@@ -107,3 +107,6 @@ también es `role=alert`).
   estampó con pnpm 11 (lockfile + `allowBuilds` en `pnpm-workspace.yaml`, campos que pnpm 9 no
   reconoce) → `actions/setup-node` (cache pnpm) falló y todo el job quality cayó. Fix local:
   `version: 11`. **Reportar al kit-app junto con el de `perf-budget.json`.**
+- Segundo fallo del mismo job (log real vía API): **pnpm 11 exige Node ≥22.13** y el `ci.yml`
+  del kit usa `node-version: 20` (sin `node:sqlite`). Fix: Node 22 en los 3 jobs. Resumen del
+  reporte al kit: el scaffold estampa pnpm 11 pero su CI asume pnpm 9 + Node 20 — incoherente.
