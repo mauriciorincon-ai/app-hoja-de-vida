@@ -5,18 +5,20 @@ status: closed
 opened: 2026-07-04
 closed: 2026-07-05
 branch: sprint-001/home-que-enamora
-pr: <pendiente — se enlaza al crear el PR>
+pr: https://github.com/mauriciorincon-ai/app-hoja-de-vida/pull/1
 ---
 
 # Sprint 001 Summary — CV Viva
 
 ## Outcome
 
-**Sí (parcial solo por gates de usuario).** La HOME completa existe en `/es` y `/en`: hero →
-trayectoria → logros → proyectos → apps showcase → contacto, con motion system de specs
-numéricas, formulario de solicitud end-to-end (email vía Resend), y el 100% del contenido
-indexable sin JavaScript. Pendientes de usuario: aprobación visual de la preview (gate de
-diseño), `RESEND_API_KEY` en Vercel y branch protection en GitHub.
+**Sí.** La HOME completa existe en `/es` y `/en`: hero → trayectoria → logros → proyectos →
+apps showcase → contacto, con motion system de specs numéricas, formulario de solicitud
+end-to-end, y el 100% del contenido indexable sin JavaScript. **CI completa verde en el PR #1**
+(quality + e2e + lighthouse contra budget con ADR-006). **El email de solicitud llegó en
+producción** (verificado por el usuario en la preview con Resend configurado). Feedback del
+gate de diseño aplicado (coreografía de timeline comprimida; animaciones replay en ambos
+sentidos de scroll). Restan: veredicto visual final del usuario + merge + branch protection.
 
 ## Qué se construyó
 
@@ -41,17 +43,19 @@ diseño), `RESEND_API_KEY` en Vercel y branch protection en GitHub.
 - ✅ **Testing:** 29 unit/integration (parser, form, endpoint con Resend mockeado y
   negativos) + 9 e2e ×2 proyectos (happy path completo, reduced-motion, honeypot, rate
   limit, axe) — 18/18 verdes local. Cobertura `src/lib` ~90%.
-- 🟡 **CI/CD:** workflow del kit listo con scripts que faltaban (`typecheck`/`test`/
-  `test:e2e`); **CI verde en el PR + preview Vercel probada + branch protection = pendiente
-  de que el usuario conecte Vercel/GitHub.**
+- ✅ **CI/CD:** Actions verde completa en el PR #1 (typecheck+lint+tests+build+audit, e2e,
+  lighthouse); preview Vercel por PR funcionando y probada por el usuario. 🟡 Branch
+  protection en `main`: pendiente (acción del usuario en GitHub Settings).
 - ✅ **Observabilidad:** Pino estructurado en el endpoint; Sentry activable por env (cliente
   lazy — sin DSN no descarga); eventos `home_visit`/`idioma_cambiado`/`app_card_clicked`/
   `solicitud_enviada`/`solicitud_fallida` en Vercel Analytics.
 - ✅ **Seguridad:** gitleaks (hook del kit) + `pnpm audit` sin high/critical; rate limit por
   `x-real-ip` (no spoofeable) + honeypot + sanitización; secrets solo en env.
-- 🟡 **Performance:** CLS 0; LCP independiente de JS (hero en CSS puro); scripts ~230KB
-  comprimido (budget 300KB). **Lighthouse local NO concluyente por ruido de la laptop** —
-  el gate real es el job de CI; plan B documentado en la bitácora si falla `interactive`.
+- ✅ **Performance:** gate Lighthouse de CI **verde** contra `perf-budget.json` con
+  renegociación documentada (ADR-006): FCP ≤1500 y CLS ≤0.1 estrictos (CLS medido: 0);
+  interactive 4000ms y LCP 3500ms renegociados (piso de hidratación Next/React y repaint
+  del font-swap de Fraunces — contenido siempre visible desde FCP). Scripts ~230KB
+  comprimido (budget 300KB).
 - ✅ **UX/A11y:** axe AA limpio en `/es` y `/en` (e2e); teclado end-to-end (skip-link, toggle,
   form); `prefers-reduced-motion` verificado en e2e; 5 estados del form. 🟡 **Gate de
   revisión de diseño: pendiente aprobación visual del usuario sobre la preview.**
@@ -64,8 +68,8 @@ diseño), `RESEND_API_KEY` en Vercel y branch protection en GitHub.
 - HOME 100% desde `data/` en ES y EN ✅ (e2e lee los YAML — editar contenido no rompe nada)
 - `curl /es` y `/en` devuelve todo el texto sin JS ✅ (e2e) · JSON-LD válido ✅
 - App dummy en `apps.yaml` = card nueva sin código ✅ (test) · Reduced-motion e2e ✅
-- Lighthouse ≥90 móvil: 🟡 diferido al job de CI (ver arriba) · Email en producción: 🟡
-  requiere `RESEND_API_KEY` en Vercel (sin clave el envío se simula y queda en logs)
+- Lighthouse en CI: ✅ budget verde (con ADR-006) · Email en producción: ✅ verificado por
+  el usuario (Resend + env vars en Vercel; el email llegó a su bandeja)
 
 ## Decisiones no anticipadas
 
@@ -103,6 +107,15 @@ shadcn cambió flags (`-b` ya no es color).
 3. El patrón "m.div nunca cambia de forma + cinturón CSS reduced-motion" merece entrar a la
    wiki de patterns de la planeadora.
 
+## Reportes al kit-app (para la retro — 4 bugs/incoherencias del scaffold)
+
+1. `perf-budget.json` con `_comment` — propiedad que Lighthouse CI rechaza (CI rota siempre).
+2. `ci.yml` fija pnpm 9 pero el scaffold estampa pnpm 11 (lockfile + `allowBuilds`).
+3. `ci.yml` usa Node 20 pero pnpm 11 exige Node ≥22.13 (`node:sqlite`).
+4. El budget default (interactive 3500 / LCP 2500) es inalcanzable para una página Next 16
+   interactiva con fuente de marca bajo simulación móvil — sugerir TBT en vez de TTI y
+   documentar el efecto del font-swap en LCP.
+
 ## Deuda técnica aceptada
 
 - **Dark mode:** no existe (decisión del prototipo: light-first). Pago: cuando el usuario lo
@@ -111,8 +124,8 @@ shadcn cambió flags (`-b` ya no es color).
   inventario del usuario (gap #1 de la orden — no bloqueó ingeniería).
 - **Rate limit en memoria por instancia** (serverless): suficiente a esta escala; revisar si
   hay abuso real (ADR-004).
-- **Lighthouse ≥90 móvil sin verificar localmente:** se verifica en el primer run de CI; si
-  falla, plan B en bitácora (reveals con IntersectionObserver nativo + CSS).
+- **Budgets renegociados (ADR-006):** interactive 4000ms / LCP 3500ms — techo, no licencia;
+  re-evaluar cuando S2 agregue el chat (más JS cliente).
 
 ## Archivos clave (máx. 10)
 
