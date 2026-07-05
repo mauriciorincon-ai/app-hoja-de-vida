@@ -14,3 +14,7 @@ test-results/
 .vercel/
 .DS_Store
 Thumbs.db
+
+# Reportes locales de Lighthouse
+.lh-*.json
+.lighthouse*.json
