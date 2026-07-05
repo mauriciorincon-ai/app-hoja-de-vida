@@ -8,10 +8,14 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useRouter } from "@/i18n/navigation";
 import { trackEvent } from "@/lib/analytics";
-import { solicitudSchema, type AppCard } from "@/lib/schemas";
+import type { AppCard } from "@/lib/schemas";
 
 type FieldErrors = Partial<Record<"nombre" | "email" | "app", string>>;
 type Status = "reposo" | "enviando" | "error";
+
+// Validación client-side a mano: zod NO entra al bundle del navegador
+// (el endpoint valida con el schema real — esa es la fuente de verdad).
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export function SolicitarAccesoForm({ apps }: { apps: AppCard[] }) {
   const t = useTranslations("form");
@@ -23,18 +27,26 @@ export function SolicitarAccesoForm({ apps }: { apps: AppCard[] }) {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
-    const data = Object.fromEntries(new FormData(form).entries());
+    const raw = Object.fromEntries(new FormData(form).entries());
+    const payload = {
+      nombre: String(raw.nombre ?? "").trim(),
+      email: String(raw.email ?? "").trim(),
+      app: String(raw.app ?? "").trim(),
+      mensaje: String(raw.mensaje ?? "").trim(),
+      website: String(raw.website ?? ""),
+    };
 
-    const parsed = solicitudSchema.safeParse(data);
-    if (!parsed.success) {
-      const fieldErrors: FieldErrors = {};
-      for (const issue of parsed.error.issues) {
-        const field = issue.path[0];
-        if (field === "nombre")
-          fieldErrors.nombre = t("errores.nombreRequerido");
-        if (field === "email") fieldErrors.email = t("errores.emailInvalido");
-        if (field === "app") fieldErrors.app = t("errores.appRequerida");
-      }
+    const fieldErrors: FieldErrors = {};
+    if (!payload.nombre || payload.nombre.length > 120) {
+      fieldErrors.nombre = t("errores.nombreRequerido");
+    }
+    if (!EMAIL_RE.test(payload.email) || payload.email.length > 254) {
+      fieldErrors.email = t("errores.emailInvalido");
+    }
+    if (!payload.app) {
+      fieldErrors.app = t("errores.appRequerida");
+    }
+    if (Object.keys(fieldErrors).length > 0) {
       setErrors(fieldErrors);
       return;
     }
@@ -45,13 +57,13 @@ export function SolicitarAccesoForm({ apps }: { apps: AppCard[] }) {
       const res = await fetch("/api/solicitar-acceso", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(parsed.data),
+        body: JSON.stringify(payload),
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      trackEvent("solicitud_enviada", { app: parsed.data.app });
+      trackEvent("solicitud_enviada", { app: payload.app });
       router.push("/solicitud-enviada");
     } catch {
-      trackEvent("solicitud_fallida", { app: parsed.data.app });
+      trackEvent("solicitud_fallida", { app: payload.app });
       setStatus("error");
     }
   }

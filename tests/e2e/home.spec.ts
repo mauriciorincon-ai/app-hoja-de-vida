@@ -25,10 +25,13 @@ test.describe("HOME — happy path del sprint", () => {
     // Showcase data-driven: las 3 apps de data/apps.yaml
     await expect(page.locator("#apps [data-app-id]")).toHaveCount(3);
 
-    // Toggle de idioma (conserva la página, cambia la ruta)
+    // Toggle de idioma (conserva la página, cambia la ruta) — timeout amplio:
+    // bajo carga paralela la navegación client-side puede exceder los 5s
     await page.getByRole("button", { name: "Switch to English" }).click();
-    await expect(page).toHaveURL(/\/en$/);
-    await expect(page.locator("#trayectoria h2")).toHaveText("Career");
+    await expect(page).toHaveURL(/\/en$/, { timeout: 15_000 });
+    await expect(page.locator("#trayectoria h2")).toHaveText("Career", {
+      timeout: 15_000,
+    });
 
     // Enviar solicitud de acceso end-to-end (sin API key → envío simulado)
     await page.locator("#contacto").scrollIntoViewIfNeeded();
@@ -58,8 +61,11 @@ test.describe("HOME — happy path del sprint", () => {
       expect(html).toContain("application/ld+json");
       expect(html).toContain('hrefLang="es"');
       expect(html).toContain('hrefLang="en"');
-      // Contenido de secciones sin ejecutar JS
-      expect(html).toContain("CV Viva");
+      // Contenido de secciones sin ejecutar JS, en el idioma de la ruta
+      expect(html).toContain(locale === "es" ? "CV Viva" : "Living CV");
+      expect(html).toContain(
+        locale === "es" ? "En construcción" : "In construction",
+      );
     }
   });
 

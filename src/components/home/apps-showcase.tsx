@@ -1,24 +1,23 @@
-"use client";
-
-import { useLocale, useTranslations } from "next-intl";
-import { StaggerItem, Stagger } from "@/components/motion/stagger";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Reveal } from "@/components/motion/reveal";
-import { trackEvent } from "@/lib/analytics";
+import { Stagger, StaggerItem } from "@/components/motion/stagger";
 import type { AppCard } from "@/lib/schemas";
+import { AppCardCta } from "./app-card-cta";
 
 /**
  * Brochure data-driven: cada card sale de data/apps.yaml (agregar una app =
  * editar el YAML, cero código). Estados canon del design system:
  * citron = en construcción · peach = en exploración.
+ * Server component: solo el CTA (tracking) se hidrata.
  */
 const chipPorEstado: Record<AppCard["estado"], string> = {
   "en-construccion": "bg-citron text-citron-ink",
   "en-exploracion": "bg-peach text-peach-ink",
 };
 
-export function AppsShowcase({ apps }: { apps: AppCard[] }) {
-  const t = useTranslations("apps");
-  const locale = useLocale() as "es" | "en";
+export async function AppsShowcase({ apps }: { apps: AppCard[] }) {
+  const t = await getTranslations("apps");
+  const locale = (await getLocale()) as "es" | "en";
 
   return (
     <section
@@ -57,16 +56,7 @@ export function AppsShowcase({ apps }: { apps: AppCard[] }) {
                   {app.descripcion[locale]}
                 </p>
                 {app.solicitable && (
-                  <a
-                    href="#contacto"
-                    onClick={() =>
-                      trackEvent("app_card_clicked", { app: app.id })
-                    }
-                    className="mt-auto flex min-h-11 items-center gap-1.5 pt-2 text-sm font-medium text-sage-ink transition-colors duration-[120ms] hover:text-ink-0"
-                  >
-                    {t("cta")}
-                    <span aria-hidden="true">→</span>
-                  </a>
+                  <AppCardCta appId={app.id} label={t("cta")} />
                 )}
               </article>
             </StaggerItem>

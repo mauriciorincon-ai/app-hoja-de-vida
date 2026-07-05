@@ -28,7 +28,7 @@ export function Header({ nombre }: { nombre: string }) {
   }
 
   return (
-    <header className="sticky top-0 z-10 border-b border-paper-2 bg-paper-0/90 backdrop-blur-sm">
+    <header className="sticky top-0 z-10 border-b border-paper-2 bg-paper-0/95">
       <a
         href="#contenido"
         className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:rounded-md focus:bg-paper-0 focus:px-3 focus:py-2 focus:text-sm focus:text-ink-0 focus:shadow-sh-2"

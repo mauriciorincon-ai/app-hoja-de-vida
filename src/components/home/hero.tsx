@@ -1,10 +1,11 @@
 import { getTranslations } from "next-intl/server";
-import { Reveal } from "@/components/motion/reveal";
 import type { Cv } from "@/lib/schemas";
 
 /**
  * Coreografía de la receta 01 (aurora-title) SIN fondo WebGL (vetado):
  * badge 0.2s → titular maskReveal 0.4s → resumen blurIn 1.2s → CTAs 1.5s.
+ * Todo en CSS puro (.anim-*): el LCP pinta sin esperar JavaScript y
+ * `prefers-reduced-motion` lo apaga vía globals.css.
  * Fondo: tinte pastel radial ESTÁTICO (cero animación ambiental).
  */
 export async function Hero({ identidad }: { identidad: Cv["identidad"] }) {
@@ -22,54 +23,68 @@ export async function Hero({ identidad }: { identidad: Cv["identidad"] }) {
         }}
       />
       <div className="mx-auto flex min-h-[88svh] max-w-5xl flex-col justify-center px-4 py-24 md:px-6">
-        <Reveal variant="fadeInUp" delay={0.2} onMount>
-          <p className="mb-6 flex items-center gap-2 text-xs font-medium tracking-[0.18em] text-ink-2 uppercase">
-            <span
-              aria-hidden="true"
-              className="size-1.5 rounded-full bg-sage-ink"
-            />
-            {identidad.eyebrow}
-          </p>
-        </Reveal>
+        <p
+          className="anim-fade-in-up mb-6 flex items-center gap-2 text-xs font-medium tracking-[0.18em] text-ink-2 uppercase"
+          style={{ "--anim-delay": "0.2s" } as React.CSSProperties}
+        >
+          <span
+            aria-hidden="true"
+            className="size-1.5 rounded-full bg-sage-ink"
+          />
+          {identidad.eyebrow}
+        </p>
 
         <h1 className="max-w-[18ch] font-display text-[clamp(2.5rem,7vw,4.5rem)] leading-[1.02] font-medium tracking-[-0.025em] text-ink-0">
-          <Reveal variant="maskReveal" delay={0.4} onMount>
-            <span className="block">{identidad.nombre}</span>
-          </Reveal>
-          <Reveal variant="maskReveal" delay={0.55} onMount>
-            <span className="block text-sage-ink">{identidad.titular}</span>
-          </Reveal>
+          <span className="block overflow-hidden">
+            <span
+              className="anim-mask-up block"
+              style={{ "--anim-delay": "0.4s" } as React.CSSProperties}
+            >
+              {identidad.nombre}
+            </span>
+          </span>
+          <span className="block overflow-hidden">
+            <span
+              className="anim-mask-up block text-sage-ink"
+              style={{ "--anim-delay": "0.55s" } as React.CSSProperties}
+            >
+              {identidad.titular}
+            </span>
+          </span>
         </h1>
 
-        <Reveal variant="blurIn" delay={1.2} onMount>
-          <p className="mt-8 max-w-[56ch] text-[17px] leading-[1.65] text-ink-2">
-            {identidad.resumen}
-          </p>
-        </Reveal>
+        <p
+          className="anim-blur-in mt-8 max-w-[56ch] text-[17px] leading-[1.65] text-ink-2"
+          style={{ "--anim-delay": "1.2s" } as React.CSSProperties}
+        >
+          {identidad.resumen}
+        </p>
 
-        <Reveal variant="fadeInUp" delay={1.5} onMount>
-          <div className="mt-10 flex flex-wrap items-center gap-5">
-            <a
-              href="#apps"
-              className="flex min-h-11 items-center gap-2 rounded-md bg-sage px-6 text-[15px] font-medium text-sage-ink shadow-sh-1 transition-colors duration-[120ms] hover:brightness-[0.97]"
-            >
-              {t("ctaApps")}
-              <span aria-hidden="true">→</span>
-            </a>
-            <a
-              href="#contacto"
-              className="flex min-h-11 items-center text-sm text-ink-2 underline decoration-paper-3 underline-offset-4 transition-colors duration-[120ms] hover:text-ink-0 hover:decoration-ink-3"
-            >
-              {t("ctaContacto")}
-            </a>
-          </div>
-        </Reveal>
+        <div
+          className="anim-fade-in-up mt-10 flex flex-wrap items-center gap-5"
+          style={{ "--anim-delay": "1.5s" } as React.CSSProperties}
+        >
+          <a
+            href="#apps"
+            className="flex min-h-11 items-center gap-2 rounded-md bg-sage px-6 text-[15px] font-medium text-sage-ink shadow-sh-1 transition-colors duration-[120ms] hover:brightness-[0.97]"
+          >
+            {t("ctaApps")}
+            <span aria-hidden="true">→</span>
+          </a>
+          <a
+            href="#contacto"
+            className="flex min-h-11 items-center text-sm text-ink-2 underline decoration-paper-3 underline-offset-4 transition-colors duration-[120ms] hover:text-ink-0 hover:decoration-ink-3"
+          >
+            {t("ctaContacto")}
+          </a>
+        </div>
 
-        <Reveal variant="fadeInUp" delay={2} onMount>
-          <p className="mt-16 font-mono text-[11px] tracking-[0.02em] text-ink-2 uppercase">
-            {identidad.ubicacion}
-          </p>
-        </Reveal>
+        <p
+          className="anim-fade-in-up mt-16 font-mono text-[11px] tracking-[0.02em] text-ink-2 uppercase"
+          style={{ "--anim-delay": "2s" } as React.CSSProperties}
+        >
+          {identidad.ubicacion}
+        </p>
       </div>
     </section>
   );
