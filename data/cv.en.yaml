@@ -1,0 +1,56 @@
+# Living CV content in English — THE source of truth (edit + push = deploy).
+# How to edit: docs/MANUAL-DE-USO.md. Every text wrapped in [PLACEHOLDER: …]
+# must be replaced with the real inventory before launch.
+
+identidad:
+  nombre: "Mauricio Rincón"
+  eyebrow: "Living CV — an interactive résumé"
+  titular: "[PLACEHOLDER: one-line headline — what you build and for whom]"
+  resumen: "[PLACEHOLDER: 2–3 sentence summary — career, current focus, what sets you apart]"
+  ubicacion: "Colombia"
+  email: "mauriciorinconai@gmail.com"
+  enlaces:
+    - etiqueta: "GitHub"
+      url: "https://github.com/mauriciorincon"
+    - etiqueta: "LinkedIn"
+      url: "https://www.linkedin.com/in/mauriciorincon"
+
+trayectoria:
+  - periodo: "2026 — today"
+    rol: "[PLACEHOLDER: current role]"
+    organizacion: "[PLACEHOLDER: organization or independent]"
+    descripcion: "[PLACEHOLDER: what you do and its impact, 1–2 sentences]"
+    actual: true
+  - periodo: "[PLACEHOLDER: 20XX — 20XX]"
+    rol: "[PLACEHOLDER: previous role]"
+    organizacion: "[PLACEHOLDER: organization]"
+    descripcion: "[PLACEHOLDER: what you did and what changed because of it]"
+  - periodo: "[PLACEHOLDER: 20XX — 20XX]"
+    rol: "[PLACEHOLDER: role or studies]"
+    organizacion: "[PLACEHOLDER: organization or institution]"
+    descripcion: "[PLACEHOLDER: formative or professional milestone]"
+
+logros:
+  - valor: 12
+    sufijo: "+"
+    etiqueta: "[PLACEHOLDER: achievement 1 label]"
+    descripcion: "[PLACEHOLDER: one-sentence context for the achievement]"
+  - valor: 90
+    sufijo: "%"
+    etiqueta: "[PLACEHOLDER: achievement 2 label]"
+    descripcion: "[PLACEHOLDER: one-sentence context for the achievement]"
+  - valor: 4
+    etiqueta: "[PLACEHOLDER: achievement 3 label]"
+    descripcion: "[PLACEHOLDER: one-sentence context for the achievement]"
+
+proyectos:
+  - nombre: "Living CV"
+    resumen: "This very page: a résumé you scroll through like an animated editorial piece, built by the same AI-APPs pipeline it showcases."
+    stack: ["Next.js", "TypeScript", "Tailwind", "Motion"]
+    destacado: true
+  - nombre: "[PLACEHOLDER: project 2]"
+    resumen: "[PLACEHOLDER: what problem it solved and which decisions made it interesting]"
+    stack: []
+  - nombre: "[PLACEHOLDER: project 3]"
+    resumen: "[PLACEHOLDER: what problem it solved and which decisions made it interesting]"
+    stack: []

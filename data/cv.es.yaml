@@ -1,0 +1,56 @@
+# Contenido de la CV Viva en español — LA fuente de verdad (editar + push = deploy).
+# Cómo editar: docs/MANUAL-DE-USO.md. Todo texto entre [PLACEHOLDER: …] debe
+# reemplazarse con el inventario real antes del lanzamiento.
+
+identidad:
+  nombre: "Mauricio Rincón"
+  eyebrow: "CV Viva — hoja de vida interactiva"
+  titular: "[PLACEHOLDER: titular de una línea — qué construyes y para quién]"
+  resumen: "[PLACEHOLDER: resumen de 2–3 frases — trayectoria, foco actual y lo que te diferencia]"
+  ubicacion: "Colombia"
+  email: "mauriciorinconai@gmail.com"
+  enlaces:
+    - etiqueta: "GitHub"
+      url: "https://github.com/mauriciorincon"
+    - etiqueta: "LinkedIn"
+      url: "https://www.linkedin.com/in/mauriciorincon"
+
+trayectoria:
+  - periodo: "2026 — hoy"
+    rol: "[PLACEHOLDER: rol actual]"
+    organizacion: "[PLACEHOLDER: organización o independiente]"
+    descripcion: "[PLACEHOLDER: qué haces y qué impacto tiene, 1–2 frases]"
+    actual: true
+  - periodo: "[PLACEHOLDER: 20XX — 20XX]"
+    rol: "[PLACEHOLDER: rol anterior]"
+    organizacion: "[PLACEHOLDER: organización]"
+    descripcion: "[PLACEHOLDER: qué hiciste y qué cambió gracias a eso]"
+  - periodo: "[PLACEHOLDER: 20XX — 20XX]"
+    rol: "[PLACEHOLDER: rol o estudios]"
+    organizacion: "[PLACEHOLDER: organización o institución]"
+    descripcion: "[PLACEHOLDER: hito formativo o profesional]"
+
+logros:
+  - valor: 12
+    sufijo: "+"
+    etiqueta: "[PLACEHOLDER: etiqueta del logro 1]"
+    descripcion: "[PLACEHOLDER: contexto del logro en una frase]"
+  - valor: 90
+    sufijo: "%"
+    etiqueta: "[PLACEHOLDER: etiqueta del logro 2]"
+    descripcion: "[PLACEHOLDER: contexto del logro en una frase]"
+  - valor: 4
+    etiqueta: "[PLACEHOLDER: etiqueta del logro 3]"
+    descripcion: "[PLACEHOLDER: contexto del logro en una frase]"
+
+proyectos:
+  - nombre: "CV Viva"
+    resumen: "Esta misma página: una hoja de vida que se recorre como pieza editorial animada, construida por el pipeline AI-APPs que también exhibe."
+    stack: ["Next.js", "TypeScript", "Tailwind", "Motion"]
+    destacado: true
+  - nombre: "[PLACEHOLDER: proyecto 2]"
+    resumen: "[PLACEHOLDER: qué problema resolvió y qué decisiones lo hicieron interesante]"
+    stack: []
+  - nombre: "[PLACEHOLDER: proyecto 3]"
+    resumen: "[PLACEHOLDER: qué problema resolvió y qué decisiones lo hicieron interesante]"
+    stack: []
