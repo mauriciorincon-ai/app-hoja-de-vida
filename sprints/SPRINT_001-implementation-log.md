@@ -99,3 +99,11 @@ también es `role=alert`).
   aserción ATS por idioma (`CV Viva`/`Living CV`) — antes pasaba de chiripa porque el prop
   bilingüe completo viajaba serializado al cliente.
 - **Suites finales: 29 unit/integration + 18/18 e2e verdes.**
+
+## 2026-07-05 — PR #1 y primer run de CI
+
+- PR #1 abierto por el usuario; Vercel ya conectado (check "Vercel Preview Comments" verde).
+- **Segundo bug del kit:** `ci.yml` fija `pnpm/action-setup` a **pnpm 9**, pero el scaffold se
+  estampó con pnpm 11 (lockfile + `allowBuilds` en `pnpm-workspace.yaml`, campos que pnpm 9 no
+  reconoce) → `actions/setup-node` (cache pnpm) falló y todo el job quality cayó. Fix local:
+  `version: 11`. **Reportar al kit-app junto con el de `perf-budget.json`.**
