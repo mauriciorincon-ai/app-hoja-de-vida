@@ -12,6 +12,27 @@
     "cambiarIdioma": "Cambiar a español",
     "saltarContenido": "Skip to content"
   },
+  "hero": {
+    "ctaApps": "Explore the apps",
+    "ctaContacto": "Let's talk"
+  },
+  "apps": {
+    "titulo": "Pipeline apps",
+    "subtitulo": "Only what's real: what's being built and what's being explored. No promised dates.",
+    "estados": {
+      "en-construccion": "In construction",
+      "en-exploracion": "In exploration"
+    },
+    "cta": "I want to try it"
+  },
+  "contacto": {
+    "eyebrow": "Contact",
+    "titulo": "Shall we talk?",
+    "subtitulo": "If anything you saw interests you — an app, a role, a technical conversation — write to me."
+  },
+  "footer": {
+    "creditos": "Built in the open by the AI-APPs pipeline."
+  },
   "form": {
     "titulo": "Request access",
     "nombre": "Your name",

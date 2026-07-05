@@ -1,5 +1,16 @@
 import { setRequestLocale } from "next-intl/server";
-import { getTranslations } from "next-intl/server";
+import { Footer } from "@/components/footer";
+import { Header } from "@/components/header";
+import { HomeVisitTracker } from "@/components/home-visit-tracker";
+import { AppsShowcase } from "@/components/home/apps-showcase";
+import { Contacto } from "@/components/home/contacto";
+import { Hero } from "@/components/home/hero";
+import { Logros } from "@/components/home/logros";
+import { Proyectos } from "@/components/home/proyectos";
+import { Trayectoria } from "@/components/home/trayectoria";
+import type { Locale } from "@/i18n/routing";
+import { getApps, getCv } from "@/lib/content";
+import { SITE_URL } from "@/lib/site";
 
 export default async function HomePage({
   params,
@@ -8,12 +19,48 @@ export default async function HomePage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const t = await getTranslations("meta");
 
-  // Placeholder de Fase 0 — la HOME real (6 secciones) llega en Fase 2.
+  const cv = getCv(locale as Locale);
+  const { apps } = getApps();
+
+  // JSON-LD Person + WebSite (gate ATS/SEO)
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        name: cv.identidad.nombre,
+        description: cv.identidad.resumen,
+        email: `mailto:${cv.identidad.email}`,
+        url: `${SITE_URL}/${locale}`,
+        sameAs: cv.identidad.enlaces.map((e) => e.url),
+      },
+      {
+        "@type": "WebSite",
+        name: cv.identidad.eyebrow,
+        url: SITE_URL,
+        inLanguage: ["es", "en"],
+      },
+    ],
+  };
+
   return (
-    <main id="contenido" className="flex-1 grid place-items-center p-8">
-      <h1 className="font-display text-4xl text-ink-0">{t("title")}</h1>
-    </main>
+    <>
+      <Header nombre={cv.identidad.nombre} />
+      <main id="contenido" className="flex-1">
+        <Hero identidad={cv.identidad} />
+        <Trayectoria trayectoria={cv.trayectoria} />
+        <Logros logros={cv.logros} />
+        <Proyectos proyectos={cv.proyectos} />
+        <AppsShowcase apps={apps} />
+        <Contacto identidad={cv.identidad} apps={apps} />
+      </main>
+      <Footer identidad={cv.identidad} />
+      <HomeVisitTracker />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+    </>
   );
 }

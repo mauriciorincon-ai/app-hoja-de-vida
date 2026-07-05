@@ -12,6 +12,27 @@
     "cambiarIdioma": "Switch to English",
     "saltarContenido": "Saltar al contenido"
   },
+  "hero": {
+    "ctaApps": "Explora las apps",
+    "ctaContacto": "Hablemos"
+  },
+  "apps": {
+    "titulo": "Apps del pipeline",
+    "subtitulo": "Solo lo real: lo que se está construyendo y lo que se está explorando. Sin fechas prometidas.",
+    "estados": {
+      "en-construccion": "En construcción",
+      "en-exploracion": "En exploración"
+    },
+    "cta": "Quiero probarla"
+  },
+  "contacto": {
+    "eyebrow": "Contacto",
+    "titulo": "¿Hablamos?",
+    "subtitulo": "Si algo de lo que viste te interesa — una app, un rol, una conversación técnica — escríbeme."
+  },
+  "footer": {
+    "creditos": "Construida en público por el pipeline AI-APPs."
+  },
   "form": {
     "titulo": "Solicitar acceso",
     "nombre": "Tu nombre",
