@@ -41,7 +41,8 @@ describe("cvSchema", () => {
   });
 
   it("rejects a CV without required identity fields", () => {
-    const { titular: _titular, ...identidadRota } = cvValido.identidad;
+    const identidadRota: Record<string, unknown> = { ...cvValido.identidad };
+    delete identidadRota.titular;
     expect(() =>
       parseCv({ ...cvValido, identidad: identidadRota }, "test.yaml"),
     ).toThrowError(/test\.yaml[\s\S]*identidad\.titular/);
@@ -115,7 +116,8 @@ describe("solicitudSchema", () => {
   });
 
   it("defaults mensaje to empty string", () => {
-    const { mensaje: _m, ...sinMensaje } = solicitudValida;
+    const sinMensaje: Record<string, unknown> = { ...solicitudValida };
+    delete sinMensaje.mensaje;
     expect(solicitudSchema.parse(sinMensaje).mensaje).toBe("");
   });
 
