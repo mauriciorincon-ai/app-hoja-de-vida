@@ -59,7 +59,10 @@ export default async function HomePage({
       <HomeVisitTracker />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{
+          // Escape de "<": impide cerrar el tag desde el contenido del YAML
+          __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+        }}
       />
     </>
   );

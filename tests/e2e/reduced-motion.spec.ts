@@ -1,6 +1,14 @@
+import { readFileSync } from "node:fs";
 import { expect, test, type Locator } from "@playwright/test";
+import { parse } from "yaml";
 
 test.use({ contextOptions: { reducedMotion: "reduce" } });
+
+// Valor real del primer logro: editar data/*.yaml no rompe la suite
+const cvEs = parse(readFileSync("data/cv.es.yaml", "utf8")) as {
+  logros: { valor: number }[];
+};
+const primerLogro = cvEs.logros[0].valor;
 
 /**
  * Devuelve null si el elemento y TODOS sus ancestros están en estado final
@@ -45,6 +53,6 @@ test.describe("prefers-reduced-motion (criterio de aceptación e2e)", () => {
 
     // El counter muestra el valor final fijo (no arranca de 0)
     const counter = page.locator("#logros .tabular-nums").first();
-    await expect(counter).toHaveText(/12/);
+    await expect(counter).toHaveText(new RegExp(String(primerLogro)));
   });
 });

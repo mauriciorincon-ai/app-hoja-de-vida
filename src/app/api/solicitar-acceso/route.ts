@@ -12,8 +12,12 @@ function sanitize(value: string): string {
 export async function POST(request: Request): Promise<NextResponse> {
   const requestId = crypto.randomUUID();
   const start = Date.now();
+  // x-real-ip lo fija la plataforma (no spoofeable por el cliente);
+  // x-forwarded-for queda de fallback para dev/local y tests
   const ip =
-    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+    request.headers.get("x-real-ip") ??
+    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ??
+    "unknown";
   const log = logger.child({ requestId, route: "solicitar-acceso" });
 
   const { allowed } = checkRateLimit(ip);
