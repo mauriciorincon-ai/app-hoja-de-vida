@@ -1,0 +1,34 @@
+# Apps del pipeline AI-APPs en el showcase — "solo lo real": sin fechas prometidas.
+# Agregar/editar una card = editar este archivo + push (cero cambios de código).
+# Estados válidos: en-construccion | en-exploracion
+
+apps:
+  - id: hoja-de-vida
+    estado: en-construccion
+    nombre:
+      es: "CV Viva"
+      en: "Living CV"
+    descripcion:
+      es: "Esta hoja de vida interactiva: la primera app del pipeline, construyéndose en público."
+      en: "This interactive résumé: the pipeline's first app, being built in the open."
+    solicitable: false
+
+  - id: idea-exploracion-1
+    estado: en-exploracion
+    nombre:
+      es: "[PLACEHOLDER: idea 1 del buzón]"
+      en: "[PLACEHOLDER: backlog idea 1]"
+    descripcion:
+      es: "[PLACEHOLDER: una frase honesta sobre qué explorará esta app]"
+      en: "[PLACEHOLDER: one honest sentence about what this app will explore]"
+    solicitable: true
+
+  - id: idea-exploracion-2
+    estado: en-exploracion
+    nombre:
+      es: "[PLACEHOLDER: idea 2 del buzón]"
+      en: "[PLACEHOLDER: backlog idea 2]"
+    descripcion:
+      es: "[PLACEHOLDER: una frase honesta sobre qué explorará esta app]"
+      en: "[PLACEHOLDER: one honest sentence about what this app will explore]"
+    solicitable: true

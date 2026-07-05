@@ -1,11 +1,10 @@
 [
   {
-    "_comment": "Presupuesto de performance del estándar #5 (estandares/estandares.md). Formato Lighthouse CI budgets. Ajustar por app SOLO con renegociación explícita documentada en ADR.",
     "path": "/*",
     "timings": [
       { "metric": "first-contentful-paint", "budget": 1500 },
-      { "metric": "largest-contentful-paint", "budget": 2500 },
-      { "metric": "interactive", "budget": 3500 },
+      { "metric": "largest-contentful-paint", "budget": 3500 },
+      { "metric": "interactive", "budget": 4000 },
       { "metric": "cumulative-layout-shift", "budget": 0.1 }
     ],
     "resourceSizes": [

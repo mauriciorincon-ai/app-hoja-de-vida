@@ -9,7 +9,12 @@ test-results/
 .env
 .env.local
 .env.*.local
+.claude/settings.local.json
 *.tsbuildinfo
 .vercel/
 .DS_Store
 Thumbs.db
+
+# Reportes locales de Lighthouse
+.lh-*.json
+.lighthouse*.json

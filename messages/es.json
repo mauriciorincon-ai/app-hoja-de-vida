@@ -1,0 +1,67 @@
+{
+  "meta": {
+    "title": "CV Viva — Mauricio Rincón",
+    "description": "Hoja de vida interactiva: trayectoria, logros y apps del pipeline AI-APPs, contados como una experiencia editorial animada."
+  },
+  "nav": {
+    "trayectoria": "Trayectoria",
+    "logros": "Logros",
+    "proyectos": "Proyectos",
+    "apps": "Apps",
+    "contacto": "Contacto",
+    "cambiarIdioma": "Switch to English",
+    "saltarContenido": "Saltar al contenido"
+  },
+  "hero": {
+    "ctaApps": "Explora las apps",
+    "ctaContacto": "Hablemos"
+  },
+  "apps": {
+    "titulo": "Apps del pipeline",
+    "subtitulo": "Solo lo real: lo que se está construyendo y lo que se está explorando. Sin fechas prometidas.",
+    "estados": {
+      "en-construccion": "En construcción",
+      "en-exploracion": "En exploración"
+    },
+    "cta": "Quiero probarla"
+  },
+  "contacto": {
+    "eyebrow": "Contacto",
+    "titulo": "¿Hablamos?",
+    "subtitulo": "Si algo de lo que viste te interesa — una app, un rol, una conversación técnica — escríbeme."
+  },
+  "footer": {
+    "creditos": "Construida en público por el pipeline AI-APPs."
+  },
+  "form": {
+    "titulo": "Solicitar acceso",
+    "nombre": "Tu nombre",
+    "email": "Tu correo",
+    "app": "¿Qué app quieres probar?",
+    "mensaje": "Cuéntame para qué la quieres usar (opcional)",
+    "enviar": "Quiero probarla",
+    "enviando": "Enviando…",
+    "errorEnvio": "No pude enviar tu solicitud. Intenta de nuevo en un momento.",
+    "reintentar": "Reintentar",
+    "errores": {
+      "nombreRequerido": "Escribe tu nombre.",
+      "emailInvalido": "Ese correo no se ve válido.",
+      "appRequerida": "Elige una app."
+    }
+  },
+  "confirmacion": {
+    "titulo": "Recibí tu solicitud",
+    "cuerpo": "Te respondo en 1–3 días hábiles al correo que dejaste.",
+    "volver": "Volver al inicio"
+  },
+  "notFound": {
+    "titulo": "Esta página no existe",
+    "cuerpo": "El enlace puede estar roto o la página se movió.",
+    "volver": "Volver al inicio"
+  },
+  "error": {
+    "titulo": "Algo salió mal",
+    "cuerpo": "Ya quedó registrado; intenta recargar.",
+    "recargar": "Recargar"
+  }
+}
