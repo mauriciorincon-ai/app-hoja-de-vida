@@ -53,9 +53,10 @@ export async function Hero({ identidad }: { identidad: Cv["identidad"] }) {
           </span>
         </h1>
 
+        {/* El resumen es el candidato LCP: anima SOLO transform (anim-rise) */}
         <p
-          className="anim-blur-in mt-8 max-w-[56ch] text-[17px] leading-[1.65] text-ink-2"
-          style={{ "--anim-delay": "0.7s" } as React.CSSProperties}
+          className="anim-rise mt-8 max-w-[56ch] text-[17px] leading-[1.65] text-ink-2"
+          style={{ "--anim-delay": "0.5s" } as React.CSSProperties}
         >
           {identidad.resumen}
         </p>

@@ -215,6 +215,21 @@
     filter: blur(0);
   }
 }
+/* Slide transform-only para el elemento LCP: sin opacity ni clip, el texto
+   cuenta como pintado desde el primer frame (LCP = FCP) y aún tiene motion. */
+@keyframes rise {
+  from {
+    transform: translateY(24px);
+  }
+  to {
+    transform: none;
+  }
+}
+.anim-rise {
+  animation: rise 0.7s var(--ease-out-cubic) both;
+  animation-delay: var(--anim-delay, 0s);
+}
+
 .anim-fade-in-up {
   animation: fade-in-up 0.7s var(--ease-out-cubic) both;
   animation-delay: var(--anim-delay, 0s);
@@ -252,7 +267,8 @@
   .anim-fade-in-up,
   .anim-blur-in,
   .anim-mask-up,
-  .anim-scale-in-blur {
+  .anim-scale-in-blur,
+  .anim-rise {
     animation: none !important;
   }
 }

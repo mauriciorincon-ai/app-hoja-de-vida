@@ -23,10 +23,13 @@ const fraunces = Fraunces({
   display: "swap",
 });
 
+// display optional: si Inter no llega en el primer instante, la visita usa el
+// fallback métrico-ajustado (sin swap tardío — el repaint del swap re-registra
+// el LCP). Visitas con caché ven Inter siempre. Ver ADR-006.
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
-  display: "swap",
+  display: "optional",
 });
 
 const jetbrains = JetBrains_Mono({
