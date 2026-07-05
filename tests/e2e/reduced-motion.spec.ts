@@ -36,6 +36,9 @@ test.describe("prefers-reduced-motion (criterio de aceptación e2e)", () => {
     page,
   }) => {
     await page.goto("/es");
+    // Estado estable post-hidratación (la ventana pre-hidratación la cubre
+    // el cinturón CSS [data-motion] de globals.css)
+    await page.locator("form[data-hydrated=true]").waitFor();
 
     // El hero está en estado final de inmediato
     expect(await findAnimatedAncestor(page.locator("h1"))).toBeNull();

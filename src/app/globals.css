@@ -170,10 +170,12 @@
  * primer paint SIN esperar hidratación — el LCP no depende de JavaScript.
  * Specs numéricas de la referencia destilada (fadeInUp 0.7s, blurIn 0.9s,
  * maskUp 0.8s). Delay por elemento vía --anim-delay.
+ * Arrancan en opacity 0.01 (no 0): visualmente idéntico, pero Chrome registra
+ * el paint del elemento desde el primer frame — el LCP no espera la animación.
  */
 @keyframes fade-in-up {
   from {
-    opacity: 0;
+    opacity: 0.01;
     transform: translateY(40px);
   }
   to {
@@ -183,7 +185,7 @@
 }
 @keyframes blur-in {
   from {
-    opacity: 0;
+    opacity: 0.01;
     filter: blur(20px);
     transform: scale(1.05);
   }
@@ -203,7 +205,7 @@
 }
 @keyframes scale-in-blur {
   from {
-    opacity: 0;
+    opacity: 0.01;
     transform: scale(0.85);
     filter: blur(15px);
   }

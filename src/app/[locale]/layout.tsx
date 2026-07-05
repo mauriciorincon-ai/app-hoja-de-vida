@@ -2,7 +2,11 @@ import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
 import { Fraunces, Inter, JetBrains_Mono } from "next/font/google";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import {
+  getMessages,
+  getTranslations,
+  setRequestLocale,
+} from "next-intl/server";
 import { notFound } from "next/navigation";
 import { MotionProvider } from "@/components/motion/motion-provider";
 import { routing } from "@/i18n/routing";
@@ -71,13 +75,22 @@ export default async function LocaleLayout({
   }
   setRequestLocale(locale);
 
+  // Al cliente solo viajan los namespaces que usan client components
+  // (header, formulario, error boundary) — el resto se queda en el server.
+  const messages = await getMessages();
+  const clientMessages = {
+    nav: messages.nav,
+    form: messages.form,
+    error: messages.error,
+  };
+
   return (
     <html
       lang={locale}
       className={`${fraunces.variable} ${inter.variable} ${jetbrains.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-paper-0 text-ink-1 font-sans">
-        <NextIntlClientProvider>
+        <NextIntlClientProvider messages={clientMessages}>
           <MotionProvider>{children}</MotionProvider>
         </NextIntlClientProvider>
         <Analytics />
