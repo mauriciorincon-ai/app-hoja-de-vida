@@ -25,7 +25,7 @@ export async function Hero({ identidad }: { identidad: Cv["identidad"] }) {
       <div className="mx-auto flex min-h-[88svh] max-w-5xl flex-col justify-center px-4 py-24 md:px-6">
         <p
           className="anim-fade-in-up mb-6 flex items-center gap-2 text-xs font-medium tracking-[0.18em] text-ink-2 uppercase"
-          style={{ "--anim-delay": "0.2s" } as React.CSSProperties}
+          style={{ "--anim-delay": "0.1s" } as React.CSSProperties}
         >
           <span
             aria-hidden="true"
@@ -38,7 +38,7 @@ export async function Hero({ identidad }: { identidad: Cv["identidad"] }) {
           <span className="block overflow-hidden">
             <span
               className="anim-mask-up block"
-              style={{ "--anim-delay": "0.4s" } as React.CSSProperties}
+              style={{ "--anim-delay": "0.2s" } as React.CSSProperties}
             >
               {identidad.nombre}
             </span>
@@ -46,7 +46,7 @@ export async function Hero({ identidad }: { identidad: Cv["identidad"] }) {
           <span className="block overflow-hidden">
             <span
               className="anim-mask-up block text-sage-ink"
-              style={{ "--anim-delay": "0.55s" } as React.CSSProperties}
+              style={{ "--anim-delay": "0.3s" } as React.CSSProperties}
             >
               {identidad.titular}
             </span>
@@ -55,14 +55,14 @@ export async function Hero({ identidad }: { identidad: Cv["identidad"] }) {
 
         <p
           className="anim-blur-in mt-8 max-w-[56ch] text-[17px] leading-[1.65] text-ink-2"
-          style={{ "--anim-delay": "1.2s" } as React.CSSProperties}
+          style={{ "--anim-delay": "0.7s" } as React.CSSProperties}
         >
           {identidad.resumen}
         </p>
 
         <div
           className="anim-fade-in-up mt-10 flex flex-wrap items-center gap-5"
-          style={{ "--anim-delay": "1.5s" } as React.CSSProperties}
+          style={{ "--anim-delay": "0.9s" } as React.CSSProperties}
         >
           <a
             href="#apps"
@@ -81,7 +81,7 @@ export async function Hero({ identidad }: { identidad: Cv["identidad"] }) {
 
         <p
           className="anim-fade-in-up mt-16 font-mono text-[11px] tracking-[0.02em] text-ink-2 uppercase"
-          style={{ "--anim-delay": "2s" } as React.CSSProperties}
+          style={{ "--anim-delay": "1.2s" } as React.CSSProperties}
         >
           {identidad.ubicacion}
         </p>

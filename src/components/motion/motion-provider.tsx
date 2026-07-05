@@ -1,14 +1,18 @@
 "use client";
 
-import { domAnimation, LazyMotion } from "motion/react";
+import { LazyMotion } from "motion/react";
 
 /**
- * Carga perezosa del subconjunto domAnimation de Motion (ADR-002): los
- * componentes usan `m.*` en modo strict para mantener el bundle mínimo.
+ * Features de Motion en chunk diferido (ADR-002): el bundle inicial no carga
+ * domAnimation — la hidratación llega antes (budget TTI) y los reveals
+ * below-the-fold animan apenas el chunk aterriza. Los `m.*` van en strict.
  */
+const loadFeatures = () =>
+  import("./motion-features").then((mod) => mod.default);
+
 export function MotionProvider({ children }: { children: React.ReactNode }) {
   return (
-    <LazyMotion features={domAnimation} strict>
+    <LazyMotion features={loadFeatures} strict>
       {children}
     </LazyMotion>
   );

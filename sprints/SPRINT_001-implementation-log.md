@@ -110,3 +110,11 @@ también es `role=alert`).
 - Segundo fallo del mismo job (log real vía API): **pnpm 11 exige Node ≥22.13** y el `ci.yml`
   del kit usa `node-version: 20` (sin `node:sqlite`). Fix: Node 22 en los 3 jobs. Resumen del
   reporte al kit: el scaffold estampa pnpm 11 pero su CI asume pnpm 9 + Node 20 — incoherente.
+- Con la CI ya corriendo completa: **quality ✅ e2e ✅ lighthouse ❌** — números del runner
+  limpio (los de verdad): LCP 3.06s vs budget 2.5s · TTI 3.62s vs 3.5s. Dos palancas:
+  1. Coreografía del hero comprimida (delays 0.2/0.4/0.55/1.2/1.5/2.0 → 0.1/0.2/0.3/0.7/0.9/
+     1.2 — las duraciones spec de las primitivas NO cambian): el titular (candidato LCP)
+     pinta ~0.35s antes y el visitante en móvil real espera menos.
+  2. `LazyMotion` con features en chunk diferido (`motion-features.ts`): domAnimation sale
+     del bundle inicial → hidratación más temprana (TTI); los reveals below-fold animan al
+     aterrizar el chunk.
