@@ -165,6 +165,24 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+/*
+ * Cinturón de seguridad de reduced-motion: los wrappers de motion llevan
+ * data-motion y el SSR incluye sus estilos iniciales inline (opacity 0,
+ * translate). Esta regla los neutraliza ANTES de la hidratación para que el
+ * contenido esté en su estado final desde el primer paint — sin excepciones.
+ */
+@media (prefers-reduced-motion: reduce) {
+  [data-motion] {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+  [data-motion-svg] {
+    stroke-dasharray: none !important;
+    stroke-dashoffset: 0 !important;
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

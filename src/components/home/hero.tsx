@@ -66,7 +66,7 @@ export async function Hero({ identidad }: { identidad: Cv["identidad"] }) {
         </Reveal>
 
         <Reveal variant="fadeInUp" delay={2} onMount>
-          <p className="mt-16 font-mono text-[11px] tracking-[0.02em] text-ink-3 uppercase">
+          <p className="mt-16 font-mono text-[11px] tracking-[0.02em] text-ink-2 uppercase">
             {identidad.ubicacion}
           </p>
         </Reveal>

@@ -18,10 +18,6 @@ export function Stagger({
 }) {
   const reduced = useReducedMotion();
 
-  if (reduced) {
-    return <div className={className}>{children}</div>;
-  }
-
   const container: Variants = {
     hidden: {},
     visible: {
@@ -29,14 +25,18 @@ export function Stagger({
     },
   };
 
+  // El m.div nunca se desmonta (ver Reveal): con reduce, sin props de animación.
+  const animProps = reduced
+    ? {}
+    : {
+        variants: container,
+        initial: "hidden" as const,
+        whileInView: "visible" as const,
+        viewport: { once: true, amount: 0.2 },
+      };
+
   return (
-    <m.div
-      className={className}
-      variants={container}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
-    >
+    <m.div data-motion="" className={className} {...animProps}>
       {children}
     </m.div>
   );
@@ -73,12 +73,12 @@ export function StaggerItem({
 }) {
   const reduced = useReducedMotion();
 
-  if (reduced) {
-    return <div className={className}>{children}</div>;
-  }
-
   return (
-    <m.div className={className} variants={itemVariants[variant]}>
+    <m.div
+      data-motion=""
+      className={className}
+      variants={reduced ? undefined : itemVariants[variant]}
+    >
       {children}
     </m.div>
   );

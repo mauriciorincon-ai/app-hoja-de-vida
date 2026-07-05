@@ -67,13 +67,13 @@ export function Header({ nombre }: { nombre: string }) {
           aria-label={t("cambiarIdioma")}
           className="flex min-h-11 items-center gap-1 rounded-full border border-paper-3 px-3 font-mono text-[11px] tracking-[0.02em] text-ink-1 uppercase transition-colors duration-[120ms] hover:bg-paper-1"
         >
-          <span className={locale === "es" ? "text-ink-0" : "text-ink-3"}>
+          <span className={locale === "es" ? "text-ink-0" : "text-ink-2"}>
             ES
           </span>
           <span aria-hidden="true" className="text-ink-3">
             /
           </span>
-          <span className={locale === "en" ? "text-ink-0" : "text-ink-3"}>
+          <span className={locale === "en" ? "text-ink-0" : "text-ink-2"}>
             EN
           </span>
         </button>

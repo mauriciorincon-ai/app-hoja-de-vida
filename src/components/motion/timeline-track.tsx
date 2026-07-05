@@ -101,6 +101,7 @@ export function TimelineTrack({ items }: { items: TimelineItem[] }) {
           </linearGradient>
         </defs>
         <m.line
+          data-motion-svg=""
           x1={50 / n}
           y1="1"
           x2={100 - 50 / n}
@@ -119,6 +120,7 @@ export function TimelineTrack({ items }: { items: TimelineItem[] }) {
         {items.map((item, i) => (
           <li key={`${item.periodo}-${item.rol}`} className="md:px-2">
             <m.span
+              data-motion=""
               aria-hidden="true"
               className={`mx-auto mb-6 hidden size-3.5 rounded-full md:block ${
                 item.actual
@@ -129,6 +131,7 @@ export function TimelineTrack({ items }: { items: TimelineItem[] }) {
               variants={reduced ? undefined : nodeVariants}
             />
             <m.article
+              data-motion=""
               custom={i}
               variants={reduced ? undefined : cardVariants}
               className="flex flex-col gap-2"

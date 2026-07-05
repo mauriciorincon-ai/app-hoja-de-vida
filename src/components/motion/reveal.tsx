@@ -84,18 +84,28 @@ export function Reveal({
 }: RevealProps) {
   const reduced = useReducedMotion();
 
-  if (reduced) {
-    return <div className={className}>{children}</div>;
-  }
+  // Regla dura: el m.div NUNCA se desmonta al cambiar reduced-motion —
+  // cambiar de elemento dejaría huérfanos los estilos inline del SSR.
+  // Con reduce: sin props de animación (estado final) + el cinturón CSS
+  // de globals.css cubre el HTML pre-hidratación vía [data-motion].
+  const animProps = reduced
+    ? {}
+    : {
+        variants: withDelay(variantsMap[variant], delay),
+        initial: "hidden" as const,
+        ...(onMount
+          ? { animate: "visible" as const }
+          : {
+              whileInView: "visible" as const,
+              viewport: { once: true, amount: 0.25 },
+            }),
+      };
 
   const inner = (
     <m.div
+      data-motion=""
       className={variant === "maskReveal" ? undefined : className}
-      variants={withDelay(variantsMap[variant], delay)}
-      initial="hidden"
-      {...(onMount
-        ? { animate: "visible" }
-        : { whileInView: "visible", viewport: { once: true, amount: 0.25 } })}
+      {...animProps}
     >
       {children}
     </m.div>

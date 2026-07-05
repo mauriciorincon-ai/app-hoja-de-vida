@@ -26,7 +26,7 @@ export async function Footer({ identidad }: { identidad: Cv["identidad"] }) {
             </a>
           ))}
         </div>
-        <p className="text-xs tracking-[0.1em] text-ink-3 uppercase">
+        <p className="text-xs tracking-[0.1em] text-ink-2 uppercase">
           <span aria-hidden="true" className="text-sage-ink">
             ◆
           </span>{" "}

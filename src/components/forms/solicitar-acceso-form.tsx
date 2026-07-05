@@ -62,6 +62,8 @@ export function SolicitarAccesoForm({ apps }: { apps: AppCard[] }) {
     <form
       onSubmit={handleSubmit}
       noValidate
+      // Marcador de hidratación: los e2e esperan a que el handler exista
+      ref={(el) => el?.setAttribute("data-hydrated", "true")}
       aria-label={t("titulo")}
       className="flex flex-col gap-5 rounded-[10px] border border-paper-3 bg-paper-0 p-6 shadow-sh-1 md:p-8"
     >
@@ -117,7 +119,9 @@ export function SolicitarAccesoForm({ apps }: { apps: AppCard[] }) {
           disabled={enviando}
           className="flex h-9 w-full min-w-0 rounded-md border border-paper-3 bg-paper-0 px-3 py-1 text-sm text-ink-1 shadow-xs transition-colors outline-none focus-visible:ring-[3px] focus-visible:ring-sky-ink/40 disabled:cursor-not-allowed disabled:opacity-50"
         >
-          <option value="" disabled />
+          <option value="" disabled>
+            —
+          </option>
           {apps.map((app) => (
             <option key={app.id} value={app.id}>
               {app.nombre[locale]}
