@@ -9,9 +9,13 @@ import { routing } from "@/i18n/routing";
 import { SITE_URL } from "@/lib/site";
 import "../globals.css";
 
+// Presupuesto LCP: la webfont del titular compite con el primer paint.
+// Fraunces va en UN peso estático (todo el display usa 500) y JetBrains Mono
+// sin preload (pinta métricas/fechas, casi todo below-the-fold).
 const fraunces = Fraunces({
   variable: "--font-fraunces",
   subsets: ["latin"],
+  weight: "500",
   display: "swap",
 });
 
@@ -25,6 +29,7 @@ const jetbrains = JetBrains_Mono({
   variable: "--font-jetbrains",
   subsets: ["latin"],
   display: "swap",
+  preload: false,
 });
 
 export function generateStaticParams() {
