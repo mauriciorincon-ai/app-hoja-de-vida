@@ -1,56 +1,204 @@
 # Contenido de la CV Viva en español — LA fuente de verdad (editar + push = deploy).
-# Cómo editar: docs/MANUAL-DE-USO.md. Todo texto entre [PLACEHOLDER: …] debe
-# reemplazarse con el inventario real antes del lanzamiento.
+# Cómo editar: docs/MANUAL-DE-USO.md. Origen: content-pack-v1 de la planeadora
+# (APROBADO 2026-07-05) — ninguna cifra inventada; todas salen de los CVs reales.
+# Los campos `verificacion:` vacíos son [AJUSTAR-LUEGO]: links Credly/Microsoft
+# Learn pendientes de entrega por el dueño del contenido.
 
 identidad:
-  nombre: "Mauricio Rincón"
-  eyebrow: "CV Viva — hoja de vida interactiva"
-  titular: "[PLACEHOLDER: titular de una línea — qué construyes y para quién]"
-  resumen: "[PLACEHOLDER: resumen de 2–3 frases — trayectoria, foco actual y lo que te diferencia]"
-  ubicacion: "Colombia"
-  email: "mauriciorinconai@gmail.com"
+  nombre: "Henry Rincón"
+  nombreCompleto: "Henry Mauricio Rincón Caro"
+  eyebrow: "Ingeniero Industrial · Data & AI Engineer"
+  titular: "De la ingeniería industrial a los agentes de IA: datos, plataformas y decisiones."
+  resumen: >-
+    Líder de datos e ingeniero de IA (DP-600 · AI-102). Diseño plataformas
+    analíticas en Microsoft Fabric y llevo agentes de IA a producción — con la
+    evidencia pública para probarlo.
+  # Perfil largo (sin sección propia aún — entra con la iteración de contenido del S2)
+  perfil: >-
+    Ingeniero Industrial (Javeriana) con 8+ años convirtiendo datos operativos
+    en decisiones de negocio: BI adoptado por 50+ usuarios en banca, ETL que
+    recortó tiempos de análisis hasta 70%, y modelos predictivos en producción
+    con >90% de precisión. En 2023 di el salto natural: lideré la estrategia de
+    datos de una startup de agentes de IA, construyendo desde cero su
+    ecosistema en Microsoft Fabric y el proceso replicable para diseñar y
+    monitorear agentes. Certificado por Microsoft en ingeniería de analítica
+    (DP-600) e ingeniería de IA (AI-102). Lo que no quepa en este texto,
+    pregúntaselo al chat de esta hoja de vida.
+  # La disponibilidad de reubicación es señal DELIBERADA para recruiters (pack §1)
+  ubicacion: "Bogotá, Colombia · Abierto a reubicación internacional y trabajo remoto"
+  email: "mauricio.hmrc@gmail.com"
   enlaces:
-    - etiqueta: "GitHub"
-      url: "https://github.com/mauriciorincon"
     - etiqueta: "LinkedIn"
-      url: "https://www.linkedin.com/in/mauriciorincon"
+      url: "https://www.linkedin.com/in/henry-mauricio-rincon"
+    - etiqueta: "GitHub"
+      url: "https://github.com/mauriciorincon-ai"
 
 trayectoria:
-  - periodo: "2026 — hoy"
-    rol: "[PLACEHOLDER: rol actual]"
-    organizacion: "[PLACEHOLDER: organización o independiente]"
-    descripcion: "[PLACEHOLDER: qué haces y qué impacto tiene, 1–2 frases]"
+  - periodo: "2025 — hoy"
+    rol: "Profesional de Analítica"
+    organizacion: "Fundación CTIC"
+    descripcion: >-
+      Analítica y gobierno de datos para decisiones administrativas y
+      asistenciales en salud.
     actual: true
-  - periodo: "[PLACEHOLDER: 20XX — 20XX]"
-    rol: "[PLACEHOLDER: rol anterior]"
-    organizacion: "[PLACEHOLDER: organización]"
-    descripcion: "[PLACEHOLDER: qué hiciste y qué cambió gracias a eso]"
-  - periodo: "[PLACEHOLDER: 20XX — 20XX]"
-    rol: "[PLACEHOLDER: rol o estudios]"
-    organizacion: "[PLACEHOLDER: organización o institución]"
-    descripcion: "[PLACEHOLDER: hito formativo o profesional]"
+  - periodo: "2023 — 2025"
+    rol: "Líder de Estrategia de Datos"
+    organizacion: "Vesting — startup de agentes de automatización"
+    descripcion: >-
+      Ecosistema de datos para agentes de IA en Microsoft Fabric, desde cero:
+      arquitectura, gobernanza, monitoreo de agentes en tiempo real y proceso
+      core replicable.
+  - periodo: "2023"
+    rol: "Analista Senior de Analítica"
+    organizacion: "Banco Pichincha"
+    descripcion: >-
+      BI adoptado por 50+ usuarios, ETL con −35% de tiempos, modelos
+      predictivos con >90% de precisión y co-liderazgo de la gobernanza de
+      datos.
+  - periodo: "2021 — 2022"
+    rol: "Análisis Post-Operacional"
+    organizacion: "C&M Consultores (TransMilenio)"
+    descripcion: >-
+      Adopción de BI (+35% de eficiencia), ETL que unificó fuentes (+70%) y
+      predicción de demanda con scikit-learn.
+  - periodo: "2020 — 2021"
+    rol: "Analista de Sistemas de Información"
+    organizacion: "Cafam"
+    descripcion: >-
+      Lideré 20 personas en la implementación del WMS: −25% de errores y +15%
+      de eficiencia operativa.
+  - periodo: "2018 — 2020"
+    rol: "Analista de Operaciones"
+    organizacion: "C&M Consorcio (TransMilenio)"
+    descripcion: >-
+      Dashboards e indicadores que elevaron el control operativo del sistema.
+  - periodo: "2017 — 2018"
+    rol: "Coordinador de Operaciones"
+    organizacion: "Ceinfes"
+    descripcion: >-
+      KPIs e informes a junta directiva; transición a gestión por procesos con
+      métodos ágiles.
+  - periodo: "2016 — 2017"
+    rol: "Ingeniero de Procesos"
+    organizacion: "Inglopres"
+    descripcion: >-
+      ERP, bases de datos y cadena de suministro bajo ISO 9001; equipo de 12
+      con 95% de satisfacción de cliente.
+  - periodo: "Formación"
+    rol: "Ingeniería Industrial — énfasis en Inteligencia Analítica de Datos"
+    organizacion: "Pontificia Universidad Javeriana"
+    descripcion: >-
+      Estudios paralelos de Diseño Industrial. Inglés B2 (IELTS, Melbourne).
 
 logros:
-  - valor: 12
+  - valor: 8
     sufijo: "+"
-    etiqueta: "[PLACEHOLDER: etiqueta del logro 1]"
-    descripcion: "[PLACEHOLDER: contexto del logro en una frase]"
-  - valor: 90
+    etiqueta: "años en datos y analítica"
+    descripcion: "De la ingeniería de procesos a plataformas de datos para agentes de IA (2016 → hoy)."
+  - valor: 50
+    sufijo: "+"
+    etiqueta: "usuarios adoptaron mis dashboards en banca"
+    descripcion: "Tableros de BI en Banco Pichincha, con +25% en toma de decisiones."
+  - valor: 70
     sufijo: "%"
-    etiqueta: "[PLACEHOLDER: etiqueta del logro 2]"
-    descripcion: "[PLACEHOLDER: contexto del logro en una frase]"
-  - valor: 4
-    etiqueta: "[PLACEHOLDER: etiqueta del logro 3]"
-    descripcion: "[PLACEHOLDER: contexto del logro en una frase]"
+    etiqueta: "más velocidad de análisis con ETL unificado"
+    descripcion: "Unificación de fuentes heterogéneas en C&M Consultores (TransMilenio)."
+  - valor: 90
+    prefijo: ">"
+    sufijo: "%"
+    etiqueta: "de precisión en modelos predictivos en producción"
+    descripcion: "Modelos con scikit-learn en Banco Pichincha."
+  - valor: 20
+    etiqueta: "personas en el mayor equipo que he liderado"
+    descripcion: "Implementación del WMS en Cafam: −25% de errores, +15% de eficiencia."
+  - valor: 6
+    etiqueta: "certificaciones profesionales"
+    descripcion: "2 de Microsoft (DP-600 · AI-102) y 4 de IBM en ciencia de datos."
 
 proyectos:
-  - nombre: "CV Viva"
-    resumen: "Esta misma página: una hoja de vida que se recorre como pieza editorial animada, construida por el pipeline AI-APPs que también exhibe."
-    stack: ["Next.js", "TypeScript", "Tailwind", "Motion"]
+  - nombre: "Plataforma de datos para agentes de IA — Vesting (2023–2025)"
+    resumen: >-
+      Startup de agentes de automatización sin infraestructura de datos:
+      diseñé e implementé desde cero el ecosistema en Microsoft Fabric (Big
+      Data + DW + procesamiento distribuido), la gobernanza para integrar
+      datos de clientes y sistemas, el monitoreo en tiempo real de los agentes
+      y el proceso core replicable para diseñar e implementar agentes de IA.
+      El puente exacto entre DP-600 y AI-102.
+    stack: ["Microsoft Fabric", "Gobernanza de datos", "Monitoreo en tiempo real"]
     destacado: true
-  - nombre: "[PLACEHOLDER: proyecto 2]"
-    resumen: "[PLACEHOLDER: qué problema resolvió y qué decisiones lo hicieron interesante]"
-    stack: []
-  - nombre: "[PLACEHOLDER: proyecto 3]"
-    resumen: "[PLACEHOLDER: qué problema resolvió y qué decisiones lo hicieron interesante]"
-    stack: []
+  - nombre: "BI que el negocio sí usa — Banco Pichincha (2023)"
+    resumen: >-
+      Dashboards adoptados por 50+ usuarios (+25% en toma de decisiones), ETL
+      con −35% de tiempos, modelos predictivos con >90% de precisión
+      (scikit-learn), gobernanza co-liderada y un programa de formación que
+      subió la productividad 20%.
+    stack: ["BI", "ETL", "scikit-learn"]
+  - nombre: "Datos que mueven una ciudad — TransMilenio / C&M (2021–2022)"
+    resumen: >-
+      Adopción de BI (+35% de eficiencia, 25+ usuarios clave), ETL que unificó
+      fuentes heterogéneas (+70% en precisión y velocidad), predicción de
+      demanda con scikit-learn (+20% de rendimiento del sistema) y mesas de
+      estrategia con la dirección del SITP (+25% en indicadores).
+    stack: ["BI", "ETL", "scikit-learn"]
+  - nombre: "Liderar la calidad de un WMS — Cafam (2020–2021)"
+    resumen: >-
+      Equipo de 20 personas en pruebas de implementación: −25% de errores y
+      +15% de eficiencia; BI de control (+50% de precisión, 15+ usuarios) e
+      integraciones VBA (−50% de errores de datos).
+    stack: ["WMS", "BI", "VBA"]
+  - nombre: "Analítica en salud — Fundación CTIC (2025–hoy)"
+    resumen: >-
+      Modelos de análisis y visualización para líderes administrativos y
+      asistenciales, gobierno y calidad de datos institucional, y tableros de
+      control por procesos.
+    stack: ["Analítica", "Gobierno de datos"]
+
+certificaciones:
+  - nombre: "Microsoft Certified: Azure AI Engineer Associate (AI-102)"
+    fecha: "dic 2024"
+    nota: "La que guía mi presente: soluciones de IA, NLP, visión y pipelines en Azure."
+    verificacion: ""
+  - nombre: "Microsoft Certified: Fabric Analytics Engineer Associate (DP-600)"
+    fecha: "2024"
+    nota: "La que respalda mi trayectoria: ingeniería de datos y analítica end-to-end."
+    verificacion: ""
+  - nombre: "IBM: Ciencia de Datos Aplicada con R"
+    fecha: "2024"
+  - nombre: "IBM: Certificado Profesional en Ciencia de Datos"
+    fecha: "2022"
+  - nombre: "IBM: Python para Ciencia de Datos"
+    fecha: "2022"
+  - nombre: "IBM: SQL para Ciencia de Datos"
+    fecha: "2022"
+
+skills:
+  - grupo: "IA & ML"
+    items:
+      - "Azure AI"
+      - "RAG y agentes — en construcción pública (ver showcase)"
+      - "PyTorch"
+      - "TensorFlow"
+      - "Scikit-Learn"
+      - "NLP"
+  - grupo: "Plataforma de datos"
+    items:
+      - "Microsoft Fabric"
+      - "Azure Synapse"
+      - "ETL"
+      - "Modelado de datos"
+      - "SQL"
+      - "Power Query"
+      - "DAX"
+  - grupo: "BI & decisión"
+    items:
+      - "Power BI"
+      - "Data storytelling"
+      - "KPIs"
+      - "Gobernanza y calidad de datos"
+  - grupo: "Ingeniería & liderazgo"
+    items:
+      - "Python"
+      - "Git/GitHub"
+      - "CI/CD — este sitio corre con ello"
+      - "Equipos de hasta 20 personas"
+      - "Stakeholders C-level"

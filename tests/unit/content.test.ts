@@ -15,6 +15,8 @@ describe("content loader (data/*.yaml reales)", () => {
     expect(en.trayectoria).toHaveLength(es.trayectoria.length);
     expect(en.logros).toHaveLength(es.logros.length);
     expect(en.proyectos).toHaveLength(es.proyectos.length);
+    expect(en.certificaciones).toHaveLength(es.certificaciones.length);
+    expect(en.skills).toHaveLength(es.skills.length);
   });
 
   it("parses data/apps.yaml and includes hoja-de-vida", () => {

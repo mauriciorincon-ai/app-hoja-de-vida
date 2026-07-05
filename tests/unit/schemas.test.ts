@@ -40,6 +40,23 @@ describe("cvSchema", () => {
     expect(cv.proyectos[0].destacado).toBe(false);
   });
 
+  it("defaults the sections without a HOME slot yet (pack v1)", () => {
+    const cv = cvSchema.parse(cvValido);
+    expect(cv.identidad.nombreCompleto).toBeUndefined();
+    expect(cv.identidad.perfil).toBe("");
+    expect(cv.certificaciones).toEqual([]);
+    expect(cv.skills).toEqual([]);
+  });
+
+  it("defaults certificaciones.verificacion to empty (links pending)", () => {
+    const cv = cvSchema.parse({
+      ...cvValido,
+      certificaciones: [{ nombre: "AI-102", fecha: "2024" }],
+    });
+    expect(cv.certificaciones[0].verificacion).toBe("");
+    expect(cv.certificaciones[0].nota).toBe("");
+  });
+
   it("rejects a CV without required identity fields", () => {
     const identidadRota: Record<string, unknown> = { ...cvValido.identidad };
     delete identidadRota.titular;
@@ -76,6 +93,25 @@ describe("appsSchema", () => {
   it("accepts a valid showcase", () => {
     const apps = appsSchema.parse(appsValidas);
     expect(apps.apps).toHaveLength(1);
+  });
+
+  it("accepts estado en-produccion with evidence links", () => {
+    const apps = appsSchema.parse({
+      apps: [
+        {
+          ...appsValidas.apps[0],
+          estado: "en-produccion",
+          enlaces: [{ etiqueta: "GitHub", url: "https://github.com/x/y" }],
+        },
+      ],
+    });
+    expect(apps.apps[0].estado).toBe("en-produccion");
+    expect(apps.apps[0].enlaces).toHaveLength(1);
+  });
+
+  it("defaults enlaces to an empty list", () => {
+    const apps = appsSchema.parse(appsValidas);
+    expect(apps.apps[0].enlaces).toEqual([]);
   });
 
   it("rejects an unknown estado", () => {

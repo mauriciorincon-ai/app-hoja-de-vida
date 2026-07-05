@@ -1,56 +1,198 @@
-# Living CV content in English — THE source of truth (edit + push = deploy).
-# How to edit: docs/MANUAL-DE-USO.md. Every text wrapped in [PLACEHOLDER: …]
-# must be replaced with the real inventory before launch.
+# English content of the Living CV — mirror of cv.es.yaml (same structure, same
+# section sizes). How to edit: docs/MANUAL-DE-USO.md. Source: content-pack-v1
+# (APPROVED 2026-07-05); no figure was invented — all come from the real CVs.
+# Empty `verificacion:` fields are pending verification links (Credly/MS Learn).
 
 identidad:
-  nombre: "Mauricio Rincón"
-  eyebrow: "Living CV — an interactive résumé"
-  titular: "[PLACEHOLDER: one-line headline — what you build and for whom]"
-  resumen: "[PLACEHOLDER: 2–3 sentence summary — career, current focus, what sets you apart]"
-  ubicacion: "Colombia"
-  email: "mauriciorinconai@gmail.com"
+  nombre: "Henry Rincón"
+  nombreCompleto: "Henry Mauricio Rincón Caro"
+  eyebrow: "Industrial Engineer · Data & AI Engineer"
+  titular: "From industrial engineering to AI agents: data, platforms and decisions."
+  resumen: >-
+    Data leader and AI engineer (DP-600 · AI-102). I design analytics
+    platforms on Microsoft Fabric and take AI agents to production — with the
+    public evidence to prove it.
+  perfil: >-
+    Industrial Engineer (Javeriana) with 8+ years turning operational data
+    into business decisions: BI adopted by 50+ users in banking, ETL that cut
+    analysis times by up to 70%, and predictive models in production with >90%
+    accuracy. In 2023 I made the natural leap: I led the data strategy of an
+    AI-agent startup, building its Microsoft Fabric ecosystem from scratch
+    together with the replicable process to design and monitor agents.
+    Microsoft-certified in analytics engineering (DP-600) and AI engineering
+    (AI-102). Whatever doesn't fit in this text, ask this résumé's chat.
+  ubicacion: "Bogotá, Colombia · Open to international relocation and remote work"
+  email: "mauricio.hmrc@gmail.com"
   enlaces:
-    - etiqueta: "GitHub"
-      url: "https://github.com/mauriciorincon"
     - etiqueta: "LinkedIn"
-      url: "https://www.linkedin.com/in/mauriciorincon"
+      url: "https://www.linkedin.com/in/henry-mauricio-rincon"
+    - etiqueta: "GitHub"
+      url: "https://github.com/mauriciorincon-ai"
 
 trayectoria:
-  - periodo: "2026 — today"
-    rol: "[PLACEHOLDER: current role]"
-    organizacion: "[PLACEHOLDER: organization or independent]"
-    descripcion: "[PLACEHOLDER: what you do and its impact, 1–2 sentences]"
+  - periodo: "2025 — today"
+    rol: "Analytics Professional"
+    organizacion: "Fundación CTIC"
+    descripcion: >-
+      Analytics and data governance for administrative and clinical decisions
+      in healthcare.
     actual: true
-  - periodo: "[PLACEHOLDER: 20XX — 20XX]"
-    rol: "[PLACEHOLDER: previous role]"
-    organizacion: "[PLACEHOLDER: organization]"
-    descripcion: "[PLACEHOLDER: what you did and what changed because of it]"
-  - periodo: "[PLACEHOLDER: 20XX — 20XX]"
-    rol: "[PLACEHOLDER: role or studies]"
-    organizacion: "[PLACEHOLDER: organization or institution]"
-    descripcion: "[PLACEHOLDER: formative or professional milestone]"
+  - periodo: "2023 — 2025"
+    rol: "Data Strategy Lead"
+    organizacion: "Vesting — automation-agents startup"
+    descripcion: >-
+      Data ecosystem for AI agents on Microsoft Fabric, built from scratch:
+      architecture, governance, real-time agent monitoring and a replicable
+      core process.
+  - periodo: "2023"
+    rol: "Senior Analytics Analyst"
+    organizacion: "Banco Pichincha"
+    descripcion: >-
+      BI adopted by 50+ users, ETL times cut by 35%, predictive models above
+      90% accuracy, and co-led data governance.
+  - periodo: "2021 — 2022"
+    rol: "Post-Operational Analysis"
+    organizacion: "C&M Consultores (TransMilenio)"
+    descripcion: >-
+      BI adoption (+35% efficiency), an ETL that unified sources (+70%) and
+      demand forecasting with scikit-learn.
+  - periodo: "2020 — 2021"
+    rol: "Information Systems Analyst"
+    organizacion: "Cafam"
+    descripcion: >-
+      Led 20 people through the WMS implementation: −25% errors and +15%
+      operational efficiency.
+  - periodo: "2018 — 2020"
+    rol: "Operations Analyst"
+    organizacion: "C&M Consorcio (TransMilenio)"
+    descripcion: >-
+      Dashboards and indicators that raised the system's operational control.
+  - periodo: "2017 — 2018"
+    rol: "Operations Coordinator"
+    organizacion: "Ceinfes"
+    descripcion: >-
+      KPIs and board-level reporting; transition to process-based management
+      with agile methods.
+  - periodo: "2016 — 2017"
+    rol: "Process Engineer"
+    organizacion: "Inglopres"
+    descripcion: >-
+      ERP, databases and supply chain under ISO 9001; a team of 12 with 95%
+      client satisfaction.
+  - periodo: "Education"
+    rol: "Industrial Engineering — emphasis in Data Analytics Intelligence"
+    organizacion: "Pontificia Universidad Javeriana"
+    descripcion: >-
+      Parallel studies in Industrial Design. English B2 (IELTS, Melbourne).
 
 logros:
-  - valor: 12
+  - valor: 8
     sufijo: "+"
-    etiqueta: "[PLACEHOLDER: achievement 1 label]"
-    descripcion: "[PLACEHOLDER: one-sentence context for the achievement]"
-  - valor: 90
+    etiqueta: "years in data and analytics"
+    descripcion: "From process engineering to data platforms for AI agents (2016 → today)."
+  - valor: 50
+    sufijo: "+"
+    etiqueta: "users adopted my dashboards in banking"
+    descripcion: "BI dashboards at Banco Pichincha, driving +25% in decision-making."
+  - valor: 70
     sufijo: "%"
-    etiqueta: "[PLACEHOLDER: achievement 2 label]"
-    descripcion: "[PLACEHOLDER: one-sentence context for the achievement]"
-  - valor: 4
-    etiqueta: "[PLACEHOLDER: achievement 3 label]"
-    descripcion: "[PLACEHOLDER: one-sentence context for the achievement]"
+    etiqueta: "faster analysis with a unified ETL"
+    descripcion: "Unifying heterogeneous sources at C&M Consultores (TransMilenio)."
+  - valor: 90
+    prefijo: ">"
+    sufijo: "%"
+    etiqueta: "accuracy of predictive models in production"
+    descripcion: "scikit-learn models at Banco Pichincha."
+  - valor: 20
+    etiqueta: "people in the largest team I've led"
+    descripcion: "WMS implementation at Cafam: −25% errors, +15% efficiency."
+  - valor: 6
+    etiqueta: "professional certifications"
+    descripcion: "2 from Microsoft (DP-600 · AI-102) and 4 from IBM in data science."
 
 proyectos:
-  - nombre: "Living CV"
-    resumen: "This very page: a résumé you scroll through like an animated editorial piece, built by the same AI-APPs pipeline it showcases."
-    stack: ["Next.js", "TypeScript", "Tailwind", "Motion"]
+  - nombre: "A data platform for AI agents — Vesting (2023–2025)"
+    resumen: >-
+      An automation-agents startup with no data infrastructure: I designed and
+      built from scratch its Microsoft Fabric ecosystem (big data + data
+      warehouse + distributed processing), the governance to integrate client
+      and system data, real-time agent monitoring, and the replicable core
+      process to design and ship AI agents. The exact bridge between DP-600
+      and AI-102.
+    stack: ["Microsoft Fabric", "Data governance", "Real-time monitoring"]
     destacado: true
-  - nombre: "[PLACEHOLDER: project 2]"
-    resumen: "[PLACEHOLDER: what problem it solved and which decisions made it interesting]"
-    stack: []
-  - nombre: "[PLACEHOLDER: project 3]"
-    resumen: "[PLACEHOLDER: what problem it solved and which decisions made it interesting]"
-    stack: []
+  - nombre: "BI the business actually uses — Banco Pichincha (2023)"
+    resumen: >-
+      Dashboards adopted by 50+ users (+25% in decision-making), ETL times cut
+      by 35%, predictive models above 90% accuracy (scikit-learn), co-led
+      governance and a training program that lifted productivity by 20%.
+    stack: ["BI", "ETL", "scikit-learn"]
+  - nombre: "Data that moves a city — TransMilenio / C&M (2021–2022)"
+    resumen: >-
+      BI adoption (+35% efficiency, 25+ key users), an ETL that unified
+      heterogeneous sources (+70% in precision and speed), demand forecasting
+      with scikit-learn (+20% system performance) and strategy sessions with
+      SITP leadership (+25% in indicators).
+    stack: ["BI", "ETL", "scikit-learn"]
+  - nombre: "Leading the quality of a WMS — Cafam (2020–2021)"
+    resumen: >-
+      A team of 20 through implementation testing: −25% errors and +15%
+      efficiency; control BI (+50% precision, 15+ users) and VBA integrations
+      (−50% data errors).
+    stack: ["WMS", "BI", "VBA"]
+  - nombre: "Analytics in healthcare — Fundación CTIC (2025–today)"
+    resumen: >-
+      Analysis and visualization models for administrative and clinical
+      leaders, institutional data governance and quality, and process-based
+      control dashboards.
+    stack: ["Analytics", "Data governance"]
+
+certificaciones:
+  - nombre: "Microsoft Certified: Azure AI Engineer Associate (AI-102)"
+    fecha: "Dec 2024"
+    nota: "The one guiding my present: AI solutions, NLP, vision and pipelines on Azure."
+    verificacion: ""
+  - nombre: "Microsoft Certified: Fabric Analytics Engineer Associate (DP-600)"
+    fecha: "2024"
+    nota: "The one backing my track record: end-to-end data and analytics engineering."
+    verificacion: ""
+  - nombre: "IBM: Applied Data Science with R"
+    fecha: "2024"
+  - nombre: "IBM: Data Science Professional Certificate"
+    fecha: "2022"
+  - nombre: "IBM: Python for Data Science"
+    fecha: "2022"
+  - nombre: "IBM: SQL for Data Science"
+    fecha: "2022"
+
+skills:
+  - grupo: "AI & ML"
+    items:
+      - "Azure AI"
+      - "RAG & agents — being built in the open (see the showcase)"
+      - "PyTorch"
+      - "TensorFlow"
+      - "Scikit-Learn"
+      - "NLP"
+  - grupo: "Data platform"
+    items:
+      - "Microsoft Fabric"
+      - "Azure Synapse"
+      - "ETL"
+      - "Data modeling"
+      - "SQL"
+      - "Power Query"
+      - "DAX"
+  - grupo: "BI & decision-making"
+    items:
+      - "Power BI"
+      - "Data storytelling"
+      - "KPIs"
+      - "Data governance & quality"
+  - grupo: "Engineering & leadership"
+    items:
+      - "Python"
+      - "Git/GitHub"
+      - "CI/CD — this site runs on it"
+      - "Teams of up to 20 people"
+      - "C-level stakeholders"

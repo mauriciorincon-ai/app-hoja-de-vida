@@ -1,34 +1,50 @@
 # Apps del pipeline AI-APPs en el showcase — "solo lo real": sin fechas prometidas.
 # Agregar/editar una card = editar este archivo + push (cero cambios de código).
-# Estados válidos: en-construccion | en-exploracion
+# Estados válidos (content pack §9 — estados honestos):
+#   en-produccion   → URL viva + repo público + CI verde ("esto ya lo hace")
+#   en-construccion → repo público con commits reales ("esto lo está haciendo AHORA")
+#   en-exploracion  → objetivo declarado, sin fechas prometidas ("esto viene")
 
 apps:
   - id: hoja-de-vida
-    estado: en-construccion
+    estado: en-produccion
     nombre:
       es: "CV Viva"
       en: "Living CV"
     descripcion:
-      es: "Esta hoja de vida interactiva: la primera app del pipeline, construyéndose en público."
-      en: "This interactive résumé: the pipeline's first app, being built in the open."
+      es: "Esta misma página: Next.js 16 + SSG + motion system + CI con gates de calidad. El repo es público — lo que estás viendo es el demo."
+      en: "This very page: Next.js 16 + SSG + a motion system + CI with quality gates. The repo is public — what you're looking at is the demo."
+    enlaces:
+      - etiqueta: "GitHub"
+        url: "https://github.com/mauriciorincon-ai/app-hoja-de-vida"
     solicitable: false
 
-  - id: idea-exploracion-1
-    estado: en-exploracion
+  - id: chat-hoja-de-vida
+    estado: en-construccion
     nombre:
-      es: "[PLACEHOLDER: idea 1 del buzón]"
-      en: "[PLACEHOLDER: backlog idea 1]"
+      es: "Chat con mi hoja de vida"
+      en: "Chat with my résumé"
     descripcion:
-      es: "[PLACEHOLDER: una frase honesta sobre qué explorará esta app]"
-      en: "[PLACEHOLDER: one honest sentence about what this app will explore]"
+      es: "Pregúntale a mi hoja de vida: RAG con índice en build-time y adapter conmutable Azure AI Foundry ↔ Gemini — un solo código, dos nubes (AI-102 en acción)."
+      en: "Ask my résumé anything: RAG with a build-time index and a switchable Azure AI Foundry ↔ Gemini adapter — one codebase, two clouds (AI-102 in action)."
     solicitable: true
 
-  - id: idea-exploracion-2
+  - id: fabric-analitica-e2e
     estado: en-exploracion
     nombre:
-      es: "[PLACEHOLDER: idea 2 del buzón]"
-      en: "[PLACEHOLDER: backlog idea 2]"
+      es: "Analítica end-to-end en Fabric"
+      en: "End-to-end analytics on Fabric"
     descripcion:
-      es: "[PLACEHOLDER: una frase honesta sobre qué explorará esta app]"
-      en: "[PLACEHOLDER: one honest sentence about what this app will explore]"
+      es: "Pipeline público con datos abiertos de Colombia: ingesta → Lakehouse → modelo semántico → Power BI embebido. Ingeniería de analítica verificable (DP-600)."
+      en: "A public pipeline on Colombian open data: ingestion → Lakehouse → semantic model → embedded Power BI. Verifiable analytics engineering (DP-600)."
+    solicitable: true
+
+  - id: agente-gemini-vertex
+    estado: en-exploracion
+    nombre:
+      es: "Agente autónomo con Gemini + Vertex AI"
+      en: "Autonomous agent with Gemini + Vertex AI"
+    descripcion:
+      es: "Agente con herramientas (LangChain) sobre el stack de GCP: el complemento multi-cloud de mi certificación Azure."
+      en: "A tool-using agent (LangChain) on the GCP stack: the multi-cloud complement to my Azure certification."
     solicitable: true
