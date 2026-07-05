@@ -10,9 +10,14 @@ import { z } from "zod";
 export const cvSchema = z.object({
   identidad: z.object({
     nombre: z.string().min(1),
+    // Nombre legal para footer/JSON-LD (Person.name); `nombre` es la marca pública
+    nombreCompleto: z.string().min(1).optional(),
     eyebrow: z.string().min(1),
     titular: z.string().min(1),
     resumen: z.string().min(1),
+    // Perfil largo (content pack §3) — aún sin sección propia en la HOME;
+    // entra con la iteración de contenido del S2 (detalle/chat)
+    perfil: z.string().default(""),
     ubicacion: z.string().min(1),
     email: z.string().email(),
     enlaces: z
@@ -57,11 +62,40 @@ export const cvSchema = z.object({
       }),
     )
     .min(1),
+  // Contenido versionado sin sección propia todavía (content pack §6–§7):
+  // se valida desde ya para que el S2 solo tenga que renderizarlo.
+  certificaciones: z
+    .array(
+      z.object({
+        nombre: z.string().min(1),
+        fecha: z.string().min(1),
+        nota: z.string().default(""),
+        // Link Credly/Microsoft Learn — [AJUSTAR-LUEGO] del pack: vacío hasta
+        // que el dueño entregue los links de verificación
+        verificacion: z.string().default(""),
+      }),
+    )
+    .default([]),
+  skills: z
+    .array(
+      z.object({
+        grupo: z.string().min(1),
+        items: z.array(z.string().min(1)).min(1),
+      }),
+    )
+    .default([]),
 });
 
 export type Cv = z.infer<typeof cvSchema>;
 
-export const appEstados = ["en-construccion", "en-exploracion"] as const;
+// Estados honestos del showcase (content pack §9): en producción = URL viva +
+// repo público · en construcción = repo con commits reales · en exploración =
+// objetivo declarado sin fechas prometidas.
+export const appEstados = [
+  "en-produccion",
+  "en-construccion",
+  "en-exploracion",
+] as const;
 
 const localizedText = z.object({
   es: z.string().min(1),
@@ -79,6 +113,15 @@ export const appsSchema = z.object({
         estado: z.enum(appEstados),
         nombre: localizedText,
         descripcion: localizedText,
+        // Evidencia pública de la card (repo, demo): etiqueta universal (p. ej. "GitHub")
+        enlaces: z
+          .array(
+            z.object({
+              etiqueta: z.string().min(1),
+              url: z.string().url(),
+            }),
+          )
+          .default([]),
         solicitable: z.boolean().default(true),
       }),
     )

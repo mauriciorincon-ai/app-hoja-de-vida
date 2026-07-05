@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "Living CV — Mauricio Rincón",
-    "description": "An interactive résumé: career, achievements and AI-APPs pipeline apps, told as an animated editorial experience."
+    "title": "Living CV — Henry Rincón",
+    "description": "Henry Rincón's interactive résumé — Data & AI Engineer (DP-600 · AI-102): career, achievements and the AI-APPs pipeline apps as an animated editorial experience."
   },
   "nav": {
     "trayectoria": "Career",
@@ -20,6 +20,7 @@
     "titulo": "Pipeline apps",
     "subtitulo": "Only what's real: what's being built and what's being explored. No promised dates.",
     "estados": {
+      "en-produccion": "In production",
       "en-construccion": "In construction",
       "en-exploracion": "In exploration"
     },
@@ -28,7 +29,7 @@
   "contacto": {
     "eyebrow": "Contact",
     "titulo": "Shall we talk?",
-    "subtitulo": "If anything you saw interests you — an app, a role, a technical conversation — write to me."
+    "subtitulo": "Want to know if I'd fit on your team? Write to me — an app, a role or a technical conversation."
   },
   "footer": {
     "creditos": "Built in the open by the AI-APPs pipeline."

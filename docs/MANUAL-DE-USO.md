@@ -26,9 +26,16 @@ e inglés. Quien la visita puede pedir acceso a tus apps y la solicitud te llega
 - **Cómo se usa:**
   1. Abre `data/cv.es.yaml` (español) y `data/cv.en.yaml` (inglés). Son espejos: cada dato debe
      existir en ambos idiomas.
-  2. Reemplaza los textos. Los que dicen `[PLACEHOLDER: …]` son los pendientes de tu inventario
-     real.
+  2. Edita los textos. Desde el content pack v1 (jul 2026) el contenido es el real — sin
+     placeholders.
   3. Guarda, haz commit y push (o edítalos directo en GitHub). El deploy sale solo.
+- **Campos guardados pero aún sin sección en la página:** `perfil` (texto largo),
+  `certificaciones` y `skills` ya viven en los YAML y se validan, pero su sección visual llega
+  con el Sprint 2. Cuando tengas los links de verificación de tus certificaciones (Credly /
+  Microsoft Learn), pégalos en el campo `verificacion:` de cada una.
+- **Dos correos distintos:** el que se **muestra** en la página (contacto público) es el campo
+  `email:` del YAML; el que **recibe** las solicitudes del formulario es la variable
+  `SOLICITUDES_TO_EMAIL` en Vercel — cambiarlos es independiente.
 - **Red de seguridad:** si un archivo queda mal formado (falta un campo, un email inválido), la
   publicación **falla antes de salir** con un mensaje que dice exactamente qué campo está mal.
   La página que ya está en línea no se rompe.
@@ -38,10 +45,15 @@ e inglés. Quien la visita puede pedir acceso a tus apps y la solicitud te llega
 ### Agregar una app al showcase · desde Sprint 001
 
 - **Qué hace:** la sección "Apps del pipeline" es un brochure que sale de `data/apps.yaml`.
-- **Cómo se usa:** agrega un bloque a la lista con `id` (minúsculas-con-guiones), `estado`
-  (`en-construccion` o `en-exploracion`), `nombre` y `descripcion` en `es` y `en`, y
-  `solicitable` (si aparece el botón "Quiero probarla"). Push y listo.
-- **Ritual del pipeline:** al cerrar el sprint de cualquier app, actualiza su card aquí.
+- **Cómo se usa:** agrega un bloque a la lista con `id` (minúsculas-con-guiones), `estado`,
+  `nombre` y `descripcion` en `es` y `en`, y `solicitable` (si aparece el botón "Quiero
+  probarla"). Opcional: `enlaces` (etiqueta + url) para mostrar la evidencia pública de la
+  card, como el repo en GitHub. Push y listo.
+- **Estados honestos (la promesa del showcase):** `en-produccion` = ya funciona y es
+  verificable · `en-construccion` = se está construyendo ahora mismo, con repo público ·
+  `en-exploracion` = objetivo declarado, sin fechas prometidas.
+- **Ritual del pipeline:** al cerrar el sprint de cualquier app, actualiza su card aquí
+  (cuando un demo pase a producción, sube su estado y considera darle case study en Proyectos).
 
 ### Idiomas · desde Sprint 001
 
@@ -76,6 +88,7 @@ e inglés. Quien la visita puede pedir acceso a tus apps y la solicitud te llega
 
 ## Historial
 
-| Sprint | Features añadidas a este manual                                                      |
-| ------ | ------------------------------------------------------------------------------------ |
-| 001    | Contenido por YAML, showcase de apps, bilingüe ES/EN, solicitudes de acceso, motion. |
+| Sprint | Features añadidas a este manual                                                                                                                                          |
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 001    | Contenido por YAML, showcase de apps, bilingüe ES/EN, solicitudes de acceso, motion.                                                                                     |
+| 001bis | Content pack v1 integrado (marca Henry Rincón), estado "en producción", enlaces de evidencia en las cards, campos `certificaciones`/`skills`/`perfil` previstos para S2. |

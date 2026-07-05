@@ -11,6 +11,7 @@ import { AppCardCta } from "./app-card-cta";
  * Server component: solo el CTA (tracking) se hidrata.
  */
 const chipPorEstado: Record<AppCard["estado"], string> = {
+  "en-produccion": "bg-sage text-sage-ink",
   "en-construccion": "bg-citron text-citron-ink",
   "en-exploracion": "bg-peach text-peach-ink",
 };
@@ -55,6 +56,23 @@ export async function AppsShowcase({ apps }: { apps: AppCard[] }) {
                 <p className="text-sm leading-relaxed text-ink-2">
                   {app.descripcion[locale]}
                 </p>
+                {app.enlaces.length > 0 && (
+                  <p className="flex flex-wrap gap-x-4 font-mono text-[13px] text-ink-2">
+                    {app.enlaces.map((enlace) => (
+                      <a
+                        key={enlace.url}
+                        href={enlace.url}
+                        rel="noopener noreferrer"
+                        target="_blank"
+                        aria-label={`${enlace.etiqueta} — ${app.nombre[locale]}`}
+                        className="flex min-h-11 items-center gap-1 border-b border-dashed border-ink-3 transition-colors duration-[120ms] hover:text-ink-0"
+                      >
+                        {enlace.etiqueta}
+                        <span aria-hidden="true">↗</span>
+                      </a>
+                    ))}
+                  </p>
+                )}
                 {app.solicitable && (
                   <AppCardCta appId={app.id} label={t("cta")} />
                 )}

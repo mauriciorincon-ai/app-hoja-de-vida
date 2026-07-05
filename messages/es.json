@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "CV Viva — Mauricio Rincón",
-    "description": "Hoja de vida interactiva: trayectoria, logros y apps del pipeline AI-APPs, contados como una experiencia editorial animada."
+    "title": "CV Viva — Henry Rincón",
+    "description": "La hoja de vida interactiva de Henry Rincón — Data & AI Engineer (DP-600 · AI-102): trayectoria, logros y las apps del pipeline AI-APPs en una experiencia editorial animada."
   },
   "nav": {
     "trayectoria": "Trayectoria",
@@ -20,6 +20,7 @@
     "titulo": "Apps del pipeline",
     "subtitulo": "Solo lo real: lo que se está construyendo y lo que se está explorando. Sin fechas prometidas.",
     "estados": {
+      "en-produccion": "En producción",
       "en-construccion": "En construcción",
       "en-exploracion": "En exploración"
     },
@@ -28,7 +29,7 @@
   "contacto": {
     "eyebrow": "Contacto",
     "titulo": "¿Hablamos?",
-    "subtitulo": "Si algo de lo que viste te interesa — una app, un rol, una conversación técnica — escríbeme."
+    "subtitulo": "¿Quieres saber si encajo en tu equipo? Escríbeme — una app, un rol o una conversación técnica."
   },
   "footer": {
     "creditos": "Construida en público por el pipeline AI-APPs."

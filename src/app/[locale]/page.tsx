@@ -1,4 +1,4 @@
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { HomeVisitTracker } from "@/components/home-visit-tracker";
@@ -22,14 +22,18 @@ export default async function HomePage({
 
   const cv = getCv(locale as Locale);
   const { apps } = getApps();
+  const tMeta = await getTranslations({ locale, namespace: "meta" });
 
-  // JSON-LD Person + WebSite (gate ATS/SEO)
+  // JSON-LD Person + WebSite (gate ATS/SEO). Person.name lleva el nombre
+  // legal completo y alternateName la marca pública (content pack §11).
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "Person",
-        name: cv.identidad.nombre,
+        name: cv.identidad.nombreCompleto ?? cv.identidad.nombre,
+        alternateName: cv.identidad.nombre,
+        jobTitle: cv.identidad.eyebrow,
         description: cv.identidad.resumen,
         email: `mailto:${cv.identidad.email}`,
         url: `${SITE_URL}/${locale}`,
@@ -37,7 +41,7 @@ export default async function HomePage({
       },
       {
         "@type": "WebSite",
-        name: cv.identidad.eyebrow,
+        name: tMeta("title"),
         url: SITE_URL,
         inLanguage: ["es", "en"],
       },
