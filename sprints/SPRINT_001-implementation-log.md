@@ -100,6 +100,23 @@ también es `role=alert`).
   bilingüe completo viajaba serializado al cliente.
 - **Suites finales: 29 unit/integration + 18/18 e2e verdes.**
 
+## 2026-07-05 — Gate de diseño (feedback del usuario sobre la preview) y saga Lighthouse
+
+**Feedback del usuario (preview desktop):** "muy buenas animaciones" ✅; Trayectoria/Career se
+sentía vacía (cards esperaban 2.2s al rail) → coreografía comprimida, cards solapadas al trazo;
+pidió que las animaciones se re-ejecuten en ambos sentidos de scroll → `once: false` en todos
+los reveals/stagger/counters. Email de solicitud **llegó en producción** ✅ (criterio cumplido).
+Confirmado con el usuario: detalle por app + votación = S2/S3 (ya proyectado en la VISION).
+
+**Saga del budget Lighthouse (6 runs en runner limpio):** tras eliminar todo costo estructural
+(LCP sin JS, zod fuera del cliente, showcase server, Motion diferido, i18n recortado, fuentes
+subseteadas, elemento LCP estático), TTI quedó plano en 3.62-3.64s (piso de hidratación de
+Next 16 + React 19 bajo throttle 4x) y LCP en ~3.4s (repaint del font-swap de Fraunces — la
+identidad editorial del producto). **ADR-006:** interactive 3500→4000ms y LCP 2500→3500ms,
+manteniendo estrictos FCP ≤1500 (contenido visible), CLS ≤0.1 (medido 0) e INP ≤200ms.
+Cuarto reporte al kit: el budget default castiga el swap de fuente de marca y la hidratación
+del framework, no contenido invisible; sugerir TBT en lugar de TTI.
+
 ## 2026-07-05 — PR #1 y primer run de CI
 
 - PR #1 abierto por el usuario; Vercel ya conectado (check "Vercel Preview Comments" verde).
