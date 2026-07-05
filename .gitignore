@@ -9,6 +9,7 @@ test-results/
 .env
 .env.local
 .env.*.local
+.claude/settings.local.json
 *.tsbuildinfo
 .vercel/
 .DS_Store

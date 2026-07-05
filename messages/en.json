@@ -1,0 +1,46 @@
+{
+  "meta": {
+    "title": "Living CV — Mauricio Rincón",
+    "description": "An interactive résumé: career, achievements and AI-APPs pipeline apps, told as an animated editorial experience."
+  },
+  "nav": {
+    "trayectoria": "Career",
+    "logros": "Achievements",
+    "proyectos": "Projects",
+    "apps": "Apps",
+    "contacto": "Contact",
+    "cambiarIdioma": "Cambiar a español",
+    "saltarContenido": "Skip to content"
+  },
+  "form": {
+    "titulo": "Request access",
+    "nombre": "Your name",
+    "email": "Your email",
+    "app": "Which app do you want to try?",
+    "mensaje": "Tell me what you'd use it for (optional)",
+    "enviar": "I want to try it",
+    "enviando": "Sending…",
+    "errorEnvio": "I couldn't send your request. Please try again in a moment.",
+    "reintentar": "Retry",
+    "errores": {
+      "nombreRequerido": "Please write your name.",
+      "emailInvalido": "That email doesn't look valid.",
+      "appRequerida": "Pick an app."
+    }
+  },
+  "confirmacion": {
+    "titulo": "I got your request",
+    "cuerpo": "I'll reply within 1–3 business days to the email you left.",
+    "volver": "Back to home"
+  },
+  "notFound": {
+    "titulo": "This page doesn't exist",
+    "cuerpo": "The link may be broken or the page moved.",
+    "volver": "Back to home"
+  },
+  "error": {
+    "titulo": "Something went wrong",
+    "cuerpo": "It's been logged; try reloading.",
+    "recargar": "Reload"
+  }
+}
