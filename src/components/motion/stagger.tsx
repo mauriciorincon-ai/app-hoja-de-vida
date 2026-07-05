@@ -32,7 +32,7 @@ export function Stagger({
         variants: container,
         initial: "hidden" as const,
         whileInView: "visible" as const,
-        viewport: { once: true, amount: 0.2 },
+        viewport: { once: false, amount: 0.2 },
       };
 
   return (

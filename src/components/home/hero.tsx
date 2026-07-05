@@ -53,11 +53,10 @@ export async function Hero({ identidad }: { identidad: Cv["identidad"] }) {
           </span>
         </h1>
 
-        {/* El resumen es el candidato LCP: anima SOLO transform (anim-rise) */}
-        <p
-          className="anim-rise mt-8 max-w-[56ch] text-[17px] leading-[1.65] text-ink-2"
-          style={{ "--anim-delay": "0.5s" } as React.CSSProperties}
-        >
+        {/* El resumen es el candidato LCP: se pinta ESTÁTICO (sin entrada) —
+            cualquier animación retrasa su registro en el simulador móvil.
+            La coreografía vive en el badge, el titular y los CTAs. */}
+        <p className="mt-8 max-w-[56ch] text-[17px] leading-[1.65] text-ink-2">
           {identidad.resumen}
         </p>
 

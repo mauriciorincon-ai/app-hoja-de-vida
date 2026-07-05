@@ -96,8 +96,10 @@ export function Reveal({
         ...(onMount
           ? { animate: "visible" as const }
           : {
+              // once:false — la entrada se re-ejecuta cada vez que la sección
+              // vuelve a pantalla (feedback del gate de diseño, 2026-07-05)
               whileInView: "visible" as const,
-              viewport: { once: true, amount: 0.25 },
+              viewport: { once: false, amount: 0.25 },
             }),
       };
 

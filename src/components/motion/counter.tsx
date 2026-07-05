@@ -31,7 +31,8 @@ export function Counter({
   className,
 }: CounterProps) {
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, amount: 0.6 });
+  // once:false — el conteo se re-ejecuta en cada entrada al viewport
+  const inView = useInView(ref, { once: false, amount: 0.6 });
   const reduced = useReducedMotion();
   // El estado inicial ES el valor final: así el HTML estático lleva la cifra
   // real y, con reduced-motion, nunca hay movimiento. El conteo re-arranca

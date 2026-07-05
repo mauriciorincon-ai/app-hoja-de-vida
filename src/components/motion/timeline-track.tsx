@@ -43,11 +43,13 @@ export function TimelineTrack({ items }: { items: TimelineItem[] }) {
   const isDesktop = useIsDesktop();
   const n = items.length;
 
+  // Coreografía comprimida (feedback del gate de diseño): las cards entran
+  // SOLAPADAS con el trazo del rail — la sección nunca se ve vacía.
   const railVariants: Variants = {
     hidden: { pathLength: 0 },
     visible: {
       pathLength: 1,
-      transition: { delay: 0.5, duration: 1.4, ease: EASE_OUT_EXPO },
+      transition: { delay: 0.3, duration: 1.4, ease: EASE_OUT_EXPO },
     },
   };
 
@@ -56,7 +58,8 @@ export function TimelineTrack({ items }: { items: TimelineItem[] }) {
     visible: (i: number) => ({
       scale: 1,
       transition: {
-        delay: 0.8 + (i / Math.max(n - 1, 1)) * 1.4,
+        // sincronizado al avance del trazo: railStart + x% × railDuration
+        delay: 0.3 + (i / Math.max(n - 1, 1)) * 1.4,
         duration: 0.5,
         ease: EASE_OUT_BACK,
       },
@@ -69,7 +72,7 @@ export function TimelineTrack({ items }: { items: TimelineItem[] }) {
       opacity: 1,
       y: 0,
       transition: {
-        delay: isDesktop ? 2.2 + i * 0.14 : i * 0.08,
+        delay: isDesktop ? 0.5 + i * 0.15 : i * 0.08,
         duration: 0.7,
         ease: EASE_OUT_CUBIC,
       },
@@ -81,7 +84,7 @@ export function TimelineTrack({ items }: { items: TimelineItem[] }) {
     : {
         initial: "hidden" as const,
         whileInView: "visible" as const,
-        viewport: { once: true, amount: 0.2 },
+        viewport: { once: false, amount: 0.2 },
       };
 
   return (
