@@ -80,6 +80,18 @@ motion system existente.
   `aria-controls` estable, no por nombre.
 - axe en la HOME (ahora más pesada) excede 30s bajo 5 workers → `test.slow()`; navegación
   client-side lenta bajo carga → timeout 15s (patrón heredado del S1).
+- **Gate Lighthouse en rutas nuevas (2 iteraciones de CI):**
+  - LCP 3.6–4.1s en el detalle: el elemento LCP resultó ser el **párrafo de Contexto**
+    dentro de un `Reveal` (opacity 0 hasta hidratación, elementRenderDelay ~8s en el
+    breakdown) — no el h1 como se asumió primero. Fix: Contexto/Reto estáticos, motion
+    solo bajo el fold.
+  - CLS 0.125 en `/cv`: JetBrains Mono sin preload + uso ESTRUCTURAL en esa ruta → el swap
+    tardío reacomodaba la página. Fix: `display: "optional"` (patrón ADR-006). CLS → 0.
+- **Gate de diseño (2 rondas de feedback):** los bloques `overflow-hidden` del mask con
+  leading 1.02 recortaban los descendentes (y, g) del titular — leading 1.12 + colchón
+  `pb-[0.1em]/-mb-[0.1em]` en la ventana de recorte + keyframe a 120% para que el texto
+  oculto no se asome. Y el intento de perfil a 2 columnas fue rechazado por el usuario:
+  quería UNA columna a todo el ancho — preguntar antes de "mejorar" de más.
 
 ## Qué salió bien / qué generó fricción
 
@@ -87,8 +99,12 @@ motion system existente.
   secciones nuevas como trabajo de solo-render; el patrón "contenido = datos" hizo que los
   case studies y el PDF salieran de la misma fuente sin duplicación; EN traducido junto al
   ES eliminó el riesgo #1 del sprint.
+- **Bien (2):** el gate de Lighthouse en CI **funcionó como diseñado** — cazó dos
+  regresiones reales de performance en rutas nuevas antes de producción; y el breakdown
+  de LCP de Lighthouse (elemento + fases) diagnosticó la causa raíz en una iteración.
 - **Fricción:** el ecosistema pdfjs en test runners (polyfills DOM); una vulnerabilidad
-  moderate transitiva sin fix disponible aguas arriba.
+  moderate transitiva sin fix disponible aguas arriba; lhci/lighthouse local en Windows
+  muere con EPERM al limpiar temporales (el JSON del reporte sí queda — extraer de ahí).
 
 ## Sugerencias de mejora al método
 
@@ -98,6 +114,18 @@ motion system existente.
 - "Traducción EN al final" como mitigación de riesgo resultó peor que traducir en línea
   (los tests de paridad rompen con EN incompleto); si el builder es un LLM, traducir junto
   al origen cuesta ~0 y elimina el riesgo — candidato a regla del método.
+- **Patrones candidatos a la wiki (los mejores aprendizajes del sprint):**
+  1. **"Todo candidato LCP nace estático"** — regla operativa para CADA ruta nueva:
+     identificar el bloque de texto/imagen más grande del viewport móvil y prohibirle
+     envolturas que arranquen en opacity 0 (Reveal/mask). En S1 fue el resumen del hero;
+     en S2 reapareció DOS veces (h1 y párrafo de Contexto del detalle). Es sistémico, no
+     anecdótico: merece checklist en la orden de construcción.
+  2. **Una fuente con `display: swap` sin preload es deuda de CLS latente** — explota en
+     cuanto una ruta la usa como fuente de layout (mono en /cv) y no solo de acentos. La
+     tríada estable del repo: fuente de marca swap (identidad) + resto optional.
+  3. **Bloques `overflow-hidden` para mask reveals recortan descendentes** con leading
+     apretado (<1.12 aprox. en Fraunces): revisar y/g/p en el gate visual, o dejar el
+     colchón pb/-mb de fábrica en el componente.
 
 ## Deuda técnica aceptada
 
