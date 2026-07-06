@@ -139,7 +139,8 @@ sin API key, el chat degrada a búsqueda local sobre el mismo índice con aviso 
 - **GROQ_API_KEY inválida** (401) — pago: usuario, regenerar en console.groq.com y poner en
   `.env.local` + Vercel, esta semana. Mientras tanto producción sirve fallback local (el
   chat funciona degradado, sin LLM).
-- gitleaks sin instalar (hook avisa sin escanear) — heredada; pago: usuario.
+- ~~gitleaks sin instalar~~ **PAGADA en este sprint:** el usuario instaló gitleaks y el
+  hook pre-commit ya escanea de verdad ("no leaks found" en el commit del S3).
 - 1 moderate transitiva (postcss) — heredada; pago: bump upstream.
 - Retrieval lexical sin embeddings — por orden; si la calidad decepciona con la historia
   crecida, iteración explícita (embeddings build-time, mismos chunks).
