@@ -74,3 +74,18 @@
   client-side (patrón del S1).
 - `pnpm audit`: 1 moderate transitiva (`postcss` vía `@sentry/nextjs>next`) — preexistente,
   bajo el umbral del gate (high); se paga cuando Next/Sentry actualicen.
+
+## Fase 4 — Cierre + gate Lighthouse (2026-07-05/06)
+
+- PR #3 creado; primera CI: quality ✔ e2e ✔ **lighthouse ✘** en las DOS rutas nuevas:
+  - `/es/proyectos/vesting` LCP 3634ms (>3500): el h1 usaba `anim-mask-up` — un elemento
+    enmascarado no registra paint hasta revelarse (mismo mecanismo del hero en S1). El h1 ES
+    el candidato LCP de la página → ahora pinta estático (coreografía en eyebrow/chips).
+  - `/es/cv` CLS 0.125 (>0.1): JetBrains Mono sin preload + uso ESTRUCTURAL en /cv (headings
+    de sección, contacto, periodos) → el swap tardío reacomodaba la página entera. Fix:
+    `display: "optional"` (patrón ADR-006, como Inter). Verificación local: CLS 0.0000.
+- **Lección reafirmada para el patrón wiki:** todo candidato LCP nace estático; y una fuente
+  con `display: swap` sin preload es deuda de CLS en cuanto una ruta la use como fuente de
+  layout (no solo de acentos).
+- Nota herramienta: lhci/lighthouse local en Windows muere con EPERM al limpiar temporales de
+  Chrome (chrome-launcher) — el JSON del reporte sí queda escrito; extraer métricas de ahí.
