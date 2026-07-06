@@ -34,8 +34,13 @@ export async function Hero({ identidad }: { identidad: Cv["identidad"] }) {
           {identidad.eyebrow}
         </p>
 
-        <h1 className="max-w-[18ch] font-display text-[clamp(2.5rem,7vw,4.5rem)] leading-[1.02] font-medium tracking-[-0.025em] text-ink-0">
-          <span className="block overflow-hidden">
+        {/* leading ≥1.12: con menos, la caja de línea recorta los descendentes
+            (y, g) dentro de los bloques overflow-hidden del mask (gate S2) */}
+        <h1 className="max-w-[18ch] font-display text-[clamp(2.5rem,6.5vw,4.25rem)] leading-[1.12] font-medium tracking-[-0.025em] text-ink-0">
+          {/* pb extiende la ventana de recorte bajo los descendentes de la
+              "y"; el -mb compensa el ritmo vertical. El keyframe mask-up
+              arranca en 120% para que el texto no se asome por ese padding. */}
+          <span className="block overflow-hidden pb-[0.1em] -mb-[0.1em]">
             <span
               className="anim-mask-up block"
               style={{ "--anim-delay": "0.2s" } as React.CSSProperties}
@@ -43,7 +48,7 @@ export async function Hero({ identidad }: { identidad: Cv["identidad"] }) {
               {identidad.nombre}
             </span>
           </span>
-          <span className="block overflow-hidden">
+          <span className="block overflow-hidden pb-[0.1em] -mb-[0.1em]">
             <span
               className="anim-mask-up block text-sage-ink"
               style={{ "--anim-delay": "0.3s" } as React.CSSProperties}

@@ -1,8 +1,10 @@
 # Contenido de la CV Viva en español — LA fuente de verdad (editar + push = deploy).
-# Cómo editar: docs/MANUAL-DE-USO.md. Origen: content-pack-v1 de la planeadora
-# (APROBADO 2026-07-05) — ninguna cifra inventada; todas salen de los CVs reales.
+# Cómo editar: docs/MANUAL-DE-USO.md. Origen: content-pack-v1 + extracción de CVs
+# (2026-07-05, planeadora) — ninguna cifra inventada; todas salen de los CVs reales.
 # Los campos `verificacion:` vacíos son [AJUSTAR-LUEGO]: links Credly/Microsoft
 # Learn pendientes de entrega por el dueño del contenido.
+# S2: `bullets` (grueso por rol, expandible + PDF) · `slug`+`casestudy` (página
+# /es/proyectos/<slug> automática — agregar un case study = editar este archivo).
 
 identidad:
   nombre: "Henry Rincón"
@@ -13,7 +15,7 @@ identidad:
     Líder de datos e ingeniero de IA (DP-600 · AI-102). Diseño plataformas
     analíticas en Microsoft Fabric y llevo agentes de IA a producción — con la
     evidencia pública para probarlo.
-  # Perfil largo (sin sección propia aún — entra con la iteración de contenido del S2)
+  # La frase del chat del pack §3 se restituye en S3, cuando el chat exista
   perfil: >-
     Ingeniero Industrial (Javeriana) con 8+ años convirtiendo datos operativos
     en decisiones de negocio: BI adoptado por 50+ usuarios en banca, ETL que
@@ -22,8 +24,7 @@ identidad:
     datos de una startup de agentes de IA, construyendo desde cero su
     ecosistema en Microsoft Fabric y el proceso replicable para diseñar y
     monitorear agentes. Certificado por Microsoft en ingeniería de analítica
-    (DP-600) e ingeniería de IA (AI-102). Lo que no quepa en este texto,
-    pregúntaselo al chat de esta hoja de vida.
+    (DP-600) e ingeniería de IA (AI-102).
   # La disponibilidad de reubicación es señal DELIBERADA para recruiters (pack §1)
   ubicacion: "Bogotá, Colombia · Abierto a reubicación internacional y trabajo remoto"
   email: "mauricio.hmrc@gmail.com"
@@ -40,6 +41,10 @@ trayectoria:
     descripcion: >-
       Analítica y gobierno de datos para decisiones administrativas y
       asistenciales en salud.
+    bullets:
+      - "Modelos de análisis y visualización para líderes administrativos y asistenciales."
+      - "Gobierno y calidad de datos institucional."
+      - "Tableros de BI por procesos y mejora continua."
     actual: true
   - periodo: "2023 — 2025"
     rol: "Líder de Estrategia de Datos"
@@ -48,6 +53,11 @@ trayectoria:
       Ecosistema de datos para agentes de IA en Microsoft Fabric, desde cero:
       arquitectura, gobernanza, monitoreo de agentes en tiempo real y proceso
       core replicable.
+    bullets:
+      - "Diseñé e implementé desde cero el ecosistema de datos para analítica de agentes de IA en Microsoft Fabric (Big Data + Data Warehouse + procesamiento distribuido)."
+      - "Definí la gobernanza de datos para integrar información de clientes y sistemas."
+      - "Construí el monitoreo en tiempo real de los agentes en producción."
+      - "Documenté el proceso core replicable para diseñar e implementar agentes de IA."
   - periodo: "2023"
     rol: "Analista Senior de Analítica"
     organizacion: "Banco Pichincha"
@@ -55,35 +65,64 @@ trayectoria:
       BI adoptado por 50+ usuarios, ETL con −35% de tiempos, modelos
       predictivos con >90% de precisión y co-liderazgo de la gobernanza de
       datos.
+    bullets:
+      - "Dashboards adoptados por 50+ usuarios: +25% en toma de decisiones."
+      - "Optimización de procesos ETL: −35% en tiempos de análisis."
+      - "Modelos predictivos con scikit-learn: >90% de precisión y +35% en predicciones."
+      - "Optimización de modelos semánticos con DAX Studio y Tabular Editor."
+      - "Co-liderazgo de la gobernanza de datos del área."
+      - "Programa de formación en analítica: +20% de productividad del equipo."
   - periodo: "2021 — 2022"
     rol: "Análisis Post-Operacional"
     organizacion: "C&M Consultores (TransMilenio)"
     descripcion: >-
       Adopción de BI (+35% de eficiencia), ETL que unificó fuentes (+70%) y
       predicción de demanda con scikit-learn.
+    bullets:
+      - "Impulsé la adopción de BI en la operación: +35% de eficiencia con 25+ usuarios clave."
+      - "ETL que unificó fuentes heterogéneas: +70% en precisión y velocidad de análisis."
+      - "Scripts de automatización: −40% en tareas repetitivas."
+      - "Mesas de estrategia con la dirección del SITP: +25% en indicadores."
+      - "Predicción de demanda con scikit-learn: +20% de rendimiento del sistema."
   - periodo: "2020 — 2021"
     rol: "Analista de Sistemas de Información"
     organizacion: "Cafam"
     descripcion: >-
       Lideré 20 personas en la implementación del WMS: −25% de errores y +15%
       de eficiencia operativa.
+    bullets:
+      - "Lideré un equipo de 20 personas en las pruebas de implementación del WMS: −25% de errores y +15% de eficiencia operativa."
+      - "BI de control operativo: +50% de precisión para 15+ usuarios."
+      - "Integraciones VBA con el WMS: +15% de automatización y −50% de errores de datos."
+      - "Mejoras de calidad de datos en SQL: +20%."
   - periodo: "2018 — 2020"
     rol: "Analista de Operaciones"
     organizacion: "C&M Consorcio (TransMilenio)"
     descripcion: >-
       Dashboards e indicadores que elevaron el control operativo del sistema.
+    bullets:
+      - "Dashboards interactivos e informes de desempeño de la operación."
+      - "Automatización de reportes y bases estadísticas del sistema."
   - periodo: "2017 — 2018"
     rol: "Coordinador de Operaciones"
     organizacion: "Ceinfes"
     descripcion: >-
       KPIs e informes a junta directiva; transición a gestión por procesos con
       métodos ágiles.
+    bullets:
+      - "KPIs de logística, RRHH y digitalización; informes a junta directiva."
+      - "Transición a gestión por procesos con Kanban y metodologías ágiles."
+      - "Coordinación de equipos multidisciplinarios."
   - periodo: "2016 — 2017"
     rol: "Ingeniero de Procesos"
     organizacion: "Inglopres"
     descripcion: >-
       ERP, bases de datos y cadena de suministro bajo ISO 9001; equipo de 12
       con 95% de satisfacción de cliente.
+    bullets:
+      - "Gestión de ERP y estructuras de bases de datos para la cadena de suministro."
+      - "Aseguramiento de calidad bajo ISO 9001:2015."
+      - "Equipo de 12 personas con 95% de satisfacción de cliente."
   - periodo: "Formación"
     rol: "Ingeniería Industrial — énfasis en Inteligencia Analítica de Datos"
     organizacion: "Pontificia Universidad Javeriana"
@@ -116,7 +155,8 @@ logros:
     descripcion: "2 de Microsoft (DP-600 · AI-102) y 4 de IBM en ciencia de datos."
 
 proyectos:
-  - nombre: "Plataforma de datos para agentes de IA — Vesting (2023–2025)"
+  - slug: "vesting"
+    nombre: "Plataforma de datos para agentes de IA — Vesting (2023–2025)"
     resumen: >-
       Startup de agentes de automatización sin infraestructura de datos:
       diseñé e implementé desde cero el ecosistema en Microsoft Fabric (Big
@@ -126,32 +166,125 @@ proyectos:
       El puente exacto entre DP-600 y AI-102.
     stack: ["Microsoft Fabric", "Gobernanza de datos", "Monitoreo en tiempo real"]
     destacado: true
-  - nombre: "BI que el negocio sí usa — Banco Pichincha (2023)"
+    casestudy:
+      contexto: >-
+        Vesting, una startup de agentes de automatización, crecía sin
+        infraestructura de datos: la analítica de sus agentes de IA no tenía
+        dónde vivir y cada integración de datos de clientes era artesanal.
+      reto: >-
+        Construir desde cero el ecosistema de datos capaz de soportar la
+        analítica y el monitoreo de agentes de IA en producción — con
+        gobernanza desde el día uno y sin frenar a la startup.
+      acciones:
+        - "Diseñé la arquitectura del ecosistema en Microsoft Fabric: Big Data, Data Warehouse y procesamiento distribuido."
+        - "Definí la gobernanza de datos para integrar información de clientes y sistemas de forma consistente."
+        - "Construí el monitoreo en tiempo real de los agentes de IA en producción."
+        - "Documenté el proceso core replicable para diseñar e implementar agentes de IA."
+      impacto:
+        - "El ecosistema de datos de la startup quedó operativo desde cero en Microsoft Fabric."
+        - "Los agentes en producción pasaron a monitorearse en tiempo real."
+        - "El proceso core replicable estandarizó cómo se diseñan e implementan los agentes."
+        - "El puente exacto entre la ingeniería de analítica (DP-600) y la ingeniería de IA (AI-102)."
+  - slug: "banco-pichincha"
+    nombre: "BI que el negocio sí usa — Banco Pichincha (2023)"
     resumen: >-
       Dashboards adoptados por 50+ usuarios (+25% en toma de decisiones), ETL
       con −35% de tiempos, modelos predictivos con >90% de precisión
       (scikit-learn), gobernanza co-liderada y un programa de formación que
       subió la productividad 20%.
     stack: ["BI", "ETL", "scikit-learn"]
-  - nombre: "Datos que mueven una ciudad — TransMilenio / C&M (2021–2022)"
+    casestudy:
+      contexto: >-
+        El área de analítica y reportes del banco producía tableros que el
+        negocio no terminaba de adoptar, con procesos ETL lentos y modelos
+        fuera de producción.
+      reto: >-
+        Convertir el BI en una herramienta que el negocio use a diario y
+        llevar los modelos predictivos a producción con precisión confiable.
+      acciones:
+        - "Diseñé dashboards orientados a decisión que adoptaron 50+ usuarios del negocio."
+        - "Optimicé los procesos ETL reduciendo 35% los tiempos de análisis."
+        - "Entrené y llevé a producción modelos predictivos con scikit-learn."
+        - "Optimicé los modelos semánticos con DAX Studio y Tabular Editor."
+        - "Co-lideré la gobernanza de datos y un programa de formación en analítica."
+      impacto:
+        - "+25% en toma de decisiones sobre los tableros adoptados."
+        - "−35% en tiempos de análisis por la optimización del ETL."
+        - ">90% de precisión y +35% en predicciones de los modelos en producción."
+        - "+20% de productividad del equipo tras el programa de formación."
+  - slug: "transmilenio-cm"
+    nombre: "Datos que mueven una ciudad — TransMilenio / C&M (2021–2022)"
     resumen: >-
       Adopción de BI (+35% de eficiencia, 25+ usuarios clave), ETL que unificó
       fuentes heterogéneas (+70% en precisión y velocidad), predicción de
       demanda con scikit-learn (+20% de rendimiento del sistema) y mesas de
       estrategia con la dirección del SITP (+25% en indicadores).
     stack: ["BI", "ETL", "scikit-learn"]
-  - nombre: "Liderar la calidad de un WMS — Cafam (2020–2021)"
+    casestudy:
+      contexto: >-
+        El análisis post-operacional del sistema TransMilenio dependía de
+        fuentes heterogéneas y reportes manuales: la operación de la ciudad
+        generaba datos más rápido de lo que podían analizarse.
+      reto: >-
+        Unificar las fuentes, acelerar el análisis y llevar los datos a las
+        mesas donde se decide la operación del sistema de transporte.
+      acciones:
+        - "Impulsé la adopción de BI en la operación con 25+ usuarios clave."
+        - "Construí el ETL que unificó las fuentes heterogéneas del sistema."
+        - "Automaticé tareas repetitivas con scripts (−40%)."
+        - "Llevé la analítica a mesas de estrategia con la dirección del SITP."
+        - "Desarrollé la predicción de demanda con scikit-learn."
+      impacto:
+        - "+35% de eficiencia operativa por la adopción de BI."
+        - "+70% en precisión y velocidad de análisis con el ETL unificado."
+        - "+25% en indicadores tras las mesas de estrategia con el SITP."
+        - "+20% de rendimiento del sistema con la predicción de demanda."
+  - slug: "cafam"
+    nombre: "Liderar la calidad de un WMS — Cafam (2020–2021)"
     resumen: >-
       Equipo de 20 personas en pruebas de implementación: −25% de errores y
       +15% de eficiencia; BI de control (+50% de precisión, 15+ usuarios) e
       integraciones VBA (−50% de errores de datos).
     stack: ["WMS", "BI", "VBA"]
-  - nombre: "Analítica en salud — Fundación CTIC (2025–hoy)"
+    casestudy:
+      contexto: >-
+        Cafam implementaba un WMS en su operación logística: un cambio de
+        sistema crítico donde cada error de datos se paga en la bodega.
+      reto: >-
+        Asegurar la calidad de la implementación coordinando al equipo de
+        pruebas más grande que he liderado, sin frenar la operación.
+      acciones:
+        - "Lideré un equipo de 20 personas en las pruebas de implementación del WMS."
+        - "Construí el BI de control operativo de la implementación."
+        - "Desarrollé integraciones VBA con el WMS para automatizar cargas de datos."
+        - "Establecí mejoras de calidad de datos en SQL."
+      impacto:
+        - "−25% de errores y +15% de eficiencia operativa en la implementación."
+        - "+50% de precisión en el control operativo, adoptado por 15+ usuarios."
+        - "+15% de automatización y −50% de errores de datos con las integraciones VBA."
+        - "+20% en calidad de datos vía SQL."
+  - slug: "fundacion-ctic"
+    nombre: "Analítica en salud — Fundación CTIC (2025–hoy)"
     resumen: >-
       Modelos de análisis y visualización para líderes administrativos y
       asistenciales, gobierno y calidad de datos institucional, y tableros de
       control por procesos.
     stack: ["Analítica", "Gobierno de datos"]
+    casestudy:
+      contexto: >-
+        En salud, las decisiones administrativas y asistenciales dependen de
+        datos institucionales que históricamente vivían dispersos y sin
+        gobierno claro.
+      reto: >-
+        Llevar gobierno, calidad y analítica de datos a las decisiones de
+        líderes administrativos y asistenciales de la Fundación.
+      acciones:
+        - "Desarrollo modelos de análisis y visualización para líderes administrativos y asistenciales."
+        - "Estructuro el gobierno y la calidad de datos institucional."
+        - "Construyo tableros de control por procesos con mejora continua."
+      impacto:
+        - "Decisiones administrativas y asistenciales informadas por datos gobernados."
+        - "Calidad de datos institucional como práctica, no como evento."
 
 certificaciones:
   - nombre: "Microsoft Certified: Azure AI Engineer Associate (AI-102)"

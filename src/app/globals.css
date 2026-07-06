@@ -196,8 +196,11 @@
   }
 }
 @keyframes mask-up {
+  /* 120% (la receta dice 110%): el contenedor del hero lleva pb-[0.1em]
+     para no recortar descendentes — con 110% el texto oculto asomaría
+     por esa franja de padding */
   from {
-    transform: translateY(110%);
+    transform: translateY(120%);
   }
   to {
     transform: none;

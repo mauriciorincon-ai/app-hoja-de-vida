@@ -9,6 +9,8 @@ export async function Trayectoria({
   trayectoria: Cv["trayectoria"];
 }) {
   const t = await getTranslations("nav");
+  // Labels del disclosure por props: el namespace no viaja al bundle cliente
+  const tTimeline = await getTranslations("timeline");
 
   return (
     <section
@@ -25,7 +27,13 @@ export async function Trayectoria({
             {t("trayectoria")}
           </h2>
         </Reveal>
-        <TimelineTrack items={trayectoria} />
+        <TimelineTrack
+          items={trayectoria}
+          labels={{
+            verMas: tTimeline("verMas"),
+            verMenos: tTimeline("verMenos"),
+          }}
+        />
       </div>
     </section>
   );

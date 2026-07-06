@@ -19,6 +19,25 @@ describe("content loader (data/*.yaml reales)", () => {
     expect(en.skills).toHaveLength(es.skills.length);
   });
 
+  it("keeps the depth layer in ES/EN parity (S2)", () => {
+    const es = getCv("es");
+    const en = getCv("en");
+    // Slugs idénticos y en el mismo orden: el hreflang depende de esto
+    expect(en.proyectos.map((p) => p.slug)).toEqual(
+      es.proyectos.map((p) => p.slug),
+    );
+    // Mismo nº de bullets por hito y casestudy en los mismos proyectos
+    expect(en.trayectoria.map((t) => t.bullets.length)).toEqual(
+      es.trayectoria.map((t) => t.bullets.length),
+    );
+    expect(en.proyectos.map((p) => Boolean(p.casestudy))).toEqual(
+      es.proyectos.map((p) => Boolean(p.casestudy)),
+    );
+    // El grueso existe: al menos un hito con bullets y un casestudy
+    expect(es.trayectoria.some((t) => t.bullets.length > 0)).toBe(true);
+    expect(es.proyectos.some((p) => p.casestudy)).toBe(true);
+  });
+
   it("parses data/apps.yaml and includes hoja-de-vida", () => {
     const { apps } = getApps();
     expect(apps.map((a) => a.id)).toContain("hoja-de-vida");

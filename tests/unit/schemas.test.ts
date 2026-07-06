@@ -27,7 +27,7 @@ const cvValido = {
     },
   ],
   logros: [{ valor: 10, etiqueta: "Etiqueta", descripcion: "Desc" }],
-  proyectos: [{ nombre: "Proyecto", resumen: "Resumen" }],
+  proyectos: [{ slug: "proyecto", nombre: "Proyecto", resumen: "Resumen" }],
 };
 
 describe("cvSchema", () => {
@@ -38,6 +38,61 @@ describe("cvSchema", () => {
     expect(cv.logros[0].decimales).toBe(0);
     expect(cv.proyectos[0].stack).toEqual([]);
     expect(cv.proyectos[0].destacado).toBe(false);
+  });
+
+  it("defaults bullets to an empty list (S2 depth layer)", () => {
+    const cv = cvSchema.parse(cvValido);
+    expect(cv.trayectoria[0].bullets).toEqual([]);
+    expect(cv.proyectos[0].casestudy).toBeUndefined();
+  });
+
+  it("accepts a full casestudy (ADR-009 narrative shape)", () => {
+    const cv = cvSchema.parse({
+      ...cvValido,
+      proyectos: [
+        {
+          ...cvValido.proyectos[0],
+          casestudy: {
+            contexto: "Contexto",
+            reto: "Reto",
+            acciones: ["Hice A"],
+            impacto: ["Logré B"],
+          },
+        },
+      ],
+    });
+    expect(cv.proyectos[0].casestudy?.acciones).toHaveLength(1);
+  });
+
+  it("rejects a casestudy with empty acciones (build fail-safe)", () => {
+    expect(() =>
+      parseCv(
+        {
+          ...cvValido,
+          proyectos: [
+            {
+              ...cvValido.proyectos[0],
+              casestudy: {
+                contexto: "C",
+                reto: "R",
+                acciones: [],
+                impacto: ["I"],
+              },
+            },
+          ],
+        },
+        "test.yaml",
+      ),
+    ).toThrowError(/casestudy\.acciones/);
+  });
+
+  it("rejects a non-kebab-case project slug", () => {
+    expect(() =>
+      cvSchema.parse({
+        ...cvValido,
+        proyectos: [{ ...cvValido.proyectos[0], slug: "Con Espacios" }],
+      }),
+    ).toThrow();
   });
 
   it("defaults the sections without a HOME slot yet (pack v1)", () => {

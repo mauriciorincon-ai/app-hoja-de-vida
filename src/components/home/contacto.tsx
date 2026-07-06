@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { SolicitarAccesoForm } from "@/components/forms/solicitar-acceso-form";
 import { Reveal } from "@/components/motion/reveal";
+import { Link } from "@/i18n/navigation";
 import type { AppCard, Cv } from "@/lib/schemas";
 
 /**
@@ -16,6 +17,7 @@ export async function Contacto({
   apps: AppCard[];
 }) {
   const t = await getTranslations("contacto");
+  const tCv = await getTranslations("cv");
   const solicitables = apps.filter((app) => app.solicitable);
 
   return (
@@ -51,6 +53,14 @@ export async function Contacto({
                 >
                   {identidad.email}
                 </a>
+              </p>
+              <p className="mt-4">
+                <Link
+                  href="/cv"
+                  className="inline-flex min-h-11 items-center text-sm text-ink-2 underline decoration-paper-3 underline-offset-4 transition-colors duration-[120ms] hover:text-ink-0 hover:decoration-ink-3"
+                >
+                  {tCv("descargar")}
+                </Link>
               </p>
             </Reveal>
           </div>
