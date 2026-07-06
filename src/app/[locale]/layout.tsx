@@ -32,10 +32,14 @@ const inter = Inter({
   display: "optional",
 });
 
+// display optional (patrón ADR-006, como Inter): /cv usa la mono de forma
+// estructural (headings, contacto, periodos) y su swap tardío reacomodaba la
+// página entera (CLS 0.125 en CI). Con optional el fallback métrico-ajustado
+// no desplaza nada; visitas con caché ven JetBrains Mono siempre.
 const jetbrains = JetBrains_Mono({
   variable: "--font-jetbrains",
   subsets: ["latin"],
-  display: "swap",
+  display: "optional",
   preload: false,
 });
 

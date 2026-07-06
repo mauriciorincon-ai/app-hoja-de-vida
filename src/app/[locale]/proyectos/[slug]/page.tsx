@@ -130,15 +130,11 @@ export default async function ProyectoDetallePage({ params }: Params) {
               />
               {t("eyebrow")}
             </p>
+            {/* El h1 es el candidato LCP de la página: se pinta ESTÁTICO —
+                un elemento enmascarado no registra paint hasta revelarse
+                (lección S1/ADR-006). La coreografía vive en eyebrow y chips. */}
             <h1 className="max-w-[24ch] font-display text-[clamp(2rem,5.5vw,3.25rem)] leading-[1.05] font-medium tracking-[-0.02em] text-ink-0">
-              <span className="block overflow-hidden">
-                <span
-                  className="anim-mask-up block"
-                  style={{ "--anim-delay": "0.15s" } as React.CSSProperties}
-                >
-                  {proyecto.nombre}
-                </span>
-              </span>
+              {proyecto.nombre}
             </h1>
             {proyecto.stack.length > 0 && (
               <ul
