@@ -47,7 +47,7 @@ export async function Logros({ logros }: { logros: Cv["logros"] }) {
               <h3 className="text-xs font-medium tracking-[0.15em] text-ink-1 uppercase">
                 {logro.etiqueta}
               </h3>
-              <p className="max-w-[36ch] text-sm leading-relaxed text-ink-2">
+              <p className="text-sm leading-relaxed text-ink-2">
                 {logro.descripcion}
               </p>
             </StaggerItem>

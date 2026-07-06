@@ -92,7 +92,7 @@ export default async function CvPage({ params }: Params) {
               >
                 {tPerfil("titulo")}
               </h3>
-              <p className="max-w-[70ch] text-[15px] leading-[1.7] text-ink-1">
+              <p className="text-[15px] leading-[1.7] text-ink-1">
                 {cv.identidad.perfil || cv.identidad.resumen}
               </p>
             </section>
@@ -153,7 +153,7 @@ export default async function CvPage({ params }: Params) {
                     <h4 className="text-base font-semibold text-ink-0">
                       {proyecto.nombre}
                     </h4>
-                    <p className="mt-1 max-w-[70ch] text-sm leading-relaxed text-ink-1">
+                    <p className="mt-1 text-sm leading-relaxed text-ink-1">
                       {proyecto.resumen}
                     </p>
                     {proyecto.casestudy && (

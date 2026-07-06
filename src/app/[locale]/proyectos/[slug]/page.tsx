@@ -167,7 +167,7 @@ export default async function ProyectoDetallePage({ params }: Params) {
                 >
                   {seccion.titulo}
                 </h2>
-                <p className="max-w-[68ch] text-[16px] leading-[1.75] text-ink-1">
+                <p className="text-[16px] leading-[1.75] text-ink-1">
                   {seccion.texto}
                 </p>
               </section>
@@ -184,7 +184,7 @@ export default async function ProyectoDetallePage({ params }: Params) {
                 <Stagger className="flex flex-col gap-3">
                   {casestudy.acciones.map((accion) => (
                     <StaggerItem key={accion} variant="fadeInUp">
-                      <p className="flex max-w-[68ch] gap-3 text-[15px] leading-relaxed text-ink-1">
+                      <p className="flex gap-3 text-[15px] leading-relaxed text-ink-1">
                         <span
                           aria-hidden="true"
                           className="mt-[9px] size-1.5 shrink-0 rounded-full bg-sage-ink"

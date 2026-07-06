@@ -34,7 +34,9 @@ export async function Hero({ identidad }: { identidad: Cv["identidad"] }) {
           {identidad.eyebrow}
         </p>
 
-        <h1 className="max-w-[18ch] font-display text-[clamp(2.5rem,7vw,4.5rem)] leading-[1.02] font-medium tracking-[-0.025em] text-ink-0">
+        {/* leading ≥1.12: con menos, la caja de línea recorta los descendentes
+            (y, g) dentro de los bloques overflow-hidden del mask (gate S2) */}
+        <h1 className="max-w-[18ch] font-display text-[clamp(2.5rem,6.5vw,4.25rem)] leading-[1.12] font-medium tracking-[-0.025em] text-ink-0">
           <span className="block overflow-hidden">
             <span
               className="anim-mask-up block"
