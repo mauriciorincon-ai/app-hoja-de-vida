@@ -23,9 +23,9 @@ export async function Perfil({ identidad }: { identidad: Cv["identidad"] }) {
           </h2>
         </Reveal>
         <Reveal variant="blurIn" delay={0.2}>
-          {/* Dos columnas en desktop: el párrafo aprovecha todo el ancho
-              editorial en vez de dejar la derecha vacía (gate S2) */}
-          <p className="text-[17px] leading-[1.75] text-ink-1 md:columns-2 md:gap-14">
+          {/* Un solo bloque a todo el ancho del contenedor (gate S2 v2:
+              el usuario prefiere una columna que se extienda a la derecha) */}
+          <p className="text-[17px] leading-[1.75] text-ink-1">
             {identidad.perfil}
           </p>
         </Reveal>
