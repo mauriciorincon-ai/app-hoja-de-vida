@@ -114,6 +114,76 @@ e inglés. Quien la visita puede pedir acceso a tus apps y la solicitud te llega
   ⚠ Si `RESEND_API_KEY` no está configurada en Vercel, el formulario "funciona" para el
   visitante pero el email NO se envía (queda solo en logs) — verifica esa variable en prod.
 
+### El chat que responde por ti · desde Sprint 003
+
+- **Qué hace:** el botón flotante "Pregúntale a mi HV" (abajo a la derecha, en todas las
+  páginas) abre un chat donde el visitante pregunta en español o inglés y recibe respuestas
+  basadas SOLO en tu contenido real, con **fuentes citadas** que llevan a la sección o case
+  study correspondiente. Si pregunta algo ajeno (el clima, chistes, tareas), recibe una
+  respuesta amable fija — sin gastar un solo token. Y si el proveedor de IA se cae o se queda
+  sin cuota, el chat **no muere**: pasa a "Búsqueda local" y muestra los fragmentos de la hoja
+  de vida que mejor responden, avisándolo con honestidad.
+- **De dónde saca las respuestas:** de los mismos YAML de siempre + tu historia
+  (`data/historia/` — ver la guía de abajo). Cada push re-indexa el conocimiento del chat.
+- **Cuánto cuesta:** con Groq (el proveedor actual) el plan gratuito cubre el uso esperado:
+  US$0. Hay protecciones apiladas: máximo 10 preguntas por minuto por visitante, respuestas
+  cortas (tope de tokens), historial corto, y el interruptor de apagado.
+- **Apagarlo del todo (kill-switch):** en Vercel pon la variable `CHAT_ENABLED=false` y
+  redeploy — el botón desaparece de la página. Volver a encender: bórrala o ponla en `true`.
+- **Cambiar de proveedor de IA (cero código):** cambia variables en Vercel y redeploy:
+  1. `CHAT_PROVIDER` = `groq` (actual) · `gemini` · `azure` · `anthropic` · `openai-compatible`.
+  2. La API key del elegido: `GROQ_API_KEY`, `GOOGLE_GENERATIVE_AI_API_KEY`,
+     `AZURE_RESOURCE_NAME`+`AZURE_API_KEY`, `ANTHROPIC_API_KEY`, o `CHAT_BASE_URL` (self-host).
+  3. Opcional `CHAT_MODEL` para elegir el modelo (cada proveedor tiene un default sensato;
+     en Azure es obligatorio: el nombre de tu deployment).
+- **Si un día llega una factura:** los logs (Vercel → Logs) registran proveedor, tokens y
+  latencia de CADA respuesta — ahí está la traza de qué se consumió. Primeros auxilios:
+  `CHAT_ENABLED=false` (se apaga ya) o volver a un proveedor free tier.
+- **Si la API key falla o se agota la cuota:** los visitantes NO ven un error — ven el modo
+  búsqueda local. Tú lo notas en los logs (`proveedor falló`) y en el badge "Búsqueda local"
+  al probar el chat.
+
+### Cómo alimentar la historia (el combustible del chat) · desde Sprint 003
+
+Tu workstream de contenido: dos archivos gemelos, `data/historia/historia.es.md` y
+`data/historia/historia.en.md`, donde escribes tu carrera al detalle que quieras — el chat
+los usa como fuente principal. Ya tienen el **esqueleto guiado**: una sección por etapa de tu
+carrera con un comentario que dice qué escribir en cada una.
+
+- **Cómo se escribe (prosa normal, sin marcas raras):** dentro de cada sección escribes
+  párrafos comunes y corrientes. NO necesitas marcar nada dentro del texto — ni negritas
+  especiales, ni etiquetas, ni formato para el buscador. El sistema trocea por secciones y el
+  chat cita la sección entera.
+- **Las ÚNICAS 2 marcas que existen** (ya están puestas en el esqueleto; solo las tocas si
+  creas una sección nueva):
+  1. El título `## Así se titula la sección`
+  2. Debajo, el comentario `<!-- seccion: un-id-unico | ancla: /proyectos/vesting -->`
+     - `seccion:` es el nombre interno que conecta la sección con su gemela en el otro idioma
+       (debe ser idéntico en ambos archivos).
+     - `ancla:` es **a dónde navega la cita** cuando el chat use esa sección: una sección de
+       la HOME (`#trayectoria`, `#perfil`, `#certificaciones`…) o un case study
+       (`/proyectos/vesting`). Si la omites, la cita lleva a Trayectoria.
+- **Cómo funcionan las citas por dentro (para que confíes en ellas):** cuando el visitante
+  pregunta, el sistema busca las secciones más relevantes, se las pasa numeradas a la IA, y
+  la IA responde marcando `[1]`, `[2]`… Cada número aparece bajo la respuesta como un chip
+  clicable que navega al `ancla` de esa sección. Por eso el ancla importa: es la promesa de
+  "verifícalo tú mismo".
+- **El ritmo incremental:** rellena UNA sección cuando tengas un rato → tradúcela en su
+  gemela EN → commit + push. El próximo deploy re-indexa y el chat ya sabe eso. Las secciones
+  vacías no estorban ni rompen nada.
+- **La regla de paridad (el único "no"):** si una sección tiene contenido en un idioma y su
+  gemela está vacía, la publicación **falla a propósito** con un mensaje que dice exactamente
+  qué sección falta traducir. Es la garantía de que el chat sabe lo mismo en ES y EN.
+- **Cómo verificar que un párrafo nuevo ya es citable:** tras el deploy, abre el chat y
+  pregunta por ese tema — la respuesta debe usarlo y citarlo. (En local: `pnpm build` y
+  revisa que diga "N secciones de historia con contenido".)
+- **⚠ Privacidad (la advertencia de siempre):** TODO lo que escribas ahí es público dos
+  veces — el repo es público en GitHub y el chat se lo cita a cualquiera. Nada de datos
+  confidenciales de empleadores, salarios, nombres de terceros sin permiso, ni datos de
+  pacientes (CTIC). Ante la duda, no lo publiques.
+- **Secciones nuevas:** copia el patrón (título + comentario con `seccion:` único y su
+  `ancla:`) en AMBOS archivos. Puedes tener tantas como quieras.
+
 ### Animaciones y accesibilidad · desde Sprint 001
 
 - **Qué hace:** las secciones se revelan al hacer scroll (contadores, línea de tiempo, cards).
@@ -130,8 +200,9 @@ e inglés. Quien la visita puede pedir acceso a tus apps y la solicitud te llega
 
 ## Historial
 
-| Sprint | Features añadidas a este manual                                                                                                                                          |
-| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| 001    | Contenido por YAML, showcase de apps, bilingüe ES/EN, solicitudes de acceso, motion.                                                                                     |
-| 001bis | Content pack v1 integrado (marca Henry Rincón), estado "en producción", enlaces de evidencia en las cards, campos `certificaciones`/`skills`/`perfil` previstos para S2. |
-| 002    | Capa de profundidad: bullets expandibles por hito, 5 case studies con URL propia, secciones Perfil/Certificaciones/Skills, ruta `/cv` imprimible + PDF ATS descargable.  |
+| Sprint | Features añadidas a este manual                                                                                                                                                                                                                           |
+| ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 001    | Contenido por YAML, showcase de apps, bilingüe ES/EN, solicitudes de acceso, motion.                                                                                                                                                                      |
+| 001bis | Content pack v1 integrado (marca Henry Rincón), estado "en producción", enlaces de evidencia en las cards, campos `certificaciones`/`skills`/`perfil` previstos para S2.                                                                                  |
+| 002    | Capa de profundidad: bullets expandibles por hito, 5 case studies con URL propia, secciones Perfil/Certificaciones/Skills, ruta `/cv` imprimible + PDF ATS descargable.                                                                                   |
+| 003    | El chat que responde por ti: RAG con citas navegables, proveedor conmutable por env (Groq inicial), off-topic sin tokens, fallback local que nunca muere, kill-switch, y la historia (`data/historia/`) como corpus incremental con guía de alimentación. |

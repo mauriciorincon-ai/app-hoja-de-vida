@@ -16,6 +16,7 @@ const SECTIONS = [
 // Los e2e leen el contenido real: editar data/*.yaml jamás rompe la suite
 type AppEntry = {
   id: string;
+  estado: string;
   solicitable?: boolean;
   nombre: { es: string; en: string };
 };
@@ -94,11 +95,13 @@ test.describe("HOME — happy path del sprint", () => {
       expect(html).toContain("application/ld+json");
       expect(html).toContain('hrefLang="es"');
       expect(html).toContain('hrefLang="en"');
-      // Contenido de secciones sin ejecutar JS, en el idioma de la ruta
+      // Contenido de secciones sin ejecutar JS, en el idioma de la ruta —
+      // el badge de estado sale de messages/<locale>.json (data-driven)
+      const mensajes = JSON.parse(
+        readFileSync(`messages/${locale}.json`, "utf8"),
+      ) as { apps: { estados: Record<string, string> } };
       expect(html).toContain(apps[0].nombre[locale as "es" | "en"]);
-      expect(html).toContain(
-        locale === "es" ? "En construcción" : "In construction",
-      );
+      expect(html).toContain(mensajes.apps.estados[apps[0].estado]);
     }
     // El grueso (capa 2) también vive en el HTML aunque nazca colapsado
     const res = await request.get("/es");

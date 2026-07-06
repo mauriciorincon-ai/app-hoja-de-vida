@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "node scripts/generate-cv-pdf.mjs && next build",
+    "build": "node scripts/generate-cv-pdf.mjs && node scripts/build-chat-index.mjs && next build",
+    "build:chat-index": "node scripts/build-chat-index.mjs",
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
@@ -13,12 +14,19 @@
     "test:e2e": "playwright test"
   },
   "dependencies": {
+    "@ai-sdk/anthropic": "^4.0.8",
+    "@ai-sdk/azure": "^4.0.7",
+    "@ai-sdk/google": "^4.0.8",
+    "@ai-sdk/groq": "^4.0.5",
+    "@ai-sdk/openai-compatible": "^3.0.5",
+    "@ai-sdk/react": "^4.0.16",
     "@sentry/nextjs": "^10.63.0",
     "@vercel/analytics": "^2.0.1",
     "ai": "^7.0.14",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^1.23.0",
+    "minisearch": "^7.2.0",
     "motion": "^12.42.2",
     "next": "16.2.10",
     "next-intl": "^4.13.1",
@@ -36,6 +44,7 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
+    "@ai-sdk/provider": "^4.0.2",
     "@axe-core/playwright": "^4.12.1",
     "@playwright/test": "^1.61.1",
     "@tailwindcss/postcss": "^4",

@@ -15,7 +15,7 @@ identidad:
     Líder de datos e ingeniero de IA (DP-600 · AI-102). Diseño plataformas
     analíticas en Microsoft Fabric y llevo agentes de IA a producción — con la
     evidencia pública para probarlo.
-  # La frase del chat del pack §3 se restituye en S3, cuando el chat exista
+  # Frase del chat (pack §3) restituida en S3: el chat ya es real
   perfil: >-
     Ingeniero Industrial (Javeriana) con 8+ años convirtiendo datos operativos
     en decisiones de negocio: BI adoptado por 50+ usuarios en banca, ETL que
@@ -24,7 +24,8 @@ identidad:
     datos de una startup de agentes de IA, construyendo desde cero su
     ecosistema en Microsoft Fabric y el proceso replicable para diseñar y
     monitorear agentes. Certificado por Microsoft en ingeniería de analítica
-    (DP-600) e ingeniería de IA (AI-102).
+    (DP-600) e ingeniería de IA (AI-102). ¿Quieres saber algo más de mí?
+    Pregúntaselo al chat de esta hoja de vida.
   # La disponibilidad de reubicación es señal DELIBERADA para recruiters (pack §1)
   ubicacion: "Bogotá, Colombia · Abierto a reubicación internacional y trabajo remoto"
   email: "mauricio.hmrc@gmail.com"

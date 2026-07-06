@@ -9,7 +9,12 @@ export type AnalyticsEvent =
   | "solicitud_fallida"
   | "hito_expandido"
   | "proyecto_detalle_visto"
-  | "cv_descargado";
+  | "cv_descargado"
+  | "chat_abierto"
+  | "chat_pregunta"
+  | "chat_respuesta"
+  | "chat_offtopic"
+  | "chat_fallback";
 
 export function trackEvent(
   name: AnalyticsEvent,

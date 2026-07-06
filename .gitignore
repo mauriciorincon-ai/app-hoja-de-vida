@@ -21,3 +21,6 @@ Thumbs.db
 
 # PDFs del CV — generados en build por scripts/generate-cv-pdf.mjs (ADR-008)
 public/cv/
+
+# Índices del chat — generados en build por scripts/build-chat-index.mjs (ADR-010)
+public/chat-index.*.json

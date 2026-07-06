@@ -8,6 +8,7 @@ import {
   setRequestLocale,
 } from "next-intl/server";
 import { notFound } from "next/navigation";
+import { ChatLauncher } from "@/components/chat/chat-launcher";
 import { MotionProvider } from "@/components/motion/motion-provider";
 import { routing } from "@/i18n/routing";
 import { SITE_URL } from "@/lib/site";
@@ -83,13 +84,18 @@ export default async function LocaleLayout({
   setRequestLocale(locale);
 
   // Al cliente solo viajan los namespaces que usan client components
-  // (header, formulario, error boundary) — el resto se queda en el server.
+  // (header, formulario, error boundary, chat) — el resto queda en el server.
   const messages = await getMessages();
   const clientMessages = {
     nav: messages.nav,
     form: messages.form,
     error: messages.error,
+    chat: messages.chat,
   };
+
+  // Kill-switch del chat (S3): sin CHAT_ENABLED=false el lanzador existe en
+  // todas las páginas; apagado, ni siquiera se monta (defensa primaria).
+  const chatEnabled = process.env.CHAT_ENABLED !== "false";
 
   return (
     <html
@@ -99,6 +105,7 @@ export default async function LocaleLayout({
       <body className="min-h-full flex flex-col bg-paper-0 text-ink-1 font-sans">
         <NextIntlClientProvider messages={clientMessages}>
           <MotionProvider>{children}</MotionProvider>
+          {chatEnabled && <ChatLauncher />}
         </NextIntlClientProvider>
         <Analytics />
       </body>
