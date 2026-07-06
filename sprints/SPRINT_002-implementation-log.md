@@ -89,3 +89,20 @@
   layout (no solo de acentos).
 - Nota herramienta: lhci/lighthouse local en Windows muere con EPERM al limpiar temporales de
   Chrome (chrome-launcher) — el JSON del reporte sí queda escrito; extraer métricas de ahí.
+- Segunda iteración del LCP: el h1 estático NO bastó — el breakdown de Lighthouse
+  (`lcp-breakdown-insight`) identificó el elemento real: el **párrafo de Contexto** dentro de
+  un `Reveal` (elementRenderDelay ~8s). Contexto/Reto estáticos → CI verde.
+
+## Gate de diseño (2026-07-05, 2 rondas)
+
+- **Ronda 1 (aprobación general + 2 ajustes):** "muy muy buen trabajo… mejor de lo que me
+  hubiera imaginado". Ajustes: (a) descendentes y/g recortados en el titular del hero —
+  leading 1.02 → 1.12 + tamaño máx 4.5 → 4.25rem; (b) más aprovechamiento del ancho: perfil,
+  logros y párrafos de detalle/cv sin topes estrechos.
+- **Ronda 2:** (a) la "y" seguía tocando el borde → colchón `pb-[0.1em]/-mb-[0.1em]` en los
+  bloques overflow-hidden + keyframe mask-up 110% → 120% (que el texto oculto no se asome por
+  el padding); (b) el perfil a 2 columnas NO gustó — el usuario quería UNA columna a todo el
+  ancho. Lección: ante feedback de espacio, preguntar la forma esperada antes de proponer un
+  layout distinto.
+- CI verde en ambas rondas (los fixes de estilo no movieron ningún gate). **PR #3 mergeado
+  por el usuario (2026-07-05); producción desplegada. Sprint 002 cerrado.**
