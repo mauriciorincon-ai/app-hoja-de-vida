@@ -155,20 +155,22 @@ export default async function ProyectoDetallePage({ params }: Params) {
           </header>
 
           <div className="flex flex-col gap-12">
+            {/* Contexto y Reto se pintan ESTÁTICOS: el párrafo de Contexto es
+                el elemento LCP de la página en móvil (un Reveal lo dejaba en
+                opacity 0 hasta la hidratación — elementRenderDelay ~8s).
+                El motion vive en las secciones bajo el fold. */}
             {secciones.map((seccion) => (
-              <Reveal key={seccion.id} variant="fadeInUp">
-                <section aria-labelledby={`cs-${seccion.id}`}>
-                  <h2
-                    id={`cs-${seccion.id}`}
-                    className="mb-4 font-display text-2xl font-medium tracking-[-0.015em] text-ink-0"
-                  >
-                    {seccion.titulo}
-                  </h2>
-                  <p className="max-w-[68ch] text-[16px] leading-[1.75] text-ink-1">
-                    {seccion.texto}
-                  </p>
-                </section>
-              </Reveal>
+              <section key={seccion.id} aria-labelledby={`cs-${seccion.id}`}>
+                <h2
+                  id={`cs-${seccion.id}`}
+                  className="mb-4 font-display text-2xl font-medium tracking-[-0.015em] text-ink-0"
+                >
+                  {seccion.titulo}
+                </h2>
+                <p className="max-w-[68ch] text-[16px] leading-[1.75] text-ink-1">
+                  {seccion.texto}
+                </p>
+              </section>
             ))}
 
             <Reveal variant="fadeInUp">
