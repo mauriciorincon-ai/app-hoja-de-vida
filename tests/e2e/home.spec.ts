@@ -2,7 +2,16 @@ import { readFileSync } from "node:fs";
 import { expect, test } from "@playwright/test";
 import { parse } from "yaml";
 
-const SECTIONS = ["trayectoria", "logros", "proyectos", "apps", "contacto"];
+const SECTIONS = [
+  "perfil",
+  "trayectoria",
+  "logros",
+  "proyectos",
+  "skills",
+  "certificaciones",
+  "apps",
+  "contacto",
+];
 
 // Los e2e leen el contenido real: editar data/*.yaml jamás rompe la suite
 type AppEntry = {
@@ -12,7 +21,13 @@ type AppEntry = {
 };
 const cvEs = parse(readFileSync("data/cv.es.yaml", "utf8")) as {
   identidad: { nombre: string };
+  trayectoria: { organizacion: string; bullets?: string[] }[];
 };
+const hitoConBullets = cvEs.trayectoria.find((t) => t.bullets?.length);
+if (!hitoConBullets?.bullets) {
+  throw new Error("cv.es.yaml sin bullets en la trayectoria");
+}
+const primerBullet = hitoConBullets.bullets[0];
 const { apps } = parse(readFileSync("data/apps.yaml", "utf8")) as {
   apps: AppEntry[];
 };
@@ -32,7 +47,7 @@ test.describe("HOME — happy path del sprint", () => {
     // La página está hidratada cuando el form montó su handler
     await page.locator("form[data-hydrated=true]").waitFor();
 
-    // Scroll por las 6 secciones — todas presentes y con heading
+    // Scroll por todas las secciones — presentes y con heading
     for (const id of SECTIONS) {
       await page.locator(`#${id}`).scrollIntoViewIfNeeded();
       await expect(
@@ -85,6 +100,34 @@ test.describe("HOME — happy path del sprint", () => {
         locale === "es" ? "En construcción" : "In construction",
       );
     }
+    // El grueso (capa 2) también vive en el HTML aunque nazca colapsado
+    const res = await request.get("/es");
+    expect(await res.text()).toContain(primerBullet);
+  });
+
+  test("disclosure del timeline: expande y contrae accesible por teclado", async ({
+    page,
+  }) => {
+    await page.goto("/es");
+    await page.locator("form[data-hydrated=true]").waitFor();
+    await page.locator("#trayectoria").scrollIntoViewIfNeeded();
+
+    // Selector estable: el accessible name cambia al expandir ("Ver menos")
+    const boton = page
+      .locator('button[aria-controls^="hito-bullets-"]')
+      .first();
+    await expect(boton).toHaveText(/Ver logros completos/);
+    await expect(boton).toHaveAttribute("aria-expanded", "false");
+
+    // Expandir con click: los bullets quedan visibles
+    await boton.click();
+    await expect(boton).toHaveAttribute("aria-expanded", "true");
+    await expect(page.getByText(primerBullet)).toBeVisible();
+
+    // Contraer con teclado (Enter sobre el botón enfocado)
+    await boton.focus();
+    await page.keyboard.press("Enter");
+    await expect(boton).toHaveAttribute("aria-expanded", "false");
   });
 
   test("404 localizado para rutas desconocidas", async ({ page }) => {

@@ -1,6 +1,8 @@
 "use client";
 
 import { m, useReducedMotion, type Variants } from "motion/react";
+import { useState } from "react";
+import { trackEvent } from "@/lib/analytics";
 import { EASE_OUT_BACK, EASE_OUT_CUBIC, EASE_OUT_EXPO } from "./easings";
 
 /**
@@ -20,10 +22,93 @@ export type TimelineItem = {
   rol: string;
   organizacion: string;
   descripcion: string;
+  bullets?: string[];
   actual?: boolean;
 };
 
-export function TimelineTrack({ items }: { items: TimelineItem[] }) {
+export type TimelineLabels = {
+  verMas: string;
+  verMenos: string;
+};
+
+/**
+ * Disclosure inline (capa de profundidad, S2): los bullets viven SIEMPRE en
+ * el HTML (gate ATS) y se colapsan solo visualmente (grid 0fr→1fr). Patrón
+ * disclosure accesible: <button aria-expanded aria-controls> + región con
+ * aria-hidden cuando está colapsada (no contiene focusables).
+ */
+function BulletsDisclosure({
+  bullets,
+  id,
+  hito,
+  labels,
+}: {
+  bullets: string[];
+  id: string;
+  hito: string;
+  labels: TimelineLabels;
+}) {
+  const [expanded, setExpanded] = useState(false);
+
+  function toggle() {
+    const next = !expanded;
+    setExpanded(next);
+    if (next) trackEvent("hito_expandido", { hito });
+  }
+
+  return (
+    <>
+      <div
+        className="grid transition-[grid-template-rows] duration-300 ease-out motion-reduce:transition-none"
+        style={{ gridTemplateRows: expanded ? "1fr" : "0fr" }}
+      >
+        <div className="overflow-hidden">
+          <ul
+            id={id}
+            aria-hidden={!expanded}
+            className="flex flex-col gap-2 pt-2 pb-1"
+          >
+            {bullets.map((bullet) => (
+              <li
+                key={bullet}
+                className="flex gap-2.5 text-sm leading-relaxed text-ink-1"
+              >
+                <span
+                  aria-hidden="true"
+                  className="mt-[9px] size-1 shrink-0 rounded-full bg-sage-ink"
+                />
+                {bullet}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+      <button
+        type="button"
+        aria-expanded={expanded}
+        aria-controls={id}
+        onClick={toggle}
+        className="flex min-h-11 items-center gap-1.5 self-start text-sm font-medium text-sage-ink transition-colors duration-[120ms] hover:text-ink-0"
+      >
+        {expanded ? labels.verMenos : labels.verMas}
+        <span
+          aria-hidden="true"
+          className={`text-[10px] transition-transform duration-200 motion-reduce:transition-none ${expanded ? "rotate-180" : ""}`}
+        >
+          ▼
+        </span>
+      </button>
+    </>
+  );
+}
+
+export function TimelineTrack({
+  items,
+  labels,
+}: {
+  items: TimelineItem[];
+  labels: TimelineLabels;
+}) {
   const reduced = useReducedMotion();
   const n = items.length;
 
@@ -144,6 +229,14 @@ export function TimelineTrack({ items }: { items: TimelineItem[] }) {
               <p className="text-sm leading-relaxed text-ink-2">
                 {item.descripcion}
               </p>
+              {(item.bullets?.length ?? 0) > 0 && (
+                <BulletsDisclosure
+                  bullets={item.bullets ?? []}
+                  id={`hito-bullets-${i}`}
+                  hito={item.organizacion}
+                  labels={labels}
+                />
+              )}
             </m.article>
           </li>
         ))}

@@ -7,14 +7,45 @@
     "trayectoria": "Career",
     "logros": "Achievements",
     "proyectos": "Projects",
+    "skills": "Skills",
+    "certificaciones": "Certifications",
     "apps": "Apps",
     "contacto": "Contact",
     "cambiarIdioma": "Cambiar a español",
-    "saltarContenido": "Skip to content"
+    "saltarContenido": "Skip to content",
+    "descargarCv": "CV (PDF)"
   },
   "hero": {
     "ctaApps": "Explore the apps",
     "ctaContacto": "Let's talk"
+  },
+  "perfil": {
+    "titulo": "Profile"
+  },
+  "timeline": {
+    "verMas": "See full achievements",
+    "verMenos": "See less"
+  },
+  "detalle": {
+    "eyebrow": "Case study",
+    "volver": "Projects",
+    "contexto": "Context",
+    "reto": "The challenge",
+    "acciones": "What I did",
+    "impacto": "Impact",
+    "stack": "Stack",
+    "cta": "Sounds like your team? Let's talk",
+    "descargarCv": "Download CV (PDF)",
+    "verCaseStudy": "View case study"
+  },
+  "cv": {
+    "titulo": "Résumé",
+    "subtitulo": "The same source that powers this page generates the PDF: they can never drift apart.",
+    "descargar": "Download CV (PDF)",
+    "volver": "Back to home"
+  },
+  "certificaciones": {
+    "verificar": "Verify"
   },
   "apps": {
     "titulo": "Pipeline apps",

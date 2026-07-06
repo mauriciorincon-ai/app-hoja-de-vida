@@ -1,10 +1,12 @@
 import { getTranslations } from "next-intl/server";
 import { Reveal } from "@/components/motion/reveal";
 import { Stagger, StaggerItem } from "@/components/motion/stagger";
+import { Link } from "@/i18n/navigation";
 import type { Cv } from "@/lib/schemas";
 
 export async function Proyectos({ proyectos }: { proyectos: Cv["proyectos"] }) {
   const t = await getTranslations("nav");
+  const tDetalle = await getTranslations("detalle");
 
   return (
     <section
@@ -46,6 +48,15 @@ export async function Proyectos({ proyectos }: { proyectos: Cv["proyectos"] }) {
                       </li>
                     ))}
                   </ul>
+                )}
+                {proyecto.casestudy && (
+                  <Link
+                    href={`/proyectos/${proyecto.slug}`}
+                    className="flex min-h-11 items-center gap-1.5 self-start text-sm font-medium text-sage-ink transition-colors duration-[120ms] hover:text-ink-0"
+                  >
+                    {tDetalle("verCaseStudy")}
+                    <span aria-hidden="true">→</span>
+                  </Link>
                 )}
               </article>
             </StaggerItem>

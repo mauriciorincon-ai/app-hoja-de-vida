@@ -3,10 +3,13 @@ import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { HomeVisitTracker } from "@/components/home-visit-tracker";
 import { AppsShowcase } from "@/components/home/apps-showcase";
+import { Certificaciones } from "@/components/home/certificaciones";
 import { Contacto } from "@/components/home/contacto";
 import { Hero } from "@/components/home/hero";
 import { Logros } from "@/components/home/logros";
+import { Perfil } from "@/components/home/perfil";
 import { Proyectos } from "@/components/home/proyectos";
+import { Skills } from "@/components/home/skills";
 import { Trayectoria } from "@/components/home/trayectoria";
 import type { Locale } from "@/i18n/routing";
 import { getApps, getCv } from "@/lib/content";
@@ -53,9 +56,12 @@ export default async function HomePage({
       <Header nombre={cv.identidad.nombre} />
       <main id="contenido" className="flex-1">
         <Hero identidad={cv.identidad} />
+        <Perfil identidad={cv.identidad} />
         <Trayectoria trayectoria={cv.trayectoria} />
         <Logros logros={cv.logros} />
         <Proyectos proyectos={cv.proyectos} />
+        <Skills skills={cv.skills} />
+        <Certificaciones certificaciones={cv.certificaciones} />
         <AppsShowcase apps={apps} />
         <Contacto identidad={cv.identidad} apps={apps} />
       </main>

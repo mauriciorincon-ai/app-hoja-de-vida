@@ -36,6 +36,9 @@ export const cvSchema = z.object({
         rol: z.string().min(1),
         organizacion: z.string().min(1),
         descripcion: z.string().min(1),
+        // El "grueso" del rol (capa 2): logros completos con métricas,
+        // expandibles en el timeline y presentes en el PDF ATS
+        bullets: z.array(z.string().min(1)).default([]),
         actual: z.boolean().default(false),
       }),
     )
@@ -55,10 +58,25 @@ export const cvSchema = z.object({
   proyectos: z
     .array(
       z.object({
+        // Slug de URL del case study — idéntico en ES y EN para el hreflang
+        slug: z
+          .string()
+          .min(1)
+          .regex(/^[a-z0-9-]+$/, "slug must be a kebab-case slug"),
         nombre: z.string().min(1),
         resumen: z.string().min(1),
         stack: z.array(z.string().min(1)).default([]),
         destacado: z.boolean().default(false),
+        // Narrativa del case study (ADR-009): con esto presente, el proyecto
+        // gana página propia en /{locale}/proyectos/<slug> — cero código
+        casestudy: z
+          .object({
+            contexto: z.string().min(1),
+            reto: z.string().min(1),
+            acciones: z.array(z.string().min(1)).min(1),
+            impacto: z.array(z.string().min(1)).min(1),
+          })
+          .optional(),
       }),
     )
     .min(1),

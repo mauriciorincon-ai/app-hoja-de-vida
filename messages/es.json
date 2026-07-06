@@ -7,14 +7,45 @@
     "trayectoria": "Trayectoria",
     "logros": "Logros",
     "proyectos": "Proyectos",
+    "skills": "Skills",
+    "certificaciones": "Certificaciones",
     "apps": "Apps",
     "contacto": "Contacto",
     "cambiarIdioma": "Switch to English",
-    "saltarContenido": "Saltar al contenido"
+    "saltarContenido": "Saltar al contenido",
+    "descargarCv": "CV (PDF)"
   },
   "hero": {
     "ctaApps": "Explora las apps",
     "ctaContacto": "Hablemos"
+  },
+  "perfil": {
+    "titulo": "Perfil"
+  },
+  "timeline": {
+    "verMas": "Ver logros completos",
+    "verMenos": "Ver menos"
+  },
+  "detalle": {
+    "eyebrow": "Case study",
+    "volver": "Proyectos",
+    "contexto": "Contexto",
+    "reto": "El reto",
+    "acciones": "Qué hice",
+    "impacto": "Impacto",
+    "stack": "Stack",
+    "cta": "¿Te suena a tu equipo? Hablemos",
+    "descargarCv": "Descargar CV (PDF)",
+    "verCaseStudy": "Ver case study"
+  },
+  "cv": {
+    "titulo": "Hoja de vida",
+    "subtitulo": "La misma fuente que alimenta esta página genera el PDF: nunca están desactualizados entre sí.",
+    "descargar": "Descargar CV (PDF)",
+    "volver": "Volver al inicio"
+  },
+  "certificaciones": {
+    "verificar": "Verificar"
   },
   "apps": {
     "titulo": "Apps del pipeline",

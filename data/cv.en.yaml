@@ -1,7 +1,9 @@
 # English content of the Living CV — mirror of cv.es.yaml (same structure, same
-# section sizes). How to edit: docs/MANUAL-DE-USO.md. Source: content-pack-v1
-# (APPROVED 2026-07-05); no figure was invented — all come from the real CVs.
+# section sizes, same slugs). How to edit: docs/MANUAL-DE-USO.md. Source:
+# content-pack-v1 + CV extraction (2026-07-05); no figure was invented.
 # Empty `verificacion:` fields are pending verification links (Credly/MS Learn).
+# S2: `bullets` (full detail per role, expandable + PDF) · `slug`+`casestudy`
+# (automatic page at /en/proyectos/<slug> — adding a case study = editing this file).
 
 identidad:
   nombre: "Henry Rincón"
@@ -20,7 +22,7 @@ identidad:
     AI-agent startup, building its Microsoft Fabric ecosystem from scratch
     together with the replicable process to design and monitor agents.
     Microsoft-certified in analytics engineering (DP-600) and AI engineering
-    (AI-102). Whatever doesn't fit in this text, ask this résumé's chat.
+    (AI-102).
   ubicacion: "Bogotá, Colombia · Open to international relocation and remote work"
   email: "mauricio.hmrc@gmail.com"
   enlaces:
@@ -36,6 +38,10 @@ trayectoria:
     descripcion: >-
       Analytics and data governance for administrative and clinical decisions
       in healthcare.
+    bullets:
+      - "Analysis and visualization models for administrative and clinical leaders."
+      - "Institutional data governance and quality."
+      - "Process-based BI dashboards and continuous improvement."
     actual: true
   - periodo: "2023 — 2025"
     rol: "Data Strategy Lead"
@@ -44,41 +50,75 @@ trayectoria:
       Data ecosystem for AI agents on Microsoft Fabric, built from scratch:
       architecture, governance, real-time agent monitoring and a replicable
       core process.
+    bullets:
+      - "Designed and built from scratch the data ecosystem for AI-agent analytics on Microsoft Fabric (big data + data warehouse + distributed processing)."
+      - "Defined the data governance to integrate client and system data."
+      - "Built real-time monitoring for the agents in production."
+      - "Documented the replicable core process to design and implement AI agents."
   - periodo: "2023"
     rol: "Senior Analytics Analyst"
     organizacion: "Banco Pichincha"
     descripcion: >-
       BI adopted by 50+ users, ETL times cut by 35%, predictive models above
       90% accuracy, and co-led data governance.
+    bullets:
+      - "Dashboards adopted by 50+ users: +25% in decision-making."
+      - "ETL process optimization: −35% in analysis times."
+      - "Predictive models with scikit-learn: >90% accuracy and +35% in predictions."
+      - "Semantic model optimization with DAX Studio and Tabular Editor."
+      - "Co-led the area's data governance."
+      - "Analytics training program: +20% team productivity."
   - periodo: "2021 — 2022"
     rol: "Post-Operational Analysis"
     organizacion: "C&M Consultores (TransMilenio)"
     descripcion: >-
       BI adoption (+35% efficiency), an ETL that unified sources (+70%) and
       demand forecasting with scikit-learn.
+    bullets:
+      - "Drove BI adoption across operations: +35% efficiency with 25+ key users."
+      - "ETL that unified heterogeneous sources: +70% in analysis precision and speed."
+      - "Automation scripts: −40% in repetitive tasks."
+      - "Strategy sessions with SITP leadership: +25% in indicators."
+      - "Demand forecasting with scikit-learn: +20% system performance."
   - periodo: "2020 — 2021"
     rol: "Information Systems Analyst"
     organizacion: "Cafam"
     descripcion: >-
       Led 20 people through the WMS implementation: −25% errors and +15%
       operational efficiency.
+    bullets:
+      - "Led a 20-person team through WMS implementation testing: −25% errors and +15% operational efficiency."
+      - "Operational-control BI: +50% precision for 15+ users."
+      - "VBA integrations with the WMS: +15% automation and −50% data errors."
+      - "SQL data-quality improvements: +20%."
   - periodo: "2018 — 2020"
     rol: "Operations Analyst"
     organizacion: "C&M Consorcio (TransMilenio)"
     descripcion: >-
       Dashboards and indicators that raised the system's operational control.
+    bullets:
+      - "Interactive dashboards and operations performance reports."
+      - "Report automation and statistical baselines for the system."
   - periodo: "2017 — 2018"
     rol: "Operations Coordinator"
     organizacion: "Ceinfes"
     descripcion: >-
       KPIs and board-level reporting; transition to process-based management
       with agile methods.
+    bullets:
+      - "KPIs for logistics, HR and digitalization; board-level reporting."
+      - "Transition to process-based management with Kanban and agile methods."
+      - "Coordination of multidisciplinary teams."
   - periodo: "2016 — 2017"
     rol: "Process Engineer"
     organizacion: "Inglopres"
     descripcion: >-
       ERP, databases and supply chain under ISO 9001; a team of 12 with 95%
       client satisfaction.
+    bullets:
+      - "ERP and database structures for the supply chain."
+      - "Quality assurance under ISO 9001:2015."
+      - "A team of 12 people with 95% client satisfaction."
   - periodo: "Education"
     rol: "Industrial Engineering — emphasis in Data Analytics Intelligence"
     organizacion: "Pontificia Universidad Javeriana"
@@ -111,7 +151,8 @@ logros:
     descripcion: "2 from Microsoft (DP-600 · AI-102) and 4 from IBM in data science."
 
 proyectos:
-  - nombre: "A data platform for AI agents — Vesting (2023–2025)"
+  - slug: "vesting"
+    nombre: "A data platform for AI agents — Vesting (2023–2025)"
     resumen: >-
       An automation-agents startup with no data infrastructure: I designed and
       built from scratch its Microsoft Fabric ecosystem (big data + data
@@ -121,31 +162,125 @@ proyectos:
       and AI-102.
     stack: ["Microsoft Fabric", "Data governance", "Real-time monitoring"]
     destacado: true
-  - nombre: "BI the business actually uses — Banco Pichincha (2023)"
+    casestudy:
+      contexto: >-
+        Vesting, an automation-agents startup, was growing without data
+        infrastructure: its AI-agent analytics had nowhere to live and every
+        client data integration was handcrafted.
+      reto: >-
+        Build from scratch a data ecosystem able to support AI-agent analytics
+        and monitoring in production — with governance from day one and
+        without slowing the startup down.
+      acciones:
+        - "Designed the ecosystem architecture on Microsoft Fabric: big data, data warehouse and distributed processing."
+        - "Defined the data governance to integrate client and system data consistently."
+        - "Built real-time monitoring for the AI agents in production."
+        - "Documented the replicable core process to design and implement AI agents."
+      impacto:
+        - "The startup's data ecosystem became operational from scratch on Microsoft Fabric."
+        - "Agents in production went from opaque to monitored in real time."
+        - "The replicable core process standardized how agents are designed and shipped."
+        - "The exact bridge between analytics engineering (DP-600) and AI engineering (AI-102)."
+  - slug: "banco-pichincha"
+    nombre: "BI the business actually uses — Banco Pichincha (2023)"
     resumen: >-
       Dashboards adopted by 50+ users (+25% in decision-making), ETL times cut
       by 35%, predictive models above 90% accuracy (scikit-learn), co-led
       governance and a training program that lifted productivity by 20%.
     stack: ["BI", "ETL", "scikit-learn"]
-  - nombre: "Data that moves a city — TransMilenio / C&M (2021–2022)"
+    casestudy:
+      contexto: >-
+        The bank's analytics and reporting area produced dashboards the
+        business never quite adopted, with slow ETL processes and models that
+        stayed out of production.
+      reto: >-
+        Turn BI into a tool the business uses daily and take predictive
+        models to production with reliable accuracy.
+      acciones:
+        - "Designed decision-oriented dashboards adopted by 50+ business users."
+        - "Optimized ETL processes, cutting analysis times by 35%."
+        - "Trained and shipped predictive models with scikit-learn."
+        - "Optimized semantic models with DAX Studio and Tabular Editor."
+        - "Co-led data governance and an analytics training program."
+      impacto:
+        - "+25% in decision-making on the adopted dashboards."
+        - "−35% in analysis times from the ETL optimization."
+        - ">90% accuracy and +35% in predictions from the models in production."
+        - "+20% team productivity after the training program."
+  - slug: "transmilenio-cm"
+    nombre: "Data that moves a city — TransMilenio / C&M (2021–2022)"
     resumen: >-
       BI adoption (+35% efficiency, 25+ key users), an ETL that unified
       heterogeneous sources (+70% in precision and speed), demand forecasting
       with scikit-learn (+20% system performance) and strategy sessions with
       SITP leadership (+25% in indicators).
     stack: ["BI", "ETL", "scikit-learn"]
-  - nombre: "Leading the quality of a WMS — Cafam (2020–2021)"
+    casestudy:
+      contexto: >-
+        Post-operational analysis of the TransMilenio system relied on
+        heterogeneous sources and manual reports: the city's operation
+        produced data faster than it could be analyzed.
+      reto: >-
+        Unify the sources, speed up the analysis and bring the data to the
+        tables where the transit system's operation is decided.
+      acciones:
+        - "Drove BI adoption across operations with 25+ key users."
+        - "Built the ETL that unified the system's heterogeneous sources."
+        - "Automated repetitive tasks with scripts (−40%)."
+        - "Brought analytics into strategy sessions with SITP leadership."
+        - "Developed demand forecasting with scikit-learn."
+      impacto:
+        - "+35% operational efficiency from BI adoption."
+        - "+70% in analysis precision and speed with the unified ETL."
+        - "+25% in indicators after the SITP strategy sessions."
+        - "+20% system performance with demand forecasting."
+  - slug: "cafam"
+    nombre: "Leading the quality of a WMS — Cafam (2020–2021)"
     resumen: >-
       A team of 20 through implementation testing: −25% errors and +15%
       efficiency; control BI (+50% precision, 15+ users) and VBA integrations
       (−50% data errors).
     stack: ["WMS", "BI", "VBA"]
-  - nombre: "Analytics in healthcare — Fundación CTIC (2025–today)"
+    casestudy:
+      contexto: >-
+        Cafam was implementing a WMS across its logistics operation: a
+        critical system change where every data error is paid for in the
+        warehouse.
+      reto: >-
+        Assure the quality of the implementation while coordinating the
+        largest testing team I've led, without slowing the operation.
+      acciones:
+        - "Led a 20-person team through the WMS implementation testing."
+        - "Built the implementation's operational-control BI."
+        - "Developed VBA integrations with the WMS to automate data loads."
+        - "Established SQL data-quality improvements."
+      impacto:
+        - "−25% errors and +15% operational efficiency across the implementation."
+        - "+50% precision in operational control, adopted by 15+ users."
+        - "+15% automation and −50% data errors with the VBA integrations."
+        - "+20% data quality via SQL."
+  - slug: "fundacion-ctic"
+    nombre: "Analytics in healthcare — Fundación CTIC (2025–today)"
     resumen: >-
       Analysis and visualization models for administrative and clinical
       leaders, institutional data governance and quality, and process-based
       control dashboards.
     stack: ["Analytics", "Data governance"]
+    casestudy:
+      contexto: >-
+        In healthcare, administrative and clinical decisions depend on
+        institutional data that historically lived scattered and without
+        clear governance.
+      reto: >-
+        Bring data governance, quality and analytics to the decisions of the
+        Foundation's administrative and clinical leaders.
+      acciones:
+        - "I build analysis and visualization models for administrative and clinical leaders."
+        - "I structure institutional data governance and quality."
+        - "I develop process-based control dashboards with continuous improvement."
+      impacto:
+        - "Administrative and clinical decisions informed by governed data."
+        - "Institutional data quality as a practice, not an event."
 
 certificaciones:
   - nombre: "Microsoft Certified: Azure AI Engineer Associate (AI-102)"

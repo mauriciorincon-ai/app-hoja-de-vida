@@ -42,6 +42,48 @@ e inglés. Quien la visita puede pedir acceso a tus apps y la solicitud te llega
 - **Limitaciones conocidas:** los logros usan `valor` numérico (el contador anima ese número);
   máximo 2 decimales.
 
+### El "grueso" de cada experiencia (bullets expandibles) · desde Sprint 002
+
+- **Qué hace:** cada hito de la Trayectoria tiene un botón "Ver logros completos" que
+  despliega los logros detallados con métricas de ese rol. Los mismos bullets alimentan el
+  PDF descargable.
+- **Cómo se usa:** en `data/cv.es.yaml` y `cv.en.yaml`, cada entrada de `trayectoria` tiene
+  una lista `bullets:` — una línea por logro. Edita, guarda y push. Un hito sin `bullets`
+  simplemente no muestra el botón (como Formación).
+- **Ojo:** mantén el mismo número de bullets en ES y EN (hay una prueba que lo vigila y
+  bloquea la publicación si se desbalancean).
+
+### Case studies con página propia · desde Sprint 002
+
+- **Qué hace:** cada proyecto con case study tiene su propia URL compartible
+  (`/es/proyectos/vesting`, por ejemplo) con la narrativa contexto → reto → qué hice →
+  impacto, en ambos idiomas.
+- **Cómo agregar uno nuevo (cero código):** en `data/cv.es.yaml` y `cv.en.yaml`, dale al
+  proyecto un `slug:` (minúsculas-con-guiones, IGUAL en ambos idiomas) y un bloque
+  `casestudy:` con `contexto`, `reto`, `acciones` (lista) e `impacto` (lista). Push y la
+  página aparece sola, con su URL, su SEO y su lugar en el sitemap.
+- **Quitar uno:** borra el bloque `casestudy:` (el proyecto sigue en la HOME como card,
+  solo pierde su página de detalle).
+
+### Perfil, Certificaciones y Skills en la HOME · desde Sprint 002
+
+- **Qué hace:** las secciones que estaban guardadas desde el content pack ahora son
+  visibles: el párrafo de Perfil, las 6 certificaciones (las 2 de Microsoft resaltadas) y
+  los 4 grupos de skills.
+- **Links de verificación:** cuando tengas los links de Credly/Microsoft Learn, pégalos en
+  el campo `verificacion:` de cada certificación — el botón "Verificar ↗" aparece solo.
+
+### Descargar CV en PDF (ATS) · desde Sprint 002
+
+- **Qué hace:** el botón "CV (PDF)" (siempre visible arriba) y la página `/cv` entregan un
+  PDF cuyo texto se puede copiar y que los sistemas de reclutamiento (ATS) pueden leer.
+  `/cv` además es la versión imprimible de la hoja de vida completa.
+- **Cómo se actualiza:** solo. El PDF se genera en cada publicación desde los mismos YAML
+  que alimentan la página — editar el contenido y hacer push regenera web Y PDF a la vez;
+  nunca quedan desincronizados.
+- **Limitación conocida:** el PDF es deliberadamente sobrio (texto estructurado, sin
+  diseño gráfico) — eso es una feature para los ATS, no un pendiente.
+
 ### Agregar una app al showcase · desde Sprint 001
 
 - **Qué hace:** la sección "Apps del pipeline" es un brochure que sale de `data/apps.yaml`.
@@ -92,3 +134,4 @@ e inglés. Quien la visita puede pedir acceso a tus apps y la solicitud te llega
 | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | 001    | Contenido por YAML, showcase de apps, bilingüe ES/EN, solicitudes de acceso, motion.                                                                                     |
 | 001bis | Content pack v1 integrado (marca Henry Rincón), estado "en producción", enlaces de evidencia en las cards, campos `certificaciones`/`skills`/`perfil` previstos para S2. |
+| 002    | Capa de profundidad: bullets expandibles por hito, 5 case studies con URL propia, secciones Perfil/Certificaciones/Skills, ruta `/cv` imprimible + PDF ATS descargable.  |

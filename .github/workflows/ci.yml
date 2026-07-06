@@ -47,6 +47,11 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
       - name: Lighthouse CI contra perf-budget.json
+        # El budget (ADR-006) aplica también a las rutas nuevas del S2
         run: |
           npm i -g @lhci/cli
-          lhci autorun --collect.startServerCommand="pnpm start" --collect.url=http://localhost:3000 --assert.budgetsFile=./perf-budget.json
+          lhci autorun --collect.startServerCommand="pnpm start" \
+            --collect.url=http://localhost:3000 \
+            --collect.url=http://localhost:3000/es/proyectos/vesting \
+            --collect.url=http://localhost:3000/es/cv \
+            --assert.budgetsFile=./perf-budget.json
