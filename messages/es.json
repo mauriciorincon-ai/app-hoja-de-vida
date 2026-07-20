@@ -58,6 +58,15 @@
     },
     "cta": "Quiero probarla"
   },
+  "brochure": {
+    "volver": "Apps",
+    "eyebrow": "Brochure",
+    "funcionalidades": "Qué hace",
+    "stack": "Stack",
+    "verApp": "Ver la app",
+    "cta": "¿Te suena a tu equipo? Hablemos",
+    "verRepo": "Ver el repositorio"
+  },
   "roadmap": {
     "eyebrow": "Roadmap",
     "titulo": "Qué viene — y tú decides el orden",

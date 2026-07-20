@@ -138,6 +138,37 @@ const roadmapFeature = z
   })
   .strict();
 
+// Brochure animada por app (S4, ADR-012). Solo apps con funcionalidad real
+// ("solo lo real"): su presencia da de alta la página /[locale]/apps/<id>.
+const brochureFeature = z
+  .object({
+    titulo: localizedText,
+    descripcion: localizedText,
+  })
+  .strict();
+
+const brochureMetrica = z
+  .object({
+    // Cifra real y verificable; el Counter la anima desde el HTML estático.
+    valor: z.number(),
+    sufijo: z.string().default(""),
+    etiqueta: localizedText,
+  })
+  .strict();
+
+const brochure = z
+  .object({
+    // Frase corta bajo el título (subtítulo del hero).
+    tagline: localizedText,
+    // Párrafo de apertura — candidato LCP: se pinta estático, sin motion JS.
+    intro: localizedText,
+    funcionalidades: z.array(brochureFeature).min(1),
+    metricas: z.array(brochureMetrica).default([]),
+    // Tecnologías (strings universales, no localizados) — como proyectos.stack.
+    stack: z.array(z.string().min(1)).default([]),
+  })
+  .strict();
+
 export const appsSchema = z
   .object({
     apps: z
@@ -163,6 +194,9 @@ export const appsSchema = z
             // Roadmap votable de la app (S4). Vacío = la app no aparece en la
             // sección de votación. Editar aquí + push = roadmap actualizado.
             roadmap: z.array(roadmapFeature).default([]),
+            // Brochure animada (S4). Presente = la app gana su página
+            // /[locale]/apps/<id>. Solo apps con funcionalidad real.
+            brochure: brochure.optional(),
           })
           .strict(),
       )
@@ -173,6 +207,7 @@ export const appsSchema = z
 export type Apps = z.infer<typeof appsSchema>;
 export type AppCard = Apps["apps"][number];
 export type RoadmapFeature = z.infer<typeof roadmapFeature>;
+export type Brochure = z.infer<typeof brochure>;
 
 /** Solicitud de acceso (formulario + endpoint). `website` es el honeypot. */
 export const solicitudSchema = z.object({

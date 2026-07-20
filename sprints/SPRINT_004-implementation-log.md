@@ -142,3 +142,38 @@ data-driven de features, títulos en HTML estático — **8/8 verde en chromium 
 **Pendiente de F4 (declarado):** el e2e interactivo de votación (votar→contador sube; BD caída
 forzada→botones off) necesita el webServer de Playwright con Supabase local — va con el job
 `integration` de CI en la fase 4.
+
+## Fase 3 — Brochures animadas por app
+
+**Schema + ADR-012** (`decisions/012-brochure-schema-y-ruta.md`): campo `brochure` opcional en cada
+app (`.strict()`): `tagline`/`intro` (ES/EN), `funcionalidades[]` (`.min(1)`), `metricas[]`
+(valor+sufijo+etiqueta, cifras reales), `stack[]`. Su presencia da de alta la página. `Brochure`
+exportado.
+
+**Contenido** (`data/apps.yaml`): brochure para las **2 apps `en-produccion`** (`hoja-de-vida`,
+`chat-hoja-de-vida`) — funcionalidades, métricas verificables y stack reales. Las `en-exploracion`
+NO tienen brochure (regla "solo lo real").
+
+**Página SSG** `/[locale]/apps/[slug]` (`src/app/[locale]/apps/[slug]/page.tsx`): template único
+data-driven (`generateStaticParams` desde `appsConBrochure()`), 4 rutas (2 apps × 2 locales). El
+**hero + tagline + intro nacen ESTÁTICOS** (candidato LCP, patrón `lcp-nace-estatico`); métricas
+con `Counter`, funcionalidades con `Reveal`/`Stagger` bajo el fold; reduced-motion a doble cinturón
+del motion system. Metadata con `alternates.languages` (es/en/x-default) + JSON-LD
+`SoftwareApplication`. CTA a `/#contacto` (reutiliza el formulario) + enlaces reales.
+`src/lib/brochure.ts` (server-only) = fuente única de "qué app tiene brochure".
+
+**Integración:** enlace "Ver la app" desde la card del showcase (`apps-showcase.tsx`); `sitemap.ts`
+extendido con las brochures (+hreflang); tracker `brochure_vista`; messages ES/EN.
+
+**Verificación:** build → 4 rutas SSG. `curl` sin JS trae hero+funcionalidades+stack en ES y EN;
+showcase enlaza a `/apps/<slug>`; app sin brochure → **404**; sitemap incluye las brochures.
+
+**Tests F3:** 3 unit de `brochure.ts` · e2e `brochure.spec.ts` (navegación DESDE el showcase por la
+UI, no solo goto; contenido estático bilingüe; 404; CTA→#contacto) · rutas de brochure añadidas al
+scan de axe. **axe AA 16/16 verde** (8 rutas × 2 proyectos). Suite `quality`: 129 tests, 92%
+cobertura. typecheck + lint limpios.
+
+**Bug cazado por axe (que F2 no vio — no corrí axe en F2):** el eyebrow "Roadmap" usaba `text-ink-3`
+(#9c9a90) sobre paper-0 → contraste 2.7 (< 4.5 AA). `ink-3` es el tono decorativo del design
+system, no para texto real. Corregido a `text-ink-2`. Lección: **correr axe en la misma fase que
+toca la UI**, no diferirlo — casó una regresión de contraste en la sección del sprint anterior.

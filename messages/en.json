@@ -58,6 +58,15 @@
     },
     "cta": "I want to try it"
   },
+  "brochure": {
+    "volver": "Apps",
+    "eyebrow": "Brochure",
+    "funcionalidades": "What it does",
+    "stack": "Stack",
+    "verApp": "See the app",
+    "cta": "Sound like your team? Let's talk",
+    "verRepo": "View the repository"
+  },
   "roadmap": {
     "eyebrow": "Roadmap",
     "titulo": "What's coming — and you set the order",

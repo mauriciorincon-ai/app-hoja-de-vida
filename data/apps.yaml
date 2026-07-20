@@ -23,6 +23,60 @@ apps:
       - etiqueta: "GitHub"
         url: "https://github.com/mauriciorincon-ai/app-hoja-de-vida"
     solicitable: false
+    brochure:
+      tagline:
+        es: "Una hoja de vida que se construye a sí misma, en público."
+        en: "A résumé that builds itself, in the open."
+      intro:
+        es: "No es un PDF ni una plantilla: es una app Next.js desplegada en Vercel, con el mismo contenido sirviendo a la web, al chat y al PDF ATS desde una sola fuente de datos versionada. Lo que estás leyendo es el demo de sí misma."
+        en: "It's not a PDF or a template: it's a Next.js app deployed on Vercel, with the same content feeding the web, the chat and the ATS PDF from a single versioned data source. What you're reading is its own demo."
+      funcionalidades:
+        - titulo:
+            es: "Contenido = datos versionados"
+            en: "Content = versioned data"
+          descripcion:
+            es: "Toda la CV vive en YAML validado con Zod en build: editar el archivo + push actualiza web, PDF y chat a la vez. Si el contenido está malformado, el build falla."
+            en: "The whole CV lives in Zod-validated YAML at build time: editing the file + push updates the web, PDF and chat at once. If the content is malformed, the build fails."
+        - titulo:
+            es: "Experiencia editorial animada"
+            en: "Animated editorial experience"
+          descripcion:
+            es: "Un motion system propio (Reveal, Stagger, Counter, TimelineTrack) con reduced-motion a prueba de hidratación y presupuesto de performance vigilado por Lighthouse en CI."
+            en: "A custom motion system (Reveal, Stagger, Counter, TimelineTrack) with hydration-safe reduced-motion and a performance budget watched by Lighthouse in CI."
+        - titulo:
+            es: "SSG primero, para ATS y SEO"
+            en: "SSG-first, for ATS and SEO"
+          descripcion:
+            es: "Todo el contenido está en el HTML estático: un recruiter, un bot ATS o un curl sin JavaScript ven la hoja de vida entera, con JSON-LD y hreflang."
+            en: "All content is in the static HTML: a recruiter, an ATS bot or a curl without JavaScript see the whole résumé, with JSON-LD and hreflang."
+        - titulo:
+            es: "Roadmap votable por quien la visita"
+            en: "A roadmap the visitor votes on"
+          descripcion:
+            es: "Las próximas features se votan con un clic, sin registro, y el contador es real (Supabase con RPC atómico). Si la base de datos cae, lo dice — nunca inventa un número."
+            en: "Upcoming features are voted with one click, no sign-up, and the counter is real (Supabase with an atomic RPC). If the database goes down, it says so — it never fabricates a number."
+      metricas:
+        - valor: 2
+          etiqueta:
+            es: "idiomas, misma fuente"
+            en: "languages, one source"
+        - valor: 0
+          sufijo: " US$/mes"
+          etiqueta:
+            es: "todo en free tier"
+            en: "all on free tier"
+        - valor: 100
+          sufijo: "%"
+          etiqueta:
+            es: "contenido en HTML estático"
+            en: "content in static HTML"
+      stack:
+        - "Next.js 16"
+        - "TypeScript"
+        - "Tailwind"
+        - "Supabase"
+        - "Playwright"
+        - "Vercel"
     roadmap:
       - id: mapa-c4
         titulo:
@@ -72,6 +126,53 @@ apps:
       - etiqueta: "GitHub"
         url: "https://github.com/mauriciorincon-ai/app-hoja-de-vida"
     solicitable: false
+    brochure:
+      tagline:
+        es: "Un chat que responde por mi hoja de vida — y nunca se cae."
+        en: "A chat that answers for my résumé — and never goes down."
+      intro:
+        es: "Pregúntale por mi experiencia en español o inglés y responde solo con mi contenido real, citando la fuente y enlazándola. Si el proveedor de IA no está disponible, degrada a búsqueda local sobre el mismo índice: el chat sigue funcionando."
+        en: "Ask it about my experience in Spanish or English and it answers using only my real content, citing the source and linking it. If the AI provider is unavailable, it falls back to local search over the same index: the chat keeps working."
+      funcionalidades:
+        - titulo:
+            es: "Respuestas ancladas a la fuente"
+            en: "Answers grounded in the source"
+          descripcion:
+            es: "RAG con índice construido en build-time desde el contenido real; cada respuesta cita la sección o el case study y enlaza a él. Sin alucinaciones sobre experiencia que no existe."
+            en: "RAG with a build-time index from the real content; every answer cites the section or case study and links to it. No hallucinating experience that doesn't exist."
+        - titulo:
+            es: "Proveedor LLM conmutable por env"
+            en: "Env-switchable LLM provider"
+          descripcion:
+            es: "Groq, Gemini, Azure AI Foundry, Claude o un self-host OpenAI-compatible: cambiar de proveedor es cambiar una variable de entorno, cero código. La demostración viva del AI-102."
+            en: "Groq, Gemini, Azure AI Foundry, Claude or an OpenAI-compatible self-host: switching provider is switching an environment variable, zero code. The AI-102 shown live."
+        - titulo:
+            es: "Nunca se cae: fallback local"
+            en: "Never down: local fallback"
+          descripcion:
+            es: "Un circuit breaker degrada a búsqueda instantánea en el cliente cuando el proveedor falla. La primera vez que ocurrió fue una falla real de credencial — y funcionó."
+            en: "A circuit breaker degrades to instant client-side search when the provider fails. The first time it happened was a real credential failure — and it worked."
+        - titulo:
+            es: "Guardrails y presupuesto"
+            en: "Guardrails and budget"
+          descripcion:
+            es: "Las preguntas fuera de tema se responden sin gastar un token; rate limit por IP, techo de tokens y kill-switch. Nada de lo que produce el modelo se guarda."
+            en: "Off-topic questions are answered without spending a token; rate limit per IP, token ceiling and kill-switch. Nothing the model produces is stored."
+      metricas:
+        - valor: 6
+          etiqueta:
+            es: "proveedores conmutables"
+            en: "switchable providers"
+        - valor: 0
+          etiqueta:
+            es: "respuestas persistidas"
+            en: "persisted answers"
+      stack:
+        - "Vercel AI SDK"
+        - "Groq"
+        - "MiniSearch"
+        - "Zod"
+        - "TypeScript"
     roadmap:
       - id: embeddings-retrieval
         titulo:

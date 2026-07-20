@@ -32,7 +32,7 @@ export async function Roadmap({ apps }: { apps: AppConRoadmap[] }) {
     >
       <div className="mx-auto max-w-5xl px-4 py-20 md:px-6 md:py-28">
         <Reveal variant="fadeInUp">
-          <p className="mb-3 font-mono text-[11px] tracking-[0.08em] text-ink-3 uppercase">
+          <p className="mb-3 font-mono text-[11px] tracking-[0.08em] text-ink-2 uppercase">
             {t("eyebrow")}
           </p>
           <h2

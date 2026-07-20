@@ -1,6 +1,7 @@
 import { getLocale, getTranslations } from "next-intl/server";
 import { Reveal } from "@/components/motion/reveal";
 import { Stagger, StaggerItem } from "@/components/motion/stagger";
+import { Link } from "@/i18n/navigation";
 import type { AppCard } from "@/lib/schemas";
 import { AppCardCta } from "./app-card-cta";
 
@@ -18,6 +19,7 @@ const chipPorEstado: Record<AppCard["estado"], string> = {
 
 export async function AppsShowcase({ apps }: { apps: AppCard[] }) {
   const t = await getTranslations("apps");
+  const tBrochure = await getTranslations("brochure");
   const locale = (await getLocale()) as "es" | "en";
 
   return (
@@ -72,6 +74,15 @@ export async function AppsShowcase({ apps }: { apps: AppCard[] }) {
                       </a>
                     ))}
                   </p>
+                )}
+                {app.brochure && (
+                  <Link
+                    href={`/apps/${app.id}`}
+                    className="mt-auto flex min-h-11 items-center gap-1.5 pt-2 text-sm font-medium text-sage-ink transition-colors duration-[120ms] hover:text-ink-0"
+                  >
+                    {tBrochure("verApp")}
+                    <span aria-hidden="true">→</span>
+                  </Link>
                 )}
                 {app.solicitable && (
                   <AppCardCta appId={app.id} label={t("cta")} />
