@@ -95,5 +95,24 @@
     "titulo": "Algo salió mal",
     "cuerpo": "Ya quedó registrado; intenta recargar.",
     "recargar": "Recargar"
+  },
+  "chat": {
+    "abrir": "Pregúntale a mi HV",
+    "cerrar": "Cerrar el chat",
+    "titulo": "Pregúntale a mi hoja de vida",
+    "disclaimer": "Respondo solo con el contenido de esta hoja de vida y puedo equivocarme: verifica con las fuentes citadas.",
+    "placeholder": "Pregunta por mi experiencia, proyectos…",
+    "enviar": "Enviar pregunta",
+    "escribiendo": "Leyendo la hoja de vida…",
+    "fuentes": "Fuentes",
+    "sugerenciasTitulo": "Prueba con:",
+    "sugerencia1": "¿Qué hizo en Vesting?",
+    "sugerencia2": "¿Qué certificaciones tiene?",
+    "sugerencia3": "¿Qué experiencia tiene con Microsoft Fabric?",
+    "fallbackModo": "Búsqueda local",
+    "fallbackAviso": "El asistente de IA no está disponible en este momento, así que te muestro los fragmentos de la hoja de vida que mejor responden a tu pregunta:",
+    "fallbackVacio": "No encontré nada sobre eso en la hoja de vida. Prueba con otra pregunta o escríbele a Henry desde Contacto.",
+    "rateLimited": "Muchas preguntas muy seguidas — dame un minuto de respiro y seguimos.",
+    "error": "No pude responder esa pregunta. Intenta de nuevo."
   }
 }

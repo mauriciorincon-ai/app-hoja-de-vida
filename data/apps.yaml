@@ -20,14 +20,17 @@ apps:
     solicitable: false
 
   - id: chat-hoja-de-vida
-    estado: en-construccion
+    estado: en-produccion
     nombre:
       es: "Chat con mi hoja de vida"
       en: "Chat with my résumé"
     descripcion:
-      es: "Pregúntale a mi hoja de vida: RAG con índice en build-time y adapter conmutable Azure AI Foundry ↔ Gemini — un solo código, dos nubes (AI-102 en acción)."
-      en: "Ask my résumé anything: RAG with a build-time index and a switchable Azure AI Foundry ↔ Gemini adapter — one codebase, two clouds (AI-102 in action)."
-    solicitable: true
+      es: "Ya está vivo en esta página (botón flotante): RAG con índice en build-time, citas navegables, proveedor LLM conmutable por env (Groq · Gemini · Azure AI Foundry · Claude) y fallback local — nunca se cae (AI-102 en acción)."
+      en: "Live on this very page (floating button): RAG with a build-time index, navigable citations, an env-switchable LLM provider (Groq · Gemini · Azure AI Foundry · Claude) and a local fallback — it never goes down (AI-102 in action)."
+    enlaces:
+      - etiqueta: "GitHub"
+        url: "https://github.com/mauriciorincon-ai/app-hoja-de-vida"
+    solicitable: false
 
   - id: fabric-analitica-e2e
     estado: en-exploracion

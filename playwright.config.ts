@@ -20,5 +20,8 @@ export default defineConfig({
     url: "http://localhost:3000/es",
     reuseExistingServer: !process.env.CI,
     timeout: 240_000,
+    // El chat corre SIEMPRE con el proveedor mock en e2e (determinista,
+    // cero red, cero tokens — la CI jamás llama a un proveedor real)
+    env: { ...process.env, CHAT_PROVIDER: "mock", CHAT_ENABLED: "true" },
   },
 });

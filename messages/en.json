@@ -95,5 +95,24 @@
     "titulo": "Something went wrong",
     "cuerpo": "It's been logged; try reloading.",
     "recargar": "Reload"
+  },
+  "chat": {
+    "abrir": "Ask my résumé",
+    "cerrar": "Close chat",
+    "titulo": "Ask my résumé",
+    "disclaimer": "I answer only with the content of this résumé and I can make mistakes: verify with the cited sources.",
+    "placeholder": "Ask about my experience, projects…",
+    "enviar": "Send question",
+    "escribiendo": "Reading the résumé…",
+    "fuentes": "Sources",
+    "sugerenciasTitulo": "Try:",
+    "sugerencia1": "What did he do at Vesting?",
+    "sugerencia2": "Which certifications does he hold?",
+    "sugerencia3": "What's his experience with Microsoft Fabric?",
+    "fallbackModo": "Local search",
+    "fallbackAviso": "The AI assistant isn't available right now, so here are the résumé excerpts that best answer your question:",
+    "fallbackVacio": "I couldn't find anything about that in the résumé. Try another question or write to Henry from the Contact section.",
+    "rateLimited": "Lots of questions in a row — give me a minute to breathe and we'll continue.",
+    "error": "I couldn't answer that one. Please try again."
   }
 }

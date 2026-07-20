@@ -1,6 +1,6 @@
 # ADR-006: Perf budget — interactive 4000ms and LCP 3500ms renegotiated; font strategy
 
-- **Status:** accepted
+- **Status:** accepted (amended in Sprint 003 — see Amendment below)
 - **Date:** 2026-07-05
 - **Sprint:** 001
 
@@ -54,3 +54,24 @@ server-component showcase, deferred Motion features, trimmed i18n payload, font 
 - Report upstream to kit-app: the default budget's `interactive 3500` is unreachable for
   any Next-16 client-interactive page under mobile simulation; suggest 4000ms default or
   replacing the metric with TBT.
+
+## Amendment (Sprint 003, 2026-07-06): LCP 3500 → 3850ms — engineering margin
+
+S2 left a boundary flake on record: HOME `/en` measured ~3515ms against the 3500ms line —
+a budget pinned exactly at the typical measured value turns CI into a coin flip
+(`wiki/patterns/lcp-nace-estatico.md`, budget corollary). Before widening the line, the
+remaining real-improvement levers were re-evaluated and all are already applied or were
+deliberately rejected:
+
+- Fraunces ships one static weight (500), latin subset, self-hosted and preloaded by
+  `next/font` — no payload left to trim.
+- The LCP element is fully static HTML (no motion wrapper); what re-registers LCP is the
+  documented Chrome behavior on the brand-font swap repaint under simulated slow-4G.
+- The only remaining lever, `display: optional` on Fraunces, was rejected above (strips the
+  editorial identity from exactly the cold first visit that matters for a recruiter) — that
+  decision stands.
+
+Therefore: **`largest-contentful-paint` budget 3500 → 3850ms (~10% engineering margin)**.
+FCP ≤1500, CLS ≤0.1 and INP ≤200 stay strict; content remains visible from FCP at all
+times. The 3850 line still fails on any real regression (the S2 detail-page bug was
+3.6–4.1s — it would still trip).
