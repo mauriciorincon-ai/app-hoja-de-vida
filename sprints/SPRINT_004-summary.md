@@ -5,7 +5,7 @@ status: closed
 opened: 2026-07-20
 closed: 2026-07-20
 branch: sprint-004/la-vitrina-completa
-pr: <pendiente — se completa al abrir el PR>
+pr: https://github.com/mauriciorincon-ai/app-hoja-de-vida/pull/6
 ---
 
 # Sprint 004 Summary — CV Viva
