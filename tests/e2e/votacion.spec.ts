@@ -56,6 +56,91 @@ test.describe("Votación del roadmap", () => {
     ).toHaveText("—");
   });
 
+  test("votar con teclado sube el conteo (red interceptada, sin BD)", async ({
+    page,
+  }) => {
+    // Gate de teclado + estado "votado". No necesita Supabase: se intercepta la
+    // red (el server no se toca), así el gate corre SIEMPRE, no solo con BD.
+    const objetivo = features[0];
+    await page.route("**/api/roadmap/votos", (route) =>
+      route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify({ conteo: [] }), // 0 votos → botones habilitados
+      }),
+    );
+    await page.route("**/api/roadmap/votar", (route) =>
+      route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify({
+          ok: true,
+          app: objetivo.app,
+          feature: objetivo.feature,
+          total: 1, // el total REAL que devolvería la RPC
+        }),
+      }),
+    );
+
+    await page.goto("/es");
+    await page.locator("#roadmap").scrollIntoViewIfNeeded();
+
+    const fila = page.locator(
+      `#roadmap [data-feature-id="${objetivo.feature}"][data-app-id="${objetivo.app}"]`,
+    );
+    const boton = fila.locator('[data-testid="roadmap-votar"]');
+    const conteoEl = fila.locator('[data-testid="roadmap-conteo"]');
+
+    // Operable SOLO por teclado: foco + Enter (es un <button> nativo)
+    await expect(boton).toBeEnabled({ timeout: 15_000 });
+    await boton.focus();
+    await expect(boton).toBeFocused();
+    await page.keyboard.press("Enter");
+
+    // El conteo mostrado = el total REAL devuelto, y el botón pasa a "Ya votaste"
+    await expect(boton).toHaveText(/Ya votaste/);
+    await expect(conteoEl).toHaveText(/1 voto/);
+  });
+
+  test("rate-limited: aviso honesto y el botón sigue disponible para reintentar", async ({
+    page,
+  }) => {
+    // El 429 del route es inalcanzable manualmente (12/min, pocas features): se
+    // fuerza interceptando el POST. Verifica que el estado "rate-limited" se
+    // RENDERIZA y que el voto NO se marca como emitido.
+    const objetivo = features[0];
+    await page.route("**/api/roadmap/votos", (route) =>
+      route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify({ conteo: [] }),
+      }),
+    );
+    await page.route("**/api/roadmap/votar", (route) =>
+      route.fulfill({
+        status: 429,
+        contentType: "application/json",
+        body: JSON.stringify({ error: "rate_limited" }),
+      }),
+    );
+
+    await page.goto("/es");
+    await page.locator("#roadmap").scrollIntoViewIfNeeded();
+
+    const fila = page.locator(
+      `#roadmap [data-feature-id="${objetivo.feature}"][data-app-id="${objetivo.app}"]`,
+    );
+    const boton = fila.locator('[data-testid="roadmap-votar"]');
+
+    await expect(boton).toBeEnabled({ timeout: 15_000 });
+    await boton.click();
+
+    // Aviso claro; el voto NO se registra y el botón permite reintentar
+    await expect(fila.getByText(/Vas muy rápido/)).toBeVisible();
+    await expect(boton).not.toHaveText(/Ya votaste/);
+    await expect(boton).toBeEnabled();
+  });
+
   test("votar sube el contador REAL (Postgres)", async ({ page }, testInfo) => {
     test.skip(
       !process.env.SUPABASE_URL,

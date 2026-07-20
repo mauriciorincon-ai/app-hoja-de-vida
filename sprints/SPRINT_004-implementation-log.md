@@ -284,3 +284,45 @@ dispara al montar la isla (cierra el código muerto y completa el estándar de o
 Notas informativas del auditor (no accionables / ya declaradas): rate limit en memoria por instancia
 (ADR-004), conteo bajo concurrencia READ COMMITTED (ningún voto se pierde), GET sin rate limit
 (aceptable a esta escala).
+
+## Auditoría final pre-cierre (dos fases, independiente del remate del build)
+
+Segunda pasada adversarial completa (solo-lectura → aprobación → fixes) sobre el diff entero, la
+migración, los routes, la isla, los schemas, el CI y los tests, más un contraste ítem-por-ítem del
+alcance contra `SPRINT_004.md`. **Veredicto: LISTO PARA CIERRE — cero críticos/altos.** CI del PR #6
+verde (quality·e2e·integration·lighthouse) y ruleset `main-protegida` verificada por API (exige los
+4 checks, incluida `integration`).
+
+Falsos positivos descartados **con evidencia**, no por confianza: el route lee `data/apps.yaml` en
+runtime (vía `esFeatureValida`) → verificado que `route.js.nft.json` SÍ traza el YAML (igual que la
+página brochure); el chat necesitó `outputFileTracingIncludes` solo porque `public/` no se traza por
+defecto. Contador honesto: ningún camino muestra número inventado/optimista/cacheado.
+
+**2 hallazgos Medios pagados en Fase 2** (gaps de cobertura que dejaban claims del DoD sin respaldo
+automatizado):
+
+- **M1 — teclado en la votación** (DoD lo marcaba ✅ sin test que lo ejercite) + **B1 — estado
+  `rate-limited` nunca renderizado en ningún test** (e inalcanzable manualmente: 12/min con pocas
+  features). Pago: 2 e2e con red interceptada en `votacion.spec.ts` (foco+Enter sube el conteo al
+  total real; 429 forzado muestra el aviso y deja el botón para reintentar). No exigen BD → corren
+  siempre. +4 ejecuciones (×2 proyectos).
+- **M2 — la verificación 42501 fue manual, sin test de regresión.** La superficie RLS-sin-políticas
+  + REVOKE + RPC es "doblemente invisible": una migración futura que re-otorgue `SELECT` al anon
+  devolvería `[]` en silencio, no error. Pago: `tests/integration/votes-rls.dbtest.ts` — el anon
+  directo a `votes` (SELECT e INSERT) debe fallar con `42501`; con guarda explícita de que `[]` sin
+  error NO es "pasa". Verificado contra Postgres real (2/2). `pnpm test:db` pasa de 7 a 9.
+
+**2 hallazgos Bajos:**
+
+- **B2 — brochure etiquetaba todos los enlaces "Ver el repositorio"** (fijo): ahora usa
+  `enlace.etiqueta` del YAML; clave `verRepo` retirada de `messages/*.json` (sin refs). Correcto hoy
+  (solo hay GitHub) y a prueba de un futuro enlace de demo.
+- **B3 — `dynamicParams=false` en rutas SSG: EVALUADO Y DESCARTADO.** Se aplicó y la verificación
+  empírica reveló que convierte el 404-limpio-vía-`notFound()` en un `NoFallbackError` que Next
+  imprime por cada hit a una URL inexistente (ruido en logs/Sentry). Beneficio nulo a escala
+  personal; revertido. Lección: un endurecimiento se verifica por su efecto observado, no por su
+  atractivo teórico.
+
+**Verificación local:** typecheck ✓ · lint ✓ · `pnpm test` 129 ✓ (cobertura 92%) · `pnpm build` ✓
+(brochures y case studies siguen SSG) · e2e afectados 30/30 ✓ (2 nuevos verdes en chromium+mobile) ·
+`pnpm test:db` 9/9 ✓ contra Supabase local. **Totales: 129 + 9 dbtest + 88 e2e = 226.**

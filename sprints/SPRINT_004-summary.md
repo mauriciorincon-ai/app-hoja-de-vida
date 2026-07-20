@@ -38,9 +38,10 @@ invocación solo-usuario), declarados como sus acciones de cierre.
 
 ## DoD — checklist (6+1)
 
-- ✅ **Testing:** 129 unit/integration (`quality`, 92% cobertura) + 7 dbtest contra Postgres real +
-  84 e2e (chromium+mobile) incl. votación real, brochures, nav móvil, axe. Regla 9 aplicada: home
-  y header re-corrieron sus suites enteras en su fase.
+- ✅ **Testing:** 129 unit/integration (`quality`, 92% cobertura) + 9 dbtest contra Postgres real +
+  88 e2e (chromium+mobile) incl. votación real (+ teclado y estado rate-limited), regresión de la
+  superficie RLS (anon directo → 42501), brochures, nav móvil, axe. Regla 9 aplicada: home y header
+  re-corrieron sus suites enteras en su fase.
 - ✅ **CI/CD:** pipeline de 4 jobs (quality·e2e·integration·lighthouse); `integration` corre la
   votación contra Postgres real; **añadido a la ruleset `main-protegida` el mismo sprint**.
 - ✅ **Observabilidad:** eventos `roadmap_visto`/`voto_emitido`/`voto_rechazado`/`brochure_vista`;
@@ -57,7 +58,7 @@ invocación solo-usuario), declarados como sus acciones de cierre.
 
 ## Métricas técnicas
 
-- Cobertura `quality`: **92%** (umbral 70%). Tests: 129 + 7 dbtest + 84 e2e = **220**.
+- Cobertura `quality`: **92%** (umbral 70%). Tests: 129 + 9 dbtest + 88 e2e = **226**.
 - Rutas SSG nuevas: 4 brochures + roadmap en la HOME. Superficie de datos: 1 tabla + 2 RPC.
 - Costo real: **US$0** (todo free tier). Presupuesto ≤US$10/mes cumplido con holgura.
 
@@ -86,6 +87,14 @@ invocación solo-usuario), declarados como sus acciones de cierre.
   sembrado en los callbacks de la promesa (mismo lote que habilita los botones); `setConteos` con
   merge. No violaba el contador honesto (nunca un número inventado). Evento `roadmap_visto` (muerto)
   ahora emitido.
+- **Auditoría final pre-cierre (independiente del remate del build):** cero críticos/altos. Se
+  cerraron 3 gaps de cobertura de test que dejaban claims del DoD sin respaldo automatizado:
+  (a) teclado end-to-end en la votación y (b) render del estado rate-limited — ambos como e2e con
+  red interceptada (no exigen BD); (c) regresión de la superficie "doblemente invisible" (anon
+  directo a `votes` → 42501) como `votes-rls.dbtest.ts` contra Postgres real. Un endurecimiento
+  opcional (`dynamicParams=false` en las rutas SSG) se **evaluó y descartó**: convierte el 404
+  limpio vía `notFound()` en un `NoFallbackError` que ensucia logs/Sentry, sin beneficio a esta
+  escala.
 
 ## Qué salió bien / qué generó fricción
 

@@ -223,7 +223,7 @@ export default async function BrochurePage({ params }: Params) {
                     target="_blank"
                     className="flex min-h-11 items-center gap-1 text-sm text-ink-2 underline decoration-paper-3 underline-offset-4 transition-colors duration-[120ms] hover:text-ink-0 hover:decoration-ink-3"
                   >
-                    {t("verRepo")}
+                    {enlace.etiqueta}
                     <span aria-hidden="true">↗</span>
                   </a>
                 ))}
