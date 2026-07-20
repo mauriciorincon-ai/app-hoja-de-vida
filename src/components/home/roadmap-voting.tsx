@@ -55,11 +55,16 @@ export function RoadmapVoting({ grupos }: { grupos: GrupoRoadmap[] }) {
   const [votados, setVotados] = useState<Record<string, boolean>>({});
   const [estadoVoto, setEstadoVoto] = useState<Record<string, VotoEstado>>({});
 
-  // Carga inicial de conteos reales + hidratación del dedup local. El dedup se
-  // siembra en el `.finally` (callback de promesa, tras montar) y no en el
-  // cuerpo del effect: leer localStorage en el primer render rompería la
-  // hidratación (el server no lo ve), así que se aplica post-hidratación.
+  // Carga inicial de conteos reales + hidratación del dedup local. Regla dura:
+  // hasta que el estado deja de ser "cargando" los botones están DESHABILITADOS
+  // (ver `deshabilitado` abajo), así que ningún voto ocurre antes de que estén
+  // listos los conteos Y el dedup. El dedup (`votados`) se siembra dentro de los
+  // callbacks de la promesa —no en el cuerpo del effect (leer localStorage en el
+  // primer render rompería la hidratación) y no en un `.finally` posterior (dejaría
+  // una ventana entre habilitar los botones y sembrar el dedup)— en el MISMO lote
+  // que la transición de estado que habilita los botones.
   useEffect(() => {
+    trackEvent("roadmap_visto");
     const iniciales: Record<string, boolean> = {};
     for (const g of grupos) {
       for (const f of g.features) {
@@ -82,15 +87,16 @@ export function RoadmapVoting({ grupos }: { grupos: GrupoRoadmap[] }) {
           if (!vivo) return;
           const mapa: Record<string, number> = {};
           for (const c of data.conteo) mapa[`${c.app}:${c.feature}`] = c.total;
-          setConteos(mapa);
+          // Merge (no reemplazo): preserva cualquier conteo real ya fijado.
+          setConteos((prev) => ({ ...prev, ...mapa }));
+          setVotados(iniciales);
           setEstado("listo");
         },
       )
       .catch(() => {
-        if (vivo) setEstado("no-disponible");
-      })
-      .finally(() => {
-        if (vivo && Object.keys(iniciales).length > 0) setVotados(iniciales);
+        if (!vivo) return;
+        setVotados(iniciales);
+        setEstado("no-disponible");
       });
     return () => {
       vivo = false;
@@ -165,8 +171,13 @@ export function RoadmapVoting({ grupos }: { grupos: GrupoRoadmap[] }) {
               const conteo = conteos[clave];
               const voto = estadoVoto[clave] ?? "idle";
               const yaVoto = votados[clave] === true;
+              // Deshabilitado mientras carga: ningún voto ocurre antes de que
+              // los conteos reales y el dedup estén listos (evita la carrera).
               const deshabilitado =
-                noDisponible || yaVoto || voto === "enviando";
+                estado === "cargando" ||
+                noDisponible ||
+                yaVoto ||
+                voto === "enviando";
 
               return (
                 <li

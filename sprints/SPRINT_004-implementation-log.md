@@ -209,3 +209,78 @@ en navegador contra Postgres real). **Añadido a la ruleset `main-protegida`** e
 **Regla 9:** el header vive en todas las páginas ⇒ **suite e2e ENTERA re-corrida**: 84 tests
 verde en chromium + mobile (home, chat, form, detalle, reduced-motion, axe, brochure, nav-movil,
 votacion). typecheck + lint limpios.
+
+## Fase 5 — CIERRE DE CICLO
+
+- **MANUAL-DE-USO.md:** § roadmap/votación (edición del YAML, contador honesto, límites del dedup
+  por navegador, cero PII), § brochures (alta por app, "solo lo real"), § menú móvil, historial S4.
+- **Guía v1 ACUMULATIVA** (`docs/GUIA-DE-PRUEBA.html`): 35 pruebas S1–S4 con chip de origen y
+  filtros, gate mínimo ⭐ de 10 (solo juicio humano/dispositivo/proveedor real), localStorage
+  versionado `s004`, autocontenida. **Kit de prueba** (`docs/kit-de-prueba/`): preguntas de
+  calibración del chat + flujo de votación.
+- **BLUEPRINT.html:** as-built del ciclo H1 (Vercel + Supabase + Groq + Resend + GitHub, costo
+  real US$0, punto único de falla = cuenta GitHub con 2FA, degradación con gracia).
+- **ADRs:** 011 (votación/Supabase) + 012 (brochure schema y ruta).
+- **`/design-sync`:** el skill es de invocación **solo-usuario** (`disable-model-invocation`) — no
+  ejecutable autónomamente; hacer el sync con la herramienta cruda arriesga un reemplazo total (el
+  skill orquesta el sync incremental). Declarado como acción [TÚ] del cierre. El `design-system.md`
+  no cambió sus tokens este sprint (el único cambio de color fue usar `ink-2` en vez de `ink-3`,
+  ambos ya del sistema).
+- **Summary** `SPRINT_004-summary.md` generado.
+
+## Desviación del plan (registro final)
+
+Ninguna desviación de alcance respecto a la orden. Ajustes menores dentro de los grados de
+libertad, todos declarados: (1) `appsSchema` completo a `.strict()` (fail-safe, más allá de lo
+pedido); (2) reglas 11–13 del kit añadidas al CLAUDE.md local (el repo se estampó pre-v1.0 y nunca
+las recibió; este sprint entrega la primera guía acumulativa); (3) `/design-sync` como paso [TÚ]
+(skill solo-usuario).
+
+## Retrospectiva (del builder — la de la planeadora se hace en la retro del sprint)
+
+### Qué salió bien
+- El impuesto Supabase-en-CI ya destilado (K3–K6) hizo la primera capa de datos casi sin fricción.
+- El contador honesto quedó probado end-to-end: `curl` sin BD → 503; e2e con BD caída forzada →
+  botones off + "no disponible"; nunca un cero inventado.
+- `mock` como proveedor de primera clase + `stdout:pipe` pagaron su promesa (CI determinista,
+  logs visibles).
+
+### Qué generó fricción
+- Dos quirks NUEVOS del Supabase local en Mac/Colima (puertos en conflicto con Innmobiliaria;
+  `vector`/analytics no arranca sobre virtiofs) — no estaban en el patrón wiki.
+- Diferir axe a F4 dejó pasar un contraste a F2 (se cazó, pero una fase tarde).
+
+### Qué cambiar del proceso
+- Añadir los 2 quirks del Mac al patrón `supabase-en-ci-y-cloud`.
+- Regla 9 debería nombrar axe explícitamente (pantalla tocada ⇒ su scan axe en la misma fase).
+
+### Aprendizajes técnicos
+- `DISABLE_RATE_LIMIT` (y cualquier flag de comportamiento) se lee POR REQUEST, no al cargar el
+  módulo, o no es testeable ni respeta cambios de entorno.
+- La superficie de acceso con RLS-sin-políticas + RPC SECURITY DEFINER es "doblemente invisible":
+  hay que verificar explícitamente que el anon NO puede tocar la tabla directa (42501), no solo
+  que las RPC funcionan.
+
+## Remate de auditoría de dos fases (método v1.9.1)
+
+**Fase 1 (solo-lectura, staff engineer adversarial):** revisó los 54 archivos del diff, la migración
+SQL, los route handlers, la isla, los schemas, el brochure, el header, el CI y los 8 tests nuevos.
+Veredicto: **cero críticos/altos**. Seguridad de la votación sólida (RLS sin políticas + RPC + GRANTs
+verificados; cero PII; anon key server-only). Contador honesto: el gate se sostiene (ningún camino
+muestra número inventado/optimista/cacheado). SSG/LCP de brochures, nav móvil, schemas `.strict()`,
+CI y tests: limpios.
+
+**1 defecto MEDIO (real) cazado y pagado en Fase 2:** carrera en la ventana "cargando" de la isla —
+los botones estaban habilitados y el dedup se sembraba en el `.finally` (tarde). Escenarios: (a) un
+voto durante la carga podía quedar oculto porque el `setConteos(mapa)` posterior reemplazaba el
+objeto entero; (b) un ya-votante podía votar de nuevo antes de sembrarse el dedup. **Fix:** botones
+deshabilitados mientras `estado === "cargando"`; el dedup (`votados`) se siembra en los callbacks de
+la promesa, en el MISMO lote que la transición que habilita los botones; `setConteos` hace merge en
+vez de reemplazo. Verificado: votación e2e 6/6 con BD real.
+
+**1 nota BAJA pagada:** el evento `roadmap_visto` estaba declarado pero nunca se emitía — ahora se
+dispara al montar la isla (cierra el código muerto y completa el estándar de observabilidad).
+
+Notas informativas del auditor (no accionables / ya declaradas): rate limit en memoria por instancia
+(ADR-004), conteo bajo concurrencia READ COMMITTED (ningún voto se pierde), GET sin rate limit
+(aceptable a esta escala).
