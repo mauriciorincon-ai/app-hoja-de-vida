@@ -1,5 +1,6 @@
 # CI del kit-app — corre en cada PR y en push a main.
-# Gates: typecheck, lint, tests+cobertura, build, audit de deps, e2e, Lighthouse vs perf-budget.json
+# Gates: typecheck, lint, tests+cobertura, build, audit de deps, e2e, Lighthouse
+# vs perf-budget.json, e integración con Postgres real (Supabase) para la votación.
 name: CI
 on:
   pull_request:
@@ -33,7 +34,48 @@ jobs:
         with: { node-version: 22, cache: pnpm }
       - run: pnpm install --frozen-lockfile
       - run: pnpm exec playwright install --with-deps chromium
-      - run: pnpm test:e2e        # incluye scans axe (@axe-core/playwright)
+      - run: pnpm test:e2e        # incluye scans axe (@axe-core/playwright); la
+                                  # votación corre en modo "no disponible" sin BD
+                                  # (el gate real-vote vive en el job integration)
+
+  # Votación con Postgres REAL (S4): la única capa de datos de la app.
+  # Patrón wiki/patterns/supabase-en-ci-y-cloud.md (impuesto K1–K6 ya pagado).
+  integration:
+    runs-on: ubuntu-latest
+    needs: quality
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with: { version: 11 }
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: pnpm }
+      - run: pnpm install --frozen-lockfile
+      - uses: supabase/setup-cli@v1
+        with: { version: latest }
+      - name: Supabase local (aplica migraciones al arrancar)
+        run: supabase start
+      - name: Exportar env de Supabase al job
+        # `supabase status -o env` ENTRECOMILLA los valores: el sed los quita o
+        # createClient rechaza la URL con error opaco (antídoto K3).
+        run: |
+          supabase status -o env | sed 's/="/=/; s/"$//' > /tmp/sb.env
+          source /tmp/sb.env
+          echo "SUPABASE_URL=$API_URL" >> "$GITHUB_ENV"
+          echo "SUPABASE_ANON_KEY=$ANON_KEY" >> "$GITHUB_ENV"
+      - name: Humo de la credencial (una URL/key inválida se descubre YA)
+        run: |
+          code=$(curl -s -o /dev/null -w '%{http_code}' "$SUPABASE_URL/rest/v1/" \
+            -H "apikey: $SUPABASE_ANON_KEY")
+          echo "REST → $code"; test "$code" = "200"
+      - name: Tests contra Postgres real (route + cliente)
+        env:
+          DISABLE_RATE_LIMIT: "1"   # en CI todo sale de localhost
+        run: pnpm test:db
+      - run: pnpm exec playwright install --with-deps chromium
+      - name: e2e de votación en el navegador contra Postgres real
+        # SUPABASE_URL/ANON_KEY viajan por process.env al webServer de Playwright;
+        # el gate "votar sube el contador real" corre de verdad (no se salta).
+        run: pnpm exec playwright test votacion.spec.ts
 
   lighthouse:
     runs-on: ubuntu-latest
@@ -47,11 +89,15 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
       - name: Lighthouse CI contra perf-budget.json
-        # El budget (ADR-006) aplica también a las rutas nuevas del S2
+        # Solo páginas PÚBLICAS (wiki: lighthouse-solo-paginas-publicas). El budget
+        # (ADR-006) cubre las rutas nuevas del S4: el roadmap vive en la HOME (/),
+        # las brochures son rutas públicas propias y se auditan aquí.
         run: |
           npm i -g @lhci/cli
           lhci autorun --collect.startServerCommand="pnpm start" \
             --collect.url=http://localhost:3000 \
             --collect.url=http://localhost:3000/es/proyectos/vesting \
             --collect.url=http://localhost:3000/es/cv \
+            --collect.url=http://localhost:3000/es/apps/hoja-de-vida \
+            --collect.url=http://localhost:3000/es/apps/chat-hoja-de-vida \
             --assert.budgetsFile=./perf-budget.json

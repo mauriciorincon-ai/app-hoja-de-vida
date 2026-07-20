@@ -14,7 +14,10 @@
     "contacto": "Contacto",
     "cambiarIdioma": "Switch to English",
     "saltarContenido": "Saltar al contenido",
-    "descargarCv": "CV (PDF)"
+    "descargarCv": "CV (PDF)",
+    "abrirMenu": "Abrir el menú",
+    "cerrarMenu": "Cerrar el menú",
+    "menu": "Menú"
   },
   "hero": {
     "ctaApps": "Explora las apps",

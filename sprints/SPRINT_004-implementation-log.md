@@ -177,3 +177,35 @@ cobertura. typecheck + lint limpios.
 (#9c9a90) sobre paper-0 → contraste 2.7 (< 4.5 AA). `ink-3` es el tono decorativo del design
 system, no para texto real. Corregido a `text-ink-2`. Lección: **correr axe en la misma fase que
 toca la UI**, no diferirlo — casó una regresión de contraste en la sección del sprint anterior.
+
+## Fase 4 — Endurecimiento
+
+**Nav móvil (deuda S1, pagada):** el `<nav>` de escritorio era `hidden md:flex` sin alternativa en
+móvil — las rutas nuevas (roadmap, brochures) lo volvieron impostergable. Disclosure hamburguesa
+accesible en `header.tsx`: `aria-expanded`/`aria-controls`, iconos Lucide, **Escape cierra y
+devuelve el foco al botón**, cada enlace cierra el menú. Strings `abrirMenu`/`cerrarMenu`/`menu`
+ES+EN.
+
+**e2e nuevos:**
+
+- `votacion.spec.ts` — **BD caída forzada** (intercept 503 del GET): aviso honesto visible + TODOS
+  los botones deshabilitados + conteo "—" (corre siempre). **Votar sube el contador REAL** contra
+  Postgres + **segundo voto rechazado** (dedup): corren contra Supabase local; cada test×proyecto
+  vota una feature distinta (sin carrera, patrón strict-mode por-proyecto).
+- `nav-movil.spec.ts` — abre/cierra, teclado (Escape→foco al botón), navega por la UI, y el toggle
+  solo existe en móvil. Selector estable por `aria-controls` (el accessible name cambia al abrir).
+- Rutas de brochure añadidas al scan de axe (16/16 AA).
+
+**Playwright config:** `stdout/stderr: "pipe"` (antídoto K3 — sin esto los logs Pino del server son
+invisibles en CI); el webServer pasa `SUPABASE_URL/ANON_KEY` (por `...process.env`) +
+`VOTACION_ENABLED` + `DISABLE_RATE_LIMIT=1`.
+
+**CI:** job nuevo **`integration`** (Supabase local vía `supabase/setup-cli` → `supabase start` →
+export de env con el `sed` anti-comillas → humo de la credencial → `pnpm test:db` → e2e de votación
+en navegador contra Postgres real). **Añadido a la ruleset `main-protegida`** el mismo sprint
+(regla 2026-07-10): checks ahora `quality`/`e2e`/`lighthouse`/`integration`. Lighthouse audita las
+2 rutas de brochure (públicas nuevas); el roadmap ya entra por `/` (HOME).
+
+**Regla 9:** el header vive en todas las páginas ⇒ **suite e2e ENTERA re-corrida**: 84 tests
+verde en chromium + mobile (home, chat, form, detalle, reduced-motion, axe, brochure, nav-movil,
+votacion). typecheck + lint limpios.
