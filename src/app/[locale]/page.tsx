@@ -9,11 +9,13 @@ import { Hero } from "@/components/home/hero";
 import { Logros } from "@/components/home/logros";
 import { Perfil } from "@/components/home/perfil";
 import { Proyectos } from "@/components/home/proyectos";
+import { Roadmap } from "@/components/home/roadmap";
 import { Skills } from "@/components/home/skills";
 import { Trayectoria } from "@/components/home/trayectoria";
 import type { Locale } from "@/i18n/routing";
 import { getApps, getCv } from "@/lib/content";
 import { SITE_URL } from "@/lib/site";
+import { appsConRoadmap } from "@/lib/votes/roadmap";
 
 export default async function HomePage({
   params,
@@ -25,6 +27,7 @@ export default async function HomePage({
 
   const cv = getCv(locale as Locale);
   const { apps } = getApps();
+  const appsRoadmap = appsConRoadmap();
   const tMeta = await getTranslations({ locale, namespace: "meta" });
 
   // JSON-LD Person + WebSite (gate ATS/SEO). Person.name lleva el nombre
@@ -63,6 +66,7 @@ export default async function HomePage({
         <Skills skills={cv.skills} />
         <Certificaciones certificaciones={cv.certificaciones} />
         <AppsShowcase apps={apps} />
+        {appsRoadmap.length > 0 && <Roadmap apps={appsRoadmap} />}
         <Contacto identidad={cv.identidad} apps={apps} />
       </main>
       <Footer identidad={cv.identidad} />

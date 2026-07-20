@@ -120,34 +120,94 @@ const localizedText = z.object({
   en: z.string().min(1),
 });
 
-export const appsSchema = z.object({
-  apps: z
-    .array(
-      z.object({
-        id: z
-          .string()
-          .min(1)
-          .regex(/^[a-z0-9-]+$/, "id must be a kebab-case slug"),
-        estado: z.enum(appEstados),
-        nombre: localizedText,
-        descripcion: localizedText,
-        // Evidencia pública de la card (repo, demo): etiqueta universal (p. ej. "GitHub")
-        enlaces: z
-          .array(
-            z.object({
-              etiqueta: z.string().min(1),
-              url: z.string().url(),
-            }),
-          )
-          .default([]),
-        solicitable: z.boolean().default(true),
-      }),
-    )
-    .min(1),
-});
+// Slug kebab-case reutilizable (id de app y de feature del roadmap). El mismo
+// alfabeto que valida la BD de votación (RPC emitir_voto) — coherencia borde↔BD.
+const slug = z
+  .string()
+  .min(1)
+  .max(60)
+  .regex(/^[a-z0-9-]+$/, "must be a kebab-case slug");
+
+// Feature del roadmap votable (S4). El par (app.id, feature.id) es la clave del
+// voto; por eso `id` es un slug estable — cambiarlo reinicia su conteo.
+const roadmapFeature = z
+  .object({
+    id: slug,
+    titulo: localizedText,
+    descripcion: localizedText,
+  })
+  .strict();
+
+// Brochure animada por app (S4, ADR-012). Solo apps con funcionalidad real
+// ("solo lo real"): su presencia da de alta la página /[locale]/apps/<id>.
+const brochureFeature = z
+  .object({
+    titulo: localizedText,
+    descripcion: localizedText,
+  })
+  .strict();
+
+const brochureMetrica = z
+  .object({
+    // Cifra real y verificable; el Counter la anima desde el HTML estático.
+    valor: z.number(),
+    sufijo: z.string().default(""),
+    etiqueta: localizedText,
+  })
+  .strict();
+
+const brochure = z
+  .object({
+    // Frase corta bajo el título (subtítulo del hero).
+    tagline: localizedText,
+    // Párrafo de apertura — candidato LCP: se pinta estático, sin motion JS.
+    intro: localizedText,
+    funcionalidades: z.array(brochureFeature).min(1),
+    metricas: z.array(brochureMetrica).default([]),
+    // Tecnologías (strings universales, no localizados) — como proyectos.stack.
+    stack: z.array(z.string().min(1)).default([]),
+  })
+  .strict();
+
+export const appsSchema = z
+  .object({
+    apps: z
+      .array(
+        z
+          .object({
+            id: slug,
+            estado: z.enum(appEstados),
+            nombre: localizedText,
+            descripcion: localizedText,
+            // Evidencia pública de la card (repo, demo): etiqueta universal (p. ej. "GitHub")
+            enlaces: z
+              .array(
+                z
+                  .object({
+                    etiqueta: z.string().min(1),
+                    url: z.string().url(),
+                  })
+                  .strict(),
+              )
+              .default([]),
+            solicitable: z.boolean().default(true),
+            // Roadmap votable de la app (S4). Vacío = la app no aparece en la
+            // sección de votación. Editar aquí + push = roadmap actualizado.
+            roadmap: z.array(roadmapFeature).default([]),
+            // Brochure animada (S4). Presente = la app gana su página
+            // /[locale]/apps/<id>. Solo apps con funcionalidad real.
+            brochure: brochure.optional(),
+          })
+          .strict(),
+      )
+      .min(1),
+  })
+  .strict();
 
 export type Apps = z.infer<typeof appsSchema>;
 export type AppCard = Apps["apps"][number];
+export type RoadmapFeature = z.infer<typeof roadmapFeature>;
+export type Brochure = z.infer<typeof brochure>;
 
 /** Solicitud de acceso (formulario + endpoint). `website` es el honeypot. */
 export const solicitudSchema = z.object({

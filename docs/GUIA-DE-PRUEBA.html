@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="es-CO">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guía de prueba — CV Viva</title>
+<!--
+  GUÍA DE PRUEBA VIVA Y ACUMULATIVA — CV Viva (app-hoja-de-vida).
+  v1 del ciclo H1: contiene TODAS las pruebas vigentes S1–S4 (bola de nieve).
+  Autocontenida (cero CDNs). Casillas en localStorage con prefijo versionado
+  por sprint (NS abajo). Origen por prueba (Nuevo·S4 / Mejorado·S4 / S1–S3
+  heredada = regresión) con filtros. Gate mínimo ⭐ = solo lo que ninguna
+  automatización puede verificar (juicio humano, hardware/dispositivo real,
+  proveedor LLM real). Referencia: app-habla/docs/GUIA-DE-PRUEBA.html.
+-->
+<style>
+  :root {
+    --fondo: #fbfbfa; --superficie: #f2f2ef; --borde: #e2e2dd;
+    --tinta: #1e2022; --tinta-suave: #5c6066;
+    --acento: #2f4858; --acento-suave: #dde6ec;
+    --alerta: #a4432f; --alerta-suave: #fbe4dd;
+    --ok: #4f7a4a; --pendiente: #8a6413; --pendiente-suave: #f8ead0;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --fondo: #14171a; --superficie: #1c2024; --borde: #2d333b;
+      --tinta: #f0efec; --tinta-suave: #9aa0a6;
+      --acento: #a8c8dc; --acento-suave: #21303a;
+      --alerta: #f3b3a3; --alerta-suave: #3a2620;
+      --ok: #8dbd86; --pendiente: #e9c470; --pendiente-suave: #33290f;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--fondo); color: var(--tinta);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 16px; line-height: 1.55; }
+  .pagina { max-width: 720px; margin: 0 auto; padding: 24px 18px 80px; }
+  h1 { font-family: Georgia, "Times New Roman", serif; font-weight: 400; font-size: 2rem;
+    line-height: 1.15; margin: 8px 0 4px; text-wrap: balance; }
+  h2 { font-family: Georgia, serif; font-weight: 400; font-size: 1.35rem; margin: 0; text-wrap: balance; }
+  .eyebrow { font-family: ui-monospace, Menlo, monospace; font-size: 0.68rem;
+    letter-spacing: 0.09em; text-transform: uppercase; color: var(--tinta-suave); }
+  p { margin: 0.5em 0; }
+  .suave { color: var(--tinta-suave); }
+  .chica { font-size: 0.875rem; }
+  code { font-family: ui-monospace, Menlo, monospace; font-size: 0.85em;
+    background: var(--superficie); padding: 1px 5px; border-radius: 4px; }
+
+  .url-caja { background: var(--superficie); border: 1px solid var(--borde);
+    border-radius: 10px; padding: 12px 14px; margin: 16px 0; overflow-wrap: anywhere; }
+
+  .progreso { position: sticky; top: 0; z-index: 5; background: var(--fondo);
+    padding: 10px 0 8px; border-bottom: 1px solid var(--borde); margin-bottom: 18px; }
+  .progreso-fila { display: flex; align-items: center; gap: 12px; }
+  .barra { flex: 1; height: 8px; background: var(--superficie); border-radius: 99px; overflow: hidden; }
+  .barra > div { height: 100%; width: 0%; background: var(--ok); transition: width 0.2s ease; }
+  .num { font-family: ui-monospace, Menlo, monospace; font-size: 0.8rem; color: var(--tinta-suave); }
+
+  .filtros { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .filtros button { font: inherit; font-size: 0.82rem; padding: 5px 12px; border-radius: 99px;
+    border: 1px solid var(--borde); background: var(--superficie); color: var(--tinta); cursor: pointer; }
+  .filtros button.activo { background: var(--acento); border-color: var(--acento); color: var(--fondo); }
+
+  .bloque { background: var(--superficie); border: 1px solid var(--borde);
+    border-radius: 14px; padding: 18px; margin: 0 0 18px; }
+  .bloque-cabeza { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
+  .letra { display: grid; place-items: center; width: 28px; height: 28px; flex: none;
+    background: var(--acento); color: var(--fondo); border-radius: 8px;
+    font-family: ui-monospace, Menlo, monospace; font-size: 0.85rem; }
+  .meta-bloque { margin: 2px 0 12px; }
+
+  ul.pasos { list-style: none; margin: 0; padding: 0; }
+  ul.pasos li { display: flex; gap: 10px; align-items: flex-start; padding: 8px 0;
+    border-top: 1px solid var(--borde); }
+  ul.pasos li:first-child { border-top: 0; }
+  ul.pasos li[hidden] { display: none; }
+  ul.pasos input[type="checkbox"] { margin: 4px 0 0; width: 20px; height: 20px; flex: none;
+    accent-color: var(--ok); cursor: pointer; }
+  ul.pasos label { cursor: pointer; }
+
+  .origen { display: inline-block; font-family: ui-monospace, Menlo, monospace; font-size: 0.65rem;
+    letter-spacing: 0.04em; text-transform: uppercase; padding: 1px 8px; border-radius: 99px;
+    border: 1px solid; white-space: nowrap; vertical-align: 2px; margin-left: 6px; }
+  .origen-nuevo { color: var(--acento); border-color: var(--acento); background: var(--acento-suave); }
+  .origen-mejorado { color: var(--pendiente); border-color: var(--pendiente); background: var(--pendiente-suave); }
+  .origen-heredada { color: var(--tinta-suave); border-color: var(--borde); }
+  .minimo { font-size: 0.75rem; white-space: nowrap; margin-left: 4px; }
+
+  .tabla-scroll { overflow-x: auto; margin: 14px 0 0; }
+  table { border-collapse: collapse; width: 100%; font-size: 0.875rem; }
+  th, td { text-align: left; padding: 7px 10px; border: 1px solid var(--borde); vertical-align: top; }
+  th { background: var(--acento-suave); font-weight: 600; }
+  td.valor { color: var(--ok); }
+
+  .reportame { margin-top: 14px; background: var(--alerta-suave); border-left: 3px solid var(--alerta);
+    border-radius: 0 8px 8px 0; padding: 10px 12px; font-size: 0.9rem; }
+  .kit { background: var(--acento-suave); border-left: 3px solid var(--acento);
+    border-radius: 0 8px 8px 0; padding: 10px 12px; font-size: 0.9rem; margin-top: 14px; }
+  footer { margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--borde); }
+  footer details { margin-top: 10px; }
+  footer summary { cursor: pointer; }
+</style>
+</head>
+<body>
+<div class="pagina">
+  <header>
+    <p class="eyebrow">CV Viva · Guía de prueba viva y acumulativa · v1 (cierre de ciclo H1) · Sprint 004 · 2026-07-20</p>
+    <h1>Guía de prueba</h1>
+    <p class="suave">Todas las pruebas vigentes de la app — las nuevas del Sprint 004, las que
+      cambiaron y las heredadas de S1–S3 (regresión). Filtra por origen para correr todo o solo lo
+      que cambió. Las casillas se guardan solas en este navegador.</p>
+    <p class="chica"><strong>Gate mínimo ⭐: 10 pruebas · ~30 min.</strong> Es lo que ninguna
+      automatización puede verificar (juicio humano sobre el contenido, aprobación visual,
+      dispositivo real, proveedor de IA real). Lo que la CI ya respalda (e2e, unit, axe, budgets)
+      queda fuera del mínimo y se corre en pases completos.</p>
+    <div class="url-caja">
+      <p class="eyebrow" style="margin:0 0 6px">URL de prueba</p>
+      <code>https://app-hoja-de-vida-git-sprint-004-la-vitrina-completa.vercel.app</code>
+      <p class="chica suave" style="margin:8px 0 0">Dirección estable de la rama del sprint: no
+        cambia aunque se suban correcciones. Si pide login de Vercel: Settings → Deployment
+        Protection → Vercel Authentication → Disabled. La votación necesita las variables de
+        Supabase configuradas en la preview (ver <code>docs/APROVISIONAMIENTO.md</code>).</p>
+    </div>
+  </header>
+
+  <div class="progreso">
+    <div class="progreso-fila">
+      <div class="barra"><div id="barra-avance"></div></div>
+      <span class="num" id="contador">0/0</span>
+    </div>
+    <div class="filtros" role="group" aria-label="Filtrar pruebas por origen">
+      <button type="button" data-filtro="todo" class="activo">Todo</button>
+      <button type="button" data-filtro="cambios">Lo que cambió en S4</button>
+      <button type="button" data-filtro="minimo">Gate mínimo ⭐</button>
+    </div>
+  </div>
+
+  <!-- ═══════ A. La HOME se recorre ═══════ -->
+  <section class="bloque">
+    <div class="bloque-cabeza"><span class="letra">A</span><h2>La HOME se recorre</h2></div>
+    <p class="meta-bloque chica suave">~4 min · en <code>/es</code> · la experiencia editorial y su navegación.</p>
+    <ul class="pasos">
+      <li data-origen="heredada"><input type="checkbox" id="a1"><label for="a1">Abre
+        <code>/es</code>: el hero muestra tu nombre y titular; el contenido carga sin pantallazos
+        en blanco. <span class="origen origen-heredada">S1</span></label></li>
+      <li data-origen="mejorado"><input type="checkbox" id="a2"><label for="a2">Baja por la página:
+        aparecen en orden Perfil, Trayectoria, Logros, Proyectos, Skills, Certificaciones, Apps,
+        <strong>Roadmap</strong> y Contacto. <span class="origen origen-mejorado">Mejorado en S4</span></label></li>
+      <li data-origen="nuevo"><input type="checkbox" id="a3"><label for="a3">El menú del encabezado
+        incluye <strong>Roadmap</strong> y al hacer clic te lleva a esa sección.
+        <span class="origen origen-nuevo">Nuevo · S4</span></label></li>
+      <li data-origen="heredada" data-minimo><input type="checkbox" id="a4"><label for="a4">⭐
+        <strong>Juicio visual:</strong> la página se siente editorial, sobria y coherente; las
+        animaciones al hacer scroll son elegantes, no distraen. Aprueba el look general.
+        <span class="origen origen-heredada">S1</span><span class="minimo">⭐ mínimo</span></label></li>
+    </ul>
+    <div class="reportame"><p><strong>Repórtame sí o sí:</strong> una sección que no aparece, texto
+      cortado, algo que se ve "genérico" o roto, o un salto de layout brusco.</p></div>
+  </section>
+
+  <!-- ═══════ B. Bilingüe ES/EN ═══════ -->
+  <section class="bloque">
+    <div class="bloque-cabeza"><span class="letra">B</span><h2>Bilingüe ES/EN</h2></div>
+    <p class="meta-bloque chica suave">~3 min · el botón ES/EN del encabezado.</p>
+    <ul class="pasos">
+      <li data-origen="heredada"><input type="checkbox" id="b1"><label for="b1">Pulsa el botón
+        ES/EN: TODO el contenido cambia de idioma y te quedas en la misma sección donde estabas.
+        <span class="origen origen-heredada">S1</span></label></li>
+      <li data-origen="heredada" data-minimo><input type="checkbox" id="b2"><label for="b2">⭐
+        <strong>Juicio de contenido:</strong> el inglés se lee natural (no traducción robótica) y
+        dice lo mismo que el español. Revisa 2–3 secciones.
+        <span class="origen origen-heredada">S1</span><span class="minimo">⭐ mínimo</span></label></li>
+    </ul>
+  </section>
+
+  <!-- ═══════ C. Profundidad: bullets y case studies ═══════ -->
+  <section class="bloque">
+    <div class="bloque-cabeza"><span class="letra">C</span><h2>Profundidad: bullets y case studies</h2></div>
+    <p class="meta-bloque chica suave">~5 min · Trayectoria y Proyectos.</p>
+    <ul class="pasos">
+      <li data-origen="heredada"><input type="checkbox" id="c1"><label for="c1">En un hito de la
+        Trayectoria, pulsa "Ver logros completos": se despliegan los bullets; vuelve a pulsar y se
+        contraen. Pruébalo también con el teclado (Tab hasta el botón, Enter).
+        <span class="origen origen-heredada">S2</span></label></li>
+      <li data-origen="heredada"><input type="checkbox" id="c2"><label for="c2">Abre un proyecto
+        con case study (p. ej. Vesting): tiene su propia URL con contexto, reto, qué hice e
+        impacto; el breadcrumb regresa a Proyectos. <span class="origen origen-heredada">S2</span></label></li>
+      <li data-origen="heredada" data-minimo><input type="checkbox" id="c3"><label for="c3">⭐
+        <strong>Juicio de contenido:</strong> los case studies son fieles a lo que hiciste y están
+        bien escritos (sin exagerar ni inventar).
+        <span class="origen origen-heredada">S2</span><span class="minimo">⭐ mínimo</span></label></li>
+    </ul>
+  </section>
+
+  <!-- ═══════ D. PDF ATS ═══════ -->
+  <section class="bloque">
+    <div class="bloque-cabeza"><span class="letra">D</span><h2>Descargar CV en PDF (ATS)</h2></div>
+    <p class="meta-bloque chica suave">~4 min · botón "CV (PDF)" y ruta <code>/cv</code>.</p>
+    <ul class="pasos">
+      <li data-origen="heredada"><input type="checkbox" id="d1"><label for="d1">Pulsa "CV (PDF)":
+        descarga el archivo. Ábrelo y confirma que el texto se puede seleccionar y copiar (no es
+        una imagen). <span class="origen origen-heredada">S2</span></label></li>
+      <li data-origen="heredada" data-minimo><input type="checkbox" id="d2"><label for="d2">⭐
+        <strong>Prueba ATS real:</strong> sube el PDF a un lector/parser de CV (o LinkedIn "subir
+        CV") y confirma que extrae nombre, experiencia y skills en orden legible.
+        <span class="origen origen-heredada">S2</span><span class="minimo">⭐ mínimo</span></label></li>
+    </ul>
+  </section>
+
+  <!-- ═══════ E. Solicitar acceso ═══════ -->
+  <section class="bloque">
+    <div class="bloque-cabeza"><span class="letra">E</span><h2>Solicitar acceso (formulario)</h2></div>
+    <p class="meta-bloque chica suave">~4 min · sección Contacto.</p>
+    <ul class="pasos">
+      <li data-origen="heredada"><input type="checkbox" id="e1"><label for="e1">Llena el formulario
+        y envíalo: ves la confirmación "Recibí tu solicitud". <span class="origen origen-heredada">S1</span></label></li>
+      <li data-origen="heredada"><input type="checkbox" id="e2"><label for="e2">Envía con campos
+        vacíos: aparecen los errores inline y NO navega. <span class="origen origen-heredada">S1</span></label></li>
+      <li data-origen="heredada" data-minimo><input type="checkbox" id="e3"><label for="e3">⭐
+        <strong>Email real:</strong> con <code>RESEND_API_KEY</code> configurada, confirma que la
+        solicitud te llega a tu bandeja y que puedes responder al correo del visitante (reply-to).
+        <span class="origen origen-heredada">S1</span><span class="minimo">⭐ mínimo</span></label></li>
+    </ul>
+    <div class="reportame"><p><strong>Repórtame sí o sí:</strong> si el formulario dice "enviado"
+      pero el correo no llega (revisa que <code>RESEND_API_KEY</code> esté en Vercel).</p></div>
+  </section>
+
+  <!-- ═══════ F. El chat ═══════ -->
+  <section class="bloque">
+    <div class="bloque-cabeza"><span class="letra">F</span><h2>El chat que responde por ti</h2></div>
+    <p class="meta-bloque chica suave">~8 min · botón flotante "Pregúntale a mi HV".</p>
+    <ul class="pasos">
+      <li data-origen="heredada"><input type="checkbox" id="f1"><label for="f1">Abre el chat y
+        pregunta algo de tu experiencia: responde con contenido real y con chips de fuente
+        clicables que navegan a la sección/case study correcto.
+        <span class="origen origen-heredada">S3</span></label></li>
+      <li data-origen="heredada"><input type="checkbox" id="f2"><label for="f2">Pregunta algo ajeno
+        (el clima, un chiste): responde amable y fijo, sin intentar contestarlo.
+        <span class="origen origen-heredada">S3</span></label></li>
+      <li data-origen="heredada"><input type="checkbox" id="f3"><label for="f3">Fuerza el fallback
+        (key inválida o sin cuota): el chat pasa a "Búsqueda local" con aviso honesto y muestra
+        fragmentos relevantes — no muere. <span class="origen origen-heredada">S3</span></label></li>
+      <li data-origen="heredada"><input type="checkbox" id="f4"><label for="f4">Teclado y
+        reduced-motion: el panel se abre, se navega con teclado y con "reducir movimiento" activo
+        el contenido queda visible sin animación. <span class="origen origen-heredada">S3</span></label></li>
+      <li data-origen="mejorado" data-minimo><input type="checkbox" id="f5"><label for="f5">⭐
+        <strong>Proveedor REAL (kit):</strong> con la <code>GROQ_API_KEY</code> regenerada, corre
+        las preguntas on/off-topic del kit y juzga la calidad: ¿las respuestas son fieles y las
+        citas correctas? ¿el off-topic no cuela respuestas del CV?
+        <span class="origen origen-mejorado">Mejorado en S4</span><span class="minimo">⭐ mínimo</span></label></li>
+    </ul>
+    <div class="kit"><p><strong>Kit de prueba:</strong> las preguntas de calibración están en
+      <code>docs/kit-de-prueba/preguntas-chat.md</code> (on-topic, off-topic, trampa y fallback).</p></div>
+  </section>
+
+  <!-- ═══════ G. Roadmap con votación ═══════ -->
+  <section class="bloque">
+    <div class="bloque-cabeza"><span class="letra">G</span><h2>Roadmap con votación anónima</h2></div>
+    <p class="meta-bloque chica suave">~6 min · sección Roadmap · la feature estrella del S4.</p>
+    <ul class="pasos">
+      <li data-origen="nuevo"><input type="checkbox" id="g1"><label for="g1">La sección Roadmap
+        muestra las features de cada app con su descripción y un número de votos junto a cada una.
+        <span class="origen origen-nuevo">Nuevo · S4</span></label></li>
+      <li data-origen="nuevo"><input type="checkbox" id="g2"><label for="g2">Pulsa "Votar" en una
+        feature: el número <strong>sube en 1</strong> y el botón pasa a "Ya votaste" y se
+        deshabilita. <span class="origen origen-nuevo">Nuevo · S4</span></label></li>
+      <li data-origen="nuevo"><input type="checkbox" id="g3"><label for="g3">Recarga la página: la
+        feature que votaste sigue en "Ya votaste" (dedup por navegador) y su número refleja tu
+        voto. <span class="origen origen-nuevo">Nuevo · S4</span></label></li>
+      <li data-origen="nuevo"><input type="checkbox" id="g4"><label for="g4">Cambia a <code>/en</code>:
+        las features y los textos de la votación están en inglés; el conteo es el mismo (misma
+        base de datos). <span class="origen origen-nuevo">Nuevo · S4</span></label></li>
+      <li data-origen="nuevo" data-minimo><input type="checkbox" id="g5"><label for="g5">⭐
+        <strong>Contador honesto:</strong> apaga la votación (<code>VOTACION_ENABLED=false</code> o
+        quita <code>SUPABASE_URL</code>) y recarga: la sección dice "no disponible" y los botones
+        quedan deshabilitados — <strong>NUNCA</strong> un número inventado (solo "—"). Juzga que el
+        flujo se siente real y honesto.
+        <span class="origen origen-nuevo">Nuevo · S4</span><span class="minimo">⭐ mínimo</span></label></li>
+    </ul>
+    <div class="kit"><p><strong>Kit de prueba:</strong> el flujo paso a paso está en
+      <code>docs/kit-de-prueba/flujo-votacion.md</code> (feliz, dedup, contador honesto, idioma).</p></div>
+    <div class="reportame"><p><strong>Repórtame sí o sí:</strong> un número que suba de forma rara
+      (más de 1), un contador que aparezca con la BD apagada, o un voto que no se registre.</p></div>
+  </section>
+
+  <!-- ═══════ H. Brochures por app ═══════ -->
+  <section class="bloque">
+    <div class="bloque-cabeza"><span class="letra">H</span><h2>Página brochure por app</h2></div>
+    <p class="meta-bloque chica suave">~5 min · sección Apps y rutas <code>/apps/&lt;app&gt;</code>.</p>
+    <ul class="pasos">
+      <li data-origen="nuevo"><input type="checkbox" id="h1"><label for="h1">En el showcase de Apps,
+        una app real (CV Viva, Chat) muestra el enlace "Ver la app": al pulsarlo abre su brochure.
+        <span class="origen origen-nuevo">Nuevo · S4</span></label></li>
+      <li data-origen="nuevo"><input type="checkbox" id="h2"><label for="h2">La brochure tiene hero
+        con tagline, funcionalidades, métricas (números que se animan), stack, y un botón que
+        vuelve al formulario de contacto. Pruébala en ES y EN.
+        <span class="origen origen-nuevo">Nuevo · S4</span></label></li>
+      <li data-origen="nuevo"><input type="checkbox" id="h3"><label for="h3">Una app "en
+        exploración" (sin funcionalidad real) NO tiene brochure: entrar a su URL da 404.
+        <span class="origen origen-nuevo">Nuevo · S4</span></label></li>
+      <li data-origen="nuevo" data-minimo><input type="checkbox" id="h4"><label for="h4">⭐
+        <strong>Juicio visual:</strong> las animaciones de la brochure son impresionantes y
+        cumplen la promesa "funcionalidades en movimiento"; el ritmo se siente pulido, no cargado.
+        <span class="origen origen-nuevo">Nuevo · S4</span><span class="minimo">⭐ mínimo</span></label></li>
+    </ul>
+  </section>
+
+  <!-- ═══════ I. Menú en móvil ═══════ -->
+  <section class="bloque">
+    <div class="bloque-cabeza"><span class="letra">I</span><h2>Menú en móvil</h2></div>
+    <p class="meta-bloque chica suave">~3 min · en un teléfono o ventana angosta.</p>
+    <ul class="pasos">
+      <li data-origen="nuevo"><input type="checkbox" id="i1"><label for="i1">En pantalla angosta,
+        el encabezado muestra un botón de menú (☰): al pulsarlo se despliegan las secciones; elige
+        Roadmap y navega + se cierra solo. <span class="origen origen-nuevo">Nuevo · S4</span></label></li>
+      <li data-origen="nuevo" data-minimo><input type="checkbox" id="i2"><label for="i2">⭐
+        <strong>Teléfono real:</strong> en tu móvil, el menú se abre cómodo, los toques son fáciles
+        (nada demasiado pequeño) y cerrar/navegar funciona sin trabas.
+        <span class="origen origen-nuevo">Nuevo · S4</span><span class="minimo">⭐ mínimo</span></label></li>
+    </ul>
+  </section>
+
+  <!-- ═══════ J. Accesibilidad y movimiento ═══════ -->
+  <section class="bloque">
+    <div class="bloque-cabeza"><span class="letra">J</span><h2>Accesibilidad y movimiento</h2></div>
+    <p class="meta-bloque chica suave">~5 min · ajustes del sistema + teclado.</p>
+    <ul class="pasos">
+      <li data-origen="heredada"><input type="checkbox" id="j1"><label for="j1">Activa "reducir
+        movimiento" en tu sistema y recarga: la página muestra TODO el contenido quieto, nada
+        parpadea ni queda invisible. <span class="origen origen-heredada">S1</span></label></li>
+      <li data-origen="mejorado"><input type="checkbox" id="j2"><label for="j2">Recorre toda la
+        página solo con teclado (Tab): el foco es visible y llega a todo, incluidos el menú móvil,
+        los botones de voto y los enlaces de brochure. <span class="origen origen-mejorado">Mejorado en S4</span></label></li>
+      <li data-origen="heredada" data-minimo><input type="checkbox" id="j3"><label for="j3">⭐
+        <strong>Dispositivo real:</strong> en un teléfono real con reduced-motion activo, confirma
+        que ninguna sección queda en blanco ni parpadea al cargar.
+        <span class="origen origen-heredada">S1</span><span class="minimo">⭐ mínimo</span></label></li>
+    </ul>
+  </section>
+
+  <footer>
+    <p class="chica suave">Guía <strong>viva y acumulativa</strong>: contiene TODAS las pruebas
+      vigentes de CV Viva con su origen visible; una prueba solo se elimina cuando su feature dejó
+      de existir (queda declarado abajo). Archivo autocontenido — se abre sin internet, se versiona
+      con el repo y se puede compartir tal cual.</p>
+    <details class="chica">
+      <summary>Historial de la guía</summary>
+      <ul>
+        <li><strong>v1 · S4 · 2026-07-20:</strong> primera guía acumulativa de la app (cierre de
+          ciclo H1). Reúne TODAS las pruebas vigentes S1–S4. Nuevas de S4: roadmap con votación
+          (G), brochures (H), menú móvil (I). Mejoradas en S4: recorrido de secciones con Roadmap
+          (A2), chat con proveedor real (F5), teclado con nav móvil y votos (J2). Ninguna prueba
+          eliminada (ninguna feature murió). Gate mínimo ⭐: 10 pruebas.</li>
+      </ul>
+    </details>
+  </footer>
+</div>
+
+<script>
+  (function () {
+    // NS VERSIONADO POR SPRINT: al publicar la guía de un sprint nuevo se cambia
+    // s004 — así una regresión sin correr no aparece marcada por el sprint anterior.
+    var NS = "guia-hoja-de-vida:s004:";
+    var casillas = Array.prototype.slice.call(document.querySelectorAll('input[type="checkbox"]'));
+    var barra = document.getElementById("barra-avance");
+    var contador = document.getElementById("contador");
+    var botones = Array.prototype.slice.call(document.querySelectorAll(".filtros button"));
+    var secciones = Array.prototype.slice.call(document.querySelectorAll("section.bloque"));
+
+    function visible(li, filtro) {
+      if (filtro === "todo") return true;
+      if (filtro === "minimo") return li.hasAttribute("data-minimo");
+      var o = li.getAttribute("data-origen");
+      return o === "nuevo" || o === "mejorado"; // filtro "cambios"
+    }
+    function aplicarFiltro(filtro) {
+      secciones.forEach(function (sec) {
+        var conVisibles = 0;
+        Array.prototype.slice.call(sec.querySelectorAll("ul.pasos li")).forEach(function (li) {
+          var v = visible(li, filtro);
+          if (v) { li.removeAttribute("hidden"); conVisibles++; } else { li.setAttribute("hidden", ""); }
+        });
+        if (conVisibles) { sec.removeAttribute("hidden"); } else { sec.setAttribute("hidden", ""); }
+      });
+      botones.forEach(function (b) { b.classList.toggle("activo", b.getAttribute("data-filtro") === filtro); });
+      actualizar();
+    }
+    function actualizar() {
+      var vis = casillas.filter(function (c) {
+        var li = c.closest("li"), sec = c.closest("section");
+        return !(li && li.hasAttribute("hidden")) && !(sec && sec.hasAttribute("hidden"));
+      });
+      var hechas = vis.filter(function (c) { return c.checked; }).length;
+      barra.style.width = (vis.length ? (hechas / vis.length) * 100 : 0) + "%";
+      contador.textContent = hechas + "/" + vis.length;
+    }
+    botones.forEach(function (b) {
+      var f = b.getAttribute("data-filtro"), n = 0;
+      document.querySelectorAll("ul.pasos li").forEach(function (li) { if (visible(li, f)) n++; });
+      b.textContent = b.textContent + " (" + n + ")";
+      b.addEventListener("click", function () { aplicarFiltro(f); });
+    });
+    casillas.forEach(function (c) {
+      try { c.checked = localStorage.getItem(NS + c.id) === "1"; } catch (e) {}
+      c.addEventListener("change", function () {
+        try { localStorage.setItem(NS + c.id, c.checked ? "1" : "0"); } catch (e) {}
+        actualizar();
+      });
+    });
+    actualizar();
+  })();
+</script>
+</body>
+</html>
