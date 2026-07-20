@@ -10,6 +10,7 @@
     "skills": "Skills",
     "certificaciones": "Certifications",
     "apps": "Apps",
+    "roadmap": "Roadmap",
     "contacto": "Contact",
     "cambiarIdioma": "Cambiar a español",
     "saltarContenido": "Skip to content",
@@ -56,6 +57,20 @@
       "en-exploracion": "In exploration"
     },
     "cta": "I want to try it"
+  },
+  "roadmap": {
+    "eyebrow": "Roadmap",
+    "titulo": "What's coming — and you set the order",
+    "subtitulo": "These are each app's next features. Vote for the ones you most want to see: one click, no sign-up. The counters are real.",
+    "votar": "Vote",
+    "votos": "{count, plural, =0 {no votes yet} one {# vote} other {# votes}}",
+    "yaVotaste": "You voted",
+    "gracias": "Thanks for your vote!",
+    "noDisponible": "Voting isn't available right now. Please try again later.",
+    "rateLimited": "You're going too fast — wait a moment before voting again.",
+    "error": "I couldn't record your vote. Please try again in a moment.",
+    "votarAria": "Vote for {feature}",
+    "cargando": "Loading votes…"
   },
   "contacto": {
     "eyebrow": "Contact",

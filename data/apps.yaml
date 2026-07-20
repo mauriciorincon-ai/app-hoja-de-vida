@@ -4,6 +4,11 @@
 #   en-produccion   → URL viva + repo público + CI verde ("esto ya lo hace")
 #   en-construccion → repo público con commits reales ("esto lo está haciendo AHORA")
 #   en-exploracion  → objetivo declarado, sin fechas prometidas ("esto viene")
+#
+# roadmap: (S4) — features futuras votables por los visitantes. El par
+#   (id de la app, id de la feature) es la clave del voto en la BD; cambiar el
+#   id de una feature reinicia su conteo. Vacío/ausente = la app no aparece en
+#   la sección de votación. Cada feature necesita titulo y descripcion ES+EN.
 
 apps:
   - id: hoja-de-vida
@@ -18,6 +23,42 @@ apps:
       - etiqueta: "GitHub"
         url: "https://github.com/mauriciorincon-ai/app-hoja-de-vida"
     solicitable: false
+    roadmap:
+      - id: mapa-c4
+        titulo:
+          es: "Mapa de arquitectura interactivo (C4)"
+          en: "Interactive architecture map (C4)"
+        descripcion:
+          es: "Navegar mis sistemas por niveles de zoom, del contexto al detalle, como un mapa."
+          en: "Navigate my systems by zoom levels, from context to detail, like a map."
+      - id: maquina-del-tiempo
+        titulo:
+          es: "Máquina del tiempo completa"
+          en: "Full time machine"
+        descripcion:
+          es: "Un scrubber cronológico para recorrer la evolución de cada proyecto en el tiempo."
+          en: "A chronological scrubber to walk through each project's evolution over time."
+      - id: sello-verificacion
+        titulo:
+          es: "Sello de verificación criptográfica"
+          en: "Cryptographic verification seal"
+        descripcion:
+          es: "Logros y commits con prueba verificable, para la era del candidato falso."
+          en: "Achievements and commits with verifiable proof, for the age of the fake candidate."
+      - id: selector-audiencia
+        titulo:
+          es: "Selector de audiencia"
+          en: "Audience selector"
+        descripcion:
+          es: "El mismo contenido en modo ejecutivo o modo arquitecto, a tu elección."
+          en: "The same content in executive mode or architect mode, your choice."
+      - id: pwa-offline
+        titulo:
+          es: "Versión instalable offline (PWA)"
+          en: "Installable offline version (PWA)"
+        descripcion:
+          es: "Instalar la CV Viva como app y consultarla sin conexión."
+          en: "Install the Living CV as an app and browse it offline."
 
   - id: chat-hoja-de-vida
     estado: en-produccion
@@ -31,6 +72,21 @@ apps:
       - etiqueta: "GitHub"
         url: "https://github.com/mauriciorincon-ai/app-hoja-de-vida"
     solicitable: false
+    roadmap:
+      - id: embeddings-retrieval
+        titulo:
+          es: "Retrieval con embeddings"
+          en: "Embeddings-based retrieval"
+        descripcion:
+          es: "Búsqueda semántica en el índice del chat, más allá del match léxico actual."
+          en: "Semantic search over the chat index, beyond the current lexical match."
+      - id: memoria-conversacion
+        titulo:
+          es: "Memoria de la conversación"
+          en: "Conversation memory"
+        descripcion:
+          es: "Que el chat recuerde el hilo de la charla para preguntas de seguimiento."
+          en: "Let the chat remember the thread so you can ask follow-up questions."
 
   - id: fabric-analitica-e2e
     estado: en-exploracion

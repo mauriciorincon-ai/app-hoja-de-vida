@@ -100,3 +100,45 @@ a "votación no disponible", nunca a un cero inventado); `votacionEnabled()` res
 Postgres real** (`tests/integration/votes-client.dbtest.ts`, aserciones relativas N→N+1 incl.
 10 votos concurrentes atómicos). Patrón `*.dbtest.ts` + `vitest.db.config.ts` + script `test:db`
 separan la suite de BD de la de `quality` (sin BD). `pnpm typecheck` limpio.
+
+## Fase 2 — Roadmap + votación
+
+**Contenido** (`data/apps.yaml`): campo `roadmap:` por app (id + titulo/descripcion ES+EN).
+`hoja-de-vida` estrena 5 features del buzón de la VISION (mapa C4, máquina del tiempo, sello de
+verificación, selector de audiencia, PWA offline); `chat-hoja-de-vida` 2 (embeddings, memoria).
+Las apps `en-exploracion` no tienen roadmap ⇒ no aparecen en la votación. **Contenido inicial —
+el usuario lo cura en el gate ⭐.**
+
+**Schema** (`src/lib/schemas.ts`): `appsSchema` entero pasa a **`.strict()`** (antes hacía strip
+silencioso — un typo se tragaba; ahora el build falla). Nuevo `roadmapFeature` (slug + textos
+bilingües). El par (app.id, feature.id) es la clave del voto. `RoadmapFeature` exportado.
+
+**Route handlers** (patrón de solicitar-acceso: requestId + Pino + rate limit namespaced + Zod):
+
+- `POST /api/roadmap/votar` — kill-switch → rate limit `vote:${ip}` (12/min, apagable con
+  `DISABLE_RATE_LIMIT=1` solo en CI, leído por request) → Zod `.strict()` → `esFeatureValida`
+  contra el YAML → RPC. Devuelve el `total` REAL de la BD. BD caída ⇒ 503, jamás conteo inventado.
+- `GET /api/roadmap/votos` — `force-dynamic` + `cache-control: no-store`: el conteo siempre sale
+  de la BD, nunca de un ISR congelado. Sin config/BD ⇒ 503.
+- `src/lib/votes/roadmap.ts` (server-only): `appsConRoadmap`/`esFeatureValida`/`paresVotables`
+  derivan del contenido — fuente única de "qué es votable".
+
+**UI:** sección server `#roadmap` (`src/components/home/roadmap.tsx`) con encabezado + títulos y
+descripciones de cada feature en HTML **estático** (ATS/SEO/LCP); isla client `RoadmapVoting`
+(conteos reales al montar, estados votable/ya-votaste/no-disponible/rate-limited, dedup
+`localStorage` prefijo `cvviva:voto:s004:`, teclado, `aria-label` por feature). Nav gana `roadmap`
+(ES/EN). Eventos analytics `roadmap_visto`/`voto_emitido`/`voto_rechazado` (+ `brochure_vista`).
+
+**Verificación del contador honesto (gate de producto):** build de prod SIN env de Supabase →
+`curl /es` y `/en` traen los títulos de features en el HTML estático; `GET /votos` y `POST /votar`
+devuelven **503** (la UI mostrará "no disponible", nunca un cero). Confirmado end-to-end.
+
+**Tests F2:** 8 schema nuevos (roadmap + `.strict()`) · 3 unit de `roadmap.ts` · 11 integration
+del route (cliente mockeado: happy/503/400×3/429/rate-off) · 2 dbtest del route (punta a punta
+contra Postgres real). `home.spec` extendido (regla 9): sección roadmap en el recorrido, conteo
+data-driven de features, títulos en HTML estático — **8/8 verde en chromium + mobile**. Suite
+`quality` completa: 89% cobertura. typecheck + lint limpios.
+
+**Pendiente de F4 (declarado):** el e2e interactivo de votación (votar→contador sube; BD caída
+forzada→botones off) necesita el webServer de Playwright con Supabase local — va con el job
+`integration` de CI en la fase 4.

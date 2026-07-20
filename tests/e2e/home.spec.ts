@@ -10,15 +10,21 @@ const SECTIONS = [
   "skills",
   "certificaciones",
   "apps",
+  "roadmap",
   "contacto",
 ];
 
 // Los e2e leen el contenido real: editar data/*.yaml jamás rompe la suite
+type RoadmapEntry = {
+  id: string;
+  titulo: { es: string; en: string };
+};
 type AppEntry = {
   id: string;
   estado: string;
   solicitable?: boolean;
   nombre: { es: string; en: string };
+  roadmap?: RoadmapEntry[];
 };
 const cvEs = parse(readFileSync("data/cv.es.yaml", "utf8")) as {
   identidad: { nombre: string };
@@ -35,6 +41,11 @@ const { apps } = parse(readFileSync("data/apps.yaml", "utf8")) as {
 const nombre = cvEs.identidad.nombre;
 const appSolicitable = apps.find((a) => a.solicitable !== false);
 if (!appSolicitable) throw new Error("apps.yaml sin apps solicitables");
+
+// Roadmap votable (S4): todas las (app, feature) con roadmap en el YAML
+const featuresRoadmap = apps.flatMap((a) => a.roadmap ?? []);
+const primeraFeature = featuresRoadmap[0];
+if (!primeraFeature) throw new Error("apps.yaml sin features de roadmap");
 
 test.describe("HOME — happy path del sprint", () => {
   test("carga, recorre secciones, cambia idioma y envía la solicitud", async ({
@@ -58,6 +69,12 @@ test.describe("HOME — happy path del sprint", () => {
 
     // Showcase data-driven: exactamente las apps de data/apps.yaml
     await expect(page.locator("#apps [data-app-id]")).toHaveCount(apps.length);
+
+    // Roadmap data-driven: una fila votable por feature de data/apps.yaml
+    await page.locator("#roadmap").scrollIntoViewIfNeeded();
+    await expect(page.locator("#roadmap [data-feature-id]")).toHaveCount(
+      featuresRoadmap.length,
+    );
 
     // Toggle de idioma (conserva la página, cambia la ruta) — timeout amplio:
     // bajo carga paralela la navegación client-side puede exceder los 5s
@@ -102,6 +119,8 @@ test.describe("HOME — happy path del sprint", () => {
       ) as { apps: { estados: Record<string, string> } };
       expect(html).toContain(apps[0].nombre[locale as "es" | "en"]);
       expect(html).toContain(mensajes.apps.estados[apps[0].estado]);
+      // El roadmap votable también nace estático (títulos de features en el HTML)
+      expect(html).toContain(primeraFeature.titulo[locale as "es" | "en"]);
     }
     // El grueso (capa 2) también vive en el HTML aunque nazca colapsado
     const res = await request.get("/es");

@@ -14,7 +14,11 @@ export type AnalyticsEvent =
   | "chat_pregunta"
   | "chat_respuesta"
   | "chat_offtopic"
-  | "chat_fallback";
+  | "chat_fallback"
+  | "roadmap_visto"
+  | "voto_emitido"
+  | "voto_rechazado"
+  | "brochure_vista";
 
 export function trackEvent(
   name: AnalyticsEvent,

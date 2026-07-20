@@ -120,34 +120,59 @@ const localizedText = z.object({
   en: z.string().min(1),
 });
 
-export const appsSchema = z.object({
-  apps: z
-    .array(
-      z.object({
-        id: z
-          .string()
-          .min(1)
-          .regex(/^[a-z0-9-]+$/, "id must be a kebab-case slug"),
-        estado: z.enum(appEstados),
-        nombre: localizedText,
-        descripcion: localizedText,
-        // Evidencia pública de la card (repo, demo): etiqueta universal (p. ej. "GitHub")
-        enlaces: z
-          .array(
-            z.object({
-              etiqueta: z.string().min(1),
-              url: z.string().url(),
-            }),
-          )
-          .default([]),
-        solicitable: z.boolean().default(true),
-      }),
-    )
-    .min(1),
-});
+// Slug kebab-case reutilizable (id de app y de feature del roadmap). El mismo
+// alfabeto que valida la BD de votación (RPC emitir_voto) — coherencia borde↔BD.
+const slug = z
+  .string()
+  .min(1)
+  .max(60)
+  .regex(/^[a-z0-9-]+$/, "must be a kebab-case slug");
+
+// Feature del roadmap votable (S4). El par (app.id, feature.id) es la clave del
+// voto; por eso `id` es un slug estable — cambiarlo reinicia su conteo.
+const roadmapFeature = z
+  .object({
+    id: slug,
+    titulo: localizedText,
+    descripcion: localizedText,
+  })
+  .strict();
+
+export const appsSchema = z
+  .object({
+    apps: z
+      .array(
+        z
+          .object({
+            id: slug,
+            estado: z.enum(appEstados),
+            nombre: localizedText,
+            descripcion: localizedText,
+            // Evidencia pública de la card (repo, demo): etiqueta universal (p. ej. "GitHub")
+            enlaces: z
+              .array(
+                z
+                  .object({
+                    etiqueta: z.string().min(1),
+                    url: z.string().url(),
+                  })
+                  .strict(),
+              )
+              .default([]),
+            solicitable: z.boolean().default(true),
+            // Roadmap votable de la app (S4). Vacío = la app no aparece en la
+            // sección de votación. Editar aquí + push = roadmap actualizado.
+            roadmap: z.array(roadmapFeature).default([]),
+          })
+          .strict(),
+      )
+      .min(1),
+  })
+  .strict();
 
 export type Apps = z.infer<typeof appsSchema>;
 export type AppCard = Apps["apps"][number];
+export type RoadmapFeature = z.infer<typeof roadmapFeature>;
 
 /** Solicitud de acceso (formulario + endpoint). `website` es el honeypot. */
 export const solicitudSchema = z.object({

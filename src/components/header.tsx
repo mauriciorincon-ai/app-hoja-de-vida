@@ -11,6 +11,7 @@ const SECTIONS = [
   "skills",
   "certificaciones",
   "apps",
+  "roadmap",
   "contacto",
 ] as const;
 
