@@ -89,3 +89,61 @@ Comando del gate (entre backticks, probado desde el render):
 | **Campo `homepage` del repo en GitHub** = la URL de producción                          | **Alta** — es la violación viva que la regla 17 predice (la GitHub App de Vercel lo reescribe tras cada deploy) | Limpiado con `gh repo edit --homepage ""`; verificado vacío. **Re-verificar tras CADA merge a `main`**                                                      |
 
 Grep final: **limpio** ✓ · `package.json` sin `homepage` ✓
+
+## Fase 1 — Ingesta, contrato y anclaje (O1)
+
+### Los 6 exports: llegada y procedencia
+
+El paso de copia estaba asignado a `[TÚ]` porque *la sesión de otra app* no puede leer el repo
+privado de dash — pero desde esta máquina los 6 `docs/brochure-export.json` sí son alcanzables, así
+que corrí el comando **textual de la orden** y desbloqueé la fase. Nada se editó: son la voz de cada
+app (regla dura 4).
+
+| slug | schema | actualizado | estado | sellado_en | funcs | grupos | métricas | descartadas |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| habla | 1.0.0 | 2026-08-21 | **sellado** | 2026-08-08 | 24 | 8 | 14 | 0 |
+| inmobiliaria | 1.0.0 | 2026-08-22 | inicial | null | 13 | 4 | 9 | 0 |
+| nutri-kids | 1.0.0 | 2026-08-22 | inicial | null | 19 | 5 | 10 | 0 |
+| anonimizador | 1.0.0 | 2026-08-21 | inicial | null | 14 | 5 | 12 | 0 |
+| ds | 1.0.0 | 2026-08-20 | inicial | null | 33 | 5 | 11 | 0 |
+| dash-agent-ai | 1.0.0 | 2026-08-19 | inicial | null | 12 | 5 | 9 | 1 |
+
+**Totales de la vitrina:** 115 funcionalidades · 32 grupos · 65 métricas · 1 descartada.
+**Verificación previa a codificar (los 6 pasan):** grupos suman = `total` en los 6 · `produccion` y
+`repositorio` en `null` en los 6 · toda métrica con `fuente`. **Nada que reportar a la planeadora.**
+
+### Forma real del contrato (medida, no supuesta)
+
+Se midió la varianza entre los 6 antes de escribir el schema, para no rechazar un export válido:
+todos los campos resultaron **universales** salvo `privacidad`, que confirma ser un **MENÚ** (11
+claves booleanas distintas entre apps: `local_only`, `red_saliente`, `escribe_en_las_fuentes`,
+`usa_ia`, `consentimiento_explicito`, `datos_del_menor_solo_en_dispositivo`, …). Por eso su schema
+es `{ detalle }` obligatorio + `catchall(boolean)`: cada app declara solo lo que puede AFIRMAR.
+Las `fuente` en uso hoy son 3 de las 4 del contrato (`medido` · `calculada` · `declarado`).
+
+### Qué se construyó
+
+- `src/lib/vitrina/schemas.ts` — contrato v1.0.0 en Zod, `.strict()` en todo objeto de forma fija.
+  Hace mecánicas las 3 reglas duras: `produccion`/`repositorio` **tipados `z.null()`** (un enlace
+  no es "campo raro", es un error de tipo), `fuente` como enum de 4, y **validación cruzada**
+  `superRefine` de grupos = total. `versionCompatible()` rechaza un mayor distinto (campos con otro
+  significado) en vez de adivinar.
+- `src/lib/vitrina/loader.ts` — server-only, mismo patrón fail-safe que `lib/content.ts`: **el build
+  FALLA** con un diagnóstico que nombra archivo y campo, y el mensaje recuerda que los exports no se
+  editan aquí sino que se reportan. Manifest de anclaje (slug · fecha del export · schema · estado ·
+  sello · ciclo · versión del repo) y **orden estable y explícito** (selladas primero, luego por
+  fecha desc, desempate por slug) — el orden no depende del sistema de archivos.
+- Tests: `vitrina-contrato.test.ts` (38) + `vitrina-loader.test.ts` (7) = **45 verdes**.
+
+### Demo EN ROJO del gate del contrato (regla 15 + regla dura 3 de la orden)
+
+Las 3 mutaciones de la orden, aplicadas a exports **reales** y revertidas después:
+
+| # | Mutación | Archivo real | Gate y resultado |
+| --- | --- | --- | --- |
+| 1 | `funcionalidades.total` 12 → 13 | `dash-agent-ai` | **`pnpm test`** (el comando del CI) → **FAIL**, `total declarado 13 ≠ 12 features en los grupos` |
+| 2 | `delete metricas[0].fuente` | `ds` | **FAIL**, `metricas.0.fuente: Invalid option: expected one of "medido"\|"calculada"\|"declarado"\|"estimacion"` |
+| 3 | `enlaces.produccion = "https://…"` | `habla` | **FAIL**, `enlaces.produccion: Invalid input: expected null, received string` |
+
+Cada rojo **nombró el archivo culpable y el campo**. Restaurados los 6 desde respaldo: **38/38 verde**
+y `git diff` de `content/vitrina/` vacío — los exports quedaron byte a byte intactos.
