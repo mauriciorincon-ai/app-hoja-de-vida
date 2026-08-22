@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { Reveal } from "@/components/motion/reveal";
+import { AperturaPorLectura } from "@/components/vitrina/apertura-por-lectura";
 import { FichaApp } from "@/components/vitrina/ficha";
 import { Link } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
@@ -103,6 +104,9 @@ export default async function VitrinaPage({ params }: Params) {
                 <FichaApp ficha={ficha} />
               </Reveal>
             ))}
+            {/* Una sola isla gobierna la apertura por lectura de TODAS las
+                tarjetas (rectángulos por cuadro de scroll, no un observer). */}
+            <AperturaPorLectura selector=".tarjeta-vitrina" />
           </div>
 
           {/* Cierre: el anclaje de toda la vitrina + la lista de espera. */}

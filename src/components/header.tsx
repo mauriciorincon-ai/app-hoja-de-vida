@@ -78,7 +78,7 @@ export function Header({
       <div className="mx-auto flex h-12 max-w-5xl items-center justify-between gap-4 px-4 md:px-6">
         <a
           href={enHome ? "#contenido" : `/${locale}`}
-          className="flex min-h-11 items-center gap-2 text-sm font-medium text-ink-0"
+          className="flex min-h-11 items-center gap-2 text-sm font-medium whitespace-nowrap text-ink-0"
         >
           <span aria-hidden="true" className="text-sage-ink">
             ◆

@@ -182,6 +182,7 @@
     "anclaje": "Ficha anclada al export del {fecha} · v{version} · {sprints, plural, one {# sprint cerrado} other {# sprints cerrados}}",
     "anclajeNota": "La vitrina muestra la versión anclada de cada app, no su estado en tiempo real.",
     "sí": "sí",
-    "no": "no"
+    "no": "no",
+    "muestraPie": "Una representación de la app dibujada en el lenguaje visual de esta página — no es una captura."
   }
 }

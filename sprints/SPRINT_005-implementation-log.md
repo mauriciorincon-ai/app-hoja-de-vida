@@ -195,3 +195,25 @@ se ve completa y sin movimiento.
 
 La vitrina renderiza **UNA sola ficha** (`FICHAS_VISIBLES = 1` en la ruta) hasta que el usuario
 apruebe cómo se ve. Al aprobar pasa a las 6 y se presenta M2.
+
+### Mirada M1 — NO APROBADA (2026-08-22)
+
+**Veredicto del usuario:** _«No la apruebo porque es puro texto y cero imágenes, nada que ver, y las
+tarjetas tienen una animación especial que hemos venido trabajando desde la planeadora»_ ·
+aclaración: _«no son imágenes sino diseños que representan las visuales de la aplicación»_.
+
+Dos faltas mías, ambas por asumir en vez de ir a leer:
+
+1. **Cero representación visual.** La ficha es un muro de texto. El contrato del export no trae
+   campo de imagen y di el asunto por cerrado, en vez de preguntar de dónde sale lo visual. Lo que
+   falta NO son capturas de las apps: son **diseños que representan la visual de cada aplicación**,
+   dibujados desde cero **en el design system de esta casa** (misma lógica de "re-expresar ≠
+   calcar": la representación se dibuja en el lenguaje de CV Viva, no se copia de la app).
+2. **La animación de las tarjetas.** Existe un patrón trabajado en la planeadora —«apertura por
+   lectura», banco de técnicas §7, que el CHANGELOG del kit v1.22.0 manda adoptar **ENTERA, con sus
+   trampas y sus tests**— y yo puse un `<details>` genérico. Lo tenía anotado en el plan y no lo
+   apliqué.
+
+**Acción:** se detiene la construcción de las 5 fichas restantes (correcto: para esto existe M1).
+Se lee la especificación del patrón en la planeadora y el material visual real de las 6 apps, se
+rehace la ficha, y M1 se vuelve a presentar. El plan de miradas no cambia de orden: M1 se repite.

@@ -182,6 +182,7 @@
     "anclaje": "Card pinned to the export of {fecha} · v{version} · {sprints, plural, one {# closed sprint} other {# closed sprints}}",
     "anclajeNota": "The showcase shows each app's pinned version, not its real-time state.",
     "sí": "yes",
-    "no": "no"
+    "no": "no",
+    "muestraPie": "A representation of the app drawn in this page's visual language — not a screenshot."
   }
 }
