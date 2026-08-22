@@ -1,6 +1,8 @@
 "use client";
 
 import { useLocale, useTranslations } from "next-intl";
+import { Menu, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { trackEvent } from "@/lib/analytics";
 
@@ -11,12 +13,19 @@ const SECTIONS = [
   "skills",
   "certificaciones",
   "apps",
+  "roadmap",
   "contacto",
 ] as const;
 
 /**
  * `enHome=false` (páginas de detalle y /cv): los anchors del nav apuntan a
  * la HOME (`/{locale}/#seccion`) en vez del fragmento local.
+ *
+ * Nav móvil (deuda S1, pagada en S4): en <md el nav de escritorio se oculta y
+ * un disclosure hamburguesa accesible (aria-expanded/controls, Escape, foco
+ * devuelto al botón) despliega las mismas secciones. Las rutas nuevas del S4
+ * (roadmap, brochures) volvieron impostergable el acceso a la navegación en
+ * móvil.
  */
 export function Header({
   nombre,
@@ -32,6 +41,22 @@ export function Header({
   const otherLocale = locale === "es" ? "en" : "es";
   const pdfHref = `/cv/Henry-Rincon-CV-${locale.toUpperCase()}.pdf`;
 
+  const [menuAbierto, setMenuAbierto] = useState(false);
+  const toggleRef = useRef<HTMLButtonElement>(null);
+
+  // Escape cierra el menú y devuelve el foco al botón que lo abrió.
+  useEffect(() => {
+    if (!menuAbierto) return;
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") {
+        setMenuAbierto(false);
+        toggleRef.current?.focus();
+      }
+    }
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [menuAbierto]);
+
   function switchLocale() {
     trackEvent("idioma_cambiado", { a: otherLocale });
     // Conserva la sección actual (anchor) al cambiar de idioma
@@ -39,6 +64,8 @@ export function Header({
       locale: otherLocale,
     });
   }
+
+  const href = (s: string) => (enHome ? `#${s}` : `/${locale}#${s}`);
 
   return (
     <header className="sticky top-0 z-10 border-b border-paper-2 bg-paper-0/95">
@@ -66,7 +93,7 @@ export function Header({
           {SECTIONS.map((s) => (
             <a
               key={s}
-              href={enHome ? `#${s}` : `/${locale}#${s}`}
+              href={href(s)}
               className="flex min-h-11 items-center text-sm text-ink-2 transition-colors duration-[120ms] hover:text-ink-0"
             >
               {t(s)}
@@ -101,8 +128,48 @@ export function Header({
               EN
             </span>
           </button>
+
+          {/* Disclosure móvil (deuda S1): las mismas secciones bajo <md */}
+          <button
+            ref={toggleRef}
+            type="button"
+            onClick={() => setMenuAbierto((v) => !v)}
+            aria-expanded={menuAbierto}
+            aria-controls="nav-movil"
+            aria-label={menuAbierto ? t("cerrarMenu") : t("abrirMenu")}
+            className="flex size-11 items-center justify-center rounded-full border border-paper-3 text-ink-1 transition-colors duration-[120ms] hover:bg-paper-1 md:hidden"
+          >
+            {menuAbierto ? (
+              <X size={18} strokeWidth={1.5} aria-hidden="true" />
+            ) : (
+              <Menu size={18} strokeWidth={1.5} aria-hidden="true" />
+            )}
+          </button>
         </div>
       </div>
+
+      {/* Panel del menú móvil: se monta solo abierto; cada enlace lo cierra. */}
+      {menuAbierto && (
+        <nav
+          id="nav-movil"
+          aria-label={t("menu")}
+          className="border-t border-paper-2 bg-paper-0 md:hidden"
+        >
+          <ul className="mx-auto flex max-w-5xl flex-col px-4 py-2">
+            {SECTIONS.map((s) => (
+              <li key={s}>
+                <a
+                  href={href(s)}
+                  onClick={() => setMenuAbierto(false)}
+                  className="flex min-h-11 items-center text-sm text-ink-1 transition-colors duration-[120ms] hover:text-ink-0"
+                >
+                  {t(s)}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )}
     </header>
   );
 }

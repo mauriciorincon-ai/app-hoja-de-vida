@@ -97,6 +97,59 @@ e inglés. Quien la visita puede pedir acceso a tus apps y la solicitud te llega
 - **Ritual del pipeline:** al cerrar el sprint de cualquier app, actualiza su card aquí
   (cuando un demo pase a producción, sube su estado y considera darle case study en Proyectos).
 
+### Roadmap con votación anónima · desde Sprint 004
+
+- **Qué hace:** la sección "Roadmap" (y su enlace en el menú) muestra las próximas features de
+  cada app y deja que quien visita **vote con un clic, sin registrarse**, las que más quiere ver.
+  El número que aparece junto a cada feature es el **conteo real** de votos en la base de datos.
+- **Cómo se edita el roadmap (cero código):** en `data/apps.yaml`, dentro de una app, agrega o
+  edita la lista `roadmap:`. Cada feature lleva un `id` (minúsculas-con-guiones), y `titulo` y
+  `descripcion` en `es` y `en`. Push y el roadmap se actualiza. Una app sin `roadmap:` no aparece
+  en la votación.
+- **⚠ Ojo con el `id` de una feature:** el voto se cuenta por el par (app, id de la feature). Si
+  **cambias el `id`** de una feature ya publicada, sus votos anteriores quedan bajo el id viejo y
+  la feature "reinicia" su conteo. Cambia el `titulo`/`descripcion` cuando quieras, pero deja el
+  `id` quieto si no quieres reiniciar.
+- **La regla del contador honesto:** el número mostrado siempre sale de la base de datos en el
+  momento. Si la base de datos no responde, la sección lo dice ("La votación no está disponible…")
+  y **deshabilita los botones** — nunca verás un número inventado ni congelado.
+- **Dedup de votos (y su límite honesto):** cada navegador puede votar una vez por feature; tras
+  votar, el botón queda en "Ya votaste". Esto se guarda en el navegador del visitante
+  (localStorage), así que es un dedup **de mejor esfuerzo**: si alguien borra los datos del
+  navegador o usa otro dispositivo, podría volver a votar. Es deliberado — para no votar dos
+  veces sin pedir registro ni guardar datos personales. **Cero PII:** la base solo guarda
+  (app, feature, fecha), nunca IP ni identidad (Ley 1581).
+- **Dónde veo los votos:** en el panel de Supabase (tabla `votes`) o en los logs de Vercel (cada
+  voto queda registrado con app, feature y el total resultante). Analítica: eventos
+  `roadmap_visto`, `voto_emitido`, `voto_rechazado`.
+- **Apagar la votación:** en Vercel pon `VOTACION_ENABLED=false` (o quita `SUPABASE_URL`/
+  `SUPABASE_ANON_KEY`) y redeploy — la sección se muestra en modo "no disponible", honesta y sin
+  botones activos.
+
+### Página brochure por app · desde Sprint 004
+
+- **Qué hace:** cada app **con funcionalidad real** tiene su propia página tipo brochure
+  (`/es/apps/hoja-de-vida`, `/es/apps/chat-hoja-de-vida`) con un hero, sus funcionalidades en
+  movimiento, métricas, el stack y un botón para hablar contigo. Desde la card del showcase, el
+  enlace "Ver la app" lleva ahí.
+- **Cómo dar de alta una brochure (cero código):** en `data/apps.yaml`, a la app le agregas un
+  bloque `brochure:` con:
+  - `tagline` (frase corta, ES/EN) e `intro` (párrafo de apertura, ES/EN),
+  - `funcionalidades:` — lista de `{ titulo, descripcion }` en ES/EN (al menos una),
+  - `metricas:` (opcional) — lista de `{ valor, sufijo, etiqueta }`; el número se anima,
+  - `stack:` (opcional) — lista de tecnologías (texto suelto).
+    Push y la página aparece sola, con su URL, su SEO (hreflang + JSON-LD) y su lugar en el sitemap.
+- **La regla "solo lo real":** ponle `brochure:` **solo a apps que ya funcionan de verdad** (las
+  que están `en-produccion`). Las apps `en-exploracion` no llevan brochure — su lugar es el
+  roadmap. Una app sin `brochure:` simplemente no tiene página (su URL da 404).
+- **Analítica:** evento `brochure_vista` (con la app y el idioma).
+
+### Menú en móvil · desde Sprint 004
+
+- **Qué hace:** en pantallas pequeñas, el encabezado muestra un botón de menú (☰) que despliega
+  las mismas secciones que el menú de escritorio. Se abre y cierra con teclado (Escape cierra) y
+  al elegir una sección se cierra solo. Nada que configurar.
+
 ### Idiomas · desde Sprint 001
 
 - **Qué hace:** la página completa existe en `/es` y `/en`, con el botón ES/EN en el encabezado.
@@ -206,3 +259,4 @@ carrera con un comentario que dice qué escribir en cada una.
 | 001bis | Content pack v1 integrado (marca Henry Rincón), estado "en producción", enlaces de evidencia en las cards, campos `certificaciones`/`skills`/`perfil` previstos para S2.                                                                                  |
 | 002    | Capa de profundidad: bullets expandibles por hito, 5 case studies con URL propia, secciones Perfil/Certificaciones/Skills, ruta `/cv` imprimible + PDF ATS descargable.                                                                                   |
 | 003    | El chat que responde por ti: RAG con citas navegables, proveedor conmutable por env (Groq inicial), off-topic sin tokens, fallback local que nunca muere, kill-switch, y la historia (`data/historia/`) como corpus incremental con guía de alimentación. |
+| 004    | Roadmap con votación anónima (contador real o "no disponible", dedup por navegador, cero PII), página brochure animada por app real, y menú en móvil. Cierre del ciclo H1: el MVP funcional queda completo.                                               |

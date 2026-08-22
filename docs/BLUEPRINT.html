@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CV Viva — Blueprint de infraestructura (as-built)</title>
+<style>
+  :root {
+    --fondo: #fafaf9; --tinta: #1c1917; --tinta-suave: #57534e;
+    --borde: #d6d3d1; --tarjeta: #ffffff; --acento: #1d4ed8;
+    --acento-suave: #dbeafe; --ok: #15803d; --alerta: #b45309;
+    --futuro: #9333ea; --caja-svg: #ffffff; --bd-svg: #eff6ff;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --fondo: #1c1917; --tinta: #fafaf9; --tinta-suave: #a8a29e;
+      --borde: #44403c; --tarjeta: #292524; --acento: #60a5fa;
+      --acento-suave: #1e3a5f; --ok: #4ade80; --alerta: #fbbf24;
+      --futuro: #c084fc; --caja-svg: #292524; --bd-svg: #1e3a5f;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 2rem 1rem 4rem; background: var(--fondo); color: var(--tinta);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif; line-height: 1.55;
+  }
+  main { max-width: 980px; margin: 0 auto; }
+  h1 { font-size: 1.6rem; margin: 0 0 .25rem; }
+  h2 { font-size: 1.15rem; margin: 2.2rem 0 .8rem; border-bottom: 2px solid var(--borde); padding-bottom: .35rem; }
+  .badge {
+    display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .05em;
+    background: var(--acento-suave); color: var(--acento); border-radius: 999px;
+    padding: .15rem .6rem; vertical-align: middle; text-transform: uppercase;
+  }
+  .meta { color: var(--tinta-suave); font-size: .9rem; margin: .2rem 0 1rem; }
+  .nota {
+    background: var(--tarjeta); border: 1px solid var(--borde); border-left: 4px solid var(--acento);
+    border-radius: 8px; padding: .8rem 1rem; font-size: .88rem; color: var(--tinta-suave);
+  }
+  .diagrama { background: var(--tarjeta); border: 1px solid var(--borde); border-radius: 12px; padding: 1rem; overflow-x: auto; }
+  .diagrama svg { display: block; min-width: 720px; width: 100%; height: auto; }
+  .caja { fill: var(--caja-svg); stroke: var(--borde); stroke-width: 1.5; }
+  .caja-principal { stroke: var(--acento); stroke-width: 2; }
+  .caja-bd { fill: var(--bd-svg); stroke: var(--acento); stroke-width: 1.5; }
+  .caja-futuro { fill: none; stroke: var(--futuro); stroke-width: 1.5; stroke-dasharray: 6 5; }
+  .titulo-caja { font: 700 13px system-ui, sans-serif; fill: var(--tinta); }
+  .detalle-caja { font: 400 11px system-ui, sans-serif; fill: var(--tinta-suave); }
+  .detalle-futuro { fill: var(--futuro); }
+  .flecha { stroke: var(--tinta-suave); stroke-width: 1.5; fill: none; marker-end: url(#punta); }
+  .flecha-futura { stroke: var(--futuro); stroke-dasharray: 6 5; }
+  .etiqueta-flecha { font: 600 10.5px system-ui, sans-serif; fill: var(--tinta-suave); }
+  table { width: 100%; border-collapse: collapse; font-size: .88rem; background: var(--tarjeta); border-radius: 8px; overflow: hidden; }
+  th, td { text-align: left; padding: .55rem .7rem; border: 1px solid var(--borde); vertical-align: top; }
+  th { background: var(--acento-suave); font-size: .8rem; text-transform: uppercase; letter-spacing: .04em; }
+  tr.critica td { font-weight: 700; }
+  .tabla-scroll { overflow-x: auto; }
+  details { margin: 1rem 0; font-size: .85rem; color: var(--tinta-suave); }
+  details summary { cursor: pointer; font-weight: 600; }
+  footer { margin-top: 3rem; font-size: .8rem; color: var(--tinta-suave); border-top: 1px solid var(--borde); padding-top: .8rem; }
+</style>
+</head>
+<body>
+<main>
+  <h1>CV Viva — Blueprint de infraestructura <span class="badge">as-built</span></h1>
+  <p class="meta">Ciclo: <strong>H1 (MVP funcional)</strong> · Cerrado: <strong>2026-07-20</strong> · Sprints del ciclo: <strong>S1–S4</strong> · Última actualización: <strong>2026-07-20</strong></p>
+  <p class="nota"><strong>Mapa real de TODA la infraestructura que sostiene CV Viva</strong>, escrito con lo DESPLEGADO de verdad al cerrar el ciclo H1. Vivo y acumulativo: el próximo ciclo lo actualiza (no lo reescribe) y declara sus cambios en el historial. Nunca contiene secretos ni URLs privadas de administración — solo qué gestor los guarda.</p>
+
+  <h2>Diagrama</h2>
+  <div class="diagrama">
+  <svg viewBox="0 0 960 440" role="img" aria-label="Diagrama de infraestructura de CV Viva">
+    <defs>
+      <marker id="punta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor" opacity="0.65"/>
+      </marker>
+    </defs>
+
+    <!-- Visitante -->
+    <rect class="caja" x="20" y="170" width="170" height="76" rx="10"/>
+    <text class="titulo-caja" x="105" y="200" text-anchor="middle">Visitante</text>
+    <text class="detalle-caja" x="105" y="218" text-anchor="middle">recruiter / navegador</text>
+
+    <!-- Hosting (Vercel) -->
+    <rect class="caja caja-principal" x="290" y="150" width="240" height="116" rx="10"/>
+    <text class="titulo-caja" x="410" y="180" text-anchor="middle">Vercel Hobby</text>
+    <text class="detalle-caja" x="410" y="200" text-anchor="middle">Next.js 16 · SSG + route handlers</text>
+    <text class="detalle-caja" x="410" y="217" text-anchor="middle">prod desde main · preview por PR</text>
+    <text class="detalle-caja" x="410" y="234" text-anchor="middle">subdominio *.vercel.app</text>
+
+    <!-- Base de datos (Supabase) -->
+    <rect class="caja caja-bd" x="640" y="40" width="290" height="104" rx="10"/>
+    <text class="titulo-caja" x="785" y="68" text-anchor="middle">Supabase (free) · S4</text>
+    <text class="detalle-caja" x="785" y="86" text-anchor="middle">Postgres · tabla votes · RLS ON</text>
+    <text class="detalle-caja" x="785" y="103" text-anchor="middle">RPC emitir_voto / conteo_votos</text>
+    <text class="detalle-caja" x="785" y="120" text-anchor="middle">anon: solo EXECUTE · cero PII</text>
+
+    <!-- Servicios externos -->
+    <rect class="caja" x="640" y="180" width="290" height="100" rx="10"/>
+    <text class="titulo-caja" x="785" y="206" text-anchor="middle">Servicios externos</text>
+    <text class="detalle-caja" x="785" y="224" text-anchor="middle">Groq (chat LLM, free) — conmutable</text>
+    <text class="detalle-caja" x="785" y="241" text-anchor="middle">Resend (email del formulario)</text>
+    <text class="detalle-caja" x="785" y="258" text-anchor="middle">Sentry + Vercel Analytics (obs.)</text>
+
+    <!-- GitHub -->
+    <rect class="caja" x="290" y="330" width="240" height="86" rx="10"/>
+    <text class="titulo-caja" x="410" y="358" text-anchor="middle">GitHub (público)</text>
+    <text class="detalle-caja" x="410" y="376" text-anchor="middle">ruleset main-protegida</text>
+    <text class="detalle-caja" x="410" y="393" text-anchor="middle">CI: quality·e2e·integration·lighthouse</text>
+
+    <!-- Futuro -->
+    <rect class="caja-futuro" x="20" y="336" width="180" height="80" rx="10"/>
+    <text class="titulo-caja detalle-futuro" x="110" y="362" text-anchor="middle">(futuro · H2)</text>
+    <text class="detalle-caja detalle-futuro" x="110" y="380" text-anchor="middle">dominio propio</text>
+    <text class="detalle-caja detalle-futuro" x="110" y="396" text-anchor="middle">buzón (C4, PWA…)</text>
+
+    <!-- Flechas -->
+    <path class="flecha" d="M 190 208 L 285 208"/>
+    <text class="etiqueta-flecha" x="237" y="200" text-anchor="middle">HTTPS</text>
+
+    <path class="flecha" d="M 530 180 L 635 110"/>
+    <text class="etiqueta-flecha" x="600" y="128" text-anchor="middle">RPC (anon)</text>
+
+    <path class="flecha" d="M 530 224 L 635 226"/>
+    <text class="etiqueta-flecha" x="585" y="216" text-anchor="middle">API</text>
+
+    <path class="flecha" d="M 410 330 L 410 268"/>
+    <text class="etiqueta-flecha" x="418" y="302">CI → deploy</text>
+  </svg>
+  </div>
+
+  <h2>Tabla por pieza</h2>
+  <div class="tabla-scroll">
+  <table>
+    <thead><tr><th>Pieza</th><th>Servicio + plan</th><th>Detalle operativo</th></tr></thead>
+    <tbody>
+      <tr><td>Código / versionamiento</td><td>GitHub <code>mauriciorincon-ai/app-hoja-de-vida</code> (público)</td><td>ruleset <code>main-protegida</code>; checks requeridos: quality · e2e · integration · lighthouse</td></tr>
+      <tr><td>CI/CD</td><td>GitHub Actions (4 jobs)</td><td>quality (typecheck·lint·test·build·audit) · e2e (Playwright+axe) · integration (Postgres real) · lighthouse (perf-budget)</td></tr>
+      <tr><td>Hosting / publicación</td><td>Vercel Hobby</td><td>Next.js 16 SSG + route handlers; prod desde <code>main</code>, preview por PR; uso NO comercial (cláusula Hobby verificada, ADR-004)</td></tr>
+      <tr><td>Base de datos</td><td><strong>Supabase free</strong> (nueva en S4, ADR-011)</td><td>Postgres; tabla <code>votes</code> (app·feature·created_at, <strong>cero PII</strong>); RLS ON sin políticas; RPC SECURITY DEFINER; anon solo EXECUTE. 2º proyecto del org</td></tr>
+      <tr><td>Auth</td><td>no aplica</td><td>la app es pública; la votación es anónima (sin registro)</td></tr>
+      <tr><td>Almacenamiento de archivos</td><td>no aplica</td><td>el PDF ATS se genera en build y se sirve estático desde <code>public/</code></td></tr>
+      <tr><td>Email / notificaciones</td><td>Resend (free)</td><td>formulario "solicitar acceso" → correo; sin key la app simula el envío (solo logs)</td></tr>
+      <tr><td>IA embebida</td><td>Groq (free) — adapter conmutable</td><td>chat RAG (S3, ADR-003); índice MiniSearch build-time; fallback local sin red; guardrails + breaker + kill-switch; conmutable a Gemini/Azure/Claude/self-host por env</td></tr>
+      <tr><td>Observabilidad</td><td>Pino · Sentry · Vercel Analytics</td><td>logs estructurados en los route handlers (request-id, latencia); Sentry client-only inerte sin DSN; eventos de producto en Analytics</td></tr>
+      <tr><td>Crons / keep-alives</td><td>ninguno</td><td>no hay procesos programados; todo es request-driven o build-time</td></tr>
+      <tr><td>Secretos</td><td><code>.env.local</code> (gitignored) + Vercel env vars</td><td>doble hook gitleaks (pre-commit + PreToolUse); jamás en el repo</td></tr>
+      <tr><td>Dominio</td><td>subdominio <code>*.vercel.app</code></td><td>dominio propio previsto para H2 (G-Release)</td></tr>
+      <tr class="critica"><td>Costo real / mes</td><td><strong>US$0</strong></td><td>Vercel Hobby · Supabase free (2 proyectos/org) · Groq free (30 RPM, 1K req/día) · Resend free · GitHub Free · Sentry/Analytics free. Ningún tier al límite</td></tr>
+      <tr class="critica"><td>Punto único de falla</td><td>la cuenta GitHub (SSO de Vercel y Supabase)</td><td>mitigación: 2FA en GitHub. La app degrada con gracia: sin BD la votación se declara "no disponible"; sin LLM el chat cae a búsqueda local — ninguno tumba el sitio</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2>Historial del blueprint</h2>
+  <div class="tabla-scroll">
+  <table>
+    <thead><tr><th>Fecha</th><th>Ciclo</th><th>Cambios</th></tr></thead>
+    <tbody>
+      <tr><td>2026-07-20</td><td>H1 (S1–S4)</td><td>Versión inicial as-built al cerrar el ciclo H1. Primera capa de datos de la app: <strong>Supabase</strong> (S4, votación). El resto (Vercel, GitHub+ruleset, Resend, Groq, Sentry/Analytics) consolidado de S1–S3. Costo real US$0.</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <footer>Blueprint as-built de CV Viva · pipeline AI-APPs · se actualiza en cada cierre de ciclo (método v1.8.1). Archivo del repo — sin CDNs ni dependencias externas.</footer>
+</main>
+</body>
+</html>

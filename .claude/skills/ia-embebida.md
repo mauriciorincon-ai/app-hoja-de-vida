@@ -29,7 +29,12 @@ valida contra `schemas.ts`, filtra con `guardrails.ts` y persiste con `persist.t
 // schemas.ts — el contrato: lo que la app entiende y almacena
 export const AnalisisSchema = z.object({
   resumen: z.string().max(500),
-  entidades: z.array(z.object({ tipo: z.enum(["persona","monto","fecha"]), valor: z.string() })),
+  entidades: z.array(
+    z.object({
+      tipo: z.enum(["persona", "monto", "fecha"]),
+      valor: z.string(),
+    }),
+  ),
   confianza: z.number().min(0).max(1),
 });
 
@@ -37,9 +42,10 @@ export const AnalisisSchema = z.object({
 import { generateObject } from "ai";
 import { anthropic } from "@ai-sdk/anthropic";
 const { object, usage } = await generateObject({
-  model: anthropic("claude-sonnet-5"),      // Haiku para tareas simples; Sonnet para razonamiento
+  model: anthropic("claude-sonnet-5"), // Haiku para tareas simples; Sonnet para razonamiento
   schema: AnalisisSchema,
-  prompt, abortSignal: AbortSignal.timeout(30_000),
+  prompt,
+  abortSignal: AbortSignal.timeout(30_000),
 });
 ```
 
@@ -75,6 +81,44 @@ Si el brief marca el dominio como sensible (habla, financiera, inmobiliaria): la
 high-stakes o de baja `confianza` se marcan `estado: pending_review`, la UI muestra "en revisión",
 y un dashboard mínimo de operador permite aprobar/rechazar antes de exponer.
 
+## 6. Proveedor conmutable por env
+
+El adapter elige proveedor por variable de entorno (`CHAT_PROVIDER` o equivalente): cambiar de
+Groq a Gemini/Azure/Claude/self-host OpenAI-compatible es cambiar env vars, jamás código.
+
+## 7. Humo del proveedor real — día 0 (kit v1.7.4)
+
+**Toda credencial de proveedor se valida el día 0 del sprint, en la fase 0 — antes de construir
+contra ella.** Un 401 descubierto en la integración es un fallo de proceso, no un imprevisto
+(hoja-de-vida S3: la GROQ_API_KEY aprovisionada era inválida y se supo recién al integrar;
+producción quedó en modo fallback hasta regenerarla).
+
+```bash
+# Groq
+curl -s -o /dev/null -w '%{http_code}' https://api.groq.com/openai/v1/models \
+  -H "Authorization: Bearer $GROQ_API_KEY"     # → 200
+```
+
+Cada proveedor viaja con su comando de humo (≤1 min) en la orden de construcción; el checklist
+re-emitido al abrir el PR lo repite si la credencial cambió. La validación contra el proveedor
+REAL es además un paso manual pre-merge del estándar 7 — la CI nunca llama proveedores reales.
+
+## 8. El mock es un proveedor de primera clase (kit v1.7.4)
+
+El mock se implementa **dentro del adapter** (`CHAT_PROVIDER=mock`), como un miembro más que
+emite por la misma interfaz de streaming — **jamás como intercept de red** (msw, `page.route`,
+nock) del proveedor real.
+
+- **Probar la conmutación es probar el mecanismo:** elegir `mock` por env recorre el mismo código
+  que elegir Groq; el intercept de red se salta exactamente la pieza que la feature promete.
+- **CI determinista y sin red:** cero cuota, cero flakes de latencia (`CHAT_PROVIDER=mock` en el
+  `env` del webServer de Playwright).
+- **Streaming de punta a punta:** la UI se prueba con el flujo real, no con un JSON estático.
+- _Excepción legítima del intercept:_ forzar el **camino de error** — interceptar la ruta propia
+  (`/api/chat`) con el mismo 503 que emite el server para probar el fallback.
+
+Patrón wiki: `mock-como-proveedor-de-primera-clase.md` (planeadora, RO).
+
 ## Checklist del sprint (lo verifica /deploy-check)
 
 - [ ] Toda llamada LLM pasa por `lib/ia/client.ts` y valida contra un schema de `schemas.ts`.
@@ -83,3 +127,6 @@ y un dashboard mínimo de operador permite aprobar/rechazar antes de exponer.
 - [ ] Costo por request loggeado.
 - [ ] Tests: unit del schema (casos válidos/inválidos) + mock del LLM en integración (nunca llamar
       al API real en CI) + 1 e2e con respuesta fixture.
+- [ ] **Humo del proveedor real ejecutado en la fase 0** (§7) — y repetido en el checklist del PR
+      si la credencial cambió.
+- [ ] **El mock vive dentro del adapter** (§8), no como intercept de red.

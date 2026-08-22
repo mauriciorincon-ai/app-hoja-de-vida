@@ -91,6 +91,7 @@ export default async function LocaleLayout({
     form: messages.form,
     error: messages.error,
     chat: messages.chat,
+    roadmap: messages.roadmap,
   };
 
   // Kill-switch del chat (S3): sin CHAT_ENABLED=false el lanzador existe en

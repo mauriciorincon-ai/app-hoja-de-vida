@@ -10,10 +10,14 @@
     "skills": "Skills",
     "certificaciones": "Certificaciones",
     "apps": "Apps",
+    "roadmap": "Roadmap",
     "contacto": "Contacto",
     "cambiarIdioma": "Switch to English",
     "saltarContenido": "Saltar al contenido",
-    "descargarCv": "CV (PDF)"
+    "descargarCv": "CV (PDF)",
+    "abrirMenu": "Abrir el menú",
+    "cerrarMenu": "Cerrar el menú",
+    "menu": "Menú"
   },
   "hero": {
     "ctaApps": "Explora las apps",
@@ -56,6 +60,28 @@
       "en-exploracion": "En exploración"
     },
     "cta": "Quiero probarla"
+  },
+  "brochure": {
+    "volver": "Apps",
+    "eyebrow": "Brochure",
+    "funcionalidades": "Qué hace",
+    "stack": "Stack",
+    "verApp": "Ver la app",
+    "cta": "¿Te suena a tu equipo? Hablemos"
+  },
+  "roadmap": {
+    "eyebrow": "Roadmap",
+    "titulo": "Qué viene — y tú decides el orden",
+    "subtitulo": "Estas son las próximas features de cada app. Vota las que más quieres ver: un clic, sin registro. Los contadores son reales.",
+    "votar": "Votar",
+    "votos": "{count, plural, =0 {sin votos aún} one {# voto} other {# votos}}",
+    "yaVotaste": "Ya votaste",
+    "gracias": "¡Gracias por tu voto!",
+    "noDisponible": "La votación no está disponible en este momento. Vuelve a intentarlo más tarde.",
+    "rateLimited": "Vas muy rápido — espera un momento antes de votar de nuevo.",
+    "error": "No pude registrar tu voto. Intenta de nuevo en un momento.",
+    "votarAria": "Votar por {feature}",
+    "cargando": "Cargando votos…"
   },
   "contacto": {
     "eyebrow": "Contacto",

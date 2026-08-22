@@ -14,6 +14,13 @@ const { proyectos } = parse(readFileSync("data/cv.es.yaml", "utf8")) as {
 const slug = proyectos.find((p) => p.casestudy)?.slug;
 if (!slug) throw new Error("cv.es.yaml sin case studies");
 
+// Primera app con brochure (S4): la ruta pública nueva también pasa por axe
+const { apps } = parse(readFileSync("data/apps.yaml", "utf8")) as {
+  apps: { id: string; brochure?: unknown }[];
+};
+const brochureSlug = apps.find((a) => a.brochure)?.id;
+if (!brochureSlug) throw new Error("apps.yaml sin brochures");
+
 const RUTAS = [
   "/es",
   "/en",
@@ -21,6 +28,8 @@ const RUTAS = [
   `/en/proyectos/${slug}`,
   "/es/cv",
   "/en/cv",
+  `/es/apps/${brochureSlug}`,
+  `/en/apps/${brochureSlug}`,
 ];
 
 for (const ruta of RUTAS) {

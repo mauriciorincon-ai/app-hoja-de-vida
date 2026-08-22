@@ -1,9 +1,10 @@
 import type { MetadataRoute } from "next";
 import { routing } from "@/i18n/routing";
+import { appsConBrochure } from "@/lib/brochure";
 import { getCv } from "@/lib/content";
 import { SITE_URL } from "@/lib/site";
 
-/** HOME + /cv + case studies (data-driven: un slug nuevo entra solo). */
+/** HOME + /cv + case studies + brochures (data-driven: una ruta nueva entra solo). */
 export default function sitemap(): MetadataRoute.Sitemap {
   const alternatesFor = (path: string) => ({
     languages: Object.fromEntries(
@@ -29,6 +30,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
         lastModified: new Date(),
         alternates: alternatesFor(`/proyectos/${p.slug}`),
       })),
+    ...appsConBrochure().map((app) => ({
+      url: `${SITE_URL}/${locale}/apps/${app.id}`,
+      lastModified: new Date(),
+      alternates: alternatesFor(`/apps/${app.id}`),
+    })),
   ]);
 
   return rutas;

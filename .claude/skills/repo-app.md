@@ -24,9 +24,17 @@ C:\Code\app-<slug>\            # SIEMPRE bajo C:\Code, nunca OneDrive
 ## Scripts esperados en package.json
 
 ```json
-{ "scripts": { "dev": "next dev", "build": "next build", "lint": "next lint",
-  "typecheck": "tsc --noEmit", "test": "vitest run --coverage",
-  "test:e2e": "playwright test", "format": "prettier --write ." } }
+{
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --coverage",
+    "test:e2e": "playwright test",
+    "format": "prettier --write ."
+  }
+}
 ```
 
 ## CI (GitHub Actions — ya viene en el kit: `.github/workflows/ci.yml`)
@@ -34,6 +42,18 @@ C:\Code\app-<slug>\            # SIEMPRE bajo C:\Code, nunca OneDrive
 Cada PR: install (pnpm, lockfile congelado) → typecheck → lint → test (unit, cobertura) →
 build → `pnpm audit --audit-level high` → e2e (Playwright) → Lighthouse CI contra
 `perf-budget.json`. `main` con branch protection: no push directo, PR con CI verde requerido.
+**Si un sprint añade un job de CI, se añade a la ruleset `main-protegida` en el MISMO sprint**
+(regla 2026-07-10) — un job que no gatea es un gate que no existe.
+
+**Lighthouse en CI solo audita páginas PÚBLICAS** (kit v1.7.2, 4º caso Lantern): las que un
+visitante anónimo ve en su primer load. Las privadas / `noindex` / hidratadas en cliente se
+**excluyen documentadamente** de las URLs auditadas y su LCP real se valida en el gate ⭐ en
+dispositivo. Razón: Lighthouse las mide en un estado que ningún usuario experimenta, y mantenerlas
+obliga a elegir entre budget global inflado o rojo permanente. `throttlingMethod: devtools` queda
+**DESCARTADO** como remedio en runners compartidos (mide peor en VMs lentas); el patrón estable es
+budget con ~10% de margen sobre el valor Lantern de la ruta pública. **Toda ruta pública nueva se
+agrega a las URLs auditadas en el sprint que la crea.** Patrón:
+`wiki/patterns/lighthouse-solo-paginas-publicas.md` (planeadora, RO).
 
 ```powershell
 # Activar branch protection al crear el remoto (gh CLI):

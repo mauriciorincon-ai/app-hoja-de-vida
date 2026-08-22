@@ -11,6 +11,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run --coverage",
     "test:watch": "vitest",
+    "test:db": "vitest run --config vitest.db.config.ts",
     "test:e2e": "playwright test"
   },
   "dependencies": {
@@ -21,6 +22,7 @@
     "@ai-sdk/openai-compatible": "^3.0.5",
     "@ai-sdk/react": "^4.0.16",
     "@sentry/nextjs": "^10.63.0",
+    "@supabase/supabase-js": "^2.110.7",
     "@vercel/analytics": "^2.0.1",
     "ai": "^7.0.14",
     "class-variance-authority": "^0.7.1",
