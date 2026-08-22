@@ -30,6 +30,10 @@ const RUTAS = [
   "/en/cv",
   `/es/apps/${brochureSlug}`,
   `/en/apps/${brochureSlug}`,
+  // La vitrina (S5): ruta pública nueva ⇒ entra a axe EN SU MISMA FASE
+  // (regla 9 + kit v1.24.1).
+  "/es/vitrina",
+  "/en/vitrina",
 ];
 
 for (const ruta of RUTAS) {

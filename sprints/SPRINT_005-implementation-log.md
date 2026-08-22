@@ -147,3 +147,51 @@ Las 3 mutaciones de la orden, aplicadas a exports **reales** y revertidas despu�
 
 Cada rojo **nombró el archivo culpable y el campo**. Restaurados los 6 desde respaldo: **38/38 verde**
 y `git diff` de `content/vitrina/` vacío — los exports quedaron byte a byte intactos.
+
+## Fase 2 — La vitrina en el DS propio · ADR-013 y mirada M1
+
+**ADR-013 escrito ANTES de construir** (`decisions/013-vitrina-exports-vs-yaml.md`): conviven sin
+puente de datos. Hallazgo que lo decide: los dos conjuntos **no se solapan** (cero slugs en común),
+así que no hay duplicación que sincronizar sino dos modelos de brochure con orígenes distintos.
+
+### Construido
+
+- `src/components/vitrina/ficha.tsx` — la ficha re-expresada. Server component, **cero JS de
+  cliente**: el desplegable es `<details>` nativo (accesible por teclado y con todo el contenido en
+  el HTML estático). Muestra chip INICIAL/SELLADO, promesa, para-quién/diferencial, **métricas con
+  su badge de `fuente`** (un pastel del DS por procedencia), funcionalidades por grupo con el ◆ del
+  grupo estrella, **descartadas visibles**, privacidad, stack, **la razón en lugar del enlace**, CTA
+  de lista de espera y el **anclaje** (de qué export es la ficha).
+- `src/app/[locale]/vitrina/page.tsx` — ruta SSG con hero estático (LCP-safe) + `nav`/`sitemap`.
+- Chrome bilingüe (`messages/*.json`, namespace `vitrina`) con paridad de claves verificada.
+
+**Decisión de diseño:** los booleanos de `privacidad` se muestran **sin colorear de bueno/malo**: la
+polaridad cambia por clave (`local_only: true` es bueno; `red_saliente: true` no lo sería) y solo la
+app sabe cuál es cuál. El `detalle` lleva la explicación.
+
+### Pasada de capturas del builder (contrapeso del ⭐ diferido) — 3 defectos que la CI no vio
+
+| # | Defecto | Cómo se vio | Fix |
+| --- | --- | --- | --- |
+| 1 | **La ficha era INVISIBLE.** `Reveal` usa `viewport.amount: 0.25`; una ficha mide ~4000px y el 25% son 1000px — **más que el viewport**, así que el umbral no se alcanza JAMÁS y el bloque se queda en `opacity: 0` para siempre. La CI en verde: el contenido sí está en el HTML | Captura de escritorio: media página en blanco | Es la trampa documentada en el kit v1.23.0. `Reveal` gana prop `amount` (default 0.25 — **cero cambio** para las pantallas existentes) y la vitrina pasa `"some"`: revela en cuanto asoma un pixel |
+| 2 | **Orden de encabezados roto** (`h1` → `h3`, saltando `h2`) | Lectura de la estructura + axe | Nombre de app `h3`→`h2`; grupos y descartadas `h4`→`h3` |
+| 3 | **La vitrina no era alcanzable desde el nav** | Captura del header | Añadida como **ruta** (no ancla) al nav de escritorio y al panel móvil |
+
+Barrido de control sobre las 5 rutas × 2 viewports buscando más bloques invisibles: los `opacity: 0`
+de la HOME son **comportamiento esperado** (`once: false` revierte la entrada al salir de pantalla),
+no defectos — se verificó con captura de sanidad de la HOME en móvil.
+
+### axe EN LA MISMA FASE (regla 9 + kit v1.24.1 — el sprint estrena la regla)
+
+Rojo a la primera: **`color-contrast` 2.7:1** en los dos párrafos de anclaje/fecha, por usar
+`text-ink-3` (#9c9a90). **Es la MISMA lección del S4 repitiéndose**: `ink-3` es el tono decorativo
+del design system (labels de eje), no un tono de texto legible. Subidos a `text-ink-2` → **axe 20/20
+verde**. Haber corrido axe en esta fase —y no en la de integración— lo cazó el mismo día.
+
+**Estado:** 174 unit/integration + 88 e2e verdes. `reduced-motion` verificado por captura: la ficha
+se ve completa y sin movimiento.
+
+### Gate de mirada M1 — PENDIENTE del usuario
+
+La vitrina renderiza **UNA sola ficha** (`FICHAS_VISIBLES = 1` en la ruta) hasta que el usuario
+apruebe cómo se ve. Al aprobar pasa a las 6 y se presenta M2.

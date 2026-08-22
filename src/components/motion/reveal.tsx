@@ -73,6 +73,15 @@ type RevealProps = {
   className?: string;
   /** true = anima al montar (hero); false = anima al entrar al viewport */
   onMount?: boolean;
+  /**
+   * Fracción del bloque que debe entrar en pantalla para revelar (default 0.25).
+   * **Trampa (kit v1.23.0):** un bloque MÁS ALTO que el viewport jamás alcanza un
+   * umbral porcentual y se queda invisible para siempre — con la CI en verde,
+   * porque el contenido sí está en el HTML. Todo bloque que pueda superar la
+   * altura de pantalla (fichas de la vitrina, secciones largas) pasa `"some"`,
+   * que revela en cuanto asoma un pixel.
+   */
+  amount?: number | "some" | "all";
 };
 
 export function Reveal({
@@ -81,6 +90,7 @@ export function Reveal({
   delay = 0,
   className,
   onMount = false,
+  amount = 0.25,
 }: RevealProps) {
   const reduced = useReducedMotion();
 
@@ -99,7 +109,7 @@ export function Reveal({
               // once:false — la entrada se re-ejecuta cada vez que la sección
               // vuelve a pantalla (feedback del gate de diseño, 2026-07-05)
               whileInView: "visible" as const,
-              viewport: { once: false, amount: 0.25 },
+              viewport: { once: false, amount },
             }),
       };
 

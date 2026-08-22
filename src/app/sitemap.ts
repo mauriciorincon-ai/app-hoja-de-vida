@@ -35,6 +35,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       alternates: alternatesFor(`/apps/${app.id}`),
     })),
+    {
+      url: `${SITE_URL}/${locale}/vitrina`,
+      lastModified: new Date(),
+      alternates: alternatesFor("/vitrina"),
+    },
   ]);
 
   return rutas;

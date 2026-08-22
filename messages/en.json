@@ -17,7 +17,8 @@
     "descargarCv": "CV (PDF)",
     "abrirMenu": "Open the menu",
     "cerrarMenu": "Close the menu",
-    "menu": "Menu"
+    "menu": "Menu",
+    "vitrina": "Showcase"
   },
   "hero": {
     "ctaApps": "Explore the apps",
@@ -140,5 +141,47 @@
     "fallbackVacio": "I couldn't find anything about that in the résumé. Try another question or write to Henry from the Contact section.",
     "rateLimited": "Lots of questions in a row — give me a minute to breathe and we'll continue.",
     "error": "I couldn't answer that one. Please try again."
+  },
+  "vitrina": {
+    "eyebrow": "The showcase",
+    "titulo": "Six apps, actually built",
+    "subtitulo": "Each with its promise, its features and its numbers — and every number with its provenance. They are shown here; they are not handed over.",
+    "notaIdioma": "Each app's own words are kept in Spanish, exactly as its team wrote them.",
+    "estados": {
+      "sellado": "Sealed",
+      "inicial": "Build closed"
+    },
+    "estadoAyuda": {
+      "sellado": "Its testing gate is done",
+      "inicial": "Its build is closed; the testing gate isn't yet"
+    },
+    "paraQuien": "Who it's for",
+    "diferencial": "What nobody else does",
+    "funcionalidades": "Features",
+    "verFuncionalidades": "See the {n} features",
+    "descartadas": "Dropped — not pending",
+    "descartadaEl": "dropped on {fecha}",
+    "privacidad": "Privacy",
+    "stack": "Stack",
+    "metricas": "The numbers",
+    "fuentes": {
+      "medido": "measured",
+      "calculada": "computed",
+      "declarado": "declared",
+      "estimacion": "estimate"
+    },
+    "fuenteAyuda": {
+      "medido": "Came from a counter or a command",
+      "calculada": "Measured, then applied to a stated rate or rule",
+      "declarado": "Set by a person",
+      "estimacion": "Inferred"
+    },
+    "acceso": "How you get access",
+    "cta": "Tell me when it opens",
+    "ctaNota": "You join the waiting list. No date promised.",
+    "anclaje": "Card pinned to the export of {fecha} · v{version} · {sprints, plural, one {# closed sprint} other {# closed sprints}}",
+    "anclajeNota": "The showcase shows each app's pinned version, not its real-time state.",
+    "sí": "yes",
+    "no": "no"
   }
 }

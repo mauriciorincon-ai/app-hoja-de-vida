@@ -17,7 +17,8 @@
     "descargarCv": "CV (PDF)",
     "abrirMenu": "Abrir el menú",
     "cerrarMenu": "Cerrar el menú",
-    "menu": "Menú"
+    "menu": "Menú",
+    "vitrina": "Vitrina"
   },
   "hero": {
     "ctaApps": "Explora las apps",
@@ -140,5 +141,47 @@
     "fallbackVacio": "No encontré nada sobre eso en la hoja de vida. Prueba con otra pregunta o escríbele a Henry desde Contacto.",
     "rateLimited": "Muchas preguntas muy seguidas — dame un minuto de respiro y seguimos.",
     "error": "No pude responder esa pregunta. Intenta de nuevo."
+  },
+  "vitrina": {
+    "eyebrow": "La vitrina",
+    "titulo": "Seis apps, construidas de verdad",
+    "subtitulo": "Cada una con su promesa, sus funcionalidades y sus cifras — y cada cifra con su procedencia. Aquí se muestran; no se entregan.",
+    "notaIdioma": "",
+    "estados": {
+      "sellado": "Sellada",
+      "inicial": "Construcción cerrada"
+    },
+    "estadoAyuda": {
+      "sellado": "Su gate de pruebas terminó",
+      "inicial": "Su construcción cerró; el gate de pruebas aún no"
+    },
+    "paraQuien": "Para quién",
+    "diferencial": "Qué no hace nadie más",
+    "funcionalidades": "Funcionalidades",
+    "verFuncionalidades": "Ver las {n} funcionalidades",
+    "descartadas": "Descartadas — no son pendientes",
+    "descartadaEl": "retirada el {fecha}",
+    "privacidad": "Privacidad",
+    "stack": "Stack",
+    "metricas": "Las cifras",
+    "fuentes": {
+      "medido": "medido",
+      "calculada": "calculada",
+      "declarado": "declarado",
+      "estimacion": "estimación"
+    },
+    "fuenteAyuda": {
+      "medido": "Salió de un contador o un comando",
+      "calculada": "Medido, operado con una tarifa o regla declarada",
+      "declarado": "Lo fijó una persona",
+      "estimacion": "Deducido"
+    },
+    "acceso": "Cómo se accede",
+    "cta": "Avísame cuando abra",
+    "ctaNota": "Entras a la lista de espera. Sin promesa de fecha.",
+    "anclaje": "Ficha anclada al export del {fecha} · v{version} · {sprints, plural, one {# sprint cerrado} other {# sprints cerrados}}",
+    "anclajeNota": "La vitrina muestra la versión anclada de cada app, no su estado en tiempo real.",
+    "sí": "sí",
+    "no": "no"
   }
 }
