@@ -1,0 +1,23 @@
+# Estampado del kit-app (kit v1.23.1) — adoptado en el Sprint 005.
+# REGLA DEL USUARIO (2026-08-22, regla 18 del CLAUDE.md): máximo DOS PRs de dependencias
+# abiertos a la vez — jamás una lista de merges pendientes. Un PR agrupado por ecosistema.
+# (Un limit 5 POR ecosistema daría hasta 10 abiertos, y la primera activación vuelca el
+# atraso entero de golpe: produjo una cola de 6 en Innmobiliaria.)
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 1
+    groups:
+      todo-npm:
+        patterns: ["*"]
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 1
+    groups:
+      todo-actions:
+        patterns: ["*"]

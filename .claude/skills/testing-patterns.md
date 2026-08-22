@@ -146,7 +146,9 @@ test("usuario crea un dashboard desde CSV y lo exporta", async ({ page }) => {
    v1.7.3, habla S3): meter un elemento nuevo a una pantalla testeada y correr la suite "al
    cierre" deja e2e mintiendo fases enteras (el selector aseveraba "exactamente 3 juegos" con
    4 en pantalla). La suite de la pantalla modificada se corre ANTES de declarar la fase
-   completa.
+   completa — **INCLUIDO su scan de axe** (kit v1.24.1, hoja-de-vida S4: diferir axe a la fase de
+   integración dejó pasar un contraste roto UNA FASE ENTERA — el eyebrow usaba el tono decorativo
+   del DS como texto real; se cazó, pero tarde).
 
 ## e2e con base de datos real (Supabase) en CI (kit v1.6.4, inmobiliaria S1)
 
