@@ -250,101 +250,79 @@
   animation-delay: var(--anim-delay, 0s);
 }
 
-/* ── Maquetas de la vitrina (S5) ────────────────────────────────────────────
- * Dibujos que REPRESENTAN la visual de cada app hermana, no capturas. Se pintan
- * con los tokens de CV Viva para que las seis se vean de la misma casa. Las
- * líneas `.trazable` se dibujan solas cuando la tarjeta entra en pantalla.
+/* ── Tiras visuales de la vitrina (S5) ──────────────────────────────────────
+ * ESQUEMÁTICAS A PROPÓSITO: no fingen ser una captura (banco §7, enmienda kit
+ * v1.23.0). Dibujan las IDEAS de cada app con los tokens de CV Viva, para que
+ * las seis fichas se vean de la misma casa. Topadas a su tamaño natural: la
+ * tipografía del dibujo se rompe si se estira al ancho de la tarjeta.
  */
-/* Topada a su tamaño natural: el viewBox es de 320 y estirarla a todo el ancho
- * amplía la tipografía del dibujo hasta romperla (regla del banco: las muestras
- * se topan a su tamaño natural, no se escalan). */
 .maqueta {
   width: 100%;
-  max-width: 420px;
+  max-width: 460px;
   height: auto;
   display: block;
   margin-inline: auto;
 }
-.maqueta .mq-lienzo {
+.maqueta .mq-caja {
   fill: var(--color-paper-0);
   stroke: var(--color-paper-3);
+  stroke-width: 1;
 }
-.maqueta .mq-caja {
-  fill: var(--color-paper-1);
-  stroke: var(--color-paper-2);
+.maqueta .mq-punto {
+  fill: var(--color-sage-ink);
 }
-.maqueta .mq-linea-texto {
+.maqueta .mq-punto-suave {
   fill: var(--color-paper-3);
 }
-.maqueta .mq-solido {
-  fill: var(--color-sage);
-}
-.maqueta .mq-acento-suave {
-  fill: var(--color-sage);
-}
-.maqueta .mq-nivel {
+.maqueta .mq-onda {
   fill: var(--color-sage-ink);
 }
 .maqueta .mq-globo {
   fill: var(--color-rose);
   stroke: var(--color-rose-ink);
+  stroke-width: 1;
 }
-.maqueta .mq-globo-cesta {
-  fill: var(--color-peach);
-  stroke: var(--color-peach-ink);
+.maqueta .mq-veto-fondo {
+  fill: var(--color-paper-1);
+  stroke: var(--color-paper-3);
+  stroke-width: 1;
 }
-.maqueta .mq-nube {
-  fill: var(--color-sky);
+.maqueta .mq-veto-punto {
+  fill: var(--color-ink-3);
 }
-.maqueta .mq-mic {
-  fill: var(--color-lilac);
-  stroke: var(--color-lilac-ink);
+.maqueta .mq-dia-lleno {
+  fill: var(--color-sage);
 }
-/* Textos de la maqueta: mismas voces del design system, a escala de dibujo. */
-.maqueta .mq-h {
-  fill: var(--color-ink-0);
-  font-family: var(--font-display), Georgia, serif;
-  font-weight: 500;
-  font-size: 15px;
+.maqueta .mq-dia-vacio {
+  fill: var(--color-paper-2);
 }
-.maqueta .mq-etiqueta {
+/* Rótulos: la voz mono del design system, a escala de dibujo. */
+.maqueta .mq-rotulo {
   fill: var(--color-ink-2);
   font-family: var(--font-mono), monospace;
-  font-size: 7.5px;
-  letter-spacing: 0.08em;
+  /* 6px y no 7: a 7 los rótulos de 4 columnas de 80 se tocaban entre sí. */
+  font-size: 6px;
+  letter-spacing: 0.04em;
 }
-.maqueta .mq-acento-texto,
-.maqueta .mq-solido-texto {
-  fill: var(--color-sage-ink);
-  font-family: var(--font-sans), system-ui, sans-serif;
-  font-size: 9px;
-}
-/* Trazos: todo lo dibujado a línea comparte grosor y remates. */
-.maqueta .mq-tick,
-.maqueta .mq-mic-base,
-.maqueta .mq-globo-cuerda,
-.maqueta .mq-trayectoria {
+/* Trazos: mismo grosor y remates en toda la tira. */
+.maqueta .mq-trazo,
+.maqueta .mq-trayectoria,
+.maqueta .mq-veto-barra {
   fill: none;
   stroke-width: 1.5;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
-.maqueta .mq-tick {
-  stroke: var(--color-sage-ink);
+.maqueta .mq-trazo {
+  stroke: var(--color-ink-3);
 }
-.maqueta .mq-mic-base,
-.maqueta .mq-globo-cuerda {
-  stroke: var(--color-ink-2);
+.maqueta .mq-veto-barra {
+  stroke: var(--color-danger);
 }
 .maqueta .mq-trayectoria {
   stroke: var(--color-rose-ink);
   stroke-dasharray: 3 3;
-  opacity: 0.7;
-}
-.maqueta rect[class*="mq-"],
-.maqueta circle[class*="mq-"],
-.maqueta ellipse[class*="mq-"] {
-  stroke-width: 1;
+  opacity: 0.75;
 }
 
 /* El dibujo se traza solo cuando su tarjeta se ve (clase puesta por la isla). */

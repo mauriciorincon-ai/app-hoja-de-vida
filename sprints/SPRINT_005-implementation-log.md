@@ -217,3 +217,36 @@ Dos faltas mías, ambas por asumir en vez de ir a leer:
 **Acción:** se detiene la construcción de las 5 fichas restantes (correcto: para esto existe M1).
 Se lee la especificación del patrón en la planeadora y el material visual real de las 6 apps, se
 rehace la ficha, y M1 se vuelve a presentar. El plan de miradas no cambia de orden: M1 se repite.
+
+### Consulta a la planeadora sobre las muestras (a pedido del usuario)
+
+El usuario pidió preguntar a la planeadora «cómo hicimos los brochure». La respuesta cierra la duda
+y **corrige mi primer intento**:
+
+**La regla del banco §7 es de DOS caras, no una** (`kit-app/docs/BROCHURE-banco-de-tecnicas.md`
+L180-187, enmienda kit v1.23.0):
+
+1. Si la pieza **ENSEÑA LA APP** ⇒ **capturas de la app CORRIENDO** (Playwright, datos sintéticos
+   seeded, WebP como `data:` URI, script re-ejecutable). **Jamás mockups SVG dibujados a mano.**
+2. El **SVG con tokens** queda para **ilustraciones ABSTRACTAS que no pretenden ser la app**.
+
+La corrección de Innmobiliaria aplicó **las dos en el mismo PR**: tira visual diagramática donde la
+tarjeta no enseña la app, capturas reales en la sección que sí. Y el detonante fue **la misma frase
+que me dijo el usuario**: _«las tarjetas deberían tener elementos visuales, no solo texto»_ →
+_«Cada una gana su tira visual diagramática con los tokens de la marca. **Es esquemática a
+propósito: no finge ser una captura.**»_
+
+**Mi primer dibujo caía del lado prohibido:** tenía marco de teléfono, cabecera «Hoy» y una tarjeta
+de cápsula — o sea, fingía una pantalla. Rehecho como **tira esquemática**: sin marco de app, sin
+cromo de interfaz; cuatro columnas iguales con las IDEAS de la app (idea del día · la voz sube · no
+se guarda · racha de días) y su rótulo mono. El `figcaption` lo declara: «No es una captura de
+pantalla».
+
+**Gramática compartida** para las seis tiras: viewBox 320×92, cuatro columnas de 80 centradas en
+40·120·200·280, dibujo arriba y rótulo debajo, trazos de 1.5 y rótulos mono de 6px (a 7px se
+tocaban entre columnas), topada a 460px de ancho (estirarla rompe la tipografía del dibujo).
+
+**Material real disponible si se quiere sumar la cara 1 de la regla:** anonimizador tiene 10 WebP y
+inmobiliaria 4, ya producidos con sus scripts y embebidos en sus brochures. Ojo con el presupuesto:
+`perf-budget.json` topa el total de la ruta en 1000 KB y solo las de Velo pesan ~360 KB — entrarían
+con `lazy` y/o una ficha por ruta. Las otras 4 apps no tienen capturas (dash es repo privado).
