@@ -33,8 +33,14 @@ const HERMANAS = path.resolve(RAIZ, "..");
 const DESTINO = path.join(RAIZ, "public", "vitrina");
 const TEMP = path.join(RAIZ, ".capturas-tmp");
 
-/** Teléfono: estas apps son móviles primero y así se ven de verdad. */
-const PANTALLA = { width: 390, height: 844 };
+/**
+ * APAISADA (decisión del usuario en el gate M1): dentro de las tarjetas la
+ * imagen va a lo ancho, así que se fotografía la vista de escritorio.
+ * 1.5 de DPR: la captura se pinta a ~560px en la ficha — 1536 ya es su 2×,
+ * y el DPR 2 solo engordaría el WebP sin ganancia visible.
+ */
+const PANTALLA = { width: 1024, height: 640 };
+const DPR = 1.5;
 
 /**
  * Una escena = una pantalla que vale la pena enseñar. `preparar` conduce la UI
@@ -48,6 +54,9 @@ const APPS = {
       {
         nombre: "hoy",
         ruta: "/",
+        // La cápsula (el primer h2) es la protagonista; en apaisado el arranque
+        // de la página la dejaría bajo el pliegue.
+        foco: "h2",
         async preparar(p) {
           // Onboarding con datos inventados: un apodo y dos intereses.
           await p.fill('input[placeholder="Su apodo"]', "Santi");
@@ -108,9 +117,7 @@ async function capturarApp(slug, config) {
     // animación: una captura a media opacidad miente sobre el producto.
     const ctx = await nav.newContext({
       viewport: PANTALLA,
-      isMobile: true,
-      hasTouch: true,
-      deviceScaleFactor: 2,
+      deviceScaleFactor: DPR,
       reducedMotion: "reduce",
     });
     const p = await ctx.newPage();
@@ -121,8 +128,16 @@ async function capturarApp(slug, config) {
       });
       if (escena.preparar) await escena.preparar(p);
       await p.waitForTimeout(600);
-      // Desde arriba: el encabezado de la pantalla es lo que la identifica.
-      await p.evaluate(() => window.scrollTo(0, 0));
+      if (escena.foco) {
+        // La escena declara QUÉ se enseña: se centra ese bloque en el cuadro.
+        await p
+          .locator(escena.foco)
+          .first()
+          .evaluate((el) => el.scrollIntoView({ block: "center" }));
+      } else {
+        // Desde arriba: el encabezado de la pantalla es lo que la identifica.
+        await p.evaluate(() => window.scrollTo(0, 0));
+      }
       await p.waitForTimeout(200);
 
       const png = path.join(TEMP, `${slug}-${escena.nombre}.png`);

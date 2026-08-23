@@ -24,9 +24,9 @@ import Image from "next/image";
 
 type Captura = { archivo: string; rotulo: string };
 
-/** 390×844 a DPR 2 — el tamaño en que se fotografían (móvil primero). */
-const ANCHO = 780;
-const ALTO = 1688;
+/** 1024×640 a DPR 1.5 — APAISADAS (decisión del usuario en el gate M1). */
+const ANCHO = 1536;
+const ALTO = 960;
 
 /** slug de la app → orden del grupo → su pantalla. */
 const CAPTURAS: Record<string, Record<number, Captura>> = {
@@ -56,27 +56,27 @@ export function CapturaGrupo({
   if (!captura) return null;
 
   return (
-    <figure className="escalona m-0 md:w-[190px] md:shrink-0">
-      <div className="marco-captura mx-auto max-w-[210px]">
+    <figure className="escalona m-0">
+      {/* A LO ANCHO de la tarjeta: la pantalla apaisada es el banner del
+          grupo, y las funcionalidades se leen debajo de lo que ya se vio. */}
+      <div className="marco-captura">
         <Image
           src={`/vitrina/${captura.archivo}`}
           alt=""
           width={ANCHO}
           height={ALTO}
-          sizes="(min-width: 768px) 190px, 210px"
+          sizes="(min-width: 896px) 720px, 100vw"
           /* Perezosa siempre: nace dentro de una tarjeta plegada, bajo el
              pliegue — cargarla ansiosa pagaría peso por algo aún invisible. */
           loading="lazy"
           className="block h-auto w-full"
         />
       </div>
-      <figcaption className="mx-auto mt-2 max-w-[210px] text-center">
-        <span className="block font-mono text-[10px] tracking-[0.06em] text-ink-2 uppercase">
+      <figcaption className="mt-2 flex flex-wrap items-baseline gap-x-2 text-[12px] leading-snug text-ink-2">
+        <span className="font-mono text-[10px] tracking-[0.06em] uppercase">
           {captura.rotulo}
         </span>
-        <span className="mt-0.5 block text-[12px] leading-snug text-ink-2">
-          {pie}
-        </span>
+        <span>· {pie}</span>
       </figcaption>
     </figure>
   );

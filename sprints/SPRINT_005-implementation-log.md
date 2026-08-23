@@ -377,3 +377,14 @@ descendiente (`.tarjeta-detalle-cuerpo .escalona`) porque las features viven un 
 La tira horizontal de portada se eliminó con su CSS y su llave `capturasEtiqueta`.
 
 Verde: typecheck · lint · 174 unit · axe 20/20 (dev apagado) · build de producción.
+
+### Las capturas pasan a APAISADAS (gate M1, ronda de corrección)
+
+Pedido del usuario: las imágenes de las tarjetas horizontales, no verticales. El script fotografía
+ahora la **vista de escritorio** (1024×640, DPR 1.5 — la ficha las pinta a ~720px y 1536 ya es su
+2×; el DPR 2 solo engordaba el WebP). Ganó el campo `foco` por escena: la de «hoy» centra la
+cápsula (primer h2), que en apaisado quedaba bajo el pliegue. En la tarjeta, la captura va **a lo
+ancho como banner del grupo** y las funcionalidades debajo; el layout de dos columnas del intento
+vertical se eliminó. Las 6 nuevas pesan 222 KB (las verticales pesaban 297).
+
+Verde: typecheck · lint · 174 unit · axe 20/20 (dev apagado) · build.
