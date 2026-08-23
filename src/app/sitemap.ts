@@ -3,8 +3,9 @@ import { routing } from "@/i18n/routing";
 import { appsConBrochure } from "@/lib/brochure";
 import { getCv } from "@/lib/content";
 import { SITE_URL } from "@/lib/site";
+import { getManifestVitrina } from "@/lib/vitrina/loader";
 
-/** HOME + /cv + case studies + brochures (data-driven: una ruta nueva entra solo). */
+/** HOME + /cv + case studies + brochures + vitrina (data-driven: una ruta nueva entra sola). */
 export default function sitemap(): MetadataRoute.Sitemap {
   const alternatesFor = (path: string) => ({
     languages: Object.fromEntries(
@@ -34,6 +35,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${SITE_URL}/${locale}/apps/${app.id}`,
       lastModified: new Date(),
       alternates: alternatesFor(`/apps/${app.id}`),
+    })),
+    {
+      url: `${SITE_URL}/${locale}/vitrina`,
+      lastModified: new Date(),
+      alternates: alternatesFor("/vitrina"),
+    },
+    // Cada app hermana con su ruta propia: entran solas desde los exports.
+    ...getManifestVitrina().map((a) => ({
+      url: `${SITE_URL}/${locale}/vitrina/${a.slug}`,
+      lastModified: new Date(),
+      alternates: alternatesFor(`/vitrina/${a.slug}`),
     })),
   ]);
 

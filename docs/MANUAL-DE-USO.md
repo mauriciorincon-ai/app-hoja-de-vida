@@ -144,6 +144,35 @@ e inglés. Quien la visita puede pedir acceso a tus apps y la solicitud te llega
   roadmap. Una app sin `brochure:` simplemente no tiene página (su URL da 404).
 - **Analítica:** evento `brochure_vista` (con la app y el idioma).
 
+### La vitrina de las apps hermanas · desde Sprint 005
+
+- **Qué hace:** `/es/vitrina` es el **escaparate** de las seis apps del portafolio. Cada una se
+  asoma con una muestra corta —en qué estado está, su nombre, su promesa, un esquema y cuánto tiene
+  construido— y **cada app tiene su propia página**: `/es/vitrina/habla`,
+  `/es/vitrina/inmobiliaria`, etc. Dentro de cada página está la ficha completa: la promesa, las
+  cifras, sus funcionalidades agrupadas en tarjetas que se abren solas al llegar leyendo, y los
+  detalles finos (privacidad, stack, funcionalidades descartadas).
+- **De dónde sale el contenido:** de un archivo por app en `content/vitrina/`, llamado
+  `<app>.brochure-export.json`. Lo genera **cada app hermana**, no esta.
+- **Cómo agregar o actualizar una app (cero código):** dejas caer su `brochure-export.json` en
+  `content/vitrina/` y haces push. La página, el sitemap, el escaparate y las pruebas de
+  accesibilidad la recogen solas.
+- **Esos archivos NO se editan aquí.** Si uno trae un dato mal, se corrige **en la app de origen**
+  y se vuelve a exportar. Si el archivo está malformado o incumple el contrato, **la publicación
+  falla** y el error dice qué archivo y qué campo — nunca se publica una ficha que miente sobre sí
+  misma.
+- **Las imágenes de las pantallas:** son capturas de cada app **corriendo de verdad**, con datos
+  inventados, tomadas con un comando de este repo y **repintadas con la paleta de la hoja de vida**
+  para que las seis se vean de la misma casa. Para regenerarlas:
+  - necesitas las apps hermanas clonadas al lado de este repo, con sus dependencias instaladas, y
+    `cwebp` disponible (`brew install webp`);
+  - `pnpm capturas:vitrina` las rehace todas, `pnpm capturas:vitrina habla` solo una;
+  - quedan en `public/vitrina/` como WebP.
+- **Ninguna ficha entrega un enlace** a la app ni a su repositorio: se muestra la **razón** de que
+  no lo haya y un único botón de **lista de espera**, sin promesa de fecha.
+- **Lo que se muestra es la versión anclada** del export (con su fecha, a la vista al pie de cada
+  ficha), no el estado en tiempo real de la app.
+
 ### Menú en móvil · desde Sprint 004
 
 - **Qué hace:** en pantallas pequeñas, el encabezado muestra un botón de menú (☰) que despliega
@@ -253,10 +282,11 @@ carrera con un comentario que dice qué escribir en cada una.
 
 ## Historial
 
-| Sprint | Features añadidas a este manual                                                                                                                                                                                                                           |
-| ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 001    | Contenido por YAML, showcase de apps, bilingüe ES/EN, solicitudes de acceso, motion.                                                                                                                                                                      |
-| 001bis | Content pack v1 integrado (marca Henry Rincón), estado "en producción", enlaces de evidencia en las cards, campos `certificaciones`/`skills`/`perfil` previstos para S2.                                                                                  |
-| 002    | Capa de profundidad: bullets expandibles por hito, 5 case studies con URL propia, secciones Perfil/Certificaciones/Skills, ruta `/cv` imprimible + PDF ATS descargable.                                                                                   |
-| 003    | El chat que responde por ti: RAG con citas navegables, proveedor conmutable por env (Groq inicial), off-topic sin tokens, fallback local que nunca muere, kill-switch, y la historia (`data/historia/`) como corpus incremental con guía de alimentación. |
-| 004    | Roadmap con votación anónima (contador real o "no disponible", dedup por navegador, cero PII), página brochure animada por app real, y menú en móvil. Cierre del ciclo H1: el MVP funcional queda completo.                                               |
+| Sprint | Features añadidas a este manual                                                                                                                                                                                                                                                                                          |
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 001    | Contenido por YAML, showcase de apps, bilingüe ES/EN, solicitudes de acceso, motion.                                                                                                                                                                                                                                     |
+| 001bis | Content pack v1 integrado (marca Henry Rincón), estado "en producción", enlaces de evidencia en las cards, campos `certificaciones`/`skills`/`perfil` previstos para S2.                                                                                                                                                 |
+| 002    | Capa de profundidad: bullets expandibles por hito, 5 case studies con URL propia, secciones Perfil/Certificaciones/Skills, ruta `/cv` imprimible + PDF ATS descargable.                                                                                                                                                  |
+| 003    | El chat que responde por ti: RAG con citas navegables, proveedor conmutable por env (Groq inicial), off-topic sin tokens, fallback local que nunca muere, kill-switch, y la historia (`data/historia/`) como corpus incremental con guía de alimentación.                                                                |
+| 004    | Roadmap con votación anónima (contador real o "no disponible", dedup por navegador, cero PII), página brochure animada por app real, y menú en móvil. Cierre del ciclo H1: el MVP funcional queda completo.                                                                                                              |
+| 005    | La vitrina: escaparate de las seis apps hermanas y **una página propia por app**, alimentadas por los `brochure-export.json` que cada app genera; tarjetas que se abren al llegar leyendo; capturas de las apps reales repintadas con la paleta de esta página; cero enlaces y CTA de lista de espera. Abre el ciclo H2. |

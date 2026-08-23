@@ -78,7 +78,7 @@ export function Header({
       <div className="mx-auto flex h-12 max-w-5xl items-center justify-between gap-4 px-4 md:px-6">
         <a
           href={enHome ? "#contenido" : `/${locale}`}
-          className="flex min-h-11 items-center gap-2 text-sm font-medium text-ink-0"
+          className="flex min-h-11 items-center gap-2 text-sm font-medium whitespace-nowrap text-ink-0"
         >
           <span aria-hidden="true" className="text-sage-ink">
             ◆
@@ -99,6 +99,13 @@ export function Header({
               {t(s)}
             </a>
           ))}
+          {/* La vitrina (S5) es RUTA propia, no ancla de la HOME. */}
+          <a
+            href={`/${locale}/vitrina`}
+            className="flex min-h-11 items-center text-sm text-ink-2 transition-colors duration-[120ms] hover:text-ink-0"
+          >
+            {t("vitrina")}
+          </a>
         </nav>
 
         <div className="flex items-center gap-2">
@@ -167,6 +174,15 @@ export function Header({
                 </a>
               </li>
             ))}
+            <li>
+              <a
+                href={`/${locale}/vitrina`}
+                onClick={() => setMenuAbierto(false)}
+                className="flex min-h-11 items-center text-sm text-ink-1 transition-colors duration-[120ms] hover:text-ink-0"
+              >
+                {t("vitrina")}
+              </a>
+            </li>
           </ul>
         </nav>
       )}

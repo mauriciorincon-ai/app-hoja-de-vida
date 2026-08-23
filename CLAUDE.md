@@ -18,25 +18,28 @@
 ## Qué es esta app
 
 **CV Viva** — hoja de vida interactiva bilingüe (ES/EN): experiencia scroll-animada de alto
-impacto + brochure de apps del pipeline + (S2) chat con la HV + (S3) roadmap con votación.
+impacto (S1) + profundidad y PDF ATS (S2) + chat con la HV (S3) + roadmap con votación real y
+brochures por app (S4). **Ciclo H1 CERRADO — MVP funcional completo.** Desde S5 abre el ciclo
+**H2: la VITRINA** — esta app es el DESTINO del portafolio a nivel de brochure re-expresado.
 Principio rector: **simplicidad optimizada sin sacrificar impacto al visitante.**
 Contrato de alcance: `portafolio/hoja-de-vida/VISION.md` (planeadora, aprobada 2026-07-04).
 
 ## Stack
 
-- **Frontend:** Next.js 15 + TypeScript strict + Tailwind + shadcn/ui, **SSG-first** (todo el
+- **Frontend:** Next.js 16 (ADR-001) + TypeScript strict + Tailwind v4 + shadcn/ui, **SSG-first** (todo el
   contenido en HTML estático — gate ATS/SEO), i18n por rutas `/es` `/en` (lib → ADR).
-- **Backend/BD/Auth:** **ninguno en Sprint 1** (único endpoint: formulario → Resend). Supabase
-  entra en S3 (votación anónima) — RLS desde la primera tabla cuando exista.
-- **IA embebida:** **ninguna en Sprint 1.** En S2: chat multi-proveedor vía Vercel AI SDK con
-  **adapter conmutable por env** (Azure AI Foundry / Claude API / Gemini / Groq / self-host
-  OpenAI-compatible) — presupuesto runtime ≤ US$20/mes, guardrails + circuit breaker con
-  fallback a búsqueda local. Patrón obligatorio: skill `ia-embebida`. El proveedor inicial se
-  decide en ADR-003 (S2) con precios vigentes.
+- **Backend/BD/Auth:** **Supabase desde S4** — votación anónima del roadmap (tabla `votes` + RPC
+  `SECURITY DEFINER`, RLS encendida y sin políticas, GRANTs explícitos, cero PII; ADR-011). El
+  otro endpoint sigue siendo el formulario → Resend (S1). Sin auth: no hay usuarios.
+- **IA embebida:** **el chat con la HV, desde S3** — multi-proveedor vía Vercel AI SDK con
+  **adapter conmutable por env** (Groq inicial · Gemini / Azure AI Foundry / Claude / self-host
+  OpenAI-compatible), presupuesto runtime ≤ US$20/mes, guardrails + circuit breaker con fallback
+  a búsqueda local (ADR-003 el adapter, ADR-010 el índice/retrieval). Patrón obligatorio: skill
+  `ia-embebida`.
 - **Tests:** Vitest (unit/integration) + Playwright (e2e) + Testing Library + @axe-core/playwright.
-- **Deploy:** Vercel (preview por PR, prod desde `main`; ⚠ verificar cláusula no comercial de
-  Hobby en ADR de hosting — alternativa: Cloudflare Pages). **Observabilidad:** Pino + Sentry +
-  Vercel Analytics/PostHog.
+- **Deploy:** Vercel Hobby (preview por PR, prod desde `main`) — **hosting resuelto en ADR-004**
+  (la cláusula no comercial de Hobby aplica y esta app es vitrina personal, no comercial).
+  **Observabilidad:** Pino + Sentry + Vercel Analytics/PostHog.
 
 ## Estructura
 
@@ -46,9 +49,11 @@ src/
 ├─ components/     (UI sin lógica de negocio; home/ · motion/ · forms/)
 ├─ engine/         (motores puros, sin side-effects, cobertura >80%)
 ├─ lib/            (content.ts · i18n.ts · resend.ts · analytics.ts)
-│  └─ ia/          (S2 — patrón IA-embebida: schemas.ts · client.ts · guardrails.ts · persist.ts)
+│  ├─ ia/          (S3 — patrón IA-embebida: schemas · provider · retrieval · guardrails)
+│  └─ votes/       (S4 — votación: schemas.ts · client.ts · roadmap.ts)
 └─ types/
-data/              (cv.es.yaml · cv.en.yaml · apps.yaml — LA fuente de contenido)
+data/              (cv.es.yaml · cv.en.yaml · apps.yaml · historia/ — LA fuente de contenido)
+content/vitrina/   (S5 — los brochure-export.json de las apps hermanas; NO se editan a mano)
 tests/{unit,integration,e2e}/
 design-system.md          (fuente de verdad visual — se crea en el sprint 1, skill diseno-ui)
 docs/MANUAL-DE-USO.md     (manual de uso general — OBLIGATORIO, vivo desde el sprint 1)
@@ -62,7 +67,7 @@ decisions/NNN-titulo.md   (ADRs de implementación)
 2. **Tests con cada feature.** Motores puros >80%, UI >50%, ≥1 e2e por feature core.
 3. **Motor separado de UI.** Lógica pura en `engine/`/`lib/`; componentes sin lógica de negocio.
 4. **Toda salida de LLM que se persista pasa por esquema Zod** (skill `ia-embebida`) — aplica
-   desde S2; nunca texto libre directo a la BD.
+   desde S3; nunca texto libre directo a la BD.
 5. **A11y desde el inicio:** tabindex, aria-labels, contraste AA, `prefers-reduced-motion`.
 6. **Commits convencionales**; branch `sprint-NNN/<tema>`; **jamás push directo a `main`** (hook lo
    bloquea); PR con CI verde + preview probado.
@@ -105,11 +110,53 @@ decisions/NNN-titulo.md   (ADRs de implementación)
     PRIMERO con programación — código, librerías, algoritmos deterministas — antes de acudir a IA
     generativa. Activar una feature LLM exige un ADR que justifique por qué el código no alcanza.
     La IA es acento con fallback determinista, jamás columna vertebral.
+14. **Un gate se demuestra FALLANDO (regla dura del pipeline).** Todo gate nuevo que este repo
+    agregue —job de CI, hook, aserción, umbral, script de verificación— nace con su **demo**: un
+    cambio deliberado que lo pone en **rojo**, registrado en
+    `sprints/SPRINT_NNN-implementation-log.md` (qué se cambió, en qué paso salió rojo, a quién
+    nombró). Un gate que nunca se vio fallar no es un gate, es decorado — y decorado que da falsa
+    tranquilidad (precedente: dos "todo bien" seguidos con una carnada floja de gitleaks,
+    2026-07-15). **Y su hermana: un gate que nunca EJECUTÓ tampoco es un gate.** `skipped` no es
+    verde: un job con `needs:` sobre otro que falló queda saltado y GitHub lo lista entre los
+    requeridos **sin alarma**. Antes de cerrar, **cada check requerido debe tener conclusión propia
+    `success`** (`gh pr checks`), y si uno corrió por primera vez en este PR se dice en el summary
+    — sin histórico no puede afirmarse ni regresión ni no-regresión.
+15. **El bundle publicable del design system es un ARTEFACTO DEL REPO (kit v1.17.0).**
+    `design-sync/` se versiona aquí como **espejo 1:1** de lo publicado en Claude Design, con
+    jerarquía fija: `design-system.md` (fuente de verdad) → `design-sync/` (bundle) → el proyecto
+    remoto (**jamás se edita allá**). **Todo sprint que toque UI actualiza el bundle en su MISMO
+    PR**; publicar puede esperar al cierre de ciclo, y así el cierre es un delta pequeño y nunca
+    una reconstrucción.
+16. **CERO ENLACES: la producción se MUESTRA, jamás se ENTREGA (regla dura del pipeline, F0 #8).**
+    Ningún archivo de este repo público ni campo de GitHub contiene la URL de producción o de
+    previews: ni el `README.md`, ni el campo About/website del repo, ni el `BLUEPRINT.html`
+    (documenta dominio y protección como "qué ve quién sin sesión" **sin escribir la URL** — la URL
+    exacta vive en la planeadora, que es privada), ni el manual, ni la guía (su campo de URL se
+    llena EN USO), ni `package.json`. El CTA público es la **«lista de espera»** — sin promesa de
+    otorgamiento. **La limpieza del campo homepage es RECURRENTE:** la GitHub App de Vercel lo
+    reescribe tras cada deploy de producción — se re-verifica tras CADA merge a `main`, y JAMÁS se
+    automatiza con un PAT de administración como secret en un repo público. Los documentos que
+    NARRAN el barrido escriben los patrones **sin el literal** (clase de carácter, p. ej.
+    `vercel[.]app`): un summary que cita el patrón tal cual rompe el grep. **El barrido corre sobre
+    TODOS los archivos versionados** (jamás con include-list de extensiones):
+    `git grep -nE "vercel[.]app|workers[.]dev|pages[.]dev" -- ':!pnpm-lock.yaml'`
+    **Y todo comando que sea un gate viaja ENTRE BACKTICKS y se prueba copiándolo del RENDER**
+    (kit v1.24.0): sin backticks el markdown come las barras invertidas y entrega un grep que no
+    encuentra nada nunca — un gate muerto que pasa en verde para siempre.
+17. **PRs de dependencias: máximo DOS abiertos y el lockfile NO se pelea (kit v1.24.0).**
+    dependabot con techo real de 2 (limit 1 por ecosistema, todo agrupado). Se mergean **DE A UNO,
+    dejando a dependabot REGENERAR** entre merges (`@dependabot rebase` puede no obedecer, y el
+    hand-merge del lockfile le rompe el parser). Si un conflicto de lockfile TOCA resolverse a
+    mano: la resolución **parte del lado que trae los bumps** y se verifica dependencia por
+    dependencia que quedó la versión MÁS NUEVA de ambos lados — pnpm degrada en silencio y la CI
+    pasa VERDE porque **ninguna puerta compara el resultado contra la INTENCIÓN del PR**: leer la
+    salida del install ES el gate. `pnpm peers check` corre en `quality` (es lo único que ve un
+    peer insatisfecho). Overrides: en `pnpm-workspace.yaml`, jamás en `package.json`.
 
 ## Estándares (los 6+1, gates en CI)
 
 Testing · CI/CD · Observabilidad · Seguridad · Performance (contra `perf-budget.json`) · UX+A11y ·
-**IA embebida responsable** (desde S2). Detalle canónico: `estandares/estandares.md` de la
+**IA embebida responsable** (desde S3). Detalle canónico: `estandares/estandares.md` de la
 planeadora (read-only). Ítem rojo ⇒ deuda técnica explícita en el summary o el sprint no cierra.
 
 ## Workflow de un sprint

@@ -250,6 +250,436 @@
   animation-delay: var(--anim-delay, 0s);
 }
 
+/* ── Tiras visuales de la vitrina (S5) ──────────────────────────────────────
+ * ESQUEMÁTICAS A PROPÓSITO: no fingen ser una captura (banco §7, enmienda kit
+ * v1.23.0). Dibujan las IDEAS de cada app con los tokens de CV Viva, para que
+ * las seis fichas se vean de la misma casa. Topadas a su tamaño natural: la
+ * tipografía del dibujo se rompe si se estira al ancho de la tarjeta.
+ */
+.maqueta {
+  width: 100%;
+  max-width: 460px;
+  height: auto;
+  display: block;
+  margin-inline: auto;
+}
+.maqueta .mq-caja {
+  fill: var(--color-paper-0);
+  stroke: var(--color-paper-3);
+  stroke-width: 1;
+}
+.maqueta .mq-punto {
+  fill: var(--color-sage-ink);
+}
+.maqueta .mq-punto-suave {
+  fill: var(--color-paper-3);
+}
+.maqueta .mq-onda {
+  fill: var(--color-sage-ink);
+}
+.maqueta .mq-globo {
+  fill: var(--color-rose);
+  stroke: var(--color-rose-ink);
+  stroke-width: 1;
+}
+.maqueta .mq-veto-fondo {
+  fill: var(--color-paper-1);
+  stroke: var(--color-paper-3);
+  stroke-width: 1;
+}
+.maqueta .mq-veto-punto {
+  fill: var(--color-ink-3);
+}
+.maqueta .mq-dia-lleno {
+  fill: var(--color-sage);
+}
+.maqueta .mq-dia-vacio {
+  fill: var(--color-paper-2);
+}
+/* Rótulos: la voz mono del design system, a escala de dibujo. */
+.maqueta .mq-rotulo {
+  fill: var(--color-ink-2);
+  font-family: var(--font-mono), monospace;
+  /* 6px y no 7: a 7 los rótulos de 4 columnas de 80 se tocaban entre sí. */
+  font-size: 6px;
+  letter-spacing: 0.04em;
+}
+/* Trazos: mismo grosor y remates en toda la tira. */
+.maqueta .mq-trazo,
+.maqueta .mq-trayectoria,
+.maqueta .mq-veto-barra {
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.maqueta .mq-trazo {
+  stroke: var(--color-ink-3);
+}
+.maqueta .mq-veto-barra {
+  stroke: var(--color-danger);
+}
+.maqueta .mq-trayectoria {
+  stroke: var(--color-rose-ink);
+  stroke-dasharray: 3 3;
+  opacity: 0.75;
+}
+
+/* El dibujo se traza solo cuando entra en pantalla (`data-vista` lo pone la
+ * isla). El 1 de `stroke-dasharray` es la longitud NORMALIZADA del trazo: cada
+ * figura trazable lleva `pathLength="1"` **como atributo del SVG** — no existe
+ * una propiedad CSS `pathLength`, y ponerla ahí deja la línea partida en dashes
+ * de 1px que se leen como un punteado sucio. */
+[data-vista] .maqueta .trazable {
+  animation: trazar 1.1s var(--ease-out-cubic) both;
+}
+@keyframes trazar {
+  from {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 0;
+  }
+}
+
+/* ── Apertura por lectura (banco de técnicas §7) ────────────────────────────
+ * La tarjeta se abre sola al llegar leyendo, y el toque del visitante manda
+ * para el resto de la visita. La altura se anima con grid-template-rows
+ * (0fr→1fr): es la única forma de transicionar "hasta el contenido" sin medir
+ * en JS. `visibility` acompaña para que el contenido cerrado salga del foco y
+ * del lector de pantalla sin cortar la animación.
+ */
+.tarjeta-detalle {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.62s var(--ease-out-quart);
+}
+.tarjeta-vitrina[data-abierta] .tarjeta-detalle {
+  grid-template-rows: 1fr;
+}
+.tarjeta-detalle-interior {
+  overflow: hidden;
+  visibility: hidden;
+  transition: visibility 0.62s;
+}
+.tarjeta-vitrina[data-abierta] .tarjeta-detalle-interior {
+  visibility: visible;
+}
+/* Cerrar fuera de cuadro es instantáneo: animar lo que nadie ve solo descuadra
+ * la compensación de scroll. */
+.tarjeta-vitrina.sin-transicion .tarjeta-detalle,
+.tarjeta-vitrina.sin-transicion .tarjeta-detalle-interior {
+  transition: none;
+}
+.tarjeta-chevron {
+  transition: transform 0.35s var(--ease-out-cubic);
+}
+.tarjeta-vitrina[data-abierta] .tarjeta-chevron {
+  transform: rotate(180deg);
+}
+/* El borde AVISA que algo se abrió, sin mover nada (bajando, un cambio de
+ * altura compite con el propio scroll). Un pulso, una sola vez. */
+.tarjeta-vitrina[data-abierta] {
+  animation: asomar 0.9s var(--ease-out-cubic);
+}
+@keyframes asomar {
+  from {
+    border-color: var(--color-sage-ink);
+  }
+  to {
+    border-color: var(--color-paper-3);
+  }
+}
+/* Coreografía interior: primero la muestra (el dibujo ancla las palabras),
+ * después los bloques de texto, escalonados. */
+.tarjeta-detalle-cuerpo .escalona {
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 0.4s var(--ease-out-cubic),
+    transform 0.4s var(--ease-out-quart);
+}
+.tarjeta-vitrina[data-abierta] .tarjeta-detalle-cuerpo .escalona {
+  opacity: 1;
+  transform: none;
+}
+.tarjeta-vitrina[data-abierta] .tarjeta-detalle-cuerpo .escalona:nth-child(1) {
+  transition-delay: 0.08s;
+}
+.tarjeta-vitrina[data-abierta] .tarjeta-detalle-cuerpo .escalona:nth-child(2) {
+  transition-delay: 0.14s;
+}
+.tarjeta-vitrina[data-abierta] .tarjeta-detalle-cuerpo .escalona:nth-child(3) {
+  transition-delay: 0.2s;
+}
+.tarjeta-vitrina[data-abierta] .tarjeta-detalle-cuerpo .escalona:nth-child(4) {
+  transition-delay: 0.26s;
+}
+.tarjeta-vitrina[data-abierta] .tarjeta-detalle-cuerpo .escalona:nth-child(5) {
+  transition-delay: 0.32s;
+}
+.tarjeta-vitrina[data-abierta] .tarjeta-detalle-cuerpo .escalona:nth-child(6) {
+  transition-delay: 0.38s;
+}
+
+/* ── Capturas: el marco que dice «esto es una pantalla» ────────────────────
+ * Sobrio a propósito: un marco de teléfono dibujado competiría con la propia
+ * pantalla que estamos enseñando. Radio y sombra son los del design system.
+ */
+.marco-captura {
+  overflow: hidden;
+  border-radius: 14px;
+  border: 1px solid var(--color-paper-3);
+  background: var(--color-paper-1);
+  box-shadow: var(--shadow-sh-2, 0 6px 18px rgb(0 0 0 / 0.07));
+}
+/* ── Firmas: el clímax del brochure de cada app, re-dibujado ───────────────
+ * La escena de habla: las barras BAILAN con la voz y se apagan AQUÍ ADENTRO;
+ * la fuga llega al borde y se devuelve. Es la coreografía del brochure
+ * original traducida a nuestros tokens y curvas. LOOP AMBIENTAL PERMITIDO
+ * SOLO AQUÍ (banco §2: el clímax es la única promesa que nunca descansa):
+ * corre únicamente con la tarjeta abierta — cerrada, `visibility: hidden` la
+ * saca de pintura — y solo anima transform/opacity.
+ */
+.firma-clima .fc-marco {
+  fill: none;
+  stroke: var(--color-paper-3);
+  stroke-width: 1.5;
+}
+.firma-clima .fc-barra {
+  fill: var(--color-sage-ink);
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  transform: scaleY(0.55);
+}
+.firma-clima .fc-fuga {
+  fill: none;
+  stroke: var(--color-rose-ink);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-dasharray: 24;
+  stroke-dashoffset: 24;
+  opacity: 0;
+}
+.tarjeta-vitrina[data-abierta] .firma-clima .fc-barra {
+  animation: fc-bailar 4.6s var(--ease-in-out-cubic) infinite;
+  animation-delay: calc(var(--k) * 130ms);
+}
+.tarjeta-vitrina[data-abierta] .firma-clima .fc-fuga {
+  animation: fc-fugarse 4.6s var(--ease-in-out-cubic) infinite;
+}
+@keyframes fc-bailar {
+  0% {
+    transform: scaleY(0.22);
+  }
+  12% {
+    transform: scaleY(0.95);
+  }
+  26% {
+    transform: scaleY(0.42);
+  }
+  40% {
+    transform: scaleY(0.86);
+  }
+  54% {
+    transform: scaleY(0.34);
+  }
+  66% {
+    transform: scaleY(0.7);
+  }
+  /* …y se apaga aquí adentro: nunca sale del marco. */
+  78%,
+  100% {
+    transform: scaleY(0.035);
+  }
+}
+/* Piezas de las OTRAS cinco firmas. Todas ESTÁTICAS: el trazo se dibuja al
+ * entrar (`.trazable`, un disparo) y nada late. El loop ambiental queda
+ * reservado al clímax de habla — banco §2: la única promesa que nunca
+ * descansa, y «toda escena clímax = ninguna lo es». */
+.firma-clima .fc-quieta {
+  animation: none;
+  opacity: 1;
+  stroke-dasharray: 3 3;
+  stroke-dashoffset: 0;
+}
+/* La bóveda de Velo: se queda de este lado de la frontera. */
+.firma-clima .fc-boveda {
+  fill: var(--color-sage);
+  stroke: var(--color-sage-ink);
+  stroke-width: 1.5;
+}
+/* Las dos líneas de dash que no pueden ser ciertas a la vez. */
+.firma-clima .fc-linea-viva {
+  fill: var(--color-paper-2);
+}
+.firma-clima .fc-choque {
+  fill: none;
+  stroke: var(--color-danger);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+/* El duelo de DS: quien gana en sage, quien pierde en hueco. */
+.firma-clima .fc-barra-gana {
+  fill: var(--color-sage);
+  stroke: var(--color-sage-ink);
+  stroke-width: 1;
+}
+.firma-clima .fc-barra-pierde {
+  fill: var(--color-paper-2);
+  stroke: var(--color-paper-3);
+  stroke-width: 1;
+}
+/* Las cifras de nutri-kids: lo que sí se dice, y lo que jamás. */
+.firma-clima .fc-cifra {
+  fill: var(--color-ink-0);
+  font-family: var(--font-display), serif;
+  font-size: 20px;
+}
+.firma-clima .fc-vetada {
+  fill: var(--color-ink-2);
+  opacity: 0.55;
+}
+.firma-clima .fc-tachon {
+  fill: none;
+  stroke: var(--color-danger);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+/* Innmobiliaria: el documento que no se guarda y el anuncio que caduca. */
+.firma-clima .fc-doc-fugaz {
+  fill: var(--color-paper-0);
+  stroke: var(--color-paper-3);
+  stroke-width: 1;
+}
+.firma-clima .fc-vivo {
+  fill: var(--color-sage);
+}
+.firma-clima .fc-zombi {
+  fill: var(--color-paper-2);
+}
+
+@keyframes fc-fugarse {
+  0%,
+  62% {
+    stroke-dashoffset: 24;
+    opacity: 0;
+  }
+  /* llega al borde… */
+  72% {
+    stroke-dashoffset: 4;
+    opacity: 0.85;
+  }
+  /* …y se devuelve. */
+  86%,
+  100% {
+    stroke-dashoffset: 24;
+    opacity: 0;
+  }
+}
+
+/* ── Anatomía de la tarjeta de grupo ───────────────────────────────────────
+ * Índice, icono e insignia de estrella: los tres avisos que dicen "esto se
+ * abre y tiene orden", tomados del molde del brochure.
+ */
+.indice-grupo {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  /* ink-2, jamás ink-3: el 3 es tono DECORATIVO del DS y sobre paper-0 mide
+   * 2.7:1 — bajo AA. Es la tercera vez que este tono se cuela en texto (S4 lo
+   * pagó en el roadmap y S5 en el anclaje). Si algo se LEE, va en ink-2. */
+  color: var(--color-ink-2);
+  pointer-events: none;
+}
+.icono-grupo {
+  flex: none;
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: var(--color-paper-1);
+  border: 1px solid var(--color-paper-2);
+  color: var(--color-sage-ink);
+}
+.icono-grupo svg {
+  width: 24px;
+  height: 24px;
+}
+.icono-grupo svg :is(path, rect, circle) {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+/* Los iconos de dash vienen en lienzo de 16 (así están en su brochure): a
+ * grosor 1.7 se verían 1.5× más gordos que los de 24. Se compensa para que
+ * las seis fichas tengan el MISMO peso óptico de trazo. */
+.icono-grupo svg[viewBox="0 0 16 16"] :is(path, rect, circle) {
+  stroke-width: 1.15;
+}
+/* «Dibujar el trazo»: el icono se termina de dibujar al llegar la tarjeta —
+ * un disparo, en cascada por figura. Dice hecho a mano, que es el argumento
+ * contra el aire de plantilla.
+ *
+ * EL ESTADO POR DEFECTO ES EL ICONO DIBUJADO. El efecto vive entero dentro de
+ * la animación, que solo existe con `data-vista`: si el disparo no llegara
+ * nunca, el icono se ve igual. La versión anterior hacía lo contrario —el
+ * reposo era `stroke-dashoffset: 1`, o sea INVISIBLE— y la transición se quedó
+ * colgada sin llegar jamás a 0: ocho iconos en blanco con la CI en verde. Es
+ * la misma lección del umbral porcentual del kit v1.23.0: lo que no se puede
+ * garantizar que se dispare no puede ser lo único que hace visible el
+ * contenido. */
+.tarjeta-vitrina[data-vista] .icono-grupo svg :is(path, rect, circle) {
+  animation: trazar-icono 0.75s var(--ease-out-cubic) both;
+}
+.tarjeta-vitrina[data-vista] .icono-grupo svg :nth-child(2) {
+  animation-delay: 0.13s;
+}
+.tarjeta-vitrina[data-vista] .icono-grupo svg :nth-child(3) {
+  animation-delay: 0.26s;
+}
+/* El 1 es la longitud NORMALIZADA: cada figura lleva `pathLength="1"` como
+ * atributo, así todas se dibujan en el mismo tiempo sin importar su largo. */
+@keyframes trazar-icono {
+  from {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 0;
+  }
+}
+/* La tarjeta estrella se distingue por el marco, no por el color de fondo:
+ * seis fichas de colores distintos no tendrían jerarquía, tendrían ruido. */
+.tarjeta-vitrina[data-estrella] {
+  border-color: var(--color-sage-ink);
+}
+
+/* ── Lo fino: acordeones nativos ───────────────────────────────────────────
+ * <details> de verdad — el teclado y el lector de pantalla ya los saben usar;
+ * lo único propio es el signo, que gira al abrir.
+ */
+.acordeon-fino summary::-webkit-details-marker {
+  display: none;
+}
+.acordeon-signo {
+  display: inline-block;
+  width: 1em;
+  transition: transform 0.25s var(--ease-out-cubic);
+}
+.acordeon-fino[open] .acordeon-signo {
+  transform: rotate(45deg);
+}
+
 /*
  * Cinturón de seguridad de reduced-motion: los wrappers de motion llevan
  * data-motion y el SSR incluye sus estilos iniciales inline (opacity 0,
@@ -258,6 +688,37 @@
  * Las utilidades .anim-* (CSS puro) también se apagan aquí.
  */
 @media (prefers-reduced-motion: reduce) {
+  /* La apertura por lectura SIGUE funcionando (abrir es contenido, no adorno);
+   * lo que se apaga es el movimiento: sin transición, sin pulso, sin trazado. */
+  .tarjeta-detalle,
+  .tarjeta-detalle-interior,
+  .tarjeta-chevron {
+    transition: none !important;
+  }
+  .tarjeta-vitrina[data-abierta] {
+    animation: none !important;
+  }
+  .tarjeta-detalle-cuerpo .escalona {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .maqueta .trazable,
+  .icono-grupo svg :is(path, rect, circle) {
+    stroke-dasharray: none !important;
+    stroke-dashoffset: 0 !important;
+    animation: none !important;
+    transition: none !important;
+  }
+  .acordeon-signo {
+    transition: none !important;
+  }
+  /* La firma queda como composición estática con el mensaje completo: barras
+   * quietas a media altura dentro del marco; la fuga no existe. */
+  .firma-clima .fc-barra,
+  .firma-clima .fc-fuga {
+    animation: none !important;
+  }
   [data-motion] {
     opacity: 1 !important;
     transform: none !important;

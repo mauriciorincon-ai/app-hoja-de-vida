@@ -6,9 +6,9 @@
 <title>Guía de prueba — CV Viva</title>
 <!--
   GUÍA DE PRUEBA VIVA Y ACUMULATIVA — CV Viva (app-hoja-de-vida).
-  v1 del ciclo H1: contiene TODAS las pruebas vigentes S1–S4 (bola de nieve).
+  v2: contiene TODAS las pruebas vigentes S1–S5 (bola de nieve).
   Autocontenida (cero CDNs). Casillas en localStorage con prefijo versionado
-  por sprint (NS abajo). Origen por prueba (Nuevo·S4 / Mejorado·S4 / S1–S3
+  por sprint (NS abajo). Origen por prueba (Nuevo·S5 / Mejorado·S5 / S1–S4
   heredada = regresión) con filtros. Gate mínimo ⭐ = solo lo que ninguna
   automatización puede verificar (juicio humano, hardware/dispositivo real,
   proveedor LLM real). Referencia: app-habla/docs/GUIA-DE-PRUEBA.html.
@@ -103,22 +103,24 @@
 <body>
 <div class="pagina">
   <header>
-    <p class="eyebrow">CV Viva · Guía de prueba viva y acumulativa · v1 (cierre de ciclo H1) · Sprint 004 · 2026-07-20</p>
+    <p class="eyebrow">CV Viva · Guía de prueba viva y acumulativa · v2 · Sprint 005 · 2026-08-23</p>
     <h1>Guía de prueba</h1>
-    <p class="suave">Todas las pruebas vigentes de la app — las nuevas del Sprint 004, las que
-      cambiaron y las heredadas de S1–S3 (regresión). Filtra por origen para correr todo o solo lo
-      que cambió. Las casillas se guardan solas en este navegador.</p>
-    <p class="chica"><strong>Gate mínimo ⭐: 10 pruebas · ~30 min.</strong> Es lo que ninguna
+    <p class="suave">Todas las pruebas vigentes de la app — las nuevas del Sprint 005 (la vitrina)
+      y las heredadas de S1–S4, que se corren como regresión. Filtra por origen para recorrer todo
+      o solo lo que cambió. Las casillas se guardan solas en este navegador.</p>
+    <p class="chica"><strong>Gate mínimo ⭐: 14 pruebas · ~45 min.</strong> Es lo que ninguna
       automatización puede verificar (juicio humano sobre el contenido, aprobación visual,
       dispositivo real, proveedor de IA real). Lo que la CI ya respalda (e2e, unit, axe, budgets)
       queda fuera del mínimo y se corre en pases completos.</p>
     <div class="url-caja">
       <p class="eyebrow" style="margin:0 0 6px">URL de prueba</p>
-      <code>https://app-hoja-de-vida-git-sprint-004-la-vitrina-completa.vercel.app</code>
-      <p class="chica suave" style="margin:8px 0 0">Dirección estable de la rama del sprint: no
-        cambia aunque se suban correcciones. Si pide login de Vercel: Settings → Deployment
-        Protection → Vercel Authentication → Disabled. La votación necesita las variables de
-        Supabase configuradas en la preview (ver <code>docs/APROVISIONAMIENTO.md</code>).</p>
+      <code>— pégala aquí al empezar —</code>
+      <p class="chica suave" style="margin:8px 0 0"><strong>La dirección no viaja en el repo</strong>
+        (regla 16, cero enlaces): la trae la orden del sprint o la copias del deploy de la rama, y
+        la pegas arriba al empezar el recorrido. Es estable durante todo el sprint: no cambia
+        aunque se suban correcciones. Si pide login de Vercel: Settings → Deployment Protection →
+        Vercel Authentication → Disabled. La votación necesita las variables de Supabase
+        configuradas en la preview (ver <code>docs/APROVISIONAMIENTO.md</code>).</p>
     </div>
   </header>
 
@@ -129,7 +131,7 @@
     </div>
     <div class="filtros" role="group" aria-label="Filtrar pruebas por origen">
       <button type="button" data-filtro="todo" class="activo">Todo</button>
-      <button type="button" data-filtro="cambios">Lo que cambió en S4</button>
+      <button type="button" data-filtro="cambios">Lo que cambió en S5</button>
       <button type="button" data-filtro="minimo">Gate mínimo ⭐</button>
     </div>
   </div>
@@ -142,12 +144,12 @@
       <li data-origen="heredada"><input type="checkbox" id="a1"><label for="a1">Abre
         <code>/es</code>: el hero muestra tu nombre y titular; el contenido carga sin pantallazos
         en blanco. <span class="origen origen-heredada">S1</span></label></li>
-      <li data-origen="mejorado"><input type="checkbox" id="a2"><label for="a2">Baja por la página:
+      <li data-origen="heredada"><input type="checkbox" id="a2"><label for="a2">Baja por la página:
         aparecen en orden Perfil, Trayectoria, Logros, Proyectos, Skills, Certificaciones, Apps,
-        <strong>Roadmap</strong> y Contacto. <span class="origen origen-mejorado">Mejorado en S4</span></label></li>
-      <li data-origen="nuevo"><input type="checkbox" id="a3"><label for="a3">El menú del encabezado
+        <strong>Roadmap</strong> y Contacto. <span class="origen origen-heredada">S4</span></label></li>
+      <li data-origen="heredada"><input type="checkbox" id="a3"><label for="a3">El menú del encabezado
         incluye <strong>Roadmap</strong> y al hacer clic te lleva a esa sección.
-        <span class="origen origen-nuevo">Nuevo · S4</span></label></li>
+        <span class="origen origen-heredada">S4</span></label></li>
       <li data-origen="heredada" data-minimo><input type="checkbox" id="a4"><label for="a4">⭐
         <strong>Juicio visual:</strong> la página se siente editorial, sobria y coherente; las
         animaciones al hacer scroll son elegantes, no distraen. Aprueba el look general.
@@ -242,11 +244,11 @@
       <li data-origen="heredada"><input type="checkbox" id="f4"><label for="f4">Teclado y
         reduced-motion: el panel se abre, se navega con teclado y con "reducir movimiento" activo
         el contenido queda visible sin animación. <span class="origen origen-heredada">S3</span></label></li>
-      <li data-origen="mejorado" data-minimo><input type="checkbox" id="f5"><label for="f5">⭐
+      <li data-origen="heredada" data-minimo><input type="checkbox" id="f5"><label for="f5">⭐
         <strong>Proveedor REAL (kit):</strong> con la <code>GROQ_API_KEY</code> regenerada, corre
         las preguntas on/off-topic del kit y juzga la calidad: ¿las respuestas son fieles y las
         citas correctas? ¿el off-topic no cuela respuestas del CV?
-        <span class="origen origen-mejorado">Mejorado en S4</span><span class="minimo">⭐ mínimo</span></label></li>
+        <span class="origen origen-heredada">S4</span><span class="minimo">⭐ mínimo</span></label></li>
     </ul>
     <div class="kit"><p><strong>Kit de prueba:</strong> las preguntas de calibración están en
       <code>docs/kit-de-prueba/preguntas-chat.md</code> (on-topic, off-topic, trampa y fallback).</p></div>
@@ -257,24 +259,24 @@
     <div class="bloque-cabeza"><span class="letra">G</span><h2>Roadmap con votación anónima</h2></div>
     <p class="meta-bloque chica suave">~6 min · sección Roadmap · la feature estrella del S4.</p>
     <ul class="pasos">
-      <li data-origen="nuevo"><input type="checkbox" id="g1"><label for="g1">La sección Roadmap
+      <li data-origen="heredada"><input type="checkbox" id="g1"><label for="g1">La sección Roadmap
         muestra las features de cada app con su descripción y un número de votos junto a cada una.
-        <span class="origen origen-nuevo">Nuevo · S4</span></label></li>
-      <li data-origen="nuevo"><input type="checkbox" id="g2"><label for="g2">Pulsa "Votar" en una
+        <span class="origen origen-heredada">S4</span></label></li>
+      <li data-origen="heredada"><input type="checkbox" id="g2"><label for="g2">Pulsa "Votar" en una
         feature: el número <strong>sube en 1</strong> y el botón pasa a "Ya votaste" y se
-        deshabilita. <span class="origen origen-nuevo">Nuevo · S4</span></label></li>
-      <li data-origen="nuevo"><input type="checkbox" id="g3"><label for="g3">Recarga la página: la
+        deshabilita. <span class="origen origen-heredada">S4</span></label></li>
+      <li data-origen="heredada"><input type="checkbox" id="g3"><label for="g3">Recarga la página: la
         feature que votaste sigue en "Ya votaste" (dedup por navegador) y su número refleja tu
-        voto. <span class="origen origen-nuevo">Nuevo · S4</span></label></li>
-      <li data-origen="nuevo"><input type="checkbox" id="g4"><label for="g4">Cambia a <code>/en</code>:
+        voto. <span class="origen origen-heredada">S4</span></label></li>
+      <li data-origen="heredada"><input type="checkbox" id="g4"><label for="g4">Cambia a <code>/en</code>:
         las features y los textos de la votación están en inglés; el conteo es el mismo (misma
-        base de datos). <span class="origen origen-nuevo">Nuevo · S4</span></label></li>
-      <li data-origen="nuevo" data-minimo><input type="checkbox" id="g5"><label for="g5">⭐
+        base de datos). <span class="origen origen-heredada">S4</span></label></li>
+      <li data-origen="heredada" data-minimo><input type="checkbox" id="g5"><label for="g5">⭐
         <strong>Contador honesto:</strong> apaga la votación (<code>VOTACION_ENABLED=false</code> o
         quita <code>SUPABASE_URL</code>) y recarga: la sección dice "no disponible" y los botones
         quedan deshabilitados — <strong>NUNCA</strong> un número inventado (solo "—"). Juzga que el
         flujo se siente real y honesto.
-        <span class="origen origen-nuevo">Nuevo · S4</span><span class="minimo">⭐ mínimo</span></label></li>
+        <span class="origen origen-heredada">S4</span><span class="minimo">⭐ mínimo</span></label></li>
     </ul>
     <div class="kit"><p><strong>Kit de prueba:</strong> el flujo paso a paso está en
       <code>docs/kit-de-prueba/flujo-votacion.md</code> (feliz, dedup, contador honesto, idioma).</p></div>
@@ -287,20 +289,20 @@
     <div class="bloque-cabeza"><span class="letra">H</span><h2>Página brochure por app</h2></div>
     <p class="meta-bloque chica suave">~5 min · sección Apps y rutas <code>/apps/&lt;app&gt;</code>.</p>
     <ul class="pasos">
-      <li data-origen="nuevo"><input type="checkbox" id="h1"><label for="h1">En el showcase de Apps,
+      <li data-origen="heredada"><input type="checkbox" id="h1"><label for="h1">En el showcase de Apps,
         una app real (CV Viva, Chat) muestra el enlace "Ver la app": al pulsarlo abre su brochure.
-        <span class="origen origen-nuevo">Nuevo · S4</span></label></li>
-      <li data-origen="nuevo"><input type="checkbox" id="h2"><label for="h2">La brochure tiene hero
+        <span class="origen origen-heredada">S4</span></label></li>
+      <li data-origen="heredada"><input type="checkbox" id="h2"><label for="h2">La brochure tiene hero
         con tagline, funcionalidades, métricas (números que se animan), stack, y un botón que
         vuelve al formulario de contacto. Pruébala en ES y EN.
-        <span class="origen origen-nuevo">Nuevo · S4</span></label></li>
-      <li data-origen="nuevo"><input type="checkbox" id="h3"><label for="h3">Una app "en
+        <span class="origen origen-heredada">S4</span></label></li>
+      <li data-origen="heredada"><input type="checkbox" id="h3"><label for="h3">Una app "en
         exploración" (sin funcionalidad real) NO tiene brochure: entrar a su URL da 404.
-        <span class="origen origen-nuevo">Nuevo · S4</span></label></li>
-      <li data-origen="nuevo" data-minimo><input type="checkbox" id="h4"><label for="h4">⭐
+        <span class="origen origen-heredada">S4</span></label></li>
+      <li data-origen="heredada" data-minimo><input type="checkbox" id="h4"><label for="h4">⭐
         <strong>Juicio visual:</strong> las animaciones de la brochure son impresionantes y
         cumplen la promesa "funcionalidades en movimiento"; el ritmo se siente pulido, no cargado.
-        <span class="origen origen-nuevo">Nuevo · S4</span><span class="minimo">⭐ mínimo</span></label></li>
+        <span class="origen origen-heredada">S4</span><span class="minimo">⭐ mínimo</span></label></li>
     </ul>
   </section>
 
@@ -309,13 +311,85 @@
     <div class="bloque-cabeza"><span class="letra">I</span><h2>Menú en móvil</h2></div>
     <p class="meta-bloque chica suave">~3 min · en un teléfono o ventana angosta.</p>
     <ul class="pasos">
-      <li data-origen="nuevo"><input type="checkbox" id="i1"><label for="i1">En pantalla angosta,
+      <li data-origen="heredada"><input type="checkbox" id="i1"><label for="i1">En pantalla angosta,
         el encabezado muestra un botón de menú (☰): al pulsarlo se despliegan las secciones; elige
-        Roadmap y navega + se cierra solo. <span class="origen origen-nuevo">Nuevo · S4</span></label></li>
-      <li data-origen="nuevo" data-minimo><input type="checkbox" id="i2"><label for="i2">⭐
+        Roadmap y navega + se cierra solo. <span class="origen origen-heredada">S4</span></label></li>
+      <li data-origen="heredada" data-minimo><input type="checkbox" id="i2"><label for="i2">⭐
         <strong>Teléfono real:</strong> en tu móvil, el menú se abre cómodo, los toques son fáciles
         (nada demasiado pequeño) y cerrar/navegar funciona sin trabas.
-        <span class="origen origen-nuevo">Nuevo · S4</span><span class="minimo">⭐ mínimo</span></label></li>
+        <span class="origen origen-heredada">S4</span><span class="minimo">⭐ mínimo</span></label></li>
+    </ul>
+  </section>
+
+  <!-- ═══════ K. La vitrina: el escaparate y la página de cada app ═══════ -->
+  <section class="bloque">
+    <div class="bloque-cabeza"><span class="letra">K</span><h2>La vitrina: el escaparate y la página de cada app</h2></div>
+    <p class="meta-bloque chica suave">~7 min · en escritorio.</p>
+    <ul class="pasos">
+      <li data-origen="nuevo"><input type="checkbox" id="k1"><label for="k1">Entra a
+        <strong>Vitrina</strong> desde el menú: ves <strong>seis tarjetas</strong>, una por app,
+        cada una con su estado, su promesa, un esquema dibujado y cuántas funcionalidades tiene.
+        <span class="origen origen-nuevo">Nuevo · S5</span></label></li>
+      <li data-origen="nuevo"><input type="checkbox" id="k2"><label for="k2">Pulsa "Ver la ficha
+        completa" en una: llegas a <strong>su propia página</strong> y ahí está esa app y ninguna
+        otra. "Volver a la vitrina" te regresa al escaparate.
+        <span class="origen origen-nuevo">Nuevo · S5</span></label></li>
+      <li data-origen="nuevo"><input type="checkbox" id="k3"><label for="k3">Al pie de una ficha,
+        "App siguiente" te lleva a otra app sin pasar por el índice.
+        <span class="origen origen-nuevo">Nuevo · S5</span></label></li>
+      <li data-origen="nuevo"><input type="checkbox" id="k4"><label for="k4">En ninguna ficha hay
+        un enlace a la app ni a su repositorio: en su lugar se explica <strong>la razón</strong> y
+        hay un botón de lista de espera que baja a la sección de contacto de esa misma página.
+        <span class="origen origen-nuevo">Nuevo · S5</span></label></li>
+      <li data-origen="nuevo"><input type="checkbox" id="k5"><label for="k5">En "Las cifras", cada
+        número lleva una etiqueta con <strong>de dónde salió</strong> (medido, calculada, declarado
+        o estimación). Ninguna cifra aparece suelta.
+        <span class="origen origen-nuevo">Nuevo · S5</span></label></li>
+      <li data-origen="nuevo"><input type="checkbox" id="k6"><label for="k6">Abre "Los detalles
+        finos": las funcionalidades <strong>descartadas</strong> aparecen tachadas, con su razón y
+        su fecha — se ve que no son pendientes. Y al pie de la ficha dice de qué fecha es la
+        información. <span class="origen origen-nuevo">Nuevo · S5</span></label></li>
+      <li data-origen="nuevo" data-minimo><input type="checkbox" id="k7"><label for="k7">⭐
+        <strong>Juicio de contenido:</strong> lee la promesa y las cifras de dos apps distintas y
+        confirma que dicen la verdad sobre lo que está construido — sin exagerar y sin prometer
+        nada que no exista. <span class="origen origen-nuevo">Nuevo · S5</span><span class="minimo">⭐ mínimo</span></label></li>
+    </ul>
+  </section>
+
+  <!-- ═══════ L. Las fichas por dentro: tarjetas que se abren al leer ═══════ -->
+  <section class="bloque">
+    <div class="bloque-cabeza"><span class="letra">L</span><h2>Las fichas por dentro: tarjetas que se abren al leer</h2></div>
+    <p class="meta-bloque chica suave">~10 min · escritorio + un teléfono real.</p>
+    <ul class="pasos">
+      <li data-origen="nuevo"><input type="checkbox" id="l1"><label for="l1">Baja leyendo por una
+        ficha larga: las tarjetas de "Qué hace" <strong>se abren solas</strong> al llegar a ellas y
+        se recogen al salir. No hay que pulsar nada.
+        <span class="origen origen-nuevo">Nuevo · S5</span></label></li>
+      <li data-origen="nuevo"><input type="checkbox" id="l2"><label for="l2">Vuelve a subir:
+        <strong>no se abre ninguna sola</strong> mientras subes.
+        <span class="origen origen-nuevo">Nuevo · S5</span></label></li>
+      <li data-origen="nuevo"><input type="checkbox" id="l3"><label for="l3">Toca una tarjeta: se
+        abre o se cierra, y desde ese momento <strong>manda tu toque</strong> — ya no se abre ni se
+        cierra sola por mucho que sigas leyendo.
+        <span class="origen origen-nuevo">Nuevo · S5</span></label></li>
+      <li data-origen="nuevo"><input type="checkbox" id="l4"><label for="l4">Baja de un tirón hasta
+        el final de la ficha: <strong>llegas al final</strong> y el contenido nunca da un salto
+        hacia atrás ni te devuelve a una tarjeta que ya habías pasado.
+        <span class="origen origen-nuevo">Nuevo · S5</span></label></li>
+      <li data-origen="nuevo" data-minimo><input type="checkbox" id="l5"><label for="l5">⭐
+        <strong>Aprobación visual:</strong> recorre las seis fichas seguidas. Todas se ven de
+        <strong>la misma casa</strong> que el resto de tu hoja de vida — ninguna trae los colores
+        de su propia marca ni desentona.
+        <span class="origen origen-nuevo">Nuevo · S5</span><span class="minimo">⭐ mínimo</span></label></li>
+      <li data-origen="nuevo" data-minimo><input type="checkbox" id="l6"><label for="l6">⭐
+        <strong>Juicio sobre las imágenes:</strong> dentro de las tarjetas, cada captura muestra de
+        verdad la pantalla de la que habla ese grupo, <strong>ninguna sale cortada</strong>, y en
+        ninguna aparece un dato de una persona real (todos los nombres y datos son inventados).
+        <span class="origen origen-nuevo">Nuevo · S5</span><span class="minimo">⭐ mínimo</span></label></li>
+      <li data-origen="nuevo" data-minimo><input type="checkbox" id="l7"><label for="l7">⭐
+        <strong>Teléfono real:</strong> recorre una ficha larga en tu móvil. Las tarjetas se abren
+        cómodas al ritmo de la lectura, las imágenes se ven nítidas y nada se sale de la pantalla
+        a lo ancho. <span class="origen origen-nuevo">Nuevo · S5</span><span class="minimo">⭐ mínimo</span></label></li>
     </ul>
   </section>
 
@@ -327,9 +401,12 @@
       <li data-origen="heredada"><input type="checkbox" id="j1"><label for="j1">Activa "reducir
         movimiento" en tu sistema y recarga: la página muestra TODO el contenido quieto, nada
         parpadea ni queda invisible. <span class="origen origen-heredada">S1</span></label></li>
-      <li data-origen="mejorado"><input type="checkbox" id="j2"><label for="j2">Recorre toda la
+      <li data-origen="heredada"><input type="checkbox" id="j2"><label for="j2">Recorre toda la
         página solo con teclado (Tab): el foco es visible y llega a todo, incluidos el menú móvil,
-        los botones de voto y los enlaces de brochure. <span class="origen origen-mejorado">Mejorado en S4</span></label></li>
+        los botones de voto y los enlaces de brochure. <span class="origen origen-heredada">S4</span></label></li>
+      <li data-origen="nuevo"><input type="checkbox" id="j4"><label for="j4">En una ficha de la
+        vitrina, recorre con Tab: el foco llega a cada tarjeta de "Qué hace", Enter la abre y la
+        cierra, y el foco se ve siempre. <span class="origen origen-nuevo">Nuevo · S5</span></label></li>
       <li data-origen="heredada" data-minimo><input type="checkbox" id="j3"><label for="j3">⭐
         <strong>Dispositivo real:</strong> en un teléfono real con reduced-motion activo, confirma
         que ninguna sección queda en blanco ni parpadea al cargar.
@@ -345,6 +422,15 @@
     <details class="chica">
       <summary>Historial de la guía</summary>
       <ul>
+        <li><strong>v2 · S5 · 2026-08-23:</strong> abre el ciclo H2. Nuevas: la vitrina como
+          escaparate y <strong>una página por app</strong> (K), y las fichas por dentro con las
+          tarjetas que se abren al leer (L), más el teclado sobre las tarjetas de la vitrina dentro
+          del bloque de accesibilidad (J4). Las 33 pruebas de S1–S4 se heredan ENTERAS y pasan a marcarse como regresión —
+          ninguna se resumió ni se eliminó (ninguna feature murió). Gate mínimo ⭐: de 10 a 14, con
+          las cuatro que ninguna automatización puede cubrir: el juicio sobre el contenido de las
+          fichas, la aprobación visual de que las seis se ven de la misma casa, el juicio sobre las
+          capturas (que muestren lo que dicen, sin recortes y sin datos de nadie) y el recorrido en
+          un teléfono real.</li>
         <li><strong>v1 · S4 · 2026-07-20:</strong> primera guía acumulativa de la app (cierre de
           ciclo H1). Reúne TODAS las pruebas vigentes S1–S4. Nuevas de S4: roadmap con votación
           (G), brochures (H), menú móvil (I). Mejoradas en S4: recorrido de secciones con Roadmap
@@ -358,8 +444,8 @@
 <script>
   (function () {
     // NS VERSIONADO POR SPRINT: al publicar la guía de un sprint nuevo se cambia
-    // s004 — así una regresión sin correr no aparece marcada por el sprint anterior.
-    var NS = "guia-hoja-de-vida:s004:";
+    // s005 — así una regresión sin correr no aparece marcada por el sprint anterior.
+    var NS = "guia-hoja-de-vida:s005:";
     var casillas = Array.prototype.slice.call(document.querySelectorAll('input[type="checkbox"]'));
     var barra = document.getElementById("barra-avance");
     var contador = document.getElementById("contador");

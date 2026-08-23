@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { readdirSync, readFileSync } from "node:fs";
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 import { parse } from "yaml";
@@ -21,6 +21,20 @@ const { apps } = parse(readFileSync("data/apps.yaml", "utf8")) as {
 const brochureSlug = apps.find((a) => a.brochure)?.id;
 if (!brochureSlug) throw new Error("apps.yaml sin brochures");
 
+// Las apps hermanas de la vitrina (S5), leídas de los exports igual que la
+// página: el slug sale del contenido, no del nombre del archivo.
+const slugsVitrina = readdirSync("content/vitrina")
+  .filter((f) => f.endsWith(".brochure-export.json"))
+  .map(
+    (f) =>
+      (
+        JSON.parse(readFileSync(`content/vitrina/${f}`, "utf8")) as {
+          app: { slug: string };
+        }
+      ).app.slug,
+  );
+if (slugsVitrina.length === 0) throw new Error("content/vitrina sin exports");
+
 const RUTAS = [
   "/es",
   "/en",
@@ -30,6 +44,13 @@ const RUTAS = [
   "/en/cv",
   `/es/apps/${brochureSlug}`,
   `/en/apps/${brochureSlug}`,
+  // La vitrina (S5): rutas públicas nuevas ⇒ entran a axe EN SU MISMA FASE
+  // (regla 9 + kit v1.24.1). El índice y LAS SEIS fichas, que ahora viven cada
+  // una en su propia ruta — se listan desde los exports para que una app
+  // hermana nueva entre al scan sola, sin tocar este archivo.
+  "/es/vitrina",
+  "/en/vitrina",
+  ...slugsVitrina.flatMap((s) => [`/es/vitrina/${s}`, `/en/vitrina/${s}`]),
 ];
 
 for (const ruta of RUTAS) {
@@ -40,6 +61,23 @@ for (const ruta of RUTAS) {
     await page.goto(ruta);
     // Estado final de la página (el footer existe en todas las rutas)
     await page.locator("footer").scrollIntoViewIfNeeded();
+
+    // Lo plegado TAMBIÉN se audita. Sin esto, todo lo que vive dentro de una
+    // tarjeta o de un <details> sale del scan y la ruta pasa en verde por no
+    // haber sido mirada — el banco de técnicas lo pide explícito ("axe con el
+    // detalle abierto"). Genérico a propósito: cualquier ruta que estrene un
+    // plegable queda cubierta el día que lo estrene.
+    await page.evaluate(() => {
+      for (const d of document.querySelectorAll("details")) d.open = true;
+      for (const t of document.querySelectorAll(".tarjeta-vitrina")) {
+        t.setAttribute("data-abierta", "");
+        t.setAttribute("data-manual", ""); // que el scroll del scan no la cierre
+        t.querySelector(".tarjeta-boton")?.setAttribute(
+          "aria-expanded",
+          "true",
+        );
+      }
+    });
 
     const results = await new AxeBuilder({ page })
       .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])

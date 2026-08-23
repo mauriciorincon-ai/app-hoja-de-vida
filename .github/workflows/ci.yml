@@ -17,6 +17,7 @@ jobs:
       - uses: actions/setup-node@v4
         with: { node-version: 22, cache: pnpm }
       - run: pnpm install --frozen-lockfile
+      - run: pnpm peers check    # único gate que ve un peer insatisfecho (kit v1.24.0)
       - run: pnpm typecheck
       - run: pnpm lint
       - run: pnpm test            # vitest run --coverage (umbral 70% en vitest.config)
@@ -100,4 +101,6 @@ jobs:
             --collect.url=http://localhost:3000/es/cv \
             --collect.url=http://localhost:3000/es/apps/hoja-de-vida \
             --collect.url=http://localhost:3000/es/apps/chat-hoja-de-vida \
+            --collect.url=http://localhost:3000/es/vitrina \
+            --collect.url=http://localhost:3000/es/vitrina/habla \
             --assert.budgetsFile=./perf-budget.json

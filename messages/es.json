@@ -17,7 +17,8 @@
     "descargarCv": "CV (PDF)",
     "abrirMenu": "Abrir el menú",
     "cerrarMenu": "Cerrar el menú",
-    "menu": "Menú"
+    "menu": "Menú",
+    "vitrina": "Vitrina"
   },
   "hero": {
     "ctaApps": "Explora las apps",
@@ -140,5 +141,61 @@
     "fallbackVacio": "No encontré nada sobre eso en la hoja de vida. Prueba con otra pregunta o escríbele a Henry desde Contacto.",
     "rateLimited": "Muchas preguntas muy seguidas — dame un minuto de respiro y seguimos.",
     "error": "No pude responder esa pregunta. Intenta de nuevo."
+  },
+  "vitrina": {
+    "eyebrow": "La vitrina",
+    "titulo": "Seis apps, construidas de verdad",
+    "subtitulo": "Cada una con su promesa, sus funcionalidades y sus cifras — y cada cifra con su procedencia. Aquí se muestran; no se entregan.",
+    "notaIdioma": "",
+    "estados": {
+      "sellado": "Sellada",
+      "inicial": "Construcción cerrada"
+    },
+    "estadoAyuda": {
+      "sellado": "Su gate de pruebas terminó",
+      "inicial": "Su construcción cerró; el gate de pruebas aún no"
+    },
+    "paraQuien": "Para quién",
+    "diferencial": "Qué no hace nadie más",
+    "queHace": "Qué hace",
+    "queHaceLinea": "{n} funcionalidades, agrupadas. Cada tarjeta se abre sola al llegar leyendo — y si la tocas, manda tu toque.",
+    "estrella": "La estrella de la app",
+    "loFino": "Los detalles finos",
+    "descartadas": "Descartadas — no son pendientes",
+    "descartadaEl": "retirada el {fecha}",
+    "privacidad": "Privacidad",
+    "stack": "Stack",
+    "metricas": "Las cifras",
+    "fuentes": {
+      "medido": "medido",
+      "calculada": "calculada",
+      "declarado": "declarado",
+      "estimacion": "estimación"
+    },
+    "fuenteAyuda": {
+      "medido": "Salió de un contador o un comando",
+      "calculada": "Medido, operado con una tarifa o regla declarada",
+      "declarado": "Lo fijó una persona",
+      "estimacion": "Deducido"
+    },
+    "acceso": "Cómo se accede",
+    "cta": "Avísame cuando abra",
+    "ctaNota": "Entras a la lista de espera. Sin promesa de fecha.",
+    "anclaje": "Ficha anclada al export del {fecha} · v{version} · {sprints, plural, one {# sprint cerrado} other {# sprints cerrados}}",
+    "anclajeNota": "La vitrina muestra la versión anclada de cada app, no su estado en tiempo real.",
+    "sí": "sí",
+    "no": "no",
+    "muestraPie": "Esquema de las ideas de la app, dibujado en el lenguaje visual de esta página. No es una captura de pantalla.",
+    "capturasPie": "Pantalla real de la app corriendo, con datos inventados — repintada con la paleta de esta página.",
+    "firmaPie": "La escena mayor de su pieza de presentación, re-dibujada en el lenguaje visual de esta página.",
+    "indiceNota": "Cada app tiene su propia página. Aquí solo se asoman.",
+    "verFicha": "Ver la ficha completa",
+    "cuentaFuncionalidades": "{n} funcionalidades",
+    "cuentaCifras": "{n, plural, one {# cifra} other {# cifras}}",
+    "volverIndice": "Volver a la vitrina",
+    "migaEtiqueta": "Dónde estás",
+    "vecinasEtiqueta": "Otras apps de la vitrina",
+    "appAnterior": "App anterior",
+    "appSiguiente": "App siguiente"
   }
 }

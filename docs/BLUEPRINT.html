@@ -84,7 +84,7 @@
     <text class="titulo-caja" x="410" y="180" text-anchor="middle">Vercel Hobby</text>
     <text class="detalle-caja" x="410" y="200" text-anchor="middle">Next.js 16 · SSG + route handlers</text>
     <text class="detalle-caja" x="410" y="217" text-anchor="middle">prod desde main · preview por PR</text>
-    <text class="detalle-caja" x="410" y="234" text-anchor="middle">subdominio *.vercel.app</text>
+    <text class="detalle-caja" x="410" y="234" text-anchor="middle">subdominio del proveedor</text>
 
     <!-- Base de datos (Supabase) -->
     <rect class="caja caja-bd" x="640" y="40" width="290" height="104" rx="10"/>
@@ -143,7 +143,7 @@
       <tr><td>Observabilidad</td><td>Pino · Sentry · Vercel Analytics</td><td>logs estructurados en los route handlers (request-id, latencia); Sentry client-only inerte sin DSN; eventos de producto en Analytics</td></tr>
       <tr><td>Crons / keep-alives</td><td>ninguno</td><td>no hay procesos programados; todo es request-driven o build-time</td></tr>
       <tr><td>Secretos</td><td><code>.env.local</code> (gitignored) + Vercel env vars</td><td>doble hook gitleaks (pre-commit + PreToolUse); jamás en el repo</td></tr>
-      <tr><td>Dominio</td><td>subdominio <code>*.vercel.app</code></td><td>dominio propio previsto para H2 (G-Release)</td></tr>
+      <tr><td>Dominio</td><td>subdominio del proveedor (Vercel) — la URL exacta NO se publica aquí (regla 17)</td><td>dominio propio previsto para H2 (G-Release)</td></tr>
       <tr class="critica"><td>Costo real / mes</td><td><strong>US$0</strong></td><td>Vercel Hobby · Supabase free (2 proyectos/org) · Groq free (30 RPM, 1K req/día) · Resend free · GitHub Free · Sentry/Analytics free. Ningún tier al límite</td></tr>
       <tr class="critica"><td>Punto único de falla</td><td>la cuenta GitHub (SSO de Vercel y Supabase)</td><td>mitigación: 2FA en GitHub. La app degrada con gracia: sin BD la votación se declara "no disponible"; sin LLM el chat cae a búsqueda local — ninguno tumba el sitio</td></tr>
     </tbody>

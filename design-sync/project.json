@@ -1,0 +1,7 @@
+{
+  "name": "CV Viva — Design System",
+  "projectId": null,
+  "publishedFiles": 0,
+  "lastPublished": null,
+  "nota": "projectId en null: este bundle todavía NO se ha publicado en Claude Design. La primera publicación la dispara el usuario con /design-sync (el comando lleva disable-model-invocation) y es OBLIGATORIA en el cierre del ciclo H2; ahí se rellenan projectId, publishedFiles y lastPublished. En este archivo no va ningún token."
+}
