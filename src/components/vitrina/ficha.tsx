@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import type { FichaVitrina } from "@/lib/vitrina/loader";
 import type { FuenteMetrica } from "@/lib/vitrina/schemas";
+import { Capturas, tieneCapturas } from "./capturas";
 import { Maqueta } from "./maquetas";
 import { TarjetaGrupo } from "./tarjeta-grupo";
 
@@ -106,15 +107,26 @@ export async function FichaApp({ ficha }: { ficha: FichaVitrina }) {
           </p>
         </div>
 
-        {/* La MUESTRA en la portada: el dibujo ancla las palabras que siguen. */}
-        <figure data-traza className="m-0">
-          <div className="overflow-hidden rounded-[10px] border border-paper-2 bg-paper-1 p-3">
-            <Maqueta slug={ancla.slug} />
-          </div>
-          <figcaption className="mt-2 text-[13px] leading-relaxed text-ink-2">
-            {t("muestraPie")}
-          </figcaption>
-        </figure>
+        {/* La MUESTRA en la portada: lo que se ve ancla las palabras que siguen.
+            Pantallas REALES si la app ya está fotografiada; mientras no lo
+            esté, el esquema — que no finge ser una captura y lo dice. Nunca un
+            relleno que aparente ser la app (banco §7). */}
+        {tieneCapturas(ancla.slug) ? (
+          <Capturas
+            slug={ancla.slug}
+            pie={t("capturasPie")}
+            etiqueta={t("capturasEtiqueta", { app: exp.app.nombre })}
+          />
+        ) : (
+          <figure data-traza className="m-0">
+            <div className="overflow-hidden rounded-[10px] border border-paper-2 bg-paper-1 p-3">
+              <Maqueta slug={ancla.slug} />
+            </div>
+            <figcaption className="mt-2 text-[13px] leading-relaxed text-ink-2">
+              {t("muestraPie")}
+            </figcaption>
+          </figure>
+        )}
 
         <p className="max-w-[62ch] text-[15px] leading-[1.75] text-ink-1">
           {promesa.intro}

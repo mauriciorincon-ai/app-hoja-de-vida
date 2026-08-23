@@ -185,6 +185,8 @@
     "anclajeNota": "The showcase shows each app's pinned version, not its real-time state.",
     "sí": "yes",
     "no": "no",
-    "muestraPie": "A schematic of the app's ideas, drawn in this page's visual language. Not a screenshot."
+    "muestraPie": "A schematic of the app's ideas, drawn in this page's visual language. Not a screenshot.",
+    "capturasPie": "Real screens, photographed from the running app with made-up data.",
+    "capturasEtiqueta": "Screens of {app}"
   }
 }
