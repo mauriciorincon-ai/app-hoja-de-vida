@@ -325,17 +325,21 @@
   opacity: 0.75;
 }
 
-/* El dibujo se traza solo cuando su tarjeta se ve (clase puesta por la isla). */
-.maqueta .trazable {
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
-  pathLength: 1;
-}
-.tarjeta-vitrina[data-vista] .maqueta .trazable {
-  animation: trazar 1.1s var(--ease-out-cubic) forwards;
+/* El dibujo se traza solo cuando entra en pantalla (`data-vista` lo pone la
+ * isla). El 1 de `stroke-dasharray` es la longitud NORMALIZADA del trazo: cada
+ * figura trazable lleva `pathLength="1"` **como atributo del SVG** — no existe
+ * una propiedad CSS `pathLength`, y ponerla ahí deja la línea partida en dashes
+ * de 1px que se leen como un punteado sucio. */
+[data-vista] .maqueta .trazable {
+  animation: trazar 1.1s var(--ease-out-cubic) both;
 }
 @keyframes trazar {
+  from {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
   to {
+    stroke-dasharray: 1;
     stroke-dashoffset: 0;
   }
 }
@@ -416,6 +420,103 @@
 .tarjeta-vitrina[data-abierta] .tarjeta-detalle-cuerpo > .escalona:nth-child(5) {
   transition-delay: 0.32s;
 }
+.tarjeta-vitrina[data-abierta] .tarjeta-detalle-cuerpo > .escalona:nth-child(6) {
+  transition-delay: 0.38s;
+}
+
+/* ── Anatomía de la tarjeta de grupo ───────────────────────────────────────
+ * Índice, icono e insignia de estrella: los tres avisos que dicen "esto se
+ * abre y tiene orden", tomados del molde del brochure.
+ */
+.indice-grupo {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  /* ink-2, jamás ink-3: el 3 es tono DECORATIVO del DS y sobre paper-0 mide
+   * 2.7:1 — bajo AA. Es la tercera vez que este tono se cuela en texto (S4 lo
+   * pagó en el roadmap y S5 en el anclaje). Si algo se LEE, va en ink-2. */
+  color: var(--color-ink-2);
+  pointer-events: none;
+}
+.icono-grupo {
+  flex: none;
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: var(--color-paper-1);
+  border: 1px solid var(--color-paper-2);
+  color: var(--color-sage-ink);
+}
+.icono-grupo svg {
+  width: 24px;
+  height: 24px;
+}
+.icono-grupo svg :is(path, rect, circle) {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+/* «Dibujar el trazo»: el icono se termina de dibujar al llegar la tarjeta —
+ * un disparo, en cascada por figura. Dice hecho a mano, que es el argumento
+ * contra el aire de plantilla.
+ *
+ * EL ESTADO POR DEFECTO ES EL ICONO DIBUJADO. El efecto vive entero dentro de
+ * la animación, que solo existe con `data-vista`: si el disparo no llegara
+ * nunca, el icono se ve igual. La versión anterior hacía lo contrario —el
+ * reposo era `stroke-dashoffset: 1`, o sea INVISIBLE— y la transición se quedó
+ * colgada sin llegar jamás a 0: ocho iconos en blanco con la CI en verde. Es
+ * la misma lección del umbral porcentual del kit v1.23.0: lo que no se puede
+ * garantizar que se dispare no puede ser lo único que hace visible el
+ * contenido. */
+.tarjeta-vitrina[data-vista] .icono-grupo svg :is(path, rect, circle) {
+  animation: trazar-icono 0.75s var(--ease-out-cubic) both;
+}
+.tarjeta-vitrina[data-vista] .icono-grupo svg :nth-child(2) {
+  animation-delay: 0.13s;
+}
+.tarjeta-vitrina[data-vista] .icono-grupo svg :nth-child(3) {
+  animation-delay: 0.26s;
+}
+/* El 1 es la longitud NORMALIZADA: cada figura lleva `pathLength="1"` como
+ * atributo, así todas se dibujan en el mismo tiempo sin importar su largo. */
+@keyframes trazar-icono {
+  from {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 0;
+  }
+}
+/* La tarjeta estrella se distingue por el marco, no por el color de fondo:
+ * seis fichas de colores distintos no tendrían jerarquía, tendrían ruido. */
+.tarjeta-vitrina[data-estrella] {
+  border-color: var(--color-sage-ink);
+}
+
+/* ── Lo fino: acordeones nativos ───────────────────────────────────────────
+ * <details> de verdad — el teclado y el lector de pantalla ya los saben usar;
+ * lo único propio es el signo, que gira al abrir.
+ */
+.acordeon-fino summary::-webkit-details-marker {
+  display: none;
+}
+.acordeon-signo {
+  display: inline-block;
+  width: 1em;
+  transition: transform 0.25s var(--ease-out-cubic);
+}
+.acordeon-fino[open] .acordeon-signo {
+  transform: rotate(45deg);
+}
 
 /*
  * Cinturón de seguridad de reduced-motion: los wrappers de motion llevan
@@ -440,10 +541,15 @@
     transform: none !important;
     transition: none !important;
   }
-  .maqueta .trazable {
+  .maqueta .trazable,
+  .icono-grupo svg :is(path, rect, circle) {
     stroke-dasharray: none !important;
     stroke-dashoffset: 0 !important;
     animation: none !important;
+    transition: none !important;
+  }
+  .acordeon-signo {
+    transition: none !important;
   }
   [data-motion] {
     opacity: 1 !important;

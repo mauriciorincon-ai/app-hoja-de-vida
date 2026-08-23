@@ -42,12 +42,26 @@ import { useEffect } from "react";
 
 const TERCIO = 1 / 3;
 
-export function AperturaPorLectura({ selector }: { selector: string }) {
+export function AperturaPorLectura({
+  selector,
+  trazos = "[data-traza]",
+}: {
+  selector: string;
+  /**
+   * Dibujos que se trazan solos al entrar en pantalla (`stroke-dashoffset`, un
+   * disparo). Se marcan con `data-vista` — el trazado es CSS, aquí solo se
+   * dice cuándo. Van por la misma pasada de rectángulos porque ya la hay: un
+   * IntersectionObserver extra para esto sería un segundo mecanismo mirando lo
+   * mismo.
+   */
+  trazos?: string;
+}) {
   useEffect(() => {
     const tarjetas = Array.from(
       document.querySelectorAll<HTMLElement>(selector),
     );
-    if (tarjetas.length === 0) return;
+    const dibujos = Array.from(document.querySelectorAll<HTMLElement>(trazos));
+    if (tarjetas.length === 0 && dibujos.length === 0) return;
 
     // T3: sin esto Chrome compensa por su cuenta y el ajuste se aplica dos veces.
     const htmlPrevio = document.documentElement.style.overflowAnchor;
@@ -81,6 +95,13 @@ export function AperturaPorLectura({ selector }: { selector: string }) {
       const vh = window.innerHeight || document.documentElement.clientHeight;
       // T1: la línea es de PANTALLA. Deja ⅓ de viewport por debajo.
       const linea = vh * (1 - TERCIO);
+
+      // Trazado: un disparo, cuando el dibujo asoma por el borde inferior.
+      for (const d of dibujos) {
+        if (d.hasAttribute("data-vista")) continue;
+        const caja = d.getBoundingClientRect();
+        if (caja.top < vh && caja.bottom > 0) d.setAttribute("data-vista", "");
+      }
 
       for (const t of tarjetas) {
         if (t.hasAttribute("data-manual")) continue;
@@ -135,7 +156,7 @@ export function AperturaPorLectura({ selector }: { selector: string }) {
       for (const quitar of quitarClicks) quitar();
       document.documentElement.style.overflowAnchor = htmlPrevio;
     };
-  }, [selector]);
+  }, [selector, trazos]);
 
   return null;
 }

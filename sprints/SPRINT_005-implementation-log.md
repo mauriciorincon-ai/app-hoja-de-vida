@@ -250,3 +250,73 @@ tocaban entre columnas), topada a 460px de ancho (estirarla rompe la tipografía
 inmobiliaria 4, ya producidos con sus scripts y embebidos en sus brochures. Ojo con el presupuesto:
 `perf-budget.json` topa el total de la ruta en 1000 KB y solo las de Velo pesan ~360 KB — entrarían
 con `lazy` y/o una ficha por ruta. Las otras 4 apps no tienen capturas (dash es repo privado).
+
+### Rechazo nº 2 de la mirada M1 — «quitaste las tarjetas»
+
+Veredicto del usuario: la sección de las 24 funcionalidades era **puro texto**, y —lo grave— *«las
+tarjetas tienen una animación especial que hemos venido trabajando desde la planeadora … y lo
+primero que haces es quitarlas»*. Tenía razón: **apliqué el patrón al envoltorio en vez de a las
+tarjetas.** La ficha entera era UNA tarjeta desplegable gigante y los grupos de funcionalidades
+caían dentro como listas de texto.
+
+**Lo que dice el molde, leído esta vez completo** (`kit-app/docs/BROCHURE.plantilla.html` L244-287):
+la capa 1 «Qué hace» son **4–6 TARJETAS**, una por grupo de features, cada una con su índice, su
+**icono del design system de la app**, su nombre en verbo humano, la línea que provoca abrirla y el
+chevron; y dentro, una `.feature` por funcionalidad. El `brochure-export.json` transporta esa
+anatomía **exacta**: `funcionalidades.grupos[]` trae `orden · estrella · nombre · linea · features[]`
+— es decir, el contrato ya venía modelado como tarjetas y yo lo aplané a listas.
+
+**Corrección aplicada:**
+
+- La **ficha deja de ser desplegable** y vuelve a ser el mini-brochure de las cuatro capas: portada
+  (estado · nombre · promesa · tira · para quién / diferencial) y cifras **siempre a la vista** —
+  la portada de un brochure es lo único que jamás se esconde—, luego las tarjetas, luego lo fino en
+  acordeones nativos `<details>`, luego el acceso.
+- **Un grupo = una tarjeta** (`src/components/vitrina/tarjeta-grupo.tsx`), y la apertura por lectura
+  gobierna ESAS. Es lo que manda el patrón: se abre por lectura «si las tarjetas concentran la mayor
+  parte de la información» — eso son los grupos, no el envoltorio.
+- **No se anidan dos niveles de apertura** a propósito: la tarjeta madre y la hija compensarían el
+  MISMO alto dos veces en el cierre por arriba (`scrollBy` de T3), y ese es justo el salto de 1291px
+  que el patrón nació para matar.
+
+### Los iconos: se traen, no se inventan (regla 8 del molde)
+
+Los 6 iconos de las tarjetas de habla están copiados **verbatim** de `app-habla/docs/BROCHURE.html`
+(24×24, trazo, `pathLength="1"`): brote · bocadillo · micrófono · diana · brújula · engranaje. Los
+grupos 7 y 8 del export no tienen tarjeta en el brochure (allá son escenas a página completa), así
+que sus iconos se dibujaron **aquí** en la misma familia y quedan declarados en el componente.
+
+**→ Sugerencia a la planeadora (contrato del export):** `brochure-export.json` v1.0.0 **no
+transporta el icono**, así que el único vínculo con el origen es una copia fechada — exactamente lo
+que la regla 8 quiere evitar («sin desincronizarse»). Propuesta: campo `grupos[].icono` (el `d` de
+las figuras) en un v1.1.0 menor y retrocompatible.
+
+### Dos defectos cazados por la pasada de capturas (ninguno los vio la CI)
+
+1. **Los ocho iconos salían EN BLANCO.** Dos causas encadenadas: (a) la tarjeta no llevaba el
+   atributo que dispara el trazado, y (b) —el de fondo— el reposo del icono era
+   `stroke-dashoffset: 1`, o sea **invisible**, y la transición se quedó colgada sin llegar nunca a
+   0. Arreglo: **el estado por defecto pasa a ser el icono DIBUJADO** y el efecto vive entero dentro
+   de una `@keyframes`; si el disparo no llega, el icono se ve igual. Es la misma lección del umbral
+   porcentual (kit v1.23.0): *lo que no se puede garantizar que se dispare no puede ser lo único que
+   hace visible el contenido.*
+2. **`pathLength` no existe como propiedad CSS.** La tira lo declaraba en la hoja de estilos, donde
+   se ignora en silencio: las líneas quedaban partidas en guiones de 1px. Va como **atributo del
+   SVG**.
+
+### axe: el mismo tono por tercera vez, y un hueco de cobertura
+
+- `color-contrast` 2.7:1 en el índice de la tarjeta y en el número de cada feature: **`ink-3` es el
+  tono DECORATIVO del DS**, no un tono de texto. Tercera reincidencia (S4 en el roadmap, S5 en el
+  anclaje). Queda comentado en el CSS junto al token.
+- **Hueco descubierto:** al pasar «lo fino» a `<details>`, ese contenido **salía del scan de axe** —
+  la ruta habría pasado en verde por no haber sido mirada. `tests/e2e/axe.spec.ts` ahora **despliega
+  todo** (details abiertos + tarjetas en `data-abierta`) antes de analizar, genérico para cualquier
+  ruta que estrene un plegable. Es lo que pide el banco: «axe con el detalle abierto». **20/20.**
+
+### Nota de método: el servidor de desarrollo contamina los e2e
+
+Seis pruebas de axe fallaron por *timeout* del footer mientras `pnpm dev` corría en el 3000:
+Playwright reusa ese servidor y bajo carga paralela no responde. Se apaga el dev, se corre la
+suite, se vuelve a levantar. (Ya estaba en la memoria del proyecto como «servidor zombi puerto
+3000»; ahora también aquí, porque la falla se disfraza de flaky.)

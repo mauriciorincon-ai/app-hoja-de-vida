@@ -23,7 +23,13 @@ export function MaquetaHabla() {
       {/* ── 1 · Una idea al día ─────────────────────────────────────────── */}
       <rect className="mq-caja" x="20" y="14" width="40" height="34" rx="6" />
       <circle className="mq-punto" cx="29" cy="24" r="2.5" />
-      <path className="mq-trazo trazable" d="M36 24h16M28 34h24M28 41h16" />
+      {/* `pathLength={1}` normaliza el trazo para que el dibujado del CSS mida
+          en fracciones y no en píxeles (ver `.maqueta .trazable`). */}
+      <path
+        className="mq-trazo trazable"
+        pathLength={1}
+        d="M36 24h16M28 34h24M28 41h16"
+      />
       <text className="mq-rotulo" x="40" y="72" textAnchor="middle">
         IDEA DEL DÍA
       </text>
@@ -47,6 +53,7 @@ export function MaquetaHabla() {
       ))}
       <path
         className="mq-trayectoria trazable"
+        pathLength={1}
         d="M122 46 C 130 38, 128 26, 134 20"
       />
       <circle className="mq-globo" cx="136" cy="16" r="8" />
@@ -57,7 +64,11 @@ export function MaquetaHabla() {
       {/* ── 3 · La voz no se guarda ─────────────────────────────────────── */}
       <circle className="mq-veto-fondo" cx="200" cy="31" r="15" />
       <circle className="mq-veto-punto" cx="200" cy="31" r="5" />
-      <path className="mq-veto-barra trazable" d="M190 41l20-20" />
+      <path
+        className="mq-veto-barra trazable"
+        pathLength={1}
+        d="M190 41l20-20"
+      />
       <text className="mq-rotulo" x="200" y="72" textAnchor="middle">
         NO SE GUARDA
       </text>

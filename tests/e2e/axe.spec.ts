@@ -45,6 +45,23 @@ for (const ruta of RUTAS) {
     // Estado final de la página (el footer existe en todas las rutas)
     await page.locator("footer").scrollIntoViewIfNeeded();
 
+    // Lo plegado TAMBIÉN se audita. Sin esto, todo lo que vive dentro de una
+    // tarjeta o de un <details> sale del scan y la ruta pasa en verde por no
+    // haber sido mirada — el banco de técnicas lo pide explícito ("axe con el
+    // detalle abierto"). Genérico a propósito: cualquier ruta que estrene un
+    // plegable queda cubierta el día que lo estrene.
+    await page.evaluate(() => {
+      for (const d of document.querySelectorAll("details")) d.open = true;
+      for (const t of document.querySelectorAll(".tarjeta-vitrina")) {
+        t.setAttribute("data-abierta", "");
+        t.setAttribute("data-manual", ""); // que el scroll del scan no la cierre
+        t.querySelector(".tarjeta-boton")?.setAttribute(
+          "aria-expanded",
+          "true",
+        );
+      }
+    });
+
     const results = await new AxeBuilder({ page })
       .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
       .analyze();
