@@ -38,6 +38,11 @@ import { useEffect } from "react";
  *  T6 — rectángulos, NO IntersectionObserver: gobierna dónde está la cabecera
  *       respecto a la pantalla, no cuánto de la tarjeta se ve — y con la
  *       coreografía de entrada la caja miente 18 px sobre su posición.
+ *  T7 — la compensación del cierre por arriba se calcula midiendo la DERIVA
+ *       de un ancla visible debajo, jamás restando el alto perdido a ciegas:
+ *       el navegador también ajusta por su cuenta (anclaje de scroll, recorte
+ *       en el fondo del documento) y la resta ciega DUPLICA la compensación —
+ *       brinco arriba, reapertura bajando, bucle. (Cazada aquí, en M1.)
  */
 
 const TERCIO = 1 / 3;
@@ -117,12 +122,29 @@ export function AperturaPorLectura({
           abrir(t, false);
         } else if (caja.bottom <= 0) {
           // T5: salió por arriba ⇒ atómico, y se repone el alto en el mismo cuadro.
+          // T7: la compensación se calcula midiendo la DERIVA REAL de un ancla
+          //     visible DEBAJO de la tarjeta — jamás restando el alto perdido a
+          //     ciegas. El navegador también ajusta el scroll por su cuenta
+          //     (anclaje de scroll, recorte cerca del fondo del documento) y
+          //     restar `perdido` encima de ese ajuste DUPLICA la compensación:
+          //     la página brinca hacia arriba, la tarjeta re-entra en zona de
+          //     apertura bajando, se reabre… y el visitante queda atrapado en
+          //     un bucle que no lo deja pasar (cazado en M1 entre las tarjetas
+          //     06 y 07: 260 pasos de rueda sin alcanzar el fondo).
+          let ancla: Element | null = null;
+          for (let n: Element | null = t; n && !ancla; n = n.parentElement)
+            ancla = n.nextElementSibling;
+          const topAntes = ancla?.getBoundingClientRect().top;
           t.classList.add("sin-transicion");
           abrir(t, false);
-          const perdido = caja.height - t.getBoundingClientRect().height;
-          if (perdido) {
-            window.scrollBy({ top: -perdido, left: 0, behavior: "instant" });
-            yPrevia = window.scrollY; // T4
+          if (ancla && topAntes !== undefined) {
+            // Leer el rect fuerza el reflow: aquí ya actuaron el encogido Y el
+            // ajuste propio del navegador. Lo que falte (o sobre) es la deriva.
+            const deriva = ancla.getBoundingClientRect().top - topAntes;
+            if (deriva) {
+              window.scrollBy({ top: deriva, left: 0, behavior: "instant" });
+              yPrevia = window.scrollY; // T4
+            }
           }
           window.requestAnimationFrame(() =>
             t.classList.remove("sin-transicion"),

@@ -445,3 +445,37 @@ estática (barras quietas a media altura, sin fuga). El mapeo slug→grupo vive 
 porque el contrato v1.0.0 no transporta material visual (mismo caso que iconos y capturas).
 
 Verde: typecheck · lint · 174 unit · axe 20/20 · build.
+
+### BUG cazado por el usuario en M1: el bucle entre las tarjetas 06 y 07 — nace la trampa T7
+
+Reporte: bajando después de «La promesa mayor», la página volvía una y otra vez a «A su medida».
+**Reproducido con números (el rojo):** 260 pasos de rueda SIN alcanzar el fondo (scrollY se quedaba
+en 3144 de un documento de 4911) con saltos hacia arriba de 600–1300px.
+
+**Causa raíz — la compensación a ciegas del cierre por arriba:** `scrollBy(-perdido)` resta el alto
+perdido SIN descontar lo que el navegador ya ajustó por su cuenta (anclaje de scroll, recorte cerca
+del fondo del documento). Doble compensación ⇒ brinco hacia arriba ⇒ la tarjeta recién cerrada
+re-entra en zona de apertura bajando ⇒ se reabre ⇒ vuelve a cerrar ⇒ bucle que no deja pasar.
+
+**Arreglo (T7, documentada en `apertura-por-lectura.tsx`):** la compensación se calcula midiendo la
+**DERIVA REAL de un ancla visible debajo** de la tarjeta (su siguiente hermano, subiendo por el
+árbol si no lo hay): rect antes → cerrar → rect después → compensar solo la diferencia. Si el
+navegador ya ajustó, la deriva es 0 y no se toca nada. Es la misma filosofía que el patrón exige a
+los TESTS («deriva cero midiendo una cabecera visible, jamás scrollY») aplicada al motor mismo.
+
+**El verde, con la métrica correcta:** el fondo se alcanza en 63 pasos; CERO tarjetas reabiertas en
+el descenso; subir no abre nada (0 abiertas); el segundo descenso también llega al fondo. Ojo
+metodológico que costó una iteración: **`scrollY` que baja NO es el síntoma** — con compensación
+correcta scrollY SIEMPRE baja al cerrar una tarjeta alta arriba (el documento se encoge); el
+síntoma real es «no llegar nunca al fondo» y el ancla visual moviéndose. El primer repro midió lo
+equivocado y "confirmó" el bug también en el código arreglado.
+
+**→ Sugerencia a la planeadora (patrón `apertura-por-lectura.md` / banco §7):** añadir T7 al
+catálogo de trampas del patrón: la compensación del cierre por arriba debe medir la deriva de un
+ancla real, no restar el alto perdido — el anclaje de scroll del navegador y el recorte del fondo
+del documento la duplican en silencio, y el e2e de deriva cero conduce con `behavior: "instant"`
+sobre documentos largos, donde esta trampa no siempre asoma (aquí la disparó la vitrina M1 con UNA
+ficha: página corta ⇒ cierre cerca del fondo).
+
+El e2e formal de deriva cero del patrón queda donde estaba planeado (Fase 3), ahora con este caso
+como fixture obligado.
