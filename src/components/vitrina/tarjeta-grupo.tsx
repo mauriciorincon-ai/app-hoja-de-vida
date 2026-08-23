@@ -1,6 +1,7 @@
 import { ChevronDown } from "lucide-react";
 import type { GrupoExport } from "@/lib/vitrina/schemas";
 import { CapturaGrupo } from "./capturas";
+import { FirmaGrupo } from "./firmas";
 import { IconoGrupo } from "./iconos-grupo";
 
 /**
@@ -28,11 +29,13 @@ export function TarjetaGrupo({
   slug,
   etiquetaEstrella,
   pieCaptura,
+  pieFirma,
 }: {
   grupo: GrupoExport;
   slug: string;
   etiquetaEstrella: string;
   pieCaptura: string;
+  pieFirma: string;
 }) {
   const id = `g-${slug}-${grupo.orden}`;
 
@@ -95,6 +98,10 @@ export function TarjetaGrupo({
             {/* LA PANTALLA REAL del grupo primero, a lo ancho: la imagen ancla
                 las palabras que vienen debajo. */}
             <CapturaGrupo slug={slug} orden={grupo.orden} pie={pieCaptura} />
+            {/* Y donde el grupo no es una pantalla sino EL CLÍMAX del brochure
+                de la app, va su FIRMA: la escena re-dibujada en nuestros
+                tokens (gate M1). */}
+            <FirmaGrupo slug={slug} orden={grupo.orden} pie={pieFirma} />
             {/* Coreografía interior: las features ALZAN en fila (~60 ms). El
                 detalle no "aparece": te lo sirven en orden de lectura. */}
             {grupo.features.map((f) => (

@@ -435,6 +435,85 @@
   background: var(--color-paper-1);
   box-shadow: var(--shadow-sh-2, 0 6px 18px rgb(0 0 0 / 0.07));
 }
+/* ── Firmas: el clímax del brochure de cada app, re-dibujado ───────────────
+ * La escena de habla: las barras BAILAN con la voz y se apagan AQUÍ ADENTRO;
+ * la fuga llega al borde y se devuelve. Es la coreografía del brochure
+ * original traducida a nuestros tokens y curvas. LOOP AMBIENTAL PERMITIDO
+ * SOLO AQUÍ (banco §2: el clímax es la única promesa que nunca descansa):
+ * corre únicamente con la tarjeta abierta — cerrada, `visibility: hidden` la
+ * saca de pintura — y solo anima transform/opacity.
+ */
+.firma-clima .fc-marco {
+  fill: none;
+  stroke: var(--color-paper-3);
+  stroke-width: 1.5;
+}
+.firma-clima .fc-barra {
+  fill: var(--color-sage-ink);
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  transform: scaleY(0.55);
+}
+.firma-clima .fc-fuga {
+  fill: none;
+  stroke: var(--color-rose-ink);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-dasharray: 24;
+  stroke-dashoffset: 24;
+  opacity: 0;
+}
+.tarjeta-vitrina[data-abierta] .firma-clima .fc-barra {
+  animation: fc-bailar 4.6s var(--ease-in-out-cubic) infinite;
+  animation-delay: calc(var(--k) * 130ms);
+}
+.tarjeta-vitrina[data-abierta] .firma-clima .fc-fuga {
+  animation: fc-fugarse 4.6s var(--ease-in-out-cubic) infinite;
+}
+@keyframes fc-bailar {
+  0% {
+    transform: scaleY(0.22);
+  }
+  12% {
+    transform: scaleY(0.95);
+  }
+  26% {
+    transform: scaleY(0.42);
+  }
+  40% {
+    transform: scaleY(0.86);
+  }
+  54% {
+    transform: scaleY(0.34);
+  }
+  66% {
+    transform: scaleY(0.7);
+  }
+  /* …y se apaga aquí adentro: nunca sale del marco. */
+  78%,
+  100% {
+    transform: scaleY(0.035);
+  }
+}
+@keyframes fc-fugarse {
+  0%,
+  62% {
+    stroke-dashoffset: 24;
+    opacity: 0;
+  }
+  /* llega al borde… */
+  72% {
+    stroke-dashoffset: 4;
+    opacity: 0.85;
+  }
+  /* …y se devuelve. */
+  86%,
+  100% {
+    stroke-dashoffset: 24;
+    opacity: 0;
+  }
+}
+
 /* ── Anatomía de la tarjeta de grupo ───────────────────────────────────────
  * Índice, icono e insignia de estrella: los tres avisos que dicen "esto se
  * abre y tiene orden", tomados del molde del brochure.
@@ -561,6 +640,12 @@
   }
   .acordeon-signo {
     transition: none !important;
+  }
+  /* La firma queda como composición estática con el mensaje completo: barras
+   * quietas a media altura dentro del marco; la fuga no existe. */
+  .firma-clima .fc-barra,
+  .firma-clima .fc-fuga {
+    animation: none !important;
   }
   [data-motion] {
     opacity: 1 !important;

@@ -412,3 +412,36 @@ regenerar capturas, `rm -rf .next/dev/cache/images` y reiniciar el dev** (el bui
 sufre esto: nace con caché vacío).
 
 Verde: axe 20/20 · 174 unit · build.
+
+### La duda de fondo del usuario — y la decisión que la cierra (gate M1, ronda 4)
+
+El usuario preguntó lo que había que preguntar: dedicó horas a los brochures, cada uno con su
+imagen única — ¿por qué la vitrina no es "el brochure con tu color y fuente"? Respuesta registrada:
+
+**Dónde nos perdimos:** el contrato del export transporta SOLO datos (el propio `_schema` dice "la
+vitrina renderiza la ficha sin abrir su repositorio") y la orden dice "los exports re-expresados en
+TU design system" — la identidad visual de cada brochure NO viaja en el contrato, y esa pérdida
+quedó implícita: nadie la decidió a la vista. Se hizo visible en M1, que para eso existe. Yo debí
+señalar la tensión en el plan.
+
+**Por qué "solo color y fuente" se descartó con razones:** (1) la paleta de cada brochure ES su
+identidad (molde regla 8: dirección de arte anclada a LA APP) — recolorearla la destruye; (2) los
+brochures traen enlaces a rutas de su app → CERO ENLACES o enlaces rotos; (3) seis piezas
+autocontenidas con su JS dentro de una ruta SSG con presupuesto de 1000 KB. Los brochures NO se
+pierden: siguen siendo la ruta /conoce de cada app.
+
+**Decisión del usuario (AskUserQuestion):** fotografiar los brochures → **NO** (rechazado
+explícito). Elegido: **el CLÍMAX de cada brochure RE-DIBUJADO en los tokens de CV Viva** como firma
+de su ficha — seis fichas, seis momentos visuales distintos nacidos del trabajo original,
+reconstruidos, jamás fotografiados ni recoloreados.
+
+**Implementación (habla):** `firmas/habla.tsx` re-dibuja E06b «La promesa mayor»: el marco del
+aparato como frontera, las 5 barras que bailan (`fc-bailar`, scaleY con retardo por barra) y se
+apagan adentro, la fuga que llega al borde y se devuelve (`fc-fugarse`). Vive en la TARJETA 07,
+cuyo mensaje ES el del clímax. **Loop ambiental permitido SOLO aquí** (banco §2: el clímax es la
+única promesa que nunca descansa); corre únicamente con la tarjeta abierta (cerrada,
+`visibility: hidden` la saca de pintura); solo transform/opacity; reduced-motion = composición
+estática (barras quietas a media altura, sin fuga). El mapeo slug→grupo vive en `firmas/index.tsx`
+porque el contrato v1.0.0 no transporta material visual (mismo caso que iconos y capturas).
+
+Verde: typecheck · lint · 174 unit · axe 20/20 · build.

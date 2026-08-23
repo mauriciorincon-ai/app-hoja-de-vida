@@ -187,6 +187,7 @@ export async function FichaApp({ ficha }: { ficha: FichaVitrina }) {
               slug={ancla.slug}
               etiquetaEstrella={t("estrella")}
               pieCaptura={t("capturasPie")}
+              pieFirma={t("firmaPie")}
             />
           ))}
         </div>
