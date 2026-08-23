@@ -562,3 +562,63 @@ ruta y aceptar seis marcas ajenas dentro del design system fueron decisiones de 
 declararlas en el plan ni en el gate M1 — y ninguna estaba escrita en la orden. La regla que me
 faltó aplicar es la misma que el método ya exige para el contenido: si algo cambia lo que el
 visitante ve, se pone sobre la mesa antes, no después de construirlo.
+
+---
+
+## Fase 3 — e2e de la vitrina (2026-08-22)
+
+`tests/e2e/vitrina.spec.ts`, **26 pruebas** (13 × chromium + móvil). Data-driven desde
+`content/vitrina/*.json`: una app hermana nueva entra al e2e sola.
+
+**La vitrina como contenido** — se llega desde el header POR LA UI (en móvil, abriendo el menú) ·
+cada app tiene su ruta y **solo su ficha vive en ella** (la aserción que hace guardia sobre la
+corrección de M2) · navegación entre vecinas y vuelta al índice · **gate ATS/SEO**: el HTML estático
+trae la promesa, los nombres de las tarjetas y el detalle de dentro, aunque nazcan cerradas ·
+**cero enlaces** en las 7 rutas · el CTA de lista de espera con su anclaje **en la misma página** ·
+toda cifra con su `data-fuente` · las descartadas, todas.
+
+**El patrón de apertura por lectura**, con las pruebas que él mismo nombra: la línea es de PANTALLA
+(T1) · subiendo no se abre nada · el toque la saca del automático para siempre · cerrada, sale del
+árbol de accesibilidad · y sigue abriendo **con `prefers-reduced-motion`** (se apaga el movimiento,
+no el contenido).
+
+### El gate de deriva cero, demostrado FALLANDO (regla 14)
+
+**Qué se cambió:** en `apertura-por-lectura.tsx`, la compensación T7 se sustituyó por la versión
+vieja a ciegas (`scrollBy(-perdido)` con el alto perdido restado sin medir nada).
+
+**Rojo:** `el contenido saltó bajo la vista — paso 32: lo que estaba a la vista se movió 170px en
+vez de 252px`. Restaurado el arreglo, verde. El archivo quedó **idéntico a HEAD** (verificado con
+`git diff --quiet`).
+
+**Tres mediciones descartadas antes de llegar a esa — las tres son la misma lección:**
+
+1. **`scrollY`** no sirve: baja legítimamente cada vez que se recoge una tarjeta alta de más arriba.
+   (Ya estaba anotado de M1; aquí se confirmó.)
+2. **«llegar al fondo»** tampoco: con el bug restaurado, esta página IGUAL llegaba al fondo — el
+   gate pasó en **VERDE con el defecto puesto**. Si no llego a exigir la demostración en rojo, el
+   sprint cierra con una prueba decorativa que además da tranquilidad falsa. Es exactamente el
+   precedente de la carnada floja de gitleaks, en otra feature.
+3. **«ninguna tarjeta se reabre»** era falsa de raíz: una tarjeta empujada bajo la pantalla por la
+   que se expande encima **debe** cerrarse y volver a abrirse cuando el lector llega a ella. La
+   aserción contradecía el patrón, no al código. Fuera.
+
+**Y dos errores de MEDICIÓN propios, que costaron una vuelta cada uno** (los anoto porque los tres
+puntos de arriba son sobre qué medir, y estos son sobre cómo):
+
+- **El ancla no puede ser un envoltorio.** Tomé el elemento bajo el centro de la pantalla y subí a
+  su bloque contenedor — que resultó ser el artículo de la ficha ENTERA, cuyo techo está miles de
+  píxeles por encima, o sea *por encima de la tarjeta que se recoge*. Ese techo se mueve con el
+  scroll aunque lo visible no se mueva: 207 px de "deriva" fantasma sobre código correcto. El
+  patrón ya lo dice — el ancla se mide sobre una cabecera **visible**. Ahora se rastrea la franja
+  central hasta dar con un bloque cuyo `top >= 0`.
+- **Hay que esperar a que la página se asiente.** Desplegar dura 620 ms; con dos cuadros de espera
+  entre pasos, la página seguía creciendo sola y la crecida se leía como deriva (96 px sobre código
+  correcto). Ahora se espera a que no quede ninguna animación **de duración finita** corriendo — las
+  infinitas (la firma que late dentro de una tarjeta abierta) quedan fuera o no terminaría nunca.
+
+**→ Sugerencia a la planeadora** (además de la T7 ya anotada): el patrón exige el test de deriva
+cero pero no dice **cómo elegir el ancla ni cuándo medir**, y los dos descuidos producen rojos
+falsos sobre código correcto — que es la forma más cara de fallo, porque manda a arreglar lo que no
+está roto. Vale la pena que `apertura-por-lectura.md` incorpore las dos condiciones: ancla con
+`top >= 0` (nunca un contenedor) y medición con las transiciones asentadas.
