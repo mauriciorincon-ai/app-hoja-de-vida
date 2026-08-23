@@ -28,6 +28,7 @@ import os from "node:os";
 import path from "node:path";
 import process from "node:process";
 import { chromium } from "playwright";
+import { temaPara } from "./tema-cv-viva.mjs";
 
 const RAIZ = process.cwd();
 const HERMANAS = path.resolve(RAIZ, "..");
@@ -222,11 +223,17 @@ const APPS = {
       if (await boton.isVisible().catch(() => false)) await boton.click();
       await p.waitForTimeout(600);
     },
+    // El foco apunta al PRIMER bloque de contenido, no al contenedor que los
+    // envuelve: `main div` casaba con la columna entera (1 472 px en «Hoy»), y
+    // el ajuste anti-recorte encogía la app al 40 % para que cupiera — letra
+    // ilegible y dos desiertos de fondo a los lados. Con un bloque corto la
+    // región cabe a tamaño real y la foto entra por el techo de la página, que
+    // es exactamente lo que ve quien abre la app.
     escenas: [
-      { nombre: "hoy", ruta: "/", desde: "top", foco: "main section, main div" },
-      { nombre: "dieta", ruta: "/dieta", desde: "top", foco: "main section, main div" },
-      { nombre: "cargar", ruta: "/cargar", desde: "top", foco: "main section, main div" },
-      { nombre: "ajustes", ruta: "/ajustes", desde: "top", foco: "main section, main div" },
+      { nombre: "hoy", ruta: "/", desde: "top", foco: "main section, main label" },
+      { nombre: "dieta", ruta: "/dieta", desde: "top", foco: "main section, main label" },
+      { nombre: "cargar", ruta: "/cargar", desde: "top", foco: "main section, main label" },
+      { nombre: "ajustes", ruta: "/ajustes", desde: "top", foco: "main section, main label" },
     ],
   },
 
@@ -335,19 +342,42 @@ async function capturarApp(slug, config) {
     const nav = await chromium.launch();
     // `reducedMotion` para fotografiar el estado final, no un cuadro a media
     // animación: una captura a media opacidad miente sobre el producto.
+    // `colorScheme: light`: tres de las seis traen bloque `prefers-color-scheme:
+    // dark` y la vitrina se ve en claro — el modo del equipo que captura no
+    // puede decidir cómo se ve la hoja de vida de otro.
     const ctx = await nav.newContext({
       viewport: PANTALLA,
       deviceScaleFactor: DPR,
       reducedMotion: "reduce",
+      colorScheme: "light",
     });
-    // El overlay de desarrollo de Next (el badge rojo de «Issues») NO es el
-    // producto: fuera de toda captura.
-    await ctx.addInitScript(() => {
-      const s = document.createElement("style");
-      s.textContent = "nextjs-portal{display:none!important}";
-      document.documentElement.appendChild(s);
-    });
+    // TEMA CV VIVA: la app real, repintada con los tokens de esta página
+    // (`tema-cv-viva.mjs`). Se inyecta al arrancar cada documento para que la
+    // app nunca se pinte de su marca ni por un cuadro, y se reafirma antes de
+    // disparar por si su hidratación reordenó el `<head>`.
+    const tema = temaPara(slug);
+    await ctx.addInitScript((css) => {
+      const poner = () => {
+        if (document.getElementById("tema-cv-viva")) return;
+        const s = document.createElement("style");
+        s.id = "tema-cv-viva";
+        s.textContent = css;
+        (document.head || document.documentElement).appendChild(s);
+      };
+      poner();
+      document.addEventListener("DOMContentLoaded", poner);
+    }, tema ?? "nextjs-portal{display:none!important}");
     const p = await ctx.newPage();
+    // Y otra vez en cada `load`: la hidratación de Next reordena el `<head>` y
+    // el `<style>` del arranque no sobrevive (medido — tras `networkidle` el
+    // `--color-purple` de inmobiliaria seguía siendo el suyo). Con el tema
+    // puesto desde el `load` la app ya no transiciona de un color al otro.
+    if (tema)
+      p.on("load", () => {
+        p.addStyleTag({ content: tema }).catch(() => {
+          /* navegación en curso: la reafirmación previa al disparo lo cubre */
+        });
+      });
 
     // Preparación única de la app (indexar dash, aceptar el aviso de nutri…).
     if (config.alIniciar) await config.alIniciar(p, base);
@@ -440,6 +470,12 @@ async function capturarApp(slug, config) {
             el.style.setProperty("display", "none", "important");
         }
       });
+
+      // Reafirmación del tema: última hoja del documento, gana por orden.
+      if (tema) {
+        await p.addStyleTag({ content: tema });
+        await p.waitForTimeout(120);
+      }
 
       const png = path.join(TEMP, `${slug}-${escena.nombre}.png`);
       await p.screenshot({ path: png });

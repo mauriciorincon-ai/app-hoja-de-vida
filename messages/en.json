@@ -186,7 +186,16 @@
     "sí": "yes",
     "no": "no",
     "muestraPie": "A schematic of the app's ideas, drawn in this page's visual language. Not a screenshot.",
-    "capturasPie": "Real screen, photographed from the running app with made-up data.",
-    "firmaPie": "The signature scene of its own showcase piece, redrawn in this page's visual language."
+    "capturasPie": "A real screen of the running app, with made-up data — repainted in this page's palette.",
+    "firmaPie": "The signature scene of its own showcase piece, redrawn in this page's visual language.",
+    "indiceNota": "Each app has its own page. This is just the window.",
+    "verFicha": "Open the full card",
+    "cuentaFuncionalidades": "{n} features",
+    "cuentaCifras": "{n, plural, one {# number} other {# numbers}}",
+    "volverIndice": "Back to the showcase",
+    "migaEtiqueta": "Where you are",
+    "vecinasEtiqueta": "Other apps in the showcase",
+    "appAnterior": "Previous app",
+    "appSiguiente": "Next app"
   }
 }

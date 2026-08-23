@@ -186,7 +186,16 @@
     "sí": "sí",
     "no": "no",
     "muestraPie": "Esquema de las ideas de la app, dibujado en el lenguaje visual de esta página. No es una captura de pantalla.",
-    "capturasPie": "Pantalla real, fotografiada de la app corriendo con datos inventados.",
-    "firmaPie": "La escena mayor de su pieza de presentación, re-dibujada en el lenguaje visual de esta página."
+    "capturasPie": "Pantalla real de la app corriendo, con datos inventados — repintada con la paleta de esta página.",
+    "firmaPie": "La escena mayor de su pieza de presentación, re-dibujada en el lenguaje visual de esta página.",
+    "indiceNota": "Cada app tiene su propia página. Aquí solo se asoman.",
+    "verFicha": "Ver la ficha completa",
+    "cuentaFuncionalidades": "{n} funcionalidades",
+    "cuentaCifras": "{n, plural, one {# cifra} other {# cifras}}",
+    "volverIndice": "Volver a la vitrina",
+    "migaEtiqueta": "Dónde estás",
+    "vecinasEtiqueta": "Otras apps de la vitrina",
+    "appAnterior": "App anterior",
+    "appSiguiente": "App siguiente"
   }
 }

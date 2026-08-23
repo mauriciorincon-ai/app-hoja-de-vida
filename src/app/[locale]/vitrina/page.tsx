@@ -5,8 +5,7 @@ import { notFound } from "next/navigation";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { Reveal } from "@/components/motion/reveal";
-import { AperturaPorLectura } from "@/components/vitrina/apertura-por-lectura";
-import { FichaApp } from "@/components/vitrina/ficha";
+import { MuestraApp } from "@/components/vitrina/muestra";
 import { Link } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
 import { getCv } from "@/lib/content";
@@ -14,23 +13,21 @@ import { SITE_URL } from "@/lib/site";
 import { getFichasVitrina } from "@/lib/vitrina/loader";
 
 /**
- * LA VITRINA (S5, ADR-013): las apps hermanas del portafolio, re-expresadas
- * desde su `brochure-export.json` en el design system de CV Viva.
+ * LA VITRINA — ÍNDICE (S5, ADR-013): el escaparate de las apps hermanas del
+ * portafolio, re-expresadas desde su `brochure-export.json` en el design
+ * system de CV Viva.
+ *
+ * **Esta ruta es la MUESTRA CORTA.** Cada app tiene su propio espacio en
+ * `/vitrina/<slug>`; aquí solo se asoma. La primera versión apilaba las seis
+ * fichas enteras en esta página —más de 22 000 px de documento— y eso rompía
+ * tres cosas de golpe: ninguna app era direccionable por sí sola, el visitante
+ * cargaba las seis para leer una, y el escaparate dejaba de ser escaparate.
+ * Una vitrina se recorre de un vistazo; el detalle está adentro.
  *
  * 100% SSG. El hero (candidato LCP) nace ESTÁTICO — sin wrapper de motion que
- * arranque en opacity 0 (patrón `lcp-nace-estatico`). **Cero enlaces**: ninguna
- * ficha entrega URL de producción ni de repositorio; se muestra la razón y un
- * CTA único de lista de espera.
+ * arranque en opacity 0 (patrón `lcp-nace-estatico`). **Cero enlaces**: los
+ * únicos destinos son rutas de este repo.
  */
-
-/**
- * GATE DE MIRADA M1 → M2 (método v1.21.0 — plan de miradas de la orden).
- * M1 (una ficha) quedó aprobada tras cuatro rondas: tarjetas por grupo con la
- * apertura por lectura, iconos traídos del brochure de origen, capturas
- * apaisadas de la app corriendo y la firma del clímax re-dibujada. Con la
- * gramática congelada, `null` abre LAS SEIS y arranca M2.
- */
-const FICHAS_VISIBLES: number | null = null;
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -65,17 +62,15 @@ export default async function VitrinaPage({ params }: Params) {
   const l = locale as Locale;
   const cv = getCv(l);
   const t = await getTranslations("vitrina");
-  const todas = getFichasVitrina();
-  const fichas =
-    FICHAS_VISIBLES === null ? todas : todas.slice(0, FICHAS_VISIBLES);
+  const fichas = getFichasVitrina();
 
   return (
     <>
       <Header nombre={cv.identidad.nombre} enHome={false} />
       <main id="contenido" className="flex-1">
-        <div className="mx-auto max-w-4xl px-4 py-16 md:px-6 md:py-20">
+        <div className="mx-auto max-w-5xl px-4 py-16 md:px-6 md:py-20">
           {/* Hero estático (candidato LCP): sin motion JS. */}
-          <header className="mb-14">
+          <header className="mb-12">
             <p className="anim-fade-in-up mb-5 flex items-center gap-2 text-xs font-medium tracking-[0.18em] text-sage-ink uppercase">
               <span
                 aria-hidden="true"
@@ -89,26 +84,24 @@ export default async function VitrinaPage({ params }: Params) {
             <p className="mt-5 max-w-[60ch] text-[16px] leading-[1.75] text-ink-1">
               {t("subtitulo")}
             </p>
+            <p className="mt-3 max-w-[60ch] text-[15px] leading-relaxed text-ink-2">
+              {t("indiceNota")}
+            </p>
             {/* En /en: las fichas conservan la voz de cada app (ADR-013 §6). */}
             {t("notaIdioma") !== "" && (
-              <p className="mt-4 max-w-[60ch] text-sm leading-relaxed text-ink-2 italic">
+              <p className="mt-3 max-w-[60ch] text-sm leading-relaxed text-ink-2 italic">
                 {t("notaIdioma")}
               </p>
             )}
           </header>
 
-          <div className="flex flex-col gap-10">
-            {/* `amount="some"`: una ficha es MÁS ALTA que la pantalla y con un
-                umbral porcentual no se revelaría nunca (kit v1.23.0). */}
-            {fichas.map((ficha) => (
-              <Reveal key={ficha.ancla.slug} variant="fadeInUp" amount="some">
-                <FichaApp ficha={ficha} />
-              </Reveal>
-            ))}
-            {/* Una sola isla gobierna la apertura por lectura de TODAS las
-                tarjetas (rectángulos por cuadro de scroll, no un observer). */}
-            <AperturaPorLectura selector=".tarjeta-vitrina" />
-          </div>
+          <Reveal variant="fadeInUp" amount="some">
+            <ul className="grid gap-5 sm:grid-cols-2">
+              {fichas.map((ficha) => (
+                <MuestraApp key={ficha.ancla.slug} ficha={ficha} />
+              ))}
+            </ul>
+          </Reveal>
 
           {/* Cierre: el anclaje de toda la vitrina + la lista de espera. */}
           <Reveal variant="fadeInUp">

@@ -479,3 +479,86 @@ ficha: página corta ⇒ cierre cerca del fondo).
 
 El e2e formal de deriva cero del patrón queda donde estaba planeado (Fase 3), ahora con este caso
 como fixture obligado.
+
+---
+
+## Gate de mirada M2 — dos correcciones del usuario (2026-08-22)
+
+Presentadas las seis fichas, el usuario devolvió **dos objeciones estructurales**. Ninguna era de
+detalle: las dos tocaban decisiones que yo había tomado sin ponerlas sobre la mesa.
+
+### 1 · «Todas las apps en una misma página»
+
+> «la idea es que todas tengan su espacio independiente y se acceda por una muestra corta
+> denominada vitrina»
+
+Tenía razón y el síntoma estaba medido desde antes: `/vitrina` era **un documento de 22 784 px**
+con las seis fichas apiladas. Eso rompía tres cosas a la vez — ninguna app era direccionable por sí
+sola, el visitante cargaba las seis (27 capturas, 992 KB) para leer una, y un escaparate que no se
+recorre de un vistazo deja de ser escaparate.
+
+**Hecho:**
+
+- `/vitrina` pasa a ser **índice**: seis muestras cortas (estado · nombre · promesa · tira · para
+  quién · cuántas funcionalidades y cifras · «ver la ficha completa»). Alto: **2 421 px**.
+- `/vitrina/<slug>` — **ruta propia por app**, 12 páginas SSG (6 × 2 idiomas) desde
+  `generateStaticParams`. Una app hermana nueva entra dejando caer su export: página, sitemap y
+  scan de axe salen solos.
+- Navegación entre vecinas (anterior/siguiente en el orden del índice) y vuelta al índice.
+- La sección `#contacto-vitrina` se replica en la ficha: el CTA de la ficha la ancla, y sin ella el
+  enlace no llevaba a ninguna parte.
+- Sitemap, `lighthouse` de CI (`/es/vitrina` + `/es/vitrina/habla`) y axe (índice + **las seis
+  fichas**, listadas desde los exports) al día. **axe: 44/44** (antes 20).
+
+**Efecto colateral que arregla el presupuesto:** las 27 capturas ya no viajan juntas. Cada ruta
+carga solo las 4–6 de su app (~150 KB) contra el techo de 1 000 KB/ruta de `perf-budget.json`.
+
+### 2 · «Le pusiste los colores de ellos»
+
+> «la de inmobiliaria con sus colores azules se ve terrible»
+
+**Precisión de la acusación:** las imágenes no eran de los brochures — son capturas de las apps
+corriendo (`pnpm capturas:vitrina`). Pero el fondo del reclamo era exacto: cada app trae su marca,
+y seis marcas juntas en la hoja de vida dan un collage. Innmobiliaria es morada (`#7b5dd6`), Dash
+es una consola negra.
+
+**Decisión del usuario (AskUserQuestion):** recapturar con los tokens de CV Viva inyectados —
+la pantalla real, repintada. Ni redibujar 27 maquetas (mentirían) ni quitar las capturas.
+
+**Hecho** — `scripts/tema-cv-viva.mjs`: un mapa por app de SUS tokens a los de esta página,
+inyectado como `<style>`. Las seis declaran su paleta en custom properties, así que basta ganarles
+por orden de documento. **La regla de mapeo es por PAPEL, no por parecido:** el acento sólido de una
+app lleva texto claro encima ⇒ va al verde OSCURO (`sage-ink`), jamás al pastel `sage` — pintarlo de
+pastel dejando el texto blanco produce una captura que enseña un defecto de contraste que la app no
+tiene. Los tintes sí van a los pasteles.
+
+**Tres trampas cazadas en la primera pasada (todas verificadas midiendo, no infiriendo):**
+
+1. **La inyección temprana no entraba.** Con `addInitScript` el `<style>` no sobrevive a la
+   hidratación de Next: tras `networkidle`, `--color-purple` seguía siendo `#7b5dd6` (medido con
+   `getComputedStyle` sobre `documentElement`). Arreglo: reinyectar en cada evento `load` de la
+   página, más una reafirmación antes del disparo.
+2. **Las transiciones fotografiadas a media zancada.** Dos morados sobrevivían: la barra de
+   progreso y el botón de la banda de cupos. Eran **exactamente** los dos elementos con
+   `transition-all duration-500` / `transition-colors` — al repintar arrancaban un viaje de color y
+   el disparo los pillaba a mitad. Arreglo: `transition-duration: 0s` en el tema (se fotografía el
+   estado asentado, que es lo que el patrón §7 ya exigía con `reducedMotion`).
+3. **Color escrito a mano.** La casa del hero de Innmobiliaria lleva sus hex en atributos
+   `fill="#..."` del JSX; ningún token la alcanza. Se rescata con selectores de atributo.
+
+**De regalo, un defecto de encuadre viejo:** el `foco` de nutri-kids (`main div`) casaba con el
+contenedor de TODA la columna (1 472 px en «Hoy»), y el ajuste anti-recorte encogía la app al ~40 %
+— letra ilegible entre dos desiertos de fondo. Apuntado al primer bloque real
+(`main section, main label`), la región cabe a tamaño natural.
+
+**Honestidad del pie:** `capturasPie` ahora dice que la captura está **repintada con la paleta de
+esta página**. Una imagen retocada que se presenta como cruda es la misma falta que una maqueta que
+finge ser captura.
+
+### Lo que yo debí hacer distinto
+
+Las dos objeciones nacen del mismo error mío: **decidir en silencio.** Apilar seis fichas en una
+ruta y aceptar seis marcas ajenas dentro del design system fueron decisiones de diseño que tomé sin
+declararlas en el plan ni en el gate M1 — y ninguna estaba escrita en la orden. La regla que me
+faltó aplicar es la misma que el método ya exige para el contenido: si algo cambia lo que el
+visitante ve, se pone sobre la mesa antes, no después de construirlo.
