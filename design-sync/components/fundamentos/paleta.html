@@ -1,0 +1,62 @@
+<!-- @dsCard group="Fundamentos" name="Paleta" -->
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paleta — CV Viva</title>
+<style>
+  :root {
+    --paper-0:#fbfaf7; --paper-1:#f5f3ed; --paper-2:#ece9e0; --paper-3:#ddd8cb;
+    --ink-0:#121110; --ink-1:#2a2927; --ink-2:#5e5c55; --ink-3:#9c9a90;
+    --sage:#cfe3cf; --sage-ink:#3c5a3c; --rose:#f2d6d6; --rose-ink:#7a3f3f;
+    --sky:#cedde9; --sky-ink:#2e4e6b; --citron:#e6e3b8; --citron-ink:#5e5a1e;
+    --lilac:#ddd3e8; --lilac-ink:#4e3e6b; --peach:#f2dec4; --peach-ink:#6b4820;
+    --danger:#c97a7a;
+    --sh-1:0 1px 0 rgba(18,17,16,.04), 0 1px 2px rgba(18,17,16,.04);
+    --sh-2:0 4px 12px -4px rgba(18,17,16,.08), 0 2px 4px rgba(18,17,16,.04);
+    --sh-3:0 12px 32px -8px rgba(18,17,16,.14);
+    --ease-out-cubic:cubic-bezier(.21,.61,.35,1);
+    --ease-in-out-cubic:cubic-bezier(.65,0,.35,1);
+    --display:Fraunces,'Iowan Old Style',Georgia,serif;
+    --sans:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; padding:28px; background:var(--paper-0); color:var(--ink-1);
+    font-family:var(--sans); font-size:15px; line-height:1.6; }
+  h1 { font-family:var(--display); font-size:26px; font-weight:500; letter-spacing:-.02em;
+    color:var(--ink-0); margin:0 0 6px; }
+  .lede { color:var(--ink-2); margin:0 0 24px; max-width:62ch; }
+  .nota { color:var(--ink-2); font-size:13.5px; max-width:70ch; margin-top:20px;
+    border-left:2px solid var(--paper-3); padding-left:12px; }
+  .rotulo { font-family:var(--mono); font-size:11px; letter-spacing:.08em;
+    text-transform:uppercase; color:var(--ink-2); margin:26px 0 10px; }
+  code { font-family:var(--mono); font-size:12.5px; background:var(--paper-1);
+    border:1px solid var(--paper-2); border-radius:4px; padding:1px 5px; }
+  .rejilla { display:grid; grid-template-columns:repeat(auto-fill,minmax(184px,1fr)); gap:12px; }
+  .ficha { border:1px solid var(--paper-2); border-radius:10px; padding:10px; background:var(--paper-0); }
+  .muestra { height:46px; border-radius:6px; border:1px solid var(--paper-3); margin-bottom:8px; }
+  .ficha b, .par b { display:block; font-family:var(--mono); font-size:12px; }
+  .ficha span, .par span { display:block; font-size:12px; color:var(--ink-2); }
+  .par { border-radius:10px; padding:12px; min-height:92px; }
+  .par span { color:inherit; opacity:.85; }
+  .rol { margin-top:4px; font-size:11.5px; }
+</style>
+</head>
+<body>
+
+<h1>Paleta — paper &amp; ink + pasteles</h1>
+<p class="lede">Neutros cálidos para el papel y la tinta; seis pastales desaturados para los
+acentos. <strong>Regla de avaricia:</strong> el acento se gasta en CTAs, estados y datos clave —
+los fondos de sección son siempre papers.</p>
+<p class="rotulo">Neutros</p>
+<div class="rejilla"><div class="ficha"><div class="muestra" style="background:#fbfaf7"></div><b>paper-0</b><span>#fbfaf7</span><span class="rol">Fondo de página</span></div><div class="ficha"><div class="muestra" style="background:#f5f3ed"></div><b>paper-1</b><span>#f5f3ed</span><span class="rol">Superficie elevada</span></div><div class="ficha"><div class="muestra" style="background:#ece9e0"></div><b>paper-2</b><span>#ece9e0</span><span class="rol">Inset · borde suave</span></div><div class="ficha"><div class="muestra" style="background:#ddd8cb"></div><b>paper-3</b><span>#ddd8cb</span><span class="rol">Divisor · borde default</span></div><div class="ficha"><div class="muestra" style="background:#121110"></div><b>ink-0</b><span>#121110</span><span class="rol">Display y titulares</span></div><div class="ficha"><div class="muestra" style="background:#2a2927"></div><b>ink-1</b><span>#2a2927</span><span class="rol">Texto primario</span></div><div class="ficha"><div class="muestra" style="background:#5e5c55"></div><b>ink-2</b><span>#5e5c55</span><span class="rol">Texto secundario</span></div><div class="ficha"><div class="muestra" style="background:#9c9a90"></div><b>ink-3</b><span>#9c9a90</span><span class="rol">Terciario · decorativo</span></div></div>
+<p class="rotulo">Acentos — SIEMPRE en pareja con su ink (≥7:1)</p>
+<div class="rejilla"><div class="par" style="background:#cfe3cf;color:#3c5a3c"><b>sage</b><span>#cfe3cf · #3c5a3c</span><span class="rol">Primario · éxito · CTA</span></div><div class="par" style="background:#f2d6d6;color:#7a3f3f"><b>rose</b><span>#f2d6d6 · #7a3f3f</span><span class="rol">Acento humano · error suave</span></div><div class="par" style="background:#cedde9;color:#2e4e6b"><b>sky</b><span>#cedde9 · #2e4e6b</span><span class="rol">Info · foco</span></div><div class="par" style="background:#e6e3b8;color:#5e5a1e"><b>citron</b><span>#e6e3b8 · #5e5a1e</span><span class="rol">En construcción</span></div><div class="par" style="background:#ddd3e8;color:#4e3e6b"><b>lilac</b><span>#ddd3e8 · #4e3e6b</span><span class="rol">Decisiones · timeline</span></div><div class="par" style="background:#f2dec4;color:#6b4820"><b>peach</b><span>#f2dec4 · #6b4820</span><span class="rol">En exploración · aviso</span></div></div>
+<p class="nota">Un pastel nunca se usa solo: cada uno viaja con su ink par, que es el único color
+de texto admitido encima. Es lo que mantiene el contraste AAA sin pensarlo dos veces. El
+<code>danger #c97a7a</code> queda para errores duros y no tiene ink par: va sobre papel.</p>
+
+</body>
+</html>

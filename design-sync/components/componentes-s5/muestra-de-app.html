@@ -1,0 +1,96 @@
+<!-- @dsCard group="Componentes · S5" name="Muestra de app" -->
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Muestra de app — CV Viva</title>
+<style>
+  :root {
+    --paper-0:#fbfaf7; --paper-1:#f5f3ed; --paper-2:#ece9e0; --paper-3:#ddd8cb;
+    --ink-0:#121110; --ink-1:#2a2927; --ink-2:#5e5c55; --ink-3:#9c9a90;
+    --sage:#cfe3cf; --sage-ink:#3c5a3c; --rose:#f2d6d6; --rose-ink:#7a3f3f;
+    --sky:#cedde9; --sky-ink:#2e4e6b; --citron:#e6e3b8; --citron-ink:#5e5a1e;
+    --lilac:#ddd3e8; --lilac-ink:#4e3e6b; --peach:#f2dec4; --peach-ink:#6b4820;
+    --danger:#c97a7a;
+    --sh-1:0 1px 0 rgba(18,17,16,.04), 0 1px 2px rgba(18,17,16,.04);
+    --sh-2:0 4px 12px -4px rgba(18,17,16,.08), 0 2px 4px rgba(18,17,16,.04);
+    --sh-3:0 12px 32px -8px rgba(18,17,16,.14);
+    --ease-out-cubic:cubic-bezier(.21,.61,.35,1);
+    --ease-in-out-cubic:cubic-bezier(.65,0,.35,1);
+    --display:Fraunces,'Iowan Old Style',Georgia,serif;
+    --sans:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; padding:28px; background:var(--paper-0); color:var(--ink-1);
+    font-family:var(--sans); font-size:15px; line-height:1.6; }
+  h1 { font-family:var(--display); font-size:26px; font-weight:500; letter-spacing:-.02em;
+    color:var(--ink-0); margin:0 0 6px; }
+  .lede { color:var(--ink-2); margin:0 0 24px; max-width:62ch; }
+  .nota { color:var(--ink-2); font-size:13.5px; max-width:70ch; margin-top:20px;
+    border-left:2px solid var(--paper-3); padding-left:12px; }
+  .rotulo { font-family:var(--mono); font-size:11px; letter-spacing:.08em;
+    text-transform:uppercase; color:var(--ink-2); margin:26px 0 10px; }
+  code { font-family:var(--mono); font-size:12.5px; background:var(--paper-1);
+    border:1px solid var(--paper-2); border-radius:4px; padding:1px 5px; }
+  .m { position:relative; max-width:420px; display:flex; flex-direction:column; gap:14px;
+    background:var(--paper-0); border:1px solid var(--paper-2); border-radius:14px; padding:22px;
+    box-shadow:var(--sh-1); transition:box-shadow 180ms var(--ease-out-cubic), transform 180ms var(--ease-out-cubic); }
+  .m:hover { transform:translateY(-2px); box-shadow:var(--sh-2); }
+  .chips { display:flex; gap:8px; }
+  .chip { border-radius:99px; padding:4px 10px; font-family:var(--mono); font-size:11px;
+    text-transform:uppercase; }
+  .sage { background:var(--sage); color:var(--sage-ink); }
+  .borde { border:1px solid var(--paper-3); color:var(--ink-2); }
+  .m h2 { font-family:var(--display); font-size:23px; font-weight:500; letter-spacing:-.02em;
+    color:var(--ink-0); margin:0; }
+  .m h2 a { color:inherit; text-decoration:none; }
+  .m h2 a::after { content:""; position:absolute; inset:0; border-radius:14px; }
+  .tag { font-family:var(--display); font-size:16px; color:var(--ink-1); margin:-8px 0 0; }
+  .tira { border:1px solid var(--paper-2); background:var(--paper-1); border-radius:10px; padding:12px; }
+  .para { font-size:14px; color:var(--ink-2); margin:0; }
+  .cuenta { font-family:var(--mono); font-size:11px; letter-spacing:.04em; text-transform:uppercase;
+    color:var(--ink-2); margin:0; }
+  .ir { font-size:14px; font-weight:500; color:var(--sage-ink); margin:0; }
+</style>
+</head>
+<body>
+
+<h1>Muestra de app</h1>
+<p class="lede">La unidad del escaparate <code>/vitrina</code>: lo justo para decidir si entras.
+El detalle vive en la página propia de cada app.</p>
+<article class="m">
+  <div class="chips">
+    <span class="chip sage">Sellada</span><span class="chip borde">H1</span>
+  </div>
+  <h2><a href="#">Hablemos San</a></h2>
+  <p class="tag">Su voz mueve el mundo.</p>
+  <div class="tira" aria-hidden="true">
+    <svg viewBox="0 0 320 92" width="100%">
+      <g fill="none" stroke="#5e5c55" stroke-width="1.5" stroke-linecap="round">
+        <rect x="18" y="16" width="44" height="30" rx="4"/>
+        <path d="M26 26h20M26 34h28"/>
+        <path d="M104 44v-8M112 44v-16M120 44v-24M128 44v-14"/>
+        <circle cx="200" cy="30" r="14"/><path d="M193 37l14-14"/>
+        <rect x="262" y="18" width="10" height="10" rx="2"/><rect x="276" y="18" width="10" height="10" rx="2"/>
+        <rect x="262" y="32" width="10" height="10" rx="2"/><rect x="276" y="32" width="10" height="10" rx="2"/>
+      </g>
+      <g font-family="var(--mono)" font-size="6" fill="#5e5c55" text-anchor="middle" letter-spacing="1">
+        <text x="40" y="72">IDEA DEL DÍA</text><text x="120" y="72">LA VOZ SUBE</text>
+        <text x="200" y="72">NO SE GUARDA</text><text x="280" y="72">RACHA DE DÍAS</text>
+      </g>
+    </svg>
+  </div>
+  <p class="para">Para el papá o la mamá de un niño de 4 a 6 años que está aprendiendo a hablar y
+    ya va a sus terapias del lenguaje.</p>
+  <p class="cuenta">24 FUNCIONALIDADES <span aria-hidden="true">·</span> 14 CIFRAS</p>
+  <p class="ir">Ver la ficha completa <span aria-hidden="true">&rarr;</span></p>
+</article>
+<p class="nota"><strong>Un solo tab stop por muestra.</strong> El enlace del título estira su área
+de clic a toda la card con <code>::after</code> absoluto, pero su nombre accesible sigue siendo el
+de la app — nunca «leer más». La tira es dibujo con los tokens de esta página, no una captura, y
+así se declara.</p>
+
+</body>
+</html>

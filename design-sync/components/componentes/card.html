@@ -1,0 +1,71 @@
+<!-- @dsCard group="Componentes" name="Card" -->
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Card — CV Viva</title>
+<style>
+  :root {
+    --paper-0:#fbfaf7; --paper-1:#f5f3ed; --paper-2:#ece9e0; --paper-3:#ddd8cb;
+    --ink-0:#121110; --ink-1:#2a2927; --ink-2:#5e5c55; --ink-3:#9c9a90;
+    --sage:#cfe3cf; --sage-ink:#3c5a3c; --rose:#f2d6d6; --rose-ink:#7a3f3f;
+    --sky:#cedde9; --sky-ink:#2e4e6b; --citron:#e6e3b8; --citron-ink:#5e5a1e;
+    --lilac:#ddd3e8; --lilac-ink:#4e3e6b; --peach:#f2dec4; --peach-ink:#6b4820;
+    --danger:#c97a7a;
+    --sh-1:0 1px 0 rgba(18,17,16,.04), 0 1px 2px rgba(18,17,16,.04);
+    --sh-2:0 4px 12px -4px rgba(18,17,16,.08), 0 2px 4px rgba(18,17,16,.04);
+    --sh-3:0 12px 32px -8px rgba(18,17,16,.14);
+    --ease-out-cubic:cubic-bezier(.21,.61,.35,1);
+    --ease-in-out-cubic:cubic-bezier(.65,0,.35,1);
+    --display:Fraunces,'Iowan Old Style',Georgia,serif;
+    --sans:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; padding:28px; background:var(--paper-0); color:var(--ink-1);
+    font-family:var(--sans); font-size:15px; line-height:1.6; }
+  h1 { font-family:var(--display); font-size:26px; font-weight:500; letter-spacing:-.02em;
+    color:var(--ink-0); margin:0 0 6px; }
+  .lede { color:var(--ink-2); margin:0 0 24px; max-width:62ch; }
+  .nota { color:var(--ink-2); font-size:13.5px; max-width:70ch; margin-top:20px;
+    border-left:2px solid var(--paper-3); padding-left:12px; }
+  .rotulo { font-family:var(--mono); font-size:11px; letter-spacing:.08em;
+    text-transform:uppercase; color:var(--ink-2); margin:26px 0 10px; }
+  code { font-family:var(--mono); font-size:12.5px; background:var(--paper-1);
+    border:1px solid var(--paper-2); border-radius:4px; padding:1px 5px; }
+  .rejilla { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px; }
+  .c { background:var(--paper-0); border:1px solid var(--paper-3); border-radius:10px;
+    padding:20px; box-shadow:var(--sh-1); }
+  .c-ed { background:var(--paper-1); border-color:var(--paper-2); }
+  .c h2 { font-family:var(--display); font-size:20px; font-weight:500; letter-spacing:-.015em;
+    color:var(--ink-0); margin:0 0 6px; }
+  .rot { font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--ink-2); margin:0 0 10px; }
+  .txt { margin:0; font-size:14px; color:var(--ink-2); }
+</style>
+</head>
+<body>
+
+<h1>Card</h1>
+<p class="lede">Papel sobre papel: fondo <code>paper-0</code>, borde de 1px y una sombra que
+apenas se nota. La variante editorial sube a <code>paper-1</code> y titula en Fraunces.</p>
+<div class="rejilla">
+  <article class="c">
+    <p class="rot">Default</p>
+    <h2>Probeta DS</h2>
+    <p class="txt">Construye un modelo que puedas defender. Borde <code>paper-3</code>, radio 10,
+      sombra <code>sh-1</code>.</p>
+  </article>
+  <article class="c c-ed">
+    <p class="rot">Editorial</p>
+    <h2>El veredicto honesto</h2>
+    <p class="txt">Fondo <code>paper-1</code> y titular de display. Para bloques que se leen, no
+      para bloques que se listan.</p>
+  </article>
+</div>
+<p class="nota">Nada de sombras pesadas uniformes ni radios XL en todo: la card debe leerse como
+una hoja apoyada, no como una burbuja.</p>
+
+</body>
+</html>

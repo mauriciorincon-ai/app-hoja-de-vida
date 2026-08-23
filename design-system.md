@@ -101,6 +101,11 @@ Primitivas del motion system (`src/components/motion/`):
 salta al estado final sin movimiento, sin excepciones (hook global) · **vetado:** three.js/WebGL,
 animaciones infinitas (sweep/glitch/marquee), scroll-snap de deck, CDNs en `<head>`.
 
+> **Única excepción al veto de bucles — ADR-014 (S5):** se admite **un** bucle ambiental por
+> página y solo en la **firma del clímax** de una ficha de la vitrina, con la tarjeta abierta,
+> apagado entero bajo `prefers-reduced-motion`. Es el privilegio del clímax del banco §2, no una
+> licencia general.
+
 ## Componentes canon
 
 - **Button** (shadcn personalizado): primary = sage fill + sage-ink label; secondary = paper-1 +
@@ -112,6 +117,29 @@ animaciones infinitas (sweep/glitch/marquee), scroll-snap de deck, CDNs en `<hea
 - **Metric tile (logros)**: número mono grande con Counter, caption label, sin sparklines en S1.
 - **Glifo ◆**: marca de evidencia/lista editorial (heredado del prototipo).
 - **Iconografía**: Lucide, stroke 1.5px, 16/20px, siempre con `aria-label` si es interactivo.
+
+### Componentes de la vitrina · S5
+
+- **Muestra de app** (escaparate `/vitrina`): card paper-0, borde paper-2, `r-lg`, `sh-1`. Lleva
+  chip de estado + chip de ciclo, nombre en Fraunces, promesa en Fraunces menor, **tira**
+  esquemática enmarcada en paper-1, para-quién en `ink-2`, conteos en mono y cierre «ver la ficha».
+  El enlace estira su área de clic a toda la card (`after:absolute inset-0`) **conservando el
+  nombre de la app como nombre accesible** — una sola parada de tabulador, y nunca «leer más».
+- **Tarjeta de grupo** (dentro de una ficha): `r-md`, borde paper-3. Cabecera `<h4><button>` —
+  jamás `<button><h4>` — con índice mono, icono del DS de la app de origen, nombre, línea y
+  chevron. Cerrada, el interior va con `visibility: hidden` (fuera del árbol de accesibilidad);
+  abierta, sus features **escalonan** a ~60 ms. Gobernada por la isla de **apertura por lectura**
+  (banco §7): abierta exactamente mientras está a la vista, y el toque manda para siempre.
+- **Chip de procedencia**: `r-full`, mono 10px uppercase, un pastel por origen —
+  `sage`=medido · `sky`=calculada · `lilac`=declarado · `peach`=estimación. **Ninguna cifra se
+  pinta sin él.**
+- **Tira y firma** (dibujo, no captura): SVG con los tokens de esta página. La **tira** resume las
+  ideas de la app en cuatro columnas (viewBox 320×92, rótulos mono 6px); la **firma** re-dibuja la
+  escena clímax de su brochure. Se declaran como dibujo en su pie: jamás fingen ser una captura.
+- **Captura repintada**: pantalla real de la app hermana corriendo, fotografiada con los tokens de
+  CV Viva inyectados (`scripts/tema-cv-viva.mjs`) para que las seis se vean de la misma casa.
+  Banner apaisado enmarcado en paper-1, `alt=""` con pie visible que **declara el repintado** —
+  una imagen retocada que se presenta como cruda miente igual que una maqueta que finge ser foto.
 
 ## Layout
 

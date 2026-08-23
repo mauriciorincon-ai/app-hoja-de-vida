@@ -1,0 +1,74 @@
+<!-- @dsCard group="Componentes · S5" name="Chip de procedencia" -->
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chip de procedencia — CV Viva</title>
+<style>
+  :root {
+    --paper-0:#fbfaf7; --paper-1:#f5f3ed; --paper-2:#ece9e0; --paper-3:#ddd8cb;
+    --ink-0:#121110; --ink-1:#2a2927; --ink-2:#5e5c55; --ink-3:#9c9a90;
+    --sage:#cfe3cf; --sage-ink:#3c5a3c; --rose:#f2d6d6; --rose-ink:#7a3f3f;
+    --sky:#cedde9; --sky-ink:#2e4e6b; --citron:#e6e3b8; --citron-ink:#5e5a1e;
+    --lilac:#ddd3e8; --lilac-ink:#4e3e6b; --peach:#f2dec4; --peach-ink:#6b4820;
+    --danger:#c97a7a;
+    --sh-1:0 1px 0 rgba(18,17,16,.04), 0 1px 2px rgba(18,17,16,.04);
+    --sh-2:0 4px 12px -4px rgba(18,17,16,.08), 0 2px 4px rgba(18,17,16,.04);
+    --sh-3:0 12px 32px -8px rgba(18,17,16,.14);
+    --ease-out-cubic:cubic-bezier(.21,.61,.35,1);
+    --ease-in-out-cubic:cubic-bezier(.65,0,.35,1);
+    --display:Fraunces,'Iowan Old Style',Georgia,serif;
+    --sans:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; padding:28px; background:var(--paper-0); color:var(--ink-1);
+    font-family:var(--sans); font-size:15px; line-height:1.6; }
+  h1 { font-family:var(--display); font-size:26px; font-weight:500; letter-spacing:-.02em;
+    color:var(--ink-0); margin:0 0 6px; }
+  .lede { color:var(--ink-2); margin:0 0 24px; max-width:62ch; }
+  .nota { color:var(--ink-2); font-size:13.5px; max-width:70ch; margin-top:20px;
+    border-left:2px solid var(--paper-3); padding-left:12px; }
+  .rotulo { font-family:var(--mono); font-size:11px; letter-spacing:.08em;
+    text-transform:uppercase; color:var(--ink-2); margin:26px 0 10px; }
+  code { font-family:var(--mono); font-size:12.5px; background:var(--paper-1);
+    border:1px solid var(--paper-2); border-radius:4px; padding:1px 5px; }
+  .rejilla { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:12px; max-width:760px; }
+  .tile { display:flex; flex-direction:column; gap:4px; background:var(--paper-1);
+    border:1px solid var(--paper-2); border-radius:6px; padding:16px; }
+  .num { font-family:var(--display); font-size:26px; font-weight:500; color:var(--ink-0);
+    margin:0; font-variant-numeric:tabular-nums; }
+  .u { font-family:var(--sans); font-size:14px; font-weight:400; color:var(--ink-2); }
+  .et { font-size:14px; color:var(--ink-1); margin:0; }
+  .p { align-self:flex-start; margin-top:4px; border-radius:99px; padding:2px 9px;
+    font-family:var(--mono); font-size:10px; letter-spacing:.04em; text-transform:uppercase; }
+  .sage { background:var(--sage); color:var(--sage-ink); }
+  .sky { background:var(--sky); color:var(--sky-ink); }
+  .lilac { background:var(--lilac); color:var(--lilac-ink); }
+  .peach { background:var(--peach); color:var(--peach-ink); }
+</style>
+</head>
+<body>
+
+<h1>Chip de procedencia</h1>
+<p class="lede">La regla madre del contrato de la vitrina: <strong>una cifra sin procedencia no
+entra</strong>. Y aquí la procedencia se ve.</p>
+<div class="rejilla">
+  <div class="tile"><p class="num">24</p><p class="et">funcionalidades entregadas</p>
+    <span class="p sage">medido</span></div>
+  <div class="tile"><p class="num">0,42 <span class="u">US$</span></p><p class="et">costo por sesión</p>
+    <span class="p sky">calculada</span></div>
+  <div class="tile"><p class="num">5</p><p class="et">sprints cerrados</p>
+    <span class="p lilac">declarado</span></div>
+  <div class="tile"><p class="num">7 <span class="u">min</span></p><p class="et">recorrido típico</p>
+    <span class="p peach">estimación</span></div>
+</div>
+<p class="nota"><strong>Qué significa cada una:</strong> <code>medido</code> salió de un contador o
+un comando · <code>calculada</code> es medido, operado con una tarifa o regla declarada ·
+<code>declarado</code> lo fijó una persona · <code>estimación</code> está deducido. El pastel
+cambia con el origen y siempre viaja con su ink par. Los números van en mono con
+<code>tabular-nums</code>.</p>
+
+</body>
+</html>
