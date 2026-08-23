@@ -320,3 +320,39 @@ Seis pruebas de axe fallaron por *timeout* del footer mientras `pnpm dev` corrí
 Playwright reusa ese servidor y bajo carga paralela no responde. Se apaga el dev, se corre la
 suite, se vuelve a levantar. (Ya estaba en la memoria del proyecto como «servidor zombi puerto
 3000»; ahora también aquí, porque la falla se disfraza de flaky.)
+
+### Las visuales de las interfaces: SÍ se puede, y así se hace
+
+Veredicto del usuario: *«¿quién te dijo que unos iconos son imágenes? necesito visuales de las
+interfaces aquí»*. Tiene razón y la regla del banco también: **si la pieza enseña LA APP, van
+capturas de la app CORRIENDO**. Los iconos son señalética, no muestra.
+
+**Comprobado en caliente:** las seis apps hermanas están clonadas como hermanas de este repo y con
+dependencias instaladas. `app-habla` levanta en 250 ms sin ninguna credencial. Cuatro de las seis no
+piden variables de entorno (habla · anonimizador · dash-agent-ai · inmobiliaria, que ya trae su
+`.env.local`); **ds** pide 4 y las tiene; **nutri-kids** pide 6 y no tiene `.env.local` — es la
+única con un bloque `[TÚ]` pendiente.
+
+**Corrección de un dato que di antes:** dije que anonimizador tenía 10 capturas y inmobiliaria 4
+listas para embeber. No es así: esos WebP son capturas **del propio brochure**, y los PNG de
+`ds-bundle/_screenshots` son fichas de componentes del design system. **Ninguna de las seis tenía
+capturas de pantalla de la app listas para usar** — hay que producirlas.
+
+**`scripts/capturas-vitrina.mjs`** (nuevo, `pnpm capturas:vitrina [app]`): levanta el servidor de
+desarrollo de la app hermana en un puerto propio, conduce su UI real —onboarding incluido— con datos
+**sintéticos declarados en el propio archivo** (cero datos de personas, repo público), fotografía las
+escenas configuradas a 390×844 DPR 2 con `reducedMotion` (para no fotografiar un cuadro a media
+animación) y las guarda en `public/vitrina/` como WebP vía `cwebp`. Requisito documentado en la
+cabecera: `brew install webp`.
+
+**Peso:** las 3 de habla suman 156 KB en disco; servidas por `next/image` al tamaño de pantalla
+pesan una fracción. A 3 por app × 6 apps ≈ 940 KB en disco — cabe bajo el techo de 1000 KB por ruta
+del `perf-budget.json`, pero **se mide con Lighthouse antes de cerrar M2**, no se supone.
+
+**La tira esquemática no se borra:** queda como respaldo declarado para la app que aún no esté
+fotografiada. Lo que jamás se pone es un relleno que aparente ser la app.
+
+**axe cazó una de verdad:** en móvil la tira de capturas desborda y se arrastra, y una región que se
+desplaza **tiene que alcanzarse con el teclado** (`scrollable-region-focusable`) — si no, quien no
+usa ratón ni dedo no llega nunca a la segunda ni a la tercera pantalla. Lleva `tabIndex` y nombre
+accesible. 20/20.
