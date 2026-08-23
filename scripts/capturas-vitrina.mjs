@@ -54,9 +54,9 @@ const APPS = {
       {
         nombre: "hoy",
         ruta: "/",
-        // La cápsula (el primer h2) es la protagonista; en apaisado el arranque
-        // de la página la dejaría bajo el pliegue.
-        foco: "h2",
+        // La protagonista es la cápsula del día, ENTERA (el encabezado de la
+        // página no cabe con ella y la cápsula se basta sola).
+        foco: "main article",
         async preparar(p) {
           // Onboarding con datos inventados: un apodo y dos intereses.
           await p.fill('input[placeholder="Su apodo"]', "Santi");
@@ -66,14 +66,24 @@ const APPS = {
           await p.waitForTimeout(1200);
         },
       },
-      { nombre: "jugar", ruta: "/jugar" },
-      { nombre: "objetivo", ruta: "/objetivo" },
+      // Título + los cuatro juegos completos.
+      { nombre: "jugar", ruta: "/jugar", foco: "main ul", desde: "top" },
+      // Título + el formulario del objetivo entero.
+      { nombre: "objetivo", ruta: "/objetivo", foco: "main section", desde: "top" },
       // El contexto es el mismo: el onboarding de la escena 1 ya quedó hecho.
-      { nombre: "estudio", ruta: "/estudio" },
+      // Del techo al CTA «Grabar mi voz» (el último botón de acento).
+      {
+        nombre: "estudio",
+        ruta: "/estudio",
+        foco: "main .bg-acento",
+        cual: "ultimo",
+        desde: "top",
+      },
       // El rumbo sale VACÍO a propósito: es lo que la app enseña de verdad
       // antes de jugar — y lo honesto es no fabricarle un historial.
-      { nombre: "rumbo", ruta: "/rumbo" },
-      { nombre: "ajustes", ruta: "/ajustes" },
+      { nombre: "rumbo", ruta: "/rumbo", foco: "main section", desde: "top" },
+      // Título + la primera tarjeta («¿Cómo habla su hijo hoy?») completa.
+      { nombre: "ajustes", ruta: "/ajustes", foco: "main section", desde: "top" },
     ],
   },
 };
@@ -128,16 +138,50 @@ async function capturarApp(slug, config) {
       });
       if (escena.preparar) await escena.preparar(p);
       await p.waitForTimeout(600);
-      if (escena.foco) {
-        // La escena declara QUÉ se enseña: se centra ese bloque en el cuadro.
-        await p
-          .locator(escena.foco)
-          .first()
-          .evaluate((el) => el.scrollIntoView({ block: "center" }));
-      } else {
-        // Desde arriba: el encabezado de la pantalla es lo que la identifica.
-        await p.evaluate(() => window.scrollTo(0, 0));
-      }
+      // NADA SALE CORTADO (gate M1, ronda 2): la escena declara con `foco` el
+      // bloque que debe verse COMPLETO (con `desde: "top"` la región arranca en
+      // el techo de la página e incluye el encabezado). Si la región no cabe en
+      // el cuadro, se encoge la página con zoom hasta que quepa — el sobrante
+      // del cuadro lo llena el fondo de la app, jamás un bloque rebanado.
+      await p.evaluate(
+        ({ sel, cual, desde, vh }) => {
+          const MARGEN = 20;
+          // Abajo casi a ras: el hueco entre tarjetas es ~24px y un margen
+          // holgado deja asomar el filo del bloque siguiente.
+          const MARGEN_INF = 8;
+          const candidatos = sel
+            ? Array.from(document.querySelectorAll(sel))
+            : [];
+          const el =
+            cual === "ultimo" ? candidatos.at(-1) : candidatos[0];
+          if (!el) {
+            window.scrollTo(0, 0);
+            return;
+          }
+          const r = el.getBoundingClientRect();
+          const techo =
+            desde === "top" ? 0 : r.top + window.scrollY - MARGEN;
+          const piso = r.bottom + window.scrollY + MARGEN_INF;
+          const alto = piso - techo;
+          const z = Math.min(1, vh / alto);
+          if (z < 1) document.body.style.zoom = String(z);
+          // Tras el zoom la página entera se re-escala: se vuelve a medir.
+          const r2 = el.getBoundingClientRect();
+          const techo2 =
+            desde === "top" ? 0 : r2.top + window.scrollY - MARGEN * z;
+          const alto2 = alto * z;
+          window.scrollTo(
+            0,
+            Math.max(0, techo2 - Math.max(0, (vh - alto2) / 2)),
+          );
+        },
+        {
+          sel: escena.foco,
+          cual: escena.cual,
+          desde: escena.desde,
+          vh: PANTALLA.height,
+        },
+      );
       await p.waitForTimeout(200);
 
       const png = path.join(TEMP, `${slug}-${escena.nombre}.png`);

@@ -388,3 +388,27 @@ ancho como banner del grupo** y las funcionalidades debajo; el layout de dos col
 vertical se eliminó. Las 6 nuevas pesan 222 KB (las verticales pesaban 297).
 
 Verde: typecheck · lint · 174 unit · axe 20/20 (dev apagado) · build.
+
+### Nada sale cortado: la escena declara su bloque COMPLETO (gate M1, ronda 3)
+
+Veredicto del usuario: buenas imágenes, pero todas cortadas — la ventana rebanaba los bloques por
+la mitad. Corrección en el script: cada escena declara con `foco` **el bloque que debe verse
+ENTERO** (`desde: "top"` arranca la región en el techo de la página; `cual: "ultimo"` elige la
+última coincidencia). Si la región no cabe en el cuadro 1024×640, la página **se encoge con zoom**
+hasta que quepa: el sobrante lo llena el fondo de la app, jamás un bloque rebanado. Margen inferior
+de 8px (el hueco entre tarjetas de habla es ~24px: un margen holgado dejaba asomar el filo del
+bloque siguiente — cazado en la pasada de capturas de ajustes).
+
+Los seis encuadres de habla: la cápsula entera con sus CTAs · título + los 4 juegos · techo→«Grabar
+mi voz» · título + formulario del objetivo · el rumbo vacío · título + primera tarjeta de ajustes.
+
+**Trampa de infraestructura que costó una hora: el caché de imágenes de Next 16 en dev vive en
+`.next/dev/cache/images`** (no en `.next/cache/images`, la ruta clásica). Al refotografiar sin
+cambiar el nombre del archivo, `next/image` siguió sirviendo la variante **webp** vieja (con
+`X-Nextjs-Cache: HIT`) mientras curl —que negocia jpeg— recibía la nueva: el mismo archivo, DOS
+variantes de caché, solo una regenerada. El diagnóstico fue interceptar los bytes que recibía el
+navegador (Playwright `page.on("response")`) en vez de confiar en curl. Regla operativa: **tras
+regenerar capturas, `rm -rf .next/dev/cache/images` y reiniciar el dev** (el build de producción no
+sufre esto: nace con caché vacío).
+
+Verde: axe 20/20 · 174 unit · build.
