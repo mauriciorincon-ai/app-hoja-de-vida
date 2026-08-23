@@ -5,7 +5,7 @@ status: closed
 opened: 2026-08-22
 closed: 2026-08-23
 branch: sprint-005/la-vitrina-de-los-seis
-pr: <pendiente — se completa al abrirlo>
+pr: https://github.com/mauriciorincon-ai/app-hoja-de-vida/pull/7
 ---
 
 # Sprint 005 Summary — CV Viva
