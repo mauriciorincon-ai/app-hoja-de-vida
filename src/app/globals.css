@@ -495,6 +495,72 @@
     transform: scaleY(0.035);
   }
 }
+/* Piezas de las OTRAS cinco firmas. Todas ESTÁTICAS: el trazo se dibuja al
+ * entrar (`.trazable`, un disparo) y nada late. El loop ambiental queda
+ * reservado al clímax de habla — banco §2: la única promesa que nunca
+ * descansa, y «toda escena clímax = ninguna lo es». */
+.firma-clima .fc-quieta {
+  animation: none;
+  opacity: 1;
+  stroke-dasharray: 3 3;
+  stroke-dashoffset: 0;
+}
+/* La bóveda de Velo: se queda de este lado de la frontera. */
+.firma-clima .fc-boveda {
+  fill: var(--color-sage);
+  stroke: var(--color-sage-ink);
+  stroke-width: 1.5;
+}
+/* Las dos líneas de dash que no pueden ser ciertas a la vez. */
+.firma-clima .fc-linea-viva {
+  fill: var(--color-paper-2);
+}
+.firma-clima .fc-choque {
+  fill: none;
+  stroke: var(--color-danger);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+/* El duelo de DS: quien gana en sage, quien pierde en hueco. */
+.firma-clima .fc-barra-gana {
+  fill: var(--color-sage);
+  stroke: var(--color-sage-ink);
+  stroke-width: 1;
+}
+.firma-clima .fc-barra-pierde {
+  fill: var(--color-paper-2);
+  stroke: var(--color-paper-3);
+  stroke-width: 1;
+}
+/* Las cifras de nutri-kids: lo que sí se dice, y lo que jamás. */
+.firma-clima .fc-cifra {
+  fill: var(--color-ink-0);
+  font-family: var(--font-display), serif;
+  font-size: 20px;
+}
+.firma-clima .fc-vetada {
+  fill: var(--color-ink-2);
+  opacity: 0.55;
+}
+.firma-clima .fc-tachon {
+  fill: none;
+  stroke: var(--color-danger);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+/* Innmobiliaria: el documento que no se guarda y el anuncio que caduca. */
+.firma-clima .fc-doc-fugaz {
+  fill: var(--color-paper-0);
+  stroke: var(--color-paper-3);
+  stroke-width: 1;
+}
+.firma-clima .fc-vivo {
+  fill: var(--color-sage);
+}
+.firma-clima .fc-zombi {
+  fill: var(--color-paper-2);
+}
+
 @keyframes fc-fugarse {
   0%,
   62% {
@@ -552,6 +618,12 @@
   stroke-width: 1.7;
   stroke-linecap: round;
   stroke-linejoin: round;
+}
+/* Los iconos de dash vienen en lienzo de 16 (así están en su brochure): a
+ * grosor 1.7 se verían 1.5× más gordos que los de 24. Se compensa para que
+ * las seis fichas tengan el MISMO peso óptico de trazo. */
+.icono-grupo svg[viewBox="0 0 16 16"] :is(path, rect, circle) {
+  stroke-width: 1.15;
 }
 /* «Dibujar el trazo»: el icono se termina de dibujar al llegar la tarjeta —
  * un disparo, en cascada por figura. Dice hecho a mano, que es el argumento

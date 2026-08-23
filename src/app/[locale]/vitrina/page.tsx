@@ -24,12 +24,13 @@ import { getFichasVitrina } from "@/lib/vitrina/loader";
  */
 
 /**
- * GATE DE MIRADA M1 (método v1.21.0 — plan de miradas de la orden).
- * Mientras vale `1`, la vitrina renderiza UNA sola ficha: el usuario aprueba
- * cómo se ve una ficha en su design system ANTES de que se construyan las seis.
- * Al aprobar M1 pasa a `null` (todas) y se presenta M2.
+ * GATE DE MIRADA M1 → M2 (método v1.21.0 — plan de miradas de la orden).
+ * M1 (una ficha) quedó aprobada tras cuatro rondas: tarjetas por grupo con la
+ * apertura por lectura, iconos traídos del brochure de origen, capturas
+ * apaisadas de la app corriendo y la firma del clímax re-dibujada. Con la
+ * gramática congelada, `null` abre LAS SEIS y arranca M2.
  */
-const FICHAS_VISIBLES: number | null = 1;
+const FICHAS_VISIBLES: number | null = null;
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));

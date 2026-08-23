@@ -41,6 +41,60 @@ const CAPTURAS: Record<string, Record<number, Captura>> = {
     // 7 y 8 (la promesa de privacidad · qué mide) no son pantallas: son
     // compromisos que atraviesan toda la app. Sin captura, sin relleno.
   },
+  anonimizador: {
+    1: { archivo: "anonimizador-diagnostico.webp", rotulo: "El diagnóstico" },
+    2: {
+      archivo: "anonimizador-transformar.webp",
+      rotulo: "Qué se le hace a cada columna",
+    },
+    // El grupo 3 («velar con exactitud») ocurre DENTRO del taller: su pantalla
+    // es la misma del grupo 2, y repetirla no diría nada nuevo.
+    4: { archivo: "anonimizador-riesgo.webp", rotulo: "El riesgo, medido" },
+    5: { archivo: "anonimizador-regreso.webp", rotulo: "El regreso" },
+  },
+  "dash-agent-ai": {
+    1: {
+      archivo: "dash-agent-ai-auditor.webp",
+      rotulo: "El auditor de memoria",
+    },
+    2: { archivo: "dash-agent-ai-costos.webp", rotulo: "Costos y ROI" },
+    3: {
+      archivo: "dash-agent-ai-atribucion.webp",
+      rotulo: "Atribución por app",
+    },
+    4: { archivo: "dash-agent-ai-timeline.webp", rotulo: "La línea de tiempo" },
+    5: { archivo: "dash-agent-ai-confianza.webp", rotulo: "Confianza" },
+  },
+  ds: {
+    1: { archivo: "ds-veredicto.webp", rotulo: "El veredicto" },
+    2: { archivo: "ds-datos.webp", rotulo: "Los datos, de frente" },
+    3: { archivo: "ds-porque.webp", rotulo: "¿Por qué predice así?" },
+    4: { archivo: "ds-usar.webp", rotulo: "Usa tu modelo" },
+    // El grupo 5 son transversales (idiomas, accesibilidad): no una pantalla.
+  },
+  "nutri-kids": {
+    1: { archivo: "nutri-kids-dieta.webp", rotulo: "La dieta consultable" },
+    2: { archivo: "nutri-kids-hoy.webp", rotulo: "El día de hoy" },
+    // El grupo 3 es el chat: su pantalla vive tras escribir una pregunta, y
+    // fotografiar un chat vacío no cuenta la feature.
+    4: { archivo: "nutri-kids-cargar.webp", rotulo: "Cargar tu dieta" },
+    5: { archivo: "nutri-kids-ajustes.webp", rotulo: "Tuya, en tu teléfono" },
+  },
+  inmobiliaria: {
+    1: {
+      archivo: "inmobiliaria-campana.webp",
+      rotulo: "La campaña de fundadores",
+    },
+    2: {
+      archivo: "inmobiliaria-publicar.webp",
+      rotulo: "Publicar en tres pasos",
+    },
+    3: { archivo: "inmobiliaria-anuncio.webp", rotulo: "Revisa y publica" },
+    4: {
+      archivo: "inmobiliaria-operador.webp",
+      rotulo: "El panel del operador",
+    },
+  },
 };
 
 export function CapturaGrupo({

@@ -1,17 +1,31 @@
+import { MaquetaAnonimizador } from "./anonimizador";
+import { MaquetaDash } from "./dash-agent-ai";
+import { MaquetaDs } from "./ds";
 import { MaquetaHabla } from "./habla";
+import { MaquetaInmobiliaria } from "./inmobiliaria";
+import { MaquetaNutriKids } from "./nutri-kids";
 
 /**
- * Muestras de la vitrina (S5). Cada app tiene su propia representación visual;
- * el despachador la elige por slug. Si una app aún no tiene muestra, la ficha
- * simplemente no la pinta — jamás un placeholder que finja ser la app.
+ * Tiras de la vitrina (S5) — la muestra de la PORTADA de cada ficha.
  *
- * ⚠ Pendiente de la decisión del usuario (gate M1): el banco de técnicas §7
- * exige capturas de la app CORRIENDO cuando la sección enseña LA APP, y reserva
- * el SVG con tokens para ilustraciones abstractas. Mientras se resuelve, solo
- * habla tiene muestra y sirve de candidata para la mirada.
+ * Son **esquemáticas a propósito: no fingen ser una captura** (banco §7,
+ * enmienda kit v1.23.0). Dibujan las IDEAS de cada app con los tokens de CV
+ * Viva, para que las seis fichas se vean de la misma casa. Las pantallas
+ * REALES de cada app viven dentro de las tarjetas de «qué hace».
+ *
+ * Gramática común: viewBox 320×92 · cuatro columnas de 80 centradas en
+ * 40·120·200·280 · dibujo arriba, rótulo mono debajo · trazos de 1.5.
+ *
+ * Si una app aún no tiene tira, la ficha simplemente no la pinta — jamás un
+ * placeholder que finja ser la app.
  */
 const MAQUETAS: Record<string, () => React.ReactElement> = {
   habla: MaquetaHabla,
+  anonimizador: MaquetaAnonimizador,
+  "dash-agent-ai": MaquetaDash,
+  ds: MaquetaDs,
+  "nutri-kids": MaquetaNutriKids,
+  inmobiliaria: MaquetaInmobiliaria,
 };
 
 export function Maqueta({ slug }: { slug: string }) {

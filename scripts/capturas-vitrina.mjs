@@ -23,7 +23,8 @@
  */
 
 import { spawn, spawnSync } from "node:child_process";
-import { mkdirSync, rmSync } from "node:fs";
+import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
+import os from "node:os";
 import path from "node:path";
 import process from "node:process";
 import { chromium } from "playwright";
@@ -86,7 +87,211 @@ const APPS = {
       { nombre: "ajustes", ruta: "/ajustes", foco: "main section", desde: "top" },
     ],
   },
+
+  /**
+   * Velo: el estado vive EN LA PESTAÑA (nada se guarda — es su tesis), así que
+   * las escenas del flujo se encadenan con `ir` (clics) en vez de `ruta`
+   * (un goto recarga y el diagnóstico desaparece, a propósito).
+   */
+  anonimizador: {
+    repo: "app-anonimizador",
+    puerto: 3163,
+    escenas: [
+      {
+        nombre: "diagnostico",
+        async ir(p, base) {
+          await p.goto(`${base}/`, { waitUntil: "networkidle" });
+          // La tabla sintética viaja EN este script: NITs y teléfonos inventados.
+          await p.setInputFiles('input[type="file"]', tablaSintetica());
+          await p.waitForTimeout(2500);
+        },
+        desde: "top",
+        foco: "main section",
+      },
+      {
+        // Mismo diagnóstico, enfocado en el bloque del riesgo de reidentificación.
+        // Sin `desde: "top"` — la cifra es la protagonista y el encabezado de
+        // la página ya salió en la escena anterior.
+        nombre: "riesgo",
+        foco: "texto:Cuánta gente queda sola",
+        bloque: "section",
+      },
+      {
+        nombre: "transformar",
+        async ir(p) {
+          await p.click('a:has-text("Transformar este archivo")');
+          await p.waitForTimeout(1500);
+        },
+        desde: "top",
+        foco: "main section",
+      },
+      // El regreso es formulario puro: aguanta un goto limpio.
+      { nombre: "regreso", ruta: "/regreso", desde: "top", foco: "main section" },
+    ],
+  },
+
+  /**
+   * Dash lee transcripts REALES del home — prohibido en un repo público. Su
+   * propio kit lo resuelve: un árbol sintético con semilla + DASH_FUENTES, y
+   * un CANDADO que aborta si una página llegara a contener el home real.
+   */
+  "dash-agent-ai": {
+    repo: "app-dash-agent-ai",
+    puerto: 3147,
+    entorno(repo) {
+      const raiz = mkdtempSync(path.join(os.tmpdir(), "vitrina-dash-"));
+      const r = spawnSync(
+        process.execPath,
+        [
+          "docs/kit-de-prueba/generador.mjs",
+          "--destino",
+          path.join(raiz, "arbol"),
+          "--semilla",
+          "vitrina-s5",
+        ],
+        { cwd: repo, stdio: "pipe" },
+      );
+      if (r.status !== 0)
+        throw new Error(`el generador de dash falló:\n${r.stderr}`);
+      return {
+        DASH_FUENTES: path.join(raiz, "arbol", "claude"),
+        DASH_INDICE_DIR: path.join(raiz, "indice"),
+      };
+    },
+    async alIniciar(p, base) {
+      // Sin índice las pantallas están vacías y la captura no dice nada.
+      await p.goto(`${base}/`, { waitUntil: "networkidle" });
+      const boton = p.getByRole("button", { name: "Indexar ahora" });
+      if (await boton.isVisible().catch(() => false)) {
+        await boton.click();
+        await p
+          .getByText(/índice al día · \d+ sesiones/)
+          .waitFor({ timeout: 60000 });
+      }
+    },
+    prohibidos: [os.homedir(), "/.claude/projects"],
+    escenas: [
+      { nombre: "auditor", ruta: "/auditor", desde: "top", foco: "main section" },
+      { nombre: "costos", ruta: "/costos", desde: "top", foco: "main section" },
+      { nombre: "atribucion", ruta: "/atribucion", desde: "top", foco: "main section" },
+      { nombre: "timeline", ruta: "/timeline", desde: "top", foco: "main section" },
+      { nombre: "confianza", ruta: "/confianza", desde: "top", foco: "main section" },
+    ],
+  },
+
+  /** Probeta DS: una sola página; el experimento se conduce con sus ejemplos. */
+  ds: {
+    repo: "app-ds",
+    puerto: 3301,
+    escenas: [
+      {
+        // El ejemplo embebido de la app: datos sintéticos de fábrica.
+        nombre: "datos",
+        async ir(p, base) {
+          await p.goto(`${base}/`, { waitUntil: "networkidle" });
+          await p.click("text=Campaña de marketing");
+          await p.waitForTimeout(2500);
+        },
+        desde: "top",
+        foco: "texto:VISTA PREVIA",
+        bloque: "section,div",
+      },
+      {
+        nombre: "veredicto",
+        async ir(p) {
+          await p.selectOption("select", { label: "convirtio" });
+          await p.click('button:has-text("Entrenar modelo")');
+          await p.waitForTimeout(9000);
+        },
+        foco: "texto:baseline",
+        bloque: "section",
+      },
+      { nombre: "porque", foco: "texto:Por qué predice", bloque: "section" },
+      { nombre: "usar", foco: "texto:Usa tu modelo", bloque: "section" },
+    ],
+  },
+
+  /** Nutri-Kids trae su «Dieta demo» de fábrica: datos sintéticos propios. */
+  "nutri-kids": {
+    repo: "app-nutri-kids",
+    puerto: 3284,
+    async alIniciar(p, base) {
+      // El aviso de primeros pasos tapa todas las rutas hasta aceptarse.
+      await p.goto(`${base}/`, { waitUntil: "networkidle" });
+      const boton = p.getByRole("button", { name: /Entendido/ });
+      if (await boton.isVisible().catch(() => false)) await boton.click();
+      await p.waitForTimeout(600);
+    },
+    escenas: [
+      { nombre: "hoy", ruta: "/", desde: "top", foco: "main section, main div" },
+      { nombre: "dieta", ruta: "/dieta", desde: "top", foco: "main section, main div" },
+      { nombre: "cargar", ruta: "/cargar", desde: "top", foco: "main section, main div" },
+      { nombre: "ajustes", ruta: "/ajustes", desde: "top", foco: "main section, main div" },
+    ],
+  },
+
+  inmobiliaria: {
+    repo: "app-inmobiliaria",
+    puerto: 3135,
+    escenas: [
+      { nombre: "campana", ruta: "/", desde: "top", foco: "main section, main div" },
+      {
+        // Paso 1 del formulario: la fricción cero que promete el grupo.
+        nombre: "publicar",
+        ruta: "/publicar",
+        desde: "top",
+        foco: "main form, main section",
+      },
+      {
+        // El anuncio armado, en su paso «Revisa y publica». Se conduce el
+        // formulario entero con un inmueble INVENTADO: `/mi-anuncio` a secas
+        // pide el enlace privado y muestra una pantalla vacía que no cuenta
+        // nada de este grupo.
+        nombre: "anuncio",
+        async ir(p, base) {
+          await p.goto(`${base}/publicar`, { waitUntil: "networkidle" });
+          await p.fill('input[placeholder="Tu nombre"]', "Ana Restrepo");
+          await p.fill('input[placeholder="300 123 4567"]', "3001234567");
+          await p.click('button:has-text("Continuar")');
+          await p.waitForTimeout(1200);
+          // El radio va `sr-only` y su label intercepta el clic: `force`.
+          await p.check('input[value="venta"]', { force: true });
+          for (const s of await p.$$("select")) {
+            const v = await s.$$eval("option", (o) => o[1]?.value);
+            if (v) await s.selectOption(v);
+          }
+          await p.fill('input[placeholder="Ej: Cedritos"]', "Cedritos");
+          await p.fill('input[placeholder="78"]', "78");
+          await p.fill('input[placeholder="3"]', "3");
+          await p.fill('input[placeholder="420.000.000"]', "420000000");
+          await p.click('button:has-text("Continuar")');
+          await p.waitForTimeout(2500);
+        },
+        desde: "top",
+        foco: "main form, main section",
+      },
+      // El panel del operador se muestra en su puerta: «acceso solo para el
+      // equipo» ES el mensaje del grupo «quién opera».
+      { nombre: "operador", ruta: "/operador", desde: "top", foco: "main form, main section" },
+    ],
+  },
 };
+
+/** La tabla sintética de Velo se escribe al vuelo — inventada, a la vista. */
+function tablaSintetica() {
+  const ruta = path.join(TEMP, "tabla-sintetica.csv");
+  writeFileSync(
+    ruta,
+    [
+      "nombre,documento,telefono,ciudad,puntaje",
+      "Comercial Andina SAS,900123456-8,3001234567,Bogotá,0.82",
+      "Distribuidora del Sur,830045210-5,3109876543,Cali,0.41",
+      "Insumos La Palma,901447038-7,3155551234,Medellín,0.77",
+      "Ferretería El Puente,900884201-1,3012223344,Bogotá,0.35",
+    ].join("\n"),
+  );
+  return ruta;
+}
 
 function esperarPuerto(puerto, intentos = 120) {
   return new Promise((resolve, reject) => {
@@ -113,15 +318,20 @@ async function capturarApp(slug, config) {
   const repo = path.join(HERMANAS, config.repo);
   console.log(`\n▸ ${slug} — levantando ${config.repo} en :${config.puerto}`);
 
+  // `entorno` prepara datos sintéticos ANTES de arrancar (dash: árbol con
+  // semilla) y devuelve las variables que lo apuntan.
+  const extra = config.entorno ? config.entorno(repo) : {};
+
   const servidor = spawn("pnpm", ["dev"], {
     cwd: repo,
-    env: { ...process.env, PORT: String(config.puerto) },
+    env: { ...process.env, PORT: String(config.puerto), ...extra },
     stdio: "ignore",
     detached: true,
   });
 
   try {
     await esperarPuerto(config.puerto);
+    const base = `http://localhost:${config.puerto}`;
     const nav = await chromium.launch();
     // `reducedMotion` para fotografiar el estado final, no un cuadro a media
     // animación: una captura a media opacidad miente sobre el producto.
@@ -130,28 +340,61 @@ async function capturarApp(slug, config) {
       deviceScaleFactor: DPR,
       reducedMotion: "reduce",
     });
+    // El overlay de desarrollo de Next (el badge rojo de «Issues») NO es el
+    // producto: fuera de toda captura.
+    await ctx.addInitScript(() => {
+      const s = document.createElement("style");
+      s.textContent = "nextjs-portal{display:none!important}";
+      document.documentElement.appendChild(s);
+    });
     const p = await ctx.newPage();
 
+    // Preparación única de la app (indexar dash, aceptar el aviso de nutri…).
+    if (config.alIniciar) await config.alIniciar(p, base);
+
     for (const escena of config.escenas) {
-      await p.goto(`http://localhost:${config.puerto}${escena.ruta}`, {
-        waitUntil: "networkidle",
-      });
+      // `ir` conduce (clics con estado en la pestaña); `ruta` navega limpio;
+      // sin ninguno, la escena continúa sobre la página donde quedó la anterior.
+      if (escena.ir) await escena.ir(p, base);
+      else if (escena.ruta)
+        await p.goto(`${base}${escena.ruta}`, { waitUntil: "networkidle" });
       if (escena.preparar) await escena.preparar(p);
       await p.waitForTimeout(600);
+
+      // CANDADO (patrón de dash): si la página contiene un dato de la lista
+      // prohibida, se aborta ANTES de escribir un solo byte de imagen.
+      if (config.prohibidos?.length) {
+        const html = await p.content();
+        const filtrado = config.prohibidos.find((s) => html.includes(s));
+        if (filtrado)
+          throw new Error(
+            `CANDADO en ${slug}/${escena.nombre}: la página contiene "${filtrado}". Nada se guardó.`,
+          );
+      }
       // NADA SALE CORTADO (gate M1, ronda 2): la escena declara con `foco` el
       // bloque que debe verse COMPLETO (con `desde: "top"` la región arranca en
       // el techo de la página e incluye el encabezado). Si la región no cabe en
       // el cuadro, se encoge la página con zoom hasta que quepa — el sobrante
       // del cuadro lo llena el fondo de la app, jamás un bloque rebanado.
       await p.evaluate(
-        ({ sel, cual, desde, vh }) => {
+        ({ sel, cual, desde, vh, bloque }) => {
           const MARGEN = 20;
           // Abajo casi a ras: el hueco entre tarjetas es ~24px y un margen
           // holgado deja asomar el filo del bloque siguiente.
           const MARGEN_INF = 8;
-          const candidatos = sel
-            ? Array.from(document.querySelectorAll(sel))
-            : [];
+          let candidatos = [];
+          if (sel?.startsWith("texto:")) {
+            // Foco por TEXTO: el encabezado que lo contiene, subido al bloque
+            // que lo envuelve (`bloque`) para encuadrar la sección entera.
+            const aguja = sel.slice(6).toLowerCase();
+            const h = Array.from(
+              document.querySelectorAll("h1,h2,h3,h4,p"),
+            ).find((e) => (e.textContent || "").toLowerCase().includes(aguja));
+            const cont = h?.closest(bloque || "section") ?? h;
+            if (cont) candidatos = [cont];
+          } else if (sel) {
+            candidatos = Array.from(document.querySelectorAll(sel));
+          }
           const el =
             cual === "ultimo" ? candidatos.at(-1) : candidatos[0];
           if (!el) {
@@ -180,9 +423,23 @@ async function capturarApp(slug, config) {
           cual: escena.cual,
           desde: escena.desde,
           vh: PANTALLA.height,
+          bloque: escena.bloque,
         },
       );
       await p.waitForTimeout(200);
+
+      // Barrido final anti-overlay: el indicador de dev de Next (el badge de
+      // «Issues») NO es el producto. Cambia de nombre y de sitio entre
+      // versiones —`nextjs-portal`, `next-devtools-indicator`, anidado o no—,
+      // así que se barre por lo único estable: es un CUSTOM ELEMENT, y estas
+      // apps son React puro sin ninguno propio. Barrido de TODO el documento
+      // (el primer intento solo miró los hijos del body y el badge sobrevivió).
+      await p.evaluate(() => {
+        for (const el of document.querySelectorAll("*")) {
+          if (el.tagName.includes("-"))
+            el.style.setProperty("display", "none", "important");
+        }
+      });
 
       const png = path.join(TEMP, `${slug}-${escena.nombre}.png`);
       await p.screenshot({ path: png });
