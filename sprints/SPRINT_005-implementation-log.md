@@ -356,3 +356,24 @@ fotografiada. Lo que jamás se pone es un relleno que aparente ser la app.
 desplaza **tiene que alcanzarse con el teclado** (`scrollable-region-focusable`) — si no, quien no
 usa ratón ni dedo no llega nunca a la segunda ni a la tercera pantalla. Lleva `tabIndex` y nombre
 accesible. 20/20.
+
+### Corrección de sitio: las capturas van EN LAS TARJETAS, no en la portada
+
+Veredicto del usuario: la portada con la tira estaba perfecta como estaba; las pantallas reales se
+necesitan **dentro de las tarjetas de «Qué hace»**. Yo las había puesto como carrusel en la portada
+— sitio equivocado.
+
+**Ahora:** la portada recupera la tira esquemática intacta, y **cada tarjeta lleva la pantalla real
+de lo que su grupo cuenta** (`CapturaGrupo`, mapeo slug→orden→archivo en `capturas.tsx`): 01 la
+cápsula de hoy · 02 los juegos · 03 el estudio · 04 el objetivo · 05 el rumbo (VACÍO a propósito:
+es la pantalla real antes de jugar, sin historial fabricado) · 06 ajustes. Los grupos 07 y 08 no
+son pantallas sino compromisos transversales — sin captura, sin relleno. En escritorio la captura
+es columna a la derecha de las features (`md:flex-row-reverse`); en móvil llega primero, topada a
+210px. Siempre `loading="lazy"`: nace dentro de una tarjeta plegada.
+
+El script ganó 3 escenas (estudio · rumbo · ajustes; mismo contexto ⇒ el onboarding de la escena 1
+persiste). Las 6 pesan 297 KB en disco. La coreografía `escalona` pasó de hijo directo a
+descendiente (`.tarjeta-detalle-cuerpo .escalona`) porque las features viven un nivel más adentro.
+La tira horizontal de portada se eliminó con su CSS y su llave `capturasEtiqueta`.
+
+Verde: typecheck · lint · 174 unit · axe 20/20 (dev apagado) · build de producción.

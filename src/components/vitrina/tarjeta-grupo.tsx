@@ -1,5 +1,6 @@
 import { ChevronDown } from "lucide-react";
 import type { GrupoExport } from "@/lib/vitrina/schemas";
+import { CapturaGrupo } from "./capturas";
 import { IconoGrupo } from "./iconos-grupo";
 
 /**
@@ -26,10 +27,12 @@ export function TarjetaGrupo({
   grupo,
   slug,
   etiquetaEstrella,
+  pieCaptura,
 }: {
   grupo: GrupoExport;
   slug: string;
   etiquetaEstrella: string;
+  pieCaptura: string;
 }) {
   const id = `g-${slug}-${grupo.orden}`;
 
@@ -88,26 +91,33 @@ export function TarjetaGrupo({
         aria-label={grupo.nombre}
       >
         <div className="tarjeta-detalle-interior">
-          <div className="tarjeta-detalle-cuerpo flex flex-col gap-5 border-t border-paper-2 px-5 pt-5 pb-6 md:px-6">
-            {/* Coreografía interior: las features ALZAN en fila (~60 ms). El
-                detalle no "aparece": te lo sirven en orden de lectura. */}
-            {grupo.features.map((f) => (
-              <div key={f.id} data-feature-id={f.id} className="escalona">
-                <h5 className="flex items-baseline gap-2 text-[15px] font-medium text-ink-0">
-                  {/* ink-2: el 3 del DS es decorativo y no llega a AA (2.7:1). */}
-                  <span
-                    aria-hidden="true"
-                    className="font-mono text-[11px] text-ink-2"
-                  >
-                    {f.id}
-                  </span>
-                  {f.nombre}
-                </h5>
-                <p className="mt-1 max-w-[64ch] text-sm leading-relaxed text-ink-1">
-                  {f.que_hace}
-                </p>
+          <div className="tarjeta-detalle-cuerpo border-t border-paper-2 px-5 pt-5 pb-6 md:px-6">
+            {/* LA PANTALLA REAL del grupo primero (la imagen ancla las
+                palabras); en escritorio se hace columna al lado del texto. */}
+            <div className="flex flex-col gap-5 md:flex-row-reverse md:gap-7">
+              <CapturaGrupo slug={slug} orden={grupo.orden} pie={pieCaptura} />
+              {/* Coreografía interior: las features ALZAN en fila (~60 ms). El
+                  detalle no "aparece": te lo sirven en orden de lectura. */}
+              <div className="flex min-w-0 flex-1 flex-col gap-5">
+                {grupo.features.map((f) => (
+                  <div key={f.id} data-feature-id={f.id} className="escalona">
+                    <h5 className="flex items-baseline gap-2 text-[15px] font-medium text-ink-0">
+                      {/* ink-2: el 3 del DS es decorativo, no llega a AA (2.7:1). */}
+                      <span
+                        aria-hidden="true"
+                        className="font-mono text-[11px] text-ink-2"
+                      >
+                        {f.id}
+                      </span>
+                      {f.nombre}
+                    </h5>
+                    <p className="mt-1 max-w-[64ch] text-sm leading-relaxed text-ink-1">
+                      {f.que_hace}
+                    </p>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </div>

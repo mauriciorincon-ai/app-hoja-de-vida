@@ -1,20 +1,25 @@
 import Image from "next/image";
 
 /**
- * LAS PANTALLAS REALES de cada app hermana.
+ * LA PANTALLA REAL de cada tarjeta de «qué hace».
  *
  * Banco de técnicas §7 (enmienda kit v1.23.0): **si la pieza enseña LA APP,
  * son capturas de la app CORRIENDO o no va.** Estas salieron de
- * `scripts/capturas-vitrina.mjs`, que levanta cada app y conduce su UI con
- * datos sintéticos — re-ejecutable, y por eso verificable: nadie tiene que
- * creerme que la pantalla es así.
+ * `scripts/capturas-vitrina.mjs`, que levanta cada app hermana y conduce su
+ * UI con datos sintéticos — re-ejecutable, y por eso verificable.
  *
- * Los rótulos NO viajan en el `brochure-export.json` (el contrato no tiene
- * campo de capturas), así que viven aquí junto al archivo que nombran.
+ * Dónde van (decisión del usuario en el gate M1): **dentro de cada tarjeta**,
+ * al lado de las funcionalidades de su grupo — la captura enseña exactamente
+ * lo que ese grupo cuenta. La portada de la ficha conserva la tira
+ * esquemática, que habla el lenguaje de esta página.
  *
- * A11y: la captura es ILUSTRACIÓN (`alt=""`) y el sentido lo carga el rótulo
- * visible debajo — repetirlo en el `alt` haría que un lector de pantalla lo
- * dijera dos veces.
+ * El mapeo grupo→pantalla no viaja en el `brochure-export.json` (el contrato
+ * v1.0.0 no tiene campo de capturas), así que vive aquí junto a los archivos
+ * que nombra. Un grupo sin pantalla propia simplemente no lleva figura —
+ * jamás un relleno.
+ *
+ * A11y: la captura es ILUSTRACIÓN (`alt=""`); el sentido lo cargan el rótulo
+ * y el pie visibles debajo.
  */
 
 type Captura = { archivo: string; rotulo: string };
@@ -23,70 +28,55 @@ type Captura = { archivo: string; rotulo: string };
 const ANCHO = 780;
 const ALTO = 1688;
 
-const CAPTURAS: Record<string, Captura[]> = {
-  habla: [
-    { archivo: "habla-hoy.webp", rotulo: "La cápsula de hoy" },
-    { archivo: "habla-jugar.webp", rotulo: "Los juegos de voz" },
-    { archivo: "habla-objetivo.webp", rotulo: "El objetivo de la semana" },
-  ],
+/** slug de la app → orden del grupo → su pantalla. */
+const CAPTURAS: Record<string, Record<number, Captura>> = {
+  habla: {
+    1: { archivo: "habla-hoy.webp", rotulo: "La cápsula de hoy" },
+    2: { archivo: "habla-jugar.webp", rotulo: "Los juegos de voz" },
+    3: { archivo: "habla-estudio.webp", rotulo: "El estudio de la familia" },
+    4: { archivo: "habla-objetivo.webp", rotulo: "El objetivo de la semana" },
+    // El rumbo sale VACÍO a propósito: es la pantalla real antes de jugar.
+    5: { archivo: "habla-rumbo.webp", rotulo: "El rumbo" },
+    6: { archivo: "habla-ajustes.webp", rotulo: "Ajustes y privacidad" },
+    // 7 y 8 (la promesa de privacidad · qué mide) no son pantallas: son
+    // compromisos que atraviesan toda la app. Sin captura, sin relleno.
+  },
 };
 
-export function tieneCapturas(slug: string): boolean {
-  return (CAPTURAS[slug]?.length ?? 0) > 0;
-}
-
-export function Capturas({
+export function CapturaGrupo({
   slug,
+  orden,
   pie,
-  etiqueta,
 }: {
   slug: string;
+  orden: number;
   pie: string;
-  etiqueta: string;
 }) {
-  const capturas = CAPTURAS[slug];
-  if (!capturas) return null;
+  const captura = CAPTURAS[slug]?.[orden];
+  if (!captura) return null;
 
   return (
-    <figure className="m-0">
-      {/* En móvil la tira se arrastra: nunca empuja el ancho de la página.
-          `tabIndex` + nombre accesible porque una región que se desplaza TIENE
-          que alcanzarse con el teclado — si no, quien no usa ratón ni dedo se
-          queda sin ver la segunda y la tercera pantalla (lo cazó axe en el
-          viewport móvil, donde la tira sí desborda). */}
-      <ul
-        tabIndex={0}
-        aria-label={etiqueta}
-        className="tira-capturas flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-ink"
-      >
-        {capturas.map((c, i) => (
-          // En escritorio caben tres holgadas; en móvil se arrastran.
-          <li
-            key={c.archivo}
-            className="w-[168px] shrink-0 snap-start sm:w-[228px]"
-          >
-            <div className="marco-captura">
-              <Image
-                src={`/vitrina/${c.archivo}`}
-                alt=""
-                width={ANCHO}
-                height={ALTO}
-                sizes="(min-width: 640px) 228px, 168px"
-                /* La primera entra ansiosa: es la que se ve al abrir la ficha
-                   y una imagen que aparece tarde se lee como página rota. Las
-                   demás, perezosas — el presupuesto de la ruta manda. */
-                loading={i === 0 ? "eager" : "lazy"}
-                className="block h-auto w-full"
-              />
-            </div>
-            <p className="mt-2 text-center font-mono text-[10px] tracking-[0.06em] text-ink-2 uppercase">
-              {c.rotulo}
-            </p>
-          </li>
-        ))}
-      </ul>
-      <figcaption className="mt-2 text-[13px] leading-relaxed text-ink-2">
-        {pie}
+    <figure className="escalona m-0 md:w-[190px] md:shrink-0">
+      <div className="marco-captura mx-auto max-w-[210px]">
+        <Image
+          src={`/vitrina/${captura.archivo}`}
+          alt=""
+          width={ANCHO}
+          height={ALTO}
+          sizes="(min-width: 768px) 190px, 210px"
+          /* Perezosa siempre: nace dentro de una tarjeta plegada, bajo el
+             pliegue — cargarla ansiosa pagaría peso por algo aún invisible. */
+          loading="lazy"
+          className="block h-auto w-full"
+        />
+      </div>
+      <figcaption className="mx-auto mt-2 max-w-[210px] text-center">
+        <span className="block font-mono text-[10px] tracking-[0.06em] text-ink-2 uppercase">
+          {captura.rotulo}
+        </span>
+        <span className="mt-0.5 block text-[12px] leading-snug text-ink-2">
+          {pie}
+        </span>
       </figcaption>
     </figure>
   );

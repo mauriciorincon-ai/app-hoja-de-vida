@@ -59,6 +59,12 @@ const APPS = {
       },
       { nombre: "jugar", ruta: "/jugar" },
       { nombre: "objetivo", ruta: "/objetivo" },
+      // El contexto es el mismo: el onboarding de la escena 1 ya quedó hecho.
+      { nombre: "estudio", ruta: "/estudio" },
+      // El rumbo sale VACÍO a propósito: es lo que la app enseña de verdad
+      // antes de jugar — y lo honesto es no fabricarle un historial.
+      { nombre: "rumbo", ruta: "/rumbo" },
+      { nombre: "ajustes", ruta: "/ajustes" },
     ],
   },
 };

@@ -186,7 +186,6 @@
     "sí": "sí",
     "no": "no",
     "muestraPie": "Esquema de las ideas de la app, dibujado en el lenguaje visual de esta página. No es una captura de pantalla.",
-    "capturasPie": "Pantallas reales de la app, fotografiadas de la app corriendo con datos inventados.",
-    "capturasEtiqueta": "Pantallas de {app}"
+    "capturasPie": "Pantalla real, fotografiada de la app corriendo con datos inventados."
   }
 }
