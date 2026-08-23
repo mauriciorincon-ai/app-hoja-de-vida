@@ -31,7 +31,7 @@
     "lucide-react": "^1.23.0",
     "minisearch": "^7.2.0",
     "motion": "^12.42.2",
-    "next": "16.2.10",
+    "next": "16.2.12",
     "next-intl": "^4.13.1",
     "pdfkit": "^0.19.1",
     "pino": "^10.3.1",

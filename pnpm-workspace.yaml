@@ -1,3 +1,25 @@
+# Overrides de SEGURIDAD (regla 17: van aquí, jamás en package.json).
+#
+# Todas son dependencias TRANSITIVAS de herramienta —eslint, @sentry/nextjs y
+# el CLI de shadcn—: ninguna la declara esta app. Se fijan a la primera versión
+# parcheada DENTRO DE SU MISMA MAYOR, para no cambiar de API por la puerta de
+# atrás. `brace-expansion`, `js-yaml` y `nanoid` conviven en dos mayores en el
+# árbol, así que cada una se ancla por separado.
+#
+# Al tocar esto: leer la salida de `pnpm install` y comprobar dependencia por
+# dependencia que quedó la versión MÁS NUEVA — pnpm degrada en silencio y la CI
+# pasa verde porque ninguna puerta compara el resultado contra la INTENCIÓN.
+overrides:
+  'brace-expansion@1': ^1.1.18
+  'brace-expansion@>=4': ^5.0.9
+  fast-uri: ^3.1.5
+  sharp: ^0.35.0
+  postcss: ^8.5.18
+  undici: ^7.29.0
+  ip-address: ^10.3.1
+  'js-yaml@4': ^4.3.1
+  'nanoid@3': ^3.3.18
+
 allowBuilds:
   '@parcel/watcher': true
   '@sentry/cli': true
