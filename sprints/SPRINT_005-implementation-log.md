@@ -731,3 +731,26 @@ documenta la corrección. Reescrito sin el literal.
 **sobre el árbol que se va a subir, no antes** — o el checklist debe decir explícitamente
 «después del último `git add`». Tal como está redactado, un artefacto generado durante el propio
 deploy-check entra sin que nadie lo vea.
+
+### La CI cazó lo que el verde local no podía (2026-09-05)
+
+El PR abrió con **`quality: fail`** y los otros tres jobs en **`skipping`** — exactamente el modo
+de falla que la regla 14 nombra: `needs:` sobre un job caído los deja saltados, y GitHub los lista
+entre los requeridos **sin alarma**. Verde local, rojo en CI.
+
+**Causa:** `pnpm audit` con **seis vulnerabilidades altas nuevas**, publicadas en las dos semanas
+transcurridas desde el cierre del S5. Ninguna la introduce esta rama.
+
+**Y una trampa dentro de mi propio arreglo del S5:** el override decía `fast-uri: ^3.1.5`, que
+admite 3.1.6 — pero el lockfile se resolvió en agosto, cuando 3.1.5 era lo último que casaba, y la
+CI instala con `--frozen-lockfile`. **Un rango abierto no protege de nada si el lockfile no se
+vuelve a resolver.** Convivían además dos versiones (3.1.3 y 3.1.5): el override no alcanzaba
+todas las rutas.
+
+**Arreglo:** `fast-uri` a `^3.1.6` (queda 3.1.7, ahora **una sola** versión en el árbol) y
+`browserslist` a `^4.28.7` (queda 4.28.9), aviso nuevo que no estaba cubierto. Verificado
+dependencia por dependencia contra la intención, no por el verde. Audit: **0 altas, 0 críticas**.
+
+**Lección, que es la misma de siempre en otro disfraz:** el audit no es una foto, es un flujo. Un
+repo que pasó el gate hace dos semanas puede estar rojo hoy sin que nadie haya tocado una línea —
+y el `--frozen-lockfile` de la CI garantiza que lo que se auditó no es lo que se instalará mañana.
