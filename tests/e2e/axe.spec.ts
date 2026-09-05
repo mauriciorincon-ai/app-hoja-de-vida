@@ -67,6 +67,18 @@ for (const ruta of RUTAS) {
     // haber sido mirada — el banco de técnicas lo pide explícito ("axe con el
     // detalle abierto"). Genérico a propósito: cualquier ruta que estrene un
     // plegable queda cubierta el día que lo estrene.
+    // Lo que nace CERRADO es invisible para axe — y por tanto, sin abrirlo,
+    // el scan pasa en verde sin haber mirado nada. Ya pasó en el S5 con los
+    // `<details>`; el desplegable del header es el mismo modo de falla.
+    const desplegable = page.locator(
+      'button[aria-controls="nav-hoja-de-vida"]',
+    );
+    if (await desplegable.isVisible().catch(() => false))
+      await desplegable.click();
+    const hamburguesa = page.getByRole("button", { name: "Abrir el menú" });
+    if (await hamburguesa.isVisible().catch(() => false))
+      await hamburguesa.click();
+
     await page.evaluate(() => {
       for (const d of document.querySelectorAll("details")) d.open = true;
       for (const t of document.querySelectorAll(".tarjeta-vitrina")) {

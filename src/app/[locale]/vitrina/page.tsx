@@ -6,6 +6,7 @@ import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { Reveal } from "@/components/motion/reveal";
 import { MuestraApp } from "@/components/vitrina/muestra";
+import { appsConBrochure } from "@/lib/brochure";
 import { Link } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
 import { getCv } from "@/lib/content";
@@ -63,6 +64,13 @@ export default async function VitrinaPage({ params }: Params) {
   const cv = getCv(l);
   const t = await getTranslations("vitrina");
   const fichas = getFichasVitrina();
+  // «De esta casa»: las apps del pipeline que viven en ESTA página y tienen
+  // brochure propia. No son fichas de la vitrina —su contenido nace de
+  // `apps.yaml`, no de un `brochure-export.json`, y el ADR-013 mantiene esas
+  // dos fuentes separadas— pero sí pertenecen a «lo construido», que desde
+  // ahora tiene UNA sola puerta. Antes su acceso era la sección «Apps» de la
+  // HOME, retirada por prometer lo mismo que la vitrina.
+  const propias = appsConBrochure();
 
   return (
     <>
@@ -102,6 +110,48 @@ export default async function VitrinaPage({ params }: Params) {
               ))}
             </ul>
           </Reveal>
+
+          {/* ── De esta casa: lo construido que sostiene esta misma página ── */}
+          {propias.length > 0 && (
+            <Reveal variant="fadeInUp">
+              <section
+                aria-labelledby="de-esta-casa"
+                className="mt-14 border-t border-paper-2 pt-10"
+              >
+                <h2
+                  id="de-esta-casa"
+                  className="font-display text-2xl font-medium tracking-[-0.015em] text-ink-0"
+                >
+                  {t("deEstaCasa")}
+                </h2>
+                <p className="mt-3 max-w-[60ch] text-[15px] leading-relaxed text-ink-1">
+                  {t("deEstaCasaLinea")}
+                </p>
+                <ul className="mt-5 grid gap-3 sm:grid-cols-2">
+                  {propias.map((app) => (
+                    <li key={app.id} className="list-none">
+                      <Link
+                        href={`/apps/${app.id}`}
+                        data-app-propia={app.id}
+                        className="flex h-full flex-col gap-1.5 rounded-[10px] border border-paper-2 bg-paper-0 p-5 transition-[box-shadow] duration-[180ms] hover:shadow-sh-1"
+                      >
+                        <span className="font-display text-[1.05rem] font-medium text-ink-0">
+                          {app.nombre[l]}
+                        </span>
+                        <span className="text-sm leading-relaxed text-ink-2">
+                          {app.brochure.tagline[l]}
+                        </span>
+                        <span className="mt-1 flex items-center gap-1.5 text-[14px] font-medium text-sage-ink">
+                          {t("verLaApp")}
+                          <span aria-hidden="true">→</span>
+                        </span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            </Reveal>
+          )}
 
           {/* Cierre: el anclaje de toda la vitrina + la lista de espera. */}
           <Reveal variant="fadeInUp">

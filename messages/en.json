@@ -9,7 +9,6 @@
     "proyectos": "Projects",
     "skills": "Skills",
     "certificaciones": "Certifications",
-    "apps": "Apps",
     "roadmap": "Roadmap",
     "contacto": "Contact",
     "cambiarIdioma": "Cambiar a español",
@@ -18,7 +17,8 @@
     "abrirMenu": "Open the menu",
     "cerrarMenu": "Close the menu",
     "menu": "Menu",
-    "vitrina": "Showcase"
+    "vitrina": "Showcase",
+    "hojaDeVida": "Résumé"
   },
   "hero": {
     "ctaApps": "Explore the apps",
@@ -53,14 +53,11 @@
     "verificar": "Verify"
   },
   "apps": {
-    "titulo": "Pipeline apps",
-    "subtitulo": "Only what's real: what's being built and what's being explored. No promised dates.",
     "estados": {
       "en-produccion": "In production",
       "en-construccion": "In construction",
       "en-exploracion": "In exploration"
-    },
-    "cta": "I want to try it"
+    }
   },
   "brochure": {
     "volver": "Apps",
@@ -196,6 +193,9 @@
     "migaEtiqueta": "Where you are",
     "vecinasEtiqueta": "Other apps in the showcase",
     "appAnterior": "Previous app",
-    "appSiguiente": "Next app"
+    "appSiguiente": "Next app",
+    "deEstaCasa": "From this house",
+    "deEstaCasaLinea": "What holds up the page you are reading: they are pipeline apps too, and they can also be walked through.",
+    "verLaApp": "See the app"
   }
 }

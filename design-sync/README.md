@@ -18,7 +18,8 @@ design-sync/
 ├─ README.md         esto
 └─ components/
    ├─ fundamentos/       Paleta · Tipografía · Forma y movimiento
-   ├─ componentes/       Botón · Card · Chip de estado
+   ├─ componentes/       Botón · Card · Chip de estado ·
+   │                     Menú desplegable del encabezado
    └─ componentes-s5/    Muestra de app · Tarjeta de grupo ·
                          Chip de procedencia · Captura repintada
 ```

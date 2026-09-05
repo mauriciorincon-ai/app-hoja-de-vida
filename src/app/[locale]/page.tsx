@@ -2,7 +2,6 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { HomeVisitTracker } from "@/components/home-visit-tracker";
-import { AppsShowcase } from "@/components/home/apps-showcase";
 import { Certificaciones } from "@/components/home/certificaciones";
 import { Contacto } from "@/components/home/contacto";
 import { Hero } from "@/components/home/hero";
@@ -26,6 +25,9 @@ export default async function HomePage({
   setRequestLocale(locale);
 
   const cv = getCv(locale as Locale);
+  // `apps` sigue haciendo falta: el formulario de Contacto arma con él su
+  // lista de apps SOLICITABLES. La sección «Apps» se retiró (ver header), pero
+  // las exploraciones no se perdieron — viven donde de verdad convierten.
   const { apps } = getApps();
   const appsRoadmap = appsConRoadmap();
   const tMeta = await getTranslations({ locale, namespace: "meta" });
@@ -65,7 +67,6 @@ export default async function HomePage({
         <Proyectos proyectos={cv.proyectos} />
         <Skills skills={cv.skills} />
         <Certificaciones certificaciones={cv.certificaciones} />
-        <AppsShowcase apps={apps} />
         {appsRoadmap.length > 0 && <Roadmap apps={appsRoadmap} />}
         <Contacto identidad={cv.identidad} apps={apps} />
       </main>

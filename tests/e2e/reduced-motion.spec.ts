@@ -56,7 +56,6 @@ test.describe("prefers-reduced-motion (criterio de aceptación e2e)", () => {
       "#proyectos h2",
       "#skills h2",
       "#certificaciones h2",
-      "#apps h2",
       "#contacto h2",
     ]) {
       expect(await findAnimatedAncestor(page.locator(selector))).toBeNull();

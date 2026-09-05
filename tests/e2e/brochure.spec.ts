@@ -28,16 +28,18 @@ if (!primera?.brochure) throw new Error("apps.yaml sin brochures");
 const sinBrochure = apps.find((a) => !a.brochure);
 
 test.describe("Brochures por app", () => {
-  test("se llega a la brochure DESDE el showcase (por la UI)", async ({
+  test("se llega a la brochure DESDE «De esta casa» en la vitrina (por la UI)", async ({
     page,
   }) => {
-    await page.goto("/es");
-    await page.locator("form[data-hydrated=true]").waitFor();
-    await page.locator("#apps").scrollIntoViewIfNeeded();
-
-    // Clic en "Ver la app" de la card de la primera app con brochure
-    const card = page.locator(`#apps [data-app-id="${primera.id}"]`);
-    await card.getByRole("link", { name: /Ver la app/ }).click();
+    // La puerta cambió de sitio: la sección «Apps» de la HOME se retiró porque
+    // prometía lo mismo que la vitrina. Lo construido tiene ahora UNA entrada,
+    // y estas dos apps —las que sostienen esta misma página— cierran el
+    // escaparate en su propio bloque. Esta prueba es la que impide que las
+    // brochures queden huérfanas: si alguien quita el bloque, se pone roja.
+    await page.goto("/es/vitrina");
+    const bloque = page.locator("#de-esta-casa");
+    await expect(bloque).toBeVisible();
+    await page.locator(`[data-app-propia="${primera.id}"]`).click();
 
     await expect(page).toHaveURL(new RegExp(`/es/apps/${primera.id}$`));
     // El h1 y el tagline de la brochure

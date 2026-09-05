@@ -9,7 +9,6 @@ const SECTIONS = [
   "proyectos",
   "skills",
   "certificaciones",
-  "apps",
   "roadmap",
   "contacto",
 ];
@@ -67,8 +66,11 @@ test.describe("HOME — happy path del sprint", () => {
       ).toBeAttached();
     }
 
-    // Showcase data-driven: exactamente las apps de data/apps.yaml
-    await expect(page.locator("#apps [data-app-id]")).toHaveCount(apps.length);
+    // La sección «Apps» se retiró: prometía lo mismo que la vitrina y no
+    // enseñaba apps visitables. Su contenido no se perdió — las dos con
+    // brochure se alcanzan desde «De esta casa» en /vitrina (brochure.spec),
+    // y las dos exploraciones siguen siendo las opciones del formulario.
+    await expect(page.locator("#apps")).toHaveCount(0);
 
     // Roadmap data-driven: una fila votable por feature de data/apps.yaml
     await page.locator("#roadmap").scrollIntoViewIfNeeded();
@@ -112,14 +114,12 @@ test.describe("HOME — happy path del sprint", () => {
       expect(html).toContain("application/ld+json");
       expect(html).toContain('hrefLang="es"');
       expect(html).toContain('hrefLang="en"');
-      // Contenido de secciones sin ejecutar JS, en el idioma de la ruta —
-      // el badge de estado sale de messages/<locale>.json (data-driven)
-      const mensajes = JSON.parse(
-        readFileSync(`messages/${locale}.json`, "utf8"),
-      ) as { apps: { estados: Record<string, string> } };
+      // Contenido de secciones sin ejecutar JS, en el idioma de la ruta. El
+      // badge de estado de las apps se comprobaba aquí y salía del showcase;
+      // retirada esa sección, lo que queda en la HOME es el roadmap votable,
+      // que nombra la app y sus features. El gate no se debilita: sigue
+      // exigiendo contenido real de `apps.yaml` en el HTML estático.
       expect(html).toContain(apps[0].nombre[locale as "es" | "en"]);
-      expect(html).toContain(mensajes.apps.estados[apps[0].estado]);
-      // El roadmap votable también nace estático (títulos de features en el HTML)
       expect(html).toContain(primeraFeature.titulo[locale as "es" | "en"]);
     }
     // El grueso (capa 2) también vive en el HTML aunque nazca colapsado
