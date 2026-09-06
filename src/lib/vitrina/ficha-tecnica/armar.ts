@@ -59,7 +59,7 @@ export function armarFichaTecnica(
     });
 
   return fichaTecnicaSchema.parse({
-    schema_version: "1.0.0",
+    schema_version: "1.1.0",
     actualizado: exp.actualizado,
     pieza: {
       slug: ancla.slug,
@@ -85,8 +85,11 @@ export function armarFichaTecnica(
       linea: g.linea,
       cuenta: g.features.length,
     })),
-    proceso: comp.proceso,
-    procedencia_proceso: comp.procedencia,
+    // v1.1.0: el proceso es opcional; si el complemento no lo trae, la ficha
+    // sale sin él y sin procedencia (el esquema exige que vayan juntos).
+    ...(comp.proceso
+      ? { proceso: comp.proceso, procedencia_proceso: comp.procedencia }
+      : {}),
     limites: comp.limites,
     nunca: comp.nunca,
     hitos,

@@ -1,7 +1,13 @@
 import { z } from "zod";
 
 /**
- * CONTRATO «FICHA TÉCNICA» v1.0.0 (ADR-016) — la capa infografía de la vitrina.
+ * CONTRATO «FICHA TÉCNICA» v1.1.0 (ADR-016) — la capa infografía de la vitrina.
+ *
+ * v1.1.0 (2026-09-06, orden del usuario): el **proceso BPMN es OPCIONAL**. No
+ * toda pieza tiene un proceso de uso (una línea de investigación, un tablero);
+ * si viene, sigue siendo BPMN válido y trae su procedencia; si no viene, la
+ * ficha omite «Cómo funciona» y renumera. Compatible hacia atrás: toda ficha
+ * v1.0.0 válida lo sigue siendo.
  *
  * Dos formas, un solo renderizador:
  *
@@ -20,8 +26,9 @@ import { z } from "zod";
  * Reglas que el esquema hace cumplir (no la buena voluntad):
  *  - toda cifra lleva su `fuente` — la misma regla madre del brochure;
  *  - entre 3 y 5 cifras destacadas: con 14 números no hay infografía, hay tabla;
- *  - el proceso es BPMN válido: un inicio, al menos un fin, todo paso alcanzable
- *    y con salida, y toda decisión con al menos dos caminos.
+ *  - el proceso, si viene, es BPMN válido: un inicio, al menos un fin, todo paso
+ *    alcanzable y con salida, y toda decisión con al menos dos caminos — y
+ *    trae su procedencia (un proceso sin dueño es una cifra sin fuente).
  */
 
 const slug = z
@@ -194,11 +201,36 @@ const texto = (max: number) => z.string().min(1).max(max);
 
 /* ── El complemento (apps con brochure-export) ───────────────────────────── */
 
+/**
+ * El proceso y su procedencia van JUNTOS o no van: un proceso sin dueño es una
+ * cifra sin fuente, y una procedencia sin proceso es ruido que confunde.
+ */
+function procesoConProcedencia(campo: string) {
+  return (
+    v: { proceso?: unknown; [k: string]: unknown },
+    ctx: z.RefinementCtx,
+  ) => {
+    const tieneProceso = v.proceso !== undefined;
+    const tieneProcedencia = v[campo] !== undefined;
+    if (tieneProceso && !tieneProcedencia)
+      ctx.addIssue({
+        code: "custom",
+        path: [campo],
+        message: `el proceso necesita su «${campo}» (app | cv-viva)`,
+      });
+    if (!tieneProceso && tieneProcedencia)
+      ctx.addIssue({
+        code: "custom",
+        path: [campo],
+        message: `«${campo}» sin proceso: sobra`,
+      });
+  };
+}
+
 export const complementoSchema = z
   .object({
     schema_version: z.string().regex(/^1\.\d+\.\d+$/),
     app: slug,
-    procedencia: z.enum(procedencias),
     declarado_en: fecha,
     // El titular de valor: QUÉ NO HACE NADIE MÁS, en una frase.
     titular: texto(240),
@@ -206,9 +238,12 @@ export const complementoSchema = z
     cifras_destacadas: z.array(z.string().min(1)).min(3).max(5),
     limites: z.array(texto(160)).min(2).max(4),
     nunca: z.array(texto(160)).min(2).max(5),
-    proceso: procesoSchema,
+    // Opcionales desde v1.1.0, siempre juntos (ver `procesoConProcedencia`).
+    proceso: procesoSchema.optional(),
+    procedencia: z.enum(procedencias).optional(),
   })
-  .strict();
+  .strict()
+  .superRefine(procesoConProcedencia("procedencia"));
 
 export type Complemento = z.infer<typeof complementoSchema>;
 
@@ -256,8 +291,9 @@ export const fichaTecnicaSchema = z
       )
       .min(2)
       .max(10),
-    proceso: procesoSchema,
-    procedencia_proceso: z.enum(procedencias),
+    // Opcionales desde v1.1.0, siempre juntos (ver `procesoConProcedencia`).
+    proceso: procesoSchema.optional(),
+    procedencia_proceso: z.enum(procedencias).optional(),
     limites: z.array(texto(160)).min(2).max(4),
     nunca: z.array(texto(160)).min(2).max(5),
     hitos: z
@@ -265,7 +301,8 @@ export const fichaTecnicaSchema = z
       .min(3)
       .max(5),
   })
-  .strict();
+  .strict()
+  .superRefine(procesoConProcedencia("procedencia_proceso"));
 
 export type FichaTecnica = z.infer<typeof fichaTecnicaSchema>;
 export type Proceso = z.infer<typeof procesoSchema>;

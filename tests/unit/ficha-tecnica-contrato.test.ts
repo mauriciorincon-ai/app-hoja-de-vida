@@ -173,3 +173,55 @@ describe("lo publicado en docs/contrato-ficha-tecnica/ es este contrato", () => 
     });
   }
 });
+
+/**
+ * v1.1.0 (orden del usuario, 2026-09-06): el proceso BPMN es OPCIONAL. Si
+ * viene, trae su procedencia; si no viene, la procedencia sobra. Lo que sigue
+ * siendo obligatorio no cambia (una ficha v1.0.0 válida sigue válida).
+ */
+describe("el proceso es opcional (contrato v1.1.0)", () => {
+  function hablaSinProceso() {
+    const c = habla() as Record<string, unknown>;
+    delete c.proceso;
+    delete c.procedencia;
+    return c;
+  }
+
+  it("un complemento sin proceso valida y arma una ficha sin «Cómo funciona»", () => {
+    const c = complementoSchema.parse(hablaSinProceso());
+    const ft = armarFichaTecnica(getFicha("habla")!, c);
+    expect(ft.schema_version).toBe("1.1.0");
+    expect(ft.proceso).toBeUndefined();
+    expect(ft.procedencia_proceso).toBeUndefined();
+    expect(fichaTecnicaSchema.safeParse(ft).success).toBe(true);
+  });
+
+  it("procedencia sin proceso sobra — y se nombra", () => {
+    const r = complementoSchema.safeParse({
+      ...hablaSinProceso(),
+      procedencia: "cv-viva",
+    });
+    expect(r.success).toBe(false);
+    expect(JSON.stringify(r.error?.issues)).toContain(
+      "«procedencia» sin proceso: sobra",
+    );
+  });
+
+  it("un proceso sin procedencia es una cifra sin fuente — y se nombra", () => {
+    const ft = getFichaTecnica("habla")!;
+    const { procedencia_proceso: _sin, ...sinProcedencia } = ft;
+    void _sin;
+    const r = fichaTecnicaSchema.safeParse(sinProcedencia);
+    expect(r.success).toBe(false);
+    expect(JSON.stringify(r.error?.issues)).toContain(
+      "el proceso necesita su «procedencia_proceso»",
+    );
+  });
+
+  it("las seis apps siguen trayendo su proceso", () => {
+    for (const ft of getFichasTecnicas()) {
+      expect(ft.proceso, ft.pieza.slug).toBeDefined();
+      expect(ft.procedencia_proceso).toBe("cv-viva");
+    }
+  });
+});

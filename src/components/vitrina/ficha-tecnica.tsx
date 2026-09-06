@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import type { FichaTecnica as Datos } from "@/lib/vitrina/ficha-tecnica/schema";
+import { numerarSecciones } from "@/lib/vitrina/ficha-tecnica/secciones";
 import type { FuenteMetrica } from "@/lib/vitrina/schemas";
 import { IconoGrupo } from "./iconos-grupo";
 import { ProcesoBpmn } from "./proceso-bpmn";
@@ -10,14 +11,16 @@ import { ProcesoBpmn } from "./proceso-bpmn";
  * LA FICHA TÉCNICA — la capa infografía de una pieza de la vitrina (ADR-016).
  *
  * Es la capa de arriba: lo que se lee en dos minutos y decide si se baja al
- * detalle. Siete bloques, siempre en el mismo orden, para cualquier frente
- * (apps hoy; agentes, investigaciones y tableros cuando lleguen), porque
+ * detalle. Hasta siete bloques, siempre en el mismo orden, para cualquier
+ * frente (apps hoy; agentes, investigaciones y tableros cuando lleguen), porque
  * renderiza UN contrato (`fichaTecnicaSchema`) y no un tipo de pieza:
  *
  *   0 cabecera (estado · nombre · tagline · stack · TITULAR de valor)
  *   — la tira de cifras (3–5, cada una con su procedencia)
  *   1 para quién, y qué resuelve
- *   2 cómo funciona — el proceso en BPMN, generado desde datos
+ *   2 cómo funciona — el proceso en BPMN, generado desde datos (OPCIONAL
+ *     desde v1.1.0: si la pieza no trae proceso, la sección no existe y las
+ *     siguientes se renumeran — `numerarSecciones`)
  *   3 qué tiene — una tarjeta por bloque, sin listar el detalle
  *   4 límites, y lo que nunca hace
  *   5 dónde está — la versión anclada
@@ -101,6 +104,7 @@ export async function FichaTecnica({
   const tv = await getTranslations("vitrina");
   const { pieza, promesa, cifras, bloques, proceso, hitos } = datos;
   const totalFuncionalidades = bloques.reduce((s, b) => s + b.cuenta, 0);
+  const n = numerarSecciones(Boolean(proceso));
 
   return (
     <article data-ficha-tecnica={pieza.slug} data-frente={pieza.frente}>
@@ -206,8 +210,8 @@ export async function FichaTecnica({
 
       {/* ── 01 ───────────────────────────────────────────────────────────── */}
       <Seccion
-        n="01"
-        id={`ft-01-${pieza.slug}`}
+        n={n.s01!}
+        id={`ft-${n.s01}-${pieza.slug}`}
         titulo={t("s01")}
         sub={t("s01sub")}
       >
@@ -227,33 +231,35 @@ export async function FichaTecnica({
         </div>
       </Seccion>
 
-      {/* ── 02 · el proceso ──────────────────────────────────────────────── */}
-      <Seccion
-        n="02"
-        id={`ft-02-${pieza.slug}`}
-        titulo={t("s02")}
-        sub={t("s02sub")}
-      >
-        <div className={`${PANEL} p-4 sm:p-5`}>
-          <ProcesoBpmn proceso={proceso} id={pieza.slug} />
-          <p className="mt-3 text-[12px] leading-snug text-ink-2 md:hidden">
-            {t("desliza")}
-          </p>
-          <p
-            data-procedencia-proceso={datos.procedencia_proceso}
-            className="mt-3 border-t border-paper-2 pt-3 font-mono text-[10.5px] tracking-[0.04em] text-ink-2 uppercase"
-          >
-            {datos.procedencia_proceso === "app"
-              ? t("procesoApp")
-              : t("procesoCvViva")}
-          </p>
-        </div>
-      </Seccion>
+      {/* ── 02 · el proceso (solo si la pieza lo trae) ───────────────────── */}
+      {proceso && (
+        <Seccion
+          n={n.s02!}
+          id={`ft-${n.s02}-${pieza.slug}`}
+          titulo={t("s02")}
+          sub={t("s02sub")}
+        >
+          <div className={`${PANEL} p-4 sm:p-5`}>
+            <ProcesoBpmn proceso={proceso} id={pieza.slug} />
+            <p className="mt-3 text-[12px] leading-snug text-ink-2 md:hidden">
+              {t("desliza")}
+            </p>
+            <p
+              data-procedencia-proceso={datos.procedencia_proceso}
+              className="mt-3 border-t border-paper-2 pt-3 font-mono text-[10.5px] tracking-[0.04em] text-ink-2 uppercase"
+            >
+              {datos.procedencia_proceso === "app"
+                ? t("procesoApp")
+                : t("procesoCvViva")}
+            </p>
+          </div>
+        </Seccion>
+      )}
 
       {/* ── 03 ───────────────────────────────────────────────────────────── */}
       <Seccion
-        n="03"
-        id={`ft-03-${pieza.slug}`}
+        n={n.s03!}
+        id={`ft-${n.s03}-${pieza.slug}`}
         titulo={t("s03")}
         sub={t("s03sub", { grupos: bloques.length, n: totalFuncionalidades })}
       >
@@ -283,8 +289,8 @@ export async function FichaTecnica({
 
       {/* ── 04 ───────────────────────────────────────────────────────────── */}
       <Seccion
-        n="04"
-        id={`ft-04-${pieza.slug}`}
+        n={n.s04!}
+        id={`ft-${n.s04}-${pieza.slug}`}
         titulo={t("s04")}
         sub={t("s04sub")}
       >
@@ -329,8 +335,8 @@ export async function FichaTecnica({
 
       {/* ── 05 ───────────────────────────────────────────────────────────── */}
       <Seccion
-        n="05"
-        id={`ft-05-${pieza.slug}`}
+        n={n.s05!}
+        id={`ft-${n.s05}-${pieza.slug}`}
         titulo={t("s05")}
         sub={t("s05sub")}
       >

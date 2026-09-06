@@ -1126,3 +1126,64 @@ posición relativa al origen, sin mirar qué más vive ahí**. La corrección in
 mover dos etiquetas: fue escribir la invariante («nada se pisa, nada se esconde») sobre los
 seis procesos reales y dejar que ella dijera dónde caben. Cazó una cuarta falla que tres pares
 de ojos no vieron.
+
+## Post-cierre VI — el proceso BPMN deja de ser obligatorio (2026-09-06, orden del usuario)
+
+### Desviación del plan
+
+Sin orden de construcción: orden directa del usuario («te ordeno que para las fichas técnicas
+quites el proceso en BPMN como campo obligatorio»). Plan mode con plan corto aprobado; fuera de
+sprint.
+
+### Qué cambia
+
+- **Contrato v1.1.0** (`src/lib/vitrina/ficha-tecnica/schema.ts`): `proceso` y su procedencia
+  son opcionales en `fichaTecnicaSchema` (`procedencia_proceso`) y en `complementoSchema`
+  (`procedencia`), **siempre juntos**: un `superRefine` compartido (`procesoConProcedencia`)
+  rechaza un proceso sin procedencia («el proceso necesita su «procedencia_proceso» (app |
+  cv-viva)») y una procedencia sin proceso (««procedencia» sin proceso: sobra»). Compatible
+  hacia atrás: toda ficha v1.0.0 válida sigue válida.
+- **Armado** (`armar.ts`): `schema_version: "1.1.0"`; sin proceso en el complemento, la ficha
+  sale sin `proceso` ni `procedencia_proceso`.
+- **Render** (`components/vitrina/ficha-tecnica.tsx`): «Cómo funciona» se pinta solo con
+  proceso, y las secciones **se renumeran** con `numerarSecciones()`
+  (`lib/vitrina/ficha-tecnica/secciones.ts`, puro): 01 · 02 · 03 · 04, nunca 01 · 03 · 04 · 05.
+  Las claves de texto siguen siendo semánticas (`s02` = el proceso).
+- **Contrato publicado** regenerado con `pnpm contrato:ficha`: `ficha-tecnica.schema.json` ya
+  no lista `proceso` ni `procedencia_proceso` en `required`; `ejemplo.habla.json` en 1.1.0.
+- **Docs:** `CLAVE-VISUAL.md` (v1.1.0; §3 «opcional»; regla «si y solo si»), `README.md`,
+  `design-system.md`, `MANUAL-DE-USO.md`.
+- **Las seis apps no cambian:** sus complementos siguen trayendo proceso; un test lo exige.
+
+### Regla 14 — demostrado en ROJO
+
+`tests/unit/ficha-tecnica-contrato.test.ts` gana el bloque «el proceso es opcional (contrato
+v1.1.0)» (4 tests) y nace `ficha-tecnica-secciones.test.ts` (2). Contra el esquema de HEAD
+(`git stash` de `schema.ts` + `armar.ts`):
+
+```
+× un complemento sin proceso valida y arma una ficha sin «Cómo funciona»
+ZodError: "expected": "object", "message": "Invalid input: expected object, received undefined"
+× procedencia sin proceso sobra — y se nombra
+AssertionError: expected '[{"expected":"object",…' to contain '«procedencia» sin proceso: sobra'
+× un proceso sin procedencia es una cifra sin fuente — y se nombra
+AssertionError: expected '[{"code":"invalid_value",…' to contain 'el proceso necesita su «procedencia_p…'
+Tests  3 failed | 14 passed (17)
+```
+
+El esquema viejo rechazaba la ficha sin proceso con un error genérico de Zod; el nuevo la acepta
+y, cuando proceso y procedencia no van juntos, **nombra el campo**. Con el esquema nuevo: 17/17
+y 2/2; el test del contrato publicado exige que el JSON Schema y el ejemplo coincidan con el Zod.
+
+**Sustitución declarada:** el plan prometía un test de componente (Testing Library) para la
+renumeración; se cubrió con el helper puro `numerarSecciones` y su test (regla 3: motor separado
+de UI), porque el componente es un server component async con `next-intl` y montarlo en jsdom
+costaba más que lo que probaba.
+
+### Para la planeadora
+
+- El contrato entregado a las otras casas sube a **v1.1.0**: si ya copiaron la carpeta
+  `docs/contrato-ficha-tecnica/`, hay que reemplazarla. Nada de lo que hubieran escrito deja de
+  valer.
+- La guía de prueba no gana pruebas: no existe pieza sin proceso en producción; la primera que
+  llegue (investigaciones) estrenará la prueba visual de la renumeración en su sprint.
