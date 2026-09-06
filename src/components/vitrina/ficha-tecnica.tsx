@@ -15,7 +15,8 @@ import { ProcesoBpmn } from "./proceso-bpmn";
  * frente (apps hoy; agentes, investigaciones y tableros cuando lleguen), porque
  * renderiza UN contrato (`fichaTecnicaSchema`) y no un tipo de pieza:
  *
- *   0 cabecera (estado · nombre · tagline · stack · TITULAR de valor)
+ *   0 cabecera (estado —con su fecha de sello si la trae— · nombre · tagline
+ *     · stack · TITULAR de valor)
  *   — la tira de cifras (3–5, cada una con su procedencia)
  *   1 para quién, y qué resuelve
  *   2 cómo funciona — el proceso en BPMN, generado desde datos (OPCIONAL
@@ -127,6 +128,17 @@ export async function FichaTecnica({
               {tv(`estados.${pieza.estado}`)}
             </span>
           </li>
+          {/* La FECHA del sello sale del contrato (`pieza.sellado_en`), no de un
+              hito de texto libre: un dato que la casa productora declara y esta
+              ficha enseña — si no lo enseñara, nadie corregiría el día que
+              mintiera. Solo tiene sentido en una pieza sellada. */}
+          {pieza.estado === "sellado" && pieza.sellado_en && (
+            <li>
+              <span data-sellado-en={pieza.sellado_en} className={CHIP}>
+                {t("selladaEl", { fecha: pieza.sellado_en })}
+              </span>
+            </li>
+          )}
           <li>
             <span className={CHIP}>{pieza.ciclo}</span>
           </li>

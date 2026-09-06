@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CV Viva
 
-## Getting Started
+Una hoja de vida que se construye a sí misma, en público.
 
-First, run the development server:
+No es un PDF ni una plantilla: es una aplicación web bilingüe (ES/EN) donde **el contenido es
+dato versionado**. Una sola fuente —los YAML de `data/`— alimenta la web, el chat, el PDF en
+formato ATS y la **vitrina**, el espacio donde se muestran las piezas construidas por el
+pipeline: apps, agentes especializados, investigaciones y tableros de datos.
+
+Principio rector: **la producción se MUESTRA, no se entrega.** Este repositorio no publica URLs
+de despliegue en ninguna parte; el único llamado a la acción público es la lista de espera, y no
+promete fecha.
+
+## Cómo está hecha
+
+| Pieza      | Qué se usó                                                                                               |
+| ---------- | -------------------------------------------------------------------------------------------------------- |
+| Framework  | Next.js 16 (App Router), **SSG-first**: toda ruta entrega su contenido íntegro en el HTML, sin JS        |
+| Lenguaje   | TypeScript en modo estricto                                                                              |
+| Estilos    | Tailwind v4 + shadcn/ui, sobre el `design-system.md` de la casa                                          |
+| Idiomas    | next-intl, rutas `/es` y `/en` con hreflang                                                              |
+| Contenido  | YAML validado con Zod **en build**: si un dato está malformado, el build falla nombrando archivo y campo |
+| Datos      | Supabase para la votación anónima del roadmap (sin usuarios, sin datos personales)                       |
+| IA         | Chat sobre la hoja de vida, multi-proveedor y con respaldo determinista                                  |
+| Pruebas    | Vitest · Playwright · Testing Library · axe-core                                                         |
+| Despliegue | Vercel, con CI que corre calidad, integración, e2e y Lighthouse contra un presupuesto                    |
+
+## Correrla en local
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
+pnpm dev          # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Otros comandos útiles:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm test         # unitarias e integración (Vitest) con cobertura
+pnpm test:e2e     # end-to-end y accesibilidad (Playwright + axe)
+pnpm typecheck    # TypeScript sin emitir
+pnpm lint         # ESLint
+pnpm build        # build de producción (valida TODO el contenido)
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Las claves viven solo en `.env.local` (ignorado por git) y en las variables de entorno del
+despliegue. `docs/APROVISIONAMIENTO.md` dice cuáles hacen falta y para qué.
 
-## Learn More
+## Dónde está cada cosa
 
-To learn more about Next.js, take a look at the following resources:
+| Ruta                       | Qué hay                                                                                         |
+| -------------------------- | ----------------------------------------------------------------------------------------------- |
+| `data/`                    | El contenido: hoja de vida (ES/EN), apps del pipeline, frentes de la vitrina, historia del chat |
+| `content/`                 | Lo que llega de otras casas del pipeline — **no se edita aquí**: se corrige en origen           |
+| `src/`                     | `app/[locale]/` rutas · `components/` UI · `lib/` motores y carga de contenido                  |
+| `docs/MANUAL-DE-USO.md`    | Cómo se usa y **cómo alimentarla**, en español llano                                            |
+| `docs/GUIA-DE-PRUEBA.html` | Guía de prueba acumulativa, autocontenida: se abre sin internet                                 |
+| `design-system.md`         | La fuente de verdad visual                                                                      |
+| `decisions/`               | Los ADR: cada decisión de arquitectura, con su porqué                                           |
+| `sprints/`                 | Bitácora y cierre de cada sprint                                                                |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Alimentarla
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Editar el YAML correspondiente en `data/` y hacer push. No hay panel de administración ni base
+de datos de contenido a propósito: el historial de git **es** el historial editorial, y el build
+es el que se niega a publicar algo malformado. El paso a paso, con ejemplos, está en
+`docs/MANUAL-DE-USO.md`.

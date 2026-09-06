@@ -220,6 +220,7 @@
   "fichaTecnica": {
     "eyebrow": "Ficha técnica",
     "ancladaEl": "Anclada al export del {fecha}",
+    "selladaEl": "Sellada el {fecha}",
     "sprints": "{n, plural, one {# sprint} other {# sprints}}",
     "titularRotulo": "Qué no hace nadie más",
     "cifras": "Las cifras",

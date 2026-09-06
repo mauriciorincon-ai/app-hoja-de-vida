@@ -270,3 +270,111 @@ B1–B2 (fase 5). **M5 y B3 se resuelven declarándolos**, no cambiando archivos
 
 > **Aprueba la Fase 1 y fija el modelo de la Fase 2 con `/model`** — un modelo menor basta si
 > sigue estos ajustes al pie. A4 necesita además tu decisión entre la opción 1 y la 2.
+
+---
+
+## AUDITORÍA RETROACTIVA S5 + S6 — FASE 2 (pagos)
+
+**Fase 1 APROBADA por el usuario** (2026-09-06). **A4 decidido: opción 1** — darle lector al
+campo. Se pagan C1 · A1 · A2 · A3 · A4; M1–M4 y B1–B2 quedan como deuda con pago asignado
+DENTRO de este mismo sprint; M5 y B3 se resuelven declarándolos.
+
+### C1 · El sprint 006 queda cerrado
+
+`sprints/SPRINT_006-summary.md` escrito con la plantilla del CLAUDE.md (12 secciones), armado
+**solo** desde los bloques «Trabajo POSTERIOR AL CIERRE» y «Post-cierre I–VI» del log del S5
+(l. 627–1190), los PR #11–#19 y esta auditoría. Declara en su primer párrafo que es retroactivo
+y por qué. Registra la auditoría con sus ocho hallazgos y sus pagos, las siete sugerencias al
+método y la deuda aceptada con su sprint de pago.
+
+> **Verificación:** `status: closed` en el frontmatter · 12 secciones `##` · ningún dato sin su
+> PR, ADR o línea de bitácora de respaldo.
+
+### A1 · El mapa del CLAUDE.md vuelve a describir este repo
+
+Añadidos al árbol de § Estructura: `src/app/[locale]/vitrina/` con sus cuatro rutas,
+`src/lib/vitrina/` con sus siete piezas, `data/vitrina.yaml`, `data/fichas/`, `content/<frente>/`,
+`design-sync/` y `docs/contrato-ficha-tecnica/`. Las dos entradas que aún no existen
+(`content/<frente>/` y `lib/vitrina/piezas.ts`) van marcadas «S7» — nacen en este sprint.
+
+> **Verificación:** todo path nombrado que ya debía existir existe (comprobado uno a uno, sin
+> salida); `git grep -c "vitrina" CLAUDE.md` = 9.
+
+### A2 · Los dos deltas que faltaban
+
+- **Regla 14 · kit v1.25.0:** párrafo nuevo — _el rojo VIAJA EN EL MISMO COMMIT que introduce el
+  gate_. Un gate agregado hoy y demostrado mañana pasa una revisión entera, a veces un merge, sin
+  que nadie haya visto que sabe fallar; y si la demo se aplaza, se olvida.
+- **§ Patrones de dominio:** dos bullets nuevos — **canal de contenido de la vitrina** (quién
+  produce qué ficha, cómo llega, y la regla dura «las fichas de otras casas NO se editan aquí, ni
+  para que quepan») y **un solo contrato, un solo renderizador**.
+
+> **Verificación:** `grep -c "MISMO COMMIT" CLAUDE.md` = 1 · `grep -c "CANAL DE CONTENIDO"` = 1.
+
+### A3 · El README deja de hablar de otro proyecto
+
+`README.md` reescrito entero (66 líneas, español): qué es CV Viva, cómo está hecha, cómo correrla
+en local, dónde está cada cosa y cómo alimentarla. **Regla 16 aplicada:** ni una URL de
+producción o preview; el único `http://` es `localhost:3000`, que no es un destino publicable.
+
+> **Verificación:** `grep -c "create-next-app" README.md` = 0 · `grep -c "app/page.tsx"` = 0 ·
+> barrido de dominios de despliegue sobre el archivo, vacío.
+
+### A4 · `pieza.sellado_en` gana su lector (opción 1, decidida por el usuario)
+
+**El dato que lo decidió** — medido sobre las 20 fichas que entran en este sprint: **5 declaran
+fecha de sello y las 5 repiten esa misma fecha en un hito de texto libre**; **15 declaran `null`**
+obligatoriamente; **0 contradicciones hoy**, pero nada las impedía: si el campo y el hito
+discreparan, la vitrina enseñaría el hito y el desacuerdo no lo vería nadie.
+
+**Qué se hizo:** un chip nuevo en la cabecera de la ficha —`data-sellado-en`, texto
+«Sellada el {fecha}»— que se pinta **solo** si la pieza está sellada y trae fecha. Claves i18n
+`fichaTecnica.selladaEl` en ES y EN. Con esto la fecha de sello deja de depender de que la casa
+productora se acuerde de escribir un hito con la etiqueta correcta: pasa a ser un dato **del
+contrato**, con su sitio fijo.
+
+**Por qué NO se borró el campo** (sería lo más limpio): `fichaTecnicaSchema` es `.strict()`, así
+que quitarlo dejaría inválidas las 20 fichas —las 5 con fecha y las 15 con `null`— y arreglarlas
+exigiría editarlas. No se editan, ni para que quepan.
+
+#### Regla 14 + regla 15 (kit v1.25.0) — el gate nuevo, demostrado en ROJO en este mismo commit
+
+El gate es la aserción nueva de `tests/e2e/vitrina.spec.ts` («cada app tiene su ficha técnica…»):
+si la pieza está sellada, el chip existe con la fecha del export; si no lo está, el chip **no**
+existe. **Cambio deliberado:** retirar el bloque del chip de `ficha-tecnica.tsx`. Rojo a la
+primera, nombrando a la app y a la fecha esperada:
+
+```
+✘ [chromium] › vitrina.spec.ts:262 › cada app tiene su ficha técnica…
+  Error: expect(locator).toHaveAttribute(expected) failed
+  Locator: locator('[data-ficha-tecnica="habla"]').locator('[data-sellado-en]')
+  Expected: "2026-08-08"
+  Error: element(s) not found
+```
+
+Restaurado el bloque, la prueba vuelve a verde. El rojo y el arreglo viajan en el mismo commit,
+que es exactamente lo que el delta v1.25.0 vino a exigir.
+
+### Lo que NO se pagó aquí, y por qué
+
+| Hallazgo                                                                                      | Por qué se aplaza                                                                                                                                                                                                 | Pago                            |
+| --------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------- |
+| M1 · slugs duplicados no vigilados · M2 · archivo ≠ slug                                      | Tocar `lib/vitrina/loader.ts` en una fase sin un solo test de producto es el cambio que se cuela sin red; además el test de contenido de la fase 1 ya exige slugs únicos globales y la invariante se extiende ahí | **Fase 1**                      |
+| M3 · `schema_version` de la ficha sin puerta de mayor · M4 · ENOENT crudo sin carpeta         | Su sitio natural es el loader de piezas, que nace en la fase 2                                                                                                                                                    | **Fase 2**                      |
+| B1 · clave i18n `detalleEyebrow` huérfana · B2 · `/deploy-check` local atrasado frente al kit | Limpieza de cierre; B2 debe estar al día **antes** de correr el check                                                                                                                                             | **Fase 5**                      |
+| M5 · la bitácora del S6 vive dentro del log del S5                                            | Partir el archivo rompería la traza histórica, que vale más que la anomalía                                                                                                                                       | Declarado en el summary del S6  |
+| B3 · el NS de la guía sigue en `s005d`                                                        | Renumerar retroactivamente borraría casillas ya marcadas por el usuario a cambio de nada                                                                                                                          | Declarado; el S7 salta a `s007` |
+
+### Estado tras los pagos
+
+`pnpm typecheck` limpio · `pnpm lint` limpio · **246/246 unitarias** · e2e de la ficha técnica en
+verde con la aserción nueva · barrido de cero enlaces vacío.
+
+### Regla 15 (bundle del design system) — verificada, sin delta
+
+`design-system.md` sí describe la cabecera de la ficha, así que se actualizó: el chip de sello
+queda documentado al lado del de estado. El bundle `design-sync/…/ficha-tecnica-y-bpmn.html`
+documenta **tres piezas** de la ficha —titular de valor, cifra con procedencia y el proceso
+BPMN— y **no** la tira de chips de cabecera; como espejo 1:1 de lo que documenta, no le
+corresponde delta por este cambio. Se declara para que la ausencia sea una decisión y no un
+olvido.

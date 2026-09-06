@@ -46,17 +46,30 @@ Contrato de alcance: `portafolio/hoja-de-vida/VISION.md` (planeadora, aprobada 2
 ```
 src/
 ├─ app/[locale]/   (App Router, rutas /es /en)
-├─ components/     (UI sin lógica de negocio; home/ · motion/ · forms/)
+│  └─ vitrina/     (S5–S6 — portal · apps/ (escaparate · <slug> ficha técnica · <slug>/detalle)
+│                   · [categoria] (un frente: escaparate si abierta, «en preparación» si no)
+│                   · [categoria]/[pieza] (S7 — la ficha de una pieza no-app))
+├─ components/     (UI sin lógica de negocio; home/ · motion/ · forms/ · vitrina/)
 ├─ engine/         (motores puros, sin side-effects, cobertura >80%)
 ├─ lib/            (content.ts · i18n.ts · resend.ts · analytics.ts)
 │  ├─ ia/          (S3 — patrón IA-embebida: schemas · provider · retrieval · guardrails)
-│  └─ votes/       (S4 — votación: schemas.ts · client.ts · roadmap.ts)
+│  ├─ votes/       (S4 — votación: schemas.ts · client.ts · roadmap.ts)
+│  └─ vitrina/     (S5–S6 — loader.ts de exports · schemas.ts · categorias.ts (frentes)
+│                   · bpmn.ts (motor puro del proceso) · ficha-tecnica/ (schema · armar
+│                   · secciones · loader) · piezas.ts (S7 — loader genérico por frente))
 └─ types/
 data/              (cv.es.yaml · cv.en.yaml · apps.yaml · historia/ — LA fuente de contenido)
+data/vitrina.yaml  (S6 — los cuatro FRENTES de la vitrina: id, estado, nombre, intro, detalle)
+data/fichas/       (S6 — complementos de CURACIÓN de CV Viva por app, `procedencia: cv-viva`:
+                    titular · cifras destacadas · límites · nunca · proceso)
 content/vitrina/   (S5 — los brochure-export.json de las apps hermanas; NO se editan a mano)
+content/<frente>/  (S7 — fichas técnicas COMPLETAS producidas por otras casas; NO se editan aquí)
 tests/{unit,integration,e2e}/
 design-system.md          (fuente de verdad visual — se crea en el sprint 1, skill diseno-ui)
+design-sync/              (bundle publicable del design system — espejo 1:1, regla 15)
 docs/MANUAL-DE-USO.md     (manual de uso general — OBLIGATORIO, vivo desde el sprint 1)
+docs/contrato-ficha-tecnica/  (S6 — el contrato publicado DESDE el Zod: schema · ejemplo ·
+                           CLAVE-VISUAL.md · referencia; lo generan los tests, no la mano)
 sprints/SPRINT_NNN-implementation-log.md · SPRINT_NNN-summary.md
 decisions/NNN-titulo.md   (ADRs de implementación)
 ```
@@ -121,6 +134,11 @@ decisions/NNN-titulo.md   (ADRs de implementación)
     requeridos **sin alarma**. Antes de cerrar, **cada check requerido debe tener conclusión propia
     `success`** (`gh pr checks`), y si uno corrió por primera vez en este PR se dice en el summary
     — sin histórico no puede afirmarse ni regresión ni no-regresión.
+    **Y el rojo VIAJA EN EL MISMO COMMIT que introduce el gate (kit v1.25.0).** Un gate que se
+    agrega hoy y se demuestra mañana pasa una revisión entera —y a veces un merge— sin que nadie
+    haya visto que sabe fallar; y si la demo se aplaza, se olvida. El commit que trae la aserción
+    trae también su demo registrada en la bitácora: qué se rompió a propósito, qué salió rojo y a
+    quién nombró.
 15. **El bundle publicable del design system es un ARTEFACTO DEL REPO (kit v1.17.0).**
     `design-sync/` se versiona aquí como **espejo 1:1** de lo publicado en Claude Design, con
     jerarquía fija: `design-system.md` (fuente de verdad) → `design-sync/` (bundle) → el proyecto
@@ -266,6 +284,19 @@ pr: <link>
   (`Person`, `WebSite`) válido; sitemap + robots generados.
 - **Showcase data-driven:** agregar/cambiar una app del pipeline en el brochure = editar
   `data/apps.yaml` (estados: en construcción / en exploración), cero cambios de código.
+- **CANAL DE CONTENIDO DE LA VITRINA (decisión del usuario, 2026-09-06).** Esta app es el
+  DESTINO, no el autor, del contenido de las piezas. Quién produce qué: las fichas de las **apps**
+  las administra la planeadora (`vitrina/apps/`: export del repo de cada app + complemento curado
+  → ficha completa); las de **agentes · investigaciones · tableros** las produce quien construye
+  cada pieza, con `docs/contrato-ficha-tecnica/`. Todas llegan **por copia** a `content/<frente>/`
+  y se publican con un **PR de contenido sin sprint** (la CI valida esquema, cero enlaces, axe y
+  e2e). **Las fichas de otras casas NO se editan aquí — ni para que quepan:** si una no valida, se
+  reporta archivo + campo + regla y se corrige EN ORIGEN; si varias no caben por una razón
+  legítima del frente, se propone contrato **v1.2.0 aditivo** en plan mode. La misma regla que ya
+  rige para `content/vitrina/`, extendida a todo lo que llega de afuera.
+- **Un solo contrato, un solo renderizador.** `FichaTecnica` renderiza `fichaTecnicaSchema` y no
+  un tipo de pieza: nada específico por frente vive en el componente. Lo específico por frente
+  vive en datos (`data/vitrina.yaml`) o en el escaparate del frente.
 
 ## Idioma
 

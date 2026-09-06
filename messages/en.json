@@ -220,6 +220,7 @@
   "fichaTecnica": {
     "eyebrow": "Technical sheet",
     "ancladaEl": "Pinned to the export of {fecha}",
+    "selladaEl": "Sealed on {fecha}",
     "sprints": "{n, plural, one {# sprint} other {# sprints}}",
     "titularRotulo": "What nobody else does",
     "cifras": "The numbers",

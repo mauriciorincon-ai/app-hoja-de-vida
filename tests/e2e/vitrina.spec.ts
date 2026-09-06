@@ -22,7 +22,12 @@ import { parse } from "yaml";
  */
 
 type Export = {
-  app: { slug: string; nombre: string };
+  app: {
+    slug: string;
+    nombre: string;
+    estado: "inicial" | "sellado";
+    sellado_en: string | null;
+  };
   promesa: { tagline: string };
   metricas: { clave: string; fuente: string }[];
   funcionalidades: {
@@ -265,6 +270,21 @@ test.describe("Vitrina — la ficha técnica (ADR-016)", () => {
       await expect(ft.locator("[data-titular]")).toContainText(
         comp.titular.slice(0, 40),
       );
+
+      // La FECHA de sello viene del contrato (`pieza.sellado_en`), no de un hito
+      // de texto libre: si la pieza está sellada se enseña, y si no lo está el
+      // chip no existe — un campo del contrato que nadie pinta es un campo que
+      // nadie corrige cuando miente.
+      const sello = ft.locator("[data-sellado-en]");
+      if (exp.app.estado === "sellado") {
+        await expect(sello).toHaveAttribute(
+          "data-sellado-en",
+          exp.app.sellado_en!,
+        );
+        await expect(sello).toContainText(exp.app.sellado_en!);
+      } else {
+        await expect(sello).toHaveCount(0);
+      }
 
       const cifras = ft.locator("[data-cifra]");
       await expect(cifras).toHaveCount(comp.cifras_destacadas.length);
