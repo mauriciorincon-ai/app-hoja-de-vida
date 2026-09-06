@@ -84,18 +84,21 @@ e inglés. Quien la visita puede pedir acceso a tus apps y la solicitud te llega
 - **Limitación conocida:** el PDF es deliberadamente sobrio (texto estructurado, sin
   diseño gráfico) — eso es una feature para los ATS, no un pendiente.
 
-### Agregar una app al showcase · desde Sprint 001
+### Las apps del pipeline (`data/apps.yaml`) · desde Sprint 001 · reorganizado 2026-09-05
 
-- **Qué hace:** la sección "Apps del pipeline" es un brochure que sale de `data/apps.yaml`.
-- **Cómo se usa:** agrega un bloque a la lista con `id` (minúsculas-con-guiones), `estado`,
-  `nombre` y `descripcion` en `es` y `en`, y `solicitable` (si aparece el botón "Quiero
-  probarla"). Opcional: `enlaces` (etiqueta + url) para mostrar la evidencia pública de la
-  card, como el repo en GitHub. Push y listo.
-- **Estados honestos (la promesa del showcase):** `en-produccion` = ya funciona y es
-  verificable · `en-construccion` = se está construyendo ahora mismo, con repo público ·
-  `en-exploracion` = objetivo declarado, sin fechas prometidas.
-- **Ritual del pipeline:** al cerrar el sprint de cualquier app, actualiza su card aquí
-  (cuando un demo pase a producción, sube su estado y considera darle case study en Proyectos).
+- **Qué cambió:** la sección **«Apps» de la portada se retiró**. No enseñaba apps que se pudieran
+  visitar: enseñaba *esta misma página* (CV Viva y su chat) y dos exploraciones sin producto —
+  mientras «Vitrina», a un centímetro en el mismo menú, sí llevaba a seis apps construidas. Dos
+  puertas prometiendo lo mismo. **Ahora lo construido tiene una sola puerta: la Vitrina.**
+- **Nada del contenido se perdió.** `data/apps.yaml` sigue siendo la fuente y alimenta tres cosas:
+  - **Las brochures** `/es/apps/hoja-de-vida` y `/es/apps/chat-hoja-de-vida` — se llega a ellas
+    desde el bloque **«De esta casa»**, al cierre de `/es/vitrina`.
+  - **El roadmap votable** de la portada (bloque `roadmap:` de cada app).
+  - **El formulario de contacto**: las apps con `solicitable: true` son las opciones que puede
+    elegir quien pide acceso. Ahí es donde viven hoy las dos exploraciones.
+- **Cómo dar de alta una app:** editar `data/apps.yaml` + push, igual que siempre. Si le pones
+  bloque `brochure:`, aparece su página y su enlace en «De esta casa»; si le pones `roadmap:`,
+  entra a la votación; si le pones `solicitable: true`, aparece en el formulario.
 
 ### Roadmap con votación anónima · desde Sprint 004
 
@@ -172,6 +175,17 @@ e inglés. Quien la visita puede pedir acceso a tus apps y la solicitud te llega
   no lo haya y un único botón de **lista de espera**, sin promesa de fecha.
 - **Lo que se muestra es la versión anclada** del export (con su fecha, a la vista al pie de cada
   ficha), no el estado en tiempo real de la app.
+
+### El menú del encabezado · desde Sprint 001 · reorganizado 2026-09-05
+
+- **Qué hace:** el menú tiene **cuatro destinos**: **Hoja de vida** (que despliega Trayectoria,
+  Logros, Proyectos, Skills y Certificaciones), **Vitrina**, **Roadmap** y **Contacto**; más el
+  botón de CV en PDF y el cambio de idioma.
+- **Por qué se agrupó:** había llegado a nueve destinos y dejaba de caber en pantallas medianas.
+  Cinco de esos nueve son **una sola cosa** —tu hoja de vida— y competían de tú a tú con la
+  vitrina y el contacto. No se perdió ningún acceso: las cinco viven dentro del desplegable.
+- **Cómo se usa:** nada que configurar. Se abre con clic o con Enter, se cierra con Escape (y el
+  foco vuelve al botón), pulsando fuera, o al elegir una sección.
 
 ### Menú en móvil · desde Sprint 004
 

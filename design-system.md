@@ -118,6 +118,24 @@ animaciones infinitas (sweep/glitch/marquee), scroll-snap de deck, CDNs en `<hea
 - **Glifo ◆**: marca de evidencia/lista editorial (heredado del prototipo).
 - **Iconografía**: Lucide, stroke 1.5px, 16/20px, siempre con `aria-label` si es interactivo.
 
+### Menú desplegable del encabezado · post-S5
+
+- **Cuándo se usa:** cuando varias secciones del nav **son la misma cosa**. Hoy, una sola vez: las
+  cinco secciones del CV bajo «Hoja de vida». No es un patrón para repartir: un header con dos
+  desplegables ya es un menú de aplicación, y esto es una pieza editorial.
+- **Forma:** panel `paper-0`, borde `paper-2`, `r-md`, `sh-2`, anclado bajo su botón. Cada opción
+  con área táctil ≥44px y `hover` en `paper-1`.
+- **Movimiento propio y corto** (`.menu-desplegable`, 120 ms — el «fast» del sistema). **No** se
+  reutiliza `anim-fade-in-up`: dura 0,7 s porque está pensada para bloques de lectura que entran
+  al hacer scroll, y en un menú deja el panel medio traslúcido durante media pantalla. Un menú se
+  siente instantáneo o parece roto.
+- **Contrato de accesibilidad, el mismo del disclosure móvil:** `aria-expanded` + `aria-controls`
+  en el botón · Escape cierra **y devuelve el foco al botón** · pulsar fuera cierra · elegir una
+  opción cierra. Los tres cierres son obligatorios: un panel flotante que solo cierra con Escape
+  deja una capa encima de lo que el visitante quiso mirar.
+- **Y entra a los scans:** lo que nace cerrado es invisible para axe, así que el scan lo abre
+  antes de analizar. Sin eso el gate pasa en verde sin haber mirado nada.
+
 ### Componentes de la vitrina · S5
 
 - **Muestra de app** (escaparate `/vitrina`): card paper-0, borde paper-2, `r-lg`, `sh-1`. Lleva

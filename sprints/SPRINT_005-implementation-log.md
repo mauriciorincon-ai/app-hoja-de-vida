@@ -622,3 +622,135 @@ cero pero no dice **cómo elegir el ancla ni cuándo medir**, y los dos descuido
 falsos sobre código correcto — que es la forma más cara de fallo, porque manda a arreglar lo que no
 está roto. Vale la pena que `apertura-por-lectura.md` incorpore las dos condiciones: ancla con
 `top >= 0` (nunca un contenedor) y medición con las transiciones asentadas.
+
+---
+
+## Trabajo POSTERIOR AL CIERRE — el menú y la absorción de «Apps» (2026-09-05)
+
+### Desviación del plan
+
+**Esto no viene de una orden de construcción.** No hay `SPRINT_006-orden.md` en la planeadora ni
+sprint abierto: es trabajo dirigido por el usuario sobre entregables del S5 ya mergeados. Va en
+rama propia (`mejora/menu-y-vitrina`, sin prefijo `sprint-NNN/` porque no lo es) y queda anotado
+aquí para que la planeadora lo vea en la retrospectiva. Si el pipeline quiere que cambios así
+pasen por orden, este es el caso de prueba.
+
+### El pedido y el hallazgo
+
+El usuario reportó que el menú «está colapsando demasiadas secciones» y aportó la pista: *lo que
+tienes como apps lo absorbió lo que ahora llamamos Vitrina*.
+
+El menú tenía **nueve destinos** de primer nivel. Pero medir el contenido dio un hallazgo peor que
+el apiñamiento: **dos etiquetas prometían lo mismo**. Dentro de «Apps» (4 entradas de
+`apps.yaml`) había *CV Viva* y *su chat* —o sea, **esta misma página**— más dos exploraciones sin
+producto. Cero apps visitables. A un centímetro, «Vitrina» sí llevaba a seis apps construidas.
+
+El **ADR-013 acertó** en que los datos no se solapan: son modelos distintos con orígenes distintos.
+Lo que nadie revisó fue **la etiqueta**. Para el visitante «Apps» y «Vitrina» son la misma promesa,
+y la que suena más real se queda con la atención. *Un ADR puede tener razón sobre los datos y
+seguir dejando la interfaz mintiendo.*
+
+### Qué se hizo
+
+1. **Menú de 9 destinos a 4.** Las cinco secciones del CV (trayectoria, logros, proyectos, skills,
+   certificaciones) **son una sola cosa** y ahora viven en un desplegable «Hoja de vida». Quedan
+   `Hoja de vida ▾ · Vitrina · Roadmap · Contacto`. Ningún acceso perdido.
+2. **La sección «Apps» se retiró** de la portada, con sus dos componentes.
+3. **Lo construido tiene UNA puerta.** Las dos brochures propias se alcanzan desde el bloque nuevo
+   **«De esta casa»** al cierre de `/vitrina` — decisión del usuario entre tres opciones. Se
+   conserva el trabajo del S4 y **no se mezclan las fuentes**: el bloque solo enlaza, así que el
+   ADR-013 sigue en pie sin necesidad de reabrirlo.
+
+### Lo que NO se perdió (medido antes de borrar)
+
+`apps.yaml` alimenta cuatro cosas, no una. Solo desapareció la sección:
+
+| Consumidor | Estado |
+| --- | --- |
+| Brochures `/apps/<id>` | vivas — puerta nueva en «De esta casa» |
+| Roadmap votable | intacto: lee `roadmap:` directamente |
+| Formulario de contacto | intacto: las dos **exploraciones** son sus opciones `solicitable` — siguen convirtiendo, que es lo único que hacían de verdad |
+| Índice del chat | intacto: `build-chat-index.mjs` lee el YAML |
+
+### Trampas cazadas
+
+- **El panel salía traslúcido.** Reutilicé `anim-fade-in-up` para el desplegable y dura **0,7 s**:
+  está pensada para bloques de lectura que entran al hacer scroll. En un menú deja el panel a
+  medio opacar durante media pantalla — se veía el titular del hero a través de él. Ahora tiene
+  animación propia de **120 ms** (el «fast» del sistema). *Un menú se siente instantáneo o parece
+  roto.*
+- **Lo que nace cerrado es invisible para axe** — la misma lección que costó los `<details>` en el
+  S5, ahora en el header. El scan **abre los dos disclosures** antes de analizar; sin eso pasaba
+  en verde sin haber mirado el componente nuevo.
+- **Un gate ATS/SEO que se volvió mentira.** `home.spec` afirmaba que el HTML estático contiene el
+  badge de estado de una app — un rótulo del showcase. Retirada la sección, la aserción habría
+  fallado por la razón equivocada. Se reapuntó al roadmap, que sigue nombrando la app y sus
+  features: el gate no se debilita, exige contenido real de `apps.yaml` en el HTML.
+
+### Guardas nuevas
+
+- **`nav-header.spec.ts`** (renombrado desde `nav-movil.spec.ts`, ahora cubre los dos disclosures):
+  el primer nivel del menú debe ser **exactamente** `Hoja de vida · Vitrina · Roadmap · Contacto`.
+  Si alguien vuelve a colgar un destino ahí, se pone rojo **antes** de que el menú se desborde en
+  producción. Más: apertura, teclado, Escape con foco devuelto, cierre al pulsar fuera, y que
+  ninguna entrada se llame «Apps».
+- **`brochure.spec.ts`** entra ahora por «De esta casa»: **es la prueba que impide que las
+  brochures queden huérfanas.** Si alguien quita el bloque, se pone roja.
+
+### Verde
+
+`typecheck` · `lint` · **174 unitarias** · **138 e2e** (+6) · **axe 44/44**, ahora con los menús
+ABIERTOS · build de producción.
+
+### Fuga de artefactos cazada de rebote (y el orden que la dejó pasar)
+
+Al correr el barrido de **cero enlaces** en esta rama saltaron seis casos. Rastreados: viven en
+`.lighthouseci/` — 9,2 MB de informes de Lighthouse que se colaron **en el PR del S5** (commit
+`af4dcac`) por un `git add -A`, y que **están en `main`**.
+
+**Gravedad real: ninguna URL propia se filtró.** Los seis casos están dentro del JavaScript del
+visor de Lighthouse, que comprueba si el host termina en el dominio de preview. No es contenido de
+esta app.
+
+**Pero el daño es otro y es peor:** el gate de cero enlaces pasaba a gritar en falso en cada
+ejecución. *Un gate que grita en falso deja de leerse — y ahí es exactamente donde se pierde una
+fuga de verdad.*
+
+**Por qué no lo cazó el `/deploy-check` del S5:** corrí el barrido **antes** de los commits que
+metieron los artefactos. `git grep` solo mira archivos VERSIONADOS, así que en ese momento
+`.lighthouseci/` era invisible para él; el `git add -A` posterior lo subió sin volver a barrer.
+
+**Arreglo:** `.lighthouseci/` fuera del índice y en `.gitignore`.
+
+**Y una trampa dentro del arreglo:** el comentario que escribí en `.gitignore` para explicar todo
+esto citaba el dominio **literal** — y volvía a disparar el barrido sobre sí mismo. La regla 16 ya
+lo advierte para los summaries; vale igual para cualquier archivo versionado, incluido el que
+documenta la corrección. Reescrito sin el literal.
+
+**→ Sugerencia a la planeadora:** el barrido de cero enlaces del `/deploy-check` debe correr
+**sobre el árbol que se va a subir, no antes** — o el checklist debe decir explícitamente
+«después del último `git add`». Tal como está redactado, un artefacto generado durante el propio
+deploy-check entra sin que nadie lo vea.
+
+### La CI cazó lo que el verde local no podía (2026-09-05)
+
+El PR abrió con **`quality: fail`** y los otros tres jobs en **`skipping`** — exactamente el modo
+de falla que la regla 14 nombra: `needs:` sobre un job caído los deja saltados, y GitHub los lista
+entre los requeridos **sin alarma**. Verde local, rojo en CI.
+
+**Causa:** `pnpm audit` con **seis vulnerabilidades altas nuevas**, publicadas en las dos semanas
+transcurridas desde el cierre del S5. Ninguna la introduce esta rama.
+
+**Y una trampa dentro de mi propio arreglo del S5:** el override decía `fast-uri: ^3.1.5`, que
+admite 3.1.6 — pero el lockfile se resolvió en agosto, cuando 3.1.5 era lo último que casaba, y la
+CI instala con `--frozen-lockfile`. **Un rango abierto no protege de nada si el lockfile no se
+vuelve a resolver.** Convivían además dos versiones (3.1.3 y 3.1.5): el override no alcanzaba
+todas las rutas.
+
+**Arreglo:** `fast-uri` a `^3.1.6` (queda 3.1.7, ahora **una sola** versión en el árbol) y
+`browserslist` a `^4.28.7` (queda 4.28.9), aviso nuevo que no estaba cubierto. Verificado
+dependencia por dependencia contra la intención, no por el verde. Audit: **0 altas, 0 críticas**.
+
+**Lección, que es la misma de siempre en otro disfraz:** el audit no es una foto, es un flujo. Un
+repo que pasó el gate hace dos semanas puede estar rojo hoy sin que nadie haya tocado una línea —
+y el `--frozen-lockfile` de la CI garantiza que lo que se auditó no es lo que se instalará mañana.

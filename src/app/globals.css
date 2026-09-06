@@ -237,6 +237,26 @@
   animation: fade-in-up 0.7s var(--ease-out-cubic) both;
   animation-delay: var(--anim-delay, 0s);
 }
+/* Panel del desplegable del header. Tiene animación PROPIA y corta (120 ms, el
+   «fast» del sistema) en vez de reutilizar `anim-fade-in-up`: esa dura 0,7 s
+   porque está pensada para bloques de lectura que entran al hacer scroll, y
+   aplicada a un menú lo dejaba medio traslúcido durante media pantalla —
+   se veía el titular del hero a través del panel. Un menú se siente
+   instantáneo o parece roto. */
+.menu-desplegable {
+  animation: menu-aparece 120ms var(--ease-out-cubic) both;
+}
+@keyframes menu-aparece {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 .anim-blur-in {
   animation: blur-in 0.9s var(--ease-out-expo) both;
   animation-delay: var(--anim-delay, 0s);
@@ -729,6 +749,7 @@
     stroke-dashoffset: 0 !important;
   }
   .anim-fade-in-up,
+  .menu-desplegable,
   .anim-blur-in,
   .anim-mask-up,
   .anim-scale-in-blur,

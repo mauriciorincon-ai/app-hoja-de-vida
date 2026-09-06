@@ -24,3 +24,9 @@ public/cv/
 
 # Índices del chat — generados en build por scripts/build-chat-index.mjs (ADR-010)
 public/chat-index.*.json
+
+# Artefactos de Lighthouse CI: se generan al correr `lhci` en local. Se colaron
+# en el PR del S5 por un `git add -A` y disparaban el barrido de CERO ENLACES
+# con seis falsos positivos del JS del visor (comprueba el dominio de preview).
+# Un gate que grita en falso deja de leerse — y ahí es donde se pierde una fuga real.
+.lighthouseci/

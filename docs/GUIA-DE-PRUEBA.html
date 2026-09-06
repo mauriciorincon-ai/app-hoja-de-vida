@@ -103,7 +103,7 @@
 <body>
 <div class="pagina">
   <header>
-    <p class="eyebrow">CV Viva · Guía de prueba viva y acumulativa · v2 · Sprint 005 · 2026-08-23</p>
+    <p class="eyebrow">CV Viva · Guía de prueba viva y acumulativa · v3 · post-Sprint 005 · 2026-09-05</p>
     <h1>Guía de prueba</h1>
     <p class="suave">Todas las pruebas vigentes de la app — las nuevas del Sprint 005 (la vitrina)
       y las heredadas de S1–S4, que se corren como regresión. Filtra por origen para recorrer todo
@@ -131,7 +131,7 @@
     </div>
     <div class="filtros" role="group" aria-label="Filtrar pruebas por origen">
       <button type="button" data-filtro="todo" class="activo">Todo</button>
-      <button type="button" data-filtro="cambios">Lo que cambió en S5</button>
+      <button type="button" data-filtro="cambios">Lo que cambió último</button>
       <button type="button" data-filtro="minimo">Gate mínimo ⭐</button>
     </div>
   </div>
@@ -144,12 +144,23 @@
       <li data-origen="heredada"><input type="checkbox" id="a1"><label for="a1">Abre
         <code>/es</code>: el hero muestra tu nombre y titular; el contenido carga sin pantallazos
         en blanco. <span class="origen origen-heredada">S1</span></label></li>
-      <li data-origen="heredada"><input type="checkbox" id="a2"><label for="a2">Baja por la página:
-        aparecen en orden Perfil, Trayectoria, Logros, Proyectos, Skills, Certificaciones, Apps,
-        <strong>Roadmap</strong> y Contacto. <span class="origen origen-heredada">S4</span></label></li>
-      <li data-origen="heredada"><input type="checkbox" id="a3"><label for="a3">El menú del encabezado
-        incluye <strong>Roadmap</strong> y al hacer clic te lleva a esa sección.
-        <span class="origen origen-heredada">S4</span></label></li>
+      <li data-origen="mejorado"><input type="checkbox" id="a2"><label for="a2">Baja por la página:
+        aparecen en orden Perfil, Trayectoria, Logros, Proyectos, Skills, Certificaciones,
+        Roadmap y Contacto — <strong>ya no hay sección "Apps"</strong>.
+        <span class="origen origen-mejorado">Mejorado · post-S5</span></label></li>
+      <li data-origen="mejorado"><input type="checkbox" id="a3"><label for="a3">El menú del encabezado
+        tiene <strong>cuatro destinos</strong>: Hoja de vida, Vitrina, Roadmap y Contacto (más CV PDF
+        e idioma). Pulsa <strong>Roadmap</strong>: te lleva a esa sección.
+        <span class="origen origen-mejorado">Mejorado · post-S5</span></label></li>
+      <li data-origen="nuevo"><input type="checkbox" id="a5"><label for="a5">Pulsa
+        <strong>Hoja de vida</strong>: se despliegan las cinco secciones del CV (Trayectoria,
+        Logros, Proyectos, Skills, Certificaciones). Elige una y te lleva ahí cerrando el menú.
+        Vuelve a abrirlo y ciérralo pulsando <strong>fuera</strong>, y otra vez con
+        <strong>Escape</strong>. <span class="origen origen-nuevo">Nuevo · post-S5</span></label></li>
+      <li data-origen="nuevo"><input type="checkbox" id="a6"><label for="a6">Abre el menú
+        <strong>solo con teclado</strong> (Tab hasta "Hoja de vida", Enter): se despliega, Tab
+        recorre las cinco, Escape cierra y el foco vuelve al botón — nunca se pierde.
+        <span class="origen origen-nuevo">Nuevo · post-S5</span></label></li>
       <li data-origen="heredada" data-minimo><input type="checkbox" id="a4"><label for="a4">⭐
         <strong>Juicio visual:</strong> la página se siente editorial, sobria y coherente; las
         animaciones al hacer scroll son elegantes, no distraen. Aprueba el look general.
@@ -287,11 +298,13 @@
   <!-- ═══════ H. Brochures por app ═══════ -->
   <section class="bloque">
     <div class="bloque-cabeza"><span class="letra">H</span><h2>Página brochure por app</h2></div>
-    <p class="meta-bloque chica suave">~5 min · sección Apps y rutas <code>/apps/&lt;app&gt;</code>.</p>
+    <p class="meta-bloque chica suave">~5 min · bloque «De esta casa» en la vitrina y rutas <code>/apps/&lt;app&gt;</code>.</p>
     <ul class="pasos">
-      <li data-origen="heredada"><input type="checkbox" id="h1"><label for="h1">En el showcase de Apps,
-        una app real (CV Viva, Chat) muestra el enlace "Ver la app": al pulsarlo abre su brochure.
-        <span class="origen origen-heredada">S4</span></label></li>
+      <li data-origen="mejorado"><input type="checkbox" id="h1"><label for="h1">Al final de
+        <code>/es/vitrina</code>, el bloque <strong>«De esta casa»</strong> muestra CV Viva y el chat:
+        pulsa "Ver la app" en una y abre su brochure. <em>(Antes se llegaba desde la sección Apps
+        de la portada, que ya no existe — esta es ahora su única puerta.)</em>
+        <span class="origen origen-mejorado">Mejorado · post-S5</span></label></li>
       <li data-origen="heredada"><input type="checkbox" id="h2"><label for="h2">La brochure tiene hero
         con tagline, funcionalidades, métricas (números que se animan), stack, y un botón que
         vuelve al formulario de contacto. Pruébala en ES y EN.
@@ -422,6 +435,14 @@
     <details class="chica">
       <summary>Historial de la guía</summary>
       <ul>
+        <li><strong>v3 · post-S5 · 2026-09-05:</strong> reorganización del menú, fuera de sprint.
+          Nuevas: el desplegable «Hoja de vida» con ratón (A5) y solo con teclado (A6). Mejoradas:
+          el orden de secciones de la portada, que ya no incluye «Apps» (A2); el menú, que pasa de
+          nueve destinos a cuatro (A3); y la puerta de entrada a las brochures, que se movió al
+          bloque «De esta casa» de la vitrina (H1). <strong>Ninguna prueba eliminada:</strong> la
+          sección «Apps» dejó de existir, pero todo lo que colgaba de ella sigue verificándose —
+          las brochures desde su puerta nueva, y las exploraciones desde el formulario de contacto
+          (bloque E). Gate mínimo ⭐ sin cambios: 14. <strong>Las 15 pruebas del S5 siguen marcadas como nuevas a propósito:</strong> su gate ⭐ aún no se ha corrido, así que todavía no son regresión.</li>
         <li><strong>v2 · S5 · 2026-08-23:</strong> abre el ciclo H2. Nuevas: la vitrina como
           escaparate y <strong>una página por app</strong> (K), y las fichas por dentro con las
           tarjetas que se abren al leer (L), más el teclado sobre las tarjetas de la vitrina dentro
@@ -445,7 +466,7 @@
   (function () {
     // NS VERSIONADO POR SPRINT: al publicar la guía de un sprint nuevo se cambia
     // s005 — así una regresión sin correr no aparece marcada por el sprint anterior.
-    var NS = "guia-hoja-de-vida:s005:";
+    var NS = "guia-hoja-de-vida:s005b:";
     var casillas = Array.prototype.slice.call(document.querySelectorAll('input[type="checkbox"]'));
     var barra = document.getElementById("barra-avance");
     var contador = document.getElementById("contador");

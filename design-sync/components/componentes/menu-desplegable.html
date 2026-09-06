@@ -1,0 +1,88 @@
+<!-- @dsCard group="Componentes" name="Menú desplegable del encabezado" -->
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Menú desplegable del encabezado — CV Viva</title>
+<style>
+  :root {
+    --paper-0:#fbfaf7; --paper-1:#f5f3ed; --paper-2:#ece9e0; --paper-3:#ddd8cb;
+    --ink-0:#121110; --ink-1:#2a2927; --ink-2:#5e5c55; --ink-3:#9c9a90;
+    --sage:#cfe3cf; --sage-ink:#3c5a3c; --rose:#f2d6d6; --rose-ink:#7a3f3f;
+    --sky:#cedde9; --sky-ink:#2e4e6b; --citron:#e6e3b8; --citron-ink:#5e5a1e;
+    --lilac:#ddd3e8; --lilac-ink:#4e3e6b; --peach:#f2dec4; --peach-ink:#6b4820;
+    --danger:#c97a7a;
+    --sh-1:0 1px 0 rgba(18,17,16,.04), 0 1px 2px rgba(18,17,16,.04);
+    --sh-2:0 4px 12px -4px rgba(18,17,16,.08), 0 2px 4px rgba(18,17,16,.04);
+    --sh-3:0 12px 32px -8px rgba(18,17,16,.14);
+    --ease-out-cubic:cubic-bezier(.21,.61,.35,1);
+    --ease-in-out-cubic:cubic-bezier(.65,0,.35,1);
+    --display:Fraunces,'Iowan Old Style',Georgia,serif;
+    --sans:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; padding:28px; background:var(--paper-1); color:var(--ink-1);
+    font-family:var(--sans); font-size:15px; line-height:1.6; }
+  h1 { font-family:var(--display); font-size:26px; font-weight:500; letter-spacing:-.02em;
+    color:var(--ink-0); margin:0 0 6px; }
+  .lede { color:var(--ink-2); margin:0 0 24px; max-width:62ch; }
+  .nota { color:var(--ink-2); font-size:13.5px; max-width:70ch; margin-top:22px;
+    border-left:2px solid var(--paper-3); padding-left:12px; }
+  code { font-family:var(--mono); font-size:12.5px; background:var(--paper-0);
+    border:1px solid var(--paper-2); border-radius:4px; padding:1px 5px; }
+  .barra { display:flex; align-items:center; justify-content:space-between; gap:20px;
+    border:1px solid var(--paper-2); border-bottom:0; border-radius:10px 10px 0 0;
+    background:var(--paper-0); padding:10px 16px; }
+  .marca { font-size:13px; font-weight:500; color:var(--ink-0); white-space:nowrap; }
+  .glifo { color:var(--sage-ink); }
+  .nav { display:flex; gap:18px; }
+  .destino { font-size:13px; color:var(--ink-2); white-space:nowrap; }
+  .destino.activo { color:var(--ink-0); display:inline-flex; align-items:center; gap:5px; }
+  .chev { font-size:11px; }
+  .controles { display:flex; gap:6px; }
+  .pill { border-radius:99px; background:var(--sage); color:var(--sage-ink);
+    font-family:var(--mono); font-size:10px; padding:4px 10px; text-transform:uppercase; }
+  .pill.borde { background:none; border:1px solid var(--paper-3); color:var(--ink-1); }
+  .panel { list-style:none; margin:0 0 0 118px; padding:6px 0; width:176px;
+    border:1px solid var(--paper-2); border-radius:10px; background:var(--paper-0);
+    box-shadow:var(--sh-2); }
+  .panel li { padding:11px 16px; font-size:13px; color:var(--ink-1); }
+  .panel li:first-child { background:var(--paper-1); color:var(--ink-0); }
+</style>
+</head>
+<body>
+
+<h1>Menú desplegable del encabezado</h1>
+<p class="lede">Para cuando varias secciones del nav <strong>son la misma cosa</strong>. Hoy, una
+sola vez: las cinco del CV bajo «Hoja de vida». No es un patrón para repartir — un header con dos
+desplegables ya es un menú de aplicación, y esto es una pieza editorial.</p>
+
+<div class="barra">
+  <span class="marca"><span class="glifo">&#9670;</span> Henry Rincón</span>
+  <nav class="nav">
+    <span class="destino activo">Hoja de vida <span class="chev">&#8964;</span></span>
+    <span class="destino">Vitrina</span>
+    <span class="destino">Roadmap</span>
+    <span class="destino">Contacto</span>
+  </nav>
+  <span class="controles"><span class="pill">CV (PDF)</span><span class="pill borde">ES / EN</span></span>
+</div>
+<ul class="panel">
+  <li>Trayectoria</li><li>Logros</li><li>Proyectos</li><li>Skills</li><li>Certificaciones</li>
+</ul>
+
+<p class="nota"><strong>Movimiento propio y corto</strong> — <code>120ms</code>, el «fast» del
+sistema. No se reutiliza <code>anim-fade-in-up</code>: dura 0,7&nbsp;s porque es para bloques de
+lectura que entran al hacer scroll, y en un menú deja el panel medio traslúcido durante media
+pantalla. Un menú se siente instantáneo o parece roto.<br><br>
+<strong>Contrato de accesibilidad</strong> (el mismo del disclosure móvil):
+<code>aria-expanded</code> + <code>aria-controls</code> · Escape cierra <strong>y devuelve el foco
+al botón</strong> · pulsar fuera cierra · elegir una opción cierra. Los tres cierres son
+obligatorios: un panel que solo cierra con Escape deja una capa encima de lo que el visitante
+quiso mirar. Y el scan de axe lo <strong>abre</strong> antes de analizar — lo que nace cerrado es
+invisible para él, y el gate pasaría en verde sin haber mirado nada.</p>
+
+</body>
+</html>

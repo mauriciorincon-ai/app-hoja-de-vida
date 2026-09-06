@@ -9,7 +9,6 @@
     "proyectos": "Proyectos",
     "skills": "Skills",
     "certificaciones": "Certificaciones",
-    "apps": "Apps",
     "roadmap": "Roadmap",
     "contacto": "Contacto",
     "cambiarIdioma": "Switch to English",
@@ -18,7 +17,8 @@
     "abrirMenu": "Abrir el menú",
     "cerrarMenu": "Cerrar el menú",
     "menu": "Menú",
-    "vitrina": "Vitrina"
+    "vitrina": "Vitrina",
+    "hojaDeVida": "Hoja de vida"
   },
   "hero": {
     "ctaApps": "Explora las apps",
@@ -53,14 +53,11 @@
     "verificar": "Verificar"
   },
   "apps": {
-    "titulo": "Apps del pipeline",
-    "subtitulo": "Solo lo real: lo que se está construyendo y lo que se está explorando. Sin fechas prometidas.",
     "estados": {
       "en-produccion": "En producción",
       "en-construccion": "En construcción",
       "en-exploracion": "En exploración"
-    },
-    "cta": "Quiero probarla"
+    }
   },
   "brochure": {
     "volver": "Apps",
@@ -196,6 +193,9 @@
     "migaEtiqueta": "Dónde estás",
     "vecinasEtiqueta": "Otras apps de la vitrina",
     "appAnterior": "App anterior",
-    "appSiguiente": "App siguiente"
+    "appSiguiente": "App siguiente",
+    "deEstaCasa": "De esta casa",
+    "deEstaCasaLinea": "Lo que sostiene la página que estás leyendo: también son apps del pipeline, y también se pueden recorrer.",
+    "verLaApp": "Ver la app"
   }
 }
