@@ -644,3 +644,61 @@ El contrapeso del gate diferido no es decorativo: mirando las capturas apareció
 `pnpm typecheck` y `pnpm lint` limpios · **324/324 unitarias** · **e2e 169 pasan** en
 `vitrina.spec` + `axe.spec` (chromium + móvil), con **14 rutas de pieza nuevas** en axe ×2 idiomas
 · `pnpm build` verde: **76 páginas SSG** (eran 62).
+
+---
+
+## Fase 4 — agentes abre (y las dos miradas se juntan en una)
+
+### Desviación del plan, pedida por el usuario
+
+El plan traía **dos miradas separadas** (M1 investigaciones, M2 agentes) para que un defecto de
+tarjeta o de ficha se arreglara una vez y no catorce. El usuario, con las capturas de M1 delante,
+pidió terminar de subir **las 20 fichas** antes de revisar. Se declara aquí: **M1 y M2 se juntan en
+una sola mirada sobre los dos frentes**, con el riesgo asumido —si algo de fondo falla, el arreglo
+toca 20 piezas en vez de 7— y a cambio de una sola sesión de revisión.
+
+### Lo que costó abrir el segundo frente
+
+**Dos líneas de datos y ninguna de código** — que era exactamente la prueba de que el motor de la
+fase 2 es genérico de verdad:
+
+- `data/vitrina.yaml`: `agentes` → `abierta`.
+- `ci.yml`: +2 URLs de Lighthouse (el escaparate de agentes y la ficha de `hr-develop-ai-apps`).
+
+Escaparate, ruta por pieza, sitemap, axe y e2e recogieron las 13 piezas **solos**: todos leen
+`content/<frente>/`. Cero componentes nuevos, cero condicionales por frente. El outcome O2 pedía
+«cero código duplicado por frente» y la cuenta es literal: **0 líneas**.
+
+### El vocabulario de app, corregido (lo que M1 destapó)
+
+Cuatro textos del cromo decían cosas **falsas** en una pieza que no es una app. Se corrigen con
+redacción **neutra que es verdad para los dos** — no con lógica por frente, que rompería la regla
+de «un solo renderizador»:
+
+| Clave                         | Antes                                              | Ahora                                      |
+| ----------------------------- | -------------------------------------------------- | ------------------------------------------ |
+| `vitrina.estados.inicial`     | «Construcción cerrada»                             | **«Sin sellar»**                           |
+| `vitrina.estadoAyuda.inicial` | «Su construcción cerró; el gate de pruebas aún no» | «Su gate de pruebas todavía no ha corrido» |
+| `fichaTecnica.ancladaEl`      | «Anclada al export del {fecha}»                    | **«Datos del {fecha}»**                    |
+| `fichaTecnica.s04sub`         | «Lo que **la app** decidió no ser…»                | «Lo que decidió no ser…»                   |
+
+Se aplica sin esperar la palabra del usuario porque no era una preferencia: FORJA tiene 0 sprints y
+«turno en la cola», así que **«construcción cerrada» era mentira en pantalla**, y una ficha sin
+export no puede estar «anclada al export». Queda dicho que cambiar la palabra es una línea.
+
+### Dos pruebas que perdieron su sujeto (y por qué se generalizan, no se borran)
+
+Al abrir agentes solo queda **un** frente en preparación, y dos pruebas asumían que había dos o que
+agentes era el ejemplo de «frente con piezas pero cerrado»:
+
+- «la cuenta no depende del estado del YAML» se reescribe como la invariante general: para todo
+  frente, la cuenta **es** la de archivos en `content/<frente>/`. Ya no depende de que exista un
+  frente cerrado con piezas — que es la clase de suposición que caduca sola.
+- «del portal se entra a un frente en preparación, y de ahí a los otros» salta ahora a **cualquier**
+  vecino, abierto o no. Antes exigía un segundo frente en preparación que ya no existe.
+
+### Estado al cerrar la fase
+
+`pnpm typecheck` y `pnpm lint` limpios · **324/324 unitarias** · **295 e2e** (chromium + móvil,
+5 saltadas) · `pnpm build` verde con **102 páginas SSG** (eran 76 al abrir investigaciones y 62 al
+empezar el sprint). Las **20 fichas están publicadas**: 13 en agentes, 7 en investigaciones.

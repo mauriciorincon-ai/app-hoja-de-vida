@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { parse } from "yaml";
 import { parseVitrina, vitrinaSchema } from "@/lib/schemas";
@@ -18,6 +18,7 @@ import { getFrente, getFrentes } from "@/lib/vitrina/categorias";
 
 /** Lo que hay HOY en el repo, medido: los exports de apps y las fichas del S7. */
 const MEDIDOS = ["apps", "agentes", "investigaciones"];
+// «tableros» queda fuera a propósito: no tiene una sola ficha.
 
 const real = parse(readFileSync("data/vitrina.yaml", "utf8")) as {
   categorias: { id: string; estado: string }[];
@@ -100,10 +101,18 @@ describe("lib/vitrina/categorias — la cuenta de piezas", () => {
     expect(getFrente("tableros")?.piezas).toBe(0); // sin carpeta: cero, no error
   });
 
-  it("la cuenta no depende del estado del YAML: mide contenido, no promesas", () => {
-    const agentes = getFrente("agentes")!;
-    expect(agentes.estado).toBe("en-preparacion");
-    expect(agentes.piezas).toBe(13);
+  it("la cuenta mide contenido, no promesas: sale del disco en todo estado", () => {
+    for (const f of getFrentes()) {
+      if (f.id === "apps") continue; // sus piezas son los exports, no fichas
+      const dir = `content/${f.id}`;
+      const enDisco = existsSync(dir)
+        ? readdirSync(dir).filter((x) => x.endsWith(".ficha-tecnica.json"))
+            .length
+        : 0;
+      expect(f.piezas, `${f.id}: la cuenta debe ser la de ${dir}`).toBe(
+        enDisco,
+      );
+    }
   });
 
   it("el estado de cada frente es el del YAML, y solo abre el que tiene piezas", () => {
@@ -112,9 +121,9 @@ describe("lib/vitrina/categorias — la cuenta de piezas", () => {
     );
     expect(estados).toEqual({
       apps: "abierta",
-      agentes: "en-preparacion", // tiene 13 piezas, pero abre en la fase 4
+      agentes: "abierta",
       investigaciones: "abierta",
-      tableros: "en-preparacion", // sin una sola ficha
+      tableros: "en-preparacion", // sin una sola ficha: no puede abrir
     });
     // Ninguno abierto sin piezas: la regla, comprobada sobre el YAML real.
     for (const f of getFrentes())

@@ -162,11 +162,11 @@
     "notaIdioma": "",
     "estados": {
       "sellado": "Sellada",
-      "inicial": "Construcción cerrada"
+      "inicial": "Sin sellar"
     },
     "estadoAyuda": {
       "sellado": "Su gate de pruebas terminó",
-      "inicial": "Su construcción cerró; el gate de pruebas aún no"
+      "inicial": "Su gate de pruebas todavía no ha corrido"
     },
     "paraQuien": "Para quién",
     "diferencial": "Qué no hace nadie más",
@@ -225,7 +225,7 @@
   },
   "fichaTecnica": {
     "eyebrow": "Ficha técnica",
-    "ancladaEl": "Anclada al export del {fecha}",
+    "ancladaEl": "Datos del {fecha}",
     "selladaEl": "Sellada el {fecha}",
     "sprints": "{n, plural, one {# sprint} other {# sprints}}",
     "titularRotulo": "Qué no hace nadie más",
@@ -243,7 +243,7 @@
     "s03sub": "{grupos, plural, one {# grupo} other {# grupos}} · {n} funcionalidades. El detalle de cada una vive en la ficha completa.",
     "s03subSinDetalle": "{grupos, plural, one {# grupo} other {# grupos}} · {n} funcionalidades.",
     "s04": "Límites, y lo que nunca hace",
-    "s04sub": "Lo que la app decidió no ser vale tanto como lo que es.",
+    "s04sub": "Lo que decidió no ser vale tanto como lo que es.",
     "limites": "Límites, a propósito",
     "nunca": "Nunca",
     "s05": "Dónde está",

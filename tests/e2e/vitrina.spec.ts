@@ -410,7 +410,11 @@ test.describe("Vitrina — los frentes en preparación (ADR-015)", () => {
   test("del portal se entra a un frente en preparación, y de ahí a los otros", async ({
     page,
   }) => {
-    const [primero, segundo] = EN_PREPARACION;
+    const primero = EN_PREPARACION[0];
+    // El vecino al que se salta: cualquier otro frente, abierto o no. Desde el
+    // S7 puede no quedar un segundo frente en preparación — y eso no debería
+    // dejar esta prueba sin sujeto.
+    const segundo = FRENTES.find((f) => f.id !== primero.id)!;
     await page.goto("/es/vitrina");
     await page
       .locator(`[data-frente="${primero.id}"]`)

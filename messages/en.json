@@ -162,11 +162,11 @@
     "notaIdioma": "Each app's own words are kept in Spanish, exactly as its team wrote them.",
     "estados": {
       "sellado": "Sealed",
-      "inicial": "Build closed"
+      "inicial": "Unsealed"
     },
     "estadoAyuda": {
       "sellado": "Its testing gate is done",
-      "inicial": "Its build is closed; the testing gate isn't yet"
+      "inicial": "Its testing gate hasn't run yet"
     },
     "paraQuien": "Who it's for",
     "diferencial": "What nobody else does",
@@ -225,7 +225,7 @@
   },
   "fichaTecnica": {
     "eyebrow": "Technical sheet",
-    "ancladaEl": "Pinned to the export of {fecha}",
+    "ancladaEl": "Data as of {fecha}",
     "selladaEl": "Sealed on {fecha}",
     "sprints": "{n, plural, one {# sprint} other {# sprints}}",
     "titularRotulo": "What nobody else does",
@@ -243,7 +243,7 @@
     "s03sub": "{grupos, plural, one {# group} other {# groups}} · {n} features. The detail of each one lives in the full card.",
     "s03subSinDetalle": "{grupos, plural, one {# group} other {# groups}} · {n} features.",
     "s04": "Limits, and what it never does",
-    "s04sub": "What the app chose not to be is worth as much as what it is.",
+    "s04sub": "What it chose not to be counts as much as what it is.",
     "limites": "Limits, on purpose",
     "nunca": "Never",
     "s05": "Where it stands",

@@ -109,4 +109,6 @@ jobs:
             --collect.url=http://localhost:3000/es/vitrina/apps/habla/detalle \
             --collect.url=http://localhost:3000/es/vitrina/investigaciones \
             --collect.url=http://localhost:3000/es/vitrina/investigaciones/forja \
+            --collect.url=http://localhost:3000/es/vitrina/agentes \
+            --collect.url=http://localhost:3000/es/vitrina/agentes/hr-develop-ai-apps \
             --assert.budgetsFile=./perf-budget.json
