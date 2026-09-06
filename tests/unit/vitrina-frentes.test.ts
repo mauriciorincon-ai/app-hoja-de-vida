@@ -2,11 +2,7 @@ import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { parse } from "yaml";
 import { parseVitrina, vitrinaSchema } from "@/lib/schemas";
-import {
-  frentesEnPreparacion,
-  getFrente,
-  getFrentes,
-} from "@/lib/vitrina/categorias";
+import { getFrente, getFrentes } from "@/lib/vitrina/categorias";
 
 /**
  * Los frentes de la vitrina (ADR-015): `data/vitrina.yaml` es contenido
@@ -110,9 +106,19 @@ describe("lib/vitrina/categorias — la cuenta de piezas", () => {
     expect(agentes.piezas).toBe(13);
   });
 
-  it("tres frentes en preparación, y «apps» no está entre ellos", () => {
-    const ids = frentesEnPreparacion().map((f) => f.id);
-    expect(ids).toEqual(["agentes", "investigaciones", "tableros"]);
+  it("el estado de cada frente es el del YAML, y solo abre el que tiene piezas", () => {
+    const estados = Object.fromEntries(
+      getFrentes().map((f) => [f.id, f.estado]),
+    );
+    expect(estados).toEqual({
+      apps: "abierta",
+      agentes: "en-preparacion", // tiene 13 piezas, pero abre en la fase 4
+      investigaciones: "abierta",
+      tableros: "en-preparacion", // sin una sola ficha
+    });
+    // Ninguno abierto sin piezas: la regla, comprobada sobre el YAML real.
+    for (const f of getFrentes())
+      if (f.estado === "abierta") expect(f.piezas).toBeGreaterThan(0);
   });
 
   it("el orden del portal es el del YAML", () => {

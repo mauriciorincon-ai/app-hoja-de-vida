@@ -93,6 +93,8 @@ jobs:
         # Solo páginas PÚBLICAS (wiki: lighthouse-solo-paginas-publicas). El budget
         # (ADR-006) cubre las rutas nuevas del S4: el roadmap vive en la HOME (/),
         # las brochures son rutas públicas propias y se auditan aquí.
+        # S7: se añaden el escaparate de un frente no-app y una de sus fichas —
+        # son plantillas, así que basta una de cada para vigilar el presupuesto.
         run: |
           npm i -g @lhci/cli
           lhci autorun --collect.startServerCommand="pnpm start" \
@@ -105,4 +107,6 @@ jobs:
             --collect.url=http://localhost:3000/es/vitrina/apps \
             --collect.url=http://localhost:3000/es/vitrina/apps/habla \
             --collect.url=http://localhost:3000/es/vitrina/apps/habla/detalle \
+            --collect.url=http://localhost:3000/es/vitrina/investigaciones \
+            --collect.url=http://localhost:3000/es/vitrina/investigaciones/forja \
             --assert.budgetsFile=./perf-budget.json

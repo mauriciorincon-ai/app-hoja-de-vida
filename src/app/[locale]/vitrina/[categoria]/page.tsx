@@ -5,49 +5,57 @@ import { notFound } from "next/navigation";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { Reveal } from "@/components/motion/reveal";
+import { MuestraPieza } from "@/components/vitrina/muestra-pieza";
 import { Link } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
 import { getCv } from "@/lib/content";
 import { SITE_URL } from "@/lib/site";
-import {
-  frentesEnPreparacion,
-  getFrente,
-  getFrentes,
-} from "@/lib/vitrina/categorias";
+import { getFrente, getFrentes } from "@/lib/vitrina/categorias";
+import { getPiezas, type Frente as FrentePieza } from "@/lib/vitrina/piezas";
 
 /**
- * UN FRENTE EN PREPARACIÓN — su espacio propio desde el día cero (ADR-015).
+ * UN FRENTE DE LA VITRINA — su espacio propio desde el día cero (ADR-015),
+ * en sus DOS estados (S7).
  *
- * Agentes, investigaciones y tableros existen ya como frentes del taller,
- * pero aún no tienen piezas publicadas. Esta página es la que **marca ese
- * inicio sin disfrazarlo**: dice qué es el frente, en qué punto está, y
- * ofrece la lista de espera — sin fecha prometida (regla dura 16: el CTA
- * público es la lista de espera, nunca una promesa).
+ * Esta ruta atiende a cualquier frente que no sea `apps` (que tiene segmento
+ * estático propio y gana al dinámico), y se bifurca por el estado que declara
+ * `data/vitrina.yaml`:
  *
- * Es GENÉRICA a propósito: solo renderiza frentes `en-preparacion`. El día que
- * uno de ellos tenga piezas, se le construye su escaparate propio (como
- * `/vitrina/apps`, que es una ruta estática y por eso gana a este segmento
- * dinámico) y su renderizador declara de dónde salen esas piezas — el esquema
- * impide marcarlo «abierta» antes de eso.
+ *  - **`en-preparacion`** — el frente existe y aún no tiene piezas. La página
+ *    **marca ese inicio sin disfrazarlo**: dice qué es, en qué punto está y
+ *    ofrece la lista de espera, sin fecha prometida (regla 16).
+ *  - **`abierta`** (S7) — el frente tiene piezas reales: es el ESCAPARATE, una
+ *    muestra corta por pieza, y cada una con su ruta propia en
+ *    `/vitrina/<frente>/<slug>`.
+ *
+ * Un frente no puede declararse `abierta` sin piezas: `parseVitrina` rompe el
+ * build nombrándolo. Así que aquí no hay que defenderse de un escaparate vacío
+ * — el gate está aguas arriba, donde se puede arreglar.
+ *
+ * 100% SSG. El hero (candidato LCP) nace ESTÁTICO, sin wrapper de motion que
+ * arranque en opacity 0 (patrón `lcp-nace-estatico`).
  */
 
+/** Todos los frentes menos `apps`: esa ruta es estática y gana a este segmento. */
 export function generateStaticParams() {
   return routing.locales.flatMap((locale) =>
-    frentesEnPreparacion().map((f) => ({ locale, categoria: f.id })),
+    getFrentes()
+      .filter((f) => f.id !== "apps")
+      .map((f) => ({ locale, categoria: f.id })),
   );
 }
 
 type Params = { params: Promise<{ locale: string; categoria: string }> };
 
-function frenteEnPreparacion(id: string) {
+function frenteDeEstaRuta(id: string) {
   const f = getFrente(id);
-  return f && f.estado === "en-preparacion" ? f : undefined;
+  return f && f.id !== "apps" ? f : undefined;
 }
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { locale, categoria } = await params;
   if (!hasLocale(routing.locales, locale)) return {};
-  const frente = frenteEnPreparacion(categoria);
+  const frente = frenteDeEstaRuta(categoria);
   if (!frente) return {};
   const t = await getTranslations({ locale, namespace: "vitrina" });
   const l = locale as Locale;
@@ -71,19 +79,23 @@ export default async function FrentePage({ params }: Params) {
   if (!hasLocale(routing.locales, locale)) notFound();
   setRequestLocale(locale);
 
-  const frente = frenteEnPreparacion(categoria);
+  const frente = frenteDeEstaRuta(categoria);
   if (!frente) notFound();
 
   const l = locale as Locale;
   const cv = getCv(l);
   const t = await getTranslations("vitrina");
+  const abierta = frente.estado === "abierta";
+  const piezas = abierta ? getPiezas(frente.id as FrentePieza) : [];
   const otros = getFrentes().filter((f) => f.id !== frente.id);
 
   return (
     <>
       <Header nombre={cv.identidad.nombre} enHome={false} />
       <main id="contenido" className="flex-1">
-        <div className="mx-auto max-w-4xl px-4 py-10 md:px-6 md:py-14">
+        <div
+          className={`mx-auto px-4 py-10 md:px-6 md:py-14 ${abierta ? "max-w-5xl" : "max-w-4xl"}`}
+        >
           <nav aria-label={t("migaEtiqueta")} className="mb-8">
             <Link
               href="/vitrina"
@@ -104,12 +116,22 @@ export default async function FrentePage({ params }: Params) {
                 />
                 {t("eyebrow")}
               </span>
-              <span
-                title={t("frenteEstadoAyuda.enPreparacion")}
-                className="rounded-full bg-citron px-2.5 py-1 font-mono text-[11px] tracking-[0.02em] text-citron-ink uppercase"
-              >
-                {t("frenteEstados.enPreparacion")}
-              </span>
+              {abierta ? (
+                <span
+                  data-cuenta-piezas={piezas.length}
+                  title={t("frenteEstadoAyuda.abierta")}
+                  className="rounded-full bg-sage px-2.5 py-1 font-mono text-[11px] tracking-[0.02em] text-sage-ink uppercase"
+                >
+                  {t("escaparateCuenta", { n: piezas.length })}
+                </span>
+              ) : (
+                <span
+                  title={t("frenteEstadoAyuda.enPreparacion")}
+                  className="rounded-full bg-citron px-2.5 py-1 font-mono text-[11px] tracking-[0.02em] text-citron-ink uppercase"
+                >
+                  {t("frenteEstados.enPreparacion")}
+                </span>
+              )}
             </p>
             <h1 className="max-w-[20ch] font-display text-[clamp(2rem,5.5vw,3.25rem)] leading-[1.05] font-medium tracking-[-0.02em] text-ink-0">
               {frente.nombre[l]}
@@ -120,25 +142,41 @@ export default async function FrentePage({ params }: Params) {
             <p className="mt-4 max-w-[60ch] text-[16px] leading-[1.75] text-ink-1">
               {frente.detalle[l]}
             </p>
+            {abierta && (
+              <p className="mt-3 max-w-[60ch] text-[15px] leading-relaxed text-ink-2">
+                {t("escaparateNota")}
+              </p>
+            )}
           </header>
 
-          {/* El inicio, dicho con todas sus letras. */}
-          <Reveal variant="fadeInUp">
-            <section
-              aria-labelledby="frente-empieza"
-              className="mt-12 rounded-[14px] border border-paper-2 bg-paper-1 p-6"
-            >
-              <h2
-                id="frente-empieza"
-                className="font-display text-xl font-medium tracking-[-0.015em] text-ink-0"
+          {abierta ? (
+            /* ── El escaparate: una muestra corta por pieza ── */
+            <Reveal variant="fadeInUp" amount="some">
+              <ul className="mt-12 grid gap-5 sm:grid-cols-2">
+                {piezas.map((p) => (
+                  <MuestraPieza key={p.pieza.slug} pieza={p} locale={l} />
+                ))}
+              </ul>
+            </Reveal>
+          ) : (
+            /* ── El inicio, dicho con todas sus letras ── */
+            <Reveal variant="fadeInUp">
+              <section
+                aria-labelledby="frente-empieza"
+                className="mt-12 rounded-[14px] border border-paper-2 bg-paper-1 p-6"
               >
-                {t("enPreparacionTitulo")}
-              </h2>
-              <p className="mt-3 max-w-[60ch] text-[15px] leading-relaxed text-ink-1">
-                {t("enPreparacionLinea")}
-              </p>
-            </section>
-          </Reveal>
+                <h2
+                  id="frente-empieza"
+                  className="font-display text-xl font-medium tracking-[-0.015em] text-ink-0"
+                >
+                  {t("enPreparacionTitulo")}
+                </h2>
+                <p className="mt-3 max-w-[60ch] text-[15px] leading-relaxed text-ink-1">
+                  {t("enPreparacionLinea")}
+                </p>
+              </section>
+            </Reveal>
+          )}
 
           {/* Se sale de un frente hacia otro, no hacia el vacío. */}
           <Reveal variant="fadeInUp">

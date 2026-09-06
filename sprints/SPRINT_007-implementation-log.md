@@ -580,3 +580,67 @@ se arregla aquí. Todo restaurado y verificado con `git diff` vacío.
 Las **20 piezas cargan** y el motor las ordena. `data/vitrina.yaml` sigue **sin abrir ningún
 frente nuevo**: eso es decisión de las fases 3 y 4, después de que tú mires. `pnpm typecheck` y
 `pnpm lint` limpios · **324/324 unitarias** en 22 archivos (eran 309 en 21) · `pnpm build` verde.
+
+---
+
+## Fase 3 — la UI de investigaciones (y la mirada M1)
+
+### `MuestraPieza`: la tarjeta de algo que no tiene pantalla
+
+Es la hermana de `MuestraApp` y se parece a ella en todo menos en una cosa: **una app se reconoce
+por su pantalla, y aquí no hay pantalla**. Un agente vive en una terminal, una investigación es un
+documento. Una maqueta inventada sería decorado — y decorado que insinúa un producto que no
+existe. Lo que ocupa ese sitio es lo único que una pieza sin interfaz sí tiene y no se puede
+fingir: **su titular de valor y sus tres primeras cifras con su procedencia**.
+
+### Las rutas
+
+- `[categoria]/page.tsx` **se bifurca por estado**: `abierta` ⇒ escaparate (hero + rejilla +
+  cierre); `en-preparacion` ⇒ lo de siempre. `generateStaticParams` cubre todos los frentes menos
+  `apps`, que gana por segmento estático. No hay que defenderse de un escaparate vacío: ese gate
+  está aguas arriba, en `parseVitrina`, donde se puede arreglar.
+- `[categoria]/[pieza]/page.tsx` rinde el **MISMO** `FichaTecnica`, **sin `hrefDetalle`**, con
+  vecinas del mismo frente y miga al escaparate. Solo publica piezas de frentes ABIERTOS: las 13
+  fichas de agentes ya están en `content/` y sus rutas **no existen** hasta que el frente abra.
+- Claves i18n **neutras** (`escaparateCuenta`, `escaparateNota`, `volverAlFrente`,
+  `vecinasDelFrente`, `piezaAnterior`, `piezaSiguiente`): la jerga de apps no viaja a otros frentes.
+- `data/vitrina.yaml`: **investigaciones → `abierta`** (7 piezas). Sitemap y axe pasan a leer
+  `content/<frente>/`, así que una ficha nueva entra sola a los dos. Lighthouse gana 2 URLs
+  (el escaparate y una ficha): son plantillas, basta una de cada.
+
+### Una función que se quedó sin llamador, borrada
+
+Al bifurcar la ruta y cambiar el sitemap, `frentesEnPreparacion()` quedó **sin un solo consumidor
+fuera de su propio test** — el mismo patrón que la auditoría cazó en el contrato con
+`pieza.sellado_en`. Se borra. Su test se reemplaza por uno que comprueba el estado de los cuatro
+frentes contra el YAML real y que ninguno abierto tiene cero piezas.
+
+### Regla 14 + regla 15 — los gates nuevos, en rojo, en este mismo commit
+
+| Gate                                            | Mutación deliberada                                            | Lo que dijo el rojo                                                                                                                                                 |
+| ----------------------------------------------- | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **La renumeración sin proceso** (criterio nº 6) | `numerarSecciones` vuelve a numerar por posición fija          | `- "ft-02-arkhe"` / `+ "ft-05-arkhe"`: el hueco reaparece y la prueba lo ve                                                                                         |
+| **axe en TODAS las rutas nuevas** (regla 9)     | La etiqueta de cifra de `MuestraPieza` en `text-ink-3` (2.7:1) | `✘ axe limpio en /es/vitrina/investigaciones` y `/en/…` — y **las fichas siguieron verdes**, porque no usan ese componente: el scan señaló exactamente dónde estaba |
+
+### Un fallo mío en la prueba de cero enlaces
+
+Mi primera versión de «CERO ENLACES en las rutas nuevas» miró `a[href]` de **toda la página** y
+salió roja: el **pie** lleva a propósito los perfiles públicos de la persona, que no son producción
+que se entregue. La prueba del S5 ya tenía resuelto el alcance correcto (`main a[href^='http']`) y
+lo decía en su comentario. Ajustada a ese mismo alcance, más la comprobación de DOI sobre el texto
+de `main` — que es lo que esta fase sí añade, porque una investigación es justo donde se cuela una
+referencia bibliográfica.
+
+### La pasada de capturas encontró una promesa falsa (y se arregló)
+
+El contrapeso del gate diferido no es decorativo: mirando las capturas apareció que el subtítulo de
+«Qué tiene» decía **«El detalle de cada una vive en la ficha completa»** también en una pieza
+**sin** ficha completa. Una página no puede mandar al lector a un sitio que no existe. Clave nueva
+`s03subSinDetalle`, que dice la cuenta y calla, elegida por `hrefDetalle`; y su aserción en el e2e
+(`main` no contiene «vive en la ficha completa»).
+
+### Estado al cerrar la fase
+
+`pnpm typecheck` y `pnpm lint` limpios · **324/324 unitarias** · **e2e 169 pasan** en
+`vitrina.spec` + `axe.spec` (chromium + móvil), con **14 rutas de pieza nuevas** en axe ×2 idiomas
+· `pnpm build` verde: **76 páginas SSG** (eran 62).

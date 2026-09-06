@@ -1,4 +1,4 @@
-import { readdirSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { expect, test, type Page } from "@playwright/test";
 import { parse } from "yaml";
 
@@ -60,6 +60,32 @@ const FRENTES = (
 const EN_PREPARACION = FRENTES.filter((f) => f.estado === "en-preparacion");
 if (EN_PREPARACION.length === 0)
   throw new Error("data/vitrina.yaml sin frentes en preparación");
+
+/**
+ * Los frentes ABIERTOS que no son «apps» (S7) y sus piezas, leídas de
+ * `content/<frente>/` — la misma fuente que renderiza la página, así que una
+ * ficha nueva entra al e2e sola.
+ */
+type Pieza = {
+  pieza: { slug: string; nombre: string; estado: string };
+  promesa: { tagline: string };
+  proceso?: unknown;
+  titular: string;
+};
+const piezasDe = (frente: string): Pieza[] =>
+  existsSync(`content/${frente}`)
+    ? readdirSync(`content/${frente}`)
+        .filter((f) => f.endsWith(".ficha-tecnica.json"))
+        .map(
+          (f) =>
+            JSON.parse(readFileSync(`content/${frente}/${f}`, "utf8")) as Pieza,
+        )
+    : [];
+const ABIERTOS = FRENTES.filter(
+  (f) => f.estado === "abierta" && f.id !== "apps",
+).map((f) => ({ ...f, piezas: piezasDe(f.id) }));
+if (ABIERTOS.length === 0)
+  throw new Error("data/vitrina.yaml sin frentes abiertos fuera de «apps»");
 
 /** La ficha con más tarjetas: la que mejor estresa la apertura por lectura. */
 const MAS_LARGA = EXPORTS.reduce((a, b) =>
@@ -427,6 +453,200 @@ test.describe("Vitrina — los frentes en preparación (ADR-015)", () => {
     await expect(
       page.locator('header[data-estado="en-preparacion"]'),
     ).toHaveCount(0);
+  });
+});
+
+test.describe("Vitrina — las estanterías: un frente ABIERTO y sus piezas (S7)", () => {
+  test("el escaparate lista TODAS las piezas del frente, y la cuenta es la medida", async ({
+    page,
+  }) => {
+    for (const f of ABIERTOS) {
+      await page.goto(`/es/vitrina/${f.id}`);
+      await expect(
+        page.getByRole("heading", { level: 1, name: f.nombre.es }),
+      ).toBeVisible();
+      await expect(page.locator("[data-muestra-slug]")).toHaveCount(
+        f.piezas.length,
+      );
+      // La cuenta del encabezado NO se escribe: sale de contar los archivos.
+      await expect(page.locator("[data-cuenta-piezas]")).toHaveAttribute(
+        "data-cuenta-piezas",
+        String(f.piezas.length),
+      );
+      // Cada muestra enseña su titular y tres cifras con su procedencia.
+      for (const p of f.piezas) {
+        const m = page.locator(`[data-muestra-slug="${p.pieza.slug}"]`);
+        await expect(m.locator("[data-titular]")).toContainText(
+          p.titular.slice(0, 40),
+        );
+        await expect(m.locator("[data-cifra] [data-fuente]")).toHaveCount(3);
+      }
+    }
+  });
+
+  test("el orden es el del motor: selladas primero, luego alfabético", async ({
+    page,
+  }) => {
+    for (const f of ABIERTOS) {
+      await page.goto(`/es/vitrina/${f.id}`);
+      const enPantalla = await page
+        .locator("[data-muestra-slug]")
+        .evaluateAll((els) =>
+          els.map((e) => e.getAttribute("data-muestra-slug")),
+        );
+      const esperado = [...f.piezas]
+        .sort((a, b) => {
+          if (a.pieza.estado !== b.pieza.estado)
+            return a.pieza.estado === "sellado" ? -1 : 1;
+          return a.pieza.nombre.localeCompare(b.pieza.nombre, "es-CO");
+        })
+        .map((p) => p.pieza.slug);
+      expect(enPantalla).toEqual(esperado);
+    }
+  });
+
+  test("cada pieza tiene su ruta propia con el MISMO renderizador de ficha", async ({
+    page,
+  }) => {
+    for (const f of ABIERTOS) {
+      for (const p of f.piezas) {
+        await page.goto(`/es/vitrina/${f.id}/${p.pieza.slug}`);
+        const ft = page.locator(`[data-ficha-tecnica="${p.pieza.slug}"]`);
+        await expect(ft).toBeVisible();
+        await expect(ft).toHaveAttribute("data-frente", f.id);
+        await expect(
+          page.getByRole("heading", { level: 1, name: p.pieza.nombre }),
+        ).toBeVisible();
+        // Solo las selladas enseñan su fecha de sello (contrato v1.2.0).
+        await expect(ft.locator("[data-sellado-en]")).toHaveCount(
+          p.pieza.estado === "sellado" ? 1 : 0,
+        );
+      }
+    }
+  });
+
+  test("una ficha SIN proceso renumera: no hay hueco, y «Cómo funciona» no existe", async ({
+    page,
+  }) => {
+    const sinProceso = ABIERTOS.flatMap((f) =>
+      f.piezas.filter((p) => !p.proceso).map((p) => ({ f, p })),
+    );
+    expect(
+      sinProceso.length,
+      "ninguna pieza sin proceso: esta prueba no está vigilando nada",
+    ).toBeGreaterThan(0);
+
+    for (const { f, p } of sinProceso) {
+      await page.goto(`/es/vitrina/${f.id}/${p.pieza.slug}`);
+      const ft = page.locator(`[data-ficha-tecnica="${p.pieza.slug}"]`);
+      // La sección del proceso no existe, ni su declaración de procedencia.
+      await expect(ft.locator("[data-procedencia-proceso]")).toHaveCount(0);
+      await expect(ft.locator("[data-proceso]")).toHaveCount(0);
+      // Y las cuatro que quedan van 01·02·03·04, sin saltarse un número.
+      const secciones = await ft
+        .locator("section[aria-labelledby]")
+        .evaluateAll((els) =>
+          els.map((e) => e.getAttribute("aria-labelledby")),
+        );
+      expect(secciones).toEqual([
+        `ft-01-${p.pieza.slug}`,
+        `ft-02-${p.pieza.slug}`,
+        `ft-03-${p.pieza.slug}`,
+        `ft-04-${p.pieza.slug}`,
+      ]);
+      await expect(ft.locator(`#ft-05-${p.pieza.slug}`)).toHaveCount(0);
+    }
+  });
+
+  test("una pieza cierra con la lista de espera y NADA más: no hay detalle que prometer", async ({
+    page,
+  }) => {
+    const { f, piezas } = { f: ABIERTOS[0], piezas: ABIERTOS[0].piezas };
+    await page.goto(`/es/vitrina/${f.id}/${piezas[0].pieza.slug}`);
+    await expect(page.locator('[data-cta="detalle"]')).toHaveCount(0);
+    await expect(page.locator('[data-cta="lista-de-espera"]')).toHaveCount(1);
+    await expect(page.locator("#contacto-vitrina")).toHaveCount(1);
+    // Y tampoco lo promete con palabras: sin detalle, «Qué tiene» no puede
+    // mandar al lector a una ficha completa que no existe.
+    await expect(page.locator("main")).not.toContainText(
+      "vive en la ficha completa",
+    );
+  });
+
+  test("se navega entre piezas VECINAS del mismo frente, sin salir de él", async ({
+    page,
+  }) => {
+    const f = ABIERTOS[0];
+    test.skip(
+      f.piezas.length < 2,
+      "el frente necesita dos piezas para vecinas",
+    );
+    await page.goto(`/es/vitrina/${f.id}`);
+    const primera = await page
+      .locator("[data-muestra-slug]")
+      .first()
+      .getAttribute("data-muestra-slug");
+    await page.goto(`/es/vitrina/${f.id}/${primera}`);
+    await page.getByText("Pieza siguiente").click();
+    await expect(page).toHaveURL(new RegExp(`/es/vitrina/${f.id}/[a-z0-9-]+$`));
+    // Y la miga vuelve al escaparate del frente, no a la vitrina entera.
+    await page.getByText(`Volver a ${f.nombre.es}`).click();
+    await expect(page).toHaveURL(new RegExp(`/es/vitrina/${f.id}$`));
+  });
+
+  test("gate ATS/SEO: escaparate y ficha entregan su contenido en el HTML estático", async ({
+    page,
+  }) => {
+    const f = ABIERTOS[0];
+    const escaparate = await (
+      await page.request.get(`/es/vitrina/${f.id}`)
+    ).text();
+    for (const p of f.piezas) {
+      expect(escaparate).toContain(p.pieza.nombre);
+      expect(escaparate).toContain(p.titular.slice(0, 60));
+    }
+    const ficha = await (
+      await page.request.get(`/es/vitrina/${f.id}/${f.piezas[0].pieza.slug}`)
+    ).text();
+    expect(ficha).toContain(f.piezas[0].promesa.tagline);
+  });
+
+  test("CERO ENLACES en las rutas nuevas: ni una URL, ni un DOI", async ({
+    page,
+  }) => {
+    const f = ABIERTOS[0];
+    for (const ruta of [
+      `/es/vitrina/${f.id}`,
+      `/es/vitrina/${f.id}/${f.piezas[0].pieza.slug}`,
+    ]) {
+      await page.goto(ruta);
+      // Mismo alcance que la prueba del S5: dentro del CONTENIDO no sale un
+      // enlace a otro sitio. El pie queda fuera a propósito — lleva los
+      // perfiles públicos de la persona, que no son producción que se entregue.
+      await expect(page.locator("main a[href^='http']")).toHaveCount(0);
+      // Y en el texto tampoco: una investigación es justo donde se cuela un DOI.
+      const texto = (await page.locator("main").innerText()).replace(
+        /\s+/g,
+        " ",
+      );
+      expect(texto).not.toMatch(/https?:\/\/|www\.|10\.\d{4,}\//);
+    }
+  });
+
+  test("un frente EN PREPARACIÓN no publica sus piezas aunque las tenga en content/", async ({
+    page,
+  }) => {
+    for (const f of EN_PREPARACION) {
+      const piezas = piezasDe(f.id);
+      if (piezas.length === 0) continue;
+      const res = await page.goto(
+        `/es/vitrina/${f.id}/${piezas[0].pieza.slug}`,
+      );
+      expect(
+        res?.status(),
+        `«${f.id}» está en preparación: sus fichas existen pero no se publican hasta que el frente abra`,
+      ).toBe(404);
+    }
   });
 });
 

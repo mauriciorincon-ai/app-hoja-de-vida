@@ -39,8 +39,3 @@ export const getFrentes = cache((): Frente[] =>
 export function getFrente(id: string): Frente | undefined {
   return getFrentes().find((f) => f.id === id);
 }
-
-/** Los que tienen página genérica «este frente empieza» (`/vitrina/[categoria]`). */
-export function frentesEnPreparacion(): Frente[] {
-  return getFrentes().filter((f) => f.estado === "en-preparacion");
-}

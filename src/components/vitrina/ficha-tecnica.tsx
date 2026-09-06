@@ -273,7 +273,13 @@ export async function FichaTecnica({
         n={n.s03!}
         id={`ft-${n.s03}-${pieza.slug}`}
         titulo={t("s03")}
-        sub={t("s03sub", { grupos: bloques.length, n: totalFuncionalidades })}
+        // «El detalle de cada una vive en la ficha completa» solo es verdad si
+        // esa ficha completa existe. Una pieza sin detalle no puede mandar al
+        // lector a un sitio que no hay — el subtítulo dice la cuenta y calla.
+        sub={t(hrefDetalle ? "s03sub" : "s03subSinDetalle", {
+          grupos: bloques.length,
+          n: totalFuncionalidades,
+        })}
       >
         <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {bloques.map((b) => (
