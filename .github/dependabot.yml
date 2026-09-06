@@ -1,8 +1,28 @@
 # Estampado del kit-app (kit v1.23.1) — adoptado en el Sprint 005.
-# REGLA DEL USUARIO (2026-08-22, regla 18 del CLAUDE.md): máximo DOS PRs de dependencias
+# REGLA DEL USUARIO (2026-08-22, regla 17 del CLAUDE.md): máximo DOS PRs de dependencias
 # abiertos a la vez — jamás una lista de merges pendientes. Un PR agrupado por ecosistema.
 # (Un limit 5 POR ecosistema daría hasta 10 abiertos, y la primera activación vuelca el
 # atraso entero de golpe: produjo una cola de 6 en Innmobiliaria.)
+#
+# EL LOTE SEMANAL SOLO LLEVA MINOR Y PATCH (2026-09-06, PRs #10 y #14 — raíz).
+# Un grupo con patterns ["*"] y sin `update-types` mete los MAYORES en el mismo PR
+# que 35 parches sanos; basta UN mayor sin soporte (eslint 10, typescript 7) para
+# que `pnpm peers check` ponga rojo el lote entero, y el lote se rehace cada semana
+# con el mismo mayor adentro: el error se arrastra. El `ignore` de abajo NO lo
+# evitó: `@dependabot show eslint ignore conditions` en el #14 devolvió `[]` — el
+# job se armó sin las condiciones del archivo. Por eso la barrera vive en la
+# definición del GRUPO (`update-types`), que dependabot sí aplica al armarlo, y
+# no en el `ignore`.
+#
+# Los mayores quedan FUERA del lote: dependabot los abre SUELTOS, uno por
+# dependencia, y solo cuando el cupo (limit 1) está libre — es decir, en una
+# semana sin menores/parches o tras mergear el lote. Un mayor es una DECISIÓN
+# (cambio de API, plugins que aún no lo soportan), no un bump: se revisa solo y
+# se mergea o se cierra sin arrastrar a nadie. Si se quiere que lleguen más
+# seguido, la palanca es `open-pull-requests-limit: 2` en npm (el usuario decide:
+# subiría el techo total a 3 con el de actions).
+#
+# `tests/unit/dependabot-config.test.ts` vigila estas invariantes (regla 14).
 version: 2
 updates:
   - package-ecosystem: "npm"
@@ -13,11 +33,12 @@ updates:
     groups:
       todo-npm:
         patterns: ["*"]
+        update-types: ["minor", "patch"]
     # Mayores que el ecosistema aún no alcanza (2026-09-05, PR #10): ESLint 10
     # no lo soportan eslint-plugin-import/react/jsx-a11y, y TypeScript 7 queda
-    # fuera del rango de typescript-eslint 8.x (<6.1). Metidos en el grupo,
-    # `pnpm peers check` pone rojo el PR entero y bloquea los otros 36 bumps.
-    # Se retira cada ignore cuando sus plugins publiquen soporte.
+    # fuera del rango de typescript-eslint 8.x (<6.1). Se conserva como segunda
+    # barrera —si algún día el job sí lo lee, ni siquiera abren sueltos— y se
+    # retira cada ignore cuando sus plugins publiquen soporte.
     ignore:
       - dependency-name: "eslint"
         update-types: ["version-update:semver-major"]
