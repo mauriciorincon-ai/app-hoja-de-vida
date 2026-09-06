@@ -12,8 +12,8 @@
 
 ## 1. Qué es una ficha técnica
 
-La capa de **dos minutos** de una pieza: lo que se lee para decidir si se entra al detalle. Siete
-bloques, siempre en el mismo orden. Cada bloque pide datos concretos, con límites concretos —
+La capa de **dos minutos** de una pieza: lo que se lee para decidir si se entra al detalle. Hasta
+siete bloques, siempre en el mismo orden (el proceso es opcional). Cada bloque pide datos concretos, con límites concretos —
 escribe **para el layout**, no para un documento.
 
 | #   | Bloque                           | Campos del JSON                                       | Límites                                                  |
@@ -100,9 +100,10 @@ Reglas (el esquema las exige):
   procedencia sin proceso.
   Se muestra al pie del diagrama. **Sin dueño declarado, el proceso es una cifra sin fuente.**
 
-BPMN es el lenguaje para piezas con un proceso de uso. Si tu pieza no lo tiene (una línea de
-investigación tiene una metodología; un agente, una cadena de comandos), sigue siendo un proceso:
-los carriles cambian (investigador · fuentes · agente), la gramática no.
+BPMN es el lenguaje para piezas con un proceso que contar. Muchas lo tienen aunque no sea «de
+uso» (una línea de investigación tiene una metodología; un agente, una cadena de comandos): los
+carriles cambian (investigador · fuentes · agente), la gramática no. Si de verdad no hay proceso,
+omítelo — una ficha sin «Cómo funciona» es mejor que un diagrama inventado.
 
 ## 4. Lo que CV Viva pone, y tú no
 
