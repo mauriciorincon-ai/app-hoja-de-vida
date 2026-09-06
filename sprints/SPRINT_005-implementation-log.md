@@ -1046,3 +1046,83 @@ Ambas nombran al grupo y a la línea. Restaurado: `4 passed (4)`.
 - **El `ignore` de dependabot.yml no es un gate:** no se puede ver operar y aquí no operó.
   Un mecanismo que no se puede demostrar fallando ni funcionando no debería sostener una regla
   del método (regla 14 aplicada a la configuración de terceros).
+
+## Post-cierre V — el motor BPMN aprende a no pisarse (2026-09-06, fuera de sprint)
+
+### El pedido
+
+El usuario revisó las seis fichas en local y marcó dos con captura: **DS** («no supera» y «sí»
+pegados como «no superasí»; «vuelve a los datos» tachado por una vertical) y **Nutri-Kids** (la
+pregunta «¿Con sus palabras?» desbordando el rombo, con la flecha de entrada atravesándola).
+«Corrige y sigamos, necesitamos avanzar más rápido, trabajemos inteligente.»
+
+### La causa (motor, no datos)
+
+Las tres eran reglas de colocación del motor que solo fallan en la **segunda fila** (tras el
+evento de enlace Ⓐ), donde una compuerta queda en la primera columna con dos caminos que salen
+hacia la misma zona:
+
+1. El rótulo del flujo que **cambia de carril** iba en el codo, junto al origen — el mismo sitio
+   que el rótulo del camino **recto** de la misma compuerta cuando el destino está en la columna
+   siguiente (el canal vertical queda a 58px del rombo).
+2. El rótulo de la **salida a un enlace por canal** iba a la izquierda de la bajada, anclado al
+   final: un rótulo de 80–110px cruzaba la vertical del flujo que entra por la columna anterior.
+   A la derecha tampoco cabía (la vertical del camino recto está a 52px).
+3. El texto de la **compuerta** iba siempre dentro del rombo (62px de diagonal): con 18
+   caracteres desborda 60px a cada lado.
+
+Y una cuarta que **nadie había visto**, destapada por la invariante nueva: en **Dash**, el «no» de
+«¿Corregir?» iba **recto al fin por el mismo carril, por detrás de «Corrige la memoria»** — la caja
+tapaba la línea y el rótulo, y la compuerta parecía tener un solo camino.
+
+### Qué se hizo (`src/lib/vitrina/bpmn.ts`, `proceso-bpmn.tsx`)
+
+- **Cambio de carril:** rótulo sobre el tramo vertical, a la altura del **primer borde de carril**
+  que cruza — franja sin cajas (van a ±29 del centro) ni horizontales (van por el centro).
+- **Salida a enlace por canal:** rótulo al **arranque del canal inferior**, a la derecha de la
+  bajada (13px entre el fondo de las cajas y el canal).
+- **Compuerta:** texto **dentro si tiene ≤ 9 caracteres**, encima en líneas de ≤ 16 si no
+  (`rotuloFuera`; cuenta caracteres con `Array.from`, no bytes — «¿» pesa dos). Cambian de
+  aspecto «¿Corregir?», «¿Aceptable?» y «¿Con sus palabras?»; «¿Supera?», «¿Acertó?» y
+  «¿Renueva?» siguen dentro.
+- **Salto de nodo en el mismo carril:** si entre origen y destino hay un nodo del mismo carril,
+  el flujo va **por debajo, dentro del carril** (7px bajo las cajas) y entra al destino por
+  abajo. Recto ya no existe para ese caso.
+- Docs: `design-system.md` (dónde va cada rótulo), `CLAVE-VISUAL.md` (regla de la pregunta ≤ 9),
+  `referencia.html` (figura de Habla regenerada desde la página) y `referencia.png` (recapturada).
+
+### Regla 14 — las invariantes nuevas, demostradas en ROJO
+
+`tests/unit/bpmn.test.ts` gana **cinco invariantes × los seis procesos reales** (de 10 a 40
+tests): dos rótulos nunca se pisan · ningún rótulo tachado por una vertical ajena · el texto de la
+compuerta cabe o va encima · ningún flujo atraviesa una caja ajena · ningún rótulo cruzado por un
+tramo ajeno. Geometría estimada a 6.3px/carácter y 11px de alto.
+
+**Demo — los tests nuevos contra el motor de HEAD** (`git stash` del motor, tests en su sitio):
+
+```
+× ds: dos rótulos de flujo nunca se pisan
+AssertionError: «no supera» (supera→veredicto) pisa a «sí» (supera→porque)
+× ds: ningún rótulo queda tachado por la vertical de otro flujo
+AssertionError: «vuelve a los datos» (veredicto→enlace:B) queda tachado por la vertical de supera→veredicto en x=284
+× habla: ningún rótulo queda tachado por la vertical de otro flujo
+AssertionError: «no · otra vez» (acierto→enlace:B) queda tachado por la vertical de responde→acierto en x=284
+× nutri-kids: el texto de cada compuerta cabe en el rombo o va encima
+AssertionError: «¿Con sus palabras?» (abierta) no cabe dentro del rombo y no va encima
+× dash-agent-ai: ningún flujo atraviesa una caja ajena
+AssertionError: corregir→fin atraviesa la caja de «corrige» (tramo 512,616→699,616)
+Tests  12 failed | 28 passed (40)
+```
+
+Nombran el proceso, el flujo y la coordenada. Con el motor nuevo: `40 passed (40)`. La primera
+versión de la corrección (rótulo de la salida a la **derecha** de la bajada) dejó 4 en rojo —
+Habla y Anonimizador, «no · otra vez» sobre el «sí» — y fue el test, no el ojo, quien mandó el
+rótulo al canal inferior.
+
+### Lo que aprendí
+
+Las dos capturas del usuario eran síntomas de una sola cosa: **el motor colocaba rótulos por
+posición relativa al origen, sin mirar qué más vive ahí**. La corrección inteligente no fue
+mover dos etiquetas: fue escribir la invariante («nada se pisa, nada se esconde») sobre los
+seis procesos reales y dejar que ella dijera dónde caben. Cazó una cuarta falla que tres pares
+de ojos no vieron.

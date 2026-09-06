@@ -152,11 +152,18 @@ animaciones infinitas (sweep/glitch/marquee), scroll-snap de deck, CDNs en `<hea
 - **Proceso BPMN** (`ProcesoBpmn`, motor `lib/vitrina/bpmn.ts`): SVG generado desde datos, jamás
   dibujado. Pool paper-0 borde paper-3 r=10, carriles alternos paper-0/paper-1, rótulos mono 10px
   `ink-2` en banda de 104 unidades. Inicio ○ `sage`/`sage-ink`; tarea ▭ paper-0 borde `ink-0` 1.3
-  r=8, texto 11px medium (≤ 3 líneas de ~17 caracteres); decisión ◇ `citron`/`citron-ink`; fin ◉
-  borde `ink-0` 3px; flujos `ink-1` 1.4 con flecha, etiquetas 10.5px semibold `sage-ink`; llamadas
-  de anotación ①② `lilac`/`lilac-ink` en la esquina de su tarea con las notas al pie en HTML;
-  eventos de enlace Ⓐ mono 10px cuando el proceso se parte en filas (6 columnas por fila). Por
-  debajo de 720 px el contenedor desplaza en horizontal: **nunca se encoge el texto**.
+  r=8, texto 11px medium (≤ 3 líneas de ~17 caracteres); decisión ◇ `citron`/`citron-ink` con
+  el texto **dentro si cabe (≤ 9 caracteres) y encima, en líneas de ≤ 16, si no** — largo y
+  dentro, la flecha de entrada lo atravesaba; fin ◉ borde `ink-0` 3px; flujos `ink-1` 1.4 con
+  flecha, etiquetas 10.5px semibold `sage-ink`. **Dónde va cada etiqueta (2026-09-06):** camino
+  recto, sobre el tramo, a mitad; cambio de carril, sobre el tramo vertical a la altura del
+  primer borde de carril (franja sin cajas ni horizontales); bucle, junto a la bajada; salida a
+  un evento de enlace por canal, al arranque del canal inferior. Nunca dos junto al mismo
+  origen: se pisaban («no supera» + «sí»). Llamadas de anotación ①② `lilac`/`lilac-ink` en la
+  esquina de su tarea con las notas al pie en HTML; eventos de enlace Ⓐ mono 10px cuando el
+  proceso se parte en filas (6 columnas por fila). Por debajo de 720 px el contenedor desplaza en
+  horizontal: **nunca se encoge el texto**. Las invariantes de legibilidad (rótulos que no se
+  pisan ni quedan tachados) se prueban sobre los seis procesos reales.
 - **Caja de frente** (portal `/vitrina`, ADR-015 · post-S5): la unidad del portal, una por frente
   (apps · agentes · investigaciones · tableros). Card paper-0, borde paper-2, `r-lg`, `sh-1`,
   hover `-translate-y-0.5` + `sh-2`. Arriba, a la izquierda el **icono del frente** en un cuadro

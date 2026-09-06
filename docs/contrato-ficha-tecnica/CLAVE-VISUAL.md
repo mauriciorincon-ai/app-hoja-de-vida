@@ -13,20 +13,20 @@ La capa de **dos minutos** de una pieza: lo que se lee para decidir si se entra 
 bloques, siempre en el mismo orden. Cada bloque pide datos concretos, con límites concretos —
 escribe **para el layout**, no para un documento.
 
-| # | Bloque | Campos del JSON | Límites |
-|---|---|---|---|
-| 0 | **Cabecera** | `pieza.*` · `promesa.tagline` · `stack[]` · `titular` | tagline ≤ 80 · titular ≤ 240 · stack 1–8 |
-| — | **Tira de cifras** | `cifras[]` | **3–5**, cada una con `fuente` |
-| 1 | **Para quién, y qué resuelve** | `promesa.para_quien` · `promesa.intro` | ≤ 400 cada uno |
-| 2 | **Cómo funciona** | `proceso` (BPMN) + `procedencia_proceso` | ver §3 |
-| 3 | **Qué tiene** | `bloques[]` | 2–10 · nombre ≤ 40 · línea ≤ 120 |
-| 4 | **Límites, y lo que nunca hace** | `limites[]` · `nunca[]` | 2–4 y 2–5 · ≤ 160 cada uno |
-| 5 | **Dónde está** | `hitos[]` | 3–5 · valor ≤ 24 · etiqueta ≤ 40 |
-| — | **Cierre** | — | lo pone CV Viva: detalle (si existe) + lista de espera |
+| #   | Bloque                           | Campos del JSON                                       | Límites                                                |
+| --- | -------------------------------- | ----------------------------------------------------- | ------------------------------------------------------ |
+| 0   | **Cabecera**                     | `pieza.*` · `promesa.tagline` · `stack[]` · `titular` | tagline ≤ 80 · titular ≤ 240 · stack 1–8               |
+| —   | **Tira de cifras**               | `cifras[]`                                            | **3–5**, cada una con `fuente`                         |
+| 1   | **Para quién, y qué resuelve**   | `promesa.para_quien` · `promesa.intro`                | ≤ 400 cada uno                                         |
+| 2   | **Cómo funciona**                | `proceso` (BPMN) + `procedencia_proceso`              | ver §3                                                 |
+| 3   | **Qué tiene**                    | `bloques[]`                                           | 2–10 · nombre ≤ 40 · línea ≤ 120                       |
+| 4   | **Límites, y lo que nunca hace** | `limites[]` · `nunca[]`                               | 2–4 y 2–5 · ≤ 160 cada uno                             |
+| 5   | **Dónde está**                   | `hitos[]`                                             | 3–5 · valor ≤ 24 · etiqueta ≤ 40                       |
+| —   | **Cierre**                       | —                                                     | lo pone CV Viva: detalle (si existe) + lista de espera |
 
 ## 2. Cómo escribir cada bloque
 
-**Titular de valor** — *qué no hace nadie más*, en una frase. No es un eslogan ni una promesa
+**Titular de valor** — _qué no hace nadie más_, en una frase. No es un eslogan ni una promesa
 comercial: es la afirmación defendible que distingue la pieza. Si un competidor podría firmarla,
 no es el titular.
 
@@ -80,7 +80,9 @@ Reglas (el esquema las exige):
 - **Un paso por acción.** `texto` ≤ 60 caracteres; si no cabe, son dos pasos. El orden del array
   es el orden de lectura (izquierda → derecha): tú controlas la narrativa.
 - Exactamente **un inicio**; al menos **un fin**. Todo paso debe ser alcanzable y tener salida.
-- **Una decisión tiene ≥ 2 caminos**, cada uno con `etiqueta` corta («sí», «no · ajusta»).
+- **Una decisión tiene ≥ 2 caminos**, cada uno con `etiqueta` corta («sí», «no · ajusta»). Su
+  `texto` es la pregunta: si tiene **≤ 9 caracteres** («¿Acertó?») se pinta dentro del rombo; más
+  largo («¿Con sus palabras?») va encima, partido en líneas. Prefiere la corta cuando exista.
 - **Los bucles se declaran** como flujos hacia atrás; el motor los dibuja por debajo del pool.
 - **Anotaciones** (≤ 6, ≤ 140 caracteres): lo que el diagrama no dice y hay que saber
   (privacidad, garantías). Se pintan como llamadas numeradas ①② con el texto al pie.

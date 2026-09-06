@@ -53,6 +53,14 @@ export type Nodo = {
   b: number;
   /** Número de llamada (①…) si tiene anotación. */
   nota?: number;
+  /**
+   * Solo decisiones: el texto NO cabe dentro del rombo y se pinta ENCIMA,
+   * partido en `lineas` (convención BPMN: el rótulo de la compuerta va fuera).
+   * Dentro solo cuando es corto — «¿Supera?» sí, «¿Con sus palabras?» no:
+   * con 18 caracteres desbordaba 60px a cada lado y la flecha de entrada lo
+   * atravesaba (Nutri-Kids, 2026-09-06).
+   */
+  rotuloFuera?: boolean;
 };
 
 export type CarrilTrazado = {
@@ -127,6 +135,13 @@ const MAX_CARACTERES_LINEA = 19;
 const MAX_LINEAS = 3;
 /** Caracteres por línea del rótulo de carril (mono 10px en la banda). */
 const MAX_CARACTERES_CARRIL = 13;
+/**
+ * Caracteres que caben DENTRO del rombo (su diagonal mide LADO·√2 ≈ 62px; a
+ * ~6.2px por carácter en 10.5px semibold, 9 caracteres ≈ 56px). Más largo,
+ * el rótulo va encima, partido a `MAX_CARACTERES_ROTULO_DECISION`.
+ */
+export const MAX_CARACTERES_DENTRO_DECISION = 9;
+const MAX_CARACTERES_ROTULO_DECISION = 16;
 
 /** Parte un texto en líneas de ~N caracteres, sin cortar palabras. */
 export function partirTexto(
@@ -152,6 +167,11 @@ export function partirTexto(
 }
 
 const LETRAS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+/** `Array.from` cuenta caracteres, no bytes («¿» pesa dos en UTF-8). */
+function cabeDentro(texto: string): boolean {
+  return Array.from(texto).length <= MAX_CARACTERES_DENTRO_DECISION;
+}
 
 function anchoColumna(p: { tipo: TipoPaso; texto: string }): number {
   if (p.tipo === "inicio")
@@ -247,7 +267,9 @@ export function trazar(proceso: Proceso, opciones: Opciones = {}): Trazo {
             ? partirTexto(p.texto)
             : p.tipo === "inicio"
               ? partirTexto(p.texto, 15)
-              : [p.texto],
+              : p.tipo === "decision" && !cabeDentro(p.texto)
+                ? partirTexto(p.texto, MAX_CARACTERES_ROTULO_DECISION)
+                : [p.texto],
         carril: p.carril,
         fila: f,
         col: f * porFila + c,
@@ -258,6 +280,9 @@ export function trazar(proceso: Proceso, opciones: Opciones = {}): Trazo {
         t: y - hh,
         b: y + hh,
         nota: notaDe.get(p.id),
+        ...(p.tipo === "decision" && !cabeDentro(p.texto)
+          ? { rotuloFuera: true }
+          : {}),
       });
     });
   });
@@ -300,9 +325,16 @@ export function trazar(proceso: Proceso, opciones: Opciones = {}): Trazo {
           ? `M${A.r},${A.y} H${salida.x - G.RADIO_ENLACE}`
           : `M${A.x},${A.b} V${canalInf} H${salida.x} V${salida.y + G.RADIO_ENLACE}`,
         etiqueta: f.etiqueta,
-        lx: libreDerecha ? A.r + 6 : A.x - 6,
-        ly: libreDerecha ? A.y - 6 : A.b + 14,
-        anclaTexto: libreDerecha ? "start" : "end",
+        // Con canal, el rótulo va al ARRANQUE DEL CANAL INFERIOR, a la derecha
+        // de la bajada. Pegado al nodo no cabe: a la izquierda cruza la
+        // vertical del flujo que entra por la columna anterior («vuelve a los
+        // datos» tachado, DS) y a la derecha la del que sale hacia la columna
+        // siguiente («no · otra vez» sobre el «sí», Habla) — entre ambas hay
+        // 52px y un rótulo corto mide 80. La franja del canal, en cambio, no
+        // tiene cajas (terminan 13px arriba) ni verticales ajenas.
+        lx: libreDerecha ? A.r + 6 : A.x + 6,
+        ly: libreDerecha ? A.y - 6 : canalInf - 3,
+        anclaTexto: "start",
       });
       flujos.push({
         de: `enlace:${L}`,
@@ -317,7 +349,17 @@ export function trazar(proceso: Proceso, opciones: Opciones = {}): Trazo {
     const filaY = filasTrazadas[A.fila];
     const colXB = filas[B.fila].xs[B.col - B.fila * porFila];
 
-    if (A.col < B.col && A.carril === B.carril) {
+    const saltaNodo =
+      A.carril === B.carril &&
+      nodos.some(
+        (n) =>
+          n.fila === A.fila &&
+          n.carril === A.carril &&
+          n.col > A.col &&
+          n.col < B.col,
+      );
+
+    if (A.col < B.col && A.carril === B.carril && !saltaNodo) {
       // Recto, mismo carril.
       flujos.push({
         de: A.id,
@@ -327,6 +369,23 @@ export function trazar(proceso: Proceso, opciones: Opciones = {}): Trazo {
         lx: (A.r + B.l) / 2,
         ly: A.y - 6,
       });
+    } else if (A.col < B.col && saltaNodo) {
+      // Mismo carril pero con un nodo EN MEDIO: recto pasaría por detrás de
+      // su caja (la caja tapa la línea y el rótulo, y una decisión parece
+      // tener un solo camino — el «no» de «¿Corregir?» en Dash, 2026-09-06).
+      // Va por debajo, dentro del carril: baja del origen, corre 7px bajo las
+      // cajas (terminan a 21 del borde) y entra al destino por abajo.
+      const carril = filaY.carriles.find((c) => c.id === A.carril)!;
+      const yBajo = carril.y + carril.alto - 14;
+      flujos.push({
+        de: A.id,
+        a: B.id,
+        d: `M${A.x},${A.b} V${yBajo} H${B.x} V${B.b}`,
+        etiqueta: f.etiqueta,
+        // A 10px de la bajada: a 6 rozaba la esquina inferior del rombo.
+        lx: A.x + 10,
+        ly: yBajo - 3,
+      });
     } else if (A.col < B.col) {
       // Adelante, cambia de carril: canal vertical justo antes de la columna destino.
       const canal = colXB - 8;
@@ -335,11 +394,17 @@ export function trazar(proceso: Proceso, opciones: Opciones = {}): Trazo {
         a: B.id,
         d: `M${A.r},${A.y} H${canal} V${B.y} H${B.l}`,
         etiqueta: f.etiqueta,
-        // Sobre el tramo vertical, pegado al canal: una decisión suele tener un
-        // camino recto (su rótulo va junto al origen) y uno que cambia de
-        // carril — si los dos rótulos fueran junto al origen se pisarían.
+        // Sobre el tramo VERTICAL, a la altura del primer borde de carril que
+        // cruza: esa franja nunca tiene cajas (van a ±29 del centro) ni
+        // tramos horizontales (van por el centro). En el codo, junto al
+        // origen, se pisaba con el rótulo del camino recto de la misma
+        // decisión cuando el destino está en la columna siguiente
+        // («no supera» + «sí» = «no superasí», DS 2026-09-06).
         lx: canal + 5,
-        ly: B.y > A.y ? A.y + 14 : A.y - 8,
+        ly:
+          B.y > A.y
+            ? A.y + G.ALTO_CARRIL / 2 - 5
+            : A.y - G.ALTO_CARRIL / 2 + 13,
       });
     } else if (A.col === B.col) {
       // Vertical, misma columna.
