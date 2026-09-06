@@ -1,0 +1,52 @@
+# Complemento de la ficha técnica de Hablemos San (ADR-016). Lo que su
+# brochure-export v1.0.0 no trae: titular · cifras destacadas · límites ·
+# nunca · proceso. PROCEDENCIA: cv-viva — derivado de su export por CV Viva;
+# se retira el día que la app lo mande en el suyo.
+schema_version: "1.0.0"
+app: habla
+procedencia: cv-viva
+declarado_en: "2026-09-05"
+titular: "Solo afirma lo que de verdad midió —hubo voz, duró tanto, el tono subió— y jamás finge reconocer la palabra: quien juzga el acierto es el padre. Y la voz del niño no se graba nunca."
+cifras_destacadas: [funcionalidades, pantallas, llamadas_de_red, cobertura_lineas, costo_operacion_mensual]
+limites:
+  - "Acompaña la terapia; jamás la reemplaza."
+  - "Se juega de a dos: no existe un «modo niño solo», a propósito."
+  - "No reconoce la palabra ni califica la pronunciación: ninguna tecnología lo hace hoy con fiabilidad en español para 4–6 años, y esta no lo simula."
+nunca:
+  - "Graba, guarda o envía la voz del niño — hay pruebas en el CI que rompen el código si alguien lo intenta."
+  - "Usa la cámara."
+  - "Pide cuenta, nube ni IA."
+  - "Hace una sola petición a internet durante el juego."
+proceso:
+  titulo: "Una sesión de práctica en casa"
+  carriles:
+    - { id: padre, nombre: "Papá · Mamá" }
+    - { id: nino, nombre: "Niño (4–6)" }
+    - { id: app, nombre: "La app · en el aparato" }
+  pasos:
+    - { id: ini, tipo: inicio, carril: padre, texto: "Cada día" }
+    - { id: idea, tipo: tarea, carril: padre, texto: "Abre la idea del día" }
+    - { id: juego, tipo: tarea, carril: padre, texto: "Elige el juego y da la consigna" }
+    - { id: habla, tipo: tarea, carril: nino, texto: "Habla: su voz es el control" }
+    - { id: mide, tipo: tarea, carril: app, texto: "Mide energía y tono, en memoria" }
+    - { id: descarta, tipo: tarea, carril: app, texto: "Descarta el audio al instante" }
+    - { id: responde, tipo: tarea, carril: app, texto: "Responde con la voz de la familia" }
+    - { id: acierto, tipo: decision, carril: padre, texto: "¿Acertó?" }
+    - { id: suma, tipo: tarea, carril: app, texto: "Suma al objetivo de la semana" }
+    - { id: rumbo, tipo: tarea, carril: padre, texto: "Revisa el rumbo, semana a semana" }
+    - { id: fin, tipo: fin, carril: padre, texto: "" }
+  flujos:
+    - { de: ini, a: idea }
+    - { de: idea, a: juego }
+    - { de: juego, a: habla }
+    - { de: habla, a: mide }
+    - { de: mide, a: descarta }
+    - { de: descarta, a: responde }
+    - { de: responde, a: acierto }
+    - { de: acierto, a: suma, etiqueta: "sí" }
+    - { de: acierto, a: habla, etiqueta: "no · otra vez" }
+    - { de: suma, a: rumbo }
+    - { de: rumbo, a: fin }
+  anotaciones:
+    - { paso: mide, texto: "La voz del niño nunca se guarda ni sale del aparato: se analiza en memoria y se descarta." }
+    - { paso: responde, texto: "Con la voz que la familia grabó una sola vez en el Estudio, en ese mismo aparato." }

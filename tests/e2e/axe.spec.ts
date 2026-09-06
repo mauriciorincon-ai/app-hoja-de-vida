@@ -62,9 +62,12 @@ const RUTAS = [
   "/en/vitrina",
   "/es/vitrina/apps",
   "/en/vitrina/apps",
+  // Por app: la ficha técnica (ADR-016) Y su detalle — dos rutas, dos scans.
   ...slugsVitrina.flatMap((s) => [
     `/es/vitrina/apps/${s}`,
     `/en/vitrina/apps/${s}`,
+    `/es/vitrina/apps/${s}/detalle`,
+    `/en/vitrina/apps/${s}/detalle`,
   ]),
   ...frentesEnPreparacion.flatMap((f) => [
     `/es/vitrina/${f}`,

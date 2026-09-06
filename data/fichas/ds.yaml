@@ -1,0 +1,49 @@
+# Complemento de la ficha técnica de Probeta DS (ADR-016). PROCEDENCIA:
+# cv-viva — derivado de su export por CV Viva; se retira cuando la app mande el suyo.
+schema_version: "1.0.0"
+app: ds
+procedencia: cv-viva
+declarado_en: "2026-09-05"
+titular: "Enseña la pantalla en la que su propio producto falla: el veredicto contra el baseline dice «NO supera» cuando no supera, la fuga de datos es imposible por construcción y toda cifra sale del conjunto de prueba."
+cifras_destacadas: [funcionalidades, filas_del_usuario_en_la_red, cobertura_lineas, gpu_requerida, costo_operacion_mensual]
+limites:
+  - "Si el modelo no supera al baseline, lo dice — el incentivo del mercado es el contrario."
+  - "El preprocesamiento se ajusta solo con la mitad de entrenamiento; la interfaz no ofrece otro camino."
+  - "No es una app local: se sirve desde la web con UNA ruta de servidor — pero el dataset sí lo es: nunca se sube."
+nunca:
+  - "Sube el dataset a un servidor."
+  - "Ajusta el preprocesamiento con datos de prueba."
+  - "Necesita una GPU."
+  - "Maquilla un veredicto."
+proceso:
+  titulo: "Un modelo que se pueda defender"
+  carriles:
+    - { id: persona, nombre: "Quien defiende el modelo" }
+    - { id: probeta, nombre: "Probeta · en el navegador" }
+  pasos:
+    - { id: ini, tipo: inicio, carril: persona, texto: "Un dataset y una pregunta" }
+    - { id: carga, tipo: tarea, carril: persona, texto: "Carga el dataset en el navegador" }
+    - { id: perfila, tipo: tarea, carril: probeta, texto: "Perfila y sanea los datos" }
+    - { id: parte, tipo: tarea, carril: probeta, texto: "Parte en entrenamiento y prueba" }
+    - { id: ajusta, tipo: tarea, carril: probeta, texto: "Ajusta el preprocesamiento con entrenamiento" }
+    - { id: entrena, tipo: tarea, carril: probeta, texto: "Entrena y compara con el baseline" }
+    - { id: supera, tipo: decision, carril: probeta, texto: "¿Supera?" }
+    - { id: veredicto, tipo: tarea, carril: persona, texto: "Lee el veredicto honesto" }
+    - { id: porque, tipo: tarea, carril: probeta, texto: "Cuenta el porqué, con cifras de prueba" }
+    - { id: usa, tipo: tarea, carril: persona, texto: "Usa el modelo y lo defiende" }
+    - { id: fin, tipo: fin, carril: persona, texto: "" }
+  flujos:
+    - { de: ini, a: carga }
+    - { de: carga, a: perfila }
+    - { de: perfila, a: parte }
+    - { de: parte, a: ajusta }
+    - { de: ajusta, a: entrena }
+    - { de: entrena, a: supera }
+    - { de: supera, a: veredicto, etiqueta: "no supera" }
+    - { de: veredicto, a: perfila, etiqueta: "vuelve a los datos" }
+    - { de: supera, a: porque, etiqueta: "sí" }
+    - { de: porque, a: usa }
+    - { de: usa, a: fin }
+  anotaciones:
+    - { paso: carga, texto: "El dataset nunca se sube: perfilado, entrenamiento y scoring corren en el navegador con Pyodide." }
+    - { paso: ajusta, texto: "La fuga de datos es imposible por construcción: la interfaz no ofrece otro camino." }

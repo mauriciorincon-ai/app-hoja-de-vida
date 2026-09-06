@@ -1,0 +1,49 @@
+# Complemento de la ficha técnica de Innmobiliaria (ADR-016). PROCEDENCIA:
+# cv-viva — derivado de su export por CV Viva; se retira cuando la app mande el suyo.
+schema_version: "1.0.0"
+app: inmobiliaria
+procedencia: cv-viva
+declarado_en: "2026-09-05"
+titular: "Publicar ES unirse, y nada se declara sin comprobarse: el sello de propietario se gana mostrando el certificado —que se ve y nunca se almacena— y los anuncios vencen si nadie los renueva. Cero contadores inventados, cero IA."
+cifras_destacadas: [funcionalidades, pantallas, cobertura_lineas, modelos_de_ia, costo_operacion_mensual]
+limites:
+  - "Bogotá primero: los cupos por zona salen de la base de datos o simplemente no se muestran."
+  - "Se pide el mínimo dato necesario; el WhatsApp del dueño solo es público si él lo activa."
+  - "Sin inteligencia artificial: todo es código determinista."
+nunca:
+  - "Cobra comisión."
+  - "Almacena tu Certificado de Tradición."
+  - "Registra a nadie sin autorización expresa."
+  - "Le vende el vendedor a alguien más."
+  - "Muestra un contador que no salga de una fila real."
+proceso:
+  titulo: "Vender directo, sin comisión"
+  carriles:
+    - { id: dueno, nombre: "El propietario" }
+    - { id: inn, nombre: "Innmobiliaria" }
+    - { id: busca, nombre: "Quien busca" }
+  pasos:
+    - { id: ini, tipo: inicio, carril: dueno, texto: "Quiere vender o arrendar directo" }
+    - { id: publica, tipo: tarea, carril: dueno, texto: "Publica su inmueble" }
+    - { id: minimo, tipo: tarea, carril: inn, texto: "Pide el mínimo dato y la autorización" }
+    - { id: muestra, tipo: tarea, carril: dueno, texto: "Muestra el Certificado de Tradición" }
+    - { id: sello, tipo: tarea, carril: inn, texto: "Otorga el sello de propietario" }
+    - { id: anuncio, tipo: tarea, carril: inn, texto: "Publica el anuncio, con cupo por zona" }
+    - { id: contacta, tipo: tarea, carril: busca, texto: "Encuentra y contacta directo" }
+    - { id: renueva, tipo: decision, carril: dueno, texto: "¿Renueva?" }
+    - { id: vence, tipo: tarea, carril: inn, texto: "El anuncio vence" }
+    - { id: fin, tipo: fin, carril: inn, texto: "" }
+  flujos:
+    - { de: ini, a: publica }
+    - { de: publica, a: minimo }
+    - { de: minimo, a: muestra }
+    - { de: muestra, a: sello }
+    - { de: sello, a: anuncio }
+    - { de: anuncio, a: contacta }
+    - { de: contacta, a: renueva }
+    - { de: renueva, a: anuncio, etiqueta: "sí" }
+    - { de: renueva, a: vence, etiqueta: "no" }
+    - { de: vence, a: fin }
+  anotaciones:
+    - { paso: minimo, texto: "Sin autorización expresa no hay registro (Ley 1581): la fecha del consentimiento se guarda en la misma fila." }
+    - { paso: sello, texto: "El certificado se ve y nunca se almacena." }
