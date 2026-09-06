@@ -5,28 +5,31 @@ import { notFound } from "next/navigation";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { Reveal } from "@/components/motion/reveal";
-import { MuestraApp } from "@/components/vitrina/muestra";
-import { appsConBrochure } from "@/lib/brochure";
+import { CajaFrente } from "@/components/vitrina/caja-frente";
 import { Link } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
 import { getCv } from "@/lib/content";
 import { SITE_URL } from "@/lib/site";
-import { getFichasVitrina } from "@/lib/vitrina/loader";
+import { getFrentes } from "@/lib/vitrina/categorias";
 
 /**
- * LA VITRINA — ÍNDICE (S5, ADR-013): el escaparate de las apps hermanas del
- * portafolio, re-expresadas desde su `brochure-export.json` en el design
- * system de CV Viva.
+ * LA VITRINA — EL PORTAL (post-S5, ADR-015).
  *
- * **Esta ruta es la MUESTRA CORTA.** Cada app tiene su propio espacio en
- * `/vitrina/<slug>`; aquí solo se asoma. La primera versión apilaba las seis
- * fichas enteras en esta página —más de 22 000 px de documento— y eso rompía
- * tres cosas de golpe: ninguna app era direccionable por sí sola, el visitante
- * cargaba las seis para leer una, y el escaparate dejaba de ser escaparate.
- * Una vitrina se recorre de un vistazo; el detalle está adentro.
+ * La vitrina nació como el escaparate de seis apps (S5). Pero lo que se
+ * construye en este taller no son solo apps: hay **agentes especializados**
+ * sin interfaz, **líneas de investigación** ya validadas y **tableros de
+ * datos** en selección. Meterlo todo bajo «apps» habría sido mentir sobre tres
+ * de las cuatro cosas; ponerlo todo en una sola página, repetir el error que
+ * el S5 corrigió (las seis fichas apiladas).
  *
- * 100% SSG. El hero (candidato LCP) nace ESTÁTICO — sin wrapper de motion que
- * arranque en opacity 0 (patrón `lcp-nace-estatico`). **Cero enlaces**: los
+ * Así que `/vitrina` reparte: una caja por frente, con su intro corta y su
+ * estado honesto, y **cada frente tiene su propio espacio** en
+ * `/vitrina/<frente>`. Las apps pasaron a `/vitrina/apps`; los otros tres
+ * frentes nacen «en preparación» y su página lo declara — marcan el inicio,
+ * no lo disfrazan.
+ *
+ * Data-driven: los frentes salen de `data/vitrina.yaml`, en su orden. 100% SSG;
+ * el hero nace estático (patrón `lcp-nace-estatico`). **Cero enlaces**: los
  * únicos destinos son rutas de este repo.
  */
 
@@ -63,14 +66,7 @@ export default async function VitrinaPage({ params }: Params) {
   const l = locale as Locale;
   const cv = getCv(l);
   const t = await getTranslations("vitrina");
-  const fichas = getFichasVitrina();
-  // «De esta casa»: las apps del pipeline que viven en ESTA página y tienen
-  // brochure propia. No son fichas de la vitrina —su contenido nace de
-  // `apps.yaml`, no de un `brochure-export.json`, y el ADR-013 mantiene esas
-  // dos fuentes separadas— pero sí pertenecen a «lo construido», que desde
-  // ahora tiene UNA sola puerta. Antes su acceso era la sección «Apps» de la
-  // HOME, retirada por prometer lo mismo que la vitrina.
-  const propias = appsConBrochure();
+  const frentes = getFrentes();
 
   return (
     <>
@@ -93,65 +89,16 @@ export default async function VitrinaPage({ params }: Params) {
               {t("subtitulo")}
             </p>
             <p className="mt-3 max-w-[60ch] text-[15px] leading-relaxed text-ink-2">
-              {t("indiceNota")}
+              {t("portalNota")}
             </p>
-            {/* En /en: las fichas conservan la voz de cada app (ADR-013 §6). */}
-            {t("notaIdioma") !== "" && (
-              <p className="mt-3 max-w-[60ch] text-sm leading-relaxed text-ink-2 italic">
-                {t("notaIdioma")}
-              </p>
-            )}
           </header>
 
-          <Reveal variant="fadeInUp" amount="some">
-            <ul className="grid gap-5 sm:grid-cols-2">
-              {fichas.map((ficha) => (
-                <MuestraApp key={ficha.ancla.slug} ficha={ficha} />
-              ))}
-            </ul>
-          </Reveal>
-
-          {/* ── De esta casa: lo construido que sostiene esta misma página ── */}
-          {propias.length > 0 && (
-            <Reveal variant="fadeInUp">
-              <section
-                aria-labelledby="de-esta-casa"
-                className="mt-14 border-t border-paper-2 pt-10"
-              >
-                <h2
-                  id="de-esta-casa"
-                  className="font-display text-2xl font-medium tracking-[-0.015em] text-ink-0"
-                >
-                  {t("deEstaCasa")}
-                </h2>
-                <p className="mt-3 max-w-[60ch] text-[15px] leading-relaxed text-ink-1">
-                  {t("deEstaCasaLinea")}
-                </p>
-                <ul className="mt-5 grid gap-3 sm:grid-cols-2">
-                  {propias.map((app) => (
-                    <li key={app.id} className="list-none">
-                      <Link
-                        href={`/apps/${app.id}`}
-                        data-app-propia={app.id}
-                        className="flex h-full flex-col gap-1.5 rounded-[10px] border border-paper-2 bg-paper-0 p-5 transition-[box-shadow] duration-[180ms] hover:shadow-sh-1"
-                      >
-                        <span className="font-display text-[1.05rem] font-medium text-ink-0">
-                          {app.nombre[l]}
-                        </span>
-                        <span className="text-sm leading-relaxed text-ink-2">
-                          {app.brochure.tagline[l]}
-                        </span>
-                        <span className="mt-1 flex items-center gap-1.5 text-[14px] font-medium text-sage-ink">
-                          {t("verLaApp")}
-                          <span aria-hidden="true">→</span>
-                        </span>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </section>
-            </Reveal>
-          )}
+          {/* Las cajas nacen visibles: son el contenido de esta ruta. */}
+          <ul className="grid gap-5 sm:grid-cols-2">
+            {frentes.map((frente) => (
+              <CajaFrente key={frente.id} frente={frente} locale={l} />
+            ))}
+          </ul>
 
           {/* Cierre: el anclaje de toda la vitrina + la lista de espera. */}
           <Reveal variant="fadeInUp">
@@ -169,11 +116,9 @@ export default async function VitrinaPage({ params }: Params) {
               <p className="mt-3 max-w-[60ch] text-[15px] leading-relaxed text-ink-1">
                 {t("ctaNota")}
               </p>
-              <p className="mt-2 max-w-[60ch] text-sm leading-relaxed text-ink-2">
-                {t("anclajeNota")}
-              </p>
               <Link
                 href="/#contacto"
+                data-cta="lista-de-espera"
                 className="mt-5 flex min-h-11 w-fit items-center gap-2 rounded-md bg-sage px-6 text-[15px] font-medium text-sage-ink shadow-sh-1 transition-[filter] duration-[120ms] hover:brightness-[0.97]"
               >
                 {t("cta")}

@@ -1,0 +1,64 @@
+# Los cuatro frentes de la vitrina — "lo que se construye aquí", por categoría.
+# Agregar/editar un frente = editar este archivo + push (cero cambios de código).
+# `id` es la ruta: /es/vitrina/<id>. Cada frente tiene nombre, una intro corta
+# (la que se lee en su caja del portal) y un detalle (el párrafo de su página).
+#
+# Estados honestos:
+#   abierta          → tiene piezas publicadas y su página las enseña
+#   en-preparacion   → el frente existe y está declarado; sus piezas aún no se
+#                      publican. Su página lo dice y ofrece la lista de espera,
+#                      sin fecha prometida.
+#
+# «apps» es un frente especial: sus piezas salen de content/vitrina/ (los
+# brochure-export.json de las apps hermanas), no de este archivo. Hoy es el
+# único que puede estar «abierta»: la publicación FALLA si otro frente se marca
+# abierto sin que exista una fuente de piezas que lo renderice.
+
+categorias:
+  - id: apps
+    estado: abierta
+    nombre:
+      es: "Apps"
+      en: "Apps"
+    intro:
+      es: "Aplicaciones completas, con interfaz, construidas por el pipeline. Cada una con su promesa, sus funcionalidades y sus cifras."
+      en: "Complete applications, with an interface, built by the pipeline. Each with its promise, its features and its numbers."
+    detalle:
+      es: "Cada una con su promesa, sus funcionalidades y sus cifras — y cada cifra con su procedencia. Aquí se muestran; no se entregan."
+      en: "Each with its promise, its features and its numbers — and every number with its provenance. They are shown here; they are not handed over."
+
+  - id: agentes
+    estado: en-preparacion
+    nombre:
+      es: "Agentes especializados"
+      en: "Specialized agents"
+    intro:
+      es: "Sin interfaz: se les habla por comandos y ejecutan actividades complejas de principio a fin."
+      en: "No interface: you drive them with commands and they carry complex work through, start to finish."
+    detalle:
+      es: "Cada agente es un especialista con un oficio acotado: recibe una orden por comando, la ejecuta paso a paso y entrega el resultado. No hay pantallas que recorrer; lo que se mostrará aquí es qué hace cada uno, con qué límites y con qué evidencia."
+      en: "Each agent is a specialist with a narrow trade: it takes an order as a command, works through it step by step and delivers the result. There are no screens to walk through; what will be shown here is what each one does, within which limits, and with what evidence."
+
+  - id: investigaciones
+    estado: en-preparacion
+    nombre:
+      es: "Investigaciones"
+      en: "Research"
+    intro:
+      es: "Líneas de investigación propias: pasaron la etapa de factibilidad y ya tienen su rumbo elegido."
+      en: "In-house research lines: past the feasibility stage, with their direction already chosen."
+    detalle:
+      es: "Cada línea nació como una pregunta, pasó por un estudio de factibilidad y salió de él con una decisión: qué se construye y qué no. Aquí se publican las líneas ya validadas —su pregunta, su alcance y lo que se decidió—; la construcción de cada una empieza ahora."
+      en: "Each line began as a question, went through a feasibility study and came out of it with a decision: what gets built and what doesn't. The validated lines are published here — their question, their scope and what was decided; building each one starts now."
+
+  - id: tableros
+    estado: en-preparacion
+    nombre:
+      es: "Tableros de datos"
+      en: "Data dashboards"
+    intro:
+      es: "Tableros analíticos sobre datos reales, para decidir con evidencia y no con intuición."
+      en: "Analytical dashboards on real data, to decide on evidence rather than hunches."
+    detalle:
+      es: "Un tablero responde preguntas de negocio con datos reales, a la vista y en una sola pantalla. Los primeros están en selección: se publican cuando estén construidos, cada uno con las preguntas que responde y de dónde salen sus datos. La herramienta importa menos que la pregunta."
+      en: "A dashboard answers business questions with real data, in plain sight and on a single screen. The first ones are being selected: they get published once built, each with the questions it answers and where its data comes from. The tool matters less than the question."

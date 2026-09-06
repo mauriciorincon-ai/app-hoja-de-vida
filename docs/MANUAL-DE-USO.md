@@ -147,19 +147,42 @@ e inglés. Quien la visita puede pedir acceso a tus apps y la solicitud te llega
   roadmap. Una app sin `brochure:` simplemente no tiene página (su URL da 404).
 - **Analítica:** evento `brochure_vista` (con la app y el idioma).
 
-### La vitrina de las apps hermanas · desde Sprint 005
+### La vitrina: cuatro frentes · desde Sprint 005 · reorganizada 2026-09-05
 
-- **Qué hace:** `/es/vitrina` es el **escaparate** de las seis apps del portafolio. Cada una se
-  asoma con una muestra corta —en qué estado está, su nombre, su promesa, un esquema y cuánto tiene
-  construido— y **cada app tiene su propia página**: `/es/vitrina/habla`,
-  `/es/vitrina/inmobiliaria`, etc. Dentro de cada página está la ficha completa: la promesa, las
-  cifras, sus funcionalidades agrupadas en tarjetas que se abren solas al llegar leyendo, y los
-  detalles finos (privacidad, stack, funcionalidades descartadas).
+- **Qué hace:** `/es/vitrina` es el **portal** de lo que se construye aquí, repartido en
+  **cuatro frentes**, cada uno con su caja —nombre, una frase, su estado y cuántas piezas tiene—
+  y **cada uno con su propio espacio**:
+  - **Apps** (`/es/vitrina/apps`): el escaparate de las seis apps hermanas. Abierto.
+  - **Agentes especializados** (`/es/vitrina/agentes`): agentes sin interfaz que se manejan por
+    comandos. En preparación.
+  - **Investigaciones** (`/es/vitrina/investigaciones`): líneas de investigación ya validadas.
+    En preparación.
+  - **Tableros de datos** (`/es/vitrina/tableros`): tableros analíticos, sin atarse a una
+    herramienta. En preparación.
+- **Un frente «en preparación» tiene página igual:** dice qué es, en qué punto está y ofrece la
+  lista de espera, **sin fecha prometida**. Marca el inicio; no lo disfraza. Cuando tenga piezas,
+  se le construye su escaparate (como el de las apps) en su propio sprint.
+- **Cómo cambiar el nombre, la intro o el estado de un frente (cero código):** edita
+  `data/vitrina.yaml` y haz push. Cada frente lleva `nombre`, `intro` (la frase de su caja) y
+  `detalle` (el párrafo de su página), en ES y EN. El orden del archivo es el orden del portal.
+  - **Ojo con `estado`:** solo puede ser `abierta` un frente que ya tenga con qué mostrar piezas
+    — hoy, solo `apps`. Si marcas otro como abierto, **la publicación falla** y el error dice cuál.
+  - La **cuenta de piezas** no se escribe: la de apps sale de los archivos de
+    `content/vitrina/`; la de un frente en preparación es cero.
+
+#### Las apps dentro de la vitrina
+
+- **Qué hace:** `/es/vitrina/apps` asoma cada app con una muestra corta —en qué estado está, su
+  nombre, su promesa, un esquema y cuánto tiene construido— y **cada app tiene su propia página**:
+  `/es/vitrina/apps/habla`, `/es/vitrina/apps/inmobiliaria`, etc. Dentro está la ficha completa:
+  la promesa, las cifras, sus funcionalidades agrupadas en tarjetas que se abren solas al llegar
+  leyendo, y los detalles finos (privacidad, stack, funcionalidades descartadas). Al pie del
+  escaparate, el bloque **«De esta casa»** enlaza las dos brochures propias (CV Viva y su chat).
 - **De dónde sale el contenido:** de un archivo por app en `content/vitrina/`, llamado
   `<app>.brochure-export.json`. Lo genera **cada app hermana**, no esta.
 - **Cómo agregar o actualizar una app (cero código):** dejas caer su `brochure-export.json` en
-  `content/vitrina/` y haces push. La página, el sitemap, el escaparate y las pruebas de
-  accesibilidad la recogen solas.
+  `content/vitrina/` y haces push. La página, el sitemap, el escaparate, la cuenta de la caja
+  «Apps» del portal y las pruebas de accesibilidad la recogen solas.
 - **Esos archivos NO se editan aquí.** Si uno trae un dato mal, se corrige **en la app de origen**
   y se vuelve a exportar. Si el archivo está malformado o incumple el contrato, **la publicación
   falla** y el error dice qué archivo y qué campo — nunca se publica una ficha que miente sobre sí

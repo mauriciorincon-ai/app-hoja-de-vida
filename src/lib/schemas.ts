@@ -209,6 +209,61 @@ export type AppCard = Apps["apps"][number];
 export type RoadmapFeature = z.infer<typeof roadmapFeature>;
 export type Brochure = z.infer<typeof brochure>;
 
+// Los frentes de la vitrina (post-S5, ADR-015): apps · agentes · investigaciones
+// · tableros. `id` es la ruta /vitrina/<id>. Un frente «abierta» necesita una
+// fuente de piezas que lo renderice — hoy solo la tiene «apps»
+// (content/vitrina/): marcar otro como abierto sin esa fuente publicaría una
+// página que promete piezas y no enseña ninguna, así que el build FALLA.
+export const categoriaEstados = ["abierta", "en-preparacion"] as const;
+
+const categoriaVitrina = z
+  .object({
+    id: slug,
+    estado: z.enum(categoriaEstados),
+    nombre: localizedText,
+    // Lo que se lee en su caja del portal: una frase.
+    intro: localizedText,
+    // El párrafo de su página.
+    detalle: localizedText,
+  })
+  .strict();
+
+export const vitrinaSchema = z
+  .object({
+    categorias: z
+      .array(categoriaVitrina)
+      .min(1)
+      .superRefine((cs, ctx) => {
+        const ids = cs.map((c) => c.id);
+        for (const [i, id] of ids.entries()) {
+          if (ids.indexOf(id) !== i)
+            ctx.addIssue({
+              code: "custom",
+              path: [i, "id"],
+              message: `frente repetido: «${id}»`,
+            });
+        }
+        if (!ids.includes("apps"))
+          ctx.addIssue({
+            code: "custom",
+            message:
+              "falta el frente «apps»: sus piezas salen de content/vitrina/ y es el que ancla el portal",
+          });
+        for (const [i, c] of cs.entries()) {
+          if (c.estado === "abierta" && c.id !== "apps")
+            ctx.addIssue({
+              code: "custom",
+              path: [i, "estado"],
+              message: `«${c.id}» no puede estar abierta: ningún renderizador tiene piezas para ese frente todavía (solo «apps» las toma de content/vitrina/)`,
+            });
+        }
+      }),
+  })
+  .strict();
+
+export type Vitrina = z.infer<typeof vitrinaSchema>;
+export type CategoriaVitrina = Vitrina["categorias"][number];
+
 /** Solicitud de acceso (formulario + endpoint). `website` es el honeypot. */
 export const solicitudSchema = z.object({
   nombre: z.string().trim().min(1).max(120),
@@ -242,4 +297,8 @@ export function parseCv(data: unknown, source: string): Cv {
 
 export function parseApps(data: unknown, source: string): Apps {
   return parseOrThrow(appsSchema, data, source);
+}
+
+export function parseVitrina(data: unknown, source: string): Vitrina {
+  return parseOrThrow(vitrinaSchema, data, source);
 }

@@ -754,3 +754,96 @@ dependencia por dependencia contra la intención, no por el verde. Audit: **0 al
 **Lección, que es la misma de siempre en otro disfraz:** el audit no es una foto, es un flujo. Un
 repo que pasó el gate hace dos semanas puede estar rojo hoy sin que nadie haya tocado una línea —
 y el `--frozen-lockfile` de la CI garantiza que lo que se auditó no es lo que se instalará mañana.
+
+## Post-cierre II — la vitrina se reparte en cuatro frentes (2026-09-05, fuera de sprint)
+
+**Pedido del usuario, en sus palabras:** la vitrina "debe dividirse de una vez en cuatro
+categorías mayores": (1) las **apps** ya incluidas; (2) **agentes especializados** — "no tienen
+interfaces, si no que mediante comandos desarrollamos actividades complejas"; (3)
+**investigaciones** — líneas que "superaron la etapa de factibilidad y ya escogimos las líneas de
+desarrollo… como ya están validadas ya las voy a publicar aquí"; (4) **tableros** — hoy en una
+herramienta, pero "no los nombres [a los otros] pero tampoco especialices el lenguaje" a esa. Y
+"esta primera visual de botones o cajas con pequeñas introducciones pero donde marquemos este
+inicio".
+
+**Sin orden de construcción** (igual que el menú): trabajo fuera de sprint, a pedido directo.
+Queda registrado aquí para que la planeadora lo vea en la retro.
+
+### La decisión (ADR-015)
+
+Elegida con el usuario entre dos: **portal + espacio propio por frente** (elegida) vs. una sola
+página con cuatro bloques. `/vitrina` pasa a ser el portal con una caja por frente; las apps se
+mueven a `/vitrina/apps` y cada una a **`/vitrina/apps/<slug>`** — no se quedan en
+`/vitrina/<slug>` porque ese nivel es ahora el de los frentes y un slug de app chocaría con uno de
+frente. Los tres frentes nuevos tienen página desde el día cero, genérica, que **declara** el
+estado «en preparación» y ofrece la lista de espera sin fecha. Mover las 12 URLs fue seguro por
+la propia regla 16: no están publicadas en ningún sitio.
+
+**Contenido = datos versionados:** `data/vitrina.yaml` (nombre · intro · detalle, ES/EN, en el
+orden del portal), Zod en build. Dos reglas que el esquema impone porque son las que mienten
+primero: (a) **la cuenta de piezas no se escribe a mano** — la de apps sale de los exports, la de
+un frente en preparación es cero; (b) **un frente solo puede estar `abierta` si existe un
+renderizador con fuente de piezas** — hoy solo «apps». Marcar otro rompe el build nombrando al
+culpable.
+
+**Tableros, sin marca:** el frente se llama «Tableros de datos» / «Data dashboards» y su texto no
+nombra herramienta alguna, ni la de hoy. "La herramienta importa menos que la pregunta."
+
+### Regla 14 — los dos gates nuevos, demostrados en ROJO
+
+**Gate 1 — el portal enseña TODOS los frentes, en el orden del YAML** (`vitrina.spec` → "se llega
+a la vitrina…"). Cambio deliberado: `frentes.slice(1).map(…)` en `vitrina/page.tsx` (esconde el
+primero). Salió rojo en el paso de las cajas:
+
+```
+Error: expect(locator).toHaveCount(expected) failed
+Expected: 4
+Received: 3
+> 81 |     await expect(cajas).toHaveCount(FRENTES.length);
+```
+
+Revertido (`grep -c "slice(1)"` → 0).
+
+**Gate 2 — un frente sin renderizador no puede declararse abierto** (esquema `vitrinaSchema`, el
+mismo que corre en el build). Cambio deliberado: `tableros: estado: abierta` en
+`data/vitrina.yaml`. Cinco unitarias en rojo, todas con el mismo diagnóstico y nombrando campo y
+frente:
+
+```
+Contenido inválido en data/vitrina.yaml:
+  - categorias.3.estado: «tableros» no puede estar abierta: ningún renderizador tiene piezas
+    para ese frente todavía (solo «apps» las toma de content/vitrina/)
+```
+
+Revertido (YAML restaurado byte a byte).
+
+### Verde
+
+`typecheck` · `lint` · unitarias (+9 en `vitrina-frentes.test.ts`) · **e2e 120/120** en los specs
+tocados (vitrina · axe · brochure · nav-header · home), con **axe sobre las 20 rutas de la vitrina**
+(portal · apps · 6 fichas · 3 frentes, ×2 idiomas) · build de producción con las rutas nuevas
+en SSG.
+
+### Lo que toca
+
+- **Rutas:** `vitrina/page.tsx` (portal, nuevo) · `vitrina/apps/page.tsx` (el escaparate, movido)
+  · `vitrina/apps/[app]/page.tsx` (la ficha, movida) · `vitrina/[categoria]/page.tsx` (frente en
+  preparación, nuevo).
+- **Datos:** `data/vitrina.yaml` · `lib/schemas.ts` (`vitrinaSchema`) · `lib/content.ts`
+  (`getVitrina`) · `lib/vitrina/categorias.ts` (`getFrentes` con la cuenta de piezas).
+- **UI:** `components/vitrina/caja-frente.tsx` (con los cuatro iconos, dibujados en casa).
+- **Sitemap, CI (Lighthouse mide ahora portal + escaparate + ficha), mensajes ES/EN.**
+- **Docs:** ADR-015 · manual (sección de la vitrina reescrita por frentes + cómo alimentar
+  `vitrina.yaml`) · guía **v4** (NS `s005c`; +2 pruebas, ⭐ de 14 a 15) · `design-system.md`
+  (caja de frente) · `design-sync/…/caja-de-frente.html`.
+
+### Para la planeadora
+
+- **Este bloque tampoco tuvo orden de construcción.** Dos trabajos post-S5 seguidos a pedido
+  directo (menú, frentes): quizá el método necesite una figura de «mejora fuera de sprint» con su
+  propia traza mínima, para que no dependa de que la bitácora del sprint anterior siga abierta.
+- **Los tres frentes nuevos son deuda declarada, no oculta:** cada uno necesita su propio sprint
+  con su propio contrato de datos (¿un `agente-export.json`? ¿qué es "una pieza" de una línea de
+  investigación?). ADR-015 no lo anticipa a propósito.
+- **Regla de la cuenta:** "ninguna cifra sin procedencia" se extendió de las métricas a la cuenta
+  de piezas de un frente. Candidata a entrar en el molde del brochure/vitrina como regla general.

@@ -141,8 +141,24 @@
   },
   "vitrina": {
     "eyebrow": "The showcase",
-    "titulo": "Six apps, actually built",
-    "subtitulo": "Each with its promise, its features and its numbers — and every number with its provenance. They are shown here; they are not handed over.",
+    "titulo": "What gets built here, on four fronts",
+    "subtitulo": "Each front has its own space; this is just the window. What is already built is shown; what is starting is declared.",
+    "portalNota": "Nothing you see is handed over from here: it is shown, and there is a waiting list.",
+    "appsTitulo": "{n} apps, actually built",
+    "frenteEstados": {
+      "abierta": "Open",
+      "enPreparacion": "In preparation"
+    },
+    "frenteEstadoAyuda": {
+      "abierta": "Has published pieces",
+      "enPreparacion": "The front exists; its pieces aren't published yet"
+    },
+    "cuentaPiezas": "{n, plural, one {# piece} other {# pieces}}",
+    "entrar": "Enter",
+    "verQueViene": "See what's coming",
+    "enPreparacionTitulo": "This front is starting",
+    "enPreparacionLinea": "The first pieces get published here once they are built — each with what it does and with what evidence. No date promised: if you want to hear about it, the waiting list is below.",
+    "otrosFrentes": "The other fronts of the showcase",
     "notaIdioma": "Each app's own words are kept in Spanish, exactly as its team wrote them.",
     "estados": {
       "sellado": "Sealed",
@@ -190,6 +206,7 @@
     "cuentaFuncionalidades": "{n} features",
     "cuentaCifras": "{n, plural, one {# number} other {# numbers}}",
     "volverIndice": "Back to the showcase",
+    "volverApps": "Back to the apps",
     "migaEtiqueta": "Where you are",
     "vecinasEtiqueta": "Other apps in the showcase",
     "appAnterior": "Previous app",

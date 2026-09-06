@@ -21,7 +21,8 @@ design-sync/
    ├─ componentes/       Botón · Card · Chip de estado ·
    │                     Menú desplegable del encabezado
    └─ componentes-s5/    Muestra de app · Tarjeta de grupo ·
-                         Chip de procedencia · Captura repintada
+                         Chip de procedencia · Captura repintada ·
+                         Caja de frente (post-S5, ADR-015)
 ```
 
 Cada tarjeta abre con la línea **exacta** `<!-- @dsCard group="…" name="…" -->`: es lo que indexa
@@ -52,8 +53,8 @@ bundle vivió en un scratchpad efímero y al retomarlo quedaban 4 de 13 archivos
 ## Cobertura declarada
 
 Este bundle cubre los **fundamentos completos** (paleta, tipografía, forma y movimiento), los
-**componentes canon transversales** (botón, card, chip de estado) y **todos los componentes nuevos
-del S5** (la vitrina). Quedan fuera, y se declaran como deuda del bundle en el summary del sprint:
+**componentes canon transversales** (botón, card, chip de estado, menú desplegable) y **todos los
+componentes nuevos del S5 y post-S5** (la vitrina, incluida la caja de frente del portal). Quedan fuera, y se declaran como deuda del bundle en el summary del sprint:
 los componentes de S1–S4 que `design-system.md` describe en prosa pero aún no tienen tarjeta —
 input/textarea, metric tile, glifo ◆, primitivas de motion (`fadeInUp`, `blurIn`, `maskReveal`,
 `scaleInBlur`, `Counter`, `TimelineTrack`) y los bloques del chat y de la votación.

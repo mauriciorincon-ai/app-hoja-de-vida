@@ -103,12 +103,12 @@
 <body>
 <div class="pagina">
   <header>
-    <p class="eyebrow">CV Viva · Guía de prueba viva y acumulativa · v3 · post-Sprint 005 · 2026-09-05</p>
+    <p class="eyebrow">CV Viva · Guía de prueba viva y acumulativa · v4 · post-Sprint 005 · 2026-09-05</p>
     <h1>Guía de prueba</h1>
     <p class="suave">Todas las pruebas vigentes de la app — las nuevas del Sprint 005 (la vitrina)
       y las heredadas de S1–S4, que se corren como regresión. Filtra por origen para recorrer todo
       o solo lo que cambió. Las casillas se guardan solas en este navegador.</p>
-    <p class="chica"><strong>Gate mínimo ⭐: 14 pruebas · ~45 min.</strong> Es lo que ninguna
+    <p class="chica"><strong>Gate mínimo ⭐: 15 pruebas · ~50 min.</strong> Es lo que ninguna
       automatización puede verificar (juicio humano sobre el contenido, aprobación visual,
       dispositivo real, proveedor de IA real). Lo que la CI ya respalda (e2e, unit, axe, budgets)
       queda fuera del mínimo y se corre en pases completos.</p>
@@ -301,7 +301,7 @@
     <p class="meta-bloque chica suave">~5 min · bloque «De esta casa» en la vitrina y rutas <code>/apps/&lt;app&gt;</code>.</p>
     <ul class="pasos">
       <li data-origen="mejorado"><input type="checkbox" id="h1"><label for="h1">Al final de
-        <code>/es/vitrina</code>, el bloque <strong>«De esta casa»</strong> muestra CV Viva y el chat:
+        <code>/es/vitrina/apps</code>, el bloque <strong>«De esta casa»</strong> muestra CV Viva y el chat:
         pulsa "Ver la app" en una y abre su brochure. <em>(Antes se llegaba desde la sección Apps
         de la portada, que ya no existe — esta es ahora su única puerta.)</em>
         <span class="origen origen-mejorado">Mejorado · post-S5</span></label></li>
@@ -334,19 +334,25 @@
     </ul>
   </section>
 
-  <!-- ═══════ K. La vitrina: el escaparate y la página de cada app ═══════ -->
+  <!-- ═══════ K. La vitrina: el portal, las apps y los frentes ═══════ -->
   <section class="bloque">
-    <div class="bloque-cabeza"><span class="letra">K</span><h2>La vitrina: el escaparate y la página de cada app</h2></div>
-    <p class="meta-bloque chica suave">~7 min · en escritorio.</p>
+    <div class="bloque-cabeza"><span class="letra">K</span><h2>La vitrina: el portal, las apps y los frentes</h2></div>
+    <p class="meta-bloque chica suave">~10 min · en escritorio.</p>
     <ul class="pasos">
-      <li data-origen="nuevo"><input type="checkbox" id="k1"><label for="k1">Entra a
-        <strong>Vitrina</strong> desde el menú: ves <strong>seis tarjetas</strong>, una por app,
-        cada una con su estado, su promesa, un esquema dibujado y cuántas funcionalidades tiene.
-        <span class="origen origen-nuevo">Nuevo · S5</span></label></li>
-      <li data-origen="nuevo"><input type="checkbox" id="k2"><label for="k2">Pulsa "Ver la ficha
-        completa" en una: llegas a <strong>su propia página</strong> y ahí está esa app y ninguna
-        otra. "Volver a la vitrina" te regresa al escaparate.
-        <span class="origen origen-nuevo">Nuevo · S5</span></label></li>
+      <li data-origen="mejorado"><input type="checkbox" id="k1"><label for="k1">Entra a
+        <strong>Vitrina</strong> desde el menú: ves el <strong>portal</strong> con <strong>cuatro
+        cajas</strong> en este orden — Apps · Agentes especializados · Investigaciones · Tableros
+        de datos — cada una con su icono, una frase y su estado. La de Apps dice
+        <strong>"6 piezas"</strong> y "Entrar"; las otras tres dicen <strong>"En preparación"</strong>
+        y "Ver qué viene". Pulsa <strong>Apps</strong>: llegas al escaparate con <strong>seis
+        tarjetas</strong>, una por app, cada una con su estado, su promesa, un esquema dibujado y
+        cuántas funcionalidades tiene.
+        <span class="origen origen-mejorado">Mejorado · post-S5</span></label></li>
+      <li data-origen="mejorado"><input type="checkbox" id="k2"><label for="k2">Pulsa "Ver la ficha
+        completa" en una: llegas a <strong>su propia página</strong> (la dirección es
+        <code>/vitrina/apps/&lt;app&gt;</code>) y ahí está esa app y ninguna otra. "Volver a las
+        apps" te regresa al escaparate, y desde ahí "Volver a la vitrina" al portal.
+        <span class="origen origen-mejorado">Mejorado · post-S5</span></label></li>
       <li data-origen="nuevo"><input type="checkbox" id="k3"><label for="k3">Al pie de una ficha,
         "App siguiente" te lleva a otra app sin pasar por el índice.
         <span class="origen origen-nuevo">Nuevo · S5</span></label></li>
@@ -366,6 +372,20 @@
         <strong>Juicio de contenido:</strong> lee la promesa y las cifras de dos apps distintas y
         confirma que dicen la verdad sobre lo que está construido — sin exagerar y sin prometer
         nada que no exista. <span class="origen origen-nuevo">Nuevo · S5</span><span class="minimo">⭐ mínimo</span></label></li>
+      <li data-origen="nuevo"><input type="checkbox" id="k8"><label for="k8">Vuelve al portal y
+        abre un frente <strong>en preparación</strong> (por ejemplo Agentes especializados): tiene
+        su propia página con el nombre, el chip "En preparación", la frase y el párrafo del frente,
+        un recuadro <strong>"Este frente empieza"</strong> que dice que no hay fecha prometida, los
+        otros tres frentes como vecinos (pulsa uno: cambia de frente sin pasar por el portal) y, al
+        pie, el botón de lista de espera. <strong>No hay ningún enlace externo.</strong>
+        <span class="origen origen-nuevo">Nuevo · post-S5</span></label></li>
+      <li data-origen="nuevo" data-minimo><input type="checkbox" id="k9"><label for="k9">⭐
+        <strong>Juicio de contenido de los frentes:</strong> lee la frase y el párrafo de los tres
+        frentes en preparación y confirma tres cosas: que describen lo que de verdad son (agentes
+        por comandos; investigaciones ya validadas, con rumbo elegido; tableros analíticos), que
+        <strong>no prometen fecha</strong>, y que el de tableros <strong>no nombra ninguna
+        herramienta</strong>. Si algo no te suena a ti, se corrige en <code>data/vitrina.yaml</code>.
+        <span class="origen origen-nuevo">Nuevo · post-S5</span><span class="minimo">⭐ mínimo</span></label></li>
     </ul>
   </section>
 
@@ -435,6 +455,14 @@
     <details class="chica">
       <summary>Historial de la guía</summary>
       <ul>
+        <li><strong>v4 · post-S5 · 2026-09-05:</strong> la vitrina se reparte en cuatro frentes
+          (ADR-015), fuera de sprint. Nuevas: la página de un frente en preparación (K8) y el juicio
+          sobre el contenido de los tres frentes nuevos (K9 ⭐). Mejoradas: la entrada a la vitrina,
+          que ahora pasa por el portal de cuatro cajas (K1); la vuelta desde una ficha, que tiene un
+          nivel más (K2); y la puerta a las brochures, que se movió con el escaparate a
+          <code>/vitrina/apps</code> (H1). <strong>Ninguna prueba eliminada.</strong> Gate mínimo ⭐:
+          de 14 a 15. Las pruebas del S5 y las de post-S5 siguen marcadas como nuevas: su gate ⭐ aún
+          no se ha corrido.</li>
         <li><strong>v3 · post-S5 · 2026-09-05:</strong> reorganización del menú, fuera de sprint.
           Nuevas: el desplegable «Hoja de vida» con ratón (A5) y solo con teclado (A6). Mejoradas:
           el orden de secciones de la portada, que ya no incluye «Apps» (A2); el menú, que pasa de
@@ -466,7 +494,7 @@
   (function () {
     // NS VERSIONADO POR SPRINT: al publicar la guía de un sprint nuevo se cambia
     // s005 — así una regresión sin correr no aparece marcada por el sprint anterior.
-    var NS = "guia-hoja-de-vida:s005b:";
+    var NS = "guia-hoja-de-vida:s005c:";
     var casillas = Array.prototype.slice.call(document.querySelectorAll('input[type="checkbox"]'));
     var barra = document.getElementById("barra-avance");
     var contador = document.getElementById("contador");

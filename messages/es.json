@@ -141,8 +141,24 @@
   },
   "vitrina": {
     "eyebrow": "La vitrina",
-    "titulo": "Seis apps, construidas de verdad",
-    "subtitulo": "Cada una con su promesa, sus funcionalidades y sus cifras — y cada cifra con su procedencia. Aquí se muestran; no se entregan.",
+    "titulo": "Lo que se construye aquí, en cuatro frentes",
+    "subtitulo": "Cada frente tiene su propio espacio; aquí solo se asoman. Lo que ya está construido se muestra; lo que empieza, se declara.",
+    "portalNota": "Nada de lo que ves se entrega desde aquí: se muestra, y hay una lista de espera.",
+    "appsTitulo": "{n} apps, construidas de verdad",
+    "frenteEstados": {
+      "abierta": "Abierto",
+      "enPreparacion": "En preparación"
+    },
+    "frenteEstadoAyuda": {
+      "abierta": "Tiene piezas publicadas",
+      "enPreparacion": "El frente existe; sus piezas aún no se publican"
+    },
+    "cuentaPiezas": "{n, plural, one {# pieza} other {# piezas}}",
+    "entrar": "Entrar",
+    "verQueViene": "Ver qué viene",
+    "enPreparacionTitulo": "Este frente empieza",
+    "enPreparacionLinea": "Las primeras piezas se publican aquí cuando estén construidas — cada una con lo que hace y con qué evidencia. Sin fecha prometida: si quieres enterarte, la lista de espera está abajo.",
+    "otrosFrentes": "Los otros frentes de la vitrina",
     "notaIdioma": "",
     "estados": {
       "sellado": "Sellada",
@@ -190,6 +206,7 @@
     "cuentaFuncionalidades": "{n} funcionalidades",
     "cuentaCifras": "{n, plural, one {# cifra} other {# cifras}}",
     "volverIndice": "Volver a la vitrina",
+    "volverApps": "Volver a las apps",
     "migaEtiqueta": "Dónde estás",
     "vecinasEtiqueta": "Otras apps de la vitrina",
     "appAnterior": "App anterior",
