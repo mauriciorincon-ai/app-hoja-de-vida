@@ -876,7 +876,7 @@ como referencia de anatomía.
    CV Viva** marcados `procedencia: cv-viva` hasta que cada app mande el suyo.
 
 **Tropiezo de proceso, registrado:** presenté rutas (`docs/contrato-ficha-tecnica/…`) que
-había *propuesto* pero no creado; el usuario fue a buscarlas y no estaban. «Qué mala maña de dar
+había _propuesto_ pero no creado; el usuario fue a buscarlas y no estaban. «Qué mala maña de dar
 las direcciones a medias». Regla para mí: **no nombrar una ruta que no esté en disco**, y dar
 siempre la ruta absoluta.
 
@@ -891,7 +891,7 @@ siempre la ruta absoluta.
   esquema: cifra con fuente · 3–5 cifras · tarea ≤ 60 caracteres · BPMN válido (un inicio, ≥ 1
   fin, todo alcanzable y con salida, decisión con ≥ 2 caminos).
 - **Paquete de entrega** `docs/contrato-ficha-tecnica/`: `CLAVE-VISUAL.md` · `ficha-tecnica.
-  schema.json` y `ejemplo.habla.json` **generados del Zod** por el propio test
+schema.json` y `ejemplo.habla.json` **generados del Zod** por el propio test
   (`pnpm contrato:ficha`) · `referencia.html` + `.png` · `README.md`.
 - **Rutas:** `/vitrina/apps/<slug>` = ficha técnica; el detalle del S5 baja a
   `/vitrina/apps/<slug>/detalle` (+12 rutas SSG, en sitemap, axe y e2e).
@@ -907,8 +907,8 @@ siempre la ruta absoluta.
   para texto es `ink-2`.
 - **Una región con scroll debe recibir foco** (`scrollable-region-focusable`): el contenedor del
   diagrama en móvil desplaza en horizontal; sin `tabIndex=0` + `role="region"` axe lo marca. Solo
-  en el proyecto móvil — en escritorio el diagrama cabe y la regla no aplica. *Un gate que solo
-  falla en un viewport es la razón de tener dos proyectos.*
+  en el proyecto móvil — en escritorio el diagrama cabe y la regla no aplica. _Un gate que solo
+  falla en un viewport es la razón de tener dos proyectos._
 - **Un flujo que cruza de fila NO puede ir en recta hacia el evento de enlace**: entre el nodo y
   el margen puede haber otros nodos del mismo carril (se vio en pantalla: la línea atravesaba
   «Revisa el rumbo» y el fin). Regla del motor: recta si el carril está libre, por canal si no.
@@ -955,12 +955,13 @@ dos arreglos de arriba.
   frentes: `docs/contrato-ficha-tecnica/CLAVE-VISUAL.md`. Candidato a entrar al kit como molde
   de «capa infografía», al lado del molde del brochure.
 - **BPMN no es el lenguaje de todos los frentes** (dicho por el usuario: «ya lo resuelvo con quien
-  corresponda»). El contrato pide *un proceso* sin fijar carriles; el motor admite los que sean.
+  corresponda»). El contrato pide _un proceso_ sin fijar carriles; el motor admite los que sean.
 - **Sugerencia al contrato del brochure-export (v1.1.0):** que la app declare su propio
   `proceso`, `titular`, `limites` y `nunca`. Hasta entonces los declara CV Viva y lo dice en
   pantalla — un proceso sin dueño es una cifra sin fuente.
 - Tercer bloque post-S5 sin orden de construcción: la figura de «mejora fuera de sprint» ya no
   es una sugerencia, es una necesidad.
+
 ## Post-cierre IV — dependabot: el lote nunca vuelve a arrastrar un mayor (2026-09-06, fuera de sprint)
 
 ### El pedido y el hallazgo
