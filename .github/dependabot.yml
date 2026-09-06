@@ -13,6 +13,16 @@ updates:
     groups:
       todo-npm:
         patterns: ["*"]
+    # Mayores que el ecosistema aún no alcanza (2026-09-05, PR #10): ESLint 10
+    # no lo soportan eslint-plugin-import/react/jsx-a11y, y TypeScript 7 queda
+    # fuera del rango de typescript-eslint 8.x (<6.1). Metidos en el grupo,
+    # `pnpm peers check` pone rojo el PR entero y bloquea los otros 36 bumps.
+    # Se retira cada ignore cuando sus plugins publiquen soporte.
+    ignore:
+      - dependency-name: "eslint"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "typescript"
+        update-types: ["version-update:semver-major"]
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
