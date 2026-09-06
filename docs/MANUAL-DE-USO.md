@@ -87,7 +87,7 @@ e inglés. Quien la visita puede pedir acceso a tus apps y la solicitud te llega
 ### Las apps del pipeline (`data/apps.yaml`) · desde Sprint 001 · reorganizado 2026-09-05
 
 - **Qué cambió:** la sección **«Apps» de la portada se retiró**. No enseñaba apps que se pudieran
-  visitar: enseñaba *esta misma página* (CV Viva y su chat) y dos exploraciones sin producto —
+  visitar: enseñaba _esta misma página_ (CV Viva y su chat) y dos exploraciones sin producto —
   mientras «Vitrina», a un centímetro en el mismo menú, sí llevaba a seis apps construidas. Dos
   puertas prometiendo lo mismo. **Ahora lo construido tiene una sola puerta: la Vitrina.**
 - **Nada del contenido se perdió.** `data/apps.yaml` sigue siendo la fuente y alimenta tres cosas:
@@ -174,15 +174,17 @@ e inglés. Quien la visita puede pedir acceso a tus apps y la solicitud te llega
 
 - **Qué hace:** `/es/vitrina/apps` asoma cada app con una muestra corta —en qué estado está, su
   nombre, su promesa, un esquema y cuánto tiene construido— y **cada app tiene dos capas**:
-  - **La ficha técnica** (`/es/vitrina/apps/habla`): la infografía de dos minutos. Siete bloques
-    fijos: cabecera con el **titular de valor** (qué no hace nadie más), la tira de **cifras con su
-    procedencia**, para quién y qué resuelve, **cómo funciona** (el proceso dibujado en BPMN: un
-    carril por actor, la decisión donde se decide, los bucles a la vista), qué tiene (una tarjeta
-    por grupo), límites y **lo que nunca hace**, y dónde está. Cierra con «Ver la ficha completa».
+  - **La ficha técnica** (`/es/vitrina/apps/habla`): la infografía de dos minutos. Hasta siete
+    bloques en orden fijo: cabecera con el **titular de valor** (qué no hace nadie más), la tira
+    de **cifras con su procedencia**, para quién y qué resuelve, **cómo funciona** (el proceso
+    dibujado en BPMN: un carril por actor, la decisión donde se decide, los bucles a la vista;
+    **opcional desde el contrato v1.1.0** — una pieza sin proceso de uso lo omite y las secciones
+    se renumeran), qué tiene (una tarjeta por grupo), límites y **lo que nunca hace**, y dónde
+    está. Cierra con «Ver la ficha completa».
   - **La ficha completa** (`/es/vitrina/apps/habla/detalle`): el detalle construido en el S5 — la
     promesa, las cifras, las funcionalidades agrupadas en tarjetas que se abren solas al llegar
     leyendo, y los detalles finos (privacidad, stack, funcionalidades descartadas).
-  Al pie del escaparate, el bloque **«De esta casa»** enlaza las dos brochures propias.
+    Al pie del escaparate, el bloque **«De esta casa»** enlaza las dos brochures propias.
 - **De dónde sale la ficha técnica:** del `brochure-export.json` de la app **más un complemento**
   que hoy escribe esta casa, en `data/fichas/<app>.yaml`: el titular, cuáles 3–5 cifras van
   arriba, los límites, los «nunca» y el proceso. Cada complemento dice `procedencia: cv-viva`, y la

@@ -1,4 +1,7 @@
-# Clave visual y contrato de la «Ficha técnica» — v1.0.0
+# Clave visual y contrato de la «Ficha técnica» — v1.1.0
+
+> **v1.1.0 (2026-09-06):** el proceso BPMN (§3) pasa a ser **opcional**. Todo lo que valía en
+> v1.0.0 sigue valiendo; una ficha sin `proceso` simplemente no tiene la sección «Cómo funciona».
 
 > Para quien produce fichas técnicas de **investigaciones, agentes o tableros** que CV Viva va a
 > mostrar en su vitrina. Entregas **contenido** (un JSON que cumple `ficha-tecnica.schema.json`);
@@ -13,16 +16,16 @@ La capa de **dos minutos** de una pieza: lo que se lee para decidir si se entra 
 bloques, siempre en el mismo orden. Cada bloque pide datos concretos, con límites concretos —
 escribe **para el layout**, no para un documento.
 
-| #   | Bloque                           | Campos del JSON                                       | Límites                                                |
-| --- | -------------------------------- | ----------------------------------------------------- | ------------------------------------------------------ |
-| 0   | **Cabecera**                     | `pieza.*` · `promesa.tagline` · `stack[]` · `titular` | tagline ≤ 80 · titular ≤ 240 · stack 1–8               |
-| —   | **Tira de cifras**               | `cifras[]`                                            | **3–5**, cada una con `fuente`                         |
-| 1   | **Para quién, y qué resuelve**   | `promesa.para_quien` · `promesa.intro`                | ≤ 400 cada uno                                         |
-| 2   | **Cómo funciona**                | `proceso` (BPMN) + `procedencia_proceso`              | ver §3                                                 |
-| 3   | **Qué tiene**                    | `bloques[]`                                           | 2–10 · nombre ≤ 40 · línea ≤ 120                       |
-| 4   | **Límites, y lo que nunca hace** | `limites[]` · `nunca[]`                               | 2–4 y 2–5 · ≤ 160 cada uno                             |
-| 5   | **Dónde está**                   | `hitos[]`                                             | 3–5 · valor ≤ 24 · etiqueta ≤ 40                       |
-| —   | **Cierre**                       | —                                                     | lo pone CV Viva: detalle (si existe) + lista de espera |
+| #   | Bloque                           | Campos del JSON                                       | Límites                                                  |
+| --- | -------------------------------- | ----------------------------------------------------- | -------------------------------------------------------- |
+| 0   | **Cabecera**                     | `pieza.*` · `promesa.tagline` · `stack[]` · `titular` | tagline ≤ 80 · titular ≤ 240 · stack 1–8                 |
+| —   | **Tira de cifras**               | `cifras[]`                                            | **3–5**, cada una con `fuente`                           |
+| 1   | **Para quién, y qué resuelve**   | `promesa.para_quien` · `promesa.intro`                | ≤ 400 cada uno                                           |
+| 2   | **Cómo funciona** (opcional)     | `proceso` (BPMN) + `procedencia_proceso`              | ver §3 · sin proceso, la sección no existe y se renumera |
+| 3   | **Qué tiene**                    | `bloques[]`                                           | 2–10 · nombre ≤ 40 · línea ≤ 120                         |
+| 4   | **Límites, y lo que nunca hace** | `limites[]` · `nunca[]`                               | 2–4 y 2–5 · ≤ 160 cada uno                               |
+| 5   | **Dónde está**                   | `hitos[]`                                             | 3–5 · valor ≤ 24 · etiqueta ≤ 40                         |
+| —   | **Cierre**                       | —                                                     | lo pone CV Viva: detalle (si existe) + lista de espera   |
 
 ## 2. Cómo escribir cada bloque
 
@@ -49,10 +52,13 @@ ninguna circunstancia (privacidad, alcance, honestidad). Frases cortas, verbo al
 validación, versión. Las etiquetas `ciclo` · `sprints` · `sellada` · `construccion` · `version` ·
 `decisiones` se traducen solas; cualquier otra se muestra tal cual.
 
-## 3. El proceso (BPMN)
+## 3. El proceso (BPMN) — opcional desde v1.1.0
 
-Es la sección más importante de la ficha y la que más se lee. El motor de CV Viva lo dibuja a
-partir de datos — **tú no dibujas nada**; describes:
+Cuando la pieza tiene un proceso de uso, es la sección más leída de la ficha. **Es opcional:** si
+tu pieza no tiene un proceso que contar (una línea de investigación sin flujo de uso, un tablero
+que se mira y no se recorre), omite `proceso` y `procedencia_proceso` — los dos a la vez, nunca
+uno solo — y la ficha sale sin «Cómo funciona», con las demás secciones renumeradas. Si lo
+incluyes, el motor de CV Viva lo dibuja a partir de datos — **tú no dibujas nada**; describes:
 
 ```json
 "proceso": {
@@ -90,6 +96,8 @@ Reglas (el esquema las exige):
   No lo encoge. En móvil se desliza en horizontal. Un proceso de 8–12 pasos es lo normal; más de
   16 es señal de que estás describiendo el detalle, no la ficha.
 - `procedencia_proceso`: `app` si lo declara la propia pieza; `cv-viva` si lo derivó CV Viva.
+  Va **si y solo si** hay `proceso`: el esquema rechaza un proceso sin procedencia y una
+  procedencia sin proceso.
   Se muestra al pie del diagrama. **Sin dueño declarado, el proceso es una cifra sin fuente.**
 
 BPMN es el lenguaje para piezas con un proceso de uso. Si tu pieza no lo tiene (una línea de
@@ -116,7 +124,7 @@ los carriles cambian (investigador · fuentes · agente), la gramática no.
 ## 6. Cómo se entrega
 
 Un archivo `<slug>.ficha-tecnica.json` que valide contra `ficha-tecnica.schema.json`
-(`schema_version: "1.0.0"`). CV Viva lo deja caer en `content/<frente>/` y la ficha existe sola:
+(`schema_version: "1.1.0"`). CV Viva lo deja caer en `content/<frente>/` y la ficha existe sola:
 ruta, sitemap, pruebas de accesibilidad. Si no valida, **la publicación falla** y el error dice el
 campo — nunca se publica una ficha que miente sobre sí misma. El archivo **no se edita en CV
 Viva**: se corrige en origen y se vuelve a entregar.

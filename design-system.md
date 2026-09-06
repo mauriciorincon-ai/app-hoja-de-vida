@@ -139,7 +139,9 @@ animaciones infinitas (sweep/glitch/marquee), scroll-snap de deck, CDNs en `<hea
 ### Componentes de la vitrina · S5
 
 - **Ficha técnica** (`/vitrina/apps/<slug>`, ADR-016 · post-S5): la capa infografía de una pieza,
-  siete bloques fijos para cualquier frente. Cabecera: eyebrow + chips de estado/ciclo/versión/
+  hasta siete bloques en orden fijo para cualquier frente (el proceso BPMN es **opcional** desde
+  el contrato v1.1.0: sin él, «Cómo funciona» no se pinta y las secciones se renumeran 01–04, nunca
+  un hueco). Cabecera: eyebrow + chips de estado/ciclo/versión/
   anclaje, nombre en Fraunces `clamp(2.2rem,6vw,3.5rem)`, tagline Fraunces 1.35rem, stack en chips
   y el **titular de valor**: caja paper-1 con borde izquierdo `sage-ink` 3px, rótulo mono
   «qué no hace nadie más», texto 16px medium `ink-0`. **Tira de cifras**: 3–5 cards paper-0,
