@@ -170,14 +170,32 @@ e inglés. Quien la visita puede pedir acceso a tus apps y la solicitud te llega
   - La **cuenta de piezas** no se escribe: la de apps sale de los archivos de
     `content/vitrina/`; la de un frente en preparación es cero.
 
-#### Las apps dentro de la vitrina
+#### Las apps dentro de la vitrina · dos capas desde 2026-09-05
 
 - **Qué hace:** `/es/vitrina/apps` asoma cada app con una muestra corta —en qué estado está, su
-  nombre, su promesa, un esquema y cuánto tiene construido— y **cada app tiene su propia página**:
-  `/es/vitrina/apps/habla`, `/es/vitrina/apps/inmobiliaria`, etc. Dentro está la ficha completa:
-  la promesa, las cifras, sus funcionalidades agrupadas en tarjetas que se abren solas al llegar
-  leyendo, y los detalles finos (privacidad, stack, funcionalidades descartadas). Al pie del
-  escaparate, el bloque **«De esta casa»** enlaza las dos brochures propias (CV Viva y su chat).
+  nombre, su promesa, un esquema y cuánto tiene construido— y **cada app tiene dos capas**:
+  - **La ficha técnica** (`/es/vitrina/apps/habla`): la infografía de dos minutos. Siete bloques
+    fijos: cabecera con el **titular de valor** (qué no hace nadie más), la tira de **cifras con su
+    procedencia**, para quién y qué resuelve, **cómo funciona** (el proceso dibujado en BPMN: un
+    carril por actor, la decisión donde se decide, los bucles a la vista), qué tiene (una tarjeta
+    por grupo), límites y **lo que nunca hace**, y dónde está. Cierra con «Ver la ficha completa».
+  - **La ficha completa** (`/es/vitrina/apps/habla/detalle`): el detalle construido en el S5 — la
+    promesa, las cifras, las funcionalidades agrupadas en tarjetas que se abren solas al llegar
+    leyendo, y los detalles finos (privacidad, stack, funcionalidades descartadas).
+  Al pie del escaparate, el bloque **«De esta casa»** enlaza las dos brochures propias.
+- **De dónde sale la ficha técnica:** del `brochure-export.json` de la app **más un complemento**
+  que hoy escribe esta casa, en `data/fichas/<app>.yaml`: el titular, cuáles 3–5 cifras van
+  arriba, los límites, los «nunca» y el proceso. Cada complemento dice `procedencia: cv-viva`, y la
+  ficha lo declara al pie del diagrama: **el proceso lo derivó CV Viva del export; la app aún no
+  lo envía**. El día que la app lo mande en su export, ese archivo se retira.
+- **Cómo cambiar el titular, las cifras destacadas, los límites o el proceso de una app:** edita
+  `data/fichas/<app>.yaml` y haz push. El proceso se describe con datos (carriles · pasos ·
+  flujos · anotaciones), no se dibuja: el diagrama lo genera la app. Si el proceso está mal
+  formado (sin fin, una decisión con un solo camino, un paso al que nadie llega, una cifra que no
+  existe en el export), **la publicación falla** y el error dice qué y dónde.
+- **Para que otra casa produzca fichas técnicas** (investigaciones, agentes, tableros): el
+  paquete de entrega está en `docs/contrato-ficha-tecnica/` — empieza por `CLAVE-VISUAL.md`.
+  Entregan un JSON; CV Viva lo pinta. Nunca HTML.
 - **De dónde sale el contenido:** de un archivo por app en `content/vitrina/`, llamado
   `<app>.brochure-export.json`. Lo genera **cada app hermana**, no esta.
 - **Cómo agregar o actualizar una app (cero código):** dejas caer su `brochure-export.json` en

@@ -1,0 +1,386 @@
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
+import type { Locale } from "@/i18n/routing";
+import type { FichaTecnica as Datos } from "@/lib/vitrina/ficha-tecnica/schema";
+import type { FuenteMetrica } from "@/lib/vitrina/schemas";
+import { IconoGrupo } from "./iconos-grupo";
+import { ProcesoBpmn } from "./proceso-bpmn";
+
+/**
+ * LA FICHA TÉCNICA — la capa infografía de una pieza de la vitrina (ADR-016).
+ *
+ * Es la capa de arriba: lo que se lee en dos minutos y decide si se baja al
+ * detalle. Siete bloques, siempre en el mismo orden, para cualquier frente
+ * (apps hoy; agentes, investigaciones y tableros cuando lleguen), porque
+ * renderiza UN contrato (`fichaTecnicaSchema`) y no un tipo de pieza:
+ *
+ *   0 cabecera (estado · nombre · tagline · stack · TITULAR de valor)
+ *   — la tira de cifras (3–5, cada una con su procedencia)
+ *   1 para quién, y qué resuelve
+ *   2 cómo funciona — el proceso en BPMN, generado desde datos
+ *   3 qué tiene — una tarjeta por bloque, sin listar el detalle
+ *   4 límites, y lo que nunca hace
+ *   5 dónde está — la versión anclada
+ *   — cierre: al detalle + lista de espera
+ *
+ * Anatomía tomada de las plantillas de la planeadora (cabecera con titular de
+ * valor · facts · secciones numeradas con subtítulo · flujo con carriles ·
+ * límites + nunca); piel de CV Viva. Server component, cero JS. Cero enlaces.
+ */
+
+const colorFuente: Record<FuenteMetrica, string> = {
+  medido: "bg-sage text-sage-ink",
+  calculada: "bg-sky text-sky-ink",
+  declarado: "bg-lilac text-lilac-ink",
+  estimacion: "bg-peach text-peach-ink",
+};
+const colorEstado = {
+  sellado: "bg-sage text-sage-ink",
+  inicial: "bg-citron text-citron-ink",
+} as const;
+
+const CHIP =
+  "rounded-full border border-paper-3 px-2.5 py-1 font-mono text-[11px] tracking-[0.02em] text-ink-2 uppercase";
+const PANEL = "rounded-[14px] border border-paper-2 bg-paper-0 p-6 shadow-sh-1";
+const ROTULO = "font-mono text-[11px] tracking-[0.08em] text-ink-2 uppercase";
+
+function Seccion({
+  n,
+  titulo,
+  sub,
+  id,
+  children,
+}: {
+  n: string;
+  titulo: string;
+  sub: string;
+  id: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <section aria-labelledby={id} className="mt-12">
+      <div className="mb-4 flex flex-wrap items-baseline gap-x-4 gap-y-1">
+        <span className="font-mono text-[11px] tracking-[0.08em] text-ink-2">
+          {n}
+        </span>
+        <h2
+          id={id}
+          className="font-display text-[1.6rem] font-medium tracking-[-0.015em] text-ink-0"
+        >
+          {titulo}
+        </h2>
+        <p className="max-w-[46ch] text-[13px] leading-snug text-ink-2 sm:ml-auto sm:text-right">
+          {sub}
+        </p>
+      </div>
+      {children}
+    </section>
+  );
+}
+
+const HITOS_CONOCIDOS = new Set([
+  "ciclo",
+  "sprints",
+  "sellada",
+  "construccion",
+  "version",
+  "decisiones",
+]);
+
+export async function FichaTecnica({
+  datos,
+  locale,
+  hrefDetalle,
+}: {
+  datos: Datos;
+  locale: Locale;
+  /** Ruta del detalle, si la pieza lo tiene. */
+  hrefDetalle?: string;
+}) {
+  const t = await getTranslations("fichaTecnica");
+  const tv = await getTranslations("vitrina");
+  const { pieza, promesa, cifras, bloques, proceso, hitos } = datos;
+  const totalFuncionalidades = bloques.reduce((s, b) => s + b.cuenta, 0);
+
+  return (
+    <article data-ficha-tecnica={pieza.slug} data-frente={pieza.frente}>
+      {/* ── 0 · Cabecera ─────────────────────────────────────────────────── */}
+      <header>
+        <p className="mb-4 flex items-center gap-2 text-xs font-medium tracking-[0.18em] text-sage-ink uppercase">
+          <span
+            aria-hidden="true"
+            className="size-1.5 rounded-full bg-sage-ink"
+          />
+          {tv("eyebrow")} · {t("eyebrow")}
+        </p>
+        <ul className="flex flex-wrap gap-2">
+          <li>
+            <span
+              data-estado={pieza.estado}
+              title={tv(`estadoAyuda.${pieza.estado}`)}
+              className={`rounded-full px-2.5 py-1 font-mono text-[11px] tracking-[0.02em] uppercase ${colorEstado[pieza.estado]}`}
+            >
+              {tv(`estados.${pieza.estado}`)}
+            </span>
+          </li>
+          <li>
+            <span className={CHIP}>{pieza.ciclo}</span>
+          </li>
+          <li>
+            <span className={CHIP}>
+              {t("sprints", { n: pieza.sprints_cerrados })}
+            </span>
+          </li>
+          <li>
+            <span className={CHIP}>v{pieza.version}</span>
+          </li>
+          <li>
+            <span className={CHIP}>
+              {t("ancladaEl", { fecha: datos.actualizado })}
+            </span>
+          </li>
+        </ul>
+        <h1 className="mt-5 max-w-[16ch] font-display text-[clamp(2.2rem,6vw,3.5rem)] leading-[1.02] font-medium tracking-[-0.02em] text-ink-0">
+          {pieza.nombre}
+        </h1>
+        <p className="mt-3 max-w-[40ch] font-display text-[1.35rem] leading-snug text-ink-1">
+          {promesa.tagline}
+        </p>
+        <ul aria-label="Stack" className="mt-4 flex flex-wrap gap-2">
+          {datos.stack.map((s) => (
+            <li key={s.nombre}>
+              <span className={CHIP} title={s.papel}>
+                {s.nombre}
+              </span>
+            </li>
+          ))}
+        </ul>
+        <div
+          data-titular
+          className="mt-6 max-w-[74ch] rounded-[10px] border-l-[3px] border-sage-ink bg-paper-1 px-5 py-4"
+        >
+          <p className="mb-1 font-mono text-[10.5px] tracking-[0.08em] text-sage-ink uppercase">
+            {t("titularRotulo")}
+          </p>
+          <p className="text-[16px] leading-relaxed font-medium text-ink-0">
+            {datos.titular}
+          </p>
+        </div>
+      </header>
+
+      {/* ── La tira de cifras ────────────────────────────────────────────── */}
+      <ul
+        aria-label={t("cifras")}
+        className="mt-7 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5"
+      >
+        {cifras.map((c) => (
+          <li
+            key={c.clave}
+            data-cifra={c.clave}
+            className="flex flex-col rounded-[12px] border border-paper-2 bg-paper-0 p-4 shadow-sh-1"
+          >
+            <p className="font-display text-[2rem] leading-none tracking-[-0.02em] text-ink-0 tabular-nums">
+              {c.valor.toLocaleString(locale === "es" ? "es-CO" : "en-US")}
+              {/* La unidad solo si la etiqueta no la dice ya: «24 funcionalidades ·
+                  Funcionalidades del MVP» es decir lo mismo dos veces. */}
+              {c.unidad &&
+                !c.etiqueta.toLowerCase().includes(c.unidad.toLowerCase()) && (
+                  <span className="ml-1 font-sans text-sm font-normal text-ink-2">
+                    {c.unidad}
+                  </span>
+                )}
+            </p>
+            <p className="mt-2 text-[12.5px] leading-snug text-ink-2">
+              {c.etiqueta}
+            </p>
+            <span
+              data-fuente={c.fuente}
+              title={`${tv(`fuenteAyuda.${c.fuente}`)} — ${c.detalle}`}
+              className={`mt-2 self-start rounded-full px-2 py-0.5 font-mono text-[10px] tracking-[0.04em] uppercase ${colorFuente[c.fuente]}`}
+            >
+              {tv(`fuentes.${c.fuente}`)}
+            </span>
+          </li>
+        ))}
+      </ul>
+
+      {/* ── 01 ───────────────────────────────────────────────────────────── */}
+      <Seccion
+        n="01"
+        id={`ft-01-${pieza.slug}`}
+        titulo={t("s01")}
+        sub={t("s01sub")}
+      >
+        <div className="grid gap-4 sm:grid-cols-2">
+          <div className={PANEL}>
+            <h3 className={ROTULO}>{t("paraQuien")}</h3>
+            <p className="mt-2.5 text-[15px] leading-relaxed text-ink-1">
+              {promesa.para_quien}
+            </p>
+          </div>
+          <div className={PANEL}>
+            <h3 className={ROTULO}>{t("promesa")}</h3>
+            <p className="mt-2.5 text-[15px] leading-relaxed text-ink-1">
+              {promesa.intro}
+            </p>
+          </div>
+        </div>
+      </Seccion>
+
+      {/* ── 02 · el proceso ──────────────────────────────────────────────── */}
+      <Seccion
+        n="02"
+        id={`ft-02-${pieza.slug}`}
+        titulo={t("s02")}
+        sub={t("s02sub")}
+      >
+        <div className={`${PANEL} p-4 sm:p-5`}>
+          <ProcesoBpmn proceso={proceso} id={pieza.slug} />
+          <p className="mt-3 text-[12px] leading-snug text-ink-2 md:hidden">
+            {t("desliza")}
+          </p>
+          <p
+            data-procedencia-proceso={datos.procedencia_proceso}
+            className="mt-3 border-t border-paper-2 pt-3 font-mono text-[10.5px] tracking-[0.04em] text-ink-2 uppercase"
+          >
+            {datos.procedencia_proceso === "app"
+              ? t("procesoApp")
+              : t("procesoCvViva")}
+          </p>
+        </div>
+      </Seccion>
+
+      {/* ── 03 ───────────────────────────────────────────────────────────── */}
+      <Seccion
+        n="03"
+        id={`ft-03-${pieza.slug}`}
+        titulo={t("s03")}
+        sub={t("s03sub", { grupos: bloques.length, n: totalFuncionalidades })}
+      >
+        <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {bloques.map((b) => (
+            <li
+              key={b.orden}
+              data-bloque={b.orden}
+              className="flex flex-col rounded-[12px] border border-paper-2 bg-paper-0 p-4 shadow-sh-1"
+            >
+              <div className="mb-3">
+                <IconoGrupo slug={pieza.slug} orden={b.orden} />
+              </div>
+              <h3 className="font-display text-[1.05rem] leading-tight font-medium text-ink-0">
+                {b.nombre}
+              </h3>
+              <p className="mt-1 font-mono text-[10.5px] tracking-[0.04em] text-ink-2 uppercase">
+                {tv("cuentaFuncionalidades", { n: b.cuenta })}
+              </p>
+              <p className="mt-1.5 text-[13px] leading-snug text-ink-2">
+                {b.linea}
+              </p>
+            </li>
+          ))}
+        </ul>
+      </Seccion>
+
+      {/* ── 04 ───────────────────────────────────────────────────────────── */}
+      <Seccion
+        n="04"
+        id={`ft-04-${pieza.slug}`}
+        titulo={t("s04")}
+        sub={t("s04sub")}
+      >
+        <div className="grid gap-4 sm:grid-cols-2">
+          <div className={PANEL}>
+            <h3 className={ROTULO}>{t("limites")}</h3>
+            <ul className="mt-2 divide-y divide-paper-2">
+              {datos.limites.map((l) => (
+                <li
+                  key={l}
+                  className="flex gap-3 py-2.5 text-[14px] leading-snug text-ink-1"
+                >
+                  <span aria-hidden="true" className="text-ink-2">
+                    —
+                  </span>
+                  {l}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className={PANEL}>
+            <h3 className={ROTULO}>{t("nunca")}</h3>
+            <ul data-nunca className="mt-2 divide-y divide-paper-2">
+              {datos.nunca.map((l) => (
+                <li
+                  key={l}
+                  className="flex gap-3 py-2.5 text-[14px] leading-snug text-ink-1"
+                >
+                  <span
+                    aria-hidden="true"
+                    className="font-semibold text-rose-ink"
+                  >
+                    ×
+                  </span>
+                  {l}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </Seccion>
+
+      {/* ── 05 ───────────────────────────────────────────────────────────── */}
+      <Seccion
+        n="05"
+        id={`ft-05-${pieza.slug}`}
+        titulo={t("s05")}
+        sub={t("s05sub")}
+      >
+        <ol
+          className={`${PANEL} grid grid-cols-2 gap-y-5 sm:grid-cols-3 lg:grid-cols-5`}
+        >
+          {hitos.map((h, i) => (
+            <li
+              key={i}
+              className="relative pt-4 text-center before:absolute before:top-0 before:left-1/2 before:size-2 before:-translate-x-1/2 before:rounded-full before:bg-sage-ink"
+            >
+              <span className="block font-display text-[1.15rem] font-medium text-ink-0">
+                {h.valor}
+              </span>
+              <span className="block text-[12px] text-ink-2">
+                {HITOS_CONOCIDOS.has(h.etiqueta)
+                  ? t(`hitos.${h.etiqueta}`)
+                  : h.etiqueta}
+              </span>
+            </li>
+          ))}
+        </ol>
+      </Seccion>
+
+      {/* ── Cierre ───────────────────────────────────────────────────────── */}
+      <div
+        id="contacto-vitrina"
+        className="mt-12 flex scroll-mt-16 flex-wrap items-center gap-3 border-t border-paper-2 pt-8"
+      >
+        {hrefDetalle && (
+          <Link
+            href={hrefDetalle}
+            data-cta="detalle"
+            className="flex min-h-11 items-center gap-2 rounded-md bg-sage px-6 text-[15px] font-medium text-sage-ink shadow-sh-1 transition-[filter] duration-[120ms] hover:brightness-[0.97]"
+          >
+            {t("verDetalle")}
+            <span aria-hidden="true">→</span>
+          </Link>
+        )}
+        <Link
+          href="/#contacto"
+          data-cta="lista-de-espera"
+          className="flex min-h-11 items-center gap-2 rounded-md border border-paper-3 px-6 text-[15px] font-medium text-ink-1 transition-colors duration-[120ms] hover:bg-paper-1"
+        >
+          {tv("cta")}
+        </Link>
+        <p className="max-w-[40ch] text-[13px] leading-snug text-ink-2 sm:ml-auto">
+          {t("cierreNota")}
+        </p>
+      </div>
+    </article>
+  );
+}

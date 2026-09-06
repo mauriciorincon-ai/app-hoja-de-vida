@@ -107,8 +107,17 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
       .getByRole("link", { name: primera.app.nombre })
       .click();
 
+    // Primero la FICHA TÉCNICA (ADR-016) …
     await expect(page).toHaveURL(
       new RegExp(`/es/vitrina/apps/${primera.app.slug}$`),
+    );
+    await expect(
+      page.locator(`[data-ficha-tecnica="${primera.app.slug}"]`),
+    ).toBeVisible();
+    // … y de ahí, con el botón, al detalle.
+    await page.locator('[data-cta="detalle"]').click();
+    await expect(page).toHaveURL(
+      new RegExp(`/es/vitrina/apps/${primera.app.slug}/detalle$`),
     );
     // Y la ficha que se abre es la de ESA app, no otra.
     await expect(
@@ -120,7 +129,7 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
     page,
   }) => {
     for (const exp of EXPORTS) {
-      await page.goto(`/es/vitrina/apps/${exp.app.slug}`);
+      await page.goto(`/es/vitrina/apps/${exp.app.slug}/detalle`);
       const fichas = page.locator("article[data-app-slug]");
       // La razón de ser del cambio: una ficha por página, no las seis apiladas.
       await expect(fichas).toHaveCount(1);
@@ -134,14 +143,16 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
   test("se navega entre apps vecinas sin volver al índice", async ({
     page,
   }) => {
-    await page.goto(`/es/vitrina/apps/${EXPORTS[0].app.slug}`);
+    await page.goto(`/es/vitrina/apps/${EXPORTS[0].app.slug}/detalle`);
     const siguiente = page.getByRole("link", { name: /App siguiente/ });
     // La primera del orden nunca tiene «anterior», pero siempre tiene vecina.
     await expect(siguiente).toBeVisible();
     await siguiente.click();
-    await expect(page).toHaveURL(/\/es\/vitrina\/apps\/[a-z0-9-]+$/);
+    await expect(page).toHaveURL(/\/es\/vitrina\/apps\/[a-z0-9-]+\/detalle$/);
     await expect(page.locator("article[data-app-slug]")).toHaveCount(1);
-    // Y desde ahí se vuelve al escaparate de apps, y de ahí al portal.
+    // Y desde ahí se sube a la ficha técnica, al escaparate, y al portal.
+    await page.getByRole("link", { name: /Volver a la ficha técnica/ }).click();
+    await expect(page).toHaveURL(/\/es\/vitrina\/apps\/[a-z0-9-]+$/);
     await page.getByRole("link", { name: /Volver a las apps/ }).click();
     await expect(page).toHaveURL(/\/es\/vitrina\/apps$/);
     await page.getByRole("link", { name: /Volver a la vitrina/ }).click();
@@ -152,7 +163,9 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
     page,
   }) => {
     const exp = MAS_LARGA;
-    const res = await page.request.get(`/es/vitrina/apps/${exp.app.slug}`);
+    const res = await page.request.get(
+      `/es/vitrina/apps/${exp.app.slug}/detalle`,
+    );
     expect(res.status()).toBe(200);
     const html = await res.text();
 
@@ -174,6 +187,7 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
       "/es/vitrina",
       "/es/vitrina/apps",
       ...EXPORTS.map((e) => `/es/vitrina/apps/${e.app.slug}`),
+      ...EXPORTS.map((e) => `/es/vitrina/apps/${e.app.slug}/detalle`),
       ...EN_PREPARACION.map((f) => `/es/vitrina/${f.id}`),
     ];
     for (const ruta of rutas) {
@@ -191,7 +205,7 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
     page,
   }) => {
     for (const exp of EXPORTS) {
-      await page.goto(`/es/vitrina/apps/${exp.app.slug}`);
+      await page.goto(`/es/vitrina/apps/${exp.app.slug}/detalle`);
       const cta = page.locator('[data-cta="lista-de-espera"]');
       await expect(cta).toBeVisible();
       await expect(cta).toHaveAttribute("href", "#contacto-vitrina");
@@ -204,7 +218,7 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
     page,
   }) => {
     for (const exp of EXPORTS) {
-      await page.goto(`/es/vitrina/apps/${exp.app.slug}`);
+      await page.goto(`/es/vitrina/apps/${exp.app.slug}/detalle`);
 
       const metricas = page.locator("[data-metrica]");
       await expect(metricas).toHaveCount(exp.metricas.length);
@@ -220,6 +234,107 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
         exp.funcionalidades.descartadas.length,
       );
     }
+  });
+});
+
+test.describe("Vitrina — la ficha técnica (ADR-016)", () => {
+  type Complemento = {
+    app: string;
+    titular: string;
+    cifras_destacadas: string[];
+    nunca: string[];
+    proceso: {
+      titulo: string;
+      carriles: { id: string; nombre: string }[];
+      pasos: { id: string; tipo: string; texto: string }[];
+      anotaciones: { texto: string }[];
+    };
+  };
+  const COMPLEMENTOS: Complemento[] = readdirSync("data/fichas")
+    .filter((f) => f.endsWith(".yaml"))
+    .map((f) => parse(readFileSync(`data/fichas/${f}`, "utf8")) as Complemento);
+
+  test("cada app tiene su ficha técnica: titular, 3–5 cifras con procedencia, proceso y «nunca»", async ({
+    page,
+  }) => {
+    for (const exp of EXPORTS) {
+      const comp = COMPLEMENTOS.find((c) => c.app === exp.app.slug)!;
+      await page.goto(`/es/vitrina/apps/${exp.app.slug}`);
+      const ft = page.locator(`[data-ficha-tecnica="${exp.app.slug}"]`);
+      await expect(ft).toBeVisible();
+      await expect(ft.locator("[data-titular]")).toContainText(
+        comp.titular.slice(0, 40),
+      );
+
+      const cifras = ft.locator("[data-cifra]");
+      await expect(cifras).toHaveCount(comp.cifras_destacadas.length);
+      // Cada cifra destacada es una métrica del export, con SU fuente.
+      for (const clave of comp.cifras_destacadas) {
+        const m = exp.metricas.find((x) => x.clave === clave)!;
+        await expect(
+          ft.locator(`[data-cifra="${clave}"] [data-fuente]`),
+        ).toHaveAttribute("data-fuente", m.fuente);
+      }
+
+      // El proceso: un nodo por paso, y las anotaciones como notas al pie.
+      const proceso = ft.locator(`[data-proceso="${exp.app.slug}"]`);
+      await expect(proceso.locator("[data-paso]")).toHaveCount(
+        comp.proceso.pasos.length,
+      );
+      await expect(proceso.locator("[data-nota]")).toHaveCount(
+        comp.proceso.anotaciones.length,
+      );
+      // Y su procedencia se declara (hoy: CV Viva).
+      await expect(ft.locator("[data-procedencia-proceso]")).toHaveAttribute(
+        "data-procedencia-proceso",
+        "cv-viva",
+      );
+
+      await expect(ft.locator("[data-nunca] li")).toHaveCount(
+        comp.nunca.length,
+      );
+      await expect(ft.locator("[data-bloque]")).toHaveCount(
+        exp.funcionalidades.grupos.length,
+      );
+    }
+  });
+
+  test("gate ATS/SEO: la ficha técnica entrega el proceso como texto en el HTML", async ({
+    page,
+  }) => {
+    const exp = MAS_LARGA;
+    const comp = COMPLEMENTOS.find((c) => c.app === exp.app.slug)!;
+    const html = await (
+      await page.request.get(`/es/vitrina/apps/${exp.app.slug}`)
+    ).text();
+    expect(html).toContain(comp.titular.slice(0, 40));
+    // Los pasos del proceso son <text> del SVG: un rastreador los lee.
+    for (const paso of comp.proceso.pasos
+      .filter((p) => p.tipo === "tarea")
+      .slice(0, 3)) {
+      const primeraPalabra = paso.texto.split(" ")[0];
+      expect(html).toContain(primeraPalabra);
+    }
+    expect(html).toContain(comp.proceso.titulo.toUpperCase());
+  });
+
+  test("la ficha técnica en móvil no encoge el proceso: se desliza", async ({
+    page,
+    isMobile,
+  }) => {
+    test.skip(!isMobile, "solo en el proyecto móvil");
+    await page.goto(`/es/vitrina/apps/${MAS_LARGA.app.slug}`);
+    const caja = page.locator(
+      `[data-proceso="${MAS_LARGA.app.slug}"] [data-desliza]`,
+    );
+    const { scrollWidth, clientWidth } = await caja.evaluate((el) => ({
+      scrollWidth: el.scrollWidth,
+      clientWidth: el.clientWidth,
+    }));
+    expect(scrollWidth).toBeGreaterThan(clientWidth);
+    await expect(
+      page.getByText("Desliza para ver el proceso completo."),
+    ).toBeVisible();
   });
 });
 
@@ -299,7 +414,7 @@ test.describe("Vitrina — los frentes en preparación (ADR-015)", () => {
  * APERTURA POR LECTURA — las pruebas que el patrón exige (banco §7)
  * ──────────────────────────────────────────────────────────────────────────── */
 
-const RUTA_LARGA = `/es/vitrina/apps/${MAS_LARGA.app.slug}`;
+const RUTA_LARGA = `/es/vitrina/apps/${MAS_LARGA.app.slug}/detalle`;
 
 /**
  * Deja la tarjeta `i` con su cabecera a `frac` de la altura de pantalla y

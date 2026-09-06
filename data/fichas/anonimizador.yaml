@@ -1,0 +1,52 @@
+# Complemento de la ficha técnica de Velo (ADR-016). PROCEDENCIA: cv-viva —
+# derivado de su export por CV Viva; se retira cuando la app mande el suyo.
+schema_version: "1.0.0"
+app: anonimizador
+procedencia: cv-viva
+declarado_en: "2026-09-05"
+titular: "La única que hace el viaje completo dentro del navegador —entregas sin entregar y recuperas con tu bóveda— con validadores que citan su fuente oficial y cero IA: el mismo archivo produce siempre el mismo resultado, byte por byte."
+cifras_destacadas: [funcionalidades, filas_procesadas, llamadas_de_red_con_datos, cobertura_lineas, costo_operacion_mensual]
+limites:
+  - "Cero inteligencia artificial, a propósito: el resultado es determinista y reproducible."
+  - "Todo ocurre dentro de la pestaña, en un hilo aparte: no hay servidor que reciba el archivo — ni que lo respalde."
+  - "Los validadores citan su fuente oficial; lo que no tiene fuente no se valida."
+nunca:
+  - "Sube el archivo a un servidor."
+  - "Deja copia al cerrar la pestaña."
+  - "Decide con IA qué se anonimiza."
+  - "Desvela sin tu bóveda."
+proceso:
+  titulo: "Entregar sin entregar, y recuperar"
+  carriles:
+    - { id: persona, nombre: "Quien entrega" }
+    - { id: velo, nombre: "Velo · en el navegador" }
+    - { id: tercero, nombre: "El tercero" }
+  pasos:
+    - { id: ini, tipo: inicio, carril: persona, texto: "Un archivo con datos de personas" }
+    - { id: abre, tipo: tarea, carril: persona, texto: "Abre el archivo en la pestaña" }
+    - { id: delata, tipo: tarea, carril: velo, texto: "Señala lo que te delata" }
+    - { id: decide, tipo: tarea, carril: persona, texto: "Decide qué se le hace a cada columna" }
+    - { id: vela, tipo: tarea, carril: velo, texto: "Vela con exactitud" }
+    - { id: riesgo, tipo: tarea, carril: velo, texto: "Mide el riesgo de reidentificación" }
+    - { id: acepta, tipo: decision, carril: persona, texto: "¿Aceptable?" }
+    - { id: certifica, tipo: tarea, carril: velo, texto: "Certifica con las dos huellas" }
+    - { id: entrega, tipo: tarea, carril: persona, texto: "Entrega el archivo velado" }
+    - { id: trabaja, tipo: tarea, carril: tercero, texto: "Trabaja sobre datos velados" }
+    - { id: recupera, tipo: tarea, carril: persona, texto: "Recupera con su bóveda" }
+    - { id: fin, tipo: fin, carril: persona, texto: "" }
+  flujos:
+    - { de: ini, a: abre }
+    - { de: abre, a: delata }
+    - { de: delata, a: decide }
+    - { de: decide, a: vela }
+    - { de: vela, a: riesgo }
+    - { de: riesgo, a: acepta }
+    - { de: acepta, a: certifica, etiqueta: "sí" }
+    - { de: acepta, a: decide, etiqueta: "no · ajusta" }
+    - { de: certifica, a: entrega }
+    - { de: entrega, a: trabaja }
+    - { de: trabaja, a: recupera }
+    - { de: recupera, a: fin }
+  anotaciones:
+    - { paso: vela, texto: "En un hilo aparte del navegador: no hay subida, no hay servidor y no queda copia al cerrar." }
+    - { paso: recupera, texto: "Solo con la bóveda de quien entregó: sin ella nadie desvela." }

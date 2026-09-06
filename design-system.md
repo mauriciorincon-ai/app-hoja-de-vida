@@ -138,6 +138,25 @@ animaciones infinitas (sweep/glitch/marquee), scroll-snap de deck, CDNs en `<hea
 
 ### Componentes de la vitrina · S5
 
+- **Ficha técnica** (`/vitrina/apps/<slug>`, ADR-016 · post-S5): la capa infografía de una pieza,
+  siete bloques fijos para cualquier frente. Cabecera: eyebrow + chips de estado/ciclo/versión/
+  anclaje, nombre en Fraunces `clamp(2.2rem,6vw,3.5rem)`, tagline Fraunces 1.35rem, stack en chips
+  y el **titular de valor**: caja paper-1 con borde izquierdo `sage-ink` 3px, rótulo mono
+  «qué no hace nadie más», texto 16px medium `ink-0`. **Tira de cifras**: 3–5 cards paper-0,
+  valor Fraunces 2rem `tabular-nums`, etiqueta 12.5px `ink-2`, chip de procedencia obligatorio.
+  Secciones numeradas `01`–`05`: número mono `ink-2`, título Fraunces 1.6rem, subtítulo 13px `ink-2`
+  alineado a la derecha. Paneles `r-lg` paper-0 borde paper-2 `sh-1`. «Límites» con guion `ink-2`;
+  «Nunca» con × `rose-ink`. Hitos: pista de puntos `sage-ink`. Cierre: botón sage al detalle + botón
+  de borde a la lista de espera. **Contraste:** `ink-3` NUNCA es color de texto (2.7:1 sobre
+  paper-0; axe lo cazó en las 12 rutas) — el mínimo para texto es `ink-2`.
+- **Proceso BPMN** (`ProcesoBpmn`, motor `lib/vitrina/bpmn.ts`): SVG generado desde datos, jamás
+  dibujado. Pool paper-0 borde paper-3 r=10, carriles alternos paper-0/paper-1, rótulos mono 10px
+  `ink-2` en banda de 104 unidades. Inicio ○ `sage`/`sage-ink`; tarea ▭ paper-0 borde `ink-0` 1.3
+  r=8, texto 11px medium (≤ 3 líneas de ~17 caracteres); decisión ◇ `citron`/`citron-ink`; fin ◉
+  borde `ink-0` 3px; flujos `ink-1` 1.4 con flecha, etiquetas 10.5px semibold `sage-ink`; llamadas
+  de anotación ①② `lilac`/`lilac-ink` en la esquina de su tarea con las notas al pie en HTML;
+  eventos de enlace Ⓐ mono 10px cuando el proceso se parte en filas (6 columnas por fila). Por
+  debajo de 720 px el contenedor desplaza en horizontal: **nunca se encoge el texto**.
 - **Caja de frente** (portal `/vitrina`, ADR-015 · post-S5): la unidad del portal, una por frente
   (apps · agentes · investigaciones · tableros). Card paper-0, borde paper-2, `r-lg`, `sh-1`,
   hover `-translate-y-0.5` + `sh-2`. Arriba, a la izquierda el **icono del frente** en un cuadro

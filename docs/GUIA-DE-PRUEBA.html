@@ -103,12 +103,12 @@
 <body>
 <div class="pagina">
   <header>
-    <p class="eyebrow">CV Viva · Guía de prueba viva y acumulativa · v4 · post-Sprint 005 · 2026-09-05</p>
+    <p class="eyebrow">CV Viva · Guía de prueba viva y acumulativa · v5 · post-Sprint 005 · 2026-09-05</p>
     <h1>Guía de prueba</h1>
     <p class="suave">Todas las pruebas vigentes de la app — las nuevas del Sprint 005 (la vitrina)
       y las heredadas de S1–S4, que se corren como regresión. Filtra por origen para recorrer todo
       o solo lo que cambió. Las casillas se guardan solas en este navegador.</p>
-    <p class="chica"><strong>Gate mínimo ⭐: 15 pruebas · ~50 min.</strong> Es lo que ninguna
+    <p class="chica"><strong>Gate mínimo ⭐: 17 pruebas · ~60 min.</strong> Es lo que ninguna
       automatización puede verificar (juicio humano sobre el contenido, aprobación visual,
       dispositivo real, proveedor de IA real). Lo que la CI ya respalda (e2e, unit, axe, budgets)
       queda fuera del mínimo y se corre en pases completos.</p>
@@ -349,10 +349,42 @@
         cuántas funcionalidades tiene.
         <span class="origen origen-mejorado">Mejorado · post-S5</span></label></li>
       <li data-origen="mejorado"><input type="checkbox" id="k2"><label for="k2">Pulsa "Ver la ficha
-        completa" en una: llegas a <strong>su propia página</strong> (la dirección es
-        <code>/vitrina/apps/&lt;app&gt;</code>) y ahí está esa app y ninguna otra. "Volver a las
-        apps" te regresa al escaparate, y desde ahí "Volver a la vitrina" al portal.
+        técnica" en una: llegas a <strong>su ficha técnica</strong> (la dirección es
+        <code>/vitrina/apps/&lt;app&gt;</code>), la infografía de dos minutos. Al final, "Ver la
+        ficha completa" baja al <strong>detalle</strong> (<code>…/detalle</code>) y ahí está esa
+        app y ninguna otra. "Volver a la ficha técnica" sube, "Volver a las apps" regresa al
+        escaparate, y desde ahí "Volver a la vitrina" al portal.
         <span class="origen origen-mejorado">Mejorado · post-S5</span></label></li>
+      <li data-origen="nuevo"><input type="checkbox" id="k10"><label for="k10">En la ficha
+        técnica de Hablemos San, recorre los siete bloques: chips de estado arriba, el nombre, el
+        <strong>titular</strong> "Qué no hace nadie más", <strong>cinco cifras</strong> cada una con
+        su chip de procedencia, "Para quién", el <strong>proceso en BPMN</strong>, "Qué tiene" (ocho
+        tarjetas con icono), "Límites y lo que nunca hace", "Dónde está", y los dos botones del
+        cierre. Nada se corta ni se encima en escritorio.
+        <span class="origen origen-nuevo">Nuevo · post-S5</span></label></li>
+      <li data-origen="nuevo"><input type="checkbox" id="k11"><label for="k11">El diagrama
+        "Cómo funciona": tres carriles (Papá·Mamá / Niño / La app), un círculo verde de inicio
+        "Cada día", cajas de tarea, el rombo <strong>"¿Acertó?"</strong> con dos salidas ("sí" y
+        "no · otra vez"), un círculo grueso de fin, y dos llamadas ① ② con su texto al pie. Como no
+        cabe en una fila, se parte en dos con los conectores <strong>A</strong> y <strong>B</strong>:
+        sigue el A y el B con el dedo y confirma que el proceso se lee de corrido. Debajo dice
+        "Proceso declarado por CV Viva…". <span class="origen origen-nuevo">Nuevo · post-S5</span></label></li>
+      <li data-origen="nuevo"><input type="checkbox" id="k12"><label for="k12">En el teléfono, el
+        diagrama <strong>no se encoge</strong>: se desliza en horizontal y debajo dice "Desliza para
+        ver el proceso completo". El resto de la ficha se apila en una columna.
+        <span class="origen origen-nuevo">Nuevo · post-S5</span></label></li>
+      <li data-origen="nuevo" data-minimo><input type="checkbox" id="k13"><label for="k13">⭐
+        <strong>Juicio de proceso:</strong> abre las fichas técnicas de <strong>dos apps</strong> y lee
+        su "Cómo funciona" como ingeniero: ¿los carriles son los actores correctos? ¿cada caja es
+        una sola acción? ¿la decisión está donde de verdad se decide? ¿el bucle existe en la app
+        real? Estos procesos los derivó CV Viva de los exports — si alguno miente sobre la app, se
+        corrige en <code>data/fichas/&lt;app&gt;.yaml</code>.
+        <span class="origen origen-nuevo">Nuevo · post-S5</span><span class="minimo">⭐ mínimo</span></label></li>
+      <li data-origen="nuevo" data-minimo><input type="checkbox" id="k14"><label for="k14">⭐
+        <strong>Aprobación visual de la infografía:</strong> con la ficha técnica de Hablemos San en
+        pantalla, decide si es la capa "de dos minutos" que querías: ¿se entiende sin bajar al
+        detalle? ¿los siete bloques están en el orden correcto? ¿sobra o falta alguno?
+        <span class="origen origen-nuevo">Nuevo · post-S5</span><span class="minimo">⭐ mínimo</span></label></li>
       <li data-origen="nuevo"><input type="checkbox" id="k3"><label for="k3">Al pie de una ficha,
         "App siguiente" te lleva a otra app sin pasar por el índice.
         <span class="origen origen-nuevo">Nuevo · S5</span></label></li>
@@ -455,6 +487,14 @@
     <details class="chica">
       <summary>Historial de la guía</summary>
       <ul>
+        <li><strong>v5 · post-S5 · 2026-09-05:</strong> la ficha técnica (ADR-016), fuera de sprint:
+          una capa infografía por app sobre el detalle, con el proceso en BPMN generado desde datos.
+          Nuevas: los siete bloques (K10), el diagrama BPMN con sus conectores (K11), el diagrama en
+          móvil (K12), el juicio de proceso (K13 ⭐) y la aprobación visual de la infografía (K14 ⭐).
+          Mejorada: la entrada a una app, que ahora pasa por la ficha técnica antes del detalle
+          (K2). <strong>Ninguna prueba eliminada:</strong> el detalle del S5 sigue entero, un nivel
+          más abajo. Gate mínimo ⭐: de 15 a 17. Las pruebas de S5 y post-S5 siguen marcadas como
+          nuevas: su gate ⭐ aún no se ha corrido.</li>
         <li><strong>v4 · post-S5 · 2026-09-05:</strong> la vitrina se reparte en cuatro frentes
           (ADR-015), fuera de sprint. Nuevas: la página de un frente en preparación (K8) y el juicio
           sobre el contenido de los tres frentes nuevos (K9 ⭐). Mejoradas: la entrada a la vitrina,
@@ -494,7 +534,7 @@
   (function () {
     // NS VERSIONADO POR SPRINT: al publicar la guía de un sprint nuevo se cambia
     // s005 — así una regresión sin correr no aparece marcada por el sprint anterior.
-    var NS = "guia-hoja-de-vida:s005c:";
+    var NS = "guia-hoja-de-vida:s005d:";
     var casillas = Array.prototype.slice.call(document.querySelectorAll('input[type="checkbox"]'));
     var barra = document.getElementById("barra-avance");
     var contador = document.getElementById("contador");

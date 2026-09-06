@@ -1,0 +1,48 @@
+# Complemento de la ficha técnica de Nutri-Kids (ADR-016). PROCEDENCIA:
+# cv-viva — derivado de su export por CV Viva; se retira cuando la app mande el suyo.
+schema_version: "1.0.0"
+app: nutri-kids
+procedencia: cv-viva
+declarado_en: "2026-09-05"
+titular: "Ninguna otra app de nutrición infantil promete lo que esta: no calificar al niño. Sin calorías, peso, IMC ni «cumplimiento» como nota moral — y el registro del día jamás sale del teléfono, ni siquiera al asistente de IA."
+cifras_destacadas: [funcionalidades, pantallas, requests_del_registro, cobertura_lineas, costo_operacion_mensual]
+limites:
+  - "No califica al niño: sin calorías, peso, IMC, percentiles ni «cumplimiento»."
+  - "Hace red para una sola cosa: las preguntas abiertas del chat — y ahí viaja únicamente el plan."
+  - "Sin servidor de datos, cuenta ni nube: la dieta, las marcas, las horas y las notas viven en el teléfono."
+nunca:
+  - "Pone una nota al niño."
+  - "Sube el registro del día a un servidor."
+  - "Envía al asistente algo distinto del plan."
+  - "Pide cuenta."
+proceso:
+  titulo: "La dieta, viva en el bolsillo"
+  carriles:
+    - { id: cuida, nombre: "Quien cuida" }
+    - { id: app, nombre: "Nutri-Kids · en el teléfono" }
+    - { id: asistente, nombre: "El asistente de IA" }
+  pasos:
+    - { id: ini, tipo: inicio, carril: cuida, texto: "Un plan médico en un documento" }
+    - { id: carga, tipo: tarea, carril: cuida, texto: "Carga la dieta del peque" }
+    - { id: guarda, tipo: tarea, carril: app, texto: "La guarda solo en el teléfono" }
+    - { id: pregunta, tipo: tarea, carril: cuida, texto: "Pregunta «¿esto se puede?»" }
+    - { id: responde, tipo: tarea, carril: app, texto: "Responde desde la dieta, sin red" }
+    - { id: registra, tipo: tarea, carril: cuida, texto: "Registra el día: horas y notas" }
+    - { id: abierta, tipo: decision, carril: cuida, texto: "¿Con sus palabras?" }
+    - { id: envia, tipo: tarea, carril: app, texto: "Envía solo el plan, nunca el registro" }
+    - { id: contesta, tipo: tarea, carril: asistente, texto: "Contesta con el plan como contexto" }
+    - { id: fin, tipo: fin, carril: cuida, texto: "" }
+  flujos:
+    - { de: ini, a: carga }
+    - { de: carga, a: guarda }
+    - { de: guarda, a: pregunta }
+    - { de: pregunta, a: responde }
+    - { de: responde, a: registra }
+    - { de: registra, a: abierta }
+    - { de: abierta, a: envia, etiqueta: "sí" }
+    - { de: abierta, a: fin, etiqueta: "no" }
+    - { de: envia, a: contesta }
+    - { de: contesta, a: fin }
+  anotaciones:
+    - { paso: guarda, texto: "Sin servidor de datos, cuenta ni nube (ADR-001, ratificada por ADR-007)." }
+    - { paso: envia, texto: "El registro del día —las horas y las notas sobre su hijo— jamás sale del teléfono." }

@@ -1,0 +1,315 @@
+{
+  "schema_version": "1.0.0",
+  "actualizado": "2026-08-21",
+  "pieza": {
+    "slug": "habla",
+    "nombre": "Hablemos San",
+    "frente": "apps",
+    "estado": "sellado",
+    "ciclo": "H1",
+    "version": "0.1.0",
+    "sellado_en": "2026-08-08",
+    "sprints_cerrados": 4
+  },
+  "promesa": {
+    "tagline": "Su voz mueve el mundo.",
+    "intro": "Juegos que se juegan hablando — y se juegan contigo. Y cada día, una respuesta concreta a la pregunta que más pesa: «¿y hoy qué puedo hacer por mi hijo?».",
+    "para_quien": "Para el papá o la mamá de un niño de 4 a 6 años que está aprendiendo a hablar y ya va a sus terapias del lenguaje. Es la práctica de casa entre sesión y sesión: acompaña, jamás reemplaza. Se juega de a dos — no existe un «modo niño solo», a propósito."
+  },
+  "titular": "Solo afirma lo que de verdad midió —hubo voz, duró tanto, el tono subió— y jamás finge reconocer la palabra: quien juzga el acierto es el padre. Y la voz del niño no se graba nunca.",
+  "stack": [
+    {
+      "nombre": "Next.js",
+      "papel": "la app entera, como PWA instalable y local-first: sin backend, sin cuentas y sin base de datos"
+    },
+    {
+      "nombre": "TypeScript",
+      "papel": "modo estricto en todo el repositorio"
+    },
+    {
+      "nombre": "Web Audio API + AudioWorklet",
+      "papel": "el motor de voz: energía y tono medidos en el hilo de audio, en el aparato, y descartados enseguida"
+    },
+    {
+      "nombre": "Tailwind",
+      "papel": "la interfaz, sobre el design system propio de la app"
+    },
+    {
+      "nombre": "Vitest y Playwright",
+      "papel": "las pruebas: motores puros con señales sintéticas, y end-to-end con micrófono falso, incluida la prueba permanente de cero red"
+    },
+    {
+      "nombre": "Zod",
+      "papel": "validación del contenido y de lo que se guarda localmente"
+    }
+  ],
+  "cifras": [
+    {
+      "clave": "funcionalidades",
+      "valor": 24,
+      "unidad": "funcionalidades",
+      "etiqueta": "Funcionalidades del MVP",
+      "fuente": "medido",
+      "detalle": "Contadas contra docs/MANUAL-DE-USO.md, con la tabla de mapeo feature→sección publicada en sprints/ENTREGA-brochure-summary.md. Nada se construyó y se retiró: descartadas[] va vacío."
+    },
+    {
+      "clave": "pantallas",
+      "valor": 10,
+      "unidad": "pantallas",
+      "etiqueta": "Pantallas de la app",
+      "fuente": "medido",
+      "detalle": "Archivos page.tsx bajo src/app/ (11 en total) menos /spike/audio, que es el banco de pruebas del motor de voz y no una pantalla del producto. La ruta /conoce sirve este brochure por reescritura y tampoco es una pantalla."
+    },
+    {
+      "clave": "llamadas_de_red",
+      "valor": 0,
+      "unidad": "llamadas",
+      "etiqueta": "Llamadas de red durante el juego",
+      "fuente": "medido",
+      "detalle": "Una prueba e2e permanente observa el tráfico mientras el niño juega y falla si aparece una sola petición saliente."
+    },
+    {
+      "clave": "cobertura_lineas",
+      "valor": 94.02,
+      "unidad": "%",
+      "etiqueta": "Cobertura de líneas",
+      "fuente": "medido",
+      "detalle": "v8 sobre src/lib y src/components; los motores puros (voz, cápsula diaria, hitos, objetivo) llevan la cobertura alta porque ahí viven las garantías."
+    },
+    {
+      "clave": "costo_operacion_mensual",
+      "valor": 0,
+      "unidad": "USD",
+      "etiqueta": "Costo de operación mensual",
+      "fuente": "calculada",
+      "detalle": "Suma de servicios contratados: ninguno. Hosting en plan gratuito de uso personal, sin servidor propio, sin base de datos, sin cuentas y sin proveedor de IA que facturar."
+    }
+  ],
+  "bloques": [
+    {
+      "orden": 1,
+      "nombre": "La respuesta de cada día",
+      "linea": "Cada mañana, una idea lista: qué decirle hoy y qué hacer con él.",
+      "cuenta": 2
+    },
+    {
+      "orden": 2,
+      "nombre": "Jugar con la voz",
+      "linea": "Cuatro juegos donde su voz es el control — y tú diriges.",
+      "cuenta": 5
+    },
+    {
+      "orden": 3,
+      "nombre": "Tu voz dentro de la app",
+      "linea": "Grabas «perro» una vez — y los juegos hablan con tu voz.",
+      "cuenta": 4
+    },
+    {
+      "orden": 4,
+      "nombre": "El objetivo de la semana",
+      "linea": "Lo que pidieron en sus terapias, puesto primero en todo.",
+      "cuenta": 3
+    },
+    {
+      "orden": 5,
+      "nombre": "El rumbo",
+      "linea": "Cómo van, semana a semana — sin notas y sin drama.",
+      "cuenta": 2
+    },
+    {
+      "orden": 6,
+      "nombre": "A su medida",
+      "linea": "Temas, etapa, calma: la app se ajusta a él, no al revés.",
+      "cuenta": 6
+    },
+    {
+      "orden": 7,
+      "nombre": "La promesa mayor",
+      "linea": "Lo que pasa adentro, muere adentro.",
+      "cuenta": 1
+    },
+    {
+      "orden": 8,
+      "nombre": "Lo fino",
+      "linea": "Lo que falta, por si lo pides.",
+      "cuenta": 1
+    }
+  ],
+  "proceso": {
+    "titulo": "Una sesión de práctica en casa",
+    "carriles": [
+      {
+        "id": "padre",
+        "nombre": "Papá · Mamá"
+      },
+      {
+        "id": "nino",
+        "nombre": "Niño (4–6)"
+      },
+      {
+        "id": "app",
+        "nombre": "La app · en el aparato"
+      }
+    ],
+    "pasos": [
+      {
+        "id": "ini",
+        "tipo": "inicio",
+        "carril": "padre",
+        "texto": "Cada día"
+      },
+      {
+        "id": "idea",
+        "tipo": "tarea",
+        "carril": "padre",
+        "texto": "Abre la idea del día"
+      },
+      {
+        "id": "juego",
+        "tipo": "tarea",
+        "carril": "padre",
+        "texto": "Elige el juego y da la consigna"
+      },
+      {
+        "id": "habla",
+        "tipo": "tarea",
+        "carril": "nino",
+        "texto": "Habla: su voz es el control"
+      },
+      {
+        "id": "mide",
+        "tipo": "tarea",
+        "carril": "app",
+        "texto": "Mide energía y tono, en memoria"
+      },
+      {
+        "id": "descarta",
+        "tipo": "tarea",
+        "carril": "app",
+        "texto": "Descarta el audio al instante"
+      },
+      {
+        "id": "responde",
+        "tipo": "tarea",
+        "carril": "app",
+        "texto": "Responde con la voz de la familia"
+      },
+      {
+        "id": "acierto",
+        "tipo": "decision",
+        "carril": "padre",
+        "texto": "¿Acertó?"
+      },
+      {
+        "id": "suma",
+        "tipo": "tarea",
+        "carril": "app",
+        "texto": "Suma al objetivo de la semana"
+      },
+      {
+        "id": "rumbo",
+        "tipo": "tarea",
+        "carril": "padre",
+        "texto": "Revisa el rumbo, semana a semana"
+      },
+      {
+        "id": "fin",
+        "tipo": "fin",
+        "carril": "padre",
+        "texto": ""
+      }
+    ],
+    "flujos": [
+      {
+        "de": "ini",
+        "a": "idea"
+      },
+      {
+        "de": "idea",
+        "a": "juego"
+      },
+      {
+        "de": "juego",
+        "a": "habla"
+      },
+      {
+        "de": "habla",
+        "a": "mide"
+      },
+      {
+        "de": "mide",
+        "a": "descarta"
+      },
+      {
+        "de": "descarta",
+        "a": "responde"
+      },
+      {
+        "de": "responde",
+        "a": "acierto"
+      },
+      {
+        "de": "acierto",
+        "a": "suma",
+        "etiqueta": "sí"
+      },
+      {
+        "de": "acierto",
+        "a": "habla",
+        "etiqueta": "no · otra vez"
+      },
+      {
+        "de": "suma",
+        "a": "rumbo"
+      },
+      {
+        "de": "rumbo",
+        "a": "fin"
+      }
+    ],
+    "anotaciones": [
+      {
+        "paso": "mide",
+        "texto": "La voz del niño nunca se guarda ni sale del aparato: se analiza en memoria y se descarta."
+      },
+      {
+        "paso": "responde",
+        "texto": "Con la voz que la familia grabó una sola vez en el Estudio, en ese mismo aparato."
+      }
+    ]
+  },
+  "procedencia_proceso": "cv-viva",
+  "limites": [
+    "Acompaña la terapia; jamás la reemplaza.",
+    "Se juega de a dos: no existe un «modo niño solo», a propósito.",
+    "No reconoce la palabra ni califica la pronunciación: ninguna tecnología lo hace hoy con fiabilidad en español para 4–6 años, y esta no lo simula."
+  ],
+  "nunca": [
+    "Graba, guarda o envía la voz del niño — hay pruebas en el CI que rompen el código si alguien lo intenta.",
+    "Usa la cámara.",
+    "Pide cuenta, nube ni IA.",
+    "Hace una sola petición a internet durante el juego."
+  ],
+  "hitos": [
+    {
+      "valor": "H1",
+      "etiqueta": "ciclo"
+    },
+    {
+      "valor": "4",
+      "etiqueta": "sprints"
+    },
+    {
+      "valor": "2026-08-08",
+      "etiqueta": "sellada"
+    },
+    {
+      "valor": "v0.1.0",
+      "etiqueta": "version"
+    },
+    {
+      "valor": "14",
+      "etiqueta": "decisiones registradas"
+    }
+  ]
+}

@@ -104,4 +104,5 @@ jobs:
             --collect.url=http://localhost:3000/es/vitrina \
             --collect.url=http://localhost:3000/es/vitrina/apps \
             --collect.url=http://localhost:3000/es/vitrina/apps/habla \
+            --collect.url=http://localhost:3000/es/vitrina/apps/habla/detalle \
             --assert.budgetsFile=./perf-budget.json

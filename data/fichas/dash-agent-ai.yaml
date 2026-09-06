@@ -1,0 +1,50 @@
+# Complemento de la ficha técnica de Dash Agent AI (ADR-016). PROCEDENCIA:
+# cv-viva — derivado de su export por CV Viva; se retira cuando la app mande el suyo.
+schema_version: "1.0.0"
+app: dash-agent-ai
+procedencia: cv-viva
+declarado_en: "2026-09-05"
+titular: "Medir tokens ya lo hacen varias herramientas. Lo que no hace nadie es el auditor de memoria: el inventario de lo que tus agentes saben de ti y la detección determinista de lo que dejó de ser cierto."
+cifras_destacadas: [funcionalidades, pantallas, llamadas_de_red, cobertura_lineas, costo_operacion_mensual]
+limites:
+  - "Lee; jamás escribe en los archivos de tus agentes — la garantía de solo lectura tiene cuatro capas."
+  - "Vive entera en tu máquina: sin servidor, cuenta ni nube."
+  - "Detecta lo que dejó de ser cierto de forma determinista: sin IA que opine."
+nunca:
+  - "Modifica un archivo de tus agentes."
+  - "Saca tus datos de la máquina."
+  - "Mezcla el índice con las fuentes."
+  - "Inventa un costo que no midió."
+proceso:
+  titulo: "Saber todo de tus agentes"
+  carriles:
+    - { id: agentes, nombre: "Tus agentes · sus archivos" }
+    - { id: dash, nombre: "Dash · en tu máquina" }
+    - { id: tu, nombre: "Tú" }
+  pasos:
+    - { id: ini, tipo: inicio, carril: agentes, texto: "Tus agentes trabajan" }
+    - { id: escriben, tipo: tarea, carril: agentes, texto: "Escriben logs, memoria e instrucciones" }
+    - { id: lee, tipo: tarea, carril: dash, texto: "Lee los archivos, solo lectura" }
+    - { id: indexa, tipo: tarea, carril: dash, texto: "Indexa fuera de las fuentes" }
+    - { id: cuesta, tipo: tarea, carril: dash, texto: "Calcula lo que te cuestan" }
+    - { id: saben, tipo: tarea, carril: dash, texto: "Inventaría lo que saben de ti" }
+    - { id: caduco, tipo: tarea, carril: dash, texto: "Detecta lo que dejó de ser cierto" }
+    - { id: revisa, tipo: tarea, carril: tu, texto: "Revisa el tablero" }
+    - { id: corregir, tipo: decision, carril: tu, texto: "¿Corregir?" }
+    - { id: corrige, tipo: tarea, carril: tu, texto: "Corrige la memoria del agente" }
+    - { id: fin, tipo: fin, carril: tu, texto: "" }
+  flujos:
+    - { de: ini, a: escriben }
+    - { de: escriben, a: lee }
+    - { de: lee, a: indexa }
+    - { de: indexa, a: cuesta }
+    - { de: cuesta, a: saben }
+    - { de: saben, a: caduco }
+    - { de: caduco, a: revisa }
+    - { de: revisa, a: corregir }
+    - { de: corregir, a: corrige, etiqueta: "sí" }
+    - { de: corregir, a: fin, etiqueta: "no" }
+    - { de: corrige, a: fin }
+  anotaciones:
+    - { paso: lee, texto: "Solo lectura con cuatro capas: permisos de Node, una frontera de módulo única, el índice fuera de las fuentes y pruebas permanentes." }
+    - { paso: indexa, texto: "Nada sale de la máquina: no hay servidor, cuenta ni nube." }

@@ -50,11 +50,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       alternates: alternatesFor("/vitrina/apps"),
     },
-    ...getManifestVitrina().map((a) => ({
-      url: `${SITE_URL}/${locale}/vitrina/apps/${a.slug}`,
-      lastModified: new Date(),
-      alternates: alternatesFor(`/vitrina/apps/${a.slug}`),
-    })),
+    // Por app: la ficha técnica (ADR-016) y su detalle.
+    ...getManifestVitrina().flatMap((a) =>
+      ["", "/detalle"].map((sub) => ({
+        url: `${SITE_URL}/${locale}/vitrina/apps/${a.slug}${sub}`,
+        lastModified: new Date(),
+        alternates: alternatesFor(`/vitrina/apps/${a.slug}${sub}`),
+      })),
+    ),
     ...frentesEnPreparacion().map((f) => ({
       url: `${SITE_URL}/${locale}/vitrina/${f.id}`,
       lastModified: new Date(),

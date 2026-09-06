@@ -847,3 +847,118 @@ en SSG.
   investigación?). ADR-015 no lo anticipa a propósito.
 - **Regla de la cuenta:** "ninguna cifra sin procedencia" se extendió de las métricas a la cuenta
   de piezas de un frente. Candidata a entrar en el molde del brochure/vitrina como regla general.
+
+## Post-cierre III — la ficha técnica y el motor BPMN (2026-09-05, fuera de sprint)
+
+**Pedido del usuario:** «construimos muy juiciosamente el detalle de la aplicación pero siento que
+debe haber una capa superior menos detallada y más orientada a ser como una ficha técnica tipo
+infografía y al final un botón que diga detalle». Dos entregables: (1) «la clave de imagen visual
+con todas las instrucciones necesarias para que otra aplicación cree las fichas de las
+investigaciones y tú solo tengas que consumirlas»; (2) «las infografías para las apps basada en
+el detalle que ya tenemos», previa presentación y argumentación de la plantilla. Trajo dos
+plantillas HTML de la planeadora (resumen visual del harness · guía de usuario de la biblioteca)
+como referencia de anatomía.
+
+**Sin orden de construcción**, tercer bloque post-S5 seguido (menú · frentes · ficha técnica).
+
+### Cómo se llegó a la plantilla (tres rondas)
+
+1. Maqueta con contenido real de Hablemos San, en tokens de CV Viva. **Aprobada la anatomía**
+   (siete bloques); **rechazada la sección «Cómo funciona»**: «no está ni cerca de estar lista…
+   usa BPMN y pilas con la visual, mira lo horrible que están las líneas». Lección: el usuario es
+   ingeniero industrial; para él el proceso es la sección más importante, y un flujo de cajas con
+   líneas a mano no es un proceso.
+2. Sección 02 rehecha como BPMN con un **generador datos → SVG** (carriles · pasos · flujos ·
+   anotaciones). «Me gusta mucho más». Mi propia crítica, aceptada: anotaciones mal puestas,
+   una tarea que hacía dos cosas, tipografía al límite en móvil, leyenda de manual, y el
+   proceso derivado por mí sin dueño declarado.
+3. «Ajusta lo que consideres para evolucionar el trabajo» → construcción completa bajo dos
+   supuestos declarados: **JSON + CV Viva pinta** (no HTML ajeno) y **los seis procesos los deriva
+   CV Viva** marcados `procedencia: cv-viva` hasta que cada app mande el suyo.
+
+**Tropiezo de proceso, registrado:** presenté rutas (`docs/contrato-ficha-tecnica/…`) que
+había *propuesto* pero no creado; el usuario fue a buscarlas y no estaban. «Qué mala maña de dar
+las direcciones a medias». Regla para mí: **no nombrar una ruta que no esté en disco**, y dar
+siempre la ruta absoluta.
+
+### Lo construido (ADR-016)
+
+- **Motor BPMN puro** (`lib/vitrina/bpmn.ts`, 10 unitarias de invariantes): pool · carriles ·
+  inicio ○ · tarea ▭ · decisión ◇ · fin ◉ · flujos ortogonales con flecha · retornos por abajo ·
+  anotaciones como llamadas ①② con notas al pie · **eventos de enlace Ⓐ** cuando el proceso se
+  parte en filas (6 columnas): nunca se encoge; en móvil se desliza.
+- **Contrato v1.0.0** (`lib/vitrina/ficha-tecnica/schema.ts`): `fichaTecnicaSchema` (completa,
+  para otras casas) y `complementoSchema` (lo que al export v1.0.0 le falta). Reglas en el
+  esquema: cifra con fuente · 3–5 cifras · tarea ≤ 60 caracteres · BPMN válido (un inicio, ≥ 1
+  fin, todo alcanzable y con salida, decisión con ≥ 2 caminos).
+- **Paquete de entrega** `docs/contrato-ficha-tecnica/`: `CLAVE-VISUAL.md` · `ficha-tecnica.
+  schema.json` y `ejemplo.habla.json` **generados del Zod** por el propio test
+  (`pnpm contrato:ficha`) · `referencia.html` + `.png` · `README.md`.
+- **Rutas:** `/vitrina/apps/<slug>` = ficha técnica; el detalle del S5 baja a
+  `/vitrina/apps/<slug>/detalle` (+12 rutas SSG, en sitemap, axe y e2e).
+- **Seis complementos** en `data/fichas/*.yaml` (titular · cifras destacadas · límites · nunca ·
+  proceso), todos `cv-viva`.
+- **Docs:** ADR-016 · manual · guía **v5** (NS `s005d`; 57 pruebas, ⭐ 15→17: juicio de proceso
+  y aprobación visual de la infografía) · `design-system.md` · card `ficha-tecnica-y-bpmn.html`.
+
+### Lo que la CI y axe cazaron (y yo no)
+
+- **`ink-3` no es color de texto.** Lo usé en números de sección, cuentas y la pista de móvil:
+  2.7:1 sobre paper-0. Axe en rojo en las 12 rutas. Regla nueva en `design-system.md`: el mínimo
+  para texto es `ink-2`.
+- **Una región con scroll debe recibir foco** (`scrollable-region-focusable`): el contenedor del
+  diagrama en móvil desplaza en horizontal; sin `tabIndex=0` + `role="region"` axe lo marca. Solo
+  en el proyecto móvil — en escritorio el diagrama cabe y la regla no aplica. *Un gate que solo
+  falla en un viewport es la razón de tener dos proyectos.*
+- **Un flujo que cruza de fila NO puede ir en recta hacia el evento de enlace**: entre el nodo y
+  el margen puede haber otros nodos del mismo carril (se vio en pantalla: la línea atravesaba
+  «Revisa el rumbo» y el fin). Regla del motor: recta si el carril está libre, por canal si no.
+- **Los rótulos de carril y del inicio se salían de su banda** («QUIEN DEFIENDE EL MODELO»): se
+  parten a 15 caracteres; el inicio con texto tiene columna propia.
+- **La unidad se repetía** («24 funcionalidades · Funcionalidades del MVP»): solo se pinta si la
+  etiqueta no la contiene ya.
+- **Node no resuelve imports sin extensión** al hacer type-stripping: el script del contrato se
+  cayó; el generador vive ahora en el test que ya calculaba lo mismo (`GENERAR_CONTRATO=1`).
+
+### Regla 14 — los gates nuevos, demostrados en ROJO
+
+**Gate 1 — el contrato publicado no puede desviarse del Zod.** Cambio deliberado:
+`cifras: max(5)` → `max(6)` sin regenerar. Dos rojos, uno de ellos el diff exacto:
+
+```
+× ficha-tecnica.schema.json coincide con el Zod de la app
+-       "maxItems": 6,
++       "maxItems": 5,
+```
+
+Revertido.
+
+**Gate 2 — un proceso mal formado rompe el build nombrando el paso.** Cambio deliberado: quitar el
+flujo `suma → rumbo` en `data/fichas/habla.yaml`. El complemento deja de validar y el error
+nombra a los dos culpables:
+
+```
+Complemento inválido en data/fichas/habla.yaml:
+  - proceso.pasos.8: «suma» no tiene salida: el proceso se queda ahí
+  - proceso.pasos.9: «rumbo» no es alcanzable: ningún flujo llega a él
+```
+
+Revertido (YAML restaurado byte a byte).
+
+**Gate 3 — la ficha técnica en el e2e** (`vitrina.spec` › «cada app tiene su ficha técnica…»):
+cuenta pasos, notas, cifras con su fuente y «nunca» contra el YAML y el export. Su demo en rojo
+es la misma del gate 2 (el build no llega), y además se vio fallar de verdad con axe antes de los
+dos arreglos de arriba.
+
+### Para la planeadora
+
+- **Contrato `ficha-tecnica` v1.0.0** listo para el harness de investigaciones y los demás
+  frentes: `docs/contrato-ficha-tecnica/CLAVE-VISUAL.md`. Candidato a entrar al kit como molde
+  de «capa infografía», al lado del molde del brochure.
+- **BPMN no es el lenguaje de todos los frentes** (dicho por el usuario: «ya lo resuelvo con quien
+  corresponda»). El contrato pide *un proceso* sin fijar carriles; el motor admite los que sean.
+- **Sugerencia al contrato del brochure-export (v1.1.0):** que la app declare su propio
+  `proceso`, `titular`, `limites` y `nunca`. Hasta entonces los declara CV Viva y lo dice en
+  pantalla — un proceso sin dueño es una cifra sin fuente.
+- Tercer bloque post-S5 sin orden de construcción: la figura de «mejora fuera de sprint» ya no
+  es una sugerencia, es una necesidad.
