@@ -1,0 +1,374 @@
+{
+  "schema_version": "1.1.0",
+  "actualizado": "2026-09-06",
+  "pieza": {
+    "slug": "asistente-posgrado",
+    "nombre": "Asistente de posgrado",
+    "frente": "agentes",
+    "estado": "inicial",
+    "ciclo": "corrida 3",
+    "version": "1.0.1",
+    "sellado_en": null,
+    "sprints_cerrados": 0
+  },
+  "promesa": {
+    "tagline": "La clase de hoy sostiene la tesis de dentro de dos años.",
+    "intro": "Cada sesión de clase entra a una biblioteca markdown suya, con procedencia exacta hasta el timestamp de la grabación o el número de diapositiva. Esa biblioteca alimenta el repaso espaciado de mañana y la matriz de opciones de proyecto de grado de pasado mañana. Al terminar, el activo que queda no es el título: es un corpus citable que sobrevive al programa.",
+    "para_quien": "Para el estudiante de un posgrado que trabaja tiempo completo y acumula tres horas de grabación y cuatro presentaciones cada semana. Hoy las guarda en carpetas que no vuelve a abrir: procesarlas a mano no es caro, es que no se hace. Y en el semestre en que hay que elegir tema de tesis, el material de los primeros cursos ya es inaccesible en la práctica."
+  },
+  "titular": "Ninguna afirmación sale de la memoria del modelo: cada ficha cita curso, sesión y timestamp, o declara el vacío. Y toda cita se genera desde el CSL-JSON con un procesador de estilos, jamás se redacta: la cita inventada deja de ser posible.",
+  "stack": [
+    {
+      "nombre": "Claude Code",
+      "papel": "La única superficie del harness: lee el paquete, opera la cadena por Bash y escribe el corpus y la memoria. Sin ningún servidor MCP configurado."
+    },
+    {
+      "nombre": "whisper.cpp",
+      "papel": "Transcribe las grabaciones de clase en la máquina del estudiante conservando timestamps: son el ancla de procedencia de toda ficha derivada de audio."
+    },
+    {
+      "nombre": "python-pptx",
+      "papel": "Extrae texto y notas del orador de las presentaciones, con el número de diapositiva como ancla. Vive en un script propio del paquete, escrito desde cero."
+    },
+    {
+      "nombre": "pandoc y estilos CSL",
+      "papel": "Genera cada cita IEEE o APA desde el CSL-JSON exportado de Zotero. Quedó degradado a verificador secundario: ante una clave huérfana devuelve exit 0."
+    },
+    {
+      "nombre": "py-fsrs",
+      "papel": "Programa la cola de repaso espaciado y persiste el estado de cada tarjeta. El log de repasos es append-only, para poder optimizar parámetros con datos propios."
+    },
+    {
+      "nombre": "poppler: pdftotext y pdfinfo",
+      "papel": "Extrae texto de PDF y lee los permisos del documento: si declara copia restringida, la restricción viaja estampada en cada ficha que derive de él."
+    },
+    {
+      "nombre": "Markdown con frontmatter",
+      "papel": "El formato de todo el corpus y de la memoria, con cinco esquemas de archivo. Legible sin la herramienta, y compatible con Obsidian sin usar Obsidian."
+    },
+    {
+      "nombre": "Bash: chequeos-cierre.sh",
+      "papel": "Los nueve chequeos mecánicos de cierre de corrida, con un modo carnada que siembra un corpus violador y asierta caso por caso que cada uno dispara."
+    }
+  ],
+  "cifras": [
+    {
+      "clave": "criterios_binarios",
+      "valor": 50,
+      "etiqueta": "Criterios de aceptación binarios",
+      "fuente": "medido",
+      "detalle": "Contados sobre entrega/work-items/*.md con grep de las filas numeradas de la tabla «Criterios de aceptación (binarios)»: 8+8+6+9+8+6+5 en los siete work-items WI-0 a WI-6. Coincide con la Ficha de arquitectura/README.md."
+    },
+    {
+      "clave": "comandos_ejercitados",
+      "valor": 0,
+      "etiqueta": "Comandos ejercitados, de 13",
+      "fuente": "medido",
+      "detalle": "verificacion.md sección 3, «Estado de ejercicio de la superficie»: ninguno de los 13 comandos de CLAUDE.md se ha corrido con material del estudiante. Por eso la guía de usuario visual está diferida a WI-2: emitirla hoy presentaría 13 capacidades probadas cuando no hay ninguna."
+    },
+    {
+      "clave": "carnadas_que_disparan",
+      "valor": 9,
+      "etiqueta": "Casos de carnada que disparan, de 9",
+      "fuente": "medido",
+      "detalle": "scripts/chequeos-cierre.sh --carnada siembra un corpus diseñado para violar cada regla y comprueba caso por caso que la atrapa: 8 casos el 2026-08-30 y el noveno el 2026-09-05. La aserción literal, y no el conteo agregado, delató tres defectos que la lectura no vio."
+    },
+    {
+      "clave": "velocidad_transcripcion",
+      "valor": 19,
+      "unidad": "veces el tiempo real",
+      "etiqueta": "Velocidad de transcripción medida",
+      "fuente": "medido",
+      "detalle": "arquitectura/roi.json, datos_medidos_en_corrida: 41 min 09 s de audio real en español con términos técnicos en inglés, transcritos en 2 min 11 s con whisper-cli y el modelo large-v3-turbo sobre Apple Silicon, el 2026-09-05. Las 3 h semanales cuestan unos 9 min de máquina."
+    },
+    {
+      "clave": "costo_herramientas_cop",
+      "valor": 0,
+      "unidad": "COP",
+      "etiqueta": "Costo anual en herramientas",
+      "fuente": "calculada",
+      "detalle": "Suma de servicios contratados: ninguno. Toda la cadena es open source con licencia verificada en su repositorio oficial (whisper.cpp, python-pptx y py-fsrs bajo MIT; pandoc y poppler bajo GPL; estilos CSL IEEE y APA bajo CC-BY-SA); Zotero y Anki son gratuitos. arquitectura/roi.json, lo_que_si_esta_medido."
+    }
+  ],
+  "bloques": [
+    {
+      "orden": 1,
+      "nombre": "Ingesta",
+      "linea": "Congela el original, lo transcribe con su ancla y parte la sesión en temas ya puntuados.",
+      "cuenta": 1
+    },
+    {
+      "orden": 2,
+      "nombre": "Biblioteca",
+      "linea": "Destila los temas marcados en fichas atómicas con procedencia, y genera las citas desde datos.",
+      "cuenta": 3
+    },
+    {
+      "orden": 3,
+      "nombre": "Entrenador",
+      "linea": "Repaso espaciado y evaluación: el modelo del estudiante solo se mueve con desempeño medido.",
+      "cuenta": 2
+    },
+    {
+      "orden": 4,
+      "nombre": "Profesor virtual",
+      "linea": "Tutoría socrática, mapas hechos de memoria y el brief de preclase. Nunca regala la respuesta.",
+      "cuenta": 3
+    },
+    {
+      "orden": 5,
+      "nombre": "Investigación",
+      "linea": "Radar de opciones de tesis, bitácora de asesoría y la propuesta que se entrega aguas abajo.",
+      "cuenta": 3
+    },
+    {
+      "orden": 6,
+      "nombre": "Defensa",
+      "linea": "Un jurado simulado que leyó el expediente completo, y su lista de objeciones sin resolver.",
+      "cuenta": 1
+    },
+    {
+      "orden": 7,
+      "nombre": "Las nueve leyes",
+      "linea": "Lo que no se negocia: la curaduría es del estudiante, la procedencia es exacta, prepara y no suplanta.",
+      "cuenta": 9
+    },
+    {
+      "orden": 8,
+      "nombre": "Memoria longitudinal",
+      "linea": "Los cinco archivos que sobreviven a la sesión: modelo, lecciones, bitácora, radar y log de repasos.",
+      "cuenta": 5
+    }
+  ],
+  "proceso": {
+    "titulo": "Una corrida: de la clase a la biblioteca",
+    "carriles": [
+      {
+        "id": "estudiante",
+        "nombre": "El estudiante"
+      },
+      {
+        "id": "asistente",
+        "nombre": "El asistente en Claude Code"
+      },
+      {
+        "id": "cadena",
+        "nombre": "Cadena local de ingesta"
+      },
+      {
+        "id": "chequeos",
+        "nombre": "Chequeos mecánicos"
+      }
+    ],
+    "pasos": [
+      {
+        "id": "ini",
+        "tipo": "inicio",
+        "carril": "estudiante",
+        "texto": "Semana de clases"
+      },
+      {
+        "id": "pre",
+        "tipo": "tarea",
+        "carril": "asistente",
+        "texto": "Brief de preclase: qué leer y qué preguntar"
+      },
+      {
+        "id": "trae",
+        "tipo": "tarea",
+        "carril": "estudiante",
+        "texto": "Tras la clase, deja el archivo en el repo"
+      },
+      {
+        "id": "ingerir",
+        "tipo": "tarea",
+        "carril": "asistente",
+        "texto": "Congela el original: raw es inmutable"
+      },
+      {
+        "id": "transcribe",
+        "tipo": "tarea",
+        "carril": "cadena",
+        "texto": "Transcribe con timestamps, extrae PPTX y PDF"
+      },
+      {
+        "id": "triage",
+        "tipo": "tarea",
+        "carril": "asistente",
+        "texto": "Parte en temas y puntúa contra el perfil"
+      },
+      {
+        "id": "curar",
+        "tipo": "decision",
+        "carril": "estudiante",
+        "texto": "¿Entra?"
+      },
+      {
+        "id": "descarta",
+        "tipo": "tarea",
+        "carril": "asistente",
+        "texto": "Registra el descarte: no se vuelve a proponer"
+      },
+      {
+        "id": "sesion",
+        "tipo": "tarea",
+        "carril": "asistente",
+        "texto": "Destila fichas y siembra flashcards"
+      },
+      {
+        "id": "estudia",
+        "tipo": "tarea",
+        "carril": "estudiante",
+        "texto": "Repasa y responde el test: recupera, no relee"
+      },
+      {
+        "id": "modelo",
+        "tipo": "tarea",
+        "carril": "asistente",
+        "texto": "Actualiza el modelo con el desempeño medido"
+      },
+      {
+        "id": "chequeo",
+        "tipo": "decision",
+        "carril": "chequeos",
+        "texto": "¿Pasa?"
+      },
+      {
+        "id": "cierre",
+        "tipo": "tarea",
+        "carril": "asistente",
+        "texto": "Escribe la lección de la corrida y commitea"
+      },
+      {
+        "id": "fin",
+        "tipo": "fin",
+        "carril": "estudiante",
+        "texto": ""
+      }
+    ],
+    "flujos": [
+      {
+        "de": "ini",
+        "a": "pre"
+      },
+      {
+        "de": "pre",
+        "a": "trae"
+      },
+      {
+        "de": "trae",
+        "a": "ingerir"
+      },
+      {
+        "de": "ingerir",
+        "a": "transcribe"
+      },
+      {
+        "de": "transcribe",
+        "a": "triage"
+      },
+      {
+        "de": "triage",
+        "a": "curar"
+      },
+      {
+        "de": "curar",
+        "a": "sesion",
+        "etiqueta": "sí · lo marca"
+      },
+      {
+        "de": "curar",
+        "a": "descarta",
+        "etiqueta": "no · descartar"
+      },
+      {
+        "de": "sesion",
+        "a": "estudia"
+      },
+      {
+        "de": "descarta",
+        "a": "chequeo"
+      },
+      {
+        "de": "estudia",
+        "a": "modelo"
+      },
+      {
+        "de": "modelo",
+        "a": "chequeo"
+      },
+      {
+        "de": "chequeo",
+        "a": "cierre",
+        "etiqueta": "sí"
+      },
+      {
+        "de": "chequeo",
+        "a": "sesion",
+        "etiqueta": "no · corrige"
+      },
+      {
+        "de": "cierre",
+        "a": "fin"
+      }
+    ],
+    "anotaciones": [
+      {
+        "paso": "curar",
+        "texto": "Compuerta indelegable: ningún tema entra a la biblioteca sin la marca del estudiante. El asistente puntúa y propone; jamás decide."
+      },
+      {
+        "paso": "ingerir",
+        "texto": "El original nunca se edita: toda corrección va en el derivado, para poder rehacer un destilado mal hecho desde la fuente."
+      },
+      {
+        "paso": "chequeo",
+        "texto": "Bloquean dos cosas: una ficha sin el localizador que exige su tipo de fuente, y una clave de cita que no existe en la bibliografía."
+      },
+      {
+        "paso": "modelo",
+        "texto": "Solo entra desempeño medido con fecha. La autoevaluación y la fluidez de lectura no son evidencia de dominio."
+      },
+      {
+        "paso": "cierre",
+        "texto": "Ninguna corrida cierra sin su entrada de lección: la mejora del método queda escrita junto al caso concreto que la produjo."
+      }
+    ]
+  },
+  "procedencia_proceso": "app",
+  "limites": [
+    "Prepara, no suplanta: no escribe los entregables evaluables del estudiante. Es frontera permanente, sin disparador de reversión.",
+    "No oye ni ve: opera sobre lo que la cadena transcribe o extrae. Un diagrama sin texto se declara como vacío, no se adivina.",
+    "No entra a las plataformas del programa. No tiene credenciales y no las pide: el estudiante trae los archivos a mano.",
+    "El retorno no afirma horas ahorradas: seis variables de la fórmula siguen sin medir y los escenarios no se emiten hasta medirlas."
+  ],
+  "nunca": [
+    "Redacta una cita a mano o de memoria: se genera desde los datos bibliográficos, o no hay cita.",
+    "Archiva un tema sin la marca explícita del estudiante.",
+    "Edita el material original, que es la fuente de verdad de toda corrida.",
+    "Rellena con lo que sabe del mundo aquello que no puede citar: declara el vacío.",
+    "Instala una herramienta en la máquina sin el token de aprobación del estudiante."
+  ],
+  "hitos": [
+    {
+      "valor": "corrida 3",
+      "etiqueta": "ciclo"
+    },
+    {
+      "valor": "0",
+      "etiqueta": "work-items cerrados"
+    },
+    {
+      "valor": "2026-08-30",
+      "etiqueta": "generado"
+    },
+    {
+      "valor": "v1.0.1",
+      "etiqueta": "version"
+    },
+    {
+      "valor": "13",
+      "etiqueta": "decisiones registradas"
+    }
+  ]
+}

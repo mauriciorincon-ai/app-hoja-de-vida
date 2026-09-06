@@ -1,0 +1,386 @@
+{
+  "schema_version": "1.1.0",
+  "actualizado": "2026-09-06",
+  "pieza": {
+    "slug": "harness-paper-computacional",
+    "nombre": "Harness Paper Computacional",
+    "frente": "agentes",
+    "estado": "sellado",
+    "ciclo": "paper 3",
+    "version": "1.21",
+    "sellado_en": "2026-08-22",
+    "sprints_cerrados": 4
+  },
+  "promesa": {
+    "tagline": "Si no está en el ledger, no está en el paper.",
+    "intro": "El paper deja de ser un documento que se escribe y pasa a ser una corrida que se ejecuta: una configuración declara el dominio, el pipeline encadena diez fases y cuatro tokens verbales separan lo reversible de lo que ya no lo es. Cada figura es una función del ledger, así que la procedencia no se documenta: se vuelve difícil de romper. Tres papers salieron así: el tercero, en 4,171 h de agente.",
+    "para_quien": "Para el investigador que produce papers computacionales de Investigación de Operaciones y quiere sostener una agenda de siete al año. Hoy los números nacen en un sitio, se grafican en otro y se escriben en un tercero: a los tres años nadie puede reconstruir de dónde salió cada cifra. Y un paper le cuesta unas cuarenta horas y meses de calendario, así que la agenda no se atrasa: no ocurre."
+  },
+  "titular": "Ningún número llega al paper sin existir antes como fila del ledger; y la prueba de que el harness es declarativo es un comando: tras tres papers de clases distintas, el diff de las fases y del contrato sigue saliendo vacío.",
+  "stack": [
+    {
+      "nombre": "Claude Science",
+      "papel": "el runtime que ejecuta P0 a P9, con kernel de cómputo persistente y procedencia por artefacto; el paquete se monta de solo lectura, por diseño"
+    },
+    {
+      "nombre": "litkit",
+      "papel": "la fachada de literatura: cinco funciones de firma congelada, caché sin expiración y bitácora JSONL; toda cita del paper pasa por ahí"
+    },
+    {
+      "nombre": "Ledger Parquet append-only",
+      "papel": "la única fuente de verdad numérica; el run_id es la moneda de la procedencia y un manifiesto mapea figura a corridas y a pregunta de investigación"
+    },
+    {
+      "nombre": "Contrato L2 en YAML",
+      "papel": "el paper.yaml declara preguntas, parámetros y semillas; si le falta un campo requerido, falla al cargar en vez de rellenarse"
+    },
+    {
+      "nombre": "Pyomo + HiGHS",
+      "papel": "la formulación MILP de cada problema, y la mitad de la comparación entre formulaciones que el harness trata como resultado de primera clase"
+    },
+    {
+      "nombre": "OR-Tools CP-SAT",
+      "papel": "la segunda formulación, obligatoria por defecto; renunciar a una exige justificación escrita en la configuración del paper"
+    },
+    {
+      "nombre": "LaTeX con biblatex",
+      "papel": "el manuscrito en P7 sobre plantilla propia de preprint, compilado limpio y con la bibliografía exportada desde los DOI verificados"
+    },
+    {
+      "nombre": "Markdown con frontmatter",
+      "papel": "el formato de todo el paquete declarativo: cada fase se especifica por entradas, salidas y criterios de aceptación, nunca por procedimiento"
+    }
+  ],
+  "cifras": [
+    {
+      "clave": "papers_producidos",
+      "valor": 3,
+      "etiqueta": "Papers listos para publicar",
+      "fuente": "medido",
+      "detalle": "Filas con producción cerrada en memoria/instanciaciones.md y en arquitectura/infografia-programa.html: salbp-fatiga-endogena (9 págs), transmilenio-conductor-bus (20 págs) y transmilenio-bunching (20 págs). Los tres con G3 firmado; ninguno enviado todavía, por decisión de agenda registrada como ADR D13."
+    },
+    {
+      "clave": "horas_agente_tercer_paper",
+      "valor": 4.171,
+      "unidad": "h",
+      "etiqueta": "Horas de agente del tercer paper",
+      "fuente": "medido",
+      "detalle": "Registro de horas por fase en memoria/decisiones-de-agenda.md y arquitectura/infografia-programa.html. La serie medida de los tres papers es 11,10 (piloto), 4,92 y 4,171 horas de agente. El tercero cerró dentro de un techo declarado de 4,5 h, con 0,329 h de margen."
+    },
+    {
+      "clave": "campos_nuevos_contrato",
+      "valor": 0,
+      "etiqueta": "Campos nuevos del contrato en tres papers",
+      "fuente": "medido",
+      "detalle": "Prueba de frontera de WI-4: tras cada reinstanciación se corre el diff de las carpetas fases/ y contrato-l2/ y debe quedar vacío. Quedó vacío en los tres papers, incluido el tercero, que renunció a ambas formulaciones de optimización y aun así cupo en el contrato sin un campo nuevo."
+    },
+    {
+      "clave": "criterios_binarios",
+      "valor": 44,
+      "etiqueta": "Criterios binarios de verificación",
+      "fuente": "medido",
+      "detalle": "Casillas de verificación contadas en verificacion.md, con grep de las líneas que abren con guion y corchete: criterios por work-item, definición de terminado de cada paper, checklist por sesión y seguimiento del valor."
+    },
+    {
+      "clave": "horas_liberadas_ano_1",
+      "valor": 224,
+      "unidad": "h",
+      "etiqueta": "Horas liberadas en el año 1 (estimadas)",
+      "fuente": "estimacion",
+      "detalle": "arquitectura/roi.json, escenario base de la agenda: siete papers al año, 40 h manuales contra 8 h con harness sobre el paper más básico, razón 5:1. Supuestos declarados: el piloto no es representativo del régimen y lo transferible es la razón, no las horas absolutas. El valor de publicar se declaró no monetizable."
+    }
+  ],
+  "bloques": [
+    {
+      "orden": 1,
+      "nombre": "El pipeline declarativo",
+      "linea": "De la pregunta de investigación al preprint: diez fases con entradas, salidas y criterios de aceptación.",
+      "cuenta": 10
+    },
+    {
+      "orden": 2,
+      "nombre": "La escalera de gates",
+      "linea": "Cuatro puntos de control con token verbal; el de revisión es recurrente, antes de cada envío.",
+      "cuenta": 4
+    },
+    {
+      "orden": 3,
+      "nombre": "El contrato con cada paper",
+      "linea": "Esquema, plantilla y validación del paper.yaml: la frontera entre proceso y contenido de dominio.",
+      "cuenta": 3
+    },
+    {
+      "orden": 4,
+      "nombre": "Plantillas de artefactos",
+      "linea": "Lo que cada paper llena: framing, posicionamiento, modelo, diseño experimental, ledger, figuras, revisión.",
+      "cuenta": 13
+    },
+    {
+      "orden": 5,
+      "nombre": "Lint de no divulgación",
+      "linea": "Verificación binaria de lista negra y regla de sustentación, en la primera fase y en la última.",
+      "cuenta": 1
+    },
+    {
+      "orden": 6,
+      "nombre": "Cápsulas de fallo",
+      "linea": "Qué hacer cuando el ledger se invalida, el lint falla, la reproducción se rompe o no hay benchmark.",
+      "cuenta": 4
+    },
+    {
+      "orden": 7,
+      "nombre": "Memoria del programa",
+      "linea": "Lecciones, una fila por paper con horas y tokens, y las decisiones de agenda con su evidencia.",
+      "cuenta": 3
+    },
+    {
+      "orden": 8,
+      "nombre": "Contexto por capas",
+      "linea": "Negocio, producto, técnica y entrega: lo que el agente necesita saber antes de la primera fase.",
+      "cuenta": 4
+    }
+  ],
+  "proceso": {
+    "titulo": "Una corrida de paper computacional",
+    "carriles": [
+      {
+        "id": "autor",
+        "nombre": "El autor · investigador"
+      },
+      {
+        "id": "harness",
+        "nombre": "El harness · en su runtime"
+      },
+      {
+        "id": "litkit",
+        "nombre": "litkit · fuentes de literatura"
+      },
+      {
+        "id": "controles",
+        "nombre": "Controles mecánicos"
+      }
+    ],
+    "pasos": [
+      {
+        "id": "ini",
+        "tipo": "inicio",
+        "carril": "autor",
+        "texto": "Nuevo paper en la agenda"
+      },
+      {
+        "id": "yaml",
+        "tipo": "tarea",
+        "carril": "autor",
+        "texto": "Declara preguntas, parámetros y semillas"
+      },
+      {
+        "id": "valida",
+        "tipo": "tarea",
+        "carril": "harness",
+        "texto": "Valida el contrato: si falta un campo, se detiene"
+      },
+      {
+        "id": "p0",
+        "tipo": "tarea",
+        "carril": "harness",
+        "texto": "P0 framing y lint de no divulgación"
+      },
+      {
+        "id": "gfrm",
+        "tipo": "decision",
+        "carril": "autor",
+        "texto": "¿Aprueba?"
+      },
+      {
+        "id": "p1",
+        "tipo": "tarea",
+        "carril": "litkit",
+        "texto": "P1 corpus: cada obra verificada en la fuente"
+      },
+      {
+        "id": "p2",
+        "tipo": "tarea",
+        "carril": "harness",
+        "texto": "P2 modelo formal, antes de gastar cómputo"
+      },
+      {
+        "id": "gmod",
+        "tipo": "decision",
+        "carril": "autor",
+        "texto": "¿Modelo ok?"
+      },
+      {
+        "id": "exp",
+        "tipo": "tarea",
+        "carril": "harness",
+        "texto": "P3 a P5: todo número entra al ledger"
+      },
+      {
+        "id": "fig",
+        "tipo": "tarea",
+        "carril": "harness",
+        "texto": "P6 y P7: figuras del ledger y manuscrito"
+      },
+      {
+        "id": "gman",
+        "tipo": "decision",
+        "carril": "autor",
+        "texto": "¿Va la voz?"
+      },
+      {
+        "id": "p8",
+        "tipo": "tarea",
+        "carril": "controles",
+        "texto": "P8: revisor, citas y kernel fresco"
+      },
+      {
+        "id": "g3",
+        "tipo": "decision",
+        "carril": "autor",
+        "texto": "¿Sin críticos?"
+      },
+      {
+        "id": "fin",
+        "tipo": "fin",
+        "carril": "autor",
+        "texto": ""
+      }
+    ],
+    "flujos": [
+      {
+        "de": "ini",
+        "a": "yaml"
+      },
+      {
+        "de": "yaml",
+        "a": "valida"
+      },
+      {
+        "de": "valida",
+        "a": "p0"
+      },
+      {
+        "de": "p0",
+        "a": "gfrm"
+      },
+      {
+        "de": "gfrm",
+        "a": "p1",
+        "etiqueta": "sí · token"
+      },
+      {
+        "de": "gfrm",
+        "a": "yaml",
+        "etiqueta": "no · corrige"
+      },
+      {
+        "de": "p1",
+        "a": "p2"
+      },
+      {
+        "de": "p2",
+        "a": "gmod"
+      },
+      {
+        "de": "gmod",
+        "a": "exp",
+        "etiqueta": "sí · token"
+      },
+      {
+        "de": "gmod",
+        "a": "p2",
+        "etiqueta": "no · reformula"
+      },
+      {
+        "de": "exp",
+        "a": "fig"
+      },
+      {
+        "de": "fig",
+        "a": "gman"
+      },
+      {
+        "de": "gman",
+        "a": "p8",
+        "etiqueta": "sí · token"
+      },
+      {
+        "de": "gman",
+        "a": "fig",
+        "etiqueta": "no · reescribe"
+      },
+      {
+        "de": "p8",
+        "a": "g3"
+      },
+      {
+        "de": "g3",
+        "a": "fin",
+        "etiqueta": "sí · listo"
+      },
+      {
+        "de": "g3",
+        "a": "exp",
+        "etiqueta": "no · re-ejecuta"
+      }
+    ],
+    "anotaciones": [
+      {
+        "paso": "valida",
+        "texto": "El harness nunca rellena contenido de dominio: una configuración incompleta falla al cargar, no se completa con un valor por defecto."
+      },
+      {
+        "paso": "exp",
+        "texto": "Si no está en el ledger, no puede estar en el paper: cero números editados a mano en figuras, tablas o manuscrito."
+      },
+      {
+        "paso": "p8",
+        "texto": "La reproducción corre en kernel fresco: si las figuras no se regeneran idénticas, hay estado oculto y el paper no cierra."
+      },
+      {
+        "paso": "g3",
+        "texto": "Los hallazgos críticos no son dispensables. Un preprint no se retira: sin este token no hay envío, jamás."
+      },
+      {
+        "paso": "fin",
+        "texto": "Publicar es una fase latente aparte: solo arranca con su propio token del autor, meses después si hace falta."
+      }
+    ]
+  },
+  "procedencia_proceso": "app",
+  "limites": [
+    "Produce papers computacionales de Investigación de Operaciones; no es un asistente de escritura general ni cubre trabajo de campo con personas.",
+    "La fachada de literatura da acceso a metadatos: no lee PDFs, no criba intelectualmente ni redacta. Ese juicio es del harness y del autor.",
+    "El entorno donde se fabrica el harness no ejecuta ninguna fase de paper: la separación entre fabricar y operar es de permisos, no de intención.",
+    "La razón 5:1 del retorno es declarada sobre el paper más básico, no medida: se verifica contra el segundo o el tercer paper, nunca contra el piloto."
+  ],
+  "nunca": [
+    "Envía a un servidor de preprints: el acto irreversible lo ejecuta el autor, con su token, y nunca el agente.",
+    "Edita un número a mano en una figura, una tabla o el manuscrito: todo sale del ledger o no existe.",
+    "Rellena una pregunta de investigación, un parámetro o una referencia que la configuración del paper no declaró.",
+    "Menciona el ecosistema del autor ni su maquinaria en el manuscrito o los metadatos: un lint binario lo verifica dos veces.",
+    "Cita un resultado que no esté en el ledger, ni una obra que no haya pasado verificación estructurada."
+  ],
+  "hitos": [
+    {
+      "valor": "paper 3",
+      "etiqueta": "ciclo"
+    },
+    {
+      "valor": "4",
+      "etiqueta": "work-items cerrados"
+    },
+    {
+      "valor": "2026-08-22",
+      "etiqueta": "sellada"
+    },
+    {
+      "valor": "v1.21",
+      "etiqueta": "version"
+    },
+    {
+      "valor": "14",
+      "etiqueta": "decisiones registradas"
+    }
+  ]
+}

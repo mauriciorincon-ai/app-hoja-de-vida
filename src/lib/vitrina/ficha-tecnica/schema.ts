@@ -1,7 +1,15 @@
 import { z } from "zod";
 
 /**
- * CONTRATO «FICHA TÉCNICA» v1.1.0 (ADR-016) — la capa infografía de la vitrina.
+ * CONTRATO «FICHA TÉCNICA» v1.2.0 (ADR-016) — la capa infografía de la vitrina.
+ *
+ * v1.2.0 (2026-09-06, S7): ADITIVO. `procedencias` admite **`"planeadora"`**
+ * — la casa que administra las fichas de las apps (export del repo de cada
+ * app + curación propia) puede firmar el proceso que declara. Y junto al
+ * contrato se publica una **plantilla generada de este mismo Zod**
+ * (`docs/contrato-ficha-tecnica/plantilla.ficha-tecnica.json`) para cualquier
+ * casa productora. Compatible hacia atrás: toda ficha v1.0.0 o v1.1.0 válida
+ * lo sigue siendo.
  *
  * v1.1.0 (2026-09-06, orden del usuario): el **proceso BPMN es OPCIONAL**. No
  * toda pieza tiene un proceso de uso (una línea de investigación, un tablero);
@@ -52,7 +60,12 @@ export const frentes = [
   "tableros",
 ] as const;
 export const estadosPieza = ["inicial", "sellado"] as const;
-export const procedencias = ["app", "cv-viva"] as const;
+/**
+ * Quién declara el proceso. `app`: la propia app en su export. `cv-viva`:
+ * esta casa, cuando el export aún no lo trae. `planeadora` (v1.2.0): la casa
+ * que administra y cura las fichas de las apps del pipeline.
+ */
+export const procedencias = ["app", "cv-viva", "planeadora"] as const;
 
 /* ── El proceso (BPMN-lite) ──────────────────────────────────────────────── */
 
@@ -216,7 +229,7 @@ function procesoConProcedencia(campo: string) {
       ctx.addIssue({
         code: "custom",
         path: [campo],
-        message: `el proceso necesita su «${campo}» (app | cv-viva)`,
+        message: `el proceso necesita su «${campo}» (${procedencias.join(" | ")})`,
       });
     if (!tieneProceso && tieneProcedencia)
       ctx.addIssue({

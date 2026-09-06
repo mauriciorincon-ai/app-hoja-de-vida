@@ -1,0 +1,150 @@
+{
+  "schema_version": "1.1.0",
+  "actualizado": "2026-09-06",
+  "pieza": {
+    "slug": "fatiga-laboral",
+    "nombre": "Suplementos por fatiga y balanceo de línea",
+    "frente": "investigaciones",
+    "estado": "inicial",
+    "ciclo": "Producción 7.º",
+    "version": "origen v1.1",
+    "sellado_en": null,
+    "sprints_cerrados": 0
+  },
+  "promesa": {
+    "tagline": "Las tablas de fatiga no conocen tu puesto ni tu altitud. Toca calibrarlas.",
+    "para_quien": "Para el ingeniero de métodos de una planta colombiana que calcula el tiempo estándar con la tabla internacional de suplementos y la ajusta a ojo. Nadie mide la fatiga real: en una imprenta, la tabla daba 12 % y los operarios de empaque estaban agotados a las tres de la tarde mientras los de control de calidad sobraban — y Bogotá está a 2.600 metros, algo que ninguna tabla contempla.",
+    "intro": "Una revisión sistemática de los métodos para derivar suplementos por fatiga, con un protocolo de calibración al contexto colombiano — altitud, clima, jornada y aclimatación de quien viene de tierras bajas —, más la prueba, sobre el modelo ya construido, de que calibrar los suplementos cambia el balanceo óptimo. El suplemento protege al trabajador; nada aquí sirve para exprimirlo."
+  },
+  "titular": "La tabla que gobierna la práctica no tiene revisión citable: ninguna de 780 obras revisadas sintetiza los métodos de suplementos por fatiga, y ninguna de 378 mide cómo la curva de fatiga cambia el balanceo óptimo de una línea.",
+  "stack": [
+    {
+      "nombre": "Revisión sistemática con protocolo",
+      "papel": "criterios de inclusión y preguntas fijados antes de leer; búsqueda en inglés, español, portugués y alemán, la tradición canónica de los suplementos"
+    },
+    {
+      "nombre": "Fisiología ocupacional de la altitud",
+      "papel": "la fuente de los rangos de suplemento por altitud y aclimatación: literatura publicada, con su incertidumbre declarada"
+    },
+    {
+      "nombre": "Modelo de balanceo con fatiga endógena",
+      "papel": "ya construido y sellado: la holgura emerge de la asignación de tareas, no de una tabla"
+    },
+    {
+      "nombre": "Curvas sintéticas desde literatura",
+      "papel": "barren el rango de curvas plausibles para medir la sensibilidad del balanceo; jamás se usan para afirmar que un protocolo calibra bien"
+    },
+    {
+      "nombre": "Varas fijadas antes del dato",
+      "papel": "qué resultado sostiene y cuál refuta cada afirmación, congelado antes de medir"
+    }
+  ],
+  "cifras": [
+    {
+      "clave": "registros_tamizados",
+      "valor": 3057,
+      "unidad": "registros",
+      "etiqueta": "Registros tamizados para validar el tema",
+      "fuente": "medido",
+      "detalle": "Paper de validación teórica: 27 consultas en tres idiomas más bola de nieve; 1.296 se tamizaron solo por título, declarado como límite; la tradición alemana no se buscó y queda declarada."
+    },
+    {
+      "clave": "revisiones_existentes",
+      "valor": 0,
+      "unidad": "obras",
+      "etiqueta": "Revisiones sistemáticas de métodos de suplementos por fatiga",
+      "fuente": "medido",
+      "detalle": "Sobre 780 registros revisados: la tabla que gobierna la práctica no tiene revisión citable — hallazgo de apertura de la línea."
+    },
+    {
+      "clave": "sensibilidad_balanceo",
+      "valor": 0,
+      "unidad": "obras",
+      "etiqueta": "Obras que miden el efecto de la fatiga en el balanceo",
+      "fuente": "medido",
+      "detalle": "Sobre 378 registros revisados en la celda del modelo de balanceo con fatiga."
+    },
+    {
+      "clave": "suplemento_tabla",
+      "valor": 12,
+      "unidad": "%",
+      "etiqueta": "Suplemento de la tabla en el caso vivido por el autor",
+      "fuente": "declarado",
+      "detalle": "Declarado por el autor desde su experiencia en una imprenta de libros; motivación, no evidencia."
+    },
+    {
+      "clave": "horas_piloto",
+      "valor": 11.1,
+      "unidad": "horas",
+      "etiqueta": "Horas de producción del paper sellado de balanceo",
+      "fuente": "medido",
+      "detalle": "Horas de agente por sellos de tiempo; fue el piloto que pagó el arranque de todo el sistema de producción."
+    }
+  ],
+  "bloques": [
+    {
+      "orden": 1,
+      "nombre": "El balanceo con fatiga endógena",
+      "linea": "Sellada: extensión del balanceo clásico, validada contra los óptimos publicados del problema estándar.",
+      "cuenta": 1
+    },
+    {
+      "orden": 2,
+      "nombre": "La revisión con protocolo",
+      "linea": "Seleccionada: qué métodos existen para derivar suplementos, y el protocolo de calibración pre-registrado.",
+      "cuenta": 0
+    },
+    {
+      "orden": 3,
+      "nombre": "Los suplementos de altitud",
+      "linea": "Seleccionada: rangos desde literatura fisiológica, por estado de aclimatación — nativos, recientes, aclimatados.",
+      "cuenta": 0
+    },
+    {
+      "orden": 4,
+      "nombre": "Calibrar cambia el balanceo",
+      "linea": "Experimento de cierre: los rangos de altitud barridos en el modelo sellado — el titular demostrable hoy.",
+      "cuenta": 0
+    },
+    {
+      "orden": 5,
+      "nombre": "El protocolo en campo",
+      "linea": "Extensión declarada: medir en una planta real; hasta entonces el protocolo es método, no resultado.",
+      "cuenta": 0
+    }
+  ],
+  "limites": [
+    "Con datos sintéticos demuestra sensibilidad del modelo; la calibración de un protocolo exige campo o literatura, y lo dice así.",
+    "No mide fatiga en personas reales: los rangos vienen de literatura publicada con su incertidumbre.",
+    "Aplica al trabajo manual repetitivo en línea; no a otros regímenes de esfuerzo."
+  ],
+  "nunca": [
+    "Nombra empresas de donde salgan datos ni operarios.",
+    "Sirve para presionar a trabajadores a rendir más: el suplemento protege, no exprime.",
+    "Presenta datos sintéticos como si validaran la calibración de un protocolo.",
+    "Usa datos de empleos anteriores del autor: solo fuentes públicas y datos sintéticos declarados.",
+    "Afirma una cifra sin fuente ni un vacío sin el número de obras revisadas."
+  ],
+  "hitos": [
+    {
+      "valor": "2026-09-04",
+      "etiqueta": "validada contra literatura"
+    },
+    {
+      "valor": "7 de 7",
+      "etiqueta": "criterios cumplidos"
+    },
+    {
+      "valor": "1",
+      "etiqueta": "paper sellado (balanceo)"
+    },
+    {
+      "valor": "7.º",
+      "etiqueta": "turno en la cola"
+    },
+    {
+      "valor": "origen v1.1",
+      "etiqueta": "version"
+    }
+  ]
+}

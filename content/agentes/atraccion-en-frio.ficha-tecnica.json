@@ -1,0 +1,377 @@
+{
+  "schema_version": "1.1.0",
+  "actualizado": "2026-09-06",
+  "pieza": {
+    "slug": "atraccion-en-frio",
+    "nombre": "Atracción en Frío",
+    "frente": "agentes",
+    "estado": "inicial",
+    "ciclo": "WI-0",
+    "version": "1.4.2",
+    "sellado_en": null,
+    "sprints_cerrados": 0
+  },
+  "promesa": {
+    "tagline": "«En frío» es la audiencia, nunca el contacto.",
+    "intro": "Una sola máquina para todas sus marcas: investiga el mercado antes de opinar, entrega la estrategia como índice y desarrolla cada actividad solo cuando él la pide, primero el detalle y después la pieza. Cada marca conserva su voz, su identidad visual y su línea base propia; el pipeline conserva la base legal de cada contacto. Y no produce nada nuevo mientras él no diga cómo le fue con lo anterior.",
+    "para_quien": "Para quien vende cosas muy distintas —servicios de BI e IA, productos digitales, aplicaciones y páginas web, artesanías, libros— y necesita clientes para todas sin gastar un peso en herramientas. Hoy hace el marketing a mano: 44 horas por campaña, seis campañas al año, y cuando desaparece dos meses la racha se rompe y la siguiente campaña vuelve a empezar de cero."
+  },
+  "titular": "No tiene modo de contacto en frío: la ley colombiana lo volvió capacidad inexistente, no opción desaconsejada. Y no produce actividad nueva mientras la anterior siga sin resultados registrados: esa gate es mecánica, no un recordatorio.",
+  "stack": [
+    {
+      "nombre": "Claude Code",
+      "papel": "el runtime completo: auto-carga la constitución del paquete, corre sus ocho comandos y trabaja con archivos en disco versionados"
+    },
+    {
+      "nombre": "Subagentes",
+      "papel": "la investigación de mercado por campaña, hasta cuatro en paralelo y siempre bajo el protocolo con sus cinco prohibiciones verbatim"
+    },
+    {
+      "nombre": "Motor de diseño en la CLI",
+      "papel": "las piezas estáticas como archivos .dc.html y canvas.json en disco: láminas verticales 1080x1920 y carruseles, con el área útil verificada"
+    },
+    {
+      "nombre": "ffmpeg 9.0.1",
+      "papel": "el montaje del video vertical: PNG del motor de diseño más voz en off y capas temporizadas hacia MP4 1080x1920 H.264/AAC"
+    },
+    {
+      "nombre": "say (macOS)",
+      "papel": "la voz en off sintética; 18 voces en español, ninguna colombiana, y eso se declara en la pieza en vez de disimularse"
+    },
+    {
+      "nombre": "git",
+      "papel": "la memoria versionada: pipeline, resultados y decisiones quedan fechados y auditables, que es también la prueba del consentimiento"
+    },
+    {
+      "nombre": "Conector de correo",
+      "papel": "crear y editar borradores con convención de asunto por marca y campaña; enviar y borrar quedan fuera, por permisos y por gobernanza"
+    },
+    {
+      "nombre": "sips y python3",
+      "papel": "redimensionar y convertir imágenes para respetar los límites de peso de cada canal, y calcular las métricas de los informes"
+    }
+  ],
+  "cifras": [
+    {
+      "clave": "comandos",
+      "valor": 8,
+      "unidad": "comandos",
+      "etiqueta": "Comandos del ciclo",
+      "fuente": "medido",
+      "detalle": "Filas de la tabla «El ciclo · comandos» de CLAUDE.md: marca, manual-de-marca, campana, actividad, feedback, pipeline, informe y cierre. Los ocho están hoy sin estrenar: el harness está generado, no ejercitado, y su primera corrida es WI-1."
+    },
+    {
+      "clave": "gates",
+      "valor": 6,
+      "unidad": "gates",
+      "etiqueta": "Gates donde se detiene",
+      "fuente": "medido",
+      "detalle": "Tabla de gobernanza.md § 2: tres humanas (compliance y marca, promesa verificable, originalidad) y tres mecánicas (retroalimentación, investigación, instalación). Cada gate mecánica trae su carnada, el caso concreto que demuestra que dispara."
+    },
+    {
+      "clave": "checklist_g2",
+      "valor": 19,
+      "unidad": "ítems",
+      "etiqueta": "Ítems del checklist humano",
+      "fuente": "medido",
+      "detalle": "Conteo de verificacion.md § 1: 6 de base legal, 7 de contenido y 6 técnicos. Se transcribe entero antes de pedir el token de aprobación, nunca resumido, y solo crece: cada defecto que se cuela vuelve como ítem permanente."
+    },
+    {
+      "clave": "horas_liberadas_ano",
+      "valor": 166.8,
+      "unidad": "horas/año",
+      "etiqueta": "Horas liberadas al año",
+      "fuente": "estimacion",
+      "detalle": "Escenario base de roi.json: 6 campañas al año por 27,8 h liberadas de las 44 que hoy cuesta una campaña a mano. Las horas y las campañas las estimó el operador desglosadas por tarea; la reducción del 63,2 % sigue siendo supuesto hasta medir una campaña real. Rango 132 a 184,8 h."
+    },
+    {
+      "clave": "costo_herramientas",
+      "valor": 0,
+      "unidad": "COP",
+      "etiqueta": "Costo en herramientas",
+      "fuente": "declarado",
+      "detalle": "Límite declarado en gobernanza.md § 3 y verificado en roi.json (S4): ninguna capacidad del paquete exige cuenta de pago. Publicación manual nativa, capa gratuita y herramientas locales del equipo."
+    }
+  ],
+  "bloques": [
+    {
+      "orden": 1,
+      "nombre": "Cartera de marcas",
+      "linea": "Una ficha por marca: ICP, voz, canales y línea base propia. Separadas a propósito.",
+      "cuenta": 6
+    },
+    {
+      "orden": 2,
+      "nombre": "Manual de marca",
+      "linea": "Diez preguntas y sale la identidad visual: paleta, tipografía y logo por cuatro caminos.",
+      "cuenta": 4
+    },
+    {
+      "orden": 3,
+      "nombre": "Playbooks de canal",
+      "linea": "Cómo se aplica una pieza en cada canal, con especificaciones verificadas.",
+      "cuenta": 6
+    },
+    {
+      "orden": 4,
+      "nombre": "Taller de piezas",
+      "linea": "Gancho, copy, lámina diseñada y montaje del video vertical, listos para aplicar.",
+      "cuenta": 0
+    },
+    {
+      "orden": 5,
+      "nombre": "Gates y gobernanza",
+      "linea": "Dónde se detiene y con qué token sigue. Tres humanas, tres mecánicas.",
+      "cuenta": 6
+    },
+    {
+      "orden": 6,
+      "nombre": "Memoria versionada",
+      "linea": "Estado, pipeline, resultados, decisiones y lecciones: lo que canta al arrancar.",
+      "cuenta": 5
+    },
+    {
+      "orden": 7,
+      "nombre": "Verificación",
+      "linea": "Criterios binarios por artefacto y el checklist de gate que solo crece.",
+      "cuenta": 19
+    },
+    {
+      "orden": 8,
+      "nombre": "Evidencia fundacional",
+      "linea": "Los frentes de investigación que fundaron el diseño, con sus vacíos declarados.",
+      "cuenta": 5
+    }
+  ],
+  "proceso": {
+    "titulo": "Una corrida: de la campaña a la pieza lista para aplicar",
+    "carriles": [
+      {
+        "id": "operador",
+        "nombre": "El operador"
+      },
+      {
+        "id": "harness",
+        "nombre": "El harness · Claude Code"
+      },
+      {
+        "id": "subagentes",
+        "nombre": "Subagentes de investigación"
+      }
+    ],
+    "pasos": [
+      {
+        "id": "ini",
+        "tipo": "inicio",
+        "carril": "operador",
+        "texto": "Abre una campaña o pide una actividad"
+      },
+      {
+        "id": "canta",
+        "tipo": "tarea",
+        "carril": "harness",
+        "texto": "Canta lo que está abierto en la memoria"
+      },
+      {
+        "id": "g1",
+        "tipo": "decision",
+        "carril": "harness",
+        "texto": "¿Feedback al día?"
+      },
+      {
+        "id": "reg",
+        "tipo": "tarea",
+        "carril": "operador",
+        "texto": "Aporta los resultados que faltaban"
+      },
+      {
+        "id": "invest",
+        "tipo": "tarea",
+        "carril": "subagentes",
+        "texto": "Investigan mercado y tendencias, con fuente"
+      },
+      {
+        "id": "indice",
+        "tipo": "tarea",
+        "carril": "harness",
+        "texto": "Entrega la estrategia como índice"
+      },
+      {
+        "id": "detalle",
+        "tipo": "tarea",
+        "carril": "harness",
+        "texto": "Detalla la actividad antes de producirla"
+      },
+      {
+        "id": "pieza",
+        "tipo": "tarea",
+        "carril": "harness",
+        "texto": "Produce el gancho, el copy y la pieza"
+      },
+      {
+        "id": "check",
+        "tipo": "tarea",
+        "carril": "harness",
+        "texto": "Transcribe entero el checklist del gate"
+      },
+      {
+        "id": "g2",
+        "tipo": "decision",
+        "carril": "operador",
+        "texto": "¿Aprueba?"
+      },
+      {
+        "id": "instr",
+        "tipo": "tarea",
+        "carril": "harness",
+        "texto": "Entrega las instrucciones de aplicación"
+      },
+      {
+        "id": "publica",
+        "tipo": "tarea",
+        "carril": "operador",
+        "texto": "Publica en el canal y anota dónde"
+      },
+      {
+        "id": "cierre",
+        "tipo": "tarea",
+        "carril": "harness",
+        "texto": "Escribe la lección, el estado y el commit"
+      },
+      {
+        "id": "fin",
+        "tipo": "fin",
+        "carril": "operador",
+        "texto": ""
+      }
+    ],
+    "flujos": [
+      {
+        "de": "ini",
+        "a": "canta"
+      },
+      {
+        "de": "canta",
+        "a": "g1"
+      },
+      {
+        "de": "g1",
+        "a": "invest",
+        "etiqueta": "sí"
+      },
+      {
+        "de": "g1",
+        "a": "reg",
+        "etiqueta": "no · bloquea"
+      },
+      {
+        "de": "reg",
+        "a": "invest"
+      },
+      {
+        "de": "invest",
+        "a": "indice"
+      },
+      {
+        "de": "indice",
+        "a": "detalle"
+      },
+      {
+        "de": "detalle",
+        "a": "pieza"
+      },
+      {
+        "de": "pieza",
+        "a": "check"
+      },
+      {
+        "de": "check",
+        "a": "g2"
+      },
+      {
+        "de": "g2",
+        "a": "instr",
+        "etiqueta": "sí"
+      },
+      {
+        "de": "g2",
+        "a": "pieza",
+        "etiqueta": "no · corrige"
+      },
+      {
+        "de": "instr",
+        "a": "publica"
+      },
+      {
+        "de": "publica",
+        "a": "cierre"
+      },
+      {
+        "de": "cierre",
+        "a": "fin"
+      }
+    ],
+    "anotaciones": [
+      {
+        "paso": "g1",
+        "texto": "Gate mecánica: pasados 14 días sin resultados registrados, bloquea. El override existe, se escribe con motivo y la deuda vuelve a cantarse."
+      },
+      {
+        "paso": "invest",
+        "texto": "Los subagentes reciben las cinco prohibiciones del protocolo verbatim; los bloqueos se reportan, nunca se rodean."
+      },
+      {
+        "paso": "pieza",
+        "texto": "Ninguna pieza se produce sin la identidad visual de su marca completa: no se improvisan colores ni tipografías sobre la marcha."
+      },
+      {
+        "paso": "check",
+        "texto": "El checklist se transcribe desde el archivo, entero, y solo crece: cada defecto que se cuela vuelve como ítem permanente."
+      },
+      {
+        "paso": "publica",
+        "texto": "El harness nunca publica ni envía. Entrega la pieza y sus instrucciones; el canal lo opera el humano."
+      },
+      {
+        "paso": "cierre",
+        "texto": "Ninguna corrida cierra sin su lección aprendida escrita. Es la mejora del sistema, no la bitácora del trabajo."
+      }
+    ]
+  },
+  "procedencia_proceso": "app",
+  "limites": [
+    "No publica ni envía: entrega la pieza y sus instrucciones de aplicación, y el canal lo opera el humano.",
+    "Monta video, no lo anima: la animación y el motion design se delegan a otros harnesses del operador.",
+    "No puede ver cómo se ve un archivo exportado: el juicio visual es del operador, siempre.",
+    "El ROI no promete ingresos: modela horas liberadas, y su reducción del 63,2 % sigue siendo supuesto hasta medir una campaña real."
+  ],
+  "nunca": [
+    "Contacta a nadie sin autorización previa, expresa, informada y probada: el contacto en frío no existe como capacidad.",
+    "Extrae datos de perfiles públicos para contactar, ni interpreta el silencio como consentimiento.",
+    "Inventa una cifra: toda cifra es medida, citada o declarada hipótesis con esa palabra.",
+    "Marca una pieza «lista para aplicar» sin el token literal del operador.",
+    "Instala un plugin, una dependencia o software sin autorización explícita."
+  ],
+  "hitos": [
+    {
+      "valor": "WI-0",
+      "etiqueta": "ciclo"
+    },
+    {
+      "valor": "0",
+      "etiqueta": "work-items cerrados"
+    },
+    {
+      "valor": "2026-08-25",
+      "etiqueta": "generado"
+    },
+    {
+      "valor": "v1.4.2",
+      "etiqueta": "version"
+    },
+    {
+      "valor": "13",
+      "etiqueta": "decisiones registradas"
+    }
+  ]
+}

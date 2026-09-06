@@ -1,0 +1,381 @@
+{
+  "schema_version": "1.1.0",
+  "actualizado": "2026-09-06",
+  "pieza": {
+    "slug": "hr-develop-ai-apps",
+    "nombre": "Fábrica de AI-APPs",
+    "frente": "agentes",
+    "estado": "sellado",
+    "ciclo": "hoja-de-vida S5",
+    "version": "1.1.0",
+    "sellado_en": "2026-07-02",
+    "sprints_cerrados": 8
+  },
+  "promesa": {
+    "tagline": "Dos casas, un escritor por casa: nadie vuelve a ser el puente.",
+    "para_quien": "Para quien construye solo un portafolio de aplicaciones con IA y ya vive el cuello de botella: la planeación en una herramienta, el código en otra, y él en el medio cargando el contexto a mano. Hoy gasta entre cuatro y ocho horas por sprint en esa coordinación, y cuando el tiempo se acaba el pipeline se congela: el sistema anterior pasó dos meses sin una sola línea de código.",
+    "intro": "La casa planeadora prioriza, investiga con fuentes, escribe la visión de producto y emite la orden de construcción; el repo de cada app la ejecuta. La sincronización es lectura de git en frío —el resumen del sprint y su historial—, no copiar y pegar. Y cada app nace estampada del mismo kit, con CI, hooks de secretos, presupuesto de rendimiento y el patrón de IA embebida ya horneados."
+  },
+  "titular": "Ninguna app avanza sin dos aprobaciones escritas —la prioridad vigente y la visión con todas sus funcionalidades inventariadas— y ningún sprint cierra sin el resumen que escribió el repo de la app: sin ese archivo, el harness se rehúsa.",
+  "stack": [
+    {
+      "nombre": "Claude Code",
+      "papel": "las dos casas corren aquí; la planeadora escribe solo en su repo y lee los de las apps como directorios adicionales en solo lectura"
+    },
+    {
+      "nombre": "Skills de ciclo",
+      "papel": "seis comandos con precondiciones: portafolio, concebir, visión, sprint, nueva-app y cierre-sprint; sin visión aprobada, sprint se rehúsa a planear"
+    },
+    {
+      "nombre": "Subagentes de investigación",
+      "papel": "concepción de una app y vigilancia del moat: encargo acotado, informe con fuentes, y lo no verificable va a la sección Gaps"
+    },
+    {
+      "nombre": "git y gh",
+      "papel": "el puente frío entre casas: el avance sube como summary del sprint más historial de commits, y la planeadora lo lee directo"
+    },
+    {
+      "nombre": "kit-app",
+      "papel": "la plantilla que se estampa en cada repo nuevo: CI, hooks de gitleaks y de no-push-a-main, presupuesto de rendimiento y patrón de IA embebida"
+    },
+    {
+      "nombre": "Markdown con frontmatter",
+      "papel": "todo artefacto es un archivo del repo -brief, visión, sprint, orden, retro-: versionable, revisable y abrible sin la herramienta"
+    }
+  ],
+  "cifras": [
+    {
+      "clave": "apps_estampadas",
+      "valor": 7,
+      "unidad": "apps",
+      "etiqueta": "Apps con repo propio estampado",
+      "fuente": "medido",
+      "detalle": "Una carpeta app-<slug> por app, todas nacidas del kit; primer commit de cada una entre 2026-07-04 y 2026-08-15. El portafolio inventaría 12 apps concebidas en portafolio/."
+    },
+    {
+      "clave": "sprints_cerrados",
+      "valor": 24,
+      "unidad": "sprints",
+      "etiqueta": "Sprints cerrados con retrospectiva",
+      "fuente": "medido",
+      "detalle": "Archivos portafolio/<slug>/sprints/SPRINT_NNN.md con status: closed (conteo por grep), repartidos en 7 apps. Cada cierre exigió el summary escrito por el repo de la app."
+    },
+    {
+      "clave": "sesiones_f0",
+      "valor": 9,
+      "unidad": "sesiones",
+      "etiqueta": "Sesiones de re-priorización F0",
+      "fuente": "medido",
+      "detalle": "Entradas F0 #1 a F0 #9 en memoria/decisiones-portafolio.md. La prioridad caduca cada 4 sprints y su gate bloquea todo trabajo de apps hasta re-correrla."
+    },
+    {
+      "clave": "gates_humanos",
+      "valor": 6,
+      "unidad": "gates",
+      "etiqueta": "Puntos donde se detiene a pedir tu visto bueno",
+      "fuente": "medido",
+      "detalle": "Filas de la tabla de gates de gobernanza.md: portafolio, visión, plan de sprint, release, edición del método y creación de repos o servicios."
+    },
+    {
+      "clave": "horas_coordinacion_eliminadas_anio",
+      "valor": 108,
+      "unidad": "h/año",
+      "etiqueta": "Horas de coordinación eliminadas al año",
+      "fuente": "estimacion",
+      "detalle": "Escenario base de roi.json: 18 sprints al año por 6 horas de coordinación eliminadas por sprint (el flujo anterior costaba entre 4 y 8 por sprint, dato del usuario). Solo cuenta la coordinación; el valor comercial del portafolio queda como opción no cuantificada."
+    }
+  ],
+  "bloques": [
+    {
+      "orden": 1,
+      "nombre": "Método 7F",
+      "linea": "Siete fases, de priorizar el portafolio a optimizar la inferencia, cada una con su cadencia.",
+      "cuenta": 7
+    },
+    {
+      "orden": 2,
+      "nombre": "Estándares 6+1, como gates",
+      "linea": "Secretos, permisos, accesibilidad, rendimiento e IA embebida se prueban en la CI; no se sugieren.",
+      "cuenta": 7
+    },
+    {
+      "orden": 3,
+      "nombre": "Skills del ciclo",
+      "linea": "Seis comandos llevan una app de la idea al sprint cerrado, cada uno con sus precondiciones.",
+      "cuenta": 6
+    },
+    {
+      "orden": 4,
+      "nombre": "kit-app estampable",
+      "linea": "La plantilla con la que nace cada repo: skills, comandos, CI, hooks y presupuesto de rendimiento.",
+      "cuenta": 14
+    },
+    {
+      "orden": 5,
+      "nombre": "Portafolio de apps",
+      "linea": "Un brief, una visión aprobada y la historia de sprints por cada app concebida.",
+      "cuenta": 12
+    },
+    {
+      "orden": 6,
+      "nombre": "Gobernanza y gates",
+      "linea": "Lo que hace sola, lo que espera aprobación y lo que tiene prohibido, escrito por separado.",
+      "cuenta": 6
+    },
+    {
+      "orden": 7,
+      "nombre": "Memoria de la fábrica",
+      "linea": "Decisiones de portafolio, lecciones por corrida y patrones cruzados entre apps.",
+      "cuenta": 3
+    },
+    {
+      "orden": 8,
+      "nombre": "Dossier de arquitectura",
+      "linea": "Cinco documentos de prosa más ROI, grafo de trazabilidad y el resumen visual.",
+      "cuenta": 5
+    }
+  ],
+  "proceso": {
+    "titulo": "Una corrida: de la prioridad a la app construida",
+    "carriles": [
+      {
+        "id": "usuario",
+        "nombre": "El dueño del portafolio"
+      },
+      {
+        "id": "plan",
+        "nombre": "Casa planeadora"
+      },
+      {
+        "id": "app",
+        "nombre": "Repo de la app"
+      },
+      {
+        "id": "ci",
+        "nombre": "Gates automáticos"
+      }
+    ],
+    "pasos": [
+      {
+        "id": "ini",
+        "tipo": "inicio",
+        "carril": "usuario",
+        "texto": "Abre la sesión"
+      },
+      {
+        "id": "f0",
+        "tipo": "tarea",
+        "carril": "plan",
+        "texto": "Puntúa el portafolio contigo (F0)"
+      },
+      {
+        "id": "gport",
+        "tipo": "decision",
+        "carril": "usuario",
+        "texto": "¿Aprueba?"
+      },
+      {
+        "id": "concebir",
+        "tipo": "tarea",
+        "carril": "plan",
+        "texto": "Investiga el dominio con fuentes"
+      },
+      {
+        "id": "vision",
+        "tipo": "tarea",
+        "carril": "plan",
+        "texto": "Destila la visión de producto"
+      },
+      {
+        "id": "gvision",
+        "tipo": "decision",
+        "carril": "usuario",
+        "texto": "¿Es tu idea?"
+      },
+      {
+        "id": "sprint",
+        "tipo": "tarea",
+        "carril": "plan",
+        "texto": "Planea la victoria rápida y emite la orden"
+      },
+      {
+        "id": "gplan",
+        "tipo": "decision",
+        "carril": "usuario",
+        "texto": "¿Aprueba?"
+      },
+      {
+        "id": "estampar",
+        "tipo": "tarea",
+        "carril": "app",
+        "texto": "Estampa el kit en el repo (primera vez)"
+      },
+      {
+        "id": "construir",
+        "tipo": "tarea",
+        "carril": "app",
+        "texto": "Construye el sprint en su propia casa"
+      },
+      {
+        "id": "gates",
+        "tipo": "decision",
+        "carril": "ci",
+        "texto": "¿Pasa?"
+      },
+      {
+        "id": "summary",
+        "tipo": "tarea",
+        "carril": "app",
+        "texto": "Escribe el summary del sprint"
+      },
+      {
+        "id": "cierre",
+        "tipo": "tarea",
+        "carril": "plan",
+        "texto": "Lee summary y git log; cura la retro"
+      },
+      {
+        "id": "fin",
+        "tipo": "fin",
+        "carril": "usuario",
+        "texto": ""
+      }
+    ],
+    "flujos": [
+      {
+        "de": "ini",
+        "a": "f0"
+      },
+      {
+        "de": "f0",
+        "a": "gport"
+      },
+      {
+        "de": "gport",
+        "a": "concebir",
+        "etiqueta": "sí"
+      },
+      {
+        "de": "gport",
+        "a": "f0",
+        "etiqueta": "no · re-puntúa"
+      },
+      {
+        "de": "concebir",
+        "a": "vision"
+      },
+      {
+        "de": "vision",
+        "a": "gvision"
+      },
+      {
+        "de": "gvision",
+        "a": "sprint",
+        "etiqueta": "sí"
+      },
+      {
+        "de": "gvision",
+        "a": "concebir",
+        "etiqueta": "no · vuelve a F1"
+      },
+      {
+        "de": "sprint",
+        "a": "gplan"
+      },
+      {
+        "de": "gplan",
+        "a": "estampar",
+        "etiqueta": "sí"
+      },
+      {
+        "de": "gplan",
+        "a": "sprint",
+        "etiqueta": "no · ajusta"
+      },
+      {
+        "de": "estampar",
+        "a": "construir"
+      },
+      {
+        "de": "construir",
+        "a": "gates"
+      },
+      {
+        "de": "gates",
+        "a": "summary",
+        "etiqueta": "sí"
+      },
+      {
+        "de": "gates",
+        "a": "construir",
+        "etiqueta": "no · arregla"
+      },
+      {
+        "de": "summary",
+        "a": "cierre"
+      },
+      {
+        "de": "cierre",
+        "a": "fin"
+      }
+    ],
+    "anotaciones": [
+      {
+        "paso": "gport",
+        "texto": "Sin priorización vigente el harness se rehúsa a planear: la prioridad caduca cada cuatro sprints."
+      },
+      {
+        "paso": "vision",
+        "texto": "La visión inventaría TODAS las funcionalidades del brief, no una muestra: es el contrato de alcance antes del primer commit."
+      },
+      {
+        "paso": "construir",
+        "texto": "Un escritor por casa: la planeadora nunca escribe en el repo de la app, y la app nunca en el plan."
+      },
+      {
+        "paso": "gates",
+        "texto": "El hook de secretos, la auditoría de dependencias y el presupuesto de rendimiento rompen el PR; la excepción se registra como deuda."
+      },
+      {
+        "paso": "cierre",
+        "texto": "Sin summary no hay cierre, y ninguna corrida cierra sin su entrada en memoria/lecciones-aprendidas.md."
+      }
+    ]
+  },
+  "procedencia_proceso": "app",
+  "limites": [
+    "No escribe código de producción: eso ocurre en el repo de cada app, jamás en la casa planeadora.",
+    "Las fases de lanzamiento y de operación siguen sin validarse en una corrida real: son método escrito, no experiencia.",
+    "El retorno solo cuenta la coordinación eliminada; el valor comercial del portafolio queda como opción no cuantificada.",
+    "Sin librerías compartidas vivas entre apps: el reúso viaja estampado en el kit y como deltas en la siguiente orden."
+  ],
+  "nunca": [
+    "Escribe en el repo de una app ni en el histórico congelado: los lee en solo lectura.",
+    "Inventa cifras, citas, papers ni competidores: sin fuente, el dato va a la sección Gaps.",
+    "Cierra un sprint sin el summary que escribió el repo de la app.",
+    "Activa una app sin priorización vigente, ni planea un sprint sin visión aprobada.",
+    "Edita el método, los estándares o el kit sin aprobación explícita del dueño."
+  ],
+  "hitos": [
+    {
+      "valor": "hoja-de-vida S5",
+      "etiqueta": "ciclo"
+    },
+    {
+      "valor": "8",
+      "etiqueta": "work-items cerrados"
+    },
+    {
+      "valor": "2026-07-02",
+      "etiqueta": "sellada"
+    },
+    {
+      "valor": "v1.1.0",
+      "etiqueta": "version"
+    },
+    {
+      "valor": "8",
+      "etiqueta": "decisiones registradas"
+    }
+  ]
+}

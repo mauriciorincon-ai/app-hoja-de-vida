@@ -1,0 +1,151 @@
+{
+  "schema_version": "1.1.0",
+  "actualizado": "2026-09-06",
+  "pieza": {
+    "slug": "convoyes-de-buses",
+    "nombre": "Convoyes de buses (bunching)",
+    "frente": "investigaciones",
+    "estado": "inicial",
+    "ciclo": "Producción 5.º",
+    "version": "origen v1.0",
+    "sellado_en": null,
+    "sprints_cerrados": 0
+  },
+  "promesa": {
+    "tagline": "El bunching no roba capacidad: roba tiempo y expulsa usuarios. Toca disolverlo.",
+    "para_quien": "Para el centro de control de un sistema de buses de alta frecuencia: ve los convoyes en pantalla, cada bus ve al de adelante y al de atrás, hasta el público los ve en una aplicación — y nadie actúa. Los buses tienen orden de seguir en su turno de salida, así que el vacío no puede adelantar al lleno y detrás del convoy se abre un hueco donde la gente se acumula.",
+    "intro": "Una política de control operable: relajar la prohibición de adelantar bajo condiciones declaradas, más instrucciones al operador según la posición de cada bus en el convoy — probada en un simulador con verdad conocida y comparada contra el mejor control clásico. La investigación anterior midió el daño; esta busca la intervención que funcione cuando la información sobra y la acción falta."
+  },
+  "titular": "Ninguna de 900 obras revisadas reporta adopción sostenida de un control de bunching en operación, y ninguna de 873 traduce el control a instrucciones por posición en el convoy: el vacío está en la acción, no en la técnica.",
+  "stack": [
+    {
+      "nombre": "Simulación de eventos discretos",
+      "papel": "un corredor real anclado a datos abiertos, con la verdad conocida por construcción: posiciones, convoyes, ocupación y espera de cada pasajero simulado"
+    },
+    {
+      "nombre": "Detector de convoyes validado",
+      "papel": "instrumento, no contribución: su precisión y recobrado se reportan como la incertidumbre de un sensor"
+    },
+    {
+      "nombre": "Control clásico como línea base",
+      "papel": "la política nueva se compara contra el mejor control canónico sin adelantamiento, nunca contra no hacer nada"
+    },
+    {
+      "nombre": "Pre-registro factorial",
+      "papel": "los dos mecanismos — adelantar e instruir por posición — se evalúan separados y juntos, con varas fijadas antes de simular"
+    },
+    {
+      "nombre": "Literatura verificada una a una",
+      "papel": "cada obra citada cotejada contra su registro oficial; búsqueda en inglés, declarada como límite"
+    }
+  ],
+  "cifras": [
+    {
+      "clave": "adopcion_sostenida",
+      "valor": 0,
+      "unidad": "obras",
+      "etiqueta": "Obras con adopción sostenida de control de bunching",
+      "fuente": "medido",
+      "detalle": "Sobre 900 registros revisados en el paper de validación del tema; la literatura de control es enorme, la de adopción en operación real está vacía."
+    },
+    {
+      "clave": "adelantamiento",
+      "valor": 1,
+      "unidad": "obra",
+      "etiqueta": "Obras que estudian relajar la prohibición de adelantar",
+      "fuente": "medido",
+      "detalle": "Sobre 296 registros revisados; el único ocupante (2017) ancla la línea y confirma que la celda es escasa en sí misma, no por falta de búsqueda."
+    },
+    {
+      "clave": "experiencias",
+      "valor": 197046,
+      "unidad": "experiencias",
+      "etiqueta": "Experiencias individuales simuladas en el paper sellado",
+      "fuente": "medido",
+      "detalle": "Paper sellado sobre las consecuencias del bunching: registro de evaluación con la capa de elección estimada sobre cada pasajero simulado."
+    },
+    {
+      "clave": "espera_media",
+      "valor": 4.43,
+      "unidad": "min",
+      "etiqueta": "Espera media bajo bunching pleno (desde 2,33 sin bunching)",
+      "fuente": "medido",
+      "detalle": "Paper sellado: la capacidad no se destruye — se transforma en espera, hacinamiento y denegaciones de abordaje."
+    },
+    {
+      "clave": "horas_paper_consecuencias",
+      "valor": 4.17,
+      "unidad": "horas",
+      "etiqueta": "Horas de producción del paper de consecuencias",
+      "fuente": "medido",
+      "detalle": "Horas de agente por sellos de tiempo en el registro del programa, del encuadre al sello."
+    }
+  ],
+  "bloques": [
+    {
+      "orden": 1,
+      "nombre": "Las consecuencias del bunching",
+      "linea": "Sellada: el indicador de servicio no se mueve; la espera casi se duplica y aparecen 1.200 denegaciones por réplica.",
+      "cuenta": 1
+    },
+    {
+      "orden": 2,
+      "nombre": "Disolver el convoy",
+      "linea": "Seleccionada: adelantamiento condicionado e instrucciones por posición, contra el mejor control clásico.",
+      "cuenta": 0
+    },
+    {
+      "orden": 3,
+      "nombre": "Por qué nadie actúa",
+      "linea": "Compañera declarada: incentivos y gobernanza operador–ente gestor, como sección dentro de la línea principal.",
+      "cuenta": 0
+    },
+    {
+      "orden": 4,
+      "nombre": "Hacer público el daño",
+      "linea": "Entregable de divulgación acoplado a la publicación del paper de consecuencias: los números ya existen.",
+      "cuenta": 0
+    },
+    {
+      "orden": 5,
+      "nombre": "El simulador como instrumento",
+      "linea": "Extensión declarada: la mecánica de adelantamiento entra como capacidad nueva del banco de pruebas.",
+      "cuenta": 0
+    }
+  ],
+  "limites": [
+    "Estudia la componente zonal del sistema: el feed abierto no trae troncales.",
+    "Simula el corredor; no observa la operación real ni afirma cifras del sistema.",
+    "Propone la política y mide su efecto; cambiar la regla es decisión institucional, no técnica.",
+    "Compara contra control clásico, no contra la ausencia de control."
+  ],
+  "nunca": [
+    "Nombra conductores ni usa datos personales.",
+    "Dirige alertas, sanciones o exposición a la persona que conduce: el análisis es del operador y del sistema.",
+    "Usa datos de empleos anteriores del autor: solo fuentes públicas y datos sintéticos declarados.",
+    "Afirma una cifra sin fuente ni un vacío sin el número de obras revisadas.",
+    "Mueve una vara después de ver el resultado."
+  ],
+  "hitos": [
+    {
+      "valor": "2026-09-03",
+      "etiqueta": "validada contra literatura"
+    },
+    {
+      "valor": "7 de 7",
+      "etiqueta": "criterios cumplidos"
+    },
+    {
+      "valor": "1",
+      "etiqueta": "paper sellado (consecuencias)"
+    },
+    {
+      "valor": "5.º",
+      "etiqueta": "turno en la cola"
+    },
+    {
+      "valor": "origen v1.0",
+      "etiqueta": "version"
+    }
+  ]
+}

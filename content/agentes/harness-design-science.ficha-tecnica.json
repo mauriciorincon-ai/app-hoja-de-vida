@@ -1,0 +1,383 @@
+{
+  "schema_version": "1.1.0",
+  "actualizado": "2026-09-06",
+  "pieza": {
+    "slug": "harness-design-science",
+    "nombre": "Harness Design Science",
+    "frente": "agentes",
+    "estado": "inicial",
+    "ciclo": "paper 05 · G3",
+    "version": "1.0.0",
+    "sellado_en": null,
+    "sprints_cerrados": 3
+  },
+  "promesa": {
+    "tagline": "Tu artefacto en producción, vuelto paper — refutaciones incluidas.",
+    "intro": "Declaras el paper en un solo archivo de configuración —preguntas, principios falsables, métricas, corpus, frontera de divulgación— y el pipeline conduce las diez fases hasta un manuscrito listo para enviar, deteniéndose en las puertas donde solo un token verbal tuyo deja pasar. Los dos papers que ya salieron costaron 5,912 y 7,1633 horas de agente, con las horas atribuidas corrida por corrida.",
+    "para_quien": "Para el investigador-practicante que ya construyó artefactos que funcionan en producción —un agente, un pipeline, una plataforma— y sabe que ahí hay un paper de Design Science Research. Hoy no lo escribe: el encuadre, la literatura, el corpus de evidencia, la instrumentación y el manuscrito son meses de calendario que compiten con el trabajo que sí paga."
+  },
+  "titular": "Congela los umbrales antes de medir y publica lo que salga: en su paper piloto, dos de los tres principios del artefacto quedaron refutados por sus propias métricas — y así se escribieron. Un resultado nulo jamás se arregla redefiniendo.",
+  "stack": [
+    {
+      "nombre": "Claude Science",
+      "papel": "el runtime: las diez fases corren ahí como skills heredadas, sobre un kernel persistente con procedencia por artefacto"
+    },
+    {
+      "nombre": "Claude Code",
+      "papel": "la fábrica: construye y mantiene el paquete, emite el prompt de cada corrida y la verifica en terminal; jamás ejecuta una fase"
+    },
+    {
+      "nombre": "paper.yaml (contrato L2)",
+      "papel": "todo el contenido de dominio de un paper en un archivo declarativo; si está incompleto, falla al cargar en vez de rellenarse"
+    },
+    {
+      "nombre": "Python + pyarrow",
+      "papel": "el kernel de evidencia: métricas, checksums, manifiestos del corpus, ledger en parquet y los scripts de figuras"
+    },
+    {
+      "nombre": "litkit",
+      "papel": "fachada certificada para toda tarea de literatura — descubrimiento, verificación de referencias y bibliografía; nunca se llama el backend"
+    },
+    {
+      "nombre": "tectonic + LaTeX SciELO",
+      "papel": "la cadena de compilación del manuscrito; el criterio de éxito es el PDF leído, nunca el código de salida"
+    },
+    {
+      "nombre": "git sobre el repo canónico",
+      "papel": "la capa mutable: un commit por fase, fila por paper y horas atribuidas; si un derivado del runtime discrepa, manda el repo"
+    },
+    {
+      "nombre": "Markdown con frontmatter",
+      "papel": "la forma de las fases, las políticas y las cápsulas: entradas, salidas y criterios versionados como documentos, no como código"
+    }
+  ],
+  "cifras": [
+    {
+      "clave": "criterios_aceptacion",
+      "valor": 52,
+      "unidad": "criterios",
+      "etiqueta": "Criterios binarios de aceptación",
+      "fuente": "medido",
+      "detalle": "Casillas de aceptación contadas en los diez archivos de fases/ (D0 5 · D1 4 · D2 6 · D3 5 · D4 5 · D5 5 · D6 4 · D7 7 · D8 7 · D9 4). Cada criterio se imprime con veredicto, denominador y universo al cerrar su fase; un FALLA detiene el cierre."
+    },
+    {
+      "clave": "fases_pipeline",
+      "valor": 10,
+      "unidad": "fases",
+      "etiqueta": "Fases del pipeline D0 a D9",
+      "fuente": "medido",
+      "detalle": "Archivos D0-framing a D9-publicacion en fases/, uno por fase, cada uno con entradas, salidas y criterios. D9 (publicación) es latente: solo abre con un token aparte."
+    },
+    {
+      "clave": "papers_sellados",
+      "valor": 2,
+      "unidad": "papers",
+      "etiqueta": "Papers con G3 sellado",
+      "fuente": "medido",
+      "detalle": "Dos instanciaciones cerradas en el registro del motor: el piloto (producción cerrada 2026-08-23, 10 corridas) y la reinstanciación (G3 sellado 2026-08-25, corrida 10 verificada). Ambos con el token «sin críticos, envía» asentado."
+    },
+    {
+      "clave": "horas_agente_paper_piloto",
+      "valor": 5.912,
+      "unidad": "h agente",
+      "etiqueta": "Horas del paper piloto",
+      "fuente": "medido",
+      "detalle": "Suma de las 10 corridas con atribución de dos columnas: 3,892 h al paper y 2,020 h al método. Cuarto dato del modelo de presupuesto por clase del programa (11,10 · 4,92 · 4,171 · 5,912). La reinstanciación midió 7,1633 h y rompió su techo: el episodio se registró en vez de suavizarse."
+    },
+    {
+      "clave": "controles_plantilla",
+      "valor": 7,
+      "unidad": "controles",
+      "etiqueta": "Controles ejecutables endurecidos",
+      "fuente": "medido",
+      "detalle": "Archivos de plantillas/controles/: lint de divulgación y piso universal, auditoría de paridad, cotejo prosa contra artefacto, checklist de fase, validador del contrato L2 y control de reproducción. Cada uno con su sha256 publicado; un paper los copia byte a byte y llena su contrato de entrada."
+    }
+  ],
+  "bloques": [
+    {
+      "orden": 1,
+      "nombre": "Las diez fases, D0 a D9",
+      "linea": "Del encuadre al manuscrito listo: entradas, salidas y criterios declarados por fase.",
+      "cuenta": 10
+    },
+    {
+      "orden": 2,
+      "nombre": "El contrato del paper (L2)",
+      "linea": "Esquema, plantilla y validación del paper.yaml: el dominio se declara, no se improvisa.",
+      "cuenta": 3
+    },
+    {
+      "orden": 3,
+      "nombre": "Las seis leyes del track",
+      "linea": "Declarativo, claims falsables, corpus congelado, frontera, bootstrap y procedencia.",
+      "cuenta": 6
+    },
+    {
+      "orden": 4,
+      "nombre": "Controles ejecutables",
+      "linea": "Siete plantillas endurecidas que un paper instancia: se copian, jamás se reescriben.",
+      "cuenta": 7
+    },
+    {
+      "orden": 5,
+      "nombre": "Lint de no divulgación",
+      "linea": "Dos capas: piso universal monótono más la frontera que declara cada paper.",
+      "cuenta": 2
+    },
+    {
+      "orden": 6,
+      "nombre": "Las puertas con token verbal",
+      "linea": "Cinco gates; ninguno se cruza sin la frase exacta del autor, ni por prisa.",
+      "cuenta": 5
+    },
+    {
+      "orden": 7,
+      "nombre": "Cápsulas de fallo",
+      "linea": "Qué hacer si el corpus se invalida, un claim queda huérfano o se cruza la frontera.",
+      "cuenta": 4
+    },
+    {
+      "orden": 8,
+      "nombre": "Work-items del harness",
+      "linea": "Despliegue auditado, piloto en dos tramos y la reinstanciación como prueba de frontera.",
+      "cuenta": 4
+    }
+  ],
+  "proceso": {
+    "titulo": "Una corrida: de una fase a su puerta",
+    "carriles": [
+      {
+        "id": "autor",
+        "nombre": "El investigador"
+      },
+      {
+        "id": "fabrica",
+        "nombre": "La fábrica"
+      },
+      {
+        "id": "agente",
+        "nombre": "El ejecutor"
+      },
+      {
+        "id": "controles",
+        "nombre": "Controles mecánicos"
+      }
+    ],
+    "pasos": [
+      {
+        "id": "ini",
+        "tipo": "inicio",
+        "carril": "fabrica",
+        "texto": "Corrida nueva"
+      },
+      {
+        "id": "prompt",
+        "tipo": "tarea",
+        "carril": "fabrica",
+        "texto": "Emite el prompt con permisos y alcance"
+      },
+      {
+        "id": "paridad",
+        "tipo": "tarea",
+        "carril": "agente",
+        "texto": "Verifica la paridad paquete contra runtime"
+      },
+      {
+        "id": "canonico",
+        "tipo": "tarea",
+        "carril": "agente",
+        "texto": "Lee el canónico: paper, fase y gate"
+      },
+      {
+        "id": "valida",
+        "tipo": "tarea",
+        "carril": "controles",
+        "texto": "Valida el contrato L2 con sus carnadas"
+      },
+      {
+        "id": "ejecuta",
+        "tipo": "tarea",
+        "carril": "agente",
+        "texto": "Ejecuta la fase contra sus criterios"
+      },
+      {
+        "id": "checklist",
+        "tipo": "tarea",
+        "carril": "controles",
+        "texto": "Imprime veredicto, denominador y universo"
+      },
+      {
+        "id": "pasa",
+        "tipo": "decision",
+        "carril": "controles",
+        "texto": "¿Pasa?"
+      },
+      {
+        "id": "commit",
+        "tipo": "tarea",
+        "carril": "agente",
+        "texto": "Commitea la fase y asienta las horas"
+      },
+      {
+        "id": "gate",
+        "tipo": "decision",
+        "carril": "agente",
+        "texto": "¿Gate?"
+      },
+      {
+        "id": "verifica",
+        "tipo": "tarea",
+        "carril": "fabrica",
+        "texto": "Verifica la corrida en terminal"
+      },
+      {
+        "id": "token",
+        "tipo": "decision",
+        "carril": "autor",
+        "texto": "¿Aprueba?"
+      },
+      {
+        "id": "cierra",
+        "tipo": "tarea",
+        "carril": "agente",
+        "texto": "Cierra: lección, horas y frontera impresa"
+      },
+      {
+        "id": "fin",
+        "tipo": "fin",
+        "carril": "autor",
+        "texto": ""
+      }
+    ],
+    "flujos": [
+      {
+        "de": "ini",
+        "a": "prompt"
+      },
+      {
+        "de": "prompt",
+        "a": "paridad"
+      },
+      {
+        "de": "paridad",
+        "a": "canonico"
+      },
+      {
+        "de": "canonico",
+        "a": "valida"
+      },
+      {
+        "de": "valida",
+        "a": "ejecuta"
+      },
+      {
+        "de": "ejecuta",
+        "a": "checklist"
+      },
+      {
+        "de": "checklist",
+        "a": "pasa"
+      },
+      {
+        "de": "pasa",
+        "a": "commit",
+        "etiqueta": "sí"
+      },
+      {
+        "de": "pasa",
+        "a": "ejecuta",
+        "etiqueta": "no · itera en fase"
+      },
+      {
+        "de": "commit",
+        "a": "gate"
+      },
+      {
+        "de": "gate",
+        "a": "verifica",
+        "etiqueta": "sí"
+      },
+      {
+        "de": "gate",
+        "a": "ejecuta",
+        "etiqueta": "no · fase siguiente"
+      },
+      {
+        "de": "verifica",
+        "a": "token"
+      },
+      {
+        "de": "token",
+        "a": "cierra",
+        "etiqueta": "sí · token verbal"
+      },
+      {
+        "de": "token",
+        "a": "ejecuta",
+        "etiqueta": "no · adjudica"
+      },
+      {
+        "de": "cierra",
+        "a": "fin"
+      }
+    ],
+    "anotaciones": [
+      {
+        "paso": "paridad",
+        "texto": "Si el runtime no ejecuta el paquete aprobado, la corrida no arranca: la paridad se verifica en ambos sentidos y con universo declarado."
+      },
+      {
+        "paso": "checklist",
+        "texto": "Un control sin denominador ni universo no emite veredicto; un lote vacío contado como verde es fallo del control, no éxito."
+      },
+      {
+        "paso": "commit",
+        "texto": "Las horas se asientan con atribución paper y método desde la corrida 1, en el repo canónico; los derivados del runtime nunca mandan."
+      },
+      {
+        "paso": "token",
+        "texto": "Los tokens son frases exactas: «framing aprobado», «artefacto aprobado», «manuscrito aprobado», «sin críticos, envía»."
+      },
+      {
+        "paso": "cierra",
+        "texto": "Instanciar un paper nuevo no puede modificar el harness: la frontera se prueba con un diff de fases y contrato, impreso en el cierre."
+      }
+    ]
+  },
+  "procedencia_proceso": "app",
+  "limites": [
+    "No ejecuta fases desde la fábrica: Claude Code construye y mantiene el paquete; las diez fases corren en el runtime, sobre un paquete de solo lectura.",
+    "No hay solvers ni benchmarks: la unidad de evidencia es un artefacto en producción y sus registros, no un experimento sintético, y no afirma optimalidad.",
+    "No publica: la producción termina en «listo para enviar»; el envío a revista es una fase latente que solo abre con un token aparte del autor.",
+    "No promete horas: el presupuesto por clase predice, y cada cierre emite su veredicto de dos columnas contra lo que de verdad se midió."
+  ],
+  "nunca": [
+    "Rellena contenido de dominio que el investigador no declaró: una configuración incompleta falla al cargar en vez de completarse sola.",
+    "Se nombra a sí mismo ni a la maquinaria que lo construyó dentro de un manuscrito: el piso de términos vetados es monótono y toda exención rechaza.",
+    "Cruza una puerta sin el token verbal exacto del autor, por urgente que venga la instrucción.",
+    "Redefine una métrica después de ver el resultado: un nulo o un claim refutado se reporta como informativo.",
+    "Escribe una cifra de memoria: toda cifra en prosa se lee del artefacto al escribirla, y el cotejo corre en cada cierre de fase."
+  ],
+  "hitos": [
+    {
+      "valor": "paper 05 · G3",
+      "etiqueta": "ciclo"
+    },
+    {
+      "valor": "3",
+      "etiqueta": "work-items cerrados"
+    },
+    {
+      "valor": "2026-08-25",
+      "etiqueta": "verificado"
+    },
+    {
+      "valor": "v1.0.0",
+      "etiqueta": "version"
+    },
+    {
+      "valor": "8",
+      "etiqueta": "decisiones registradas"
+    }
+  ]
+}

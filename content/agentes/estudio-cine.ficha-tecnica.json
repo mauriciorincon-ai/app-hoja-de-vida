@@ -1,0 +1,379 @@
+{
+  "schema_version": "1.1.0",
+  "actualizado": "2026-09-06",
+  "pieza": {
+    "slug": "estudio-cine",
+    "nombre": "Presentaciones CINE",
+    "frente": "agentes",
+    "estado": "sellado",
+    "ciclo": "sprint 003",
+    "version": "1.5.0",
+    "sellado_en": "2026-07-24",
+    "sprints_cerrados": 3
+  },
+  "promesa": {
+    "tagline": "Cada animación cuenta la historia, o se corta.",
+    "intro": "El estudio convierte esa pelea en un oficio con ley: brief, storyboard con cobertura completa de los mensajes, motion-system propio de la pieza, rodaje escena por escena y un gate humano en cada corte. Lo que sale es un deck web determinista —animación de código, no video— con su corte editorial entero para quien pidió menos movimiento. Y cada corrida deja una lección escrita.",
+    "para_quien": "Para quien tiene que presentar algo que importa —una visión ante la dirección, una plataforma ante un cliente— y hoy paga unas 40 horas armando a mano una presentación excelente, lámina por lámina, sin forma de repetir el resultado en la siguiente. El nivel de las mejores agencias le queda fuera de alcance, y no por gusto: por horas."
+  },
+  "titular": "Cada animación apunta a un mensaje del storyboard o se corta — y quien firma que la pieza se siente cinematográfica es una persona recorriéndola en aparatos reales, no la CI: la máquina verifica el comportamiento, jamás la experiencia.",
+  "stack": [
+    {
+      "nombre": "Claude Code",
+      "papel": "La casa entera: la constitución se auto-carga al abrir la carpeta, toda sesión arranca leyendo el estado actual y plan y rodaje ocurren en la misma ventana"
+    },
+    {
+      "nombre": "Markdown con frontmatter",
+      "papel": "El formato de la ley y de la memoria: cada documento declara id, versión, estado y fecha, y las correcciones entran como enmiendas fechadas, nunca reescribiendo"
+    },
+    {
+      "nombre": "Subagentes de Claude Code",
+      "papel": "La investigación del dominio y el análisis de referencias: máximo cinco por corrida sin aprobación; más que eso se propone primero"
+    },
+    {
+      "nombre": "WebSearch y WebFetch",
+      "papel": "La evidencia externa: solo contenido público servido al navegador; jamás credenciales halladas en bundles ni sondeo de APIs o backends ajenos"
+    },
+    {
+      "nombre": "GSAP y ScrollTrigger",
+      "papel": "El motor de motion de las piezas: orquestación determinista y matchMedia para el corte editorial; licencia verificada en el tarball de npm, no en prosa"
+    },
+    {
+      "nombre": "reveal.js",
+      "papel": "La estructura de deck de la primera pieza: 24 láminas 16:9, con inert en las que no están presentes y disolvencia entre lámina y lámina"
+    },
+    {
+      "nombre": "Python y Chrome headless",
+      "papel": "Los instrumentos de medición: peso real por escena, primer fotograma por opacidad efectiva, cobertura del corte editorial y despiece de los SVG del autor"
+    },
+    {
+      "nombre": "SVG por capas",
+      "papel": "El material de motion: la geometría pesa una vez con defs y use, se recolorea por herencia de fill y se anima solo con transform y opacity"
+    }
+  ],
+  "cifras": [
+    {
+      "clave": "escenas_construidas",
+      "valor": 24,
+      "etiqueta": "Escenas construidas de la primera pieza",
+      "fuente": "medido",
+      "detalle": "Contadas sobre el index.html del producto: 24 identificadores de escena únicos y 24 nodos marcados como escena. Las 24 están coreografiadas en las dos ramas —movimiento y corte editorial— según el registro de gates por escena del estado actual."
+    },
+    {
+      "clave": "gates_humanos",
+      "valor": 8,
+      "etiqueta": "Gates humanos con token verbal",
+      "fuente": "medido",
+      "detalle": "Filas de la tabla Gates del CLAUDE.md del paquete: cartelera, guion, plan, arranque, fases, sala de proyección, estreno y método. Cada gate se define por su mecanismo verificable —frase canónica o artefacto firmado— y no por su intención."
+    },
+    {
+      "clave": "decisiones_registradas",
+      "valor": 15,
+      "etiqueta": "Decisiones de arquitectura registradas",
+      "fuente": "medido",
+      "detalle": "8 decisiones del harness en arquitectura/DECISIONES.md, un registro append-only donde una decisión nunca se reescribe: se le añade una enmienda fechada al pie. Más 7 decisiones de dominio, una por archivo, en estandares/adr/ (stack v1, aprobado el 2026-08-30)."
+    },
+    {
+      "clave": "comprobaciones_regresion",
+      "valor": 206,
+      "etiqueta": "Comprobaciones del guion de regresión",
+      "fuente": "medido",
+      "detalle": "Identificadores únicos en el guion de regresión de la primera pieza: 209 filas con identificador propio, 206 distintos. Es acumulativo por contrato —cada sprint hereda el guion entero y le suma— y cada línea declara si es nueva, mejorada o heredada."
+    },
+    {
+      "clave": "horas_liberadas_anio_base",
+      "valor": 400,
+      "unidad": "h/año",
+      "etiqueta": "Horas liberadas al año, escenario base",
+      "fuente": "estimacion",
+      "detalle": "Escenario base del roi.json: 40 h por pieza hoy y 20 con el estudio (reducción del 50 %) sobre 20 piezas al año. La reducción es supuesto de la Fábrica con confianza baja, declarado a calibrar con las horas reales de la primera producción."
+    }
+  ],
+  "bloques": [
+    {
+      "orden": 1,
+      "nombre": "La ley del oficio",
+      "linea": "El método por fases y los estándares del dominio: solo cambian por gate, con changelog fechado.",
+      "cuenta": 7
+    },
+    {
+      "orden": 2,
+      "nombre": "Los gates de la casa",
+      "linea": "Ocho puntos donde el agente para y espera una frase suya para seguir.",
+      "cuenta": 8
+    },
+    {
+      "orden": 3,
+      "nombre": "La cartelera",
+      "linea": "El plan de cada pieza: brief, storyboard, motion-system, sprints, órdenes y la sala.",
+      "cuenta": 6
+    },
+    {
+      "orden": 4,
+      "nombre": "El kit de escena",
+      "linea": "El molde estampable y sus seis oficios: sistema de motion, narrativa, deck, assets, arte, rendimiento.",
+      "cuenta": 6
+    },
+    {
+      "orden": 5,
+      "nombre": "Las referencias",
+      "linea": "Análisis de código de piezas del listón, en solo lectura: evidencia fechada que no se reescribe.",
+      "cuenta": 9
+    },
+    {
+      "orden": 6,
+      "nombre": "Memoria y aprendizaje",
+      "linea": "Lecciones por corrida, patrones que ascienden a la segunda ocurrencia y cápsulas de riesgo.",
+      "cuenta": 6
+    },
+    {
+      "orden": 7,
+      "nombre": "El contexto en cuatro capas",
+      "linea": "Negocio, producto, tecnología y entrega — cada capa con su sección de vacíos declarados.",
+      "cuenta": 4
+    },
+    {
+      "orden": 8,
+      "nombre": "El plan de arranque",
+      "linea": "Los work-items que llevan el método de hipótesis a oficio, con criterios binarios.",
+      "cuenta": 4
+    }
+  ],
+  "proceso": {
+    "titulo": "Una producción, de la cartelera a la sala",
+    "carriles": [
+      {
+        "id": "autor",
+        "nombre": "El autor · dueño de los gates"
+      },
+      {
+        "id": "casa",
+        "nombre": "La casa · Claude Code"
+      },
+      {
+        "id": "scripts",
+        "nombre": "Los medidores de la casa"
+      }
+    ],
+    "pasos": [
+      {
+        "id": "ini",
+        "tipo": "inicio",
+        "carril": "autor",
+        "texto": "Una pieza entra a la cartelera"
+      },
+      {
+        "id": "estado",
+        "tipo": "tarea",
+        "carril": "casa",
+        "texto": "Abre por el estado actual y sincroniza"
+      },
+      {
+        "id": "brief",
+        "tipo": "tarea",
+        "carril": "autor",
+        "texto": "Dicta el brief: mensajes y audiencia"
+      },
+      {
+        "id": "story",
+        "tipo": "tarea",
+        "carril": "casa",
+        "texto": "Propone el storyboard, escena por escena"
+      },
+      {
+        "id": "guion",
+        "tipo": "decision",
+        "carril": "autor",
+        "texto": "¿Guion?"
+      },
+      {
+        "id": "orden",
+        "tipo": "tarea",
+        "carril": "casa",
+        "texto": "Deriva motion-system, sprint y orden"
+      },
+      {
+        "id": "arranca",
+        "tipo": "tarea",
+        "carril": "autor",
+        "texto": "Da «orden aprobada» y luego «construye»"
+      },
+      {
+        "id": "rodaje",
+        "tipo": "tarea",
+        "carril": "casa",
+        "texto": "Roda la escena: arte, motion, corte editorial"
+      },
+      {
+        "id": "checks",
+        "tipo": "tarea",
+        "carril": "scripts",
+        "texto": "Miden propiedades, peso y primer fotograma"
+      },
+      {
+        "id": "fase",
+        "tipo": "decision",
+        "carril": "autor",
+        "texto": "¿Sigue?"
+      },
+      {
+        "id": "sala",
+        "tipo": "tarea",
+        "carril": "autor",
+        "texto": "Recorre la sala en aparatos reales"
+      },
+      {
+        "id": "firma",
+        "tipo": "decision",
+        "carril": "autor",
+        "texto": "¿Sala?"
+      },
+      {
+        "id": "leccion",
+        "tipo": "tarea",
+        "carril": "casa",
+        "texto": "Escribe la lección y deja la próxima acción"
+      },
+      {
+        "id": "fin",
+        "tipo": "fin",
+        "carril": "autor",
+        "texto": ""
+      }
+    ],
+    "flujos": [
+      {
+        "de": "ini",
+        "a": "estado"
+      },
+      {
+        "de": "estado",
+        "a": "brief"
+      },
+      {
+        "de": "brief",
+        "a": "story"
+      },
+      {
+        "de": "story",
+        "a": "guion"
+      },
+      {
+        "de": "guion",
+        "a": "orden",
+        "etiqueta": "sí · guion aprobado"
+      },
+      {
+        "de": "guion",
+        "a": "story",
+        "etiqueta": "no · reescribe"
+      },
+      {
+        "de": "orden",
+        "a": "arranca"
+      },
+      {
+        "de": "arranca",
+        "a": "rodaje"
+      },
+      {
+        "de": "rodaje",
+        "a": "checks"
+      },
+      {
+        "de": "checks",
+        "a": "fase"
+      },
+      {
+        "de": "fase",
+        "a": "sala",
+        "etiqueta": "sí · continúa"
+      },
+      {
+        "de": "fase",
+        "a": "rodaje",
+        "etiqueta": "no · ajusta"
+      },
+      {
+        "de": "sala",
+        "a": "firma"
+      },
+      {
+        "de": "firma",
+        "a": "leccion",
+        "etiqueta": "sí · sala firmada"
+      },
+      {
+        "de": "firma",
+        "a": "rodaje",
+        "etiqueta": "no · deja regresión"
+      },
+      {
+        "de": "leccion",
+        "a": "fin"
+      }
+    ],
+    "anotaciones": [
+      {
+        "paso": "story",
+        "texto": "El storyboard cubre todos los mensajes del brief, uno a uno: agrupar sí, omitir jamás. Sin esa cuenta cerrada no hay guion aprobado."
+      },
+      {
+        "paso": "arranca",
+        "texto": "Aprobar el plan no arranca el rodaje: son dos tokens distintos, y el segundo se da aparte."
+      },
+      {
+        "paso": "checks",
+        "texto": "Las señales son scripts de texto, no navegador: el navegador sin ventana se colgó y el análisis estático fue el que verificó."
+      },
+      {
+        "paso": "firma",
+        "texto": "El único gate que ninguna automatización puede dar. Cada defecto que aparece aquí deja su línea de regresión para que no vuelva."
+      },
+      {
+        "paso": "leccion",
+        "texto": "Ninguna corrida cierra sin su lección escrita y sin dejar la próxima acción concreta apuntada en el estado."
+      },
+      {
+        "paso": "rodaje",
+        "texto": "El último sprint es el corte final: publica el mapa de escenas y el recorrido sin movimiento de la pieza completa."
+      }
+    ]
+  },
+  "procedencia_proceso": "app",
+  "limites": [
+    "No ve una animación corriendo: sin computer-use ni render en línea, el feel lo juzga una persona en la sala de proyección.",
+    "El método es hipótesis hasta cerrar la primera producción completa: una sola pieza no funda un oficio.",
+    "El ahorro estimado no está calibrado: la reducción del 50 % es supuesto propio, a corregir con las horas reales de la primera pieza.",
+    "No expone piezas a usuarios reales: eso es otro gate, y lo da el autor."
+  ],
+  "nunca": [
+    "Anima por decoración: la animación que no refuerza, revela o dramatiza el mensaje se corta.",
+    "Inventa cifras, citas ni comportamientos de sitios de referencia: sin fuente, va a la sección de vacíos.",
+    "Cambia el método, los estándares o el kit sin gate aprobado y su entrada de changelog con fecha, razón y origen.",
+    "Corre IA dentro de una pieza: el motion es código determinista, sin azar sin semilla, salvo decisión aprobada.",
+    "Difiere la sala de proyección del sprint de corte final."
+  ],
+  "hitos": [
+    {
+      "valor": "sprint 003",
+      "etiqueta": "ciclo"
+    },
+    {
+      "valor": "1 de 4",
+      "etiqueta": "work-items cerrados"
+    },
+    {
+      "valor": "2026-07-24",
+      "etiqueta": "sellada"
+    },
+    {
+      "valor": "15",
+      "etiqueta": "decisiones registradas"
+    },
+    {
+      "valor": "v1.5.0",
+      "etiqueta": "version"
+    }
+  ]
+}

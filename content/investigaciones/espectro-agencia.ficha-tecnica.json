@@ -1,0 +1,144 @@
+{
+  "schema_version": "1.1.0",
+  "actualizado": "2026-09-06",
+  "pieza": {
+    "slug": "espectro-agencia",
+    "nombre": "El espectro de agencia de los instrumentos de decisión",
+    "frente": "investigaciones",
+    "estado": "inicial",
+    "ciclo": "Producción 3.º",
+    "version": "origen v1.1",
+    "sellado_en": null,
+    "sprints_cerrados": 1
+  },
+  "promesa": {
+    "tagline": "Tablero, alerta, asistente, recomendador o agente: cuál para cada decisión.",
+    "para_quien": "Para quien dirige un área de analítica en cualquier sector: hoy el instrumento se elige por costumbre, por miedo o por presupuesto — tableros para todo, incluso donde hacía falta una alerta a las seis de la mañana; y desconfianza ante la recomendación automática aunque el dato sea el mismo. No existe una regla que diga qué decisión, con qué riesgos, merece qué nivel de agencia.",
+    "intro": "Un marco que ordena los instrumentos por cuántas etapas de la decisión ceden al sistema — observar, filtrar, interpretar, evaluar, ejecutar — y un banco de pruebas con decisores sintéticos: perfiles de sesgo tomados de la literatura y medidos antes de usarse, ante el mismo escenario a través de cada instrumento, contra un óptimo conocido. Entregable: qué instrumento para qué decisión."
+  },
+  "titular": "De 119 marcos de niveles de automatización examinados uno a uno, ninguno ordena los instrumentos de decisión por agencia con evaluación y costo contra óptimo; y ninguna de 800 obras prescribe la elección entre clases.",
+  "stack": [
+    {
+      "nombre": "Espectro ordinal por construcción",
+      "papel": "cinco instrumentos ordenados por las etapas del proceso de decisión que ejecutan en lugar del humano; el orden es propiedad de la definición, no del dato"
+    },
+    {
+      "nombre": "Decisores sintéticos de prueba",
+      "papel": "perfiles de sesgo citados de literatura, ejecutados por modelos de lenguaje; miden propiedades de los instrumentos, jamás predicen personas"
+    },
+    {
+      "nombre": "Escenario con óptimo conocido",
+      "papel": "decisiones de crédito generadas donde la política óptima es calculable: la vara es exacta"
+    },
+    {
+      "nombre": "Verificación de manipulación",
+      "papel": "un perfil que no exprese su sesgo de forma medible no entra al dato — puerta de admisibilidad, no reporte anexo"
+    },
+    {
+      "nombre": "Regret contra el óptimo",
+      "papel": "la pérdida de valor de cada decisión respecto a la óptima, agregada por instrumento y perfil con denominador pre-registrado"
+    }
+  ],
+  "cifras": [
+    {
+      "clave": "marcos_examinados",
+      "valor": 119,
+      "unidad": "marcos",
+      "etiqueta": "Marcos de niveles de automatización examinados uno a uno",
+      "fuente": "medido",
+      "detalle": "Paper de validación teórica: la literatura ocupa la escala en dominios físicos; su traducción a instrumentos analíticos con método y métrica está libre."
+    },
+    {
+      "clave": "guias_entre_clases",
+      "valor": 0,
+      "unidad": "obras",
+      "etiqueta": "Guías que prescriben la elección entre clases de instrumento",
+      "fuente": "medido",
+      "detalle": "Sobre 800 registros revisados; las 8 halladas prescriben dentro de una sola clase."
+    },
+    {
+      "clave": "simulados_como_carga",
+      "valor": 2,
+      "unidad": "obras",
+      "etiqueta": "Obras con simulados como carga de prueba, no sustituto",
+      "fuente": "medido",
+      "detalle": "Sobre 500 registros de la disputa sobre modelos de lenguaje como sujetos simulados; ninguna evalúa instrumentos de decisión."
+    },
+    {
+      "clave": "hipotesis_forma",
+      "valor": 6,
+      "unidad": "obras",
+      "etiqueta": "Obras que varían la forma del dato como el espectro",
+      "fuente": "medido",
+      "detalle": "Sobre 500 revisadas, 35 varían la forma y solo 6 en el sentido del espectro; entran como hipótesis pre-registradas."
+    },
+    {
+      "clave": "techo_horas",
+      "valor": 7.16,
+      "unidad": "horas",
+      "etiqueta": "Techo de horas de producción, congelado antes de arrancar",
+      "fuente": "declarado",
+      "detalle": "Declarado en el libro de horas del programa desde la tabla de presupuesto por clase; se reporta si se rompe, jamás se ajusta."
+    }
+  ],
+  "bloques": [
+    {
+      "orden": 1,
+      "nombre": "El marco y el banco de pruebas",
+      "linea": "Seleccionada: la investigación pausada se retoma donde quedó, con el pre-registro enriquecido.",
+      "cuenta": 0
+    },
+    {
+      "orden": 2,
+      "nombre": "El método de decisores sintéticos",
+      "linea": "Capítulo separable: inducir, medir, ejecutar y reportar — publicable solo si crece.",
+      "cuenta": 0
+    },
+    {
+      "orden": 3,
+      "nombre": "La regla de elección",
+      "linea": "Entregable declarado: tabla tipo de decisión × clase de instrumento — un orden sin regla de uso no sirve.",
+      "cuenta": 0
+    },
+    {
+      "orden": 4,
+      "nombre": "Las hipótesis de forma",
+      "linea": "Disueltas en el pre-registro: las seis comparaciones del sentido del espectro, fijadas antes de medir.",
+      "cuenta": 0
+    }
+  ],
+  "limites": [
+    "Afirma propiedades de los instrumentos bajo cargas controladas; nada sobre cómo deciden las personas.",
+    "Escenario cien por ciento sintético: el óptimo se conoce porque se construyó.",
+    "El orden del espectro es a priori; si el medido lo contradice, es hallazgo, no motivo para redefinirlo."
+  ],
+  "nunca": [
+    "Afirma que los decisores sintéticos predicen comportamiento humano — ni siquiera como motivación.",
+    "Nombra la organización donde el autor vivió el problema: el problema no tiene sector.",
+    "Usa un perfil de sesgo que no haya demostrado expresar su sesgo de forma medible.",
+    "Afirma una cifra sin fuente ni un vacío sin el número de obras revisadas.",
+    "Mueve una vara después de ver el resultado."
+  ],
+  "hitos": [
+    {
+      "valor": "2026-09-05",
+      "etiqueta": "validada contra literatura"
+    },
+    {
+      "valor": "7 de 7",
+      "etiqueta": "criterios cumplidos"
+    },
+    {
+      "valor": "en aprobación",
+      "etiqueta": "encuadre de la investigación"
+    },
+    {
+      "valor": "3.º",
+      "etiqueta": "turno en la cola"
+    },
+    {
+      "valor": "origen v1.1",
+      "etiqueta": "version"
+    }
+  ]
+}

@@ -1,0 +1,357 @@
+{
+  "schema_version": "1.1.0",
+  "actualizado": "2026-09-06",
+  "pieza": {
+    "slug": "ai103-foundry",
+    "nombre": "Super guía AI-103",
+    "frente": "agentes",
+    "estado": "inicial",
+    "ciclo": "WI-08",
+    "version": "2.1.0",
+    "sellado_en": null,
+    "sprints_cerrados": 8
+  },
+  "promesa": {
+    "tagline": "Estudias construyendo: el temario llega en el paso donde se necesita.",
+    "intro": "El estudio se invierte. Primero defines un proyecto real en Azure AI Foundry, y el harness demuestra con un mapa de cobertura contra los pesos oficiales que construirlo cubre el examen. Solo entonces genera las guías que lo levantan paso a paso, con los callouts oficiales inyectados donde hacen falta, un checkpoint al cerrar cada guía y re-foco por peso por debilidad medida.",
+    "para_quien": "Para el profesional de datos e IA que va a certificarse en AI-103 y hoy estudia como todos: lee los módulos oficiales en orden, copia apuntes a un documento aparte y hace los labs como recetas que se olvidan a la semana. Reparte el esfuerzo plano, ignorando que dos dominios pesan cerca del 60% del examen, y salta los bloques Note, Tip e Important, cantera de preguntas."
+  },
+  "titular": "Ninguna guía existe hasta que un mapa demuestre que la ruta cubre el outline en proporción a los pesos oficiales; y cada afirmación pedagógica cita su callout oficial con URL y fecha, o se marca «a confirmar» en vez de rellenarse.",
+  "stack": [
+    {
+      "nombre": "Claude Code",
+      "papel": "la única superficie: auto-carga CLAUDE.md y corre el loop de sesión (refresco, guía, checkpoint, re-foco) sin prompt de arranque"
+    },
+    {
+      "nombre": "Python",
+      "papel": "la ingesta viva: baja outline y módulos oficiales, clona labs, extrae los callouts y hashea cada fuente para detectar drift entre corridas"
+    },
+    {
+      "nombre": "Markdown con frontmatter",
+      "papel": "fuente de verdad de guías y notas inteligentes, cada nota con tipo, fuente y fecha de captura; el HTML es capa derivada"
+    },
+    {
+      "nombre": "HTML autocontenido",
+      "papel": "las guías infográficas y la super guía, generadas desde plantillas/plantilla-guia.html sin CDN ni Mermaid; se abren en el navegador"
+    },
+    {
+      "nombre": "git",
+      "papel": "historial local del corpus, las guías y los checkpoints; commit al cerrar cada sesión de estudio"
+    },
+    {
+      "nombre": "CSV",
+      "papel": "la señal cuantitativa del re-foco: una fila por checkpoint con dominio, aciertos, total y temas fallados"
+    },
+    {
+      "nombre": "PowerShell",
+      "papel": "utilidad de apagado de recursos que el harness documenta y corre el usuario; el harness nunca la ejecuta"
+    }
+  ],
+  "cifras": [
+    {
+      "clave": "criterios_aceptacion",
+      "valor": 29,
+      "unidad": "criterios",
+      "etiqueta": "Criterios binarios de aceptación",
+      "fuente": "medido",
+      "detalle": "Casillas de criterio contadas en entrega/work-items/work-items.md, repartidas entre los 9 work-items WI-01 a WI-09. Cada una es pasa o no pasa y su comprobación agregada vive en verificacion.md (19 ítems de checklist)."
+    },
+    {
+      "clave": "notas_inteligentes_semilla",
+      "valor": 6,
+      "unidad": "notas",
+      "etiqueta": "Notas inteligentes ya sembradas",
+      "fuente": "medido",
+      "detalle": "Archivos de nota bajo corpus/notas/, uno por carpeta de dominio (01-planear tiene dos). Cada nota lleva tipo, fuente con URL y fecha de captura: es lo que permite el reporte de drift."
+    },
+    {
+      "clave": "recursos_azure_creados",
+      "valor": 0,
+      "unidad": "recursos",
+      "etiqueta": "Recursos Azure que crea el harness",
+      "fuente": "declarado",
+      "detalle": "Regla de oro declarada en CLAUDE.md y en la frontera de capacidades.md (crear, modificar o borrar recursos: nunca). El smoke test S7 de OPERACION-EJEMPLO comprueba que ningún script crea recursos y que el teardown avisa que lo corre el usuario."
+    },
+    {
+      "clave": "horas_de_estudio",
+      "valor": 75,
+      "unidad": "horas",
+      "etiqueta": "Horas de estudio del método",
+      "fuente": "estimacion",
+      "detalle": "Supuesto de roi.json: 15 h por semana durante 5 semanas, contra las 130 h del método tradicional para el mismo resultado. Confianza declarada media: es el anclaje heredado de la v1 y se re-valida con horas reales por guía en el piloto WI-09."
+    }
+  ],
+  "bloques": [
+    {
+      "orden": 1,
+      "nombre": "Sesión 0 y mapa de cobertura",
+      "linea": "Tu proyecto real, cruzado contra los dominios y sus pesos antes de escribir una sola guía.",
+      "cuenta": 5
+    },
+    {
+      "orden": 2,
+      "nombre": "Ingesta viva y drift",
+      "linea": "Baja lo oficial, extrae los callouts y avisa qué guía quedó vencida cuando la fuente cambia.",
+      "cuenta": 3
+    },
+    {
+      "orden": 3,
+      "nombre": "Guías aplicativas",
+      "linea": "Cada guía construye una pieza del proyecto, con el resultado esperado de cada paso.",
+      "cuenta": 5
+    },
+    {
+      "orden": 4,
+      "nombre": "Banco de notas inteligentes",
+      "linea": "El oro que nadie lee: callout oficial, trampa, distinción y concepto, con fuente y fecha.",
+      "cuenta": 4
+    },
+    {
+      "orden": 5,
+      "nombre": "Checkpoints y re-foco",
+      "linea": "Preguntas con los tipos reales del examen; el resultado reordena hacia donde flaqueas.",
+      "cuenta": 4
+    },
+    {
+      "orden": 6,
+      "nombre": "Super guía maestra",
+      "linea": "El índice único: ruta, progreso ponderado por peso, drift pendiente y banco de notas.",
+      "cuenta": 4
+    },
+    {
+      "orden": 7,
+      "nombre": "Motor re-instanciable",
+      "linea": "El método es agnóstico de la certificación: AI-103 es apenas la primera instancia.",
+      "cuenta": 3
+    },
+    {
+      "orden": 8,
+      "nombre": "Los tres gates",
+      "linea": "Cobertura, Azure y drift: los tres puntos donde el harness se detiene y decides tú.",
+      "cuenta": 3
+    }
+  ],
+  "proceso": {
+    "titulo": "Una corrida: de la sesión 0 a una guía cerrada",
+    "carriles": [
+      {
+        "id": "tu",
+        "nombre": "Tú · quien estudia"
+      },
+      {
+        "id": "harness",
+        "nombre": "El harness · Claude Code"
+      },
+      {
+        "id": "fuente",
+        "nombre": "Contenido oficial Microsoft"
+      }
+    ],
+    "pasos": [
+      {
+        "id": "ini",
+        "tipo": "inicio",
+        "carril": "tu",
+        "texto": "Abres el repo en Claude Code"
+      },
+      {
+        "id": "ingesta",
+        "tipo": "tarea",
+        "carril": "harness",
+        "texto": "Corre la ingesta: outline, módulos y labs"
+      },
+      {
+        "id": "callouts",
+        "tipo": "tarea",
+        "carril": "fuente",
+        "texto": "Devuelve snapshots y callouts oficiales"
+      },
+      {
+        "id": "objetivo",
+        "tipo": "tarea",
+        "carril": "harness",
+        "texto": "Desafía y moldea tu proyecto aplicado"
+      },
+      {
+        "id": "mapa",
+        "tipo": "tarea",
+        "carril": "harness",
+        "texto": "Cruza proyecto por dominio por peso"
+      },
+      {
+        "id": "gcob",
+        "tipo": "decision",
+        "carril": "tu",
+        "texto": "¿Aprueba?"
+      },
+      {
+        "id": "guia",
+        "tipo": "tarea",
+        "carril": "harness",
+        "texto": "Genera la guía: markdown fuente y HTML"
+      },
+      {
+        "id": "notas",
+        "tipo": "tarea",
+        "carril": "harness",
+        "texto": "Inyecta las notas con fuente y fecha"
+      },
+      {
+        "id": "ejecuta",
+        "tipo": "tarea",
+        "carril": "tu",
+        "texto": "Ejecutas los pasos en Azure AI Foundry"
+      },
+      {
+        "id": "teardown",
+        "tipo": "tarea",
+        "carril": "tu",
+        "texto": "Decides qué recursos apagas"
+      },
+      {
+        "id": "check",
+        "tipo": "tarea",
+        "carril": "harness",
+        "texto": "Aplica el checkpoint y explica errores"
+      },
+      {
+        "id": "refoco",
+        "tipo": "tarea",
+        "carril": "harness",
+        "texto": "Re-foca por peso del examen por debilidad"
+      },
+      {
+        "id": "parada",
+        "tipo": "decision",
+        "carril": "harness",
+        "texto": "¿Ruta completa?"
+      },
+      {
+        "id": "fin",
+        "tipo": "fin",
+        "carril": "tu",
+        "texto": ""
+      }
+    ],
+    "flujos": [
+      {
+        "de": "ini",
+        "a": "ingesta"
+      },
+      {
+        "de": "ingesta",
+        "a": "callouts"
+      },
+      {
+        "de": "callouts",
+        "a": "objetivo"
+      },
+      {
+        "de": "objetivo",
+        "a": "mapa"
+      },
+      {
+        "de": "mapa",
+        "a": "gcob"
+      },
+      {
+        "de": "gcob",
+        "a": "guia",
+        "etiqueta": "sí"
+      },
+      {
+        "de": "gcob",
+        "a": "mapa",
+        "etiqueta": "no · ajusta ruta"
+      },
+      {
+        "de": "guia",
+        "a": "notas"
+      },
+      {
+        "de": "notas",
+        "a": "ejecuta"
+      },
+      {
+        "de": "ejecuta",
+        "a": "teardown"
+      },
+      {
+        "de": "teardown",
+        "a": "check"
+      },
+      {
+        "de": "check",
+        "a": "refoco"
+      },
+      {
+        "de": "refoco",
+        "a": "parada"
+      },
+      {
+        "de": "parada",
+        "a": "fin",
+        "etiqueta": "sí · agenda examen"
+      },
+      {
+        "de": "parada",
+        "a": "guia",
+        "etiqueta": "no · siguiente guía"
+      }
+    ],
+    "anotaciones": [
+      {
+        "paso": "gcob",
+        "texto": "Ninguna guía existe antes de este gate: el harness presenta la ruta, se detiene y espera tu aprobación."
+      },
+      {
+        "paso": "ejecuta",
+        "texto": "El harness nunca toca tu suscripción: propone el comando y lo corres tú, porque ejecutar es el aprendizaje."
+      },
+      {
+        "paso": "callouts",
+        "texto": "Cada fuente se hashea; si cambia, el reporte de drift nombra las guías que la citan y tú decides regenerar."
+      },
+      {
+        "paso": "refoco",
+        "texto": "El diagnóstico queda en memoria/patrones-acumulados.md y cada checkpoint en checkpoints/resultados.csv."
+      }
+    ]
+  },
+  "procedencia_proceso": "app",
+  "limites": [
+    "No ejecuta nada en Azure: propone los comandos y los corres tú, porque ejecutar es el aprendizaje.",
+    "No es un simulador de examen: cinco a diez preguntas por guía, sin banco de simulacros ni flashcards.",
+    "No renderiza nada en pantalla: entrega archivos HTML que abres en el navegador.",
+    "El ROI no afirma salto salarial: monetiza la certificación en horas facturables a tu tarifa, y las horas del método siguen sin validar en uso real."
+  ],
+  "nunca": [
+    "Crea, modifica ni borra recursos de tu suscripción Azure.",
+    "Genera una guía antes de que apruebes el mapa de cobertura.",
+    "Inventa contenido de examen: sin fuente oficial disponible, marca «a confirmar».",
+    "Edita a mano el HTML generado: corrige el markdown y regenera.",
+    "Cambia la ruta, los pesos de dominio ni el umbral de aprobación sin tu visto bueno."
+  ],
+  "hitos": [
+    {
+      "valor": "WI-08",
+      "etiqueta": "ciclo"
+    },
+    {
+      "valor": "8",
+      "etiqueta": "work-items entregados (de 9)"
+    },
+    {
+      "valor": "2026-07-02",
+      "etiqueta": "generado"
+    },
+    {
+      "valor": "v2.1.0",
+      "etiqueta": "version"
+    },
+    {
+      "valor": "8",
+      "etiqueta": "decisiones registradas"
+    }
+  ]
+}

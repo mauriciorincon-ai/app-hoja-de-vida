@@ -146,6 +146,78 @@ describe("armarFichaTecnica", () => {
 });
 
 /**
+ * LA PLANTILLA (v1.2.0, O3 del S7) — el esqueleto que cualquier casa
+ * productora rellena para entregar una ficha. Se DERIVA del JSON Schema, que a
+ * su vez se deriva del Zod: si mañana el contrato gana un campo, la plantilla
+ * lo gana sola. Escrita a mano se desviaría en el primer cambio — y una
+ * plantilla desviada enseña a producir fichas inválidas.
+ *
+ * No pretende validar: sus valores son MARCADORES que llevan su propia regla
+ * («<texto · 1–240 caracteres>»), que es justo lo que un humano necesita ver.
+ */
+type Esquema = {
+  type?: string;
+  enum?: unknown[];
+  anyOf?: Esquema[];
+  pattern?: string;
+  minLength?: number;
+  maxLength?: number;
+  minimum?: number;
+  minItems?: number;
+  maxItems?: number;
+  items?: Esquema;
+  properties?: Record<string, Esquema>;
+  required?: string[];
+};
+
+const PATRONES: Record<string, string> = {
+  "^\\d{4}-\\d{2}-\\d{2}$": "AAAA-MM-DD",
+  "^1\\.\\d+\\.\\d+$": "1.2.0",
+  "^[a-z0-9-]+$": "<kebab-case",
+};
+
+function marcador(e: Esquema): unknown {
+  if (e.anyOf) {
+    // `x | null`: se muestra la forma con valor y se avisa que null vale.
+    const sinNull = e.anyOf.find((a) => a.type !== "null")!;
+    const v = marcador(sinNull);
+    if (typeof v !== "string") return v;
+    // El marcador con forma «<…>» lleva la nota dentro; uno fijo («AAAA-MM-DD»)
+    // la lleva al lado, porque partirlo lo dejaría ilegible.
+    return v.endsWith(">") ? `${v.slice(0, -1)} · o null>` : `${v} · o null`;
+  }
+  if (e.enum) return `<uno de: ${e.enum.join(" | ")}>`;
+  if (e.type === "integer" || e.type === "number")
+    return e.minimum === 0 ? 0 : 1;
+  if (e.type === "array") {
+    const cuantos = Math.max(e.minItems ?? 1, 1);
+    return Array.from({ length: cuantos }, () => marcador(e.items!));
+  }
+  if (e.type === "object") {
+    const obj: Record<string, unknown> = {};
+    for (const [k, v] of Object.entries(e.properties ?? {}))
+      obj[k] = marcador(v);
+    return obj;
+  }
+  // string
+  const fijo = e.pattern && PATRONES[e.pattern];
+  if (fijo)
+    return fijo.startsWith("<") ? `${fijo} · máx ${e.maxLength}>` : fijo;
+  const min = e.minLength ?? 0;
+  return `<texto · ${min || 1}–${e.maxLength} caracteres>`;
+}
+
+function plantillaDesde(raiz: Esquema): Record<string, unknown> {
+  const opcionales = Object.keys(raiz.properties ?? {}).filter(
+    (k) => !(raiz.required ?? []).includes(k),
+  );
+  return {
+    _plantilla: `Contrato «ficha técnica» v1.2.0. Reemplaza cada <marcador> y BORRA esta clave. Opcionales: ${opcionales.join(", ")} (el proceso y su procedencia van juntos o no van). Las cifras llevan SIEMPRE su fuente, y no se escribe ni un enlace ni un DOI.`,
+    ...(marcador(raiz) as Record<string, unknown>),
+  };
+}
+
+/**
  * Lo publicado en docs/contrato-ficha-tecnica/ se GENERA de aquí — una sola
  * fuente de verdad. Con `GENERAR_CONTRATO=1` (script `pnpm contrato:ficha`)
  * este test escribe los archivos; sin la variable, exige que coincidan.
@@ -157,6 +229,11 @@ describe("lo publicado en docs/contrato-ficha-tecnica/ es este contrato", () => 
       unrepresentable: "any",
     }),
     "ejemplo.habla.json": getFichaTecnica("habla")!,
+    "plantilla.ficha-tecnica.json": plantillaDesde(
+      z.toJSONSchema(fichaTecnicaSchema, {
+        unrepresentable: "any",
+      }) as Esquema,
+    ),
   };
   for (const [archivo, contenido] of Object.entries(generado)) {
     it(`${archivo} coincide con el Zod de la app`, () => {
@@ -190,7 +267,7 @@ describe("el proceso es opcional (contrato v1.1.0)", () => {
   it("un complemento sin proceso valida y arma una ficha sin «Cómo funciona»", () => {
     const c = complementoSchema.parse(hablaSinProceso());
     const ft = armarFichaTecnica(getFicha("habla")!, c);
-    expect(ft.schema_version).toBe("1.1.0");
+    expect(ft.schema_version).toBe("1.2.0");
     expect(ft.proceso).toBeUndefined();
     expect(ft.procedencia_proceso).toBeUndefined();
     expect(fichaTecnicaSchema.safeParse(ft).success).toBe(true);

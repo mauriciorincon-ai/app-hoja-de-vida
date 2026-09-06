@@ -378,3 +378,129 @@ documenta **tres piezas** de la ficha —titular de valor, cifra con procedencia
 BPMN— y **no** la tira de chips de cabecera; como espejo 1:1 de lo que documenta, no le
 corresponde delta por este cambio. Se declara para que la ausencia sea una decisión y no un
 olvido.
+
+---
+
+## Fase 1 — reparto, escritura y validación de las 20 fichas
+
+### El reparto, leído de `pieza.frente` (no de mi criterio)
+
+**13 agentes · 7 investigaciones.** Coincide con el reparto declarado en el plan aprobado.
+Destino: `content/<pieza.frente>/<pieza.slug>.ficha-tecnica.json`.
+
+### La codificación: restaurar no es editar — y mi primer intento estuvo mal
+
+Las 20 llegaron con el texto **mal decodificado**: UTF-8 leído como latin-1 (`evaluación` →
+`evaluaciÃ³n`). Los **bytes estaban intactos**, así que la vuelta
+`.encode("latin-1").decode("utf-8")` los restaura **exactamente**: no es interpretar, es deshacer.
+
+**Mi primer intento se equivocó y vale registrarlo.** Detecté el mojibake buscando caracteres
+sospechosos (`Ã`, `Â`, `â€`) y reparé solo las cadenas que los tuvieran: 908 campos. Al medir los
+campos al borde del límite apareció `«La tripleta conductorâbusâruta»` — una raya larga (`–`,
+`E2 80 93`) cuyo mojibake en latin-1 es `â` + dos caracteres de control invisibles, que **ninguno
+de mis patrones contenía**. La heurística de caracteres era el error: el documento entero viene
+mal decodificado, así que la regla correcta es **intentar la reparación en toda cadena** y
+quedarse con ella solo si tiene éxito (una cadena ya correcta falla al codificar a latin-1 y se
+deja intacta). Rehecho así: **915 campos** restaurados, 7 más que con la heurística.
+
+> **Verificación dura:** cero caracteres de control C1 (`0x80`–`0x9F`) en los 20 archivos. Si
+> quedara uno, la reparación estaría incompleta. `«La tripleta conductor–bus–ruta»` ✅
+
+### Las 20, validadas ANTES de escribirlas
+
+Validadas contra `fichaTecnicaSchema` en un directorio de trabajo, fuera del repo: **las 20 pasan
+el contrato v1.1.0 sin tocar un solo campo.** Ninguna hubo que reportar, ninguna hubo que esperar.
+**Cero enlaces, cero DOI, cero correos, cero nombres de personas.** Solo entonces se escribieron
+en `content/`.
+
+**193 campos quedan a 10 caracteres o menos de su límite** — ninguno lo excede. Los más apretados,
+al carácter: `promesa.intro` de `atraccion-en-frio` **400/400**, `stack[].papel` de
+`estudio-cine` y de `taller-de-animacion` **160/160**, `titular` de `constructor-tableros-powerbi`
+**240/240**, `cifras[].etiqueta` de `espectro-agencia` y `fatiga-laboral` **60/60**,
+`promesa.tagline` de `reemplazo-erp` **80/80**. Se anota porque una casa productora que reescriba
+uno de esos textos «un poquito» rompe la publicación: el margen es cero.
+
+| frente          | pieza                          | estado  | proceso | sha256 del archivo | huella de contenido |
+| --------------- | ------------------------------ | ------- | ------- | ------------------ | ------------------- |
+| agentes         | `ai103-foundry`                | inicial | sí      | `32369e99f186015f` | `82fa4dc39fd59d13`  |
+| agentes         | `asistente-posgrado`           | inicial | sí      | `8ed8193f73fcdc2f` | `48a22055ad839fd8`  |
+| agentes         | `atraccion-en-frio`            | inicial | sí      | `8caa5617419d9617` | `03eb23baffd5ad38`  |
+| agentes         | `biblioteca-tendencias-genai`  | inicial | sí      | `dc6cb22bd38238b1` | `7f66fa9803e971b7`  |
+| agentes         | `constructor-tableros-powerbi` | sellado | sí      | `7e2548b009ad4649` | `743952f212bdd5b5`  |
+| agentes         | `estudio-cine`                 | sellado | sí      | `3b0d098f0259ce2a` | `ab3f5689359449d0`  |
+| agentes         | `experto-fiscal`               | inicial | sí      | `805b751016dbdaff` | `07044b787d6d8e59`  |
+| agentes         | `experto-iso42001`             | inicial | sí      | `70e3e003373a45a7` | `57146874da354408`  |
+| agentes         | `harness-design-science`       | inicial | sí      | `ac700523c086ec7b` | `42f5f7f191e6514b`  |
+| agentes         | `harness-paper-computacional`  | sellado | sí      | `8e4ba906eaea609b` | `02265d97c1008ce0`  |
+| agentes         | `hiring-copilot`               | inicial | sí      | `23afec9ffbabaff1` | `2e4b47020aba0149`  |
+| agentes         | `hr-develop-ai-apps`           | sellado | sí      | `a2274ffedd09239b` | `a0bb4cc706438876`  |
+| agentes         | `taller-de-animacion`          | sellado | sí      | `e25880f45eada4f6` | `778924fce50b66d4`  |
+| investigaciones | `arkhe`                        | inicial | —       | `1cbac2bc40e04431` | `153070ca9b3c1af1`  |
+| investigaciones | `asignacion-con-fallas`        | inicial | —       | `8bd68b8570ecedd3` | `d074fb8d1256e73a`  |
+| investigaciones | `convoyes-de-buses`            | inicial | —       | `4f0a7a4ba79bbc4a` | `4f1b4d4c460247af`  |
+| investigaciones | `espectro-agencia`             | inicial | —       | `f238fa48d849aa1d` | `450c2a470e6ca9d0`  |
+| investigaciones | `fatiga-laboral`               | inicial | —       | `ee59ebffd46df828` | `4819d701908d9a5d`  |
+| investigaciones | `forja`                        | inicial | —       | `a9f39e98a25a241b` | `ad5b245b0998231c`  |
+| investigaciones | `reemplazo-erp`                | inicial | —       | `574f4d32e0f03323` | `92ddc54702749cf9`  |
+
+La **huella de contenido** es `sha256` del JSON canónico (claves ordenadas, sin espacios): no
+depende del formato, así que puedes reproducirla desde tu archivo de origen aunque tenga otra
+indentación —
+
+```
+python3 -c "import json,hashlib,sys;print(hashlib.sha256(json.dumps(json.load(open(sys.argv[1],encoding='utf-8')),ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()).hexdigest()[:16])" <tu-archivo>.json
+```
+
+Si tu origen trae el mojibake, la huella **no** coincidirá — es la prueba de que lo único que
+cambió aquí fue la codificación.
+
+### El gate del canal de contenido — `tests/unit/content-fichas.test.ts` (62 casos)
+
+Cuatro invariantes que ninguna revisión a ojo sostiene con 20 archivos, y menos con 200:
+el **contrato**; **archivo = slug y carpeta = frente** (la ruta pública sale del contenido, no del
+nombre); **slugs únicos GLOBALES**, incluidos los exports de `content/vitrina/` — que es el pago
+de los hallazgos **M1 y M2** de la auditoría; y **cero enlaces y cero DOI**, que es donde se cuela
+una referencia bibliográfica.
+
+#### Regla 14 + regla 15 — cinco mutaciones, cinco rojos, en este mismo commit
+
+| #   | Mutación deliberada                                        | Lo que dijo el rojo                                                                                                       |
+| --- | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| 1   | `forja.ficha-tecnica.json` → `la-forja.ficha-tecnica.json` | `el archivo debería llamarse «forja.ficha-tecnica.json» — la ruta pública sale del contenido, no del nombre`              |
+| 2   | `arkhe` movida a `content/agentes/`                        | `la ficha declara «pieza.frente: investigaciones» pero está en content/agentes/`                                          |
+| 3   | Fixture con `slug: "habla"`, el de una app                 | `slug repetido «habla»: … y content/vitrina/habla.brochure-export.json (una app). Chocarían en la vitrina.`               |
+| 4   | Un DOI en una cifra de `convoyes-de-buses`                 | `trae «10.1016/»: la producción se MUESTRA, jamás se entrega (regla 16)`                                                  |
+| 5   | `promesa.para_quien` de `hiring-copilot` pasado de 400     | `promesa.para_quien: Too big: expected string to have <=400 characters` + `⚠ Las fichas de otras casas NO se editan aquí` |
+
+Todo restaurado y **verificado byte a byte** contra un respaldo previo (`diff -r`, idéntico).
+
+### Contrato v1.2.0 — ADITIVO
+
+- **`procedencias` gana `"planeadora"`** — la casa que administra y cura las fichas de las apps
+  puede firmar el proceso que declara (pedido explícito de `vitrina/README.md` de la planeadora).
+  El mensaje de error del esquema ya no lleva la lista a mano: la deriva del propio enum.
+- **`docs/contrato-ficha-tecnica/plantilla.ficha-tecnica.json`** (O3): el esqueleto que rellena
+  cualquier casa productora, con cada campo y su límite dentro del marcador
+  (`"<texto · 1–240 caracteres>"`, `"<uno de: inicial | sellado>"`). **Se DERIVA del JSON Schema,
+  que se deriva del Zod** — escrita a mano se habría desviado en el primer cambio, y una plantilla
+  desviada enseña a producir fichas inválidas. Los arreglos emiten tantos elementos como exige el
+  mínimo (3 cifras, 3 hitos, 2 límites), así que se rellena directo.
+- `armar.ts` pasa a escribir `schema_version: "1.2.0"`: esta casa produce contra la versión
+  vigente. **Las 20 fichas entregadas se quedan en `1.1.0` y siguen siendo válidas** — v1.2.0 es
+  aditivo y no se toca una ficha ajena por una etiqueta de versión.
+- `CLAVE-VISUAL.md` y el `README` del contrato a v1.2.0; schema y ejemplo regenerados con
+  `pnpm contrato:ficha`.
+
+**Demo 6 en rojo (mismo commit):** quitada la clave `proceso` de la plantilla publicada, el test
+`plantilla.ficha-tecnica.json coincide con el Zod de la app` falló con el diff exacto — y de paso
+enseñó que el enum nuevo ya viajó: `"procedencia_proceso": "<uno de: app | cv-viva | planeadora>"`.
+
+### Estado al cerrar la fase
+
+`pnpm typecheck` limpio · `pnpm lint` limpio · **309/309 unitarias** (21 archivos; eran 246 en 20)
+· barrido de cero enlaces vacío sobre el árbol staged · `content/` sin una URL ni un DOI.
+
+### Deuda de la auditoría pagada aquí
+
+**M1** (slugs duplicados sin vigilar) y **M2** (nombre de archivo ≠ slug): pagados por el test de
+contenido, que además extiende la invariante a `content/vitrina/` — donde nació el hallazgo.

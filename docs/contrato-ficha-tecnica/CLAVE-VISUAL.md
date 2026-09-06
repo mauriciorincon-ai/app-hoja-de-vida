@@ -1,4 +1,10 @@
-# Clave visual y contrato de la «Ficha técnica» — v1.1.0
+# Clave visual y contrato de la «Ficha técnica» — v1.2.0
+
+> **v1.2.0 (2026-09-06):** ADITIVO, nada de lo anterior cambia. Dos cosas nuevas:
+> `procedencia_proceso` admite **`planeadora`** (la casa que administra y cura las fichas de las
+> apps del pipeline), y junto a este documento se publica **`plantilla.ficha-tecnica.json`**, el
+> esqueleto con todos los campos y sus límites, **generado del mismo Zod** que valida — así que
+> no puede desviarse del contrato. Toda ficha v1.0.0 o v1.1.0 válida lo sigue siendo.
 
 > **v1.1.0 (2026-09-06):** el proceso BPMN (§3) pasa a ser **opcional**. Todo lo que valía en
 > v1.0.0 sigue valiendo; una ficha sin `proceso` simplemente no tiene la sección «Cómo funciona».
@@ -8,7 +14,8 @@
 > CV Viva lo pinta con esta plantilla. No entregas HTML, imágenes ni colores.
 >
 > Referencia visual: `referencia.html` (ábrelo en el navegador) o `referencia.png`.
-> Ejemplo completo y real: `ejemplo.habla.json`.
+> Ejemplo completo y real: `ejemplo.habla.json`. Esqueleto para rellenar:
+> `plantilla.ficha-tecnica.json`.
 
 ## 1. Qué es una ficha técnica
 
@@ -95,7 +102,8 @@ Reglas (el esquema las exige):
 - Si el proceso no cabe en una fila, el motor lo **parte en filas** con eventos de enlace Ⓐ…Ⓐ.
   No lo encoge. En móvil se desliza en horizontal. Un proceso de 8–12 pasos es lo normal; más de
   16 es señal de que estás describiendo el detalle, no la ficha.
-- `procedencia_proceso`: `app` si lo declara la propia pieza; `cv-viva` si lo derivó CV Viva.
+- `procedencia_proceso`: `app` si lo declara la propia pieza; `cv-viva` si lo derivó CV Viva;
+  `planeadora` si lo curó la casa que administra las fichas de las apps (v1.2.0).
   Va **si y solo si** hay `proceso`: el esquema rechaza un proceso sin procedencia y una
   procedencia sin proceso.
   Se muestra al pie del diagrama. **Sin dueño declarado, el proceso es una cifra sin fuente.**
@@ -125,7 +133,7 @@ omítelo — una ficha sin «Cómo funciona» es mejor que un diagrama inventado
 ## 6. Cómo se entrega
 
 Un archivo `<slug>.ficha-tecnica.json` que valide contra `ficha-tecnica.schema.json`
-(`schema_version: "1.1.0"`). CV Viva lo deja caer en `content/<frente>/` y la ficha existe sola:
+(`schema_version: "1.2.0"`; las versiones 1.x anteriores siguen siendo válidas). CV Viva lo deja caer en `content/<frente>/` y la ficha existe sola:
 ruta, sitemap, pruebas de accesibilidad. Si no valida, **la publicación falla** y el error dice el
 campo — nunca se publica una ficha que miente sobre sí misma. El archivo **no se edita en CV
 Viva**: se corrige en origen y se vuelve a entregar.
