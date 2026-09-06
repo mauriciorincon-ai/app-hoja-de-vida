@@ -504,3 +504,79 @@ enseñó que el enum nuevo ya viajó: `"procedencia_proceso": "<uno de: app | cv
 
 **M1** (slugs duplicados sin vigilar) y **M2** (nombre de archivo ≠ slug): pagados por el test de
 contenido, que además extiende la invariante a `content/vitrina/` — donde nació el hallazgo.
+
+---
+
+## Fase 2 — el motor: loader genérico, frente abierto por piezas, cuenta medida
+
+### `src/lib/vitrina/piezas.ts` — el hermano del loader de exports
+
+Es el gemelo de `loader.ts`, y su diferencia resume el sprint: aquél ingiere los
+`brochure-export.json` de las apps y **esta casa arma** la ficha con su curación; éste recibe la
+ficha **ya completa**, producida por quien construyó la pieza. Un solo contrato, un solo
+renderizador; nada específico por frente vive en el código.
+
+- `getPiezas(frente)` · `getPieza(frente, slug)` · `frentesConPiezas()`.
+- **El núcleo va separado de la IO** (regla 3): `parseFicha(raw, ruta)` es puro y no toca disco;
+  `leerFicha` solo lee el archivo y lo llama. Por eso el fail-safe se puede probar de verdad, sin
+  ensuciar `content/` durante los tests.
+- **Orden explícito:** selladas primero, luego alfabético por nombre en `es-CO`. Nunca el orden
+  del sistema de archivos, que cambia entre máquinas sin que nadie toque una línea.
+
+### La regla del S6 se levanta POR FRENTE, y sale del esquema
+
+Hasta ayer, «abierta» estaba reservada a `apps` con la condición escrita a mano en el
+`superRefine` de `vitrinaSchema`. Ahora el criterio es **medido**: abre el frente que TIENE
+piezas. Y por eso la regla **salió del esquema**: un esquema valida FORMA, y la forma no sabe qué
+hay en disco. Vive en `parseVitrina(data, source, frentesConPiezas)`, con la lista como
+**parámetro obligatorio y sin valor por defecto** — un default silencioso sería justo la puerta
+que esta regla vino a cerrar. `getVitrina()` la calcula: `apps` por sus exports, los demás por sus
+fichas. La lista se mide, nunca se escribe.
+
+### La cuenta del portal, medida por frente
+
+`categorias.ts` deja de responder «apps o cero»: cada frente cuenta lo que hay en `content/`.
+Un frente del YAML que no exista en el contrato (`pieza.frente`) cuenta cero, y no por descuido —
+ninguna ficha podría declararlo, así que no puede tener piezas. **La cuenta no depende del estado
+del YAML:** hoy `agentes` está en preparación y ya tiene 13 piezas medidas; el portal las enseña
+el día que el frente abra, no antes.
+
+### Regla 14 + regla 15 — los cuatro gates, en rojo, en este mismo commit
+
+| Gate                             | Mutación deliberada                           | Lo que dijo el rojo                                                                                                           |
+| -------------------------------- | --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| **Frente abierto exige piezas**  | `tableros: abierta` en `data/vitrina.yaml`    | `tableros: está marcada «abierta» y no tiene ni una pieza publicada… Frentes con piezas hoy: apps, agentes, investigaciones.` |
+| **Cuenta medida**                | Sacar `experto-fiscal` de `content/agentes/`  | `expected 12 to be 13` en las dos pruebas que la miden                                                                        |
+| **Orden determinista**           | Quitar del `sort` la regla «selladas primero» | `× el orden es explícito: selladas primero, luego alfabético es-CO`                                                           |
+| **Loader fail-safe EN EL BUILD** | `cifras[1].fuente: "intuicion"` en `forja`    | ver abajo                                                                                                                     |
+
+El cuarto es el criterio de aceptación nº 2 de la orden, así que se demostró contra el **build de
+producción**, no contra un test:
+
+```
+✓ Compiled successfully in 1381ms
+Error: Ficha inválida en content/investigaciones/forja.ficha-tecnica.json (contrato de la ficha técnica):
+  - cifras.1.fuente: Invalid option: expected one of "medido"|"calculada"|"declarado"|"estimacion"
+  ⚠ Las fichas de otras casas NO se editan aquí: se corrige en origen y se vuelve a entregar.
+> Build error occurred
+Error: Failed to collect page data for /[locale]/vitrina/[categoria]
+```
+
+El diagnóstico nombra **archivo, campo y vocabulario admitido**, y termina diciendo qué hacer: no
+se arregla aquí. Todo restaurado y verificado con `git diff` vacío.
+
+### Deuda de la auditoría pagada aquí
+
+- **M3 · `schema_version` sin puerta de mayor.** `parseFicha` la revisa **antes** del esquema: una
+  ficha `2.0.0` se rechaza con _«esta vitrina renderiza el mayor 1.x.x — un mayor distinto trae
+  campos con otro significado»_, en vez del `no coincide con el patrón` del regex, que no le dice
+  nada a nadie. Reutiliza `versionCompatible` del loader de exports: una sola regla de mayor para
+  las dos ingestas.
+- **M4 · ENOENT crudo.** Un frente sin carpeta devuelve `[]`. No es un repo roto: es un frente que
+  empieza. Lo que sí rompe es declararlo abierto, y eso lo vigila `parseVitrina`.
+
+### Estado al cerrar la fase
+
+Las **20 piezas cargan** y el motor las ordena. `data/vitrina.yaml` sigue **sin abrir ningún
+frente nuevo**: eso es decisión de las fases 3 y 4, después de que tú mires. `pnpm typecheck` y
+`pnpm lint` limpios · **324/324 unitarias** en 22 archivos (eran 309 en 21) · `pnpm build` verde.

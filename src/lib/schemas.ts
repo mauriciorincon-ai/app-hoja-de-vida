@@ -210,10 +210,15 @@ export type RoadmapFeature = z.infer<typeof roadmapFeature>;
 export type Brochure = z.infer<typeof brochure>;
 
 // Los frentes de la vitrina (post-S5, ADR-015): apps · agentes · investigaciones
-// · tableros. `id` es la ruta /vitrina/<id>. Un frente «abierta» necesita una
-// fuente de piezas que lo renderice — hoy solo la tiene «apps»
-// (content/vitrina/): marcar otro como abierto sin esa fuente publicaría una
-// página que promete piezas y no enseña ninguna, así que el build FALLA.
+// · tableros. `id` es la ruta /vitrina/<id>. Un frente «abierta» necesita
+// PIEZAS REALES que enseñar: marcarlo abierto sin ellas publicaría una página
+// que promete y no cumple, así que el build FALLA.
+//
+// S7: esa regla deja de decir «solo apps» y pasa a MEDIRSE por frente contra
+// `content/<frente>/`. Por eso no vive en el esquema —que valida FORMA, y la
+// forma no sabe qué hay en disco— sino en `parseVitrina`, que recibe la lista
+// de frentes con piezas. Un frente nuevo abre solo, el día que le llegue su
+// primera ficha; y ninguno puede abrir a mano.
 export const categoriaEstados = ["abierta", "en-preparacion"] as const;
 
 const categoriaVitrina = z
@@ -249,14 +254,6 @@ export const vitrinaSchema = z
             message:
               "falta el frente «apps»: sus piezas salen de content/vitrina/ y es el que ancla el portal",
           });
-        for (const [i, c] of cs.entries()) {
-          if (c.estado === "abierta" && c.id !== "apps")
-            ctx.addIssue({
-              code: "custom",
-              path: [i, "estado"],
-              message: `«${c.id}» no puede estar abierta: ningún renderizador tiene piezas para ese frente todavía (solo «apps» las toma de content/vitrina/)`,
-            });
-        }
       }),
   })
   .strict();
@@ -299,6 +296,33 @@ export function parseApps(data: unknown, source: string): Apps {
   return parseOrThrow(appsSchema, data, source);
 }
 
-export function parseVitrina(data: unknown, source: string): Vitrina {
-  return parseOrThrow(vitrinaSchema, data, source);
+/**
+ * `frentesConPiezas` es lo que hay MEDIDO en el repo (ver
+ * `lib/vitrina/piezas.ts` y `categorias.ts`). Es un parámetro y no un valor por
+ * defecto a propósito: quien llame tiene que haber ido a mirar. Un default
+ * silencioso sería justo la puerta que esta regla vino a cerrar.
+ */
+export function parseVitrina(
+  data: unknown,
+  source: string,
+  frentesConPiezas: readonly string[],
+): Vitrina {
+  const vitrina = parseOrThrow(vitrinaSchema, data, source);
+  const huerfanos = vitrina.categorias.filter(
+    (c) => c.estado === "abierta" && !frentesConPiezas.includes(c.id),
+  );
+  if (huerfanos.length > 0) {
+    throw new Error(
+      `Contenido inválido en ${source}:\n` +
+        huerfanos
+          .map(
+            (c) =>
+              `  - ${c.id}: está marcada «abierta» y no tiene ni una pieza publicada. ` +
+              `Un frente abierto sin piezas promete lo que no enseña — se abre el día que llegue su primera ficha, no antes.`,
+          )
+          .join("\n") +
+        `\n  Frentes con piezas hoy: ${frentesConPiezas.length ? frentesConPiezas.join(", ") : "(ninguno)"}.`,
+    );
+  }
+  return vitrina;
 }
