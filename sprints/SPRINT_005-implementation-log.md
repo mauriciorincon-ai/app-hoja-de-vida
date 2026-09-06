@@ -94,19 +94,19 @@ Grep final: **limpio** ✓ · `package.json` sin `homepage` ✓
 
 ### Los 6 exports: llegada y procedencia
 
-El paso de copia estaba asignado a `[TÚ]` porque *la sesión de otra app* no puede leer el repo
+El paso de copia estaba asignado a `[TÚ]` porque _la sesión de otra app_ no puede leer el repo
 privado de dash — pero desde esta máquina los 6 `docs/brochure-export.json` sí son alcanzables, así
 que corrí el comando **textual de la orden** y desbloqueé la fase. Nada se editó: son la voz de cada
 app (regla dura 4).
 
-| slug | schema | actualizado | estado | sellado_en | funcs | grupos | métricas | descartadas |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| habla | 1.0.0 | 2026-08-21 | **sellado** | 2026-08-08 | 24 | 8 | 14 | 0 |
-| inmobiliaria | 1.0.0 | 2026-08-22 | inicial | null | 13 | 4 | 9 | 0 |
-| nutri-kids | 1.0.0 | 2026-08-22 | inicial | null | 19 | 5 | 10 | 0 |
-| anonimizador | 1.0.0 | 2026-08-21 | inicial | null | 14 | 5 | 12 | 0 |
-| ds | 1.0.0 | 2026-08-20 | inicial | null | 33 | 5 | 11 | 0 |
-| dash-agent-ai | 1.0.0 | 2026-08-19 | inicial | null | 12 | 5 | 9 | 1 |
+| slug          | schema | actualizado | estado      | sellado_en | funcs | grupos | métricas | descartadas |
+| ------------- | ------ | ----------- | ----------- | ---------- | ----- | ------ | -------- | ----------- |
+| habla         | 1.0.0  | 2026-08-21  | **sellado** | 2026-08-08 | 24    | 8      | 14       | 0           |
+| inmobiliaria  | 1.0.0  | 2026-08-22  | inicial     | null       | 13    | 4      | 9        | 0           |
+| nutri-kids    | 1.0.0  | 2026-08-22  | inicial     | null       | 19    | 5      | 10       | 0           |
+| anonimizador  | 1.0.0  | 2026-08-21  | inicial     | null       | 14    | 5      | 12       | 0           |
+| ds            | 1.0.0  | 2026-08-20  | inicial     | null       | 33    | 5      | 11       | 0           |
+| dash-agent-ai | 1.0.0  | 2026-08-19  | inicial     | null       | 12    | 5      | 9        | 1           |
 
 **Totales de la vitrina:** 115 funcionalidades · 32 grupos · 65 métricas · 1 descartada.
 **Verificación previa a codificar (los 6 pasan):** grupos suman = `total` en los 6 · `produccion` y
@@ -139,11 +139,11 @@ Las `fuente` en uso hoy son 3 de las 4 del contrato (`medido` · `calculada` · 
 
 Las 3 mutaciones de la orden, aplicadas a exports **reales** y revertidas después:
 
-| # | Mutación | Archivo real | Gate y resultado |
-| --- | --- | --- | --- |
-| 1 | `funcionalidades.total` 12 → 13 | `dash-agent-ai` | **`pnpm test`** (el comando del CI) → **FAIL**, `total declarado 13 ≠ 12 features en los grupos` |
-| 2 | `delete metricas[0].fuente` | `ds` | **FAIL**, `metricas.0.fuente: Invalid option: expected one of "medido"\|"calculada"\|"declarado"\|"estimacion"` |
-| 3 | `enlaces.produccion = "https://…"` | `habla` | **FAIL**, `enlaces.produccion: Invalid input: expected null, received string` |
+| #   | Mutación                           | Archivo real    | Gate y resultado                                                                                                |
+| --- | ---------------------------------- | --------------- | --------------------------------------------------------------------------------------------------------------- |
+| 1   | `funcionalidades.total` 12 → 13    | `dash-agent-ai` | **`pnpm test`** (el comando del CI) → **FAIL**, `total declarado 13 ≠ 12 features en los grupos`                |
+| 2   | `delete metricas[0].fuente`        | `ds`            | **FAIL**, `metricas.0.fuente: Invalid option: expected one of "medido"\|"calculada"\|"declarado"\|"estimacion"` |
+| 3   | `enlaces.produccion = "https://…"` | `habla`         | **FAIL**, `enlaces.produccion: Invalid input: expected null, received string`                                   |
 
 Cada rojo **nombró el archivo culpable y el campo**. Restaurados los 6 desde respaldo: **38/38 verde**
 y `git diff` de `content/vitrina/` vacío — los exports quedaron byte a byte intactos.
@@ -171,11 +171,11 @@ app sabe cuál es cuál. El `detalle` lleva la explicación.
 
 ### Pasada de capturas del builder (contrapeso del ⭐ diferido) — 3 defectos que la CI no vio
 
-| # | Defecto | Cómo se vio | Fix |
-| --- | --- | --- | --- |
-| 1 | **La ficha era INVISIBLE.** `Reveal` usa `viewport.amount: 0.25`; una ficha mide ~4000px y el 25% son 1000px — **más que el viewport**, así que el umbral no se alcanza JAMÁS y el bloque se queda en `opacity: 0` para siempre. La CI en verde: el contenido sí está en el HTML | Captura de escritorio: media página en blanco | Es la trampa documentada en el kit v1.23.0. `Reveal` gana prop `amount` (default 0.25 — **cero cambio** para las pantallas existentes) y la vitrina pasa `"some"`: revela en cuanto asoma un pixel |
-| 2 | **Orden de encabezados roto** (`h1` → `h3`, saltando `h2`) | Lectura de la estructura + axe | Nombre de app `h3`→`h2`; grupos y descartadas `h4`→`h3` |
-| 3 | **La vitrina no era alcanzable desde el nav** | Captura del header | Añadida como **ruta** (no ancla) al nav de escritorio y al panel móvil |
+| #   | Defecto                                                                                                                                                                                                                                                                          | Cómo se vio                                   | Fix                                                                                                                                                                                                |
+| --- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | **La ficha era INVISIBLE.** `Reveal` usa `viewport.amount: 0.25`; una ficha mide ~4000px y el 25% son 1000px — **más que el viewport**, así que el umbral no se alcanza JAMÁS y el bloque se queda en `opacity: 0` para siempre. La CI en verde: el contenido sí está en el HTML | Captura de escritorio: media página en blanco | Es la trampa documentada en el kit v1.23.0. `Reveal` gana prop `amount` (default 0.25 — **cero cambio** para las pantallas existentes) y la vitrina pasa `"some"`: revela en cuanto asoma un pixel |
+| 2   | **Orden de encabezados roto** (`h1` → `h3`, saltando `h2`)                                                                                                                                                                                                                       | Lectura de la estructura + axe                | Nombre de app `h3`→`h2`; grupos y descartadas `h4`→`h3`                                                                                                                                            |
+| 3   | **La vitrina no era alcanzable desde el nav**                                                                                                                                                                                                                                    | Captura del header                            | Añadida como **ruta** (no ancla) al nav de escritorio y al panel móvil                                                                                                                             |
 
 Barrido de control sobre las 5 rutas × 2 viewports buscando más bloques invisibles: los `opacity: 0`
 de la HOME son **comportamiento esperado** (`once: false` revierte la entrada al salir de pantalla),
@@ -253,9 +253,9 @@ con `lazy` y/o una ficha por ruta. Las otras 4 apps no tienen capturas (dash es 
 
 ### Rechazo nº 2 de la mirada M1 — «quitaste las tarjetas»
 
-Veredicto del usuario: la sección de las 24 funcionalidades era **puro texto**, y —lo grave— *«las
+Veredicto del usuario: la sección de las 24 funcionalidades era **puro texto**, y —lo grave— _«las
 tarjetas tienen una animación especial que hemos venido trabajando desde la planeadora … y lo
-primero que haces es quitarlas»*. Tenía razón: **apliqué el patrón al envoltorio en vez de a las
+primero que haces es quitarlas»_. Tenía razón: **apliqué el patrón al envoltorio en vez de a las
 tarjetas.** La ficha entera era UNA tarjeta desplegable gigante y los grupos de funcionalidades
 caían dentro como listas de texto.
 
@@ -295,11 +295,10 @@ las figuras) en un v1.1.0 menor y retrocompatible.
 
 1. **Los ocho iconos salían EN BLANCO.** Dos causas encadenadas: (a) la tarjeta no llevaba el
    atributo que dispara el trazado, y (b) —el de fondo— el reposo del icono era
-   `stroke-dashoffset: 1`, o sea **invisible**, y la transición se quedó colgada sin llegar nunca a
-   0. Arreglo: **el estado por defecto pasa a ser el icono DIBUJADO** y el efecto vive entero dentro
+   `stroke-dashoffset: 1`, o sea **invisible**, y la transición se quedó colgada sin llegar nunca a 0. Arreglo: **el estado por defecto pasa a ser el icono DIBUJADO** y el efecto vive entero dentro
    de una `@keyframes`; si el disparo no llega, el icono se ve igual. Es la misma lección del umbral
-   porcentual (kit v1.23.0): *lo que no se puede garantizar que se dispare no puede ser lo único que
-   hace visible el contenido.*
+   porcentual (kit v1.23.0): _lo que no se puede garantizar que se dispare no puede ser lo único que
+   hace visible el contenido._
 2. **`pathLength` no existe como propiedad CSS.** La tira lo declaraba en la hoja de estilos, donde
    se ignora en silencio: las líneas quedaban partidas en guiones de 1px. Va como **atributo del
    SVG**.
@@ -316,15 +315,15 @@ las figuras) en un v1.1.0 menor y retrocompatible.
 
 ### Nota de método: el servidor de desarrollo contamina los e2e
 
-Seis pruebas de axe fallaron por *timeout* del footer mientras `pnpm dev` corría en el 3000:
+Seis pruebas de axe fallaron por _timeout_ del footer mientras `pnpm dev` corría en el 3000:
 Playwright reusa ese servidor y bajo carga paralela no responde. Se apaga el dev, se corre la
 suite, se vuelve a levantar. (Ya estaba en la memoria del proyecto como «servidor zombi puerto
 3000»; ahora también aquí, porque la falla se disfraza de flaky.)
 
 ### Las visuales de las interfaces: SÍ se puede, y así se hace
 
-Veredicto del usuario: *«¿quién te dijo que unos iconos son imágenes? necesito visuales de las
-interfaces aquí»*. Tiene razón y la regla del banco también: **si la pieza enseña LA APP, van
+Veredicto del usuario: _«¿quién te dijo que unos iconos son imágenes? necesito visuales de las
+interfaces aquí»_. Tiene razón y la regla del banco también: **si la pieza enseña LA APP, van
 capturas de la app CORRIENDO**. Los iconos son señalética, no muestra.
 
 **Comprobado en caliente:** las seis apps hermanas están clonadas como hermanas de este repo y con
@@ -608,7 +607,7 @@ puntos de arriba son sobre qué medir, y estos son sobre cómo):
 
 - **El ancla no puede ser un envoltorio.** Tomé el elemento bajo el centro de la pantalla y subí a
   su bloque contenedor — que resultó ser el artículo de la ficha ENTERA, cuyo techo está miles de
-  píxeles por encima, o sea *por encima de la tarjeta que se recoge*. Ese techo se mueve con el
+  píxeles por encima, o sea _por encima de la tarjeta que se recoge_. Ese techo se mueve con el
   scroll aunque lo visible no se mueva: 207 px de "deriva" fantasma sobre código correcto. El
   patrón ya lo dice — el ancla se mide sobre una cabecera **visible**. Ahora se rastrea la franja
   central hasta dar con un bloque cuyo `top >= 0`.
@@ -637,18 +636,18 @@ pasen por orden, este es el caso de prueba.
 
 ### El pedido y el hallazgo
 
-El usuario reportó que el menú «está colapsando demasiadas secciones» y aportó la pista: *lo que
-tienes como apps lo absorbió lo que ahora llamamos Vitrina*.
+El usuario reportó que el menú «está colapsando demasiadas secciones» y aportó la pista: _lo que
+tienes como apps lo absorbió lo que ahora llamamos Vitrina_.
 
 El menú tenía **nueve destinos** de primer nivel. Pero medir el contenido dio un hallazgo peor que
 el apiñamiento: **dos etiquetas prometían lo mismo**. Dentro de «Apps» (4 entradas de
-`apps.yaml`) había *CV Viva* y *su chat* —o sea, **esta misma página**— más dos exploraciones sin
+`apps.yaml`) había _CV Viva_ y _su chat_ —o sea, **esta misma página**— más dos exploraciones sin
 producto. Cero apps visitables. A un centímetro, «Vitrina» sí llevaba a seis apps construidas.
 
 El **ADR-013 acertó** en que los datos no se solapan: son modelos distintos con orígenes distintos.
 Lo que nadie revisó fue **la etiqueta**. Para el visitante «Apps» y «Vitrina» son la misma promesa,
-y la que suena más real se queda con la atención. *Un ADR puede tener razón sobre los datos y
-seguir dejando la interfaz mintiendo.*
+y la que suena más real se queda con la atención. _Un ADR puede tener razón sobre los datos y
+seguir dejando la interfaz mintiendo._
 
 ### Qué se hizo
 
@@ -665,20 +664,20 @@ seguir dejando la interfaz mintiendo.*
 
 `apps.yaml` alimenta cuatro cosas, no una. Solo desapareció la sección:
 
-| Consumidor | Estado |
-| --- | --- |
-| Brochures `/apps/<id>` | vivas — puerta nueva en «De esta casa» |
-| Roadmap votable | intacto: lee `roadmap:` directamente |
+| Consumidor             | Estado                                                                                                                        |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| Brochures `/apps/<id>` | vivas — puerta nueva en «De esta casa»                                                                                        |
+| Roadmap votable        | intacto: lee `roadmap:` directamente                                                                                          |
 | Formulario de contacto | intacto: las dos **exploraciones** son sus opciones `solicitable` — siguen convirtiendo, que es lo único que hacían de verdad |
-| Índice del chat | intacto: `build-chat-index.mjs` lee el YAML |
+| Índice del chat        | intacto: `build-chat-index.mjs` lee el YAML                                                                                   |
 
 ### Trampas cazadas
 
 - **El panel salía traslúcido.** Reutilicé `anim-fade-in-up` para el desplegable y dura **0,7 s**:
   está pensada para bloques de lectura que entran al hacer scroll. En un menú deja el panel a
   medio opacar durante media pantalla — se veía el titular del hero a través de él. Ahora tiene
-  animación propia de **120 ms** (el «fast» del sistema). *Un menú se siente instantáneo o parece
-  roto.*
+  animación propia de **120 ms** (el «fast» del sistema). _Un menú se siente instantáneo o parece
+  roto._
 - **Lo que nace cerrado es invisible para axe** — la misma lección que costó los `<details>` en el
   S5, ahora en el header. El scan **abre los dos disclosures** antes de analizar; sin eso pasaba
   en verde sin haber mirado el componente nuevo.
@@ -713,8 +712,8 @@ visor de Lighthouse, que comprueba si el host termina en el dominio de preview. 
 esta app.
 
 **Pero el daño es otro y es peor:** el gate de cero enlaces pasaba a gritar en falso en cada
-ejecución. *Un gate que grita en falso deja de leerse — y ahí es exactamente donde se pierde una
-fuga de verdad.*
+ejecución. _Un gate que grita en falso deja de leerse — y ahí es exactamente donde se pierde una
+fuga de verdad._
 
 **Por qué no lo cazó el `/deploy-check` del S5:** corrí el barrido **antes** de los commits que
 metieron los artefactos. `git grep` solo mira archivos VERSIONADOS, así que en ese momento
@@ -847,3 +846,88 @@ en SSG.
   investigación?). ADR-015 no lo anticipa a propósito.
 - **Regla de la cuenta:** "ninguna cifra sin procedencia" se extendió de las métricas a la cuenta
   de piezas de un frente. Candidata a entrar en el molde del brochure/vitrina como regla general.
+
+## Post-cierre IV — dependabot: el lote nunca vuelve a arrastrar un mayor (2026-09-06, fuera de sprint)
+
+### El pedido y el hallazgo
+
+El usuario, con el PR **#14** en rojo delante: «otra vez tenemos problemas en el lote de
+dependabot… resuelve el problema de raíz, no podemos seguir arrastrando el error».
+
+Cronología del arrastre:
+
+| Cuándo (UTC)     | Qué                                                                                              |
+| ---------------- | ------------------------------------------------------------------------------------------------ |
+| 2026-08-30       | #10 nace: 38 bumps, entre ellos **eslint 9→10** y **typescript 5→7**. `pnpm peers check` rojo.   |
+| 2026-09-06 00:37 | #13 mergea el `ignore` de esos dos mayores. `@dependabot recreate` en #10 lo **cierra** sin más. |
+| 2026-09-06 00:51 | #14 nace: 39 bumps **con eslint 10 y typescript 7 otra vez**, el `ignore` ya en `main`.          |
+| 2026-09-06 02:05 | `@dependabot show eslint ignore conditions` en #14 → **`[]`**.                                   |
+
+Esa última línea es la raíz: **el job de dependabot se armó SIN las condiciones de ignore del
+archivo.** El YAML está bien (parseado con `yaml`: `updates[0].ignore` tiene los dos), está en
+la rama por defecto y el grupo cambió de hash (dependabot sí leyó una config nueva) — y aun así
+el ignore no viajó. No encontré la causa en la documentación; lo que sí encontré es que estaba
+apostando el lote entero a un mecanismo que no podía ver operando.
+
+El error de fondo era de DISEÑO, no de ese ignore: un grupo `patterns: ["*"]` sin
+`update-types` mete los **mayores** en el mismo PR que 35 parches sanos. Basta un mayor sin
+soporte (plugins de ESLint que no alcanzan la 10; typescript-eslint 8 que topa en `<6.1`) para
+que `pnpm peers check` ponga rojo el lote entero, y como el lote se rehace cada semana con el
+mismo mayor adentro, el rojo se hereda. **Las 35 bumps buenas llevaban una semana presas.**
+
+### Qué se hizo (raíz)
+
+- **`.github/dependabot.yml`:** el grupo `todo-npm` declara `update-types: ["minor", "patch"]`.
+  Eso es parte de la DEFINICIÓN del grupo, que dependabot sí aplica al armarlo — no una
+  condición aparte. Los mayores quedan fuera del lote por construcción: dependabot los abre
+  **sueltos, uno por dependencia**, y solo cuando el cupo (`limit 1`) está libre. Un mayor es
+  una decisión (API nueva, plugins que aún no lo soportan), no un bump: se revisa solo y se
+  mergea o se cierra **sin arrastrar a nadie**.
+- El `ignore` de eslint/typescript **se conserva como segunda barrera**, pero ya no se confía
+  en él (queda anotado en el propio archivo).
+- **CLAUDE.md, regla 17:** una frase con la política y el hallazgo del `[]`.
+- **Lo que NO se hizo:** editar a mano el #14 para sacarle los dos mayores. Regla 17 manda
+  dejar que dependabot regenere; el #14 se cierra (cerrar un PR agrupado **no** crea
+  condiciones de ignore, changelog de GitHub 2023-08-10) y el run que dispara la config
+  cambiada abre el lote nuevo, que debe llegar **sin un solo mayor**. Ese es el criterio de
+  éxito, verificable en la tabla del PR.
+
+**Trade-off declarado:** con `limit 1` y un lote semanal casi siempre presente, los mayores
+llegan poco (semana sin menores, o justo tras mergear el lote). Si el usuario quiere que lleguen
+más seguido, la palanca es `open-pull-requests-limit: 2` en npm — techo total 3 con el de
+actions, y esa regla («máximo DOS») es suya, no mía.
+
+### Regla 14 — el gate nuevo, demostrado en ROJO
+
+Nadie corre dependabot en local, así que la invariante se vigila con un test de configuración:
+**`tests/unit/dependabot-config.test.ts`** (4 tests: limit 1 por ecosistema · un solo grupo
+npm con `patterns: ["*"]` · el grupo solo admite `minor`+`patch` y jamás `major` · eslint y
+typescript siguen en el ignore). Corre en `quality` con `pnpm test`.
+
+**Demo 1 — meter `major` al grupo** (`update-types: ["minor", "patch", "major"]`):
+
+```
+× el lote de npm solo lleva minor y patch — jamás major
+AssertionError: el grupo «todo-npm» admite major: expected [ 'minor', 'patch', 'major' ] to not include 'major'
+Tests  1 failed | 3 passed (4)
+```
+
+**Demo 2 — quitar la línea `update-types`** (exactamente el estado que parió #10 y #14):
+
+```
+× el lote de npm solo lleva minor y patch — jamás major
+AssertionError: el grupo «todo-npm» no declara update-types: sin él los mayores entran al lote: expected undefined to be defined
+Tests  1 failed | 3 passed (4)
+```
+
+Ambas nombran al grupo y a la línea. Restaurado: `4 passed (4)`.
+
+### Para la planeadora
+
+- **El molde del kit (`dependabot.yml`, kit v1.23.1) trae `patterns: ["*"]` sin
+  `update-types`.** Toda app estampada hereda el mismo modo de falla: el primer mayor sin
+  soporte deja el lote en rojo para siempre. Candidato a corrección del kit: grupo
+  minor+patch, mayores sueltos, y el test de invariantes como pieza del kit.
+- **El `ignore` de dependabot.yml no es un gate:** no se puede ver operar y aquí no operó.
+  Un mecanismo que no se puede demostrar fallando ni funcionando no debería sostener una regla
+  del método (regla 14 aplicada a la configuración de terceros).
