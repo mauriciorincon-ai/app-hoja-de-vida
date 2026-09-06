@@ -16,9 +16,12 @@ import { getFicha, getFichasVitrina } from "@/lib/vitrina/loader";
 /**
  * LA FICHA DE UNA APP — su espacio propio (S5, ADR-013).
  *
- * Cada app hermana tiene aquí una ruta entera para ella: `/vitrina/<slug>`.
+ * Cada app hermana tiene aquí una ruta entera para ella: `/vitrina/apps/<slug>`.
  * Es lo que la convierte en algo que se puede abrir, marcar y recorrer sin
- * arrastrar a las otras cinco. El índice (`/vitrina`) es solo el escaparate.
+ * arrastrar a las otras cinco. El escaparate (`/vitrina/apps`) solo las asoma,
+ * y el portal (`/vitrina`) es el que reparte entre los cuatro frentes
+ * (ADR-015): por eso las apps viven bajo su propio segmento y no sueltas en
+ * `/vitrina/<slug>`, donde un slug de app chocaría con el de un frente.
  *
  * 100% SSG: `generateStaticParams` cruza los dos idiomas con los slugs que
  * traen los `brochure-export.json` — agregar una app hermana es dejar caer su
@@ -49,9 +52,9 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     description: ficha.export.promesa.tagline,
     alternates: {
       languages: {
-        es: `/es/vitrina/${app}`,
-        en: `/en/vitrina/${app}`,
-        "x-default": `/es/vitrina/${app}`,
+        es: `/es/vitrina/apps/${app}`,
+        en: `/en/vitrina/apps/${app}`,
+        "x-default": `/es/vitrina/apps/${app}`,
       },
     },
   };
@@ -83,11 +86,11 @@ export default async function FichaVitrinaPage({ params }: Params) {
         <div className="mx-auto max-w-4xl px-4 py-10 md:px-6 md:py-14">
           <nav aria-label={t("migaEtiqueta")} className="mb-8">
             <Link
-              href="/vitrina"
+              href="/vitrina/apps"
               className="inline-flex min-h-11 items-center gap-2 font-mono text-[11px] tracking-[0.08em] text-ink-2 uppercase hover:text-ink-0"
             >
               <span aria-hidden="true">←</span>
-              {t("volverIndice")}
+              {t("volverApps")}
             </Link>
           </nav>
 
@@ -107,7 +110,7 @@ export default async function FichaVitrinaPage({ params }: Params) {
               >
                 {anterior ? (
                   <Link
-                    href={`/vitrina/${anterior.ancla.slug}`}
+                    href={`/vitrina/apps/${anterior.ancla.slug}`}
                     className="flex min-h-11 flex-col justify-center rounded-[10px] border border-paper-2 bg-paper-0 px-5 py-4 transition-[box-shadow] duration-[180ms] hover:shadow-sh-1"
                   >
                     <span className="font-mono text-[11px] tracking-[0.08em] text-ink-2 uppercase">
@@ -122,7 +125,7 @@ export default async function FichaVitrinaPage({ params }: Params) {
                 )}
                 {siguiente && (
                   <Link
-                    href={`/vitrina/${siguiente.ancla.slug}`}
+                    href={`/vitrina/apps/${siguiente.ancla.slug}`}
                     className="flex min-h-11 flex-col justify-center rounded-[10px] border border-paper-2 bg-paper-0 px-5 py-4 transition-[box-shadow] duration-[180ms] hover:shadow-sh-1 sm:items-end sm:text-right"
                   >
                     <span className="font-mono text-[11px] tracking-[0.08em] text-ink-2 uppercase">

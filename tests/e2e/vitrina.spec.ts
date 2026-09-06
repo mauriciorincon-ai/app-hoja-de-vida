@@ -1,13 +1,14 @@
 import { readdirSync, readFileSync } from "node:fs";
 import { expect, test, type Page } from "@playwright/test";
+import { parse } from "yaml";
 
 /**
  * LA VITRINA (S5) — e2e.
  *
  * Cubre las dos capas de la feature:
  *
- *  1. **La vitrina como contenido**: el índice, la ruta propia de cada app, el
- *     gate ATS/SEO (todo en el HTML estático), las reglas duras que la ficha
+ *  1. **La vitrina como contenido**: el portal por frentes (ADR-015), el
+ *     escaparate de apps, la ruta propia de cada app, el gate ATS/SEO (todo en el HTML estático), las reglas duras que la ficha
  *     hace visibles (cero enlaces · toda cifra con su procedencia · las
  *     descartadas se muestran) y el CTA de lista de espera con su anclaje.
  *
@@ -41,6 +42,20 @@ const EXPORTS: Export[] = readdirSync("content/vitrina")
   );
 if (EXPORTS.length === 0) throw new Error("content/vitrina sin exports");
 
+/** Los frentes del portal, de la misma fuente que la página (ADR-015). */
+type Frente = {
+  id: string;
+  estado: "abierta" | "en-preparacion";
+  nombre: { es: string; en: string };
+  intro: { es: string; en: string };
+};
+const FRENTES = (
+  parse(readFileSync("data/vitrina.yaml", "utf8")) as { categorias: Frente[] }
+).categorias;
+const EN_PREPARACION = FRENTES.filter((f) => f.estado === "en-preparacion");
+if (EN_PREPARACION.length === 0)
+  throw new Error("data/vitrina.yaml sin frentes en preparación");
+
 /** La ficha con más tarjetas: la que mejor estresa la apertura por lectura. */
 const MAS_LARGA = EXPORTS.reduce((a, b) =>
   b.funcionalidades.grupos.length > a.funcionalidades.grupos.length ? b : a,
@@ -61,6 +76,26 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
       .click();
     await expect(page).toHaveURL(/\/es\/vitrina$/);
 
+    // El PORTAL (ADR-015): una caja por frente, en el orden del YAML.
+    const cajas = page.locator("[data-frente]");
+    await expect(cajas).toHaveCount(FRENTES.length);
+    expect(
+      await cajas.evaluateAll((es) =>
+        es.map((e) => e.getAttribute("data-frente")),
+      ),
+    ).toEqual(FRENTES.map((f) => f.id));
+    // Y la caja de apps dice cuántas hay — la cuenta sale de los exports, no
+    // de un número escrito a mano.
+    await expect(page.locator('[data-frente="apps"]')).toContainText(
+      `${EXPORTS.length} piezas`,
+    );
+
+    await page
+      .locator('[data-frente="apps"]')
+      .getByRole("link", { name: "Apps", exact: true })
+      .click();
+    await expect(page).toHaveURL(/\/es\/vitrina\/apps$/);
+
     // Las seis muestras, cada una con su tarjeta.
     await expect(page.locator("[data-muestra-slug]")).toHaveCount(
       EXPORTS.length,
@@ -73,7 +108,7 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
       .click();
 
     await expect(page).toHaveURL(
-      new RegExp(`/es/vitrina/${primera.app.slug}$`),
+      new RegExp(`/es/vitrina/apps/${primera.app.slug}$`),
     );
     // Y la ficha que se abre es la de ESA app, no otra.
     await expect(
@@ -85,7 +120,7 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
     page,
   }) => {
     for (const exp of EXPORTS) {
-      await page.goto(`/es/vitrina/${exp.app.slug}`);
+      await page.goto(`/es/vitrina/apps/${exp.app.slug}`);
       const fichas = page.locator("article[data-app-slug]");
       // La razón de ser del cambio: una ficha por página, no las seis apiladas.
       await expect(fichas).toHaveCount(1);
@@ -99,14 +134,16 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
   test("se navega entre apps vecinas sin volver al índice", async ({
     page,
   }) => {
-    await page.goto(`/es/vitrina/${EXPORTS[0].app.slug}`);
+    await page.goto(`/es/vitrina/apps/${EXPORTS[0].app.slug}`);
     const siguiente = page.getByRole("link", { name: /App siguiente/ });
     // La primera del orden nunca tiene «anterior», pero siempre tiene vecina.
     await expect(siguiente).toBeVisible();
     await siguiente.click();
-    await expect(page).toHaveURL(/\/es\/vitrina\/[a-z0-9-]+$/);
+    await expect(page).toHaveURL(/\/es\/vitrina\/apps\/[a-z0-9-]+$/);
     await expect(page.locator("article[data-app-slug]")).toHaveCount(1);
-    // Y desde ahí se vuelve al escaparate.
+    // Y desde ahí se vuelve al escaparate de apps, y de ahí al portal.
+    await page.getByRole("link", { name: /Volver a las apps/ }).click();
+    await expect(page).toHaveURL(/\/es\/vitrina\/apps$/);
     await page.getByRole("link", { name: /Volver a la vitrina/ }).click();
     await expect(page).toHaveURL(/\/es\/vitrina$/);
   });
@@ -115,7 +152,7 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
     page,
   }) => {
     const exp = MAS_LARGA;
-    const res = await page.request.get(`/es/vitrina/${exp.app.slug}`);
+    const res = await page.request.get(`/es/vitrina/apps/${exp.app.slug}`);
     expect(res.status()).toBe(200);
     const html = await res.text();
 
@@ -135,7 +172,9 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
   }) => {
     const rutas = [
       "/es/vitrina",
-      ...EXPORTS.map((e) => `/es/vitrina/${e.app.slug}`),
+      "/es/vitrina/apps",
+      ...EXPORTS.map((e) => `/es/vitrina/apps/${e.app.slug}`),
+      ...EN_PREPARACION.map((f) => `/es/vitrina/${f.id}`),
     ];
     for (const ruta of rutas) {
       await page.goto(ruta);
@@ -152,7 +191,7 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
     page,
   }) => {
     for (const exp of EXPORTS) {
-      await page.goto(`/es/vitrina/${exp.app.slug}`);
+      await page.goto(`/es/vitrina/apps/${exp.app.slug}`);
       const cta = page.locator('[data-cta="lista-de-espera"]');
       await expect(cta).toBeVisible();
       await expect(cta).toHaveAttribute("href", "#contacto-vitrina");
@@ -165,7 +204,7 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
     page,
   }) => {
     for (const exp of EXPORTS) {
-      await page.goto(`/es/vitrina/${exp.app.slug}`);
+      await page.goto(`/es/vitrina/apps/${exp.app.slug}`);
 
       const metricas = page.locator("[data-metrica]");
       await expect(metricas).toHaveCount(exp.metricas.length);
@@ -184,11 +223,83 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
   });
 });
 
+test.describe("Vitrina — los frentes en preparación (ADR-015)", () => {
+  test("cada frente en preparación tiene su página, lo declara y no promete fecha", async ({
+    page,
+  }) => {
+    for (const f of EN_PREPARACION) {
+      await page.goto(`/es/vitrina/${f.id}`);
+      await expect(
+        page.getByRole("heading", { level: 1, name: f.nombre.es }),
+      ).toBeVisible();
+      // El estado se dice con todas sus letras, en el HTML, no se disfraza.
+      await expect(
+        page.locator(`header[data-frente="${f.id}"]`),
+      ).toHaveAttribute("data-estado", "en-preparacion");
+      await expect(page.getByText("En preparación").first()).toBeVisible();
+      // Un solo CTA, y es la lista de espera (regla 16) — con su anclaje.
+      const cta = page.locator('[data-cta="lista-de-espera"]');
+      await expect(cta).toHaveCount(1);
+      await expect(page.locator("#contacto-vitrina")).toHaveCount(1);
+      const html = await page.content();
+      expect(html).toContain("Sin fecha prometida");
+    }
+  });
+
+  test("del portal se entra a un frente en preparación, y de ahí a los otros", async ({
+    page,
+  }) => {
+    const [primero, segundo] = EN_PREPARACION;
+    await page.goto("/es/vitrina");
+    await page
+      .locator(`[data-frente="${primero.id}"]`)
+      .getByRole("link", { name: primero.nombre.es, exact: true })
+      .click();
+    await expect(page).toHaveURL(new RegExp(`/es/vitrina/${primero.id}$`));
+    // Los vecinos: todos los frentes menos este.
+    await expect(page.locator("[data-frente-vecino]")).toHaveCount(
+      FRENTES.length - 1,
+    );
+    await page.locator(`[data-frente-vecino="${segundo.id}"]`).click();
+    await expect(page).toHaveURL(new RegExp(`/es/vitrina/${segundo.id}$`));
+  });
+
+  test("gate ATS/SEO: el portal y los frentes entregan su contenido en el HTML", async ({
+    page,
+  }) => {
+    const portal = await (await page.request.get("/es/vitrina")).text();
+    for (const f of FRENTES) {
+      expect(portal).toContain(f.nombre.es);
+      expect(portal).toContain(f.intro.es.slice(0, 40));
+    }
+    for (const f of EN_PREPARACION) {
+      const res = await page.request.get(`/es/vitrina/${f.id}`);
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain(f.intro.es);
+    }
+  });
+
+  test("un frente que no existe es 404, y «apps» no cae en la página genérica", async ({
+    page,
+  }) => {
+    const res = await page.goto("/es/vitrina/no-existe");
+    expect(res?.status()).toBe(404);
+    // /vitrina/apps es el escaparate (ruta estática), no un frente «en preparación».
+    await page.goto("/es/vitrina/apps");
+    await expect(page.locator("[data-muestra-slug]")).toHaveCount(
+      EXPORTS.length,
+    );
+    await expect(
+      page.locator('header[data-estado="en-preparacion"]'),
+    ).toHaveCount(0);
+  });
+});
+
 /* ────────────────────────────────────────────────────────────────────────────
  * APERTURA POR LECTURA — las pruebas que el patrón exige (banco §7)
  * ──────────────────────────────────────────────────────────────────────────── */
 
-const RUTA_LARGA = `/es/vitrina/${MAS_LARGA.app.slug}`;
+const RUTA_LARGA = `/es/vitrina/apps/${MAS_LARGA.app.slug}`;
 
 /**
  * Deja la tarjeta `i` con su cabecera a `frac` de la altura de pantalla y

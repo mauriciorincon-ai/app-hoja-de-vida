@@ -102,5 +102,6 @@ jobs:
             --collect.url=http://localhost:3000/es/apps/hoja-de-vida \
             --collect.url=http://localhost:3000/es/apps/chat-hoja-de-vida \
             --collect.url=http://localhost:3000/es/vitrina \
-            --collect.url=http://localhost:3000/es/vitrina/habla \
+            --collect.url=http://localhost:3000/es/vitrina/apps \
+            --collect.url=http://localhost:3000/es/vitrina/apps/habla \
             --assert.budgetsFile=./perf-budget.json

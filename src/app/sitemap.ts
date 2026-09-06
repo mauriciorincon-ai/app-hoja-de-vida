@@ -3,9 +3,10 @@ import { routing } from "@/i18n/routing";
 import { appsConBrochure } from "@/lib/brochure";
 import { getCv } from "@/lib/content";
 import { SITE_URL } from "@/lib/site";
+import { frentesEnPreparacion } from "@/lib/vitrina/categorias";
 import { getManifestVitrina } from "@/lib/vitrina/loader";
 
-/** HOME + /cv + case studies + brochures + vitrina (data-driven: una ruta nueva entra sola). */
+/** HOME + /cv + case studies + brochures + vitrina por frentes (data-driven: una ruta nueva entra sola). */
 export default function sitemap(): MetadataRoute.Sitemap {
   const alternatesFor = (path: string) => ({
     languages: Object.fromEntries(
@@ -36,16 +37,28 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       alternates: alternatesFor(`/apps/${app.id}`),
     })),
+    // La vitrina (ADR-015): el portal, el escaparate de apps, cada app con su
+    // ruta propia y los frentes en preparación — todo entra solo desde los
+    // exports y de data/vitrina.yaml.
     {
       url: `${SITE_URL}/${locale}/vitrina`,
       lastModified: new Date(),
       alternates: alternatesFor("/vitrina"),
     },
-    // Cada app hermana con su ruta propia: entran solas desde los exports.
-    ...getManifestVitrina().map((a) => ({
-      url: `${SITE_URL}/${locale}/vitrina/${a.slug}`,
+    {
+      url: `${SITE_URL}/${locale}/vitrina/apps`,
       lastModified: new Date(),
-      alternates: alternatesFor(`/vitrina/${a.slug}`),
+      alternates: alternatesFor("/vitrina/apps"),
+    },
+    ...getManifestVitrina().map((a) => ({
+      url: `${SITE_URL}/${locale}/vitrina/apps/${a.slug}`,
+      lastModified: new Date(),
+      alternates: alternatesFor(`/vitrina/apps/${a.slug}`),
+    })),
+    ...frentesEnPreparacion().map((f) => ({
+      url: `${SITE_URL}/${locale}/vitrina/${f.id}`,
+      lastModified: new Date(),
+      alternates: alternatesFor(`/vitrina/${f.id}`),
     })),
   ]);
 

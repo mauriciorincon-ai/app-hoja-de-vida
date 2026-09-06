@@ -138,6 +138,15 @@ animaciones infinitas (sweep/glitch/marquee), scroll-snap de deck, CDNs en `<hea
 
 ### Componentes de la vitrina · S5
 
+- **Caja de frente** (portal `/vitrina`, ADR-015 · post-S5): la unidad del portal, una por frente
+  (apps · agentes · investigaciones · tableros). Card paper-0, borde paper-2, `r-lg`, `sh-1`,
+  hover `-translate-y-0.5` + `sh-2`. Arriba, a la izquierda el **icono del frente** en un cuadro
+  paper-1 de 44 px (24×24, trazo 1.5, sin relleno, dibujado en esta casa — nunca un emoji); a la
+  derecha su **chip de estado**: `sage` con la cuenta de piezas si está abierto, `citron` «En
+  preparación» si no. Nombre en Fraunces, intro en `ink-1` de 15 px, y cierre «Entrar →» / «Ver
+  qué viene →». Mismo contrato que la muestra de app: el enlace estira su área de clic a toda la
+  caja **conservando el nombre del frente como nombre accesible**. **Marca un inicio, no lo
+  disfraza:** un frente en preparación no enseña una cuenta inventada.
 - **Muestra de app** (escaparate `/vitrina`): card paper-0, borde paper-2, `r-lg`, `sh-1`. Lleva
   chip de estado + chip de ciclo, nombre en Fraunces, promesa en Fraunces menor, **tira**
   esquemática enmarcada en paper-1, para-quién en `ink-2`, conteos en mono y cierre «ver la ficha».

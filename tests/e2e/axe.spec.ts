@@ -35,6 +35,16 @@ const slugsVitrina = readdirSync("content/vitrina")
   );
 if (slugsVitrina.length === 0) throw new Error("content/vitrina sin exports");
 
+// Los frentes en preparación (ADR-015): una página genérica por frente, leída
+// del mismo YAML que el portal.
+const frentesEnPreparacion = (
+  parse(readFileSync("data/vitrina.yaml", "utf8")) as {
+    categorias: { id: string; estado: string }[];
+  }
+).categorias
+  .filter((c) => c.estado === "en-preparacion")
+  .map((c) => c.id);
+
 const RUTAS = [
   "/es",
   "/en",
@@ -44,13 +54,22 @@ const RUTAS = [
   "/en/cv",
   `/es/apps/${brochureSlug}`,
   `/en/apps/${brochureSlug}`,
-  // La vitrina (S5): rutas públicas nuevas ⇒ entran a axe EN SU MISMA FASE
-  // (regla 9 + kit v1.24.1). El índice y LAS SEIS fichas, que ahora viven cada
-  // una en su propia ruta — se listan desde los exports para que una app
-  // hermana nueva entre al scan sola, sin tocar este archivo.
+  // La vitrina (S5 · ADR-015): rutas públicas nuevas ⇒ entran a axe EN SU
+  // MISMA FASE (regla 9 + kit v1.24.1). El portal, el escaparate de apps, LAS
+  // SEIS fichas (cada una en su ruta) y los frentes en preparación — se listan
+  // desde los exports y el YAML para que una pieza nueva entre al scan sola.
   "/es/vitrina",
   "/en/vitrina",
-  ...slugsVitrina.flatMap((s) => [`/es/vitrina/${s}`, `/en/vitrina/${s}`]),
+  "/es/vitrina/apps",
+  "/en/vitrina/apps",
+  ...slugsVitrina.flatMap((s) => [
+    `/es/vitrina/apps/${s}`,
+    `/en/vitrina/apps/${s}`,
+  ]),
+  ...frentesEnPreparacion.flatMap((f) => [
+    `/es/vitrina/${f}`,
+    `/en/vitrina/${f}`,
+  ]),
 ];
 
 for (const ruta of RUTAS) {

@@ -36,7 +36,8 @@ test.describe("Brochures por app", () => {
     // y estas dos apps —las que sostienen esta misma página— cierran el
     // escaparate en su propio bloque. Esta prueba es la que impide que las
     // brochures queden huérfanas: si alguien quita el bloque, se pone roja.
-    await page.goto("/es/vitrina");
+    // (Desde ADR-015 el escaparate de apps vive en /vitrina/apps.)
+    await page.goto("/es/vitrina/apps");
     const bloque = page.locator("#de-esta-casa");
     await expect(bloque).toBeVisible();
     await page.locator(`[data-app-propia="${primera.id}"]`).click();

@@ -4,7 +4,14 @@ import path from "node:path";
 import { cache } from "react";
 import { parse } from "yaml";
 import type { Locale } from "@/i18n/routing";
-import { parseApps, parseCv, type Apps, type Cv } from "./schemas";
+import {
+  parseApps,
+  parseCv,
+  parseVitrina,
+  type Apps,
+  type Cv,
+  type Vitrina,
+} from "./schemas";
 
 /**
  * Carga del contenido versionado en build time (SSG). Si un YAML está
@@ -26,4 +33,9 @@ export const getCv = cache((locale: Locale): Cv => {
 
 export const getApps = cache((): Apps => {
   return parseApps(readYaml("apps.yaml"), "data/apps.yaml");
+});
+
+/** Los frentes de la vitrina (post-S5). Mismo fail-safe: YAML roto = build roto. */
+export const getVitrina = cache((): Vitrina => {
+  return parseVitrina(readYaml("vitrina.yaml"), "data/vitrina.yaml");
 });
