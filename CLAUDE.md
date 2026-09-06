@@ -152,6 +152,12 @@ decisions/NNN-titulo.md   (ADRs de implementación)
     pasa VERDE porque **ninguna puerta compara el resultado contra la INTENCIÓN del PR**: leer la
     salida del install ES el gate. `pnpm peers check` corre en `quality` (es lo único que ve un
     peer insatisfecho). Overrides: en `pnpm-workspace.yaml`, jamás en `package.json`.
+    **El lote semanal solo lleva minor y patch** (`update-types` en el grupo, 2026-09-06, PRs
+    #10/#14): un mayor sin soporte metido en el lote lo pone rojo entero y se arrastra semana a
+    semana. Los mayores llegan SUELTOS, uno por dependencia, cuando el cupo está libre — un mayor
+    es una decisión, no un bump. El `ignore` del archivo NO es barrera (`@dependabot show <dep>
+ignore conditions` devolvió `[]`): se conserva, pero no se confía en él. Invariantes vigiladas
+    por `tests/unit/dependabot-config.test.ts`.
 
 ## Estándares (los 6+1, gates en CI)
 
