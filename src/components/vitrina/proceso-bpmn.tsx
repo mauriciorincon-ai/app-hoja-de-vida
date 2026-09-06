@@ -237,16 +237,25 @@ export function ProcesoBpmn({
                     stroke="var(--color-citron-ink)"
                     strokeWidth={1.5}
                   />
-                  <text
-                    x={n.x}
-                    y={n.y + 4}
-                    fontSize={10.5}
-                    fontWeight={600}
-                    textAnchor="middle"
-                    fill="var(--color-ink-0)"
-                  >
-                    {n.texto}
-                  </text>
+                  {/* Corto: dentro del rombo. Largo: encima, en líneas
+                      (el motor decide — `rotuloFuera`). */}
+                  {n.lineas.map((linea, li) => (
+                    <text
+                      key={li}
+                      x={n.x}
+                      y={
+                        n.rotuloFuera
+                          ? n.t - 6 - (n.lineas.length - 1 - li) * 12
+                          : n.y + 4
+                      }
+                      fontSize={10.5}
+                      fontWeight={600}
+                      textAnchor="middle"
+                      fill="var(--color-ink-0)"
+                    >
+                      {linea}
+                    </text>
+                  ))}
                 </>
               )}
               {n.tipo === "tarea" && (
