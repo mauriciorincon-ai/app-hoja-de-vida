@@ -49,7 +49,7 @@ vitrina están abiertos con piezas reales.**
 | Estándar | Evidencia |
 | -------- | --------- |
 | **Testing** | 370 unitarias · e2e 319 pasadas / 11 saltadas / **cero flaky** · cobertura `src/lib/**` 93.6 % statements, 84.6 % branches (umbral 70) |
-| **CI/CD** | `typecheck` · `lint` · `test` · `build` · `audit` · `peers check` · `test:e2e` · Lighthouse con las 6 URLs nuevas. Cada check debe cerrar con `success` propio |
+| **CI/CD** | PR #21: los **seis** checks con conclusión **propia `success`** — `quality` 1m32s · `integration` 3m05s · `e2e` 4m59s · `lighthouse` 11m28s (con las 6 URLs nuevas) · Vercel · Vercel Preview Comments. Ni un `skipped`. Ninguno corrió por primera vez aquí: la lectura de no-regresión es legítima |
 | **Observabilidad** | Sin endpoints nuevos (SSG puro). El fail-safe del contenido escribe diagnóstico con archivo y campo |
 | **Seguridad** | `pnpm audit --audit-level high` limpio (tapado un aviso Alto de calendario) · cero secretos · **cero enlaces** · cero datos de personas · la galería ya no puede salirse de su carpeta |
 | **Performance** | Presupuesto medido en local sobre las rutas con imágenes: LCP 3359 ms y 482 KiB en el escaparate de tableros, contra 3850 ms y 1000 KiB |

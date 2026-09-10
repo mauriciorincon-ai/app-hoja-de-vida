@@ -944,3 +944,18 @@ porque **deduplica** las 28 rutas que resolvían a dos versiones distintas.
 | — | Los `hitos[].etiqueta` que las fichas ajenas escriben **en español** se enseñan tal cual en `/en` | El contrato los define como texto libre y **aquí no se editan**. Se reporta a las casas productoras |
 | — | `eslint@9.39.4` avisa de deprecación en el install | Es un mayor: llega suelto, no en el lote (regla 17) |
 | — | El valor `"planeadora"` de `procedencias` (v1.2.0) **sigue sin consumidor** | Se añadió a petición del README de la vitrina; ninguna de las 26 fichas lo usa todavía |
+
+### CI del PR #21 — cada check con conclusión PROPIA
+
+| Check | Conclusión | Duración |
+| ----- | ---------- | -------- |
+| `quality` (typecheck · lint · test+cobertura · build · audit · peers) | **success** | 1m32s |
+| `integration` | **success** | 3m05s |
+| `e2e` (incluye axe sobre las rutas nuevas × 2 idiomas × 2 viewports) | **success** | 4m59s |
+| `lighthouse` (con las **6 URLs nuevas**, tableros incluido) | **success** | 11m28s |
+| `Vercel` | **success** | — |
+| `Vercel Preview Comments` | **success** | — |
+
+Ni un `skipped`, ni un `neutral`, ni un ausente. **Ningún job corrió por primera vez en este PR**:
+los seis tienen histórico, así que la lectura de no-regresión es legítima. El de `lighthouse`
+confirma en el runner lo medido en local: las dos rutas de tableros entran en el presupuesto.
