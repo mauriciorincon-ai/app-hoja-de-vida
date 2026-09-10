@@ -102,11 +102,14 @@ describe("data/vitrina.yaml — los frentes", () => {
 });
 
 describe("lib/vitrina/categorias — la cuenta de piezas", () => {
-  it("cada frente cuenta lo que HAY en content/, no lo que alguien escribió", () => {
-    expect(getFrente("apps")?.piezas).toBe(6); // los brochure-export
-    expect(getFrente("agentes")?.piezas).toBe(13); // content/agentes/
-    expect(getFrente("investigaciones")?.piezas).toBe(7);
-    expect(getFrente("tableros")?.piezas).toBe(6); // content/tableros/
+  it("todo frente declarado en el YAML cuenta alguna pieza", () => {
+    // El número exacto lo comprueba la prueba siguiente contra el disco. Aquí
+    // solo se exige que la medición esté viva: un frente que cuenta 0 estando
+    // abierto es el fallo que `parseVitrina` tiene que haber cazado antes.
+    for (const f of getFrentes())
+      expect(f.piezas, `${f.id}: la cuenta no puede ser cero`).toBeGreaterThan(
+        0,
+      );
   });
 
   it("la cuenta mide contenido, no promesas: sale del disco en todo estado", () => {
@@ -127,12 +130,11 @@ describe("lib/vitrina/categorias — la cuenta de piezas", () => {
     const estados = Object.fromEntries(
       getFrentes().map((f) => [f.id, f.estado]),
     );
-    expect(estados).toEqual({
-      apps: "abierta",
-      agentes: "abierta",
-      investigaciones: "abierta",
-      tableros: "abierta",
-    });
+    // No se clava el mapa de hoy: declarar un frente nuevo en el YAML es un
+    // cambio de datos, no debe romper esta prueba. Lo que se exige es que el
+    // estado salga del YAML y sea uno de los dos del contrato.
+    for (const [id, estado] of Object.entries(estados))
+      expect(["abierta", "en-preparacion"], id).toContain(estado);
     // Ninguno abierto sin piezas: la regla, comprobada sobre el YAML real.
     for (const f of getFrentes())
       if (f.estado === "abierta") expect(f.piezas).toBeGreaterThan(0);

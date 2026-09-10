@@ -195,7 +195,7 @@ e inglés. Quien la visita puede pedir acceso a tus apps y la solicitud te llega
 #### Cómo publicar una pieza nueva (sin sprint, sin código)
 
 1. **Quien construyó la pieza produce su ficha** siguiendo `docs/contrato-ficha-tecnica/`
-   (empieza por `CLAVE-VISUAL.md`). Es un JSON; nunca HTML. Contrato vigente: **v1.3.0**.
+   (empieza por `CLAVE-VISUAL.md`). Es un JSON; nunca HTML. Contrato vigente: **v1.3.1**.
 2. **Se deja caer el archivo** en `content/<frente>/<slug>.ficha-tecnica.json`. El nombre del
    archivo **tiene que ser el slug** de la pieza, y la carpeta, su frente.
 3. **Si trae capturas**, van a `public/piezas/<frente>/` respetando la ruta que el campo
@@ -240,7 +240,7 @@ e inglés. Quien la visita puede pedir acceso a tus apps y la solicitud te llega
   existe en el export), **la publicación falla** y el error dice qué y dónde.
 - **Para que otra casa produzca fichas técnicas** (investigaciones, agentes, tableros): el
   paquete de entrega está en `docs/contrato-ficha-tecnica/` — empieza por `CLAVE-VISUAL.md`.
-  Entregan un JSON; CV Viva lo pinta. Nunca HTML. Contrato vigente: **v1.3.0** (ver «Cómo
+  Entregan un JSON; CV Viva lo pinta. Nunca HTML. Contrato vigente: **v1.3.1** (ver «Cómo
   publicar una pieza nueva», arriba).
 - **De dónde sale el contenido:** de un archivo por app en `content/vitrina/`, llamado
   `<app>.brochure-export.json`. Lo genera **cada app hermana**, no esta.

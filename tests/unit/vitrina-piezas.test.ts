@@ -1,4 +1,5 @@
 import { readFileSync } from "node:fs";
+import { readdirSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import {
   frentesConPiezas,
@@ -57,10 +58,17 @@ describe("parseFicha — el núcleo puro del loader", () => {
 });
 
 describe("getPiezas — lo que hay en content/<frente>/", () => {
-  it("lee las piezas de cada frente entregado", () => {
-    expect(getPiezas("agentes")).toHaveLength(13);
-    expect(getPiezas("investigaciones")).toHaveLength(7);
-    expect(getPiezas("tableros")).toHaveLength(6);
+  it("lee TODAS las fichas que hay en la carpeta de cada frente", () => {
+    // Contra el DISCO, no contra un número escrito aquí: publicar una pieza es
+    // un PR de contenido sin sprint (ADR-017), y no puede poner en rojo una
+    // prueba del motor que no tiene nada que ver con ella.
+    for (const frente of ["agentes", "investigaciones", "tableros"] as const) {
+      const enDisco = readdirSync(`content/${frente}`).filter((f) =>
+        f.endsWith(".ficha-tecnica.json"),
+      ).length;
+      expect(enDisco, `${frente} sin fichas: nada que leer`).toBeGreaterThan(0);
+      expect(getPiezas(frente), frente).toHaveLength(enDisco);
+    }
   });
 
   it("un frente SIN carpeta devuelve [] — es un frente que empieza, no un error", () => {

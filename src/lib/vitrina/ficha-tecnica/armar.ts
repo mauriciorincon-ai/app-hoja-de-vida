@@ -53,13 +53,14 @@ export function armarFichaTecnica(
     (m) => m.clave === "decisiones_registradas",
   );
   if (decisiones)
-    hitos.push({
-      valor: String(decisiones.valor),
-      etiqueta: "decisiones registradas",
-    });
+    // La CLAVE del hito, no su texto: el renderizador traduce las etiquetas que
+    // conoce y cae al literal para las que no. Con «decisiones registradas» aquí
+    // nunca coincidía, y las seis fichas en inglés enseñaban esas dos palabras en
+    // español mientras `fichaTecnica.hitos.decisiones` era código muerto.
+    hitos.push({ valor: String(decisiones.valor), etiqueta: "decisiones" });
 
   return fichaTecnicaSchema.parse({
-    schema_version: "1.3.0",
+    schema_version: "1.3.1",
     actualizado: exp.actualizado,
     pieza: {
       slug: ancla.slug,

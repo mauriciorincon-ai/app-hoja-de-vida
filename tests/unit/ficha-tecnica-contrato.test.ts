@@ -172,7 +172,7 @@ type Esquema = {
 
 const PATRONES: Record<string, string> = {
   "^\\d{4}-\\d{2}-\\d{2}$": "AAAA-MM-DD",
-  "^1\\.\\d+\\.\\d+$": "1.3.0",
+  "^1\\.\\d+\\.\\d+$": "1.3.1",
   "^[a-z0-9-]+$": "<kebab-case",
 };
 
@@ -212,7 +212,7 @@ function plantillaDesde(raiz: Esquema): Record<string, unknown> {
     (k) => !(raiz.required ?? []).includes(k),
   );
   return {
-    _plantilla: `Contrato «ficha técnica» v1.3.0. Reemplaza cada <marcador> y BORRA esta clave. Opcionales: ${opcionales.join(", ")} (el proceso y su procedencia van juntos o no van). Las cifras llevan SIEMPRE su fuente, y no se escribe ni un enlace ni un DOI.`,
+    _plantilla: `Contrato «ficha técnica» v1.3.1. Reemplaza cada <marcador> y BORRA esta clave. Opcionales: ${opcionales.join(", ")} (el proceso y su procedencia van juntos o no van). Las cifras llevan SIEMPRE su fuente, y no se escribe ni un enlace ni un DOI.`,
     ...(marcador(raiz) as Record<string, unknown>),
   };
 }
@@ -267,7 +267,7 @@ describe("el proceso es opcional (contrato v1.1.0)", () => {
   it("un complemento sin proceso valida y arma una ficha sin «Cómo funciona»", () => {
     const c = complementoSchema.parse(hablaSinProceso());
     const ft = armarFichaTecnica(getFicha("habla")!, c);
-    expect(ft.schema_version).toBe("1.3.0");
+    expect(ft.schema_version).toBe("1.3.1");
     expect(ft.proceso).toBeUndefined();
     expect(ft.procedencia_proceso).toBeUndefined();
     expect(fichaTecnicaSchema.safeParse(ft).success).toBe(true);

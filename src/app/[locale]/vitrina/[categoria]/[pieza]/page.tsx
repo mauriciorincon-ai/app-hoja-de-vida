@@ -10,8 +10,11 @@ import { Link } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
 import { getCv } from "@/lib/content";
 import { SITE_URL } from "@/lib/site";
-import { getFrente, getFrentes } from "@/lib/vitrina/categorias";
-import { getPieza, getPiezas, type Frente } from "@/lib/vitrina/piezas";
+import {
+  frentesDinamicosAbiertos,
+  getFrenteDinamico,
+} from "@/lib/vitrina/categorias";
+import { esFrente, getPieza, getPiezas } from "@/lib/vitrina/piezas";
 
 /**
  * LA FICHA TÉCNICA DE UNA PIEZA — la misma para todos los frentes (S7).
@@ -31,21 +34,16 @@ import { getPieza, getPiezas, type Frente } from "@/lib/vitrina/piezas";
  * fichas en `content/` — se enseña el día que el frente abra, no antes.
  */
 
-/** Los frentes ABIERTOS distintos de `apps`: los únicos que enseñan piezas. */
-function frentesAbiertos(): Frente[] {
-  return getFrentes()
-    .filter((f) => f.estado === "abierta" && f.id !== "apps")
-    .map((f) => f.id as Frente);
-}
-
 export function generateStaticParams() {
   return routing.locales.flatMap((locale) =>
-    frentesAbiertos().flatMap((categoria) =>
-      getPiezas(categoria).map((p) => ({
-        locale,
-        categoria,
-        pieza: p.pieza.slug,
-      })),
+    frentesDinamicosAbiertos().flatMap(({ id: categoria }) =>
+      esFrente(categoria)
+        ? getPiezas(categoria).map((p) => ({
+            locale,
+            categoria,
+            pieza: p.pieza.slug,
+          }))
+        : [],
     ),
   );
 }
@@ -54,26 +52,34 @@ type Params = {
   params: Promise<{ locale: string; categoria: string; pieza: string }>;
 };
 
-/** La pieza solo existe si su frente está ABIERTO: si no, la ruta es 404. */
+/**
+ * El frente Y la pieza, o nada. Devuelve los dos juntos para que quien la llama
+ * no tenga que volver a buscar el frente con un `!` apoyado en que esta función
+ * ya lo encontró — esa garantía vivía tres líneas y una función más allá.
+ */
 function piezaPublicada(categoria: string, slug: string) {
-  const frente = getFrente(categoria);
-  if (!frente || frente.id === "apps" || frente.estado !== "abierta")
+  const frente = getFrenteDinamico(categoria);
+  if (!frente || frente.estado !== "abierta" || !esFrente(frente.id))
     return undefined;
-  return getPieza(categoria as Frente, slug);
+  // El id ya está estrechado, pero la propiedad del objeto no conserva ese
+  // estrechamiento: se lleva aparte para que nadie tenga que castear luego.
+  const id = frente.id;
+  const ficha = getPieza(id, slug);
+  return ficha ? { frente, id, ficha } : undefined;
 }
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { locale, categoria, pieza } = await params;
   if (!hasLocale(routing.locales, locale)) return {};
-  const ficha = piezaPublicada(categoria, pieza);
-  if (!ficha) return {};
+  const publicada = piezaPublicada(categoria, pieza);
+  if (!publicada) return {};
   const t = await getTranslations({ locale, namespace: "fichaTecnica" });
   const ruta = `/vitrina/${categoria}/${pieza}`;
 
   return {
     metadataBase: new URL(SITE_URL),
-    title: `${ficha.pieza.nombre} — ${t("eyebrow")} — Henry Rincón`,
-    description: ficha.promesa.tagline,
+    title: `${publicada.ficha.pieza.nombre} — ${t("eyebrow")} — Henry Rincón`,
+    description: publicada.ficha.promesa.tagline,
     alternates: {
       languages: {
         es: `/es${ruta}`,
@@ -89,17 +95,17 @@ export default async function FichaDePiezaPage({ params }: Params) {
   if (!hasLocale(routing.locales, locale)) notFound();
   setRequestLocale(locale);
 
-  const ficha = piezaPublicada(categoria, pieza);
-  if (!ficha) notFound();
+  const publicada = piezaPublicada(categoria, pieza);
+  if (!publicada) notFound();
+  const { frente, id: idFrente, ficha } = publicada;
 
   const l = locale as Locale;
   const cv = getCv(l);
   const t = await getTranslations("vitrina");
-  const frente = getFrente(categoria)!;
   const nombreFrente = frente.nombre[l];
 
   // Vecinas en el orden del escaparate, dentro del MISMO frente.
-  const todas = getPiezas(categoria as Frente);
+  const todas = getPiezas(idFrente);
   const i = todas.findIndex((p) => p.pieza.slug === pieza);
   const anterior = todas[i - 1];
   const siguiente = todas[i + 1];

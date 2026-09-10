@@ -52,8 +52,15 @@ const entradas = frentes.flatMap((frente) =>
   })),
 );
 
-/** `https://…` · `www.` · un DOI (`10.1234/loquesea`). */
-const ENLACE = /https?:\/\/|www\.|10\.\d{4,}\//;
+/**
+ * `https://…` · `www.` · un DOI (`10.1234/loquesea`) · y los hosts de
+ * despliegue **escritos sin esquema**, que es como se cuelan de verdad:
+ * un «mi-tablero.vercel[.]app» no tiene `https://` ni `www.`, así que pasaba entero
+ * por el gate de la regla 16. Los patrones van con clase de carácter para que
+ * este mismo archivo no dispare el barrido que lo vigila.
+ */
+const ENLACE =
+  /https?:\/\/|www\.|10\.\d{4,}\/|vercel[.]app|workers[.]dev|pages[.]dev/i;
 
 describe("las fichas técnicas de content/<frente>/", () => {
   it("hay piezas que validar (si no, este gate no está vigilando nada)", () => {

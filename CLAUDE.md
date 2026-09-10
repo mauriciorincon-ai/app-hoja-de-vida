@@ -298,7 +298,7 @@ pr: <link>
   y se publican con un **PR de contenido sin sprint** (la CI valida esquema, cero enlaces, axe y
   e2e). **Las fichas de otras casas NO se editan aquí — ni para que quepan:** si una no valida, se
   reporta archivo + campo + regla y se corrige EN ORIGEN; si varias no caben por una razón
-  legítima del frente, se propone **contrato aditivo** en plan mode (así nacieron v1.2.0 y v1.3.0; vigente: **v1.3.0**). La misma regla que ya
+  legítima del frente, se propone **contrato aditivo** en plan mode (así nacieron v1.2.0 y v1.3.0; vigente: **v1.3.1**). La misma regla que ya
   rige para `content/vitrina/`, extendida a todo lo que llega de afuera.
 - **Un solo contrato, un solo renderizador.** `FichaTecnica` renderiza `fichaTecnicaSchema` y no
   un tipo de pieza: nada específico por frente vive en el componente. Lo específico por frente

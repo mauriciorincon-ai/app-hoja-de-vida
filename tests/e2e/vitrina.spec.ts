@@ -449,6 +449,15 @@ test.describe("Vitrina — los frentes en preparación (ADR-015)", () => {
       expect(portal).toContain(f.nombre.es);
       expect(portal).toContain(f.intro.es.slice(0, 40));
     }
+    // Y los frentes en preparación, si hay alguno. Sin este aviso, con la lista
+    // vacía el bucle no se ejecuta y el verde se lee como cobertura de una rama
+    // que nadie miró.
+    test.info().annotations.push({
+      type: EN_PREPARACION.length ? "frentes en preparación" : "sin sujeto",
+      description: EN_PREPARACION.length
+        ? EN_PREPARACION.map((f) => f.id).join(", ")
+        : "los cuatro frentes tienen piezas: la rama «en preparación» no se ejerce aquí",
+    });
     for (const f of EN_PREPARACION) {
       const res = await page.request.get(`/es/vitrina/${f.id}`);
       expect(res.status()).toBe(200);
@@ -589,10 +598,13 @@ test.describe("Vitrina — las estanterías: un frente ABIERTO y sus piezas (S7)
         .filter((p) => p.bloques.every((b) => b.cuenta === 0))
         .map((p) => ({ f, p })),
     );
-    test.skip(
-      sinCuenta.length === 0,
-      "ninguna pieza declara todos sus bloques en cuenta 0",
-    );
+    // Aserción, no skip: las siete investigaciones llegan así por diseño
+    // (aportes, no funciones). El día que ninguna pieza venga sin cuenta, esta
+    // prueba tiene que AVISAR de que dejó de vigilar algo, no desaparecer.
+    expect(
+      sinCuenta.length,
+      "ninguna pieza declara sus bloques en cuenta 0: esta prueba no vigila nada",
+    ).toBeGreaterThan(0);
 
     for (const { f, p } of sinCuenta) {
       await page.goto(`/es/vitrina/${f.id}/${p.pieza.slug}`);
@@ -610,10 +622,12 @@ test.describe("Vitrina — las estanterías: un frente ABIERTO y sus piezas (S7)
         .filter((p) => p.galeria && p.conclusiones)
         .map((p) => ({ f, p })),
     );
-    test.skip(
-      conDatos.length === 0,
-      "ninguna pieza trae galería y conclusiones",
-    );
+    // Ídem: los seis tableros traen las dos claves de la v1.3.0 y son la razón
+    // de que el contrato creciera. Si desaparecen, es un hallazgo, no un skip.
+    expect(
+      conDatos.length,
+      "ninguna pieza trae galería y conclusiones: esta prueba no vigila nada",
+    ).toBeGreaterThan(0);
 
     for (const { f, p } of conDatos) {
       await page.goto(`/es/vitrina/${f.id}/${p.pieza.slug}`);
@@ -714,11 +728,16 @@ test.describe("Vitrina — las estanterías: un frente ABIERTO y sus piezas (S7)
   test("CERO ENLACES en las rutas nuevas: ni una URL, ni un DOI", async ({
     page,
   }) => {
-    const f = ABIERTOS[0];
-    for (const ruta of [
+    // TODAS las piezas de TODOS los frentes abiertos, no una muestra: cada
+    // ficha la escribió una casa distinta, así que el riesgo no es del
+    // renderizador —que es uno— sino del contenido, que son 26 archivos.
+    const rutas = ABIERTOS.flatMap((f) => [
       `/es/vitrina/${f.id}`,
-      `/es/vitrina/${f.id}/${f.piezas[0].pieza.slug}`,
-    ]) {
+      ...f.piezas.map((p) => `/es/vitrina/${f.id}/${p.pieza.slug}`),
+    ]);
+    expect(rutas.length, "no hay rutas nuevas que barrer").toBeGreaterThan(4);
+
+    for (const ruta of rutas) {
       await page.goto(ruta);
       // Mismo alcance que la prueba del S5: dentro del CONTENIDO no sale un
       // enlace a otro sitio. El pie queda fuera a propósito — lleva los
@@ -729,7 +748,13 @@ test.describe("Vitrina — las estanterías: un frente ABIERTO y sus piezas (S7)
         /\s+/g,
         " ",
       );
-      expect(texto).not.toMatch(/https?:\/\/|www\.|10\.\d{4,}\//);
+      expect(texto, ruta).not.toMatch(/https?:\/\/|www\.|10\.\d{4,}\//);
+      // Y el HTML entero —no solo el texto— contra los hosts de despliegue,
+      // que es lo que la regla 16 prohíbe publicar. Sin esquema no los cazaba
+      // ningún patrón de arriba.
+      expect(await page.content(), ruta).not.toMatch(
+        /vercel[.]app|workers[.]dev|pages[.]dev/i,
+      );
     }
   });
 

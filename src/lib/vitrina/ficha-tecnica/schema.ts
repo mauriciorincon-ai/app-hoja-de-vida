@@ -1,7 +1,13 @@
 import { z } from "zod";
 
 /**
- * CONTRATO «FICHA TÉCNICA» v1.3.0 (ADR-016) — la capa infografía de la vitrina.
+ * CONTRATO «FICHA TÉCNICA» v1.3.1 (ADR-016 · ADR-017) — la capa infografía.
+ *
+ * v1.3.1 (2026-09-09, auditoría del S7): PARCHE de endurecimiento. `galeria[].archivo`
+ * era una ruta relativa solo de nombre — el patrón aceptaba «../..» y raíz, con lo
+ * que una galería podía apuntar fuera de public/piezas/<frente>/. Ninguna de las 36
+ * capturas entregadas se ve afectada. No se impone una forma de carpetas: se prohíbe
+ * escaparse.
  *
  * v1.3.0 (2026-09-09, S7 · las fichas de tableros): ADITIVO. Dos claves
  * opcionales que una pieza CON DATOS necesita y una app no: **`conclusiones`**
@@ -296,9 +302,14 @@ const captura = z
       .string()
       .min(1)
       .max(120)
+      // RELATIVA de verdad: el patrón viejo aceptaba «../../favicon.png» y
+      // «/loquesea.png», con lo que la galería salía de
+      // public/piezas/<frente>/ — el navegador normaliza el «..» y sirve
+      // cualquier cosa bajo public/. No se impone una FORMA de carpetas (cada
+      // casa organiza sus capturas como quiera): se prohíbe escaparse.
       .regex(
-        /^[A-Za-z0-9._/-]+\.(png|jpg|jpeg|webp)$/,
-        "ruta relativa a una imagen",
+        /^(?!\/)(?!.*(?:^|\/)\.\.(?:\/|$))[A-Za-z0-9._/-]+\.(png|jpg|jpeg|webp)$/,
+        "ruta relativa a una imagen, sin «..» ni raíz",
       ),
     pie: texto(80),
   })

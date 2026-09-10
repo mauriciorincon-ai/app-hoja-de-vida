@@ -10,7 +10,11 @@ import { Link } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
 import { getCv } from "@/lib/content";
 import { SITE_URL } from "@/lib/site";
-import { getFrente, getFrentes } from "@/lib/vitrina/categorias";
+import {
+  FRENTE_PROPIO,
+  getFrenteDinamico,
+  getFrentes,
+} from "@/lib/vitrina/categorias";
 import { getPiezas, type Frente as FrentePieza } from "@/lib/vitrina/piezas";
 
 /**
@@ -40,22 +44,17 @@ import { getPiezas, type Frente as FrentePieza } from "@/lib/vitrina/piezas";
 export function generateStaticParams() {
   return routing.locales.flatMap((locale) =>
     getFrentes()
-      .filter((f) => f.id !== "apps")
+      .filter((f) => f.id !== FRENTE_PROPIO)
       .map((f) => ({ locale, categoria: f.id })),
   );
 }
 
 type Params = { params: Promise<{ locale: string; categoria: string }> };
 
-function frenteDeEstaRuta(id: string) {
-  const f = getFrente(id);
-  return f && f.id !== "apps" ? f : undefined;
-}
-
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { locale, categoria } = await params;
   if (!hasLocale(routing.locales, locale)) return {};
-  const frente = frenteDeEstaRuta(categoria);
+  const frente = getFrenteDinamico(categoria);
   if (!frente) return {};
   const t = await getTranslations({ locale, namespace: "vitrina" });
   const l = locale as Locale;
@@ -79,7 +78,7 @@ export default async function FrentePage({ params }: Params) {
   if (!hasLocale(routing.locales, locale)) notFound();
   setRequestLocale(locale);
 
-  const frente = frenteDeEstaRuta(categoria);
+  const frente = getFrenteDinamico(categoria);
   if (!frente) notFound();
 
   const l = locale as Locale;

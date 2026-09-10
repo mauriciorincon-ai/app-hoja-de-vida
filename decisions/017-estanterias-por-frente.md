@@ -1,4 +1,4 @@
-# ADR-017 — Las estanterías: un loader genérico por frente, «abierta» medida por piezas y el contrato v1.3.0
+# ADR-017 — Las estanterías: un loader genérico por frente, «abierta» medida por piezas y el contrato v1.3.x
 
 - **Status:** accepted
 - **Date:** 2026-09-09
@@ -53,9 +53,15 @@ tienen piezas hoy. La cuenta que el portal enseña (**«13 piezas»**) se mide i
 disco, no un número escrito a mano que se queda viejo.
 
 Esto **levanta la regla del S6 por frente, no en general**: `apps` conserva su fuente propia (el
-manifiesto de exports); los demás frentes miden `content/<frente>/`. El literal `"apps"`
-sobrevive en un solo sitio de cada lado, y ya no como sinónimo de «el único frente que puede
-estar abierto».
+manifiesto de exports); los demás frentes miden `content/<frente>/`, y `"apps"` deja de ser
+sinónimo de «el único frente que puede estar abierto».
+
+**Lo que este ADR NO logró, y conviene no fingir:** `apps` sigue siendo un caso especial escrito
+en varios sitios —la cuenta, la validación del YAML, las dos páginas dinámicas y el sitemap—
+porque los cuatro tienen que saber que ese frente **no se sirve por la ruta genérica**. La regla
+está centralizada en `getFrenteDinamico()`, pero el literal sobrevive donde la fuente de datos
+difiere de verdad. Unificarlo del todo pide que `apps` también publique fichas completas en
+`content/apps/`, que es trabajo del sprint siguiente.
 
 ### 3. Un solo renderizador, y el contrato crece por adición
 
@@ -71,6 +77,7 @@ Cuando las fichas reales no cupieron, **cambió el contrato, nunca la ficha**:
 | ------- | --------- | -------- |
 | v1.2.0 | `"planeadora"` en `procedencias` · plantilla generada del Zod | lo pedía el README de la vitrina; la plantilla la necesita cualquier casa productora |
 | v1.3.0 | `conclusiones` (3–6) · `galeria` (1–12) | un tablero **es** hallazgos y pantallas; una app no |
+| v1.3.1 | `galeria[].archivo` rechaza `..` y la raíz | «relativa» tiene que serlo de verdad (auditoría del sprint) |
 
 Ambas **aditivas**: `required` no cambia, toda ficha v1.1.0 sigue válida, y el gate de versión
 solo rechaza un salto de **mayor**. La numeración de secciones se generalizó a **tres
@@ -109,5 +116,5 @@ procedencia es una opinión disfrazada.
   de galería existe en disco.
 - Los iconos de bloque de las piezas nuevas usan el genérico (rombo). Iconos propios: sprint
   siguiente.
-- El contrato publicado en `docs/contrato-ficha-tecnica/` es **v1.3.0**: es la versión que debe
+- El contrato publicado en `docs/contrato-ficha-tecnica/` es **v1.3.1**: es la versión que debe
   leer cualquier casa que produzca una ficha desde hoy.

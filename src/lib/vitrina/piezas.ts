@@ -37,6 +37,17 @@ import { SCHEMA_MAYOR_SOPORTADO, versionCompatible } from "./schemas";
 
 export type Frente = (typeof frentes)[number];
 
+/**
+ * El tipo `Frente` no existe en runtime, y seis llamadores llegaban aquí con un
+ * `as Frente` sobre un segmento de URL o un id del YAML. El invariante se
+ * sostenía —ningún id fuera del contrato puede estar `abierta`—, pero repartido
+ * en cuatro archivos: un refactor lo rompía en silencio y `carpeta()` acababa
+ * uniendo cualquier cosa a una ruta de disco. Esta guardia lo cierra en un sitio.
+ */
+export function esFrente(id: string): id is Frente {
+  return (frentes as readonly string[]).includes(id);
+}
+
 const SUFIJO = ".ficha-tecnica.json";
 
 function carpeta(frente: Frente): string {
@@ -85,7 +96,28 @@ function leerFicha(frente: Frente, archivo: string): FichaTecnica {
       `Ficha ilegible en ${ruta}: ${(e as Error).message}\n${AVISO}`,
     );
   }
-  return parseFicha(raw, ruta);
+  const ficha = parseFicha(raw, ruta);
+
+  // DÓNDE vive una ficha es parte de su validez, no un detalle de archivo: la
+  // ruta pública sale del CONTENIDO (`/vitrina/<pieza.frente>/<pieza.slug>`),
+  // así que una ficha copiada al frente equivocado se pinta en el escaparate de
+  // uno y enlaza al de otro — tarjeta viva, enlace muerto, y el sitemap
+  // publicando una tercera cosa. El gate de contenido ya lo caza, pero eso solo
+  // rompe `pnpm test`: esto tiene que romper el BUILD, como toda ficha inválida.
+  if (ficha.pieza.frente !== frente) {
+    throw new Error(
+      `Ficha fuera de sitio en ${ruta}: declara «pieza.frente: ${ficha.pieza.frente}» ` +
+        `y vive en content/${frente}/. Su tarjeta enlazaría a ` +
+        `/vitrina/${ficha.pieza.frente}/${ficha.pieza.slug}, que este frente no publica.\n${AVISO}`,
+    );
+  }
+  if (archivo !== `${ficha.pieza.slug}${SUFIJO}`) {
+    throw new Error(
+      `Ficha mal nombrada en ${ruta}: su slug es «${ficha.pieza.slug}», así que el ` +
+        `archivo debe llamarse «${ficha.pieza.slug}${SUFIJO}».\n${AVISO}`,
+    );
+  }
+  return ficha;
 }
 
 /**
@@ -93,6 +125,7 @@ function leerFicha(frente: Frente, archivo: string): FichaTecnica {
  * todavía no tiene carpeta: eso es un frente que empieza, no un repo roto.
  */
 export const getPiezas = cache((frente: Frente): FichaTecnica[] => {
+  if (!esFrente(frente)) return [];
   const dir = carpeta(frente);
   if (!existsSync(dir)) return [];
 
@@ -100,6 +133,13 @@ export const getPiezas = cache((frente: Frente): FichaTecnica[] => {
     .filter((f) => f.endsWith(SUFIJO))
     .sort()
     .map((archivo) => leerFicha(frente, archivo));
+
+  // NO hace falta comprobar aquí que los slugs no se repitan DENTRO del frente:
+  // la regla de arriba (archivo = «<slug>.ficha-tecnica.json») ya lo garantiza,
+  // porque dos archivos de una carpeta no pueden llamarse igual. Se intentó
+  // añadir esa guardia y resultó inalcanzable — un gate que no puede fallar es
+  // decorado. La unicidad GLOBAL entre frentes, que sí es una regla aparte, la
+  // vigila `tests/unit/content-fichas.test.ts`.
 
   return piezas.sort((a, b) => {
     if (a.pieza.estado !== b.pieza.estado)

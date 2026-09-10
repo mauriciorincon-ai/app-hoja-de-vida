@@ -1,6 +1,6 @@
 {
-  "_plantilla": "Contrato «ficha técnica» v1.3.0. Reemplaza cada <marcador> y BORRA esta clave. Opcionales: proceso, procedencia_proceso, conclusiones, galeria (el proceso y su procedencia van juntos o no van). Las cifras llevan SIEMPRE su fuente, y no se escribe ni un enlace ni un DOI.",
-  "schema_version": "1.3.0",
+  "_plantilla": "Contrato «ficha técnica» v1.3.1. Reemplaza cada <marcador> y BORRA esta clave. Opcionales: proceso, procedencia_proceso, conclusiones, galeria (el proceso y su procedencia van juntos o no van). Las cifras llevan SIEMPRE su fuente, y no se escribe ni un enlace ni un DOI.",
+  "schema_version": "1.3.1",
   "actualizado": "AAAA-MM-DD",
   "pieza": {
     "slug": "<kebab-case · máx 60>",

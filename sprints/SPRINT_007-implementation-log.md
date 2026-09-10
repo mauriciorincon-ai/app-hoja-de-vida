@@ -871,3 +871,76 @@ la suerte del runner.
 - **B2 pagada:** `/deploy-check` local estaba en la versión de 10 secciones; se copia la del kit
   (**12 secciones**), que trae el gate de «cada check con conclusión propia» y el del disco en
   runtime.
+
+## `/audita-sprint` — auditoría final del sprint
+
+**Fase 1 (solo lectura)** sobre los 19 archivos de `src/` y `tests/` que el sprint cambió, más
+las 26 fichas. **Veredicto: requiere ajustes** — un hallazgo Alto y varios Medios reales, ningún
+Crítico. Comprobado explícitamente y **descartado**: path traversal desde la URL (el `slug` nunca
+toca disco; los ids salen del YAML), `any`/`@ts-ignore` (ninguno), datos personales.
+
+**Nota de método:** la Fase 2 se ejecuta sin esperar aprobación porque todos los pagos son
+defectos del trabajo de este mismo sprint, no cambios de alcance. Lo que sí queda a decisión del
+usuario está declarado abajo como deuda, no pagado a escondidas.
+
+### Pagados
+
+| # | Sev. | Hallazgo | Qué se hizo |
+| - | ---- | -------- | ----------- |
+| A1 | Alto | El loader **no comprobaba dónde vive una ficha**: una copiada al frente equivocado pasaba el build, se pintaba en un escaparate y enlazaba a otro, con el sitemap publicando una tercera cosa. Solo lo cazaba `pnpm test`, no `pnpm build`. | `leerFicha` valida `pieza.frente` = carpeta y archivo = `<slug>.ficha-tecnica.json`. **Rompe el build**, como toda ficha inválida |
+| M5 | Alto de hecho | **Agujero en un gate de la regla 16**: el patrón `https?://\|www\.\|10\.\d{4,}/` **no caza** `mi-tablero.vercel[.]app` — sin esquema y sin `www.` no coincide con nada. Y el e2e nuevo miraba **una** pieza de **un** frente: 25 de 26 páginas sin revisar | patrón + los tres hosts de despliegue; el e2e barre **las 26 piezas y los 4 escaparates**, y mira el **HTML entero**, no solo el texto |
+| M1 | Medio | `galeria[].archivo` decía «ruta relativa» y aceptaba `../../favicon.png` y `/raiz.png`: la galería podía salirse de `public/piezas/<frente>/`, y el test de contenido seguía el `..` con una lectura de disco real | patrón que rechaza `..` y raíz **sin imponer una forma de carpetas**. Contrato **v1.3.1** (parche), regenerado. Las 36 capturas entregadas siguen validando |
+| M2 | Medio | `Frente` es un tipo, no existe en runtime, y **seis llamadores** llegaban con `as Frente` sobre un segmento de URL | `esFrente()` como guardia de verdad en `getPiezas`; los seis `as` eliminados |
+| M3 | Medio | Pruebas clavadas al inventario de hoy (13/7/6): un PR de contenido —que el ADR promete sin sprint— ponía en rojo cinco aserciones ajenas | la cuenta se deriva del disco; el mapa de estados se comprueba por contrato, no por enumeración |
+| M4 | Medio | Dos pruebas nuevas se saltaban **en silencio** formas que el ADR garantiza por diseño; y un bucle sobre lista vacía pasaba en verde leyéndose como cobertura | los dos `test.skip` pasan a aserción `>0` con su razón; el bucle vacío **declara** que no tiene sujeto |
+| M6 | Medio | **El ADR-017 afirmaba algo falso:** «el literal `apps` sobrevive en un solo sitio de cada lado». Estaba en siete, y la regla «apps no se sirve por la ruta genérica» re-derivada en cuatro | `FRENTE_PROPIO` + `getFrenteDinamico()` + `frentesDinamicosAbiertos()` en un solo módulo; y **el ADR dice ahora lo que no logró** |
+| B4 | Bajo | La clave del hito era el texto y no la clave, así que `fichaTecnica.hitos.decisiones` era código muerto y **las seis fichas en inglés enseñaban «decisiones registradas» en español** | `etiqueta: "decisiones"`. Verificado: `/en/vitrina/apps/habla` dice «recorded decisions» |
+| B2 | Bajo | Un `!` sobre `getFrente(categoria)` apoyado en una garantía que vivía en otra función | `piezaPublicada` devuelve `{ frente, id, ficha }`: sin `!` y sin repetir la búsqueda |
+| B6 | Bajo | El sitemap declaraba `lastModified: new Date()` teniendo la fecha que la ficha obliga a traer: 111 páginas «cambiadas» en cada build | `new Date(p.actualizado)` — en un repo cuya regla madre es «ninguna cifra sin fuente» |
+
+### Regla 14 — cuatro gates nuevos, cuatro rojos en este mismo commit
+
+| Demo | Mutación | Rojo que salió |
+| ---- | -------- | -------------- |
+| **H** | `formula-1` copiada a `content/agentes/` | *«Ficha fuera de sitio… declara «pieza.frente: tableros» y vive en content/agentes/. Su tarjeta enlazaría a /vitrina/tableros/formula-1, que este frente no publica»* — **el build**, no la prueba |
+| **I** | la misma ficha renombrada a `otro-nombre` | *«Ficha mal nombrada… su slug es «formula-1», así que el archivo debe llamarse…»* |
+| **K** | `mi-tablero.vercel[.]app` dentro de un campo de texto de forja | *«forja… trae «vercel[.]app»: la producción se MUESTRA, jamás se entrega (regla 16)»* |
+| **L** | `archivo: "../../favicon.png"` en la galería de fórmula 1 | *«ruta relativa a una imagen, sin «..» ni raíz»* |
+
+Las 26 fichas quedaron **restauradas byte a byte** tras cada demo (`git status content/` vacío).
+
+**Y un gate que se intentó y NO se quedó.** Añadí una guardia de «dos fichas no pueden repetir
+slug dentro de un frente» y al ir a demostrarla en rojo **no pude**: si el archivo debe llamarse
+como el slug, dos archivos de una carpeta no pueden reclamarlo. Era **inalcanzable**. Se retiró y
+el porqué quedó escrito en el código. *Un gate que no puede fallar no es un gate; y el modo de
+descubrirlo es el que la regla 14 exige — intentar ponerlo rojo.* La unicidad **global** entre
+frentes, que sí es una regla aparte, la sigue vigilando el gate de contenido.
+
+### `/deploy-check` — 12 secciones (kit)
+
+`pnpm typecheck` · `pnpm lint` · `pnpm test` **370/370** (cobertura de `src/lib/**`: 93.6 %
+statements · 84.6 % branches, umbral 70) · `pnpm test:e2e` **319 pasadas, 11 saltadas, CERO
+flaky** · `pnpm build` **111 páginas** · `pnpm audit --audit-level high` **limpio** ·
+`pnpm peers check` sin problemas · barrido cero enlaces **vacío** · homepage **vacío**.
+
+**Un aviso Alto tapado en el camino:** `pnpm audit` salía **rojo** por `js-yaml` (GHSA-2883-xcg3-v3hh,
+`>=4.0.0 <4.3.2`), transitivo de eslint — **rojo de calendario**, no del sprint, pero la CI lo
+corre como gate. El override ya existía en `pnpm-workspace.yaml` fijado a `^4.3.1`: sube a
+`^4.3.2`. Se leyó la salida del install como exige la regla 17 y se comprobó **paquete por
+paquete** que nada se degradó: ninguno entró ni salió del árbol, y el lockfile encoge 159 líneas
+porque **deduplica** las 28 rutas que resolvían a dos versiones distintas.
+
+### Deuda aceptada (declarada, no pagada)
+
+| # | Qué | Por qué se aplaza |
+| - | --- | ----------------- |
+| M4c | La rama **«en preparación»** de la página de frente no la vigila nada en ninguna capa: con los cuatro frentes abiertos no tiene sujeto | Devolverla a la red pide un `data/vitrina.yaml` de fixture o un test de render del componente. Vuelve sola con el quinto frente; entretanto la página **existe y está declarada** |
+| M8 | La suite de axe crece **4 escaneos por ficha** entregada (~188 hoy) | El renderizador es uno, pero el CONTENIDO no: axe sobre contenido real ya cazó un contraste en el S6. Se vigila el tiempo (e2e completo: 56 s) antes de recortar |
+| M7 | `colorEstado` escrito de tres formas y el locale BCP-47 de dos | Cosmético; se paga cuando se toque la paleta |
+| B1 | El fail-safe «Ficha ilegible» es la única sentencia sin cubrir de `piezas.ts` | Pide extraer `leerFichaDeTexto`; el comportamiento está demostrado a mano |
+| B3 | `n.s01!` se apoya en un mapa de runtime, no en el tipo | Tipar `numerarSecciones` con fijas + opcionales es correcto y no urgente |
+| B5 | Keys de React sobre texto libre en `limites`/`nunca`/`galeria` | Coherencia interna; sin efecto observable hoy |
+| B7 | `cache()` de React no memoiza entre páginas: cada una de las 111 revalida las 26 fichas | Coste de build, resultado idéntico. Si molesta, el memo va en `piezas.ts` **y** `loader.ts` a la vez, para no crear dos convenciones |
+| — | Los `hitos[].etiqueta` que las fichas ajenas escriben **en español** se enseñan tal cual en `/en` | El contrato los define como texto libre y **aquí no se editan**. Se reporta a las casas productoras |
+| — | `eslint@9.39.4` avisa de deprecación en el install | Es un mayor: llega suelto, no en el lote (regla 17) |
+| — | El valor `"planeadora"` de `procedencias` (v1.2.0) **sigue sin consumidor** | Se añadió a petición del README de la vitrina; ninguna de las 26 fichas lo usa todavía |

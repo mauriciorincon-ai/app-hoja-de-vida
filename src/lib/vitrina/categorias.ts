@@ -23,18 +23,43 @@ export type Frente = CategoriaVitrina & {
   piezas: number;
 };
 
+/**
+ * El nombre del frente que NO se sirve por la ruta genérica: `apps` tiene su
+ * propio segmento estático (`/vitrina/apps/...`), con export + curación en vez
+ * de una ficha completa en `content/`. Estaba escrito a mano en cuatro sitios y
+ * la regla se re-derivaba en cada uno; ahora se pregunta, no se recuerda.
+ */
+export const FRENTE_PROPIO = "apps";
+
 /** Los frentes en el orden del YAML: es el orden del portal. */
 export const getFrentes = cache((): Frente[] =>
   getVitrina().categorias.map((c) => ({
     ...c,
     piezas:
-      c.id === "apps"
+      c.id === FRENTE_PROPIO
         ? getManifestVitrina().length
         : (frentes as readonly string[]).includes(c.id)
           ? getPiezas(c.id as FrentePieza).length
           : 0,
   })),
 );
+
+/**
+ * El frente de un segmento de URL dinámico — `undefined` si ese id no existe o
+ * si es el que tiene ruta propia. Lo usan las dos páginas de `[categoria]` y el
+ * sitemap: los tres tienen que coincidir o la vitrina enlaza a un 404.
+ */
+export function getFrenteDinamico(id: string): Frente | undefined {
+  const f = getFrente(id);
+  return f && f.id !== FRENTE_PROPIO ? f : undefined;
+}
+
+/** Los frentes dinámicos ABIERTOS: los únicos que publican piezas. */
+export function frentesDinamicosAbiertos(): Frente[] {
+  return getFrentes().filter(
+    (f) => f.id !== FRENTE_PROPIO && f.estado === "abierta",
+  );
+}
 
 export function getFrente(id: string): Frente | undefined {
   return getFrentes().find((f) => f.id === id);

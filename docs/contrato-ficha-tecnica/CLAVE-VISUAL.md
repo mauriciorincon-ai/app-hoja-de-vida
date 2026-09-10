@@ -1,5 +1,10 @@
-# Clave visual y contrato de la «Ficha técnica» — v1.3.0
+# Clave visual y contrato de la «Ficha técnica» — v1.3.1
 
+> **v1.3.1 (2026-09-09):** PARCHE. `galeria[].archivo` debe ser una ruta relativa **de
+> verdad**: se rechazan `..` y la raíz `/`, que antes pasaban y dejaban a la galería apuntar
+> fuera de su carpeta. **No se impone una forma de carpetas** — organiza tus capturas como
+> quieras — solo no se puede salir. Ninguna ficha entregada hasta hoy se ve afectada.
+>
 > **v1.3.0 (2026-09-09):** ADITIVO. Dos claves opcionales para la pieza que **produce datos** —un
 > tablero, y mañana lo que sea—: **`conclusiones`** (3–6 tarjetas: `cifra` ≤16, `unidad` ≤24
 > opcional, `titulo` ≤60, `texto` ≤240, y `fuente` obligatoria como en toda cifra) y **`galeria`**
@@ -141,7 +146,7 @@ omítelo — una ficha sin «Cómo funciona» es mejor que un diagrama inventado
 ## 6. Cómo se entrega
 
 Un archivo `<slug>.ficha-tecnica.json` que valide contra `ficha-tecnica.schema.json`
-(`schema_version: "1.3.0"`; las versiones 1.x anteriores siguen siendo válidas). Si la ficha trae
+(`schema_version: "1.3.1"`; las versiones 1.x anteriores siguen siendo válidas). Si la ficha trae
 `galeria`, las imágenes viajan junto al JSON en la ruta relativa que declara cada `archivo`
 (`capturas/<slug>/NN-<pagina>.png`, 2560×1440); CV Viva las sirve desde `public/piezas/<frente>/` y
 su test exige que cada una exista. CV Viva lo deja caer en `content/<frente>/` y la ficha existe sola:
