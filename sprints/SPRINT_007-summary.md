@@ -5,7 +5,7 @@ status: closed
 opened: 2026-09-06
 closed: 2026-09-09
 branch: sprint-007/las-estanterias
-pr: <se completa al abrirlo>
+pr: https://github.com/mauriciorincon-ai/app-hoja-de-vida/pull/21
 ---
 
 # Sprint 007 Summary — CV Viva
