@@ -18,7 +18,8 @@
     "cerrarMenu": "Close the menu",
     "menu": "Menu",
     "vitrina": "Showcase",
-    "hojaDeVida": "Résumé"
+    "hojaDeVida": "Résumé",
+    "estudios": "Education"
   },
   "hero": {
     "ctaApps": "Explore the apps",
@@ -29,11 +30,13 @@
   },
   "timeline": {
     "verMas": "See full achievements",
-    "verMenos": "See less"
+    "verMenos": "See less",
+    "verCaseStudy": "View case study",
+    "indiceAria": "Year of the experience in view"
   },
   "detalle": {
     "eyebrow": "Case study",
-    "volver": "Projects",
+    "volver": "Career",
     "contexto": "Context",
     "reto": "The challenge",
     "acciones": "What I did",
@@ -265,5 +268,16 @@
     "verDetalle": "Open the full card",
     "cierreNota": "Shown here; not handed over. The waiting list promises no date.",
     "volverFichaTecnica": "Back to the technical sheet"
+  },
+  "vitrinaHome": {
+    "titulo": "What I build",
+    "linea": "Four fronts: apps, agents, research and dashboards. Each with its pieces, and every piece with its technical sheet.",
+    "ir": "Enter the showcase"
+  },
+  "estudios": {
+    "sinPeriodo": "No date declared"
+  },
+  "skills": {
+    "linea": "What I use day to day, by group. No made-up percentages: what you see here is what I can do."
   }
 }

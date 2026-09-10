@@ -29,11 +29,16 @@ test.describe("Páginas de detalle /proyectos/<slug> (capa 2)", () => {
   }) => {
     await page.goto("/es");
     await page.locator("form[data-hydrated=true]").waitFor();
-    await page.locator("#proyectos").scrollIntoViewIfNeeded();
+    await page.locator("#trayectoria").scrollIntoViewIfNeeded();
 
-    // Entrar al primer case study desde su card — timeout amplio: bajo carga
-    // paralela la navegación client-side puede exceder los 5s (lección S1)
-    await page.getByRole("link", { name: "Ver case study" }).first().click();
+    // Entrar al primer case study desde SU HITO de la trayectoria (la sección
+    // «Proyectos» dejó la HOME en la revisión post-S7) — timeout amplio: bajo
+    // carga paralela la navegación client-side puede exceder los 5s.
+    await page
+      .locator(
+        `#trayectoria [data-case-study][href$="/proyectos/${proyectoEs.slug}"]`,
+      )
+      .click();
     await expect(page).toHaveURL(
       new RegExp(`/es/proyectos/${proyectoEs.slug}$`),
       { timeout: 15_000 },
@@ -54,12 +59,12 @@ test.describe("Páginas de detalle /proyectos/<slug> (capa 2)", () => {
       { timeout: 15_000 },
     );
 
-    // Breadcrumb: regreso a la sección Proyectos de la HOME
+    // Breadcrumb: regreso a la trayectoria de la HOME, que es de donde se vino
     await page
       .getByRole("navigation", { name: "Breadcrumb" })
       .getByRole("link")
       .click();
-    await expect(page).toHaveURL(/\/en#proyectos$/);
+    await expect(page).toHaveURL(/\/en#trayectoria$/);
   });
 
   test("el case study completo está en el HTML estático (gate ATS/SEO)", async ({

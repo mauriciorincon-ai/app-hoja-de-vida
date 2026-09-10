@@ -18,7 +18,8 @@
     "cerrarMenu": "Cerrar el menú",
     "menu": "Menú",
     "vitrina": "Vitrina",
-    "hojaDeVida": "Hoja de vida"
+    "hojaDeVida": "Hoja de vida",
+    "estudios": "Estudios"
   },
   "hero": {
     "ctaApps": "Explora las apps",
@@ -29,11 +30,13 @@
   },
   "timeline": {
     "verMas": "Ver logros completos",
-    "verMenos": "Ver menos"
+    "verMenos": "Ver menos",
+    "verCaseStudy": "Ver case study",
+    "indiceAria": "Año de la experiencia a la vista"
   },
   "detalle": {
     "eyebrow": "Case study",
-    "volver": "Proyectos",
+    "volver": "Trayectoria",
     "contexto": "Contexto",
     "reto": "El reto",
     "acciones": "Qué hice",
@@ -265,5 +268,16 @@
     "verDetalle": "Ver la ficha completa",
     "cierreNota": "Aquí se muestra; no se entrega. La lista de espera no promete fecha.",
     "volverFichaTecnica": "Volver a la ficha técnica"
+  },
+  "vitrinaHome": {
+    "titulo": "Lo que construyo",
+    "linea": "Cuatro frentes: apps, agentes, investigaciones y tableros. Cada uno con sus piezas, y cada pieza con su ficha técnica.",
+    "ir": "Entrar a la vitrina"
+  },
+  "estudios": {
+    "sinPeriodo": "Sin fecha declarada"
+  },
+  "skills": {
+    "linea": "Lo que uso a diario, por grupo. Sin porcentajes inventados: lo que aparece aquí es lo que sé hacer."
   }
 }

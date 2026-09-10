@@ -35,6 +35,7 @@ trayectoria:
   - periodo: "2025 — today"
     rol: "Analytics Professional"
     organizacion: "Fundación CTIC"
+    proyecto: "fundacion-ctic"
     descripcion: >-
       Analytics and data governance for administrative and clinical decisions
       in healthcare.
@@ -46,6 +47,7 @@ trayectoria:
   - periodo: "2023 — 2025"
     rol: "Data Strategy Lead"
     organizacion: "Vesting — automation-agents startup"
+    proyecto: "vesting"
     descripcion: >-
       Data ecosystem for AI agents on Microsoft Fabric, built from scratch:
       architecture, governance, real-time agent monitoring and a replicable
@@ -58,6 +60,7 @@ trayectoria:
   - periodo: "2023"
     rol: "Senior Analytics Analyst"
     organizacion: "Banco Pichincha"
+    proyecto: "banco-pichincha"
     descripcion: >-
       BI adopted by 50+ users, ETL times cut by 35%, predictive models above
       90% accuracy, and co-led data governance.
@@ -71,6 +74,7 @@ trayectoria:
   - periodo: "2021 — 2022"
     rol: "Post-Operational Analysis"
     organizacion: "C&M Consultores (TransMilenio)"
+    proyecto: "transmilenio-cm"
     descripcion: >-
       BI adoption (+35% efficiency), an ETL that unified sources (+70%) and
       demand forecasting with scikit-learn.
@@ -83,6 +87,7 @@ trayectoria:
   - periodo: "2020 — 2021"
     rol: "Information Systems Analyst"
     organizacion: "Cafam"
+    proyecto: "cafam"
     descripcion: >-
       Led 20 people through the WMS implementation: −25% errors and +15%
       operational efficiency.
@@ -119,11 +124,13 @@ trayectoria:
       - "ERP and database structures for the supply chain."
       - "Quality assurance under ISO 9001:2015."
       - "A team of 12 people with 95% client satisfaction."
-  - periodo: "Education"
-    rol: "Industrial Engineering — emphasis in Data Analytics Intelligence"
-    organizacion: "Pontificia Universidad Javeriana"
-    descripcion: >-
-      Parallel studies in Industrial Design. English B2 (IELTS, Melbourne).
+# Education (post-S7 review): its own section on the HOME, in /cv and in the PDF.
+# `periodo` stays empty until you add the years — no date gets made up.
+estudios:
+  - titulo: "Industrial Engineering"
+    institucion: "Pontificia Universidad Javeriana"
+    periodo: ""
+    nota: "Emphasis in Data Analytics Intelligence. Parallel studies in Industrial Design. English B2 (IELTS, Melbourne)."
 
 logros:
   - valor: 8

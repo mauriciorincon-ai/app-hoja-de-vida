@@ -33,19 +33,21 @@ test.describe("Nav móvil (disclosure del header)", () => {
     await expect(toggle).toHaveAccessibleName("Cerrar el menú");
     const panel = page.locator("#nav-movil");
     await expect(panel).toBeVisible();
-    await expect(panel.getByRole("link", { name: "Roadmap" })).toBeVisible();
+    await expect(panel.getByRole("link", { name: "Contacto" })).toBeVisible();
+    // «Roadmap» ya no es destino de la HOME (vive en /vitrina/apps).
+    await expect(panel.getByRole("link", { name: "Roadmap" })).toHaveCount(0);
 
     // Escape cierra y devuelve el foco al botón
     await page.keyboard.press("Escape");
     await expect(page.locator("#nav-movil")).toHaveCount(0);
     await expect(toggle).toBeFocused();
 
-    // Reabrir y navegar a Roadmap por la UI: el menú se cierra al elegir
+    // Reabrir y navegar a Contacto por la UI: el menú se cierra al elegir
     await toggle.click();
-    await panel.getByRole("link", { name: "Roadmap" }).click();
-    await expect(page).toHaveURL(/#roadmap$/);
+    await panel.getByRole("link", { name: "Contacto" }).click();
+    await expect(page).toHaveURL(/#contacto$/);
     await expect(page.locator("#nav-movil")).toHaveCount(0);
-    await expect(page.locator("#roadmap")).toBeInViewport();
+    await expect(page.locator("#contacto")).toBeInViewport();
   });
 
   test("el toggle solo existe en móvil (en escritorio hay nav completo)", async ({
@@ -65,12 +67,13 @@ test.describe("Nav móvil (disclosure del header)", () => {
 });
 
 /** Los cuatro destinos del primer nivel, en orden. */
-const PRIMER_NIVEL = ["Hoja de vida", "Vitrina", "Roadmap", "Contacto"];
+// TRES desde la revisión post-S7: «Roadmap» se fue con las apps a la vitrina.
+const PRIMER_NIVEL = ["Hoja de vida", "Vitrina", "Contacto"];
 
 test.describe("Desplegable «Hoja de vida» (escritorio)", () => {
   test.use({ viewport: { width: 1280, height: 900 } });
 
-  test("el menú se queda en CUATRO destinos y ninguno se llama «Apps»", async ({
+  test("el menú se queda en TRES destinos y ninguno se llama «Apps» ni «Roadmap»", async ({
     page,
   }) => {
     await page.goto("/es");
@@ -86,6 +89,8 @@ test.describe("Desplegable «Hoja de vida» (escritorio)", () => {
 
     // «Apps» prometía lo mismo que «Vitrina» y no enseñaba apps visitables.
     await expect(nav.getByRole("link", { name: "Apps" })).toHaveCount(0);
+    // «Roadmap» es una pregunta sobre las apps: vive en /vitrina/apps.
+    await expect(nav.getByRole("link", { name: "Roadmap" })).toHaveCount(0);
   });
 
   test("abre, lleva a una sección, y se opera por teclado", async ({ page }) => {
@@ -100,7 +105,7 @@ test.describe("Desplegable «Hoja de vida» (escritorio)", () => {
     const panel = page.locator("#nav-hoja-de-vida");
     // Las cinco secciones del CV, ninguna perdida al agrupar.
     await expect(panel.getByRole("link")).toHaveCount(5);
-    for (const s of ["Trayectoria", "Logros", "Proyectos", "Skills", "Certificaciones"])
+    for (const s of ["Trayectoria", "Logros", "Estudios", "Certificaciones", "Skills"])
       await expect(panel.getByRole("link", { name: s })).toBeVisible();
 
     // Escape cierra y devuelve el foco al botón que abrió.
@@ -110,10 +115,10 @@ test.describe("Desplegable «Hoja de vida» (escritorio)", () => {
 
     // Elegir una sección navega y cierra.
     await toggle.click();
-    await panel.getByRole("link", { name: "Proyectos" }).click();
-    await expect(page).toHaveURL(/#proyectos$/);
+    await panel.getByRole("link", { name: "Estudios" }).click();
+    await expect(page).toHaveURL(/#estudios$/);
     await expect(panel).toHaveCount(0);
-    await expect(page.locator("#proyectos")).toBeInViewport();
+    await expect(page.locator("#estudios")).toBeInViewport();
   });
 
   test("pulsar fuera lo cierra", async ({ page }) => {

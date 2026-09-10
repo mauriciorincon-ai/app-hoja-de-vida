@@ -91,7 +91,7 @@ jobs:
       - run: pnpm build
       - name: Lighthouse CI contra perf-budget.json
         # Solo páginas PÚBLICAS (wiki: lighthouse-solo-paginas-publicas). El budget
-        # (ADR-006) cubre las rutas nuevas del S4: el roadmap vive en la HOME (/),
+        # (ADR-006) cubre las rutas nuevas del S4: el roadmap vive en /es/vitrina/apps,
         # las brochures son rutas públicas propias y se auditan aquí.
         # S7: se añaden el escaparate de un frente no-app y una de sus fichas —
         # son plantillas, así que basta una de cada para vigilar el presupuesto.

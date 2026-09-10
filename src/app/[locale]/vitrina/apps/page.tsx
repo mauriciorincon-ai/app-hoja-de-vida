@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { Reveal } from "@/components/motion/reveal";
+import { Roadmap } from "@/components/home/roadmap";
 import { MuestraApp } from "@/components/vitrina/muestra";
 import { appsConBrochure } from "@/lib/brochure";
 import { Link } from "@/i18n/navigation";
@@ -13,6 +14,7 @@ import { getCv } from "@/lib/content";
 import { SITE_URL } from "@/lib/site";
 import { getFrente } from "@/lib/vitrina/categorias";
 import { getFichasVitrina } from "@/lib/vitrina/loader";
+import { appsConRoadmap } from "@/lib/votes/roadmap";
 
 /**
  * EL FRENTE «APPS» — el escaparate (S5, ADR-013 · reubicado en ADR-015): las
@@ -81,6 +83,10 @@ export default async function VitrinaAppsPage({ params }: Params) {
   // ahora tiene UNA sola puerta. Antes su acceso era la sección «Apps» de la
   // HOME, retirada por prometer lo mismo que la vitrina.
   const propias = appsConBrochure();
+  // «Qué viene — y tú decides el orden» es una pregunta sobre las apps, así
+  // que se contesta aquí, con las apps (revisión post-S7): antes vivía en la
+  // HOME, donde nadie le pregunta a una hoja de vida qué viene.
+  const conRoadmap = appsConRoadmap();
 
   return (
     <>
@@ -130,6 +136,9 @@ export default async function VitrinaAppsPage({ params }: Params) {
               ))}
             </ul>
           </Reveal>
+
+          {/* ── Qué viene: el roadmap votable, con las apps ── */}
+          {conRoadmap.length > 0 && <Roadmap apps={conRoadmap} embebido />}
 
           {/* ── De esta casa: lo construido que sostiene esta misma página ── */}
           {propias.length > 0 && (

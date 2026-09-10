@@ -2,14 +2,17 @@ import { readFileSync } from "node:fs";
 import { expect, test } from "@playwright/test";
 import { parse } from "yaml";
 
+// El orden de la HOME desde la revisión post-S7: la vitrina ocupa el sitio de
+// «Proyectos», los estudios tienen sección propia, y el roadmap se fue con las
+// apps a /vitrina/apps.
 const SECTIONS = [
   "perfil",
   "trayectoria",
   "logros",
-  "proyectos",
-  "skills",
+  "vitrina",
+  "estudios",
   "certificaciones",
-  "roadmap",
+  "skills",
   "contacto",
 ];
 
@@ -72,11 +75,11 @@ test.describe("HOME — happy path del sprint", () => {
     // y las dos exploraciones siguen siendo las opciones del formulario.
     await expect(page.locator("#apps")).toHaveCount(0);
 
-    // Roadmap data-driven: una fila votable por feature de data/apps.yaml
-    await page.locator("#roadmap").scrollIntoViewIfNeeded();
-    await expect(page.locator("#roadmap [data-feature-id]")).toHaveCount(
-      featuresRoadmap.length,
-    );
+    // Ni «Proyectos» ni «Roadmap» viven ya en la HOME: la vitrina asoma sus
+    // cuatro frentes y el roadmap está con las apps (vitrina.spec lo vigila).
+    await expect(page.locator("#proyectos")).toHaveCount(0);
+    await expect(page.locator("#roadmap")).toHaveCount(0);
+    await expect(page.locator("#vitrina [data-frente]")).toHaveCount(4);
 
     // Toggle de idioma (conserva la página, cambia la ruta) — timeout amplio:
     // bajo carga paralela la navegación client-side puede exceder los 5s
@@ -115,12 +118,12 @@ test.describe("HOME — happy path del sprint", () => {
       expect(html).toContain('hrefLang="es"');
       expect(html).toContain('hrefLang="en"');
       // Contenido de secciones sin ejecutar JS, en el idioma de la ruta. El
-      // badge de estado de las apps se comprobaba aquí y salía del showcase;
-      // retirada esa sección, lo que queda en la HOME es el roadmap votable,
-      // que nombra la app y sus features. El gate no se debilita: sigue
-      // exigiendo contenido real de `apps.yaml` en el HTML estático.
-      expect(html).toContain(apps[0].nombre[locale as "es" | "en"]);
-      expect(html).toContain(primeraFeature.titulo[locale as "es" | "en"]);
+      // roadmap se fue a /vitrina/apps (su gate ATS está allá): lo que la HOME
+      // sigue exigiendo en el HTML estático es la vitrina asomada con sus
+      // cuatro frentes y los estudios recién nacidos como sección.
+      expect(html).toContain('id="vitrina"');
+      expect(html).toContain('id="estudios"');
+      expect(html).toContain("Pontificia Universidad Javeriana");
     }
     // El grueso (capa 2) también vive en el HTML aunque nazca colapsado
     const res = await request.get("/es");
@@ -158,5 +161,24 @@ test.describe("HOME — happy path del sprint", () => {
     await expect(page.getByRole("heading", { level: 1 })).toContainText(
       "Esta página no existe",
     );
+  });
+});
+
+test.describe("El roadmap vive con las apps (revisión post-S7)", () => {
+  test("/vitrina/apps enseña una fila votable por feature, y la HOME ninguna", async ({
+    page,
+    request,
+  }) => {
+    await page.goto("/es/vitrina/apps");
+    await page.locator("#roadmap").scrollIntoViewIfNeeded();
+    await expect(page.locator("#roadmap [data-feature-id]")).toHaveCount(
+      featuresRoadmap.length,
+    );
+    // Gate ATS: la app y su feature, en el HTML estático de esa ruta.
+    for (const locale of ["es", "en"] as const) {
+      const html = await (await request.get(`/${locale}/vitrina/apps`)).text();
+      expect(html).toContain(apps[0].nombre[locale]);
+      expect(html).toContain(primeraFeature.titulo[locale]);
+    }
   });
 });

@@ -34,6 +34,7 @@ const LABELS = {
   es: {
     perfil: "Perfil",
     trayectoria: "Trayectoria",
+    estudios: "Estudios",
     logros: "Logros",
     certificaciones: "Certificaciones",
     skills: "Skills",
@@ -44,6 +45,7 @@ const LABELS = {
   en: {
     perfil: "Profile",
     trayectoria: "Career",
+    estudios: "Education",
     logros: "Achievements",
     certificaciones: "Certifications",
     skills: "Skills",
@@ -172,7 +174,9 @@ export function buildChunks({ cv, apps, historia, locale }) {
   );
 
   for (const p of cv.proyectos) {
-    const ancla = p.casestudy ? `/proyectos/${p.slug}` : "#proyectos";
+    // Sin sección Proyectos en la HOME (post-S7), la cita de un proyecto
+    // sin detalle cae en la trayectoria, que es donde vive su hito.
+    const ancla = p.casestudy ? `/proyectos/${p.slug}` : "#trayectoria";
     push(`proyecto-${p.slug}`, p.nombre, `${p.resumen} ${(p.stack ?? []).join(", ")}`, ancla);
     if (p.casestudy) {
       const c = p.casestudy;
@@ -186,6 +190,15 @@ export function buildChunks({ cv, apps, historia, locale }) {
       );
     }
   }
+
+  push(
+    "estudios",
+    L.estudios,
+    (cv.estudios ?? [])
+      .map((e) => `${e.titulo}, ${e.institucion}${e.periodo ? ` (${e.periodo})` : ""}. ${e.nota ?? ""}`)
+      .join(" · "),
+    "#estudios",
+  );
 
   push(
     "certificaciones",

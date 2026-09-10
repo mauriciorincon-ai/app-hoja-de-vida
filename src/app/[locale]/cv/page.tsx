@@ -170,24 +170,37 @@ export default async function CvPage({ params }: Params) {
               </ul>
             </section>
 
-            <section aria-labelledby="cv-skills">
-              <h3
-                id="cv-skills"
-                className="mb-4 font-mono text-[13px] tracking-[0.12em] text-ink-2 uppercase"
-              >
-                {tNav("skills")}
-              </h3>
-              <ul className="flex flex-col gap-2">
-                {cv.skills.map((grupo) => (
-                  <li key={grupo.grupo} className="text-sm text-ink-1">
-                    <span className="font-semibold text-ink-0">
-                      {grupo.grupo}:
-                    </span>{" "}
-                    {grupo.items.join(" · ")}
-                  </li>
-                ))}
-              </ul>
-            </section>
+            {cv.estudios.length > 0 && (
+              <section aria-labelledby="cv-estudios">
+                <h3
+                  id="cv-estudios"
+                  className="mb-4 font-mono text-[13px] tracking-[0.12em] text-ink-2 uppercase"
+                >
+                  {tNav("estudios")}
+                </h3>
+                <ul className="flex flex-col gap-4">
+                  {cv.estudios.map((e) => (
+                    <li key={`${e.titulo}-${e.institucion}`}>
+                      <div className="flex flex-wrap items-baseline justify-between gap-x-4">
+                        <h4 className="text-base font-semibold text-ink-0">
+                          {e.titulo} — {e.institucion}
+                        </h4>
+                        {e.periodo && (
+                          <span className="font-mono text-[12px] text-ink-2 uppercase tabular-nums">
+                            {e.periodo}
+                          </span>
+                        )}
+                      </div>
+                      {e.nota && (
+                        <p className="mt-1 text-sm leading-relaxed text-ink-1">
+                          {e.nota}
+                        </p>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
 
             <section aria-labelledby="cv-certificaciones">
               <h3
@@ -210,6 +223,25 @@ export default async function CvPage({ params }: Params) {
                 ))}
               </ul>
             </section>
+            <section aria-labelledby="cv-skills">
+              <h3
+                id="cv-skills"
+                className="mb-4 font-mono text-[13px] tracking-[0.12em] text-ink-2 uppercase"
+              >
+                {tNav("skills")}
+              </h3>
+              <ul className="flex flex-col gap-2">
+                {cv.skills.map((grupo) => (
+                  <li key={grupo.grupo} className="text-sm text-ink-1">
+                    <span className="font-semibold text-ink-0">
+                      {grupo.grupo}:
+                    </span>{" "}
+                    {grupo.items.join(" · ")}
+                  </li>
+                ))}
+              </ul>
+            </section>
+
           </div>
 
           <p className="mt-14 print:hidden">

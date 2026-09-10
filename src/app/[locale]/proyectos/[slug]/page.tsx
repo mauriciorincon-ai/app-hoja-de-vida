@@ -88,8 +88,8 @@ export default async function ProyectoDetallePage({ params }: Params) {
           {
             "@type": "ListItem",
             position: 1,
-            name: tNav("proyectos"),
-            item: `${SITE_URL}/${locale}#proyectos`,
+            name: tNav("trayectoria"),
+            item: `${SITE_URL}/${locale}#trayectoria`,
           },
           {
             "@type": "ListItem",
@@ -114,7 +114,7 @@ export default async function ProyectoDetallePage({ params }: Params) {
         <article className="mx-auto max-w-3xl px-4 py-16 md:px-6 md:py-20">
           <nav aria-label="Breadcrumb">
             <Link
-              href="/#proyectos"
+              href="/#trayectoria"
               className="flex min-h-11 items-center gap-1.5 self-start font-mono text-[13px] text-ink-2 transition-colors duration-[120ms] hover:text-ink-0"
             >
               <span aria-hidden="true">←</span>
