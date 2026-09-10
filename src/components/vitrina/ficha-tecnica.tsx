@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
@@ -22,7 +23,10 @@ import { ProcesoBpmn } from "./proceso-bpmn";
  *   2 cómo funciona — el proceso en BPMN, generado desde datos (OPCIONAL
  *     desde v1.1.0: si la pieza no trae proceso, la sección no existe y las
  *     siguientes se renumeran — `numerarSecciones`)
+ *   · lo que dicen los datos — conclusiones con su cifra y su fuente
+ *     (OPCIONAL, v1.3.0: lo trae una pieza que produce datos, no una app)
  *   3 qué tiene — una tarjeta por bloque, sin listar el detalle
+ *   · cómo se ve — la galería de pantallas reales (OPCIONAL, v1.3.0)
  *   4 límites, y lo que nunca hace
  *   5 dónde está — la versión anclada
  *   — cierre: al detalle + lista de espera
@@ -103,9 +107,22 @@ export async function FichaTecnica({
 }) {
   const t = await getTranslations("fichaTecnica");
   const tv = await getTranslations("vitrina");
-  const { pieza, promesa, cifras, bloques, proceso, hitos } = datos;
+  const {
+    pieza,
+    promesa,
+    cifras,
+    bloques,
+    proceso,
+    hitos,
+    conclusiones,
+    galeria,
+  } = datos;
   const totalFuncionalidades = bloques.reduce((s, b) => s + b.cuenta, 0);
-  const n = numerarSecciones(Boolean(proceso));
+  const n = numerarSecciones({
+    proceso: Boolean(proceso),
+    conclusiones: Boolean(conclusiones),
+    galeria: Boolean(galeria),
+  });
 
   return (
     <article data-ficha-tecnica={pieza.slug} data-frente={pieza.frente}>
@@ -268,6 +285,48 @@ export async function FichaTecnica({
         </Seccion>
       )}
 
+      {/* ── Lo que dicen los datos (solo si la pieza trae conclusiones) ──── */}
+      {conclusiones && (
+        <Seccion
+          n={n.conclusiones!}
+          id={`ft-${n.conclusiones}-${pieza.slug}`}
+          titulo={t("conclusiones")}
+          sub={t("conclusionesSub")}
+        >
+          <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {conclusiones.map((c, i) => (
+              <li
+                key={i}
+                data-conclusion={i + 1}
+                className="flex flex-col rounded-[12px] border border-paper-2 bg-paper-0 p-5 shadow-sh-1"
+              >
+                <p className="font-display text-[1.9rem] leading-none tracking-[-0.02em] text-ink-0 tabular-nums">
+                  {c.cifra}
+                  {c.unidad && (
+                    <span className="ml-1.5 font-sans text-[13px] font-normal text-ink-2">
+                      {c.unidad}
+                    </span>
+                  )}
+                </p>
+                <h3 className="mt-3 font-display text-[1.05rem] leading-tight font-medium text-ink-0">
+                  {c.titulo}
+                </h3>
+                <p className="mt-2 text-[13.5px] leading-snug text-ink-1">
+                  {c.texto}
+                </p>
+                <span
+                  data-fuente={c.fuente}
+                  title={tv(`fuenteAyuda.${c.fuente}`)}
+                  className={`mt-3 self-start rounded-full px-2 py-0.5 font-mono text-[10px] tracking-[0.04em] uppercase ${colorFuente[c.fuente]}`}
+                >
+                  {tv(`fuentes.${c.fuente}`)}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </Seccion>
+      )}
+
       {/* ── 03 ───────────────────────────────────────────────────────────── */}
       <Seccion
         n={n.s03!}
@@ -304,6 +363,44 @@ export async function FichaTecnica({
           ))}
         </ul>
       </Seccion>
+
+      {/* ── Cómo se ve (solo si la pieza trae galería) ───────────────────── */}
+      {galeria && (
+        <Seccion
+          n={n.galeria!}
+          id={`ft-${n.galeria}-${pieza.slug}`}
+          titulo={t("galeria")}
+          sub={t("galeriaSub")}
+        >
+          <ul className="grid gap-4 sm:grid-cols-2">
+            {galeria.map((g, i) => (
+              <li key={g.archivo} data-captura={i + 1}>
+                <figure className="m-0">
+                  <div className="overflow-hidden rounded-[12px] border border-paper-2 bg-paper-1 shadow-sh-1">
+                    {/* La ruta de la ficha es relativa; CV Viva la sirve desde
+                        public/piezas/<frente>/. Perezosa: vive bajo el pliegue. */}
+                    <Image
+                      src={`/piezas/${pieza.frente}/${g.archivo}`}
+                      alt={g.pie}
+                      width={2560}
+                      height={1440}
+                      sizes="(min-width: 1024px) 480px, (min-width: 640px) 50vw, 100vw"
+                      loading="lazy"
+                      className="block h-auto w-full"
+                    />
+                  </div>
+                  <figcaption className="mt-2 flex flex-wrap items-baseline gap-x-2 text-[12.5px] leading-snug text-ink-2">
+                    <span className="font-mono text-[10px] tracking-[0.06em] uppercase">
+                      {t("galeriaPie", { n: i + 1, total: galeria.length })}
+                    </span>
+                    <span>· {g.pie}</span>
+                  </figcaption>
+                </figure>
+              </li>
+            ))}
+          </ul>
+        </Seccion>
+      )}
 
       {/* ── 04 ───────────────────────────────────────────────────────────── */}
       <Seccion

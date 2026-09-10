@@ -1,0 +1,243 @@
+{
+  "schema_version": "1.1.0",
+  "actualizado": "2026-09-07",
+  "pieza": {
+    "slug": "banca-colombiana",
+    "nombre": "Banca colombiana bajo la lupa",
+    "frente": "tableros",
+    "estado": "sellado",
+    "ciclo": "H1",
+    "version": "1.0.0",
+    "sellado_en": "2026-09-07",
+    "sprints_cerrados": 0
+  },
+  "promesa": {
+    "tagline": "El sistema financiero colombiano, con la aritmética del origen verificada",
+    "para_quien": "Para quien evalúa trabajo analítico sobre datos regulatorios y quiere ver el criterio: cómo se descubre que la cifra oficial de «ingresos» está inflada al doble, cómo se decide entre deduplicar y sumar filas repetidas, y cómo se comparan indicadores que el origen mide con cuatro reglas distintas sin fingir que son la misma.",
+    "intro": "La Superintendencia Financiera publica el plan de cuentas completo de cada entidad vigilada, mes a mes. El origen trae dieciséis trampas —resultados acumulados dentro del año, niveles del plan de cuentas mezclados, una cuenta de «ingresos» inflada al doble— y todas están medidas antes del modelo; las que cambian una cifra publicada se explican en el propio tablero."
+  },
+  "titular": "Once años de estados financieros de las 81 entidades de crédito de Colombia, con las identidades contables del origen corridas enteras: el balance cierra en las 7 779 combinaciones y la solvencia se reproduce en 3 809 de 3 811 casos.",
+  "stack": [
+    {
+      "nombre": "Power BI Desktop",
+      "papel": "El tablero: cuatro tablas de hechos con perímetros y periodicidades distintos, que no se relacionan entre sí, y doce páginas en un archivo."
+    },
+    {
+      "nombre": "Power Query (M)",
+      "papel": "Toda la preparación: el plan de cuentas filtrado por código y los resultados desacumulados conservando los flujos negativos."
+    },
+    {
+      "nombre": "DAX",
+      "papel": "Las 62 medidas, cada una nombrando sus códigos de cuenta, y la solvencia recalculada desde sus componentes para que se pueda agregar."
+    },
+    {
+      "nombre": "PBIR escrito por script",
+      "papel": "Doce páginas, seis en español y seis en inglés, generadas con Python desde un solo juego de medidas; falla ante un color huérfano o un binding roto."
+    },
+    {
+      "nombre": "Python",
+      "papel": "El preflight independiente que predijo nueve conteos desde los CSV crudos y acertó los nueve, y las identidades contables corridas enteras."
+    },
+    {
+      "nombre": "API SODA (Socrata)",
+      "papel": "La descarga a demanda de los datasets de la Superintendencia Financiera, sin tocar el que publica datos personales."
+    }
+  ],
+  "cifras": [
+    {
+      "clave": "municipios_con_oficina",
+      "valor": 1094,
+      "unidad": "municipios",
+      "etiqueta": "Municipios con oficina bancaria · 4 743 oficinas",
+      "fuente": "medido",
+      "detalle": "Al corte de junio de 2026, los establecimientos bancarios tienen 4 743 oficinas y 131 347 empleados repartidos en 1 094 municipios, unos 28 empleados por oficina. El mapa del crédito muestra dónde está esa red física y cuánto capta y presta en cada municipio; es un origen trimestral con su propio corte, que no se mezcla con lo mensual."
+    },
+    {
+      "clave": "balance_cierra",
+      "valor": 7779,
+      "unidad": "de 7 779",
+      "etiqueta": "Combinaciones entidad-corte en las que el balance cierra",
+      "fuente": "medido",
+      "detalle": "Activo = Pasivo + Patrimonio, corrido entero y no sobre una muestra, con desvío máximo de 1,7·10⁻¹¹. El origen trae su propia prueba de consistencia; correrla completa es lo que permite afirmar que el modelo carga bien y no solo que carga."
+    },
+    {
+      "clave": "solvencia_reproducida",
+      "valor": 3809,
+      "unidad": "de 3 811",
+      "etiqueta": "Relaciones de solvencia reproducidas desde sus componentes",
+      "fuente": "medido",
+      "detalle": "Patrimonio técnico ÷ (activos ponderados por riesgo + riesgo de mercado + riesgo operativo), dentro de 0,01 puntos. Importa porque es lo único que permite agregar: la solvencia del sistema es el cociente de las sumas, no el promedio de los ratios. El atajo de dividir solo por los activos ponderados se desvía 4,71 puntos en la mediana."
+    },
+    {
+      "clave": "cuenta4_vs_margen",
+      "valor": 506.5,
+      "unidad": "billones en la cuenta 4",
+      "etiqueta": "Lo que dice la cuenta de «ingresos»; el margen real es 41,6",
+      "fuente": "medido",
+      "detalle": "De los 506,5 billones de la cuenta 400000 en doce meses, 283,1 son valoración bruta de derivados de tesorería que del lado del gasto vale 283,9: el negocio neto aportó −0,8. El tablero no publica ninguna medida llamada «Ingresos»; publica margen de intereses, comisiones netas y utilidad, y dedica un bloque de la página de notas a explicar por qué."
+    },
+    {
+      "clave": "inflacion_resultado",
+      "valor": 6.39,
+      "unidad": "veces",
+      "etiqueta": "Lo que se infla un resultado anual sumando los doce meses",
+      "fuente": "medido",
+      "detalle": "Las cuentas de resultado llegan acumuladas dentro del año y reinician cada enero. Se desacumulan en Power Query conservando los flujos negativos, que son reversiones contables legítimas: así el 99,99 % de las series cierra contra su propio acumulado de diciembre, frente al 81,90 % que cerraría si se recortaran en cero."
+    }
+  ],
+  "bloques": [
+    {
+      "orden": 1,
+      "nombre": "El sistema en cifras",
+      "linea": "Cuánto pesa la banca, quién la domina y cómo ha crecido: ranking por tamaño y dos medidas de concentración.",
+      "cuenta": 12
+    },
+    {
+      "orden": 2,
+      "nombre": "De dónde sale la plata",
+      "linea": "Margen, comisiones, costo del riesgo y rentabilidad en doce meses móviles, con ROA y ROE sobre saldos promedio.",
+      "cuenta": 14
+    },
+    {
+      "orden": 3,
+      "nombre": "La calidad de la cartera",
+      "linea": "Qué se está dejando de pagar, en qué producto y desde cuándo, y cuánto de la mora está ya provisionado.",
+      "cuenta": 13
+    },
+    {
+      "orden": 4,
+      "nombre": "El colchón de capital",
+      "linea": "La solvencia recalculada desde sus componentes contra el mínimo legal del 9 %, ordenada por quién está más ajustado.",
+      "cuenta": 14
+    },
+    {
+      "orden": 5,
+      "nombre": "El mapa del crédito",
+      "linea": "Dónde capta y dónde presta el sistema, municipio por municipio, con oficinas y empleados para ver dónde hay red física.",
+      "cuenta": 9
+    },
+    {
+      "orden": 6,
+      "nombre": "Notas, límites y calidad",
+      "linea": "Lo que hubo que medir antes de sumar una cifra: los derivados, las trampas del origen y el perímetro de 81 entidades.",
+      "cuenta": 11
+    },
+    {
+      "orden": 7,
+      "nombre": "Seis páginas en inglés",
+      "linea": "Gemelas de las españolas, desde el mismo modelo y el mismo juego de medidas; ocho tablas llevan sus rótulos en inglés.",
+      "cuenta": 6
+    },
+    {
+      "orden": 8,
+      "nombre": "El modelo semántico",
+      "linea": "16 tablas y 20 relaciones con 62 medidas DAX; cuatro hechos con perímetros distintos, y sin columnas calculadas.",
+      "cuenta": 62
+    }
+  ],
+  "limites": [
+    "Los datos son una foto fechada, no una conexión viva: se actualizan cuando se ejecuta la descarga.",
+    "Los cuatro hechos arrancan en enero de 2016: antes, el desglose de cartera del origen no cierra contra su propio total.",
+    "La solvencia solo existe desde 2021, que es cuando el origen empieza a publicarla, y su página lo declara.",
+    "La armonización de los tramos de mora es una aproximación declarada: cada modalidad de crédito usa su propio esquema de días."
+  ],
+  "nunca": [
+    "Nunca publica la cuenta 4 como ingresos: el 56 % de lo que contiene es valoración bruta de derivados que se cancela contra el gasto.",
+    "Nunca suma niveles del plan de cuentas entre sí: cada medida nombra sus códigos, porque sumar la columna sin filtrar infla el activo 2,7 veces.",
+    "Nunca mezcla los cuatro hechos en una sola cifra: tienen perímetros distintos —81, 63, 66 y 70 entidades— y dos periodicidades.",
+    "Nunca cruza entidades por nombre, solo por el par (tipo, código): los nombres no coinciden entre datasets y uno de ellos escribe «CORPORACIONES FINA11NCIERAS».",
+    "Nunca carga datos personales: el dataset de entidades vigiladas publica nombre, documento, dirección y correo del representante legal, y no se descarga."
+  ],
+  "conclusiones": [
+    {
+      "cifra": "70,9 %",
+      "unidad": "en cinco bancos",
+      "titulo": "Cinco bancos tienen el 70,9 % del activo bancario",
+      "texto": "A junio de 2026, el índice HHI de los establecimientos bancarios es 1 271, concentración moderada; la cuota de las cinco mayores lo dice más claro. Los bancos son el 84,4 % del activo de las 81 entidades vigiladas.",
+      "fuente": "medido"
+    },
+    {
+      "cifra": "4,29 %",
+      "unidad": "de cartera vencida",
+      "titulo": "Uno de cada 23 pesos prestados está en mora",
+      "texto": "Cartera vencida de 32,5 billones sobre 757,8 de saldo, con 1 336 558 clientes en mora. Las provisiones cubren el 123,2 % de lo vencido: la mora está reconocida antes de perderse. El interés bancario corriente vigente es 19,19 %.",
+      "fuente": "medido"
+    },
+    {
+      "cifra": "15,22",
+      "unidad": "de solvencia total",
+      "titulo": "Ningún banco está por debajo del mínimo legal de solvencia",
+      "texto": "La relación de solvencia agregada de los bancos es 15,22 contra un mínimo del 9: un colchón de 6,22 puntos. Agregar solo es posible porque se recalcula como cociente de sumas, no como promedio de ratios.",
+      "fuente": "medido"
+    },
+    {
+      "cifra": "17,2 %",
+      "unidad": "ROE",
+      "titulo": "Rentabilidad: 17,2 % sobre patrimonio, 1,62 % sobre activo",
+      "texto": "Doce meses a junio de 2026: 97,8 billones de intereses cobrados menos 57,2 pagados dejan 40,7 de margen; tras costo del riesgo (16,0) y personal (15,2), la utilidad es 17,3. ROA y ROE van sobre saldos promedio, no de cierre.",
+      "fuente": "medido"
+    },
+    {
+      "cifra": "1 326,9",
+      "unidad": "billones de activo",
+      "titulo": "El sistema de crédito colombiano pesa 1 326,9 billones",
+      "texto": "Activo de las 81 entidades vigiladas a junio de 2026, con 1 150,8 de pasivo y 176,1 de patrimonio. Los bancos son el 84,4 %; el resto, corporaciones financieras, compañías de financiamiento, oficiales especiales y cooperativas.",
+      "fuente": "medido"
+    },
+    {
+      "cifra": "747,2",
+      "unidad": "billones en depósitos",
+      "titulo": "El sistema capta más de lo que presta, municipio a municipio",
+      "texto": "Depósitos municipales de 747,2 billones frente a 694,3 de cartera, en 1 094 municipios con presencia, 4 743 oficinas y 131 347 empleados. Es un origen trimestral con su propio corte y no se mezcla con lo mensual.",
+      "fuente": "medido"
+    }
+  ],
+  "hitos": [
+    {
+      "valor": "H1",
+      "etiqueta": "ciclo"
+    },
+    {
+      "valor": "7",
+      "etiqueta": "fases de construcción cerradas"
+    },
+    {
+      "valor": "2026-09-07",
+      "etiqueta": "sellada"
+    },
+    {
+      "valor": "v1.0.0",
+      "etiqueta": "version"
+    },
+    {
+      "valor": "7 779",
+      "etiqueta": "balances que cierran, de 7 779"
+    }
+  ],
+  "galeria": [
+    {
+      "archivo": "capturas/banca-colombiana/01-el-sistema-en-cifras.png",
+      "pie": "El sistema en cifras"
+    },
+    {
+      "archivo": "capturas/banca-colombiana/02-de-donde-sale-la-plata.png",
+      "pie": "De dónde sale la plata"
+    },
+    {
+      "archivo": "capturas/banca-colombiana/03-la-calidad-de-la-cartera.png",
+      "pie": "La calidad de la cartera"
+    },
+    {
+      "archivo": "capturas/banca-colombiana/04-el-colchon-de-capital.png",
+      "pie": "El colchón de capital"
+    },
+    {
+      "archivo": "capturas/banca-colombiana/05-el-mapa-del-credito.png",
+      "pie": "El mapa del crédito"
+    },
+    {
+      "archivo": "capturas/banca-colombiana/06-notas-limites-y-calidad.png",
+      "pie": "Notas, límites y calidad"
+    }
+  ]
+}

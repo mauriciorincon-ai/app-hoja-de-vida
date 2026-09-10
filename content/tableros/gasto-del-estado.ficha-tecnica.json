@@ -1,0 +1,243 @@
+{
+  "schema_version": "1.1.0",
+  "actualizado": "2026-09-06",
+  "pieza": {
+    "slug": "gasto-del-estado",
+    "nombre": "¿En qué gasta el Estado colombiano y con quién?",
+    "frente": "tableros",
+    "estado": "sellado",
+    "ciclo": "H1",
+    "version": "1.0.0",
+    "sellado_en": "2026-09-06",
+    "sprints_cerrados": 0
+  },
+  "promesa": {
+    "tagline": "El gasto público colombiano, con sus límites medidos y a la vista",
+    "para_quien": "Para quien evalúa trabajo analítico sobre datos públicos y quiere ver el criterio: cómo se detecta que un origen publica sus métricas acumuladas, cómo se sanea un dato absurdo sin esconderlo, y cómo se declara con cifras que dos fuentes del mismo Estado no son sumables.",
+    "intro": "El presupuesto de la Nación y la contratación pública, dos caras del mismo gasto que casi nunca se miran juntas. El origen trae nueve trampas —métricas que llegan acumuladas, contratos que declaran valores imposibles, claves de entidad que no cruzan— y las nueve están medidas y resueltas antes de modelar, y explicadas en el propio tablero."
+  },
+  "titular": "Cuatro millones de contratos públicos y ocho años de presupuesto nacional en un solo modelo, con la cifra de control validada contra la que aprobó el Congreso y los veintiún contratos imposibles publicados uno por uno.",
+  "stack": [
+    {
+      "nombre": "Power BI Desktop",
+      "papel": "El tablero: dos tablas de hechos que no se relacionan entre sí a propósito, en modo import, y doce páginas en un solo archivo."
+    },
+    {
+      "nombre": "Power Query (M)",
+      "papel": "Toda la preparación, incluido el desacumulado mes a mes de las métricas que el origen publica acumuladas dentro del año."
+    },
+    {
+      "nombre": "DAX",
+      "papel": "Las medidas: los cuatro escalones del embudo, que solo pueden ir a menos, y dos medidas de concentración de proveedores que dicen cosas distintas."
+    },
+    {
+      "nombre": "PBIR escrito por script",
+      "papel": "Doce páginas, seis en español y seis en inglés, generadas con Python, con seis catálogos curados a mano que sostienen los ejes en inglés."
+    },
+    {
+      "nombre": "Python",
+      "papel": "La línea base independiente sobre los CSV crudos, que tumbó un desacumulado propio por aritmética antes de que llegara a Power BI."
+    },
+    {
+      "nombre": "API SODA (Socrata)",
+      "papel": "La descarga a demanda de 4,37 millones de contratos y 337 034 filas de presupuesto, con el SHA-256 de cada archivo."
+    }
+  ],
+  "cifras": [
+    {
+      "clave": "apropiacion_2024",
+      "valor": 502.597,
+      "unidad": "billones COP",
+      "etiqueta": "Apropiación inicial 2024, la cifra que aprobó el Congreso",
+      "fuente": "medido",
+      "detalle": "El modelo reproduce exactamente el Presupuesto General de la Nación de esa vigencia. Es la única capa de validación que no sale del dato: comprueba que el archivo dice la verdad, no solo que el modelo lo cargó bien."
+    },
+    {
+      "clave": "contratos_saneados",
+      "valor": 4373766,
+      "unidad": "contratos",
+      "etiqueta": "Contratos saneados, más 337 034 filas de presupuesto",
+      "fuente": "medido",
+      "detalle": "Dos tablas de hechos que no se relacionan entre sí a propósito, porque las claves de entidad no cruzan y ni siquiera cubren el mismo universo. Se conforman por sector y calendario, y por nada más."
+    },
+    {
+      "clave": "valor_recuperado",
+      "valor": 65,
+      "unidad": "%",
+      "etiqueta": "Del valor que la línea base recuperó antes de Power BI",
+      "fuente": "medido",
+      "detalle": "La primera versión del desacumulado perdía dos de cada tres pesos sin que ninguna consulta fallara. Una línea base escrita en Python sobre los archivos crudos lo detectó por aritmética: 19 filas por serie donde solo puede haber 12 meses."
+    },
+    {
+      "clave": "contratacion_directa",
+      "valor": 77,
+      "unidad": "% sin competencia",
+      "etiqueta": "Contratos adjudicados sin competencia; en dinero, el 52 %",
+      "fuente": "calculada",
+      "detalle": "Las dos cifras juntas son el hallazgo: la contratación directa domina en número, pero los contratos grandes sí se licitan. Medido sobre las dieciséis modalidades del periodo, agrupadas en un catálogo curado a mano."
+    },
+    {
+      "clave": "contratos_imposibles",
+      "valor": 21,
+      "unidad": "contratos",
+      "etiqueta": "Contratos con valores imposibles, excluidos y publicados",
+      "fuente": "medido",
+      "detalle": "Suman 8 909 billones de pesos declarados. El mayor dice valer trece veces el presupuesto nacional entero bajo una modalidad que la ley reserva a las compras más pequeñas. No se borran en silencio: el tablero los cuenta y los lista."
+    }
+  ],
+  "bloques": [
+    {
+      "orden": 1,
+      "nombre": "El embudo del presupuesto",
+      "linea": "De lo que aprueba el Congreso a los pesos que salen de caja: cuatro escalones que solo pueden ir a menos, mes a mes.",
+      "cuenta": 13
+    },
+    {
+      "orden": 2,
+      "nombre": "En qué gasta el Estado",
+      "linea": "El presupuesto por sector, nivel del clasificador y entidad, y qué parte es funcionamiento, inversión y deuda.",
+      "cuenta": 7
+    },
+    {
+      "orden": 3,
+      "nombre": "Con quién contrata el Estado",
+      "linea": "Un millón de proveedores y la forma real de ese mercado: los mayores, la participación PYME y la concentración.",
+      "cuenta": 11
+    },
+    {
+      "orden": 4,
+      "nombre": "Cómo contrata el Estado",
+      "linea": "Modalidad, tipo de contrato, estado y tiempos: cuánto se adjudica sin competencia y cuánto dura el contrato típico.",
+      "cuenta": 9
+    },
+    {
+      "orden": 5,
+      "nombre": "El mapa del gasto",
+      "linea": "Dónde se contrata y quién lo hace: departamento, ciudad y región, y la frontera entre lo nacional y lo territorial.",
+      "cuenta": 8
+    },
+    {
+      "orden": 6,
+      "nombre": "Notas, límites y calidad",
+      "linea": "Qué se excluyó y por qué, la validación contra el Congreso y las trampas del origen, con cifras y no con párrafos.",
+      "cuenta": 7
+    },
+    {
+      "orden": 7,
+      "nombre": "Seis páginas en inglés",
+      "linea": "Gemelas de las españolas, desde el mismo modelo; seis catálogos curados a mano sostienen los ejes en inglés.",
+      "cuenta": 6
+    },
+    {
+      "orden": 8,
+      "nombre": "El modelo semántico",
+      "linea": "18 tablas y 16 relaciones con 44 medidas DAX; dos hechos que no se relacionan a propósito, y sin columnas calculadas.",
+      "cuenta": 44
+    }
+  ],
+  "limites": [
+    "Los datos son una foto fechada, no una conexión viva: se actualizan cuando se ejecuta la descarga.",
+    "El presupuesto nacional y la contratación no son sumables: el primero es del Gobierno central y dos de cada tres contratos son de entidades territoriales.",
+    "La contratación empieza en 2022: hasta 2021 la plataforma estaba en adopción y una serie más larga mostraría adopción, no gasto.",
+    "Todas las cifras están en pesos corrientes, sin deflactar, así que la comparación entre años incluye la inflación del periodo."
+  ],
+  "nunca": [
+    "Nunca suma el presupuesto nacional con la contratación pública: serían dos universos distintos y el total no significaría nada.",
+    "Nunca suma las métricas acumuladas del origen: llegan acumuladas dentro del año y sumarlas devuelve cifras siete veces infladas. Se desacumulan al preparar.",
+    "Nunca borra en silencio un contrato con valor absurdo: los excluye del hecho y los publica uno por uno, con su entidad, su modalidad y el valor que declararon.",
+    "Nunca carga datos de personas: el origen publica nombre, cédula, domicilio, nacionalidad y género de tres cargos por contrato, y nada de eso se descarga.",
+    "Nunca traduce un valor del dato con una regla automática: sectores, modalidades y estados van en catálogos curados a mano, porque ninguna heurística acierta."
+  ],
+  "conclusiones": [
+    {
+      "cifra": "8 de 10",
+      "unidad": "contratos",
+      "titulo": "Ocho de cada diez contratos se adjudican sin competencia",
+      "texto": "En 2025, el 77,3 % de los contratos fue contratación directa; en dinero, el 51,8 %. Las dos cifras juntas son el hallazgo: la directa domina en número, pero los contratos grandes sí se licitan.",
+      "fuente": "medido"
+    },
+    {
+      "cifra": "1,08",
+      "unidad": "millones de proveedores",
+      "titulo": "No es un mercado de empresas: es un mercado de personas",
+      "texto": "1,08 millones de proveedores para 4,37 millones de contratos, y la mayoría contrata una sola vez. El 83 % de los contratos vale menos de 50 millones de pesos; el contrato mediano de 2025 vale 21,5 millones y dura 149 días.",
+      "fuente": "medido"
+    },
+    {
+      "cifra": "2 de 3",
+      "unidad": "contratos",
+      "titulo": "Dos de cada tres contratos son de entidades territoriales",
+      "texto": "En 2024, 630 668 contratos son de alcaldías, gobernaciones y entes territoriales y 307 043 de entidades nacionales; en dinero van casi a la par, 63,9 contra 60,6 billones. El contrato nacional es dos veces más grande.",
+      "fuente": "medido"
+    },
+    {
+      "cifra": "87,7 %",
+      "unidad": "ejecutado en 2025",
+      "titulo": "De 523 billones aprobados para 2025 se pagaron 447,6",
+      "texto": "Apropiación inicial 523,0 billones, vigente 510,5, compromisos 499,7, obligaciones 448,5 y pagos 447,6. La ejecución cayó al 83,6 % en 2020 y al 82,7 % en 2024, y los pagos se duplicaron desde 2019: de 230,4 a 447,6 billones.",
+      "fuente": "medido"
+    },
+    {
+      "cifra": "88,3 %",
+      "unidad": "del valor",
+      "titulo": "El 10 % de los proveedores concentra el 88,3 % del dinero",
+      "texto": "Y aun así el índice HHI de 2025 es 72, lejos de los 1 500 de un mercado concentrado: atomizado en número, concentrado en valor. La PYME recibe el 20,8 % del dinero contratado del año.",
+      "fuente": "medido"
+    },
+    {
+      "cifra": "×1,7",
+      "unidad": "en valor desde 2022",
+      "titulo": "La contratación creció 48 % en número y 71 % en valor",
+      "texto": "De 710 530 contratos y 98,9 billones en 2022 a 1 050 851 y 169,1 billones en 2025, en pesos corrientes. En 2024, 90,2 billones se contrataron como inversión y 35,9 como funcionamiento.",
+      "fuente": "medido"
+    }
+  ],
+  "hitos": [
+    {
+      "valor": "H1",
+      "etiqueta": "ciclo"
+    },
+    {
+      "valor": "7",
+      "etiqueta": "fases de construcción cerradas"
+    },
+    {
+      "valor": "2026-09-06",
+      "etiqueta": "sellada"
+    },
+    {
+      "valor": "v1.0.0",
+      "etiqueta": "version"
+    },
+    {
+      "valor": "502,597",
+      "etiqueta": "billones, la cifra del Congreso"
+    }
+  ],
+  "galeria": [
+    {
+      "archivo": "capturas/gasto-del-estado/01-el-embudo-del-presupuesto.png",
+      "pie": "El embudo del presupuesto"
+    },
+    {
+      "archivo": "capturas/gasto-del-estado/02-en-que-gasta-el-estado.png",
+      "pie": "En qué gasta el Estado"
+    },
+    {
+      "archivo": "capturas/gasto-del-estado/03-con-quien-contrata-el-estado.png",
+      "pie": "Con quién contrata el Estado"
+    },
+    {
+      "archivo": "capturas/gasto-del-estado/04-como-contrata-el-estado.png",
+      "pie": "Cómo contrata el Estado"
+    },
+    {
+      "archivo": "capturas/gasto-del-estado/05-el-mapa-del-gasto.png",
+      "pie": "El mapa del gasto"
+    },
+    {
+      "archivo": "capturas/gasto-del-estado/06-notas-limites-y-calidad.png",
+      "pie": "Notas, límites y calidad"
+    }
+  ]
+}

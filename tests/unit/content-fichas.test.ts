@@ -23,6 +23,9 @@ import {
  *     silencio** (hallazgos M1 y M2 de la auditoría retroactiva S5+S6).
  *  4. **Cero enlaces y cero DOI** (regla dura 16): la producción se muestra,
  *     jamás se entrega — y una investigación es justo donde se cuela un DOI.
+ *  5. **Toda captura de la galería existe** en `public/piezas/<frente>/`
+ *     (v1.3.0): una ficha que apunta a una imagen que no está no publica un
+ *     hueco con un alt — rompe aquí, nombrando el archivo.
  */
 
 const SUFIJO = ".ficha-tecnica.json";
@@ -115,6 +118,26 @@ describe("las fichas técnicas de content/<frente>/", () => {
       dueño.set(slug, `content/vitrina/${archivo}`);
     }
   });
+
+  it.each(entradas.map((e) => [e.ruta, e] as const))(
+    "%s: cada captura de su galería existe en public/piezas/",
+    (_ruta, e) => {
+      const ficha = fichaTecnicaSchema.parse(JSON.parse(e.crudo));
+      for (const g of ficha.galeria ?? []) {
+        const enDisco = path.join(
+          process.cwd(),
+          "public",
+          "piezas",
+          e.frente,
+          g.archivo,
+        );
+        expect(
+          existsSync(enDisco),
+          `${e.ruta} apunta a «${g.archivo}» y no existe public/piezas/${e.frente}/${g.archivo}: la galería no puede publicar un hueco`,
+        ).toBe(true);
+      }
+    },
+  );
 
   it.each(entradas.map((e) => [e.ruta, e] as const))(
     "%s no trae un solo enlace ni un DOI",

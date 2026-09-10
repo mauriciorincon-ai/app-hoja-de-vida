@@ -1,6 +1,6 @@
 {
-  "_plantilla": "Contrato «ficha técnica» v1.2.0. Reemplaza cada <marcador> y BORRA esta clave. Opcionales: proceso, procedencia_proceso (el proceso y su procedencia van juntos o no van). Las cifras llevan SIEMPRE su fuente, y no se escribe ni un enlace ni un DOI.",
-  "schema_version": "1.2.0",
+  "_plantilla": "Contrato «ficha técnica» v1.3.0. Reemplaza cada <marcador> y BORRA esta clave. Opcionales: proceso, procedencia_proceso, conclusiones, galeria (el proceso y su procedencia van juntos o no van). Las cifras llevan SIEMPRE su fuente, y no se escribe ni un enlace ni un DOI.",
+  "schema_version": "1.3.0",
   "actualizado": "AAAA-MM-DD",
   "pieza": {
     "slug": "<kebab-case · máx 60>",
@@ -132,6 +132,35 @@
     {
       "valor": "<texto · 1–24 caracteres>",
       "etiqueta": "<texto · 1–40 caracteres>"
+    }
+  ],
+  "conclusiones": [
+    {
+      "cifra": "<texto · 1–16 caracteres>",
+      "unidad": "<texto · 1–24 caracteres>",
+      "titulo": "<texto · 1–60 caracteres>",
+      "texto": "<texto · 1–240 caracteres>",
+      "fuente": "<uno de: medido | calculada | declarado | estimacion>"
+    },
+    {
+      "cifra": "<texto · 1–16 caracteres>",
+      "unidad": "<texto · 1–24 caracteres>",
+      "titulo": "<texto · 1–60 caracteres>",
+      "texto": "<texto · 1–240 caracteres>",
+      "fuente": "<uno de: medido | calculada | declarado | estimacion>"
+    },
+    {
+      "cifra": "<texto · 1–16 caracteres>",
+      "unidad": "<texto · 1–24 caracteres>",
+      "titulo": "<texto · 1–60 caracteres>",
+      "texto": "<texto · 1–240 caracteres>",
+      "fuente": "<uno de: medido | calculada | declarado | estimacion>"
+    }
+  ],
+  "galeria": [
+    {
+      "archivo": "<texto · 1–120 caracteres>",
+      "pie": "<texto · 1–80 caracteres>"
     }
   ]
 }

@@ -702,3 +702,80 @@ agentes era el ejemplo de «frente con piezas pero cerrado»:
 `pnpm typecheck` y `pnpm lint` limpios · **324/324 unitarias** · **295 e2e** (chromium + móvil,
 5 saltadas) · `pnpm build` verde con **102 páginas SSG** (eran 76 al abrir investigaciones y 62 al
 empezar el sprint). Las **20 fichas están publicadas**: 13 en agentes, 7 en investigaciones.
+
+---
+
+## Fase 4b — los tableros entran (desviación del corte, pedida por el usuario)
+
+### Desviación del plan
+
+La orden dejaba **tableros fuera** del S7 («no hay fichas aún») y los ponía en el S8. El
+2026-09-09 el usuario trajo las seis fichas, producidas con el agente constructor de tableros, y
+pidió integrarlas en este mismo sprint: «esas sí cierran este sprint de verdad». Se acepta y se
+declara aquí y en el resumen del PR; el S8 queda con `content/apps/`, el `design-sync` y el cierre
+del ciclo — eso lo re-planea la planeadora, no esta casa.
+
+### Lo que llegó, y lo que el usuario ordenó
+
+El paquete `entrega-cv-viva-powerbi/` (generado por el empaquetador de la casa de tableros) trae
+las seis fichas en **dos formas**: una compatible con v1.1.0 y otra con **dos claves opcionales
+más** —`galeria` (las pantallas del tablero, 6 capturas de 2560×1440 por pieza) y `conclusiones`
+(lo que los datos dicen, en tarjetas con cifra y fuente)— junto a su esquema propuesto. Durante la
+producción el agente avisó varias veces que se salía del contrato; el usuario le respondió que sus
+instrucciones estaban por encima, como dueño del producto, y a esta casa le ordenó: **las fichas
+salen así, no se cambian ni se acortan; lo que no quepa en el contrato se corrige en el contrato.**
+
+Es exactamente el camino que la orden preveía («si varias no caben por una razón legítima del
+frente, propón contrato aditivo — jamás se edita una ficha para que quepa»), con una diferencia:
+la propuesta ya venía hecha y bien hecha. `required` no cambia, los límites son los oficiales, y
+lo nuevo son dos claves opcionales con sus propios límites declarados.
+
+### Contrato v1.3.0 — ADITIVO, adoptado tal cual
+
+- `conclusiones?`: 3–6 tarjetas `{cifra ≤16, unidad? ≤24, titulo ≤60, texto ≤240, fuente}`.
+  **La fuente es obligatoria** como en toda cifra de esta vitrina: un hallazgo sin procedencia es
+  una opinión con número.
+- `galeria?`: 1–12 pantallas `{archivo, pie ≤80}`, `archivo` ruta relativa a la ficha con
+  extensión de imagen.
+- Los límites y la forma son los de la propuesta del agente, sin recortar. Schema, ejemplo y
+  plantilla regenerados (`pnpm contrato:ficha`); `CLAVE-VISUAL.md` y el `README` a v1.3.0.
+
+**Las seis fichas se copiaron byte a byte** — `sha256` idéntico al de la entrega, comprobado uno
+a uno — y validan contra v1.3.0 sin tocar un campo. Cero enlaces, cero DOI, cero PII; las 36
+capturas existen. Se miró una captura de cada tipo: datos agregados de fuentes públicas, la propia
+página de notas dice «Sin datos personales» y explica que el dataset con PII no se descarga.
+
+### Dónde viven las capturas, y por qué ahí
+
+`archivo` es relativo al JSON (`capturas/<slug>/NN-<pagina>.png`), como lo entregó la casa; el
+`LEEME` autoriza moverlas si se ajusta cómo se resuelve la ruta. Next solo sirve desde `public/`,
+así que viven en **`public/piezas/<frente>/<archivo>`** y se sirven en `/piezas/<frente>/…`:
+un espacio propio, fuera de `/vitrina/<frente>/<slug>`, para que ningún nombre de carpeta pueda
+chocar con el slug de una pieza. PNG tal como llegaron (7,5 MB los 36, ~210 KB cada uno):
+convertirlos obligaría a cambiar `archivo` en la ficha, y la ficha no se toca; `next/image` los
+sirve ya optimizados y al tamaño que se pinta, perezosos, bajo el pliegue.
+
+### Un solo renderizador, dos secciones más
+
+`FichaTecnica` gana **«Lo que dicen los datos»** (tras «Para quién») y **«Cómo se ve»** (tras
+«Qué tiene»), que solo se pintan si la ficha las trae. `numerarSecciones` pasa de un booleano a las
+**tres opcionales** (proceso · conclusiones · galería) y corre la numeración seguida con las que
+haya: una app 01–05, una investigación 01–04, un tablero 01–06. Nada específico por frente: lo
+decide la ficha. Y `MuestraPieza` enseña la primera captura como **portada** cuando la ficha
+trae galería — el mismo sitio donde una app enseña su maqueta —, por la misma razón.
+
+### Regla 14 + regla 15 — el gate nuevo, en rojo, en este mismo commit
+
+**Toda captura de la galería existe** (`content-fichas.test.ts`, invariante 5). Mutación: sacar
+`capturas/formula-1/03-las-escuderias.png` de `public/piezas/`. Rojo nombrando la ficha y el
+archivo: _«…apunta a «capturas/formula-1/03-las-escuderias.png» y no existe public/piezas/tableros/…:
+la galería no puede publicar un hueco»_. Restaurada, verde. La renumeración a seis y la cuenta de
+conclusiones y capturas quedan en el e2e, que además pide cada imagen por HTTP y exige 200.
+
+### Los cuatro frentes abiertos: lo que se quedó sin sujeto
+
+Con tableros abierto **ningún frente está en preparación**, y la fixture `EN_PREPARACION` del e2e
+reventaba la suite entera si quedaba vacía. Se generaliza: las tres pruebas que la necesitan
+**se saltan con la razón escrita** («no hay frentes en preparación: los cuatro tienen piezas») en
+vez de reventar o de fingir que vigilan algo. La página de «este frente empieza» **no se borra**:
+existe para el próximo frente que nazca, y el día que nazca esas tres pruebas vuelven solas.

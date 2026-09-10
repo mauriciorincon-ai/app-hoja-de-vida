@@ -60,10 +60,16 @@ describe("getPiezas — lo que hay en content/<frente>/", () => {
   it("lee las piezas de cada frente entregado", () => {
     expect(getPiezas("agentes")).toHaveLength(13);
     expect(getPiezas("investigaciones")).toHaveLength(7);
+    expect(getPiezas("tableros")).toHaveLength(6);
   });
 
   it("un frente SIN carpeta devuelve [] — es un frente que empieza, no un error", () => {
-    expect(getPiezas("tableros")).toEqual([]);
+    // Hoy los cuatro frentes tienen carpeta, así que el caso se ejercita con
+    // uno que no existe en disco: es exactamente lo que verá el quinto frente
+    // el día que se declare en el YAML antes de recibir su primera ficha.
+    expect(
+      getPiezas("un-frente-que-empieza" as Parameters<typeof getPiezas>[0]),
+    ).toEqual([]);
   });
 
   it("el orden es explícito: selladas primero, luego alfabético es-CO", () => {
@@ -93,7 +99,7 @@ describe("getPiezas — lo que hay en content/<frente>/", () => {
   });
 
   it("toda pieza vive en la carpeta que declara", () => {
-    for (const frente of ["agentes", "investigaciones"] as const)
+    for (const frente of ["agentes", "investigaciones", "tableros"] as const)
       for (const p of getPiezas(frente)) expect(p.pieza.frente).toBe(frente);
   });
 });
@@ -110,7 +116,11 @@ describe("getPieza y frentesConPiezas", () => {
     expect(getPieza("agentes", "no-existe")).toBeUndefined();
   });
 
-  it("los frentes con piezas se MIDEN: ni «tableros» ni «apps» salen de content/<frente>/", () => {
-    expect(frentesConPiezas()).toEqual(["agentes", "investigaciones"]);
+  it("los frentes con piezas se MIDEN de content/<frente>/ — «apps» no sale de ahí", () => {
+    expect(frentesConPiezas()).toEqual([
+      "agentes",
+      "investigaciones",
+      "tableros",
+    ]);
   });
 });

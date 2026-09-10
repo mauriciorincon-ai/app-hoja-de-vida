@@ -111,4 +111,6 @@ jobs:
             --collect.url=http://localhost:3000/es/vitrina/investigaciones/forja \
             --collect.url=http://localhost:3000/es/vitrina/agentes \
             --collect.url=http://localhost:3000/es/vitrina/agentes/hr-develop-ai-apps \
+            --collect.url=http://localhost:3000/es/vitrina/tableros \
+            --collect.url=http://localhost:3000/es/vitrina/tableros/banca-colombiana \
             --assert.budgetsFile=./perf-budget.json

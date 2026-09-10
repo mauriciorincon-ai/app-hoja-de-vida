@@ -1,0 +1,243 @@
+{
+  "schema_version": "1.1.0",
+  "actualizado": "2026-09-08",
+  "pieza": {
+    "slug": "formula-1",
+    "nombre": "Fórmula 1: 77 temporadas contadas bien",
+    "frente": "tableros",
+    "estado": "sellado",
+    "ciclo": "H1",
+    "version": "1.0.0",
+    "sellado_en": "2026-09-08",
+    "sprints_cerrados": 0
+  },
+  "promesa": {
+    "tagline": "77 temporadas de F1, con cada récord contado como se debe contar",
+    "para_quien": "Para quien evalúa trabajo analítico y quiere ver cómo se trata un dato que parece fácil. La Fórmula 1 tiene setenta y siete años de reglas cambiantes —sistemas de puntos que cambian, equipos que cambian de nombre, carreras que puntuaban sin ser Fórmula 1— y casi todas esas trampas producen números plausibles. Aquí están las veintiuna que encontró el sondeo, y cómo se resolvió cada una.",
+    "intro": "F1DB publica 47 archivos con toda la historia del campeonato, y también 54 totales ya calculados por piloto y por escudería. Esos totales no se cargan: serían un segundo origen de verdad dentro del modelo. Se usan como prueba. El modelo calcula sus propias cifras y se comparan una a una fuera de él, contra los CSV crudos. Las veinte que puede reproducir cierran sin una sola desviación."
+  },
+  "titular": "Setenta y siete temporadas de Fórmula 1 medidas contra los veinte totales que el propio origen publica. Las veinte identidades cierran, y las tres que no cerraban al principio destaparon reglas del deporte, no errores de código.",
+  "stack": [
+    {
+      "nombre": "Power BI Desktop",
+      "papel": "El tablero: un modelo en modo import y doce páginas que viven en un solo archivo, sin servicio en la nube y sin publicar nada."
+    },
+    {
+      "nombre": "Power Query (M)",
+      "papel": "Toda la preparación: 33 consultas que van de los CSV crudos a las 25 tablas del modelo, sin una sola columna calculada en DAX."
+    },
+    {
+      "nombre": "DAX",
+      "papel": "Las 54 medidas, que es lo único que no puede vivir en Power Query."
+    },
+    {
+      "nombre": "PBIR escrito por script",
+      "papel": "Doce páginas, seis en español y seis en inglés, y sus 78 visuales escritas en PBIR con Python, no a mano sobre el lienzo: el diseño es reproducible."
+    },
+    {
+      "nombre": "Python",
+      "papel": "La validación: cinco capas que corren antes de abrir Power BI, y la comparación de las cifras del modelo contra los CSV crudos."
+    },
+    {
+      "nombre": "F1DB v2026.13.0",
+      "papel": "El origen, bajo licencia CC BY 4.0: 47 archivos con la historia del campeonato, tomados como una foto fechada y no como una conexión viva."
+    }
+  ],
+  "cifras": [
+    {
+      "clave": "identidades_reproducidas",
+      "valor": 20,
+      "unidad": "de 20",
+      "etiqueta": "Identidades del origen reproducidas sin desviación",
+      "fuente": "medido",
+      "detalle": "Diez totales publicados por piloto contrastados contra los 917 del catálogo, y diez por escudería contra las 187. La comparación corre en Python, fuera del modelo y contra los CSV crudos: cargar esos totales sería meter un segundo origen de verdad dentro del tablero."
+    },
+    {
+      "clave": "pilotos_catalogo",
+      "valor": 917,
+      "unidad": "pilotos",
+      "etiqueta": "Pilotos del catálogo · 860 corrieron · 757 fuera de Indy",
+      "fuente": "medido",
+      "detalle": "Las tres cifras responden preguntas distintas: 917 están en el catálogo de F1DB, 860 tienen al menos un resultado de carrera y 757 lo tienen fuera de las 500 Millas de Indianápolis, que puntuaron para el campeonato entre 1950 y 1960 sin ser carreras de Fórmula 1. El tablero publica las tres y nunca dice «los pilotos» a secas."
+    },
+    {
+      "clave": "filas_cargadas",
+      "valor": 186216,
+      "unidad": "filas",
+      "etiqueta": "Filas cargadas en las 25 tablas del modelo",
+      "fuente": "medido",
+      "detalle": "155 101 son filas de hecho repartidas en diez tablas; el resto son once dimensiones, un calendario diario de 1950 a 2026 y dos tablas de servicio. Las 39 relaciones están todas activas y ninguna es bidireccional."
+    },
+    {
+      "clave": "poles_discrepantes",
+      "valor": 13,
+      "unidad": "carreras",
+      "etiqueta": "Carreras donde la pole no es el mejor tiempo de la qualy",
+      "fuente": "medido",
+      "detalle": "Nueve temporadas distintas entre 1959 y 2024. Contando la posición 1 de la clasificación, la identidad de poles fallaba en 13 pilotos y Verstappen salía con 52 en vez de 48; leyendo la bandera que el propio origen publica, cierra en los 917."
+    },
+    {
+      "clave": "errores_validacion",
+      "valor": 0,
+      "unidad": "errores",
+      "etiqueta": "Errores en las cinco capas de validación automática",
+      "fuente": "medido",
+      "detalle": "Sobre los 171 archivos del reporte: esquema oficial, 322 referencias de campo sin ninguna rota, 36 cuadros de texto que caben en su caja, 54 rótulos de tarjeta que caben y 54 cifras de tarjeta medidas contra el ancho real de su tarjeta. La revisión de render humana es la sexta capa."
+    }
+  ],
+  "bloques": [
+    {
+      "orden": 1,
+      "nombre": "La F1 en 77 temporadas",
+      "linea": "Cuánto ha crecido el campeonato y dónde se corre, con los 78 circuitos dibujados por sus coordenadas.",
+      "cuenta": 8
+    },
+    {
+      "orden": 2,
+      "nombre": "Los pilotos",
+      "linea": "Quién es el mejor cuando los puntos no deciden: victorias, poles, podios y la tasa de victoria con mínimo.",
+      "cuenta": 7
+    },
+    {
+      "orden": 3,
+      "nombre": "Las escuderías",
+      "linea": "Quién dominó cada era y quién es hoy quién: las victorias por linaje y los catorce cambios de identidad.",
+      "cuenta": 8
+    },
+    {
+      "orden": 4,
+      "nombre": "El fin de semana",
+      "linea": "De la pole a la meta: puestos ganados, las mayores remontadas y el paso por boxes dentro de un circuito.",
+      "cuenta": 8
+    },
+    {
+      "orden": 5,
+      "nombre": "Los puntos mienten",
+      "linea": "El mismo dato, tres rankings distintos — y 1988, cuando Prost marcó once puntos más que Senna y perdió.",
+      "cuenta": 8
+    },
+    {
+      "orden": 6,
+      "nombre": "Notas, límites y calidad",
+      "linea": "Lo que el tablero no puede contestar y por qué: las tres cifras del censo y dónde empieza cada serie corta.",
+      "cuenta": 9
+    },
+    {
+      "orden": 7,
+      "nombre": "Seis páginas en inglés",
+      "linea": "Gemelas de las españolas, desde el mismo modelo; doce tablas, de países a eras de puntuación, llevan columna en inglés.",
+      "cuenta": 6
+    },
+    {
+      "orden": 8,
+      "nombre": "El modelo semántico",
+      "linea": "25 tablas y 39 relaciones con 54 medidas DAX; 33 consultas de Power Query y ni una columna calculada.",
+      "cuenta": 54
+    }
+  ],
+  "limites": [
+    "Los datos son una foto del 2026-09-08 sobre F1DB v2026.13.0, no una conexión viva: nada se actualiza solo.",
+    "Las paradas en boxes existen desde 1994 y los puntos de sprint desde 2021: ninguna de esas series cubre los 77 años.",
+    "La temporada 2026 está en curso, con 13 rondas corridas de 23 programadas: cualquier agregado suyo es parcial.",
+    "El tiempo de boxes mide el paso por el pit lane, no el tiempo parado, y solo se compara dentro de un mismo circuito."
+  ],
+  "nunca": [
+    "Nunca dice «los pilotos» a secas: publica las tres cifras del censo, porque 917, 860 y 757 responden preguntas distintas.",
+    "Nunca suma puntos entre eras salvo en la página que lo declara: una victoria valía 8 puntos en 1955 y vale 25 desde 2010.",
+    "Nunca calcula los puntos del campeonato sumando carreras: hasta 1990 solo contaban los mejores resultados de la temporada.",
+    "Nunca agrupa escuderías por el padre que publica el origen: ese campo cuenta la historia de Sauber cinco veces.",
+    "Nunca cuenta dos veces a un piloto que compartió coche: entradas y podios van por carrera distinta, no por fila."
+  ],
+  "conclusiones": [
+    {
+      "cifra": "11",
+      "unidad": "puntos de más",
+      "titulo": "Prost marcó más que Senna en 1988 y perdió el título",
+      "texto": "105 marcados contra 94. Con el descarte de resultados vigente hasta 1990, el campeonato fue 90 a 87 para Senna. Ninguna de las dos columnas está mal: son dos preguntas distintas.",
+      "fuente": "medido"
+    },
+    {
+      "cifra": "8.º",
+      "unidad": "por puntos crudos",
+      "titulo": "El top 10 por puntos crudos tiene a Pérez y no a Fangio",
+      "texto": "Tampoco a Schumacher, Prost, Senna, Clark ni Stewart. Una victoria valía 8 puntos en 1955 y vale 25 desde 2010: la lista de puntos crudos ordena fechas, no pilotos. Por victorias: Hamilton 106, Schumacher 91, Verstappen 71.",
+      "fuente": "medido"
+    },
+    {
+      "cifra": "6 de 8",
+      "unidad": "remontadas",
+      "titulo": "Seis de las ocho mayores remontadas son de Indianápolis",
+      "texto": "Las 500 Millas puntuaron para el campeonato entre 1950 y 1960 sin ser Fórmula 1: 33 coches en un óvalo. El récord es de Jim Rathmann, +30 puestos en 1957; fuera de Indianápolis, Roberto Mieres, +26 en Gran Bretaña 1954.",
+      "fuente": "medido"
+    },
+    {
+      "cifra": "47,1 %",
+      "unidad": "de victorias",
+      "titulo": "Fangio ganó casi una de cada dos carreras que corrió",
+      "texto": "24 victorias en 51 salidas, sin Indianápolis y con mínimo de veinte. Ascari 41,9 % (13 de 31), Clark 34,7 %, Schumacher 29,7 %, Verstappen 28,9 % y Hamilton, el de más victorias con 106, 27,0 %.",
+      "fuente": "medido"
+    },
+    {
+      "cifra": "14",
+      "unidad": "linajes",
+      "titulo": "Un equipo puede haber corrido con seis nombres",
+      "texto": "Audi es Sauber › BMW Sauber › Sauber › Alfa Romeo › Kick Sauber › Audi; Mercedes fue Tyrrell, BAR, Honda y Brawn; Alpine ha sido cinco equipos. Ferrari lleva 16 títulos de constructores sin cambiar de nombre.",
+      "fuente": "medido"
+    },
+    {
+      "cifra": "1/7",
+      "unidad": "de punto",
+      "titulo": "Gran Bretaña 1954: la vuelta rápida se repartió entre siete",
+      "texto": "Siete pilotos empataron la vuelta rápida y el punto que la premiaba se partió en siete: 8,14 puntos para el ganador. Los coches compartidos de los años cincuenta partían también los puntos, y por eso hay medios puntos en la historia.",
+      "fuente": "medido"
+    }
+  ],
+  "hitos": [
+    {
+      "valor": "H1",
+      "etiqueta": "ciclo"
+    },
+    {
+      "valor": "7",
+      "etiqueta": "fases de construcción cerradas"
+    },
+    {
+      "valor": "2026-09-08",
+      "etiqueta": "sellada"
+    },
+    {
+      "valor": "v1.0.0",
+      "etiqueta": "version"
+    },
+    {
+      "valor": "20 de 20",
+      "etiqueta": "identidades del origen que cierran"
+    }
+  ],
+  "galeria": [
+    {
+      "archivo": "capturas/formula-1/01-la-f1-en-77-temporadas.png",
+      "pie": "La F1 en 77 temporadas"
+    },
+    {
+      "archivo": "capturas/formula-1/02-los-pilotos.png",
+      "pie": "Los pilotos"
+    },
+    {
+      "archivo": "capturas/formula-1/03-las-escuderias.png",
+      "pie": "Las escuderías"
+    },
+    {
+      "archivo": "capturas/formula-1/04-el-fin-de-semana.png",
+      "pie": "El fin de semana"
+    },
+    {
+      "archivo": "capturas/formula-1/05-los-puntos-mienten.png",
+      "pie": "Los puntos mienten"
+    },
+    {
+      "archivo": "capturas/formula-1/06-notas-limites-y-calidad.png",
+      "pie": "Notas, límites y calidad"
+    }
+  ]
+}

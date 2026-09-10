@@ -59,7 +59,7 @@ export function armarFichaTecnica(
     });
 
   return fichaTecnicaSchema.parse({
-    schema_version: "1.2.0",
+    schema_version: "1.3.0",
     actualizado: exp.actualizado,
     pieza: {
       slug: ancla.slug,

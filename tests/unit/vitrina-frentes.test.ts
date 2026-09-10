@@ -17,8 +17,7 @@ import { getFrente, getFrentes } from "@/lib/vitrina/categorias";
  */
 
 /** Lo que hay HOY en el repo, medido: los exports de apps y las fichas del S7. */
-const MEDIDOS = ["apps", "agentes", "investigaciones"];
-// «tableros» queda fuera a propósito: no tiene una sola ficha.
+const MEDIDOS = ["apps", "agentes", "investigaciones", "tableros"];
 
 const real = parse(readFileSync("data/vitrina.yaml", "utf8")) as {
   categorias: { id: string; estado: string }[];
@@ -55,9 +54,14 @@ describe("data/vitrina.yaml — los frentes", () => {
       const t = cs.find((c) => c.id === "tableros");
       if (t) t.estado = "abierta";
     });
-    // «tableros» no está entre los medidos: no tiene una sola ficha.
+    // Se simula que «tableros» no tiene piezas quitándolo de la lista medida:
+    // el YAML lo declara abierto y la medición lo desmiente.
     expect(() =>
-      parseVitrina(tramposo, "data/vitrina.yaml", MEDIDOS),
+      parseVitrina(
+        tramposo,
+        "data/vitrina.yaml",
+        MEDIDOS.filter((m) => m !== "tableros"),
+      ),
     ).toThrowError(/tableros: está marcada «abierta» y no tiene ni una pieza/);
   });
 
@@ -72,7 +76,11 @@ describe("data/vitrina.yaml — los frentes", () => {
     );
     // Y el mismo YAML, con ese frente fuera de la lista medida, rompe.
     expect(() =>
-      parseVitrina(abierto, "data/vitrina.yaml", ["apps"]),
+      parseVitrina(
+        abierto,
+        "data/vitrina.yaml",
+        MEDIDOS.filter((m) => m !== "investigaciones"),
+      ),
     ).toThrowError(/investigaciones: está marcada «abierta»/);
   });
 
@@ -98,7 +106,7 @@ describe("lib/vitrina/categorias — la cuenta de piezas", () => {
     expect(getFrente("apps")?.piezas).toBe(6); // los brochure-export
     expect(getFrente("agentes")?.piezas).toBe(13); // content/agentes/
     expect(getFrente("investigaciones")?.piezas).toBe(7);
-    expect(getFrente("tableros")?.piezas).toBe(0); // sin carpeta: cero, no error
+    expect(getFrente("tableros")?.piezas).toBe(6); // content/tableros/
   });
 
   it("la cuenta mide contenido, no promesas: sale del disco en todo estado", () => {
@@ -123,7 +131,7 @@ describe("lib/vitrina/categorias — la cuenta de piezas", () => {
       apps: "abierta",
       agentes: "abierta",
       investigaciones: "abierta",
-      tableros: "en-preparacion", // sin una sola ficha: no puede abrir
+      tableros: "abierta",
     });
     // Ninguno abierto sin piezas: la regla, comprobada sobre el YAML real.
     for (const f of getFrentes())

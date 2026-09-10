@@ -1,0 +1,243 @@
+{
+  "schema_version": "1.1.0",
+  "actualizado": "2026-09-08",
+  "pieza": {
+    "slug": "ciclo-monetario",
+    "nombre": "Tasas, inflación y deuda: el ciclo monetario",
+    "frente": "tableros",
+    "estado": "sellado",
+    "ciclo": "H1",
+    "version": "1.0.0",
+    "sellado_en": "2026-09-08",
+    "sprints_cerrados": 0
+  },
+  "promesa": {
+    "tagline": "El ciclo monetario mundial, medido contra el organismo que produce cada dato",
+    "para_quien": "Para quien evalúa trabajo analítico sobre datos macroeconómicos y quiere ver el criterio: cómo se decide el mes de referencia cuando el panel está incompleto, qué se hace cuando dos instituciones publican cifras distintas del mismo país, y cuándo una medida debe negarse a dar un número.",
+    "intro": "Cuarenta bancos centrales publican su tasa de política, la Reserva Federal y el Tesoro publican la curva de rendimientos de EE. UU. por separado, la OCDE publica precios y el FMI proyecta. Ninguno publica lo mismo con el mismo calendario. El tablero cruza los siete organismos y enseña, en su propia página, dónde no coinciden."
+  },
+  "titular": "Veintisiete años de política monetaria de 41 áreas, tomados de siete organismos que publican cada cifra, con las dos fuentes oficiales de la curva de EE. UU. contrastadas par a par.",
+  "stack": [
+    {
+      "nombre": "Power BI Desktop",
+      "papel": "El tablero: un modelo en estrella con calendario diario de 1999 a 2031 y doce páginas en un solo archivo."
+    },
+    {
+      "nombre": "Power Query (M)",
+      "papel": "Toda la preparación: 24 consultas que anclan cada medida de ciclo al último cierre completo y marcan los años de previsión del FMI."
+    },
+    {
+      "nombre": "DAX",
+      "papel": "Las medidas de ciclo, once de las cuales devuelven vacío fuera del contexto de un país, a propósito."
+    },
+    {
+      "nombre": "PBIR escrito por script",
+      "papel": "Doce páginas, seis en español y seis en inglés, generadas con Python con cuatro capas de validación, dos nacidas de revisiones de render anteriores."
+    },
+    {
+      "nombre": "Python",
+      "papel": "La línea base independiente que, además de conteos, comprueba diez cifras de control contra el archivo crudo, y el contraste par a par de las dos curvas."
+    },
+    {
+      "nombre": "SDMX y APIs REST",
+      "papel": "La descarga a demanda desde los siete organismos que producen cada dato, sin pasar por ningún agregador."
+    }
+  ],
+  "cifras": [
+    {
+      "clave": "tasa_real_negativa",
+      "valor": 3,
+      "unidad": "de 11 economías",
+      "etiqueta": "Bancos centrales con la tasa por debajo de su inflación",
+      "fuente": "medido",
+      "detalle": "Mayo de 2026, el último mes completo del panel: de las once áreas que publican tasa de política e inflación de ese mismo mes, tres tienen tasa real negativa, el 27,3 %. Son Canadá (2,25 % contra 3,23 %), Corea del Sur (2,50 % contra 3,14 %) y Estados Unidos (3,62 % contra 4,25 %). La página de la tasa real lo muestra área por área, con la cobertura del IPC a la vista."
+    },
+    {
+      "clave": "pares_curva",
+      "valor": 71999,
+      "unidad": "de 71 999",
+      "etiqueta": "Pares en que las dos fuentes oficiales de la curva coinciden",
+      "fuente": "medido",
+      "detalle": "Tesoro de EE. UU. contra el H.15 de la Reserva Federal, mismo día y mismo tenor: desvío máximo 0,000000 pp. Toda la discrepancia entre los dos organismos está en QUÉ DÍAS existe el valor, no en cuánto vale: 997 pares solo los publica el H.15, y 994 de ellos son el bono a 30 años entre 2002 y 2006, los cuatro años en que no se emitía."
+    },
+    {
+      "clave": "areas_ancla",
+      "valor": 38,
+      "unidad": "de 38, no 22",
+      "etiqueta": "Áreas del panel en el mes al que se anclan las tarjetas",
+      "fuente": "medido",
+      "detalle": "El último mes publicado traía 22 áreas de 38 y Colombia no estaba entre ellas. Una tarjeta anclada ahí habría descrito «el ciclo monetario mundial» sobre poco más de media muestra, sin avisar. Todas las medidas de ciclo se anclan al último CIERRE COMPLETO, y la página de notas enseña las dos cifras juntas."
+    },
+    {
+      "clave": "desvio_fmi_ocde",
+      "valor": 0.05,
+      "unidad": "pp",
+      "etiqueta": "Desvío mediano entre el IPC del FMI y el de la OCDE",
+      "fuente": "medido",
+      "detalle": "Sobre 2025, con 22 áreas que tienen los doce meses. Pero los extremos son enormes: Argentina 2024 sale −16,9 pp y Rusia 1999, −7,0. Cuando dos instituciones publican la inflación del mismo país y del mismo año y no coinciden, el tablero enseña las dos."
+    },
+    {
+      "clave": "panel_fijo",
+      "valor": 9,
+      "unidad": "áreas, no 30",
+      "etiqueta": "Áreas con IPC en todos los meses: el panel fijo de precios",
+      "fuente": "medido",
+      "detalle": "El dataset de precios de la OCDE SE ENCOGE y cada país termina en un mes distinto: Japón en 2021-06, Rusia en 2022-03, Chile en 2023-12, y solo doce llegan a 2026-07. Una línea de «inflación mediana» sobre ese panel cambiaría de composición por el camino sin que nada fallara, así que se calcula sobre un panel fijo declarado en la propia tarjeta."
+    }
+  ],
+  "bloques": [
+    {
+      "orden": 1,
+      "nombre": "El ciclo, de un vistazo",
+      "linea": "Cuántos bancos centrales suben, sostienen o bajan, y desde cuándo, al último cierre completo del panel.",
+      "cuenta": 12
+    },
+    {
+      "orden": 2,
+      "nombre": "La ola de 2021",
+      "linea": "Quién movió primero, cuánto subió y cuánto ha recortado desde su techo, con el ciclo medido desde enero de 2021.",
+      "cuenta": 9
+    },
+    {
+      "orden": 3,
+      "nombre": "La curva de EE. UU.",
+      "linea": "La inversión 10a−2a y 10a−3m, y las dos fuentes oficiales que la publican, contrastadas tenor a tenor.",
+      "cuenta": 10
+    },
+    {
+      "orden": 4,
+      "nombre": "La tasa real",
+      "linea": "Tasa de política menos inflación del mismo mes: quién iba por detrás de la curva, con la cobertura del IPC a la vista.",
+      "cuenta": 9
+    },
+    {
+      "orden": 5,
+      "nombre": "Lo que cuesta la deuda",
+      "linea": "El rezago entre lo que decide la Fed y lo que paga de verdad el Tesoro, instrumento por instrumento. Solo EE. UU.",
+      "cuenta": 9
+    },
+    {
+      "orden": 6,
+      "nombre": "Notas, límites y calidad",
+      "linea": "Lo que el origen no cumple, lo que no coincide entre organismos y lo que el tablero decidió no hacer, sin segmentadores.",
+      "cuenta": 11
+    },
+    {
+      "orden": 7,
+      "nombre": "Seis páginas en inglés",
+      "linea": "Gemelas de las españolas, desde el mismo modelo; las 41 áreas, las regiones y los tenores llevan su nombre en inglés.",
+      "cuenta": 6
+    },
+    {
+      "orden": 8,
+      "nombre": "El modelo semántico",
+      "linea": "13 tablas y 13 relaciones con 62 medidas DAX; 24 consultas de Power Query y un calendario diario de 1999 a 2031.",
+      "cuenta": 62
+    }
+  ],
+  "limites": [
+    "Los datos son una foto fechada del 2026-09-07, no una conexión viva: se actualizan cuando se ejecuta la descarga.",
+    "El panel de tasas del BIS no es fijo: 31 áreas en 1999, 40 entre 2007 y 2022, 38 al último cierre completo. Las medidas de panel dicen sobre cuántas calculan.",
+    "La tasa real solo existe para 30 de las 41 áreas, las que publican IPC mensual en la OCDE. Nueva Zelanda, entre otras, lo publica trimestral.",
+    "Los años 2026 a 2031 del FMI son PROYECCIÓN, no dato. La frontera está medida contra la media de los doce meses del IPC de la OCDE, no supuesta."
+  ],
+  "nunca": [
+    "Nunca da «la tasa de política» de más de un área: no existe la tasa de cuarenta bancos centrales, y once medidas devuelven vacío fuera del contexto de un país.",
+    "Nunca ancla una cifra al último mes publicado si su panel está incompleto: usa el último cierre completo, y enseña la diferencia en la página de notas.",
+    "Nunca dibuja una mediana de precios como serie temporal sobre quien haya publicado ese mes: usa el panel fijo, que no cambia de composición a lo largo del eje.",
+    "Nunca promedia las tasas de los tipos de título: publica la del origen. Sin saldos con que ponderar, el promedio simple daría 3,411 % contra 3,490 %.",
+    "Nunca toma una cifra de un agregador: cada dato viene del organismo que lo produce, y por eso FRED queda fuera pese a ser el atajo obvio."
+  ],
+  "conclusiones": [
+    {
+      "cifra": "1 009",
+      "unidad": "días invertida",
+      "titulo": "La curva de EE. UU. estuvo invertida 1 009 días",
+      "texto": "El diferencial entre el bono a 10 años y el de 2 fue negativo durante 1 009 días de la serie que arranca en 2000. Al último día la curva vuelve a ser positiva: +0,41 puntos, con el 3 meses en 3,91 %, el 10 años en 4,78 % y el 30 en 5,24 %.",
+      "fuente": "medido"
+    },
+    {
+      "cifra": "31 de 38",
+      "unidad": "sostienen",
+      "titulo": "El ciclo de recortes ya está hecho en su mayor parte",
+      "texto": "En mayo de 2026, el último mes con panel completo, 31 bancos centrales sostienen su tasa, 5 suben y 2 bajan. Pero 28 de los 38 la tienen más baja que un año antes. La mediana del panel es 4,25 %.",
+      "fuente": "medido"
+    },
+    {
+      "cifra": "mar-2021",
+      "unidad": "primera subida",
+      "titulo": "Brasil, Rusia y Turquía subieron un año antes que la Fed",
+      "texto": "Los tres movieron en marzo de 2021, con Dinamarca; Colombia en octubre; la Reserva Federal esperó a marzo de 2022 y el BCE a julio. China es la única de las 41 áreas que no subió nunca en el ciclo.",
+      "fuente": "medido"
+    },
+    {
+      "cifra": "13,25 %",
+      "unidad": "techo de Colombia",
+      "titulo": "Colombia subió 11,5 puntos en dos años y ha bajado dos",
+      "texto": "De 1,75 % en enero de 2021 a 13,25 % en mayo de 2023, y 11,25 % en mayo de 2026. Estados Unidos fue de 0,12 % a 5,38 % y ya está en 3,62 %; la zona euro, de 0 a 4,50 % y ahora en 2,00 %.",
+      "fuente": "medido"
+    },
+    {
+      "cifra": "3,490 %",
+      "unidad": "tasa media pagada",
+      "titulo": "La deuda de EE. UU. paga 3,490 % y la Fed está en 3,63 %",
+      "texto": "40,1 billones de dólares de deuda, el 80,9 % en poder del público. El rezago entre la tasa de política y la que paga el Tesoro es de −0,14 puntos: cuando la Fed sube, la deuda vieja sigue pagando cupones viejos.",
+      "fuente": "medido"
+    },
+    {
+      "cifra": "50 %",
+      "unidad": "Turquía, mar-2024",
+      "titulo": "Los techos del ciclo: Turquía 50 %, Rusia 21 %, Brasil 15 %",
+      "texto": "Turquía partió del 17 % en 2021 y hoy está en 37 %; Rusia llegó al 21 % en octubre de 2024 y ha bajado a 14,50 %; Brasil tocó 15 % en junio de 2025 y solo ha recortado medio punto. Japón subió por primera vez en marzo de 2024.",
+      "fuente": "medido"
+    }
+  ],
+  "hitos": [
+    {
+      "valor": "H1",
+      "etiqueta": "ciclo"
+    },
+    {
+      "valor": "7",
+      "etiqueta": "fases de construcción cerradas"
+    },
+    {
+      "valor": "2026-09-08",
+      "etiqueta": "sellada"
+    },
+    {
+      "valor": "v1.0.0",
+      "etiqueta": "version"
+    },
+    {
+      "valor": "71 999",
+      "etiqueta": "pares de la curva que coinciden"
+    }
+  ],
+  "galeria": [
+    {
+      "archivo": "capturas/ciclo-monetario/01-el-ciclo-de-un-vistazo.png",
+      "pie": "El ciclo, de un vistazo"
+    },
+    {
+      "archivo": "capturas/ciclo-monetario/02-la-ola-de-2021.png",
+      "pie": "La ola de 2021"
+    },
+    {
+      "archivo": "capturas/ciclo-monetario/03-la-curva-de-ee-uu.png",
+      "pie": "La curva de EE. UU."
+    },
+    {
+      "archivo": "capturas/ciclo-monetario/04-la-tasa-real.png",
+      "pie": "La tasa real"
+    },
+    {
+      "archivo": "capturas/ciclo-monetario/05-lo-que-cuesta-la-deuda.png",
+      "pie": "Lo que cuesta la deuda"
+    },
+    {
+      "archivo": "capturas/ciclo-monetario/06-notas-limites-y-calidad.png",
+      "pie": "Notas, límites y calidad"
+    }
+  ]
+}

@@ -1,4 +1,12 @@
-# Clave visual y contrato de la «Ficha técnica» — v1.2.0
+# Clave visual y contrato de la «Ficha técnica» — v1.3.0
+
+> **v1.3.0 (2026-09-09):** ADITIVO. Dos claves opcionales para la pieza que **produce datos** —un
+> tablero, y mañana lo que sea—: **`conclusiones`** (3–6 tarjetas: `cifra` ≤16, `unidad` ≤24
+> opcional, `titulo` ≤60, `texto` ≤240, y `fuente` obligatoria como en toda cifra) y **`galeria`**
+> (1–12 pantallas reales: `archivo` ruta relativa a la ficha, `pie` ≤80). Las propuso la casa que
+> produce los tableros y se adoptaron tal cual. En la ficha son dos secciones más —«Lo que dicen los
+> datos» tras «Para quién», «Cómo se ve» tras «Qué tiene»— y la numeración corre seguida con las que
+> haya. `required` no cambia; toda ficha 1.x válida lo sigue siendo.
 
 > **v1.2.0 (2026-09-06):** ADITIVO, nada de lo anterior cambia. Dos cosas nuevas:
 > `procedencia_proceso` admite **`planeadora`** (la casa que administra y cura las fichas de las
@@ -133,7 +141,10 @@ omítelo — una ficha sin «Cómo funciona» es mejor que un diagrama inventado
 ## 6. Cómo se entrega
 
 Un archivo `<slug>.ficha-tecnica.json` que valide contra `ficha-tecnica.schema.json`
-(`schema_version: "1.2.0"`; las versiones 1.x anteriores siguen siendo válidas). CV Viva lo deja caer en `content/<frente>/` y la ficha existe sola:
+(`schema_version: "1.3.0"`; las versiones 1.x anteriores siguen siendo válidas). Si la ficha trae
+`galeria`, las imágenes viajan junto al JSON en la ruta relativa que declara cada `archivo`
+(`capturas/<slug>/NN-<pagina>.png`, 2560×1440); CV Viva las sirve desde `public/piezas/<frente>/` y
+su test exige que cada una exista. CV Viva lo deja caer en `content/<frente>/` y la ficha existe sola:
 ruta, sitemap, pruebas de accesibilidad. Si no valida, **la publicación falla** y el error dice el
 campo — nunca se publica una ficha que miente sobre sí misma. El archivo **no se edita en CV
 Viva**: se corrige en origen y se vuelve a entregar.

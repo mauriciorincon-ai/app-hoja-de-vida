@@ -57,7 +57,7 @@ categorias:
       en: "Each line began as a question, went through a feasibility study and came out of it with a decision: what gets built and what doesn't. The validated lines are published here — their question, their scope and what was decided; building each one starts now."
 
   - id: tableros
-    estado: en-preparacion
+    estado: abierta
     nombre:
       es: "Tableros de datos"
       en: "Data dashboards"

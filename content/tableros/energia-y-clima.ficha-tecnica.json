@@ -1,0 +1,243 @@
+{
+  "schema_version": "1.1.0",
+  "actualizado": "2026-09-06",
+  "pieza": {
+    "slug": "energia-y-clima",
+    "nombre": "Energía y clima",
+    "frente": "tableros",
+    "estado": "sellado",
+    "ciclo": "H1",
+    "version": "1.0.0",
+    "sellado_en": "2026-09-06",
+    "sprints_cerrados": 0
+  },
+  "promesa": {
+    "tagline": "El sistema energético mundial, con sus límites declarados",
+    "para_quien": "Para quien evalúa trabajo de datos y quiere ver el criterio, no solo el resultado: cómo se decide qué fuente manda cuando dos se contradicen, cómo se evita un doble conteo que nadie notaría, y cómo se dice en la propia pieza lo que la pieza no puede responder.",
+    "intro": "Siete fuentes públicas —Ember, Our World in Data, NASA, NOAA, la IEA, el WRI y el Banco Mundial— reunidas en un solo modelo en estrella. Ninguna coincide del todo con las otras: publican agregados distintos, miden la temperatura contra periodos base distintos y cubren países distintos. El tablero no disimula esas costuras, las mide y las muestra."
+  },
+  "titular": "Un tablero sobre cómo el mundo genera su electricidad y cuánto calienta el planeta, construido desde cero sobre siete fuentes abiertas y con sus propios límites puestos a la vista.",
+  "stack": [
+    {
+      "nombre": "Power BI Desktop",
+      "papel": "El tablero: un modelo en estrella con siete fuentes en modo import y doce páginas en un solo archivo, sin servicio en la nube."
+    },
+    {
+      "nombre": "Power Query (M)",
+      "papel": "Toda la preparación: los agregados en hechos separados de los países, una sola dimensión de combustible para dos mundos y un calendario mensual."
+    },
+    {
+      "nombre": "DAX",
+      "papel": "Las 43 medidas, validadas una por una contra el modelo y contrastadas con valores publicados, no solo consigo mismas."
+    },
+    {
+      "nombre": "PBIR escrito por script",
+      "papel": "Las doce páginas y sus 112 visuales generadas con Python; las inglesas salen de un diccionario que avisa de cualquier texto sin traducir."
+    },
+    {
+      "nombre": "Python",
+      "papel": "La línea base independiente que predijo las 1 925 420 filas de hechos antes del refresco, y la brecha países-mundo medida sobre los CSV crudos."
+    },
+    {
+      "nombre": "Siete fuentes abiertas",
+      "papel": "Ember, Our World in Data, NASA, NOAA, la IEA, el WRI y el Banco Mundial, cada una con su licencia declarada en la página de notas."
+    }
+  ],
+  "cifras": [
+    {
+      "clave": "filas_hechos",
+      "valor": 1925420,
+      "unidad": "filas",
+      "etiqueta": "Filas en tablas de hechos, las que predijo la línea base",
+      "fuente": "medido",
+      "detalle": "Conteo sobre el modelo cargado, idéntico al que predijo una validación independiente escrita en Python antes del refresco."
+    },
+    {
+      "clave": "medidas",
+      "valor": 43,
+      "unidad": "medidas",
+      "etiqueta": "Medidas DAX validadas una por una",
+      "fuente": "medido",
+      "detalle": "Todas evaluadas contra el modelo; las cifras se contrastaron con valores publicados, no solo consigo mismas."
+    },
+    {
+      "clave": "paginas",
+      "valor": 12,
+      "unidad": "páginas",
+      "etiqueta": "Páginas, seis en español y seis en inglés",
+      "fuente": "medido",
+      "detalle": "112 visuales generados desde un mismo modelo; las páginas en inglés se producen con un script que avisa de cualquier texto sin traducir."
+    },
+    {
+      "clave": "referencias_rotas",
+      "valor": 0,
+      "unidad": "de 354",
+      "etiqueta": "Referencias rotas entre reporte y modelo",
+      "fuente": "medido",
+      "detalle": "Cada campo citado por un visual se contrasta contra el modelo real, porque el validador de esquema no sabe qué medidas existen."
+    },
+    {
+      "clave": "brecha_paises_mundo",
+      "valor": -0.38,
+      "unidad": "%",
+      "etiqueta": "Brecha entre sumar países y el total mundial de 2024",
+      "fuente": "calculada",
+      "detalle": "Medida sobre los archivos crudos y reproducida después por una medida DAX sobre el modelo terminado: dos caminos independientes al mismo número."
+    }
+  ],
+  "bloques": [
+    {
+      "orden": 1,
+      "nombre": "El pulso del sistema",
+      "linea": "Cómo se genera hoy la electricidad del mundo y a qué velocidad cambia: el mix desde 2000 y el despegue solar y eólico.",
+      "cuenta": 8
+    },
+    {
+      "orden": 2,
+      "nombre": "La transición eléctrica",
+      "linea": "El mix de cada país y quién se mueve más rápido: ranking de variación interanual y los más limpios entre los grandes.",
+      "cuenta": 4
+    },
+    {
+      "orden": 3,
+      "nombre": "Quién calentó el planeta",
+      "linea": "El CO₂ se acumula: hoy pesa lo emitido en dos siglos. Emisiones desde 1750, por combustible, y producir contra consumir.",
+      "cuenta": 4
+    },
+    {
+      "orden": 4,
+      "nombre": "El termómetro",
+      "linea": "La anomalía de temperatura global desde 1880, con dos series que no se restan, y el aporte de cada país.",
+      "cuenta": 5
+    },
+    {
+      "orden": 5,
+      "nombre": "Dónde está la energía",
+      "linea": "Las 34 934 centrales del mundo dibujadas por sus propias coordenadas, y el avance del vehículo eléctrico.",
+      "cuenta": 6
+    },
+    {
+      "orden": 6,
+      "nombre": "Notas, límites y calidad",
+      "linea": "De dónde sale cada cifra, con su licencia, y la brecha medida entre sumar países y el agregado publicado.",
+      "cuenta": 2
+    },
+    {
+      "orden": 7,
+      "nombre": "Seis páginas en inglés",
+      "linea": "Gemelas de las españolas, desde el mismo modelo; un diccionario avisa de cualquier texto que se quede sin traducir.",
+      "cuenta": 6
+    },
+    {
+      "orden": 8,
+      "nombre": "El modelo semántico",
+      "linea": "Estrella de 15 tablas y 22 relaciones con 43 medidas DAX; toda la preparación en Power Query, sin columnas calculadas.",
+      "cuenta": 43
+    }
+  ],
+  "limites": [
+    "Los datos son una foto fechada, no una conexión viva: se actualizan cuando se ejecuta la descarga.",
+    "El año más reciente está incompleto y los rankings usan el último año con cobertura completa.",
+    "El inventario de centrales tiene cobertura desigual por país y la mitad no trae año de puesta en marcha.",
+    "Dos indicadores per cápita solo son válidos con un país seleccionado, y así está declarado en el modelo."
+  ],
+  "nunca": [
+    "Nunca suma los combustibles detallados con los agregados: son el mismo total visto de dos formas.",
+    "Nunca usa la suma de países como total mundial: publica el agregado oficial y muestra la diferencia.",
+    "Nunca resta las dos series de temperatura: usan periodos base distintos y la resta mediría la base.",
+    "Nunca inventa una cifra sin fuente: cada número del tablero viene de un archivo con licencia declarada.",
+    "Nunca contiene datos de personas: todas las fuentes son estadísticas públicas agregadas."
+  ],
+  "conclusiones": [
+    {
+      "cifra": "2 143",
+      "unidad": "TWh solares en 2024",
+      "titulo": "La solar pasó de 1 TWh en 2000 a 2 143 en 2024",
+      "texto": "La eólica, de 31 a 2 508 TWh. Juntas son ya el 15 % de una generación mundial que casi se duplicó, de 15 279 a 30 912 TWh. La energía limpia subió del 35,3 % al 40,9 % del mix.",
+      "fuente": "medido"
+    },
+    {
+      "cifra": "471",
+      "unidad": "gCO₂/kWh",
+      "titulo": "Cada kilovatio hora emite un 11 % menos que en 2000",
+      "texto": "La intensidad de carbono de la electricidad mundial bajó de 527 a 471 gramos por kilovatio hora entre 2000 y 2024. Pero el carbón casi se duplicó en absoluto, de 5 809 a 10 540 TWh: el mix se limpia más despacio de lo que crece.",
+      "fuente": "medido"
+    },
+    {
+      "cifra": "23,5 %",
+      "unidad": "del CO₂ acumulado",
+      "titulo": "EE. UU. acumula más CO₂ que nadie; China emite más hoy",
+      "texto": "Desde 1750, Estados Unidos suma 434,9 gigatoneladas, el 23,5 % del total, y China 285,1. En 2024 China emitió 12,29 Gt y Estados Unidos 4,90: por eso el ranking acumulado no se parece al anual.",
+      "fuente": "medido"
+    },
+    {
+      "cifra": "14,2 t",
+      "unidad": "per cápita en EE. UU.",
+      "titulo": "Un estadounidense emite seis veces lo que un indio",
+      "texto": "Per cápita en 2024: Estados Unidos 14,2 toneladas, Rusia 12,3, China 8,7, Alemania 6,8, India 2,2 y Colombia 1,8. India emite 3,19 Gt al año con solo el 3,6 % del acumulado histórico.",
+      "fuente": "medido"
+    },
+    {
+      "cifra": "+1,28 °C",
+      "unidad": "en 2024",
+      "titulo": "2024 fue el año más cálido desde que hay registro",
+      "texto": "La anomalía media de 2024 en la serie de la NASA es +1,28 °C sobre la base 1951-1980, el año más cálido desde 1880. Y el mundo emitió 38,09 gigatoneladas de CO₂ en 2023, el último año con agregado completo.",
+      "fuente": "medido"
+    },
+    {
+      "cifra": "67 %",
+      "unidad": "limpia en Colombia",
+      "titulo": "Colombia genera dos tercios de su electricidad limpia",
+      "texto": "En 2023, 58,00 de sus 86,58 TWh vinieron de fuentes limpias, sobre todo hidráulica, con 258 gCO₂/kWh frente a los 471 del mundo. Y la generación colombiana se duplicó desde 2000: 2,02 veces.",
+      "fuente": "medido"
+    }
+  ],
+  "hitos": [
+    {
+      "valor": "H1",
+      "etiqueta": "ciclo"
+    },
+    {
+      "valor": "7",
+      "etiqueta": "fases de construcción cerradas"
+    },
+    {
+      "valor": "2026-09-06",
+      "etiqueta": "sellada"
+    },
+    {
+      "valor": "v1.0.0",
+      "etiqueta": "version"
+    },
+    {
+      "valor": "7",
+      "etiqueta": "fuentes abiertas con licencia declarada"
+    }
+  ],
+  "galeria": [
+    {
+      "archivo": "capturas/energia-y-clima/01-el-pulso-del-sistema.png",
+      "pie": "El pulso del sistema"
+    },
+    {
+      "archivo": "capturas/energia-y-clima/02-la-transicion-electrica.png",
+      "pie": "La transición eléctrica"
+    },
+    {
+      "archivo": "capturas/energia-y-clima/03-quien-calento-el-planeta.png",
+      "pie": "Quién calentó el planeta"
+    },
+    {
+      "archivo": "capturas/energia-y-clima/04-el-termometro.png",
+      "pie": "El termómetro"
+    },
+    {
+      "archivo": "capturas/energia-y-clima/05-donde-esta-la-energia.png",
+      "pie": "Dónde está la energía"
+    },
+    {
+      "archivo": "capturas/energia-y-clima/06-notas-limites-y-calidad.png",
+      "pie": "Notas, límites y calidad"
+    }
+  ]
+}

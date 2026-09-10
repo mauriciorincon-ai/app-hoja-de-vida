@@ -1,7 +1,14 @@
 import { z } from "zod";
 
 /**
- * CONTRATO «FICHA TÉCNICA» v1.2.0 (ADR-016) — la capa infografía de la vitrina.
+ * CONTRATO «FICHA TÉCNICA» v1.3.0 (ADR-016) — la capa infografía de la vitrina.
+ *
+ * v1.3.0 (2026-09-09, S7 · las fichas de tableros): ADITIVO. Dos claves
+ * opcionales que una pieza CON DATOS necesita y una app no: **`conclusiones`**
+ * (lo que los datos dicen, en tarjetas con su cifra y su fuente) y
+ * **`galeria`** (las pantallas reales, con su pie). Propuestas por la casa que
+ * produce los tableros y adoptadas tal cual: límites y forma son los suyos.
+ * `required` no cambia; toda ficha 1.x válida lo sigue siendo.
  *
  * v1.2.0 (2026-09-06, S7): ADITIVO. `procedencias` admite **`"planeadora"`**
  * — la casa que administra las fichas de las apps (export del repo de cada
@@ -260,6 +267,43 @@ export const complementoSchema = z
 
 export type Complemento = z.infer<typeof complementoSchema>;
 
+/* ── Lo que una pieza con DATOS trae de más (v1.3.0) ────────────────────── */
+
+/**
+ * Una conclusión es una cifra con su lectura: lo que los datos dicen, no lo
+ * que la pieza es. Lleva `fuente` como toda cifra de esta vitrina — un hallazgo
+ * sin procedencia es una opinión con número.
+ */
+const conclusion = z
+  .object({
+    cifra: texto(16),
+    unidad: z.string().max(24).optional(),
+    titulo: texto(60),
+    texto: texto(240),
+    fuente: z.enum(fuentesCifra),
+  })
+  .strict();
+
+/**
+ * Una pantalla real de la pieza. `archivo` es una ruta RELATIVA a la ficha
+ * (`capturas/<slug>/NN-<pagina>.png`); CV Viva la sirve desde
+ * `public/piezas/<frente>/` y el test de contenido exige que exista — una
+ * galería que apunta al vacío rompe el build, no publica un hueco.
+ */
+const captura = z
+  .object({
+    archivo: z
+      .string()
+      .min(1)
+      .max(120)
+      .regex(
+        /^[A-Za-z0-9._/-]+\.(png|jpg|jpeg|webp)$/,
+        "ruta relativa a una imagen",
+      ),
+    pie: texto(80),
+  })
+  .strict();
+
 /* ── La ficha técnica completa (el contrato para otras casas) ────────────── */
 
 export const fichaTecnicaSchema = z
@@ -313,9 +357,15 @@ export const fichaTecnicaSchema = z
       .array(z.object({ valor: texto(24), etiqueta: texto(40) }).strict())
       .min(3)
       .max(5),
+    // v1.3.0 — opcionales, independientes entre sí. Entre 3 y 6 conclusiones:
+    // menos no es una lectura, más es un informe.
+    conclusiones: z.array(conclusion).min(3).max(6).optional(),
+    galeria: z.array(captura).min(1).max(12).optional(),
   })
   .strict()
   .superRefine(procesoConProcedencia("procedencia_proceso"));
 
 export type FichaTecnica = z.infer<typeof fichaTecnicaSchema>;
 export type Proceso = z.infer<typeof procesoSchema>;
+export type Conclusion = z.infer<typeof conclusion>;
+export type Captura = z.infer<typeof captura>;

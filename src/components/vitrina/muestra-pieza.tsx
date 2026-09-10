@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
@@ -14,6 +15,10 @@ import type { FichaTecnica } from "@/lib/vitrina/ficha-tecnica/schema";
  * Lo que ocupa ese sitio es lo único que una pieza sin interfaz sí tiene y no
  * se puede fingir: **su titular de valor y sus tres primeras cifras con su
  * procedencia**. Quien pasa por el escaparate decide con eso, no con un dibujo.
+ *
+ * Y si la pieza SÍ tiene pantalla —una ficha con `galeria` (v1.3.0), como un
+ * tablero—, la tarjeta enseña la primera, real y sin retocar, en el mismo sitio
+ * donde una app enseña su maqueta. Lo decide la ficha, no el frente.
  *
  * Cero enlaces (regla 16): el único destino es una ruta de este repo.
  */
@@ -68,6 +73,23 @@ export async function MuestraPieza({
             {promesa.tagline}
           </p>
         </div>
+
+        {datos.galeria?.[0] && (
+          <div
+            data-portada
+            className="overflow-hidden rounded-[10px] border border-paper-2 bg-paper-1"
+          >
+            <Image
+              src={`/piezas/${pieza.frente}/${datos.galeria[0].archivo}`}
+              alt=""
+              width={2560}
+              height={1440}
+              sizes="(min-width: 1024px) 480px, (min-width: 640px) 50vw, 100vw"
+              loading="lazy"
+              className="block h-auto w-full"
+            />
+          </div>
+        )}
 
         {/* El titular ocupa el lugar que en una app tiene la maqueta: es lo que
             hace reconocible a la pieza de un vistazo. */}

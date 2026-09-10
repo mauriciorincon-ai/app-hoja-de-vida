@@ -248,6 +248,11 @@
     "nunca": "Never",
     "s05": "Where it stands",
     "s05sub": "The pinned version, not real time.",
+    "conclusiones": "What the data says",
+    "conclusionesSub": "Each finding with its figure and its provenance. It is what the piece found, not what it is.",
+    "galeria": "What it looks like",
+    "galeriaSub": "Real screens of the piece, as it runs. Untouched.",
+    "galeriaPie": "Screen {n} of {total}",
     "hitos": {
       "ciclo": "cycle",
       "sprints": "closed sprints",

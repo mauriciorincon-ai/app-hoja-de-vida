@@ -248,6 +248,11 @@
     "nunca": "Nunca",
     "s05": "Dónde está",
     "s05sub": "La versión anclada, no el tiempo real.",
+    "conclusiones": "Lo que dicen los datos",
+    "conclusionesSub": "Cada hallazgo con su cifra y su procedencia. Es lo que la pieza encontró, no lo que es.",
+    "galeria": "Cómo se ve",
+    "galeriaSub": "Pantallas reales de la pieza, tal como corre. Sin retocar.",
+    "galeriaPie": "Pantalla {n} de {total}",
     "hitos": {
       "ciclo": "ciclo",
       "sprints": "sprints cerrados",
