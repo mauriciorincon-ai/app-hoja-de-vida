@@ -86,6 +86,11 @@ export async function MuestraPieza({
               height={1440}
               sizes="(min-width: 1024px) 480px, (min-width: 640px) 50vw, 100vw"
               loading="lazy"
+              // La portada es contexto, no el contenido principal: cede ancho de
+              // banda a la fuente que el texto del escaparate necesita para
+              // pintar. Seis portadas compitiendo con ella le costaban ~150 ms
+              // de LCP al frente de tableros, el único con capturas.
+              fetchPriority="low"
               className="block h-auto w-full"
             />
           </div>

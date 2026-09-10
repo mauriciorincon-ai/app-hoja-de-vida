@@ -792,3 +792,82 @@ planeadora **recalcula** el trabajo restante (lo que quedó de H2 + lo que salga
 Consecuencias aquí: el gate ⭐ del S7 sigue diferido con sus contrapesos (como ya preveía la
 orden); el cierre del ciclo H2 **no se fija** hasta el recálculo. El mensaje para la planeadora
 —esta app no le escribe— queda versionado en `sprints/SPRINT_007-mensaje-a-la-planeadora.md`.
+
+## Fase 5 — el cierre
+
+### Lo que el sprint dejó FALSO (barrido de promesa aplazada, kit v1.15.2)
+
+Barrido sobre manual, README, guía y design-system con el vocabulario corto y estable
+(`todavía no` · `aún no` · `por ahora` · `de momento` · `próximamente` · `más adelante` ·
+`no se puede` · futuros). Tres afirmaciones habían caducado, todas por la misma causa —
+**abrir los cuatro frentes**:
+
+| Dónde | Decía | Dice |
+| ----- | ----- | ---- |
+| `docs/MANUAL-DE-USO.md` | «Agentes / Investigaciones / Tableros: **En preparación**» | los cuatro con su cuenta real |
+| `docs/MANUAL-DE-USO.md` | «solo puede ser `abierta`… **hoy, solo `apps`**» | abierta ⇔ el frente tiene piezas |
+| `docs/GUIA-DE-PRUEBA.html` K1 | «la de Apps dice 6 piezas; las otras tres **En preparación**» | las cuatro dicen «Entrar» con su cuenta |
+
+Y una cuarta que **no** caducó y se deja escrita para que no la borren por parecerlo: la página
+de «este frente empieza» **sigue existiendo** — hoy sin sujeto. La prueba K8 queda **EN ESPERA**
+declarando esa razón, no se elimina (regla 11: una prueba solo se borra si su feature murió).
+
+### “0 FUNCIONALIDADES”: la app inventaba un número que la ficha no dio
+
+Observación del usuario mirando el escaparate. Causa: **las 7 investigaciones declaran
+`cuenta: 0`** en todos sus bloques —una investigación tiene aportes, no funciones— y la ficha
+imprimía «0 funcionalidades» en cada tarjeta y «4 grupos · 0 funcionalidades» en el subtítulo.
+
+**Corregido con el invariante, no con el síntoma:** *la app nunca escribe un número que la ficha
+no declaró.* Si `cuenta` es 0, la tarjeta **calla**; si el total es 0, el subtítulo cuenta grupos
+y calla el número (`s03subSoloGrupos`, ES/EN). No se tocó ninguna ficha ajena — el arreglo es de
+esta casa, que es la que hablaba de más.
+
+**Regla 14 — el rojo, en este mismo commit.** Prueba nueva
+(`vitrina.spec.ts`, «una pieza que NO cuenta funcionalidades no dice “0 funcionalidades”»)
+corrida contra el build ANTERIOR: **roja**, nombrando `espectro-agencia` y citando el texto
+«02 Qué tiene 4 grupos · 0 funcionalidades». Con el arreglo, verde en chromium y móvil.
+
+### Lighthouse: el presupuesto, medido de verdad antes del PR
+
+El job de CI gana 6 URLs y **tableros es el único frente con imágenes**. Medido en local:
+
+| Ruta | LCP (mediana de 3) | TTI | Peso | Presupuesto |
+| ---- | ------------------ | --- | ---- | ----------- |
+| `/es/vitrina/tableros` | 3359 ms | 3540 ms | 482 KiB | LCP 3850 · TTI 4000 · 1000 KiB |
+| `/es/vitrina/tableros/banca-colombiana` | 3206 ms | 3372 ms | 387 KiB | ídem |
+| `/es/vitrina/agentes` (control, sin imágenes) | 3206 ms | 3455 ms | — | ídem |
+
+**Aviso metodológico:** la PRIMERA corrida suelta dio LCP 4206 ms y **rompió el presupuesto**.
+Era arranque en frío, no una regresión: con las 3 corridas que usa el job (mediana) pasa con
+~13 % de margen. *Una sola corrida de Lighthouse no es una medición* — y por poco se paga un
+falso positivo con una optimización a ciegas.
+
+Lo que sí se cambió, y por qué: las **portadas del escaparate llevan `fetchPriority="low"`**. Son
+contexto, no el contenido principal; seis de ellas compitiendo por ancho de banda con la fuente
+que el texto necesita es exactamente el sitio donde no se quiere gastar la prioridad. El efecto
+medido es pequeño (dentro del ruido), pero la semántica queda correcta y el margen no depende de
+la suerte del runner.
+
+### Entregables del cierre
+
+- **ADR-017** «Las estanterías»: el loader genérico, «abierta» como medición y el contrato v1.3.0,
+  con las cuatro alternativas descartadas y sus razones.
+- **`docs/GUIA-DE-PRUEBA.html` v6** — NS `s007`. Bola de nieve: **57 heredadas enteras** + bloque
+  **M** (14 pruebas nuevas) + `j5` = **72 pruebas**. `k1`, `k8` y `k9` mejoradas. **5 ⭐ nuevas**
+  (m10 · m11 · m12 · m13 · m14) → gate mínimo **22**. Verificada: HTML bien formado, cero recursos
+  externos, 72 casillas sin ids duplicados y sin etiquetas huérfanas.
+- **`docs/MANUAL-DE-USO.md`** — los cuatro frentes con su cuenta, «Las piezas que no son apps» y
+  **«Cómo publicar una pieza nueva (sin sprint, sin código)»** en cinco pasos, con la regla de que
+  la ficha ajena no se edita aquí.
+- **`design-system.md`** — Muestra de pieza (y por qué no lleva maqueta), Hallazgos, Galería; la
+  ficha generalizada a **tres opcionales**. **`design-sync/components/componentes-s7/`** con las
+  dos tarjetas nuevas (autocontenidas, cero CDNs). Publicar sigue siendo del cierre de ciclo.
+- **CLAUDE.md auditado.** Dos correcciones del mapa: se añade `public/piezas/<frente>/`, y se
+  **borra `src/engine/`, que nunca existió** — los motores puros viven bajo `src/lib/` por
+  dominio, y la regla 3 lo dice ahora con esas palabras. Un mapa que nombra una carpeta que no
+  está es una trampa para el próximo que lo lea.
+- **B1 pagada:** `fichaTecnica.detalleEyebrow` era huérfana desde el S6 — eliminada en ES y EN.
+- **B2 pagada:** `/deploy-check` local estaba en la versión de 10 secciones; se copia la del kit
+  (**12 secciones**), que trae el gate de «cada check con conclusión propia» y el del disco en
+  runtime.

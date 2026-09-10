@@ -242,6 +242,7 @@
     "s03": "What it has",
     "s03sub": "{grupos, plural, one {# group} other {# groups}} · {n} features. The detail of each one lives in the full card.",
     "s03subSinDetalle": "{grupos, plural, one {# group} other {# groups}} · {n} features.",
+    "s03subSoloGrupos": "{grupos, plural, one {# group} other {# groups}}.",
     "s04": "Limits, and what it never does",
     "s04sub": "What it chose not to be counts as much as what it is.",
     "limites": "Limits, on purpose",
@@ -263,7 +264,6 @@
     },
     "verDetalle": "Open the full card",
     "cierreNota": "Shown here; not handed over. The waiting list promises no date.",
-    "detalleEyebrow": "Full card",
     "volverFichaTecnica": "Back to the technical sheet"
   }
 }

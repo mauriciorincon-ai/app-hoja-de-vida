@@ -20,10 +20,11 @@ design-sync/
    ├─ fundamentos/       Paleta · Tipografía · Forma y movimiento
    ├─ componentes/       Botón · Card · Chip de estado ·
    │                     Menú desplegable del encabezado
-   └─ componentes-s5/    Muestra de app · Tarjeta de grupo ·
-                         Chip de procedencia · Captura repintada ·
-                         Caja de frente (post-S5, ADR-015) ·
-                         Ficha técnica y proceso BPMN (post-S5, ADR-016)
+   ├─ componentes-s5/    Muestra de app · Tarjeta de grupo ·
+   │                     Chip de procedencia · Captura repintada ·
+   │                     Caja de frente (post-S5, ADR-015) ·
+   │                     Ficha técnica y proceso BPMN (post-S5, ADR-016)
+   └─ componentes-s7/    Muestra de pieza · Hallazgos y galería (S7, ADR-017)
 ```
 
 Cada tarjeta abre con la línea **exacta** `<!-- @dsCard group="…" name="…" -->`: es lo que indexa

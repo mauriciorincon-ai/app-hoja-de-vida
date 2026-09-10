@@ -242,6 +242,7 @@
     "s03": "Qué tiene",
     "s03sub": "{grupos, plural, one {# grupo} other {# grupos}} · {n} funcionalidades. El detalle de cada una vive en la ficha completa.",
     "s03subSinDetalle": "{grupos, plural, one {# grupo} other {# grupos}} · {n} funcionalidades.",
+    "s03subSoloGrupos": "{grupos, plural, one {# grupo} other {# grupos}}.",
     "s04": "Límites, y lo que nunca hace",
     "s04sub": "Lo que decidió no ser vale tanto como lo que es.",
     "limites": "Límites, a propósito",
@@ -263,7 +264,6 @@
     },
     "verDetalle": "Ver la ficha completa",
     "cierreNota": "Aquí se muestra; no se entrega. La lista de espera no promete fecha.",
-    "detalleEyebrow": "Ficha completa",
     "volverFichaTecnica": "Volver a la ficha técnica"
   }
 }

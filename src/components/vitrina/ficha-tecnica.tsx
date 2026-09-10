@@ -335,10 +335,17 @@ export async function FichaTecnica({
         // «El detalle de cada una vive en la ficha completa» solo es verdad si
         // esa ficha completa existe. Una pieza sin detalle no puede mandar al
         // lector a un sitio que no hay — el subtítulo dice la cuenta y calla.
-        sub={t(hrefDetalle ? "s03sub" : "s03subSinDetalle", {
-          grupos: bloques.length,
-          n: totalFuncionalidades,
-        })}
+        // Y si la ficha NO cuenta funcionalidades (`cuenta: 0` en todos sus
+        // bloques — una investigación tiene aportes, no funciones), el subtítulo
+        // no inventa un «0 funcionalidades» que la pieza jamás declaró.
+        sub={
+          totalFuncionalidades === 0
+            ? t("s03subSoloGrupos", { grupos: bloques.length })
+            : t(hrefDetalle ? "s03sub" : "s03subSinDetalle", {
+                grupos: bloques.length,
+                n: totalFuncionalidades,
+              })
+        }
       >
         <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {bloques.map((b) => (
@@ -353,9 +360,11 @@ export async function FichaTecnica({
               <h3 className="font-display text-[1.05rem] leading-tight font-medium text-ink-0">
                 {b.nombre}
               </h3>
-              <p className="mt-1 font-mono text-[10.5px] tracking-[0.04em] text-ink-2 uppercase">
-                {tv("cuentaFuncionalidades", { n: b.cuenta })}
-              </p>
+              {b.cuenta > 0 && (
+                <p className="mt-1 font-mono text-[10.5px] tracking-[0.04em] text-ink-2 uppercase">
+                  {tv("cuentaFuncionalidades", { n: b.cuenta })}
+                </p>
+              )}
               <p className="mt-1.5 text-[13px] leading-snug text-ink-2">
                 {b.linea}
               </p>

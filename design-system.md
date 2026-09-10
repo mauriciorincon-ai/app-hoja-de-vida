@@ -136,18 +136,21 @@ animaciones infinitas (sweep/glitch/marquee), scroll-snap de deck, CDNs en `<hea
 - **Y entra a los scans:** lo que nace cerrado es invisible para axe, así que el scan lo abre
   antes de analizar. Sin eso el gate pasa en verde sin haber mirado nada.
 
-### Componentes de la vitrina · S5
+### Componentes de la vitrina · S5 → S7
 
-- **Ficha técnica** (`/vitrina/apps/<slug>`, ADR-016 · post-S5): la capa infografía de una pieza,
-  hasta siete bloques en orden fijo para cualquier frente (el proceso BPMN es **opcional** desde
-  el contrato v1.1.0: sin él, «Cómo funciona» no se pinta y las secciones se renumeran 01–04, nunca
-  un hueco). Cabecera: eyebrow + chips de estado —con **«Sellada el {fecha}»** a su lado cuando
+- **Ficha técnica** (`/vitrina/apps/<slug>` y `/vitrina/<frente>/<slug>`, ADR-016 · ADR-017): la capa infografía de una pieza,
+  en orden fijo para cualquier frente y con **tres secciones opcionales que decide la pieza, no el
+  frente**: el proceso BPMN (contrato v1.1.0), los hallazgos y la galería (v1.3.0). La que falta
+  no se pinta y **las demás se renumeran seguidas, nunca un hueco** — una app va 01–05, una
+  investigación 01–04, un tablero 01–06. Y la app **no inventa lo que la ficha no declara**: si
+  los bloques vienen con la cuenta en cero (una investigación tiene aportes, no funciones), el
+  subtítulo cuenta grupos y **calla el número**. Cabecera: eyebrow + chips de estado —con **«Sellada el {fecha}»** a su lado cuando
   la pieza viene sellada y el contrato trae `pieza.sellado_en`— ciclo, sprints, versión y
   anclaje, nombre en Fraunces `clamp(2.2rem,6vw,3.5rem)`, tagline Fraunces 1.35rem, stack en chips
   y el **titular de valor**: caja paper-1 con borde izquierdo `sage-ink` 3px, rótulo mono
   «qué no hace nadie más», texto 16px medium `ink-0`. **Tira de cifras**: 3–5 cards paper-0,
   valor Fraunces 2rem `tabular-nums`, etiqueta 12.5px `ink-2`, chip de procedencia obligatorio.
-  Secciones numeradas `01`–`05`: número mono `ink-2`, título Fraunces 1.6rem, subtítulo 13px `ink-2`
+  Secciones numeradas: número mono `ink-2`, título Fraunces 1.6rem, subtítulo 13px `ink-2`
   alineado a la derecha. Paneles `r-lg` paper-0 borde paper-2 `sh-1`. «Límites» con guion `ink-2`;
   «Nunca» con × `rose-ink`. Hitos: pista de puntos `sage-ink`. Cierre: botón sage al detalle + botón
   de borde a la lista de espera. **Contraste:** `ink-3` NUNCA es color de texto (2.7:1 sobre
@@ -175,12 +178,36 @@ animaciones infinitas (sweep/glitch/marquee), scroll-snap de deck, CDNs en `<hea
   preparación» si no. Nombre en Fraunces, intro en `ink-1` de 15 px, y cierre «Entrar →» / «Ver
   qué viene →». Mismo contrato que la muestra de app: el enlace estira su área de clic a toda la
   caja **conservando el nombre del frente como nombre accesible**. **Marca un inicio, no lo
-  disfraza:** un frente en preparación no enseña una cuenta inventada.
+  disfraza:** un frente en preparación no enseña una cuenta inventada, y la cuenta de uno abierto
+  **se mide en disco**, no se escribe.
 - **Muestra de app** (escaparate `/vitrina`): card paper-0, borde paper-2, `r-lg`, `sh-1`. Lleva
   chip de estado + chip de ciclo, nombre en Fraunces, promesa en Fraunces menor, **tira**
   esquemática enmarcada en paper-1, para-quién en `ink-2`, conteos en mono y cierre «ver la ficha».
   El enlace estira su área de clic a toda la card (`after:absolute inset-0`) **conservando el
   nombre de la app como nombre accesible** — una sola parada de tabulador, y nunca «leer más».
+- **Muestra de pieza** (escaparate de un frente que no es apps, `/vitrina/<frente>` · S7): la
+  hermana de la muestra de app, y se parece en todo menos en una cosa — **una app se reconoce por
+  su pantalla y una pieza sin interfaz no tiene ninguna**. Un agente vive en una terminal, una
+  investigación es un documento: una maqueta inventada sería decorado que insinúa un producto
+  inexistente. Card paper-0, borde paper-2, `r-[14px]`, `sh-1`, hover `-translate-y-0.5` + `sh-2`.
+  Lleva chip de estado (`sage`=sellada · `citron`=sin sellar) + chip de ciclo, nombre en Fraunces
+  1.45rem, tagline en Fraunces 1.02rem, y en el sitio de la maqueta **el titular de valor** —caja
+  paper-1 con borde izquierdo `sage-ink` de 3px y antetítulo mono en `sage-ink`— seguido de
+  **tres cifras** (nunca las cinco: el escaparate asoma, la ficha desarrolla) en rejilla de 3
+  columnas, cada una con su chip de procedencia. Mismo contrato de enlace que la muestra de app:
+  `after:absolute inset-0` **conservando el nombre de la pieza como nombre accesible**.
+  **Portada condicional:** si la ficha trae `galeria`, la **primera captura** ocupa el lugar de la
+  maqueta —real, sin retocar, `alt=""` porque el pie lo da el nombre— y lo decide **la ficha, no
+  el frente**.
+- **Hallazgos** («Lo que dicen los datos», solo si la ficha trae `conclusiones` · S7): de 3 a 6
+  tarjetas paper-1 en rejilla; cada una abre con **la cifra en Fraunces** y su unidad en mono
+  `ink-2`, luego el título y el texto, y cierra con **su chip de procedencia**. La regla del chip
+  no se relaja aquí: *un hallazgo con número y sin procedencia es una opinión disfrazada.*
+- **Galería** («Cómo se ve», solo si la ficha trae `galeria` · S7): de 1 a 12 capturas de la pieza
+  corriendo, cada una en `<figure>` con marco paper-1 y `figcaption` mono «Pantalla N de T».
+  `loading="lazy"`, `sizes` responsivo, y se sirven de `/piezas/<frente>/…` —espacio propio, que
+  no colisiona con la ruta de la ficha—. **Se guardan tal como llegaron**: convertirlas obligaría
+  a editar la ficha de otra casa.
 - **Tarjeta de grupo** (dentro de una ficha): `r-md`, borde paper-3. Cabecera `<h4><button>` —
   jamás `<button><h4>` — con índice mono, icono del DS de la app de origen, nombre, línea y
   chevron. Cerrada, el interior va con `visibility: hidden` (fuera del árbol de accesibilidad);

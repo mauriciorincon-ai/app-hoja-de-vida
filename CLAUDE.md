@@ -50,11 +50,11 @@ src/
 │                   · [categoria] (un frente: escaparate si abierta, «en preparación» si no)
 │                   · [categoria]/[pieza] (S7 — la ficha de una pieza no-app))
 ├─ components/     (UI sin lógica de negocio; home/ · motion/ · forms/ · vitrina/)
-├─ engine/         (motores puros, sin side-effects, cobertura >80%)
 ├─ lib/            (content.ts · i18n.ts · resend.ts · analytics.ts)
 │  ├─ ia/          (S3 — patrón IA-embebida: schemas · provider · retrieval · guardrails)
 │  ├─ votes/       (S4 — votación: schemas.ts · client.ts · roadmap.ts)
-│  └─ vitrina/     (S5–S6 — loader.ts de exports · schemas.ts · categorias.ts (frentes)
+│  └─ vitrina/     (S5–S7 — MOTORES PUROS de la vitrina, sin side-effects, cobertura >80%:
+│                   loader.ts de exports · schemas.ts · categorias.ts (frentes)
 │                   · bpmn.ts (motor puro del proceso) · ficha-tecnica/ (schema · armar
 │                   · secciones · loader) · piezas.ts (S7 — loader genérico por frente))
 └─ types/
@@ -63,7 +63,11 @@ data/vitrina.yaml  (S6 — los cuatro FRENTES de la vitrina: id, estado, nombre,
 data/fichas/       (S6 — complementos de CURACIÓN de CV Viva por app, `procedencia: cv-viva`:
                     titular · cifras destacadas · límites · nunca · proceso)
 content/vitrina/   (S5 — los brochure-export.json de las apps hermanas; NO se editan a mano)
-content/<frente>/  (S7 — fichas técnicas COMPLETAS producidas por otras casas; NO se editan aquí)
+content/<frente>/  (S7 — fichas técnicas COMPLETAS producidas por otras casas; NO se editan aquí:
+                    agentes/ · investigaciones/ · tableros/, un <slug>.ficha-tecnica.json por pieza)
+public/piezas/<frente>/  (S7 — las capturas que la `galeria` de una ficha referencia, tal como
+                    llegaron; se sirven en /piezas/<frente>/… — espacio propio, no choca con
+                    /vitrina/<frente>/<slug>)
 tests/{unit,integration,e2e}/
 design-system.md          (fuente de verdad visual — se crea en el sprint 1, skill diseno-ui)
 design-sync/              (bundle publicable del design system — espejo 1:1, regla 15)
@@ -78,7 +82,9 @@ decisions/NNN-titulo.md   (ADRs de implementación)
 
 1. **TypeScript strict.** Sin `any` ni `@ts-ignore` sin justificación en comentario.
 2. **Tests con cada feature.** Motores puros >80%, UI >50%, ≥1 e2e por feature core.
-3. **Motor separado de UI.** Lógica pura en `engine/`/`lib/`; componentes sin lógica de negocio.
+3. **Motor separado de UI.** Lógica pura en `src/lib/` (aquí NO hay `src/engine/`: los motores
+   —`bpmn.ts`, `secciones.ts`, `retrieval.ts`, `roadmap.ts`— viven bajo `lib/` por dominio);
+   componentes sin lógica de negocio.
 4. **Toda salida de LLM que se persista pasa por esquema Zod** (skill `ia-embebida`) — aplica
    desde S3; nunca texto libre directo a la BD.
 5. **A11y desde el inicio:** tabindex, aria-labels, contraste AA, `prefers-reduced-motion`.
@@ -292,7 +298,7 @@ pr: <link>
   y se publican con un **PR de contenido sin sprint** (la CI valida esquema, cero enlaces, axe y
   e2e). **Las fichas de otras casas NO se editan aquí — ni para que quepan:** si una no valida, se
   reporta archivo + campo + regla y se corrige EN ORIGEN; si varias no caben por una razón
-  legítima del frente, se propone contrato **v1.2.0 aditivo** en plan mode. La misma regla que ya
+  legítima del frente, se propone **contrato aditivo** en plan mode (así nacieron v1.2.0 y v1.3.0; vigente: **v1.3.0**). La misma regla que ya
   rige para `content/vitrina/`, extendida a todo lo que llega de afuera.
 - **Un solo contrato, un solo renderizador.** `FichaTecnica` renderiza `fichaTecnicaSchema` y no
   un tipo de pieza: nada específico por frente vive en el componente. Lo específico por frente

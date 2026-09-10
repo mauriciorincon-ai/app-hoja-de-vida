@@ -73,6 +73,7 @@ type Pieza = {
   proceso?: unknown;
   conclusiones?: unknown[];
   galeria?: { archivo: string }[];
+  bloques: { cuenta: number }[];
   titular: string;
 };
 const piezasDe = (frente: string): Pieza[] =>
@@ -574,6 +575,30 @@ test.describe("Vitrina — las estanterías: un frente ABIERTO y sus piezas (S7)
       await expect(
         ft.locator(`#ft-0${cuantas + 1}-${p.pieza.slug}`),
       ).toHaveCount(0);
+    }
+  });
+
+  test("una pieza que NO cuenta funcionalidades no dice «0 funcionalidades»", async ({
+    page,
+  }) => {
+    // Una investigación tiene aportes, no funciones: sus bloques declaran
+    // `cuenta: 0`. La app no puede inventarle un número que la ficha no dio —
+    // ni en la tarjeta ni en el subtítulo de la sección.
+    const sinCuenta = ABIERTOS.flatMap((f) =>
+      f.piezas
+        .filter((p) => p.bloques.every((b) => b.cuenta === 0))
+        .map((p) => ({ f, p })),
+    );
+    test.skip(
+      sinCuenta.length === 0,
+      "ninguna pieza declara todos sus bloques en cuenta 0",
+    );
+
+    for (const { f, p } of sinCuenta) {
+      await page.goto(`/es/vitrina/${f.id}/${p.pieza.slug}`);
+      const ft = page.locator(`[data-ficha-tecnica="${p.pieza.slug}"]`);
+      await expect(ft).toContainText(`${p.bloques.length} grupos`);
+      await expect(ft).not.toContainText(/0\s+funcionalidades/i);
     }
   });
 
