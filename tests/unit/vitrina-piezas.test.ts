@@ -5,6 +5,8 @@ import {
   frentesConPiezas,
   getPieza,
   getPiezas,
+  leerFichaDeTexto,
+  ordenarPiezas,
   parseFicha,
 } from "@/lib/vitrina/piezas";
 
@@ -130,5 +132,47 @@ describe("getPieza y frentesConPiezas", () => {
       "investigaciones",
       "tableros",
     ]);
+  });
+});
+
+describe("los dos fail-safes que faltaban por probar sin disco (auditoría S7, B1)", () => {
+  it("un JSON malformado es «ilegible» y nombra la ruta — no un SyntaxError suelto", () => {
+    expect(() =>
+      leerFichaDeTexto("{ esto no es json", "agentes", "x.ficha-tecnica.json"),
+    ).toThrow(/Ficha ilegible en content\/agentes\/x\.ficha-tecnica\.json/);
+  });
+
+  it("una ficha en la carpeta equivocada rompe nombrando el frente que declara", () => {
+    const texto = readFileSync(
+      "content/tableros/formula-1.ficha-tecnica.json",
+      "utf8",
+    );
+    expect(() =>
+      leerFichaDeTexto(texto, "agentes", "formula-1.ficha-tecnica.json"),
+    ).toThrow(/Ficha fuera de sitio.*pieza\.frente: tableros.*content\/agentes/);
+  });
+
+  it("un archivo que no se llama como su slug rompe diciendo cómo debe llamarse", () => {
+    const texto = readFileSync(
+      "content/tableros/formula-1.ficha-tecnica.json",
+      "utf8",
+    );
+    expect(() =>
+      leerFichaDeTexto(texto, "tableros", "otro.ficha-tecnica.json"),
+    ).toThrow(/debe llamarse «formula-1\.ficha-tecnica\.json»/);
+  });
+
+  it("ordenarPiezas: sellada antes que sin sellar, VENGA en el orden que venga", () => {
+    const [a, b] = getPiezas("investigaciones");
+    const sellada = { ...a, pieza: { ...a.pieza, estado: "sellado" as const, nombre: "Zeta" } };
+    const inicial = { ...b, pieza: { ...b.pieza, estado: "inicial" as const, nombre: "Alfa" } };
+    // Las dos ramas del comparador: sellada primero aunque llegue segunda…
+    expect(ordenarPiezas([inicial, sellada]).map((p) => p.pieza.nombre)).toEqual(["Zeta", "Alfa"]);
+    // …y primera si ya venía primera.
+    expect(ordenarPiezas([sellada, inicial]).map((p) => p.pieza.nombre)).toEqual(["Zeta", "Alfa"]);
+    // A igual estado, alfabético en es-CO (la ñ y las tildes cuentan como letras).
+    const n1 = { ...inicial, pieza: { ...inicial.pieza, nombre: "Ñandú" } };
+    const n2 = { ...inicial, pieza: { ...inicial.pieza, nombre: "Ozono" } };
+    expect(ordenarPiezas([n2, n1]).map((p) => p.pieza.nombre)).toEqual(["Ñandú", "Ozono"]);
   });
 });

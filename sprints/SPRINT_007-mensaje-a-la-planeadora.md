@@ -38,7 +38,7 @@ piezas reales, todo en la rama `sprint-007/las-estanterias` del repo de la app:
   motor, renumeración de secciones, axe sobre las rutas nuevas, galería sin hueco.
 - **Verificación al cierre de la construcción:** typecheck y lint limpios · 370 pruebas unitarias
   · e2e completo en chromium y móvil, incluida accesibilidad en todas las rutas nuevas en los
-  dos idiomas · build SSG de 111 páginas (el sprint empezó con 62) · barrido cero enlaces vacío
+  dos idiomas · build SSG de 108 páginas (el sprint empezó con 62) · barrido cero enlaces vacío
   · cero datos de personas.
 
 **Lo que además pagó el S7 (fase 0):** la auditoría retroactiva de S5+S6 con sus pagos, el

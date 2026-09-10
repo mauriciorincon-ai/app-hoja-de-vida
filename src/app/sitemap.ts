@@ -74,7 +74,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
           ? getPiezas(f.id).map((p) => ({
               url: `${SITE_URL}/${locale}/vitrina/${f.id}/${p.pieza.slug}`,
               // La fecha que la ficha declara, no «ahora»: el contrato obliga a
-              // `actualizado` y decir que 111 páginas cambiaron en cada build es
+              // `actualizado` y decir que 108 páginas cambiaron en cada build es
               // ruido en un repo cuya regla madre es que nada se afirma sin fuente.
               lastModified: new Date(p.actualizado),
               alternates: alternatesFor(`/vitrina/${f.id}/${p.pieza.slug}`),

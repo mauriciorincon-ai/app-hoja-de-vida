@@ -25,23 +25,37 @@ export type Opcionales = {
   galeria: boolean;
 };
 
-const OPCIONAL: Partial<Record<Seccion, keyof Opcionales>> = {
+const OPCIONAL = {
   s02: "proceso",
   conclusiones: "conclusiones",
   galeria: "galeria",
-};
+} as const satisfies Partial<Record<Seccion, keyof Opcionales>>;
 
-export function numerarSecciones(
-  presentes: Opcionales,
-): Record<Seccion, string | undefined> {
-  const visibles = SECCIONES.filter((s) => {
-    const clave = OPCIONAL[s];
-    return clave === undefined || presentes[clave];
+export type SeccionOpcional = keyof typeof OPCIONAL;
+export type SeccionFija = Exclude<Seccion, SeccionOpcional>;
+
+/**
+ * Las fijas SIEMPRE tienen número; las opcionales solo si la pieza las trae.
+ * El tipo lo dice para que el renderizador no necesite un `!` apoyado en un
+ * mapa de runtime: si mañana una fija pasa a opcional, el compilador avisa en
+ * cada sitio donde se usaba como segura, en vez de pintar «ft-undefined-…».
+ */
+export type Numeracion = Record<SeccionFija, string> &
+  Partial<Record<SeccionOpcional, string>>;
+
+function esOpcional(s: Seccion): s is SeccionOpcional {
+  return s in OPCIONAL;
+}
+
+export function numerarSecciones(presentes: Opcionales): Numeracion {
+  const visibles = SECCIONES.filter(
+    (s) => !esOpcional(s) || presentes[OPCIONAL[s]],
+  );
+  const numeros: Partial<Record<Seccion, string>> = {};
+  visibles.forEach((s, i) => {
+    numeros[s] = String(i + 1).padStart(2, "0");
   });
-  const numeros = {} as Record<Seccion, string | undefined>;
-  for (const s of SECCIONES) {
-    const i = visibles.indexOf(s);
-    numeros[s] = i === -1 ? undefined : String(i + 1).padStart(2, "0");
-  }
-  return numeros;
+  // Las fijas están todas en `visibles` por construcción (el filtro solo quita
+  // opcionales), así que el cast es una afirmación verdadera, no un deseo.
+  return numeros as Numeracion;
 }

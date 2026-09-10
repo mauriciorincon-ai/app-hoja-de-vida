@@ -87,7 +87,13 @@ function ancla(exp: BrochureExport, archivo: string): AnclaVitrina {
  * descendente, y a igualdad por slug — así el orden no depende del sistema de
  * archivos ni cambia solo entre builds.
  */
+// Memo de módulo SOLO en producción (misma convención que `piezas.ts`): en
+// build, cada página volvía a leer y validar los seis exports.
+let memo: FichaVitrina[] | undefined;
+const MEMORIZAR = process.env.NODE_ENV === "production";
+
 export const getFichasVitrina = cache((): FichaVitrina[] => {
+  if (MEMORIZAR && memo) return memo;
   const archivos = readdirSync(VITRINA_DIR)
     .filter((f) => f.endsWith(SUFIJO))
     .sort();
@@ -100,7 +106,7 @@ export const getFichasVitrina = cache((): FichaVitrina[] => {
     return { ancla: ancla(exp, archivo), export: exp };
   });
 
-  return fichas.sort((a, b) => {
+  const ordenadas = fichas.sort((a, b) => {
     if (a.ancla.estado !== b.ancla.estado) {
       return a.ancla.estado === "sellado" ? -1 : 1;
     }
@@ -109,6 +115,8 @@ export const getFichasVitrina = cache((): FichaVitrina[] => {
     }
     return a.ancla.slug.localeCompare(b.ancla.slug);
   });
+  if (MEMORIZAR) memo = ordenadas;
+  return ordenadas;
 });
 
 /** Solo los anclajes (para el manifest y las cabeceras de la vitrina). */

@@ -42,7 +42,7 @@ vitrina están abiertos con piezas reales.**
   01–04, un tablero 01–06.
 - Sitemap, `alternates`, axe sobre todas las rutas nuevas × 2 idiomas × 2 viewports, Lighthouse
   con 6 URLs nuevas, guía v6, manual, ADR-017 y bundle del design system.
-- **De 62 a 111 páginas estáticas.**
+- **De 62 a 108 páginas estáticas.**
 
 ## DoD — los 6+1 estándares
 
@@ -62,7 +62,7 @@ vitrina están abiertos con piezas reales.**
 | ------- | -------- | --------- |
 | Frentes abiertos | 2 (investigaciones, agentes) | **4** |
 | Piezas publicadas | 20 | **26** |
-| Páginas SSG | ~104 | **111** |
+| Páginas SSG | ~104 | **108** |
 | Fichas editadas en esta casa | 0 | **0** |
 | Gates nuevos demostrados en rojo | todos | **11** (6 del contenido y la plantilla, A–G del motor y la UI, H–L de la auditoría) |
 
@@ -120,17 +120,26 @@ y por poco se paga con una optimización a ciegas.
 
 ## Deuda técnica aceptada
 
+Tras el segundo pase de la auditoría (pedido por el usuario: «resuelve de una vez»), la deuda
+**pagada** en este mismo PR: `colorEstado` y el locale unificados en `lib/vitrina/estilos.ts` ·
+`numerarSecciones` tipada con fijas y opcionales (fuera los `!`) · keys de React por índice ·
+los dos fail-safes del loader (`leerFichaDeTexto`, `ordenarPiezas`) puros y probados sin disco ·
+memo de módulo **solo en producción** en `piezas.ts` y `loader.ts` a la vez · la rama «en
+preparación» extraída a `FrenteEnPreparacion` y probada con Testing Library. 378 unitarias.
+
+Lo que **queda**, con su porqué:
+
 | Qué | Por qué | Pago |
 | --- | ------- | ---- |
-| La rama «en preparación» sin cobertura en ninguna capa | Con los cuatro frentes abiertos no tiene sujeto; recuperarla pide un YAML de fixture | Vuelve sola con el quinto frente, o S8 si se decide el fixture |
-| La suite de axe crece 4 escaneos por ficha entregada (~188 hoy) | El renderizador es uno, pero el contenido no; axe sobre contenido real ya cazó un contraste en el S6 | Se vigila el tiempo (56 s hoy) antes de recortar |
-| `colorEstado` en tres formas y el locale BCP-47 en dos | Cosmético | Cuando se toque la paleta |
-| El fail-safe «Ficha ilegible» sin cubrir; `n.s01!` apoyado en runtime; keys de React sobre texto libre | Sin efecto observable | S8 |
-| `cache()` no memoiza entre páginas: las 111 revalidan las 26 fichas | Coste de build, resultado idéntico | Si el build molesta, y en `piezas.ts` **y** `loader.ts` a la vez |
-| Los `hitos[].etiqueta` que las fichas ajenas escriben en español salen así en `/en` | El contrato los define como texto libre y aquí no se editan | Se reporta a las casas productoras |
-| `"planeadora"` en `procedencias` sigue sin consumidor | Se añadió a petición del README de la vitrina | Cuando la planeadora produzca su primera ficha |
-| `eslint@9.39.4` avisa de deprecación | Es un mayor: llega suelto, no en el lote (regla 17) | S8 |
+| La suite de axe crece 4 escaneos por ficha entregada (~188 hoy) | **Decisión, no defecto:** el renderizador es uno pero el contenido no, y axe sobre contenido real ya cazó un contraste en el S6. Recortar es perder cobertura para ganar segundos (e2e completo: 53 s) | Se vigila el tiempo; se recorta si pasa de 3 min |
+| Los `hitos[].etiqueta` que las fichas ajenas escriben en español salen así en `/en` | El contrato los define como texto libre y **aquí no se editan** | Se reporta a las casas productoras |
+| `"planeadora"` en `procedencias` sigue sin consumidor | Se añadió a petición del README de la vitrina; ninguna ficha lo usa aún | Cuando la planeadora produzca su primera ficha |
+| `eslint@9.39.4` avisa de deprecación | Es un mayor: llega suelto, no en el lote (regla 17) | PR de dependencias propio |
 | Iconos propios de las piezas nuevas (usan el rombo genérico) | Declarado en el plan | S8 |
+
+**Corrección de una cifra:** el sprint dijo «111 páginas» y son **108**. Las tres de más las
+deja el e2e en la caché del servidor al pedir rutas inexistentes (`/es/vitrina/no-existe` y
+compañía), y se contaron por medir después de correrlo. El build limpio genera 108.
 
 ## Gate ⭐ — diferido, con sus contrapesos
 

@@ -86,11 +86,20 @@ export function parseFicha(raw: unknown, ruta: string): FichaTecnica {
   return r.data;
 }
 
-function leerFicha(frente: Frente, archivo: string): FichaTecnica {
+/**
+ * De TEXTO a ficha, sin disco: el otro fail-safe («ilegible») también es puro
+ * y se prueba sin tocar el sistema de archivos. `frente` y `archivo` son parte
+ * de la validez: la ruta pública sale del contenido.
+ */
+export function leerFichaDeTexto(
+  texto: string,
+  frente: Frente,
+  archivo: string,
+): FichaTecnica {
   const ruta = `content/${frente}/${archivo}`;
   let raw: unknown;
   try {
-    raw = JSON.parse(readFileSync(path.join(carpeta(frente), archivo), "utf8"));
+    raw = JSON.parse(texto);
   } catch (e) {
     throw new Error(
       `Ficha ilegible en ${ruta}: ${(e as Error).message}\n${AVISO}`,
@@ -120,12 +129,43 @@ function leerFicha(frente: Frente, archivo: string): FichaTecnica {
   return ficha;
 }
 
+function leerFicha(frente: Frente, archivo: string): FichaTecnica {
+  return leerFichaDeTexto(
+    readFileSync(path.join(carpeta(frente), archivo), "utf8"),
+    frente,
+    archivo,
+  );
+}
+
+/**
+ * El orden del escaparate, puro: selladas primero, luego alfabético en es-CO.
+ * Exportado para probar las DOS ramas del comparador sin depender del orden
+ * en que el disco entregue los archivos.
+ */
+export function ordenarPiezas(piezas: readonly FichaTecnica[]): FichaTecnica[] {
+  return [...piezas].sort((a, b) => {
+    if (a.pieza.estado !== b.pieza.estado)
+      return a.pieza.estado === "sellado" ? -1 : 1;
+    return a.pieza.nombre.localeCompare(b.pieza.nombre, "es-CO");
+  });
+}
+
+/**
+ * `cache()` de React memoiza por render, no entre páginas: en un `next build`
+ * cada una de las 108 páginas volvía a leer y validar las 26 fichas. Este memo
+ * de módulo vive SOLO en producción — en desarrollo, editar un JSON y refrescar
+ * tiene que enseñar el cambio. Misma convención en `loader.ts`.
+ */
+const memo = new Map<Frente, FichaTecnica[]>();
+const MEMORIZAR = process.env.NODE_ENV === "production";
+
 /**
  * Las piezas publicadas de un frente, validadas y ordenadas. `[]` si el frente
  * todavía no tiene carpeta: eso es un frente que empieza, no un repo roto.
  */
 export const getPiezas = cache((frente: Frente): FichaTecnica[] => {
   if (!esFrente(frente)) return [];
+  if (MEMORIZAR && memo.has(frente)) return memo.get(frente)!;
   const dir = carpeta(frente);
   if (!existsSync(dir)) return [];
 
@@ -141,11 +181,9 @@ export const getPiezas = cache((frente: Frente): FichaTecnica[] => {
   // decorado. La unicidad GLOBAL entre frentes, que sí es una regla aparte, la
   // vigila `tests/unit/content-fichas.test.ts`.
 
-  return piezas.sort((a, b) => {
-    if (a.pieza.estado !== b.pieza.estado)
-      return a.pieza.estado === "sellado" ? -1 : 1;
-    return a.pieza.nombre.localeCompare(b.pieza.nombre, "es-CO");
-  });
+  const ordenadas = ordenarPiezas(piezas);
+  if (MEMORIZAR) memo.set(frente, ordenadas);
+  return ordenadas;
 });
 
 export function getPieza(

@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import type { FichaTecnica as Datos } from "@/lib/vitrina/ficha-tecnica/schema";
+import { COLOR_ESTADO, intlLocale } from "@/lib/vitrina/estilos";
 import { numerarSecciones } from "@/lib/vitrina/ficha-tecnica/secciones";
 import type { FuenteMetrica } from "@/lib/vitrina/schemas";
 import { IconoGrupo } from "./iconos-grupo";
@@ -42,10 +43,6 @@ const colorFuente: Record<FuenteMetrica, string> = {
   declarado: "bg-lilac text-lilac-ink",
   estimacion: "bg-peach text-peach-ink",
 };
-const colorEstado = {
-  sellado: "bg-sage text-sage-ink",
-  inicial: "bg-citron text-citron-ink",
-} as const;
 
 const CHIP =
   "rounded-full border border-paper-3 px-2.5 py-1 font-mono text-[11px] tracking-[0.02em] text-ink-2 uppercase";
@@ -140,7 +137,7 @@ export async function FichaTecnica({
             <span
               data-estado={pieza.estado}
               title={tv(`estadoAyuda.${pieza.estado}`)}
-              className={`rounded-full px-2.5 py-1 font-mono text-[11px] tracking-[0.02em] uppercase ${colorEstado[pieza.estado]}`}
+              className={`rounded-full px-2.5 py-1 font-mono text-[11px] tracking-[0.02em] uppercase ${COLOR_ESTADO[pieza.estado]}`}
             >
               {tv(`estados.${pieza.estado}`)}
             </span>
@@ -213,7 +210,7 @@ export async function FichaTecnica({
             className="flex flex-col rounded-[12px] border border-paper-2 bg-paper-0 p-4 shadow-sh-1"
           >
             <p className="font-display text-[2rem] leading-none tracking-[-0.02em] text-ink-0 tabular-nums">
-              {c.valor.toLocaleString(locale === "es" ? "es-CO" : "en-US")}
+              {c.valor.toLocaleString(intlLocale(locale))}
               {/* La unidad solo si la etiqueta no la dice ya: «24 funcionalidades ·
                   Funcionalidades del MVP» es decir lo mismo dos veces. */}
               {c.unidad &&
@@ -239,7 +236,7 @@ export async function FichaTecnica({
 
       {/* ── 01 ───────────────────────────────────────────────────────────── */}
       <Seccion
-        n={n.s01!}
+        n={n.s01}
         id={`ft-${n.s01}-${pieza.slug}`}
         titulo={t("s01")}
         sub={t("s01sub")}
@@ -261,9 +258,9 @@ export async function FichaTecnica({
       </Seccion>
 
       {/* ── 02 · el proceso (solo si la pieza lo trae) ───────────────────── */}
-      {proceso && (
+      {proceso && n.s02 && (
         <Seccion
-          n={n.s02!}
+          n={n.s02}
           id={`ft-${n.s02}-${pieza.slug}`}
           titulo={t("s02")}
           sub={t("s02sub")}
@@ -286,9 +283,9 @@ export async function FichaTecnica({
       )}
 
       {/* ── Lo que dicen los datos (solo si la pieza trae conclusiones) ──── */}
-      {conclusiones && (
+      {conclusiones && n.conclusiones && (
         <Seccion
-          n={n.conclusiones!}
+          n={n.conclusiones}
           id={`ft-${n.conclusiones}-${pieza.slug}`}
           titulo={t("conclusiones")}
           sub={t("conclusionesSub")}
@@ -329,7 +326,7 @@ export async function FichaTecnica({
 
       {/* ── 03 ───────────────────────────────────────────────────────────── */}
       <Seccion
-        n={n.s03!}
+        n={n.s03}
         id={`ft-${n.s03}-${pieza.slug}`}
         titulo={t("s03")}
         // «El detalle de cada una vive en la ficha completa» solo es verdad si
@@ -374,16 +371,16 @@ export async function FichaTecnica({
       </Seccion>
 
       {/* ── Cómo se ve (solo si la pieza trae galería) ───────────────────── */}
-      {galeria && (
+      {galeria && n.galeria && (
         <Seccion
-          n={n.galeria!}
+          n={n.galeria}
           id={`ft-${n.galeria}-${pieza.slug}`}
           titulo={t("galeria")}
           sub={t("galeriaSub")}
         >
           <ul className="grid gap-4 sm:grid-cols-2">
             {galeria.map((g, i) => (
-              <li key={g.archivo} data-captura={i + 1}>
+              <li key={i} data-captura={i + 1}>
                 <figure className="m-0">
                   <div className="overflow-hidden rounded-[12px] border border-paper-2 bg-paper-1 shadow-sh-1">
                     {/* La ruta de la ficha es relativa; CV Viva la sirve desde
@@ -413,7 +410,7 @@ export async function FichaTecnica({
 
       {/* ── 04 ───────────────────────────────────────────────────────────── */}
       <Seccion
-        n={n.s04!}
+        n={n.s04}
         id={`ft-${n.s04}-${pieza.slug}`}
         titulo={t("s04")}
         sub={t("s04sub")}
@@ -422,9 +419,9 @@ export async function FichaTecnica({
           <div className={PANEL}>
             <h3 className={ROTULO}>{t("limites")}</h3>
             <ul className="mt-2 divide-y divide-paper-2">
-              {datos.limites.map((l) => (
+              {datos.limites.map((l, i) => (
                 <li
-                  key={l}
+                  key={i}
                   className="flex gap-3 py-2.5 text-[14px] leading-snug text-ink-1"
                 >
                   <span aria-hidden="true" className="text-ink-2">
@@ -438,9 +435,9 @@ export async function FichaTecnica({
           <div className={PANEL}>
             <h3 className={ROTULO}>{t("nunca")}</h3>
             <ul data-nunca className="mt-2 divide-y divide-paper-2">
-              {datos.nunca.map((l) => (
+              {datos.nunca.map((l, i) => (
                 <li
-                  key={l}
+                  key={i}
                   className="flex gap-3 py-2.5 text-[14px] leading-snug text-ink-1"
                 >
                   <span
@@ -459,7 +456,7 @@ export async function FichaTecnica({
 
       {/* ── 05 ───────────────────────────────────────────────────────────── */}
       <Seccion
-        n={n.s05!}
+        n={n.s05}
         id={`ft-${n.s05}-${pieza.slug}`}
         titulo={t("s05")}
         sub={t("s05sub")}

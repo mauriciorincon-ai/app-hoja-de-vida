@@ -2,6 +2,7 @@ import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
+import { COLOR_ESTADO, intlLocale } from "@/lib/vitrina/estilos";
 import type { FichaTecnica } from "@/lib/vitrina/ficha-tecnica/schema";
 
 /**
@@ -32,10 +33,7 @@ export async function MuestraPieza({
   const t = await getTranslations("vitrina");
   const { pieza, promesa } = datos;
 
-  const colorEstado =
-    pieza.estado === "sellado"
-      ? "bg-sage text-sage-ink"
-      : "bg-citron text-citron-ink";
+  const colorEstado = COLOR_ESTADO[pieza.estado];
 
   return (
     <li className="list-none">
@@ -119,7 +117,7 @@ export async function MuestraPieza({
               className="flex flex-col rounded-[10px] border border-paper-2 bg-paper-1 p-3"
             >
               <span className="font-display text-[1.35rem] leading-none tracking-[-0.02em] text-ink-0 tabular-nums">
-                {c.valor.toLocaleString(locale === "es" ? "es-CO" : "en-US")}
+                {c.valor.toLocaleString(intlLocale(locale))}
               </span>
               <span className="mt-1.5 text-[11.5px] leading-snug text-ink-2">
                 {c.etiqueta}

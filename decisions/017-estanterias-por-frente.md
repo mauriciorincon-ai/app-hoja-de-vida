@@ -106,7 +106,7 @@ procedencia es una opinión disfrazada.
 ## Consecuencias
 
 - **Los cuatro frentes están abiertos** (apps 6 · agentes 13 · investigaciones 7 · tableros 6) y
-  el sitio pasó de 62 a **111 páginas estáticas**. Publicar una pieza nueva es un PR de contenido
+  el sitio pasó de 62 a **108 páginas estáticas**. Publicar una pieza nueva es un PR de contenido
   sin sprint: un JSON, sus capturas si las tiene, y la CI valida.
 - **Ningún frente está «en preparación» hoy.** La página existe y espera al próximo frente; las
   tres pruebas e2e que la vigilaban **se saltan declarando la razón** en vez de reventar o de

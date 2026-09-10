@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { Reveal } from "@/components/motion/reveal";
+import { FrenteEnPreparacion } from "@/components/vitrina/frente-en-preparacion";
 import { MuestraPieza } from "@/components/vitrina/muestra-pieza";
 import { Link } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
@@ -160,20 +161,10 @@ export default async function FrentePage({ params }: Params) {
           ) : (
             /* ── El inicio, dicho con todas sus letras ── */
             <Reveal variant="fadeInUp">
-              <section
-                aria-labelledby="frente-empieza"
-                className="mt-12 rounded-[14px] border border-paper-2 bg-paper-1 p-6"
-              >
-                <h2
-                  id="frente-empieza"
-                  className="font-display text-xl font-medium tracking-[-0.015em] text-ink-0"
-                >
-                  {t("enPreparacionTitulo")}
-                </h2>
-                <p className="mt-3 max-w-[60ch] text-[15px] leading-relaxed text-ink-1">
-                  {t("enPreparacionLinea")}
-                </p>
-              </section>
+              <FrenteEnPreparacion
+                titulo={t("enPreparacionTitulo")}
+                linea={t("enPreparacionLinea")}
+              />
             </Reveal>
           )}
 

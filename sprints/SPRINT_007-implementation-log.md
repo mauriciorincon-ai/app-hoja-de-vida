@@ -896,7 +896,7 @@ usuario está declarado abajo como deuda, no pagado a escondidas.
 | M6 | Medio | **El ADR-017 afirmaba algo falso:** «el literal `apps` sobrevive en un solo sitio de cada lado». Estaba en siete, y la regla «apps no se sirve por la ruta genérica» re-derivada en cuatro | `FRENTE_PROPIO` + `getFrenteDinamico()` + `frentesDinamicosAbiertos()` en un solo módulo; y **el ADR dice ahora lo que no logró** |
 | B4 | Bajo | La clave del hito era el texto y no la clave, así que `fichaTecnica.hitos.decisiones` era código muerto y **las seis fichas en inglés enseñaban «decisiones registradas» en español** | `etiqueta: "decisiones"`. Verificado: `/en/vitrina/apps/habla` dice «recorded decisions» |
 | B2 | Bajo | Un `!` sobre `getFrente(categoria)` apoyado en una garantía que vivía en otra función | `piezaPublicada` devuelve `{ frente, id, ficha }`: sin `!` y sin repetir la búsqueda |
-| B6 | Bajo | El sitemap declaraba `lastModified: new Date()` teniendo la fecha que la ficha obliga a traer: 111 páginas «cambiadas» en cada build | `new Date(p.actualizado)` — en un repo cuya regla madre es «ninguna cifra sin fuente» |
+| B6 | Bajo | El sitemap declaraba `lastModified: new Date()` teniendo la fecha que la ficha obliga a traer: 108 páginas «cambiadas» en cada build | `new Date(p.actualizado)` — en un repo cuya regla madre es «ninguna cifra sin fuente» |
 
 ### Regla 14 — cuatro gates nuevos, cuatro rojos en este mismo commit
 
@@ -920,7 +920,7 @@ frentes, que sí es una regla aparte, la sigue vigilando el gate de contenido.
 
 `pnpm typecheck` · `pnpm lint` · `pnpm test` **370/370** (cobertura de `src/lib/**`: 93.6 %
 statements · 84.6 % branches, umbral 70) · `pnpm test:e2e` **319 pasadas, 11 saltadas, CERO
-flaky** · `pnpm build` **111 páginas** · `pnpm audit --audit-level high` **limpio** ·
+flaky** · `pnpm build` **108 páginas** · `pnpm audit --audit-level high` **limpio** ·
 `pnpm peers check` sin problemas · barrido cero enlaces **vacío** · homepage **vacío**.
 
 **Un aviso Alto tapado en el camino:** `pnpm audit` salía **rojo** por `js-yaml` (GHSA-2883-xcg3-v3hh,
@@ -940,7 +940,7 @@ porque **deduplica** las 28 rutas que resolvían a dos versiones distintas.
 | B1 | El fail-safe «Ficha ilegible» es la única sentencia sin cubrir de `piezas.ts` | Pide extraer `leerFichaDeTexto`; el comportamiento está demostrado a mano |
 | B3 | `n.s01!` se apoya en un mapa de runtime, no en el tipo | Tipar `numerarSecciones` con fijas + opcionales es correcto y no urgente |
 | B5 | Keys de React sobre texto libre en `limites`/`nunca`/`galeria` | Coherencia interna; sin efecto observable hoy |
-| B7 | `cache()` de React no memoiza entre páginas: cada una de las 111 revalida las 26 fichas | Coste de build, resultado idéntico. Si molesta, el memo va en `piezas.ts` **y** `loader.ts` a la vez, para no crear dos convenciones |
+| B7 | `cache()` de React no memoiza entre páginas: cada una de las 108 revalida las 26 fichas | Coste de build, resultado idéntico. Si molesta, el memo va en `piezas.ts` **y** `loader.ts` a la vez, para no crear dos convenciones |
 | — | Los `hitos[].etiqueta` que las fichas ajenas escriben **en español** se enseñan tal cual en `/en` | El contrato los define como texto libre y **aquí no se editan**. Se reporta a las casas productoras |
 | — | `eslint@9.39.4` avisa de deprecación en el install | Es un mayor: llega suelto, no en el lote (regla 17) |
 | — | El valor `"planeadora"` de `procedencias` (v1.2.0) **sigue sin consumidor** | Se añadió a petición del README de la vitrina; ninguna de las 26 fichas lo usa todavía |
@@ -959,3 +959,20 @@ porque **deduplica** las 28 rutas que resolvían a dos versiones distintas.
 Ni un `skipped`, ni un `neutral`, ni un ausente. **Ningún job corrió por primera vez en este PR**:
 los seis tienen histórico, así que la lectura de no-regresión es legítima. El de `lighthouse`
 confirma en el runner lo medido en local: las dos rutas de tableros entran en el presupuesto.
+
+### Segundo pase de la auditoría — la deuda, pagada (pedido del usuario)
+
+| # | Pago |
+| - | ---- |
+| M7 | `src/lib/vitrina/estilos.ts`: `COLOR_ESTADO` e `intlLocale()`; los tres componentes lo consumen |
+| B3 | `numerarSecciones` devuelve `Record<SeccionFija,string> & Partial<Record<SeccionOpcional,string>>`; el renderizador ya no lleva un solo `!` sobre la numeración — las opcionales se pintan con doble guarda (dato **y** número) |
+| B5 | Keys por índice en `limites`, `nunca` y `galeria`, como ya hacían `conclusiones` e `hitos` |
+| B1 | `leerFichaDeTexto(texto, frente, archivo)` y `ordenarPiezas()` exportados y puros: el «ilegible», el «fuera de sitio», el «mal nombrado» y **las dos ramas del comparador** probados sin disco |
+| B7 | Memo de módulo en `piezas.ts` **y** `loader.ts`, con la misma convención y **solo en producción** (`NODE_ENV`): en desarrollo, editar un JSON y refrescar sigue enseñando el cambio |
+| M4c | `FrenteEnPreparacion` extraído como componente puro (recibe sus dos textos) y probado con Testing Library: la rama vuelve a la red sin esperar a un quinto frente |
+
+**M8 no se paga, se decide:** recortar los escaneos de axe a «una pieza por forma» ahorraría
+segundos a cambio de dejar de mirar contenido real, que es justo donde axe encontró el contraste
+del S6. Se vigila el tiempo (53 s el e2e completo) y se recorta si pasa de tres minutos.
+
+**Cifra corregida:** 108 páginas, no 111. Las tres de más eran caché del e2e (`no-existe`).
