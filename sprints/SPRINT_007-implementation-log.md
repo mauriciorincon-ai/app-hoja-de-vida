@@ -779,3 +779,16 @@ reventaba la suite entera si quedaba vacía. Se generaliza: las tres pruebas que
 **se saltan con la razón escrita** («no hay frentes en preparación: los cuatro tienen piezas») en
 vez de reventar o de fingir que vigilan algo. La página de «este frente empieza» **no se borra**:
 existe para el próximo frente que nazca, y el día que nazca esas tres pruebas vuelven solas.
+
+## Decisión del dueño (2026-09-09) — la revisión va después del detalle
+
+El usuario decide que **la revisión de toda la hoja de vida, vitrina incluida, se hace una sola
+vez cuando el contenido esté completo**, y el contenido no lo está: el chat (ADR-010) se indexa
+desde `data/historia/historia.{es,en}.md`, que hoy tiene 12 secciones de ~40 palabras cada una.
+Pide que el **siguiente sprint sea el del detalle**: los documentos que cuentan en profundidad su
+experiencia, como sustento del chat; después de ese sprint hace la revisión completa y la
+planeadora **recalcula** el trabajo restante (lo que quedó de H2 + lo que salga de la revisión).
+
+Consecuencias aquí: el gate ⭐ del S7 sigue diferido con sus contrapesos (como ya preveía la
+orden); el cierre del ciclo H2 **no se fija** hasta el recálculo. El mensaje para la planeadora
+—esta app no le escribe— queda versionado en `sprints/SPRINT_007-mensaje-a-la-planeadora.md`.
