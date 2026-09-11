@@ -101,7 +101,7 @@ monitorea un agente de IA en producción, qué es el proceso core replicable. --
 gobierno de datos institucional, qué tableros usan los líderes asistenciales.
 Recuerda: NADA de datos de pacientes ni información interna sensible. -->
 
-## Certificaciones — el camino DP-600 → AI-102
+## Certificaciones — el camino desde el DP-600
 
 <!-- seccion: certificaciones | ancla: #certificaciones -->
 <!-- guía: Por qué elegiste estas certificaciones, cómo las preparaste, qué

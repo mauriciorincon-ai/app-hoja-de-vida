@@ -120,8 +120,8 @@ apps:
       es: "Chat con mi hoja de vida"
       en: "Chat with my résumé"
     descripcion:
-      es: "Ya está vivo en esta página (botón flotante): RAG con índice en build-time, citas navegables, proveedor LLM conmutable por env (Groq · Gemini · Azure AI Foundry · Claude) y fallback local — nunca se cae (AI-102 en acción)."
-      en: "Live on this very page (floating button): RAG with a build-time index, navigable citations, an env-switchable LLM provider (Groq · Gemini · Azure AI Foundry · Claude) and a local fallback — it never goes down (AI-102 in action)."
+      es: "Ya está vivo en esta página (botón flotante): RAG con índice en build-time, citas navegables, proveedor LLM conmutable por env (Groq · Gemini · Azure AI Foundry · Claude) y fallback local — nunca se cae (ingeniería de IA en acción)."
+      en: "Live on this very page (floating button): RAG with a build-time index, navigable citations, an env-switchable LLM provider (Groq · Gemini · Azure AI Foundry · Claude) and a local fallback — it never goes down (AI engineering in action)."
     enlaces:
       - etiqueta: "GitHub"
         url: "https://github.com/mauriciorincon-ai/app-hoja-de-vida"
@@ -144,8 +144,8 @@ apps:
             es: "Proveedor LLM conmutable por env"
             en: "Env-switchable LLM provider"
           descripcion:
-            es: "Groq, Gemini, Azure AI Foundry, Claude o un self-host OpenAI-compatible: cambiar de proveedor es cambiar una variable de entorno, cero código. La demostración viva del AI-102."
-            en: "Groq, Gemini, Azure AI Foundry, Claude or an OpenAI-compatible self-host: switching provider is switching an environment variable, zero code. The AI-102 shown live."
+            es: "Groq, Gemini, Azure AI Foundry, Claude o un self-host OpenAI-compatible: cambiar de proveedor es cambiar una variable de entorno, cero código. La demostración viva de la ingeniería de IA."
+            en: "Groq, Gemini, Azure AI Foundry, Claude or an OpenAI-compatible self-host: switching provider is switching an environment variable, zero code. AI engineering shown live."
         - titulo:
             es: "Nunca se cae: fallback local"
             en: "Never down: local fallback"

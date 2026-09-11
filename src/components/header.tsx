@@ -25,10 +25,16 @@ import { trackEvent } from "@/lib/analytics";
  * construidas. Dos etiquetas prometiendo lo mismo, y la más real se quedaba con
  * la atención. Lo construido tiene ahora una sola puerta: la vitrina, que al
  * cierre enlaza las dos brochures propias en su bloque «De esta casa».
+ *
+ * «Lo que construyo» (revisión post-S7, 2.ª, 2026-09-10): la vitrina asomada
+ * en la HOME es una sección más de la hoja de vida, así que entra al
+ * desplegable con el nombre que lleva en la página. «Vitrina» en el primer
+ * nivel sigue siendo la RUTA del portal: una es la sección, la otra la casa.
  */
 const HOJA_DE_VIDA = [
   "trayectoria",
   "logros",
+  "vitrina",
   "estudios",
   "certificaciones",
   "skills",
@@ -49,7 +55,7 @@ const DIRECTAS = ["contacto"] as const;
  * Dos disclosures, el mismo contrato de accesibilidad en ambos
  * (`aria-expanded` + `aria-controls`, Escape cierra y devuelve el foco al botón
  * que abrió, elegir una opción cierra):
- *  - **Hoja de vida** (≥md): agrupa las cinco secciones del CV.
+ *  - **Hoja de vida** (≥md): agrupa las seis secciones del CV.
  *  - **Hamburguesa** (<md): el menú completo, con la hoja de vida como grupo.
  */
 export function Header({
@@ -60,6 +66,7 @@ export function Header({
   enHome?: boolean;
 }) {
   const t = useTranslations("nav");
+  const tHome = useTranslations("vitrinaHome");
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
@@ -117,6 +124,10 @@ export function Header({
   }
 
   const href = (s: string) => (enHome ? `#${s}` : `/${locale}#${s}`);
+  // La sección de la vitrina en la HOME se llama como en la página («Lo que
+  // construyo»), no «Vitrina»: ese rótulo es el del portal, en el primer nivel.
+  const etiqueta = (s: (typeof HOJA_DE_VIDA)[number]) =>
+    s === "vitrina" ? tHome("titulo") : t(s);
 
   const ENLACE =
     "flex min-h-11 items-center text-sm text-ink-2 transition-colors duration-[120ms] hover:text-ink-0";
@@ -144,7 +155,7 @@ export function Header({
           aria-label={locale === "es" ? "Secciones" : "Sections"}
           className="hidden items-center gap-5 md:flex"
         >
-          {/* Las cinco secciones del CV, bajo un solo destino. */}
+          {/* Las seis secciones del CV, bajo un solo destino. */}
           <div ref={hvRef} className="relative">
             <button
               ref={hvToggleRef}
@@ -174,7 +185,7 @@ export function Header({
                       onClick={() => setHvAbierto(false)}
                       className="flex min-h-11 items-center px-4 text-sm text-ink-1 transition-colors duration-[120ms] hover:bg-paper-1 hover:text-ink-0"
                     >
-                      {t(s)}
+                      {etiqueta(s)}
                     </a>
                   </li>
                 ))}
@@ -267,7 +278,7 @@ export function Header({
                       onClick={() => setMenuAbierto(false)}
                       className="flex min-h-11 items-center pl-3 text-sm text-ink-1 transition-colors duration-[120ms] hover:text-ink-0"
                     >
-                      {t(s)}
+                      {etiqueta(s)}
                     </a>
                   </li>
                 ))}

@@ -148,8 +148,10 @@ animaciones infinitas (sweep/glitch/marquee), scroll-snap de deck, CDNs en `<hea
 ### Menú desplegable del encabezado · post-S5
 
 - **Cuándo se usa:** cuando varias secciones del nav **son la misma cosa**. Hoy, una sola vez: las
-  cinco secciones del CV bajo «Hoja de vida» (Trayectoria · Logros · Estudios · Certificaciones ·
-  Skills). El primer nivel queda en tres: Hoja de vida · Vitrina · Contacto. No es un patrón para repartir: un header con dos
+  seis secciones del CV bajo «Hoja de vida» (Trayectoria · Logros · Lo que construyo · Estudios ·
+  Certificaciones · Skills — el orden de la página; la vitrina asomada entra con su nombre de
+  sección, y el portal sigue como «Vitrina» en el primer nivel). El primer nivel queda en tres:
+  Hoja de vida · Vitrina · Contacto. No es un patrón para repartir: un header con dos
   desplegables ya es un menú de aplicación, y esto es una pieza editorial.
 - **Forma:** panel `paper-0`, borde `paper-2`, `r-md`, `sh-2`, anclado bajo su botón. Cada opción
   con área táctil ≥44px y `hover` en `paper-1`.

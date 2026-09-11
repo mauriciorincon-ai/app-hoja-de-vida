@@ -4,7 +4,8 @@ import { Stagger, StaggerItem } from "@/components/motion/stagger";
 import type { Cv } from "@/lib/schemas";
 
 /**
- * Certificaciones (content pack §6): las 2 de Microsoft llevan nota editorial.
+ * Certificaciones (content pack §6): la de Microsoft (DP-600) lleva nota
+ * editorial. AI-102 salió el 2026-09-10: Microsoft la descontinuó.
  * El enlace "Verificar" aparece solo cuando `verificacion:` tiene URL
  * ([AJUSTAR-LUEGO]: links Credly/Learn pendientes del dueño).
  */

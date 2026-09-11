@@ -9,7 +9,8 @@ import type { Cv } from "@/lib/schemas";
  * el periodo «Formación» — una palabra haciendo de estructura. Ahora es un
  * dato (`cv.estudios`) que la HOME, el /cv, el PDF y el chat leen igual.
  *
- * Sin fecha no se inventa fecha: un estudio sin `periodo` lo dice.
+ * Sin fecha no se inventa fecha: un estudio sin `periodo` lo dice — y el test
+ * de contenido no deja publicarlo así (todo estudio lleva año desde 2026-09-10).
  */
 export async function Estudios({ estudios }: { estudios: Cv["estudios"] }) {
   const tNav = await getTranslations("nav");

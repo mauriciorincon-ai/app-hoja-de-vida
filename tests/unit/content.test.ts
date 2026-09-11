@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { parse } from "yaml";
 import { getApps, getCv } from "@/lib/content";
@@ -32,6 +33,51 @@ describe("content loader (data/*.yaml reales)", () => {
     expect(es.trayectoria.some((t) => t.proyecto)).toBe(true);
     // Y la formación ya no se disfraza de hito: ningún periodo sin año.
     for (const t of es.trayectoria) expect(t.periodo).toMatch(/\d{4}/);
+  });
+
+  it("ningún estudio va sin año: «Sin fecha declarada» es un fallback, no un estado publicable", () => {
+    for (const locale of ["es", "en"] as const)
+      for (const e of getCv(locale).estudios)
+        expect(e.periodo, `${locale}: ${e.titulo}`).toMatch(/\d{4}/);
+  });
+
+  // Una credencial nombrada por código (DP-600, AI-102…) en el titular, un
+  // logro, un case study, la historia del chat o apps.yaml es una promesa:
+  // tiene que existir en `certificaciones`. Nació el 2026-09-10, cuando AI-102
+  // salió de la lista (Microsoft la descontinuó) y seguía viva en seis sitios.
+  const CODIGO_CREDENCIAL = /\b(?:AI|DP|AZ|PL|DA|MB|MS|SC)-\d{3}\b/g;
+  type Hallazgo = { ruta: string; codigo: string };
+  function codigosEn(valor: unknown, ruta: string, out: Hallazgo[]) {
+    if (typeof valor === "string") {
+      for (const codigo of valor.match(CODIGO_CREDENCIAL) ?? [])
+        out.push({ ruta, codigo });
+    } else if (Array.isArray(valor)) {
+      valor.forEach((v, i) => codigosEn(v, `${ruta}[${i}]`, out));
+    } else if (valor && typeof valor === "object") {
+      for (const [k, v] of Object.entries(valor)) codigosEn(v, `${ruta}.${k}`, out);
+    }
+  }
+
+  it("toda credencial nombrada por código existe en certificaciones (cv, historia y apps)", () => {
+    const apps: unknown = parse(readFileSync("data/apps.yaml", "utf8"));
+    for (const locale of ["es", "en"] as const) {
+      const { certificaciones, ...resto } = getCv(locale);
+      const vigentes = new Set(
+        certificaciones.flatMap((c) => c.nombre.match(CODIGO_CREDENCIAL) ?? []),
+      );
+      const halladas: Hallazgo[] = [];
+      codigosEn(resto, `cv.${locale}`, halladas);
+      codigosEn(
+        readFileSync(`data/historia/historia.${locale}.md`, "utf8"),
+        `historia.${locale}`,
+        halladas,
+      );
+      codigosEn(apps, "apps", halladas);
+      const huerfanas = halladas
+        .filter((h) => !vigentes.has(h.codigo))
+        .map((h) => `${h.codigo} en ${h.ruta}`);
+      expect(huerfanas).toEqual([]);
+    }
   });
 
   it("keeps the depth layer in ES/EN parity (S2)", () => {

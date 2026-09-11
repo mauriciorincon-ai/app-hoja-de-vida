@@ -103,7 +103,7 @@
 <body>
 <div class="pagina">
   <header>
-    <p class="eyebrow">CV Viva · Guía de prueba viva y acumulativa · v7 · post-Sprint 007 (revisión de la HOME) · 2026-09-09</p>
+    <p class="eyebrow">CV Viva · Guía de prueba viva y acumulativa · v7.1 · post-Sprint 007 (revisión de la HOME, 2.ª) · 2026-09-10</p>
     <h1>Guía de prueba</h1>
     <p class="suave">Todas las pruebas vigentes de la app — las nuevas de la <strong>revisión de
       la HOME</strong> pedida por el dueño tras el Sprint 007 (trayectoria como índice, la vitrina
@@ -158,14 +158,16 @@
         <strong>No hay "Roadmap"</strong>. Pulsa <strong>Contacto</strong>: te lleva a esa sección.
         <span class="origen origen-mejorado">Mejorado · post-S7</span></label></li>
       <li data-origen="mejorado"><input type="checkbox" id="a5"><label for="a5">Pulsa
-        <strong>Hoja de vida</strong>: se despliegan las cinco secciones del CV (Trayectoria,
-        Logros, <strong>Estudios</strong>, Certificaciones, Skills — en ese orden). Elige una y te
+        <strong>Hoja de vida</strong>: se despliegan las seis secciones del CV (Trayectoria,
+        Logros, <strong>Lo que construyo</strong>, <strong>Estudios</strong>, Certificaciones,
+        Skills — en ese orden, el de la página). "Lo que construyo" te lleva a la vitrina asomada
+        en la HOME; el "Vitrina" del primer nivel sigue llevando al portal. Elige una y te
         lleva ahí cerrando el menú.
         Vuelve a abrirlo y ciérralo pulsando <strong>fuera</strong>, y otra vez con
         <strong>Escape</strong>. <span class="origen origen-mejorado">Mejorado · post-S7</span></label></li>
       <li data-origen="heredada"><input type="checkbox" id="a6"><label for="a6">Abre el menú
         <strong>solo con teclado</strong> (Tab hasta "Hoja de vida", Enter): se despliega, Tab
-        recorre las cinco, Escape cierra y el foco vuelve al botón — nunca se pierde.
+        recorre las seis, Escape cierra y el foco vuelve al botón — nunca se pierde.
         <span class="origen origen-heredada">post-S5</span></label></li>
       <li data-origen="heredada" data-minimo><input type="checkbox" id="a4"><label for="a4">⭐
         <strong>Juicio visual:</strong> la página se siente editorial, sobria y coherente; las
@@ -591,12 +593,14 @@
         vitrina con su cuenta (Apps 6 · Agentes 13 · Investigaciones 7 · Tableros 6) y el botón
         "Entrar a la vitrina", que lleva al portal. Pulsa una caja: entras a ese frente.
         <span class="origen origen-nuevo">Nuevo · post-S7</span></label></li>
-      <li data-origen="nuevo"><input type="checkbox" id="n5"><label for="n5">La sección
-        <strong>Estudios</strong> va antes de Certificaciones: una tarjeta con "Ingeniería
-        Industrial", la Javeriana y la nota. Hoy dice <strong>"Sin fecha declarada"</strong> en
-        cursiva porque los años no están en los datos. Lo mismo aparece en <code>/es/cv</code> y en
-        el PDF, en su sección Formación.
-        <span class="origen origen-nuevo">Nuevo · post-S7</span></label></li>
+      <li data-origen="mejorado"><input type="checkbox" id="n5"><label for="n5">La sección
+        <strong>Estudios</strong> va antes de Certificaciones: <strong>tres tarjetas con sus
+        años</strong> — Ingeniería Industrial (2009 — 2016), los estudios de Diseño Industrial
+        (2011 — 2016) y el curso de inglés con IELTS en Melbourne (2013 — 2014). Ninguna dice
+        "Sin fecha declarada". Lo mismo aparece en <code>/es/cv</code> y en el PDF, en su sección
+        Formación. En Certificaciones ya <strong>no está AI-102</strong> (Microsoft la
+        descontinuó) y el logro dice <strong>5 certificaciones</strong>.
+        <span class="origen origen-mejorado">Mejorado · 2026-09-10</span></label></li>
       <li data-origen="nuevo"><input type="checkbox" id="n6"><label for="n6">En
         <strong>Skills</strong>, cuatro tarjetas con un icono cada una: al llegar, el icono
         <strong>se termina de dibujar</strong> (el trazo aparece) y los chips entran uno tras otro.
@@ -621,11 +625,13 @@
         cuatro iconos dicen lo que es cada grupo (chispa · capas · curva · rama) y si la animación
         del trazo suma o sobra.
         <span class="origen origen-nuevo">Nuevo · post-S7</span><span class="minimo">⭐ mínimo</span></label></li>
-      <li data-origen="nuevo" data-minimo><input type="checkbox" id="n11"><label for="n11">⭐
-        <strong>Juicio de contenido de Estudios:</strong> completa los años en
-        <code>data/cv.es.yaml</code> y <code>cv.en.yaml</code> (campo <code>periodo</code>) y
-        decide si falta algún estudio o si el inglés B2 debería ser una entrada aparte.
-        <span class="origen origen-nuevo">Nuevo · post-S7</span><span class="minimo">⭐ mínimo</span></label></li>
+      <li data-origen="mejorado" data-minimo><input type="checkbox" id="n11"><label for="n11">⭐
+        <strong>Juicio de contenido de Estudios y Certificaciones:</strong> los datos salieron de
+        tu PDF 2024-I. Confirma títulos y años; que Diseño Industrial quede como "estudios de
+        pregrado" (el PDF no dice título); que el inglés con IELTS vaya en Estudios y no en
+        Certificaciones; y que retirar AI-102 del titular, el perfil, el logro y el case study de
+        Vesting sea lo que quieres decir.
+        <span class="origen origen-mejorado">Mejorado · 2026-09-10</span><span class="minimo">⭐ mínimo</span></label></li>
     </ul>
     <div class="reportame"><p><strong>Repórtame sí o sí:</strong> un año que no cambie al pasar por
       una experiencia, el círculo fuera de la línea, un icono de Skills que no se vea, o un
@@ -665,6 +671,11 @@
     <details class="chica">
       <summary>Historial de la guía</summary>
       <ul>
+        <li><strong>v7.1 · post-S7 (2.ª) · 2026-09-10:</strong> "Lo que construyo" entra al
+          desplegable Hoja de vida (seis secciones, en el orden de la página); Estudios con los años
+          del PDF del dueño (tres entradas); AI-102 retirada de todo el contenido (Microsoft la
+          descontinuó) y un gate nuevo que impide nombrar una credencial que no esté en
+          Certificaciones. Mejoradas <strong>a5, a6, n5, n11</strong>. Ninguna prueba eliminada.</li>
         <li><strong>v7 · post-S7 · 2026-09-09 (revisión de la HOME, fuera de sprint):</strong> la
           trayectoria como índice que baja contigo, la vitrina en el sitio de Proyectos, Estudios
           como sección y como dato, Skills rehecha y el roadmap con las apps (ADR-018). Nuevo bloque
@@ -731,8 +742,8 @@
 <script>
   (function () {
     // NS VERSIONADO POR SPRINT: al publicar la guía de un sprint nuevo se cambia
-    // s007b — así una regresión sin correr no aparece marcada por la versión anterior.
-    var NS = "guia-hoja-de-vida:s007b:";
+    // s007c — así una regresión sin correr no aparece marcada por la versión anterior.
+    var NS = "guia-hoja-de-vida:s007c:";
     var casillas = Array.prototype.slice.call(document.querySelectorAll('input[type="checkbox"]'));
     var barra = document.getElementById("barra-avance");
     var contador = document.getElementById("contador");
