@@ -29,13 +29,18 @@ import { trackEvent } from "@/lib/analytics";
 const HOJA_DE_VIDA = [
   "trayectoria",
   "logros",
-  "proyectos",
-  "skills",
+  "estudios",
   "certificaciones",
+  "skills",
 ] as const;
 
-/** Destinos que se ganan su sitio en el primer nivel. */
-const DIRECTAS = ["roadmap", "contacto"] as const;
+/**
+ * Destinos que se ganan su sitio en el primer nivel. «Roadmap» ya no está:
+ * es una pregunta sobre las apps y vive con ellas, en /vitrina/apps
+ * (revisión post-S7). El primer nivel queda en TRES: Hoja de vida · Vitrina
+ * · Contacto.
+ */
+const DIRECTAS = ["contacto"] as const;
 
 /**
  * `enHome=false` (páginas de detalle, /cv y /vitrina): los anchors del nav

@@ -17,6 +17,21 @@ describe("content loader (data/*.yaml reales)", () => {
     expect(en.proyectos).toHaveLength(es.proyectos.length);
     expect(en.certificaciones).toHaveLength(es.certificaciones.length);
     expect(en.skills).toHaveLength(es.skills.length);
+    // Estudios (post-S7): sección propia, misma cuenta en los dos idiomas.
+    expect(en.estudios).toHaveLength(es.estudios.length);
+    expect(es.estudios.length).toBeGreaterThan(0);
+  });
+
+  it("cada hito enlaza al MISMO case study en ES y EN (el hreflang lo necesita)", () => {
+    const es = getCv("es");
+    const en = getCv("en");
+    expect(en.trayectoria.map((t) => t.proyecto ?? null)).toEqual(
+      es.trayectoria.map((t) => t.proyecto ?? null),
+    );
+    // La puerta a los case studies es la trayectoria: al menos uno enlazado.
+    expect(es.trayectoria.some((t) => t.proyecto)).toBe(true);
+    // Y la formación ya no se disfraza de hito: ningún periodo sin año.
+    for (const t of es.trayectoria) expect(t.periodo).toMatch(/\d{4}/);
   });
 
   it("keeps the depth layer in ES/EN parity (S2)", () => {

@@ -136,6 +136,14 @@ describe("buildChunks (YAML + historia → chunks con ancla)", () => {
       },
       { slug: "sin-detalle", nombre: "Otro", resumen: "Sin casestudy." },
     ],
+    estudios: [
+      {
+        titulo: "Ingeniería Industrial",
+        institucion: "Javeriana",
+        periodo: "",
+        nota: "Énfasis en analítica.",
+      },
+    ],
     certificaciones: [{ nombre: "AI-102", fecha: "2024", nota: "" }],
     skills: [{ grupo: "IA", items: ["Azure AI"] }],
   };
@@ -166,11 +174,20 @@ describe("buildChunks (YAML + historia → chunks con ancla)", () => {
   });
   const porId = new Map(chunks.map((c) => [c.id, c]));
 
-  it("el proyecto con casestudy ancla a su página; el resto a la HOME", () => {
+  it("el proyecto con casestudy ancla a su página; el resto, a la trayectoria", () => {
     expect(porId.get("proyecto-vesting")?.ancla).toBe("/proyectos/vesting");
     expect(porId.get("casestudy-vesting")?.ancla).toBe("/proyectos/vesting");
-    expect(porId.get("proyecto-sin-detalle")?.ancla).toBe("#proyectos");
+    // La HOME ya no tiene sección «Proyectos» (revisión post-S7): una cita
+    // que apuntara a #proyectos llevaría a ninguna parte.
+    expect(porId.get("proyecto-sin-detalle")?.ancla).toBe("#trayectoria");
     expect(porId.get("trayectoria-0")?.ancla).toBe("#trayectoria");
+  });
+
+  it("los estudios tienen su chunk, con su ancla y sin inventar un periodo", () => {
+    const e = porId.get("estudios");
+    expect(e?.ancla).toBe("#estudios");
+    expect(e?.texto).toContain("Ingeniería Industrial, Javeriana");
+    expect(e?.texto).not.toContain("()");
   });
 
   it("la historia con contenido entra con su ancla; la vacía se ignora", () => {

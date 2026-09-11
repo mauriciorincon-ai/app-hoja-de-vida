@@ -42,6 +42,19 @@ e inglés. Quien la visita puede pedir acceso a tus apps y la solicitud te llega
 - **Limitaciones conocidas:** los logros usan `valor` numérico (el contador anima ese número);
   máximo 2 decimales.
 
+### La trayectoria: el índice que baja contigo · desde Sprint 001 · rehecha en la revisión post-S7
+
+- **Qué hace:** una sola línea recorre todas las experiencias. Al hacer scroll, un círculo se
+  queda a media pantalla y la línea pasa por él (se rellena en lila lo que ya leíste); al lado
+  del círculo aparece **el año grande** de la experiencia que está a esa altura. Con «reducir
+  movimiento» activado todo queda quieto: la línea completa, el círculo fijo y el año sin fundido.
+- **Cómo se alimenta:** igual que siempre, `trayectoria:` en `data/cv.es.yaml` y `cv.en.yaml`. El
+  año grande sale del `periodo` (los primeros cuatro dígitos): «2023 — 2025» enseña «2023».
+- **Ver case study desde el hito:** un hito con `proyecto: <slug>` enseña «Ver case study →» hacia
+  `/proyectos/<slug>`. El slug tiene que ser el de un proyecto **con** `casestudy:`; si no, **la
+  publicación falla** y te dice qué hito. Es la única puerta a los case studies desde la HOME
+  (la sección «Proyectos» ya no existe: ahí está la vitrina).
+
 ### El "grueso" de cada experiencia (bullets expandibles) · desde Sprint 002
 
 - **Qué hace:** cada hito de la Trayectoria tiene un botón "Ver logros completos" que
@@ -49,7 +62,7 @@ e inglés. Quien la visita puede pedir acceso a tus apps y la solicitud te llega
   PDF descargable.
 - **Cómo se usa:** en `data/cv.es.yaml` y `cv.en.yaml`, cada entrada de `trayectoria` tiene
   una lista `bullets:` — una línea por logro. Edita, guarda y push. Un hito sin `bullets`
-  simplemente no muestra el botón (como Formación).
+  simplemente no muestra el botón.
 - **Ojo:** mantén el mismo número de bullets en ES y EN (hay una prueba que lo vigila y
   bloquea la publicación si se desbalancean).
 
@@ -62,16 +75,38 @@ e inglés. Quien la visita puede pedir acceso a tus apps y la solicitud te llega
   proyecto un `slug:` (minúsculas-con-guiones, IGUAL en ambos idiomas) y un bloque
   `casestudy:` con `contexto`, `reto`, `acciones` (lista) e `impacto` (lista). Push y la
   página aparece sola, con su URL, su SEO y su lugar en el sitemap.
-- **Quitar uno:** borra el bloque `casestudy:` (el proyecto sigue en la HOME como card,
-  solo pierde su página de detalle).
+- **Quitar uno:** borra el bloque `casestudy:` y quita el `proyecto:` del hito que lo enlazaba
+  (si lo dejas, la publicación falla avisándote). El proyecto sigue en `/cv` y en el PDF como
+  resumen; solo pierde su página de detalle.
 
-### Perfil, Certificaciones y Skills en la HOME · desde Sprint 002
+### Perfil, Certificaciones y Skills en la HOME · desde Sprint 002 · Skills rehecha post-S7
 
 - **Qué hace:** las secciones que estaban guardadas desde el content pack ahora son
   visibles: el párrafo de Perfil, las 6 certificaciones (las 2 de Microsoft resaltadas) y
   los 4 grupos de skills.
 - **Links de verificación:** cuando tengas los links de Credly/Microsoft Learn, pégalos en
   el campo `verificacion:` de cada certificación — el botón "Verificar ↗" aparece solo.
+- **Skills, desde la revisión post-S7:** una tarjeta por grupo con un icono dibujado en casa
+  (se termina de trazar al llegar la tarjeta) y los ítems como chips que entran escalonados.
+  **El icono va por la posición del grupo** (1.º IA, 2.º datos, 3.º BI, 4.º ingeniería): si
+  reordenas los grupos en el YAML, los iconos se quedan en su posición. Un quinto grupo recibe un
+  rombo. Sin porcentajes ni «nivel de dominio», a propósito.
+
+### Estudios · desde la revisión post-S7
+
+- **Qué hace:** sección propia entre la vitrina y las certificaciones, con una tarjeta por
+  estudio. Antes la formación era un hito más de la trayectoria; ahora es un dato que también
+  leen `/cv`, el PDF y el chat.
+- **Cómo se alimenta:** en `data/cv.es.yaml` y `cv.en.yaml`, el bloque `estudios:` — cada entrada
+  con `titulo`, `institucion`, `periodo` y `nota` (opcional). **`periodo` está vacío hoy:** ponle
+  los años (p. ej. `"2011 — 2016"`) y la tarjeta deja de decir «Sin fecha declarada». Mismo número
+  de estudios en ES y EN.
+
+### La vitrina, asomada en la HOME · desde la revisión post-S7
+
+- **Qué hace:** en el sitio que tenía «Proyectos», la HOME enseña las cuatro cajas de la vitrina
+  con su cuenta real de piezas y un botón «Entrar a la vitrina». Son las mismas cajas del portal:
+  no hay nada que editar aparte de `data/vitrina.yaml`.
 
 ### Descargar CV en PDF (ATS) · desde Sprint 002
 
@@ -100,11 +135,14 @@ e inglés. Quien la visita puede pedir acceso a tus apps y la solicitud te llega
   bloque `brochure:`, aparece su página y su enlace en «De esta casa»; si le pones `roadmap:`,
   entra a la votación; si le pones `solicitable: true`, aparece en el formulario.
 
-### Roadmap con votación anónima · desde Sprint 004
+### Roadmap con votación anónima · desde Sprint 004 · vive en la vitrina desde la revisión post-S7
 
-- **Qué hace:** la sección "Roadmap" (y su enlace en el menú) muestra las próximas features de
-  cada app y deja que quien visita **vote con un clic, sin registrarse**, las que más quiere ver.
-  El número que aparece junto a cada feature es el **conteo real** de votos en la base de datos.
+- **Qué hace:** la sección "Roadmap" muestra las próximas features de cada app y deja que quien
+  visita **vote con un clic, sin registrarse**, las que más quiere ver. El número que aparece
+  junto a cada feature es el **conteo real** de votos en la base de datos.
+- **Dónde está:** al pie de `/es/vitrina/apps`, debajo de las seis apps y antes de «De esta
+  casa». **Ya no está en la HOME ni en el menú**: es una pregunta sobre las apps y se contesta
+  con ellas.
 - **Cómo se edita el roadmap (cero código):** en `data/apps.yaml`, dentro de una app, agrega o
   edita la lista `roadmap:`. Cada feature lleva un `id` (minúsculas-con-guiones), y `titulo` y
   `descripcion` en `es` y `en`. Push y el roadmap se actualiza. Una app sin `roadmap:` no aparece
@@ -265,8 +303,8 @@ e inglés. Quien la visita puede pedir acceso a tus apps y la solicitud te llega
 
 ### El menú del encabezado · desde Sprint 001 · reorganizado 2026-09-05
 
-- **Qué hace:** el menú tiene **cuatro destinos**: **Hoja de vida** (que despliega Trayectoria,
-  Logros, Proyectos, Skills y Certificaciones), **Vitrina**, **Roadmap** y **Contacto**; más el
+- **Qué hace:** el menú tiene **tres destinos**: **Hoja de vida** (que despliega Trayectoria,
+  Logros, Estudios, Certificaciones y Skills), **Vitrina** y **Contacto**; más el
   botón de CV en PDF y el cambio de idioma.
 - **Por qué se agrupó:** había llegado a nueve destinos y dejaba de caber en pantallas medianas.
   Cinco de esos nueve son **una sola cosa** —tu hoja de vida— y competían de tú a tú con la
@@ -392,3 +430,4 @@ carrera con un comentario que dice qué escribir en cada una.
 | 004    | Roadmap con votación anónima (contador real o "no disponible", dedup por navegador, cero PII), página brochure animada por app real, y menú en móvil. Cierre del ciclo H1: el MVP funcional queda completo.                                                                                                              |
 | 005    | La vitrina: escaparate de las seis apps hermanas y **una página propia por app**, alimentadas por los `brochure-export.json` que cada app genera; tarjetas que se abren al llegar leyendo; capturas de las apps reales repintadas con la paleta de esta página; cero enlaces y CTA de lista de espera. Abre el ciclo H2. |
 | 007    | Las estanterías: los cuatro frentes de la vitrina abiertos con piezas reales (6 apps · 13 agentes · 7 investigaciones · 6 tableros). Un escaparate por frente y una ficha por pieza, con el mismo renderizador de las apps; las fichas las produce quien construye cada pieza y llegan por PR de contenido. Contrato v1.3.0: los tableros añaden «Lo que dicen los datos» y «Cómo se ve» (galería de capturas), opcionales y con renumeración automática. |
+| post-S7 | Revisión del dueño sobre la HOME: la trayectoria como índice que baja contigo (línea continua, círculo fijo a media pantalla, año grande); la vitrina en el sitio de Proyectos y los case studies desde su hito; Estudios como sección y como dato (`cv.estudios`); Skills en tarjetas con icono y trazo; el roadmap se muda a `/vitrina/apps` y sale del menú. |

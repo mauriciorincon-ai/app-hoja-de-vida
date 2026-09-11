@@ -120,6 +120,45 @@ describe("cvSchema", () => {
     ).toThrowError(/test\.yaml[\s\S]*identidad\.titular/);
   });
 
+  it("estudios defaults to [] and accepts an entry without a period (post-S7)", () => {
+    expect(cvSchema.parse(cvValido).estudios).toEqual([]);
+    const cv = cvSchema.parse({
+      ...cvValido,
+      estudios: [{ titulo: "Ingeniería", institucion: "Javeriana" }],
+    });
+    expect(cv.estudios[0].periodo).toBe("");
+    expect(cv.estudios[0].nota).toBe("");
+  });
+
+  it("a hito that points to a proyecto WITHOUT casestudy breaks the build naming it", () => {
+    // El enlace «Ver case study» saldría de aquí y llevaría a un 404.
+    const roto = {
+      ...cvValido,
+      trayectoria: [{ ...cvValido.trayectoria[0], proyecto: "proyecto" }],
+    };
+    expect(() => parseCv(roto, "data/cv.es.yaml")).toThrowError(
+      /Org → proyecto «proyecto»/,
+    );
+    // Con casestudy, el mismo vínculo es válido.
+    const ok = {
+      ...roto,
+      proyectos: [
+        {
+          ...cvValido.proyectos[0],
+          casestudy: {
+            contexto: "c",
+            reto: "r",
+            acciones: ["a"],
+            impacto: ["i"],
+          },
+        },
+      ],
+    };
+    expect(parseCv(ok, "data/cv.es.yaml").trayectoria[0].proyecto).toBe(
+      "proyecto",
+    );
+  });
+
   it("rejects empty trayectoria", () => {
     expect(() =>
       parseCv({ ...cvValido, trayectoria: [] }, "test.yaml"),

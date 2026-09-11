@@ -53,10 +53,15 @@ test.describe("prefers-reduced-motion (criterio de aceptación e2e)", () => {
       "#perfil h2",
       "#trayectoria h2",
       "#logros h2",
-      "#proyectos h2",
-      "#skills h2",
+      "#vitrina-titulo",
+      "#estudios h2",
       "#certificaciones h2",
+      "#skills h2",
       "#contacto h2",
+      // Lo nuevo de la revisión post-S7 que nace con estilos inline de motion:
+      // el año grande del índice y los trazos de los iconos de skills.
+      "#trayectoria [data-timeline-anio]",
+      "#skills [data-skill-grupo='0'] svg",
     ]) {
       expect(await findAnimatedAncestor(page.locator(selector))).toBeNull();
     }

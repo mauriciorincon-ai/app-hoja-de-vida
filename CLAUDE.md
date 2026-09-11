@@ -49,7 +49,9 @@ src/
 │  └─ vitrina/     (S5–S6 — portal · apps/ (escaparate · <slug> ficha técnica · <slug>/detalle)
 │                   · [categoria] (un frente: escaparate si abierta, «en preparación» si no)
 │                   · [categoria]/[pieza] (S7 — la ficha de una pieza no-app))
-├─ components/     (UI sin lógica de negocio; home/ · motion/ · forms/ · vitrina/)
+├─ components/     (UI sin lógica de negocio; home/ (hero · perfil · trayectoria · logros ·
+│                   vitrina · estudios · certificaciones · skills · roadmap (vive en
+│                   /vitrina/apps) · contacto) · motion/ · forms/ · vitrina/)
 ├─ lib/            (content.ts · i18n.ts · resend.ts · analytics.ts)
 │  ├─ ia/          (S3 — patrón IA-embebida: schemas · provider · retrieval · guardrails)
 │  ├─ votes/       (S4 — votación: schemas.ts · client.ts · roadmap.ts)
@@ -58,7 +60,8 @@ src/
 │                   · bpmn.ts (motor puro del proceso) · ficha-tecnica/ (schema · armar
 │                   · secciones · loader) · piezas.ts (S7 — loader genérico por frente))
 └─ types/
-data/              (cv.es.yaml · cv.en.yaml · apps.yaml · historia/ — LA fuente de contenido)
+data/              (cv.es.yaml · cv.en.yaml (identidad · trayectoria · estudios · logros ·
+                    proyectos · certificaciones · skills) · apps.yaml · historia/ — LA fuente)
 data/vitrina.yaml  (S6 — los cuatro FRENTES de la vitrina: id, estado, nombre, intro, detalle)
 data/fichas/       (S6 — complementos de CURACIÓN de CV Viva por app, `procedencia: cv-viva`:
                     titular · cifras destacadas · límites · nunca · proceso)

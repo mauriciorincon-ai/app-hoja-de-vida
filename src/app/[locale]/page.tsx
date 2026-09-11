@@ -4,17 +4,16 @@ import { Header } from "@/components/header";
 import { HomeVisitTracker } from "@/components/home-visit-tracker";
 import { Certificaciones } from "@/components/home/certificaciones";
 import { Contacto } from "@/components/home/contacto";
+import { Estudios } from "@/components/home/estudios";
 import { Hero } from "@/components/home/hero";
 import { Logros } from "@/components/home/logros";
 import { Perfil } from "@/components/home/perfil";
-import { Proyectos } from "@/components/home/proyectos";
-import { Roadmap } from "@/components/home/roadmap";
 import { Skills } from "@/components/home/skills";
 import { Trayectoria } from "@/components/home/trayectoria";
+import { VitrinaHome } from "@/components/home/vitrina";
 import type { Locale } from "@/i18n/routing";
 import { getApps, getCv } from "@/lib/content";
 import { SITE_URL } from "@/lib/site";
-import { appsConRoadmap } from "@/lib/votes/roadmap";
 
 export default async function HomePage({
   params,
@@ -29,7 +28,6 @@ export default async function HomePage({
   // lista de apps SOLICITABLES. La sección «Apps» se retiró (ver header), pero
   // las exploraciones no se perdieron — viven donde de verdad convierten.
   const { apps } = getApps();
-  const appsRoadmap = appsConRoadmap();
   const tMeta = await getTranslations({ locale, namespace: "meta" });
 
   // JSON-LD Person + WebSite (gate ATS/SEO). Person.name lleva el nombre
@@ -62,12 +60,15 @@ export default async function HomePage({
       <main id="contenido" className="flex-1">
         <Hero identidad={cv.identidad} />
         <Perfil identidad={cv.identidad} />
-        <Trayectoria trayectoria={cv.trayectoria} />
+        <Trayectoria trayectoria={cv.trayectoria} proyectos={cv.proyectos} />
         <Logros logros={cv.logros} />
-        <Proyectos proyectos={cv.proyectos} />
-        <Skills skills={cv.skills} />
+        {/* El sitio de «Proyectos» lo ocupa la vitrina (revisión post-S7):
+            los case studies se abren desde su hito en la trayectoria. El
+            roadmap se fue con las apps, a /vitrina/apps. */}
+        <VitrinaHome locale={locale as Locale} />
+        <Estudios estudios={cv.estudios} />
         <Certificaciones certificaciones={cv.certificaciones} />
-        {appsRoadmap.length > 0 && <Roadmap apps={appsRoadmap} />}
+        <Skills skills={cv.skills} />
         <Contacto identidad={cv.identidad} apps={apps} />
       </main>
       <Footer identidad={cv.identidad} />

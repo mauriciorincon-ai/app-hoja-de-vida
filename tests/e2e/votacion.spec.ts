@@ -37,7 +37,7 @@ test.describe("Votación del roadmap", () => {
       }),
     );
 
-    await page.goto("/es");
+    await page.goto("/es/vitrina/apps");
     await page.locator("#roadmap").scrollIntoViewIfNeeded();
 
     // Aviso honesto visible
@@ -82,7 +82,7 @@ test.describe("Votación del roadmap", () => {
       }),
     );
 
-    await page.goto("/es");
+    await page.goto("/es/vitrina/apps");
     await page.locator("#roadmap").scrollIntoViewIfNeeded();
 
     const fila = page.locator(
@@ -124,7 +124,7 @@ test.describe("Votación del roadmap", () => {
       }),
     );
 
-    await page.goto("/es");
+    await page.goto("/es/vitrina/apps");
     await page.locator("#roadmap").scrollIntoViewIfNeeded();
 
     const fila = page.locator(
@@ -154,7 +154,7 @@ test.describe("Votación del roadmap", () => {
     const idx = testInfo.project.name === "mobile" ? 1 : 0;
     const objetivo = features[idx] ?? features[0];
 
-    await page.goto("/es");
+    await page.goto("/es/vitrina/apps");
     await page.locator("#roadmap").scrollIntoViewIfNeeded();
 
     const fila = page.locator(
@@ -188,7 +188,7 @@ test.describe("Votación del roadmap", () => {
     const idx = testInfo.project.name === "mobile" ? 3 : 2;
     const objetivo = features[idx] ?? features[0];
 
-    await page.goto("/es");
+    await page.goto("/es/vitrina/apps");
     await page.locator("#roadmap").scrollIntoViewIfNeeded();
     const fila = page.locator(
       `#roadmap [data-feature-id="${objetivo.feature}"][data-app-id="${objetivo.app}"]`,

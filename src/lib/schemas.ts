@@ -40,9 +40,30 @@ export const cvSchema = z.object({
         // expandibles en el timeline y presentes en el PDF ATS
         bullets: z.array(z.string().min(1)).default([]),
         actual: z.boolean().default(false),
+        // El case study de ESTA experiencia, si lo tiene: el slug de un
+        // proyecto con `casestudy`. Desde que la sección Proyectos dejó la
+        // HOME (revisión post-S7), la puerta a cada case study es su hito.
+        proyecto: z
+          .string()
+          .regex(/^[a-z0-9-]+$/, "proyecto must be a kebab-case slug")
+          .optional(),
       }),
     )
     .min(1),
+  // Estudios (revisión post-S7): sección propia. Antes vivían disfrazados de
+  // hito «Formación» dentro de la trayectoria, y el PDF los separaba por el
+  // texto del periodo — un dato que dependía de una palabra. Ahora son datos.
+  estudios: z
+    .array(
+      z.object({
+        titulo: z.string().min(1),
+        institucion: z.string().min(1),
+        // Vacío hasta que el dueño ponga los años: no se inventa una fecha.
+        periodo: z.string().default(""),
+        nota: z.string().default(""),
+      }),
+    )
+    .default([]),
   logros: z
     .array(
       z.object({
@@ -289,7 +310,20 @@ function parseOrThrow<T>(
 }
 
 export function parseCv(data: unknown, source: string): Cv {
-  return parseOrThrow(cvSchema, data, source);
+  const cv = parseOrThrow(cvSchema, data, source);
+  // Un hito que apunta a un proyecto sin case study enlazaría a un 404.
+  const conDetalle = new Set(
+    cv.proyectos.filter((p) => p.casestudy).map((p) => p.slug),
+  );
+  const rotos = cv.trayectoria
+    .filter((t) => t.proyecto && !conDetalle.has(t.proyecto))
+    .map((t) => `${t.organizacion} → proyecto «${t.proyecto}»`);
+  if (rotos.length > 0) {
+    throw new Error(
+      `Contenido inválido en ${source}: cada «proyecto:» de la trayectoria debe ser el slug de un proyecto CON casestudy. Rotos: ${rotos.join("; ")}`,
+    );
+  }
+  return cv;
 }
 
 export function parseApps(data: unknown, source: string): Apps {

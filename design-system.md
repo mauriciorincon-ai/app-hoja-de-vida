@@ -118,10 +118,38 @@ animaciones infinitas (sweep/glitch/marquee), scroll-snap de deck, CDNs en `<hea
 - **Glifo ◆**: marca de evidencia/lista editorial (heredado del prototipo).
 - **Iconografía**: Lucide, stroke 1.5px, 16/20px, siempre con `aria-label` si es interactivo.
 
+### Componentes de la HOME · revisión post-S7
+
+- **Índice que baja contigo** (`TimelineTrack`): dos columnas — índice (88 px móvil · 176 px
+  escritorio) y tarjetas. En el índice, **una línea** `paper-3` de 2 px de arriba abajo, un
+  **relleno** `lilac-ink` que crece con el scroll (`scaleY` desde `scrollYProgress`, origen
+  arriba), una **marca** de 8 px por hito (rellena al pasar, hueca antes) y **el círculo**: 14 px
+  `lilac-ink` con anillo `paper-0`, `position: sticky; top: 45vh`. A su lado **el año** en
+  Fraunces `lilac-ink` (1.5rem móvil · 2.75rem escritorio, `tabular-nums`), que cambia con un
+  fundido de 350 ms (opacity + 10 px). El hito activo es el último cuyo borde superior está por
+  encima de la línea del círculo. Reduced motion: sin relleno, sin fundido, el círculo sigue
+  `sticky`. En la tarjeta, las **dos acciones en una fila** («Ver logros completos» · «Ver case
+  study →») y el panel de bullets abre debajo de la fila.
+- **Tarjeta de skills**: card `paper-0`, borde `paper-2`, `r-[14px]`, `sh-1`, hover
+  `-translate-y-0.5` + `sh-2`. Cabecera con el **icono** en cuadro `paper-1` de 48 px (24×24,
+  trazo 1.7, `sage-ink`, dibujado en casa, **por posición del grupo**) y el nombre en Fraunces
+  1.35rem. Los ítems son chips `paper-1` con borde `paper-3` que entran con `scaleInBlur`
+  escalonado. El trazo del icono se dibuja al llegar la tarjeta (`pathLength` 0→1, en cascada de
+  130 ms por figura) heredando las variantes del `Stagger`; el estado por defecto es el icono
+  dibujado. **Prohibido:** barras o porcentajes de dominio.
+- **Tarjeta de estudio**: como la de certificación (`r-md`, borde `paper-3`, `sh-1`), título en
+  Fraunces `xl`, institución en mono, periodo en mono `ink-2` — y **sin fecha, «Sin fecha
+  declarada» en cursiva `ink-2`**, nunca `ink-3` (2.7:1; axe lo cazó otra vez).
+- **Vitrina asomada**: las mismas cajas de frente del portal, sin variante, con un botón sage
+  «Entrar a la vitrina». La HOME enseña la vitrina, no la copia.
+- **Roadmap embebido**: dentro de `/vitrina/apps` va como bloque con `border-t paper-2` y título
+  `2xl` (no el `clamp` de sección de HOME). Misma isla de votación.
+
 ### Menú desplegable del encabezado · post-S5
 
 - **Cuándo se usa:** cuando varias secciones del nav **son la misma cosa**. Hoy, una sola vez: las
-  cinco secciones del CV bajo «Hoja de vida». No es un patrón para repartir: un header con dos
+  cinco secciones del CV bajo «Hoja de vida» (Trayectoria · Logros · Estudios · Certificaciones ·
+  Skills). El primer nivel queda en tres: Hoja de vida · Vitrina · Contacto. No es un patrón para repartir: un header con dos
   desplegables ya es un menú de aplicación, y esto es una pieza editorial.
 - **Forma:** panel `paper-0`, borde `paper-2`, `r-md`, `sh-2`, anclado bajo su botón. Cada opción
   con área táctil ≥44px y `hover` en `paper-1`.

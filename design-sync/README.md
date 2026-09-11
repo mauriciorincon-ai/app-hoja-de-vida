@@ -24,7 +24,8 @@ design-sync/
    │                     Chip de procedencia · Captura repintada ·
    │                     Caja de frente (post-S5, ADR-015) ·
    │                     Ficha técnica y proceso BPMN (post-S5, ADR-016)
-   └─ componentes-s7/    Muestra de pieza · Hallazgos y galería (S7, ADR-017)
+   ├─ componentes-s7/    Muestra de pieza · Hallazgos y galería (S7, ADR-017)
+   └─ componentes-post-s7/  Índice que baja contigo · Tarjeta de skills (ADR-018)
 ```
 
 Cada tarjeta abre con la línea **exacta** `<!-- @dsCard group="…" name="…" -->`: es lo que indexa

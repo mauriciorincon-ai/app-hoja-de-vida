@@ -39,6 +39,7 @@ trayectoria:
   - periodo: "2025 — hoy"
     rol: "Profesional de Analítica"
     organizacion: "Fundación CTIC"
+    proyecto: "fundacion-ctic"
     descripcion: >-
       Analítica y gobierno de datos para decisiones administrativas y
       asistenciales en salud.
@@ -50,6 +51,7 @@ trayectoria:
   - periodo: "2023 — 2025"
     rol: "Líder de Estrategia de Datos"
     organizacion: "Vesting — startup de agentes de automatización"
+    proyecto: "vesting"
     descripcion: >-
       Ecosistema de datos para agentes de IA en Microsoft Fabric, desde cero:
       arquitectura, gobernanza, monitoreo de agentes en tiempo real y proceso
@@ -62,6 +64,7 @@ trayectoria:
   - periodo: "2023"
     rol: "Analista Senior de Analítica"
     organizacion: "Banco Pichincha"
+    proyecto: "banco-pichincha"
     descripcion: >-
       BI adoptado por 50+ usuarios, ETL con −35% de tiempos, modelos
       predictivos con >90% de precisión y co-liderazgo de la gobernanza de
@@ -76,6 +79,7 @@ trayectoria:
   - periodo: "2021 — 2022"
     rol: "Análisis Post-Operacional"
     organizacion: "C&M Consultores (TransMilenio)"
+    proyecto: "transmilenio-cm"
     descripcion: >-
       Adopción de BI (+35% de eficiencia), ETL que unificó fuentes (+70%) y
       predicción de demanda con scikit-learn.
@@ -88,6 +92,7 @@ trayectoria:
   - periodo: "2020 — 2021"
     rol: "Analista de Sistemas de Información"
     organizacion: "Cafam"
+    proyecto: "cafam"
     descripcion: >-
       Lideré 20 personas en la implementación del WMS: −25% de errores y +15%
       de eficiencia operativa.
@@ -124,11 +129,13 @@ trayectoria:
       - "Gestión de ERP y estructuras de bases de datos para la cadena de suministro."
       - "Aseguramiento de calidad bajo ISO 9001:2015."
       - "Equipo de 12 personas con 95% de satisfacción de cliente."
-  - periodo: "Formación"
-    rol: "Ingeniería Industrial — énfasis en Inteligencia Analítica de Datos"
-    organizacion: "Pontificia Universidad Javeriana"
-    descripcion: >-
-      Estudios paralelos de Diseño Industrial. Inglés B2 (IELTS, Melbourne).
+# Estudios (revisión post-S7): sección propia en la HOME, en el /cv y en el PDF.
+# `periodo` va vacío hasta que pongas los años — no se inventa una fecha.
+estudios:
+  - titulo: "Ingeniería Industrial"
+    institucion: "Pontificia Universidad Javeriana"
+    periodo: ""
+    nota: "Énfasis en Inteligencia Analítica de Datos. Estudios paralelos de Diseño Industrial. Inglés B2 (IELTS, Melbourne)."
 
 logros:
   - valor: 8
