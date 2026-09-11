@@ -38,6 +38,16 @@ jobs:
       - run: pnpm test:e2e        # incluye scans axe (@axe-core/playwright); la
                                   # votación corre en modo "no disponible" sin BD
                                   # (el gate real-vote vive en el job integration)
+      # Un rojo en CI que no se reproduce local es ciego sin sus trazas: el
+      # primer reintento graba trace (playwright.config `on-first-retry`) con
+      # consola, errores y DOM — se sube solo cuando algo falla (2026-09-10).
+      - uses: actions/upload-artifact@v7
+        if: failure()
+        with:
+          name: playwright-test-results
+          path: test-results/
+          retention-days: 7
+          if-no-files-found: ignore
 
   # Votación con Postgres REAL (S4): la única capa de datos de la app.
   # Patrón wiki/patterns/supabase-en-ci-y-cloud.md (impuesto K1–K6 ya pagado).

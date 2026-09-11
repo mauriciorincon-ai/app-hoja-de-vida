@@ -82,8 +82,13 @@ e inglés. Quien la visita puede pedir acceso a tus apps y la solicitud te llega
 ### Perfil, Certificaciones y Skills en la HOME · desde Sprint 002 · Skills rehecha post-S7
 
 - **Qué hace:** las secciones que estaban guardadas desde el content pack ahora son
-  visibles: el párrafo de Perfil, las 6 certificaciones (las 2 de Microsoft resaltadas) y
-  los 4 grupos de skills.
+  visibles: el párrafo de Perfil, las 5 certificaciones (la DP-600 resaltada) y los 4 grupos
+  de skills. **AI-102 salió el 2026-09-10:** Microsoft la descontinuó, y con ella se fue de
+  todo el contenido que la nombraba (titular, perfil, logro, case study de Vesting, historia
+  del chat, `apps.yaml`).
+- **Una credencial nombrada es una credencial listada:** si cualquier texto de `data/` menciona
+  un código (DP-600, AI-102…) que no esté en `certificaciones:`, el test de contenido lo nombra
+  con su ruta y falla. Para volver a citar una certificación, primero va a la lista.
 - **Links de verificación:** cuando tengas los links de Credly/Microsoft Learn, pégalos en
   el campo `verificacion:` de cada certificación — el botón "Verificar ↗" aparece solo.
 - **Skills, desde la revisión post-S7:** una tarjeta por grupo con un icono dibujado en casa
@@ -98,9 +103,11 @@ e inglés. Quien la visita puede pedir acceso a tus apps y la solicitud te llega
   estudio. Antes la formación era un hito más de la trayectoria; ahora es un dato que también
   leen `/cv`, el PDF y el chat.
 - **Cómo se alimenta:** en `data/cv.es.yaml` y `cv.en.yaml`, el bloque `estudios:` — cada entrada
-  con `titulo`, `institucion`, `periodo` y `nota` (opcional). **`periodo` está vacío hoy:** ponle
-  los años (p. ej. `"2011 — 2016"`) y la tarjeta deja de decir «Sin fecha declarada». Mismo número
-  de estudios en ES y EN.
+  con `titulo`, `institucion`, `periodo` y `nota` (opcional). Hoy hay tres, tomadas del PDF
+  2024-I del dueño: Ingeniería Industrial (2009 — 2016), los estudios de Diseño Industrial
+  (2011 — 2016) y el curso de inglés con IELTS en Melbourne (2013 — 2014). **Todo estudio lleva
+  año:** un `periodo` sin cuatro dígitos pone rojo el test de contenido. Mismo número de estudios
+  en ES y EN.
 
 ### La vitrina, asomada en la HOME · desde la revisión post-S7
 
@@ -304,8 +311,10 @@ e inglés. Quien la visita puede pedir acceso a tus apps y la solicitud te llega
 ### El menú del encabezado · desde Sprint 001 · reorganizado 2026-09-05
 
 - **Qué hace:** el menú tiene **tres destinos**: **Hoja de vida** (que despliega Trayectoria,
-  Logros, Estudios, Certificaciones y Skills), **Vitrina** y **Contacto**; más el
-  botón de CV en PDF y el cambio de idioma.
+  Logros, Lo que construyo, Estudios, Certificaciones y Skills — el orden de la página),
+  **Vitrina** y **Contacto**; más el botón de CV en PDF y el cambio de idioma. «Lo que
+  construyo» (desde 2026-09-10) es la sección de la HOME donde se asoma la vitrina; «Vitrina»
+  en el primer nivel es el portal.
 - **Por qué se agrupó:** había llegado a nueve destinos y dejaba de caber en pantallas medianas.
   Cinco de esos nueve son **una sola cosa** —tu hoja de vida— y competían de tú a tú con la
   vitrina y el contacto. No se perdió ningún acceso: las cinco viven dentro del desplegable.
@@ -431,3 +440,4 @@ carrera con un comentario que dice qué escribir en cada una.
 | 005    | La vitrina: escaparate de las seis apps hermanas y **una página propia por app**, alimentadas por los `brochure-export.json` que cada app genera; tarjetas que se abren al llegar leyendo; capturas de las apps reales repintadas con la paleta de esta página; cero enlaces y CTA de lista de espera. Abre el ciclo H2. |
 | 007    | Las estanterías: los cuatro frentes de la vitrina abiertos con piezas reales (6 apps · 13 agentes · 7 investigaciones · 6 tableros). Un escaparate por frente y una ficha por pieza, con el mismo renderizador de las apps; las fichas las produce quien construye cada pieza y llegan por PR de contenido. Contrato v1.3.0: los tableros añaden «Lo que dicen los datos» y «Cómo se ve» (galería de capturas), opcionales y con renumeración automática. |
 | post-S7 | Revisión del dueño sobre la HOME: la trayectoria como índice que baja contigo (línea continua, círculo fijo a media pantalla, año grande); la vitrina en el sitio de Proyectos y los case studies desde su hito; Estudios como sección y como dato (`cv.estudios`); Skills en tarjetas con icono y trazo; el roadmap se muda a `/vitrina/apps` y sale del menú. |
+| post-S7 (2.ª) | «Lo que construyo» entra al desplegable Hoja de vida; Estudios con los años del PDF del dueño (tres entradas); AI-102 retirada de todo el contenido (Microsoft la descontinuó) y gate nuevo: una credencial nombrada tiene que estar en `certificaciones:`. |

@@ -28,9 +28,11 @@ import { EASE_OUT_CUBIC } from "./easings";
  *  - **El año grande** al lado del círculo: el de la experiencia que está a
  *    su altura. Cambia con un fundido corto (opacity + translate, nada más).
  *
- * Reduced motion: la línea completa y quieta, el círculo sigue siendo
- * `sticky` (es posición, no animación), el año cambia sin fundido y el
- * relleno no existe. Nada parpadea, nada se mueve solo.
+ * Reduced motion: la línea completa y quieta (el relleno queda entero, lo
+ * fija el cinturón CSS), el círculo sigue siendo `sticky` (es posición, no
+ * animación) y el año cambia sin fundido. Nada parpadea, nada se mueve solo.
+ * La FORMA del árbol es la misma con y sin reducción — `useReducedMotion()`
+ * solo toca props; ramificar elementos con él desajusta la hidratación.
  *
  * Gate ATS: el `<ol>` con periodos, roles y bullets es HTML siempre; el año
  * grande es un duplicado decorativo (`aria-hidden`).
@@ -213,14 +215,17 @@ export function TimelineTrack({
       <div aria-hidden="true" className="relative">
         {/* La línea entera, de la primera experiencia a la última. */}
         <div className="absolute top-0 bottom-0 left-[6px] w-0.5 bg-paper-3" />
-        {/* Cuánto llevas leído. Solo si el movimiento está permitido. */}
-        {!reduced && (
-          <m.div
-            data-timeline-relleno
-            className="absolute top-0 bottom-0 left-[6px] w-0.5 origin-top bg-lilac-ink"
-            style={{ scaleY: scrollYProgress }}
-          />
-        )}
+        {/* Cuánto llevas leído. Existe SIEMPRE: con reducción de movimiento el
+            cinturón CSS (`[data-motion]` → transform: none) lo deja completo y
+            quieto. La estructura no puede depender de `reduced`, que en el
+            servidor es null: ramificarla rompió la hidratación (React #418) para
+            los usuarios con esa preferencia (2026-09-10). */}
+        <m.div
+          data-motion=""
+          data-timeline-relleno
+          className="absolute top-0 bottom-0 left-[6px] w-0.5 origin-top bg-lilac-ink"
+          style={{ scaleY: scrollYProgress }}
+        />
         {/* Una marca por experiencia, a la altura donde empieza su tarjeta. */}
         {marcas.map((y, i) => (
           <span

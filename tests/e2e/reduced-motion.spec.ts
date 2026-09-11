@@ -61,6 +61,9 @@ test.describe("prefers-reduced-motion (criterio de aceptación e2e)", () => {
       // Lo nuevo de la revisión post-S7 que nace con estilos inline de motion:
       // el año grande del índice y los trazos de los iconos de skills.
       "#trayectoria [data-timeline-anio]",
+      // El relleno de la línea existe siempre (misma estructura que el
+      // servidor); con reducción queda completo y quieto por el cinturón CSS.
+      "#trayectoria [data-timeline-relleno]",
       "#skills [data-skill-grupo='0'] svg",
     ]) {
       expect(await findAnimatedAncestor(page.locator(selector))).toBeNull();

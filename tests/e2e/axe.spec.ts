@@ -102,6 +102,12 @@ for (const ruta of RUTAS) {
     // El scan de la HOME (con la capa de profundidad) excede 30s bajo carga
     // paralela de workers — axe necesita margen, no está colgado
     test.slow();
+    // Este spec corre con «reducir movimiento» en TODAS las rutas: es el sitio
+    // exacto para exigir una hidratación limpia bajo esa preferencia. Un
+    // desajuste servidor/cliente (React #418) regenera el árbol en silencio y
+    // aquí se veía como un «footer not attached» intermitente (2026-09-10).
+    const erroresDePagina: string[] = [];
+    page.on("pageerror", (e) => erroresDePagina.push(e.message));
     await page.goto(ruta);
     // Estado final de la página (el footer existe en todas las rutas)
     await page.locator("footer").scrollIntoViewIfNeeded();
@@ -140,5 +146,6 @@ for (const ruta of RUTAS) {
       .analyze();
 
     expect(results.violations).toEqual([]);
+    expect(erroresDePagina, "errores de página (hidratación incluida)").toEqual([]);
   });
 }

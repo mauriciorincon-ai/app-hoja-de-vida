@@ -4,8 +4,10 @@ import { expect, test } from "@playwright/test";
  * NAVEGACIÓN DEL HEADER — los dos disclosures.
  *
  *  - **Hamburguesa** (<md, deuda S1 pagada en S4): el menú completo.
- *  - **Hoja de vida** (≥md, 2026-09-05): agrupa las cinco secciones del CV,
- *    que antes competían en el primer nivel con la vitrina y el contacto.
+ *  - **Hoja de vida** (≥md, 2026-09-05): agrupa las secciones del CV, que
+ *    antes competían en el primer nivel con la vitrina y el contacto. Seis
+ *    desde 2026-09-10: «Lo que construyo» (la vitrina asomada en la HOME)
+ *    entró con el nombre que lleva en la página.
  *
  * Ambos comparten contrato: `aria-expanded` + `aria-controls`, Escape cierra y
  * devuelve el foco al botón que abrió, y elegir una opción cierra.
@@ -34,6 +36,10 @@ test.describe("Nav móvil (disclosure del header)", () => {
     const panel = page.locator("#nav-movil");
     await expect(panel).toBeVisible();
     await expect(panel.getByRole("link", { name: "Contacto" })).toBeVisible();
+    // La vitrina asomada en la HOME está en el grupo, con su nombre de sección.
+    await expect(
+      panel.getByRole("link", { name: "Lo que construyo" }),
+    ).toHaveAttribute("href", "#vitrina");
     // «Roadmap» ya no es destino de la HOME (vive en /vitrina/apps).
     await expect(panel.getByRole("link", { name: "Roadmap" })).toHaveCount(0);
 
@@ -103,10 +109,21 @@ test.describe("Desplegable «Hoja de vida» (escritorio)", () => {
     await toggle.click();
     await expect(toggle).toHaveAttribute("aria-expanded", "true");
     const panel = page.locator("#nav-hoja-de-vida");
-    // Las cinco secciones del CV, ninguna perdida al agrupar.
-    await expect(panel.getByRole("link")).toHaveCount(5);
-    for (const s of ["Trayectoria", "Logros", "Estudios", "Certificaciones", "Skills"])
-      await expect(panel.getByRole("link", { name: s })).toBeVisible();
+    // Las seis secciones del CV, en el orden de la página, ninguna perdida.
+    const secciones = [
+      "Trayectoria",
+      "Logros",
+      "Lo que construyo",
+      "Estudios",
+      "Certificaciones",
+      "Skills",
+    ];
+    await expect(panel.getByRole("link")).toHaveText(secciones);
+    // «Lo que construyo» es la SECCIÓN de la HOME (#vitrina), no el portal:
+    // el portal sigue en el primer nivel, como «Vitrina».
+    await expect(
+      panel.getByRole("link", { name: "Lo que construyo" }),
+    ).toHaveAttribute("href", "#vitrina");
 
     // Escape cierra y devuelve el foco al botón que abrió.
     await page.keyboard.press("Escape");

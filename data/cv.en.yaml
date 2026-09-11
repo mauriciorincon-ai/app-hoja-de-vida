@@ -11,7 +11,7 @@ identidad:
   eyebrow: "Industrial Engineer · Data & AI Engineer"
   titular: "From industrial engineering to AI agents: data, platforms and decisions."
   resumen: >-
-    Data leader and AI engineer (DP-600 · AI-102). I design analytics
+    Data leader and AI engineer (DP-600). I design analytics
     platforms on Microsoft Fabric and take AI agents to production — with the
     public evidence to prove it.
   perfil: >-
@@ -21,8 +21,8 @@ identidad:
     accuracy. In 2023 I made the natural leap: I led the data strategy of an
     AI-agent startup, building its Microsoft Fabric ecosystem from scratch
     together with the replicable process to design and monitor agents.
-    Microsoft-certified in analytics engineering (DP-600) and AI engineering
-    (AI-102). Want to know anything else about me? Ask this résumé's chat.
+    Microsoft-certified in analytics engineering (DP-600). Want to know
+    anything else about me? Ask this résumé's chat.
   ubicacion: "Bogotá, Colombia · Open to international relocation and remote work"
   email: "mauricio.hmrc@gmail.com"
   enlaces:
@@ -127,10 +127,19 @@ trayectoria:
 # Education (post-S7 review): its own section on the HOME, in /cv and in the PDF.
 # `periodo` stays empty until you add the years — no date gets made up.
 estudios:
-  - titulo: "Industrial Engineering"
-    institucion: "Pontificia Universidad Javeriana"
-    periodo: ""
-    nota: "Emphasis in Data Analytics Intelligence. Parallel studies in Industrial Design. English B2 (IELTS, Melbourne)."
+  # From the owner's "Hoja de vida 2024-I" PDF (2026-09-10); the fine content review belongs to S8.
+  - titulo: "Industrial Engineering, emphasis in Data Analytics Intelligence"
+    institucion: "Pontificia Universidad Javeriana · Bogotá"
+    periodo: "2009 — 2016"
+    nota: "Process optimization, data analysis and decision support, integrating engineering principles with advanced analytics. Modelling and prediction of industrial phenomena with SQL, Python and Power BI."
+  - titulo: "Undergraduate studies in Industrial Design"
+    institucion: "Pontificia Universidad Javeriana · Bogotá"
+    periodo: "2011 — 2016"
+    nota: "Product and systems design with a technological, market-driven approach, focused on environmental sustainability and cultural impact."
+  - titulo: "Intensive English course and IELTS certification"
+    institucion: "Cambridge International College · Melbourne, Australia"
+    periodo: "2013 — 2014"
+    nota: "English B2: reading, listening and technical writing; professional discussions and analytical reports."
 
 logros:
   - valor: 8
@@ -153,9 +162,9 @@ logros:
   - valor: 20
     etiqueta: "people in the largest team I've led"
     descripcion: "WMS implementation at Cafam: −25% errors, +15% efficiency."
-  - valor: 6
+  - valor: 5
     etiqueta: "professional certifications"
-    descripcion: "2 from Microsoft (DP-600 · AI-102) and 4 from IBM in data science."
+    descripcion: "Microsoft's DP-600 and 4 from IBM in data science."
 
 proyectos:
   - slug: "vesting"
@@ -165,8 +174,8 @@ proyectos:
       built from scratch its Microsoft Fabric ecosystem (big data + data
       warehouse + distributed processing), the governance to integrate client
       and system data, real-time agent monitoring, and the replicable core
-      process to design and ship AI agents. The exact bridge between DP-600
-      and AI-102.
+      process to design and ship AI agents. The exact bridge between
+      analytics engineering and AI engineering.
     stack: ["Microsoft Fabric", "Data governance", "Real-time monitoring"]
     destacado: true
     casestudy:
@@ -187,7 +196,7 @@ proyectos:
         - "The startup's data ecosystem became operational from scratch on Microsoft Fabric."
         - "Agents in production went from opaque to monitored in real time."
         - "The replicable core process standardized how agents are designed and shipped."
-        - "The exact bridge between analytics engineering (DP-600) and AI engineering (AI-102)."
+        - "The exact bridge between analytics engineering (DP-600) and AI engineering."
   - slug: "banco-pichincha"
     nombre: "BI the business actually uses — Banco Pichincha (2023)"
     resumen: >-
@@ -290,10 +299,7 @@ proyectos:
         - "Institutional data quality as a practice, not an event."
 
 certificaciones:
-  - nombre: "Microsoft Certified: Azure AI Engineer Associate (AI-102)"
-    fecha: "Dec 2024"
-    nota: "The one guiding my present: AI solutions, NLP, vision and pipelines on Azure."
-    verificacion: ""
+  # AI-102 left the list on 2026-09-10: Microsoft discontinued the certification (owner's decision).
   - nombre: "Microsoft Certified: Fabric Analytics Engineer Associate (DP-600)"
     fecha: "2024"
     nota: "The one backing my track record: end-to-end data and analytics engineering."

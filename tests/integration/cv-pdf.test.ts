@@ -59,8 +59,11 @@ describe("PDF ATS generado en build desde los YAML", () => {
     expect(text).toContain("EXPERIENCIA");
     // Métrica real de un bullet (capa de profundidad)
     expect(text).toContain("50+ usuarios");
-    expect(text).toContain("AI-102");
+    expect(text).toContain("DP-600");
+    // Formación desde `cv.estudios` (post-S7), con sus años (2026-09-10).
+    expect(text).toContain("FORMACIÓN");
     expect(text).toContain("Pontificia Universidad Javeriana");
+    expect(text).toContain("2009 — 2016");
   });
 
   it("el texto del PDF EN es parseable y refleja el YAML", async () => {
@@ -69,6 +72,8 @@ describe("PDF ATS generado en build desde los YAML", () => {
     expect(text).toContain("EXPERIENCE");
     expect(text).toContain("50+ users");
     expect(text).toContain("DP-600");
+    expect(text).toContain("EDUCATION");
+    expect(text).toContain("2009 — 2016");
   });
 
   it("sin caracteres fuera de WinAnsi que rompan el render (− → ⭐)", async () => {

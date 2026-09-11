@@ -12,7 +12,7 @@ identidad:
   eyebrow: "Ingeniero Industrial · Data & AI Engineer"
   titular: "De la ingeniería industrial a los agentes de IA: datos, plataformas y decisiones."
   resumen: >-
-    Líder de datos e ingeniero de IA (DP-600 · AI-102). Diseño plataformas
+    Líder de datos e ingeniero de IA (DP-600). Diseño plataformas
     analíticas en Microsoft Fabric y llevo agentes de IA a producción — con la
     evidencia pública para probarlo.
   # Frase del chat (pack §3) restituida en S3: el chat ya es real
@@ -24,7 +24,7 @@ identidad:
     datos de una startup de agentes de IA, construyendo desde cero su
     ecosistema en Microsoft Fabric y el proceso replicable para diseñar y
     monitorear agentes. Certificado por Microsoft en ingeniería de analítica
-    (DP-600) e ingeniería de IA (AI-102). ¿Quieres saber algo más de mí?
+    (DP-600). ¿Quieres saber algo más de mí?
     Pregúntaselo al chat de esta hoja de vida.
   # La disponibilidad de reubicación es señal DELIBERADA para recruiters (pack §1)
   ubicacion: "Bogotá, Colombia · Abierto a reubicación internacional y trabajo remoto"
@@ -132,10 +132,19 @@ trayectoria:
 # Estudios (revisión post-S7): sección propia en la HOME, en el /cv y en el PDF.
 # `periodo` va vacío hasta que pongas los años — no se inventa una fecha.
 estudios:
-  - titulo: "Ingeniería Industrial"
-    institucion: "Pontificia Universidad Javeriana"
-    periodo: ""
-    nota: "Énfasis en Inteligencia Analítica de Datos. Estudios paralelos de Diseño Industrial. Inglés B2 (IELTS, Melbourne)."
+  # Del PDF «Hoja de vida 2024-I» del dueño (2026-09-10); la revisión fina del contenido es del S8.
+  - titulo: "Ingeniería Industrial, énfasis en Inteligencia Analítica de Datos"
+    institucion: "Pontificia Universidad Javeriana · Bogotá"
+    periodo: "2009 — 2016"
+    nota: "Optimización de procesos, análisis de datos y soporte a la toma de decisiones, integrando principios de ingeniería con analítica avanzada. Modelado y predicción de fenómenos industriales con SQL, Python y Power BI."
+  - titulo: "Estudios de pregrado en Diseño Industrial"
+    institucion: "Pontificia Universidad Javeriana · Bogotá"
+    periodo: "2011 — 2016"
+    nota: "Diseño de productos y sistemas con enfoque tecnológico y de mercado, con foco en sostenibilidad ambiental e impacto cultural."
+  - titulo: "Curso intensivo de inglés y certificación IELTS"
+    institucion: "Cambridge International College · Melbourne, Australia"
+    periodo: "2013 — 2014"
+    nota: "Inglés B2: lectura, escucha y redacción técnica; discusiones profesionales e informes analíticos."
 
 logros:
   - valor: 8
@@ -158,9 +167,9 @@ logros:
   - valor: 20
     etiqueta: "personas en el mayor equipo que he liderado"
     descripcion: "Implementación del WMS en Cafam: −25% de errores, +15% de eficiencia."
-  - valor: 6
+  - valor: 5
     etiqueta: "certificaciones profesionales"
-    descripcion: "2 de Microsoft (DP-600 · AI-102) y 4 de IBM en ciencia de datos."
+    descripcion: "DP-600 de Microsoft y 4 de IBM en ciencia de datos."
 
 proyectos:
   - slug: "vesting"
@@ -171,7 +180,7 @@ proyectos:
       Data + DW + procesamiento distribuido), la gobernanza para integrar
       datos de clientes y sistemas, el monitoreo en tiempo real de los agentes
       y el proceso core replicable para diseñar e implementar agentes de IA.
-      El puente exacto entre DP-600 y AI-102.
+      El puente exacto entre la ingeniería de analítica y la ingeniería de IA.
     stack: ["Microsoft Fabric", "Gobernanza de datos", "Monitoreo en tiempo real"]
     destacado: true
     casestudy:
@@ -192,7 +201,7 @@ proyectos:
         - "El ecosistema de datos de la startup quedó operativo desde cero en Microsoft Fabric."
         - "Los agentes en producción pasaron a monitorearse en tiempo real."
         - "El proceso core replicable estandarizó cómo se diseñan e implementan los agentes."
-        - "El puente exacto entre la ingeniería de analítica (DP-600) y la ingeniería de IA (AI-102)."
+        - "El puente exacto entre la ingeniería de analítica (DP-600) y la ingeniería de IA."
   - slug: "banco-pichincha"
     nombre: "BI que el negocio sí usa — Banco Pichincha (2023)"
     resumen: >-
@@ -295,10 +304,7 @@ proyectos:
         - "Calidad de datos institucional como práctica, no como evento."
 
 certificaciones:
-  - nombre: "Microsoft Certified: Azure AI Engineer Associate (AI-102)"
-    fecha: "dic 2024"
-    nota: "La que guía mi presente: soluciones de IA, NLP, visión y pipelines en Azure."
-    verificacion: ""
+  # AI-102 salió de la lista el 2026-09-10: Microsoft descontinuó la certificación (decisión del dueño).
   - nombre: "Microsoft Certified: Fabric Analytics Engineer Associate (DP-600)"
     fecha: "2024"
     nota: "La que respalda mi trayectoria: ingeniería de datos y analítica end-to-end."

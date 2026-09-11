@@ -100,7 +100,7 @@ monitored in production, what the replicable core process is. -->
 institutional data governance, which dashboards clinical and administrative
 leaders use. Remember: NO patient data or sensitive internal information. -->
 
-## Certifications — the DP-600 → AI-102 path
+## Certifications — the path from DP-600
 
 <!-- seccion: certificaciones | ancla: #certificaciones -->
 <!-- guía: Why you chose these certifications, how you prepared for them,

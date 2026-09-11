@@ -85,9 +85,13 @@ export default async function LocaleLayout({
 
   // Al cliente solo viajan los namespaces que usan client components
   // (header, formulario, error boundary, chat) — el resto queda en el server.
+  // `vitrinaHome` viaja porque el header rotula «Lo que construyo» con el
+  // MISMO string que la sección (2026-09-10): un namespace que falte aquí no
+  // rompe el build, pinta la clave cruda — el e2e del menú es quien lo caza.
   const messages = await getMessages();
   const clientMessages = {
     nav: messages.nav,
+    vitrinaHome: messages.vitrinaHome,
     form: messages.form,
     error: messages.error,
     chat: messages.chat,
