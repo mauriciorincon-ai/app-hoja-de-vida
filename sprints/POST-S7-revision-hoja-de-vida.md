@@ -88,6 +88,39 @@ leído línea a línea — seis subidas más `@types/react-dom`, ninguna degrada
   los seis rótulos exactos, escritorio y móvil). Corregido en el layout, con el porqué escrito al
   lado de la lista.
 
+### Lo que cazó la CI — y no la máquina local
+
+El job e2e falló dos veces en CI con un `footer … is not attached to the DOM` en `axe.spec.ts`,
+siempre en la HOME, nunca reproducible en local (cinco cosas probadas: repetición ×6, dos
+workers, CPU 8× más lenta, arranque en frío, consola limpia). Mirando atrás: los runs del S7
+pasaban limpios; el flaky nació con la revisión 1 de la HOME y aquí se volvió rojo firme.
+
+1. **Primero, ojos en la CI.** El job no subía nada al fallar. Se agregó `upload-artifact` de
+   `test-results/` solo en fallo (Playwright ya grababa trace en el primer reintento).
+2. **La traza lo dijo:** `pageerror: Minified React error #418` — **fallo de hidratación**. React
+   regenera el árbol en el cliente, el footer viejo se desconecta y el locator queda huérfano. El
+   snapshot del DOM en la traza, comparado con el de después del `goto`, mostró la diferencia
+   exacta: en el servidor existe `[data-timeline-relleno]`; en el cliente, no.
+3. **La causa:** `TimelineTrack` pintaba el relleno con `{!reduced && <m.div/>}`.
+   `useReducedMotion()` vale `null` en el servidor y `true` en un navegador con «reducir
+   movimiento» — y `axe.spec.ts` corre con esa preferencia en todas las rutas. Estructura distinta
+   ⇒ #418 en cada carga; el «not attached» era solo la parte visible, según la hidratación
+   terminara antes o después del `load`. En local termina antes; en CI, después.
+4. **A quién le pasaba de verdad:** a toda persona con reducción de movimiento que abriera la
+   HOME — justo a quienes el cinturón de reduced-motion quiere cuidar.
+5. **La corrección (la regla, no el síntoma):** el relleno existe siempre; con reducción lo deja
+   completo y quieto el cinturón CSS (`[data-motion]` → `transform: none`). **La forma del árbol
+   nunca depende de `useReducedMotion()`**: el hook solo toca props.
+
+| Demo | Mutación / estado | Rojo |
+| ---- | ----------------- | ---- |
+| **P** | `motion-estructura-reducida.test.tsx` nuevo, contra el `TimelineTrack` de ese momento | *«TimelineTrack con reducción: expected '<div data-timeline…' to be …»* (el `m.div` del relleno falta con `reduced = true`); Reveal, Stagger e IconoSkill en verde |
+| **Q** | `axe.spec.ts` exige cero `pageerror` (hidratación incluida), contra el build sin corregir | *«errores de página (hidratación incluida): + "Minified React error #418…"»* en `/es` |
+
+El gate **Q** habría puesto rojo firme la CI del PR #22 en vez de un flaky con reintento verde.
+`reduced-motion.spec.ts` exige además que `[data-timeline-relleno]` quede sin transform bajo
+reducción.
+
 ### Desviaciones y deuda
 
 - Retirar AI-102 tocó **más que la lista**: titular, perfil, logro, case study, historia del chat y
@@ -99,8 +132,9 @@ leído línea a línea — seis subidas más `@types/react-dom`, ninguna degrada
 
 ### Verificación
 
-typecheck · lint · **384 unitarias + integración** (el gate del PDF entre ellas) · e2e **321 pasadas,
-11 saltadas, cero fallos** sobre el build corregido · build **108 páginas HTML** · barrido cero
-enlaces vacío · capturas del menú (escritorio y móvil), Estudios y Certificaciones enviadas al
-dueño. El espejo `design-sync/…/menu-desplegable.html` se puso al día en este mismo PR (regla 15):
+typecheck · lint · **388 unitarias + integración** (el gate del PDF y el de estructura reducida
+entre ellas) · e2e **321 pasadas, 11 saltadas, cero fallos** sobre el build corregido, dos veces
+(antes y después del arreglo de hidratación) · `/es` con «reducir movimiento»: **cero errores de
+página** (antes: React #418 en cada carga) · build **108 páginas HTML** · barrido cero enlaces
+vacío · capturas del menú (escritorio y móvil), Estudios y Certificaciones enviadas al dueño. El espejo `design-sync/…/menu-desplegable.html` se puso al día en este mismo PR (regla 15):
 seguía con «Roadmap» en el primer nivel y «Proyectos» en el panel desde la revisión anterior.

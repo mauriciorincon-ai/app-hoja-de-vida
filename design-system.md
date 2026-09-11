@@ -127,8 +127,12 @@ animaciones infinitas (sweep/glitch/marquee), scroll-snap de deck, CDNs en `<hea
   `lilac-ink` con anillo `paper-0`, `position: sticky; top: 45vh`. A su lado **el año** en
   Fraunces `lilac-ink` (1.5rem móvil · 2.75rem escritorio, `tabular-nums`), que cambia con un
   fundido de 350 ms (opacity + 10 px). El hito activo es el último cuyo borde superior está por
-  encima de la línea del círculo. Reduced motion: sin relleno, sin fundido, el círculo sigue
-  `sticky`. En la tarjeta, las **dos acciones en una fila** («Ver logros completos» · «Ver case
+  encima de la línea del círculo. Reduced motion: el relleno **completo y quieto** (lo fija el
+  cinturón CSS `[data-motion]`), sin fundido, el círculo sigue `sticky`. **La forma del árbol es la
+  misma con y sin reducción:** `useReducedMotion()` solo cambia props, nunca qué elementos se
+  pintan — en el servidor vale `null` y ramificar la estructura con él desajusta la hidratación
+  (React #418, cazado el 2026-09-10 en este mismo relleno). En la tarjeta, las **dos acciones en
+  una fila** («Ver logros completos» · «Ver case
   study →») y el panel de bullets abre debajo de la fila.
 - **Tarjeta de skills**: card `paper-0`, borde `paper-2`, `r-[14px]`, `sh-1`, hover
   `-translate-y-0.5` + `sh-2`. Cabecera con el **icono** en cuadro `paper-1` de 48 px (24×24,

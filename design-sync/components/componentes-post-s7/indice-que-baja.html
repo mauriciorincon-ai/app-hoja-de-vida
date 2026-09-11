@@ -84,8 +84,9 @@
   de posición y siempre bien situado aunque el scroll salte (anclas del menú). El
   <strong>relleno</strong> es <code>scaleY(scrollYProgress)</code> con origen arriba; el
   <strong>hito activo</strong> es el último cuyo borde superior queda por encima de la línea del
-  círculo, y su año entra con un fundido de 350 ms (opacity + 10 px). Reduced motion: sin
-  relleno, sin fundido; el círculo sigue siendo posición, no animación.</p>
+  círculo, y su año entra con un fundido de 350 ms (opacity + 10 px). Reduced motion: el relleno
+  completo y quieto (cinturón CSS), sin fundido; el círculo sigue siendo posición, no animación.
+  La forma del árbol no cambia con la preferencia: <code>useReducedMotion()</code> solo toca props.</p>
 <p class="nota"><strong>Las dos acciones en una fila</strong> («Ver logros completos» · «Ver case
   study →»): el panel de bullets abre debajo de la fila. Dos filas de 44 px con aire entre ellas
   hacían que cada tarjeta pareciera terminar dos veces.</p>
