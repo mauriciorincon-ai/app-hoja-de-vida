@@ -1,5 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
+import { COLOR_ESTADO } from "@/lib/vitrina/estilos";
 import type { FichaVitrina } from "@/lib/vitrina/loader";
 import { Maqueta } from "./maquetas";
 
@@ -23,10 +24,7 @@ export async function MuestraApp({ ficha }: { ficha: FichaVitrina }) {
   const t = await getTranslations("vitrina");
   const { ancla, export: exp } = ficha;
 
-  const colorEstado =
-    ancla.estado === "sellado"
-      ? "bg-sage text-sage-ink"
-      : "bg-citron text-citron-ink";
+  const colorEstado = COLOR_ESTADO[ancla.estado];
 
   return (
     <li className="list-none">

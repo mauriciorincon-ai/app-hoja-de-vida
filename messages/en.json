@@ -162,11 +162,11 @@
     "notaIdioma": "Each app's own words are kept in Spanish, exactly as its team wrote them.",
     "estados": {
       "sellado": "Sealed",
-      "inicial": "Build closed"
+      "inicial": "Unsealed"
     },
     "estadoAyuda": {
       "sellado": "Its testing gate is done",
-      "inicial": "Its build is closed; the testing gate isn't yet"
+      "inicial": "Its testing gate hasn't run yet"
     },
     "paraQuien": "Who it's for",
     "diferencial": "What nobody else does",
@@ -211,6 +211,12 @@
     "vecinasEtiqueta": "Other apps in the showcase",
     "appAnterior": "Previous app",
     "appSiguiente": "Next app",
+    "escaparateCuenta": "{n, plural, one {# published piece} other {# published pieces}}",
+    "escaparateNota": "Each piece has its own page. Here they only show a corner.",
+    "volverAlFrente": "Back to {frente}",
+    "vecinasDelFrente": "Other pieces in {frente}",
+    "piezaAnterior": "Previous piece",
+    "piezaSiguiente": "Next piece",
     "deEstaCasa": "From this house",
     "deEstaCasaLinea": "What holds up the page you are reading: they are pipeline apps too, and they can also be walked through.",
     "verLaApp": "See the app",
@@ -219,7 +225,8 @@
   },
   "fichaTecnica": {
     "eyebrow": "Technical sheet",
-    "ancladaEl": "Pinned to the export of {fecha}",
+    "ancladaEl": "Data as of {fecha}",
+    "selladaEl": "Sealed on {fecha}",
     "sprints": "{n, plural, one {# sprint} other {# sprints}}",
     "titularRotulo": "What nobody else does",
     "cifras": "The numbers",
@@ -234,12 +241,19 @@
     "procesoApp": "Process declared by the app itself in its export.",
     "s03": "What it has",
     "s03sub": "{grupos, plural, one {# group} other {# groups}} · {n} features. The detail of each one lives in the full card.",
+    "s03subSinDetalle": "{grupos, plural, one {# group} other {# groups}} · {n} features.",
+    "s03subSoloGrupos": "{grupos, plural, one {# group} other {# groups}}.",
     "s04": "Limits, and what it never does",
-    "s04sub": "What the app chose not to be is worth as much as what it is.",
+    "s04sub": "What it chose not to be counts as much as what it is.",
     "limites": "Limits, on purpose",
     "nunca": "Never",
     "s05": "Where it stands",
     "s05sub": "The pinned version, not real time.",
+    "conclusiones": "What the data says",
+    "conclusionesSub": "Each finding with its figure and its provenance. It is what the piece found, not what it is.",
+    "galeria": "What it looks like",
+    "galeriaSub": "Real screens of the piece, as it runs. Untouched.",
+    "galeriaPie": "Screen {n} of {total}",
     "hitos": {
       "ciclo": "cycle",
       "sprints": "closed sprints",
@@ -250,7 +264,6 @@
     },
     "verDetalle": "Open the full card",
     "cierreNota": "Shown here; not handed over. The waiting list promises no date.",
-    "detalleEyebrow": "Full card",
     "volverFichaTecnica": "Back to the technical sheet"
   }
 }

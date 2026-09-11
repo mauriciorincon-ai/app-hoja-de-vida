@@ -1,0 +1,393 @@
+{
+  "schema_version": "1.1.0",
+  "actualizado": "2026-09-06",
+  "pieza": {
+    "slug": "experto-fiscal",
+    "nombre": "Experto Fiscal",
+    "frente": "agentes",
+    "estado": "inicial",
+    "ciclo": "corrida 0",
+    "version": "1.0.0",
+    "sellado_en": null,
+    "sprints_cerrados": 1
+  },
+  "promesa": {
+    "tagline": "Calcula con tus cifras contra la norma citada, y se detiene ante ti.",
+    "intro": "Deja de esperar a agosto. Mantiene un gemelo de tus finanzas en archivos que son tuyos, calcula tu impuesto estimado a la fecha, recorre las palancas legales que aplican a tu caso concreto y prepara lo que el contador necesita — citando en cada afirmación el artículo, la fuente y la vigencia de la regla que aplicó. Y cuando la decisión tiene consecuencias, para y te la deja a ti.",
+    "para_quien": "Para el independiente colombiano que opera fiscalmente a ciegas once meses del año y descubre su situación en agosto, cuando ya no queda nada que decidir. Hoy compra cumplimiento —alguien presenta lo que ya ocurrió— y no planeación, que es donde está el dinero. El mercado está partido: unas herramientas ven sus datos y no opinan sobre la norma; otras razonan la norma y no saben cuánto gana."
+  },
+  "titular": "Ninguna cifra fiscal sale de la memoria del modelo: sale de un corpus de 150 reglas con artículo, fuente, vigencia y confianza declarada. Y una sugerencia sin su regla citada no se emite con advertencia — no se emite.",
+  "stack": [
+    {
+      "nombre": "Claude Code",
+      "papel": "el runtime entero: sin servidor, sin cuentas y sin nube; los archivos viven en el disco del dueño de los datos"
+    },
+    {
+      "nombre": "Markdown con frontmatter",
+      "papel": "el corpus normativo: una ficha por regla con artículo, texto citado, fuente, fecha de captura, vigencia y confianza"
+    },
+    {
+      "nombre": "CSV versionados en git",
+      "papel": "el gemelo financiero: ledger append-only, saldos anclados y reglas de doble uso, auditables como texto plano"
+    },
+    {
+      "nombre": "Python · Decimal",
+      "papel": "la aritmética fiscal con redondeo explícito; float queda prohibido en toda cadena que aterrice en una cifra fiscal"
+    },
+    {
+      "nombre": "DuckDB por Bash",
+      "papel": "agrega y cruza el ledger con DECIMAL nativo, por cédula, ámbito y categoría; sin MCP de por medio, por decisión D12"
+    },
+    {
+      "nombre": "poppler · pdftotext",
+      "papel": "extrae el texto de los formularios oficiales, que traen el AcroForm cifrado y devuelven cero campos por API"
+    },
+    {
+      "nombre": "Subagentes de Claude Code",
+      "papel": "investigación normativa y verificación del paquete en aislamiento, bajo el protocolo de análisis web del paquete"
+    }
+  ],
+  "cifras": [
+    {
+      "clave": "reglas_corpus",
+      "valor": 150,
+      "unidad": "reglas",
+      "etiqueta": "Reglas fiscales citables",
+      "fuente": "medido",
+      "detalle": "149 fichas tituladas contadas sobre contexto/normativa/ (39 renta persona natural, 39 estructura societaria, 30 Régimen Simple, 20 calendario y sanciones, 12 IVA e ICA, 9 retenciones) más R-RST-D01, la ficha de discrepancia que declara su ID en el cuerpo. Conteo del 2026-08-25, replicado el 2026-09-06 sobre los seis archivos."
+    },
+    {
+      "clave": "comandos",
+      "valor": 12,
+      "unidad": "comandos",
+      "etiqueta": "Comandos del harness",
+      "fuente": "medido",
+      "detalle": "Filas de la tabla Comandos del CLAUDE.md del paquete: registrar, cargar, anclar saldo, estado fiscal, optimizar, simular, estructura, cumplimiento, dossier contador, redactar, vigilancia normativa y cerrar corrida. Ninguno se ha corrido con datos reales todavía: el gemelo está vacío."
+    },
+    {
+      "clave": "gates",
+      "valor": 5,
+      "unidad": "gates",
+      "etiqueta": "Gates con token exacto",
+      "fuente": "medido",
+      "detalle": "Tabla de Gates del CLAUDE.md: adopción fiscal, liberación de borrador, deriva anómala, absorción normativa y entorno. Los tres primeros son gates humanos: no protegen al sistema de un error técnico, protegen al usuario de delegar una decisión que es suya."
+    },
+    {
+      "clave": "decisiones_registradas",
+      "valor": 17,
+      "unidad": "ADR",
+      "etiqueta": "Decisiones de arquitectura",
+      "fuente": "medido",
+      "detalle": "Encabezados D1 a D17 contados en arquitectura/DECISIONES.md. Cada uno registra qué se decidió y qué se perdió al decidirlo: corpus determinista en vez de base vectorial, Decimal en vez de float, vigilancia con gate en vez de actualización automática."
+    },
+    {
+      "clave": "reduccion_tiempo_base",
+      "valor": 50,
+      "unidad": "%",
+      "etiqueta": "Reducción de tiempo propio, escenario base",
+      "fuente": "estimacion",
+      "detalle": "Escenario base de arquitectura/roi.json sobre un insumo declarado por el usuario en el intake. El modelo está abierto, no cerrado: el parámetro dominante —qué fracción del tiempo es realmente automatizable— aún no se mide, y el ahorro fiscal directo, probablemente el componente mayor, no se estima por falta de datos reales en el gemelo."
+    }
+  ],
+  "bloques": [
+    {
+      "orden": 1,
+      "nombre": "Corpus normativo con procedencia",
+      "linea": "Seis archivos de fichas con artículo, fuente, vigencia y confianza declarada por regla.",
+      "cuenta": 6
+    },
+    {
+      "orden": 2,
+      "nombre": "Cápsulas de trampas",
+      "linea": "Casos borde, fuentes que publican norma ya tumbada y errores de operación que cuestan dinero.",
+      "cuenta": 3
+    },
+    {
+      "orden": 3,
+      "nombre": "El gemelo de tus finanzas",
+      "linea": "Tres CSV en tu disco: movimientos append-only, saldos anclados y reglas de doble uso.",
+      "cuenta": 3
+    },
+    {
+      "orden": 4,
+      "nombre": "Ingesta sin conectar el banco",
+      "linea": "Dictado, plantilla o soporte: registrar, cargar y anclar saldo, siempre con tu confirmación.",
+      "cuenta": 3
+    },
+    {
+      "orden": 5,
+      "nombre": "Cálculo y planeación",
+      "linea": "Impuesto a la fecha, palancas ordenadas, simulaciones en sandbox y comparación de estructuras.",
+      "cuenta": 4
+    },
+    {
+      "orden": 6,
+      "nombre": "Cumplimiento y dossier",
+      "linea": "Qué vence, con qué formulario, qué falta — y el paquete anual que recibe el contador.",
+      "cuenta": 2
+    },
+    {
+      "orden": 7,
+      "nombre": "Comunicaciones",
+      "linea": "Correos, cartas y resúmenes ejecutivos que traducen un resultado ya calculado.",
+      "cuenta": 1
+    },
+    {
+      "orden": 8,
+      "nombre": "Vigilancia normativa",
+      "linea": "Barrido de cambios de norma que propone absorciones y espera tu aprobación.",
+      "cuenta": 1
+    },
+    {
+      "orden": 9,
+      "nombre": "Memoria y defensa",
+      "linea": "Estado, ADR fiscales, lecciones y bitácora de vigilancia: el respaldo ante una fiscalización.",
+      "cuenta": 4
+    }
+  ],
+  "proceso": {
+    "titulo": "Una corrida: de la pregunta a la decisión adoptada",
+    "carriles": [
+      {
+        "id": "usuario",
+        "nombre": "Tú · dueño de los datos"
+      },
+      {
+        "id": "agente",
+        "nombre": "experto-fiscal · en Claude Code"
+      },
+      {
+        "id": "motor",
+        "nombre": "Cálculo determinista"
+      },
+      {
+        "id": "contador",
+        "nombre": "Tu contador"
+      }
+    ],
+    "pasos": [
+      {
+        "id": "ini",
+        "tipo": "inicio",
+        "carril": "usuario",
+        "texto": "Abre una corrida"
+      },
+      {
+        "id": "situar",
+        "tipo": "tarea",
+        "carril": "agente",
+        "texto": "Lee el estado y dice qué vence pronto"
+      },
+      {
+        "id": "propone",
+        "tipo": "tarea",
+        "carril": "agente",
+        "texto": "Propone el asiento ya clasificado"
+      },
+      {
+        "id": "confirma",
+        "tipo": "tarea",
+        "carril": "usuario",
+        "texto": "Confirma cada asiento del ledger"
+      },
+      {
+        "id": "reglas",
+        "tipo": "tarea",
+        "carril": "agente",
+        "texto": "Elige las fichas del corpus que aplican"
+      },
+      {
+        "id": "firme",
+        "tipo": "decision",
+        "carril": "agente",
+        "texto": "¿Firme?"
+      },
+      {
+        "id": "vacio",
+        "tipo": "tarea",
+        "carril": "agente",
+        "texto": "Declara el vacío y no calcula esa rama"
+      },
+      {
+        "id": "calcula",
+        "tipo": "tarea",
+        "carril": "motor",
+        "texto": "Calcula las dos ramas con Decimal"
+      },
+      {
+        "id": "explica",
+        "tipo": "tarea",
+        "carril": "agente",
+        "texto": "Cita regla, supuestos y sensibilidad"
+      },
+      {
+        "id": "adopta",
+        "tipo": "decision",
+        "carril": "usuario",
+        "texto": "¿Adopta?"
+      },
+      {
+        "id": "registra",
+        "tipo": "tarea",
+        "carril": "agente",
+        "texto": "Asienta el ADR fiscal con su versión"
+      },
+      {
+        "id": "borrador",
+        "tipo": "tarea",
+        "carril": "agente",
+        "texto": "Arma el borrador y el checklist"
+      },
+      {
+        "id": "revisa",
+        "tipo": "tarea",
+        "carril": "contador",
+        "texto": "Revisa antes de que se presente"
+      },
+      {
+        "id": "cierra",
+        "tipo": "tarea",
+        "carril": "agente",
+        "texto": "Escribe la lección y actualiza el estado"
+      },
+      {
+        "id": "fin",
+        "tipo": "fin",
+        "carril": "usuario",
+        "texto": ""
+      }
+    ],
+    "flujos": [
+      {
+        "de": "ini",
+        "a": "situar"
+      },
+      {
+        "de": "situar",
+        "a": "propone"
+      },
+      {
+        "de": "propone",
+        "a": "confirma"
+      },
+      {
+        "de": "confirma",
+        "a": "reglas"
+      },
+      {
+        "de": "reglas",
+        "a": "firme"
+      },
+      {
+        "de": "firme",
+        "a": "calcula",
+        "etiqueta": "sí"
+      },
+      {
+        "de": "firme",
+        "a": "vacio",
+        "etiqueta": "no · declara vacío"
+      },
+      {
+        "de": "vacio",
+        "a": "explica"
+      },
+      {
+        "de": "calcula",
+        "a": "explica"
+      },
+      {
+        "de": "explica",
+        "a": "adopta"
+      },
+      {
+        "de": "adopta",
+        "a": "registra",
+        "etiqueta": "sí · con token"
+      },
+      {
+        "de": "adopta",
+        "a": "reglas",
+        "etiqueta": "no · otra palanca"
+      },
+      {
+        "de": "registra",
+        "a": "borrador"
+      },
+      {
+        "de": "borrador",
+        "a": "revisa"
+      },
+      {
+        "de": "revisa",
+        "a": "cierra"
+      },
+      {
+        "de": "cierra",
+        "a": "fin"
+      }
+    ],
+    "anotaciones": [
+      {
+        "paso": "confirma",
+        "texto": "El ledger es append-only: un asiento no se edita ni se borra, se corrige con un contra-asiento que apunta al original."
+      },
+      {
+        "paso": "vacio",
+        "texto": "Regla en discrepancia, confianza baja o sin verificar: esa rama no se ejecuta. Un «no sé» explicado vale más que un número plausible."
+      },
+      {
+        "paso": "calcula",
+        "texto": "Decimal y DECIMAL, nunca float: un resultado sellado con la versión del corpus debe reproducirse idéntico meses después."
+      },
+      {
+        "paso": "adopta",
+        "texto": "El gate exige el token exacto y la aprobación es por decisión, nunca por sesión: nada se asienta antes."
+      },
+      {
+        "paso": "borrador",
+        "texto": "Sale marcado «BORRADOR — no presentado» hasta que tú lo liberas con el token de su gate."
+      },
+      {
+        "paso": "cierra",
+        "texto": "Ninguna corrida cierra sin su entrada de lecciones: es el único mecanismo por el que el método mejora."
+      }
+    ]
+  },
+  "procedencia_proceso": "app",
+  "limites": [
+    "Cubre Colombia y la DIAN, nada más: multi-jurisdicción queda declarada como extensión con disparador, no prometida.",
+    "Sirve a un solo usuario: sin multiusuario, sin sincronización, sin servidor y sin privacidad que negociar con nadie.",
+    "No estima el ahorro fiscal directo: depende de cifras que aún no están en el gemelo, y ponerle número hoy sería inventarlo.",
+    "No diligencia formularios: entrega la cifra que va en la casilla con su regla, no un PDF lleno ni una presentación validada."
+  ],
+  "nunca": [
+    "Presenta ante la DIAN: produce borradores y checklists; presentar es un acto personal del contribuyente.",
+    "Saca una cifra fiscal de la memoria del modelo: sale del corpus o no sale, y si falta lo dice y se detiene.",
+    "Emite una sugerencia sin su regla citada, sus supuestos y su sensibilidad.",
+    "Conecta cuentas bancarias por API, ni ordena ni ejecuta inversiones: solo simula el impacto fiscal.",
+    "Absorbe un cambio de norma por su cuenta: la vigilancia detecta, presenta la fuente y espera aprobación humana."
+  ],
+  "hitos": [
+    {
+      "valor": "corrida 0",
+      "etiqueta": "ciclo"
+    },
+    {
+      "valor": "1",
+      "etiqueta": "work-items cerrados"
+    },
+    {
+      "valor": "2026-08-25",
+      "etiqueta": "verificado"
+    },
+    {
+      "valor": "v1.0.0",
+      "etiqueta": "version"
+    },
+    {
+      "valor": "17",
+      "etiqueta": "decisiones registradas"
+    }
+  ]
+}

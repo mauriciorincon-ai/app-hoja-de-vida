@@ -147,28 +147,71 @@ e inglés. Quien la visita puede pedir acceso a tus apps y la solicitud te llega
   roadmap. Una app sin `brochure:` simplemente no tiene página (su URL da 404).
 - **Analítica:** evento `brochure_vista` (con la app y el idioma).
 
-### La vitrina: cuatro frentes · desde Sprint 005 · reorganizada 2026-09-05
+### La vitrina: cuatro frentes · desde Sprint 005 · los cuatro abiertos desde Sprint 007
 
 - **Qué hace:** `/es/vitrina` es el **portal** de lo que se construye aquí, repartido en
   **cuatro frentes**, cada uno con su caja —nombre, una frase, su estado y cuántas piezas tiene—
-  y **cada uno con su propio espacio**:
-  - **Apps** (`/es/vitrina/apps`): el escaparate de las seis apps hermanas. Abierto.
+  y **cada uno con su propio espacio**. Desde el Sprint 007 **los cuatro tienen piezas reales**:
+  - **Apps** (`/es/vitrina/apps`): las seis apps hermanas. **6 piezas.**
   - **Agentes especializados** (`/es/vitrina/agentes`): agentes sin interfaz que se manejan por
-    comandos. En preparación.
+    comandos. **13 piezas.**
   - **Investigaciones** (`/es/vitrina/investigaciones`): líneas de investigación ya validadas.
-    En preparación.
+    **7 piezas.**
   - **Tableros de datos** (`/es/vitrina/tableros`): tableros analíticos, sin atarse a una
-    herramienta. En preparación.
+    herramienta. **6 piezas.**
 - **Un frente «en preparación» tiene página igual:** dice qué es, en qué punto está y ofrece la
-  lista de espera, **sin fecha prometida**. Marca el inicio; no lo disfraza. Cuando tenga piezas,
-  se le construye su escaparate (como el de las apps) en su propio sprint.
+  lista de espera, **sin fecha prometida**. Marca el inicio; no lo disfraza. Hoy **ningún frente
+  está así** — esa página espera al próximo frente que declares.
 - **Cómo cambiar el nombre, la intro o el estado de un frente (cero código):** edita
   `data/vitrina.yaml` y haz push. Cada frente lleva `nombre`, `intro` (la frase de su caja) y
   `detalle` (el párrafo de su página), en ES y EN. El orden del archivo es el orden del portal.
-  - **Ojo con `estado`:** solo puede ser `abierta` un frente que ya tenga con qué mostrar piezas
-    — hoy, solo `apps`. Si marcas otro como abierto, **la publicación falla** y el error dice cuál.
-  - La **cuenta de piezas** no se escribe: la de apps sale de los archivos de
-    `content/vitrina/`; la de un frente en preparación es cero.
+  - **Ojo con `estado`:** solo puede ser `abierta` un frente que **ya tenga piezas publicadas**.
+    Si marcas como abierto uno vacío, **la publicación falla**, el error dice cuál es y lista los
+    frentes que sí tienen piezas hoy.
+  - La **cuenta de piezas nunca se escribe a mano:** se cuenta sola. La de apps sale de
+    `content/vitrina/`; la de los demás frentes, de los archivos de `content/<frente>/`.
+
+#### Las piezas que no son apps · desde Sprint 007
+
+- **Qué hace:** cada frente distinto de apps tiene su **escaparate** (`/es/vitrina/agentes`) con
+  una tarjeta por pieza, y cada pieza su **ficha técnica** en `/es/vitrina/<frente>/<pieza>`. Es
+  **la misma ficha** que la de una app: mismos bloques, misma tipografía, mismos chips. Lo único
+  que cambia es que estas piezas **no tienen «ficha completa»** — su detalle vive en la casa que
+  las construyó, no aquí.
+- **La tarjeta del escaparate** enseña: el estado (sellada / sin sellar) y el ciclo, el nombre, la
+  frase de la pieza, su **titular de valor** y sus **tres primeras cifras** con su procedencia. Si
+  la pieza trae capturas, la primera va arriba como **portada**.
+- **El orden no se elige:** las piezas **selladas** van primero y dentro de cada grupo el orden es
+  alfabético. Es estable: no cambia porque alguien toque un archivo.
+- **Lo que una pieza puede traer de más** (y una app no): **«Lo que dicen los datos»** —de 3 a 6
+  hallazgos, cada uno con su cifra y su procedencia— y **«Cómo se ve»** —de 1 a 12 capturas de la
+  pieza corriendo—. Son opcionales: si la pieza no las trae, esas secciones **no aparecen** y las
+  demás **se renumeran seguidas**, sin dejar un hueco. Por eso la ficha de una app va del 01 al
+  05, la de una investigación del 01 al 04 y la de un tablero del 01 al 06.
+- **Lo que la app nunca inventa:** si una pieza declara sus bloques **sin cuenta de
+  funcionalidades** (una investigación tiene aportes, no funciones), la ficha **calla el número**
+  en vez de escribir «0 funcionalidades».
+
+#### Cómo publicar una pieza nueva (sin sprint, sin código)
+
+1. **Quien construyó la pieza produce su ficha** siguiendo `docs/contrato-ficha-tecnica/`
+   (empieza por `CLAVE-VISUAL.md`). Es un JSON; nunca HTML. Contrato vigente: **v1.3.1**.
+2. **Se deja caer el archivo** en `content/<frente>/<slug>.ficha-tecnica.json`. El nombre del
+   archivo **tiene que ser el slug** de la pieza, y la carpeta, su frente.
+3. **Si trae capturas**, van a `public/piezas/<frente>/` respetando la ruta que el campo
+   `galeria[].archivo` declara. Si falta una sola, **la publicación falla** y el error dice qué
+   ficha la pedía y qué archivo no está.
+4. **Se abre un PR de contenido** (sin sprint). La CI valida el contrato, que no haya enlaces ni
+   DOI, que el slug no choque con ninguna otra pieza, la accesibilidad y las pruebas de extremo a
+   extremo. Al mergear, el escaparate, la cuenta del portal, el sitemap y las pruebas la recogen
+   solos.
+5. **Si el frente todavía no estaba abierto**, se marca `abierta` en `data/vitrina.yaml` en ese
+   mismo PR — ya tiene con qué.
+
+> **Estas fichas NO se editan aquí, ni para que quepan.** Si una trae un dato mal o no valida, el
+> error dice **archivo y campo**, y la corrección se hace **en el repositorio que la produjo**. Si
+> varias no caben por una razón legítima del frente, lo que crece es **el contrato** (así nació la
+> v1.3.0 con las conclusiones y la galería de los tableros), nunca se recorta la ficha.
 
 #### Las apps dentro de la vitrina · dos capas desde 2026-09-05
 
@@ -197,7 +240,8 @@ e inglés. Quien la visita puede pedir acceso a tus apps y la solicitud te llega
   existe en el export), **la publicación falla** y el error dice qué y dónde.
 - **Para que otra casa produzca fichas técnicas** (investigaciones, agentes, tableros): el
   paquete de entrega está en `docs/contrato-ficha-tecnica/` — empieza por `CLAVE-VISUAL.md`.
-  Entregan un JSON; CV Viva lo pinta. Nunca HTML.
+  Entregan un JSON; CV Viva lo pinta. Nunca HTML. Contrato vigente: **v1.3.1** (ver «Cómo
+  publicar una pieza nueva», arriba).
 - **De dónde sale el contenido:** de un archivo por app en `content/vitrina/`, llamado
   `<app>.brochure-export.json`. Lo genera **cada app hermana**, no esta.
 - **Cómo agregar o actualizar una app (cero código):** dejas caer su `brochure-export.json` en
@@ -347,3 +391,4 @@ carrera con un comentario que dice qué escribir en cada una.
 | 003    | El chat que responde por ti: RAG con citas navegables, proveedor conmutable por env (Groq inicial), off-topic sin tokens, fallback local que nunca muere, kill-switch, y la historia (`data/historia/`) como corpus incremental con guía de alimentación.                                                                |
 | 004    | Roadmap con votación anónima (contador real o "no disponible", dedup por navegador, cero PII), página brochure animada por app real, y menú en móvil. Cierre del ciclo H1: el MVP funcional queda completo.                                                                                                              |
 | 005    | La vitrina: escaparate de las seis apps hermanas y **una página propia por app**, alimentadas por los `brochure-export.json` que cada app genera; tarjetas que se abren al llegar leyendo; capturas de las apps reales repintadas con la paleta de esta página; cero enlaces y CTA de lista de espera. Abre el ciclo H2. |
+| 007    | Las estanterías: los cuatro frentes de la vitrina abiertos con piezas reales (6 apps · 13 agentes · 7 investigaciones · 6 tableros). Un escaparate por frente y una ficha por pieza, con el mismo renderizador de las apps; las fichas las produce quien construye cada pieza y llegan por PR de contenido. Contrato v1.3.0: los tableros añaden «Lo que dicen los datos» y «Cómo se ve» (galería de capturas), opcionales y con renumeración automática. |

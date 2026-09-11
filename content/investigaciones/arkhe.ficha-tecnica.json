@@ -1,0 +1,154 @@
+{
+  "schema_version": "1.1.0",
+  "actualizado": "2026-09-06",
+  "pieza": {
+    "slug": "arkhe",
+    "nombre": "ARKHÉ: un ecosistema declarativo de conocimiento de proceso",
+    "frente": "investigaciones",
+    "estado": "inicial",
+    "ciclo": "Producción 2.º",
+    "version": "origen v1.1",
+    "sellado_en": null,
+    "sprints_cerrados": 0
+  },
+  "promesa": {
+    "tagline": "Una persona con criterio fabrica sistemas que antes exigían un equipo.",
+    "para_quien": "Para quien construye con inteligencia artificial y arranca cada proyecto en frío: lo aprendido en el anterior murió con él, los mismos errores vuelven, se gastan recursos en re-explicar lo sabido y las piezas valiosas de un proyecto no se hablan con las del siguiente. Lo que existe reutiliza código o texto; nada reutiliza conocimiento de proceso ni aprende de sus propias instancias.",
+    "intro": "Los sistemas de trabajo no se construyen desde cero: se instancian desde contratos declarativos indexados — roles, reglas, evidencia — que se reutilizan como moldes, evolucionan y devuelven lo aprendido al núcleo. Opera desde hace meses en dominios sin relación. El paper publica los conceptos que lo sustentan y cómo, unidos, producen lo que ninguno da solo: ingredientes, no receta."
+  },
+  "titular": "Ningún ecosistema publicado reúne las tres condiciones en lectura estricta — de 36 en lectura generosa, ninguno produce sistemas en más de un dominio — y la evidencia de un individuo fabricando sistemas completos con IA es 8 de 400.",
+  "stack": [
+    {
+      "nombre": "Contratos declarativos indexados",
+      "papel": "cada sistema declara sus roles, reglas y evidencia; el índice permite instanciar en vez de construir"
+    },
+    {
+      "nombre": "Bucle de aprendizaje al núcleo",
+      "papel": "lo aprendido en cada instancia vuelve al que planea: el ecosistema mejora aunque ninguna pieza lo haga sola"
+    },
+    {
+      "nombre": "Reutilización de moldes, no de piezas",
+      "papel": "lo que viaja entre sistemas es el rol y la estructura, no el texto — medido en 980 coincidencias de rol con cuerpos distintos"
+    },
+    {
+      "nombre": "Registros inspeccionables",
+      "papel": "horas medidas por sellos de tiempo de cada paper producido: la evidencia que no es la palabra del autor"
+    },
+    {
+      "nombre": "Gobernanza declarada y verificable",
+      "papel": "compuertas de aprobación, registros y trazabilidad: lo que sí se puede mostrar, en vez de adjetivos"
+    },
+    {
+      "nombre": "Frontera de divulgación como contrato",
+      "papel": "se publica la composición y los impactos, no la formulación: ingredientes, no receta"
+    }
+  ],
+  "cifras": [
+    {
+      "clave": "obras_verificadas",
+      "valor": 1405,
+      "unidad": "obras",
+      "etiqueta": "Obras verificadas una a una para validar el tema",
+      "fuente": "medido",
+      "detalle": "Paper de validación teórica: 28 consultas en seis familias y tres idiomas; 5.674 tamizados; 120 preprints bajo etiqueta."
+    },
+    {
+      "clave": "ecosistemas_equivalentes",
+      "valor": 0,
+      "unidad": "obras",
+      "etiqueta": "Ecosistemas con las tres condiciones, lectura estricta",
+      "fuente": "medido",
+      "detalle": "Sobre 36 obras que las cumplen en lectura generosa (500 revisados): una declara conocimiento de proceso de lo que produce, ninguna en más de un dominio."
+    },
+    {
+      "clave": "individuo_sistema_completo",
+      "valor": 8,
+      "unidad": "obras",
+      "etiqueta": "Individuos que fabrican un sistema completo con IA",
+      "fuente": "medido",
+      "detalle": "Sobre 400 registros revisados; la evidencia fuerte está en tareas pequeñas (440 obras). Por eso pesan los registros del programa."
+    },
+    {
+      "clave": "horas_cinco_papers",
+      "valor": 33.27,
+      "unidad": "horas",
+      "etiqueta": "Horas medidas en los cinco papers producidos con ARKHÉ",
+      "fuente": "medido",
+      "detalle": "Suma de los registros por sellos de tiempo del programa: 11,10 · 4,92 · 4,17 · 5,91 · 7,16 — publicables con su autoalojamiento declarado."
+    },
+    {
+      "clave": "conceptos_citables",
+      "valor": 6,
+      "unidad": "de 9",
+      "etiqueta": "Conceptos citables con literatura revisada por su término",
+      "fuente": "medido",
+      "detalle": "Auditoría concepto por concepto: seis con literatura revisada, uno solo como preprint, dos términos de práctica anclados a su vecino establecido."
+    }
+  ],
+  "bloques": [
+    {
+      "orden": 1,
+      "nombre": "Dos mecanismos evaluados",
+      "linea": "Sellada: reutilizar piezas y contratos sin edición, refutados — reutiliza moldes y sus contratos evolucionan.",
+      "cuenta": 1
+    },
+    {
+      "orden": 2,
+      "nombre": "La arquitectura conceptual",
+      "linea": "Seleccionada, sale primero: cada componente por la función que cumple en el conjunto, y el cierre por mecanismo.",
+      "cuenta": 0
+    },
+    {
+      "orden": 3,
+      "nombre": "La evidencia que no es mi palabra",
+      "linea": "Seleccionada, arranca hoy: libro de horas de cada construcción, con clase y techo declarados antes.",
+      "cuenta": 0
+    },
+    {
+      "orden": 4,
+      "nombre": "Recepción y consumo",
+      "linea": "Pre-registrada: umbrales de descargas, usos y citas fijados antes de la presentación pública; cuenta, no interpreta.",
+      "cuenta": 0
+    },
+    {
+      "orden": 5,
+      "nombre": "FORJA como caso demostrativo",
+      "linea": "La visión del compilador entra dentro de esta sombrilla: el método de especificación como núcleo arquitectónico.",
+      "cuenta": 0
+    }
+  ],
+  "limites": [
+    "Publica ingredientes, no receta: qué componentes, qué principios y qué impactos — no cómo interactúan adentro.",
+    "Un ecosistema, un operador: nadie más lo opera; el éxito es consumo de sus productos y recepción del paper.",
+    "La evidencia de velocidad es del propio programa que el ecosistema produce: autoalojamiento declarado, mitigado con registros inspeccionables."
+  ],
+  "nunca": [
+    "Describe la mecánica interna del ecosistema: la frontera es también comercial.",
+    "Afirma un valor no medido ni un concepto sin auditar: la lista de fundamentos se filtra, no se transcribe.",
+    "Re-evalúa los mecanismos refutados: son conocimiento de diseño.",
+    "Afirma una cifra sin fuente ni un vacío sin el número de obras revisadas.",
+    "Mueve una vara después de ver el resultado."
+  ],
+  "hitos": [
+    {
+      "valor": "2026-09-05",
+      "etiqueta": "validada contra literatura"
+    },
+    {
+      "valor": "7 de 7",
+      "etiqueta": "criterios cumplidos"
+    },
+    {
+      "valor": "1",
+      "etiqueta": "paper sellado (mecanismos)"
+    },
+    {
+      "valor": "2.º",
+      "etiqueta": "turno en la cola"
+    },
+    {
+      "valor": "origen v1.1",
+      "etiqueta": "version"
+    }
+  ]
+}

@@ -1,0 +1,395 @@
+{
+  "schema_version": "1.1.0",
+  "actualizado": "2026-09-06",
+  "pieza": {
+    "slug": "constructor-tableros-powerbi",
+    "nombre": "Constructor de Tableros Power BI",
+    "frente": "agentes",
+    "estado": "sellado",
+    "ciclo": "Fase 4",
+    "version": "1.1.0",
+    "sellado_en": "2026-06-30",
+    "sprints_cerrados": 0
+  },
+  "promesa": {
+    "tagline": "De un texto de requerimientos a un tablero que ya pasó su prueba.",
+    "intro": "Le entrega dos cosas: los requerimientos en texto y un proyecto con las tablas. El harness diagnostica el modelo, propone la lista de medidas, columnas y relaciones para que la apruebe, la crea por el MCP probando cada medida, y después escribe el reporte entero en el formato nativo. Él revisa el render y aprueba el refresh; lo aprendido queda escrito para la corrida siguiente.",
+    "para_quien": "Para quien construye tableros de Power BI por encargo y hoy los arma a mano: leer el requerimiento, inventar las medidas DAX, arrastrar cada visual, y repetirlo en el tablero siguiente sin que lo aprendido quede en ninguna parte. Cada tablero le cuesta del orden de treinta y dos horas, y el ritmo que quisiera sostener es de tres al mes."
+  },
+  "titular": "Escribe el reporte en el JSON nativo de Power BI con una skill propia, sin CLI ni ecosistema Fabric, y nunca toca el modelo a mano: eso es del MCP. Ninguna corrida cierra sin DAX en verde, validador limpio y render aprobado por una persona.",
+  "stack": [
+    {
+      "nombre": "Claude Code",
+      "papel": "el runtime del harness: auto-carga sus reglas, descubre la skill de autoría y declara el servidor de modelado; corre nativo en Windows, sin sandbox"
+    },
+    {
+      "nombre": "powerbi-modeling-mcp",
+      "papel": "dueño único del modelo semántico: inspección en vivo, relaciones, columnas, medidas DAX, RLS y ejecución de consultas de validación"
+    },
+    {
+      "nombre": "Skill propia autoria-pbir",
+      "papel": "dueña única del reporte: escribe a mano el JSON de páginas, visuales, filtros y tema, con once referencias por tipo de visual y un tema base"
+    },
+    {
+      "nombre": "validate_pbir.py",
+      "papel": "validador local del reporte en dos capas: estructural con librería estándar, siempre; y schemas oficiales cuando hay red"
+    },
+    {
+      "nombre": "DAX (EVALUATE)",
+      "papel": "el lenguaje de las medidas y, a la vez, la prueba binaria: una medida que no devuelve resultado no pasa de fase"
+    },
+    {
+      "nombre": "PBIP y PBIR",
+      "papel": "el formato de entrega: proyecto en carpeta con modelo y reporte separados, versionable en git en vez de un binario opaco"
+    },
+    {
+      "nombre": "Power BI Desktop",
+      "papel": "la sesión viva que el MCP necesita y el único lugar donde se confirma el render, a ojo humano"
+    },
+    {
+      "nombre": "Markdown con frontmatter",
+      "papel": "el formato de contexto, cápsulas, memoria y documentos de corrida; todo lo que el agente lee y deja escrito"
+    }
+  ],
+  "cifras": [
+    {
+      "clave": "criterios_binarios",
+      "valor": 20,
+      "etiqueta": "Criterios binarios de aceptación",
+      "fuente": "medido",
+      "detalle": "Contados con grep sobre las casillas de entrega/work-items/work-items.md (20) y sobre la sección de criterios por work-item de verificacion.md (20): la misma lista en los dos documentos, repartida entre los ocho work-items WI-01 a WI-08."
+    },
+    {
+      "clave": "gates_humanos",
+      "valor": 5,
+      "etiqueta": "Gates de aprobación humana",
+      "fuente": "medido",
+      "detalle": "Filas de la tabla «Requiere aprobación» de gobernanza.md: G1 diseño del modelo, G2 ajustes visuales, G3 refresh contra datos reales, G4 override de alcance o rigor, G5 publicación (diferida). Tres de ellos, G1 a G3, se atraviesan en cada corrida."
+    },
+    {
+      "clave": "tableros_construidos",
+      "valor": 1,
+      "etiqueta": "Tableros construidos",
+      "fuente": "medido",
+      "detalle": "Subcarpetas con un proyecto .pbip bajo tableros/: una, higiene-de-manos, con sus insumos originales y siete documentos de corrida (01-diagnostico a 07-cobertura-requerimientos) versionados junto al tablero."
+    },
+    {
+      "clave": "catalogo_diseno",
+      "valor": 33,
+      "etiqueta": "Dashboards de referencia",
+      "fuente": "medido",
+      "detalle": "Archivos PNG en referencias-diseno/catalogo/ (Dashboard 01 a Dashboard 33), contados con ls, indexados de forma agnóstica del tema en referencias-diseno/INDICE.md. Son el norte de diseño cuando el encargo no trae preferencia visual."
+    },
+    {
+      "clave": "horas_liberadas_anio_base",
+      "valor": 691.2,
+      "unidad": "h/año",
+      "etiqueta": "Horas liberadas al año, escenario base",
+      "fuente": "estimacion",
+      "detalle": "Escenario base de roi.json: 32 horas manuales por tablero, 60 por ciento de reducción (19,2 h por tablero) y 36 tableros al año. Volumen y tiempo manual tienen confianza media; ninguna corrida está cronometrada todavía contra la línea base."
+    }
+  ],
+  "bloques": [
+    {
+      "orden": 1,
+      "nombre": "El pipeline de seis fases",
+      "linea": "Intake, diagnóstico, diseño, backend, frontend y cierre. Una corrida, un tablero.",
+      "cuenta": 6
+    },
+    {
+      "orden": 2,
+      "nombre": "El modelo, por el MCP",
+      "linea": "Relaciones, columnas, medidas y RLS, cada una probada antes de seguir.",
+      "cuenta": 0
+    },
+    {
+      "orden": 3,
+      "nombre": "La skill de autoría del reporte",
+      "linea": "Once referencias por tipo de visual, un validador propio y un tema base.",
+      "cuenta": 11
+    },
+    {
+      "orden": 4,
+      "nombre": "Los gates de aprobación",
+      "linea": "Modelo, visuales, refresh, override y publicación: cinco puntos de freno.",
+      "cuenta": 5
+    },
+    {
+      "orden": 5,
+      "nombre": "Work-items con criterio binario",
+      "linea": "Ocho entregables y veinte casillas que se marcan o no se marcan.",
+      "cuenta": 8
+    },
+    {
+      "orden": 6,
+      "nombre": "Contexto y cápsulas de dominio",
+      "linea": "Cuatro capas de contexto y cuatro cápsulas: DAX, trampas del formato, archetypes, fallback.",
+      "cuenta": 8
+    },
+    {
+      "orden": 7,
+      "nombre": "La memoria entre corridas",
+      "linea": "Seis plantillas de corrida y una bitácora de patrones que se lee al empezar.",
+      "cuenta": 7
+    },
+    {
+      "orden": 8,
+      "nombre": "El catálogo de diseño",
+      "linea": "Treinta y tres tableros de referencia, indexados por archetype y audiencia.",
+      "cuenta": 33
+    },
+    {
+      "orden": 9,
+      "nombre": "Los tableros, versionados",
+      "linea": "Los proyectos viven en el repo: se crean y se mantienen, corrida a corrida.",
+      "cuenta": 1
+    }
+  ],
+  "proceso": {
+    "titulo": "Una corrida: de los requerimientos al tablero cerrado",
+    "carriles": [
+      {
+        "id": "autor",
+        "nombre": "Autor · dueño del tablero"
+      },
+      {
+        "id": "agente",
+        "nombre": "El agente en Claude Code"
+      },
+      {
+        "id": "mcp",
+        "nombre": "MCP de modelado · Desktop"
+      },
+      {
+        "id": "val",
+        "nombre": "Validador del reporte"
+      }
+    ],
+    "pasos": [
+      {
+        "id": "ini",
+        "tipo": "inicio",
+        "carril": "autor",
+        "texto": "Requerimientos y proyecto con tablas"
+      },
+      {
+        "id": "intake",
+        "tipo": "tarea",
+        "carril": "agente",
+        "texto": "Inventaria insumos y tablas conectadas"
+      },
+      {
+        "id": "diag",
+        "tipo": "tarea",
+        "carril": "mcp",
+        "texto": "Inspecciona el modelo vivo y muestrea el dato"
+      },
+      {
+        "id": "brecha",
+        "tipo": "tarea",
+        "carril": "agente",
+        "texto": "Propone medidas, columnas y relaciones"
+      },
+      {
+        "id": "g1",
+        "tipo": "decision",
+        "carril": "autor",
+        "texto": "¿Aprueba?"
+      },
+      {
+        "id": "back",
+        "tipo": "tarea",
+        "carril": "mcp",
+        "texto": "Crea relaciones, columnas y medidas DAX"
+      },
+      {
+        "id": "dax",
+        "tipo": "decision",
+        "carril": "mcp",
+        "texto": "¿Pasa DAX?"
+      },
+      {
+        "id": "pbir",
+        "tipo": "tarea",
+        "carril": "agente",
+        "texto": "Escribe el reporte: páginas, visuales y tema"
+      },
+      {
+        "id": "valida",
+        "tipo": "decision",
+        "carril": "val",
+        "texto": "¿Valida?"
+      },
+      {
+        "id": "render",
+        "tipo": "tarea",
+        "carril": "autor",
+        "texto": "Abre Desktop y revisa cómo se ve"
+      },
+      {
+        "id": "g2",
+        "tipo": "decision",
+        "carril": "autor",
+        "texto": "¿Render OK?"
+      },
+      {
+        "id": "refresh",
+        "tipo": "tarea",
+        "carril": "autor",
+        "texto": "Refresca contra los datos reales"
+      },
+      {
+        "id": "memoria",
+        "tipo": "tarea",
+        "carril": "agente",
+        "texto": "Registra aprendizajes y cierra la corrida"
+      },
+      {
+        "id": "fin",
+        "tipo": "fin",
+        "carril": "autor",
+        "texto": ""
+      }
+    ],
+    "flujos": [
+      {
+        "de": "ini",
+        "a": "intake"
+      },
+      {
+        "de": "intake",
+        "a": "diag"
+      },
+      {
+        "de": "diag",
+        "a": "brecha"
+      },
+      {
+        "de": "brecha",
+        "a": "g1"
+      },
+      {
+        "de": "g1",
+        "a": "back",
+        "etiqueta": "sí"
+      },
+      {
+        "de": "g1",
+        "a": "brecha",
+        "etiqueta": "no · ajusta la lista"
+      },
+      {
+        "de": "back",
+        "a": "dax"
+      },
+      {
+        "de": "dax",
+        "a": "pbir",
+        "etiqueta": "sí"
+      },
+      {
+        "de": "dax",
+        "a": "back",
+        "etiqueta": "no · reintenta"
+      },
+      {
+        "de": "pbir",
+        "a": "valida"
+      },
+      {
+        "de": "valida",
+        "a": "render",
+        "etiqueta": "sí"
+      },
+      {
+        "de": "valida",
+        "a": "pbir",
+        "etiqueta": "no · corrige"
+      },
+      {
+        "de": "render",
+        "a": "g2"
+      },
+      {
+        "de": "g2",
+        "a": "refresh",
+        "etiqueta": "sí"
+      },
+      {
+        "de": "g2",
+        "a": "pbir",
+        "etiqueta": "no · rediseña"
+      },
+      {
+        "de": "refresh",
+        "a": "memoria"
+      },
+      {
+        "de": "memoria",
+        "a": "fin"
+      }
+    ],
+    "anotaciones": [
+      {
+        "paso": "diag",
+        "texto": "El diagnóstico muestrea el dato real y convierte los requerimientos en indicadores medibles antes de decidir un solo visual."
+      },
+      {
+        "paso": "g1",
+        "texto": "Nada se crea sin esa lista aprobada, y el modelo semántico no se edita a mano nunca: solo el MCP lo toca."
+      },
+      {
+        "paso": "dax",
+        "texto": "Cada medida se prueba contra el modelo vivo. Tres reintentos fallidos y la corrida se detiene y escala al autor."
+      },
+      {
+        "paso": "valida",
+        "texto": "El validador corre local: capa estructural siempre, capa de schemas oficiales cuando hay red. Sin errores, no hay render."
+      },
+      {
+        "paso": "render",
+        "texto": "No hay computer-use: cómo se ve lo confirma una persona en Power BI Desktop, y ese paso no se puede automatizar."
+      },
+      {
+        "paso": "memoria",
+        "texto": "Los aprendizajes quedan en la bitácora de patrones y se leen al abrir la corrida siguiente: no se reutilizan componentes, sino decisiones."
+      }
+    ]
+  },
+  "procedencia_proceso": "app",
+  "limites": [
+    "Construye desde cero: migrar un tablero entre fuentes de datos queda fuera de alcance, y será otro harness.",
+    "Entrega un proyecto local versionado en git; publicar al servicio en la nube está diferido y no forma parte del harness.",
+    "No ve la pantalla: sin computer-use, cómo se ve el tablero lo confirma una persona en Power BI Desktop.",
+    "El retorno es una estimación con supuestos declarados, no horas cronometradas: aún no hay corrida medida contra la línea base."
+  ],
+  "nunca": [
+    "Edita el modelo semántico a mano: relaciones, medidas, columnas y RLS pasan solo por el MCP de modelado.",
+    "Crea una medida, columna o relación antes de que su lista quede aprobada.",
+    "Declara cerrada una corrida sin DAX en verde, validador sin errores y render revisado.",
+    "Inventa cifras de valor: cada supuesto del retorno lleva su fuente y su nivel de confianza.",
+    "Traslada archivos con datos cacheados entre la máquina de empresa y la personal sin autorización."
+  ],
+  "hitos": [
+    {
+      "valor": "Fase 4",
+      "etiqueta": "ciclo"
+    },
+    {
+      "valor": "8",
+      "etiqueta": "work-items definidos"
+    },
+    {
+      "valor": "2026-06-30",
+      "etiqueta": "sellada"
+    },
+    {
+      "valor": "v1.1.0",
+      "etiqueta": "version"
+    },
+    {
+      "valor": "5",
+      "etiqueta": "decisiones registradas"
+    }
+  ]
+}

@@ -1,0 +1,150 @@
+{
+  "schema_version": "1.1.0",
+  "actualizado": "2026-09-06",
+  "pieza": {
+    "slug": "forja",
+    "nombre": "FORJA: del proceso dibujado al sistema que lo ejecuta",
+    "frente": "investigaciones",
+    "estado": "inicial",
+    "ciclo": "Producción 1.º",
+    "version": "origen v1.1",
+    "sellado_en": null,
+    "sprints_cerrados": 0
+  },
+  "promesa": {
+    "tagline": "El profesional dibuja su proceso; FORJA lo compila. Sin intermediarios.",
+    "para_quien": "Para el profesional que conoce su proceso y lo dibuja en el estándar gráfico de procesos — y luego espera semanas a que alguien lo traduzca a sistema, para descubrir que lo que corre no es lo que aprobó, y que cuando el proceso cambia el sistema se queda atrás. Hoy cada actividad la programa alguien; y las herramientas de IA generan flujos desde texto libre, sin contrato ni trazabilidad.",
+    "intro": "Un método para que el diagrama sea el programa: el profesional abre la caja negra de cada actividad — qué entra, qué hace, qué sale — y el compilador lo convierte en una orquestación de agentes de IA donde cada elemento traza a su realización y verificadores de distintas familias vigilan la conformidad. La trazabilidad se logra cuando el diagrama trae su especificación: esa es la hipótesis."
+  },
+  "titular": "De 279 obras revisadas, 53 se dirigen a no programadores y 40 producen un ejecutable, pero ninguna exige declarar por actividad entradas, función y salidas; y ninguna de 359 compila el proceso a agentes verificados con usuarios reales.",
+  "stack": [
+    {
+      "nombre": "Modelo de proceso como contrato",
+      "papel": "el diagrama estándar del profesional es la entrada que gobierna la compilación, no documentación ni insumo de un prompt"
+    },
+    {
+      "nombre": "Caja negra abierta por actividad",
+      "papel": "cada actividad declara entradas, función y salidas: la capa de especificación que hace computable la trazabilidad"
+    },
+    {
+      "nombre": "Compilación con mapa de realización",
+      "papel": "la salida es el flujo ejecutable más el mapa elemento→realización, artefacto de primera clase del compilador"
+    },
+    {
+      "nombre": "Verificación multi-modelo",
+      "papel": "la conformidad la juzgan verificadores independientes, no el compilador que la produjo"
+    },
+    {
+      "nombre": "Estudio con profesionales voluntarios",
+      "papel": "sin nombres, con consentimiento informado, reporte anonimizado — la primera vez que el programa recluta personas"
+    }
+  ],
+  "cifras": [
+    {
+      "clave": "exigen_declaracion",
+      "valor": 0,
+      "unidad": "obras",
+      "etiqueta": "Métodos que exigen declarar entradas, función y salidas",
+      "fuente": "medido",
+      "detalle": "Sobre 279 registros revisados: 53 dirigen el método a no programadores y 40 producen un ejecutable; 20 obras cumplen dos de tres condiciones del método, ninguna las tres."
+    },
+    {
+      "clave": "celda_reauditada",
+      "valor": 0,
+      "unidad": "obras",
+      "etiqueta": "Obras que compilan el modelo a agentes con usuarios reales",
+      "fuente": "medido",
+      "detalle": "Sobre 359 registros re-auditados con preprints admitidos y español; la base previa de 537 apunta igual."
+    },
+    {
+      "clave": "confianza_por_conformidad",
+      "valor": 10,
+      "unidad": "obras",
+      "etiqueta": "Obras sobre confianza por conformidad verificada visible",
+      "fuente": "medido",
+      "detalle": "Sobre 571 registros: la literatura la domina la explicabilidad del resultado, no la conformidad con lo especificado."
+    },
+    {
+      "clave": "estructura_conservada",
+      "valor": 99.5,
+      "unidad": "%",
+      "etiqueta": "Estructura conservada por el compilador en el paper sellado",
+      "fuente": "medido",
+      "detalle": "Un elemento de 204 quedó sin trazar — y estaba fuera del subconjunto especificado: el dato y la hipótesis apuntan al mismo lugar."
+    },
+    {
+      "clave": "horas_demostrador",
+      "valor": 1.12,
+      "unidad": "horas",
+      "etiqueta": "Horas de construcción del demostrador",
+      "fuente": "medido",
+      "detalle": "Libro de horas del artefacto, por sellos de tiempo: compilador, cinco procesos, línea base y compuertas de aprobación."
+    }
+  ],
+  "bloques": [
+    {
+      "orden": 1,
+      "nombre": "Tres afirmaciones evaluadas sin piedad",
+      "linea": "Sellada: conservación, detección diferencial y comparación con lenguaje natural, refutadas con varas fijadas antes.",
+      "cuenta": 1
+    },
+    {
+      "orden": 2,
+      "nombre": "El método de especificación",
+      "linea": "Seleccionada, nuclear: ¿una especificación que cumple el método compila con trazabilidad completa, y una que no, no?",
+      "cuenta": 0
+    },
+    {
+      "orden": 3,
+      "nombre": "El estudio con profesionales",
+      "linea": "Seleccionada, cierra el titular: ¿llegan a un proceso ejecutable, y confían porque ven la conformidad verificada?",
+      "cuenta": 0
+    },
+    {
+      "orden": 4,
+      "nombre": "La visión, dentro de ARKHÉ",
+      "linea": "Condicionada: entra como caso demostrativo del paper de arquitectura del ecosistema, o sale primero si aquel no existe.",
+      "cuenta": 0
+    },
+    {
+      "orden": 5,
+      "nombre": "El demostrador",
+      "linea": "Construido y registrado: compilador, cinco procesos, compuertas y línea base; horas medidas desde el primer registro.",
+      "cuenta": 0
+    }
+  ],
+  "limites": [
+    "Demuestra la suficiencia del método sin personas; que los profesionales lo usen se demuestra solo con profesionales.",
+    "El prototipo soporta un subconjunto del estándar de procesos; su cobertura se declara, no se supone.",
+    "La operación original en producción es motivación, jamás evidencia."
+  ],
+  "nunca": [
+    "Se presenta como reemplazo del programador: es el profesional automatizando lo suyo.",
+    "Afirma usabilidad por profesionales sin evidencia con profesionales.",
+    "Reformula las afirmaciones refutadas como si estuvieran vigentes: son conocimiento de diseño.",
+    "Usa datos de empleos anteriores del autor: solo fuentes públicas y datos sintéticos declarados.",
+    "Afirma una cifra sin fuente ni un vacío sin el número de obras revisadas."
+  ],
+  "hitos": [
+    {
+      "valor": "2026-09-05",
+      "etiqueta": "validada contra literatura"
+    },
+    {
+      "valor": "7 de 7",
+      "etiqueta": "criterios cumplidos"
+    },
+    {
+      "valor": "1",
+      "etiqueta": "paper sellado (evaluación)"
+    },
+    {
+      "valor": "1.º",
+      "etiqueta": "turno en la cola"
+    },
+    {
+      "valor": "origen v1.1",
+      "etiqueta": "version"
+    }
+  ]
+}

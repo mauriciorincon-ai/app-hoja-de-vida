@@ -1,0 +1,374 @@
+{
+  "schema_version": "1.1.0",
+  "actualizado": "2026-09-06",
+  "pieza": {
+    "slug": "hiring-copilot",
+    "nombre": "Hiring Copilot",
+    "frente": "agentes",
+    "estado": "inicial",
+    "ciclo": "WI-9",
+    "version": "1.1.0",
+    "sellado_en": null,
+    "sprints_cerrados": 1
+  },
+  "promesa": {
+    "tagline": "Ninguna afirmación sale de la memoria del modelo.",
+    "para_quien": "Para un profesional de inteligencia artificial que busca un rol de nivel medio-alto en Colombia o en Europa, con doce candidaturas por delante y quince días para empezar. Hoy rehace el currículum en cada oferta, escribe la carta desde cero, prepara la entrevista con lo que recuerda y no sabe qué canal le respondió la vez pasada: cada candidatura le cuesta unas cinco horas y empieza en blanco.",
+    "intro": "Su perfil se convierte una sola vez en un banco de logros con procedencia, y desde ahí sale todo: el análisis que descarta la oferta antes de gastarle horas, el currículum y la carta en dos idiomas, el gimnasio que entrena entrevista y código de verdad, y un pipeline que aprende qué canal responde. Él decide y él envía; el harness prepara, verifica y recuerda."
+  },
+  "titular": "Cada afirmación enviable enlaza un logro con su fuente y un programa lo comprueba: el bullet huérfano hace fallar el control. Y ningún control vale su verde sin su carnada, el caso destruido que demuestra que dispara.",
+  "stack": [
+    {
+      "nombre": "Claude Code",
+      "papel": "el runtime del asesor: doce comandos sobre ocho módulos, sin MCP en el núcleo y con todos los datos en el repositorio local"
+    },
+    {
+      "nombre": "Node 24",
+      "papel": "los nueve verificadores propios y sin dependencias: bullets huérfanos, texto oculto, puntaje sin duros, coherencia de recuentos"
+    },
+    {
+      "nombre": "Python 3.14 en entorno virtual",
+      "papel": "ingesta de PDF, pruebas y motor del gimnasio; el marcador PEP 668 del intérprete obliga al .venv, no es preferencia"
+    },
+    {
+      "nombre": "PuLP con HiGHS",
+      "papel": "resuelve el ejercicio de plan de estudio; CBC se declara disponible y no corre en esta máquina, así que el arranque prueba resolviendo"
+    },
+    {
+      "nombre": "pandoc",
+      "papel": "convierte el currículum de una columna a documento de texto, con plantilla de referencia extraída una sola vez"
+    },
+    {
+      "nombre": "Google Chrome sin interfaz",
+      "papel": "renderiza el currículum humano a PDF tamaño carta, etiquetado y con las tildes intactas al extraer el texto"
+    },
+    {
+      "nombre": "JSON Schema vendorizado",
+      "papel": "valida perfil, oferta y pipeline sin salir a la red: las definiciones viven dentro del paquete con su licencia"
+    },
+    {
+      "nombre": "Markdown con frontmatter",
+      "papel": "el banco de evidencia, las fichas de oferta y la memoria: una carpeta por candidatura que se lee sin herramientas"
+    }
+  ],
+  "cifras": [
+    {
+      "clave": "criterios_binarios",
+      "valor": 99,
+      "etiqueta": "Criterios binarios de aceptación",
+      "fuente": "medido",
+      "detalle": "Suma de las casillas de los doce work-items: contando las líneas de casilla en entrega/work-items/ dan 99. Hoy hay 16 cumplidas —las ocho de WI-6, la carnada de WI-7 y las siete de WI-9—, y pipeline/scripts/verificar-coherencia.mjs compara ese recuento contra el disco en cada corrida. El total cuenta las dos casillas, marcada y sin marcar, para que el paquete no encoja al avanzar."
+    },
+    {
+      "clave": "gates_humanos",
+      "valor": 6,
+      "etiqueta": "Gates humanos con token exacto",
+      "fuente": "medido",
+      "detalle": "Filas de la tabla de gates en el CLAUDE.md del paquete: banco aprobado, decisión de aplicar, mirada sobre el currículum, mirada sobre el tablero, pieza lista para enviar y regla nueva al método. Cada uno se abre con una frase exacta que él solo puede decir si de verdad hizo lo que el gate pide; «ok», «dale», «sigue» y «continúa» no abren ninguno."
+    },
+    {
+      "clave": "controles_con_carnada",
+      "valor": 8,
+      "etiqueta": "Controles con carnada, de nueve programas",
+      "fuente": "medido",
+      "detalle": "Tabla de verificadores en capacidades.md §3b, contrastada con pipeline/scripts/: nueve programas, ocho de ellos controles con su caso destruido en pipeline/scripts/carnadas/. El noveno, lib-esquema.mjs, es una librería y declara que no lleva carnada propia: las suyas son las de quienes la usan."
+    },
+    {
+      "clave": "costo_en_herramientas",
+      "valor": 0,
+      "unidad": "COP",
+      "etiqueta": "Costo en herramientas",
+      "fuente": "declarado",
+      "detalle": "Ficha del paquete en arquitectura/README.md: cero pesos, todo corre local. Sin conectores en el núcleo, sin servicios contratados y sin descargas en corrida, porque los esquemas se vendorizan dentro del paquete con su licencia."
+    },
+    {
+      "clave": "horas_ahorradas_base",
+      "valor": 34.8,
+      "unidad": "h",
+      "etiqueta": "Horas ahorradas, escenario base",
+      "fuente": "estimacion",
+      "detalle": "Escenario base de arquitectura/roi.json: 30 h ahorradas en doce candidaturas más 4,8 h en preparación de entrevistas. El porcentaje de ahorro no está medido: se estima y se corrige con la primera corrida real. El mismo archivo declara que no afirma mejora de la tasa de respuesta y que el delta salarial no se cuenta como retorno."
+    }
+  ],
+  "bloques": [
+    {
+      "orden": 1,
+      "nombre": "Perfil, fuente de verdad",
+      "linea": "Logros con cifra, período y procedencia. La única fuente de toda afirmación enviable.",
+      "cuenta": 1
+    },
+    {
+      "orden": 2,
+      "nombre": "Analizador de oferta",
+      "linea": "Eliminatorias primero, reglas de descarte después, y el puntaje siempre con los duros al lado.",
+      "cuenta": 1
+    },
+    {
+      "orden": 3,
+      "nombre": "Las piezas",
+      "linea": "Currículum humano y de una columna, carta y mensajes, en español e inglés, todo trazable.",
+      "cuenta": 3
+    },
+    {
+      "orden": 4,
+      "nombre": "El gimnasio",
+      "linea": "Entrevistas con rúbrica, seis ejercicios con sus dos direcciones y exámenes de sesenta preguntas.",
+      "cuenta": 3
+    },
+    {
+      "orden": 5,
+      "nombre": "Puente de habla",
+      "linea": "Brief hacia el agente externo de práctica oral e ingesta de su informe. No se reconstruye.",
+      "cuenta": 1
+    },
+    {
+      "orden": 6,
+      "nombre": "El pipeline",
+      "linea": "La memoria: estado, seguimientos, post-mortem y tasa por canal, con muestra mínima.",
+      "cuenta": 1
+    },
+    {
+      "orden": 7,
+      "nombre": "Negociación",
+      "linea": "Playbook aplicado: cinco momentos, rango reforzante y frase textual para cada uno.",
+      "cuenta": 1
+    },
+    {
+      "orden": 8,
+      "nombre": "Informe de avance",
+      "linea": "Nivel, evolución y plan de estudio priorizado por lo que más aparece en las ofertas.",
+      "cuenta": 1
+    }
+  ],
+  "proceso": {
+    "titulo": "Una corrida de candidatura, de la oferta al post-mortem",
+    "carriles": [
+      {
+        "id": "candidato",
+        "nombre": "El candidato"
+      },
+      {
+        "id": "agente",
+        "nombre": "El harness · Claude Code"
+      },
+      {
+        "id": "controles",
+        "nombre": "Los verificadores"
+      },
+      {
+        "id": "mundo",
+        "nombre": "La empresa"
+      }
+    ],
+    "pasos": [
+      {
+        "id": "ini",
+        "tipo": "inicio",
+        "carril": "candidato",
+        "texto": "Aparece una oferta"
+      },
+      {
+        "id": "analiza",
+        "tipo": "tarea",
+        "carril": "agente",
+        "texto": "Analiza la oferta: descarte y cobertura"
+      },
+      {
+        "id": "aplica",
+        "tipo": "decision",
+        "carril": "candidato",
+        "texto": "¿Aplica?"
+      },
+      {
+        "id": "descarte",
+        "tipo": "tarea",
+        "carril": "agente",
+        "texto": "Registra el descarte con su motivo"
+      },
+      {
+        "id": "canal",
+        "tipo": "tarea",
+        "carril": "agente",
+        "texto": "Pregunta primero por la vía de referido"
+      },
+      {
+        "id": "piezas",
+        "tipo": "tarea",
+        "carril": "agente",
+        "texto": "Redacta CV, carta y mensajes trazables"
+      },
+      {
+        "id": "verifica",
+        "tipo": "tarea",
+        "carril": "controles",
+        "texto": "Barre bullets huérfanos y texto oculto"
+      },
+      {
+        "id": "pasa",
+        "tipo": "decision",
+        "carril": "controles",
+        "texto": "¿Pasa?"
+      },
+      {
+        "id": "envia",
+        "tipo": "tarea",
+        "carril": "candidato",
+        "texto": "Revisa, aprueba con su token y envía"
+      },
+      {
+        "id": "registra",
+        "tipo": "tarea",
+        "carril": "agente",
+        "texto": "Registra canal y fecha en el pipeline"
+      },
+      {
+        "id": "responde",
+        "tipo": "tarea",
+        "carril": "mundo",
+        "texto": "Responde o calla"
+      },
+      {
+        "id": "gimnasio",
+        "tipo": "tarea",
+        "carril": "agente",
+        "texto": "Entrena entrevista, ejercicio y examen"
+      },
+      {
+        "id": "leccion",
+        "tipo": "tarea",
+        "carril": "agente",
+        "texto": "Escribe el post-mortem y su lección"
+      },
+      {
+        "id": "fin",
+        "tipo": "fin",
+        "carril": "candidato",
+        "texto": ""
+      }
+    ],
+    "flujos": [
+      {
+        "de": "ini",
+        "a": "analiza"
+      },
+      {
+        "de": "analiza",
+        "a": "aplica"
+      },
+      {
+        "de": "aplica",
+        "a": "canal",
+        "etiqueta": "sí"
+      },
+      {
+        "de": "aplica",
+        "a": "descarte",
+        "etiqueta": "no · descarta"
+      },
+      {
+        "de": "descarte",
+        "a": "fin"
+      },
+      {
+        "de": "canal",
+        "a": "piezas"
+      },
+      {
+        "de": "piezas",
+        "a": "verifica"
+      },
+      {
+        "de": "verifica",
+        "a": "pasa"
+      },
+      {
+        "de": "pasa",
+        "a": "envia",
+        "etiqueta": "sí"
+      },
+      {
+        "de": "pasa",
+        "a": "piezas",
+        "etiqueta": "no · corrige"
+      },
+      {
+        "de": "envia",
+        "a": "registra"
+      },
+      {
+        "de": "registra",
+        "a": "responde"
+      },
+      {
+        "de": "responde",
+        "a": "gimnasio"
+      },
+      {
+        "de": "gimnasio",
+        "a": "leccion"
+      },
+      {
+        "de": "leccion",
+        "a": "fin"
+      }
+    ],
+    "anotaciones": [
+      {
+        "paso": "analiza",
+        "texto": "El puntaje de encaje nunca se muestra sin la lista de requisitos duros incumplidos al lado."
+      },
+      {
+        "paso": "canal",
+        "texto": "Canal antes que volumen: la vía de referido se pregunta antes de escribir la primera pieza."
+      },
+      {
+        "paso": "verifica",
+        "texto": "Un bullet sin identificador de logro con procedencia hace fallar el control. No es una intención declarada."
+      },
+      {
+        "paso": "envia",
+        "texto": "El gate exige la frase «esta pieza sale». El harness deja lista la pieza y no envía nada, nunca."
+      },
+      {
+        "paso": "leccion",
+        "texto": "Ninguna corrida cierra sin su lección en la memoria del paquete, y la regla nueva la aprueba él."
+      }
+    ]
+  },
+  "procedencia_proceso": "app",
+  "limites": [
+    "Prepara candidaturas; no las envía ni responde correos. Deja la pieza lista para pegar o adjuntar, y él decide.",
+    "Entrena antes de la entrevista y jamás asiste durante una real: varias empresas lo prohíben y sería riesgo de descalificación.",
+    "No emite puntaje de sistema de seguimiento: no existe uno común publicado. Emite informe de parseo binario y cobertura de requisitos.",
+    "No promete acortar la búsqueda ni mejorar la tasa de respuesta: nadie lo ha medido para ninguna herramienta, ni de pago."
+  ],
+  "nunca": [
+    "Escribe una cifra sin procedencia en una pieza enviable: un barrido mecánico rechaza el bullet huérfano.",
+    "Inserta texto oculto en un documento, en ninguna forma.",
+    "Revela el ingreso actual del usuario en una pieza de negociación.",
+    "Rodea un bloqueo de acceso ni entra a un portal de empleo tras autenticación.",
+    "Presenta una métrica estimada como si fuera medida."
+  ],
+  "hitos": [
+    {
+      "valor": "WI-9",
+      "etiqueta": "ciclo"
+    },
+    {
+      "valor": "1",
+      "etiqueta": "work-items cerrados"
+    },
+    {
+      "valor": "2026-09-05",
+      "etiqueta": "verificado"
+    },
+    {
+      "valor": "v1.1.0",
+      "etiqueta": "version"
+    },
+    {
+      "valor": "20",
+      "etiqueta": "decisiones registradas"
+    }
+  ]
+}

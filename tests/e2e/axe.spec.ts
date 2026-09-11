@@ -1,4 +1,4 @@
-import { readdirSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 import { parse } from "yaml";
@@ -35,15 +35,30 @@ const slugsVitrina = readdirSync("content/vitrina")
   );
 if (slugsVitrina.length === 0) throw new Error("content/vitrina sin exports");
 
-// Los frentes en preparación (ADR-015): una página genérica por frente, leída
-// del mismo YAML que el portal.
-const frentesEnPreparacion = (
+// Los frentes (ADR-015 · S7): cada uno tiene su página —escaparate si está
+// abierto, «en preparación» si no— y los abiertos tienen además una ruta por
+// pieza. Todo se lee del mismo YAML y de `content/<frente>/` que renderiza la
+// página, así que una ficha nueva entra al scan SOLA.
+const frentesYaml = (
   parse(readFileSync("data/vitrina.yaml", "utf8")) as {
     categorias: { id: string; estado: string }[];
   }
-).categorias
-  .filter((c) => c.estado === "en-preparacion")
-  .map((c) => c.id);
+).categorias.filter((c) => c.id !== "apps");
+
+const piezasDe = (frente: string): string[] => {
+  const dir = `content/${frente}`;
+  if (!existsSync(dir)) return [];
+  return readdirSync(dir)
+    .filter((f) => f.endsWith(".ficha-tecnica.json"))
+    .map(
+      (f) =>
+        (
+          JSON.parse(readFileSync(`${dir}/${f}`, "utf8")) as {
+            pieza: { slug: string };
+          }
+        ).pieza.slug,
+    );
+};
 
 const RUTAS = [
   "/es",
@@ -69,9 +84,16 @@ const RUTAS = [
     `/es/vitrina/apps/${s}/detalle`,
     `/en/vitrina/apps/${s}/detalle`,
   ]),
-  ...frentesEnPreparacion.flatMap((f) => [
-    `/es/vitrina/${f}`,
-    `/en/vitrina/${f}`,
+  // Cada frente, y cada pieza de los que están abiertos (S7).
+  ...frentesYaml.flatMap((f) => [
+    `/es/vitrina/${f.id}`,
+    `/en/vitrina/${f.id}`,
+    ...(f.estado === "abierta"
+      ? piezasDe(f.id).flatMap((s) => [
+          `/es/vitrina/${f.id}/${s}`,
+          `/en/vitrina/${f.id}/${s}`,
+        ])
+      : []),
   ]),
 ];
 

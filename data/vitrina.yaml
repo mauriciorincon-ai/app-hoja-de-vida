@@ -10,9 +10,14 @@
 #                      sin fecha prometida.
 #
 # «apps» es un frente especial: sus piezas salen de content/vitrina/ (los
-# brochure-export.json de las apps hermanas), no de este archivo. Hoy es el
-# único que puede estar «abierta»: la publicación FALLA si otro frente se marca
-# abierto sin que exista una fuente de piezas que lo renderice.
+# brochure-export.json de las apps hermanas). Los demás las toman de
+# content/<id>/ (fichas técnicas completas, producidas por quien construye cada
+# pieza y entregadas por copia).
+#
+# El estado NO se declara a voluntad: la publicación FALLA si un frente se marca
+# «abierta» sin tener ni una pieza. La cuenta que se ve en el portal tampoco se
+# escribe aquí — se MIDE de content/. Un frente abre el día que llega su primera
+# ficha, y ni un día antes.
 
 categorias:
   - id: apps
@@ -28,7 +33,7 @@ categorias:
       en: "Each with its promise, its features and its numbers — and every number with its provenance. They are shown here; they are not handed over."
 
   - id: agentes
-    estado: en-preparacion
+    estado: abierta
     nombre:
       es: "Agentes especializados"
       en: "Specialized agents"
@@ -40,7 +45,7 @@ categorias:
       en: "Each agent is a specialist with a narrow trade: it takes an order as a command, works through it step by step and delivers the result. There are no screens to walk through; what will be shown here is what each one does, within which limits, and with what evidence."
 
   - id: investigaciones
-    estado: en-preparacion
+    estado: abierta
     nombre:
       es: "Investigaciones"
       en: "Research"
@@ -52,7 +57,7 @@ categorias:
       en: "Each line began as a question, went through a feasibility study and came out of it with a decision: what gets built and what doesn't. The validated lines are published here — their question, their scope and what was decided; building each one starts now."
 
   - id: tableros
-    estado: en-preparacion
+    estado: abierta
     nombre:
       es: "Tableros de datos"
       en: "Data dashboards"

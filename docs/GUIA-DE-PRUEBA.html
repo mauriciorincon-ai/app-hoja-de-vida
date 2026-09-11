@@ -103,15 +103,18 @@
 <body>
 <div class="pagina">
   <header>
-    <p class="eyebrow">CV Viva · Guía de prueba viva y acumulativa · v5 · post-Sprint 005 · 2026-09-05</p>
+    <p class="eyebrow">CV Viva · Guía de prueba viva y acumulativa · v6 · Sprint 007 · 2026-09-09</p>
     <h1>Guía de prueba</h1>
-    <p class="suave">Todas las pruebas vigentes de la app — las nuevas del Sprint 005 (la vitrina)
-      y las heredadas de S1–S4, que se corren como regresión. Filtra por origen para recorrer todo
-      o solo lo que cambió. Las casillas se guardan solas en este navegador.</p>
-    <p class="chica"><strong>Gate mínimo ⭐: 17 pruebas · ~60 min.</strong> Es lo que ninguna
+    <p class="suave">Todas las pruebas vigentes de la app — las nuevas del Sprint 007 (las
+      estanterías: los cuatro frentes de la vitrina con piezas reales) y las 57 heredadas de
+      S1–S5, que se corren como regresión. Filtra por origen para recorrer todo o solo lo que
+      cambió. Las casillas se guardan solas en este navegador.</p>
+    <p class="chica"><strong>Gate mínimo ⭐: 22 pruebas · ~75 min.</strong> Es lo que ninguna
       automatización puede verificar (juicio humano sobre el contenido, aprobación visual,
       dispositivo real, proveedor de IA real). Lo que la CI ya respalda (e2e, unit, axe, budgets)
-      queda fuera del mínimo y se corre en pases completos.</p>
+      queda fuera del mínimo y se corre en pases completos. <strong>Las 5 ⭐ del Sprint 007 se
+      dejan al acumulado del ciclo H2</strong> (gate diferido, declarado en el summary): se pagan
+      en el recorrido de cierre, no antes.</p>
     <div class="url-caja">
       <p class="eyebrow" style="margin:0 0 6px">URL de prueba</p>
       <code>— pégala aquí al empezar —</code>
@@ -144,23 +147,23 @@
       <li data-origen="heredada"><input type="checkbox" id="a1"><label for="a1">Abre
         <code>/es</code>: el hero muestra tu nombre y titular; el contenido carga sin pantallazos
         en blanco. <span class="origen origen-heredada">S1</span></label></li>
-      <li data-origen="mejorado"><input type="checkbox" id="a2"><label for="a2">Baja por la página:
+      <li data-origen="heredada"><input type="checkbox" id="a2"><label for="a2">Baja por la página:
         aparecen en orden Perfil, Trayectoria, Logros, Proyectos, Skills, Certificaciones,
         Roadmap y Contacto — <strong>ya no hay sección "Apps"</strong>.
-        <span class="origen origen-mejorado">Mejorado · post-S5</span></label></li>
-      <li data-origen="mejorado"><input type="checkbox" id="a3"><label for="a3">El menú del encabezado
+        <span class="origen origen-heredada">post-S5</span></label></li>
+      <li data-origen="heredada"><input type="checkbox" id="a3"><label for="a3">El menú del encabezado
         tiene <strong>cuatro destinos</strong>: Hoja de vida, Vitrina, Roadmap y Contacto (más CV PDF
         e idioma). Pulsa <strong>Roadmap</strong>: te lleva a esa sección.
-        <span class="origen origen-mejorado">Mejorado · post-S5</span></label></li>
-      <li data-origen="nuevo"><input type="checkbox" id="a5"><label for="a5">Pulsa
+        <span class="origen origen-heredada">post-S5</span></label></li>
+      <li data-origen="heredada"><input type="checkbox" id="a5"><label for="a5">Pulsa
         <strong>Hoja de vida</strong>: se despliegan las cinco secciones del CV (Trayectoria,
         Logros, Proyectos, Skills, Certificaciones). Elige una y te lleva ahí cerrando el menú.
         Vuelve a abrirlo y ciérralo pulsando <strong>fuera</strong>, y otra vez con
-        <strong>Escape</strong>. <span class="origen origen-nuevo">Nuevo · post-S5</span></label></li>
-      <li data-origen="nuevo"><input type="checkbox" id="a6"><label for="a6">Abre el menú
+        <strong>Escape</strong>. <span class="origen origen-heredada">post-S5</span></label></li>
+      <li data-origen="heredada"><input type="checkbox" id="a6"><label for="a6">Abre el menú
         <strong>solo con teclado</strong> (Tab hasta "Hoja de vida", Enter): se despliega, Tab
         recorre las cinco, Escape cierra y el foco vuelve al botón — nunca se pierde.
-        <span class="origen origen-nuevo">Nuevo · post-S5</span></label></li>
+        <span class="origen origen-heredada">post-S5</span></label></li>
       <li data-origen="heredada" data-minimo><input type="checkbox" id="a4"><label for="a4">⭐
         <strong>Juicio visual:</strong> la página se siente editorial, sobria y coherente; las
         animaciones al hacer scroll son elegantes, no distraen. Aprueba el look general.
@@ -300,11 +303,11 @@
     <div class="bloque-cabeza"><span class="letra">H</span><h2>Página brochure por app</h2></div>
     <p class="meta-bloque chica suave">~5 min · bloque «De esta casa» en la vitrina y rutas <code>/apps/&lt;app&gt;</code>.</p>
     <ul class="pasos">
-      <li data-origen="mejorado"><input type="checkbox" id="h1"><label for="h1">Al final de
+      <li data-origen="heredada"><input type="checkbox" id="h1"><label for="h1">Al final de
         <code>/es/vitrina/apps</code>, el bloque <strong>«De esta casa»</strong> muestra CV Viva y el chat:
         pulsa "Ver la app" en una y abre su brochure. <em>(Antes se llegaba desde la sección Apps
         de la portada, que ya no existe — esta es ahora su única puerta.)</em>
-        <span class="origen origen-mejorado">Mejorado · post-S5</span></label></li>
+        <span class="origen origen-heredada">post-S5</span></label></li>
       <li data-origen="heredada"><input type="checkbox" id="h2"><label for="h2">La brochure tiene hero
         con tagline, funcionalidades, métricas (números que se animan), stack, y un botón que
         vuelve al formulario de contacto. Pruébala en ES y EN.
@@ -342,82 +345,83 @@
       <li data-origen="mejorado"><input type="checkbox" id="k1"><label for="k1">Entra a
         <strong>Vitrina</strong> desde el menú: ves el <strong>portal</strong> con <strong>cuatro
         cajas</strong> en este orden — Apps · Agentes especializados · Investigaciones · Tableros
-        de datos — cada una con su icono, una frase y su estado. La de Apps dice
-        <strong>"6 piezas"</strong> y "Entrar"; las otras tres dicen <strong>"En preparación"</strong>
-        y "Ver qué viene". Pulsa <strong>Apps</strong>: llegas al escaparate con <strong>seis
-        tarjetas</strong>, una por app, cada una con su estado, su promesa, un esquema dibujado y
-        cuántas funcionalidades tiene.
-        <span class="origen origen-mejorado">Mejorado · post-S5</span></label></li>
-      <li data-origen="mejorado"><input type="checkbox" id="k2"><label for="k2">Pulsa "Ver la ficha
+        de datos — cada una con su icono, una frase y su estado. <strong>Las cuatro dicen "Entrar"</strong>
+        y cada una su cuenta: Apps <strong>6</strong> · Agentes <strong>13</strong> ·
+        Investigaciones <strong>7</strong> · Tableros <strong>6</strong>. Pulsa <strong>Apps</strong>:
+        llegas al escaparate con <strong>seis tarjetas</strong>, una por app, cada una con su
+        estado, su promesa, un esquema dibujado y cuántas funcionalidades tiene.
+        <span class="origen origen-mejorado">Mejorado · S7</span></label></li>
+      <li data-origen="heredada"><input type="checkbox" id="k2"><label for="k2">Pulsa "Ver la ficha
         técnica" en una: llegas a <strong>su ficha técnica</strong> (la dirección es
         <code>/vitrina/apps/&lt;app&gt;</code>), la infografía de dos minutos. Al final, "Ver la
         ficha completa" baja al <strong>detalle</strong> (<code>…/detalle</code>) y ahí está esa
         app y ninguna otra. "Volver a la ficha técnica" sube, "Volver a las apps" regresa al
         escaparate, y desde ahí "Volver a la vitrina" al portal.
-        <span class="origen origen-mejorado">Mejorado · post-S5</span></label></li>
-      <li data-origen="nuevo"><input type="checkbox" id="k10"><label for="k10">En la ficha
+        <span class="origen origen-heredada">post-S5</span></label></li>
+      <li data-origen="heredada"><input type="checkbox" id="k10"><label for="k10">En la ficha
         técnica de Hablemos San, recorre los siete bloques: chips de estado arriba, el nombre, el
         <strong>titular</strong> "Qué no hace nadie más", <strong>cinco cifras</strong> cada una con
         su chip de procedencia, "Para quién", el <strong>proceso en BPMN</strong>, "Qué tiene" (ocho
         tarjetas con icono), "Límites y lo que nunca hace", "Dónde está", y los dos botones del
         cierre. Nada se corta ni se encima en escritorio.
-        <span class="origen origen-nuevo">Nuevo · post-S5</span></label></li>
-      <li data-origen="nuevo"><input type="checkbox" id="k11"><label for="k11">El diagrama
+        <span class="origen origen-heredada">post-S5</span></label></li>
+      <li data-origen="heredada"><input type="checkbox" id="k11"><label for="k11">El diagrama
         "Cómo funciona": tres carriles (Papá·Mamá / Niño / La app), un círculo verde de inicio
         "Cada día", cajas de tarea, el rombo <strong>"¿Acertó?"</strong> con dos salidas ("sí" y
         "no · otra vez"), un círculo grueso de fin, y dos llamadas ① ② con su texto al pie. Como no
         cabe en una fila, se parte en dos con los conectores <strong>A</strong> y <strong>B</strong>:
         sigue el A y el B con el dedo y confirma que el proceso se lee de corrido. Debajo dice
-        "Proceso declarado por CV Viva…". <span class="origen origen-nuevo">Nuevo · post-S5</span></label></li>
-      <li data-origen="nuevo"><input type="checkbox" id="k12"><label for="k12">En el teléfono, el
+        "Proceso declarado por CV Viva…". <span class="origen origen-heredada">post-S5</span></label></li>
+      <li data-origen="heredada"><input type="checkbox" id="k12"><label for="k12">En el teléfono, el
         diagrama <strong>no se encoge</strong>: se desliza en horizontal y debajo dice "Desliza para
         ver el proceso completo". El resto de la ficha se apila en una columna.
-        <span class="origen origen-nuevo">Nuevo · post-S5</span></label></li>
-      <li data-origen="nuevo" data-minimo><input type="checkbox" id="k13"><label for="k13">⭐
+        <span class="origen origen-heredada">post-S5</span></label></li>
+      <li data-origen="heredada" data-minimo><input type="checkbox" id="k13"><label for="k13">⭐
         <strong>Juicio de proceso:</strong> abre las fichas técnicas de <strong>dos apps</strong> y lee
         su "Cómo funciona" como ingeniero: ¿los carriles son los actores correctos? ¿cada caja es
         una sola acción? ¿la decisión está donde de verdad se decide? ¿el bucle existe en la app
         real? Estos procesos los derivó CV Viva de los exports — si alguno miente sobre la app, se
         corrige en <code>data/fichas/&lt;app&gt;.yaml</code>.
-        <span class="origen origen-nuevo">Nuevo · post-S5</span><span class="minimo">⭐ mínimo</span></label></li>
-      <li data-origen="nuevo" data-minimo><input type="checkbox" id="k14"><label for="k14">⭐
+        <span class="origen origen-heredada">post-S5</span><span class="minimo">⭐ mínimo</span></label></li>
+      <li data-origen="heredada" data-minimo><input type="checkbox" id="k14"><label for="k14">⭐
         <strong>Aprobación visual de la infografía:</strong> con la ficha técnica de Hablemos San en
         pantalla, decide si es la capa "de dos minutos" que querías: ¿se entiende sin bajar al
         detalle? ¿los siete bloques están en el orden correcto? ¿sobra o falta alguno?
-        <span class="origen origen-nuevo">Nuevo · post-S5</span><span class="minimo">⭐ mínimo</span></label></li>
-      <li data-origen="nuevo"><input type="checkbox" id="k3"><label for="k3">Al pie de una ficha,
+        <span class="origen origen-heredada">post-S5</span><span class="minimo">⭐ mínimo</span></label></li>
+      <li data-origen="heredada"><input type="checkbox" id="k3"><label for="k3">Al pie de una ficha,
         "App siguiente" te lleva a otra app sin pasar por el índice.
-        <span class="origen origen-nuevo">Nuevo · S5</span></label></li>
-      <li data-origen="nuevo"><input type="checkbox" id="k4"><label for="k4">En ninguna ficha hay
+        <span class="origen origen-heredada">S5</span></label></li>
+      <li data-origen="heredada"><input type="checkbox" id="k4"><label for="k4">En ninguna ficha hay
         un enlace a la app ni a su repositorio: en su lugar se explica <strong>la razón</strong> y
         hay un botón de lista de espera que baja a la sección de contacto de esa misma página.
-        <span class="origen origen-nuevo">Nuevo · S5</span></label></li>
-      <li data-origen="nuevo"><input type="checkbox" id="k5"><label for="k5">En "Las cifras", cada
+        <span class="origen origen-heredada">S5</span></label></li>
+      <li data-origen="heredada"><input type="checkbox" id="k5"><label for="k5">En "Las cifras", cada
         número lleva una etiqueta con <strong>de dónde salió</strong> (medido, calculada, declarado
         o estimación). Ninguna cifra aparece suelta.
-        <span class="origen origen-nuevo">Nuevo · S5</span></label></li>
-      <li data-origen="nuevo"><input type="checkbox" id="k6"><label for="k6">Abre "Los detalles
+        <span class="origen origen-heredada">S5</span></label></li>
+      <li data-origen="heredada"><input type="checkbox" id="k6"><label for="k6">Abre "Los detalles
         finos": las funcionalidades <strong>descartadas</strong> aparecen tachadas, con su razón y
         su fecha — se ve que no son pendientes. Y al pie de la ficha dice de qué fecha es la
-        información. <span class="origen origen-nuevo">Nuevo · S5</span></label></li>
-      <li data-origen="nuevo" data-minimo><input type="checkbox" id="k7"><label for="k7">⭐
+        información. <span class="origen origen-heredada">S5</span></label></li>
+      <li data-origen="heredada" data-minimo><input type="checkbox" id="k7"><label for="k7">⭐
         <strong>Juicio de contenido:</strong> lee la promesa y las cifras de dos apps distintas y
         confirma que dicen la verdad sobre lo que está construido — sin exagerar y sin prometer
-        nada que no exista. <span class="origen origen-nuevo">Nuevo · S5</span><span class="minimo">⭐ mínimo</span></label></li>
-      <li data-origen="nuevo"><input type="checkbox" id="k8"><label for="k8">Vuelve al portal y
-        abre un frente <strong>en preparación</strong> (por ejemplo Agentes especializados): tiene
-        su propia página con el nombre, el chip "En preparación", la frase y el párrafo del frente,
-        un recuadro <strong>"Este frente empieza"</strong> que dice que no hay fecha prometida, los
-        otros tres frentes como vecinos (pulsa uno: cambia de frente sin pasar por el portal) y, al
-        pie, el botón de lista de espera. <strong>No hay ningún enlace externo.</strong>
-        <span class="origen origen-nuevo">Nuevo · post-S5</span></label></li>
-      <li data-origen="nuevo" data-minimo><input type="checkbox" id="k9"><label for="k9">⭐
-        <strong>Juicio de contenido de los frentes:</strong> lee la frase y el párrafo de los tres
-        frentes en preparación y confirma tres cosas: que describen lo que de verdad son (agentes
-        por comandos; investigaciones ya validadas, con rumbo elegido; tableros analíticos), que
-        <strong>no prometen fecha</strong>, y que el de tableros <strong>no nombra ninguna
-        herramienta</strong>. Si algo no te suena a ti, se corrige en <code>data/vitrina.yaml</code>.
-        <span class="origen origen-nuevo">Nuevo · post-S5</span><span class="minimo">⭐ mínimo</span></label></li>
+        nada que no exista. <span class="origen origen-heredada">S5</span><span class="minimo">⭐ mínimo</span></label></li>
+      <li data-origen="mejorado"><input type="checkbox" id="k8"><label for="k8"><strong>EN ESPERA — hoy
+        no hay sujeto.</strong> Desde el S7 los cuatro frentes tienen piezas, así que ninguno está
+        "en preparación". La página existe y espera al próximo frente que declares: el día que
+        exista uno sin piezas, comprueba que tiene su nombre, el chip "En preparación", la frase y
+        el párrafo del frente, el recuadro <strong>"Este frente empieza"</strong> sin fecha
+        prometida, los otros frentes como vecinos y el botón de lista de espera al pie, sin ningún
+        enlace externo. <em>Las tres pruebas automáticas que la vigilaban se saltan declarando esta
+        misma razón.</em> <span class="origen origen-mejorado">Mejorado · S7</span></label></li>
+      <li data-origen="mejorado" data-minimo><input type="checkbox" id="k9"><label for="k9">⭐
+        <strong>Juicio de contenido de los frentes:</strong> lee la frase y el párrafo de los
+        <strong>cuatro</strong> frentes en el portal y confirma tres cosas: que describen lo que de
+        verdad son (agentes por comandos; investigaciones ya validadas, con rumbo elegido; tableros
+        analíticos), que <strong>ninguno promete fecha</strong>, y que el de tableros <strong>no
+        nombra ninguna herramienta</strong>. Si algo no te suena a ti, se corrige en
+        <code>data/vitrina.yaml</code>. <span class="origen origen-mejorado">Mejorado · S7</span><span class="minimo">⭐ mínimo</span></label></li>
     </ul>
   </section>
 
@@ -426,36 +430,132 @@
     <div class="bloque-cabeza"><span class="letra">L</span><h2>Las fichas por dentro: tarjetas que se abren al leer</h2></div>
     <p class="meta-bloque chica suave">~10 min · escritorio + un teléfono real.</p>
     <ul class="pasos">
-      <li data-origen="nuevo"><input type="checkbox" id="l1"><label for="l1">Baja leyendo por una
+      <li data-origen="heredada"><input type="checkbox" id="l1"><label for="l1">Baja leyendo por una
         ficha larga: las tarjetas de "Qué hace" <strong>se abren solas</strong> al llegar a ellas y
         se recogen al salir. No hay que pulsar nada.
-        <span class="origen origen-nuevo">Nuevo · S5</span></label></li>
-      <li data-origen="nuevo"><input type="checkbox" id="l2"><label for="l2">Vuelve a subir:
+        <span class="origen origen-heredada">S5</span></label></li>
+      <li data-origen="heredada"><input type="checkbox" id="l2"><label for="l2">Vuelve a subir:
         <strong>no se abre ninguna sola</strong> mientras subes.
-        <span class="origen origen-nuevo">Nuevo · S5</span></label></li>
-      <li data-origen="nuevo"><input type="checkbox" id="l3"><label for="l3">Toca una tarjeta: se
+        <span class="origen origen-heredada">S5</span></label></li>
+      <li data-origen="heredada"><input type="checkbox" id="l3"><label for="l3">Toca una tarjeta: se
         abre o se cierra, y desde ese momento <strong>manda tu toque</strong> — ya no se abre ni se
         cierra sola por mucho que sigas leyendo.
-        <span class="origen origen-nuevo">Nuevo · S5</span></label></li>
-      <li data-origen="nuevo"><input type="checkbox" id="l4"><label for="l4">Baja de un tirón hasta
+        <span class="origen origen-heredada">S5</span></label></li>
+      <li data-origen="heredada"><input type="checkbox" id="l4"><label for="l4">Baja de un tirón hasta
         el final de la ficha: <strong>llegas al final</strong> y el contenido nunca da un salto
         hacia atrás ni te devuelve a una tarjeta que ya habías pasado.
-        <span class="origen origen-nuevo">Nuevo · S5</span></label></li>
-      <li data-origen="nuevo" data-minimo><input type="checkbox" id="l5"><label for="l5">⭐
+        <span class="origen origen-heredada">S5</span></label></li>
+      <li data-origen="heredada" data-minimo><input type="checkbox" id="l5"><label for="l5">⭐
         <strong>Aprobación visual:</strong> recorre las seis fichas seguidas. Todas se ven de
         <strong>la misma casa</strong> que el resto de tu hoja de vida — ninguna trae los colores
         de su propia marca ni desentona.
-        <span class="origen origen-nuevo">Nuevo · S5</span><span class="minimo">⭐ mínimo</span></label></li>
-      <li data-origen="nuevo" data-minimo><input type="checkbox" id="l6"><label for="l6">⭐
+        <span class="origen origen-heredada">S5</span><span class="minimo">⭐ mínimo</span></label></li>
+      <li data-origen="heredada" data-minimo><input type="checkbox" id="l6"><label for="l6">⭐
         <strong>Juicio sobre las imágenes:</strong> dentro de las tarjetas, cada captura muestra de
         verdad la pantalla de la que habla ese grupo, <strong>ninguna sale cortada</strong>, y en
         ninguna aparece un dato de una persona real (todos los nombres y datos son inventados).
-        <span class="origen origen-nuevo">Nuevo · S5</span><span class="minimo">⭐ mínimo</span></label></li>
-      <li data-origen="nuevo" data-minimo><input type="checkbox" id="l7"><label for="l7">⭐
+        <span class="origen origen-heredada">S5</span><span class="minimo">⭐ mínimo</span></label></li>
+      <li data-origen="heredada" data-minimo><input type="checkbox" id="l7"><label for="l7">⭐
         <strong>Teléfono real:</strong> recorre una ficha larga en tu móvil. Las tarjetas se abren
         cómodas al ritmo de la lectura, las imágenes se ven nítidas y nada se sale de la pantalla
-        a lo ancho. <span class="origen origen-nuevo">Nuevo · S5</span><span class="minimo">⭐ mínimo</span></label></li>
+        a lo ancho. <span class="origen origen-heredada">S5</span><span class="minimo">⭐ mínimo</span></label></li>
     </ul>
+  </section>
+
+  <!-- ═══════ M. Las estanterías: los frentes con piezas ═══════ -->
+  <section class="bloque">
+    <div class="bloque-cabeza"><span class="letra">M</span><h2>Las estanterías: los frentes con piezas</h2></div>
+    <p class="meta-bloque chica suave">~20 min · escritorio + un teléfono real. Las 26 fichas de
+      agentes, investigaciones y tableros las escribió <strong>quien construyó cada pieza</strong>,
+      no esta app: aquí se comprueba que llegaron enteras y se leen bien.</p>
+    <ul class="pasos">
+      <li data-origen="nuevo"><input type="checkbox" id="m1"><label for="m1">Desde el portal entra
+        a <strong>Agentes especializados</strong>: el encabezado dice <strong>"13 piezas
+        publicadas"</strong> y debajo hay <strong>13 tarjetas</strong>. Cuéntalas. Las
+        <strong>selladas van primero</strong> y dentro de cada grupo el orden es alfabético — no
+        cambia aunque recargues. Repite en <strong>Investigaciones</strong> (7) y en
+        <strong>Tableros de datos</strong> (6).
+        <span class="origen origen-nuevo">Nuevo · S7</span></label></li>
+      <li data-origen="nuevo"><input type="checkbox" id="m2"><label for="m2">Mira una tarjeta de
+        cerca: chip de <strong>estado</strong> (Sellada / Sin sellar) y de <strong>ciclo</strong>,
+        el nombre, la frase de la pieza, su <strong>titular de valor</strong> en un recuadro, y
+        <strong>tres cifras</strong> cada una con su etiqueta de procedencia. Pulsa en cualquier
+        parte de la tarjeta: te lleva a la ficha de esa pieza.
+        <span class="origen origen-nuevo">Nuevo · S7</span></label></li>
+      <li data-origen="nuevo"><input type="checkbox" id="m3"><label for="m3">Abre la ficha de un
+        <strong>agente</strong> (por ejemplo el que construye las apps): es la <strong>misma
+        ficha</strong> que la de una app — mismos bloques, misma tipografía, mismos chips. Si la
+        pieza está sellada, arriba aparece <strong>"Sellada el …"</strong> con su fecha. Al final
+        <strong>no</strong> hay "Ver la ficha completa" (estas piezas no tienen página de detalle
+        aquí) y sí está el botón de lista de espera.
+        <span class="origen origen-nuevo">Nuevo · S7</span></label></li>
+      <li data-origen="nuevo"><input type="checkbox" id="m4"><label for="m4">Abre una ficha de
+        <strong>Investigaciones</strong>: <strong>no tiene "Cómo funciona"</strong> (no traen
+        proceso) y las secciones van <strong>01 · 02 · 03 · 04 seguidas</strong>, sin saltarse un
+        número. Comprueba también que <strong>en ninguna tarjeta dice "0 funcionalidades"</strong>:
+        una investigación tiene aportes, no funciones, y la app no le inventa una cuenta que la
+        ficha no dio. <span class="origen origen-nuevo">Nuevo · S7</span></label></li>
+      <li data-origen="nuevo"><input type="checkbox" id="m5"><label for="m5">Abre una ficha de
+        <strong>Tableros</strong>: tiene <strong>seis</strong> secciones numeradas 01–06, dos de
+        ellas que no existen en ninguna app — <strong>"Lo que dicen los datos"</strong> con seis
+        hallazgos, cada uno con su cifra y su procedencia, y <strong>"Cómo se ve"</strong> con
+        <strong>seis capturas</strong> del tablero, cada una con su pie "Pantalla N de 6". Ninguna
+        imagen sale rota. <span class="origen origen-nuevo">Nuevo · S7</span></label></li>
+      <li data-origen="nuevo"><input type="checkbox" id="m6"><label for="m6">Vuelve al escaparate
+        de <strong>Tableros</strong>: cada tarjeta enseña su <strong>primera pantalla como
+        portada</strong>, arriba del todo. En Agentes e Investigaciones, que no traen capturas, la
+        tarjeta <strong>no</strong> deja un hueco donde iría la imagen.
+        <span class="origen origen-nuevo">Nuevo · S7</span></label></li>
+      <li data-origen="nuevo"><input type="checkbox" id="m7"><label for="m7">Al pie de una ficha,
+        <strong>"Pieza siguiente"</strong> lleva a otra pieza <strong>del mismo frente</strong>
+        (nunca a un frente distinto), y la miga <strong>"Volver a …"</strong> regresa al escaparate
+        de ese frente. Desde ahí, "Volver a la vitrina" al portal.
+        <span class="origen origen-nuevo">Nuevo · S7</span></label></li>
+      <li data-origen="nuevo"><input type="checkbox" id="m8"><label for="m8">Recorre tres fichas de
+        frentes distintos buscando enlaces: <strong>no hay ninguno hacia afuera</strong> — ni al
+        repositorio de la pieza, ni a un artículo, ni un DOI de investigación. Solo la lista de
+        espera. <span class="origen origen-nuevo">Nuevo · S7</span></label></li>
+      <li data-origen="nuevo"><input type="checkbox" id="m9"><label for="m9">Cambia a
+        <code>/en</code> estando en una ficha de tablero: la <strong>misma pieza</strong> en inglés,
+        con sus capturas y sus hallazgos, y el nombre de la pieza sin traducir.
+        <span class="origen origen-nuevo">Nuevo · S7</span></label></li>
+      <li data-origen="nuevo" data-minimo><input type="checkbox" id="m10"><label for="m10">⭐
+        <strong>Juicio de contenido de las piezas ajenas:</strong> lee entera <strong>una ficha de
+        cada frente</strong> (un agente, una investigación, un tablero) y confirma que dicen la
+        verdad sobre tu trabajo: la promesa, las cifras y los límites. Estas fichas
+        <strong>no se editan aquí</strong> — si algo está mal, se corrige en el repositorio que la
+        produjo y se vuelve a entregar.
+        <span class="origen origen-nuevo">Nuevo · S7</span><span class="minimo">⭐ mínimo</span></label></li>
+      <li data-origen="nuevo" data-minimo><input type="checkbox" id="m11"><label for="m11">⭐
+        <strong>Aprobación visual de los escaparates:</strong> recorre los cuatro escaparates
+        seguidos y decide si los cuatro se ven <strong>de la misma casa</strong>: la tarjeta de un
+        agente, la de una investigación y la de un tablero conviven sin que ninguna desentone, y
+        ninguna promete más de lo que la pieza es.
+        <span class="origen origen-nuevo">Nuevo · S7</span><span class="minimo">⭐ mínimo</span></label></li>
+      <li data-origen="nuevo" data-minimo><input type="checkbox" id="m12"><label for="m12">⭐
+        <strong>Juicio de las capturas de tableros:</strong> abre las seis fichas de tableros y mira
+        sus 36 capturas: cada una muestra de verdad la página de la que habla su pie, se leen
+        nítidas, <strong>ninguna sale cortada</strong>, y en ninguna aparece un dato de una persona
+        identificable. Si una no sirve, se cambia en origen.
+        <span class="origen origen-nuevo">Nuevo · S7</span><span class="minimo">⭐ mínimo</span></label></li>
+      <li data-origen="nuevo" data-minimo><input type="checkbox" id="m13"><label for="m13">⭐
+        <strong>Teléfono real — la tarjeta y las cifras:</strong> abre un escaparate en tu móvil.
+        Las tarjetas se leen cómodas en una columna, el titular no se apretuja y <strong>las tres
+        cifras caben sin encimarse</strong>. Decide si el bloque de cifras se lee bien así o
+        prefieres otra disposición en pantalla angosta.
+        <span class="origen origen-nuevo">Nuevo · S7</span><span class="minimo">⭐ mínimo</span></label></li>
+      <li data-origen="nuevo" data-minimo><input type="checkbox" id="m14"><label for="m14">⭐
+        <strong>Teléfono real — la galería:</strong> abre una ficha de tablero en tu móvil y recorre
+        "Cómo se ve": las capturas se ven nítidas, cargan al ir llegando a ellas y
+        <strong>nada se sale de la pantalla a lo ancho</strong>.
+        <span class="origen origen-nuevo">Nuevo · S7</span><span class="minimo">⭐ mínimo</span></label></li>
+    </ul>
+    <p class="kit chica"><strong>Cómo se publica una pieza nueva:</strong> se deja caer su
+      <code>&lt;slug&gt;.ficha-tecnica.json</code> en <code>content/&lt;frente&gt;/</code> (y sus
+      capturas en <code>public/piezas/&lt;frente&gt;/</code> si las trae) y se abre un PR de
+      contenido. La CI valida el contrato, el cero-enlaces y que ninguna captura falte. El
+      contrato para quien la produzca está en <code>docs/contrato-ficha-tecnica/</code>
+      (<strong>v1.3.1</strong>).</p>
   </section>
 
   <!-- ═══════ J. Accesibilidad y movimiento ═══════ -->
@@ -469,9 +569,13 @@
       <li data-origen="heredada"><input type="checkbox" id="j2"><label for="j2">Recorre toda la
         página solo con teclado (Tab): el foco es visible y llega a todo, incluidos el menú móvil,
         los botones de voto y los enlaces de brochure. <span class="origen origen-heredada">S4</span></label></li>
-      <li data-origen="nuevo"><input type="checkbox" id="j4"><label for="j4">En una ficha de la
+      <li data-origen="heredada"><input type="checkbox" id="j4"><label for="j4">En una ficha de la
         vitrina, recorre con Tab: el foco llega a cada tarjeta de "Qué hace", Enter la abre y la
-        cierra, y el foco se ve siempre. <span class="origen origen-nuevo">Nuevo · S5</span></label></li>
+        cierra, y el foco se ve siempre. <span class="origen origen-heredada">S5</span></label></li>
+      <li data-origen="nuevo"><input type="checkbox" id="j5"><label for="j5">Con "reducir
+        movimiento" activo, abre un escaparate de frente y una ficha de tablero: todo el contenido
+        se ve quieto, las capturas están todas ahí y ninguna tarjeta queda invisible.
+        <span class="origen origen-nuevo">Nuevo · S7</span></label></li>
       <li data-origen="heredada" data-minimo><input type="checkbox" id="j3"><label for="j3">⭐
         <strong>Dispositivo real:</strong> en un teléfono real con reduced-motion activo, confirma
         que ninguna sección queda en blanco ni parpadea al cargar.
@@ -487,6 +591,18 @@
     <details class="chica">
       <summary>Historial de la guía</summary>
       <ul>
+        <li><strong>v6 · S7 · 2026-09-09:</strong> las estanterías. Nuevo bloque <strong>M</strong>
+          (14 pruebas): los cuatro frentes con piezas reales — escaparate por frente con su cuenta
+          medida, la ficha de una pieza que no es app, la renumeración cuando falta el proceso, las
+          conclusiones y la galería de un tablero, la portada en la tarjeta, las vecinas del frente
+          y el cero-enlaces sobre las 26 fichas ajenas. <strong>5 ⭐ nuevas</strong> (m10 · m11 ·
+          m12 · m13 · m14), <strong>diferidas al acumulado del ciclo H2</strong> con sus contrapesos
+          (pasada de capturas del builder + e2e de reduced-motion sobre las rutas nuevas). Mejoradas
+          <strong>k1</strong> (el portal ya no tiene frentes en preparación: las cuatro cajas dicen
+          "Entrar" con su cuenta) y <strong>k9</strong> (el juicio de contenido cubre los cuatro
+          frentes). <strong>k8 queda EN ESPERA</strong>, sin sujeto: no se elimina porque la página
+          de "en preparación" sigue existiendo para el próximo frente que nazca. Nueva
+          <strong>j5</strong> (reduced-motion en las rutas nuevas). Ninguna prueba eliminada.</li>
         <li><strong>v5 · post-S5 · 2026-09-05:</strong> la ficha técnica (ADR-016), fuera de sprint:
           una capa infografía por app sobre el detalle, con el proceso en BPMN generado desde datos.
           Nuevas: los siete bloques (K10), el diagrama BPMN con sus conectores (K11), el diagrama en
@@ -533,8 +649,8 @@
 <script>
   (function () {
     // NS VERSIONADO POR SPRINT: al publicar la guía de un sprint nuevo se cambia
-    // s005 — así una regresión sin correr no aparece marcada por el sprint anterior.
-    var NS = "guia-hoja-de-vida:s005d:";
+    // s007 — así una regresión sin correr no aparece marcada por el sprint anterior.
+    var NS = "guia-hoja-de-vida:s007:";
     var casillas = Array.prototype.slice.call(document.querySelectorAll('input[type="checkbox"]'));
     var barra = document.getElementById("barra-avance");
     var contador = document.getElementById("contador");

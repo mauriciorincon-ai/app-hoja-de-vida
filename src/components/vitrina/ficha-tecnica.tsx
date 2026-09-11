@@ -1,7 +1,9 @@
+import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import type { FichaTecnica as Datos } from "@/lib/vitrina/ficha-tecnica/schema";
+import { COLOR_ESTADO, intlLocale } from "@/lib/vitrina/estilos";
 import { numerarSecciones } from "@/lib/vitrina/ficha-tecnica/secciones";
 import type { FuenteMetrica } from "@/lib/vitrina/schemas";
 import { IconoGrupo } from "./iconos-grupo";
@@ -15,13 +17,17 @@ import { ProcesoBpmn } from "./proceso-bpmn";
  * frente (apps hoy; agentes, investigaciones y tableros cuando lleguen), porque
  * renderiza UN contrato (`fichaTecnicaSchema`) y no un tipo de pieza:
  *
- *   0 cabecera (estado · nombre · tagline · stack · TITULAR de valor)
+ *   0 cabecera (estado —con su fecha de sello si la trae— · nombre · tagline
+ *     · stack · TITULAR de valor)
  *   — la tira de cifras (3–5, cada una con su procedencia)
  *   1 para quién, y qué resuelve
  *   2 cómo funciona — el proceso en BPMN, generado desde datos (OPCIONAL
  *     desde v1.1.0: si la pieza no trae proceso, la sección no existe y las
  *     siguientes se renumeran — `numerarSecciones`)
+ *   · lo que dicen los datos — conclusiones con su cifra y su fuente
+ *     (OPCIONAL, v1.3.0: lo trae una pieza que produce datos, no una app)
  *   3 qué tiene — una tarjeta por bloque, sin listar el detalle
+ *   · cómo se ve — la galería de pantallas reales (OPCIONAL, v1.3.0)
  *   4 límites, y lo que nunca hace
  *   5 dónde está — la versión anclada
  *   — cierre: al detalle + lista de espera
@@ -37,10 +43,6 @@ const colorFuente: Record<FuenteMetrica, string> = {
   declarado: "bg-lilac text-lilac-ink",
   estimacion: "bg-peach text-peach-ink",
 };
-const colorEstado = {
-  sellado: "bg-sage text-sage-ink",
-  inicial: "bg-citron text-citron-ink",
-} as const;
 
 const CHIP =
   "rounded-full border border-paper-3 px-2.5 py-1 font-mono text-[11px] tracking-[0.02em] text-ink-2 uppercase";
@@ -102,9 +104,22 @@ export async function FichaTecnica({
 }) {
   const t = await getTranslations("fichaTecnica");
   const tv = await getTranslations("vitrina");
-  const { pieza, promesa, cifras, bloques, proceso, hitos } = datos;
+  const {
+    pieza,
+    promesa,
+    cifras,
+    bloques,
+    proceso,
+    hitos,
+    conclusiones,
+    galeria,
+  } = datos;
   const totalFuncionalidades = bloques.reduce((s, b) => s + b.cuenta, 0);
-  const n = numerarSecciones(Boolean(proceso));
+  const n = numerarSecciones({
+    proceso: Boolean(proceso),
+    conclusiones: Boolean(conclusiones),
+    galeria: Boolean(galeria),
+  });
 
   return (
     <article data-ficha-tecnica={pieza.slug} data-frente={pieza.frente}>
@@ -122,11 +137,22 @@ export async function FichaTecnica({
             <span
               data-estado={pieza.estado}
               title={tv(`estadoAyuda.${pieza.estado}`)}
-              className={`rounded-full px-2.5 py-1 font-mono text-[11px] tracking-[0.02em] uppercase ${colorEstado[pieza.estado]}`}
+              className={`rounded-full px-2.5 py-1 font-mono text-[11px] tracking-[0.02em] uppercase ${COLOR_ESTADO[pieza.estado]}`}
             >
               {tv(`estados.${pieza.estado}`)}
             </span>
           </li>
+          {/* La FECHA del sello sale del contrato (`pieza.sellado_en`), no de un
+              hito de texto libre: un dato que la casa productora declara y esta
+              ficha enseña — si no lo enseñara, nadie corregiría el día que
+              mintiera. Solo tiene sentido en una pieza sellada. */}
+          {pieza.estado === "sellado" && pieza.sellado_en && (
+            <li>
+              <span data-sellado-en={pieza.sellado_en} className={CHIP}>
+                {t("selladaEl", { fecha: pieza.sellado_en })}
+              </span>
+            </li>
+          )}
           <li>
             <span className={CHIP}>{pieza.ciclo}</span>
           </li>
@@ -184,7 +210,7 @@ export async function FichaTecnica({
             className="flex flex-col rounded-[12px] border border-paper-2 bg-paper-0 p-4 shadow-sh-1"
           >
             <p className="font-display text-[2rem] leading-none tracking-[-0.02em] text-ink-0 tabular-nums">
-              {c.valor.toLocaleString(locale === "es" ? "es-CO" : "en-US")}
+              {c.valor.toLocaleString(intlLocale(locale))}
               {/* La unidad solo si la etiqueta no la dice ya: «24 funcionalidades ·
                   Funcionalidades del MVP» es decir lo mismo dos veces. */}
               {c.unidad &&
@@ -210,7 +236,7 @@ export async function FichaTecnica({
 
       {/* ── 01 ───────────────────────────────────────────────────────────── */}
       <Seccion
-        n={n.s01!}
+        n={n.s01}
         id={`ft-${n.s01}-${pieza.slug}`}
         titulo={t("s01")}
         sub={t("s01sub")}
@@ -232,9 +258,9 @@ export async function FichaTecnica({
       </Seccion>
 
       {/* ── 02 · el proceso (solo si la pieza lo trae) ───────────────────── */}
-      {proceso && (
+      {proceso && n.s02 && (
         <Seccion
-          n={n.s02!}
+          n={n.s02}
           id={`ft-${n.s02}-${pieza.slug}`}
           titulo={t("s02")}
           sub={t("s02sub")}
@@ -256,12 +282,67 @@ export async function FichaTecnica({
         </Seccion>
       )}
 
+      {/* ── Lo que dicen los datos (solo si la pieza trae conclusiones) ──── */}
+      {conclusiones && n.conclusiones && (
+        <Seccion
+          n={n.conclusiones}
+          id={`ft-${n.conclusiones}-${pieza.slug}`}
+          titulo={t("conclusiones")}
+          sub={t("conclusionesSub")}
+        >
+          <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {conclusiones.map((c, i) => (
+              <li
+                key={i}
+                data-conclusion={i + 1}
+                className="flex flex-col rounded-[12px] border border-paper-2 bg-paper-0 p-5 shadow-sh-1"
+              >
+                <p className="font-display text-[1.9rem] leading-none tracking-[-0.02em] text-ink-0 tabular-nums">
+                  {c.cifra}
+                  {c.unidad && (
+                    <span className="ml-1.5 font-sans text-[13px] font-normal text-ink-2">
+                      {c.unidad}
+                    </span>
+                  )}
+                </p>
+                <h3 className="mt-3 font-display text-[1.05rem] leading-tight font-medium text-ink-0">
+                  {c.titulo}
+                </h3>
+                <p className="mt-2 text-[13.5px] leading-snug text-ink-1">
+                  {c.texto}
+                </p>
+                <span
+                  data-fuente={c.fuente}
+                  title={tv(`fuenteAyuda.${c.fuente}`)}
+                  className={`mt-3 self-start rounded-full px-2 py-0.5 font-mono text-[10px] tracking-[0.04em] uppercase ${colorFuente[c.fuente]}`}
+                >
+                  {tv(`fuentes.${c.fuente}`)}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </Seccion>
+      )}
+
       {/* ── 03 ───────────────────────────────────────────────────────────── */}
       <Seccion
-        n={n.s03!}
+        n={n.s03}
         id={`ft-${n.s03}-${pieza.slug}`}
         titulo={t("s03")}
-        sub={t("s03sub", { grupos: bloques.length, n: totalFuncionalidades })}
+        // «El detalle de cada una vive en la ficha completa» solo es verdad si
+        // esa ficha completa existe. Una pieza sin detalle no puede mandar al
+        // lector a un sitio que no hay — el subtítulo dice la cuenta y calla.
+        // Y si la ficha NO cuenta funcionalidades (`cuenta: 0` en todos sus
+        // bloques — una investigación tiene aportes, no funciones), el subtítulo
+        // no inventa un «0 funcionalidades» que la pieza jamás declaró.
+        sub={
+          totalFuncionalidades === 0
+            ? t("s03subSoloGrupos", { grupos: bloques.length })
+            : t(hrefDetalle ? "s03sub" : "s03subSinDetalle", {
+                grupos: bloques.length,
+                n: totalFuncionalidades,
+              })
+        }
       >
         <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {bloques.map((b) => (
@@ -276,9 +357,11 @@ export async function FichaTecnica({
               <h3 className="font-display text-[1.05rem] leading-tight font-medium text-ink-0">
                 {b.nombre}
               </h3>
-              <p className="mt-1 font-mono text-[10.5px] tracking-[0.04em] text-ink-2 uppercase">
-                {tv("cuentaFuncionalidades", { n: b.cuenta })}
-              </p>
+              {b.cuenta > 0 && (
+                <p className="mt-1 font-mono text-[10.5px] tracking-[0.04em] text-ink-2 uppercase">
+                  {tv("cuentaFuncionalidades", { n: b.cuenta })}
+                </p>
+              )}
               <p className="mt-1.5 text-[13px] leading-snug text-ink-2">
                 {b.linea}
               </p>
@@ -287,9 +370,47 @@ export async function FichaTecnica({
         </ul>
       </Seccion>
 
+      {/* ── Cómo se ve (solo si la pieza trae galería) ───────────────────── */}
+      {galeria && n.galeria && (
+        <Seccion
+          n={n.galeria}
+          id={`ft-${n.galeria}-${pieza.slug}`}
+          titulo={t("galeria")}
+          sub={t("galeriaSub")}
+        >
+          <ul className="grid gap-4 sm:grid-cols-2">
+            {galeria.map((g, i) => (
+              <li key={i} data-captura={i + 1}>
+                <figure className="m-0">
+                  <div className="overflow-hidden rounded-[12px] border border-paper-2 bg-paper-1 shadow-sh-1">
+                    {/* La ruta de la ficha es relativa; CV Viva la sirve desde
+                        public/piezas/<frente>/. Perezosa: vive bajo el pliegue. */}
+                    <Image
+                      src={`/piezas/${pieza.frente}/${g.archivo}`}
+                      alt={g.pie}
+                      width={2560}
+                      height={1440}
+                      sizes="(min-width: 1024px) 480px, (min-width: 640px) 50vw, 100vw"
+                      loading="lazy"
+                      className="block h-auto w-full"
+                    />
+                  </div>
+                  <figcaption className="mt-2 flex flex-wrap items-baseline gap-x-2 text-[12.5px] leading-snug text-ink-2">
+                    <span className="font-mono text-[10px] tracking-[0.06em] uppercase">
+                      {t("galeriaPie", { n: i + 1, total: galeria.length })}
+                    </span>
+                    <span>· {g.pie}</span>
+                  </figcaption>
+                </figure>
+              </li>
+            ))}
+          </ul>
+        </Seccion>
+      )}
+
       {/* ── 04 ───────────────────────────────────────────────────────────── */}
       <Seccion
-        n={n.s04!}
+        n={n.s04}
         id={`ft-${n.s04}-${pieza.slug}`}
         titulo={t("s04")}
         sub={t("s04sub")}
@@ -298,9 +419,9 @@ export async function FichaTecnica({
           <div className={PANEL}>
             <h3 className={ROTULO}>{t("limites")}</h3>
             <ul className="mt-2 divide-y divide-paper-2">
-              {datos.limites.map((l) => (
+              {datos.limites.map((l, i) => (
                 <li
-                  key={l}
+                  key={i}
                   className="flex gap-3 py-2.5 text-[14px] leading-snug text-ink-1"
                 >
                   <span aria-hidden="true" className="text-ink-2">
@@ -314,9 +435,9 @@ export async function FichaTecnica({
           <div className={PANEL}>
             <h3 className={ROTULO}>{t("nunca")}</h3>
             <ul data-nunca className="mt-2 divide-y divide-paper-2">
-              {datos.nunca.map((l) => (
+              {datos.nunca.map((l, i) => (
                 <li
-                  key={l}
+                  key={i}
                   className="flex gap-3 py-2.5 text-[14px] leading-snug text-ink-1"
                 >
                   <span
@@ -335,7 +456,7 @@ export async function FichaTecnica({
 
       {/* ── 05 ───────────────────────────────────────────────────────────── */}
       <Seccion
-        n={n.s05!}
+        n={n.s05}
         id={`ft-${n.s05}-${pieza.slug}`}
         titulo={t("s05")}
         sub={t("s05sub")}

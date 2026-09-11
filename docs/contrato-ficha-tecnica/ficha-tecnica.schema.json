@@ -368,7 +368,8 @@
       "type": "string",
       "enum": [
         "app",
-        "cv-viva"
+        "cv-viva",
+        "planeadora"
       ]
     },
     "limites": {
@@ -412,6 +413,77 @@
         "required": [
           "valor",
           "etiqueta"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "conclusiones": {
+      "minItems": 3,
+      "maxItems": 6,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "cifra": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 16
+          },
+          "unidad": {
+            "type": "string",
+            "maxLength": 24
+          },
+          "titulo": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 60
+          },
+          "texto": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "fuente": {
+            "type": "string",
+            "enum": [
+              "medido",
+              "calculada",
+              "declarado",
+              "estimacion"
+            ]
+          }
+        },
+        "required": [
+          "cifra",
+          "titulo",
+          "texto",
+          "fuente"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "galeria": {
+      "minItems": 1,
+      "maxItems": 12,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "archivo": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120,
+            "pattern": "^(?!\\/)(?!.*(?:^|\\/)\\.\\.(?:\\/|$))[A-Za-z0-9._/-]+\\.(png|jpg|jpeg|webp)$"
+          },
+          "pie": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          }
+        },
+        "required": [
+          "archivo",
+          "pie"
         ],
         "additionalProperties": false
       }

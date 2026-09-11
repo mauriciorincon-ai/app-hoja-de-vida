@@ -1,0 +1,243 @@
+{
+  "schema_version": "1.1.0",
+  "actualizado": "2026-09-06",
+  "pieza": {
+    "slug": "empresas-de-colombia",
+    "nombre": "Las empresas de Colombia en cifras",
+    "frente": "tableros",
+    "estado": "sellado",
+    "ciclo": "H1",
+    "version": "1.0.0",
+    "sellado_en": "2026-09-06",
+    "sprints_cerrados": 0
+  },
+  "promesa": {
+    "tagline": "El sector real colombiano, con su cobertura declarada",
+    "para_quien": "Para quien evalúa trabajo financiero y quiere ver el criterio: cómo se define un universo sin contar dos veces al mismo grupo empresarial, cómo se prueba que una regla derivada coincide con la del supervisor, y cómo se distingue el crecimiento de la economía del crecimiento de la muestra.",
+    "intro": "Los estados financieros que las sociedades reportan a la Superintendencia de Sociedades, de 2018 a 2025, reunidos en un modelo en estrella de 6,4 millones de hechos. El origen trae nueve trampas —declaraciones repetidas, consolidados que duplican al grupo, razones sociales corruptas— y cada una está medida y resuelta antes de modelar, no parcheada después."
+  },
+  "titular": "Ocho años de estados financieros de casi cuarenta mil sociedades colombianas, con las identidades contables verificadas en cero y la cobertura del propio universo medida en una página.",
+  "stack": [
+    {
+      "nombre": "Power BI Desktop",
+      "papel": "El tablero: un modelo en estrella de diez tablas en modo import y doce páginas en un solo archivo, sin servicio en la nube."
+    },
+    {
+      "nombre": "Power Query (M)",
+      "papel": "Toda la preparación: catorce consultas que resuelven reenvíos, duplicados y consolidados antes de que exista una sola medida."
+    },
+    {
+      "nombre": "DAX",
+      "papel": "Las 64 medidas, incluidas las cuatro identidades contables que cierran en cero."
+    },
+    {
+      "nombre": "PBIR escrito por script",
+      "papel": "Doce páginas, seis en español y seis en inglés, con 142 visuales generadas con Python; las etiquetas regulatorias se traducen por su código, no por su texto."
+    },
+    {
+      "nombre": "Python",
+      "papel": "La línea base independiente que predijo el conteo exacto de la tabla de hechos, y la verificación de la clasificación sectorial contra la oficial."
+    },
+    {
+      "nombre": "API SODA (Socrata)",
+      "papel": "La descarga a demanda desde datos.gov.co, con la fecha de la foto sellada en cada archivo."
+    }
+  ],
+  "cifras": [
+    {
+      "clave": "ingresos_2025",
+      "valor": 1400.1,
+      "unidad": "billones de pesos",
+      "etiqueta": "Ingresos de 29 167 sociedades en 2025",
+      "fuente": "medido",
+      "detalle": "Lo que facturó en 2025 el universo del tablero: 29 167 sociedades que reportan a la Superintendencia de Sociedades. En 2018 eran 19 405 y 707,7 billones; el máximo fue 2023, con 1 437,7. El crecimiento de 2025 fue del 7,3 % agregado y del 6,8 % sobre las 27 662 empresas presentes también en 2024."
+    },
+    {
+      "clave": "filas_hechos",
+      "valor": 6443634,
+      "unidad": "filas",
+      "etiqueta": "Filas en la tabla de hechos, las que predijo el preflight",
+      "fuente": "medido",
+      "detalle": "Conteo sobre el modelo cargado, idéntico al que predijo una validación independiente escrita en Python antes del refresco: dos caminos distintos al mismo número."
+    },
+    {
+      "clave": "sociedades",
+      "valor": 39276,
+      "unidad": "sociedades",
+      "etiqueta": "Sociedades, con 224 190 declaraciones anuales",
+      "fuente": "medido",
+      "detalle": "Una sola declaración por empresa y año, tras resolver los reenvíos y los casos que reportaron bajo dos figuras el mismo ejercicio."
+    },
+    {
+      "clave": "descuadre_identidades",
+      "valor": 0,
+      "unidad": "pesos",
+      "etiqueta": "Descuadre en las cuatro identidades contables",
+      "fuente": "medido",
+      "detalle": "Ingresos menos costo igual a ganancia bruta; pasivos más patrimonio igual a activos; efectivo del balance igual a caja de cierre del flujo; y el árbol DuPont, que cierra a siete decimales."
+    },
+    {
+      "clave": "cobertura_ranking",
+      "valor": 84.9,
+      "unidad": "%",
+      "etiqueta": "Cobertura del ranking de las diez mil empresas más grandes",
+      "fuente": "medido",
+      "detalle": "Las 1 507 que faltan valen 509 billones de pesos en ingresos y están vigiladas por otra superintendencia. El tablero lo publica como cifra en una página, no como nota al pie."
+    }
+  ],
+  "bloques": [
+    {
+      "orden": 1,
+      "nombre": "La economía real en cifras",
+      "linea": "Cuánto factura, gana y posee el sector real, con el crecimiento agregado y el comparable en el mismo eje.",
+      "cuenta": 10
+    },
+    {
+      "orden": 2,
+      "nombre": "Quién gana y quién pierde",
+      "linea": "El ranking por ingresos y por utilidad, filtrable por sector y norma contable, y quién cerró el año en pérdida.",
+      "cuenta": 6
+    },
+    {
+      "orden": 3,
+      "nombre": "Los sectores",
+      "linea": "Las veintiuna secciones de la clasificación industrial comparadas: tamaño, margen y dispersión por sección.",
+      "cuenta": 4
+    },
+    {
+      "orden": 4,
+      "nombre": "El mapa empresarial",
+      "linea": "Dónde están las empresas, por departamento y ciudad, y bajo qué forma jurídica operan.",
+      "cuenta": 5
+    },
+    {
+      "orden": 5,
+      "nombre": "Salud financiera",
+      "linea": "Liquidez, endeudamiento, rentabilidad y flujo de caja, y el árbol DuPont que descompone la rentabilidad.",
+      "cuenta": 9
+    },
+    {
+      "orden": 6,
+      "nombre": "Notas, límites y calidad",
+      "linea": "Qué universo cubre este tablero, medido contra dos rankings publicados, y qué no puede responder.",
+      "cuenta": 7
+    },
+    {
+      "orden": 7,
+      "nombre": "Seis páginas en inglés",
+      "linea": "Gemelas de las españolas, desde el mismo modelo; las etiquetas regulatorias se traducen por su código, no por su texto.",
+      "cuenta": 6
+    },
+    {
+      "orden": 8,
+      "nombre": "El modelo semántico",
+      "linea": "Estrella de 10 tablas y 6 relaciones con 64 medidas DAX; toda la preparación en Power Query, sin columnas calculadas.",
+      "cuenta": 64
+    }
+  ],
+  "limites": [
+    "Los datos son una foto fechada, no una conexión viva: se actualizan cuando se ejecuta la descarga.",
+    "El universo son las sociedades que reportan a la Superintendencia de Sociedades: quedan fuera las vigiladas por otra superintendencia.",
+    "Cada empresa aparece con la clasificación de su declaración más reciente: una sociedad que cambió de sector se muestra con el actual en todos los años.",
+    "La descripción del código industrial no se carga: el origen la publica con las tildes rotas en 480 variantes, y el análisis va por sección."
+  ],
+  "nunca": [
+    "Nunca suma los estados consolidados con los individuales: serían la misma matriz contada dos veces y cada grupo empresarial quedaría inflado.",
+    "Nunca presenta el crecimiento agregado solo: al lado va el de las mismas empresas en los dos años, que en 2020 revela −7,4 % donde el agregado muestra −2,2 %.",
+    "Nunca mezcla las cifras publicadas por terceros con las que calcula el modelo: viven en el modelo sin relación, a propósito.",
+    "Nunca inventa un dato para reparar el origen: la razón social que llega corrupta se toma del ranking oficial que republica el mismo campo bien codificado.",
+    "Nunca carga los datos de contacto que el origen publica —teléfono, correo y dirección de cada sociedad—: el tablero es de análisis financiero."
+  ],
+  "conclusiones": [
+    {
+      "cifra": "−7,4 %",
+      "unidad": "en 2020",
+      "titulo": "La caída de 2020 fue del 7,4 %, no del 2,2 %",
+      "texto": "El agregado dice −2,2 % porque en 2020 reportaron 3 414 sociedades nuevas. Sobre las mismas 23 321 empresas presentes en los dos años, la contracción fue más del triple. El tablero enseña los dos crecimientos en el mismo eje.",
+      "fuente": "medido"
+    },
+    {
+      "cifra": "+14,6 %",
+      "unidad": "en 2019",
+      "titulo": "El salto de 2019 era en su mayor parte muestra, no economía",
+      "texto": "El agregado creció 24,5 %; las mismas empresas, 14,6 %. Los otros diez puntos son 6 193 sociedades que entraron al universo ese año, no ventas nuevas.",
+      "fuente": "medido"
+    },
+    {
+      "cifra": "49,1 %",
+      "unidad": "de los ingresos",
+      "titulo": "La mitad de la facturación tiene domicilio en Bogotá",
+      "texto": "688,0 de los 1 400,1 billones de 2025, con 11 944 de las 29 167 sociedades. Con Antioquia (17,5 %) y Valle (8,8 %), tres departamentos suman tres de cada cuatro pesos facturados.",
+      "fuente": "medido"
+    },
+    {
+      "cifra": "41,1 %",
+      "unidad": "comercio",
+      "titulo": "El comercio es el sector que más factura: 41 % del total",
+      "texto": "Comercio 575,8 billones, manufactura 393,5 y servicios 246,3 en 2025. Pero los servicios tienen más sociedades que nadie: 11 962 frente a 7 437 del comercio. Facturar mucho y ser muchos no es lo mismo.",
+      "fuente": "medido"
+    },
+    {
+      "cifra": "22,6 %",
+      "unidad": "en pérdida",
+      "titulo": "Más de una de cada cinco sociedades cerró 2025 en pérdida",
+      "texto": "6 586 de las 29 167 sociedades del universo declararon resultado negativo en 2025, un año en que el conjunto facturó 6,8 % más que el anterior sobre las mismas empresas.",
+      "fuente": "medido"
+    },
+    {
+      "cifra": "16,3",
+      "unidad": "billones cada una",
+      "titulo": "Claro y las tiendas Ara facturan casi lo mismo",
+      "texto": "Comunicación Celular S.A. factura 16,35 billones y Jerónimo Martins Colombia, dueña de las tiendas Ara, 16,34. Siguen Colombiana de Comercio, Kopps Commercial, D1 y Primax: dos cadenas de descuento entre las seis mayores del universo.",
+      "fuente": "medido"
+    }
+  ],
+  "hitos": [
+    {
+      "valor": "H1",
+      "etiqueta": "ciclo"
+    },
+    {
+      "valor": "7",
+      "etiqueta": "fases de construcción cerradas"
+    },
+    {
+      "valor": "2026-09-06",
+      "etiqueta": "sellada"
+    },
+    {
+      "valor": "v1.0.0",
+      "etiqueta": "version"
+    },
+    {
+      "valor": "0,00",
+      "etiqueta": "descuadre en las cuatro identidades"
+    }
+  ],
+  "galeria": [
+    {
+      "archivo": "capturas/empresas-de-colombia/01-la-economia-real-en-cifras.png",
+      "pie": "La economía real en cifras"
+    },
+    {
+      "archivo": "capturas/empresas-de-colombia/02-quien-gana-y-quien-pierde.png",
+      "pie": "Quién gana y quién pierde"
+    },
+    {
+      "archivo": "capturas/empresas-de-colombia/03-los-sectores.png",
+      "pie": "Los sectores"
+    },
+    {
+      "archivo": "capturas/empresas-de-colombia/04-el-mapa-empresarial.png",
+      "pie": "El mapa empresarial"
+    },
+    {
+      "archivo": "capturas/empresas-de-colombia/05-salud-financiera.png",
+      "pie": "Salud financiera"
+    },
+    {
+      "archivo": "capturas/empresas-de-colombia/06-notas-limites-y-calidad.png",
+      "pie": "Notas, límites y calidad"
+    }
+  ]
+}

@@ -1,0 +1,135 @@
+{
+  "schema_version": "1.1.0",
+  "actualizado": "2026-09-06",
+  "pieza": {
+    "slug": "reemplazo-erp",
+    "nombre": "Reemplazo de un ERP con inteligencia artificial",
+    "frente": "investigaciones",
+    "estado": "inicial",
+    "ciclo": "Producción 6.º",
+    "version": "origen v1.1",
+    "sellado_en": null,
+    "sprints_cerrados": 0
+  },
+  "promesa": {
+    "tagline": "El sistema central manda sobre el negocio. Reemplazarlo módulo a módulo, con IA.",
+    "para_quien": "Para la empresa mediana atrapada en su sistema central de gestión: licencias millonarias al año, cambios de un campo que toman semanas de consultoría más cobros de desarrollo a medida, y áreas que terminan operando en hojas de cálculo al lado del sistema porque el sistema no se adapta a ellas. Migrar a otro proveedor toma años y entrega la misma trampa con otro logo.",
+    "intro": "Una estrategia de reemplazo con desarrollo a medida asistido por inteligencia artificial que minimice tiempo y riesgo: módulo a módulo con el sistema viejo corriendo al lado, ordenando qué va primero según su acoplamiento, y medido sobre un sistema real de código abierto — no sobre una maqueta. Primero el orden de reemplazo; después la arquitectura y el método."
+  },
+  "titular": "Ninguna de 900 obras revisadas presenta una estrategia de reemplazo de ERP asistido por IA validada y replicable; solo 15 de 500 estudian la productividad de la IA en sistemas integrados, frente a 138 en tareas pequeñas.",
+  "stack": [
+    {
+      "nombre": "ERP de código abierto como demostrador",
+      "papel": "un sistema real, en producción en miles de empresas, público y sin dato de organización alguna: complejidad real, reproducible por cualquiera"
+    },
+    {
+      "nombre": "Patrón estrangulador",
+      "papel": "reemplazar módulo a módulo sin apagar el sistema viejo, con operación paralela y reconciliación de datos"
+    },
+    {
+      "nombre": "Análisis de acoplamiento entre módulos",
+      "papel": "el grafo de dependencias decide el orden de reemplazo: qué módulo primero y por qué"
+    },
+    {
+      "nombre": "Desarrollo asistido por IA",
+      "papel": "la variable que cambia la ecuación; su productividad se cita con fuente y alcance, jamás se exagera"
+    },
+    {
+      "nombre": "Literatura verificada una a una",
+      "papel": "fracasos y costos de migraciones documentados, modernización de sistemas heredados, y la evidencia real de productividad"
+    }
+  ],
+  "cifras": [
+    {
+      "clave": "estrategias_validadas",
+      "valor": 1,
+      "unidad": "obra",
+      "etiqueta": "Obras con estrategia de reemplazo asistido por IA",
+      "fuente": "medido",
+      "detalle": "Sobre 900 registros revisados en la celda estricta del paper de validación: un marco multiagente sin validación empírica; ninguna replicable."
+    },
+    {
+      "clave": "evidencia_sistema_integrado",
+      "valor": 15,
+      "unidad": "obras",
+      "etiqueta": "Estudios de productividad de la IA en sistemas integrados",
+      "fuente": "medido",
+      "detalle": "Sobre 500 registros revisados: la evidencia fuerte está en tareas pequeñas, la de sistemas completos apenas empieza."
+    },
+    {
+      "clave": "evidencia_tarea",
+      "valor": 138,
+      "unidad": "obras",
+      "etiqueta": "Estudios de productividad de la IA en tareas pequeñas",
+      "fuente": "medido",
+      "detalle": "Sobre los mismos 500 registros: es la asimetría que define el riesgo de la línea y la razón de medir sobre un sistema real."
+    },
+    {
+      "clave": "orden_por_acoplamiento",
+      "valor": 3,
+      "unidad": "obras",
+      "etiqueta": "Obras que formalizan el orden de reemplazo por acoplamiento",
+      "fuente": "medido",
+      "detalle": "Sobre 400 registros revisados; ninguna sobre ERP — el primer artefacto publicable de la línea."
+    }
+  ],
+  "bloques": [
+    {
+      "orden": 1,
+      "nombre": "El orden de reemplazo",
+      "linea": "Seleccionada: qué módulo va primero, formalizado sobre el grafo de dependencias de un ERP de código abierto.",
+      "cuenta": 0
+    },
+    {
+      "orden": 2,
+      "nombre": "Arquitectura y método de referencia",
+      "linea": "Programa declarado, diferido: reemplazo de un módulo crítico medido en esfuerzo y defectos, cuando el mapa exista.",
+      "cuenta": 0
+    },
+    {
+      "orden": 3,
+      "nombre": "La línea base de comparación",
+      "linea": "Dentro de la arquitectura: duraciones de migraciones tradicionales desde literatura, normalizadas al nivel de módulo.",
+      "cuenta": 0
+    },
+    {
+      "orden": 4,
+      "nombre": "El demostrador como contribución",
+      "linea": "Elegir un ERP real de código abierto, no fabricar una maqueta: resuelve la credibilidad y la reproducibilidad a la vez.",
+      "cuenta": 0
+    }
+  ],
+  "limites": [
+    "Reemplaza un módulo crítico en el demostrador; no un ERP completo en una organización real.",
+    "La productividad de la IA se cita con su alcance: lo probado en tareas pequeñas no se extrapola a sistemas integrados.",
+    "El método se construye con las herramientas del autor y se declara reproducible con herramientas de uso general."
+  ],
+  "nunca": [
+    "Nombra empresas donde el autor vivió el problema, ni proveedores de ERP en tono acusatorio: se describe la clase de sistema.",
+    "Afirma una cifra de productividad de la IA sin fuente y alcance declarados.",
+    "Usa datos de empleos anteriores del autor: solo fuentes públicas y datos sintéticos declarados.",
+    "Afirma una cifra sin fuente ni un vacío sin el número de obras revisadas."
+  ],
+  "hitos": [
+    {
+      "valor": "2026-09-04",
+      "etiqueta": "validada contra literatura"
+    },
+    {
+      "valor": "7 de 7",
+      "etiqueta": "criterios cumplidos"
+    },
+    {
+      "valor": "0",
+      "etiqueta": "papers sellados"
+    },
+    {
+      "valor": "6.º",
+      "etiqueta": "turno en la cola"
+    },
+    {
+      "valor": "origen v1.1",
+      "etiqueta": "version"
+    }
+  ]
+}

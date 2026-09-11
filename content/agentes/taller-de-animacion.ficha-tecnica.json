@@ -1,0 +1,367 @@
+{
+  "schema_version": "1.1.0",
+  "actualizado": "2026-09-06",
+  "pieza": {
+    "slug": "taller-de-animacion",
+    "nombre": "Taller de Animación",
+    "frente": "agentes",
+    "estado": "sellado",
+    "ciclo": "v1",
+    "version": "1.3.0",
+    "sellado_en": "2026-08-01",
+    "sprints_cerrados": 0
+  },
+  "promesa": {
+    "tagline": "Carboncillo, tinta y plastilina, con la GPU encendida lo menos posible.",
+    "intro": "Lo que cambia es el costo marginal. Guion, voz, medición y montaje corren en el Mac y cuestan cero; la GPU alquilada se enciende tarde, solo para generar los clips, y se apaga antes de ensamblar. Cada video queda con un manifiesto que permite repetirlo, un costo real registrado y una lección escrita. Y cada técnica nueva entra por un procedimiento, no por un rediseño.",
+    "para_quien": "Para quien necesita videos animados con estética artesanal y hoy no los hace, porque encargar uno cuesta del orden de 500.000 COP y a ese precio la frecuencia se muere antes que la idea. Hoy publica sin video, o con plantillas genéricas que no se parecen a nada suyo. Del otro lado hay un operador, un Mac y una tarjeta gráfica alquilada por horas."
+  },
+  "titular": "Que la técnica número 15 cueste lo mismo que la número 4 no es una promesa: tras cada alta de técnica, git diff --stat sobre pipeline/ tiene que quedar vacío. Si sale con cambios, el alta no pasa y se corrige el contrato, nunca el núcleo.",
+  "stack": [
+    {
+      "nombre": "Claude Code",
+      "papel": "el taller mismo: lee la constitución, redacta guion y storyboard, parchea los workflows, corre los comandos y se detiene en cada gate a esperar su token"
+    },
+    {
+      "nombre": "ComfyUI por API REST",
+      "papel": "el motor de generación, manejado con curl: encolar el workflow parcheado, consultar el estado de la corrida y descargar el clip. Nunca por la interfaz gráfica"
+    },
+    {
+      "nombre": "RunPod (pod on-demand)",
+      "papel": "la GPU alquilada por tiempo encendido, con network volume para los modelos. Es la única pieza del sistema que cuesta dinero mientras corre"
+    },
+    {
+      "nombre": "Kokoro TTS",
+      "papel": "la narración en español, generada local y sin GPU. Se hace antes de encender el pod porque su duración es la que fija cuántos frames se generan"
+    },
+    {
+      "nombre": "FFmpeg y ffprobe",
+      "papel": "la medición y el ensamblaje locales: duración exacta de cada línea narrada, verificación de los clips, concatenado, formato de destino y deriva A/V"
+    },
+    {
+      "nombre": "Workflows JSON (plantilla + parche)",
+      "papel": "el formato declarativo de cada técnica: una plantilla validada que solo se modifica en los parámetros que su tabla declara. Parámetro no documentado, no se toca"
+    },
+    {
+      "nombre": "ssh y scp",
+      "papel": "control del pod desde el Mac: comprobar que ComfyUI levantó, inspeccionar el volume, subir los insumos por escena que la técnica declare y apagar"
+    },
+    {
+      "nombre": "Markdown con frontmatter y git",
+      "papel": "el repo declarativo: brief, guion, storyboard, plan de escenas, manifiesto y costos se versionan; clips, audio, másteres y modelos quedan fuera"
+    }
+  ],
+  "cifras": [
+    {
+      "clave": "criterios_binarios",
+      "valor": 33,
+      "etiqueta": "Criterios binarios de verificación",
+      "fuente": "medido",
+      "detalle": "Casillas contadas en verificacion.md (grep de líneas que abren con casilla vacía): 7 de WI-1, 5 de WI-2, 7 de WI-3, 7 del DoD de cada video, 3 del chequeo por sesión y 4 del seguimiento de valor. Todos son pasa o no pasa; ninguno pide juicio salvo el gate de entrega, que es del operador."
+    },
+    {
+      "clave": "gates",
+      "valor": 6,
+      "etiqueta": "Gates con token verbal",
+      "fuente": "medido",
+      "detalle": "Tabla de gates de CLAUDE.md, coherente con gobernanza.md: G-Concepto, G-Guion+Storyboard, G-Encendido, G-Entrega, G-Tecnica y G-Metodo. Cada uno se define por su mecanismo (una frase exacta que el operador dice), no por su intención."
+    },
+    {
+      "clave": "decisiones",
+      "valor": 11,
+      "etiqueta": "Decisiones de arquitectura registradas",
+      "fuente": "medido",
+      "detalle": "Encabezados D1 a D11 contados en arquitectura/DECISIONES.md, registro append-only: 8 de la fundación, 2 de la revisión de fondo del 2026-07-26 y una extensión declarada inactiva."
+    },
+    {
+      "clave": "componentes_tecnica",
+      "valor": 6,
+      "etiqueta": "Componentes que exige toda técnica",
+      "fuente": "medido",
+      "detalle": "Sección «Los 6 componentes exigidos» de contrato-tecnica/CONTRATO-DE-TECNICA.md: workflow plantilla validado, tabla de parámetros parcheables, modelos y LoRAs con su comando de verificación, guía de prompts, tolerancias de coherencia temporal y clip de referencia de calidad."
+    },
+    {
+      "clave": "horas_operacion_mes",
+      "valor": 8,
+      "unidad": "h/mes",
+      "etiqueta": "Horas de operación al mes previstas",
+      "fuente": "declarado",
+      "detalle": "Insumo de arquitectura/roi.json declarado por el operador: 8 horas de operación al mes para sostener la producción, con la GPU alquilada encendida solo para generar clips. Ninguna producción está cronometrada aún; el costo evitado por video que modela el roi.json no se publica hasta medir la primera."
+    }
+  ],
+  "bloques": [
+    {
+      "orden": 1,
+      "nombre": "El método",
+      "linea": "El ciclo de una producción, de concepto a cierre, con su gate en cada frontera.",
+      "cuenta": 7
+    },
+    {
+      "orden": 2,
+      "nombre": "El contrato de técnica",
+      "linea": "La norma que hace el catálogo abierto: seis componentes y un alta estandarizada.",
+      "cuenta": 6
+    },
+    {
+      "orden": 3,
+      "nombre": "El catálogo de técnicas",
+      "linea": "Carboncillo, tinta-plumilla y plastilina, con roadmap abierto a las que entren.",
+      "cuenta": 3
+    },
+    {
+      "orden": 4,
+      "nombre": "El pipeline central",
+      "linea": "Lo que no cambia al agregar una técnica: formatos, voz, frames y ensamblaje.",
+      "cuenta": 4
+    },
+    {
+      "orden": 5,
+      "nombre": "La infraestructura del pod",
+      "linea": "Ciclo de vida de la GPU alquilada e inventario de modelos del volume.",
+      "cuenta": 2
+    },
+    {
+      "orden": 6,
+      "nombre": "Las producciones",
+      "linea": "Una carpeta por video: brief, guion, storyboard, plan de escenas y manifiesto.",
+      "cuenta": 5
+    },
+    {
+      "orden": 7,
+      "nombre": "La memoria",
+      "linea": "Lecciones, patrones acumulados, costos por corrida y decisiones de catálogo.",
+      "cuenta": 4
+    },
+    {
+      "orden": 8,
+      "nombre": "Las cápsulas de fallo",
+      "linea": "Qué hacer cuando pasa lo previsible: pod huérfano, deriva, workflow o modelo roto.",
+      "cuenta": 4
+    },
+    {
+      "orden": 9,
+      "nombre": "El arranque",
+      "linea": "Tres work-items encadenados antes del primer video real: spike, catálogo, pipeline.",
+      "cuenta": 3
+    }
+  ],
+  "proceso": {
+    "titulo": "Una corrida: de la idea al video entregado",
+    "carriles": [
+      {
+        "id": "operador",
+        "nombre": "El operador"
+      },
+      {
+        "id": "taller",
+        "nombre": "El taller · Claude Code (local)"
+      },
+      {
+        "id": "pod",
+        "nombre": "Pod RunPod · ComfyUI"
+      }
+    ],
+    "pasos": [
+      {
+        "id": "ini",
+        "tipo": "inicio",
+        "carril": "operador",
+        "texto": "Nueva producción"
+      },
+      {
+        "id": "abre",
+        "tipo": "tarea",
+        "carril": "taller",
+        "texto": "Lee el estado: ¿quedó algún pod encendido?"
+      },
+      {
+        "id": "guion",
+        "tipo": "tarea",
+        "carril": "taller",
+        "texto": "Redacta brief, guion y storyboard"
+      },
+      {
+        "id": "gguion",
+        "tipo": "decision",
+        "carril": "operador",
+        "texto": "¿Guion ok?"
+      },
+      {
+        "id": "voz",
+        "tipo": "tarea",
+        "carril": "taller",
+        "texto": "Narra con Kokoro y mide con ffprobe"
+      },
+      {
+        "id": "plan",
+        "tipo": "tarea",
+        "carril": "taller",
+        "texto": "Arma el plan: frames por duración medida"
+      },
+      {
+        "id": "gpod",
+        "tipo": "decision",
+        "carril": "operador",
+        "texto": "¿Enciende?"
+      },
+      {
+        "id": "genera",
+        "tipo": "tarea",
+        "carril": "pod",
+        "texto": "Genera los clips, escena por escena"
+      },
+      {
+        "id": "apaga",
+        "tipo": "tarea",
+        "carril": "taller",
+        "texto": "Descarga todo y apaga el pod"
+      },
+      {
+        "id": "monta",
+        "tipo": "tarea",
+        "carril": "taller",
+        "texto": "Ensambla y verifica la deriva A/V"
+      },
+      {
+        "id": "gentrega",
+        "tipo": "decision",
+        "carril": "operador",
+        "texto": "¿Aprueba?"
+      },
+      {
+        "id": "cierra",
+        "tipo": "tarea",
+        "carril": "taller",
+        "texto": "Registra costo, escribe la lección, commit"
+      },
+      {
+        "id": "fin",
+        "tipo": "fin",
+        "carril": "operador",
+        "texto": ""
+      }
+    ],
+    "flujos": [
+      {
+        "de": "ini",
+        "a": "abre"
+      },
+      {
+        "de": "abre",
+        "a": "guion"
+      },
+      {
+        "de": "guion",
+        "a": "gguion"
+      },
+      {
+        "de": "gguion",
+        "a": "voz",
+        "etiqueta": "sí · guion aprobado"
+      },
+      {
+        "de": "gguion",
+        "a": "guion",
+        "etiqueta": "no · reescribe"
+      },
+      {
+        "de": "voz",
+        "a": "plan"
+      },
+      {
+        "de": "plan",
+        "a": "gpod"
+      },
+      {
+        "de": "gpod",
+        "a": "genera",
+        "etiqueta": "sí · enciende el pod"
+      },
+      {
+        "de": "gpod",
+        "a": "plan",
+        "etiqueta": "no · ajusta el plan"
+      },
+      {
+        "de": "genera",
+        "a": "apaga"
+      },
+      {
+        "de": "apaga",
+        "a": "monta"
+      },
+      {
+        "de": "monta",
+        "a": "gentrega"
+      },
+      {
+        "de": "gentrega",
+        "a": "cierra",
+        "etiqueta": "sí · video aprobado"
+      },
+      {
+        "de": "gentrega",
+        "a": "guion",
+        "etiqueta": "no · al storyboard"
+      },
+      {
+        "de": "cierra",
+        "a": "fin"
+      }
+    ],
+    "anotaciones": [
+      {
+        "paso": "gpod",
+        "texto": "La GPU solo arranca con storyboard aprobado, audio ya medido, plan completo y costo esperado declarado. Es el único acto que cuesta."
+      },
+      {
+        "paso": "genera",
+        "texto": "Ningún clip nace a mano: cada escena sale de la plantilla de su técnica, parcheada solo en los parámetros declarados y encolada por la API."
+      },
+      {
+        "paso": "apaga",
+        "texto": "El montaje corre con el pod ya apagado. Apagar nunca requiere permiso, y ninguna sesión termina con un pod encendido."
+      },
+      {
+        "paso": "cierra",
+        "texto": "Nada cierra sin costo real registrado, lección escrita y un manifiesto que permita repetir la corrida tal cual."
+      }
+    ]
+  },
+  "procedencia_proceso": "app",
+  "limites": [
+    "Produce videos, no aplicaciones: su salida es guion, audio, clips, máster y el manifiesto que lo hace repetible.",
+    "No juzga la estética: no puede ver un video reproducirse, así que la calidad la aprueba el operador en el gate de entrega.",
+    "El método es hipótesis hasta cerrar el tercer work-item: tiempos de render, costo por segundo y qué modelo sirve a cada técnica no están medidos.",
+    "El valor que declara es costo evitado, no ingreso: el retorno comercial de que los videos atraigan público no está monetizado."
+  ],
+  "nunca": [
+    "Enciende la GPU sin guion y storyboard aprobados con su token verbal.",
+    "Termina una sesión con el pod encendido.",
+    "Produce clips a mano en la interfaz de ComfyUI: todo nace de un workflow parcheado por API.",
+    "Inventa costos, tiempos de render ni capacidades de modelos que no midió: sin fuente, va a la lista de vacíos.",
+    "Toca el pipeline para acomodar una técnica nueva: si hizo falta, se corrige el contrato, no el núcleo."
+  ],
+  "hitos": [
+    {
+      "valor": "v1",
+      "etiqueta": "ciclo"
+    },
+    {
+      "valor": "0",
+      "etiqueta": "work-items cerrados"
+    },
+    {
+      "valor": "2026-08-01",
+      "etiqueta": "sellada"
+    },
+    {
+      "valor": "v1.3.0",
+      "etiqueta": "version"
+    },
+    {
+      "valor": "11",
+      "etiqueta": "decisiones registradas"
+    }
+  ]
+}

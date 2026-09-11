@@ -162,11 +162,11 @@
     "notaIdioma": "",
     "estados": {
       "sellado": "Sellada",
-      "inicial": "Construcción cerrada"
+      "inicial": "Sin sellar"
     },
     "estadoAyuda": {
       "sellado": "Su gate de pruebas terminó",
-      "inicial": "Su construcción cerró; el gate de pruebas aún no"
+      "inicial": "Su gate de pruebas todavía no ha corrido"
     },
     "paraQuien": "Para quién",
     "diferencial": "Qué no hace nadie más",
@@ -211,6 +211,12 @@
     "vecinasEtiqueta": "Otras apps de la vitrina",
     "appAnterior": "App anterior",
     "appSiguiente": "App siguiente",
+    "escaparateCuenta": "{n, plural, one {# pieza publicada} other {# piezas publicadas}}",
+    "escaparateNota": "Cada pieza tiene su propia página. Aquí solo se asoman.",
+    "volverAlFrente": "Volver a {frente}",
+    "vecinasDelFrente": "Otras piezas de {frente}",
+    "piezaAnterior": "Pieza anterior",
+    "piezaSiguiente": "Pieza siguiente",
     "deEstaCasa": "De esta casa",
     "deEstaCasaLinea": "Lo que sostiene la página que estás leyendo: también son apps del pipeline, y también se pueden recorrer.",
     "verLaApp": "Ver la app",
@@ -219,7 +225,8 @@
   },
   "fichaTecnica": {
     "eyebrow": "Ficha técnica",
-    "ancladaEl": "Anclada al export del {fecha}",
+    "ancladaEl": "Datos del {fecha}",
+    "selladaEl": "Sellada el {fecha}",
     "sprints": "{n, plural, one {# sprint} other {# sprints}}",
     "titularRotulo": "Qué no hace nadie más",
     "cifras": "Las cifras",
@@ -234,12 +241,19 @@
     "procesoApp": "Proceso declarado por la propia app en su export.",
     "s03": "Qué tiene",
     "s03sub": "{grupos, plural, one {# grupo} other {# grupos}} · {n} funcionalidades. El detalle de cada una vive en la ficha completa.",
+    "s03subSinDetalle": "{grupos, plural, one {# grupo} other {# grupos}} · {n} funcionalidades.",
+    "s03subSoloGrupos": "{grupos, plural, one {# grupo} other {# grupos}}.",
     "s04": "Límites, y lo que nunca hace",
-    "s04sub": "Lo que la app decidió no ser vale tanto como lo que es.",
+    "s04sub": "Lo que decidió no ser vale tanto como lo que es.",
     "limites": "Límites, a propósito",
     "nunca": "Nunca",
     "s05": "Dónde está",
     "s05sub": "La versión anclada, no el tiempo real.",
+    "conclusiones": "Lo que dicen los datos",
+    "conclusionesSub": "Cada hallazgo con su cifra y su procedencia. Es lo que la pieza encontró, no lo que es.",
+    "galeria": "Cómo se ve",
+    "galeriaSub": "Pantallas reales de la pieza, tal como corre. Sin retocar.",
+    "galeriaPie": "Pantalla {n} de {total}",
     "hitos": {
       "ciclo": "ciclo",
       "sprints": "sprints cerrados",
@@ -250,7 +264,6 @@
     },
     "verDetalle": "Ver la ficha completa",
     "cierreNota": "Aquí se muestra; no se entrega. La lista de espera no promete fecha.",
-    "detalleEyebrow": "Ficha completa",
     "volverFichaTecnica": "Volver a la ficha técnica"
   }
 }

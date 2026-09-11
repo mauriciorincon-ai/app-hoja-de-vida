@@ -1,0 +1,155 @@
+{
+  "schema_version": "1.1.0",
+  "actualizado": "2026-09-06",
+  "pieza": {
+    "slug": "asignacion-con-fallas",
+    "nombre": "Asignación conductor–bus con fallas",
+    "frente": "investigaciones",
+    "estado": "inicial",
+    "ciclo": "Producción 4.º",
+    "version": "origen v1.1",
+    "sellado_en": null,
+    "sprints_cerrados": 0
+  },
+  "promesa": {
+    "tagline": "La falla es del par conductor–bus. Asignar como pareja cumple más kilómetros.",
+    "para_quien": "Para quien despacha buses en un sistema de transporte público: hoy asigna conductor y bus con listas separadas — por antigüedad, por disponibilidad, por cuánto lleva un bus sin salir — y los kilómetros incumplidos se le descuentan del pago sin que nadie sepa qué pareja falló ni por qué. La interacción entre un conductor y un bus concreto no está en ninguna lista.",
+    "intro": "Un modelo que un operador puede usar para decidir sus parejas conductor–bus–ruta, incorporando la probabilidad de falla como propiedad de la pareja, la capacidad del bus y la demanda de cada ruta, para cumplir más kilómetros y mover más pasajeros a la vez. La investigación anterior ya midió cuánto cuesta ignorar la interacción; esta construye el modelo para no ignorarla."
+  },
+  "titular": "Ninguna de 1.414 obras revisadas modela la falla del servicio como propiedad de la pareja conductor–vehículo, y ninguna de 600 optimiza el cumplimiento de kilómetros con la avería como consecuencia de la propia asignación.",
+  "stack": [
+    {
+      "nombre": "Programación entera y por restricciones",
+      "papel": "dos formulaciones independientes del mismo problema; sus óptimos deben coincidir o el modelo está mal traducido"
+    },
+    {
+      "nombre": "Datos abiertos del sistema de transporte",
+      "papel": "la topología real de rutas y paradas, anclada por huella criptográfica para que cualquiera reproduzca con el mismo archivo"
+    },
+    {
+      "nombre": "Generador sintético declarado",
+      "papel": "los datos que no son públicos — fallas, demandas, tiempos — se simulan con supuestos y calibración publicados; el generador es parte del trabajo"
+    },
+    {
+      "nombre": "Varas fijadas antes del dato",
+      "papel": "los umbrales que deciden si la tesis se sostiene o cae se congelan antes de que exista un solo resultado"
+    },
+    {
+      "nombre": "Evaluación por etapas",
+      "papel": "primero el par con rutas fijas, que valida modelo y generador; después se libera la ruta y se mide la tripleta completa"
+    },
+    {
+      "nombre": "Literatura verificada una a una",
+      "papel": "cada obra citada se cotejó contra su registro oficial; los vacíos se reportan con el número de obras revisadas"
+    }
+  ],
+  "cifras": [
+    {
+      "clave": "registros_revisados",
+      "valor": 2350,
+      "unidad": "registros",
+      "etiqueta": "Registros revisados para validar el tema",
+      "fuente": "medido",
+      "detalle": "Paper de validación teórica del tema: 25 consultas en seis familias, en inglés (límite declarado), más 401 registros por bola de nieve; 241 obras verificadas una a una contra registro oficial."
+    },
+    {
+      "clave": "obras_falla_del_par",
+      "valor": 0,
+      "unidad": "obras",
+      "etiqueta": "Obras que modelan la falla como propiedad del par",
+      "fuente": "medido",
+      "detalle": "Sobre 1.414 registros revisados en la celda correspondiente del paper de validación; el vecino más cercano es de 2025 y confirma que la conversación va hacia allá."
+    },
+    {
+      "clave": "optimos_identicos",
+      "valor": 14251,
+      "unidad": "óptimos",
+      "etiqueta": "Óptimos idénticos entre las dos formulaciones",
+      "fuente": "medido",
+      "detalle": "Paper sellado sobre las consecuencias de asignar mal: 14.251 comparaciones con óptimo probado, 14.251 valores idénticos, sobre 18.500 corridas registradas."
+    },
+    {
+      "clave": "parejas_que_cambian",
+      "valor": 90,
+      "unidad": "%",
+      "etiqueta": "Parejas que cambian al modelar el par",
+      "fuente": "medido",
+      "detalle": "Distancia de emparejamiento mediana entre la asignación con interacción y la separable, en el paper sellado de consecuencias."
+    },
+    {
+      "clave": "horas_paper_consecuencias",
+      "valor": 4.92,
+      "unidad": "horas",
+      "etiqueta": "Horas de producción del paper de consecuencias",
+      "fuente": "medido",
+      "detalle": "Horas de agente medidas por sellos de tiempo en el registro del programa, del encuadre al sello, para el paper sellado sobre las consecuencias."
+    }
+  ],
+  "bloques": [
+    {
+      "orden": 1,
+      "nombre": "Las consecuencias de asignar mal",
+      "linea": "Sellada: cuánto cuesta ignorar la interacción, y los dos modos en que el modelo separable falla.",
+      "cuenta": 1
+    },
+    {
+      "orden": 2,
+      "nombre": "El par con rutas fijas",
+      "linea": "Etapa A, seleccionada: valida el modelo y el generador sintético sobre el escalón verificable.",
+      "cuenta": 0
+    },
+    {
+      "orden": 3,
+      "nombre": "La tripleta conductor–bus–ruta",
+      "linea": "Etapa B, seleccionada: se libera la ruta y entran la capacidad del bus y la demanda — el modelo para operar.",
+      "cuenta": 0
+    },
+    {
+      "orden": 4,
+      "nombre": "El generador de datos sintéticos",
+      "linea": "Contribución propia: qué simula, con qué supuestos, calibrado contra qué fuentes públicas y con qué límites.",
+      "cuenta": 0
+    },
+    {
+      "orden": 5,
+      "nombre": "El costo contractual de asignar mal",
+      "linea": "Diferida: la pieza de consultoría — qué paga un operador por cada pareja mal formada.",
+      "cuenta": 0
+    }
+  ],
+  "limites": [
+    "Estudia la componente zonal del sistema: el feed abierto no trae rutas troncales, y no se fabrican.",
+    "Afirma medias, no percentiles: la confiabilidad se trata como valor esperado, no como distribución diaria.",
+    "Las magnitudes son de instancias sintéticas: el mecanismo se demuestra; las cifras reales exigen datos de un operador.",
+    "Es un modelo de emparejamiento, no de clasificación de personas."
+  ],
+  "nunca": [
+    "Nombra conductores ni usa datos personales.",
+    "Usa datos de empleos anteriores del autor: solo fuentes públicas y datos sintéticos declarados.",
+    "Culpa o clasifica conductores: el modelo empareja, no rankea.",
+    "Afirma una cifra sin fuente ni un vacío sin el número de obras revisadas.",
+    "Mueve una vara después de ver el resultado."
+  ],
+  "hitos": [
+    {
+      "valor": "2026-09-02",
+      "etiqueta": "validada contra literatura"
+    },
+    {
+      "valor": "7 de 7",
+      "etiqueta": "criterios cumplidos"
+    },
+    {
+      "valor": "1",
+      "etiqueta": "paper sellado (consecuencias)"
+    },
+    {
+      "valor": "4.º",
+      "etiqueta": "turno en la cola"
+    },
+    {
+      "valor": "origen v1.1",
+      "etiqueta": "version"
+    }
+  ]
+}

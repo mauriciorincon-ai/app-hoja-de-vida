@@ -1,7 +1,28 @@
 import { z } from "zod";
 
 /**
- * CONTRATO «FICHA TÉCNICA» v1.1.0 (ADR-016) — la capa infografía de la vitrina.
+ * CONTRATO «FICHA TÉCNICA» v1.3.1 (ADR-016 · ADR-017) — la capa infografía.
+ *
+ * v1.3.1 (2026-09-09, auditoría del S7): PARCHE de endurecimiento. `galeria[].archivo`
+ * era una ruta relativa solo de nombre — el patrón aceptaba «../..» y raíz, con lo
+ * que una galería podía apuntar fuera de public/piezas/<frente>/. Ninguna de las 36
+ * capturas entregadas se ve afectada. No se impone una forma de carpetas: se prohíbe
+ * escaparse.
+ *
+ * v1.3.0 (2026-09-09, S7 · las fichas de tableros): ADITIVO. Dos claves
+ * opcionales que una pieza CON DATOS necesita y una app no: **`conclusiones`**
+ * (lo que los datos dicen, en tarjetas con su cifra y su fuente) y
+ * **`galeria`** (las pantallas reales, con su pie). Propuestas por la casa que
+ * produce los tableros y adoptadas tal cual: límites y forma son los suyos.
+ * `required` no cambia; toda ficha 1.x válida lo sigue siendo.
+ *
+ * v1.2.0 (2026-09-06, S7): ADITIVO. `procedencias` admite **`"planeadora"`**
+ * — la casa que administra las fichas de las apps (export del repo de cada
+ * app + curación propia) puede firmar el proceso que declara. Y junto al
+ * contrato se publica una **plantilla generada de este mismo Zod**
+ * (`docs/contrato-ficha-tecnica/plantilla.ficha-tecnica.json`) para cualquier
+ * casa productora. Compatible hacia atrás: toda ficha v1.0.0 o v1.1.0 válida
+ * lo sigue siendo.
  *
  * v1.1.0 (2026-09-06, orden del usuario): el **proceso BPMN es OPCIONAL**. No
  * toda pieza tiene un proceso de uso (una línea de investigación, un tablero);
@@ -52,7 +73,12 @@ export const frentes = [
   "tableros",
 ] as const;
 export const estadosPieza = ["inicial", "sellado"] as const;
-export const procedencias = ["app", "cv-viva"] as const;
+/**
+ * Quién declara el proceso. `app`: la propia app en su export. `cv-viva`:
+ * esta casa, cuando el export aún no lo trae. `planeadora` (v1.2.0): la casa
+ * que administra y cura las fichas de las apps del pipeline.
+ */
+export const procedencias = ["app", "cv-viva", "planeadora"] as const;
 
 /* ── El proceso (BPMN-lite) ──────────────────────────────────────────────── */
 
@@ -216,7 +242,7 @@ function procesoConProcedencia(campo: string) {
       ctx.addIssue({
         code: "custom",
         path: [campo],
-        message: `el proceso necesita su «${campo}» (app | cv-viva)`,
+        message: `el proceso necesita su «${campo}» (${procedencias.join(" | ")})`,
       });
     if (!tieneProceso && tieneProcedencia)
       ctx.addIssue({
@@ -246,6 +272,48 @@ export const complementoSchema = z
   .superRefine(procesoConProcedencia("procedencia"));
 
 export type Complemento = z.infer<typeof complementoSchema>;
+
+/* ── Lo que una pieza con DATOS trae de más (v1.3.0) ────────────────────── */
+
+/**
+ * Una conclusión es una cifra con su lectura: lo que los datos dicen, no lo
+ * que la pieza es. Lleva `fuente` como toda cifra de esta vitrina — un hallazgo
+ * sin procedencia es una opinión con número.
+ */
+const conclusion = z
+  .object({
+    cifra: texto(16),
+    unidad: z.string().max(24).optional(),
+    titulo: texto(60),
+    texto: texto(240),
+    fuente: z.enum(fuentesCifra),
+  })
+  .strict();
+
+/**
+ * Una pantalla real de la pieza. `archivo` es una ruta RELATIVA a la ficha
+ * (`capturas/<slug>/NN-<pagina>.png`); CV Viva la sirve desde
+ * `public/piezas/<frente>/` y el test de contenido exige que exista — una
+ * galería que apunta al vacío rompe el build, no publica un hueco.
+ */
+const captura = z
+  .object({
+    archivo: z
+      .string()
+      .min(1)
+      .max(120)
+      // RELATIVA de verdad: el patrón viejo aceptaba «../../favicon.png» y
+      // «/loquesea.png», con lo que la galería salía de
+      // public/piezas/<frente>/ — el navegador normaliza el «..» y sirve
+      // cualquier cosa bajo public/. No se impone una FORMA de carpetas (cada
+      // casa organiza sus capturas como quiera): se prohíbe escaparse.
+      .regex(
+        /^(?!\/)(?!.*(?:^|\/)\.\.(?:\/|$))[A-Za-z0-9._/-]+\.(png|jpg|jpeg|webp)$/,
+        "ruta relativa a una imagen, sin «..» ni raíz",
+      ),
+    pie: texto(80),
+  })
+  .strict();
 
 /* ── La ficha técnica completa (el contrato para otras casas) ────────────── */
 
@@ -300,9 +368,15 @@ export const fichaTecnicaSchema = z
       .array(z.object({ valor: texto(24), etiqueta: texto(40) }).strict())
       .min(3)
       .max(5),
+    // v1.3.0 — opcionales, independientes entre sí. Entre 3 y 6 conclusiones:
+    // menos no es una lectura, más es un informe.
+    conclusiones: z.array(conclusion).min(3).max(6).optional(),
+    galeria: z.array(captura).min(1).max(12).optional(),
   })
   .strict()
   .superRefine(procesoConProcedencia("procedencia_proceso"));
 
 export type FichaTecnica = z.infer<typeof fichaTecnicaSchema>;
 export type Proceso = z.infer<typeof procesoSchema>;
+export type Conclusion = z.infer<typeof conclusion>;
+export type Captura = z.infer<typeof captura>;

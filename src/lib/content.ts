@@ -12,6 +12,8 @@ import {
   type Cv,
   type Vitrina,
 } from "./schemas";
+import { getManifestVitrina } from "./vitrina/loader";
+import { frentesConPiezas } from "./vitrina/piezas";
 
 /**
  * Carga del contenido versionado en build time (SSG). Si un YAML está
@@ -35,7 +37,19 @@ export const getApps = cache((): Apps => {
   return parseApps(readYaml("apps.yaml"), "data/apps.yaml");
 });
 
-/** Los frentes de la vitrina (post-S5). Mismo fail-safe: YAML roto = build roto. */
+/**
+ * Los frentes de la vitrina (post-S5). Mismo fail-safe: YAML roto = build roto.
+ *
+ * Y desde el S7, además: un frente solo puede declararse «abierta» si TIENE
+ * piezas, y eso se MIDE aquí mismo — «apps» por sus exports en
+ * `content/vitrina/`, los demás por sus fichas en `content/<frente>/`. La lista
+ * se calcula, nunca se escribe: es la misma regla de «ninguna cifra sin
+ * procedencia» aplicada al estado de un frente.
+ */
 export const getVitrina = cache((): Vitrina => {
-  return parseVitrina(readYaml("vitrina.yaml"), "data/vitrina.yaml");
+  const conPiezas = new Set(frentesConPiezas() as string[]);
+  if (getManifestVitrina().length > 0) conPiezas.add("apps");
+  return parseVitrina(readYaml("vitrina.yaml"), "data/vitrina.yaml", [
+    ...conPiezas,
+  ]);
 });

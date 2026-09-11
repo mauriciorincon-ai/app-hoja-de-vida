@@ -1,0 +1,377 @@
+{
+  "schema_version": "1.1.0",
+  "actualizado": "2026-09-06",
+  "pieza": {
+    "slug": "biblioteca-tendencias-genai",
+    "nombre": "Biblioteca de Tendencias GenAI",
+    "frente": "agentes",
+    "estado": "inicial",
+    "ciclo": "WI-6",
+    "version": "1.2.0",
+    "sellado_en": null,
+    "sprints_cerrados": 7
+  },
+  "promesa": {
+    "tagline": "Nada entra sin tu palabra; nada envejece en silencio.",
+    "intro": "Un bibliotecario agente barre las fuentes primarias del censo —cero prensa—, detecta lo nuevo y lo que cambia, y te presenta hasta siete candidatas por corrida. Tú decides una por una, con tu frase exacta. Lo aprobado se integra como ficha bilingüe conectada al grafo, y de ahí se computan la línea de tiempo, las vistas y los guiones. La investigación deja de evaporarse: se acumula.",
+    "para_quien": "Para el expositor de IA generativa que prepara una charla al mes y hoy quema dieciséis horas investigando desde cero: abre pestañas, lee anuncios, cruza fechas y arma el guion a mano. Al terminar, ese trabajo no queda en ninguna parte. La charla siguiente empieza otra vez en blanco, y lo que aprendió sobre RAG, MCP o los agentes se dispersa entre una presentación y la siguiente."
+  },
+  "titular": "Los radares, landscapes y awesome-lists listan; ninguno conecta sus unidades entre sí ni las mantiene vivas. Aquí cada ficha lleva aristas tipadas, sello de frescura y la postura datada del curador — y ninguna entra sin su token.",
+  "stack": [
+    {
+      "nombre": "Claude Code",
+      "papel": "el runtime: el paquete se abre como repositorio y el agente lee su CLAUDE.md, el contexto y la memoria antes de cada corrida"
+    },
+    {
+      "nombre": "WebFetch",
+      "papel": "lee los feeds RSS/Atom, las páginas oficiales y las specs del censo de fuentes; nunca prensa ni agregadores"
+    },
+    {
+      "nombre": "WebSearch",
+      "papel": "localiza el anuncio primario cuando el feed da la señal pero falta la fuente canónica"
+    },
+    {
+      "nombre": "Subagentes",
+      "papel": "verifican fuentes primarias en paralelo por era o por tendencia, con las prohibiciones del protocolo web copiadas verbatim en su prompt"
+    },
+    {
+      "nombre": "Python · generar-vistas.py",
+      "papel": "computa grafo.json y las cinco vistas desde los infobox de las fichas, imprime denominadores y coteja grafo contra ficha"
+    },
+    {
+      "nombre": "Markdown con frontmatter",
+      "papel": "el formato de la ficha canónica: infobox, prosa bilingüe, cronología y citas clave con URL y fecha de consulta"
+    },
+    {
+      "nombre": "HTML autocontenido con SVG",
+      "papel": "las candidatas que se presentan al gate, las explicaciones visuales y la guía de usuario; se abren en el navegador, sin librerías externas"
+    },
+    {
+      "nombre": "Git",
+      "papel": "un commit por corrida cerrada, más el respaldo en un remoto privado; la historia de la biblioteca es auditable"
+    }
+  ],
+  "cifras": [
+    {
+      "clave": "fichas_canonicas",
+      "valor": 59,
+      "unidad": "fichas",
+      "etiqueta": "Fichas canónicas bilingües",
+      "fuente": "medido",
+      "detalle": "Archivos .md de biblioteca/tendencias/ excluyendo README.md, cotejados contra los 59 nodos de biblioteca/grafo.json. Las seis secciones existen en español y en inglés en todas: el chequeo V13 imprime 59/59 y V14 no halla divergencias de citas."
+    },
+    {
+      "clave": "entradas_censo_con_veredicto",
+      "valor": 61,
+      "unidad": "entradas",
+      "etiqueta": "Entradas del censo con veredicto",
+      "fuente": "medido",
+      "detalle": "Suma por era del contexto/04-censo-historico.md (8+12+15+14+8+4), cerradas en los work-items WI-1 a WI-6. Cuatro de las 61 no entraron a la biblioteca, cada una con su motivo registrado."
+    },
+    {
+      "clave": "aristas_tipadas",
+      "valor": 265,
+      "unidad": "aristas",
+      "etiqueta": "Relaciones tipadas del grafo",
+      "fuente": "medido",
+      "detalle": "Longitud del arreglo de aristas de biblioteca/grafo.json, computado por biblioteca/generar-vistas.py desde los infobox de las fichas. Siete tipos cerrados repartidos sobre trece dominios."
+    },
+    {
+      "clave": "ajustes_al_metodo",
+      "valor": 31,
+      "unidad": "ajustes",
+      "etiqueta": "Ajustes al método aprobados",
+      "fuente": "medido",
+      "detalle": "Total declarado en memoria/decisiones-curaduria.md: 31 tokens «ajuste aprobado» desde el arranque del harness. Cada uno entró con su test de regresión escrito dentro de la propia regla."
+    },
+    {
+      "clave": "horas_recuperadas_anuales",
+      "valor": 114,
+      "unidad": "h/año",
+      "etiqueta": "Horas recuperadas al año",
+      "fuente": "estimacion",
+      "detalle": "Escenario base de arquitectura/roi.json: doce presentaciones al año que bajan de 16 a 5 horas de investigación, menos ~1,5 h/mes de curaduría. El supuesto central se valida con el seguimiento (media móvil de tres), no se afirma."
+    }
+  ],
+  "bloques": [
+    {
+      "orden": 1,
+      "nombre": "La biblioteca viva",
+      "linea": "Fichas canónicas bilingües: el único lugar donde vive el detalle de una tendencia.",
+      "cuenta": 59
+    },
+    {
+      "orden": 2,
+      "nombre": "El grafo de relaciones",
+      "linea": "Siete tipos de arista cerrados sobre trece dominios. Se computa, no se redacta.",
+      "cuenta": 265
+    },
+    {
+      "orden": 3,
+      "nombre": "Vistas computadas",
+      "linea": "Línea de tiempo, por empresa, por era, por estado y por postura. Jamás a mano.",
+      "cuenta": 5
+    },
+    {
+      "orden": 4,
+      "nombre": "El censo y el criterio",
+      "linea": "Qué cuenta como tendencia, qué fuentes valen y qué historia hay que reconstruir.",
+      "cuenta": 6
+    },
+    {
+      "orden": 5,
+      "nombre": "Comandos de operación",
+      "linea": "Lo que el curador escribe en el chat, cada uno marcado ejercitado o sin estrenar.",
+      "cuenta": 12
+    },
+    {
+      "orden": 6,
+      "nombre": "Gates y tokens",
+      "linea": "Cada decisión tiene su frase exacta. Un gate sin token no ocurrió.",
+      "cuenta": 9
+    },
+    {
+      "orden": 7,
+      "nombre": "La memoria del harness",
+      "linea": "Estado de corridas, tokens del curador, lecciones y patrones transversales.",
+      "cuenta": 4
+    },
+    {
+      "orden": 8,
+      "nombre": "Verificación",
+      "linea": "Criterios binarios que se imprimen con denominador al cerrar cada corrida.",
+      "cuenta": 13
+    }
+  ],
+  "proceso": {
+    "titulo": "Una corrida de vigilancia de la biblioteca",
+    "carriles": [
+      {
+        "id": "curador",
+        "nombre": "El curador"
+      },
+      {
+        "id": "agente",
+        "nombre": "Bibliotecario (Claude Code)"
+      },
+      {
+        "id": "subs",
+        "nombre": "Subagentes de verificación"
+      },
+      {
+        "id": "mec",
+        "nombre": "Verificación mecánica"
+      }
+    ],
+    "pasos": [
+      {
+        "id": "ini",
+        "tipo": "inicio",
+        "carril": "curador",
+        "texto": "Cada mes, o cuando lo pide"
+      },
+      {
+        "id": "pide",
+        "tipo": "tarea",
+        "carril": "curador",
+        "texto": "Pide la corrida en el chat"
+      },
+      {
+        "id": "estado",
+        "tipo": "tarea",
+        "carril": "agente",
+        "texto": "Carga marca de agua y watchlist"
+      },
+      {
+        "id": "barrido",
+        "tipo": "tarea",
+        "carril": "agente",
+        "texto": "Barre feeds y specs con denominador impreso"
+      },
+      {
+        "id": "verifica",
+        "tipo": "tarea",
+        "carril": "subs",
+        "texto": "Verifican fuentes primarias en paralelo"
+      },
+      {
+        "id": "clasifica",
+        "tipo": "tarea",
+        "carril": "agente",
+        "texto": "Clasifica: nueva, cambio, watchlist o ruido"
+      },
+      {
+        "id": "frescura",
+        "tipo": "tarea",
+        "carril": "agente",
+        "texto": "Revisita las tres fichas más viejas"
+      },
+      {
+        "id": "candidatas",
+        "tipo": "tarea",
+        "carril": "agente",
+        "texto": "Arma hasta siete candidatas en HTML"
+      },
+      {
+        "id": "gate",
+        "tipo": "decision",
+        "carril": "curador",
+        "texto": "¿Entra?"
+      },
+      {
+        "id": "integra",
+        "tipo": "tarea",
+        "carril": "agente",
+        "texto": "Integra la ficha bilingüe y sus aristas"
+      },
+      {
+        "id": "computa",
+        "tipo": "tarea",
+        "carril": "mec",
+        "texto": "Recomputa el grafo y las cinco vistas"
+      },
+      {
+        "id": "chequeo",
+        "tipo": "decision",
+        "carril": "mec",
+        "texto": "¿Pasa?"
+      },
+      {
+        "id": "cierre",
+        "tipo": "tarea",
+        "carril": "agente",
+        "texto": "Escribe memoria, lección y diff; commit"
+      },
+      {
+        "id": "fin",
+        "tipo": "fin",
+        "carril": "curador",
+        "texto": ""
+      }
+    ],
+    "flujos": [
+      {
+        "de": "ini",
+        "a": "pide"
+      },
+      {
+        "de": "pide",
+        "a": "estado"
+      },
+      {
+        "de": "estado",
+        "a": "barrido"
+      },
+      {
+        "de": "barrido",
+        "a": "verifica"
+      },
+      {
+        "de": "verifica",
+        "a": "clasifica"
+      },
+      {
+        "de": "clasifica",
+        "a": "frescura"
+      },
+      {
+        "de": "frescura",
+        "a": "candidatas"
+      },
+      {
+        "de": "candidatas",
+        "a": "gate"
+      },
+      {
+        "de": "gate",
+        "a": "integra",
+        "etiqueta": "entra"
+      },
+      {
+        "de": "gate",
+        "a": "cierre",
+        "etiqueta": "watchlist · no entra"
+      },
+      {
+        "de": "integra",
+        "a": "computa"
+      },
+      {
+        "de": "computa",
+        "a": "chequeo"
+      },
+      {
+        "de": "chequeo",
+        "a": "cierre",
+        "etiqueta": "sí"
+      },
+      {
+        "de": "chequeo",
+        "a": "integra",
+        "etiqueta": "no · corrige"
+      },
+      {
+        "de": "cierre",
+        "a": "fin"
+      }
+    ],
+    "anotaciones": [
+      {
+        "paso": "barrido",
+        "texto": "Una fuente no barrida se declara «no evaluado, con motivo». La fórmula «sin novedades» está prohibida."
+      },
+      {
+        "paso": "verifica",
+        "texto": "Cada subagente lleva las prohibiciones del protocolo web verbatim; un 403 o un paywall se reporta como hallazgo, jamás se rodea."
+      },
+      {
+        "paso": "gate",
+        "texto": "Sin el token exacto del curador no hay integración. El gate es recurrente: vuelve a exigirse en cada corrida, candidata por candidata."
+      },
+      {
+        "paso": "computa",
+        "texto": "Las vistas y el grafo se computan desde los infobox de las fichas; editarlos a mano no está permitido."
+      },
+      {
+        "paso": "cierre",
+        "texto": "Ninguna corrida cierra sin su lección escrita en la memoria y su diff de lo que entró, cambió y se rechazó."
+      }
+    ]
+  },
+  "procedencia_proceso": "app",
+  "limites": [
+    "Solo tendencias de infraestructura GenAI: patrones, protocolos y capas reutilizables. Lo que no cambia cómo se construye, no entra.",
+    "No decide qué entra a la biblioteca: el veredicto es del curador, candidata por candidata.",
+    "De doce comandos, dos están ejercitados; los otros diez se declaran «sin estrenar» en el manual, nunca como probados.",
+    "El retorno no se promete: el supuesto central —de dieciséis horas a cinco por charla— se valida con el seguimiento."
+  ],
+  "nunca": [
+    "Cita prensa, agregadores o hilos: solo fuentes primarias por niveles.",
+    "Integra una ficha sin el token del curador registrado con fecha.",
+    "Rodea un bloqueo, un paywall o un login: lo reporta como hallazgo y sigue.",
+    "Edita una vista a mano: se computa desde las fichas o no existe.",
+    "Presenta una cifra de terceros como hecho propio: la marca como afirmación no verificada."
+  ],
+  "hitos": [
+    {
+      "valor": "WI-6",
+      "etiqueta": "ciclo"
+    },
+    {
+      "valor": "7",
+      "etiqueta": "work-items cerrados"
+    },
+    {
+      "valor": "2026-08-23",
+      "etiqueta": "verificado"
+    },
+    {
+      "valor": "v1.2.0",
+      "etiqueta": "version"
+    },
+    {
+      "valor": "9",
+      "etiqueta": "decisiones registradas"
+    }
+  ]
+}

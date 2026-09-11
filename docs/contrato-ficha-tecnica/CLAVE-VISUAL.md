@@ -1,4 +1,23 @@
-# Clave visual y contrato de la «Ficha técnica» — v1.1.0
+# Clave visual y contrato de la «Ficha técnica» — v1.3.1
+
+> **v1.3.1 (2026-09-09):** PARCHE. `galeria[].archivo` debe ser una ruta relativa **de
+> verdad**: se rechazan `..` y la raíz `/`, que antes pasaban y dejaban a la galería apuntar
+> fuera de su carpeta. **No se impone una forma de carpetas** — organiza tus capturas como
+> quieras — solo no se puede salir. Ninguna ficha entregada hasta hoy se ve afectada.
+>
+> **v1.3.0 (2026-09-09):** ADITIVO. Dos claves opcionales para la pieza que **produce datos** —un
+> tablero, y mañana lo que sea—: **`conclusiones`** (3–6 tarjetas: `cifra` ≤16, `unidad` ≤24
+> opcional, `titulo` ≤60, `texto` ≤240, y `fuente` obligatoria como en toda cifra) y **`galeria`**
+> (1–12 pantallas reales: `archivo` ruta relativa a la ficha, `pie` ≤80). Las propuso la casa que
+> produce los tableros y se adoptaron tal cual. En la ficha son dos secciones más —«Lo que dicen los
+> datos» tras «Para quién», «Cómo se ve» tras «Qué tiene»— y la numeración corre seguida con las que
+> haya. `required` no cambia; toda ficha 1.x válida lo sigue siendo.
+
+> **v1.2.0 (2026-09-06):** ADITIVO, nada de lo anterior cambia. Dos cosas nuevas:
+> `procedencia_proceso` admite **`planeadora`** (la casa que administra y cura las fichas de las
+> apps del pipeline), y junto a este documento se publica **`plantilla.ficha-tecnica.json`**, el
+> esqueleto con todos los campos y sus límites, **generado del mismo Zod** que valida — así que
+> no puede desviarse del contrato. Toda ficha v1.0.0 o v1.1.0 válida lo sigue siendo.
 
 > **v1.1.0 (2026-09-06):** el proceso BPMN (§3) pasa a ser **opcional**. Todo lo que valía en
 > v1.0.0 sigue valiendo; una ficha sin `proceso` simplemente no tiene la sección «Cómo funciona».
@@ -8,7 +27,8 @@
 > CV Viva lo pinta con esta plantilla. No entregas HTML, imágenes ni colores.
 >
 > Referencia visual: `referencia.html` (ábrelo en el navegador) o `referencia.png`.
-> Ejemplo completo y real: `ejemplo.habla.json`.
+> Ejemplo completo y real: `ejemplo.habla.json`. Esqueleto para rellenar:
+> `plantilla.ficha-tecnica.json`.
 
 ## 1. Qué es una ficha técnica
 
@@ -95,7 +115,8 @@ Reglas (el esquema las exige):
 - Si el proceso no cabe en una fila, el motor lo **parte en filas** con eventos de enlace Ⓐ…Ⓐ.
   No lo encoge. En móvil se desliza en horizontal. Un proceso de 8–12 pasos es lo normal; más de
   16 es señal de que estás describiendo el detalle, no la ficha.
-- `procedencia_proceso`: `app` si lo declara la propia pieza; `cv-viva` si lo derivó CV Viva.
+- `procedencia_proceso`: `app` si lo declara la propia pieza; `cv-viva` si lo derivó CV Viva;
+  `planeadora` si lo curó la casa que administra las fichas de las apps (v1.2.0).
   Va **si y solo si** hay `proceso`: el esquema rechaza un proceso sin procedencia y una
   procedencia sin proceso.
   Se muestra al pie del diagrama. **Sin dueño declarado, el proceso es una cifra sin fuente.**
@@ -125,7 +146,10 @@ omítelo — una ficha sin «Cómo funciona» es mejor que un diagrama inventado
 ## 6. Cómo se entrega
 
 Un archivo `<slug>.ficha-tecnica.json` que valide contra `ficha-tecnica.schema.json`
-(`schema_version: "1.1.0"`). CV Viva lo deja caer en `content/<frente>/` y la ficha existe sola:
+(`schema_version: "1.3.1"`; las versiones 1.x anteriores siguen siendo válidas). Si la ficha trae
+`galeria`, las imágenes viajan junto al JSON en la ruta relativa que declara cada `archivo`
+(`capturas/<slug>/NN-<pagina>.png`, 2560×1440); CV Viva las sirve desde `public/piezas/<frente>/` y
+su test exige que cada una exista. CV Viva lo deja caer en `content/<frente>/` y la ficha existe sola:
 ruta, sitemap, pruebas de accesibilidad. Si no valida, **la publicación falla** y el error dice el
 campo — nunca se publica una ficha que miente sobre sí misma. El archivo **no se edita en CV
 Viva**: se corrige en origen y se vuelve a entregar.

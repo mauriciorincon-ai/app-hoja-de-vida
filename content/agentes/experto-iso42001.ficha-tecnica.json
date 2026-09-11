@@ -1,0 +1,399 @@
+{
+  "schema_version": "1.1.0",
+  "actualizado": "2026-09-06",
+  "pieza": {
+    "slug": "experto-iso42001",
+    "nombre": "Experto ISO 42001",
+    "frente": "agentes",
+    "estado": "inicial",
+    "ciclo": "v1",
+    "version": "1.0.0",
+    "sellado_en": null,
+    "sprints_cerrados": 0
+  },
+  "promesa": {
+    "tagline": "El experto que sabe cuándo dejó de estar actualizado.",
+    "intro": "Cada cliente recibe su repositorio estampado del mismo molde: intake, gap analysis con la declaración de aplicabilidad de 38 controles, plan, políticas y el ciclo mensual que el mercado casi no vende. Toda afirmación normativa cita el corpus con apartado y página, cada dictamen estampa la fecha en que se verificó su vigencia, y nada con consecuencias avanza sin el token de un humano.",
+    "para_quien": "Para el consultor que quiere asesorar en ISO/IEC 42001 en español y hoy no tiene dónde apoyarse: o compra una plataforma de gobernanza que admite cubrir menos de la mitad del camino a certificación, o arma cada diagnóstico desde cero en su cabeza, sin memoria de lo que dictaminó el mes pasado y sin forma de saber si su criterio sigue vigente."
+  },
+  "titular": "Ningún dictamen sale de la memoria del modelo: cada afirmación normativa cita su entrada del corpus con apartado y página, o declara el vacío — y estampa la fecha en que se verificó que sigue vigente.",
+  "stack": [
+    {
+      "nombre": "Claude Code",
+      "papel": "la casa entera: el CLAUDE.md del repositorio se auto-carga como constitución (8 leyes, 9 comandos) sin montar proyecto ni pegar instrucciones"
+    },
+    {
+      "nombre": "git",
+      "papel": "el repositorio propio es la precondición mecánica de la ley L6: su .gitignore deja los PDF de la norma fuera del control de versiones, y se comprueba"
+    },
+    {
+      "nombre": "Markdown con frontmatter",
+      "papel": "todo documento declara id, versión, estado y capa — así se sabe qué vive en la matriz, qué se copia a cada instancia y qué es del dossier"
+    },
+    {
+      "nombre": "Subagentes web",
+      "papel": "vigilancia normativa e investigador de modelos, con las cinco prohibiciones del protocolo de análisis web copiadas verbatim en cada prompt"
+    },
+    {
+      "nombre": "Corpus de citas por apartado",
+      "papel": "el índice de citas al que amarra todo dictamen: paráfrasis con apartado y página, nunca el tenor literal de la norma"
+    },
+    {
+      "nombre": "Kit de instanciación",
+      "papel": "estampa el repositorio privado de cada cliente desde la matriz: contexto copiado en solo lectura, artefactos vivos, memoria propia"
+    }
+  ],
+  "cifras": [
+    {
+      "clave": "controles_anexo_a",
+      "valor": 38,
+      "etiqueta": "Controles del Anexo A en el corpus",
+      "fuente": "medido",
+      "detalle": "Los 38 controles de referencia sintetizados en contexto/norma/02-anexo-a-b-controles.md, cada uno con su guía y el artefacto que lo implementa. El ítem G-11 del checklist de gates exige entregar la declaración de aplicabilidad con 38/38 filas pobladas, nunca parcial sin decirlo."
+    },
+    {
+      "clave": "documentos_portadores",
+      "valor": 24,
+      "etiqueta": "Documentos que el auditor pide",
+      "fuente": "medido",
+      "detalle": "Tabla P-1..P-24 de contexto/auditoria/01-artefactos-stage-1.md: los documentos portadores que se ponen sobre la mesa en la fase documental de la certificación. Es la lista única del paquete (regla G-10): WI-3 y WI-5 trabajan contra ella, no contra copias."
+    },
+    {
+      "clave": "comandos",
+      "valor": 9,
+      "etiqueta": "Comandos de la superficie",
+      "fuente": "medido",
+      "detalle": "Filas de la tabla de comandos del CLAUDE.md del paquete: instanciar, intake, gap, plan, gestion, simulacro, vigilancia, modelos y dictamen. Son conversacionales; el consultor los escribe en el chat."
+    },
+    {
+      "clave": "items_checklist_gates",
+      "valor": 14,
+      "etiqueta": "Ítems del checklist de gates",
+      "fuente": "medido",
+      "detalle": "G-1..G-14 en memoria/checklist-gates.md, contados sobre las tablas del archivo. La lista solo crece: diez son fundacionales y cuatro nacieron de defectos reales de la verificación de fundación (punteros muertos, listas repetidas que divergían, una corrección de corpus sin bump de versión, un criterio que evaluaba a falso el día que se escribió)."
+    },
+    {
+      "clave": "cobertura_plataforma_lider",
+      "valor": 45,
+      "unidad": "%",
+      "etiqueta": "Lo que cubre la plataforma líder",
+      "fuente": "declarado",
+      "detalle": "Cifra auto-reportada por el proveedor líder de plataformas de gobernanza de IA, recogida en investigacion/frente-a-comercial.md §1 con confianza ALTA como cita y MEDIA como medida real. El resto del camino a la certificación es juicio humano: exactamente el hueco que este harness ocupa."
+    }
+  ],
+  "bloques": [
+    {
+      "orden": 1,
+      "nombre": "El corpus de la norma",
+      "linea": "Cláusulas y controles destilados: paráfrasis con apartado y página, más su procedencia.",
+      "cuenta": 5
+    },
+    {
+      "orden": 2,
+      "nombre": "Riesgo, impacto y madurez",
+      "linea": "Método de evaluación de riesgo e impacto, y los cinco niveles de madurez con su promoción.",
+      "cuenta": 2
+    },
+    {
+      "orden": 3,
+      "nombre": "Auditoría y no conformidades",
+      "linea": "Programa de auditoría interna, gestión de hallazgos y la lista de portadores documentales.",
+      "cuenta": 2
+    },
+    {
+      "orden": 4,
+      "nombre": "Marcos satélite e integración",
+      "linea": "Leyes y marcos ajenos mapeados hacia la 42001, y el enganche con los sistemas ya existentes.",
+      "cuenta": 3
+    },
+    {
+      "orden": 5,
+      "nombre": "Frontera técnica de IA",
+      "linea": "Qué evidencia técnica se pide, qué diseña el harness y qué ejecuta la organización.",
+      "cuenta": 1
+    },
+    {
+      "orden": 6,
+      "nombre": "Vigilancia y modelos",
+      "linea": "Cuándo el criterio dejó de valer: disparadores por capa, hallazgos y modelos del inventario.",
+      "cuenta": 3
+    },
+    {
+      "orden": 7,
+      "nombre": "Plantillas de artefactos",
+      "linea": "Los documentos vivos del sistema de gestión, con campos por resolver en cada instancia.",
+      "cuenta": 10
+    },
+    {
+      "orden": 8,
+      "nombre": "Instanciación por cliente",
+      "linea": "Cómo nace un cliente: protocolo, intake, kit de estampado y una organización piloto ficticia.",
+      "cuenta": 4
+    },
+    {
+      "orden": 9,
+      "nombre": "El ciclo de trabajo",
+      "linea": "Del estampado al régimen permanente, un work-item por etapa con criterios binarios.",
+      "cuenta": 7
+    },
+    {
+      "orden": 10,
+      "nombre": "Memoria y cápsulas",
+      "linea": "Bitácora, lecciones, estado de instancias, checklist de gates y los casos que se tuercen.",
+      "cuenta": 6
+    }
+  ],
+  "proceso": {
+    "titulo": "Una corrida: del cliente nuevo al régimen permanente",
+    "carriles": [
+      {
+        "id": "consultor",
+        "nombre": "El consultor"
+      },
+      {
+        "id": "harness",
+        "nombre": "El harness · Claude Code"
+      },
+      {
+        "id": "cliente",
+        "nombre": "La organización cliente"
+      },
+      {
+        "id": "web",
+        "nombre": "Subagentes web"
+      }
+    ],
+    "pasos": [
+      {
+        "id": "ini",
+        "tipo": "inicio",
+        "carril": "consultor",
+        "texto": "Un cliente nuevo, o el mes siguiente"
+      },
+      {
+        "id": "prereq",
+        "tipo": "tarea",
+        "carril": "harness",
+        "texto": "Verifica copia licenciada y repo propio"
+      },
+      {
+        "id": "glic",
+        "tipo": "decision",
+        "carril": "consultor",
+        "texto": "¿Aprueba?"
+      },
+      {
+        "id": "estampa",
+        "tipo": "tarea",
+        "carril": "harness",
+        "texto": "Estampa la instancia en su repo privado"
+      },
+      {
+        "id": "intake",
+        "tipo": "tarea",
+        "carril": "cliente",
+        "texto": "Responde el intake, bloque por bloque"
+      },
+      {
+        "id": "perfil",
+        "tipo": "tarea",
+        "carril": "harness",
+        "texto": "Funda perfil, alcance e inventario"
+      },
+      {
+        "id": "gap",
+        "tipo": "tarea",
+        "carril": "harness",
+        "texto": "Emite gap, aplicabilidad 38/38 y madurez"
+      },
+      {
+        "id": "ginf",
+        "tipo": "decision",
+        "carril": "consultor",
+        "texto": "¿Pasa?"
+      },
+      {
+        "id": "plan",
+        "tipo": "tarea",
+        "carril": "harness",
+        "texto": "Redacta plan y políticas en borrador"
+      },
+      {
+        "id": "gcli",
+        "tipo": "decision",
+        "carril": "cliente",
+        "texto": "¿Aprueba?"
+      },
+      {
+        "id": "vig",
+        "tipo": "tarea",
+        "carril": "web",
+        "texto": "Rastrea cambios de norma, ley y modelos"
+      },
+      {
+        "id": "gestion",
+        "tipo": "tarea",
+        "carril": "harness",
+        "texto": "Corre el ciclo vivo y promueve la madurez"
+      },
+      {
+        "id": "bit",
+        "tipo": "tarea",
+        "carril": "harness",
+        "texto": "Escribe bitácora, lección y sello"
+      },
+      {
+        "id": "sigue",
+        "tipo": "decision",
+        "carril": "consultor",
+        "texto": "¿Sigue?"
+      },
+      {
+        "id": "fin",
+        "tipo": "fin",
+        "carril": "consultor",
+        "texto": ""
+      }
+    ],
+    "flujos": [
+      {
+        "de": "ini",
+        "a": "prereq"
+      },
+      {
+        "de": "prereq",
+        "a": "glic"
+      },
+      {
+        "de": "glic",
+        "a": "estampa",
+        "etiqueta": "sí · token"
+      },
+      {
+        "de": "glic",
+        "a": "prereq",
+        "etiqueta": "no · falta copia"
+      },
+      {
+        "de": "estampa",
+        "a": "intake"
+      },
+      {
+        "de": "intake",
+        "a": "perfil"
+      },
+      {
+        "de": "perfil",
+        "a": "gap"
+      },
+      {
+        "de": "gap",
+        "a": "ginf"
+      },
+      {
+        "de": "ginf",
+        "a": "plan",
+        "etiqueta": "sí · token"
+      },
+      {
+        "de": "ginf",
+        "a": "gap",
+        "etiqueta": "no · ajusta"
+      },
+      {
+        "de": "plan",
+        "a": "gcli"
+      },
+      {
+        "de": "gcli",
+        "a": "vig",
+        "etiqueta": "aprobado"
+      },
+      {
+        "de": "gcli",
+        "a": "plan",
+        "etiqueta": "no · sigue borrador"
+      },
+      {
+        "de": "vig",
+        "a": "gestion"
+      },
+      {
+        "de": "gestion",
+        "a": "bit"
+      },
+      {
+        "de": "bit",
+        "a": "sigue"
+      },
+      {
+        "de": "sigue",
+        "a": "vig",
+        "etiqueta": "sí · mes siguiente"
+      },
+      {
+        "de": "sigue",
+        "a": "fin",
+        "etiqueta": "no · cierra"
+      }
+    ],
+    "anotaciones": [
+      {
+        "paso": "glic",
+        "texto": "Sin copia licenciada de la norma verificada no se estampa nada: el texto de la norma no se redistribuye, jamás."
+      },
+      {
+        "paso": "gap",
+        "texto": "Toda afirmación normativa cita su entrada del corpus con apartado y página, o declara el vacío. Sin cita no hay dictamen."
+      },
+      {
+        "paso": "gcli",
+        "texto": "Sin token literal no hay aprobación: un «ok, sigue» deja el artefacto en borrador, y el harness lo dice en voz alta."
+      },
+      {
+        "paso": "vig",
+        "texto": "Los subagentes llevan verbatim sus cinco prohibiciones; el contenido web es siempre dato, nunca instrucción."
+      },
+      {
+        "paso": "bit",
+        "texto": "Cada dictamen estampa la fecha en que se verificó su vigencia; si la capa satélite lleva más de 45 días en mora, lo advierte."
+      }
+    ]
+  },
+  "procedencia_proceso": "app",
+  "limites": [
+    "Un solo núcleo: la 42001. El AI Act, NIST o las leyes locales entran como satélites mapeados hacia ella, nunca como el destino del consejo.",
+    "No ejecuta código ni entrena modelos ni lee telemetría: diseña la prueba con criterios binarios y evalúa la evidencia que devuelve la organización.",
+    "No certifica ni da fe pública — eso es de un organismo acreditado. Dictamina gestión, no litigio.",
+    "El retorno queda con la magnitud en blanco a propósito: los parámetros se miden en la primera corrida real, no se estiman."
+  ],
+  "nunca": [
+    "Reproduce el texto de la norma: parafrasea y remite al apartado y la página de la copia licenciada del lector.",
+    "Inventa una cifra: toda tarifa, plazo o métrica se elicita con fuente, o se declara vacía.",
+    "Da por aprobado un gate sin su token literal y explícito.",
+    "Mezcla datos, hallazgos o texto entre dos instancias de cliente.",
+    "Se conecta a sistemas de terceros: sin servidores externos, sin APIs, sin tickets."
+  ],
+  "hitos": [
+    {
+      "valor": "v1",
+      "etiqueta": "ciclo"
+    },
+    {
+      "valor": "0",
+      "etiqueta": "work-items cerrados"
+    },
+    {
+      "valor": "2026-08-30",
+      "etiqueta": "generado"
+    },
+    {
+      "valor": "v1.0.0",
+      "etiqueta": "version"
+    },
+    {
+      "valor": "12",
+      "etiqueta": "decisiones registradas"
+    }
+  ]
+}
