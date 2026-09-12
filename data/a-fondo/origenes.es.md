@@ -23,13 +23,14 @@ CÓMO SE ESCRIBE ESTE ARCHIVO
 - Prosa normal, en primera persona, en párrafos.
 - Cada subsección empieza con un título `##` seguido de un comentario
   `<!-- seccion: id -->`. Esas son las ÚNICAS 2 marcas.
+
 - `estado: borrador` → el chat NO lo indexa y no se le exige gemelo en inglés.
   `estado: aprobado` → el chat lo indexa y exige el gemelo `.en.md` completo,
   subsección por subsección.
 - Ninguna cifra, fecha ni logro sin fuente. Lo que falte va como
   `[CONFIRMAR: qué falta]`, jamás relleno plausible.
 - Guía completa: docs/MANUAL-DE-USO.md → «Cómo alimentar el a fondo».
--->
+  -->
 
 <!-- guía (viene del esqueleto de la historia, S3 — la escribió el dueño):
 El arco completo: por qué estudiaste Ingeniería Industrial, cuándo
@@ -110,6 +111,6 @@ y el dato es de salud — que es el contexto más exigente en el que he trabajad
 **Cuántos años son, en total.** Diez años de experiencia profesional, contados desde agosto de
 2016, cuando entré a mi primer empleo; ocho de ellos con los datos en el centro del trabajo.
 
-[CONFIRMAR: los dos números son verdaderos y hay que elegir cuál se declara — diez desde el primer
-empleo, ocho desde que el trabajo es de datos. Lo importante es que la hoja de vida, el sitio y
-este documento digan el mismo, porque hoy no declaran ninguno.]
+<!-- Resuelto el 2026-09-12 por el dueño: se declara DIEZ. El perfil del sitio dice «diez años»
+desde la revisión post-S8; este párrafo conserva la precisión de que ocho son con los datos en el
+centro. -->
