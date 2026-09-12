@@ -91,6 +91,25 @@ decisions/NNN-titulo.md   (ADRs de implementación)
 4. **Toda salida de LLM que se persista pasa por esquema Zod** (skill `ia-embebida`) — aplica
    desde S3; nunca texto libre directo a la BD.
 5. **A11y desde el inicio:** tabindex, aria-labels, contraste AA, `prefers-reduced-motion`.
+   **Y dos reglas que nacen de reincidencias de ESTA app (kit v1.26.0):**
+   (a) **La FORMA del árbol jamás depende de `useReducedMotion()`.** El hook vale `null` en el
+   servidor y `true` en el navegador con «reducir movimiento»: si decide QUÉ elementos se pintan,
+   el HTML del servidor y el primer render del cliente no coinciden (React #418) y la página se
+   regenera entera **justo para quien el cinturón quería cuidar**. Reduced motion cambia
+   PROPIEDADES (`initial`, `variants`, `transition`) o lo hace el CSS. Dos gates:
+   `tests/unit/motion-estructura-reducida.test.tsx` (mismo HTML con `null` / `true` / `false`) +
+   axe bajo emulación de reduced-motion en `tests/e2e/axe.spec.ts`, que además falla si la página
+   emite un solo error de consola. *(Precedente: el relleno del `TimelineTrack` se pintaba tras un
+   `{!reduced && …}`; la CI cayó dos veces con «footer no está en el DOM» y cinco intentos de
+   reproducción local fallaron — el rojo no se leía sin las trazas.)*
+   (b) **Los tokens de tinta VETADOS como texto se declaran en `design-system.md` y FALLAN en
+   test, no en axe al final.** La lista legible por máquina vive en el bloque
+   `tokens-vetados-como-texto` del design system y la barre
+   `tests/unit/design-tokens-vetados.test.ts` sobre `src/**` en sus tres formas: la clase de
+   Tailwind, `color: var(--color-…)` y el hex suelto. **Vetado como TEXTO no es vetado a secas**
+   —`border-`, `bg-`, `decoration-`, `fill` y `stroke` siguen siendo legítimos—. *(Precedente:
+   `ink-3` (2,7:1) cazado por axe DOS veces en esta app, S6 y post-S7; las dos veces la defensa
+   fue prosa en el design system, y la prosa no corre.)*
 6. **Commits convencionales**; branch `sprint-NNN/<tema>`; **jamás push directo a `main`** (hook lo
    bloquea); PR con CI verde + preview probado.
 7. **Secrets solo en `.env.local` (gitignored) y Vercel env vars.** Doble protección gitleaks: hook
@@ -148,6 +167,13 @@ decisions/NNN-titulo.md   (ADRs de implementación)
     haya visto que sabe fallar; y si la demo se aplaza, se olvida. El commit que trae la aserción
     trae también su demo registrada en la bitácora: qué se rompió a propósito, qué salió rojo y a
     quién nombró.
+    **Y la tercera pregunta (kit v1.26.0): ¿puede este gate FALLAR siquiera?** Antes de
+    escribirlo, comprueba que existe un estado del repo que lo pondría en rojo y que **ninguna
+    regla anterior lo hace inalcanzable** — un schema que ya rechaza el caso, un test que ya lo
+    cubre, un build que rompe antes. Si no puede fallar, no es un gate: se retira y se anota cuál
+    regla lo cubría (precedente: S7, un gate nuevo resultó inalcanzable por una regla previa y
+    solo se supo al exigirle el rojo). Las tres, juntas: ¿lo viste **fallar**? · ¿lo viste
+    **correr**? · ¿**puede** fallar?
 15. **El bundle publicable del design system es un ARTEFACTO DEL REPO (kit v1.17.0).**
     `design-sync/` se versiona aquí como **espejo 1:1** de lo publicado en Claude Design, con
     jerarquía fija: `design-system.md` (fuente de verdad) → `design-sync/` (bundle) → el proyecto
@@ -170,6 +196,11 @@ decisions/NNN-titulo.md   (ADRs de implementación)
     **Y todo comando que sea un gate viaja ENTRE BACKTICKS y se prueba copiándolo del RENDER**
     (kit v1.24.0): sin backticks el markdown come las barras invertidas y entrega un grep que no
     encuentra nada nunca — un gate muerto que pasa en verde para siempre.
+    **Y el barrido corre sobre el árbol que se VA A SUBIR: DESPUÉS del último `git add` (kit
+    v1.26.0).** Un barrido temprano deja ciega la ventana entre él y el push — así entraron al PR
+    del S5 los artefactos de `.lighthouseci/` con seis falsos positivos. **Y vale también para
+    código y comentarios de tests:** el comentario de un spec que cita el dominio de preview es
+    una fuga igual que una URL en el README.
 17. **PRs de dependencias: máximo DOS abiertos y el lockfile NO se pelea (kit v1.24.0).**
     dependabot con techo real de 2 (limit 1 por ecosistema, todo agrupado). Se mergean **DE A UNO,
     dejando a dependabot REGENERAR** entre merges (`@dependabot rebase` puede no obedecer, y el

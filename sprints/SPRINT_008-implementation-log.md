@@ -142,3 +142,60 @@ como estimación y se corrige con el número real de la primera corrida de CI de
 usuario le parece demasiado para cada PR, la palanca es la lista de URLs —que ahora es un archivo
 de datos, no YAML— y no el número de corridas.
 
+---
+
+### 0.4 · CLAUDE.md y comandos al día (deltas del kit v1.26.0)
+
+**Ojo a la numeración:** las reglas de esta app van **corridas uno** respecto al kit. Las 5 / 15 /
+17 del kit son aquí la **5, la 14 y la 16**.
+
+| Dónde                        | Qué ganó                                                                                                                                    |
+| ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `CLAUDE.md` regla 5          | (a) la forma del árbol jamás depende de `useReducedMotion()`, con sus dos gates nombrados · (b) tokens de tinta vetados como texto, con el suyo |
+| `CLAUDE.md` regla 14         | La **tercera pregunta**: ¿puede este gate FALLAR siquiera? Las tres juntas: ¿lo viste fallar? · ¿lo viste correr? · ¿puede fallar?             |
+| `CLAUDE.md` regla 16         | El barrido corre **después del último `git add`**, y cubre código y comentarios de tests                                                       |
+| `/deploy-check` §3           | Las dos casillas de la regla 5, con el nombre del test que las sostiene                                                                       |
+| `/deploy-check` §8           | La verdad sobre desde cuándo hay gate en ESTA app (el S8, no el S1) · tres corridas y mediana · el 96 de Best Practices explicado             |
+| `/deploy-check` §9           | Cuándo se barre (tras el último `git add`) y qué más cubre                                                                                    |
+| `/audita-sprint`             | **«Quién audita la Fase 1»**: auditor independiente con el diff delante, tres formas en orden de preferencia, y la tercera se DECLARA          |
+
+La regla 5-a ya estaba **implementada** desde la revisión post-S7 (los gates existen y corren); lo
+que faltaba era estar escrita. Se documenta ahora para que la próxima sesión no tenga que
+redescubrirla con dos CI rojas.
+
+---
+
+### 0.5 · Inventario de lo que quedó SIN SUJETO (solo inventario — no se toca nada)
+
+Regla del método v1.27.0: una prueba cuyo sujeto desapareció no se borra ni se disimula, **se
+inventaría**. El S7 abrió los cuatro frentes de la vitrina, y con eso dejó sin sujeto la rama
+«frente en preparación» entera.
+
+| #   | Qué                                                                                  | Dónde                                  | Estado hoy                                                                         |
+| --- | ------------------------------------------------------------------------------------ | -------------------------------------- | ------------------------------------------------------------------------------------ |
+| 1   | «cada frente en preparación tiene su página, lo declara y no promete fecha»          | `tests/e2e/vitrina.spec.ts:395`        | **SALTADA** — `EN_PREPARACION.length === 0`                                          |
+| 2   | «del portal se entra a un frente en preparación, y de ahí a los otros»                | `tests/e2e/vitrina.spec.ts:421`        | **SALTADA** — misma causa                                                            |
+| 3   | «un frente EN PREPARACIÓN no publica sus piezas aunque las tenga en `content/`» (404) | `tests/e2e/vitrina.spec.ts:764`        | **SALTADA** — misma causa                                                            |
+| 4   | El bucle sobre `EN_PREPARACION` dentro de la prueba del portal                        | `tests/e2e/vitrina.spec.ts:461`        | **VERDE SIN EJERCER** — ya lo confiesa con una anotación `sin sujeto` (bien hecho)    |
+| 5   | El redirect de la raíz `/` → idioma                                                   | `src/proxy.ts`                         | **SIN PRUEBA** — ni e2e ni integración; y desde el 0.3 tampoco lo mira Lighthouse    |
+
+**Qué NO cubre `tests/unit/frente-en-preparacion.test.tsx`**, que es el sustituto que el S7 dejó:
+prueba el **componente** `FrenteEnPreparacion` (encabezado accesible, que no promete fecha, que no
+enlaza afuera). No prueba nada de la **ruta**: ni el `data-estado="en-preparacion"` del `header`,
+ni que haya **un solo** CTA y sea la lista de espera, ni el `#contacto-vitrina`, ni la frase «Sin
+fecha prometida» en el HTML servido, ni —lo más caro— **el 404 de una pieza cuyo frente está
+cerrado**, que es la regla de negocio de verdad: las fichas existen en `content/` y no deben
+publicarse. Eso hoy **no lo sostiene nadie**.
+
+La corrección del plan, dicha con todas las letras: **el plan suponía un cuarto caso en las
+brochures** (`tests/e2e/brochure.spec.ts:74`, «una app sin brochure no tiene página»). **No está
+saltado:** `apps.yaml` tiene dos apps sin brochure (`fabric-analitica-e2e`, `agente-gemini-vertex`),
+así que esa prueba corre. El cuarto caso real es el nº 4 de la tabla. Los `test.skip` de
+`votacion.spec.ts` dependen de `SUPABASE_URL` —no son «sin sujeto», son entorno— y los de
+`reduced-motion.spec.ts` tienen sujeto de sobra en el contenido actual.
+
+**No se decide aquí.** Va al recálculo posterior al sprint, con tres salidas sobre la mesa: nace un
+quinto frente y todo revive · se sustituyen por pruebas de ruta con un frente de mentira en un
+fixture · se retiran declarándolo. La tercera es legítima; lo que no lo es, es dejarlas saltadas en
+silencio otro sprint más.
+
