@@ -111,5 +111,5 @@ Que puedo diseñar un sistema de IA en producción con criterio de ingeniero y n
 decidiendo qué **no** usar, poniendo el determinismo donde se puede, dejando la degradación prevista
 y pagando el costo de que cada afirmación sea verificable.
 
-Las dos posiciones que me interesan piden exactamente esto —arquitecturas de recuperación, agentes,
-IA generativa gobernada—, y la diferencia entre decirlo y demostrarlo es este botón.
+Cuando una vacante de IA pide arquitecturas de recuperación, agentes o IA generativa gobernada, la
+diferencia entre decirlo y demostrarlo es este botón.

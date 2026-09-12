@@ -22,7 +22,7 @@ Cómo se escribe, campo por campo: `docs/MANUAL-DE-USO.md` → «Cómo alimentar
 | 1 | `como-trabajo` | borrador | 5 | 1 | `#perfil` |
 | 2 | `origenes` | borrador | 5 | 2 | `#trayectoria` |
 | 3 | `inglopres` | borrador | 5 | 4 | `#trayectoria` |
-| 4 | `ceinfes` | borrador | 5 | 3 | `#trayectoria` |
+| 4 | `ceinfes` | borrador | 5 | 4 | `#trayectoria` |
 | 5 | `cm-operaciones` | borrador | 5 | 2 | `#trayectoria` |
 | 6 | `cafam` | borrador | 5 | 2 | `/proyectos/cafam` |
 | 7 | `transmilenio-cm` | borrador | 6 | 3 | `/proyectos/transmilenio-cm` |
@@ -44,7 +44,7 @@ Cómo se escribe, campo por campo: `docs/MANUAL-DE-USO.md` → «Cómo alimentar
 | 23 | `los-tableros` | borrador | 5 | 2 | `/vitrina/tableros` |
 | 24 | `las-investigaciones` | borrador | 6 | 1 | `/vitrina/investigaciones` |
 
-**24 documentos · 132 subsecciones · 52 `[CONFIRMAR]` · 0 aprobados.**
+**24 documentos · 132 subsecciones · 53 `[CONFIRMAR]` · 0 aprobados.**
 
 ## Cómo corregirlos
 
@@ -58,6 +58,17 @@ capacidades. Por cada documento:
 3. Cuando quede bien, `estado: aprobado`. Yo traduzco el gemelo `.en.md` y el chat empieza a
    citarlo en el siguiente despliegue.
 
-Las respuestas de los `[CONFIRMAR]` de `fundacion-ctic`, `banco-pichincha`, `vesting` y
-`certificaciones` son las que más cambian el resultado: son cifras y afirmaciones, no redacción.
-El informe `sprints/SPRINT_008-informe-discrepancias.md` las recoge todas con su contexto.
+**Comprueba lo que vas escribiendo** con `pnpm test`: la aduana te dice si algo no cumple, y el
+**golden set** (`tests/unit/a-fondo-golden.test.ts`) te dice si las `preguntas_de_prueba` de un
+documento traen ese documento y no otro. Si una pregunta trae un documento distinto pero correcto,
+la mal escrita suele ser la pregunta.
+
+## Por dónde empezar
+
+Dos informes dicen dónde rinde más el esfuerzo:
+
+- `sprints/SPRINT_008-informe-discrepancias.md` — las 12 diferencias entre el sitio y tu hoja de
+  vida. Las de peso: el AI-103 ausente, las cifras de Fundación CTIC, el −35% de Pichincha y los
+  «modelos semánticos».
+- `sprints/SPRINT_008-simulacion-m2.md` — qué preguntas de una entrevista contesta bien este corpus
+  y cuáles no. Trae los cinco huecos que más rinde cerrar, en orden.

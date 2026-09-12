@@ -98,8 +98,8 @@ pensado explícitamente como el complemento multi-nube de mi certificación en A
 Está en exploración con esa palabra a propósito. Cuando esté construida, será evidencia; mientras
 tanto, es una declaración de hacia dónde voy, no un logro que me atribuyo.
 
-[CONFIRMAR: ¿quieres que esa exploración pase a prioridad? Si una de las dos posiciones objetivo
-avanza, una pieza pequeña pero terminada sobre Vertex AI y BigQuery convierte la brecha en
+[CONFIRMAR: ¿quieres que esa exploración pase a prioridad? Si avanza una vacante que pida Google
+Cloud, una pieza pequeña pero terminada sobre Vertex AI y BigQuery convierte la brecha en
 evidencia. Según mi estimación es cuestión de semanas, no de meses, pero la decisión de dónde poner
 tu tiempo es tuya.]
 

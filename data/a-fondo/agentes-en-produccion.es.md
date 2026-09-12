@@ -119,6 +119,5 @@ permite construir el siguiente igual que el anterior.
 
 Eso lo aprendí montando una plataforma para agentes ajenos y lo confirmé construyendo trece propios.
 
-[CONFIRMAR: ¿qué frameworks usaste en Vesting para los agentes, o eran desarrollo propio? Las dos
-posiciones objetivo preguntan explícitamente por marcos de agentes, y hoy este documento no lo
-responde.]
+[CONFIRMAR: ¿qué frameworks usaste en Vesting para los agentes, o eran desarrollo propio? Es de las
+primeras preguntas de cualquier entrevista de ingeniería de IA y hoy este documento no la responde.]

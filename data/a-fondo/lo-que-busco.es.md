@@ -64,8 +64,9 @@ la plataforma y además sabe sentarse en la mesa donde se decide— es poco com�
 
 <!-- seccion: condiciones -->
 
-Estoy en Bogotá, Colombia, y **abierto a reubicación internacional y a trabajo remoto**. Está
-declarado en la cabecera de este sitio.
+Estoy en Bogotá, Colombia, y **abierto a reubicarme a otro país y a trabajar en remoto**. La
+reubicación internacional no es una concesión que hago por una vacante: está declarada en la
+cabecera de este sitio desde antes de que existiera esta conversación.
 
 Ya viví y estudié fuera: hice un curso intensivo de inglés con certificación IELTS en Melbourne,
 Australia, entre 2013 y 2014. Mudarme de país no es una hipótesis para mí.

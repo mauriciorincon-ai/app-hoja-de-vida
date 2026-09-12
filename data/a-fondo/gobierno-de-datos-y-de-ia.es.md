@@ -108,17 +108,20 @@ rojo: si nunca se vio fallar, no es un control.
 
 Son reglas de gobierno, aplicadas a construir con IA, escritas antes de necesitarlas.
 
-## Lo que esto significa para un rol de estrategia
+## Lo transversal en organizaciones grandes
 
-<!-- seccion: para-un-rol-de-estrategia -->
+<!-- seccion: lo-transversal -->
 
-Una de las dos posiciones que me interesan es de liderazgo de estrategia y gobierno de IA para un
-grupo empresarial grande: estándares, lineamientos y uso responsable, con iniciativas transversales.
+Gobernar sirve de poco si no se puede atravesar la organización, y eso lo he hecho tres veces en
+sitios donde nadie me reportaba: las mesas con la dirección de concesionarios del sistema de
+transporte de Bogotá, la implementación del sistema de bodega de Cafam con veinte personas de
+varias áreas, y la gobernanza co-liderada en Banco Pichincha.
 
-Lo transversal en organizaciones grandes lo he hecho —TransMilenio, Cafam, Banco Pichincha—, y el
-gobierno lo he hecho tres veces. La pieza sobre ISO 42001 es la que muestra que el salto al gobierno
-de IA no es un deseo: ya lo estudié lo bastante como para construir algo que lo aplica.
+Lo que se aprende ahí no es técnico. Es que una iniciativa transversal avanza cuando cada área ve
+qué gana, y se detiene cuando se percibe como un requisito impuesto desde afuera. Por eso empiezo
+siempre por la decisión que cada área tiene que tomar, no por la norma que tiene que cumplir.
 
-[CONFIRMAR: esa posición exige especialización o estudios de posgrado en IA, analítica o
-transformación digital, y hoy tu formación declarada son los dos pregrados. Es el único requisito
-que no cumples. ¿Estás cursando algo, lo tienes planeado, o entramos sin él?]
+[CONFIRMAR: los roles de estrategia y gobierno de IA suelen pedir especialización o estudios de
+posgrado en IA, analítica o transformación digital, y hoy tu formación declarada son los dos
+pregrados. ¿Estás cursando algo, lo tienes planeado, o vamos sin él? Es el único requisito de ese
+tipo de vacante que hoy no aparece cubierto.]
