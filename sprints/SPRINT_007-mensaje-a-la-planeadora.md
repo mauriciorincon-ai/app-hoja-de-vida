@@ -104,3 +104,76 @@ acumulativa, manual, bundle del design system en el repo, summary dentro del PR 
 desviaciones de arriba, CI verde check por check, y limpieza del campo homepage tras el
 deploy. Cuando el PR esté en `main`, el summary queda en `sprints/SPRINT_007-summary.md` para
 tu retrospectiva.
+
+---
+
+# Adenda — 2026-09-10, antes de que cierres el S7
+
+> Lo de arriba se escribió el 2026-09-09, con el S7 aún en su PR. Entre esa fecha y hoy pasaron
+> dos cosas que cambian lo que tienes que planear, y una de ellas encontró un defecto real en
+> producción. Te las cuento antes de que hagas la retrospectiva.
+
+## 6. Revisé la HOME antes de lo previsto, y pedí cambios
+
+Dije en el § 3 que la revisión iba después del detalle. Eso sigue en pie para la revisión
+**completa**. Pero al mirar la página por encima vi cinco cosas que no aguantaban esperar un
+sprint entero, y pedí que se ajustaran ya. Se hicieron **fuera de sprint**, en dos ramas con su
+PR cada una, ya en `main`:
+
+**Revisión 1** (PR #22, decisiones en `decisions/018-la-home-tras-la-revision-del-dueno.md`):
+
+1. La trayectoria tenía una barra y un círculo por experiencia, sin orden. Ahora es **una sola
+   línea** que mide todas, un círculo fijo a media pantalla y **el año en grande** como índice.
+2. Donde decía «Proyectos» ahora está **la vitrina asomada** con sus cuatro frentes; los case
+   studies se abren desde su hito, y el vínculo se valida en build.
+3. **Skills** rehecha: una tarjeta por grupo, icono dibujado en casa, sin porcentajes.
+4. **Estudios nació como sección y como dato** (`cv.estudios`). Antes la formación era un hito
+   disfrazado y el PDF la separaba comparando la palabra «Formación».
+5. **«Qué viene» salió de la hoja de vida**: es una pregunta sobre las apps y vive al pie de
+   `/vitrina/apps`. El menú quedó en tres destinos.
+
+**Revisión 2** (PR #23): la vitrina entró al desplegable «Hoja de vida» con el nombre que lleva
+en la página; los **estudios se llenaron con los años** de mi hoja de vida en PDF (tres entradas);
+y **retiré la certificación AI-102**, que Microsoft descontinuó. Eso último tocó diez sitios más
+que la lista —titular, perfil, un logro, un case study, la historia del chat y `apps.yaml`— así
+que ahora hay un gate: **una credencial nombrada por código tiene que existir en la lista**.
+
+## 7. Un defecto real, que solo la CI vio — y la lección
+
+La revisión 1 dejó vivo un **fallo de hidratación en la HOME** (React #418): la línea de la
+trayectoria decidía si pintar su relleno según la preferencia «reducir movimiento», que el
+servidor no conoce. Resultado: para **toda persona con esa preferencia activa**, la página se
+regeneraba entera en cada carga. Justo a quien el cinturón de accesibilidad quiere cuidar.
+
+Cómo apareció: como un fallo **intermitente** en el escaneo de accesibilidad, dos veces en la CI
+y jamás en la máquina local. Se cazó porque el job empezó a **subir sus trazas al fallar** — no
+lo hacía. La traza lo nombró en una línea.
+
+Tres cosas que te propongo llevar al método del pipeline, porque no son de esta app:
+
+1. **La forma del árbol no puede depender de `useReducedMotion()`.** El hook vale `null` en el
+   servidor. Solo puede cambiar propiedades de animación, nunca qué elementos existen. Hoy lo
+   vigilan dos gates nuevos aquí (uno unitario, otro en los escaneos de accesibilidad, ambos
+   vistos en rojo antes de corregir).
+2. **Un job de CI que puede ponerse rojo tiene que subir su evidencia.** Un rojo sin trazas costó
+   dos ciclos de ida y vuelta. Es barato: se sube solo cuando falla.
+3. **`ink-3` como color de texto debería fallar en el lint, no en el escaneo final.** Es la
+   segunda vez (S6 y ahora) que la regla escrita en el design system se rompe y la caza `axe` al
+   final. Una regla de lint la pararía al escribir.
+
+## 8. Qué cambia para tu planeación
+
+- **La HOME ya no es la que describía el S7.** Si el plan del detalle asume su forma anterior,
+  hay que releerla: `sprints/POST-S7-revision-hoja-de-vida.md` tiene las dos revisiones con su
+  tabla de «lo pedido → lo hecho», los rojos demostrados y las desviaciones.
+- **El gate ⭐ acumulado creció a 25 pruebas** en la guía v7.1: las 5 del S7 más 3 nuevas de la
+  revisión de la HOME, sobre las heredadas. Sigue diferido por mi decisión, y lo pago en el
+  recorrido de cierre, después del S8.
+- **Queda una mirada de contenido mía pendiente** (la ⭐ `n11`): confirmar títulos y años de los
+  estudios y que retirar AI-102 del titular y del perfil dice lo que quiero decir. Va con la
+  revisión completa del S8, no antes.
+- **Lo pedido en el § 4 no cambia:** el S8 sigue siendo el sprint del detalle para el chat. Y
+  después de él, la revisión completa y tu recálculo.
+
+Nada más queda abierto del lado de la app: los tres PRs están en `main`, la CI verde check por
+check, el campo `homepage` limpio tras el deploy y el barrido de enlaces vacío.
