@@ -598,3 +598,74 @@ exactamente lo que el diseño promete.
 Los dos e2e que el corpus nuevo podía mover —el del chat y el del fallback— pasan. El cambio de 3 a
 4 fuentes en el fallback solo añade evidencia; no mueve el orden.
 
+---
+
+## Fase 4 — el corpus completo y la simulación M2
+
+### 4.1 · Por qué es simulación y no medición real
+
+**Decisión del dueño (2026-09-12):** corrige primero y aprueba después — «es una labor larga y
+quiero iniciarla cuanto antes». M1 y M2 quedan pendientes de esa corrección, y **nada más del
+sprint depende de ellas**. El índice publicado sigue en 28 fragmentos, que es lo que el diseño
+promete con 24 borradores.
+
+Así que la fase mide contra el índice que existirá: **162 fragmentos**, los 24 documentos forzados a
+aprobado más los de los YAML. Es exactamente el riesgo 7 del plan, declarado de antemano.
+
+Entregable: `sprints/SPRINT_008-simulacion-m2.md`. No es un informe de cierre: **es la herramienta
+de trabajo del dueño mientras corrige**, porque le dice qué preguntas contesta bien su corpus y
+cuáles no.
+
+### 4.2 · El hallazgo de la fase: los documentos repetían la oferta de trabajo
+
+Cuatro subsecciones —en `gobierno-de-datos-y-de-ia`, `rag-y-el-chat`, `plataforma-y-despliegue` y
+`agentes-en-produccion`— traían frases como «liderazgo de estrategia y gobierno de IA para un grupo
+empresarial grande: estándares, lineamientos y uso responsable, con iniciativas transversales». Eso
+es **el texto de la vacante**, no el del dueño. Dos consecuencias, las dos malas:
+
+1. **Secuestraban el buscador.** Esos párrafos contienen el vocabulario exacto de las preguntas de
+   ese tipo de vacante, así que ganaban el top-4 de **todas** a la vez. A «¿tiene especialización o
+   posgrado?» el chat respondía con un párrafo que dice *«esa posición exige posgrado»* — la forma
+   de respuesta equivocada, y una que además suena a excusa.
+2. **Metían la oferta en un repositorio público.** Los datos identificables del tercero se apartaron
+   desde el primer mensaje. **La redacción de la oferta también es de un tercero** y se me pasó.
+
+Reescritas las cuatro en la voz del dueño y sin nombrar ninguna vacante concreta. Efecto medido:
+«¿tiene posgrado?» pasa a traer `estudios` de primero —la respuesta real— y «¿está dispuesto a
+reubicarse?» pasa a traer la subsección de condiciones, que es la que lo dice.
+
+Es el mismo error que la aduana persigue con los datos de terceros, un nivel más arriba: **no basta
+con no copiar el dato, hay que no copiar la frase.** Ningún gate lo habría cazado; lo cazó medir.
+
+### 4.3 · Los números de la simulación
+
+| Grupo | Bien | Flojas |
+| ----- | ---: | -----: |
+| Preguntas de un rol de ingeniería de IA | 6/10 | 4 |
+| Preguntas de un rol de estrategia y gobierno de IA | 7/10 | 3 |
+| **Total** | **13/20** | **7** |
+
+**Las siete flojas no son del buscador: son huecos de contenido**, y seis de las siete ya tienen su
+`[CONFIRMAR]`. Las mejoras más grandes al aprobar la base: RAG pasa de un case study genérico al
+documento entero; gobierno de IA e ISO 42001 pasan de **invisibles** a tener su subsección; y
+Docker/Kubernetes y MLOps pasan de **OFF-TOPIC** —el chat hoy no sabe qué decir— a responder con la
+brecha declarada de frente.
+
+**El «no sé de eso» con la base cargada:** 3 de 5 preguntas ajenas se paran sin gastar un token; las
+2 que comparten vocabulario pasan al modelo, que las declina por el prompt. Está decidido y
+explicado en 3.3.
+
+**El fallback local mejora solo.** Con la base cargada, los cuatro recortes de 220 caracteres son
+prosa en primera persona y se leen como respuesta, no como un volcado de campos de un YAML.
+
+### 4.4 · Verificación de la fase 4
+
+| Comprobación     | Resultado                                        |
+| ---------------- | -------------------------------------------------- |
+| `pnpm test`      | **615 pasan / 615** · 30 archivos                  |
+| `pnpm typecheck` | limpio                                            |
+| `pnpm lint`      | limpio                                            |
+| `pnpm build`     | OK — 28 chunks, 0 de 24 aprobados                 |
+| Golden set tras las reescrituras | 48/48 — ninguna reescritura lo movió |
+| Privacidad sobre los 24 | limpio                                      |
+
