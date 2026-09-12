@@ -44,9 +44,17 @@ describe("content loader (data/*.yaml reales)", () => {
   });
 
   // Una credencial nombrada por código (DP-600, AI-102…) en el titular, un
-  // logro, un case study, la historia del chat o apps.yaml es una promesa:
+  // logro, un case study, el corpus «a fondo» o apps.yaml es una promesa:
   // tiene que existir en `certificaciones`. Nació el 2026-09-10, cuando AI-102
   // salió de la lista (Microsoft la descontinuó) y seguía viva en seis sitios.
+  //
+  // S8 — el segundo estado declarable. El canal «a fondo» destapó el caso que
+  // faltaba: un documento cuyo TEMA es el estado de una credencial —una
+  // descontinuada, una en curso— tiene que escribir el código justamente para
+  // decir que NO se tiene. La promesa no se toca (sigue siendo imposible
+  // afirmar una credencial que no se tiene); lo que se añade es que un código
+  // también puede estar declarado en `data/credenciales-nombradas.yaml` CON SU
+  // RAZÓN. Un código que no esté en ninguna de las dos rompe igual.
   const CODIGO_CREDENCIAL = /\b(?:AI|DP|AZ|PL|DA|MB|MS|SC)-\d{3}\b/g;
   type Hallazgo = { ruta: string; codigo: string };
   function codigosEn(valor: unknown, ruta: string, out: Hallazgo[]) {
@@ -64,9 +72,19 @@ describe("content loader (data/*.yaml reales)", () => {
     const apps: unknown = parse(readFileSync("data/apps.yaml", "utf8"));
     for (const locale of ["es", "en"] as const) {
       const { certificaciones, ...resto } = getCv(locale);
-      const vigentes = new Set(
-        certificaciones.flatMap((c) => c.nombre.match(CODIGO_CREDENCIAL) ?? []),
-      );
+      const declaradas = parse(
+        readFileSync("data/credenciales-nombradas.yaml", "utf8"),
+      ) as { nombradas_sin_obtener: { codigo: string; razon: string }[] };
+      for (const d of declaradas.nombradas_sin_obtener) {
+        expect(
+          d.razon?.trim(),
+          `credenciales-nombradas.yaml: «${d.codigo}» sin razón. Nombrar una credencial que no se tiene es una decisión, y una decisión sin razón escrita no es declarable.`,
+        ).toBeTruthy();
+      }
+      const vigentes = new Set([
+        ...certificaciones.flatMap((c) => c.nombre.match(CODIGO_CREDENCIAL) ?? []),
+        ...declaradas.nombradas_sin_obtener.map((d) => d.codigo),
+      ]);
       const halladas: Hallazgo[] = [];
       codigosEn(resto, `cv.${locale}`, halladas);
       // El canal «a fondo» reemplazó a la historia en el S8: los códigos de
@@ -84,7 +102,10 @@ describe("content loader (data/*.yaml reales)", () => {
       const huerfanas = halladas
         .filter((h) => !vigentes.has(h.codigo))
         .map((h) => `${h.codigo} en ${h.ruta}`);
-      expect(huerfanas).toEqual([]);
+      expect(
+        huerfanas,
+        "una credencial nombrada es una credencial listada: o está en `certificaciones` de cv.*.yaml, o está declarada en data/credenciales-nombradas.yaml con su razón",
+      ).toEqual([]);
     }
   });
 

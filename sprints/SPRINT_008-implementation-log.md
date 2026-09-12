@@ -353,3 +353,112 @@ expresión regular no está disponible con el target de este repo; el `= []` por
 hacía que TS infiriera `never[]` desde el `.mjs`; y un fixture de los tests de guardrails seguía
 nombrando `historia`. Corregidas.
 
+---
+
+## Fase 2 — la base en borrador: los 24 documentos
+
+### 2.1 · Lo que hay
+
+| Medida                          | Valor                                                  |
+| ------------------------------- | -------------------------------------------------------- |
+| Documentos                      | **24**, todos `estado: borrador`                        |
+| Subsecciones                    | **132** (4–6 por documento, como pedía el plan)         |
+| Palabras de prosa               | **~16 450** (sin contar comentarios)                    |
+| Marcas `[CONFIRMAR]`            | **52**                                                  |
+| Documentos aprobados e indexados | **0** — y el build lo imprime en cada corrida           |
+
+Índice para corregirlos uno a uno: `data/a-fondo/README.md`, en el orden del mapa aprobado (de la
+trayectoria a las capacidades), con el número de `[CONFIRMAR]` de cada uno a la vista.
+
+**Fuentes:** la hoja de vida fusionada (fuera del repo) · `cv.{es,en}.yaml` · los 5 case studies ·
+`apps.yaml` · `vitrina.yaml` · los 6 brochure-export · las 26 fichas técnicas de agentes,
+investigaciones y tableros · `data/fichas/` · el manual.
+
+### 2.2 · Las 52 marcas `[CONFIRMAR]` son la señal de que el método funcionó
+
+Ninguna cifra, fecha ni logro se escribió sin fuente. Donde la fuente no existía, quedó la marca con
+**qué falta y por qué importa** — nunca un dato plausible. Las que más pesan:
+
+- **`fundacion-ctic`**: el rol actual sigue sin una sola cifra, en la hoja de vida y en el sitio. Es
+  el vacío más importante de los 24 y tiene subsección propia que lo dice de frente.
+- **`vesting`**: falta el tamaño (volumen, clientes integrados), qué se capturaba de cada agente y
+  cuántos agentes se vigilaban a la vez.
+- **`banco-pichincha`**: qué predecían los modelos, y las dos discrepancias de fondo (el −35% y los
+  «modelos semánticos»).
+- **`certificaciones`**: desde cuándo va la ruta del AI-103, si su temario sigue siendo el del
+  AI-102, y si entra al sitio.
+- **`analitica-predictiva`**: de PyTorch, TensorFlow, Watson Studio, Orange, SPSS y SAS, cuáles se
+  usaron en un trabajo real y cuáles vienen de formación. Un documento que no distingue lo dominado
+  de lo visto se cae en la primera entrevista técnica.
+- **`procesos-y-simulacion`**: dónde se usaron Bizagi y FlexSim. Hoy están en la hoja de vida sin un
+  uso asociado y **no aparecen en las skills del sitio**.
+
+### 2.3 · Cero terceros — la tercera capa, que es mi lectura
+
+El barrido mecánico pasó limpio sobre los 24. Pero la regla dice que los nombres propios no los caza
+un regex, así que leí: barrí los 24 documentos buscando mayúsculas que no fueran organizaciones,
+productos o lugares ya publicados.
+
+**Un hallazgo, y lo aparté.** La hoja de vida nombra la consultoría de Ceinfes por su razón social,
+que **lleva el nombre de una persona**. Lo escribí en el primer borrador y lo retiré: `cv.es.yaml`
+tampoco lo publica —dice solo «Ceinfes»— y un nombre propio de tercero no viaja a un archivo de este
+repositorio sin visto bueno del dueño. Queda como `[CONFIRMAR]` dentro del documento, con la razón
+escrita.
+
+Es exactamente el caso que el plan anticipó al exigir tres capas en vez de una.
+
+### 2.4 · El gate de credenciales del S7 se puso ROJO, y tenía razón
+
+Al terminar de escribir, `pnpm test` cayó con **15 huérfanas**: `AI-103` y `AI-102` nombrados en
+`a-fondo/certificaciones.es.md` y `a-fondo/como-aprendo.es.md` sin existir en `certificaciones`.
+
+El gate nació el 2026-09-10 con una regla de un solo estado: **una credencial nombrada es una
+credencial listada**. El canal nuevo destapó el caso que le faltaba: **un documento cuyo TEMA es el
+estado de una credencial** —una descontinuada, una en curso— tiene que escribir el código
+justamente para decir que NO se tiene.
+
+Tres salidas había, y dos eran malas:
+
+1. **Meter el AI-103 en `cv.*.yaml`** para que el test pasara. **Descartada**: es la discrepancia 1
+   del informe y la orden dice que nada se corrige sin el OK del dueño. Un gate no se satisface
+   tomando por él una decisión que es suya.
+2. **Quitar los códigos de la prosa.** Descartada: el dueño pidió expresamente que el contenido se
+   oriente a «DP-600 vigente, AI-103 en desarrollo». Reescribir para que quepa es la versión de
+   texto de editar una ficha ajena «para que quepa».
+3. **Afinar el invariante**, que es lo que se hizo.
+
+**Qué cambió exactamente.** Ahora hay **dos estados declarables** en vez de uno: el código está en
+`certificaciones` (se tiene), **o** está en `data/credenciales-nombradas.yaml` **con su razón
+escrita** (se nombra y se dice por qué no se tiene). Un código que no esté en ninguna de las dos
+rompe igual que antes.
+
+**La promesa del gate no se debilitó, se completó:** sigue siendo imposible afirmar una credencial
+que no se tiene, y ahora además es imposible **mencionar** una sin declarar por qué. Antes ese caso
+no estaba prohibido: estaba fuera del alcance del gate. De hecho el manual llevaba dos días
+explicando la descontinuación del AI-102 sin que nada lo vigilara.
+
+**Los dos rojos, en el mismo commit:**
+
+| Rojo | Mutación                                         | Qué imprimió                                                                                     |
+| ---- | ------------------------------------------------ | -------------------------------------------------------------------------------------------------- |
+| A    | retirar `AI-103` de la lista declarada           | 11 huérfanas nombradas con archivo: `AI-103 en a-fondo/certificaciones.es.md`, `…/como-aprendo.es.md` |
+| B    | dejar una declaración con `razon` vacía          | `credenciales-nombradas.yaml: «AI-103» sin razón. Nombrar una credencial que no se tiene es una decisión, y una decisión sin razón escrita no es declarable.` |
+
+Y la `[CONFIRMAR]` de la decisión de fondo vive **dentro del propio archivo de datos**, junto al
+código: si el AI-103 entra a `certificaciones`, su entrada aquí se borra.
+
+### 2.5 · Verificación de la fase 2
+
+| Comprobación     | Resultado                                                               |
+| ---------------- | ------------------------------------------------------------------------- |
+| `pnpm test`      | **551 pasan / 551** · 29 archivos (503 al cerrar la fase 1)              |
+| `pnpm typecheck` | limpio                                                                   |
+| `pnpm lint`      | limpio                                                                   |
+| `pnpm build`     | OK — `28 chunks (0 de 24 documentos «a fondo» aprobados e indexados)`    |
+| Aduana sobre los 24 | limpia: nombre, destino, privacidad y paridad                         |
+| Lectura de terceros | hecha y registrada arriba — un hallazgo, apartado                     |
+
+El índice publicado **no creció ni un chunk**, y eso es exactamente lo correcto: 24 borradores no se
+indexan. La base entera está escrita y el chat todavía no la ve — que es lo que permite corregirla
+sin publicar medio documento.
+

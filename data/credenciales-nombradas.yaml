@@ -1,0 +1,31 @@
+# CÓDIGOS DE CREDENCIAL QUE EL CONTENIDO PUEDE NOMBRAR SIN TENERLOS (S8).
+#
+# El gate del S7 («una credencial nombrada es una credencial listada», nacido el
+# 2026-09-10 cuando AI-102 salió de `certificaciones` y seguía viva en seis sitios)
+# tenía un solo estado permitido: el código está en `certificaciones` o el test lo
+# nombra. El canal «a fondo» destapó el caso que faltaba: un documento cuyo tema ES
+# el estado de una credencial —una descontinuada, una en curso— necesita escribir el
+# código justamente para decir que NO se tiene.
+#
+# La promesa del gate no se toca: sigue siendo imposible afirmar una credencial que no
+# se tiene. Lo que cambia es que ahora hay DOS estados declarables en vez de uno:
+#
+#   · está en `certificaciones` de cv.{es,en}.yaml  → se tiene;
+#   · está en esta lista, con su razón               → se nombra y se dice por qué no.
+#
+# Un código que no esté en ninguna de las dos sigue rompiendo el build.
+# Añadir una entrada aquí es una DECISIÓN, no un parche: la razón es obligatoria.
+
+nombradas_sin_obtener:
+  - codigo: AI-102
+    razon: >-
+      Microsoft la descontinuó. Salió de todo el contenido el 2026-09-10 (titular, perfil,
+      logro, case study de Vesting, apps.yaml). Solo se menciona para explicar por qué ya
+      no está y por qué la ruta es ahora el AI-103.
+  - codigo: AI-103
+    razon: >-
+      Ruta en desarrollo. JAMÁS se declara como obtenida — ni en el sitio, ni en la hoja
+      de vida, ni en el corpus del chat.
+      [CONFIRMAR: hoy el AI-103 no aparece en ninguna parte del sitio publicado. ¿Entra a
+      `certificaciones` como credencial en curso? Si entra, el logro «5 certificaciones»
+      pasa a «5 + 1 en curso». Discrepancia 1 del informe del S8.]
