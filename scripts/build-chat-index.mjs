@@ -52,6 +52,7 @@ const LABELS = {
     estudios: "Estudios",
     logros: "Logros",
     certificaciones: "Certificaciones",
+    enCurso: "en curso",
     skills: "Skills",
     contacto: "Contacto y enlaces",
     apps: "Apps del pipeline",
@@ -63,6 +64,7 @@ const LABELS = {
     estudios: "Education",
     logros: "Achievements",
     certificaciones: "Certifications",
+    enCurso: "in progress",
     skills: "Skills",
     contacto: "Contact & links",
     apps: "Pipeline apps",
@@ -124,7 +126,12 @@ export function buildChunks({ cv, apps, aFondo, locale }) {
     // Sin sección Proyectos en la HOME (post-S7), la cita de un proyecto
     // sin detalle cae en la trayectoria, que es donde vive su hito.
     const ancla = p.casestudy ? `/proyectos/${p.slug}` : "#trayectoria";
-    push(`proyecto-${p.slug}`, p.nombre, `${p.resumen} ${(p.stack ?? []).join(", ")}`, ancla);
+    push(
+      `proyecto-${p.slug}`,
+      p.nombre,
+      `${p.resumen} ${(p.stack ?? []).join(", ")}`,
+      ancla,
+    );
     if (p.casestudy) {
       const c = p.casestudy;
       // Título diferenciado: las citas [n] del proyecto y de su case study
@@ -142,7 +149,10 @@ export function buildChunks({ cv, apps, aFondo, locale }) {
     "estudios",
     L.estudios,
     (cv.estudios ?? [])
-      .map((e) => `${e.titulo}, ${e.institucion}${e.periodo ? ` (${e.periodo})` : ""}. ${e.nota ?? ""}`)
+      .map(
+        (e) =>
+          `${e.titulo}, ${e.institucion}${e.periodo ? ` (${e.periodo})` : ""}. ${e.nota ?? ""}`,
+      )
       .join(" · "),
     "#estudios",
   );
@@ -151,7 +161,10 @@ export function buildChunks({ cv, apps, aFondo, locale }) {
     "certificaciones",
     L.certificaciones,
     cv.certificaciones
-      .map((c) => `${c.nombre} (${c.fecha}). ${c.nota ?? ""}`)
+      .map(
+        (c) =>
+          `${c.nombre} (${c.estado === "en curso" ? L.enCurso : c.fecha}). ${c.nota ?? ""}`,
+      )
       .join(" · "),
     "#certificaciones",
   );
@@ -198,7 +211,10 @@ function main() {
   for (const locale of LOCALES) {
     docs[locale] = leerDocumentos(locale);
     for (const doc of docs[locale]) {
-      crudos.set(doc.archivo, readFileSync(path.join(ROOT, doc.archivo), "utf8"));
+      crudos.set(
+        doc.archivo,
+        readFileSync(path.join(ROOT, doc.archivo), "utf8"),
+      );
     }
   }
 
@@ -234,7 +250,9 @@ function main() {
     const outFile = path.join(OUT_DIR, `chat-index.${locale}.json`);
     writeFileSync(outFile, JSON.stringify(index), "utf8");
 
-    const aprobados = docs[locale].filter((d) => d.estado === "aprobado").length;
+    const aprobados = docs[locale].filter(
+      (d) => d.estado === "aprobado",
+    ).length;
     console.log(
       `\u2713 chat-index.${locale}.json — ${chunks.length} chunks (` +
         `${aprobados} de ${docs[locale].length} documentos «a fondo» aprobados e indexados)`,
@@ -243,6 +261,9 @@ function main() {
 }
 
 // Ejecutable directo (build) e importable (tests unit del builder).
-if (process.argv[1] && import.meta.url.endsWith(path.basename(process.argv[1]))) {
+if (
+  process.argv[1] &&
+  import.meta.url.endsWith(path.basename(process.argv[1]))
+) {
   main();
 }

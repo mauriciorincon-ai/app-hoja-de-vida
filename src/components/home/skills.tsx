@@ -12,6 +12,12 @@ import { IconoSkill } from "./skills-iconos";
  * Lo que NO hay, a propósito: barras de porcentaje ni «nivel de dominio». Un
  * 80 % de Python no significa nada y nadie lo puede medir; lo que aparece es
  * lo que se sabe hacer, y la trayectoria es la prueba.
+ *
+ * Revisión post-S8 — «más impactante, pero elegante»: tres capas. La tarjeta
+ * ATERRIZA (`liftIn`: sube con 8° de perspectiva, escala y desenfoque, 1 s,
+ * 120 ms de escalón entre tarjetas) → el trazo del icono se dibuja cuando ya
+ * aterrizó (0,35 s) → los chips entran en cascada rápida (45 ms). Todo
+ * transform/opacity/filter; con reducción de movimiento, quieto.
  */
 export async function Skills({ skills }: { skills: Cv["skills"] }) {
   const tNav = await getTranslations("nav");
@@ -36,9 +42,9 @@ export async function Skills({ skills }: { skills: Cv["skills"] }) {
             {t("linea")}
           </p>
         </Reveal>
-        <Stagger className="grid gap-5 md:grid-cols-2">
+        <Stagger className="grid gap-5 md:grid-cols-2" stagger={0.12}>
           {skills.map((grupo, i) => (
-            <StaggerItem key={grupo.grupo} variant="fadeInUp" className="h-full">
+            <StaggerItem key={grupo.grupo} variant="liftIn" className="h-full">
               <article
                 data-skill-grupo={i}
                 className="skill-tarjeta flex h-full flex-col gap-5 rounded-[14px] border border-paper-2 bg-paper-0 p-6 shadow-sh-1 transition-[box-shadow,transform] duration-[180ms] ease-[var(--ease-out-cubic)] hover:-translate-y-0.5 hover:shadow-sh-2"
@@ -49,7 +55,11 @@ export async function Skills({ skills }: { skills: Cv["skills"] }) {
                     {grupo.grupo}
                   </h3>
                 </div>
-                <Stagger className="flex flex-wrap gap-2" delay={0.15}>
+                <Stagger
+                  className="flex flex-wrap gap-2"
+                  delay={0.4}
+                  stagger={0.045}
+                >
                   {grupo.items.map((item) => (
                     <StaggerItem key={item} variant="scaleInBlur">
                       <span className="inline-flex min-h-8 items-center rounded-full border border-paper-3 bg-paper-1 px-3 py-1 text-[14px] text-ink-1">

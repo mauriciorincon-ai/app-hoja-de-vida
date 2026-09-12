@@ -96,7 +96,9 @@ export default async function VitrinaPage({ params }: Params) {
           {/* Las cajas nacen visibles: son el contenido de esta ruta. */}
           <ul className="grid gap-5 sm:grid-cols-2">
             {frentes.map((frente) => (
-              <CajaFrente key={frente.id} frente={frente} locale={l} />
+              <li key={frente.id} className="list-none">
+                <CajaFrente frente={frente} locale={l} />
+              </li>
             ))}
           </ul>
 

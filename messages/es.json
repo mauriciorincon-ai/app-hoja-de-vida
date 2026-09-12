@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "CV Viva — Henry Rincón",
-    "description": "La hoja de vida interactiva de Henry Rincón — Data & AI Engineer (DP-600 · AI-102): trayectoria, logros y las apps del pipeline AI-APPs en una experiencia editorial animada."
+    "description": "La hoja de vida interactiva de Henry Rincón — Ingeniero Industrial · Analytics & AI Engineer (DP-600): trayectoria, logros, vitrina y un chat que responde con su evidencia, en una experiencia editorial animada."
   },
   "nav": {
     "trayectoria": "Trayectoria",
@@ -17,12 +17,12 @@
     "abrirMenu": "Abrir el menú",
     "cerrarMenu": "Cerrar el menú",
     "menu": "Menú",
-    "vitrina": "Vitrina",
+    "portafolio": "Portafolio",
     "hojaDeVida": "Hoja de vida",
     "estudios": "Estudios"
   },
   "hero": {
-    "ctaApps": "Explora las apps",
+    "ctaApps": "Explora mi portafolio",
     "ctaContacto": "Hablemos"
   },
   "perfil": {
@@ -53,7 +53,8 @@
     "volver": "Volver al inicio"
   },
   "certificaciones": {
-    "verificar": "Verificar"
+    "verificar": "Verificar",
+    "enCurso": "En curso"
   },
   "apps": {
     "estados": {
@@ -87,29 +88,29 @@
   "contacto": {
     "eyebrow": "Contacto",
     "titulo": "¿Hablamos?",
-    "subtitulo": "¿Quieres saber si encajo en tu equipo? Escríbeme — una app, un rol o una conversación técnica."
+    "subtitulo": "¿Un proyecto, una asesoría, una charla o un rol? Escríbeme y cuéntame qué tienes en mente."
   },
   "footer": {
-    "creditos": "Construida en público por el pipeline AI-APPs."
+    "creditos": "Diseñada y construida por Henry Rincón."
   },
   "form": {
-    "titulo": "Solicitar acceso",
+    "titulo": "Escríbeme",
     "nombre": "Tu nombre",
     "email": "Tu correo",
-    "app": "¿Qué app quieres probar?",
-    "mensaje": "Cuéntame para qué la quieres usar (opcional)",
-    "enviar": "Quiero probarla",
+    "app": "¿Vienes por una app? (opcional)",
+    "appNinguna": "No, es un mensaje general",
+    "mensaje": "Cuéntame qué tienes en mente (opcional)",
+    "enviar": "Enviar",
     "enviando": "Enviando…",
-    "errorEnvio": "No pude enviar tu solicitud. Intenta de nuevo en un momento.",
+    "errorEnvio": "No pude enviar tu mensaje. Intenta de nuevo en un momento.",
     "reintentar": "Reintentar",
     "errores": {
       "nombreRequerido": "Escribe tu nombre.",
-      "emailInvalido": "Ese correo no se ve válido.",
-      "appRequerida": "Elige una app."
+      "emailInvalido": "Ese correo no se ve válido."
     }
   },
   "confirmacion": {
-    "titulo": "Recibí tu solicitud",
+    "titulo": "Recibí tu mensaje",
     "cuerpo": "Te respondo en 1–3 días hábiles al correo que dejaste.",
     "volver": "Volver al inicio"
   },
@@ -153,14 +154,14 @@
       "enPreparacion": "En preparación"
     },
     "frenteEstadoAyuda": {
-      "abierta": "Tiene piezas publicadas",
-      "enPreparacion": "El frente existe; sus piezas aún no se publican"
+      "abierta": "Tiene productos publicados",
+      "enPreparacion": "El frente existe; sus productos aún no se publican"
     },
-    "cuentaPiezas": "{n, plural, one {# pieza} other {# piezas}}",
-    "entrar": "Entrar",
+    "cuentaPiezas": "{n, plural, one {# producto} other {# productos}}",
+    "entrar": "Explora",
     "verQueViene": "Ver qué viene",
     "enPreparacionTitulo": "Este frente empieza",
-    "enPreparacionLinea": "Las primeras piezas se publican aquí cuando estén construidas — cada una con lo que hace y con qué evidencia. Sin fecha prometida: si quieres enterarte, la lista de espera está abajo.",
+    "enPreparacionLinea": "Los primeros productos se publican aquí cuando estén construidas — cada una con lo que hace y con qué evidencia. Sin fecha prometida: si quieres enterarte, la lista de espera está abajo.",
     "otrosFrentes": "Los otros frentes de la vitrina",
     "notaIdioma": "",
     "estados": {
@@ -203,7 +204,7 @@
     "no": "no",
     "muestraPie": "Esquema de las ideas de la app, dibujado en el lenguaje visual de esta página. No es una captura de pantalla.",
     "capturasPie": "Pantalla real de la app corriendo, con datos inventados — repintada con la paleta de esta página.",
-    "firmaPie": "La escena mayor de su pieza de presentación, re-dibujada en el lenguaje visual de esta página.",
+    "firmaPie": "La escena mayor de su producto de presentación, re-dibujada en el lenguaje visual de esta página.",
     "indiceNota": "Cada app tiene su propia página. Aquí solo se asoman.",
     "verFicha": "Ver la ficha técnica",
     "cuentaFuncionalidades": "{n} funcionalidades",
@@ -214,12 +215,12 @@
     "vecinasEtiqueta": "Otras apps de la vitrina",
     "appAnterior": "App anterior",
     "appSiguiente": "App siguiente",
-    "escaparateCuenta": "{n, plural, one {# pieza publicada} other {# piezas publicadas}}",
-    "escaparateNota": "Cada pieza tiene su propia página. Aquí solo se asoman.",
+    "escaparateCuenta": "{n, plural, one {# producto publicado} other {# productos publicados}}",
+    "escaparateNota": "Cada producto tiene su propia página. Aquí solo se asoman.",
     "volverAlFrente": "Volver a {frente}",
-    "vecinasDelFrente": "Otras piezas de {frente}",
-    "piezaAnterior": "Pieza anterior",
-    "piezaSiguiente": "Pieza siguiente",
+    "vecinasDelFrente": "Otros productos de {frente}",
+    "piezaAnterior": "Producto anterior",
+    "piezaSiguiente": "Producto siguiente",
     "deEstaCasa": "De esta casa",
     "deEstaCasaLinea": "Lo que sostiene la página que estás leyendo: también son apps del pipeline, y también se pueden recorrer.",
     "verLaApp": "Ver la app",
@@ -253,9 +254,9 @@
     "s05": "Dónde está",
     "s05sub": "La versión anclada, no el tiempo real.",
     "conclusiones": "Lo que dicen los datos",
-    "conclusionesSub": "Cada hallazgo con su cifra y su procedencia. Es lo que la pieza encontró, no lo que es.",
+    "conclusionesSub": "Cada hallazgo con su cifra y su procedencia. Es lo que el producto encontró, no lo que es.",
     "galeria": "Cómo se ve",
-    "galeriaSub": "Pantallas reales de la pieza, tal como corre. Sin retocar.",
+    "galeriaSub": "Pantallas reales del producto, tal como corre. Sin retocar.",
     "galeriaPie": "Pantalla {n} de {total}",
     "hitos": {
       "ciclo": "ciclo",
@@ -270,9 +271,9 @@
     "volverFichaTecnica": "Volver a la ficha técnica"
   },
   "vitrinaHome": {
-    "titulo": "Lo que construyo",
-    "linea": "Cuatro frentes: apps, agentes, investigaciones y tableros. Cada uno con sus piezas, y cada pieza con su ficha técnica.",
-    "ir": "Entrar a la vitrina"
+    "titulo": "Vitrina",
+    "linea": "Cuatro frentes: apps, agentes, investigaciones y tableros. Cada uno con sus productos, y cada producto con su ficha técnica.",
+    "ir": "Explora el portafolio"
   },
   "estudios": {
     "sinPeriodo": "Sin fecha declarada"

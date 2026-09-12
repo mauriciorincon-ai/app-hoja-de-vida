@@ -22,10 +22,7 @@ nombradas_sin_obtener:
       Microsoft la descontinuó. Salió de todo el contenido el 2026-09-10 (titular, perfil,
       logro, case study de Vesting, apps.yaml). Solo se menciona para explicar por qué ya
       no está y por qué la ruta es ahora el AI-103.
-  - codigo: AI-103
-    razon: >-
-      Ruta en desarrollo. JAMÁS se declara como obtenida — ni en el sitio, ni en la hoja
-      de vida, ni en el corpus del chat.
-      [CONFIRMAR: hoy el AI-103 no aparece en ninguna parte del sitio publicado. ¿Entra a
-      `certificaciones` como credencial en curso? Si entra, el logro «5 certificaciones»
-      pasa a «5 + 1 en curso». Discrepancia 1 del informe del S8.]
+  # AI-103 salió de esta lista el 2026-09-12 (revisión post-S8): entró a
+  # `certificaciones` de cv.{es,en}.yaml con `estado: en curso` — el TERCER estado,
+  # que se lista con chip y sin fecha, y cuyo código solo puede nombrarse con «en
+  # curso» al lado (gate de contenido). Resolvía la discrepancia 1 del informe del S8.

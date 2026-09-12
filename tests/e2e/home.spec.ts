@@ -89,20 +89,22 @@ test.describe("HOME — happy path del sprint", () => {
       timeout: 15_000,
     });
 
-    // Enviar solicitud de acceso end-to-end (sin API key → envío simulado)
+    // Enviar un mensaje end-to-end (sin API key → envío simulado). Elegir una
+    // app es opcional desde la revisión post-S8; aquí se elige una, que es la
+    // ruta de la lista de espera.
     await page.locator("#contacto").scrollIntoViewIfNeeded();
     await page.locator("form[data-hydrated=true]").waitFor();
     await page.getByLabel("Your name").fill("E2E Tester");
     await page.getByLabel("Your email").fill("e2e@example.com");
     await page
-      .getByLabel("Which app do you want to try?")
+      .getByLabel("Here for an app? (optional)")
       .selectOption(appSolicitable.id);
-    await page.getByRole("button", { name: "I want to try it" }).click();
+    await page.getByRole("button", { name: "Send" }).click();
 
     // Confirmación humana
     await expect(page).toHaveURL(/\/en\/solicitud-enviada/);
     await expect(page.getByRole("heading", { level: 1 })).toContainText(
-      "I got your request",
+      "I got your message",
     );
   });
 

@@ -3,7 +3,9 @@ import { Resend } from "resend";
 import type { Solicitud } from "./schemas";
 
 /**
- * Envío de la solicitud de acceso por email (Resend free tier).
+ * Envío del mensaje del formulario por email (Resend free tier). Desde la
+ * revisión post-S8 el formulario es el contacto general: con `app` es una
+ * solicitud de acceso a esa app; sin ella, un mensaje desde la hoja de vida.
  * Sin RESEND_API_KEY configurada (dev/preview sin secrets) el envío se
  * simula y queda solo en logs — el llamador decide cómo registrarlo.
  */
@@ -26,11 +28,13 @@ export async function sendSolicitudEmail(
     from,
     to,
     replyTo: solicitud.email,
-    subject: `[CV Viva] Solicitud de acceso: ${solicitud.app}`,
+    subject: solicitud.app
+      ? `[CV Viva] Solicitud de acceso: ${solicitud.app}`
+      : "[CV Viva] Mensaje desde la hoja de vida",
     text: [
       `Nombre: ${solicitud.nombre}`,
       `Email: ${solicitud.email}`,
-      `App: ${solicitud.app}`,
+      `App: ${solicitud.app || "(ninguna: mensaje general)"}`,
       "",
       solicitud.mensaje || "(sin mensaje)",
     ].join("\n"),

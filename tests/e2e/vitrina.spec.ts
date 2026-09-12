@@ -106,7 +106,7 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
     const hamburguesa = page.getByRole("button", { name: "Abrir el menú" });
     if (await hamburguesa.isVisible()) await hamburguesa.click();
     await page
-      .getByRole("link", { name: "Vitrina", exact: true })
+      .getByRole("link", { name: "Portafolio", exact: true })
       .first()
       .click();
     await expect(page).toHaveURL(/\/es\/vitrina$/);
@@ -122,7 +122,7 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
     // Y la caja de apps dice cuántas hay — la cuenta sale de los exports, no
     // de un número escrito a mano.
     await expect(page.locator('[data-frente="apps"]')).toContainText(
-      `${EXPORTS.length} piezas`,
+      `${EXPORTS.length} productos`,
     );
 
     await page
@@ -701,7 +701,7 @@ test.describe("Vitrina — las estanterías: un frente ABIERTO y sus piezas (S7)
       .first()
       .getAttribute("data-muestra-slug");
     await page.goto(`/es/vitrina/${f.id}/${primera}`);
-    await page.getByText("Pieza siguiente").click();
+    await page.getByText("Producto siguiente").click();
     await expect(page).toHaveURL(new RegExp(`/es/vitrina/${f.id}/[a-z0-9-]+$`));
     // Y la miga vuelve al escaparate del frente, no a la vitrina entera.
     await page.getByText(`Volver a ${f.nombre.es}`).click();

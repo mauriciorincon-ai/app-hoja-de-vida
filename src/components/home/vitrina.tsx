@@ -1,5 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import { Reveal } from "@/components/motion/reveal";
+import { Stagger, StaggerItem } from "@/components/motion/stagger";
 import { CajaFrente } from "@/components/vitrina/caja-frente";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
@@ -13,6 +14,9 @@ import { getFrentes } from "@/lib/vitrina/categorias";
  *
  * Son las MISMAS cajas del portal (`CajaFrente`), con la misma cuenta medida:
  * la HOME no mantiene una copia de la vitrina, la enseña.
+ *
+ * Revisión post-S8: las cuatro cajas aparecen levemente, una a una (140 ms
+ * de escalón, `fadeInSlow`), y la cifra de productos crece y vuelve al asomar.
  */
 export async function VitrinaHome({ locale }: { locale: Locale }) {
   const t = await getTranslations("vitrinaHome");
@@ -36,13 +40,18 @@ export async function VitrinaHome({ locale }: { locale: Locale }) {
             {t("linea")}
           </p>
         </Reveal>
-        <Reveal variant="fadeInUp" amount="some">
-          <ul className="grid gap-5 sm:grid-cols-2">
-            {frentes.map((frente) => (
-              <CajaFrente key={frente.id} frente={frente} locale={locale} />
-            ))}
-          </ul>
-        </Reveal>
+        <Stagger as="ul" className="grid gap-5 sm:grid-cols-2" stagger={0.14}>
+          {frentes.map((frente) => (
+            <StaggerItem
+              key={frente.id}
+              as="li"
+              variant="fadeInSlow"
+              className="list-none"
+            >
+              <CajaFrente frente={frente} locale={locale} />
+            </StaggerItem>
+          ))}
+        </Stagger>
         <Reveal variant="fadeInUp">
           <p className="mt-10">
             <Link
