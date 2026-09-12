@@ -5,7 +5,7 @@ status: closed
 opened: 2026-09-12
 closed: 2026-09-12
 branch: sprint-008/el-detalle
-pr: <se completa al abrir el PR>
+pr: https://github.com/mauriciorincon-ai/app-hoja-de-vida/pull/25
 ---
 
 # Sprint 008 Summary — CV Viva
