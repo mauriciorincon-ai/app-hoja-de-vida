@@ -29,8 +29,17 @@ import { parse } from "yaml";
 
 const RAIZ = process.cwd();
 const DS = path.join(RAIZ, "design-system.md");
-const SRC = path.join(RAIZ, "src");
-const EXTENSIONES = new Set([".ts", ".tsx", ".css"]);
+/**
+ * DÓNDE SE BARRE. `src/` es la app… y `design-sync/` es el bundle publicable
+ * del design system, que la regla 15 obliga a mantener como **espejo 1:1** de
+ * lo que se publica en Claude Design. Un veto que rige en la app y no en su
+ * propio catálogo publicado es medio veto: el catálogo es de donde alguien
+ * copia y pega. *(Y no es hipotético: al ampliar el barrido aparecieron dos
+ * usos vivos, los marcadores de posición de `muestra-de-pieza` y de
+ * `hallazgos-y-galeria`.)*
+ */
+const ARBOLES = [path.join(RAIZ, "src"), path.join(RAIZ, "design-sync")];
+const EXTENSIONES = new Set([".ts", ".tsx", ".css", ".html"]);
 
 type Vetado = {
   token: string;
@@ -69,7 +78,7 @@ function archivosDe(dir: string): string[] {
   });
 }
 
-const archivos = archivosDe(SRC).sort();
+const archivos = ARBOLES.flatMap(archivosDe).sort();
 
 /**
  * Las tres formas, armadas desde el token para que el literal prohibido no
@@ -84,9 +93,12 @@ function patrones(v: Vetado): { nombre: string; re: RegExp }[] {
       re: new RegExp(String.raw`(?<![\w-])text-${t}(?![\w-])`),
     },
     {
-      nombre: `CSS «color: var(--color-${v.token})»`,
+      // Dos nombres para la misma variable: la app usa el prefijo de Tailwind
+      // v4 (`--color-ink-3`) y el bundle publicable usa el token pelado
+      // (`--ink-3`). El gate tiene que ver los dos o solo mira media casa.
+      nombre: `CSS «color: var(--color-${v.token})» o «var(--${v.token})»`,
       re: new RegExp(
-        String.raw`(?<![-\w])color\s*:\s*var\(\s*--color-${t}\s*\)`,
+        String.raw`(?<![-\w])color\s*:\s*var\(\s*--(?:color-)?${t}\s*\)`,
         "i",
       ),
     },
@@ -106,7 +118,7 @@ describe("los tokens de tinta vetados como color de texto", () => {
   });
 
   it.each(vetados.map((v) => [v.token, v] as const))(
-    "«%s» no pinta texto en ningún archivo de src/",
+    "«%s» no pinta texto ni en src/ ni en el bundle del design system",
     (_token, v) => {
       const hallazgos: string[] = [];
       for (const archivo of archivos) {

@@ -829,3 +829,53 @@ preguntas** con su informe generado, y trajo con él dos reglas nuevas del canal
 abierta en un aprobado; la simulación las quita antes de medir) y 16 correcciones de contenido.
 Para la planeadora: es trabajo que el plan no pedía y que el método debería pedir — **un corpus que
 alimenta un buscador léxico necesita una prueba de vocabulario, no solo una de formato.**
+
+---
+
+## Fase 5 — cierre
+
+### 5.1 · Guía de prueba v8, acumulativa de verdad
+
+`docs/GUIA-DE-PRUEBA.html` pasa a **v8** con el prefijo de `localStorage` versionado (`s008`), las
+**83 pruebas anteriores intactas** convertidas a heredadas —ninguna eliminada, ninguna comprimida— y
+un bloque **O** nuevo de 11 pruebas, **6 de ellas ⭐**, diferidas al acumulado del ciclo H2 (31 ⭐ en
+total, ~3 h).
+
+**Un sprint invisible necesita una guía honesta.** El S8 casi no cambió lo que ve el visitante, y la
+guía lo dice en su cabecera en vez de fingir pantallas nuevas: el bloque O se corre **con el
+repositorio delante**, no con el navegador. Sus ⭐ son de **lectura y juicio** —leer un documento y
+decidir si es suyo, barrer los 24 buscando el nombre de una persona, contrastar cifras contra la
+hoja de vida—, que es exactamente el criterio fijo del gate mínimo: lo que ninguna automatización
+puede hacer por el dueño.
+
+**Dos de las ⭐ nacen diferidas por dependencia, no por deuda:** o9 y o10 son M1 y M2, y esperan a
+que el dueño apruebe el primer documento. Están escritas con su condición de arranque dentro.
+
+**La historia retirada queda declarada en el historial del pie, y con su matiz:** no desapareció
+ninguna prueba con ella, porque **nunca tuvo sujeto en esta guía** — no tenía prosa que probar.
+
+### 5.2 · Un hallazgo del cierre: el veto valía en la app y no en su propio catálogo
+
+Revisando el bundle publicable (regla 15, espejo 1:1 de lo que se publica en Claude Design) aparecen
+**dos usos vivos de `ink-3` como texto**: los marcadores de posición de
+`design-sync/components/componentes-s7/muestra-de-pieza.html:71` y de `hallazgos-y-galeria.html:55`.
+
+El gate de la fase 0 barría `src/**` y nada más. Un veto que rige en la app y no en el catálogo del
+que la gente copia y pega es medio veto. Ampliado a `design-sync/**` y a `.html`, con una corrección
+técnica de paso: la app nombra la variable con el prefijo de Tailwind v4 (`--color-ink-3`) y el
+bundle la nombra pelada (`--ink-3`); el patrón tiene que ver **las dos** o solo mira media casa.
+
+**El rojo, en este mismo commit:** al ampliar el barrido, el test nombró los dos archivos con su
+línea antes de que yo tocara nada. Corregidos a `--ink-2`.
+
+### 5.3 · Verificación del cierre
+
+| Comprobación | Resultado |
+| --- | --- |
+| `pnpm test` | **758 / 758** · 31 archivos |
+| `pnpm test:e2e` | **321 pasan · 11 saltados** (los 3 de la vitrina + brochure + los 2 de Postgres real, inventariados en la fase 0) · 1,1 min |
+| `pnpm typecheck` · `pnpm lint` | limpios |
+| `pnpm build` | OK — 28 chunks, 0 de 24 aprobados |
+| `pnpm audit --audit-level high` | sin vulnerabilidades conocidas |
+| Código de la app tocado | 3 clases de token + la unificación de `TOP_K_CONTEXTO` + STOPWORDS. **Sin crecimiento de bundle**: no hay componente, ruta ni dependencia nueva |
+| Barrido cero enlaces | vacío, tras el último `git add` |
