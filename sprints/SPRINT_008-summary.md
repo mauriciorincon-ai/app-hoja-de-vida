@@ -54,7 +54,7 @@ Lighthouse que `/deploy-check` prometía desde hacía siete sprints y no existí
 
 | Estándar           | Estado | Evidencia                                                                                                                                                                               |
 | ------------------ | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Testing**        | ✅     | 758 unitarias (eran 615) en 31 archivos · golden set 48/48 · banco 131/131 · e2e completo verde                                                                                         |
+| **Testing**        | ✅     | 768 unitarias (eran 615) en 31 archivos · golden set 48/48 · banco 131/131 · e2e completo verde                                                                                         |
 | **CI/CD**          | ✅     | Los dos gates nuevos de Lighthouse **corren por primera vez en este PR** — sin histórico, no puede afirmarse regresión ni no-regresión                                                  |
 | **Observabilidad** | ✅     | Sin endpoints nuevos. El build imprime la cuenta real: «28 chunks (0 de 24 documentos aprobados e indexados)»                                                                           |
 | **Seguridad**      | ✅     | `pnpm audit --audit-level high` limpio · gitleaks en cada commit · **cero terceros identificables** con lectura registrada sobre los 24 · barrido cero enlaces tras el último `git add` |
@@ -109,6 +109,31 @@ antes del sprint. El visitante no ve ninguna diferencia, y es lo correcto.
   se extendió el invariante con un **segundo estado declarable** — nombrada y no obtenida, con su
   razón escrita.
 
+## Auditoría del sprint (`/audita-sprint`)
+
+**Fase 1 por un auditor independiente** —subagente con el diff completo delante, el plan y la orden,
+sin haber construido— tal como manda el kit v1.26.0. Veredicto: **requiere ajustes**. 5 Altos, 8
+Medios, 8 Bajos. Verifiqué los cinco Altos antes de tocar nada: **cuatro ciertos, uno falso**.
+
+**Los tres hallazgos más valiosos son los tres sitios donde la bitácora afirmaba algo que el diff no
+sostenía**, y los tres están pagados en este PR:
+
+| Hallazgo | Pago | Rojo demostrado |
+| --- | --- | --- |
+| **A1** · `#apps` seguía vivo en el **CTA principal del hero** y en el breadcrumb de cada brochure (la bitácora decía que se habían corregido los dos sitios; eran cuatro) | los dos a `#vitrina` + **el barrido de enlaces de la app que faltaba** | el barrido nombra los dos archivos con su línea |
+| **A2** · el regex de `[CONFIRMAR]` **se comía la prosa** con una marca en medio de una frase, sin un solo test | regex acotado + 5 tests | el regex viejo pone en rojo el caso en línea |
+| **A3** · el gate de credenciales **se debilitó**: `cv.es.yaml` podía decir «Certificado AI-103» y pasar | el segundo estado habilita **solo la prosa de `a-fondo/`** | `AI-103 en cv.es.identidad.titular` |
+| **A4** · cuatro de las siete desviaciones **no existían en el repo** | las siete en la bitácora, con qué cae de la orden | — |
+| **A5** · «la guía v8 está sin comitear» | **descartado**: 184 líneas en el diff | — |
+
+**Medios pagados aquí:** M1 (`revisarAduana` era código muerto y el build reimplementaba la aduana
+aparte) · M2 (un inglés aprobado con su español en borrador no producía ningún problema) · M5 (el
+manual documentaba la promesa vieja del gate) · M8 (un número a mano dentro de un informe generado).
+
+**Pendiente de decisión del dueño (M4):** la brochure del chat promete «las preguntas fuera de tema
+se responden sin gastar un token» y la medición de la fase 4b dice que el corpus completo bloquea 9
+de 15. Es copy suyo: hay propuesta de redacción en la bitácora 5.5.
+
 ## Bugs + resoluciones
 
 | Qué                                                                                                                  | Cómo se resolvió                                                                                                                     |
@@ -159,6 +184,10 @@ declarar el corte en vez de esconderlo en un «parcial».
 | 3 e2e de la vitrina saltados desde el S7 + el 404 de una pieza en un frente cerrado sin sustituto | Inventariado en la fase 0, no resuelto: la orden pedía inventario | El recálculo del ciclo H2                                   |
 | El redirect de `/` a `/es` no lo cubre ningún test                                                | Encontrado al verificar una afirmación mía falsa                  | Sprint siguiente, con el resto del inventario               |
 | Las 6 ⭐ del S8 diferidas                                                                         | Sprint intermedio del ciclo H2 (4 de ≥4)                          | Recorrido de cierre del ciclo, con las 25 acumuladas        |
+| **M3** · `resumen` y `actualizado` del frontmatter **no tienen un solo lector** | Se validan con Zod y los declaran los 24 documentos; el índice generado no los usa | Sprint siguiente: o entran a la tabla del README —el `resumen` es justo lo que el dueño quiere ver antes de abrir un documento— o salen del schema |
+| **M6** · cinco umbrales nuevos sin su rojo registrado (conservación de la migración, piso del 60 %, techo de 5 huecos, ≥3 preguntas por documento, permeabilidad del guardrail) | Son los que se aflojan sin que nadie lo note | Sprint siguiente: una tabla de cinco mutaciones con lo que imprimió cada una |
+| **M7** · el catálogo no valida el **fragmento** de una ruta (`/proyectos/vesting#inventado` pasa) | Hoy ningún documento usa esa forma; es prevención, y el bug fundacional era exactamente un fragmento muerto | Sprint siguiente, derivando los ids de los case studies |
+| **B1–B8** de la auditoría (tests tautológicos, off-by-one cosmético en `parseDocumento`, cifras que no cuadran entre artefactos, `match` sin flag global en privacidad, árbol de CLAUDE.md desalineado) | Ninguno cambia un resultado; todos son de higiene | Sprint siguiente |
 
 ## Archivos clave
 
@@ -175,7 +204,7 @@ declarar el corte en vez de esconderlo en un «parcial».
 
 ## Cómo probar
 
-1. `pnpm test` — 758 unitarias, con el golden set y las 131 del banco.
+1. `pnpm test` — 768 unitarias, con el golden set y las 131 del banco.
 2. `pnpm build` — la última línea dice la cuenta real: `28 chunks (0 de 24 documentos aprobados)`.
 3. `pnpm corpus:informe` — regenera el informe del banco y la tabla del índice.
 4. **La guía**: `docs/GUIA-DE-PRUEBA.html`, bloque **O**. Las seis ⭐ son de lectura y de juicio

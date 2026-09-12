@@ -174,7 +174,19 @@ export function parseDocumento(markdown, archivo) {
  *    son largas y la normalización por longitud de BM25 castiga justo a los
  *    fragmentos que más falta le hacen al dueño arreglar.
  */
-export const PATRON_PREGUNTA_ABIERTA = /\[CONFIRMAR[\s\S]*?\](?=\s*(?:\n\n|$))/g;
+/**
+ * **Termina en el PRIMER `]`, y se lleva el espacio que tiene delante.** La
+ * primera versión exigía que el corchete cerrara párrafo
+ * (`\](?=\s*(?:\n\n|$))`) y eso la volvía peligrosa: con un `[CONFIRMAR]`
+ * escrito **en medio de una frase**, el cuantificador perezoso seguía buscando
+ * hasta el siguiente corchete que sí cerrara párrafo y **borraba en silencio
+ * todo lo que había en medio** (reproducido en la auditoría: dos párrafos y
+ * medio). El dueño va a escribir estas marcas durante semanas y las va a
+ * escribir en línea. Verificado: sobre las 132 subsecciones reales las dos
+ * versiones dan un resultado byte a byte idéntico — el arreglo no cambia lo
+ * medido, cierra el caso que no estaba medido.
+ */
+export const PATRON_PREGUNTA_ABIERTA = /\s*\[CONFIRMAR[^\]]*\]/g;
 
 /** Prosa sin sus preguntas abiertas, con los huecos de líneas cerrados. */
 export function sinPreguntasAbiertas(texto) {
@@ -303,10 +315,21 @@ export function problemasDeParidad(docsEs, docsEn) {
     }
   }
 
+  // La vuelta: un inglés aprobado cuyo español NO lo está. Sin esto, el índice
+  // inglés cita un documento que el español no tiene —un idioma ve contenido
+  // que el otro no—, y no lo cazaba nadie: el bucle de arriba solo recorre los
+  // aprobados en español (lo encontró la auditoría del cierre).
   for (const en of docsEn) {
-    if (en.estado === "aprobado" && !docsEs.some((d) => d.slug === en.slug)) {
+    if (en.estado !== "aprobado") continue;
+    const es = docsEs.find((d) => d.slug === en.slug);
+    if (!es) {
       problemas.push(
         `${en.archivo}: está «aprobado» y no existe su gemelo data/a-fondo/${en.slug}.es.md.`,
+      );
+    } else if (es.estado !== "aprobado") {
+      problemas.push(
+        `${en.archivo}: está «aprobado» pero ${es.archivo} sigue en «${es.estado}». ` +
+          `El chat inglés citaría un documento que el español no tiene.`,
       );
     }
   }

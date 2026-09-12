@@ -35,7 +35,7 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import process from "node:process";
 import { parse } from "yaml";
-import { chunksDeAFondo, leerDocumentos, problemasDeParidad, problemasDeNombre, problemasDeDestino, problemasDePreguntasAbiertas, problemasDePrivacidad } from "./a-fondo.mjs";
+import { chunksDeAFondo, leerDocumentos, revisarAduana } from "./a-fondo.mjs";
 import { catalogoDeDestinos, destinoExiste } from "./destinos.mjs";
 
 const ROOT = process.cwd();
@@ -202,16 +202,16 @@ function main() {
     }
   }
 
-  const problemas = [];
-  for (const locale of LOCALES) {
-    for (const doc of docs[locale]) {
-      problemas.push(...problemasDeNombre(doc, locale));
-      problemas.push(...problemasDeDestino(doc, catalogo));
-      problemas.push(...problemasDePreguntasAbiertas(doc));
-      problemas.push(...problemasDePrivacidad(crudos.get(doc.archivo), doc.archivo));
-    }
-  }
-  problemas.push(...problemasDeParidad(docs.es, docs.en));
+  // UNA sola aduana, la que los tests ejercen. Nació duplicada —`revisarAduana`
+  // en el motor y esta misma lógica escrita a mano aquí—, y eso son dos
+  // originales que divergen: el probado no era el que corría (lo encontró la
+  // auditoría del cierre).
+  const problemas = revisarAduana({
+    docsEs: docs.es,
+    docsEn: docs.en,
+    crudos,
+    catalogo,
+  });
   if (problemas.length > 0) detener("Aduana del canal «a fondo»", problemas);
 
   mkdirSync(OUT_DIR, { recursive: true });

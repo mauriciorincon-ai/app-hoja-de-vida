@@ -86,9 +86,16 @@ e inglés. Quien la visita puede pedir acceso a tus apps y la solicitud te llega
   de skills. **AI-102 salió el 2026-09-10:** Microsoft la descontinuó, y con ella se fue de
   todo el contenido que la nombraba (titular, perfil, logro, case study de Vesting, corpus
   del chat, `apps.yaml`).
-- **Una credencial nombrada es una credencial listada:** si cualquier texto de `data/` menciona
-  un código (DP-600, AI-102…) que no esté en `certificaciones:`, el test de contenido lo nombra
-  con su ruta y falla. Para volver a citar una certificación, primero va a la lista.
+- **Una credencial nombrada es una credencial listada:** si el CV o `apps.yaml` mencionan un
+  código (DP-600, AI-102…) que no esté en `certificaciones:`, el test de contenido lo nombra con
+  su ruta y falla. Para volver a citar una certificación, primero va a la lista.
+- **Con una excepción, y solo en la prosa del «a fondo» (S8):** ahí hace falta poder **explicar
+  por qué una credencial ya no está o todavía no está** — el AI-102 que Microsoft descontinuó, la
+  ruta del AI-103 en curso—. Para eso existe `data/credenciales-nombradas.yaml`: un código se
+  declara ahí, **con su razón escrita**, y entonces los documentos de `data/a-fondo/` pueden
+  nombrarlo. **El CV sigue igual de estricto:** un código declarado ahí no autoriza a ponerlo en
+  el titular, el perfil ni los logros. Nombrar una credencial que no se tiene es una decisión, y
+  una decisión sin razón escrita no es declarable.
 - **Links de verificación:** cuando tengas los links de Credly/Microsoft Learn, pégalos en
   el campo `verificacion:` de cada certificación — el botón "Verificar ↗" aparece solo.
 - **Skills, desde la revisión post-S7:** una tarjeta por grupo con un icono dibujado en casa

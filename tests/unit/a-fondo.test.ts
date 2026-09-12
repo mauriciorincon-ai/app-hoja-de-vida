@@ -1,6 +1,10 @@
 import { describe, expect, it } from "vitest";
 import {
   chunksDeAFondo,
+  leerDocumentos,
+  problemasDePreguntasAbiertas,
+  simularAprobacion,
+  sinPreguntasAbiertas,
   MINIMO_PALABRAS_VENTANA,
   TOPE_PALABRAS_CHUNK,
   ventanasPorParrafo,
@@ -9,7 +13,9 @@ import {
   problemasDeNombre,
   problemasDeParidad,
   problemasDePrivacidad,
+  revisarAduana,
 } from "../../scripts/a-fondo.mjs";
+import { catalogoDeDestinos } from "../../scripts/destinos.mjs";
 
 /**
  * LA ADUANA DEL CANAL «A FONDO» (S8, ADR-019).
@@ -304,5 +310,142 @@ describe("el tope de tamaño y las ventanas por párrafo", () => {
     // texto que puede pasarse del tope es un párrafo suelto más largo que él.
     expect(TOPE_PALABRAS_CHUNK).toBeGreaterThan(100);
     expect(TOPE_PALABRAS_CHUNK).toBeLessThanOrEqual(250);
+  });
+});
+
+/**
+ * LAS PREGUNTAS ABIERTAS (fase 2 de la auditoría).
+ *
+ * `[CONFIRMAR: …]` es el mecanismo con el que un documento declara lo que no
+ * tiene fuente, y tiene dos consecuencias mecánicas: un aprobado no puede
+ * llevar ninguna, y la simulación las quita antes de medir. Las dos vivían sin
+ * un solo test, y la auditoría encontró que el borrado se comía prosa cuando la
+ * marca iba **en medio de una frase** — justo la forma en que el dueño la va a
+ * escribir durante semanas de corrección.
+ */
+describe("preguntas abiertas", () => {
+  it("una marca EN LÍNEA solo se borra a sí misma: la frase y el resto sobreviven", () => {
+    const texto =
+      "Primera frase con [CONFIRMAR: falta el dato] y sigue el párrafo aquí.\n\n" +
+      "Segundo párrafo con prosa que no debería desaparecer.\n\n" +
+      "Tercero y [CONFIRMAR: otro hueco]";
+    expect(sinPreguntasAbiertas(texto)).toBe(
+      "Primera frase con y sigue el párrafo aquí.\n\n" +
+        "Segundo párrafo con prosa que no debería desaparecer.\n\n" +
+        "Tercero y",
+    );
+  });
+
+  it("un bloque de varios párrafos se borra entero y no deja hueco de líneas", () => {
+    const texto =
+      "Antes.\n\n[CONFIRMAR — dos cosas:\n1. la primera\n2. la segunda]\n\nDespués.";
+    expect(sinPreguntasAbiertas(texto)).toBe("Antes.\n\nDespués.");
+  });
+
+  it("un texto sin marcas sale igual que entró", () => {
+    const texto = "Un párrafo.\n\nOtro párrafo con [corchetes] normales.";
+    expect(sinPreguntasAbiertas(texto)).toBe(texto);
+  });
+
+  it("sobre el corpus REAL, la simulación no borra más de lo que las marcas ocupan", () => {
+    // El contrato que de verdad importa: lo que se mide (golden set y banco)
+    // tiene que ser el corpus del dueño menos sus preguntas, ni una palabra más.
+    for (const doc of leerDocumentos("es")) {
+      const simulado = simularAprobacion([doc])[0];
+      doc.subsecciones.forEach((s: { id: string; texto: string }, i: number) => {
+        const marcas = s.texto.match(/\[CONFIRMAR[^\]]*\]/g) ?? [];
+        const palabras = (t: string) => t.split(/\s+/).filter(Boolean).length;
+        const borradas =
+          palabras(s.texto) - palabras(simulado.subsecciones[i].texto);
+        const enLasMarcas = marcas.reduce((n, m) => n + palabras(m), 0);
+        expect(
+          borradas,
+          `${doc.slug} · ${s.id}: la simulación borró ${borradas} palabras y las marcas solo ocupan ${enLasMarcas}`,
+        ).toBe(enLasMarcas);
+      });
+    }
+  });
+
+  it("un aprobado con una pregunta abierta no pasa la aduana; un borrador sí", () => {
+    const doc = {
+      archivo: "data/a-fondo/x.es.md",
+      estado: "aprobado",
+      subsecciones: [{ id: "a", titulo: "A", texto: "Algo. [CONFIRMAR: qué falta]" }],
+    };
+    expect(problemasDePreguntasAbiertas(doc)).toHaveLength(1);
+    expect(problemasDePreguntasAbiertas(doc)[0]).toContain('subsección "a"');
+    expect(problemasDePreguntasAbiertas({ ...doc, estado: "borrador" })).toEqual([]);
+  });
+});
+
+/**
+ * LA ADUANA COMPLETA, la que corre en el build (fase 2 de la auditoría).
+ *
+ * `revisarAduana` existía con un comentario que decía que se separaba de
+ * `main()` «para poder ejercerla desde vitest»… y **no la llamaba nadie**: ni
+ * un test, ni el build, que reimplementaba la misma lista a mano. Dos
+ * originales que divergen, y el probado no era el que corría. Ahora el build la
+ * usa y esto la ejerce.
+ */
+describe("revisarAduana — la lista entera, de una", () => {
+  const catalogo = catalogoDeDestinos();
+  const sano = {
+    slug: "x",
+    titulo: "X",
+    estado: "borrador",
+    ancla: "#skills",
+    archivo: "data/a-fondo/x.es.md",
+    subsecciones: [{ id: "a", titulo: "A", texto: "Prosa." }],
+  };
+
+  it("un corpus sano no produce ni un problema", () => {
+    expect(
+      revisarAduana({ docsEs: [sano], docsEn: [], crudos: new Map(), catalogo }),
+    ).toEqual([]);
+  });
+
+  it("junta los problemas de TODAS las reglas, cada uno nombrando su archivo", () => {
+    const malo = {
+      ...sano,
+      slug: "otro", // el archivo se llama x.es.md → el nombre miente
+      estado: "aprobado",
+      ancla: "#apps", // destino muerto
+      subsecciones: [
+        { id: "a", titulo: "A", texto: "Algo. [CONFIRMAR: qué falta]" },
+      ],
+    };
+    const crudos = new Map([
+      ["data/a-fondo/x.es.md", "Escríbeme a alguien@ejemplo.com"],
+    ]);
+    const problemas = revisarAduana({
+      docsEs: [malo],
+      docsEn: [],
+      crudos,
+      catalogo,
+    });
+    const junto = problemas.join("\n");
+    expect(junto).toContain("debería ser «otro.es.md»");
+    expect(junto).toContain("no existe en el sitio");
+    expect(junto).toContain("[CONFIRMAR");
+    expect(junto).toContain("un correo electrónico");
+    expect(junto).toContain("no existe su gemelo");
+    for (const p of problemas) expect(p).toContain("x.es.md");
+  });
+
+  it("un inglés aprobado con su español en borrador NO pasa", () => {
+    // El chat inglés citaría un documento que el español no tiene.
+    const es = { ...sano, estado: "borrador" };
+    const en = {
+      ...sano,
+      estado: "aprobado",
+      archivo: "data/a-fondo/x.en.md",
+    };
+    const problemas = revisarAduana({
+      docsEs: [es],
+      docsEn: [en],
+      crudos: new Map(),
+      catalogo,
+    });
+    expect(problemas.join("\n")).toContain("sigue en «borrador»");
   });
 });

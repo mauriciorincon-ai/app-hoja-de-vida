@@ -70,7 +70,7 @@ export async function Hero({ identidad }: { identidad: Cv["identidad"] }) {
           style={{ "--anim-delay": "0.9s" } as React.CSSProperties}
         >
           <a
-            href="#apps"
+            href="#vitrina"
             className="flex min-h-11 items-center gap-2 rounded-md bg-sage px-6 text-[15px] font-medium text-sage-ink shadow-sh-1 transition-colors duration-[120ms] hover:brightness-[0.97]"
           >
             {t("ctaApps")}

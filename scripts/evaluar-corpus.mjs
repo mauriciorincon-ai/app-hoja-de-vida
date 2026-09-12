@@ -252,7 +252,8 @@ export function informeMarkdown({
       "solo sube cuando el contenido mejora de verdad.");
   L.push("");
   L.push(
-    "**Y la columna HOY no es una nota baja: es el tamaño del cambio.** Está en 12 % porque las " +
+    "**Y la columna HOY no es una nota baja: es el tamaño del cambio.** Está en " +
+      `${pct(hoy.resumen.aciertos, hoy.resumen.total)} porque las ` +
       "fuentes que estas preguntas necesitan son justo los 24 documentos que todavía no están " +
       "aprobados. Lo que dice esa columna es cuántas de estas preguntas contesta hoy la hoja de " +
       "vida sola.");

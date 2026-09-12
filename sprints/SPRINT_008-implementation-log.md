@@ -820,7 +820,22 @@ dice cuáles están **limpios de preguntas abiertas**: `apps-pipeline`, `bi-que-
 | `pnpm build`                  | OK — 28 chunks, 0 de 24 aprobados (el índice publicado no se movió) |
 | e2e                           | no se corre: el índice publicado es idéntico, byte a byte, porque los 24 siguen en borrador |
 
-## Desviación del plan (7)
+## Desviaciones del plan — las siete, juntas
+
+> **Estaban dispersas y cuatro no existían en este repositorio** (la 2, la 4, la 5 y la 6 vivían
+> solo en el archivo del plan, que vive fuera del repo). Lo encontró la auditoría independiente, y
+> es una regla dura de la casa: la planeadora lee la bitácora, así que una desviación que no está
+> aquí es una desviación que nadie ve. **La nº 2 no es un detalle: cancela el outcome O2 entero.**
+
+| # | Desviación | Qué de la orden cae | Por qué |
+| --- | --- | --- | --- |
+| 1 | **La historia no tenía prosa**: el test de igualdad pasa a ser de conservación | AC 1, en su forma | El esqueleto eran 12 encabezados y cero prosa —las ~40 palabras eran la GUÍA— y el build lo imprimía desde el S3. La igualdad habría probado el vacío. Declarada en 1.7 |
+| 2 | **Los documentos no se publican: sin página ni puertas** | **Outcome O2 entero** · AC 3 (rutas `/detalle`) · AC 4 (enlaces desde HOME y case study) · AC 8 (e2e de navegación por ancla) · la parte de citas del AC 5 · las dos URLs nuevas de Lighthouse del AC 9 · **M1 y M2 redefinidas** | Decisión del dueño, 2026-09-12: «ese detalle o a fondo no puede estar abierto a NADIE, NADIE lo puede ver». Una URL que existe es una URL que se filtra; no tener página es la única puerta que no se puede dejar entornada |
+| 3 | **`data/a-fondo/` en vez de `data/detalle/`** | Ninguno: solo el nombre | «Detalle» ya significa otras dos cosas en esta app (el case study de un proyecto y el último tramo de la ficha de una app). Un tercer significado cuesta más que un nombre nuevo. Declarada en 1.1 |
+| 4 | **Una regla de aduana MÁS de las que pide la orden: el destino de la cita tiene que existir** | Ninguno: añade | Nació de encontrar `#apps` —muerto desde la revisión post-S7— vivo en el índice publicado. La orden pedía cuatro reglas; hay seis. El catálogo se deriva de la HOME y de los datos, no se mantiene a mano |
+| 5 | **El documento de brechas se reemplaza por «cómo aprendo»** | Ninguno de los AC; cambia el mapa de documentos | Decisión del dueño: «lo más sensato es callarlas, porque lo que estamos construyendo es lo que he hecho». El documento nuevo cuenta lo mismo por el lado que sí es evidencia: cuatro certificaciones en dos años, el DP-600 en cinco meses, 32 piezas publicadas |
+| 6 | **Sin librería de Markdown** | El «render en build sin JS de Markdown en el cliente» del AC 3 queda sin sujeto | Consecuencia mecánica de la nº 2: sin páginas no hay nada que renderizar. Cero dependencias nuevas en el sprint |
+| 7 | **El banco de preguntas** (abajo) | Ninguno: añade | Pedido del dueño en la fase 4b |
 
 **El plan no contemplaba un banco de preguntas.** La fase 4 entregaba una simulación de 20
 preguntas como informe. El dueño pidió 100 o más y que el contenido quedara «excelentemente
@@ -872,7 +887,7 @@ línea antes de que yo tocara nada. Corregidos a `--ink-2`.
 
 | Comprobación | Resultado |
 | --- | --- |
-| `pnpm test` | **758 / 758** · 31 archivos |
+| `pnpm test` | **768 / 768** · 31 archivos (las 10 nuevas son de la fase 2 de la auditoría) |
 | `pnpm test:e2e` | **321 pasan · 11 saltados** (los 3 de la vitrina + brochure + los 2 de Postgres real, inventariados en la fase 0) · 1,1 min |
 | `pnpm typecheck` · `pnpm lint` | limpios |
 | `pnpm build` | OK — 28 chunks, 0 de 24 aprobados |
@@ -897,3 +912,63 @@ línea antes de que yo tocara nada. Corregidos a `--ink-2`.
 
 **Decisión: MERGE OK**, con dos declaraciones que viajan en el PR: el criterio 15 no se cumple (M1 y
 M2 dependen del dueño) y los dos gates de Lighthouse no tienen histórico.
+
+### 5.5 · `/audita-sprint` — auditoría independiente y sus pagos
+
+**Fase 1 corrida por un auditor independiente** (forma 1 del comando: subagente con
+`git diff main...HEAD` delante —68 archivos, 8 559 líneas—, el plan y la orden, sin haber
+construido nada). Corrió sus propias verificaciones: el builder, los tests nuevos, el barrido de
+cero enlaces y una lectura de terceros sobre los 24 documentos (cero nombres de persona).
+
+**Veredicto: requiere ajustes.** Cinco hallazgos Altos, ocho Medios, ocho Bajos. Verifiqué los
+cinco Altos uno por uno antes de tocar nada: **cuatro ciertos, uno falso** (decía que la guía v8
+estaba sin comitear; leyó `git status` en el momento en que yo tenía un ajuste suelto).
+
+**Lo más valioso que trajo son los tres sitios donde ESTA bitácora afirmaba algo que el diff no
+sostiene.** Los tres están corregidos abajo, y el texto original queda dicho aquí en vez de
+reescrito, porque el error de método es el hallazgo: *nadie audita bien lo que acaba de escribir*.
+
+| # | Hallazgo | Verificado | Pago |
+| --- | --- | --- | --- |
+| **A1** | **`#apps` seguía vivo en dos enlaces que se pulsan**: el CTA principal del hero y el breadcrumb de cada brochure. La bitácora 1.3 decía «vivía en **dos** sitios a la vez… se corrigieron los dos». **Eran cuatro** | ✅ `hero.tsx:73`, `apps/[slug]/page.tsx:88` | Los dos a `#vitrina` **+ el barrido que faltaba** |
+| **A2** | El regex de `[CONFIRMAR]` **se comía la prosa** si la marca iba en medio de una frase, y no tenía un solo test | ✅ reproducido: dos párrafos y medio | Regex nuevo + 5 tests |
+| **A3** | El gate de credenciales **se debilitó**: los códigos declarados quedaban autorizados en TODAS partes. La bitácora 2.4 decía «la promesa no se debilitó, se completó» | ✅ `cv.es.yaml` podía decir «Certificado AI-103» y pasar | El segundo estado habilita **solo la prosa de `a-fondo/`** |
+| **A4** | **Cuatro de las siete desviaciones no existían en el repo** —incluida la que cancela el outcome O2 entero— | ✅ solo estaban 1, 3 y 7 | Las siete, en una tabla, con qué cae de la orden |
+| **A5** | «La guía v8 está sin comitear» | ❌ **falso**: 184 líneas en el diff | — |
+
+**Los tres rojos de los ajustes, cada uno antes de su corrección:**
+
+1. **El barrido de enlaces de la app** (nuevo en `destinos.test.ts`) nombró, antes de que yo tocara
+   nada: `src/app/[locale]/apps/[slug]/page.tsx:88 — href="/#apps"` y
+   `src/components/home/hero.tsx:73 — href="#apps"`.
+2. **El regex viejo** pone en rojo el test «una marca EN LÍNEA solo se borra a sí misma».
+3. **El gate de credenciales**, con `AI-103` metido en el titular de `cv.es.yaml`:
+   `AI-103 en cv.es.identidad.titular`. **Antes de este ajuste eso pasaba en verde.**
+
+**Por qué el barrido no existía, que es la lección:** el sprint construyó el catálogo de destinos
+para vigilar a dónde navega una **cita**, y lo apuntó a los datos. Los enlaces de la interfaz —los
+únicos que un visitante puede pulsar— quedaron fuera del alcance de la herramienta que se construyó
+justamente para eso. Un invariante que se aplica a la mitad de sus sujetos es medio invariante.
+
+**Medios pagados aquí** (los cuatro que la auditoría recomendó y uno más):
+
+- **M1 · `revisarAduana` era código muerto** cuyo comentario decía que existía «para poder ejercerla
+  desde vitest»: no la llamaba nadie y el build reimplementaba la misma lista a mano. Dos originales
+  que divergen, y el probado no era el que corría. Ahora el build la usa y tres tests la ejercen.
+- **M2 · Hueco de paridad**: un `.en.md` aprobado con su `.es.md` en borrador no producía **ningún**
+  problema — el chat inglés citaría un documento que el español no tiene. Cerrado, con su test.
+- **M5 · El manual documentaba la promesa vieja** del gate de credenciales. Reescrito con el segundo
+  estado y su límite: el CV sigue igual de estricto.
+- **M8 · Un número escrito a mano dentro de un informe que se genera** (`«está en 12 %»`). Se
+  interpola: a la primera aprobación del dueño habría dejado de ser cierto.
+
+**Uno es del dueño y no se toca solo — M4.** `data/apps.yaml:157` promete, en la brochure del chat:
+«las preguntas fuera de tema se responden sin gastar un token». La medición de la fase 4b dice otra
+cosa con números: de 15 preguntas ajenas, el índice de hoy bloquea 13 y el corpus completo bloquea
+9. Es copy suyo y se vuelve medible-mente falso el día que apruebe el primer documento. **Propuesta,
+pendiente de su decisión:** «las preguntas sin relación con mi contenido se responden sin gastar un
+token; las que comparten vocabulario las para el prompt, que solo responde desde las fuentes».
+
+**Deuda declarada, con pago asignado** (en el summary): M3 (`resumen` y `actualizado` del
+frontmatter sin lector), M6 (cinco umbrales sin su rojo registrado), M7 (el fragmento de una ruta no
+se valida), B1–B8.

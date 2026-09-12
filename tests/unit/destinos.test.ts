@@ -1,3 +1,5 @@
+import { readdirSync, readFileSync, statSync } from "node:fs";
+import path from "node:path";
 import { describe, expect, it } from "vitest";
 import {
   anclasDeHome,
@@ -94,5 +96,74 @@ describe("destinoExiste", () => {
     expect(destinoExiste("", catalogo)).toBe(false);
     expect(destinoExiste("proyectos/vesting", catalogo)).toBe(false);
     expect(destinoExiste(undefined, catalogo)).toBe(false);
+  });
+});
+
+/**
+ * LOS ENLACES DE LA PROPIA APP, no solo los del chat (S8, fase 2 de la
+ * auditoría).
+ *
+ * El catálogo nació para vigilar a dónde navega una CITA, y con eso se corrigió
+ * el `#apps` del índice del chat. Pero el ancla muerta vivía en dos sitios más
+ * —y los dos son enlaces que un visitante PULSA—: el CTA principal del hero y
+ * el breadcrumb de cada brochure. La herramienta que los habría cazado se
+ * construyó en este mismo sprint y se apuntó a los datos, no a la interfaz.
+ *
+ * Qué barre, y por qué ese alcance exacto:
+ *
+ *  · **`href="/#x"`, en cualquier archivo**: la barra inicial dice «la HOME»,
+ *    así que `#x` tiene que ser una sección de la HOME, esté donde esté el
+ *    componente.
+ *  · **`href="#x"`, solo en lo que se MONTA en la HOME** (`components/home/**`
+ *    y la propia `page.tsx`): ahí un ancla suelta es la HOME. Fuera de ahí es
+ *    un ancla de su propia página —`#contacto-vitrina` en una ficha, el
+ *    `#contenido` del salto al contenido— y juzgarla contra la HOME daría
+ *    falsos positivos.
+ */
+describe("los enlaces de la app apuntan a algo que existe", () => {
+  const anclas = anclasDeHome();
+  const RAIZ = process.cwd();
+  const EN_LA_HOME = [
+    path.join("src", "components", "home"),
+    path.join("src", "app", "[locale]", "page.tsx"),
+  ];
+
+  function tsx(dir: string): string[] {
+    return readdirSync(dir).flatMap((e) => {
+      const completo = path.join(dir, e);
+      if (statSync(completo).isDirectory()) return tsx(completo);
+      return e.endsWith(".tsx") ? [completo] : [];
+    });
+  }
+
+  const archivos = tsx(path.join(RAIZ, "src"));
+
+  it("hay árbol que barrer (si no, esto no vigila nada)", () => {
+    expect(archivos.length).toBeGreaterThan(20);
+  });
+
+  it("ningún href lleva a una sección de la HOME que no existe", () => {
+    const rotos: string[] = [];
+    for (const archivo of archivos) {
+      const relativo = path.relative(RAIZ, archivo);
+      const enLaHome = EN_LA_HOME.some((p) => relativo.startsWith(p));
+      readFileSync(archivo, "utf8")
+        .split("\n")
+        .forEach((linea, i) => {
+          const m = linea.match(/href="(\/?)(#[\w-]+)"/);
+          if (!m) return;
+          const [, barra, ancla] = m;
+          if (!barra && !enLaHome) return; // ancla de su propia página
+          if (!anclas.has(ancla)) {
+            rotos.push(`  ${relativo}:${i + 1} — href="${barra}${ancla}"`);
+          }
+        });
+    }
+    expect(
+      rotos.join("\n"),
+      `Estos enlaces llevan a una sección de la HOME que no existe. La HOME monta hoy: ` +
+        `${[...anclas].filter((a) => !a.endsWith("-titulo")).sort().join(" · ")}.\n` +
+        `Donde están:\n${rotos.join("\n")}`,
+    ).toBe("");
   });
 });

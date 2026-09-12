@@ -70,21 +70,23 @@ describe("content loader (data/*.yaml reales)", () => {
 
   it("toda credencial nombrada por código existe en certificaciones (cv, «a fondo» y apps)", () => {
     const apps: unknown = parse(readFileSync("data/apps.yaml", "utf8"));
+    const declaradas = parse(
+      readFileSync("data/credenciales-nombradas.yaml", "utf8"),
+    ) as { nombradas_sin_obtener: { codigo: string; razon: string }[] };
+    for (const d of declaradas.nombradas_sin_obtener) {
+      expect(
+        d.razon?.trim(),
+        `credenciales-nombradas.yaml: «${d.codigo}» sin razón. Nombrar una credencial que no se tiene es una decisión, y una decisión sin razón escrita no es declarable.`,
+      ).toBeTruthy();
+    }
+    const declarada = new Set(
+      declaradas.nombradas_sin_obtener.map((d) => d.codigo),
+    );
     for (const locale of ["es", "en"] as const) {
       const { certificaciones, ...resto } = getCv(locale);
-      const declaradas = parse(
-        readFileSync("data/credenciales-nombradas.yaml", "utf8"),
-      ) as { nombradas_sin_obtener: { codigo: string; razon: string }[] };
-      for (const d of declaradas.nombradas_sin_obtener) {
-        expect(
-          d.razon?.trim(),
-          `credenciales-nombradas.yaml: «${d.codigo}» sin razón. Nombrar una credencial que no se tiene es una decisión, y una decisión sin razón escrita no es declarable.`,
-        ).toBeTruthy();
-      }
-      const vigentes = new Set([
-        ...certificaciones.flatMap((c) => c.nombre.match(CODIGO_CREDENCIAL) ?? []),
-        ...declaradas.nombradas_sin_obtener.map((d) => d.codigo),
-      ]);
+      const listadas = new Set(
+        certificaciones.flatMap((c) => c.nombre.match(CODIGO_CREDENCIAL) ?? []),
+      );
       const halladas: Hallazgo[] = [];
       codigosEn(resto, `cv.${locale}`, halladas);
       // El canal «a fondo» reemplazó a la historia en el S8: los códigos de
@@ -99,12 +101,22 @@ describe("content loader (data/*.yaml reales)", () => {
         );
       }
       codigosEn(apps, "apps", halladas);
+      // EL SEGUNDO ESTADO HABILITA LA PROSA, NO EL CV (fase 2 de la auditoría).
+      // Al nacer, `credenciales-nombradas.yaml` autorizaba su código EN TODAS
+      // PARTES, y con eso `cv.es.yaml` habría podido poner «Certificado AI-103»
+      // en el titular y pasar en verde — el gate dejaba de vigilar «una
+      // credencial nombrada es una credencial listada» y pasaba a vigilar «está
+      // declarada en alguna parte», que no es la misma promesa. El segundo
+      // estado existe porque la PROSA del corpus necesita explicar por qué una
+      // credencial ya no está o todavía no está; el CV, no: ahí un código o
+      // está en `certificaciones` o no se nombra.
       const huerfanas = halladas
-        .filter((h) => !vigentes.has(h.codigo))
+        .filter((h) => !listadas.has(h.codigo))
+        .filter((h) => !(h.ruta.startsWith("a-fondo/") && declarada.has(h.codigo)))
         .map((h) => `${h.codigo} en ${h.ruta}`);
       expect(
         huerfanas,
-        "una credencial nombrada es una credencial listada: o está en `certificaciones` de cv.*.yaml, o está declarada en data/credenciales-nombradas.yaml con su razón",
+        "una credencial nombrada es una credencial listada: en el CV y en apps.yaml, el código está en `certificaciones` de cv.*.yaml o no se nombra; en la prosa de data/a-fondo/ vale además el segundo estado declarado en data/credenciales-nombradas.yaml, con su razón",
       ).toEqual([]);
     }
   });
