@@ -156,8 +156,8 @@ apps:
             es: "Guardrails y presupuesto"
             en: "Guardrails and budget"
           descripcion:
-            es: "Las preguntas fuera de tema se responden sin gastar un token; rate limit por IP, techo de tokens y kill-switch. Nada de lo que produce el modelo se guarda."
-            en: "Off-topic questions are answered without spending a token; rate limit per IP, token ceiling and kill-switch. Nothing the model produces is stored."
+            es: "El modelo solo ve fragmentos de mi propio contenido: no tiene de dónde sacar otra cosa. Las preguntas que ni se le parecen se paran antes, sin gastar un token. Rate limit por IP, techo de tokens y kill-switch. Nada de lo que produce el modelo se guarda."
+            en: "The model only ever sees fragments of my own content: it has nowhere else to draw from. Questions that do not even resemble it are stopped earlier, without spending a token. Rate limit per IP, token ceiling and kill-switch. Nothing the model produces is stored."
       metricas:
         - valor: 6
           etiqueta:
