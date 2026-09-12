@@ -1,6 +1,8 @@
-import { readFileSync } from "node:fs";
+import { readdirSync, readFileSync } from "node:fs";
+import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { parse } from "yaml";
+import { DIR_A_FONDO } from "../../scripts/a-fondo.mjs";
 import { getApps, getCv } from "@/lib/content";
 import { parseApps, parseCv } from "@/lib/schemas";
 
@@ -58,7 +60,7 @@ describe("content loader (data/*.yaml reales)", () => {
     }
   }
 
-  it("toda credencial nombrada por código existe en certificaciones (cv, historia y apps)", () => {
+  it("toda credencial nombrada por código existe en certificaciones (cv, «a fondo» y apps)", () => {
     const apps: unknown = parse(readFileSync("data/apps.yaml", "utf8"));
     for (const locale of ["es", "en"] as const) {
       const { certificaciones, ...resto } = getCv(locale);
@@ -67,11 +69,17 @@ describe("content loader (data/*.yaml reales)", () => {
       );
       const halladas: Hallazgo[] = [];
       codigosEn(resto, `cv.${locale}`, halladas);
-      codigosEn(
-        readFileSync(`data/historia/historia.${locale}.md`, "utf8"),
-        `historia.${locale}`,
-        halladas,
-      );
+      // El canal «a fondo» reemplazó a la historia en el S8: los códigos de
+      // credencial se cuelan igual en la prosa, y ahí hay 24 documentos, no 2.
+      for (const archivo of readdirSync(DIR_A_FONDO).filter((f) =>
+        f.endsWith(`.${locale}.md`),
+      )) {
+        codigosEn(
+          readFileSync(join(DIR_A_FONDO, archivo), "utf8"),
+          `a-fondo/${archivo}`,
+          halladas,
+        );
+      }
       codigosEn(apps, "apps", halladas);
       const huerfanas = halladas
         .filter((h) => !vigentes.has(h.codigo))

@@ -61,7 +61,11 @@ src/
 │                   · secciones · loader) · piezas.ts (S7 — loader genérico por frente))
 └─ types/
 data/              (cv.es.yaml · cv.en.yaml (identidad · trayectoria · estudios · logros ·
-                    proyectos · certificaciones · skills) · apps.yaml · historia/ — LA fuente)
+                    proyectos · certificaciones · skills) · apps.yaml — LA fuente)
+data/a-fondo/      (S8 — el corpus profundo del chat: <slug>.{es,en}.md, un documento por tema,
+                    con frontmatter Zod + subsecciones `<!-- seccion: id -->`. NO se publican:
+                    son combustible, y la cita navega al `ancla`, que es algo visible.
+                    `estado: borrador` no se indexa ni exige gemelo; `aprobado` hace las dos)
 data/vitrina.yaml  (S6 — los cuatro FRENTES de la vitrina: id, estado, nombre, intro, detalle)
 data/fichas/       (S6 — complementos de CURACIÓN de CV Viva por app, `procedencia: cv-viva`:
                     titular · cifras destacadas · límites · nunca · proceso)

@@ -22,7 +22,7 @@ function retrieverReal(locale: "es" | "en") {
   const chunks = buildChunks({
     cv: read(`cv.${locale}.yaml`),
     apps: read("apps.yaml"),
-    historia: [],
+    aFondo: [],
     locale,
   });
   return createRetriever(chunks.map((c) => chatChunkSchema.parse(c)));

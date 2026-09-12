@@ -1,0 +1,159 @@
+{
+  "_comentario": [
+    "EL ESQUELETO DE LA HISTORIA (S3, ADR-010), CONGELADO AL RETIRARLO EN EL S8.",
+    "data/historia/historia.{es,en}.md eran 12 encabezados con su marca y su guía, y",
+    "CERO prosa: las ~40 palabras por sección eran la guía, no el contenido (el build",
+    "lo imprimía en cada corrida: «0 secciones de historia con contenido»).",
+    "Este archivo es la referencia del TEST DE CONSERVACIÓN: los 12 ids, sus títulos,",
+    "sus destinos y sus guías tienen que seguir vivos en data/a-fondo/. Si alguien",
+    "borra un documento migrado, el test lo nombra. No se edita: es un registro."
+  ],
+  "es": [
+    {
+      "id": "como-trabajo",
+      "ancla": "#perfil",
+      "titulo": "Mi forma de trabajar",
+      "guia": "Cómo piensas y trabajas: tu enfoque para resolver problemas, cómo\nlideras equipos, qué valoras en un proyecto, cómo comunicas con stakeholders.\nLo que un hiring manager preguntaría en la primera entrevista."
+    },
+    {
+      "id": "origenes",
+      "ancla": "#trayectoria",
+      "titulo": "De la ingeniería industrial a los datos",
+      "guia": "El arco completo: por qué estudiaste Ingeniería Industrial, cuándo\ndescubriste los datos, qué te llevó de procesos a analítica y de ahí a IA.\nEl hilo que conecta toda tu trayectoria."
+    },
+    {
+      "id": "inglopres",
+      "ancla": "#trayectoria",
+      "titulo": "Inglopres — Ingeniero de Procesos (2016–2017)",
+      "guia": "El detalle que no cabe en el timeline: cómo era la operación, qué\nhacías día a día con el ERP y la cadena de suministro, anécdotas del equipo\nde 12 personas, qué aprendiste."
+    },
+    {
+      "id": "ceinfes",
+      "ancla": "#trayectoria",
+      "titulo": "Ceinfes — Coordinador de Operaciones (2017–2018)",
+      "guia": "La transición a gestión por procesos, cómo montaste los KPIs, cómo\nera reportar a junta directiva, qué te dejó coordinar equipos\nmultidisciplinarios."
+    },
+    {
+      "id": "cm-operaciones",
+      "ancla": "#trayectoria",
+      "titulo": "C&M Consorcio / TransMilenio — Analista de Operaciones (2018–2020)",
+      "guia": "Tu entrada al mundo del transporte masivo: qué dashboards\nconstruiste, cómo era trabajar con los datos de la operación de Bogotá, qué\nautomatizaste."
+    },
+    {
+      "id": "cafam",
+      "ancla": "/proyectos/cafam",
+      "titulo": "Cafam — el WMS y el equipo de 20 (2020–2021)",
+      "guia": "La historia detrás del case study: cómo fue liderar el equipo más\ngrande de tu carrera, qué salió mal y cómo lo resolviste, detalles de las\nintegraciones VBA y el BI de control que no caben en la página."
+    },
+    {
+      "id": "transmilenio-cm",
+      "ancla": "/proyectos/transmilenio-cm",
+      "titulo": "C&M Consultores / TransMilenio — análisis post-operacional (2021–2022)",
+      "guia": "El detalle milimétrico: cómo unificaste las fuentes heterogéneas,\ncómo eran las mesas con la dirección del SITP, cómo entrenaste la predicción\nde demanda con scikit-learn."
+    },
+    {
+      "id": "banco-pichincha",
+      "ancla": "/proyectos/banco-pichincha",
+      "titulo": "Banco Pichincha — BI que el negocio sí usa (2023)",
+      "guia": "Cómo lograste la adopción (el problema difícil de BI), qué hiciste\ndistinto con los dashboards, el programa de formación, los modelos\npredictivos en producción."
+    },
+    {
+      "id": "vesting",
+      "ancla": "/proyectos/vesting",
+      "titulo": "Vesting — la plataforma de datos para agentes de IA (2023–2025)",
+      "guia": "Tu historia estrella: cómo se diseña un ecosistema de datos desde\ncero en Microsoft Fabric, decisiones de arquitectura y por qué, cómo se\nmonitorea un agente de IA en producción, qué es el proceso core replicable."
+    },
+    {
+      "id": "fundacion-ctic",
+      "ancla": "/proyectos/fundacion-ctic",
+      "titulo": "Fundación CTIC — analítica en salud (2025–hoy)",
+      "guia": "Qué tiene de distinto el dato en salud, cómo estás montando el\ngobierno de datos institucional, qué tableros usan los líderes asistenciales.\nRecuerda: NADA de datos de pacientes ni información interna sensible."
+    },
+    {
+      "id": "certificaciones",
+      "ancla": "#certificaciones",
+      "titulo": "Certificaciones — el camino desde el DP-600",
+      "guia": "Por qué elegiste estas certificaciones, cómo las preparaste, qué\nsabes hacer gracias a cada una, cómo se conectan entre sí y con tu trabajo."
+    },
+    {
+      "id": "apps-pipeline",
+      "ancla": "#apps",
+      "titulo": "Las apps que estoy construyendo en público",
+      "guia": "La visión del pipeline AI-APPs: por qué construyes en público, qué\ndemuestra cada app, cómo trabajas con agentes de IA para construirlas (esta\nCV Viva incluida)."
+    }
+  ],
+  "en": [
+    {
+      "id": "como-trabajo",
+      "ancla": "#perfil",
+      "titulo": "How I work",
+      "guia": "How you think and work: your approach to solving problems, how you\nlead teams, what you value in a project, how you communicate with\nstakeholders. What a hiring manager would ask in the first interview."
+    },
+    {
+      "id": "origenes",
+      "ancla": "#trayectoria",
+      "titulo": "From industrial engineering to data",
+      "guia": "The full arc: why you studied Industrial Engineering, when you\ndiscovered data, what took you from process engineering to analytics and\nfrom there to AI. The thread that connects your whole career."
+    },
+    {
+      "id": "inglopres",
+      "ancla": "#trayectoria",
+      "titulo": "Inglopres — Process Engineer (2016–2017)",
+      "guia": "The detail that doesn't fit the timeline: what the operation was\nlike, your day-to-day with the ERP and the supply chain, anecdotes from the\n12-person team, what you learned."
+    },
+    {
+      "id": "ceinfes",
+      "ancla": "#trayectoria",
+      "titulo": "Ceinfes — Operations Coordinator (2017–2018)",
+      "guia": "The transition to process-based management, how you built the\nKPIs, what reporting to the board was like, what coordinating\nmultidisciplinary teams taught you."
+    },
+    {
+      "id": "cm-operaciones",
+      "ancla": "#trayectoria",
+      "titulo": "C&M Consorcio / TransMilenio — Operations Analyst (2018–2020)",
+      "guia": "Your entry into mass transit: which dashboards you built, what it\nwas like to work with Bogotá's operational data, what you automated."
+    },
+    {
+      "id": "cafam",
+      "ancla": "/proyectos/cafam",
+      "titulo": "Cafam — the WMS and the team of 20 (2020–2021)",
+      "guia": "The story behind the case study: what leading the largest team of\nyour career was like, what went wrong and how you solved it, details of the\nVBA integrations and the control BI that don't fit on the page."
+    },
+    {
+      "id": "transmilenio-cm",
+      "ancla": "/proyectos/transmilenio-cm",
+      "titulo": "C&M Consultores / TransMilenio — post-operational analysis (2021–2022)",
+      "guia": "The fine-grained detail: how you unified the heterogeneous\nsources, what the strategy meetings with SITP management were like, how you\ntrained the demand prediction with scikit-learn."
+    },
+    {
+      "id": "banco-pichincha",
+      "ancla": "/proyectos/banco-pichincha",
+      "titulo": "Banco Pichincha — BI the business actually uses (2023)",
+      "guia": "How you achieved adoption (the hard problem in BI), what you did\ndifferently with the dashboards, the training program, the predictive models\nin production."
+    },
+    {
+      "id": "vesting",
+      "ancla": "/proyectos/vesting",
+      "titulo": "Vesting — the data platform for AI agents (2023–2025)",
+      "guia": "Your star story: how a data ecosystem is designed from scratch on\nMicrosoft Fabric, architecture decisions and why, how an AI agent is\nmonitored in production, what the replicable core process is."
+    },
+    {
+      "id": "fundacion-ctic",
+      "ancla": "/proyectos/fundacion-ctic",
+      "titulo": "Fundación CTIC — analytics in healthcare (2025–today)",
+      "guia": "What makes healthcare data different, how you're building the\ninstitutional data governance, which dashboards clinical and administrative\nleaders use. Remember: NO patient data or sensitive internal information."
+    },
+    {
+      "id": "certificaciones",
+      "ancla": "#certificaciones",
+      "titulo": "Certifications — the path from DP-600",
+      "guia": "Why you chose these certifications, how you prepared for them,\nwhat each one lets you do, how they connect to each other and to your\nwork."
+    },
+    {
+      "id": "apps-pipeline",
+      "ancla": "#apps",
+      "titulo": "The apps I'm building in public",
+      "guia": "The AI-APPs pipeline vision: why you build in public, what each\napp demonstrates, how you work with AI agents to build them (this Living CV\nincluded)."
+    }
+  ]
+}

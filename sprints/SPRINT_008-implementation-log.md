@@ -219,3 +219,137 @@ regla 14 están pagadas las preguntas «¿lo viste fallar?» y «¿puede fallar?
 correr?» queda pendiente y se declara** — es exactamente la mitad de la regla que no se puede dar
 por buena con corridas locales.
 
+---
+
+## Fase 1 — el canal, su aduana, la migración y el informe
+
+### 1.1 · Por qué el canal se llama «a fondo» y no «detalle»
+
+La palabra ya significa otras dos cosas en esta app: el case study de un proyecto
+(`messages.detalle`, `DetalleVisitTracker`) y el último tramo de la ficha larga de una app
+(`/vitrina/apps/<slug>/detalle`). Un tercer significado cuesta más que un nombre nuevo, cada vez
+que alguien lee el código. → `data/a-fondo/<slug>.<locale>.md`. **Desviación 3**, declarada.
+
+### 1.2 · Las piezas
+
+| Archivo                                     | Qué es                                                                                         |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| `scripts/a-fondo.mjs`                       | El motor: frontmatter Zod, parser de subsecciones, las cinco reglas de aduana, el troceo         |
+| `scripts/destinos.mjs`                      | El catálogo de destinos, **derivado** de la HOME y de los datos                                  |
+| `scripts/build-chat-index.mjs`              | Reescrito sobre el canal nuevo; la historia sale, la aduana entra                                |
+| `data/a-fondo/*.es.md` (12)                 | La migración                                                                                     |
+| `data/a-fondo/README.md`                    | El índice del canal, para corregir documento por documento                                       |
+| `tests/fixtures/historia-esqueleto-s3.json` | El esqueleto congelado el día que se retiró — referencia del test de conservación                |
+| `decisions/019-canal-a-fondo.md`            | ADR-019                                                                                          |
+
+El motor vive en `scripts/` y no en `src/lib/` por una razón y no por comodidad: **`src/lib/` es
+para lo que la app renderiza, y aquí no hay nada que renderizar.** Sin páginas, el único consumidor
+del canal es el build. Se prueba desde vitest exactamente igual que se probaba `parseHistoria`.
+
+### 1.3 · El catálogo de destinos: el invariante, no el síntoma
+
+El síntoma era `ancla: #apps` en la sección `apps-pipeline` del esqueleto. El invariante es que
+**el destino de una cita tiene que existir**, y la lista de destinos no se mantiene a mano: se
+deriva.
+
+- **Anclas de la HOME, en dos saltos:** qué componentes monta `page.tsx` dentro de `<main>`, y qué
+  `id="…"` declara cada uno de esos archivos. El segundo salto solo mira los del primero, y eso
+  importa: `roadmap.tsx` declara `id="roadmap"` y vive en `components/home/`, **pero la HOME ya no
+  lo monta** — el roadmap se fue a `/vitrina/apps`. Listarlo habría sido revivir el error de
+  `#apps` con otro nombre. Hay un test que exige justo eso.
+- **Rutas:** de los mismos datos que generan las páginas (`cv.*.yaml`, `apps.yaml`,
+  `vitrina.yaml`, `content/`). Hoy: **17 anclas y 52 rutas**.
+
+Y la regla corre sobre **todos** los chunks, no solo los del canal nuevo. Fue lo correcto: el
+`#apps` muerto vivía **en dos sitios a la vez** — el esqueleto de la historia y los cuatro chunks
+que salen de `apps.yaml`. Se corrigieron los dos; el de las apps pasa a `#vitrina`.
+
+### 1.4 · Un hallazgo de YAML que conviene no volver a sufrir
+
+El primer `ancla: #apps` sin comillas **no llegó siquiera al gate**: YAML lee `#` como comienzo de
+comentario y el campo llega `null`. Lo cazó el schema («`ancla`: expected string, received null»),
+que es donde debía cazarse. Por eso el manual insiste en que el ancla **va entre comillas**, y por
+eso el diagnóstico nombra el campo.
+
+### 1.5 · Los seis rojos, en el mismo commit (regla 14)
+
+| #   | Rojo                          | Cómo se puso rojo                                               | Qué imprimió                                                                                                  |
+| --- | ----------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| 1   | Frontmatter inválido          | `estado: casi-listo`                                            | `data/a-fondo/vesting.es.md: frontmatter inválido:` → `  - estado: Invalid option: expected one of "borrador"\|"aprobado"` |
+| 2   | Id de subsección duplicado    | dos `<!-- seccion: arquitectura -->` en el mismo documento      | `id de subsección duplicado "arquitectura". Dos subsecciones con el mismo id producen dos chunks que compiten por la misma cita.` |
+| 3a  | Aprobado sin gemelo           | `estado: aprobado` con dos subsecciones y sin `.en.md`          | `está «aprobado» y no existe su gemelo data/a-fondo/vesting.en.md — un idioma ciego es peor que un PR que espera.` |
+| 3b  | Paridad rota POR SUBSECCIÓN   | gemelo inglés al que le falta una subsección                    | `vesting: las subsecciones no coinciden entre idiomas — falta(n) en inglés: proceso-core.`                     |
+| 4   | Privacidad                    | correo + teléfono + documento + dominio en una subsección       | **6 hallazgos con línea exacta**: correo, teléfono internacional, teléfono agrupado, «siete dígitos seguidos», y los dos dominios |
+| 5   | Destino inexistente           | **SOLO — el `#apps` que el esqueleto traía roto de verdad**     | `«ancla: #apps» no existe en el sitio. Una cita que no lleva a ninguna parte rompe la promesa del chat.`       |
+| 5b  | Destino inexistente en CHUNKS | devolver `#apps` al chunk de las apps (la segunda fuga real)    | `✖ Destinos de cita inexistentes` × 4: `app-hoja-de-vida`, `app-chat-hoja-de-vida`, `app-fabric-analitica-e2e`, `app-agente-gemini-vertex` |
+| 6   | Un borrador se cuela al índice | quitar `if (doc.estado !== "aprobado") continue;`               | 2 tests en rojo: «un BORRADOR no aporta ni un chunk» y «el a fondo aprobado entra por subsección…»             |
+
+El rojo **5 no necesitó mutación**: era el estado real del repositorio. El 5b tampoco es hipotético
+— es el mismo destino muerto que vivía en el índice publicado desde la revisión post-S7.
+
+**La tercera pregunta (¿puede fallar siquiera?):** las seis pueden, y ninguna regla anterior las
+alcanzaba. El schema de `chatChunkSchema` valida que `ancla` sea un string **no vacío**, no que
+exista; y la paridad de la historia comparaba «tiene texto / no tiene texto» por sección, nunca el
+**conjunto** de subsecciones.
+
+### 1.6 · La privacidad, calibrada contra los documentos reales
+
+Seis patrones: correo · teléfono internacional · teléfono agrupado · siete dígitos seguidos
+(cédula, NIT, teléfono local) · dirección web · dominio suelto.
+
+**Lo que NO dispara**, con test propio para cada caso: `2009 — 2016`, `2016-2017`, `ISO 9001:2015`,
+`DP-600`, `1.234.567`, `Next.js 16.3.4`, `data/cv.es.yaml`. Son las siete formas en que un barrido
+de privacidad mal calibrado convierte un documento correcto en un rojo, y el autor aprende a
+ignorarlo.
+
+**Y lo que ningún regex caza: los nombres propios.** Por eso la regla vive en **tres capas** —este
+barrido, el checklist de la cabecera de cada documento y mi lectura en cada PR— y no en una.
+
+### 1.7 · La migración y el test de conservación
+
+La orden pedía un **«test de igualdad de prosa»** entre la historia y el canal nuevo. **No había
+prosa que comparar:** `data/historia/historia.{es,en}.md` eran 12 encabezados con su marca y su
+guía, y cero contenido — el build lo imprimía en cada corrida (`0 secciones de historia con
+contenido`) desde el S3. Una prueba de igualdad habría probado el vacío y habría pasado en verde
+para siempre. **Desviación 1**, declarada.
+
+Lo que sí se puede conservar, y es lo que valía, son **los 12 ids, sus títulos, sus destinos y las
+guías que escribió el dueño**. El esqueleto se congeló en `tests/fixtures/historia-esqueleto-s3.json`
+el día que se retiró, y el test exige contra él: cada id tiene su documento, con el mismo título y
+el mismo destino —salvo `#apps → #vitrina`, con la razón escrita en la aserción— y **la guía
+sobrevive palabra por palabra** dentro del documento. Si alguien borra un documento migrado, el
+test lo nombra. Es un gate durable, no una comprobación de un solo uso.
+
+`data/historia/` retirada, y con ella `parseHistoria` y `checkHistoriaParity`. Lo que seguía
+valiendo se reescribió sobre el canal nuevo: el barrido de credenciales de `content.test.ts` ahora
+recorre los 12 documentos en vez de los 2 archivos de la historia.
+
+### 1.8 · Informe de discrepancias
+
+`sprints/SPRINT_008-informe-discrepancias.md` — **12 diferencias** entre lo publicado y la hoja de
+vida fusionada, en los dos idiomas, ordenadas por peso, cada una con su pregunta. **Nada
+corregido**, como manda la orden. Ninguna cifra del sitio resultó inventada ni contradictoria: las
+veinte cifras duras coinciden palabra por palabra.
+
+Las dos de peso alto: **el AI-103 no existe en el sitio** (el AI-102 se retiró y nada ocupó su
+lugar, y la orden pide orientar el contenido a él) y **Fundación CTIC sigue sin una sola cifra**,
+en los dos documentos a la vez. Las dos que son cifra o afirmación y por tanto no pueden esperar:
+el −35% de Banco Pichincha mide «procesamiento» en la hoja de vida y «análisis» en el sitio, y
+«modelos semánticos» es una interpretación del sitio que la hoja de vida no hace.
+
+La hoja de vida **no entró al repositorio** y ningún dato de contacto aparece en el informe.
+
+### 1.9 · Verificación de la fase 1
+
+| Comprobación   | Resultado                                                        |
+| -------------- | ------------------------------------------------------------------ |
+| `pnpm test`    | **503 pasan / 503** · 29 archivos (eran 390 / 26 al cerrar la fase 0) |
+| `pnpm typecheck` | limpio                                                           |
+| `pnpm lint`    | limpio                                                            |
+| `pnpm build`   | OK — `28 chunks (0 de 12 documentos «a fondo» aprobados e indexados)` |
+
+Tres roturas de typecheck que solo vio `tsc`, no vitest, y que valen una línea: el flag `/s` de una
+expresión regular no está disponible con el target de este repo; el `= []` por defecto de `aFondo`
+hacía que TS infiriera `never[]` desde el `.mjs`; y un fixture de los tests de guardrails seguía
+nombrando `historia`. Corregidas.
+

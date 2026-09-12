@@ -3,101 +3,11 @@ import { existsSync, readFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
-import {
-  buildChunks,
-  checkHistoriaParity,
-  parseHistoria,
-} from "../../scripts/build-chat-index.mjs";
+import { buildChunks } from "../../scripts/build-chat-index.mjs";
+import { catalogoDeDestinos, destinoExiste } from "../../scripts/destinos.mjs";
 import { parseChatIndex } from "@/lib/ia/schemas";
 
-const MD_BASE = `# Historia
-
-<!-- preámbulo que no se indexa -->
-
-## Vesting a fondo
-
-<!-- seccion: vesting | ancla: /proyectos/vesting -->
-<!-- guía: qué escribir -->
-
-Construí el ecosistema de datos en Microsoft Fabric desde cero.
-
-## Sección vacía
-
-<!-- seccion: pendiente | ancla: #trayectoria -->
-<!-- guía: aún sin rellenar -->
-`;
-
-describe("parseHistoria (marcas del esqueleto guiado)", () => {
-  it("extrae id, ancla, título y texto sin comentarios", () => {
-    const sections = parseHistoria(MD_BASE, "historia.es.md");
-    expect(sections).toHaveLength(2);
-    expect(sections[0]).toMatchObject({
-      id: "vesting",
-      ancla: "/proyectos/vesting",
-      titulo: "Vesting a fondo",
-    });
-    expect(sections[0].texto).toContain("Microsoft Fabric");
-    expect(sections[0].texto).not.toContain("guía");
-  });
-
-  it("una sección sin prosa queda con texto vacío (no bloquea)", () => {
-    const sections = parseHistoria(MD_BASE, "historia.es.md");
-    expect(sections[1].id).toBe("pendiente");
-    expect(sections[1].texto).toBe("");
-  });
-
-  it("ancla por defecto cuando el comentario no la trae", () => {
-    const md = "## Título\n\n<!-- seccion: libre -->\n\nTexto.\n";
-    expect(parseHistoria(md, "x.md")[0].ancla).toBe("#trayectoria");
-  });
-
-  it("falla con diagnóstico si falta el comentario de sección", () => {
-    const md = "## Sin marca\n\nTexto huérfano.\n";
-    expect(() => parseHistoria(md, "historia.es.md")).toThrowError(
-      /historia\.es\.md[\s\S]*Sin marca/,
-    );
-  });
-
-  it("rechaza ids duplicados", () => {
-    const md =
-      "## A\n<!-- seccion: dup -->\nUno.\n## B\n<!-- seccion: dup -->\nDos.\n";
-    expect(() => parseHistoria(md, "x.md")).toThrowError(/dup/);
-  });
-});
-
-describe("checkHistoriaParity (regla de paridad ES/EN)", () => {
-  const seccion = (id: string, texto: string) => ({
-    id,
-    ancla: "#trayectoria",
-    titulo: id,
-    texto,
-  });
-
-  it("sin problemas cuando ambas gemelas tienen (o no tienen) contenido", () => {
-    expect(
-      checkHistoriaParity(
-        [seccion("a", "hola"), seccion("b", "")],
-        [seccion("a", "hello"), seccion("b", "")],
-      ),
-    ).toEqual([]);
-  });
-
-  it("detecta contenido en un idioma con la gemela vacía", () => {
-    const problems = checkHistoriaParity(
-      [seccion("vesting", "contenido en español")],
-      [seccion("vesting", "")],
-    );
-    expect(problems).toHaveLength(1);
-    expect(problems[0]).toMatch(/vesting[\s\S]*historia\.en\.md/);
-  });
-
-  it("detecta una sección sin gemela en el otro archivo", () => {
-    const problems = checkHistoriaParity([seccion("solo-es", "texto")], []);
-    expect(problems[0]).toContain("solo-es");
-  });
-});
-
-describe("buildChunks (YAML + historia → chunks con ancla)", () => {
+describe("buildChunks (YAML + «a fondo» → chunks con ancla)", () => {
   const cvMinimo = {
     identidad: {
       nombre: "Henry",
@@ -161,14 +71,24 @@ describe("buildChunks (YAML + historia → chunks con ancla)", () => {
   const chunks = buildChunks({
     cv: cvMinimo,
     apps: appsMinimas,
-    historia: [
+    aFondo: [
       {
-        id: "vesting",
+        slug: "vesting",
+        titulo: "Vesting",
+        estado: "aprobado",
         ancla: "/proyectos/vesting",
-        titulo: "Vesting a fondo",
-        texto: "La historia completa.",
+        subsecciones: [
+          { id: "arquitectura", titulo: "La arquitectura", texto: "Fabric desde cero." },
+          { id: "vacia", titulo: "Vacía", texto: "" },
+        ],
       },
-      { id: "vacia", ancla: "#trayectoria", titulo: "Vacía", texto: "" },
+      {
+        slug: "en-borrador",
+        titulo: "Aún sin aprobar",
+        estado: "borrador",
+        ancla: "#trayectoria",
+        subsecciones: [{ id: "algo", titulo: "Algo", texto: "Prosa del borrador." }],
+      },
     ],
     locale: "es",
   });
@@ -190,9 +110,20 @@ describe("buildChunks (YAML + historia → chunks con ancla)", () => {
     expect(e?.texto).not.toContain("()");
   });
 
-  it("la historia con contenido entra con su ancla; la vacía se ignora", () => {
-    expect(porId.get("historia-vesting")?.texto).toContain("historia completa");
-    expect(porId.has("historia-vacia")).toBe(false);
+  it("el «a fondo» aprobado entra por subsección; la vacía y el borrador no", () => {
+    expect(porId.get("a-fondo-vesting-arquitectura")?.texto).toContain(
+      "Fabric desde cero",
+    );
+    expect(porId.get("a-fondo-vesting-arquitectura")?.ancla).toBe(
+      "/proyectos/vesting",
+    );
+    expect(porId.has("a-fondo-vesting-vacia")).toBe(false);
+    // Un borrador es material de trabajo del dueño, no evidencia citable.
+    expect([...porId.keys()].filter((k) => k.includes("en-borrador"))).toEqual([]);
+  });
+
+  it("las apps ya no citan «#apps»: esa sección de la HOME murió en la revisión post-S7", () => {
+    expect(porId.get("app-hoja-de-vida")?.ancla).toBe("#vitrina");
   });
 
   it("los bullets de trayectoria y el casestudy quedan indexados", () => {
@@ -225,6 +156,14 @@ describe("script real contra los data/ reales (integración del build)", () => {
       expect(index.chunks.some((c) => c.ancla === "/proyectos/vesting")).toBe(
         true,
       );
+
+      // EL DESTINO DE TODA CITA EXISTE. La regla nació de encontrar «#apps»
+      // —muerto desde la revisión post-S7— vivo en el índice publicado.
+      const catalogo = catalogoDeDestinos();
+      const rotos = index.chunks
+        .filter((c) => !destinoExiste(c.ancla, catalogo))
+        .map((c) => `${c.id} → ${c.ancla}`);
+      expect(rotos, "chunks que citan hacia algo que no existe").toEqual([]);
     }
   });
 });
