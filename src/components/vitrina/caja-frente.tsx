@@ -102,24 +102,22 @@ export async function CajaFrente({
             {ICONOS[frente.id] ?? PUNTO}
           </svg>
         </span>
-        <span
-          title={t(
-            abierta
-              ? "frenteEstadoAyuda.abierta"
-              : "frenteEstadoAyuda.enPreparacion",
-          )}
-          className={`rounded-full px-2.5 py-1 font-mono text-[11px] tracking-[0.02em] uppercase ${
-            abierta ? "bg-sage text-sage-ink" : "bg-citron text-citron-ink"
-          }`}
-        >
-          {abierta ? (
-            <CifraQueLlama className="inline-block">
-              {t("cuentaPiezas", { n: frente.piezas })}
-            </CifraQueLlama>
-          ) : (
-            t("frenteEstados.enPreparacion")
-          )}
-        </span>
+        {/* El chip ENTERO crece y vuelve al asomar (no solo su texto). */}
+        {abierta ? (
+          <CifraQueLlama
+            title={t("frenteEstadoAyuda.abierta")}
+            className="inline-block rounded-full bg-sage px-2.5 py-1 font-mono text-[11px] tracking-[0.02em] text-sage-ink uppercase"
+          >
+            {t("cuentaPiezas", { n: frente.piezas })}
+          </CifraQueLlama>
+        ) : (
+          <span
+            title={t("frenteEstadoAyuda.enPreparacion")}
+            className="rounded-full bg-citron px-2.5 py-1 font-mono text-[11px] tracking-[0.02em] text-citron-ink uppercase"
+          >
+            {t("frenteEstados.enPreparacion")}
+          </span>
+        )}
       </div>
 
       <div>
