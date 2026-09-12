@@ -879,3 +879,21 @@ línea antes de que yo tocara nada. Corregidos a `--ink-2`.
 | `pnpm audit --audit-level high` | sin vulnerabilidades conocidas |
 | Código de la app tocado | 3 clases de token + la unificación de `TOP_K_CONTEXTO` + STOPWORDS. **Sin crecimiento de bundle**: no hay componente, ruta ni dependencia nueva |
 | Barrido cero enlaces | vacío, tras el último `git add` |
+
+### 5.4 · `/deploy-check`
+
+| § | Comprobación | Estado |
+| --- | --- | --- |
+| 1 | Tests · e2e · cobertura | ✅ 758/758 unitarias · 321 e2e (11 saltados, inventariados) · cobertura global 92,8 % líneas |
+| 2 | Type safety | ✅ `tsc --noEmit` limpio · sin `@ts-ignore` nuevos |
+| 3 | Lint y formato · reduced-motion | ✅ `eslint` limpio · sin motion nuevo; el test de árbol reducido sigue verde |
+| 4 | Build · tamaño de bundle | ✅ build OK · **sin crecimiento**: no hay ruta, componente ni dependencia nueva; el código de app tocado son 3 clases de token y la unificación de `TOP_K_CONTEXTO` |
+| 5 | Seguridad | ✅ `pnpm audit --audit-level high` limpio · sin secretos en el diff (gitleaks en cada commit) · **sin variables de entorno nuevas** |
+| 6 | Observabilidad | ✅ sin endpoints nuevos. El build imprime la cuenta real de fragmentos y de documentos aprobados en cada corrida |
+| 7 | Accesibilidad y diseño | ✅ axe en el e2e · **tres violaciones de contraste vivas corregidas** y el veto convertido en test · aprobación visual: ⭐ o11, diferida al acumulado |
+| 8 | Performance | ✅ presupuesto + **categorías ≥0,9**, mediana de 3 corridas sobre 15 URLs. Los dos corren **por primera vez en este PR** |
+| 9 | Documentación | ✅ MANUAL con «Cómo alimentar el a fondo» + «Cómo se prueba que el contenido contesta» · ADR-019 · CLAUDE.md · guía v8 |
+| 10 | Cierre del sprint | ✅ bitácora al día · `SPRINT_008-summary.md` con el corte declarado · checklist de IA embebida cubierto por los gates del retrieval |
+
+**Decisión: MERGE OK**, con dos declaraciones que viajan en el PR: el criterio 15 no se cumple (M1 y
+M2 dependen del dueño) y los dos gates de Lighthouse no tienen histórico.
