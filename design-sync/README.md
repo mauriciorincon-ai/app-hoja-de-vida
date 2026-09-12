@@ -60,4 +60,5 @@ Este bundle cubre los **fundamentos completos** (paleta, tipografía, forma y mo
 componentes nuevos del S5 y post-S5** (la vitrina, incluida la caja de frente del portal). Quedan fuera, y se declaran como deuda del bundle en el summary del sprint:
 los componentes de S1–S4 que `design-system.md` describe en prosa pero aún no tienen tarjeta —
 input/textarea, metric tile, glifo ◆, primitivas de motion (`fadeInUp`, `blurIn`, `maskReveal`,
-`scaleInBlur`, `Counter`, `TimelineTrack`) y los bloques del chat y de la votación.
+`scaleInBlur`, `Counter`, `TimelineTrack` y, desde post-S8, `fadeInSlow`, `liftIn` y `CifraQueLlama`)
+y los bloques del chat y de la votación.

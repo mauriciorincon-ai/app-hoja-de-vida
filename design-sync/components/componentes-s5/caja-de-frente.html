@@ -1,100 +1,250 @@
 <!-- @dsCard group="Componentes · S5" name="Caja de frente" -->
 <!doctype html>
 <html lang="es">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Caja de frente — CV Viva</title>
-<style>
-  :root {
-    --paper-0:#fbfaf7; --paper-1:#f5f3ed; --paper-2:#ece9e0; --paper-3:#ddd8cb;
-    --ink-0:#121110; --ink-1:#2a2927; --ink-2:#5e5c55; --ink-3:#9c9a90;
-    --sage:#cfe3cf; --sage-ink:#3c5a3c; --rose:#f2d6d6; --rose-ink:#7a3f3f;
-    --sky:#cedde9; --sky-ink:#2e4e6b; --citron:#e6e3b8; --citron-ink:#5e5a1e;
-    --lilac:#ddd3e8; --lilac-ink:#4e3e6b; --peach:#f2dec4; --peach-ink:#6b4820;
-    --sh-1:0 1px 0 rgba(18,17,16,.04), 0 1px 2px rgba(18,17,16,.04);
-    --sh-2:0 4px 12px -4px rgba(18,17,16,.08), 0 2px 4px rgba(18,17,16,.04);
-    --ease-out-cubic:cubic-bezier(.21,.61,.35,1);
-    --display:Fraunces,'Iowan Old Style',Georgia,serif;
-    --sans:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-    --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
-  }
-  * { box-sizing: border-box; }
-  body { margin:0; padding:28px; background:var(--paper-0); color:var(--ink-1);
-    font-family:var(--sans); font-size:15px; line-height:1.6; }
-  h1 { font-family:var(--display); font-size:26px; font-weight:500; letter-spacing:-.02em;
-    color:var(--ink-0); margin:0 0 6px; }
-  .lede { color:var(--ink-2); margin:0 0 24px; max-width:62ch; }
-  .nota { color:var(--ink-2); font-size:13.5px; max-width:70ch; margin-top:20px;
-    border-left:2px solid var(--paper-3); padding-left:12px; }
-  code { font-family:var(--mono); font-size:12.5px; background:var(--paper-1);
-    border:1px solid var(--paper-2); border-radius:4px; padding:1px 5px; }
-  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px; max-width:760px; }
-  .c { position:relative; display:flex; flex-direction:column; gap:16px;
-    background:var(--paper-0); border:1px solid var(--paper-2); border-radius:14px; padding:24px;
-    box-shadow:var(--sh-1); transition:box-shadow 180ms var(--ease-out-cubic), transform 180ms var(--ease-out-cubic); }
-  .c:hover { transform:translateY(-2px); box-shadow:var(--sh-2); }
-  .cab { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; }
-  .ico { display:flex; align-items:center; justify-content:center; width:44px; height:44px;
-    border-radius:10px; background:var(--paper-1); color:var(--ink-1); }
-  .ico svg { width:22px; height:22px; fill:none; stroke:currentColor; stroke-width:1.5;
-    stroke-linecap:round; stroke-linejoin:round; }
-  .chip { border-radius:99px; padding:4px 10px; font-family:var(--mono); font-size:11px;
-    letter-spacing:.02em; text-transform:uppercase; white-space:nowrap; }
-  .sage { background:var(--sage); color:var(--sage-ink); }
-  .citron { background:var(--citron); color:var(--citron-ink); }
-  .c h2 { font-family:var(--display); font-size:23px; font-weight:500; letter-spacing:-.02em;
-    color:var(--ink-0); margin:0; line-height:1.15; }
-  .c h2 a { color:inherit; text-decoration:none; }
-  .c h2 a::after { content:""; position:absolute; inset:0; border-radius:14px; }
-  .intro { font-size:15px; color:var(--ink-1); margin:8px 0 0; }
-  .ir { margin-top:auto; font-size:14px; font-weight:500; color:var(--sage-ink); }
-</style>
-</head>
-<body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Caja de frente — CV Viva</title>
+    <style>
+      :root {
+        --paper-0: #fbfaf7;
+        --paper-1: #f5f3ed;
+        --paper-2: #ece9e0;
+        --paper-3: #ddd8cb;
+        --ink-0: #121110;
+        --ink-1: #2a2927;
+        --ink-2: #5e5c55;
+        --ink-3: #9c9a90;
+        --sage: #cfe3cf;
+        --sage-ink: #3c5a3c;
+        --rose: #f2d6d6;
+        --rose-ink: #7a3f3f;
+        --sky: #cedde9;
+        --sky-ink: #2e4e6b;
+        --citron: #e6e3b8;
+        --citron-ink: #5e5a1e;
+        --lilac: #ddd3e8;
+        --lilac-ink: #4e3e6b;
+        --peach: #f2dec4;
+        --peach-ink: #6b4820;
+        --sh-1:
+          0 1px 0 rgba(18, 17, 16, 0.04), 0 1px 2px rgba(18, 17, 16, 0.04);
+        --sh-2:
+          0 4px 12px -4px rgba(18, 17, 16, 0.08),
+          0 2px 4px rgba(18, 17, 16, 0.04);
+        --ease-out-cubic: cubic-bezier(0.21, 0.61, 0.35, 1);
+        --display: Fraunces, "Iowan Old Style", Georgia, serif;
+        --sans:
+          Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        --mono:
+          "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 28px;
+        background: var(--paper-0);
+        color: var(--ink-1);
+        font-family: var(--sans);
+        font-size: 15px;
+        line-height: 1.6;
+      }
+      h1 {
+        font-family: var(--display);
+        font-size: 26px;
+        font-weight: 500;
+        letter-spacing: -0.02em;
+        color: var(--ink-0);
+        margin: 0 0 6px;
+      }
+      .lede {
+        color: var(--ink-2);
+        margin: 0 0 24px;
+        max-width: 62ch;
+      }
+      .nota {
+        color: var(--ink-2);
+        font-size: 13.5px;
+        max-width: 70ch;
+        margin-top: 20px;
+        border-left: 2px solid var(--paper-3);
+        padding-left: 12px;
+      }
+      code {
+        font-family: var(--mono);
+        font-size: 12.5px;
+        background: var(--paper-1);
+        border: 1px solid var(--paper-2);
+        border-radius: 4px;
+        padding: 1px 5px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 20px;
+        max-width: 760px;
+      }
+      .c {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        background: var(--paper-0);
+        border: 1px solid var(--paper-2);
+        border-radius: 14px;
+        padding: 24px;
+        box-shadow: var(--sh-1);
+        transition:
+          box-shadow 180ms var(--ease-out-cubic),
+          transform 180ms var(--ease-out-cubic);
+      }
+      .c:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--sh-2);
+      }
+      .cab {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .ico {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        border-radius: 10px;
+        background: var(--paper-1);
+        color: var(--ink-1);
+      }
+      .ico svg {
+        width: 22px;
+        height: 22px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .chip {
+        border-radius: 99px;
+        padding: 4px 10px;
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+      .sage {
+        background: var(--sage);
+        color: var(--sage-ink);
+      }
+      .citron {
+        background: var(--citron);
+        color: var(--citron-ink);
+      }
+      .c h2 {
+        font-family: var(--display);
+        font-size: 23px;
+        font-weight: 500;
+        letter-spacing: -0.02em;
+        color: var(--ink-0);
+        margin: 0;
+        line-height: 1.15;
+      }
+      .c h2 a {
+        color: inherit;
+        text-decoration: none;
+      }
+      .c h2 a::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 14px;
+      }
+      .intro {
+        font-size: 15px;
+        color: var(--ink-1);
+        margin: 8px 0 0;
+      }
+      .ir {
+        margin-top: auto;
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--sage-ink);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Caja de frente</h1>
+    <p class="lede">
+      La unidad del portal <code>/vitrina</code>: una por frente (apps · agentes
+      · investigaciones · tableros). Enseña lo justo para elegir por dónde
+      entrar, y <strong>marca un inicio sin disfrazarlo</strong>.
+    </p>
 
-<h1>Caja de frente</h1>
-<p class="lede">La unidad del portal <code>/vitrina</code>: una por frente (apps · agentes ·
-investigaciones · tableros). Enseña lo justo para elegir por dónde entrar, y <strong>marca un
-inicio sin disfrazarlo</strong>.</p>
+    <div class="grid">
+      <article class="c">
+        <div class="cab">
+          <span class="ico" aria-hidden="true"
+            ><svg viewBox="0 0 24 24">
+              <rect x="3" y="3" width="8" height="8" rx="2" />
+              <rect x="13" y="3" width="8" height="8" rx="2" />
+              <rect x="3" y="13" width="8" height="8" rx="2" />
+              <rect x="13" y="13" width="8" height="8" rx="2" /></svg
+          ></span>
+          <span class="chip sage" title="Tiene productos publicados"
+            >6 productos</span
+          >
+        </div>
+        <div>
+          <h2><a href="#">Apps</a></h2>
+          <p class="intro">
+            Aplicaciones completas, con interfaz, construidas por el pipeline.
+            Cada una con su promesa, sus funcionalidades y sus cifras.
+          </p>
+        </div>
+        <p class="ir">Explora <span aria-hidden="true">&rarr;</span></p>
+      </article>
 
-<div class="grid">
-  <article class="c">
-    <div class="cab">
-      <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24">
-        <rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="2"/>
-        <rect x="3" y="13" width="8" height="8" rx="2"/><rect x="13" y="13" width="8" height="8" rx="2"/></svg></span>
-      <span class="chip sage" title="Tiene piezas publicadas">6 piezas</span>
+      <article class="c">
+        <div class="cab">
+          <span class="ico" aria-hidden="true"
+            ><svg viewBox="0 0 24 24">
+              <rect x="3" y="4" width="18" height="16" rx="2" />
+              <path d="M7 9l3 3-3 3" />
+              <path d="M12 15h5" /></svg
+          ></span>
+          <span
+            class="chip citron"
+            title="El frente existe; sus productos aún no se publican"
+            >En preparación</span
+          >
+        </div>
+        <div>
+          <h2><a href="#">Agentes especializados</a></h2>
+          <p class="intro">
+            Sin interfaz: se les habla por comandos y ejecutan actividades
+            complejas de principio a fin.
+          </p>
+        </div>
+        <p class="ir">Ver qué viene <span aria-hidden="true">&rarr;</span></p>
+      </article>
     </div>
-    <div>
-      <h2><a href="#">Apps</a></h2>
-      <p class="intro">Aplicaciones completas, con interfaz, construidas por el pipeline. Cada una
-        con su promesa, sus funcionalidades y sus cifras.</p>
-    </div>
-    <p class="ir">Entrar <span aria-hidden="true">&rarr;</span></p>
-  </article>
 
-  <article class="c">
-    <div class="cab">
-      <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24">
-        <rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9l3 3-3 3"/><path d="M12 15h5"/></svg></span>
-      <span class="chip citron" title="El frente existe; sus piezas aún no se publican">En preparación</span>
-    </div>
-    <div>
-      <h2><a href="#">Agentes especializados</a></h2>
-      <p class="intro">Sin interfaz: se les habla por comandos y ejecutan actividades complejas de
-        principio a fin.</p>
-    </div>
-    <p class="ir">Ver qué viene <span aria-hidden="true">&rarr;</span></p>
-  </article>
-</div>
-
-<p class="nota"><strong>Dos estados, dos chips.</strong> Abierto: <code>sage</code> con la cuenta
-de piezas, que <em>no se escribe a mano</em> (sale de la fuente de piezas del frente). En
-preparación: <code>citron</code>, y el cierre cambia de «Entrar» a «Ver qué viene». El icono se
-dibuja en esta casa (24×24, trazo 1.5, sin relleno) — nunca un emoji. Un solo tab stop por caja:
-el enlace del título estira su área de clic con <code>::after</code> absoluto y su nombre accesible
-sigue siendo el del frente.</p>
-
-</body>
+    <p class="nota">
+      <strong>Dos estados, dos chips.</strong> Abierto: <code>sage</code> con la
+      cuenta de productos («piezas» hasta post-S8), que
+      <em>no se escribe a mano</em> (sale de la fuente de piezas del frente); al
+      asomar, la cifra crece y vuelve (<code>CifraQueLlama</code>). En
+      preparación: <code>citron</code>, y el cierre cambia de «Explora» a «Ver
+      qué viene». El icono se dibuja en esta casa (24×24, trazo 1.5, sin
+      relleno) — nunca un emoji. Un solo tab stop por caja: el enlace del título
+      estira su área de clic con <code>::after</code> absoluto y su nombre
+      accesible sigue siendo el del frente.
+    </p>
+  </body>
 </html>
