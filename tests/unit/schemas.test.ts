@@ -103,6 +103,30 @@ describe("cvSchema", () => {
     expect(cv.skills).toEqual([]);
   });
 
+  it("certificaciones: «en curso» va sin fecha y con chip; una obtenida sin fecha no pasa (post-S8)", () => {
+    const cv = cvSchema.parse({
+      ...cvValido,
+      certificaciones: [
+        { nombre: "Azure AI Engineer (AI-103)", estado: "en curso" },
+      ],
+    });
+    expect(cv.certificaciones[0].estado).toBe("en curso");
+    expect(cv.certificaciones[0].fecha).toBe("");
+    expect(cv.certificaciones[0].icono).toBe("insignia");
+    expect(() =>
+      cvSchema.parse({
+        ...cvValido,
+        certificaciones: [{ nombre: "Sin fecha" }],
+      }),
+    ).toThrow(/fecha/);
+    expect(() =>
+      cvSchema.parse({
+        ...cvValido,
+        certificaciones: [{ nombre: "X", fecha: "2024", icono: "emoji" }],
+      }),
+    ).toThrow();
+  });
+
   it("defaults certificaciones.verificacion to empty (links pending)", () => {
     const cv = cvSchema.parse({
       ...cvValido,
@@ -309,6 +333,11 @@ describe("solicitudSchema", () => {
       nombre: "  Ana  ",
     });
     expect(s.nombre).toBe("Ana");
+  });
+
+  it("defaults app to empty: the form is the general contact since post-S8", () => {
+    const sinApp = { ...solicitudValida, app: undefined };
+    expect(solicitudSchema.parse(sinApp).app).toBe("");
   });
 
   it("defaults mensaje to empty string", () => {

@@ -1,0 +1,82 @@
+# Bitácora — tercera revisión de la HOME, tras el S8 (fuera de sprint)
+
+> Pedida por el dueño el 2026-09-12 al correr el **bloque A del gate ⭐ acumulado del ciclo H2**
+> (31 pruebas): seis pruebas, dieciséis observaciones y un síntoma. Rama
+> `ajustes/hv-revision-3`, un PR. Decisiones en `decisions/020-…`. Esta bitácora existe para
+> que la planeadora vea el trabajo, como en las dos revisiones post-S7.
+
+## Lo pedido → lo hecho
+
+| #   | Observación del dueño                                                                           | Qué se hizo                                                                                                                                                                                                              |
+| --- | ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 1   | «Ahora no inicia en español, inicia en inglés»                                                  | No era azar: `/` seguía `Accept-Language` **y la cookie de «Switch to English»**. `localeDetection: false` — la raíz es `/es` siempre. Test e2e nuevo que además paga la deuda del S8 (el redirect sin test)             |
+| 2   | Titular «Analytics & AI Engineer»                                                               | `identidad.eyebrow` ES/EN; JSON-LD, `/cv`, PDF y el prompt del chat lo siguen                                                                                                                                            |
+| 3   | Resumen con AI-103 y DP-600, «estamos en proceso»                                               | «(AI-103, **en curso**) · Analytics Engineer (DP-600)». El AI-103 entra a `certificaciones` con `estado: en curso` (decisión 1 del dueño) y un gate nuevo impide que salga a secas                                       |
+| 4   | «con la evidencia pública para probarlo» suena a reto                                           | «— y esta hoja de vida es la muestra: recórrela y pregúntale.»                                                                                                                                                           |
+| 5   | «Explora las apps» → «Explora mi portafolio»                                                    | `hero.ctaApps` ES/EN                                                                                                                                                                                                     |
+| 6   | Rehacer el Perfil sin logros, con lo que hace hoy                                               | Perfil nuevo sin cifras; «Hoy lidero la adopción y el gobierno de la IA: la estrategia y la implementación de ISO/IEC 42001» — y ese bullet entra al hito de Fundación CTIC para que perfil y trayectoria digan lo mismo |
+| 7   | Vesting 2024, Pichincha 2023; el año grande los sigue                                           | `periodo: "2024"` en Vesting ES/EN; el índice se deriva del dato. Decisión estética del dueño, con la advertencia de que el dato va también al PDF, a `/cv` y al chat (decisión 3)                                       |
+| 8   | «Lo que construyo» → «Vitrina» en sección, menú y submenú                                       | Sección y submenú «Vitrina»; **el primer nivel pasa a «Portafolio»** para no tener dos enlaces iguales a sitios distintos (decisión 2 del dueño). `nav.vitrina` → `nav.portafolio`                                       |
+| 9   | Vitrina: cada recuadro aparece levemente uno a uno; el número crece y vuelve                    | `Stagger as="ul"` con `StaggerItem as="li"` y `fadeInSlow` (140 ms); `CifraQueLlama` sobre la cuenta (1 → 1,14 → 1, ease-out-back). La caja de frente ya no trae su `<li>`: lo pone quien la lista                       |
+| 10  | «piezas» → «productos» · «Entrar» → «Explora» · «Entrar a la vitrina» → «Explora el portafolio» | Las 14 cadenas visibles de la vitrina, ES/EN — la caja es la misma en la HOME y en el portal. «Pieza» se queda en código, contrato y `public/piezas/`: es el nombre del dominio                                          |
+| 11  | Estudios: aparición leve, más marcada y lenta; icono pequeño, sin color, líneas                 | `fadeInSlow` (1,2 s, blur 8 px) + `icono:` por dato (enum de seis, Lucide 16 px, trazo 1.5, `ink-2`)                                                                                                                     |
+| 12  | Certificaciones: mismo efecto, «con los logos»                                                  | Igual; iconos monolínea por dato. Los logos de Microsoft/IBM son marca ajena: si llegan las insignias de Credly, van como imagen junto al `verificacion:` pendiente                                                      |
+| 13  | Skills: más impactante, elegante                                                                | Tres capas: tarjeta `liftIn` (sube 48 px, 8° de perspectiva, escala y desenfoque, 1 s, 120 ms de escalón) → el trazo del icono arranca a 0,35 s → chips en cascada de 45 ms tras 0,4 s                                   |
+| 14  | Contacto: no solo reclutadores                                                                  | «¿Un proyecto, una asesoría, una charla o un rol? Escríbeme y cuéntame qué tienes en mente.»                                                                                                                             |
+| 15  | «Solicitar acceso» es de las apps, no de aquí                                                   | Título «Escríbeme»; la app pasa a **opcional** («No, es un mensaje general» es opción válida); asunto del correo según venga o no con app; `solicitudSchema.app` con default; 2 errores inline en vez de 3               |
+| 16  | Créditos: mi producto, no el pipeline                                                           | «Diseñada y construida por Henry Rincón.»                                                                                                                                                                                |
+
+**Y lo que el recorrido destapó sin pedirlo:** AI-102 seguía vivo en la descripción SEO de los
+dos idiomas (`messages/*.json`) tres días después de su retiro, porque el barrido de credenciales
+miraba `data/` y no `messages/`. Corregida la descripción y ampliado el barrido.
+
+## Las tres decisiones del dueño
+
+1. **AI-103 «en curso»** — «me gusta la sinceridad; aprobado».
+2. **Sección y submenú «Vitrina», primer nivel «Portafolio».**
+3. **Vesting «2024» solo como aproximación estética del índice**; el case study conserva
+   «2023–2025» y el corpus «agosto de 2023 a enero de 2025». Se le advirtió que `periodo` es el
+   mismo dato del PDF, de `/cv` y del chat; lo aceptó así.
+
+## Regla 14 — los rojos, en el mismo commit que sus gates
+
+| Gate                                                             | Mutación / estado                                                                    | Rojo                                                                                                             |
+| ---------------------------------------------------------------- | ------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
+| El barrido de credenciales mira también `messages/`              | **Nació en rojo solo**, sobre el repo tal como estaba                                | `AI-102 en messages/es.json.meta.description` (el bucle se detiene en ES; EN tenía lo mismo)                     |
+| Una credencial «en curso» jamás sale a secas                     | `(AI-103, en curso)` → `(AI-103)` en `identidad.resumen`, con copia aparte en `/tmp` | `AI-103 en cv.es.identidad.resumen: «…Líder de datos e ingeniero de IA (AI-103) · Analytics Engineer (DP-600)…»` |
+| La raíz `/` abre en `/es` con `Accept-Language: en` y con cookie | El e2e nuevo, corrido **contra el build de `main`** en `:3000` (detección encendida) | `Expected: "/es" · Received: "/en"` en los dos casos (Accept-Language y cookie); 2 de 4 fallan                   |
+| Una certificación obtenida sin fecha no valida                   | Unitaria en `schemas.test.ts`                                                        | `cvSchema` lanza nombrando `fecha`; y un `icono: "emoji"` fuera del enum también                                 |
+
+**Lección aplicada del S8:** la copia de seguridad de una mutación sobre trabajo sin commitear va
+**aparte** (`cp` al scratchpad), nunca `git checkout --`, que no distingue la mutación del trabajo.
+
+## Lo que cazó la verificación antes del PR
+
+- **El test del idioma no puede vivir en vitest:** `next-intl` resuelve `next/server` desde su
+  propia carpeta del store de pnpm y no lo encuentra. Va como e2e con `request` y
+  `maxRedirects: 0`, que además mide la respuesta real del middleware.
+- **`vitrina.spec.ts:704`** pulsaba «Pieza siguiente»: con el copy nuevo es «Producto siguiente».
+  Los dos únicos fallos del e2e completo; corregido.
+- Dos avisos de lint por variables de descarte (`_app`) en tests: el `sinApp` se construye con
+  `app: undefined` y Zod aplica el default.
+
+## Verificación
+
+- `pnpm test` **772/772** (31 archivos; 4 unitarias nuevas) · `pnpm typecheck` · `pnpm lint` limpios ·
+  `pnpm build` 114 páginas, índice del chat en **28 fragmentos** (el «a fondo» no se tocó).
+- e2e completo contra el build de la rama en `:3001` con el entorno de la CI: **329 pasan, 11
+  saltados** (los inventariados desde el S7), tras corregir la etiqueta de arriba.
+- Humo sobre el HTML servido: la raíz → `/es` en los tres casos; 16 cadenas nuevas presentes en
+  ES y 9 en EN; **cero** restos de «Lo que construyo», «Explora las apps», «Entrar a la vitrina»,
+  «Solicitar acceso», «Data & AI Engineer», «Construida en público», «AI-102» ni « piezas».
+- Barrido de cero enlaces vacío tras el último `git add`.
+
+## Desviaciones y deuda
+
+- **El `a fondo` sigue en borrador** y nada de esta revisión lo toca: el corpus dice «agosto de
+  2023 a enero de 2025» para Vesting y el hito dice «2024». Es la aproximación que el dueño
+  aceptó; queda para su lectura de `o8` (cifras y fechas).
+- **`a4` ⭐ se enriqueció, no se creó una ⭐ nueva:** las cuatro animaciones pedidas son juicio
+  visual y ya tenían su prueba. El acumulado del ciclo H2 sigue en 31.
+- **Las insignias de Credly** (los «logos» que el dueño pidió en certificaciones) esperan al
+  `verificacion:` que sigue pendiente de él desde el S2.

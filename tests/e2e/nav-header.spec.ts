@@ -6,8 +6,10 @@ import { expect, test } from "@playwright/test";
  *  - **Hamburguesa** (<md, deuda S1 pagada en S4): el menú completo.
  *  - **Hoja de vida** (≥md, 2026-09-05): agrupa las secciones del CV, que
  *    antes competían en el primer nivel con la vitrina y el contacto. Seis
- *    desde 2026-09-10: «Lo que construyo» (la vitrina asomada en la HOME)
- *    entró con el nombre que lleva en la página.
+ *    desde 2026-09-10: la vitrina asomada en la HOME entró con el nombre que
+ *    lleva en la página — «Vitrina» desde la revisión post-S8 (2026-09-12), y
+ *    por eso el portal, en el primer nivel, se llama «Portafolio»: dos enlaces
+ *    iguales a sitios distintos en un mismo menú son una trampa.
  *
  * Ambos comparten contrato: `aria-expanded` + `aria-controls`, Escape cierra y
  * devuelve el foco al botón que abrió, y elegir una opción cierra.
@@ -38,8 +40,12 @@ test.describe("Nav móvil (disclosure del header)", () => {
     await expect(panel.getByRole("link", { name: "Contacto" })).toBeVisible();
     // La vitrina asomada en la HOME está en el grupo, con su nombre de sección.
     await expect(
-      panel.getByRole("link", { name: "Lo que construyo" }),
+      panel.getByRole("link", { name: "Vitrina", exact: true }),
     ).toHaveAttribute("href", "#vitrina");
+    // Y el portal, en el primer nivel, es «Portafolio» — la RUTA, no el ancla.
+    await expect(
+      panel.getByRole("link", { name: "Portafolio", exact: true }),
+    ).toHaveAttribute("href", "/es/vitrina");
     // «Roadmap» ya no es destino de la HOME (vive en /vitrina/apps).
     await expect(panel.getByRole("link", { name: "Roadmap" })).toHaveCount(0);
 
@@ -74,7 +80,7 @@ test.describe("Nav móvil (disclosure del header)", () => {
 
 /** Los cuatro destinos del primer nivel, en orden. */
 // TRES desde la revisión post-S7: «Roadmap» se fue con las apps a la vitrina.
-const PRIMER_NIVEL = ["Hoja de vida", "Vitrina", "Contacto"];
+const PRIMER_NIVEL = ["Hoja de vida", "Portafolio", "Contacto"];
 
 test.describe("Desplegable «Hoja de vida» (escritorio)", () => {
   test.use({ viewport: { width: 1280, height: 900 } });
@@ -99,7 +105,9 @@ test.describe("Desplegable «Hoja de vida» (escritorio)", () => {
     await expect(nav.getByRole("link", { name: "Roadmap" })).toHaveCount(0);
   });
 
-  test("abre, lleva a una sección, y se opera por teclado", async ({ page }) => {
+  test("abre, lleva a una sección, y se opera por teclado", async ({
+    page,
+  }) => {
     await page.goto("/es");
     await page.locator("form[data-hydrated=true]").waitFor();
 
@@ -113,16 +121,16 @@ test.describe("Desplegable «Hoja de vida» (escritorio)", () => {
     const secciones = [
       "Trayectoria",
       "Logros",
-      "Lo que construyo",
+      "Vitrina",
       "Estudios",
       "Certificaciones",
       "Skills",
     ];
     await expect(panel.getByRole("link")).toHaveText(secciones);
-    // «Lo que construyo» es la SECCIÓN de la HOME (#vitrina), no el portal:
-    // el portal sigue en el primer nivel, como «Vitrina».
+    // «Vitrina» es la SECCIÓN de la HOME (#vitrina), no el portal: el portal
+    // sigue en el primer nivel, como «Portafolio».
     await expect(
-      panel.getByRole("link", { name: "Lo que construyo" }),
+      panel.getByRole("link", { name: "Vitrina", exact: true }),
     ).toHaveAttribute("href", "#vitrina");
 
     // Escape cierra y devuelve el foco al botón que abrió.
@@ -145,7 +153,10 @@ test.describe("Desplegable «Hoja de vida» (escritorio)", () => {
     await expect(page.locator("#nav-hoja-de-vida")).toBeVisible();
     // Un panel flotante que solo cierra con Escape deja una capa encima de lo
     // que el visitante quiso mirar.
-    await page.locator("h1").first().click({ position: { x: 2, y: 2 } });
+    await page
+      .locator("h1")
+      .first()
+      .click({ position: { x: 2, y: 2 } });
     await expect(page.locator("#nav-hoja-de-vida")).toHaveCount(0);
   });
 });

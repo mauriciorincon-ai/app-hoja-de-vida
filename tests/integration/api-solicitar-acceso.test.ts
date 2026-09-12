@@ -53,6 +53,15 @@ describe("POST /api/solicitar-acceso", () => {
     expect(payload.text).toContain("Ana Prueba");
   });
 
+  it("accepts a message WITHOUT an app (general contact, post-S8) and says so in the subject", async () => {
+    const sinApp = { ...solicitudValida, app: undefined };
+    const res = await POST(makeRequest(sinApp, "1.0.0.9"));
+    expect(res.status).toBe(200);
+    const payload = sendMock.mock.calls[0][0];
+    expect(payload.subject).toBe("[CV Viva] Mensaje desde la hoja de vida");
+    expect(payload.text).toContain("(ninguna: mensaje general)");
+  });
+
   it("returns 200 but sends NOTHING when the honeypot is filled (negative)", async () => {
     const res = await POST(
       makeRequest(

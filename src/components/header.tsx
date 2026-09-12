@@ -28,8 +28,14 @@ import { trackEvent } from "@/lib/analytics";
  *
  * «Lo que construyo» (revisión post-S7, 2.ª, 2026-09-10): la vitrina asomada
  * en la HOME es una sección más de la hoja de vida, así que entra al
- * desplegable con el nombre que lleva en la página. «Vitrina» en el primer
- * nivel sigue siendo la RUTA del portal: una es la sección, la otra la casa.
+ * desplegable con el nombre que lleva en la página.
+ *
+ * Y «Vitrina» / «Portafolio» (revisión post-S8, 2026-09-12): el dueño quiso
+ * que la sección se llame «Vitrina», como siempre la llamó — y dos enlaces
+ * «Vitrina» en el mismo menú a sitios distintos son una trampa (para el lector
+ * de pantalla y para cualquiera). Así que el primer nivel, que es la RUTA del
+ * portal, pasa a «Portafolio»: el nombre que sus propios CTAs ya le daban
+ * («Explora el portafolio»). Una es la sección, la otra la casa.
  */
 const HOJA_DE_VIDA = [
   "trayectoria",
@@ -124,8 +130,8 @@ export function Header({
   }
 
   const href = (s: string) => (enHome ? `#${s}` : `/${locale}#${s}`);
-  // La sección de la vitrina en la HOME se llama como en la página («Lo que
-  // construyo»), no «Vitrina»: ese rótulo es el del portal, en el primer nivel.
+  // La sección de la vitrina en la HOME se llama como en la página («Vitrina»);
+  // el portal, en el primer nivel, es «Portafolio» (post-S8).
   const etiqueta = (s: (typeof HOJA_DE_VIDA)[number]) =>
     s === "vitrina" ? tHome("titulo") : t(s);
 
@@ -193,10 +199,10 @@ export function Header({
             )}
           </div>
 
-          {/* La vitrina es RUTA propia, no ancla de la HOME — y es la única
+          {/* El portafolio es RUTA propia, no ancla de la HOME — y es la única
               puerta a «lo construido» desde que «Apps» dejó de existir. */}
           <a href={`/${locale}/vitrina`} className={ENLACE}>
-            {t("vitrina")}
+            {t("portafolio")}
           </a>
           {DIRECTAS.map((s) => (
             <a key={s} href={href(s)} className={ENLACE}>
@@ -270,7 +276,10 @@ export function Header({
               >
                 {t("hojaDeVida")}
               </p>
-              <ul aria-labelledby="grupo-hoja-de-vida" className="flex flex-col">
+              <ul
+                aria-labelledby="grupo-hoja-de-vida"
+                className="flex flex-col"
+              >
                 {HOJA_DE_VIDA.map((s) => (
                   <li key={s}>
                     <a
@@ -290,7 +299,7 @@ export function Header({
                 onClick={() => setMenuAbierto(false)}
                 className="flex min-h-11 items-center text-sm text-ink-1 transition-colors duration-[120ms] hover:text-ink-0"
               >
-                {t("vitrina")}
+                {t("portafolio")}
               </a>
             </li>
             {DIRECTAS.map((s) => (

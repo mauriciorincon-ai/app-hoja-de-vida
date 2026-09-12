@@ -28,15 +28,15 @@ en componentes** — si un valor no está aquí, primero se agrega aquí (vía A
 
 ### Paleta — paper & ink + pasteles desaturados
 
-| Token     | Hex       | Rol                                |
-| --------- | --------- | ---------------------------------- |
-| `paper-0` | `#FBFAF7` | Fondo de página (off-white cálido) |
-| `paper-1` | `#F5F3ED` | Superficie elevada                 |
-| `paper-2` | `#ECE9E0` | Inset / borde de card suave        |
-| `paper-3` | `#DDD8CB` | Divisor fuerte, bordes default     |
-| `ink-0`   | `#121110` | Display / headings                 |
-| `ink-1`   | `#2A2927` | Texto primario                     |
-| `ink-2`   | `#5E5C55` | Texto secundario                   |
+| Token     | Hex       | Rol                                                    |
+| --------- | --------- | ------------------------------------------------------ |
+| `paper-0` | `#FBFAF7` | Fondo de página (off-white cálido)                     |
+| `paper-1` | `#F5F3ED` | Superficie elevada                                     |
+| `paper-2` | `#ECE9E0` | Inset / borde de card suave                            |
+| `paper-3` | `#DDD8CB` | Divisor fuerte, bordes default                         |
+| `ink-0`   | `#121110` | Display / headings                                     |
+| `ink-1`   | `#2A2927` | Texto primario                                         |
+| `ink-2`   | `#5E5C55` | Texto secundario                                       |
 | `ink-3`   | `#9C9A90` | **Decorativo: bordes, rellenos, trazos — JAMÁS texto** |
 
 #### Tokens de tinta VETADOS como color de TEXTO
@@ -109,14 +109,20 @@ Easings (variables CSS): `--ease-out-expo (.16,1,.3,1)` · `--ease-out-cubic (.2
 
 Primitivas del motion system (`src/components/motion/`):
 
-| Primitiva       | Spec exacta                                                                                                                    |
-| --------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| `fadeInUp`      | 0.7s, ease-out-cubic, translateY(40px)→0, stagger 80ms                                                                         |
-| `blurIn`        | 0.9s, ease-out-expo, blur(20px)+scale(1.05)→0                                                                                  |
-| `maskReveal`    | 0.8s, ease-in-out-cubic, translateY(100%)→0 dentro de overflow-hidden                                                          |
-| `scaleInBlur`   | scale(0.85)+blur(15px)→1 (cards)                                                                                               |
-| `Counter`       | ease-out-cubic manual, ~1800ms, tabular-nums                                                                                   |
-| `TimelineTrack` | rail SVG stroke-dashoffset 1.4s ease-out-expo; nodos scale(0)→1 ease-out-back sincronizados `800ms + x% × 1400ms`; cards ±32px |
+| Primitiva       | Spec exacta                                                                                                                                                      |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `fadeInUp`      | 0.7s, ease-out-cubic, translateY(40px)→0, stagger 80ms                                                                                                           |
+| `blurIn`        | 0.9s, ease-out-expo, blur(20px)+scale(1.05)→0                                                                                                                    |
+| `maskReveal`    | 0.8s, ease-in-out-cubic, translateY(100%)→0 dentro de overflow-hidden                                                                                            |
+| `scaleInBlur`   | scale(0.85)+blur(15px)→1 (cards)                                                                                                                                 |
+| `Counter`       | ease-out-cubic manual, ~1800ms, tabular-nums                                                                                                                     |
+| `TimelineTrack` | rail SVG stroke-dashoffset 1.4s ease-out-expo; nodos scale(0)→1 ease-out-back sincronizados `800ms + x% × 1400ms`; cards ±32px                                   |
+| `fadeInSlow`    | post-S8 — «leve, más marcada y lenta»: 1.2s, ease-out-expo, translateY(28px)+blur(8px)→0; escalón 140ms (Estudios, Certificaciones, cajas de la vitrina asomada) |
+| `liftIn`        | post-S8 — la tarjeta aterriza: 1.0s, ease-out-expo, translateY(48px)+rotateX(8°, perspectiva 900)+scale(.96)+blur(12px)→0; escalón 120ms (Skills)                |
+| `CifraQueLlama` | post-S8 — una cifra crece a 1.14× y vuelve, 0.9s ease-out-back con 0.55s de retraso, al asomar (`amount: all`); solo transform (cuenta de productos)             |
+
+`Stagger` acepta `stagger` (segundos entre hermanos; default 80ms) y `as` (`div` · `ul` · `li`) desde post-S8:
+las cajas de la vitrina se escalonan dentro de un `<ul>` real, y un `div` entre `ul` y `li` es HTML inválido.
 
 **Reglas duras:** solo `transform`/`opacity` en animaciones de scroll · `prefers-reduced-motion`
 salta al estado final sin movimiento, sin excepciones (hook global) · **vetado:** three.js/WebGL,
@@ -161,22 +167,38 @@ animaciones infinitas (sweep/glitch/marquee), scroll-snap de deck, CDNs en `<hea
   1.35rem. Los ítems son chips `paper-1` con borde `paper-3` que entran con `scaleInBlur`
   escalonado. El trazo del icono se dibuja al llegar la tarjeta (`pathLength` 0→1, en cascada de
   130 ms por figura) heredando las variantes del `Stagger`; el estado por defecto es el icono
-  dibujado. **Prohibido:** barras o porcentajes de dominio.
+  dibujado. **Prohibido:** barras o porcentajes de dominio. **Coreografía post-S8, tres capas:**
+  la tarjeta **aterriza** (`liftIn`, escalón 120 ms) → el trazo empieza cuando ya aterrizó (0,35 s)
+  → los chips caen en cascada rápida (`scaleInBlur`, 45 ms, tras 0,4 s). Solo
+  transform/opacity/filter; con reducción de movimiento, todo quieto.
 - **Tarjeta de estudio**: como la de certificación (`r-md`, borde `paper-3`, `sh-1`), título en
   Fraunces `xl`, institución en mono, periodo en mono `ink-2` — y **sin fecha, «Sin fecha
-  declarada» en cursiva `ink-2`**, nunca `ink-3` (2.7:1; axe lo cazó otra vez).
+  declarada» en cursiva `ink-2`**, nunca `ink-3` (2.7:1; axe lo cazó otra vez). **Post-S8:** entra
+  con `fadeInSlow` (escalón 140 ms) y lleva el **icono de la institución** delante de su nombre —
+  Lucide 16 px, trazo 1.5, `ink-2`, sin color, **por dato** (`icono:` en el YAML, enum
+  `universidad · idiomas · curso · insignia · datos · codigo`). Nunca un logo de marca ajena.
+- **Tarjeta de certificación**: mismo `fadeInSlow`, mismo icono por dato delante del nombre. Y el
+  **tercer estado**: una credencial `en curso` lleva un chip `citron`/`citron-ink` mono 11 px
+  «En curso» **en el sitio de la fecha** — el mismo chip de «en preparación» de la vitrina — y no
+  puede nombrarse en ningún titular sin esas palabras al lado (gate de contenido).
 - **Vitrina asomada**: las mismas cajas de frente del portal, sin variante, con un botón sage
-  «Entrar a la vitrina». La HOME enseña la vitrina, no la copia.
+  «Explora el portafolio» (post-S8; antes «Entrar a la vitrina»). La HOME enseña la vitrina, no la
+  copia. **Post-S8:** la sección se titula «Vitrina», las cuatro cajas aparecen levemente una a
+  una (`fadeInSlow` dentro de un `<ul>` escalonado, 140 ms), la cifra de **productos** —ya no
+  «piezas», en todo el copy visible— crece y vuelve al asomar (`CifraQueLlama`), y el cierre de
+  cada caja dice «Explora».
 - **Roadmap embebido**: dentro de `/vitrina/apps` va como bloque con `border-t paper-2` y título
   `2xl` (no el `clamp` de sección de HOME). Misma isla de votación.
 
 ### Menú desplegable del encabezado · post-S5
 
 - **Cuándo se usa:** cuando varias secciones del nav **son la misma cosa**. Hoy, una sola vez: las
-  seis secciones del CV bajo «Hoja de vida» (Trayectoria · Logros · Lo que construyo · Estudios ·
+  seis secciones del CV bajo «Hoja de vida» (Trayectoria · Logros · Vitrina · Estudios ·
   Certificaciones · Skills — el orden de la página; la vitrina asomada entra con su nombre de
-  sección, y el portal sigue como «Vitrina» en el primer nivel). El primer nivel queda en tres:
-  Hoja de vida · Vitrina · Contacto. No es un patrón para repartir: un header con dos
+  sección). El primer nivel queda en tres: Hoja de vida · **Portafolio** · Contacto. **Post-S8:**
+  la sección recuperó el nombre «Vitrina» y por eso el portal pasó a «Portafolio» — dos enlaces
+  con el mismo nombre a destinos distintos en un mismo menú son una trampa para el lector de
+  pantalla y para cualquiera. No es un patrón para repartir: un header con dos
   desplegables ya es un menú de aplicación, y esto es una pieza editorial.
 - **Forma:** panel `paper-0`, borde `paper-2`, `r-md`, `sh-2`, anclado bajo su botón. Cada opción
   con área táctil ≥44px y `hover` en `paper-1`.
@@ -257,7 +279,7 @@ animaciones infinitas (sweep/glitch/marquee), scroll-snap de deck, CDNs en `<hea
 - **Hallazgos** («Lo que dicen los datos», solo si la ficha trae `conclusiones` · S7): de 3 a 6
   tarjetas paper-1 en rejilla; cada una abre con **la cifra en Fraunces** y su unidad en mono
   `ink-2`, luego el título y el texto, y cierra con **su chip de procedencia**. La regla del chip
-  no se relaja aquí: *un hallazgo con número y sin procedencia es una opinión disfrazada.*
+  no se relaja aquí: _un hallazgo con número y sin procedencia es una opinión disfrazada._
 - **Galería** («Cómo se ve», solo si la ficha trae `galeria` · S7): de 1 a 12 capturas de la pieza
   corriendo, cada una en `<figure>` con marco paper-1 y `figcaption` mono «Pantalla N de T».
   `loading="lazy"`, `sizes` responsivo, y se sirven de `/piezas/<frente>/…` —espacio propio, que

@@ -64,7 +64,8 @@ describe("content loader (data/*.yaml reales)", () => {
     } else if (Array.isArray(valor)) {
       valor.forEach((v, i) => codigosEn(v, `${ruta}[${i}]`, out));
     } else if (valor && typeof valor === "object") {
-      for (const [k, v] of Object.entries(valor)) codigosEn(v, `${ruta}.${k}`, out);
+      for (const [k, v] of Object.entries(valor))
+        codigosEn(v, `${ruta}.${k}`, out);
     }
   }
 
@@ -101,6 +102,14 @@ describe("content loader (data/*.yaml reales)", () => {
         );
       }
       codigosEn(apps, "apps", halladas);
+      // Revisión post-S8 (2026-09-12): la descripción SEO de `messages/` es una
+      // superficie publicada más — y ahí AI-102 sobrevivió al retiro del
+      // 2026-09-10 porque este barrido no la miraba. Google sí la indexa.
+      codigosEn(
+        JSON.parse(readFileSync(`messages/${locale}.json`, "utf8")),
+        `messages/${locale}.json`,
+        halladas,
+      );
       // EL SEGUNDO ESTADO HABILITA LA PROSA, NO EL CV (fase 2 de la auditoría).
       // Al nacer, `credenciales-nombradas.yaml` autorizaba su código EN TODAS
       // PARTES, y con eso `cv.es.yaml` habría podido poner «Certificado AI-103»
@@ -112,11 +121,75 @@ describe("content loader (data/*.yaml reales)", () => {
       // está en `certificaciones` o no se nombra.
       const huerfanas = halladas
         .filter((h) => !listadas.has(h.codigo))
-        .filter((h) => !(h.ruta.startsWith("a-fondo/") && declarada.has(h.codigo)))
+        .filter(
+          (h) => !(h.ruta.startsWith("a-fondo/") && declarada.has(h.codigo)),
+        )
         .map((h) => `${h.codigo} en ${h.ruta}`);
       expect(
         huerfanas,
-        "una credencial nombrada es una credencial listada: en el CV y en apps.yaml, el código está en `certificaciones` de cv.*.yaml o no se nombra; en la prosa de data/a-fondo/ vale además el segundo estado declarado en data/credenciales-nombradas.yaml, con su razón",
+        "una credencial nombrada es una credencial listada: en el CV, en messages/ y en apps.yaml, el código está en `certificaciones` de cv.*.yaml o no se nombra; en la prosa de data/a-fondo/ vale además el segundo estado declarado en data/credenciales-nombradas.yaml, con su razón",
+      ).toEqual([]);
+    }
+  });
+
+  // Revisión post-S8 (2026-09-12): el tercer estado. El dueño quiso el AI-103
+  // en el titular («estamos en proceso»), y el gate de arriba lo hacía
+  // imposible a propósito: un código o está en `certificaciones` o no se
+  // nombra. La salida honesta es listarlo CON `estado: en curso` — y entonces
+  // hace falta vigilar lo contrario: que nunca aparezca como si ya se tuviera.
+  // Cada mención de un código en curso, en las superficies publicadas (CV,
+  // messages, apps), lleva al lado las palabras que dicen que no está.
+  const MARCA_EN_CURSO =
+    /en curso|en ruta|en preparaci[oó]n|in progress|on the way|preparing/i;
+  const VENTANA = 48;
+  function mencionesSinMarca(
+    valor: unknown,
+    ruta: string,
+    codigos: Set<string>,
+    out: string[],
+  ) {
+    if (typeof valor === "string") {
+      for (const m of valor.matchAll(CODIGO_CREDENCIAL)) {
+        if (!codigos.has(m[0])) continue;
+        const i = m.index ?? 0;
+        const ventana = valor.slice(
+          Math.max(0, i - VENTANA),
+          i + m[0].length + VENTANA,
+        );
+        if (!MARCA_EN_CURSO.test(ventana))
+          out.push(`${m[0]} en ${ruta}: «…${ventana.trim()}…»`);
+      }
+    } else if (Array.isArray(valor)) {
+      valor.forEach((v, i) =>
+        mencionesSinMarca(v, `${ruta}[${i}]`, codigos, out),
+      );
+    } else if (valor && typeof valor === "object") {
+      for (const [k, v] of Object.entries(valor))
+        mencionesSinMarca(v, `${ruta}.${k}`, codigos, out);
+    }
+  }
+
+  it("una credencial «en curso» jamás sale a secas: cada mención lleva «en curso» al lado (CV, messages, apps)", () => {
+    const apps: unknown = parse(readFileSync("data/apps.yaml", "utf8"));
+    for (const locale of ["es", "en"] as const) {
+      const { certificaciones, ...resto } = getCv(locale);
+      const enCurso = new Set(
+        certificaciones
+          .filter((c) => c.estado === "en curso")
+          .flatMap((c) => c.nombre.match(CODIGO_CREDENCIAL) ?? []),
+      );
+      const aSecas: string[] = [];
+      mencionesSinMarca(resto, `cv.${locale}`, enCurso, aSecas);
+      mencionesSinMarca(
+        JSON.parse(readFileSync(`messages/${locale}.json`, "utf8")),
+        `messages/${locale}.json`,
+        enCurso,
+        aSecas,
+      );
+      mencionesSinMarca(apps, "apps", enCurso, aSecas);
+      expect(
+        aSecas,
+        "un código listado como «en curso» se nombra siempre con esa marca a menos de 48 caracteres: sin ella, el titular afirma una credencial que no se tiene",
       ).toEqual([]);
     }
   });

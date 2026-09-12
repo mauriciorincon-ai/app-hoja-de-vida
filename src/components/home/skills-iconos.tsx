@@ -21,7 +21,10 @@ const DIBUJOS: React.ReactElement[][] = [
   [
     <circle key="a" cx="12" cy="12" r="3" />,
     <path key="b" d="M12 3v3M12 18v3M3 12h3M18 12h3" />,
-    <path key="c" d="M5.6 5.6l2.2 2.2M16.2 16.2l2.2 2.2M5.6 18.4l2.2-2.2M16.2 7.8l2.2-2.2" />,
+    <path
+      key="c"
+      d="M5.6 5.6l2.2 2.2M16.2 16.2l2.2 2.2M5.6 18.4l2.2-2.2M16.2 7.8l2.2-2.2"
+    />,
   ],
   // 1 · Plataforma de datos — las capas de un almacén.
   [
@@ -50,7 +53,12 @@ const trazo: Variants = {
   visible: (i: number) => ({
     pathLength: 1,
     opacity: 1,
-    transition: { duration: 0.75, delay: 0.1 + i * 0.13, ease: EASE_OUT_CUBIC },
+    // Post-S8: el trazo empieza cuando la tarjeta ya aterrizó (liftIn, 1 s).
+    transition: {
+      duration: 0.75,
+      delay: 0.35 + i * 0.13,
+      ease: EASE_OUT_CUBIC,
+    },
   }),
 };
 

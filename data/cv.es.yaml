@@ -9,22 +9,27 @@
 identidad:
   nombre: "Henry Rincón"
   nombreCompleto: "Henry Mauricio Rincón Caro"
-  eyebrow: "Ingeniero Industrial · Data & AI Engineer"
+  eyebrow: "Ingeniero Industrial · Analytics & AI Engineer"
   titular: "De la ingeniería industrial a los agentes de IA: datos, plataformas y decisiones."
+  # Revisión post-S8 (2026-09-12): AI-103 se nombra CON «en curso» (gate de
+  # contenido) y el cierre invita en vez de retar (decisión del dueño).
   resumen: >-
-    Líder de datos e ingeniero de IA (DP-600). Diseño plataformas
-    analíticas en Microsoft Fabric y llevo agentes de IA a producción — con la
-    evidencia pública para probarlo.
+    Líder de datos e ingeniero de IA (AI-103, en curso) · Analytics Engineer
+    (DP-600). Diseño plataformas analíticas en Microsoft Fabric y llevo
+    agentes de IA a producción — y esta hoja de vida es la muestra: recórrela
+    y pregúntale.
   # Frase del chat (pack §3) restituida en S3: el chat ya es real
+  # Revisión post-S8: sin cifras — los logros tienen su sección — y con lo que
+  # el dueño hace HOY (estrategia de IA e ISO/IEC 42001).
   perfil: >-
-    Ingeniero Industrial (Javeriana) con 8+ años convirtiendo datos operativos
-    en decisiones de negocio: BI adoptado por 50+ usuarios en banca, ETL que
-    recortó tiempos de análisis hasta 70%, y modelos predictivos en producción
-    con >90% de precisión. En 2023 di el salto natural: lideré la estrategia de
-    datos de una startup de agentes de IA, construyendo desde cero su
-    ecosistema en Microsoft Fabric y el proceso replicable para diseñar y
-    monitorear agentes. Certificado por Microsoft en ingeniería de analítica
-    (DP-600). ¿Quieres saber algo más de mí?
+    Ingeniero Industrial (Javeriana) con más de ocho años convirtiendo datos
+    operativos en decisiones de negocio, en banca, transporte, logística y
+    salud. Hoy lidero la adopción y el gobierno de la IA: la estrategia y la
+    implementación de ISO/IEC 42001. Antes diseñé desde cero la estrategia y la
+    plataforma de datos de una startup de agentes de IA —Microsoft Fabric y un
+    proceso replicable para diseñar y monitorear agentes— y construí BI y
+    analítica predictiva en banca. Certificado por Microsoft como Fabric
+    Analytics Engineer (DP-600), en ruta al AI-103. ¿Quieres saber algo más?
     Pregúntaselo al chat de esta hoja de vida.
   # La disponibilidad de reubicación es señal DELIBERADA para recruiters (pack §1)
   ubicacion: "Bogotá, Colombia · Abierto a reubicación internacional y trabajo remoto"
@@ -44,11 +49,15 @@ trayectoria:
       Analítica y gobierno de datos para decisiones administrativas y
       asistenciales en salud.
     bullets:
+      - "Lidero la estrategia de IA y la implementación de ISO/IEC 42001."
       - "Modelos de análisis y visualización para líderes administrativos y asistenciales."
       - "Gobierno y calidad de datos institucional."
       - "Tableros de BI por procesos y mejora continua."
     actual: true
-  - periodo: "2023 — 2025"
+  # «2024» es la decisión estética del dueño (revisión post-S8) para que el
+  # índice de la trayectoria no repita 2023 con Pichincha; el case study
+  # conserva 2023–2025. Este dato también va al PDF, a /cv y al chat.
+  - periodo: "2024"
     rol: "Líder de Estrategia de Datos"
     organizacion: "Vesting — startup de agentes de automatización"
     proyecto: "vesting"
@@ -136,14 +145,17 @@ estudios:
   - titulo: "Ingeniería Industrial, énfasis en Inteligencia Analítica de Datos"
     institucion: "Pontificia Universidad Javeriana · Bogotá"
     periodo: "2009 — 2016"
+    icono: universidad
     nota: "Optimización de procesos, análisis de datos y soporte a la toma de decisiones, integrando principios de ingeniería con analítica avanzada. Modelado y predicción de fenómenos industriales con SQL, Python y Power BI."
   - titulo: "Estudios de pregrado en Diseño Industrial"
     institucion: "Pontificia Universidad Javeriana · Bogotá"
     periodo: "2011 — 2016"
+    icono: universidad
     nota: "Diseño de productos y sistemas con enfoque tecnológico y de mercado, con foco en sostenibilidad ambiental e impacto cultural."
   - titulo: "Curso intensivo de inglés y certificación IELTS"
     institucion: "Cambridge International College · Melbourne, Australia"
     periodo: "2013 — 2014"
+    icono: idiomas
     nota: "Inglés B2: lectura, escucha y redacción técnica; discusiones profesionales e informes analíticos."
 
 logros:
@@ -181,7 +193,8 @@ proyectos:
       datos de clientes y sistemas, el monitoreo en tiempo real de los agentes
       y el proceso core replicable para diseñar e implementar agentes de IA.
       El puente exacto entre la ingeniería de analítica y la ingeniería de IA.
-    stack: ["Microsoft Fabric", "Gobernanza de datos", "Monitoreo en tiempo real"]
+    stack:
+      ["Microsoft Fabric", "Gobernanza de datos", "Monitoreo en tiempo real"]
     destacado: true
     casestudy:
       contexto: >-
@@ -309,14 +322,26 @@ certificaciones:
     fecha: "2024"
     nota: "La que respalda mi trayectoria: ingeniería de datos y analítica end-to-end."
     verificacion: ""
+    icono: insignia
+  # Revisión post-S8 (2026-09-12): el AI-103 entra como credencial EN CURSO
+  # (decisión del dueño: «me gusta la sinceridad»). Sin fecha, con chip; el
+  # logro «5 certificaciones» sigue contando solo las obtenidas.
+  - nombre: "Microsoft Certified: Azure AI Engineer Associate (AI-103)"
+    estado: "en curso"
+    nota: "En preparación: la ruta de ingeniería de IA en Azure."
+    icono: insignia
   - nombre: "IBM: Ciencia de Datos Aplicada con R"
     fecha: "2024"
+    icono: datos
   - nombre: "IBM: Certificado Profesional en Ciencia de Datos"
     fecha: "2022"
+    icono: datos
   - nombre: "IBM: Python para Ciencia de Datos"
     fecha: "2022"
+    icono: codigo
   - nombre: "IBM: SQL para Ciencia de Datos"
     fecha: "2022"
+    icono: codigo
 
 skills:
   - grupo: "IA & ML"

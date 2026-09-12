@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Living CV — Henry Rincón",
-    "description": "Henry Rincón's interactive résumé — Data & AI Engineer (DP-600 · AI-102): career, achievements and the AI-APPs pipeline apps as an animated editorial experience."
+    "description": "Henry Rincón's interactive résumé — Industrial Engineer · Analytics & AI Engineer (DP-600): career, achievements, showcase and a chat that answers with his evidence, as an animated editorial experience."
   },
   "nav": {
     "trayectoria": "Career",
@@ -17,12 +17,12 @@
     "abrirMenu": "Open the menu",
     "cerrarMenu": "Close the menu",
     "menu": "Menu",
-    "vitrina": "Showcase",
+    "portafolio": "Portfolio",
     "hojaDeVida": "Résumé",
     "estudios": "Education"
   },
   "hero": {
-    "ctaApps": "Explore the apps",
+    "ctaApps": "Explore my portfolio",
     "ctaContacto": "Let's talk"
   },
   "perfil": {
@@ -53,7 +53,8 @@
     "volver": "Back to home"
   },
   "certificaciones": {
-    "verificar": "Verify"
+    "verificar": "Verify",
+    "enCurso": "In progress"
   },
   "apps": {
     "estados": {
@@ -87,29 +88,29 @@
   "contacto": {
     "eyebrow": "Contact",
     "titulo": "Shall we talk?",
-    "subtitulo": "Want to know if I'd fit on your team? Write to me — an app, a role or a technical conversation."
+    "subtitulo": "A project, an advisory, a talk or a role? Write to me and tell me what you have in mind."
   },
   "footer": {
-    "creditos": "Built in the open by the AI-APPs pipeline."
+    "creditos": "Designed and built by Henry Rincón."
   },
   "form": {
-    "titulo": "Request access",
+    "titulo": "Write to me",
     "nombre": "Your name",
     "email": "Your email",
-    "app": "Which app do you want to try?",
-    "mensaje": "Tell me what you'd use it for (optional)",
-    "enviar": "I want to try it",
+    "app": "Here for an app? (optional)",
+    "appNinguna": "No, this is a general message",
+    "mensaje": "Tell me what you have in mind (optional)",
+    "enviar": "Send",
     "enviando": "Sending…",
-    "errorEnvio": "I couldn't send your request. Please try again in a moment.",
+    "errorEnvio": "I couldn't send your message. Please try again in a moment.",
     "reintentar": "Retry",
     "errores": {
       "nombreRequerido": "Please write your name.",
-      "emailInvalido": "That email doesn't look valid.",
-      "appRequerida": "Pick an app."
+      "emailInvalido": "That email doesn't look valid."
     }
   },
   "confirmacion": {
-    "titulo": "I got your request",
+    "titulo": "I got your message",
     "cuerpo": "I'll reply within 1–3 business days to the email you left.",
     "volver": "Back to home"
   },
@@ -153,14 +154,14 @@
       "enPreparacion": "In preparation"
     },
     "frenteEstadoAyuda": {
-      "abierta": "Has published pieces",
-      "enPreparacion": "The front exists; its pieces aren't published yet"
+      "abierta": "Has published products",
+      "enPreparacion": "The front exists; its products aren't published yet"
     },
-    "cuentaPiezas": "{n, plural, one {# piece} other {# pieces}}",
-    "entrar": "Enter",
+    "cuentaPiezas": "{n, plural, one {# product} other {# products}}",
+    "entrar": "Explore",
     "verQueViene": "See what's coming",
     "enPreparacionTitulo": "This front is starting",
-    "enPreparacionLinea": "The first pieces get published here once they are built — each with what it does and with what evidence. No date promised: if you want to hear about it, the waiting list is below.",
+    "enPreparacionLinea": "The first products get published here once they are built — each with what it does and with what evidence. No date promised: if you want to hear about it, the waiting list is below.",
     "otrosFrentes": "The other fronts of the showcase",
     "notaIdioma": "Each app's own words are kept in Spanish, exactly as its team wrote them.",
     "estados": {
@@ -203,7 +204,7 @@
     "no": "no",
     "muestraPie": "A schematic of the app's ideas, drawn in this page's visual language. Not a screenshot.",
     "capturasPie": "A real screen of the running app, with made-up data — repainted in this page's palette.",
-    "firmaPie": "The signature scene of its own showcase piece, redrawn in this page's visual language.",
+    "firmaPie": "The signature scene of its own showcase product, redrawn in this page's visual language.",
     "indiceNota": "Each app has its own page. This is just the window.",
     "verFicha": "Open the technical sheet",
     "cuentaFuncionalidades": "{n} features",
@@ -214,12 +215,12 @@
     "vecinasEtiqueta": "Other apps in the showcase",
     "appAnterior": "Previous app",
     "appSiguiente": "Next app",
-    "escaparateCuenta": "{n, plural, one {# published piece} other {# published pieces}}",
-    "escaparateNota": "Each piece has its own page. Here they only show a corner.",
+    "escaparateCuenta": "{n, plural, one {# published product} other {# published products}}",
+    "escaparateNota": "Each product has its own page. Here they only show a corner.",
     "volverAlFrente": "Back to {frente}",
-    "vecinasDelFrente": "Other pieces in {frente}",
-    "piezaAnterior": "Previous piece",
-    "piezaSiguiente": "Next piece",
+    "vecinasDelFrente": "Other products in {frente}",
+    "piezaAnterior": "Previous product",
+    "piezaSiguiente": "Next product",
     "deEstaCasa": "From this house",
     "deEstaCasaLinea": "What holds up the page you are reading: they are pipeline apps too, and they can also be walked through.",
     "verLaApp": "See the app",
@@ -270,9 +271,9 @@
     "volverFichaTecnica": "Back to the technical sheet"
   },
   "vitrinaHome": {
-    "titulo": "What I build",
-    "linea": "Four fronts: apps, agents, research and dashboards. Each with its pieces, and every piece with its technical sheet.",
-    "ir": "Enter the showcase"
+    "titulo": "Showcase",
+    "linea": "Four fronts: apps, agents, research and dashboards. Each with its products, and every product with its technical sheet.",
+    "ir": "Explore the portfolio"
   },
   "estudios": {
     "sinPeriodo": "No date declared"

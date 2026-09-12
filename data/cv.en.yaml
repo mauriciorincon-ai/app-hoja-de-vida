@@ -8,21 +8,23 @@
 identidad:
   nombre: "Henry Rincón"
   nombreCompleto: "Henry Mauricio Rincón Caro"
-  eyebrow: "Industrial Engineer · Data & AI Engineer"
+  eyebrow: "Industrial Engineer · Analytics & AI Engineer"
   titular: "From industrial engineering to AI agents: data, platforms and decisions."
   resumen: >-
-    Data leader and AI engineer (DP-600). I design analytics
-    platforms on Microsoft Fabric and take AI agents to production — with the
-    public evidence to prove it.
+    Data leader and AI engineer (AI-103, in progress) · Analytics Engineer
+    (DP-600). I design analytics platforms on Microsoft Fabric and take AI
+    agents to production — and this résumé is the sample: walk through it and
+    ask.
   perfil: >-
-    Industrial Engineer (Javeriana) with 8+ years turning operational data
-    into business decisions: BI adopted by 50+ users in banking, ETL that cut
-    analysis times by up to 70%, and predictive models in production with >90%
-    accuracy. In 2023 I made the natural leap: I led the data strategy of an
-    AI-agent startup, building its Microsoft Fabric ecosystem from scratch
-    together with the replicable process to design and monitor agents.
-    Microsoft-certified in analytics engineering (DP-600). Want to know
-    anything else about me? Ask this résumé's chat.
+    Industrial Engineer (Javeriana) with more than eight years turning
+    operational data into business decisions, across banking, transport,
+    logistics and healthcare. Today I lead AI adoption and governance: the
+    strategy and the ISO/IEC 42001 implementation. Before that I designed from
+    scratch the data strategy and platform of an AI-agent startup —Microsoft
+    Fabric and a replicable process to design and monitor agents— and built BI
+    and predictive analytics in banking. Microsoft-certified as a Fabric
+    Analytics Engineer (DP-600), on the way to AI-103. Want to know anything
+    else? Ask this résumé's chat.
   ubicacion: "Bogotá, Colombia · Open to international relocation and remote work"
   email: "mauricio.hmrc@gmail.com"
   enlaces:
@@ -40,11 +42,12 @@ trayectoria:
       Analytics and data governance for administrative and clinical decisions
       in healthcare.
     bullets:
+      - "I lead the AI strategy and the ISO/IEC 42001 implementation."
       - "Analysis and visualization models for administrative and clinical leaders."
       - "Institutional data governance and quality."
       - "Process-based BI dashboards and continuous improvement."
     actual: true
-  - periodo: "2023 — 2025"
+  - periodo: "2024"
     rol: "Data Strategy Lead"
     organizacion: "Vesting — automation-agents startup"
     proyecto: "vesting"
@@ -131,14 +134,17 @@ estudios:
   - titulo: "Industrial Engineering, emphasis in Data Analytics Intelligence"
     institucion: "Pontificia Universidad Javeriana · Bogotá"
     periodo: "2009 — 2016"
+    icono: universidad
     nota: "Process optimization, data analysis and decision support, integrating engineering principles with advanced analytics. Modelling and prediction of industrial phenomena with SQL, Python and Power BI."
   - titulo: "Undergraduate studies in Industrial Design"
     institucion: "Pontificia Universidad Javeriana · Bogotá"
     periodo: "2011 — 2016"
+    icono: universidad
     nota: "Product and systems design with a technological, market-driven approach, focused on environmental sustainability and cultural impact."
   - titulo: "Intensive English course and IELTS certification"
     institucion: "Cambridge International College · Melbourne, Australia"
     periodo: "2013 — 2014"
+    icono: idiomas
     nota: "English B2: reading, listening and technical writing; professional discussions and analytical reports."
 
 logros:
@@ -304,14 +310,23 @@ certificaciones:
     fecha: "2024"
     nota: "The one backing my track record: end-to-end data and analytics engineering."
     verificacion: ""
+    icono: insignia
+  - nombre: "Microsoft Certified: Azure AI Engineer Associate (AI-103)"
+    estado: "en curso"
+    nota: "In preparation: the Azure AI engineering path."
+    icono: insignia
   - nombre: "IBM: Applied Data Science with R"
     fecha: "2024"
+    icono: datos
   - nombre: "IBM: Data Science Professional Certificate"
     fecha: "2022"
+    icono: datos
   - nombre: "IBM: Python for Data Science"
     fecha: "2022"
+    icono: codigo
   - nombre: "IBM: SQL for Data Science"
     fecha: "2022"
+    icono: codigo
 
 skills:
   - grupo: "AI & ML"

@@ -1,6 +1,21 @@
 import { z } from "zod";
 
 /**
+ * Iconos monolínea (Lucide, trazo 1.5, sin color) que un estudio o una
+ * certificación puede declarar en el YAML (revisión post-S8). Un nombre que no
+ * esté aquí rompe el build: el icono es dato, no adivinanza por palabra clave.
+ */
+export const ICONOS_FORMACION = [
+  "universidad",
+  "idiomas",
+  "curso",
+  "insignia",
+  "datos",
+  "codigo",
+] as const;
+export type IconoFormacion = (typeof ICONOS_FORMACION)[number];
+
+/**
  * Contratos del contenido versionado (data/*.yaml). El build FALLA si el
  * contenido no cumple estos schemas (fail-safe del patrón "contenido = datos
  * versionados"). Las claves están en español porque son la interfaz de
@@ -61,6 +76,8 @@ export const cvSchema = z.object({
         // Vacío hasta que el dueño ponga los años: no se inventa una fecha.
         periodo: z.string().default(""),
         nota: z.string().default(""),
+        // Revisión post-S8: icono monolínea de la institución, como dato.
+        icono: z.enum(ICONOS_FORMACION).default("universidad"),
       }),
     )
     .default([]),
@@ -105,14 +122,25 @@ export const cvSchema = z.object({
   // se valida desde ya para que el S2 solo tenga que renderizarlo.
   certificaciones: z
     .array(
-      z.object({
-        nombre: z.string().min(1),
-        fecha: z.string().min(1),
-        nota: z.string().default(""),
-        // Link Credly/Microsoft Learn — [AJUSTAR-LUEGO] del pack: vacío hasta
-        // que el dueño entregue los links de verificación
-        verificacion: z.string().default(""),
-      }),
+      z
+        .object({
+          nombre: z.string().min(1),
+          // Revisión post-S8 (2026-09-12): el tercer estado de una credencial.
+          // «en curso» se lista con chip y sin fecha; el gate de contenido
+          // exige que cada mención de su código lleve «en curso» al lado.
+          estado: z.enum(["obtenida", "en curso"]).default("obtenida"),
+          fecha: z.string().default(""),
+          nota: z.string().default(""),
+          // Link Credly/Microsoft Learn — [AJUSTAR-LUEGO] del pack: vacío hasta
+          // que el dueño entregue los links de verificación
+          verificacion: z.string().default(""),
+          icono: z.enum(ICONOS_FORMACION).default("insignia"),
+        })
+        .refine((c) => c.estado === "en curso" || c.fecha.trim().length > 0, {
+          message:
+            "una certificación obtenida lleva fecha; solo «en curso» puede ir sin ella",
+          path: ["fecha"],
+        }),
     )
     .default([]),
   skills: z
@@ -282,11 +310,16 @@ export const vitrinaSchema = z
 export type Vitrina = z.infer<typeof vitrinaSchema>;
 export type CategoriaVitrina = Vitrina["categorias"][number];
 
-/** Solicitud de acceso (formulario + endpoint). `website` es el honeypot. */
+/**
+ * Mensaje desde la hoja de vida (formulario + endpoint). `website` es el
+ * honeypot. `app` es opcional desde la revisión post-S8: el formulario dejó
+ * de ser «solicitar acceso» a una app y pasó a ser el contacto general —
+ * asesorías, charlas, roles—; elegir una app sigue metiendo en su lista de espera.
+ */
 export const solicitudSchema = z.object({
   nombre: z.string().trim().min(1).max(120),
   email: z.string().trim().email().max(254),
-  app: z.string().trim().min(1).max(60),
+  app: z.string().trim().max(60).default(""),
   mensaje: z.string().trim().max(1000).default(""),
   website: z.literal("").default(""),
 });

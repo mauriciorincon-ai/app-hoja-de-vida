@@ -1,16 +1,17 @@
 import { expect, test } from "@playwright/test";
 
-test.describe("Formulario solicitar acceso", () => {
+test.describe("Formulario de contacto (antes «solicitar acceso»)", () => {
   test("validación inline: campos vacíos muestran errores y no navegan", async ({
     page,
   }) => {
     await page.goto("/es");
     await page.locator("#contacto").scrollIntoViewIfNeeded();
     await page.locator("form[data-hydrated=true]").waitFor();
-    await page.getByRole("button", { name: "Quiero probarla" }).click();
+    await page.getByRole("button", { name: "Enviar" }).click();
 
-    // Scope al form: el route-announcer de Next también tiene role=alert
-    await expect(page.locator("form").getByRole("alert")).toHaveCount(3);
+    // Scope al form: el route-announcer de Next también tiene role=alert.
+    // Dos errores, no tres: la app es opcional desde la revisión post-S8.
+    await expect(page.locator("form").getByRole("alert")).toHaveCount(2);
     await expect(page).toHaveURL(/\/es$/);
   });
 

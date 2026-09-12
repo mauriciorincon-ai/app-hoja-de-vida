@@ -10,7 +10,7 @@ import { useRouter } from "@/i18n/navigation";
 import { trackEvent } from "@/lib/analytics";
 import type { AppCard } from "@/lib/schemas";
 
-type FieldErrors = Partial<Record<"nombre" | "email" | "app", string>>;
+type FieldErrors = Partial<Record<"nombre" | "email", string>>;
 type Status = "reposo" | "enviando" | "error";
 
 // Validación client-side a mano: zod NO entra al bundle del navegador
@@ -42,9 +42,6 @@ export function SolicitarAccesoForm({ apps }: { apps: AppCard[] }) {
     }
     if (!EMAIL_RE.test(payload.email) || payload.email.length > 254) {
       fieldErrors.email = t("errores.emailInvalido");
-    }
-    if (!payload.app) {
-      fieldErrors.app = t("errores.appRequerida");
     }
     if (Object.keys(fieldErrors).length > 0) {
       setErrors(fieldErrors);
@@ -122,29 +119,23 @@ export function SolicitarAccesoForm({ apps }: { apps: AppCard[] }) {
 
       <div className="flex flex-col gap-2">
         <Label htmlFor="solicitud-app">{t("app")}</Label>
+        {/* Opcional desde la revisión post-S8: el formulario es el contacto
+            general (asesorías, charlas, roles); elegir una app sigue metiendo
+            en su lista de espera. La primera opción es válida, no un hueco. */}
         <select
           id="solicitud-app"
           name="app"
           defaultValue=""
-          aria-invalid={!!errors.app}
-          aria-describedby={errors.app ? "error-app" : undefined}
           disabled={enviando}
           className="flex h-9 w-full min-w-0 rounded-md border border-paper-3 bg-paper-0 px-3 py-1 text-sm text-ink-1 shadow-xs transition-colors outline-none focus-visible:ring-[3px] focus-visible:ring-sky-ink/40 disabled:cursor-not-allowed disabled:opacity-50"
         >
-          <option value="" disabled>
-            —
-          </option>
+          <option value="">{t("appNinguna")}</option>
           {apps.map((app) => (
             <option key={app.id} value={app.id}>
               {app.nombre[locale]}
             </option>
           ))}
         </select>
-        {errors.app && (
-          <p id="error-app" role="alert" className="text-sm text-rose-ink">
-            {errors.app}
-          </p>
-        )}
       </div>
 
       <div className="flex flex-col gap-2">

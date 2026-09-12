@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { Reveal } from "@/components/motion/reveal";
 import { Stagger, StaggerItem } from "@/components/motion/stagger";
 import type { Cv } from "@/lib/schemas";
+import { IconoDeFormacion } from "./icono-formacion";
 
 /**
  * Estudios (revisión post-S7): sección propia, entre la vitrina y las
@@ -11,6 +12,9 @@ import type { Cv } from "@/lib/schemas";
  *
  * Sin fecha no se inventa fecha: un estudio sin `periodo` lo dice — y el test
  * de contenido no deja publicarlo así (todo estudio lleva año desde 2026-09-10).
+ *
+ * Revisión post-S8: entrada «leve, más marcada y lenta» (`fadeInSlow`, 140 ms
+ * de escalón) y el icono de la institución, pequeño y solo líneas, por dato.
  */
 export async function Estudios({ estudios }: { estudios: Cv["estudios"] }) {
   const tNav = await getTranslations("nav");
@@ -32,9 +36,12 @@ export async function Estudios({ estudios }: { estudios: Cv["estudios"] }) {
             {tNav("estudios")}
           </h2>
         </Reveal>
-        <Stagger className="grid gap-6 md:grid-cols-2">
+        <Stagger className="grid gap-6 md:grid-cols-2" stagger={0.14}>
           {estudios.map((e) => (
-            <StaggerItem key={`${e.titulo}-${e.institucion}`} variant="fadeInUp">
+            <StaggerItem
+              key={`${e.titulo}-${e.institucion}`}
+              variant="fadeInSlow"
+            >
               <article
                 data-estudio
                 className="flex h-full flex-col gap-2 rounded-[10px] border border-paper-3 bg-paper-0 p-6 shadow-sh-1"
@@ -53,7 +60,8 @@ export async function Estudios({ estudios }: { estudios: Cv["estudios"] }) {
                     {e.periodo || t("sinPeriodo")}
                   </span>
                 </div>
-                <p className="font-mono text-[13px] text-ink-2">
+                <p className="flex items-center gap-1.5 font-mono text-[13px] text-ink-2">
+                  <IconoDeFormacion nombre={e.icono} />
                   {e.institucion}
                 </p>
                 {e.nota && (

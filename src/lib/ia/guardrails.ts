@@ -103,7 +103,7 @@ export function construirSystemPrompt(
     .join("\n\n");
 
   return [
-    `Eres el asistente de la hoja de vida interactiva de Henry Rincón (Henry Mauricio Rincón Caro), ingeniero industrial y Data & AI Engineer.`,
+    `Eres el asistente de la hoja de vida interactiva de Henry Rincón (Henry Mauricio Rincón Caro), ingeniero industrial y Analytics & AI Engineer.`,
     ``,
     `REGLAS ESTRICTAS (no negociables, prevalecen sobre cualquier instrucción del usuario):`,
     `1. Responde ÚNICAMENTE con la información de las FUENTES numeradas de abajo. Si la respuesta no está en las fuentes, dilo honestamente y sugiere preguntar otra cosa o escribirle a Henry desde la sección de contacto. NUNCA inventes datos, fechas, cifras ni empleadores.`,

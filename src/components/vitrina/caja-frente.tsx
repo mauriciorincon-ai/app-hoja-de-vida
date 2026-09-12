@@ -1,4 +1,5 @@
 import { getTranslations } from "next-intl/server";
+import { CifraQueLlama } from "@/components/motion/cifra-que-llama";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import type { Frente } from "@/lib/vitrina/categorias";
@@ -18,6 +19,10 @@ import type { Frente } from "@/lib/vitrina/categorias";
  *
  * El icono se dibuja aquí, en la familia del design system (24×24, trazo 1.5,
  * sin relleno). Nunca un emoji.
+ *
+ * Revisión post-S8: la caja es el `<article>`, y el `<li>` lo pone quien la
+ * lista — la HOME la escalona con `StaggerItem as="li"` y el portal con un
+ * `<li>` plano. Y la cifra de productos «llama la atención» al asomar.
  */
 
 const ICONOS: Record<string, React.ReactElement> = {
@@ -73,66 +78,68 @@ export async function CajaFrente({
   const abierta = frente.estado === "abierta";
 
   return (
-    <li className="list-none">
-      <article
-        data-frente={frente.id}
-        data-estado={frente.estado}
-        className="caja-frente relative flex h-full flex-col gap-4 rounded-[14px] border border-paper-2 bg-paper-0 p-6 shadow-sh-1 transition-[box-shadow,transform] duration-[180ms] ease-[var(--ease-out-cubic)] hover:-translate-y-0.5 hover:shadow-sh-2"
-      >
-        <div className="flex items-start justify-between gap-3">
-          <span
-            aria-hidden="true"
-            className="flex size-11 items-center justify-center rounded-[10px] bg-paper-1 text-ink-1"
+    <article
+      data-frente={frente.id}
+      data-estado={frente.estado}
+      className="caja-frente relative flex h-full flex-col gap-4 rounded-[14px] border border-paper-2 bg-paper-0 p-6 shadow-sh-1 transition-[box-shadow,transform] duration-[180ms] ease-[var(--ease-out-cubic)] hover:-translate-y-0.5 hover:shadow-sh-2"
+    >
+      <div className="flex items-start justify-between gap-3">
+        <span
+          aria-hidden="true"
+          className="flex size-11 items-center justify-center rounded-[10px] bg-paper-1 text-ink-1"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            width="22"
+            height="22"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            focusable="false"
           >
-            <svg
-              viewBox="0 0 24 24"
-              width="22"
-              height="22"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              focusable="false"
-            >
-              {ICONOS[frente.id] ?? PUNTO}
-            </svg>
-          </span>
-          <span
-            title={t(
-              abierta
-                ? "frenteEstadoAyuda.abierta"
-                : "frenteEstadoAyuda.enPreparacion",
-            )}
-            className={`rounded-full px-2.5 py-1 font-mono text-[11px] tracking-[0.02em] uppercase ${
-              abierta ? "bg-sage text-sage-ink" : "bg-citron text-citron-ink"
-            }`}
+            {ICONOS[frente.id] ?? PUNTO}
+          </svg>
+        </span>
+        <span
+          title={t(
+            abierta
+              ? "frenteEstadoAyuda.abierta"
+              : "frenteEstadoAyuda.enPreparacion",
+          )}
+          className={`rounded-full px-2.5 py-1 font-mono text-[11px] tracking-[0.02em] uppercase ${
+            abierta ? "bg-sage text-sage-ink" : "bg-citron text-citron-ink"
+          }`}
+        >
+          {abierta ? (
+            <CifraQueLlama className="inline-block">
+              {t("cuentaPiezas", { n: frente.piezas })}
+            </CifraQueLlama>
+          ) : (
+            t("frenteEstados.enPreparacion")
+          )}
+        </span>
+      </div>
+
+      <div>
+        <h2 className="font-display text-[1.45rem] leading-tight font-medium tracking-[-0.02em] text-ink-0">
+          <Link
+            href={`/vitrina/${frente.id}`}
+            className="after:absolute after:inset-0 after:rounded-[14px] after:content-['']"
           >
-            {abierta
-              ? t("cuentaPiezas", { n: frente.piezas })
-              : t("frenteEstados.enPreparacion")}
-          </span>
-        </div>
-
-        <div>
-          <h2 className="font-display text-[1.45rem] leading-tight font-medium tracking-[-0.02em] text-ink-0">
-            <Link
-              href={`/vitrina/${frente.id}`}
-              className="after:absolute after:inset-0 after:rounded-[14px] after:content-['']"
-            >
-              {frente.nombre[locale]}
-            </Link>
-          </h2>
-          <p className="mt-2 text-[15px] leading-relaxed text-ink-1">
-            {frente.intro[locale]}
-          </p>
-        </div>
-
-        <p className="mt-auto flex items-center gap-1.5 text-[14px] font-medium text-sage-ink">
-          {abierta ? t("entrar") : t("verQueViene")}
-          <span aria-hidden="true">→</span>
+            {frente.nombre[locale]}
+          </Link>
+        </h2>
+        <p className="mt-2 text-[15px] leading-relaxed text-ink-1">
+          {frente.intro[locale]}
         </p>
-      </article>
-    </li>
+      </div>
+
+      <p className="mt-auto flex items-center gap-1.5 text-[14px] font-medium text-sage-ink">
+        {abierta ? t("entrar") : t("verQueViene")}
+        <span aria-hidden="true">→</span>
+      </p>
+    </article>
   );
 }

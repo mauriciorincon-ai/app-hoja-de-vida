@@ -9,11 +9,15 @@
 
 CV Viva es tu hoja de vida convertida en una página web que se recorre como una pieza editorial
 animada: identidad, trayectoria, logros, proyectos y la vitrina de apps del pipeline, en español
-e inglés. Quien la visita puede pedir acceso a tus apps y la solicitud te llega al correo.
+e inglés. Quien la visita puede escribirte —por una app, una asesoría, una charla o un rol— y
+el mensaje te llega al correo.
 
 ## Primeros pasos
 
 - La página vive en la URL de producción (Vercel). Se abre en `/es` (español) o `/en` (inglés).
+  **La raíz `/` abre SIEMPRE en español** (revisión post-S8): antes seguía el idioma del navegador
+  y la cookie del botón «Switch to English», y quien lo pulsara una vez quedaba en inglés para
+  siempre. El botón sigue cambiando de idioma; lo que no hay es detección.
 - No requiere cuenta ni instalación: es una página pública.
 
 ## Features
@@ -96,6 +100,22 @@ e inglés. Quien la visita puede pedir acceso a tus apps y la solicitud te llega
   nombrarlo. **El CV sigue igual de estricto:** un código declarado ahí no autoriza a ponerlo en
   el titular, el perfil ni los logros. Nombrar una credencial que no se tiene es una decisión, y
   una decisión sin razón escrita no es declarable.
+- **El tercer estado — «en curso» (revisión post-S8):** una certificación que estás preparando
+  se lista con `estado: "en curso"` y **sin `fecha`** (una obtenida sin fecha rompe el build). La
+  HOME la enseña con el chip «En curso» en el sitio de la fecha; `/cv` y el chat dicen «(en
+  curso)». Así entró el **AI-103**. El logro «5 certificaciones» sigue contando solo las
+  obtenidas. **Y el gate vigila lo contrario:** cada vez que el titular, el perfil, un logro,
+  `messages/` o `apps.yaml` nombran un código en curso, tienen que llevar «en curso» (o «en
+  ruta», «en preparación», «in progress») a menos de 48 caracteres — «(AI-103)» a secas pone
+  rojo el test nombrando la ruta exacta. Nombrar una credencial que no se tiene es una decisión;
+  fingir que se tiene, no.
+- **El barrido de credenciales mira también `messages/`** (post-S8): ahí sobrevivió AI-102 en la
+  descripción SEO tres días después de su retiro, porque el test solo miraba `data/`.
+- **Iconos por dato (post-S8):** cada certificación y cada estudio puede llevar `icono:` con uno
+  de `universidad · idiomas · curso · insignia · datos · codigo` (Lucide, pequeño, solo líneas,
+  sin color). Un nombre fuera de la lista rompe el build. Los logos reales de Microsoft o IBM no
+  entran como icono: si un día quieres las insignias de Credly, van junto al enlace de
+  verificación, como imagen.
 - **Links de verificación:** cuando tengas los links de Credly/Microsoft Learn, pégalos en
   el campo `verificacion:` de cada certificación — el botón "Verificar ↗" aparece solo.
 - **Skills, desde la revisión post-S7:** una tarjeta por grupo con un icono dibujado en casa
@@ -110,7 +130,8 @@ e inglés. Quien la visita puede pedir acceso a tus apps y la solicitud te llega
   estudio. Antes la formación era un hito más de la trayectoria; ahora es un dato que también
   leen `/cv`, el PDF y el chat.
 - **Cómo se alimenta:** en `data/cv.es.yaml` y `cv.en.yaml`, el bloque `estudios:` — cada entrada
-  con `titulo`, `institucion`, `periodo` y `nota` (opcional). Hoy hay tres, tomadas del PDF
+  con `titulo`, `institucion`, `periodo`, `nota` (opcional) e `icono` (opcional, post-S8; ver
+  arriba). Hoy hay tres, tomadas del PDF
   2024-I del dueño: Ingeniería Industrial (2009 — 2016), los estudios de Diseño Industrial
   (2011 — 2016) y el curso de inglés con IELTS en Melbourne (2013 — 2014). **Todo estudio lleva
   año:** un `periodo` sin cuatro dígitos pone rojo el test de contenido. Mismo número de estudios
@@ -119,8 +140,17 @@ e inglés. Quien la visita puede pedir acceso a tus apps y la solicitud te llega
 ### La vitrina, asomada en la HOME · desde la revisión post-S7
 
 - **Qué hace:** en el sitio que tenía «Proyectos», la HOME enseña las cuatro cajas de la vitrina
-  con su cuenta real de piezas y un botón «Entrar a la vitrina». Son las mismas cajas del portal:
-  no hay nada que editar aparte de `data/vitrina.yaml`.
+  con su cuenta real de **productos** y un botón «Explora el portafolio». Son las mismas cajas del
+  portal: no hay nada que editar aparte de `data/vitrina.yaml`.
+- **Nombres, desde la revisión post-S8:** la sección se llama **«Vitrina»** (antes «Lo que
+  construyo») y el primer nivel del menú que lleva al portal se llama **«Portafolio»** — dos
+  enlaces «Vitrina» en el mismo menú a sitios distintos era una trampa. En todo el copy visible,
+  «pieza» pasó a **«producto»**; en el código, el contrato de ficha técnica y `public/piezas/`
+  sigue diciendo pieza, a propósito: es el nombre del dominio, no el de la vitrina.
+- **El formulario de contacto (post-S8):** ya no se titula «Solicitar acceso» sino **«Escríbeme»**,
+  y elegir una app es **opcional** — el visitante puede venir por una asesoría, una charla o un
+  rol. Sin app, el correo llega con el asunto «Mensaje desde la hoja de vida»; con app, sigue
+  siendo «Solicitud de acceso: <app>» y es la lista de espera de las piezas.
 
 ### Descargar CV en PDF (ATS) · desde Sprint 002
 
@@ -394,10 +424,10 @@ Tu workstream de contenido: **un archivo por tema**, en `data/a-fondo/<tema>.es.
 
 **Lo primero, y lo único que de verdad tienes que recordar: `estado`.**
 
-| `estado`   | Qué pasa                                                                                                       |
-| ---------- | ---------------------------------------------------------------------------------------------------------------- |
+| `estado`   | Qué pasa                                                                                                        |
+| ---------- | --------------------------------------------------------------------------------------------------------------- |
 | `borrador` | El chat **no lo indexa** y **no se le exige el gemelo en inglés**. Es tuyo, para escribir y corregir con calma. |
-| `aprobado` | El chat **lo indexa y lo cita** — y el build **exige** el gemelo `.en.md` completo, subsección por subsección. |
+| `aprobado` | El chat **lo indexa y lo cita** — y el build **exige** el gemelo `.en.md` completo, subsección por subsección.  |
 
 Así la base entera puede vivir en español mientras la corriges, sin romper la publicación y sin
 que el chat cite media traducción. **Tú decides cuándo un documento pasa a `aprobado`**: cambias
@@ -407,13 +437,13 @@ esa palabra, se traduce, y el siguiente deploy lo pone a responder.
 
 ```yaml
 ---
-slug: vesting                      # = nombre del archivo, sin el idioma
+slug: vesting # = nombre del archivo, sin el idioma
 titulo: "Vesting — la plataforma de datos para agentes de IA"
 resumen: "Una o dos líneas: de qué va este documento."
-estado: borrador                   # borrador | aprobado
-ancla: "/proyectos/vesting"        # a dónde navega la cita — VA ENTRE COMILLAS
+estado: borrador # borrador | aprobado
+ancla: "/proyectos/vesting" # a dónde navega la cita — VA ENTRE COMILLAS
 actualizado: 2026-09-12
-preguntas_de_prueba:               # mínimo 2
+preguntas_de_prueba: # mínimo 2
   - "¿Cómo diseñó Henry el ecosistema de datos de Vesting?"
   - "¿Qué es el proceso core replicable de agentes?"
 ---
@@ -463,10 +493,10 @@ nombre del archivo) y escribe. No hay lista que actualizar en ninguna parte.
 Escribir el documento es la mitad. La otra es comprobar que **el chat lo encuentra cuando alguien
 pregunta**, y eso no se mira a ojo: hay dos conjuntos de preguntas que corren en cada `pnpm test`.
 
-| Conjunto                                | Dónde vive                                | Qué exige                                                                       |
-| --------------------------------------- | ----------------------------------------- | --------------------------------------------------------------------------------- |
+| Conjunto                                  | Dónde vive                                    | Qué exige                                                                   |
+| ----------------------------------------- | --------------------------------------------- | --------------------------------------------------------------------------- |
 | **Las preguntas de prueba del documento** | en su propia cabecera (`preguntas_de_prueba`) | Que cada pregunta traiga **su** documento. La prueba viaja con el contenido |
-| **El banco de preguntas**               | `tests/fixtures/banco-de-preguntas.es.yaml` | Que 131 preguntas **de afuera** traigan la fuente que debería contestarlas   |
+| **El banco de preguntas**                 | `tests/fixtures/banco-de-preguntas.es.yaml`   | Que 131 preguntas **de afuera** traigan la fuente que debería contestarlas  |
 
 **Por qué hacen falta los dos.** Las preguntas de prueba de un documento se escriben con el
 documento delante, así que usan sus palabras. Quien recluta usa las suyas: «MLOps», «lakehouse»,
@@ -509,15 +539,15 @@ chat hoy y cuáles traería con la base aprobada. Ese informe **se genera, no se
 
 ## Historial
 
-| Sprint | Features añadidas a este manual                                                                                                                                                                                                                                                                                          |
-| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| 001    | Contenido por YAML, showcase de apps, bilingüe ES/EN, solicitudes de acceso, motion.                                                                                                                                                                                                                                     |
-| 001bis | Content pack v1 integrado (marca Henry Rincón), estado "en producción", enlaces de evidencia en las cards, campos `certificaciones`/`skills`/`perfil` previstos para S2.                                                                                                                                                 |
-| 002    | Capa de profundidad: bullets expandibles por hito, 5 case studies con URL propia, secciones Perfil/Certificaciones/Skills, ruta `/cv` imprimible + PDF ATS descargable.                                                                                                                                                  |
-| 003    | El chat que responde por ti: RAG con citas navegables, proveedor conmutable por env (Groq inicial), off-topic sin tokens, fallback local que nunca muere, kill-switch, y la historia (`data/historia/`) como corpus incremental con guía de alimentación. **La historia se RETIRÓ en el S8** (nunca tuvo prosa): su guía de alimentación la reemplaza «Cómo alimentar el a fondo».                                                                |
-| 004    | Roadmap con votación anónima (contador real o "no disponible", dedup por navegador, cero PII), página brochure animada por app real, y menú en móvil. Cierre del ciclo H1: el MVP funcional queda completo.                                                                                                              |
-| 005    | La vitrina: escaparate de las seis apps hermanas y **una página propia por app**, alimentadas por los `brochure-export.json` que cada app genera; tarjetas que se abren al llegar leyendo; capturas de las apps reales repintadas con la paleta de esta página; cero enlaces y CTA de lista de espera. Abre el ciclo H2. |
-| 007    | Las estanterías: los cuatro frentes de la vitrina abiertos con piezas reales (6 apps · 13 agentes · 7 investigaciones · 6 tableros). Un escaparate por frente y una ficha por pieza, con el mismo renderizador de las apps; las fichas las produce quien construye cada pieza y llegan por PR de contenido. Contrato v1.3.0: los tableros añaden «Lo que dicen los datos» y «Cómo se ve» (galería de capturas), opcionales y con renumeración automática. |
-| 008    | El «a fondo»: un documento por tema en `data/a-fondo/` como corpus profundo del chat, con aduana que rompe el build nombrando archivo y campo (cabecera, ids duplicados, paridad ES/EN de los aprobados, privacidad mecánica, **y ningún `[CONFIRMAR]` en un aprobado**) y un `estado` que separa el borrador de lo citable. **Banco de 131 preguntas de afuera** como prueba del contenido, con su informe generado. **El destino de toda cita se verifica contra el sitio real** — así murió el `#apps` que llevaba una revisión entera apuntando a una sección retirada. `data/historia/` retirada, sus 12 secciones migradas. |
-| post-S7 | Revisión del dueño sobre la HOME: la trayectoria como índice que baja contigo (línea continua, círculo fijo a media pantalla, año grande); la vitrina en el sitio de Proyectos y los case studies desde su hito; Estudios como sección y como dato (`cv.estudios`); Skills en tarjetas con icono y trazo; el roadmap se muda a `/vitrina/apps` y sale del menú. |
-| post-S7 (2.ª) | «Lo que construyo» entra al desplegable Hoja de vida; Estudios con los años del PDF del dueño (tres entradas); AI-102 retirada de todo el contenido (Microsoft la descontinuó) y gate nuevo: una credencial nombrada tiene que estar en `certificaciones:`. |
+| Sprint        | Features añadidas a este manual                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 001           | Contenido por YAML, showcase de apps, bilingüe ES/EN, solicitudes de acceso, motion.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| 001bis        | Content pack v1 integrado (marca Henry Rincón), estado "en producción", enlaces de evidencia en las cards, campos `certificaciones`/`skills`/`perfil` previstos para S2.                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| 002           | Capa de profundidad: bullets expandibles por hito, 5 case studies con URL propia, secciones Perfil/Certificaciones/Skills, ruta `/cv` imprimible + PDF ATS descargable.                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| 003           | El chat que responde por ti: RAG con citas navegables, proveedor conmutable por env (Groq inicial), off-topic sin tokens, fallback local que nunca muere, kill-switch, y la historia (`data/historia/`) como corpus incremental con guía de alimentación. **La historia se RETIRÓ en el S8** (nunca tuvo prosa): su guía de alimentación la reemplaza «Cómo alimentar el a fondo».                                                                                                                                                                                                                                                |
+| 004           | Roadmap con votación anónima (contador real o "no disponible", dedup por navegador, cero PII), página brochure animada por app real, y menú en móvil. Cierre del ciclo H1: el MVP funcional queda completo.                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| 005           | La vitrina: escaparate de las seis apps hermanas y **una página propia por app**, alimentadas por los `brochure-export.json` que cada app genera; tarjetas que se abren al llegar leyendo; capturas de las apps reales repintadas con la paleta de esta página; cero enlaces y CTA de lista de espera. Abre el ciclo H2.                                                                                                                                                                                                                                                                                                          |
+| 007           | Las estanterías: los cuatro frentes de la vitrina abiertos con piezas reales (6 apps · 13 agentes · 7 investigaciones · 6 tableros). Un escaparate por frente y una ficha por pieza, con el mismo renderizador de las apps; las fichas las produce quien construye cada pieza y llegan por PR de contenido. Contrato v1.3.0: los tableros añaden «Lo que dicen los datos» y «Cómo se ve» (galería de capturas), opcionales y con renumeración automática.                                                                                                                                                                         |
+| 008           | El «a fondo»: un documento por tema en `data/a-fondo/` como corpus profundo del chat, con aduana que rompe el build nombrando archivo y campo (cabecera, ids duplicados, paridad ES/EN de los aprobados, privacidad mecánica, **y ningún `[CONFIRMAR]` en un aprobado**) y un `estado` que separa el borrador de lo citable. **Banco de 131 preguntas de afuera** como prueba del contenido, con su informe generado. **El destino de toda cita se verifica contra el sitio real** — así murió el `#apps` que llevaba una revisión entera apuntando a una sección retirada. `data/historia/` retirada, sus 12 secciones migradas. |
+| post-S7       | Revisión del dueño sobre la HOME: la trayectoria como índice que baja contigo (línea continua, círculo fijo a media pantalla, año grande); la vitrina en el sitio de Proyectos y los case studies desde su hito; Estudios como sección y como dato (`cv.estudios`); Skills en tarjetas con icono y trazo; el roadmap se muda a `/vitrina/apps` y sale del menú.                                                                                                                                                                                                                                                                   |
+| post-S7 (2.ª) | «Lo que construyo» entra al desplegable Hoja de vida; Estudios con los años del PDF del dueño (tres entradas); AI-102 retirada de todo el contenido (Microsoft la descontinuó) y gate nuevo: una credencial nombrada tiene que estar en `certificaciones:`.                                                                                                                                                                                                                                                                                                                                                                       |

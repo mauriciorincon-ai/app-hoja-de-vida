@@ -46,6 +46,7 @@ export default async function CvPage({ params }: Params) {
   const cv = getCv(locale as Locale);
   const t = await getTranslations("cv");
   const tNav = await getTranslations("nav");
+  const tCert = await getTranslations("certificaciones");
   const tDetalle = await getTranslations("detalle");
   const tPerfil = await getTranslations("perfil");
 
@@ -217,7 +218,11 @@ export default async function CvPage({ params }: Params) {
                   >
                     {cert.nombre}{" "}
                     <span className="font-mono text-[12px] text-ink-2">
-                      ({cert.fecha})
+                      (
+                      {cert.estado === "en curso"
+                        ? tCert("enCurso")
+                        : cert.fecha}
+                      )
                     </span>
                   </li>
                 ))}
@@ -241,7 +246,6 @@ export default async function CvPage({ params }: Params) {
                 ))}
               </ul>
             </section>
-
           </div>
 
           <p className="mt-14 print:hidden">
