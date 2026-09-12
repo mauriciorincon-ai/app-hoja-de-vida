@@ -16,8 +16,8 @@ import { getFrentes } from "@/lib/vitrina/categorias";
  * la HOME no mantiene una copia de la vitrina, la enseña.
  *
  * Revisión post-S8: las cuatro cajas aparecen levemente, una a una (140 ms
- * de escalón, `fadeInSlow`), y el chip de productos crece y vuelve AL MISMO
- * TIEMPO que su caja: misma duración, mismo escalón.
+ * de escalón, `fadeInSlow`), y el chip de productos APARECE GRANDE Y SE ENCOGE
+ * con su caja: misma duración, misma curva, mismo escalón.
  */
 /** Escalón entre cajas — y el retraso del pulso de cada chip, para que se muevan juntos. */
 const ESCALON_S = 0.14;

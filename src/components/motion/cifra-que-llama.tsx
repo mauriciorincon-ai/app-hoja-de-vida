@@ -1,19 +1,19 @@
 "use client";
 
 import { m, useReducedMotion, type Variants } from "motion/react";
-import { EASE_IN_OUT_CUBIC } from "./easings";
+import { EASE_OUT_EXPO } from "./easings";
 
 /**
- * Un chip que «llama la atención» AL MISMO TIEMPO que aparece su tarjeta
- * (revisión post-S8). Crece a 1,3× y vuelve en una curva simétrica de la
- * MISMA duración que la entrada de la tarjeta (`fadeInSlow`, 1,2 s): arranca
- * cuando ella arranca —con el mismo escalón, que llega en `retraso`— y termina
- * de volver cuando ella termina de aparecer. Es EL CONTENEDOR el que crece
+ * Un chip que APARECE GRANDE Y SE ENCOGE a su tamaño al mismo tiempo que
+ * aparece su tarjeta (revisión post-S8). Empieza a 1,5× y baja a 1× con la
+ * MISMA duración y la MISMA curva que la entrada de la tarjeta (`fadeInSlow`:
+ * 1,2 s, ease-out-expo), y arranca con ella —el escalón de la caja llega en
+ * `retraso`—: un solo movimiento, no dos. Es EL CONTENEDOR el que se encoge
  * (fondo, borde, texto), desde su borde derecho para no salirse.
  *
  * NO tiene disparador propio: hereda la variante `visible` de la tarjeta que
  * lo contiene (`StaggerItem`). Como esa entrada se re-ejecuta cada vez que la
- * sección vuelve a pantalla (`once: false`), el pulso también. El escalón del
+ * sección vuelve a pantalla (`once: false`), esto también. El escalón del
  * `Stagger` NO se hereda a los nietos —se midió: los cuatro chips arrancaban
  * a la vez—, por eso el retraso de cada caja viaja como prop.
  *
@@ -21,6 +21,7 @@ import { EASE_IN_OUT_CUBIC } from "./easings";
  * `[data-motion]` neutraliza cualquier estado inicial — mismo árbol.
  */
 export const DURACION_PULSO_S = 1.2;
+export const ESCALA_INICIAL = 1.5;
 
 export function CifraQueLlama({
   children,
@@ -36,14 +37,13 @@ export function CifraQueLlama({
 }) {
   const reduced = useReducedMotion();
   const pulso: Variants = {
-    hidden: { scale: 1 },
+    hidden: { scale: ESCALA_INICIAL },
     visible: {
-      scale: [1, 1.3, 1],
+      scale: 1,
       transition: {
         delay: retraso,
         duration: DURACION_PULSO_S,
-        times: [0, 0.5, 1],
-        ease: EASE_IN_OUT_CUBIC,
+        ease: EASE_OUT_EXPO,
       },
     },
   };
