@@ -103,19 +103,25 @@
 <body>
 <div class="pagina">
   <header>
-    <p class="eyebrow">CV Viva · Guía de prueba viva y acumulativa · v7.1 · post-Sprint 007 (revisión de la HOME, 2.ª) · 2026-09-10</p>
+    <p class="eyebrow">CV Viva · Guía de prueba viva y acumulativa · v8 · Sprint 008 (el detalle) · 2026-09-12</p>
     <h1>Guía de prueba</h1>
-    <p class="suave">Todas las pruebas vigentes de la app — las nuevas de la <strong>revisión de
-      la HOME</strong> pedida por el dueño tras el Sprint 007 (trayectoria como índice, la vitrina
-      en la HOME, Estudios, Skills rehecha, el roadmap con las apps) y las 72 heredadas de
-      S1–S7, que se corren como regresión. Filtra por origen para recorrer todo o solo lo que
-      cambió. Las casillas se guardan solas en este navegador.</p>
-    <p class="chica"><strong>Gate mínimo ⭐: 25 pruebas · ~85 min.</strong> Es lo que ninguna
+    <p class="suave">Todas las pruebas vigentes de la app — las nuevas del <strong>Sprint 008
+      (el «a fondo»)</strong> y las 83 heredadas de S1–S7 y de las dos revisiones de la HOME, que
+      se corren como regresión. Filtra por origen para recorrer todo o solo lo que cambió. Las
+      casillas se guardan solas en este navegador.</p>
+    <p class="chica suave"><strong>Aviso sobre este sprint:</strong> el S8 casi no cambió lo que ve
+      quien visita, y es a propósito. Construyó el <strong>corpus profundo del chat</strong> —24
+      documentos que viven en el repositorio y <strong>no se publican en ninguna página</strong>— y
+      los dejó en <code>borrador</code>, así que el chat todavía no los cita. Por eso el bloque
+      <strong>O</strong> se prueba más con el repositorio delante que con el navegador, y sus dos
+      pruebas de chat (⭐ o7 y o8) <strong>esperan a que apruebes el primer documento</strong>.</p>
+    <p class="chica"><strong>Gate mínimo ⭐: 31 pruebas · ~3 h.</strong> Es lo que ninguna
       automatización puede verificar (juicio humano sobre el contenido, aprobación visual,
       dispositivo real, proveedor de IA real). Lo que la CI ya respalda (e2e, unit, axe, budgets)
-      queda fuera del mínimo y se corre en pases completos. <strong>Las 5 ⭐ del Sprint 007 y las 3 de
-      la revisión de la HOME se dejan al acumulado del ciclo H2</strong> (gate diferido, declarado
-      en el summary): se pagan en el recorrido de cierre, no antes.</p>
+      queda fuera del mínimo y se corre en pases completos. Las 6 del S8 son casi todas de
+      <strong>lectura</strong> —el corpus— y por eso el mínimo crece de ~85 min a ~3 h. <strong>Las 5 ⭐ del Sprint 007, las 3
+      de la revisión de la HOME y las 6 del Sprint 008 se dejan al acumulado del ciclo H2</strong>
+      (gate diferido, declarado en el summary): se pagan en el recorrido de cierre, no antes.</p>
     <div class="url-caja">
       <p class="eyebrow" style="margin:0 0 6px">URL de prueba</p>
       <code>— pégala aquí al empezar —</code>
@@ -148,23 +154,23 @@
       <li data-origen="heredada"><input type="checkbox" id="a1"><label for="a1">Abre
         <code>/es</code>: el hero muestra tu nombre y titular; el contenido carga sin pantallazos
         en blanco. <span class="origen origen-heredada">S1</span></label></li>
-      <li data-origen="mejorado"><input type="checkbox" id="a2"><label for="a2">Baja por la página:
+      <li data-origen="heredada"><input type="checkbox" id="a2"><label for="a2">Baja por la página:
         aparecen en orden Perfil, Trayectoria, Logros, <strong>Vitrina</strong>, <strong>Estudios</strong>,
         Certificaciones, Skills y Contacto — ya no hay "Apps", <strong>ni "Proyectos", ni
         "Roadmap"</strong> (la vitrina ocupa el sitio de Proyectos; el roadmap vive con las apps).
-        <span class="origen origen-mejorado">Mejorado · post-S7</span></label></li>
-      <li data-origen="mejorado"><input type="checkbox" id="a3"><label for="a3">El menú del encabezado
+        <span class="origen origen-heredada">post-S7</span></label></li>
+      <li data-origen="heredada"><input type="checkbox" id="a3"><label for="a3">El menú del encabezado
         tiene <strong>tres destinos</strong>: Hoja de vida, Vitrina y Contacto (más CV PDF e idioma).
         <strong>No hay "Roadmap"</strong>. Pulsa <strong>Contacto</strong>: te lleva a esa sección.
-        <span class="origen origen-mejorado">Mejorado · post-S7</span></label></li>
-      <li data-origen="mejorado"><input type="checkbox" id="a5"><label for="a5">Pulsa
+        <span class="origen origen-heredada">post-S7</span></label></li>
+      <li data-origen="heredada"><input type="checkbox" id="a5"><label for="a5">Pulsa
         <strong>Hoja de vida</strong>: se despliegan las seis secciones del CV (Trayectoria,
         Logros, <strong>Lo que construyo</strong>, <strong>Estudios</strong>, Certificaciones,
         Skills — en ese orden, el de la página). "Lo que construyo" te lleva a la vitrina asomada
         en la HOME; el "Vitrina" del primer nivel sigue llevando al portal. Elige una y te
         lleva ahí cerrando el menú.
         Vuelve a abrirlo y ciérralo pulsando <strong>fuera</strong>, y otra vez con
-        <strong>Escape</strong>. <span class="origen origen-mejorado">Mejorado · post-S7</span></label></li>
+        <strong>Escape</strong>. <span class="origen origen-heredada">post-S7</span></label></li>
       <li data-origen="heredada"><input type="checkbox" id="a6"><label for="a6">Abre el menú
         <strong>solo con teclado</strong> (Tab hasta "Hoja de vida", Enter): se despliega, Tab
         recorre las seis, Escape cierra y el foco vuelve al botón — nunca se pierde.
@@ -202,12 +208,12 @@
         Trayectoria, pulsa "Ver logros completos": se despliegan los bullets; vuelve a pulsar y se
         contraen. Pruébalo también con el teclado (Tab hasta el botón, Enter).
         <span class="origen origen-heredada">S2</span></label></li>
-      <li data-origen="mejorado"><input type="checkbox" id="c2"><label for="c2">En la Trayectoria,
+      <li data-origen="heredada"><input type="checkbox" id="c2"><label for="c2">En la Trayectoria,
         en el hito de Vesting, pulsa <strong>"Ver case study →"</strong> (está en la misma fila que
         "Ver logros completos"): tiene su propia URL con contexto, reto, qué hice e impacto; el
         breadcrumb <strong>regresa a la Trayectoria</strong>. Cinco hitos tienen enlace (CTIC,
         Vesting, Pichincha, C&amp;M Consultores, Cafam); los otros tres, no.
-        <span class="origen origen-mejorado">Mejorado · post-S7</span></label></li>
+        <span class="origen origen-heredada">post-S7</span></label></li>
       <li data-origen="heredada" data-minimo><input type="checkbox" id="c3"><label for="c3">⭐
         <strong>Juicio de contenido:</strong> los case studies son fieles a lo que hiciste y están
         bien escritos (sin exagerar ni inventar).
@@ -281,11 +287,11 @@
     <div class="bloque-cabeza"><span class="letra">G</span><h2>Roadmap con votación anónima</h2></div>
     <p class="meta-bloque chica suave">~6 min · en <code>/es/vitrina/apps</code>, sección Roadmap · la feature estrella del S4.</p>
     <ul class="pasos">
-      <li data-origen="mejorado"><input type="checkbox" id="g1"><label for="g1">La sección Roadmap vive
+      <li data-origen="heredada"><input type="checkbox" id="g1"><label for="g1">La sección Roadmap vive
         ahora <strong>al pie de <code>/es/vitrina/apps</code></strong>, debajo de las seis apps:
         muestra las features de cada app con su descripción y un número de votos junto a cada una.
         <strong>No está en la HOME ni en el menú.</strong>
-        <span class="origen origen-mejorado">Mejorado · post-S7</span></label></li>
+        <span class="origen origen-heredada">post-S7</span></label></li>
       <li data-origen="heredada"><input type="checkbox" id="g2"><label for="g2">Pulsa "Votar" en una
         feature: el número <strong>sube en 1</strong> y el botón pasa a "Ya votaste" y se
         deshabilita. <span class="origen origen-heredada">S4</span></label></li>
@@ -573,69 +579,150 @@
     <div class="bloque-cabeza"><span class="letra">N</span><h2>La HOME tras la revisión: el índice que baja, la vitrina, Estudios y Skills</h2></div>
     <p class="meta-bloque chica suave">~15 min · en <code>/es</code> · escritorio + un teléfono real.</p>
     <ul class="pasos">
-      <li data-origen="nuevo"><input type="checkbox" id="n1"><label for="n1">Baja despacio por la
+      <li data-origen="heredada"><input type="checkbox" id="n1"><label for="n1">Baja despacio por la
         <strong>Trayectoria</strong>: hay <strong>una sola línea</strong> de la primera experiencia a
         la última, un <strong>círculo que se queda a media pantalla</strong> mientras la línea pasa por
         él, y a su lado <strong>el año en grande</strong>. La parte de la línea que ya pasaste se
         pinta en lila; cada experiencia tiene una marca en la línea a la altura de su tarjeta.
-        <span class="origen origen-nuevo">Nuevo · post-S7</span></label></li>
-      <li data-origen="nuevo"><input type="checkbox" id="n2"><label for="n2">Sigue bajando: el año
+        <span class="origen origen-heredada">post-S7</span></label></li>
+      <li data-origen="heredada"><input type="checkbox" id="n2"><label for="n2">Sigue bajando: el año
         <strong>cambia</strong> cuando el círculo llega a cada experiencia (2025 → 2023 → 2023 →
         2021 → 2020 → 2018 → 2017 → 2016), con un fundido corto. Sube: cambia de vuelta. Salta con el
         menú a "Trayectoria" y luego a "Logros": el círculo nunca se queda fuera de sitio.
-        <span class="origen origen-nuevo">Nuevo · post-S7</span></label></li>
-      <li data-origen="nuevo"><input type="checkbox" id="n3"><label for="n3">En un hito con case
+        <span class="origen origen-heredada">post-S7</span></label></li>
+      <li data-origen="heredada"><input type="checkbox" id="n3"><label for="n3">En un hito con case
         study, "Ver logros completos" y "Ver case study →" están <strong>en la misma fila</strong>;
         al abrir los logros, la lista aparece <strong>debajo de la fila</strong>, no entre los dos.
-        <span class="origen origen-nuevo">Nuevo · post-S7</span></label></li>
-      <li data-origen="nuevo"><input type="checkbox" id="n4"><label for="n4">La sección
+        <span class="origen origen-heredada">post-S7</span></label></li>
+      <li data-origen="heredada"><input type="checkbox" id="n4"><label for="n4">La sección
         <strong>"Lo que construyo"</strong> ocupa el sitio de Proyectos: las cuatro cajas de la
         vitrina con su cuenta (Apps 6 · Agentes 13 · Investigaciones 7 · Tableros 6) y el botón
         "Entrar a la vitrina", que lleva al portal. Pulsa una caja: entras a ese frente.
-        <span class="origen origen-nuevo">Nuevo · post-S7</span></label></li>
-      <li data-origen="mejorado"><input type="checkbox" id="n5"><label for="n5">La sección
+        <span class="origen origen-heredada">post-S7</span></label></li>
+      <li data-origen="heredada"><input type="checkbox" id="n5"><label for="n5">La sección
         <strong>Estudios</strong> va antes de Certificaciones: <strong>tres tarjetas con sus
         años</strong> — Ingeniería Industrial (2009 — 2016), los estudios de Diseño Industrial
         (2011 — 2016) y el curso de inglés con IELTS en Melbourne (2013 — 2014). Ninguna dice
         "Sin fecha declarada". Lo mismo aparece en <code>/es/cv</code> y en el PDF, en su sección
         Formación. En Certificaciones ya <strong>no está AI-102</strong> (Microsoft la
         descontinuó) y el logro dice <strong>5 certificaciones</strong>.
-        <span class="origen origen-mejorado">Mejorado · 2026-09-10</span></label></li>
-      <li data-origen="nuevo"><input type="checkbox" id="n6"><label for="n6">En
+        <span class="origen origen-heredada">post-S7 (2.ª)</span></label></li>
+      <li data-origen="heredada"><input type="checkbox" id="n6"><label for="n6">En
         <strong>Skills</strong>, cuatro tarjetas con un icono cada una: al llegar, el icono
         <strong>se termina de dibujar</strong> (el trazo aparece) y los chips entran uno tras otro.
         No hay porcentajes ni barras.
-        <span class="origen origen-nuevo">Nuevo · post-S7</span></label></li>
-      <li data-origen="nuevo"><input type="checkbox" id="n7"><label for="n7">Con "reducir
+        <span class="origen origen-heredada">post-S7</span></label></li>
+      <li data-origen="heredada"><input type="checkbox" id="n7"><label for="n7">Con "reducir
         movimiento" activo, recarga: la línea de la trayectoria está completa y quieta, el círculo
         sigue a media pantalla y el año cambia sin fundido; los iconos de Skills aparecen ya
         dibujados. Nada parpadea.
-        <span class="origen origen-nuevo">Nuevo · post-S7</span></label></li>
-      <li data-origen="nuevo"><input type="checkbox" id="n8"><label for="n8">Pregúntale al chat
+        <span class="origen origen-heredada">post-S7</span></label></li>
+      <li data-origen="heredada"><input type="checkbox" id="n8"><label for="n8">Pregúntale al chat
         "¿qué estudió Henry?": responde con la Javeriana y cita <strong>Estudios</strong>, y la
         cita lleva a esa sección.
-        <span class="origen origen-nuevo">Nuevo · post-S7</span></label></li>
-      <li data-origen="nuevo" data-minimo><input type="checkbox" id="n9"><label for="n9">⭐
+        <span class="origen origen-heredada">post-S7</span></label></li>
+      <li data-origen="heredada" data-minimo><input type="checkbox" id="n9"><label for="n9">⭐
         <strong>Aprobación visual del índice:</strong> recorre la trayectoria entera en escritorio
         y en tu teléfono y decide si la animación es la que pediste — "una línea completa, un
         círculo que baja y el año grande" — y si se siente elegante y no un truco.
-        <span class="origen origen-nuevo">Nuevo · post-S7</span><span class="minimo">⭐ mínimo</span></label></li>
-      <li data-origen="nuevo" data-minimo><input type="checkbox" id="n10"><label for="n10">⭐
+        <span class="origen origen-heredada">post-S7</span><span class="minimo">⭐ mínimo</span></label></li>
+      <li data-origen="heredada" data-minimo><input type="checkbox" id="n10"><label for="n10">⭐
         <strong>Aprobación visual de Skills:</strong> ¿"elegante pero atractivo"? Decide si los
         cuatro iconos dicen lo que es cada grupo (chispa · capas · curva · rama) y si la animación
         del trazo suma o sobra.
-        <span class="origen origen-nuevo">Nuevo · post-S7</span><span class="minimo">⭐ mínimo</span></label></li>
-      <li data-origen="mejorado" data-minimo><input type="checkbox" id="n11"><label for="n11">⭐
+        <span class="origen origen-heredada">post-S7</span><span class="minimo">⭐ mínimo</span></label></li>
+      <li data-origen="heredada" data-minimo><input type="checkbox" id="n11"><label for="n11">⭐
         <strong>Juicio de contenido de Estudios y Certificaciones:</strong> los datos salieron de
         tu PDF 2024-I. Confirma títulos y años; que Diseño Industrial quede como "estudios de
         pregrado" (el PDF no dice título); que el inglés con IELTS vaya en Estudios y no en
         Certificaciones; y que retirar AI-102 del titular, el perfil, el logro y el case study de
         Vesting sea lo que quieres decir.
-        <span class="origen origen-mejorado">Mejorado · 2026-09-10</span><span class="minimo">⭐ mínimo</span></label></li>
+        <span class="origen origen-heredada">post-S7 (2.ª)</span><span class="minimo">⭐ mínimo</span></label></li>
     </ul>
     <div class="reportame"><p><strong>Repórtame sí o sí:</strong> un año que no cambie al pasar por
       una experiencia, el círculo fuera de la línea, un icono de Skills que no se vea, o un
       "Ver case study" que lleve a otro proyecto.</p></div>
+  </section>
+
+  <!-- ═══════ O. El «a fondo» (S8) ═══════ -->
+  <section class="bloque">
+    <div class="bloque-cabeza"><span class="letra">O</span><h2>El «a fondo»: el corpus que alimenta al chat</h2></div>
+    <p class="meta-bloque chica suave">~25 min · la mitad con el repositorio delante, no con el navegador · los documentos <strong>no tienen página</strong>: son combustible del chat.</p>
+    <ul class="pasos">
+      <li data-origen="nuevo"><input type="checkbox" id="o1"><label for="o1">Recorre la HOME y abre
+        el chat: <strong>responde igual que antes del sprint</strong>. Es lo correcto — los 24
+        documentos están en <code>borrador</code> y el chat no los ve. Confírmalo en la última línea
+        de <code>pnpm build</code>: <code>28 chunks (0 de 24 documentos «a fondo» aprobados e
+        indexados)</code>. <span class="origen origen-nuevo">Nuevo · S8</span></label></li>
+      <li data-origen="nuevo"><input type="checkbox" id="o2"><label for="o2">Busca una página del
+        detalle: <strong>no existe</strong>. Prueba <code>/es/a-fondo</code> y
+        <code>/es/detalle</code> — los dos dan 404, y ni la HOME ni un case study enlazan a ningún
+        documento. Fue tu decisión: «eso no lo puede ver NADIE».
+        <span class="origen origen-nuevo">Nuevo · S8</span></label></li>
+      <li data-origen="nuevo"><input type="checkbox" id="o3"><label for="o3">Abre
+        <code>data/a-fondo/README.md</code>: la tabla dice <strong>24 documentos · 132 subsecciones
+        · 14.268 palabras · 30 <code>[CONFIRMAR]</code> por resolver · 0 aprobados</strong> y nombra los <strong>seis documentos sin
+        ninguna pregunta abierta</strong>, que son por los que conviene empezar. Corre
+        <code>pnpm corpus:informe</code> y comprueba que la tabla se regenera sola.
+        <span class="origen origen-nuevo">Nuevo · S8</span></label></li>
+      <li data-origen="nuevo"><input type="checkbox" id="o4"><label for="o4">Mira cómo se defiende
+        el canal: en cualquier documento cambia <code>estado: borrador</code> por
+        <code>aprobado</code> y corre <code>pnpm build</code>. <strong>Se detiene</strong> nombrando
+        el archivo y la subsección —por el <code>[CONFIRMAR]</code> que aún tiene y por el gemelo en
+        inglés que falta—. Devuélvelo a <code>borrador</code>.
+        <span class="origen origen-nuevo">Nuevo · S8</span></label></li>
+      <li data-origen="nuevo"><input type="checkbox" id="o5"><label for="o5">Abre
+        <code>sprints/SPRINT_008-banco-de-preguntas.md</code>: <strong>131 preguntas</strong> con lo
+        que el chat trae hoy y lo que traería con la base aprobada, y la lista de las
+        <strong>18 preguntas que hoy reciben «eso se me escapa»</strong> y dejarían de recibirlo.
+        <span class="origen origen-nuevo">Nuevo · S8</span></label></li>
+      <li data-origen="nuevo" data-minimo><input type="checkbox" id="o6"><label for="o6">⭐
+        <strong>Lee un documento entero y decide si es tuyo.</strong> Empieza por
+        <code>data/a-fondo/como-trabajo.es.md</code> (no tiene preguntas abiertas). Léelo como si lo
+        hubiera escrito otro: ¿cada afirmación es verdad, y la dirías así? Lo que el chat cite
+        saldrá de ahí <strong>palabra por palabra</strong>, y nadie más que tú puede juzgarlo.
+        <span class="origen origen-nuevo">Nuevo · S8</span><span class="minimo">⭐ mínimo</span></label></li>
+      <li data-origen="nuevo" data-minimo><input type="checkbox" id="o7"><label for="o7">⭐
+        <strong>Cero terceros identificables.</strong> Barre los 24 buscando el nombre de una
+        persona —un jefe, un cliente, un compañero—. El build caza correos, teléfonos, cédulas y
+        direcciones web; <strong>un nombre propio no lo caza ningún programa</strong>. Es un
+        repositorio público: esta casilla es tuya y no se delega.
+        <span class="origen origen-nuevo">Nuevo · S8</span><span class="minimo">⭐ mínimo</span></label></li>
+      <li data-origen="nuevo" data-minimo><input type="checkbox" id="o8"><label for="o8">⭐
+        <strong>Las cifras y las fechas son verdaderas.</strong> Contrasta contra tu hoja de vida los
+        tres documentos con más números —<code>banco-pichincha</code>, <code>cafam</code>,
+        <code>transmilenio-cm</code>— y resuelve las <strong>12 diferencias</strong> de
+        <code>sprints/SPRINT_008-informe-discrepancias.md</code>. Una cifra publicada que no puedas
+        sostener en una entrevista es peor que no publicarla.
+        <span class="origen origen-nuevo">Nuevo · S8</span><span class="minimo">⭐ mínimo</span></label></li>
+      <li data-origen="nuevo" data-minimo><input type="checkbox" id="o9"><label for="o9">⭐
+        <strong>DIFERIDA hasta que apruebes el primero (M1).</strong> Cuando pases un documento a
+        <code>aprobado</code> y yo traduzca su gemelo, en la preview pregúntale al chat algo de ese
+        documento: tiene que responder <strong>con su prosa</strong>, citar, y que la cita
+        <strong>navegue a algo visible</strong> del sitio (su <code>ancla</code>). Juzga si la
+        respuesta suena a ti.
+        <span class="origen origen-nuevo">Nuevo · S8</span><span class="minimo">⭐ mínimo</span></label></li>
+      <li data-origen="nuevo" data-minimo><input type="checkbox" id="o10"><label for="o10">⭐
+        <strong>DIFERIDA hasta la base aprobada (M2).</strong> Con el proveedor real, hazle al chat
+        <strong>cinco preguntas del banco</strong> —una de trayectoria, una de IA, una de plataforma,
+        una incómoda y una ajena— y juzga: ¿concretas y fieles a las fuentes? ¿la cita correcta? ¿y
+        sigue diciendo «eso se me escapa» a la ajena?
+        <span class="origen origen-nuevo">Nuevo · S8</span><span class="minimo">⭐ mínimo</span></label></li>
+      <li data-origen="nuevo" data-minimo><input type="checkbox" id="o11"><label for="o11">⭐
+        <strong>Aprobación visual de los tres textos que se oscurecieron.</strong> El
+        <strong>/</strong> entre ES y EN del encabezado, el texto de ayuda del chat («Pregunta por mi
+        experiencia, proyectos…») y el <strong>404</strong> de la página de error: estaban en un gris
+        de 2,7:1 —por debajo del mínimo legible— y ahora están un tono más oscuro. Míralos en tu
+        pantalla y, si puedes, con luz de día: ¿se leen? ¿el <strong>/</strong> sigue siendo discreto
+        y no un elemento más del encabezado?
+        <span class="origen origen-nuevo">Nuevo · S8</span><span class="minimo">⭐ mínimo</span></label></li>
+    </ul>
+    <div class="kit"><p><strong>Kit de prueba:</strong> el orden para corregir y por dónde empezar
+      están en <code>data/a-fondo/README.md</code>; qué contesta hoy y qué contestaría aprobado, en
+      <code>sprints/SPRINT_008-banco-de-preguntas.md</code>.</p></div>
+    <div class="reportame"><p><strong>Repórtame sí o sí:</strong> el nombre de una persona en
+      cualquier documento, una cifra que no puedas sostener, una página del detalle que SÍ exista, o
+      un chat que empiece a citar un documento que no aprobaste.</p></div>
   </section>
 
   <!-- ═══════ J. Accesibilidad y movimiento ═══════ -->
@@ -671,6 +758,17 @@
     <details class="chica">
       <summary>Historial de la guía</summary>
       <ul>
+        <li><strong>v8 · S8 · 2026-09-12:</strong> el «a fondo», el corpus profundo del chat. Nuevo
+          bloque <strong>O</strong> (11 pruebas, <strong>6 ⭐</strong> diferidas al acumulado del
+          ciclo H2: o6 · o7 · o8 · o9 · o10 · o11; o9 y o10 son además las metas M1 y M2 y
+          <strong>esperan a que el dueño apruebe el primer documento</strong>). Ninguna prueba
+          eliminada ni comprimida: las 83 de S1–S7 y de las dos revisiones de la HOME pasan a
+          heredadas y se corren como regresión. <strong>Se retiró <code>data/historia/</code></strong>
+          —sus 12 secciones migraron a <code>data/a-fondo/</code> conservando id, título, destino y
+          guía— y <strong>no desapareció ninguna prueba con ello</strong>: la historia nunca tuvo
+          sujeto en esta guía porque nunca tuvo prosa (el build imprimía «0 secciones de historia con
+          contenido» desde el S3). Las pruebas del chat (bloque F) siguen enteras: el índice
+          publicado no cambió.</li>
         <li><strong>v7.1 · post-S7 (2.ª) · 2026-09-10:</strong> "Lo que construyo" entra al
           desplegable Hoja de vida (seis secciones, en el orden de la página); Estudios con los años
           del PDF del dueño (tres entradas); AI-102 retirada de todo el contenido (Microsoft la
@@ -743,7 +841,7 @@
   (function () {
     // NS VERSIONADO POR SPRINT: al publicar la guía de un sprint nuevo se cambia
     // s007c — así una regresión sin correr no aparece marcada por la versión anterior.
-    var NS = "guia-hoja-de-vida:s007c:";
+    var NS = "guia-hoja-de-vida:s008:";
     var casillas = Array.prototype.slice.call(document.querySelectorAll('input[type="checkbox"]'));
     var barra = document.getElementById("barra-avance");
     var contador = document.getElementById("contador");

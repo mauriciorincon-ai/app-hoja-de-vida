@@ -37,7 +37,28 @@ en componentes** — si un valor no está aquí, primero se agrega aquí (vía A
 | `ink-0`   | `#121110` | Display / headings                 |
 | `ink-1`   | `#2A2927` | Texto primario                     |
 | `ink-2`   | `#5E5C55` | Texto secundario                   |
-| `ink-3`   | `#9C9A90` | Texto terciario, labels de eje     |
+| `ink-3`   | `#9C9A90` | **Decorativo: bordes, rellenos, trazos — JAMÁS texto** |
+
+#### Tokens de tinta VETADOS como color de TEXTO
+
+Un token de tinta que no alcanza AA sobre superficie **no se vigila con prosa ni con axe al
+final**: se declara aquí, en forma legible por máquina, y lo hace fallar un barrido sobre `src/`
+(`tests/unit/design-tokens-vetados.test.ts`, kit v1.26.0 → regla 5). Editar esta lista **cambia el
+gate**: es su única fuente. Vetado como texto no es vetado a secas — `border-`, `bg-`, `fill`,
+`stroke` y `decoration-` siguen siendo usos legítimos del mismo token.
+
+<!-- tokens-vetados-como-texto:inicio -->
+
+```yaml
+vetados_como_texto:
+  - token: ink-3
+    hex: "#9C9A90"
+    contraste: "2.7:1 sobre paper-0"
+    minimo: ink-2
+    porque: "axe lo cazó dos veces en la misma app (S6 y post-S7); la tercera la caza el test"
+```
+
+<!-- tokens-vetados-como-texto:fin -->
 
 **Acentos pastel** (cada uno con su ink par, contraste ≥7:1 AAA — usar SIEMPRE en pareja):
 

@@ -19,6 +19,23 @@ pueda ejecutarlo de la mejor manera sin ambigüedad**. La Fase 2 puede (y suele)
 un modelo menor siguiendo ese plan al pie. El usuario decide el modelo de cada fase con
 `/model` — este comando se lo recuerda al entregar el reporte.
 
+## Quién audita la Fase 1 (kit v1.26.0)
+
+**La Fase 1 la corre un auditor INDEPENDIENTE, con el diff delante y sin haber construido.**
+No es un detalle de organización: los dos hallazgos más caros del S7 salieron de revisar
+justamente lo que el constructor daba por bueno — nadie audita bien lo que acaba de escribir,
+porque la lectura la hace la intención y no el código.
+
+Cómo se cumple en la práctica, en orden de preferencia:
+
+1. **Un subagente de auditoría** lanzado para esto, con el diff completo (`git diff main...HEAD`),
+   el plan aprobado y la orden del sprint. **Recibe el diff, no el relato del constructor.**
+2. **Sesión aparte** en otra ventana, arrancando de cero sobre el mismo branch.
+3. Si ninguna es posible, se declara en el reporte: *«Fase 1 corrida por el constructor»* — y el
+   hallazgo se lee con esa advertencia puesta. Es el peor de los tres, no un empate.
+
+El auditor **nunca escribe código**: entrega hallazgos. La Fase 2 es de quien construye.
+
 ## FASE 1 — Auditoría (SOLO LECTURA)
 
 1. **Cobertura de alcance:** contrasta CADA ítem planeado (el plan aprobado del sprint +

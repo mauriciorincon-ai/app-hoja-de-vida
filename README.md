@@ -49,7 +49,7 @@ despliegue. `docs/APROVISIONAMIENTO.md` dice cuáles hacen falta y para qué.
 
 | Ruta                       | Qué hay                                                                                         |
 | -------------------------- | ----------------------------------------------------------------------------------------------- |
-| `data/`                    | El contenido: hoja de vida (ES/EN), apps del pipeline, frentes de la vitrina, historia del chat |
+| `data/`                    | El contenido: hoja de vida (ES/EN), apps del pipeline, frentes de la vitrina, corpus «a fondo» del chat |
 | `content/`                 | Lo que llega de otras casas del pipeline — **no se edita aquí**: se corrige en origen           |
 | `src/`                     | `app/[locale]/` rutas · `components/` UI · `lib/` motores y carga de contenido                  |
 | `docs/MANUAL-DE-USO.md`    | Cómo se usa y **cómo alimentarla**, en español llano                                            |

@@ -10,7 +10,7 @@ export default async function NotFoundPage() {
       className="grid min-h-svh flex-1 place-items-center px-4"
     >
       <div className="max-w-md text-center">
-        <p className="font-mono text-sm tracking-[0.2em] text-ink-3 uppercase">
+        <p className="font-mono text-sm tracking-[0.2em] text-ink-2 uppercase">
           404
         </p>
         <h1 className="mt-4 font-display text-3xl font-medium tracking-[-0.015em] text-ink-0">

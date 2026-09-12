@@ -29,7 +29,15 @@ Corre cada verificación en orden y reporta estado:
 
 ### 3. Lint y formato
 - [ ] `pnpm lint` sin warnings nuevos.
-- [ ] `prefers-reduced-motion` respetado si hay animaciones nuevas.
+- [ ] `prefers-reduced-motion` respetado si hay animaciones nuevas — y **la FORMA del árbol no
+      depende de `useReducedMotion()`** (regla 5-a): lo vigila
+      `tests/unit/motion-estructura-reducida.test.tsx`.
+- [ ] **Tokens de tinta vetados como texto** (regla 5-b, kit v1.26.0):
+      `tests/unit/design-tokens-vetados.test.ts` verde. Barre `src/**` contra el bloque
+      `tokens-vetados-como-texto` de `design-system.md` en sus tres formas —clase de Tailwind,
+      `color: var(--color-…)` y el hex suelto—. **No se silencia una violación: se cambia el
+      token.** Si hace falta un uso nuevo del token que NO sea texto (borde, relleno, trazo), ya
+      está permitido; si hace falta como texto, es una decisión de diseño y va por ADR.
 
 ### 4. Build
 - [ ] `pnpm build` exitoso.
@@ -67,10 +75,20 @@ Corre cada verificación en orden y reporta estado:
 
 ### 8. Performance
 - [ ] Lighthouse score >=90 en Performance, Best Practices, Accessibility, SEO (móvil).
-      **Desde kit v1.12.0 esta casilla SÍ tiene gate mecánico:** el job `lighthouse` corre
-      `lhci assert --config=./lighthouse-categorias.json` sobre las URLs de
-      `lighthouse-urls.json` — antes solo se medía `perf-budget.json` (tiempos y pesos, que es
-      otra cosa) y la casilla se marcaba sin que nadie la hubiera verificado nunca.
+      **En ESTA app la casilla tiene gate mecánico desde el S8, no antes** (el gate llegó al kit
+      en la v1.12.0 y la app se estampó desde la v1.0.0): hasta el S7 el job medía **solo**
+      `perf-budget.json` —tiempos y pesos, que es otra cosa— y la casilla se marcó siete sprints
+      seguidos sin que nadie la verificara jamás. Hoy el job hace UN `lhci collect` y **DOS**
+      `lhci assert` (`lighthouse-budget.json` y `lighthouse-categorias.json`), porque LHCI declara
+      `assert.budgetsFile` mutuamente excluyente con `assert.assertions`.
+- [ ] **Tres corridas por URL y aserción sobre la MEDIANA** (kit v1.26.0, `--numberOfRuns=3` +
+      `aggregationMethod: median-run` dentro de cada config — `lhci assert` **no** acepta la
+      bandera suelta). Una corrida no mide: la home de esta app dio 89 en una y 90/91/91 en tres.
+      La lista de URLs vive en `lighthouse-urls.json`, que es dato y no YAML — es la palanca para
+      bajar el costo del job, nunca el número de corridas.
+- [ ] Best Practices se queda en **96** midiendo fuera de Vercel: `/_vercel/insights/script.js`
+      devuelve 404 con `pnpm start` y eso cuesta `errors-in-console`. Es el arnés, no el sitio —
+      no lo persigas.
       **Si lo corres a mano: `npx @lhci/cli`** — `npx lhci` A SECAS resuelve a un paquete
       impostor del registry (imprime "Hello, this is AnupamAS01!"); el CI del kit ya usa el
       correcto (K-habla S2).
@@ -87,6 +105,13 @@ Corre cada verificación en orden y reporta estado:
       README, BLUEPRINT ("qué ve quién" sin la URL), manual, guía (su campo de URL se llena EN
       USO), CTAs. *La producción se muestra (brochure), jamás se entrega (link).* Si este sprint
       es anterior a la regla y encuentras enlaces heredados: se limpian en este mismo PR.
+      **CUÁNDO: después del ÚLTIMO `git add`, no antes** (kit v1.26.0). Un barrido temprano deja
+      ciega la ventana entre él y el push — así entraron al PR del S5 los artefactos de
+      `.lighthouseci/`. **Y cubre código y comentarios de tests:** el comentario de un spec que
+      cita el dominio de preview es una fuga igual que una URL en el README.
+      **Y tras CADA merge a `main`, vuelve a mirar el campo homepage:** la GitHub App de Vercel lo
+      reescribe en cada deploy de producción. Jamás se automatiza con un PAT de administración
+      como secret en un repo público.
 - [ ] (post-MVP) **Si este sprint cambió features y la app tiene brochure: el brochure se ajustó
       EN ESTE SPRINT** (regla 13 — el sello MVP no lo congela; un brochure que describe el sprint
       pasado es una frase caducada de página entera).

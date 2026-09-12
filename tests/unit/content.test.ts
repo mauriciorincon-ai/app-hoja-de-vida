@@ -1,6 +1,8 @@
-import { readFileSync } from "node:fs";
+import { readdirSync, readFileSync } from "node:fs";
+import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { parse } from "yaml";
+import { DIR_A_FONDO } from "../../scripts/a-fondo.mjs";
 import { getApps, getCv } from "@/lib/content";
 import { parseApps, parseCv } from "@/lib/schemas";
 
@@ -42,9 +44,17 @@ describe("content loader (data/*.yaml reales)", () => {
   });
 
   // Una credencial nombrada por código (DP-600, AI-102…) en el titular, un
-  // logro, un case study, la historia del chat o apps.yaml es una promesa:
+  // logro, un case study, el corpus «a fondo» o apps.yaml es una promesa:
   // tiene que existir en `certificaciones`. Nació el 2026-09-10, cuando AI-102
   // salió de la lista (Microsoft la descontinuó) y seguía viva en seis sitios.
+  //
+  // S8 — el segundo estado declarable. El canal «a fondo» destapó el caso que
+  // faltaba: un documento cuyo TEMA es el estado de una credencial —una
+  // descontinuada, una en curso— tiene que escribir el código justamente para
+  // decir que NO se tiene. La promesa no se toca (sigue siendo imposible
+  // afirmar una credencial que no se tiene); lo que se añade es que un código
+  // también puede estar declarado en `data/credenciales-nombradas.yaml` CON SU
+  // RAZÓN. Un código que no esté en ninguna de las dos rompe igual.
   const CODIGO_CREDENCIAL = /\b(?:AI|DP|AZ|PL|DA|MB|MS|SC)-\d{3}\b/g;
   type Hallazgo = { ruta: string; codigo: string };
   function codigosEn(valor: unknown, ruta: string, out: Hallazgo[]) {
@@ -58,25 +68,56 @@ describe("content loader (data/*.yaml reales)", () => {
     }
   }
 
-  it("toda credencial nombrada por código existe en certificaciones (cv, historia y apps)", () => {
+  it("toda credencial nombrada por código existe en certificaciones (cv, «a fondo» y apps)", () => {
     const apps: unknown = parse(readFileSync("data/apps.yaml", "utf8"));
+    const declaradas = parse(
+      readFileSync("data/credenciales-nombradas.yaml", "utf8"),
+    ) as { nombradas_sin_obtener: { codigo: string; razon: string }[] };
+    for (const d of declaradas.nombradas_sin_obtener) {
+      expect(
+        d.razon?.trim(),
+        `credenciales-nombradas.yaml: «${d.codigo}» sin razón. Nombrar una credencial que no se tiene es una decisión, y una decisión sin razón escrita no es declarable.`,
+      ).toBeTruthy();
+    }
+    const declarada = new Set(
+      declaradas.nombradas_sin_obtener.map((d) => d.codigo),
+    );
     for (const locale of ["es", "en"] as const) {
       const { certificaciones, ...resto } = getCv(locale);
-      const vigentes = new Set(
+      const listadas = new Set(
         certificaciones.flatMap((c) => c.nombre.match(CODIGO_CREDENCIAL) ?? []),
       );
       const halladas: Hallazgo[] = [];
       codigosEn(resto, `cv.${locale}`, halladas);
-      codigosEn(
-        readFileSync(`data/historia/historia.${locale}.md`, "utf8"),
-        `historia.${locale}`,
-        halladas,
-      );
+      // El canal «a fondo» reemplazó a la historia en el S8: los códigos de
+      // credencial se cuelan igual en la prosa, y ahí hay 24 documentos, no 2.
+      for (const archivo of readdirSync(DIR_A_FONDO).filter((f) =>
+        f.endsWith(`.${locale}.md`),
+      )) {
+        codigosEn(
+          readFileSync(join(DIR_A_FONDO, archivo), "utf8"),
+          `a-fondo/${archivo}`,
+          halladas,
+        );
+      }
       codigosEn(apps, "apps", halladas);
+      // EL SEGUNDO ESTADO HABILITA LA PROSA, NO EL CV (fase 2 de la auditoría).
+      // Al nacer, `credenciales-nombradas.yaml` autorizaba su código EN TODAS
+      // PARTES, y con eso `cv.es.yaml` habría podido poner «Certificado AI-103»
+      // en el titular y pasar en verde — el gate dejaba de vigilar «una
+      // credencial nombrada es una credencial listada» y pasaba a vigilar «está
+      // declarada en alguna parte», que no es la misma promesa. El segundo
+      // estado existe porque la PROSA del corpus necesita explicar por qué una
+      // credencial ya no está o todavía no está; el CV, no: ahí un código o
+      // está en `certificaciones` o no se nombra.
       const huerfanas = halladas
-        .filter((h) => !vigentes.has(h.codigo))
+        .filter((h) => !listadas.has(h.codigo))
+        .filter((h) => !(h.ruta.startsWith("a-fondo/") && declarada.has(h.codigo)))
         .map((h) => `${h.codigo} en ${h.ruta}`);
-      expect(huerfanas).toEqual([]);
+      expect(
+        huerfanas,
+        "una credencial nombrada es una credencial listada: en el CV y en apps.yaml, el código está en `certificaciones` de cv.*.yaml o no se nombra; en la prosa de data/a-fondo/ vale además el segundo estado declarado en data/credenciales-nombradas.yaml, con su razón",
+      ).toEqual([]);
     }
   });
 

@@ -84,11 +84,18 @@ e inglés. Quien la visita puede pedir acceso a tus apps y la solicitud te llega
 - **Qué hace:** las secciones que estaban guardadas desde el content pack ahora son
   visibles: el párrafo de Perfil, las 5 certificaciones (la DP-600 resaltada) y los 4 grupos
   de skills. **AI-102 salió el 2026-09-10:** Microsoft la descontinuó, y con ella se fue de
-  todo el contenido que la nombraba (titular, perfil, logro, case study de Vesting, historia
+  todo el contenido que la nombraba (titular, perfil, logro, case study de Vesting, corpus
   del chat, `apps.yaml`).
-- **Una credencial nombrada es una credencial listada:** si cualquier texto de `data/` menciona
-  un código (DP-600, AI-102…) que no esté en `certificaciones:`, el test de contenido lo nombra
-  con su ruta y falla. Para volver a citar una certificación, primero va a la lista.
+- **Una credencial nombrada es una credencial listada:** si el CV o `apps.yaml` mencionan un
+  código (DP-600, AI-102…) que no esté en `certificaciones:`, el test de contenido lo nombra con
+  su ruta y falla. Para volver a citar una certificación, primero va a la lista.
+- **Con una excepción, y solo en la prosa del «a fondo» (S8):** ahí hace falta poder **explicar
+  por qué una credencial ya no está o todavía no está** — el AI-102 que Microsoft descontinuó, la
+  ruta del AI-103 en curso—. Para eso existe `data/credenciales-nombradas.yaml`: un código se
+  declara ahí, **con su razón escrita**, y entonces los documentos de `data/a-fondo/` pueden
+  nombrarlo. **El CV sigue igual de estricto:** un código declarado ahí no autoriza a ponerlo en
+  el titular, el perfil ni los logros. Nombrar una credencial que no se tiene es una decisión, y
+  una decisión sin razón escrita no es declarable.
 - **Links de verificación:** cuando tengas los links de Credly/Microsoft Learn, pégalos en
   el campo `verificacion:` de cada certificación — el botón "Verificar ↗" aparece solo.
 - **Skills, desde la revisión post-S7:** una tarjeta por grupo con un icono dibujado en casa
@@ -353,8 +360,8 @@ e inglés. Quien la visita puede pedir acceso a tus apps y la solicitud te llega
   respuesta amable fija — sin gastar un solo token. Y si el proveedor de IA se cae o se queda
   sin cuota, el chat **no muere**: pasa a "Búsqueda local" y muestra los fragmentos de la hoja
   de vida que mejor responden, avisándolo con honestidad.
-- **De dónde saca las respuestas:** de los mismos YAML de siempre + tu historia
-  (`data/historia/` — ver la guía de abajo). Cada push re-indexa el conocimiento del chat.
+- **De dónde saca las respuestas:** de los mismos YAML de siempre + tus documentos **a fondo**
+  (`data/a-fondo/` — ver la guía de abajo). Cada push re-indexa el conocimiento del chat.
 - **Cuánto cuesta:** con Groq (el proveedor actual) el plan gratuito cubre el uso esperado:
   US$0. Hay protecciones apiladas: máximo 10 preguntas por minuto por visitante, respuestas
   cortas (tope de tokens), historial corto, y el interruptor de apagado.
@@ -373,46 +380,118 @@ e inglés. Quien la visita puede pedir acceso a tus apps y la solicitud te llega
   búsqueda local. Tú lo notas en los logs (`proveedor falló`) y en el badge "Búsqueda local"
   al probar el chat.
 
-### Cómo alimentar la historia (el combustible del chat) · desde Sprint 003
+### Cómo alimentar el «a fondo» (el combustible del chat) · desde Sprint 008
 
-Tu workstream de contenido: dos archivos gemelos, `data/historia/historia.es.md` y
-`data/historia/historia.en.md`, donde escribes tu carrera al detalle que quieras — el chat
-los usa como fuente principal. Ya tienen el **esqueleto guiado**: una sección por etapa de tu
-carrera con un comentario que dice qué escribir en cada una.
+> **Reemplaza a «Cómo alimentar la historia» (S3).** `data/historia/` se retiró en el Sprint 008:
+> eran dos archivos con 12 encabezados y **cero prosa** — las ~40 palabras de cada sección eran
+> la GUÍA de qué escribir, no el contenido. Sus 12 secciones migraron a `data/a-fondo/`
+> conservando id, título, destino y guía palabra por palabra, y el canal nuevo trae lo que le
+> faltaba al viejo: un documento por tema en vez de dos archivos gigantes, aduana que rompe el
+> build nombrando archivo y campo, y un estado que separa el borrador de lo publicable.
 
-- **Cómo se escribe (prosa normal, sin marcas raras):** dentro de cada sección escribes
-  párrafos comunes y corrientes. NO necesitas marcar nada dentro del texto — ni negritas
-  especiales, ni etiquetas, ni formato para el buscador. El sistema trocea por secciones y el
-  chat cita la sección entera.
-- **Las ÚNICAS 2 marcas que existen** (ya están puestas en el esqueleto; solo las tocas si
-  creas una sección nueva):
-  1. El título `## Así se titula la sección`
-  2. Debajo, el comentario `<!-- seccion: un-id-unico | ancla: /proyectos/vesting -->`
-     - `seccion:` es el nombre interno que conecta la sección con su gemela en el otro idioma
-       (debe ser idéntico en ambos archivos).
-     - `ancla:` es **a dónde navega la cita** cuando el chat use esa sección: una sección de
-       la HOME (`#trayectoria`, `#perfil`, `#certificaciones`…) o un case study
-       (`/proyectos/vesting`). Si la omites, la cita lleva a Trayectoria.
-- **Cómo funcionan las citas por dentro (para que confíes en ellas):** cuando el visitante
-  pregunta, el sistema busca las secciones más relevantes, se las pasa numeradas a la IA, y
-  la IA responde marcando `[1]`, `[2]`… Cada número aparece bajo la respuesta como un chip
-  clicable que navega al `ancla` de esa sección. Por eso el ancla importa: es la promesa de
-  "verifícalo tú mismo".
-- **El ritmo incremental:** rellena UNA sección cuando tengas un rato → tradúcela en su
-  gemela EN → commit + push. El próximo deploy re-indexa y el chat ya sabe eso. Las secciones
-  vacías no estorban ni rompen nada.
-- **La regla de paridad (el único "no"):** si una sección tiene contenido en un idioma y su
-  gemela está vacía, la publicación **falla a propósito** con un mensaje que dice exactamente
-  qué sección falta traducir. Es la garantía de que el chat sabe lo mismo en ES y EN.
-- **Cómo verificar que un párrafo nuevo ya es citable:** tras el deploy, abre el chat y
-  pregunta por ese tema — la respuesta debe usarlo y citarlo. (En local: `pnpm build` y
-  revisa que diga "N secciones de historia con contenido".)
-- **⚠ Privacidad (la advertencia de siempre):** TODO lo que escribas ahí es público dos
-  veces — el repo es público en GitHub y el chat se lo cita a cualquiera. Nada de datos
-  confidenciales de empleadores, salarios, nombres de terceros sin permiso, ni datos de
-  pacientes (CTIC). Ante la duda, no lo publiques.
-- **Secciones nuevas:** copia el patrón (título + comentario con `seccion:` único y su
-  `ancla:`) en AMBOS archivos. Puedes tener tantas como quieras.
+Tu workstream de contenido: **un archivo por tema**, en `data/a-fondo/<tema>.es.md` y su gemelo
+`.en.md`. Es el corpus profundo del chat — lo que no cabe en el CV.
+
+**Lo primero, y lo único que de verdad tienes que recordar: `estado`.**
+
+| `estado`   | Qué pasa                                                                                                       |
+| ---------- | ---------------------------------------------------------------------------------------------------------------- |
+| `borrador` | El chat **no lo indexa** y **no se le exige el gemelo en inglés**. Es tuyo, para escribir y corregir con calma. |
+| `aprobado` | El chat **lo indexa y lo cita** — y el build **exige** el gemelo `.en.md` completo, subsección por subsección. |
+
+Así la base entera puede vivir en español mientras la corriges, sin romper la publicación y sin
+que el chat cite media traducción. **Tú decides cuándo un documento pasa a `aprobado`**: cambias
+esa palabra, se traduce, y el siguiente deploy lo pone a responder.
+
+**La cabecera del documento** (el bloque entre `---` y `---`):
+
+```yaml
+---
+slug: vesting                      # = nombre del archivo, sin el idioma
+titulo: "Vesting — la plataforma de datos para agentes de IA"
+resumen: "Una o dos líneas: de qué va este documento."
+estado: borrador                   # borrador | aprobado
+ancla: "/proyectos/vesting"        # a dónde navega la cita — VA ENTRE COMILLAS
+actualizado: 2026-09-12
+preguntas_de_prueba:               # mínimo 2
+  - "¿Cómo diseñó Henry el ecosistema de datos de Vesting?"
+  - "¿Qué es el proceso core replicable de agentes?"
+---
+```
+
+**Las comillas del `ancla` no son decoración:** sin ellas, un `#perfil` lo lee YAML como un
+comentario y el campo llega vacío. El build lo dice, pero es más fácil no tropezar.
+
+**Dentro del documento**, las ÚNICAS 2 marcas de siempre:
+
+1. El título `## Así se titula la subsección`
+2. Debajo, el comentario `<!-- seccion: un-id-unico -->`
+
+El resto es prosa normal, en primera persona, en párrafos. **Cada subsección es un fragmento
+citable**: cuando el chat responde con ella, el chip `[n]` lleva al `ancla` del documento.
+
+**Lo que el build NO te deja publicar** (y te lo dice con archivo y campo):
+
+- Una cabecera incompleta o con un `estado` inventado.
+- Dos subsecciones con el mismo id en un documento.
+- Un documento `aprobado` sin su gemelo en inglés, o con distintas subsecciones entre idiomas.
+- Un documento `aprobado` que todavía tiene un `[CONFIRMAR: …]`. **Aprobar es justamente haber
+  resuelto esas preguntas**: si quedara una, el chat se la citaría tal cual a un visitante —tu
+  pregunta a ti mismo publicada como si fuera evidencia—.
+- Un correo, un teléfono, siete dígitos seguidos (cédula, NIT) o una dirección web en la prosa.
+- Un `ancla` que **no existe en el sitio**. Esta es nueva y vale la pena entenderla: si mañana
+  se retira una sección de la HOME, los documentos que citaban hacia ella se ponen en rojo. Una
+  cita que no lleva a ninguna parte rompe la única promesa del chat.
+
+**Lo que ningún programa puede cazar por ti: los nombres propios.** El barrido caza correos y
+teléfonos; a un jefe, un cliente o un compañero mencionado por su nombre **no lo caza un regex**.
+Esa decisión es tuya, documento por documento.
+
+**Ninguna cifra, fecha ni logro sin fuente.** Si algo falta, se escribe `[CONFIRMAR: qué falta]`
+y ahí se queda hasta que lo confirmes. Nunca un dato plausible inventado. Es la única marca que
+el build persigue de verdad: mientras esté, el documento no puede pasar a `aprobado`.
+
+**El ritmo:** escribe un documento → déjalo en `borrador` todo el tiempo que quieras → cuando
+esté bien, `aprobado` + su gemelo en inglés → commit + push. En local puedes comprobarlo con
+`pnpm build`: la última línea dice cuántos documentos hay y cuántos están aprobados e indexados.
+
+**Un tema nuevo:** copia cualquier documento, cámbiale el `slug` (que debe coincidir con el
+nombre del archivo) y escribe. No hay lista que actualizar en ninguna parte.
+
+### Cómo se prueba que el contenido contesta · desde Sprint 008
+
+Escribir el documento es la mitad. La otra es comprobar que **el chat lo encuentra cuando alguien
+pregunta**, y eso no se mira a ojo: hay dos conjuntos de preguntas que corren en cada `pnpm test`.
+
+| Conjunto                                | Dónde vive                                | Qué exige                                                                       |
+| --------------------------------------- | ----------------------------------------- | --------------------------------------------------------------------------------- |
+| **Las preguntas de prueba del documento** | en su propia cabecera (`preguntas_de_prueba`) | Que cada pregunta traiga **su** documento. La prueba viaja con el contenido |
+| **El banco de preguntas**               | `tests/fixtures/banco-de-preguntas.es.yaml` | Que 131 preguntas **de afuera** traigan la fuente que debería contestarlas   |
+
+**Por qué hacen falta los dos.** Las preguntas de prueba de un documento se escriben con el
+documento delante, así que usan sus palabras. Quien recluta usa las suyas: «MLOps», «lakehouse»,
+«posgrado», «pipelines». Y la búsqueda de este chat es **léxica** — si el corpus no dice esa
+palabra, no hay nada que traer, por más que el trabajo esté hecho. El banco es, además de una
+prueba, una **auditoría de vocabulario**.
+
+**Cuando una pregunta del banco se pone roja hay dos salidas honestas y ninguna es aflojarla:**
+
+1. el contenido no lo dice con las palabras de quien pregunta → **se corrige el documento**;
+2. la contesta mejor otra fuente → **se corrige `espera:` en el banco**.
+
+Inventar contenido para que pase es la tercera, y está prohibida.
+
+**Para agregar una pregunta** basta con escribirla en el banco con la fuente que esperas:
+
+```yaml
+- pregunta: "¿Tiene experiencia con Docker y Kubernetes?"
+  espera: [plataforma-y-despliegue] # el slug del documento que debería contestarla
+  familia: plataforma-y-datos
+```
+
+**Para leer cómo va todo junto:** `pnpm corpus:informe` regenera
+`sprints/SPRINT_008-banco-de-preguntas.md`, que trae pregunta por pregunta qué fragmentos trae el
+chat hoy y cuáles traería con la base aprobada. Ese informe **se genera, no se escribe a mano**.
 
 ### Animaciones y accesibilidad · desde Sprint 001
 
@@ -435,9 +514,10 @@ carrera con un comentario que dice qué escribir en cada una.
 | 001    | Contenido por YAML, showcase de apps, bilingüe ES/EN, solicitudes de acceso, motion.                                                                                                                                                                                                                                     |
 | 001bis | Content pack v1 integrado (marca Henry Rincón), estado "en producción", enlaces de evidencia en las cards, campos `certificaciones`/`skills`/`perfil` previstos para S2.                                                                                                                                                 |
 | 002    | Capa de profundidad: bullets expandibles por hito, 5 case studies con URL propia, secciones Perfil/Certificaciones/Skills, ruta `/cv` imprimible + PDF ATS descargable.                                                                                                                                                  |
-| 003    | El chat que responde por ti: RAG con citas navegables, proveedor conmutable por env (Groq inicial), off-topic sin tokens, fallback local que nunca muere, kill-switch, y la historia (`data/historia/`) como corpus incremental con guía de alimentación.                                                                |
+| 003    | El chat que responde por ti: RAG con citas navegables, proveedor conmutable por env (Groq inicial), off-topic sin tokens, fallback local que nunca muere, kill-switch, y la historia (`data/historia/`) como corpus incremental con guía de alimentación. **La historia se RETIRÓ en el S8** (nunca tuvo prosa): su guía de alimentación la reemplaza «Cómo alimentar el a fondo».                                                                |
 | 004    | Roadmap con votación anónima (contador real o "no disponible", dedup por navegador, cero PII), página brochure animada por app real, y menú en móvil. Cierre del ciclo H1: el MVP funcional queda completo.                                                                                                              |
 | 005    | La vitrina: escaparate de las seis apps hermanas y **una página propia por app**, alimentadas por los `brochure-export.json` que cada app genera; tarjetas que se abren al llegar leyendo; capturas de las apps reales repintadas con la paleta de esta página; cero enlaces y CTA de lista de espera. Abre el ciclo H2. |
 | 007    | Las estanterías: los cuatro frentes de la vitrina abiertos con piezas reales (6 apps · 13 agentes · 7 investigaciones · 6 tableros). Un escaparate por frente y una ficha por pieza, con el mismo renderizador de las apps; las fichas las produce quien construye cada pieza y llegan por PR de contenido. Contrato v1.3.0: los tableros añaden «Lo que dicen los datos» y «Cómo se ve» (galería de capturas), opcionales y con renumeración automática. |
+| 008    | El «a fondo»: un documento por tema en `data/a-fondo/` como corpus profundo del chat, con aduana que rompe el build nombrando archivo y campo (cabecera, ids duplicados, paridad ES/EN de los aprobados, privacidad mecánica, **y ningún `[CONFIRMAR]` en un aprobado**) y un `estado` que separa el borrador de lo citable. **Banco de 131 preguntas de afuera** como prueba del contenido, con su informe generado. **El destino de toda cita se verifica contra el sitio real** — así murió el `#apps` que llevaba una revisión entera apuntando a una sección retirada. `data/historia/` retirada, sus 12 secciones migradas. |
 | post-S7 | Revisión del dueño sobre la HOME: la trayectoria como índice que baja contigo (línea continua, círculo fijo a media pantalla, año grande); la vitrina en el sitio de Proyectos y los case studies desde su hito; Estudios como sección y como dato (`cv.estudios`); Skills en tarjetas con icono y trazo; el roadmap se muda a `/vitrina/apps` y sale del menú. |
 | post-S7 (2.ª) | «Lo que construyo» entra al desplegable Hoja de vida; Estudios con los años del PDF del dueño (tres entradas); AI-102 retirada de todo el contenido (Microsoft la descontinuó) y gate nuevo: una credencial nombrada tiene que estar en `certificaciones:`. |

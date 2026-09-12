@@ -1,9 +1,11 @@
 /**
- * Índice de conocimiento del chat (S3, ADR-010) — corre en cada build ANTES
- * de `next build` (encadenado en package.json, patrón del PDF ADR-008).
+ * Índice de conocimiento del chat (S3, ADR-010; canal «a fondo» S8, ADR-019) —
+ * corre en cada build ANTES de `next build` (encadenado en package.json, patrón
+ * del PDF ADR-008).
  *
  * Fuentes por locale: data/cv.{es,en}.yaml + data/apps.yaml +
- * data/historia/historia.{es,en}.md (corpus principal cuando tiene contenido).
+ * data/a-fondo/<slug>.{es,en}.md (el corpus profundo, y el principal cuando
+ * tiene documentos aprobados).
  * Salida: public/chat-index.{es,en}.json — UN solo asset que sirve doble:
  * retrieval del RAG en el server (/api/chat) y búsqueda local del fallback
  * en el cliente (fetch lazy).
@@ -12,16 +14,29 @@
  * ("#trayectoria") o página ("/proyectos/<slug>"); el cliente antepone
  * "/{locale}".
  *
- * REGLA DE PARIDAD (falla el build): si una sección de la historia tiene
- * contenido en un idioma, su gemela (mismo `seccion: id`) debe tenerlo en el
- * otro. El chat responde en el idioma de la página — sin paridad, un idioma
- * quedaría ciego.
+ * **EL DESTINO DE TODA CITA SE VERIFICA CONTRA EL SITIO REAL** (S8): el
+ * catálogo de `scripts/destinos.mjs` se deriva de la HOME y de los datos, y el
+ * build FALLA si un chunk apunta a algo que no existe. Nació de encontrar
+ * `#apps` —muerto desde la revisión post-S7— vivo en dos sitios a la vez.
+ *
+ * La aduana del canal «a fondo» (frontmatter, ids duplicados, paridad ES/EN de
+ * los aprobados, privacidad mecánica) vive en `scripts/a-fondo.mjs` y también
+ * rompe el build, nombrando archivo y campo.
+ *
+ * HISTORIA RETIRADA (S8): `data/historia/historia.{es,en}.md` era un esqueleto
+ * de 12 secciones sin una sola línea de prosa —las ~40 palabras por sección
+ * eran la GUÍA, no el contenido, y el build lo imprimía en cada corrida:
+ * «0 secciones de historia con contenido»—. Sus 12 secciones migraron a
+ * `data/a-fondo/` conservando id, título, destino y guía palabra por palabra
+ * (test de conservación). Declarado en el manual y en la guía de prueba.
  */
 
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import process from "node:process";
 import { parse } from "yaml";
+import { chunksDeAFondo, leerDocumentos, revisarAduana } from "./a-fondo.mjs";
+import { catalogoDeDestinos, destinoExiste } from "./destinos.mjs";
 
 const ROOT = process.cwd();
 // Los tests pasan un directorio temporal como argv[2] (patrón del script del PDF)
@@ -40,7 +55,7 @@ const LABELS = {
     skills: "Skills",
     contacto: "Contacto y enlaces",
     apps: "Apps del pipeline",
-    historia: "Historia",
+    aFondo: "A fondo",
   },
   en: {
     perfil: "Profile",
@@ -51,7 +66,7 @@ const LABELS = {
     skills: "Skills",
     contacto: "Contact & links",
     apps: "Pipeline apps",
-    historia: "Story",
+    aFondo: "In depth",
   },
 };
 
@@ -59,76 +74,8 @@ function readYaml(fileName) {
   return parse(readFileSync(path.join(ROOT, "data", fileName), "utf8"));
 }
 
-/**
- * Parsea historia.<locale>.md → secciones {id, ancla, titulo, texto}.
- * Marcas del dueño (las únicas 2): encabezado `## Título` + comentario
- * `<!-- seccion: id | ancla: destino -->`. El resto de comentarios (guías,
- * cabecera de privacidad) se descarta y NUNCA se indexa.
- */
-export function parseHistoria(markdown, fileName) {
-  const sections = [];
-  const parts = markdown.split(/^## /m).slice(1); // descarta el preámbulo
-
-  for (const part of parts) {
-    const newlineAt = part.indexOf("\n");
-    const titulo = part.slice(0, newlineAt).trim();
-    let body = part.slice(newlineAt + 1);
-
-    const marker = body.match(
-      /<!--\s*seccion:\s*([a-z0-9-]+)\s*(?:\|\s*ancla:\s*(\S+))?\s*-->/,
-    );
-    if (!marker) {
-      throw new Error(
-        `${fileName}: la sección "## ${titulo}" no tiene el comentario ` +
-          `<!-- seccion: id | ancla: destino -->. Cópialo de otra sección.`,
-      );
-    }
-    const [, id, ancla = "#trayectoria"] = marker;
-
-    // Fuera comentarios (marca + guías): solo la prosa del dueño se indexa.
-    const texto = body
-      .replace(/<!--[\s\S]*?-->/g, "")
-      .replace(/\n{3,}/g, "\n\n")
-      .trim();
-
-    if (sections.some((s) => s.id === id)) {
-      throw new Error(`${fileName}: id de sección duplicado "${id}".`);
-    }
-    sections.push({ id, ancla, titulo, texto });
-  }
-  return sections;
-}
-
-/** Paridad ES/EN de la historia: mismas secciones, contenido en ambas o en ninguna. */
-export function checkHistoriaParity(es, en) {
-  const problems = [];
-  const esById = new Map(es.map((s) => [s.id, s]));
-  const enById = new Map(en.map((s) => [s.id, s]));
-
-  for (const id of new Set([...esById.keys(), ...enById.keys()])) {
-    const inEs = esById.get(id);
-    const inEn = enById.get(id);
-    if (!inEs || !inEn) {
-      problems.push(
-        `la sección "${id}" existe solo en historia.${inEs ? "es" : "en"}.md ` +
-          `— crea su gemela (mismo "seccion: ${id}") en el otro archivo`,
-      );
-      continue;
-    }
-    if (Boolean(inEs.texto) !== Boolean(inEn.texto)) {
-      const lleno = inEs.texto ? "es" : "en";
-      const vacio = inEs.texto ? "en" : "es";
-      problems.push(
-        `la sección "${id}" tiene contenido en historia.${lleno}.md pero está ` +
-          `vacía en historia.${vacio}.md — tradúcela antes del push (regla de paridad)`,
-      );
-    }
-  }
-  return problems;
-}
-
-/** Chunks de los YAML estructurados (hechos) + historia (narrativa). */
-export function buildChunks({ cv, apps, historia, locale }) {
+/** Chunks de los YAML estructurados (hechos) + «a fondo» (narrativa). */
+export function buildChunks({ cv, apps, aFondo, locale }) {
   const L = LABELS[locale];
   const chunks = [];
   const push = (id, titulo, texto, ancla) => {
@@ -221,55 +168,76 @@ export function buildChunks({ cv, apps, historia, locale }) {
       `app-${app.id}`,
       `${L.apps} — ${app.nombre[locale]}`,
       `${app.nombre[locale]} (${app.estado}): ${app.descripcion[locale]}`,
-      "#apps",
+      // «#apps» murió en la revisión post-S7 (la sección se retiró y el roadmap
+      // se fue a /vitrina/apps). Lo que la HOME enseña hoy es la vitrina.
+      "#vitrina",
     );
   }
 
-  for (const s of historia) {
-    if (!s.texto) continue; // el esqueleto vacío no bloquea (la orden lo exige)
-    push(`historia-${s.id}`, `${L.historia} — ${s.titulo}`, s.texto, s.ancla);
-  }
+  // Solo los documentos APROBADOS entran al índice: un borrador es material de
+  // trabajo del dueño, no evidencia que el chat pueda citar.
+  chunks.push(...chunksDeAFondo(aFondo ?? [], L.aFondo));
 
   return chunks;
 }
 
+/** Un problema de aduana rompe el build nombrando archivo y campo. */
+function detener(titulo, problemas) {
+  console.error(`\u2716 ${titulo} — el build se detiene:`);
+  for (const p of problemas) console.error(`  - ${p}`);
+  process.exit(1);
+}
+
 function main() {
   const apps = readYaml("apps.yaml");
+  const catalogo = catalogoDeDestinos();
 
-  const historiaBySrc = {};
+  // --- ADUANA DEL CANAL «A FONDO» -----------------------------------------
+  const docs = {};
+  const crudos = new Map();
   for (const locale of LOCALES) {
-    const file = path.join(ROOT, "data", "historia", `historia.${locale}.md`);
-    historiaBySrc[locale] = parseHistoria(
-      readFileSync(file, "utf8"),
-      `data/historia/historia.${locale}.md`,
-    );
+    docs[locale] = leerDocumentos(locale);
+    for (const doc of docs[locale]) {
+      crudos.set(doc.archivo, readFileSync(path.join(ROOT, doc.archivo), "utf8"));
+    }
   }
 
-  const parityProblems = checkHistoriaParity(
-    historiaBySrc.es,
-    historiaBySrc.en,
-  );
-  if (parityProblems.length > 0) {
-    console.error("✖ Paridad ES/EN de la historia rota — el build se detiene:");
-    for (const p of parityProblems) console.error(`  - ${p}`);
-    process.exit(1);
-  }
+  // UNA sola aduana, la que los tests ejercen. Nació duplicada —`revisarAduana`
+  // en el motor y esta misma lógica escrita a mano aquí—, y eso son dos
+  // originales que divergen: el probado no era el que corría (lo encontró la
+  // auditoría del cierre).
+  const problemas = revisarAduana({
+    docsEs: docs.es,
+    docsEn: docs.en,
+    crudos,
+    catalogo,
+  });
+  if (problemas.length > 0) detener("Aduana del canal «a fondo»", problemas);
 
   mkdirSync(OUT_DIR, { recursive: true });
   for (const locale of LOCALES) {
     const cv = readYaml(`cv.${locale}.yaml`);
-    const chunks = buildChunks({
-      cv,
-      apps,
-      historia: historiaBySrc[locale],
-      locale,
-    });
+    const chunks = buildChunks({ cv, apps, aFondo: docs[locale], locale });
+
+    // --- EL DESTINO DE TODA CITA EXISTE ------------------------------------
+    // Vale para TODOS los chunks, no solo para los del canal nuevo: el `#apps`
+    // muerto vivía en los chunks de las apps, que salen de un YAML.
+    const rotos = chunks
+      .filter((c) => !destinoExiste(c.ancla, catalogo))
+      .map(
+        (c) =>
+          `chat-index.${locale}.json · chunk "${c.id}" apunta a «${c.ancla}», que no existe en el sitio.`,
+      );
+    if (rotos.length > 0) detener("Destinos de cita inexistentes", rotos);
+
     const index = { version: 1, locale, chunks };
     const outFile = path.join(OUT_DIR, `chat-index.${locale}.json`);
     writeFileSync(outFile, JSON.stringify(index), "utf8");
+
+    const aprobados = docs[locale].filter((d) => d.estado === "aprobado").length;
     console.log(
-      `✓ chat-index.${locale}.json — ${chunks.length} chunks (` +
-        `${historiaBySrc[locale].filter((s) => s.texto).length} secciones de historia con contenido)`,
+      `\u2713 chat-index.${locale}.json — ${chunks.length} chunks (` +
+        `${aprobados} de ${docs[locale].length} documentos «a fondo» aprobados e indexados)`,
     );
   }
 }

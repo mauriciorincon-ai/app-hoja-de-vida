@@ -225,7 +225,7 @@ export function Header({
             <span className={locale === "es" ? "text-ink-0" : "text-ink-2"}>
               ES
             </span>
-            <span aria-hidden="true" className="text-ink-3">
+            <span aria-hidden="true" className="text-ink-2">
               /
             </span>
             <span className={locale === "en" ? "text-ink-0" : "text-ink-2"}>

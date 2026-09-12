@@ -14,7 +14,8 @@
     "test:db": "vitest run --config vitest.db.config.ts",
     "test:e2e": "playwright test",
     "capturas:vitrina": "node scripts/capturas-vitrina.mjs",
-    "contrato:ficha": "GENERAR_CONTRATO=1 vitest run tests/unit/ficha-tecnica-contrato.test.ts"
+    "contrato:ficha": "GENERAR_CONTRATO=1 vitest run tests/unit/ficha-tecnica-contrato.test.ts",
+    "corpus:informe": "GENERAR_INFORME=1 vitest run tests/unit/banco-de-preguntas.test.ts"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^4.0.49",

@@ -3,6 +3,9 @@
 - **Status:** accepted
 - **Date:** 2026-07-06
 - **Sprint:** 003
+- **Superseded in part by:** [ADR-019](019-canal-a-fondo.md) (S8) — `data/historia/` was
+  retired and replaced by the `data/a-fondo/` channel. The retrieval, the two consumers of the
+  single asset and the citation contract stay exactly as decided here.
 
 ## Context
 
