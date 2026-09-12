@@ -1,6 +1,9 @@
 import { describe, expect, it } from "vitest";
 import {
   chunksDeAFondo,
+  MINIMO_PALABRAS_VENTANA,
+  TOPE_PALABRAS_CHUNK,
+  ventanasPorParrafo,
   parseDocumento,
   problemasDeDestino,
   problemasDeNombre,
@@ -223,5 +226,83 @@ describe("chunksDeAFondo — el borrador NO se indexa", () => {
   it("un BORRADOR no aporta ni un chunk — es material de trabajo, no evidencia", () => {
     expect(chunksDeAFondo([borrador], "A fondo")).toEqual([]);
     expect(chunksDeAFondo([aprobado, borrador], "A fondo")).toHaveLength(2);
+  });
+});
+
+describe("el tope de tamaño y las ventanas por párrafo", () => {
+  const parrafo = (n: number, palabra = "dato") =>
+    Array.from({ length: n }, () => palabra).join(" ");
+  const cuenta = (t: string) => t.split(/\s+/).filter(Boolean).length;
+
+  it("un texto por debajo del tope no se parte", () => {
+    const v = ventanasPorParrafo(parrafo(50), 180);
+    expect(v).toHaveLength(1);
+  });
+
+  it("corta por párrafo, jamás a media frase", () => {
+    // Tres párrafos de 100 con tope 180: cada ventana se cierra ANTES de
+    // pasarse, así que salen tres de 100 y no dos de 100 y 200. La ventana
+    // nunca excede el tope juntando párrafos — solo cuando uno solo ya lo pasa.
+    const v = ventanasPorParrafo([parrafo(100), parrafo(100), parrafo(100)].join("\n\n"), 180);
+    expect(v).toHaveLength(3);
+    expect(v.map(cuenta)).toEqual([100, 100, 100]);
+  });
+
+  it("junta párrafos mientras quepan", () => {
+    const v = ventanasPorParrafo([parrafo(80), parrafo(80), parrafo(80)].join("\n\n"), 180);
+    expect(v.map(cuenta)).toEqual([160, 80]);
+  });
+
+  it("un párrafo más largo que el tope viaja SOLO, sin partirse", () => {
+    // Cortar dentro de un párrafo produce fragmentos que citados se leen
+    // truncados: el tope cede antes que la legibilidad de la cita.
+    const v = ventanasPorParrafo(parrafo(300), 180);
+    expect(v).toHaveLength(1);
+    expect(cuenta(v[0])).toBe(300);
+  });
+
+  it("la cola corta se funde con su vecina en vez de quedar huérfana", () => {
+    const texto = [parrafo(170), parrafo(20)].join("\n\n");
+    const v = ventanasPorParrafo(texto, 180);
+    expect(v, "20 palabras está por debajo del suelo: se funde").toHaveLength(1);
+    expect(cuenta(v[0])).toBe(190);
+    expect(MINIMO_PALABRAS_VENTANA).toBeGreaterThan(20);
+  });
+
+  it("una cola que llega al suelo sí se queda como ventana propia", () => {
+    const texto = [parrafo(170), parrafo(60)].join("\n\n");
+    expect(ventanasPorParrafo(texto, 180)).toHaveLength(2);
+  });
+
+  it("las ventanas de un chunk troceado comparten ancla y se distinguen por «~»", () => {
+    const largo = [parrafo(170), parrafo(60)].join("\n\n");
+    const doc = {
+      slug: "vesting",
+      titulo: "Vesting",
+      estado: "aprobado",
+      ancla: "/proyectos/vesting",
+      subsecciones: [{ id: "arquitectura", titulo: "La arquitectura", texto: largo }],
+    };
+    const chunks = chunksDeAFondo([doc], "A fondo");
+    expect(chunks).toHaveLength(2);
+    expect(chunks.map((c: { id: string }) => c.id)).toEqual([
+      "a-fondo-vesting-arquitectura~1",
+      "a-fondo-vesting-arquitectura~2",
+    ]);
+    // El separador es «~» y no «-» a propósito: un id de subsección solo admite
+    // [a-z0-9-], así que la colisión con una subsección «arquitectura-1» es
+    // imposible por construcción.
+    expect(chunks[0].id).not.toContain("arquitectura-1");
+    // Misma ancla: la cita lleva al mismo sitio visible.
+    expect(new Set(chunks.map((c: { ancla: string }) => c.ancla)).size).toBe(1);
+    // Y el título dice qué ventana es, para que el chip del chat no repita.
+    expect(chunks[0].titulo).toContain("(1/2)");
+  });
+
+  it("el tope vigente acota el peor caso del contexto", () => {
+    // Con k=4, el contexto del modelo no puede crecer sin techo. El único
+    // texto que puede pasarse del tope es un párrafo suelto más largo que él.
+    expect(TOPE_PALABRAS_CHUNK).toBeGreaterThan(100);
+    expect(TOPE_PALABRAS_CHUNK).toBeLessThanOrEqual(250);
   });
 });

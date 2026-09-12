@@ -7,7 +7,7 @@ ancla: "#trayectoria"
 actualizado: 2026-09-12
 preguntas_de_prueba:
   - "¿Por qué pasó Henry de ingeniería industrial a los datos?"
-  - "¿Cuál es el hilo que conecta toda su trayectoria?"
+  - "¿Por qué estudió Henry ingeniería industrial y diseño industrial?"
 ---
 
 <!--

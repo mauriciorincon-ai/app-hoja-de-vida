@@ -2,6 +2,7 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 import { parse } from "yaml";
 import { describe, expect, it } from "vitest";
+import { leerDocumentos } from "../../scripts/a-fondo.mjs";
 import { buildChunks } from "../../scripts/build-chat-index.mjs";
 import {
   construirSystemPrompt,
@@ -16,9 +17,10 @@ import { chatChunkSchema } from "@/lib/ia/schemas";
  * deja pasar chistes o bloquea preguntas legítimas sobre la trayectoria,
  * estos tests lo cazan antes que un visitante.
  */
+const read = (f: string) =>
+  parse(readFileSync(path.join(process.cwd(), "data", f), "utf8"));
+
 function retrieverReal(locale: "es" | "en") {
-  const read = (f: string) =>
-    parse(readFileSync(path.join(process.cwd(), "data", f), "utf8"));
   const chunks = buildChunks({
     cv: read(`cv.${locale}.yaml`),
     apps: read("apps.yaml"),
@@ -57,10 +59,19 @@ describe("guardrail de entrada (off-topic = cero tokens)", () => {
     "¿Qué certificaciones de Microsoft tiene?",
     "Cuéntame de la plataforma de datos para agentes de IA",
   ];
+  // S8 — esta lista se AMPLÍA con lo que la medición destapó. «cuéntame un
+  // chiste SOBRE gatos» puntuaba 4,28 y pasaba el guardrail: casaba solo la
+  // preposición «sobre», presente en 42 de 162 fragmentos. El test no lo veía
+  // porque preguntaba «chiste DE gatos», y «de» sí era stopword. La preposición
+  // entró a STOPWORDS y ahora las dos formas puntúan 0 — por la razón correcta.
   const preguntasOffTopic = [
     "cuéntame un chiste de gatos",
+    "cuéntame un chiste sobre gatos",
     "¿va a llover mañana en Madrid?",
     "hazme la tarea de cálculo integral",
+    "escribe una función en rust que ordene una lista",
+    "¿cuál es la receta del ajiaco?",
+    "tell me a joke about cats",
   ];
 
   it.each(preguntasOnTopic)("deja pasar: %s", (pregunta) => {
@@ -75,6 +86,51 @@ describe("guardrail de entrada (off-topic = cero tokens)", () => {
     // Con fuzzy, "gatos" ≈ "datos" daría falso on-topic; la estricta no.
     expect(retrieverEs.topK("gatos").length).toBeGreaterThanOrEqual(0);
     expect(retrieverEs.topKStrict("gatos")).toHaveLength(0);
+  });
+
+  /**
+   * LO QUE ESTE GUARDRAIL **NO** GARANTIZA (S8) — y está aquí escrito como test
+   * para que nadie lo confunda con una promesa que no da.
+   *
+   * El puntaje de MiniSearch suma sobre los términos que casan, así que una
+   * pregunta ajena con varias palabras comunes puede puntuar más que una
+   * pregunta legítima corta. Medido sobre el corpus completo (162 fragmentos):
+   * on-topic mín 6,55 («¿sabe Kubernetes?») contra off-topic máx 16,64
+   * («escribe una función en rust que ordene una lista»). **Los dos grupos se
+   * solapan: ningún umbral los separa.**
+   *
+   * La decisión, declarada: el umbral se queda BAJO. Lo que se cuela pasa al
+   * modelo y ahí lo para el prompt grounding-only. El peor fallo posible de este
+   * chat no es gastar tokens en un chiste — es responder «eso se me escapa» a
+   * una pregunta legítima sobre la trayectoria.
+   */
+  it("una pregunta ajena que comparte vocabulario SÍ pasa — y eso está decidido", () => {
+    const chunks = buildChunks({
+      cv: read("cv.es.yaml"),
+      apps: read("apps.yaml"),
+      aFondo: leerDocumentos("es").map((d: { estado: string }) => ({
+        ...d,
+        estado: "aprobado",
+      })),
+      locale: "es",
+    });
+    const conCorpusCompleto = createRetriever(
+      chunks.map((c: unknown) => chatChunkSchema.parse(c)),
+    );
+    // Con el corpus completo, «función» y «lista» casan contenido real.
+    expect(
+      esOffTopic(
+        conCorpusCompleto.topKStrict(
+          "escribe una función en rust que ordene una lista",
+        ),
+      ),
+      "si esto pasa a true, alguien subió el umbral: comprueba que no bloqueó también «¿sabe Kubernetes?»",
+    ).toBe(false);
+    // Y la contraparte que justifica la decisión: la pregunta legítima más
+    // floja del conjunto medido sigue pasando.
+    expect(
+      esOffTopic(conCorpusCompleto.topKStrict("¿sabe Kubernetes?")),
+    ).toBe(false);
   });
 
   it("la respuesta estática existe en ambos idiomas", () => {

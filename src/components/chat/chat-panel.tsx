@@ -6,7 +6,11 @@ import { Send } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import { trackEvent } from "@/lib/analytics";
-import { createRetriever, type Retriever } from "@/lib/ia/retrieval";
+import {
+  createRetriever,
+  type Retriever,
+  TOP_K_CONTEXTO,
+} from "@/lib/ia/retrieval";
 import {
   parseChatIndex,
   type ChatUIMessage,
@@ -123,7 +127,10 @@ export function ChatPanel({
   async function responderLocal(pregunta: string) {
     try {
       const retriever = await cargarRetriever();
-      const resultados = retriever.topK(pregunta, 3);
+      // El MISMO k que usa el servidor (S8). Hasta el S7 aquí había un 3
+      // escrito a mano: el fallback local enseñaba menos evidencia que la que
+      // el modelo habría recibido, y ninguna prueba comparaba los dos números.
+      const resultados = retriever.topK(pregunta, TOP_K_CONTEXTO);
       const fuentes: Fuente[] = resultados.map((r, i) => ({
         n: i + 1,
         titulo: r.chunk.titulo,

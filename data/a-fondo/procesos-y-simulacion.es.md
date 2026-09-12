@@ -7,7 +7,7 @@ ancla: "#skills"
 actualizado: 2026-09-12
 preguntas_de_prueba:
   - "¿Qué sabe Henry de modelado de procesos y simulación?"
-  - "¿Cómo le sirve la ingeniería industrial en un rol de datos?"
+  - "¿Por qué Henry genera los diagramas de proceso desde los datos?"
 ---
 
 <!--

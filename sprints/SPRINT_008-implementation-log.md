@@ -462,3 +462,139 @@ El índice publicado **no creció ni un chunk**, y eso es exactamente lo correct
 indexan. La base entera está escrita y el chat todavía no la ve — que es lo que permite corregirla
 sin publicar medio documento.
 
+---
+
+## Fase 3 — el chat sobre el corpus nuevo
+
+### 3.1 · El troceo con tope, medido antes de elegir el número
+
+El tope no se eligió por intuición. Medidas las 132 subsecciones escritas: **mediana 101 palabras,
+percentil 90 en 143, la más larga 247**. A 180 se trocean 5 subsecciones (4 %); a 120 se trocearían
+33 (25 %), que es partir por partir. **`TOPE_PALABRAS_CHUNK = 180`: el tope corta la cola, no el
+cuerpo.**
+
+Tres decisiones dentro del troceo, y las tres tienen su prueba:
+
+- **Se corta por párrafo, nunca a media frase.** Un fragmento cortado a mitad de oración, citado, se
+  lee truncado. Un párrafo que ya excede el tope por sí solo **viaja entero**: el tope cede antes
+  que la legibilidad de la cita.
+- **Suelo de ventana: `MINIMO_PALABRAS_VENTANA = 40`.** La primera versión producía colas de 23, 30
+  y 31 palabras — chunks que pueden ganar el top-k por un término suelto y, citados, no dicen nada.
+  Ahora la cola corta se funde con su vecina aunque pase el tope. Efecto medido: **de las 5
+  subsecciones que exceden 180, solo 2 se parten de verdad**; las otras 3 se quedan enteras porque
+  su cola no llegaba al suelo.
+- **El sufijo de ventana es `~n`, no `-n`.** Un id de subsección admite `[a-z0-9-]`, así que con `-`
+  la ventana 1 de `el-ai-103` y una subsección llamada `el-ai-103-1` colisionarían. Con `~` la
+  colisión es **imposible por construcción**, no improbable.
+
+| Configuración | Chunks | Chunk más largo | Contexto peor caso (k=4) |
+| ------------- | -----: | --------------: | -----------------------: |
+| Sin tope      |    132 |             247 |                      816 |
+| Tope 180      |    134 |             195 |                      738 |
+
+Las ventanas conservan la **misma ancla**: la cita lleva al mismo sitio visible. Solo cambia el
+título, que dice `(1/2)` para que el chip del chat no repita.
+
+### 3.2 · `TOP_K_CONTEXTO`: uno solo, exportado, y con su número medido
+
+Hasta el S7 este número vivía **dos veces y con dos valores**: `TOP_K_CONTEXTO = 4` privado dentro
+de `src/app/api/chat/route.ts`, y un **`3` escrito a mano** en `chat-panel.tsx` para el modo de
+búsqueda local. El golden set no podía ejercitar ninguno, porque ninguno era importable.
+
+Ahora vive en `src/lib/ia/retrieval.ts`, exportado, y es el valor por defecto del retriever. **El 4
+sale de medir**, contra el corpus completo (162 fragmentos, 48 preguntas de prueba):
+
+| k | Aciertos | % |
+| - | -------- | - |
+| 1 | 32/48 | 67 % |
+| 2 | 42/48 | 88 % |
+| 3 | 45/48 | 94 % |
+| **4** | **48/48** | **100 %** |
+| 5 | 48/48 | 100 % |
+
+Con 3 fuentes fallan tres preguntas —`vesting`, `fabric-en-la-practica` y `transmilenio-cm`—; con 4
+no falla ninguna y subir a 5 no aporta nada, solo contexto y factura. **El fallback local mostraba
+menos evidencia que la que el modelo recibía**, y nada comparaba los dos números.
+
+### 3.3 · El umbral off-topic: lo que la medición dijo fue que no hay umbral
+
+Se midieron 9 preguntas legítimas y 9 ajenas contra los dos corpus:
+
+| Corpus                      | On-topic mínimo | Off-topic máximo | ¿Separa? |
+| --------------------------- | --------------- | ---------------- | -------- |
+| 28 fragmentos (el publicado) | 0,00 («¿sabe Kubernetes?» — no hay nada que responder) | 3,41 | **NO** |
+| 162 fragmentos (simulado)    | 6,55 («¿sabe Kubernetes?») | 16,64 («escribe una función en rust que ordene una lista») | **NO** |
+
+El puntaje de MiniSearch **suma sobre los términos que casan**, así que una pregunta ajena larga con
+tres palabras comunes puntúa más que una pregunta legítima corta. Subir el umbral hasta bloquear la
+primera bloquea también la segunda. **Los dos grupos se solapan en los dos corpus.**
+
+**La decisión, declarada:** `UMBRAL_ON_TOPIC` se queda en **1**, que significa «casó algo
+sustantivo». Lo que se cuela pasa al modelo y ahí lo para el prompt grounding-only. El peor fallo
+posible de este chat **no es gastar tokens en un chiste: es responder «eso se me escapa» a una
+pregunta legítima sobre la trayectoria.** El comentario del constante ya no dice «calibrado»: dice
+qué garantiza y qué no, con los números.
+
+**La mitad que SÍ se arregló fueron las stopwords.** «cuéntame un chiste **sobre** gatos» puntuaba
+**4,28 y pasaba el guardrail** — con el corpus de hoy, en producción, desde el S3. El único término
+que casaba era la preposición «sobre», presente en 42 de 162 fragmentos. **El test no lo veía porque
+preguntaba «chiste *de* gatos»**, y «de» sí era stopword: una prueba que pasaba por la redacción de
+su ejemplo, no por el comportamiento del sistema. Entraron a `STOPWORDS` las preposiciones y los
+imperativos dirigidos al asistente (`escribe`, `hazme`, `dime`…): son instrucción, no tema. Las dos
+formas de la pregunta puntúan ahora 0.
+
+Y el test de guardrails gana un caso nuevo que **documenta la limitación en vez de esconderla**:
+«una pregunta ajena que comparte vocabulario SÍ pasa — y eso está decidido», con la contraparte
+(`¿sabe Kubernetes?` sigue pasando) que impide que alguien «arregle» el umbral rompiendo lo que
+importa.
+
+### 3.4 · El golden set
+
+`tests/unit/a-fondo-golden.test.ts`. Cada documento declara sus `preguntas_de_prueba` y el test
+exige que **cada pregunta traiga su documento en el top-4 del retriever real**. Sumar un documento
+suma sus preguntas al gate sin que nadie edite `tests/`.
+
+**Se mide con los borradores forzados a aprobado, y eso es deliberado.** Si solo mirara los
+aprobados tendría **cero sujetos** y pasaría en verde sin vigilar nada — el gate decorativo que la
+tercera pregunta de la regla 14 persigue, y justo lo que inventarié en la fase 0. Que un borrador no
+entre al índice publicado lo vigila `a-fondo.test.ts`: son dos preguntas distintas, cada una con su
+gate.
+
+**Siete preguntas mal asignadas, corregidas con la medición delante.** La primera corrida dio 41/48.
+Los fallos no eran del retriever: eran preguntas que describían mejor a OTRO documento. «¿Qué
+modelos predictivos ha construido?» colgaba de `transmilenio-cm` y traía `analitica-predictiva` —
+que es la respuesta correcta. «¿Qué hizo Henry en TransMilenio?» es ambigua por construcción: hay
+**dos** roles en TransMilenio. Se reescribieron las siete para que cada una discrimine su documento;
+el criterio fue el mismo en todas: **si una pregunta trae un documento distinto pero correcto, la
+mal escrita es la pregunta.** De 41/48 a 48/48.
+
+**Los rojos, en el mismo commit:**
+
+| Rojo | Mutación | Qué imprimió |
+| ---- | -------- | ------------ |
+| Pregunta que no describe a su documento | poner «¿Qué certificaciones de IBM tiene Henry?» en `vesting` | `«…» no trajo «vesting» en el top-4. Trajo: a-fondo-certificaciones-las-de-ibm, …` |
+| `TOP_K_CONTEXTO = 3` (el valor que usaba el cliente) | — | **3 rojos**: `fabric-en-la-practica`, `transmilenio-cm`, `vesting`. La unificación del constante queda justificada por evidencia, no por gusto |
+| Anular el tope de chunk (`1000`) | — | 2 rojos: las ventanas dejan de existir y el peor caso deja de estar acotado |
+
+### 3.5 · M1 — listo, y esperando una palabra tuya
+
+La maquinaria está completa y verde: el corpus trocea, el retriever encuentra, el `k` es uno solo,
+la cita apunta al ancla del documento y el golden set lo defiende con 48 aserciones.
+
+**Lo único que falta para M1 es que un documento esté `aprobado`**, y esa es una decisión del dueño,
+no mía. El índice publicado sigue en 28 fragmentos porque los 24 están en borrador — que es
+exactamente lo que el diseño promete.
+
+### 3.6 · Verificación de la fase 3
+
+| Comprobación     | Resultado                                          |
+| ---------------- | ---------------------------------------------------- |
+| `pnpm test`      | **615 pasan / 615** · 30 archivos (551 en la fase 2) |
+| `pnpm test:e2e`  | **321 pasan / 321** · chromium + móvil              |
+| `pnpm typecheck` | limpio                                              |
+| `pnpm lint`      | limpio                                              |
+| `pnpm build`     | OK — 28 chunks, 0 de 24 aprobados                   |
+
+Los dos e2e que el corpus nuevo podía mover —el del chat y el del fallback— pasan. El cambio de 3 a
+4 fuentes en el fallback solo añade evidencia; no mueve el orden.
+

@@ -292,24 +292,99 @@ export function revisarAduana({ docsEs, docsEn, crudos, catalogo }) {
 }
 
 /**
+ * TOPE DE TAMAÑO DE UN CHUNK, en palabras.
+ *
+ * Sin tope, «una subsección = un chunk» deja que una subsección larga entre
+ * entera al contexto del modelo, y con `TOP_K_CONTEXTO = 4` el peor caso crece
+ * sin techo. Con 180, el peor caso del contexto queda acotado en ~720 palabras.
+ *
+ * El número sale de MEDIR el corpus, no de la intuición (S8, fase 3): de las
+ * 132 subsecciones escritas, la mediana son 101 palabras, el percentil 90 son
+ * 143 y la más larga 247. A 180 se trocean **5 subsecciones (4 %)**; a 120 se
+ * trocearían 33 (25 %), que es partir por partir. El tope corta la cola, no el
+ * cuerpo.
+ */
+export const TOPE_PALABRAS_CHUNK = 180;
+
+/**
+ * SUELO DE UNA VENTANA, en palabras. Una ventana de 23 palabras es un chunk que
+ * puede ganar el top-k por un término suelto y, citado, no dice nada. Si la
+ * última cola queda por debajo del suelo se **funde con la anterior**, aunque
+ * eso pase el tope: un chunk de 195 palabras es mejor que uno de 165 más un
+ * huérfano de 30. Medido: de las 5 subsecciones que pasan de 180, solo 2 se
+ * parten de verdad; las otras 3 se quedan enteras porque su cola no llegaba al
+ * suelo — es decir, el tope corta donde hay algo que cortar.
+ */
+export const MINIMO_PALABRAS_VENTANA = 40;
+
+/** Cuenta de palabras, la misma en todo el módulo. */
+const palabrasDe = (t) => t.split(/\s+/).filter(Boolean).length;
+
+/**
+ * Trocea un texto largo en ventanas **por párrafo**, nunca a media frase. Cada
+ * ventana acumula párrafos hasta que el siguiente la pasaría del tope; un
+ * párrafo que ya excede el tope por sí solo viaja solo, sin partirse — cortar
+ * dentro de un párrafo produce fragmentos que citados se leen truncados.
+ */
+export function ventanasPorParrafo(texto, tope = TOPE_PALABRAS_CHUNK) {
+  const parrafos = texto
+    .split(/\n\s*\n/)
+    .map((p) => p.replace(/\s+/g, " ").trim())
+    .filter(Boolean);
+  if (parrafos.length === 0) return [];
+
+  const ventanas = [];
+  let actual = [];
+  let palabras = 0;
+  for (const p of parrafos) {
+    const n = p.split(/\s+/).length;
+    if (actual.length > 0 && palabras + n > tope) {
+      ventanas.push(actual.join(" "));
+      actual = [];
+      palabras = 0;
+    }
+    actual.push(p);
+    palabras += n;
+  }
+  if (actual.length > 0) ventanas.push(actual.join(" "));
+
+  // La cola corta se funde con su vecina: mejor un chunk grande que un huérfano.
+  if (
+    ventanas.length > 1 &&
+    palabrasDe(ventanas[ventanas.length - 1]) < MINIMO_PALABRAS_VENTANA
+  ) {
+    const cola = ventanas.pop();
+    ventanas[ventanas.length - 1] += ` ${cola}`;
+  }
+  return ventanas;
+}
+
+/**
  * Documentos → chunks del índice del chat. **Solo los aprobados**: un borrador
  * es material de trabajo del dueño, no evidencia que el chat pueda citar.
  *
- * El troceo de hoy es «una subsección = un chunk». El tope de tamaño con
- * ventanas por párrafo llega en la fase 3, con su medición delante.
+ * Troceo: una subsección = un chunk, salvo que pase el tope, y entonces
+ * ventanas por párrafo. **Las ventanas conservan la MISMA ancla** —la cita
+ * lleva al mismo sitio visible, que es lo único que el lector ve— y el id gana
+ * un sufijo para que sigan siendo chunks distintos con contenido distinto.
  */
-export function chunksDeAFondo(docs, etiqueta) {
+export function chunksDeAFondo(docs, etiqueta, tope = TOPE_PALABRAS_CHUNK) {
   const chunks = [];
   for (const doc of docs) {
     if (doc.estado !== "aprobado") continue;
     for (const s of doc.subsecciones) {
-      const texto = s.texto.replace(/\s+/g, " ").trim();
-      if (!texto) continue;
-      chunks.push({
-        id: `a-fondo-${doc.slug}-${s.id}`,
-        titulo: `${etiqueta} — ${doc.titulo} · ${s.titulo}`,
-        texto,
-        ancla: doc.ancla,
+      if (!s.texto.trim()) continue;
+      const ventanas = ventanasPorParrafo(s.texto, tope);
+      const partido = ventanas.length > 1;
+      ventanas.forEach((texto, i) => {
+        chunks.push({
+          id: `a-fondo-${doc.slug}-${s.id}${partido ? `~${i + 1}` : ""}`,
+          titulo: partido
+            ? `${etiqueta} — ${doc.titulo} · ${s.titulo} (${i + 1}/${ventanas.length})`
+            : `${etiqueta} — ${doc.titulo} · ${s.titulo}`,
+          texto,
+          ancla: doc.ancla,
+        });
       });
     }
   }

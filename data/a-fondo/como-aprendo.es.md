@@ -7,7 +7,7 @@ ancla: "#certificaciones"
 actualizado: 2026-09-12
 preguntas_de_prueba:
   - "¿Qué tan rápido aprende Henry una tecnología nueva?"
-  - "¿Cómo se prepara Henry para algo que no ha hecho antes?"
+  - "¿Qué evidencia tiene Henry de que aprende rápido?"
 ---
 
 <!--

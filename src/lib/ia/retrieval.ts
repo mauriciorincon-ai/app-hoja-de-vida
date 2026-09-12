@@ -13,7 +13,17 @@ import type { ChatChunk } from "./schemas";
  *   off-topic — sin fuzzy, "gatos" jamás coincide con "datos".
  */
 
-/** Stopwords ES/EN: sin esto, "en", "de", "the" hacen match con todo. */
+/**
+ * Stopwords ES/EN: sin esto, "en", "de", "the" hacen match con todo.
+ *
+ * S8 — la segunda tanda, medida y no intuida. Con el corpus de 28 fragmentos, la
+ * pregunta «cuéntame un chiste **sobre** gatos» puntuaba 4,28 y pasaba el
+ * guardrail: el único término que casaba era la preposición «sobre», presente en
+ * 42 fragmentos. El test de off-topic no lo veía porque usaba «chiste **de**
+ * gatos», y «de» sí estaba en esta lista. Entran aquí las **preposiciones y los
+ * imperativos dirigidos al asistente** —«escribe», «hazme», «dime»—: son
+ * instrucciones, no tema, y su único efecto era sumar puntaje a preguntas ajenas.
+ */
 const STOPWORDS = new Set([
   "que",
   "con",
@@ -70,6 +80,49 @@ const STOPWORDS = new Set([
   "about",
   "you",
   "your",
+  // S8 — preposiciones que no son tema (medidas: «sobre» aparecía en 42 de 162
+  // fragmentos y sostenía sola un falso on-topic).
+  "sobre",
+  "desde",
+  "entre",
+  "hasta",
+  "sin",
+  "tras",
+  "ante",
+  "bajo",
+  "contra",
+  "segun",
+  "según",
+  "durante",
+  "mediante",
+  "from",
+  "into",
+  "over",
+  "under",
+  "between",
+  "during",
+  "through",
+  // S8 — imperativos dirigidos al asistente: instrucción, no tema.
+  "dime",
+  "dame",
+  "hazme",
+  "haz",
+  "escribe",
+  "escribeme",
+  "escríbeme",
+  "explica",
+  "explicame",
+  "explícame",
+  "cuentame",
+  "cuéntame",
+  "hablame",
+  "háblame",
+  "tell",
+  "write",
+  "give",
+  "make",
+  "show",
+  "explain",
 ]);
 
 /** Siglas cortas con significado real en este CV. */
@@ -81,6 +134,24 @@ function processTerm(term: string): string | null {
   if (t.length < 3 && !SIGLAS.has(t)) return null;
   return t;
 }
+
+/**
+ * CUÁNTAS FUENTES entran a una respuesta. **Uno solo, y exportado** (S8).
+ *
+ * Hasta el S7 este número vivía DOS veces y con DOS valores: `TOP_K_CONTEXTO = 4`
+ * privado dentro de la ruta del chat, y un `3` escrito a mano en el panel del
+ * cliente para el modo de búsqueda local. El golden set no podía ejercitar
+ * ninguno de los dos, porque ninguno era importable.
+ *
+ * El 4 sale de MEDIR contra el corpus completo (24 documentos × sus preguntas de
+ * prueba = 48 consultas, 162 fragmentos):
+ *
+ *   k=1 → 67 %   k=2 → 88 %   k=3 → 94 %   k=4 → **100 %**   k=5 → 100 %
+ *
+ * Es decir: con 3 fuentes, 3 de cada 48 preguntas no traen su propio documento.
+ * Con 4 no falla ninguna y subir a 5 no aporta nada — solo contexto y factura.
+ */
+export const TOP_K_CONTEXTO = 4;
 
 export type ScoredChunk = { chunk: ChatChunk; score: number };
 
@@ -112,7 +183,7 @@ export function createRetriever(chunks: ChatChunk[]): Retriever {
     }));
 
   return {
-    topK(query, k = 4) {
+    topK(query, k = TOP_K_CONTEXTO) {
       return toScored(
         mini.search(query, {
           boost: { titulo: 2 },
@@ -123,7 +194,7 @@ export function createRetriever(chunks: ChatChunk[]): Retriever {
         k,
       );
     },
-    topKStrict(query, k = 4) {
+    topKStrict(query, k = TOP_K_CONTEXTO) {
       return toScored(
         mini.search(query, {
           boost: { titulo: 2 },

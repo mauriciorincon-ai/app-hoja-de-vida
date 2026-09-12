@@ -12,8 +12,42 @@ import type { ScoredChunk } from "./retrieval";
 export type ChatLocale = "es" | "en";
 
 /**
- * Umbral de relevancia lexical: por debajo, la coincidencia es ruido (una
- * palabra suelta con fuzzy). Calibrado con los tests de guardrails.
+ * Umbral de relevancia lexical. **Recalibrado midiendo en el S8, y lo que la
+ * medición dijo fue que no hay umbral que sirva — así que lo importante de este
+ * comentario es lo que el guardrail NO garantiza.**
+ *
+ * Se midieron 9 preguntas legítimas y 9 ajenas contra los dos corpus (el
+ * publicado de 28 fragmentos y el simulado de 162, con los 24 documentos
+ * forzados a aprobado). Los dos grupos **se solapan en los dos corpus**:
+ *
+ *   · 28 fragmentos:  on-topic mín 0,00 · off-topic máx 3,41
+ *   · 162 fragmentos: on-topic mín 6,55 · off-topic máx 16,64
+ *
+ * El puntaje de MiniSearch suma sobre los términos que casan, así que una
+ * pregunta ajena larga con tres palabras comunes («escribe una **función** en
+ * rust que ordene una **lista**») puntúa más que una pregunta legítima corta
+ * («¿sabe **Kubernetes**?»). Ningún número separa eso, y subir el umbral hasta
+ * bloquear la primera bloquea también la segunda.
+ *
+ * **Qué SÍ garantiza este guardrail:** que una pregunta sin un solo término
+ * sustantivo del corpus se responde con la estática bilingüe, sin llamar al
+ * proveedor. Cero tokens para «¿va a llover mañana en Madrid?».
+ *
+ * **Qué NO garantiza:** que toda pregunta ajena se detenga aquí. Las que
+ * comparten vocabulario con el contenido pasan al modelo — y ahí las para el
+ * prompt grounding-only, que prohíbe responder fuera de las fuentes. **La
+ * garantía de corrección es el prompt; este umbral es un ahorro de tokens y una
+ * primera línea**, y se deja bajo a propósito: el peor fallo posible de este
+ * chat no es gastar tokens en un chiste, es contestar «eso se me escapa» a una
+ * pregunta legítima sobre la trayectoria.
+ *
+ * Se queda en 1 porque el 1 es justo eso: «casó algo sustantivo». Un umbral más
+ * alto compraría precisión pagándola con falsos «no sé de eso».
+ *
+ * La otra mitad de la recalibración no fue este número sino las STOPWORDS
+ * (`retrieval.ts`): «cuéntame un chiste **sobre** gatos» puntuaba 4,28 con solo
+ * la preposición casando, y el test de off-topic no lo veía porque preguntaba
+ * «chiste **de** gatos». Eso sí se arregló, y con su medición.
  */
 export const UMBRAL_ON_TOPIC = 1;
 

@@ -6,8 +6,8 @@ estado: borrador
 ancla: "/proyectos/transmilenio-cm"
 actualizado: 2026-09-12
 preguntas_de_prueba:
-  - "¿Qué hizo Henry en TransMilenio?"
-  - "¿Qué modelos predictivos ha construido?"
+  - "¿Cómo unificó Henry las fuentes de datos heterogéneas del SITP?"
+  - "¿Cómo fue el modelo de predicción de demanda del SITP?"
 ---
 
 <!--

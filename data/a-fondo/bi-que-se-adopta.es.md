@@ -7,7 +7,7 @@ ancla: "#skills"
 actualizado: 2026-09-12
 preguntas_de_prueba:
   - "¿Cómo logra Henry que el negocio adopte los tableros?"
-  - "¿Qué experiencia tiene Henry en Power BI y BI corporativo?"
+  - "¿Por qué dice Henry que la adopción es el indicador y no el tablero?"
 ---
 
 <!--

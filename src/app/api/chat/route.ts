@@ -18,6 +18,7 @@ import {
 } from "@/lib/ia/guardrails";
 import { getChatIndex } from "@/lib/ia/index-server";
 import { chatHabilitado, resolverProveedor } from "@/lib/ia/provider";
+import { TOP_K_CONTEXTO } from "@/lib/ia/retrieval";
 import {
   chatRequestSchema,
   type ChatUIMessage,
@@ -35,7 +36,6 @@ import { checkRateLimit } from "@/lib/rate-limit";
  */
 
 const CHAT_RATE_LIMIT = { limit: 10, windowMs: 60_000 };
-const TOP_K_CONTEXTO = 4;
 
 /** Respuesta estática como stream UIMessage (el cliente no distingue transporte). */
 function respuestaEstatica(texto: string): Response {

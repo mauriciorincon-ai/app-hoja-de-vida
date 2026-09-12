@@ -7,7 +7,7 @@ ancla: "/vitrina/investigaciones"
 actualizado: 2026-09-12
 preguntas_de_prueba:
   - "¿Qué investigaciones ha hecho Henry?"
-  - "¿Cómo investiga Henry un problema nuevo?"
+  - "¿Cómo mide Henry el vacío de la literatura antes de investigar?"
 ---
 
 <!--
