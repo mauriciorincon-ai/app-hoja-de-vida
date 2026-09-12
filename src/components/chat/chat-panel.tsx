@@ -300,7 +300,7 @@ export function ChatPanel({
           aria-label={t("placeholder")}
           placeholder={t("placeholder")}
           data-testid="chat-input"
-          className="min-h-11 flex-1 rounded-xl border border-paper-3 bg-paper-0 px-3 text-sm text-ink-0 placeholder:text-ink-3 focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-ink-0"
+          className="min-h-11 flex-1 rounded-xl border border-paper-3 bg-paper-0 px-3 text-sm text-ink-0 placeholder:text-ink-2 focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-ink-0"
         />
         <button
           type="submit"
