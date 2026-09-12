@@ -69,15 +69,15 @@ Ninguna: las 131 preguntas del banco traen al menos una de sus fuentes esperadas
 Preguntas que un reclutador hace y que **el corpus no contesta hoy**, con el documento donde iría la respuesta. No las inventé: cada una necesita algo que solo tú sabes.
 
 - **¿Cuáles son sus expectativas salariales?** → `lo-que-busco`
-  - Es una decisión del dueño, no un dato que falte. Hoy la pregunta recibe la respuesta fija. Si decide poner una banda o decir «conversemos», va en la subsección `condiciones`.
+  - Es una decisión tuya, no un dato que falte. Hoy la pregunta recibe la respuesta fija. Si decides poner una banda o decir «conversemos», va en la subsección `condiciones`.
 - **¿Cuál es su disponibilidad para empezar?** → `lo-que-busco`
-  - Depende de su situación contractual actual, que no está escrita en ninguna parte y no tiene por qué estarlo sin su decisión.
+  - Depende de tu situación contractual de hoy, que no está escrita en ninguna parte y no tiene por qué estarlo sin que tú lo decidas.
 - **¿Qué nivel de inglés tiene?** → `lo-que-busco`
-  - El corpus menciona el curso intensivo con IELTS en Melbourne, pero no declara un nivel. El informe de discrepancias tiene el detalle: el respaldo es de hace doce años y está por debajo del B2 que declara la hoja de vida. Es una decisión suya qué declarar.
+  - El corpus menciona el curso intensivo con IELTS en Melbourne, pero no declara un nivel. El informe de discrepancias tiene el detalle: el respaldo es de hace doce años y está por debajo del B2 que declara la hoja de vida. Qué declarar lo decides tú.
 - **¿Tiene disponibilidad para viajar?** → `lo-que-busco`
-  - Ni la hoja de vida ni el sitio lo dicen. Una línea en `condiciones` lo cierra, pero la línea es suya.
+  - Ni la hoja de vida ni el sitio lo dicen. Una línea en `condiciones` lo cierra, pero la línea es tuya.
 - **¿Qué pasó entre mayo de 2022 y marzo de 2023?** → `origenes`
-  - Es el único hueco largo del recorrido —diez meses— y está señalado en el informe de discrepancias y en los COMPLEMENTOS de la hoja de vida. Nadie puede escribirlo sino él.
+  - Es el único hueco largo del recorrido —diez meses— y está señalado en el informe de discrepancias y en los COMPLEMENTOS de la hoja de vida. Nadie puede escribirlo sino tú.
 
 ---
 
