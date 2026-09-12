@@ -41,7 +41,8 @@ predictivos en producción. -->
 <!-- seccion: el-problema-real -->
 
 Entré a Banco Pichincha en marzo de 2023 como Analista Senior de Analítica y Reportes, y estuve
-hasta julio de 2023. El área producía tableros que el negocio no terminaba de adoptar, con procesos
+hasta julio de 2023. Es mi paso por el **sector financiero**, y en banca eso cambia el peso de
+todo lo que sigue. El área producía tableros que el negocio no terminaba de adoptar, con procesos
 de extracción lentos y modelos predictivos que no llegaban a producción.
 
 Es el patrón clásico de la inteligencia de negocios: el problema no es construir, es que se use. Un
@@ -76,7 +77,8 @@ esta subsección pasa de «diseñé un programa» a algo que se puede dimensiona
 
 <!-- seccion: etl-y-modelos-semanticos -->
 
-Implementé soluciones avanzadas de extracción, transformación y carga que redujeron los tiempos en
+Implementé soluciones avanzadas de extracción, transformación y carga —procesos **ETL**— que
+redujeron los tiempos en
 un treinta y cinco por ciento, y centralicé y optimicé el análisis de datos con DAX Studio y
 Tabular Editor.
 

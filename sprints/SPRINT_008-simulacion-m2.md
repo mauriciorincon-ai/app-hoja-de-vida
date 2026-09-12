@@ -11,6 +11,12 @@
 >
 > Cada bloque compara **HOY** (lo que el chat contesta en producción en este momento) contra **M2**
 > (lo que contestaría con la base aprobada). El `top-4` es el que de verdad usa el chat.
+>
+> **Este informe se quedó corto y lo dice él mismo.** Veinte preguntas escritas a mano, medidas una
+> vez. La fase 4b lo convirtió en un gate permanente de **131 preguntas** que corre en cada
+> `pnpm test`: `sprints/SPRINT_008-banco-de-preguntas.md`, generado con `pnpm corpus:informe`. Lo
+> que sigue aquí conserva su valor porque es **narrativo** —cuenta qué destapó cada pregunta—;
+> los números vigentes están allá.
 
 ---
 

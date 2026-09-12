@@ -35,7 +35,8 @@ CÓMO SE ESCRIBE ESTE ARCHIVO
 
 <!-- seccion: el-problema-que-quiero -->
 
-Quiero seguir en la frontera entre la plataforma de datos y la inteligencia artificial: donde se
+**Lo que me motiva** es seguir en la frontera entre la plataforma de datos y la inteligencia
+artificial: donde se
 decide cómo viven los datos, cómo se gobiernan y cómo un modelo o un agente llega a producción y se
 puede vigilar.
 
@@ -50,7 +51,7 @@ lo mismo con más alcance.
 
 **Ingeniería de IA.** Construir: arquitecturas de recuperación aumentada, agentes con herramientas,
 modelos en producción, la plataforma que los sostiene y la observabilidad que permite confiar en
-ellos. Aquí traigo diez años de ingeniería de datos y dos de agentes en producción.
+ellos. Aquí traigo diez años de ingeniería de procesos y de datos, y dos de agentes en producción.
 
 **Estrategia y gobierno de IA.** Decidir: qué se adopta, con qué estándares, con qué control y con
 qué criterio de uso responsable. Aquí traigo tres experiencias de gobierno de datos —Banco
@@ -60,11 +61,11 @@ experto en la norma ISO 42001 construido por mí que cita apartado y página o d
 Las dos son el mismo perfil mirado desde dos alturas. Y la combinación —alguien que ha construido
 la plataforma y además sabe sentarse en la mesa donde se decide— es poco común.
 
-## Condiciones
+## Condiciones: dónde vivo y hasta dónde me muevo
 
 <!-- seccion: condiciones -->
 
-Estoy en Bogotá, Colombia, y **abierto a reubicarme a otro país y a trabajar en remoto**. La
+**Vivo en Bogotá, Colombia**, y estoy abierto a reubicarme a otro país y a trabajar en remoto. La
 reubicación internacional no es una concesión que hago por una vacante: está declarada en la
 cabecera de este sitio desde antes de que existiera esta conversación.
 
@@ -74,7 +75,7 @@ Australia, entre 2013 y 2014. Mudarme de país no es una hipótesis para mí.
 [CONFIRMAR: ¿hay restricciones reales de reubicación —país, plazo, condiciones familiares— que
 convenga saber de antemano? Y en remoto, ¿tienes preferencia o límite de zona horaria?]
 
-## Qué ofrezco que no es frecuente
+## Por qué contratarme: lo que ofrezco y no es frecuente
 
 <!-- seccion: que-ofrezco -->
 
@@ -95,7 +96,8 @@ entrevista: tiene evidencia medida.
 
 <!-- seccion: como-trabajo-con-quien-contrata -->
 
-Prefiero una conversación sobre un problema concreto a una sobre mi currículum. Si me dan un
+Sobre el **proceso de selección**: prefiero una conversación sobre un problema concreto a una
+sobre mi currículum. Si me dan un
 problema real y algo de contexto, traigo una propuesta: qué haría primero, qué mediría y en qué
 plazo se vería el primer resultado.
 

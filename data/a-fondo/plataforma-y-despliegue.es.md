@@ -66,6 +66,12 @@ que le paso un ticket.
 producción** con Docker y Kubernetes no están en mi experiencia profesional. Mi mundo es Microsoft
 y en Microsoft es donde tengo la profundidad.
 
+De **MLOps** —la palabra que suele englobar todo esto— tengo una mitad y no la otra, y conviene
+decir cuál. La mitad de llevar modelos a producción y sostenerlos la he hecho: dos modelos
+predictivos en producción, el monitoreo en tiempo real de agentes de IA en Vesting, y seis
+aplicaciones con integración continua, controles que bloquean la publicación y despliegue
+automático, operadas por mí. La mitad de empaquetar y orquestar con contenedores, no.
+
 Prefiero decirlo así, de frente, que esconderlo en una lista de herramientas. Un currículum que
 nombra treinta tecnologías no distingue las cinco que domina de las veinticinco que ha visto, y
 quien entrevista lo descubre en diez minutos.

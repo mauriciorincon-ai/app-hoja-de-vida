@@ -36,8 +36,8 @@ CÓMO SE ESCRIBE ESTE ARCHIVO
 <!-- seccion: lo-que-estas-usando -->
 
 Si esta respuesta te llegó por el chat de esta página, estás usando lo que este documento describe.
-Es una arquitectura de generación aumentada por recuperación, construida por mí, corriendo en
-producción sobre mi propia hoja de vida.
+Es una arquitectura de generación aumentada por recuperación —RAG— sobre un **modelo de lenguaje
+grande**, construida por mí, corriendo en producción sobre mi propia hoja de vida.
 
 Esa es su gracia: no es un ejemplo de tutorial. Es un sistema con usuarios reales cuyo costo, cuyos
 límites y cuyas fallas tengo que sostener yo.
@@ -92,8 +92,8 @@ lo que obliga a que el destino de cada fragmento exista de verdad, comprobado al
 
 <!-- seccion: nunca-se-cae -->
 
-El proveedor de modelo es conmutable con una variable de entorno: Groq, Gemini, Azure AI Foundry,
-Claude o cualquier servicio compatible. Cambiar de proveedor no toca una línea de código.
+El proveedor del **modelo de lenguaje** es conmutable con una variable de entorno: Groq, Gemini,
+Azure AI Foundry, Claude o cualquier servicio compatible. Cambiar de proveedor no toca una línea de código.
 
 Y si el proveedor falla o se agota la cuota, hay un cortacircuitos: el chat **pasa a búsqueda local
 en el navegador** y muestra los fragmentos que mejor responden, avisándolo con honestidad. El

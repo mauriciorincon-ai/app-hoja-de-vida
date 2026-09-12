@@ -65,7 +65,11 @@ data/              (cv.es.yaml · cv.en.yaml (identidad · trayectoria · estudi
 data/a-fondo/      (S8 — el corpus profundo del chat: <slug>.{es,en}.md, un documento por tema,
                     con frontmatter Zod + subsecciones `<!-- seccion: id -->`. NO se publican:
                     son combustible, y la cita navega al `ancla`, que es algo visible.
-                    `estado: borrador` no se indexa ni exige gemelo; `aprobado` hace las dos)
+                    `estado: borrador` no se indexa ni exige gemelo; `aprobado` hace las dos y
+                    además NO puede llevar un `[CONFIRMAR]` — el chat lo citaría tal cual.
+                    El contenido se prueba con preguntas de AFUERA: el banco de
+                    `tests/fixtures/banco-de-preguntas.es.yaml`, porque el buscador es léxico y
+                    una palabra que el corpus no dice no existe para quien pregunta)
 data/vitrina.yaml  (S6 — los cuatro FRENTES de la vitrina: id, estado, nombre, intro, detalle)
 data/fichas/       (S6 — complementos de CURACIÓN de CV Viva por app, `procedencia: cv-viva`:
                     titular · cifras destacadas · límites · nunca · proceso)

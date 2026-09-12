@@ -46,7 +46,8 @@ importa: no estudié para un examen, certifiqué lo que estaba haciendo con las 
 
 <!-- seccion: lago-y-almacen -->
 
-En Vesting diseñé el ecosistema integrando Big Data, Data Warehouse y procesamiento distribuido. No
+En Vesting diseñé el ecosistema integrando Big Data, Data Warehouse y procesamiento distribuido:
+un lago de datos —un **lakehouse**— y un almacén analítico conviviendo bajo el mismo gobierno. No
 es redundancia: son dos contratos distintos con el dato.
 
 El lago recibe lo que llega como llega, y su virtud es no perder nada ni obligar a decidir el

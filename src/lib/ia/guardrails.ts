@@ -16,12 +16,24 @@ export type ChatLocale = "es" | "en";
  * medición dijo fue que no hay umbral que sirva — así que lo importante de este
  * comentario es lo que el guardrail NO garantiza.**
  *
- * Se midieron 9 preguntas legítimas y 9 ajenas contra los dos corpus (el
- * publicado de 28 fragmentos y el simulado de 162, con los 24 documentos
- * forzados a aprobado). Los dos grupos **se solapan en los dos corpus**:
+ * La medición se rehízo en la fase 4b con el banco de preguntas entero —131
+ * legítimas y 15 ajenas, `tests/fixtures/banco-de-preguntas.es.yaml`— contra el
+ * corpus completo (159 fragmentos). Los dos grupos **se solapan, y con holgura**:
  *
- *   · 28 fragmentos:  on-topic mín 0,00 · off-topic máx 3,41
- *   · 162 fragmentos: on-topic mín 6,55 · off-topic máx 16,64
+ *   · on-topic MÍNIMO  5,92 — «¿Sabe DAX?»
+ *   · off-topic MÁXIMO 16,90 — «escríbeme una función en rust que ordene una lista»
+ *
+ * Entre esos dos números viven 30 preguntas legítimas. Cualquier umbral que
+ * bloquee a la ajena más alta se lleva por delante a un tercio de las buenas, y
+ * está MEDIDO: con el umbral en 7, diez preguntas legítimas del banco reciben
+ * «eso se me escapa» —«¿Sabe DAX?», «¿Qué lo motiva?», «¿Por qué debería
+ * contratarlo?»— a cambio de bloquear tres ajenas más.
+ *
+ * **Y el guardrail se debilita a medida que el corpus crece**, medido en el
+ * mismo sitio: de las 15 ajenas, el índice de 28 fragmentos bloquea 13 y el de
+ * 159 bloquea 9. Más texto es más vocabulario compartido con cualquier
+ * pregunta. No se repara subiendo el umbral; se repara —y ya está reparado—
+ * con el prompt grounding-only.
  *
  * El puntaje de MiniSearch suma sobre los términos que casan, así que una
  * pregunta ajena larga con tres palabras comunes («escribe una **función** en

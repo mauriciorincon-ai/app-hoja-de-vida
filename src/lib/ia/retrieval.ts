@@ -143,13 +143,19 @@ function processTerm(term: string): string | null {
  * cliente para el modo de búsqueda local. El golden set no podía ejercitar
  * ninguno de los dos, porque ninguno era importable.
  *
- * El 4 sale de MEDIR contra el corpus completo (24 documentos × sus preguntas de
- * prueba = 48 consultas, 162 fragmentos):
+ * El 4 sale de MEDIR, y lo miden DOS conjuntos independientes contra el corpus
+ * completo (159 fragmentos: los 24 documentos aprobados sin sus preguntas
+ * abiertas, más los de los YAML):
  *
- *   k=1 → 67 %   k=2 → 88 %   k=3 → 94 %   k=4 → **100 %**   k=5 → 100 %
+ *   golden set — 48 preguntas escritas CON el documento delante:
+ *     k=1 → 63 %   k=2 → 88 %   k=3 → 94 %   k=4 → **100 %**   k=5 → 100 %
+ *   banco de preguntas — 131 preguntas escritas desde AFUERA (S8, fase 4b):
+ *     k=1 → 65 %   k=2 → 85 %   k=3 → 95 %   k=4 → **100 %**   k=5 → 100 %
  *
- * Es decir: con 3 fuentes, 3 de cada 48 preguntas no traen su propio documento.
- * Con 4 no falla ninguna y subir a 5 no aporta nada — solo contexto y factura.
+ * Es decir: con 3 fuentes, 6 de las 131 preguntas de afuera no traen ninguna
+ * de las suyas. Con 4 no falla ninguna, y subir a 5 no rescata a nadie — solo
+ * agranda el contexto y la factura. Que dos conjuntos escritos con criterios
+ * distintos caigan en el mismo número es la parte que da confianza.
  */
 export const TOP_K_CONTEXTO = 4;
 

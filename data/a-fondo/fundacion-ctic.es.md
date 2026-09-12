@@ -40,8 +40,8 @@ Recuerda: NADA de datos de pacientes ni información interna sensible. -->
 
 <!-- seccion: el-rol-actual -->
 
-Desde febrero de 2025 soy Profesional de Analítica en la Fundación CTIC. Es mi rol actual y el
-contexto más exigente en el que he trabajado en cuanto a gobierno del dato, por una razón evidente:
+**Actualmente trabajo en la Fundación CTIC**, desde febrero de 2025, como Profesional de
+Analítica. Es mi rol actual y el contexto más exigente en el que he trabajado en cuanto a gobierno del dato, por una razón evidente:
 en salud, el dato describe a personas.
 
 Todo lo que escribo sobre este rol tiene un límite que no es negociable y que prefiero declarar de

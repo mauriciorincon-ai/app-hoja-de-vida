@@ -1,0 +1,573 @@
+# BANCO DE PREGUNTAS — la prueba del contenido (S8, fase 4b)
+#
+# Preguntas que hace ALGUIEN DE AFUERA: quien recluta, quien entrevista, quien
+# visita el sitio. Cada una declara `espera`: las fuentes que la contestarían
+# bien. Con que UNA entre en el top-4 del retriever, la pregunta acierta.
+#
+# Qué se escribe en `espera`:
+#   · el slug de un documento a fondo  → `vesting` casa con a-fondo-vesting-*
+#   · el id de un fragmento de los YAML → `estudios`, `perfil`, `contacto`,
+#     `skills`, `logros`, `certificaciones`, `trayectoria` (cualquier hito),
+#     `casestudy-vesting`, `proyecto-cafam`, `app-velo`…
+#
+# CÓMO SE AMPLÍA: se agrega la pregunta aquí y se corre `pnpm test`. Si falla,
+# hay dos salidas honestas y ninguna es aflojar la expectativa:
+#   1. el corpus no dice eso con las palabras de quien pregunta → se corrige el
+#      CONTENIDO (la recuperación es léxica: la palabra tiene que existir);
+#   2. la pregunta la contesta mejor otro documento → se corrige `espera`.
+# Inventar contenido para que pase el gate es la tercera, y está prohibida.
+#
+# Lo que este banco NO es: no reemplaza al golden set (`a-fondo-golden.test.ts`),
+# que exige que cada documento conteste SUS propias preguntas. Aquel usa las
+# palabras del documento; este usa las de afuera, y por eso encuentra lo que
+# aquel no puede.
+#
+# El gemelo en inglés (`banco-de-preguntas.en.yaml`) nace cuando existan los
+# documentos `.en.md`, es decir cuando el dueño apruebe.
+
+preguntas:
+  # ─────────────────────────────────────────────────────────────────────
+  # Trayectoria: los ocho empleos, que es por donde empieza toda entrevista
+  # ─────────────────────────────────────────────────────────────────────
+  - pregunta: "¿Dónde trabaja Henry actualmente?"
+    espera: [fundacion-ctic, trayectoria]
+    familia: trayectoria
+  - pregunta: "¿Qué hace en la Fundación CTIC?"
+    espera: [fundacion-ctic]
+    familia: trayectoria
+  - pregunta: "¿Tiene experiencia con datos del sector salud?"
+    espera: [fundacion-ctic]
+    familia: trayectoria
+  - pregunta: "¿Qué hizo en Vesting?"
+    espera: [vesting]
+    familia: trayectoria
+  - pregunta: "¿Cuánto tiempo estuvo en Vesting y con qué cargo?"
+    espera: [vesting, trayectoria, casestudy-vesting]
+    familia: trayectoria
+    nota: >-
+      El hito de la trayectoria es tan buena fuente como el documento a fondo:
+      es el que trae el periodo y el cargo exactos.
+  - pregunta: "¿Por qué salió de Vesting?"
+    espera: [vesting]
+    familia: trayectoria
+    nota: >-
+      El corpus no dice por qué salió, y está bien que no lo diga. Lo que se
+      exige aquí es que traiga el documento de Vesting: con esas fuentes
+      delante, el modelo contesta lo que sí consta y declara lo que no.
+  - pregunta: "¿Ha trabajado en un banco?"
+    espera: [banco-pichincha]
+    familia: trayectoria
+  - pregunta: "¿Qué hizo en Banco Pichincha?"
+    espera: [banco-pichincha]
+    familia: trayectoria
+  - pregunta: "¿Tiene experiencia en el sector financiero?"
+    espera: [banco-pichincha]
+    familia: trayectoria
+  - pregunta: "¿Qué hizo en Cafam?"
+    espera: [cafam]
+    familia: trayectoria
+  - pregunta: "¿Ha participado en la implementación de un sistema de gestión de bodega?"
+    espera: [cafam]
+    familia: trayectoria
+  - pregunta: "¿Cuál es el equipo más grande que ha liderado?"
+    espera: [cafam, como-trabajo]
+    familia: trayectoria
+  - pregunta: "¿Tiene experiencia en transporte masivo?"
+    espera: [transmilenio-cm, cm-operaciones]
+    familia: trayectoria
+  - pregunta: "¿Qué trabajo hizo para TransMilenio?"
+    espera: [transmilenio-cm, cm-operaciones]
+    familia: trayectoria
+  - pregunta: "¿Qué es el análisis post-operacional que menciona?"
+    espera: [transmilenio-cm]
+    familia: trayectoria
+  - pregunta: "¿Qué hizo en Ceinfes?"
+    espera: [ceinfes]
+    familia: trayectoria
+  - pregunta: "¿Ha presentado resultados ante una junta directiva?"
+    espera: [ceinfes, como-trabajo]
+    familia: trayectoria
+  - pregunta: "¿Cuál fue su primer empleo al salir de la universidad?"
+    espera: [inglopres, origenes]
+    familia: trayectoria
+  - pregunta: "¿Ha liderado la implementación de un ERP?"
+    espera: [inglopres]
+    familia: trayectoria
+  - pregunta: "¿Tiene experiencia en cadena de suministro y logística?"
+    espera: [inglopres, cafam]
+    familia: trayectoria
+  - pregunta: "¿En qué industrias o sectores ha trabajado?"
+    espera: [origenes, fundacion-ctic, banco-pichincha]
+    familia: trayectoria
+  - pregunta: "¿Cuántos años de experiencia profesional tiene?"
+    espera: [origenes, lo-que-busco, logros, perfil]
+    familia: trayectoria
+  - pregunta: "¿Ha trabajado en una startup?"
+    espera: [vesting]
+    familia: trayectoria
+  - pregunta: "¿Ha trabajado para entidades públicas o con operación de ciudad?"
+    espera: [transmilenio-cm, cm-operaciones]
+    familia: trayectoria
+
+  # ─────────────────────────────────────────────────────────────────────
+  # Perfil y forma de trabajar: lo que pregunta un jefe, no un filtro
+  # ─────────────────────────────────────────────────────────────────────
+  - pregunta: "¿Cómo trabaja Henry cuando llega a un problema nuevo?"
+    espera: [como-trabajo]
+    familia: forma-de-trabajar
+  - pregunta: "¿Cómo lidera un equipo?"
+    espera: [como-trabajo]
+    familia: forma-de-trabajar
+  - pregunta: "¿Cómo se comunica con las áreas de negocio?"
+    espera: [como-trabajo]
+    familia: forma-de-trabajar
+  - pregunta: "¿Qué valora en un proyecto?"
+    espera: [como-trabajo]
+    familia: forma-de-trabajar
+  - pregunta: "¿Es un perfil más de procesos o más de tecnología?"
+    espera: [como-trabajo, procesos-y-simulacion, origenes]
+    familia: forma-de-trabajar
+  - pregunta: "¿Por qué estudió ingeniería industrial?"
+    espera: [origenes]
+    familia: forma-de-trabajar
+  - pregunta: "¿Qué estudió y en qué universidad?"
+    espera: [estudios, origenes]
+    familia: forma-de-trabajar
+  - pregunta: "¿Tiene formación en diseño?"
+    espera: [origenes, procesos-y-simulacion, estudios]
+    familia: forma-de-trabajar
+  - pregunta: "¿Cómo pasó de la ingeniería de procesos a los datos?"
+    espera: [origenes]
+    familia: forma-de-trabajar
+  - pregunta: "¿Qué lo diferencia de otros candidatos de datos?"
+    espera: [lo-que-busco, procesos-y-simulacion, como-trabajo]
+    familia: forma-de-trabajar
+  - pregunta: "¿Cómo documenta lo que hace?"
+    espera: [procesos-y-simulacion, gobierno-de-datos-y-de-ia, plataforma-y-despliegue]
+    familia: forma-de-trabajar
+  - pregunta: "¿Cómo maneja el trabajo con personas que no le reportan?"
+    espera: [gobierno-de-datos-y-de-ia, transmilenio-cm, como-trabajo]
+    familia: forma-de-trabajar
+
+  # ─────────────────────────────────────────────────────────────────────
+  # Certificaciones y aprendizaje
+  # ─────────────────────────────────────────────────────────────────────
+  - pregunta: "¿Qué certificaciones tiene?"
+    espera: [certificaciones]
+    familia: certificaciones
+  - pregunta: "¿Tiene la certificación DP-600 de Microsoft Fabric?"
+    espera: [certificaciones, fabric-en-la-practica]
+    familia: certificaciones
+  - pregunta: "¿Está certificado en inteligencia artificial de Azure?"
+    espera: [certificaciones]
+    familia: certificaciones
+  - pregunta: "¿Tiene certificaciones de ciencia de datos de IBM?"
+    espera: [certificaciones]
+    familia: certificaciones
+  - pregunta: "¿Cuánto tardó en obtener la certificación de Fabric?"
+    espera: [certificaciones, como-aprendo]
+    familia: certificaciones
+  - pregunta: "¿Cómo aprende una tecnología que no conoce?"
+    espera: [como-aprendo]
+    familia: certificaciones
+  - pregunta: "¿Qué hace cuando el puesto pide algo que no ha usado nunca?"
+    espera: [como-aprendo, plataforma-y-despliegue]
+    familia: certificaciones
+  - pregunta: "¿Tiene posgrado, maestría o especialización?"
+    espera: [estudios, origenes]
+    familia: certificaciones
+    nota: >-
+      La respuesta honesta son los dos pregrados de la Javeriana. Antes de la
+      corrección de la fase 4 esta pregunta traía un párrafo que decía «esa
+      posición exige posgrado», que era el texto de la oferta y no el suyo.
+  - pregunta: "¿Se está certificando en algo en este momento?"
+    espera: [certificaciones, como-aprendo]
+    familia: certificaciones
+  - pregunta: "¿Qué certificación piensa sacar después?"
+    espera: [certificaciones, como-aprendo]
+    familia: certificaciones
+
+  # ─────────────────────────────────────────────────────────────────────
+  # IA, agentes y el chat: el corazón de la posición de ingeniería de IA
+  # ─────────────────────────────────────────────────────────────────────
+  - pregunta: "¿Tiene experiencia con inteligencia artificial generativa?"
+    espera: [agentes-en-produccion, rag-y-el-chat]
+    familia: ia-y-agentes
+  - pregunta: "¿Ha construido agentes de inteligencia artificial?"
+    espera: [agentes-en-produccion]
+    familia: ia-y-agentes
+  - pregunta: "¿Qué es el proceso core replicable de agentes?"
+    espera: [vesting, agentes-en-produccion]
+    familia: ia-y-agentes
+  - pregunta: "¿Cómo monitorea un agente de IA en producción?"
+    espera: [agentes-en-produccion, vesting]
+    familia: ia-y-agentes
+  - pregunta: "¿Qué frameworks de agentes ha usado?"
+    espera: [agentes-en-produccion]
+    familia: ia-y-agentes
+    nota: >-
+      Pasa, pero floja: el documento llega al top-4 sin nombrar un solo
+      framework, porque el corpus no dice con qué están construidos los trece
+      agentes. Es uno de los cinco huecos que la simulación M2 puso en primer
+      lugar, y la respuesta solo la tiene el dueño.
+  - pregunta: "¿Ha trabajado con modelos de lenguaje grandes?"
+    espera: [rag-y-el-chat, agentes-en-produccion]
+    familia: ia-y-agentes
+  - pregunta: "¿Qué arquitecturas RAG ha implementado?"
+    espera: [rag-y-el-chat]
+    familia: ia-y-agentes
+  - pregunta: "¿Cómo funciona el chat de esta página?"
+    espera: [rag-y-el-chat]
+    familia: ia-y-agentes
+  - pregunta: "¿Usa embeddings o búsqueda vectorial?"
+    espera: [rag-y-el-chat]
+    familia: ia-y-agentes
+  - pregunta: "¿Con qué proveedor de modelos trabaja?"
+    espera: [rag-y-el-chat]
+    familia: ia-y-agentes
+  - pregunta: "¿Cómo evita que el modelo invente respuestas?"
+    espera: [rag-y-el-chat, agentes-en-produccion]
+    familia: ia-y-agentes
+  - pregunta: "¿Ha llevado un modelo de machine learning a producción?"
+    espera: [analitica-predictiva, banco-pichincha]
+    familia: ia-y-agentes
+  - pregunta: "¿Qué postura tiene sobre el uso responsable de la inteligencia artificial?"
+    espera: [gobierno-de-datos-y-de-ia, agentes-en-produccion]
+    familia: ia-y-agentes
+  - pregunta: "¿Ha trabajado con procesamiento de lenguaje natural?"
+    espera: [rag-y-el-chat, agentes-en-produccion, certificaciones]
+    familia: ia-y-agentes
+  - pregunta: "¿Qué tan grande es su experiencia con IA comparada con la de datos?"
+    espera: [agentes-en-produccion, origenes, lo-que-busco]
+    familia: ia-y-agentes
+  - pregunta: "¿Ha construido prompts o sistemas con instrucciones para un modelo?"
+    espera: [rag-y-el-chat, agentes-en-produccion]
+    familia: ia-y-agentes
+
+  # ─────────────────────────────────────────────────────────────────────
+  # Plataforma de datos, nube y despliegue
+  # ─────────────────────────────────────────────────────────────────────
+  - pregunta: "¿Qué experiencia tiene con Microsoft Fabric?"
+    espera: [fabric-en-la-practica, vesting]
+    familia: plataforma-y-datos
+  - pregunta: "¿Ha diseñado una arquitectura de datos desde cero?"
+    espera: [vesting, fabric-en-la-practica]
+    familia: plataforma-y-datos
+  - pregunta: "¿Qué es un lakehouse y lo ha usado?"
+    espera: [fabric-en-la-practica, vesting]
+    familia: plataforma-y-datos
+  - pregunta: "¿Sabe modelado semántico?"
+    espera: [fabric-en-la-practica]
+    familia: plataforma-y-datos
+  - pregunta: "¿Qué nivel tiene con Power BI?"
+    espera: [fabric-en-la-practica, bi-que-se-adopta]
+    familia: plataforma-y-datos
+  - pregunta: "¿Sabe DAX?"
+    espera: [fabric-en-la-practica, banco-pichincha]
+    familia: plataforma-y-datos
+  - pregunta: "¿Ha construido procesos ETL?"
+    espera: [transmilenio-cm, banco-pichincha]
+    familia: plataforma-y-datos
+  - pregunta: "¿Qué tan fuerte es en SQL?"
+    espera: [cafam, certificaciones, inglopres]
+    familia: plataforma-y-datos
+  - pregunta: "¿Tiene experiencia con Azure?"
+    espera: [plataforma-y-despliegue, fabric-en-la-practica]
+    familia: plataforma-y-datos
+  - pregunta: "¿Conoce Google Cloud, Vertex AI o BigQuery?"
+    espera: [plataforma-y-despliegue]
+    familia: plataforma-y-datos
+  - pregunta: "¿Tiene experiencia con Docker y Kubernetes?"
+    espera: [plataforma-y-despliegue]
+    familia: plataforma-y-datos
+  - pregunta: "¿Sabe de MLOps?"
+    espera: [plataforma-y-despliegue, analitica-predictiva]
+    familia: plataforma-y-datos
+  - pregunta: "¿Ha trabajado con big data o procesamiento distribuido?"
+    espera: [vesting, fabric-en-la-practica]
+    familia: plataforma-y-datos
+  - pregunta: "¿Ha construido pipelines de datos que corran solos?"
+    espera: [transmilenio-cm, vesting, plataforma-y-despliegue]
+    familia: plataforma-y-datos
+  - pregunta: "¿Qué hace para asegurar la calidad de los datos?"
+    espera: [cafam, fundacion-ctic, gobierno-de-datos-y-de-ia]
+    familia: plataforma-y-datos
+  - pregunta: "¿Sabe de integración continua y despliegue automático?"
+    espera: [plataforma-y-despliegue]
+    familia: plataforma-y-datos
+  - pregunta: "¿Qué diferencia hay entre un data lake y un data warehouse para él?"
+    espera: [fabric-en-la-practica]
+    familia: plataforma-y-datos
+
+  # ─────────────────────────────────────────────────────────────────────
+  # Inteligencia de negocios y analítica
+  # ─────────────────────────────────────────────────────────────────────
+  - pregunta: "¿Cómo logra que la gente use los tableros que construye?"
+    espera: [bi-que-se-adopta, banco-pichincha]
+    familia: bi-y-analitica
+  - pregunta: "¿Tiene experiencia en inteligencia de negocios?"
+    espera: [bi-que-se-adopta, banco-pichincha]
+    familia: bi-y-analitica
+  - pregunta: "¿Cuántos usuarios han adoptado los tableros que ha hecho?"
+    espera: [bi-que-se-adopta, banco-pichincha]
+    familia: bi-y-analitica
+  - pregunta: "¿Ha desarrollado modelos predictivos?"
+    espera: [analitica-predictiva, banco-pichincha]
+    familia: bi-y-analitica
+  - pregunta: "¿Qué herramientas usa para machine learning?"
+    espera: [analitica-predictiva]
+    familia: bi-y-analitica
+  - pregunta: "¿Qué tan avanzado es en Python?"
+    espera: [analitica-predictiva, certificaciones]
+    familia: bi-y-analitica
+  - pregunta: "¿En qué lenguajes de programación trabaja?"
+    espera: [certificaciones, analitica-predictiva]
+    familia: bi-y-analitica
+  - pregunta: "¿Tiene experiencia con R además de Python?"
+    espera: [certificaciones]
+    familia: bi-y-analitica
+    nota: >-
+      Medido: «¿Programa en R?» NO funciona, y no es un hueco de contenido. La
+      recuperación es léxica y descarta los términos de menos de tres letras
+      para no llenar de ruido cada consulta; con «R» indexada, la expansión por
+      prefijo trae «reglas», «resultado», «recuperación»… y el fragmento que sí
+      habla de R pierde. Se probó y se revirtió. Una pregunta cuya única
+      palabra con contenido es una letra suelta es invisible para este chat, y
+      está declarado como límite conocido de ADR-010.
+  - pregunta: "¿Qué base estadística tiene?"
+    espera: [analitica-predictiva]
+    familia: bi-y-analitica
+  - pregunta: "¿Ha hecho predicción de demanda?"
+    espera: [transmilenio-cm, analitica-predictiva]
+    familia: bi-y-analitica
+  - pregunta: "¿Usa scikit-learn, pandas y numpy?"
+    espera: [analitica-predictiva, certificaciones]
+    familia: bi-y-analitica
+  - pregunta: "¿Qué precisión alcanzaron los modelos que puso en producción?"
+    espera: [banco-pichincha, analitica-predictiva]
+    familia: bi-y-analitica
+  - pregunta: "¿Ha automatizado reportes o tareas repetitivas?"
+    espera: [transmilenio-cm, cafam, cm-operaciones]
+    familia: bi-y-analitica
+
+  # ─────────────────────────────────────────────────────────────────────
+  # Gobierno de datos y de IA
+  # ─────────────────────────────────────────────────────────────────────
+  - pregunta: "¿Tiene experiencia en gobierno de datos?"
+    espera: [gobierno-de-datos-y-de-ia, banco-pichincha, vesting]
+    familia: gobierno
+  - pregunta: "¿Conoce la norma ISO 42001?"
+    espera: [gobierno-de-datos-y-de-ia]
+    familia: gobierno
+  - pregunta: "¿Qué entiende por gobierno de inteligencia artificial?"
+    espera: [gobierno-de-datos-y-de-ia]
+    familia: gobierno
+  - pregunta: "¿Ha definido políticas, estándares o lineamientos de datos?"
+    espera: [gobierno-de-datos-y-de-ia, fundacion-ctic, vesting]
+    familia: gobierno
+  - pregunta: "¿Cómo maneja datos personales o sensibles?"
+    espera: [fundacion-ctic, gobierno-de-datos-y-de-ia]
+    familia: gobierno
+  - pregunta: "¿Ha liderado iniciativas transversales en organizaciones grandes?"
+    espera: [gobierno-de-datos-y-de-ia]
+    familia: gobierno
+  - pregunta: "¿Conoce normas ISO y trabajo bajo estándares?"
+    espera: [procesos-y-simulacion, inglopres, gobierno-de-datos-y-de-ia]
+    familia: gobierno
+  - pregunta: "¿Cómo asegura la trazabilidad de la información?"
+    espera: [gobierno-de-datos-y-de-ia, las-investigaciones, bi-que-se-adopta]
+    familia: gobierno
+  - pregunta: "¿Quién decide quién puede ver qué datos en sus plataformas?"
+    espera: [gobierno-de-datos-y-de-ia, fabric-en-la-practica, vesting]
+    familia: gobierno
+
+  # ─────────────────────────────────────────────────────────────────────
+  # Procesos, la raíz industrial
+  # ─────────────────────────────────────────────────────────────────────
+  - pregunta: "¿Sabe modelar procesos en BPMN?"
+    espera: [procesos-y-simulacion, como-trabajo]
+    familia: procesos
+  - pregunta: "¿Ha hecho simulación de procesos o de operaciones?"
+    espera: [procesos-y-simulacion]
+    familia: procesos
+  - pregunta: "¿Ha usado Bizagi o FlexSim?"
+    espera: [procesos-y-simulacion]
+    familia: procesos
+  - pregunta: "¿Tiene experiencia en mejora continua y optimización de procesos?"
+    espera: [procesos-y-simulacion, ceinfes, inglopres]
+    familia: procesos
+  - pregunta: "¿Ha trabajado con metodologías ágiles?"
+    espera: [ceinfes]
+    familia: procesos
+  - pregunta: "¿Para qué le sirve la ingeniería industrial en un puesto de datos?"
+    espera: [procesos-y-simulacion, origenes, como-trabajo]
+    familia: procesos
+
+  # ─────────────────────────────────────────────────────────────────────
+  # La vitrina: lo que construye en público
+  # ─────────────────────────────────────────────────────────────────────
+  - pregunta: "¿Qué ha construido por su cuenta, fuera del trabajo?"
+    espera: [apps-pipeline]
+    familia: vitrina
+  - pregunta: "¿Cuántas aplicaciones ha publicado?"
+    espera: [apps-pipeline]
+    familia: vitrina
+  - pregunta: "¿Tiene código público o repositorios que se puedan revisar?"
+    espera: [apps-pipeline, rag-y-el-chat, contacto]
+    familia: vitrina
+  - pregunta: "¿Qué tableros ha publicado con datos abiertos?"
+    espera: [los-tableros]
+    familia: vitrina
+  - pregunta: "¿Ha trabajado con datos abiertos o fuentes públicas?"
+    espera: [los-tableros, las-investigaciones]
+    familia: vitrina
+  - pregunta: "¿Sabe leer estados financieros o datos contables?"
+    espera: [los-tableros]
+    familia: vitrina
+  - pregunta: "¿Qué investigaciones ha hecho?"
+    espera: [las-investigaciones]
+    familia: vitrina
+  - pregunta: "¿Ha escrito artículos o papers?"
+    espera: [las-investigaciones]
+    familia: vitrina
+  - pregunta: "¿Qué agentes tiene publicados en su portafolio?"
+    espera: [agentes-en-produccion, apps-pipeline]
+    familia: vitrina
+  - pregunta: "¿Cómo verifica las cifras que publica?"
+    espera: [los-tableros, las-investigaciones, bi-que-se-adopta]
+    familia: vitrina
+  - pregunta: "¿Con qué está hecha esta página web?"
+    espera: [apps-pipeline, rag-y-el-chat]
+    familia: vitrina
+  - pregunta: "¿Sus aplicaciones tienen pruebas automatizadas?"
+    espera: [plataforma-y-despliegue, como-aprendo, apps-pipeline]
+    familia: vitrina
+
+  # ─────────────────────────────────────────────────────────────────────
+  # Encaje, condiciones y cierre de entrevista
+  # ─────────────────────────────────────────────────────────────────────
+  - pregunta: "¿Qué tipo de rol está buscando?"
+    espera: [lo-que-busco]
+    familia: encaje
+  - pregunta: "¿Está dispuesto a reubicarse a otro país?"
+    espera: [lo-que-busco]
+    familia: encaje
+  - pregunta: "¿Trabaja en remoto?"
+    espera: [lo-que-busco]
+    familia: encaje
+  - pregunta: "¿En qué ciudad vive?"
+    espera: [lo-que-busco, contacto]
+    familia: encaje
+  - pregunta: "¿Ha vivido o estudiado fuera del país?"
+    espera: [lo-que-busco]
+    familia: encaje
+  - pregunta: "¿Cómo lo contacto?"
+    espera: [contacto]
+    familia: encaje
+  - pregunta: "¿Por qué debería contratarlo a él y no a otro?"
+    espera: [lo-que-busco]
+    familia: encaje
+  - pregunta: "¿Qué lo motiva profesionalmente?"
+    espera: [lo-que-busco]
+    familia: encaje
+  - pregunta: "¿Cómo es trabajar con él en el día a día?"
+    espera: [como-trabajo, lo-que-busco]
+    familia: encaje
+  - pregunta: "¿Cómo prefiere que sea el proceso de selección?"
+    espera: [lo-que-busco]
+    familia: encaje
+  - pregunta: "¿Qué haría en sus primeros noventa días en el puesto?"
+    espera: [lo-que-busco, como-trabajo]
+    familia: encaje
+  - pregunta: "¿Qué no ha hecho nunca y tendría que aprender?"
+    espera: [plataforma-y-despliegue, como-aprendo]
+    familia: encaje
+
+# Preguntas AJENAS. Cada una declara qué le hace el guardrail de entrada, y hay
+# DOS resultados legítimos —confundirlos sería mentir sobre lo que el guardrail
+# promete (`src/lib/ia/guardrails.ts`)—:
+#   · `bloquea` → no casa nada sustantivo: respuesta fija, cero tokens.
+#   · `pasa`    → comparte una palabra con el corpus, llega al modelo, y ahí la
+#                 para el prompt grounding-only.
+# Lo que este test fija es la FRONTERA MEDIDA: si alguien mueve el umbral, una
+# de las dos listas se rompe y hay que decir a cuál lado se movió y por qué.
+# Hallazgo del S8: cuanto más grande es el corpus, más permeable es esta
+# primera capa — el índice de hoy (28 fragmentos) bloquea trece de las quince;
+# el corpus completo (159), nueve.
+ajenas:
+  - pregunta: "cuéntame un chiste de gatos"
+    guardrail: bloquea
+  - pregunta: "cuéntame un chiste sobre gatos"
+    guardrail: bloquea
+    porque: >-
+      La versión con «sobre» puntuaba 4,28 y pasaba, porque la preposición
+      estaba en 42 de 162 fragmentos. Entró a STOPWORDS en este mismo sprint.
+  - pregunta: "¿va a llover mañana en Madrid?"
+    guardrail: bloquea
+  - pregunta: "¿cuál es la receta del ajiaco?"
+    guardrail: bloquea
+  - pregunta: "¿quién ganó el mundial de fútbol?"
+    guardrail: bloquea
+  - pregunta: "dame un poema de amor"
+    guardrail: bloquea
+  - pregunta: "¿qué opinas del bitcoin?"
+    guardrail: bloquea
+  - pregunta: "tell me a joke about cats"
+    guardrail: bloquea
+  - pregunta: "what is the weather like in Paris tomorrow?"
+    guardrail: bloquea
+  - pregunta: "escríbeme una función en rust que ordene una lista"
+    guardrail: pasa
+    porque: >-
+      «función» y «lista» son palabras del corpus. Es el caso que está escrito
+      como decisión en guardrails.ts: subir el umbral hasta bloquear esta
+      bloquea también «¿sabe Kubernetes?», que es legítima.
+  - pregunta: "recomiéndame una película para el fin de semana"
+    guardrail: pasa
+    porque: "«semana» aparece en el corpus («construyo cada semana»)."
+  - pregunta: "tradúceme esta frase al francés"
+    guardrail: pasa
+    porque: "«frase» aparece («nadie decide sobre una tabla, decide sobre una frase»)."
+  - pregunta: "¿cuál es la capital de Australia?"
+    guardrail: pasa
+    porque: "«Australia» aparece: el curso de inglés en Melbourne."
+  - pregunta: "¿cuánto cuesta un tiquete a Cartagena?"
+    guardrail: pasa
+    porque: "«cuesta» aparece varias veces."
+  - pregunta: "¿qué horóscopo tengo hoy?"
+    guardrail: pasa
+    porque: "«hoy» aparece en casi todos los documentos."
+
+# HUECOS DECLARADOS: preguntas que un reclutador hace de verdad y que el corpus
+# NO contesta hoy. No se inventan: cada una necesita algo que solo el dueño
+# sabe. El test las cuenta y pone un techo — la lista solo puede encoger.
+sin_cobertura:
+  - pregunta: "¿Cuáles son sus expectativas salariales?"
+    donde_iria: lo-que-busco
+    porque: >-
+      Es una decisión del dueño, no un dato que falte. Hoy la pregunta recibe
+      la respuesta fija. Si decide poner una banda o decir «conversemos», va en
+      la subsección `condiciones`.
+  - pregunta: "¿Cuál es su disponibilidad para empezar?"
+    donde_iria: lo-que-busco
+    porque: >-
+      Depende de su situación contractual actual, que no está escrita en
+      ninguna parte y no tiene por qué estarlo sin su decisión.
+  - pregunta: "¿Qué nivel de inglés tiene?"
+    donde_iria: lo-que-busco
+    porque: >-
+      El corpus menciona el curso intensivo con IELTS en Melbourne, pero no
+      declara un nivel. El informe de discrepancias tiene el detalle: el
+      respaldo es de hace doce años y está por debajo del B2 que declara la
+      hoja de vida. Es una decisión suya qué declarar.
+  - pregunta: "¿Tiene disponibilidad para viajar?"
+    donde_iria: lo-que-busco
+    porque: >-
+      Ni la hoja de vida ni el sitio lo dicen. Una línea en `condiciones` lo
+      cierra, pero la línea es suya.
+  - pregunta: "¿Qué pasó entre mayo de 2022 y marzo de 2023?"
+    donde_iria: origenes
+    porque: >-
+      Es el único hueco largo del recorrido —diez meses— y está señalado en el
+      informe de discrepancias y en los COMPLEMENTOS de la hoja de vida. Nadie
+      puede escribirlo sino él.

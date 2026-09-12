@@ -35,7 +35,7 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import process from "node:process";
 import { parse } from "yaml";
-import { chunksDeAFondo, leerDocumentos, problemasDeParidad, problemasDeNombre, problemasDeDestino, problemasDePrivacidad } from "./a-fondo.mjs";
+import { chunksDeAFondo, leerDocumentos, problemasDeParidad, problemasDeNombre, problemasDeDestino, problemasDePreguntasAbiertas, problemasDePrivacidad } from "./a-fondo.mjs";
 import { catalogoDeDestinos, destinoExiste } from "./destinos.mjs";
 
 const ROOT = process.cwd();
@@ -207,6 +207,7 @@ function main() {
     for (const doc of docs[locale]) {
       problemas.push(...problemasDeNombre(doc, locale));
       problemas.push(...problemasDeDestino(doc, catalogo));
+      problemas.push(...problemasDePreguntasAbiertas(doc));
       problemas.push(...problemasDePrivacidad(crudos.get(doc.archivo), doc.archivo));
     }
   }

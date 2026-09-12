@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import { parse } from "yaml";
 import { createRetriever, TOP_K_CONTEXTO } from "@/lib/ia/retrieval";
 import { chatChunkSchema } from "@/lib/ia/schemas";
-import { chunksDeAFondo, leerDocumentos } from "../../scripts/a-fondo.mjs";
+import { leerDocumentos, simularAprobacion } from "../../scripts/a-fondo.mjs";
 import { buildChunks } from "../../scripts/build-chat-index.mjs";
 
 /**
@@ -39,7 +39,7 @@ type Doc = {
 };
 
 const docs: Doc[] = leerDocumentos("es");
-const aprobados = docs.map((d) => ({ ...d, estado: "aprobado" }));
+const aprobados = simularAprobacion(docs);
 const chunks = buildChunks({
   cv: leer("cv.es.yaml"),
   apps: leer("apps.yaml"),

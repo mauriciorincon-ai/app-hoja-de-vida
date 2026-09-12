@@ -52,8 +52,8 @@ lo que podíamos convertirla en algo utilizable.
 
 <!-- seccion: unificar-las-fuentes -->
 
-Diseñé e implementé sistemas de extracción, transformación y carga que unificaron fuentes de datos
-heterogéneas, con una mejora del setenta por ciento en la precisión y la velocidad del análisis.
+Diseñé e implementé sistemas de extracción, transformación y carga —procesos **ETL**, las tuberías
+de datos que hoy se llaman *pipelines*— que unificaron fuentes de datos heterogéneas, con una mejora del setenta por ciento en la precisión y la velocidad del análisis.
 
 Ese setenta por ciento es la cifra de la que más orgulloso estoy de esa época, y conviene entender
 de dónde sale: no es que los datos fueran mejores, es que dejaron de reconciliarse a mano. Cuando

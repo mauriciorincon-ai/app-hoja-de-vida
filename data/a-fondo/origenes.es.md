@@ -106,3 +106,10 @@ una plataforma de datos.
 
 Desde febrero de 2025 estoy en la Fundación CTIC, donde el proceso es asistencial y administrativo
 y el dato es de salud — que es el contexto más exigente en el que he trabajado en cuanto a gobierno.
+
+**Cuántos años son, en total.** Diez años de experiencia profesional, contados desde agosto de
+2016, cuando entré a mi primer empleo; ocho de ellos con los datos en el centro del trabajo.
+
+[CONFIRMAR: los dos números son verdaderos y hay que elegir cuál se declara — diez desde el primer
+empleo, ocho desde que el trabajo es de datos. Lo importante es que la hoja de vida, el sitio y
+este documento digan el mismo, porque hoy no declaran ninguno.]

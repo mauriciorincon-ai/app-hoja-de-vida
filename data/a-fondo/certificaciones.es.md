@@ -54,7 +54,8 @@ certificando exactamente lo que estaba haciendo. Cinco meses, de julio a noviemb
 
 <!-- seccion: el-ai-103 -->
 
-**Microsoft Certified: Azure AI Engineer Associate — AI-103. EN DESARROLLO.**
+**Microsoft Certified: Azure AI Engineer Associate — AI-103. EN DESARROLLO.** Es la certificación
+de ingeniero de **inteligencia artificial de Azure**, y todavía **no la tengo**.
 
 Digo «en desarrollo» y no «obtenida», y lo digo en todas partes. La ruta anterior era el AI-102;
 Microsoft la descontinuó, y con ella se fue de todo mi contenido: la retiré del titular, del perfil,
@@ -78,7 +79,8 @@ demuestre que cubre el temario en proporción a los pesos oficiales del examen.
 
 <!-- seccion: las-de-ibm -->
 
-Cuatro certificaciones, en dos tandas y con dos lenguajes distintos:
+Cuatro certificaciones, en dos tandas y con los dos lenguajes de programación del análisis de
+datos:
 
 **En Python, durante 2022.** El Certificado Profesional en Ciencia de Datos (mayo a noviembre) con
 Pandas, NumPy, Matplotlib, Seaborn, SQL, scikit-learn, Jupyter y Watsonx. Antes, Python para

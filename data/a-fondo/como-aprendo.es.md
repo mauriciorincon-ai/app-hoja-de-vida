@@ -109,7 +109,7 @@ Es, literalmente, mi método de aprendizaje convertido en una herramienta que ot
 Que la brecha entre lo que sé hoy y lo que necesita el puesto es una variable de tiempo, y el tiempo
 está medido en las cuatro ocasiones anteriores.
 
-Si un rol exige una nube, un framework o una herramienta que no está en mi lista, lo trato como traté
+Si el puesto exige una nube, un framework o una herramienta que **nunca he usado**, lo trato como traté
 Fabric en 2024 y como traté WebAssembly el año pasado: un problema pequeño y real, la documentación
 oficial, y algo terminado que se puede mirar. Prefiero decir «eso no lo he hecho, y así es como lo
 resolvería» que inflar una lista de herramientas.

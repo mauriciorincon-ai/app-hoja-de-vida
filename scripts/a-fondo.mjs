@@ -155,6 +155,66 @@ export function parseDocumento(markdown, archivo) {
   return { ...meta, archivo, subsecciones };
 }
 
+
+/**
+ * PREGUNTA ABIERTA: el bloque `[CONFIRMAR: …]` con el que un documento declara
+ * lo que todavía no tiene fuente. Es el mecanismo central del flujo de
+ * corrección —«ninguna cifra, fecha ni logro sin fuente; lo que falte va como
+ * [CONFIRMAR], jamás relleno plausible»— y por eso tiene dos consecuencias
+ * mecánicas, no una:
+ *
+ *  · **Un documento APROBADO no puede llevar ninguna** (ver
+ *    `problemasDePreguntasAbiertas`). Si llevara, el chat citaría a un
+ *    visitante un párrafo que dice «[CONFIRMAR: ¿a cuántas personas formaste?]»
+ *    — la pregunta del autor a sí mismo, publicada como si fuera evidencia.
+ *  · **La simulación las quita antes de medir** (ver `simularAprobacion`),
+ *    porque mide el índice que existirá DESPUÉS de aprobar, y para aprobar hay
+ *    que haberlas resuelto. Medidas: hoy son 29 bloques y 1 282 palabras — el
+ *    9 % del corpus. Con ellas dentro, el troceo parte subsecciones que no
+ *    son largas y la normalización por longitud de BM25 castiga justo a los
+ *    fragmentos que más falta le hacen al dueño arreglar.
+ */
+export const PATRON_PREGUNTA_ABIERTA = /\[CONFIRMAR[\s\S]*?\](?=\s*(?:\n\n|$))/g;
+
+/** Prosa sin sus preguntas abiertas, con los huecos de líneas cerrados. */
+export function sinPreguntasAbiertas(texto) {
+  return texto
+    .replace(PATRON_PREGUNTA_ABIERTA, "")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+}
+
+/** Un aprobado con preguntas abiertas se publica al visitante. La aduana lo para. */
+export function problemasDePreguntasAbiertas(doc) {
+  if (doc.estado !== "aprobado") return [];
+  return doc.subsecciones
+    .filter((s) => /\[CONFIRMAR/.test(s.texto))
+    .map(
+      (s) =>
+        `${doc.archivo} · subsección "${s.id}": está «aprobado» y todavía tiene un ` +
+        `[CONFIRMAR: …]. El chat cita este texto tal cual a quien pregunte: aprobar es ` +
+        `justamente haber resuelto esas preguntas. Respóndela y bórrala, o devuelve el ` +
+        `documento a «borrador».`,
+    );
+}
+
+/**
+ * LOS BORRADORES, COMO SI YA ESTUVIERAN APROBADOS. Es lo que miden el golden
+ * set y el banco de preguntas: el índice que existirá cuando el dueño apruebe.
+ * Medir el corpus contra el índice publicado —que hoy no lo contiene— sería un
+ * gate sin sujeto (regla 14, tercera pregunta).
+ */
+export function simularAprobacion(docs) {
+  return docs.map((d) => ({
+    ...d,
+    estado: "aprobado",
+    subsecciones: d.subsecciones.map((s) => ({
+      ...s,
+      texto: sinPreguntasAbiertas(s.texto),
+    })),
+  }));
+}
+
 /** El slug del frontmatter manda: el nombre del archivo no puede mentir. */
 export function problemasDeNombre(doc, locale) {
   const esperado = `${doc.slug}.${locale}.md`;
@@ -281,6 +341,7 @@ export function revisarAduana({ docsEs, docsEn, crudos, catalogo }) {
     for (const doc of docs) {
       problemas.push(...problemasDeNombre(doc, locale));
       problemas.push(...problemasDeDestino(doc, catalogo));
+      problemas.push(...problemasDePreguntasAbiertas(doc));
       const crudo = crudos?.get(doc.archivo);
       if (crudo !== undefined) {
         problemas.push(...problemasDePrivacidad(crudo, doc.archivo));

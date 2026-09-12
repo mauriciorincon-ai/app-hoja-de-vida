@@ -428,6 +428,9 @@ citable**: cuando el chat responde con ella, el chip `[n]` lleva al `ancla` del 
 - Una cabecera incompleta o con un `estado` inventado.
 - Dos subsecciones con el mismo id en un documento.
 - Un documento `aprobado` sin su gemelo en inglés, o con distintas subsecciones entre idiomas.
+- Un documento `aprobado` que todavía tiene un `[CONFIRMAR: …]`. **Aprobar es justamente haber
+  resuelto esas preguntas**: si quedara una, el chat se la citaría tal cual a un visitante —tu
+  pregunta a ti mismo publicada como si fuera evidencia—.
 - Un correo, un teléfono, siete dígitos seguidos (cédula, NIT) o una dirección web en la prosa.
 - Un `ancla` que **no existe en el sitio**. Esta es nueva y vale la pena entenderla: si mañana
   se retira una sección de la HOME, los documentos que citaban hacia ella se ponen en rojo. Una
@@ -438,7 +441,8 @@ teléfonos; a un jefe, un cliente o un compañero mencionado por su nombre **no 
 Esa decisión es tuya, documento por documento.
 
 **Ninguna cifra, fecha ni logro sin fuente.** Si algo falta, se escribe `[CONFIRMAR: qué falta]`
-y ahí se queda hasta que lo confirmes. Nunca un dato plausible inventado.
+y ahí se queda hasta que lo confirmes. Nunca un dato plausible inventado. Es la única marca que
+el build persigue de verdad: mientras esté, el documento no puede pasar a `aprobado`.
 
 **El ritmo:** escribe un documento → déjalo en `borrador` todo el tiempo que quieras → cuando
 esté bien, `aprobado` + su gemelo en inglés → commit + push. En local puedes comprobarlo con
@@ -446,6 +450,41 @@ esté bien, `aprobado` + su gemelo en inglés → commit + push. En local puedes
 
 **Un tema nuevo:** copia cualquier documento, cámbiale el `slug` (que debe coincidir con el
 nombre del archivo) y escribe. No hay lista que actualizar en ninguna parte.
+
+### Cómo se prueba que el contenido contesta · desde Sprint 008
+
+Escribir el documento es la mitad. La otra es comprobar que **el chat lo encuentra cuando alguien
+pregunta**, y eso no se mira a ojo: hay dos conjuntos de preguntas que corren en cada `pnpm test`.
+
+| Conjunto                                | Dónde vive                                | Qué exige                                                                       |
+| --------------------------------------- | ----------------------------------------- | --------------------------------------------------------------------------------- |
+| **Las preguntas de prueba del documento** | en su propia cabecera (`preguntas_de_prueba`) | Que cada pregunta traiga **su** documento. La prueba viaja con el contenido |
+| **El banco de preguntas**               | `tests/fixtures/banco-de-preguntas.es.yaml` | Que 131 preguntas **de afuera** traigan la fuente que debería contestarlas   |
+
+**Por qué hacen falta los dos.** Las preguntas de prueba de un documento se escriben con el
+documento delante, así que usan sus palabras. Quien recluta usa las suyas: «MLOps», «lakehouse»,
+«posgrado», «pipelines». Y la búsqueda de este chat es **léxica** — si el corpus no dice esa
+palabra, no hay nada que traer, por más que el trabajo esté hecho. El banco es, además de una
+prueba, una **auditoría de vocabulario**.
+
+**Cuando una pregunta del banco se pone roja hay dos salidas honestas y ninguna es aflojarla:**
+
+1. el contenido no lo dice con las palabras de quien pregunta → **se corrige el documento**;
+2. la contesta mejor otra fuente → **se corrige `espera:` en el banco**.
+
+Inventar contenido para que pase es la tercera, y está prohibida.
+
+**Para agregar una pregunta** basta con escribirla en el banco con la fuente que esperas:
+
+```yaml
+- pregunta: "¿Tiene experiencia con Docker y Kubernetes?"
+  espera: [plataforma-y-despliegue] # el slug del documento que debería contestarla
+  familia: plataforma-y-datos
+```
+
+**Para leer cómo va todo junto:** `pnpm corpus:informe` regenera
+`sprints/SPRINT_008-banco-de-preguntas.md`, que trae pregunta por pregunta qué fragmentos trae el
+chat hoy y cuáles traería con la base aprobada. Ese informe **se genera, no se escribe a mano**.
 
 ### Animaciones y accesibilidad · desde Sprint 001
 
@@ -472,6 +511,6 @@ nombre del archivo) y escribe. No hay lista que actualizar en ninguna parte.
 | 004    | Roadmap con votación anónima (contador real o "no disponible", dedup por navegador, cero PII), página brochure animada por app real, y menú en móvil. Cierre del ciclo H1: el MVP funcional queda completo.                                                                                                              |
 | 005    | La vitrina: escaparate de las seis apps hermanas y **una página propia por app**, alimentadas por los `brochure-export.json` que cada app genera; tarjetas que se abren al llegar leyendo; capturas de las apps reales repintadas con la paleta de esta página; cero enlaces y CTA de lista de espera. Abre el ciclo H2. |
 | 007    | Las estanterías: los cuatro frentes de la vitrina abiertos con piezas reales (6 apps · 13 agentes · 7 investigaciones · 6 tableros). Un escaparate por frente y una ficha por pieza, con el mismo renderizador de las apps; las fichas las produce quien construye cada pieza y llegan por PR de contenido. Contrato v1.3.0: los tableros añaden «Lo que dicen los datos» y «Cómo se ve» (galería de capturas), opcionales y con renumeración automática. |
-| 008    | El «a fondo»: un documento por tema en `data/a-fondo/` como corpus profundo del chat, con aduana que rompe el build nombrando archivo y campo (cabecera, ids duplicados, paridad ES/EN de los aprobados, privacidad mecánica) y un `estado` que separa el borrador de lo citable. **El destino de toda cita se verifica contra el sitio real** — así murió el `#apps` que llevaba una revisión entera apuntando a una sección retirada. `data/historia/` retirada, sus 12 secciones migradas. |
+| 008    | El «a fondo»: un documento por tema en `data/a-fondo/` como corpus profundo del chat, con aduana que rompe el build nombrando archivo y campo (cabecera, ids duplicados, paridad ES/EN de los aprobados, privacidad mecánica, **y ningún `[CONFIRMAR]` en un aprobado**) y un `estado` que separa el borrador de lo citable. **Banco de 131 preguntas de afuera** como prueba del contenido, con su informe generado. **El destino de toda cita se verifica contra el sitio real** — así murió el `#apps` que llevaba una revisión entera apuntando a una sección retirada. `data/historia/` retirada, sus 12 secciones migradas. |
 | post-S7 | Revisión del dueño sobre la HOME: la trayectoria como índice que baja contigo (línea continua, círculo fijo a media pantalla, año grande); la vitrina en el sitio de Proyectos y los case studies desde su hito; Estudios como sección y como dato (`cv.estudios`); Skills en tarjetas con icono y trazo; el roadmap se muda a `/vitrina/apps` y sale del menú. |
 | post-S7 (2.ª) | «Lo que construyo» entra al desplegable Hoja de vida; Estudios con los años del PDF del dueño (tres entradas); AI-102 retirada de todo el contenido (Microsoft la descontinuó) y gate nuevo: una credencial nombrada tiene que estar en `certificaciones:`. |

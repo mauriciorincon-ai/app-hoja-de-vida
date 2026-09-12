@@ -669,3 +669,163 @@ prosa en primera persona y se leen como respuesta, no como un volcado de campos 
 | Golden set tras las reescrituras | 48/48 — ninguna reescritura lo movió |
 | Privacidad sobre los 24 | limpio                                      |
 
+
+---
+
+## Fase 4b — el banco de preguntas: el contenido probado desde afuera
+
+> **Pedido del dueño, 2026-09-12:** «necesito que lo pruebes sobre al menos 100 preguntas posibles,
+> necesito que ese contenido esté excelentemente testeado». La simulación M2 medía veinte preguntas
+> y era un informe de una corrida; esto es un **gate del repositorio** con 131.
+
+### 4b.1 · Por qué las preguntas de prueba de los documentos no bastaban
+
+El golden set exige que cada documento conteste **sus propias** `preguntas_de_prueba`. Las escribí
+yo con el documento delante, así que usan **sus palabras**. Quien recluta usa las suyas.
+
+Y la recuperación de este chat es **léxica** (ADR-010, decisión declarada y no un descuido): si el
+corpus no dice «MLOps», no hay fragmento que traer por bien hecho que esté el trabajo. Así que el
+banco no es solo una prueba de contenido, es una **auditoría de vocabulario**: cada pregunta roja
+nombra o un hueco real, o un término que el dueño escribe distinto a como lo pregunta el mundo.
+
+**Lo nuevo, en cuatro archivos:**
+
+| Archivo                                     | Qué es                                                                        |
+| ------------------------------------------- | ------------------------------------------------------------------------------- |
+| `tests/fixtures/banco-de-preguntas.es.yaml` | 131 preguntas en 10 familias + 15 ajenas + 5 huecos declarados                 |
+| `scripts/evaluar-corpus.mjs`                | el motor: lee y valida el banco, arma los dos índices, evalúa y arma el informe |
+| `tests/unit/banco-de-preguntas.test.ts`     | el gate: cablea el retriever real (TS) con el motor (`.mjs`)                   |
+| `sprints/SPRINT_008-banco-de-preguntas.md`  | el informe, **generado** con `pnpm corpus:informe`                             |
+
+El informe lo escribe el test, no la mano — el mismo patrón con el que `docs/contrato-ficha-tecnica/`
+se genera desde el Zod. **A propósito no hay gate de «informe desactualizado»:** el dueño va a estar
+corrigiendo durante semanas y un rojo que solo dice «regenera el informe» le taparía los que
+importan. Queda declarado como gate que se decidió NO poner, y por qué.
+
+### 4b.2 · El primer hallazgo: las preguntas abiertas estaban dentro del índice
+
+Los 30 bloques `[CONFIRMAR: …]` son **1 282 palabras, el 9 % del corpus**, y entraban al índice
+simulado como si fueran prosa. Dos consecuencias, las dos malas: la normalización por longitud de
+BM25 castigaba justo a los fragmentos que más falta hace arreglar, y —lo grave— **un documento
+aprobado con una pregunta abierta se la habría citado tal cual a un visitante**: la pregunta del
+autor a sí mismo, publicada como evidencia.
+
+Dos mecanismos, no uno, porque son dos problemas distintos:
+
+1. **La aduana prohíbe `[CONFIRMAR` en un `aprobado`** y rompe el build nombrando archivo y
+   subsección. Aprobar es exactamente haber resuelto esas preguntas.
+2. **La simulación las quita antes de medir** (`simularAprobacion`), porque mide el índice que
+   existirá *después* de aprobar. El golden set usa la misma función: los dos miden el mismo futuro.
+
+### 4b.3 · Las 17 preguntas rojas, y las 16 correcciones de contenido
+
+Primera corrida: **114 de 131**. Las 17 rojas, sin excepción, eran del contenido:
+
+| Lo que preguntaba el mundo             | Lo que decía el corpus                            | Corrección                                    |
+| -------------------------------------- | ------------------------------------------------- | ---------------------------------------------- |
+| «ETL»                                  | «extracción, transformación y carga»              | el acrónimo, en Pichincha y en TransMilenio   |
+| «lakehouse»                            | «el lago y el almacén»                            | la palabra, en `fabric-en-la-practica`        |
+| «pipelines de datos»                   | «pipeline» solo existía para el de aplicaciones   | «tuberías de datos —los *pipelines*—» en Vesting |
+| «MLOps»                                | nada                                              | párrafo honesto de mitades en `plataforma-y-despliegue` |
+| «¿dónde trabaja **actualmente**?»      | «Desde febrero de 2025 soy…»                      | «**Actualmente trabajo en**…»                 |
+| «sector financiero»                    | «en un banco»                                     | «Es mi paso por el **sector financiero**»     |
+| «¿cuántos **años** de experiencia?»    | nadie los sumaba                                  | diez/ocho, con su `[CONFIRMAR]` para elegir   |
+| «personas que no le reportan»          | «sitios donde nadie me reportaba»                 | las dos formas                                |
+| «certificado en IA de Azure»           | «Azure AI Engineer Associate»                     | «certificación de ingeniero de IA de Azure, y **no la tengo**» |
+| «IA generativa» como experiencia       | solo como postura                                 | abre `agentes-en-produccion`                  |
+| «modelos de lenguaje grandes»          | «el proveedor de modelo»                          | «el **modelo de lenguaje**», dos sitios       |
+| «¿qué lo **motiva**?»                  | nada — respondía «eso se me escapa»               | «**Lo que me motiva** es…»                    |
+| «¿por qué **contratarlo**?»            | «Qué ofrezco que no es frecuente»                 | «**Por qué contratarme**: lo que ofrezco…»    |
+| «proceso de **selección**»             | «prefiero una conversación…»                      | la frase nombra el proceso de selección       |
+| «¿en qué ciudad **vive**?»             | «Estoy en Bogotá»                                 | «**Vivo en Bogotá**»                          |
+| «el puesto pide algo que nunca ha usado» | «un rol exige… que no está en mi lista»         | «el **puesto**… que **nunca he usado**»       |
+
+Y una armonización de paso: `lo-que-busco` decía «diez años de ingeniería de datos» cuando el arco
+empieza en procesos. Ahora dice «de procesos y de datos», que es lo que el resto del corpus sostiene.
+
+**Dos expectativas del banco también estaban mal, y se corrigieron ahí y no en el contenido:** para
+«¿cuánto tiempo estuvo en Vesting?» y «¿por qué salió?», el hito de la trayectoria es tan buena
+fuente como el documento a fondo —es el que trae el periodo y el cargo—.
+
+**Lo que NO se hizo:** inventar contenido para que pasara un gate. Está escrito como regla en la
+cabecera del banco, con las dos únicas salidas honestas.
+
+### 4b.4 · Una letra suelta es invisible, y se midió
+
+«¿Programa en R?» no funciona y no es un hueco de contenido: `processTerm` descarta los términos de
+menos de tres letras para que una consulta no traiga medio índice. **Se probó a indexar la «R»**
+(sumarla a `SIGLAS`) y el resultado fue peor: la expansión por prefijo trae «reglas», «resultado»,
+«recuperación»… y el fragmento que sí habla de R pierde igual. Revertido. Queda declarado como
+límite conocido de ADR-010, con la pregunta reformulada a como la escribiría una persona
+(«¿Tiene experiencia con R además de Python?») y la medición en la nota del banco.
+
+### 4b.5 · Lo que el banco dice del retrieval, con 131 preguntas en vez de 9
+
+**`TOP_K_CONTEXTO = 4` queda confirmado por dos conjuntos independientes que caen en el mismo número:**
+
+| k   | Golden set (48, palabras del documento) | Banco (131, palabras de afuera) |
+| --- | --------------------------------------- | -------------------------------- |
+| 1   | 63 %                                    | 65 %                            |
+| 2   | 88 %                                    | 85 %                            |
+| 3   | 94 %                                    | 95 %                            |
+| **4** | **100 %**                             | **100 %**                       |
+| 5   | 100 %                                   | 100 %                           |
+
+**Y lo que el umbral de off-topic no puede hacer, ahora con evidencia gruesa.** Con 131 legítimas y
+15 ajenas contra el corpus completo: on-topic **mínimo 5,92** («¿Sabe DAX?») contra off-topic
+**máximo 16,90** («escríbeme una función en rust que ordene una lista»). Entre esos dos números
+viven **30 preguntas legítimas**.
+
+**El guardrail se debilita a medida que el corpus crece, y quedó medido:** de las 15 ajenas, el
+índice de 28 fragmentos bloquea 13 y el de 159 bloquea 9. Más texto es más vocabulario compartido
+con cualquier pregunta. Por eso cada ajena del banco **declara de qué lado de la frontera está**
+(`bloquea` / `pasa`): mover el umbral rompe un test que dice hacia dónde se movió.
+
+### 4b.6 · Los tres rojos, en este mismo commit (regla 14)
+
+| Gate                                        | Mutación                                          | Qué salió rojo                                                                 |
+| ------------------------------------------- | ------------------------------------------------- | -------------------------------------------------------------------------------- |
+| Aduana: ningún `[CONFIRMAR]` en un aprobado | `estado: aprobado` en `origenes.es.md`            | el build se detiene nombrando las dos subsecciones: `por-que-industrial` y `de-la-plataforma-a-la-ia` |
+| El banco (contenido)                        | el corpus deja de decir «MLOps»                   | `¿Sabe de MLOps?` — «esperaba: plataforma-y-despliegue · analitica-predictiva / trajo: como-aprendo-por-que-existe…» |
+| La frontera de off-topic                    | `UMBRAL_ON_TOPIC = 7`                             | **diez preguntas legítimas** reciben «eso se me escapa» —«¿Sabe DAX?», «¿Qué lo motiva?», «¿Por qué debería contratarlo?»— a cambio de bloquear tres ajenas |
+
+El tercero es el más útil de los tres: convierte una decisión que antes era prosa en un experimento
+que cualquiera puede repetir cambiando un número.
+
+**Un tropiezo propio, anotado porque enseña:** deshice la segunda mutación con
+`git checkout -- <archivo>` y me llevé por delante el párrafo de MLOps, que estaba en ese mismo
+archivo sin commitear. Lo mismo pasó con el comentario de `guardrails.ts`. Los dos repuestos y
+verificados. Para demostrar un rojo sobre trabajo sin commitear, la copia de seguridad va aparte;
+`git checkout` no distingue tu mutación de tu trabajo.
+
+### 4b.7 · Y una cuenta que estaba mal desde la fase 2
+
+La tabla de `data/a-fondo/README.md` declaraba **53 `[CONFIRMAR]`**. Son **30**: contaba la línea
+`[CONFIRMAR: qué falta]` de la plantilla que llevan los 24 archivos en su comentario de cabecera, y
+le ponía una a seis documentos que no tienen ninguna. Es justo la columna con la que el dueño decide
+por dónde empezar, así que **la tabla pasa a generarse** con el resto del informe, entre marcas
+(`<!-- tabla-de-documentos:inicio -->`), conservando el orden curado que ya tenía. Ahora también
+dice cuáles están **limpios de preguntas abiertas**: `apps-pipeline`, `bi-que-se-adopta`,
+`como-aprendo`, `como-trabajo`, `las-investigaciones` y `rag-y-el-chat`.
+
+### 4b.8 · Verificación de la fase 4b
+
+| Comprobación                  | Resultado                                                |
+| ----------------------------- | ---------------------------------------------------------- |
+| `pnpm test`                   | **758 pasan / 758** · 31 archivos (+143 del banco)        |
+| Banco de preguntas            | **131/131** con su fuente en el top-4 · 85 de primeras    |
+| Preguntas legítimas sin respuesta | **0** (hoy, con la base en borrador, son 18)          |
+| Golden set                    | 48/48 tras las 16 correcciones                            |
+| `pnpm typecheck` · `pnpm lint` | limpios                                                   |
+| `pnpm build`                  | OK — 28 chunks, 0 de 24 aprobados (el índice publicado no se movió) |
+| e2e                           | no se corre: el índice publicado es idéntico, byte a byte, porque los 24 siguen en borrador |
+
+## Desviación del plan (7)
+
+**El plan no contemplaba un banco de preguntas.** La fase 4 entregaba una simulación de 20
+preguntas como informe. El dueño pidió 100 o más y que el contenido quedara «excelentemente
+testeado», así que la simulación de una corrida se convirtió en un **gate permanente de 131
+preguntas** con su informe generado, y trajo con él dos reglas nuevas del canal (ninguna pregunta
+abierta en un aprobado; la simulación las quita antes de medir) y 16 correcciones de contenido.
+Para la planeadora: es trabajo que el plan no pedía y que el método debería pedir — **un corpus que
+alimenta un buscador léxico necesita una prueba de vocabulario, no solo una de formato.**

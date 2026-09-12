@@ -112,8 +112,9 @@ Son reglas de gobierno, aplicadas a construir con IA, escritas antes de necesita
 
 <!-- seccion: lo-transversal -->
 
-Gobernar sirve de poco si no se puede atravesar la organización, y eso lo he hecho tres veces en
-sitios donde nadie me reportaba: las mesas con la dirección de concesionarios del sistema de
+Gobernar sirve de poco si no se puede atravesar la organización, y atravesarla casi siempre
+significa trabajar con **personas que no me reportan**, cuya colaboración no se puede ordenar. Lo
+he hecho tres veces en sitios donde nadie me reportaba: las mesas con la dirección de concesionarios del sistema de
 transporte de Bogotá, la implementación del sistema de bodega de Cafam con veinte personas de
 varias áreas, y la gobernanza co-liderada en Banco Pichincha.
 

@@ -35,7 +35,8 @@ CÓMO SE ESCRIBE ESTE ARCHIVO
 
 <!-- seccion: dos-experiencias -->
 
-Cuando digo que trabajo con agentes de IA me refiero a dos cosas que conviene separar.
+Cuando digo que tengo experiencia con **inteligencia artificial generativa** y con agentes de IA,
+me refiero a dos cosas que conviene separar.
 
 La primera es **profesional**: en Vesting, una startup de agentes de automatización, fui Líder de
 Estrategia de Datos entre agosto de 2023 y enero de 2025. Ahí construí la plataforma que sostenía la

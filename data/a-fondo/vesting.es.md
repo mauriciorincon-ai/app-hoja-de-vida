@@ -55,7 +55,9 @@ gobernanza se paga después, y con demasiado proceso la startup se detiene.
 <!-- seccion: la-arquitectura -->
 
 Diseñé e implementé desde cero el ecosistema de datos en Microsoft Fabric, integrando Big Data,
-Data Warehouse y procesamiento distribuido.
+Data Warehouse y procesamiento distribuido, con las **tuberías de datos** —los *pipelines* de
+ingesta y transformación que llevan la información de cada cliente al lago— corriendo solas en
+lugar de una integración artesanal por cliente.
 
 Elegir Fabric fue una decisión de plataforma, no de moda: reúne el lago, el almacén, el modelado
 semántico y la capa de visualización bajo un mismo gobierno y una misma identidad. Para un equipo
