@@ -99,28 +99,28 @@ jobs:
         with: { node-version: 22, cache: pnpm }
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
-      - name: Lighthouse CI contra perf-budget.json
-        # Solo páginas PÚBLICAS (wiki: lighthouse-solo-paginas-publicas). El budget
-        # (ADR-006) cubre las rutas nuevas del S4: el roadmap vive en /es/vitrina/apps,
-        # las brochures son rutas públicas propias y se auditan aquí.
-        # S7: se añaden el escaparate de un frente no-app y una de sus fichas —
-        # son plantillas, así que basta una de cada para vigilar el presupuesto.
+      - name: Lighthouse CI — recolección (3 corridas por URL)
+        # Solo páginas PÚBLICAS (wiki: lighthouse-solo-paginas-publicas). La lista
+        # vive en lighthouse-urls.json y NO en este YAML: las dos aserciones de abajo
+        # juzgan lo recolectado, así que una sola lista evita que se desincronicen.
+        # El budget (ADR-006) cubre las rutas del S4 (roadmap en /es/vitrina/apps,
+        # brochures) y del S7 (un escaparate no-app y una de sus fichas — son
+        # plantillas, basta una de cada).
+        # S8: la raíz «/» salió de la lista y entró «/es». La raíz es un 307 que
+        # resuelve el Accept-Language del runner, así que medía /en unas veces y el
+        # salto otras — la única fila que variaba de la tabla (89 en una corrida suelta,
+        # 90/91/91 en tres). Un presupuesto de performance no es el sitio para vigilar
+        # un redirect; que HOY no lo vigile nadie más queda inventariado en la bitácora
+        # del S8 (fase 0) como superficie sin prueba, no disimulado aquí.
+        # TRES corridas y aserción sobre la MEDIANA (kit v1.26.0): una corrida no mide.
         run: |
           npm i -g @lhci/cli
-          lhci autorun --collect.startServerCommand="pnpm start" \
-            --collect.url=http://localhost:3000 \
-            --collect.url=http://localhost:3000/es/proyectos/vesting \
-            --collect.url=http://localhost:3000/es/cv \
-            --collect.url=http://localhost:3000/es/apps/hoja-de-vida \
-            --collect.url=http://localhost:3000/es/apps/chat-hoja-de-vida \
-            --collect.url=http://localhost:3000/es/vitrina \
-            --collect.url=http://localhost:3000/es/vitrina/apps \
-            --collect.url=http://localhost:3000/es/vitrina/apps/habla \
-            --collect.url=http://localhost:3000/es/vitrina/apps/habla/detalle \
-            --collect.url=http://localhost:3000/es/vitrina/investigaciones \
-            --collect.url=http://localhost:3000/es/vitrina/investigaciones/forja \
-            --collect.url=http://localhost:3000/es/vitrina/agentes \
-            --collect.url=http://localhost:3000/es/vitrina/agentes/hr-develop-ai-apps \
-            --collect.url=http://localhost:3000/es/vitrina/tableros \
-            --collect.url=http://localhost:3000/es/vitrina/tableros/banca-colombiana \
-            --assert.budgetsFile=./perf-budget.json
+          URLS=$(jq -r '.[] | "--url=http://localhost:3000" + .' lighthouse-urls.json)
+          lhci collect --startServerCommand="pnpm start" --numberOfRuns=3 $URLS
+      - name: Aserción contra perf-budget.json (mediana de 3)
+        run: lhci assert --config=./lighthouse-budget.json
+      - name: Aserción de categorías >=90 (mediana de 3)
+        # La casilla «>=90 en las cuatro categorías» de /deploy-check §8 se afirmaba
+        # desde el S1 sin que NADIE la midiera: el budget mide tiempos y pesos, que es
+        # otra cosa. Este paso es el que la paga.
+        run: lhci assert --config=./lighthouse-categorias.json

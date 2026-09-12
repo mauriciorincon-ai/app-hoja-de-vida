@@ -1,0 +1,15 @@
+{
+  "_comentario": [
+    "Envoltorio del budget para poder declarar `aggregationMethod` junto a `budgetsFile`:",
+    "`lhci assert` NO acepta --aggregationMethod como bandera suelta (solo --config,",
+    "--preset, --assertions, --budgetsFile), así que la mediana viaja por config.",
+    "budgetsFile + aggregationMethod SÍ conviven: la exclusividad mutua es con `assertions`.",
+    "Nombre no auto-descubrible, por la misma razón que lighthouse-categorias.json."
+  ],
+  "ci": {
+    "assert": {
+      "aggregationMethod": "median-run",
+      "budgetsFile": "./perf-budget.json"
+    }
+  }
+}
