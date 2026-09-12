@@ -199,3 +199,23 @@ quinto frente y todo revive · se sustituyen por pruebas de ruta con un frente d
 fixture · se retiran declarándolo. La tercera es legítima; lo que no lo es, es dejarlas saltadas en
 silencio otro sprint más.
 
+---
+
+### 0.6 · Verificación de la fase 0
+
+| Comprobación                                                         | Resultado                                   |
+| -------------------------------------------------------------------- | ------------------------------------------- |
+| `pnpm test`                                                          | **390 pasan / 390** · 26 archivos           |
+| Cobertura global                                                     | 92,8 % stmts · 82,7 % branches · 93,8 % func |
+| `pnpm typecheck`                                                     | limpio                                      |
+| `pnpm lint`                                                          | limpio                                      |
+| `pnpm build`                                                         | OK                                          |
+| `git grep -nE "vercel[.]app\|workers[.]dev\|pages[.]dev" -- ':!pnpm-lock.yaml'` | vacío                             |
+| `ci.yml` parsea y el job `lighthouse` tiene sus 3 pasos              | verificado con el parser de `yaml`          |
+
+Los dos gates nuevos **no se han visto correr en CI todavía**: el workflow dispara en
+`pull_request` y en push a `main`, y el PR del sprint se abre al cierre. Hasta entonces, de la
+regla 14 están pagadas las preguntas «¿lo viste fallar?» y «¿puede fallar?»; **«¿lo viste
+correr?» queda pendiente y se declara** — es exactamente la mitad de la regla que no se puede dar
+por buena con corridas locales.
+
