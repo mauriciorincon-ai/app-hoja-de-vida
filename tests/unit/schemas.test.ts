@@ -275,7 +275,6 @@ const appsValidas = {
       estado: "en-construccion",
       nombre: { es: "CV Viva", en: "Living CV" },
       descripcion: { es: "Desc", en: "Desc" },
-      solicitable: false,
     },
   ],
 };

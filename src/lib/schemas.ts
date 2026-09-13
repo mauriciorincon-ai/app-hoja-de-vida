@@ -292,7 +292,6 @@ export const appsSchema = z
                   .strict(),
               )
               .default([]),
-            solicitable: z.boolean().default(true),
             // Roadmap votable de la app (S4). Vacío = la app no aparece en la
             // sección de votación. Editar aquí + push = roadmap actualizado.
             roadmap: z.array(roadmapFeature).default([]),

@@ -204,7 +204,9 @@ el mensaje te llega al correo.
     desde el bloque **«De esta casa»**, al cierre de `/es/vitrina`.
   - **El roadmap votable** de la portada (bloque `roadmap:` de cada app).
   - **El formulario de contacto** ya no lista apps (desde la tercera revisión post-S8 pide un
-    «Motivo»); `solicitable:` sigue en el YAML pero hoy no cambia nada visible.
+    «Motivo»). El campo `solicitable:` **se retiró** de `apps.yaml` (2026-09-13): la lista de
+    espera lista las apps de `content/vitrina/`. Si un YAML viejo lo trae, la publicación falla
+    nombrándolo.
 - **Cómo dar de alta una app:** editar `data/apps.yaml` + push, igual que siempre. Si le pones
   bloque `brochure:`, aparece su página y su enlace en «De esta casa»; si le pones `roadmap:`,
   entra a la votación.

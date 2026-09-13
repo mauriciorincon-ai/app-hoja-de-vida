@@ -22,7 +22,6 @@ apps:
     enlaces:
       - etiqueta: "GitHub"
         url: "https://github.com/mauriciorincon-ai/app-hoja-de-vida"
-    solicitable: false
     brochure:
       tagline:
         es: "Una hoja de vida que se construye a sí misma, en público."
@@ -125,7 +124,6 @@ apps:
     enlaces:
       - etiqueta: "GitHub"
         url: "https://github.com/mauriciorincon-ai/app-hoja-de-vida"
-    solicitable: false
     brochure:
       tagline:
         es: "Un chat que responde por mi hoja de vida — y nunca se cae."
@@ -197,7 +195,6 @@ apps:
     descripcion:
       es: "Pipeline público con datos abiertos de Colombia: ingesta → Lakehouse → modelo semántico → Power BI embebido. Ingeniería de analítica verificable (DP-600)."
       en: "A public pipeline on Colombian open data: ingestion → Lakehouse → semantic model → embedded Power BI. Verifiable analytics engineering (DP-600)."
-    solicitable: true
 
   - id: agente-gemini-vertex
     estado: en-exploracion
@@ -207,4 +204,3 @@ apps:
     descripcion:
       es: "Agente con herramientas (LangChain) sobre el stack de GCP: el complemento multi-cloud de mi certificación Azure."
       en: "A tool-using agent (LangChain) on the GCP stack: the multi-cloud complement to my Azure certification."
-    solicitable: true

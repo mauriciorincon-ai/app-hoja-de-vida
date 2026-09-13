@@ -300,6 +300,17 @@ describe("showcase data-driven (criterio de aceptación)", () => {
     const parseada = parseApps(conDummy, "apps.yaml");
     expect(parseada.apps.map((a) => a.id)).toContain("app-dummy");
     // El default se aplica sin tocar componentes ni schema
-    expect(parseada.apps.at(-1)?.solicitable).toBe(true);
+    expect(parseada.apps.at(-1)?.roadmap).toEqual([]);
+  });
+
+  it("`solicitable` se retiró (dueño, 2026-09-13): un YAML que aún lo traiga rompe el build nombrándolo", () => {
+    // La lista de espera lista los exports de content/vitrina/, no apps.yaml;
+    // el campo quedó sin consumidor y un campo muerto en la fuente es una
+    // promesa que nadie cumple. El schema es strict: lo rechaza por nombre.
+    const conCampoViejo = structuredClone(getApps()) as {
+      apps: Record<string, unknown>[];
+    };
+    conCampoViejo.apps[0].solicitable = true;
+    expect(() => parseApps(conCampoViejo, "apps.yaml")).toThrow(/solicitable/);
   });
 });
