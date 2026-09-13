@@ -109,3 +109,7 @@ miraba `data/` y no `messages/`. Corregida la descripción y ampliado el barrido
   `RESEND_API_KEY` (+ `SOLICITUDES_TO_EMAIL`, y `SOLICITUDES_FROM_EMAIL` con dominio verificado
   en Resend, porque el remitente de prueba solo entrega al correo dueño de la cuenta) en Vercel →
   deploy → enviar desde los DOS formularios → confirmar bandeja y reply-to → recién ahí, e3 ⭐.
+- **Bloque F (el chat) aplazado por el dueño (2026-09-13):** «lo voy a probar cuando termine
+  `data/a-fondo/`». Tiene sentido: el chat responde con el corpus, y el corpus sigue en borrador.
+  F y O (el «a fondo», con sus seis ⭐) se corren juntos cuando apruebe los documentos. No se
+  difiere el gate del cierre: se difiere el momento de ejecutar esos dos bloques.
