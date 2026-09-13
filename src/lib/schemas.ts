@@ -232,7 +232,7 @@ const slug = z
 
 // Feature del roadmap votable (S4). El par (app.id, feature.id) es la clave del
 // voto; por eso `id` es un slug estable — cambiarlo reinicia su conteo.
-const roadmapFeature = z
+export const roadmapFeatureSchema = z
   .object({
     id: slug,
     titulo: localizedText,
@@ -294,7 +294,6 @@ export const appsSchema = z
               .default([]),
             // Roadmap votable de la app (S4). Vacío = la app no aparece en la
             // sección de votación. Editar aquí + push = roadmap actualizado.
-            roadmap: z.array(roadmapFeature).default([]),
             // Brochure animada (S4). Presente = la app gana su página
             // /[locale]/apps/<id>. Solo apps con funcionalidad real.
             brochure: brochure.optional(),
@@ -307,7 +306,7 @@ export const appsSchema = z
 
 export type Apps = z.infer<typeof appsSchema>;
 export type AppCard = Apps["apps"][number];
-export type RoadmapFeature = z.infer<typeof roadmapFeature>;
+export type RoadmapFeature = z.infer<typeof roadmapFeatureSchema>;
 export type Brochure = z.infer<typeof brochure>;
 
 // Los frentes de la vitrina (post-S5, ADR-015): apps · agentes · investigaciones

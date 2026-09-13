@@ -202,8 +202,8 @@ el mensaje te llega al correo.
 - **Nada del contenido se perdió.** `data/apps.yaml` sigue siendo la fuente y alimenta tres cosas:
   - **Las brochures** `/es/apps/hoja-de-vida` y `/es/apps/chat-hoja-de-vida` — se llega a ellas
     desde el bloque **«De esta casa»**, al cierre de `/es/vitrina`.
-  - **El roadmap votable** (bloque `roadmap:` de cada app) — **vacío desde 2026-09-13**: las
-    features de CV Viva se retiraron por decisión tuya; vuelve por app hermana (ver abajo).
+  - **El roadmap votable** ya no sale de `apps.yaml`: vive en `data/fichas/<slug>.yaml` y se
+    vota en la página de cada app hermana (ver «Roadmap con votación anónima»).
   - **El formulario de contacto** ya no lista apps (desde la tercera revisión post-S8 pide un
     «Motivo»). El campo `solicitable:` **se retiró** de `apps.yaml` (2026-09-13): la lista de
     espera lista las apps de `content/vitrina/`. Si un YAML viejo lo trae, la publicación falla
@@ -212,33 +212,29 @@ el mensaje te llega al correo.
   bloque `brochure:`, aparece su página y su enlace en «De esta casa»; si le pones `roadmap:`,
   entra a la votación.
 
-### Roadmap con votación anónima · desde Sprint 004 · vive en la vitrina desde la revisión post-S7
+### Roadmap con votación anónima · desde Sprint 004 · por app hermana desde el 2026-09-13
 
-> **Estado 2026-09-13 (tu decisión, bloque G del gate):** las siete features que había eran de
-> CV Viva y del chat, escritas en el S4, y **ninguna feature de CV Viva se muestra en ningún
-> lado**. Se retiraron del YAML: la sección Roadmap **no se monta** hasta que existan features
-> reales. El roadmap vuelve **por app hermana, en la página de cada app**, con las features más
-> disruptivas y de cierre de plan que entregue la planeadora (ya pedidas el 2026-09-13; llegan por
-> copia a `data/fichas/<slug>.yaml`). La votación y su base de datos siguen
-> intactas; los votos viejos quedan huérfanos en Supabase (cero PII) y no se muestran.
-
-- **Qué hace:** la sección "Roadmap" muestra las próximas features de cada app y deja que quien
-  visita **vote con un clic, sin registrarse**, las que más quiere ver. El número que aparece
+- **Qué hace:** en la página de cada app hermana (`/es/vitrina/apps/<slug>`, entre la ficha
+  técnica y la lista de espera) la sección "Roadmap" muestra lo que esa app tiene planeado para el
+  final de su camino y deja que quien visita **vote con un clic, sin registrarse**. El número
   junto a cada feature es el **conteo real** de votos en la base de datos.
-- **Dónde está:** al pie de `/es/vitrina/apps`, debajo de las seis apps y antes de «De esta
-  casa». **Ya no está en la HOME ni en el menú**: es una pregunta sobre las apps y se contesta
-  con ellas.
-- **Cómo se edita el roadmap (cero código):** en `data/apps.yaml`, dentro de una app, agrega o
-  edita la lista `roadmap:`. Cada feature lleva un `id` (minúsculas-con-guiones), y `titulo` y
-  `descripcion` en `es` y `en`. Push y el roadmap se actualiza. Una app sin `roadmap:` no aparece
-  en la votación.
+- **Qué NO se muestra (tu decisión, 2026-09-13):** ninguna feature de CV Viva ni del chat. Las
+  siete del S4 se retiraron y `apps.yaml` ya no admite `roadmap:` (si lo trae, la publicación
+  falla nombrándolo). El escaparate `/vitrina/apps` tampoco monta roadmap: solo asoma las apps.
+- **De dónde salen las features:** del complemento curado de cada app, `data/fichas/<slug>.yaml`,
+  campo `roadmap:`. Lo administra la **planeadora** (procedencia `cv-viva`) con el criterio que le
+  pediste —las más disruptivas e innovadoras y las de cierre de plan, nunca las que ya se están
+  construyendo— y **llega por copia: no se edita aquí**. Hoy: 5 features por app y 3 en
+  `dash-agent-ai` (su plan es cerrado; la tercera es la más condicionada, se puede quitar si
+  prefieres dos). Una app sin `roadmap:` simplemente no muestra la sección.
 - **⚠ Ojo con el `id` de una feature:** el voto se cuenta por el par (app, id de la feature). Si
-  **cambias el `id`** de una feature ya publicada, sus votos anteriores quedan bajo el id viejo y
-  la feature "reinicia" su conteo. Cambia el `titulo`/`descripcion` cuando quieras, pero deja el
-  `id` quieto si no quieres reiniciar.
+  **cambia el `id`** de una feature ya publicada, sus votos anteriores quedan bajo el id viejo y
+  la feature "reinicia" su conteo. La planeadora lo sabe (ids estables); si una feature se
+  construye, sale del roadmap y sus votos quedan archivados en la base.
 - **La regla del contador honesto:** el número mostrado siempre sale de la base de datos en el
   momento. Si la base de datos no responde, la sección lo dice ("La votación no está disponible…")
-  y **deshabilita los botones** — nunca verás un número inventado ni congelado.
+  y **deshabilita los botones** — nunca verás un número inventado ni congelado. **En tu computador
+  pasa siempre** (no hay credenciales de Supabase en local): votar de verdad se prueba en producción.
 - **Dedup de votos (y su límite honesto):** cada navegador puede votar una vez por feature; tras
   votar, el botón queda en "Ya votaste". Esto se guarda en el navegador del visitante
   (localStorage), así que es un dedup **de mejor esfuerzo**: si alguien borra los datos del
@@ -246,8 +242,9 @@ el mensaje te llega al correo.
   veces sin pedir registro ni guardar datos personales. **Cero PII:** la base solo guarda
   (app, feature, fecha), nunca IP ni identidad (Ley 1581).
 - **Dónde veo los votos:** en el panel de Supabase (tabla `votes`) o en los logs de Vercel (cada
-  voto queda registrado con app, feature y el total resultante). Analítica: eventos
-  `roadmap_visto`, `voto_emitido`, `voto_rechazado`.
+  voto queda registrado con app, feature y el total resultante). Los votos de las siete features
+  viejas de CV Viva siguen en la tabla, sin mostrarse; borrarlos es decisión tuya. Analítica:
+  eventos `roadmap_visto`, `voto_emitido`, `voto_rechazado`.
 - **Apagar la votación:** en Vercel pon `VOTACION_ENABLED=false` (o quita `SUPABASE_URL`/
   `SUPABASE_ANON_KEY`) y redeploy — la sección se muestra en modo "no disponible", honesta y sin
   botones activos.

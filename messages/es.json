@@ -74,7 +74,7 @@
   "roadmap": {
     "eyebrow": "Roadmap",
     "titulo": "Qué viene — y tú decides el orden",
-    "subtitulo": "Estas son las próximas features de cada app. Vota las que más quieres ver: un clic, sin registro. Los contadores son reales.",
+    "subtitulo": "Lo que esta app tiene planeado para el final de su camino. Vota lo que más quieres ver: un clic, sin registro. Los contadores son reales.",
     "votar": "Votar",
     "votos": "{count, plural, =0 {sin votos aún} one {# voto} other {# votos}}",
     "yaVotaste": "Ya votaste",

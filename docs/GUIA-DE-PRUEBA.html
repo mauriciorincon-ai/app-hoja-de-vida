@@ -771,34 +771,40 @@
           <h2>Roadmap con votación anónima</h2>
         </div>
         <p class="meta-bloque chica suave">
-          ~6 min · en <code>/es/vitrina/apps</code>, sección Roadmap · la
-          feature estrella del S4.
+          ~6 min · en <code>/es/vitrina/apps/&lt;slug&gt;</code>, sección
+          Roadmap de cada app · la feature estrella del S4.
         </p>
         <div class="reportame">
           <p>
-            <strong>Bloque APLAZADO por el dueño (2026-09-13).</strong> Las
-            features que se votaban eran de CV Viva y del chat, y «ninguna
-            feature de CV Viva debe mostrarse en ningún lado»: se retiraron del
-            YAML y la sección Roadmap <strong>no se monta</strong> hoy. El
-            roadmap vuelve
-            <strong>por app, en la página de cada app hermana</strong>, con las
-            features que entregue la planeadora (ya pedidas el 2026-09-13; la
-            respuesta está en camino). Además, en <code>localhost</code> no hay
-            credenciales de Supabase: la votación se declara «no disponible» por
-            diseño, así que g2–g4 solo se prueban en producción. Las cinco
-            pruebas se conservan tal cual y se corren cuando el roadmap por app
-            exista.
+            <strong>Dónde y cómo (2026-09-13):</strong> el roadmap vive ahora
+            <strong>en la página de cada app hermana</strong>
+            (<code>/es/vitrina/apps/habla</code>, entre la ficha técnica y la
+            lista de espera), con las features de cierre de plan que entregó la
+            planeadora. Ninguna feature de CV Viva se muestra en ningún lado. En
+            <code>localhost</code> no hay credenciales de Supabase: la votación
+            se declara «no disponible» por diseño, así que
+            <strong>g2–g4 solo se prueban en producción</strong>; g1 y g5 se
+            pueden juzgar aquí.
           </p>
         </div>
         <ul class="pasos">
-          <li data-origen="heredada">
+          <li data-origen="mejorado">
             <input type="checkbox" id="g1" /><label for="g1"
-              >La sección Roadmap vive ahora
-              <strong>al pie de <code>/es/vitrina/apps</code></strong
-              >, debajo de las seis apps: muestra las features de cada app con
-              su descripción y un número de votos junto a cada una.
-              <strong>No está en la HOME ni en el menú.</strong>
-              <span class="origen origen-heredada">post-S7</span></label
+              >Entra a la página de una app hermana
+              (<code>/es/vitrina/apps/habla</code>): debajo de la ficha técnica
+              está la sección <strong>Roadmap</strong> con las features de
+              <em>esa</em> app (cinco; tres en dash-agent-ai), cada una con su
+              descripción y un número de votos. Recorre las seis: cada una tiene
+              su propio grupo.
+              <strong
+                >Ni en <code>/es/vitrina/apps</code> ni en la HOME hay
+                roadmap</strong
+              >, y en ningún lado aparece una feature de CV Viva. Juzga el
+              contenido: ¿son disruptivas, de cierre de plan, y ninguna es lo
+              que ya se está construyendo?
+              <span class="origen origen-mejorado"
+                >Mejorado · post-S8 (bloque G)</span
+              ></label
             >
           </li>
           <li data-origen="heredada">

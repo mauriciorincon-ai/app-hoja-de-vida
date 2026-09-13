@@ -300,7 +300,7 @@ describe("showcase data-driven (criterio de aceptación)", () => {
     const parseada = parseApps(conDummy, "apps.yaml");
     expect(parseada.apps.map((a) => a.id)).toContain("app-dummy");
     // El default se aplica sin tocar componentes ni schema
-    expect(parseada.apps.at(-1)?.roadmap).toEqual([]);
+    expect(parseada.apps.at(-1)?.enlaces).toEqual([]);
   });
 
   it("`solicitable` se retiró (dueño, 2026-09-13): un YAML que aún lo traiga rompe el build nombrándolo", () => {

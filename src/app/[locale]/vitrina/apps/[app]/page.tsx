@@ -4,6 +4,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
+import { Roadmap } from "@/components/home/roadmap";
 import { Reveal } from "@/components/motion/reveal";
 import { FichaTecnica } from "@/components/vitrina/ficha-tecnica";
 import { ListaDeEspera } from "@/components/vitrina/lista-de-espera";
@@ -16,6 +17,7 @@ import {
   getFichasTecnicas,
 } from "@/lib/vitrina/ficha-tecnica/loader";
 import { getFichasVitrina } from "@/lib/vitrina/loader";
+import { roadmapDe } from "@/lib/votes/roadmap";
 
 /**
  * LA FICHA TÉCNICA DE UNA APP — la capa infografía (ADR-016).
@@ -73,6 +75,9 @@ export default async function FichaTecnicaAppPage({ params }: Params) {
   const l = locale as Locale;
   const cv = getCv(l);
   const t = await getTranslations("vitrina");
+  // El roadmap votable de ESTA app (2026-09-13): cierre de plan que entrega la
+  // planeadora en su complemento. Sin features, la sección no se monta.
+  const roadmap = roadmapDe(app);
 
   // Vecinas en el orden del escaparate.
   const todas = getFichasTecnicas();
@@ -102,6 +107,8 @@ export default async function FichaTecnicaAppPage({ params }: Params) {
             hrefDetalle={`/vitrina/apps/${app}/detalle`}
             listaDeEspera
           />
+
+          {roadmap && <Roadmap apps={[roadmap]} embebido />}
 
           {/* El anclaje del botón «Avísame cuando abra» de la ficha vive en
               ESTA página, con la app ya elegida en el formulario. */}

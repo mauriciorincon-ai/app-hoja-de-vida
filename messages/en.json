@@ -74,7 +74,7 @@
   "roadmap": {
     "eyebrow": "Roadmap",
     "titulo": "What's coming — and you set the order",
-    "subtitulo": "These are each app's next features. Vote for the ones you most want to see: one click, no sign-up. The counters are real.",
+    "subtitulo": "What this app has planned for the end of its road. Vote for what you most want to see: one click, no sign-up. The counters are real.",
     "votar": "Vote",
     "votos": "{count, plural, =0 {no votes yet} one {# vote} other {# votes}}",
     "yaVotaste": "You voted",

@@ -1,5 +1,7 @@
 // @vitest-environment node
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { readFileSync } from "node:fs";
+import { parse } from "yaml";
 import { resetRateLimit } from "@/lib/rate-limit";
 
 /**
@@ -32,36 +34,15 @@ vi.mock("@/lib/votes/client", () => {
   };
 });
 
-// El contenido va MOCKEADO con un roadmap de fixture: desde 2026-09-13 ninguna
-// app de esta casa declara `roadmap:` en data/apps.yaml (las features de CV
-// Viva no se muestran, decisión del dueño), y el motor de votos se prueba
-// igual — `esFeatureValida` sigue siendo real, solo cambia de dónde lee.
-// Así "hoja-de-vida"/"mapa-c4" es válido y "x"/"y" no.
-vi.mock("@/lib/content", async (importOriginal) => {
-  const real = await importOriginal<typeof import("@/lib/content")>();
-  const { parseApps } = await import("@/lib/schemas");
-  const fixture = parseApps(
-    {
-      apps: [
-        {
-          id: "hoja-de-vida",
-          estado: "en-produccion",
-          nombre: { es: "CV Viva", en: "Living CV" },
-          descripcion: { es: "Fixture", en: "Fixture" },
-          roadmap: [
-            {
-              id: "mapa-c4",
-              titulo: { es: "Mapa C4", en: "C4 map" },
-              descripcion: { es: "Fixture", en: "Fixture" },
-            },
-          ],
-        },
-      ],
-    },
-    "fixture",
-  );
-  return { ...real, getApps: () => fixture };
-});
+// `esFeatureValida` queda REAL: lee el roadmap del complemento de cada app
+// hermana (`data/fichas/<slug>.yaml`, 2026-09-13). El par válido se toma del
+// archivo real de «habla»; "x"/"y" no existe.
+const habla = parse(readFileSync("data/fichas/habla.yaml", "utf8")) as {
+  app: string;
+  roadmap: { id: string }[];
+};
+const APP = habla.app;
+const FEATURE = habla.roadmap[0].id;
 
 // Importa DESPUÉS de los mocks.
 const { POST } = await import("@/app/api/roadmap/votar/route");
@@ -81,7 +62,7 @@ beforeEach(() => {
   mockState.emitir = vi.fn().mockResolvedValue(3);
   mockState.leer = vi
     .fn()
-    .mockResolvedValue([{ app: "hoja-de-vida", feature: "mapa-c4", total: 3 }]);
+    .mockResolvedValue([{ app: APP, feature: FEATURE, total: 3 }]);
   resetRateLimit();
   delete process.env.DISABLE_RATE_LIMIT;
 });
@@ -92,24 +73,20 @@ afterEach(() => {
 
 describe("POST /api/roadmap/votar", () => {
   it("happy path: devuelve el total REAL de la RPC", async () => {
-    const res = await POST(
-      postVoto({ app: "hoja-de-vida", feature: "mapa-c4" }),
-    );
+    const res = await POST(postVoto({ app: APP, feature: FEATURE }));
     expect(res.status).toBe(200);
     expect(await res.json()).toEqual({
       ok: true,
-      app: "hoja-de-vida",
-      feature: "mapa-c4",
+      app: APP,
+      feature: FEATURE,
       total: 3,
     });
-    expect(mockState.emitir).toHaveBeenCalledWith("hoja-de-vida", "mapa-c4");
+    expect(mockState.emitir).toHaveBeenCalledWith(APP, FEATURE);
   });
 
   it("503 cuando la votación está apagada/no configurada", async () => {
     mockState.enabled = false;
-    const res = await POST(
-      postVoto({ app: "hoja-de-vida", feature: "mapa-c4" }),
-    );
+    const res = await POST(postVoto({ app: APP, feature: FEATURE }));
     expect(res.status).toBe(503);
     expect(await res.json()).toEqual({ error: "unavailable" });
     expect(mockState.emitir).not.toHaveBeenCalled();
@@ -123,7 +100,7 @@ describe("POST /api/roadmap/votar", () => {
 
   it("400 invalid_fields con clave de más (.strict)", async () => {
     const res = await POST(
-      postVoto({ app: "hoja-de-vida", feature: "mapa-c4", extra: "x" }),
+      postVoto({ app: APP, feature: FEATURE, extra: "x" }),
     );
     expect(res.status).toBe(400);
     expect((await res.json()).error).toBe("invalid_fields");
@@ -140,9 +117,7 @@ describe("POST /api/roadmap/votar", () => {
     const ip = "10.0.0.99";
     let last: Response | undefined;
     for (let i = 0; i < 14; i++) {
-      last = await POST(
-        postVoto({ app: "hoja-de-vida", feature: "mapa-c4" }, ip),
-      );
+      last = await POST(postVoto({ app: APP, feature: FEATURE }, ip));
     }
     expect(last?.status).toBe(429);
     expect((await last!.json()).error).toBe("rate_limited");
@@ -153,9 +128,7 @@ describe("POST /api/roadmap/votar", () => {
     const ip = "10.0.0.7";
     let last: Response | undefined;
     for (let i = 0; i < 20; i++) {
-      last = await POST(
-        postVoto({ app: "hoja-de-vida", feature: "mapa-c4" }, ip),
-      );
+      last = await POST(postVoto({ app: APP, feature: FEATURE }, ip));
     }
     expect(last?.status).toBe(200);
   });
@@ -164,9 +137,7 @@ describe("POST /api/roadmap/votar", () => {
     mockState.emitir = vi
       .fn()
       .mockRejectedValue(new VotesUnavailableError("db down"));
-    const res = await POST(
-      postVoto({ app: "hoja-de-vida", feature: "mapa-c4" }),
-    );
+    const res = await POST(postVoto({ app: APP, feature: FEATURE }));
     expect(res.status).toBe(503);
     expect(await res.json()).toEqual({ error: "unavailable" });
   });
@@ -178,7 +149,7 @@ describe("GET /api/roadmap/votos", () => {
     expect(res.status).toBe(200);
     expect(res.headers.get("cache-control")).toBe("no-store");
     expect(await res.json()).toEqual({
-      conteo: [{ app: "hoja-de-vida", feature: "mapa-c4", total: 3 }],
+      conteo: [{ app: APP, feature: FEATURE, total: 3 }],
     });
   });
 

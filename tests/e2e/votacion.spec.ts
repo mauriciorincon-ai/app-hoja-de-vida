@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { readdirSync, readFileSync } from "node:fs";
 import { expect, test } from "@playwright/test";
 import { parse } from "yaml";
 
@@ -10,13 +10,15 @@ import { parse } from "yaml";
  *    se salta si no hay SUPABASE_URL en el entorno del runner.
  */
 
-type AppEntry = { id: string; roadmap?: { id: string }[] };
-const { apps } = parse(readFileSync("data/apps.yaml", "utf8")) as {
-  apps: AppEntry[];
-};
-const features = apps.flatMap((a) =>
-  (a.roadmap ?? []).map((f) => ({ app: a.id, feature: f.id })),
-);
+// Las features viven en el complemento de cada app hermana
+// (`data/fichas/<slug>.yaml`) y se votan en `/vitrina/apps/<slug>` (2026-09-13).
+type Complemento = { app: string; roadmap?: { id: string }[] };
+const features = readdirSync("data/fichas")
+  .filter((f) => f.endsWith(".yaml"))
+  .map((f) => parse(readFileSync(`data/fichas/${f}`, "utf8")) as Complemento)
+  .flatMap((c) =>
+    (c.roadmap ?? []).map((f) => ({ app: c.app, feature: f.id })),
+  );
 
 // "3 votos" / "1 voto" / "sin votos aún" → número (0 si no hay dígitos)
 function parseConteo(texto: string | null): number {
@@ -25,12 +27,7 @@ function parseConteo(texto: string | null): number {
 }
 
 test.describe("Votación del roadmap", () => {
-  // Vacío desde 2026-09-13: las features de CV Viva se retiraron (dueño).
-  // Los dos gates vuelven a correr con el roadmap por app hermana.
-  test.skip(
-    features.length === 0,
-    "sin features votables: las de CV Viva se retiraron (2026-09-13); vuelve con el roadmap por app",
-  );
+  test.skip(features.length === 0, "data/fichas sin ningún roadmap votable");
 
   test("BD caída forzada: aviso honesto + botones deshabilitados", async ({
     page,
@@ -44,7 +41,7 @@ test.describe("Votación del roadmap", () => {
       }),
     );
 
-    await page.goto("/es/vitrina/apps");
+    await page.goto(`/es/vitrina/apps/${features[0].app}`);
     await page.locator("#roadmap").scrollIntoViewIfNeeded();
 
     // Aviso honesto visible
@@ -89,7 +86,7 @@ test.describe("Votación del roadmap", () => {
       }),
     );
 
-    await page.goto("/es/vitrina/apps");
+    await page.goto(`/es/vitrina/apps/${objetivo.app}`);
     await page.locator("#roadmap").scrollIntoViewIfNeeded();
 
     const fila = page.locator(
@@ -131,7 +128,7 @@ test.describe("Votación del roadmap", () => {
       }),
     );
 
-    await page.goto("/es/vitrina/apps");
+    await page.goto(`/es/vitrina/apps/${objetivo.app}`);
     await page.locator("#roadmap").scrollIntoViewIfNeeded();
 
     const fila = page.locator(
@@ -161,7 +158,7 @@ test.describe("Votación del roadmap", () => {
     const idx = testInfo.project.name === "mobile" ? 1 : 0;
     const objetivo = features[idx] ?? features[0];
 
-    await page.goto("/es/vitrina/apps");
+    await page.goto(`/es/vitrina/apps/${objetivo.app}`);
     await page.locator("#roadmap").scrollIntoViewIfNeeded();
 
     const fila = page.locator(
@@ -195,7 +192,7 @@ test.describe("Votación del roadmap", () => {
     const idx = testInfo.project.name === "mobile" ? 3 : 2;
     const objetivo = features[idx] ?? features[0];
 
-    await page.goto("/es/vitrina/apps");
+    await page.goto(`/es/vitrina/apps/${objetivo.app}`);
     await page.locator("#roadmap").scrollIntoViewIfNeeded();
     const fila = page.locator(
       `#roadmap [data-feature-id="${objetivo.feature}"][data-app-id="${objetivo.app}"]`,

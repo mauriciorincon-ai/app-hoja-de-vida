@@ -323,63 +323,28 @@ describe("appsSchema", () => {
     expect(() => appsSchema.parse(roto)).toThrow();
   });
 
-  it("defaults roadmap to an empty list (app sin votación)", () => {
-    const apps = appsSchema.parse(appsValidas);
-    expect(apps.apps[0].roadmap).toEqual([]);
-  });
-
-  it("accepts a roadmap with bilingual features (S4)", () => {
-    const apps = appsSchema.parse({
-      apps: [
+  it("rejects `roadmap` on an app: since 2026-09-13 the roadmap lives in data/fichas/<slug>.yaml", () => {
+    // Ninguna feature de CV Viva se muestra (dueño): el campo salió de
+    // apps.yaml y el objeto es strict, así que un YAML viejo rompe el build.
+    expect(() =>
+      parseApps(
         {
-          ...appsValidas.apps[0],
-          roadmap: [
+          apps: [
             {
-              id: "mapa-c4",
-              titulo: { es: "Mapa C4", en: "C4 map" },
-              descripcion: { es: "Navegar sistemas", en: "Navigate systems" },
+              ...appsValidas.apps[0],
+              roadmap: [
+                {
+                  id: "mapa-c4",
+                  titulo: { es: "Mapa C4", en: "C4 map" },
+                  descripcion: { es: "Navegar", en: "Navigate" },
+                },
+              ],
             },
           ],
         },
-      ],
-    });
-    expect(apps.apps[0].roadmap[0].id).toBe("mapa-c4");
-  });
-
-  it("rejects a roadmap feature missing a language (build fail-safe)", () => {
-    const roto = {
-      apps: [
-        {
-          ...appsValidas.apps[0],
-          roadmap: [
-            {
-              id: "mapa-c4",
-              titulo: { es: "Mapa C4" },
-              descripcion: { es: "Navegar", en: "Navigate" },
-            },
-          ],
-        },
-      ],
-    };
-    expect(() => parseApps(roto, "apps.yaml")).toThrowError(/roadmap/);
-  });
-
-  it("rejects a non-kebab-case roadmap feature id", () => {
-    const roto = {
-      apps: [
-        {
-          ...appsValidas.apps[0],
-          roadmap: [
-            {
-              id: "Mapa C4",
-              titulo: { es: "Mapa C4", en: "C4 map" },
-              descripcion: { es: "Navegar", en: "Navigate" },
-            },
-          ],
-        },
-      ],
-    };
-    expect(() => appsSchema.parse(roto)).toThrow();
+        "apps.yaml",
+      ),
+    ).toThrowError(/roadmap/);
   });
 
   it("rejects an unknown key on an app (.strict fail-safe)", () => {

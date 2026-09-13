@@ -1,80 +1,59 @@
-import { readFileSync } from "node:fs";
+import { readdirSync, readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { parse } from "yaml";
-import { parseApps } from "@/lib/schemas";
 import {
   appsConRoadmap,
   esFeatureValida,
   paresVotables,
+  roadmapDe,
 } from "@/lib/votes/roadmap";
 
 /**
- * Deriva de data/apps.yaml real (la fuente de verdad del roadmap votable).
- *
- * **2026-09-13 (decisión del dueño, gate ⭐ post-S8, bloque G):** «ninguna
- * feature de CV Viva debe mostrarse en ningún lado». Las siete features que
- * el S4 escribió para las dos apps de esta casa se retiraron; el roadmap
- * votable vuelve por app HERMANA, en la página de cada una, con las features
- * que entregue la planeadora. Hasta entonces `appsConRoadmap()` es vacío y la
- * sección no se monta. El motor sigue probado con un fixture.
+ * El roadmap votable deriva del complemento curado de cada app hermana
+ * (`data/fichas/<slug>.yaml`, procedencia cv-viva, administrado por la
+ * planeadora) — desde 2026-09-13, por decisión del dueño: ninguna feature de
+ * CV Viva se muestra, y cada app vota en su propia página. Estas pruebas anclan
+ * el comportamiento contra los archivos reales, no un número mágico.
  */
 
-const real = parse(readFileSync("data/apps.yaml", "utf8")) as {
-  apps: { id: string; roadmap?: unknown[] }[];
-};
+type Complemento = { app: string; roadmap?: { id: string }[] };
+const reales = readdirSync("data/fichas")
+  .filter((f) => f.endsWith(".yaml"))
+  .map((f) => parse(readFileSync(`data/fichas/${f}`, "utf8")) as Complemento);
+const conRoadmap = reales.filter((c) => (c.roadmap ?? []).length > 0);
 
-const FEATURE = {
-  id: "feature-demo",
-  titulo: { es: "Demo", en: "Demo" },
-  descripcion: { es: "Prueba", en: "Test" },
-};
-
-describe("votes/roadmap", () => {
-  it("ninguna app de esta casa declara roadmap: las features de CV Viva no se muestran (dueño, 2026-09-13)", () => {
-    for (const app of real.apps) {
-      expect({ id: app.id, roadmap: app.roadmap ?? [] }).toEqual({
-        id: app.id,
-        roadmap: [],
-      });
+describe("votes/roadmap (por app hermana)", () => {
+  it("appsConRoadmap devuelve las apps con features, en el orden del escaparate", () => {
+    const apps = appsConRoadmap();
+    expect(apps.map((a) => a.id).sort()).toEqual(
+      conRoadmap.map((c) => c.app).sort(),
+    );
+    for (const app of apps) {
+      expect(app.roadmap.length).toBeGreaterThan(0);
+      expect(app.nombre.length).toBeGreaterThan(0);
     }
-    expect(appsConRoadmap()).toEqual([]);
-    expect(paresVotables()).toEqual([]);
   });
 
-  it("el motor sigue vivo sobre un fixture: solo apps con features, en orden, y pares planos", () => {
-    const fixture = parseApps(
-      {
-        apps: [
-          {
-            id: "app-sin",
-            estado: "en-exploracion",
-            nombre: { es: "Sin", en: "None" },
-            descripcion: { es: "d", en: "d" },
-          },
-          {
-            id: "app-con",
-            estado: "en-exploracion",
-            nombre: { es: "Con", en: "With" },
-            descripcion: { es: "d", en: "d" },
-            roadmap: [FEATURE, { ...FEATURE, id: "otra-feature" }],
-          },
-        ],
-      },
-      "fixture",
+  it("roadmapDe da el roadmap de UNA app, y undefined si no lo tiene o no existe", () => {
+    const primera = conRoadmap[0];
+    expect(roadmapDe(primera.app)?.roadmap.map((f) => f.id)).toEqual(
+      primera.roadmap?.map((f) => f.id),
     );
-    const con = fixture.apps.filter((a) => a.roadmap.length > 0);
-    expect(con.map((a) => a.id)).toEqual(["app-con"]);
-    const pares = con.flatMap((a) =>
-      a.roadmap.map((f) => ({ app: a.id, feature: f.id })),
-    );
-    expect(pares).toEqual([
-      { app: "app-con", feature: "feature-demo" },
-      { app: "app-con", feature: "otra-feature" },
-    ]);
+    expect(roadmapDe("app-inexistente")).toBeUndefined();
   });
 
-  it("esFeatureValida rechaza cualquier par mientras no haya roadmap", () => {
+  it("esFeatureValida acepta pares reales y rechaza los inexistentes", () => {
+    const pares = paresVotables();
+    const primero = pares[0];
+    expect(esFeatureValida(primero.app, primero.feature)).toBe(true);
+    expect(esFeatureValida(primero.app, "feature-que-no-existe")).toBe(false);
+    expect(esFeatureValida("app-inexistente", primero.feature)).toBe(false);
+    // Las features de CV Viva ya no existen en ningún lado.
     expect(esFeatureValida("hoja-de-vida", "mapa-c4")).toBe(false);
-    expect(esFeatureValida("app-inexistente", "feature")).toBe(false);
+  });
+
+  it("paresVotables aplana todas las (app, feature) de los complementos", () => {
+    const total = conRoadmap.reduce((n, c) => n + (c.roadmap?.length ?? 0), 0);
+    expect(paresVotables()).toHaveLength(total);
   });
 });

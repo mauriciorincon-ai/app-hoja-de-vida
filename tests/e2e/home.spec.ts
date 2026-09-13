@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { readdirSync, readFileSync } from "node:fs";
 import { expect, test } from "@playwright/test";
 import { parse } from "yaml";
 
@@ -21,12 +21,6 @@ type RoadmapEntry = {
   id: string;
   titulo: { es: string; en: string };
 };
-type AppEntry = {
-  id: string;
-  estado: string;
-  nombre: { es: string; en: string };
-  roadmap?: RoadmapEntry[];
-};
 const cvEs = parse(readFileSync("data/cv.es.yaml", "utf8")) as {
   identidad: { nombre: string };
   trayectoria: { organizacion: string; bullets?: string[] }[];
@@ -36,17 +30,25 @@ if (!hitoConBullets?.bullets) {
   throw new Error("cv.es.yaml sin bullets en la trayectoria");
 }
 const primerBullet = hitoConBullets.bullets[0];
-const { apps } = parse(readFileSync("data/apps.yaml", "utf8")) as {
-  apps: AppEntry[];
-};
 const nombre = cvEs.identidad.nombre;
 
-// Roadmap votable (S4): todas las (app, feature) con roadmap en el YAML.
-// Vacío desde 2026-09-13: las features de CV Viva se retiraron (dueño); el
-// roadmap vuelve por app hermana, en su página, con las features de la
-// planeadora. Mientras tanto la sección NO se monta, y eso es lo que se vigila.
-const featuresRoadmap = apps.flatMap((a) => a.roadmap ?? []);
-const primeraFeature = featuresRoadmap[0];
+// Roadmap votable (S4 · por app hermana desde 2026-09-13): las features viven
+// en el complemento curado de cada app, `data/fichas/<slug>.yaml`, y se votan
+// en la página de ESA app (`/vitrina/apps/<slug>`), no en el escaparate. Las
+// de CV Viva se retiraron por decisión del dueño: ninguna se muestra.
+const roadmaps = readdirSync("data/fichas")
+  .filter((f) => f.endsWith(".yaml"))
+  .map((f) => {
+    const c = parse(readFileSync(`data/fichas/${f}`, "utf8")) as {
+      app: string;
+      roadmap?: RoadmapEntry[];
+    };
+    return { app: c.app, roadmap: c.roadmap ?? [] };
+  })
+  .filter((c) => c.roadmap.length > 0);
+const primerRoadmap = roadmaps[0];
+if (!primerRoadmap) throw new Error("data/fichas sin ningún roadmap");
+const primeraFeature = primerRoadmap.roadmap[0];
 
 test.describe("HOME — happy path del sprint", () => {
   test("carga, recorre secciones, cambia idioma y envía la solicitud", async ({
@@ -161,41 +163,41 @@ test.describe("HOME — happy path del sprint", () => {
   });
 });
 
-test.describe("El roadmap vive con las apps (revisión post-S7)", () => {
-  test("sin features en el YAML, la sección Roadmap NO se monta en /vitrina/apps (2026-09-13)", async ({
+test.describe("El roadmap vive en la página de cada app (2026-09-13)", () => {
+  test("el escaparate /vitrina/apps ya NO monta el roadmap: cada app vota en su página", async ({
     page,
   }) => {
-    test.skip(
-      featuresRoadmap.length > 0,
-      "hay features: el caso vacío no aplica",
-    );
     await page.goto("/es/vitrina/apps");
     await expect(page.locator("#roadmap")).toHaveCount(0);
+    // Y ninguna feature de CV Viva se muestra en ningún lado (dueño).
     const html = await page.content();
-    for (const nombre of ["Mapa de arquitectura", "Retrieval con embeddings"]) {
-      expect(html).not.toContain(nombre);
+    for (const vieja of ["Mapa de arquitectura", "Retrieval con embeddings"]) {
+      expect(html).not.toContain(vieja);
     }
   });
 
-  test("/vitrina/apps enseña una fila votable por feature, y la HOME ninguna", async ({
+  test("/vitrina/apps/<slug> enseña una fila votable por feature de ESA app, y la HOME ninguna", async ({
     page,
     request,
   }) => {
-    test.skip(
-      !primeraFeature,
-      "sin features votables: las de CV Viva se retiraron (2026-09-13); vuelve con el roadmap por app",
-    );
-    if (!primeraFeature) return;
-    await page.goto("/es/vitrina/apps");
-    await page.locator("#roadmap").scrollIntoViewIfNeeded();
-    await expect(page.locator("#roadmap [data-feature-id]")).toHaveCount(
-      featuresRoadmap.length,
-    );
-    // Gate ATS: la app y su feature, en el HTML estático de esa ruta.
+    for (const { app, roadmap } of roadmaps) {
+      await page.goto(`/es/vitrina/apps/${app}`);
+      await page.locator("#roadmap").scrollIntoViewIfNeeded();
+      await expect(page.locator("#roadmap [data-feature-id]")).toHaveCount(
+        roadmap.length,
+      );
+      await expect(page.locator(`#roadmap [data-app-id="${app}"]`)).toHaveCount(
+        roadmap.length,
+      );
+    }
+    // Gate ATS: la feature, en el HTML estático de la página de su app.
     for (const locale of ["es", "en"] as const) {
-      const html = await (await request.get(`/${locale}/vitrina/apps`)).text();
-      expect(html).toContain(apps[0].nombre[locale]);
+      const html = await (
+        await request.get(`/${locale}/vitrina/apps/${primerRoadmap.app}`)
+      ).text();
       expect(html).toContain(primeraFeature.titulo[locale]);
     }
+    await page.goto("/es");
+    await expect(page.locator("#roadmap")).toHaveCount(0);
   });
 });
