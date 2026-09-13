@@ -44,7 +44,11 @@ el mensaje te llega al correo.
   publicación **falla antes de salir** con un mensaje que dice exactamente qué campo está mal.
   La página que ya está en línea no se rompe.
 - **Limitaciones conocidas:** los logros usan `valor` numérico (el contador anima ese número);
-  máximo 2 decimales.
+  máximo 2 decimales. **Excepción que se calcula sola (corrección de contenido 2026-09-12):** el
+  logro de «años de trayectoria profesional» no lleva `valor` sino `desde: "2016-08"`, y el número
+  se calcula en cada build como años cumplidos — 10 hasta julio de 2027, 11 desde agosto. Un
+  `desde` en el futuro, o un logro sin `valor` ni `desde`, rompe el build; y si alguien vuelve a
+  escribir el número a mano, `tests/unit/content.test.ts` lo nombra.
 
 ### La trayectoria: el índice que baja contigo · desde Sprint 001 · rehecha en la revisión post-S7
 

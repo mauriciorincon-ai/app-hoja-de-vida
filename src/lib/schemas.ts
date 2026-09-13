@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { aniosCumplidos, DESDE_RE, esFuturo } from "../../scripts/anios.mjs";
 
 /**
  * Iconos monolínea (Lucide, trazo 1.5, sin color) que un estudio o una
@@ -101,14 +102,41 @@ export const cvSchema = z.object({
     .default([]),
   logros: z
     .array(
-      z.object({
-        valor: z.number(),
-        prefijo: z.string().default(""),
-        sufijo: z.string().default(""),
-        decimales: z.number().int().min(0).max(2).default(0),
-        etiqueta: z.string().min(1),
-        descripcion: z.string().min(1),
-      }),
+      z
+        .object({
+          // Corrección de contenido 2026-09-12: un logro puede declarar `desde`
+          // ("YYYY-MM") y su `valor` se CALCULA en build como años cumplidos —
+          // el número deja de envejecer solo. Sin `desde`, `valor` es obligatorio.
+          valor: z.number().optional(),
+          desde: z.string().regex(DESDE_RE, "desde must be YYYY-MM").optional(),
+          prefijo: z.string().default(""),
+          sufijo: z.string().default(""),
+          decimales: z.number().int().min(0).max(2).default(0),
+          etiqueta: z.string().min(1),
+          descripcion: z.string().min(1),
+        })
+        .transform((l, ctx) => {
+          if (l.desde !== undefined) {
+            if (esFuturo(l.desde)) {
+              ctx.addIssue({
+                code: "custom",
+                path: ["desde"],
+                message: `desde ${l.desde} está en el futuro: un logro no se cuenta antes de empezar`,
+              });
+              return z.NEVER;
+            }
+            return { ...l, valor: aniosCumplidos(l.desde) };
+          }
+          if (l.valor === undefined) {
+            ctx.addIssue({
+              code: "custom",
+              path: ["valor"],
+              message: "un logro lleva `valor`, o `desde` para calcularlo",
+            });
+            return z.NEVER;
+          }
+          return { ...l, valor: l.valor };
+        }),
     )
     .min(1),
   proyectos: z

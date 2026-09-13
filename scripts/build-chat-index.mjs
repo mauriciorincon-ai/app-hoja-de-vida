@@ -36,6 +36,7 @@ import path from "node:path";
 import process from "node:process";
 import { parse } from "yaml";
 import { chunksDeAFondo, leerDocumentos, revisarAduana } from "./a-fondo.mjs";
+import { aniosCumplidos } from "./anios.mjs";
 import { catalogoDeDestinos, destinoExiste } from "./destinos.mjs";
 
 const ROOT = process.cwd();
@@ -116,7 +117,7 @@ export function buildChunks({ cv, apps, aFondo, locale }) {
     cv.logros
       .map(
         (l) =>
-          `${l.prefijo ?? ""}${l.valor}${l.sufijo ?? ""} ${l.etiqueta}: ${l.descripcion}`,
+          `${l.prefijo ?? ""}${l.desde ? aniosCumplidos(l.desde) : l.valor}${l.sufijo ?? ""} ${l.etiqueta}: ${l.descripcion}`,
       )
       .join(" · "),
     "#logros",

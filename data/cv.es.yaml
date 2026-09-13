@@ -22,7 +22,8 @@ identidad:
   # Revisión post-S8: sin cifras — los logros tienen su sección — y con lo que
   # el dueño hace HOY (estrategia de IA e ISO/IEC 42001).
   perfil: >-
-    Ingeniero Industrial (Javeriana) con diez años convirtiendo datos
+    Ingeniero Industrial (Javeriana) con diez años de trayectoria —de la
+    ingeniería de procesos a los datos y la IA— convirtiendo datos
     operativos en decisiones de negocio, en banca, transporte, logística y
     salud. Hoy lidero la adopción y el gobierno de la IA: la estrategia y la
     implementación de ISO/IEC 42001. Antes diseñé desde cero la estrategia y la
@@ -166,10 +167,11 @@ estudios:
     nota: "Inglés B2: lectura, escucha y redacción técnica; discusiones profesionales e informes analíticos."
 
 logros:
-  - valor: 8
-    sufijo: "+"
-    etiqueta: "años en datos y analítica"
-    descripcion: "De la ingeniería de procesos a plataformas de datos para agentes de IA (2016 → hoy)."
+  # Corrección de contenido 2026-09-12: el valor se CALCULA desde `desde` en
+  # build (años cumplidos) — 10 hasta julio de 2027, 11 después. No se escribe.
+  - desde: "2016-08"
+    etiqueta: "años de trayectoria profesional"
+    descripcion: "De la ingeniería de procesos a plataformas de datos para agentes de IA (agosto 2016 → hoy)."
   - valor: 50
     sufijo: "+"
     etiqueta: "usuarios adoptaron mis dashboards en banca"

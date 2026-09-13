@@ -50,25 +50,25 @@ escalables con aprendizaje automático en entornos de nube.
 La preparé mientras construía el ecosistema de Vesting, y esa coincidencia no fue casual: estaba
 certificando exactamente lo que estaba haciendo. Cinco meses, de julio a noviembre.
 
-## El AI-103: en desarrollo, y por qué no es el AI-102
+## El AI-103: en curso, y por qué no es el AI-102
 
 <!-- seccion: el-ai-103 -->
 
-**Microsoft Certified: Azure AI Engineer Associate — AI-103. EN DESARROLLO.** Es la certificación
-de ingeniero de **inteligencia artificial de Azure**, y todavía **no la tengo**.
+**Microsoft Certified: Azure AI Engineer Associate — AI-103. EN CURSO, inscrito desde julio de
+2026.** Es la certificación de ingeniero de **inteligencia artificial de Azure**, y todavía **no la
+tengo**: está en mi lista de certificaciones con la marca «en curso», y así la nombro en el titular
+y en el perfil. Digo «en curso» y no «obtenida», y lo digo en todas partes.
 
-Digo «en desarrollo» y no «obtenida», y lo digo en todas partes. La ruta anterior era el AI-102;
-Microsoft la descontinuó, y con ella se fue de todo mi contenido: la retiré del titular, del perfil,
-del case study de Vesting y del listado de certificaciones. Nada en mi hoja de vida ni en este sitio
-declara una credencial que no exista o que ya no se pueda presentar.
+El AI-102 nunca lo obtuve. Era la ruta que preparaba; al programar el examen me informaron que
+Microsoft lo reemplazaba por el AI-103, y ahí cambié de ruta. Con eso el AI-102 se fue de todo mi
+contenido: lo retiré del titular, del perfil, del case study de Vesting y del listado de
+certificaciones. Nada en mi hoja de vida ni en este sitio declara una credencial que no exista o que
+ya no se pueda presentar.
 
-[CONFIRMAR — tres cosas, y las tres las tienes que responder tú:
-1. ¿Desde cuándo estás en la ruta del AI-103 y qué módulos llevas?
-2. El AI-102 cubría aprendizaje automático, chatbots con procesamiento de lenguaje natural, visión
-   por computadora y despliegue en Kubernetes. ¿El temario del AI-103 es el mismo? Si cambió, esa
-   descripción se refiere a un examen que ya no existe.
-3. Hoy el AI-103 **no aparece en ninguna parte del sitio** — ni en certificaciones, ni en el perfil,
-   ni en skills. ¿Entra? Y si entra, ¿el logro «5 certificaciones» pasa a «5 + 1 en curso»?]
+[CONFIRMAR — dos cosas que siguen abiertas: qué módulos llevas de la ruta; y si el temario del
+AI-103 es el mismo del AI-102 (aprendizaje automático, chatbots con procesamiento de lenguaje
+natural, visión por computadora y despliegue en Kubernetes) o cambió — si cambió, esa descripción
+se refiere a un examen que ya no existe.]
 
 Lo que sí puedo decir sin esperar respuesta es que construí una guía de estudio para el AI-103 como
 una pieza de mi propio pipeline. Es un agente que exige que cada afirmación pedagógica cite su

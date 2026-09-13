@@ -1,16 +1,21 @@
 import { readFileSync } from "node:fs";
 import { expect, test, type Locator } from "@playwright/test";
 import { parse } from "yaml";
+import { aniosCumplidos } from "../../scripts/anios.mjs";
 
 test.use({ contextOptions: { reducedMotion: "reduce" } });
 
-// Valor real del primer logro: editar data/*.yaml no rompe la suite
+// Valor real del primer logro: editar data/*.yaml no rompe la suite. Desde la
+// corrección de contenido 2026-09-12 el primer logro declara `desde` y su
+// valor se CALCULA (años cumplidos), igual que en build.
 const cvEs = parse(readFileSync("data/cv.es.yaml", "utf8")) as {
-  logros: { valor: number }[];
+  logros: { valor?: number; desde?: string }[];
   trayectoria: { bullets?: string[] }[];
   proyectos: { slug: string; casestudy?: unknown }[];
 };
-const primerLogro = cvEs.logros[0].valor;
+const primerLogro = cvEs.logros[0].desde
+  ? aniosCumplidos(cvEs.logros[0].desde)
+  : cvEs.logros[0].valor;
 const primerBullet = cvEs.trayectoria.find((t) => t.bullets?.length)
   ?.bullets?.[0];
 const slugConCasestudy = cvEs.proyectos.find((p) => p.casestudy)?.slug;
