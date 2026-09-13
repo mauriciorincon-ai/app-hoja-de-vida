@@ -151,7 +151,9 @@ function BulletsDisclosure({
               </li>
             ))}
           </ul>
-          {expanded && children}
+          {/* Separado del último logro (margen arriba) para que se lea como
+              acción del hito, no como un logro más. */}
+          {expanded && <div className="mt-3 mb-1">{children}</div>}
         </div>
       </div>
     </>
