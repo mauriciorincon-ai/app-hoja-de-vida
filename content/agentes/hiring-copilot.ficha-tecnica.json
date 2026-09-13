@@ -1,19 +1,19 @@
 {
   "schema_version": "1.1.0",
-  "actualizado": "2026-09-06",
+  "actualizado": "2026-09-12",
   "pieza": {
     "slug": "hiring-copilot",
     "nombre": "Hiring Copilot",
     "frente": "agentes",
     "estado": "inicial",
     "ciclo": "WI-9",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "sellado_en": null,
     "sprints_cerrados": 1
   },
   "promesa": {
     "tagline": "Ninguna afirmación sale de la memoria del modelo.",
-    "para_quien": "Para un profesional de inteligencia artificial que busca un rol de nivel medio-alto en Colombia o en Europa, con doce candidaturas por delante y quince días para empezar. Hoy rehace el currículum en cada oferta, escribe la carta desde cero, prepara la entrevista con lo que recuerda y no sabe qué canal le respondió la vez pasada: cada candidatura le cuesta unas cinco horas y empieza en blanco.",
+    "para_quien": "Para un profesional de inteligencia artificial que busca un rol de nivel medio-alto en Colombia o en Europa y quiere que cada candidatura parta de evidencia real, no de memoria. Sin esta herramienta rehace el currículum en cada oferta, escribe la carta desde cero, prepara la entrevista de memoria y no sabe qué canal le respondió: cada candidatura cuesta unas cinco horas y empieza en blanco.",
     "intro": "Su perfil se convierte una sola vez en un banco de logros con procedencia, y desde ahí sale todo: el análisis que descarta la oferta antes de gastarle horas, el currículum y la carta en dos idiomas, el gimnasio que entrena entrevista y código de verdad, y un pipeline que aprende qué canal responde. Él decide y él envía; el harness prepara, verifica y recuerda."
   },
   "titular": "Cada afirmación enviable enlaza un logro con su fuente y un programa lo comprueba: el bullet huérfano hace fallar el control. Y ningún control vale su verde sin su carnada, el caso destruido que demuestra que dispara.",
@@ -87,7 +87,7 @@
       "unidad": "h",
       "etiqueta": "Horas ahorradas, escenario base",
       "fuente": "estimacion",
-      "detalle": "Escenario base de arquitectura/roi.json: 30 h ahorradas en doce candidaturas más 4,8 h en preparación de entrevistas. El porcentaje de ahorro no está medido: se estima y se corrige con la primera corrida real. El mismo archivo declara que no afirma mejora de la tasa de respuesta y que el delta salarial no se cuenta como retorno."
+      "detalle": "Escenario base de arquitectura/roi.json: 30 h ahorradas en un escenario de doce candidaturas más 4,8 h en preparación de entrevistas. El porcentaje de ahorro no está medido: se estima y se corrige con la primera corrida real. El mismo archivo declara que no afirma mejora de la tasa de respuesta y que el delta salarial no se cuenta como retorno."
     }
   ],
   "bloques": [
