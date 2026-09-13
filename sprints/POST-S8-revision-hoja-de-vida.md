@@ -124,3 +124,12 @@ miraba `data/` y no `messages/`. Corregida la descripción y ampliado el barrido
   limpiar la tabla `votes` es decisión del dueño (ADR-022). **dash-agent-ai trae 3 features y la
   planeadora marcó la tercera como la más condicionada:** se copió tal cual; quitarla es decisión
   del dueño y se hace en origen.
+- **Cómo se mantiene el roadmap al día (decisión del dueño, 2026-09-13):** «esta app, al igual
+  que todas, se mueve con la planeadora: cada vez que hagamos nuevo sprint en cualquier app, la
+  planeadora me debe recordar la revisión de features aquí». La revisión fija vive en el MÉTODO
+  de la planeadora, no en esta app: ni gate, ni recordatorio propio, ni automatización. Se
+  descartaron: gate export-vs-roadmap, fecha de anclaje visible, resumen de votos, Action mensual
+  y una ⭐ en la guía («así se pierde»; «no voy a hacer el gate una y otra vez»). Texto para el
+  método entregado al dueño en chat para pegarlo en la planeadora (no vive en este repo, como el
+  prompt del roadmap). Del lado de la app no cambia nada: el roadmap llega por copia a
+  `data/fichas/<slug>.yaml` y sale como PR de contenido sin sprint.
