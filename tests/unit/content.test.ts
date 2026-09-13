@@ -25,6 +25,35 @@ describe("content loader (data/*.yaml reales)", () => {
     expect(es.estudios.length).toBeGreaterThan(0);
   });
 
+  // Corrección de contenido 2026-09-12 (punto 11 del informe de discrepancias
+  // del S8): el logro de años de trayectoria se CALCULA desde una fecha, no se
+  // escribe — un número escrito a mano envejece solo. Si alguien vuelve a
+  // poner `valor: 10` y borra `desde`, este test lo nombra.
+  it("el logro de años de trayectoria declara `desde` y su valor se calcula (ES y EN)", () => {
+    for (const locale of ["es", "en"] as const) {
+      const crudo: unknown = parse(
+        readFileSync(`data/cv.${locale}.yaml`, "utf8"),
+      );
+      const logros = (crudo as { logros: Record<string, unknown>[] }).logros;
+      const trayectoria = logros.find((l) =>
+        /trayectoria|experience/i.test(String(l.etiqueta)),
+      );
+      expect(
+        trayectoria,
+        `cv.${locale}: falta el logro de años de trayectoria`,
+      ).toBeDefined();
+      expect(
+        trayectoria?.desde,
+        `cv.${locale}: el logro «${trayectoria?.etiqueta}» no declara \`desde\` — el valor se calcula, no se escribe`,
+      ).toMatch(/^\d{4}-\d{2}$/);
+      expect(
+        trayectoria?.valor,
+        `cv.${locale}: el logro «${trayectoria?.etiqueta}» trae \`valor\` escrito a mano; sobra, lo calcula \`desde\``,
+      ).toBeUndefined();
+      expect(getCv(locale).logros[0].valor).toBeGreaterThanOrEqual(10);
+    }
+  });
+
   it("cada hito enlaza al MISMO case study en ES y EN (el hreflang lo necesita)", () => {
     const es = getCv("es");
     const en = getCv("en");

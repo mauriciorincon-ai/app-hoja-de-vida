@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { aniosCumplidos } from "../../scripts/anios.mjs";
 import {
   appsSchema,
   cvSchema,
@@ -30,7 +31,44 @@ const cvValido = {
   proyectos: [{ slug: "proyecto", nombre: "Proyecto", resumen: "Resumen" }],
 };
 
+describe("aniosCumplidos (el logro que deja de envejecer solo)", () => {
+  it("cuenta años COMPLETOS desde YYYY-MM: 2016-08 vale 10 hasta julio de 2027 y 11 después", () => {
+    expect(aniosCumplidos("2016-08", new Date(2026, 8, 12))).toBe(10);
+    expect(aniosCumplidos("2016-08", new Date(2027, 6, 31))).toBe(10);
+    expect(aniosCumplidos("2016-08", new Date(2027, 7, 1))).toBe(11);
+    expect(aniosCumplidos("2016-08", new Date(2016, 7, 1))).toBe(0);
+    expect(() => aniosCumplidos("2016-8")).toThrow(/desde/);
+  });
+});
+
 describe("cvSchema", () => {
+  it("un logro con `desde` calcula su valor en build; uno sin `desde` ni `valor`, o con `desde` futura, rompe (corrección 2026-09-12)", () => {
+    const cv = cvSchema.parse({
+      ...cvValido,
+      logros: [{ desde: "2016-08", etiqueta: "años", descripcion: "Desc" }],
+    });
+    expect(cv.logros[0].valor).toBe(aniosCumplidos("2016-08"));
+    expect(cv.logros[0].valor).toBeGreaterThanOrEqual(10);
+    expect(() =>
+      cvSchema.parse({
+        ...cvValido,
+        logros: [{ etiqueta: "años", descripcion: "Desc" }],
+      }),
+    ).toThrow(/valor/);
+    expect(() =>
+      cvSchema.parse({
+        ...cvValido,
+        logros: [{ desde: "2099-01", etiqueta: "años", descripcion: "Desc" }],
+      }),
+    ).toThrow(/futuro/);
+    expect(() =>
+      cvSchema.parse({
+        ...cvValido,
+        logros: [{ desde: "2016-8", etiqueta: "años", descripcion: "Desc" }],
+      }),
+    ).toThrow(/YYYY-MM/);
+  });
+
   it("accepts a complete CV and applies defaults", () => {
     const cv = cvSchema.parse(cvValido);
     expect(cv.logros[0].prefijo).toBe("");

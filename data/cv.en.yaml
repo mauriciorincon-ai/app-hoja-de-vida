@@ -16,8 +16,9 @@ identidad:
     agents to production — and this résumé is the sample: walk through it and
     ask.
   perfil: >-
-    Industrial Engineer (Javeriana) with ten years turning
-    operational data into business decisions, across banking, transport,
+    Industrial Engineer (Javeriana) with ten years of experience —from
+    process engineering to data and AI— turning operational data into
+    business decisions, across banking, transport,
     logistics and healthcare. Today I lead AI adoption and governance: the
     strategy and the ISO/IEC 42001 implementation. Before that I designed from
     scratch the data strategy and platform of an AI-agent startup —Microsoft
@@ -154,10 +155,9 @@ estudios:
     nota: "English B2: reading, listening and technical writing; professional discussions and analytical reports."
 
 logros:
-  - valor: 8
-    sufijo: "+"
-    etiqueta: "years in data and analytics"
-    descripcion: "From process engineering to data platforms for AI agents (2016 → today)."
+  - desde: "2016-08"
+    etiqueta: "years of professional experience"
+    descripcion: "From process engineering to data platforms for AI agents (August 2016 → today)."
   - valor: 50
     sufijo: "+"
     etiqueta: "users adopted my dashboards in banking"
