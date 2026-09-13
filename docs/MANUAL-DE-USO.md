@@ -163,10 +163,17 @@ el mensaje te llega al correo.
   sigue diciendo pieza, a propósito: es el nombre del dominio, no el de la vitrina.
 - **El formulario de contacto (post-S8):** ya no se titula «Solicitar acceso» sino **«Escríbeme»**,
   y el tercer campo es el desplegable **«Motivo (opcional)»**: un proyecto, una asesoría, una
-  capacitación, una charla, un rol o la lista de espera de la vitrina (la que prometen sus
-  botones). El motivo elegido es el **asunto** del correo («[CV Viva] Una asesoría»); sin motivo,
-  «[CV Viva] Mensaje desde la hoja de vida». Las opciones viven en `MOTIVOS` (`src/lib/schemas.ts`)
-  y sus textos en `messages/*.json` bajo `form.motivos`.
+  capacitación, una charla o un rol. El motivo elegido es el **asunto** del correo («[CV Viva]
+  Una asesoría»); sin motivo, «[CV Viva] Mensaje desde la hoja de vida». Las opciones viven en
+  `MOTIVOS` (`src/lib/schemas.ts`) y sus textos en `messages/*.json` bajo `form.motivos`.
+- **Hay DOS formularios (decisión tuya, 2026-09-13):** el general de la portada, que pide un
+  motivo, y la **lista de espera de las apps**, al pie de `/vitrina/apps` y de cada ficha de app
+  (ahí llega ya con esa app elegida). Su desplegable lista las apps publicadas en
+  `content/vitrina/` más **«Otra»**; el asunto del correo es «[CV Viva] Lista de espera: <app>».
+  **Solo las apps tienen lista de espera:** agentes, investigaciones y tableros se muestran para
+  enseñar capacidades y no se entregan, así que sus páginas cierran con «Escríbeme» al formulario
+  general. Lo declara `listaDeEspera: true` en `data/vitrina.yaml` (solo en `apps`; un test lo
+  vigila).
 
 ### Descargar CV en PDF (ATS) · desde Sprint 002
 
@@ -264,8 +271,9 @@ el mensaje te llega al correo.
     **7 piezas.**
   - **Tableros de datos** (`/es/vitrina/tableros`): tableros analíticos, sin atarse a una
     herramienta. **6 piezas.**
-- **Un frente «en preparación» tiene página igual:** dice qué es, en qué punto está y ofrece la
-  lista de espera, **sin fecha prometida**. Marca el inicio; no lo disfraza. Hoy **ningún frente
+- **Un frente «en preparación» tiene página igual:** dice qué es y en qué punto está, **sin
+  fecha prometida**, y cierra como los demás frentes (lista de espera solo si es `apps`). Marca el
+  inicio; no lo disfraza. Hoy **ningún frente
   está así** — esa página espera al próximo frente que declares.
 - **Cómo cambiar el nombre, la intro o el estado de un frente (cero código):** edita
   `data/vitrina.yaml` y haz push. Cada frente lleva `nombre`, `intro` (la frase de su caja) y
@@ -364,7 +372,7 @@ el mensaje te llega al correo.
   - `pnpm capturas:vitrina` las rehace todas, `pnpm capturas:vitrina habla` solo una;
   - quedan en `public/vitrina/` como WebP.
 - **Ninguna ficha entrega un enlace** a la app ni a su repositorio: se muestra la **razón** de que
-  no lo haya y un único botón de **lista de espera**, sin promesa de fecha.
+  no lo haya y un único botón de **lista de espera** (solo en las apps), sin promesa de fecha.
 - **Lo que se muestra es la versión anclada** del export (con su fecha, a la vista al pie de cada
   ficha), no el estado en tiempo real de la app.
 

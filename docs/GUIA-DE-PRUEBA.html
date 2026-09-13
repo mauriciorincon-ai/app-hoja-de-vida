@@ -626,9 +626,9 @@
               charla o un rol? Escríbeme…» y el formulario se titula
               <strong>«Escríbeme»</strong>, no «Solicitar acceso». El tercer
               campo es el desplegable <strong>«Motivo (opcional)»</strong> con
-              esas cinco puertas más «La lista de espera de la vitrina» (es lo
-              que prometen los botones de la vitrina). Llena nombre y correo,
-              elige «Una asesoría» y envía: ves la confirmación
+              esas cinco puertas y nada más (la lista de espera de las apps es
+              OTRO formulario, en la vitrina: e5). Llena nombre y correo, elige
+              «Una asesoría» y envía: ves la confirmación
               <strong>"Recibí tu mensaje"</strong>.
               <span class="origen origen-mejorado"
                 >Mejorado · post-S8 (bloque E)</span
@@ -671,6 +671,27 @@
               Resend no puede escribirle a ese buzón.
               <span class="origen origen-heredada">S1</span
               ><span class="minimo">⭐ mínimo</span></label
+            >
+          </li>
+          <li data-origen="nuevo">
+            <input type="checkbox" id="e5" /><label for="e5"
+              >El <strong>segundo formulario</strong>, la lista de espera de las
+              apps: en <code>/es/vitrina/apps</code>, al pie, se titula
+              <strong>«Lista de espera»</strong> y su desplegable «¿Qué app te
+              interesa?» lista las apps de la vitrina más
+              <strong>«Otra»</strong>. Entra a la ficha de una app
+              (<code>/es/vitrina/apps/habla</code>): el botón «Avísame cuando
+              abra» baja al mismo formulario con
+              <strong>esa app ya elegida</strong>. Envía: confirmación «Recibí
+              tu mensaje»; en producción el asunto del correo es «[CV Viva]
+              Lista de espera: Habla». Y en <code>/es/vitrina/agentes</code>,
+              <code>/investigaciones</code> y <code>/tableros</code>
+              <strong>NO hay lista de espera</strong> ni en el frente ni en sus
+              fichas: cierran con «Este frente se muestra para enseñar
+              capacidades…» y un «Escríbeme» al formulario general.
+              <span class="origen origen-nuevo"
+                >Nuevo · post-S8 (bloque E)</span
+              ></label
             >
           </li>
         </ul>
@@ -995,12 +1016,15 @@
               <span class="origen origen-heredada">S5</span></label
             >
           </li>
-          <li data-origen="heredada">
+          <li data-origen="mejorado">
             <input type="checkbox" id="k4" /><label for="k4"
               >En ninguna ficha hay un enlace a la app ni a su repositorio: en
               su lugar se explica <strong>la razón</strong> y hay un botón de
-              lista de espera que baja a la sección de contacto de esa misma
-              página. <span class="origen origen-heredada">S5</span></label
+              lista de espera que baja al formulario de lista de espera de esa
+              misma página, con la app ya elegida.
+              <span class="origen origen-mejorado"
+                >Mejorado · post-S8 (bloque E)</span
+              ></label
             >
           </li>
           <li data-origen="heredada">
@@ -1227,13 +1251,16 @@
               portal. <span class="origen origen-heredada">S7</span></label
             >
           </li>
-          <li data-origen="heredada">
+          <li data-origen="mejorado">
             <input type="checkbox" id="m8" /><label for="m8"
               >Recorre tres fichas de frentes distintos buscando enlaces:
               <strong>no hay ninguno hacia afuera</strong> — ni al repositorio
-              de la pieza, ni a un artículo, ni un DOI de investigación. Solo la
-              lista de espera.
-              <span class="origen origen-heredada">S7</span></label
+              de la pieza, ni a un artículo, ni un DOI de investigación. Y
+              tampoco lista de espera: estas piezas se muestran, no se entregan
+              (solo las apps la tienen).
+              <span class="origen origen-mejorado"
+                >Mejorado · post-S8 (bloque E)</span
+              ></label
             >
           </li>
           <li data-origen="heredada">
@@ -1705,8 +1732,12 @@
               dos columnas con navy y el anuncio del sitio (d1); y el formulario
               cambia «¿Vienes por una app?» por el desplegable
               <strong>«Motivo»</strong> —proyecto, asesoría, capacitación,
-              charla, rol y lista de espera— (e1, e4); e3 ⭐ aclara que en
-              localhost el correo se simula.
+              charla y rol— (e1, e4); e3 ⭐ aclara que en localhost el correo se
+              simula. <strong>Dos formularios</strong> (dueño, 2026-09-13): la
+              lista de espera es OTRO formulario, solo para las apps, al pie de
+              <code>/vitrina/apps</code> y de cada ficha de app (e5 nueva);
+              agentes, investigaciones y tableros ya no la ofrecen (k4, m8
+              mejoradas).
             </li>
             <li>
               <strong>v8 · S8 · 2026-09-12:</strong> el «a fondo», el corpus

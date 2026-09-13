@@ -6,6 +6,7 @@ import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { Reveal } from "@/components/motion/reveal";
 import { FichaTecnica } from "@/components/vitrina/ficha-tecnica";
+import { ListaDeEspera } from "@/components/vitrina/lista-de-espera";
 import { Link } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
 import { getCv } from "@/lib/content";
@@ -99,7 +100,12 @@ export default async function FichaTecnicaAppPage({ params }: Params) {
             datos={ft}
             locale={l}
             hrefDetalle={`/vitrina/apps/${app}/detalle`}
+            listaDeEspera
           />
+
+          {/* El anclaje del botón «Avísame cuando abra» de la ficha vive en
+              ESTA página, con la app ya elegida en el formulario. */}
+          <ListaDeEspera appInicial={app} />
 
           {(anterior || siguiente) && (
             <Reveal variant="fadeInUp">

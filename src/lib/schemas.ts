@@ -332,6 +332,12 @@ const categoriaVitrina = z
     intro: localizedText,
     // El párrafo de su página.
     detalle: localizedText,
+    // Solo las apps tienen lista de espera (decisión del dueño, 2026-09-13):
+    // son el único frente con vocación comercial. Los agentes, las
+    // investigaciones y los tableros se muestran para enseñar capacidades y
+    // no se entregan, así que nadie tiene por qué pedir acceso. Con `true`, el
+    // cierre de la página del frente enlaza a la lista de espera de las apps.
+    listaDeEspera: z.boolean().default(false),
   })
   .strict();
 
@@ -364,12 +370,12 @@ export type Vitrina = z.infer<typeof vitrinaSchema>;
 export type CategoriaVitrina = Vitrina["categorias"][number];
 
 /**
- * Los motivos del formulario de contacto (bloque E del gate ⭐ post-S8): las
- * cinco puertas que el propio bloque anuncia —«¿Un proyecto, una asesoría,
- * una capacitación, una charla o un rol?»— más la lista de espera de la
- * vitrina, que es lo que sus CTAs prometen («Entras a la lista de espera»).
- * El texto visible vive en `messages/*.json` (`form.motivos.<id>`); estas
- * etiquetas son las del CORREO, que lee el dueño, en español.
+ * Los motivos del formulario GENERAL de la HOME (bloque E del gate ⭐ post-S8):
+ * las cinco puertas que el propio bloque anuncia —«¿Un proyecto, una asesoría,
+ * una capacitación, una charla o un rol?»— y nada más. La lista de espera de
+ * las apps es OTRO formulario, en la vitrina (campo `app`, abajo). El texto
+ * visible vive en `messages/*.json` (`form.motivos.<id>`); estas etiquetas son
+ * las del CORREO, que lee el dueño, en español.
  */
 export const MOTIVOS = [
   "proyecto",
@@ -377,7 +383,6 @@ export const MOTIVOS = [
   "capacitacion",
   "charla",
   "rol",
-  "lista-de-espera",
 ] as const;
 export type Motivo = (typeof MOTIVOS)[number];
 export const ETIQUETAS_MOTIVO: Record<Motivo, string> = {
@@ -386,19 +391,25 @@ export const ETIQUETAS_MOTIVO: Record<Motivo, string> = {
   capacitacion: "Una capacitación",
   charla: "Una charla",
   rol: "Un rol",
-  "lista-de-espera": "Lista de espera de la vitrina",
 };
 
+/** La opción «Otra» de la lista de espera de apps: nunca sobra. */
+export const APP_OTRA = "otra";
+export const ETIQUETA_APP_OTRA = "Otra app";
+
 /**
- * Mensaje desde la hoja de vida (formulario + endpoint). `website` es el
- * honeypot. `motivo` es opcional y solo admite la lista de arriba: el
- * desplegable es la única fuente, y un valor fuera de ella es un cliente
- * que no es el formulario.
+ * Mensaje desde la hoja de vida (los dos formularios + el endpoint). `website`
+ * es el honeypot. `motivo` (formulario general) solo admite la lista de arriba;
+ * `app` (lista de espera de la vitrina) es un slug de `content/vitrina/` o
+ * `APP_OTRA`, y lo comprueba el endpoint contra el manifiesto real —el schema
+ * valida forma, y la forma no sabe qué apps hay en disco—. Un valor fuera de
+ * las listas es un cliente que no es el formulario.
  */
 export const solicitudSchema = z.object({
   nombre: z.string().trim().min(1).max(120),
   email: z.string().trim().email().max(254),
   motivo: z.enum(MOTIVOS).or(z.literal("")).default(""),
+  app: z.string().trim().max(60).default(""),
   mensaje: z.string().trim().max(1000).default(""),
   website: z.literal("").default(""),
 });

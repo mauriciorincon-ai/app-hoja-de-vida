@@ -426,6 +426,18 @@ describe("solicitudSchema", () => {
     }
   });
 
+  it("defaults app to empty and keeps a slug: the waiting list is the other form", () => {
+    expect(solicitudSchema.parse(solicitudValida).app).toBe("");
+    expect(
+      solicitudSchema.parse({ ...solicitudValida, app: " habla " }).app,
+    ).toBe("habla");
+  });
+
+  it("the general form has NO waiting-list motivo: only the apps have one (owner, 2026-09-13)", () => {
+    expect(MOTIVOS).not.toContain("lista-de-espera");
+    expect(MOTIVOS).toHaveLength(5);
+  });
+
   it("rejects a motivo outside the list (the select is the only source)", () => {
     expect(() =>
       solicitudSchema.parse({ ...solicitudValida, motivo: "spam" }),

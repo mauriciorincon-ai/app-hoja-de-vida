@@ -7,6 +7,7 @@ import { Header } from "@/components/header";
 import { Reveal } from "@/components/motion/reveal";
 import { AperturaPorLectura } from "@/components/vitrina/apertura-por-lectura";
 import { FichaApp } from "@/components/vitrina/ficha";
+import { ListaDeEspera } from "@/components/vitrina/lista-de-espera";
 import { Link } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
 import { getCv } from "@/lib/content";
@@ -146,34 +147,9 @@ export default async function DetalleAppPage({ params }: Params) {
 
           {/* El anclaje del CTA de la ficha vive en ESTA página: el botón
               «avísame» de la ficha apunta a `#contacto-vitrina`, y si la
-              sección no estuviera aquí el enlace no llevaría a ninguna parte. */}
-          <Reveal variant="fadeInUp">
-            <section
-              id="contacto-vitrina"
-              aria-labelledby="vitrina-cierre"
-              className="mt-12 scroll-mt-16 border-t border-paper-2 pt-10"
-            >
-              <h2
-                id="vitrina-cierre"
-                className="font-display text-2xl font-medium tracking-[-0.015em] text-ink-0"
-              >
-                {t("acceso")}
-              </h2>
-              <p className="mt-3 max-w-[60ch] text-[15px] leading-relaxed text-ink-1">
-                {t("ctaNota")}
-              </p>
-              <p className="mt-2 max-w-[60ch] text-sm leading-relaxed text-ink-2">
-                {t("anclajeNota")}
-              </p>
-              <Link
-                href="/#contacto"
-                className="mt-5 flex min-h-11 w-fit items-center gap-2 rounded-md bg-sage px-6 text-[15px] font-medium text-sage-ink shadow-sh-1 transition-[filter] duration-[120ms] hover:brightness-[0.97]"
-              >
-                {t("cta")}
-                <span aria-hidden="true">→</span>
-              </Link>
-            </section>
-          </Reveal>
+              sección no estuviera aquí el enlace no llevaría a ninguna parte.
+              La app ya va elegida en el formulario. */}
+          <ListaDeEspera appInicial={app} />
         </div>
       </main>
       <Footer identidad={cv.identidad} />

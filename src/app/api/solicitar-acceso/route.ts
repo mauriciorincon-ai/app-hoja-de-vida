@@ -2,7 +2,8 @@ import { NextResponse } from "next/server";
 import { logger } from "@/lib/logger";
 import { checkRateLimit } from "@/lib/rate-limit";
 import { sendSolicitudEmail } from "@/lib/resend";
-import { solicitudSchema } from "@/lib/schemas";
+import { APP_OTRA, ETIQUETA_APP_OTRA, solicitudSchema } from "@/lib/schemas";
+import { getManifestVitrina } from "@/lib/vitrina/loader";
 
 /** Colapsa saltos de línea y recorta: los campos van a un email plano. */
 function sanitize(value: string): string {
@@ -63,29 +64,39 @@ export async function POST(request: Request): Promise<NextResponse> {
     mensaje: sanitize(parsed.data.mensaje),
   };
 
+  // La lista de espera solo admite las apps publicadas en la vitrina (o
+  // «otra»): el desplegable es la única fuente, y el manifiesto es la verdad.
+  let etiquetaApp: string | undefined;
+  if (solicitud.app) {
+    const ancla = getManifestVitrina().find((a) => a.slug === solicitud.app);
+    if (solicitud.app === APP_OTRA) etiquetaApp = ETIQUETA_APP_OTRA;
+    else if (ancla) etiquetaApp = ancla.nombre;
+    else {
+      log.warn(
+        { app: solicitud.app, ms: Date.now() - start },
+        "app desconocida",
+      );
+      return NextResponse.json({ error: "invalid_fields" }, { status: 400 });
+    }
+  }
+  const ctx = { motivo: solicitud.motivo, app: solicitud.app };
+
   try {
-    const result = await sendSolicitudEmail(solicitud);
+    const result = await sendSolicitudEmail(solicitud, etiquetaApp);
     if (result.simulated) {
       log.warn(
-        { motivo: solicitud.motivo, ms: Date.now() - start },
+        { ...ctx, ms: Date.now() - start },
         "RESEND_API_KEY ausente: envío simulado",
       );
     } else {
       log.info(
-        {
-          motivo: solicitud.motivo,
-          emailId: result.id,
-          ms: Date.now() - start,
-        },
+        { ...ctx, emailId: result.id, ms: Date.now() - start },
         "solicitud enviada",
       );
     }
     return NextResponse.json({ ok: true });
   } catch (error) {
-    log.error(
-      { err: error, motivo: solicitud.motivo, ms: Date.now() - start },
-      "fallo el envío",
-    );
+    log.error({ err: error, ...ctx, ms: Date.now() - start }, "fallo el envío");
     return NextResponse.json({ error: "send_failed" }, { status: 502 });
   }
 }

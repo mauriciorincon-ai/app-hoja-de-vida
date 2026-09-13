@@ -20,7 +20,7 @@ import { getFrente, getFrentes } from "@/lib/vitrina/categorias";
 const MEDIDOS = ["apps", "agentes", "investigaciones", "tableros"];
 
 const real = parse(readFileSync("data/vitrina.yaml", "utf8")) as {
-  categorias: { id: string; estado: string }[];
+  categorias: { id: string; estado: string; listaDeEspera?: boolean }[];
 };
 
 function conCambio(
@@ -32,6 +32,26 @@ function conCambio(
 }
 
 describe("data/vitrina.yaml — los frentes", () => {
+  it("solo «apps» tiene lista de espera: los otros frentes se muestran, no se entregan (dueño, 2026-09-13)", () => {
+    // Agentes, investigaciones y tableros no tienen vocación comercial: nadie
+    // tiene por qué pedir acceso. Un `listaDeEspera: true` fuera de apps
+    // reabriría esa puerta sin que nadie lo decidiera.
+    for (const c of real.categorias) {
+      expect({ id: c.id, listaDeEspera: c.listaDeEspera === true }).toEqual({
+        id: c.id,
+        listaDeEspera: c.id === "apps",
+      });
+    }
+    // Y el default del schema es «sin lista de espera».
+    const v = vitrinaSchema.parse(
+      conCambio((cs) => {
+        for (const c of cs)
+          delete (c as { listaDeEspera?: boolean }).listaDeEspera;
+      }),
+    );
+    expect(v.categorias.every((c) => c.listaDeEspera === false)).toBe(true);
+  });
+
   it("el YAML real valida y trae los cuatro frentes en orden", () => {
     const v = parseVitrina(real, "data/vitrina.yaml", MEDIDOS);
     expect(v.categorias.map((c) => c.id)).toEqual([

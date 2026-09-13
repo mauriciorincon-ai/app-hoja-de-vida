@@ -15,6 +15,34 @@ test.describe("Formulario de contacto (antes «solicitar acceso»)", () => {
     await expect(page).toHaveURL(/\/es$/);
   });
 
+  test("el formulario general de la HOME pide un MOTIVO y no ofrece la lista de espera", async ({
+    page,
+  }) => {
+    await page.goto("/es");
+    const select = page.locator('form[data-formulario="motivo"] select');
+    // «Elige un motivo» + proyecto · asesoría · capacitación · charla · rol
+    await expect(select.locator("option")).toHaveCount(6);
+    await expect(select.locator('option[value="lista-de-espera"]')).toHaveCount(
+      0,
+    );
+  });
+
+  test("lista de espera de apps (vitrina): «otra» nunca sobra, y envía", async ({
+    page,
+  }) => {
+    await page.goto("/es/vitrina/apps");
+    const form = page.locator('form[data-formulario="app"]');
+    await form.scrollIntoViewIfNeeded();
+    await page
+      .locator('form[data-formulario="app"][data-hydrated=true]')
+      .waitFor();
+    await form.getByLabel("Tu nombre").fill("E2E Espera");
+    await form.getByLabel("Tu correo").fill("espera@example.com");
+    await form.getByLabel("¿Qué app te interesa?").selectOption("otra");
+    await form.getByRole("button", { name: "Enviar" }).click();
+    await expect(page).toHaveURL(/\/es\/solicitud-enviada/);
+  });
+
   test("honeypot lleno: el API responde 200 silencioso (negativo)", async ({
     request,
   }) => {

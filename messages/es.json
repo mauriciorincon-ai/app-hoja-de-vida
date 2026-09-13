@@ -104,8 +104,7 @@
       "asesoria": "Una asesoría",
       "capacitacion": "Una capacitación",
       "charla": "Una charla",
-      "rol": "Un rol",
-      "lista-de-espera": "La lista de espera de la vitrina"
+      "rol": "Un rol"
     },
     "mensaje": "Cuéntame qué tienes en mente (opcional)",
     "enviar": "Enviar",
@@ -116,6 +115,13 @@
       "nombreRequerido": "Escribe tu nombre.",
       "emailInvalido": "Ese correo no se ve válido."
     }
+  },
+  "listaDeEspera": {
+    "titulo": "Lista de espera",
+    "app": "¿Qué app te interesa?",
+    "elige": "Elige una app",
+    "otra": "Otra",
+    "nota": "Sin promesa de fecha. Te aviso cuando abra."
   },
   "confirmacion": {
     "titulo": "Recibí tu mensaje",
@@ -155,7 +161,7 @@
     "eyebrow": "La vitrina",
     "titulo": "Lo que se construye aquí, en cuatro frentes",
     "subtitulo": "Cada frente tiene su propio espacio; aquí solo se asoman. Lo que ya está construido se muestra; lo que empieza, se declara.",
-    "portalNota": "Nada de lo que ves se entrega desde aquí: se muestra, y hay una lista de espera.",
+    "portalNota": "Nada de lo que ves se entrega desde aquí: se muestra. Solo las apps tienen lista de espera.",
     "appsTitulo": "{n} apps, construidas de verdad",
     "frenteEstados": {
       "abierta": "Abierto",
@@ -169,7 +175,7 @@
     "entrar": "Explora",
     "verQueViene": "Ver qué viene",
     "enPreparacionTitulo": "Este frente empieza",
-    "enPreparacionLinea": "Los primeros productos se publican aquí cuando estén construidas — cada una con lo que hace y con qué evidencia. Sin fecha prometida: si quieres enterarte, la lista de espera está abajo.",
+    "enPreparacionLinea": "Los primeros productos se publican aquí cuando estén construidas — cada una con lo que hace y con qué evidencia. Sin fecha prometida.",
     "otrosFrentes": "Los otros frentes de la vitrina",
     "notaIdioma": "",
     "estados": {
@@ -206,6 +212,10 @@
     "acceso": "Cómo se accede",
     "cta": "Avísame cuando abra",
     "ctaNota": "Entras a la lista de espera. Sin promesa de fecha.",
+    "ctaApps": "Lista de espera de las apps",
+    "listaDeEsperaLinea": "Solo las apps tienen lista de espera: dime cuál te interesa y te aviso cuando abra. Sin promesa de fecha.",
+    "sinListaDeEspera": "Este frente se muestra para enseñar capacidades: no se entrega ni tiene lista de espera. Si algo de aquí te sirve, escríbeme.",
+    "escribeme": "Escríbeme",
     "anclaje": "Ficha anclada al export del {fecha} · v{version} · {sprints, plural, one {# sprint cerrado} other {# sprints cerrados}}",
     "anclajeNota": "La vitrina muestra la versión anclada de cada app, no su estado en tiempo real.",
     "sí": "sí",
@@ -275,7 +285,7 @@
       "decisiones": "decisiones registradas"
     },
     "verDetalle": "Ver la ficha completa",
-    "cierreNota": "Aquí se muestra; no se entrega. La lista de espera no promete fecha.",
+    "cierreNota": "Aquí se muestra; no se entrega.",
     "volverFichaTecnica": "Volver a la ficha técnica"
   },
   "vitrinaHome": {

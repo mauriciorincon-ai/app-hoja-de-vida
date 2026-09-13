@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { resetRateLimit } from "@/lib/rate-limit";
+import { getManifestVitrina } from "@/lib/vitrina/loader";
 import { POST } from "@/app/api/solicitar-acceso/route";
 
 const sendMock = vi.hoisted(() => vi.fn());
@@ -61,6 +62,45 @@ describe("POST /api/solicitar-acceso", () => {
     const payload = sendMock.mock.calls[0][0];
     expect(payload.subject).toBe("[CV Viva] Mensaje desde la hoja de vida");
     expect(payload.text).toContain("Motivo: (sin motivo)");
+  });
+
+  it("waiting list: a published app goes in the subject by its name", async () => {
+    const [primera] = getManifestVitrina();
+    if (!primera) throw new Error("content/vitrina sin exports");
+    const res = await POST(
+      makeRequest(
+        { ...solicitudValida, motivo: undefined, app: primera.slug },
+        "1.0.0.11",
+      ),
+    );
+    expect(res.status).toBe(200);
+    const payload = sendMock.mock.calls[0][0];
+    expect(payload.subject).toBe(
+      `[CV Viva] Lista de espera: ${primera.nombre}`,
+    );
+    expect(payload.text).toContain(`Lista de espera: ${primera.nombre}`);
+  });
+
+  it("waiting list: «otra» is a valid choice and says so", async () => {
+    const res = await POST(
+      makeRequest(
+        { ...solicitudValida, motivo: undefined, app: "otra" },
+        "1.0.0.12",
+      ),
+    );
+    expect(res.status).toBe(200);
+    expect(sendMock.mock.calls[0][0].subject).toBe(
+      "[CV Viva] Lista de espera: Otra app",
+    );
+  });
+
+  it("returns 400 on an app that is not in the showcase manifest without sending (negative)", async () => {
+    const res = await POST(
+      makeRequest({ ...solicitudValida, app: "app-que-no-existe" }, "1.0.0.13"),
+    );
+    expect(res.status).toBe(400);
+    await expect(res.json()).resolves.toEqual({ error: "invalid_fields" });
+    expect(sendMock).not.toHaveBeenCalled();
   });
 
   it("returns 400 on a motivo outside the list without sending (negative)", async () => {
