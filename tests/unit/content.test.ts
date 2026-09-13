@@ -1,4 +1,4 @@
-import { readdirSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { parse } from "yaml";
@@ -190,6 +190,32 @@ describe("content loader (data/*.yaml reales)", () => {
       expect(
         aSecas,
         "un código listado como «en curso» se nombra siempre con esa marca a menos de 48 caracteres: sin ella, el titular afirma una credencial que no se tiene",
+      ).toEqual([]);
+    }
+  });
+
+  // Revisión post-S8: el logo de una institución es un ARCHIVO de
+  // `public/logos/`, y un `logo:` que apunta a un archivo que no está pinta
+  // una imagen rota en la HOME con la CI en verde — el schema solo valida el
+  // nombre. Este gate exige que exista, y nombra el estudio o la certificación.
+  it("todo `logo:` de estudios y certificaciones apunta a un archivo que existe en public/logos/", () => {
+    for (const locale of ["es", "en"] as const) {
+      const cv = getCv(locale);
+      const rotos = [
+        ...cv.estudios.map((e) => ({
+          quien: `estudio «${e.titulo}»`,
+          logo: e.logo,
+        })),
+        ...cv.certificaciones.map((c) => ({
+          quien: `certificación «${c.nombre}»`,
+          logo: c.logo,
+        })),
+      ]
+        .filter((x) => x.logo && !existsSync(join("public", "logos", x.logo)))
+        .map((x) => `${x.quien} → public/logos/${x.logo} (cv.${locale})`);
+      expect(
+        rotos,
+        "un logo declarado tiene que existir en public/logos/",
       ).toEqual([]);
     }
   });

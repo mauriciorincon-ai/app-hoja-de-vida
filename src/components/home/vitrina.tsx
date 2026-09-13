@@ -16,8 +16,12 @@ import { getFrentes } from "@/lib/vitrina/categorias";
  * la HOME no mantiene una copia de la vitrina, la enseña.
  *
  * Revisión post-S8: las cuatro cajas aparecen levemente, una a una (140 ms
- * de escalón, `fadeInSlow`), y la cifra de productos crece y vuelve al asomar.
+ * de escalón, `fadeInSlow`), y el chip de productos APARECE GRANDE Y SE ENCOGE
+ * con su caja: misma duración, misma curva, mismo escalón.
  */
+/** Escalón entre cajas — y el retraso del pulso de cada chip, para que se muevan juntos. */
+const ESCALON_S = 0.14;
+
 export async function VitrinaHome({ locale }: { locale: Locale }) {
   const t = await getTranslations("vitrinaHome");
   const frentes = getFrentes();
@@ -40,15 +44,23 @@ export async function VitrinaHome({ locale }: { locale: Locale }) {
             {t("linea")}
           </p>
         </Reveal>
-        <Stagger as="ul" className="grid gap-5 sm:grid-cols-2" stagger={0.14}>
-          {frentes.map((frente) => (
+        <Stagger
+          as="ul"
+          className="grid gap-5 sm:grid-cols-2"
+          stagger={ESCALON_S}
+        >
+          {frentes.map((frente, i) => (
             <StaggerItem
               key={frente.id}
               as="li"
               variant="fadeInSlow"
               className="list-none"
             >
-              <CajaFrente frente={frente} locale={locale} />
+              <CajaFrente
+                frente={frente}
+                locale={locale}
+                retrasoPulso={i * ESCALON_S}
+              />
             </StaggerItem>
           ))}
         </Stagger>

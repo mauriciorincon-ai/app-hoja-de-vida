@@ -2,7 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { Reveal } from "@/components/motion/reveal";
 import { Stagger, StaggerItem } from "@/components/motion/stagger";
 import type { Cv } from "@/lib/schemas";
-import { IconoDeFormacion } from "./icono-formacion";
+import { LogoDeFormacion } from "./logo-formacion";
 
 /**
  * Estudios (revisión post-S7): sección propia, entre la vitrina y las
@@ -61,7 +61,11 @@ export async function Estudios({ estudios }: { estudios: Cv["estudios"] }) {
                   </span>
                 </div>
                 <p className="flex items-center gap-1.5 font-mono text-[13px] text-ink-2">
-                  <IconoDeFormacion nombre={e.icono} />
+                  <LogoDeFormacion
+                    logo={e.logo}
+                    icono={e.icono}
+                    alto={e.logoAlto}
+                  />
                   {e.institucion}
                 </p>
                 {e.nota && (

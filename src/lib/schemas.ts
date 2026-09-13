@@ -14,6 +14,12 @@ export const ICONOS_FORMACION = [
   "codigo",
 ] as const;
 export type IconoFormacion = (typeof ICONOS_FORMACION)[number];
+/** Nombre de archivo bajo `public/logos/`: sin rutas, sin mayúsculas, svg o png. */
+export const ARCHIVO_LOGO = /^[a-z0-9-]+\.(svg|png)$/;
+/** Altura por defecto y cotas (px) de un logo de institución en las tarjetas. */
+export const LOGO_ALTO = 20;
+export const LOGO_ALTO_MIN = 12;
+export const LOGO_ALTO_MAX = 48;
 
 /**
  * Contratos del contenido versionado (data/*.yaml). El build FALLA si el
@@ -78,6 +84,18 @@ export const cvSchema = z.object({
         nota: z.string().default(""),
         // Revisión post-S8: icono monolínea de la institución, como dato.
         icono: z.enum(ICONOS_FORMACION).default("universidad"),
+        // Logo de la institución en `public/logos/` (post-S8). Si está, va en
+        // vez del icono; el test de contenido exige que el archivo exista.
+        logo: z.string().regex(ARCHIVO_LOGO).optional(),
+        // Altura del logo en px (post-S8, a pedido del dueño): un escudo cuadrado
+        // pesa menos que un logotipo ancho a la misma altura, así que la altura
+        // es dato. Acotada para que ningún logo sea cartel.
+        logoAlto: z
+          .number()
+          .int()
+          .min(LOGO_ALTO_MIN)
+          .max(LOGO_ALTO_MAX)
+          .default(LOGO_ALTO),
       }),
     )
     .default([]),
@@ -135,6 +153,13 @@ export const cvSchema = z.object({
           // que el dueño entregue los links de verificación
           verificacion: z.string().default(""),
           icono: z.enum(ICONOS_FORMACION).default("insignia"),
+          logo: z.string().regex(ARCHIVO_LOGO).optional(),
+          logoAlto: z
+            .number()
+            .int()
+            .min(LOGO_ALTO_MIN)
+            .max(LOGO_ALTO_MAX)
+            .default(LOGO_ALTO),
         })
         .refine((c) => c.estado === "en curso" || c.fecha.trim().length > 0, {
           message:

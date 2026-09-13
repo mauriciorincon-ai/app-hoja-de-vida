@@ -103,7 +103,7 @@ el mensaje te llega al correo.
 - **El tercer estado — «en curso» (revisión post-S8):** una certificación que estás preparando
   se lista con `estado: "en curso"` y **sin `fecha`** (una obtenida sin fecha rompe el build). La
   HOME la enseña con el chip «En curso» en el sitio de la fecha; `/cv` y el chat dicen «(en
-  curso)». Así entró el **AI-103**. El logro «5 certificaciones» sigue contando solo las
+  curso)». Así entraron el **AI-103** y el **DP-100**, en paralelo. El logro «5 certificaciones» sigue contando solo las
   obtenidas. **Y el gate vigila lo contrario:** cada vez que el titular, el perfil, un logro,
   `messages/` o `apps.yaml` nombran un código en curso, tienen que llevar «en curso» (o «en
   ruta», «en preparación», «in progress») a menos de 48 caracteres — «(AI-103)» a secas pone
@@ -111,11 +111,18 @@ el mensaje te llega al correo.
   fingir que se tiene, no.
 - **El barrido de credenciales mira también `messages/`** (post-S8): ahí sobrevivió AI-102 en la
   descripción SEO tres días después de su retiro, porque el test solo miraba `data/`.
-- **Iconos por dato (post-S8):** cada certificación y cada estudio puede llevar `icono:` con uno
-  de `universidad · idiomas · curso · insignia · datos · codigo` (Lucide, pequeño, solo líneas,
-  sin color). Un nombre fuera de la lista rompe el build. Los logos reales de Microsoft o IBM no
-  entran como icono: si un día quieres las insignias de Credly, van junto al enlace de
-  verificación, como imagen.
+- **Logos de las instituciones (post-S8, decisión del dueño):** cada certificación y cada
+  estudio puede llevar `logo:` con el nombre de un archivo de `public/logos/` (`javeriana.png`,
+  `british-council.svg`, `microsoft.svg`, `ibm.svg`). Se pinta pequeño y en gris junto al
+  nombre, a **20 px de alto salvo que `logoAlto:` diga otra cosa** (entre 12 y 48): un escudo
+  cuadrado a 20 px se ve la mitad que un logotipo ancho, así que la Javeriana va a 40, IBM a 16 y el British
+  Council, muy apaisado, a 14. **Un `logo:` cuyo archivo no exista pone rojo el test de contenido** nombrando el
+  estudio o la certificación. Para añadir uno: el archivo a `public/logos/` (SVG ligero o PNG
+  pequeño; el de la Javeriana es PNG porque su SVG pesa 150 KB), su procedencia y licencia a
+  `public/logos/LICENCIAS.md`, y el campo en el YAML.
+- **Iconos por dato, el respaldo:** si no hay `logo:`, la tarjeta pinta `icono:` con uno de
+  `universidad · idiomas · curso · insignia · datos · codigo` (Lucide, pequeño, solo líneas,
+  sin color). Un nombre fuera de la lista rompe el build.
 - **Links de verificación:** cuando tengas los links de Credly/Microsoft Learn, pégalos en
   el campo `verificacion:` de cada certificación — el botón "Verificar ↗" aparece solo.
 - **Skills, desde la revisión post-S7:** una tarjeta por grupo con un icono dibujado en casa

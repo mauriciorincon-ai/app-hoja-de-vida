@@ -1,41 +1,52 @@
 "use client";
 
-import { m, useReducedMotion } from "motion/react";
-import { EASE_IN_OUT_CUBIC } from "./easings";
+import { m, useReducedMotion, type Variants } from "motion/react";
+import { EASE_OUT_EXPO } from "./easings";
 
 /**
- * Un chip que «llama la atención» al aparecer (revisión post-S8), tal como lo
- * pidió el dueño a la tercera: **apenas aparece en pantalla crece al doble,
- * UNA sola vez, y vuelve a su tamaño**. Una curva simétrica ease-in-out-cubic
- * (0,9 s) — sobria, sin rebote, sin repetirse al volver a entrar. Crece desde
- * su borde derecho para no salirse de la caja. Es EL CONTENEDOR el que crece
- * (fondo, borde, texto), no el texto. Solo `transform`; con reduced motion no
- * hay props de animación y el cinturón CSS de `[data-motion]` neutraliza
- * cualquier estado inicial — la forma del árbol es la misma.
+ * Un chip que APARECE GRANDE Y SE ENCOGE a su tamaño al mismo tiempo que
+ * aparece su tarjeta (revisión post-S8). Empieza a 1,5× y baja a 1× con la
+ * MISMA duración y la MISMA curva que la entrada de la tarjeta (`fadeInSlow`:
+ * 1,2 s, ease-out-expo), y arranca con ella —el escalón de la caja llega en
+ * `retraso`—: un solo movimiento, no dos. Es EL CONTENEDOR el que se encoge
+ * (fondo, borde, texto), desde su borde derecho para no salirse.
+ *
+ * NO tiene disparador propio: hereda la variante `visible` de la tarjeta que
+ * lo contiene (`StaggerItem`). Como esa entrada se re-ejecuta cada vez que la
+ * sección vuelve a pantalla (`once: false`), esto también. El escalón del
+ * `Stagger` NO se hereda a los nietos —se midió: los cuatro chips arrancaban
+ * a la vez—, por eso el retraso de cada caja viaja como prop.
+ *
+ * Solo `transform`; con reduced motion no hay variantes y el cinturón CSS de
+ * `[data-motion]` neutraliza cualquier estado inicial — mismo árbol.
  */
+export const DURACION_PULSO_S = 1.2;
+export const ESCALA_INICIAL = 1.5;
+
 export function CifraQueLlama({
   children,
   className,
   title,
+  retraso = 0,
 }: {
   children: React.ReactNode;
   className?: string;
   title?: string;
+  /** Segundos de espera antes del pulso: el escalón de la tarjeta que lo contiene. */
+  retraso?: number;
 }) {
   const reduced = useReducedMotion();
-  const animProps = reduced
-    ? {}
-    : {
-        initial: { scale: 1 },
-        whileInView: { scale: [1, 2, 1] },
-        viewport: { once: true, amount: "some" as const },
-        transition: {
-          duration: 0.9,
-          times: [0, 0.5, 1],
-          ease: EASE_IN_OUT_CUBIC,
-          delay: 0.2,
-        },
-      };
+  const pulso: Variants = {
+    hidden: { scale: ESCALA_INICIAL },
+    visible: {
+      scale: 1,
+      transition: {
+        delay: retraso,
+        duration: DURACION_PULSO_S,
+        ease: EASE_OUT_EXPO,
+      },
+    },
+  };
   return (
     <m.span
       data-motion=""
@@ -46,7 +57,7 @@ export function CifraQueLlama({
         position: "relative",
         zIndex: 1,
       }}
-      {...animProps}
+      variants={reduced ? undefined : pulso}
     >
       {children}
     </m.span>

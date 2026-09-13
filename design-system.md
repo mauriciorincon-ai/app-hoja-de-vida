@@ -109,17 +109,17 @@ Easings (variables CSS): `--ease-out-expo (.16,1,.3,1)` · `--ease-out-cubic (.2
 
 Primitivas del motion system (`src/components/motion/`):
 
-| Primitiva       | Spec exacta                                                                                                                                                                                                                                                                    |
-| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `fadeInUp`      | 0.7s, ease-out-cubic, translateY(40px)→0, stagger 80ms                                                                                                                                                                                                                         |
-| `blurIn`        | 0.9s, ease-out-expo, blur(20px)+scale(1.05)→0                                                                                                                                                                                                                                  |
-| `maskReveal`    | 0.8s, ease-in-out-cubic, translateY(100%)→0 dentro de overflow-hidden                                                                                                                                                                                                          |
-| `scaleInBlur`   | scale(0.85)+blur(15px)→1 (cards)                                                                                                                                                                                                                                               |
-| `Counter`       | ease-out-cubic manual, ~1800ms, tabular-nums                                                                                                                                                                                                                                   |
-| `TimelineTrack` | rail SVG stroke-dashoffset 1.4s ease-out-expo; nodos scale(0)→1 ease-out-back sincronizados `800ms + x% × 1400ms`; cards ±32px                                                                                                                                                 |
-| `fadeInSlow`    | post-S8 — «leve, más marcada y lenta»: 1.2s, ease-out-expo, translateY(28px)+blur(8px)→0; escalón 140ms (Estudios, Certificaciones, cajas de la vitrina asomada)                                                                                                               |
-| `liftIn`        | post-S8 — la tarjeta aterriza: 1.0s, ease-out-expo, translateY(48px)+rotateX(8°, perspectiva 900)+scale(.96)+blur(12px)→0; escalón 120ms (Skills)                                                                                                                              |
-| `CifraQueLlama` | post-S8 — el CHIP entero (fondo, borde, texto) crece **al doble, una sola vez** al aparecer y vuelve: 0.9s ease-in-out-cubic simétrico, 0.2s de retraso, `once: true`, origen en su borde derecho para no salirse de la caja. Sin rebote. Solo transform (cuenta de productos) |
+| Primitiva       | Spec exacta                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `fadeInUp`      | 0.7s, ease-out-cubic, translateY(40px)→0, stagger 80ms                                                                                                                                                                                                                                                                                                                                                                                         |
+| `blurIn`        | 0.9s, ease-out-expo, blur(20px)+scale(1.05)→0                                                                                                                                                                                                                                                                                                                                                                                                  |
+| `maskReveal`    | 0.8s, ease-in-out-cubic, translateY(100%)→0 dentro de overflow-hidden                                                                                                                                                                                                                                                                                                                                                                          |
+| `scaleInBlur`   | scale(0.85)+blur(15px)→1 (cards)                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `Counter`       | ease-out-cubic manual, ~1800ms, tabular-nums                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `TimelineTrack` | rail SVG stroke-dashoffset 1.4s ease-out-expo; nodos scale(0)→1 ease-out-back sincronizados `800ms + x% × 1400ms`; cards ±32px                                                                                                                                                                                                                                                                                                                 |
+| `fadeInSlow`    | post-S8 — «leve, más marcada y lenta»: 1.2s, ease-out-expo, translateY(28px)+blur(8px)→0; escalón 140ms (Estudios, Certificaciones, cajas de la vitrina asomada)                                                                                                                                                                                                                                                                               |
+| `liftIn`        | post-S8 — la tarjeta aterriza: 1.4s, ease-in-out-cubic, translateY(70px)+rotateX(14°, perspectiva 900)+scale(.94)+blur(12px)→0; escalón 120ms (Skills)                                                                                                                                                                                                                                                                                         |
+| `CifraQueLlama` | post-S8 — el CHIP entero (fondo, borde, texto) **aparece a 1.5× y se encoge a 1×** con la entrada de su tarjeta: misma duración y misma curva que `fadeInSlow` (1.2s, ease-out-expo), mismo escalón (viaja como prop `retraso`, porque el `staggerChildren` del `Stagger` no llega a los nietos — medido), origen en su borde derecho; se repite en cada pasada como toda entrada. Sin disparador propio. Solo transform (cuenta de productos) |
 
 `Stagger` acepta `stagger` (segundos entre hermanos; default 80ms) y `as` (`div` · `ul` · `li`) desde post-S8:
 las cajas de la vitrina se escalonan dentro de un `<ul>` real, y un `div` entre `ul` y `li` es HTML inválido.
@@ -168,16 +168,31 @@ animaciones infinitas (sweep/glitch/marquee), scroll-snap de deck, CDNs en `<hea
   escalonado. El trazo del icono se dibuja al llegar la tarjeta (`pathLength` 0→1, en cascada de
   130 ms por figura) heredando las variantes del `Stagger`; el estado por defecto es el icono
   dibujado. **Prohibido:** barras o porcentajes de dominio. **Coreografía post-S8, tres capas:**
-  la tarjeta **aterriza** (`liftIn`, escalón 120 ms) → el trazo empieza cuando ya aterrizó (0,35 s)
-  → los chips caen en cascada rápida (`scaleInBlur`, 45 ms, tras 0,4 s). Solo
+  la tarjeta **aterriza vacía** (`liftIn`, escalón 200 ms) → a los 0,8 s, cuando ya se ve,
+  aparece la cabecera (`fadeInUp`) y el trazo del icono se dibuja (1,0 s) → los chips caen uno a
+  uno detrás (`scaleInBlur`, 100 ms). Cada tarjeta corre la partitura desplazada por su escalón:
+  la orquesta la propia tarjeta (`hijos` en `StaggerItem` = `delayChildren` + `staggerChildren`).
+  Segunda vuelta del dueño: la primera versión (1 s ease-out-expo, chips a 45 ms) resolvía el
+  87 % del viaje en 300 ms y se leía como un fundido más; el in-out y los tres momentos separados
+  son lo que hace que se VEA. **Regla de motion que nació aquí:** dentro de un árbol de
+  variantes, un ítem con `transition.delay` propio o un `Stagger` anidado con su disparador se
+  congelan al nacer (medido); el escalón de los nietos se orquesta desde el padre. Solo
   transform/opacity/filter; con reducción de movimiento, todo quieto.
 - **Tarjeta de estudio**: como la de certificación (`r-md`, borde `paper-3`, `sh-1`), título en
   Fraunces `xl`, institución en mono, periodo en mono `ink-2` — y **sin fecha, «Sin fecha
   declarada» en cursiva `ink-2`**, nunca `ink-3` (2.7:1; axe lo cazó otra vez). **Post-S8:** entra
-  con `fadeInSlow` (escalón 140 ms) y lleva el **icono de la institución** delante de su nombre —
-  Lucide 16 px, trazo 1.5, `ink-2`, sin color, **por dato** (`icono:` en el YAML, enum
-  `universidad · idiomas · curso · insignia · datos · codigo`). Nunca un logo de marca ajena.
-- **Tarjeta de certificación**: mismo `fadeInSlow`, mismo icono por dato delante del nombre. Y el
+  con `fadeInSlow` (escalón 140 ms) y lleva el **logo de la institución** delante de su nombre —
+  `grayscale` + `opacity-80`, decorativo (`alt=""`), **por dato** (`logo:` en el
+  YAML → archivo de `public/logos/`, con procedencia y licencia en `LICENCIAS.md`). **La altura
+  también es dato** (`logoAlto:`, 20 px por defecto, cotas 12–48): la masa visual de un logo
+  depende de su proporción, no de su altura — el escudo cuadrado de la Javeriana va a 40 px para
+  pesar al menos lo que las ocho barras de IBM a 20, y el logotipo apaisado del British Council
+  baja a 14 para no dominar la línea. Sin `logo:`,
+  cae al **icono monolínea** por `icono:` (Lucide 16 px, trazo 1.5, `ink-2`, enum
+  `universidad · idiomas · curso · insignia · datos · codigo`). Decisión del dueño post-S8: el
+  primer corte traía solo iconos por no meter marcas ajenas; él quiso los logos, y entran en gris
+  y pequeños para que sean seña y no cartel.
+- **Tarjeta de certificación**: mismo `fadeInSlow`, mismo logo (o icono) por dato delante del nombre. Y el
   **tercer estado**: una credencial `en curso` lleva un chip `citron`/`citron-ink` mono 11 px
   «En curso» **en el sitio de la fecha** — el mismo chip de «en preparación» de la vitrina — y no
   puede nombrarse en ningún titular sin esas palabras al lado (gate de contenido).
@@ -185,7 +200,7 @@ animaciones infinitas (sweep/glitch/marquee), scroll-snap de deck, CDNs en `<hea
   «Explora el portafolio» (post-S8; antes «Entrar a la vitrina»). La HOME enseña la vitrina, no la
   copia. **Post-S8:** la sección se titula «Vitrina», las cuatro cajas aparecen levemente una a
   una (`fadeInSlow` dentro de un `<ul>` escalonado, 140 ms), la cifra de **productos** —ya no
-  «piezas», en todo el copy visible— crece al doble una sola vez al aparecer y vuelve, como chip entero y sin rebote (`CifraQueLlama`), y el cierre de
+  «piezas», en todo el copy visible— aparece a 1.5× y se encoge a su tamaño con la entrada de su caja —misma duración, misma curva, mismo escalón— en cada pasada, como chip entero y sin rebote (`CifraQueLlama`), y el cierre de
   cada caja dice «Explora».
 - **Roadmap embebido**: dentro de `/vitrina/apps` va como bloque con `border-t paper-2` y título
   `2xl` (no el `clamp` de sección de HOME). Misma isla de votación.

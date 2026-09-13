@@ -14,22 +14,23 @@ identidad:
   # Revisión post-S8 (2026-09-12): AI-103 se nombra CON «en curso» (gate de
   # contenido) y el cierre invita en vez de retar (decisión del dueño).
   resumen: >-
-    Líder de datos e ingeniero de IA (AI-103, en curso) · Analytics Engineer
-    (DP-600). Diseño plataformas analíticas en Microsoft Fabric y llevo
+    Líder de datos e ingeniero de IA (AI-103 y DP-100, en curso) · Analytics
+    Engineer (DP-600). Diseño plataformas analíticas en Microsoft Fabric y llevo
     agentes de IA a producción — y esta hoja de vida es la muestra: recórrela
     y pregúntale.
   # Frase del chat (pack §3) restituida en S3: el chat ya es real
   # Revisión post-S8: sin cifras — los logros tienen su sección — y con lo que
   # el dueño hace HOY (estrategia de IA e ISO/IEC 42001).
   perfil: >-
-    Ingeniero Industrial (Javeriana) con más de ocho años convirtiendo datos
+    Ingeniero Industrial (Javeriana) con diez años convirtiendo datos
     operativos en decisiones de negocio, en banca, transporte, logística y
     salud. Hoy lidero la adopción y el gobierno de la IA: la estrategia y la
     implementación de ISO/IEC 42001. Antes diseñé desde cero la estrategia y la
     plataforma de datos de una startup de agentes de IA —Microsoft Fabric y un
     proceso replicable para diseñar y monitorear agentes— y construí BI y
     analítica predictiva en banca. Certificado por Microsoft como Fabric
-    Analytics Engineer (DP-600), en ruta al AI-103. ¿Quieres saber algo más?
+    Analytics Engineer (DP-600), en ruta al AI-103 y al DP-100. ¿Quieres saber
+    algo más?
     Pregúntaselo al chat de esta hoja de vida.
   # La disponibilidad de reubicación es señal DELIBERADA para recruiters (pack §1)
   ubicacion: "Bogotá, Colombia · Abierto a reubicación internacional y trabajo remoto"
@@ -146,16 +147,22 @@ estudios:
     institucion: "Pontificia Universidad Javeriana · Bogotá"
     periodo: "2009 — 2016"
     icono: universidad
+    logo: javeriana.png
+    logoAlto: 40
     nota: "Optimización de procesos, análisis de datos y soporte a la toma de decisiones, integrando principios de ingeniería con analítica avanzada. Modelado y predicción de fenómenos industriales con SQL, Python y Power BI."
   - titulo: "Estudios de pregrado en Diseño Industrial"
     institucion: "Pontificia Universidad Javeriana · Bogotá"
     periodo: "2011 — 2016"
     icono: universidad
+    logo: javeriana.png
+    logoAlto: 40
     nota: "Diseño de productos y sistemas con enfoque tecnológico y de mercado, con foco en sostenibilidad ambiental e impacto cultural."
   - titulo: "Curso intensivo de inglés y certificación IELTS"
     institucion: "Cambridge International College · Melbourne, Australia"
     periodo: "2013 — 2014"
     icono: idiomas
+    logo: british-council.svg
+    logoAlto: 14
     nota: "Inglés B2: lectura, escucha y redacción técnica; discusiones profesionales e informes analíticos."
 
 logros:
@@ -323,6 +330,7 @@ certificaciones:
     nota: "La que respalda mi trayectoria: ingeniería de datos y analítica end-to-end."
     verificacion: ""
     icono: insignia
+    logo: microsoft.svg
   # Revisión post-S8 (2026-09-12): el AI-103 entra como credencial EN CURSO
   # (decisión del dueño: «me gusta la sinceridad»). Sin fecha, con chip; el
   # logro «5 certificaciones» sigue contando solo las obtenidas.
@@ -330,18 +338,33 @@ certificaciones:
     estado: "en curso"
     nota: "En preparación: la ruta de ingeniería de IA en Azure."
     icono: insignia
+    logo: microsoft.svg
+  # 2026-09-12: el DP-100 va en paralelo al AI-103, también EN CURSO.
+  - nombre: "Microsoft Certified: Azure Data Scientist Associate (DP-100)"
+    estado: "en curso"
+    nota: "En preparación, en paralelo al AI-103: ciencia de datos y aprendizaje automático en Azure."
+    icono: insignia
+    logo: microsoft.svg
   - nombre: "IBM: Ciencia de Datos Aplicada con R"
     fecha: "2024"
     icono: datos
+    logo: ibm.svg
+    logoAlto: 16
   - nombre: "IBM: Certificado Profesional en Ciencia de Datos"
     fecha: "2022"
     icono: datos
+    logo: ibm.svg
+    logoAlto: 16
   - nombre: "IBM: Python para Ciencia de Datos"
     fecha: "2022"
     icono: codigo
+    logo: ibm.svg
+    logoAlto: 16
   - nombre: "IBM: SQL para Ciencia de Datos"
     fecha: "2022"
     icono: codigo
+    logo: ibm.svg
+    logoAlto: 16
 
 skills:
   - grupo: "IA & ML"

@@ -70,9 +70,12 @@ const PUNTO = <circle cx="12" cy="12" r="3" />;
 export async function CajaFrente({
   frente,
   locale,
+  retrasoPulso = 0,
 }: {
   frente: Frente;
   locale: Locale;
+  /** Escalón de entrada de esta caja (s): el pulso del chip arranca con ella. */
+  retrasoPulso?: number;
 }) {
   const t = await getTranslations("vitrina");
   const abierta = frente.estado === "abierta";
@@ -105,6 +108,7 @@ export async function CajaFrente({
         {/* El chip ENTERO crece y vuelve al asomar (no solo su texto). */}
         {abierta ? (
           <CifraQueLlama
+            retraso={retrasoPulso}
             title={t("frenteEstadoAyuda.abierta")}
             className="inline-block rounded-full bg-sage px-2.5 py-1 font-mono text-[11px] tracking-[0.02em] text-sage-ink uppercase"
           >

@@ -1,7 +1,17 @@
 "use client";
 
-import { m, useReducedMotion, type Variants } from "motion/react";
-import { EASE_OUT_CUBIC, EASE_OUT_EXPO, STAGGER_S } from "./easings";
+import {
+  m,
+  useReducedMotion,
+  type TargetAndTransition,
+  type Variants,
+} from "motion/react";
+import {
+  EASE_IN_OUT_CUBIC,
+  EASE_OUT_CUBIC,
+  EASE_OUT_EXPO,
+  STAGGER_S,
+} from "./easings";
 
 /**
  * Contenedor de entradas escalonadas (spec: stagger 80ms entre hermanos).
@@ -88,15 +98,18 @@ const itemVariants: Record<StaggerVariant, Variants> = {
       transition: { duration: 1.2, ease: EASE_OUT_EXPO },
     },
   },
-  // Post-S8 — la tarjeta de Skills «aterriza»: sube 48 px con una inclinación
-  // de 8° en perspectiva, escala 0,96 → 1 y desenfoque 12 px → 0, en 1 s
-  // ease-out-expo. Solo transform/opacity/filter; nada ligado al scroll.
+  // Post-S8 — la tarjeta de Skills «aterriza»: sube 70 px con una inclinación
+  // de 14° en perspectiva, escala 0,94 → 1 y desenfoque 12 px → 0, en 1,4 s
+  // ease-in-out. Segunda vuelta del dueño («no lo veo»): la versión de 1 s
+  // con ease-out-expo resolvía el 87 % del recorrido en 300 ms y el ojo leía
+  // «apareció», no «aterrizó». El in-out arranca lento y deja ver el viaje.
+  // Solo transform/opacity/filter; nada ligado al scroll.
   liftIn: {
     hidden: {
       opacity: 0,
-      y: 48,
-      scale: 0.96,
-      rotateX: 8,
+      y: 70,
+      scale: 0.94,
+      rotateX: 14,
       filter: "blur(12px)",
       transformPerspective: 900,
     },
@@ -107,21 +120,67 @@ const itemVariants: Record<StaggerVariant, Variants> = {
       rotateX: 0,
       filter: "blur(0px)",
       transformPerspective: 900,
-      transition: { duration: 1.0, ease: EASE_OUT_EXPO },
+      transition: { duration: 1.4, ease: EASE_IN_OUT_CUBIC },
     },
   },
 };
+
+/**
+ * Un ítem que ORQUESTA a los ítems que contiene (post-S8, Skills). Hallazgo
+ * medido con Playwright en cinco experimentos (bitácora post-S8, fila 19):
+ * dentro de un árbol de variantes que se propaga desde un `whileInView`, un
+ * ítem con `transition.delay` PROPIO se congela al nacer (a 0,72 de opacidad
+ * el uno, a 0,87 el otro, para siempre; con el driver JS ni arranca), y un
+ * `Stagger` anidado con su propio disparador corre la misma suerte. Lo que sí
+ * llega a los nietos es el escalón que el padre REENVÍA: `delayChildren` y
+ * `staggerChildren` en la transición del ítem padre, que motion propaga por
+ * contexto aunque haya `<div>` planos en medio. Las variantes se memorizan
+ * por clave para que su identidad sea estable entre renders.
+ */
+const memoVariantes = new Map<string, Variants>();
+function conOrquesta(
+  variant: StaggerVariant,
+  hijos?: { delay: number; escalon: number },
+): Variants {
+  const v = itemVariants[variant];
+  if (!hijos) return v;
+  const clave = `${variant}:${hijos.delay}:${hijos.escalon}`;
+  let out = memoVariantes.get(clave);
+  if (!out) {
+    const visible = v.visible as TargetAndTransition;
+    out = {
+      hidden: v.hidden,
+      visible: {
+        ...visible,
+        transition: {
+          ...visible.transition,
+          delayChildren: hijos.delay,
+          staggerChildren: hijos.escalon,
+        },
+      },
+    };
+    memoVariantes.set(clave, out);
+  }
+  return out;
+}
 
 export function StaggerItem({
   children,
   className,
   variant = "fadeInUp",
   as = "div",
+  hijos,
 }: {
   children: React.ReactNode;
   className?: string;
   variant?: StaggerVariant;
   as?: Etiqueta;
+  /**
+   * Orquestación de los ítems que este ítem contiene (post-S8, Skills): sus
+   * hijos con variantes arrancan `delay` segundos después que él y con
+   * `escalon` segundos entre ellos — aunque haya `<div>` planos en medio.
+   */
+  hijos?: { delay: number; escalon: number };
 }) {
   const reduced = useReducedMotion();
   const Tag = as === "ul" ? m.ul : as === "li" ? m.li : m.div;
@@ -130,7 +189,7 @@ export function StaggerItem({
     <Tag
       data-motion=""
       className={className}
-      variants={reduced ? undefined : itemVariants[variant]}
+      variants={reduced ? undefined : conOrquesta(variant, hijos)}
     >
       {children}
     </Tag>

@@ -2,7 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { Reveal } from "@/components/motion/reveal";
 import { Stagger, StaggerItem } from "@/components/motion/stagger";
 import type { Cv } from "@/lib/schemas";
-import { IconoDeFormacion } from "./icono-formacion";
+import { LogoDeFormacion } from "./logo-formacion";
 
 /**
  * Certificaciones (content pack §6): la de Microsoft (DP-600) lleva nota
@@ -48,10 +48,11 @@ export async function Certificaciones({
                 }`}
               >
                 <div className="flex items-start justify-between gap-4">
-                  <h3 className="flex items-start gap-2 text-base leading-snug font-semibold text-ink-0">
-                    <IconoDeFormacion
-                      nombre={cert.icono}
-                      className="mt-[3px] shrink-0 text-ink-2"
+                  <h3 className="flex items-center gap-2 text-base leading-snug font-semibold text-ink-0">
+                    <LogoDeFormacion
+                      logo={cert.logo}
+                      icono={cert.icono}
+                      alto={cert.logoAlto}
                     />
                     {cert.nombre}
                   </h3>

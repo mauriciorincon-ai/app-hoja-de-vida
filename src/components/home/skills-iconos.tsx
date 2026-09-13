@@ -48,15 +48,28 @@ const DIBUJOS: React.ReactElement[][] = [
 ];
 const ROMBO = [<path key="a" d="M12 3l9 9-9 9-9-9z" />];
 
+/**
+ * La partitura de una tarjeta de Skills (post-S8, segunda vuelta), en segundos
+ * desde que la tarjeta arranca. Cada tarjeta corre la suya desplazada
+ * `ESCALON_SKILLS_S × i`: aterriza vacía (1,4 s) → a los 0,8 s la cabecera y,
+ * 0,2 s después, el trazo → los chips, uno cada 0,1 s, detrás de la cabecera.
+ * La cabecera y los chips los orquesta la tarjeta (`hijos`); el trazo lleva su
+ * retraso propio porque el `path` no es hijo directo de nadie con escalón.
+ */
+export const ESCALON_SKILLS_S = 0.2;
+export const RETRASO_CABECERA_S = 0.8;
+export const RETRASO_TRAZO_S = 1.0;
+export const ESCALON_CHIP_S = 0.1;
+
 const trazo: Variants = {
   hidden: { pathLength: 0, opacity: 0.4 },
   visible: (i: number) => ({
     pathLength: 1,
     opacity: 1,
-    // Post-S8: el trazo empieza cuando la tarjeta ya aterrizó (liftIn, 1 s).
+    // El trazo arranca cuando la cabecera ya se ve (0,8 s + su fundido).
     transition: {
       duration: 0.75,
-      delay: 0.35 + i * 0.13,
+      delay: RETRASO_TRAZO_S + i * ESCALON_SKILLS_S,
       ease: EASE_OUT_CUBIC,
     },
   }),

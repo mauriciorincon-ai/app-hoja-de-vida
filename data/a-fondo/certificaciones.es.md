@@ -75,6 +75,17 @@ una pieza de mi propio pipeline. Es un agente que exige que cada afirmación ped
 fuente oficial con su fecha, y que no considera válida una ruta de estudio hasta que un mapa
 demuestre que cubre el temario en proporción a los pesos oficiales del examen.
 
+## El DP-100, en paralelo
+
+<!-- seccion: el-dp-100 -->
+
+**Microsoft Certified: Azure Data Scientist Associate — DP-100. EN CURSO.** La llevo en paralelo
+al AI-103, y las dos se complementan: el AI-103 es llevar modelos y agentes a producción en Azure;
+el DP-100 es entrenarlos, evaluarlos y operarlos con Azure Machine Learning — el tramo de ciencia
+de datos que las de IBM abrieron en 2022, ahora sobre la plataforma donde trabajo.
+
+[CONFIRMAR — ¿desde cuándo, qué módulos llevas y cuál de las dos piensas presentar primero?]
+
 ## Las cuatro de IBM: la base de ciencia de datos
 
 <!-- seccion: las-de-ibm -->
@@ -102,8 +113,8 @@ la estadística es ciudadana de primera clase.
 
 Vistas juntas, las certificaciones dibujan el mismo arco que mi trayectoria. Las de IBM cubren el
 análisis y el modelo: qué se puede aprender de un conjunto de datos. El DP-600 cubre la plataforma:
-dónde viven esos datos, cómo se gobiernan y cómo llegan a una decisión. Y la ruta del AI-103 cubre
-el tercer tramo: cómo se lleva un modelo o un agente a producción.
+dónde viven esos datos, cómo se gobiernan y cómo llegan a una decisión. Y las rutas del AI-103 y del DP-100
+cubren el tercer tramo: cómo se entrena, se lleva a producción y se opera un modelo o un agente.
 
 Es también por qué no me certifico en todo lo que se cruza. Una certificación me interesa cuando
 cierra un tramo que ya estoy recorriendo con las manos, no cuando abre uno que no pienso recorrer.
@@ -113,7 +124,7 @@ cierra un tramo que ya estoy recorriendo con las manos, no cuando abre uno que n
 <!-- seccion: el-ritmo -->
 
 Tres certificaciones en 2022, una en 2024 y el DP-600 ese mismo año, todo mientras trabajaba a
-tiempo completo. El DP-600 en cinco meses. La ruta del AI-103, abierta.
+tiempo completo. El DP-600 en cinco meses. Las rutas del AI-103 y del DP-100, abiertas en paralelo.
 
 Ese ritmo es el argumento de fondo, y por eso tiene un documento propio en esta base: lo que
 distingue mi perfil no es la lista de lo que sé hoy, es la velocidad con que incorporo lo que
