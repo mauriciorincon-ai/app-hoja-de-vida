@@ -2,7 +2,12 @@ import { getTranslations } from "next-intl/server";
 import { Reveal } from "@/components/motion/reveal";
 import { Stagger, StaggerItem } from "@/components/motion/stagger";
 import type { Cv } from "@/lib/schemas";
-import { IconoSkill } from "./skills-iconos";
+import {
+  ESCALON_CHIP_S,
+  ESCALON_SKILLS_S,
+  IconoSkill,
+  RETRASO_CABECERA_S,
+} from "./skills-iconos";
 
 /**
  * Skills (revisión post-S7): una tarjeta por grupo, con su icono dibujado en
@@ -13,11 +18,18 @@ import { IconoSkill } from "./skills-iconos";
  * 80 % de Python no significa nada y nadie lo puede medir; lo que aparece es
  * lo que se sabe hacer, y la trayectoria es la prueba.
  *
- * Revisión post-S8 — «más impactante, pero elegante»: tres capas. La tarjeta
- * ATERRIZA (`liftIn`: sube con 8° de perspectiva, escala y desenfoque, 1 s,
- * 120 ms de escalón entre tarjetas) → el trazo del icono se dibuja cuando ya
- * aterrizó (0,35 s) → los chips entran en cascada rápida (45 ms). Todo
- * transform/opacity/filter; con reducción de movimiento, quieto.
+ * Revisión post-S8 — «más impactante, pero elegante», segunda vuelta («no lo
+ * veo»): tres momentos que se DISTINGUEN, no tres capas que se pisan. La
+ * tarjeta ATERRIZA VACÍA (`liftIn`: 70 px, 14° de perspectiva, 1,4 s
+ * ease-in-out, 200 ms de escalón) → a los 0,8 s, cuando ya se ve, aparece la
+ * cabecera (icono y título) y el trazo del icono se dibuja → los chips caen
+ * uno a uno detrás, con 100 ms entre ellos, que es un escalón que el ojo
+ * separa. La partitura interna la orquesta LA TARJETA (`hijos` en su
+ * `StaggerItem`: `delayChildren` + `staggerChildren`), y así cada tarjeta
+ * arrastra a los suyos con su propio escalón — la cuarta no recibe sus chips
+ * antes de aterrizar. No es un `Stagger` anidado ni un `delay` por ítem: las
+ * dos cosas congelan al nieto (ver `StaggerItem`). Todo transform/opacity/
+ * filter; con reducción de movimiento, quieto.
  */
 export async function Skills({ skills }: { skills: Cv["skills"] }) {
   const tNav = await getTranslations("nav");
@@ -42,24 +54,31 @@ export async function Skills({ skills }: { skills: Cv["skills"] }) {
             {t("linea")}
           </p>
         </Reveal>
-        <Stagger className="grid gap-5 md:grid-cols-2" stagger={0.12}>
+        <Stagger
+          className="grid gap-5 md:grid-cols-2"
+          stagger={ESCALON_SKILLS_S}
+        >
           {skills.map((grupo, i) => (
-            <StaggerItem key={grupo.grupo} variant="liftIn" className="h-full">
+            <StaggerItem
+              key={grupo.grupo}
+              variant="liftIn"
+              className="h-full"
+              hijos={{ delay: RETRASO_CABECERA_S, escalon: ESCALON_CHIP_S }}
+            >
               <article
                 data-skill-grupo={i}
                 className="skill-tarjeta flex h-full flex-col gap-5 rounded-[14px] border border-paper-2 bg-paper-0 p-6 shadow-sh-1 transition-[box-shadow,transform] duration-[180ms] ease-[var(--ease-out-cubic)] hover:-translate-y-0.5 hover:shadow-sh-2"
               >
-                <div className="flex items-center gap-4">
+                <StaggerItem
+                  variant="fadeInUp"
+                  className="flex items-center gap-4"
+                >
                   <IconoSkill indice={i} />
                   <h3 className="font-display text-[1.35rem] leading-tight font-medium tracking-[-0.015em] text-ink-0">
                     {grupo.grupo}
                   </h3>
-                </div>
-                <Stagger
-                  className="flex flex-wrap gap-2"
-                  delay={0.4}
-                  stagger={0.045}
-                >
+                </StaggerItem>
+                <div className="flex flex-wrap gap-2">
                   {grupo.items.map((item) => (
                     <StaggerItem key={item} variant="scaleInBlur">
                       <span className="inline-flex min-h-8 items-center rounded-full border border-paper-3 bg-paper-1 px-3 py-1 text-[14px] text-ink-1">
@@ -67,7 +86,7 @@ export async function Skills({ skills }: { skills: Cv["skills"] }) {
                       </span>
                     </StaggerItem>
                   ))}
-                </Stagger>
+                </div>
               </article>
             </StaggerItem>
           ))}

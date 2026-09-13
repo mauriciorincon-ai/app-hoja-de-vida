@@ -118,7 +118,7 @@ Primitivas del motion system (`src/components/motion/`):
 | `Counter`       | ease-out-cubic manual, ~1800ms, tabular-nums                                                                                                                                                                                                                                                                                                                                                                                                   |
 | `TimelineTrack` | rail SVG stroke-dashoffset 1.4s ease-out-expo; nodos scale(0)→1 ease-out-back sincronizados `800ms + x% × 1400ms`; cards ±32px                                                                                                                                                                                                                                                                                                                 |
 | `fadeInSlow`    | post-S8 — «leve, más marcada y lenta»: 1.2s, ease-out-expo, translateY(28px)+blur(8px)→0; escalón 140ms (Estudios, Certificaciones, cajas de la vitrina asomada)                                                                                                                                                                                                                                                                               |
-| `liftIn`        | post-S8 — la tarjeta aterriza: 1.0s, ease-out-expo, translateY(48px)+rotateX(8°, perspectiva 900)+scale(.96)+blur(12px)→0; escalón 120ms (Skills)                                                                                                                                                                                                                                                                                              |
+| `liftIn`        | post-S8 — la tarjeta aterriza: 1.4s, ease-in-out-cubic, translateY(70px)+rotateX(14°, perspectiva 900)+scale(.94)+blur(12px)→0; escalón 120ms (Skills)                                                                                                                                                                                                                                                                                         |
 | `CifraQueLlama` | post-S8 — el CHIP entero (fondo, borde, texto) **aparece a 1.5× y se encoge a 1×** con la entrada de su tarjeta: misma duración y misma curva que `fadeInSlow` (1.2s, ease-out-expo), mismo escalón (viaja como prop `retraso`, porque el `staggerChildren` del `Stagger` no llega a los nietos — medido), origen en su borde derecho; se repite en cada pasada como toda entrada. Sin disparador propio. Solo transform (cuenta de productos) |
 
 `Stagger` acepta `stagger` (segundos entre hermanos; default 80ms) y `as` (`div` · `ul` · `li`) desde post-S8:
@@ -168,8 +168,15 @@ animaciones infinitas (sweep/glitch/marquee), scroll-snap de deck, CDNs en `<hea
   escalonado. El trazo del icono se dibuja al llegar la tarjeta (`pathLength` 0→1, en cascada de
   130 ms por figura) heredando las variantes del `Stagger`; el estado por defecto es el icono
   dibujado. **Prohibido:** barras o porcentajes de dominio. **Coreografía post-S8, tres capas:**
-  la tarjeta **aterriza** (`liftIn`, escalón 120 ms) → el trazo empieza cuando ya aterrizó (0,35 s)
-  → los chips caen en cascada rápida (`scaleInBlur`, 45 ms, tras 0,4 s). Solo
+  la tarjeta **aterriza vacía** (`liftIn`, escalón 200 ms) → a los 0,8 s, cuando ya se ve,
+  aparece la cabecera (`fadeInUp`) y el trazo del icono se dibuja (1,0 s) → los chips caen uno a
+  uno detrás (`scaleInBlur`, 100 ms). Cada tarjeta corre la partitura desplazada por su escalón:
+  la orquesta la propia tarjeta (`hijos` en `StaggerItem` = `delayChildren` + `staggerChildren`).
+  Segunda vuelta del dueño: la primera versión (1 s ease-out-expo, chips a 45 ms) resolvía el
+  87 % del viaje en 300 ms y se leía como un fundido más; el in-out y los tres momentos separados
+  son lo que hace que se VEA. **Regla de motion que nació aquí:** dentro de un árbol de
+  variantes, un ítem con `transition.delay` propio o un `Stagger` anidado con su disparador se
+  congelan al nacer (medido); el escalón de los nietos se orquesta desde el padre. Solo
   transform/opacity/filter; con reducción de movimiento, todo quieto.
 - **Tarjeta de estudio**: como la de certificación (`r-md`, borde `paper-3`, `sh-1`), título en
   Fraunces `xl`, institución en mono, periodo en mono `ink-2` — y **sin fecha, «Sin fecha

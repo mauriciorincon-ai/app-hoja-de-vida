@@ -33,7 +33,7 @@ export function LogoDeFormacion({
       unoptimized
       data-logo={logo}
       data-logo-alto={alto}
-      style={{ height: alto, maxWidth: alto * 5 }}
+      style={{ height: alto, width: "auto", maxWidth: alto * 5 }}
       className="w-auto shrink-0 opacity-80 grayscale"
     />
   );
