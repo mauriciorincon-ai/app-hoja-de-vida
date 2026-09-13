@@ -38,6 +38,7 @@ const LABELS = {
     formacion: "FORMACIÓN",
     enCurso: "en curso",
     masEnMiSitio: "Más en mi sitio:",
+    masEnMiSitioWeb: "Más en mi sitio web.",
     cierreChat: /\s*¿Quieres saber algo más\?[^.]*\./,
     archivo: "Henry-Rincon-CV-ES.pdf",
     titulo: "CV — Henry Rincón (ES)",
@@ -51,6 +52,7 @@ const LABELS = {
     formacion: "EDUCATION",
     enCurso: "in progress",
     masEnMiSitio: "More on my site:",
+    masEnMiSitioWeb: "More on my website.",
     cierreChat: /\s*Want to know anything else\?[^.]*\./,
     archivo: "Henry-Rincon-CV-EN.pdf",
     titulo: "CV — Henry Rincón (EN)",
@@ -118,15 +120,15 @@ export function lineaDeContacto(identidad, sitio) {
 
 /**
  * El perfil, para el PDF: la web cierra con «¿Quieres saber algo más?
- * Pregúntaselo al chat…», y en papel no hay chat. Con dominio conocido, esa
- * frase se vuelve «Más en mi sitio: dominio» (el dueño quiso ese espacio para
- * su página); sin dominio, la frase simplemente no va.
+ * Pregúntaselo al chat…», y en papel no hay chat. El dueño quiso ese espacio
+ * para anunciar su página: con dominio conocido, «Más en mi sitio: dominio»;
+ * sin dominio todavía, «Más en mi sitio web.» — el anuncio va siempre.
  */
 export function perfilParaPdf(perfil, labels, destacado) {
   const sinChat = String(perfil).replace(labels.cierreChat, "").trimEnd();
   return destacado
     ? `${sinChat} ${labels.masEnMiSitio} ${destacado}.`
-    : sinChat;
+    : `${sinChat} ${labels.masEnMiSitioWeb}`;
 }
 
 /**

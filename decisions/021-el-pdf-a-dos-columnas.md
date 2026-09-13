@@ -22,7 +22,9 @@ hoja «muy, muy explícito».
    por `NEXT_PUBLIC_SITE_URL`.** Regla 16 intacta: el dominio no se escribe en ningún archivo del
    repo. En local o sin variable la cabecera sale sin él. Gates: unit sobre `lineaDeContacto` e
    integración generando el PDF con la variable puesta.
-4. Una certificación `en curso` imprime «(en curso)» / «(in progress)» en vez de fecha (el corte
+4. El cierre del perfil anuncia el sitio SIEMPRE: «Más en mi sitio: dominio» con dominio, «Más en mi
+   sitio web.» sin él (la frase del chat de la web no viaja al papel).
+5. Una certificación `en curso` imprime «(en curso)» / «(in progress)» en vez de fecha (el corte
    anterior dejaba un paréntesis vacío).
 
 ## Consecuencias

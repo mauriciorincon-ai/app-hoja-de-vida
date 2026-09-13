@@ -101,6 +101,10 @@ describe("PDF ATS generado en build desde los YAML", () => {
     // Y el perfil cierra con el sitio en vez de con el chat.
     expect(text).toMatch(/Más en mi sitio:\s*ejemplo\.test/);
     expect(text).not.toMatch(/Pregúntaselo\s+al\s+chat/);
+    // Sin dominio, el anuncio va igual, sin dominio inventado.
+    expect(await extractText(files.es)).toMatch(/Más en mi sitio web\./);
+    // Sin dominio, el anuncio va igual, sin dominio inventado.
+    expect(await extractText(files.es)).toMatch(/Más en mi sitio web\./);
     // Y sin la variable (los PDFs de `files`), no hay dominio inventado.
     expect(await extractText(files.es)).not.toContain("ejemplo.test");
   });

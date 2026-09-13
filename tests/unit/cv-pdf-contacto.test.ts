@@ -40,6 +40,7 @@ describe("lineaDeContacto del PDF", () => {
 describe("perfilParaPdf: el cierre del chat se vuelve el sitio", () => {
   const labels = {
     masEnMiSitio: "Más en mi sitio:",
+    masEnMiSitioWeb: "Más en mi sitio web.",
     cierreChat: /\s*¿Quieres saber algo más\?[^.]*\./,
   };
   const perfil =
@@ -51,13 +52,15 @@ describe("perfilParaPdf: el cierre del chat se vuelve el sitio", () => {
     );
   });
 
-  it("sin dominio, la frase del chat simplemente no va", () => {
+  it("sin dominio todavía, el anuncio va igual: «Más en mi sitio web.»", () => {
     expect(perfilParaPdf(perfil, labels, null)).toBe(
-      "Ingeniero con diez años.",
+      "Ingeniero con diez años. Más en mi sitio web.",
     );
   });
 
-  it("un perfil sin esa frase queda intacto", () => {
-    expect(perfilParaPdf("Texto plano.", labels, null)).toBe("Texto plano.");
+  it("un perfil sin la frase del chat también recibe el anuncio", () => {
+    expect(perfilParaPdf("Texto plano.", labels, null)).toBe(
+      "Texto plano. Más en mi sitio web.",
+    );
   });
 });
