@@ -25,6 +25,13 @@ function parseConteo(texto: string | null): number {
 }
 
 test.describe("Votación del roadmap", () => {
+  // Vacío desde 2026-09-13: las features de CV Viva se retiraron (dueño).
+  // Los dos gates vuelven a correr con el roadmap por app hermana.
+  test.skip(
+    features.length === 0,
+    "sin features votables: las de CV Viva se retiraron (2026-09-13); vuelve con el roadmap por app",
+  );
+
   test("BD caída forzada: aviso honesto + botones deshabilitados", async ({
     page,
   }) => {

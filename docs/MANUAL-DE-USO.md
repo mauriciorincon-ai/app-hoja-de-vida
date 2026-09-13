@@ -202,7 +202,8 @@ el mensaje te llega al correo.
 - **Nada del contenido se perdió.** `data/apps.yaml` sigue siendo la fuente y alimenta tres cosas:
   - **Las brochures** `/es/apps/hoja-de-vida` y `/es/apps/chat-hoja-de-vida` — se llega a ellas
     desde el bloque **«De esta casa»**, al cierre de `/es/vitrina`.
-  - **El roadmap votable** de la portada (bloque `roadmap:` de cada app).
+  - **El roadmap votable** (bloque `roadmap:` de cada app) — **vacío desde 2026-09-13**: las
+    features de CV Viva se retiraron por decisión tuya; vuelve por app hermana (ver abajo).
   - **El formulario de contacto** ya no lista apps (desde la tercera revisión post-S8 pide un
     «Motivo»). El campo `solicitable:` **se retiró** de `apps.yaml` (2026-09-13): la lista de
     espera lista las apps de `content/vitrina/`. Si un YAML viejo lo trae, la publicación falla
@@ -212,6 +213,14 @@ el mensaje te llega al correo.
   entra a la votación.
 
 ### Roadmap con votación anónima · desde Sprint 004 · vive en la vitrina desde la revisión post-S7
+
+> **Estado 2026-09-13 (tu decisión, bloque G del gate):** las siete features que había eran de
+> CV Viva y del chat, escritas en el S4, y **ninguna feature de CV Viva se muestra en ningún
+> lado**. Se retiraron del YAML: la sección Roadmap **no se monta** hasta que existan features
+> reales. El roadmap vuelve **por app hermana, en la página de cada app**, con las features más
+> disruptivas y de cierre de plan que entregue la planeadora — el prompt para pedírselas está en
+> `sprints/POST-S8-prompt-a-la-planeadora-roadmap.md`. La votación y su base de datos siguen
+> intactas; los votos viejos quedan huérfanos en Supabase (cero PII) y no se muestran.
 
 - **Qué hace:** la sección "Roadmap" muestra las próximas features de cada app y deja que quien
   visita **vote con un clic, sin registrarse**, las que más quiere ver. El número que aparece

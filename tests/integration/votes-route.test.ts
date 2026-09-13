@@ -32,8 +32,38 @@ vi.mock("@/lib/votes/client", () => {
   };
 });
 
-// Importa DESPUÉS del mock. `esFeatureValida` queda real: lee data/apps.yaml,
-// así "hoja-de-vida"/"mapa-c4" es válido y "x"/"y" no.
+// El contenido va MOCKEADO con un roadmap de fixture: desde 2026-09-13 ninguna
+// app de esta casa declara `roadmap:` en data/apps.yaml (las features de CV
+// Viva no se muestran, decisión del dueño), y el motor de votos se prueba
+// igual — `esFeatureValida` sigue siendo real, solo cambia de dónde lee.
+// Así "hoja-de-vida"/"mapa-c4" es válido y "x"/"y" no.
+vi.mock("@/lib/content", async (importOriginal) => {
+  const real = await importOriginal<typeof import("@/lib/content")>();
+  const { parseApps } = await import("@/lib/schemas");
+  const fixture = parseApps(
+    {
+      apps: [
+        {
+          id: "hoja-de-vida",
+          estado: "en-produccion",
+          nombre: { es: "CV Viva", en: "Living CV" },
+          descripcion: { es: "Fixture", en: "Fixture" },
+          roadmap: [
+            {
+              id: "mapa-c4",
+              titulo: { es: "Mapa C4", en: "C4 map" },
+              descripcion: { es: "Fixture", en: "Fixture" },
+            },
+          ],
+        },
+      ],
+    },
+    "fixture",
+  );
+  return { ...real, getApps: () => fixture };
+});
+
+// Importa DESPUÉS de los mocks.
 const { POST } = await import("@/app/api/roadmap/votar/route");
 const { GET } = await import("@/app/api/roadmap/votos/route");
 const { VotesUnavailableError } = await import("@/lib/votes/client");

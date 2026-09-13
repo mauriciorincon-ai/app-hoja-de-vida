@@ -41,10 +41,12 @@ const { apps } = parse(readFileSync("data/apps.yaml", "utf8")) as {
 };
 const nombre = cvEs.identidad.nombre;
 
-// Roadmap votable (S4): todas las (app, feature) con roadmap en el YAML
+// Roadmap votable (S4): todas las (app, feature) con roadmap en el YAML.
+// Vacío desde 2026-09-13: las features de CV Viva se retiraron (dueño); el
+// roadmap vuelve por app hermana, en su página, con las features de la
+// planeadora. Mientras tanto la sección NO se monta, y eso es lo que se vigila.
 const featuresRoadmap = apps.flatMap((a) => a.roadmap ?? []);
 const primeraFeature = featuresRoadmap[0];
-if (!primeraFeature) throw new Error("apps.yaml sin features de roadmap");
 
 test.describe("HOME — happy path del sprint", () => {
   test("carga, recorre secciones, cambia idioma y envía la solicitud", async ({
@@ -160,10 +162,30 @@ test.describe("HOME — happy path del sprint", () => {
 });
 
 test.describe("El roadmap vive con las apps (revisión post-S7)", () => {
+  test("sin features en el YAML, la sección Roadmap NO se monta en /vitrina/apps (2026-09-13)", async ({
+    page,
+  }) => {
+    test.skip(
+      featuresRoadmap.length > 0,
+      "hay features: el caso vacío no aplica",
+    );
+    await page.goto("/es/vitrina/apps");
+    await expect(page.locator("#roadmap")).toHaveCount(0);
+    const html = await page.content();
+    for (const nombre of ["Mapa de arquitectura", "Retrieval con embeddings"]) {
+      expect(html).not.toContain(nombre);
+    }
+  });
+
   test("/vitrina/apps enseña una fila votable por feature, y la HOME ninguna", async ({
     page,
     request,
   }) => {
+    test.skip(
+      !primeraFeature,
+      "sin features votables: las de CV Viva se retiraron (2026-09-13); vuelve con el roadmap por app",
+    );
+    if (!primeraFeature) return;
     await page.goto("/es/vitrina/apps");
     await page.locator("#roadmap").scrollIntoViewIfNeeded();
     await expect(page.locator("#roadmap [data-feature-id]")).toHaveCount(
