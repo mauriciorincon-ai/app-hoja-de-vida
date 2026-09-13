@@ -146,16 +146,19 @@ estudios:
     institucion: "Pontificia Universidad Javeriana · Bogotá"
     periodo: "2009 — 2016"
     icono: universidad
+    logo: javeriana.png
     nota: "Optimización de procesos, análisis de datos y soporte a la toma de decisiones, integrando principios de ingeniería con analítica avanzada. Modelado y predicción de fenómenos industriales con SQL, Python y Power BI."
   - titulo: "Estudios de pregrado en Diseño Industrial"
     institucion: "Pontificia Universidad Javeriana · Bogotá"
     periodo: "2011 — 2016"
     icono: universidad
+    logo: javeriana.png
     nota: "Diseño de productos y sistemas con enfoque tecnológico y de mercado, con foco en sostenibilidad ambiental e impacto cultural."
   - titulo: "Curso intensivo de inglés y certificación IELTS"
     institucion: "Cambridge International College · Melbourne, Australia"
     periodo: "2013 — 2014"
     icono: idiomas
+    logo: british-council.svg
     nota: "Inglés B2: lectura, escucha y redacción técnica; discusiones profesionales e informes analíticos."
 
 logros:
@@ -323,6 +326,7 @@ certificaciones:
     nota: "La que respalda mi trayectoria: ingeniería de datos y analítica end-to-end."
     verificacion: ""
     icono: insignia
+    logo: microsoft.svg
   # Revisión post-S8 (2026-09-12): el AI-103 entra como credencial EN CURSO
   # (decisión del dueño: «me gusta la sinceridad»). Sin fecha, con chip; el
   # logro «5 certificaciones» sigue contando solo las obtenidas.
@@ -330,18 +334,23 @@ certificaciones:
     estado: "en curso"
     nota: "En preparación: la ruta de ingeniería de IA en Azure."
     icono: insignia
+    logo: microsoft.svg
   - nombre: "IBM: Ciencia de Datos Aplicada con R"
     fecha: "2024"
     icono: datos
+    logo: ibm.svg
   - nombre: "IBM: Certificado Profesional en Ciencia de Datos"
     fecha: "2022"
     icono: datos
+    logo: ibm.svg
   - nombre: "IBM: Python para Ciencia de Datos"
     fecha: "2022"
     icono: codigo
+    logo: ibm.svg
   - nombre: "IBM: SQL para Ciencia de Datos"
     fecha: "2022"
     icono: codigo
+    logo: ibm.svg
 
 skills:
   - grupo: "IA & ML"

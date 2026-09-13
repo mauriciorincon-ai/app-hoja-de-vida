@@ -174,10 +174,14 @@ animaciones infinitas (sweep/glitch/marquee), scroll-snap de deck, CDNs en `<hea
 - **Tarjeta de estudio**: como la de certificación (`r-md`, borde `paper-3`, `sh-1`), título en
   Fraunces `xl`, institución en mono, periodo en mono `ink-2` — y **sin fecha, «Sin fecha
   declarada» en cursiva `ink-2`**, nunca `ink-3` (2.7:1; axe lo cazó otra vez). **Post-S8:** entra
-  con `fadeInSlow` (escalón 140 ms) y lleva el **icono de la institución** delante de su nombre —
-  Lucide 16 px, trazo 1.5, `ink-2`, sin color, **por dato** (`icono:` en el YAML, enum
-  `universidad · idiomas · curso · insignia · datos · codigo`). Nunca un logo de marca ajena.
-- **Tarjeta de certificación**: mismo `fadeInSlow`, mismo icono por dato delante del nombre. Y el
+  con `fadeInSlow` (escalón 140 ms) y lleva el **logo de la institución** delante de su nombre —
+  20 px de alto, `grayscale` + `opacity-80`, decorativo (`alt=""`), **por dato** (`logo:` en el
+  YAML → archivo de `public/logos/`, con procedencia y licencia en `LICENCIAS.md`). Sin `logo:`,
+  cae al **icono monolínea** por `icono:` (Lucide 16 px, trazo 1.5, `ink-2`, enum
+  `universidad · idiomas · curso · insignia · datos · codigo`). Decisión del dueño post-S8: el
+  primer corte traía solo iconos por no meter marcas ajenas; él quiso los logos, y entran en gris
+  y pequeños para que sean seña y no cartel.
+- **Tarjeta de certificación**: mismo `fadeInSlow`, mismo logo (o icono) por dato delante del nombre. Y el
   **tercer estado**: una credencial `en curso` lleva un chip `citron`/`citron-ink` mono 11 px
   «En curso» **en el sitio de la fecha** — el mismo chip de «en preparación» de la vitrina — y no
   puede nombrarse en ningún titular sin esas palabras al lado (gate de contenido).

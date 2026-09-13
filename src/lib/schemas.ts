@@ -14,6 +14,8 @@ export const ICONOS_FORMACION = [
   "codigo",
 ] as const;
 export type IconoFormacion = (typeof ICONOS_FORMACION)[number];
+/** Nombre de archivo bajo `public/logos/`: sin rutas, sin mayúsculas, svg o png. */
+export const ARCHIVO_LOGO = /^[a-z0-9-]+\.(svg|png)$/;
 
 /**
  * Contratos del contenido versionado (data/*.yaml). El build FALLA si el
@@ -78,6 +80,9 @@ export const cvSchema = z.object({
         nota: z.string().default(""),
         // Revisión post-S8: icono monolínea de la institución, como dato.
         icono: z.enum(ICONOS_FORMACION).default("universidad"),
+        // Logo de la institución en `public/logos/` (post-S8). Si está, va en
+        // vez del icono; el test de contenido exige que el archivo exista.
+        logo: z.string().regex(ARCHIVO_LOGO).optional(),
       }),
     )
     .default([]),
@@ -135,6 +140,7 @@ export const cvSchema = z.object({
           // que el dueño entregue los links de verificación
           verificacion: z.string().default(""),
           icono: z.enum(ICONOS_FORMACION).default("insignia"),
+          logo: z.string().regex(ARCHIVO_LOGO).optional(),
         })
         .refine((c) => c.estado === "en curso" || c.fecha.trim().length > 0, {
           message:

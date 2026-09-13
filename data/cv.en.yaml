@@ -135,16 +135,19 @@ estudios:
     institucion: "Pontificia Universidad Javeriana · Bogotá"
     periodo: "2009 — 2016"
     icono: universidad
+    logo: javeriana.png
     nota: "Process optimization, data analysis and decision support, integrating engineering principles with advanced analytics. Modelling and prediction of industrial phenomena with SQL, Python and Power BI."
   - titulo: "Undergraduate studies in Industrial Design"
     institucion: "Pontificia Universidad Javeriana · Bogotá"
     periodo: "2011 — 2016"
     icono: universidad
+    logo: javeriana.png
     nota: "Product and systems design with a technological, market-driven approach, focused on environmental sustainability and cultural impact."
   - titulo: "Intensive English course and IELTS certification"
     institucion: "Cambridge International College · Melbourne, Australia"
     periodo: "2013 — 2014"
     icono: idiomas
+    logo: british-council.svg
     nota: "English B2: reading, listening and technical writing; professional discussions and analytical reports."
 
 logros:
@@ -311,22 +314,28 @@ certificaciones:
     nota: "The one backing my track record: end-to-end data and analytics engineering."
     verificacion: ""
     icono: insignia
+    logo: microsoft.svg
   - nombre: "Microsoft Certified: Azure AI Engineer Associate (AI-103)"
     estado: "en curso"
     nota: "In preparation: the Azure AI engineering path."
     icono: insignia
+    logo: microsoft.svg
   - nombre: "IBM: Applied Data Science with R"
     fecha: "2024"
     icono: datos
+    logo: ibm.svg
   - nombre: "IBM: Data Science Professional Certificate"
     fecha: "2022"
     icono: datos
+    logo: ibm.svg
   - nombre: "IBM: Python for Data Science"
     fecha: "2022"
     icono: codigo
+    logo: ibm.svg
   - nombre: "IBM: SQL for Data Science"
     fecha: "2022"
     icono: codigo
+    logo: ibm.svg
 
 skills:
   - grupo: "AI & ML"

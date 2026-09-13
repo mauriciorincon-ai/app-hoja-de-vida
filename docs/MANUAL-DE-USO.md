@@ -111,11 +111,16 @@ el mensaje te llega al correo.
   fingir que se tiene, no.
 - **El barrido de credenciales mira también `messages/`** (post-S8): ahí sobrevivió AI-102 en la
   descripción SEO tres días después de su retiro, porque el test solo miraba `data/`.
-- **Iconos por dato (post-S8):** cada certificación y cada estudio puede llevar `icono:` con uno
-  de `universidad · idiomas · curso · insignia · datos · codigo` (Lucide, pequeño, solo líneas,
-  sin color). Un nombre fuera de la lista rompe el build. Los logos reales de Microsoft o IBM no
-  entran como icono: si un día quieres las insignias de Credly, van junto al enlace de
-  verificación, como imagen.
+- **Logos de las instituciones (post-S8, decisión del dueño):** cada certificación y cada
+  estudio puede llevar `logo:` con el nombre de un archivo de `public/logos/` (`javeriana.png`,
+  `british-council.svg`, `microsoft.svg`, `ibm.svg`). Se pinta pequeño (20 px) y en gris junto al
+  nombre. **Un `logo:` cuyo archivo no exista pone rojo el test de contenido** nombrando el
+  estudio o la certificación. Para añadir uno: el archivo a `public/logos/` (SVG ligero o PNG
+  pequeño; el de la Javeriana es PNG porque su SVG pesa 150 KB), su procedencia y licencia a
+  `public/logos/LICENCIAS.md`, y el campo en el YAML.
+- **Iconos por dato, el respaldo:** si no hay `logo:`, la tarjeta pinta `icono:` con uno de
+  `universidad · idiomas · curso · insignia · datos · codigo` (Lucide, pequeño, solo líneas,
+  sin color). Un nombre fuera de la lista rompe el build.
 - **Links de verificación:** cuando tengas los links de Credly/Microsoft Learn, pégalos en
   el campo `verificacion:` de cada certificación — el botón "Verificar ↗" aparece solo.
 - **Skills, desde la revisión post-S7:** una tarjeta por grupo con un icono dibujado en casa
