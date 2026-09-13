@@ -61,7 +61,11 @@ export async function Estudios({ estudios }: { estudios: Cv["estudios"] }) {
                   </span>
                 </div>
                 <p className="flex items-center gap-1.5 font-mono text-[13px] text-ink-2">
-                  <LogoDeFormacion logo={e.logo} icono={e.icono} />
+                  <LogoDeFormacion
+                    logo={e.logo}
+                    icono={e.icono}
+                    alto={e.logoAlto}
+                  />
                   {e.institucion}
                 </p>
                 {e.nota && (

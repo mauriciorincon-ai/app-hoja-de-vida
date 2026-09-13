@@ -49,7 +49,11 @@ export async function Certificaciones({
               >
                 <div className="flex items-start justify-between gap-4">
                   <h3 className="flex items-center gap-2 text-base leading-snug font-semibold text-ink-0">
-                    <LogoDeFormacion logo={cert.logo} icono={cert.icono} />
+                    <LogoDeFormacion
+                      logo={cert.logo}
+                      icono={cert.icono}
+                      alto={cert.logoAlto}
+                    />
                     {cert.nombre}
                   </h3>
                   {cert.estado === "en curso" ? (

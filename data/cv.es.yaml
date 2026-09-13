@@ -147,18 +147,21 @@ estudios:
     periodo: "2009 — 2016"
     icono: universidad
     logo: javeriana.png
+    logoAlto: 40
     nota: "Optimización de procesos, análisis de datos y soporte a la toma de decisiones, integrando principios de ingeniería con analítica avanzada. Modelado y predicción de fenómenos industriales con SQL, Python y Power BI."
   - titulo: "Estudios de pregrado en Diseño Industrial"
     institucion: "Pontificia Universidad Javeriana · Bogotá"
     periodo: "2011 — 2016"
     icono: universidad
     logo: javeriana.png
+    logoAlto: 40
     nota: "Diseño de productos y sistemas con enfoque tecnológico y de mercado, con foco en sostenibilidad ambiental e impacto cultural."
   - titulo: "Curso intensivo de inglés y certificación IELTS"
     institucion: "Cambridge International College · Melbourne, Australia"
     periodo: "2013 — 2014"
     icono: idiomas
     logo: british-council.svg
+    logoAlto: 14
     nota: "Inglés B2: lectura, escucha y redacción técnica; discusiones profesionales e informes analíticos."
 
 logros:

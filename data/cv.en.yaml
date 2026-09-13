@@ -136,18 +136,21 @@ estudios:
     periodo: "2009 — 2016"
     icono: universidad
     logo: javeriana.png
+    logoAlto: 40
     nota: "Process optimization, data analysis and decision support, integrating engineering principles with advanced analytics. Modelling and prediction of industrial phenomena with SQL, Python and Power BI."
   - titulo: "Undergraduate studies in Industrial Design"
     institucion: "Pontificia Universidad Javeriana · Bogotá"
     periodo: "2011 — 2016"
     icono: universidad
     logo: javeriana.png
+    logoAlto: 40
     nota: "Product and systems design with a technological, market-driven approach, focused on environmental sustainability and cultural impact."
   - titulo: "Intensive English course and IELTS certification"
     institucion: "Cambridge International College · Melbourne, Australia"
     periodo: "2013 — 2014"
     icono: idiomas
     logo: british-council.svg
+    logoAlto: 14
     nota: "English B2: reading, listening and technical writing; professional discussions and analytical reports."
 
 logros:

@@ -175,8 +175,12 @@ animaciones infinitas (sweep/glitch/marquee), scroll-snap de deck, CDNs en `<hea
   Fraunces `xl`, institución en mono, periodo en mono `ink-2` — y **sin fecha, «Sin fecha
   declarada» en cursiva `ink-2`**, nunca `ink-3` (2.7:1; axe lo cazó otra vez). **Post-S8:** entra
   con `fadeInSlow` (escalón 140 ms) y lleva el **logo de la institución** delante de su nombre —
-  20 px de alto, `grayscale` + `opacity-80`, decorativo (`alt=""`), **por dato** (`logo:` en el
-  YAML → archivo de `public/logos/`, con procedencia y licencia en `LICENCIAS.md`). Sin `logo:`,
+  `grayscale` + `opacity-80`, decorativo (`alt=""`), **por dato** (`logo:` en el
+  YAML → archivo de `public/logos/`, con procedencia y licencia en `LICENCIAS.md`). **La altura
+  también es dato** (`logoAlto:`, 20 px por defecto, cotas 12–48): la masa visual de un logo
+  depende de su proporción, no de su altura — el escudo cuadrado de la Javeriana va a 40 px para
+  pesar al menos lo que las ocho barras de IBM a 20, y el logotipo apaisado del British Council
+  baja a 14 para no dominar la línea. Sin `logo:`,
   cae al **icono monolínea** por `icono:` (Lucide 16 px, trazo 1.5, `ink-2`, enum
   `universidad · idiomas · curso · insignia · datos · codigo`). Decisión del dueño post-S8: el
   primer corte traía solo iconos por no meter marcas ajenas; él quiso los logos, y entran en gris

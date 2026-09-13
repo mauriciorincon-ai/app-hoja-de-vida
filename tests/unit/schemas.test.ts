@@ -127,6 +127,39 @@ describe("cvSchema", () => {
     ).toThrow();
   });
 
+  it("logoAlto is data, defaults to 20 and is bounded 12–48 (post-S8)", () => {
+    const cv = cvSchema.parse({
+      ...cvValido,
+      estudios: [
+        {
+          titulo: "Ingeniería",
+          institucion: "Javeriana",
+          logo: "javeriana.png",
+        },
+      ],
+      certificaciones: [
+        {
+          nombre: "DP-600",
+          fecha: "2024",
+          logo: "microsoft.svg",
+          logoAlto: 24,
+        },
+      ],
+    });
+    expect(cv.estudios[0].logoAlto).toBe(20);
+    expect(cv.certificaciones[0].logoAlto).toBe(24);
+    for (const logoAlto of [8, 60, 20.5]) {
+      expect(() =>
+        cvSchema.parse({
+          ...cvValido,
+          estudios: [
+            { titulo: "X", institucion: "Y", logo: "javeriana.png", logoAlto },
+          ],
+        }),
+      ).toThrow();
+    }
+  });
+
   it("defaults certificaciones.verificacion to empty (links pending)", () => {
     const cv = cvSchema.parse({
       ...cvValido,
