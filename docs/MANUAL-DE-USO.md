@@ -176,6 +176,13 @@ el mensaje te llega al correo.
   nunca quedan desincronizados.
 - **Limitación conocida:** el PDF es deliberadamente sobrio (texto estructurado, sin
   diseño gráfico) — eso es una feature para los ATS, no un pendiente.
+- **Cómo se ve desde la revisión post-S8 (bloque D):** dos columnas —experiencia y proyectos a la
+  izquierda; perfil, formación, certificaciones y skills a la derecha—, acentos en azul navy y
+  texto Helvetica seleccionable, en el orden que un ATS lee (cabecera → perfil → experiencia).
+  **El dominio del sitio va primero y en negrilla en la cabecera**, pero no se escribe en ningún
+  archivo: el build lo toma de la variable `NEXT_PUBLIC_SITE_URL` de Vercel. Sin variable, o en
+  local, la cabecera sale sin dominio. Una certificación «en curso» dice «(en curso)» en vez de
+  fecha.
 
 ### Las apps del pipeline (`data/apps.yaml`) · desde Sprint 001 · reorganizado 2026-09-05
 

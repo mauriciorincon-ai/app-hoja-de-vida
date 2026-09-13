@@ -334,3 +334,23 @@ táctiles ≥44×44 · `prefers-reduced-motion` global · timeline legible por l
 shadcn sin personalizar · gradiente violeta/azul · emojis como iconografía · hero centrado
 genérico con dos botones · sombras pesadas uniformes · radios XL en todo · texto default de
 librería o inglés residual en la UI ES · placeholder "Lorem".
+
+## El PDF (revisión post-S8, bloque D)
+
+El CV en PDF es el único artefacto que sale del sistema editorial de la web: es para un ATS y
+para una impresora, y el dueño lo quiso «simple y minimalista pero un poco más atractivo», con
+la estructura de dos columnas de los comprobadores de CV y un azul navy. Sus tokens viven en
+`scripts/generate-cv-pdf.mjs`, no en Tailwind:
+
+| Token      | Valor                            | Uso                                                                                     |
+| ---------- | -------------------------------- | --------------------------------------------------------------------------------------- |
+| `NAVY`     | `#1F3A5F`                        | eyebrow, organización/institución, grupos de skills, reglas de sección, dominio         |
+| `TINTA`    | `#111111`                        | nombre, títulos de sección y de hito, cuerpo                                            |
+| `GRIS`     | `#555555`                        | periodos, línea de contacto, ubicación                                                  |
+| columnas   | 62 % / 38 % con 14 pt de hueco   | izquierda: experiencia, proyectos · derecha: perfil, formación, certificaciones, skills |
+| tipografía | Helvetica 20 / 11 / 10 / 9 / 8.5 | nombre / eyebrow / secciones e hitos / cuerpo / metadatos                               |
+
+Reglas: solo texto (nada de iconos ni imágenes: el ATS los pierde); el título de un hito viaja con
+su organización, periodo y primer bullet al saltar de página; el orden de dibujo por página es el
+orden de lectura ATS (cabecera → derecha → izquierda). El dominio del sitio encabeza el contacto
+**solo si el build lo conoce por variable de entorno** (regla 16).

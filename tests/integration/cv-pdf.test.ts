@@ -76,6 +76,32 @@ describe("PDF ATS generado en build desde los YAML", () => {
     expect(text).toContain("2009 — 2016");
   });
 
+  // Revisión post-S8, bloque D: una certificación «en curso» no lleva fecha,
+  // y el PDF viejo imprimía «(AI-103) ()». Ahora dice «(en curso)».
+  it("una certificación en curso dice «en curso», nunca un paréntesis vacío", async () => {
+    const es = await extractText(files.es);
+    const en = await extractText(files.en);
+    expect(es).not.toContain("()");
+    expect(en).not.toContain("()");
+    expect(es).toMatch(/\(AI-103\)\s*\(en curso\)/);
+    expect(en).toMatch(/\(AI-103\)\s*\(in progress\)/);
+  });
+
+  // El dominio del sitio va PRIMERO en la cabecera cuando el build lo conoce
+  // por `NEXT_PUBLIC_SITE_URL` (regla 16: nunca escrito en el repo).
+  it("con NEXT_PUBLIC_SITE_URL, el dominio encabeza la línea de contacto", async () => {
+    const dir = path.join(tmpdir(), `cv-pdf-test-sitio-${process.pid}`);
+    execFileSync(process.execPath, ["scripts/generate-cv-pdf.mjs", dir], {
+      cwd: process.cwd(),
+      env: { ...process.env, NEXT_PUBLIC_SITE_URL: "https://ejemplo.test" },
+    });
+    const text = await extractText(path.join(dir, "Henry-Rincon-CV-ES.pdf"));
+    expect(text.indexOf("ejemplo.test")).toBeGreaterThan(-1);
+    expect(text.indexOf("ejemplo.test")).toBeLessThan(text.indexOf("@"));
+    // Y sin la variable (los PDFs de `files`), no hay dominio inventado.
+    expect(await extractText(files.es)).not.toContain("ejemplo.test");
+  });
+
   it("sin caracteres fuera de WinAnsi que rompan el render (− → ⭐)", async () => {
     const text = await extractText(files.es);
     expect(text).not.toContain("−"); // − minus sign
