@@ -115,7 +115,7 @@ el mensaje te llega al correo.
   estudio puede llevar `logo:` con el nombre de un archivo de `public/logos/` (`javeriana.png`,
   `british-council.svg`, `microsoft.svg`, `ibm.svg`). Se pinta pequeño y en gris junto al
   nombre, a **20 px de alto salvo que `logoAlto:` diga otra cosa** (entre 12 y 48): un escudo
-  cuadrado a 20 px se ve la mitad que un logotipo ancho, así que la Javeriana va a 40 y el British
+  cuadrado a 20 px se ve la mitad que un logotipo ancho, así que la Javeriana va a 40, IBM a 16 y el British
   Council, muy apaisado, a 14. **Un `logo:` cuyo archivo no exista pone rojo el test de contenido** nombrando el
   estudio o la certificación. Para añadir uno: el archivo a `public/logos/` (SVG ligero o PNG
   pequeño; el de la Javeriana es PNG porque su SVG pesa 150 KB), su procedencia y licencia a

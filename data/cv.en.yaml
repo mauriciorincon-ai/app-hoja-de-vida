@@ -327,18 +327,22 @@ certificaciones:
     fecha: "2024"
     icono: datos
     logo: ibm.svg
+    logoAlto: 16
   - nombre: "IBM: Data Science Professional Certificate"
     fecha: "2022"
     icono: datos
     logo: ibm.svg
+    logoAlto: 16
   - nombre: "IBM: Python for Data Science"
     fecha: "2022"
     icono: codigo
     logo: ibm.svg
+    logoAlto: 16
   - nombre: "IBM: SQL for Data Science"
     fecha: "2022"
     icono: codigo
     logo: ibm.svg
+    logoAlto: 16
 
 skills:
   - grupo: "AI & ML"
