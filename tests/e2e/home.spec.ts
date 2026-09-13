@@ -24,7 +24,6 @@ type RoadmapEntry = {
 type AppEntry = {
   id: string;
   estado: string;
-  solicitable?: boolean;
   nombre: { es: string; en: string };
   roadmap?: RoadmapEntry[];
 };
@@ -41,8 +40,6 @@ const { apps } = parse(readFileSync("data/apps.yaml", "utf8")) as {
   apps: AppEntry[];
 };
 const nombre = cvEs.identidad.nombre;
-const appSolicitable = apps.find((a) => a.solicitable !== false);
-if (!appSolicitable) throw new Error("apps.yaml sin apps solicitables");
 
 // Roadmap votable (S4): todas las (app, feature) con roadmap en el YAML
 const featuresRoadmap = apps.flatMap((a) => a.roadmap ?? []);
@@ -71,8 +68,7 @@ test.describe("HOME — happy path del sprint", () => {
 
     // La sección «Apps» se retiró: prometía lo mismo que la vitrina y no
     // enseñaba apps visitables. Su contenido no se perdió — las dos con
-    // brochure se alcanzan desde «De esta casa» en /vitrina (brochure.spec),
-    // y las dos exploraciones siguen siendo las opciones del formulario.
+    // brochure se alcanzan desde «De esta casa» en /vitrina (brochure.spec).
     await expect(page.locator("#apps")).toHaveCount(0);
 
     // Ni «Proyectos» ni «Roadmap» viven ya en la HOME: la vitrina asoma sus
@@ -89,16 +85,13 @@ test.describe("HOME — happy path del sprint", () => {
       timeout: 15_000,
     });
 
-    // Enviar un mensaje end-to-end (sin API key → envío simulado). Elegir una
-    // app es opcional desde la revisión post-S8; aquí se elige una, que es la
-    // ruta de la lista de espera.
+    // Enviar un mensaje end-to-end (sin API key → envío simulado). El motivo
+    // es opcional (bloque E de la revisión post-S8); aquí se elige uno.
     await page.locator("#contacto").scrollIntoViewIfNeeded();
     await page.locator("form[data-hydrated=true]").waitFor();
     await page.getByLabel("Your name").fill("E2E Tester");
     await page.getByLabel("Your email").fill("e2e@example.com");
-    await page
-      .getByLabel("Here for an app? (optional)")
-      .selectOption(appSolicitable.id);
+    await page.getByLabel("Reason (optional)").selectOption("proyecto");
     await page.getByRole("button", { name: "Send" }).click();
 
     // Confirmación humana

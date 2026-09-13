@@ -60,7 +60,6 @@ export async function POST(request: Request): Promise<NextResponse> {
   const solicitud = {
     ...parsed.data,
     nombre: sanitize(parsed.data.nombre),
-    app: sanitize(parsed.data.app),
     mensaje: sanitize(parsed.data.mensaje),
   };
 
@@ -68,19 +67,23 @@ export async function POST(request: Request): Promise<NextResponse> {
     const result = await sendSolicitudEmail(solicitud);
     if (result.simulated) {
       log.warn(
-        { app: solicitud.app, ms: Date.now() - start },
+        { motivo: solicitud.motivo, ms: Date.now() - start },
         "RESEND_API_KEY ausente: envío simulado",
       );
     } else {
       log.info(
-        { app: solicitud.app, emailId: result.id, ms: Date.now() - start },
+        {
+          motivo: solicitud.motivo,
+          emailId: result.id,
+          ms: Date.now() - start,
+        },
         "solicitud enviada",
       );
     }
     return NextResponse.json({ ok: true });
   } catch (error) {
     log.error(
-      { err: error, app: solicitud.app, ms: Date.now() - start },
+      { err: error, motivo: solicitud.motivo, ms: Date.now() - start },
       "fallo el envío",
     );
     return NextResponse.json({ error: "send_failed" }, { status: 502 });

@@ -1,14 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useRouter } from "@/i18n/navigation";
 import { trackEvent } from "@/lib/analytics";
-import type { AppCard } from "@/lib/schemas";
+import { MOTIVOS } from "@/lib/schemas";
 
 type FieldErrors = Partial<Record<"nombre" | "email", string>>;
 type Status = "reposo" | "enviando" | "error";
@@ -17,9 +17,8 @@ type Status = "reposo" | "enviando" | "error";
 // (el endpoint valida con el schema real — esa es la fuente de verdad).
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-export function SolicitarAccesoForm({ apps }: { apps: AppCard[] }) {
+export function SolicitarAccesoForm() {
   const t = useTranslations("form");
-  const locale = useLocale() as "es" | "en";
   const router = useRouter();
   const [status, setStatus] = useState<Status>("reposo");
   const [errors, setErrors] = useState<FieldErrors>({});
@@ -31,7 +30,7 @@ export function SolicitarAccesoForm({ apps }: { apps: AppCard[] }) {
     const payload = {
       nombre: String(raw.nombre ?? "").trim(),
       email: String(raw.email ?? "").trim(),
-      app: String(raw.app ?? "").trim(),
+      motivo: String(raw.motivo ?? "").trim(),
       mensaje: String(raw.mensaje ?? "").trim(),
       website: String(raw.website ?? ""),
     };
@@ -57,10 +56,10 @@ export function SolicitarAccesoForm({ apps }: { apps: AppCard[] }) {
         body: JSON.stringify(payload),
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      trackEvent("solicitud_enviada", { app: payload.app });
+      trackEvent("solicitud_enviada", { motivo: payload.motivo });
       router.push("/solicitud-enviada");
     } catch {
-      trackEvent("solicitud_fallida", { app: payload.app });
+      trackEvent("solicitud_fallida", { motivo: payload.motivo });
       setStatus("error");
     }
   }
@@ -118,21 +117,22 @@ export function SolicitarAccesoForm({ apps }: { apps: AppCard[] }) {
       </div>
 
       <div className="flex flex-col gap-2">
-        <Label htmlFor="solicitud-app">{t("app")}</Label>
-        {/* Opcional desde la revisión post-S8: el formulario es el contacto
-            general (asesorías, charlas, roles); elegir una app sigue metiendo
-            en su lista de espera. La primera opción es válida, no un hueco. */}
+        <Label htmlFor="solicitud-motivo">{t("motivo")}</Label>
+        {/* Bloque E del gate ⭐ post-S8: el desplegable responde la pregunta
+            del bloque («¿Un proyecto, una asesoría, una capacitación, una
+            charla o un rol?») y suma la lista de espera que la vitrina
+            promete. Opcional: la primera opción es válida, no un hueco. */}
         <select
-          id="solicitud-app"
-          name="app"
+          id="solicitud-motivo"
+          name="motivo"
           defaultValue=""
           disabled={enviando}
           className="flex h-9 w-full min-w-0 rounded-md border border-paper-3 bg-paper-0 px-3 py-1 text-sm text-ink-1 shadow-xs transition-colors outline-none focus-visible:ring-[3px] focus-visible:ring-sky-ink/40 disabled:cursor-not-allowed disabled:opacity-50"
         >
-          <option value="">{t("appNinguna")}</option>
-          {apps.map((app) => (
-            <option key={app.id} value={app.id}>
-              {app.nombre[locale]}
+          <option value="">{t("motivoElige")}</option>
+          {MOTIVOS.map((motivo) => (
+            <option key={motivo} value={motivo}>
+              {t(`motivos.${motivo}`)}
             </option>
           ))}
         </select>

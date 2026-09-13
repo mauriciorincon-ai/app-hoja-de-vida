@@ -97,8 +97,16 @@
     "titulo": "Escríbeme",
     "nombre": "Tu nombre",
     "email": "Tu correo",
-    "app": "¿Vienes por una app? (opcional)",
-    "appNinguna": "No, es un mensaje general",
+    "motivo": "Motivo (opcional)",
+    "motivoElige": "Elige un motivo",
+    "motivos": {
+      "proyecto": "Un proyecto",
+      "asesoria": "Una asesoría",
+      "capacitacion": "Una capacitación",
+      "charla": "Una charla",
+      "rol": "Un rol",
+      "lista-de-espera": "La lista de espera de la vitrina"
+    },
     "mensaje": "Cuéntame qué tienes en mente (opcional)",
     "enviar": "Enviar",
     "enviando": "Enviando…",

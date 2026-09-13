@@ -162,9 +162,11 @@ el mensaje te llega al correo.
   «pieza» pasó a **«producto»**; en el código, el contrato de ficha técnica y `public/piezas/`
   sigue diciendo pieza, a propósito: es el nombre del dominio, no el de la vitrina.
 - **El formulario de contacto (post-S8):** ya no se titula «Solicitar acceso» sino **«Escríbeme»**,
-  y elegir una app es **opcional** — el visitante puede venir por una asesoría, una charla o un
-  rol. Sin app, el correo llega con el asunto «Mensaje desde la hoja de vida»; con app, sigue
-  siendo «Solicitud de acceso: <app>» y es la lista de espera de las piezas.
+  y el tercer campo es el desplegable **«Motivo (opcional)»**: un proyecto, una asesoría, una
+  capacitación, una charla, un rol o la lista de espera de la vitrina (la que prometen sus
+  botones). El motivo elegido es el **asunto** del correo («[CV Viva] Una asesoría»); sin motivo,
+  «[CV Viva] Mensaje desde la hoja de vida». Las opciones viven en `MOTIVOS` (`src/lib/schemas.ts`)
+  y sus textos en `messages/*.json` bajo `form.motivos`.
 
 ### Descargar CV en PDF (ATS) · desde Sprint 002
 
@@ -194,11 +196,11 @@ el mensaje te llega al correo.
   - **Las brochures** `/es/apps/hoja-de-vida` y `/es/apps/chat-hoja-de-vida` — se llega a ellas
     desde el bloque **«De esta casa»**, al cierre de `/es/vitrina`.
   - **El roadmap votable** de la portada (bloque `roadmap:` de cada app).
-  - **El formulario de contacto**: las apps con `solicitable: true` son las opciones que puede
-    elegir quien pide acceso. Ahí es donde viven hoy las dos exploraciones.
+  - **El formulario de contacto** ya no lista apps (desde la tercera revisión post-S8 pide un
+    «Motivo»); `solicitable:` sigue en el YAML pero hoy no cambia nada visible.
 - **Cómo dar de alta una app:** editar `data/apps.yaml` + push, igual que siempre. Si le pones
   bloque `brochure:`, aparece su página y su enlace en «De esta casa»; si le pones `roadmap:`,
-  entra a la votación; si le pones `solicitable: true`, aparece en el formulario.
+  entra a la votación.
 
 ### Roadmap con votación anónima · desde Sprint 004 · vive en la vitrina desde la revisión post-S7
 
@@ -391,16 +393,25 @@ el mensaje te llega al correo.
   Cambiar de idioma conserva la sección donde estaba el visitante.
 - **Cómo se usa:** nada que configurar; el contenido sale de los dos YAML espejo.
 
-### Solicitudes de acceso · desde Sprint 001
+### El formulario «Escríbeme» · desde Sprint 001 (antes «Solicitar acceso»)
 
-- **Qué hace:** el formulario "Solicitar acceso" (sección Contacto) envía un email a tu correo
-  con nombre, email, app pedida y mensaje del visitante. El visitante ve la confirmación
-  "Recibí tu solicitud, te respondo en 1–3 días hábiles."
-- **Cómo llegan:** al correo configurado en Vercel (`SOLICITUDES_TO_EMAIL`; por defecto tu
-  Gmail). Puedes responder directo: el "reply-to" es el email del visitante.
-- **Protecciones:** máximo 5 envíos por minuto por visitante y una trampa anti-bots invisible.
-  ⚠ Si `RESEND_API_KEY` no está configurada en Vercel, el formulario "funciona" para el
-  visitante pero el email NO se envía (queda solo en logs) — verifica esa variable en prod.
+- **Qué hace:** el formulario de la sección Contacto envía un email a tu correo con nombre,
+  email, motivo y mensaje del visitante. El visitante ve la confirmación "Recibí tu mensaje, te
+  respondo en 1–3 días hábiles."
+- **A dónde llega:** al correo configurado en Vercel (`SOLICITUDES_TO_EMAIL`; si no está, al
+  Gmail interno que trae el código). Es tu correo **interno**, distinto del que se muestra en la
+  página. Puedes responder directo: el "reply-to" es el email del visitante. Revisa también spam
+  la primera vez.
+- **En tu computador NO llega, y es a propósito:** `localhost` no tiene `RESEND_API_KEY` (no hay
+  `.env.local`), así que el envío se **simula**: el visitante ve la confirmación y el servidor
+  solo anota «envío simulado» en su log. El correo real solo se prueba desde el sitio publicado.
+- **Protecciones:** máximo 5 envíos por minuto por visitante, una trampa anti-bots invisible y un
+  motivo que solo admite la lista del desplegable.
+  ⚠ Si `RESEND_API_KEY` no está configurada en Vercel, pasa lo mismo que en local: el formulario
+  "funciona" para el visitante pero el email NO se envía — verifica esa variable en prod. Y el
+  remitente por defecto (`onboarding@resend.dev`, el de prueba de Resend) solo puede escribirle
+  al correo dueño de la cuenta de Resend: para cualquier otro buzón hace falta un dominio
+  verificado en Resend y `SOLICITUDES_FROM_EMAIL`.
 
 ### El chat que responde por ti · desde Sprint 003
 

@@ -29,8 +29,8 @@ function makeRequest(body: unknown, ip = "9.9.9.9"): Request {
 const solicitudValida = {
   nombre: "Ana Prueba",
   email: "ana@example.com",
-  app: "idea-exploracion-1",
-  mensaje: "Quiero probarla",
+  motivo: "asesoria",
+  mensaje: "Quiero una asesoría",
   website: "",
 };
 
@@ -48,18 +48,27 @@ describe("POST /api/solicitar-acceso", () => {
     await expect(res.json()).resolves.toEqual({ ok: true });
     expect(sendMock).toHaveBeenCalledOnce();
     const payload = sendMock.mock.calls[0][0];
-    expect(payload.subject).toContain("idea-exploracion-1");
+    expect(payload.subject).toBe("[CV Viva] Una asesoría");
+    expect(payload.text).toContain("Motivo: Una asesoría");
     expect(payload.replyTo).toBe("ana@example.com");
     expect(payload.text).toContain("Ana Prueba");
   });
 
-  it("accepts a message WITHOUT an app (general contact, post-S8) and says so in the subject", async () => {
-    const sinApp = { ...solicitudValida, app: undefined };
-    const res = await POST(makeRequest(sinApp, "1.0.0.9"));
+  it("accepts a message WITHOUT a motivo (the reason is optional) and says so in the subject", async () => {
+    const sinMotivo = { ...solicitudValida, motivo: undefined };
+    const res = await POST(makeRequest(sinMotivo, "1.0.0.9"));
     expect(res.status).toBe(200);
     const payload = sendMock.mock.calls[0][0];
     expect(payload.subject).toBe("[CV Viva] Mensaje desde la hoja de vida");
-    expect(payload.text).toContain("(ninguna: mensaje general)");
+    expect(payload.text).toContain("Motivo: (sin motivo)");
+  });
+
+  it("returns 400 on a motivo outside the list without sending (negative)", async () => {
+    const res = await POST(
+      makeRequest({ ...solicitudValida, motivo: "spam" }, "1.0.0.10"),
+    );
+    expect(res.status).toBe(400);
+    expect(sendMock).not.toHaveBeenCalled();
   });
 
   it("returns 200 but sends NOTHING when the honeypot is filled (negative)", async () => {

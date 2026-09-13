@@ -97,8 +97,16 @@
     "titulo": "Write to me",
     "nombre": "Your name",
     "email": "Your email",
-    "app": "Here for an app? (optional)",
-    "appNinguna": "No, this is a general message",
+    "motivo": "Reason (optional)",
+    "motivoElige": "Choose a reason",
+    "motivos": {
+      "proyecto": "A project",
+      "asesoria": "Consulting",
+      "capacitacion": "Training",
+      "charla": "A talk",
+      "rol": "A role",
+      "lista-de-espera": "The showcase waiting list"
+    },
     "mensaje": "Tell me what you have in mind (optional)",
     "enviar": "Send",
     "enviando": "Sending…",

@@ -1,11 +1,12 @@
 import "server-only";
 import { Resend } from "resend";
-import type { Solicitud } from "./schemas";
+import { ETIQUETAS_MOTIVO, type Solicitud } from "./schemas";
 
 /**
  * Envío del mensaje del formulario por email (Resend free tier). Desde la
- * revisión post-S8 el formulario es el contacto general: con `app` es una
- * solicitud de acceso a esa app; sin ella, un mensaje desde la hoja de vida.
+ * revisión post-S8 el formulario es el contacto general: el asunto lleva el
+ * motivo que el visitante eligió («Una asesoría», «Un rol»…) y, sin motivo,
+ * «Mensaje desde la hoja de vida».
  * Sin RESEND_API_KEY configurada (dev/preview sin secrets) el envío se
  * simula y queda solo en logs — el llamador decide cómo registrarlo.
  */
@@ -24,17 +25,18 @@ export async function sendSolicitudEmail(
   const from =
     process.env.SOLICITUDES_FROM_EMAIL ?? "CV Viva <onboarding@resend.dev>";
 
+  const motivo = solicitud.motivo ? ETIQUETAS_MOTIVO[solicitud.motivo] : "";
   const { data, error } = await resend.emails.send({
     from,
     to,
     replyTo: solicitud.email,
-    subject: solicitud.app
-      ? `[CV Viva] Solicitud de acceso: ${solicitud.app}`
+    subject: motivo
+      ? `[CV Viva] ${motivo}`
       : "[CV Viva] Mensaje desde la hoja de vida",
     text: [
       `Nombre: ${solicitud.nombre}`,
       `Email: ${solicitud.email}`,
-      `App: ${solicitud.app || "(ninguna: mensaje general)"}`,
+      `Motivo: ${motivo || "(sin motivo)"}`,
       "",
       solicitud.mensaje || "(sin mensaje)",
     ].join("\n"),

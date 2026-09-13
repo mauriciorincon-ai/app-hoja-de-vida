@@ -6,6 +6,8 @@ import {
   parseApps,
   parseCv,
   solicitudSchema,
+  MOTIVOS,
+  ETIQUETAS_MOTIVO,
 } from "@/lib/schemas";
 
 const cvValido = {
@@ -393,8 +395,8 @@ describe("solicitudSchema", () => {
   const solicitudValida = {
     nombre: "Ana",
     email: "ana@example.com",
-    app: "hoja-de-vida",
-    mensaje: "Quiero probarla",
+    motivo: "asesoria",
+    mensaje: "Quiero una asesoría",
     website: "",
   };
 
@@ -404,11 +406,30 @@ describe("solicitudSchema", () => {
       nombre: "  Ana  ",
     });
     expect(s.nombre).toBe("Ana");
+    expect(s.motivo).toBe("asesoria");
   });
 
-  it("defaults app to empty: the form is the general contact since post-S8", () => {
-    const sinApp = { ...solicitudValida, app: undefined };
-    expect(solicitudSchema.parse(sinApp).app).toBe("");
+  it("defaults motivo to empty: the reason is optional (block E of the post-S8 gate)", () => {
+    const sinMotivo = { ...solicitudValida, motivo: undefined };
+    expect(solicitudSchema.parse(sinMotivo).motivo).toBe("");
+    expect(
+      solicitudSchema.parse({ ...solicitudValida, motivo: "" }).motivo,
+    ).toBe("");
+  });
+
+  it("accepts every declared motivo and each one has a label", () => {
+    for (const motivo of MOTIVOS) {
+      expect(solicitudSchema.parse({ ...solicitudValida, motivo }).motivo).toBe(
+        motivo,
+      );
+      expect(ETIQUETAS_MOTIVO[motivo].length).toBeGreaterThan(0);
+    }
+  });
+
+  it("rejects a motivo outside the list (the select is the only source)", () => {
+    expect(() =>
+      solicitudSchema.parse({ ...solicitudValida, motivo: "spam" }),
+    ).toThrow(/motivo/);
   });
 
   it("defaults mensaje to empty string", () => {

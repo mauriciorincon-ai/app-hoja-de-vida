@@ -10,7 +10,7 @@ test.describe("Formulario de contacto (antes «solicitar acceso»)", () => {
     await page.getByRole("button", { name: "Enviar" }).click();
 
     // Scope al form: el route-announcer de Next también tiene role=alert.
-    // Dos errores, no tres: la app es opcional desde la revisión post-S8.
+    // Dos errores, no tres: el motivo es opcional (revisión post-S8, bloque E).
     await expect(page.locator("form").getByRole("alert")).toHaveCount(2);
     await expect(page).toHaveURL(/\/es$/);
   });
@@ -23,7 +23,7 @@ test.describe("Formulario de contacto (antes «solicitar acceso»)", () => {
       data: {
         nombre: "Bot",
         email: "bot@spam.example",
-        app: "hoja-de-vida",
+        motivo: "rol",
         mensaje: "spam",
         website: "http://spam.example",
       },
@@ -37,7 +37,7 @@ test.describe("Formulario de contacto (antes «solicitar acceso»)", () => {
     const data = {
       nombre: "Rate Tester",
       email: "rate@example.com",
-      app: "idea-exploracion-2",
+      motivo: "charla",
       mensaje: "",
       website: "",
     };

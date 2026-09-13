@@ -364,15 +364,41 @@ export type Vitrina = z.infer<typeof vitrinaSchema>;
 export type CategoriaVitrina = Vitrina["categorias"][number];
 
 /**
+ * Los motivos del formulario de contacto (bloque E del gate ⭐ post-S8): las
+ * cinco puertas que el propio bloque anuncia —«¿Un proyecto, una asesoría,
+ * una capacitación, una charla o un rol?»— más la lista de espera de la
+ * vitrina, que es lo que sus CTAs prometen («Entras a la lista de espera»).
+ * El texto visible vive en `messages/*.json` (`form.motivos.<id>`); estas
+ * etiquetas son las del CORREO, que lee el dueño, en español.
+ */
+export const MOTIVOS = [
+  "proyecto",
+  "asesoria",
+  "capacitacion",
+  "charla",
+  "rol",
+  "lista-de-espera",
+] as const;
+export type Motivo = (typeof MOTIVOS)[number];
+export const ETIQUETAS_MOTIVO: Record<Motivo, string> = {
+  proyecto: "Un proyecto",
+  asesoria: "Una asesoría",
+  capacitacion: "Una capacitación",
+  charla: "Una charla",
+  rol: "Un rol",
+  "lista-de-espera": "Lista de espera de la vitrina",
+};
+
+/**
  * Mensaje desde la hoja de vida (formulario + endpoint). `website` es el
- * honeypot. `app` es opcional desde la revisión post-S8: el formulario dejó
- * de ser «solicitar acceso» a una app y pasó a ser el contacto general —
- * asesorías, charlas, roles—; elegir una app sigue metiendo en su lista de espera.
+ * honeypot. `motivo` es opcional y solo admite la lista de arriba: el
+ * desplegable es la única fuente, y un valor fuera de ella es un cliente
+ * que no es el formulario.
  */
 export const solicitudSchema = z.object({
   nombre: z.string().trim().min(1).max(120),
   email: z.string().trim().email().max(254),
-  app: z.string().trim().max(60).default(""),
+  motivo: z.enum(MOTIVOS).or(z.literal("")).default(""),
   mensaje: z.string().trim().max(1000).default(""),
   website: z.literal("").default(""),
 });
