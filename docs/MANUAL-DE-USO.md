@@ -17,7 +17,10 @@ el mensaje te llega al correo.
 - La página vive en la URL de producción (Vercel). Se abre en `/es` (español) o `/en` (inglés).
   **La raíz `/` abre SIEMPRE en español** (revisión post-S8): antes seguía el idioma del navegador
   y la cookie del botón «Switch to English», y quien lo pulsara una vez quedaba en inglés para
-  siempre. El botón sigue cambiando de idioma; lo que no hay es detección.
+  siempre. El botón sigue cambiando de idioma; lo que no hay es detección. **Y el botón te deja
+  exactamente donde estabas** (revisión post-S8, bloque B): conserva el mismo hito de contenido a
+  la misma altura de la ventana, no el borde de la sección ni los píxeles — el inglés es más corto
+  y los píxeles caerían en otro sitio.
 - No requiere cuenta ni instalación: es una página pública.
 
 ## Features
