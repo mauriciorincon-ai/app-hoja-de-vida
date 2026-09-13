@@ -1,5 +1,6 @@
 import "server-only";
 import { Resend } from "resend";
+import type { Propuesta } from "./propuestas";
 import { ETIQUETAS_MOTIVO, type Solicitud } from "./schemas";
 
 /**
@@ -46,6 +47,43 @@ export async function sendSolicitudEmail(
         : `Motivo: ${motivo || "(sin motivo)"}`,
       "",
       solicitud.mensaje || "(sin mensaje)",
+    ].join("\n"),
+  });
+
+  if (error) {
+    throw new Error(`Resend: ${error.message}`);
+  }
+  return { sent: true, simulated: false, id: data?.id };
+}
+
+/**
+ * Propuesta de funcionalidad para una app hermana (2026-09-13). Sin correo del
+ * visitante no hay reply-to: la propuesta es anónima a propósito.
+ */
+export async function sendPropuestaEmail(
+  propuesta: Propuesta,
+  nombreApp: string,
+): Promise<SendResult> {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    return { sent: false, simulated: true };
+  }
+
+  const resend = new Resend(apiKey);
+  const to = process.env.SOLICITUDES_TO_EMAIL ?? "mauriciorinconai@gmail.com";
+  const from =
+    process.env.SOLICITUDES_FROM_EMAIL ?? "CV Viva <onboarding@resend.dev>";
+
+  const { data, error } = await resend.emails.send({
+    from,
+    to,
+    ...(propuesta.email ? { replyTo: propuesta.email } : {}),
+    subject: `[CV Viva] Propuesta para ${nombreApp}`,
+    text: [
+      `App: ${nombreApp} (${propuesta.app})`,
+      `Correo: ${propuesta.email || "(no dejó correo)"}`,
+      "",
+      propuesta.propuesta,
     ].join("\n"),
   });
 

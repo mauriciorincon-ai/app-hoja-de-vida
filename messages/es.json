@@ -123,6 +123,20 @@
     "otra": "Otra",
     "nota": "Sin promesa de fecha. Te aviso cuando abra."
   },
+  "propuesta": {
+    "eyebrow": "Propón una funcionalidad",
+    "titulo": "¿Qué te gustaría que hiciera {app}?",
+    "ayuda": "Una idea, en tus palabras. Las mejores llegan al plan de la app.",
+    "placeholder": "Por ejemplo: que…",
+    "email": "Tu correo (opcional, por si quieres saber cuándo exista)",
+    "enviar": "Proponer",
+    "enviando": "Enviando…",
+    "reintentar": "Reintentar",
+    "gracias": "Recibí tu propuesta. Gracias.",
+    "error": "No pude enviar tu propuesta. Intenta de nuevo en un momento.",
+    "errorTexto": "Escribe tu propuesta: al menos diez caracteres.",
+    "errorEmail": "Ese correo no se ve válido."
+  },
   "confirmacion": {
     "titulo": "Recibí tu mensaje",
     "cuerpo": "Te respondo en 1–3 días hábiles al correo que dejaste.",

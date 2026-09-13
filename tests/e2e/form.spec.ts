@@ -43,6 +43,38 @@ test.describe("Formulario de contacto (antes «solicitar acceso»)", () => {
     await expect(page).toHaveURL(/\/es\/solicitud-enviada/);
   });
 
+  test("propuesta de funcionalidad: debajo del roadmap de una app, solo texto, y confirma sin salir", async ({
+    page,
+  }) => {
+    await page.goto("/es/vitrina/apps/habla");
+    const form = page.locator('form[data-formulario="propuesta"]');
+    await form.scrollIntoViewIfNeeded();
+    await page
+      .locator('form[data-formulario="propuesta"][data-hydrated=true]')
+      .waitFor();
+    // Debajo del roadmap: el formulario viene DESPUÉS de la sección #roadmap.
+    const orden = await page.evaluate(() => {
+      const r = document.querySelector("#roadmap");
+      const f = document.querySelector('form[data-formulario="propuesta"]');
+      return r && f
+        ? Boolean(
+            r.compareDocumentPosition(f) & Node.DOCUMENT_POSITION_FOLLOWING,
+          )
+        : false;
+    });
+    expect(orden).toBe(true);
+    // Vacío: error inline, nada se envía.
+    await form.getByRole("button", { name: "Proponer" }).click();
+    await expect(form.getByRole("alert")).toHaveCount(1);
+    // Con texto: confirmación en el sitio, sin navegar.
+    await form
+      .getByLabel(/qué te gustaría/i)
+      .fill("Que lea cuentos con la voz de la abuela.");
+    await form.getByRole("button", { name: "Proponer" }).click();
+    await expect(form.getByText(/Recibí tu propuesta/)).toBeVisible();
+    await expect(page).toHaveURL(/\/es\/vitrina\/apps\/habla$/);
+  });
+
   test("honeypot lleno: el API responde 200 silencioso (negativo)", async ({
     request,
   }) => {

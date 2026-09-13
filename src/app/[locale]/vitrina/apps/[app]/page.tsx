@@ -6,6 +6,7 @@ import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { Roadmap } from "@/components/home/roadmap";
 import { Reveal } from "@/components/motion/reveal";
+import { PropuestaForm } from "@/components/forms/propuesta-form";
 import { FichaTecnica } from "@/components/vitrina/ficha-tecnica";
 import { ListaDeEspera } from "@/components/vitrina/lista-de-espera";
 import { Link } from "@/i18n/navigation";
@@ -109,6 +110,16 @@ export default async function FichaTecnicaAppPage({ params }: Params) {
           />
 
           {roadmap && <Roadmap apps={[roadmap]} embebido />}
+
+          {/* Debajo del roadmap: «un espacio muy simple para proponer nuevas
+              funcionalidades» (dueño, 2026-09-13). Llega por correo; nada se
+              publica. Con volumen, el dueño evaluará hacerlas públicas y
+              votables, con control de spam. */}
+          <Reveal variant="fadeInUp">
+            <div className="mt-8">
+              <PropuestaForm app={app} nombreApp={ft.pieza.nombre} />
+            </div>
+          </Reveal>
 
           {/* El anclaje del botón «Avísame cuando abra» de la ficha vive en
               ESTA página, con la app ya elegida en el formulario. */}

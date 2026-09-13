@@ -7,6 +7,8 @@ export type AnalyticsEvent =
   | "app_card_clicked"
   | "solicitud_enviada"
   | "solicitud_fallida"
+  | "propuesta_enviada"
+  | "propuesta_fallida"
   | "hito_expandido"
   | "proyecto_detalle_visto"
   | "cv_descargado"

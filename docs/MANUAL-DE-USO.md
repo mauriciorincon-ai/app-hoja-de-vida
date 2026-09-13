@@ -248,6 +248,14 @@ el mensaje te llega al correo.
 - **Apagar la votación:** en Vercel pon `VOTACION_ENABLED=false` (o quita `SUPABASE_URL`/
   `SUPABASE_ANON_KEY`) y redeploy — la sección se muestra en modo "no disponible", honesta y sin
   botones activos.
+- **Proponer una funcionalidad (desde el 2026-09-13):** debajo del roadmap de cada app hay una
+  caja «¿Qué te gustaría que hiciera <app>?» con correo opcional y el botón «Proponer». La
+  propuesta **te llega por correo** con el asunto «[CV Viva] Propuesta para <app>» (reply-to solo
+  si el visitante dejó su correo); **nada se publica ni se guarda en la base de datos**. Mismas
+  protecciones que el formulario de contacto (límite por visitante, trampa anti-bots, y la app
+  tiene que existir). En tu computador el envío se simula, como el de contacto. Qué hacer con
+  ellas: las buenas se las pasas a la planeadora en la revisión de features. Cuando haya
+  volumen, se evaluará hacerlas públicas y votables, con control de spam — no antes.
 
 ### Página brochure por app · desde Sprint 004
 

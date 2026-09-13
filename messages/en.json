@@ -123,6 +123,20 @@
     "otra": "Another one",
     "nota": "No date promised. I'll let you know when it opens."
   },
+  "propuesta": {
+    "eyebrow": "Propose a feature",
+    "titulo": "What would you like {app} to do?",
+    "ayuda": "An idea, in your own words. The best ones reach the app's plan.",
+    "placeholder": "For example: that it…",
+    "email": "Your email (optional, in case you want to know when it exists)",
+    "enviar": "Propose",
+    "enviando": "Sending…",
+    "reintentar": "Retry",
+    "gracias": "I got your proposal. Thank you.",
+    "error": "I couldn't send your proposal. Please try again in a moment.",
+    "errorTexto": "Write your proposal: at least ten characters.",
+    "errorEmail": "That email doesn't look valid."
+  },
   "confirmacion": {
     "titulo": "I got your message",
     "cuerpo": "I'll reply within 1–3 business days to the email you left.",
