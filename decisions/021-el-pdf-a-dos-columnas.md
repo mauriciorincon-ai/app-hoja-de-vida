@@ -16,7 +16,7 @@ hoja «muy, muy explícito».
    (38 %): perfil, formación, certificaciones y skills. Por página se dibuja cabecera → derecha →
    izquierda, así el flujo de texto que un parser extrae es cabecera, perfil, experiencia. La
    izquierda fluye a más páginas. Verificado con `pdftotext` en modo crudo.
-2. **Acento navy `#1F3A5F`**, tinta `#111111`, gris `#555555`; Helvetica sin embedding, todo
+2. **Acento navy `#2B4C7E`** (el primer corte, `#1F3A5F`, el dueño lo pidió «aclarado un poco»), tinta `#111111`, gris `#555555`; Helvetica sin embedding, todo
    texto. Sin iconos ni imágenes: el ATS los pierde y no aportan.
 3. **El dominio va primero y en negrilla en la línea de contacto, pero solo si el build lo conoce
    por `NEXT_PUBLIC_SITE_URL`.** Regla 16 intacta: el dominio no se escribe en ningún archivo del

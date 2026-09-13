@@ -98,6 +98,9 @@ describe("PDF ATS generado en build desde los YAML", () => {
     const text = await extractText(path.join(dir, "Henry-Rincon-CV-ES.pdf"));
     expect(text.indexOf("ejemplo.test")).toBeGreaterThan(-1);
     expect(text.indexOf("ejemplo.test")).toBeLessThan(text.indexOf("@"));
+    // Y el perfil cierra con el sitio en vez de con el chat.
+    expect(text).toMatch(/Más en mi sitio:\s*ejemplo\.test/);
+    expect(text).not.toMatch(/Pregúntaselo\s+al\s+chat/);
     // Y sin la variable (los PDFs de `files`), no hay dominio inventado.
     expect(await extractText(files.es)).not.toContain("ejemplo.test");
   });

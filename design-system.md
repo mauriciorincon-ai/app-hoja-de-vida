@@ -344,7 +344,7 @@ la estructura de dos columnas de los comprobadores de CV y un azul navy. Sus tok
 
 | Token      | Valor                            | Uso                                                                                     |
 | ---------- | -------------------------------- | --------------------------------------------------------------------------------------- |
-| `NAVY`     | `#1F3A5F`                        | eyebrow, organización/institución, grupos de skills, reglas de sección, dominio         |
+| `NAVY`     | `#2B4C7E`                        | eyebrow, organización/institución, grupos de skills, reglas de sección, dominio         |
 | `TINTA`    | `#111111`                        | nombre, títulos de sección y de hito, cuerpo                                            |
 | `GRIS`     | `#555555`                        | periodos, línea de contacto, ubicación                                                  |
 | columnas   | 62 % / 38 % con 14 pt de hueco   | izquierda: experiencia, proyectos · derecha: perfil, formación, certificaciones, skills |

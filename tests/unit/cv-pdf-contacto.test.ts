@@ -1,5 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { lineaDeContacto } from "../../scripts/generate-cv-pdf.mjs";
+import {
+  lineaDeContacto,
+  perfilParaPdf,
+} from "../../scripts/generate-cv-pdf.mjs";
 
 /**
  * La cabecera del PDF (revisión post-S8, bloque D): el dominio del sitio va
@@ -31,5 +34,30 @@ describe("lineaDeContacto del PDF", () => {
       lineaDeContacto(identidad, "http://localhost:3000").destacado,
     ).toBeNull();
     expect(lineaDeContacto(identidad, "no es una url").destacado).toBeNull();
+  });
+});
+
+describe("perfilParaPdf: el cierre del chat se vuelve el sitio", () => {
+  const labels = {
+    masEnMiSitio: "Más en mi sitio:",
+    cierreChat: /\s*¿Quieres saber algo más\?[^.]*\./,
+  };
+  const perfil =
+    "Ingeniero con diez años. ¿Quieres saber algo más? Pregúntaselo al chat de esta hoja de vida.";
+
+  it("con dominio, la frase del chat se reemplaza por «Más en mi sitio: dominio»", () => {
+    expect(perfilParaPdf(perfil, labels, "ejemplo.test")).toBe(
+      "Ingeniero con diez años. Más en mi sitio: ejemplo.test.",
+    );
+  });
+
+  it("sin dominio, la frase del chat simplemente no va", () => {
+    expect(perfilParaPdf(perfil, labels, null)).toBe(
+      "Ingeniero con diez años.",
+    );
+  });
+
+  it("un perfil sin esa frase queda intacto", () => {
+    expect(perfilParaPdf("Texto plano.", labels, null)).toBe("Texto plano.");
   });
 });

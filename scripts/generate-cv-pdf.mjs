@@ -37,6 +37,8 @@ const LABELS = {
     certificaciones: "CERTIFICACIONES",
     formacion: "FORMACIÓN",
     enCurso: "en curso",
+    masEnMiSitio: "Más en mi sitio:",
+    cierreChat: /\s*¿Quieres saber algo más\?[^.]*\./,
     archivo: "Henry-Rincon-CV-ES.pdf",
     titulo: "CV — Henry Rincón (ES)",
   },
@@ -48,13 +50,15 @@ const LABELS = {
     certificaciones: "CERTIFICATIONS",
     formacion: "EDUCATION",
     enCurso: "in progress",
+    masEnMiSitio: "More on my site:",
+    cierreChat: /\s*Want to know anything else\?[^.]*\./,
     archivo: "Henry-Rincon-CV-EN.pdf",
     titulo: "CV — Henry Rincón (EN)",
   },
 };
 
 /** Paleta del PDF: navy para acentos, tinta para el texto, gris para fechas. */
-export const NAVY = "#1F3A5F";
+export const NAVY = "#2B4C7E"; // navy aclarado (segunda vuelta del dueño)
 const TINTA = "#111111";
 const GRIS = "#555555";
 
@@ -110,6 +114,19 @@ export function lineaDeContacto(identidad, sitio) {
     ...identidad.enlaces.map((e) => sinProtocolo(e.url)),
   ].filter(Boolean);
   return { destacado, resto };
+}
+
+/**
+ * El perfil, para el PDF: la web cierra con «¿Quieres saber algo más?
+ * Pregúntaselo al chat…», y en papel no hay chat. Con dominio conocido, esa
+ * frase se vuelve «Más en mi sitio: dominio» (el dueño quiso ese espacio para
+ * su página); sin dominio, la frase simplemente no va.
+ */
+export function perfilParaPdf(perfil, labels, destacado) {
+  const sinChat = String(perfil).replace(labels.cierreChat, "").trimEnd();
+  return destacado
+    ? `${sinChat} ${labels.masEnMiSitio} ${destacado}.`
+    : sinChat;
 }
 
 /**
@@ -245,14 +262,22 @@ function cabecera(doc, cv, sitio) {
   return y + 12;
 }
 
-function columnaDerecha(doc, cv, labels, yInicial) {
+function columnaDerecha(doc, cv, labels, yInicial, sitio) {
   const col = new Columna(doc, COL_DER.x, COL_DER.ancho, yInicial);
 
   col.seccion(labels.perfil);
   estilo(doc, "Helvetica", 8.8, TINTA);
-  col.parrafo(ansi(cv.identidad.perfil || cv.identidad.resumen), {
-    lineGap: 1.6,
-  });
+  const { destacado } = lineaDeContacto(cv.identidad, sitio);
+  col.parrafo(
+    ansi(
+      perfilParaPdf(
+        cv.identidad.perfil || cv.identidad.resumen,
+        labels,
+        destacado,
+      ),
+    ),
+    { lineGap: 1.6 },
+  );
 
   const estudios = cv.estudios ?? [];
   if (estudios.length > 0) {
@@ -346,7 +371,7 @@ export function renderCv(
   const yColumnas = cabecera(doc, cv, sitio);
   // Orden ATS por página: cabecera, luego perfil/formación/certificaciones/
   // skills (derecha), luego experiencia/proyectos (izquierda).
-  columnaDerecha(doc, cv, labels, yColumnas);
+  columnaDerecha(doc, cv, labels, yColumnas, sitio);
   columnaIzquierda(doc, cv, labels, yColumnas);
 
   doc.end();

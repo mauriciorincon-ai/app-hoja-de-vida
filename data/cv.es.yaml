@@ -392,10 +392,19 @@ skills:
       - "Data storytelling"
       - "KPIs"
       - "Gobernanza y calidad de datos"
-  - grupo: "Ingeniería & liderazgo"
+  - grupo: "Ingeniería"
     items:
       - "Python"
       - "Git/GitHub"
       - "CI/CD — este sitio corre con ello"
-      - "Equipos de hasta 20 personas"
-      - "Stakeholders C-level"
+  # Revisión post-S8, bloque D: el quinto grupo son las habilidades blandas,
+  # sacadas del corpus «Mi forma de trabajar» (decisión del dueño, 2026-09-13).
+  - grupo: "Cómo trabajo"
+    items:
+      - "Liderazgo de equipos de hasta 20 personas"
+      - "Comunicación con junta directiva y dirección"
+      - "Gestión por procesos y métodos ágiles"
+      - "Formación y adopción de usuarios"
+      - "Documentación reproducible y transferencia"
+      - "Trabajo con equipos multidisciplinarios"
+      - "Inglés profesional (B2)"
