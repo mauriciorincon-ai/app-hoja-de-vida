@@ -103,7 +103,7 @@ el mensaje te llega al correo.
 - **El tercer estado — «en curso» (revisión post-S8):** una certificación que estás preparando
   se lista con `estado: "en curso"` y **sin `fecha`** (una obtenida sin fecha rompe el build). La
   HOME la enseña con el chip «En curso» en el sitio de la fecha; `/cv` y el chat dicen «(en
-  curso)». Así entró el **AI-103**. El logro «5 certificaciones» sigue contando solo las
+  curso)». Así entraron el **AI-103** y el **DP-100**, en paralelo. El logro «5 certificaciones» sigue contando solo las
   obtenidas. **Y el gate vigila lo contrario:** cada vez que el titular, el perfil, un logro,
   `messages/` o `apps.yaml` nombran un código en curso, tienen que llevar «en curso» (o «en
   ruta», «en preparación», «in progress») a menos de 48 caracteres — «(AI-103)» a secas pone

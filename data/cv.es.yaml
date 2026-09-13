@@ -14,8 +14,8 @@ identidad:
   # Revisión post-S8 (2026-09-12): AI-103 se nombra CON «en curso» (gate de
   # contenido) y el cierre invita en vez de retar (decisión del dueño).
   resumen: >-
-    Líder de datos e ingeniero de IA (AI-103, en curso) · Analytics Engineer
-    (DP-600). Diseño plataformas analíticas en Microsoft Fabric y llevo
+    Líder de datos e ingeniero de IA (AI-103 y DP-100, en curso) · Analytics
+    Engineer (DP-600). Diseño plataformas analíticas en Microsoft Fabric y llevo
     agentes de IA a producción — y esta hoja de vida es la muestra: recórrela
     y pregúntale.
   # Frase del chat (pack §3) restituida en S3: el chat ya es real
@@ -29,7 +29,8 @@ identidad:
     plataforma de datos de una startup de agentes de IA —Microsoft Fabric y un
     proceso replicable para diseñar y monitorear agentes— y construí BI y
     analítica predictiva en banca. Certificado por Microsoft como Fabric
-    Analytics Engineer (DP-600), en ruta al AI-103. ¿Quieres saber algo más?
+    Analytics Engineer (DP-600), en ruta al AI-103 y al DP-100. ¿Quieres saber
+    algo más?
     Pregúntaselo al chat de esta hoja de vida.
   # La disponibilidad de reubicación es señal DELIBERADA para recruiters (pack §1)
   ubicacion: "Bogotá, Colombia · Abierto a reubicación internacional y trabajo remoto"
@@ -336,6 +337,12 @@ certificaciones:
   - nombre: "Microsoft Certified: Azure AI Engineer Associate (AI-103)"
     estado: "en curso"
     nota: "En preparación: la ruta de ingeniería de IA en Azure."
+    icono: insignia
+    logo: microsoft.svg
+  # 2026-09-12: el DP-100 va en paralelo al AI-103, también EN CURSO.
+  - nombre: "Microsoft Certified: Azure Data Scientist Associate (DP-100)"
+    estado: "en curso"
+    nota: "En preparación, en paralelo al AI-103: ciencia de datos y aprendizaje automático en Azure."
     icono: insignia
     logo: microsoft.svg
   - nombre: "IBM: Ciencia de Datos Aplicada con R"
