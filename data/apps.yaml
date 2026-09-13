@@ -12,7 +12,7 @@
 #   DESDE 2026-09-13 (decisión del dueño): ninguna app de ESTA casa lleva
 #   roadmap — las features de CV Viva no se muestran en ningún lado. El roadmap
 #   votable vuelve POR APP HERMANA, en la página de cada una, con las features
-#   que entregue la planeadora (ver sprints/POST-S8-prompt-a-la-planeadora-roadmap.md).
+#   que entregue la planeadora (pedidas el 2026-09-13; el pedido no vive en este repo).
 #   Un test lo vigila: un `roadmap:` aquí rompe el build.
 
 apps:

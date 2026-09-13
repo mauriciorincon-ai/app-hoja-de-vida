@@ -218,8 +218,8 @@ el mensaje te llega al correo.
 > CV Viva y del chat, escritas en el S4, y **ninguna feature de CV Viva se muestra en ningún
 > lado**. Se retiraron del YAML: la sección Roadmap **no se monta** hasta que existan features
 > reales. El roadmap vuelve **por app hermana, en la página de cada app**, con las features más
-> disruptivas y de cierre de plan que entregue la planeadora — el prompt para pedírselas está en
-> `sprints/POST-S8-prompt-a-la-planeadora-roadmap.md`. La votación y su base de datos siguen
+> disruptivas y de cierre de plan que entregue la planeadora (ya pedidas el 2026-09-13; llegan por
+> copia a `data/fichas/<slug>.yaml`). La votación y su base de datos siguen
 > intactas; los votos viejos quedan huérfanos en Supabase (cero PII) y no se muestran.
 
 - **Qué hace:** la sección "Roadmap" muestra las próximas features de cada app y deja que quien
