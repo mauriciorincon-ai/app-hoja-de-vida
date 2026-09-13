@@ -61,7 +61,7 @@ el mensaje te llega al correo.
   movimiento» activado todo queda quieto: la línea completa, el círculo fijo y el año sin fundido.
 - **Cómo se alimenta:** igual que siempre, `trayectoria:` en `data/cv.es.yaml` y `cv.en.yaml`. El
   año grande sale del `periodo` (los primeros cuatro dígitos): «2023 — 2025» enseña «2023».
-- **Ver case study desde el hito:** un hito con `proyecto: <slug>` enseña «Ver case study →» hacia
+- **Ver case study desde el hito:** un hito con `proyecto: <slug>` enseña «Ver caso de estudio →» («View case study →» en inglés) hacia
   `/proyectos/<slug>`. El slug tiene que ser el de un proyecto **con** `casestudy:`; si no, **la
   publicación falla** y te dice qué hito. Es la única puerta a los case studies desde la HOME
   (la sección «Proyectos» ya no existe: ahí está la vitrina).

@@ -31,11 +31,11 @@
   "timeline": {
     "verMas": "Ver logros completos",
     "verMenos": "Ver menos",
-    "verCaseStudy": "Ver case study",
+    "verCaseStudy": "Ver caso de estudio",
     "indiceAria": "Año de la experiencia a la vista"
   },
   "detalle": {
-    "eyebrow": "Case study",
+    "eyebrow": "Caso de estudio",
     "volver": "Trayectoria",
     "contexto": "Contexto",
     "reto": "El reto",
@@ -44,7 +44,7 @@
     "stack": "Stack",
     "cta": "¿Te suena a tu equipo? Hablemos",
     "descargarCv": "Descargar CV (PDF)",
-    "verCaseStudy": "Ver case study"
+    "verCaseStudy": "Ver caso de estudio"
   },
   "cv": {
     "titulo": "Hoja de vida",

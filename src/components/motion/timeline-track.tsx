@@ -93,10 +93,11 @@ function BulletsDisclosure({
   id: string;
   hito: string;
   labels: TimelineLabels;
-  /** Acciones vecinas del hito (p. ej. el enlace al case study): van DEBAJO
-   *  del panel de bullets, así que bajan con él al desplegarse (revisión
-   *  post-S8, bloque C: «que el botón baje con el desplegable»). Antes iban en
-   *  la misma fila que el botón y el panel abría entre medias. */
+  /** Acciones vecinas del hito (p. ej. el enlace al caso de estudio). Con el
+   *  panel CERRADO van al lado del botón, en la misma fila; al DESPLEGAR bajan
+   *  al pie del panel y salen con él; al cerrar vuelven a la fila (revisión
+   *  post-S8, bloque C: «al lado al inicio, que baje cuando despliegue y
+   *  regrese al lado cuando cierre»). */
   children?: React.ReactNode;
 }) {
   const [expanded, setExpanded] = useState(false);
@@ -125,6 +126,7 @@ function BulletsDisclosure({
             ▼
           </span>
         </button>
+        {!expanded && children}
       </div>
       <div
         className="grid transition-[grid-template-rows] duration-300 ease-out motion-reduce:transition-none"
@@ -149,9 +151,9 @@ function BulletsDisclosure({
               </li>
             ))}
           </ul>
+          {expanded && children}
         </div>
       </div>
-      {children}
     </>
   );
 }
@@ -300,8 +302,9 @@ export function TimelineTrack({
               <p className="text-sm leading-relaxed text-ink-2">
                 {item.descripcion}
               </p>
-              {/* «Ver logros completos» arriba; el enlace al case study va
-                  DEBAJO del panel de logros y baja con él (post-S8, bloque C). */}
+              {/* «Ver logros completos» y el enlace al caso de estudio en UNA
+                  fila; al desplegar, el enlace baja al pie de los logros y al
+                  cerrar vuelve a la fila (post-S8, bloque C). */}
               {(item.bullets?.length ?? 0) > 0 ? (
                 <BulletsDisclosure
                   bullets={item.bullets ?? []}
