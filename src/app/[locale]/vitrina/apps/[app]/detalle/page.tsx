@@ -7,7 +7,6 @@ import { Header } from "@/components/header";
 import { Reveal } from "@/components/motion/reveal";
 import { AperturaPorLectura } from "@/components/vitrina/apertura-por-lectura";
 import { FichaApp } from "@/components/vitrina/ficha";
-import { ListaDeEspera } from "@/components/vitrina/lista-de-espera";
 import { Link } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
 import { getCv } from "@/lib/content";
@@ -146,10 +145,37 @@ export default async function DetalleAppPage({ params }: Params) {
           )}
 
           {/* El anclaje del CTA de la ficha vive en ESTA página: el botón
-              «avísame» de la ficha apunta a `#contacto-vitrina`, y si la
-              sección no estuviera aquí el enlace no llevaría a ninguna parte.
-              La app ya va elegida en el formulario. */}
-          <ListaDeEspera appInicial={app} />
+              «avísame» apunta a `#contacto-vitrina`. Pero el FORMULARIO de la
+              lista de espera vive en la página inicial de la app (la ficha
+              técnica), no aquí: el detalle es la página más pesada de la
+              vitrina y una isla más la sacó del presupuesto de interactividad
+              (Lighthouse, PR #32: 4005 ms > 4000). Este cierre es estático y
+              manda al formulario con la app ya elegida. */}
+          <Reveal variant="fadeInUp">
+            <section
+              id="contacto-vitrina"
+              aria-labelledby="vitrina-cierre"
+              className="mt-12 scroll-mt-16 border-t border-paper-2 pt-10"
+            >
+              <h2
+                id="vitrina-cierre"
+                className="font-display text-2xl font-medium tracking-[-0.015em] text-ink-0"
+              >
+                {t("acceso")}
+              </h2>
+              <p className="mt-3 max-w-[60ch] text-[15px] leading-relaxed text-ink-1">
+                {t("listaDeEsperaLinea")}
+              </p>
+              <Link
+                href={`/vitrina/apps/${app}#contacto-vitrina`}
+                data-cta="ir-a-lista-de-espera"
+                className="mt-5 flex min-h-11 w-fit items-center gap-2 rounded-md bg-sage px-6 text-[15px] font-medium text-sage-ink shadow-sh-1 transition-[filter] duration-[120ms] hover:brightness-[0.97]"
+              >
+                {t("cta")}
+                <span aria-hidden="true">→</span>
+              </Link>
+            </section>
+          </Reveal>
         </div>
       </main>
       <Footer identidad={cv.identidad} />

@@ -248,6 +248,16 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
       await expect(cta).toHaveAttribute("href", "#contacto-vitrina");
       // Un ancla que no aterriza en ninguna parte es un botón roto.
       await expect(page.locator("#contacto-vitrina")).toHaveCount(1);
+      // El FORMULARIO vive en la página inicial de la app, no en el detalle
+      // (la página más pesada: una isla más la sacó del presupuesto de
+      // interactividad, PR #32). El cierre del detalle manda allá.
+      await expect(page.locator('form[data-formulario="app"]')).toHaveCount(0);
+      await expect(
+        page.locator('[data-cta="ir-a-lista-de-espera"]'),
+      ).toHaveAttribute(
+        "href",
+        `/es/vitrina/apps/${exp.app.slug}#contacto-vitrina`,
+      );
     }
   });
 
