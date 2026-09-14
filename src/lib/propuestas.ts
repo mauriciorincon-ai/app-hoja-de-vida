@@ -9,8 +9,9 @@ import { z } from "zod";
  * haya volumen, el dueño evaluará propuestas públicas y votables, con control
  * de spam — no antes.
  */
-export const PROPUESTA_MIN = 10;
-export const PROPUESTA_MAX = 500;
+import { PROPUESTA_MAX, PROPUESTA_MIN } from "./contacto-constantes";
+
+export { PROPUESTA_MAX, PROPUESTA_MIN };
 
 export const propuestaSchema = z.object({
   app: z

@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { APP_OTRA } from "@/lib/schemas";
+import { APP_OTRA } from "@/lib/contacto-constantes";
 import { FormularioContacto } from "./formulario-contacto";
 
 /**

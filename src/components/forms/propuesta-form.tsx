@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { trackEvent } from "@/lib/analytics";
-import { PROPUESTA_MAX, PROPUESTA_MIN } from "@/lib/propuestas";
+import { PROPUESTA_MAX, PROPUESTA_MIN } from "@/lib/contacto-constantes";
 
 /**
  * «Un espacio muy simple para proponer nuevas funcionalidades ahí mismo,

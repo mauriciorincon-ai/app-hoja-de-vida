@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { aniosCumplidos, DESDE_RE, esFuturo } from "../../scripts/anios.mjs";
+import { MOTIVOS } from "./contacto-constantes";
 
 /**
  * Iconos monolínea (Lucide, trazo 1.5, sin color) que un estudio o una
@@ -367,33 +368,15 @@ export const vitrinaSchema = z
 export type Vitrina = z.infer<typeof vitrinaSchema>;
 export type CategoriaVitrina = Vitrina["categorias"][number];
 
-/**
- * Los motivos del formulario GENERAL de la HOME (bloque E del gate ⭐ post-S8):
- * las cinco puertas que el propio bloque anuncia —«¿Un proyecto, una asesoría,
- * una capacitación, una charla o un rol?»— y nada más. La lista de espera de
- * las apps es OTRO formulario, en la vitrina (campo `app`, abajo). El texto
- * visible vive en `messages/*.json` (`form.motivos.<id>`); estas etiquetas son
- * las del CORREO, que lee el dueño, en español.
- */
-export const MOTIVOS = [
-  "proyecto",
-  "asesoria",
-  "capacitacion",
-  "charla",
-  "rol",
-] as const;
-export type Motivo = (typeof MOTIVOS)[number];
-export const ETIQUETAS_MOTIVO: Record<Motivo, string> = {
-  proyecto: "Un proyecto",
-  asesoria: "Una asesoría",
-  capacitacion: "Una capacitación",
-  charla: "Una charla",
-  rol: "Un rol",
-};
-
-/** La opción «Otra» de la lista de espera de apps: nunca sobra. */
-export const APP_OTRA = "otra";
-export const ETIQUETA_APP_OTRA = "Otra app";
+// Las constantes que también usa el navegador viven sin Zod en
+// `contacto-constantes.ts`; se re-exportan para que haya una sola lista.
+export {
+  APP_OTRA,
+  ETIQUETA_APP_OTRA,
+  ETIQUETAS_MOTIVO,
+  MOTIVOS,
+  type Motivo,
+} from "./contacto-constantes";
 
 /**
  * Mensaje desde la hoja de vida (los dos formularios + el endpoint). `website`
