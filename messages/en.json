@@ -74,7 +74,7 @@
   "roadmap": {
     "eyebrow": "Roadmap",
     "titulo": "What's coming — and you set the order",
-    "subtitulo": "These are each app's next features. Vote for the ones you most want to see: one click, no sign-up. The counters are real.",
+    "subtitulo": "What this app has planned for the end of its road. Vote for what you most want to see: one click, no sign-up. The counters are real.",
     "votar": "Vote",
     "votos": "{count, plural, =0 {no votes yet} one {# vote} other {# votes}}",
     "yaVotaste": "You voted",
@@ -97,8 +97,15 @@
     "titulo": "Write to me",
     "nombre": "Your name",
     "email": "Your email",
-    "app": "Here for an app? (optional)",
-    "appNinguna": "No, this is a general message",
+    "motivo": "Reason (optional)",
+    "motivoElige": "Choose a reason",
+    "motivos": {
+      "proyecto": "A project",
+      "asesoria": "Consulting",
+      "capacitacion": "Training",
+      "charla": "A talk",
+      "rol": "A role"
+    },
     "mensaje": "Tell me what you have in mind (optional)",
     "enviar": "Send",
     "enviando": "Sending…",
@@ -108,6 +115,27 @@
       "nombreRequerido": "Please write your name.",
       "emailInvalido": "That email doesn't look valid."
     }
+  },
+  "listaDeEspera": {
+    "titulo": "Waiting list",
+    "app": "Which app are you interested in?",
+    "elige": "Choose an app",
+    "otra": "Another one",
+    "nota": "No date promised. I'll let you know when it opens."
+  },
+  "propuesta": {
+    "eyebrow": "Propose a feature",
+    "titulo": "What would you like {app} to do?",
+    "ayuda": "An idea, in your own words. The best ones reach the app's plan.",
+    "placeholder": "For example: that it…",
+    "email": "Your email (optional, in case you want to know when it exists)",
+    "enviar": "Propose",
+    "enviando": "Sending…",
+    "reintentar": "Retry",
+    "gracias": "I got your proposal. Thank you.",
+    "error": "I couldn't send your proposal. Please try again in a moment.",
+    "errorTexto": "Write your proposal: at least ten characters.",
+    "errorEmail": "That email doesn't look valid."
   },
   "confirmacion": {
     "titulo": "I got your message",
@@ -147,7 +175,7 @@
     "eyebrow": "The showcase",
     "titulo": "What gets built here, on four fronts",
     "subtitulo": "Each front has its own space; this is just the window. What is already built is shown; what is starting is declared.",
-    "portalNota": "Nothing you see is handed over from here: it is shown, and there is a waiting list.",
+    "portalNota": "Nothing you see is handed over from here: it is shown. Only the apps have a waiting list.",
     "appsTitulo": "{n} apps, actually built",
     "frenteEstados": {
       "abierta": "Open",
@@ -161,7 +189,7 @@
     "entrar": "Explore",
     "verQueViene": "See what's coming",
     "enPreparacionTitulo": "This front is starting",
-    "enPreparacionLinea": "The first products get published here once they are built — each with what it does and with what evidence. No date promised: if you want to hear about it, the waiting list is below.",
+    "enPreparacionLinea": "The first products get published here once they are built — each with what it does and with what evidence. No date promised.",
     "otrosFrentes": "The other fronts of the showcase",
     "notaIdioma": "Each app's own words are kept in Spanish, exactly as its team wrote them.",
     "estados": {
@@ -198,6 +226,10 @@
     "acceso": "How you get access",
     "cta": "Tell me when it opens",
     "ctaNota": "You join the waiting list. No date promised.",
+    "ctaApps": "Apps waiting list",
+    "listaDeEsperaLinea": "Only the apps have a waiting list: tell me which one you're interested in and I'll let you know when it opens. No date promised.",
+    "sinListaDeEspera": "This front is shown to demonstrate capabilities: it is not handed over and has no waiting list. If something here is useful to you, write to me.",
+    "escribeme": "Write to me",
     "anclaje": "Card pinned to the export of {fecha} · v{version} · {sprints, plural, one {# closed sprint} other {# closed sprints}}",
     "anclajeNota": "The showcase shows each app's pinned version, not its real-time state.",
     "sí": "yes",
@@ -267,7 +299,7 @@
       "decisiones": "recorded decisions"
     },
     "verDetalle": "Open the full card",
-    "cierreNota": "Shown here; not handed over. The waiting list promises no date.",
+    "cierreNota": "Shown here; not handed over.",
     "volverFichaTecnica": "Back to the technical sheet"
   },
   "vitrinaHome": {

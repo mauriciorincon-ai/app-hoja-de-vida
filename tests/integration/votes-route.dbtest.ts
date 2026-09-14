@@ -1,4 +1,14 @@
+import { readFileSync } from "node:fs";
 import { beforeAll, describe, expect, it } from "vitest";
+import { parse } from "yaml";
+
+// El par real sale del complemento de «habla» (roadmap por app, 2026-09-13).
+const habla = parse(readFileSync("data/fichas/habla.yaml", "utf8")) as {
+  app: string;
+  roadmap: { id: string }[];
+};
+const APP = habla.app;
+const FEATURE = habla.roadmap[0].id;
 
 /**
  * Punta a punta de los route handlers de votación contra Postgres REAL
@@ -41,8 +51,8 @@ beforeAll(() => {
 
 describe("route de votación contra Postgres real", () => {
   it("POST votar sube el total real y GET votos lo refleja", async () => {
-    const app = "hoja-de-vida";
-    const feature = "mapa-c4";
+    const app = APP;
+    const feature = FEATURE;
     const antes = await totalDe(app, feature);
 
     const res = await POST(postVoto({ app, feature }));
@@ -55,12 +65,10 @@ describe("route de votación contra Postgres real", () => {
   });
 
   it("400 unknown_feature no toca la BD", async () => {
-    const antes = await totalDe("hoja-de-vida", "mapa-c4");
-    const res = await POST(
-      postVoto({ app: "hoja-de-vida", feature: "no-existe" }),
-    );
+    const antes = await totalDe(APP, FEATURE);
+    const res = await POST(postVoto({ app: APP, feature: "no-existe" }));
     expect(res.status).toBe(400);
-    const despues = await totalDe("hoja-de-vida", "mapa-c4");
+    const despues = await totalDe(APP, FEATURE);
     expect(despues).toBe(antes);
   });
 });

@@ -50,3 +50,44 @@ proceso:
   anotaciones:
     - { paso: mide, texto: "La voz del niño nunca se guarda ni sale del aparato: se analiza en memoria y se descarta." }
     - { paso: responde, texto: "Con la voz que la familia grabó una sola vez en el Estudio, en ese mismo aparato." }
+
+# Roadmap votable (2026-09-13): lo que la planeadora entrega como cierre de plan
+# de esta app — features disruptivas, no en construcción, sin fechas. PROCEDENCIA:
+# cv-viva (la planeadora lo administra; llega por copia y no se edita aquí). Los
+# `id` son ESTABLES: el par (app, id) es la clave del voto en la BD.
+roadmap:
+  - id: cuentos-a-su-medida
+    titulo:
+      es: "Cuentos hechos para él, con la voz de casa"
+      en: "Stories made for him, in a voice from home"
+    descripcion:
+      es: "Cada tanto llegan historias nuevas con sus intereses y sus palabras meta; tú las revisas antes de que las escuche, narradas con la voz de mamá o papá."
+      en: "Every so often new stories arrive with his interests and target words; you review them before he hears them, narrated in mom's or dad's voice."
+  - id: dijo-la-palabra
+    titulo:
+      es: "¿Dijo la palabra? Una segunda opinión, sin quitarte el juicio"
+      en: "Did he say the word? A second opinion that never overrules you"
+    descripcion:
+      es: "La app reconoce en el teléfono un vocabulario cerrado y te lo marca como «quizás»: la última palabra sigue siendo tuya."
+      en: "The app recognizes a closed vocabulary on the phone and flags it as a “maybe”: the final call stays yours."
+  - id: contacto-visual-en-la-app
+    titulo:
+      es: "El contacto visual, dentro de la pantalla de cada día"
+      en: "Eye contact, inside the everyday screen"
+    descripcion:
+      es: "Lo que hoy es un documento pasa a convivir con las cápsulas del habla en «Hoy»: dos dominios en una sola rutina."
+      en: "What is a document today joins the speech capsules in “Today”: two domains in a single routine."
+  - id: videoteca-de-la-familia
+    titulo:
+      es: "Videoteca de la familia"
+      en: "The family video library"
+    descripcion:
+      es: "Clips cortos de papá o los hermanos modelando pedir, saludar o jugar, para que el ejemplo venga de las caras que él conoce."
+      en: "Short clips of dad or siblings modeling asking, greeting or playing, so the example comes from the faces he knows."
+  - id: la-voz-dibujada-con-mas-detalle
+    titulo:
+      es: "Ver la propia voz dibujada con más detalle"
+      en: "See your own voice drawn in more detail"
+    descripcion:
+      es: "Los juegos de tono ganan una lectura más fina de la voz, para que el dibujo responda a matices que hoy no distingue."
+      en: "The pitch games gain a finer reading of the voice, so the drawing responds to nuances it can't tell apart today."

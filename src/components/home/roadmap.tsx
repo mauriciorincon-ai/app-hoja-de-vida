@@ -11,10 +11,12 @@ import { RoadmapVoting, type GrupoRoadmap } from "./roadmap-voting";
  */
 /**
  * Desde la revisión post-S7 el roadmap NO vive en la HOME: es una pregunta
- * sobre las apps («qué viene») y se contesta donde están las apps — al pie
- * del escaparate de la vitrina. `embebido` lo pinta como un bloque más de esa
- * página (sin su propio contenedor a todo el ancho). Los ids, los
- * `data-testid` y la isla de votación son los mismos: solo cambió de casa.
+ * sobre las apps («qué viene») y se contesta donde están las apps. Y desde
+ * 2026-09-13 (dueño) se contesta en la página de CADA app hermana, con su
+ * propio roadmap (`data/fichas/<slug>.yaml`): `embebido` lo pinta como un
+ * bloque más de esa página. Con una sola app el nombre del grupo sobra (la
+ * página ya es la de esa app). Los ids, los `data-testid` y la isla de
+ * votación son los mismos: solo cambió de casa, dos veces.
  */
 export async function Roadmap({
   apps,
@@ -28,7 +30,7 @@ export async function Roadmap({
 
   const grupos: GrupoRoadmap[] = apps.map((app) => ({
     appId: app.id,
-    appNombre: app.nombre[locale],
+    appNombre: app.nombre,
     features: app.roadmap.map((f) => ({
       app: app.id,
       feature: f.id,
@@ -57,7 +59,7 @@ export async function Roadmap({
           {t("subtitulo")}
         </p>
       </Reveal>
-      <RoadmapVoting grupos={grupos} />
+      <RoadmapVoting grupos={grupos} conNombreDeApp={apps.length > 1} />
     </>
   );
 

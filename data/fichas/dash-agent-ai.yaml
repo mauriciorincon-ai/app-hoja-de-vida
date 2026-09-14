@@ -48,3 +48,30 @@ proceso:
   anotaciones:
     - { paso: lee, texto: "Solo lectura con cuatro capas: permisos de Node, una frontera de módulo única, el índice fuera de las fuentes y pruebas permanentes." }
     - { paso: indexa, texto: "Nada sale de la máquina: no hay servidor, cuenta ni nube." }
+
+# Roadmap votable (2026-09-13): lo que la planeadora entrega como cierre de plan
+# de esta app — features disruptivas, no en construcción, sin fechas. PROCEDENCIA:
+# cv-viva (la planeadora lo administra; llega por copia y no se edita aquí). Los
+# `id` son ESTABLES: el par (app, id) es la clave del voto en la BD.
+roadmap:
+  - id: lector-de-otro-agente-de-codigo
+    titulo:
+      es: "Un segundo agente de código en el mismo panel"
+      en: "A second coding agent on the same dashboard"
+    descripcion:
+      es: "Costo, línea de tiempo y auditor dejan de cubrir un solo agente: cuando adoptes otro, sus tokens medidos entran al mismo panel, sin estimaciones."
+      en: "Cost, timeline and auditor stop covering a single agent: when you adopt another one, its measured tokens join the same dashboard, no estimates."
+  - id: app-de-doble-clic
+    titulo:
+      es: "Abrir Dash con doble clic"
+      en: "Open Dash with a double click"
+    descripcion:
+      es: "Deja de ser un servidor que levantas desde la terminal: una app de escritorio que abres como cualquier otra, igual de local y sin enviar nada fuera."
+      en: "No more starting a server from the terminal: a desktop app you open like any other, just as local, sending nothing out."
+  - id: agentes-sin-registro-de-tokens
+    titulo:
+      es: "Agentes que no guardan sus tokens, con cifras marcadas como estimación"
+      en: "Agents that keep no token log, with figures flagged as estimates"
+    descripcion:
+      es: "Incorporas herramientas que no persisten consumo: cada cifra llega rotulada como estimación y nunca se mezcla con lo medido."
+      en: "Bring in tools that persist no usage data: every figure arrives labeled as an estimate and is never blended with measured values."

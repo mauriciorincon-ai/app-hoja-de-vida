@@ -6,6 +6,8 @@ import {
   parseApps,
   parseCv,
   solicitudSchema,
+  MOTIVOS,
+  ETIQUETAS_MOTIVO,
 } from "@/lib/schemas";
 
 const cvValido = {
@@ -273,7 +275,6 @@ const appsValidas = {
       estado: "en-construccion",
       nombre: { es: "CV Viva", en: "Living CV" },
       descripcion: { es: "Desc", en: "Desc" },
-      solicitable: false,
     },
   ],
 };
@@ -322,63 +323,28 @@ describe("appsSchema", () => {
     expect(() => appsSchema.parse(roto)).toThrow();
   });
 
-  it("defaults roadmap to an empty list (app sin votación)", () => {
-    const apps = appsSchema.parse(appsValidas);
-    expect(apps.apps[0].roadmap).toEqual([]);
-  });
-
-  it("accepts a roadmap with bilingual features (S4)", () => {
-    const apps = appsSchema.parse({
-      apps: [
+  it("rejects `roadmap` on an app: since 2026-09-13 the roadmap lives in data/fichas/<slug>.yaml", () => {
+    // Ninguna feature de CV Viva se muestra (dueño): el campo salió de
+    // apps.yaml y el objeto es strict, así que un YAML viejo rompe el build.
+    expect(() =>
+      parseApps(
         {
-          ...appsValidas.apps[0],
-          roadmap: [
+          apps: [
             {
-              id: "mapa-c4",
-              titulo: { es: "Mapa C4", en: "C4 map" },
-              descripcion: { es: "Navegar sistemas", en: "Navigate systems" },
+              ...appsValidas.apps[0],
+              roadmap: [
+                {
+                  id: "mapa-c4",
+                  titulo: { es: "Mapa C4", en: "C4 map" },
+                  descripcion: { es: "Navegar", en: "Navigate" },
+                },
+              ],
             },
           ],
         },
-      ],
-    });
-    expect(apps.apps[0].roadmap[0].id).toBe("mapa-c4");
-  });
-
-  it("rejects a roadmap feature missing a language (build fail-safe)", () => {
-    const roto = {
-      apps: [
-        {
-          ...appsValidas.apps[0],
-          roadmap: [
-            {
-              id: "mapa-c4",
-              titulo: { es: "Mapa C4" },
-              descripcion: { es: "Navegar", en: "Navigate" },
-            },
-          ],
-        },
-      ],
-    };
-    expect(() => parseApps(roto, "apps.yaml")).toThrowError(/roadmap/);
-  });
-
-  it("rejects a non-kebab-case roadmap feature id", () => {
-    const roto = {
-      apps: [
-        {
-          ...appsValidas.apps[0],
-          roadmap: [
-            {
-              id: "Mapa C4",
-              titulo: { es: "Mapa C4", en: "C4 map" },
-              descripcion: { es: "Navegar", en: "Navigate" },
-            },
-          ],
-        },
-      ],
-    };
-    expect(() => appsSchema.parse(roto)).toThrow();
+        "apps.yaml",
+      ),
+    ).toThrowError(/roadmap/);
   });
 
   it("rejects an unknown key on an app (.strict fail-safe)", () => {
@@ -393,8 +359,8 @@ describe("solicitudSchema", () => {
   const solicitudValida = {
     nombre: "Ana",
     email: "ana@example.com",
-    app: "hoja-de-vida",
-    mensaje: "Quiero probarla",
+    motivo: "asesoria",
+    mensaje: "Quiero una asesoría",
     website: "",
   };
 
@@ -404,11 +370,42 @@ describe("solicitudSchema", () => {
       nombre: "  Ana  ",
     });
     expect(s.nombre).toBe("Ana");
+    expect(s.motivo).toBe("asesoria");
   });
 
-  it("defaults app to empty: the form is the general contact since post-S8", () => {
-    const sinApp = { ...solicitudValida, app: undefined };
-    expect(solicitudSchema.parse(sinApp).app).toBe("");
+  it("defaults motivo to empty: the reason is optional (block E of the post-S8 gate)", () => {
+    const sinMotivo = { ...solicitudValida, motivo: undefined };
+    expect(solicitudSchema.parse(sinMotivo).motivo).toBe("");
+    expect(
+      solicitudSchema.parse({ ...solicitudValida, motivo: "" }).motivo,
+    ).toBe("");
+  });
+
+  it("accepts every declared motivo and each one has a label", () => {
+    for (const motivo of MOTIVOS) {
+      expect(solicitudSchema.parse({ ...solicitudValida, motivo }).motivo).toBe(
+        motivo,
+      );
+      expect(ETIQUETAS_MOTIVO[motivo].length).toBeGreaterThan(0);
+    }
+  });
+
+  it("defaults app to empty and keeps a slug: the waiting list is the other form", () => {
+    expect(solicitudSchema.parse(solicitudValida).app).toBe("");
+    expect(
+      solicitudSchema.parse({ ...solicitudValida, app: " habla " }).app,
+    ).toBe("habla");
+  });
+
+  it("the general form has NO waiting-list motivo: only the apps have one (owner, 2026-09-13)", () => {
+    expect(MOTIVOS).not.toContain("lista-de-espera");
+    expect(MOTIVOS).toHaveLength(5);
+  });
+
+  it("rejects a motivo outside the list (the select is the only source)", () => {
+    expect(() =>
+      solicitudSchema.parse({ ...solicitudValida, motivo: "spam" }),
+    ).toThrow(/motivo/);
   });
 
   it("defaults mensaje to empty string", () => {

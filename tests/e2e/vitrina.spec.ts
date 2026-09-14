@@ -53,6 +53,8 @@ type Frente = {
   estado: "abierta" | "en-preparacion";
   nombre: { es: string; en: string };
   intro: { es: string; en: string };
+  /** Solo las apps (dueño, 2026-09-13): los demás frentes se muestran, no se entregan. */
+  listaDeEspera?: boolean;
 };
 const FRENTES = (
   parse(readFileSync("data/vitrina.yaml", "utf8")) as { categorias: Frente[] }
@@ -246,6 +248,16 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
       await expect(cta).toHaveAttribute("href", "#contacto-vitrina");
       // Un ancla que no aterriza en ninguna parte es un botón roto.
       await expect(page.locator("#contacto-vitrina")).toHaveCount(1);
+      // El FORMULARIO vive en la página inicial de la app, no en el detalle
+      // (la página más pesada: una isla más la sacó del presupuesto de
+      // interactividad, PR #32). El cierre del detalle manda allá.
+      await expect(page.locator('form[data-formulario="app"]')).toHaveCount(0);
+      await expect(
+        page.locator('[data-cta="ir-a-lista-de-espera"]'),
+      ).toHaveAttribute(
+        "href",
+        `/es/vitrina/apps/${exp.app.slug}#contacto-vitrina`,
+      );
     }
   });
 
@@ -406,10 +418,10 @@ test.describe("Vitrina — los frentes en preparación (ADR-015)", () => {
         page.locator(`header[data-frente="${f.id}"]`),
       ).toHaveAttribute("data-estado", "en-preparacion");
       await expect(page.getByText("En preparación").first()).toBeVisible();
-      // Un solo CTA, y es la lista de espera (regla 16) — con su anclaje.
+      // La lista de espera solo si el frente la declara (solo las apps la
+      // tienen); un frente sin ella cierra con «Escríbeme», sin promesa.
       const cta = page.locator('[data-cta="lista-de-espera"]');
-      await expect(cta).toHaveCount(1);
-      await expect(page.locator("#contacto-vitrina")).toHaveCount(1);
+      await expect(cta).toHaveCount(f.listaDeEspera ? 1 : 0);
       const html = await page.content();
       expect(html).toContain("Sin fecha prometida");
     }
@@ -672,19 +684,53 @@ test.describe("Vitrina — las estanterías: un frente ABIERTO y sus piezas (S7)
     }
   });
 
-  test("una pieza cierra con la lista de espera y NADA más: no hay detalle que prometer", async ({
+  test("una pieza cierra SIN detalle y SIN lista de espera: se muestra, no se entrega", async ({
     page,
   }) => {
+    // Decisión del dueño (2026-09-13): agentes, investigaciones y tableros no
+    // tienen vocación comercial, así que nadie tiene por qué pedir acceso.
+    // Solo las apps tienen lista de espera (vitrina.spec, ficha técnica de app).
     const { f, piezas } = { f: ABIERTOS[0], piezas: ABIERTOS[0].piezas };
     await page.goto(`/es/vitrina/${f.id}/${piezas[0].pieza.slug}`);
     await expect(page.locator('[data-cta="detalle"]')).toHaveCount(0);
-    await expect(page.locator('[data-cta="lista-de-espera"]')).toHaveCount(1);
-    await expect(page.locator("#contacto-vitrina")).toHaveCount(1);
+    await expect(page.locator('[data-cta="lista-de-espera"]')).toHaveCount(0);
+    await expect(page.locator("#contacto-vitrina")).toHaveCount(0);
     // Y tampoco lo promete con palabras: sin detalle, «Qué tiene» no puede
     // mandar al lector a una ficha completa que no existe.
     await expect(page.locator("main")).not.toContainText(
       "vive en la ficha completa",
     );
+  });
+
+  test("un frente sin vocación comercial cierra sin lista de espera, y lo dice", async ({
+    page,
+  }) => {
+    for (const f of ABIERTOS) {
+      await page.goto(`/es/vitrina/${f.id}`);
+      await expect(page.locator('[data-cta="lista-de-espera"]')).toHaveCount(
+        f.listaDeEspera ? 1 : 0,
+      );
+      await expect(page.locator('form[data-formulario="app"]')).toHaveCount(0);
+      await expect(
+        page.locator('[data-lista-de-espera="no"] [data-cta="escribeme"]'),
+      ).toHaveCount(f.listaDeEspera ? 0 : 1);
+    }
+  });
+
+  test("la ficha técnica de una APP sí cierra con la lista de espera, con esa app ya elegida", async ({
+    page,
+  }) => {
+    const exp = EXPORTS[0];
+    await page.goto(`/es/vitrina/apps/${exp.app.slug}`);
+    const cta = page.locator('[data-cta="lista-de-espera"]');
+    await expect(cta).toHaveCount(1);
+    await expect(cta).toHaveAttribute("href", "#contacto-vitrina");
+    await expect(page.locator("#contacto-vitrina")).toHaveCount(1);
+    const form = page.locator('form[data-formulario="app"]');
+    await expect(form).toHaveCount(1);
+    await expect(form.locator("select")).toHaveValue(exp.app.slug);
+    // «Otra» nunca sobra.
+    await expect(form.locator('option[value="otra"]')).toHaveCount(1);
   });
 
   test("se navega entre piezas VECINAS del mismo frente, sin salir de él", async ({

@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { Reveal } from "@/components/motion/reveal";
-import { Roadmap } from "@/components/home/roadmap";
+import { ListaDeEspera } from "@/components/vitrina/lista-de-espera";
 import { MuestraApp } from "@/components/vitrina/muestra";
 import { appsConBrochure } from "@/lib/brochure";
 import { Link } from "@/i18n/navigation";
@@ -14,7 +14,6 @@ import { getCv } from "@/lib/content";
 import { SITE_URL } from "@/lib/site";
 import { getFrente } from "@/lib/vitrina/categorias";
 import { getFichasVitrina } from "@/lib/vitrina/loader";
-import { appsConRoadmap } from "@/lib/votes/roadmap";
 
 /**
  * EL FRENTE «APPS» — el escaparate (S5, ADR-013 · reubicado en ADR-015): las
@@ -83,10 +82,8 @@ export default async function VitrinaAppsPage({ params }: Params) {
   // ahora tiene UNA sola puerta. Antes su acceso era la sección «Apps» de la
   // HOME, retirada por prometer lo mismo que la vitrina.
   const propias = appsConBrochure();
-  // «Qué viene — y tú decides el orden» es una pregunta sobre las apps, así
-  // que se contesta aquí, con las apps (revisión post-S7): antes vivía en la
-  // HOME, donde nadie le pregunta a una hoja de vida qué viene.
-  const conRoadmap = appsConRoadmap();
+  // «Qué viene — y tú decides el orden» se contesta en la página de CADA app
+  // (2026-09-13): el escaparate solo asoma, y las features se votan adentro.
 
   return (
     <>
@@ -138,7 +135,6 @@ export default async function VitrinaAppsPage({ params }: Params) {
           </Reveal>
 
           {/* ── Qué viene: el roadmap votable, con las apps ── */}
-          {conRoadmap.length > 0 && <Roadmap apps={conRoadmap} embebido />}
 
           {/* ── De esta casa: lo construido que sostiene esta misma página ── */}
           {propias.length > 0 && (
@@ -182,34 +178,8 @@ export default async function VitrinaAppsPage({ params }: Params) {
             </Reveal>
           )}
 
-          {/* Cierre: el anclaje de toda la vitrina + la lista de espera. */}
-          <Reveal variant="fadeInUp">
-            <section
-              id="contacto-vitrina"
-              aria-labelledby="vitrina-cierre"
-              className="mt-14 scroll-mt-16 border-t border-paper-2 pt-10"
-            >
-              <h2
-                id="vitrina-cierre"
-                className="font-display text-2xl font-medium tracking-[-0.015em] text-ink-0"
-              >
-                {t("acceso")}
-              </h2>
-              <p className="mt-3 max-w-[60ch] text-[15px] leading-relaxed text-ink-1">
-                {t("ctaNota")}
-              </p>
-              <p className="mt-2 max-w-[60ch] text-sm leading-relaxed text-ink-2">
-                {t("anclajeNota")}
-              </p>
-              <Link
-                href="/#contacto"
-                className="mt-5 flex min-h-11 w-fit items-center gap-2 rounded-md bg-sage px-6 text-[15px] font-medium text-sage-ink shadow-sh-1 transition-[filter] duration-[120ms] hover:brightness-[0.97]"
-              >
-                {t("cta")}
-                <span aria-hidden="true">→</span>
-              </Link>
-            </section>
-          </Reveal>
+          {/* Cierre: la lista de espera de las apps, con su formulario. */}
+          <ListaDeEspera />
         </div>
       </main>
       <Footer identidad={cv.identidad} />

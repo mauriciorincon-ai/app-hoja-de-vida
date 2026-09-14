@@ -47,3 +47,44 @@ proceso:
   anotaciones:
     - { paso: minimo, texto: "Sin autorización expresa no hay registro (Ley 1581): la fecha del consentimiento se guarda en la misma fila." }
     - { paso: sello, texto: "El certificado se ve y nunca se almacena." }
+
+# Roadmap votable (2026-09-13): lo que la planeadora entrega como cierre de plan
+# de esta app — features disruptivas, no en construcción, sin fechas. PROCEDENCIA:
+# cv-viva (la planeadora lo administra; llega por copia y no se edita aquí). Los
+# `id` son ESTABLES: el par (app, id) es la clave del voto en la BD.
+roadmap:
+  - id: abrir-a-compradores
+    titulo:
+      es: "Abrir el catálogo a quien busca"
+      en: "Open the catalog to buyers"
+    descripcion:
+      es: "Quien busca encuentra tu inmueble, recibe alertas cuando aparece lo que quiere y te contacta directo, sin comisión ni intermediario."
+      en: "Buyers find your property, get alerts when what they want shows up, and contact you directly, with no commission and no middleman."
+  - id: copiloto-del-papeleo
+    titulo:
+      es: "Copiloto del papeleo legal"
+      en: "Legal paperwork copilot"
+    descripcion:
+      es: "Te explica cláusula por cláusula la promesa, la escritura y el registro, para que firmes entendiendo lo que firmas."
+      en: "Explains the promise, the deed and the registration clause by clause, so you sign understanding what you sign."
+  - id: compradores-verificados
+    titulo:
+      es: "Compradores verificados"
+      en: "Verified buyers"
+    descripcion:
+      es: "La verificación se vuelve de dos vías: quien te contacta también está identificado, y dejas de atender curiosos y estafadores."
+      en: "Verification goes both ways: whoever contacts you is identified too, and you stop dealing with tire-kickers and scammers."
+  - id: avaluo-instantaneo
+    titulo:
+      es: "Cuánto vale tu inmueble, antes de publicarlo"
+      en: "What your property is worth, before you list it"
+    descripcion:
+      es: "Al entrar obtienes un rango de valor con su explicación, para fijar el precio con datos y no con una corazonada."
+      en: "On arrival you get a value range with its reasoning, to set the price on data rather than a hunch."
+  - id: fotos-que-venden
+    titulo:
+      es: "Fotos que venden"
+      en: "Photos that sell"
+    descripcion:
+      es: "Asistencia fotográfica para tu publicación: la app deja de solo calificar tus fotos y te ayuda a conseguir las que cierran ventas."
+      en: "Photo assistance for your listing: the app stops merely grading your photos and helps you get the ones that close sales."

@@ -39,3 +39,73 @@ test.describe("la raíz `/` abre en español, diga lo que diga el navegador", ()
     expect(res.status()).toBe(200);
   });
 });
+
+/**
+ * EL CAMBIO DE IDIOMA TE DEJA EXACTAMENTE DONDE ESTABAS (revisión post-S8,
+ * bloque B, 2026-09-13). El dueño, en b1: en Perfil y Trayectoria el botón
+ * ES/EN «no se quedaba» — el hash lleva al borde de la sección, y él estaba a
+ * media sección. Se conserva un ancla de CONTENIDO (`src/lib/ancla-de-scroll.ts`):
+ * el mismo hito, al mismo desfase, aunque el inglés sea más corto.
+ */
+test.describe("el botón ES/EN conserva el punto exacto de lectura", () => {
+  const TOLERANCIA = 24;
+
+  test("a media Trayectoria: el mismo hito queda a la misma altura de la ventana", async ({
+    page,
+  }) => {
+    await page.goto("/es");
+    // El tercer hito, a 180 px del borde: a media sección, sin hash de por medio.
+    const hito = page.locator("#trayectoria article").nth(2);
+    await page.evaluate(() => {
+      const el = document.querySelectorAll("#trayectoria article")[2];
+      window.scrollTo(0, el.getBoundingClientRect().top + window.scrollY - 180);
+    });
+    const antes = await hito.evaluate((el) =>
+      Math.round(el.getBoundingClientRect().top),
+    );
+
+    await page.getByRole("button", { name: "Switch to English" }).click();
+    await expect(page).toHaveURL(/\/en$/, { timeout: 15_000 });
+    await expect(page.locator("#trayectoria h2")).toHaveText("Career", {
+      timeout: 15_000,
+    });
+    await page.waitForTimeout(300);
+    const despues = await page
+      .locator("#trayectoria article")
+      .nth(2)
+      .evaluate((el) => Math.round(el.getBoundingClientRect().top));
+    expect(
+      Math.abs(despues - antes),
+      `hito a ${antes}px antes, a ${despues}px después`,
+    ).toBeLessThanOrEqual(TOLERANCIA);
+  });
+
+  test("a media Perfil: el título de la sección queda a la misma altura", async ({
+    page,
+  }) => {
+    await page.goto("/es");
+    const perfil = page.locator("#perfil");
+    // 120 px por debajo del borde de la sección: dentro del texto.
+    await page.evaluate(() => {
+      const el = document.querySelector("#perfil")!;
+      window.scrollTo(0, el.getBoundingClientRect().top + window.scrollY + 120);
+    });
+    const antes = await perfil.evaluate((el) =>
+      Math.round(el.getBoundingClientRect().top),
+    );
+
+    await page.getByRole("button", { name: "Switch to English" }).click();
+    await expect(page).toHaveURL(/\/en$/, { timeout: 15_000 });
+    await expect(page.locator("#perfil h2")).toHaveText("Profile", {
+      timeout: 15_000,
+    });
+    await page.waitForTimeout(300);
+    const despues = await page
+      .locator("#perfil")
+      .evaluate((el) => Math.round(el.getBoundingClientRect().top));
+    expect(
+      Math.abs(despues - antes),
+      `sección a ${antes}px antes, a ${despues}px después`,
+    ).toBeLessThanOrEqual(TOLERANCIA);
+  });
+});

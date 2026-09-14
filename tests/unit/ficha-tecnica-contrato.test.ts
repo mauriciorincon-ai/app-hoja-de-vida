@@ -40,6 +40,56 @@ function habla() {
   };
 }
 
+describe("complemento — roadmap votable por app (2026-09-13)", () => {
+  const feature = {
+    id: "feature-demo",
+    titulo: { es: "Demo", en: "Demo" },
+    descripcion: { es: "Prueba", en: "Test" },
+  };
+
+  it("acepta un roadmap con features bilingües y por defecto es vacío", () => {
+    const con = complementoSchema.parse({ ...habla(), roadmap: [feature] });
+    expect(con.roadmap.map((f) => f.id)).toEqual(["feature-demo"]);
+    const sin = complementoSchema.parse({ ...habla(), roadmap: undefined });
+    expect(sin.roadmap).toEqual([]);
+  });
+
+  it("rechaza dos features con el mismo id: el par (app, id) es la clave del voto", () => {
+    const r = complementoSchema.safeParse({
+      ...habla(),
+      roadmap: [feature, { ...feature, titulo: { es: "Otra", en: "Other" } }],
+    });
+    expect(r.success).toBe(false);
+    expect(JSON.stringify(r.error?.issues)).toMatch(/feature-demo/);
+  });
+
+  it("rechaza una feature sin uno de los dos idiomas o con id fuera de kebab-case", () => {
+    expect(
+      complementoSchema.safeParse({
+        ...habla(),
+        roadmap: [{ ...feature, titulo: { es: "Solo español" } }],
+      }).success,
+    ).toBe(false);
+    expect(
+      complementoSchema.safeParse({
+        ...habla(),
+        roadmap: [{ ...feature, id: "Feature Demo" }],
+      }).success,
+    ).toBe(false);
+  });
+
+  it("los complementos reales traen el roadmap de la planeadora, con ids únicos por app", () => {
+    const conRoadmap = complementos.filter(
+      (c) => Array.isArray(c.roadmap) && c.roadmap.length > 0,
+    );
+    expect(conRoadmap.length).toBeGreaterThan(0);
+    for (const c of conRoadmap) {
+      const ids = (c.roadmap as { id: string }[]).map((f) => f.id);
+      expect(new Set(ids).size).toBe(ids.length);
+    }
+  });
+});
+
 describe("complementos reales", () => {
   it("hay uno por app del escaparate y todos validan", () => {
     expect(complementos.map((c) => c.app).sort()).toEqual(

@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { roadmapFeatureSchema } from "@/lib/schemas";
 
 /**
  * CONTRATO «FICHA TÉCNICA» v1.3.1 (ADR-016 · ADR-017) — la capa infografía.
@@ -267,6 +268,23 @@ export const complementoSchema = z
     // Opcionales desde v1.1.0, siempre juntos (ver `procesoConProcedencia`).
     proceso: procesoSchema.optional(),
     procedencia: z.enum(procedencias).optional(),
+    // v1.2.0 (2026-09-13): el roadmap votable de la app, cierre de plan que
+    // entrega la planeadora (procedencia cv-viva). Se vota en la página de ESA
+    // app. El par (app, id) es la clave del voto: ids únicos y estables.
+    roadmap: z
+      .array(roadmapFeatureSchema)
+      .default([])
+      .superRefine((fs, ctx) => {
+        const ids = fs.map((f) => f.id);
+        for (const [i, id] of ids.entries()) {
+          if (ids.indexOf(id) !== i)
+            ctx.addIssue({
+              code: "custom",
+              path: [i, "id"],
+              message: `feature repetida en el roadmap: «${id}»`,
+            });
+        }
+      }),
   })
   .strict()
   .superRefine(procesoConProcedencia("procedencia"));

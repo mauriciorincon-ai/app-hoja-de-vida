@@ -12,7 +12,7 @@ import { Skills } from "@/components/home/skills";
 import { Trayectoria } from "@/components/home/trayectoria";
 import { VitrinaHome } from "@/components/home/vitrina";
 import type { Locale } from "@/i18n/routing";
-import { getApps, getCv } from "@/lib/content";
+import { getCv } from "@/lib/content";
 import { SITE_URL } from "@/lib/site";
 
 export default async function HomePage({
@@ -24,10 +24,6 @@ export default async function HomePage({
   setRequestLocale(locale);
 
   const cv = getCv(locale as Locale);
-  // `apps` sigue haciendo falta: el formulario de Contacto arma con él su
-  // lista de apps SOLICITABLES. La sección «Apps» se retiró (ver header), pero
-  // las exploraciones no se perdieron — viven donde de verdad convierten.
-  const { apps } = getApps();
   const tMeta = await getTranslations({ locale, namespace: "meta" });
 
   // JSON-LD Person + WebSite (gate ATS/SEO). Person.name lleva el nombre
@@ -69,7 +65,7 @@ export default async function HomePage({
         <Estudios estudios={cv.estudios} />
         <Certificaciones certificaciones={cv.certificaciones} />
         <Skills skills={cv.skills} />
-        <Contacto identidad={cv.identidad} apps={apps} />
+        <Contacto identidad={cv.identidad} />
       </main>
       <Footer identidad={cv.identidad} />
       <HomeVisitTracker />
