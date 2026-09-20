@@ -49,7 +49,7 @@ La experiencia también amplió mi comprensión del activo gobernado. Ya no se t
 
 En la Fundación CTIC gestiono procesos de limpieza, integración y estandarización orientados a fortalecer la calidad, consistencia y confiabilidad de la información institucional. Este trabajo ocurre en un entorno donde los datos pueden representar personas, procesos asistenciales y decisiones sensibles, por lo que su utilización exige un nivel especialmente alto de responsabilidad, confidencialidad y trazabilidad.
 
-Actualmente lidero además la estrategia institucional de inteligencia artificial, estructurada a partir de los principios y requisitos de ISO/IEC 42001:2025. Esta responsabilidad amplía el gobierno desde los datos hacia los sistemas que los utilizan para producir análisis, recomendaciones, contenidos o acciones.
+Actualmente lidero además la estrategia institucional de inteligencia artificial, estructurada a partir de los principios y requisitos de ISO/IEC 42001. Esta responsabilidad amplía el gobierno desde los datos hacia los sistemas que los utilizan para producir análisis, recomendaciones, contenidos o acciones.
 
 Las tres experiencias representan problemas diferentes. En banca profundicé en la confianza, la semántica y la utilización controlada de información crítica. En Vesting incorporé aislamiento, observabilidad y trazabilidad sobre sistemas inteligentes. En salud conecto calidad, confidencialidad, propósito autorizado y gestión institucional de la inteligencia artificial.
 
@@ -99,7 +99,7 @@ Mi experiencia me permite trabajar en ambos niveles. Puedo analizar la arquitect
 
 <!-- seccion: estrategia-iso-42001 -->
 
-Actualmente lidero la estrategia institucional de inteligencia artificial siguiendo los principios y requisitos de ISO/IEC 42001:2025. Mi responsabilidad consiste en contribuir a que la organización no aborde la IA como una colección de iniciativas desconectadas, sino como una capacidad que necesita dirección, políticas, responsabilidades, gestión de riesgos, evaluación y mejora continua.
+Actualmente lidero la estrategia institucional de inteligencia artificial siguiendo los principios y requisitos de ISO/IEC 42001. Mi responsabilidad consiste en contribuir a que la organización no aborde la IA como una colección de iniciativas desconectadas, sino como una capacidad que necesita dirección, políticas, responsabilidades, gestión de riesgos, evaluación y mejora continua.
 
 ISO/IEC 42001 no indica qué modelo debe utilizarse ni prescribe una arquitectura tecnológica única. Proporciona una estructura de gestión para que la organización comprenda su contexto, establezca objetivos, identifique riesgos y oportunidades, asigne responsabilidades y evalúe el desempeño de su sistema de gestión de inteligencia artificial.
 
@@ -226,15 +226,15 @@ El gobierno se vuelve sostenible cuando deja de depender de la capacidad individ
 
 <!-- seccion: experiencia-y-formacion -->
 
-Algunas posiciones de estrategia, arquitectura y gobierno de inteligencia artificial establecen una especialización o una maestría como requisito preferente. Mi formación académica está compuesta por Ingeniería Industrial y estudios de Diseño Industrial, complementados por seis credenciales verificables en analítica y ciencia de datos, la certificación DP-600 y las rutas AI-103 y AI-300 actualmente en desarrollo.
+Algunas posiciones de estrategia, arquitectura y gobierno de inteligencia artificial establecen una especialización o una maestría como requisito preferente. Mi formación académica está compuesta por Ingeniería Industrial y estudios de Diseño Industrial, complementados por cinco credenciales verificables en analítica y ciencia de datos, la certificación DP-600 y las rutas AI-103 y AI-300 actualmente en desarrollo.
 
 No presento la experiencia como sustituto universal de la educación avanzada ni desconozco el valor de un posgrado. Una especialización o maestría puede aportar investigación guiada, profundidad conceptual y una estructura formal de aprendizaje. Sin embargo, cuando una organización admite equivalencia entre educación y experiencia, mi trayectoria permite evaluar directamente las competencias que ese requisito busca representar.
 
-Durante diez años he desarrollado capacidades relacionadas con procesos, datos, plataformas analíticas, modelos predictivos, aplicaciones, agentes y gobierno. He co-liderado gobierno de datos en banca, diseñado la arquitectura de datos y observabilidad para una plataforma de agentes, estructurado un proceso utilizado como marco para construir veintisiete agentes y actualmente lidero una estrategia institucional de inteligencia artificial basada en ISO/IEC 42001:2025.
+Durante diez años he desarrollado capacidades relacionadas con procesos, datos, plataformas analíticas, modelos predictivos, aplicaciones, agentes y gobierno. He co-liderado gobierno de datos en banca, diseñado la arquitectura de datos y observabilidad para una plataforma de agentes, estructurado un proceso utilizado como marco para construir veintisiete agentes y actualmente lidero una estrategia institucional de inteligencia artificial basada en ISO/IEC 42001.
 
 Esta experiencia no se limita a la exposición incidental a esos dominios. He trabajado en las responsabilidades que necesito gobernar: construí pipelines y modelos semánticos antes de establecer criterios sobre activos analíticos; diseñé observabilidad antes de formular exigencias sobre seguimiento; y desarrollé agentes y harnesses antes de asumir responsabilidades estratégicas sobre su gobierno.
 
-A la experiencia profesional se suma evidencia verificable. DP-600 valida formalmente mi profundidad en Microsoft Fabric, Power BI y modelos semánticos. Las cinco credenciales independientes de IBM respaldan mi base en ciencia de datos, Python, SQL y R. Mi portafolio público permite examinar aplicaciones, agentes, investigaciones, tableros y controles implementados.
+A la experiencia profesional se suma evidencia verificable. DP-600 valida formalmente mi profundidad en Microsoft Fabric, Power BI y modelos semánticos. Las cuatro credenciales independientes de IBM respaldan mi base en ciencia de datos, Python, SQL y R. Mi portafolio público permite examinar aplicaciones, agentes, investigaciones, tableros y controles implementados.
 
 Esta combinación me permite evitar dos extremos: una gobernanza conceptualmente correcta, pero difícil de implementar, y una arquitectura técnicamente sofisticada que ignora los riesgos, impactos y responsabilidades institucionales.
 

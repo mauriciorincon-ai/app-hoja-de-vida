@@ -14,7 +14,7 @@ identidad:
   # Revisión post-S8 (2026-09-12): AI-103 se nombra CON «en curso» (gate de
   # contenido) y el cierre invita en vez de retar (decisión del dueño).
   resumen: >-
-    Líder de datos e ingeniero de IA (AI-103 y DP-100, en curso) · Analytics
+    Líder de datos e ingeniero de IA (AI-103 y AI-300, en curso) · Analytics
     Engineer (DP-600). Diseño plataformas analíticas en Microsoft Fabric y llevo
     agentes de IA a producción — y esta hoja de vida es la muestra: recórrela
     y pregúntale.
@@ -30,7 +30,7 @@ identidad:
     plataforma de datos de una startup de agentes de IA —Microsoft Fabric y un
     proceso replicable para diseñar y monitorear agentes— y construí BI y
     analítica predictiva en banca. Certificado por Microsoft como Fabric
-    Analytics Engineer (DP-600), en ruta al AI-103 y al DP-100. ¿Quieres saber
+    Analytics Engineer (DP-600), en ruta al AI-103 y al AI-300. ¿Quieres saber
     algo más?
     Pregúntaselo al chat de esta hoja de vida.
   # La disponibilidad de reubicación es señal DELIBERADA para recruiters (pack §1)
@@ -336,15 +336,18 @@ certificaciones:
   # Revisión post-S8 (2026-09-12): el AI-103 entra como credencial EN CURSO
   # (decisión del dueño: «me gusta la sinceridad»). Sin fecha, con chip; el
   # logro «5 certificaciones» sigue contando solo las obtenidas.
-  - nombre: "Microsoft Certified: Azure AI Engineer Associate (AI-103)"
+  - nombre: "Microsoft Certified: Azure AI Apps and Agents Developer Associate (AI-103)"
     estado: "en curso"
     nota: "En preparación: la ruta de ingeniería de IA en Azure."
     icono: insignia
     logo: microsoft.svg
-  # 2026-09-12: el DP-100 va en paralelo al AI-103, también EN CURSO.
-  - nombre: "Microsoft Certified: Azure Data Scientist Associate (DP-100)"
+  # 2026-09-19 (a fondo v2): el DP-100 SALE y entra el AI-300 en su lugar.
+  # Microsoft retiró el DP-100 el 1 de junio de 2026 y su reemplazo declarado es
+  # el AI-300, que además es el nombre correcto de la ruta que el dueño cursa:
+  # el AI-300 es MLOps y GenAIOps, no «aplicaciones y agentes» — ese es el AI-103.
+  - nombre: "Microsoft Certified: Machine Learning Operations Engineer Associate (AI-300)"
     estado: "en curso"
-    nota: "En preparación, en paralelo al AI-103: ciencia de datos y aprendizaje automático en Azure."
+    nota: "En preparación, en paralelo al AI-103: operación, evaluación y monitoreo de modelos y agentes en Azure."
     icono: insignia
     logo: microsoft.svg
   - nombre: "IBM: Ciencia de Datos Aplicada con R"

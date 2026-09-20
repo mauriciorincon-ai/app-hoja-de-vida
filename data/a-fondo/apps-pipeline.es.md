@@ -79,7 +79,7 @@ Esta distinción es especialmente importante en investigaciones y agentes. La ap
 
 El pipeline produce cuatro familias principales de activos: aplicaciones, agentes, investigaciones y tableros analíticos. Todas las piezas terminadas se publican en la vitrina del sitio y cuentan con una ficha que explica su propósito, alcance, estado y principales decisiones de diseño.
 
-Actualmente, el portafolio reúne siete aplicaciones completas: Velo, Dash Agent AI, Probeta DS, Hablemos San, Innmobiliaria, Nutri-Kids y CV Viva. Cada una responde a una promesa diferente, pero todas deben superar el mismo criterio: convertir una necesidad en una experiencia funcional, documentada y verificable, no únicamente en una interfaz convincente o una demostración técnica.
+Actualmente, el portafolio reúne seis aplicaciones hermanas completas —Velo, Dash Agent AI, Probeta DS, Hablemos San, Innmobiliaria y Nutri-Kids— más CV Viva, que es este mismo sitio y no una pieza del escaparate. Cada una responde a una promesa diferente, pero todas deben superar el mismo criterio: convertir una necesidad en una experiencia funcional, documentada y verificable, no únicamente en una interfaz convincente o una demostración técnica.
 
 El portafolio incluye además trece agentes concebidos como sistemas de trabajo especializados. No los presento como conversaciones genéricas ni como demostraciones de generación de texto. Cada agente debe tener un propósito delimitado, unas fuentes o conocimientos identificables, reglas de actuación, resultados esperados y condiciones bajo las cuales debe reconocer sus límites.
 

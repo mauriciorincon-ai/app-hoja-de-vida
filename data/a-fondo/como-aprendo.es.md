@@ -69,7 +69,7 @@ La Ingeniería Industrial aporta este criterio de priorización: los recursos so
 
 <!-- seccion: evidencia-certificaciones -->
 
-Actualmente cuento con seis credenciales obtenidas y verificables: la certificación Microsoft Certified: Fabric Analytics Engineer Associate, asociada al examen DP-600, y cinco credenciales independientes de IBM relacionadas con ciencia de datos, Python, SQL y R. AI-103 y AI-300 representan rutas de certificación en desarrollo y no forman parte de ese conteo mientras no haya aprobado los exámenes correspondientes.
+Actualmente cuento con cinco credenciales obtenidas y verificables: la certificación Microsoft Certified: Fabric Analytics Engineer Associate, asociada al examen DP-600, y cuatro credenciales independientes de IBM relacionadas con ciencia de datos, Python, SQL y R. AI-103 y AI-300 representan rutas de certificación en desarrollo y no forman parte de ese conteo mientras no haya aprobado los exámenes correspondientes.
 
 Durante 2022 consolidé mi base en ciencia de datos mediante formación especializada en Python, SQL, análisis, visualización y aprendizaje automático. Estas credenciales me permitieron organizar conocimientos que ya necesitaba en mi trabajo y ampliar mi capacidad para desarrollar análisis reproducibles, consultar información estructurada y construir modelos mediante herramientas como Pandas, NumPy y scikit-learn.
 
@@ -81,7 +81,7 @@ Ese proceso consolidó una de las características centrales de mi aprendizaje: 
 
 Actualmente desarrollo las rutas AI-103 y AI-300 porque corresponden con la siguiente etapa de mi trayectoria. AI-103 profundiza en la construcción de aplicaciones y agentes de inteligencia artificial. AI-300 amplía las prácticas necesarias para desplegar, evaluar, observar y mantener modelos, aplicaciones generativas y agentes durante su ciclo de vida.
 
-Estas rutas no representan intereses hipotéticos. Se conectan con capacidades que ya he desarrollado: una plataforma para monitorear agentes, un proceso utilizado como marco para construir veintisiete soluciones, un ecosistema propio de harnesses especializados y una estrategia institucional de inteligencia artificial sustentada en ISO/IEC 42001:2023.
+Estas rutas no representan intereses hipotéticos. Se conectan con capacidades que ya he desarrollado: una plataforma para monitorear agentes, un proceso utilizado como marco para construir veintisiete soluciones, un ecosistema propio de harnesses especializados y una estrategia institucional de inteligencia artificial sustentada en ISO/IEC 42001.
 
 Las certificaciones demuestran disciplina, capacidad de estructurar el conocimiento y dominio de un marco reconocido. Sin embargo, no las utilizo como sustituto de la experiencia. Su mayor valor aparece cuando formalizan conocimientos que puedo aplicar, cuestionar y convertir en resultados observables.
 
@@ -91,7 +91,7 @@ Las certificaciones demuestran disciplina, capacidad de estructurar el conocimie
 
 La evidencia más contundente de mi capacidad de aprendizaje se encuentra en lo que he construido, porque cada pieza puede examinarse y relacionarse con decisiones, pruebas y resultados concretos.
 
-Mi portafolio reúne siete aplicaciones publicadas: Velo, Dash Agent AI, Probeta DS, Hablemos San, Innmobiliaria, Nutri-Kids y CV Viva. Varias de ellas exigieron incorporar tecnologías, patrones o restricciones con los que no había trabajado previamente.
+Mi portafolio reúne seis aplicaciones hermanas publicadas —Velo, Dash Agent AI, Probeta DS, Hablemos San, Innmobiliaria y Nutri-Kids— más CV Viva, este sitio. Varias de ellas exigieron incorporar tecnologías, patrones o restricciones con los que no había trabajado previamente.
 
 Probeta DS me llevó a ejecutar Python, Pandas y scikit-learn dentro del navegador mediante WebAssembly. Velo exigió procesamiento local de archivos y una arquitectura que evitara transferir información hacia un servidor. Otras aplicaciones incorporaron trabajadores web, bases de datos embebidas, capacidades instalables, operación sin conexión, despliegue en el borde, síntesis de voz y captura de audio en el navegador.
 
@@ -101,7 +101,7 @@ La calidad no se demuestra únicamente porque las aplicaciones puedan abrirse. V
 
 Estas cifras deben permanecer sincronizadas con los repositorios y no sustituyen la evaluación de la calidad. Una suite extensa puede proteger poco si verifica aspectos irrelevantes. Por eso, relaciono cada control con una condición concreta y procuro demostrar que puede ponerse en rojo frente a la falla que debe detectar.
 
-A las siete aplicaciones se suman trece agentes publicados, siete líneas de investigación y seis tableros construidos sobre datos públicos. En total, el portafolio reúne treinta y tres piezas dentro de esas cuatro familias, siempre que sus inventarios continúen coincidiendo con las fichas visibles de la vitrina.
+A las seis aplicaciones hermanas se suman trece agentes publicados, siete líneas de investigación y seis tableros construidos sobre datos públicos. En total, la vitrina reúne treinta y dos piezas dentro de esas cuatro familias, siempre que sus inventarios continúen coincidiendo con las fichas visibles de la vitrina.
 
 Cada familia demuestra una forma diferente de aprendizaje. Las aplicaciones exigen transformar nuevas tecnologías en experiencias utilizables. Los agentes requieren comprender modelos, fuentes, herramientas, contexto, memoria y evaluación. Las investigaciones obligan a formular preguntas, revisar evidencia y controlar afirmaciones. Los tableros requieren convertir fuentes públicas en modelos semánticos, medidas verificables y experiencias de decisión.
 

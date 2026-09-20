@@ -97,7 +97,7 @@ En Vesting construí la plataforma de datos necesaria para observar agentes en p
 
 En la Fundación CTIC, esta perspectiva se conecta con el ciclo de vida establecido dentro de la estrategia institucional de inteligencia artificial. Una iniciativa no queda gobernada únicamente porque haya superado una evaluación inicial. Debe permanecer observable, contar con responsables y conservar mecanismos para revisar su comportamiento cuando cambien los datos, los modelos, las integraciones o el contexto institucional.
 
-AI-300 aporta la disciplina operativa que permite materializar esos principios en arquitecturas técnicas. Mientras ISO/IEC 42001:2023 estructura el sistema institucional de gestión, AI-300 profundiza en los mecanismos tecnológicos necesarios para desplegar, evaluar, monitorear y mantener soluciones de inteligencia artificial. Son niveles diferentes y complementarios: uno organiza el gobierno institucional y el otro fortalece la operación técnica.
+AI-300 aporta la disciplina operativa que permite materializar esos principios en arquitecturas técnicas. Mientras ISO/IEC 42001 estructura el sistema institucional de gestión, AI-300 profundiza en los mecanismos tecnológicos necesarios para desplegar, evaluar, monitorear y mantener soluciones de inteligencia artificial. Son niveles diferentes y complementarios: uno organiza el gobierno institucional y el otro fortalece la operación técnica.
 
 La Ingeniería Industrial vuelve a ser relevante en esta dimensión. Operar una solución de inteligencia artificial implica gestionar capacidad, restricciones, calidad, variabilidad, incidentes y mejora continua. Muchos principios utilizados para estabilizar un proceso productivo también resultan aplicables a un sistema inteligente, aunque sus unidades de observación sean ejecuciones, evaluaciones, versiones y eventos en lugar de materiales físicos.
 
@@ -127,7 +127,7 @@ Las credenciales de IBM no constituyen, por tanto, una colección independiente 
 
 <!-- seccion: como-se-conectan -->
 
-Vistas en conjunto, mis seis credenciales obtenidas y las dos rutas de certificación que actualmente desarrollo representan una arquitectura de capacidades y no una acumulación de títulos. DP-600 formaliza el núcleo analítico de mi perfil; las cinco credenciales independientes de IBM proporcionan la base de ciencia de datos; y las rutas AI-103 y AI-300 amplían esa trayectoria hacia el desarrollo y la operación de aplicaciones, agentes y soluciones empresariales de inteligencia artificial.
+Vistas en conjunto, mis cinco credenciales obtenidas y las dos rutas de certificación que actualmente desarrollo representan una arquitectura de capacidades y no una acumulación de títulos. DP-600 formaliza el núcleo analítico de mi perfil; las cuatro credenciales independientes de IBM proporcionan la base de ciencia de datos; y las rutas AI-103 y AI-300 amplían esa trayectoria hacia el desarrollo y la operación de aplicaciones, agentes y soluciones empresariales de inteligencia artificial.
 
 Las credenciales de IBM proporcionan la base de ciencia de datos: comprender la información, explorarla, formular hipótesis, construir modelos y evaluar resultados. DP-600 organiza esa capacidad dentro de una plataforma analítica empresarial: prepara y transforma los datos, administra activos analíticos, estructura modelos semánticos y convierte la información en experiencias de decisión mediante Power BI.
 
@@ -157,7 +157,7 @@ Tampoco busco certificarme en todas las tecnologías con las que tengo contacto.
 
 <!-- seccion: el-ritmo -->
 
-Actualmente cuento con seis credenciales obtenidas y verificables: la certificación Microsoft Certified: Fabric Analytics Engineer Associate, asociada al examen DP-600, y cinco credenciales independientes de IBM en ciencia de datos, Python, SQL y R. AI-103 y AI-300 representan rutas de certificación en desarrollo y no forman parte de ese conteo mientras no haya aprobado los exámenes correspondientes.
+Actualmente cuento con cinco credenciales obtenidas y verificables: la certificación Microsoft Certified: Fabric Analytics Engineer Associate, asociada al examen DP-600, y cuatro credenciales independientes de IBM en ciencia de datos, Python, SQL y R. AI-103 y AI-300 representan rutas de certificación en desarrollo y no forman parte de ese conteo mientras no haya aprobado los exámenes correspondientes.
 
 Durante 2022 consolidé mi base en Python, SQL y ciencia de datos. En 2024 amplié esa formación mediante R y completé la preparación de DP-600 mientras trabajaba a tiempo completo y construía soluciones sobre Microsoft Fabric. Actualmente continúo las rutas AI-103 y AI-300, en coherencia con mi evolución hacia el desarrollo de aplicaciones y agentes de inteligencia artificial y hacia la operación confiable de estas soluciones durante todo su ciclo de vida.
 

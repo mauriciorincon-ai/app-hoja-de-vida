@@ -57,7 +57,7 @@ El Diseño Industrial incorpora la dimensión de uso. Una plataforma puede opera
 
 Además de mi experiencia en plataformas empresariales, mantengo un portafolio de aplicaciones públicas construidas y desplegadas directamente por mí. Esta práctica me obliga a asumir el ciclo completo: definición, arquitectura, desarrollo, pruebas, integración, publicación, observación y evolución.
 
-Actualmente, el portafolio reúne siete aplicaciones: Velo, Dash Agent AI, Probeta DS, Hablemos San, Innmobiliaria, Nutri-Kids y CV Viva. No todas responden al mismo propósito ni utilizan la misma arquitectura, pero comparten criterios sobre documentación, pruebas, accesibilidad, rendimiento, trazabilidad y control de cambios.
+Actualmente, el portafolio reúne seis aplicaciones hermanas —Velo, Dash Agent AI, Probeta DS, Hablemos San, Innmobiliaria y Nutri-Kids— más CV Viva, este sitio. No todas responden al mismo propósito ni utilizan la misma arquitectura, pero comparten criterios sobre documentación, pruebas, accesibilidad, rendimiento, trazabilidad y control de cambios.
 
 La integración continua funciona como un mecanismo de calidad y no únicamente como una automatización de despliegue. Antes de publicar, la solución debe superar los controles definidos para su código, comportamiento y artefactos. Cuando una validación falla, la publicación debe detenerse en lugar de trasladar el problema al usuario.
 
@@ -157,9 +157,9 @@ Aporto profundidad en Power BI y modelos semánticos. Puedo trabajar en preparac
 
 Aporto experiencia en agentes desde dos perspectivas complementarias. En un entorno profesional diseñé la plataforma y el proceso utilizado como marco para construir veintisiete agentes. En mi trabajo propio desarrollé un ecosistema agéntico de alto nivel basado en harnesses especializados, recuperación selectiva, herramientas, memoria, contratos, controles y mecanismos de evaluación.
 
-Aporto práctica directa de despliegue. Mantengo siete aplicaciones públicas con procesos automatizados, pruebas, controles de calidad, accesibilidad, presupuestos de rendimiento y evolución versionada. Respondo por productos que pueden fallar y que necesitan mecanismos reales de prevención, diagnóstico y recuperación.
+Aporto práctica directa de despliegue. Mantengo seis aplicaciones hermanas públicas y este sitio, todas con procesos automatizados, pruebas, controles de calidad, accesibilidad, presupuestos de rendimiento y evolución versionada. Respondo por productos que pueden fallar y que necesitan mecanismos reales de prevención, diagnóstico y recuperación.
 
-Aporto gobierno de datos e inteligencia artificial aplicado en banca, plataformas de agentes y salud. Actualmente lidero una estrategia institucional basada en ISO/IEC 42001:2023 y conecto políticas, riesgos y responsabilidades con los componentes técnicos que deben producir evidencia sobre su funcionamiento.
+Aporto gobierno de datos e inteligencia artificial aplicado en banca, plataformas de agentes y salud. Actualmente lidero una estrategia institucional basada en ISO/IEC 42001 y conecto políticas, riesgos y responsabilidades con los componentes técnicos que deben producir evidencia sobre su funcionamiento.
 
 Aporto una cultura de calidad y trazabilidad que se originó en mi experiencia con sistemas de gestión. Las decisiones relevantes quedan documentadas. Los controles deben demostrar que pueden detectar una falla. Las cifras conservan su procedencia. Los cambios necesitan una razón y una forma de comprobar su efecto.
 

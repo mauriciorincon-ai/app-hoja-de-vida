@@ -297,7 +297,7 @@ DP-600 aporta la plataforma analítica con la que pueden organizarse corpus, reg
 
 La investigación también fortalece el gobierno de IA. Una organización necesita distinguir entre afirmaciones, evidencia, riesgos, impactos y condiciones de uso. La capacidad para exigir esa separación se desarrolla practicándola sobre el propio trabajo.
 
-Estas siete piezas demuestran que no utilizo inteligencia artificial únicamente para construir más rápido. La utilizo dentro de un sistema diseñado para producir conocimiento trazable, refutable y reproducible.
+Estas siete investigaciones demuestran que no utilizo inteligencia artificial únicamente para construir más rápido. La utilizo dentro de un sistema diseñado para producir conocimiento trazable, refutable y reproducible.
 
 ## Lo que las siete investigaciones demuestran
 

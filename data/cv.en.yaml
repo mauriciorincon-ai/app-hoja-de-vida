@@ -11,7 +11,7 @@ identidad:
   eyebrow: "Industrial Engineer · Analytics & AI Engineer"
   titular: "From industrial engineering to AI agents: data, platforms and decisions."
   resumen: >-
-    Data leader and AI engineer (AI-103 and DP-100, in progress) · Analytics
+    Data leader and AI engineer (AI-103 and AI-300, in progress) · Analytics
     Engineer (DP-600). I design analytics platforms on Microsoft Fabric and take AI
     agents to production — and this résumé is the sample: walk through it and
     ask.
@@ -24,7 +24,7 @@ identidad:
     scratch the data strategy and platform of an AI-agent startup —Microsoft
     Fabric and a replicable process to design and monitor agents— and built BI
     and predictive analytics in banking. Microsoft-certified as a Fabric
-    Analytics Engineer (DP-600), on the way to AI-103 and DP-100. Want to know
+    Analytics Engineer (DP-600), on the way to AI-103 and AI-300. Want to know
     anything else? Ask this résumé's chat.
   ubicacion: "Bogotá, Colombia · Open to international relocation and remote work"
   email: "mauricio.hmrc@gmail.com"
@@ -318,14 +318,14 @@ certificaciones:
     verificacion: ""
     icono: insignia
     logo: microsoft.svg
-  - nombre: "Microsoft Certified: Azure AI Engineer Associate (AI-103)"
+  - nombre: "Microsoft Certified: Azure AI Apps and Agents Developer Associate (AI-103)"
     estado: "en curso"
     nota: "In preparation: the Azure AI engineering path."
     icono: insignia
     logo: microsoft.svg
-  - nombre: "Microsoft Certified: Azure Data Scientist Associate (DP-100)"
+  - nombre: "Microsoft Certified: Machine Learning Operations Engineer Associate (AI-300)"
     estado: "en curso"
-    nota: "In preparation, alongside AI-103: data science and machine learning on Azure."
+    nota: "In preparation, alongside AI-103: operating, evaluating and monitoring models and agents on Azure."
     icono: insignia
     logo: microsoft.svg
   - nombre: "IBM: Applied Data Science with R"

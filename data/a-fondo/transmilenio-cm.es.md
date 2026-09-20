@@ -40,7 +40,7 @@ de demanda con scikit-learn. -->
 
 <!-- seccion: el-problema -->
 
-Regresé al entorno de TransMilenio en octubre de 2020, esta vez como Profesional de Análisis Postoperacional en C&M Consultores, y permanecí en el cargo hasta junio de 2021. Volví al mismo dominio, pero con una responsabilidad distinta y con una comprensión más madura de la relación entre operación, datos y decisiones.
+Regresé al entorno de TransMilenio en julio de 2021, esta vez como Profesional de Análisis Postoperacional en C&M Consultores, y permanecí en el cargo hasta mayo de 2022. Volví al mismo dominio, pero con una responsabilidad distinta y con una comprensión más madura de la relación entre operación, datos y decisiones.
 
 El análisis postoperacional consiste en reconstruir lo ocurrido para comprender sus causas y decidir cómo debe ajustarse la operación futura. No se limita a describir el día anterior. Debe explicar las diferencias entre lo programado y lo ejecutado, identificar patrones, hacer visibles las restricciones y transformar los resultados observados en decisiones sobre programación, capacidad y servicio.
 

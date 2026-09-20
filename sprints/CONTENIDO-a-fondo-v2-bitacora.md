@@ -196,3 +196,56 @@ que el problema no era el tamaño del corpus sino la competencia entre duplicado
 
 **Marcador de los gates sobre el corpus entero:** 213 → **209**.
 
+### Barrido de hechos decididos (adelanto de F3)
+
+Mientras el dueño responde las preguntas por documento, se aplicó lo que **no depende de
+ninguna respuesta nueva**: las correcciones que ya salen de sus respuestas al bloque A del
+2026-09-19. Son cambios de dato, no de prosa, y por eso no esperan al turno de cada documento.
+
+| Corrección                                                            | Dónde                                  | Decisión |
+| --------------------------------------------------------------------- | -------------------------------------- | -------- |
+| `ISO/IEC 42001` pierde el año en los 24 documentos                     | 5 archivos con `:2025`, 3 con `:2023`  | A4: la edición publicada es :2023 y la adopción colombiana está sin verificar, así que la prosa no compromete ninguna |
+| Cafam y C&M Consultores dejan de estar intercambiadas                  | `origenes`, `transmilenio-cm`          | A7 |
+| Fundación CTIC empieza en marzo, no en febrero                         | `origenes`                             | A8 |
+| «Siete aplicaciones» → seis hermanas más CV Viva, que es el sitio      | `apps-pipeline`, `como-aprendo`, `plataforma-y-despliegue` | A10 |
+| «Treinta y tres piezas» → treinta y dos                                | `como-aprendo`                         | A10 |
+| «Seis credenciales» → cinco · «cinco de IBM» → cuatro                  | `certificaciones`, `como-aprendo`, `gobierno-de-datos-y-de-ia` | A5 |
+| «Estas siete piezas» → «estas siete investigaciones»                   | `las-investigaciones`                  | desambiguación: son piezas, pero decir cuáles evita el conteo ambiguo |
+
+**Y el sitio, en lo que el bloque A resolvió:**
+
+- **El DP-100 sale de `certificaciones` y entra el AI-300.** Microsoft retiró el DP-100 el 1 de
+  junio de 2026 y declaró el AI-300 como su reemplazo. El DP-100 pasa a
+  `data/credenciales-nombradas.yaml` con su razón, como en su día el AI-102, para que el corpus
+  pueda explicar por qué ya no está.
+- **El AI-103 recupera su nombre oficial:** «Azure AI Apps and Agents Developer Associate», no
+  «Azure AI Engineer Associate». El sitio publicaba el nombre viejo.
+- **Y una corrección al propio dueño.** Al responder A1 nombró el AI-300 como «Aplicaciones y
+  agentes de Azure AI»: ese es el AI-103. El **AI-300 es Machine Learning Operations Engineer
+  Associate** — MLOps y GenAIOps, es decir operar, evaluar y monitorear. Verificado en Microsoft
+  Learn. Encaja con su propia respuesta A2 (el AI-300 reemplaza al DP-100) y con lo que el corpus
+  ya dice del AI-300 en cinco de sus seis menciones. La nota de la credencial se escribió con el
+  alcance correcto.
+- Titular, frase del chat, `cv.en.yaml`, guía de prueba y manual quedan alineados.
+
+Con eso, el **gate de credenciales nombradas vuelve a verde** (estaba en rojo: el AI-300 se
+nombraba en trece documentos sin existir en el sitio).
+
+**Marcador de los seis gates:** 213 → 209 → **181**.
+
+| Gate                    | Rojos |
+| ----------------------- | ----: |
+| Cifras del sitio        | **0** |
+| Fechas de cargos        | **0** |
+| Normas con año correcto | **0** |
+| Densidad                |   149 |
+| Léxico obligatorio      |    20 |
+| Sin párrafos repetidos  |    12 |
+
+El de repetidos subió de 11 a 12, y es un hallazgo, no una regresión: al quitar el año de la
+norma, dos párrafos sobre ISO/IEC 42001 —uno en `fundacion-ctic`, otro en
+`gobierno-de-datos-y-de-ia`— resultaron ser el mismo texto. El año distinto los disfrazaba.
+
+**Estado de la suite:** 29 de 32 archivos en verde. Los tres rojos son exactamente el trabajo
+pendiente: el golden set (5), el banco de preguntas (31) y tres de los seis gates de coherencia.
+
