@@ -128,8 +128,8 @@ apps:
     solicitable: false
     brochure:
       tagline:
-        es: "Un chat que responde por mi hoja de vida — y nunca se cae."
-        en: "A chat that answers for my résumé — and never goes down."
+        es: "Un chat que responde por mi hoja de vida — y se degrada sin ocultarlo."
+        en: "A chat that answers for my résumé — and degrades without hiding it."
       intro:
         es: "Pregúntale por mi experiencia en español o inglés y responde solo con mi contenido real, citando la fuente y enlazándola. Si el proveedor de IA no está disponible, degrada a búsqueda local sobre el mismo índice: el chat sigue funcionando."
         en: "Ask it about my experience in Spanish or English and it answers using only my real content, citing the source and linking it. If the AI provider is unavailable, it falls back to local search over the same index: the chat keeps working."
@@ -205,6 +205,6 @@ apps:
       es: "Agente autónomo con Gemini + Vertex AI"
       en: "Autonomous agent with Gemini + Vertex AI"
     descripcion:
-      es: "Agente con herramientas (LangChain) sobre el stack de GCP: el complemento multi-cloud de mi certificación Azure."
-      en: "A tool-using agent (LangChain) on the GCP stack: the multi-cloud complement to my Azure certification."
+      es: "Agente con herramientas (LangChain) sobre el stack de GCP: el complemento multi-cloud de mi ruta de certificación en Azure."
+      en: "A tool-using agent (LangChain) on the GCP stack: the multi-cloud complement to my Azure certification path."
     solicitable: true

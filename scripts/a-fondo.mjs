@@ -46,7 +46,10 @@ export const frontmatterSchema = z.object({
     .regex(/^\d{4}-\d{2}-\d{2}$/, "formato AAAA-MM-DD"),
   preguntas_de_prueba: z
     .array(z.string().min(1))
-    .min(2, "al menos 2 — la prueba del chat viaja con el contenido"),
+    // Subió de 2 a 3 en la reescritura de 2026-09 (a fondo v2): con dos preguntas, un
+    // documento se probaba con sus propias palabras y nada más; la tercera nace del
+    // banco de preguntas, con palabras de afuera.
+    .min(3, "al menos 3 — la prueba del chat viaja con el contenido, y una de afuera"),
 });
 
 /**

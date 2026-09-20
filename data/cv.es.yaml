@@ -73,7 +73,7 @@ trayectoria:
       - "Construí el monitoreo en tiempo real de los agentes en producción."
       - "Documenté el proceso core replicable para diseñar e implementar agentes de IA."
   - periodo: "2023"
-    rol: "Analista Senior de Analítica"
+    rol: "Analista Senior de Analítica y Reportes"
     organizacion: "Banco Pichincha"
     proyecto: "banco-pichincha"
     descripcion: >-
@@ -86,7 +86,7 @@ trayectoria:
       - "Modelos predictivos con scikit-learn: >90% de precisión y +35% en predicciones."
       - "Optimización de modelos semánticos con DAX Studio y Tabular Editor."
       - "Co-liderazgo de la gobernanza de datos del área."
-      - "Programa de formación en analítica: +20% de productividad del equipo."
+      - "Programa de formación en analítica: +20% de productividad en la preparación y uso de la información."
   - periodo: "2021 — 2022"
     rol: "Análisis Post-Operacional"
     organizacion: "C&M Consultores (TransMilenio)"
@@ -220,9 +220,9 @@ proyectos:
         - "Construí el monitoreo en tiempo real de los agentes de IA en producción."
         - "Documenté el proceso core replicable para diseñar e implementar agentes de IA."
       impacto:
-        - "El ecosistema de datos de la startup quedó operativo desde cero en Microsoft Fabric."
-        - "Los agentes en producción pasaron a monitorearse en tiempo real."
-        - "El proceso core replicable estandarizó cómo se diseñan e implementan los agentes."
+        - "El ecosistema de datos quedó operativo desde cero en Microsoft Fabric: 12 clientes integrados, 120 tablas, 20 GB y 1.000 eventos por día."
+        - "27 agentes en el inventario y hasta 23 monitoreados a la vez, en tiempo real."
+        - "El proceso core replicable, de 11 etapas, estandarizó cómo se diseñan e implementan los agentes."
         - "El puente exacto entre la ingeniería de analítica (DP-600) y la ingeniería de IA."
   - slug: "banco-pichincha"
     nombre: "BI que el negocio sí usa — Banco Pichincha (2023)"
@@ -250,7 +250,7 @@ proyectos:
         - "+25% en toma de decisiones sobre los tableros adoptados."
         - "−35% en tiempos de análisis por la optimización del ETL."
         - ">90% de precisión y +35% en predicciones de los modelos en producción."
-        - "+20% de productividad del equipo tras el programa de formación."
+        - "+20% de productividad en la preparación y uso de la información tras el programa de formación."
   - slug: "transmilenio-cm"
     nombre: "Datos que mueven una ciudad — TransMilenio / C&M (2021–2022)"
     resumen: >-
@@ -274,7 +274,7 @@ proyectos:
         - "Llevé la analítica a mesas de estrategia con la dirección del SITP."
         - "Desarrollé la predicción de demanda con scikit-learn."
       impacto:
-        - "+35% de eficiencia operativa por la adopción de BI."
+        - "+35% de eficiencia de los procesos analíticos por la adopción de BI."
         - "+70% en precisión y velocidad de análisis con el ETL unificado."
         - "+25% en indicadores tras las mesas de estrategia con el SITP."
         - "+20% de rendimiento del sistema con la predicción de demanda."
@@ -321,8 +321,11 @@ proyectos:
         - "Desarrollo modelos de análisis y visualización para líderes administrativos y asistenciales."
         - "Estructuro el gobierno y la calidad de datos institucional."
         - "Construyo tableros de control por procesos con mejora continua."
+        - "Lidero la estrategia institucional de IA bajo UNE-ISO/IEC 42001:2025: 23 instrumentos del sistema de gestión, 8 terminados."
       impacto:
-        - "Decisiones administrativas y asistenciales informadas por datos gobernados."
+        - "42 productos analíticos en uso para 20 líderes de 15 procesos y unos 75 usuarios."
+        - "Cerca de 60% menos esfuerzo en la preparación de la información; 10 planes de análisis en seguimiento."
+        - "12 oportunidades de IA identificadas, 7 casos evaluados, 3 priorizados y 2 documentados."
         - "Calidad de datos institucional como práctica, no como evento."
 
 certificaciones:
@@ -376,6 +379,7 @@ skills:
     items:
       - "Azure AI"
       - "RAG y agentes — en construcción pública (ver showcase)"
+      - "n8n"
       - "PyTorch"
       - "TensorFlow"
       - "Scikit-Learn"
@@ -383,18 +387,23 @@ skills:
   - grupo: "Plataforma de datos"
     items:
       - "Microsoft Fabric"
-      - "Azure Synapse"
+      - "Direct Lake"
+      - "RLS (seguridad a nivel de fila)"
       - "ETL"
       - "Modelado de datos"
       - "SQL"
       - "Power Query"
       - "DAX"
+      - "Google Cloud — en exploración"
   - grupo: "BI & decisión"
     items:
       - "Power BI"
       - "Data storytelling"
       - "KPIs"
       - "Gobernanza y calidad de datos"
+      - "Shiny (R)"
+      - "Tableau"
+      - "Looker Studio"
   - grupo: "Ingeniería & liderazgo"
     items:
       - "Python"
@@ -402,3 +411,10 @@ skills:
       - "CI/CD — este sitio corre con ello"
       - "Equipos de hasta 20 personas"
       - "Stakeholders C-level"
+  # a fondo v2 (2026-09-20, D2/C66): la raíz industrial entra a skills con sus métodos.
+  - grupo: "Procesos y simulación"
+    items:
+      - "BPMN (Bizagi)"
+      - "Simulación de eventos discretos (FlexSim)"
+      - "Estudio de tiempos y balanceo de líneas"
+      - "Kanban y Scrum"

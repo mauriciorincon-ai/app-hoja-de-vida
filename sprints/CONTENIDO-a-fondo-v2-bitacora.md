@@ -542,3 +542,33 @@ está escrita en el grupo 1: sin `[CONFIRMAR]` y sin inventar, proporcional a la
 el dueño dio significa esto. Cada documento tiene ahora entre 970 y 1.560 palabras, subsecciones
 de 150 a 400 con un dato cada una, y tablas donde había cifras.
 
+---
+
+## F3 — Coherencia global: el sitio recibe lo que el dueño decidió
+
+En el mismo PR (D1). Todo sale de las respuestas del 19 y del 20 de septiembre:
+
+| Cambio                                                                                  | Dónde                           | Decisión |
+| --------------------------------------------------------------------------------------- | ------------------------------- | -------- |
+| Cargo de Pichincha: «Analista Senior de Analítica **y Reportes**»                        | `cv.{es,en}.yaml` trayectoria   | C31      |
+| «+20 % de productividad **en la preparación y uso de la información**» (no «del equipo») | trayectoria y case study        | A14      |
+| «+35 % de eficiencia **de los procesos analíticos**» (no «operativa»)                    | case study de TransMilenio/C&M  | A12      |
+| Case study de Vesting con cifras: 12 clientes, 120 tablas, 20 GB, 1.000 eventos/día, 27 agentes, 23 vigilados, 11 etapas | proyectos | A11, A17 |
+| Case study de CTIC, el único sin cifras, recibe ocho: 42, 20, 15, ~75, cerca del 60 %, 10, 12/7/3/2, 23 instrumentos (8 terminados) y la norma UNE | proyectos y acción | A15, A16, C43 |
+| Skills: entran n8n, Direct Lake, RLS, Google Cloud «en exploración», Shiny (R), Tableau, Looker Studio, y el grupo nuevo **«Procesos y simulación»** (BPMN con Bizagi, FlexSim, estudio de tiempos y balanceo, Kanban y Scrum); sale Azure Synapse | `cv.{es,en}.yaml` skills | D2, C49, C66 |
+| El chat «se degrada sin ocultarlo», no «nunca se cae»                                    | `apps.yaml`                     | C74      |
+| «El complemento multi-cloud de mi **ruta de** certificación en Azure»                    | `apps.yaml`                     | C69      |
+| Mínimo de **tres** `preguntas_de_prueba` por documento                                  | `scripts/a-fondo.mjs`           | plan F1  |
+
+El gate de tres preguntas nace con su rojo: la plantilla de `a-fondo.test.ts` gana una tercera
+pregunta y un caso con solo dos, que lanza «al menos 3». Los 25 documentos ya cumplían.
+
+Un quinto grupo de skills en la HOME recibe el icono de reserva (el rombo), como el componente
+ya preveía; `content.test.ts` sigue exigiendo el mismo número de grupos en los dos idiomas.
+**Conflicto esperado con el PR #32**, que añade el grupo «Cómo trabajo» en el mismo archivo: al
+mergear el segundo, se conservan los dos grupos.
+
+No hay test ni mensaje que fijara los textos cambiados; la suite sigue en el mismo estado que
+al cerrar F2 (rojos solo en golden-ajena y banco, que son F4). El índice del chat se
+reconstruye sin cambios: 28 fragmentos, 0 de 25 aprobados.
+

@@ -62,7 +62,7 @@ trayectoria:
       - "Built real-time monitoring for the agents in production."
       - "Documented the replicable core process to design and implement AI agents."
   - periodo: "2023"
-    rol: "Senior Analytics Analyst"
+    rol: "Senior Analytics and Reporting Analyst"
     organizacion: "Banco Pichincha"
     proyecto: "banco-pichincha"
     descripcion: >-
@@ -74,7 +74,7 @@ trayectoria:
       - "Predictive models with scikit-learn: >90% accuracy and +35% in predictions."
       - "Semantic model optimization with DAX Studio and Tabular Editor."
       - "Co-led the area's data governance."
-      - "Analytics training program: +20% team productivity."
+      - "Analytics training program: +20% productivity in preparing and using information."
   - periodo: "2021 — 2022"
     rol: "Post-Operational Analysis"
     organizacion: "C&M Consultores (TransMilenio)"
@@ -205,9 +205,9 @@ proyectos:
         - "Built real-time monitoring for the AI agents in production."
         - "Documented the replicable core process to design and implement AI agents."
       impacto:
-        - "The startup's data ecosystem became operational from scratch on Microsoft Fabric."
-        - "Agents in production went from opaque to monitored in real time."
-        - "The replicable core process standardized how agents are designed and shipped."
+        - "The data ecosystem became operational from scratch on Microsoft Fabric: 12 clients integrated, 120 tables, 20 GB and 1,000 events a day."
+        - "27 agents in the inventory and up to 23 monitored at once, in real time."
+        - "The replicable core process, in 11 stages, standardized how agents are designed and shipped."
         - "The exact bridge between analytics engineering (DP-600) and AI engineering."
   - slug: "banco-pichincha"
     nombre: "BI the business actually uses — Banco Pichincha (2023)"
@@ -234,7 +234,7 @@ proyectos:
         - "+25% in decision-making on the adopted dashboards."
         - "−35% in analysis times from the ETL optimization."
         - ">90% accuracy and +35% in predictions from the models in production."
-        - "+20% team productivity after the training program."
+        - "+20% productivity in preparing and using information after the training program."
   - slug: "transmilenio-cm"
     nombre: "Data that moves a city — TransMilenio / C&M (2021–2022)"
     resumen: >-
@@ -258,7 +258,7 @@ proyectos:
         - "Brought analytics into strategy sessions with SITP leadership."
         - "Developed demand forecasting with scikit-learn."
       impacto:
-        - "+35% operational efficiency from BI adoption."
+        - "+35% efficiency of analytical processes from BI adoption."
         - "+70% in analysis precision and speed with the unified ETL."
         - "+25% in indicators after the SITP strategy sessions."
         - "+20% system performance with demand forecasting."
@@ -306,8 +306,11 @@ proyectos:
         - "I build analysis and visualization models for administrative and clinical leaders."
         - "I structure institutional data governance and quality."
         - "I develop process-based control dashboards with continuous improvement."
+        - "I lead the institutional AI strategy under UNE-ISO/IEC 42001:2025: 23 management-system instruments, 8 finished."
       impacto:
-        - "Administrative and clinical decisions informed by governed data."
+        - "42 analytical products in use for 20 leaders across 15 processes and about 75 users."
+        - "About 60% less effort preparing information; 10 analysis plans under follow-up."
+        - "12 AI opportunities identified, 7 use cases evaluated, 3 prioritized and 2 documented."
         - "Institutional data quality as a practice, not an event."
 
 certificaciones:
@@ -354,6 +357,7 @@ skills:
     items:
       - "Azure AI"
       - "RAG & agents — being built in the open (see the showcase)"
+      - "n8n"
       - "PyTorch"
       - "TensorFlow"
       - "Scikit-Learn"
@@ -361,18 +365,23 @@ skills:
   - grupo: "Data platform"
     items:
       - "Microsoft Fabric"
-      - "Azure Synapse"
+      - "Direct Lake"
+      - "RLS (row-level security)"
       - "ETL"
       - "Data modeling"
       - "SQL"
       - "Power Query"
       - "DAX"
+      - "Google Cloud — exploring"
   - grupo: "BI & decision-making"
     items:
       - "Power BI"
       - "Data storytelling"
       - "KPIs"
       - "Data governance & quality"
+      - "Shiny (R)"
+      - "Tableau"
+      - "Looker Studio"
   - grupo: "Engineering & leadership"
     items:
       - "Python"
@@ -380,3 +389,9 @@ skills:
       - "CI/CD — this site runs on it"
       - "Teams of up to 20 people"
       - "C-level stakeholders"
+  - grupo: "Processes & simulation"
+    items:
+      - "BPMN (Bizagi)"
+      - "Discrete-event simulation (FlexSim)"
+      - "Time study and line balancing"
+      - "Kanban and Scrum"

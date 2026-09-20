@@ -35,6 +35,7 @@ actualizado: 2026-09-12
 preguntas_de_prueba:
   - "¿Qué hizo Henry en Vesting?"
   - "¿Qué es el proceso core?"
+  - "¿Qué demuestra el monitoreo de agentes?"
 ---
 ${extra}`;
 
@@ -82,9 +83,11 @@ describe("parseDocumento — frontmatter y subsecciones", () => {
     expect(() => doc(estadoRaro)).toThrowError(/- estado:/);
   });
 
-  it("exige al menos dos preguntas de prueba — la prueba viaja con el contenido", () => {
+  it("exige al menos tres preguntas de prueba — la prueba viaja con el contenido, y una de afuera", () => {
     const una = FM(CUERPO).replace('  - "¿Qué es el proceso core?"\n', "");
     expect(() => doc(una)).toThrowError(/preguntas_de_prueba/);
+    const dos = FM(CUERPO).replace('  - "¿Qué demuestra el monitoreo de agentes?"\n', "");
+    expect(() => doc(dos)).toThrowError(/al menos 3/);
   });
 
   it("rechaza ids de subsección duplicados", () => {
