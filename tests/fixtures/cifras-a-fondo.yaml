@@ -1,0 +1,89 @@
+# CIFRAS DEL SITIO — los conteos que el corpus no puede contradecir (a fondo v2).
+#
+# Por qué existe: el visitante PUEDE CONTAR. Si el chat dice «siete aplicaciones»
+# y la vitrina muestra seis, la cifra no es un detalle de redacción: es la única
+# afirmación del sitio que cualquiera desmiente en diez segundos, y se lleva por
+# delante la credibilidad de las otras treinta.
+#
+# Aquí NO se escribe ningún número. La verdad se DERIVA del repositorio
+# (`verdadesDelSitio()` en scripts/a-fondo-coherencia.mjs): las piezas se cuentan
+# en `content/`, las credenciales en `data/cv.es.yaml`. Si mañana entra una pieza
+# nueva, el gate se mueve solo y nombra a los documentos que se quedaron atrás.
+#
+# Lo que sí se escribe es el PATRÓN, y se escribe estrecho a propósito: se
+# prefiere no cazar una frase a cazarla mal.
+#   · `sustantivos`: el sustantivo que sigue al número.
+#   · `contexto`:    si está, alguna de estas frases tiene que aparecer cerca —
+#                    es como se separa «credenciales de IBM» de «credenciales».
+#   · `salvedades`:  si alguna aparece cerca, la frase no se juzga, y la razón
+#                    va escrita al lado.
+#
+# LO QUE ESTE GATE NO VIGILA, y por qué: «veintisiete agentes» de Vesting. Es un
+# inventario de una empresa que no está en este repositorio, así que no hay
+# verdad que derivar — vigilarlo sería congelar a mano un número, que es
+# exactamente lo que este gate existe para evitar. Su fuente vive en la hoja de
+# ruta de la auditoría, fuera del repo, y su control es la lectura del dueño.
+
+conceptos:
+  - id: apps
+    etiqueta: "las apps hermanas de la vitrina"
+    fuente: "content/vitrina/*.json"
+    sustantivos: [aplicaciones, apps]
+    salvedades:
+      - frase: "aplicaciones de power bi"
+        razon: "un conteo de informes, no del pipeline"
+      - frase: "aplicaciones empresariales"
+        razon: "categoría de software, no piezas de la vitrina"
+
+  - id: piezas
+    etiqueta: "las piezas publicadas en la vitrina"
+    fuente: "content/vitrina + agentes + investigaciones + tableros"
+    sustantivos: [piezas]
+
+  - id: agentes-vitrina
+    etiqueta: "los agentes publicados en la vitrina"
+    fuente: "content/agentes/*.json"
+    sustantivos: [agentes]
+    contexto:
+      - publicados
+      - "de la vitrina"
+      - "en la vitrina"
+      - "del portafolio"
+      - "en el portafolio"
+
+  - id: investigaciones
+    etiqueta: "las investigaciones publicadas"
+    fuente: "content/investigaciones/*.json"
+    sustantivos: [investigaciones, "lineas de investigacion", "líneas de investigación"]
+
+  - id: tableros
+    etiqueta: "los tableros publicados"
+    fuente: "content/tableros/*.json"
+    sustantivos: [tableros]
+    salvedades:
+      - frase: "tableros de control"
+        razon: "habla del oficio, no del inventario de la vitrina"
+      - frase: "tableros de bi"
+        razon: "habla del oficio, no del inventario de la vitrina"
+
+  - id: credenciales-obtenidas
+    etiqueta: "las credenciales obtenidas"
+    fuente: "cv.es.yaml · certificaciones sin «estado»"
+    sustantivos: [credenciales, certificaciones]
+    salvedades:
+      - frase: "de ibm"
+        razon: "las de IBM tienen su propio concepto"
+      - frase: "en curso"
+        razon: "las que están en preparación no son obtenidas"
+
+  - id: credenciales-ibm
+    etiqueta: "las credenciales de IBM"
+    fuente: "cv.es.yaml · certificaciones cuyo nombre empieza por IBM"
+    sustantivos: [credenciales, certificaciones]
+    contexto: ["de ibm"]
+
+  - id: credenciales-en-curso
+    etiqueta: "las credenciales en curso"
+    fuente: "cv.es.yaml · certificaciones con «estado: en curso»"
+    sustantivos: [credenciales, certificaciones, rutas]
+    contexto: ["en curso", "en desarrollo", "en preparacion", "en preparación"]

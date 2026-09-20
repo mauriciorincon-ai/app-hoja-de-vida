@@ -3,7 +3,7 @@ slug: rag-y-el-chat
 titulo: "RAG: cómo funciona este chat por dentro"
 resumen: "La arquitectura del chat de esta página, por qué es determinista y qué demuestra."
 estado: borrador
-ancla: "/vitrina/apps"
+ancla: "#vitrina"
 actualizado: 2026-09-12
 preguntas_de_prueba:
   - "¿Cómo funciona el chat de la hoja de vida de Henry?"

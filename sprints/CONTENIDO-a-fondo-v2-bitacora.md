@@ -60,3 +60,92 @@ las palabras concretas con las que alguien pregunta —herramienta, ciudad, cifr
 **El índice publicado no se movió:** 28 fragmentos, «0 de 24 documentos aprobados e indexados».
 Todo el corpus sigue en borrador y el sitio en `main` responde exactamente igual que antes.
 
+---
+
+## F1 — Arquitectura y los gates nuevos
+
+### Los seis gates que nacieron rojos
+
+`scripts/a-fondo-coherencia.mjs` (motores puros) + `tests/unit/a-fondo-coherencia.test.ts`.
+Los seis van en el mismo commit que su rojo (regla 14) y **se quedan rojos durante toda la
+reescritura**: son la lista de tareas de F2 y F3, y el número de ofensores es la medida del
+avance. Cada aserción imprime la lista entera, no el primer ofensor.
+
+| Gate                      | Qué exige                                                                                      | Rojo de partida | A quién nombró                                                                          |
+| ------------------------- | ---------------------------------------------------------------------------------------------- | --------------: | ---------------------------------------------------------------------------------------- |
+| Cifras del sitio          | Todo conteo de piezas o credenciales coincide con `content/` y `cv.es.yaml`                    |          **15** | «siete aplicaciones» ×5 · «seis credenciales» ×4 · «cinco credenciales de IBM» ×4 · «treinta y tres piezas» · «siete piezas» |
+| Fechas de cargos          | Una fecha nombrada en una frase de permanencia cae dentro de esa permanencia                   |           **7** | Cafam y C&M Consultores intercambiadas en `origenes` y `transmilenio-cm`; CTIC en febrero |
+| Densidad                  | Subsección ≤ 400 palabras y con ≥ 1 dato concreto                                              |         **151** | 70 subsecciones largas (hasta 949) y 81 sin una sola cifra, fecha, herramienta ni empresa |
+| Léxico obligatorio        | Cada documento dice las palabras con las que se pregunta por su tema                           |          **21** | `plataforma-y-despliegue` sin Docker, Kubernetes, Vertex AI, CI/CD, GitHub Actions, Vercel, Sentry ni Git |
+| Sin párrafos repetidos    | Ningún bloque de ≥ 25 palabras vive en dos sitios                                              |          **11** | 59 palabras repetidas dentro de `vesting · el-puente`; el control en rojo en dos documentos |
+| Normas con año correcto   | `ISO/IEC 42001` solo `:2023` o sin año; `ISO 9001` solo `:2015`                                |           **8** | cinco archivos con `:2025`                                                                |
+
+**Y los motores saben aprobar, no solo reprobar.** Con el corpus entero en rojo, los seis gates
+demuestran que fallan pero no que sepan pasar. Doce pruebas más, sobre documentos de juguete,
+le dan a cada motor un caso limpio y uno roto y exigen que los distinga nombrando al ofensor.
+Ahí se cazó un falso positivo del gate de fechas antes de que llegara al corpus: con «de» suelto
+en la lista de conectores, la frase «lo que aprendí en Cafam lo apliqué en marzo de 2024» se leía
+como una afirmación de permanencia, porque «marzo **de** 2024» lleva un «de» dentro. El conector
+ahora tiene que venir pegado a un mes o a un año.
+
+**Ninguna cifra de estos gates está escrita a mano.** Las verdades se derivan del repositorio,
+como el catálogo de destinos: las piezas se cuentan en `content/` (6 apps · 13 agentes · 7
+investigaciones · 6 tableros = 32) y las credenciales en `cv.es.yaml` (5 obtenidas, 4 de IBM, 2
+en curso). Si mañana entra una pieza a la vitrina, el gate se mueve solo y nombra a los
+documentos que se quedaron con el número viejo. El vocabulario concreto del gate de densidad
+sale de `cv.skills`, `cv.trayectoria` y `cv.proyectos` por la misma razón.
+
+**Lo único que sí se escribe a mano son los meses de cada cargo** (`tests/fixtures/cargos-a-fondo.yaml`),
+porque el sitio publica el periodo por años («2021 — 2022») y contra años no se puede ver que
+Cafam y C&M estén intercambiadas: caen en años vecinos. Para que el fixture no se convierta en
+una segunda verdad paralela, un séptimo caso lo cruza contra `cv.trayectoria` y falla si los dos
+no pueden ser ciertos a la vez. Hoy está verde.
+
+### El séptimo gate que NO se escribió
+
+El plan pedía un gate de «medición del buscador»: golden al 100 %, banco con la primera fuente
+por encima del 60 %, ajenas bloqueadas. Al hacerle la tercera pregunta de la regla 14 —¿puede
+fallar?— la respuesta fue que **ya falla, en otro sitio**: `a-fondo-golden.test.ts` y
+`banco-de-preguntas.test.ts` afirman exactamente eso y hoy están en rojo por ello. Escribirlo de
+nuevo habría sido decorado. Lo que sí era nuevo —dejar el número por escrito en cada corte— es
+disciplina de bitácora, no una aserción, y vive en las tablas de esta bitácora.
+
+### Arquitectura: quién es el dueño de cada hecho
+
+La regla que ordena la reescritura es **un hecho, un dueño**. En un buscador léxico la
+redundancia no es inofensiva: los duplicados compiten por el top-4 y desplazan al documento que
+sí tenía el dato. Los demás lo citan en una línea y remiten.
+
+| Hecho                                                     | Dueño                       | Quién lo cita y remite                        |
+| --------------------------------------------------------- | --------------------------- | --------------------------------------------- |
+| Los ocho empleos, con sus fechas                          | `origenes`                  | cada documento de proyecto, solo el suyo      |
+| Cada proyecto (qué pasó, con qué, con qué resultado)      | su documento de proyecto    | las capacidades, con una línea de evidencia   |
+| Las credenciales: código, nombre, estado, fecha           | `certificaciones`           | `como-aprendo` (los plazos), `fabric` (DP-600) |
+| Los plazos y el método de aprendizaje                     | `como-aprendo`              | `origenes` (una línea)                        |
+| La escalera indicador → agente                            | `como-trabajo`              | nadie más: aparece UNA vez en el corpus       |
+| El proceso core de agentes y los 27 de Vesting            | `agentes-en-produccion`     | `vesting` (una línea, remite)                 |
+| Los 13 agentes publicados, uno a uno                      | `los-agentes-de-la-vitrina` (nuevo) | `apps-pipeline`, `agentes-en-produccion` |
+| Fabric por dentro (lakehouse, Direct Lake, RLS, medallón) | `fabric-en-la-practica`     | `vesting`, `banco-pichincha`                  |
+| El gobierno, las tres veces                               | `gobierno-de-datos-y-de-ia` | `fundacion-ctic`, `vesting`, `banco-pichincha` |
+| Lo que no se ha hecho (Docker, Kubernetes, Vertex AI)     | `plataforma-y-despliegue`   | `como-aprendo` (una línea)                    |
+| El chat por dentro, con sus números                       | `rag-y-el-chat`             | `apps-pipeline`                               |
+| La fábrica en números (dos casas, CI, ADRs, cero enlaces) | `apps-pipeline`             | `como-aprendo`                                |
+
+**Documentos que cambian de forma en F2:** `agentes-en-produccion` se parte en dos y nace
+`los-agentes-de-la-vitrina.es.md` (ancla `/vitrina/agentes`); `apps-pipeline` gana
+`la-fabrica-en-numeros` y, si pasa de 3.600 palabras, suelta `el-metodo.es.md`. No se crea un
+documento por app hermana: las seis fichas ya publican eso y la palanca es **indexarlas** (F4).
+
+### Un ancla corregida
+
+`rag-y-el-chat` citaba a `/vitrina/apps`, el escaparate de las apps. El documento explica el
+chat de ESTE sitio, y el chat vive en la HOME: ahora cita a `#vitrina`. La aduana de destinos
+sigue verde (126 casos).
+
+### Lo que F1 dejó para después, y por qué
+
+Las `preguntas_de_prueba` suben de 2 a 3 por documento **en F2, documento a documento**, no
+ahora. El golden set exige que cada pregunta traiga a su documento en el top-4: escribir hoy la
+tercera pregunta contra una prosa que F2 va a reescribir entera sería escribirla dos veces. El
+mínimo del esquema (`a-fondo.mjs`) sube a 3 en F3, cuando los 25 cumplan.
+
