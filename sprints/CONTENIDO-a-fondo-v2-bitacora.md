@@ -731,3 +731,35 @@ inglés, 25 de 25 aprobados e indexados**. Suite completa: **1.158 verdes** (34 
 typecheck limpios. El informe del banco se regeneró: HOY = M2, 136/136, 99 de primeras, 0
 legítimas con «eso se me escapa». `data/a-fondo/README.md`: 25 · 171 · 29.970 palabras · 0
 `[CONFIRMAR]` · 25 aprobados.
+
+---
+
+## F6 — Verificación local y entrega
+
+| Verificación | Resultado |
+| --- | --- |
+| `pnpm test` (unit + integration) | 1.158 verdes en 34 archivos |
+| `pnpm typecheck` · `pnpm lint` | limpios |
+| `pnpm build` | índice regenerado: 494 fragmentos ES · 493 EN · 25 de 25 aprobados |
+| e2e `chat.spec.ts` + `axe.spec.ts` (desktop y móvil, sobre el build) | 204 verdes: respuesta con cita que navega al case study, panel en inglés, off-topic estático, teclado, 503 → búsqueda local, 429, axe AA con el panel abierto, reduced-motion; axe limpio en las 98 rutas × 2 |
+| `pnpm corpus:informe` | informe y README regenerados (HOY = M2 = 136/136) |
+| Barrido cero enlaces tras el último `git add` | exit 1 (limpio) en los tres commits |
+| gitleaks (hook pre-commit) | «no leaks found» en los tres commits |
+
+Los gates nuevos de esta entrega y su rojo, para el summary del PR:
+
+| Gate | Rojo demostrado |
+| --- | --- |
+| `tests/unit/fichas-al-indice.test.ts` | ficha sin `pieza.slug` → «ficha sin slug»; frente inventado → ancla inexistente (F4) |
+| `peso` en `chatChunkSchema` + `boostDocument` | sin peso, el banco cae a 94/131 (F4, medido) |
+| golden con fichas | al incluirlas, 3 golden en rojo (F4) |
+| `banco-de-preguntas-en.test.ts` + golden inglés | nacieron con 5 + 3 rojos (F5) |
+| `preguntas_de_prueba` ≥ 3 | fixture con dos → «al menos 3» (F3) |
+| seis gates de coherencia | 213 rojos sobre el corpus de partida (F1) |
+
+**Lo que queda del lado del dueño** (hoja `RESPUESTAS.md`, ítem E): pegar la clave de Groq en
+`.env.local` para probar el proveedor real en local; la preview del PR la prueba con la clave de
+Vercel. **Y la entrega:** la rama `contenido/a-fondo-v2` tiene tres commits locales (F4, F5, F6)
+sobre los de F0–F3 y **no se sube hasta que el dueño lo diga**; el cuerpo del PR está listo en
+la carpeta de la auditoría. Al mergear: conflicto esperado con el PR #32 en `skills` de
+`cv.{es,en}.yaml` (se conservan los dos grupos), limpieza del campo *homepage* tras el deploy.
