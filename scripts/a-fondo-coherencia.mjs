@@ -308,7 +308,7 @@ export function problemasDeDensidad(docs, { tope = 400, vocabulario = [] } = {})
             `Pártela por ideas: el índice trocea en 180 y una subsección larga se hunde entera.`,
         );
       }
-      const plano = normalizar(sub.texto);
+      const plano = normalizar(sub.texto).replace(/\s+/g, " ");
       const tieneDato =
         RE_DATO.some((re) => re.test(sub.texto)) ||
         terminos.some((t) => plano.includes(t));
@@ -345,8 +345,10 @@ export function problemasDeLexico(docs, lexico) {
       );
       continue;
     }
-    const cuerpo = normalizar(doc.subsecciones.map((s) => s.texto).join("\n"));
-    const faltan = terminos.filter((t) => !cuerpo.includes(normalizar(t)));
+    // «estudio de\ntiempos» es «estudio de tiempos»: el salto de línea del Markdown no es
+    // una palabra. Se comparan con los espacios normalizados.
+    const cuerpo = normalizar(doc.subsecciones.map((s) => s.texto).join("\n")).replace(/\s+/g, " ");
+    const faltan = terminos.filter((t) => !cuerpo.includes(normalizar(t).replace(/\s+/g, " ")));
     if (faltan.length) {
       problemas.push(
         `${doc.archivo}: no dice ${faltan.map((t) => `«${t}»`).join(", ")}. ` +

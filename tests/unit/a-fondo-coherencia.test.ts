@@ -187,6 +187,10 @@ describe("los motores de coherencia, uno a uno", () => {
     expect(problemasDeLexico([doc("x", [{ id: "s", texto: "Modelé el proceso con notación." }])], { x: ["BPMN"] })[0]).toContain("«BPMN»");
   });
 
+  it("léxico: una frase partida por un salto de línea sigue siendo la frase", () => {
+    expect(problemasDeLexico([doc("x", [{ id: "s", texto: "Hice estudio de\ntiempos en la planta." }])], { x: ["estudio de tiempos"] })).toEqual([]);
+  });
+
   it("léxico: un slug que no existe es un gate sin sujeto y se dice", () => {
     expect(problemasDeLexico([], { fantasma: ["algo"] })[0]).toContain("gate sin sujeto");
   });

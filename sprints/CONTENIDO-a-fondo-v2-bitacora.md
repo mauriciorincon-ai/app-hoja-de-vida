@@ -433,3 +433,56 @@ Golden set: 3 documentos en rojo, todos de los grupos siguientes.
 
 **Marcador de los seis gates:** 122 → **81**. Densidad 71 · léxico 10 · **repetidos 0**.
 
+### Grupo 3 cerrado: los seis documentos de capacidad
+
+| Documento                   | Antes | Después | Subsecciones | Rojos propios |
+| --------------------------- | ----: | ------: | -----------: | ------------: |
+| `fabric-en-la-practica`     | 4.698 |   1.207 |       11 → 7 |        9 → 0 |
+| `gobierno-de-datos-y-de-ia` | 4.753 |   1.248 |       12 → 7 |        8 → 0 |
+| `plataforma-y-despliegue`   | 3.039 |   1.002 |        8 → 6 |       14 → 0 |
+| `bi-que-se-adopta`          | 4.519 |     972 |       12 → 6 |        9 → 0 |
+| `analitica-predictiva`      | 4.460 |   1.117 |       12 → 7 |       11 → 0 |
+| `procesos-y-simulacion`     | 5.102 |   1.356 |       12 → 8 |       10 → 0 |
+
+La regla del grupo: la **capacidad cuenta CÓMO lo hago con evidencia transversal** —empresa,
+cifra, herramienta— y remite al documento de proyecto que ya narró el caso. Lo que era manual de
+BI, capítulo de libro de ML o documentación de Microsoft (~1.000 palabras por documento, según
+los informes) salió.
+
+- `plataforma-y-despliegue` **recupera «Lo que no he hecho, dicho sin rodeos»** desde `main`, con
+  la respuesta del dueño: sin contenedores en producción, Kubernetes como estudio (A19), Google
+  Cloud en exploración sin horizonte (A18), el complemento «de mi ruta de certificación en Azure»
+  (C69). Nombra Git, GitHub Actions, CI/CD, Vercel y Sentry (C61) y Microsoft Foundry con su
+  nombre anterior (C60). Docker, Kubernetes, Vertex AI y BigQuery vuelven a existir para el
+  buscador: eran cero apariciones en los 24.
+- `fabric-en-la-practica`: Spark y T-SQL, OneLake, plegado de consultas, DAX Studio y Tabular
+  Editor con el caso de Pichincha, la combinación de modos de almacenamiento de Vesting (C37),
+  RLS (D2) y los workspaces por cliente (C38). Synapse sale (C49, C59). La exploración pública
+  de Fabric baja a 80 palabras (C58).
+- `gobierno-de-datos-y-de-ia`: **tabla de las tres veces**; habeas data, Ley 1581 y anonimización
+  (B10); UNE-ISO/IEC 42001:2025, el inventario de sistemas de IA y la AIIA; los 23 instrumentos
+  (A15); el **Experto ISO 42001** nombrado como la pieza de la vitrina que es; la respuesta al
+  posgrado con las cifras correctas.
+- `bi-que-se-adopta`: **tabla de las cuatro adopciones** con CTIC incluida (C43), la línea honesta
+  sobre C&M Consorcio sin cifra, la procedencia medida/calculada/declarada/estimada, y el
+  **Constructor de Tableros Power BI** como agente construido y probado que produce el .pbip
+  completo (C40). La escalera de instrumentos remite a `como-trabajo`.
+- `analitica-predictiva`: **tabla de herramientas con nivel** según C62 —scikit-learn real en tres
+  empresas, PyTorch y TensorFlow en exploración, SAS en Cafam como complemento, NLP en agentes
+  propios (C64)—; RMSE y los diez meses del modelo (C25, C26); fuga, mora y riesgo (B7); la deriva
+  como método sin caso propio (C63) y Probeta DS con sus cifras medidas.
+- `procesos-y-simulacion`: `bizagi-y-flexsim` (1.128 palabras, «no se toca» según el informe) se
+  **parte en tres** —Bizagi por empresa según C3, FlexSim con el modelo del despacho de Cafam
+  (C65), capacidad y variabilidad— sin perder una idea; nace `estudio-del-trabajo` con tiempos y
+  suplementos OIT, balanceo, Kanban como sistema de tirón lean y Scrum (C2, C67); el título
+  duplicado en la misma línea desaparece.
+
+**Dos mejoras al motor** salidas de este grupo: el léxico y la densidad comparan con los espacios
+normalizados —«estudio de\ntiempos», partido por el ajuste de línea del Markdown, no encontraba
+«estudio de tiempos»—, con su caso de juguete; y la vecindad de «siete aplicaciones» se escribe
+como «seis hermanas y este sitio» donde quiera que el conteo incluya a CV Viva.
+
+**Marcador de los seis gates:** 81 → **44**. Densidad 39 · léxico 5, todos en los cinco documentos
+de la vitrina que faltan. Golden set: solo la ajena «receta del ajiaco» pasa el guardrail, y ese
+umbral se recalibra midiendo en F4.
+

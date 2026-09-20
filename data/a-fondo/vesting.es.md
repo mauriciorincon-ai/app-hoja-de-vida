@@ -98,10 +98,8 @@ sin reescribir cada análisis. El detalle se conservaba sin deteriorar la consul
 explicar, agregados para observar.
 
 **Power BI** era la capa de consumo: modelos semánticos que convertían eventos técnicos en
-conceptos —agentes, clientes, sesiones, periodos, resultados— con una **combinación de modos de
-almacenamiento** según el uso: Direct Lake para lo que debía verse al momento, importación para
-el histórico agregado, DirectQuery donde el detalle no cabía en memoria. El detalle de cómo se
-modela en Fabric está en el documento de Fabric.
+conceptos —agentes, clientes, sesiones, periodos, resultados— con una **combinación de modos de almacenamiento** —Direct Lake, importación y DirectQuery—
+elegida por el uso de cada modelo. Cómo se decide eso está en el documento de Fabric.
 
 ## Gobernanza desde el diseño
 
