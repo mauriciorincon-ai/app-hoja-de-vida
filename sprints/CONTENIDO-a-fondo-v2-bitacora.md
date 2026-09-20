@@ -267,3 +267,50 @@ Los cuatro `[CONFIRMAR]` que F2 había puesto en `inglopres` se retiraron; el co
 cero. La aduana sigue prohibiéndolos en un `aprobado`, que ahora es inalcanzable por
 construcción y no por disciplina.
 
+### Grupo 1 cerrado: `inglopres` · `ceinfes` · `cm-operaciones` · `origenes`
+
+| Documento        | Antes | Después | Subsecciones | Rojos propios antes → después |
+| ---------------- | ----: | ------: | -----------: | ----------------------------: |
+| `inglopres`      | 1.291 |   1.182 |        5 → 7 |                         5 → 0 |
+| `ceinfes`        | 2.105 |   1.445 |        6 → 8 |                         5 → 0 |
+| `cm-operaciones` | 2.309 |   1.043 |        5 → 6 |                         7 → 0 |
+| `origenes`       | 7.523 |   1.336 |        7 → 6 |                        11 → 0 |
+
+**Desviación declarada del plan: el volumen quedó por debajo de los objetivos de §3** (1.500–1.800
+· 2.000–2.400 · 1.400–1.700 · 1.800–2.200). Los objetivos se fijaron suponiendo que las
+respuestas del dueño traerían cifras nuevas —hojas por jornada, estaciones, rutas, tamaño de
+equipos—. El dueño decidió el 2026-09-20 que lo que falta no se marca ni se inventa: se escribe
+sin ese dato. Sin cifras que sostenerlo, «proporcional al volumen de información» significa más
+corto. Si las respuestas de `RESPUESTAS.md` traen los números, cada documento gana la subsección
+que los aloja; no se rellena antes.
+
+**Qué se hizo, además de lo que dicen los gates:**
+
+- `ceinfes` gana una **tabla de los tres frentes** (qué hace · qué pasa si falla), una lista de
+  KPIs con nombre, el método nombrado —balanceo de líneas, cuello de botella, teoría de
+  restricciones, capacidad teórica frente a efectiva— y una subsección nueva: la programación de
+  aplicadores a más de 100 colegios tratada como **problema de asignación con ventanas de
+  tiempo**. «Metodologías ágiles» vuelve literal junto a Kanban: el banco espera este documento y
+  solo este para esa pregunta, y la revisión había cambiado la frase.
+- `cm-operaciones` pierde el epílogo duplicado (949 → 74 palabras) y gana vocabulario de
+  transporte con soporte: apelotonamiento de buses (*bus bunching*), regularidad de intervalos
+  (*headway*), control de intervalo, indicadores *lagging* y *leading*, auditoría de cumplimiento
+  contractual. Se **restituye el puente a las dos investigaciones de la vitrina** que la revisión
+  había borrado, y los «18 meses». «Memoria estadística» pasa a «histórico operacional».
+- `origenes` vuelve a ser **el arco y no la hoja de vida narrada**: la **tabla de los ocho
+  empleos** con periodo mes a mes, el hilo con los métodos de ingeniería industrial nombrados, y
+  «cuántos años» con la cuenta real —diez desde agosto de 2016, ocho con los datos en el centro
+  desde Ceinfes, **105 meses de trabajo efectivo**— y la comparación datos frente a IA que el
+  banco pregunta. Lo que salió (≈6.200 palabras) ya vivía en sus dueños.
+- **Un término del léxico estaba mal puesto**: «post-operacional» en `cm-operaciones` es el cargo
+  de C&M Consultores (2021–2022), no de este rol. Se cambia por «supervisión» y «cumplimiento»,
+  que es lo que este documento es y lo que el banco pregunta.
+- **Dos mejoras al motor** salidas de usarlo: el vocabulario derivado parte las organizaciones
+  por paréntesis y guion —«C&M Consorcio (TransMilenio)» son dos nombres que el corpus usa por
+  separado—, y el gate de fechas lee también los rangos con guion de una tabla («agosto 2016 –
+  junio 2017»), con su caso de juguete en rojo y en verde. Sin eso, la tabla de `origenes` habría
+  quedado fuera de vigilancia.
+
+**Marcador de los seis gates:** 213 → **163**. Densidad 135 · léxico 17 · repetidos 11; cifras,
+fechas y normas en cero. Golden set: 4 documentos en rojo, todos de los grupos siguientes.
+

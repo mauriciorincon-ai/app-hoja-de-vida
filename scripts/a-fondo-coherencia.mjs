@@ -162,7 +162,9 @@ const RE_MES_ANIO = new RegExp(
  */
 const RE_RANGO = new RegExp(
   `\\b(?:entre|desde|hasta|a partir de)\\s+(?:${[...MESES.keys()].join("|")}|\\d{4})\\b` +
-    `|\\bde\\s+(?:${[...MESES.keys()].join("|")})\\s+(?:de\\s+)?\\d{4}\\s+a\\s+`,
+    `|\\bde\\s+(?:${[...MESES.keys()].join("|")})\\s+(?:de\\s+)?\\d{4}\\s+a\\s+` +
+    // «agosto 2016 – junio 2017», la forma de una tabla de trayectoria: también es un rango.
+    `|\\b(?:${[...MESES.keys()].join("|")})\\s+(?:de\\s+)?\\d{4}\\s*[–—-]\\s*(?:${[...MESES.keys()].join("|")}|\\d{4}|hoy|actual)`,
   "i",
 );
 
@@ -269,7 +271,11 @@ export function vocabularioConcreto() {
     }
   }
   for (const hito of cv.trayectoria ?? []) {
-    terminos.add(String(hito.organizacion).split("—")[0].trim());
+    // «C&M Consorcio (TransMilenio)» son DOS nombres que el corpus usa por
+    // separado; «Vesting — startup de agentes…» es uno con su glosa detrás.
+    for (const parte of String(hito.organizacion).split(/\s*[—(]\s*|\)/)) {
+      if (parte.trim()) terminos.add(parte.trim());
+    }
   }
   for (const proyecto of cv.proyectos ?? []) {
     if (proyecto.titulo) terminos.add(proyecto.titulo);

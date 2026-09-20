@@ -150,6 +150,15 @@ describe("los motores de coherencia, uno a uno", () => {
     expect(rojo[0]).toContain("Cafam");
   });
 
+  it("fechas: la fila de una tabla «agosto 2016 – junio 2017 | Cafam» también es un rango", () => {
+    expect(
+      problemasDeFechas([doc("x", [{ id: "s", texto: "| octubre 2020 – junio 2021 | Analista, Cafam |" }])], CARGOS),
+    ).toEqual([]);
+    const rojo = problemasDeFechas([doc("x", [{ id: "s", texto: "| julio 2021 – mayo 2022 | Analista, Cafam |" }])], CARGOS);
+    expect(rojo).toHaveLength(2);
+    expect(rojo[0]).toContain("Cafam");
+  });
+
   it("fechas: una mención sin rango no es una afirmación de permanencia", () => {
     expect(
       problemasDeFechas([doc("x", [{ id: "s", texto: "Lo que aprendí en Cafam lo apliqué en marzo de 2024." }])], CARGOS),

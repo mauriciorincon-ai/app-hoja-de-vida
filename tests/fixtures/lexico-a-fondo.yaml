@@ -27,7 +27,7 @@ ceinfes:
   [KPI, junta directiva, ágil, mejora continua, procesos]
 
 cm-operaciones:
-  [TransMilenio, transporte, post-operacional, automatización, indicadores]
+  [TransMilenio, transporte, supervisión, automatización, indicadores, cumplimiento]
 
 transmilenio-cm:
   [TransMilenio, SITP, ETL, demanda, Power BI]
