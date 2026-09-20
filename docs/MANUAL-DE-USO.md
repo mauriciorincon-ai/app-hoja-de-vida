@@ -468,6 +468,33 @@ el mensaje te llega al correo.
   búsqueda local. Tú lo notas en los logs (`proveedor falló`) y en el badge "Búsqueda local"
   al probar el chat.
 
+### El chat pide nombre y correo, y guarda cada conversación · desde el 2026-09-21 (ADR-024)
+
+- **Qué hace:** antes de la primera pregunta, el visitante deja **nombre y correo**, marca el
+  aviso de tratamiento de datos (Ley 1581) y recibe por correo un **código de seis dígitos**
+  que vale diez minutos. Con el código entra y no vuelve a registrarse en 30 días en ese
+  navegador. Sin código no hay chat: es la barrera contra quien solo viene a probar.
+- **Qué se guarda:** en Supabase, tabla `chat_registro`: quién (nombre, correo), en qué idioma,
+  **qué preguntó y qué se le respondió** (texto completo), con qué fuentes, en qué modo (IA ·
+  respuesta fija a una pregunta ajena · búsqueda local), con qué proveedor y cuántos tokens.
+  **Lo lees en el panel de Supabase** (Table Editor → `chat_registro`, ordena por `creado_en`).
+  Ningún visitante puede leer esa tabla: la lectura es solo tuya.
+- **Respuestas de dos o tres párrafos:** el chat contesta en 120–220 palabras, primero la
+  respuesta directa y después el contexto con cifras, y cierra ofreciendo profundizar. Si el
+  visitante quiere más, pregunta más. No vuelca los documentos.
+- **Lo que tienes que configurar (una vez):**
+  1. **Resend con dominio verificado.** El remitente de cortesía solo entrega a tu propio
+     correo: para que el código llegue a cualquier visitante, verifica el dominio del sitio en
+     Resend y pon `SOLICITUDES_FROM_EMAIL` con ese dominio.
+  2. **La migración** `supabase/migrations/20260921120000_chat_registro.sql` en tu proyecto de
+     Supabase (`supabase db push` o pegarla en el editor SQL).
+  3. **`CHAT_SESSION_SECRET`** en Vercel: 32 o más caracteres al azar (`openssl rand -base64 48`).
+- **Apagar solo la barrera** (sin apagar el chat): `CHAT_GATE=off`. Pensado para desarrollo
+  local; en producción la barrera está encendida y, si le falta el secreto o la base de datos,
+  el chat responde «registro no disponible» en vez de dejar pasar.
+- **Borrar los datos de alguien:** el aviso dice que puede pedirlo desde Contacto; se borra a
+  mano en Supabase (`delete from chat_registro where email = …`).
+
 ### Cómo alimentar el «a fondo» (el combustible del chat) · desde Sprint 008
 
 > **Reemplaza a «Cómo alimentar la historia» (S3).** `data/historia/` se retiró en el Sprint 008:
@@ -657,5 +684,6 @@ chat hoy y cuáles traería con la base aprobada. Ese informe **se genera, no se
 | 007           | Las estanterías: los cuatro frentes de la vitrina abiertos con piezas reales (6 apps · 13 agentes · 7 investigaciones · 6 tableros). Un escaparate por frente y una ficha por pieza, con el mismo renderizador de las apps; las fichas las produce quien construye cada pieza y llegan por PR de contenido. Contrato v1.3.0: los tableros añaden «Lo que dicen los datos» y «Cómo se ve» (galería de capturas), opcionales y con renumeración automática.                                                                                                                                                                         |
 | 008           | El «a fondo»: un documento por tema en `data/a-fondo/` como corpus profundo del chat, con aduana que rompe el build nombrando archivo y campo (cabecera, ids duplicados, paridad ES/EN de los aprobados, privacidad mecánica, **y ningún `[CONFIRMAR]` en un aprobado**) y un `estado` que separa el borrador de lo citable. **Banco de 131 preguntas de afuera** como prueba del contenido, con su informe generado. **El destino de toda cita se verifica contra el sitio real** — así murió el `#apps` que llevaba una revisión entera apuntando a una sección retirada. `data/historia/` retirada, sus 12 secciones migradas. |
 | post-S7       | Revisión del dueño sobre la HOME: la trayectoria como índice que baja contigo (línea continua, círculo fijo a media pantalla, año grande); la vitrina en el sitio de Proyectos y los case studies desde su hito; Estudios como sección y como dato (`cv.estudios`); Skills en tarjetas con icono y trazo; el roadmap se muda a `/vitrina/apps` y sale del menú.                                                                                                                                                                                                                                                                   |
+| chat/registro | El chat pide nombre y correo con código de verificación por Resend, sesión firmada de 30 días, registro de cada conversación en Supabase (`chat_registro`, lectura solo del dueño) y respuestas de dos o tres párrafos (ADR-024). |
 | a fondo v2    | El corpus reescrito desde la auditoría del dueño (2026-09-19/20): 25 documentos, ~144.000 palabras por idioma (el texto del dueño, ampliado y alineado, nunca recortado), cero `[CONFIRMAR]`, seis gates de coherencia (cifras del sitio, fechas de cargos, densidad, léxico, repetidos, normas), tres preguntas de prueba por documento, las 32 fichas de la vitrina en el índice del chat con peso 0,5 (ADR-023), banco de 136 preguntas en los dos idiomas, gemelos en inglés y los 25 aprobados. |
 | post-S7 (2.ª) | «Lo que construyo» entra al desplegable Hoja de vida; Estudios con los años del PDF del dueño (tres entradas); AI-102 retirada de todo el contenido (Microsoft la descontinuó) y gate nuevo: una credencial nombrada tiene que estar en `certificaciones:`.                                                                                                                                                                                                                                                                                                                                                                       |

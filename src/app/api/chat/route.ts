@@ -24,6 +24,14 @@ import {
   type ChatUIMessage,
   type Fuente,
 } from "@/lib/ia/schemas";
+import { secretoSesion } from "@/lib/chat-registro/codigo";
+import type { EntradaRegistro, Sesion } from "@/lib/chat-registro/schemas";
+import { sesionDeRequest } from "@/lib/chat-registro/sesion";
+import {
+  gateHabilitado,
+  resolverStore,
+  type RegistroStore,
+} from "@/lib/chat-registro/store";
 import { logger } from "@/lib/logger";
 import { checkRateLimit } from "@/lib/rate-limit";
 
@@ -32,10 +40,18 @@ import { checkRateLimit } from "@/lib/rate-limit";
  * kill-switch → rate limit por IP → Zod → guardrail off-topic (estática,
  * CERO llamadas al proveedor) → circuit breaker → RAG con citas en streaming.
  * Cualquier falla del proveedor degrada al cliente a búsqueda local — el
- * chat nunca muere. Nada de lo que produce el LLM se persiste.
+ * chat nunca muere.
+ *
+ * Desde ADR-024 hay una defensa más antes del guardrail —la SESIÓN: sin la
+ * cookie firmada que emite /api/chat/verificar no hay chat (401)— y una
+ * consecuencia después: cada pregunta respondida se REGISTRA (quién, qué,
+ * respuesta, fuentes, modo, costo) en el almacén del registro. Es la única
+ * salida del LLM que se persiste, y se persiste tal cual, como texto.
  */
 
 const CHAT_RATE_LIMIT = { limit: 10, windowMs: 60_000 };
+/** e2e: todo sale de localhost; el límite se apaga como en la votación y el registro. */
+const limiteApagado = () => process.env.DISABLE_RATE_LIMIT === "1";
 
 /** Respuesta estática como stream UIMessage (el cliente no distingue transporte). */
 function respuestaEstatica(texto: string): Response {
@@ -69,7 +85,9 @@ export async function POST(request: Request): Promise<Response> {
   }
 
   // 2. Rate limit por IP (ventana propia del chat)
-  const { allowed } = checkRateLimit(`chat:${ip}`, CHAT_RATE_LIMIT);
+  const { allowed } = limiteApagado()
+    ? { allowed: true }
+    : checkRateLimit(`chat:${ip}`, CHAT_RATE_LIMIT);
   if (!allowed) {
     log.warn({ ip, ms: Date.now() - start }, "chat rate limited");
     return NextResponse.json({ error: "rate_limited" }, { status: 429 });
@@ -96,6 +114,47 @@ export async function POST(request: Request): Promise<Response> {
     return NextResponse.json({ error: "invalid_fields" }, { status: 400 });
   }
 
+  // 3b. La sesión (ADR-024): la barrera es del visitante, no del contenido.
+  let sesion: Sesion | null = null;
+  let store: RegistroStore | null = null;
+  if (gateHabilitado()) {
+    const secreto = secretoSesion();
+    store = resolverStore();
+    if (!secreto || !store) {
+      log.error(
+        { secreto: Boolean(secreto), store: Boolean(store) },
+        "barrera del chat sin configurar",
+      );
+      return NextResponse.json(
+        { error: "registro_no_disponible" },
+        { status: 503 },
+      );
+    }
+    sesion = sesionDeRequest(request, secreto);
+    if (!sesion) {
+      log.info({ ms: Date.now() - start }, "sin sesión — registro requerido");
+      return NextResponse.json(
+        { error: "registro_requerido" },
+        { status: 401 },
+      );
+    }
+  }
+  const registrar = (
+    entrada: Omit<EntradaRegistro, "nombre" | "email" | "locale">,
+  ) => {
+    if (!sesion || !store) return;
+    store
+      .registrar({
+        ...entrada,
+        nombre: sesion.nombre,
+        email: sesion.email,
+        locale,
+      })
+      .catch((err: unknown) =>
+        log.error({ err }, "no se pudo registrar la conversación"),
+      );
+  };
+
   const { retriever } = getChatIndex(locale);
 
   // 4. Guardrail de entrada: off-topic responde estático, sin gastar tokens.
@@ -105,6 +164,13 @@ export async function POST(request: Request): Promise<Response> {
       { ms: Date.now() - start },
       "chat offtopic — respuesta estática (cero tokens)",
     );
+    registrar({
+      pregunta: pregunta.content,
+      respuesta: RESPUESTA_OFFTOPIC[locale],
+      fuentes: [],
+      modo: "offtopic",
+      ms: Date.now() - start,
+    });
     return respuestaEstatica(RESPUESTA_OFFTOPIC[locale]);
   }
 
@@ -171,13 +237,27 @@ export async function POST(request: Request): Promise<Response> {
       );
 
       try {
-        const usage = await result.totalUsage;
+        const [usage, texto] = await Promise.all([
+          result.totalUsage,
+          result.text,
+        ]);
         registrarExito();
         logUsoChat(log, {
           proveedor: modelo.proveedor,
           modelo: modelo.modelId,
           ms: Date.now() - start,
           usage,
+        });
+        registrar({
+          pregunta: pregunta.content,
+          respuesta: texto,
+          fuentes: fuentes.map((f) => ({ titulo: f.titulo, ancla: f.ancla })),
+          modo: "ia",
+          proveedor: modelo.proveedor,
+          modelo: modelo.modelId,
+          tokensIn: usage.inputTokens,
+          tokensOut: usage.outputTokens,
+          ms: Date.now() - start,
         });
       } catch {
         // el onError del stream mergeado ya registró la falla

@@ -135,10 +135,10 @@
       <tr><td>Código / versionamiento</td><td>GitHub <code>mauriciorincon-ai/app-hoja-de-vida</code> (público)</td><td>ruleset <code>main-protegida</code>; checks requeridos: quality · e2e · integration · lighthouse</td></tr>
       <tr><td>CI/CD</td><td>GitHub Actions (4 jobs)</td><td>quality (typecheck·lint·test·build·audit) · e2e (Playwright+axe) · integration (Postgres real) · lighthouse (perf-budget)</td></tr>
       <tr><td>Hosting / publicación</td><td>Vercel Hobby</td><td>Next.js 16 SSG + route handlers; prod desde <code>main</code>, preview por PR; uso NO comercial (cláusula Hobby verificada, ADR-004)</td></tr>
-      <tr><td>Base de datos</td><td><strong>Supabase free</strong> (nueva en S4, ADR-011)</td><td>Postgres; tabla <code>votes</code> (app·feature·created_at, <strong>cero PII</strong>); RLS ON sin políticas; RPC SECURITY DEFINER; anon solo EXECUTE. 2º proyecto del org</td></tr>
-      <tr><td>Auth</td><td>no aplica</td><td>la app es pública; la votación es anónima (sin registro)</td></tr>
+      <tr><td>Base de datos</td><td><strong>Supabase free</strong> (nueva en S4, ADR-011)</td><td>Postgres; tabla <code>votes</code> (app·feature·created_at, <strong>cero PII</strong>); RLS ON sin políticas; RPC SECURITY DEFINER; anon solo EXECUTE. 2º proyecto del org; <strong>desde ADR-024, tablas <code>chat_codigos</code> y <code>chat_registro</code> (nombre, correo, pregunta, respuesta — datos personales con aviso Ley 1581), RLS ON sin políticas, tres RPC SECURITY DEFINER; lectura solo con service_role</strong></td></tr>
+      <tr><td>Auth</td><td><strong>sesión firmada por correo verificado</strong> (ADR-024, sin proveedor)</td><td>el chat pide nombre y correo, manda un código de 6 dígitos (Resend), y emite una cookie HMAC httpOnly de 30 días; sin cuentas ni contraseñas. La votación sigue anónima</td></tr>
       <tr><td>Almacenamiento de archivos</td><td>no aplica</td><td>el PDF ATS se genera en build y se sirve estático desde <code>public/</code></td></tr>
-      <tr><td>Email / notificaciones</td><td>Resend (free)</td><td>formulario "solicitar acceso" → correo; sin key la app simula el envío (solo logs)</td></tr>
+      <tr><td>Email / notificaciones</td><td>Resend (free)</td><td>formulario de contacto → correo al dueño; <strong>código del chat → correo al visitante</strong> (exige dominio verificado en Resend); sin key la app simula el envío (solo logs)</td></tr>
       <tr><td>IA embebida</td><td>Groq (free) — adapter conmutable</td><td>chat RAG (S3, ADR-003); índice MiniSearch build-time; fallback local sin red; guardrails + breaker + kill-switch; conmutable a Gemini/Azure/Claude/self-host por env</td></tr>
       <tr><td>Observabilidad</td><td>Pino · Sentry · Vercel Analytics</td><td>logs estructurados en los route handlers (request-id, latencia); Sentry client-only inerte sin DSN; eventos de producto en Analytics</td></tr>
       <tr><td>Crons / keep-alives</td><td>ninguno</td><td>no hay procesos programados; todo es request-driven o build-time</td></tr>
@@ -155,6 +155,7 @@
   <table>
     <thead><tr><th>Fecha</th><th>Ciclo</th><th>Cambios</th></tr></thead>
     <tbody>
+      <tr><td>2026-09-21</td><td>H2 (fuera de sprint)</td><td>El chat con nombre y correo (ADR-024): la fila «Auth» deja de ser «no aplica» (sesión firmada por correo verificado, sin proveedor); la base de datos gana dos tablas con datos personales; Resend gana el correo transaccional del código. Costo sigue en US$0; punto único de falla sin cambio.</td></tr>
       <tr><td>2026-07-20</td><td>H1 (S1–S4)</td><td>Versión inicial as-built al cerrar el ciclo H1. Primera capa de datos de la app: <strong>Supabase</strong> (S4, votación). El resto (Vercel, GitHub+ruleset, Resend, Groq, Sentry/Analytics) consolidado de S1–S3. Costo real US$0.</td></tr>
     </tbody>
   </table>

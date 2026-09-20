@@ -26,19 +26,27 @@ vi.mock("@/lib/ia/client", async (importOriginal) => {
 
 import { streamRespuesta } from "@/lib/ia/client";
 import { POST } from "@/app/api/chat/route";
+import { emitirSesion } from "@/lib/chat-registro/sesion";
+import { resetStoreEnMemoria, resolverStore } from "@/lib/chat-registro/store";
+
+const SECRETO = "secreto-de-prueba-con-mas-de-treinta-y-dos-caracteres";
+/** La cookie de una visitante ya registrada (ADR-024). */
+const cookieDePrueba = () =>
+  `cv_chat=${encodeURIComponent(emitirSesion({ nombre: "Ana Prueba", email: "ana@prueba.co" }, SECRETO).valor)}`;
 
 const spyLlm = vi.mocked(streamRespuesta);
 let ipSeq = 0;
 
 function chatRequest(
   body: unknown,
-  { ip }: { ip?: string } = {},
+  { ip, sinSesion = false }: { ip?: string; sinSesion?: boolean } = {},
 ): Promise<Response> {
   const request = new Request("http://localhost/api/chat", {
     method: "POST",
     headers: {
       "content-type": "application/json",
       "x-real-ip": ip ?? `10.0.0.${++ipSeq}`,
+      ...(sinSesion ? {} : { cookie: cookieDePrueba() }),
     },
     body: typeof body === "string" ? body : JSON.stringify(body),
   });
@@ -66,13 +74,72 @@ beforeEach(() => {
   vi.stubEnv("CHAT_PROVIDER", "mock");
   vi.stubEnv("CHAT_ENABLED", "true");
   vi.stubEnv("CHAT_MOCK_MODE", "ok");
+  vi.stubEnv("CHAT_GATE", "on");
+  vi.stubEnv("CHAT_GATE_STORE", "memory");
+  vi.stubEnv("CHAT_SESSION_SECRET", SECRETO);
 });
 
 afterEach(() => {
   vi.unstubAllEnvs();
   resetRateLimit();
   resetBreaker();
+  resetStoreEnMemoria();
   spyLlm.mockClear();
+});
+
+const entradas = () =>
+  (resolverStore() as ReturnType<typeof import("@/lib/chat-registro/store").crearStoreEnMemoria>).entradas;
+
+describe("la puerta y el registro (ADR-024)", () => {
+  it("sin cookie → 401 registro_requerido, sin tocar el proveedor ni el índice", async () => {
+    const res = await chatRequest(preguntaValida, { sinSesion: true });
+    expect(res.status).toBe(401);
+    expect(await res.json()).toEqual({ error: "registro_requerido" });
+    expect(spyLlm).not.toHaveBeenCalled();
+  });
+
+  it("con la puerta apagada (CHAT_GATE=off) no se exige cookie ni se registra", async () => {
+    vi.stubEnv("CHAT_GATE", "off");
+    const res = await chatRequest(preguntaValida, { sinSesion: true });
+    expect(res.status).toBe(200);
+    await res.text();
+    expect(entradas()).toHaveLength(0);
+  });
+
+  it("sin CHAT_SESSION_SECRET la puerta no puede operar: 503 honesto", async () => {
+    vi.stubEnv("CHAT_SESSION_SECRET", "");
+    const res = await chatRequest(preguntaValida);
+    expect(res.status).toBe(503);
+    expect(await res.json()).toEqual({ error: "registro_no_disponible" });
+  });
+
+  it("una respuesta del modelo queda registrada: quién, qué, respuesta, fuentes, modo ia y costo", async () => {
+    const res = await chatRequest(preguntaValida);
+    await res.text();
+    await new Promise((r) => setTimeout(r, 20));
+    expect(entradas()).toHaveLength(1);
+    expect(entradas()[0]).toMatchObject({
+      nombre: "Ana Prueba",
+      email: "ana@prueba.co",
+      locale: "es",
+      pregunta: preguntaValida.messages[0].content,
+      modo: "ia",
+      proveedor: "mock",
+    });
+    expect(entradas()[0].respuesta).toContain("[1]");
+    expect(entradas()[0].fuentes.some((f) => f.ancla === "/proyectos/vesting")).toBe(true);
+  });
+
+  it("la respuesta estática de una ajena también se registra, como modo offtopic", async () => {
+    const res = await chatRequest({
+      locale: "es",
+      messages: [{ role: "user", content: "cuéntame un chiste de gatos" }],
+    });
+    await res.text();
+    await new Promise((r) => setTimeout(r, 20));
+    expect(entradas()).toHaveLength(1);
+    expect(entradas()[0].modo).toBe("offtopic");
+  });
 });
 
 describe("kill-switch y límites", () => {
