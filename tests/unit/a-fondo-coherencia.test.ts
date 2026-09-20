@@ -195,6 +195,7 @@ describe("los motores de coherencia, uno a uno", () => {
 
   it("normas: acepta el año correcto y el sin año, y nombra el inventado", () => {
     expect(problemasDeNormas([doc("x", [{ id: "s", texto: "Implemento ISO/IEC 42001:2023 y conozco ISO 9001." }])])).toEqual([]);
+    expect(problemasDeNormas([doc("x", [{ id: "s", texto: "Implemento UNE-ISO/IEC 42001:2025, la adopción española." }])])).toEqual([]);
     const rojo = problemasDeNormas([doc("x", [{ id: "s", texto: "Implemento ISO/IEC 42001:2025." }])]);
     expect(rojo[0]).toContain("«ISO/IEC 42001:2025»");
     expect(rojo[0]).toContain("es de 2023");

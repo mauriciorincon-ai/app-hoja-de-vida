@@ -46,11 +46,13 @@ noviembre de 2018. Fue el paso de mejorar un proceso a dirigir una operación en
 recursos, dependencias y puntos de control que no dependían de mí uno a uno.
 
 Ceinfes prestaba servicios de evaluación educativa: simulacros de pruebas para **más de 100
-colegios**. La operación tenía que poner profesores, consultores, materiales, instrumentos de
+colegios al año**. La operación tenía que poner profesores, consultores, materiales, instrumentos de
 evaluación y transporte en cada institución en la fecha exacta. Llegar antes estorbaba; llegar
 después dejaba la prueba sin aplicar.
 
-Bajo mi coordinación convergían tres frentes que solo funcionaban juntos:
+Bajo mi coordinación convergían tres frentes que solo funcionaban juntos, unas 40 personas
+directas —7 en programación, 12 en digitalización y 20 en logística— y, a través de la
+programación, unos 50 profesores aplicadores:
 
 | Frente         | Qué hacía                                                        | Qué pasaba si fallaba                                  |
 | -------------- | ---------------------------------------------------------------- | ------------------------------------------------------ |
@@ -80,7 +82,8 @@ del día:
 
 Los dos que más pesaban eran el **cumplimiento de la programación** —cuántas aplicaciones
 ocurrieron donde y cuando estaban previstas— y el **avance de digitalización**, porque de él
-dependía la fecha de entrega de resultados al colegio.
+dependía la fecha de entrega de resultados al colegio. Detrás iban las entregas a tiempo por
+institución, el porcentaje de captura manual y los reprocesos por lote.
 
 Aprendí que medir solo el resultado final llega tarde: cuando un indicador dice que una entrega
 incumplió, el valor de saberlo ya se perdió en buena parte. Por eso los indicadores intermedios
@@ -100,8 +103,10 @@ como una línea de producción: recibir, organizar, identificar, escanear con eq
 especializados, revisar, corregir las lecturas dudosas y completar a mano lo que la captura
 automática no resolvía.
 
-Lo traté como lo que era, un problema de **balanceo de líneas**. Cada estación tenía una
-capacidad, un tiempo de ciclo y una incidencia sobre la calidad final. Si una avanzaba más rápido
+Lo traté como lo que era, un problema de **balanceo de líneas**: unas **250 hojas por jornada**,
+dos estaciones de escaneo y, alrededor, las de alistamiento, organización, validación y
+reordenamiento; cerca de un 10 % de las hojas necesitaba captura manual. Cada estación tenía
+una capacidad, un tiempo de ciclo y una incidencia sobre la calidad final. Si una avanzaba más rápido
 de lo que la siguiente absorbía, el trabajo en proceso se acumulaba; si la captura se aceleraba a
 costa de la revisión, los errores reaparecían más adelante, más caros. La estación que
 restringía el flujo —el **cuello de botella**, en el vocabulario de la teoría de restricciones—
@@ -128,9 +133,8 @@ mirar el flujo completo y no la pieza más lenta.
 Asignar profesores y consultores a más de 100 colegios, cada uno con su fecha y su franja, es un
 **problema de asignación con ventanas de tiempo**: cada aplicador tiene disponibilidad,
 competencias y una ubicación de partida, y cada colegio una ventana exacta en la que la prueba
-debe ocurrir. La programación la resolví con hoja de cálculo y criterio, no con un modelo de
-optimización; lo que sí hice fue tratarla como lo que es, con restricciones explícitas y no con
-una lista de nombres.
+debe ocurrir. Al principio se hacía a mano, sobre Google Calendar. Diseñé una **macro en VBA** que
+optimizaba la asignación con esas restricciones explícitas, en vez de con una lista de nombres.
 
 La asignación no podía limitarse a decir quién iba a dónde. Tenía que considerar la demanda del
 día, la capacidad disponible, la prioridad de cada institución, las competencias requeridas, las
@@ -142,7 +146,9 @@ significaba proteger el flujo completo, no mantener ocupadas a todas las persona
 <!-- seccion: la-junta-directiva -->
 
 En Ceinfes presenté **informes estratégicos a la junta directiva** por primera vez en mi
-trayectoria. Los informes eran periódicos y salían de los mismos KPIs de la operación.
+trayectoria. Los informes eran **semanales, cada viernes**, y salían de los mismos KPIs de la operación. De
+ellos salieron decisiones concretas: programas de incentivos, mejoras de condiciones laborales,
+rediseño de puestos de trabajo, rediseño de procesos y rediseño del software.
 
 Aprendí a llegar con dos niveles: una lámina con la consecuencia y un número, y detrás la base
 trazable por si la pedían. La junta no quiere el detalle; quiere saber que el detalle existe y
@@ -159,9 +165,11 @@ consecuencias a la vista.
 
 Lideré la transición de Ceinfes hacia un modelo de **gestión por procesos** sustentado en
 sistemas de información, y dirigí los proyectos tecnológicos que lo soportaban con
-**metodologías ágiles**. Con el área de tecnología trabajamos en **Kanban**: un tablero con las
-solicitudes, sus prioridades, responsables, dependencias y estado de avance, y un límite al
-trabajo en curso para que lo empezado se terminara antes de abrir lo siguiente.
+**metodologías ágiles**. Con el área de tecnología trabajamos con
+**Scrum**, por sprints, para los proyectos, y con **Kanban** para el flujo de solicitudes: un
+tablero con prioridades, responsables, dependencias y estado de avance, y un límite al trabajo
+en curso para que lo empezado se terminara antes de abrir lo siguiente. Los procesos los modelé
+en BPMN con Bizagi.
 
 El cambio más difícil no fue técnico. La operación dependía del conocimiento repartido en cada
 área; había que convertirlo en procesos explícitos, información compartida y sistemas capaces de
@@ -203,6 +211,6 @@ proceso. Fue mi primer contacto con lo que después llamaría gobierno de datos.
 En Ceinfes aprendí a dirigir una operación como un sistema de flujos interdependientes: coordiné
 personas, recursos, materiales e información; construí KPIs para observar el flujo; balanceé la
 línea de digitalización; convertí resultados operativos en conversaciones con la junta
-directiva; y llevé la gestión a procesos explícitos con Kanban.
+directiva; y llevé la gestión a procesos explícitos con Scrum y Kanban.
 
 Inglopres me enseñó a estructurar una operación. Ceinfes me enseñó a dirigirla con información.

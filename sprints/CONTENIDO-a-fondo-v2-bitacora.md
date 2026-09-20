@@ -314,3 +314,27 @@ que los aloja; no se rellena antes.
 **Marcador de los seis gates:** 213 → **163**. Densidad 135 · léxico 17 · repetidos 11; cifras,
 fechas y normas en cero. Golden set: 4 documentos en rojo, todos de los grupos siguientes.
 
+### Las respuestas del dueño (2026-09-20, 113 puntos) aplicadas al grupo 1
+
+El dueño marcó la hoja única. Lo que cambió en los cuatro documentos ya escritos, con su fuente:
+
+- `inglopres`: parque de unas 120 unidades entre máquinas y vehículos (C5); el equipo de doce eran
+  operarios y técnicos (C6); el 95 % se medía en encuesta a clientes (C7); SQLite era la base del
+  análisis y Odoo tenía la suya (C1); estudio de tiempos formal con tabla de suplementos de la
+  OIT (C2); BPMN con Bizagi y simulación con FlexSim (C3). **El efecto del ERP lleva una cifra
+  estimada** («del orden de un 20 %»): el dueño pidió expresamente asignar cifras razonables
+  porque se midió en su momento y no las conserva (C8). Va con «del orden de» y no entra al sitio.
+- `ceinfes`: más de 100 colegios **al año** (C9); 7 + 12 + 20 personas directas y ~50 profesores
+  (C10); ~250 hojas por jornada, 2 estaciones de escaneo, ~10 % de captura manual (C11);
+  indicadores nombrados a propuesta del builder (C12); junta **semanal, los viernes**, con las
+  decisiones que salieron de ella (C13); la programación pasó de Google Calendar a una macro en
+  VBA que la optimizaba (C14); Scrum por sprints además de Kanban (C15); Bizagi (C3).
+- `cm-operaciones`: ~150 rutas de 10 concesionarios, las cinco fuentes nombradas —recaudo, flota
+  y GPS, programación, novedades, PQR— (B5, C16); dos informes semanales y un consolidado mensual;
+  bases semanales organizadas en SQLite (C1, C18); tiempos de procesamiento −40 % como mínimo (C16).
+- `origenes`: Bizagi y FlexSim por empresa (C3); el cargo completo de Pichincha y su equipo de 5
+  (C29, C31); los meses de 2022–2023 fueron de estudio: tres de las cuatro IBM son de entonces (A9b).
+- **Gate de normas:** el dueño implementa **UNE-ISO/IEC 42001:2025**, la adopción española de la
+  :2023 (A4). El gate acepta el prefijo UNE- con ese año y sigue vetando «ISO/IEC 42001:2025» a
+  secas; caso de juguete añadido.
+

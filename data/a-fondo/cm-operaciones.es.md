@@ -51,13 +51,14 @@ como estaba pactado. Eso cambia el dato de naturaleza. Deja de servir para mejor
 proceso y pasa a sostener una conversación entre la autoridad y el concesionario, donde ninguna
 de las dos partes puede discutir de dónde salió el número.
 
-Ninguna fuente describía la operación entera. Había que reconstruirla cruzando registros con
-distinto detalle, oportunidad y calidad:
+Ninguna fuente describía la operación entera: unas **150 rutas de 10 empresas concesionarias**.
+Había que reconstruirla cruzando registros con distinto detalle, oportunidad y calidad:
 
+- el recaudo;
+- la flota y el GPS de los buses;
 - la programación de servicios;
-- la ejecución observada;
-- los recorridos y los tiempos;
-- las novedades y las condiciones operativas del día.
+- las novedades de la operación;
+- las PQR de los usuarios.
 
 Ahí entendí que la trazabilidad no es una característica técnica sino una condición de
 legitimidad: cuando un indicador puede tener efectos contractuales o económicos, hay que poder
@@ -69,7 +70,8 @@ lo sustentan.
 <!-- seccion: tableros-e-informes -->
 
 Desarrollé los **tableros e informes de desempeño** con los que la supervisión de TransMilenio
-seguía la operación. Transformaban grandes volúmenes de registros en indicadores, señalaban las
+seguía la operación: dos informes semanales, un consolidado mensual y los que se pedían a
+demanda. Transformaban grandes volúmenes de registros en indicadores, señalaban las
 desviaciones relevantes y permitían pasar del dato individual al comportamiento del sistema. Lo
 que se verificaba en ellos:
 
@@ -98,9 +100,11 @@ trazable y que responde a una pregunta relevante.
 <!-- seccion: la-automatizacion -->
 
 Automaticé las actividades recurrentes de preparación, validación y consolidación de la
-información de la operación de TransMilenio, con scripts en **Excel y VBA**: extraer los registros, validarlos, transformarlos
-con las mismas reglas cada vez y consolidarlos. Eso redujo la intervención manual, hizo el
-procesamiento repetible y dejó de depender de procedimientos individuales difíciles de auditar.
+información de la operación de TransMilenio, con scripts en **Excel y VBA** y bases en
+**SQLite** consultadas en SQL: cada semana llegaban las bases de los concesionarios, y había que
+extraer los registros, validarlos, transformarlos con las mismas reglas y consolidarlos en el
+acumulado. Eso redujo **al menos un 40 %** el tiempo de procesamiento, hizo el trabajo
+repetible y dejó de depender de procedimientos individuales difíciles de auditar.
 
 Automatizar no era ejecutar más rápido lo mismo. Antes hubo que definir qué entradas recibía
 cada proceso, qué validaciones aplicaba, qué reglas transformaban los datos y qué excepciones

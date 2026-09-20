@@ -421,7 +421,9 @@ export function problemasDeRepetidos(docs, { ventana = 25 } = {}) {
  * compromete a una edición mientras la adopción colombiana esté sin verificar.
  */
 export const NORMAS = [
-  { patron: /ISO(?:\/IEC)?\s*42001(?::(\d{4}))?/g, nombre: "ISO/IEC 42001", anio: "2023" },
+  // «UNE-ISO/IEC 42001:2025» es la adopción española de la :2023 y es la edición que el
+  // dueño implementa (respuesta A4, 2026-09-20): con el prefijo UNE- el año 2025 es correcto.
+  { patron: /(?<!UNE-)ISO(?:\/IEC)?\s*42001(?::(\d{4}))?/g, nombre: "ISO/IEC 42001", anio: "2023" },
   { patron: /ISO\s*9001(?::(\d{4}))?/g, nombre: "ISO 9001", anio: "2015" },
 ];
 

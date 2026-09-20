@@ -45,8 +45,9 @@ Entré a **Inglopres en agosto de 2016**, recién egresado de Ingeniería Indust
 Pontificia Universidad Javeriana. Fue mi primer empleo, como Ingeniero de Procesos, y estuve
 hasta junio de 2017.
 
-Inglopres alquilaba, compraba y vendía maquinaria pesada para empresas y clientes individuales.
-Era una operación intensiva en activos: cada venta o alquiler dependía de qué máquina estaba
+Inglopres alquilaba, compraba y vendía maquinaria pesada para empresas y clientes individuales,
+con un parque de unas **120 unidades entre máquinas y vehículos**. Era una operación intensiva
+en activos: cada venta o alquiler dependía de qué máquina estaba
 disponible, en qué estado, en qué obra y con qué mantenimiento pendiente. La pregunta del
 negocio no era comercial antes que operativa. Era la misma pregunta.
 
@@ -62,11 +63,14 @@ Lideré la implementación de un **ERP —Odoo—**, el sistema de planificació
 empresariales con el que Inglopres pasó de registros dispersos a un solo lugar. El
 objetivo declarado era aumentar la eficiencia operativa y la consistencia del servicio; el
 objetivo real, más difícil, era que las áreas compartieran una misma versión de la operación.
+Con el ERP en marcha, la operación ganó del orden de un 20 % en eficiencia: menos reprocesos
+entre áreas y menos tiempo entre el pedido del cliente y la máquina en obra.
 
 Antes de configurar un solo módulo hubo que separar dos cosas que la organización daba por
 iguales: **el proceso definido y el proceso ejecutado**. Levanté el segundo preguntando y
-observando, no leyendo manuales, y lo dibujé como flujo con sus actividades, sus decisiones y
-sus excepciones. Ese dibujo fue lo que el ERP pudo representar; sin él, la herramienta habría
+observando, no leyendo manuales, y lo modelé en **BPMN con Bizagi**, con sus actividades, sus
+decisiones y sus excepciones; con **FlexSim** simulé la operación para comparar alternativas
+antes de cambiarla. Ese dibujo fue lo que el ERP pudo representar; sin él, la herramienta habría
 copiado el desorden con otra interfaz.
 
 El trabajo que más pesó ocurrió antes de la primera pantalla: acordar qué significaba cada dato,
@@ -82,8 +86,9 @@ Para evaluar los procesos necesitaba indicadores, y descubrí que la mitad de la
 existía: no se capturaba, o vivía repartida en registros que nadie cruzaba. Me habían pedido
 mejorar la operación y no podía medirla.
 
-Diseñé e implementé las estructuras de base de datos que faltaban —en **SQLite**— para organizar
-los eventos operativos, cruzarlos y hacer seguimiento a las métricas del negocio. Definí las
+El ERP tenía su propia base de datos; lo que faltaba era la del análisis. Diseñé e implementé
+en **SQLite** las estructuras para organizar los eventos operativos, cruzarlos y hacer
+seguimiento a las métricas del negocio. Definí las
 entidades, sus relaciones y las reglas que preservaban el significado de cada campo, y las
 consulté en **SQL** para producir los análisis. Ese fue el punto donde mi trayectoria giró hacia
 los datos, y no fue una decisión de carrera: fue lo que el problema exigía.
@@ -106,8 +111,8 @@ de tiempos** sobre las actividades repetitivas de Inglopres: cronometraje, valor
 y cálculo del tiempo estándar.
 
 La parte que un cronómetro no resuelve son los **suplementos por fatiga** —las *allowances* del
-estudio del trabajo—. Un tiempo observado no es un estándar: hay que añadirle el suplemento que
-reconoce el esfuerzo, la repetitividad, las condiciones de ejecución y la variabilidad propia de
+estudio del trabajo—. Un tiempo observado no es un estándar: hay que añadirle el suplemento —tomado de la tabla de
+la **OIT**— que reconoce el esfuerzo, la repetitividad, las condiciones de ejecución y la variabilidad propia de
 una persona. Sin ese suplemento, el estándar se cumple una semana y se incumple el resto del
 año, y la culpa recae sobre quien ejecuta en vez de sobre quien midió.
 
@@ -142,9 +147,9 @@ repetirse sin esa persona delante.
 
 <!-- seccion: el-equipo-de-doce -->
 
-Lideré un equipo de **doce personas**. Con asignación explícita de responsabilidades y
-seguimiento de los compromisos, la operación alcanzó una **tasa de satisfacción del cliente del
-95 %**.
+Lideré un equipo de **doce personas**, operarios y técnicos. Con asignación explícita de
+responsabilidades y seguimiento de los compromisos, la operación alcanzó una **tasa de
+satisfacción del cliente del 95 %**, medida en encuesta a los clientes.
 
 El resultado no vino de más control. Vino de definir mejor el trabajo: qué resultado se espera,
 quién responde, con qué información se cuenta y qué significa que algo esté terminado. Cuando

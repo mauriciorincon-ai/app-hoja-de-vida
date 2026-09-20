@@ -103,7 +103,7 @@ organizaciones:
 | noviembre 2018 – mayo 2020  | Analista de Operaciones, C&M Consorcio (TransMilenio)         | una ciudad: supervisar con datos la operación de Bogotá               |
 | octubre 2020 – junio 2021   | Analista de Sistemas de Información, Cafam                    | un sistema empresarial: el WMS, 20 personas, integraciones             |
 | julio 2021 – mayo 2022      | Análisis Post-Operacional, C&M Consultores (TransMilenio)     | un pipeline: ETL, tableros, +35 % de eficiencia analítica, demanda     |
-| marzo 2023 – julio 2023     | Analista Senior de Analítica, Banco Pichincha                 | la adopción: BI para 50+ usuarios, −35 % en tiempos de análisis        |
+| marzo 2023 – julio 2023     | Analista Senior de Analítica y Reportes, Banco Pichincha | la adopción: BI para 50+ usuarios con un equipo de 5, −35 % en tiempos de análisis |
 | agosto 2023 – enero 2025    | Líder de Estrategia de Datos, Vesting                         | una plataforma: Microsoft Fabric desde cero para monitorear agentes de IA |
 | marzo 2025 – hoy            | Profesional de Analítica, Fundación CTIC                      | la estrategia: analítica en salud y el sistema de gestión de IA        |
 
@@ -139,9 +139,9 @@ método es el mismo, y tiene nombre.
   estándar hasta que reconoce el esfuerzo de quien lo ejecuta.
 - **Balanceo de líneas y teoría de restricciones**, en Ceinfes: el cuello de botella fija el ritmo
   real, y la capacidad efectiva —con excepciones y reprocesos— no es la teórica.
-- **Modelado de procesos en BPMN y simulación**, con Bizagi y FlexSim, en Inglopres, Ceinfes y
-  Cafam: dibujar el proceso ejecutado antes de tocarlo, y probar la alternativa antes de
-  implantarla.
+- **Modelado de procesos en BPMN y simulación**: Bizagi en Inglopres, Ceinfes, Cafam y Banco
+  Pichincha, FlexSim en Inglopres y Cafam. Dibujar el proceso ejecutado antes de tocarlo, y
+  probar la alternativa antes de implantarla.
 - **Un problema de asignación con restricciones**, en TransMilenio: conductor, bus y ruta no son
   tres decisiones sino una, y lo prescriptivo empieza por formularlo así.
 - **ISO 9001 y, hoy, ISO/IEC 42001**: la misma estructura de alto nivel de los sistemas de gestión
@@ -166,8 +166,8 @@ En ese arco hay ocho empleos en siete organizaciones y seis sectores: maquinaria
 evaluación educativa, transporte masivo, logística de medicamentos, banca y una startup de
 agentes de IA; hoy, el sector salud. Sumados, son **105 meses de trabajo efectivo**, ocho años y
 nueve meses; el resto, hasta los diez, son las pausas entre un empleo y el siguiente, la más larga
-entre mediados de 2022 y comienzos de 2023. Los periodos exactos, mes a mes, están en la tabla
-de arriba.
+entre mediados de 2022 y comienzos de 2023, que dediqué a estudiar: tres de las cuatro
+certificaciones de IBM —las de 2022— son de esos meses. Los periodos exactos, mes a mes, están en la tabla de arriba.
 
 Si la pregunta es cuánta experiencia hay en IA frente a la de datos: los datos ocupan ocho de
 esos años; la IA aplicada, con agentes en producción, empieza en agosto de 2023 en Vesting y
