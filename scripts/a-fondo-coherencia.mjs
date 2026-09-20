@@ -120,7 +120,14 @@ export function problemasDeCifras(docs, conceptos, verdades) {
             normalizar(sub.id).replace(/-/g, " ") +
             " " +
             texto.slice(Math.max(0, m.index - 80), m.index + 120);
-          if (contextos.length && !contextos.some((c) => vecindad.includes(c))) continue;
+          // `ventana`: el contexto tiene que venir PEGADO al sustantivo, en los N caracteres
+          // que lo siguen. Separa «cuatro credenciales de IBM» de «cinco credenciales
+          // obtenidas —el DP-600 y cuatro de IBM—», donde «de IBM» está cerca pero no es
+          // de ese conteo.
+          const zona = concepto.ventana
+            ? texto.slice(m.index + m[0].length, m.index + m[0].length + concepto.ventana)
+            : vecindad;
+          if (contextos.length && !contextos.some((c) => zona.includes(c))) continue;
           if (salvedades.some((s) => vecindad.includes(s))) continue;
           const dicho = /^\d+$/.test(m[1]) ? Number(m[1]) : NUMEROS_ES.get(m[1]);
           if (dicho === valor) continue;

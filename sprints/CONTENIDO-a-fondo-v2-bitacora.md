@@ -393,3 +393,43 @@ sigue vigilado.
 **Marcador de los seis gates:** 163 → **122**. Densidad 105 · léxico 12 · repetidos 5.
 Golden set: 3 documentos en rojo, todos de los grupos siguientes.
 
+### Grupo 2, segunda mitad: `lo-que-busco` · `certificaciones` · `como-aprendo` · `como-trabajo`
+
+| Documento         | Antes | Después | Subsecciones | Rojos propios |
+| ----------------- | ----: | ------: | -----------: | ------------: |
+| `lo-que-busco`    | 4.342 |   1.063 |        8 → 6 |        6 → 0 |
+| `certificaciones` | 3.216 |   1.037 |        7 → 6 |        7 → 0 |
+| `como-aprendo`    | 4.680 |   1.113 |       12 → 6 |       12 → 0 |
+| `como-trabajo`    | 5.406 |   1.137 |        8 → 6 |       10 → 0 |
+
+- `lo-que-busco`: cuatro tipos de rol en tabla, el cuarto de BI y analítica que el dueño añadió
+  (C47); cualquier zona horaria (C45); inglés B2 (C46); los cuatro números de la vitrina y el
+  agente ISO 42001 (C48); las tres cifras de ARKHÉ como cálculos propios (C44); Bogotá, remoto y
+  reubicación con las palabras con las que se pregunta. La arquitectura agéntica completa sale a
+  `agentes-en-produccion`, que es su dueño.
+- `certificaciones`: **tabla de credenciales** con código, nombre oficial, estado y fecha; AI-103
+  y AI-300 con su nombre correcto, desde julio de 2026 y con sus módulos (A1, A3); el DP-100
+  retirado y el AI-102 descontinuado, nombrados con su razón; Synapse, Data Factory y Watsonx
+  fuera (C49); la Super guía AI-103 como la pieza de la vitrina que es. `el-ritmo` se va a
+  `como-aprendo`.
+- `como-aprendo`: **tabla de plazos con fechas** —Fabric y el DP-600 en cinco meses sobre una
+  plataforma con menos de un año en el mercado (C50), Codex, Antigravity y Claude Code en un mes
+  desde su salida (C51), este sitio en ocho sprints desde julio de 2026, AI-103 y AI-300— y la
+  **tabla de las seis apps con sus pruebas, coberturas y ADR medidos** desde `content/vitrina/`.
+  Todas en operación sostenida y Hablemos San la más avanzada (C68). Código primero y control en
+  rojo remiten a `apps-pipeline` (C52).
+- `como-trabajo`: de 5.406 palabras sin una sola cifra a un índice de capacidades con
+  evidencia en cada rasgo: **tabla de equipos** (20 en Cafam, 12 en Inglopres, ~40 en Ceinfes, 5 en
+  Pichincha) y «después de Cafam pasé a liderar procesos completos» (C55); la junta semanal de
+  Ceinfes y las mesas del SITP, los fundadores de Vesting y la línea directa en CTIC (C56); las
+  tres adopciones medidas; process mining como método y no como caso (C53); la escalera reporte →
+  agente vive aquí y solo aquí. Se borran `como-decido-que-construir`, `la-confianza-se-disena` y
+  `como-aprendo-y-evoluciono` (C57), que tenían dueño en otros documentos.
+- **Gate de cifras:** los conceptos «de IBM» y «en curso» exigen ahora que el calificador siga al
+  sustantivo (`ventana`), porque «cinco credenciales obtenidas —el DP-600 y cuatro de IBM— y dos
+  rutas en curso» disparaba dos conceptos vecinos que no eran suyos. Caso de juguete añadido.
+- Léxico de `fabric`: salen Synapse (C49) y «medallón» (no hay fuente de que lo use); entran
+  OneLake y Power Query.
+
+**Marcador de los seis gates:** 122 → **81**. Densidad 71 · léxico 10 · **repetidos 0**.
+

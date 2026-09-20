@@ -54,7 +54,7 @@ lo-que-busco:
   [remoto, reubicación, Bogotá, rol, inglés]
 
 fabric-en-la-practica:
-  [lakehouse, Direct Lake, modelo semántico, DAX, RLS, Synapse, medallón]
+  [lakehouse, Direct Lake, modelo semántico, DAX, RLS, OneLake, Power Query]
 
 agentes-en-produccion:
   [agentes, RAG, LLM, prompt, monitoreo, proceso core]

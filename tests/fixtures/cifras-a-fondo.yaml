@@ -92,9 +92,11 @@ conceptos:
     fuente: "cv.es.yaml · certificaciones cuyo nombre empieza por IBM"
     sustantivos: [credenciales, certificaciones]
     contexto: ["de ibm"]
+    ventana: 12   # «de IBM» pegado al sustantivo, o no es este conteo
 
   - id: credenciales-en-curso
     etiqueta: "las credenciales en curso"
     fuente: "cv.es.yaml · certificaciones con «estado: en curso»"
     sustantivos: [credenciales, certificaciones, rutas]
     contexto: ["en curso", "en desarrollo", "en preparacion", "en preparación"]
+    ventana: 20

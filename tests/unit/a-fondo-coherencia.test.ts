@@ -133,6 +133,13 @@ describe("los motores de coherencia, uno a uno", () => {
     ).toEqual([]);
   });
 
+  it("cifras: con `ventana` el contexto tiene que seguir al sustantivo, no solo estar cerca", () => {
+    const ibm = [{ id: "ibm", etiqueta: "las de IBM", fuente: "cv", sustantivos: ["credenciales"], contexto: ["de ibm"], ventana: 12 }];
+    expect(problemasDeCifras([doc("x", [{ id: "s", texto: "Tengo cuatro credenciales de IBM." }])], ibm, { ibm: 4 })).toEqual([]);
+    expect(problemasDeCifras([doc("x", [{ id: "s", texto: "Cinco credenciales obtenidas: el DP-600 y cuatro de IBM." }])], ibm, { ibm: 4 })).toEqual([]);
+    expect(problemasDeCifras([doc("x", [{ id: "s", texto: "Tengo cinco credenciales de IBM." }])], ibm, { ibm: 4 })).toHaveLength(1);
+  });
+
   it("cifras: un concepto sin verdad derivable se planta, no pasa en silencio", () => {
     expect(() => problemasDeCifras([], CONCEPTO_APPS, {})).toThrow(/no tiene verdad derivable/);
   });
