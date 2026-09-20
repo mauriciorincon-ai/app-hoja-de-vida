@@ -2,6 +2,7 @@
 slug: como-aprendo
 titulo: "How I learn"
 resumen: "The argument with a measure: the DP-600 in five months on a Fabric with less than a year on the market, Codex, Antigravity and Claude Code within a month of their release, this site in eight sprints since July 2026, and 32 public pieces with their tests and coverage."
+cuando_usar: "Use this when they ask how he learns a new technology, what he does when the job asks for something he has never used, how long it took him to get certified, what he is studying now, or how he documents and proves what he learned."
 estado: aprobado
 ancla: "#certificaciones"
 actualizado: 2026-09-20

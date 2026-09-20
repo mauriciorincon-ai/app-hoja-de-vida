@@ -2,6 +2,7 @@
 slug: origenes
 titulo: "From industrial engineering to data"
 resumen: "The arc: why Industrial Engineering and Industrial Design, the first job that was about processes, the three leaps up to AI with the table of the eight jobs, the thread with its methods, and how many years it adds up to."
+cuando_usar: "Use this when they ask why he studied industrial engineering and industrial design, at which university, how he moved from processes to data and to artificial intelligence, how many years of experience he has, in which sectors and companies he has worked, or what happened in the gaps between jobs."
 estado: aprobado
 ancla: "#trayectoria"
 actualizado: 2026-09-20

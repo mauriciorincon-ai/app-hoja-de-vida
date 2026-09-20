@@ -2,6 +2,7 @@
 slug: inglopres
 titulo: "Inglopres — Ingeniero de Procesos (2016–2017)"
 resumen: "Mi primer empleo: un ERP (Odoo), las bases de datos que no existían, el estudio del trabajo y un equipo de doce personas con 95 % de satisfacción."
+cuando_usar: "Úsalo cuando pregunten por su primer empleo al salir de la universidad, la implementación de un ERP (Odoo), la cadena de suministro y logística de maquinaria, el estudio de tiempos y el equipo de doce personas en Inglopres (2016–2017)."
 estado: aprobado
 ancla: "#trayectoria"
 actualizado: 2026-09-20

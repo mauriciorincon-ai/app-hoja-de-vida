@@ -2,6 +2,7 @@
 slug: los-agentes-de-la-vitrina
 titulo: "The thirteen agents of the showcase"
 resumen: "The 13 published agents, one by one, in four families: what each one promises, its measured figure, its limit and its \"never\". Five sealed. All with human gates, baits that prove the controls fire, zero cost in tools and the same rule: no claim comes out of the model's memory."
+cuando_usar: "Use this when they ask which agents he has published in his portfolio, what each of the thirteen showcase agents is for, what a harness is, how he controls quality with human gates and bait, and what the thirteen share."
 estado: aprobado
 ancla: "/vitrina/agentes"
 actualizado: 2026-09-20

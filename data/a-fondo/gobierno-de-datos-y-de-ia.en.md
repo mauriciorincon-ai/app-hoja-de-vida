@@ -2,6 +2,7 @@
 slug: gobierno-de-datos-y-de-ia
 titulo: "Data governance and AI governance"
 resumen: "Governance set up three times —co-led in banking, designed from scratch for 12 clients at an AI-agent startup, and today in healthcare under UNE-ISO/IEC 42001:2025 with 23 instruments— plus the ISO 42001 expert agent and the rules with which I govern my own pipeline."
+cuando_usar: "Use this when they ask about data or artificial intelligence governance, the ISO 42001 standard, data policies and guidelines, personal and sensitive data, traceability of information, who decides who sees which data, responsible use of AI, or how he documents what he does."
 estado: aprobado
 ancla: "#skills"
 actualizado: 2026-09-20

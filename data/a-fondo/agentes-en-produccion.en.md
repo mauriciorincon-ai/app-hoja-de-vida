@@ -2,6 +2,7 @@
 slug: agentes-en-produccion
 titulo: "AI agents: the Vesting platform and ARKHÉ, my own ecosystem"
 resumen: "Two experiences with agents: 27 built with Vesting's core process on n8n and monitored in real time, and ARKHÉ, my agentic ecosystem of specialized harnesses, measured on 120 scenarios: −52% tokens and instruction compliance from 71% to 93%."
+cuando_usar: "Use this when they ask whether he has built artificial intelligence agents, which agent frameworks he has used (n8n, Claude Code), how he monitors an agent in production, what ARKHÉ is, how he keeps the model from making things up, and his experience with generative AI and large language models."
 estado: aprobado
 ancla: "/vitrina/agentes"
 actualizado: 2026-09-20

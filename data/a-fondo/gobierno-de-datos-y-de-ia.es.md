@@ -2,6 +2,7 @@
 slug: gobierno-de-datos-y-de-ia
 titulo: "Gobierno de datos y de IA"
 resumen: "Gobierno montado tres veces —co-liderado en banca, diseñado desde cero para 12 clientes en una startup de agentes, y hoy en salud bajo UNE-ISO/IEC 42001:2025 con 23 instrumentos— más el agente experto en ISO 42001 y las reglas con las que gobierno mi propio pipeline."
+cuando_usar: "Úsalo cuando pregunten por gobierno de datos o de inteligencia artificial, la norma ISO 42001, políticas y lineamientos de datos, datos personales y sensibles, trazabilidad de la información, quién decide quién ve qué datos, uso responsable de la IA, o cómo documenta lo que hace."
 estado: aprobado
 ancla: "#skills"
 actualizado: 2026-09-20

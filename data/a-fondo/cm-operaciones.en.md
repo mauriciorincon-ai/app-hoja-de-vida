@@ -2,6 +2,7 @@
 slug: cm-operaciones
 titulo: "C&M Consorcio / TransMilenio — Operations Analyst (2018–2020)"
 resumen: "My entry into mass transit: 18 months supervising Bogotá's operation with data, performance dashboards and reports, automation of processing and the two questions that are research today."
+cuando_usar: "Use this when they ask about running a city's transport operation at C&M Consorcio (2018–2019): supervising TransMilenio routes and concessionaires, automating reports with Excel, VBA and SQL, compliance indicators and the operational history."
 estado: aprobado
 ancla: "#trayectoria"
 actualizado: 2026-09-20

@@ -2,6 +2,7 @@
 slug: fundacion-ctic
 titulo: "Fundación CTIC — analytics in healthcare (2025–today)"
 resumen: "My current role: 42 analytical products in Power BI for 20 leaders of 15 processes, data governance and quality in healthcare, and the institutional AI strategy under UNE-ISO/IEC 42001:2025 with 23 instruments, 12 opportunities and 7 cases evaluated."
+cuando_usar: "Use this when they ask where he works now, about Fundación CTIC (2025–today), healthcare data, data quality, the institutional artificial intelligence strategy under UNE-ISO/IEC 42001:2025, the 23 instruments and the per-process dashboards."
 estado: aprobado
 ancla: "/proyectos/fundacion-ctic"
 actualizado: 2026-09-20

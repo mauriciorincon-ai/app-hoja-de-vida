@@ -828,3 +828,27 @@ creció cinco veces, pero el fragmento sigue midiendo 180 palabras, así que lo 
   el tipo de frase que el dueño debe leer en su gate ⭐ (o6).
 - `fabric-en-la-practica` conserva ~460 palabras del dueño sobre la exploración de Fabric en
   público donde HECHOS C58 pedía 80: la orden «no me quites lo que hice» manda sobre C58.
+
+### «Cuándo usar»: la descripción del documento como la de una skill
+
+El dueño pidió que cada documento le dijera al chat cuándo usarlo, «como las skills». Entra el
+campo opcional `cuando_usar` en la cabecera (≥ 40 caracteres), escrito en los 50 archivos con las
+palabras de afuera (empresas, herramientas, temas), y `chunksDeAFondo` lo indexa como el PRIMER
+fragmento del documento —`a-fondo-<slug>-cuando-usar`, resumen + cuándo usar, misma ancla—. La
+aduana exige paridad (si está en un idioma, está en el otro). Gate nuevo en `a-fondo.test.ts`
+con sus rojos: sin el campo no hay fragmento de entrada, con menos de 40 caracteres la cabecera
+es inválida, y el campo en un solo idioma es un rojo con nombre.
+
+Medido sobre los dos índices (k = 4):
+
+| | Sin `cuando_usar` | Con `cuando_usar` |
+| --- | ---: | ---: |
+| Fragmentos ES / EN | 1.412 / 1.401 | **1.437 / 1.426** |
+| Banco ES: fuente en top-4 · de primeras | 136/136 · 103 | 136/136 · **106** |
+| Banco EN: fuente en top-4 · de primeras | 136/136 · 104 | 136/136 · **118** |
+| Golden ES / EN | 75/75 · 75/75 | 75/75 · 75/75 |
+| Preguntas del banco con el fragmento de entrada en su contexto | 0 | 58 (ES) · 57 (EN) |
+
+Es decir: en 58 de 136 preguntas el modelo recibe, además de las subsecciones, la descripción del
+documento entero, y la primera fuente acierta más veces. Con k = 3 el inglés perdía una pregunta
+(135/136): k = 4 se queda.

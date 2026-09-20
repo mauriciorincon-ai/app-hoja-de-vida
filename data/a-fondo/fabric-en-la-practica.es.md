@@ -2,6 +2,7 @@
 slug: fabric-en-la-practica
 titulo: "Microsoft Fabric en la práctica"
 resumen: "Cómo trabajo Fabric por dentro: lakehouse y warehouse sobre OneLake en Vesting (120 tablas, 20 GB), Power Query y pipelines con validaciones, el modelo semántico optimizado con DAX Studio y Tabular Editor, Direct Lake, RLS, y Power BI como experiencia de decisión."
+cuando_usar: "Úsalo cuando pregunten por su experiencia con Microsoft Fabric por dentro: lakehouse y warehouse, OneLake, pipelines, modelado semántico y DAX, Direct Lake, RLS, Power BI, DAX Studio y Tabular Editor, o si ha diseñado una arquitectura de datos desde cero."
 estado: aprobado
 ancla: "#skills"
 actualizado: 2026-09-20

@@ -2,6 +2,7 @@
 slug: transmilenio-cm
 titulo: "C&M Consultores / TransMilenio — post-operational analysis (2021–2022)"
 resumen: "The post-operational analysis of the SITP: the ETL that unified fare collection, fleet, scheduling, incidents and PQR (+70%), BI adopted by 25+ key users (+35%), the working sessions with SITP management (+25%) and a demand model in scikit-learn that ran for ten months."
+cuando_usar: "Use this when they ask about TransMilenio and C&M Consultores (2021–2022): post-operational analysis, heterogeneous data sources (fare collection, fleet, scheduling, incidents, PQR), ETL pipelines, demand forecasting by route and time band, working sessions with SITP management and dashboard adoption."
 estado: aprobado
 ancla: "/proyectos/transmilenio-cm"
 actualizado: 2026-09-20

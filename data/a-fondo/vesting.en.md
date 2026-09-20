@@ -2,6 +2,7 @@
 slug: vesting
 titulo: "Vesting — the data platform for AI agents (2023–2025)"
 resumen: "Microsoft Fabric from scratch for an agent startup: 12 clients, 27 agents in inventory and 23 monitored at once in real time, 1,000 events per day, 20 GB and 120 tables, per-client governance and an 11-stage core process to design and implement agents."
+cuando_usar: "Use this when they ask about Vesting (2023–2025): an AI agents startup, the data architecture designed from scratch on Microsoft Fabric (lakehouse, OneLake, Direct Lake), monitoring agents in production, the replicable core process for agents, per-client governance and why he left."
 estado: aprobado
 ancla: "/proyectos/vesting"
 actualizado: 2026-09-20

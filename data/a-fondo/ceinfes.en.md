@@ -2,6 +2,7 @@
 slug: ceinfes
 titulo: "Ceinfes — Operations Coordinator (2017–2018)"
 resumen: "Coordinating three fronts for more than 100 schools: KPIs per area, the balancing of digitization, reports to the board of directors and the transition to process management with Kanban."
+cuando_usar: "Use this when they ask about Ceinfes (2017–2018): indicators and KPIs, reports to a board of directors, process management, the school assessment operation, Kanban and Scrum, digitizing answer sheets and continuous improvement."
 estado: aprobado
 ancla: "#trayectoria"
 actualizado: 2026-09-20

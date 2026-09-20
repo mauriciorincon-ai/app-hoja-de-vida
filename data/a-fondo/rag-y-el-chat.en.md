@@ -2,6 +2,7 @@
 slug: rag-y-el-chat
 titulo: "RAG: how this chat works on the inside"
 resumen: "The architecture of this page's chat with its numbers: build-time index, lexical retrieval with MiniSearch (BM25) without embeddings, layered guardrails, a measured threshold, navigable citations, five interchangeable providers, local fallback, a US$20 budget with a real cost of zero, and how it is evaluated with 48 questions of its own and 131 from outside."
+cuando_usar: "Use this when they ask how the chat on this page works, which RAG architecture he implemented, whether he uses embeddings or lexical search, which model provider he works with, how he keeps the model from making up answers, and how he evaluates the system with a golden set and a question bank."
 estado: aprobado
 ancla: "#vitrina"
 actualizado: 2026-09-20

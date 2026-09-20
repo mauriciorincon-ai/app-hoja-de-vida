@@ -2,6 +2,7 @@
 slug: como-trabajo
 titulo: "How I work"
 resumen: "How I work, with the evidence behind each trait: process first (BPMN), adoption as the indicator (50+ users), leading teams of up to 20 people, the board of directors and the SITP working tables, and which instrument goes with each decision."
+cuando_usar: "Use this when they ask how he works, how he leads a team, how he communicates with business areas and senior management, what he values in a project, how he handles people who do not report to him, or whether he is a process or a technology profile."
 estado: aprobado
 ancla: "#perfil"
 actualizado: 2026-09-20

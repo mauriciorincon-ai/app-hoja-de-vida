@@ -2,6 +2,7 @@
 slug: lo-que-busco
 titulo: "Lo que busco"
 resumen: "Qué problema quiero resolver, los cuatro tipos de rol donde rindo más, en qué condiciones —Bogotá, remoto o reubicación, inglés B2— y qué ofrezco a cambio, con la evidencia pública que lo respalda."
+cuando_usar: "Úsalo cuando pregunten qué tipo de rol busca, si trabaja en remoto o se reubica a otro país, en qué ciudad vive, su nivel de inglés, qué lo motiva, qué lo diferencia de otros candidatos, por qué contratarlo, o cómo prefiere un proceso de selección."
 estado: aprobado
 ancla: "#contacto"
 actualizado: 2026-09-20

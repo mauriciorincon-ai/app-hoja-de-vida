@@ -453,6 +453,7 @@ esa palabra, se traduce, y el siguiente deploy lo pone a responder.
 slug: vesting # = nombre del archivo, sin el idioma
 titulo: "Vesting — la plataforma de datos para agentes de IA"
 resumen: "Una o dos líneas: de qué va este documento."
+cuando_usar: "Úsalo cuando pregunten por Vesting, Microsoft Fabric desde cero, el monitoreo de agentes…" # como la descripción de una skill
 estado: borrador # borrador | aprobado
 ancla: "/proyectos/vesting" # a dónde navega la cita — VA ENTRE COMILLAS
 actualizado: 2026-09-12
@@ -462,6 +463,14 @@ preguntas_de_prueba: # mínimo 3 — y una de ellas con palabras de AFUERA, no d
   - "¿Cómo monitorea un agente de IA en producción?"
 ---
 ```
+
+**`cuando_usar` es la descripción de una skill.** Una o dos frases con **las palabras con las
+que alguien preguntaría** por este documento: nombres de empresas, herramientas, temas. Entra al
+índice del chat como el **primer fragmento del documento**, junto al resumen, así que cuando la
+pregunta de afuera encaja con la descripción, el chat encuentra el documento entero antes que una
+subsección suelta. Medido al introducirlo (2026-09-21): las respuestas «de primeras» del banco
+subieron de 103 a 106 en español y de 104 a 118 en inglés. Si el español lo trae, el gemelo
+también (la aduana lo exige).
 
 **Las comillas del `ancla` no son decoración:** sin ellas, un `#perfil` lo lee YAML como un
 comentario y el campo llega vacío. El build lo dice, pero es más fácil no tropezar.

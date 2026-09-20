@@ -2,6 +2,7 @@
 slug: plataforma-y-despliegue
 titulo: "Platform and deployment"
 resumen: "Where my platform depth lies —Microsoft: Fabric, Power BI, Microsoft Foundry—, what I deploy and operate myself with Git, GitHub Actions, CI/CD, Vercel and Sentry, what I have not done said plainly —Docker, Kubernetes, Vertex AI, BigQuery— and how I cover that gap."
+cuando_usar: "Use this when they ask about his experience with Azure and the Microsoft cloud, Google Cloud, Docker and Kubernetes, MLOps, continuous integration and deployment, what he deploys and maintains directly, and what he has never done and would have to learn."
 estado: aprobado
 ancla: "#skills"
 actualizado: 2026-09-20

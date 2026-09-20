@@ -2,6 +2,7 @@
 slug: los-agentes-de-la-vitrina
 titulo: "Los trece agentes de la vitrina"
 resumen: "Los 13 agentes publicados, uno a uno, en cuatro familias: qué promete cada uno, su cifra medida, su límite y su «nunca». Cinco sellados. Todos con gates humanos, carnadas que demuestran que los controles disparan, cero costo en herramientas y la misma regla: ninguna afirmación sale de la memoria del modelo."
+cuando_usar: "Úsalo cuando pregunten qué agentes tiene publicados en su portafolio, para qué sirve cada uno de los trece agentes de la vitrina, qué es un harness, cómo controla la calidad con gates humanos y carnadas, y qué comparten los trece."
 estado: aprobado
 ancla: "/vitrina/agentes"
 actualizado: 2026-09-20
