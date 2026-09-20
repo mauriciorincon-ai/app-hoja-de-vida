@@ -486,3 +486,59 @@ como «seis hermanas y este sitio» donde quiera que el conteo incluya a CV Viva
 de la vitrina que faltan. Golden set: solo la ajena «receta del ajiaco» pasa el guardrail, y ese
 umbral se recalibra midiendo en F4.
 
+### Grupo 4 cerrado: la vitrina, y F2 con él
+
+| Documento                   | Antes | Después | Subsecciones | Rojos propios |
+| --------------------------- | ----: | ------: | -----------: | ------------: |
+| `apps-pipeline`             | 4.454 |   1.170 |        9 → 8 |       10 → 0 |
+| `agentes-en-produccion`     | 5.040 |   1.057 |       10 → 7 |       12 → 0 |
+| `los-agentes-de-la-vitrina` | nuevo |   1.237 |            6 |        1 → 0 |
+| `rag-y-el-chat`             | 4.373 |   1.190 |       13 → 9 |       11 → 0 |
+| `los-tableros`              | 4.596 |   1.103 |       10 → 6 |        6 → 0 |
+| `las-investigaciones`       | 5.152 |   1.395 |       10 → 7 |        6 → 0 |
+
+- **`los-agentes-de-la-vitrina` nace** (D5): los 13 agentes uno a uno, en cuatro familias y en
+  tablas, con la cifra medida, el límite y el «nunca» de cada ficha de `content/agentes/`. Ocho de
+  los trece no se nombraban en ningún documento del corpus. Sin horas de agente por pieza (B9).
+- `agentes-en-produccion` se queda con Vesting y con **ARKHÉ**, el ecosistema propio, con el
+  harness definido una sola vez, las tres cifras de los 120 escenarios como cálculos del dueño
+  (C44) y «producción» reservada para Vesting (C70). Dash Agent AI queda como pieza concebida en
+  CTIC (C35).
+- `rag-y-el-chat` pasa de ~15 % a mayoría de evidencia: 180 palabras por fragmento, BM25, título
+  ×2, tolerancia 0,2 y búsqueda estricta en el guardrail, el umbral medido (5,92 frente a 16,90,
+  30 legítimas en medio), el orden real de las ocho capas, 10 por minuto, 800 caracteres, 12
+  mensajes, 3 fallas → 60 s, 600 tokens, 30 s, cinco proveedores, techo de US$20 y costo real de
+  US$0, golden de 48 y banco de 131. **No publica** que el guardrail se debilita con el corpus
+  (C77) ni el proveedor de pruebas (C78); corrige «nunca se cae» (C74) y dice la verdad de los
+  chips (C75).
+- `los-tableros` gana la **tabla de los seis universos** con sus identidades, el stack real sin
+  Fabric (C79) —PBIR escrito por script, Python, APIs SODA y SDMX—, los 21 contratos imposibles
+  como lo que son (C81), «reglas del deporte, no errores de código» (C82), el preflight de banca,
+  y los «nunca» (C83). Las 1.700 palabras que eran de `fabric` volvieron a `fabric`.
+- `las-investigaciones` gana la **tabla del vacío medido** (1.414 · 900 · 780 · 279 · 1.405 · 119 ·
+  900 obras), los hallazgos que la revisión había quitado (14.251 óptimos, 90 %, 197.046, 4,43
+  frente a 2,33 min, 99,5 %, 6 de 9), los dos harnesses con nombre y criterios (52 y 44), el
+  ledger, el pre-registro, el `git diff` vacío, BPMN en FORJA (C89), el ERP de 2016 y los «nunca»
+  éticos (C88).
+- `apps-pipeline` gana **«La fábrica, en números»**: dos casas, 8 sprints cerrados, la Fábrica de
+  AI-APPs con sus tres límites, cuatro jobs de CI, los dos precedentes (gitleaks 2026-07-15, la
+  credencial 401 del S3), costo real US$0, punto único de falla, 20 ADR, cero enlaces, el contrato
+  v1.3.1 (B8). Las dos reglas del pipeline viven aquí y los demás remiten (C52).
+
+**F2 queda cerrado.** Los seis gates de coherencia están en **cero** sobre los 25 documentos:
+cifras 0 · fechas 0 · densidad 0 · léxico 0 · repetidos 0 · normas 0. El golden set pasa entero
+salvo la ajena «cuéntame un chiste sobre gatos», que el guardrail deja pasar con un fragmento: es
+la calibración del umbral, que se mide en F4 y no se toca antes.
+
+| Medida                          | Originales (`main`) | Revisados del dueño | F2 cerrado |
+| ------------------------------- | ------------------: | ------------------: | ---------: |
+| Documentos                      |                  24 |                  24 |     **25** |
+| Palabras                        |              14.268 |             100.399 | **29.820** |
+| Subsecciones                    |                 132 |                 230 |    **167** |
+| Rojos de los seis gates         |                   — |                 213 |      **0** |
+
+**Desviación declarada:** el volumen final es la mitad del objetivo del plan (≈60.000). La razón
+está escrita en el grupo 1: sin `[CONFIRMAR]` y sin inventar, proporcional a la información que
+el dueño dio significa esto. Cada documento tiene ahora entre 970 y 1.560 palabras, subsecciones
+de 150 a 400 con un dato cada una, y tablas donde había cifras.
+

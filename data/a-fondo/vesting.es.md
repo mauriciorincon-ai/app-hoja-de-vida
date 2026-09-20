@@ -51,7 +51,8 @@ por personas o registrado por una aplicación empresarial: los agentes generaban
 interactuaban con personas, sistemas y herramientas, y cada uno traía sus propias estructuras. Sin
 una base compartida, cada nueva solución era una excepción.
 
-Mi responsabilidad fue diseñar **desde cero** la estrategia y la plataforma de datos: integrar esa
+Mi responsabilidad fue el diseño, **desde cero**, del **ecosistema de datos** de Vesting, la
+estrategia y la plataforma: integrar esa
 información, fijar estructuras comunes y construir la base analítica para monitorear los agentes,
 con gobernanza desde el día uno y sin frenar a la startup. La tensión de fondo era velocidad
 contra sostenibilidad: distinguir qué debía ser común —eventos fundamentales, identificadores,
@@ -82,7 +83,7 @@ desvió y qué costó.
 
 <!-- seccion: la-arquitectura -->
 
-Diseñé e implementé en **Microsoft Fabric** el ecosistema completo: **Big Data**, **Data
+Diseñé e implementé en **Microsoft Fabric** el ecosistema de datos completo: **Big Data**, **Data
 Warehouse** y **procesamiento distribuido** sobre un **lakehouse**, con pipelines que recibían la
 información de las integraciones de los agentes —n8n entre ellas—, validaban su estructura,
 conservaban los identificadores de contexto y la transformaban en entidades analíticas.
