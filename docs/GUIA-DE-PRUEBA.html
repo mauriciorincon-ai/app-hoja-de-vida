@@ -316,7 +316,7 @@
     <div class="pagina">
       <header>
         <p class="eyebrow">
-          CV Viva · Guía de prueba viva y acumulativa · v9 · a fondo v2 (el
+          CV Viva · Guía de prueba viva y acumulativa · v9.1 · chat/registro + a fondo v2 (el
           detalle) + revisión post-S8 · 2026-09-12
         </p>
         <h1>Guía de prueba</h1>
@@ -751,6 +751,33 @@
               on/off-topic del kit y juzga la calidad: ¿las respuestas son
               fieles y las citas correctas? ¿el off-topic no cuela respuestas
               del CV? <span class="origen origen-heredada">S4</span
+              ><span class="minimo">⭐ mínimo</span></label
+            >
+          </li>
+          <li data-origen="nuevo">
+            <input type="checkbox" id="f6" /><label for="f6"
+              >La puerta: abre el chat en una ventana privada. Antes de poder
+              preguntar pide <strong>nombre, correo y el aviso de datos</strong>;
+              sin marcar el aviso el botón no se activa. Pide el código: en la
+              preview sin Resend aparece «el código quedó en el registro del
+              servidor» (míralo en Vercel → Logs); con Resend y dominio
+              verificado llega al correo. Un código malo dice «no coincide»; el
+              bueno saluda por tu nombre. Recarga: ya no pide nada (30 días).
+              <span class="origen origen-nuevo">Nuevo · chat/registro</span></label
+            >
+          </li>
+          <li data-origen="nuevo" data-minimo>
+            <input type="checkbox" id="f7" /><label for="f7"
+              >⭐ <strong>El registro y la longitud.</strong> Con el proveedor
+              real, haz tres preguntas (una de trayectoria, una ajena, y una con
+              el proveedor caído si puedes forzarlo). Abre Supabase → Table
+              Editor → <code>chat_registro</code>: las tres filas están, con tu
+              nombre y correo, la pregunta, la respuesta completa, las fuentes y
+              el modo (<code>ia</code> · <code>offtopic</code> ·
+              <code>local</code>). Y juzga la respuesta de trayectoria: ¿dos o
+              tres párrafos, concreta, sin volcar el documento, y ofrece
+              profundizar?
+              <span class="origen origen-nuevo">Nuevo · chat/registro</span
               ><span class="minimo">⭐ mínimo</span></label
             >
           </li>
@@ -1797,6 +1824,14 @@
         <details class="chica">
           <summary>Historial de la guía</summary>
           <ul>
+            <li>
+              <strong>v9.1 · chat/registro · 2026-09-21:</strong> el chat pide
+              nombre y correo con código por Resend, registra cada conversación
+              en Supabase y responde en dos o tres párrafos (ADR-024). Bloque F:
+              <strong>f6 y f7 nuevas</strong> (f7 ⭐); f1–f5 heredadas, ahora
+              cruzando la puerta primero. Ninguna prueba eliminada. El prefijo
+              de casillas no cambia: las pruebas de F no cambiaron de sujeto.
+            </li>
             <li>
               <strong>v9 · a fondo v2 · 2026-09-20:</strong> el corpus
               reescrito desde la auditoría del dueño: 25 documentos (uno nuevo,

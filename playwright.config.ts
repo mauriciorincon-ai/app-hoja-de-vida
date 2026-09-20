@@ -35,6 +35,13 @@ export default defineConfig({
       // "no disponible". Rate limit apagado: en e2e todo sale de localhost.
       VOTACION_ENABLED: "true",
       DISABLE_RATE_LIMIT: "1",
+      // La barrera del chat (ADR-024) corre ENCENDIDA en e2e, con almacén en
+      // memoria, correo simulado y código fijo: el flujo real, sin red.
+      CHAT_GATE: "on",
+      CHAT_GATE_STORE: "memory",
+      CHAT_SESSION_SECRET: "secreto-solo-para-e2e-con-mas-de-treinta-y-dos-caracteres",
+      CHAT_CODIGO_PRUEBA: "246810",
+      RESEND_API_KEY: "",
     },
   },
 });

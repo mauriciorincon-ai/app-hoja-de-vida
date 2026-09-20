@@ -8,9 +8,41 @@ import { expect, test, type Page } from "@playwright/test";
  * real (503 fallback / 429) — nunca se llama a un proveedor real.
  */
 
+/**
+ * Abre el chat y CRUZA LA PUERTA (ADR-024): nombre, correo, aviso, código.
+ * El server corre con almacén en memoria y CHAT_CODIGO_PRUEBA=246810, así que
+ * el flujo es el real (dos endpoints, cookie httpOnly) sin correo de por medio.
+ * La cookie dura 30 días: en la misma página, abrir otra vez ya no pide nada.
+ */
 async function abrirChat(page: Page) {
   await page.getByTestId("chat-launcher").click();
   await expect(page.getByTestId("chat-panel")).toBeVisible();
+  const puerta = page.getByTestId("chat-registro");
+  const input = page.getByTestId("chat-input");
+  await expect(puerta.or(input)).toBeVisible();
+  if (await puerta.isVisible()) {
+    // Un correo por prueba: los workers comparten el almacén en memoria y el
+    // código se CONSUME al verificar — con el mismo correo, dos pruebas en
+    // paralelo se pisarían el código (una entraría y la otra vería «sin_codigo»).
+    await registrarse(page, { nombre: "Ana Prueba", email: correoUnico() });
+  }
+}
+
+const correoUnico = () =>
+  `ana-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}@prueba.co`;
+
+async function registrarse(
+  page: Page,
+  { nombre, email }: { nombre: string; email: string },
+) {
+  await page.getByTestId("chat-registro-nombre").fill(nombre);
+  await page.getByTestId("chat-registro-email").fill(email);
+  await page.getByTestId("chat-registro-acepta").check();
+  await page.getByTestId("chat-registro-enviar").click();
+  await expect(page.getByTestId("chat-registro-codigo")).toBeVisible();
+  await page.getByTestId("chat-registro-input-codigo").fill("246810");
+  await page.getByTestId("chat-registro-verificar").click();
+  await expect(page.getByTestId("chat-input")).toBeVisible();
 }
 
 async function preguntar(page: Page, texto: string) {
@@ -87,7 +119,10 @@ test.describe("chat — flujo estrella", () => {
     await page.keyboard.press("Enter");
     await expect(page.getByTestId("chat-panel")).toBeVisible();
 
-    // El foco aterriza en el input; una sugerencia responde al teclado
+    // Con la puerta (ADR-024) el foco aterriza en el primer campo del
+    // registro; cruzada la puerta, en el input del chat.
+    await expect(page.getByTestId("chat-registro-nombre")).toBeFocused();
+    await registrarse(page, { nombre: "Ana Prueba", email: correoUnico() });
     await expect(page.getByTestId("chat-input")).toBeFocused();
     await page.getByRole("button", { name: "¿Qué hizo en Vesting?" }).click();
     await expect(
@@ -184,5 +219,55 @@ test.describe("chat — a11y y reduced-motion", () => {
       .getByTestId("chat-panel")
       .evaluate((el) => getComputedStyle(el).opacity);
     expect(opacity).toBe("1");
+  });
+});
+
+test.describe("chat — la puerta (ADR-024)", () => {
+  test("sin registrarse no hay chat: el panel abre en el formulario y un código equivocado no entra", async ({
+    page,
+  }) => {
+    await page.goto("/es");
+    await page.getByTestId("chat-launcher").click();
+    await expect(page.getByTestId("chat-registro")).toBeVisible();
+    await expect(page.getByTestId("chat-input")).toHaveCount(0);
+
+    // El botón no se activa sin el aviso de datos marcado
+    await page.getByTestId("chat-registro-nombre").fill("Ana Prueba");
+    await page.getByTestId("chat-registro-email").fill(correoUnico());
+    await expect(page.getByTestId("chat-registro-enviar")).toBeDisabled();
+    await page.getByTestId("chat-registro-acepta").check();
+    await page.getByTestId("chat-registro-enviar").click();
+
+    // Paso 2: el aviso de correo simulado (no hay RESEND en e2e) y el código malo
+    await expect(page.getByTestId("chat-registro-codigo")).toBeVisible();
+    await expect(page.getByTestId("chat-registro-simulado")).toBeVisible();
+    await page.getByTestId("chat-registro-input-codigo").fill("000000");
+    await page.getByTestId("chat-registro-verificar").click();
+    await expect(page.getByTestId("chat-registro-error")).toContainText(
+      "no coincide",
+    );
+    await expect(page.getByTestId("chat-input")).toHaveCount(0);
+
+    // El bueno entra, saluda por el nombre y la cookie sobrevive a recargar
+    await page.getByTestId("chat-registro-input-codigo").fill("246810");
+    await page.getByTestId("chat-registro-verificar").click();
+    await expect(page.getByTestId("chat-saludo")).toContainText("Ana Prueba");
+    await page.reload();
+    await page.getByTestId("chat-launcher").click();
+    await expect(page.getByTestId("chat-input")).toBeVisible();
+    await expect(page.getByTestId("chat-registro")).toHaveCount(0);
+  });
+
+  test("el endpoint del chat sin cookie responde 401 registro_requerido", async ({
+    request,
+  }) => {
+    const res = await request.post("/api/chat", {
+      data: {
+        locale: "es",
+        messages: [{ role: "user", content: "¿Qué hizo Henry en Vesting?" }],
+      },
+    });
+    expect(res.status()).toBe(401);
+    expect(await res.json()).toEqual({ error: "registro_requerido" });
   });
 });

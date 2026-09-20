@@ -7,7 +7,8 @@ import type { ModeloResuelto } from "./provider";
  * resuelto por el adapter. Límites de presupuesto horneados aquí.
  */
 
-export const CHAT_MAX_OUTPUT_TOKENS = 600;
+/** 220 palabras en español ≈ 350–400 tokens; el tope deja margen sin abrir la puerta a volcados. */
+export const CHAT_MAX_OUTPUT_TOKENS = 700;
 export const CHAT_TIMEOUT_MS = 30_000;
 
 export function streamRespuesta({
