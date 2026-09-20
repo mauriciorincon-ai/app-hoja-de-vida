@@ -37,7 +37,7 @@ Qué tiene de distinto el dato en salud, cómo estás montando el
 gobierno de datos institucional, qué tableros usan los líderes asistenciales.
 Recuerda: NADA de datos de pacientes ni información interna sensible. -->
 
-## El rol actual
+## El rol actual: dónde trabajo hoy
 
 <!-- seccion: el-rol-actual -->
 

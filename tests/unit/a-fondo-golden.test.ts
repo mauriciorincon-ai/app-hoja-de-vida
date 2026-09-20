@@ -5,6 +5,7 @@ import { createRetriever, TOP_K_CONTEXTO } from "@/lib/ia/retrieval";
 import { chatChunkSchema } from "@/lib/ia/schemas";
 import { leerDocumentos, simularAprobacion } from "../../scripts/a-fondo.mjs";
 import { buildChunks } from "../../scripts/build-chat-index.mjs";
+import { leerFichas } from "../../scripts/fichas-al-indice.mjs";
 
 /**
  * EL GOLDEN SET DEL CORPUS (S8).
@@ -45,6 +46,9 @@ const chunks = buildChunks({
   apps: leer("apps.yaml"),
   aFondo: aprobados,
   locale: "es",
+  // Las 32 fichas de la vitrina también viven en el índice (ADR-021): medir
+  // el golden sin ellas sería medir contra un índice que no existe.
+  fichas: leerFichas(),
 }).map((c: unknown) => chatChunkSchema.parse(c));
 const retriever = createRetriever(chunks);
 
@@ -91,10 +95,13 @@ describe("golden set — cada pregunta trae su documento", () => {
   it("una pregunta AJENA no trae ningún documento a fondo", () => {
     // El rojo de este gate: si el retriever trajera cualquier cosa para
     // cualquier consulta, las 48 aserciones de arriba pasarían por casualidad.
+    // Las tres son ajenas que el banco declara «bloquea» sobre el índice
+    // completo. «Madrid» y «ajiaco» salieron de aquí con ADR-021: las fichas
+    // de la vitrina traen «mañana» y «receta», y el banco las declara «pasa».
     for (const ajena of [
       "cuéntame un chiste sobre gatos",
-      "¿va a llover mañana en Madrid?",
-      "¿cuál es la receta del ajiaco?",
+      "dame un poema de amor",
+      "¿qué opinas del bitcoin?",
     ]) {
       expect(
         retriever.topKStrict(ajena),

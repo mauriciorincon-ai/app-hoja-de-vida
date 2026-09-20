@@ -135,7 +135,7 @@ el flujo de solicitudes y **Scrum** por sprints para los proyectos.
 Los tres resuelven lo mismo con distinta escala: que el ritmo lo fije la capacidad real del
 sistema y no la aspiración del cronograma.
 
-## ISO 9001 y la disciplina del rastro escrito
+## ISO 9001 y la documentación: la disciplina del rastro escrito
 
 <!-- seccion: iso-9001 -->
 

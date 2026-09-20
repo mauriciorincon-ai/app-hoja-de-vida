@@ -50,7 +50,7 @@ sabes hacer gracias a cada una, cómo se conectan entre sí y con tu trabajo. --
 | IBM        | Python para Ciencia de Datos                                          | obtenida                    | junio – septiembre de 2022 |
 | IBM        | SQL para Ciencia de Datos                                             | obtenida                    | septiembre – noviembre de 2022 |
 
-**Cinco credenciales obtenidas** —el DP-600 y cuatro de IBM— y **dos rutas en curso**. Dos códigos
+**Cinco credenciales obtenidas** —el DP-600 y cuatro de IBM— y **dos rutas en curso**: en este momento me estoy certificando en el AI-103 y en el AI-300. Dos códigos
 que aparecen en mi historia y no en la tabla: el **AI-102**, que Microsoft descontinuó y cuya ruta
 es hoy el AI-103, y el **DP-100**, que Microsoft retiró el 1 de junio de 2026 y cuyo reemplazo
 declarado es el AI-300. Ninguno de los dos se presenta como obtenido.

@@ -7,7 +7,7 @@ ancla: "#perfil"
 actualizado: 2026-09-20
 preguntas_de_prueba:
   - "¿Cómo trabaja Henry?"
-  - "¿Cómo lidera equipos y habla con los stakeholders?"
+  - "¿Cómo lidera Henry un equipo y cómo se comunica con las áreas de negocio?"
   - "¿Cuál es el equipo más grande que ha liderado?"
 ---
 
@@ -37,7 +37,7 @@ Cómo piensas y trabajas: tu enfoque para resolver problemas, cómo
 lideras equipos, qué valoras en un proyecto, cómo comunicas con stakeholders.
 Lo que un hiring manager preguntaría en la primera entrevista. -->
 
-## Primero el proceso, después la herramienta
+## Ante un problema nuevo: primero el proceso, después la herramienta
 
 <!-- seccion: primero-el-proceso -->
 
@@ -76,7 +76,7 @@ La adopción es un problema humano tanto como técnico: en Pichincha el programa
 profesionales fue parte del producto, no un anexo. Cómo se mide la adopción sin confundirla con
 visitas está en el documento de BI.
 
-## Cómo lidero
+## Cómo lidero un equipo, y cómo trabajo con personas que no me reportan
 
 <!-- seccion: como-lidero -->
 
@@ -92,8 +92,7 @@ equipo avanza sin mí delante. Tengo las cifras que lo dicen:
 | Pichincha   | **5 personas** a cargo                | 50+ usuarios, −35 % en tiempos de análisis             |
 
 En Cafam no bajamos los errores con más supervisión sino escribiendo antes de empezar qué contaba
-como caso probado y quién lo firmaba. Después de Cafam pasé a liderar procesos completos que
-integran a muchas personas sin que me reporten: en Vesting, la plataforma y el proceso con el
+como caso probado y quién lo firmaba. Después de Cafam pasé a liderar procesos completos que integran a muchas personas que no me reportan: en Vesting, la plataforma y el proceso con el
 que se construyeron 27 agentes; en CTIC, la estrategia de IA de la institución.
 
 Distingo delegar tareas de distribuir la capacidad de decidir. No creo en el seguimiento por
@@ -101,7 +100,7 @@ reuniones constantes: prefiero mecanismos donde el avance, los bloqueos y las pr
 visibles para todos, como el Kanban y el Scrum que llevé a Ceinfes. Y no evalúo mi liderazgo por
 las decisiones que pasan por mí, sino por la claridad con la que el equipo avanza cuando no estoy.
 
-## Cómo hablo con el negocio
+## Cómo me comunico con las áreas de negocio
 
 <!-- seccion: como-hablo-con-el-negocio -->
 

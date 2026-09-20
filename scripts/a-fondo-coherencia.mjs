@@ -296,7 +296,11 @@ export function vocabularioConcreto() {
  * subsección de mil produce seis fragmentos que compiten entre sí por la misma
  * cita y se hunden todos por la normalización de longitud del buscador.
  */
-export function problemasDeDensidad(docs, { tope = 400, vocabulario = [] } = {}) {
+/**
+ * @param {Array<{slug: string, subsecciones: Array<{id: string, texto: string}>}>} docs
+ * @param {{ tope?: number, vocabulario?: string[] }} [opciones]
+ */
+export function problemasDeDensidad(docs, { tope = 400, vocabulario = /** @type {string[]} */ ([]) } = {}) {
   const problemas = [];
   const terminos = vocabulario.map((v) => normalizar(v));
   for (const doc of docs) {

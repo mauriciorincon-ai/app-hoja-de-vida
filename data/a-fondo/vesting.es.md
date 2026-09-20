@@ -58,7 +58,7 @@ con gobernanza desde el día uno y sin frenar a la startup. La tensión de fondo
 contra sostenibilidad: distinguir qué debía ser común —eventos fundamentales, identificadores,
 estados, métricas— y qué podía quedar configurable por cliente o por agente.
 
-## El tamaño de lo construido
+## Qué hice en Vesting: el tamaño de lo construido
 
 <!-- seccion: el-tamano-de-lo-construido -->
 
@@ -173,7 +173,7 @@ resuelve un caso; una capacidad permite resolver los siguientes con procesos, cr
 componentes que la organización ya entiende. El método, generalizado, está en el documento de
 agentes en producción.
 
-## El puente que esta experiencia construyó
+## Por qué salí de Vesting, y el puente que esta experiencia construyó
 
 <!-- seccion: el-puente -->
 
@@ -183,7 +183,7 @@ Fabric lo que la certificación describe— y la ingeniería de IA. Por primera 
 observación de una plataforma de datos no eran personas ni procesos sino sistemas que también
 recomiendan y ejecutan.
 
-Cerré la etapa en enero de 2025 al dejar el ecosistema y el proceso documentados: una plataforma
+Salí de Vesting en enero de 2025 y cerré la etapa al dejar el ecosistema y el proceso documentados: una plataforma
 de datos operativa, la base analítica para el monitoreo y un proceso con el que la startup podía
 construir el siguiente agente sin mí. Cuanto más cerca está una solución de actuar, más
 trazabilidad exigen sus datos, su comportamiento y sus límites.

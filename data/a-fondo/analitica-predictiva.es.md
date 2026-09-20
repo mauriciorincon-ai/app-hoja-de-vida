@@ -72,11 +72,11 @@ de que el modelo produzca resultados válidos sobre entradas defectuosas. Y exig
 en el tiempo: los datos cambian, las variables pierden capacidad explicativa y el modelo
 necesita seguimiento, revisión y criterios para actualizarse o retirarse.
 
-## Las herramientas, y con qué nivel
+## Los lenguajes de programación y las herramientas: Python, R, SQL, y con qué nivel
 
 <!-- seccion: las-herramientas -->
 
-No presento las herramientas como equivalentes. Esta es la lista honesta:
+Los lenguajes de programación con los que trabajo son Python, R, SQL y DAX; el nivel más avanzado es Python. No presento las herramientas como equivalentes. Esta es la lista honesta:
 
 | Herramienta                      | Nivel                                   | Dónde                                       |
 | -------------------------------- | --------------------------------------- | ------------------------------------------- |
@@ -88,7 +88,7 @@ No presento las herramientas como equivalentes. Esta es la lista honesta:
 | Watson Studio                    | exploración                              | flujos analíticos                           |
 | Orange, SPSS                     | formación                                | universidad                                 |
 | SAS                              | trabajo complementario y formación       | Cafam, como herramienta de análisis         |
-| Procesamiento de lenguaje natural (NLP) | trabajo real                      | varios de mis agentes lo usan de forma permanente |
+| Procesamiento de lenguaje natural (NLP), sobre modelos de lenguaje grandes (LLM) | trabajo real | varios de mis agentes lo usan de forma permanente |
 
 El algoritmo importa menos que la calidad con la que se formula el problema, se construyen las
 variables, se evalúan los errores y se conecta la salida con una decisión. Elijo por el

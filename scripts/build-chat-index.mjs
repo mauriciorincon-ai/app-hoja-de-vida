@@ -38,6 +38,7 @@ import { parse } from "yaml";
 import { chunksDeAFondo, leerDocumentos, revisarAduana } from "./a-fondo.mjs";
 import { aniosCumplidos } from "./anios.mjs";
 import { catalogoDeDestinos, destinoExiste } from "./destinos.mjs";
+import { chunksDeFichas, leerFichas } from "./fichas-al-indice.mjs";
 
 const ROOT = process.cwd();
 // Los tests pasan un directorio temporal como argv[2] (patrón del script del PDF)
@@ -78,7 +79,11 @@ function readYaml(fileName) {
 }
 
 /** Chunks de los YAML estructurados (hechos) + «a fondo» (narrativa). */
-export function buildChunks({ cv, apps, aFondo, locale }) {
+/**
+ * @param {{ cv: any, apps: any, aFondo: any[], locale: string,
+ *   fichas?: { apps: any[], piezas: any[] } | null }} entrada
+ */
+export function buildChunks({ cv, apps, aFondo, locale, fichas = null }) {
   const L = LABELS[locale];
   const chunks = [];
   const push = (id, titulo, texto, ancla) => {
@@ -191,7 +196,10 @@ export function buildChunks({ cv, apps, aFondo, locale }) {
   // Solo los documentos APROBADOS entran al índice: un borrador es material de
   // trabajo del dueño, no evidencia que el chat pueda citar.
   chunks.push(...chunksDeAFondo(aFondo ?? [], L.aFondo));
-
+  // Las 32 piezas de la vitrina, con sus fichas (a fondo v2, D3): promesa,
+  // cifras con procedencia, límites y «nunca», citando a la página de cada
+  // pieza. El texto es el que mandó cada casa, en español, en los dos índices.
+  if (fichas) chunks.push(...chunksDeFichas(fichas, locale));
   return chunks;
 }
 
@@ -204,6 +212,7 @@ function detener(titulo, problemas) {
 
 function main() {
   const apps = readYaml("apps.yaml");
+  const fichas = leerFichas();
   const catalogo = catalogoDeDestinos();
 
   // --- ADUANA DEL CANAL «A FONDO» -----------------------------------------
@@ -234,7 +243,7 @@ function main() {
   mkdirSync(OUT_DIR, { recursive: true });
   for (const locale of LOCALES) {
     const cv = readYaml(`cv.${locale}.yaml`);
-    const chunks = buildChunks({ cv, apps, aFondo: docs[locale], locale });
+    const chunks = buildChunks({ cv, apps, aFondo: docs[locale], locale, fichas });
 
     // --- EL DESTINO DE TODA CITA EXISTE ------------------------------------
     // Vale para TODOS los chunks, no solo para los del canal nuevo: el `#apps`

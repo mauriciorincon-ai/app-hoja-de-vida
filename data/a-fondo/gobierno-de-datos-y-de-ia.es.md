@@ -55,7 +55,7 @@ propósito con la gestión institucional de la IA.
 El gobierno no viaja como plantilla. Los principios permanecen; los controles, los **roles** y
 los mecanismos de adopción responden al propósito, los riesgos y la madurez de cada organización.
 
-## Qué significa gobernar un dato
+## Qué significa gobernar un dato: trazabilidad de la información
 
 <!-- seccion: que-es-gobernar -->
 
@@ -75,7 +75,7 @@ equivocada.
 Gobernar no es documentar definiciones que nadie consulta. Es que la información correcta llegue
 a las personas adecuadas bajo condiciones claras, y que se pueda demostrar.
 
-## Liderar una estrategia bajo UNE-ISO/IEC 42001:2025
+## Uso responsable de la inteligencia artificial: liderar una estrategia bajo UNE-ISO/IEC 42001:2025
 
 <!-- seccion: estrategia-iso-42001 -->
 
@@ -117,7 +117,7 @@ evidencia y responsabilidad humana.
 Es también la herramienta con la que reviso cada uno de los 23 instrumentos contra los requisitos
 de la norma. La regla central es sencilla: ningún dictamen sale solo de la memoria del modelo.
 
-## El gobierno aplicado a mi propio proceso
+## Documentación: cómo documento lo que hago, con el gobierno aplicado a mi propio proceso
 
 <!-- seccion: gobierno-de-mi-proceso -->
 

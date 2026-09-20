@@ -6,9 +6,9 @@ estado: borrador
 ancla: "/vitrina/agentes"
 actualizado: 2026-09-20
 preguntas_de_prueba:
-  - "¿Qué agentes tiene publicados en su portafolio?"
-  - "¿Qué hace el Experto Fiscal?"
-  - "¿Qué es un harness?"
+  - "¿Qué son los trece agentes de la vitrina y qué no son?"
+  - "¿Qué comparten los trece agentes de la vitrina?"
+  - "¿Cómo producen piezas los agentes con gates humanos?"
 ---
 
 <!--

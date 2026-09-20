@@ -62,7 +62,7 @@ medicamentos para entender dónde una regla del nuevo sistema podía crear una c
 existía. Implementar una plataforma empresarial exige intervenir a la vez procesos, datos,
 tecnología y formas de trabajo; si uno cambia y los otros no, la solución no llega a su propósito.
 
-## El equipo de veinte
+## El equipo de veinte: el más grande que he liderado
 
 <!-- seccion: el-equipo-de-veinte -->
 

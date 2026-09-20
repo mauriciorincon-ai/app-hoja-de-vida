@@ -95,7 +95,7 @@ sean visibles antes de llegar al modelo, no en una revisión manual al final.
 Un pipeline contiene decisiones de negocio —calidad, correspondencia, temporalidad,
 granularidad— y se documenta como tal. Una consulta rápida pero ilegible es deuda técnica.
 
-## El modelado semántico es donde se gana o se pierde la confianza
+## El modelado semántico y DAX: donde se gana o se pierde la confianza
 
 <!-- seccion: modelado-semantico -->
 

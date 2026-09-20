@@ -120,7 +120,7 @@ página propia; en el ciclo monetario, la tasa real solo existe para 30 de las 4
 mitad del inventario de centrales no trae año de puesta en marcha.
 
 Y cada ficha publica sus **«nunca»**: nunca sumar consolidados con individuales, porque serían la
-misma matriz contada dos veces; nunca usar la suma de países como total mundial; nunca restar dos
+misma matriz contada dos veces; nunca usar la suma de países como total global; nunca restar dos
 series de temperatura con periodos base distintos; nunca sumar presupuesto nacional con
 contratación, porque son dos universos; nunca decir «los pilotos» a secas cuando el censo da tres
 cifras. Distinguir ausencia de cero, conservar los cambios metodológicos visibles y no

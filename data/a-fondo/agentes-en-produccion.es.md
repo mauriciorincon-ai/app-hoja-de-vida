@@ -32,7 +32,7 @@ CÓMO SE ESCRIBE ESTE ARCHIVO
 - Guía completa: docs/MANUAL-DE-USO.md → «Cómo alimentar el a fondo».
 -->
 
-## Dos experiencias distintas, no una
+## Agentes de inteligencia artificial en producción: dos experiencias distintas, no una
 
 <!-- seccion: dos-experiencias -->
 
@@ -101,7 +101,7 @@ no se gobierna una solución inteligente cuya operación es invisible.
 <!-- seccion: arkhe -->
 
 **ARKHÉ** es una arquitectura de nivel superior que coordina agentes, conocimiento, herramientas,
-controles y memoria para convertir modelos generativos (**LLM**) en capacidad de trabajo. Un
+controles y memoria para convertir modelos de lenguaje grandes (**LLM**, inteligencia artificial generativa) en capacidad de trabajo. Un
 **harness** es el envoltorio de ejecución que le fija a un agente su función, sus instrucciones,
 sus fuentes autorizadas, sus herramientas, su contrato de entrada y salida, sus validaciones y sus
 condiciones de excepción. Separo el agente —la capacidad de interpretar, razonar o generar— del
@@ -121,7 +121,7 @@ cálculos, con línea base, muestra y métrica declaradas. Como investigación, 
 vitrina: 1.405 obras verificadas una a una sin encontrar un ecosistema equivalente, y 6 de sus 9
 conceptos ya citables con literatura revisada.
 
-## Fuentes o vacío declarado
+## Fuentes o vacío declarado: cómo evito que el modelo invente
 
 <!-- seccion: fuentes-o-vacio -->
 

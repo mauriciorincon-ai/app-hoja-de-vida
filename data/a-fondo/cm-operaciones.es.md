@@ -95,7 +95,7 @@ resultado y dónde aparecen las irregularidades antes de que pesen. Esa forma de
 trasladé después a los modelos semánticos y a Power BI: una métrica con significado estable,
 trazable y que responde a una pregunta relevante.
 
-## La automatización y el histórico operacional
+## La automatización de reportes y tareas repetitivas, y el histórico operacional
 
 <!-- seccion: la-automatizacion -->
 

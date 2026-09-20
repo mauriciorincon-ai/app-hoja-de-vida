@@ -63,7 +63,7 @@ Lideré la implementación de un **ERP —Odoo—**, el sistema de planificació
 empresariales con el que Inglopres pasó de registros dispersos a un solo lugar. El
 objetivo declarado era aumentar la eficiencia operativa y la consistencia del servicio; el
 objetivo real, más difícil, era que las áreas compartieran una misma versión de la operación.
-Con el ERP en marcha, la operación ganó del orden de un 20 % en eficiencia: menos reprocesos
+Con el ERP en marcha, la operación mejoró del orden de un 20 % en eficiencia: menos reprocesos
 entre áreas y menos tiempo entre el pedido del cliente y la máquina en obra.
 
 Antes de configurar un solo módulo hubo que separar dos cosas que la organización daba por

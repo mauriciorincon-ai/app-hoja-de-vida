@@ -76,10 +76,10 @@ discriminación, y para eso una búsqueda léxica bien configurada recupera con 
 cero por consulta y es determinista: misma versión del índice, misma respuesta.
 
 La configuración: el título pesa el doble, hay coincidencia por prefijo y una tolerancia difusa
-de 0,2 para errores de escritura. El guardrail, en cambio, usa una búsqueda **estricta sin
-tolerancia difusa**: «gatos» jamás coincide con «datos». Y las palabras vacías se calibraron
-midiendo: «cuéntame un chiste sobre gatos» puntuaba 4,28 solo porque «sobre» estaba en 42 de 162
-fragmentos.
+de 0,2 para errores de escritura. El guardrail, en cambio, usa una búsqueda **estricta sin tolerancia difusa**: una palabra que
+difiere en una letra de «datos» jamás coincide con «datos». Y las palabras vacías se calibraron
+midiendo: una pregunta ajena de siete palabras puntuaba 4,28 solo porque la preposición «sobre»
+estaba en 42 de 162 fragmentos.
 
 Los embeddings quedan como evolución condicionada: entrarían si un conjunto representativo de
 preguntas demostrara que la búsqueda léxica falla de forma sistemática con paráfrasis, y entonces
@@ -98,7 +98,7 @@ legítimas quedarían rechazadas. Ningún número separa los dos grupos, así qu
 deliberadamente bajo y el resto lo hacen las demás capas. Cuando el corpus crece, el umbral se
 vuelve a medir, no a suponer.
 
-## Los guardrails están distribuidos, no concentrados en un prompt
+## Cómo evito que el modelo invente: guardrails distribuidos, no un prompt
 
 <!-- seccion: los-guardrails -->
 
@@ -164,7 +164,7 @@ el corpus, se corrigió el contenido, no la expectativa. Y las pruebas incluyen 
 citas a destinos inexistentes, consultas fuera de dominio, proveedor caído. Un control que no se
 ha visto fallar no cuenta.
 
-## Qué demuestra esta aplicación
+## Qué demuestra esta aplicación sobre inteligencia artificial generativa
 
 <!-- seccion: que-demuestra -->
 

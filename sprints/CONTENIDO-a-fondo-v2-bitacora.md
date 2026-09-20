@@ -572,3 +572,92 @@ No hay test ni mensaje que fijara los textos cambiados; la suite sigue en el mis
 al cerrar F2 (rojos solo en golden-ajena y banco, que son F4). El índice del chat se
 reconstruye sin cambios: 28 fragmentos, 0 de 25 aprobados.
 
+
+---
+
+## F4 — El buscador con el corpus nuevo: las fichas entran, y el banco vuelve a 100 %
+
+Decisión escrita en **ADR-021** (`decisions/021-fichas-en-el-indice-del-chat.md`); aquí, la
+secuencia y los números.
+
+### Las fichas al índice
+
+`scripts/fichas-al-indice.mjs` (nuevo) lee las 6 apps (brochure + complemento de `data/fichas/`)
+y las 26 piezas de `content/{agentes,investigaciones,tableros}/` y produce 226 fragmentos con
+32 anclas, todas existentes en el catálogo de destinos. Se trocean con `ventanasPorParrafo`
+(mediana 146 palabras, máximo 255 en una ventana de un solo párrafo). Gate nuevo,
+`tests/unit/fichas-al-indice.test.ts`, con su rojo: una ficha sin `pieza.slug` lanza «ficha sin
+slug»; el test de anclas falla si una ruta no existe (se probó con un frente inventado).
+
+### La medición que cambió la decisión
+
+Con las fichas a peso 1 el banco **bajó** de 102/131 a 94/131: las fichas desplazaban a los
+documentos a fondo en preguntas que no eran sobre una pieza. La tabla de variantes está en el
+ADR; la salida es un `peso` opcional por fragmento (`chatChunkSchema`), aplicado como
+`boostDocument` en los dos modos del retriever, y las fichas viajan con **0,5**. A ese peso el
+banco recupera el 102/131 de «sin fichas» y once preguntas de la vitrina siguen recibiendo una
+ficha en su contexto.
+
+### El banco, de 102 a 136 de 136
+
+Al cerrar F2 el banco tenía 29 rojos (31 con el corpus de partida): preguntas de afuera cuya
+palabra el corpus v2 ya no decía. Se arreglaron **en el contenido**, nunca aflojando el gate, y
+casi siempre en el título de la subsección (el título pesa doble en el ranking, así que es el
+lugar más barato para poner la palabra con la que alguien pregunta):
+
+| Pregunta de afuera                                  | Qué se cambió                                                                 |
+| --------------------------------------------------- | ----------------------------------------------------------------------------- |
+| ¿Dónde trabaja actualmente?                         | `fundacion-ctic`: «El rol actual: dónde trabajo hoy»                          |
+| ¿Qué hizo en Vesting? / ¿Por qué salió?             | `vesting`: dos títulos y «Salí de Vesting en enero de 2025…»                  |
+| Problema nuevo / áreas de negocio / no le reportan  | `como-trabajo`: tres títulos                                                  |
+| Diferencia / motiva / contratarlo / país / ciudad   | `lo-que-busco`: cuatro títulos y dos viñetas («vivo en Bogotá», «otro país»)  |
+| Posgrado / formación en diseño / IA vs. datos       | `origenes`: la formación formal completa (pregrado, Diseño Industrial, sin posgrado) |
+| Certificándose ahora                                | `certificaciones`: «en este momento me estoy certificando en el AI-103 y en el AI-300» |
+| IA generativa / agentes de IA / LLM / inventar / NLP | `agentes-en-produccion`, `rag-y-el-chat`, `analitica-predictiva`             |
+| Uso responsable / trazabilidad / documenta          | `gobierno-de-datos-y-de-ia` (tres títulos), `procesos-y-simulacion` (ISO 9001) |
+| DAX / Python / lenguajes / R                        | `fabric-en-la-practica` (título), `analitica-predictiva` (título y frase)     |
+| Por su cuenta / artículos o papers                  | `apps-pipeline`, `las-investigaciones` («investigaciones aplicadas, no artículos de revista») |
+| Automatizado reportes                               | `cm-operaciones`: «La automatización de reportes y tareas repetitivas…»       |
+| Equipo más grande                                   | `cafam`: «El equipo de veinte: el más grande que he liderado»                 |
+
+Dos preguntas cambiaron de `espera` porque la fuente que traían **es** la correcta: «¿Ha
+trabajado con procesamiento de lenguaje natural?» y «¿Tiene experiencia con R además de Python?»
+las contesta la tabla de herramientas de `analitica-predictiva` (C62, C64). «R» tiene una letra
+y el tokenizador la descarta: esa pregunta solo puede casar por «Python» y «experiencia».
+
+El banco crece de 131 a **136**: tres preguntas de `los-agentes-de-la-vitrina` (el gate de
+cobertura exige tres por documento), y dos que salen de `sin_cobertura` porque el corpus v2 ya
+las contesta —el nivel de inglés (B2, A18) y la pausa de mayo de 2022 a marzo de 2023
+(origenes)—. Los huecos declarados quedan en **3**: salario, disponibilidad y viajes.
+
+Tres golden se reescribieron con las palabras nuevas de su documento (`lo-que-busco`,
+`como-trabajo`, y las tres de `los-agentes-de-la-vitrina`, que perdían contra las fichas de los
+agentes que nombraban). Y el golden **medía sin fichas** —un índice que no existe—: ahora las
+incluye, y por eso se vio el problema.
+
+### Las ajenas
+
+Con las fichas en el índice tres ajenas pasan el guardrail por una palabra real: «mañana»
+(Hablemos San), «receta» (límites de ARKHÉ), «mundial» (tablero de energía y clima). Las fichas no
+se editan aquí; el banco las declara `pasa` con su `porque`. De la prosa propia se retiraron
+«ganó» (inglopres), «receta» y «total mundial». Resultado: **6 de 15 bloqueadas**, 9 pasan al
+modelo con puntajes entre 3,8 y 37; las 136 legítimas puntúan ≥ 6,65 en modo estricto.
+
+### k y umbral
+
+`TOP_K_CONTEXTO` se queda en 4 y `UMBRAL_ON_TOPIC` en 1, con la curva k = 1…6 en el ADR y en
+los comentarios de `retrieval.ts` y `guardrails.ts`. Resumen: k = 4 es el primer valor con
+75/75 golden y 136/136 banco; k = 5 no rescata ninguna y agranda el contexto un 25 %
+(537 → 670 palabras).
+
+### Estado
+
+| Métrica                                   | Cierre F2 | Cierre F4    |
+| ----------------------------------------- | --------: | -----------: |
+| Fragmentos del índice simulado            |       268 |      **494** |
+| Banco, fuente en top-4                    |   102/131 |  **136/136** |
+| Banco, de primeras                        |        66 |       **98** |
+| Golden                                    |     75/75 |    **75/75** (ahora con fichas) |
+| Ajenas bloqueadas                         |      7/15 |         6/15 |
+| Huecos declarados                         |         5 |        **3** |
+| Suite completa                            |         — | 842 verdes · lint y typecheck limpios |

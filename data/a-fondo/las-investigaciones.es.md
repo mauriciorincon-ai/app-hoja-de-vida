@@ -32,7 +32,7 @@ CÓMO SE ESCRIBE ESTE ARCHIVO
 - Guía completa: docs/MANUAL-DE-USO.md → «Cómo alimentar el a fondo».
 -->
 
-## Qué son
+## Qué son: investigaciones aplicadas, no artículos de revista
 
 <!-- seccion: que-son -->
 
@@ -110,7 +110,7 @@ profesionales, no con el prototipo.
 **ARKHÉ.** Una persona con criterio fabrica sistemas que antes exigían un equipo. Es la
 arquitectura que produce las otras seis: contratos declarativos indexados, moldes reutilizables,
 registros inspeccionables, gobernanza verificable; **6 de sus 9 conceptos** ya son citables con
-literatura revisada. Publica ingredientes, no receta: la frontera es también comercial.
+literatura revisada. Publica los componentes, no la fórmula completa: la frontera es también comercial.
 
 **El espectro de agencia.** Tablero, alerta, asistente, recomendador o agente: cuál para cada
 decisión. Un espectro ordinal por construcción, decisores sintéticos y un escenario con óptimo

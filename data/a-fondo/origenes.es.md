@@ -37,7 +37,7 @@ El arco completo: por qué estudiaste Ingeniería Industrial, cuándo
 descubriste los datos, qué te llevó de procesos a analítica y de ahí a IA.
 El hilo que conecta toda tu trayectoria. -->
 
-## Por qué ingeniería industrial
+## Por qué ingeniería industrial, y la formación en diseño
 
 <!-- seccion: por-que-industrial -->
 
@@ -158,7 +158,7 @@ acceso a cierta información, límites y una responsabilidad que hay que diseña
 
 <!-- seccion: cuantos-anos -->
 
-**Diez años de trayectoria profesional**, contados desde agosto de 2016, y **ocho con los datos
+Mi formación formal es el pregrado en Ingeniería Industrial de la Javeriana, con énfasis en Inteligencia Analítica de Datos, y el programa de Diseño Industrial; no tengo maestría, especialización ni otro posgrado: la profundización posterior son las certificaciones y lo construido. **Diez años de trayectoria profesional**, contados desde agosto de 2016, y **ocho con los datos
 en el centro**, contados desde Ceinfes en noviembre de 2017, cuando los indicadores pasaron a ser
 mi trabajo y no una herramienta del trabajo.
 
@@ -166,9 +166,9 @@ En ese arco hay ocho empleos en siete organizaciones y seis sectores: maquinaria
 evaluación educativa, transporte masivo, logística de medicamentos, banca y una startup de
 agentes de IA; hoy, el sector salud. Sumados, son **105 meses de trabajo efectivo**, ocho años y
 nueve meses; el resto, hasta los diez, son las pausas entre un empleo y el siguiente, la más larga
-entre mediados de 2022 y comienzos de 2023, que dediqué a estudiar: tres de las cuatro
+entre mayo de 2022 y marzo de 2023, que dediqué a estudiar: tres de las cuatro
 certificaciones de IBM —las de 2022— son de esos meses. Los periodos exactos, mes a mes, están en la tabla de arriba.
 
-Si la pregunta es cuánta experiencia hay en IA frente a la de datos: los datos ocupan ocho de
+Si la pregunta es qué tan grande es mi experiencia con IA comparada con la de datos: los datos ocupan ocho de
 esos años; la IA aplicada, con agentes en producción, empieza en agosto de 2023 en Vesting y
 sigue hoy en CTIC. Tres años de los diez, y los tres más recientes.

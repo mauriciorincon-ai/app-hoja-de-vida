@@ -41,7 +41,7 @@ La visión del pipeline AI-APPs: por qué construyes en público, qué
 demuestra cada app, cómo trabajas con agentes de IA para construirlas (esta
 CV Viva incluida). -->
 
-## Por qué construyo en público
+## Lo que construyo por mi cuenta, fuera del trabajo, y por qué en público
 
 <!-- seccion: por-que-en-publico -->
 

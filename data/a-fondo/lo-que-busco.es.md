@@ -8,7 +8,7 @@ actualizado: 2026-09-20
 preguntas_de_prueba:
   - "¿Qué tipo de posición busca Henry?"
   - "¿Está abierto a reubicarse o a trabajo remoto?"
-  - "¿Qué ofrece Henry que no es frecuente?"
+  - "¿Qué diferencia a Henry de otros candidatos de datos?"
 ---
 
 <!--
@@ -32,7 +32,7 @@ CÓMO SE ESCRIBE ESTE ARCHIVO
 - Guía completa: docs/MANUAL-DE-USO.md → «Cómo alimentar el a fondo».
 -->
 
-## El problema que quiero resolver
+## Lo que me motiva: el problema que quiero resolver
 
 <!-- seccion: el-problema-que-quiero -->
 
@@ -77,12 +77,12 @@ y la operación. No hace falta que la organización tenga resueltas esas capacid
 donde la arquitectura está por construirse, siempre que exista la intención real de construir
 capacidad y no solo de adoptar tecnología.
 
-## Las condiciones en las que puedo trabajar
+## Dónde vivo y dónde puedo trabajar: ciudad, remoto y reubicación a otro país
 
 <!-- seccion: condiciones -->
 
-- **Ubicación:** resido en **Bogotá, Colombia**. Trabajo presencial, híbrido o **remoto**.
-- **Reubicación:** disponible para **reubicarme**, nacional o internacionalmente, si la oportunidad
+- **Ubicación:** vivo en **Bogotá, Colombia**. Trabajo presencial, híbrido o **remoto**.
+- **Reubicación:** dispuesto a **reubicarme** a otra ciudad o a otro país, si la oportunidad
   representa una evolución real y las condiciones son proporcionales al alcance del cargo.
 - **Zona horaria:** cualquiera. En **trabajo remoto** adapto la jornada a la del equipo.
 - **Inglés:** nivel **B2**, profesional. Entre 2013 y 2014 viví y estudié en Melbourne, Australia,
@@ -93,11 +93,11 @@ decisiones, hacer visibles las dependencias y conservar memoria. Al evaluar una 
 ubicación pesa, pero pesan más el alcance real de la responsabilidad y la capacidad de influir
 sobre la arquitectura.
 
-## Lo que ofrezco y no es frecuente
+## Lo que me diferencia de otros candidatos de datos
 
 <!-- seccion: que-ofrezco -->
 
-Mi diferencial es conectar dimensiones que suelen estar separadas: procesos, datos, experiencia
+Si la pregunta es por qué contratarme a mí y no a otro perfil de datos, la respuesta es la combinación: conecto dimensiones que suelen estar separadas: procesos, datos, experiencia
 de usuario, plataformas analíticas, aplicaciones inteligentes, agentes y gobierno.
 
 - **Comprensión sistémica.** Soy ingeniero industrial: empiezo por cómo funciona el trabajo, no
