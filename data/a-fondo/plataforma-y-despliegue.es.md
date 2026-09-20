@@ -2,7 +2,7 @@
 slug: plataforma-y-despliegue
 titulo: "Plataforma y despliegue"
 resumen: "Dónde tengo profundidad de plataforma —Microsoft: Fabric, Power BI, Microsoft Foundry—, qué despliego y opero yo mismo con Git, GitHub Actions, CI/CD, Vercel y Sentry, lo que no he hecho dicho sin rodeos —Docker, Kubernetes, Vertex AI, BigQuery— y cómo cubro esa brecha."
-estado: borrador
+estado: aprobado
 ancla: "#skills"
 actualizado: 2026-09-20
 preguntas_de_prueba:

@@ -2,7 +2,7 @@
 slug: bi-que-se-adopta
 titulo: "BI que se adopta"
 resumen: "La adopción como indicador y no el tablero: 50+ usuarios en banca, 25+ usuarios clave en transporte, 15+ en logística y 42 productos para 20 líderes en salud; la formación como parte del producto, la procedencia de cada cifra y el agente que construye reportes de Power BI completos."
-estado: borrador
+estado: aprobado
 ancla: "#skills"
 actualizado: 2026-09-20
 preguntas_de_prueba:

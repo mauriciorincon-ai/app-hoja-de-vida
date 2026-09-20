@@ -316,7 +316,7 @@
     <div class="pagina">
       <header>
         <p class="eyebrow">
-          CV Viva · Guía de prueba viva y acumulativa · v8.1 · Sprint 008 (el
+          CV Viva · Guía de prueba viva y acumulativa · v9 · a fondo v2 (el
           detalle) + revisión post-S8 · 2026-09-12
         </p>
         <h1>Guía de prueba</h1>
@@ -1433,17 +1433,18 @@
           chat.
         </p>
         <ul class="pasos">
-          <li data-origen="nuevo">
+          <li data-origen="mejorada">
             <input type="checkbox" id="o1" /><label for="o1"
-              >Recorre la HOME y abre el chat:
-              <strong>responde igual que antes del sprint</strong>. Es lo
-              correcto — los 24 documentos están en <code>borrador</code> y el
-              chat no los ve. Confírmalo en la última línea de
-              <code>pnpm build</code>:
+              >Abre el chat y pregunta algo que solo el a fondo sabe («¿Por qué
+              salió de Vesting?», «¿Qué hizo en Inglopres?»):
+              <strong>responde con la prosa del documento</strong> y la cita
+              navega a lo visible (el case study o la sección de la HOME). Los
+              25 documentos están <code>aprobados</code> en los dos idiomas.
+              Confírmalo en la última línea de <code>pnpm build</code>:
               <code
-                >28 chunks (0 de 24 documentos «a fondo» aprobados e
+                >494 chunks (25 de 25 documentos «a fondo» aprobados e
                 indexados)</code
-              >. <span class="origen origen-nuevo">Nuevo · S8</span></label
+              >. <span class="origen origen-mejorada">Mejorado en a fondo v2</span></label
             >
           </li>
           <li data-origen="nuevo">
@@ -1455,58 +1456,60 @@
               <span class="origen origen-nuevo">Nuevo · S8</span></label
             >
           </li>
-          <li data-origen="nuevo">
+          <li data-origen="mejorada">
             <input type="checkbox" id="o3" /><label for="o3"
               >Abre <code>data/a-fondo/README.md</code>: la tabla dice
               <strong
-                >24 documentos · 132 subsecciones · 14.268 palabras · 30
-                <code>[CONFIRMAR]</code> por resolver · 0 aprobados</strong
-              >
-              y nombra los
-              <strong>seis documentos sin ninguna pregunta abierta</strong>, que
-              son por los que conviene empezar. Corre
-              <code>pnpm corpus:informe</code> y comprueba que la tabla se
-              regenera sola.
-              <span class="origen origen-nuevo">Nuevo · S8</span></label
+                >25 documentos · 171 subsecciones · ~30.000 palabras · 0
+                <code>[CONFIRMAR]</code> · 25 aprobados</strong
+              >. Corre <code>pnpm corpus:informe</code> y comprueba que la
+              tabla se regenera sola.
+              <span class="origen origen-mejorada">Mejorado en a fondo v2</span></label
             >
           </li>
-          <li data-origen="nuevo">
+          <li data-origen="mejorada">
             <input type="checkbox" id="o4" /><label for="o4"
-              >Mira cómo se defiende el canal: en cualquier documento cambia
-              <code>estado: borrador</code> por <code>aprobado</code> y corre
-              <code>pnpm build</code>. <strong>Se detiene</strong> nombrando el
-              archivo y la subsección —por el <code>[CONFIRMAR]</code> que aún
-              tiene y por el gemelo en inglés que falta—. Devuélvelo a
-              <code>borrador</code>.
-              <span class="origen origen-nuevo">Nuevo · S8</span></label
+              >Mira cómo se defiende el canal: en cualquier
+              <code>.en.md</code> cambia el id de una subsección
+              (<code>&lt;!-- seccion: la-operacion --&gt;</code> por otro) y
+              corre <code>pnpm build</code>. <strong>Se detiene</strong>
+              nombrando el documento y la subsección que no coincide entre
+              idiomas. Deshaz el cambio. Y en cualquier <code>.es.md</code>
+              escribe <code>[CONFIRMAR: algo]</code>: el build vuelve a
+              detenerse — un aprobado no puede llevar preguntas abiertas.
+              <span class="origen origen-mejorada">Mejorado en a fondo v2</span></label
             >
           </li>
-          <li data-origen="nuevo">
+          <li data-origen="mejorada">
             <input type="checkbox" id="o5" /><label for="o5"
               >Abre <code>sprints/SPRINT_008-banco-de-preguntas.md</code>:
-              <strong>131 preguntas</strong> con lo que el chat trae hoy y lo
-              que traería con la base aprobada, y la lista de las
-              <strong>18 preguntas que hoy reciben «eso se me escapa»</strong> y
-              dejarían de recibirlo.
-              <span class="origen origen-nuevo">Nuevo · S8</span></label
+              <strong>136 preguntas</strong> de afuera, las 136 con su fuente
+              en el top-4 y 98 de primeras; <strong>cero</strong> preguntas
+              legítimas reciben «eso se me escapa»; 6 de 15 ajenas se bloquean
+              sin gastar tokens y las otras 9 las declina el prompt. Los tres
+              huecos que quedan (salario, disponibilidad, viajes) son tuyos.
+              <span class="origen origen-mejorada">Mejorado en a fondo v2</span></label
             >
           </li>
-          <li data-origen="nuevo" data-minimo>
+          <li data-origen="mejorada" data-minimo>
             <input type="checkbox" id="o6" /><label for="o6"
               >⭐
               <strong>Lee un documento entero y decide si es tuyo.</strong>
-              Empieza por <code>data/a-fondo/como-trabajo.es.md</code> (no tiene
-              preguntas abiertas). Léelo como si lo hubiera escrito otro: ¿cada
-              afirmación es verdad, y la dirías así? Lo que el chat cite saldrá
-              de ahí <strong>palabra por palabra</strong>, y nadie más que tú
-              puede juzgarlo. <span class="origen origen-nuevo">Nuevo · S8</span
+              Empieza por <code>data/a-fondo/lo-que-busco.es.md</code> y sigue
+              por <code>vesting</code> y <code>fundacion-ctic</code>, los que
+              más respuestas tuyas del 20 de septiembre recibieron. Léelos como
+              si los hubiera escrito otro: ¿cada afirmación es verdad, y la
+              dirías así? Lo que el chat cite saldrá de ahí
+              <strong>palabra por palabra</strong>, y nadie más que tú puede
+              juzgarlo. Lo que corrijas se corrige en el <code>.es.md</code> y
+              en su gemelo. <span class="origen origen-mejorada">Mejorado en a fondo v2</span
               ><span class="minimo">⭐ mínimo</span></label
             >
           </li>
           <li data-origen="nuevo" data-minimo>
             <input type="checkbox" id="o7" /><label for="o7"
-              >⭐ <strong>Cero terceros identificables.</strong> Barre los 24
-              buscando el nombre de una persona —un jefe, un cliente, un
+              >⭐ <strong>Cero terceros identificables.</strong> Barre los 25,
+              en los dos idiomas, buscando el nombre de una persona —un jefe, un cliente, un
               compañero—. El build caza correos, teléfonos, cédulas y
               direcciones web;
               <strong>un nombre propio no lo caza ningún programa</strong>. Es
@@ -1515,43 +1518,49 @@
               ><span class="minimo">⭐ mínimo</span></label
             >
           </li>
-          <li data-origen="nuevo" data-minimo>
+          <li data-origen="mejorada" data-minimo>
             <input type="checkbox" id="o8" /><label for="o8"
               >⭐
               <strong>Las cifras y las fechas son verdaderas.</strong> Contrasta
-              contra tu hoja de vida los tres documentos con más números
-              —<code>banco-pichincha</code>, <code>cafam</code>,
-              <code>transmilenio-cm</code>— y resuelve las
-              <strong>12 diferencias</strong> de
-              <code>sprints/SPRINT_008-informe-discrepancias.md</code>. Una
-              cifra publicada que no puedas sostener en una entrevista es peor
-              que no publicarla.
-              <span class="origen origen-nuevo">Nuevo · S8</span
+              contra tu hoja de vida las tablas de los tres documentos con más
+              números —<code>banco-pichincha</code>, <code>cafam</code>,
+              <code>transmilenio-cm</code>— y las estimaciones que pediste y
+              van marcadas como tales («del orden de», «cerca de»: el efecto
+              del ERP en Inglopres, la mejora de indicadores en Ceinfes). Las
+              fechas de los ocho cargos las vigila un test contra
+              <code>cv.es.yaml</code> mes a mes; una cifra publicada que no
+              puedas sostener en una entrevista es peor que no publicarla.
+              <span class="origen origen-mejorada">Mejorado en a fondo v2</span
               ><span class="minimo">⭐ mínimo</span></label
             >
           </li>
-          <li data-origen="nuevo" data-minimo>
+          <li data-origen="mejorada" data-minimo>
             <input type="checkbox" id="o9" /><label for="o9"
               >⭐
-              <strong>DIFERIDA hasta que apruebes el primero (M1).</strong>
-              Cuando pases un documento a <code>aprobado</code> y yo traduzca su
-              gemelo, en la preview pregúntale al chat algo de ese documento:
-              tiene que responder <strong>con su prosa</strong>, citar, y que la
-              cita <strong>navegue a algo visible</strong> del sitio (su
-              <code>ancla</code>). Juzga si la respuesta suena a ti.
-              <span class="origen origen-nuevo">Nuevo · S8</span
+              <strong>M1, ya activa.</strong> En la preview, con el proveedor
+              real, pregúntale al chat por Vesting («¿Cómo diseñó el ecosistema
+              de datos de Vesting?»): tiene que responder
+              <strong>con la prosa del documento</strong>, citar, y que la cita
+              <strong>navegue a algo visible</strong> del sitio
+              (<code>/proyectos/vesting</code>). Juzga si la respuesta suena a
+              ti. Repite en <code>/en</code>: responde en inglés con el gemelo.
+              <span class="origen origen-mejorada">Mejorado en a fondo v2</span
               ><span class="minimo">⭐ mínimo</span></label
             >
           </li>
-          <li data-origen="nuevo" data-minimo>
+          <li data-origen="mejorada" data-minimo>
             <input type="checkbox" id="o10" /><label for="o10"
-              >⭐ <strong>DIFERIDA hasta la base aprobada (M2).</strong> Con el
-              proveedor real, hazle al chat
-              <strong>cinco preguntas del banco</strong> —una de trayectoria,
-              una de IA, una de plataforma, una incómoda y una ajena— y juzga:
-              ¿concretas y fieles a las fuentes? ¿la cita correcta? ¿y sigue
-              diciendo «eso se me escapa» a la ajena?
-              <span class="origen origen-nuevo">Nuevo · S8</span
+              >⭐ <strong>M2, ya activa.</strong> Con el proveedor real, hazle
+              al chat <strong>cinco preguntas del banco</strong> —una de
+              trayectoria («¿Cuál es el equipo más grande que ha liderado?»),
+              una de IA («¿Cómo evita que el modelo invente respuestas?»), una
+              de plataforma («¿Qué es un lakehouse y lo ha usado?»), una
+              incómoda («¿Qué no ha hecho nunca y tendría que aprender?») y una
+              ajena («¿quién ganó el mundial de fútbol?», que el guardrail deja
+              pasar a propósito)— y juzga: ¿concretas y fieles a las fuentes?
+              ¿la cita correcta? ¿y la ajena la declina el modelo sin colar
+              nada del CV?
+              <span class="origen origen-mejorada">Mejorado en a fondo v2</span
               ><span class="minimo">⭐ mínimo</span></label
             >
           </li>
@@ -1573,6 +1582,46 @@
               ><span class="minimo">⭐ mínimo</span></label
             >
           </li>
+          <li data-origen="nuevo">
+            <input type="checkbox" id="o12" /><label for="o12"
+              >Las fichas hablan por el chat: pregunta «¿Qué límites tiene
+              Hablemos San?» o «¿Cuántos criterios tiene el Harness Paper
+              Computacional?». La respuesta sale de la ficha y la cita navega a
+              <code>/vitrina/apps/hablemos-san</code> o a la ficha del agente
+              — no a la HOME. Son las 32 fichas, con la mitad del peso que tus
+              documentos (ADR-021).
+              <span class="origen origen-nuevo">Nuevo · a fondo v2</span></label
+            >
+          </li>
+          <li data-origen="nuevo">
+            <input type="checkbox" id="o13" /><label for="o13"
+              >Mira cómo se defienden las cifras: en
+              <code>data/a-fondo/cafam.es.md</code> cambia «20 personas» por
+              «25 personas» y corre
+              <code>npx vitest run tests/unit/a-fondo-coherencia.test.ts</code>.
+              El gate de fechas y cargos no lo ve (no es una fecha), pero el
+              de <strong>léxico</strong> o el de <strong>densidad</strong>
+              tampoco: ese número lo defiende tu lectura (o8). Ahora escribe
+              «las cinco apps» en cualquier documento: el gate de
+              <strong>cifras del sitio</strong> se pone en rojo nombrando el
+              archivo, la subsección y el número verdadero (6). Deshaz los dos
+              cambios.
+              <span class="origen origen-nuevo">Nuevo · a fondo v2</span></label
+            >
+          </li>
+          <li data-origen="nuevo" data-minimo>
+            <input type="checkbox" id="o14" /><label for="o14"
+              >⭐ <strong>El inglés suena a ti.</strong> Lee entero un gemelo
+              —<code>data/a-fondo/lo-que-busco.en.md</code>— al lado de su
+              español: mismas cifras (con puntuación inglesa: 1,000 · 52%),
+              mismas subsecciones, nada nuevo en inglés y nada perdido. El
+              glosario fijo (showcase, sheet, dashboard, in-depth) está en la
+              bitácora. Una traducción que dice algo que el español no dice es
+              un documento que no aprobaste.
+              <span class="origen origen-nuevo">Nuevo · a fondo v2</span
+              ><span class="minimo">⭐ mínimo</span></label
+            >
+          </li>
         </ul>
         <div class="kit">
           <p>
@@ -1586,8 +1635,8 @@
           <p>
             <strong>Repórtame sí o sí:</strong> el nombre de una persona en
             cualquier documento, una cifra que no puedas sostener, una página
-            del detalle que SÍ exista, o un chat que empiece a citar un
-            documento que no aprobaste.
+            del detalle que SÍ exista, una respuesta del chat que no suene a ti,
+            o un inglés que diga algo que el español no dice.
           </p>
         </div>
       </section>
@@ -1655,6 +1704,20 @@
         <details class="chica">
           <summary>Historial de la guía</summary>
           <ul>
+            <li>
+              <strong>v9 · a fondo v2 · 2026-09-20:</strong> el corpus
+              reescrito desde la auditoría del dueño: 25 documentos (uno nuevo,
+              <code>los-agentes-de-la-vitrina</code>), cero
+              <code>[CONFIRMAR]</code>, seis gates de coherencia, las 32 fichas
+              de la vitrina en el índice del chat (ADR-021), banco de 136
+              preguntas en los dos idiomas, gemelos en inglés y los 25
+              <code>aprobados</code>. Bloque O: o1, o3, o4, o5, o6, o8
+              mejoradas; <strong>o9 y o10 (M1 y M2) dejan de estar
+              diferidas</strong>; <strong>o12, o13 y o14 nuevas</strong> (o14
+              ⭐). Ninguna prueba eliminada. El prefijo de casillas cambia a
+              <code>afondo-v2</code>: las pruebas de O cambiaron de sujeto y
+              una marca vieja no vale.
+            </li>
             <li>
               <strong>v8.1 · post-S8 · 2026-09-12:</strong> la tercera revisión
               de la HOME, pedida por el dueño al correr el bloque A del gate ⭐.
@@ -1812,7 +1875,7 @@
       (function () {
         // NS VERSIONADO POR SPRINT: al publicar la guía de un sprint nuevo se cambia
         // s007c — así una regresión sin correr no aparece marcada por la versión anterior.
-        var NS = "guia-hoja-de-vida:s008:";
+        var NS = "guia-hoja-de-vida:afondo-v2:";
         var casillas = Array.prototype.slice.call(
           document.querySelectorAll('input[type="checkbox"]'),
         );

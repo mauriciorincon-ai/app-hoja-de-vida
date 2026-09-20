@@ -2,7 +2,7 @@
 slug: agentes-en-produccion
 titulo: "Agentes de IA: la plataforma de Vesting y ARKHÉ, mi ecosistema propio"
 resumen: "Dos experiencias con agentes: 27 construidos con el proceso core de Vesting sobre n8n y monitoreados en tiempo real, y ARKHÉ, mi ecosistema agéntico de harnesses especializados, medido en 120 escenarios: −52 % de tokens y cumplimiento del 71 % al 93 %."
-estado: borrador
+estado: aprobado
 ancla: "/vitrina/agentes"
 actualizado: 2026-09-20
 preguntas_de_prueba:

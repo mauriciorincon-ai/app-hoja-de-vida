@@ -661,3 +661,73 @@ los comentarios de `retrieval.ts` y `guardrails.ts`. Resumen: k = 4 es el primer
 | Ajenas bloqueadas                         |      7/15 |         6/15 |
 | Huecos declarados                         |         5 |        **3** |
 | Suite completa                            |         — | 842 verdes · lint y typecheck limpios |
+
+---
+
+## F5 — Inglés y aprobación: 25 gemelos, el banco en inglés y los 50 en `aprobado`
+
+### Los gemelos
+
+Los 25 `.en.md` se tradujeron del español ya cerrado, subsección por subsección, en cinco lotes
+paralelos con las mismas reglas escritas (formato exacto, glosario fijo, puntuación inglesa de
+cifras y fechas, **nada nuevo en inglés**, nada perdido). Cada archivo pasó, antes de entrar, una
+verificación mecánica: mismos ids de subsección en el mismo orden, mismo número de títulos y de
+preguntas de prueba, mismo `slug`, sin `[CONFIRMAR]`; y después la aduana real (`a-fondo.test.ts`:
+cabecera Zod, privacidad, destino, paridad) y un barrido de correos, URL y teléfonos: cero.
+
+| | Español | Inglés |
+| --- | ---: | ---: |
+| Documentos | 25 | 25 |
+| Subsecciones | 171 | 171 |
+| Palabras (con cabeceras y comentarios) | 39.048 | 39.341 |
+| Fragmentos en el índice publicado (con YAML y fichas) | 494 | 493 |
+
+**Lo que la traducción encontró en el español** (y se corrigió en los dos idiomas):
+`origenes` decía «ocho empleos en ocho organizaciones» en una subsección y «en siete» en otra;
+el sitio lista ocho (C&M Consorcio y C&M Consultores son dos). Y dos frases se sumaron en ambos
+idiomas porque el banco las necesitaba y el documento ya las decía en otras palabras: «lo mismo
+que haría en mis primeros noventa días» (`lo-que-busco`) y «la raíz **de procesos**» en el título
+de `procesos-y-simulacion`.
+
+**Glosario fijo** (el manual remite aquí): a fondo → in-depth · vitrina → showcase · ficha →
+sheet / technical sheet · pieza → piece · tablero → dashboard · carnada → bait · sellado → sealed ·
+el dueño → the owner · hoja de vida → CV · lista de espera → waiting list · junta directiva →
+board of directors · medicamentos → medicines · bodega → warehouse · centro de distribución →
+distribution center · modelo semántico → semantic model · gobierno de datos/IA → data/AI
+governance · trazabilidad → traceability · estudio del trabajo → work study · balanceo de líneas
+→ line balancing · franja → time band · recaudo → fare collection · novedades → incidents · fuga /
+mora → churn / delinquency · colegio → school · jornada → session · hoja de respuestas → answer
+sheet · en curso → in progress · obtenida → earned · eso se me escapa → "that one escapes me" ·
+fragmento → chunk · pregunta ajena → off-topic question · vacío declarado → declared gap · OIT →
+ILO. Nombres propios, códigos de certificación, productos y `UNE-ISO/IEC 42001:2025` no se
+traducen. Los nombres de las piezas de la vitrina se traducen de forma descriptiva (ISO 42001
+Expert, Tax Expert, Power BI Dashboard Builder…) porque las fichas son español-solo.
+
+### El banco en inglés
+
+`tests/fixtures/banco-de-preguntas.en.yaml`: las mismas 136 preguntas, mismas fuentes esperadas
+y familias (un test exige la igualdad, pregunta por pregunta), 15 ajenas y 3 huecos. Gate nuevo,
+`tests/unit/banco-de-preguntas-en.test.ts`, contra el índice inglés simulado; nació con **5 rojos**
+del banco y **3 del golden inglés** (que se sumó a `a-fondo-golden.test.ts`), todos por
+vocabulario de la traducción, todos corregidos en el gemelo y no en la expectativa:
+
+| Pregunta en inglés | Qué faltaba |
+| --- | --- |
+| Is he getting certified in anything right now? | «certifying» no es «certified» para un buscador de prefijos → «getting certified» |
+| Does he have experience with R besides Python? | «R» tiene una letra y se descarta → «my deepest experience… is in Python» |
+| What did he study and at which university? | el nombre de la universidad está en español → título de `origenes` con «study» y «university» |
+| Is he more of a process profile or a technology profile? | «technologies» no casa con «technology» → «technology list», y «process root» |
+| What would he do in his first ninety days? | la frase nueva, en los dos idiomas |
+| tres golden (`agentes-en-produccion`, `como-trabajo`, `los-tableros`) | reescritas con las palabras del gemelo («led» no casa con «lead»: fuzzy 0 en tres letras) |
+
+Resultado: **136/136** en inglés con **104 de primeras** (más que en español: el inglés tiene menos
+formas por palabra). Ajenas sobre el índice inglés: las fichas son español-solo, así que «recipe»
+se bloquea y «mañana» (en una ajena en español) pasa; declarado en el YAML con su `porque`.
+
+### La aprobación
+
+Los 50 archivos pasan a `estado: aprobado`. `pnpm build`: **494 fragmentos en español, 493 en
+inglés, 25 de 25 aprobados e indexados**. Suite completa: **1.158 verdes** (34 archivos), lint y
+typecheck limpios. El informe del banco se regeneró: HOY = M2, 136/136, 99 de primeras, 0
+legítimas con «eso se me escapa». `data/a-fondo/README.md`: 25 · 171 · 29.970 palabras · 0
+`[CONFIRMAR]` · 25 aprobados.

@@ -2,7 +2,7 @@
 slug: origenes
 titulo: "De la ingeniería industrial a los datos"
 resumen: "El arco: por qué Ingeniería Industrial y Diseño Industrial, el primer trabajo que fue de procesos, los tres saltos hasta la IA con la tabla de los ocho empleos, el hilo con sus métodos, y cuántos años son."
-estado: borrador
+estado: aprobado
 ancla: "#trayectoria"
 actualizado: 2026-09-20
 preguntas_de_prueba:
@@ -162,7 +162,7 @@ Mi formación formal es el pregrado en Ingeniería Industrial de la Javeriana, c
 en el centro**, contados desde Ceinfes en noviembre de 2017, cuando los indicadores pasaron a ser
 mi trabajo y no una herramienta del trabajo.
 
-En ese arco hay ocho empleos en siete organizaciones y seis sectores: maquinaria pesada,
+En ese arco hay ocho empleos en ocho organizaciones y seis sectores: maquinaria pesada,
 evaluación educativa, transporte masivo, logística de medicamentos, banca y una startup de
 agentes de IA; hoy, el sector salud. Sumados, son **105 meses de trabajo efectivo**, ocho años y
 nueve meses; el resto, hasta los diez, son las pausas entre un empleo y el siguiente, la más larga

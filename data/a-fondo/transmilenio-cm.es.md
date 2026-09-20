@@ -2,7 +2,7 @@
 slug: transmilenio-cm
 titulo: "C&M Consultores / TransMilenio — análisis post-operacional (2021–2022)"
 resumen: "El análisis post-operacional del SITP: el ETL que unificó recaudo, flota, programación, novedades y PQR (+70 %), BI adoptado por 25+ usuarios clave (+35 %), las mesas con la dirección del SITP (+25 %) y un modelo de demanda en scikit-learn que corrió diez meses."
-estado: borrador
+estado: aprobado
 ancla: "/proyectos/transmilenio-cm"
 actualizado: 2026-09-20
 preguntas_de_prueba:

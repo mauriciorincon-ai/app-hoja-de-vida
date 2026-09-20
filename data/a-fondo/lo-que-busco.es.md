@@ -2,7 +2,7 @@
 slug: lo-que-busco
 titulo: "Lo que busco"
 resumen: "Qué problema quiero resolver, los cuatro tipos de rol donde rindo más, en qué condiciones —Bogotá, remoto o reubicación, inglés B2— y qué ofrezco a cambio, con la evidencia pública que lo respalda."
-estado: borrador
+estado: aprobado
 ancla: "#contacto"
 actualizado: 2026-09-20
 preguntas_de_prueba:
@@ -142,7 +142,7 @@ en 2023 y en la Fundación CTIC en 2025. Lo indispensable es la disposición a c
 
 Prefiero una conversación sobre un problema real a un recorrido por el currículum. Con un
 problema y contexto suficiente puedo decir qué entendería primero, qué información necesitaría,
-qué hipótesis validaría y cuál sería la intervención inicial de menor costo y riesgo.
+qué hipótesis validaría y cuál sería la intervención inicial de menor costo y riesgo. Es lo mismo que haría en mis primeros noventa días en el puesto: entender, medir el vacío e intervenir donde cuesta menos.
 
 Distingo con precisión entre lo que he implementado, lo que he dirigido, lo que he estudiado y lo
 que todavía debo aprender. Si una tecnología no forma parte de mi experiencia directa, lo digo;

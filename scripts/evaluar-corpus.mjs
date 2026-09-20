@@ -36,6 +36,7 @@ import { buildChunks } from "./build-chat-index.mjs";
 import { leerFichas } from "./fichas-al-indice.mjs";
 
 export const RUTA_BANCO = "tests/fixtures/banco-de-preguntas.es.yaml";
+export const RUTA_BANCO_EN = "tests/fixtures/banco-de-preguntas.en.yaml";
 export const RUTA_INFORME = "sprints/SPRINT_008-banco-de-preguntas.md";
 
 const preguntaSchema = z.object({

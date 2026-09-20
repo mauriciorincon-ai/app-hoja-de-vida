@@ -2,7 +2,7 @@
 slug: rag-y-el-chat
 titulo: "RAG: cómo funciona este chat por dentro"
 resumen: "La arquitectura del chat de esta página con sus números: índice en tiempo de build, recuperación léxica con MiniSearch (BM25) sin embeddings, guardrails en capas, umbral medido, citas navegables, cinco proveedores intercambiables, fallback local, presupuesto de US$20 con costo real de cero, y cómo se evalúa con 48 preguntas propias y 131 de afuera."
-estado: borrador
+estado: aprobado
 ancla: "#vitrina"
 actualizado: 2026-09-20
 preguntas_de_prueba:

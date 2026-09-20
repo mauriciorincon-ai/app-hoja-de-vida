@@ -110,3 +110,38 @@ describe("golden set — cada pregunta trae su documento", () => {
     }
   });
 });
+
+/**
+ * EL GEMELO EN INGLÉS (a fondo v2, F5). El chat en /en responde con el índice
+ * inglés: los `.en.md` aprobados, los YAML en inglés y las fichas. Las
+ * `preguntas_de_prueba` de cada gemelo se miden contra ESE índice, no contra el
+ * español — un gemelo que existe pero no contesta sus propias preguntas es un
+ * idioma ciego con apariencia de paridad.
+ */
+describe("golden set en inglés — cada gemelo contesta sus propias preguntas", () => {
+  const docsEn: Doc[] = leerDocumentos("en");
+  const chunksEn = buildChunks({
+    cv: leer("cv.en.yaml"),
+    apps: leer("apps.yaml"),
+    aFondo: simularAprobacion(docsEn),
+    locale: "en",
+    fichas: leerFichas(),
+  }).map((c: unknown) => chatChunkSchema.parse(c));
+  const retrieverEn = createRetriever(chunksEn);
+  const casosEn = docsEn.flatMap((d) =>
+    d.preguntas_de_prueba.map((q) => [`${d.slug} ← ${q}`, q, d] as const),
+  );
+
+  it("hay tantos gemelos como documentos en español", () => {
+    expect(docsEn.map((d) => d.slug).sort()).toEqual(docs.map((d) => d.slug).sort());
+  });
+
+  it.each(casosEn)("%s", (_titulo, pregunta, doc) => {
+    const hits = retrieverEn.topK(pregunta, TOP_K_CONTEXTO);
+    expect(
+      hits.some((h) => h.chunk.id.startsWith(`a-fondo-${doc.slug}-`)),
+      `«${pregunta}» no trajo «${doc.slug}» en el top-${TOP_K_CONTEXTO} del índice inglés.\n` +
+        `  Trajo: ${hits.map((h) => h.chunk.id).join(", ")}`,
+    ).toBe(true);
+  });
+});

@@ -2,7 +2,7 @@
 slug: como-aprendo
 titulo: "Cómo aprendo"
 resumen: "El argumento con medida: el DP-600 en cinco meses sobre un Fabric con menos de un año en el mercado, Codex, Antigravity y Claude Code en un mes desde su salida, este sitio en ocho sprints desde julio de 2026, y 32 piezas públicas con sus pruebas y coberturas."
-estado: borrador
+estado: aprobado
 ancla: "#certificaciones"
 actualizado: 2026-09-20
 preguntas_de_prueba:

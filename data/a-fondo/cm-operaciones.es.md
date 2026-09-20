@@ -2,7 +2,7 @@
 slug: cm-operaciones
 titulo: "C&M Consorcio / TransMilenio — Analista de Operaciones (2018–2020)"
 resumen: "Mi entrada al transporte masivo: 18 meses supervisando con datos la operación de Bogotá, tableros e informes de desempeño, automatización del procesamiento y las dos preguntas que hoy son investigaciones."
-estado: borrador
+estado: aprobado
 ancla: "#trayectoria"
 actualizado: 2026-09-20
 preguntas_de_prueba:

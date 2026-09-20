@@ -2,7 +2,7 @@
 slug: ceinfes
 titulo: "Ceinfes — Coordinador de Operaciones (2017–2018)"
 resumen: "Coordinar tres frentes para más de 100 colegios: KPIs por área, el balanceo de la digitalización, informes a la junta directiva y la transición a gestión por procesos con Kanban."
-estado: borrador
+estado: aprobado
 ancla: "#trayectoria"
 actualizado: 2026-09-20
 preguntas_de_prueba:

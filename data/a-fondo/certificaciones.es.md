@@ -2,7 +2,7 @@
 slug: certificaciones
 titulo: "Certificaciones — el camino desde el DP-600"
 resumen: "Cinco credenciales obtenidas —DP-600 de Microsoft Fabric en diciembre de 2024 y cuatro de IBM en ciencia de datos— y dos rutas en curso desde julio de 2026: AI-103 (aplicaciones y agentes) y AI-300 (MLOps), que reemplaza al DP-100 retirado."
-estado: borrador
+estado: aprobado
 ancla: "#certificaciones"
 actualizado: 2026-09-20
 preguntas_de_prueba:

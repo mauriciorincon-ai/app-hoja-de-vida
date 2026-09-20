@@ -2,7 +2,7 @@
 slug: vesting
 titulo: "Vesting — la plataforma de datos para agentes de IA (2023–2025)"
 resumen: "Microsoft Fabric desde cero para una startup de agentes: 12 clientes, 27 agentes en inventario y 23 vigilados a la vez en tiempo real, 1.000 eventos por día, 20 GB y 120 tablas, gobernanza por cliente y un proceso core de 11 etapas para diseñar e implementar agentes."
-estado: borrador
+estado: aprobado
 ancla: "/proyectos/vesting"
 actualizado: 2026-09-20
 preguntas_de_prueba:

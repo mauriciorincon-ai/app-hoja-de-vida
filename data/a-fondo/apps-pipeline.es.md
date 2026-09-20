@@ -2,7 +2,7 @@
 slug: apps-pipeline
 titulo: "Las apps que estoy construyendo en público"
 resumen: "El pipeline AI-APPs: seis aplicaciones hermanas más CV Viva, 13 agentes, 7 investigaciones y 6 tableros —32 piezas— construidos con dos casas, un agente de fábrica, cuatro jobs de CI, un contrato de ficha desde Zod, costo real de US$0 al mes y dos reglas: código primero y todo control se demuestra fallando."
-estado: borrador
+estado: aprobado
 ancla: "#vitrina"
 actualizado: 2026-09-20
 preguntas_de_prueba:

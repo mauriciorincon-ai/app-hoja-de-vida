@@ -2,7 +2,7 @@
 slug: analitica-predictiva
 titulo: "Analítica predictiva"
 resumen: "Dos familias de modelos en producción con scikit-learn —demanda del SITP por ruta y franja, y fuga, mora y riesgo en banca con más del 90 % de precisión—, las herramientas de machine learning que uso y con qué nivel, la estadística y la ingeniería de variables que sostienen el modelo, y Probeta DS."
-estado: borrador
+estado: aprobado
 ancla: "#skills"
 actualizado: 2026-09-20
 preguntas_de_prueba:

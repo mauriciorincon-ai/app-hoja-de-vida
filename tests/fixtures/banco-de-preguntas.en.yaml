@@ -1,0 +1,484 @@
+# BANCO DE PREGUNTAS EN INGLÉS — el gemelo de banco-de-preguntas.es.yaml (a fondo v2, F5)
+#
+# Las mismas 136 preguntas de afuera, con las mismas fuentes esperadas (`espera`)
+# y las mismas familias, traducidas. Se miden contra el índice INGLÉS simulado —los
+# documentos .en.md forzados a aprobado, los YAML en inglés y las fichas— en
+# `tests/unit/banco-de-preguntas.test.ts`. Las reglas para ampliarlo son las del
+# banco en español: el contenido se corrige, la expectativa no se afloja.
+#
+# Las ajenas se declaran igual que en español y se miden aparte: el vocabulario
+# inglés del corpus es otro, así que «pasa» y «bloquea» pueden diferir.
+
+preguntas:
+  # ── trayectoria
+  - pregunta: "Where does Henry work now?"
+    espera: [fundacion-ctic, trayectoria]
+    familia: trayectoria
+  - pregunta: "What does he do at Fundación CTIC?"
+    espera: [fundacion-ctic]
+    familia: trayectoria
+  - pregunta: "Does he have experience with healthcare data?"
+    espera: [fundacion-ctic]
+    familia: trayectoria
+  - pregunta: "What did he do at Vesting?"
+    espera: [vesting]
+    familia: trayectoria
+  - pregunta: "How long was he at Vesting and in what role?"
+    espera: [vesting, trayectoria, casestudy-vesting]
+    familia: trayectoria
+  - pregunta: "Why did he leave Vesting?"
+    espera: [vesting]
+    familia: trayectoria
+  - pregunta: "Has he worked at a bank?"
+    espera: [banco-pichincha]
+    familia: trayectoria
+  - pregunta: "What did he do at Banco Pichincha?"
+    espera: [banco-pichincha]
+    familia: trayectoria
+  - pregunta: "Does he have experience in the financial sector?"
+    espera: [banco-pichincha]
+    familia: trayectoria
+  - pregunta: "What did he do at Cafam?"
+    espera: [cafam]
+    familia: trayectoria
+  - pregunta: "Has he taken part in implementing a warehouse management system?"
+    espera: [cafam]
+    familia: trayectoria
+  - pregunta: "What is the largest team he has led?"
+    espera: [cafam, como-trabajo]
+    familia: trayectoria
+  - pregunta: "Does he have experience in mass transit?"
+    espera: [transmilenio-cm, cm-operaciones]
+    familia: trayectoria
+  - pregunta: "What work did he do for TransMilenio?"
+    espera: [transmilenio-cm, cm-operaciones]
+    familia: trayectoria
+  - pregunta: "What is the post-operational analysis he mentions?"
+    espera: [transmilenio-cm]
+    familia: trayectoria
+  - pregunta: "What did he do at Ceinfes?"
+    espera: [ceinfes]
+    familia: trayectoria
+  - pregunta: "Has he presented results to a board of directors?"
+    espera: [ceinfes, como-trabajo]
+    familia: trayectoria
+  - pregunta: "What was his first job after university?"
+    espera: [inglopres, origenes]
+    familia: trayectoria
+  - pregunta: "Has he led an ERP implementation?"
+    espera: [inglopres]
+    familia: trayectoria
+  - pregunta: "Does he have supply chain and logistics experience?"
+    espera: [inglopres, cafam]
+    familia: trayectoria
+  - pregunta: "Which industries or sectors has he worked in?"
+    espera: [origenes, fundacion-ctic, banco-pichincha]
+    familia: trayectoria
+  - pregunta: "How many years of professional experience does he have?"
+    espera: [origenes, lo-que-busco, logros, perfil]
+    familia: trayectoria
+  - pregunta: "Has he worked at a startup?"
+    espera: [vesting]
+    familia: trayectoria
+  - pregunta: "Has he worked for public entities or with city-scale operations?"
+    espera: [transmilenio-cm, cm-operaciones]
+    familia: trayectoria
+  # ── forma-de-trabajar
+  - pregunta: "How does Henry work when he faces a new problem?"
+    espera: [como-trabajo]
+    familia: forma-de-trabajar
+  - pregunta: "How does he lead a team?"
+    espera: [como-trabajo]
+    familia: forma-de-trabajar
+  - pregunta: "How does he communicate with business areas?"
+    espera: [como-trabajo]
+    familia: forma-de-trabajar
+  - pregunta: "What does he value in a project?"
+    espera: [como-trabajo]
+    familia: forma-de-trabajar
+  - pregunta: "Is he more of a process profile or a technology profile?"
+    espera: [como-trabajo, procesos-y-simulacion, origenes]
+    familia: forma-de-trabajar
+  - pregunta: "Why did he study industrial engineering?"
+    espera: [origenes]
+    familia: forma-de-trabajar
+  - pregunta: "What did he study and at which university?"
+    espera: [estudios, origenes]
+    familia: forma-de-trabajar
+  - pregunta: "Does he have design training?"
+    espera: [origenes, procesos-y-simulacion, estudios]
+    familia: forma-de-trabajar
+  - pregunta: "How did he move from process engineering to data?"
+    espera: [origenes]
+    familia: forma-de-trabajar
+  - pregunta: "What sets him apart from other data candidates?"
+    espera: [lo-que-busco, procesos-y-simulacion, como-trabajo]
+    familia: forma-de-trabajar
+  - pregunta: "How does he document what he does?"
+    espera: [procesos-y-simulacion, gobierno-de-datos-y-de-ia, plataforma-y-despliegue]
+    familia: forma-de-trabajar
+  - pregunta: "How does he handle working with people who don't report to him?"
+    espera: [gobierno-de-datos-y-de-ia, transmilenio-cm, como-trabajo]
+    familia: forma-de-trabajar
+  # ── certificaciones
+  - pregunta: "What certifications does he have?"
+    espera: [certificaciones]
+    familia: certificaciones
+  - pregunta: "Does he hold the Microsoft Fabric DP-600 certification?"
+    espera: [certificaciones, fabric-en-la-practica]
+    familia: certificaciones
+  - pregunta: "Is he certified in Azure artificial intelligence?"
+    espera: [certificaciones]
+    familia: certificaciones
+  - pregunta: "Does he have IBM data science certifications?"
+    espera: [certificaciones]
+    familia: certificaciones
+  - pregunta: "How long did it take him to earn the Fabric certification?"
+    espera: [certificaciones, como-aprendo]
+    familia: certificaciones
+  - pregunta: "How does he learn a technology he doesn't know?"
+    espera: [como-aprendo]
+    familia: certificaciones
+  - pregunta: "What does he do when the job asks for something he has never used?"
+    espera: [como-aprendo, plataforma-y-despliegue]
+    familia: certificaciones
+  - pregunta: "Does he have a postgraduate degree, a master's or a specialization?"
+    espera: [estudios, origenes]
+    familia: certificaciones
+  - pregunta: "Is he getting certified in anything right now?"
+    espera: [certificaciones, como-aprendo]
+    familia: certificaciones
+  - pregunta: "Which certification does he plan to take next?"
+    espera: [certificaciones, como-aprendo]
+    familia: certificaciones
+  # ── ia-y-agentes
+  - pregunta: "Does he have experience with generative artificial intelligence?"
+    espera: [agentes-en-produccion, rag-y-el-chat]
+    familia: ia-y-agentes
+  - pregunta: "Has he built artificial intelligence agents?"
+    espera: [agentes-en-produccion]
+    familia: ia-y-agentes
+  - pregunta: "What is the replicable core process for agents?"
+    espera: [vesting, agentes-en-produccion]
+    familia: ia-y-agentes
+  - pregunta: "How does he monitor an AI agent in production?"
+    espera: [agentes-en-produccion, vesting]
+    familia: ia-y-agentes
+  - pregunta: "Which agent frameworks has he used?"
+    espera: [agentes-en-produccion]
+    familia: ia-y-agentes
+  - pregunta: "Has he worked with large language models?"
+    espera: [rag-y-el-chat, agentes-en-produccion]
+    familia: ia-y-agentes
+  - pregunta: "Which RAG architectures has he implemented?"
+    espera: [rag-y-el-chat]
+    familia: ia-y-agentes
+  - pregunta: "How does the chat on this page work?"
+    espera: [rag-y-el-chat]
+    familia: ia-y-agentes
+  - pregunta: "Does he use embeddings or vector search?"
+    espera: [rag-y-el-chat]
+    familia: ia-y-agentes
+  - pregunta: "Which model provider does he work with?"
+    espera: [rag-y-el-chat]
+    familia: ia-y-agentes
+  - pregunta: "How does he keep the model from making up answers?"
+    espera: [rag-y-el-chat, agentes-en-produccion]
+    familia: ia-y-agentes
+  - pregunta: "Has he taken a machine learning model to production?"
+    espera: [analitica-predictiva, banco-pichincha]
+    familia: ia-y-agentes
+  - pregunta: "What is his stance on the responsible use of artificial intelligence?"
+    espera: [gobierno-de-datos-y-de-ia, agentes-en-produccion]
+    familia: ia-y-agentes
+  - pregunta: "Has he worked with natural language processing?"
+    espera: [rag-y-el-chat, agentes-en-produccion, certificaciones, analitica-predictiva]
+    familia: ia-y-agentes
+  - pregunta: "How big is his AI experience compared with his data experience?"
+    espera: [agentes-en-produccion, origenes, lo-que-busco]
+    familia: ia-y-agentes
+  - pregunta: "Has he built prompts or systems with instructions for a model?"
+    espera: [rag-y-el-chat, agentes-en-produccion]
+    familia: ia-y-agentes
+  # ── plataforma-y-datos
+  - pregunta: "What experience does he have with Microsoft Fabric?"
+    espera: [fabric-en-la-practica, vesting]
+    familia: plataforma-y-datos
+  - pregunta: "Has he designed a data architecture from scratch?"
+    espera: [vesting, fabric-en-la-practica]
+    familia: plataforma-y-datos
+  - pregunta: "What is a lakehouse and has he used one?"
+    espera: [fabric-en-la-practica, vesting]
+    familia: plataforma-y-datos
+  - pregunta: "Does he know semantic modeling?"
+    espera: [fabric-en-la-practica]
+    familia: plataforma-y-datos
+  - pregunta: "What is his level with Power BI?"
+    espera: [fabric-en-la-practica, bi-que-se-adopta]
+    familia: plataforma-y-datos
+  - pregunta: "Does he know DAX?"
+    espera: [fabric-en-la-practica, banco-pichincha]
+    familia: plataforma-y-datos
+  - pregunta: "Has he built ETL processes?"
+    espera: [transmilenio-cm, banco-pichincha]
+    familia: plataforma-y-datos
+  - pregunta: "How strong is he in SQL?"
+    espera: [cafam, certificaciones, inglopres]
+    familia: plataforma-y-datos
+  - pregunta: "Does he have experience with Azure?"
+    espera: [plataforma-y-despliegue, fabric-en-la-practica]
+    familia: plataforma-y-datos
+  - pregunta: "Does he know Google Cloud, Vertex AI or BigQuery?"
+    espera: [plataforma-y-despliegue]
+    familia: plataforma-y-datos
+  - pregunta: "Does he have experience with Docker and Kubernetes?"
+    espera: [plataforma-y-despliegue]
+    familia: plataforma-y-datos
+  - pregunta: "Does he know MLOps?"
+    espera: [plataforma-y-despliegue, analitica-predictiva]
+    familia: plataforma-y-datos
+  - pregunta: "Has he worked with big data or distributed processing?"
+    espera: [vesting, fabric-en-la-practica]
+    familia: plataforma-y-datos
+  - pregunta: "Has he built data pipelines that run on their own?"
+    espera: [transmilenio-cm, vesting, plataforma-y-despliegue]
+    familia: plataforma-y-datos
+  - pregunta: "What does he do to ensure data quality?"
+    espera: [cafam, fundacion-ctic, gobierno-de-datos-y-de-ia]
+    familia: plataforma-y-datos
+  - pregunta: "Does he know continuous integration and automated deployment?"
+    espera: [plataforma-y-despliegue]
+    familia: plataforma-y-datos
+  - pregunta: "What is the difference between a data lake and a data warehouse for him?"
+    espera: [fabric-en-la-practica]
+    familia: plataforma-y-datos
+  # ── bi-y-analitica
+  - pregunta: "How does he get people to use the dashboards he builds?"
+    espera: [bi-que-se-adopta, banco-pichincha]
+    familia: bi-y-analitica
+  - pregunta: "Does he have business intelligence experience?"
+    espera: [bi-que-se-adopta, banco-pichincha]
+    familia: bi-y-analitica
+  - pregunta: "How many users have adopted the dashboards he has made?"
+    espera: [bi-que-se-adopta, banco-pichincha]
+    familia: bi-y-analitica
+  - pregunta: "Has he developed predictive models?"
+    espera: [analitica-predictiva, banco-pichincha]
+    familia: bi-y-analitica
+  - pregunta: "Which tools does he use for machine learning?"
+    espera: [analitica-predictiva]
+    familia: bi-y-analitica
+  - pregunta: "How advanced is he in Python?"
+    espera: [analitica-predictiva, certificaciones]
+    familia: bi-y-analitica
+  - pregunta: "Which programming languages does he work in?"
+    espera: [certificaciones, analitica-predictiva]
+    familia: bi-y-analitica
+  - pregunta: "Does he have experience with R besides Python?"
+    espera: [certificaciones, analitica-predictiva]
+    familia: bi-y-analitica
+  - pregunta: "What is his statistics background?"
+    espera: [analitica-predictiva]
+    familia: bi-y-analitica
+  - pregunta: "Has he done demand forecasting?"
+    espera: [transmilenio-cm, analitica-predictiva]
+    familia: bi-y-analitica
+  - pregunta: "Does he use scikit-learn, pandas and numpy?"
+    espera: [analitica-predictiva, certificaciones]
+    familia: bi-y-analitica
+  - pregunta: "What accuracy did the models he put in production reach?"
+    espera: [banco-pichincha, analitica-predictiva]
+    familia: bi-y-analitica
+  - pregunta: "Has he automated reports or repetitive tasks?"
+    espera: [transmilenio-cm, cafam, cm-operaciones]
+    familia: bi-y-analitica
+  # ── gobierno
+  - pregunta: "Does he have data governance experience?"
+    espera: [gobierno-de-datos-y-de-ia, banco-pichincha, vesting]
+    familia: gobierno
+  - pregunta: "Does he know the ISO 42001 standard?"
+    espera: [gobierno-de-datos-y-de-ia]
+    familia: gobierno
+  - pregunta: "What does he understand by artificial intelligence governance?"
+    espera: [gobierno-de-datos-y-de-ia]
+    familia: gobierno
+  - pregunta: "Has he defined data policies, standards or guidelines?"
+    espera: [gobierno-de-datos-y-de-ia, fundacion-ctic, vesting]
+    familia: gobierno
+  - pregunta: "How does he handle personal or sensitive data?"
+    espera: [fundacion-ctic, gobierno-de-datos-y-de-ia]
+    familia: gobierno
+  - pregunta: "Has he led cross-cutting initiatives in large organizations?"
+    espera: [gobierno-de-datos-y-de-ia]
+    familia: gobierno
+  - pregunta: "Does he know ISO standards and work under standards?"
+    espera: [procesos-y-simulacion, inglopres, gobierno-de-datos-y-de-ia]
+    familia: gobierno
+  - pregunta: "How does he ensure the traceability of information?"
+    espera: [gobierno-de-datos-y-de-ia, las-investigaciones, bi-que-se-adopta]
+    familia: gobierno
+  - pregunta: "Who decides who can see which data on his platforms?"
+    espera: [gobierno-de-datos-y-de-ia, fabric-en-la-practica, vesting]
+    familia: gobierno
+  # ── procesos
+  - pregunta: "Does he know how to model processes in BPMN?"
+    espera: [procesos-y-simulacion, como-trabajo]
+    familia: procesos
+  - pregunta: "Has he done process or operations simulation?"
+    espera: [procesos-y-simulacion]
+    familia: procesos
+  - pregunta: "Has he used Bizagi or FlexSim?"
+    espera: [procesos-y-simulacion]
+    familia: procesos
+  - pregunta: "Does he have experience in continuous improvement and process optimization?"
+    espera: [procesos-y-simulacion, ceinfes, inglopres]
+    familia: procesos
+  - pregunta: "Has he worked with agile methodologies?"
+    espera: [ceinfes]
+    familia: procesos
+  - pregunta: "What good is industrial engineering in a data job?"
+    espera: [procesos-y-simulacion, origenes, como-trabajo]
+    familia: procesos
+  # ── vitrina
+  - pregunta: "What has he built on his own, outside of work?"
+    espera: [apps-pipeline]
+    familia: vitrina
+  - pregunta: "How many applications has he published?"
+    espera: [apps-pipeline]
+    familia: vitrina
+  - pregunta: "Does he have public code or repositories that can be reviewed?"
+    espera: [apps-pipeline, rag-y-el-chat, contacto]
+    familia: vitrina
+  - pregunta: "Which dashboards has he published with open data?"
+    espera: [los-tableros]
+    familia: vitrina
+  - pregunta: "Has he worked with open data or public sources?"
+    espera: [los-tableros, las-investigaciones]
+    familia: vitrina
+  - pregunta: "Can he read financial statements or accounting data?"
+    espera: [los-tableros]
+    familia: vitrina
+  - pregunta: "What research has he done?"
+    espera: [las-investigaciones]
+    familia: vitrina
+  - pregunta: "Has he written articles or papers?"
+    espera: [las-investigaciones]
+    familia: vitrina
+  - pregunta: "Which agents has he published in his portfolio?"
+    espera: [agentes-en-produccion, apps-pipeline, los-agentes-de-la-vitrina]
+    familia: vitrina
+  - pregunta: "What are the thirteen showcase agents for?"
+    espera: [los-agentes-de-la-vitrina]
+    familia: vitrina
+  - pregunta: "What is a harness and how does he use it in his agents?"
+    espera: [los-agentes-de-la-vitrina, las-investigaciones, agentes-en-produccion]
+    familia: vitrina
+  - pregunta: "How does he control the quality of what his agents produce with Claude Code?"
+    espera: [los-agentes-de-la-vitrina]
+    familia: vitrina
+  - pregunta: "How does he verify the figures he publishes?"
+    espera: [los-tableros, las-investigaciones, bi-que-se-adopta]
+    familia: vitrina
+  - pregunta: "What is this website built with?"
+    espera: [apps-pipeline, rag-y-el-chat]
+    familia: vitrina
+  - pregunta: "Do his applications have automated tests?"
+    espera: [plataforma-y-despliegue, como-aprendo, apps-pipeline]
+    familia: vitrina
+  # ── encaje
+  - pregunta: "What type of role is he looking for?"
+    espera: [lo-que-busco]
+    familia: encaje
+  - pregunta: "Is he willing to relocate to another country?"
+    espera: [lo-que-busco]
+    familia: encaje
+  - pregunta: "Does he work remotely?"
+    espera: [lo-que-busco]
+    familia: encaje
+  - pregunta: "What is his English level?"
+    espera: [lo-que-busco]
+    familia: encaje
+  # ── trayectoria
+  - pregunta: "What happened between May 2022 and March 2023?"
+    espera: [origenes]
+    familia: trayectoria
+  # ── encaje
+  - pregunta: "Which city does he live in?"
+    espera: [lo-que-busco, contacto]
+    familia: encaje
+  - pregunta: "Has he lived or studied abroad?"
+    espera: [lo-que-busco]
+    familia: encaje
+  - pregunta: "How do I contact him?"
+    espera: [contacto]
+    familia: encaje
+  - pregunta: "Why should I hire him and not someone else?"
+    espera: [lo-que-busco]
+    familia: encaje
+  - pregunta: "What motivates him professionally?"
+    espera: [lo-que-busco]
+    familia: encaje
+  - pregunta: "What is it like to work with him day to day?"
+    espera: [como-trabajo, lo-que-busco]
+    familia: encaje
+  - pregunta: "How does he prefer the selection process to be?"
+    espera: [lo-que-busco]
+    familia: encaje
+  - pregunta: "What would he do in his first ninety days on the job?"
+    espera: [lo-que-busco, como-trabajo]
+    familia: encaje
+  - pregunta: "What has he never done and would have to learn?"
+    espera: [plataforma-y-despliegue, como-aprendo]
+    familia: encaje
+
+ajenas:
+  - pregunta: "tell me a joke about cats"
+    guardrail: bloquea
+  - pregunta: "tell me a joke on cats"
+    guardrail: bloquea
+  - pregunta: "will it rain in Madrid tomorrow?"
+    guardrail: pasa
+    porque: >-
+      Medida sobre el índice inglés; la nota se completa con la palabra que
+      casa.
+  - pregunta: "what is the recipe for ajiaco?"
+    guardrail: bloquea
+    porque: >-
+      En español pasa por «receta» en una ficha; las fichas son español-solo y
+      «recipe» no aparece en el índice inglés.
+  - pregunta: "who won the football world cup?"
+    guardrail: pasa
+  - pregunta: "write me a love poem"
+    guardrail: bloquea
+  - pregunta: "what do you think about bitcoin?"
+    guardrail: bloquea
+  - pregunta: "cuéntame un chiste de gatos"
+    guardrail: bloquea
+  - pregunta: "¿qué tiempo hará mañana en París?"
+    guardrail: pasa
+    porque: >-
+      Una ajena en español contra el índice inglés: «mañana» está en la ficha
+      de Hablemos San, que es español-solo y vive en los dos índices.
+  - pregunta: "write a rust function that sorts a list"
+    guardrail: pasa
+  - pregunta: "recommend me a movie for the weekend"
+    guardrail: pasa
+  - pregunta: "translate this sentence into French"
+    guardrail: pasa
+  - pregunta: "what is the capital of Australia?"
+    guardrail: pasa
+  - pregunta: "how much is a ticket to Cartagena?"
+    guardrail: pasa
+  - pregunta: "what is my horoscope today?"
+    guardrail: pasa
+
+sin_cobertura:
+  - pregunta: "What are his salary expectations?"
+    donde_iria: lo-que-busco
+    porque: "A decision of the owner, not a missing datum: the fixed reply answers it today."
+  - pregunta: "When is he available to start?"
+    donde_iria: lo-que-busco
+    porque: "Depends on his contractual situation today, which is written nowhere and need not be unless he decides so."
+  - pregunta: "Is he available to travel?"
+    donde_iria: lo-que-busco
+    porque: "Neither the CV nor the site says it; one line in `condiciones` closes it, and the line is his."

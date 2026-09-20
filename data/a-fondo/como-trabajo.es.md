@@ -2,7 +2,7 @@
 slug: como-trabajo
 titulo: "Mi forma de trabajar"
 resumen: "Cómo trabajo, con la evidencia de cada rasgo: primero el proceso (BPMN), la adopción como indicador (50+ usuarios), liderazgo de equipos de hasta 20 personas, la junta directiva y las mesas del SITP, y qué instrumento va con cada decisión."
-estado: borrador
+estado: aprobado
 ancla: "#perfil"
 actualizado: 2026-09-20
 preguntas_de_prueba:

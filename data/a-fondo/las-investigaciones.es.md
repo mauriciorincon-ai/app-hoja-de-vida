@@ -2,7 +2,7 @@
 slug: las-investigaciones
 titulo: "Las investigaciones: método antes que resultado"
 resumen: "Siete líneas de investigación publicadas con su vacío medido —1.414, 900, 780, 279, 1.405, 119 y 900 obras revisadas— y sus hallazgos, producidas con dos harnesses: Design Science (52 criterios, umbrales congelados antes de medir) y Paper Computacional (44 criterios, ledger: si no está en el ledger no está en el paper)."
-estado: borrador
+estado: aprobado
 ancla: "/vitrina/investigaciones"
 actualizado: 2026-09-20
 preguntas_de_prueba:

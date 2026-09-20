@@ -2,7 +2,7 @@
 slug: cafam
 titulo: "Cafam — el WMS y el equipo de 20 (2020–2021)"
 resumen: "La implementación de Oracle WMS Cloud en un centro de distribución de medicamentos: 20 personas en pruebas durante seis meses, el BI de control, las integraciones en VBA y la calidad del dato en SQL."
-estado: borrador
+estado: aprobado
 ancla: "/proyectos/cafam"
 actualizado: 2026-09-20
 preguntas_de_prueba:

@@ -23,35 +23,33 @@ Cómo se escribe, campo por campo: `docs/MANUAL-DE-USO.md` → «Cómo alimentar
 
 | #  | Documento | Estado | Subsec. | `[CONFIRMAR]` | Cita hacia |
 | -- | --------- | ------ | ------: | ------------: | ---------- |
-| 1 | `como-trabajo` | borrador | 6 | 0 | `#perfil` |
-| 2 | `origenes` | borrador | 6 | 0 | `#trayectoria` |
-| 3 | `inglopres` | borrador | 7 | 0 | `#trayectoria` |
-| 4 | `ceinfes` | borrador | 8 | 0 | `#trayectoria` |
-| 5 | `cm-operaciones` | borrador | 6 | 0 | `#trayectoria` |
-| 6 | `cafam` | borrador | 7 | 0 | `/proyectos/cafam` |
-| 7 | `transmilenio-cm` | borrador | 7 | 0 | `/proyectos/transmilenio-cm` |
-| 8 | `banco-pichincha` | borrador | 8 | 0 | `/proyectos/banco-pichincha` |
-| 9 | `vesting` | borrador | 7 | 0 | `/proyectos/vesting` |
-| 10 | `fundacion-ctic` | borrador | 7 | 0 | `/proyectos/fundacion-ctic` |
-| 11 | `certificaciones` | borrador | 6 | 0 | `#certificaciones` |
-| 12 | `apps-pipeline` | borrador | 8 | 0 | `#vitrina` |
-| 13 | `lo-que-busco` | borrador | 6 | 0 | `#contacto` |
-| 14 | `fabric-en-la-practica` | borrador | 7 | 0 | `#skills` |
-| 15 | `agentes-en-produccion` | borrador | 7 | 0 | `/vitrina/agentes` |
-| 16 | `rag-y-el-chat` | borrador | 9 | 0 | `#vitrina` |
-| 17 | `gobierno-de-datos-y-de-ia` | borrador | 7 | 0 | `#skills` |
-| 18 | `plataforma-y-despliegue` | borrador | 6 | 0 | `#skills` |
-| 19 | `como-aprendo` | borrador | 6 | 0 | `#certificaciones` |
-| 20 | `bi-que-se-adopta` | borrador | 6 | 0 | `#skills` |
-| 21 | `analitica-predictiva` | borrador | 7 | 0 | `#skills` |
-| 22 | `procesos-y-simulacion` | borrador | 8 | 0 | `#skills` |
-| 23 | `los-tableros` | borrador | 6 | 0 | `/vitrina/tableros` |
-| 24 | `las-investigaciones` | borrador | 7 | 0 | `/vitrina/investigaciones` |
-| 25 | `los-agentes-de-la-vitrina` | borrador | 6 | 0 | `/vitrina/agentes` |
+| 1 | `como-trabajo` | aprobado | 6 | 0 | `#perfil` |
+| 2 | `origenes` | aprobado | 6 | 0 | `#trayectoria` |
+| 3 | `inglopres` | aprobado | 7 | 0 | `#trayectoria` |
+| 4 | `ceinfes` | aprobado | 8 | 0 | `#trayectoria` |
+| 5 | `cm-operaciones` | aprobado | 6 | 0 | `#trayectoria` |
+| 6 | `cafam` | aprobado | 7 | 0 | `/proyectos/cafam` |
+| 7 | `transmilenio-cm` | aprobado | 7 | 0 | `/proyectos/transmilenio-cm` |
+| 8 | `banco-pichincha` | aprobado | 8 | 0 | `/proyectos/banco-pichincha` |
+| 9 | `vesting` | aprobado | 7 | 0 | `/proyectos/vesting` |
+| 10 | `fundacion-ctic` | aprobado | 7 | 0 | `/proyectos/fundacion-ctic` |
+| 11 | `certificaciones` | aprobado | 6 | 0 | `#certificaciones` |
+| 12 | `apps-pipeline` | aprobado | 8 | 0 | `#vitrina` |
+| 13 | `lo-que-busco` | aprobado | 6 | 0 | `#contacto` |
+| 14 | `fabric-en-la-practica` | aprobado | 7 | 0 | `#skills` |
+| 15 | `agentes-en-produccion` | aprobado | 7 | 0 | `/vitrina/agentes` |
+| 16 | `rag-y-el-chat` | aprobado | 9 | 0 | `#vitrina` |
+| 17 | `gobierno-de-datos-y-de-ia` | aprobado | 7 | 0 | `#skills` |
+| 18 | `plataforma-y-despliegue` | aprobado | 6 | 0 | `#skills` |
+| 19 | `como-aprendo` | aprobado | 6 | 0 | `#certificaciones` |
+| 20 | `bi-que-se-adopta` | aprobado | 6 | 0 | `#skills` |
+| 21 | `analitica-predictiva` | aprobado | 7 | 0 | `#skills` |
+| 22 | `procesos-y-simulacion` | aprobado | 8 | 0 | `#skills` |
+| 23 | `los-tableros` | aprobado | 6 | 0 | `/vitrina/tableros` |
+| 24 | `las-investigaciones` | aprobado | 7 | 0 | `/vitrina/investigaciones` |
+| 25 | `los-agentes-de-la-vitrina` | aprobado | 6 | 0 | `/vitrina/agentes` |
 
-**25 documentos · 171 subsecciones · 29.948 palabras · 0 `[CONFIRMAR]` por resolver · 0 aprobados.**
-
-**Sin ninguna pregunta abierta, listos para que los leas y decidas:** `como-trabajo` · `origenes` · `inglopres` · `ceinfes` · `cm-operaciones` · `cafam` · `transmilenio-cm` · `banco-pichincha` · `vesting` · `fundacion-ctic` · `certificaciones` · `apps-pipeline` · `lo-que-busco` · `fabric-en-la-practica` · `agentes-en-produccion` · `rag-y-el-chat` · `gobierno-de-datos-y-de-ia` · `plataforma-y-despliegue` · `como-aprendo` · `bi-que-se-adopta` · `analitica-predictiva` · `procesos-y-simulacion` · `los-tableros` · `las-investigaciones` · `los-agentes-de-la-vitrina`.
+**25 documentos · 171 subsecciones · 29.970 palabras · 0 `[CONFIRMAR]` por resolver · 25 aprobados.**
 
 <!-- tabla-de-documentos:fin -->
 

@@ -3,7 +3,7 @@
 > **Generado por `pnpm corpus:informe` el 2026-09-20. No se edita a mano.**
 > Banco: `tests/fixtures/banco-de-preguntas.es.yaml` — **136 preguntas** de 10 familias, 15 preguntas ajenas y 3 huecos declarados.
 >
-> **HOY** = el índice publicado, tal como está en disco: **254 fragmentos** (los 24 documentos siguen en `borrador`, así que el chat todavía no ve nada de ellos).
+> **HOY** = el índice publicado, tal como está en disco: **494 fragmentos** (los 24 documentos siguen en `borrador`, así que el chat todavía no ve nada de ellos).
 > **M2** = el índice que existirá cuando los apruebes: **494 fragmentos**.
 > El `top-4` es el que de verdad entra al contexto del modelo.
 
@@ -13,14 +13,14 @@
 
 | | HOY | M2 |
 | --- | --- | --- |
-| Preguntas con su fuente en el top-4 | 12/136 (9 %) | **136/136 (100 %)** |
-| …y además de primeras | 9 (7 %) | **98 (72 %)** |
-| Preguntas que reciben «eso se me escapa» | 1 | **0** |
+| Preguntas con su fuente en el top-4 | 136/136 (100 %) | **136/136 (100 %)** |
+| …y además de primeras | 99 (73 %) | **99 (73 %)** |
+| Preguntas que reciben «eso se me escapa» | 0 | **0** |
 
 
 **Cómo leer las dos filas.** La primera es el gate: la fuente que declaré para esa pregunta entra al top-4, que es lo que el modelo ve. La segunda es más dura de lo que parece: cuenta solo cuando esa fuente llega **de primeras**, y no cuenta los casos —muchos— en que la primera es otra fuente igual de buena («¿Qué hizo en Cafam?» arranca por el hito de la trayectoria y no por el documento a fondo). Se deja estricta a propósito: así el número solo sube cuando el contenido mejora de verdad.
 
-**Y la columna HOY no es una nota baja: es el tamaño del cambio.** Está en 9 % porque las fuentes que estas preguntas necesitan son justo los 24 documentos que todavía no están aprobados. Lo que dice esa columna es cuántas de estas preguntas contesta hoy la hoja de vida sola.
+**Y la columna HOY no es una nota baja: es el tamaño del cambio.** Está en 100 % porque las fuentes que estas preguntas necesitan son justo los 24 documentos que todavía no están aprobados. Lo que dice esa columna es cuántas de estas preguntas contesta hoy la hoja de vida sola.
 
 ### Por familia (M2)
 
@@ -35,7 +35,7 @@
 | gobierno | 9 | 9 (100 %) | 9 (100 %) |
 | procesos | 6 | 6 (100 %) | 5 (83 %) |
 | vitrina | 15 | 15 (100 %) | 12 (80 %) |
-| encaje | 13 | 13 (100 %) | 9 (69 %) |
+| encaje | 13 | 13 (100 %) | 10 (77 %) |
 
 ## Las que no traen su fuente
 
@@ -43,9 +43,8 @@ Ninguna: las 136 preguntas del banco traen al menos una de sus fuentes esperadas
 
 ## Lo que cambia al aprobar
 
-**1 preguntas** que hoy reciben la respuesta fija «eso se me escapa» pasan a tener respuesta con fuente:
+**0 preguntas** que hoy reciben la respuesta fija «eso se me escapa» pasan a tener respuesta con fuente:
 
-- ¿Qué lo motiva profesionalmente?
 
 ## Huecos declarados
 
@@ -282,7 +281,7 @@ Preguntas que un reclutador hace y que **el corpus no contesta hoy**, con el doc
 
 **✅ ¿Cómo aprende una tecnología que no conoce?**
 
-- top-4: a-fondo-como-aprendo-criterios-de-aprendizaje, a-fondo-como-aprendo-evidencia-construido~3, a-fondo-plataforma-y-despliegue-como-la-cubro~1, a-fondo-procesos-y-simulacion-la-raiz
+- top-4: a-fondo-como-aprendo-criterios-de-aprendizaje, a-fondo-como-aprendo-evidencia-construido~3, a-fondo-plataforma-y-despliegue-como-la-cubro~1, a-fondo-ceinfes-gestion-por-procesos~2
 - primer fragmento: «Seis criterios, y una capacidad no está aprendida hasta cumplir los seis: 1. **Funcional:** la pieza resuelve el problema y supera escenarios representativos, no solo el recorrido ideal. 2. **Arquitectónico:** puedo just…»
 
 **☑️ ¿Qué hace cuando el puesto pide algo que no ha usado nunca?**
@@ -595,7 +594,7 @@ Preguntas que un reclutador hace y que **el corpus no contesta hoy**, con el doc
 
 **✅ ¿Sabe modelar procesos en BPMN?**
 
-- top-4: a-fondo-procesos-y-simulacion-bizagi-en-la-practica, a-fondo-ceinfes-gestion-por-procesos~1, a-fondo-procesos-y-simulacion-la-raiz, a-fondo-inglopres-el-erp~1
+- top-4: a-fondo-procesos-y-simulacion-bizagi-en-la-practica, a-fondo-procesos-y-simulacion-la-raiz, a-fondo-ceinfes-gestion-por-procesos~1, a-fondo-inglopres-el-erp~1
 - primer fragmento: «Con **Bizagi** modelo procesos en **BPMN**: actividades, decisiones, responsables, eventos, entradas, resultados y transferencias entre áreas. Su valor no es el diagrama: es un lenguaje común para contrastar cómo debería…»
 
 **☑️ ¿Ha hecho simulación de procesos o de operaciones?**
@@ -734,7 +733,7 @@ Preguntas que un reclutador hace y que **el corpus no contesta hoy**, con el doc
 
 **✅ ¿Cómo lo contacto?**
 
-- top-4: contacto, a-fondo-apps-pipeline-el-contrato-de-las-fichas, a-fondo-lo-que-busco-como-trabajo-con-quien-contrata, a-fondo-los-agentes-de-la-vitrina-produccion-de-piezas~1
+- top-4: contacto, a-fondo-apps-pipeline-el-contrato-de-las-fichas, a-fondo-los-agentes-de-la-vitrina-produccion-de-piezas~1, a-fondo-lo-que-busco-como-trabajo-con-quien-contrata
 - primer fragmento: «Bogotá, Colombia · Abierto a reubicación internacional y trabajo remoto. Email: mauricio.hmrc@gmail.com. LinkedIn: https://www.linkedin.com/in/henry-mauricio-rincon · GitHub: https://github.com/mauriciorincon-ai»
 
 **✅ ¿Por qué debería contratarlo a él y no a otro?**
@@ -749,7 +748,7 @@ Preguntas que un reclutador hace y que **el corpus no contesta hoy**, con el doc
 
 **☑️ ¿Cómo es trabajar con él en el día a día?**
 
-- top-4: a-fondo-certificaciones-el-dp-600~1, a-fondo-como-trabajo-como-hablo-con-el-negocio~2, a-fondo-como-trabajo-como-lidero~2, a-fondo-como-trabajo-como-lidero~1
+- top-4: a-fondo-certificaciones-el-dp-600~1, a-fondo-lo-que-busco-como-trabajo-con-quien-contrata, a-fondo-como-trabajo-como-hablo-con-el-negocio~2, a-fondo-como-trabajo-como-lidero~2
 - primer fragmento: «Preparé el **DP-600** entre julio y noviembre de 2024 y obtuve la credencial en **diciembre de 2024**, mientras trabajaba a tiempo completo y construía en Vesting un ecosistema de datos sobre **Microsoft Fabric**. Fabric…»
 
 **✅ ¿Cómo prefiere que sea el proceso de selección?**
@@ -757,10 +756,10 @@ Preguntas que un reclutador hace y que **el corpus no contesta hoy**, con el doc
 - top-4: a-fondo-lo-que-busco-como-trabajo-con-quien-contrata, a-fondo-origenes-del-proceso-a-la-ia, a-fondo-como-trabajo-como-lidero~2, a-fondo-gobierno-de-datos-y-de-ia-gobierno-de-mi-proceso
 - primer fragmento: «Prefiero una conversación sobre un problema real a un recorrido por el currículum. Con un problema y contexto suficiente puedo decir qué entendería primero, qué información necesitaría, qué hipótesis validaría y cuál ser…»
 
-**☑️ ¿Qué haría en sus primeros noventa días en el puesto?**
+**✅ ¿Qué haría en sus primeros noventa días en el puesto?**
 
-- top-4: a-fondo-origenes-el-primer-trabajo~1, a-fondo-inglopres-lo-que-dejo, a-fondo-como-trabajo-como-hablo-con-el-negocio~1, a-fondo-inglopres-cadena-e-iso
-- primer fragmento: «Mi primer empleo, en **Inglopres desde agosto de 2016**, fue como Ingeniero de Procesos: una operación de alquiler y venta de maquinaria pesada, un **ERP** (Odoo) que había que implementar para integrar áreas que trabaja…»
+- top-4: a-fondo-lo-que-busco-como-trabajo-con-quien-contrata, a-fondo-origenes-el-primer-trabajo~1, a-fondo-inglopres-lo-que-dejo, a-fondo-como-trabajo-como-hablo-con-el-negocio~1
+- primer fragmento: «Prefiero una conversación sobre un problema real a un recorrido por el currículum. Con un problema y contexto suficiente puedo decir qué entendería primero, qué información necesitaría, qué hipótesis validaría y cuál ser…»
 
 **☑️ ¿Qué no ha hecho nunca y tendría que aprender?**
 

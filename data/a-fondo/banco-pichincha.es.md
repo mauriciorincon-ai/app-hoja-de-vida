@@ -2,7 +2,7 @@
 slug: banco-pichincha
 titulo: "Banco Pichincha — BI que el negocio sí usa (2023)"
 resumen: "Cinco meses en banca: dashboards adoptados por 50+ usuarios (+25 % en decisiones), ETL −35 %, modelos de fuga, mora y riesgo en producción con scikit-learn (>90 %), un equipo de 5, 12 profesionales formados y el gobierno de datos co-liderado."
-estado: borrador
+estado: aprobado
 ancla: "/proyectos/banco-pichincha"
 actualizado: 2026-09-20
 preguntas_de_prueba:

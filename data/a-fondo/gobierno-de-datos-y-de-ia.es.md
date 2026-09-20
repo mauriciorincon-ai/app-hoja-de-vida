@@ -2,7 +2,7 @@
 slug: gobierno-de-datos-y-de-ia
 titulo: "Gobierno de datos y de IA"
 resumen: "Gobierno montado tres veces —co-liderado en banca, diseñado desde cero para 12 clientes en una startup de agentes, y hoy en salud bajo UNE-ISO/IEC 42001:2025 con 23 instrumentos— más el agente experto en ISO 42001 y las reglas con las que gobierno mi propio pipeline."
-estado: borrador
+estado: aprobado
 ancla: "#skills"
 actualizado: 2026-09-20
 preguntas_de_prueba:

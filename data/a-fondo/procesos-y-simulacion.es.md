@@ -2,7 +2,7 @@
 slug: procesos-y-simulacion
 titulo: "Procesos y simulación"
 resumen: "La raíz industrial con sus métodos: BPMN con Bizagi en cuatro empresas, simulación de eventos discretos con FlexSim en Inglopres y el despacho de medicamentos de Cafam, capacidad nominal frente a efectiva, estudio de tiempos con suplementos OIT, Kanban y Scrum, ISO 9001, y el proceso replicable de Vesting."
-estado: borrador
+estado: aprobado
 ancla: "#skills"
 actualizado: 2026-09-20
 preguntas_de_prueba:
@@ -32,7 +32,7 @@ CÓMO SE ESCRIBE ESTE ARCHIVO
 - Guía completa: docs/MANUAL-DE-USO.md → «Cómo alimentar el a fondo».
 -->
 
-## La raíz que no se ve en una lista de tecnologías
+## La raíz de procesos que no se ve en una lista de tecnologías
 
 <!-- seccion: la-raiz -->
 

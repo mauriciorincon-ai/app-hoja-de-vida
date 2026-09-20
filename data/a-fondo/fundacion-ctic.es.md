@@ -2,7 +2,7 @@
 slug: fundacion-ctic
 titulo: "Fundación CTIC — analítica en salud (2025–hoy)"
 resumen: "Mi rol actual: 42 productos analíticos en Power BI para 20 líderes de 15 procesos, gobierno y calidad de datos en salud, y la estrategia institucional de IA bajo UNE-ISO/IEC 42001:2025 con 23 instrumentos, 12 oportunidades y 7 casos evaluados."
-estado: borrador
+estado: aprobado
 ancla: "/proyectos/fundacion-ctic"
 actualizado: 2026-09-20
 preguntas_de_prueba:

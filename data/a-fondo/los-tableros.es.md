@@ -2,7 +2,7 @@
 slug: los-tableros
 titulo: "Los tableros: datos públicos, verificados"
 resumen: "Seis tableros sellados sobre datos abiertos —banca, empresas, ciclo monetario, gasto del Estado, energía y clima, Fórmula 1— construidos con Power BI Desktop, Power Query, DAX, PBIR escrito por script y Python, con las identidades del origen corridas enteras y los límites a la vista."
-estado: borrador
+estado: aprobado
 ancla: "/vitrina/tableros"
 actualizado: 2026-09-20
 preguntas_de_prueba:
