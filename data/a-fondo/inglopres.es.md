@@ -1,13 +1,14 @@
 ---
 slug: inglopres
 titulo: "Inglopres — Ingeniero de Procesos (2016–2017)"
-resumen: "Mi primer rol: ERP, cadena de suministro y un equipo de doce personas en Inglopres."
+resumen: "Mi primer empleo: un ERP (Odoo), las bases de datos que no existían, el estudio del trabajo y un equipo de doce personas con 95 % de satisfacción."
 estado: borrador
 ancla: "#trayectoria"
-actualizado: 2026-09-12
+actualizado: 2026-09-19
 preguntas_de_prueba:
   - "¿Qué hizo Henry en Inglopres?"
-  - "¿Qué experiencia tiene con ERP y cadena de suministro?"
+  - "¿Ha liderado la implementación de un ERP?"
+  - "¿Cuál fue su primer empleo al salir de la universidad?"
 ---
 
 <!--
@@ -40,60 +41,140 @@ de 12 personas, qué aprendiste. -->
 
 <!-- seccion: la-operacion -->
 
-Ingresé a Inglopres en agosto de 2016, recién egresado de Ingeniería Industrial de la Pontificia Universidad Javeriana, para asumir mi primer empleo como Ingeniero de Procesos. Permanecí en la organización hasta junio de 2017.
+Entré a **Inglopres en agosto de 2016**, recién egresado de Ingeniería Industrial de la
+Pontificia Universidad Javeriana. Fue mi primer empleo, como Ingeniero de Procesos, y estuve
+hasta junio de 2017.
 
-Inglopres se dedicaba al alquiler, la compra y la venta de maquinaria pesada para empresas y clientes individuales. Era una operación intensiva en activos, en la que las decisiones comerciales dependían de la disponibilidad de los equipos, su estado, mantenimiento, ubicación, programación y capacidad para responder oportunamente a las necesidades de cada cliente.
+Inglopres alquilaba, compraba y vendía maquinaria pesada para empresas y clientes individuales.
+Era una operación intensiva en activos: cada venta o alquiler dependía de qué máquina estaba
+disponible, en qué estado, en qué obra y con qué mantenimiento pendiente. La pregunta del
+negocio no era comercial antes que operativa. Era la misma pregunta.
 
-Mi encargo consistía en comprender esa operación de extremo a extremo y contribuir a integrarla. Debía identificar cómo se conectaban las áreas, cómo circulaba la información, dónde aparecían esperas o reprocesos y qué controles necesitaba la organización para operar con mayor eficiencia y ofrecer un servicio más consistente.
+Mi encargo fue entender esa operación de extremo a extremo e integrarla. En la práctica eso
+significó cuatro cosas: mapear cómo se conectaban las áreas, seguir por dónde circulaba la
+información, ubicar dónde aparecían esperas y reprocesos, y proponer los controles que faltaban.
+
+[CONFIRMAR: ¿de qué tamaño era la operación —número de máquinas en el parque, de empleados o de
+clientes activos? Una sola de las tres da la escala y hoy el documento no la tiene.]
 
 ## El ERP: integrar lo que estaba suelto
 
 <!-- seccion: el-erp -->
 
-Lideré la implementación de un sistema de planificación de recursos empresariales ERP (Odoo) para integrar los procesos de la organización y fortalecer la coordinación entre sus áreas. El propósito no era únicamente reemplazar registros dispersos por una plataforma, sino construir una visión compartida de la operación y mejorar la calidad de la información utilizada para gestionarla.
+Lideré la implementación de un **ERP —Odoo—**, el sistema de planificación de recursos
+empresariales con el que la organización pasó de registros dispersos a un solo lugar. El
+objetivo declarado era aumentar la eficiencia operativa y la consistencia del servicio; el
+objetivo real, más difícil, era que las áreas compartieran una misma versión de la operación.
 
-Esta experiencia me enseñó tempranamente que el software no integra una organización por sí solo. La verdadera integración ocurre cuando las áreas acuerdan qué significa cada dato, quién es responsable de producirlo, qué reglas determinan su transformación y cómo debe utilizarse a lo largo del proceso. Gran parte del trabajo más importante tuvo lugar antes de la primera pantalla, al convertir actividades, decisiones y excepciones en definiciones que el sistema pudiera representar.
+Antes de configurar un solo módulo hubo que separar dos cosas que la organización daba por
+iguales: **el proceso definido y el proceso ejecutado**. Levanté el segundo preguntando y
+observando, no leyendo manuales, y lo dibujé como flujo con sus actividades, sus decisiones y
+sus excepciones. Ese dibujo fue lo que el ERP pudo representar; sin él, la herramienta habría
+copiado el desorden con otra interfaz.
 
-Implementar el ERP también me permitió comprender que digitalizar un proceso sin revisarlo puede trasladar sus inconsistencias a la tecnología. Por eso, antes de configurar la solución, fue necesario hacer visible cómo funcionaba realmente la organización, diferenciar el proceso definido del proceso ejecutado y establecer una base común para integrar personas, activos, información y responsabilidades.
+El trabajo que más pesó ocurrió antes de la primera pantalla: acordar qué significaba cada dato,
+quién respondía por producirlo, qué reglas lo transformaban y en qué momento del proceso podía
+usarse. Aprendí ahí que un ERP no integra una organización. Integra lo que la organización ya
+acordó, y expone lo que no.
+
+[CONFIRMAR: ¿sobre qué versión se implementó? En 2016 Odoo venía de renombrarse desde OpenERP y
+convivían la 9 y la 10; decirlo evita una pregunta incómoda de alguien del gremio.]
 
 ## Las bases de datos que no existían
 
 <!-- seccion: las-bases-de-datos -->
 
-Para evaluar los procesos necesitaba indicadores confiables, pero una parte importante de la información requerida no existía, no se capturaba de forma consistente o permanecía distribuida entre diferentes registros. Me habían encargado mejorar la operación y descubrí que no podía hacerlo rigurosamente sin construir primero la información necesaria para medirla.
+Para evaluar los procesos necesitaba indicadores, y descubrí que la mitad de la información no
+existía: no se capturaba, o vivía repartida en registros que nadie cruzaba. Me habían pedido
+mejorar la operación y no podía medirla.
 
-Diseñé e implementé estructuras de bases de datos para organizar los eventos operativos, mejorar la precisión de los análisis y hacer posible el seguimiento de métricas relevantes. Este fue el punto en el que mi trayectoria comenzó a orientarse hacia los datos, no como un cambio deliberado de profesión, sino como una consecuencia natural del problema que necesitaba resolver.
+Diseñé e implementé las estructuras de base de datos que faltaban —en **SQLite**— para organizar
+los eventos operativos, cruzarlos y hacer seguimiento a las métricas del negocio. Definí las
+entidades, sus relaciones y las reglas que preservaban el significado de cada campo, y las
+consulté en **SQL** para producir los análisis. Ese fue el punto donde mi trayectoria giró hacia
+los datos, y no fue una decisión de carrera: fue lo que el problema exigía.
 
-Allí comprendí que un indicador confiable no comienza en un reporte. Comienza en la definición del proceso, en la captura correcta de sus eventos, en las relaciones entre sus entidades y en las reglas que preservan el significado de la información. Este aprendizaje se convirtió posteriormente en la base de mi trabajo con pipelines de datos, modelos semánticos, Power BI y plataformas analíticas empresariales.
+El caso que mejor lo explica es la **disponibilidad de una máquina**. No basta con que esté en
+el inventario. Hay que representar su estado operativo, su ubicación, su programación, su
+utilización y su condición de mantenimiento; si falta una de las cinco, el indicador miente
+justo cuando el comercial lo necesita. La calidad del análisis dependía de la fidelidad con que
+los datos describieran la operación, no de la herramienta que los mostrara.
 
-También aprendí que la arquitectura de datos debe comenzar en la decisión que se quiere habilitar. Para conocer la disponibilidad real de una máquina, por ejemplo, no bastaba con incluirla en un inventario. Era necesario representar su estado operativo, ubicación, programación, utilización y condición de mantenimiento. La calidad del análisis dependía directamente de la fidelidad con la que los datos describieran la operación.
+Aprendí que un indicador confiable no empieza en el reporte. Empieza en la definición del
+proceso y en la captura de sus eventos.
+
+## El estudio del trabajo: tiempos y suplementos por fatiga
+
+<!-- seccion: el-estudio-del-trabajo -->
+
+Medir la operación me obligó a medir también el trabajo humano que la ejecutaba. Hice **estudio
+de tiempos** sobre las actividades repetitivas de Inglopres: cronometraje, valoración del ritmo
+y cálculo del tiempo estándar.
+
+La parte que un cronómetro no resuelve son los **suplementos por fatiga** —las *allowances* del
+estudio del trabajo—. Un tiempo observado no es un estándar: hay que añadirle el suplemento que
+reconoce el esfuerzo, la repetitividad, las condiciones de ejecución y la variabilidad propia de
+una persona. Sin ese suplemento, el estándar se cumple una semana y se incumple el resto del
+año, y la culpa recae sobre quien ejecuta en vez de sobre quien midió.
+
+De ahí salió un criterio que sigo usando: **una mejora en velocidad no es una mejora**. Puede
+producir más errores, aumentar el reproceso o trasladar la carga a otra parte del sistema.
+Optimizar es encontrar el equilibrio sostenible entre capacidad, calidad, costo, servicio y
+condiciones de trabajo, y eso exige mirar los cinco a la vez.
+
+Es el mismo problema que años después convertí en una línea de investigación propia sobre
+suplementos por fatiga y balanceo de líneas.
+
+[CONFIRMAR: ¿el estudio de tiempos fue formal —con cronometraje y tabla de suplementos, tipo OIT
+o Niebel— o una estimación razonada? La diferencia importa para quien recluta en manufactura.]
 
 ## Cadena de suministro e ISO 9001
 
 <!-- seccion: cadena-e-iso -->
 
-También lideré iniciativas de optimización de la cadena de suministro orientadas a reducir costos operativos, fortalecer la coordinación de recursos y asegurar el cumplimiento de los requisitos asociados con la norma ISO 9001:2015. Esta responsabilidad amplió mi visión desde el desempeño de actividades individuales hacia la forma en que proveedores, recursos, información y controles determinaban conjuntamente la calidad del servicio.
+Lideré iniciativas de optimización de la **cadena de suministro** para reducir costos operativos
+y coordinar mejor los recursos. En una operación de maquinaria pesada eso se juega en tres
+variables: el **tiempo de respuesta** desde que un cliente pide hasta que el equipo está en
+obra, el **nivel de servicio** que la empresa logra sostener, y la **disponibilidad** del parque,
+que depende del mantenimiento tanto como de la programación.
 
-El análisis de la operación me llevó además a considerar las condiciones humanas bajo las cuales se ejecutaba el trabajo. Al estudiar tiempos, cargas y distribución de actividades, incorporé la consideración de holguras asociadas a la fatiga para evitar que un tiempo observado se convirtiera automáticamente en un estándar difícil de sostener. Comprendí que medir productividad exige considerar el esfuerzo, la repetitividad, las condiciones de ejecución y la variabilidad propia del trabajo humano.
+Ese trabajo tenía que cumplir además los requisitos de **ISO 9001:2015**, y fue mi primera
+escuela formal de rigor documental. No bastaba con que un proceso funcionara: había que definir
+cómo debía funcionar, quién respondía por cada actividad, qué controles se aplicaban y qué
+evidencia demostraba el cumplimiento.
 
-Este aprendizaje fue importante porque me enseñó a no interpretar los indicadores fuera de su contexto. Una mejora aparente en velocidad puede producir más errores, aumentar el reproceso o trasladar una carga excesiva hacia otra parte del sistema. Optimizar no consiste en maximizar aisladamente una métrica, sino en encontrar un equilibrio sostenible entre capacidad, calidad, costo, servicio y condiciones de trabajo.
+De ahí salió el hábito que no he soltado: **lo hecho deja rastro escrito**. La calidad no puede
+depender de que alguien recuerde cómo se hacía. Tiene que poder comprenderse, verificarse y
+repetirse sin esa persona delante.
 
-La norma ISO 9001:2015 fue, a su vez, mi primera escuela formal de trazabilidad y rigor documental. No bastaba con que un proceso funcionara. Era necesario definir cómo debía funcionar, quién respondía por cada actividad, qué controles se aplicaban y qué evidencia permitía demostrar el cumplimiento. Aprendí que la calidad no debe depender de la memoria de las personas, sino de una forma de trabajo que pueda ser comprendida, verificada y repetida.
-
-Esta experiencia también consolidó mi afinidad por los estándares como instrumentos para convertir principios en sistemas de gestión verificables y sostenibles. Haber desarrollado desde temprano una forma de trabajo basada en procesos, responsabilidades, controles, evidencia y mejora continua me ha facilitado incorporar actualmente los principios y requisitos de ISO/IEC 42001:2025 en el liderazgo de la estrategia de inteligencia artificial, trasladando ese mismo rigor al gobierno, la evaluación de riesgos y la gestión responsable de las soluciones de IA.
-
-Esa disciplina continúa presente en todo lo que construyo. Hoy la aplico en la trazabilidad de pipelines y modelos semánticos, en la documentación de aplicaciones y en la evaluación de soluciones y agentes de inteligencia artificial. Un dato debe conservar su procedencia, una transformación debe poder reproducirse y una respuesta generada mediante IA debe distinguir claramente entre aquello que proviene de una fuente, lo que fue calculado, lo que fue inferido y aquello que no se puede sostener con evidencia.
-
-## El equipo de doce
+## El equipo de doce y el 95 %
 
 <!-- seccion: el-equipo-de-doce -->
 
-En esta primera experiencia también lideré un equipo de doce personas. La gestión del trabajo, la asignación clara de responsabilidades y el seguimiento de los compromisos contribuyeron a alcanzar una tasa de satisfacción del cliente del noventa y cinco por ciento.
+Lideré un equipo de **doce personas**. Con asignación explícita de responsabilidades y
+seguimiento de los compromisos, la operación alcanzó una **tasa de satisfacción del cliente del
+95 %**.
 
-Fue mi primera oportunidad para comprender que liderar no consiste en supervisar constantemente la actividad, sino en reducir la ambigüedad que impide ejecutar bien. Cuando las personas entienden qué resultado se espera, cuál es su responsabilidad, de qué información disponen y qué significa que una tarea esté realmente terminada, pueden trabajar con mayor autonomía y responder con más consistencia.
+El resultado no vino de más control. Vino de definir mejor el trabajo: qué resultado se espera,
+quién responde, con qué información se cuenta y qué significa que algo esté terminado. Cuando
+esas cuatro están claras, la supervisión deja de ser el mecanismo y pasa a serlo la coordinación.
 
-El resultado no provino de incrementar el control, sino de definir mejor el trabajo, hacer visibles las prioridades y convertir el seguimiento en un mecanismo de coordinación. Esta experiencia estableció la base de mi estilo de liderazgo actual: claridad en el propósito, responsabilidades explícitas, avance observable, autonomía proporcional a la capacidad y responsabilidad compartida sobre el resultado.
+Fue mi primera lección de que liderar es **reducir ambigüedad**, no vigilar actividad. Y la
+segunda, que una operación no mejora de forma sostenible si el conocimiento vive en una sola
+cabeza: los procesos, los criterios y los controles tienen que quedar lo bastante claros para
+que el equipo los ejecute, los discuta y los mejore.
 
-También comprendí que una operación no mejora de manera sostenible cuando el conocimiento permanece concentrado en una sola persona. Los procesos, criterios y controles deben quedar suficientemente claros para que el equipo pueda ejecutarlos, cuestionarlos y mejorarlos. Este principio continúa guiando la forma en que hoy lidero iniciativas de datos e inteligencia artificial: mi objetivo no es convertirme en el punto obligatorio de todas las decisiones, sino construir equipos y capacidades que puedan avanzar con criterio incluso cuando no estoy presente.
+[CONFIRMAR: ¿de qué disciplinas era el equipo de doce —operarios, técnicos de mantenimiento,
+personal administrativo, una mezcla? Es la pregunta que sigue abierta desde la primera versión.]
 
-Vista en retrospectiva, Inglopres reunió los fundamentos de todo lo que construiría después. Allí aprendí a comprender una operación como sistema, traducir procesos en estructuras de información, integrar áreas mediante tecnología, medir con atención al contexto, gestionar con evidencia y liderar desde la claridad. Todavía no hablaba de modelos semánticos, plataformas analíticas o arquitecturas de inteligencia artificial, pero ya trabajaba sobre los problemas que esas capacidades me permitirían abordar posteriormente con mayor profundidad y escala.
+## Lo que dejó este primer trabajo
+
+<!-- seccion: lo-que-dejo -->
+
+Inglopres reunió, en once meses, los fundamentos de todo lo que construí después: entender una
+operación como sistema, traducir procesos en estructuras de información, integrar áreas con
+tecnología, medir sin descontextualizar y liderar desde la claridad.
+
+Todavía no hablaba de modelos semánticos ni de plataformas analíticas. Pero el problema que
+resolvía en 2016 —que la decisión necesitaba un dato que nadie había construido— es exactamente
+el mismo que resuelvo hoy, con otras herramientas y otra escala.

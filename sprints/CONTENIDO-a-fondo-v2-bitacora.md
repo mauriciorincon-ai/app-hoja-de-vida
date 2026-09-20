@@ -149,3 +149,50 @@ ahora. El golden set exige que cada pregunta traiga a su documento en el top-4: 
 tercera pregunta contra una prosa que F2 va a reescribir entera sería escribirla dos veces. El
 mínimo del esquema (`a-fondo.mjs`) sube a 3 en F3, cuando los 25 cumplan.
 
+---
+
+## F2 — Reescritura. Grupo 1: trayectoria
+
+### `inglopres` — el documento patrón
+
+Se reescribe primero el más pequeño del corpus para fijar el patrón antes de aplicarlo a los
+otros veintitrés. Es además el que la auditoría llamó «el mejor calibrado»: si las diez reglas
+no lo mejoran, no mejoran ninguno.
+
+| Medida                | Antes | Después |
+| --------------------- | ----: | ------: |
+| Palabras              | 1.291 |   1.182 |
+| Subsecciones          |     5 |       7 |
+| La más larga          |   424 |     214 |
+| Subsecciones sin dato |     1 |       0 |
+| Preguntas de prueba   |     2 |       3 |
+| Gates en rojo         |     5 |       0 |
+
+**Qué cambió, regla por regla:**
+
+- **Un hecho, un dueño.** Salen de aquí tres cosas que tenían otro dueño: ISO/IEC 42001 y los
+  agentes de IA (van a `gobierno-de-datos-y-de-ia`; este es un documento de 2016), el método de
+  ISO 9001 como escuela de rigor (va a `procesos-y-simulacion`; aquí queda solo el hecho de
+  haberla vivido) y «no ser el punto obligatorio de todas las decisiones» (va a `como-trabajo`).
+- **Un fragmento, una idea con un dato.** `cadena-e-iso` mezclaba cuatro planos en 424 palabras.
+  Se parte: el estudio del trabajo gana subsección propia y la cadena se queda con lo suyo.
+- **Léxico.** Entra **SQL**, que el banco de preguntas esperaba de este documento y que no
+  aparecía ni una vez, ni en la versión vieja ni en la revisada.
+- **Tecnicismos con soporte.** «Holguras por fatiga» pasa a **«suplementos por fatiga»**: en
+  estudio del trabajo el término castellano es ese, «holgura» es el *slack* de programación de
+  proyectos. El propio dueño escribe «suplementos» en `las-investigaciones`. Se nombran además
+  el método (estudio de tiempos, cronometraje, ritmo, tiempo estándar) y los conceptos de cadena
+  que faltaban (tiempo de respuesta, nivel de servicio, disponibilidad del parque).
+- **HICE antes que APRENDÍ.** `cadena-e-iso` iba 15/70; el epílogo de carrera que colgaba del
+  final de la subsección de liderazgo sale a su propia subsección de cierre, de 76 palabras.
+- **Honestidad publicada.** Se restituyen los tres `[CONFIRMAR]` que la revisión había borrado
+  sin responder: el tamaño de la operación, la versión de Odoo y las disciplinas del equipo de
+  doce. Se añade uno nuevo: si el estudio de tiempos fue formal o una estimación razonada.
+
+**Efecto colateral medido:** al encoger `inglopres`, el golden set pasó de 5 documentos en rojo
+a 4. `como-trabajo` volvió a contestar «¿Cómo lidera equipos y habla con los stakeholders?»
+porque dejó de competir con la reflexión de liderazgo que vivía aquí. Es la primera evidencia de
+que el problema no era el tamaño del corpus sino la competencia entre duplicados.
+
+**Marcador de los gates sobre el corpus entero:** 213 → **209**.
+
