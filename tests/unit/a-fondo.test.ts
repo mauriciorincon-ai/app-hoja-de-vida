@@ -35,6 +35,7 @@ actualizado: 2026-09-12
 preguntas_de_prueba:
   - "¿Qué hizo Henry en Vesting?"
   - "¿Qué es el proceso core?"
+  - "¿Qué demuestra el monitoreo de agentes?"
 ---
 ${extra}`;
 
@@ -82,9 +83,11 @@ describe("parseDocumento — frontmatter y subsecciones", () => {
     expect(() => doc(estadoRaro)).toThrowError(/- estado:/);
   });
 
-  it("exige al menos dos preguntas de prueba — la prueba viaja con el contenido", () => {
+  it("exige al menos tres preguntas de prueba — la prueba viaja con el contenido, y una de afuera", () => {
     const una = FM(CUERPO).replace('  - "¿Qué es el proceso core?"\n', "");
     expect(() => doc(una)).toThrowError(/preguntas_de_prueba/);
+    const dos = FM(CUERPO).replace('  - "¿Qué demuestra el monitoreo de agentes?"\n', "");
+    expect(() => doc(dos)).toThrowError(/al menos 3/);
   });
 
   it("rechaza ids de subsección duplicados", () => {
@@ -447,5 +450,62 @@ describe("revisarAduana — la lista entera, de una", () => {
       catalogo,
     });
     expect(problemas.join("\n")).toContain("sigue en «borrador»");
+  });
+});
+
+/**
+ * «Cuándo usar» (a fondo v3): la descripción del documento, como la de una
+ * skill, entra al índice como el PRIMER fragmento del documento. Rojo de
+ * paridad: si el español lo trae y el inglés no, la aduana lo nombra.
+ */
+describe("cuando_usar — la descripción del documento entra al índice", () => {
+  const md = (extra: string) =>
+    [
+      "---",
+      "slug: demo",
+      'titulo: "Demo"',
+      'resumen: "Un resumen de prueba."',
+      extra,
+      "estado: aprobado",
+      'ancla: "#perfil"',
+      "actualizado: 2026-09-21",
+      "preguntas_de_prueba:",
+      '  - "¿Uno?"',
+      '  - "¿Dos?"',
+      '  - "¿Tres?"',
+      "---",
+      "",
+      "## Sección",
+      "",
+      "<!-- seccion: s -->",
+      "",
+      "Texto con un dato: 2024.",
+      "",
+    ].join("\n");
+  const con = () =>
+    parseDocumento(
+      md('cuando_usar: "Úsalo cuando pregunten por la demo, sus cifras y su alcance."'),
+      "demo.es.md",
+    );
+  const sin = () => parseDocumento(md(""), "demo.en.md");
+
+  it("con el campo, el primer fragmento es la entrada: resumen + cuándo usar, con la ancla del documento", () => {
+    const chunks = chunksDeAFondo([con()], "A fondo");
+    expect(chunks[0].id).toBe("a-fondo-demo-cuando-usar");
+    expect(chunks[0].texto).toContain("Un resumen de prueba.");
+    expect(chunks[0].texto).toContain("Úsalo cuando pregunten por la demo");
+    expect(chunks[0].ancla).toBe("#perfil");
+    expect(chunks).toHaveLength(2);
+  });
+
+  it("sin el campo no hay fragmento de entrada; con menos de 40 caracteres, la cabecera es inválida", () => {
+    expect(chunksDeAFondo([sin()], "A fondo")).toHaveLength(1);
+    expect(() => parseDocumento(md('cuando_usar: "corto"'), "demo.es.md")).toThrow(/40/);
+  });
+
+  it("paridad: el campo en un idioma y no en el otro es un rojo con nombre", () => {
+    const problemas = problemasDeParidad([con()], [sin()]);
+    expect(problemas.some((p: string) => p.includes("cuando_usar"))).toBe(true);
+    expect(problemasDeParidad([con()], [con()]).filter((p: string) => p.includes("cuando_usar"))).toEqual([]);
   });
 });

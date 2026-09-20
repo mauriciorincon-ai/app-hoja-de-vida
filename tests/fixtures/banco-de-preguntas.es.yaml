@@ -235,7 +235,7 @@ preguntas:
     espera: [gobierno-de-datos-y-de-ia, agentes-en-produccion]
     familia: ia-y-agentes
   - pregunta: "¿Ha trabajado con procesamiento de lenguaje natural?"
-    espera: [rag-y-el-chat, agentes-en-produccion, certificaciones]
+    espera: [rag-y-el-chat, agentes-en-produccion, certificaciones, analitica-predictiva]
     familia: ia-y-agentes
   - pregunta: "¿Qué tan grande es su experiencia con IA comparada con la de datos?"
     espera: [agentes-en-produccion, origenes, lo-que-busco]
@@ -324,7 +324,7 @@ preguntas:
     espera: [certificaciones, analitica-predictiva]
     familia: bi-y-analitica
   - pregunta: "¿Tiene experiencia con R además de Python?"
-    espera: [certificaciones]
+    espera: [certificaciones, analitica-predictiva]
     familia: bi-y-analitica
     nota: >-
       Medido: «¿Programa en R?» NO funciona, y no es un hueco de contenido. La
@@ -431,7 +431,16 @@ preguntas:
     espera: [las-investigaciones]
     familia: vitrina
   - pregunta: "¿Qué agentes tiene publicados en su portafolio?"
-    espera: [agentes-en-produccion, apps-pipeline]
+    espera: [agentes-en-produccion, apps-pipeline, los-agentes-de-la-vitrina]
+    familia: vitrina
+  - pregunta: "¿Para qué sirven los trece agentes de la vitrina?"
+    espera: [los-agentes-de-la-vitrina]
+    familia: vitrina
+  - pregunta: "¿Qué es un harness y cómo lo usa en sus agentes?"
+    espera: [los-agentes-de-la-vitrina, las-investigaciones, agentes-en-produccion]
+    familia: vitrina
+  - pregunta: "¿Cómo controla la calidad de lo que producen sus agentes con Claude Code?"
+    espera: [los-agentes-de-la-vitrina]
     familia: vitrina
   - pregunta: "¿Cómo verifica las cifras que publica?"
     espera: [los-tableros, las-investigaciones, bi-que-se-adopta]
@@ -455,6 +464,12 @@ preguntas:
   - pregunta: "¿Trabaja en remoto?"
     espera: [lo-que-busco]
     familia: encaje
+  - pregunta: "¿Qué nivel de inglés tiene?"
+    espera: [lo-que-busco]
+    familia: encaje
+  - pregunta: "¿Qué pasó entre mayo de 2022 y marzo de 2023?"
+    espera: [origenes]
+    familia: trayectoria
   - pregunta: "¿En qué ciudad vive?"
     espera: [lo-que-busco, contacto]
     familia: encaje
@@ -503,11 +518,24 @@ ajenas:
       La versión con «sobre» puntuaba 4,28 y pasaba, porque la preposición
       estaba en 42 de 162 fragmentos. Entró a STOPWORDS en este mismo sprint.
   - pregunta: "¿va a llover mañana en Madrid?"
-    guardrail: bloquea
+    guardrail: pasa
+    porque: >-
+      Desde que las fichas de la vitrina entran al índice (ADR-023), «mañana»
+      aparece en la ficha de Hablemos San («cada mañana»). La ficha es de otra
+      casa y no se edita aquí; la pregunta llega al modelo y el prompt la
+      declina.
   - pregunta: "¿cuál es la receta del ajiaco?"
-    guardrail: bloquea
+    guardrail: pasa
+    porque: >-
+      Con las fichas en el índice (ADR-023), «receta» aparece en los límites de
+      la ficha de ARKHÉ. En los documentos a fondo la palabra se retiró
+      («publica los componentes, no la fórmula»); la ficha es de otra casa.
   - pregunta: "¿quién ganó el mundial de fútbol?"
-    guardrail: bloquea
+    guardrail: pasa
+    porque: >-
+      «mundial» aparece en la ficha del tablero de energía y clima. En los
+      documentos a fondo se retiraron «ganó» y «total mundial»; la ficha no se
+      edita aquí.
   - pregunta: "dame un poema de amor"
     guardrail: bloquea
   - pregunta: "¿qué opinas del bitcoin?"
@@ -553,21 +581,10 @@ sin_cobertura:
     porque: >-
       Depende de tu situación contractual de hoy, que no está escrita en ninguna
       parte y no tiene por qué estarlo sin que tú lo decidas.
-  - pregunta: "¿Qué nivel de inglés tiene?"
-    donde_iria: lo-que-busco
-    porque: >-
-      El corpus menciona el curso intensivo con IELTS en Melbourne, pero no
-      declara un nivel. El informe de discrepancias tiene el detalle: el
-      respaldo es de hace doce años y está por debajo del B2 que declara la
-      hoja de vida. Qué declarar lo decides tú.
+
   - pregunta: "¿Tiene disponibilidad para viajar?"
     donde_iria: lo-que-busco
     porque: >-
       Ni la hoja de vida ni el sitio lo dicen. Una línea en `condiciones` lo
       cierra, pero la línea es tuya.
-  - pregunta: "¿Qué pasó entre mayo de 2022 y marzo de 2023?"
-    donde_iria: origenes
-    porque: >-
-      Es el único hueco largo del recorrido —diez meses— y está señalado en el
-      informe de discrepancias y en los COMPLEMENTOS de la hoja de vida. Nadie
-      puede escribirlo sino tú.
+

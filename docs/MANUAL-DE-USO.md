@@ -110,7 +110,9 @@ el mensaje te llega al correo.
 - **El tercer estado — «en curso» (revisión post-S8):** una certificación que estás preparando
   se lista con `estado: "en curso"` y **sin `fecha`** (una obtenida sin fecha rompe el build). La
   HOME la enseña con el chip «En curso» en el sitio de la fecha; `/cv` y el chat dicen «(en
-  curso)». Así entraron el **AI-103** y el **DP-100**, en paralelo. El logro «5 certificaciones» sigue contando solo las
+  curso)». Así entraron el **AI-103** y el **AI-300**, en paralelo. (El DP-100 ocupó ese lugar hasta
+  el 2026-09-19: Microsoft lo retiró el 1 de junio de 2026 y declaró el AI-300 como su
+  reemplazo, así que salió de `certificaciones` y pasó a `data/credenciales-nombradas.yaml`.) El logro «5 certificaciones» sigue contando solo las
   obtenidas. **Y el gate vigila lo contrario:** cada vez que el titular, el perfil, un logro,
   `messages/` o `apps.yaml` nombran un código en curso, tienen que llevar «en curso» (o «en
   ruta», «en preparación», «in progress») a menos de 48 caracteres — «(AI-103)» a secas pone
@@ -496,14 +498,24 @@ esa palabra, se traduce, y el siguiente deploy lo pone a responder.
 slug: vesting # = nombre del archivo, sin el idioma
 titulo: "Vesting — la plataforma de datos para agentes de IA"
 resumen: "Una o dos líneas: de qué va este documento."
+cuando_usar: "Úsalo cuando pregunten por Vesting, Microsoft Fabric desde cero, el monitoreo de agentes…" # como la descripción de una skill
 estado: borrador # borrador | aprobado
 ancla: "/proyectos/vesting" # a dónde navega la cita — VA ENTRE COMILLAS
 actualizado: 2026-09-12
-preguntas_de_prueba: # mínimo 2
+preguntas_de_prueba: # mínimo 3 — y una de ellas con palabras de AFUERA, no del documento
   - "¿Cómo diseñó Henry el ecosistema de datos de Vesting?"
   - "¿Qué es el proceso core replicable de agentes?"
+  - "¿Cómo monitorea un agente de IA en producción?"
 ---
 ```
+
+**`cuando_usar` es la descripción de una skill.** Una o dos frases con **las palabras con las
+que alguien preguntaría** por este documento: nombres de empresas, herramientas, temas. Entra al
+índice del chat como el **primer fragmento del documento**, junto al resumen, así que cuando la
+pregunta de afuera encaja con la descripción, el chat encuentra el documento entero antes que una
+subsección suelta. Medido al introducirlo (2026-09-21): las respuestas «de primeras» del banco
+subieron de 103 a 106 en español y de 104 a 118 en inglés. Si el español lo trae, el gemelo
+también (la aduana lo exige).
 
 **Las comillas del `ancla` no son decoración:** sin ellas, un `#perfil` lo lee YAML como un
 comentario y el campo llega vacío. El build lo dice, pero es más fácil no tropezar.
@@ -533,16 +545,55 @@ citable**: cuando el chat responde con ella, el chip `[n]` lleva al `ancla` del 
 teléfonos; a un jefe, un cliente o un compañero mencionado por su nombre **no lo caza un regex**.
 Esa decisión es tuya, documento por documento.
 
-**Ninguna cifra, fecha ni logro sin fuente.** Si algo falta, se escribe `[CONFIRMAR: qué falta]`
-y ahí se queda hasta que lo confirmes. Nunca un dato plausible inventado. Es la única marca que
-el build persigue de verdad: mientras esté, el documento no puede pasar a `aprobado`.
+**Ninguna cifra, fecha ni logro sin fuente — y sin `[CONFIRMAR]` (regla del dueño, 2026-09-20).**
+Un dato que falta **se omite**; nunca se inventa y nunca se deja como pregunta dentro de la
+prosa. Si algo es interpretable (un efecto «del orden de», un porcentaje aproximado) se estima
+**y se declara como estimación** en el texto («del orden de», «cerca de»), y las estimaciones
+**no** entran a `cv.*.yaml`, que es la fuente que el sitio publica como hecho. La marca
+`[CONFIRMAR]` sigue existiendo solo como red del build: si aparece, el documento no puede pasar
+a `aprobado`. Las preguntas al dueño van en una hoja aparte, fuera del repositorio, todas de
+una vez.
+
+**Y hay seis cosas más que `pnpm test` no deja pasar (a fondo v2, 2026-09-20).** Nacieron de
+auditar el corpus de partida —213 rojos— y se quedan vigilando lo que escribas después:
+
+| Gate                        | Qué exige                                                                                                                                                                                                                   | Dónde se ajusta                              |
+| --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
+| **Cifras del sitio**        | Cuando nombras cuántas apps, piezas, agentes, investigaciones, tableros o credenciales hay, el número es el que el sitio publica (se deriva de `content/` y `cv.es.yaml`). «Cinco apps» con seis publicadas se pone en rojo. | `tests/fixtures/cifras-a-fondo.yaml`         |
+| **Fechas de cargos**        | Una fecha dentro de la frase de un cargo cae dentro de su periodo, y los periodos coinciden con `cv.trayectoria` mes a mes.                                                                                                 | `tests/fixtures/cargos-a-fondo.yaml`         |
+| **Densidad**                | Cada subsección tiene ≤ 400 palabras **y** al menos un dato concreto (una cifra, un mes, una herramienta o una organización del CV). Una subsección de opinión sin nada verificable no se publica.                        | `scripts/a-fondo-coherencia.mjs`             |
+| **Léxico obligatorio**      | Cada documento dice literalmente las palabras con las que alguien de afuera lo buscaría (la búsqueda es léxica).                                                                                                            | `tests/fixtures/lexico-a-fondo.yaml`         |
+| **Sin párrafos repetidos**  | Ningún bloque de 25 palabras aparece en dos documentos: lo que se repite se dice en uno y el otro remite.                                                                                                                  | —                                            |
+| **Normas con año**          | `ISO/IEC 42001` va sin año o con `:2023`; `UNE-ISO/IEC 42001` con `:2025`; `ISO 9001` con `:2015`.                                                                                                                         | `scripts/a-fondo-coherencia.mjs` (`NORMAS`)  |
+
+Cuando agregues un cargo, una cifra del sitio o un tema nuevo, el fixture correspondiente se
+actualiza en el mismo commit; el gate te dirá cuál.
 
 **El ritmo:** escribe un documento → déjalo en `borrador` todo el tiempo que quieras → cuando
 esté bien, `aprobado` + su gemelo en inglés → commit + push. En local puedes comprobarlo con
 `pnpm build`: la última línea dice cuántos documentos hay y cuántos están aprobados e indexados.
 
 **Un tema nuevo:** copia cualquier documento, cámbiale el `slug` (que debe coincidir con el
-nombre del archivo) y escribe. No hay lista que actualizar en ninguna parte.
+nombre del archivo) y escribe. Lo único que hay que actualizar es el léxico obligatorio del
+documento (`tests/fixtures/lexico-a-fondo.yaml`) y tres preguntas suyas en el banco.
+
+**El gemelo en inglés** se traduce del español ya cerrado, subsección por subsección: mismos
+ids, mismas tablas, mismas cifras (con la puntuación inglesa: `1,000`, `52%`), **nada nuevo en
+inglés**. El glosario de términos fijos (vitrina → showcase, ficha → sheet, tablero →
+dashboard, a fondo → in-depth…) vive en la bitácora `sprints/CONTENIDO-a-fondo-v2-bitacora.md`.
+
+### Las fichas de la vitrina también hablan por el chat · desde a fondo v2
+
+Desde el 2026-09-20 (ADR-023) el índice del chat incluye las **32 fichas de la vitrina**: por
+cada app, su presentación, funcionalidades, cifras y límites; por cada agente, investigación o
+tablero, su presentación, cifras, límites y bloques. Cada fragmento cita hacia la ficha
+(`/vitrina/apps/<slug>` o `/vitrina/<frente>/<slug>`). No hay nada que escribir: **una ficha que
+llega a `content/` entra al chat en el siguiente build**.
+
+Las fichas pesan **la mitad** que tus documentos en el ranking: son evidencia de una pieza
+concreta, y tu voz es el documento a fondo. Si preguntan por una pieza, la ficha gana; si
+preguntan por ti, gana el documento. El número (0,5) salió de medir el banco de preguntas y está
+en el ADR.
 
 ### Cómo se prueba que el contenido contesta · desde Sprint 008
 
@@ -552,7 +603,7 @@ pregunta**, y eso no se mira a ojo: hay dos conjuntos de preguntas que corren en
 | Conjunto                                  | Dónde vive                                    | Qué exige                                                                   |
 | ----------------------------------------- | --------------------------------------------- | --------------------------------------------------------------------------- |
 | **Las preguntas de prueba del documento** | en su propia cabecera (`preguntas_de_prueba`) | Que cada pregunta traiga **su** documento. La prueba viaja con el contenido |
-| **El banco de preguntas**                 | `tests/fixtures/banco-de-preguntas.es.yaml`   | Que 131 preguntas **de afuera** traigan la fuente que debería contestarlas  |
+| **El banco de preguntas**                 | `tests/fixtures/banco-de-preguntas.es.yaml` y su gemelo `.en.yaml` | Que 136 preguntas **de afuera**, en cada idioma, traigan la fuente que debería contestarlas |
 
 **Por qué hacen falta los dos.** Las preguntas de prueba de un documento se escriben con el
 documento delante, así que usan sus palabras. Quien recluta usa las suyas: «MLOps», «lakehouse»,
@@ -606,4 +657,5 @@ chat hoy y cuáles traería con la base aprobada. Ese informe **se genera, no se
 | 007           | Las estanterías: los cuatro frentes de la vitrina abiertos con piezas reales (6 apps · 13 agentes · 7 investigaciones · 6 tableros). Un escaparate por frente y una ficha por pieza, con el mismo renderizador de las apps; las fichas las produce quien construye cada pieza y llegan por PR de contenido. Contrato v1.3.0: los tableros añaden «Lo que dicen los datos» y «Cómo se ve» (galería de capturas), opcionales y con renumeración automática.                                                                                                                                                                         |
 | 008           | El «a fondo»: un documento por tema en `data/a-fondo/` como corpus profundo del chat, con aduana que rompe el build nombrando archivo y campo (cabecera, ids duplicados, paridad ES/EN de los aprobados, privacidad mecánica, **y ningún `[CONFIRMAR]` en un aprobado**) y un `estado` que separa el borrador de lo citable. **Banco de 131 preguntas de afuera** como prueba del contenido, con su informe generado. **El destino de toda cita se verifica contra el sitio real** — así murió el `#apps` que llevaba una revisión entera apuntando a una sección retirada. `data/historia/` retirada, sus 12 secciones migradas. |
 | post-S7       | Revisión del dueño sobre la HOME: la trayectoria como índice que baja contigo (línea continua, círculo fijo a media pantalla, año grande); la vitrina en el sitio de Proyectos y los case studies desde su hito; Estudios como sección y como dato (`cv.estudios`); Skills en tarjetas con icono y trazo; el roadmap se muda a `/vitrina/apps` y sale del menú.                                                                                                                                                                                                                                                                   |
+| a fondo v2    | El corpus reescrito desde la auditoría del dueño (2026-09-19/20): 25 documentos, ~144.000 palabras por idioma (el texto del dueño, ampliado y alineado, nunca recortado), cero `[CONFIRMAR]`, seis gates de coherencia (cifras del sitio, fechas de cargos, densidad, léxico, repetidos, normas), tres preguntas de prueba por documento, las 32 fichas de la vitrina en el índice del chat con peso 0,5 (ADR-023), banco de 136 preguntas en los dos idiomas, gemelos en inglés y los 25 aprobados. |
 | post-S7 (2.ª) | «Lo que construyo» entra al desplegable Hoja de vida; Estudios con los años del PDF del dueño (tres entradas); AI-102 retirada de todo el contenido (Microsoft la descontinuó) y gate nuevo: una credencial nombrada tiene que estar en `certificaciones:`.                                                                                                                                                                                                                                                                                                                                                                       |

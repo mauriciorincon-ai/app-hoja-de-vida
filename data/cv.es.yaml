@@ -14,7 +14,7 @@ identidad:
   # Revisión post-S8 (2026-09-12): AI-103 se nombra CON «en curso» (gate de
   # contenido) y el cierre invita en vez de retar (decisión del dueño).
   resumen: >-
-    Líder de datos e ingeniero de IA (AI-103 y DP-100, en curso) · Analytics
+    Líder de datos e ingeniero de IA (AI-103 y AI-300, en curso) · Analytics
     Engineer (DP-600). Diseño plataformas analíticas en Microsoft Fabric y llevo
     agentes de IA a producción — y esta hoja de vida es la muestra: recórrela
     y pregúntale.
@@ -30,7 +30,7 @@ identidad:
     plataforma de datos de una startup de agentes de IA —Microsoft Fabric y un
     proceso replicable para diseñar y monitorear agentes— y construí BI y
     analítica predictiva en banca. Certificado por Microsoft como Fabric
-    Analytics Engineer (DP-600), en ruta al AI-103 y al DP-100. ¿Quieres saber
+    Analytics Engineer (DP-600), en ruta al AI-103 y al AI-300. ¿Quieres saber
     algo más?
     Pregúntaselo al chat de esta hoja de vida.
   # La disponibilidad de reubicación es señal DELIBERADA para recruiters (pack §1)
@@ -73,7 +73,7 @@ trayectoria:
       - "Construí el monitoreo en tiempo real de los agentes en producción."
       - "Documenté el proceso core replicable para diseñar e implementar agentes de IA."
   - periodo: "2023"
-    rol: "Analista Senior de Analítica"
+    rol: "Analista Senior de Analítica y Reportes"
     organizacion: "Banco Pichincha"
     proyecto: "banco-pichincha"
     descripcion: >-
@@ -86,7 +86,7 @@ trayectoria:
       - "Modelos predictivos con scikit-learn: >90% de precisión y +35% en predicciones."
       - "Optimización de modelos semánticos con DAX Studio y Tabular Editor."
       - "Co-liderazgo de la gobernanza de datos del área."
-      - "Programa de formación en analítica: +20% de productividad del equipo."
+      - "Programa de formación en analítica: +20% de productividad en la preparación y uso de la información."
   - periodo: "2021 — 2022"
     rol: "Análisis Post-Operacional"
     organizacion: "C&M Consultores (TransMilenio)"
@@ -220,9 +220,9 @@ proyectos:
         - "Construí el monitoreo en tiempo real de los agentes de IA en producción."
         - "Documenté el proceso core replicable para diseñar e implementar agentes de IA."
       impacto:
-        - "El ecosistema de datos de la startup quedó operativo desde cero en Microsoft Fabric."
-        - "Los agentes en producción pasaron a monitorearse en tiempo real."
-        - "El proceso core replicable estandarizó cómo se diseñan e implementan los agentes."
+        - "El ecosistema de datos quedó operativo desde cero en Microsoft Fabric: 12 clientes integrados, 120 tablas, 20 GB y 1.000 eventos por día."
+        - "27 agentes en el inventario y hasta 23 monitoreados a la vez, en tiempo real."
+        - "El proceso core replicable, de 11 etapas, estandarizó cómo se diseñan e implementan los agentes."
         - "El puente exacto entre la ingeniería de analítica (DP-600) y la ingeniería de IA."
   - slug: "banco-pichincha"
     nombre: "BI que el negocio sí usa — Banco Pichincha (2023)"
@@ -250,7 +250,7 @@ proyectos:
         - "+25% en toma de decisiones sobre los tableros adoptados."
         - "−35% en tiempos de análisis por la optimización del ETL."
         - ">90% de precisión y +35% en predicciones de los modelos en producción."
-        - "+20% de productividad del equipo tras el programa de formación."
+        - "+20% de productividad en la preparación y uso de la información tras el programa de formación."
   - slug: "transmilenio-cm"
     nombre: "Datos que mueven una ciudad — TransMilenio / C&M (2021–2022)"
     resumen: >-
@@ -274,7 +274,7 @@ proyectos:
         - "Llevé la analítica a mesas de estrategia con la dirección del SITP."
         - "Desarrollé la predicción de demanda con scikit-learn."
       impacto:
-        - "+35% de eficiencia operativa por la adopción de BI."
+        - "+35% de eficiencia de los procesos analíticos por la adopción de BI."
         - "+70% en precisión y velocidad de análisis con el ETL unificado."
         - "+25% en indicadores tras las mesas de estrategia con el SITP."
         - "+20% de rendimiento del sistema con la predicción de demanda."
@@ -321,8 +321,11 @@ proyectos:
         - "Desarrollo modelos de análisis y visualización para líderes administrativos y asistenciales."
         - "Estructuro el gobierno y la calidad de datos institucional."
         - "Construyo tableros de control por procesos con mejora continua."
+        - "Lidero la estrategia institucional de IA bajo UNE-ISO/IEC 42001:2025: 23 instrumentos del sistema de gestión, 8 terminados."
       impacto:
-        - "Decisiones administrativas y asistenciales informadas por datos gobernados."
+        - "42 productos analíticos en uso para 20 líderes de 15 procesos y unos 75 usuarios."
+        - "Cerca de 60% menos esfuerzo en la preparación de la información; 10 planes de análisis en seguimiento."
+        - "12 oportunidades de IA identificadas, 7 casos evaluados, 3 priorizados y 2 documentados."
         - "Calidad de datos institucional como práctica, no como evento."
 
 certificaciones:
@@ -336,15 +339,18 @@ certificaciones:
   # Revisión post-S8 (2026-09-12): el AI-103 entra como credencial EN CURSO
   # (decisión del dueño: «me gusta la sinceridad»). Sin fecha, con chip; el
   # logro «5 certificaciones» sigue contando solo las obtenidas.
-  - nombre: "Microsoft Certified: Azure AI Engineer Associate (AI-103)"
+  - nombre: "Microsoft Certified: Azure AI Apps and Agents Developer Associate (AI-103)"
     estado: "en curso"
     nota: "En preparación: la ruta de ingeniería de IA en Azure."
     icono: insignia
     logo: microsoft.svg
-  # 2026-09-12: el DP-100 va en paralelo al AI-103, también EN CURSO.
-  - nombre: "Microsoft Certified: Azure Data Scientist Associate (DP-100)"
+  # 2026-09-19 (a fondo v2): el DP-100 SALE y entra el AI-300 en su lugar.
+  # Microsoft retiró el DP-100 el 1 de junio de 2026 y su reemplazo declarado es
+  # el AI-300, que además es el nombre correcto de la ruta que el dueño cursa:
+  # el AI-300 es MLOps y GenAIOps, no «aplicaciones y agentes» — ese es el AI-103.
+  - nombre: "Microsoft Certified: Machine Learning Operations Engineer Associate (AI-300)"
     estado: "en curso"
-    nota: "En preparación, en paralelo al AI-103: ciencia de datos y aprendizaje automático en Azure."
+    nota: "En preparación, en paralelo al AI-103: operación, evaluación y monitoreo de modelos y agentes en Azure."
     icono: insignia
     logo: microsoft.svg
   - nombre: "IBM: Ciencia de Datos Aplicada con R"
@@ -373,6 +379,7 @@ skills:
     items:
       - "Azure AI"
       - "RAG y agentes — en construcción pública (ver showcase)"
+      - "n8n"
       - "PyTorch"
       - "TensorFlow"
       - "Scikit-Learn"
@@ -380,23 +387,35 @@ skills:
   - grupo: "Plataforma de datos"
     items:
       - "Microsoft Fabric"
-      - "Azure Synapse"
+      - "Direct Lake"
+      - "RLS (seguridad a nivel de fila)"
       - "ETL"
       - "Modelado de datos"
       - "SQL"
       - "Power Query"
       - "DAX"
+      - "Google Cloud — en exploración"
   - grupo: "BI & decisión"
     items:
       - "Power BI"
       - "Data storytelling"
       - "KPIs"
       - "Gobernanza y calidad de datos"
+      - "Shiny (R)"
+      - "Tableau"
+      - "Looker Studio"
   - grupo: "Ingeniería"
     items:
       - "Python"
       - "Git/GitHub"
       - "CI/CD — este sitio corre con ello"
+  # a fondo v2 (2026-09-20, D2/C66): la raíz industrial entra a skills con sus métodos.
+  - grupo: "Procesos y simulación"
+    items:
+      - "BPMN (Bizagi)"
+      - "Simulación de eventos discretos (FlexSim)"
+      - "Estudio de tiempos y balanceo de líneas"
+      - "Kanban y Scrum"
   # Revisión post-S8, bloque D: el quinto grupo son las habilidades blandas,
   # sacadas del corpus «Mi forma de trabajar» (decisión del dueño, 2026-09-13).
   - grupo: "Cómo trabajo"

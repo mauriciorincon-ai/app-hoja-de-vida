@@ -22,6 +22,11 @@ nombradas_sin_obtener:
       Microsoft la descontinuó. Salió de todo el contenido el 2026-09-10 (titular, perfil,
       logro, case study de Vesting, apps.yaml). Solo se menciona para explicar por qué ya
       no está y por qué la ruta es ahora el AI-103.
+  - codigo: DP-100
+    razon: >-
+      Microsoft la retiró el 1 de junio de 2026 y declaró como reemplazo el AI-300.
+      Salió de `certificaciones` el 2026-09-19 (a fondo v2). Solo se menciona para
+      explicar por qué la ruta de ciencia de datos en Azure es hoy el AI-300.
   # AI-103 salió de esta lista el 2026-09-12 (revisión post-S8): entró a
   # `certificaciones` de cv.{es,en}.yaml con `estado: en curso` — el TERCER estado,
   # que se lista con chip y sin fecha, y cuyo código solo puede nombrarse con «en

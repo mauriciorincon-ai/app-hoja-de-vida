@@ -77,14 +77,16 @@ describe("PDF ATS generado en build desde los YAML", () => {
   });
 
   // Revisión post-S8, bloque D: una certificación «en curso» no lleva fecha,
-  // y el PDF viejo imprimía «(AI-103) ()». Ahora dice «(en curso)».
+  // y el PDF viejo imprimía «(AI-103) ()». Ahora dice «(en curso)». El nombre largo
+  // del AI-103 (a fondo v3) parte «(en curso)» en dos líneas de la columna: el
+  // salto es legítimo, el paréntesis vacío no.
   it("una certificación en curso dice «en curso», nunca un paréntesis vacío", async () => {
     const es = await extractText(files.es);
     const en = await extractText(files.en);
     expect(es).not.toContain("()");
     expect(en).not.toContain("()");
-    expect(es).toMatch(/\(AI-103\)\s*\(en curso\)/);
-    expect(en).toMatch(/\(AI-103\)\s*\(in progress\)/);
+    expect(es).toMatch(/\(AI-103\)\s*\(en\s+curso\)/);
+    expect(en).toMatch(/\(AI-103\)\s*\(in\s+progress\)/);
   });
 
   // El dominio del sitio va PRIMERO en la cabecera cuando el build lo conoce

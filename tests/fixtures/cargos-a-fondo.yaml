@@ -1,0 +1,73 @@
+# FECHAS DE CARGOS — la permanencia real en cada empresa (a fondo v2).
+#
+# Por qué existe un fixture y no se lee de `cv.es.yaml`: el sitio publica el
+# periodo por AÑOS («2021 — 2022», «2025 — hoy») y el corpus escribe MESES
+# («entre octubre de 2020 y junio de 2021»). Contra los años no se puede
+# detectar el error que la auditoría encontró —las fechas de Cafam y de C&M
+# Consultores estaban intercambiadas en dos documentos—, porque los dos cargos
+# caen en años vecinos.
+#
+# Aquí viven los meses, y el gate los cruza en las dos direcciones:
+#   · `problemasDeFechas` — una fecha nombrada en una frase que declara una
+#     permanencia en una empresa tiene que caer DENTRO de esa permanencia;
+#   · `problemasDeCargosContraElSitio` — estos meses no pueden contradecir los
+#     años que publica `cv.es.yaml`, o el fixture se convertiría en una segunda
+#     verdad paralela, que es peor que no tener ninguna.
+#
+# Regla floja a propósito: no se exige que la fecha sea el inicio o el fin.
+# «En diciembre de 2024, mientras construía en Vesting» es legítimo. Lo que no
+# puede ser es que caiga fuera.
+#
+# Estos meses son los que el dueño confirmó el 2026-09-19 al responder el
+# bloque A de la auditoría. Nada aquí es de terceros y nada es de contacto:
+# son las mismas empresas y periodos que el sitio ya publica, con un mes de
+# resolución en vez de un año.
+
+cargos:
+  - empresa: "Inglopres"
+    alias: ["INGLOPRES", "Inglopres S.A.S"]
+    organizacion_sitio: "Inglopres"
+    inicio: "2016-08"
+    fin: "2017-06"
+
+  - empresa: "Ceinfes"
+    alias: ["CEINFES", "Milton Ochoa"]
+    organizacion_sitio: "Ceinfes"
+    inicio: "2017-11"
+    fin: "2018-11"
+
+  - empresa: "C&M Consorcio 2018"
+    alias: ["Consorcio 2018"]
+    organizacion_sitio: "Consorcio"
+    inicio: "2018-11"
+    fin: "2020-05"
+
+  - empresa: "Cafam"
+    alias: ["CAFAM", "Caja de Compensación Familiar Cafam"]
+    organizacion_sitio: "Cafam"
+    inicio: "2020-10"
+    fin: "2021-06"
+
+  - empresa: "C&M Consultores"
+    alias: ["C&M Consultores"]
+    organizacion_sitio: "C&M Consultores"
+    inicio: "2021-07"
+    fin: "2022-05"
+
+  - empresa: "Banco Pichincha"
+    alias: ["Pichincha"]
+    organizacion_sitio: "Banco Pichincha"
+    inicio: "2023-03"
+    fin: "2023-07"
+
+  - empresa: "Vesting"
+    alias: []
+    organizacion_sitio: "Vesting"
+    inicio: "2023-08"
+    fin: "2025-01"
+
+  - empresa: "Fundación CTIC"
+    alias: ["Fundacion CTIC", "CTIC"]
+    organizacion_sitio: "CTIC"
+    inicio: "2025-03"
+    fin: null

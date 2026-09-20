@@ -1,0 +1,93 @@
+# LÉXICO OBLIGATORIO — las palabras con las que preguntan desde afuera.
+#
+# El buscador del chat es LÉXICO (MiniSearch sobre el corpus, sin embeddings):
+# una palabra que el documento no escribe no existe para quien pregunta. La
+# reescritura de 2026-09 subió el volumen ×6,5 y, al hacerlo, cambió términos
+# concretos por sinónimos abstractos: «contenedores» por «empaquetado», «BPMN»
+# por «modelado de procesos», «ETL» por «integración de información». El corpus
+# creció y el buscador empeoró.
+#
+# Cada lista sale de dos sitios verificables, no de la intuición:
+#   · `tests/fixtures/banco-de-preguntas.es.yaml` — las preguntas que declaran
+#     a ese documento como fuente esperada;
+#   · `data/cv.es.yaml` — las skills y herramientas que el sitio ya publica.
+#
+# Un término se compara SIN TILDES y en minúsculas, y basta con que aparezca
+# una vez en el cuerpo. No es una cuota de densidad: es la garantía de que la
+# palabra existe. Si un término deja de ser cierto, se BORRA de aquí y se
+# explica — jamás se escribe en el documento para que el gate pase.
+
+origenes:
+  [ingeniería industrial, diseño industrial, Javeriana, procesos, Inglopres]
+
+inglopres:
+  [ERP, cadena de suministro, ISO 9001, SQL, indicadores]
+
+ceinfes:
+  [KPI, junta directiva, ágil, mejora continua, procesos]
+
+cm-operaciones:
+  [TransMilenio, transporte, supervisión, automatización, indicadores, cumplimiento]
+
+transmilenio-cm:
+  [TransMilenio, SITP, ETL, demanda, Power BI]
+
+cafam:
+  [WMS, SQL, calidad de datos, inventario, medicamentos]
+
+banco-pichincha:
+  [Power BI, DAX, ETL, scikit-learn, gobierno de datos, adopción]
+
+vesting:
+  [Microsoft Fabric, lakehouse, agentes, monitoreo, gobernanza, startup]
+
+fundacion-ctic:
+  [salud, ISO/IEC 42001, Power BI, gobierno de datos, datos personales]
+
+certificaciones:
+  [DP-600, AI-103, AI-300, IBM, Microsoft Fabric, Python, SQL, R]
+
+apps-pipeline:
+  [Next.js, pruebas automatizadas, repositorio, vitrina, despliegue]
+
+lo-que-busco:
+  [remoto, reubicación, Bogotá, rol, inglés]
+
+fabric-en-la-practica:
+  [lakehouse, Direct Lake, modelo semántico, DAX, RLS, OneLake, Power Query]
+
+agentes-en-produccion:
+  [agentes, RAG, LLM, prompt, monitoreo, proceso core]
+
+rag-y-el-chat:
+  [RAG, MiniSearch, léxica, embeddings, guardrail, fallback, citas]
+
+gobierno-de-datos-y-de-ia:
+  [ISO/IEC 42001, ISO 9001, habeas data, linaje, roles, políticas]
+
+plataforma-y-despliegue:
+  [Docker, Kubernetes, Vertex AI, CI/CD, GitHub Actions, Vercel, Sentry, Git]
+
+como-aprendo:
+  [DP-600, certificación, meses, documentación, pruebas]
+
+bi-que-se-adopta:
+  [Power BI, adopción, usuarios, DAX, modelo semántico, formación]
+
+analitica-predictiva:
+  [scikit-learn, Python, PyTorch, TensorFlow, deriva, precisión, validación]
+
+procesos-y-simulacion:
+  [BPMN, FlexSim, Bizagi, ISO 9001, estudio de tiempos, simulación, lean]
+
+los-tableros:
+  [Power BI, DAX, Power Query, datos abiertos, medidas]
+
+las-investigaciones:
+  [investigación, método, datos abiertos, reproducible, hallazgo]
+
+como-trabajo:
+  [equipo, junta directiva, adopción, BPMN, usuarios]
+
+los-agentes-de-la-vitrina:
+  [agentes, harness, Claude Code, gates, carnada, sellado]

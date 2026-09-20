@@ -60,6 +60,13 @@ export type ChatLocale = "es" | "en";
  * (`retrieval.ts`): «cuéntame un chiste **sobre** gatos» puntuaba 4,28 con solo
  * la preposición casando, y el test de off-topic no lo veía porque preguntaba
  * «chiste **de** gatos». Eso sí se arregló, y con su medición.
+ *
+ * Segunda medición, 2026-09-20 (ADR-023: corpus v2 + fichas, 494 fragmentos):
+ * la legítima que peor puntúa en modo estricto da 6,65 y ninguna de las 136 del
+ * banco baja de 1; las ajenas bloqueadas dan 0 y las que pasan (por una palabra
+ * real del corpus: «mañana», «receta», «mundial», «hoy») dan entre 3,8 y 37.
+ * No hay un umbral entre 1 y 6,65 que bloquee una ajena más sin acercarse a
+ * las legítimas, así que se queda en 1.
  */
 export const UMBRAL_ON_TOPIC = 1;
 

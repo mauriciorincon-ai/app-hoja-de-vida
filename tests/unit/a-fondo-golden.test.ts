@@ -5,6 +5,7 @@ import { createRetriever, TOP_K_CONTEXTO } from "@/lib/ia/retrieval";
 import { chatChunkSchema } from "@/lib/ia/schemas";
 import { leerDocumentos, simularAprobacion } from "../../scripts/a-fondo.mjs";
 import { buildChunks } from "../../scripts/build-chat-index.mjs";
+import { leerFichas } from "../../scripts/fichas-al-indice.mjs";
 
 /**
  * EL GOLDEN SET DEL CORPUS (S8).
@@ -45,6 +46,9 @@ const chunks = buildChunks({
   apps: leer("apps.yaml"),
   aFondo: aprobados,
   locale: "es",
+  // Las 32 fichas de la vitrina también viven en el índice (ADR-023): medir
+  // el golden sin ellas sería medir contra un índice que no existe.
+  fichas: leerFichas(),
 }).map((c: unknown) => chatChunkSchema.parse(c));
 const retriever = createRetriever(chunks);
 
@@ -91,15 +95,53 @@ describe("golden set — cada pregunta trae su documento", () => {
   it("una pregunta AJENA no trae ningún documento a fondo", () => {
     // El rojo de este gate: si el retriever trajera cualquier cosa para
     // cualquier consulta, las 48 aserciones de arriba pasarían por casualidad.
+    // Las tres son ajenas que el banco declara «bloquea» sobre el índice
+    // completo. «Madrid» y «ajiaco» salieron de aquí con ADR-023: las fichas
+    // de la vitrina traen «mañana» y «receta», y el banco las declara «pasa».
     for (const ajena of [
       "cuéntame un chiste sobre gatos",
-      "¿va a llover mañana en Madrid?",
-      "¿cuál es la receta del ajiaco?",
+      "dame un poema de amor",
+      "¿qué opinas del bitcoin?",
     ]) {
       expect(
         retriever.topKStrict(ajena),
         `«${ajena}» no debería casar con nada del corpus`,
       ).toHaveLength(0);
     }
+  });
+});
+
+/**
+ * EL GEMELO EN INGLÉS (a fondo v2, F5). El chat en /en responde con el índice
+ * inglés: los `.en.md` aprobados, los YAML en inglés y las fichas. Las
+ * `preguntas_de_prueba` de cada gemelo se miden contra ESE índice, no contra el
+ * español — un gemelo que existe pero no contesta sus propias preguntas es un
+ * idioma ciego con apariencia de paridad.
+ */
+describe("golden set en inglés — cada gemelo contesta sus propias preguntas", () => {
+  const docsEn: Doc[] = leerDocumentos("en");
+  const chunksEn = buildChunks({
+    cv: leer("cv.en.yaml"),
+    apps: leer("apps.yaml"),
+    aFondo: simularAprobacion(docsEn),
+    locale: "en",
+    fichas: leerFichas(),
+  }).map((c: unknown) => chatChunkSchema.parse(c));
+  const retrieverEn = createRetriever(chunksEn);
+  const casosEn = docsEn.flatMap((d) =>
+    d.preguntas_de_prueba.map((q) => [`${d.slug} ← ${q}`, q, d] as const),
+  );
+
+  it("hay tantos gemelos como documentos en español", () => {
+    expect(docsEn.map((d) => d.slug).sort()).toEqual(docs.map((d) => d.slug).sort());
+  });
+
+  it.each(casosEn)("%s", (_titulo, pregunta, doc) => {
+    const hits = retrieverEn.topK(pregunta, TOP_K_CONTEXTO);
+    expect(
+      hits.some((h) => h.chunk.id.startsWith(`a-fondo-${doc.slug}-`)),
+      `«${pregunta}» no trajo «${doc.slug}» en el top-${TOP_K_CONTEXTO} del índice inglés.\n` +
+        `  Trajo: ${hits.map((h) => h.chunk.id).join(", ")}`,
+    ).toBe(true);
   });
 });

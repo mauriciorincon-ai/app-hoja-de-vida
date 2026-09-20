@@ -144,18 +144,21 @@ function processTerm(term: string): string | null {
  * ninguno de los dos, porque ninguno era importable.
  *
  * El 4 sale de MEDIR, y lo miden DOS conjuntos independientes contra el corpus
- * completo (159 fragmentos: los 24 documentos aprobados sin sus preguntas
- * abiertas, más los de los YAML):
+ * completo. Medido por segunda vez el 2026-09-20 (corpus a fondo v2 + las 32
+ * fichas de la vitrina, ADR-023: 494 fragmentos):
  *
- *   golden set — 48 preguntas escritas CON el documento delante:
- *     k=1 → 63 %   k=2 → 88 %   k=3 → 94 %   k=4 → **100 %**   k=5 → 100 %
- *   banco de preguntas — 131 preguntas escritas desde AFUERA (S8, fase 4b):
- *     k=1 → 65 %   k=2 → 85 %   k=3 → 95 %   k=4 → **100 %**   k=5 → 100 %
+ *   golden set — 75 preguntas escritas CON el documento delante:
+ *     k=1 → 44   k=2 → 59   k=3 → 67   k=4 → **75/75**   k=5 → 75
+ *   banco de preguntas — 136 preguntas escritas desde AFUERA:
+ *     k=1 → 98   k=2 → 120  k=3 → 130  k=4 → **136/136**  k=5 → 136
+ *   contexto medio: 402 palabras con k=3 · 537 con k=4 · 670 con k=5
  *
- * Es decir: con 3 fuentes, 6 de las 131 preguntas de afuera no traen ninguna
+ * Es decir: con 3 fuentes, 6 de las 136 preguntas de afuera no traen ninguna
  * de las suyas. Con 4 no falla ninguna, y subir a 5 no rescata a nadie — solo
- * agranda el contexto y la factura. Que dos conjuntos escritos con criterios
- * distintos caigan en el mismo número es la parte que da confianza.
+ * agranda el contexto un 25 % y la factura con él. Que dos conjuntos escritos
+ * con criterios distintos caigan en el mismo número, dos veces, es la parte
+ * que da confianza. (La primera medición, S8, sobre 159 fragmentos: 48 y 131
+ * preguntas, mismo resultado.)
  */
 export const TOP_K_CONTEXTO = 4;
 
@@ -171,20 +174,38 @@ type Hit = {
   titulo: string;
   texto: string;
   ancla: string;
+  peso?: number;
   score: number;
 };
+
+/**
+ * Peso por fragmento (ADR-023): multiplica el puntaje BM25 del fragmento. Las
+ * fichas de la vitrina viajan con `peso: 0.5`; todo lo demás, sin campo, vale 1.
+ * Medido con el banco de 131 preguntas sobre el índice completo (494
+ * fragmentos): a peso 1 las fichas desplazaban a los documentos a fondo en 8
+ * preguntas (94/131); a 0,5 el banco vuelve a 102/131 —el mismo número que sin
+ * fichas— y aun así 11 preguntas reciben una ficha en su contexto.
+ */
+const pesoDe = (_id: string, _term: string, stored?: Record<string, unknown>) =>
+  typeof stored?.peso === "number" ? stored.peso : 1;
 
 export function createRetriever(chunks: ChatChunk[]): Retriever {
   const mini = new MiniSearch<ChatChunk>({
     fields: ["titulo", "texto"],
-    storeFields: ["id", "titulo", "texto", "ancla"],
+    storeFields: ["id", "titulo", "texto", "ancla", "peso"],
     processTerm,
   });
   mini.addAll(chunks);
 
   const toScored = (hits: Hit[], k: number): ScoredChunk[] =>
     hits.slice(0, k).map((r) => ({
-      chunk: { id: r.id, titulo: r.titulo, texto: r.texto, ancla: r.ancla },
+      chunk: {
+        id: r.id,
+        titulo: r.titulo,
+        texto: r.texto,
+        ancla: r.ancla,
+        ...(r.peso !== undefined ? { peso: r.peso } : {}),
+      },
       score: r.score,
     }));
 
@@ -193,6 +214,7 @@ export function createRetriever(chunks: ChatChunk[]): Retriever {
       return toScored(
         mini.search(query, {
           boost: { titulo: 2 },
+          boostDocument: pesoDe,
           prefix: true,
           fuzzy: 0.2,
           processTerm,
@@ -204,6 +226,7 @@ export function createRetriever(chunks: ChatChunk[]): Retriever {
       return toScored(
         mini.search(query, {
           boost: { titulo: 2 },
+          boostDocument: pesoDe,
           processTerm,
         }) as unknown as Hit[],
         k,

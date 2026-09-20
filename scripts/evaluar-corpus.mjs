@@ -33,8 +33,10 @@ import { parse } from "yaml";
 import { z } from "zod";
 import { leerDocumentos, simularAprobacion } from "./a-fondo.mjs";
 import { buildChunks } from "./build-chat-index.mjs";
+import { leerFichas } from "./fichas-al-indice.mjs";
 
 export const RUTA_BANCO = "tests/fixtures/banco-de-preguntas.es.yaml";
+export const RUTA_BANCO_EN = "tests/fixtures/banco-de-preguntas.en.yaml";
 export const RUTA_INFORME = "sprints/SPRINT_008-banco-de-preguntas.md";
 
 const preguntaSchema = z.object({
@@ -104,6 +106,7 @@ export function corpusPublicado(locale = "es") {
     apps: leerYaml("apps.yaml"),
     aFondo: leerDocumentos(locale),
     locale,
+    fichas: leerFichas(),
   });
 }
 
@@ -120,6 +123,7 @@ export function corpusSimulado(locale = "es") {
     apps: leerYaml("apps.yaml"),
     aFondo: simularAprobacion(leerDocumentos(locale)),
     locale,
+    fichas: leerFichas(),
   });
 }
 

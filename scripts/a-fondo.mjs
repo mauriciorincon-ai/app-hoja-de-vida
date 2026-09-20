@@ -39,6 +39,12 @@ export const frontmatterSchema = z.object({
     .regex(/^[a-z0-9-]+$/, "solo minúsculas, dígitos y guiones"),
   titulo: z.string().min(1),
   resumen: z.string().min(1),
+  // «Cuándo usar este documento», como la descripción de una skill (a fondo v3,
+  // decisión del dueño): entra al índice como el PRIMER fragmento del documento,
+  // junto al resumen, para que la pregunta de afuera encuentre el documento
+  // entero antes que una subsección suelta. Opcional, pero si el español lo
+  // trae, el gemelo también (paridad).
+  cuando_usar: z.string().min(40, "al menos 40 caracteres: para qué preguntas sirve este documento").optional(),
   estado: z.enum(["borrador", "aprobado"]),
   ancla: z.string().min(1),
   actualizado: z
@@ -46,7 +52,10 @@ export const frontmatterSchema = z.object({
     .regex(/^\d{4}-\d{2}-\d{2}$/, "formato AAAA-MM-DD"),
   preguntas_de_prueba: z
     .array(z.string().min(1))
-    .min(2, "al menos 2 — la prueba del chat viaja con el contenido"),
+    // Subió de 2 a 3 en la reescritura de 2026-09 (a fondo v2): con dos preguntas, un
+    // documento se probaba con sus propias palabras y nada más; la tercera nace del
+    // banco de preguntas, con palabras de afuera.
+    .min(3, "al menos 3 — la prueba del chat viaja con el contenido, y una de afuera"),
 });
 
 /**
@@ -291,6 +300,11 @@ export function problemasDeParidad(docsEs, docsEn) {
         `${es.archivo}: está «aprobado» pero ${en.archivo} sigue en «${en.estado}».`,
       );
     }
+    if (Boolean(es.cuando_usar) !== Boolean(en.cuando_usar)) {
+      problemas.push(
+        `${es.slug}: «cuando_usar» está en ${es.cuando_usar ? "español" : "inglés"} y falta en el otro idioma.`,
+      );
+    }
     const idsEs = es.subsecciones.map((s) => s.id);
     const idsEn = en.subsecciones.map((s) => s.id);
     if (idsEs.join("|") !== idsEn.join("|")) {
@@ -456,6 +470,17 @@ export function chunksDeAFondo(docs, etiqueta, tope = TOPE_PALABRAS_CHUNK) {
   const chunks = [];
   for (const doc of docs) {
     if (doc.estado !== "aprobado") continue;
+    // El fragmento de entrada: resumen + «cuándo usar», con el título del
+    // documento. Es la «descripción de la skill»: corto, denso en las palabras
+    // con las que alguien pregunta, y cita hacia la misma ancla.
+    if (doc.cuando_usar) {
+      chunks.push({
+        id: `a-fondo-${doc.slug}-cuando-usar`,
+        titulo: `${etiqueta} — ${doc.titulo}`,
+        texto: `${doc.resumen} ${doc.cuando_usar}`.replace(/\s+/g, " ").trim(),
+        ancla: doc.ancla,
+      });
+    }
     for (const s of doc.subsecciones) {
       if (!s.texto.trim()) continue;
       const ventanas = ventanasPorParrafo(s.texto, tope);
