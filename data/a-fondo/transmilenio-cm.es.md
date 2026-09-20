@@ -1,13 +1,14 @@
 ---
 slug: transmilenio-cm
 titulo: "C&M Consultores / TransMilenio — análisis post-operacional (2021–2022)"
-resumen: "El análisis post-operacional del SITP: fuentes heterogéneas, mesas de dirección y predicción de demanda."
+resumen: "El análisis post-operacional del SITP: el ETL que unificó recaudo, flota, programación, novedades y PQR (+70 %), BI adoptado por 25+ usuarios clave (+35 %), las mesas con la dirección del SITP (+25 %) y un modelo de demanda en scikit-learn que corrió diez meses."
 estado: borrador
 ancla: "/proyectos/transmilenio-cm"
-actualizado: 2026-09-12
+actualizado: 2026-09-20
 preguntas_de_prueba:
   - "¿Cómo unificó Henry las fuentes de datos heterogéneas del SITP?"
   - "¿Cómo fue el modelo de predicción de demanda del SITP?"
+  - "¿Qué es el análisis post-operacional que menciona?"
 ---
 
 <!--
@@ -40,110 +41,144 @@ de demanda con scikit-learn. -->
 
 <!-- seccion: el-problema -->
 
-Regresé al entorno de TransMilenio en julio de 2021, esta vez como Profesional de Análisis Postoperacional en C&M Consultores, y permanecí en el cargo hasta mayo de 2022. Volví al mismo dominio, pero con una responsabilidad distinta y con una comprensión más madura de la relación entre operación, datos y decisiones.
+Regresé al entorno de **TransMilenio en julio de 2021**, esta vez como Profesional de Análisis
+Post-Operacional en **C&M Consultores**, en la Fuerza Operativa de TransMilenio S.A., y estuve
+hasta mayo de 2022. Volví al mismo dominio con una responsabilidad distinta: ya no supervisar el
+cumplimiento, sino explicar la operación y ayudar a decidir cómo ajustarla.
 
-El análisis postoperacional consiste en reconstruir lo ocurrido para comprender sus causas y decidir cómo debe ajustarse la operación futura. No se limita a describir el día anterior. Debe explicar las diferencias entre lo programado y lo ejecutado, identificar patrones, hacer visibles las restricciones y transformar los resultados observados en decisiones sobre programación, capacidad y servicio.
+El **análisis post-operacional** reconstruye lo ocurrido para entender sus causas y decidir la
+operación futura. No describe el día anterior: explica las diferencias entre lo programado y lo
+ejecutado, encuentra patrones, hace visibles las restricciones y convierte eso en una
+recomendación con consecuencia.
 
-El principal obstáculo era que la operación generaba información más rápido de lo que podía prepararse y analizarse manualmente. Los datos se encontraban distribuidos entre fuentes heterogéneas, con estructuras, niveles de detalle y reglas diferentes. Una parte considerable del esfuerzo se consumía reuniendo archivos, validando correspondencias y conciliando resultados antes de que pudiera comenzar el análisis realmente valioso.
+El obstáculo era que la operación del **SITP** generaba información más rápido de lo que podía
+prepararse y analizarse a mano. Los datos vivían en cinco fuentes heterogéneas, cada una con su
+estructura, su detalle y sus reglas:
 
-Esta experiencia me permitió reconocer una diferencia fundamental entre disponer de datos y contar con una capacidad analítica. Los datos podían existir y, aun así, no estar preparados para responder las preguntas de la operación. El verdadero desafío consistía en construir un recorrido confiable desde el evento operacional hasta el indicador, el análisis y la decisión.
+- el **recaudo**;
+- la **flota y el GPS** de los buses;
+- la **programación** de servicios;
+- las **novedades** de la operación;
+- las **PQR** de los usuarios.
+
+Buena parte del esfuerzo se iba en localizar archivos, conciliar formatos y corregir estructuras
+antes de analizar nada. Ahí se ve la diferencia entre tener datos y tener capacidad analítica.
 
 ## Unificar las fuentes
 
 <!-- seccion: unificar-las-fuentes -->
 
-Diseñé e implementé procesos de extracción, transformación y carga de datos para integrar fuentes heterogéneas y convertirlas en una base analítica común. Esta intervención mejoró en un setenta por ciento la precisión y la velocidad del análisis, al reducir la conciliación manual y aplicar reglas consistentes durante la preparación de la información.
+Diseñé e implementé los procesos de **ETL** —extracción, transformación y carga— que integraron
+las cinco fuentes en una base analítica común. La intervención mejoró un **70 % la precisión y la
+velocidad del análisis**, porque sustituyó la conciliación manual por reglas consistentes que se
+aplican igual en cada ciclo.
 
-La integración no consistía únicamente en trasladar datos desde diferentes orígenes hacia un repositorio común. Era necesario comprender qué representaba cada registro, armonizar estructuras, resolver diferencias entre identificadores, alinear dimensiones temporales y establecer reglas para relacionar programación, ejecución y resultados. Unificar las fuentes significaba reconstruir una versión coherente de la operación.
+Integrar no era mover datos a un repositorio. Había que entender qué representaba cada
+registro, armonizar estructuras, resolver diferencias entre identificadores, alinear las
+dimensiones temporales —el recaudo por transacción, el GPS por segundo, la programación por
+servicio— y fijar las reglas para relacionarlos. Las bases semanales de los concesionarios se
+organizaban en SQLite para el acumulado histórico.
 
-La mejora simultánea en velocidad y precisión no fue accidental. Ambas dependían de resolver el mismo problema: sustituir procedimientos manuales y variables por un pipeline reproducible. Cuando las transformaciones se convierten en un proceso definido, las mismas reglas pueden aplicarse en cada ciclo, los errores pueden detectarse con mayor facilidad y el equipo deja de invertir tiempo en reconstruir repetidamente la información.
+Incorporé validaciones para detectar datos incompletos, duplicados y relaciones que no cumplían
+las reglas esperadas: no para corregir en silencio al final del recorrido, sino para hacerlas
+visibles, rastrear su origen y evitar que avanzaran hasta un indicador.
 
-También incorporé validaciones para identificar datos incompletos, duplicados, inconsistencias y relaciones que no cumplían las reglas esperadas. El objetivo no era corregir silenciosamente las diferencias al final del recorrido, sino hacerlas visibles, rastrear su origen y evitar que avanzaran hasta indicadores o decisiones sin una explicación adecuada.
-
-Aquí profundicé en uno de los fundamentos de mi trabajo actual con plataformas de datos: un pipeline no es una tubería invisible que solamente transporta información. Es una parte de la lógica empresarial. Contiene decisiones sobre calidad, correspondencia, temporalidad, granularidad y significado que deben poder documentarse, evaluarse y reproducirse.
-
-Esta experiencia preparó mi evolución posterior hacia arquitecturas analíticas más avanzadas. Lo que entonces resolvía mediante procesos ETL se convertiría después en pipelines gobernados, modelos semánticos reutilizables y soluciones empresariales en Power BI. La tecnología evolucionó, pero el principio permaneció intacto: una decisión confiable requiere un recorrido de datos igualmente confiable.
+Un pipeline no es una tubería invisible. Contiene decisiones sobre calidad, correspondencia,
+temporalidad y granularidad que forman parte de la lógica del negocio, y por eso se documentan
+como tal.
 
 ## La adopción del BI en la operación
 
 <!-- seccion: la-adopcion -->
 
-Lideré la implementación de herramientas especializadas de inteligencia de negocios, logrando un aumento del treinta y cinco por ciento en la eficiencia de los procesos analíticos y la adopción de los tableros por más de veinticinco usuarios clave.
+Lideré la implementación de **Power BI** en la operación, con un aumento del **35 % en la
+eficiencia de los procesos analíticos** y la adopción de los tableros por **más de 25 usuarios
+clave**: los responsables de programación, seguimiento y decisiones de servicio.
 
-El término usuarios clave es importante. En una operación de esta naturaleza, el valor no dependía de maximizar el número de personas que abrían un tablero, sino de conseguir que lo utilizaran quienes tenían responsabilidad sobre la programación, el seguimiento y las decisiones de servicio. La adopción debía observarse en la incorporación del producto analítico a las rutinas de trabajo, no solamente en sus estadísticas de acceso.
+«Usuarios clave» es la palabra importante. El valor no estaba en cuántas personas abrían un
+tablero sino en que lo usaran quienes tenían responsabilidad sobre la operación. Por eso cada
+tablero se diseñó alrededor de una pregunta operacional concreta: reconocer una condición,
+entender sus causas y orientar una acción, sin obligar al usuario a interpretar una acumulación de
+gráficas.
 
-Para lograrlo, los tableros se diseñaron alrededor de preguntas operacionales concretas. Cada indicador debía permitir reconocer una condición relevante, comprender sus posibles causas y orientar una acción. La solución no debía obligar a los usuarios a interpretar una acumulación de visualizaciones, sino ofrecerles una estructura clara para pasar del resultado general al detalle que requería intervención.
-
-Esta etapa consolidó mi comprensión de que Power BI debe diseñarse como una experiencia de decisión y no como una capa decorativa sobre los datos. Detrás de cada visualización debe existir un modelo coherente, dimensiones compartidas, medidas verificables y rutas de análisis que permitan profundizar sin perder consistencia. La simplicidad que percibe el usuario depende de la rigurosidad de la arquitectura que la sostiene.
-
-También aprendí que una solución analítica adoptada necesita equilibrar estabilidad y evolución. Sus definiciones deben permanecer suficientemente consistentes para generar confianza, pero el producto también debe incorporar nuevas preguntas y aprendizajes a medida que cambia la operación. La adopción no concluye con la publicación. Se sostiene mediante acompañamiento, retroalimentación y mejora continua.
-
-El resultado más importante no fue la cantidad de tableros desarrollados, sino la creación de una visión compartida de la operación. Cuando los responsables utilizan las mismas definiciones y pueden recorrer los resultados hasta su evidencia, la conversación deja de concentrarse en cuál cifra es correcta y puede orientarse hacia qué decisión conviene tomar.
+El resultado más importante no fue el número de tableros sino una visión compartida de la
+operación: cuando los responsables usan las mismas definiciones y pueden recorrer un resultado
+hasta su evidencia, la conversación deja de ser sobre cuál cifra es correcta y pasa a ser sobre
+qué hacer.
 
 ## Las mesas con la dirección del SITP
 
 <!-- seccion: las-mesas-del-sitp -->
 
-Coordiné mesas de trabajo con la dirección de concesionarios del Sistema Integrado de Transporte Público para analizar resultados, definir estrategias de mejora y articular decisiones sobre los procesos. Este trabajo contribuyó a alcanzar una mejora del veinticinco por ciento en los indicadores asociados con las intervenciones realizadas.
+Coordiné mesas de trabajo con la dirección de concesionarios del **Sistema Integrado de
+Transporte Público (SITP)** para analizar resultados, definir estrategias de mejora y articular
+decisiones sobre los procesos. Ese trabajo contribuyó a una **mejora del 25 % en los indicadores**
+de la operación.
 
-Estas mesas me enseñaron que la analítica alcanza su mayor valor cuando consigue alinear actores que observan la operación desde perspectivas diferentes. La autoridad, los concesionarios y los equipos técnicos podían tener responsabilidades, restricciones e interpretaciones distintas. Mi función consistía en proporcionar una base de evidencia común que permitiera comprender el problema antes de discutir la solución.
+Es negociación basada en evidencia entre la autoridad, los concesionarios y los equipos
+técnicos, cada uno con responsabilidades, restricciones e interpretaciones distintas. La
+credibilidad no se construye dentro de la reunión: el dato llega con una definición clara, una
+procedencia identificable y una relación verificable con los eventos de la operación, o no sirve
+para decidir.
 
-Para llegar a esa conversación, el dato debía estar preparado para ser examinado. Cada resultado requería una definición clara, una procedencia identificable y una relación verificable con los eventos de la operación. La credibilidad no podía construirse dentro de la reunión. Tenía que estar incorporada previamente en las fuentes, los pipelines, los modelos y las reglas utilizadas para producir el análisis.
-
-También aprendí que una recomendación ejecutiva debe conectar evidencia, mecanismo y consecuencia. No era suficiente señalar que un indicador había empeorado. Era necesario explicar qué condiciones producían el resultado, qué actores podían intervenir, qué alternativas estaban disponibles y cómo se evaluaría posteriormente su efecto.
-
-Esta experiencia fortaleció mi capacidad para comunicar entre niveles operativos, analíticos y directivos. Podía recorrer el problema desde los registros y las reglas de transformación hasta la síntesis ejecutiva, y regresar al detalle cuando una conclusión necesitaba ser explicada o defendida. Esa capacidad continúa siendo esencial en mi trabajo con plataformas analíticas, aplicaciones inteligentes y estrategias empresariales de inteligencia artificial.
-
-Las mesas también hicieron visible que una decisión no genera valor por quedar registrada en un acta. Necesita responsables, acciones, plazos e indicadores que permitan cerrar el ciclo y determinar si la intervención produjo el resultado esperado. La analítica con consecuencia no termina en la recomendación. Incluye la capacidad de observar lo que ocurrió después de actuar.
+Una recomendación ejecutiva conecta evidencia, mecanismo y consecuencia. No basta señalar que un
+indicador empeoró: hay que explicar qué condiciones lo producen, qué actor puede intervenir, qué
+alternativas hay y cómo se sabrá si funcionó. Y una decisión no genera valor por quedar en un
+acta: necesita responsable, acción, plazo e indicador para cerrar el ciclo.
 
 ## La predicción de demanda
 
 <!-- seccion: prediccion-de-demanda -->
 
-Desarrollé con scikit-learn un modelo de aprendizaje automático para predecir mensualmente la demanda del sistema y fortalecer las decisiones de planeación. El modelo incorporaba variables relacionadas con el tipo de día de la semana, la ruta establecida, la hora del día, la presencia de obras civiles, la realización de eventos y las condiciones de tráfico.
+Desarrollé con **scikit-learn** un modelo de aprendizaje automático para predecir la **demanda del
+sistema por ruta y franja horaria**, con actualización mensual, para fortalecer la planeación y
+la programación de flota. El problema, en lenguaje de ingeniería industrial, es pronóstico de
+demanda para planeación de capacidad.
 
-La evaluación no debía limitarse a una única medida de desempeño global. También era necesario observar cómo se comportaba el modelo entre rutas, franjas horarias, tipos de día y condiciones excepcionales, porque un buen resultado promedio podía ocultar errores importantes en segmentos críticos de la operación. Esta experiencia fortaleció mi criterio para evaluar modelos no solo por su precisión estadística, sino por la estabilidad, utilidad y confiabilidad de sus resultados dentro del contexto en el que serían utilizados.
+Las variables representaban las dimensiones del comportamiento de la demanda:
 
-El horizonte mensual respondía a una necesidad concreta de planificación. El propósito no era anticipar únicamente el siguiente movimiento de la operación, sino proporcionar una perspectiva suficientemente amplia para ajustar la programación y preparar los recursos con anticipación. La utilidad del modelo dependía de que sus resultados llegaran dentro del ciclo real en el que podían modificarse las decisiones.
+- el tipo de día y la hora del día, para los patrones recurrentes;
+- la ruta, para las diferencias estructurales entre servicios y zonas;
+- las obras civiles, los eventos y las condiciones de tráfico, para las excepciones.
 
-Las variables representaban diferentes dimensiones del comportamiento de la demanda. El tipo de día y la hora permitían modelar patrones temporales recurrentes. La ruta incorporaba las diferencias estructurales entre servicios y zonas. Las obras civiles, los eventos y el tráfico introducían condiciones externas capaces de modificar los patrones habituales. El comportamiento del sistema no podía explicarse exclusivamente por su historia; también debía interpretarse dentro del contexto urbano en el que operaba.
+Es un problema de series de tiempo, y la validación tenía que respetarlo: se evaluó con **RMSE**
+respetando el orden temporal, nunca con una partición aleatoria que dejara ver el futuro. Y no
+bastaba una medida global: había que mirar cómo se comportaba el modelo por ruta, por franja y
+por tipo de día, porque un buen promedio esconde errores en los segmentos críticos.
 
-El desarrollo del modelo exigió transformar variables operativas y contextuales en características consistentes, organizar datos históricos, controlar su calidad y evaluar si la predicción tenía suficiente utilidad para respaldar decisiones. Esta experiencia me enseñó que el aprendizaje automático no comienza con la selección de un algoritmo. Comienza con la representación correcta del problema, la definición del horizonte y la correspondencia entre la salida del modelo y la decisión que debe habilitar.
+El modelo corrió **diez meses**. Lo usaban los profesionales que presentaban el informe mensual de
+demanda que las unidades tomaban como referencia para programar, y contribuyó a una **mejora del
+20 % en el rendimiento reportado del sistema**.
 
-El modelo contribuyó a una mejora del veinte por ciento en el rendimiento reportado del sistema. Más allá de la cifra, el aprendizaje fundamental fue que una predicción solo genera valor cuando puede incorporarse en un proceso de decisión. Un modelo puede alcanzar un buen desempeño técnico y seguir siendo irrelevante si entrega la respuesta demasiado tarde, utiliza variables que no estarán disponibles al momento de inferir o produce una salida que la organización no puede convertir en una acción.
-
-Esta fue una de mis primeras experiencias conectando aprendizaje automático con una consecuencia operacional real. También estableció una disciplina que mantengo en el diseño de soluciones inteligentes: definir primero qué decisión se quiere mejorar, determinar con cuánto tiempo de anticipación debe producirse la respuesta y evaluar el modelo tanto por su desempeño técnico como por su impacto dentro del proceso.
-
-Con el tiempo, esta comprensión se ampliaría hacia aplicaciones y agentes de inteligencia artificial. Un modelo genera una predicción; una aplicación puede integrarla con reglas y flujos de trabajo; un agente puede consultar datos, interpretar contexto, proponer acciones y utilizar herramientas dentro de límites definidos. Sin embargo, toda esa capacidad depende del mismo fundamento que aprendí aquí: datos confiables, propósito explícito, evaluación rigurosa y una relación clara entre el resultado y la decisión.
+De ahí salió una disciplina que mantengo para toda solución inteligente: primero qué decisión se
+quiere mejorar, con cuánta anticipación necesita la respuesta y quién la va a usar; después el
+algoritmo.
 
 ## La automatización
 
 <!-- seccion: la-automatizacion -->
 
-Implementé scripts que redujeron en un cuarenta por ciento el tiempo dedicado a tareas repetitivas de preparación y procesamiento de información. Aunque este logro puede parecer menos sofisticado que un modelo predictivo, fue una condición necesaria para liberar capacidad analítica y concentrar el esfuerzo del equipo en problemas de mayor valor.
+Implementé scripts que redujeron un **40 % el tiempo de las tareas repetitivas** de preparación y
+procesamiento de información. Fue la condición para liberar capacidad analítica: si el tiempo se
+va en localizar archivos, consolidar estructuras y corregir formatos, la organización tiene
+analistas pero no capacidad analítica.
 
-La automatización permitió aplicar reglas de forma consistente, reducir la intervención manual y hacer que los ciclos de análisis fueran más rápidos y reproducibles. Actividades que antes debían ejecutarse paso a paso podían incorporarse a un flujo estructurado, con entradas conocidas, transformaciones definidas y resultados verificables.
-
-Esta experiencia me enseñó a observar el trabajo analítico como un pipeline completo. Si la mayor parte del tiempo se consume localizando archivos, consolidando estructuras y corrigiendo formatos, la organización cuenta con analistas, pero no necesariamente con una capacidad analítica escalable. Automatizar esas actividades no elimina el criterio profesional. Lo desplaza hacia tareas en las que puede producir más valor.
-
-También comprendí que la automatización debe incluir controles y manejo de excepciones. Un script que funciona únicamente bajo condiciones ideales traslada el esfuerzo manual hacia la resolución constante de fallas. Una solución sostenible necesita validar sus entradas, registrar desviaciones y hacer visible cuándo una situación requiere revisión humana.
-
-Ese principio continúa vigente en mi trabajo con agentes de IA. La automatización inteligente no consiste en retirar indiscriminadamente a las personas del proceso. Consiste en asignar a la tecnología las actividades que puede ejecutar de forma confiable, conservar trazabilidad sobre sus acciones y transferir a una persona aquellas situaciones que requieren interpretación, juicio o responsabilidad adicional.
+La automatización aplicaba las mismas reglas cada vez, redujo la intervención manual y volvió los
+ciclos de análisis reproducibles: entradas conocidas, transformaciones definidas, salidas
+verificables. Y con controles: un script que solo funciona en condiciones ideales traslada el
+esfuerzo manual a resolver fallas. Validar las entradas, registrar las desviaciones y hacer
+visibles las excepciones era parte del diseño.
 
 ## Lo que C&M Consultores consolidó
 
 <!-- seccion: lo-que-cm-consultores-consolido -->
 
-Vista en retrospectiva, C&M Consultores fue la experiencia en la que convertí mi conocimiento de la operación de transporte en una capacidad analítica más integrada. La etapa anterior me había enseñado a reconstruir y supervisar el sistema mediante datos. En esta nueva responsabilidad avancé hacia la automatización de su preparación, la unificación de fuentes, la adopción de herramientas de inteligencia de negocios y la incorporación de modelos capaces de anticipar comportamientos relevantes.
+En C&M Consultores convertí mi conocimiento de la operación de transporte en una capacidad
+analítica integrada: la etapa anterior me había enseñado a reconstruir y supervisar el sistema
+con datos; en esta lo unifiqué, lo automaticé, lo llevé a Power BI, lo puse en una mesa con la
+dirección del SITP y lo usé para predecir.
 
-Allí comprendí que ETL, modelado, visualización, predicción y comunicación ejecutiva no son productos independientes. Forman parte de una misma arquitectura de decisión. Los datos deben integrarse bajo reglas consistentes, el modelo debe conservar su significado, el producto analítico debe responder a una necesidad real y la organización debe contar con mecanismos para convertir el resultado en una acción.
-
-La unificación de fuentes me enseñó a construir una representación común de la operación. La automatización liberó capacidad para el análisis. Los tableros trasladaron esa capacidad a más de veinticinco usuarios clave. Las mesas con la dirección convirtieron la evidencia en acuerdos. El modelo de demanda amplió la conversación desde lo ocurrido hacia lo que podía suceder y lo que debía prepararse con anticipación.
-
-Esta experiencia también consolidó mi interés por los diferentes niveles de capacidad que puede ofrecer una solución. Un reporte documenta. Un tablero permite explorar. Una alerta dirige la atención. Un modelo anticipa. Una recomendación orienta. Una aplicación estructura la ejecución. Un agente puede coordinar conocimiento y herramientas para actuar dentro de límites definidos. El instrumento adecuado depende de la decisión, la oportunidad, el riesgo y el grado de autonomía que la organización puede administrar.
-
-C&M Consultores marcó, por tanto, mi transición desde el análisis de una operación hacia el diseño de sistemas analíticos para dirigirla. Allí se fortalecieron varios fundamentos de mi trabajo actual con Power BI y plataformas de datos: pipelines reproducibles, modelos consistentes, productos adoptados, indicadores trazables y experiencias analíticas conectadas con decisiones reales.
-
-También se formó una parte esencial de mi visión sobre inteligencia artificial. Comprendí que un modelo no es valioso por su complejidad ni por su precisión aislada, sino por su capacidad de integrarse en un proceso, llegar en el momento adecuado y mejorar una decisión. Esa misma exigencia guía hoy la forma en que diseño aplicaciones inteligentes, agentes de IA y arquitecturas empresariales orientadas a producir capacidades confiables, observables y sostenibles.
-
-C&M Consultores también consolidó mi convicción de que una capacidad analítica debe aprender de su propia operación. Los datos históricos no solo servían para construir indicadores y entrenar modelos; también debían permitir comparar las predicciones con los resultados observados, revisar los supuestos y ajustar progresivamente las decisiones. Esta lógica de evaluación continua se convertiría después en un fundamento de mi trabajo con plataformas analíticas, aplicaciones inteligentes y agentes de IA: ninguna solución está realmente terminada si la organización no puede observar su comportamiento, medir su impacto y mejorarla a partir de nueva evidencia.
+ETL, modelado, visualización, predicción y comunicación ejecutiva no son productos
+independientes. Son una misma arquitectura de decisión: los datos se integran bajo reglas
+consistentes, el modelo conserva su significado, el producto responde a una pregunta, la
+predicción llega a tiempo y la conversación termina en una decisión con responsable.

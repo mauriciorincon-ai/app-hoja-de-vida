@@ -60,6 +60,17 @@ conceptos:
     etiqueta: "los tableros publicados"
     fuente: "content/tableros/*.json"
     sustantivos: [tableros]
+    # Un tablero es también lo que se construye en un empleo («23 tableros de control» en
+    # CTIC): solo se juzga el conteo cuando cerca se habla de la vitrina o de datos públicos.
+    contexto:
+      - publicados
+      - "de la vitrina"
+      - "en la vitrina"
+      - "del portafolio"
+      - "en el portafolio"
+      - "datos publicos"
+      - "datos públicos"
+      - "datos abiertos"
     salvedades:
       - frase: "tableros de control"
         razon: "habla del oficio, no del inventario de la vitrina"

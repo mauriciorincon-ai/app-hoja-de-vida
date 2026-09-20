@@ -338,3 +338,58 @@ El dueño marcó la hoja única. Lo que cambió en los cuatro documentos ya escr
   :2023 (A4). El gate acepta el prefijo UNE- con ese año y sigue vetando «ISO/IEC 42001:2025» a
   secas; caso de juguete añadido.
 
+### Grupo 2 cerrado: `cafam` · `transmilenio-cm` · `banco-pichincha` · `vesting` · `fundacion-ctic`
+
+| Documento         | Antes | Después | Subsecciones | Rojos propios |
+| ----------------- | ----: | ------: | -----------: | ------------: |
+| `cafam`           | 2.818 |   1.405 |        7 → 7 |        4 → 0 |
+| `transmilenio-cm` | 2.827 |   1.115 |        7 → 7 |        6 → 0 |
+| `banco-pichincha` | 4.173 |   1.138 |        9 → 8 |        9 → 0 |
+| `vesting`         | 3.861 |   1.282 |        8 → 7 |        7 → 0 |
+| `fundacion-ctic`  | 4.624 |   1.271 |       10 → 7 |       11 → 0 |
+
+**Qué entró de las respuestas del dueño:**
+
+- `cafam`: Oracle WMS Cloud, con Oracle recién dueño del producto (B1); medicamentos (B2); 14 de
+  Cafam + 6 de Oracle y los roles de los 15 usuarios del BI (B3); las VBA siguieron corriendo (B3);
+  la validación por medicamentos con criterio 80-20 (C21); FlexSim sobre el despacho de
+  medicamentos y BPMN con Bizagi (C3, C65); SAS como herramienta complementaria (C62); las cuatro
+  cifras del case study con su nombre técnico: exactitud de registro de inventario (C20).
+- `transmilenio-cm`: fechas correctas y «Fuerza Operativa» (B4); las cinco fuentes nombradas
+  (B5); Power BI en la frase del hecho (C23); demanda por franja horaria con actualización
+  mensual (C24); validación con RMSE respetando el orden temporal (C25); el modelo corrió diez
+  meses y quién lo usaba (C26); +35 % «de eficiencia de los procesos analíticos» (A12).
+  **«Dieciocho meses» no se restituye aquí:** este rol fue de once (julio 2021 – mayo 2022); los
+  dieciocho son del primero en TransMilenio y ya están en `cm-operaciones`.
+- `banco-pichincha`: cargo completo (C31); equipo de 5 (C29); fuga, mora y riesgo contextualizados
+  y en producción (B7); scikit-learn (C30); 12 profesionales (C28); +20 % «de productividad en la
+  preparación y uso de la información» (A14); Bizagi (C3). El documento pasa de 4.173 a 1.138
+  palabras: era el tercero más largo del grupo con el rol más corto, y el 40 % era doctrina que
+  ya tenía dueño en `bi-que-se-adopta`, `analitica-predictiva`, `gobierno` y `fabric`.
+- `vesting`: **la subsección nueva «El tamaño de lo construido»** con la tabla —12 clientes, 27
+  agentes en inventario, 23 vigilados a la vez, 1.000 eventos por día, 20 GB, 120 tablas, tiempo
+  real— y lo que se capturaba (A11, A17); Big Data, Data Warehouse y procesamiento distribuido
+  restituidos con el sitio; combinación de modos de almacenamiento (C37); workspaces separados
+  por cliente (C38); n8n (C39); **el proceso core en once etapas** numeradas —la descomposición en
+  once es del builder sobre el propio texto del dueño, que fijó el número (A17)—; la frase del
+  ingeniero industrial y la planta, y el DP-600 obtenido en el rol, recuperados del original (C34);
+  la salida en enero de 2025 con la línea que eligió (A17b). **Dash Agent AI no vuelve:** el dueño
+  aclaró que lo concibió y diseñó por completo en CTIC (C35).
+- `fundacion-ctic`: marzo de 2025 (A8); UNE-ISO/IEC 42001:2025 (A4); 23 instrumentos, 8
+  terminados y 15 en construcción (A15); 42 productos, 23 tableros, 20 líderes, 15 procesos, ~75
+  usuarios, «cerca del 60 %», 10 planes, 12 oportunidades, 7 casos, 3 priorizados, 2 documentados
+  (A16, C43); planes de mejora diseñados, no implementados (C41); el agente experto en ISO 42001
+  (C42); IPS, habilitación, indicadores de calidad, habeas data / Ley 1581, anonimización y las
+  cuatro reglas de calidad (B10); línea directa con la Dirección de Planeación y tres
+  subdirecciones (C56). Las dos subsecciones que decían lo mismo se fundieron en una; la
+  «convergencia de la trayectoria» salió a `origenes`, que es su dueño; la tabla de avance es el
+  único lugar donde viven las cifras.
+
+**Un ajuste al gate de cifras:** «23 tableros de control» en CTIC disparaba el conteo de los
+tableros de la vitrina (6). El concepto `tableros` exige ahora contexto de vitrina o de datos
+públicos, como ya lo exigía el de agentes; «seis tableros construidos sobre datos públicos»
+sigue vigilado.
+
+**Marcador de los seis gates:** 163 → **122**. Densidad 105 · léxico 12 · repetidos 5.
+Golden set: 3 documentos en rojo, todos de los grupos siguientes.
+
