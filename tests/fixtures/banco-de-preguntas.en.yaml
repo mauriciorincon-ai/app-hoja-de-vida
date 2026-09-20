@@ -451,7 +451,11 @@ ajenas:
   - pregunta: "write me a love poem"
     guardrail: bloquea
   - pregunta: "what do you think about bitcoin?"
-    guardrail: bloquea
+    guardrail: pasa
+    porque: >-
+      «think» es un verbo corriente del inglés y aparece en el corpus («I
+      think»); en español «opinas» no casa con nada. Llega al modelo y el
+      prompt la declina.
   - pregunta: "cuéntame un chiste de gatos"
     guardrail: bloquea
   - pregunta: "¿qué tiempo hará mañana en París?"

@@ -763,3 +763,68 @@ Vercel. **Y la entrega:** la rama `contenido/a-fondo-v2` tiene tres commits loca
 sobre los de F0–F3 y **no se sube hasta que el dueño lo diga**; el cuerpo del PR está listo en
 la carpeta de la auditoría. Al mergear: conflicto esperado con el PR #32 en `skills` de
 `cv.{es,en}.yaml` (se conservan los dos grupos), limpieza del campo *homepage* tras el deploy.
+
+---
+
+## v3 — «Reescribe pero no me borres mi trabajo»: el corpus vuelve a ser el del dueño, ampliado
+
+El dueño revisó la v2 el 2026-09-20 y la rechazó por lo que era: una reescritura que dejó sus
+documentos en menos de un tercio. Su orden, textual: «quiero que estos documentos queden lo más
+extensos posible, porque el chat necesita un montón de contexto… claro que quiero que reescribas,
+a mí no me gustó la redacción que se planteó, pero no me quites lo que hice: amplía, amplía,
+amplía… alinea todo con las preguntas que me hiciste, cero inconcordancia». La v2 se conserva
+solo como cantera de datos; el error —recortar sin enseñar qué salía— queda escrito en la sección
+de F2 y aquí.
+
+### Qué se hizo
+
+1. Se restauró el texto del dueño de los 24 documentos desde el commit que ya traía sus
+   respuestas del bloque A y sin `[CONFIRMAR]` (`7eeec2d`; `inglopres` desde F0). Su carpeta
+   `~/Documents/hoja-de-vida-henry/a-fondo/` nunca se tocó.
+2. Seis editores en paralelo, con la misma regla escrita: conservar cada idea, anécdota y cifra;
+   mejorar la redacción sin quitar; **corregir** con HECHOS.md (los 113 códigos); **ampliar** con
+   las respuestas, la hoja de vida (sin terceros), `cv.es.yaml`, los case studies y las fichas;
+   partir las subsecciones largas (tope 400) sin recortar; acortar SOLO un bloque repetido entre
+   documentos, y reportarlo. Lo acortado, uno por uno: en `vesting` un párrafo del dueño estaba
+   dos veces en el mismo documento y otro duplicado al cierre; en `cm-operaciones` tres párrafos
+   estaban duplicados dentro de la misma subsección; en `gobierno-de-datos-y-de-ia` un párrafo
+   aparecía dos veces seguidas; `como-aprendo` remitió a `apps-pipeline` un bloque que ya vivía
+   allí (C57). Nada más salió.
+3. Las correcciones de fondo que la alineación encontró en la prosa del dueño (todas con código):
+   Bizagi y FlexSim en las cuatro empresas → Bizagi en cuatro, FlexSim en dos (C3); los tableros
+   de la vitrina «integrados con Fabric» en siete pasajes → ninguno usa Fabric (C79); Dash Agent
+   AI narrado como continuación de Vesting → concebido en CTIC (C35); «13 componentes» → 23
+   instrumentos, 8 terminados (A15); «60 %» → «cerca del 60 %», estimado (A16); tres tipos de
+   rol → cuatro (C47); una «cuarta capa» del chat que validaba citas y no existe → lo que sí hay
+   (C75); «ocho empleos en siete organizaciones» y «en ocho» en el mismo documento → ocho.
+4. El vocabulario de afuera volvió a los títulos (la búsqueda es léxica y el título pesa doble):
+   28 títulos en español y 8 en inglés cambiaron para que el banco y el golden encuentren su
+   documento. Cuatro literales de las ajenas («chiste», «gatos», «receta», «total mundial») se
+   retiraron de la prosa propia en los dos idiomas.
+5. Ocho traductores en paralelo produjeron los 25 gemelos desde el español cerrado, con la misma
+   regla de nada nuevo y nada perdido; los 50 archivos pasan a `aprobado`.
+
+### Los números
+
+| | v2 (rechazada) | v3 |
+| --- | ---: | ---: |
+| Palabras de prosa por idioma | ~30.000 | **~144.000** (ES 158.606 con cabeceras; EN 157.876) |
+| Subsecciones | 171 | **529** |
+| Fragmentos en el índice del chat | 494 ES · 493 EN | **1.412 ES · 1.401 EN** |
+| Banco de afuera (ES / EN) | 136/136 · 136/136 | **136/136 · 136/136**, 103 de primeras en ES |
+| Golden (ES / EN) | 75/75 · 75/75 | **75/75 · 75/75** |
+| Seis gates de coherencia | 0 rojos | **0 rojos** sobre 529 subsecciones |
+| Suite completa | 1.158 | **1.158 verdes**, typecheck y lint limpios |
+
+El contexto medio que recibe el modelo por pregunta sigue en ~525 palabras (k = 4): el corpus
+creció cinco veces, pero el fragmento sigue midiendo 180 palabras, así que lo que cambia es la
+**cobertura**, no la factura. La curva de k se volvió a medir: k = 3 → 135/136, k = 4 → 135, k = 6
+→ 136 antes del último ajuste de títulos; después, 136/136 con k = 4.
+
+### Dos avisos honestos
+
+- Un editor amplió `banco-pichincha` con ejemplos escritos como hipótesis («una cartera seguida
+  con dos definiciones de mora»); se revisaron y quedaron en condicional, nunca como hecho. Es
+  el tipo de frase que el dueño debe leer en su gate ⭐ (o6).
+- `fabric-en-la-practica` conserva ~460 palabras del dueño sobre la exploración de Fabric en
+  público donde HECHOS C58 pedía 80: la orden «no me quites lo que hice» manda sobre C58.

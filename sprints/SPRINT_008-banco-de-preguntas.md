@@ -3,8 +3,8 @@
 > **Generado por `pnpm corpus:informe` el 2026-09-20. No se edita a mano.**
 > Banco: `tests/fixtures/banco-de-preguntas.es.yaml` — **136 preguntas** de 10 familias, 15 preguntas ajenas y 3 huecos declarados.
 >
-> **HOY** = el índice publicado, tal como está en disco: **494 fragmentos** (los 24 documentos siguen en `borrador`, así que el chat todavía no ve nada de ellos).
-> **M2** = el índice que existirá cuando los apruebes: **494 fragmentos**.
+> **HOY** = el índice publicado, tal como está en disco: **1412 fragmentos** (los 24 documentos siguen en `borrador`, así que el chat todavía no ve nada de ellos).
+> **M2** = el índice que existirá cuando los apruebes: **1412 fragmentos**.
 > El `top-4` es el que de verdad entra al contexto del modelo.
 
 ---
@@ -14,7 +14,7 @@
 | | HOY | M2 |
 | --- | --- | --- |
 | Preguntas con su fuente en el top-4 | 136/136 (100 %) | **136/136 (100 %)** |
-| …y además de primeras | 99 (73 %) | **99 (73 %)** |
+| …y además de primeras | 103 (76 %) | **103 (76 %)** |
 | Preguntas que reciben «eso se me escapa» | 0 | **0** |
 
 
@@ -26,16 +26,16 @@
 
 | Familia | Preguntas | Con su fuente en top-4 | De primeras |
 | --- | --- | --- | --- |
-| trayectoria | 25 | 25 (100 %) | 16 (64 %) |
-| forma-de-trabajar | 12 | 12 (100 %) | 9 (75 %) |
-| certificaciones | 10 | 10 (100 %) | 5 (50 %) |
+| trayectoria | 25 | 25 (100 %) | 14 (56 %) |
+| forma-de-trabajar | 12 | 12 (100 %) | 10 (83 %) |
+| certificaciones | 10 | 10 (100 %) | 9 (90 %) |
 | ia-y-agentes | 16 | 16 (100 %) | 13 (81 %) |
-| plataforma-y-datos | 17 | 17 (100 %) | 12 (71 %) |
-| bi-y-analitica | 13 | 13 (100 %) | 8 (62 %) |
-| gobierno | 9 | 9 (100 %) | 9 (100 %) |
-| procesos | 6 | 6 (100 %) | 5 (83 %) |
-| vitrina | 15 | 15 (100 %) | 12 (80 %) |
-| encaje | 13 | 13 (100 %) | 10 (77 %) |
+| plataforma-y-datos | 17 | 17 (100 %) | 11 (65 %) |
+| bi-y-analitica | 13 | 13 (100 %) | 11 (85 %) |
+| gobierno | 9 | 9 (100 %) | 7 (78 %) |
+| procesos | 6 | 6 (100 %) | 4 (67 %) |
+| vitrina | 15 | 15 (100 %) | 13 (87 %) |
+| encaje | 13 | 13 (100 %) | 11 (85 %) |
 
 ## Las que no traen su fuente
 
@@ -65,706 +65,706 @@ Preguntas que un reclutador hace y que **el corpus no contesta hoy**, con el doc
 
 **☑️ ¿Dónde trabaja Henry actualmente?**
 
-- top-4: contacto, a-fondo-como-trabajo-como-hablo-con-el-negocio~2, perfil, a-fondo-fundacion-ctic-el-rol-actual
+- top-4: contacto, a-fondo-fundacion-ctic-el-rol-actual~1, a-fondo-procesos-y-simulacion-de-las-preguntas-a-las-investigaciones~1, a-fondo-gobierno-de-datos-y-de-ia-experiencia-en-lo-que-gobierno~1
 - primer fragmento: «Bogotá, Colombia · Abierto a reubicación internacional y trabajo remoto. Email: mauricio.hmrc@gmail.com. LinkedIn: https://www.linkedin.com/in/henry-mauricio-rincon · GitHub: https://github.com/mauriciorincon-ai»
 
-**☑️ ¿Qué hace en la Fundación CTIC?**
+**✅ ¿Qué hace en la Fundación CTIC?**
 
-- top-4: trayectoria-0, a-fondo-fundacion-ctic-analitica-por-procesos~1, a-fondo-fundacion-ctic-lo-que-reune, a-fondo-fundacion-ctic-sistema-de-gestion-de-ia~1
-- primer fragmento: «2025 — hoy: Profesional de Analítica, Fundación CTIC. Analítica y gobierno de datos para decisiones administrativas y asistenciales en salud. Lidero la estrategia de IA y la implementación de ISO/IEC 42001. Modelos de an…»
+- top-4: a-fondo-fundacion-ctic-el-limite-de-confidencialidad, a-fondo-procesos-y-simulacion-por-que-me-hace-mejor-disenando~2, trayectoria-0, a-fondo-fundacion-ctic-convergencia-de-la-trayectoria~2
+- primer fragmento: «Todo lo que comunico sobre esta experiencia conserva un límite que considero innegociable: no expongo datos de pacientes ni información clínica; tampoco detalles sensibles de los procesos, ni conocimiento interno cuya di…»
 
 **✅ ¿Tiene experiencia con datos del sector salud?**
 
-- top-4: a-fondo-fundacion-ctic-el-rol-actual, a-fondo-gobierno-de-datos-y-de-ia-experiencia-y-formacion, a-fondo-origenes-cuantos-anos~1, a-fondo-gobierno-de-datos-y-de-ia-tres-veces~1
-- primer fragmento: «Desde **marzo de 2025** trabajo como Profesional de Analítica en la **Fundación CTIC**, una institución del sector **salud**. Es el contexto más exigente en el que he trabajado en calidad, seguridad, privacidad, trazabil…»
+- top-4: a-fondo-fundacion-ctic-gobierno-y-calidad, a-fondo-origenes-cuantos-anos~2, a-fondo-vesting-trazabilidad-y-naturaleza-de-la-informacion~2, a-fondo-gobierno-de-datos-y-de-ia-gobierno-en-salud~1
+- primer fragmento: «He gestionado procesos de limpieza, integración y estandarización de datos orientados a fortalecer su calidad, consistencia y confiabilidad, en alineación con las políticas y necesidades institucionales. Esta experiencia…»
 
 **☑️ ¿Qué hizo en Vesting?**
 
-- top-4: a-fondo-agentes-en-produccion-n8n, a-fondo-agentes-en-produccion-el-proceso-core, a-fondo-vesting-el-puente, trayectoria-1
-- primer fragmento: «Los flujos de los agentes de Vesting corrían sobre **n8n**: conectar servicios, organizar secuencias, ejecutar reglas e integrar componentes. Pero la arquitectura no era una colección de flujos visuales: el valor estaba…»
+- top-4: a-fondo-agentes-en-produccion-que-me-llevo~1, a-fondo-vesting-especificacion-del-agente~1, a-fondo-gobierno-de-datos-y-de-ia-gobierno-en-vesting~2, a-fondo-gobierno-de-datos-y-de-ia-acceso-y-cambio~1
+- primer fragmento: «Vesting y ARKHÉ representan dos etapas diferentes de una misma evolución profesional. En Vesting construí la plataforma de datos y estructuré el proceso que sirvió como marco para desarrollar 27 agentes en un entorno pro…»
 
-**✅ ¿Cuánto tiempo estuvo en Vesting y con qué cargo?**
+**☑️ ¿Cuánto tiempo estuvo en Vesting y con qué cargo?**
 
-- top-4: a-fondo-vesting-el-tamano-de-lo-construido, a-fondo-vesting-monitoreo-de-agentes~1, trayectoria-1, a-fondo-vesting-el-puente
-- primer fragmento: «Las cifras del ecosistema al cierre de la etapa: | Qué | Cuánto | | ------------------------------------- | ----------------------------------------------- | | Clientes integrados a la plataforma | **12** | | Agentes en…»
+- top-4: a-fondo-bi-que-se-adopta-adopcion-con-nombre-de-cargo~2, a-fondo-vesting-el-tamano-de-lo-construido~1, a-fondo-como-aprendo-los-plazos~1, a-fondo-transmilenio-cm-las-cinco-fuentes~2
+- primer fragmento: «En C&M Consorcio 2018, entre noviembre de 2018 y mayo de 2020, desarrollé tableros e informes de desempeño orientados al control y la transparencia de la supervisión de TransMilenio: 2 informes semanales, 1 consolidado m…»
 - nota: El hito de la trayectoria es tan buena fuente como el documento a fondo: es el que trae el periodo y el cargo exactos.
 
 **☑️ ¿Por qué salió de Vesting?**
 
-- top-4: a-fondo-agentes-en-produccion-monitorear-un-agente, a-fondo-agentes-en-produccion-el-proceso-core, a-fondo-vesting-el-puente, trayectoria-1
-- primer fragmento: «Un agente puede estar disponible y responder con fluidez mientras la calidad de sus resultados se deteriora; o responder bien con una latencia, un costo o unos reintentos que lo vuelven inviable. Por eso el monitoreo de…»
+- top-4: a-fondo-agentes-en-produccion-el-proceso-core~1, a-fondo-vesting-el-tamano-de-lo-construido~2, a-fondo-vesting-por-que-sali-y-el-puente~1, a-fondo-banco-pichincha-lo-que-pichincha-consolido~2
+- primer fragmento: «En Vesting definí, documenté y validé el proceso core para diseñar e implementar agentes de inteligencia artificial: once etapas, del caso de uso a la operación observable, que están numeradas en el documento de Vesting.…»
 - nota: El corpus no dice por qué salió, y está bien que no lo diga. Lo que se exige aquí es que traiga el documento de Vesting: con esas fuentes delante, el modelo contesta lo que sí consta y declara lo que no.
 
-**✅ ¿Ha trabajado en un banco?**
+**☑️ ¿Ha trabajado en un banco?**
 
-- top-4: a-fondo-banco-pichincha-programa-de-formacion, a-fondo-banco-pichincha-el-problema-real, a-fondo-banco-pichincha-modelos-predictivos, a-fondo-origenes-del-proceso-a-la-ia
-- primer fragmento: «Para sostener la adopción diseñé y dicté un **programa de formación a 12 profesionales** del banco. No enseñaba funciones de una herramienta: recorría la solución analítica completa, sobre situaciones reales de los parti…»
+- top-4: a-fondo-como-trabajo-equipos-que-he-liderado~2, a-fondo-como-trabajo-equipos-que-he-liderado~3, a-fondo-banco-pichincha-modelos-predictivos~1, a-fondo-banco-pichincha-programa-de-formacion~1
+- primer fragmento: «| Dónde | Cuándo | Equipo | Resultado | | ------------------- | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------…»
 
 **✅ ¿Qué hizo en Banco Pichincha?**
 
-- top-4: a-fondo-banco-pichincha-el-problema-real, a-fondo-banco-pichincha-lo-que-pichincha-consolido, trayectoria-2, a-fondo-banco-pichincha-gobierno-de-datos
-- primer fragmento: «Entré a **Banco Pichincha en marzo de 2023** como Analista Senior de Analítica y Reportes y estuve hasta julio del mismo año. Fueron cinco meses, y fue mi paso por el **sector financiero**: en **banca** el dato tiene due…»
+- top-4: a-fondo-banco-pichincha-deuda-tecnica-del-modelo, a-fondo-banco-pichincha-la-cadena-completa~1, a-fondo-gobierno-de-datos-y-de-ia-gobierno-en-banca~3, a-fondo-banco-pichincha-lo-que-pichincha-consolido~2
+- primer fragmento: «También comprendí en Banco Pichincha que un modelo semántico acumula deuda técnica cuando crece sin principios comunes. La duplicación de medidas, las relaciones ambiguas, los cálculos innecesariamente complejos y los no…»
 
 **✅ ¿Tiene experiencia en el sector financiero?**
 
-- top-4: a-fondo-banco-pichincha-el-problema-real, a-fondo-fabric-en-la-practica-power-bi~1, a-fondo-fundacion-ctic-el-rol-actual, a-fondo-gobierno-de-datos-y-de-ia-experiencia-y-formacion
-- primer fragmento: «Entré a **Banco Pichincha en marzo de 2023** como Analista Senior de Analítica y Reportes y estuve hasta julio del mismo año. Fueron cinco meses, y fue mi paso por el **sector financiero**: en **banca** el dato tiene due…»
+- top-4: a-fondo-banco-pichincha-el-problema-real~1, a-fondo-las-investigaciones-de-experiencia-a-pregunta~2, a-fondo-fundacion-ctic-gobierno-y-calidad, a-fondo-analitica-predictiva-dos-modelos~1
+- primer fragmento: «Ingresé a Banco Pichincha en marzo de 2023 como Analista Senior de Analítica y Reportes y permanecí en la organización hasta julio del mismo año. Fueron cinco meses, y fue mi paso por el sector financiero: en banca el da…»
 
 **☑️ ¿Qué hizo en Cafam?**
 
-- top-4: a-fondo-origenes-el-hilo~2, trayectoria-4, a-fondo-cafam-lo-que-cafam-consolido, casestudy-cafam
-- primer fragmento: «- **Estudio de tiempos y suplementos por fatiga**, en Inglopres: un tiempo observado no es un estándar hasta que reconoce el esfuerzo de quien lo ejecuta. - **Balanceo de líneas y teoría de restricciones**, en Ceinfes: e…»
+- top-4: a-fondo-origenes-el-hilo~2, a-fondo-como-trabajo-seguimiento-visible~3, a-fondo-cafam-resultados-en-cifras~2, trayectoria-4
+- primer fragmento: «- **Estudio de tiempos y suplementos por fatiga**, en Inglopres, con la tabla de la OIT: un tiempo observado no es un estándar hasta que reconoce el esfuerzo de quien lo ejecuta. - **Balanceo de líneas y teoría de restri…»
 
 **✅ ¿Ha participado en la implementación de un sistema de gestión de bodega?**
 
-- top-4: a-fondo-cafam-el-contexto~1, a-fondo-fundacion-ctic-sistema-de-gestion-de-ia~1, a-fondo-fundacion-ctic-sistema-de-gestion-de-ia~2, casestudy-cafam
-- primer fragmento: «Entré a **Cafam en octubre de 2020** como Analista de Sistemas de Información y de Proyectos y estuve hasta junio de 2021. Mi responsabilidad fue la implementación de un **WMS** —un sistema de gestión de almacenes, en es…»
+- top-4: a-fondo-cafam-el-contexto~1, a-fondo-fundacion-ctic-inventario-y-ciclo-de-vida~1, a-fondo-cafam-el-contexto~3, a-fondo-fundacion-ctic-sistema-de-gestion-de-ia~2
+- primer fragmento: «Ingresé a Cafam en octubre de 2020 como Analista de Sistemas de Información y de Proyectos y permanecí en la organización hasta junio de 2021. Mi responsabilidad se concentró en la implementación de un WMS —un sistema de…»
 
 **✅ ¿Cuál es el equipo más grande que ha liderado?**
 
-- top-4: a-fondo-cafam-el-equipo-de-veinte~2, a-fondo-cafam-el-equipo-de-veinte~1, casestudy-cafam, a-fondo-como-trabajo-como-lidero~2
-- primer fragmento: «El reto de coordinación no era repartir casos de prueba. Era asegurar **cobertura**, evitar duplicidades, mantener consistencia en la ejecución y hacer visible qué partes del sistema estaban validadas, cuáles pendientes…»
+- top-4: a-fondo-cafam-el-equipo-de-veinte~1, a-fondo-cafam-el-equipo-de-veinte~2, a-fondo-como-trabajo-equipos-que-he-liderado~1, casestudy-cafam
+- primer fragmento: «Lideré un equipo mixto de veinte personas durante la fase de pruebas: catorce integrantes de Cafam y seis profesionales de Oracle, organización que acababa de comprar el producto y lo estaba implantando con sus propios e…»
 
 **☑️ ¿Tiene experiencia en transporte masivo?**
 
-- top-4: a-fondo-analitica-predictiva-dos-modelos~1, a-fondo-cm-operaciones-la-operacion-de-una-ciudad~1, a-fondo-origenes-cuantos-anos~1, a-fondo-fabric-en-la-practica-power-bi~1
-- primer fragmento: «He llevado modelos de **machine learning** a producción en dos contextos que no se parecen: la planeación de la demanda en transporte masivo y la anticipación del comportamiento de clientes en banca. El método viaja; el…»
+- top-4: a-fondo-origenes-cuantos-anos~2, a-fondo-cm-operaciones-la-operacion-de-una-ciudad~1, a-fondo-las-investigaciones-experiencia-y-metodo~2, a-fondo-las-investigaciones-de-experiencia-a-pregunta~1
+- primer fragmento: «En ese arco hay ocho empleos en ocho organizaciones y siete sectores: maquinaria pesada, evaluación educativa, transporte masivo, logística de medicamentos, banca, una startup de agentes de IA y, hoy, la salud. Sumados,…»
 
-**✅ ¿Qué trabajo hizo para TransMilenio?**
+**☑️ ¿Qué trabajo hizo para TransMilenio?**
 
-- top-4: a-fondo-cm-operaciones-la-automatizacion, a-fondo-transmilenio-cm-las-mesas-del-sitp, a-fondo-agentes-en-produccion-n8n, a-fondo-origenes-el-hilo~2
-- primer fragmento: «Automaticé las actividades recurrentes de preparación, validación y consolidación de la información de la operación de TransMilenio, con scripts en **Excel y VBA** y bases en **SQLite** consultadas en SQL: cada semana ll…»
+- top-4: a-fondo-como-trabajo-junta-directiva-y-mesas-sitp~2, a-fondo-origenes-el-hilo~2, a-fondo-transmilenio-cm-lo-que-enseno-el-modelo~2, a-fondo-origenes-del-indicador-a-la-plataforma~1
+- primer fragmento: «La segunda escuela fueron las **mesas de trabajo con la dirección de los concesionarios del SITP**, en C&M Consultores, para la Fuerza Operativa de TransMilenio. Allí la audiencia no me reportaba ni tenía por qué creerme…»
 
-**☑️ ¿Qué es el análisis post-operacional que menciona?**
+**✅ ¿Qué es el análisis post-operacional que menciona?**
 
-- top-4: trayectoria-3, a-fondo-transmilenio-cm-la-automatizacion, a-fondo-transmilenio-cm-el-problema, a-fondo-transmilenio-cm-la-adopcion
-- primer fragmento: «2021 — 2022: Análisis Post-Operacional, C&M Consultores (TransMilenio). Adopción de BI (+35% de eficiencia), ETL que unificó fuentes (+70%) y predicción de demanda con scikit-learn. Impulsé la adopción de BI en la operac…»
+- top-4: a-fondo-transmilenio-cm-que-es-el-analisis-post-operacional~2, a-fondo-transmilenio-cm-que-es-el-analisis-post-operacional~1, trayectoria-3, a-fondo-transmilenio-cm-el-problema~1
+- primer fragmento: «Lo distingue del análisis de supervisión —mi etapa anterior en el mismo sistema, entre 2018 y 2020— el horizonte y el destinatario. La supervisión mira el cumplimiento de cada servicio y sustenta consecuencias; el anális…»
 
 **☑️ ¿Qué hizo en Ceinfes?**
 
-- top-4: a-fondo-origenes-el-hilo~2, a-fondo-ceinfes-lo-que-dejo, trayectoria-6, a-fondo-ceinfes-el-encargo~1
-- primer fragmento: «- **Estudio de tiempos y suplementos por fatiga**, en Inglopres: un tiempo observado no es un estándar hasta que reconoce el esfuerzo de quien lo ejecuta. - **Balanceo de líneas y teoría de restricciones**, en Ceinfes: e…»
+- top-4: a-fondo-como-trabajo-junta-directiva-y-mesas-sitp~2, a-fondo-origenes-el-hilo~2, a-fondo-ceinfes-lo-que-dejo, a-fondo-ceinfes-el-encargo~1
+- primer fragmento: «La segunda escuela fueron las **mesas de trabajo con la dirección de los concesionarios del SITP**, en C&M Consultores, para la Fuerza Operativa de TransMilenio. Allí la audiencia no me reportaba ni tenía por qué creerme…»
 
 **✅ ¿Ha presentado resultados ante una junta directiva?**
 
-- top-4: a-fondo-ceinfes-la-junta-directiva, a-fondo-ceinfes-lo-que-dejo, trayectoria-6, a-fondo-como-trabajo-como-hablo-con-el-negocio~1
-- primer fragmento: «En Ceinfes presenté **informes estratégicos a la junta directiva** por primera vez en mi trayectoria. Los informes eran **semanales, cada viernes**, y salían de los mismos KPIs de la operación. De ellos salieron decision…»
+- top-4: a-fondo-ceinfes-la-junta-directiva~2, a-fondo-ceinfes-la-junta-directiva~1, a-fondo-como-trabajo-junta-directiva-y-mesas-sitp~1, a-fondo-como-trabajo-junta-directiva-y-mesas-sitp~3
+- primer fragmento: «También comprendí que presentar resultados no es suficiente. La información debe organizarse alrededor de la decisión que busca habilitar. Cada informe respondía cinco cosas: qué estaba ocurriendo, por qué era relevante,…»
 
 **✅ ¿Cuál fue su primer empleo al salir de la universidad?**
 
-- top-4: a-fondo-origenes-el-primer-trabajo~1, a-fondo-inglopres-la-operacion, a-fondo-origenes-el-primer-trabajo~2, a-fondo-cm-operaciones-la-operacion-de-una-ciudad~1
-- primer fragmento: «Mi primer empleo, en **Inglopres desde agosto de 2016**, fue como Ingeniero de Procesos: una operación de alquiler y venta de maquinaria pesada, un **ERP** (Odoo) que había que implementar para integrar áreas que trabaja…»
+- top-4: a-fondo-inglopres-la-operacion~1, a-fondo-inglopres-la-operacion~2, a-fondo-origenes-lo-que-ya-contenia~2, a-fondo-origenes-la-leccion-de-arquitectura~2
+- primer fragmento: «Ingresé a Inglopres en agosto de 2016, recién egresado de Ingeniería Industrial de la Pontificia Universidad Javeriana, para asumir mi primer empleo como Ingeniero de Procesos. Permanecí en la organización hasta junio de…»
 
-**✅ ¿Ha liderado la implementación de un ERP?**
+**☑️ ¿Ha liderado la implementación de un ERP?**
 
-- top-4: a-fondo-inglopres-el-erp~1, casestudy-cafam, a-fondo-cafam-el-equipo-de-veinte~2, a-fondo-cafam-el-equipo-de-veinte~1
-- primer fragmento: «Lideré la implementación de un **ERP —Odoo—**, el sistema de planificación de recursos empresariales con el que Inglopres pasó de registros dispersos a un solo lugar. El objetivo declarado era aumentar la eficiencia oper…»
+- top-4: a-fondo-cafam-el-equipo-de-veinte~2, a-fondo-como-trabajo-equipos-que-he-liderado~1, a-fondo-inglopres-el-erp~1, a-fondo-las-investigaciones-reemplazo-del-erp~1
+- primer fragmento: «La duración de esta fase permitió superar la validación de escenarios ideales y observar también excepciones, reincidencias y comportamientos que solo se hacen visibles cuando el sistema se somete de manera sostenida a l…»
 
 **✅ ¿Tiene experiencia en cadena de suministro y logística?**
 
-- top-4: a-fondo-inglopres-cadena-e-iso, trayectoria-7, a-fondo-procesos-y-simulacion-iso-9001, a-fondo-fabric-en-la-practica-power-bi~1
-- primer fragmento: «Lideré iniciativas de optimización de la **cadena de suministro** para reducir costos operativos y coordinar mejor los recursos. En una operación de maquinaria pesada eso se juega en tres variables: el **tiempo de respue…»
+- top-4: a-fondo-inglopres-cadena-de-suministro~1, a-fondo-inglopres-cadena-de-suministro~2, a-fondo-procesos-y-simulacion-iso-9001~1, a-fondo-origenes-el-primer-trabajo~3
+- primer fragmento: «También lideré iniciativas de optimización de la cadena de suministro orientadas a reducir costos operativos, fortalecer la coordinación de recursos y asegurar el cumplimiento de los requisitos asociados con la norma ISO…»
 
 **✅ ¿En qué industrias o sectores ha trabajado?**
 
-- top-4: a-fondo-origenes-cuantos-anos~1, a-fondo-origenes-del-proceso-a-la-ia, a-fondo-lo-que-busco-que-ofrezco~2, a-fondo-fundacion-ctic-el-rol-actual
-- primer fragmento: «Mi formación formal es el pregrado en Ingeniería Industrial de la Javeriana, con énfasis en Inteligencia Analítica de Datos, y el programa de Diseño Industrial; no tengo maestría, especialización ni otro posgrado: la pro…»
+- top-4: a-fondo-origenes-del-proceso-a-la-ia, a-fondo-origenes-indicadores-como-sensores~2, a-fondo-origenes-cuantos-anos~2, a-fondo-origenes-medir-el-tiempo~2
+- primer fragmento: «**Del proceso al indicador** (Ceinfes y C&M Consorcio 2018). Dejé de mejorar una actividad y pasé a dirigir y supervisar operaciones enteras a través de sus datos: KPIs por área, tableros de desempeño, un histórico para…»
 
 **✅ ¿Cuántos años de experiencia profesional tiene?**
 
-- top-4: a-fondo-origenes-cuantos-anos~2, a-fondo-origenes-cuantos-anos~1, a-fondo-fabric-en-la-practica-power-bi~1, a-fondo-gobierno-de-datos-y-de-ia-experiencia-y-formacion
-- primer fragmento: «Si la pregunta es qué tan grande es mi experiencia con IA comparada con la de datos: los datos ocupan ocho de esos años; la IA aplicada, con agentes en producción, empieza en agosto de 2023 en Vesting y sigue hoy en CTIC…»
+- top-4: a-fondo-origenes-cuantos-anos~1, a-fondo-origenes-cuantos-anos~3, a-fondo-origenes-cuantos-anos~2, a-fondo-gobierno-de-datos-y-de-ia-experiencia-en-lo-que-gobierno~2
+- primer fragmento: «Mi formación formal es el pregrado en Ingeniería Industrial de la Javeriana, con énfasis en Inteligencia Analítica de Datos, y el programa de Diseño Industrial; no tengo maestría, especialización ni otro posgrado: la pro…»
 
 **☑️ ¿Ha trabajado en una startup?**
 
-- top-4: trayectoria-1, a-fondo-vesting-una-startup-sin-plataforma~2, a-fondo-como-trabajo-que-valoro~1, a-fondo-vesting-una-startup-sin-plataforma~1
+- top-4: trayectoria-1, a-fondo-como-trabajo-equipos-que-he-liderado~3, a-fondo-vesting-el-contexto~1, a-fondo-vesting-el-contexto~2
 - primer fragmento: «2024: Líder de Estrategia de Datos, Vesting — startup de agentes de automatización. Ecosistema de datos para agentes de IA en Microsoft Fabric, desde cero: arquitectura, gobernanza, monitoreo de agentes en tiempo real y…»
 
 **✅ ¿Ha trabajado para entidades públicas o con operación de ciudad?**
 
-- top-4: a-fondo-cm-operaciones-la-operacion-de-una-ciudad~1, a-fondo-cm-operaciones-la-operacion-de-una-ciudad~2, casestudy-transmilenio-cm, a-fondo-lo-que-busco-condiciones
-- primer fragmento: «Entré a **C&M Consorcio 2018 en noviembre de 2018** como Analista de Operaciones Junior, dentro de la supervisión de **TransMilenio**, y estuve hasta mayo de 2020: **18 meses**. Fue mi entrada al transporte masivo y la p…»
+- top-4: a-fondo-transmilenio-cm-el-problema~1, a-fondo-cm-operaciones-la-operacion-de-una-ciudad~2, a-fondo-cm-operaciones-la-operacion-de-una-ciudad~1, a-fondo-los-tableros-banca-colombiana~1
+- primer fragmento: «Regresé al entorno de TransMilenio en julio de 2021, esta vez como Profesional de Análisis Post-Operacional en C&M Consultores, dentro de la Fuerza Operativa de TransMilenio S.A., y permanecí en el cargo hasta mayo de 20…»
 
 **✅ ¿Qué pasó entre mayo de 2022 y marzo de 2023?**
 
-- top-4: a-fondo-origenes-los-tres-saltos~2, a-fondo-origenes-cuantos-anos~1, a-fondo-transmilenio-cm-el-problema, a-fondo-banco-pichincha-el-problema-real
-- primer fragmento: «| Periodo | Rol y organización | Qué cambió de escala | | --------------------------- | ------------------------------------------------------------- | --------------------------------------------------------------------…»
+- top-4: a-fondo-origenes-los-tres-saltos~2, a-fondo-como-aprendo-ibm-y-las-rutas-en-curso~2, a-fondo-como-aprendo-ibm-y-las-rutas-en-curso~1, a-fondo-bi-que-se-adopta-adopcion-medida~2
+- primer fragmento: «| Periodo | Rol y organización | Qué cambió de escala | | --- | --- | --- | | agosto 2016 – junio 2017 | Ingeniero de Procesos, Inglopres | un proceso: el ERP (Odoo), las bases de datos que faltaban, un equipo de 12 | |…»
 
 ### forma-de-trabajar
 
 **✅ ¿Cómo trabaja Henry cuando llega a un problema nuevo?**
 
-- top-4: a-fondo-como-trabajo-primero-el-proceso~1, a-fondo-como-trabajo-primero-el-proceso~2, a-fondo-lo-que-busco-el-problema-que-quiero, a-fondo-banco-pichincha-el-problema-real
-- primer fragmento: «Soy ingeniero industrial antes que ingeniero de datos, y esa forma de mirar sigue siendo mi mayor ventaja: los problemas que parecen de tecnología casi siempre son de proceso. Un tablero no arregla la falta de claridad o…»
+- top-4: a-fondo-como-trabajo-primero-el-proceso~1, a-fondo-como-trabajo-primero-el-proceso~2, a-fondo-bi-que-se-adopta-el-problema-dificil~1, a-fondo-como-trabajo-primero-el-proceso~3
+- primer fragmento: «Soy ingeniero industrial de la Javeriana antes que ingeniero de datos, y esa forma de entender el mundo sigue siendo una de mis mayores ventajas competitivas. A lo largo de diez años de carrera —desde agosto de 2016, en…»
 
 **☑️ ¿Cómo lidera un equipo?**
 
-- top-4: a-fondo-cafam-el-equipo-de-veinte~1, a-fondo-como-trabajo-como-lidero~2, a-fondo-cafam-el-equipo-de-veinte~2, a-fondo-como-trabajo-como-lidero~1
-- primer fragmento: «Lideré un equipo mixto de **20 personas** durante la fase de pruebas: **14 de Cafam y 6 de Oracle**, que acababa de adquirir el producto y lo estaba implantando con sus propios especialistas. La combinación reunía los do…»
+- top-4: a-fondo-cafam-el-equipo-de-veinte~1, a-fondo-como-trabajo-como-lidero~1, a-fondo-como-trabajo-como-lidero~3, a-fondo-como-trabajo-como-lidero~2
+- primer fragmento: «Lideré un equipo mixto de veinte personas durante la fase de pruebas: catorce integrantes de Cafam y seis profesionales de Oracle, organización que acababa de comprar el producto y lo estaba implantando con sus propios e…»
 
 **✅ ¿Cómo se comunica con las áreas de negocio?**
 
-- top-4: a-fondo-como-trabajo-como-hablo-con-el-negocio~2, a-fondo-como-trabajo-como-hablo-con-el-negocio~1, casestudy-banco-pichincha, a-fondo-banco-pichincha-programa-de-formacion
-- primer fragmento: «Toda cifra tiene identidad y procedencia. Si no puedo explicar de dónde sale, cómo se transformó y cuándo se actualizó, no la presento. En Vesting trabajé directamente con los fundadores; en CTIC tengo línea directa con…»
+- top-4: a-fondo-como-trabajo-como-hablo-con-el-negocio~1, a-fondo-como-trabajo-como-hablo-con-el-negocio~3, a-fondo-como-trabajo-como-hablo-con-el-negocio~2, a-fondo-como-trabajo-junta-directiva-y-mesas-sitp~1
+- primer fragmento: «A lo largo de mi trayectoria he trabajado de manera cercana con la alta dirección, líderes de negocio y responsables de áreas estratégicas: la junta directiva de Ceinfes, la dirección de los concesionarios del SITP, los…»
 
 **✅ ¿Qué valora en un proyecto?**
 
-- top-4: a-fondo-como-trabajo-que-valoro~2, a-fondo-como-trabajo-que-valoro~1, a-fondo-procesos-y-simulacion-estudio-del-trabajo, a-fondo-bi-que-se-adopta-formacion-y-adopcion
-- primer fragmento: «También valoro que un proyecto deje activos reutilizables —patrones, componentes, pruebas, documentación— y que aprenda después de implementarse: las necesidades cambian, los modelos se degradan, los usuarios descubren u…»
+- top-4: a-fondo-como-trabajo-que-valoro~1, a-fondo-como-trabajo-que-valoro~3, a-fondo-como-trabajo-que-valoro~2, a-fondo-como-trabajo-proyecto-que-aprende~1
+- primer fragmento: «Valoro los proyectos que convierten problemas relevantes en capacidades empresariales duraderas. Para mí, una iniciativa de alto valor no comienza con una herramienta, una tecnología o una solución previamente definida.…»
 
-**☑️ ¿Es un perfil más de procesos o más de tecnología?**
+**✅ ¿Es un perfil más de procesos o más de tecnología?**
 
-- top-4: perfil, a-fondo-procesos-y-simulacion-la-raiz, a-fondo-ceinfes-gestion-por-procesos~1, a-fondo-inglopres-lo-que-dejo
-- primer fragmento: «Henry Rincón — Ingeniero Industrial · Analytics & AI Engineer. De la ingeniería industrial a los agentes de IA: datos, plataformas y decisiones. Líder de datos e ingeniero de IA (AI-103 y AI-300, en curso) · Analytics En…»
+- top-4: a-fondo-procesos-y-simulacion-lo-que-representan~3, a-fondo-procesos-y-simulacion-lo-que-representan~1, a-fondo-procesos-y-simulacion-lo-que-representan~2, perfil
+- primer fragmento: «Mi diferencial no consiste únicamente en conocer herramientas de procesos, datos o inteligencia artificial. Consiste en poder conectarlas dentro de un método único: comprender, representar, medir, experimentar, decidir y…»
 
 **✅ ¿Por qué estudió ingeniería industrial?**
 
-- top-4: a-fondo-origenes-por-que-industrial~1, a-fondo-origenes-por-que-industrial~2, a-fondo-origenes-el-hilo~2, a-fondo-origenes-el-primer-trabajo~2
-- primer fragmento: «Elegí **Ingeniería Industrial** porque quería entender cómo funcionan las organizaciones como sistemas completos y, sobre todo, cómo podían funcionar mejor. Me interesaba una disciplina que conectara procesos, personas,…»
+- top-4: a-fondo-origenes-por-que-industrial~1, a-fondo-origenes-por-que-industrial~2, a-fondo-como-aprendo-aprender-como-un-proceso, a-fondo-origenes-la-convergencia~2
+- primer fragmento: «Elegí estudiar Ingeniería Industrial porque quería comprender cómo funcionan las organizaciones como sistemas completos y, sobre todo, cómo podían funcionar mejor. Me interesaba una disciplina que no se limitara a observ…»
 
 **✅ ¿Qué estudió y en qué universidad?**
 
-- top-4: a-fondo-origenes-por-que-industrial~1, estudios, a-fondo-procesos-y-simulacion-estudio-del-trabajo, a-fondo-inglopres-el-estudio-del-trabajo
-- primer fragmento: «Elegí **Ingeniería Industrial** porque quería entender cómo funcionan las organizaciones como sistemas completos y, sobre todo, cómo podían funcionar mejor. Me interesaba una disciplina que conectara procesos, personas,…»
+- top-4: a-fondo-origenes-por-que-industrial~2, a-fondo-origenes-por-que-industrial~1, a-fondo-inglopres-la-operacion~1, a-fondo-inglopres-la-operacion~2
+- primer fragmento: «La estudié en la Pontificia Universidad Javeriana, en Bogotá, entre 2009 y 2016. Diez años después de graduarme sigo empezando igual que entonces: antes de proponer un modelo, dibujo el proceso y ubico dónde se pierde el…»
 
 **✅ ¿Tiene formación en diseño?**
 
-- top-4: a-fondo-origenes-por-que-industrial~1, a-fondo-origenes-por-que-industrial~2, a-fondo-gobierno-de-datos-y-de-ia-experiencia-y-formacion, a-fondo-bi-que-se-adopta-formacion-y-adopcion
-- primer fragmento: «Elegí **Ingeniería Industrial** porque quería entender cómo funcionan las organizaciones como sistemas completos y, sobre todo, cómo podían funcionar mejor. Me interesaba una disciplina que conectara procesos, personas,…»
+- top-4: a-fondo-origenes-la-formacion-en-diseno~1, a-fondo-origenes-la-formacion-en-diseno~2, a-fondo-bi-que-se-adopta-formacion-y-adopcion~2, a-fondo-banco-pichincha-programa-de-formacion~1
+- primer fragmento: «En paralelo, cursé estudios de pregrado en Diseño Industrial en la misma universidad, entre 2011 y 2016, con un enfoque en sostenibilidad y en el impacto cultural del diseño. Esta formación complementó mi pensamiento de…»
 
 **✅ ¿Cómo pasó de la ingeniería de procesos a los datos?**
 
-- top-4: a-fondo-origenes-del-proceso-a-la-ia, a-fondo-origenes-por-que-industrial~1, a-fondo-origenes-el-hilo~3, a-fondo-origenes-el-primer-trabajo~1
-- primer fragmento: «**Del proceso al indicador** (Ceinfes y C&M Consorcio). Dejé de mejorar una actividad y pasé a dirigir y supervisar operaciones enteras a través de sus datos: KPIs por área, tableros de desempeño, un histórico para que c…»
+- top-4: a-fondo-origenes-la-convergencia~1, a-fondo-origenes-del-proceso-a-la-ia, a-fondo-origenes-el-primer-trabajo~1, a-fondo-origenes-el-enfasis-en-analitica~2
+- primer fragmento: «La convergencia entre Ingeniería Industrial, analítica de datos y Diseño Industrial terminó construyendo una perspectiva profesional que hoy considero esencial. La ingeniería me permite comprender y estructurar la comple…»
 
 **✅ ¿Qué lo diferencia de otros candidatos de datos?**
 
-- top-4: a-fondo-lo-que-busco-que-ofrezco~1, a-fondo-lo-que-busco-que-ofrezco~2, a-fondo-los-tableros-que-demuestran, a-fondo-transmilenio-cm-el-problema
-- primer fragmento: «Si la pregunta es por qué contratarme a mí y no a otro perfil de datos, la respuesta es la combinación: conecto dimensiones que suelen estar separadas: procesos, datos, experiencia de usuario, plataformas analíticas, apl…»
+- top-4: a-fondo-lo-que-busco-que-ofrezco~1, a-fondo-lo-que-busco-que-ofrezco~2, a-fondo-lo-que-busco-que-ofrezco~3, a-fondo-los-tableros-otras-herramientas~1
+- primer fragmento: «Si la pregunta es por qué contratarme a mí y no a otro perfil de datos, la respuesta es la combinación. Mi principal diferencial es la capacidad de conectar dimensiones que con frecuencia se encuentran separadas: proceso…»
 
 **☑️ ¿Cómo documenta lo que hace?**
 
-- top-4: a-fondo-agentes-en-produccion-el-proceso-core, a-fondo-gobierno-de-datos-y-de-ia-gobierno-de-mi-proceso, a-fondo-como-aprendo-criterios-de-aprendizaje, a-fondo-lo-que-busco-condiciones
-- primer fragmento: «En Vesting definí, documenté y validé el proceso central para diseñar e implementar agentes: once etapas, del caso de uso a la operación observable, que están numeradas en el documento de Vesting. Sirvió como marco para…»
+- top-4: a-fondo-analitica-predictiva-probeta-por-dentro~1, a-fondo-gobierno-de-datos-y-de-ia-iso-42001-limites~1, a-fondo-gobierno-de-datos-y-de-ia-iso-42001~2, a-fondo-procesos-y-simulacion-verificacion-y-validacion~1
+- primer fragmento: «Lo que Probeta DS hace por dentro es la misma disciplina de este documento convertida en producto. Dos modelos compiten con el mismo preprocesamiento —Random Forest y HistGradientBoosting de scikit-learn— y el resultado…»
 
 **✅ ¿Cómo maneja el trabajo con personas que no le reportan?**
 
-- top-4: a-fondo-como-trabajo-como-lidero~2, a-fondo-como-trabajo-como-lidero~1, a-fondo-fundacion-ctic-el-rol-actual, a-fondo-inglopres-el-estudio-del-trabajo
-- primer fragmento: «En Cafam no bajamos los errores con más supervisión sino escribiendo antes de empezar qué contaba como caso probado y quién lo firmaba. Después de Cafam pasé a liderar procesos completos que integran a muchas personas qu…»
+- top-4: a-fondo-como-trabajo-personas-que-no-me-reportan~2, a-fondo-como-trabajo-personas-que-no-me-reportan~1, a-fondo-fabric-en-la-practica-datos-listos-para-ia~1, a-fondo-transmilenio-cm-automatizacion-con-controles
+- primer fragmento: «Tres veces he trabajado en iniciativas donde la colaboración no podía ordenarse. En Cafam, el equipo era mixto: 14 personas de la caja y 6 del proveedor del WMS, con intereses contractuales distintos, y la única manera d…»
 
 ### certificaciones
 
-**☑️ ¿Qué certificaciones tiene?**
+**✅ ¿Qué certificaciones tiene?**
 
-- top-4: a-fondo-como-aprendo-evidencia-certificaciones~2, a-fondo-como-aprendo-evidencia-certificaciones~1, certificaciones, a-fondo-certificaciones-como-se-conectan
-- primer fragmento: «Las cuatro de IBM siguen el mismo patrón: tres en 2022 —el Certificado Profesional en Ciencia de Datos, Python y SQL, entre mayo y noviembre— en los meses que dediqué a estudiar entre dos empleos, y R en 2024, en paralel…»
+- top-4: a-fondo-certificaciones-la-tabla~2, a-fondo-certificaciones-el-estado-de-cada-credencial, a-fondo-certificaciones-criterio-de-certificacion~1, a-fondo-certificaciones-el-ai-103~1
+- primer fragmento: «Cinco credenciales obtenidas —el DP-600 y cuatro de IBM— y dos rutas en curso: en este momento me estoy certificando en el AI-103 y en el AI-300. Es el mismo conteo que publica el sitio: el logro «5 certificaciones profe…»
 
 **✅ ¿Tiene la certificación DP-600 de Microsoft Fabric?**
 
-- top-4: a-fondo-fabric-en-la-practica-que-significa-el-dp-600, a-fondo-certificaciones-el-dp-600~1, a-fondo-certificaciones-la-tabla~1, a-fondo-certificaciones-el-ai-300
-- primer fragmento: «El **DP-600** —Fabric Analytics Engineer Associate, obtenido en diciembre de 2024— valida el recorrido completo de una solución analítica sobre **Microsoft Fabric**: seleccionar el almacén, preparar y transformar, diseña…»
+- top-4: a-fondo-certificaciones-criterio-de-certificacion~1, a-fondo-certificaciones-dp-600-en-vesting-y-ctic~1, a-fondo-fabric-en-la-practica-que-significa-el-dp-600~2, a-fondo-certificaciones-dp-600-en-vesting-y-ctic~2
+- primer fragmento: «No selecciono una certificación únicamente porque una tecnología sea reciente o tenga visibilidad en el mercado. Me interesa cuando formaliza una capacidad que ya estoy aplicando, fortalece un tramo necesario de mi arqui…»
 
-**☑️ ¿Está certificado en inteligencia artificial de Azure?**
+**✅ ¿Está certificado en inteligencia artificial de Azure?**
 
-- top-4: a-fondo-gobierno-de-datos-y-de-ia-estrategia-iso-42001~2, a-fondo-apps-pipeline-codigo-primero, a-fondo-certificaciones-el-ai-103, a-fondo-plataforma-y-despliegue-desplegar-y-operar-ia
-- primer fragmento: «El sistema de gestión comprende hoy **23 instrumentos** —políticas, procedimientos, matrices, criterios de evaluación y mecanismos de seguimiento—, **8 terminados y 15 en construcción**. La norma se adopta como referente…»
+- top-4: a-fondo-certificaciones-el-ai-103~1, a-fondo-apps-pipeline-codigo-primero~3, a-fondo-gobierno-de-datos-y-de-ia-estrategia-iso-42001~2, a-fondo-apps-pipeline-codigo-primero~1
+- primer fragmento: «Desde julio de 2026 desarrollo la ruta correspondiente al examen AI-103, orientado al desarrollo de aplicaciones y agentes de inteligencia artificial en Azure; a la fecha llevo 21 módulos. No presento esta credencial com…»
 
 **✅ ¿Tiene certificaciones de ciencia de datos de IBM?**
 
-- top-4: a-fondo-certificaciones-las-de-ibm, certificaciones, a-fondo-como-aprendo-evidencia-certificaciones~2, a-fondo-certificaciones-la-tabla~1
-- primer fragmento: «Mi base en ciencia de datos son **cuatro credenciales de IBM**, en dos etapas y alrededor de los tres lenguajes del análisis: **Python**, **SQL** y **R**. En **2022** completé el Certificado Profesional en Ciencia de Dat…»
+- top-4: a-fondo-certificaciones-las-de-ibm~1, a-fondo-certificaciones-las-de-ibm~2, a-fondo-certificaciones-ibm-y-mis-dos-formaciones~1, a-fondo-certificaciones-ibm-y-mis-dos-formaciones~2
+- primer fragmento: «Mi formación en ciencia de datos se construyó mediante cuatro credenciales de IBM, desarrolladas en dos etapas y alrededor de los principales lenguajes utilizados para el análisis: Python, SQL y R. Durante 2022 completé…»
 
-**☑️ ¿Cuánto tardó en obtener la certificación de Fabric?**
+**✅ ¿Cuánto tardó en obtener la certificación de Fabric?**
 
-- top-4: a-fondo-fabric-en-la-practica-que-significa-el-dp-600, a-fondo-vesting-el-puente, a-fondo-como-aprendo-los-plazos, a-fondo-certificaciones-el-dp-600~1
-- primer fragmento: «El **DP-600** —Fabric Analytics Engineer Associate, obtenido en diciembre de 2024— valida el recorrido completo de una solución analítica sobre **Microsoft Fabric**: seleccionar el almacén, preparar y transformar, diseña…»
+- top-4: a-fondo-como-aprendo-los-plazos~1, a-fondo-como-aprendo-los-plazos~2, a-fondo-certificaciones-criterio-de-certificacion~1, a-fondo-como-aprendo-evidencia-certificaciones~1
+- primer fragmento: «Las últimas veces que aprendí algo desde cero, y cuánto tardé: | Qué | Desde | Plazo | Resultado | | ------------------------------------- | -------------- | --------------------------------- | --------------------------…»
 
-**✅ ¿Cómo aprende una tecnología que no conoce?**
+**☑️ ¿Cómo aprende una tecnología que no conoce?**
 
-- top-4: a-fondo-como-aprendo-criterios-de-aprendizaje, a-fondo-como-aprendo-evidencia-construido~3, a-fondo-plataforma-y-despliegue-como-la-cubro~1, a-fondo-ceinfes-gestion-por-procesos~2
-- primer fragmento: «Seis criterios, y una capacidad no está aprendida hasta cumplir los seis: 1. **Funcional:** la pieza resuelve el problema y supera escenarios representativos, no solo el recorrido ideal. 2. **Arquitectónico:** puedo just…»
+- top-4: a-fondo-como-trabajo-proyecto-que-aprende~3, a-fondo-como-aprendo-criterios-de-aprendizaje~2, a-fondo-como-aprendo-por-que-existe~1, a-fondo-como-trabajo-como-aprendo-y-evoluciono
+- primer fragmento: «En síntesis, valoro tres condiciones fundamentales: que el problema sea real y su impacto pueda medirse, que exista un responsable del negocio comprometido con convertir la solución en una capacidad adoptada, y que el re…»
 
-**☑️ ¿Qué hace cuando el puesto pide algo que no ha usado nunca?**
+**✅ ¿Qué hace cuando el puesto pide algo que no ha usado nunca?**
 
-- top-4: pieza-apps-nutri-kids-limites~1, pieza-apps-habla-limites~1, a-fondo-como-aprendo-criterios-de-aprendizaje, a-fondo-procesos-y-simulacion-bizagi-en-la-practica
-- primer fragmento: «Límite: No califica al niño: sin calorías, peso, IMC, percentiles ni «cumplimiento». Límite: Hace red para una sola cosa: las preguntas abiertas del chat — y ahí viaja únicamente el plan. Límite: Sin servidor de datos, c…»
+- top-4: a-fondo-como-aprendo-incorporar-una-plataforma~3, a-fondo-como-aprendo-incorporar-una-plataforma~1, a-fondo-como-aprendo-incorporar-una-plataforma~2, pieza-apps-nutri-kids-limites~1
+- primer fragmento: «Mi criterio para declarar incorporada una nueva capacidad es claro. No basta con completar un curso ni con ejecutar una demostración. Debo poder explicar la arquitectura, desplegar la solución, reproducirla, observar su…»
 
 **✅ ¿Tiene posgrado, maestría o especialización?**
 
-- top-4: a-fondo-origenes-cuantos-anos~1, agentes-asistente-posgrado~1, a-fondo-gobierno-de-datos-y-de-ia-experiencia-y-formacion, agentes-asistente-posgrado-bloques
+- top-4: a-fondo-origenes-cuantos-anos~1, a-fondo-gobierno-de-datos-y-de-ia-experiencia-y-formacion~1, a-fondo-agentes-en-produccion-escala-frente-a-profundidad~2, a-fondo-los-tableros-verificar-el-universo~1
 - primer fragmento: «Mi formación formal es el pregrado en Ingeniería Industrial de la Javeriana, con énfasis en Inteligencia Analítica de Datos, y el programa de Diseño Industrial; no tengo maestría, especialización ni otro posgrado: la pro…»
 - nota: La respuesta honesta son los dos pregrados de la Javeriana. Antes de la corrección de la fase 4 esta pregunta traía un párrafo que decía «esa posición exige posgrado», que era el texto de la oferta y no el suyo.
 
 **✅ ¿Se está certificando en algo en este momento?**
 
-- top-4: a-fondo-certificaciones-la-tabla~2, a-fondo-banco-pichincha-modelos-predictivos, a-fondo-vesting-monitoreo-de-agentes~1, a-fondo-inglopres-el-equipo-de-doce
-- primer fragmento: «**Cinco credenciales obtenidas** —el DP-600 y cuatro de IBM— y **dos rutas en curso**: en este momento me estoy certificando en el AI-103 y en el AI-300. Dos códigos que aparecen en mi historia y no en la tabla: el **AI-…»
+- top-4: a-fondo-certificaciones-la-tabla~2, a-fondo-apps-pipeline-estados-honestos~2, a-fondo-como-aprendo-incorporar-una-plataforma~2, a-fondo-rag-y-el-chat-umbral-medido~2
+- primer fragmento: «Cinco credenciales obtenidas —el DP-600 y cuatro de IBM— y dos rutas en curso: en este momento me estoy certificando en el AI-103 y en el AI-300. Es el mismo conteo que publica el sitio: el logro «5 certificaciones profe…»
 
-**☑️ ¿Qué certificación piensa sacar después?**
+**✅ ¿Qué certificación piensa sacar después?**
 
-- top-4: a-fondo-analitica-predictiva-monitoreo-del-modelo, a-fondo-certificaciones-las-de-ibm, a-fondo-como-trabajo-primero-el-proceso~2, a-fondo-como-trabajo-primero-el-proceso~1
-- primer fragmento: «Un modelo se degrada sin avisar. La **deriva** —de los datos de entrada, de la relación que el modelo aprendió, de la población— es el riesgo que la **validación** inicial no cubre, y se vigila en producción: distribució…»
+- top-4: a-fondo-certificaciones-criterio-de-certificacion~1, a-fondo-gobierno-de-datos-y-de-ia-iso-42001~2, a-fondo-certificaciones-criterio-de-certificacion~2, a-fondo-procesos-y-simulacion-verificacion-y-validacion~3
+- primer fragmento: «No selecciono una certificación únicamente porque una tecnología sea reciente o tenga visibilidad en el mercado. Me interesa cuando formaliza una capacidad que ya estoy aplicando, fortalece un tramo necesario de mi arqui…»
 
 ### ia-y-agentes
 
 **✅ ¿Tiene experiencia con inteligencia artificial generativa?**
 
-- top-4: a-fondo-rag-y-el-chat-que-demuestra, a-fondo-vesting-monitoreo-de-agentes~2, a-fondo-apps-pipeline-codigo-primero, a-fondo-certificaciones-el-ai-103
-- primer fragmento: «Que puedo diseñar una solución de IA generativa como un sistema y no como una llamada a un modelo: contenido versionado, índice construido y validado, recuperación proporcional al problema, alcance delimitado antes de ga…»
+- top-4: a-fondo-rag-y-el-chat-que-demuestra~1, a-fondo-rag-y-el-chat-que-demuestra~2, a-fondo-rag-y-el-chat-que-demuestra~3, a-fondo-agentes-en-produccion-dos-experiencias~1
+- primer fragmento: «El chat demuestra que puedo diseñar una solución de inteligencia artificial generativa como un sistema completo y no únicamente como una llamada a un modelo. La arquitectura comienza en el contenido versionado, continúa…»
 
-**☑️ ¿Ha construido agentes de inteligencia artificial?**
+**✅ ¿Ha construido agentes de inteligencia artificial?**
 
-- top-4: a-fondo-vesting-monitoreo-de-agentes~2, a-fondo-certificaciones-el-ai-103, a-fondo-vesting-monitoreo-de-agentes~1, a-fondo-agentes-en-produccion-dos-experiencias
-- primer fragmento: «Las métricas técnicas prueban que el agente respondió; no que la respuesta sirvió. Por eso los tableros operativos, para producto y operaciones, permitían recorrer una anomalía hasta los eventos de la sesión. Un agente d…»
+- top-4: a-fondo-agentes-en-produccion-la-segunda-trayectoria~1, a-fondo-agentes-en-produccion-la-segunda-trayectoria~2, a-fondo-origenes-la-ingenieria-y-la-ia~2, a-fondo-origenes-de-la-plataforma-a-la-ia~1
+- primer fragmento: «La segunda trayectoria corresponde a ARKHÉ, mi propio ecosistema agéntico, y a los agentes publicados en CV Viva. Este trabajo no es una extensión de la arquitectura de Vesting ni una reproducción de sus componentes. Es…»
 
-**✅ ¿Qué es el proceso core replicable de agentes?**
+**☑️ ¿Qué es el proceso core replicable de agentes?**
 
-- top-4: a-fondo-vesting-el-proceso-core~1, trayectoria-1, casestudy-vesting, proyecto-vesting
-- primer fragmento: «Además del ecosistema, estructuré, documenté y validé el **proceso core** con el que se diseñaron e implementaron los **27 agentes** del inventario. El activo no era un agente: era la capacidad de construir el siguiente…»
+- top-4: a-fondo-origenes-el-marco-replicable~1, a-fondo-agentes-en-produccion-el-proceso-core~1, a-fondo-vesting-el-proceso-core~1, a-fondo-agentes-en-produccion-el-proceso-core~2
+- primer fragmento: «En Vesting, sin embargo, el principal activo no era un agente individual. Era el proceso que permitía diseñar, construir, evaluar y desplegar los siguientes de forma consistente. Por ello estructuré, documenté y validé u…»
 
 **✅ ¿Cómo monitorea un agente de IA en producción?**
 
-- top-4: a-fondo-vesting-monitoreo-de-agentes~1, a-fondo-vesting-monitoreo-de-agentes~2, a-fondo-agentes-en-produccion-dos-experiencias, a-fondo-agentes-en-produccion-monitorear-un-agente
-- primer fragmento: «Construí el **monitoreo en tiempo real** de los agentes en producción: **23 a la vez** en el punto más alto. La observabilidad tenía que responder algo más profundo que «¿está disponible?»: qué solicitud recibió cada age…»
+- top-4: a-fondo-vesting-monitoreo-de-agentes~1, a-fondo-agentes-en-produccion-monitorear-no-es-mirar-si-esta-arriba~1, a-fondo-vesting-tableros-operativos~2, a-fondo-vesting-monitoreo-de-agentes~2
+- primer fragmento: «Uno de los principales objetivos del ecosistema de datos fue establecer la capacidad de monitorear agentes en producción, y llegó a vigilar 23 agentes a la vez, en tiempo real. La observabilidad debía responder una pregu…»
 
 **✅ ¿Qué frameworks de agentes ha usado?**
 
-- top-4: a-fondo-agentes-en-produccion-el-proceso-core, a-fondo-ceinfes-balanceo-de-digitalizacion~2, a-fondo-certificaciones-el-ai-103, a-fondo-agentes-en-produccion-monitorear-un-agente
-- primer fragmento: «En Vesting definí, documenté y validé el proceso central para diseñar e implementar agentes: once etapas, del caso de uso a la operación observable, que están numeradas en el documento de Vesting. Sirvió como marco para…»
+- top-4: a-fondo-agentes-en-produccion-n8n-como-base~3, a-fondo-agentes-en-produccion-n8n-como-base~1, a-fondo-agentes-en-produccion-n8n-como-base~2, a-fondo-como-aprendo-incorporar-una-plataforma~1
+- primer fragmento: «También aprendí que una herramienta de automatización puede acelerar considerablemente la construcción, pero no elimina la necesidad de arquitectura. A medida que aumentan los agentes, las integraciones y las excepciones…»
 - nota: Pasa, pero floja: el documento llega al top-4 sin nombrar un solo framework, porque el corpus no dice con qué están construidos los trece agentes. Es uno de los cinco huecos que la simulación M2 puso en primer lugar, y la respuesta solo la tiene el dueño.
 
 **☑️ ¿Ha trabajado con modelos de lenguaje grandes?**
 
-- top-4: a-fondo-analitica-predictiva-las-herramientas~1, a-fondo-agentes-en-produccion-arkhe~1, a-fondo-banco-pichincha-modelos-predictivos, a-fondo-los-tableros-el-stack
-- primer fragmento: «Los lenguajes de programación con los que trabajo son Python, R, SQL y DAX; el nivel más avanzado es Python. No presento las herramientas como equivalentes. Esta es la lista honesta: | Herramienta | Nivel | Dónde | | ---…»
+- top-4: a-fondo-analitica-predictiva-nivel-por-herramienta~1, a-fondo-agentes-en-produccion-ecosistema-agentico-propio~1, a-fondo-analitica-predictiva-las-herramientas~1, a-fondo-lo-que-busco-arquitectura-agentica~1
+- primer fragmento: «No presento las herramientas como equivalentes ni como una competencia definida únicamente por su nombre. Esta es la lista honesta, herramienta por herramienta: | Herramienta | Nivel | Dónde | | --- | --- | --- | | Pytho…»
 
 **✅ ¿Qué arquitecturas RAG ha implementado?**
 
-- top-4: a-fondo-rag-y-el-chat-lo-que-estas-usando, a-fondo-rag-y-el-chat-recuperacion-lexica, a-fondo-rag-y-el-chat-proveedor-y-costo, a-fondo-rag-y-el-chat-que-demuestra
-- primer fragmento: «Si esta respuesta la generó el chat de esta página, estás usando una implementación real de la arquitectura que describo: un sistema de generación aumentada por recuperación —**RAG**— que construí para responder sobre mi…»
+- top-4: a-fondo-rag-y-el-chat-embeddings-condicionados~2, a-fondo-rag-y-el-chat-ninguna-capa-basta~2, a-fondo-rag-y-el-chat-que-demuestra~1, a-fondo-rag-y-el-chat-evaluacion-del-rag~1
+- primer fragmento: «La opción está declarada en público: «retrieval con embeddings» es una de las dos funcionalidades votables del roadmap de CV Viva, junto con la memoria de la conversación. Quien visita el sitio puede votar por ella, y el…»
 
-**☑️ ¿Cómo funciona el chat de esta página?**
+**✅ ¿Cómo funciona el chat de esta página?**
 
-- top-4: a-fondo-apps-pipeline-esta-misma-pagina, a-fondo-rag-y-el-chat-lo-que-estas-usando, a-fondo-rag-y-el-chat-los-guardrails~1, app-chat-hoja-de-vida
-- primer fragmento: «**CV Viva** forma parte del portafolio: una aplicación en **Next.js** con generación estática, bilingüe, construida en 8 sprints, con **pruebas automatizadas** en tres niveles, accesibilidad verificada, presupuesto de re…»
+- top-4: a-fondo-rag-y-el-chat-lo-que-estas-usando~1, a-fondo-rag-y-el-chat-el-indice~1, a-fondo-rag-y-el-chat-citas-navegables~1, a-fondo-apps-pipeline-esta-misma-pagina~2
+- primer fragmento: «Si esta respuesta fue generada por el chat de esta página, estás utilizando una implementación real de la arquitectura que describo. Es un sistema de generación aumentada por recuperación —RAG— construido por mí para res…»
 
 **✅ ¿Usa embeddings o búsqueda vectorial?**
 
-- top-4: a-fondo-rag-y-el-chat-recuperacion-lexica, a-fondo-rag-y-el-chat-degradacion-controlada, casestudy-banco-pichincha, a-fondo-banco-pichincha-la-adopcion-medida
-- primer fragmento: «La recuperación es **léxica**, con **MiniSearch** —el algoritmo **BM25**— y sin **embeddings** ni base de datos vectorial. Es una decisión registrada, no una etapa incompleta: el contenido está lleno de nombres, fechas,…»
+- top-4: a-fondo-rag-y-el-chat-embeddings-condicionados~1, a-fondo-rag-y-el-chat-recuperacion-lexica~1, a-fondo-rag-y-el-chat-recuperacion-lexica~3, a-fondo-rag-y-el-chat-embeddings-condicionados~2
+- primer fragmento: «La regla aplicada es la misma que utilizo en mi pipeline de aplicaciones —la regla 13, código primero—: no incorporar inteligencia artificial por defecto. Antes de aumentar la complejidad, debo demostrar qué característi…»
 
 **✅ ¿Con qué proveedor de modelos trabaja?**
 
-- top-4: a-fondo-rag-y-el-chat-proveedor-y-costo, a-fondo-banco-pichincha-modelos-predictivos, a-fondo-como-trabajo-como-lidero~1, a-fondo-agentes-en-produccion-fuentes-o-vacio
-- primer fragmento: «El proveedor generativo se elige por configuración, sin tocar código, entre cinco adaptados: **Groq** —el inicial, con Llama 3.3 70B—, **Gemini** 2.5 Flash, **Azure** con Microsoft Foundry, **Claude** y cualquier servici…»
+- top-4: a-fondo-rag-y-el-chat-proveedor-intercambiable~2, a-fondo-cafam-coordinar-equipo-mixto~2, a-fondo-origenes-banco-pichincha-la-capa-analitica~1, a-fondo-fabric-en-la-practica-dax-studio-y-tabular-editor~1
+- primer fragmento: «El beneficio principal es reducir el acoplamiento. La aplicación no debería dejar de existir porque cambie un proveedor, se modifique una cuota o desaparezca un modelo específico. La arquitectura necesita preservar la ca…»
 
 **✅ ¿Cómo evita que el modelo invente respuestas?**
 
-- top-4: a-fondo-rag-y-el-chat-los-guardrails~2, a-fondo-agentes-en-produccion-fuentes-o-vacio, a-fondo-rag-y-el-chat-los-guardrails~1, a-fondo-analitica-predictiva-ingenieria-de-variables
-- primer fragmento: «Sobre las citas, la verdad exacta: los chips que acompañan una respuesta son las cuatro fuentes que la recuperación entregó al modelo, y cada uno navega a su sección del sitio. No existe hoy un validador que compruebe qu…»
+- top-4: a-fondo-agentes-en-produccion-fuentes-o-vacio~1, a-fondo-rag-y-el-chat-los-guardrails~2, a-fondo-agentes-en-produccion-fuentes-o-vacio~2, a-fondo-rag-y-el-chat-los-guardrails~3
+- primer fragmento: «Los agentes de ARKHÉ comparten una regla que resume mi postura sobre inteligencia artificial generativa: ninguna afirmación verificable debe depender únicamente de la memoria del modelo. Cuando una respuesta requiere evi…»
 
-**✅ ¿Ha llevado un modelo de machine learning a producción?**
+**☑️ ¿Ha llevado un modelo de machine learning a producción?**
 
-- top-4: a-fondo-analitica-predictiva-dos-modelos~1, a-fondo-banco-pichincha-modelos-predictivos, a-fondo-analitica-predictiva-en-produccion, a-fondo-certificaciones-el-ai-300
-- primer fragmento: «He llevado modelos de **machine learning** a producción en dos contextos que no se parecen: la planeación de la demanda en transporte masivo y la anticipación del comportamiento de clientes en banca. El método viaja; el…»
+- top-4: a-fondo-transmilenio-cm-lo-que-enseno-el-modelo~2, a-fondo-analitica-predictiva-dos-modelos~1, a-fondo-banco-pichincha-modelos-predictivos~1, a-fondo-transmilenio-cm-lo-que-enseno-el-modelo~1
+- primer fragmento: «Con el tiempo, esta comprensión se ampliaría hacia aplicaciones y agentes de inteligencia artificial. Un modelo genera una predicción; una aplicación puede integrarla con reglas y flujos de trabajo; un agente puede consu…»
 
 **✅ ¿Qué postura tiene sobre el uso responsable de la inteligencia artificial?**
 
-- top-4: a-fondo-gobierno-de-datos-y-de-ia-estrategia-iso-42001~1, a-fondo-gobierno-de-datos-y-de-ia-estrategia-iso-42001~2, a-fondo-fundacion-ctic-estrategia-institucional-de-ia, a-fondo-fundacion-ctic-lo-que-reune
-- primer fragmento: «Lidero la estrategia institucional de IA de la Fundación CTIC sobre **UNE-ISO/IEC 42001:2025**, la adopción española de **ISO/IEC 42001**: la IA no como una colección de iniciativas sino como una capacidad que necesita d…»
+- top-4: a-fondo-gobierno-de-datos-y-de-ia-estrategia-iso-42001~1, a-fondo-gobierno-de-datos-y-de-ia-estrategia-iso-42001~2, a-fondo-gobierno-de-datos-y-de-ia-la-continuacion~2, a-fondo-fundacion-ctic-gobernar-datos-y-gobernar-ia
+- primer fragmento: «Actualmente lidero la estrategia institucional de inteligencia artificial de la Fundación CTIC siguiendo los principios y requisitos de **UNE-ISO/IEC 42001:2025**, la adopción española de la norma internacional ISO/IEC 4…»
 
 **✅ ¿Ha trabajado con procesamiento de lenguaje natural?**
 
-- top-4: a-fondo-analitica-predictiva-las-herramientas~1, a-fondo-los-tableros-el-stack, a-fondo-cm-operaciones-la-automatizacion, a-fondo-fabric-en-la-practica-lago-y-almacen~1
-- primer fragmento: «Los lenguajes de programación con los que trabajo son Python, R, SQL y DAX; el nivel más avanzado es Python. No presento las herramientas como equivalentes. Esta es la lista honesta: | Herramienta | Nivel | Dónde | | ---…»
+- top-4: a-fondo-analitica-predictiva-nivel-por-herramienta~1, a-fondo-certificaciones-el-ai-103~1, a-fondo-fabric-en-la-practica-lago-y-almacen~1, a-fondo-como-trabajo-el-instrumento-para-cada-decision~1
+- primer fragmento: «No presento las herramientas como equivalentes ni como una competencia definida únicamente por su nombre. Esta es la lista honesta, herramienta por herramienta: | Herramienta | Nivel | Dónde | | --- | --- | --- | | Pytho…»
 
 **✅ ¿Qué tan grande es su experiencia con IA comparada con la de datos?**
 
-- top-4: a-fondo-origenes-cuantos-anos~2, a-fondo-gobierno-de-datos-y-de-ia-experiencia-y-formacion, a-fondo-vesting-la-gobernanza, a-fondo-vesting-el-puente
-- primer fragmento: «Si la pregunta es qué tan grande es mi experiencia con IA comparada con la de datos: los datos ocupan ocho de esos años; la IA aplicada, con agentes en producción, empieza en agosto de 2023 en Vesting y sigue hoy en CTIC…»
+- top-4: a-fondo-origenes-cuantos-anos~3, a-fondo-vesting-trazabilidad-y-naturaleza-de-la-informacion~2, a-fondo-gobierno-de-datos-y-de-ia-experiencia-y-formacion~1, a-fondo-vesting-por-que-sali-y-el-puente~1
+- primer fragmento: «Si la pregunta es qué tan grande es mi experiencia con IA comparada con la de datos: los datos ocupan ocho de esos años; la IA aplicada, con agentes en producción, empieza en agosto de 2023 en Vesting y sigue hoy en la F…»
 
 **✅ ¿Ha construido prompts o sistemas con instrucciones para un modelo?**
 
-- top-4: a-fondo-rag-y-el-chat-los-guardrails~1, a-fondo-analitica-predictiva-donde-lo-aplico-hoy, a-fondo-las-investigaciones-se-mide-el-vacio~2, a-fondo-analitica-predictiva-la-estadistica
-- primer fragmento: «El alcance del chat no depende de una instrucción. El orden real de las defensas en el servidor: 1. **Interruptor general**: si el chat está apagado, el servidor tampoco pinta el botón. 2. **Límite de frecuencia**: 10 pr…»
+- top-4: a-fondo-rag-y-el-chat-los-guardrails~3, a-fondo-rag-y-el-chat-los-guardrails~1, a-fondo-rag-y-el-chat-los-guardrails~2, a-fondo-analitica-predictiva-de-modelos-a-sistemas~1
+- primer fragmento: «La primera capa de fondo controla el ingreso al flujo generativo: las preguntas sin recuperación suficiente se resuelven sin modelo, lo que reduce costo y limita la posibilidad de que el conocimiento general del proveedo…»
 
 ### plataforma-y-datos
 
 **✅ ¿Qué experiencia tiene con Microsoft Fabric?**
 
-- top-4: a-fondo-fabric-en-la-practica-power-bi~1, a-fondo-fabric-en-la-practica-power-bi~2, a-fondo-fabric-en-la-practica-lo-publico, a-fondo-plataforma-y-despliegue-el-mundo-microsoft~1
-- primer fragmento: «**Power BI** atraviesa toda mi trayectoria: el análisis de la operación de TransMilenio, el BI de control del WMS en Cafam, la adopción por más de 50 usuarios en Banco Pichincha y hoy los 42 productos analíticos de la Fu…»
+- top-4: a-fondo-fabric-en-la-practica-power-bi~2, a-fondo-fabric-en-la-practica-fabric-en-mi-perfil~1, a-fondo-fabric-en-la-practica-power-bi~1, a-fondo-vesting-la-arquitectura~3
+- primer fragmento: «Por eso, el desarrollo comienza antes de abrir la interfaz. Primero identifico el proceso, la audiencia, la pregunta y la decisión. Después defino las entidades, relaciones, eventos y medidas necesarias para representar…»
 
-**☑️ ¿Ha diseñado una arquitectura de datos desde cero?**
+**✅ ¿Ha diseñado una arquitectura de datos desde cero?**
 
-- top-4: casestudy-vesting, trayectoria-1, a-fondo-lo-que-busco-que-ofrezco~2, a-fondo-fabric-en-la-practica-lago-y-almacen~2
-- primer fragmento: «Vesting, una startup de agentes de automatización, crecía sin infraestructura de datos: la analítica de sus agentes de IA no tenía dónde vivir y cada integración de datos de clientes era artesanal. Construir desde cero e…»
+- top-4: a-fondo-vesting-la-arquitectura~1, a-fondo-vesting-la-arquitectura~3, a-fondo-vesting-la-arquitectura~2, a-fondo-lo-que-busco-que-ofrezco~3
+- primer fragmento: «Diseñé e implementé en Microsoft Fabric un ecosistema de datos orientado a integrar, transformar y analizar la información generada por los agentes: Big Data, Data Warehouse y procesamiento distribuido sobre un lakehouse…»
 
-**☑️ ¿Qué es un lakehouse y lo ha usado?**
+**✅ ¿Qué es un lakehouse y lo ha usado?**
 
-- top-4: a-fondo-plataforma-y-despliegue-como-la-cubro~1, a-fondo-fabric-en-la-practica-lago-y-almacen~1, a-fondo-fabric-en-la-practica-lago-y-almacen~2, a-fondo-fabric-en-la-practica-lo-publico
-- primer fragmento: «Dos razones. La primera es de equivalencia: un lago sobre almacenamiento distribuido, un almacén analítico columnar, un orquestador de pipelines y una capa semántica existen en las tres nubes con nombres distintos. Lo qu…»
+- top-4: a-fondo-fabric-en-la-practica-lago-y-almacen~2, a-fondo-como-aprendo-incorporar-una-plataforma~1, a-fondo-fabric-en-la-practica-lago-y-almacen~1, a-fondo-como-aprendo-incorporar-una-plataforma~3
+- primer fragmento: «El warehouse cumplía una función complementaria. Permitía organizar información estructurada mediante un enfoque relacional, desarrollar transformaciones y vistas en T-SQL orientadas al análisis y responder con claridad…»
 
-**✅ ¿Sabe modelado semántico?**
+**☑️ ¿Sabe modelado semántico?**
 
-- top-4: a-fondo-fabric-en-la-practica-modelado-semantico~1, a-fondo-fabric-en-la-practica-modelado-semantico~2, a-fondo-banco-pichincha-modelos-semanticos-y-optimizacion, a-fondo-los-tableros-que-son
-- primer fragmento: «El **modelo semántico** es la capa menos visible y la que más determina el valor: donde las tablas se vuelven entidades del negocio, las relaciones adquieren significado y las reglas de cálculo se vuelven **medidas** que…»
+- top-4: a-fondo-banco-pichincha-contenidos-de-la-formacion~1, a-fondo-fabric-en-la-practica-modelado-semantico~1, a-fondo-fabric-en-la-practica-modelado-semantico~2, a-fondo-banco-pichincha-contenidos-de-la-formacion~2
+- primer fragmento: «Uno de los componentes principales fue Power Query, utilizado para estructurar transformaciones más claras, reducir actividades manuales y establecer una preparación reproducible de la información. El propósito no era ún…»
 
 **✅ ¿Qué nivel tiene con Power BI?**
 
-- top-4: a-fondo-fabric-en-la-practica-power-bi~2, a-fondo-fabric-en-la-practica-power-bi~1, agentes-constructor-tableros-powerbi-limites, skills
-- primer fragmento: «La ingeniería industrial aporta el proceso —tableros por proceso, no por área, con indicadores de resultado conectados a las condiciones que los producen— y el diseño industrial la interacción: jerarquía, navegación comp…»
+- top-4: a-fondo-bi-que-se-adopta-cuando-power-bi-no-es-el-instrumento~2, a-fondo-bi-que-se-adopta-cuando-power-bi-no-es-el-instrumento~1, a-fondo-plataforma-y-despliegue-siguiente-nivel-plataforma~1, a-fondo-los-tableros-otras-herramientas~1
+- primer fragmento: «Seleccionar el instrumento adecuado exige comprender cuánto tiempo conserva valor la información, qué nivel de interpretación requiere, qué consecuencias tiene la decisión y qué responsabilidad debe permanecer en la pers…»
 
-**✅ ¿Sabe DAX?**
+**☑️ ¿Sabe DAX?**
 
-- top-4: a-fondo-fabric-en-la-practica-modelado-semantico~1, a-fondo-fabric-en-la-practica-modelado-semantico~2, tableros-energia-y-clima-cifras~1, a-fondo-las-investigaciones-operaciones-bajo-variabilidad~1
-- primer fragmento: «El **modelo semántico** es la capa menos visible y la que más determina el valor: donde las tablas se vuelven entidades del negocio, las relaciones adquieren significado y las reglas de cálculo se vuelven **medidas** que…»
+- top-4: a-fondo-los-tableros-medidas-dax~3, a-fondo-rag-y-el-chat-umbral-medido~1, a-fondo-fabric-en-la-practica-modelado-semantico~1, a-fondo-fabric-en-la-practica-modelado-semantico~2
+- primer fragmento: «Las 43 medidas de energía se validaron una por una contra el modelo y se contrastaron con valores publicados, no solo consigo mismas. Y cada campo que un visual cita se contrasta contra el modelo real, porque el validado…»
 
 **✅ ¿Ha construido procesos ETL?**
 
-- top-4: a-fondo-banco-pichincha-el-etl-y-la-preparacion, a-fondo-procesos-y-simulacion-construir-procesos, a-fondo-fundacion-ctic-analitica-por-procesos~1, a-fondo-inglopres-lo-que-dejo
-- primer fragmento: «Optimicé los procesos **ETL** de preparación de información de las soluciones de Power BI, con **Power Query**, y los tiempos de análisis **bajaron un 35 %**, con más consistencia en los resultados. Estructuré las consul…»
+- top-4: a-fondo-banco-pichincha-el-etl-y-la-preparacion~1, a-fondo-transmilenio-cm-unificar-las-fuentes~2, a-fondo-transmilenio-cm-unificar-las-fuentes~1, a-fondo-banco-pichincha-el-etl-y-la-preparacion~2
+- primer fragmento: «Trabajé en la optimización de los procesos ETL de preparación de información utilizados por las soluciones de Power BI, construidos con Power Query. Las mejoras aplicadas contribuyeron a reducir aproximadamente un 35 % l…»
 
 **✅ ¿Qué tan fuerte es en SQL?**
 
-- top-4: a-fondo-cafam-calidad-en-sql~2, a-fondo-analitica-predictiva-las-herramientas~1, a-fondo-cafam-calidad-en-sql~1, a-fondo-analitica-predictiva-las-herramientas~2
-- primer fragmento: «Aprendí que la calidad no es una propiedad abstracta: un dato puede ser válido en su formato y no ser lo bastante oportuno, completo o consistente para una decisión concreta. Y que los controles van dentro del pipeline,…»
+- top-4: a-fondo-inglopres-las-bases-de-datos~1, a-fondo-origenes-el-punto-de-inflexion~2, a-fondo-analitica-predictiva-las-herramientas~2, a-fondo-cm-operaciones-la-automatizacion~1
+- primer fragmento: «Para evaluar los procesos necesitaba indicadores confiables, pero una parte importante de la información requerida no existía, no se capturaba de forma consistente o permanecía distribuida entre diferentes registros que…»
 
-**✅ ¿Tiene experiencia con Azure?**
+**☑️ ¿Tiene experiencia con Azure?**
 
-- top-4: a-fondo-plataforma-y-despliegue-el-mundo-microsoft~1, a-fondo-fabric-en-la-practica-power-bi~1, a-fondo-gobierno-de-datos-y-de-ia-experiencia-y-formacion, a-fondo-fabric-en-la-practica-power-bi~2
-- primer fragmento: «Mi experiencia en la **nube** está en el ecosistema **Microsoft** y en **Azure**, y ahí está la profundidad: **Microsoft Fabric**, **Power BI**, modelos semánticos, lakehouses, warehouses y pipelines, y hoy **Microsoft F…»
+- top-4: a-fondo-certificaciones-el-ai-103~1, a-fondo-plataforma-y-despliegue-el-mundo-microsoft~1, a-fondo-apps-pipeline-exploracion-gemini-vertex~1, a-fondo-fabric-en-la-practica-power-bi~2
+- primer fragmento: «Desde julio de 2026 desarrollo la ruta correspondiente al examen AI-103, orientado al desarrollo de aplicaciones y agentes de inteligencia artificial en Azure; a la fecha llevo 21 módulos. No presento esta credencial com…»
 
 **✅ ¿Conoce Google Cloud, Vertex AI o BigQuery?**
 
-- top-4: a-fondo-plataforma-y-despliegue-lo-que-no-he-hecho, app-agente-gemini-vertex, a-fondo-plataforma-y-despliegue-como-la-cubro~2, a-fondo-plataforma-y-despliegue-como-la-cubro~1
-- primer fragmento: «**Google Cloud** —**Vertex AI**, **BigQuery**, despliegue productivo en ese ecosistema— y **contenedores en producción** con **Docker** y **Kubernetes** no están en mi experiencia profesional. Mi mundo es Microsoft y en…»
+- top-4: a-fondo-plataforma-y-despliegue-expansion-google-cloud~1, a-fondo-como-aprendo-incorporar-una-plataforma~2, a-fondo-apps-pipeline-exploracion-gemini-vertex~1, a-fondo-plataforma-y-despliegue-lo-que-no-he-hecho~1
+- primer fragmento: «He convertido Google Cloud en una prioridad concreta dentro de mi pipeline de construcción, con una salvedad que mantengo escrita: es una exploración sin fecha comprometida. Mi propósito es ampliar una profundidad arquit…»
 
 **✅ ¿Tiene experiencia con Docker y Kubernetes?**
 
-- top-4: a-fondo-plataforma-y-despliegue-lo-que-no-he-hecho, a-fondo-fabric-en-la-practica-power-bi~1, a-fondo-gobierno-de-datos-y-de-ia-experiencia-y-formacion, a-fondo-fabric-en-la-practica-power-bi~2
-- primer fragmento: «**Google Cloud** —**Vertex AI**, **BigQuery**, despliegue productivo en ese ecosistema— y **contenedores en producción** con **Docker** y **Kubernetes** no están en mi experiencia profesional. Mi mundo es Microsoft y en…»
+- top-4: a-fondo-plataforma-y-despliegue-lo-que-no-he-hecho~1, a-fondo-lo-que-busco-lo-que-no-he-hecho-y-el-portafolio~1, a-fondo-fabric-en-la-practica-power-bi~2, a-fondo-gobierno-de-datos-y-de-ia-experiencia-y-formacion~1
+- primer fragmento: «Google Cloud —Vertex AI, BigQuery, despliegue productivo en ese ecosistema— y contenedores en producción con Docker y Kubernetes no están en mi experiencia profesional. Mi mundo es Microsoft y en Microsoft es donde tengo…»
 
-**✅ ¿Sabe de MLOps?**
+**☑️ ¿Sabe de MLOps?**
 
-- top-4: a-fondo-plataforma-y-despliegue-desplegar-y-operar-ia, a-fondo-analitica-predictiva-monitoreo-del-modelo, a-fondo-plataforma-y-despliegue-lo-que-no-he-hecho, a-fondo-certificaciones-el-ai-300
-- primer fragmento: «Desplegar aplicaciones y operar IA comparten fundamentos —versiones, automatización, pruebas, observabilidad—, pero una solución inteligente añade componentes probabilísticos que evolucionan solos: datos, modelos, contex…»
+- top-4: a-fondo-certificaciones-el-ai-300~1, a-fondo-analitica-predictiva-la-deriva~2, a-fondo-certificaciones-el-ai-300~2, a-fondo-lo-que-busco-contexto-controles-y-abstencion~2
+- primer fragmento: «Desde julio de 2026 curso también la ruta correspondiente al examen AI-300, que completa el tercer componente de mi especialización; llevo 10 módulos. Mientras no haya aprobado el examen, debe presentarse como una certif…»
 
 **☑️ ¿Ha trabajado con big data o procesamiento distribuido?**
 
-- top-4: trayectoria-1, proyecto-vesting, casestudy-vesting, a-fondo-vesting-la-arquitectura~1
+- top-4: trayectoria-1, proyecto-vesting, a-fondo-vesting-la-arquitectura~1, casestudy-vesting
 - primer fragmento: «2024: Líder de Estrategia de Datos, Vesting — startup de agentes de automatización. Ecosistema de datos para agentes de IA en Microsoft Fabric, desde cero: arquitectura, gobernanza, monitoreo de agentes en tiempo real y…»
 
-**☑️ ¿Ha construido pipelines de datos que corran solos?**
+**✅ ¿Ha construido pipelines de datos que corran solos?**
 
-- top-4: a-fondo-fabric-en-la-practica-pipelines, a-fondo-vesting-el-tamano-de-lo-construido, a-fondo-analitica-predictiva-donde-lo-aplico-hoy, a-fondo-como-aprendo-evidencia-construido~3
-- primer fragmento: «La preparación empieza con **Power Query** y los pipelines de Fabric: conexión con las fuentes, preparación, construcción de las tablas del modelo, como pasos separados y con nombres que se entienden. En Banco Pichincha…»
+- top-4: a-fondo-transmilenio-cm-validaciones-en-el-pipeline~1, a-fondo-transmilenio-cm-validaciones-en-el-pipeline~2, a-fondo-agentes-en-produccion-la-segunda-trayectoria~1, a-fondo-vesting-la-arquitectura~2
+- primer fragmento: «Incorporé validaciones en el ETL para identificar datos incompletos, duplicados, inconsistencias y relaciones que no cumplían las reglas esperadas: un servicio ejecutado sin programación que lo respaldara, una transacció…»
 
 **☑️ ¿Qué hace para asegurar la calidad de los datos?**
 
-- top-4: casestudy-cafam, a-fondo-fundacion-ctic-gobierno-y-calidad~1, a-fondo-cafam-calidad-en-sql~2, a-fondo-cafam-calidad-en-sql~1
+- top-4: casestudy-cafam, a-fondo-origenes-iso-9001-la-primera-escuela~1, a-fondo-gobierno-de-datos-y-de-ia-gobernar-para-hacer-mas~2, a-fondo-procesos-y-simulacion-verificacion-y-validacion~1
 - primer fragmento: «Cafam implementaba un WMS en su operación logística: un cambio de sistema crítico donde cada error de datos se paga en la bodega. Asegurar la calidad de la implementación coordinando al equipo de pruebas más grande que h…»
 
 **✅ ¿Sabe de integración continua y despliegue automático?**
 
-- top-4: a-fondo-plataforma-y-despliegue-lo-que-no-he-hecho, a-fondo-plataforma-y-despliegue-lo-que-despliego~1, a-fondo-plataforma-y-despliegue-lo-que-despliego~2, a-fondo-plataforma-y-despliegue-el-mundo-microsoft~1
-- primer fragmento: «**Google Cloud** —**Vertex AI**, **BigQuery**, despliegue productivo en ese ecosistema— y **contenedores en producción** con **Docker** y **Kubernetes** no están en mi experiencia profesional. Mi mundo es Microsoft y en…»
+- top-4: a-fondo-plataforma-y-despliegue-ci-como-calidad~1, a-fondo-plataforma-y-despliegue-lo-que-despliego~2, a-fondo-plataforma-y-despliegue-lo-que-no-he-hecho~1, a-fondo-plataforma-y-despliegue-ci-como-calidad~3
+- primer fragmento: «La integración continua funciona como un mecanismo de calidad y no únicamente como una automatización de despliegue. Antes de publicar, la solución debe superar los controles definidos para su código, comportamiento y ar…»
 
 **✅ ¿Qué diferencia hay entre un data lake y un data warehouse para él?**
 
-- top-4: a-fondo-fabric-en-la-practica-lago-y-almacen~1, a-fondo-fabric-en-la-practica-lago-y-almacen~2, a-fondo-vesting-la-arquitectura~1, trayectoria-1
-- primer fragmento: «En Vesting diseñé sobre Fabric un ecosistema de **120 tablas y 20 GB** que combinaba almacenamiento analítico, procesamiento distribuido y estructuras de consumo. La regla era asignar cada carga al mecanismo adecuado seg…»
+- top-4: a-fondo-fabric-en-la-practica-lago-y-almacen~2, a-fondo-vesting-la-arquitectura~1, a-fondo-fabric-en-la-practica-lago-y-almacen~1, a-fondo-fabric-en-la-practica-direct-lake-y-rls~1
+- primer fragmento: «El warehouse cumplía una función complementaria. Permitía organizar información estructurada mediante un enfoque relacional, desarrollar transformaciones y vistas en T-SQL orientadas al análisis y responder con claridad…»
 
 ### bi-y-analitica
 
 **✅ ¿Cómo logra que la gente use los tableros que construye?**
 
-- top-4: a-fondo-banco-pichincha-el-problema-real, a-fondo-bi-que-se-adopta-el-problema-dificil, a-fondo-lo-que-busco-el-problema-que-quiero, a-fondo-bi-que-se-adopta-cuando-la-herramienta-estorba~1
-- primer fragmento: «Entré a **Banco Pichincha en marzo de 2023** como Analista Senior de Analítica y Reportes y estuve hasta julio del mismo año. Fueron cinco meses, y fue mi paso por el **sector financiero**: en **banca** el dato tiene due…»
+- top-4: a-fondo-bi-que-se-adopta-portafolio-de-tableros~1, a-fondo-apps-pipeline-procedencia-y-responsabilidad~1, a-fondo-apps-pipeline-agentes-investigaciones-tableros~1, a-fondo-banco-pichincha-programa-de-formacion~2
+- primer fragmento: «La gestión de la adopción también exige observar el portafolio completo. Una organización puede tener productos individualmente correctos y, al mismo tiempo, ofrecer una experiencia fragmentada porque diferentes tableros…»
 
-**☑️ ¿Tiene experiencia en inteligencia de negocios?**
+**✅ ¿Tiene experiencia en inteligencia de negocios?**
 
-- top-4: a-fondo-vesting-monitoreo-de-agentes~2, a-fondo-banco-pichincha-modelos-predictivos, a-fondo-banco-pichincha-lo-que-pichincha-consolido, a-fondo-rag-y-el-chat-que-demuestra
-- primer fragmento: «Las métricas técnicas prueban que el agente respondió; no que la respuesta sirvió. Por eso los tableros operativos, para producto y operaciones, permitían recorrer una anomalía hasta los eventos de la sesión. Un agente d…»
+- top-4: a-fondo-bi-que-se-adopta-lo-que-demuestra~1, a-fondo-bi-que-se-adopta-lo-que-demuestra~2, a-fondo-vesting-por-que-sali-y-el-puente~1, a-fondo-banco-pichincha-elegir-el-instrumento~3
+- primer fragmento: «Mi experiencia demuestra que la adopción no es una consecuencia accidental de construir un buen tablero. Es una condición que debe diseñarse desde la identificación del problema, sostenerse mediante datos y definiciones…»
 
-**☑️ ¿Cuántos usuarios han adoptado los tableros que ha hecho?**
+**✅ ¿Cuántos usuarios han adoptado los tableros que ha hecho?**
 
-- top-4: a-fondo-fundacion-ctic-analitica-por-procesos~1, casestudy-banco-pichincha, a-fondo-transmilenio-cm-la-adopcion, a-fondo-bi-que-se-adopta-adopcion-medida~1
-- primer fragmento: «He construido **42 productos analíticos** en Power BI —entre ellos **23 tableros de control**— que hoy usan **20 líderes** de **15 procesos** administrativos y asistenciales y unos **75 usuarios**. Las dos audiencias tra…»
+- top-4: a-fondo-bi-que-se-adopta-ciclo-de-adopcion~2, a-fondo-plataforma-y-despliegue-lo-que-no-he-hecho~1, a-fondo-bi-que-se-adopta-pichincha-y-cm-consultores, a-fondo-bi-que-se-adopta-portafolio-de-tableros~2
+- primer fragmento: «También debe existir una forma de retirar aquello que ya no aporta valor. Los tableros, páginas e indicadores que han perdido su propósito no deberían permanecer indefinidamente como opciones aparentemente vigentes. El e…»
 
 **✅ ¿Ha desarrollado modelos predictivos?**
 
-- top-4: a-fondo-banco-pichincha-modelos-predictivos, a-fondo-analitica-predictiva-dos-modelos~2, a-fondo-analitica-predictiva-dos-modelos~1, trayectoria-2
-- primer fragmento: «Entrené y llevé a producción modelos de **machine learning** —con **scikit-learn**— para predecir **fuga de clientes, mora y riesgo**: anticipar qué cliente puede irse, qué obligación puede dejar de pagarse y qué operaci…»
+- top-4: a-fondo-analitica-predictiva-de-modelos-a-sistemas~1, a-fondo-banco-pichincha-modelos-predictivos~2, a-fondo-analitica-predictiva-de-modelos-a-sistemas~3, a-fondo-analitica-predictiva-de-modelos-a-sistemas~2
+- primer fragmento: «La analítica predictiva constituye uno de los fundamentos de la inteligencia artificial empresarial, pero no agota su alcance. Un modelo produce una estimación, clasificación o prioridad. Una aplicación puede integrar es…»
 
-**☑️ ¿Qué herramientas usa para machine learning?**
+**✅ ¿Qué herramientas usa para machine learning?**
 
-- top-4: a-fondo-banco-pichincha-modelos-predictivos, a-fondo-analitica-predictiva-dos-modelos~1, a-fondo-analitica-predictiva-las-herramientas~1, a-fondo-certificaciones-el-ai-300
-- primer fragmento: «Entrené y llevé a producción modelos de **machine learning** —con **scikit-learn**— para predecir **fuga de clientes, mora y riesgo**: anticipar qué cliente puede irse, qué obligación puede dejar de pagarse y qué operaci…»
+- top-4: a-fondo-analitica-predictiva-las-herramientas~2, a-fondo-analitica-predictiva-las-herramientas~1, a-fondo-transmilenio-cm-lo-que-enseno-el-modelo~2, a-fondo-transmilenio-cm-lo-que-enseno-el-modelo~1
+- primer fragmento: «Jupyter facilita la experimentación y la documentación del recorrido analítico. Sin embargo, no considero el notebook como el destino final de una solución. Es un espacio para explorar, comparar y aprender. Cuando el tra…»
 
 **✅ ¿Qué tan avanzado es en Python?**
 
-- top-4: a-fondo-analitica-predictiva-las-herramientas~1, a-fondo-apps-pipeline-que-hay-construido~1, estudios, a-fondo-analitica-predictiva-las-herramientas~2
-- primer fragmento: «Los lenguajes de programación con los que trabajo son Python, R, SQL y DAX; el nivel más avanzado es Python. No presento las herramientas como equivalentes. Esta es la lista honesta: | Herramienta | Nivel | Dónde | | ---…»
+- top-4: a-fondo-analitica-predictiva-las-herramientas~1, a-fondo-certificaciones-las-de-ibm~2, a-fondo-analitica-predictiva-las-herramientas~2, a-fondo-certificaciones-las-de-ibm~1
+- primer fragmento: «Los lenguajes de programación con los que trabajo son Python, R, SQL y DAX; el nivel más avanzado es Python. Python con scikit-learn constituye una de mis bases principales para desarrollar modelos predictivos. Es el ent…»
 
 **✅ ¿En qué lenguajes de programación trabaja?**
 
-- top-4: a-fondo-analitica-predictiva-las-herramientas~1, a-fondo-analitica-predictiva-las-herramientas~2, a-fondo-ceinfes-equipos-multidisciplinarios, a-fondo-ceinfes-la-programacion-de-recursos
-- primer fragmento: «Los lenguajes de programación con los que trabajo son Python, R, SQL y DAX; el nivel más avanzado es Python. No presento las herramientas como equivalentes. Esta es la lista honesta: | Herramienta | Nivel | Dónde | | ---…»
+- top-4: a-fondo-analitica-predictiva-las-herramientas~1, a-fondo-analitica-predictiva-las-herramientas~2, a-fondo-certificaciones-las-de-ibm~1, a-fondo-ceinfes-la-programacion-de-recursos~1
+- primer fragmento: «Los lenguajes de programación con los que trabajo son Python, R, SQL y DAX; el nivel más avanzado es Python. Python con scikit-learn constituye una de mis bases principales para desarrollar modelos predictivos. Es el ent…»
 
-**☑️ ¿Tiene experiencia con R además de Python?**
+**✅ ¿Tiene experiencia con R además de Python?**
 
-- top-4: a-fondo-los-tableros-el-stack, a-fondo-como-aprendo-evidencia-certificaciones~2, a-fondo-fabric-en-la-practica-power-bi~1, a-fondo-analitica-predictiva-las-herramientas~1
-- primer fragmento: «Los seis se construyen con el mismo stack, declarado en cada ficha: **Power BI Desktop**, **Power Query** en lenguaje M para la preparación, **DAX** para las medidas, el reporte en **PBIR escrito por script** —doce págin…»
+- top-4: a-fondo-analitica-predictiva-las-herramientas~2, a-fondo-gobierno-de-datos-y-de-ia-experiencia-y-formacion~1, a-fondo-certificaciones-las-de-ibm~2, a-fondo-gobierno-de-datos-y-de-ia-experiencia-y-formacion~2
+- primer fragmento: «Jupyter facilita la experimentación y la documentación del recorrido analítico. Sin embargo, no considero el notebook como el destino final de una solución. Es un espacio para explorar, comparar y aprender. Cuando el tra…»
 - nota: Medido: «¿Programa en R?» NO funciona, y no es un hueco de contenido. La recuperación es léxica y descarta los términos de menos de tres letras para no llenar de ruido cada consulta; con «R» indexada, la expansión por prefijo trae «reglas», «resultado», «recuperación»… y el fragmento que sí habla de R pierde. Se probó y se revirtió. Una pregunta cuya única palabra con contenido es una letra suelta es invisible para este chat, y está declarado como límite conocido de ADR-010.
 
 **☑️ ¿Qué base estadística tiene?**
 
-- top-4: a-fondo-certificaciones-las-de-ibm, a-fondo-analitica-predictiva-la-estadistica, a-fondo-agentes-en-produccion-n8n, trayectoria-5
-- primer fragmento: «Mi base en ciencia de datos son **cuatro credenciales de IBM**, en dos etapas y alrededor de los tres lenguajes del análisis: **Python**, **SQL** y **R**. En **2022** completé el Certificado Profesional en Ciencia de Dat…»
+- top-4: a-fondo-certificaciones-las-de-ibm~2, a-fondo-cm-operaciones-la-memoria-estadistica~1, a-fondo-analitica-predictiva-la-estadistica~3, a-fondo-analitica-predictiva-la-estadistica~1
+- primer fragmento: «Python aportó la capacidad para convertir un problema analítico en un flujo reproducible. Me permitió avanzar desde la exploración y preparación de los datos hasta el entrenamiento y la evaluación de modelos. SQL proporc…»
 
 **✅ ¿Ha hecho predicción de demanda?**
 
-- top-4: a-fondo-transmilenio-cm-prediccion-de-demanda~1, a-fondo-transmilenio-cm-prediccion-de-demanda~2, a-fondo-plataforma-y-despliegue-lo-que-no-he-hecho, a-fondo-analitica-predictiva-en-produccion
-- primer fragmento: «Desarrollé con **scikit-learn** un modelo de aprendizaje automático para predecir la **demanda del sistema por ruta y franja horaria**, con actualización mensual, para fortalecer la planeación y la programación de flota.…»
+- top-4: a-fondo-transmilenio-cm-prediccion-de-demanda~2, a-fondo-transmilenio-cm-prediccion-de-demanda~1, a-fondo-analitica-predictiva-de-la-prediccion-a-la-decision~1, a-fondo-analitica-predictiva-demanda-transmilenio~1
+- primer fragmento: «El horizonte mensual respondía a una necesidad concreta de planificación. El propósito no era anticipar únicamente el siguiente movimiento de la operación, sino proporcionar una perspectiva suficientemente amplia para aj…»
 
 **✅ ¿Usa scikit-learn, pandas y numpy?**
 
-- top-4: a-fondo-analitica-predictiva-las-herramientas~1, a-fondo-certificaciones-las-de-ibm, proyecto-banco-pichincha, casestudy-banco-pichincha
-- primer fragmento: «Los lenguajes de programación con los que trabajo son Python, R, SQL y DAX; el nivel más avanzado es Python. No presento las herramientas como equivalentes. Esta es la lista honesta: | Herramienta | Nivel | Dónde | | ---…»
+- top-4: a-fondo-analitica-predictiva-nivel-por-herramienta~2, a-fondo-analitica-predictiva-nivel-por-herramienta~1, a-fondo-como-aprendo-ibm-y-las-rutas-en-curso~1, a-fondo-analitica-predictiva-lo-que-demuestra~2
+- primer fragmento: «Estas herramientas no representan el mismo nivel de especialización ni cumplen la misma función. Python, scikit-learn, Pandas, NumPy y SQL ocupan un lugar central en mi práctica de modelado y preparación. R fortalece el…»
 
-**✅ ¿Qué precisión alcanzaron los modelos que puso en producción?**
+**☑️ ¿Qué precisión alcanzaron los modelos que puso en producción?**
 
-- top-4: a-fondo-analitica-predictiva-en-produccion, a-fondo-banco-pichincha-modelos-predictivos, a-fondo-analitica-predictiva-dos-modelos~2, casestudy-banco-pichincha
-- primer fragmento: «Uso con cuidado la expresión «modelo en producción». Un modelo no está en producción por tener una métrica alta en un notebook: lo está cuando sus predicciones entran en un proceso real, llegan dentro del ciclo de decisi…»
+- top-4: a-fondo-certificaciones-ibm-y-mis-dos-formaciones~2, a-fondo-banco-pichincha-modelos-predictivos~1, a-fondo-banco-pichincha-modelos-predictivos~2, a-fondo-analitica-predictiva-en-produccion~3
+- primer fragmento: «El Diseño Industrial añadió una responsabilidad complementaria: los resultados debían hacerse comprensibles. La visualización no era un paso decorativo al final del análisis, sino una forma de estructurar la información…»
 
 **✅ ¿Ha automatizado reportes o tareas repetitivas?**
 
-- top-4: a-fondo-cm-operaciones-la-automatizacion, casestudy-transmilenio-cm, trayectoria-3, a-fondo-como-trabajo-como-lidero~2
-- primer fragmento: «Automaticé las actividades recurrentes de preparación, validación y consolidación de la información de la operación de TransMilenio, con scripts en **Excel y VBA** y bases en **SQLite** consultadas en SQL: cada semana ll…»
+- top-4: a-fondo-cm-operaciones-la-automatizacion~1, a-fondo-cm-operaciones-la-automatizacion~2, a-fondo-fabric-en-la-practica-automatizar-power-bi~1, casestudy-transmilenio-cm
+- primer fragmento: «Implementé soluciones para automatizar actividades recurrentes de preparación, validación y consolidación de información, reduciendo la intervención manual y mejorando la consistencia del procesamiento. Las herramientas…»
 
 ### gobierno
 
 **✅ ¿Tiene experiencia en gobierno de datos?**
 
-- top-4: a-fondo-gobierno-de-datos-y-de-ia-experiencia-y-formacion, a-fondo-gobierno-de-datos-y-de-ia-tres-veces~2, a-fondo-gobierno-de-datos-y-de-ia-tres-veces~1, a-fondo-lo-que-busco-que-ofrezco~1
-- primer fragmento: «Algunas posiciones de estrategia y gobierno de IA piden posgrado. Mi formación es Ingeniería Industrial y Diseño Industrial en la Javeriana, cinco credenciales obtenidas —el DP-600 y cuatro de IBM— y dos rutas en curso,…»
+- top-4: a-fondo-gobierno-de-datos-y-de-ia-experiencia-y-formacion~1, a-fondo-gobierno-de-datos-y-de-ia-experiencia-y-formacion~2, a-fondo-gobierno-de-datos-y-de-ia-tres-veces~1, a-fondo-gobierno-de-datos-y-de-ia-tres-veces~2
+- primer fragmento: «Algunas posiciones de estrategia, arquitectura y gobierno de inteligencia artificial establecen una especialización o una maestría como requisito preferente. Mi formación académica está compuesta por Ingeniería Industria…»
 
 **✅ ¿Conoce la norma ISO 42001?**
 
-- top-4: a-fondo-gobierno-de-datos-y-de-ia-iso-42001, a-fondo-gobierno-de-datos-y-de-ia-estrategia-iso-42001~1, a-fondo-gobierno-de-datos-y-de-ia-estrategia-iso-42001~2, a-fondo-procesos-y-simulacion-iso-9001
-- primer fragmento: «Construí el **Experto ISO 42001**, uno de los 13 agentes de mi vitrina, como evidencia de cómo trabajo con IA generativa y conocimiento normativo. No usa la memoria del modelo como autoridad sobre la norma: cada afirmaci…»
+- top-4: a-fondo-gobierno-de-datos-y-de-ia-estrategia-iso-42001~1, a-fondo-gobierno-de-datos-y-de-ia-iso-42001~1, a-fondo-gobierno-de-datos-y-de-ia-iso-42001~2, a-fondo-procesos-y-simulacion-de-iso-9001-a-iso-42001
+- primer fragmento: «Actualmente lidero la estrategia institucional de inteligencia artificial de la Fundación CTIC siguiendo los principios y requisitos de **UNE-ISO/IEC 42001:2025**, la adopción española de la norma internacional ISO/IEC 4…»
 
 **✅ ¿Qué entiende por gobierno de inteligencia artificial?**
 
-- top-4: a-fondo-gobierno-de-datos-y-de-ia-tres-veces~1, a-fondo-gobierno-de-datos-y-de-ia-estrategia-iso-42001~1, a-fondo-fundacion-ctic-gobierno-y-calidad~2, a-fondo-gobierno-de-datos-y-de-ia-estrategia-iso-42001~2
-- primer fragmento: «He asumido responsabilidades de **gobierno de datos** e inteligencia artificial en tres contextos distintos, y en cada uno el problema era otro: | Dónde | Alcance | El problema que había que gobernar | | ----------------…»
+- top-4: a-fondo-gobierno-de-datos-y-de-ia-la-continuacion~1, a-fondo-gobierno-de-datos-y-de-ia-la-continuacion~2, a-fondo-gobierno-de-datos-y-de-ia-controles-en-ia~1, a-fondo-gobierno-de-datos-y-de-ia-estrategia-iso-42001~1
+- primer fragmento: «El gobierno de la inteligencia artificial no reemplaza el gobierno de datos ni constituye un tema completamente separado. Lo amplía. Una solución de IA depende de información, conocimiento, modelos, herramientas, proveed…»
 
 **✅ ¿Ha definido políticas, estándares o lineamientos de datos?**
 
-- top-4: a-fondo-gobierno-de-datos-y-de-ia-que-es-gobernar, a-fondo-ceinfes-balanceo-de-digitalizacion~2, a-fondo-fundacion-ctic-gobierno-y-calidad~1, a-fondo-las-investigaciones-datos-sinteticos-y-limites
-- primer fragmento: «Gobernar un dato es poder responder cinco preguntas sobre él: de dónde viene y qué reglas lo transformaron (**linaje**), qué significa y quién responde por esa definición (**roles**), quién puede usarlo y para qué (**pol…»
+- top-4: a-fondo-gobierno-de-datos-y-de-ia-gobierno-tecnico-e-institucional~1, a-fondo-gobierno-de-datos-y-de-ia-acceso-y-cambio~1, a-fondo-gobierno-de-datos-y-de-ia-acceso-y-cambio~2, a-fondo-gobierno-de-datos-y-de-ia-acceso-y-cambio~3
+- primer fragmento: «El gobierno de inteligencia artificial fracasa cuando las políticas y la arquitectura se desarrollan por separado. Una política puede establecer transparencia, supervisión o trazabilidad, pero esos principios necesitan m…»
 
 **✅ ¿Cómo maneja datos personales o sensibles?**
 
-- top-4: a-fondo-gobierno-de-datos-y-de-ia-que-es-gobernar, a-fondo-fundacion-ctic-gobierno-y-calidad~1, a-fondo-vesting-una-startup-sin-plataforma~1, pieza-apps-anonimizador-funcionalidades~1
-- primer fragmento: «Gobernar un dato es poder responder cinco preguntas sobre él: de dónde viene y qué reglas lo transformaron (**linaje**), qué significa y quién responde por esa definición (**roles**), quién puede usarlo y para qué (**pol…»
+- top-4: a-fondo-gobierno-de-datos-y-de-ia-datos-personales~1, a-fondo-gobierno-de-datos-y-de-ia-datos-personales~3, a-fondo-gobierno-de-datos-y-de-ia-datos-personales~2, a-fondo-gobierno-de-datos-y-de-ia-gobierno-en-salud~1
+- primer fragmento: «Con datos personales, las cinco preguntas tienen ley detrás. En Colombia, el derecho de **habeas data** y la **Ley 1581** de protección de datos personales fijan qué puede tratarse, con qué finalidad, con qué autorizació…»
 
-**✅ ¿Ha liderado iniciativas transversales en organizaciones grandes?**
+**☑️ ¿Ha liderado iniciativas transversales en organizaciones grandes?**
 
-- top-4: a-fondo-gobierno-de-datos-y-de-ia-lo-transversal, a-fondo-fundacion-ctic-estrategia-institucional-de-ia, a-fondo-gobierno-de-datos-y-de-ia-estrategia-iso-42001~1, a-fondo-cafam-el-equipo-de-veinte~2
-- primer fragmento: «El gobierno genera poco valor dentro de un solo equipo. He trabajado tres veces en iniciativas transversales donde la colaboración no podía ordenarse: las mesas con la dirección de los concesionarios del SITP, el equipo…»
+- top-4: a-fondo-cafam-el-equipo-de-veinte~1, a-fondo-como-trabajo-adopcion-desafio-humano~2, a-fondo-gobierno-de-datos-y-de-ia-lo-transversal~1, a-fondo-como-trabajo-equipos-que-he-liderado~1
+- primer fragmento: «Lideré un equipo mixto de veinte personas durante la fase de pruebas: catorce integrantes de Cafam y seis profesionales de Oracle, organización que acababa de comprar el producto y lo estaba implantando con sus propios e…»
 
 **✅ ¿Conoce normas ISO y trabajo bajo estándares?**
 
-- top-4: a-fondo-procesos-y-simulacion-iso-9001, a-fondo-gobierno-de-datos-y-de-ia-iso-42001, a-fondo-inglopres-el-estudio-del-trabajo, a-fondo-origenes-el-primer-trabajo~1
-- primer fragmento: «En Inglopres trabajé el aseguramiento de calidad bajo **ISO 9001:2015** en la cadena de suministro, mi primera escuela formal de trazabilidad: no basta afirmar que el proceso funciona; hay que establecer qué resultado se…»
+- top-4: a-fondo-inglopres-cadena-e-iso~2, a-fondo-lo-que-busco-estrategia-y-gobierno-de-ia, a-fondo-gobierno-de-datos-y-de-ia-iso-42001~2, a-fondo-las-investigaciones-fatiga-y-balanceo
+- primer fragmento: «Esta experiencia también consolidó mi afinidad por los estándares como instrumentos para convertir principios en sistemas de gestión verificables y sostenibles. Haber desarrollado desde temprano una forma de trabajo basa…»
 
-**✅ ¿Cómo asegura la trazabilidad de la información?**
+**☑️ ¿Cómo asegura la trazabilidad de la información?**
 
-- top-4: a-fondo-gobierno-de-datos-y-de-ia-que-es-gobernar, a-fondo-procesos-y-simulacion-iso-9001, trayectoria-4, a-fondo-fundacion-ctic-el-rol-actual
-- primer fragmento: «Gobernar un dato es poder responder cinco preguntas sobre él: de dónde viene y qué reglas lo transformaron (**linaje**), qué significa y quién responde por esa definición (**roles**), quién puede usarlo y para qué (**pol…»
+- top-4: a-fondo-origenes-riesgos-y-datos-de-salud~2, a-fondo-vesting-trazabilidad-y-naturaleza-de-la-informacion~1, a-fondo-gobierno-de-datos-y-de-ia-que-es-gobernar~2, a-fondo-vesting-trazabilidad-y-naturaleza-de-la-informacion~2
+- primer fragmento: «Un componente central de la estrategia consiste en asegurar la trazabilidad del ciclo de vida de las soluciones. Es necesario conocer qué necesidad originó cada iniciativa, qué fuentes utiliza, cómo transforma la informa…»
 
 **✅ ¿Quién decide quién puede ver qué datos en sus plataformas?**
 
-- top-4: a-fondo-vesting-el-proceso-core~2, a-fondo-procesos-y-simulacion-la-raiz, a-fondo-vesting-monitoreo-de-agentes~2, a-fondo-como-aprendo-por-que-existe-y-como-decido
-- primer fragmento: «1. **Caso de uso**: qué problema se resuelve y qué acción habilita. 2. **Usuarios y decisión**: quién lo usa y qué decide con él. 3. **Especificación funcional**: cada actividad con entradas, reglas, salidas y criterios…»
+- top-4: a-fondo-gobierno-de-datos-y-de-ia-acceso-y-cambio~1, a-fondo-gobierno-de-datos-y-de-ia-acceso-y-cambio~3, a-fondo-gobierno-de-datos-y-de-ia-acceso-y-cambio~2, a-fondo-como-aprendo-como-decido-que-aprender
+- primer fragmento: «La cuarta pregunta corresponde al acceso y al propósito: las **políticas**. No basta con establecer quién puede consultar un dato. También es necesario comprender para qué puede utilizarlo, qué nivel de detalle necesita…»
 
 ### procesos
 
 **✅ ¿Sabe modelar procesos en BPMN?**
 
-- top-4: a-fondo-procesos-y-simulacion-bizagi-en-la-practica, a-fondo-procesos-y-simulacion-la-raiz, a-fondo-ceinfes-gestion-por-procesos~1, a-fondo-inglopres-el-erp~1
-- primer fragmento: «Con **Bizagi** modelo procesos en **BPMN**: actividades, decisiones, responsables, eventos, entradas, resultados y transferencias entre áreas. Su valor no es el diagrama: es un lenguaje común para contrastar cómo debería…»
+- top-4: a-fondo-procesos-y-simulacion-bizagi-en-la-practica~1, a-fondo-procesos-y-simulacion-bizagi-en-la-practica~3, a-fondo-procesos-y-simulacion-bizagi-en-la-practica~2, a-fondo-como-trabajo-modelar-el-proceso-en-bpmn~1
+- primer fragmento: «He utilizado Bizagi y FlexSim en distintos momentos de mi trayectoria, y no siempre juntas: **Bizagi** en Inglopres, Ceinfes, Cafam y Banco Pichincha; **FlexSim** en Inglopres y Cafam. Las dos herramientas responden a ne…»
 
-**☑️ ¿Ha hecho simulación de procesos o de operaciones?**
+**✅ ¿Ha hecho simulación de procesos o de operaciones?**
 
-- top-4: a-fondo-las-investigaciones-datos-sinteticos-y-limites, a-fondo-las-investigaciones-operaciones-bajo-variabilidad~1, a-fondo-procesos-y-simulacion-capacidad-y-variabilidad~1, a-fondo-procesos-y-simulacion-preguntas-pendientes
-- primer fragmento: «Varias de las 7 líneas —las 197.046 experiencias de los convoyes, las curvas de fatiga— se evalúan con datos sintéticos o simulación porque no hay datos públicos suficientes o no se puede usar información operacional. Lo…»
+- top-4: a-fondo-procesos-y-simulacion-flexsim-en-la-practica~3, a-fondo-procesos-y-simulacion-la-simulacion~1, a-fondo-procesos-y-simulacion-bizagi-en-la-practica~2, a-fondo-procesos-y-simulacion-construir-procesos~3
+- primer fragmento: «En logística y gestión de almacenes, la simulación permitía razonar sobre movimientos, disponibilidad de recursos, secuencias, tiempos de atención y restricciones de capacidad. Una modificación podía reducir el tiempo de…»
 
-**✅ ¿Ha usado Bizagi o FlexSim?**
+**☑️ ¿Ha usado Bizagi o FlexSim?**
 
-- top-4: a-fondo-procesos-y-simulacion-bizagi-en-la-practica, a-fondo-cafam-el-contexto~2, skills, a-fondo-origenes-el-hilo~2
-- primer fragmento: «Con **Bizagi** modelo procesos en **BPMN**: actividades, decisiones, responsables, eventos, entradas, resultados y transferencias entre áreas. Su valor no es el diagrama: es un lenguaje común para contrastar cómo debería…»
+- top-4: a-fondo-cafam-proceso-bpmn-y-simulacion~2, a-fondo-cafam-proceso-bpmn-y-simulacion~1, a-fondo-procesos-y-simulacion-bizagi-en-la-practica~1, a-fondo-procesos-y-simulacion-verificacion-y-validacion~3
+- primer fragmento: «Aquí se nota el ingeniero industrial que llegó a Cafam en octubre de 2020: primero el proceso, después el sistema. Esta misma combinación —BPMN con Bizagi para el proceso y simulación cuando el flujo lo amerita— la había…»
 
 **✅ ¿Tiene experiencia en mejora continua y optimización de procesos?**
 
-- top-4: a-fondo-ceinfes-gestion-por-procesos~2, a-fondo-fabric-en-la-practica-power-bi~1, trayectoria-0, a-fondo-banco-pichincha-modelos-semanticos-y-optimizacion
-- primer fragmento: «Ahí aprendí de dónde sale la resistencia: no de la tecnología, sino de que hacer visible el proceso obliga a resolver ambigüedades que durante años se compensaron con experiencia, comunicación informal y decisiones indiv…»
+- top-4: a-fondo-inglopres-cadena-e-iso~2, a-fondo-ceinfes-gestion-por-procesos~2, a-fondo-procesos-y-simulacion-de-iso-9001-a-iso-42001, a-fondo-fabric-en-la-practica-ciclo-de-vida-analitico~2
+- primer fragmento: «Esta experiencia también consolidó mi afinidad por los estándares como instrumentos para convertir principios en sistemas de gestión verificables y sostenibles. Haber desarrollado desde temprano una forma de trabajo basa…»
 
-**✅ ¿Ha trabajado con metodologías ágiles?**
+**☑️ ¿Ha trabajado con metodologías ágiles?**
 
-- top-4: a-fondo-ceinfes-gestion-por-procesos~1, trayectoria-6, a-fondo-procesos-y-simulacion-estudio-del-trabajo, a-fondo-fundacion-ctic-el-rol-actual
-- primer fragmento: «Lideré la transición de Ceinfes hacia un modelo de **gestión por procesos** sustentado en sistemas de información, y dirigí los proyectos tecnológicos que lo soportaban con **metodologías ágiles**. Con el área de tecnolo…»
+- top-4: trayectoria-6, a-fondo-ceinfes-gestion-por-procesos~1, a-fondo-procesos-y-simulacion-lean-kanban-y-scrum~1, a-fondo-como-trabajo-personas-que-no-me-reportan~2
+- primer fragmento: «2017 — 2018: Coordinador de Operaciones, Ceinfes. KPIs e informes a junta directiva; transición a gestión por procesos con métodos ágiles. KPIs de logística, RRHH y digitalización; informes a junta directiva. Transición…»
 
 **✅ ¿Para qué le sirve la ingeniería industrial en un puesto de datos?**
 
-- top-4: a-fondo-origenes-por-que-industrial~2, a-fondo-origenes-por-que-industrial~1, a-fondo-origenes-cuantos-anos~1, a-fondo-origenes-el-hilo~3
-- primer fragmento: «Las tres cosas siguen definiendo el perfil. La ingeniería me permite estructurar la complejidad. Los datos me permiten observarla y explicarla con evidencia. El diseño me obliga a convertir ese conocimiento en algo que a…»
+- top-4: a-fondo-origenes-arquitectura-de-medicion~2, a-fondo-origenes-la-convergencia~1, a-fondo-origenes-por-que-industrial~1, a-fondo-origenes-la-ingenieria-y-la-ia~2
+- primer fragmento: «Esta comprensión representa una de las bases de mi trabajo actual con ingeniería de datos, modelos semánticos y Power BI. Una solución analítica empresarial no comienza en la selección de visualizaciones. Comienza en la…»
 
 ### vitrina
 
 **✅ ¿Qué ha construido por su cuenta, fuera del trabajo?**
 
-- top-4: a-fondo-apps-pipeline-por-que-en-publico, a-fondo-fundacion-ctic-el-rol-actual, a-fondo-agentes-en-produccion-el-proceso-core, a-fondo-inglopres-lo-que-dejo
-- primer fragmento: «Un currículum afirma; una pieza publicada demuestra: por eso he publicado seis aplicaciones y 32 piezas en total. Durante diez años exigí que cada indicador conservara su procedencia y que cada conclusión tuviera evidenc…»
+- top-4: a-fondo-apps-pipeline-por-que-en-publico~1, a-fondo-apps-pipeline-por-que-en-publico~2, a-fondo-agentes-en-produccion-la-segunda-trayectoria~1, a-fondo-agentes-en-produccion-sistemas-de-trabajo~2
+- primer fragmento: «Un currículum afirma; una pieza publicada demuestra. Esa es la razón principal por la que construyo en público: seis aplicaciones hermanas, más este sitio, y 32 piezas en total, todas fuera de mi trabajo y todas con su r…»
 
-**✅ ¿Cuántas aplicaciones ha publicado?**
+**☑️ ¿Cuántas aplicaciones ha publicado?**
 
-- top-4: a-fondo-apps-pipeline-por-que-en-publico, a-fondo-ceinfes-los-indicadores~1, a-fondo-certificaciones-el-ai-103, a-fondo-como-aprendo-evidencia-construido~3
-- primer fragmento: «Un currículum afirma; una pieza publicada demuestra: por eso he publicado seis aplicaciones y 32 piezas en total. Durante diez años exigí que cada indicador conservara su procedencia y que cada conclusión tuviera evidenc…»
+- top-4: a-fondo-como-aprendo-evidencia-construido~1, a-fondo-apps-pipeline-las-seis-apps-en-cifras~1, a-fondo-ceinfes-la-programacion-de-recursos~2, a-fondo-agentes-en-produccion-la-segunda-trayectoria~1
+- primer fragmento: «La evidencia más contundente de mi capacidad de aprendizaje se encuentra en lo que he construido, porque cada pieza puede examinarse y relacionarse con decisiones, pruebas y resultados concretos. Mi portafolio reúne seis…»
 
 **✅ ¿Tiene código público o repositorios que se puedan revisar?**
 
-- top-4: a-fondo-apps-pipeline-codigo-primero, a-fondo-apps-pipeline-la-fabrica-en-numeros~1, a-fondo-apps-pipeline-por-que-en-publico, a-fondo-apps-pipeline-la-fabrica-en-numeros~2
-- primer fragmento: «Regla 13 del pipeline: no incorporar IA generativa por defecto. Antes de usar un modelo hay que demostrar qué característica del problema exige interpretación, generación, recuperación contextual o coordinación flexible,…»
+- top-4: a-fondo-apps-pipeline-publicar-con-responsabilidad~2, a-fondo-apps-pipeline-como-se-construyen~2, a-fondo-apps-pipeline-publicar-con-responsabilidad~1, a-fondo-apps-pipeline-por-que-en-publico~1
+- primer fragmento: «También procuro que los repositorios públicos no conviertan la transparencia en una vulnerabilidad. Las configuraciones sensibles se separan del código —los secretos viven solo en el archivo de entorno local, ignorado po…»
 
 **✅ ¿Qué tableros ha publicado con datos abiertos?**
 
-- top-4: a-fondo-los-tableros-que-son, a-fondo-los-tableros-el-stack, a-fondo-los-tableros-los-seis~1, a-fondo-los-tableros-cobertura-y-limites~1
-- primer fragmento: «Construí desde cero **seis tableros** sobre **datos abiertos** y los publiqué sellados en la vitrina, cada uno con su ficha técnica. No son ejercicios de diseño: son productos analíticos completos, de la evaluación de la…»
+- top-4: a-fondo-los-tableros-datos-abiertos-reproducibles~2, a-fondo-los-tableros-datos-abiertos-reproducibles~3, a-fondo-los-tableros-fabric-y-los-tableros~1, a-fondo-los-tableros-energia-y-clima~1
+- primer fragmento: «Las fuentes tienen nombre y dueño en cada ficha. El plan de cuentas completo de cada entidad vigilada que publica la Superintendencia Financiera, mes a mes. Los estados financieros que las sociedades reportan a la Superi…»
 
 **✅ ¿Ha trabajado con datos abiertos o fuentes públicas?**
 
-- top-4: a-fondo-los-tableros-el-stack, a-fondo-los-tableros-que-son, a-fondo-los-tableros-que-demuestran, a-fondo-los-tableros-los-seis~1
-- primer fragmento: «Los seis se construyen con el mismo stack, declarado en cada ficha: **Power BI Desktop**, **Power Query** en lenguaje M para la preparación, **DAX** para las medidas, el reporte en **PBIR escrito por script** —doce págin…»
+- top-4: a-fondo-los-tableros-datos-abiertos-reproducibles~3, a-fondo-los-tableros-datos-abiertos-reproducibles~2, a-fondo-los-tableros-energia-y-clima~1, a-fondo-los-tableros-que-demuestran~2
+- primer fragmento: «Ninguna de esas fuentes está pensada para análisis integrado, y esa es la parte del trabajo que un tablero bonito esconde: el origen de banca trae dieciséis trampas medidas antes del modelo; el de empresas, nueve; el del…»
 
 **✅ ¿Sabe leer estados financieros o datos contables?**
 
-- top-4: a-fondo-los-tableros-los-seis~1, tableros-banca-colombiana, a-fondo-los-tableros-que-demuestran, tableros-empresas-de-colombia
-- primer fragmento: «| Tablero | Universo | La identidad que cierra | | ---------------------------------------------- | ------------------------------------------------------------------------ | ---------------------------------------------…»
+- top-4: a-fondo-los-tableros-banca-colombiana~1, a-fondo-los-tableros-los-seis~1, a-fondo-los-tableros-empresas-de-colombia~1, a-fondo-gobierno-de-datos-y-de-ia-estados-y-procedencia~1
+- primer fragmento: «El primer tablero, Banca colombiana bajo la lupa, integra once años de estados financieros correspondientes a las 81 entidades de crédito vigiladas. La pieza permite analizar la evolución del sector, comparar institucion…»
 
-**✅ ¿Qué investigaciones ha hecho?**
+**☑️ ¿Qué investigaciones ha hecho?**
 
-- top-4: a-fondo-las-investigaciones-se-mide-el-vacio~3, a-fondo-plataforma-y-despliegue-lo-que-no-he-hecho, a-fondo-las-investigaciones-procesos-y-decision~1, a-fondo-las-investigaciones-los-harnesses~1
-- primer fragmento: «Un vacío contado sigue teniendo límites: demuestra que la condición no se encontró en el corpus revisado bajo ese método, no que sea imposible que exista fuera de la búsqueda. La formulación correcta no es «nadie lo ha h…»
+- top-4: a-fondo-lo-que-busco-lo-que-no-he-hecho-y-el-portafolio~2, a-fondo-las-investigaciones-limites-del-vacio~1, a-fondo-las-investigaciones-congelar-el-criterio~1, a-fondo-plataforma-y-despliegue-lo-que-no-he-hecho~1
+- primer fragmento: «También invito a examinar mi portafolio durante el proceso. Las 32 piezas —aplicaciones, agentes, investigaciones, tableros— y la propia plataforma de presentación, este sitio, permiten evaluar capacidades que un currícu…»
 
-**☑️ ¿Ha escrito artículos o papers?**
+**✅ ¿Ha escrito artículos o papers?**
 
-- top-4: a-fondo-los-agentes-de-la-vitrina-investigacion-y-fabrica~1, a-fondo-procesos-y-simulacion-iso-9001, a-fondo-las-investigaciones-que-son, agentes-hr-develop-ai-apps-limites
-- primer fragmento: «| Agente | Estado | Qué promete | Cifra medida | | -------------------------------- | ------- | ---------------------------------------------------------------------------------------------------- | ---------------------…»
+- top-4: a-fondo-las-investigaciones-lo-que-demuestran~2, a-fondo-las-investigaciones-que-son~1, a-fondo-las-investigaciones-harness-paper-computacional~1, a-fondo-las-investigaciones-tuberia-declarativa~2
+- primer fragmento: «Demuestran capacidad para construir sistemas reutilizables. La tubería no depende de un artículo específico —tres papers de clases distintas y un diff vacío lo prueban— y los agentes no dependen de una única tarea. El ob…»
 
-**☑️ ¿Qué agentes tiene publicados en su portafolio?**
+**✅ ¿Qué agentes tiene publicados en su portafolio?**
 
-- top-4: a-fondo-como-aprendo-evidencia-construido~3, a-fondo-agentes-en-produccion-dos-experiencias, a-fondo-las-investigaciones-que-son, a-fondo-agentes-en-produccion-fuentes-o-vacio
-- primer fragmento: «A las seis aplicaciones se suman **13 agentes** publicados, **7 investigaciones** y **6 tableros** sobre datos públicos: **32 piezas** en cuatro familias, cada una con una forma distinta de aprender. Las aplicaciones exi…»
+- top-4: a-fondo-agentes-en-produccion-la-segunda-trayectoria~1, a-fondo-agentes-en-produccion-la-segunda-trayectoria~2, a-fondo-apps-pipeline-agentes-investigaciones-tableros~1, a-fondo-como-aprendo-las-cuatro-familias
+- primer fragmento: «La segunda trayectoria corresponde a ARKHÉ, mi propio ecosistema agéntico, y a los agentes publicados en CV Viva. Este trabajo no es una extensión de la arquitectura de Vesting ni una reproducción de sus componentes. Es…»
 
 **✅ ¿Para qué sirven los trece agentes de la vitrina?**
 
-- top-4: a-fondo-los-agentes-de-la-vitrina-que-son, a-fondo-los-agentes-de-la-vitrina-lo-que-comparten, a-fondo-los-agentes-de-la-vitrina-investigacion-y-fabrica~1, a-fondo-los-agentes-de-la-vitrina-investigacion-y-fabrica~2
-- primer fragmento: «La vitrina publica **13 agentes**, cada uno con su ficha técnica: promesa, cifras con procedencia, límites, «nunca» y el proceso dibujado. Son sistemas de trabajo que corren sobre **Claude Code** dentro de un **harness**…»
+- top-4: a-fondo-los-agentes-de-la-vitrina-conocimiento-uno-por-uno~2, a-fondo-los-agentes-de-la-vitrina-como-nace-un-agente~1, a-fondo-los-agentes-de-la-vitrina-que-son, a-fondo-los-agentes-de-la-vitrina-sellado-e-inicial~2
+- primer fragmento: «**Experto Fiscal** (inicial, v1.0.0). Mantiene un gemelo de las finanzas del usuario en archivos suyos, calcula el impuesto estimado a la fecha, recorre las palancas legales que aplican a su caso y prepara lo que el cont…»
 
 **✅ ¿Qué es un harness y cómo lo usa en sus agentes?**
 
-- top-4: a-fondo-los-agentes-de-la-vitrina-que-son, a-fondo-plataforma-y-despliegue-desplegar-y-operar-ia, a-fondo-las-investigaciones-los-harnesses~1, a-fondo-vesting-el-proceso-core~2
-- primer fragmento: «La vitrina publica **13 agentes**, cada uno con su ficha técnica: promesa, cifras con procedencia, límites, «nunca» y el proceso dibujado. Son sistemas de trabajo que corren sobre **Claude Code** dentro de un **harness**…»
+- top-4: a-fondo-agentes-en-produccion-ecosistema-agentico-propio~1, a-fondo-los-agentes-de-la-vitrina-que-son, a-fondo-los-agentes-de-la-vitrina-como-nace-un-agente~2, a-fondo-lo-que-busco-arquitectura-agentica~2
+- primer fragmento: «Mi trabajo propio evolucionó hacia ARKHÉ, un ecosistema agéntico avanzado que no reproduce la arquitectura utilizada en Vesting ni se limita a los agentes publicados individualmente en la vitrina. Es una estructura de ni…»
 
 **✅ ¿Cómo controla la calidad de lo que producen sus agentes con Claude Code?**
 
-- top-4: a-fondo-los-agentes-de-la-vitrina-lo-que-comparten, a-fondo-los-agentes-de-la-vitrina-que-son, a-fondo-vesting-el-proceso-core~1, a-fondo-como-trabajo-el-instrumento-para-cada-decision
+- top-4: a-fondo-los-agentes-de-la-vitrina-lo-que-comparten, a-fondo-los-agentes-de-la-vitrina-como-nace-un-agente~1, a-fondo-agentes-en-produccion-controles-en-rojo~2, a-fondo-los-agentes-de-la-vitrina-que-son
 - primer fragmento: «- **Gates humanos con token exacto.** Ningún agente cruza una puerta —encender una GPU, cerrar un sprint, integrar una ficha— sin la palabra literal de la persona. Entre 5 y 8 gates por agente. - **Carnadas.** Un control…»
 
 **✅ ¿Cómo verifica las cifras que publica?**
 
-- top-4: a-fondo-los-tableros-cobertura-y-limites~2, a-fondo-plataforma-y-despliegue-lo-que-despliego~2, a-fondo-los-tableros-los-seis~1, a-fondo-los-tableros-las-identidades~1
-- primer fragmento: «Y cada ficha publica sus **«nunca»**: nunca sumar consolidados con individuales, porque serían la misma matriz contada dos veces; nunca usar la suma de países como total global; nunca restar dos series de temperatura con…»
+- top-4: a-fondo-los-tableros-verificar-el-universo~1, a-fondo-los-tableros-verificar-el-universo~2, a-fondo-los-tableros-verificar-el-universo~3, a-fondo-los-tableros-formula-1~1
+- primer fragmento: «Cuando la escala lo permite, ejecuto las validaciones sobre el universo completo incorporado al modelo y no únicamente sobre una muestra seleccionada. En los seis tableros lo permitió: las 7.779 combinaciones de la banca…»
 
 **✅ ¿Con qué está hecha esta página web?**
 
-- top-4: a-fondo-apps-pipeline-esta-misma-pagina, a-fondo-rag-y-el-chat-lo-que-estas-usando, a-fondo-plataforma-y-despliegue-lo-que-no-he-hecho, agentes-biblioteca-tendencias-genai-cifras~3
-- primer fragmento: «**CV Viva** forma parte del portafolio: una aplicación en **Next.js** con generación estática, bilingüe, construida en 8 sprints, con **pruebas automatizadas** en tres niveles, accesibilidad verificada, presupuesto de re…»
+- top-4: a-fondo-apps-pipeline-esta-misma-pagina~2, a-fondo-apps-pipeline-esta-misma-pagina~3, a-fondo-apps-pipeline-estados-honestos~1, a-fondo-apps-pipeline-estados-honestos~2
+- primer fragmento: «El contenido se mantiene separado de la presentación y se administra mediante archivos estructurados y control de versiones: la trayectoria, los estudios, los logros, los proyectos, las certificaciones y las skills viven…»
 
-**☑️ ¿Sus aplicaciones tienen pruebas automatizadas?**
+**✅ ¿Sus aplicaciones tienen pruebas automatizadas?**
 
-- top-4: a-fondo-certificaciones-el-ai-103, a-fondo-plataforma-y-despliegue-desplegar-y-operar-ia, a-fondo-apps-pipeline-esta-misma-pagina, a-fondo-como-aprendo-evidencia-construido~2
-- primer fragmento: «Desde **julio de 2026** curso la ruta del examen **AI-103**, que conduce a **Microsoft Certified: Azure AI Apps and Agents Developer Associate**: llevo 21 módulos. No la presento como obtenida: mientras no apruebe el exa…»
+- top-4: a-fondo-como-aprendo-evidencia-construido~2, a-fondo-cafam-lo-que-ensenan-las-pruebas~2, a-fondo-como-aprendo-evidencia-construido~1, a-fondo-como-aprendo-evidencia-construido~3
+- primer fragmento: «| Aplicación | Pruebas automatizadas | Cobertura | Decisiones (ADR) | Lo que exigió aprender | | ------------- | ---------------------- | --------: | ---------------: | ---------------------------------------------------…»
 
 ### encaje
 
-**☑️ ¿Qué tipo de rol está buscando?**
+**✅ ¿Qué tipo de rol está buscando?**
 
-- top-4: a-fondo-rag-y-el-chat-lo-que-estas-usando, a-fondo-lo-que-busco-los-roles-que-me-encajan~1, a-fondo-vesting-el-puente, a-fondo-como-aprendo-criterios-de-aprendizaje
-- primer fragmento: «Si esta respuesta la generó el chat de esta página, estás usando una implementación real de la arquitectura que describo: un sistema de generación aumentada por recuperación —**RAG**— que construí para responder sobre mi…»
+- top-4: a-fondo-lo-que-busco-plataformas-y-bi~2, a-fondo-plataforma-y-despliegue-el-mundo-microsoft~2, a-fondo-bi-que-se-adopta-el-rol-en-bi-y-analitica~2, a-fondo-lo-que-busco-los-roles-que-me-encajan~1
+- primer fragmento: «El cuarto rol es el más cercano a ese oficio: liderazgo en BI y analítica, Power BI de extremo a extremo y equipos que lo adoptan. Es el rol que el DP-600 certifica y el que más veces he ejercido: en Banco Pichincha, con…»
 
 **✅ ¿Está dispuesto a reubicarse a otro país?**
 
-- top-4: a-fondo-lo-que-busco-condiciones, a-fondo-como-trabajo-que-valoro~1, a-fondo-lo-que-busco-que-ofrezco~2, a-fondo-plataforma-y-despliegue-el-mundo-microsoft~2
-- primer fragmento: «- **Ubicación:** vivo en **Bogotá, Colombia**. Trabajo presencial, híbrido o **remoto**. - **Reubicación:** dispuesto a **reubicarme** a otra ciudad o a otro país, si la oportunidad representa una evolución real y las co…»
+- top-4: a-fondo-lo-que-busco-condiciones~1, a-fondo-lo-que-busco-condiciones~2, a-fondo-rag-y-el-chat-umbral-medido~1, a-fondo-como-trabajo-responsable-del-negocio~2
+- primer fragmento: «- Ubicación: resido en Bogotá, Colombia. Puedo trabajar de manera presencial, híbrida o remota según la naturaleza de la responsabilidad. - Reubicación: tengo disponibilidad para una reubicación nacional o internacional,…»
 
 **✅ ¿Trabaja en remoto?**
 
-- top-4: a-fondo-lo-que-busco-condiciones, contacto, a-fondo-como-trabajo-como-hablo-con-el-negocio~2, a-fondo-fundacion-ctic-el-rol-actual
-- primer fragmento: «- **Ubicación:** vivo en **Bogotá, Colombia**. Trabajo presencial, híbrido o **remoto**. - **Reubicación:** dispuesto a **reubicarme** a otra ciudad o a otro país, si la oportunidad representa una evolución real y las co…»
+- top-4: a-fondo-lo-que-busco-condiciones~1, a-fondo-lo-que-busco-trabajo-remoto-y-equipos-distribuidos, a-fondo-lo-que-busco-condiciones~2, contacto
+- primer fragmento: «- Ubicación: resido en Bogotá, Colombia. Puedo trabajar de manera presencial, híbrida o remota según la naturaleza de la responsabilidad. - Reubicación: tengo disponibilidad para una reubicación nacional o internacional,…»
 
 **✅ ¿Qué nivel de inglés tiene?**
 
-- top-4: a-fondo-lo-que-busco-condiciones, a-fondo-analitica-predictiva-las-herramientas~1, a-fondo-analitica-predictiva-las-herramientas~2, tableros-gasto-del-estado-bloques
-- primer fragmento: «- **Ubicación:** vivo en **Bogotá, Colombia**. Trabajo presencial, híbrido o **remoto**. - **Reubicación:** dispuesto a **reubicarme** a otra ciudad o a otro país, si la oportunidad representa una evolución real y las co…»
+- top-4: a-fondo-lo-que-busco-condiciones~1, a-fondo-analitica-predictiva-nivel-por-herramienta~2, a-fondo-plataforma-y-despliegue-siguiente-nivel-plataforma~2, a-fondo-analitica-predictiva-nivel-por-herramienta~1
+- primer fragmento: «- Ubicación: resido en Bogotá, Colombia. Puedo trabajar de manera presencial, híbrida o remota según la naturaleza de la responsabilidad. - Reubicación: tengo disponibilidad para una reubicación nacional o internacional,…»
 
 **✅ ¿En qué ciudad vive?**
 
-- top-4: a-fondo-lo-que-busco-condiciones, casestudy-transmilenio-cm, proyecto-transmilenio-cm, a-fondo-cm-operaciones-la-operacion-de-una-ciudad~2
-- primer fragmento: «- **Ubicación:** vivo en **Bogotá, Colombia**. Trabajo presencial, híbrido o **remoto**. - **Reubicación:** dispuesto a **reubicarme** a otra ciudad o a otro país, si la oportunidad representa una evolución real y las co…»
+- top-4: a-fondo-lo-que-busco-condiciones~1, casestudy-transmilenio-cm, a-fondo-origenes-los-tres-saltos~2, proyecto-transmilenio-cm
+- primer fragmento: «- Ubicación: resido en Bogotá, Colombia. Puedo trabajar de manera presencial, híbrida o remota según la naturaleza de la responsabilidad. - Reubicación: tengo disponibilidad para una reubicación nacional o internacional,…»
 
 **✅ ¿Ha vivido o estudiado fuera del país?**
 
-- top-4: a-fondo-lo-que-busco-condiciones, a-fondo-rag-y-el-chat-fuera-de-alcance, a-fondo-apps-pipeline-por-que-en-publico, tableros-ciclo-monetario-cifras~4
-- primer fragmento: «- **Ubicación:** vivo en **Bogotá, Colombia**. Trabajo presencial, híbrido o **remoto**. - **Reubicación:** dispuesto a **reubicarme** a otra ciudad o a otro país, si la oportunidad representa una evolución real y las co…»
+- top-4: a-fondo-lo-que-busco-condiciones~1, a-fondo-los-tableros-ciclo-monetario~4, a-fondo-los-tableros-medidas-dax~2, a-fondo-rag-y-el-chat-fuera-de-alcance~1
+- primer fragmento: «- Ubicación: resido en Bogotá, Colombia. Puedo trabajar de manera presencial, híbrida o remota según la naturaleza de la responsabilidad. - Reubicación: tengo disponibilidad para una reubicación nacional o internacional,…»
 
 **✅ ¿Cómo lo contacto?**
 
-- top-4: contacto, a-fondo-apps-pipeline-el-contrato-de-las-fichas, a-fondo-los-agentes-de-la-vitrina-produccion-de-piezas~1, a-fondo-lo-que-busco-como-trabajo-con-quien-contrata
+- top-4: contacto, a-fondo-las-investigaciones-limites-del-vacio~1, a-fondo-los-agentes-de-la-vitrina-produccion-de-piezas~1, a-fondo-apps-pipeline-el-contrato-de-las-fichas~2
 - primer fragmento: «Bogotá, Colombia · Abierto a reubicación internacional y trabajo remoto. Email: mauricio.hmrc@gmail.com. LinkedIn: https://www.linkedin.com/in/henry-mauricio-rincon · GitHub: https://github.com/mauriciorincon-ai»
 
-**✅ ¿Por qué debería contratarlo a él y no a otro?**
+**☑️ ¿Por qué debería contratarlo a él y no a otro?**
 
-- top-4: a-fondo-lo-que-busco-que-ofrezco~1, a-fondo-lo-que-busco-condiciones, a-fondo-fundacion-ctic-gobierno-y-calidad~2, a-fondo-agentes-en-produccion-n8n
-- primer fragmento: «Si la pregunta es por qué contratarme a mí y no a otro perfil de datos, la respuesta es la combinación: conecto dimensiones que suelen estar separadas: procesos, datos, experiencia de usuario, plataformas analíticas, apl…»
+- top-4: a-fondo-rag-y-el-chat-umbral-medido~1, a-fondo-lo-que-busco-que-ofrezco~1, a-fondo-lo-que-busco-condiciones~1, a-fondo-lo-que-busco-que-ofrezco~3
+- primer fragmento: «El umbral debe ser evaluado cuidadosamente. Si es demasiado bajo, preguntas irrelevantes pueden llegar al modelo. Si es demasiado alto, consultas válidas pueden rechazarse. Por eso su configuración se contrastó con pregu…»
 
 **✅ ¿Qué lo motiva profesionalmente?**
 
-- top-4: a-fondo-lo-que-busco-el-problema-que-quiero, investigaciones-espectro-agencia-limites, agentes-biblioteca-tendencias-genai-cifras~1, pieza-apps-anonimizador-funcionalidades~4
-- primer fragmento: «Quiero trabajar en problemas que exijan conectar datos, analítica e inteligencia artificial dentro de una capacidad empresarial completa: donde no basta construir un modelo o un tablero, sino que hay que integrarlos con…»
+- top-4: a-fondo-lo-que-busco-el-problema-que-quiero~2, a-fondo-lo-que-busco-el-problema-que-quiero~1, a-fondo-rag-y-el-chat-umbral-medido~1, a-fondo-como-aprendo-evidencia-certificaciones~1
+- primer fragmento: «Mi interés no está limitado a demostrar que una tecnología funciona. Quiero construir sistemas capaces de producir valor de manera sostenida. Eso implica comprender el problema antes de seleccionar la herramienta, diseña…»
 
 **☑️ ¿Cómo es trabajar con él en el día a día?**
 
-- top-4: a-fondo-certificaciones-el-dp-600~1, a-fondo-lo-que-busco-como-trabajo-con-quien-contrata, a-fondo-como-trabajo-como-hablo-con-el-negocio~2, a-fondo-como-trabajo-como-lidero~2
-- primer fragmento: «Preparé el **DP-600** entre julio y noviembre de 2024 y obtuve la credencial en **diciembre de 2024**, mientras trabajaba a tiempo completo y construía en Vesting un ecosistema de datos sobre **Microsoft Fabric**. Fabric…»
+- top-4: a-fondo-como-aprendo-como-aprendo-en-concreto~2, a-fondo-lo-que-busco-como-trabajo-con-quien-contrata~1, a-fondo-como-trabajo-capacidad-que-sobrevive~2, a-fondo-como-aprendo-como-aprendo-en-concreto~1
+- primer fragmento: «No descarto tutoriales, artículos o comunidades, pero los utilizo como apoyo y no como autoridad final. Cuando dos explicaciones producen interpretaciones distintas, regreso a la fuente oficial, reproduzco el comportamie…»
 
 **✅ ¿Cómo prefiere que sea el proceso de selección?**
 
-- top-4: a-fondo-lo-que-busco-como-trabajo-con-quien-contrata, a-fondo-origenes-del-proceso-a-la-ia, a-fondo-como-trabajo-como-lidero~2, a-fondo-gobierno-de-datos-y-de-ia-gobierno-de-mi-proceso
-- primer fragmento: «Prefiero una conversación sobre un problema real a un recorrido por el currículum. Con un problema y contexto suficiente puedo decir qué entendería primero, qué información necesitaría, qué hipótesis validaría y cuál ser…»
+- top-4: a-fondo-lo-que-busco-como-trabajo-con-quien-contrata~1, a-fondo-como-trabajo-process-mining-y-diagramas-vivos~1, a-fondo-origenes-la-leccion-de-arquitectura~2, a-fondo-lo-que-busco-como-trabajo-con-quien-contrata~2
+- primer fragmento: «Prefiero una conversación sobre un problema real a una conversación limitada al recorrido de mi currículum. Mi trayectoria proporciona contexto, pero la mejor forma de evaluar mi capacidad es observar cómo comprendo una…»
 
 **✅ ¿Qué haría en sus primeros noventa días en el puesto?**
 
-- top-4: a-fondo-lo-que-busco-como-trabajo-con-quien-contrata, a-fondo-origenes-el-primer-trabajo~1, a-fondo-inglopres-lo-que-dejo, a-fondo-como-trabajo-como-hablo-con-el-negocio~1
-- primer fragmento: «Prefiero una conversación sobre un problema real a un recorrido por el currículum. Con un problema y contexto suficiente puedo decir qué entendería primero, qué información necesitaría, qué hipótesis validaría y cuál ser…»
+- top-4: a-fondo-lo-que-busco-como-trabajo-con-quien-contrata~1, a-fondo-lo-que-busco-como-trabajo-con-quien-contrata~2, a-fondo-como-aprendo-incorporar-una-plataforma~1, a-fondo-como-aprendo-incorporar-una-plataforma~2
+- primer fragmento: «Prefiero una conversación sobre un problema real a una conversación limitada al recorrido de mi currículum. Mi trayectoria proporciona contexto, pero la mejor forma de evaluar mi capacidad es observar cómo comprendo una…»
 
-**☑️ ¿Qué no ha hecho nunca y tendría que aprender?**
+**✅ ¿Qué no ha hecho nunca y tendría que aprender?**
 
-- top-4: a-fondo-los-agentes-de-la-vitrina-aprendizaje~2, a-fondo-como-aprendo-por-que-existe-y-como-decido, a-fondo-plataforma-y-despliegue-lo-que-no-he-hecho, agentes-biblioteca-tendencias-genai-limites
-- primer fragmento: «La Super guía no ejecuta nada en Azure: propone los comandos y los corres tú, porque ejecutar es el aprendizaje. El Asistente prepara y no suplanta: no escribe los entregables evaluables del estudiante. Hiring Copilot en…»
+- top-4: a-fondo-plataforma-y-despliegue-lo-que-no-he-hecho~1, a-fondo-lo-que-busco-lo-que-no-he-hecho-y-el-portafolio~1, a-fondo-los-agentes-de-la-vitrina-aprendizaje~2, a-fondo-como-aprendo-incorporar-una-plataforma~1
+- primer fragmento: «Google Cloud —Vertex AI, BigQuery, despliegue productivo en ese ecosistema— y contenedores en producción con Docker y Kubernetes no están en mi experiencia profesional. Mi mundo es Microsoft y en Microsoft es donde tengo…»
 
 ---
 

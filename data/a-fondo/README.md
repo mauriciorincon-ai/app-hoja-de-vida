@@ -23,33 +23,33 @@ Cómo se escribe, campo por campo: `docs/MANUAL-DE-USO.md` → «Cómo alimentar
 
 | #  | Documento | Estado | Subsec. | `[CONFIRMAR]` | Cita hacia |
 | -- | --------- | ------ | ------: | ------------: | ---------- |
-| 1 | `como-trabajo` | aprobado | 6 | 0 | `#perfil` |
-| 2 | `origenes` | aprobado | 6 | 0 | `#trayectoria` |
-| 3 | `inglopres` | aprobado | 7 | 0 | `#trayectoria` |
-| 4 | `ceinfes` | aprobado | 8 | 0 | `#trayectoria` |
-| 5 | `cm-operaciones` | aprobado | 6 | 0 | `#trayectoria` |
-| 6 | `cafam` | aprobado | 7 | 0 | `/proyectos/cafam` |
-| 7 | `transmilenio-cm` | aprobado | 7 | 0 | `/proyectos/transmilenio-cm` |
-| 8 | `banco-pichincha` | aprobado | 8 | 0 | `/proyectos/banco-pichincha` |
-| 9 | `vesting` | aprobado | 7 | 0 | `/proyectos/vesting` |
-| 10 | `fundacion-ctic` | aprobado | 7 | 0 | `/proyectos/fundacion-ctic` |
-| 11 | `certificaciones` | aprobado | 6 | 0 | `#certificaciones` |
-| 12 | `apps-pipeline` | aprobado | 8 | 0 | `#vitrina` |
-| 13 | `lo-que-busco` | aprobado | 6 | 0 | `#contacto` |
-| 14 | `fabric-en-la-practica` | aprobado | 7 | 0 | `#skills` |
-| 15 | `agentes-en-produccion` | aprobado | 7 | 0 | `/vitrina/agentes` |
-| 16 | `rag-y-el-chat` | aprobado | 9 | 0 | `#vitrina` |
-| 17 | `gobierno-de-datos-y-de-ia` | aprobado | 7 | 0 | `#skills` |
-| 18 | `plataforma-y-despliegue` | aprobado | 6 | 0 | `#skills` |
-| 19 | `como-aprendo` | aprobado | 6 | 0 | `#certificaciones` |
-| 20 | `bi-que-se-adopta` | aprobado | 6 | 0 | `#skills` |
-| 21 | `analitica-predictiva` | aprobado | 7 | 0 | `#skills` |
-| 22 | `procesos-y-simulacion` | aprobado | 8 | 0 | `#skills` |
-| 23 | `los-tableros` | aprobado | 6 | 0 | `/vitrina/tableros` |
-| 24 | `las-investigaciones` | aprobado | 7 | 0 | `/vitrina/investigaciones` |
-| 25 | `los-agentes-de-la-vitrina` | aprobado | 6 | 0 | `/vitrina/agentes` |
+| 1 | `como-trabajo` | aprobado | 29 | 0 | `#perfil` |
+| 2 | `origenes` | aprobado | 35 | 0 | `#trayectoria` |
+| 3 | `inglopres` | aprobado | 9 | 0 | `#trayectoria` |
+| 4 | `ceinfes` | aprobado | 12 | 0 | `#trayectoria` |
+| 5 | `cm-operaciones` | aprobado | 13 | 0 | `#trayectoria` |
+| 6 | `cafam` | aprobado | 15 | 0 | `/proyectos/cafam` |
+| 7 | `transmilenio-cm` | aprobado | 18 | 0 | `/proyectos/transmilenio-cm` |
+| 8 | `banco-pichincha` | aprobado | 25 | 0 | `/proyectos/banco-pichincha` |
+| 9 | `vesting` | aprobado | 24 | 0 | `/proyectos/vesting` |
+| 10 | `fundacion-ctic` | aprobado | 25 | 0 | `/proyectos/fundacion-ctic` |
+| 11 | `certificaciones` | aprobado | 15 | 0 | `#certificaciones` |
+| 12 | `apps-pipeline` | aprobado | 27 | 0 | `#vitrina` |
+| 13 | `lo-que-busco` | aprobado | 19 | 0 | `#contacto` |
+| 14 | `fabric-en-la-practica` | aprobado | 22 | 0 | `#skills` |
+| 15 | `agentes-en-produccion` | aprobado | 23 | 0 | `/vitrina/agentes` |
+| 16 | `rag-y-el-chat` | aprobado | 23 | 0 | `#vitrina` |
+| 17 | `gobierno-de-datos-y-de-ia` | aprobado | 24 | 0 | `#skills` |
+| 18 | `plataforma-y-despliegue` | aprobado | 15 | 0 | `#skills` |
+| 19 | `como-aprendo` | aprobado | 18 | 0 | `#certificaciones` |
+| 20 | `bi-que-se-adopta` | aprobado | 23 | 0 | `#skills` |
+| 21 | `analitica-predictiva` | aprobado | 18 | 0 | `#skills` |
+| 22 | `procesos-y-simulacion` | aprobado | 25 | 0 | `#skills` |
+| 23 | `los-tableros` | aprobado | 28 | 0 | `/vitrina/tableros` |
+| 24 | `las-investigaciones` | aprobado | 32 | 0 | `/vitrina/investigaciones` |
+| 25 | `los-agentes-de-la-vitrina` | aprobado | 12 | 0 | `/vitrina/agentes` |
 
-**25 documentos · 171 subsecciones · 29.970 palabras · 0 `[CONFIRMAR]` por resolver · 25 aprobados.**
+**25 documentos · 529 subsecciones · 144.019 palabras · 0 `[CONFIRMAR]` por resolver · 25 aprobados.**
 
 <!-- tabla-de-documentos:fin -->
 
