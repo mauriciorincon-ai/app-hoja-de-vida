@@ -31,11 +31,11 @@
   "timeline": {
     "verMas": "Ver logros completos",
     "verMenos": "Ver menos",
-    "verCaseStudy": "Ver case study",
+    "verCaseStudy": "Ver caso de estudio",
     "indiceAria": "Año de la experiencia a la vista"
   },
   "detalle": {
-    "eyebrow": "Case study",
+    "eyebrow": "Caso de estudio",
     "volver": "Trayectoria",
     "contexto": "Contexto",
     "reto": "El reto",
@@ -44,7 +44,7 @@
     "stack": "Stack",
     "cta": "¿Te suena a tu equipo? Hablemos",
     "descargarCv": "Descargar CV (PDF)",
-    "verCaseStudy": "Ver case study"
+    "verCaseStudy": "Ver caso de estudio"
   },
   "cv": {
     "titulo": "Hoja de vida",
@@ -74,7 +74,7 @@
   "roadmap": {
     "eyebrow": "Roadmap",
     "titulo": "Qué viene — y tú decides el orden",
-    "subtitulo": "Estas son las próximas features de cada app. Vota las que más quieres ver: un clic, sin registro. Los contadores son reales.",
+    "subtitulo": "Lo que esta app tiene planeado para el final de su camino. Vota lo que más quieres ver: un clic, sin registro. Los contadores son reales.",
     "votar": "Votar",
     "votos": "{count, plural, =0 {sin votos aún} one {# voto} other {# votos}}",
     "yaVotaste": "Ya votaste",
@@ -97,8 +97,15 @@
     "titulo": "Escríbeme",
     "nombre": "Tu nombre",
     "email": "Tu correo",
-    "app": "¿Vienes por una app? (opcional)",
-    "appNinguna": "No, es un mensaje general",
+    "motivo": "Motivo (opcional)",
+    "motivoElige": "Elige un motivo",
+    "motivos": {
+      "proyecto": "Un proyecto",
+      "asesoria": "Una asesoría",
+      "capacitacion": "Una capacitación",
+      "charla": "Una charla",
+      "rol": "Un rol"
+    },
     "mensaje": "Cuéntame qué tienes en mente (opcional)",
     "enviar": "Enviar",
     "enviando": "Enviando…",
@@ -108,6 +115,27 @@
       "nombreRequerido": "Escribe tu nombre.",
       "emailInvalido": "Ese correo no se ve válido."
     }
+  },
+  "listaDeEspera": {
+    "titulo": "Lista de espera",
+    "app": "¿Qué app te interesa?",
+    "elige": "Elige una app",
+    "otra": "Otra",
+    "nota": "Sin promesa de fecha. Te aviso cuando abra."
+  },
+  "propuesta": {
+    "eyebrow": "Propón una funcionalidad",
+    "titulo": "¿Qué te gustaría que hiciera {app}?",
+    "ayuda": "Una idea, en tus palabras. Las mejores llegan al plan de la app.",
+    "placeholder": "Por ejemplo: que…",
+    "email": "Tu correo (opcional, por si quieres saber cuándo exista)",
+    "enviar": "Proponer",
+    "enviando": "Enviando…",
+    "reintentar": "Reintentar",
+    "gracias": "Recibí tu propuesta. Gracias.",
+    "error": "No pude enviar tu propuesta. Intenta de nuevo en un momento.",
+    "errorTexto": "Escribe tu propuesta: al menos diez caracteres.",
+    "errorEmail": "Ese correo no se ve válido."
   },
   "confirmacion": {
     "titulo": "Recibí tu mensaje",
@@ -147,7 +175,7 @@
     "eyebrow": "La vitrina",
     "titulo": "Lo que se construye aquí, en cuatro frentes",
     "subtitulo": "Cada frente tiene su propio espacio; aquí solo se asoman. Lo que ya está construido se muestra; lo que empieza, se declara.",
-    "portalNota": "Nada de lo que ves se entrega desde aquí: se muestra, y hay una lista de espera.",
+    "portalNota": "Nada de lo que ves se entrega desde aquí: se muestra. Solo las apps tienen lista de espera.",
     "appsTitulo": "{n} apps, construidas de verdad",
     "frenteEstados": {
       "abierta": "Abierto",
@@ -161,7 +189,7 @@
     "entrar": "Explora",
     "verQueViene": "Ver qué viene",
     "enPreparacionTitulo": "Este frente empieza",
-    "enPreparacionLinea": "Los primeros productos se publican aquí cuando estén construidas — cada una con lo que hace y con qué evidencia. Sin fecha prometida: si quieres enterarte, la lista de espera está abajo.",
+    "enPreparacionLinea": "Los primeros productos se publican aquí cuando estén construidas — cada una con lo que hace y con qué evidencia. Sin fecha prometida.",
     "otrosFrentes": "Los otros frentes de la vitrina",
     "notaIdioma": "",
     "estados": {
@@ -198,6 +226,10 @@
     "acceso": "Cómo se accede",
     "cta": "Avísame cuando abra",
     "ctaNota": "Entras a la lista de espera. Sin promesa de fecha.",
+    "ctaApps": "Lista de espera de las apps",
+    "listaDeEsperaLinea": "Solo las apps tienen lista de espera: dime cuál te interesa y te aviso cuando abra. Sin promesa de fecha.",
+    "sinListaDeEspera": "Este frente se muestra para enseñar capacidades: no se entrega ni tiene lista de espera. Si algo de aquí te sirve, escríbeme.",
+    "escribeme": "Escríbeme",
     "anclaje": "Ficha anclada al export del {fecha} · v{version} · {sprints, plural, one {# sprint cerrado} other {# sprints cerrados}}",
     "anclajeNota": "La vitrina muestra la versión anclada de cada app, no su estado en tiempo real.",
     "sí": "sí",
@@ -267,7 +299,7 @@
       "decisiones": "decisiones registradas"
     },
     "verDetalle": "Ver la ficha completa",
-    "cierreNota": "Aquí se muestra; no se entrega. La lista de espera no promete fecha.",
+    "cierreNota": "Aquí se muestra; no se entrega.",
     "volverFichaTecnica": "Volver a la ficha técnica"
   },
   "vitrinaHome": {

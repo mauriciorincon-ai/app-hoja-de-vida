@@ -520,14 +520,14 @@ ajenas:
   - pregunta: "¿va a llover mañana en Madrid?"
     guardrail: pasa
     porque: >-
-      Desde que las fichas de la vitrina entran al índice (ADR-021), «mañana»
+      Desde que las fichas de la vitrina entran al índice (ADR-023), «mañana»
       aparece en la ficha de Hablemos San («cada mañana»). La ficha es de otra
       casa y no se edita aquí; la pregunta llega al modelo y el prompt la
       declina.
   - pregunta: "¿cuál es la receta del ajiaco?"
     guardrail: pasa
     porque: >-
-      Con las fichas en el índice (ADR-021), «receta» aparece en los límites de
+      Con las fichas en el índice (ADR-023), «receta» aparece en los límites de
       la ficha de ARKHÉ. En los documentos a fondo la palabra se retiró
       («publica los componentes, no la fórmula»); la ficha es de otra casa.
   - pregunta: "¿quién ganó el mundial de fútbol?"

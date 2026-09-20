@@ -200,7 +200,7 @@ export function chunksDeApp({ brochure, complemento }, locale = "es", tope = TOP
 
 /** Todas las piezas de la vitrina, para un locale. */
 /**
- * Peso de una ficha en el ranking del chat (ADR-021). Las fichas son evidencia
+ * Peso de una ficha en el ranking del chat (ADR-023). Las fichas son evidencia
  * de una pieza concreta; la voz del dueño son los documentos a fondo. A peso 1
  * las fichas le quitaban el contexto a esos documentos en 8 de 131 preguntas
  * del banco; a 0,5 el banco recupera el número que tenía sin fichas.

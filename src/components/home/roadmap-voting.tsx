@@ -48,7 +48,14 @@ function yaVotoLocal(app: string, feature: string): boolean {
   }
 }
 
-export function RoadmapVoting({ grupos }: { grupos: GrupoRoadmap[] }) {
+export function RoadmapVoting({
+  grupos,
+  conNombreDeApp = true,
+}: {
+  grupos: GrupoRoadmap[];
+  /** Con una sola app (su propia página) el rótulo del grupo sobra. */
+  conNombreDeApp?: boolean;
+}) {
   const t = useTranslations("roadmap");
   const [estado, setEstado] = useState<Estado>("cargando");
   const [conteos, setConteos] = useState<Record<string, number>>({});
@@ -162,7 +169,13 @@ export function RoadmapVoting({ grupos }: { grupos: GrupoRoadmap[] }) {
 
       {grupos.map((grupo) => (
         <div key={grupo.appId} className="flex flex-col gap-4">
-          <h3 className="font-display text-lg font-medium text-ink-0">
+          <h3
+            className={
+              conNombreDeApp
+                ? "font-display text-lg font-medium text-ink-0"
+                : "sr-only"
+            }
+          >
             {grupo.appNombre}
           </h3>
           <ul className="flex flex-col gap-3">

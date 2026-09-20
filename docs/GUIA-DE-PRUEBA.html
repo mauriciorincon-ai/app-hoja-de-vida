@@ -508,11 +508,17 @@
           ~3 min · el botón ES/EN del encabezado.
         </p>
         <ul class="pasos">
-          <li data-origen="heredada">
+          <li data-origen="mejorado">
             <input type="checkbox" id="b1" /><label for="b1"
-              >Pulsa el botón ES/EN: TODO el contenido cambia de idioma y te
-              quedas en la misma sección donde estabas.
-              <span class="origen origen-heredada">S1</span></label
+              >Pulsa el botón ES/EN a <strong>media sección</strong> (por
+              ejemplo, con un hito de Trayectoria a media pantalla, o dentro del
+              texto de Perfil): TODO el contenido cambia de idioma y la ventana
+              se queda <strong>exactamente donde estabas</strong> — el mismo
+              hito a la misma altura, sin saltar al borde de la sección ni al
+              inicio, aunque el inglés sea más corto.
+              <span class="origen origen-mejorado"
+                >Mejorado · post-S8 (bloque B)</span
+              ></label
             >
           </li>
           <li data-origen="heredada" data-minimo>
@@ -544,16 +550,20 @@
               <span class="origen origen-heredada">S2</span></label
             >
           </li>
-          <li data-origen="heredada">
+          <li data-origen="mejorado">
             <input type="checkbox" id="c2" /><label for="c2"
               >En la Trayectoria, en el hito de Vesting, pulsa
-              <strong>"Ver case study →"</strong> (está en la misma fila que
-              "Ver logros completos"): tiene su propia URL con contexto, reto,
-              qué hice e impacto; el breadcrumb
-              <strong>regresa a la Trayectoria</strong>. Cinco hitos tienen
-              enlace (CTIC, Vesting, Pichincha, C&amp;M Consultores, Cafam); los
-              otros tres, no.
-              <span class="origen origen-heredada">post-S7</span></label
+              <strong>"Ver caso de estudio →"</strong> (al lado de "Ver logros
+              completos"; si despliegas los logros
+              <strong>baja al pie de ellos</strong>, y al cerrarlos vuelve al
+              lado): tiene su propia URL con contexto, reto, qué hice e impacto;
+              el breadcrumb <strong>regresa a la Trayectoria</strong> y al pie
+              <strong>no hay</strong> «¿Te suena a tu equipo?»: solo el PDF.
+              Cinco hitos tienen enlace (CTIC, Vesting, Pichincha, C&amp;M
+              Consultores, Cafam); los otros tres, no.
+              <span class="origen origen-mejorado"
+                >Mejorado · post-S8 (bloque C)</span
+              ></label
             >
           </li>
           <li data-origen="heredada" data-minimo>
@@ -577,11 +587,17 @@
           ~4 min · botón "CV (PDF)" y ruta <code>/cv</code>.
         </p>
         <ul class="pasos">
-          <li data-origen="heredada">
+          <li data-origen="mejorado">
             <input type="checkbox" id="d1" /><label for="d1"
               >Pulsa "CV (PDF)": descarga el archivo. Ábrelo y confirma que el
-              texto se puede seleccionar y copiar (no es una imagen).
-              <span class="origen origen-heredada">S2</span></label
+              texto se puede seleccionar y copiar (no es una imagen). Es a
+              <strong>dos columnas</strong> (experiencia a la izquierda; perfil,
+              formación, certificaciones y skills a la derecha) con acentos en
+              azul navy, y en la cabecera, cuando el sitio tenga dominio,
+              <strong>el dominio va primero y en negrilla</strong>.
+              <span class="origen origen-mejorado"
+                >Mejorado · post-S8 (bloque D)</span
+              ></label
             >
           </li>
           <li data-origen="heredada" data-minimo>
@@ -606,51 +622,85 @@
         <ul class="pasos">
           <li data-origen="mejorado">
             <input type="checkbox" id="e1" /><label for="e1"
-              >El bloque dice «¿Un proyecto, una asesoría, una capacitación, una charla o un rol?
-              Escríbeme…» y el formulario se titula
-              <strong>«Escríbeme»</strong>, no «Solicitar acceso». Llena nombre
-              y correo, elige una app y envía: ves la confirmación
+              >El bloque dice «¿Un proyecto, una asesoría, una capacitación, una
+              charla o un rol? Escríbeme…» y el formulario se titula
+              <strong>«Escríbeme»</strong>, no «Solicitar acceso». El tercer
+              campo es el desplegable <strong>«Motivo (opcional)»</strong> con
+              esas cinco puertas y nada más (la lista de espera de las apps es
+              OTRO formulario, en la vitrina: e5). Llena nombre y correo, elige
+              «Una asesoría» y envía: ves la confirmación
               <strong>"Recibí tu mensaje"</strong>.
               <span class="origen origen-mejorado"
-                >Mejorado · post-S8</span
+                >Mejorado · post-S8 (bloque E)</span
               ></label
             >
           </li>
           <li data-origen="mejorado">
             <input type="checkbox" id="e2" /><label for="e2"
               >Envía con campos vacíos: aparecen <strong>dos</strong> errores
-              inline (nombre y correo — la app ya es opcional) y NO navega.
+              inline (nombre y correo — el motivo es opcional) y NO navega.
               <span class="origen origen-mejorado"
                 >Mejorado · post-S8</span
               ></label
             >
           </li>
-          <li data-origen="nuevo">
+          <li data-origen="mejorado">
             <input type="checkbox" id="e4" /><label for="e4"
-              >Envía <strong>sin elegir app</strong> (la primera opción, «No, es
-              un mensaje general»): llega igual y ves la confirmación. Si tienes
-              <code>RESEND_API_KEY</code>, el asunto del correo dice
-              <strong>«Mensaje desde la hoja de vida»</strong> en vez de
-              «Solicitud de acceso».
-              <span class="origen origen-nuevo">Nuevo · post-S8</span></label
+              >Envía <strong>sin elegir motivo</strong> (la primera opción,
+              «Elige un motivo»): llega igual y ves la confirmación. En
+              producción el asunto del correo dice
+              <strong>«[CV Viva] Mensaje desde la hoja de vida»</strong>; con
+              motivo, el asunto ES el motivo («[CV Viva] Una asesoría») y el
+              cuerpo lo repite.
+              <span class="origen origen-mejorado"
+                >Mejorado · post-S8 (bloque E)</span
+              ></label
             >
           </li>
           <li data-origen="heredada" data-minimo>
             <input type="checkbox" id="e3" /><label for="e3"
-              >⭐ <strong>Email real:</strong> con
-              <code>RESEND_API_KEY</code> configurada, confirma que la solicitud
-              te llega a tu bandeja y que puedes responder al correo del
-              visitante (reply-to).
+              >⭐ <strong>Email real — SOLO en producción:</strong> en
+              <code>localhost</code> no hay <code>RESEND_API_KEY</code>, el
+              envío se SIMULA y el correo no sale a ningún lado (es a
+              propósito). Envía desde el sitio publicado y confirma que el
+              mensaje llega a la bandeja de <code>SOLICITUDES_TO_EMAIL</code>
+              (tu correo interno, no el que se muestra en la página; mira
+              también spam) y que puedes responder directo al visitante
+              (reply-to). Si en vez de la confirmación ves «No pude enviar tu
+              mensaje», falta la clave en Vercel o el remitente de prueba de
+              Resend no puede escribirle a ese buzón.
               <span class="origen origen-heredada">S1</span
               ><span class="minimo">⭐ mínimo</span></label
+            >
+          </li>
+          <li data-origen="nuevo">
+            <input type="checkbox" id="e5" /><label for="e5"
+              >El <strong>segundo formulario</strong>, la lista de espera de las
+              apps: en <code>/es/vitrina/apps</code>, al pie, se titula
+              <strong>«Lista de espera»</strong> y su desplegable «¿Qué app te
+              interesa?» lista las apps de la vitrina más
+              <strong>«Otra»</strong>. Entra a la ficha de una app
+              (<code>/es/vitrina/apps/habla</code>): el botón «Avísame cuando
+              abra» baja al mismo formulario con
+              <strong>esa app ya elegida</strong>. Envía: confirmación «Recibí
+              tu mensaje»; en producción el asunto del correo es «[CV Viva]
+              Lista de espera: Habla». Y en <code>/es/vitrina/agentes</code>,
+              <code>/investigaciones</code> y <code>/tableros</code>
+              <strong>NO hay lista de espera</strong> ni en el frente ni en sus
+              fichas: cierran con «Este frente se muestra para enseñar
+              capacidades…» y un «Escríbeme» al formulario general.
+              <span class="origen origen-nuevo"
+                >Nuevo · post-S8 (bloque E)</span
+              ></label
             >
           </li>
         </ul>
         <div class="reportame">
           <p>
-            <strong>Repórtame sí o sí:</strong> si el formulario dice "enviado"
-            pero el correo no llega (revisa que <code>RESEND_API_KEY</code> esté
-            en Vercel).
+            <strong>Repórtame sí o sí:</strong> si en producción el formulario
+            dice "enviado" pero el correo no llega (revisa que
+            <code>RESEND_API_KEY</code> esté en Vercel; en localhost no llega
+            nunca, por diseño).
           </p>
         </div>
       </section>
@@ -721,18 +771,40 @@
           <h2>Roadmap con votación anónima</h2>
         </div>
         <p class="meta-bloque chica suave">
-          ~6 min · en <code>/es/vitrina/apps</code>, sección Roadmap · la
-          feature estrella del S4.
+          ~6 min · en <code>/es/vitrina/apps/&lt;slug&gt;</code>, sección
+          Roadmap de cada app · la feature estrella del S4.
         </p>
+        <div class="reportame">
+          <p>
+            <strong>Dónde y cómo (2026-09-13):</strong> el roadmap vive ahora
+            <strong>en la página de cada app hermana</strong>
+            (<code>/es/vitrina/apps/habla</code>, entre la ficha técnica y la
+            lista de espera), con las features de cierre de plan que entregó la
+            planeadora. Ninguna feature de CV Viva se muestra en ningún lado. En
+            <code>localhost</code> no hay credenciales de Supabase: la votación
+            se declara «no disponible» por diseño, así que
+            <strong>g2–g4 solo se prueban en producción</strong>; g1 y g5 se
+            pueden juzgar aquí.
+          </p>
+        </div>
         <ul class="pasos">
-          <li data-origen="heredada">
+          <li data-origen="mejorado">
             <input type="checkbox" id="g1" /><label for="g1"
-              >La sección Roadmap vive ahora
-              <strong>al pie de <code>/es/vitrina/apps</code></strong
-              >, debajo de las seis apps: muestra las features de cada app con
-              su descripción y un número de votos junto a cada una.
-              <strong>No está en la HOME ni en el menú.</strong>
-              <span class="origen origen-heredada">post-S7</span></label
+              >Entra a la página de una app hermana
+              (<code>/es/vitrina/apps/habla</code>): debajo de la ficha técnica
+              está la sección <strong>Roadmap</strong> con las features de
+              <em>esa</em> app (cinco; tres en dash-agent-ai), cada una con su
+              descripción y un número de votos. Recorre las seis: cada una tiene
+              su propio grupo.
+              <strong
+                >Ni en <code>/es/vitrina/apps</code> ni en la HOME hay
+                roadmap</strong
+              >, y en ningún lado aparece una feature de CV Viva. Juzga el
+              contenido: ¿son disruptivas, de cierre de plan, y ninguna es lo
+              que ya se está construyendo?
+              <span class="origen origen-mejorado"
+                >Mejorado · post-S8 (bloque G)</span
+              ></label
             >
           </li>
           <li data-origen="heredada">
@@ -767,6 +839,21 @@
               el flujo se siente real y honesto.
               <span class="origen origen-heredada">S4</span
               ><span class="minimo">⭐ mínimo</span></label
+            >
+          </li>
+          <li data-origen="nuevo">
+            <input type="checkbox" id="g6" /><label for="g6"
+              >Debajo del roadmap de una app
+              (<code>/es/vitrina/apps/habla</code>) está la caja
+              <strong>«¿Qué te gustaría que hiciera Hablemos San?»</strong> con
+              correo opcional y el botón «Proponer». Envía vacío: un error
+              inline y nada sale. Escribe una idea y envía: ves
+              <strong>«Recibí tu propuesta. Gracias.»</strong> sin salir de la
+              página. En producción te llega el correo «[CV Viva] Propuesta para
+              Hablemos San»; en localhost se simula. Nada se publica.
+              <span class="origen origen-nuevo"
+                >Nuevo · post-S8 (bloque G)</span
+              ></label
             >
           </li>
         </ul>
@@ -966,12 +1053,15 @@
               <span class="origen origen-heredada">S5</span></label
             >
           </li>
-          <li data-origen="heredada">
+          <li data-origen="mejorado">
             <input type="checkbox" id="k4" /><label for="k4"
               >En ninguna ficha hay un enlace a la app ni a su repositorio: en
               su lugar se explica <strong>la razón</strong> y hay un botón de
-              lista de espera que baja a la sección de contacto de esa misma
-              página. <span class="origen origen-heredada">S5</span></label
+              lista de espera que baja al formulario de lista de espera de esa
+              misma página, con la app ya elegida.
+              <span class="origen origen-mejorado"
+                >Mejorado · post-S8 (bloque E)</span
+              ></label
             >
           </li>
           <li data-origen="heredada">
@@ -1198,13 +1288,16 @@
               portal. <span class="origen origen-heredada">S7</span></label
             >
           </li>
-          <li data-origen="heredada">
+          <li data-origen="mejorado">
             <input type="checkbox" id="m8" /><label for="m8"
               >Recorre tres fichas de frentes distintos buscando enlaces:
               <strong>no hay ninguno hacia afuera</strong> — ni al repositorio
-              de la pieza, ni a un artículo, ni un DOI de investigación. Solo la
-              lista de espera.
-              <span class="origen origen-heredada">S7</span></label
+              de la pieza, ni a un artículo, ni un DOI de investigación. Y
+              tampoco lista de espera: estas piezas se muestran, no se entregan
+              (solo las apps la tienen).
+              <span class="origen origen-mejorado"
+                >Mejorado · post-S8 (bloque E)</span
+              ></label
             >
           </li>
           <li data-origen="heredada">
@@ -1415,7 +1508,7 @@
           <p>
             <strong>Repórtame sí o sí:</strong> un año que no cambie al pasar
             por una experiencia, el círculo fuera de la línea, un icono de
-            Skills que no se vea, o un "Ver case study" que lleve a otro
+            Skills que no se vea, o un "Ver caso de estudio" que lleve a otro
             proyecto.
           </p>
         </div>
@@ -1589,7 +1682,7 @@
               Computacional?». La respuesta sale de la ficha y la cita navega a
               <code>/vitrina/apps/hablemos-san</code> o a la ficha del agente
               — no a la HOME. Son las 32 fichas, con la mitad del peso que tus
-              documentos (ADR-021).
+              documentos (ADR-023).
               <span class="origen origen-nuevo">Nuevo · a fondo v2</span></label
             >
           </li>
@@ -1709,7 +1802,7 @@
               reescrito desde la auditoría del dueño: 25 documentos (uno nuevo,
               <code>los-agentes-de-la-vitrina</code>), cero
               <code>[CONFIRMAR]</code>, seis gates de coherencia, las 32 fichas
-              de la vitrina en el índice del chat (ADR-021), banco de 136
+              de la vitrina en el índice del chat (ADR-023), banco de 136
               preguntas en los dos idiomas, gemelos en inglés y los 25
               <code>aprobados</code>. Bloque O: o1, o3, o4, o5, o6, o8
               mejoradas; <strong>o9 y o10 (M1 y M2) dejan de estar
@@ -1733,6 +1826,23 @@
               la app opcional — bloque E renombrado, e1 y e2 mejoradas,
               <strong>e4 nueva</strong>. Ninguna prueba eliminada. El prefijo de
               casillas sigue en <code>s008</code>: es el mismo sprint.
+              <strong>Tercera revisión, bloques B–E (2026-09-13):</strong> el
+              cambio de idioma conserva el punto de lectura (b1); el enlace al
+              caso de estudio acompaña al desplegable de logros (c2); el PDF a
+              dos columnas con navy y el anuncio del sitio (d1); y el formulario
+              cambia «¿Vienes por una app?» por el desplegable
+              <strong>«Motivo»</strong> —proyecto, asesoría, capacitación,
+              charla y rol— (e1, e4); e3 ⭐ aclara que en localhost el correo se
+              simula. <strong>Dos formularios</strong> (dueño, 2026-09-13): la
+              lista de espera es OTRO formulario, solo para las apps, al pie de
+              <code>/vitrina/apps</code> y de cada ficha de app (e5 nueva);
+              agentes, investigaciones y tableros ya no la ofrecen (k4, m8
+              mejoradas). <strong>Bloque G aplazado:</strong> las features de CV
+              Viva se retiran del YAML (ninguna se muestra), la sección Roadmap
+              no se monta y vuelve por app hermana con las features de la
+              planeadora; g1–g5 se conservan.
+              <strong>Bloque F aplazado</strong> hasta que el dueño termine
+              <code>data/a-fondo/</code>: se corre junto con O.
             </li>
             <li>
               <strong>v8 · S8 · 2026-09-12:</strong> el «a fondo», el corpus

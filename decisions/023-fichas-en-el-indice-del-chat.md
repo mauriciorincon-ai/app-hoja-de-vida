@@ -1,4 +1,4 @@
-# ADR-021 — Las 32 fichas de la vitrina entran al índice del chat con peso 0,5; el top-k y el umbral se quedan donde estaban, medidos otra vez
+# ADR-023 — Las 32 fichas de la vitrina entran al índice del chat con peso 0,5; el top-k y el umbral se quedan donde estaban, medidos otra vez
 
 - **Status:** accepted
 - **Date:** 2026-09-20

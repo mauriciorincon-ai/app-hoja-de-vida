@@ -774,8 +774,8 @@ De las 15 preguntas ajenas del banco, **6 se paran en el guardrail** —respuest
 
 **Y hay un precio de crecer, medido aquí:** el índice de hoy bloquea 6 de las 15; el corpus completo, 6. Más texto es más vocabulario compartido con cualquier pregunta. Por eso la garantía de corrección es el prompt grounding-only y no este umbral.
 
-- **¿va a llover mañana en Madrid?** — Desde que las fichas de la vitrina entran al índice (ADR-021), «mañana» aparece en la ficha de Hablemos San («cada mañana»). La ficha es de otra casa y no se edita aquí; la pregunta llega al modelo y el prompt la declina.
-- **¿cuál es la receta del ajiaco?** — Con las fichas en el índice (ADR-021), «receta» aparece en los límites de la ficha de ARKHÉ. En los documentos a fondo la palabra se retiró («publica los componentes, no la fórmula»); la ficha es de otra casa.
+- **¿va a llover mañana en Madrid?** — Desde que las fichas de la vitrina entran al índice (ADR-023), «mañana» aparece en la ficha de Hablemos San («cada mañana»). La ficha es de otra casa y no se edita aquí; la pregunta llega al modelo y el prompt la declina.
+- **¿cuál es la receta del ajiaco?** — Con las fichas en el índice (ADR-023), «receta» aparece en los límites de la ficha de ARKHÉ. En los documentos a fondo la palabra se retiró («publica los componentes, no la fórmula»); la ficha es de otra casa.
 - **¿quién ganó el mundial de fútbol?** — «mundial» aparece en la ficha del tablero de energía y clima. En los documentos a fondo se retiraron «ganó» y «total mundial»; la ficha no se edita aquí.
 - **escríbeme una función en rust que ordene una lista** — «función» y «lista» son palabras del corpus. Es el caso que está escrito como decisión en guardrails.ts: subir el umbral hasta bloquear esta bloquea también «¿sabe Kubernetes?», que es legítima.
 - **recomiéndame una película para el fin de semana** — «semana» aparece en el corpus («construyo cada semana»).

@@ -50,3 +50,44 @@ proceso:
   anotaciones:
     - { paso: vela, texto: "En un hilo aparte del navegador: no hay subida, no hay servidor y no queda copia al cerrar." }
     - { paso: recupera, texto: "Solo con la bóveda de quien entregó: sin ella nadie desvela." }
+
+# Roadmap votable (2026-09-13): lo que la planeadora entrega como cierre de plan
+# de esta app — features disruptivas, no en construcción, sin fechas. PROCEDENCIA:
+# cv-viva (la planeadora lo administra; llega por copia y no se edita aquí). Los
+# `id` son ESTABLES: el par (app, id) es la clave del voto en la BD.
+roadmap:
+  - id: puente-a-bases-de-datos
+    titulo:
+      es: "Conectar directo a tu base de datos"
+      en: "Connect straight to your database"
+    descripcion:
+      es: "Anonimizas desde la fuente, sin exportar un archivo intermedio: eliges la tabla, aplicas la política y el resultado vuelve a tu base local."
+      en: "Anonymize at the source, with no intermediate file: pick the table, apply the policy, and the result lands back in your local database."
+  - id: api-para-pipelines
+    titulo:
+      es: "Anonimización sin pantalla, dentro de tus pipelines"
+      en: "Screen-free anonymization inside your pipelines"
+    descripcion:
+      es: "Llamas a Velo desde tus propios procesos y la anonimización ocurre sola, con las mismas políticas y el mismo certificado que hoy obtienes a mano."
+      en: "Call Velo from your own processes and anonymization runs on its own, with the same policies and the same certificate you get by hand today."
+  - id: privacidad-diferencial
+    titulo:
+      es: "Privacidad diferencial: garantía matemática, no solo k-anonimato"
+      en: "Differential privacy: a mathematical guarantee, not just k-anonymity"
+    descripcion:
+      es: "Añades ruido calibrado con un presupuesto de privacidad explícito, y el riesgo deja de depender de lo que un atacante ya sepa de tus filas."
+      en: "Add calibrated noise under an explicit privacy budget, so the risk no longer depends on what an attacker already knows about your rows."
+  - id: generalizacion-optima
+    titulo:
+      es: "La generalización óptima, no la primera que sirve"
+      en: "The optimal generalization, not the first one that works"
+    descripcion:
+      es: "Velo explora jerarquías completas y elige la que destruye menos utilidad para el mismo nivel de protección que pediste."
+      en: "Velo explores full hierarchies and picks the one that destroys the least utility for the protection level you asked for."
+  - id: metadatos-de-pdf-e-imagenes
+    titulo:
+      es: "Limpiar lo que delata un PDF o una foto"
+      en: "Scrub what a PDF or a photo gives away"
+    descripcion:
+      es: "Autor, ubicación, dispositivo y demás metadatos ocultos desaparecen antes de compartir; la aduana deja de limitarse a tablas."
+      en: "Author, location, device and other hidden metadata are gone before you share; the checkpoint stops being tables-only."

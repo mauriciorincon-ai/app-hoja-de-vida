@@ -93,6 +93,11 @@ export default async function LocaleLayout({
     nav: messages.nav,
     vitrinaHome: messages.vitrinaHome,
     form: messages.form,
+    // La lista de espera de las apps (vitrina) es el otro client component
+    // con formulario (2026-09-13). Sin este renglón el build imprime
+    // MISSING_MESSAGE en el prerender y la página pinta la clave cruda.
+    listaDeEspera: messages.listaDeEspera,
+    propuesta: messages.propuesta,
     error: messages.error,
     chat: messages.chat,
     roadmap: messages.roadmap,

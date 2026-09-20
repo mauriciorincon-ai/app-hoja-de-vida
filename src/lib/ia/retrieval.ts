@@ -145,7 +145,7 @@ function processTerm(term: string): string | null {
  *
  * El 4 sale de MEDIR, y lo miden DOS conjuntos independientes contra el corpus
  * completo. Medido por segunda vez el 2026-09-20 (corpus a fondo v2 + las 32
- * fichas de la vitrina, ADR-021: 494 fragmentos):
+ * fichas de la vitrina, ADR-023: 494 fragmentos):
  *
  *   golden set — 75 preguntas escritas CON el documento delante:
  *     k=1 → 44   k=2 → 59   k=3 → 67   k=4 → **75/75**   k=5 → 75
@@ -179,7 +179,7 @@ type Hit = {
 };
 
 /**
- * Peso por fragmento (ADR-021): multiplica el puntaje BM25 del fragmento. Las
+ * Peso por fragmento (ADR-023): multiplica el puntaje BM25 del fragmento. Las
  * fichas de la vitrina viajan con `peso: 0.5`; todo lo demás, sin campo, vale 1.
  * Medido con el banco de 131 preguntas sobre el índice completo (494
  * fragmentos): a peso 1 las fichas desplazaban a los documentos a fondo en 8

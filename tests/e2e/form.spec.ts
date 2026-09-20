@@ -10,9 +10,69 @@ test.describe("Formulario de contacto (antes «solicitar acceso»)", () => {
     await page.getByRole("button", { name: "Enviar" }).click();
 
     // Scope al form: el route-announcer de Next también tiene role=alert.
-    // Dos errores, no tres: la app es opcional desde la revisión post-S8.
+    // Dos errores, no tres: el motivo es opcional (revisión post-S8, bloque E).
     await expect(page.locator("form").getByRole("alert")).toHaveCount(2);
     await expect(page).toHaveURL(/\/es$/);
+  });
+
+  test("el formulario general de la HOME pide un MOTIVO y no ofrece la lista de espera", async ({
+    page,
+  }) => {
+    await page.goto("/es");
+    const select = page.locator('form[data-formulario="motivo"] select');
+    // «Elige un motivo» + proyecto · asesoría · capacitación · charla · rol
+    await expect(select.locator("option")).toHaveCount(6);
+    await expect(select.locator('option[value="lista-de-espera"]')).toHaveCount(
+      0,
+    );
+  });
+
+  test("lista de espera de apps (vitrina): «otra» nunca sobra, y envía", async ({
+    page,
+  }) => {
+    await page.goto("/es/vitrina/apps");
+    const form = page.locator('form[data-formulario="app"]');
+    await form.scrollIntoViewIfNeeded();
+    await page
+      .locator('form[data-formulario="app"][data-hydrated=true]')
+      .waitFor();
+    await form.getByLabel("Tu nombre").fill("E2E Espera");
+    await form.getByLabel("Tu correo").fill("espera@example.com");
+    await form.getByLabel("¿Qué app te interesa?").selectOption("otra");
+    await form.getByRole("button", { name: "Enviar" }).click();
+    await expect(page).toHaveURL(/\/es\/solicitud-enviada/);
+  });
+
+  test("propuesta de funcionalidad: debajo del roadmap de una app, solo texto, y confirma sin salir", async ({
+    page,
+  }) => {
+    await page.goto("/es/vitrina/apps/habla");
+    const form = page.locator('form[data-formulario="propuesta"]');
+    await form.scrollIntoViewIfNeeded();
+    await page
+      .locator('form[data-formulario="propuesta"][data-hydrated=true]')
+      .waitFor();
+    // Debajo del roadmap: el formulario viene DESPUÉS de la sección #roadmap.
+    const orden = await page.evaluate(() => {
+      const r = document.querySelector("#roadmap");
+      const f = document.querySelector('form[data-formulario="propuesta"]');
+      return r && f
+        ? Boolean(
+            r.compareDocumentPosition(f) & Node.DOCUMENT_POSITION_FOLLOWING,
+          )
+        : false;
+    });
+    expect(orden).toBe(true);
+    // Vacío: error inline, nada se envía.
+    await form.getByRole("button", { name: "Proponer" }).click();
+    await expect(form.getByRole("alert")).toHaveCount(1);
+    // Con texto: confirmación en el sitio, sin navegar.
+    await form
+      .getByLabel(/qué te gustaría/i)
+      .fill("Que lea cuentos con la voz de la abuela.");
+    await form.getByRole("button", { name: "Proponer" }).click();
+    await expect(form.getByText(/Recibí tu propuesta/)).toBeVisible();
+    await expect(page).toHaveURL(/\/es\/vitrina\/apps\/habla$/);
   });
 
   test("honeypot lleno: el API responde 200 silencioso (negativo)", async ({
@@ -23,7 +83,7 @@ test.describe("Formulario de contacto (antes «solicitar acceso»)", () => {
       data: {
         nombre: "Bot",
         email: "bot@spam.example",
-        app: "hoja-de-vida",
+        motivo: "rol",
         mensaje: "spam",
         website: "http://spam.example",
       },
@@ -37,7 +97,7 @@ test.describe("Formulario de contacto (antes «solicitar acceso»)", () => {
     const data = {
       nombre: "Rate Tester",
       email: "rate@example.com",
-      app: "idea-exploracion-2",
+      motivo: "charla",
       mensaje: "",
       website: "",
     };

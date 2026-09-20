@@ -404,13 +404,11 @@ skills:
       - "Shiny (R)"
       - "Tableau"
       - "Looker Studio"
-  - grupo: "Ingeniería & liderazgo"
+  - grupo: "Ingeniería"
     items:
       - "Python"
       - "Git/GitHub"
       - "CI/CD — este sitio corre con ello"
-      - "Equipos de hasta 20 personas"
-      - "Stakeholders C-level"
   # a fondo v2 (2026-09-20, D2/C66): la raíz industrial entra a skills con sus métodos.
   - grupo: "Procesos y simulación"
     items:
@@ -418,3 +416,14 @@ skills:
       - "Simulación de eventos discretos (FlexSim)"
       - "Estudio de tiempos y balanceo de líneas"
       - "Kanban y Scrum"
+  # Revisión post-S8, bloque D: el quinto grupo son las habilidades blandas,
+  # sacadas del corpus «Mi forma de trabajar» (decisión del dueño, 2026-09-13).
+  - grupo: "Cómo trabajo"
+    items:
+      - "Liderazgo de equipos de hasta 20 personas"
+      - "Comunicación con junta directiva y dirección"
+      - "Gestión por procesos y métodos ágiles"
+      - "Formación y adopción de usuarios"
+      - "Documentación reproducible y transferencia"
+      - "Trabajo con equipos multidisciplinarios"
+      - "Inglés profesional (B2)"

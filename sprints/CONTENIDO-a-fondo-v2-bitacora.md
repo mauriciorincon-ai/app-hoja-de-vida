@@ -577,7 +577,7 @@ reconstruye sin cambios: 28 fragmentos, 0 de 25 aprobados.
 
 ## F4 — El buscador con el corpus nuevo: las fichas entran, y el banco vuelve a 100 %
 
-Decisión escrita en **ADR-021** (`decisions/021-fichas-en-el-indice-del-chat.md`); aquí, la
+Decisión escrita en **ADR-023** (`decisions/023-fichas-en-el-indice-del-chat.md`); aquí, la
 secuencia y los números.
 
 ### Las fichas al índice
@@ -852,3 +852,30 @@ Medido sobre los dos índices (k = 4):
 Es decir: en 58 de 136 preguntas el modelo recibe, además de las subsecciones, la descripción del
 documento entero, y la primera fuente acierta más veces. Con k = 3 el inglés perdía una pregunta
 (135/136): k = 4 se queda.
+
+## Fusión con `main` antes del merge del PR #34 (2026-09-21)
+
+Al abrir el PR, `main` ya traía el PR #32 (revisión post-S8 del dueño, bloques B–G) y el #33
+(dependabot). Cuatro archivos en conflicto, resueltos así:
+
+| Archivo | Conflicto | Resolución |
+| --- | --- | --- |
+| `data/cv.{es,en}.yaml` | el #32 renombró «Ingeniería & liderazgo» → «Ingeniería» y movió el liderazgo a un quinto grupo «Cómo trabajo»; esta rama agregaba Shiny, Tableau y Looker Studio a «BI & decisión» y el grupo «Procesos y simulación» | se conservan las dos cosas: el nombre y el grupo de main, las tres herramientas y el grupo de esta rama; los dos ítems de liderazgo salen de «Ingeniería» porque ya viven en «Cómo trabajo» |
+| `data/apps.yaml` | el #32 retiró `solicitable`; esta rama cambiaba la descripción del agente de GCP («ruta de certificación en Azure», decisión del dueño) | la descripción de esta rama, sin `solicitable` |
+| `docs/GUIA-DE-PRUEBA.html` | «AI-103 y DP-100» (main) contra «AI-103 y AI-300» (esta rama, decisión del dueño ya aplicada en los YAML) | AI-300 |
+
+**Dos ADR renumerados.** `main` estrenó el ADR-021 (PDF a dos columnas) y el ADR-022 (roadmap
+por app hermana) mientras esta rama nacía con su propio 021 (fichas en el índice) y la rama del
+chat con su 022. Para no tener dos decisiones con el mismo número: **las fichas en el índice son
+el ADR-023** y **la puerta del chat es el ADR-024** (12 y 17 archivos tocados, respectivamente;
+`git grep` de los números viejos en cero fuera de los ADR de main).
+
+**Un rojo al fusionar, y qué decía.** `tests/integration/cv-pdf.test.ts` (nacido en el #32)
+exigía `(AI-103) (en curso)` en el texto del PDF, y el nombre completo del AI-103 que el dueño
+decidió («Azure AI Apps and Agents Developer Associate») parte «(en curso)» en dos líneas de la
+columna derecha. El PDF está bien —el paréntesis vacío que el test caza no aparece—; el test
+tolera ahora el salto de línea dentro de «en curso» / «in progress» y sigue prohibiendo `()`.
+Verificado el PDF en español: dos páginas, con los cinco grupos de skills y sus ítems.
+
+Tras la fusión: suite completa verde, typecheck y lint limpios, build con 1.437 / 1.426
+fragmentos, e2e del chat 16 verdes, barrido cero enlaces tras el último `git add`.

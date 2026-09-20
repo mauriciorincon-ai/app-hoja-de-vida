@@ -6,7 +6,13 @@ import {
   useReducedMotion,
   useScroll,
 } from "motion/react";
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import { Link } from "@/i18n/navigation";
 import { trackEvent } from "@/lib/analytics";
 import { EASE_OUT_CUBIC } from "./easings";
@@ -87,8 +93,11 @@ function BulletsDisclosure({
   id: string;
   hito: string;
   labels: TimelineLabels;
-  /** Acciones vecinas del hito (p. ej. el enlace al case study): van en la
-   *  misma fila que el botón; el panel de bullets abre DEBAJO de la fila. */
+  /** Acciones vecinas del hito (p. ej. el enlace al caso de estudio). Con el
+   *  panel CERRADO van al lado del botón, en la misma fila; al DESPLEGAR bajan
+   *  al pie del panel y salen con él; al cerrar vuelven a la fila (revisión
+   *  post-S8, bloque C: «al lado al inicio, que baje cuando despliegue y
+   *  regrese al lado cuando cierre»). */
   children?: React.ReactNode;
 }) {
   const [expanded, setExpanded] = useState(false);
@@ -117,7 +126,7 @@ function BulletsDisclosure({
             ▼
           </span>
         </button>
-        {children}
+        {!expanded && children}
       </div>
       <div
         className="grid transition-[grid-template-rows] duration-300 ease-out motion-reduce:transition-none"
@@ -142,6 +151,9 @@ function BulletsDisclosure({
               </li>
             ))}
           </ul>
+          {/* Separado del último logro (margen arriba) para que se lea como
+              acción del hito, no como un logro más. */}
+          {expanded && <div className="mt-3 mb-1">{children}</div>}
         </div>
       </div>
     </>
@@ -292,8 +304,9 @@ export function TimelineTrack({
               <p className="text-sm leading-relaxed text-ink-2">
                 {item.descripcion}
               </p>
-              {/* Las dos acciones del hito en UNA fila; el panel de logros
-                  abre debajo de la fila, no entre las dos. */}
+              {/* «Ver logros completos» y el enlace al caso de estudio en UNA
+                  fila; al desplegar, el enlace baja al pie de los logros y al
+                  cerrar vuelve a la fila (post-S8, bloque C). */}
               {(item.bullets?.length ?? 0) > 0 ? (
                 <BulletsDisclosure
                   bullets={item.bullets ?? []}
@@ -302,12 +315,18 @@ export function TimelineTrack({
                   labels={labels}
                 >
                   {item.hrefCaseStudy && (
-                    <EnlaceCaseStudy href={item.hrefCaseStudy} label={labels.verCaseStudy} />
+                    <EnlaceCaseStudy
+                      href={item.hrefCaseStudy}
+                      label={labels.verCaseStudy}
+                    />
                   )}
                 </BulletsDisclosure>
               ) : (
                 item.hrefCaseStudy && (
-                  <EnlaceCaseStudy href={item.hrefCaseStudy} label={labels.verCaseStudy} />
+                  <EnlaceCaseStudy
+                    href={item.hrefCaseStudy}
+                    label={labels.verCaseStudy}
+                  />
                 )
               )}
             </article>

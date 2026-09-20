@@ -8,8 +8,8 @@ import { EASE_OUT_CUBIC } from "@/components/motion/easings";
  * design system (24×24, trazo 1.7, sin relleno). Nunca un emoji.
  *
  * Van POR POSICIÓN del grupo, no por su nombre: el nombre es contenido y
- * puede cambiar en el YAML sin que el icono deje de salir. Cuatro dibujos
- * para los cuatro grupos del content pack; un quinto grupo recibe el rombo.
+ * puede cambiar en el YAML sin que el icono deje de salir. Cinco dibujos
+ * para los cinco grupos del content pack; un sexto grupo recibiría el rombo.
  *
  * El trazo se DIBUJA al llegar la tarjeta: cada figura lleva `pathLength=1` y
  * anima 0→1 dentro de la orquestación del `Stagger` padre (hereda las
@@ -38,12 +38,20 @@ const DIBUJOS: React.ReactElement[][] = [
     <path key="b" d="M5 16l4-5 4 3 6-8" />,
     <circle key="c" cx="19" cy="6" r="1.8" />,
   ],
-  // 3 · Ingeniería & liderazgo — la rama que se bifurca y vuelve.
+  // 3 · Ingeniería — la rama que se bifurca y vuelve.
   [
     <circle key="a" cx="6" cy="5" r="2" />,
     <circle key="b" cx="18" cy="9" r="2" />,
     <circle key="c" cx="6" cy="19" r="2" />,
     <path key="d" d="M6 7v10M16 9.5c-4 0-8 1.5-8 6" />,
+  ],
+  // 4 · Cómo trabajo (post-S8, bloque D) — dos personas y la mesa entre ellas.
+  [
+    <circle key="a" cx="8" cy="8" r="2.5" />,
+    <circle key="b" cx="16.5" cy="9" r="2" />,
+    <path key="c" d="M3.5 18c0-2.8 2-4.5 4.5-4.5S12.5 15.2 12.5 18" />,
+    <path key="d" d="M13.5 17c.3-2.2 1.6-3.5 3.3-3.5 1.8 0 3.2 1.4 3.4 3.5" />,
+    <path key="e" d="M3 21h18" />,
   ],
 ];
 const ROMBO = [<path key="a" d="M12 3l9 9-9 9-9-9z" />];

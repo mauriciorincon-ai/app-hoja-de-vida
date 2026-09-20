@@ -15,7 +15,7 @@ export const chatChunkSchema = z.object({
   texto: z.string().min(1),
   ancla: z.string().min(1),
   /**
-   * Peso del fragmento en el ranking (ADR-021). Ausente = 1. Las fichas de la
+   * Peso del fragmento en el ranking (ADR-023). Ausente = 1. Las fichas de la
    * vitrina entran con 0,5: son evidencia de una pieza concreta, no la voz del
    * dueño, y a peso 1 le ganaban el contexto a los documentos a fondo.
    */

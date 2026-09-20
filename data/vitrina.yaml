@@ -6,8 +6,12 @@
 # Estados honestos:
 #   abierta          → tiene piezas publicadas y su página las enseña
 #   en-preparacion   → el frente existe y está declarado; sus piezas aún no se
-#                      publican. Su página lo dice y ofrece la lista de espera,
-#                      sin fecha prometida.
+#                      publican. Su página lo dice, sin fecha prometida.
+#
+# listaDeEspera (2026-09-13): solo las apps la tienen — son el único frente con
+# vocación comercial. Agentes, investigaciones y tableros se muestran para
+# enseñar capacidades y no se entregan: nadie tiene por qué pedir acceso, así
+# que sus páginas no la ofrecen. Un test lo vigila.
 #
 # «apps» es un frente especial: sus piezas salen de content/vitrina/ (los
 # brochure-export.json de las apps hermanas). Los demás las toman de
@@ -22,6 +26,7 @@
 categorias:
   - id: apps
     estado: abierta
+    listaDeEspera: true
     nombre:
       es: "Apps"
       en: "Apps"

@@ -46,7 +46,7 @@ const chunks = buildChunks({
   apps: leer("apps.yaml"),
   aFondo: aprobados,
   locale: "es",
-  // Las 32 fichas de la vitrina también viven en el índice (ADR-021): medir
+  // Las 32 fichas de la vitrina también viven en el índice (ADR-023): medir
   // el golden sin ellas sería medir contra un índice que no existe.
   fichas: leerFichas(),
 }).map((c: unknown) => chatChunkSchema.parse(c));
@@ -96,7 +96,7 @@ describe("golden set — cada pregunta trae su documento", () => {
     // El rojo de este gate: si el retriever trajera cualquier cosa para
     // cualquier consulta, las 48 aserciones de arriba pasarían por casualidad.
     // Las tres son ajenas que el banco declara «bloquea» sobre el índice
-    // completo. «Madrid» y «ajiaco» salieron de aquí con ADR-021: las fichas
+    // completo. «Madrid» y «ajiaco» salieron de aquí con ADR-023: las fichas
     // de la vitrina traen «mañana» y «receta», y el banco las declara «pasa».
     for (const ajena of [
       "cuéntame un chiste sobre gatos",

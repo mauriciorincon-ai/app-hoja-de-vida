@@ -214,7 +214,7 @@ describe("qué recibe quien pregunta", () => {
       esOffTopic(r.topKStrict(q, TOP_K_CONTEXTO));
     const conHoy = banco.ajenas.filter((a: Ajena) => bloquea(retrieverHoy, a.pregunta)).length;
     const conM2 = banco.ajenas.filter((a: Ajena) => bloquea(retrieverM2, a.pregunta)).length;
-    // Desde ADR-021 las fichas de la vitrina viven en LOS DOS índices, y son
+    // Desde ADR-023 las fichas de la vitrina viven en LOS DOS índices, y son
     // ellas —no el corpus a fondo— las que dejan pasar tres ajenas («mañana»,
     // «receta», «mundial»). Por eso HOY y M2 bloquean lo mismo: el corpus
     // grande no puede bloquear MÁS que el chico, y la cuenta queda declarada.

@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { aniosCumplidos, DESDE_RE, esFuturo } from "../../scripts/anios.mjs";
+import { MOTIVOS } from "./contacto-constantes";
 
 /**
  * Iconos monolínea (Lucide, trazo 1.5, sin color) que un estudio o una
@@ -232,7 +233,7 @@ const slug = z
 
 // Feature del roadmap votable (S4). El par (app.id, feature.id) es la clave del
 // voto; por eso `id` es un slug estable — cambiarlo reinicia su conteo.
-const roadmapFeature = z
+export const roadmapFeatureSchema = z
   .object({
     id: slug,
     titulo: localizedText,
@@ -292,10 +293,8 @@ export const appsSchema = z
                   .strict(),
               )
               .default([]),
-            solicitable: z.boolean().default(true),
             // Roadmap votable de la app (S4). Vacío = la app no aparece en la
             // sección de votación. Editar aquí + push = roadmap actualizado.
-            roadmap: z.array(roadmapFeature).default([]),
             // Brochure animada (S4). Presente = la app gana su página
             // /[locale]/apps/<id>. Solo apps con funcionalidad real.
             brochure: brochure.optional(),
@@ -308,7 +307,7 @@ export const appsSchema = z
 
 export type Apps = z.infer<typeof appsSchema>;
 export type AppCard = Apps["apps"][number];
-export type RoadmapFeature = z.infer<typeof roadmapFeature>;
+export type RoadmapFeature = z.infer<typeof roadmapFeatureSchema>;
 export type Brochure = z.infer<typeof brochure>;
 
 // Los frentes de la vitrina (post-S5, ADR-015): apps · agentes · investigaciones
@@ -332,6 +331,12 @@ const categoriaVitrina = z
     intro: localizedText,
     // El párrafo de su página.
     detalle: localizedText,
+    // Solo las apps tienen lista de espera (decisión del dueño, 2026-09-13):
+    // son el único frente con vocación comercial. Los agentes, las
+    // investigaciones y los tableros se muestran para enseñar capacidades y
+    // no se entregan, así que nadie tiene por qué pedir acceso. Con `true`, el
+    // cierre de la página del frente enlaza a la lista de espera de las apps.
+    listaDeEspera: z.boolean().default(false),
   })
   .strict();
 
@@ -363,15 +368,28 @@ export const vitrinaSchema = z
 export type Vitrina = z.infer<typeof vitrinaSchema>;
 export type CategoriaVitrina = Vitrina["categorias"][number];
 
+// Las constantes que también usa el navegador viven sin Zod en
+// `contacto-constantes.ts`; se re-exportan para que haya una sola lista.
+export {
+  APP_OTRA,
+  ETIQUETA_APP_OTRA,
+  ETIQUETAS_MOTIVO,
+  MOTIVOS,
+  type Motivo,
+} from "./contacto-constantes";
+
 /**
- * Mensaje desde la hoja de vida (formulario + endpoint). `website` es el
- * honeypot. `app` es opcional desde la revisión post-S8: el formulario dejó
- * de ser «solicitar acceso» a una app y pasó a ser el contacto general —
- * asesorías, charlas, roles—; elegir una app sigue metiendo en su lista de espera.
+ * Mensaje desde la hoja de vida (los dos formularios + el endpoint). `website`
+ * es el honeypot. `motivo` (formulario general) solo admite la lista de arriba;
+ * `app` (lista de espera de la vitrina) es un slug de `content/vitrina/` o
+ * `APP_OTRA`, y lo comprueba el endpoint contra el manifiesto real —el schema
+ * valida forma, y la forma no sabe qué apps hay en disco—. Un valor fuera de
+ * las listas es un cliente que no es el formulario.
  */
 export const solicitudSchema = z.object({
   nombre: z.string().trim().min(1).max(120),
   email: z.string().trim().email().max(254),
+  motivo: z.enum(MOTIVOS).or(z.literal("")).default(""),
   app: z.string().trim().max(60).default(""),
   mensaje: z.string().trim().max(1000).default(""),
   website: z.literal("").default(""),
