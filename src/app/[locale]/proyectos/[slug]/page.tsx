@@ -224,15 +224,11 @@ export default async function ProyectoDetallePage({ params }: Params) {
               </section>
             </Reveal>
 
+            {/* Revisión post-S8, bloque C: sin «¿Te suena a tu equipo? Hablemos»
+                al pie del case study — el dueño lo sintió invasivo aquí. Queda el
+                PDF; el contacto tiene su sección y el hero su botón. */}
             <Reveal variant="fadeInUp">
               <div className="flex flex-wrap items-center gap-5 border-t border-paper-2 pt-10">
-                <Link
-                  href="/#contacto"
-                  className="flex min-h-11 items-center gap-2 rounded-md bg-sage px-6 text-[15px] font-medium text-sage-ink shadow-sh-1 transition-[filter] duration-[120ms] hover:brightness-[0.97]"
-                >
-                  {t("cta")}
-                  <span aria-hidden="true">→</span>
-                </Link>
                 <Link
                   href="/cv"
                   className="flex min-h-11 items-center text-sm text-ink-2 underline decoration-paper-3 underline-offset-4 transition-colors duration-[120ms] hover:text-ink-0 hover:decoration-ink-3"

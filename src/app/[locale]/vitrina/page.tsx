@@ -102,12 +102,12 @@ export default async function VitrinaPage({ params }: Params) {
             ))}
           </ul>
 
-          {/* Cierre: el anclaje de toda la vitrina + la lista de espera. */}
+          {/* Cierre: solo las apps tienen lista de espera; el portal manda
+              a la de ellas. Los otros frentes se muestran, no se entregan. */}
           <Reveal variant="fadeInUp">
             <section
-              id="contacto-vitrina"
               aria-labelledby="vitrina-cierre"
-              className="mt-14 scroll-mt-16 border-t border-paper-2 pt-10"
+              className="mt-14 border-t border-paper-2 pt-10"
             >
               <h2
                 id="vitrina-cierre"
@@ -116,14 +116,14 @@ export default async function VitrinaPage({ params }: Params) {
                 {t("acceso")}
               </h2>
               <p className="mt-3 max-w-[60ch] text-[15px] leading-relaxed text-ink-1">
-                {t("ctaNota")}
+                {t("listaDeEsperaLinea")}
               </p>
               <Link
-                href="/#contacto"
+                href="/vitrina/apps#contacto-vitrina"
                 data-cta="lista-de-espera"
                 className="mt-5 flex min-h-11 w-fit items-center gap-2 rounded-md bg-sage px-6 text-[15px] font-medium text-sage-ink shadow-sh-1 transition-[filter] duration-[120ms] hover:brightness-[0.97]"
               >
-                {t("cta")}
+                {t("ctaApps")}
                 <span aria-hidden="true">→</span>
               </Link>
             </section>

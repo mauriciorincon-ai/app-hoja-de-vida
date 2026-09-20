@@ -200,12 +200,15 @@ export default async function FrentePage({ params }: Params) {
             </nav>
           </Reveal>
 
-          {/* El anclaje del CTA vive en ESTA página. */}
+          {/* El cierre lo decide `listaDeEspera` en data/vitrina.yaml: con
+              ella, el frente manda a la lista de espera de las apps; sin
+              ella —agentes, investigaciones, tableros— el frente se muestra
+              para enseñar capacidades y lo dice, sin botón de acceso. */}
           <Reveal variant="fadeInUp">
             <section
-              id="contacto-vitrina"
               aria-labelledby="vitrina-cierre"
-              className="mt-12 scroll-mt-16 border-t border-paper-2 pt-10"
+              data-lista-de-espera={frente.listaDeEspera ? "si" : "no"}
+              className="mt-12 border-t border-paper-2 pt-10"
             >
               <h2
                 id="vitrina-cierre"
@@ -214,14 +217,22 @@ export default async function FrentePage({ params }: Params) {
                 {t("acceso")}
               </h2>
               <p className="mt-3 max-w-[60ch] text-[15px] leading-relaxed text-ink-1">
-                {t("ctaNota")}
+                {frente.listaDeEspera
+                  ? t("listaDeEsperaLinea")
+                  : t("sinListaDeEspera")}
               </p>
               <Link
-                href="/#contacto"
-                data-cta="lista-de-espera"
+                href={
+                  frente.listaDeEspera
+                    ? "/vitrina/apps#contacto-vitrina"
+                    : "/#contacto"
+                }
+                data-cta={
+                  frente.listaDeEspera ? "lista-de-espera" : "escribeme"
+                }
                 className="mt-5 flex min-h-11 w-fit items-center gap-2 rounded-md bg-sage px-6 text-[15px] font-medium text-sage-ink shadow-sh-1 transition-[filter] duration-[120ms] hover:brightness-[0.97]"
               >
-                {t("cta")}
+                {frente.listaDeEspera ? t("ctaApps") : t("escribeme")}
                 <span aria-hidden="true">→</span>
               </Link>
             </section>

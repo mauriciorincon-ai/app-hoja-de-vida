@@ -5,11 +5,10 @@
 #   en-construccion → repo público con commits reales ("esto lo está haciendo AHORA")
 #   en-exploracion  → objetivo declarado, sin fechas prometidas ("esto viene")
 #
-# roadmap: (S4) — features futuras votables por los visitantes. El par
-#   (id de la app, id de la feature) es la clave del voto en la BD; cambiar el
-#   id de una feature reinicia su conteo. Vacío/ausente = la app no aparece en
-#   la sección de votación. Cada feature necesita titulo y descripcion ES+EN.
-
+# roadmap: YA NO VIVE AQUÍ (2026-09-13, decisión del dueño). Ninguna feature de
+#   CV Viva se muestra en ningún lado; el roadmap votable es POR APP HERMANA y
+#   está en data/fichas/<slug>.yaml (lo entrega la planeadora). Un `roadmap:`
+#   en este archivo rompe el build.
 apps:
   - id: hoja-de-vida
     estado: en-produccion
@@ -22,7 +21,6 @@ apps:
     enlaces:
       - etiqueta: "GitHub"
         url: "https://github.com/mauriciorincon-ai/app-hoja-de-vida"
-    solicitable: false
     brochure:
       tagline:
         es: "Una hoja de vida que se construye a sí misma, en público."
@@ -77,42 +75,6 @@ apps:
         - "Supabase"
         - "Playwright"
         - "Vercel"
-    roadmap:
-      - id: mapa-c4
-        titulo:
-          es: "Mapa de arquitectura interactivo (C4)"
-          en: "Interactive architecture map (C4)"
-        descripcion:
-          es: "Navegar mis sistemas por niveles de zoom, del contexto al detalle, como un mapa."
-          en: "Navigate my systems by zoom levels, from context to detail, like a map."
-      - id: maquina-del-tiempo
-        titulo:
-          es: "Máquina del tiempo completa"
-          en: "Full time machine"
-        descripcion:
-          es: "Un scrubber cronológico para recorrer la evolución de cada proyecto en el tiempo."
-          en: "A chronological scrubber to walk through each project's evolution over time."
-      - id: sello-verificacion
-        titulo:
-          es: "Sello de verificación criptográfica"
-          en: "Cryptographic verification seal"
-        descripcion:
-          es: "Logros y commits con prueba verificable, para la era del candidato falso."
-          en: "Achievements and commits with verifiable proof, for the age of the fake candidate."
-      - id: selector-audiencia
-        titulo:
-          es: "Selector de audiencia"
-          en: "Audience selector"
-        descripcion:
-          es: "El mismo contenido en modo ejecutivo o modo arquitecto, a tu elección."
-          en: "The same content in executive mode or architect mode, your choice."
-      - id: pwa-offline
-        titulo:
-          es: "Versión instalable offline (PWA)"
-          en: "Installable offline version (PWA)"
-        descripcion:
-          es: "Instalar la CV Viva como app y consultarla sin conexión."
-          en: "Install the Living CV as an app and browse it offline."
 
   - id: chat-hoja-de-vida
     estado: en-produccion
@@ -125,7 +87,6 @@ apps:
     enlaces:
       - etiqueta: "GitHub"
         url: "https://github.com/mauriciorincon-ai/app-hoja-de-vida"
-    solicitable: false
     brochure:
       tagline:
         es: "Un chat que responde por mi hoja de vida — y nunca se cae."
@@ -173,21 +134,6 @@ apps:
         - "MiniSearch"
         - "Zod"
         - "TypeScript"
-    roadmap:
-      - id: embeddings-retrieval
-        titulo:
-          es: "Retrieval con embeddings"
-          en: "Embeddings-based retrieval"
-        descripcion:
-          es: "Búsqueda semántica en el índice del chat, más allá del match léxico actual."
-          en: "Semantic search over the chat index, beyond the current lexical match."
-      - id: memoria-conversacion
-        titulo:
-          es: "Memoria de la conversación"
-          en: "Conversation memory"
-        descripcion:
-          es: "Que el chat recuerde el hilo de la charla para preguntas de seguimiento."
-          en: "Let the chat remember the thread so you can ask follow-up questions."
 
   - id: fabric-analitica-e2e
     estado: en-exploracion
@@ -197,7 +143,6 @@ apps:
     descripcion:
       es: "Pipeline público con datos abiertos de Colombia: ingesta → Lakehouse → modelo semántico → Power BI embebido. Ingeniería de analítica verificable (DP-600)."
       en: "A public pipeline on Colombian open data: ingestion → Lakehouse → semantic model → embedded Power BI. Verifiable analytics engineering (DP-600)."
-    solicitable: true
 
   - id: agente-gemini-vertex
     estado: en-exploracion
@@ -207,4 +152,3 @@ apps:
     descripcion:
       es: "Agente con herramientas (LangChain) sobre el stack de GCP: el complemento multi-cloud de mi certificación Azure."
       en: "A tool-using agent (LangChain) on the GCP stack: the multi-cloud complement to my Azure certification."
-    solicitable: true

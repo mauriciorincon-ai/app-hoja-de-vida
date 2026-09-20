@@ -2,23 +2,16 @@ import { getTranslations } from "next-intl/server";
 import { SolicitarAccesoForm } from "@/components/forms/solicitar-acceso-form";
 import { Reveal } from "@/components/motion/reveal";
 import { Link } from "@/i18n/navigation";
-import type { AppCard, Cv } from "@/lib/schemas";
+import type { Cv } from "@/lib/schemas";
 
 /**
  * Cierre editorial (receta 10, variante minimalista V3): sin orbes, sin
  * sweep infinito ni pulse — el interés viene de la tipografía y el foco
  * único en el formulario.
  */
-export async function Contacto({
-  identidad,
-  apps,
-}: {
-  identidad: Cv["identidad"];
-  apps: AppCard[];
-}) {
+export async function Contacto({ identidad }: { identidad: Cv["identidad"] }) {
   const t = await getTranslations("contacto");
   const tCv = await getTranslations("cv");
-  const solicitables = apps.filter((app) => app.solicitable);
 
   return (
     <section
@@ -66,7 +59,7 @@ export async function Contacto({
           </div>
 
           <Reveal variant="fadeInUp" delay={0.3}>
-            <SolicitarAccesoForm apps={solicitables} />
+            <SolicitarAccesoForm />
           </Reveal>
         </div>
       </div>

@@ -47,3 +47,44 @@ proceso:
   anotaciones:
     - { paso: carga, texto: "El dataset nunca se sube: perfilado, entrenamiento y scoring corren en el navegador con Pyodide." }
     - { paso: ajusta, texto: "La fuga de datos es imposible por construcción: la interfaz no ofrece otro camino." }
+
+# Roadmap votable (2026-09-13): lo que la planeadora entrega como cierre de plan
+# de esta app — features disruptivas, no en construcción, sin fechas. PROCEDENCIA:
+# cv-viva (la planeadora lo administra; llega por copia y no se edita aquí). Los
+# `id` son ESTABLES: el par (app, id) es la clave del voto en la BD.
+roadmap:
+  - id: sello-de-defendibilidad
+    titulo:
+      es: "Un sello que certifica que tu modelo se puede defender"
+      en: "A seal certifying your model can be defended"
+    descripcion:
+      es: "Sales con un reporte compartible que marca, una a una, las condiciones que tu modelo cumplió: sin fuga, partición correcta, supera el baseline, incertidumbre y robustez medidas."
+      en: "Walk away with a shareable report that checks, one by one, the conditions your model met: no leakage, proper split, beats the baseline, uncertainty and robustness measured."
+  - id: prueba-de-estres
+    titulo:
+      es: "Prueba de estrés: cuánto aguanta tu modelo"
+      en: "Stress test: how much your model can take"
+    descripcion:
+      es: "Con un botón metes ruido, barajas columnas y simulas cambios en los datos, y ves cuánto cae el acierto antes de confiarle una decisión."
+      en: "One button adds noise, shuffles columns and simulates data shifts, and you see how far accuracy drops before you trust it with a decision."
+  - id: datos-sinteticos
+    titulo:
+      es: "Un gemelo sintético de tus datos para compartirlos sin exponerlos"
+      en: "A synthetic twin of your data to share without exposing it"
+    descripcion:
+      es: "Generas un conjunto con la misma forma estadística y sin filas reales, para que otros trabajen sobre él mientras el original nunca sale de tu máquina."
+      en: "Generate a set with the same statistical shape and no real rows, so others can work on it while the original never leaves your machine."
+  - id: que-pasaria-si-en-dinero
+    titulo:
+      es: "¿Qué pasaría si…? con el impacto en dinero"
+      en: "What if…? with the impact in money"
+    descripcion:
+      es: "Mueves una variable y la predicción se traduce a pesos: el modelo deja de ser un número y se vuelve una decisión de negocio."
+      en: "Move one variable and the prediction is translated into money: the model stops being a number and becomes a business decision."
+  - id: vigilancia-de-deriva
+    titulo:
+      es: "Vigilar el modelo después de publicarlo"
+      en: "Watch the model after it ships"
+    descripcion:
+      es: "Probeta compara los datos nuevos con los de entrenamiento y te avisa cuándo el modelo se degradó y toca reentrenar."
+      en: "Probeta compares new data with the training data and tells you when the model has degraded and it's time to retrain."

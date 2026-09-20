@@ -5,6 +5,7 @@ import { ChevronDown, Menu, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { trackEvent } from "@/lib/analytics";
+import { guardarAncla, restaurarAncla } from "@/lib/ancla-de-scroll";
 
 /**
  * NAVEGACIÓN AGRUPADA (2026-09-05, fuera de sprint — a pedido del usuario).
@@ -123,11 +124,22 @@ export function Header({
 
   function switchLocale() {
     trackEvent("idioma_cambiado", { a: otherLocale });
-    // Conserva la sección actual (anchor) al cambiar de idioma
-    router.replace(`${pathname}${window.location.hash}`, {
-      locale: otherLocale,
-    });
+    // Revisión post-S8, bloque B: el cambio de idioma te deja EXACTAMENTE
+    // donde estabas. Antes se conservaba el `#hash`, que lleva al borde de la
+    // sección; el dueño estaba a media Trayectoria y «se movía». Ahora se
+    // guarda un ancla de contenido (el mismo hito, al mismo desfase) y se
+    // navega sin hash y sin el scroll al inicio de Next (`scroll: false`);
+    // el efecto de abajo la restaura cuando el otro idioma ya está pintado.
+    guardarAncla();
+    router.replace(pathname, { locale: otherLocale, scroll: false });
   }
+
+  // Tras cambiar de idioma, coloca la ventana en el ancla guardada. Corre en
+  // el primer render de cada idioma; sin ancla (llegada directa) no hace nada.
+  useEffect(() => {
+    const id = requestAnimationFrame(() => restaurarAncla());
+    return () => cancelAnimationFrame(id);
+  }, [locale]);
 
   const href = (s: string) => (enHome ? `#${s}` : `/${locale}#${s}`);
   // La sección de la vitrina en la HOME se llama como en la página («Vitrina»);

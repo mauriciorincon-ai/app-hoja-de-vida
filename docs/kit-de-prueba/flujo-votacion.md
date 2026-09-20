@@ -5,7 +5,7 @@
 
 ## Flujo feliz (votar sube el contador REAL)
 
-1. Abre la preview en `/es/vitrina/apps` y baja hasta la sección **Roadmap**, al pie de las seis apps (desde la revisión post-S7 el roadmap vive con las apps, no en la HOME).
+1. Abre la preview en la página de una app hermana, por ejemplo `/es/vitrina/apps/habla`, y baja hasta la sección **Roadmap**, entre la ficha técnica y la lista de espera (desde el 2026-09-13 cada app vota en su propia página; ni el escaparate ni la HOME tienen roadmap).
 2. Fíjate en el número junto a una feature (p. ej. "sin votos aún" o "3 votos").
 3. Haz clic en **Votar**. Debe:
    - subir el número **en 1** (el valor real de la base de datos, no un salto raro),

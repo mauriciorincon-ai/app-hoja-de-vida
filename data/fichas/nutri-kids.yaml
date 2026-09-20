@@ -46,3 +46,44 @@ proceso:
   anotaciones:
     - { paso: guarda, texto: "Sin servidor de datos, cuenta ni nube (ADR-001, ratificada por ADR-007)." }
     - { paso: envia, texto: "El registro del día —las horas y las notas sobre su hijo— jamás sale del teléfono." }
+
+# Roadmap votable (2026-09-13): lo que la planeadora entrega como cierre de plan
+# de esta app — features disruptivas, no en construcción, sin fechas. PROCEDENCIA:
+# cv-viva (la planeadora lo administra; llega por copia y no se edita aquí). Los
+# `id` son ESTABLES: el par (app, id) es la clave del voto en la BD.
+roadmap:
+  - id: gemelo-nutricional
+    titulo:
+      es: "Un gemelo nutricional que aprende sus patrones"
+      en: "A nutritional twin that learns his patterns"
+    descripcion:
+      es: "Con el tiempo, la app deja de solo registrar y empieza a anticipar: qué combinaciones le sientan, qué días se tuercen y por qué."
+      en: "Over time the app stops merely logging and starts anticipating: which combinations work for him, which days go sideways, and why."
+  - id: aviso-de-riesgo-del-dia
+    titulo:
+      es: "Aviso de riesgo antes de que el día se tuerza"
+      en: "A risk heads-up before the day goes sideways"
+    descripcion:
+      es: "Al empezar el día ves un nivel bajo, medio o alto según sueño, eventos y quién cuida, y qué preparar para adelantarte."
+      en: "At the start of the day you see a low, medium or high level based on sleep, events and who's caring, and what to prepare ahead."
+  - id: supervision-profesional
+    titulo:
+      es: "Tu nutricionista dentro de la app"
+      en: "Your nutritionist inside the app"
+    descripcion:
+      es: "El profesional revisa el registro, ajusta y firma el plan desde su lado, con permisos por rol y sin que salga nada que no autorices."
+      en: "The professional reviews the log, adjusts and signs the plan from their side, with role-based permissions and nothing shared you didn't authorize."
+  - id: juego-para-el-nino
+    titulo:
+      es: "Una aventura para él, no solo para los padres"
+      en: "An adventure for him, not just for the parents"
+    descripcion:
+      es: "Por primera vez la app la usa el niño: una historia que avanza con su día, en positivo, sin peso ni castigos."
+      en: "For the first time the child uses the app: a story that moves with his day, in the positive, with no weight and no punishments."
+  - id: varias-dietas-en-una
+    titulo:
+      es: "Varias dietas de distintos profesionales, en una sola"
+      en: "Several diets from different professionals, in one"
+    descripcion:
+      es: "Cargas los planes de más de un profesional y la app los concilia en una dieta única sin contradicciones, señalando dónde chocaban."
+      en: "Load plans from more than one professional and the app reconciles them into a single diet with no contradictions, flagging where they clashed."

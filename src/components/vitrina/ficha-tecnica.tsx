@@ -96,11 +96,14 @@ export async function FichaTecnica({
   datos,
   locale,
   hrefDetalle,
+  listaDeEspera = false,
 }: {
   datos: Datos;
   locale: Locale;
   /** Ruta del detalle, si la pieza lo tiene. */
   hrefDetalle?: string;
+  /** Solo las apps: el cierre enlaza a `#contacto-vitrina` de la misma página. */
+  listaDeEspera?: boolean;
 }) {
   const t = await getTranslations("fichaTecnica");
   const tv = await getTranslations("vitrina");
@@ -483,10 +486,9 @@ export async function FichaTecnica({
       </Seccion>
 
       {/* ── Cierre ───────────────────────────────────────────────────────── */}
-      <div
-        id="contacto-vitrina"
-        className="mt-12 flex scroll-mt-16 flex-wrap items-center gap-3 border-t border-paper-2 pt-8"
-      >
+      {/* La lista de espera la decide la PÁGINA (por frente, desde
+          `data/vitrina.yaml`), no este componente: solo las apps la tienen. */}
+      <div className="mt-12 flex flex-wrap items-center gap-3 border-t border-paper-2 pt-8">
         {hrefDetalle && (
           <Link
             href={hrefDetalle}
@@ -497,13 +499,15 @@ export async function FichaTecnica({
             <span aria-hidden="true">→</span>
           </Link>
         )}
-        <Link
-          href="/#contacto"
-          data-cta="lista-de-espera"
-          className="flex min-h-11 items-center gap-2 rounded-md border border-paper-3 px-6 text-[15px] font-medium text-ink-1 transition-colors duration-[120ms] hover:bg-paper-1"
-        >
-          {tv("cta")}
-        </Link>
+        {listaDeEspera && (
+          <a
+            href="#contacto-vitrina"
+            data-cta="lista-de-espera"
+            className="flex min-h-11 items-center gap-2 rounded-md border border-paper-3 px-6 text-[15px] font-medium text-ink-1 transition-colors duration-[120ms] hover:bg-paper-1"
+          >
+            {tv("cta")}
+          </a>
+        )}
         <p className="max-w-[40ch] text-[13px] leading-snug text-ink-2 sm:ml-auto">
           {t("cierreNota")}
         </p>
