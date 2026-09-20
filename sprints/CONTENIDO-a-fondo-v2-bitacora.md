@@ -249,3 +249,21 @@ norma, dos párrafos sobre ISO/IEC 42001 —uno en `fundacion-ctic`, otro en
 **Estado de la suite:** 29 de 32 archivos en verde. Los tres rojos son exactamente el trabajo
 pendiente: el golden set (5), el banco de preguntas (31) y tres de los seis gates de coherencia.
 
+### Decisión del dueño (2026-09-20): sin `[CONFIRMAR]` en el corpus, una sola hoja de respuestas
+
+El dueño rechazó el mecanismo de dejar `[CONFIRMAR]` en cada subsección: él ya resolvió los de
+la primera versión y no va a volver a hacerlo por pedazos. Regla nueva, que sustituye al punto 5
+del plan:
+
+- **Un dato que falta no se inventa y no se marca en el corpus**: la prosa se escribe sin ese
+  dato (sin la cifra, sin la versión), con proporción, y la pregunta vive en UNA sola hoja fuera
+  del repo, con opciones para marcar y un valor por defecto que se ejecuta si no la marca.
+- **Lo interpretable se estima y se declara** en esa hoja como «lo escribo así», para que él
+  corrija solo lo falso.
+- **No se le pide nada por pedazos.** Las 113 preguntas de la auditoría (A abiertas, B, C, D)
+  están en esa única hoja, con el paso de la clave del chat incluido.
+
+Los cuatro `[CONFIRMAR]` que F2 había puesto en `inglopres` se retiraron; el corpus queda con
+cero. La aduana sigue prohibiéndolos en un `aprobado`, que ahora es inalcanzable por
+construcción y no por disciplina.
+

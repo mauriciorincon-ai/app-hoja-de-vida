@@ -54,15 +54,12 @@ Mi encargo fue entender esa operación de extremo a extremo e integrarla. En la 
 significó cuatro cosas: mapear cómo se conectaban las áreas, seguir por dónde circulaba la
 información, ubicar dónde aparecían esperas y reprocesos, y proponer los controles que faltaban.
 
-[CONFIRMAR: ¿de qué tamaño era la operación —número de máquinas en el parque, de empleados o de
-clientes activos? Una sola de las tres da la escala y hoy el documento no la tiene.]
-
 ## El ERP: integrar lo que estaba suelto
 
 <!-- seccion: el-erp -->
 
 Lideré la implementación de un **ERP —Odoo—**, el sistema de planificación de recursos
-empresariales con el que la organización pasó de registros dispersos a un solo lugar. El
+empresariales con el que Inglopres pasó de registros dispersos a un solo lugar. El
 objetivo declarado era aumentar la eficiencia operativa y la consistencia del servicio; el
 objetivo real, más difícil, era que las áreas compartieran una misma versión de la operación.
 
@@ -76,9 +73,6 @@ El trabajo que más pesó ocurrió antes de la primera pantalla: acordar qué si
 quién respondía por producirlo, qué reglas lo transformaban y en qué momento del proceso podía
 usarse. Aprendí ahí que un ERP no integra una organización. Integra lo que la organización ya
 acordó, y expone lo que no.
-
-[CONFIRMAR: ¿sobre qué versión se implementó? En 2016 Odoo venía de renombrarse desde OpenERP y
-convivían la 9 y la 10; decirlo evita una pregunta incómoda de alguien del gremio.]
 
 ## Las bases de datos que no existían
 
@@ -125,9 +119,6 @@ condiciones de trabajo, y eso exige mirar los cinco a la vez.
 Es el mismo problema que años después convertí en una línea de investigación propia sobre
 suplementos por fatiga y balanceo de líneas.
 
-[CONFIRMAR: ¿el estudio de tiempos fue formal —con cronometraje y tabla de suplementos, tipo OIT
-o Niebel— o una estimación razonada? La diferencia importa para quien recluta en manufactura.]
-
 ## Cadena de suministro e ISO 9001
 
 <!-- seccion: cadena-e-iso -->
@@ -163,9 +154,6 @@ Fue mi primera lección de que liderar es **reducir ambigüedad**, no vigilar ac
 segunda, que una operación no mejora de forma sostenible si el conocimiento vive en una sola
 cabeza: los procesos, los criterios y los controles tienen que quedar lo bastante claros para
 que el equipo los ejecute, los discuta y los mejore.
-
-[CONFIRMAR: ¿de qué disciplinas era el equipo de doce —operarios, técnicos de mantenimiento,
-personal administrativo, una mezcla? Es la pregunta que sigue abierta desde la primera versión.]
 
 ## Lo que dejó este primer trabajo
 
