@@ -5,7 +5,7 @@ resumen: "Gobierno montado tres veces —co-liderado en banca, diseñado desde c
 cuando_usar: "Úsalo cuando pregunten por gobierno de datos o de inteligencia artificial, la norma ISO 42001, políticas y lineamientos de datos, datos personales y sensibles, trazabilidad de la información, quién decide quién ve qué datos, uso responsable de la IA, o cómo documenta lo que hace."
 estado: aprobado
 ancla: "#skills"
-actualizado: 2026-09-20
+actualizado: 2026-09-21
 preguntas_de_prueba:
   - "¿Qué experiencia tiene Henry en gobierno de datos?"
   - "¿Sabe Henry de gobierno de IA y de la norma ISO 42001?"
@@ -117,7 +117,37 @@ Mi regla de trabajo con datos de personas, la que aplico en la Fundación CTIC d
 
 La misma regla la aplico a lo que digo en público. Todo lo que comunico sobre esa experiencia va agregado —42 productos, 20 líderes, 15 procesos— y no expongo datos de pacientes, información clínica, detalles sensibles de los procesos ni conocimiento interno cuya divulgación pueda afectar a las personas o a la institución. Puedo explicar capacidades, principios de arquitectura y prácticas de gobierno; no revelo la información sobre la que operan.
 
-Y la llevé a mi vitrina: una de las 6 aplicaciones publicadas es un anonimizador, porque la primera necesidad de quien quiere analizar datos de personas con inteligencia artificial es dejar de tener a las personas en los datos. La regla no es de un empleo: es mía.
+Y la llevé a mi vitrina: una de las 6 aplicaciones publicadas es un anonimizador, porque la primera necesidad de quien quiere analizar datos de personas con inteligencia artificial es dejar de tener a las personas en los datos. La regla no es de un empleo: es mía. Y desde septiembre de 2026 dejó de aplicarse solo a lo que hago para otros: esta misma hoja de vida empezó a recoger datos personales, y lo que sigue cuenta cuáles y cómo se gobiernan.
+
+## Qué datos personales recoge este sitio: nombre y correo para chatear
+
+<!-- seccion: datos-personales-de-este-sitio -->
+
+Esta hoja de vida dejó de ser un sitio que no pide nada, y conviene decirlo antes de que alguien lo descubra solo. Durante todo su desarrollo, lo único que llegó a una base de datos fue el voto de un roadmap —hoy, el de cada aplicación hermana—, sin nombre, sin correo y sin ningún rastro que permitiera saber quién había votado: la regla escrita era cero información personal. Desde el 21 de septiembre de 2026 hay una excepción, y es deliberada: para conversar con el chat hay que dejar **nombre y correo**.
+
+La finalidad es concreta y viaja escrita en el aviso que el visitante marca antes de enviar nada: que yo sepa quién me escribe y qué se le respondió, y que la conversación no se consuma —ni el presupuesto de tokens que la paga— en tráfico sin interés real en mi trayectoria. Nada de eso queda implícito. La casilla de consentimiento nombra la **Ley 1581 de 2012**, enumera los tres datos que se guardan —nombre, correo y preguntas—, explica para qué sirven y dice cómo pedir el borrado: escribiéndome desde la sección de contacto. Sin esa casilla marcada, el servidor rechaza la solicitud; no es decoración del formulario, es una validación que devuelve error.
+
+Es exactamente lo que le exijo a una institución cuando trata datos de personas: **autorización del titular, finalidad declarada y un canal para revocarla**. La diferencia es que aquí el responsable del tratamiento soy yo, y la evidencia de que el control existe no es una política archivada, sino el código y la migración de base de datos que cualquiera puede leer en el repositorio público de esta hoja de vida.
+
+## El código de verificación del correo: seis dígitos que la base de datos nunca guarda
+
+<!-- seccion: codigo-de-verificacion -->
+
+El correo no se cree por escrito: se comprueba. El servidor genera un código de **seis dígitos**, lo envía a esa dirección y conserva únicamente su **hash** —SHA-256 calculado con un secreto que solo vive en el servidor y con el propio correo—, jamás el código en claro. Eso significa que ni yo puedo leer el código de nadie: lo que la tabla contiene es una huella de sesenta y cuatro caracteres que sirve para comparar y para nada más. El código vale **diez minutos** y admite **cinco intentos**; el sexto lo agota aunque sea el correcto, y la fila desaparece al verificar, al vencer o al agotarse.
+
+Verificado el correo, el servidor emite una **cookie firmada** con HMAC-SHA256, inaccesible desde el JavaScript de la página, que dura **treinta días**. No hay contraseña, no hay tabla de usuarios y no hay proveedor de identidad de por medio: el correo es la identidad y el código es la prueba de que le pertenece a quien lo escribió. Sin esa cookie, la ruta del chat responde con un error de autorización y el panel devuelve al visitante a la puerta sin perderle la pregunta que ya había escrito.
+
+Todo eso es **minimización** aplicada con criterio de ingeniería: conservar lo mínimo que hace funcionar el control y nada de lo que solo serviría para saber más. Por la misma razón no se registra la dirección IP ni el navegador de quien pregunta, aunque habrían sido gratis de capturar. Un dato que no se recoge es el único que después no hay que proteger, ni auditar, ni borrar.
+
+## Qué guarda el registro de conversaciones del chat, quién lo lee y la privacidad del visitante
+
+<!-- seccion: registro-y-privacidad-del-visitante -->
+
+Cada pregunta respondida deja una fila: nombre, correo, idioma, la pregunta tal como se escribió, la respuesta completa, las fuentes que se citaron, el modo en que se resolvió —con el modelo, con la búsqueda local o rechazada por salirse del tema—, el proveedor, el modelo, los tokens consumidos y los milisegundos que tardó. Es la telemetría que construí en Vesting traída a mi propia casa, con una diferencia que lo cambia todo: aquí el evento tiene nombre, y por eso necesita aviso.
+
+Para qué lo uso, sin rodeos: para saber qué se me pregunta de verdad, que casi nunca es lo que uno supone; para encontrar la pregunta que el corpus no supo contestar y escribir después el documento que faltaba; para vigilar el costo de cada respuesta contra el presupuesto declarado; y para saber quién se interesó por mi trabajo y poder responderle. No hay perfilado, no hay publicidad y no hay terceros de analítica: el registro no sale de esa base de datos.
+
+El control técnico es el mismo patrón con el que ya protegía la votación, endurecido porque ahora sí hay datos de personas. Las dos tablas tienen **RLS encendida y ninguna política**, que en la práctica significa que el rol anónimo con el que habla el navegador no puede leer ni una fila. Lo único que ese rol puede hacer son tres funciones de escritura declaradas **SECURITY DEFINER**, con permisos concedidos uno a uno: guardar un código, verificarlo y consumirlo, y registrar una conversación. **Leer es exclusivamente mío**, con la clave de servicio, desde el panel de administración de la base de datos. La retención la decido yo, está declarada como decisión y no como automatismo, y el aviso dice cómo pedir el borrado: no prometo una purga programada que no existe.
 
 ## El gobierno de la inteligencia artificial es una continuación y una ampliación
 
@@ -199,7 +229,7 @@ Ninguna aplicación avanza sin dos decisiones documentadas. La primera confirma 
 
 Ningún ciclo se considera cerrado sin un resumen que conserve las decisiones tomadas, las pruebas ejecutadas, los cambios frente a la visión inicial, los problemas encontrados y el trabajo pendiente. Esta memoria reduce la dependencia del conocimiento informal y permite que cada iteración comience desde el aprendizaje anterior. Las decisiones de arquitectura no anticipadas quedan en registros de decisión numerados, con su contexto y su alternativa descartada, para que dentro de un año se sepa por qué se eligió lo que se eligió.
 
-Toda salida persistente producida por un modelo debe cumplir una estructura verificable: un esquema que se valida antes de guardar. El sistema no puede tratar como activo válido cualquier contenido generado únicamente porque tenga una forma convincente. Los esquemas, validadores y controles deterministas protegen aquello que puede comprobarse mediante reglas explícitas; el chat de esta hoja de vida, por ejemplo, no persiste texto libre de un modelo en ninguna base de datos.
+Toda salida persistente producida por un modelo debe cumplir una estructura verificable: un esquema que se valida antes de guardar. El sistema no puede tratar como activo válido cualquier contenido generado únicamente porque tenga una forma convincente. Los esquemas, validadores y controles deterministas protegen aquello que puede comprobarse mediante reglas explícitas. El chat de esta hoja de vida obliga a precisar la regla: desde septiembre de 2026 sí archiva la respuesta del modelo tal cual, como texto, en el registro de conversaciones, porque el propósito de ese registro es saber qué se respondió. Lo que sigue prohibido es lo que de verdad importaba: ninguna salida del modelo se interpreta, se ejecuta, ni se convierte en un activo del que dependa otra decisión del sistema. Un texto que se guarda para leerlo no es lo mismo que un texto al que se le obedece.
 
 Incorporar inteligencia artificial generativa también exige una decisión justificada: **código primero**. Antes de utilizar un modelo, debo establecer qué característica del problema requiere interpretación, generación, recuperación contextual o coordinación flexible, y por qué una solución determinista no resulta suficiente. La IA es acento con respaldo determinista, jamás la columna vertebral.
 

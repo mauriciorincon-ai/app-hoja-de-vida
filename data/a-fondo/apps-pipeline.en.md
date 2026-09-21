@@ -5,7 +5,7 @@ resumen: "The AI-APPs pipeline: six sister applications plus CV Viva, 13 agents,
 cuando_usar: "Use this when they ask what he has built on his own outside of work, how many applications he has published, whether he has public code, how his build pipeline works with Next.js, automated tests and CI, and what each of the six showcase apps demonstrates."
 estado: aprobado
 ancla: "#vitrina"
-actualizado: 2026-09-20
+actualizado: 2026-09-21
 preguntas_de_prueba:
   - "What applications is Henry building?"
   - "Why does he build in public?"
@@ -34,8 +34,12 @@ HOW THIS FILE IS WRITTEN
 -->
 
 <!-- The S3 skeleton pointed at "#apps"; that HOME section was removed in the
-     post-S7 review and the roadmap moved to /vitrina/apps. Today what the HOME
-     shows of what has been built is the showcase. Corrected in the S8 migration. -->
+     post-S7 review and today what the HOME shows of what has been built is the
+     showcase. CV Viva's own roadmap was removed entirely on September 13, 2026:
+     no feature of this site is voted on. The votable roadmap that does exist
+     is PER SISTER APP and lives on the page of each application, inside
+     /vitrina/apps. Corrected in the S8 migration and up to date on
+     2026-09-21. -->
 
 <!-- guide (comes from the story skeleton, S3 — written by the owner):
 The vision of the AI-APPs pipeline: why you build in public, what each app
@@ -76,7 +80,11 @@ I do not publish credentials, secrets, personal information, internal data of or
 
 I also make sure that public repositories do not turn transparency into a vulnerability. Sensitive configurations are separated from the code —secrets live only in the local environment file, ignored by git, and in the deployment variables—, dependencies are reviewed with an audit on every integration, and features that use external services operate under explicit permissions and limits. A secrets sweep with gitleaks blocks every commit, in 2 layers: the git hook for manual commits and a hook of the coding agent for the writes it makes. A verifiable architecture does not need to reveal what it must protect.
 
-And one hard rule of the pipeline that governs this site: zero links. No file of the repository nor field of the project contains the production URL or the preview URLs; production is shown, never handed over. The public call to action of each app is a waiting list, with no promise of being granted, and the sweep that watches over it runs on all versioned files after the last change, not before.
+## Zero links: the waiting list and the site's contact forms
+
+<!-- seccion: cero-enlaces-y-formularios -->
+
+And one hard rule of the pipeline that governs this site, number 16: zero links. No file of the repository nor field of the project contains the production URL or the preview URLs; production is shown, never handed over. That is why the public call to action of an application is a waiting list, with no promise of being granted, and it appears only where there is an app: the applications storefront of the showcase and the sheet of each one. The agents, the research lines and the dashboards are shown, but not handed over: they carry no waiting list. Alongside it there are two other ways to write to me —the home page has a general contact form that asks you to choose the reason among five, a project, consulting, training, a talk or a role, and that reason travels as the subject of the email; and under the roadmap of each sister app there is a box to propose a feature, which also arrives by email and publishes nothing—. The sweep that watches over the zero-links rule runs on all versioned files after the last change, not before.
 
 ## Provenance of knowledge and responsibility for AI-assisted work
 
@@ -212,7 +220,7 @@ It is coordinated by the AI-APPs Factory, an agent sealed on July 2, 2026 that i
 
 The Factory declares three limits, and I prefer writing them down to hiding them: it does not write production code —that happens in each app's repository, never in the planning house—; the launch and operation phases remain unvalidated in a real run, they are written method and not experience; and there are no live shared libraries between apps, reuse travels stamped in the kit. Its return only counts the coordination eliminated —an estimate of 108 hours a year, with its assumptions declared—; the commercial value of the portfolio remains an unquantified option.
 
-This site carries eight sprints closed this way and 21 architecture decisions recorded in its repository. Every change goes through four continuous integration jobs —quality, integration against a real database, end-to-end tests with accessibility, and Lighthouse with a performance budget— and through the secrets sweep. The infrastructure that supports it is drawn in a blueprint with its real cost, US$0 a month, and with its single point of failure declared: the GitHub account, which is the login for the hosting and the database, mitigated with two-factor authentication. And if the database goes down, voting is declared unavailable; if the AI provider goes down, the chat switches to local search: neither of the two brings down the site.
+This site carries eight sprints closed this way and 25 architecture decisions recorded in its repository. Every change goes through four continuous integration jobs —quality, integration against a real database, end-to-end tests with accessibility, and Lighthouse with a performance budget— and through the secrets sweep. The infrastructure that supports it is drawn in a blueprint with its real cost, US$0 a month, and with its single point of failure declared: the GitHub account, which is the login for the hosting and the database, mitigated with two-factor authentication. And if the database goes down, voting is declared unavailable; if the AI provider goes down, the chat switches to local search: neither of the two brings down the site.
 
 ## Two written approvals and explicit human owners
 
@@ -312,13 +320,13 @@ CV Viva, the platform from which this content is presented, is part of the portf
 
 The content is kept separate from the presentation and is managed through structured files and version control: the career, the studies, the achievements, the projects, the certifications and the skills live in one YAML file per language, validated with a Zod schema at build time. If the content is malformed, the build fails, not the page. This decision makes it possible to update the information without manually rebuilding each page, keep the history of changes and apply common rules on dates, sections, projects and claims. Editing the file and pushing updates the web, the PDF for applicant tracking systems and the chat all at once.
 
-Static generation reduces operational complexity and allows a significant part of the site to be consulted without depending on permanent processes on a server. All the content is in the static HTML: a recruiter, a screening bot or a download without JavaScript sees the entire CV, with structured data for search engines and the alternate language tags. The architecture seeks an experience that is fast, accessible and resilient to failures, and technical decisions that respond to the real purpose of the product. Future features are voted with one click and without registration, and the counter is real, on a database with an atomic function: if the database goes down, it says so; it never invents a number.
+Static generation reduces operational complexity and allows a significant part of the site to be consulted without depending on permanent processes on a server. All the content is in the static HTML: a recruiter, a screening bot or a download without JavaScript sees the entire CV, with structured data for search engines and the alternate language tags. The architecture seeks an experience that is fast, accessible and resilient to failures, and technical decisions that respond to the real purpose of the product. The features that are voted with one click and without registration are no longer this site's —CV Viva removed its own roadmap in September 2026 and today submits none of its own features to a vote—, but those of each sister app, on the page that application has in the showcase; the counter is real, on a database with an atomic function: if the database goes down, it says so; it never invents a number.
 
 ## The chat, seen from the pipeline
 
 <!-- seccion: el-chat-desde-el-pipeline -->
 
-The platform also incorporates a chat with retrieval augmentation —RAG— that answers over the evidence published on the site itself. Its function is not to improvise a persuasive version of my profile, but to help navigate the information, locate relevant content and answer through references that can be verified. How it works inside, with all its numbers, is in its own document; here is what the pipeline demands of it.
+The platform also incorporates a chat with retrieval augmentation —RAG— that answers over the evidence published on the site itself. Its function is not to improvise a persuasive version of my profile, but to help navigate the information, locate relevant content and answer through references that can be verified. Since September 21, 2026 it has a gate: whoever wants to talk leaves their name and their email, accepts the data processing notice and confirms the email with a six-digit code that reaches them by email; every conversation is logged. How it works inside, with all its numbers and with the detail of that gate, is in its own document; here is what the pipeline demands of it.
 
 The chat separates the model from the knowledge. The generative provider can change —five are adapted, and it is chosen by environment variable—, but the authorized sources remain in the site's versioned content. This separation prevents the professional identity from depending on the memory or the preferences of a specific model.
 
@@ -364,6 +372,6 @@ This discipline connects directly with my professional career. Industrial Engine
 
 The pipeline also demonstrates that I do not understand artificial intelligence as an indiscriminate substitute for professional work. I use it as part of a governed system, where decisions of purpose, priority, acceptance and risk remain explicit. The agent accelerates and organizes, but does not remove responsibility for the result.
 
-Building through this system allows me to turn every project into something more than a deliverable. Each piece leaves decisions, components, tests, patterns and lessons that reduce the uncertainty of the next one. The portfolio grows not only in quantity, but also in memory, consistency and accumulated capability: 24 sprints closed in the pipeline, 21 decisions recorded on this site alone.
+Building through this system allows me to turn every project into something more than a deliverable. Each piece leaves decisions, components, tests, patterns and lessons that reduce the uncertainty of the next one. The portfolio grows not only in quantity, but also in memory, consistency and accumulated capability: 24 sprints closed in the pipeline, 25 decisions recorded on this site alone.
 
 That is the main claim the pipeline makes it possible to demonstrate: I do not build applications, agents, research lines and dashboards as isolated exercises. I build a work architecture capable of turning problems into verifiable products, rigorously distinguishing between intention and result, learning from every cycle and progressively raising the standard with which I approach the next one.

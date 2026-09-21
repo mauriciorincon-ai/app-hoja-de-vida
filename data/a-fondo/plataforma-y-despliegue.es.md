@@ -5,7 +5,7 @@ resumen: "Dónde tengo profundidad de plataforma —Microsoft: Fabric, Power BI,
 cuando_usar: "Úsalo cuando pregunten por su experiencia con Azure y la nube de Microsoft, Google Cloud, Docker y Kubernetes, MLOps, integración y despliegue continuos, qué despliega y mantiene directamente, y qué no ha hecho nunca y tendría que aprender."
 estado: aprobado
 ancla: "#skills"
-actualizado: 2026-09-20
+actualizado: 2026-09-21
 preguntas_de_prueba:
   - "¿Qué experiencia tiene Henry con la nube?"
   - "¿Sabe Henry de contenedores, Kubernetes o Google Cloud?"
@@ -66,8 +66,9 @@ Además de mi experiencia en plataformas empresariales, mantengo un portafolio d
 Actualmente, el portafolio reúne seis aplicaciones hermanas —Velo, Dash Agent AI, Probeta DS, Hablemos San, Innmobiliaria y Nutri-Kids— más CV Viva, este sitio. Todas están en operación sostenida: si están en el sitio es porque alcanzaron la condición de MVP, y siguen en evolución permanente; Hablemos San, sellada en agosto de 2026, es la más avanzada. No todas responden al mismo propósito ni utilizan la misma arquitectura, pero comparten criterios sobre documentación, pruebas, accesibilidad, rendimiento, trazabilidad y control de cambios, y comparten la misma cadena de herramientas:
 
 - Git y GitHub como fuente de verdad, con commits convencionales, ramas por sprint y decisiones de arquitectura registradas en ADR;
-- integración y despliegue continuos (CI/CD) con GitHub Actions: pruebas unitarias, de integración y de extremo a extremo, accesibilidad con axe, presupuesto de rendimiento con Lighthouse y un barrido de secretos con gitleaks que bloquea la publicación si algo falla;
+- integración y despliegue continuos (CI/CD) con GitHub Actions: pruebas unitarias, de integración y de extremo a extremo, accesibilidad con axe y presupuesto de rendimiento con Lighthouse, y ninguna rama llega a producción con uno solo de esos trabajos en rojo. El barrido de secretos con gitleaks va un paso antes, como enganche de pre-commit: un secreto no llega siquiera a existir en el historial, que es donde de verdad cuesta sacarlo;
 - despliegue en Vercel, con una vista previa por cada cambio y producción desde la rama principal; Innmobiliaria se sirve desde el borde en Cloudflare Workers, y Dash Agent AI no se despliega porque vive entera en la máquina de quien la usa;
+- base de datos gestionada con Supabase donde de verdad hay que guardar algo —Innmobiliaria y este sitio—, y correo transaccional con Resend para lo que sale por email;
 - observabilidad con Sentry y registro estructurado con Pino, siempre con metadatos y nunca con contenido del usuario, para saber qué falló y dónde.
 
 Cada aplicación publica además una ficha con sus cifras y la fuente de cada una —medida, calculada, declarada o estimada—, porque una app que exige procedencia a cada número de su pantalla no puede publicar cifras sueltas sobre sí misma.
@@ -104,6 +105,38 @@ Estos despliegues tienen consecuencias reales. Una modificación incorrecta pued
 La prevención es la CI que bloquea; la detección es Sentry y el registro estructurado; la reversión es la vista previa por cambio en Vercel y la posibilidad de volver a la versión anterior de la rama principal; el aprendizaje es el resumen de cada sprint y el ADR de cada decisión, que quedan en el repositorio. Cuando una app corre en el navegador del usuario —Velo con Web Workers y Web Crypto, Probeta DS con Python en WebAssembly— la reversión es todavía más importante, porque no hay un servidor que apagar.
 
 Esta práctica fortalece mi criterio para entornos empresariales. Una arquitectura no termina cuando el código funciona en desarrollo. Necesita una ruta de publicación, condiciones verificables, visibilidad sobre las fallas y una forma controlada de evolucionar. Lo que aprendí operando seis aplicaciones y este sitio es lo mismo que exigía en Vesting a cada integración nueva, con la diferencia de que aquí no hay nadie más a quien llamar cuando algo se rompe.
+
+## La base de datos de este sitio: Supabase, seguridad a nivel de fila y acceso solo por funciones
+
+<!-- seccion: la-base-de-datos-del-sitio -->
+
+Este sitio se sirve estático y no tiene un servidor mío detrás, pero sí tiene una capa de datos desde julio de 2026: Supabase en su plan gratuito, la primera base de datos de la aplicación, que entró para sostener una votación con conteos reales y hoy sostiene la del roadmap de cada aplicación hermana. La decisión de arquitectura no fue elegir Supabase; fue cómo exponerlo. La tabla de votos no guarda identidad ni dirección IP, y el conteo es una agregación y no un contador mutable: así no hay carrera de escritura sobre una celda ni histórico que se pierda al recalcular.
+
+La seguridad a nivel de fila queda encendida y sin ninguna política, que es la manera de decir que el rol anónimo no lee ni escribe la tabla directamente. Toda la superficie pública son dos funciones con privilegios del definidor —una emite el voto y devuelve el conteo real en la misma transacción, la otra devuelve el agregado— y los permisos se otorgan y se revocan uno a uno, en vez de confiar en lo que el motor deje concedido: un privilegio implícito es justamente el que nadie revisa. Lo comprobé como se comprueba un control: intentando leer e insertar como anónimo y viendo el permiso denegado.
+
+El contador es honesto por regla de producto. El número sale de la función en el momento de pedirlo, y si la base no responde, la ruta devuelve un 503 y la interfaz declara la votación no disponible con los botones apagados. Prefiero una función apagada a un número inventado.
+
+Este repositorio corre cuatro trabajos de integración continua: calidad, integración, extremo a extremo y Lighthouse. El de integración levanta un Supabase real, le aplica las migraciones y prueba contra Postgres, votación en el navegador incluida. Una regla de permisos razonada todavía no está verificada; lo está cuando una prueba intenta saltársela y no puede.
+
+## Nombre y correo para chatear: qué datos guarda la puerta del chat y quién puede leerlos
+
+<!-- seccion: la-puerta-del-chat -->
+
+Desde el 21 de septiembre de 2026 el chat de esta hoja de vida tiene una puerta, y la puerta es infraestructura antes que pantalla: añadió dos tablas al mismo Supabase, con el mismo patrón de la votación y una diferencia que obliga a decirla en voz alta, porque estas sí guardan datos personales. La primera tabla, la de los códigos, lleva una fila por correo con la huella del código vigente, su vencimiento y los intentos fallidos. La segunda, la del registro, lleva una fila por pregunta respondida: nombre, correo, idioma, la pregunta, la respuesta completa, las fuentes que se citaron, el modo en que se contestó, el proveedor y el modelo, los tokens y los milisegundos que costó.
+
+Las dos tienen la seguridad por filas encendida y ninguna política, y el rol anónimo solo puede ejecutar tres funciones con privilegios del definidor: guardar un código, verificarlo y consumirlo, y registrar una conversación. Ninguna de las tres devuelve filas. Escribir no es leer: quien pregunta deja su rastro y no puede ver el de nadie, ni siquiera el suyo. La lectura es mía, con la llave de servicio y desde el panel de la base, y esa llave no viaja al navegador ni vive en el repositorio.
+
+El resto de la decisión pesa tanto como el esquema. No se guarda dirección IP ni agente de usuario. El visitante entrega su nombre y su correo con un aviso de tratamiento de datos, bajo la Ley 1581 de 2012, y con un fin declarado: que yo sepa quién preguntó y qué se le respondió. La promesa anterior de la aplicación —cero datos personales, que sigue valiendo para la votación— no daba para estirarla hasta aquí, así que en lugar de estirarla cambió, quedó escrita en su propia decisión de arquitectura y se dice en el mismo sitio donde se piden los datos. Privacidad, para mí, es esto: decir qué se guarda, por qué, quién lo lee y cómo se pide que se borre.
+
+## El código de verificación sale por Resend y la sesión viaja en una cookie firmada
+
+<!-- seccion: codigo-y-cookie-del-chat -->
+
+El correo con el código de seis dígitos sale por Resend, el mismo proveedor que ya enviaba el formulario de contacto: una sola cuenta de correo transaccional para las dos cosas y una dependencia menos que vigilar. El código se genera con el generador criptográfico del sistema y no con un azar de interfaz; de él se guarda solo una huella calculada con un secreto del servidor y el propio correo, de modo que ni con la base delante se reconstruye; vale diez minutos y cinco intentos, y se compara en tiempo constante para no filtrar información por lo que tarda la comparación.
+
+Verificado el código, el servidor emite una cookie firmada con HMAC-SHA256, httpOnly y SameSite=Lax, que dura treinta días. No hay contraseñas, ni tabla de usuarios, ni proveedor de identidad: el correo es la identidad y el código es la prueba de que le pertenece. Es la pieza de autenticación más pequeña que resuelve el problema, y eso es deliberado, porque cada pieza que no existe es una que no hay que operar, actualizar ni proteger.
+
+También está diseñada la forma de fallar. Sin el secreto configurado, la ruta del chat responde que el registro no está disponible en vez de dejar pasar a cualquiera: una puerta que se abre sola cuando le falta una variable de entorno no es una puerta. Y para probar hay un almacén en memoria que reemplaza la base de datos, de manera que el recorrido de extremo a extremo cruza la puerta de verdad —pide el código, lo verifica, recibe la cookie— sin correo, sin red y sin base de datos. Es lo que permite que la barrera se pruebe entera en cada cambio, y no solo el día que se construyó.
 
 ## Operar inteligencia artificial exige una disciplina adicional
 

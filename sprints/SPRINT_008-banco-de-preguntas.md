@@ -1,10 +1,10 @@
 # Banco de preguntas — el corpus medido con preguntas de afuera
 
-> **Generado por `pnpm corpus:informe` el 2026-09-20. No se edita a mano.**
+> **Generado por `pnpm corpus:informe` el 2026-09-21. No se edita a mano.**
 > Banco: `tests/fixtures/banco-de-preguntas.es.yaml` — **136 preguntas** de 10 familias, 15 preguntas ajenas y 3 huecos declarados.
 >
-> **HOY** = el índice publicado, tal como está en disco: **1437 fragmentos** (los 24 documentos siguen en `borrador`, así que el chat todavía no ve nada de ellos).
-> **M2** = el índice que existirá cuando los apruebes: **1437 fragmentos**.
+> **HOY** = el índice publicado, tal como está en disco: **1467 fragmentos** (los 24 documentos siguen en `borrador`, así que el chat todavía no ve nada de ellos).
+> **M2** = el índice que existirá cuando los apruebes: **1467 fragmentos**.
 > El `top-4` es el que de verdad entra al contexto del modelo.
 
 ---
@@ -234,7 +234,7 @@ Preguntas que un reclutador hace y que **el corpus no contesta hoy**, con el doc
 
 **✅ ¿Cómo pasó de la ingeniería de procesos a los datos?**
 
-- top-4: a-fondo-origenes-cuando-usar, a-fondo-origenes-la-convergencia~1, a-fondo-origenes-del-proceso-a-la-ia, a-fondo-origenes-el-enfasis-en-analitica~2
+- top-4: a-fondo-origenes-cuando-usar, a-fondo-origenes-la-convergencia~1, a-fondo-origenes-del-proceso-a-la-ia, a-fondo-origenes-el-primer-trabajo~1
 - primer fragmento: «El arco: por qué Ingeniería Industrial y Diseño Industrial, el primer trabajo que fue de procesos, los tres saltos hasta la IA con la tabla de los ocho empleos, el hilo con sus métodos, y cuántos años son. Úsalo cuando p…»
 
 **✅ ¿Qué lo diferencia de otros candidatos de datos?**
@@ -340,17 +340,17 @@ Preguntas que un reclutador hace y que **el corpus no contesta hoy**, con el doc
 
 **✅ ¿Qué arquitecturas RAG ha implementado?**
 
-- top-4: a-fondo-rag-y-el-chat-embeddings-condicionados~2, a-fondo-rag-y-el-chat-ninguna-capa-basta~2, a-fondo-rag-y-el-chat-que-demuestra~1, a-fondo-rag-y-el-chat-evaluacion-del-rag~1
-- primer fragmento: «La opción está declarada en público: «retrieval con embeddings» es una de las dos funcionalidades votables del roadmap de CV Viva, junto con la memoria de la conversación. Quien visita el sitio puede votar por ella, y el…»
+- top-4: a-fondo-rag-y-el-chat-que-demuestra~1, a-fondo-rag-y-el-chat-ninguna-capa-basta~2, a-fondo-rag-y-el-chat-embeddings-condicionados~2, a-fondo-rag-y-el-chat-evaluacion-del-rag~1
+- primer fragmento: «El chat demuestra que puedo diseñar una solución de inteligencia artificial generativa como un sistema completo y no únicamente como una llamada a un modelo. La arquitectura comienza en el contenido versionado, continúa…»
 
 **✅ ¿Cómo funciona el chat de esta página?**
 
-- top-4: a-fondo-rag-y-el-chat-cuando-usar, a-fondo-rag-y-el-chat-lo-que-estas-usando~1, a-fondo-rag-y-el-chat-el-indice~1, a-fondo-rag-y-el-chat-citas-navegables~1
+- top-4: a-fondo-rag-y-el-chat-cuando-usar, a-fondo-rag-y-el-chat-lo-que-estas-usando~1, a-fondo-rag-y-el-chat-el-indice~1, a-fondo-rag-y-el-chat-codigo-de-seis-digitos~2
 - primer fragmento: «La arquitectura del chat de esta página con sus números: índice en tiempo de build, recuperación léxica con MiniSearch (BM25) sin embeddings, guardrails en capas, umbral medido, citas navegables, cinco proveedores interc…»
 
 **✅ ¿Usa embeddings o búsqueda vectorial?**
 
-- top-4: a-fondo-rag-y-el-chat-embeddings-condicionados~1, a-fondo-rag-y-el-chat-recuperacion-lexica~1, a-fondo-rag-y-el-chat-cuando-usar, a-fondo-rag-y-el-chat-recuperacion-lexica~3
+- top-4: a-fondo-rag-y-el-chat-embeddings-condicionados~1, a-fondo-rag-y-el-chat-recuperacion-lexica~1, a-fondo-rag-y-el-chat-embeddings-condicionados~2, a-fondo-rag-y-el-chat-cuando-usar
 - primer fragmento: «La regla aplicada es la misma que utilizo en mi pipeline de aplicaciones —la regla 13, código primero—: no incorporar inteligencia artificial por defecto. Antes de aumentar la complejidad, debo demostrar qué característi…»
 
 **✅ ¿Con qué proveedor de modelos trabaja?**
@@ -360,7 +360,7 @@ Preguntas que un reclutador hace y que **el corpus no contesta hoy**, con el doc
 
 **✅ ¿Cómo evita que el modelo invente respuestas?**
 
-- top-4: a-fondo-agentes-en-produccion-fuentes-o-vacio~1, a-fondo-rag-y-el-chat-los-guardrails~2, a-fondo-agentes-en-produccion-fuentes-o-vacio~2, a-fondo-rag-y-el-chat-cuando-usar
+- top-4: a-fondo-agentes-en-produccion-fuentes-o-vacio~1, a-fondo-rag-y-el-chat-los-guardrails~2, a-fondo-agentes-en-produccion-fuentes-o-vacio~2, a-fondo-rag-y-el-chat-los-guardrails~3
 - primer fragmento: «Los agentes de ARKHÉ comparten una regla que resume mi postura sobre inteligencia artificial generativa: ninguna afirmación verificable debe depender únicamente de la memoria del modelo. Cuando una respuesta requiere evi…»
 
 **☑️ ¿Ha llevado un modelo de machine learning a producción?**
@@ -402,7 +402,7 @@ Preguntas que un reclutador hace y que **el corpus no contesta hoy**, con el doc
 
 **✅ ¿Qué es un lakehouse y lo ha usado?**
 
-- top-4: a-fondo-fabric-en-la-practica-lago-y-almacen~2, a-fondo-como-aprendo-incorporar-una-plataforma~1, a-fondo-fabric-en-la-practica-lago-y-almacen~1, a-fondo-como-aprendo-incorporar-una-plataforma~3
+- top-4: a-fondo-fabric-en-la-practica-lago-y-almacen~2, a-fondo-como-aprendo-incorporar-una-plataforma~1, a-fondo-fabric-en-la-practica-lago-y-almacen~1, a-fondo-rag-y-el-chat-auditoria-de-vocabulario
 - primer fragmento: «El warehouse cumplía una función complementaria. Permitía organizar información estructurada mediante un enfoque relacional, desarrollar transformaciones y vistas en T-SQL orientadas al análisis y responder con claridad…»
 
 **☑️ ¿Sabe modelado semántico?**
@@ -567,8 +567,8 @@ Preguntas que un reclutador hace y que **el corpus no contesta hoy**, con el doc
 
 **✅ ¿Cómo maneja datos personales o sensibles?**
 
-- top-4: a-fondo-gobierno-de-datos-y-de-ia-datos-personales~1, a-fondo-gobierno-de-datos-y-de-ia-datos-personales~3, a-fondo-gobierno-de-datos-y-de-ia-datos-personales~2, a-fondo-gobierno-de-datos-y-de-ia-gobierno-en-salud~1
-- primer fragmento: «Con datos personales, las cinco preguntas tienen ley detrás. En Colombia, el derecho de **habeas data** y la **Ley 1581** de protección de datos personales fijan qué puede tratarse, con qué finalidad, con qué autorizació…»
+- top-4: a-fondo-gobierno-de-datos-y-de-ia-datos-personales~3, a-fondo-gobierno-de-datos-y-de-ia-datos-personales~1, a-fondo-gobierno-de-datos-y-de-ia-datos-personales~2, a-fondo-gobierno-de-datos-y-de-ia-gobierno-en-salud~1
+- primer fragmento: «La misma regla la aplico a lo que digo en público. Todo lo que comunico sobre esa experiencia va agregado —42 productos, 20 líderes, 15 procesos— y no expongo datos de pacientes, información clínica, detalles sensibles d…»
 
 **☑️ ¿Ha liderado iniciativas transversales en organizaciones grandes?**
 
@@ -587,7 +587,7 @@ Preguntas que un reclutador hace y que **el corpus no contesta hoy**, con el doc
 
 **✅ ¿Quién decide quién puede ver qué datos en sus plataformas?**
 
-- top-4: a-fondo-gobierno-de-datos-y-de-ia-acceso-y-cambio~1, a-fondo-gobierno-de-datos-y-de-ia-acceso-y-cambio~3, a-fondo-gobierno-de-datos-y-de-ia-acceso-y-cambio~2, a-fondo-como-aprendo-como-decido-que-aprender
+- top-4: a-fondo-gobierno-de-datos-y-de-ia-acceso-y-cambio~1, a-fondo-gobierno-de-datos-y-de-ia-acceso-y-cambio~3, a-fondo-gobierno-de-datos-y-de-ia-acceso-y-cambio~2, a-fondo-plataforma-y-despliegue-la-puerta-del-chat~2
 - primer fragmento: «La cuarta pregunta corresponde al acceso y al propósito: las **políticas**. No basta con establecer quién puede consultar un dato. También es necesario comprender para qué puede utilizarlo, qué nivel de detalle necesita…»
 
 ### procesos
@@ -681,8 +681,8 @@ Preguntas que un reclutador hace y que **el corpus no contesta hoy**, con el doc
 
 **✅ ¿Cómo controla la calidad de lo que producen sus agentes con Claude Code?**
 
-- top-4: a-fondo-los-agentes-de-la-vitrina-lo-que-comparten, a-fondo-los-agentes-de-la-vitrina-como-nace-un-agente~1, a-fondo-agentes-en-produccion-cuando-usar, a-fondo-agentes-en-produccion-controles-en-rojo~2
-- primer fragmento: «- **Gates humanos con token exacto.** Ningún agente cruza una puerta —encender una GPU, cerrar un sprint, integrar una ficha— sin la palabra literal de la persona. Entre 5 y 8 gates por agente. - **Carnadas.** Un control…»
+- top-4: a-fondo-los-agentes-de-la-vitrina-como-nace-un-agente~1, a-fondo-los-agentes-de-la-vitrina-como-nace-un-agente~2, a-fondo-los-agentes-de-la-vitrina-como-nace-un-agente~3, a-fondo-los-agentes-de-la-vitrina-lo-que-comparten
+- primer fragmento: «Los trece comparten una anatomía, y conviene describirla una sola vez. Cada agente es un repositorio con una **constitución**: un archivo `CLAUDE.md` que Claude Code carga solo al abrir la carpeta y que fija las leyes de…»
 
 **✅ ¿Cómo verifica las cifras que publica?**
 
@@ -733,7 +733,7 @@ Preguntas que un reclutador hace y que **el corpus no contesta hoy**, con el doc
 
 **✅ ¿Cómo lo contacto?**
 
-- top-4: contacto, a-fondo-las-investigaciones-limites-del-vacio~1, a-fondo-los-agentes-de-la-vitrina-produccion-de-piezas~1, a-fondo-apps-pipeline-el-contrato-de-las-fichas~2
+- top-4: contacto, a-fondo-apps-pipeline-cero-enlaces-y-formularios, a-fondo-las-investigaciones-limites-del-vacio~1, a-fondo-apps-pipeline-el-contrato-de-las-fichas~2
 - primer fragmento: «Bogotá, Colombia · Abierto a reubicación internacional y trabajo remoto. Email: mauricio.hmrc@gmail.com. LinkedIn: https://www.linkedin.com/in/henry-mauricio-rincon · GitHub: https://github.com/mauriciorincon-ai»
 
 **☑️ ¿Por qué debería contratarlo a él y no a otro?**

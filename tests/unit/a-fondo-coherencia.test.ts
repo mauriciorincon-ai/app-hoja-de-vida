@@ -1,6 +1,11 @@
+import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
+import { parse } from "yaml";
 import { leerDocumentos } from "../../scripts/a-fondo.mjs";
+import { buildChunks } from "../../scripts/build-chat-index.mjs";
+import { leerFichas } from "../../scripts/fichas-al-indice.mjs";
 import {
+  conPortada,
   fixture,
   problemasDeCargosContraElSitio,
   problemasDeCifras,
@@ -41,17 +46,35 @@ import {
 const docs = leerDocumentos("es");
 const lista = (problemas: string[]) => "\n" + problemas.map((p) => `  · ${p}`).join("\n");
 
+/**
+ * El tamaño del índice NO se puede leer de `public/chat-index.es.json`: ese
+ * archivo está en `.gitignore` y en una copia limpia no existe hasta después
+ * del build, que corre DESPUÉS de los tests. Así que se deriva igual que lo
+ * deriva el build, construyendo los fragmentos aquí. Es la misma función.
+ */
+const leerYaml = (f: string) => parse(readFileSync(`data/${f}`, "utf8"));
+
+const fragmentosDelIndice = buildChunks({
+  cv: leerYaml("cv.es.yaml"),
+  apps: leerYaml("apps.yaml"),
+  aFondo: docs,
+  locale: "es",
+  fichas: leerFichas(),
+}).length;
+
 describe("coherencia del corpus a fondo", () => {
   it("hay documentos que vigilar (si no, estos seis gates no vigilan nada)", () => {
     expect(docs.length).toBeGreaterThan(0);
   });
 
   it("las cifras del corpus son las que el sitio publica", () => {
-    const problemas = problemasDeCifras(
-      docs,
-      fixture("cifras-a-fondo.yaml").conceptos,
-      verdadesDelSitio(),
-    );
+    // `conPortada`: el `resumen` y el `cuando_usar` son el primer fragmento que
+    // el chat cita de cada documento, así que sus cifras se juzgan igual que las
+    // de la prosa.
+    const problemas = problemasDeCifras(conPortada(docs), fixture("cifras-a-fondo.yaml").conceptos, {
+      ...verdadesDelSitio(),
+      "fragmentos-indice": fragmentosDelIndice,
+    });
     expect(problemas, lista(problemas)).toEqual([]);
   });
 
@@ -72,6 +95,23 @@ describe("coherencia del corpus a fondo", () => {
 
   it("cada documento dice las palabras con las que preguntan por su tema", () => {
     const problemas = problemasDeLexico(docs, fixture("lexico-a-fondo.yaml"));
+    expect(problemas, lista(problemas)).toEqual([]);
+  });
+
+  /**
+   * EL GEMELO INGLÉS TAMBIÉN SE TROCEA. Los otros cinco gates derivan su verdad
+   * de `cv.es.yaml` y de un fixture de léxico en español, así que miran solo el
+   * español. La densidad no: contar palabras y exigir un dato concreto no
+   * depende del idioma, y el troceo en ventanas de 180 palabras es el mismo
+   * para los dos índices. Dejarlo fuera era vigilar medio corpus.
+   * (Hallazgo 2026-09-21: cuatro subsecciones inglesas llevaban meses entre 401
+   * y 403 palabras sin que nada lo dijera.)
+   */
+  it("las subsecciones en inglés también caben en un fragmento citable", () => {
+    const problemas = problemasDeDensidad(leerDocumentos("en"), {
+      tope: 400,
+      vocabulario: vocabularioConcreto(),
+    });
     expect(problemas, lista(problemas)).toEqual([]);
   });
 
@@ -131,6 +171,160 @@ describe("los motores de coherencia, uno a uno", () => {
     expect(
       problemasDeCifras([doc("x", [{ id: "s", texto: "Construí tres aplicaciones de Power BI." }])], conceptos, { apps: 6 }),
     ).toEqual([]);
+  });
+
+  // ─────────────────────────────────────────────────────────────────────
+  // LAS CIFRAS DEL PROPIO REPOSITORIO (2026-09-21) y sus tres mecanismos.
+  //
+  // El rojo de nacimiento fue REAL y está en la bitácora: el corpus decía «21
+  // decisiones de arquitectura» con 24 en `decisions/`. Estas pruebas son la
+  // otra mitad de la regla 14 —demostrar que además sabe APROBAR— y fijan por
+  // qué existe cada mecanismo, que es lo que se olvida en seis meses.
+  // ─────────────────────────────────────────────────────────────────────
+
+  it("cifras del repo: nombra la cuenta de decisiones que envejeció sola", () => {
+    const adr = [
+      {
+        id: "decisiones-arquitectura",
+        etiqueta: "las decisiones de arquitectura",
+        fuente: "decisions/",
+        sustantivos: ["decisiones"],
+        contexto: ["de arquitectura"],
+        ventana: 22,
+      },
+    ];
+    const verdades = { "decisiones-arquitectura": 24 };
+    expect(
+      problemasDeCifras([doc("x", [{ id: "s", texto: "Lleva 24 decisiones de arquitectura." }])], adr, verdades),
+    ).toEqual([]);
+    const rojo = problemasDeCifras(
+      [doc("x", [{ id: "s", texto: "Lleva 21 decisiones de arquitectura." }])],
+      adr,
+      verdades,
+    );
+    expect(rojo).toHaveLength(1);
+    expect(rojo[0]).toContain("«21 decisiones»");
+    // Y no se dispara con decisiones que no son las de arquitectura.
+    expect(
+      problemasDeCifras([doc("x", [{ id: "s", texto: "Tomé tres decisiones difíciles." }])], adr, verdades),
+    ).toEqual([]);
+  });
+
+  it("cifras del repo: `contexto_previo` separa el tamaño del índice del top-k", () => {
+    // El mismo sustantivo, tres órdenes de magnitud: «el índice de N fragmentos»
+    // frente a «la recuperación de los cuatro fragmentos». El sujeto va DELANTE.
+    const indice = [
+      {
+        id: "fragmentos-indice",
+        etiqueta: "los fragmentos del índice",
+        fuente: "el builder",
+        sustantivos: ["fragmentos"],
+        contexto_previo: ["indice de"],
+        ventana_previa: 24,
+      },
+    ];
+    const verdades = { "fragmentos-indice": 1437 };
+    // El top-k no se juzga: no lo precede «índice de».
+    expect(
+      problemasDeCifras(
+        [doc("x", [{ id: "s", texto: "La recuperación de los cuatro fragmentos corre en memoria." }])],
+        indice,
+        verdades,
+      ),
+    ).toEqual([]);
+    // El tamaño del índice sí, y en rojo cuando es de otra época.
+    const rojo = problemasDeCifras(
+      [doc("x", [{ id: "s", texto: "Trabaja sobre un índice de 494 fragmentos." }])],
+      indice,
+      verdades,
+    );
+    expect(rojo).toHaveLength(1);
+    expect(rojo[0]).toContain("«494 fragmentos»");
+  });
+
+  it("cifras del repo: un `hito` declarado es historia, no una afirmación sobre hoy", () => {
+    const indice = [
+      {
+        id: "fragmentos-indice",
+        etiqueta: "los fragmentos del índice",
+        fuente: "el builder",
+        sustantivos: ["fragmentos"],
+        contexto_previo: ["indice de"],
+        ventana_previa: 24,
+        hitos: [{ valor: 28, razon: "el índice al nacer" }],
+      },
+    ];
+    const verdades = { "fragmentos-indice": 1437 };
+    expect(
+      problemasDeCifras([doc("x", [{ id: "s", texto: "Nació con un índice de 28 fragmentos." }])], indice, verdades),
+    ).toEqual([]);
+    // Un número que NO está declarado como hito sigue siendo rojo.
+    expect(
+      problemasDeCifras([doc("x", [{ id: "s", texto: "Nació con un índice de 30 fragmentos." }])], indice, verdades),
+    ).toHaveLength(1);
+  });
+
+  it("cifras del repo: la `tolerancia` evita que el gate sea circular", () => {
+    // Corregir el tamaño del índice cambia el tamaño del índice. Con banda, una
+    // cifra honesta del orden de magnitud pasa; una de otra época, no.
+    const indice = [
+      {
+        id: "fragmentos-indice",
+        etiqueta: "los fragmentos del índice",
+        fuente: "el builder",
+        sustantivos: ["fragmentos"],
+        contexto_previo: ["indice de"],
+        ventana_previa: 24,
+        tolerancia: 0.05,
+      },
+    ];
+    const verdades = { "fragmentos-indice": 1437 };
+    expect(
+      problemasDeCifras([doc("x", [{ id: "s", texto: "Hoy es un índice de 1400 fragmentos." }])], indice, verdades),
+    ).toEqual([]);
+    expect(
+      problemasDeCifras([doc("x", [{ id: "s", texto: "Hoy es un índice de 494 fragmentos." }])], indice, verdades),
+    ).toHaveLength(1);
+  });
+
+  it("cifras del repo: lee el separador de miles, o es ciego por encima de 999", () => {
+    // Hallazgo del 2026-09-21, al estrenar el concepto del tamaño del índice:
+    // la expresión solo capturaba tres dígitos, así que «1.437 fragmentos» se
+    // leía como «437» y se reportaba como cifra desmentida. Un gate que además
+    // de no ver, ve mal.
+    const indice = [
+      {
+        id: "fragmentos-indice",
+        etiqueta: "los fragmentos del índice",
+        fuente: "el builder",
+        sustantivos: ["fragmentos"],
+        contexto_previo: ["indice de"],
+        ventana_previa: 24,
+      },
+    ];
+    expect(
+      problemasDeCifras([doc("x", [{ id: "s", texto: "Un índice de 1.437 fragmentos." }])], indice, {
+        "fragmentos-indice": 1437,
+      }),
+    ).toEqual([]);
+    const rojo = problemasDeCifras(
+      [doc("x", [{ id: "s", texto: "Un índice de 1.437 fragmentos." }])],
+      indice,
+      { "fragmentos-indice": 2000 },
+    );
+    expect(rojo).toHaveLength(1);
+    expect(rojo[0]).toContain("«1.437 fragmentos»");
+  });
+
+  it("cifras del repo: un concepto sin verdad derivable no se queda callado", () => {
+    // Un gate cuyo sujeto desaparece tiene que romper, no aprobar en silencio.
+    expect(() =>
+      problemasDeCifras(
+        [doc("x", [{ id: "s", texto: "Lleva 24 decisiones de arquitectura." }])],
+        [{ id: "inventado", etiqueta: "x", fuente: "y", sustantivos: ["decisiones"] }],
+        {},
+      ),
+    ).toThrow(/no tiene verdad derivable/);
   });
 
   it("cifras: con `ventana` el contexto tiene que seguir al sustantivo, no solo estar cerca", () => {

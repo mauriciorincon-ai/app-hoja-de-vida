@@ -5,7 +5,7 @@ resumen: "The 13 published agents, one by one, in four families: what each one p
 cuando_usar: "Use this when they ask which agents he has published in his portfolio, what each of the thirteen showcase agents is for, what a harness is, how he controls quality with human gates and bait, and what the thirteen share."
 estado: aprobado
 ancla: "/vitrina/agentes"
-actualizado: 2026-09-20
+actualizado: 2026-09-21
 preguntas_de_prueba:
   - "What are the thirteen agents of the showcase and what are they not?"
   - "What do the thirteen agents of the showcase share?"
@@ -116,7 +116,7 @@ ecosystem in a manuscript, something a lint verifies twice. The Factory does not
 code, has not validated its launch and operation phases in a real run, and has no shared
 libraries: those are its three declared limits.
 
-## How an agent is born: the constitution, the commands and the gates
+## How an agent is born on Claude Code: the constitution, the commands and the quality gates
 
 <!-- seccion: como-nace-un-agente -->
 

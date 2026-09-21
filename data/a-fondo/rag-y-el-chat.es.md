@@ -1,15 +1,17 @@
 ---
 slug: rag-y-el-chat
 titulo: "RAG: cómo funciona este chat por dentro"
-resumen: "La arquitectura del chat de esta página con sus números: índice en tiempo de build, recuperación léxica con MiniSearch (BM25) sin embeddings, guardrails en capas, umbral medido, citas navegables, cinco proveedores intercambiables, fallback local, presupuesto de US$20 con costo real de cero, y cómo se evalúa con 48 preguntas propias y 131 de afuera."
-cuando_usar: "Úsalo cuando pregunten cómo funciona el chat de esta página, qué arquitectura RAG implementó, si usa embeddings o búsqueda léxica, con qué proveedor de modelos trabaja, cómo evita que el modelo invente respuestas, y cómo evalúa el sistema con un golden set y un banco de preguntas."
+resumen: "La arquitectura del chat de esta página con sus números: índice en tiempo de build, recuperación léxica con MiniSearch (BM25) sin embeddings, guardrails en capas, umbral medido, citas navegables, cinco proveedores intercambiables, fallback local, presupuesto de US$20 con costo real de cero, la puerta de nombre y correo con código de verificación, qué datos guarda el registro de conversaciones y quién los lee, y cómo se evalúa con 75 preguntas propias y 136 de afuera."
+cuando_usar: "Úsalo cuando pregunten cómo funciona el chat de esta página, qué arquitectura RAG implementó, si usa embeddings o búsqueda léxica, con qué proveedor de modelos trabaja, cómo evita que el modelo invente respuestas, y cómo evalúa el sistema con un golden set y un banco de preguntas. Úsalo también para todo lo que tenga que ver con la puerta del chat y con la privacidad: por qué pide el nombre y el correo antes de responder, para qué sirve el código de verificación de seis dígitos que llega por email, qué datos personales guarda, quién puede leerlos, cuánto duran, cómo pedir que los borren, y por qué las respuestas son de dos o tres párrafos en vez de un volcado del corpus."
 estado: aprobado
 ancla: "#vitrina"
-actualizado: 2026-09-20
+actualizado: 2026-09-21
 preguntas_de_prueba:
   - "¿Cómo funciona el chat de la hoja de vida de Henry?"
   - "¿Qué experiencia tiene Henry con RAG?"
   - "¿Usa embeddings o búsqueda vectorial?"
+  - "¿Por qué el chat me pide el nombre y el correo antes de responder?"
+  - "¿Qué datos personales guarda este chat y quién puede leerlos?"
 ---
 
 <!--
@@ -53,7 +55,7 @@ La función del modelo no es recordar mi trayectoria ni improvisar una versión 
 
 Esta separación protege la integridad del sistema. Mi perfil puede evolucionar mediante cambios controlados en los archivos que lo representan —los datos del currículum en YAML, las fichas de las 32 piezas de la vitrina y los documentos de esta base de conocimiento— sin depender de reentrenar un modelo ni esperar que un proveedor haya incorporado información reciente. Cuando una experiencia, certificación o proyecto cambia, la actualización ocurre en la fuente y se propaga al índice durante la siguiente construcción del sitio.
 
-La arquitectura refleja una decisión de fondo: la inteligencia generativa no debe ocupar el lugar del conocimiento verificable. Debe ayudar a encontrarlo, relacionarlo y comunicarlo sin romper el vínculo con su procedencia. Por eso el proveedor generativo es intercambiable por configuración entre cinco adaptados, y por eso ninguno de ellos guarda nada: la telemetría registra proveedor, modelo, milisegundos y tokens, nunca el contenido de la conversación ni la salida del modelo.
+La arquitectura refleja una decisión de fondo: la inteligencia generativa no debe ocupar el lugar del conocimiento verificable. Debe ayudar a encontrarlo, relacionarlo y comunicarlo sin romper el vínculo con su procedencia. Por eso el proveedor generativo es intercambiable por configuración entre cinco adaptados, y por eso ninguno de ellos se queda con el conocimiento: la telemetría técnica anota proveedor, modelo, milisegundos y tokens, y el registro de la conversación —que desde el 21 de septiembre de 2026 sí guarda la pregunta y la respuesta— vive en mi propia base de datos, no en la del proveedor, y se le advierte a quien pregunta antes de que escriba la primera palabra. Más abajo lo explico entero.
 
 Es la misma regla que aplico en una plataforma de datos: el dato no adquiere confiabilidad cuando aparece en la pantalla, sino durante el recorrido que lo prepara, valida y contextualiza. Aquí, la respuesta del chat no comienza cuando interviene el modelo. Comienza en la calidad del contenido, en la estructura del índice y en la preservación de sus metadatos.
 
@@ -65,7 +67,7 @@ El conocimiento utilizado por el chat se compila durante la construcción del si
 
 Cada fragmento conserva una referencia hacia la sección o página de la que proviene. La recuperación no entrega únicamente texto al modelo. También suministra la identidad de la fuente y el destino que posteriormente permitirá al usuario verificar la afirmación dentro del sitio.
 
-El tamaño del fragmento está decidido y medido: como máximo 180 palabras. Una subsección más larga se parte en ventanas que conservan la misma ancla, porque un fragmento largo entra entero al contexto y compite consigo mismo; con ese tope, el peor caso del contexto de una respuesta queda acotado en unas 720 palabras. Antes de la reescritura de esta base el índice publicado tenía 28 fragmentos por idioma; con los 25 documentos aprobados y las fichas de la vitrina llega a 494. El número lo imprime cada build y es un artefacto regenerado, no editable a mano.
+El tamaño del fragmento está decidido y medido: como máximo 180 palabras. Una subsección más larga se parte en ventanas que conservan la misma ancla, porque un fragmento largo entra entero al contexto y compite consigo mismo; con ese tope, el peor caso del contexto de una respuesta queda acotado en unas 720 palabras. El índice tiene historia y vale la pena contarla: arrancó con 28 fragmentos por idioma, salidos solo de los YAML del currículum; las 32 fichas de la vitrina le sumaron 226; con la primera versión larga de esta base llegó a 494; y hoy, con los 25 documentos aprobados y la descripción de «cuándo usar» que cada uno declara, son 1.467 fragmentos en español y 1.457 en inglés. El número lo imprime cada build y es un artefacto regenerado, no editable a mano.
 
 Esta decisión desplaza hacia el proceso de construcción actividades que no necesitan repetirse en cada consulta. El contenido se analiza, divide y valida una vez por versión publicada. La pregunta puede concentrarse entonces en recuperar los fragmentos pertinentes y construir la respuesta, sin volver a procesar todo el corpus.
 
@@ -89,7 +91,7 @@ Hasta septiembre de 2026 el índice se armaba con los datos del currículum y co
 
 Indexarlas tal cual produjo lo previsible: 226 fragmentos nuevos, todos ricos en vocabulario, y el banco de 131 preguntas de afuera bajó de 102 a 94 aciertos en el top-4. Las fichas le ganaban el contexto a los documentos en preguntas que no eran sobre una pieza: «¿tiene posgrado?» traía la ficha del Asistente de Posgrado, y «¿qué nivel tiene con Power BI?» traía la del Constructor de Tableros Power BI.
 
-La solución fue un peso por fragmento que multiplica el puntaje de la búsqueda. La voz del dueño son los documentos; una ficha es evidencia de una pieza concreta y debe ganar solo cuando la pregunta es sobre esa pieza. El número salió de medir el banco sobre el índice completo de 494 fragmentos:
+La solución fue un peso por fragmento que multiplica el puntaje de la búsqueda. La voz del dueño son los documentos; una ficha es evidencia de una pieza concreta y debe ganar solo cuando la pregunta es sobre esa pieza. El número salió de medir el banco sobre el índice completo de entonces, 494 fragmentos:
 
 | Variante              | Fuente esperada en el top-4 | Preguntas con una ficha en el contexto |
 | --------------------- | --------------------------: | -------------------------------------: |
@@ -99,7 +101,7 @@ La solución fue un peso por fragmento que multiplica el puntaje de la búsqueda
 | **fichas a peso 0,5** |                 **102/131** |                                 **11** |
 | fichas a peso 0,35    |                     103/131 |                                      8 |
 
-A 0,5 el banco recupera exactamente el número que tenía sin fichas y once preguntas —las de la vitrina— siguen recibiendo una ficha. Bajar más ya no compra nada y las vuelve invisibles. Las fichas no se editan para que indexen mejor: son de otras casas, y añadir una a la vitrina la mete al chat en el siguiente build, sin escribir prosa nueva.
+A 0,5 el banco recupera exactamente el número que tenía sin fichas y once preguntas —las de la vitrina— siguen recibiendo una ficha. Bajar más ya no compra nada y las vuelve invisibles. Las fichas no se editan para que indexen mejor: son de otras casas, y añadir una a la vitrina la mete al chat en el siguiente build, sin escribir prosa nueva. El peso vive en una constante del código, con su medición al lado, y sigue en 0,5 sobre un índice que ya va en 1.467 fragmentos.
 
 ## La recuperación léxica es una decisión de arquitectura
 
@@ -121,11 +123,11 @@ El enfoque también ofrece determinismo y reproducibilidad. Bajo la misma versi�
 
 Una búsqueda léxica es tan buena como su lista de palabras vacías. Sin ella, «en», «de» o «the» coinciden con todo el corpus y cualquier pregunta parece pertinente. La primera lista era la evidente; la segunda tanda salió de una medición, no de una intuición.
 
-Con el corpus de 28 fragmentos, una pregunta ajena de cinco palabras —una petición de humor sobre mascotas, que no comparte ningún sustantivo con el corpus— puntuaba 4,28 y pasaba el guardrail. El único término que casaba era la preposición «sobre», presente en 42 de los 162 fragmentos del índice de aquel momento, y sostenía sola un falso positivo. La prueba automática de fuera de alcance no lo veía porque preguntaba la misma petición con la preposición «de», que sí estaba en la lista.
+Con el corpus de entonces, de 28 fragmentos, una pregunta ajena de cinco palabras —una petición de humor sobre mascotas, que no comparte ningún sustantivo con el corpus— puntuaba 4,28 y pasaba el guardrail. El único término que casaba era la preposición «sobre», presente en 42 de los 162 fragmentos del índice de aquel momento, y sostenía sola un falso positivo. La prueba automática de fuera de alcance no lo veía porque preguntaba la misma petición con la preposición «de», que sí estaba en la lista.
 
 Entraron entonces a la lista las preposiciones que no son tema —«sobre», «desde», «entre», «hasta», «sin», «tras»— y los imperativos dirigidos al asistente —«escribe», «hazme», «dime»—. Son instrucciones, no tema, y su único efecto era sumar puntaje a preguntas ajenas. Esa corrección se hizo con su medición al lado, y la prueba que antes no veía el caso ahora lo ve.
 
-Es una lección pequeña que vale para cualquier RAG: el vocabulario que comparte una pregunta con el corpus no siempre es contenido. Una parte es gramática, y la gramática se mide y se descarta.
+Es una lección pequeña que vale para cualquier RAG: el vocabulario que comparte una pregunta con el corpus no siempre es contenido. Una parte es gramática, y la gramática se mide y se descarta. Aquellos conteos son del índice viejo; el de hoy tiene 1.467 fragmentos en español y 1.457 en inglés, y la aritmética no cambió: una preposición presente en la cuarta parte de los fragmentos sostenía sola un falso positivo, y ninguna lista escrita a ojo la habría cazado.
 
 ## Embeddings: una evolución condicionada, no una mejora automática
 
@@ -137,7 +139,7 @@ Los embeddings permanecen como una evolución posible, no como una mejora autom�
 
 En ese caso, la evolución más razonable no sería necesariamente reemplazar por completo el mecanismo actual. Podría consistir en una recuperación híbrida que combinara la precisión de los términos explícitos con la capacidad semántica de los vectores. La decisión tendría que evaluarse mediante la calidad de recuperación, la latencia, el costo, la mantenibilidad y la capacidad para explicar por qué se seleccionó cada fragmento.
 
-La opción está declarada en público: «retrieval con embeddings» es una de las dos funcionalidades votables del roadmap de CV Viva, junto con la memoria de la conversación. Quien visita el sitio puede votar por ella, y el voto cuenta de verdad. Lo que no va a pasar es que entre porque sea habitual en arquitecturas RAG.
+La opción sigue declarada, pero ya no se vota. En septiembre de 2026 retiré del sitio el roadmap de funcionalidades de CV Viva —el retrieval con embeddings y la memoria de la conversación estaban entre ellas—: el roadmap votable es hoy el de cada app hermana, vive en su propia ficha y se vota ahí; esta hoja de vida muestra lo que construyo, no somete a votación sus propias funciones. De modo que los embeddings no van a entrar porque alguien los pida, y tampoco porque sean habituales en arquitecturas RAG. Van a entrar el día que una medición lo justifique, y hoy no lo hace: el banco de preguntas tendría que mostrar una familia de consultas que la búsqueda léxica pierde de forma sistemática —paráfrasis, sinónimos, vocabulario que el corpus no escribe— y que el léxico obligatorio de cada documento ya no alcance a cubrir. Ese día el número que hay que mover no es un voto, es el conteo de preguntas sin su fuente en el top-4, que hoy es cero.
 
 Prefiero una arquitectura suficientemente avanzada para resolver el problema y suficientemente comprensible para poder gobernarla. La sofisticación solo genera valor cuando mejora un resultado demostrable.
 
@@ -181,9 +183,9 @@ El umbral debe ser evaluado cuidadosamente. Si es demasiado bajo, preguntas irre
 
 El hallazgo fue negativo, y prefiero decirlo con sus números. La pregunta legítima que peor puntúa da 5,92 —«¿sabe DAX?»— y la ajena que mejor puntúa da 16,90 —una petición de escribir una función en otro lenguaje que ordene una lista—. Entre esos dos números viven 30 preguntas legítimas. Cualquier umbral que bloquee a la ajena más alta se lleva por delante a un tercio de las buenas, y está medido: con el umbral en 7, diez preguntas legítimas reciben «eso se me escapa» —«¿qué lo motiva?», «¿por qué debería contratarlo?»— a cambio de bloquear tres ajenas más.
 
-La razón es aritmética. El puntaje suma sobre los términos que casan, así que una pregunta ajena larga con tres palabras comunes puntúa más que una pregunta legítima corta como «¿sabe Kubernetes?». Ningún número separa eso. Por eso el umbral es deliberadamente bajo —1, que significa exactamente «casó algo sustantivo»— y el resto lo hacen las demás capas. Se volvió a medir en septiembre de 2026 sobre los 494 fragmentos: la legítima que peor puntúa en modo estricto da 6,65, ninguna de las 136 baja de 1 y las ajenas bloqueadas dan 0. No hay margen que ganar moviéndolo.
+La razón es aritmética. El puntaje suma sobre los términos que casan, así que una pregunta ajena larga con tres palabras comunes puntúa más que una pregunta legítima corta como «¿sabe Kubernetes?». Ningún número separa eso. Por eso el umbral es deliberadamente bajo —1, que significa exactamente «casó algo sustantivo»— y el resto lo hacen las demás capas. Se volvió a medir en septiembre de 2026, sobre los 494 fragmentos que el índice tenía entonces: la legítima que peor puntúa en modo estricto da 6,65, ninguna de las 136 baja de 1 y las ajenas bloqueadas dan 0. No hay margen que ganar moviéndolo.
 
-Lo que este guardrail sí garantiza: que una pregunta sin un solo término sustantivo del corpus se responde sin llamar al proveedor. Lo que no garantiza: que toda pregunta ajena se detenga aquí. Las que comparten vocabulario con el contenido pasan al modelo, y ahí las detiene el prompt que prohíbe responder fuera de las fuentes. La garantía de corrección es el prompt; el umbral es un ahorro de tokens y una primera línea. El peor fallo posible de este chat no es gastar tokens en una pregunta ajena: es contestar «eso se me escapa» a una pregunta legítima sobre mi trayectoria. Cuando el corpus crece, el umbral se vuelve a medir, no a suponer.
+Lo que este guardrail sí garantiza: que una pregunta sin un solo término sustantivo del corpus se responde sin llamar al proveedor. Lo que no garantiza: que toda pregunta ajena se detenga aquí. Las que comparten vocabulario con el contenido pasan al modelo, y ahí las detiene el prompt que prohíbe responder fuera de las fuentes. La garantía de corrección es el prompt; el umbral es un ahorro de tokens y una primera línea. El peor fallo posible de este chat no es gastar tokens en una pregunta ajena: es contestar «eso se me escapa» a una pregunta legítima sobre mi trayectoria. Cuando el corpus crece, el umbral se vuelve a medir, no a suponer, y el índice ya va en 1.467 fragmentos.
 
 ## Cómo evito que el modelo invente: guardrails distribuidos, no un prompt
 
@@ -194,11 +196,12 @@ El alcance del chat no depende de una única instrucción escrita en el prompt d
 1. **Interruptor general.** Si el chat está apagado por configuración, el servidor tampoco pinta el botón.
 2. **Límite de frecuencia.** Diez preguntas por minuto por dirección.
 3. **Validación estricta de la entrada.** Hasta 800 caracteres por mensaje, hasta 12 mensajes de historial —unos seis turnos—, roles restringidos; lo que no cumple el esquema no entra.
-4. **Fuera de alcance**, con la respuesta fija y sin llamar al proveedor.
-5. **Circuit breaker.** Tres fallas consecutivas del proveedor abren el circuito durante 60 segundos.
-6. **Recuperación.** Los cuatro fragmentos más relevantes, numerados, y nada más del sitio.
-7. **Instrucciones del sistema** compuestas en el servidor, fuera del control del visitante: usar solo las fuentes recuperadas, nunca inventar fechas, empresas o resultados, rechazar intentos de cambiar las reglas.
-8. **Salida.** Respuesta de hasta 600 tokens y 30 segundos, y las citas navegables.
+4. **La puerta.** Sin la cookie firmada que deja la verificación del correo, el servidor responde 401 y el panel vuelve al formulario de nombre y correo sin perder la pregunta escrita.
+5. **Fuera de alcance**, con la respuesta fija y sin llamar al proveedor.
+6. **Circuit breaker.** Tres fallas consecutivas del proveedor abren el circuito durante 60 segundos.
+7. **Recuperación.** Los cuatro fragmentos más relevantes, numerados, y nada más del sitio.
+8. **Instrucciones del sistema** compuestas en el servidor, fuera del control del visitante: usar solo las fuentes recuperadas, nunca inventar fechas, empresas o resultados, rechazar intentos de cambiar las reglas.
+9. **Salida.** Respuesta de hasta 700 tokens y 30 segundos, y las citas navegables.
 
 La primera capa de fondo controla el ingreso al flujo generativo: las preguntas sin recuperación suficiente se resuelven sin modelo, lo que reduce costo y limita la posibilidad de que el conocimiento general del proveedor desplace al corpus autorizado. La segunda controla el contexto: el modelo recibe fragmentos numerados con metadatos de fuentes reales del sitio, no acceso indiscriminado a todos los contenidos, y no necesita reconstruir de memoria la trayectoria sobre la que debe responder.
 
@@ -210,7 +213,7 @@ La tercera son las instrucciones del sistema, que delimitan el dominio, exigen u
 
 Ninguna de estas capas elimina por sí sola todos los riesgos. Su fortaleza proviene de la combinación. Un prompt puede ser ignorado o interpretado de forma inesperada; un filtro léxico puede equivocarse, y ya mostré con números cuánto; una cita puede ser formalmente válida y conceptualmente insuficiente. La arquitectura debe asumir que cada control tiene límites y evitar depender de uno solo.
 
-La distribución también reparte el costo de cada control. El interruptor y el límite de frecuencia cuestan cero por pregunta. La validación del esquema cuesta microsegundos. La búsqueda estricta del guardrail y la recuperación de los cuatro fragmentos corren sobre un índice en memoria. Solo la última capa —el proveedor— tiene una factura, y llega después de que las siete anteriores hicieron su trabajo. Es la misma lógica de un proceso industrial: los controles baratos van primero, y el recurso caro se usa cuando la pieza ya pasó las puertas anteriores.
+La distribución también reparte el costo de cada control. El interruptor, la puerta y el límite de frecuencia cuestan cero por pregunta. La validación del esquema y la comprobación de la firma de la cookie cuestan microsegundos. La búsqueda estricta del guardrail y la recuperación de los cuatro fragmentos corren sobre un índice en memoria. Solo la última capa —el proveedor— tiene una factura, y llega después de que las ocho anteriores hicieron su trabajo. Es la misma lógica de un proceso industrial: los controles baratos van primero, y el recurso caro se usa cuando la pieza ya pasó las puertas anteriores.
 
 Este enfoque refleja principios que aplico en sistemas de gestión y arquitectura empresarial, y que formalicé implementando ISO/IEC 42001. El control efectivo no es una declaración general de seguridad. Es una distribución de responsabilidades entre mecanismos capaces de prevenir, detectar, contener y hacer visible una desviación. Y cada uno de esos mecanismos tiene su prueba: el límite de frecuencia, el esquema de entrada, el circuit breaker, el guardrail y el fallback se ejercitan con fallas provocadas en la suite automatizada, porque un control que nunca se vio en rojo no ha demostrado nada.
 
@@ -260,7 +263,7 @@ Que el proveedor se elija por configuración no significa que cualquier servicio
 
 Esa capa hace algo más que traducir formatos: decide qué pasa cuando falta una credencial. Si el proveedor configurado no tiene su clave o su modelo, la aplicación no falla en silencio ni en producción: el chat entra en el mismo modo de degradación que usaría ante una caída, y desde el sprint 3 toda credencial pasa además una prueba de humo antes de construir contra ella.
 
-Esta decisión se relaciona con la arquitectura empresarial de inteligencia artificial. Los modelos evolucionan con rapidez y las dependencias externas pueden cambiar. Diseñar una solución sostenible exige separar aquello que es propio de la organización, como sus datos, definiciones y reglas, de aquello que puede sustituirse, como el servicio generativo utilizado para procesarlos. En Microsoft Foundry, en Groq o en un modelo autoalojado, el índice de 494 fragmentos y las ocho defensas del servidor son exactamente los mismos.
+Esta decisión se relaciona con la arquitectura empresarial de inteligencia artificial. Los modelos evolucionan con rapidez y las dependencias externas pueden cambiar. Diseñar una solución sostenible exige separar aquello que es propio de la organización, como sus datos, definiciones y reglas, de aquello que puede sustituirse, como el servicio generativo utilizado para procesarlos. En Microsoft Foundry, en Groq o en un modelo autoalojado, el índice —1.467 fragmentos en español— y las nueve defensas del servidor son exactamente los mismos.
 
 ## El sistema se degrada sin ocultarlo
 
@@ -288,7 +291,7 @@ El presupuesto mensual objetivo es un techo de US$20 y el costo real observado e
 
 La primera decisión de ahorro ocurre antes del modelo: las preguntas fuera de alcance no consumen tokens. La segunda está en la recuperación: solo se envían los cuatro fragmentos relevantes y no la totalidad del contenido del sitio; con el tope de 180 palabras por fragmento, el contexto medio de una respuesta es de unas 540 palabras, del orden de 800 tokens. La tercera se encuentra en el historial: la aplicación conserva únicamente los 12 mensajes necesarios para mantener coherencia.
 
-El tamaño de las respuestas también se limita, a 600 tokens. Una respuesta más extensa no es automáticamente más útil y puede aumentar el costo, la latencia y la posibilidad de introducir afirmaciones innecesarias. La arquitectura busca producir la explicación suficiente, respaldada por las fuentes adecuadas.
+El tamaño de las respuestas también se limita, hoy a 700 tokens: subió desde 600 el día que la instrucción pasó de pedir dos a cinco frases a pedir dos o tres párrafos. Una respuesta más extensa no es automáticamente más útil y puede aumentar el costo, la latencia y la posibilidad de introducir afirmaciones innecesarias. La arquitectura busca producir la explicación suficiente, respaldada por las fuentes adecuadas.
 
 La selección de proveedor también puede responder a costo, disponibilidad y capacidad. Sin embargo, una alternativa más económica solo resulta válida si conserva los criterios mínimos de grounding, citación y comportamiento que exige la aplicación.
 
@@ -298,7 +301,7 @@ La economía no se mide exclusivamente por el costo de una llamada. Una respuest
 
 <!-- seccion: seguridad-y-limites -->
 
-Una aplicación pública debe asumir que no todas las solicitudes serán legítimas ni estarán orientadas al propósito para el que fue diseñada. Por eso, el chat incorpora límites sobre la frecuencia de las consultas, su longitud, la extensión de las respuestas y el historial conservado, y todos están escritos como números, no como intenciones: 10 preguntas por minuto, 800 caracteres, 600 tokens de salida, 30 segundos, 12 mensajes.
+Una aplicación pública debe asumir que no todas las solicitudes serán legítimas ni estarán orientadas al propósito para el que fue diseñada. Por eso, el chat incorpora límites sobre la frecuencia de las consultas, su longitud, la extensión de las respuestas y el historial conservado, y todos están escritos como números, no como intenciones: 10 preguntas por minuto, 800 caracteres, 700 tokens de salida, 30 segundos, 12 mensajes, y tres códigos de verificación por dirección y por correo cada diez minutos.
 
 La limitación por visitante y por periodo ayuda a contener automatizaciones abusivas, consumo accidental y utilización desproporcionada de la capacidad. No elimina todas las posibilidades de abuso, pero reduce la exposición y proporciona una primera barrera proporcional al alcance de la aplicación.
 
@@ -310,7 +313,55 @@ El servidor compone las instrucciones fundamentales y controla las credenciales 
 
 Estas medidas no convierten el sistema en invulnerable. Representan controles proporcionales a una aplicación pública de alcance delimitado. La seguridad se diseña como una combinación de prevención, contención, visibilidad y capacidad de respuesta.
 
-La publicación responsable también exige no registrar indiscriminadamente el contenido de las conversaciones. La telemetría se limita a lo necesario para comprender la operación, investigar fallas y administrar costos —proveedor, modelo, milisegundos y tokens— y nunca guarda la pregunta ni la respuesta: cero respuestas persistidas, por diseño y por prueba.
+La publicación responsable también exige decidir qué se registra y decirlo en voz alta. Hasta el 20 de septiembre de 2026 la telemetría se limitaba a lo necesario para comprender la operación, investigar fallas y administrar costos —proveedor, modelo, milisegundos y tokens— y no guardaba la pregunta ni la respuesta. Desde el 21 sí las guarda, junto al nombre y el correo de quien las hizo, y eso cambia por completo la conversación sobre privacidad: las tres subsecciones que siguen la cuentan entera, porque un registro que no se explica es justo lo que le critico a otros productos.
+
+## Por qué el chat pide tu nombre y tu correo antes de responder
+
+<!-- seccion: por-que-nombre-y-correo -->
+
+Desde el 21 de septiembre de 2026 este chat tiene puerta. Antes se abría el panel y se preguntaba; hoy, antes de la primera respuesta, pido nombre y correo, y el correo hay que verificarlo con un código de seis dígitos que llega por email. Es lo único del sitio que le exige algo al visitante, así que prefiero explicar el porqué antes de que alguien lo lea como un trámite.
+
+Son dos razones y ninguna es de marketing. La primera es el presupuesto: un chat generativo abierto a internet es una cuenta abierta. Las defensas que ya describí —el corte de temas ajenos, el límite de diez preguntas por minuto, el tope de contexto— contienen el gasto de quien viene a preguntar, no el de quien viene a jugar. Un correo verificado sube el costo de jugar lo suficiente para que deje de tener gracia, sin poner un captcha ni una cuenta de usuario delante de alguien que solo quiere saber si manejo Microsoft Fabric.
+
+La segunda es que quiero saber quién pregunta. Esta hoja de vida existe para conversar con reclutadores, clientes y colegas; si alguien dedica diez minutos a interrogar mi currículum sobre TransMilenio o sobre cómo gobierno un modelo, esa persona me interesa y quiero poder escribirle. El aviso que se acepta lo dice con esas mismas palabras: el nombre, el correo y las preguntas se guardan para que yo sepa quién me escribe y qué se le respondió, y se pueden borrar pidiéndomelo desde Contacto.
+
+Lo que la puerta no es: no hay contraseña, no hay tabla de usuarios, no hay proveedor de identidad externo, no hay perfil que mantener y no se pide un dato más —ni empresa, ni cargo, ni teléfono—. El correo es la identidad y el código es la prueba de que es suyo. Y falla cerrada: si al servidor le falta el secreto con el que firma, responde 503 y no entra nadie. Una barrera que se abre sola cuando está mal configurada no es una barrera, es un adorno.
+
+## El código de seis dígitos: cómo se verifica el correo y por qué el código nunca se guarda
+
+<!-- seccion: codigo-de-seis-digitos -->
+
+El mecanismo cabe en dos párrafos y aun así contiene todas las decisiones que tomaría en un sistema serio. Cuando dejas nombre y correo, el servidor genera un número de seis dígitos con el generador criptográfico del sistema —no con el aleatorio de conveniencia—, calcula su huella SHA-256 mezclada con un secreto que solo vive en el servidor y con tu propio correo, guarda esa huella y te envía el número por email. Lo que queda escrito en la base de datos no sirve para entrar: de la huella no se regresa al código, y como el secreto no está en la base, ni siquiera quien tuviera la base delante podría recalcularla.
+
+El código vive diez minutos y admite cinco intentos. El sexto lo agota aunque sea el correcto, y toca pedir otro. La comparación se hace en tiempo constante, para que la demora de la respuesta no delate cuántos dígitos acertaste. Y pedir códigos tiene su propio freno: tres cada diez minutos por dirección y por correo.
+
+Cuando el código coincide ocurren dos cosas en la misma transacción: la fila del código se borra —es de un solo uso por construcción, no por buena voluntad— y el servidor emite una cookie firmada con HMAC-SHA256 que dice quién eres y hasta cuándo. Dura 30 días, es httpOnly —el JavaScript de la página no la puede leer—, viaja con SameSite=Lax y solo por HTTPS en producción. No es un JWT y no necesita serlo: hay un emisor, un lector y un secreto. Si alguien le cambia un carácter a la firma, el servidor la lee como si no existiera.
+
+De ahí en adelante el chat exige esa cookie. Sin ella responde 401, el panel te devuelve al formulario sin perder la pregunta que ya habías escrito y la reenvía apenas entras. Esa es la parte que más veces probé, porque una barrera que obliga a escribir la pregunta dos veces es una barrera que la gente no cruza.
+
+## Qué datos guarda este chat, quién los lee y cómo pedir que se borren
+
+<!-- seccion: que-datos-guarda-el-chat -->
+
+Sin rodeos, porque es lo que yo querría leer: cada pregunta que se responde aquí queda guardada. La fila lleva tu nombre, tu correo, el idioma, la pregunta tal como la escribiste, la respuesta completa que se te dio, las fuentes que se citaron, el modo en que se resolvió —con el modelo, con la respuesta fija de fuera de alcance o con la búsqueda local— y el costo técnico: proveedor, modelo, tokens y milisegundos. También queda lo que contestó la búsqueda local, que ocurre en tu navegador: el panel la manda al servidor con la misma cookie, para que el registro no tenga huecos según por dónde salió la respuesta.
+
+Lo que no se guarda: ninguna dirección IP, ningún identificador del navegador, ningún rastreo entre sitios y ningún código de verificación —de ese solo queda la huella, y solo mientras está vigente—. En el proveedor del modelo tampoco queda el registro: él recibe el contexto y devuelve el texto; la fila la escribe mi servidor.
+
+Quién lo lee: yo, y nadie más. Las dos tablas viven en la misma base que la votación del roadmap y con el mismo patrón: seguridad a nivel de fila encendida y sin una sola política, de modo que la llave pública que usa el sitio no puede leerlas ni aunque alguien la saque del navegador. Esa llave solo puede ejecutar tres funciones —guardar un código, verificarlo, registrar una conversación—. Leer exige la llave de servicio, que vive en el panel de administración y no sale de ahí.
+
+Cuánto se conserva y cómo se borra: no hay borrado automático, y no voy a inventar una retención que todavía no he decidido. Lo que sí hay es una vía directa: escríbeme desde el formulario de contacto del sitio y borro tus filas. Eso está en el aviso que se acepta al entrar, junto con la ley colombiana que lo regula, la 1581 de 2012. Guardar datos de otra persona obliga a decir qué se guarda, para qué, quién lo ve y cómo se sale.
+
+## Por qué las respuestas son de dos o tres párrafos y no un volcado del corpus
+
+<!-- seccion: respuestas-de-dos-o-tres-parrafos -->
+
+El mismo día que puse la puerta cambié la extensión de las respuestas, y las dos cosas tienen la misma causa: esta base creció mucho. Pasó de unas 30.000 a unas 158.000 palabras por idioma, y el índice saltó de 494 a 1.467 fragmentos en español. Con esa materia prima delante, la instrucción vieja —«responde en dos a cinco frases»— producía respuestas que dejaban fuera justo lo que la persona había venido a buscar: la cifra, el nombre del sistema, el porqué de la decisión.
+
+La regla nueva pide dos o tres párrafos desarrollados, entre 120 y 220 palabras: el primero contesta de frente, los siguientes ponen el contexto y las cifras que traen las fuentes, y el cierre ofrece profundizar en un aspecto concreto. Sin listas y sin encabezados, porque una respuesta de chat con viñetas se lee como un folleto. El tope de salida subió de 600 a 700 tokens para que esos párrafos quepan sin que el modelo se corte a media frase.
+
+Lo que no cambió importa igual. Las fuentes siguen siendo cuatro —el número medido, que no se movió porque el corpus creciera—, el contexto sigue rondando las 540 palabras y la instrucción dice explícitamente que no se vuelque lo que dicen las fuentes: hay que elegir lo que responde la pregunta. Un modelo con más material delante tiende a resumirlo todo, y resumirlo todo es la forma más rápida de no contestar nada.
+
+Hay una tensión honesta aquí y prefiero dejarla escrita: párrafos más largos cuestan más tokens y tardan más, exactamente lo contrario de lo que pide el presupuesto. La acepté porque el costo real observado sigue en US$0 y porque el propósito de este chat no es gastar poco, sino que alguien entienda a qué me dedico sin leerse 25 documentos. Si el gasto sube, la extensión es una perilla y se mueve en una línea.
 
 ## Cómo evalúo el RAG
 
@@ -326,11 +377,11 @@ Las preguntas cubren hechos directos, relaciones entre secciones, formulaciones 
 
 Para la generación, verifico que cada afirmación factual esté sustentada, que no se introduzcan datos ajenos al corpus y que la respuesta conserve el alcance solicitado. Para las citas, compruebo que cada referencia conduce a un destino válido. Y evalúo el comportamiento ante fallas: el sistema debe activar la búsqueda local cuando el proveedor no está disponible, comunicar la degradación y conservar el acceso a los contenidos relevantes. Los costos y la latencia forman parte de la evaluación: una respuesta correcta pero innecesariamente costosa o lenta indica demasiado contexto, historial excesivo o una configuración desproporcionada.
 
-## Las dos mediciones del top-k y la auditoría de vocabulario
+## Las dos mediciones del top-k: por qué entran cuatro fuentes y no tres ni cinco
 
 <!-- seccion: medicion-del-top-k -->
 
-Cuántas fuentes entran a una respuesta no es un número de gusto. El 4 sale de medir, y lo miden los dos conjuntos independientes contra el índice completo. La primera medición fue en el sprint 8, sobre 159 fragmentos, con 48 preguntas propias y 131 de afuera. La segunda, el 20 de septiembre de 2026, sobre los 494 fragmentos, con 75 y 136:
+Cuántas fuentes entran a una respuesta no es un número de gusto. El 4 sale de medir, y lo miden los dos conjuntos independientes contra el índice completo. La primera medición fue en el sprint 8, sobre los 159 fragmentos de entonces, con 48 preguntas propias y 131 de afuera. La segunda, el 20 de septiembre de 2026, sobre 494 fragmentos, con 75 y 136:
 
 | Fuentes por respuesta | Golden set (75 propias) | Banco (136 de afuera) | Contexto medio |
 | --------------------- | ----------------------: | --------------------: | -------------: |
@@ -340,7 +391,11 @@ Cuántas fuentes entran a una respuesta no es un número de gusto. El 4 sale de 
 | **4**                 |               **75/75** |           **136/136** |   537 palabras |
 | 5                     |                   75/75 |               136/136 |   670 palabras |
 
-Con tres fuentes, seis de las 136 preguntas de afuera no traen ninguna de las suyas. Con cuatro no falla ninguna, y subir a cinco no rescata a nadie: solo agranda el contexto un 25 %, y la factura con él. Que dos conjuntos escritos con criterios distintos caigan en el mismo número, dos veces, es la parte que da confianza. Con una sola fuente el golden set acertaría el 59 %; hoy el número vive en un solo sitio del código y el golden set lo ejercita directamente.
+Con tres fuentes, seis de las 136 preguntas de afuera no traen ninguna de las suyas. Con cuatro no falla ninguna, y subir a cinco no rescata a nadie: solo agranda el contexto un 25 %, y la factura con él. Que dos conjuntos escritos con criterios distintos caigan en el mismo número, dos veces, es la parte que da confianza. Con una sola fuente el golden set acertaría el 59 %; hoy el número vive en un solo sitio del código y el golden set lo ejercita directamente. El índice de hoy ya no es el de aquellas dos mediciones —1.467 fragmentos en español, 1.457 en inglés—, y por eso se vuelve a medir cada vez que el corpus cambia: el 4 es un número medido, no una constante heredada.
+
+## El banco como auditoría de vocabulario: ETL, lakehouse y las palabras que el corpus no decía
+
+<!-- seccion: auditoria-de-vocabulario -->
 
 El banco es además una auditoría de vocabulario, y esa es su función más valiosa. Como la búsqueda es léxica, una palabra que el corpus no dice no existe para quien pregunta. Cuando el banco descubrió que «ETL» y «lakehouse» no aparecían en los documentos —yo había escrito «integración de información»—, se corrigió el contenido, no la expectativa. Un léxico obligatorio por documento, derivado del banco y de las skills publicadas, vigila hoy que esas palabras sigan ahí.
 

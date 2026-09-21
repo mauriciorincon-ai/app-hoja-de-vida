@@ -72,6 +72,29 @@ export function verdadesDelSitio() {
   const cv = parse(readFileSync(path.join(ROOT, "data/cv.es.yaml"), "utf8"));
   const certificaciones = cv.certificaciones ?? [];
 
+  // LOS HECHOS DEL PROPIO REPOSITORIO. El corpus usa este sitio como evidencia
+  // («este sitio lleva ocho sprints cerrados y N decisiones registradas»), y esas
+  // cifras envejecen SOLAS: nadie las toca, y aun así dejan de ser ciertas el día
+  // que se mergea un ADR. Los conteos de arriba se derivan de `content/` y del CV;
+  // estos se derivan del repositorio, por la misma razón y con la misma regla:
+  // aquí no se escribe ningún número.
+  // (Precedente 2026-09-21: el corpus afirmaba «21 decisiones de arquitectura»
+  // cuando ya había 24, y nada lo cazó — los seis gates miraban el CONTENIDO del
+  // sitio, ninguno miraba lo que el corpus dice DEL SITIO.)
+  const cuentaMd = (rel, filtro) =>
+    existsSync(path.join(ROOT, rel))
+      ? readdirSync(path.join(ROOT, rel)).filter((f) => f.endsWith(".md") && filtro(f)).length
+      : 0;
+
+  // Un ADR es un archivo numerado; un README o una plantilla en la misma carpeta no lo es.
+  const decisiones = cuentaMd("decisions", (f) => /^\d{3}-/.test(f));
+  const sprintsCerrados = cuentaMd("sprints", (f) => /-summary\.md$/.test(f));
+
+  const ci = path.join(ROOT, ".github/workflows/ci.yml");
+  const jobsCi = existsSync(ci)
+    ? Object.keys(parse(readFileSync(ci, "utf8")).jobs ?? {}).length
+    : 0;
+
   return {
     apps,
     piezas: apps + agentes + investigaciones + tableros,
@@ -81,7 +104,29 @@ export function verdadesDelSitio() {
     "credenciales-obtenidas": certificaciones.filter((c) => !c.estado).length,
     "credenciales-ibm": certificaciones.filter((c) => !c.estado && /^IBM/i.test(c.nombre)).length,
     "credenciales-en-curso": certificaciones.filter((c) => c.estado === "en curso").length,
+    "decisiones-arquitectura": decisiones,
+    "sprints-cerrados": sprintsCerrados,
+    "jobs-ci": jobsCi,
   };
+}
+
+/**
+ * LA PORTADA TAMBIÉN SE CITA. `resumen` y `cuando_usar` no son metadatos
+ * decorativos: `chunksDeAFondo` los emite como el PRIMER fragmento del
+ * documento, así que el chat los lee y los cita igual que a cualquier
+ * subsección. Un número falso ahí llega al visitante exactamente igual, y
+ * hasta hoy ningún gate lo miraba porque todos recorren `subsecciones`.
+ * (Hallazgo 2026-09-21: el resumen del documento del chat anunciaba «48
+ * preguntas propias y 131 de afuera» cuando eran 75 y 136.)
+ */
+export function conPortada(docs) {
+  return docs.map((doc) => ({
+    ...doc,
+    subsecciones: [
+      { id: "portada", titulo: doc.titulo ?? "", texto: `${doc.resumen ?? ""} ${doc.cuando_usar ?? ""}` },
+      ...doc.subsecciones,
+    ],
+  }));
 }
 
 /**
@@ -102,12 +147,18 @@ export function problemasDeCifras(docs, conceptos, verdades) {
       );
     }
     const sustantivos = concepto.sustantivos.map((s) => normalizar(s)).join("|");
+    // El número puede venir con separador de miles a la española —«1.437
+    // fragmentos»—, y la forma con puntos va PRIMERO en la alternancia o el
+    // motor casa «1» y deja «.437» fuera. Sin esto el gate era ciego por
+    // encima de 999 y, peor, leía «1.437» como «437» y lo daba por desmentido
+    // (hallazgo 2026-09-21, al estrenar el concepto del tamaño del índice).
     const re = new RegExp(
-      `\\b(\\d{1,3}|${ALTERNATIVAS_NUMERO})\\s+(?:${sustantivos})\\b`,
+      `\\b(\\d{1,3}(?:\\.\\d{3})+|\\d{1,4}|${ALTERNATIVAS_NUMERO})\\s+(?:${sustantivos})\\b`,
       "g",
     );
     const salvedades = (concepto.salvedades ?? []).map((s) => normalizar(s.frase));
     const contextos = (concepto.contexto ?? []).map((s) => normalizar(s));
+    const previos = (concepto.contexto_previo ?? []).map((s) => normalizar(s));
 
     for (const doc of docs) {
       for (const sub of doc.subsecciones) {
@@ -128,12 +179,47 @@ export function problemasDeCifras(docs, conceptos, verdades) {
             ? texto.slice(m.index + m[0].length, m.index + m[0].length + concepto.ventana)
             : vecindad;
           if (contextos.length && !contextos.some((c) => zona.includes(c))) continue;
+          // `contexto_previo`: hay conceptos que se nombran por DELANTE del número,
+          // no por detrás — «el índice de 494 fragmentos». Mirar solo hacia atrás
+          // confunde ese caso con «la recuperación de los cuatro fragmentos», que
+          // habla del top-k y no del tamaño del índice: el mismo sustantivo, dos
+          // magnitudes que se diferencian en tres órdenes.
+          if (previos.length) {
+            const antes = texto.slice(
+              Math.max(0, m.index - (concepto.ventana_previa ?? 40)),
+              m.index,
+            );
+            if (!previos.some((c) => antes.includes(c))) continue;
+          }
           if (salvedades.some((s) => vecindad.includes(s))) continue;
-          const dicho = /^\d+$/.test(m[1]) ? Number(m[1]) : NUMEROS_ES.get(m[1]);
+          const dicho = /^[\d.]+$/.test(m[1])
+            ? Number(m[1].replace(/\./g, ""))
+            : NUMEROS_ES.get(m[1]);
           if (dicho === valor) continue;
+          // `hitos`: un número que el corpus cita como HISTORIA —de dónde venía el
+          // índice, cuánto aportó cada tanda— no es una afirmación sobre hoy, y
+          // borrarlo empobrecería el documento. Se declara con su razón, como una
+          // salvedad, y así la historia sigue siendo verdad el día que hoy cambie.
+          if ((concepto.hitos ?? []).some((h) => Number(h.valor) === dicho)) continue;
+          // `tolerancia`: hay cifras que se mueven con CADA edición del corpus —el
+          // número de fragmentos del índice es la primera—. Exigirles el valor exacto
+          // vuelve al gate circular: corriges el número, el número cambia. Con una
+          // banda, «del orden de mil cuatrocientos» pasa y «494» no.
+          if (
+            concepto.tolerancia &&
+            Math.abs(dicho - valor) <= valor * Number(concepto.tolerancia)
+          )
+            continue;
+          const admitidos = [
+            concepto.tolerancia
+              ? `hoy son ${valor} (±${Math.round(Number(concepto.tolerancia) * 100)} %)`
+              : `hoy son ${valor}`,
+            ...(concepto.hitos ?? []).map((h) => `${h.valor} como historia (${h.razon})`),
+          ].join("; ");
           problemas.push(
             `${doc.archivo} · «${sub.id}»: dice «${m[0]}» y ${concepto.etiqueta} son ${valor} ` +
-              `(${concepto.fuente}). Una cifra que el propio sitio desmiente es la más cara de todas: ` +
+              `(${concepto.fuente}). Se admite: ${admitidos}. ` +
+              `Una cifra que el propio sitio desmiente es la más cara de todas: ` +
               `el visitante puede contarla.`,
           );
         }

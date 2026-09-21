@@ -5,7 +5,7 @@ resumen: "The argument with a measure: the DP-600 in five months on a Fabric wit
 cuando_usar: "Use this when they ask how he learns a new technology, what he does when the job asks for something he has never used, how long it took him to get certified, what he is studying now, or how he documents and proves what he learned."
 estado: aprobado
 ancla: "#certificaciones"
-actualizado: 2026-09-20
+actualizado: 2026-09-21
 preguntas_de_prueba:
   - "How fast does Henry learn a new technology?"
   - "What evidence does Henry have that he learns fast?"
@@ -89,11 +89,12 @@ are four industrial-engineering criteria —resources are limited and are alloca
 constraint and result—: concrete need, permanence, evidence and opportunity cost.
 
 The first is the concrete need. I prioritize what connects with a problem I already have in hand.
-The DP-600 accompanied the construction of a data platform in Microsoft Fabric. The AI-103 relates
-to my work on applications and agents. The AI-300 goes deeper into the evaluation, observability and
-operation of intelligent solutions. Google Cloud now enters exploration because it would extend
-architecture capabilities I have already developed on Microsoft toward a second ecosystem; I do not
-declare a horizon or real use of BigQuery or Vertex AI as long as no built piece exists.
+The DP-600 accompanied the construction of a data platform in Microsoft Fabric. The AI-103, in
+progress, relates to my work on applications and agents. The AI-300, also in progress, goes deeper
+into the evaluation, observability and operation of intelligent solutions. Google Cloud now enters
+exploration because it would extend architecture capabilities I have already developed on Microsoft
+toward a second ecosystem; I do not declare a horizon or real use of BigQuery or Vertex AI as long
+as no built piece exists.
 
 ## Permanence, evidence and opportunity cost: why I also choose what not to study
 
@@ -368,8 +369,9 @@ incorporate artificial intelligence, I do it within a hybrid architecture: the c
 validations, contracts, transformations and limits; the model intervenes where its generative
 capacity produces necessary value; the sources provide evidence; the controls verify what can be
 checked. Every generative call must have a function, a delimited input and a sufficient reason to
-exist. The AI-103 expands my capacity to build applications and agents under this logic; the AI-300
-strengthens their evaluation and operation once they start being used in a sustained way.
+exist. The AI-103, in progress, expands my capacity to build applications and agents under this
+logic; the AI-300, also in progress, strengthens their evaluation and operation once they start
+being used in a sustained way.
 
 The second is a way of studying. I do not consider a platform's security, recovery or
 fault-tolerance mechanism understood until I have observed what happens when it stops working. The

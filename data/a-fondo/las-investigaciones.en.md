@@ -757,7 +757,7 @@ criteria, the metrics and the permitted conclusions.
 
 AI-103 strengthens the construction of these agents and their retrieval mechanisms and tools.
 AI-300 expands their evaluation, observability and operation. DP-600 contributes the analytical
-architecture needed to organize corpora, records, metrics and results. The purpose is not to
+architecture to organize corpora, records, metrics and results. The purpose is not to
 produce more academic text with less effort. It is to increase the capacity to review, measure
 and reproduce the process without allowing automation to displace scientific judgment.
 

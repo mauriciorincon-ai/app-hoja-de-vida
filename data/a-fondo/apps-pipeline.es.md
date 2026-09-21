@@ -5,7 +5,7 @@ resumen: "El pipeline AI-APPs: seis aplicaciones hermanas más CV Viva, 13 agent
 cuando_usar: "Úsalo cuando pregunten qué ha construido por su cuenta fuera del trabajo, cuántas aplicaciones ha publicado, si tiene código público, cómo es su pipeline de construcción con Next.js, pruebas automatizadas y CI, y qué demuestra cada una de las seis apps de la vitrina."
 estado: aprobado
 ancla: "#vitrina"
-actualizado: 2026-09-20
+actualizado: 2026-09-21
 preguntas_de_prueba:
   - "¿Qué aplicaciones está construyendo Henry?"
   - "¿Por qué construye en público?"
@@ -34,8 +34,12 @@ CÓMO SE ESCRIBE ESTE ARCHIVO
 -->
 
 <!-- El esqueleto del S3 apuntaba a «#apps»; esa sección de la HOME se retiró en
-     la revisión post-S7 y el roadmap se fue a /vitrina/apps. Hoy lo que la HOME
-     enseña de lo construido es la vitrina. Corregido en la migración del S8. -->
+     la revisión post-S7 y hoy lo que la HOME enseña de lo construido es la
+     vitrina. El roadmap propio de CV Viva se retiró entero el 13 de septiembre
+     de 2026: ninguna funcionalidad de este sitio se vota. El roadmap votable
+     que existe es POR APP HERMANA y vive en la página de cada aplicación,
+     dentro de /vitrina/apps. Corregido en la migración del S8 y al día el
+     2026-09-21. -->
 
 <!-- guía (viene del esqueleto de la historia, S3 — la escribió el dueño):
 La visión del pipeline AI-APPs: por qué construyes en público, qué
@@ -76,7 +80,11 @@ No publico credenciales, secretos, información personal, datos internos de orga
 
 También procuro que los repositorios públicos no conviertan la transparencia en una vulnerabilidad. Las configuraciones sensibles se separan del código —los secretos viven solo en el archivo de entorno local, ignorado por git, y en las variables del despliegue—, las dependencias se revisan con una auditoría en cada integración, y las funcionalidades que utilizan servicios externos operan bajo permisos y límites explícitos. Un barrido de secretos con gitleaks bloquea cada commit, en 2 capas: el hook de git para los commits manuales y un hook del agente de código para las escrituras que él hace. Una arquitectura verificable no necesita revelar aquello que debe proteger.
 
-Y una regla dura del pipeline que rige sobre este sitio: cero enlaces. Ningún archivo del repositorio ni campo del proyecto contiene la URL de producción ni la de las vistas previas; la producción se muestra, jamás se entrega. El llamado público de cada app es una lista de espera, sin promesa de otorgamiento, y el barrido que lo vigila corre sobre todos los archivos versionados después del último cambio, no antes.
+## Cero enlaces: la lista de espera y los formularios de contacto del sitio
+
+<!-- seccion: cero-enlaces-y-formularios -->
+
+Y una regla dura del pipeline que rige sobre este sitio, la número 16: cero enlaces. Ningún archivo del repositorio ni campo del proyecto contiene la URL de producción ni la de las vistas previas; la producción se muestra, jamás se entrega. Por eso el llamado público de una aplicación es una lista de espera, sin promesa de otorgamiento, y aparece únicamente donde hay una app: el escaparate de aplicaciones de la vitrina y la ficha de cada una. Los agentes, las investigaciones y los tableros se muestran, pero no se entregan: no llevan lista de espera. Junto a ella hay otras dos maneras de escribirme —la portada tiene un formulario general que pide elegir el motivo entre cinco, un proyecto, una asesoría, una capacitación, una charla o un rol, y ese motivo viaja como asunto del correo; y bajo el roadmap de cada app hermana hay una caja para proponer una funcionalidad, que también llega por correo y no publica nada—. El barrido que vigila la regla de cero enlaces corre sobre todos los archivos versionados después del último cambio, no antes.
 
 ## Procedencia del conocimiento y responsabilidad sobre lo asistido por IA
 
@@ -212,7 +220,7 @@ Lo coordina la Fábrica de AI-APPs, un agente sellado el 2 de julio de 2026 que 
 
 La Fábrica declara tres límites, y prefiero escribirlos a esconderlos: no escribe código de producción —eso ocurre en el repositorio de cada app, jamás en la planeadora—; las fases de lanzamiento y de operación siguen sin validarse en una corrida real, son método escrito y no experiencia; y no hay librerías compartidas vivas entre apps, el reúso viaja estampado en el kit. Su retorno solo cuenta la coordinación eliminada —una estimación de 108 horas al año, con sus supuestos declarados—; el valor comercial del portafolio queda como opción no cuantificada.
 
-Este sitio lleva ocho sprints cerrados así y 21 decisiones de arquitectura registradas en su repositorio. Cada cambio pasa por cuatro jobs de integración continua —calidad, integración contra una base de datos real, pruebas de extremo a extremo con accesibilidad y Lighthouse con presupuesto de rendimiento— y por el barrido de secretos. La infraestructura que lo sostiene está dibujada en un blueprint con su costo real, US$0 al mes, y con su punto único de falla declarado: la cuenta de GitHub, que es el inicio de sesión del hosting y de la base de datos, mitigado con doble factor. Y si la base de datos cae, la votación se declara no disponible; si el proveedor de IA cae, el chat pasa a búsqueda local: ninguno de los dos tumba el sitio.
+Este sitio lleva ocho sprints cerrados así y 25 decisiones de arquitectura registradas en su repositorio. Cada cambio pasa por cuatro jobs de integración continua —calidad, integración contra una base de datos real, pruebas de extremo a extremo con accesibilidad y Lighthouse con presupuesto de rendimiento— y por el barrido de secretos. La infraestructura que lo sostiene está dibujada en un blueprint con su costo real, US$0 al mes, y con su punto único de falla declarado: la cuenta de GitHub, que es el inicio de sesión del hosting y de la base de datos, mitigado con doble factor. Y si la base de datos cae, la votación se declara no disponible; si el proveedor de IA cae, el chat pasa a búsqueda local: ninguno de los dos tumba el sitio.
 
 ## Dos aprobaciones escritas y responsables humanos explícitos
 
@@ -312,13 +320,13 @@ CV Viva, la plataforma desde la que se presenta este contenido, forma parte del 
 
 El contenido se mantiene separado de la presentación y se administra mediante archivos estructurados y control de versiones: la trayectoria, los estudios, los logros, los proyectos, las certificaciones y las skills viven en un archivo YAML por idioma, validado con un esquema Zod en el build. Si el contenido está malformado, el build falla, no la página. Esta decisión permite actualizar la información sin reconstruir manualmente cada página, conservar el historial de los cambios y aplicar reglas comunes sobre fechas, secciones, proyectos y afirmaciones. Editar el archivo y hacer push actualiza a la vez la web, el PDF para sistemas de selección y el chat.
 
-La generación estática reduce complejidad operativa y permite que una parte importante del sitio pueda consultarse sin depender de procesos permanentes en un servidor. Todo el contenido está en el HTML estático: un reclutador, un robot de selección o una descarga sin JavaScript ven la hoja de vida entera, con datos estructurados para buscadores y las etiquetas de idioma alternativo. La arquitectura busca que la experiencia sea rápida, accesible y resistente a fallas, y que las decisiones técnicas respondan al propósito real del producto. Las funcionalidades futuras se votan con un clic y sin registro, y el contador es real, sobre una base de datos con una función atómica: si la base cae, lo dice; nunca inventa un número.
+La generación estática reduce complejidad operativa y permite que una parte importante del sitio pueda consultarse sin depender de procesos permanentes en un servidor. Todo el contenido está en el HTML estático: un reclutador, un robot de selección o una descarga sin JavaScript ven la hoja de vida entera, con datos estructurados para buscadores y las etiquetas de idioma alternativo. La arquitectura busca que la experiencia sea rápida, accesible y resistente a fallas, y que las decisiones técnicas respondan al propósito real del producto. Las funcionalidades que se votan con un clic y sin registro ya no son las de este sitio —CV Viva retiró su propio roadmap en septiembre de 2026 y hoy no somete ninguna funcionalidad suya al voto—, sino las de cada app hermana, en la página que esa aplicación tiene en la vitrina; el contador es real, sobre una base de datos con una función atómica: si la base cae, lo dice; nunca inventa un número.
 
 ## El chat, visto desde el pipeline
 
 <!-- seccion: el-chat-desde-el-pipeline -->
 
-La plataforma incorpora además un chat con recuperación aumentada —RAG— que responde sobre la evidencia publicada en el propio sitio. Su función no es improvisar una versión persuasiva de mi perfil, sino ayudar a recorrer la información, localizar contenidos relevantes y responder mediante referencias que puedan ser verificadas. Cómo funciona por dentro, con todos sus números, está en su propio documento; aquí va lo que el pipeline le exige.
+La plataforma incorpora además un chat con recuperación aumentada —RAG— que responde sobre la evidencia publicada en el propio sitio. Su función no es improvisar una versión persuasiva de mi perfil, sino ayudar a recorrer la información, localizar contenidos relevantes y responder mediante referencias que puedan ser verificadas. Desde el 21 de septiembre de 2026 tiene puerta: quien quiera conversar deja su nombre y su correo, acepta el aviso de tratamiento de datos y confirma el correo con un código de seis dígitos que le llega por email; cada conversación queda registrada. Cómo funciona por dentro, con todos sus números y con el detalle de esa puerta, está en su propio documento; aquí va lo que el pipeline le exige.
 
 El chat separa el modelo del conocimiento. El proveedor generativo puede cambiar —cinco están adaptados, y se elige por variable de entorno—, pero las fuentes autorizadas permanecen en el contenido versionado del sitio. Esta separación evita que la identidad profesional dependa de la memoria o de las preferencias de un modelo específico.
 
@@ -364,6 +372,6 @@ Esta disciplina conecta directamente con mi trayectoria profesional. La Ingenier
 
 El pipeline también demuestra que no entiendo la inteligencia artificial como un sustituto indiscriminado del trabajo profesional. La utilizo como parte de un sistema gobernado, donde las decisiones de propósito, prioridad, aceptación y riesgo permanecen explícitas. El agente acelera y organiza, pero no elimina la responsabilidad sobre el resultado.
 
-Construir mediante este sistema me permite transformar cada proyecto en algo más que un entregable. Cada pieza deja decisiones, componentes, pruebas, patrones y aprendizajes que reducen la incertidumbre de la siguiente. El portafolio crece no solo en cantidad, sino también en memoria, consistencia y capacidad acumulada: 24 sprints cerrados en el pipeline, 21 decisiones registradas solo en este sitio.
+Construir mediante este sistema me permite transformar cada proyecto en algo más que un entregable. Cada pieza deja decisiones, componentes, pruebas, patrones y aprendizajes que reducen la incertidumbre de la siguiente. El portafolio crece no solo en cantidad, sino también en memoria, consistencia y capacidad acumulada: 24 sprints cerrados en el pipeline, 25 decisiones registradas solo en este sitio.
 
 Esa es la afirmación principal que el pipeline permite demostrar: no construyo aplicaciones, agentes, investigaciones y tableros como ejercicios aislados. Construyo una arquitectura de trabajo capaz de convertir problemas en productos verificables, distinguir con rigor entre intención y resultado, aprender de cada ciclo y elevar progresivamente el estándar con el que abordo el siguiente.

@@ -5,7 +5,7 @@ resumen: "Dos experiencias con agentes: 27 construidos con el proceso core de Ve
 cuando_usar: "Úsalo cuando pregunten si ha construido agentes de inteligencia artificial, qué frameworks de agentes ha usado (n8n, Claude Code), cómo monitorea un agente en producción, qué es ARKHÉ, cómo evita que el modelo invente, y su experiencia con IA generativa y modelos de lenguaje grandes."
 estado: aprobado
 ancla: "/vitrina/agentes"
-actualizado: 2026-09-20
+actualizado: 2026-09-21
 preguntas_de_prueba:
   - "¿Qué experiencia tiene Henry construyendo agentes de IA?"
   - "¿Cómo se monitorea un agente de IA en producción?"
@@ -137,7 +137,7 @@ También debía observarse el costo de la operación. En soluciones generativas,
 
 Distingo dos cosas que suelen confundirse. La telemetría le sirve al equipo responsable para entender el comportamiento técnico de una solución. La transparencia le sirve a la persona afectada para saber qué información se conserva y se usa sobre ella. Ambas son necesarias, pero responden a audiencias y responsabilidades distintas: en Vesting construí la primera; Dash Agent AI, años después, nació de la segunda.
 
-La lección principal fue que no es posible gobernar una solución inteligente cuya operación permanece invisible. Cuanto mayor es la capacidad del agente para recomendar, coordinar herramientas o ejecutar acciones, más importante resulta conservar evidencia sobre lo que recibió, los componentes que utilizó y el resultado que produjo. Esa lección es la que hoy lleva a que el chat de este sitio registre cada respuesta con su costo y sus citas, y a que mis 13 agentes publicados dejen evidencia de cada corrida.
+La lección principal fue que no es posible gobernar una solución inteligente cuya operación permanece invisible. Cuanto mayor es la capacidad del agente para recomendar, coordinar herramientas o ejecutar acciones, más importante resulta conservar evidencia sobre lo que recibió, los componentes que utilizó y el resultado que produjo. Esa lección es la que hoy lleva a que el chat de este sitio guarde, desde septiembre de 2026, una fila entera por respuesta —quién preguntó, qué preguntó, qué se le contestó, con qué fuentes, en qué modo, con qué proveedor, cuántos tokens y cuántos milisegundos— y no apenas su costo; y a que mis 13 agentes publicados dejen evidencia de cada corrida. Ahí las dos caras se encontraron: la telemetría es mía, y la transparencia es de quien pregunta, que antes de escribir su primera línea marca un aviso donde dice qué se guarda de él y cómo pedir que se borre.
 
 ## Dash Agent AI y la transparencia sobre el contexto
 

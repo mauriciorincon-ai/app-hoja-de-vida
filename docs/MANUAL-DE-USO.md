@@ -586,7 +586,7 @@ auditar el corpus de partida —213 rojos— y se quedan vigilando lo que escrib
 
 | Gate                        | Qué exige                                                                                                                                                                                                                   | Dónde se ajusta                              |
 | --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
-| **Cifras del sitio**        | Cuando nombras cuántas apps, piezas, agentes, investigaciones, tableros o credenciales hay, el número es el que el sitio publica (se deriva de `content/` y `cv.es.yaml`). «Cinco apps» con seis publicadas se pone en rojo. | `tests/fixtures/cifras-a-fondo.yaml`         |
+| **Cifras del sitio**        | Cuando nombras cuántas apps, piezas, agentes, investigaciones, tableros o credenciales hay, el número es el que el sitio publica (se deriva de `content/` y `cv.es.yaml`). «Cinco apps» con seis publicadas se pone en rojo. **Y desde el 2026-09-21, también las cifras del propio repositorio:** cuántas decisiones de arquitectura lleva registradas, cuántos sprints cerró, cuántos jobs de integración continua corre y de cuántos fragmentos es el índice del chat. | `tests/fixtures/cifras-a-fondo.yaml`         |
 | **Fechas de cargos**        | Una fecha dentro de la frase de un cargo cae dentro de su periodo, y los periodos coinciden con `cv.trayectoria` mes a mes.                                                                                                 | `tests/fixtures/cargos-a-fondo.yaml`         |
 | **Densidad**                | Cada subsección tiene ≤ 400 palabras **y** al menos un dato concreto (una cifra, un mes, una herramienta o una organización del CV). Una subsección de opinión sin nada verificable no se publica.                        | `scripts/a-fondo-coherencia.mjs`             |
 | **Léxico obligatorio**      | Cada documento dice literalmente las palabras con las que alguien de afuera lo buscaría (la búsqueda es léxica).                                                                                                            | `tests/fixtures/lexico-a-fondo.yaml`         |
@@ -595,6 +595,25 @@ auditar el corpus de partida —213 rojos— y se quedan vigilando lo que escrib
 
 Cuando agregues un cargo, una cifra del sitio o un tema nuevo, el fixture correspondiente se
 actualiza en el mismo commit; el gate te dirá cuál.
+
+**Por qué el gate de cifras creció (2026-09-21).** Los seis vigilaban lo que el corpus dice del
+CONTENIDO del sitio. Ninguno vigilaba lo que el corpus dice **del sitio como obra**, y esas
+cifras envejecen solas: el día que se mergea una decisión de arquitectura, la frase «este sitio
+lleva 21 decisiones registradas» deja de ser verdad sin que nadie toque el corpus. Pasó
+exactamente así: el corpus decía 21 cuando ya había 24, y seis gates verdes no lo vieron. Ahora
+la verdad se deriva de `decisions/`, de los resúmenes de sprint, de `ci.yml` y del índice que
+construye el build, igual que las otras: **aquí tampoco se escribe ningún número a mano**.
+
+Dos detalles de ese gate, porque el corpus los necesita:
+
+- **La historia del índice se declara.** El índice nació con 28 fragmentos, las fichas de la
+  vitrina aportaron 226, con el corpus v2 eran 494 y hoy son del orden de 1.400. Contar de dónde
+  viene es parte del argumento y es verdad, así que el número de cada etapa se declara como hito
+  en `tests/fixtures/cifras-a-fondo.yaml`, con su razón escrita al lado. Lo que el gate no deja
+  pasar es presentar un número de otra época como si fuera el de hoy.
+- **El tamaño del índice admite una banda del 5 %.** Ese número se mueve con cada párrafo que
+  escribas; exigirlo exacto volvería el gate circular, porque corregir la cifra la mueve otra
+  vez. Con la banda, «del orden de 1.400 fragmentos» pasa y «494» no.
 
 **El ritmo:** escribe un documento → déjalo en `borrador` todo el tiempo que quieras → cuando
 esté bien, `aprobado` + su gemelo en inglés → commit + push. En local puedes comprobarlo con

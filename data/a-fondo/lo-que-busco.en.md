@@ -5,7 +5,7 @@ resumen: "What problem I want to solve, the four types of role where I perform b
 cuando_usar: "Use this when they ask what type of role he is looking for, whether he works remotely or would relocate to another country, which city he lives in, his English level, what motivates him, what sets him apart from other candidates, why hire him, or how he prefers a selection process."
 estado: aprobado
 ancla: "#contacto"
-actualizado: 2026-09-20
+actualizado: 2026-09-21
 preguntas_de_prueba:
   - "What kind of position is Henry looking for?"
   - "Is he open to relocating or to remote work?"
@@ -235,7 +235,7 @@ If a responsibility or technology is not part of my direct experience, I say so 
 
 My experience shows that I can incorporate new knowledge quickly —DP-600 in five months on a platform with less than a year on the market—, but I do not use that ability as a substitute for the experience a responsibility demands. When I need to learn, I establish the sources, the expected results, the practical exercises and the evidence with which I will demonstrate the mastery acquired.
 
-I also invite examining my portfolio during the process. The 32 pieces —applications, agents, research lines, dashboards— and the presentation platform itself, this site, make it possible to evaluate capabilities that a résumé can only describe. I prefer a hiring decision to be based on observable evidence and on the quality of reasoning, not only on personal claims. The contact form on this page is the shortest path.
+I also invite examining my portfolio during the process. The 32 pieces —applications, agents, research lines, dashboards— and the presentation platform itself, this site, make it possible to evaluate capabilities that a résumé can only describe. I prefer a hiring decision to be based on observable evidence and on the quality of reasoning, not only on personal claims. To write to me, the shortest path is the general form on the home page: it asks for the name, the email, the message and a reason among five —a project, consulting, training, a talk or a role—, and that reason travels as the subject of the email, so that a conversation about a position reaches me marked as such. That form is not the same as the waiting list of the applications: that one lives in the apps showcase and is for requesting access to one of them, not for talking with me.
 
 ## What I want to build in my next stage
 

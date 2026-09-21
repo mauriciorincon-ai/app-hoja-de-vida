@@ -5,7 +5,7 @@ resumen: "Two experiences with agents: 27 built with Vesting's core process on n
 cuando_usar: "Use this when they ask whether he has built artificial intelligence agents, which agent frameworks he has used (n8n, Claude Code), how he monitors an agent in production, what ARKHÉ is, how he keeps the model from making things up, and his experience with generative AI and large language models."
 estado: aprobado
 ancla: "/vitrina/agentes"
-actualizado: 2026-09-20
+actualizado: 2026-09-21
 preguntas_de_prueba:
   - "Has Henry built artificial intelligence agents in production?"
   - "How is an AI agent monitored in production?"
@@ -272,10 +272,14 @@ born from the second.
 
 The main lesson was that it is not possible to govern an intelligent solution whose operation
 remains invisible. The greater the agent's ability to recommend, coordinate tools or execute
-actions, the more important it becomes to keep evidence about what it received, the components
-it used and the result it produced. That lesson is what today leads the chat on this site to
-record each answer with its cost and its citations, and my 13 published agents to leave evidence
-of every run.
+actions, the more important it becomes to keep evidence about what it received, the components it
+used and the result it produced. That lesson is what today leads the chat on this site to store,
+since September 2026, a whole row per answer —who asked, what they asked, what they were answered,
+with which sources, in which mode, with which provider, how many tokens and how many milliseconds—
+and not merely its cost; and my 13 published agents to leave evidence of every run. That is where
+the two sides met: the telemetry is mine, and the transparency belongs to whoever asks, who before
+writing their first line ticks a notice that says what is stored about them and how to ask for it to
+be deleted.
 
 ## Dash Agent AI and transparency about the context
 

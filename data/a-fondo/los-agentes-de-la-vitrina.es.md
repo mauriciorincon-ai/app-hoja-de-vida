@@ -5,7 +5,7 @@ resumen: "Los 13 agentes publicados, uno a uno, en cuatro familias: qué promete
 cuando_usar: "Úsalo cuando pregunten qué agentes tiene publicados en su portafolio, para qué sirve cada uno de los trece agentes de la vitrina, qué es un harness, cómo controla la calidad con gates humanos y carnadas, y qué comparten los trece."
 estado: aprobado
 ancla: "/vitrina/agentes"
-actualizado: 2026-09-20
+actualizado: 2026-09-21
 preguntas_de_prueba:
   - "¿Qué son los trece agentes de la vitrina y qué no son?"
   - "¿Qué comparten los trece agentes de la vitrina?"
@@ -113,7 +113,7 @@ en un manuscrito, cosa que un lint verifica dos veces. La Fábrica no escribe c�
 producción, no ha validado sus fases de lanzamiento y operación en una corrida real, y no tiene
 librerías compartidas: son sus tres límites declarados.
 
-## Cómo nace un agente: la constitución, los comandos y los gates
+## Cómo nace un agente en Claude Code: la constitución, los comandos y los gates de calidad
 
 <!-- seccion: como-nace-un-agente -->
 

@@ -5,7 +5,7 @@ resumen: "Governance set up three times —co-led in banking, designed from scra
 cuando_usar: "Use this when they ask about data or artificial intelligence governance, the ISO 42001 standard, data policies and guidelines, personal and sensitive data, traceability of information, who decides who sees which data, responsible use of AI, or how he documents what he does."
 estado: aprobado
 ancla: "#skills"
-actualizado: 2026-09-20
+actualizado: 2026-09-21
 preguntas_de_prueba:
   - "What experience does Henry have in data governance?"
   - "Does Henry know about AI governance and the ISO 42001 standard?"
@@ -240,7 +240,84 @@ practices; I do not reveal the information they operate on.
 
 And I brought it to my showcase: one of the 6 published applications is an anonymizer, because the
 first need of anyone who wants to analyze people's data with artificial intelligence is to stop
-having the people in the data. The rule does not belong to one job: it is mine.
+having the people in the data. The rule does not belong to one job: it is mine. And since September
+2026 it stopped applying only to what I do for others: this very CV started collecting personal
+data, and what follows tells which data and how it is governed.
+
+## What personal data this site collects: name and email to use the chat
+
+<!-- seccion: datos-personales-de-este-sitio -->
+
+This CV stopped being a site that asks for nothing, and it is worth saying so before someone finds
+it out on their own. Throughout its development, the only thing that reached a database was a
+roadmap vote —today, the one of each sibling application—, with no name, no email and no trace that
+would allow anyone to know who had voted: the written rule was zero personal information. Since 21
+September 2026 there is one exception, and it is deliberate: to talk with the chat you have to leave
+**a name and an email**.
+
+The purpose is concrete and travels written into the notice the visitor ticks before sending
+anything: that I know who is writing to me and what they were answered, and that the conversation
+—and the token budget that pays for it— is not spent on traffic with no real interest in my career.
+None of that is left implicit. The consent checkbox names **Law 1581 of 2012**, lists the three
+pieces of data that are stored —name, email and questions—, explains what they are for and says how
+to ask for deletion: by writing to me from the contact section. Without that box ticked, the server
+rejects the request; it is not decoration on the form, it is a validation that returns an error.
+
+It is exactly what I demand of an institution when it processes people's data: **authorization from
+the data subject, a declared purpose and a channel to revoke it**. The difference is that here the
+data controller is me, and the evidence that the control exists is not a filed policy but the code
+and the database migration that anyone can read in the public repository of this CV.
+
+## The email verification code: six digits the database never stores
+
+<!-- seccion: codigo-de-verificacion -->
+
+The email is not taken on trust: it is checked. The server generates a **six-digit** code, sends it
+to that address and keeps only its **hash** —SHA-256 computed with a secret that lives only on the
+server and with the email itself—, never the code in the clear. That means not even I can read
+anyone's code: what the table holds is a sixty-four-character fingerprint that serves to compare and
+for nothing else. The code is valid for **ten minutes** and allows **five attempts**; the sixth uses
+it up even if it is the right one, and the row disappears on verification, on expiry or on
+exhaustion.
+
+Once the email is verified, the server issues a **signed cookie** with HMAC-SHA256, unreachable from
+the page's JavaScript, that lasts **thirty days**. There is no password, there is no users table and
+there is no identity provider in between: the email is the identity and the code is the proof that
+it belongs to whoever typed it. Without that cookie, the chat route answers with an authorization
+error and the panel returns the visitor to the gate without losing the question they had already
+written.
+
+All of that is **minimization** applied with engineering judgement: keeping the minimum that makes
+the control work and nothing that would only serve to know more. For the same reason neither the IP
+address nor the browser of whoever asks is recorded, although both would have been free to capture.
+A piece of data that is not collected is the only one that afterwards does not have to be protected,
+nor audited, nor deleted.
+
+## What the chat conversation log stores, who can read it, and the visitor's privacy
+
+<!-- seccion: registro-y-privacidad-del-visitante -->
+
+Every answered question leaves a row: name, email, language, the question exactly as it was typed,
+the full answer, the sources that were cited, the mode in which it was resolved —with the model,
+with the local search, or refused for falling outside the topic—, the provider, the model, the
+tokens consumed and the milliseconds it took. It is the telemetry I built at Vesting brought home to
+my own house, with one difference that changes everything: here the event has a name, and that is
+why it needs a notice.
+
+What I use it for, with no detours: to know what I am really asked, which is almost never what one
+assumes; to find the question the corpus did not know how to answer and then write the document that
+was missing; to watch the cost of each answer against the declared budget; and to know who took an
+interest in my work so that I can reply to them. There is no profiling, there is no advertising and
+there are no analytics third parties: the log does not leave that database.
+
+The technical control is the same pattern with which I already protected the voting, hardened
+because now there really is people's data. Both tables have **row-level security (RLS) turned on and
+not a single policy**, which in practice means that the anonymous role the browser talks with cannot
+read a single row. All that role can do is three write functions declared **SECURITY DEFINER**, with
+permissions granted one by one: store a code, verify and consume it, and log a conversation.
+**Reading is exclusively mine**, with the service key, from the database administration panel.
+Retention is decided by me, it is declared as a decision and not as an automatism, and the notice
+says how to ask for deletion: I do not promise a scheduled purge that does not exist.
 
 ## Artificial intelligence governance is a continuation and an extension
 
@@ -446,8 +523,12 @@ chosen was chosen.
 Every persistent output produced by a model must comply with a verifiable structure: a schema that
 is validated before saving. The system cannot treat as a valid asset any generated content merely
 because it has a convincing form. Schemas, validators and deterministic controls protect what can be
-checked through explicit rules; the chat of this CV, for example, does not persist free text from a
-model in any database.
+checked through explicit rules. The chat of this CV forces the rule to be stated precisely: since
+September 2026 it does archive the model's answer as it stands, as text, in the conversation log,
+because the purpose of that log is to know what was answered. What remains forbidden is what really
+mattered: no output of the model is interpreted, executed, or turned into an asset that another
+decision of the system depends on. A text that is stored in order to be read is not the same as a
+text that is obeyed.
 
 Incorporating generative artificial intelligence also demands a justified decision: **code first**.
 Before using a model, I must establish which characteristic of the problem requires interpretation,
