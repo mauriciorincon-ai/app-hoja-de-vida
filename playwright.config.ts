@@ -5,7 +5,18 @@ export default defineConfig({
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
-  reporter: process.env.CI ? "github" : "list",
+  // TOPE DE LA CORRIDA ENTERA. Un test colgado ya muere por su propio tope de
+  // 30 s, así que un silencio más largo significa que lo colgado está FUERA de
+  // un test: el arranque de un worker, una fixture o el navegador. Eso no lo
+  // corta nada, y sin este tope la corrida se queda muda hasta el límite de
+  // seis horas de GitHub, sin decir jamás qué se quedó a medias.
+  // Al saltar, Playwright imprime el resumen y NOMBRA lo que no terminó, que
+  // es justo lo que faltó para diagnosticar. Medido: la suite entera tarda
+  // 1,4 min en local con tres workers y ~4 min en la CI.
+  // (2026-09-22: la CI se colgó dos veces tras 314 de 360 pruebas, 59 y 24
+  // minutos de silencio absoluto, y hubo que cancelar para leer los registros.)
+  globalTimeout: process.env.CI ? 15 * 60_000 : undefined,
+  reporter: process.env.CI ? [["github"], ["line"]] : "list",
   use: {
     baseURL: "http://localhost:3000",
     trace: "on-first-retry",
