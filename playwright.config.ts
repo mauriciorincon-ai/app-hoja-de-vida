@@ -27,10 +27,22 @@ export default defineConfig({
   ],
   webServer: {
     // Build de producción: los e2e validan el HTML estático real (gate ATS/SEO)
-    command: "pnpm build && pnpm start",
+    // El servidor se arranca SIN la capa de pnpm: `pnpm start` mete un proceso
+    // intermedio entre Playwright y `next`, y al apagar quedaba el nieto vivo
+    // —GitHub lo delataba al final del job: «Terminate orphan process:
+    // next-server»—. Con el binario directo, lo que Playwright mata ES el
+    // servidor.
+    command: "pnpm build && ./node_modules/.bin/next start",
     url: "http://localhost:3000/es",
     reuseExistingServer: !process.env.CI,
     timeout: 240_000,
+    // APAGADO ACOTADO. Sin esto, Playwright pide el cierre y espera para
+    // siempre: la corrida del 2026-09-22 terminó sus 360 pruebas en 3 min 41 s
+    // y se quedó colgada en el apagado hasta el tope global, dos veces, también
+    // en el job que solo corre las diez pruebas de votación —o sea, nada que
+    // ver con el contenido—. Ahora se pide con SIGTERM y, si en diez segundos
+    // no se ha ido, se mata.
+    gracefulShutdown: { signal: "SIGTERM", timeout: 10_000 },
     // Playwright descarta el stdout del webServer por defecto: sin esto los
     // logs Pino del server son invisibles en CI (antídoto K3, supabase-en-ci).
     stdout: "pipe",
