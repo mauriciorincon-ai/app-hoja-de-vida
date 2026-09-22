@@ -179,21 +179,56 @@ Y verificado en la CI después: `e2e` e `integration` en verde, con conclusión 
 de los cuatro trabajos **no llegaron a usarse** —los trabajos fallaron antes— y siguen sin haberse
 visto fallar. Quedan como red de seguridad del piso de arriba, declarada aquí sin histórico.
 
-### Lighthouse: un rojo de 2,8 milisegundos que no era de esta rama
+### Lighthouse: el gate estaba roto desde el sprint 001, y mordió aquí
 
 En la misma corrida cayó `lighthouse`: el *Time to Interactive* de `/es/vitrina/tableros` dio
-**4.002,79 ms contra un tope de 4.000** — 0,07 % por encima, con las tres corridas rozando la
-línea (4.047 / 4.031 / 4.003).
+**4.002,79 ms contra un tope de 4.000**. La primera lectura fue «varianza del runner», y estaba
+mal: con dos corridas de tres, **seis de nueve mediciones quedaron por encima** (4.047 · 4.031 ·
+4.003 y 4.134 · 4.011 · 4.007). El centro de la distribución cae SOBRE la línea, así que el gate
+fallaba más veces de las que pasaba. Relanzar no lo arreglaba: lo escondía una de cada tres veces.
 
-No lo causó este trabajo, y se puede demostrar sin re-correr nada:
-`git diff --name-only origin/main...HEAD` no toca **ni un archivo** de `src/`, de `public/` ni de
-los datos que se publican; esa página se sirve igual que en `main`. Y el corpus no puede llegar
-hasta ahí: el panel del chat se monta con `dynamic` **solo al hacer clic** y el índice se descarga
-dentro del panel, así que Lighthouse —que nunca lo abre— jamás lo pide.
+No lo causó esta rama, y se demuestra sin re-correr nada: `git diff --name-only origin/main...HEAD`
+no toca **ni un archivo** de `src/`, de `public/` ni de los datos que se publican. Y el corpus no
+puede llegar hasta ahí: el panel del chat se monta con `dynamic` **solo al hacer clic** y el índice
+se descarga dentro del panel, así que Lighthouse —que nunca lo abre— jamás lo pide.
 
-Relanzado el **mismo commit**, pasó. Era lentitud del runner sobre una página que ya vivía en el
-filo. **No se tocó el presupuesto:** aflojar el número por detrás para que un rojo se calle es
-justo lo que la regla 14 persigue. Queda anotado abajo como decisión del dueño.
+El dato que decidió: en la corrida que sí pasó, `categories:performance >= 0.9` dio verde en las
+quince URLs, **esa incluida**. La página no es lenta por el criterio con que Google puntúa; desde
+Lighthouse 10 el TTI pesa **cero** en esa puntuación, porque Google lo retiró por ruidoso y puso el
+*Total Blocking Time* en su lugar.
+
+Y este repositorio ya lo había predicho. El ADR-006, del sprint 001, llamaba al TTI «a deprecated
+lab metric» y proponía literalmente *«or replacing the metric with TBT»*; su enmienda del sprint
+003 estableció el corolario —un presupuesto clavado en el valor medido convierte la CI en cara o
+sello— y lo aplicó **solo al LCP**. El TTI se quedó clavado dos meses. Esto paga esa mitad:
+**ADR-026**, `interactive` sale y entra `total-blocking-time <= 200 ms`.
+
+**El umbral se midió, no se estimó** (y de paso contestó la tercera pregunta de la regla 14). Medir
+en local habría mentido —esta Mac es mucho más rápida que el runner— y `lhci assert` solo imprime
+valores de las aserciones que **fallan**. Así que el presupuesto viajó una corrida en **0**,
+deliberadamente rojo (`5e1c97f`): eso imprimió la cifra real de las quince URLs y, a la vez, probó
+que el gate **puede** fallar — si el nombre de la métrica hubiera estado mal, Lighthouse la habría
+ignorado en silencio y un techo de 0 habría pasado en verde.
+
+| | TBT |
+| --- | --- |
+| Peor mediana por URL (`/es`) | 84 ms |
+| Mejor mediana | 26 ms |
+| `/es/vitrina/tableros`, la que rompía el TTI | **38 ms** |
+| Las 45 corridas | p50 43 · p90 67 ms |
+| Valores por encima de 200 ms, de 45 | **1** (arranque en frío) |
+
+La página que llevaba todo el día bloqueando el merge está **a mitad de tabla** en bloqueo real del
+hilo principal: la confirmación más limpia de que el TTI medía la hidratación del framework y no
+algo que el visitante sufra. Los 200 ms son el umbral «bueno» del propio Lighthouse y el mismo
+número que el INP del DoD, así que la línea está tomada prestada, no inventada: 2,4× de holgura
+sobre la peor mediana y 3× sobre el p90.
+
+**Esto no es aflojar el techo.** Cambia QUÉ se vigila, de una métrica que su propio fabricante
+deprecó a la que la reemplazó; ningún incumplimiento quedó excusado. El único valor por encima de
+200 fue un arranque en frío (1107, primera corrida de la primera URL); si algún día `median-run`
+llega a elegir una así, el arreglo es **calentar el servidor antes de recolectar**, no subir el
+techo.
 
 ## Lo que queda para el dueño
 
@@ -205,10 +240,8 @@ justo lo que la regla 14 persigue. Queda anotado abajo como decisión del dueño
   «Profesional de Análisis Post-Operacional») y el sitio los abrevia en los tres casos. Los dos
   son ciertos y el patrón es consistente, así que no se tocó nada: igualarlos es decisión suya, y
   en cualquiera de las dos direcciones.
-- **El presupuesto de rendimiento vive en el filo, y es decisión suya.** `/es/vitrina/tableros`
-  marcó 4.047 / 4.031 / 4.003 ms de *Time to Interactive* contra un tope de 4.000. Relanzado el
-  mismo commit pasó, así que hoy es una moneda al aire: **cualquier PR futuro puede caer por esto
-  sin que nadie haya roto nada**, y un gate que falla al azar enseña a ignorar los rojos. Las
-  salidas son dos y ninguna es tocar el número a escondidas: hacer más liviana esa página —es la
-  más pesada de las quince— o subir el tope con una razón escrita y su fecha. No se hizo aquí
-  porque esta rama no toca esa página y el arreglo merece su propio trabajo.
+- **Nada pendiente del presupuesto de rendimiento: quedó decidido y resuelto** (ADR-026). Se
+  cambió la métrica vigilada, no el techo. Lo que sí vale la pena mirar con calma algún día es el
+  arranque en frío de la primera URL que recolecta Lighthouse, que midió 1107 ms de TBT contra
+  medianas de 26 a 84: hoy `median-run` lo descarta, y si dejara de hacerlo el arreglo es calentar
+  el servidor, no subir la línea.
