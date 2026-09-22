@@ -124,7 +124,7 @@ The two fact tables are deliberately not related to each other, because the enti
 
 The source brings nine traps. The one that taught me the most: the budget metrics arrive cumulative within the year, and the first version of my de-accumulation lost two out of every three pesos without any query failing. A baseline written in Python on the raw files caught it by arithmetic —19 rows per series where there can only be 12 months— before it reached Power BI, and recovered 65% of the value. And the 21 contracts with impossible values —they add up to 8,909 trillion declared; the largest claims to be worth thirteen times the entire national budget under a contracting method reserved for the smallest purchases— are not deleted silently: they are excluded from the fact table and published one by one, with their entity, their contracting method and the value they declared.
 
-The model: 18 tables, 16 relationships and 44 DAX measures, with the four steps of the funnel that can only go down. The findings: in 2025, 77.3% of contracts were direct contracting, but in money terms 51.8% —direct contracting dominates in number; the large contracts do go to tender—; 1.08 million suppliers for 4.37 million contracts, and 10% of them concentrate 88.3% of the money.
+The model: 18 tables, 16 relationships and 44 DAX measures, with a four-step funnel that can only go down. The findings: in 2025, 77.3% of contracts were direct contracting, but only 51.8% in money —direct contracting dominates in number; the large contracts do go to tender—; 1.08 million suppliers for 4.37 million contracts, and 10% of them concentrate 88.3% of the money.
 
 ## Energy and climate: seven open sources, one model
 

@@ -5,7 +5,7 @@ resumen: "La raíz industrial con sus métodos: BPMN con Bizagi en cuatro empres
 cuando_usar: "Úsalo cuando pregunten por su raíz de ingeniería industrial: modelado de procesos en BPMN con Bizagi, simulación de eventos discretos con FlexSim, estudio de tiempos y balanceo de líneas, capacidad y variabilidad, ISO 9001:2015, mejora continua, metodologías ágiles y para qué sirve todo eso en un puesto de datos."
 estado: aprobado
 ancla: "#skills"
-actualizado: 2026-09-20
+actualizado: 2026-09-21
 preguntas_de_prueba:
   - "¿Qué sabe Henry de modelado de procesos y simulación?"
   - "¿Ha usado Bizagi o FlexSim?"
@@ -37,7 +37,7 @@ CÓMO SE ESCRIBE ESTE ARCHIVO
 
 <!-- seccion: la-raiz -->
 
-Soy Ingeniero Industrial de la Pontificia Universidad Javeriana, con énfasis en Inteligencia Analítica de Datos, y cursé también estudios de Diseño Industrial en la misma universidad, entre 2009 y 2016. Antes de especializarme en plataformas de datos, Power BI, aplicaciones inteligentes y agentes de IA, aprendí a comprender procesos, modelar sistemas, analizar restricciones, distribuir recursos y diseñar soluciones alrededor de las personas que deben utilizarlas.
+Soy Ingeniero Industrial de la Pontificia Universidad Javeriana, con énfasis en Inteligencia Analítica de Datos, y cursé también estudios de Diseño Industrial en la misma universidad: la ingeniería entre 2009 y 2016, el diseño entre 2011 y 2016. Antes de especializarme en plataformas de datos, Power BI, aplicaciones inteligentes y agentes de IA, aprendí a comprender procesos, modelar sistemas, analizar restricciones, distribuir recursos y diseñar soluciones alrededor de las personas que deben utilizarlas.
 
 Esta raíz explica una parte importante de mi diferencial profesional. Cuando enfrento un problema de datos, no comienzo por la tabla, la visualización o el modelo. Comienzo por comprender el sistema que produce la información: quién interviene, qué actividad realiza, qué entradas necesita, qué resultado genera, qué dependencias existen y dónde aparecen esperas, errores, transferencias o pérdidas de información.
 

@@ -316,7 +316,7 @@
     <div class="pagina">
       <header>
         <p class="eyebrow">
-          CV Viva · Guía de prueba viva y acumulativa · v9.1 · chat/registro + a fondo v2 (el
+          CV Viva · Guía de prueba viva y acumulativa · v9.2 · el corpus alineado + chat/registro + a fondo v2 (el
           detalle) + revisión post-S8 · 2026-09-12
         </p>
         <h1>Guía de prueba</h1>
@@ -778,6 +778,21 @@
               tres párrafos, concreta, sin volcar el documento, y ofrece
               profundizar?
               <span class="origen origen-nuevo">Nuevo · chat/registro</span
+              ><span class="minimo">⭐ mínimo</span></label
+            >
+          </li>
+          <li>
+            <input type="checkbox" id="f8" /><label for="f8"
+              >⭐ <strong>El chat sabe explicar su propia puerta.</strong> Con el
+              proveedor real, pregúntale tres cosas sobre él mismo:
+              «¿por qué me piden el nombre y el correo?», «¿qué datos guardan
+              sobre mí y quién los lee?» y «¿puedo pedir que borren mis datos?».
+              Las tres tienen que contestarse con el documento del chat y citar
+              una fuente, no responder «no sé de eso». Repite la primera en
+              inglés desde <code>/en</code>. Y juzga el fondo: ¿la respuesta
+              dice la verdad de lo que hoy hace el sitio, o suena a política de
+              privacidad genérica?
+              <span class="origen origen-nuevo">Nuevo · alineación</span
               ><span class="minimo">⭐ mínimo</span></label
             >
           </li>
@@ -1825,6 +1840,17 @@
           <summary>Historial de la guía</summary>
           <ul>
             <li>
+              <strong>v9.2 · alineación del corpus · 2026-09-21:</strong> el corpus
+              vuelve a decir la verdad del sitio después de que el roadmap
+              propio de CV Viva se retirara y el chat ganara su puerta: se
+              corrigió la invitación a votar una funcionalidad que ya no existe,
+              el conteo de decisiones de arquitectura y el tamaño del índice, y
+              el corpus ganó doce subsecciones sobre la puerta, el código de
+              verificación y qué datos se guardan. El gate de cifras ahora
+              deriva también las del propio repositorio. Nueva f8; prefijo de
+              casillas <code>alineacion</code>.
+            </li>
+            <li>
               <strong>v9.1 · chat/registro · 2026-09-21:</strong> el chat pide
               nombre y correo con código por Resend, registra cada conversación
               en Supabase y responde en dos o tres párrafos (ADR-024). Bloque F:
@@ -2020,7 +2046,7 @@
       (function () {
         // NS VERSIONADO POR SPRINT: al publicar la guía de un sprint nuevo se cambia
         // s007c — así una regresión sin correr no aparece marcada por la versión anterior.
-        var NS = "guia-hoja-de-vida:afondo-v2:";
+        var NS = "guia-hoja-de-vida:alineacion:";
         var casillas = Array.prototype.slice.call(
           document.querySelectorAll('input[type="checkbox"]'),
         );

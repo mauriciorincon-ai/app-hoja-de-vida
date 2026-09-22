@@ -1,15 +1,17 @@
 ---
 slug: rag-y-el-chat
 titulo: "RAG: how this chat works on the inside"
-resumen: "The architecture of this page's chat with its numbers: build-time index, lexical retrieval with MiniSearch (BM25) without embeddings, layered guardrails, a measured threshold, navigable citations, five interchangeable providers, local fallback, a US$20 budget with a real cost of zero, and how it is evaluated with 48 questions of its own and 131 from outside."
-cuando_usar: "Use this when they ask how the chat on this page works, which RAG architecture he implemented, whether he uses embeddings or lexical search, which model provider he works with, how he keeps the model from making up answers, and how he evaluates the system with a golden set and a question bank."
+resumen: "The architecture of this page's chat with its numbers: build-time index, lexical retrieval with MiniSearch (BM25) without embeddings, layered guardrails, a measured threshold, navigable citations, five interchangeable providers, local fallback, a US$20 budget with a real cost of zero, the name and email gate with its six-digit verification code, what data the conversation log stores and who reads it, and how it is evaluated with 75 questions of its own and 136 from outside."
+cuando_usar: "Use this when they ask how the chat on this page works, which RAG architecture he implemented, whether he uses embeddings or lexical search, which model provider he works with, how he keeps the model from making up answers, and how he evaluates the system with a golden set and a question bank. Use it too for everything that has to do with the chat gate and with privacy: why the chat asks for your name and email before answering, what the six-digit verification code that arrives by email is for, what personal data it stores, who can read it, how long it is kept, how to ask for it to be deleted, and why the answers are two or three paragraphs instead of a dump of the corpus."
 estado: aprobado
 ancla: "#vitrina"
-actualizado: 2026-09-20
+actualizado: 2026-09-21
 preguntas_de_prueba:
   - "How does the chat on Henry's CV work?"
   - "What experience does Henry have with RAG?"
   - "Does it use embeddings or vector search?"
+  - "Why does this chat ask for my name and email before answering?"
+  - "What personal data does this chat store and who can read it?"
 ---
 
 <!--
@@ -80,9 +82,11 @@ next build of the site.
 The architecture reflects a fundamental decision: generative intelligence must not take the
 place of verifiable knowledge. It should help find it, relate it and communicate it without
 breaking the link to its provenance. That is why the generative provider is interchangeable by
-configuration among five adapted ones, and why none of them stores anything: telemetry records
-provider, model, milliseconds and tokens, never the content of the conversation or the model's
-output.
+configuration among five adapted ones, and why none of them keeps the knowledge: the technical
+telemetry notes provider, model, milliseconds and tokens, and the conversation log —which since
+September 21, 2026 does store the question and the answer— lives in my own database, not in the
+provider's, and whoever asks is warned about it before writing the first word. Further down I
+explain it in full.
 
 It is the same rule I apply on a data platform: a data point does not become reliable when it
 shows up on the screen, but during the journey that prepares, validates and contextualizes it.
@@ -106,9 +110,11 @@ let the user verify the claim within the site.
 The chunk size is decided and measured: at most 180 words. A longer subsection is split into
 windows that keep the same anchor, because a long chunk enters the context whole and competes
 with itself; with that cap, the worst case of one answer's context is bounded at about 720 words.
-Before the rewrite of this base, the published index had 28 chunks per language; with the 25
-approved documents and the showcase sheets it reaches 494. The number is printed by every build
-and is a regenerated artifact, not something edited by hand.
+The index has a history and it is worth telling: it started with 28 chunks per language, drawn
+only from the résumé YAML files; the 32 showcase sheets added 226; with the first long version of
+this base it reached 494; and today, with the 25 approved documents and the "when to use"
+description each one declares, there are 1,467 chunks in Spanish and 1,457 in English. The number
+is printed by every build and is a regenerated artifact, not something edited by hand.
 
 This decision shifts toward the build process activities that do not need to be repeated on
 every query. The content is analyzed, split and validated once per published version. The
@@ -162,7 +168,8 @@ with Power BI?" brought up the one for the Power BI Dashboard Builder.
 
 The solution was a per-chunk weight that multiplies the search score. The owner's voice is the
 documents; a sheet is evidence of one specific piece and should win only when the question is
-about that piece. The number came from measuring the bank on the complete index of 494 chunks:
+about that piece. The number came from measuring the bank on the complete index of the time, 494
+chunks:
 
 | Variant                   | Expected source in the top-4 | Questions with a sheet in the context |
 | ------------------------- | ---------------------------: | ------------------------------------: |
@@ -175,7 +182,9 @@ about that piece. The number came from measuring the bank on the complete index 
 At 0.5 the bank recovers exactly the number it had without sheets, and eleven questions —the
 showcase ones— still receive a sheet. Going lower buys nothing more and makes them invisible. The
 sheets are not edited to index better: they belong to other houses, and adding one to the
-showcase puts it into the chat on the next build, without writing new prose.
+showcase puts it into the chat on the next build, without writing new prose. The weight lives in
+a constant in the code, with its measurement beside it, and it is still at 0.5 over an index that
+is now up to 1,467 chunks.
 
 ## Lexical retrieval is an architecture decision
 
@@ -219,11 +228,12 @@ A lexical search is only as good as its list of stopwords. Without it, "en", "de
 the whole corpus and any question looks pertinent. The first list was the obvious one; the second
 batch came out of a measurement, not an intuition.
 
-With the corpus of 28 chunks, a five-word off-topic question —a request for pet humor,
+With the corpus of the time, 28 chunks, a five-word off-topic question —a request for pet humor,
 which shares no noun with the corpus— scored 4.28 and passed the guardrail. The only term that
 matched was the preposition "sobre" ("about"), present in 42 of the 162 chunks of the index at
-that time, and it sustained a false positive on its own. The automated out-of-scope test could not
-see it because it asked the same request with the preposition "de", which was already on the list.
+that time, and it sustained a false positive on its own. The automated out-of-scope test could
+not see it because it asked the same request with the preposition "de", which was already on the
+list.
 
 Into the list then went the prepositions that are not topic —"sobre", "desde", "entre", "hasta",
 "sin", "tras"— and the imperatives aimed at the assistant —"escribe", "hazme", "dime" ("write",
@@ -232,7 +242,10 @@ to off-topic questions. That correction was made with its measurement beside it,
 that previously could not see the case now sees it.
 
 It is a small lesson that holds for any RAG: the vocabulary a question shares with the corpus is
-not always content. Part of it is grammar, and grammar gets measured and discarded.
+not always content. Part of it is grammar, and grammar gets measured and discarded. Those counts
+belong to the old index; today's has 1,467 chunks in Spanish and 1,457 in English, and the
+arithmetic did not change: a preposition present in a quarter of the chunks sustained a false
+positive on its own, and no list written by eye would have caught it.
 
 ## Embeddings: a conditional evolution, not an automatic improvement
 
@@ -255,10 +268,17 @@ explicit terms with the semantic capacity of vectors. The decision would have to
 through retrieval quality, latency, cost, maintainability and the ability to explain why each
 chunk was selected.
 
-The option is declared in public: "retrieval with embeddings" is one of the two votable features
-on the CV Viva roadmap, alongside conversation memory. Anyone visiting the site can vote for it,
-and the vote counts for real. What is not going to happen is that it gets in because it is
-customary in RAG architectures.
+The option is still declared, but it is no longer voted on. In September 2026 I withdrew the CV
+Viva feature roadmap from the site —retrieval with embeddings and conversation memory were among
+those features—: the votable roadmap today is the one of each sibling app, it lives on that app's
+own sheet and it is voted there; this CV shows what I build, it does not put its own features to
+a vote. So embeddings are not going to get in because someone asks for them, and not because they
+are customary in RAG architectures either. They will get in the day a measurement justifies it,
+and today it does not: the question bank would have to show a family of queries that lexical
+search loses systematically —paraphrases, synonyms, vocabulary the corpus does not write— and
+that the mandatory lexicon of each document no longer manages to cover. That day the number to
+move is not a vote, it is the count of questions without their source in the top-4, which today
+is zero.
 
 I prefer an architecture advanced enough to solve the problem and understandable enough to be
 governed. Sophistication only creates value when it improves a demonstrable result.
@@ -348,9 +368,9 @@ The reason is arithmetic. The score adds up over the terms that match, so a long
 question with three common words scores higher than a short legitimate question like "does he
 know Kubernetes?". No number separates that. That is why the threshold is deliberately low —1,
 which means exactly "something substantive matched"— and the other layers do the rest. It was
-measured again in September 2026 on the 494 chunks: the worst-scoring legitimate question in
-strict mode gives 6.65, none of the 136 drops below 1 and the blocked off-topic ones give 0.
-There is no margin to gain by moving it.
+measured again in September 2026, on the 494 chunks the index had at the time: the worst-scoring
+legitimate question in strict mode gives 6.65, none of the 136 drops below 1 and the blocked
+off-topic ones give 0. There is no margin to gain by moving it.
 
 What this guardrail does guarantee: that a question without a single substantive term from the
 corpus is answered without calling the provider. What it does not guarantee: that every
@@ -359,7 +379,7 @@ and there the prompt that forbids answering outside the sources stops them. The 
 guarantee is the prompt; the threshold is a token saving and a first line. The worst possible
 failure of this chat is not spending tokens on an off-topic question: it is answering "that one
 escapes me" to a legitimate question about my career. When the corpus grows, the threshold is
-measured again, not assumed.
+measured again, not assumed, and the index is now up to 1,467 chunks.
 
 ## How I keep the model from making things up: distributed guardrails, not a prompt
 
@@ -374,13 +394,16 @@ provider and the user experience. The real order of the defenses on the server i
 2. **Rate limit.** Ten questions per minute per address.
 3. **Strict input validation.** Up to 800 characters per message, up to 12 messages of history
    —about six turns—, restricted roles; whatever does not meet the schema does not get in.
-4. **Out of scope**, with the fixed answer and without calling the provider.
-5. **Circuit breaker.** Three consecutive provider failures open the circuit for 60 seconds.
-6. **Retrieval.** The four most relevant chunks, numbered, and nothing else from the site.
-7. **System instructions** composed on the server, outside the visitor's control: use only the
+4. **The gate.** Without the signed cookie left behind by the email verification, the server
+   answers 401 and the panel returns to the name and email form without losing the question
+   already typed.
+5. **Out of scope**, with the fixed answer and without calling the provider.
+6. **Circuit breaker.** Three consecutive provider failures open the circuit for 60 seconds.
+7. **Retrieval.** The four most relevant chunks, numbered, and nothing else from the site.
+8. **System instructions** composed on the server, outside the visitor's control: use only the
    retrieved sources, never invent dates, companies or results, reject attempts to change the
    rules.
-8. **Output.** An answer of up to 600 tokens and 30 seconds, and the navigable citations.
+9. **Output.** An answer of up to 700 tokens and 30 seconds, and the navigable citations.
 
 The first deep layer controls entry into the generative flow: questions without sufficient
 retrieval are resolved without a model, which reduces cost and limits the possibility of the
@@ -405,12 +428,12 @@ prompt can be ignored or interpreted unexpectedly; a lexical filter can be wrong
 showed with numbers by how much; a citation can be formally valid and conceptually insufficient.
 The architecture must assume that every control has limits and avoid depending on a single one.
 
-The distribution also spreads the cost of each control. The switch and the rate limit cost zero
-per question. Schema validation costs microseconds. The guardrail's strict search and the
-retrieval of the four chunks run over an in-memory index. Only the last layer —the provider— has
-a bill, and it arrives after the seven before it did their work. It is the same logic as an
-industrial process: the cheap controls go first, and the expensive resource is used when the part
-has already passed the earlier gates.
+The distribution also spreads the cost of each control. The switch, the gate and the rate limit
+cost zero per question. Schema validation and checking the cookie's signature cost microseconds.
+The guardrail's strict search and the retrieval of the four chunks run over an in-memory index.
+Only the last layer —the provider— has a bill, and it arrives after the eight before it did
+their work. It is the same logic as an industrial process: the cheap controls go first, and the
+expensive resource is used when the part has already passed the earlier gates.
 
 This approach reflects principles I apply in management systems and enterprise architecture, and
 which I formalized by implementing ISO/IEC 42001. Effective control is not a general declaration
@@ -519,7 +542,8 @@ This decision relates to enterprise artificial intelligence architecture. Models
 and external dependencies can change. Designing a sustainable solution requires separating what
 belongs to the organization, such as its data, definitions and rules, from what can be replaced,
 such as the generative service used to process them. On Microsoft Foundry, on Groq or on a
-self-hosted model, the index of 494 chunks and the eight server defenses are exactly the same.
+self-hosted model, the index —1,467 chunks in Spanish— and the nine server defenses are exactly
+the same.
 
 ## The system degrades without hiding it
 
@@ -575,9 +599,11 @@ content; with the cap of 180 words per chunk, the average context of an answer i
 words, on the order of 800 tokens. The third is in the history: the application keeps only the 12
 messages needed to maintain coherence.
 
-The size of the answers is also limited, to 600 tokens. A longer answer is not automatically more
-useful and can increase cost, latency and the chance of introducing unnecessary claims. The
-architecture seeks to produce a sufficient explanation, backed by the right sources.
+The size of the answers is also limited, today to 700 tokens: it went up from 600 the day the
+instruction moved from asking for two to five sentences to asking for two or three paragraphs. A
+longer answer is not automatically more useful and can increase cost, latency and the chance of
+introducing unnecessary claims. The architecture seeks to produce a sufficient explanation,
+backed by the right sources.
 
 Provider selection can also respond to cost, availability and capability. However, a cheaper
 alternative is only valid if it preserves the minimum criteria of grounding, citation and
@@ -597,8 +623,8 @@ the solution throughout its life cycle.
 A public application must assume that not every request will be legitimate or aimed at the
 purpose it was designed for. That is why the chat includes limits on the frequency of queries,
 their length, the extent of the answers and the history kept, and all of them are written as
-numbers, not as intentions: 10 questions per minute, 800 characters, 600 output tokens, 30
-seconds, 12 messages.
+numbers, not as intentions: 10 questions per minute, 800 characters, 700 output tokens, 30
+seconds, 12 messages, and three verification codes per address and per email every ten minutes.
 
 Limiting per visitor and per period helps contain abusive automation, accidental consumption and
 disproportionate use of capacity. It does not remove every possibility of abuse, but it reduces
@@ -621,10 +647,129 @@ These measures do not make the system invulnerable. They represent controls prop
 public application of delimited scope. Security is designed as a combination of prevention,
 containment, visibility and capacity to respond.
 
-Responsible publishing also demands not indiscriminately logging the content of conversations.
-Telemetry is limited to what is necessary to understand the operation, investigate failures and
-manage costs —provider, model, milliseconds and tokens— and never stores the question or the
-answer: zero persisted answers, by design and by test.
+Responsible publishing also demands deciding what gets logged and saying it out loud. Until 20
+September 2026 telemetry was limited to what was necessary to understand the operation,
+investigate failures and manage costs —provider, model, milliseconds and tokens— and it did not
+store the question or the answer. Since the 21st it does store them, together with the name and
+the email of whoever asked, and that completely changes the privacy conversation: the three
+subsections that follow tell it in full, because a log that is not explained is exactly what I
+criticize in other products.
+
+## Why this chat asks for your name and email before answering
+
+<!-- seccion: por-que-nombre-y-correo -->
+
+Since September 21, 2026 this chat has a gate. Before, you opened the panel and asked; today,
+before the first answer, I ask for your name and email, and the email has to be verified with a
+six-digit code that arrives by email. It is the only thing on the site that demands something of
+the visitor, so I prefer to explain why before anyone reads it as red tape.
+
+There are two reasons and neither is marketing. The first is the budget: a generative chat open
+to the internet is an open tab. The defenses I already described —cutting off foreign topics, the
+limit of ten questions per minute, the context cap— contain the spending of whoever comes to ask,
+not of whoever comes to play. A verified email raises the cost of playing enough that it stops
+being funny, without putting a captcha or a user account in front of someone who only wants to
+know whether I handle Microsoft Fabric.
+
+The second is that I want to know who is asking. This CV exists in order to talk with recruiters,
+clients and colleagues; if someone spends ten minutes interrogating my résumé about TransMilenio
+or about how I govern a model, that person interests me and I want to be able to write to them.
+The notice you accept says it in those same words: the name, the email and the questions are
+stored so that I know who is writing to me and what they were answered, and they can be deleted
+by asking me from Contact.
+
+What the gate is not: there is no password, no user table, no external identity provider, no
+profile to maintain and not one extra piece of data is asked for —no company, no job title, no
+phone number—. The email is the identity and the code is the proof that it is yours. And it fails
+closed: if the server is missing the secret it signs with, it answers 503 and nobody gets in. A
+barrier that opens by itself when it is misconfigured is not a barrier, it is an ornament.
+
+## The six-digit verification code: how the email is verified and why the code is never stored
+
+<!-- seccion: codigo-de-seis-digitos -->
+
+The mechanism fits in two paragraphs and even so it contains every decision I would make in a
+serious system. When you leave your name and email, the server generates a six-digit number with
+the system's cryptographic generator —not with the convenient random one—, computes its SHA-256
+hash mixed with a secret that lives only on the server and with your own email, stores that hash
+and sends you the number by email. What ends up written in the database is of no use for getting
+in: you cannot go back from the hash to the code, and since the secret is not in the database,
+not even someone with the database in front of them could recompute it.
+
+The code lives ten minutes and allows five attempts. The sixth exhausts it even if it is the
+right one, and you have to ask for another. The comparison is made in constant time, so that the
+delay of the answer does not give away how many digits you got right. And asking for codes has
+its own brake: three every ten minutes per address and per email.
+
+When the code matches, two things happen in the same transaction: the code's row is deleted —it
+is single-use by construction, not by good will— and the server issues a cookie signed with
+HMAC-SHA256 that says who you are and until when. It lasts 30 days, it is httpOnly —the page's
+JavaScript cannot read it—, it travels with SameSite=Lax and only over HTTPS in production. It is
+not a JWT and it does not need to be: there is one issuer, one reader and one secret. If someone
+changes a single character of the signature, the server reads it as if it did not exist.
+
+From there on the chat demands that cookie. Without it it answers 401, the panel returns you to
+the form without losing the question you had already written and resends it as soon as you are
+in. That is the part I tested the most times, because a barrier that forces you to write the
+question twice is a barrier people do not cross.
+
+## What data this chat stores, who reads it and how to ask for it to be deleted
+
+<!-- seccion: que-datos-guarda-el-chat -->
+
+Bluntly, because it is what I would want to read: every question answered here is stored. The row
+carries your name, your email, the language, the question exactly as you wrote it, the complete
+answer you were given, the sources that were cited, the way it was resolved —with the model, with
+the fixed out-of-scope answer or with the local search— and the technical cost: provider, model,
+tokens and milliseconds. What the local search answered is stored too, even though it happens in
+your browser: the panel sends it to the server with the same cookie, so that the log has no holes
+depending on which path the answer came out of.
+
+What is not stored: no IP address, no browser identifier, no cross-site tracking and no
+verification code —of that one only the hash remains, and only while it is valid—. The log does
+not stay at the model provider either: it receives the context and returns the text; the row is
+written by my server.
+
+Who reads it: me, and nobody else. The two tables live in the same database as the roadmap voting
+and with the same pattern: row-level security on and without a single policy, so that the public
+key the site uses cannot read them even if someone pulls it out of the browser. That key can only
+execute three functions —store a code, verify it, log a conversation—. Reading requires the
+service key, which lives in the administration panel and does not leave it.
+
+How long it is kept and how it is deleted: there is no automatic deletion, and I am not going to
+invent a retention period I have not decided yet. What there is, is a direct route: write to me
+from the site's contact form and I delete your rows. That is in the notice you accept on entry,
+together with the Colombian law that regulates it, Law 1581 of 2012. Storing another person's
+data obliges you to say what is stored, what for, who sees it and how to get out.
+
+## Why the answers are two or three paragraphs and not a dump of the corpus
+
+<!-- seccion: respuestas-de-dos-o-tres-parrafos -->
+
+The same day I put in the gate I changed the length of the answers, and the two things have the
+same cause: this base grew a lot. It went from about 30,000 to about 158,000 words per language,
+and the index jumped from 494 to 1,467 chunks in Spanish. With that raw material in front of it,
+the old instruction —"answer in two to five sentences"— produced answers that left out exactly
+what the person had come looking for: the figure, the name of the system, the why of the
+decision.
+
+The new rule asks for two or three developed paragraphs, between 120 and 220 words: the first
+answers head-on, the following ones bring the context and the figures the sources carry, and the
+close offers to go deeper into one concrete aspect. No lists and no headings, because a chat
+answer with bullets reads like a brochure. The output cap went up from 600 to 700 tokens so that
+those paragraphs fit without the model cutting off mid-sentence.
+
+What did not change matters just as much. The sources are still four —the measured number, which
+did not move just because the corpus grew—, the context still hovers around 540 words and the
+instruction says explicitly not to dump what the sources say: you have to choose what answers the
+question. A model with more material in front of it tends to summarize all of it, and summarizing
+all of it is the fastest way to answer nothing.
+
+There is an honest tension here and I prefer to leave it written down: longer paragraphs cost
+more tokens and take longer, exactly the opposite of what the budget asks for. I accepted it
+because the observed real cost is still US$0 and because the purpose of this chat is not to spend
+little, but for someone to understand what I do without reading 25 documents. If the spending
+goes up, the length is a knob and it moves in one line.
 
 ## How I evaluate the RAG
 
@@ -661,14 +806,14 @@ access to the relevant content. Costs and latency are part of the evaluation: a 
 needlessly expensive or slow answer indicates too much context, excessive history or a
 disproportionate configuration.
 
-## The two measurements of the top-k and the vocabulary audit
+## The two measurements of the top-k: why four sources go in and not three or five
 
 <!-- seccion: medicion-del-top-k -->
 
 How many sources enter an answer is not a matter of taste. The 4 comes from measuring, and the
 two independent sets measure it against the complete index. The first measurement was in sprint
-8, on 159 chunks, with 48 questions of my own and 131 from outside. The second, on September 20,
-2026, on the 494 chunks, with 75 and 136:
+8, on the 159 chunks of the time, with 48 questions of my own and 131 from outside. The second,
+on September 20, 2026, on 494 chunks, with 75 and 136:
 
 | Sources per answer | Golden set (75 of my own) | Bank (136 from outside) | Average context |
 | ------------------ | ------------------------: | ----------------------: | --------------: |
@@ -682,7 +827,14 @@ With three sources, six of the 136 outside questions bring none of their own. Wi
 fails, and going up to five rescues no one: it only enlarges the context by 25%, and the bill
 with it. That two sets written with different criteria land on the same number, twice, is the
 part that gives confidence. With a single source the golden set would hit 59%; today the number
-lives in one place in the code and the golden set exercises it directly.
+lives in one place in the code and the golden set exercises it directly. Today's index is no
+longer the one of those two measurements —1,467 chunks in Spanish, 1,457 in English—, and that is
+why it is measured again every time the corpus changes: the 4 is a measured number, not an
+inherited constant.
+
+## The bank as a vocabulary audit: ETL, lakehouse and the words the corpus did not say
+
+<!-- seccion: auditoria-de-vocabulario -->
 
 The bank is also a vocabulary audit, and that is its most valuable function. Since the search is
 lexical, a word the corpus does not say does not exist for whoever asks. When the bank discovered

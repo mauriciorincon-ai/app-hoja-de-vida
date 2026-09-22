@@ -34,13 +34,13 @@ Cómo se escribe, campo por campo: `docs/MANUAL-DE-USO.md` → «Cómo alimentar
 | 9 | `vesting` | aprobado | 24 | 0 | `/proyectos/vesting` |
 | 10 | `fundacion-ctic` | aprobado | 25 | 0 | `/proyectos/fundacion-ctic` |
 | 11 | `certificaciones` | aprobado | 15 | 0 | `#certificaciones` |
-| 12 | `apps-pipeline` | aprobado | 27 | 0 | `#vitrina` |
+| 12 | `apps-pipeline` | aprobado | 28 | 0 | `#vitrina` |
 | 13 | `lo-que-busco` | aprobado | 19 | 0 | `#contacto` |
 | 14 | `fabric-en-la-practica` | aprobado | 22 | 0 | `#skills` |
 | 15 | `agentes-en-produccion` | aprobado | 23 | 0 | `/vitrina/agentes` |
-| 16 | `rag-y-el-chat` | aprobado | 23 | 0 | `#vitrina` |
-| 17 | `gobierno-de-datos-y-de-ia` | aprobado | 24 | 0 | `#skills` |
-| 18 | `plataforma-y-despliegue` | aprobado | 15 | 0 | `#skills` |
+| 16 | `rag-y-el-chat` | aprobado | 28 | 0 | `#vitrina` |
+| 17 | `gobierno-de-datos-y-de-ia` | aprobado | 27 | 0 | `#skills` |
+| 18 | `plataforma-y-despliegue` | aprobado | 18 | 0 | `#skills` |
 | 19 | `como-aprendo` | aprobado | 18 | 0 | `#certificaciones` |
 | 20 | `bi-que-se-adopta` | aprobado | 23 | 0 | `#skills` |
 | 21 | `analitica-predictiva` | aprobado | 18 | 0 | `#skills` |
@@ -49,7 +49,7 @@ Cómo se escribe, campo por campo: `docs/MANUAL-DE-USO.md` → «Cómo alimentar
 | 24 | `las-investigaciones` | aprobado | 32 | 0 | `/vitrina/investigaciones` |
 | 25 | `los-agentes-de-la-vitrina` | aprobado | 12 | 0 | `/vitrina/agentes` |
 
-**25 documentos · 529 subsecciones · 144.019 palabras · 0 `[CONFIRMAR]` por resolver · 25 aprobados.**
+**25 documentos · 541 subsecciones · 148.112 palabras · 0 `[CONFIRMAR]` por resolver · 25 aprobados.**
 
 <!-- tabla-de-documentos:fin -->
 

@@ -100,3 +100,91 @@ conceptos:
     sustantivos: [credenciales, certificaciones, rutas]
     contexto: ["en curso", "en desarrollo", "en preparacion", "en preparación"]
     ventana: 20
+
+# ───────────────────────────────────────────────────────────────────────────
+# LAS CIFRAS DEL PROPIO REPOSITORIO (2026-09-21)
+#
+# Por qué nacen. Los ocho conceptos de arriba vigilan lo que el corpus dice del
+# CONTENIDO del sitio: cuántas piezas, cuántas credenciales. Ninguno vigilaba lo
+# que el corpus dice DEL SITIO COMO OBRA — cuántas decisiones lleva registradas,
+# cuántos sprints cerró, de cuántos fragmentos es su índice. Y esas cifras
+# envejecen sin que nadie toque el corpus: basta mergear un ADR.
+#
+# Se descubrió leyendo, no fallando: el 2026-09-21 el corpus afirmaba «21
+# decisiones de arquitectura» cuando ya había 24, y afirmaba un índice «de 494
+# fragmentos» cuando ya eran 1.437. Dos afirmaciones falsas que seis gates verdes
+# no vieron, porque ninguno tenía ese sujeto.
+# ───────────────────────────────────────────────────────────────────────────
+
+  - id: decisiones-arquitectura
+    etiqueta: "las decisiones de arquitectura registradas en este repositorio"
+    fuente: "decisions/NNN-*.md"
+    sustantivos: [decisiones]
+    # «registradas» entra por un caso real: «25 decisiones registradas solo en este
+    # sitio» no lleva «de arquitectura» al lado y se le escapaba al gate, que sí
+    # cazó la otra mención del mismo documento. Un gate que caza una de dos deja
+    # el corpus contradiciéndose consigo mismo.
+    contexto: ["de arquitectura", "arquitectonicas", "registradas"]
+    ventana: 22   # el contexto pegado al sustantivo, o habla de otras decisiones
+
+  - id: sprints-cerrados
+    etiqueta: "los sprints cerrados de este sitio"
+    fuente: "sprints/SPRINT_NNN-summary.md"
+    sustantivos: [sprints]
+    contexto: ["cerrados"]
+    ventana: 16
+    # El sujeto tiene que ser ESTE sitio, y se nombra por delante: «este sitio lleva
+    # ocho sprints cerrados». Sin esto, el concepto cazaría «24 sprints cerrados»,
+    # que son los del PIPELINE ENTERO —las siete casas— y no tienen verdad derivable
+    # en este repositorio: su fuente es la planeadora, que es privada.
+    contexto_previo: ["este sitio", "este repositorio", "esta aplicacion"]
+    ventana_previa: 60
+    salvedades:
+      - frase: "pipeline"
+        razon: "los sprints del pipeline entero se cuentan en la planeadora, no aquí"
+      - frase: "fabrica"
+        razon: "la Fábrica de AI-APPs coordina las siete casas; su conteo no es el de este repo"
+
+  - id: jobs-ci
+    etiqueta: "los jobs de integración continua de este repositorio"
+    fuente: ".github/workflows/ci.yml · claves de `jobs:`"
+    sustantivos: [jobs, trabajos]
+    contexto: ["de integracion continua", "de ci"]
+    ventana: 30
+
+  - id: fragmentos-indice
+    etiqueta: "los fragmentos del índice del chat en español"
+    fuente: "el índice que construye scripts/build-chat-index.mjs"
+    sustantivos: [fragmentos]
+    # EL SUJETO VA POR DELANTE: «el índice de 1.437 fragmentos». Sin esto, el
+    # concepto caza «la recuperación de los cuatro fragmentos», que es el top-k
+    # —cuántas fuentes entran a UNA respuesta— y no el tamaño del índice. Mismo
+    # sustantivo, tres órdenes de magnitud de diferencia.
+    contexto_previo: ["indice de", "indice en", "indice con", "indice tiene", "indice suma"]
+    ventana_previa: 24
+    salvedades:
+      - frase: "fragmentos relevantes"
+        razon: "el top-k de una respuesta, no el tamaño del índice"
+      - frase: "por respuesta"
+        razon: "el top-k de una respuesta, no el tamaño del índice"
+      - frase: "recuperacion de los"
+        razon: "el top-k de una respuesta, no el tamaño del índice"
+    # TOLERANCIA, y por qué. Este número se mueve con CADA edición del corpus:
+    # añadir un párrafo lo cambia. Exigirlo exacto haría el gate circular —
+    # corriges la cifra, y corregirla mueve la cifra. Con una banda del 5 %, una
+    # afirmación honesta del orden de magnitud pasa y una cifra de otra época no.
+    tolerancia: 0.05
+    # HITOS: la serie histórica del índice es parte del argumento del dueño sobre
+    # cómo creció el conocimiento del chat, y es verdad. Se declara para que el
+    # gate no la confunda con una afirmación sobre hoy.
+    hitos:
+      - valor: 28
+        razon: "el índice al nacer, solo con los YAML, antes del corpus a fondo"
+      - valor: 226
+        razon: "lo que aportan las 32 fichas de la vitrina al entrar (ADR-023)"
+      - valor: 494
+        razon: "el índice con el corpus v2, antes de que v3 ampliara los documentos"
+      - valor: 162
+        razon: "medición intermedia del corpus v2, citada en la auditoría del top-k"
+      - valor: 159
+        razon: "medición intermedia del corpus v2, citada en la auditoría del top-k"

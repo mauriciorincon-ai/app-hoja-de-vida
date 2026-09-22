@@ -5,7 +5,7 @@ resumen: "Where my platform depth lies —Microsoft: Fabric, Power BI, Microsoft
 cuando_usar: "Use this when they ask about his experience with Azure and the Microsoft cloud, Google Cloud, Docker and Kubernetes, MLOps, continuous integration and deployment, what he deploys and maintains directly, and what he has never done and would have to learn."
 estado: aprobado
 ancla: "#skills"
-actualizado: 2026-09-20
+actualizado: 2026-09-21
 preguntas_de_prueba:
   - "What experience does Henry have with the cloud?"
   - "Does Henry know containers, Kubernetes or Google Cloud?"
@@ -111,11 +111,15 @@ toolchain:
 - Git and GitHub as the source of truth, with conventional commits, branches per sprint and
   architecture decisions recorded in ADRs;
 - continuous integration and deployment (CI/CD) with GitHub Actions: unit, integration and
-  end-to-end tests, accessibility with axe, a performance budget with Lighthouse and a secrets
-  sweep with gitleaks that blocks publication if anything fails;
+  end-to-end tests, accessibility with axe and a performance budget with Lighthouse, and no
+  branch reaches production with a single one of those jobs in red. The secrets sweep with
+  gitleaks goes one step earlier, as a pre-commit hook: a secret never even gets to exist in the
+  history, which is where it really costs to get it out;
 - deployment on Vercel, with a preview for every change and production from the main branch;
   Innmobiliaria is served from the edge on Cloudflare Workers, and Dash Agent AI is not deployed
   because it lives entirely on the machine of whoever uses it;
+- a managed database with Supabase where something really has to be stored —Innmobiliaria and
+  this site—, and transactional email with Resend for whatever goes out by email;
 - observability with Sentry and structured logging with Pino, always with metadata and never
   with user content, to know what failed and where.
 
@@ -182,6 +186,91 @@ when the code works in development. It needs a publication path, verifiable cond
 visibility into failures and a controlled way to evolve. What I learned operating six
 applications and this site is the same thing I demanded at Vesting of every new integration,
 with the difference that here there is no one else to call when something breaks.
+
+## This site's database: Supabase, row-level security and access only through functions
+
+<!-- seccion: la-base-de-datos-del-sitio -->
+
+This site is served statically and has no server of mine behind it, but it does have a data
+layer since July 2026: Supabase on its free plan, the application's first database, which came
+in to support a vote with real counts and today supports the one on each sister application's
+roadmap. The architecture decision was not choosing Supabase; it was how to expose it. The votes
+table stores no identity and no IP address, and the count is an aggregation and not a mutable
+counter: that way there is no write race over a single cell and no history that gets lost when
+recalculating.
+
+Row-level security (RLS) stays turned on and with not a single policy, which is the way of
+saying that the anonymous role neither reads nor writes the table directly. The whole public
+surface is two functions declared SECURITY DEFINER —one casts the vote and returns the real
+count in the same transaction, the other returns the aggregate— and permissions are granted and
+revoked one by one, instead of trusting whatever the engine leaves granted: an implicit
+privilege is precisely the one nobody reviews. I checked it the way a control is checked: trying
+to read and to insert as the anonymous role and watching the permission be denied.
+
+The counter is honest as a product rule. The number comes out of the function at the moment it
+is asked for, and if the database does not respond, the route returns a 503 and the interface
+declares the voting unavailable with the buttons switched off. I prefer a feature switched off
+to an invented number.
+
+This repository runs four continuous integration jobs: quality, integration, end-to-end and
+Lighthouse. The integration one brings up a real Supabase, applies the migrations to it and
+tests against Postgres, browser voting included. A reasoned permissions rule is not yet
+verified; it is verified when a test tries to get around it and cannot.
+
+## Name and email to chat: what data the chat's gate stores and who can read it
+
+<!-- seccion: la-puerta-del-chat -->
+
+Since September 21, 2026 the chat of this CV has a gate, and the gate is infrastructure before it
+is a screen: it added two tables to the same Supabase, with the same pattern as the voting and
+one difference that has to be said out loud, because these ones do store personal data. The
+first table, the one for the codes, carries one row per email with the hash of the code in
+force, its expiry and the failed attempts. The second, the log, carries one row per answered
+question: name, email, language, the question, the complete answer, the sources that were cited,
+the mode in which it was answered, the provider and the model, the tokens and the milliseconds
+it cost.
+
+Both have row-level security turned on and not a single policy, and the anonymous role can only
+execute three functions declared SECURITY DEFINER: store a code, verify and consume it, and log
+a conversation. None of the three returns rows. Writing is not reading: whoever asks leaves
+their trace and cannot see anyone else's, not even their own. Reading is mine, with the service
+key and from the database administration panel, and that key never travels to the browser nor
+lives in the repository.
+
+The rest of the decision weighs as much as the schema. No IP address and no user agent are
+stored. The visitor hands over their name and their email with a data processing notice, under
+Law 1581 of 2012, and with a declared purpose: so that I know who asked and what they were
+answered. The application's previous promise —zero personal data, which still holds for the
+voting— did not stretch this far, so instead of stretching it, it changed, it was written down
+in its own architecture decision and it is stated in the very place where the data is asked for.
+Privacy, for me, is this: saying what is stored, why, who reads it and how to ask for it to be
+deleted.
+
+## The verification code goes out through Resend and the session travels in a signed cookie
+
+<!-- seccion: codigo-y-cookie-del-chat -->
+
+The email with the six-digit code goes out through Resend, the same provider that already sent
+the contact form: a single transactional email account for both things and one dependency less
+to watch over. The code is generated with the system's cryptographic generator and not with an
+interface's randomness; of it only a hash is stored, computed with a server secret and the email
+itself, so that not even with the database in front of you can it be reconstructed; it is worth
+ten minutes and five attempts, and it is compared in constant time so as not to leak information
+through how long the comparison takes.
+
+Once the code is verified, the server issues a cookie signed with HMAC-SHA256, httpOnly and
+SameSite=Lax, which lasts thirty days. There are no passwords, no users table and no identity
+provider: the email is the identity and the code is the proof that it belongs to them. It is the
+smallest piece of authentication that solves the problem, and that is deliberate, because every
+piece that does not exist is one that does not have to be operated, updated or protected.
+
+The way of failing is designed too. Without the secret configured, the chat route answers that
+registration is not available instead of letting anyone through: a gate that opens by itself
+when it is missing an environment variable is not a gate. And for testing there is an in-memory
+store that replaces the database, so that the end-to-end run crosses the gate for real —it asks
+for the code, verifies it, receives the cookie— with no email, no network and no database. That
+is what makes it possible for the barrier to be tested in full on every change, and not only on
+the day it was built.
 
 ## Operating artificial intelligence demands an additional discipline
 

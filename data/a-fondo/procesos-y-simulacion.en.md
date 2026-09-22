@@ -5,7 +5,7 @@ resumen: "The industrial root with its methods: BPMN with Bizagi in four compani
 cuando_usar: "Use this when they ask about his industrial engineering roots: process modeling in BPMN with Bizagi, discrete-event simulation with FlexSim, time study and line balancing, capacity and variability, ISO 9001:2015, continuous improvement, agile methodologies and what all of that is good for in a data job."
 estado: aprobado
 ancla: "#skills"
-actualizado: 2026-09-20
+actualizado: 2026-09-21
 preguntas_de_prueba:
   - "What does Henry know about process modeling and simulation?"
   - "Has he used Bizagi or FlexSim?"
@@ -38,10 +38,11 @@ HOW THIS FILE IS WRITTEN
 <!-- seccion: la-raiz -->
 
 I am an Industrial Engineer from the Pontificia Universidad Javeriana, with an emphasis in Data
-Analytics Intelligence, and I also pursued Industrial Design studies at the same university,
-between 2009 and 2016. Before specializing in data platforms, Power BI, intelligent applications
-and AI agents, I learned to understand processes, model systems, analyze constraints, distribute
-resources and design solutions around the people who have to use them.
+Analytics Intelligence, and I also pursued Industrial Design studies at the same university: the
+engineering between 2009 and 2016, the design between 2011 and 2016. Before specializing in data
+platforms, Power BI, intelligent applications and AI agents, I learned to understand processes,
+model systems, analyze constraints, distribute resources and design solutions around the people who
+have to use them.
 
 This root explains an important part of my professional differential. When I face a data
 problem, I do not start with the table, the visualization or the model. I start by understanding
@@ -656,8 +657,8 @@ July 2026: operating artificial intelligence sustainably requires processes to v
 deploy, observe and improve models, applications and agents. The technical architecture needs to
 be accompanied by an operational architecture.
 
-I do not seek to have an organization depend indefinitely on my direct intervention. I seek to
-leave standards, memory, components, criteria and mechanisms that allow other people to keep
+I do not seek to have an organization depend indefinitely on my intervention. I seek to
+leave standards, memory, components, criteria and mechanisms that let other people keep
 building on a reliable base.
 
 ## The questions that remained open: assigning, balancing, controlling

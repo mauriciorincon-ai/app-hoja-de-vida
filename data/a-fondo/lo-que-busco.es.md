@@ -5,7 +5,7 @@ resumen: "Qué problema quiero resolver, los cuatro tipos de rol donde rindo má
 cuando_usar: "Úsalo cuando pregunten qué tipo de rol busca, si trabaja en remoto o se reubica a otro país, en qué ciudad vive, su nivel de inglés, qué lo motiva, qué lo diferencia de otros candidatos, por qué contratarlo, o cómo prefiere un proceso de selección."
 estado: aprobado
 ancla: "#contacto"
-actualizado: 2026-09-20
+actualizado: 2026-09-21
 preguntas_de_prueba:
   - "¿Qué tipo de posición busca Henry?"
   - "¿Está abierto a reubicarse o a trabajo remoto?"
@@ -235,7 +235,7 @@ Si una responsabilidad o tecnología no forma parte de mi experiencia directa, l
 
 Mi experiencia demuestra que puedo incorporar conocimientos nuevos con rapidez —el DP-600 en cinco meses sobre una plataforma con menos de un año en el mercado—, pero no utilizo esa capacidad como sustituto de la experiencia que una responsabilidad exige. Cuando necesito aprender, establezco las fuentes, los resultados esperados, los ejercicios prácticos y la evidencia con la que demostraré el dominio adquirido.
 
-También invito a examinar mi portafolio durante el proceso. Las 32 piezas —aplicaciones, agentes, investigaciones, tableros— y la propia plataforma de presentación, este sitio, permiten evaluar capacidades que un currículum solo puede describir. Prefiero que una decisión de contratación se base en evidencia observable y en la calidad del razonamiento, no únicamente en afirmaciones personales. El formulario de contacto de esta página es el camino más corto.
+También invito a examinar mi portafolio durante el proceso. Las 32 piezas —aplicaciones, agentes, investigaciones, tableros— y la propia plataforma de presentación, este sitio, permiten evaluar capacidades que un currículum solo puede describir. Prefiero que una decisión de contratación se base en evidencia observable y en la calidad del razonamiento, no únicamente en afirmaciones personales. Para escribirme, el camino más corto es el formulario general de la página de inicio: pide el nombre, el correo, el mensaje y un motivo entre cinco —un proyecto, una asesoría, una capacitación, una charla o un rol—, y ese motivo viaja como asunto del correo, de modo que una conversación sobre una posición me llega marcada como tal. Ese formulario no es el mismo que la lista de espera de las aplicaciones: aquel vive en la vitrina de apps y sirve para pedir acceso a una de ellas, no para hablar conmigo.
 
 ## Lo que quiero construir en mi siguiente etapa
 
