@@ -133,6 +133,68 @@ los gemelos no se separen— y la pregunta volvió.
 | Barrido cero enlaces tras el último `git add` | limpio |
 | Prosa del dueño | **+4.502 palabras**; ningún documento perdió ni una |
 
+## La CI se colgó dos veces, y el arreglo no estaba en el contenido
+
+El primer empujón de esta rama dejó `e2e` e `integration` mudos **59 y 24 minutos**, sin una línea
+de salida, hasta que hubo que cancelarlos a mano. Lo normal en estos dos trabajos son 2 a 5
+minutos. Las dos veces la corrida se detuvo en el mismo punto: 314 de 360 puntos impresos.
+
+Sospechar del corpus era lo natural —es lo único que cambió— y era falso. Lo que hizo falta
+primero fue **que la cuelga hablara**, porque ningún trabajo tenía tope: GitHub los habría dejado
+correr hasta su límite de seis horas sin decir jamás qué se quedó a medias.
+
+**Primer commit, que son gates nuevos:** `timeout-minutes` en los cuatro trabajos (quality 20,
+e2e 25, integration 25, lighthouse 30 — ninguno tenía uno), y en Playwright un `globalTimeout` de
+15 minutos más el reportero `line`, que imprime el resumen y **nombra** lo que no terminó.
+
+**El rojo, observado en la CI y no simulado** (regla 14, primera pregunta). En la corrida de
+`8b6a399` los dos trabajos **fallaron en 15 minutos en vez de colgarse**, y al fallar dijeron
+exactamente lo que faltaba saber:
+
+```
+349 passed (15.0m)
+Timed out waiting 900s for the teardown for plugin setup to run
+```
+
+Las 349 pruebas **pasaron**, en 3 min 41 s. Lo colgado era el **apagado**, después de la última
+prueba. Y la prueba decisiva de que el contenido no tenía nada que ver la dio el trabajo vecino:
+`integration` corre solo las **diez pruebas de votación**, que esta rama no toca, las pasó en
+cinco segundos y se colgó idéntico.
+
+**Segundo commit, las dos causas reales**, ambas en `playwright.config.ts`:
+
+1. **La espera del apagado no tenía fin.** Playwright pedía el cierre del servidor y esperaba para
+   siempre. Ahora se pide con `SIGTERM` y, si en diez segundos no se fue, se mata:
+   `gracefulShutdown: { signal: "SIGTERM", timeout: 10_000 }`.
+2. **Había un proceso de más en medio.** El servidor se arrancaba con `pnpm start`, que mete a pnpm
+   entre Playwright y `next`: al matar al hijo quedaba vivo el nieto. GitHub lo venía delatando al
+   final de **cada** trabajo, y nadie lo leía: «Terminate orphan process: next-server». Ahora se
+   arranca el binario directo, `./node_modules/.bin/next start`, y lo que Playwright mata **es** el
+   servidor.
+
+Verificado en local antes de empujar: tras una corrida en modo CI no sobrevive ni un `next-server`.
+Y verificado en la CI después: `e2e` e `integration` en verde, con conclusión propia.
+
+**Honestidad sobre los topes nuevos:** el que disparó fue el de Playwright. Los `timeout-minutes`
+de los cuatro trabajos **no llegaron a usarse** —los trabajos fallaron antes— y siguen sin haberse
+visto fallar. Quedan como red de seguridad del piso de arriba, declarada aquí sin histórico.
+
+### Lighthouse: un rojo de 2,8 milisegundos que no era de esta rama
+
+En la misma corrida cayó `lighthouse`: el *Time to Interactive* de `/es/vitrina/tableros` dio
+**4.002,79 ms contra un tope de 4.000** — 0,07 % por encima, con las tres corridas rozando la
+línea (4.047 / 4.031 / 4.003).
+
+No lo causó este trabajo, y se puede demostrar sin re-correr nada:
+`git diff --name-only origin/main...HEAD` no toca **ni un archivo** de `src/`, de `public/` ni de
+los datos que se publican; esa página se sirve igual que en `main`. Y el corpus no puede llegar
+hasta ahí: el panel del chat se monta con `dynamic` **solo al hacer clic** y el índice se descarga
+dentro del panel, así que Lighthouse —que nunca lo abre— jamás lo pide.
+
+Relanzado el **mismo commit**, pasó. Era lentitud del runner sobre una página que ya vivía en el
+filo. **No se tocó el presupuesto:** aflojar el número por detrás para que un rojo se calle es
+justo lo que la regla 14 persigue. Queda anotado abajo como decisión del dueño.
+
 ## Lo que queda para el dueño
 
 - La **f8** nueva de la guía: preguntarle al chat, con el proveedor real, por qué pide el correo,
@@ -143,3 +205,10 @@ los gemelos no se separen— y la pregunta volvió.
   «Profesional de Análisis Post-Operacional») y el sitio los abrevia en los tres casos. Los dos
   son ciertos y el patrón es consistente, así que no se tocó nada: igualarlos es decisión suya, y
   en cualquiera de las dos direcciones.
+- **El presupuesto de rendimiento vive en el filo, y es decisión suya.** `/es/vitrina/tableros`
+  marcó 4.047 / 4.031 / 4.003 ms de *Time to Interactive* contra un tope de 4.000. Relanzado el
+  mismo commit pasó, así que hoy es una moneda al aire: **cualquier PR futuro puede caer por esto
+  sin que nadie haya roto nada**, y un gate que falla al azar enseña a ignorar los rojos. Las
+  salidas son dos y ninguna es tocar el número a escondidas: hacer más liviana esa página —es la
+  más pesada de las quince— o subir el tope con una razón escrita y su fecha. No se hizo aquí
+  porque esta rama no toca esa página y el arreglo merece su propio trabajo.
