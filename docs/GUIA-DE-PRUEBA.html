@@ -316,7 +316,7 @@
     <div class="pagina">
       <header>
         <p class="eyebrow">
-          CV Viva · Guía de prueba viva y acumulativa · v9.2 · el corpus alineado + chat/registro + a fondo v2 (el
+          CV Viva · Guía de prueba viva y acumulativa · v9.3 · la cita conserva la conversación + el corpus alineado + chat/registro + a fondo v2 (el
           detalle) + revisión post-S8 · 2026-09-12
         </p>
         <h1>Guía de prueba</h1>
@@ -715,12 +715,16 @@
           ~8 min · botón flotante "Pregúntale a mi HV".
         </p>
         <ul class="pasos">
-          <li data-origen="heredada">
+          <li data-origen="mejorado">
             <input type="checkbox" id="f1" /><label for="f1"
               >Abre el chat y pregunta algo de tu experiencia: responde con
               contenido real y con chips de fuente clicables que navegan a la
-              sección/case study correcto.
-              <span class="origen origen-heredada">S3</span></label
+              sección/case study correcto. <strong>Y al volver a abrir el chat
+              en esa página, la conversación sigue ahí</strong> — la cita lleva
+              a la evidencia y te devuelve, no te deja en un panel vacío.
+              (Antes un clic recargaba la página entera y borraba todo; lo
+              encontraste tú en producción el 2026-09-23.)
+              <span class="origen origen-mejorado">Mejorado · cita viva</span></label
             >
           </li>
           <li data-origen="heredada">
@@ -1840,6 +1844,20 @@
           <summary>Historial de la guía</summary>
           <ul>
             <li>
+              <strong>v9.3 · la cita conserva la conversación · 2026-09-23:</strong>
+              el primer paso del gate ⭐ con el proveedor real destapó que hacer
+              clic en una fuente del chat recargaba la página y borraba la
+              conversación. Ahora la cita navega del lado cliente y el chat
+              sigue donde estaba (f1 mejorada). Mismo día: producción encendida
+              de verdad —dominio propio, Resend verificado, Supabase de
+              producción, puerta del chat probada— y el modelo de Groq
+              reemplazado, porque el anterior llevaba cinco semanas retirado.
+              Prefijo de casillas <code>cita-viva</code>. Y un defecto propio de
+              esta guía: el filtro «cambios» ignoraba los ocho ítems marcados
+              <code>mejorada</code> (solo reconocía <code>mejorado</code>); ya
+              cuenta los dos.
+            </li>
+            <li>
               <strong>v9.2 · alineación del corpus · 2026-09-21:</strong> el corpus
               vuelve a decir la verdad del sitio después de que el roadmap
               propio de CV Viva se retirara y el chat ganara su puerta: se
@@ -2046,7 +2064,7 @@
       (function () {
         // NS VERSIONADO POR SPRINT: al publicar la guía de un sprint nuevo se cambia
         // s007c — así una regresión sin correr no aparece marcada por la versión anterior.
-        var NS = "guia-hoja-de-vida:alineacion:";
+        var NS = "guia-hoja-de-vida:cita-viva:";
         var casillas = Array.prototype.slice.call(
           document.querySelectorAll('input[type="checkbox"]'),
         );
@@ -2063,7 +2081,7 @@
           if (filtro === "todo") return true;
           if (filtro === "minimo") return li.hasAttribute("data-minimo");
           var o = li.getAttribute("data-origen");
-          return o === "nuevo" || o === "mejorado"; // filtro "cambios"
+          return o === "nuevo" || o === "mejorado" || o === "mejorada"; // filtro "cambios"
         }
         function aplicarFiltro(filtro) {
           secciones.forEach(function (sec) {

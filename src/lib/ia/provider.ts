@@ -33,7 +33,11 @@ export type ModeloResuelto = {
 };
 
 const MODELO_DEFAULT: Partial<Record<ProveedorChat, string>> = {
-  groq: "llama-3.3-70b-versatile",
+  // Groq retiró llama-3.3-70b-versatile para cuentas free/dev el 2026-08-16 y
+  // el chat estuvo cinco semanas en búsqueda local sin que ningún gate lo
+  // viera (los e2e corren con mock a propósito). Reemplazo de producción
+  // recomendado por Groq; free tier: 30 RPM · 1K req/día · 8K TPM · 200K TPD.
+  groq: "openai/gpt-oss-120b",
   gemini: "gemini-2.5-flash",
   anthropic: "claude-haiku-4-5",
 };

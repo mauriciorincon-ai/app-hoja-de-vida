@@ -17,7 +17,7 @@ describe("adapter multi-proveedor por env (ADR-003)", () => {
       GROQ_API_KEY: "gsk_test",
     } as unknown as NodeJS.ProcessEnv);
     expect(m?.proveedor).toBe("groq");
-    expect(m?.modelId).toBe("llama-3.3-70b-versatile");
+    expect(m?.modelId).toBe("openai/gpt-oss-120b");
     expect(m?.model).toBeDefined();
   });
 
