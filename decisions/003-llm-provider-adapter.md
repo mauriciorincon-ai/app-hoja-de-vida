@@ -21,12 +21,27 @@ selected by env — the only place that knows about concrete providers:
 
 | `CHAT_PROVIDER`      | Package                     | Key env vars                            | Default `CHAT_MODEL`        |
 | -------------------- | --------------------------- | --------------------------------------- | --------------------------- |
-| `groq` (**initial**) | `@ai-sdk/groq`              | `GROQ_API_KEY`                          | `llama-3.3-70b-versatile`   |
+| `groq` (**initial**) | `@ai-sdk/groq`              | `GROQ_API_KEY`                          | `openai/gpt-oss-120b` (¹)   |
 | `gemini`             | `@ai-sdk/google`            | `GOOGLE_GENERATIVE_AI_API_KEY`          | `gemini-2.5-flash`          |
 | `azure`              | `@ai-sdk/azure`             | `AZURE_RESOURCE_NAME` + `AZURE_API_KEY` | (deployment name, required) |
 | `anthropic`          | `@ai-sdk/anthropic`         | `ANTHROPIC_API_KEY`                     | `claude-haiku-4-5`          |
 | `openai-compatible`  | `@ai-sdk/openai-compatible` | `CHAT_BASE_URL` (+ `CHAT_API_KEY`)      | (required)                  |
 | `mock`               | — (fixture, in-repo)        | —                                       | —                           |
+
+(¹) **Amended 2026-09-23.** The original default was `llama-3.3-70b-versatile`. Groq retired it
+for free/developer accounts on **2026-08-16** (announced 2026-06-17; enterprise contracts
+unaffected). Production silently ran on the local-search fallback for five weeks and no gate
+noticed: the CI runs every test against the `mock` provider *by design* (zero real calls), so a
+provider-side retirement is invisible to it — the owner found it in the ⭐ gate, reading a
+"BÚSQUEDA LOCAL" badge. Groq's recommended replacement is `openai/gpt-oss-120b` (the other one,
+`qwen/qwen3.6-27b`, was itself retired on 2026-09-14). Free-tier limits for the new default
+(console.groq.com/docs/rate-limits, checked 2026-09-23): **30 RPM · 1K requests/day · 8K
+tokens/min · 200K tokens/day**. The binding constraint is now **tokens/min**: at ~2K tokens per
+answer (4 chunks of context + 700 output) that is ~4 answers a minute, still far above what a CV
+site sees; overflow → 429 → breaker → local search, as before. `gpt-oss` is a reasoning model;
+its reasoning tokens count toward `maxOutputTokens`, and the first real answers came back
+complete in two paragraphs, so the 700 cap stays. **Lesson:** a provider-side retirement cannot
+be caught by a mock; the manual names the symptom and the one-variable fix.
 
 `CHAT_MODEL` overrides the default without code. The **`mock` provider** is deterministic
 (fixture responses with citations) and is what unit/integration/e2e tests use — the CI never

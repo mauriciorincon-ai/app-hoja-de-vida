@@ -5,6 +5,7 @@ import { DefaultChatTransport } from "ai";
 import { Send } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
+import { Link } from "@/i18n/navigation";
 import { trackEvent } from "@/lib/analytics";
 import {
   createRetriever,
@@ -243,8 +244,10 @@ export function ChatPanel({
     logRef.current?.scrollTo({ top: logRef.current.scrollHeight });
   }, [messages, status]);
 
+  // Sin prefijo de locale: lo pone <Link>. Un ancla de la HOME («#skills») se
+  // escribe «/#skills», como hacen ya las páginas de proyectos y apps.
   function hrefFuente(ancla: string): string {
-    return `/${locale}${ancla}`;
+    return ancla.startsWith("#") ? `/${ancla}` : ancla;
   }
 
   return (
@@ -365,7 +368,11 @@ export function ChatPanel({
                       {t("fuentes")}
                     </span>
                     {fuentes.map((f) => (
-                      <a
+                      // <Link>, no <a>: un <a> recargaba la página entera y el
+                      // visitante volvía a un panel vacío. Con navegación del
+                      // lado cliente el lanzador (en el layout) y el panel
+                      // (solo se oculta) conservan la conversación.
+                      <Link
                         key={f.n}
                         href={hrefFuente(f.ancla)}
                         onClick={onCerrar}
@@ -373,7 +380,7 @@ export function ChatPanel({
                         className="rounded-full bg-sage px-2 py-0.5 font-mono text-[10px] text-sage-ink transition-[filter] duration-[120ms] hover:brightness-[0.97] motion-reduce:transition-none"
                       >
                         [{f.n}] {recortar(f.titulo, 40)}
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 )}

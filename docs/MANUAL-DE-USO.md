@@ -461,6 +461,13 @@ el mensaje te llega al correo.
      `AZURE_RESOURCE_NAME`+`AZURE_API_KEY`, `ANTHROPIC_API_KEY`, o `CHAT_BASE_URL` (self-host).
   3. Opcional `CHAT_MODEL` para elegir el modelo (cada proveedor tiene un default sensato;
      en Azure es obligatorio: el nombre de tu deployment).
+- **Si el chat muestra la etiqueta «BÚSQUEDA LOCAL» en cada respuesta**, el proveedor está
+  fallando y el sitio responde con el paracaídas (fragmentos crudos, sin redactar). La causa más
+  probable es que **Groq retiró el modelo** — lo hace cada pocos meses y la CI no puede verlo
+  porque prueba con un proveedor simulado. Pasó el 2026-08-16 con `llama-3.3-70b-versatile` y
+  nadie lo notó en cinco semanas. Arreglo sin tocar código: Vercel → Logs → la línea
+  `POST /api/chat` dice el error exacto; luego `CHAT_MODEL` con un modelo vigente de
+  `console.groq.com/docs/models` (hoy `openai/gpt-oss-120b`) y redeploy.
 - **Si un día llega una factura:** los logs (Vercel → Logs) registran proveedor, tokens y
   latencia de CADA respuesta — ahí está la traza de qué se consumió. Primeros auxilios:
   `CHAT_ENABLED=false` (se apaga ya) o volver a un proveedor free tier.

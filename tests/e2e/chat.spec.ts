@@ -80,6 +80,17 @@ test.describe("chat — flujo estrella", () => {
     await expect(page).toHaveURL(/\/es\/proyectos\/vesting/, {
       timeout: 15_000,
     });
+
+    // La cita lleva a la evidencia y DEVUELVE al chat: la conversación tiene
+    // que seguir ahí al reabrir. Con un <a> corriente la página se recargaba
+    // entera y el visitante volvía a un panel vacío (hallado por el dueño en
+    // producción, 2026-09-23, gate ⭐ f1). Navegación del lado cliente: el
+    // lanzador vive en el layout y el panel solo se oculta, no se destruye.
+    await page.getByTestId("chat-launcher").click();
+    await expect(page.getByTestId("chat-panel")).toBeVisible();
+    await expect(
+      page.getByTestId("chat-mensaje-asistente").last(),
+    ).toContainText("Microsoft Fabric");
   });
 
   test("en /en el panel y las fuentes salen en inglés", async ({ page }) => {
