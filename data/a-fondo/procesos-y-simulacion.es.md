@@ -1,5 +1,6 @@
 ---
 slug: procesos-y-simulacion
+codigo: AF-22
 titulo: "Procesos y simulación"
 resumen: "La raíz industrial con sus métodos: BPMN con Bizagi en cuatro empresas, simulación de eventos discretos con FlexSim en Inglopres y el despacho de medicamentos de Cafam, capacidad nominal frente a efectiva, estudio de tiempos con suplementos OIT, Kanban y Scrum, ISO 9001, y el proceso replicable de Vesting."
 cuando_usar: "Úsalo cuando pregunten por su raíz de ingeniería industrial: modelado de procesos en BPMN con Bizagi, simulación de eventos discretos con FlexSim, estudio de tiempos y balanceo de líneas, capacidad y variabilidad, ISO 9001:2015, mejora continua, metodologías ágiles y para qué sirve todo eso en un puesto de datos."

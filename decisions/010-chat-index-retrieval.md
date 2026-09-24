@@ -47,3 +47,24 @@ disappoints).
   the index is answered statically without touching the provider.
 - Lexical quality on very short queries is the known risk; logged for the summary if it
   shows up in real use (iteration path: build-time embeddings, same chunk source).
+
+## Amendment — 2026-09-23: the citation chip says where it comes from and where it goes
+
+The anchor contract above is unchanged: a citation still navigates to something visible, never
+to the source document (the «a fondo» corpus is fuel, not pages — S8). What changed is what the
+chip **shows**. It used to print the chunk title («A fondo — Vesting — la plataforma… ·
+Monitoreo», cut at 40 chars) and land on a page nobody could anticipate; the owner tested it in
+production and asked, rightly, what the logic was. Now every chunk carries two more fields,
+derived at build time and validated by `chatChunkSchema`:
+
+- `codigo` — where the sentence came from: `AF-NN` for an «a fondo» document (declared in its
+  frontmatter, stable, identical in both twins, unique per locale — the build stops otherwise),
+  `CV` for the résumé YAML, `APP` for `apps.yaml`, `FT` for a showcase datasheet.
+- `destino` — the **name** of where the citation goes («Vesting», «Skills», «Agentes
+  especializados»), derived from the same sources that paint each destination (menu labels,
+  project name in the CV, showcase front/piece names). A destination that exists but has no
+  name stops the build; it never reaches a chip as `undefined`.
+
+The chip reads `[n] AF-09 · Vesting`; the full chunk title lives in its tooltip. The code is
+for the owner (which file to fix), the destination is for the visitor (where the evidence is).
+

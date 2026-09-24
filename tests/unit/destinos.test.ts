@@ -5,6 +5,9 @@ import {
   anclasDeHome,
   catalogoDeDestinos,
   destinoExiste,
+  nombreCortoDeProyecto,
+  nombreDeDestino,
+  nombresDeDestinos,
   rutasDeDatos,
 } from "../../scripts/destinos.mjs";
 
@@ -96,6 +99,67 @@ describe("destinoExiste", () => {
     expect(destinoExiste("", catalogo)).toBe(false);
     expect(destinoExiste("proyectos/vesting", catalogo)).toBe(false);
     expect(destinoExiste(undefined, catalogo)).toBe(false);
+  });
+});
+
+/**
+ * EL NOMBRE DE CADA DESTINO (2026-09-23). El chip de la cita dice a dónde
+ * lleva, y el nombre sale de las fuentes que pintan cada destino, no de una
+ * lista. Rojo: un destino que existe pero no tiene nombre devuelve `null`, y el
+ * build lo para antes de que un chip diga «undefined».
+ */
+describe("nombreDeDestino — a dónde lleva la cita, con el nombre que el visitante reconoce", () => {
+  const es = nombresDeDestinos("es");
+  const en = nombresDeDestinos("en");
+
+  it("una sección de la HOME toma la etiqueta del menú, en cada idioma", () => {
+    expect(nombreDeDestino("#skills", es)).toBe("Skills");
+    expect(nombreDeDestino("#trayectoria", es)).toBe("Trayectoria");
+    expect(nombreDeDestino("#trayectoria", en)).toBe("Career");
+    expect(nombreDeDestino("#perfil", en)).toBe("Profile");
+  });
+
+  it("«#skills-titulo» es la sección «#skills»", () => {
+    expect(nombreDeDestino("#skills-titulo", es)).toBe("Skills");
+  });
+
+  it("un case study toma el DÓNDE del nombre del proyecto, no el nombre entero", () => {
+    expect(nombreDeDestino("/proyectos/vesting", es)).toBe("Vesting");
+    expect(nombreDeDestino("/proyectos/vesting", en)).toBe("Vesting");
+    expect(nombreDeDestino("/proyectos/transmilenio-cm", es)).toBe("TransMilenio / C&M");
+    expect(nombreDeDestino("/proyectos/vesting#cs-impacto", es)).toBe("Vesting");
+  });
+
+  it("un frente y una pieza de la vitrina toman su nombre de los datos", () => {
+    expect(nombreDeDestino("/vitrina/agentes", es)).toBe("Agentes especializados");
+    expect(nombreDeDestino("/vitrina/agentes", en)).toBe("Specialized agents");
+    expect(nombreDeDestino("/vitrina/agentes/hr-develop-ai-apps", es)).toBeTruthy();
+    expect(nombreDeDestino("/vitrina/apps/habla/detalle", es)).toBeTruthy();
+  });
+
+  it("un destino sin nombre devuelve null — y eso rompe el build, no el chip", () => {
+    expect(nombreDeDestino("#seccion-nueva-sin-etiqueta", es)).toBeNull();
+    expect(nombreDeDestino("/proyectos/inventado", es)).toBeNull();
+    expect(nombreDeDestino("", es)).toBeNull();
+    expect(nombreDeDestino(undefined, es)).toBeNull();
+  });
+
+  it("todo destino del catálogo que un chunk pueda citar tiene nombre hoy", () => {
+    // Las anclas «-titulo» se resuelven por su sección; lo demás, directo.
+    const sinNombre = [...catalogoDeDestinos()].filter(
+      (d) => nombreDeDestino(d, es) === null || nombreDeDestino(d, en) === null,
+    );
+    expect(sinNombre).toEqual([]);
+  });
+
+  it("nombreCortoDeProyecto: el DÓNDE sin el periodo; sin la forma, el nombre entero", () => {
+    expect(
+      nombreCortoDeProyecto("Plataforma de datos para agentes de IA — Vesting (2023–2025)"),
+    ).toBe("Vesting");
+    expect(nombreCortoDeProyecto("Analítica en salud — Fundación CTIC (2025–hoy)")).toBe(
+      "Fundación CTIC",
+    );
+    expect(nombreCortoDeProyecto("Un proyecto sin guion")).toBe("Un proyecto sin guion");
   });
 });
 

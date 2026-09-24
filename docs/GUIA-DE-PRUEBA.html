@@ -316,7 +316,7 @@
     <div class="pagina">
       <header>
         <p class="eyebrow">
-          CV Viva · Guía de prueba viva y acumulativa · v9.3 · la cita conserva la conversación + el corpus alineado + chat/registro + a fondo v2 (el
+          CV Viva · Guía de prueba viva y acumulativa · v9.4 · la cita dice de dónde sale y a dónde lleva + la cita conserva la conversación + el corpus alineado + chat/registro + a fondo v2 (el
           detalle) + revisión post-S8 · 2026-09-12
         </p>
         <h1>Guía de prueba</h1>
@@ -718,13 +718,20 @@
           <li data-origen="mejorado">
             <input type="checkbox" id="f1" /><label for="f1"
               >Abre el chat y pregunta algo de tu experiencia: responde con
-              contenido real y con chips de fuente clicables que navegan a la
-              sección/case study correcto. <strong>Y al volver a abrir el chat
-              en esa página, la conversación sigue ahí</strong> — la cita lleva
-              a la evidencia y te devuelve, no te deja en un panel vacío.
-              (Antes un clic recargaba la página entera y borraba todo; lo
-              encontraste tú en producción el 2026-09-23.)
-              <span class="origen origen-mejorado">Mejorado · cita viva</span></label
+              contenido real y con chips de fuente clicables. <strong>Cada chip
+              dice de dónde salió la frase y a dónde te lleva</strong>:
+              <code>[1] AF-09 · Vesting</code>, <code>[2] CV · Trayectoria</code>
+              — el código <code>AF-NN</code> es el documento a fondo (la tabla
+              de <code>data/a-fondo/README.md</code> los lista), <code>CV</code>
+              es la hoja de vida, y lo que sigue al punto es el nombre del
+              destino, nunca el título de un fragmento. Al pasar el ratón, el
+              tooltip enseña el título completo. Tócalo: aterriza en esa
+              sección o case study. <strong>Y al volver a abrir el chat en esa
+              página, la conversación sigue ahí</strong> — la cita lleva a la
+              evidencia y te devuelve. (Ambas cosas las encontraste tú en
+              producción el 2026-09-23: un clic recargaba y borraba todo, y el
+              chip no decía a dónde iba.)
+              <span class="origen origen-mejorado">Mejorado · cita con destino</span></label
             >
           </li>
           <li data-origen="heredada">
@@ -1844,6 +1851,18 @@
           <summary>Historial de la guía</summary>
           <ul>
             <li>
+              <strong>v9.4 · la cita dice de dónde sale y a dónde lleva · 2026-09-23:</strong>
+              probando la v9.3 en producción, el dueño preguntó qué lógica tenía
+              que una fuente «a fondo» lo mandara a una parte del sitio que no
+              se llama así. La regla era correcta (los documentos no se
+              publican; la cita va a lo visible) pero el chip no la contaba.
+              Ahora cada chip dice <code>[n] AF-NN · destino</code>: el código
+              del documento (nuevo campo <code>codigo</code> en el frontmatter,
+              fijo y único, con su aduana) y el nombre de a dónde lleva,
+              derivado de los datos que pintan cada destino. f1 mejorada.
+              Prefijo de casillas <code>cita-con-destino</code>.
+            </li>
+            <li>
               <strong>v9.3 · la cita conserva la conversación · 2026-09-23:</strong>
               el primer paso del gate ⭐ con el proveedor real destapó que hacer
               clic en una fuente del chat recargaba la página y borraba la
@@ -2064,7 +2083,7 @@
       (function () {
         // NS VERSIONADO POR SPRINT: al publicar la guía de un sprint nuevo se cambia
         // s007c — así una regresión sin correr no aparece marcada por la versión anterior.
-        var NS = "guia-hoja-de-vida:cita-viva:";
+        var NS = "guia-hoja-de-vida:cita-con-destino:";
         var casillas = Array.prototype.slice.call(
           document.querySelectorAll('input[type="checkbox"]'),
         );

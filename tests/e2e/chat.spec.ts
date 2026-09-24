@@ -76,6 +76,11 @@ test.describe("chat — flujo estrella", () => {
       .locator('[data-testid="chat-fuente"][href*="/proyectos/vesting"]')
       .first();
     await expect(fuente).toBeVisible();
+    // El chip dice DE DÓNDE salió la frase y A DÓNDE lleva (decisión del
+    // dueño, 2026-09-23): «[n] AF-09 · Vesting» o «[n] CV · Vesting», nunca
+    // el título del fragmento. El título completo queda en el tooltip.
+    await expect(fuente).toHaveText(/^\[\d\] (AF-\d{2}|CV) · Vesting$/);
+    await expect(fuente).toHaveAttribute("title", /.+/);
     await fuente.click();
     await expect(page).toHaveURL(/\/es\/proyectos\/vesting/, {
       timeout: 15_000,
@@ -104,9 +109,12 @@ test.describe("chat — flujo estrella", () => {
     await expect(
       page.getByTestId("chat-mensaje-asistente").last(),
     ).toContainText("[1]", { timeout: 15_000 });
-    // Fuentes del índice EN (títulos en inglés) apuntando a la ruta EN
+    // Fuentes del índice EN apuntando a la ruta EN, con el destino en inglés
+    // («Career», «Profile»…) o un nombre propio («Vesting»).
     const fuente = page.getByTestId("chat-fuente").first();
     await expect(fuente).toHaveAttribute("href", /^\/en/);
+    await expect(fuente).toHaveText(/^\[\d\] (AF-\d{2}|CV|APP|FT) · .+$/);
+    await expect(fuente).not.toHaveText(/In depth|A fondo/);
   });
 
   test("pregunta off-topic → respuesta estática elegante (sin proveedor)", async ({

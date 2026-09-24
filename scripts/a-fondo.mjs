@@ -37,6 +37,18 @@ export const frontmatterSchema = z.object({
   slug: z
     .string()
     .regex(/^[a-z0-9-]+$/, "solo minúsculas, dígitos y guiones"),
+  /**
+   * EL CÓDIGO DEL DOCUMENTO (2026-09-23, decisión del dueño). Los documentos no
+   * se publican, así que el chip de la cita no puede enseñar «el documento»:
+   * enseña su código y a dónde lleva («AF-09 · Vesting»). El código es para
+   * el dueño —le dice qué archivo corregir cuando una respuesta suena rara—
+   * y es ESTABLE: no depende del orden ni del nombre del archivo, y un
+   * documento nuevo toma el siguiente libre. Un mismo código en dos
+   * documentos, o distinto entre gemelos, lo para la aduana.
+   */
+  codigo: z
+    .string()
+    .regex(/^AF-\d{2}$/, "formato AF-NN con dos dígitos, p. ej. AF-09"),
   titulo: z.string().min(1),
   resumen: z.string().min(1),
   // «Cuándo usar este documento», como la descripción de una skill (a fondo v3,
@@ -94,7 +106,7 @@ export function separarFrontmatter(markdown, archivo) {
   if (!m) {
     throw new Error(
       `${archivo}: falta el frontmatter. Todo documento a fondo empieza con un bloque ` +
-        `«---» … «---» con slug, titulo, resumen, estado, ancla, actualizado y preguntas_de_prueba.`,
+        `«---» … «---» con slug, codigo, titulo, resumen, estado, ancla, actualizado y preguntas_de_prueba.`,
     );
   }
   return { crudo: m[1], cuerpo: m[2] };
@@ -247,6 +259,24 @@ export function problemasDeNombre(doc, locale) {
       ];
 }
 
+/**
+ * Un código nombra a UN documento. Dos documentos con el mismo código dejan al
+ * dueño sin saber cuál corregir, que es lo único para lo que sirve el código.
+ */
+export function problemasDeCodigo(docs) {
+  const porCodigo = new Map();
+  for (const d of docs) {
+    porCodigo.set(d.codigo, [...(porCodigo.get(d.codigo) ?? []), d.archivo]);
+  }
+  return [...porCodigo]
+    .filter(([, archivos]) => archivos.length > 1)
+    .map(
+      ([codigo, archivos]) =>
+        `código «${codigo}» repetido en ${archivos.join(" y ")}. Un código nombra a UN ` +
+        `documento: es lo que el chip de la cita enseña y lo que dice qué archivo corregir.`,
+    );
+}
+
 /** El destino de la cita tiene que EXISTIR (la regla que nació del `#apps` muerto). */
 export function problemasDeDestino(doc, catalogo) {
   return destinoExiste(doc.ancla, catalogo)
@@ -298,6 +328,12 @@ export function problemasDeParidad(docsEs, docsEn) {
     if (en.estado !== "aprobado") {
       problemas.push(
         `${es.archivo}: está «aprobado» pero ${en.archivo} sigue en «${en.estado}».`,
+      );
+    }
+    if (es.codigo !== en.codigo) {
+      problemas.push(
+        `${es.slug}: el código es «${es.codigo}» en español y «${en.codigo}» en inglés. ` +
+          `Los gemelos son el mismo documento y llevan el mismo código.`,
       );
     }
     if (Boolean(es.cuando_usar) !== Boolean(en.cuando_usar)) {
@@ -375,6 +411,7 @@ export function revisarAduana({ docsEs, docsEn, crudos, catalogo }) {
     ["es", docsEs],
     ["en", docsEn],
   ]) {
+    problemas.push(...problemasDeCodigo(docs));
     for (const doc of docs) {
       problemas.push(...problemasDeNombre(doc, locale));
       problemas.push(...problemasDeDestino(doc, catalogo));
@@ -476,6 +513,7 @@ export function chunksDeAFondo(docs, etiqueta, tope = TOPE_PALABRAS_CHUNK) {
     if (doc.cuando_usar) {
       chunks.push({
         id: `a-fondo-${doc.slug}-cuando-usar`,
+        codigo: doc.codigo,
         titulo: `${etiqueta} — ${doc.titulo}`,
         texto: `${doc.resumen} ${doc.cuando_usar}`.replace(/\s+/g, " ").trim(),
         ancla: doc.ancla,
@@ -488,6 +526,7 @@ export function chunksDeAFondo(docs, etiqueta, tope = TOPE_PALABRAS_CHUNK) {
       ventanas.forEach((texto, i) => {
         chunks.push({
           id: `a-fondo-${doc.slug}-${s.id}${partido ? `~${i + 1}` : ""}`,
+          codigo: doc.codigo,
           titulo: partido
             ? `${etiqueta} — ${doc.titulo} · ${s.titulo} (${i + 1}/${ventanas.length})`
             : `${etiqueta} — ${doc.titulo} · ${s.titulo}`,

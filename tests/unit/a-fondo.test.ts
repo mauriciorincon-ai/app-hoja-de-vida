@@ -9,6 +9,7 @@ import {
   TOPE_PALABRAS_CHUNK,
   ventanasPorParrafo,
   parseDocumento,
+  problemasDeCodigo,
   problemasDeDestino,
   problemasDeNombre,
   problemasDeParidad,
@@ -27,6 +28,7 @@ import { catalogoDeDestinos } from "../../scripts/destinos.mjs";
 
 const FM = (extra = "", estado = "borrador") => `---
 slug: vesting
+codigo: AF-09
 titulo: "Vesting"
 resumen: "Resumen de una línea."
 estado: ${estado}
@@ -113,6 +115,50 @@ describe("problemasDeNombre — el archivo no puede mentir sobre su slug", () =>
     expect(problemasDeNombre(doc(FM(CUERPO)), "es")).toEqual([]);
     const mal = doc(FM(CUERPO), "data/a-fondo/otro-nombre.es.md");
     expect(problemasDeNombre(mal, "es")[0]).toContain("vesting.es.md");
+  });
+});
+
+/**
+ * EL CÓDIGO DEL DOCUMENTO (2026-09-23, decisión del dueño): el chip de la cita
+ * enseña «AF-09 · Vesting» en vez del título del fragmento. Tres rojos: un
+ * código mal formado no pasa el frontmatter; dos documentos con el mismo
+ * código no pasan la aduana; dos gemelos con códigos distintos, tampoco.
+ */
+describe("codigo — un código nombra a UN documento", () => {
+  it("el frontmatter exige AF-NN con dos dígitos", () => {
+    const sinCodigo = FM().replace("codigo: AF-09\n", "");
+    expect(() => doc(sinCodigo)).toThrow(/codigo/);
+    const malFormado = FM().replace("codigo: AF-09", 'codigo: "AF9"');
+    expect(() => doc(malFormado)).toThrow(/AF-NN/);
+    expect(doc(FM()).codigo).toBe("AF-09");
+  });
+
+  it("dos documentos con el mismo código: la aduana los nombra a los dos", () => {
+    const a = { codigo: "AF-09", archivo: "data/a-fondo/vesting.es.md" };
+    const b = { codigo: "AF-09", archivo: "data/a-fondo/cafam.es.md" };
+    const c = { codigo: "AF-06", archivo: "data/a-fondo/ceinfes.es.md" };
+    expect(problemasDeCodigo([a, c])).toEqual([]);
+    const problemas = problemasDeCodigo([a, b, c]);
+    expect(problemas).toHaveLength(1);
+    expect(problemas[0]).toContain("«AF-09» repetido");
+    expect(problemas[0]).toContain("vesting.es.md");
+    expect(problemas[0]).toContain("cafam.es.md");
+  });
+
+  it("gemelos con códigos distintos no pasan la paridad", () => {
+    const es = doc(FM(CUERPO, "aprobado"));
+    const en = doc(
+      FM(CUERPO, "aprobado").replace("codigo: AF-09", "codigo: AF-10"),
+      "data/a-fondo/vesting.en.md",
+    );
+    const problemas = problemasDeParidad([es], [en]);
+    expect(problemas.join("\n")).toContain("«AF-09» en español y «AF-10» en inglés");
+  });
+
+  it("los chunks de un documento llevan su código", () => {
+    const chunks = chunksDeAFondo([doc(FM(CUERPO, "aprobado"))], "A fondo");
+    expect(chunks.length).toBeGreaterThan(0);
+    for (const c of chunks) expect(c.codigo).toBe("AF-09");
   });
 });
 
@@ -394,6 +440,7 @@ describe("revisarAduana — la lista entera, de una", () => {
   const catalogo = catalogoDeDestinos();
   const sano = {
     slug: "x",
+    codigo: "AF-99",
     titulo: "X",
     estado: "borrador",
     ancla: "#skills",
@@ -463,6 +510,7 @@ describe("cuando_usar — la descripción del documento entra al índice", () =>
     [
       "---",
       "slug: demo",
+      "codigo: AF-97",
       'titulo: "Demo"',
       'resumen: "Un resumen de prueba."',
       extra,

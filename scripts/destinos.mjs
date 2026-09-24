@@ -114,6 +114,105 @@ export function rutasDeDatos() {
   return rutas;
 }
 
+/**
+ * EL NOMBRE DE CADA DESTINO (2026-09-23, decisión del dueño). El chip de una
+ * cita decía el título del fragmento («A fondo — Vesting — la plataforma… ·
+ * Monitoreo») y aterrizaba en una página que nadie podía anticipar. Ahora dice
+ * a dónde lleva («Vesting», «Skills», «Agentes especializados»), y ese nombre
+ * NO se escribe a mano: sale de las mismas fuentes que pintan cada destino —
+ * la etiqueta del menú para una sección de la HOME, el nombre del proyecto en
+ * el CV, el nombre del frente o de la pieza en la vitrina—. Un destino que
+ * existe pero no tiene nombre rompe el build (gate del índice): mejor un rojo
+ * hoy que un chip que dice «undefined» a un visitante.
+ */
+export function nombresDeDestinos(locale) {
+  const nombres = new Map();
+  const msg = JSON.parse(
+    readFileSync(path.join(ROOT, "messages", `${locale}.json`), "utf8"),
+  );
+  for (const seccion of [
+    "trayectoria",
+    "logros",
+    "skills",
+    "certificaciones",
+    "contacto",
+    "estudios",
+  ]) {
+    if (msg.nav?.[seccion]) nombres.set(`#${seccion}`, msg.nav[seccion]);
+  }
+  if (msg.perfil?.titulo) nombres.set("#perfil", msg.perfil.titulo);
+  if (msg.vitrinaHome?.titulo) {
+    nombres.set("#vitrina", msg.vitrinaHome.titulo);
+    nombres.set("/vitrina", msg.vitrinaHome.titulo);
+  }
+  if (msg.nav?.hojaDeVida) {
+    nombres.set("/", msg.nav.hojaDeVida);
+    nombres.set("#contenido", msg.nav.hojaDeVida);
+  }
+  if (msg.cv?.titulo) nombres.set("/cv", msg.cv.titulo);
+
+  const cv = leerYaml(`data/cv.${locale}.yaml`);
+  for (const p of cv.proyectos ?? []) {
+    if (p.casestudy) nombres.set(`/proyectos/${p.slug}`, nombreCortoDeProyecto(p.nombre));
+  }
+
+  for (const app of leerYaml("data/apps.yaml").apps ?? []) {
+    if (app.brochure) nombres.set(`/apps/${app.id}`, app.nombre[locale]);
+  }
+
+  for (const frente of leerYaml("data/vitrina.yaml").categorias ?? []) {
+    nombres.set(`/vitrina/${frente.id}`, frente.nombre[locale]);
+    if (frente.estado !== "abierta") continue;
+    if (frente.id === "apps") {
+      const dir = path.join(ROOT, "content", "vitrina");
+      for (const f of existsSync(dir) ? readdirSync(dir) : []) {
+        if (!f.endsWith(".brochure-export.json")) continue;
+        const { app } = JSON.parse(readFileSync(path.join(dir, f), "utf8"));
+        nombres.set(`/vitrina/apps/${app.slug}`, app.nombre);
+        nombres.set(`/vitrina/apps/${app.slug}/detalle`, app.nombre);
+      }
+      continue;
+    }
+    const dir = path.join(ROOT, "content", frente.id);
+    for (const f of existsSync(dir) ? readdirSync(dir) : []) {
+      if (!f.endsWith(".ficha-tecnica.json")) continue;
+      const { pieza } = JSON.parse(readFileSync(path.join(dir, f), "utf8"));
+      nombres.set(`/vitrina/${frente.id}/${pieza.slug}`, pieza.nombre);
+    }
+  }
+  return nombres;
+}
+
+/**
+ * El nombre de un proyecto en el CV sigue la forma «Qué se hizo — Dónde
+ * (cuándo)»: «Plataforma de datos para agentes de IA — Vesting (2023–2025)».
+ * El chip quiere el DÓNDE, que es como el visitante reconoce el case study.
+ * Si el nombre no sigue la forma, viaja entero: un chip largo es mejor que uno
+ * que diga otra cosa.
+ */
+export function nombreCortoDeProyecto(nombre) {
+  const partes = String(nombre).split(" — ");
+  const donde = (partes.length > 1 ? partes[partes.length - 1] : partes[0])
+    .replace(/\s*\([^)]*\)\s*$/, "")
+    .trim();
+  return donde || String(nombre);
+}
+
+/**
+ * ¿Cómo se llama este destino? `#skills-titulo` es la sección `#skills`;
+ * `/proyectos/vesting#cs-impacto` es la página de Vesting. `null` si no tiene
+ * nombre — y eso rompe el build, no el chip.
+ */
+export function nombreDeDestino(destino, nombres) {
+  if (typeof destino !== "string" || destino.length === 0) return null;
+  if (destino.startsWith("#")) {
+    return (
+      nombres.get(destino) ?? nombres.get(destino.replace(/-titulo$/, "")) ?? null
+    );
+  }
+  return nombres.get(destino.split("#")[0]) ?? null;
+}
+
 /** Todos los destinos válidos hoy: anclas de la HOME + rutas reales. */
 export function catalogoDeDestinos() {
   return new Set([...anclasDeHome(), ...rutasDeDatos()]);

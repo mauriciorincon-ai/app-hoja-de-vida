@@ -31,6 +31,7 @@ import esqueleto from "../fixtures/historia-esqueleto-s3.json";
 type Sub = { id: string; titulo: string; texto: string };
 type Doc = {
   slug: string;
+  codigo: string;
   titulo: string;
   estado: string;
   ancla: string;
@@ -85,6 +86,18 @@ describe("los documentos de data/a-fondo/", () => {
       expect(d.preguntas_de_prueba.length).toBeGreaterThanOrEqual(2);
     },
   );
+
+  it("cada documento tiene su código, ninguno se repite y los gemelos comparten el suyo", () => {
+    for (const [, d] of todos) expect(d.codigo, d.archivo).toMatch(/^AF-\d{2}$/);
+    for (const l of ["es", "en"] as const) {
+      const codigos = docs[l].map((d) => d.codigo);
+      expect(new Set(codigos).size, `códigos repetidos en ${l}`).toBe(codigos.length);
+    }
+    for (const es of docs.es) {
+      const en = docs.en.find((d) => d.slug === es.slug);
+      if (en) expect(en.codigo, es.slug).toBe(es.codigo);
+    }
+  });
 
   it("ningún slug se repite dentro de un idioma", () => {
     for (const locale of ["es", "en"] as const) {

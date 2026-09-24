@@ -12,7 +12,11 @@
  *
  * Cada chunk lleva `ancla` (destino de la cita): sección de la HOME
  * ("#trayectoria") o página ("/proyectos/<slug>"); el cliente antepone
- * "/{locale}".
+ * "/{locale}". Y desde 2026-09-23 lleva además `codigo` (de qué fuente salió:
+ * `AF-NN` un documento a fondo, `CV` el YAML del CV, `APP` apps.yaml, `FT`
+ * una ficha de la vitrina) y `destino` (el NOMBRE de a dónde lleva la cita,
+ * derivado de las mismas fuentes que pintan cada destino). El chip enseña
+ * «AF-09 · Vesting» en vez del título del fragmento.
  *
  * **EL DESTINO DE TODA CITA SE VERIFICA CONTRA EL SITIO REAL** (S8): el
  * catálogo de `scripts/destinos.mjs` se deriva de la HOME y de los datos, y el
@@ -37,7 +41,12 @@ import process from "node:process";
 import { parse } from "yaml";
 import { chunksDeAFondo, leerDocumentos, revisarAduana } from "./a-fondo.mjs";
 import { aniosCumplidos } from "./anios.mjs";
-import { catalogoDeDestinos, destinoExiste } from "./destinos.mjs";
+import {
+  catalogoDeDestinos,
+  destinoExiste,
+  nombreDeDestino,
+  nombresDeDestinos,
+} from "./destinos.mjs";
 import { chunksDeFichas, leerFichas } from "./fichas-al-indice.mjs";
 
 const ROOT = process.cwd();
@@ -83,12 +92,21 @@ function readYaml(fileName) {
  * @param {{ cv: any, apps: any, aFondo: any[], locale: string,
  *   fichas?: { apps: any[], piezas: any[] } | null }} entrada
  */
-export function buildChunks({ cv, apps, aFondo, locale, fichas = null }) {
+export function buildChunks({
+  cv,
+  apps,
+  aFondo,
+  locale,
+  fichas = null,
+  nombres = nombresDeDestinos(locale),
+}) {
   const L = LABELS[locale];
   const chunks = [];
-  const push = (id, titulo, texto, ancla) => {
+  // «CV»: todo lo que sale de cv.{es,en}.yaml — el código le dice al dueño
+  // que la frase citada se corrige ahí, no en un documento a fondo.
+  const push = (id, titulo, texto, ancla, codigo = "CV") => {
     const clean = String(texto).replace(/\s+/g, " ").trim();
-    if (clean) chunks.push({ id, titulo, texto: clean, ancla });
+    if (clean) chunks.push({ id, codigo, titulo, texto: clean, ancla });
   };
 
   const { identidad } = cv;
@@ -190,6 +208,7 @@ export function buildChunks({ cv, apps, aFondo, locale, fichas = null }) {
       // «#apps» murió en la revisión post-S7 (la sección se retiró y el roadmap
       // se fue a /vitrina/apps). Lo que la HOME enseña hoy es la vitrina.
       "#vitrina",
+      "APP",
     );
   }
 
@@ -200,7 +219,13 @@ export function buildChunks({ cv, apps, aFondo, locale, fichas = null }) {
   // cifras con procedencia, límites y «nunca», citando a la página de cada
   // pieza. El texto es el que mandó cada casa, en español, en los dos índices.
   if (fichas) chunks.push(...chunksDeFichas(fichas, locale));
-  return chunks;
+  // El NOMBRE del destino viaja en el chunk: es lo que el chip enseña. Un
+  // destino sin nombre queda sin el campo, y el esquema del índice —y el gate
+  // de main()— lo paran con su id.
+  return chunks.map((c) => {
+    const destino = nombreDeDestino(c.ancla, nombres);
+    return destino === null ? c : { ...c, destino };
+  });
 }
 
 /** Un problema de aduana rompe el build nombrando archivo y campo. */
@@ -255,6 +280,23 @@ function main() {
           `chat-index.${locale}.json · chunk "${c.id}" apunta a «${c.ancla}», que no existe en el sitio.`,
       );
     if (rotos.length > 0) detener("Destinos de cita inexistentes", rotos);
+
+    // --- Y TODO DESTINO TIENE NOMBRE ---------------------------------------
+    // El chip dice a dónde lleva la cita («Vesting», «Skills»). El nombre se
+    // deriva de las fuentes que pintan cada destino; un destino que existe
+    // pero no tiene nombre (una sección nueva de la HOME sin etiqueta en el
+    // menú, por ejemplo) pararía aquí, no en la pantalla del visitante.
+    const porDestino = new Map();
+    for (const c of chunks.filter((c) => c.destino === undefined)) {
+      porDestino.set(c.ancla, [...(porDestino.get(c.ancla) ?? []), c.id]);
+    }
+    const sinNombre = [...porDestino].map(
+      ([ancla, ids]) =>
+        `chat-index.${locale}.json · «${ancla}» existe pero no tiene nombre para el chip ` +
+        `(${ids.length} chunk${ids.length === 1 ? "" : "s"}, p. ej. "${ids[0]}"). Dale etiqueta ` +
+        `en messages/${locale}.json (nav.*) o en los datos que lo pintan.`,
+    );
+    if (sinNombre.length > 0) detener("Destinos de cita sin nombre", sinNombre);
 
     const index = { version: 1, locale, chunks };
     const outFile = path.join(OUT_DIR, `chat-index.${locale}.json`);

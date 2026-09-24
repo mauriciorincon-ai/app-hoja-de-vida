@@ -1,5 +1,6 @@
 ---
 slug: fundacion-ctic
+codigo: AF-10
 titulo: "Fundación CTIC — analítica en salud (2025–hoy)"
 resumen: "Mi rol actual: 42 productos analíticos en Power BI para 20 líderes de 15 procesos, gobierno y calidad de datos en salud, y la estrategia institucional de IA bajo UNE-ISO/IEC 42001:2025 con 23 instrumentos, 12 oportunidades y 7 casos evaluados."
 cuando_usar: "Úsalo cuando pregunten dónde trabaja actualmente, por la Fundación CTIC (2025–hoy), datos del sector salud, calidad de datos, la estrategia institucional de inteligencia artificial bajo UNE-ISO/IEC 42001:2025, los 23 instrumentos y los tableros de control por proceso."

@@ -1,5 +1,6 @@
 ---
 slug: plataforma-y-despliegue
+codigo: AF-18
 titulo: "Plataforma y despliegue"
 resumen: "Dónde tengo profundidad de plataforma —Microsoft: Fabric, Power BI, Microsoft Foundry—, qué despliego y opero yo mismo con Git, GitHub Actions, CI/CD, Vercel y Sentry, lo que no he hecho dicho sin rodeos —Docker, Kubernetes, Vertex AI, BigQuery— y cómo cubro esa brecha."
 cuando_usar: "Úsalo cuando pregunten por su experiencia con Azure y la nube de Microsoft, Google Cloud, Docker y Kubernetes, MLOps, integración y despliegue continuos, qué despliega y mantiene directamente, y qué no ha hecho nunca y tendría que aprender."

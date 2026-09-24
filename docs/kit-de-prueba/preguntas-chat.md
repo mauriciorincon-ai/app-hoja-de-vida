@@ -12,6 +12,8 @@
 5. ¿En qué consiste su rol más reciente?
 
 **Qué esperar:** respuesta basada solo en el contenido de la HV, con uno o más chips de fuente
+(cada uno dice `[n] código · destino`, p. ej. `[1] AF-09 · Vesting`; el código es el documento a
+fondo o `CV`, y el destino es el nombre de la sección o página a la que lleva)
 (`[1]`, `[2]`…) debajo que, al hacer clic, navegan a la sección o al case study correcto.
 Juzga: ¿la respuesta es fiel a lo que dice la hoja de vida? ¿la cita lleva al lugar correcto?
 

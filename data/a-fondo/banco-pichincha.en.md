@@ -1,5 +1,6 @@
 ---
 slug: banco-pichincha
+codigo: AF-08
 titulo: "Banco Pichincha — BI the business actually uses (2023)"
 resumen: "Five months in banking: dashboards adopted by 50+ users (+25% in decisions), ETL −35%, churn, delinquency and risk models in production with scikit-learn (>90%), a team of 5, 12 professionals trained and data governance co-led."
 cuando_usar: "Use this when they ask about Banco Pichincha (2023): the financial sector, churn, delinquency and risk models in production, semantic models and DAX, BI adoption by more than 50 users, co-led data governance and the analyst training program."

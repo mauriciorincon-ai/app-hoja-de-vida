@@ -1,5 +1,6 @@
 ---
 slug: certificaciones
+codigo: AF-11
 titulo: "Certifications — the path from the DP-600"
 resumen: "Five credentials earned —DP-600 in Microsoft Fabric in December 2024 and four from IBM in data science— and two paths in progress since July 2026: AI-103 (apps and agents) and AI-300 (MLOps), which replaces the retired DP-100."
 cuando_usar: "Use this when they ask which certifications he holds: the Microsoft Fabric DP-600, the four IBM data science certifications, the AI-103 and AI-300 tracks in progress, how long it took him to earn them, and which certification he plans to take next."

@@ -1,5 +1,6 @@
 ---
 slug: bi-que-se-adopta
+codigo: AF-20
 titulo: "BI que se adopta"
 resumen: "La adopción como indicador y no el tablero: 50+ usuarios en banca, 25+ usuarios clave en transporte, 15+ en logística y 42 productos para 20 líderes en salud; la formación como parte del producto, la procedencia de cada cifra y el agente que construye reportes de Power BI completos."
 cuando_usar: "Úsalo cuando pregunten por inteligencia de negocios: cómo logra que la gente use los tableros, cuántos usuarios han adoptado sus tableros, la adopción como indicador, el diseño alrededor de una decisión, Power BI, Shiny, Tableau y Looker Studio, y el liderazgo en BI y analítica."

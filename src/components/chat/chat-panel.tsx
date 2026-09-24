@@ -154,8 +154,10 @@ export function ChatPanel({
       const resultados = retriever.topK(pregunta, TOP_K_CONTEXTO);
       const fuentes: Fuente[] = resultados.map((r, i) => ({
         n: i + 1,
+        codigo: r.chunk.codigo,
         titulo: r.chunk.titulo,
         ancla: r.chunk.ancla,
+        destino: r.chunk.destino,
       }));
       const texto =
         resultados.length === 0
@@ -177,7 +179,11 @@ export function ChatPanel({
             locale,
             pregunta,
             respuesta: texto.slice(0, 4000),
-            fuentes: fuentes.map((f) => ({ titulo: f.titulo, ancla: f.ancla })),
+            fuentes: fuentes.map((f) => ({
+              codigo: f.codigo,
+              titulo: f.titulo,
+              ancla: f.ancla,
+            })),
           }),
         }).catch(() => undefined);
       }
@@ -372,14 +378,20 @@ export function ChatPanel({
                       // visitante volvía a un panel vacío. Con navegación del
                       // lado cliente el lanzador (en el layout) y el panel
                       // (solo se oculta) conservan la conversación.
+                      // Código + destino, no el título del fragmento (decisión
+                      // del dueño, 2026-09-23): los documentos a fondo no se
+                      // publican, así que el chip dice de qué fuente salió la
+                      // frase («AF-09») y a dónde lleva la cita («Vesting»).
+                      // El título completo queda en el tooltip.
                       <Link
                         key={f.n}
                         href={hrefFuente(f.ancla)}
                         onClick={onCerrar}
+                        title={f.titulo}
                         data-testid="chat-fuente"
                         className="rounded-full bg-sage px-2 py-0.5 font-mono text-[10px] text-sage-ink transition-[filter] duration-[120ms] hover:brightness-[0.97] motion-reduce:transition-none"
                       >
-                        [{f.n}] {recortar(f.titulo, 40)}
+                        [{f.n}] {f.codigo} · {f.destino}
                       </Link>
                     ))}
                   </div>

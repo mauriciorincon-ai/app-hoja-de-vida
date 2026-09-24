@@ -193,8 +193,10 @@ export async function POST(request: Request): Promise<Response> {
   const contexto = retriever.topK(pregunta.content, TOP_K_CONTEXTO);
   const fuentes: Fuente[] = contexto.map((f, i) => ({
     n: i + 1,
+    codigo: f.chunk.codigo,
     titulo: f.chunk.titulo,
     ancla: f.chunk.ancla,
+    destino: f.chunk.destino,
   }));
   const system = construirSystemPrompt(locale, contexto);
   const modelMessages: ModelMessage[] = messages.map((m) => ({
@@ -251,7 +253,11 @@ export async function POST(request: Request): Promise<Response> {
         registrar({
           pregunta: pregunta.content,
           respuesta: texto,
-          fuentes: fuentes.map((f) => ({ titulo: f.titulo, ancla: f.ancla })),
+          fuentes: fuentes.map((f) => ({
+            codigo: f.codigo,
+            titulo: f.titulo,
+            ancla: f.ancla,
+          })),
           modo: "ia",
           proveedor: modelo.proveedor,
           modelo: modelo.modelId,

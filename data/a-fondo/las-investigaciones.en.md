@@ -1,5 +1,6 @@
 ---
 slug: las-investigaciones
+codigo: AF-24
 titulo: "The research: method before result"
 resumen: "Seven research lines published with their measured gap —1,414, 900, 780, 279, 1,405, 119 and 900 works reviewed— and their findings, produced with two harnesses: Design Science (52 criteria, thresholds frozen before measuring) and Computational Paper (44 criteria, ledger: if it is not in the ledger it is not in the paper)."
 cuando_usar: "Use this when they ask what research he has done, whether he has written articles or papers, the two research harnesses (Design Science and Computational Paper), the method of measuring the gap in the literature, synthetic data and simulation, and what research has to do with an AI role."
