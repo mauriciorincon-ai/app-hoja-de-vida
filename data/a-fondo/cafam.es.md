@@ -1,5 +1,6 @@
 ---
 slug: cafam
+codigo: AF-06
 titulo: "Cafam — el WMS y el equipo de 20 (2020–2021)"
 resumen: "La implementación de Oracle WMS Cloud en un centro de distribución de medicamentos: 20 personas en pruebas durante seis meses, el BI de control, las integraciones en VBA y la calidad del dato en SQL."
 cuando_usar: "Úsalo cuando pregunten por Cafam (2020–2021): la implementación de un sistema de gestión de bodega (Oracle WMS Cloud) en un centro de distribución de medicamentos, el equipo más grande que ha liderado (20 personas), integraciones en VBA, calidad de datos en SQL y simulación con FlexSim."

@@ -5,6 +5,7 @@ import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { buildChunks } from "../../scripts/build-chat-index.mjs";
 import { catalogoDeDestinos, destinoExiste } from "../../scripts/destinos.mjs";
+import { CODIGO_FICHA } from "../../scripts/fichas-al-indice.mjs";
 import { parseChatIndex } from "@/lib/ia/schemas";
 
 describe("buildChunks (YAML + «a fondo» → chunks con ancla)", () => {
@@ -74,6 +75,7 @@ describe("buildChunks (YAML + «a fondo» → chunks con ancla)", () => {
     aFondo: [
       {
         slug: "vesting",
+        codigo: "AF-09",
         titulo: "Vesting",
         estado: "aprobado",
         ancla: "/proyectos/vesting",
@@ -84,6 +86,7 @@ describe("buildChunks (YAML + «a fondo» → chunks con ancla)", () => {
       },
       {
         slug: "en-borrador",
+        codigo: "AF-98",
         titulo: "Aún sin aprobar",
         estado: "borrador",
         ancla: "#trayectoria",
@@ -131,6 +134,18 @@ describe("buildChunks (YAML + «a fondo» → chunks con ancla)", () => {
     expect(porId.get("casestudy-vesting")?.texto).toContain("Impacto.");
   });
 
+  it("cada chunk dice de qué fuente salió: CV, APP o el código del documento", () => {
+    // El chip enseña el código (2026-09-23): al dueño le dice qué archivo
+    // corregir. Lo del YAML del CV es «CV», lo de apps.yaml es «APP», lo de un
+    // documento a fondo es SU código, y una ficha de la vitrina «FT».
+    expect(porId.get("perfil")?.codigo).toBe("CV");
+    expect(porId.get("proyecto-vesting")?.codigo).toBe("CV");
+    expect(porId.get("app-hoja-de-vida")?.codigo).toBe("APP");
+    expect(porId.get("a-fondo-vesting-arquitectura")?.codigo).toBe("AF-09");
+    expect(CODIGO_FICHA).toBe("FT");
+    for (const c of chunks) expect(c.codigo, c.id).toBeTruthy();
+  });
+
   it("las apps usan el nombre/descripción del locale", () => {
     expect(porId.get("app-hoja-de-vida")?.texto).toContain("Esta página");
   });
@@ -156,6 +171,18 @@ describe("script real contra los data/ reales (integración del build)", () => {
       expect(index.chunks.some((c) => c.ancla === "/proyectos/vesting")).toBe(
         true,
       );
+
+      // TODO DESTINO TIENE NOMBRE, y es el que el visitante reconoce: el chip
+      // dice «Vesting», no «Plataforma de datos para agentes de IA — Vesting
+      // (2023–2025)» ni el título del fragmento. `parseChatIndex` ya exigió
+      // `codigo` y `destino` en cada chunk.
+      const vesting = index.chunks.find((c) => c.ancla === "/proyectos/vesting");
+      expect(vesting?.destino).toBe("Vesting");
+      const skills = index.chunks.find((c) => c.ancla === "#skills");
+      expect(skills?.destino).toBe("Skills");
+      const aFondo = index.chunks.filter((c) => c.id.startsWith("a-fondo-"));
+      expect(aFondo.length).toBeGreaterThan(0);
+      for (const c of aFondo) expect(c.codigo, c.id).toMatch(/^AF-\d{2}$/);
 
       // EL DESTINO DE TODA CITA EXISTE. La regla nació de encontrar «#apps»
       // —muerto desde la revisión post-S7— vivo en el índice publicado.

@@ -1,5 +1,6 @@
 ---
 slug: origenes
+codigo: AF-02
 titulo: "De la ingeniería industrial a los datos"
 resumen: "El arco: por qué Ingeniería Industrial y Diseño Industrial, el primer trabajo que fue de procesos, los tres saltos hasta la IA con la tabla de los ocho empleos, el hilo con sus métodos, y cuántos años son."
 cuando_usar: "Úsalo cuando pregunten por qué estudió ingeniería industrial y diseño industrial, en qué universidad, cómo pasó de los procesos a los datos y a la inteligencia artificial, cuántos años de experiencia tiene, en qué sectores y empresas ha trabajado, o qué pasó en las pausas entre empleos."

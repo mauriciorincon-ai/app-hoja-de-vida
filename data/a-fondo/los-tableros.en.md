@@ -1,5 +1,6 @@
 ---
 slug: los-tableros
+codigo: AF-23
 titulo: "The dashboards: public data, verified"
 resumen: "Six sealed dashboards on open data —banking, companies, the monetary cycle, State spending, energy and climate, Formula 1— built with Power BI Desktop, Power Query, DAX, script-written PBIR and Python, with the source's identities run in full and the limits in plain view."
 cuando_usar: "Use this when they ask about the six dashboards published with open data (energy and climate, monetary cycle, Colombian banking, Colombia's companies, state spending, Formula 1), how he verifies the figures he publishes, financial statements and accounting data, Power Query, DAX and the rigor of each dashboard."

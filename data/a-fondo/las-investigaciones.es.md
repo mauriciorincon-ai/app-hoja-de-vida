@@ -1,5 +1,6 @@
 ---
 slug: las-investigaciones
+codigo: AF-24
 titulo: "Las investigaciones: método antes que resultado"
 resumen: "Siete líneas de investigación publicadas con su vacío medido —1.414, 900, 780, 279, 1.405, 119 y 900 obras revisadas— y sus hallazgos, producidas con dos harnesses: Design Science (52 criterios, umbrales congelados antes de medir) y Paper Computacional (44 criterios, ledger: si no está en el ledger no está en el paper)."
 cuando_usar: "Úsalo cuando pregunten qué investigaciones ha hecho, si ha escrito artículos o papers, los dos harnesses de investigación (Design Science y Paper Computacional), el método de medir el vacío en la literatura, datos sintéticos y simulación, y qué tiene que ver la investigación con un rol de IA."

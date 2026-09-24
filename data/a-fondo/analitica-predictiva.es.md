@@ -1,5 +1,6 @@
 ---
 slug: analitica-predictiva
+codigo: AF-21
 titulo: "Analítica predictiva"
 resumen: "Dos familias de modelos en producción con scikit-learn —demanda del SITP por ruta y franja, y fuga, mora y riesgo en banca con más del 90 % de precisión—, las herramientas de machine learning que uso y con qué nivel, la estadística y la ingeniería de variables que sostienen el modelo, y Probeta DS."
 cuando_usar: "Úsalo cuando pregunten por modelos predictivos y machine learning: predicción de demanda, modelos de fuga, mora y riesgo, precisión alcanzada, herramientas (Python, scikit-learn, pandas, numpy, R, SQL), su base estadística, lenguajes de programación, procesamiento de lenguaje natural y Probeta DS."

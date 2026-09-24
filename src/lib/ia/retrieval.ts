@@ -171,9 +171,11 @@ export type Retriever = {
 
 type Hit = {
   id: string;
+  codigo: string;
   titulo: string;
   texto: string;
   ancla: string;
+  destino: string;
   peso?: number;
   score: number;
 };
@@ -192,7 +194,7 @@ const pesoDe = (_id: string, _term: string, stored?: Record<string, unknown>) =>
 export function createRetriever(chunks: ChatChunk[]): Retriever {
   const mini = new MiniSearch<ChatChunk>({
     fields: ["titulo", "texto"],
-    storeFields: ["id", "titulo", "texto", "ancla", "peso"],
+    storeFields: ["id", "codigo", "titulo", "texto", "ancla", "destino", "peso"],
     processTerm,
   });
   mini.addAll(chunks);
@@ -201,9 +203,11 @@ export function createRetriever(chunks: ChatChunk[]): Retriever {
     hits.slice(0, k).map((r) => ({
       chunk: {
         id: r.id,
+        codigo: r.codigo,
         titulo: r.titulo,
         texto: r.texto,
         ancla: r.ancla,
+        destino: r.destino,
         ...(r.peso !== undefined ? { peso: r.peso } : {}),
       },
       score: r.score,

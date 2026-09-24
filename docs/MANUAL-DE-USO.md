@@ -530,6 +530,7 @@ esa palabra, se traduce, y el siguiente deploy lo pone a responder.
 ```yaml
 ---
 slug: vesting # = nombre del archivo, sin el idioma
+codigo: AF-09 # el código que enseña el chip de la cita; fijo, el mismo en los dos idiomas
 titulo: "Vesting — la plataforma de datos para agentes de IA"
 resumen: "Una o dos líneas: de qué va este documento."
 cuando_usar: "Úsalo cuando pregunten por Vesting, Microsoft Fabric desde cero, el monitoreo de agentes…" # como la descripción de una skill
@@ -551,6 +552,16 @@ subsección suelta. Medido al introducirlo (2026-09-21): las respuestas «de pri
 subieron de 103 a 106 en español y de 104 a 118 en inglés. Si el español lo trae, el gemelo
 también (la aduana lo exige).
 
+**El `codigo` es tuyo (desde 2026-09-23).** Los documentos no se publican, así que el chip de una
+cita no puede enseñar «el documento»: enseña **de dónde salió la frase y a dónde lleva**, por
+ejemplo `[1] AF-09 · Vesting`. El código (`AF-NN`, dos dígitos) te dice **qué archivo corregir**
+cuando una respuesta te suene rara: `AF-09` es `vesting.{es,en}.md`, y la tabla de
+`data/a-fondo/README.md` los lista todos. Un documento nuevo toma el siguiente número libre y
+**no se reutiliza** un código retirado. Lo que el chat cita del CV lleva `CV`, lo de `apps.yaml`
+lleva `APP` y lo de una ficha de la vitrina lleva `FT` (esa se corrige en origen, no aquí). El
+**destino** («Vesting», «Skills», «Agentes especializados») no lo escribes: sale del nombre del
+proyecto en el CV, de la etiqueta del menú o del nombre del frente o la pieza, en cada idioma.
+
 **Las comillas del `ancla` no son decoración:** sin ellas, un `#perfil` lo lee YAML como un
 comentario y el campo llega vacío. El build lo dice, pero es más fácil no tropezar.
 
@@ -560,11 +571,13 @@ comentario y el campo llega vacío. El build lo dice, pero es más fácil no tro
 2. Debajo, el comentario `<!-- seccion: un-id-unico -->`
 
 El resto es prosa normal, en primera persona, en párrafos. **Cada subsección es un fragmento
-citable**: cuando el chat responde con ella, el chip `[n]` lleva al `ancla` del documento.
+citable**: cuando el chat responde con ella, el chip `[n] AF-NN · destino` lleva al `ancla` del
+documento, y el título de la subsección queda en el tooltip del chip.
 
 **Lo que el build NO te deja publicar** (y te lo dice con archivo y campo):
 
-- Una cabecera incompleta o con un `estado` inventado.
+- Una cabecera incompleta, con un `estado` inventado o con un `codigo` que no sea `AF-NN`.
+- Dos documentos con el mismo `codigo`, o gemelos ES/EN con códigos distintos.
 - Dos subsecciones con el mismo id en un documento.
 - Un documento `aprobado` sin su gemelo en inglés, o con distintas subsecciones entre idiomas.
 - Un documento `aprobado` que todavía tiene un `[CONFIRMAR: …]`. **Aprobar es justamente haber
@@ -574,6 +587,8 @@ citable**: cuando el chat responde con ella, el chip `[n]` lleva al `ancla` del 
 - Un `ancla` que **no existe en el sitio**. Esta es nueva y vale la pena entenderla: si mañana
   se retira una sección de la HOME, los documentos que citaban hacia ella se ponen en rojo. Una
   cita que no lleva a ninguna parte rompe la única promesa del chat.
+- Un `ancla` que existe pero **no tiene nombre** para el chip (una sección nueva de la HOME sin
+  etiqueta en el menú, por ejemplo). Antes de que un chip diga «undefined», el build lo dice.
 
 **Lo que ningún programa puede cazar por ti: los nombres propios.** El barrido caza correos y
 teléfonos; a un jefe, un cliente o un compañero mencionado por su nombre **no lo caza un regex**.

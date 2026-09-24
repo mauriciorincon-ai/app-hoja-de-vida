@@ -68,6 +68,84 @@ Es exactamente lo que vio el dueño: un panel sin mensajes. Con `<Link>`, los 10
 verde. Guía v9.3: f1 pasa a *Mejorado · cita viva* con la expectativa nueva; prefijo de casillas
 `cita-viva` para que ninguna regresión sin correr herede una marca.
 
+## Hallazgo 3 — la cita no decía de dónde salía ni a dónde llevaba (PR de la tarde)
+
+Con la cita ya viva, el dueño hizo la pregunta correcta: *«¿qué lógica tiene que yo le dé a un
+documento de a fondo y me lleve a una parte de la página que no tiene nada que ver con a fondo?
+¿Y cómo se decide a qué parte lleva cada fuente?»*. La regla era correcta y estaba escrita desde
+el S8 —los documentos no se publican, la cita navega a lo visible, y el destino lo declara cada
+documento en su `ancla`—, pero **el chip no la contaba**: enseñaba el título del fragmento («A
+fondo — Vesting — la plataforma… · Monitoreo», cortado a 40 letras) y aterrizaba donde nadie
+podía anticipar. Decisión del dueño, textual: *«si a los documentos le damos un código y al lado
+del código sí a dónde me va a llevar esa fuente»*.
+
+**Lo que cambió.** Cada chunk del índice lleva ahora `codigo` y `destino`, y el chip dice
+`[n] AF-09 · Vesting`:
+
+| Pieza | Qué hace |
+| --- | --- |
+| `codigo: AF-NN` en el frontmatter de los 25 documentos (×2 idiomas) | Fijo, único por idioma, igual entre gemelos. Orden = la tabla del README. Para el dueño: qué archivo corregir |
+| `CV` · `APP` · `FT` | El código de lo que sale del YAML del CV, de `apps.yaml` y de las fichas de la vitrina (esas se corrigen en origen) |
+| `nombresDeDestinos(locale)` + `nombreDeDestino()` en `scripts/destinos.mjs` | El NOMBRE del destino, derivado: etiqueta del menú para `#seccion`, el «dónde» del nombre del proyecto para `/proyectos/<slug>`, nombre del frente o pieza para la vitrina. `#skills-titulo` → «Skills»; `/ruta#frag` → la ruta |
+| `chatChunkSchema` y `fuenteSchema` | Exigen los dos campos: un índice sin ellos no carga |
+| El chip (`chat-panel.tsx`) | `[n] {codigo} · {destino}`, título completo en `title=`; encabezado «Fuentes · ver en el sitio» |
+| El registro (`chat_registro`) | Las fuentes guardan también el `codigo` — el dueño lee una conversación y sabe qué archivo tocar |
+| Tabla del README de a fondo | Gana la columna Código (la genera `pnpm corpus:informe`) |
+
+**Regla 14 — cada gate nuevo, en rojo en este mismo commit.** Las tres preguntas: ¿lo vi
+fallar? sí, abajo; ¿lo vi correr? sí, en `pnpm test` (42 archivos) y en el build del índice;
+¿puede fallar? sí, cada uno tiene un estado del repo que ninguna regla anterior atrapa.
+
+1. **Código repetido** (`vesting.es.md` con `AF-08`, que ya es el de Banco Pichincha). La aduana
+   nombra a los dos archivos y, de paso, al gemelo que quedó con otro código:
+
+   ```
+   ✖ Aduana del canal «a fondo» — el build se detiene:
+     - código «AF-08» repetido en data/a-fondo/banco-pichincha.es.md y data/a-fondo/vesting.es.md. Un código nombra a UN documento: …
+     - vesting: el código es «AF-08» en español y «AF-09» en inglés. Los gemelos son el mismo documento y llevan el mismo código.
+   ```
+
+2. **Código mal formado** (`cafam.en.md` con `codigo: "AF6"`):
+
+   ```
+   Error: data/a-fondo/cafam.en.md: frontmatter inválido:
+     - codigo: formato AF-NN con dos dígitos, p. ej. AF-09
+   ```
+
+3. **Destino que existe pero no tiene nombre.** Se montó un `<div id="pruebita" />` dentro del
+   `<main>` de la HOME (así el catálogo lo acepta como destino real) y `como-trabajo` pasó a
+   `ancla: "#pruebita"`. El catálogo lo da por bueno; el gate nuevo no:
+
+   ```
+   ✖ Destinos de cita sin nombre — el build se detiene:
+     - chat-index.es.json · «#pruebita» existe pero no tiene nombre para el chip (74 chunks, p. ej. "a-fondo-como-trabajo-cuando-usar"). Dale etiqueta en messages/es.json (nav.*) o en los datos que lo pintan.
+   ```
+
+   (La primera versión del mensaje listaba los 74 chunks uno a uno; se agrupó por destino.)
+
+4. **El chip, en e2e.** Aserción nueva en `tests/e2e/chat.spec.ts`: el chip de Vesting tiene que
+   leer `[n] AF-NN · Vesting` o `[n] CV · Vesting`, y en `/en` ningún chip puede decir «In depth».
+   Corrida con el chip viejo (título recortado), 2 de 10 en rojo:
+
+   ```
+   Error: expect(locator).toHaveText(expected) failed
+   Expected pattern: /^\[\d\] (AF-\d{2}|CV|APP|FT) · .+$/
+   Received string:  "[1] In depth — AI agents: the Vesting platfo…"
+   ```
+
+   Con el chip nuevo, 10 de 10.
+
+**Un tropiezo propio, para no repetirlo:** al limpiar las demos con `git checkout -- <archivo>`
+sobre archivos cuyo cambio aún no estaba comiteado, el `codigo` de cuatro documentos se borró y
+las demos 2 y 3 salieron rojas **por la razón equivocada** (`codigo: undefined` en Vesting). Se
+repusieron los cuatro códigos y se repitieron las dos demos revirtiendo con `sed`, no con git.
+Lección: una demo en rojo solo vale si el mensaje nombra la causa que se rompió a propósito.
+
+**Lo que no cambió a propósito:** los seis documentos que citan hacia `#skills` siguen
+compartiendo destino («Skills»). El código ya los distingue; si el destino grueso molesta, se
+revisa después con respuestas reales delante. Y el chip conserva su estilo (`design-sync/` sin
+cambios: mismo componente, otro texto).
+
 ## Verificación
 
 | Qué | Resultado |
@@ -76,13 +154,17 @@ verde. Guía v9.3: f1 pasa a *Mejorado · cita viva* con la expectativa nueva; p
 | `tests/unit/chat-provider-breaker.test.ts` | 17 verdes con el nuevo default |
 | typecheck · lint | limpios |
 | Producción | respuesta real de Vesting: dos párrafos, 27 agentes / 23 simultáneos / 12 clientes, citas `[1]`–`[4]`, sin etiqueta de búsqueda local |
+| Hallazgo 3 · `pnpm test` | 42 archivos, 1.246 pruebas verdes (nuevas: código único y bien formado, gemelos con el mismo código, chunks con código, nombres de destino en ES/EN, todo destino del catálogo con nombre, corpus real con sus 25 códigos) |
+| Hallazgo 3 · índice | 1.467 chunks ES / 1.457 EN, 70 pares código·destino, ninguno sin campo |
+| Hallazgo 3 · e2e `chat.spec.ts` | 2/10 rojos con el chip viejo; **10/10** con el nuevo |
+| Hallazgo 3 · typecheck · lint | limpios |
 
 ## Lo que queda para el dueño
 
 - **Rotar `CHAT_SESSION_SECRET`**: el valor vivo se pegó en el chat al depurar. Baja urgencia
   (transcript local); rotarlo invalida su propia sesión y nada más.
-- **Las fuentes del chat**: ya no borran nada. Decidir si se quedan como están (son la promesa
-  «verifica con las fuentes citadas» y lo que impide inventar) o se pliegan tras «Fuentes (n)».
+- **Las fuentes del chat**: decidido (Hallazgo 3): se quedan, y dicen código y destino. Queda
+  abierto si los seis documentos que citan hacia `#skills` merecen destinos más finos.
 - **Apuntar el dominio al sitio** (`NEXT_PUBLIC_SITE_URL` + DNS en Cloudflare, esta vez en
   naranja): hoy el dominio solo firma correos.
 - **DMARC** opcional en Cloudflare (`_dmarc` → `v=DMARC1; p=none;`).

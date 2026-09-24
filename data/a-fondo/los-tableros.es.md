@@ -1,5 +1,6 @@
 ---
 slug: los-tableros
+codigo: AF-23
 titulo: "Los tableros: datos públicos, verificados"
 resumen: "Seis tableros sellados sobre datos abiertos —banca, empresas, ciclo monetario, gasto del Estado, energía y clima, Fórmula 1— construidos con Power BI Desktop, Power Query, DAX, PBIR escrito por script y Python, con las identidades del origen corridas enteras y los límites a la vista."
 cuando_usar: "Úsalo cuando pregunten por los seis tableros publicados con datos abiertos (energía y clima, ciclo monetario, banca colombiana, empresas de Colombia, gasto del Estado, Fórmula 1), cómo verifica las cifras que publica, estados financieros y datos contables, Power Query, DAX y el rigor de cada tablero."

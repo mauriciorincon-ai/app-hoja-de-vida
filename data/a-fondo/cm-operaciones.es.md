@@ -1,5 +1,6 @@
 ---
 slug: cm-operaciones
+codigo: AF-05
 titulo: "C&M Consorcio / TransMilenio — Analista de Operaciones (2018–2020)"
 resumen: "Mi entrada al transporte masivo: 18 meses supervisando con datos la operación de Bogotá, tableros e informes de desempeño, automatización del procesamiento y las dos preguntas que hoy son investigaciones."
 cuando_usar: "Úsalo cuando pregunten por la operación de transporte de una ciudad en C&M Consorcio (2018–2020): supervisión de rutas y concesionarias de TransMilenio, automatización de reportes con Excel, VBA y SQL, indicadores de cumplimiento y el histórico operacional."

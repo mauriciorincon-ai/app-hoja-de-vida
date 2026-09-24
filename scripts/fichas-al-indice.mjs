@@ -207,9 +207,16 @@ export function chunksDeApp({ brochure, complemento }, locale = "es", tope = TOP
  */
 export const PESO_FICHA = 0.5;
 
+/**
+ * El código que enseña el chip de una cita a una ficha: «FT» (ficha técnica).
+ * Las fichas las produce otra casa y llegan por copia; el código le dice al
+ * dueño que lo que se citó no se corrige aquí, sino en origen.
+ */
+export const CODIGO_FICHA = "FT";
+
 export function chunksDeFichas({ apps, piezas }, locale = "es", tope = TOPE_PALABRAS_CHUNK) {
   return [
     ...apps.flatMap((app) => chunksDeApp(app, locale, tope)),
     ...piezas.flatMap((pieza) => chunksDePieza(pieza, locale, tope)),
-  ].map((c) => ({ ...c, peso: PESO_FICHA }));
+  ].map((c) => ({ ...c, codigo: CODIGO_FICHA, peso: PESO_FICHA }));
 }

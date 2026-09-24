@@ -11,9 +11,17 @@ import { z } from "zod";
 /** Un chunk del índice de conocimiento (ADR-010). `ancla` es locale-agnóstica. */
 export const chatChunkSchema = z.object({
   id: z.string().min(1),
+  /**
+   * De qué fuente salió (2026-09-23): `AF-NN` un documento a fondo, `CV` el
+   * YAML del CV, `APP` apps.yaml, `FT` una ficha de la vitrina. El chip lo
+   * enseña; al dueño le dice qué archivo corregir.
+   */
+  codigo: z.string().min(1),
   titulo: z.string().min(1),
   texto: z.string().min(1),
   ancla: z.string().min(1),
+  /** El NOMBRE de a dónde lleva la cita («Vesting», «Skills»), derivado en build. */
+  destino: z.string().min(1),
   /**
    * Peso del fragmento en el ranking (ADR-023). Ausente = 1. Las fichas de la
    * vitrina entran con 0,5: son evidencia de una pieza concreta, no la voz del
@@ -58,8 +66,10 @@ export type ChatRequest = z.infer<typeof chatRequestSchema>;
 /** Cita enviada al cliente como data part del stream: [n] → destino navegable. */
 export const fuenteSchema = z.object({
   n: z.number().int().min(1),
+  codigo: z.string().min(1),
   titulo: z.string().min(1),
   ancla: z.string().min(1),
+  destino: z.string().min(1),
 });
 export type Fuente = z.infer<typeof fuenteSchema>;
 

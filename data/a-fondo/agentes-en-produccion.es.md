@@ -1,5 +1,6 @@
 ---
 slug: agentes-en-produccion
+codigo: AF-15
 titulo: "Agentes de IA: la plataforma de Vesting y ARKHÉ, mi ecosistema propio"
 resumen: "Dos experiencias con agentes: 27 construidos con el proceso core de Vesting sobre n8n y monitoreados en tiempo real, y ARKHÉ, mi ecosistema agéntico de harnesses especializados, medido en 120 escenarios: −52 % de tokens y cumplimiento del 71 % al 93 %."
 cuando_usar: "Úsalo cuando pregunten si ha construido agentes de inteligencia artificial, qué frameworks de agentes ha usado (n8n, Claude Code), cómo monitorea un agente en producción, qué es ARKHÉ, cómo evita que el modelo invente, y su experiencia con IA generativa y modelos de lenguaje grandes."

@@ -1,5 +1,6 @@
 ---
 slug: certificaciones
+codigo: AF-11
 titulo: "Certificaciones — el camino desde el DP-600"
 resumen: "Cinco credenciales obtenidas —DP-600 de Microsoft Fabric en diciembre de 2024 y cuatro de IBM en ciencia de datos— y dos rutas en curso desde julio de 2026: AI-103 (aplicaciones y agentes) y AI-300 (MLOps), que reemplaza al DP-100 retirado."
 cuando_usar: "Úsalo cuando pregunten qué certificaciones tiene: el DP-600 de Microsoft Fabric, las cuatro de IBM en ciencia de datos, las rutas AI-103 y AI-300 en curso, cuánto tardó en obtenerlas, y qué certificación piensa sacar después."

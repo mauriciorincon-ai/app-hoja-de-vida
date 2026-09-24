@@ -1,5 +1,6 @@
 ---
 slug: lo-que-busco
+codigo: AF-13
 titulo: "What I am looking for"
 resumen: "What problem I want to solve, the four types of role where I perform best, under what conditions —Bogotá, remote or relocation, B2 English— and what I offer in return, with the public evidence that backs it."
 cuando_usar: "Use this when they ask what type of role he is looking for, whether he works remotely or would relocate to another country, which city he lives in, his English level, what motivates him, what sets him apart from other candidates, why hire him, or how he prefers a selection process."

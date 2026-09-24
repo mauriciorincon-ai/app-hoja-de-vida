@@ -1,5 +1,6 @@
 ---
 slug: banco-pichincha
+codigo: AF-08
 titulo: "Banco Pichincha — BI que el negocio sí usa (2023)"
 resumen: "Cinco meses en banca: dashboards adoptados por 50+ usuarios (+25 % en decisiones), ETL −35 %, modelos de fuga, mora y riesgo en producción con scikit-learn (>90 %), un equipo de 5, 12 profesionales formados y el gobierno de datos co-liderado."
 cuando_usar: "Úsalo cuando pregunten por Banco Pichincha (2023): sector financiero, modelos de fuga, mora y riesgo en producción, modelos semánticos y DAX, adopción de BI por más de 50 usuarios, gobierno de datos co-liderado y el programa de formación de analistas."

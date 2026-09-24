@@ -43,7 +43,15 @@ export const registroLocalSchema = z.object({
   pregunta: z.string().trim().min(1).max(800),
   respuesta: z.string().trim().min(1).max(4000),
   fuentes: z
-    .array(z.object({ titulo: z.string().min(1), ancla: z.string().min(1) }))
+    .array(
+      z.object({
+        // El código de la fuente («AF-09», «CV»…) viaja al registro para que
+        // el dueño sepa qué archivo corregir al leer una conversación.
+        codigo: z.string().min(1).optional(),
+        titulo: z.string().min(1),
+        ancla: z.string().min(1),
+      }),
+    )
     .max(8)
     .default([]),
 });
@@ -64,7 +72,7 @@ export type EntradaRegistro = {
   locale: "es" | "en";
   pregunta: string;
   respuesta: string;
-  fuentes: { titulo: string; ancla: string }[];
+  fuentes: { codigo?: string; titulo: string; ancla: string }[];
   modo: "ia" | "offtopic" | "local";
   proveedor?: string;
   modelo?: string;

@@ -1,5 +1,6 @@
 ---
 slug: bi-que-se-adopta
+codigo: AF-20
 titulo: "BI that gets adopted"
 resumen: "Adoption as the indicator and not the dashboard: 50+ users in banking, 25+ key users in transport, 15+ in logistics and 42 products for 20 leaders in healthcare; training as part of the product, the provenance of every figure and the agent that builds complete Power BI reports."
 cuando_usar: "Use this when they ask about business intelligence: how he gets people to use the dashboards, how many users have adopted his dashboards, adoption as the indicator, designing around a decision, Power BI, Shiny, Tableau and Looker Studio, and leadership in BI and analytics."

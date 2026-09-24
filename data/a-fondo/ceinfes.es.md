@@ -1,5 +1,6 @@
 ---
 slug: ceinfes
+codigo: AF-04
 titulo: "Ceinfes — Coordinador de Operaciones (2017–2018)"
 resumen: "Coordinar tres frentes para más de 100 colegios: KPIs por área, el balanceo de la digitalización, informes a la junta directiva y la transición a gestión por procesos con Kanban."
 cuando_usar: "Úsalo cuando pregunten por Ceinfes (2017–2018): indicadores y KPI, informes a una junta directiva, gestión por procesos, la operación de evaluación en colegios, Kanban y Scrum, digitalización de hojas de respuesta y mejora continua."

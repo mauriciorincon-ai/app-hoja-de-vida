@@ -1,5 +1,6 @@
 ---
 slug: rag-y-el-chat
+codigo: AF-16
 titulo: "RAG: cómo funciona este chat por dentro"
 resumen: "La arquitectura del chat de esta página con sus números: índice en tiempo de build, recuperación léxica con MiniSearch (BM25) sin embeddings, guardrails en capas, umbral medido, citas navegables, cinco proveedores intercambiables, fallback local, presupuesto de US$20 con costo real de cero, la puerta de nombre y correo con código de verificación, qué datos guarda el registro de conversaciones y quién los lee, y cómo se evalúa con 75 preguntas propias y 136 de afuera."
 cuando_usar: "Úsalo cuando pregunten cómo funciona el chat de esta página, qué arquitectura RAG implementó, si usa embeddings o búsqueda léxica, con qué proveedor de modelos trabaja, cómo evita que el modelo invente respuestas, y cómo evalúa el sistema con un golden set y un banco de preguntas. Úsalo también para todo lo que tenga que ver con la puerta del chat y con la privacidad: por qué pide el nombre y el correo antes de responder, para qué sirve el código de verificación de seis dígitos que llega por email, qué datos personales guarda, quién puede leerlos, cuánto duran, cómo pedir que los borren, y por qué las respuestas son de dos o tres párrafos en vez de un volcado del corpus."

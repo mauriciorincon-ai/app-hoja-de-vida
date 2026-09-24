@@ -394,12 +394,12 @@ export function tablaDeDocumentos(docs, ordenPrevio = []) {
       0,
     );
   const L = [
-    "| #  | Documento | Estado | Subsec. | `[CONFIRMAR]` | Cita hacia |",
-    "| -- | --------- | ------ | ------: | ------------: | ---------- |",
+    "| #  | Código | Documento | Estado | Subsec. | `[CONFIRMAR]` | Cita hacia |",
+    "| -- | ------ | --------- | ------ | ------: | ------------: | ---------- |",
   ];
   ordenados.forEach((d, i) => {
     L.push(
-      `| ${i + 1} | \`${d.slug}\` | ${d.estado} | ${d.subsecciones.length} | ` +
+      `| ${i + 1} | ${d.codigo} | \`${d.slug}\` | ${d.estado} | ${d.subsecciones.length} | ` +
         `${abiertas(d)} | \`${d.ancla}\` |`,
     );
   });
