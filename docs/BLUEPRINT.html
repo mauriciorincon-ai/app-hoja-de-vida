@@ -84,7 +84,7 @@
     <text class="titulo-caja" x="410" y="180" text-anchor="middle">Vercel Hobby</text>
     <text class="detalle-caja" x="410" y="200" text-anchor="middle">Next.js 16 · SSG + route handlers</text>
     <text class="detalle-caja" x="410" y="217" text-anchor="middle">prod desde main · preview por PR</text>
-    <text class="detalle-caja" x="410" y="234" text-anchor="middle">subdominio del proveedor</text>
+    <text class="detalle-caja" x="410" y="234" text-anchor="middle">dominio propio · DNS Cloudflare (sin proxy)</text>
 
     <!-- Base de datos (Supabase) -->
     <rect class="caja caja-bd" x="640" y="40" width="290" height="104" rx="10"/>
@@ -109,7 +109,7 @@
     <!-- Futuro -->
     <rect class="caja-futuro" x="20" y="336" width="180" height="80" rx="10"/>
     <text class="titulo-caja detalle-futuro" x="110" y="362" text-anchor="middle">(futuro · H2)</text>
-    <text class="detalle-caja" x="110" y="380" text-anchor="middle">dominio propio ✓ (correo)</text>
+    <text class="detalle-caja detalle-futuro" x="110" y="380" text-anchor="middle">correo entrante del dominio</text>
     <text class="detalle-caja detalle-futuro" x="110" y="396" text-anchor="middle">buzón (C4, PWA…)</text>
 
     <!-- Flechas -->
@@ -143,9 +143,9 @@
       <tr><td>Observabilidad</td><td>Pino · Sentry · Vercel Analytics</td><td>logs estructurados en los route handlers (request-id, latencia); Sentry client-only inerte sin DSN; eventos de producto en Analytics</td></tr>
       <tr><td>Crons / keep-alives</td><td>ninguno</td><td>no hay procesos programados; todo es request-driven o build-time</td></tr>
       <tr><td>Secretos</td><td><code>.env.local</code> (gitignored) + Vercel env vars</td><td>doble hook gitleaks (pre-commit + PreToolUse); jamás en el repo</td></tr>
-      <tr><td>Dominio</td><td>el sitio sigue en el subdominio del proveedor (Vercel) — la URL exacta NO se publica aquí (regla 17)</td><td><strong>dominio propio comprado 2026-09-23</strong> (Cloudflare Registrar, auto-renew, vence 2027-09-22): hoy solo firma el correo del chat; apuntarlo al sitio (<code>NEXT_PUBLIC_SITE_URL</code>) es decisión pendiente del dueño</td></tr>
+      <tr><td>Dominio</td><td><strong>el sitio vive en el dominio propio desde 2026-09-24</strong> — la URL exacta NO se publica aquí (regla 16)</td><td>Cloudflare Registrar (auto-renew, vence 2027-09-22) y su DNS: dos CNAME al destino del proyecto en Vercel (el principal con <em>CNAME flattening</em>), <strong>DNS only, sin proxy</strong> — Vercel desaconseja un proxy delante, y los límites por IP del chat y los formularios necesitan ver la IP real del visitante. Dominio principal sin <code>www</code>; el <code>www</code> redirige con 308. Certificado Let's Encrypt emitido y renovado por Vercel. <code>NEXT_PUBLIC_SITE_URL</code> en Production (tipo Config, no es secreto) alimenta canonical, hreflang, sitemap y el PDF. El subdominio del proveedor sigue respondiendo</td></tr>
       <tr class="critica"><td>Costo real / mes</td><td><strong>≈ US$1</strong> (el dominio: ~US$10–15/año, a precio de costo en Cloudflare)</td><td>Vercel Hobby · Supabase free (2 proyectos/org, ambos usados) · Groq free (<code>openai/gpt-oss-120b</code>: 30 RPM · 1K req/día · 8K TPM · 200K TPD) · Resend free · Cloudflare Registrar (solo el dominio) · GitHub Free · Sentry/Analytics free. Ningún tier al límite; el primer costo no-cero del proyecto</td></tr>
-      <tr class="critica"><td>Punto único de falla</td><td>la cuenta GitHub (SSO de Vercel y Supabase)</td><td>mitigación: 2FA en GitHub. La app degrada con gracia: sin BD la votación se declara "no disponible"; sin LLM el chat cae a búsqueda local — ninguno tumba el sitio</td></tr>
+      <tr class="critica"><td>Punto único de falla</td><td>la cuenta GitHub (SSO de Vercel y Supabase) · <strong>y ahora la de Cloudflare</strong> (registro y DNS del dominio)</td><td>mitigación: 2FA en las dos. La app degrada con gracia: sin BD la votación se declara "no disponible"; sin LLM el chat cae a búsqueda local — ninguno tumba el sitio. Sin Cloudflare el dominio deja de resolver (y el correo del chat pierde su remitente verificado), pero el subdominio del proveedor sigue sirviendo el sitio</td></tr>
     </tbody>
   </table>
   </div>
@@ -155,6 +155,7 @@
   <table>
     <thead><tr><th>Fecha</th><th>Ciclo</th><th>Cambios</th></tr></thead>
     <tbody>
+      <tr><td>2026-09-24</td><td>H2 (fuera de sprint)</td><td><strong>El dominio propio apunta al sitio:</strong> dos CNAME en el DNS de Cloudflare, sin proxy; <code>www</code> → principal con 308; certificado emitido por Vercel; <code>NEXT_PUBLIC_SITE_URL</code> en Production. Canonical, hreflang, sitemap y el PDF (bloque del dominio en la cabecera, PR #42) usan el dominio. El punto único de falla suma la cuenta de Cloudflare. Costo sin cambio (≈US$1/mes).</td></tr>
       <tr><td>2026-09-23</td><td>H2 (fuera de sprint)</td><td><strong>Producción encendida de verdad:</strong> dominio propio comprado y verificado en Resend; proyecto de Supabase de producción creado (no existía: la votación del S4 nunca había funcionado en producción) y las dos migraciones aplicadas; siete variables en Vercel; la puerta del chat probada de punta a punta. Groq había retirado el modelo por defecto el 2026-08-16 y el chat llevaba cinco semanas en búsqueda local (ADR-003 enmendado, nuevo default). La cita del chat ya no borra la conversación al navegar. Costo pasa de US$0 a ≈US$1/mes (el dominio).</td></tr>
       <tr><td>2026-09-21</td><td>H2 (fuera de sprint)</td><td>El chat con nombre y correo (ADR-024): la fila «Auth» deja de ser «no aplica» (sesión firmada por correo verificado, sin proveedor); la base de datos gana dos tablas con datos personales; Resend gana el correo transaccional del código. Costo sigue en US$0; punto único de falla sin cambio.</td></tr>
       <tr><td>2026-07-20</td><td>H1 (S1–S4)</td><td>Versión inicial as-built al cerrar el ciclo H1. Primera capa de datos de la app: <strong>Supabase</strong> (S4, votación). El resto (Vercel, GitHub+ruleset, Resend, Groq, Sentry/Analytics) consolidado de S1–S3. Costo real US$0.</td></tr>
