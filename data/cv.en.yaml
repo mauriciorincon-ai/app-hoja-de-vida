@@ -110,7 +110,7 @@ trayectoria:
       Data-driven supervision of about 150 TransMilenio routes: traceable
       indicators, automation and the system's statistical memory.
     bullets:
-      - "Data-driven supervision of about 150 routes from 10 concessionaires, cross-referencing fare collection, fleet and GPS, scheduling, incidents and user complaints."
+      - "Data-driven supervision of about 150 routes from 10 concessionaires, cross-referencing five sources: fare collection, fleet and GPS, scheduling, incidents and user complaints."
       - "Performance dashboards and reports —two weekly and one monthly— traceable down to the operational event."
       - "Automation with Excel, VBA and SQL: at least −40% in processing time."
       - "The system's statistical memory in SQLite: the operation's history, week by week."
@@ -123,7 +123,7 @@ trayectoria:
       KPIs and board-level reporting; transition to process-based management
       with agile methods.
     bullets:
-      - "KPIs for scheduling, logistics and digitalization for more than 100 schools a year; weekly reports to the board."
+      - "KPIs for scheduling, logistics and digitalization of mock exams for more than 100 schools a year; weekly reports to the board."
       - "Coordination of about 40 people across three fronts and some 50 exam proctors."
       - "Balancing the digitalization line: about 250 sheets per shift across two scanning stations."
       - "A VBA macro that optimized teacher scheduling with explicit constraints."
@@ -136,7 +136,7 @@ trayectoria:
       ERP, databases and supply chain under ISO 9001; a team of 12 with 95%
       client satisfaction.
     bullets:
-      - "Led the implementation of the Odoo ERP to integrate the organization's processes."
+      - "Led the implementation of the Odoo ERP to integrate the processes of a heavy-machinery rental and sales company, with a fleet of about 120 units."
       - "Designed in SQLite and SQL the analysis databases the operation did not have."
       - "Work study with fatigue allowances for sustainable time standards."
       - "Supply chain and quality assurance under ISO 9001:2015."

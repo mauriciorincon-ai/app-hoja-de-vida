@@ -238,12 +238,17 @@ el mensaje te llega al correo.
   archivo: el build lo toma de la variable `NEXT_PUBLIC_SITE_URL` de Vercel. Sin variable, o en
   local, la cabecera sale sin dominio. Una certificación «en curso» dice «(en curso)» en vez de
   fecha.
-- **Dos páginas, siempre** (desde el 2026-09-24): una prueba cuenta las páginas y falla si
-  pasan de dos. Por eso **la sección «Proyectos» del PDF lista solo los proyectos con
-  `destacado: true`** (hoy, Vesting): desde que cada experiencia tiene su caso de estudio, un
-  proyecto repetía las cifras que ya están en los logros de su experiencia, y listar los ocho
-  llevaba el PDF a tres páginas. Para que otro proyecto salga en el PDF, ponle
-  `destacado: true` en los dos YAML; si con eso pasa de dos páginas, la publicación te avisa.
+- **Dos páginas, sin repetir y sin dejar nada por fuera** (desde el 2026-09-24). El PDF cuenta
+  **cada experiencia una sola vez**: los ocho empleos con **todos** sus logros, y ningún caso de
+  estudio vuelve a aparecer como «Proyecto», porque es la misma historia que su experiencia. La
+  sección «Proyectos» solo sale si agregas un proyecto que **no** es de ningún empleo (hoy no hay
+  ninguno, así que no se pinta). Cuatro pruebas lo cuidan, y la publicación te avisa si una falla:
+  - el PDF no pasa de **dos páginas**;
+  - **cada logro de cada experiencia** está en el PDF (nadie puede recortarlos para que quepa);
+  - **ningún caso se repite** como proyecto;
+  - **cada cifra de la banda de un caso está también en los logros de su experiencia**. Si
+    agregas una cifra a un caso y no a los logros de su empleo, la prueba te dice cuál falta y
+    dónde ponerla: el PDF no lista los casos, así que sin eso esa cifra quedaría por fuera.
 
 ### Las apps del pipeline (`data/apps.yaml`) · desde Sprint 001 · reorganizado 2026-09-05
 

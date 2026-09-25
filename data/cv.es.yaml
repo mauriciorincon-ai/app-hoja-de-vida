@@ -122,7 +122,7 @@ trayectoria:
       Supervisión con datos de unas 150 rutas de TransMilenio: indicadores
       trazables, automatización y la memoria estadística del sistema.
     bullets:
-      - "Supervisión con datos de unas 150 rutas de 10 concesionarios, cruzando recaudo, flota y GPS, programación, novedades y PQR."
+      - "Supervisión con datos de unas 150 rutas de 10 concesionarios, cruzando cinco fuentes: recaudo, flota y GPS, programación, novedades y PQR."
       - "Tableros e informes de desempeño —dos semanales y un consolidado mensual— trazables hasta el evento operativo."
       - "Automatización con Excel, VBA y SQL: al menos −40% en el tiempo de procesamiento."
       - "Memoria estadística del sistema en SQLite: el histórico de la operación, semana a semana."
@@ -135,7 +135,7 @@ trayectoria:
       KPIs e informes a junta directiva; transición a gestión por procesos con
       métodos ágiles.
     bullets:
-      - "KPIs de programación, logística y digitalización para más de 100 colegios al año; informes semanales a la junta directiva."
+      - "KPIs de programación, logística y digitalización de simulacros de pruebas para más de 100 colegios al año; informes semanales a la junta directiva."
       - "Coordinación de cerca de 40 personas en tres frentes y unos 50 profesores aplicadores."
       - "Balanceo de la línea de digitalización: unas 250 hojas por jornada en dos estaciones de escaneo."
       - "Macro en VBA que optimizó la programación de profesores con restricciones explícitas."
@@ -148,7 +148,7 @@ trayectoria:
       ERP, bases de datos y cadena de suministro bajo ISO 9001; equipo de 12
       con 95% de satisfacción de cliente.
     bullets:
-      - "Lideré la implementación del ERP Odoo para integrar los procesos de la organización."
+      - "Lideré la implementación del ERP Odoo para integrar los procesos de una empresa de alquiler y venta de maquinaria pesada, con un parque de unas 120 unidades."
       - "Diseñé en SQLite y SQL las bases de datos de análisis que la operación no tenía."
       - "Estudio del trabajo con suplementos por fatiga para estándares de tiempo sostenibles."
       - "Cadena de suministro y aseguramiento de calidad bajo ISO 9001:2015."

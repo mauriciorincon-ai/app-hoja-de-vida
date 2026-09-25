@@ -42,7 +42,7 @@ mismas experiencias.
 | Logros de la HOME                       | +2: 27 agentes (Vesting) y 42 productos analíticos (CTIC). Ocho, en cuatro columnas                                                                                                                                      |
 | Índice del chat                         | Un fragmento por caso (tesis, contexto, reto, cifras, impacto, lección) y uno por capítulo; los tres documentos a fondo citan ahora su caso                                                                              |
 | «¿Algo no funciona? Avísame»            | En la puerta del chat, bajo «Pedir otro código» (y en el primer paso si algo falló). `POST /api/chat/problema` → correo al dueño con respuesta al visitante y el **diagnóstico de la puerta** (secreto, almacén, correo) |
-| PDF                                     | Vuelve a dos páginas: «Proyectos» lista solo los `destacado: true`                                                                                                                                                       |
+| PDF                                     | Vuelve a dos páginas y cuenta cada experiencia una vez: ningún caso se repite como «Proyecto», y cada cifra de un caso está en los logros de su experiencia                                                              |
 
 ## Regla 14 — cada gate nuevo, en rojo en este mismo PR
 
@@ -110,9 +110,65 @@ AssertionError: el PDF es tiene 3 páginas: expected 3 to be less than or equal 
 
 **El PDF había pasado a tres páginas, y ninguna prueba lo sabía.** Medido con `pdftotext`: la
 tercera página era entera la sección «Proyectos», que repetía palabra por palabra las cifras de
-los logros de cada experiencia. Decisión: en el PDF, «Proyectos» lista solo los `destacado:
-true` (hoy, Vesting), y una prueba nueva cuenta las páginas. El campo `destacado` existía desde
-el S1 y nadie lo leía. **Revertible en una línea** si el dueño prefiere los ocho en el PDF.
+los logros de cada experiencia. Primera decisión: listar solo los `destacado: true` (Vesting), y
+una prueba nueva cuenta las páginas.
+
+**El dueño fijó el criterio, y la primera decisión no lo cumplía.** Sus palabras: _«lo
+importante es que no repita claramente, pero también que no vaya a dejar por fuera ninguna de
+mis experiencias y logros más importantes»_. Releído el PDF con eso delante:
+
+- **Repetía:** Vesting salía dos veces, en su experiencia y otra vez como único «Proyecto», con
+  las mismas frases (Fabric desde cero, la gobernanza, el monitoreo, el proceso core).
+- **Dejaba por fuera** cifras que el sitio destaca en la banda de un caso y que los logros de su
+  experiencia no decían: las **unas 120 unidades** del parque de Inglopres (y qué hacía la
+  empresa: alquiler y venta de maquinaria pesada) y las **cinco fuentes** que cruzaba C&M
+  Consorcio, en los dos idiomas. El resumen de Ceinfes decía también para qué eran los colegios
+  (simulacros de pruebas), y el logro no.
+
+Se corrigió en su raíz: **«Proyectos» lista solo lo que no es ya una experiencia** (un proyecto
+cuyo `slug` no es el `proyecto:` de ningún hito). Hoy no hay ninguno, así que la sección no se
+pinta. Lo que solo decía un resumen de proyecto pasó a los logros de su hito (Inglopres,
+C&M Consorcio y Ceinfes, ES y EN). Lo único que no pasó es la frase de posicionamiento del
+resumen de Vesting («el puente exacto entre la ingeniería de analítica y la de IA»), que no es
+un logro y que el perfil ya cuenta. `destacado` vuelve a no leerlo nadie en el PDF.
+
+**Una falsa alarma mía, para que conste:** el primer sondeo marcó también los «diez meses» de
+TransMilenio en inglés; estaban (_ten months_), y el sondeo no sabía leer números en letras en
+inglés. La prueba sí sabe.
+
+Tres rojos, en este mismo commit:
+
+**7. Una cifra de caso que su experiencia calla** (los logros de antes de este ajuste, `HEAD`):
+
+```
+× cada cifra de un caso está también en los logros de su experiencia (ES y EN)
++ cm-operaciones (es): la cifra 5 «fuentes cruzadas para reconstruir la operación» no está en los
+  logros de su experiencia (data/cv.es.yaml, trayectoria), así que el PDF la deja por fuera.
++ inglopres (es): la cifra ~120 «unidades de maquinaria en el parque» no está en los logros […]
++ cm-operaciones (en) … + inglopres (en) …
+```
+
+**8. Un PDF que recorta logros para caber** (`rol.bullets.slice(0, 3)` en el generador):
+
+```
+× no deja nada por fuera: cada experiencia y cada uno de sus logros está en el PDF
++ es · Fundación CTIC: «Tableros de control por procesos y planes de mejora: […]»
++ es · Vesting — startup de agentes de automatización: «Documenté el proceso core replicable […]»
+```
+
+La prueba de dos páginas no lo habría visto: recortar es justo la forma fácil de caber.
+
+**9. Un caso contado dos veces** (vuelve el filtro de `destacado`):
+
+```
+× no repite: ningún caso de estudio vuelve a contarse como proyecto
+AssertionError: el PDF es cuenta dos veces estas experiencias
++   "Plataforma de datos para agentes de IA",
+```
+
+Tampoco lo ve la de dos páginas: con Vesting repetido, el PDF cabe. Hallazgo de la prueba
+misma: pdfkit parte «cross-referencing» en el guion al final del renglón y el extractor lo
+devuelve como «crossreferencing»; la comparación ignora guiones y saltos, que son maquetación.
 
 **El filtro de temas del chat se aflojó con el contenido nuevo, y está previsto que así sea.**
 Dos preguntas ajenas que la prueba exigía bloquear con el índice de solo-YAML ahora pasan,
@@ -161,15 +217,17 @@ cuando ya eran 34. Ahora son 36 y coinciden texto, estrellas y filtro.
 
 | Qué                              | Resultado                                                                         |
 | -------------------------------- | --------------------------------------------------------------------------------- |
-| `pnpm test` (unit + integración) | 44 archivos, 1.266 pruebas verdes |
+| `pnpm test` (unit + integración) | 44 archivos, 1.270 pruebas verdes |
 | e2e completo (chromium + móvil)  | 383 pasan, 11 saltos condicionales ya existentes, 0 fallas                        |
 | axe                              | los 16 casos (8 × 2 idiomas) sin violaciones                                      |
 | typecheck · lint                 | limpios                                                                           |
-| PDF                              | 2 páginas ES · 2 EN                                                               |
+| PDF                              | 2 páginas ES · 2 EN; cada experiencia una vez, con todos sus logros               |
 | Capturas revisadas               | Vesting escritorio y móvil, Inglopres, C&M Consorcio en inglés, logros de la HOME |
 
 ## Lo que queda para el dueño
 
 - Gate ⭐ de la guía v9.5: **c3** (juicio de los ocho casos), **c4** (juicio visual), **f9**
   (el aviso de problema en producción, con el correo real) y **d1** (el PDF en dos páginas).
-- Decidir si el PDF debe listar más proyectos destacados (`destacado: true` en los dos YAML).
+- El periodo de Vesting: el sitio y el PDF dicen «2024»; los meses que el dueño confirmó el
+  2026-09-19 (`tests/fixtures/cargos-a-fondo.yaml`) son agosto de 2023 a enero de 2025, y el
+  título del caso ya dice «2023–2025». No se tocó: es su decisión cómo publicar sus fechas.

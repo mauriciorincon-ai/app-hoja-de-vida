@@ -4,6 +4,8 @@ import { existsSync, readFileSync, statSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { beforeAll, describe, expect, it } from "vitest";
+import { ansi } from "../../scripts/generate-cv-pdf.mjs";
+import { getCv } from "@/lib/content";
 
 // pdfjs-dist (dentro de pdf-parse) referencia DOMMatrix al evaluar el módulo,
 // pero la extracción de TEXTO no usa canvas: basta un stub para importar.
@@ -32,6 +34,13 @@ const files = {
   es: path.join(outDir, "Henry-Rincon-CV-ES.pdf"),
   en: path.join(outDir, "Henry-Rincon-CV-EN.pdf"),
 };
+
+/**
+ * Sin saltos de línea ni guiones: dónde parte un renglón es maquetación, no
+ * contenido, y pdfkit parte «cross-referencing» en el guion —el extractor lo
+ * devuelve como «crossreferencing»—.
+ */
+const plano = (t: string) => t.replace(/-\s*/g, "").replace(/\s+/g, " ").trim();
 
 async function extractText(file: string): Promise<string> {
   const parser = new PDFParse({ data: new Uint8Array(readFileSync(file)) });
@@ -73,6 +82,41 @@ describe("PDF ATS generado en build desde los YAML", () => {
         paginas,
         `el PDF ${locale} tiene ${paginas} páginas`,
       ).toBeLessThanOrEqual(2);
+    }
+  });
+
+  // EL CRITERIO DEL DUEÑO (2026-09-24): «que no repita, pero también que no
+  // deje por fuera ninguna de mis experiencias y logros más importantes». Dos
+  // pruebas, una por mitad. La que exige que cada cifra de un caso esté en los
+  // logros de su hito vive en `tests/unit/casos-de-estudio.test.ts`; estas
+  // miran el PDF de verdad.
+  it("no deja nada por fuera: cada experiencia y cada uno de sus logros está en el PDF", async () => {
+    for (const locale of ["es", "en"] as const) {
+      const texto = plano(await extractText(files[locale]));
+      const faltan = getCv(locale).trayectoria.flatMap((h) =>
+        [h.rol, h.organizacion, ...h.bullets]
+          .filter((t) => !texto.includes(plano(ansi(t))))
+          .map((t) => `${locale} · ${h.organizacion}: «${t}»`),
+      );
+      expect(faltan.join("\n")).toBe("");
+    }
+  });
+
+  it("no repite: ningún caso de estudio vuelve a contarse como proyecto", async () => {
+    for (const locale of ["es", "en"] as const) {
+      const cv = getCv(locale);
+      const texto = plano(await extractText(files[locale]));
+      const conHito = new Set(cv.trayectoria.map((h) => h.proyecto));
+      // El «qué» del nombre, antes de « — Dónde (cuándo)»: no está en ningún
+      // logro, así que solo aparece si el caso se lista otra vez.
+      const repetidos = cv.proyectos
+        .filter((p) => conHito.has(p.slug))
+        .map((p) => plano(ansi(p.nombre.split(" — ")[0])))
+        .filter((titulo) => texto.includes(titulo));
+      expect(
+        repetidos,
+        `el PDF ${locale} cuenta dos veces estas experiencias`,
+      ).toEqual([]);
     }
   });
 

@@ -38,18 +38,68 @@ const en = getCv("en");
 const conCaso = (cv: Cv) => cv.proyectos.filter((p) => p.casestudy);
 const palabras = (t: string) => t.split(/\s+/).filter(Boolean).length;
 
-/** Las cifras que el corpus escribe en letras, como número. */
-function numerosDelDocumento(md: string): Set<number> {
-  const texto = normalizar(md);
+/** Los que el inglés de los logros escribe en letras («ten months in use»). */
+const NUMEROS_EN = new Map(
+  Object.entries({
+    one: 1,
+    two: 2,
+    three: 3,
+    four: 4,
+    five: 5,
+    six: 6,
+    seven: 7,
+    eight: 8,
+    nine: 9,
+    ten: 10,
+    eleven: 11,
+    twelve: 12,
+    twenty: 20,
+  }),
+);
+
+/** Las cifras de un texto, en dígitos o en letras, como número. */
+function numerosDelTexto(
+  bruto: string,
+  enLetras: Map<string, number> = NUMEROS_ES,
+): Set<number> {
+  const texto = normalizar(bruto);
   const numeros = new Set<number>();
-  // «1.000» y «120» → 1000 y 120; el separador de miles a la española primero.
-  for (const m of texto.matchAll(/\d{1,3}(?:\.\d{3})+|\d+/g)) {
-    numeros.add(Number(m[0].replace(/\./g, "")));
+  // «1.000», «1,000» y «120» → 1000, 1000 y 120: el separador de miles primero.
+  for (const m of texto.matchAll(/\d{1,3}(?:[.,]\d{3})+|\d+/g)) {
+    numeros.add(Number(m[0].replace(/[.,]/g, "")));
   }
-  for (const [palabra, valor] of NUMEROS_ES) {
+  for (const [palabra, valor] of enLetras) {
     if (new RegExp(`\\b${palabra}\\b`).test(texto)) numeros.add(valor);
   }
   return numeros;
+}
+
+const numerosDelDocumento = (md: string) => numerosDelTexto(md);
+
+/**
+ * Las cifras de UN caso que los logros de su hito no dicen — puro, para verlo
+ * fallar. El PDF no lista los casos (cuenta cada experiencia una vez, ver
+ * `generate-cv-pdf.mjs`): lo que el caso destaca y su hito calla, el PDF lo
+ * deja por fuera.
+ */
+export function cifrasFueraDeSuHito(
+  slug: string,
+  caso: Caso,
+  logros: string[],
+  locale: "es" | "en",
+): string[] {
+  const numeros = numerosDelTexto(
+    logros.join(" "),
+    locale === "es" ? NUMEROS_ES : NUMEROS_EN,
+  );
+  return caso.cifras
+    .filter((c) => !numeros.has(c.valor))
+    .map(
+      (c) =>
+        `${slug} (${locale}): la cifra ${c.prefijo}${c.valor}${c.sufijo} «${c.etiqueta}» no está ` +
+        `en los logros de su experiencia (data/cv.${locale}.yaml, trayectoria), así que el PDF ` +
+        `la deja por fuera.`,
+    );
 }
 
 /** Los problemas de UN caso contra su documento — puro, para poder verlo fallar. */
@@ -138,6 +188,28 @@ describe("los casos de estudio", () => {
     expect(problemas.join("\n")).toBe("");
   });
 
+  // «Que no deje por fuera ninguna de mis experiencias y logros más
+  // importantes» (el dueño, 2026-09-24, sobre el PDF). Las cifras de la banda
+  // son, por definición, lo más importante de cada caso; el PDF solo tiene los
+  // logros de la trayectoria. Nació en rojo: las 120 máquinas de Inglopres, las
+  // cinco fuentes de C&M Consorcio y, en inglés, los diez meses de TransMilenio.
+  it("cada cifra de un caso está también en los logros de su experiencia (ES y EN)", () => {
+    const problemas: string[] = [];
+    for (const [locale, cv] of [
+      ["es", es],
+      ["en", en],
+    ] as const) {
+      for (const hito of cv.trayectoria) {
+        const p = cv.proyectos.find((x) => x.slug === hito.proyecto);
+        if (!p?.casestudy) continue;
+        problemas.push(
+          ...cifrasFueraDeSuHito(p.slug, p.casestudy, hito.bullets, locale),
+        );
+      }
+    }
+    expect(problemas.join("\n")).toBe("");
+  });
+
   it("cada caso cabe en una página minimalista (ES y EN)", () => {
     const fuera = [...conCaso(es), ...conCaso(en)].flatMap((p) =>
       excesos(p.slug, p.casestudy!),
@@ -216,6 +288,25 @@ describe("los motores del gate, uno a uno (sus rojos)", () => {
       cifras: [{ ...base.cifras[0], valor: 1000 }, ...base.cifras.slice(1)],
     };
     expect(cifrasSinFuente("x", miles, `1.000 eventos, ${doc}`)).toEqual([]);
+  });
+
+  it("una cifra del caso que los logros del hito callan se nombra; en letras cuenta, en los dos idiomas", () => {
+    const logrosEs = [
+      "Un parque de unas 120 unidades.",
+      "Seis meses de pruebas.",
+    ];
+    const faltan = cifrasFueraDeSuHito("x", base, logrosEs, "es");
+    expect(faltan).toHaveLength(1);
+    expect(faltan[0]).toContain("95%");
+    expect(faltan[0]).toContain("el PDF");
+    expect(
+      cifrasFueraDeSuHito(
+        "x",
+        base,
+        ["A fleet of 120 units, six months of testing, 95% satisfaction."],
+        "en",
+      ),
+    ).toEqual([]);
   });
 
   it("un capítulo que crece hasta ser un ensayo se nombra", () => {
