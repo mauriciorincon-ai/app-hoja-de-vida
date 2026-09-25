@@ -14,7 +14,9 @@ import { aniosCumplidos } from "./anios.mjs";
  * columnas de ese comprobador —experiencia a la izquierda; perfil, formación,
  * certificaciones y skills a la derecha— «simple y minimalista pero un poco
  * más atractiva», con un azul navy; y que el DOMINIO, cuando exista, vaya en
- * la cabecera «muy, muy explícito»: primero y en negrilla.
+ * la cabecera «muy, muy explícito». El 2026-09-24 lo pidió «grande y
+ * resaltado»: un bloque navy junto al nombre, el cierre del perfil y el pie de
+ * cada página, los tres enlazados (ver `bloqueDelDominio` y `pie`).
  *
  * - Helvetica (fuente estándar, sin embedding); todo es texto seleccionable.
  * - Dos columnas dibujadas por página en orden ATS: cabecera → columna
@@ -28,7 +30,7 @@ import { aniosCumplidos } from "./anios.mjs";
  * Uso: node scripts/generate-cv-pdf.mjs [outDir]   (default: public/cv)
  */
 
-const LABELS = {
+export const LABELS = {
   es: {
     perfil: "PERFIL",
     experiencia: "EXPERIENCIA",
@@ -42,6 +44,8 @@ const LABELS = {
     cierreChat: /\s*¿Quieres saber algo más\?[^.]*\./,
     archivo: "Henry-Rincon-CV-ES.pdf",
     titulo: "CV — Henry Rincón (ES)",
+    ruta: "/es",
+    rotuloSitio: "CV interactivo · casos · chat",
   },
   en: {
     perfil: "PROFILE",
@@ -56,6 +60,8 @@ const LABELS = {
     cierreChat: /\s*Want to know anything else\?[^.]*\./,
     archivo: "Henry-Rincon-CV-EN.pdf",
     titulo: "CV — Henry Rincón (EN)",
+    ruta: "/en",
+    rotuloSitio: "Interactive CV · cases · chat",
   },
 };
 
@@ -98,24 +104,27 @@ function sinProtocolo(url) {
 }
 
 /**
- * La línea de contacto de la cabecera. `destacado` es el dominio del sitio
- * (primero y en negrilla) cuando `sitio` es una URL pública; `resto` va
- * detrás: correo y enlaces sin protocolo. La ubicación va en su propia línea.
+ * El contacto de la cabecera. `destacado` es el dominio del sitio cuando
+ * `sitio` es una URL pública, y `origen` la dirección a la que enlaza; `resto`
+ * es el correo y los enlaces sin protocolo. La ubicación va en su propia línea.
  */
 export function lineaDeContacto(identidad, sitio) {
   let destacado = null;
+  let origen = null;
   if (sitio && !/localhost|127\.0\.0\.1/.test(sitio)) {
     try {
-      destacado = sinProtocolo(new URL(sitio).origin);
+      origen = new URL(sitio).origin;
+      destacado = sinProtocolo(origen);
     } catch {
       destacado = null;
+      origen = null;
     }
   }
   const resto = [
     identidad.email,
     ...identidad.enlaces.map((e) => sinProtocolo(e.url)),
   ].filter(Boolean);
-  return { destacado, resto };
+  return { destacado, origen, resto };
 }
 
 /**
@@ -157,6 +166,8 @@ class Columna {
       this.y = MARGEN.arriba;
     }
     doc.switchToPage(this.pagina);
+    const vigente = estiloVigente.get(doc);
+    if (vigente) estilo(doc, ...vigente);
   }
 
   /** Escribe un párrafo con el estilo actual, con sangría opcional. */
@@ -166,6 +177,30 @@ class Columna {
     const alto = doc.heightOfString(texto, { width: ancho, lineGap });
     this.asegurar(alto + juntoCon);
     doc.text(texto, this.x + sangria, this.y, { width: ancho, lineGap });
+    this.y = doc.y;
+  }
+
+  /**
+   * Un párrafo con un tramo enlazado: `enlace` va en navy y en negrilla y se
+   * puede pulsar; `antes` y `despues`, en el estilo `base`.
+   */
+  parrafoConEnlace(antes, enlace, despues, url, base, { lineGap = 1 } = {}) {
+    const { doc } = this;
+    estilo(doc, base.fuente, base.tamano, base.color);
+    const alto = doc.heightOfString(`${antes}${enlace}${despues}`, {
+      width: this.ancho,
+      lineGap,
+    });
+    this.asegurar(alto);
+    doc.text(antes, this.x, this.y, {
+      width: this.ancho,
+      lineGap,
+      continued: true,
+    });
+    estilo(doc, "Helvetica-Bold", base.tamano, NAVY);
+    doc.text(enlace, { link: url, continued: true });
+    estilo(doc, base.fuente, base.tamano, base.color);
+    doc.text(despues, { link: null });
     this.y = doc.y;
   }
 
@@ -197,11 +232,18 @@ class Columna {
     this.y += pt;
   }
 
-  /** Título de sección: versalitas en negrilla y una regla navy debajo. */
-  seccion(titulo) {
+  /**
+   * Título de sección: versalitas en negrilla y una regla navy debajo. Viaja
+   * con los `juntoCon` puntos que le siguen: un título solo al pie de una
+   * página es un título huérfano.
+   */
+  seccion(titulo, { juntoCon = 40 } = {}) {
     const { doc } = this;
-    doc.font("Helvetica-Bold").fontSize(10).fillColor(TINTA);
-    this.asegurar(doc.heightOfString(titulo, { width: this.ancho }) + 40);
+    estilo(doc, "Helvetica-Bold", 10, TINTA);
+    // 10 de aire arriba, 2 hasta la regla y 7 debajo: lo que ocupa de verdad.
+    this.asegurar(
+      doc.heightOfString(titulo, { width: this.ancho }) + 19 + juntoCon,
+    );
     if (this.y > MARGEN.arriba) this.espacio(10);
     doc.text(titulo, this.x, this.y, {
       width: this.ancho,
@@ -218,39 +260,92 @@ class Columna {
   }
 }
 
+/**
+ * El estilo vigente de cada documento. pdfkit escribe el color en el flujo de
+ * la página ACTUAL: si una columna fija el color y luego salta a otra página,
+ * el texto sale con el último color que quedó en esa otra página (así salió
+ * «EXPERIENCIA» en navy, 2026-09-24). `Columna.asegurar` lo re-aplica tras
+ * cada cambio de página.
+ */
+const estiloVigente = new WeakMap();
+
 function estilo(doc, fuente, tamano, color) {
+  estiloVigente.set(doc, [fuente, tamano, color]);
   doc.font(fuente).fontSize(tamano).fillColor(color);
 }
 
-function cabecera(doc, cv, sitio) {
+/**
+ * EL DOMINIO, MUY RESALTADO (2026-09-24, pedido del dueño: «mi dominio de
+ * encabezado grande y resaltado»). Un bloque navy con el dominio en blanco, a
+ * la altura del nombre y a la derecha, que se puede pulsar y lleva al sitio en
+ * el idioma del PDF; debajo, en gris, qué va a encontrar ahí. El nombre y el
+ * eyebrow se estrechan para no tocarlo. Es texto sobre un rectángulo, no una
+ * imagen: el ATS lo lee. Sin dominio, la cabecera es la de siempre.
+ */
+const DOMINIO = { tamano: 14, padX: 12, padY: 8, radio: 4, separacion: 16 };
+
+function bloqueDelDominio(doc, dominio, url, rotulo) {
+  estilo(doc, "Helvetica-Bold", DOMINIO.tamano, "#FFFFFF");
+  const ancho = doc.widthOfString(dominio) + 2 * DOMINIO.padX;
+  const alto = DOMINIO.tamano + 2 * DOMINIO.padY;
+  const x = MARGEN.lado + ANCHO_UTIL - ancho;
+  const y = MARGEN.arriba;
+  doc.roundedRect(x, y, ancho, alto, DOMINIO.radio).fill(NAVY);
+  estilo(doc, "Helvetica-Bold", DOMINIO.tamano, "#FFFFFF");
+  doc.text(dominio, x + DOMINIO.padX, y + DOMINIO.padY + 1, {
+    lineBreak: false,
+  });
+  doc.link(x, y, ancho, alto, url);
+  estilo(doc, "Helvetica", 7.5, GRIS);
+  const anchoRotulo = Math.max(ancho, doc.widthOfString(rotulo));
+  doc.text(rotulo, x + ancho - anchoRotulo, y + alto + 4, {
+    width: anchoRotulo,
+    align: "right",
+    lineBreak: false,
+  });
+  return { ancho, fondo: y + alto + 4 + 9 };
+}
+
+function cabecera(doc, cv, sitio, labels) {
   const { identidad } = cv;
+  const { destacado, origen, resto } = lineaDeContacto(identidad, sitio);
+  // El bloque se mide primero: de su ancho depende cuánto espacio le queda al
+  // nombre. Se DIBUJA después del nombre y el eyebrow, para que el orden de
+  // lectura del ATS siga siendo nombre → cargo → dominio → contacto.
+  let anchoBloque = 0;
+  if (destacado) {
+    estilo(doc, "Helvetica-Bold", DOMINIO.tamano, "#FFFFFF");
+    anchoBloque =
+      doc.widthOfString(ansi(destacado)) +
+      2 * DOMINIO.padX +
+      DOMINIO.separacion;
+  }
+  const anchoIzq = ANCHO_UTIL - anchoBloque;
+
   let y = MARGEN.arriba;
   estilo(doc, "Helvetica-Bold", 20, TINTA);
   doc.text(ansi(identidad.nombreCompleto ?? identidad.nombre), MARGEN.lado, y, {
-    width: ANCHO_UTIL,
+    width: anchoIzq,
     characterSpacing: 0.3,
   });
   y = doc.y + 2;
   estilo(doc, "Helvetica-Bold", 11, NAVY);
-  doc.text(ansi(identidad.eyebrow), MARGEN.lado, y, { width: ANCHO_UTIL });
+  doc.text(ansi(identidad.eyebrow), MARGEN.lado, y, { width: anchoIzq });
   y = doc.y + 6;
 
-  const { destacado, resto } = lineaDeContacto(identidad, sitio);
-  const separador = "   ·   ";
   if (destacado) {
-    estilo(doc, "Helvetica-Bold", 9.5, NAVY);
-    doc.text(ansi(destacado), MARGEN.lado, y, {
-      continued: true,
-      width: ANCHO_UTIL,
-    });
-    estilo(doc, "Helvetica", 8.5, GRIS);
-    doc.text(ansi(separador + resto.join(separador)), { width: ANCHO_UTIL });
-  } else {
-    estilo(doc, "Helvetica", 8.5, GRIS);
-    doc.text(ansi(resto.join(separador)), MARGEN.lado, y, {
-      width: ANCHO_UTIL,
-    });
+    const bloque = bloqueDelDominio(
+      doc,
+      ansi(destacado),
+      `${origen}${labels.ruta}`,
+      ansi(labels.rotuloSitio),
+    );
+    y = Math.max(y, bloque.fondo + 4);
   }
+
+  const separador = "   ·   ";
+  estilo(doc, "Helvetica", 8.5, GRIS);
+  doc.text(ansi(resto.join(separador)), MARGEN.lado, y, { width: ANCHO_UTIL });
   y = doc.y + 2;
   estilo(doc, "Helvetica", 8.5, GRIS);
   doc.text(ansi(identidad.ubicacion), MARGEN.lado, y, { width: ANCHO_UTIL });
@@ -264,22 +359,61 @@ function cabecera(doc, cv, sitio) {
   return y + 12;
 }
 
+/**
+ * El pie de cada página: el dominio (enlazado) y el número de página, chicos y
+ * centrados, bajo el margen donde terminan las columnas. Refuerza sin
+ * competir: 7,5 pt, sin filete. Solo cuando hay dominio.
+ */
+function pie(doc, destacado, url) {
+  const { start, count } = doc.bufferedPageRange();
+  for (let i = start; i < start + count; i++) {
+    doc.switchToPage(i);
+    // pdfkit abre una página nueva si se escribe bajo el margen inferior.
+    const margen = doc.page.margins.bottom;
+    doc.page.margins.bottom = 0;
+    const numero = `   ·   ${i - start + 1} / ${count}`;
+    estilo(doc, "Helvetica-Bold", 7.5, NAVY);
+    const anchoDominio = doc.widthOfString(destacado);
+    estilo(doc, "Helvetica", 7.5, GRIS);
+    const anchoNumero = doc.widthOfString(numero);
+    const x = MARGEN.lado + (ANCHO_UTIL - anchoDominio - anchoNumero) / 2;
+    const y = PAGINA.alto - 26;
+    estilo(doc, "Helvetica-Bold", 7.5, NAVY);
+    doc.text(destacado, x, y, { lineBreak: false, link: url });
+    estilo(doc, "Helvetica", 7.5, GRIS);
+    doc.text(numero, x + anchoDominio, y, { lineBreak: false, link: null });
+    doc.page.margins.bottom = margen;
+  }
+}
+
 function columnaDerecha(doc, cv, labels, yInicial, sitio) {
   const col = new Columna(doc, COL_DER.x, COL_DER.ancho, yInicial);
 
   col.seccion(labels.perfil);
   estilo(doc, "Helvetica", 8.8, TINTA);
-  const { destacado } = lineaDeContacto(cv.identidad, sitio);
-  col.parrafo(
-    ansi(
-      perfilParaPdf(
-        cv.identidad.perfil || cv.identidad.resumen,
-        labels,
-        destacado,
-      ),
+  const { destacado, origen } = lineaDeContacto(cv.identidad, sitio);
+  const perfil = ansi(
+    perfilParaPdf(
+      cv.identidad.perfil || cv.identidad.resumen,
+      labels,
+      destacado,
     ),
-    { lineGap: 1.6 },
   );
+  if (destacado) {
+    // «Más en mi sitio: dominio.» — el dominio, en navy y enlazado.
+    const dominio = ansi(destacado);
+    const i = perfil.lastIndexOf(dominio);
+    col.parrafoConEnlace(
+      perfil.slice(0, i),
+      dominio,
+      perfil.slice(i + dominio.length),
+      `${origen}${labels.ruta}`,
+      { fuente: "Helvetica", tamano: 8.8, color: TINTA },
+      { lineGap: 1.6 },
+    );
+  } else {
+    col.parrafo(perfil, { lineGap: 1.6 });
+  }
 
   const estudios = cv.estudios ?? [];
   if (estudios.length > 0) {
@@ -305,12 +439,27 @@ function columnaDerecha(doc, cv, labels, yInicial, sitio) {
     col.espacio(2);
   }
 
-  col.seccion(labels.skills);
-  for (const grupo of cv.skills) {
-    estilo(doc, "Helvetica-Bold", 9, NAVY);
-    col.parrafo(ansi(grupo.grupo), { juntoCon: 14 });
+  // Cada grupo viaja con sus ítems, y el título de la sección con el primer
+  // grupo: «SKILLS» o «IA & ML» solos al pie de la página 1 (así estaban).
+  const itemsDe = (grupo) => ansi(grupo.items.join("  ·  "));
+  const altoItems = (grupo) => {
     estilo(doc, "Helvetica", 8.8, TINTA);
-    col.parrafo(ansi(grupo.items.join("  ·  ")), { lineGap: 1.6 });
+    return col.alto(itemsDe(grupo), { lineGap: 1.6 });
+  };
+  const altoTitulo = (grupo) => {
+    estilo(doc, "Helvetica-Bold", 9, NAVY);
+    return col.alto(ansi(grupo.grupo));
+  };
+  if (cv.skills.length > 0)
+    col.seccion(labels.skills, {
+      juntoCon: altoTitulo(cv.skills[0]) + altoItems(cv.skills[0]),
+    });
+  for (const grupo of cv.skills) {
+    const alto = altoItems(grupo);
+    estilo(doc, "Helvetica-Bold", 9, NAVY);
+    col.parrafo(ansi(grupo.grupo), { juntoCon: alto });
+    estilo(doc, "Helvetica", 8.8, TINTA);
+    col.parrafo(itemsDe(grupo), { lineGap: 1.6 });
     col.espacio(5);
   }
   return col;
@@ -380,11 +529,13 @@ export function renderCv(
   const salida = createWriteStream(outFile);
   doc.pipe(salida);
 
-  const yColumnas = cabecera(doc, cv, sitio);
+  const yColumnas = cabecera(doc, cv, sitio, labels);
   // Orden ATS por página: cabecera, luego perfil/formación/certificaciones/
-  // skills (derecha), luego experiencia/proyectos (izquierda).
+  // skills (derecha), luego experiencia/proyectos (izquierda), y el pie.
   columnaDerecha(doc, cv, labels, yColumnas, sitio);
   columnaIzquierda(doc, cv, labels, yColumnas);
+  const { destacado, origen } = lineaDeContacto(cv.identidad, sitio);
+  if (destacado) pie(doc, ansi(destacado), `${origen}${labels.ruta}`);
 
   doc.end();
   return new Promise((resolve) => salida.on("finish", resolve));

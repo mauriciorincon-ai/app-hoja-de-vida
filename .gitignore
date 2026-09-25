@@ -30,3 +30,9 @@ public/chat-index.*.json
 # con seis falsos positivos del JS del visor (comprueba el dominio de preview).
 # Un gate que grita en falso deja de leerse — y ahí es donde se pierde una fuga real.
 .lighthouseci/
+
+# Muestras para que el dueño revise (capturas, PDFs generados en local). Viven
+# AQUÍ, dentro del repo, y no en el Escritorio (decisión del dueño, 2026-09-24);
+# jamás se versionan: un PDF de muestra lleva el dominio real, y la regla 16
+# prohíbe ese dominio en cualquier archivo del repo.
+/muestras/

@@ -234,9 +234,14 @@ el mensaje te llega al correo.
 - **Cómo se ve desde la revisión post-S8 (bloque D):** dos columnas —experiencia y proyectos a la
   izquierda; perfil, formación, certificaciones y skills a la derecha—, acentos en azul navy y
   texto Helvetica seleccionable, en el orden que un ATS lee (cabecera → perfil → experiencia).
-  **El dominio del sitio va primero y en negrilla en la cabecera**, pero no se escribe en ningún
-  archivo: el build lo toma de la variable `NEXT_PUBLIC_SITE_URL` de Vercel. Sin variable, o en
-  local, la cabecera sale sin dominio. Una certificación «en curso» dice «(en curso)» en vez de
+  **Tu dominio va muy resaltado** (desde el 2026-09-24): un bloque azul navy con el dominio en
+  blanco arriba a la derecha, a la altura de tu nombre, con «CV interactivo · casos · chat» debajo;
+  el perfil cierra con «Más en mi sitio: dominio.» y el pie de cada página lo repite pequeño con
+  el número de página. Los tres se pueden pulsar y abren el sitio en el idioma del PDF. El dominio
+  no se escribe en ningún archivo: el build lo toma de la variable `NEXT_PUBLIC_SITE_URL` de
+  Vercel. **Sin variable, o en local, el PDF sale sin bloque, sin pie y sin dominio.** Por eso la
+  variable se pone **cuando el dominio ya abra el sitio**: antes, el PDF mandaría a los
+  reclutadores a una dirección que no carga. Una certificación «en curso» dice «(en curso)» en vez de
   fecha.
 - **Dos páginas, sin repetir y sin dejar nada por fuera** (desde el 2026-09-24). El PDF cuenta
   **cada experiencia una sola vez**: los ocho empleos con **todos** sus logros, y ningún caso de
