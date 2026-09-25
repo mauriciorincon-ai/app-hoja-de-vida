@@ -15,6 +15,7 @@ import {
 } from "react";
 import { Link } from "@/i18n/navigation";
 import { trackEvent } from "@/lib/analytics";
+import { anioDe } from "@/lib/casos";
 import { EASE_OUT_CUBIC } from "./easings";
 
 /**
@@ -60,11 +61,6 @@ export type TimelineLabels = {
   verCaseStudy: string;
   indiceAria: string;
 };
-
-/** «2023 — 2025» → «2023»; «2025 — hoy» → «2025». Sin año, el texto tal cual. */
-function anioDe(periodo: string): string {
-  return /\d{4}/.exec(periodo)?.[0] ?? periodo;
-}
 
 /** Fracción de la ventana donde vive el círculo (y donde se mide el hito activo). */
 const LINEA = 0.45;

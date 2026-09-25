@@ -3,7 +3,12 @@ import { describe, expect, it } from "vitest";
 import { NUMEROS_ES, normalizar } from "../../scripts/a-fondo-coherencia.mjs";
 import { nombreCortoDeProyecto as nombreCortoMjs } from "../../scripts/destinos.mjs";
 import { getCv } from "@/lib/content";
-import { nombreCortoDeProyecto, vecinosDeCaso } from "@/lib/casos";
+import {
+  anioDe,
+  nombreCortoDeProyecto,
+  periodoEnLaHome,
+  vecinosDeCaso,
+} from "@/lib/casos";
 import type { Cv } from "@/lib/schemas";
 
 /**
@@ -319,6 +324,42 @@ describe("los motores del gate, uno a uno (sus rojos)", () => {
     };
     expect(excesos("x", largo).join("\n")).toContain("capítulo 1: texto de");
     expect(excesos("x", base)).toEqual([]);
+  });
+});
+
+// EL PERIODO REAL Y EL AÑO DE LA HOME (2026-09-24). Vesting fue 2023–2025,
+// pero la línea de tiempo de la HOME dice «2024» por decisión del dueño, para
+// que su año de transición no repita el 2023 de Pichincha. Ese «2024» vivía en
+// `periodo` y por eso llegaba también al PDF, a /cv y al chat, y cada revisión
+// lo volvía a señalar como error. Ahora son dos datos: `periodo` (el real,
+// para todo) y `periodoEnLaHome` (solo la línea). Dos pruebas, una por dato.
+describe("el periodo de cada hito", () => {
+  const anios = (t: string) => new Set(t.match(/\d{4}/g) ?? []);
+
+  it("el periodo real dice los mismos años que el nombre de su caso (ES y EN)", () => {
+    const distintos: string[] = [];
+    for (const cv of [es, en]) {
+      for (const h of cv.trayectoria) {
+        const p = cv.proyectos.find((x) => x.slug === h.proyecto);
+        const delNombre = /\(([^)]*)\)\s*$/.exec(p?.nombre ?? "")?.[1];
+        if (!delNombre) continue;
+        const a = [...anios(h.periodo)].sort().join(",");
+        const b = [...anios(delNombre)].sort().join(",");
+        if (a !== b)
+          distintos.push(
+            `${h.proyecto}: la trayectoria dice «${h.periodo}» y el caso «${delNombre}»`,
+          );
+      }
+    }
+    expect(distintos.join("\n")).toBe("");
+  });
+
+  it("la línea de tiempo de la HOME no repite año de transición", () => {
+    for (const cv of [es, en]) {
+      const lineas = cv.trayectoria.map((h) => anioDe(periodoEnLaHome(h)));
+      const repetidos = lineas.filter((a, i) => lineas.indexOf(a) !== i);
+      expect(repetidos, `años de la línea: ${lineas.join(" · ")}`).toEqual([]);
+    }
   });
 });
 

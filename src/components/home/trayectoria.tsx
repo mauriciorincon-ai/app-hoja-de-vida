@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { Reveal } from "@/components/motion/reveal";
 import { TimelineTrack } from "@/components/motion/timeline-track";
+import { periodoEnLaHome } from "@/lib/casos";
 import type { Cv } from "@/lib/schemas";
 
 /**
@@ -23,6 +24,7 @@ export async function Trayectoria({
   );
   const items = trayectoria.map((h) => ({
     ...h,
+    periodo: periodoEnLaHome(h),
     hrefCaseStudy:
       h.proyecto && conDetalle.has(h.proyecto)
         ? `/proyectos/${h.proyecto}`

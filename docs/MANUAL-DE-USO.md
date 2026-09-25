@@ -61,6 +61,12 @@ el mensaje te llega al correo.
   movimiento» activado todo queda quieto: la línea completa, el círculo fijo y el año sin fundido.
 - **Cómo se alimenta:** igual que siempre, `trayectoria:` en `data/cv.es.yaml` y `cv.en.yaml`. El
   año grande sale del `periodo` (los primeros cuatro dígitos): «2023 — 2025» enseña «2023».
+- **El periodo real y el de la HOME** (desde el 2026-09-24): `periodo` es **el real**, el que leen
+  el PDF, `/cv`, el chat y los casos. Si en la línea de la HOME quieres otro —para que el año
+  grande no se repita—, agrega `periodoEnLaHome:` al hito y solo la línea lo usará. Así está
+  Vesting: `periodo: "2023 — 2025"` y `periodoEnLaHome: "2024"`, para no repetir el 2023 de
+  Pichincha. Dos pruebas lo cuidan: el periodo real tiene que decir los mismos años que el nombre
+  de su caso, y la línea de la HOME no puede repetir un año.
 - **Ver case study desde el hito:** un hito con `proyecto: <slug>` enseña «Ver caso de estudio →» («View case study →» en inglés) hacia
   `/proyectos/<slug>`. El slug tiene que ser el de un proyecto **con** `casestudy:`; si no, **la
   publicación falla** y te dice qué hito. Es la única puerta a los case studies desde la HOME

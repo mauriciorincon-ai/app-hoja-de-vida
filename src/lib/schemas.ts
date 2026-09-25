@@ -68,7 +68,13 @@ export const cvSchema = z.object({
   trayectoria: z
     .array(
       z.object({
+        // El periodo REAL: el que leen el PDF, /cv, el chat y los casos.
         periodo: z.string().min(1),
+        // Solo la línea de tiempo de la HOME, cuando su año de transición no
+        // puede ser el real (decisión estética del dueño, revisión post-S8):
+        // Vesting fue 2023–2025, pero en la línea dice «2024» para no repetir
+        // el 2023 de Pichincha. Todo lo demás lee `periodo`.
+        periodoEnLaHome: z.string().min(1).optional(),
         rol: z.string().min(1),
         organizacion: z.string().min(1),
         descripcion: z.string().min(1),
