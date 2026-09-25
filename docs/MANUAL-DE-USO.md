@@ -76,19 +76,63 @@ el mensaje te llega al correo.
   simplemente no muestra el botón.
 - **Ojo:** mantén el mismo número de bullets en ES y EN (hay una prueba que lo vigila y
   bloquea la publicación si se desbalancean).
+- **Desde el 2026-09-24** los bullets de los ocho hitos llevan las cifras del corpus a fondo
+  (Inglopres, Ceinfes y C&M Consorcio pasaron de 2 o 3 a 5), y en la sección **Logros** de la
+  HOME entraron dos: los 27 agentes construidos con el proceso core de Vesting y los 42
+  productos analíticos de la Fundación CTIC. Son ocho logros, en cuatro columnas.
 
-### Case studies con página propia · desde Sprint 002
+### Casos de estudio con página propia · desde Sprint 002 · rehechos el 2026-09-24
 
-- **Qué hace:** cada proyecto con case study tiene su propia URL compartible
-  (`/es/proyectos/vesting`, por ejemplo) con la narrativa contexto → reto → qué hice →
-  impacto, en ambos idiomas.
-- **Cómo agregar uno nuevo (cero código):** en `data/cv.es.yaml` y `cv.en.yaml`, dale al
-  proyecto un `slug:` (minúsculas-con-guiones, IGUAL en ambos idiomas) y un bloque
-  `casestudy:` con `contexto`, `reto`, `acciones` (lista) e `impacto` (lista). Push y la
-  página aparece sola, con su URL, su SEO y su lugar en el sitemap.
-- **Quitar uno:** borra el bloque `casestudy:` y quita el `proyecto:` del hito que lo enlazaba
-  (si lo dejas, la publicación falla avisándote). El proyecto sigue en `/cv` y en el PDF como
-  resumen; solo pierde su página de detalle.
+- **Qué hace:** cada experiencia de la trayectoria tiene su caso de estudio con URL propia
+  (`/es/proyectos/vesting`, por ejemplo), en los dos idiomas. **Son ocho, uno por hito**:
+  Fundación CTIC, Vesting, Banco Pichincha, C&M Consultores, Cafam y, desde el 2026-09-24,
+  C&M Consorcio, Ceinfes e Inglopres.
+- **Cómo se ve cada caso, de arriba abajo:** la tesis en una frase bajo el título · una banda
+  de 3 o 4 cifras grandes · contexto y reto lado a lado · «Cómo lo hice» en capítulos
+  numerados · el impacto · «Lo que me llevo», una frase tuya en cita · y el caso anterior y el
+  siguiente, en el orden de la trayectoria.
+- **De dónde sale el texto:** del corpus a fondo que aprobaste. Cada cifra de la banda **tiene
+  que aparecer en el documento a fondo del mismo nombre** (`data/a-fondo/<slug>.es.md`), en
+  número o en letras; si pones una que el documento no dice, la publicación falla nombrándola.
+  La lección es una frase de ese mismo documento.
+- **Cómo agregar o editar uno (cero código):** en `data/cv.es.yaml` y `cv.en.yaml`, el proyecto
+  lleva un `slug:` (IGUAL en los dos idiomas) y un bloque `casestudy:` con estos campos, en
+  este orden:
+
+  ```yaml
+  casestudy:
+    titular: "La tesis del caso en una frase."
+    contexto: >-
+      Dónde y qué estaba pasando.
+    reto: >-
+      Qué había que lograr.
+    cifras:            # 3 o 4, cada una en su documento a fondo
+      - valor: 27
+        etiqueta: "agentes construidos con el proceso core"
+      - valor: 90
+        prefijo: ">"   # opcional: ~ · > · + · −
+        sufijo: "%"    # opcional
+        etiqueta: "de precisión en modelos en producción"
+    capitulos:         # de 3 a 6
+      - titulo: "La arquitectura en Microsoft Fabric"
+        texto: >-
+          Un párrafo corto: qué hice y por qué.
+    impacto:
+      - "Un resultado por línea."
+    leccion: >-
+      Una frase tuya del documento a fondo.
+  ```
+
+- **Lo que la publicación NO te deja hacer** (y te lo dice con el campo): un caso sin
+  `titular`, `cifras`, `capitulos` o `leccion`; menos de 3 cifras o más de 4; menos de 3
+  capítulos o más de 6; una cifra que el documento a fondo no dice; un hito de la trayectoria
+  sin su caso; y un caso que en inglés tenga otras cifras u otro número de capítulos.
+- **Minimalismo medido:** titular hasta 40 palabras, título de capítulo hasta 8, texto de
+  capítulo hasta 70, etiqueta de cifra hasta 9, lección hasta 45. Si un capítulo crece hasta
+  ser un ensayo, la prueba lo nombra: la profundidad vive en el chat, no en la página.
+- **Quitar uno:** hoy no se puede sin quitar también el hito, porque cada hito exige su caso.
+  Si alguna vez un hito no debe tenerlo, se relaja esa prueba a propósito
+  (`tests/unit/casos-de-estudio.test.ts`).
 
 ### Perfil, Certificaciones y Skills en la HOME · desde Sprint 002 · Skills rehecha post-S7
 
@@ -194,6 +238,12 @@ el mensaje te llega al correo.
   archivo: el build lo toma de la variable `NEXT_PUBLIC_SITE_URL` de Vercel. Sin variable, o en
   local, la cabecera sale sin dominio. Una certificación «en curso» dice «(en curso)» en vez de
   fecha.
+- **Dos páginas, siempre** (desde el 2026-09-24): una prueba cuenta las páginas y falla si
+  pasan de dos. Por eso **la sección «Proyectos» del PDF lista solo los proyectos con
+  `destacado: true`** (hoy, Vesting): desde que cada experiencia tiene su caso de estudio, un
+  proyecto repetía las cifras que ya están en los logros de su experiencia, y listar los ocho
+  llevaba el PDF a tres páginas. Para que otro proyecto salga en el PDF, ponle
+  `destacado: true` en los dos YAML; si con eso pasa de dos páginas, la publicación te avisa.
 
 ### Las apps del pipeline (`data/apps.yaml`) · desde Sprint 001 · reorganizado 2026-09-05
 
@@ -501,6 +551,13 @@ el mensaje te llega al correo.
   el chat responde «registro no disponible» en vez de dejar pasar.
 - **Borrar los datos de alguien:** el aviso dice que puede pedirlo desde Contacto; se borra a
   mano en Supabase (`delete from chat_registro where email = …`).
+- **«¿Algo no funciona? Avísame»** (desde el 2026-09-24): bajo «Pedir otro código» —y en el
+  primer paso, si algo falló— el visitante puede avisar sin salir del panel, con un texto
+  opcional. **Te llega por correo** con el asunto «[CV Viva] Problema con la puerta del chat»,
+  dirigido para que al responder le escribas al visitante, y con el **diagnóstico del
+  servidor** en ese momento: si el secreto de sesión, el almacén y el envío de correos están
+  configurados. Si dice «NO» en alguno, ya sabes qué variable revisar en Vercel. Límite: tres
+  avisos por visitante cada diez minutos.
 
 ### Cómo alimentar el «a fondo» (el combustible del chat) · desde Sprint 008
 
@@ -728,3 +785,4 @@ chat hoy y cuáles traería con la base aprobada. Ese informe **se genera, no se
 | chat/registro | El chat pide nombre y correo con código de verificación por Resend, sesión firmada de 30 días, registro de cada conversación en Supabase (`chat_registro`, lectura solo del dueño) y respuestas de dos o tres párrafos (ADR-024). |
 | a fondo v2    | El corpus reescrito desde la auditoría del dueño (2026-09-19/20): 25 documentos, ~144.000 palabras por idioma (el texto del dueño, ampliado y alineado, nunca recortado), cero `[CONFIRMAR]`, seis gates de coherencia (cifras del sitio, fechas de cargos, densidad, léxico, repetidos, normas), tres preguntas de prueba por documento, las 32 fichas de la vitrina en el índice del chat con peso 0,5 (ADR-023), banco de 136 preguntas en los dos idiomas, gemelos en inglés y los 25 aprobados. |
 | post-S7 (2.ª) | «Lo que construyo» entra al desplegable Hoja de vida; Estudios con los años del PDF del dueño (tres entradas); AI-102 retirada de todo el contenido (Microsoft la descontinuó) y gate nuevo: una credencial nombrada tiene que estar en `certificaciones:`.                                                                                                                                                                                                                                                                                                                                                                       |
+| casos 2026-09-24 | **Ocho casos de estudio, uno por hito** (nacen C&M Consorcio, Ceinfes e Inglopres, pedidos el 2026-09-13), con la forma completa: tesis, banda de cifras, capítulos numerados, lección y navegación entre casos; cada cifra verificada contra su documento a fondo y el minimalismo medido. Bullets de la trayectoria enriquecidos y dos logros nuevos en la HOME. En el chat, «¿Algo no funciona? Avísame» en la puerta, con diagnóstico del servidor en el correo. |

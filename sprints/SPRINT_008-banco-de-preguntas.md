@@ -1,10 +1,10 @@
 # Banco de preguntas — el corpus medido con preguntas de afuera
 
-> **Generado por `pnpm corpus:informe` el 2026-09-21. No se edita a mano.**
+> **Generado por `pnpm corpus:informe` el 2026-09-25. No se edita a mano.**
 > Banco: `tests/fixtures/banco-de-preguntas.es.yaml` — **136 preguntas** de 10 familias, 15 preguntas ajenas y 3 huecos declarados.
 >
-> **HOY** = el índice publicado, tal como está en disco: **1467 fragmentos** (los 24 documentos siguen en `borrador`, así que el chat todavía no ve nada de ellos).
-> **M2** = el índice que existirá cuando los apruebes: **1467 fragmentos**.
+> **HOY** = el índice publicado, tal como está en disco: **1513 fragmentos** (los 24 documentos siguen en `borrador`, así que el chat todavía no ve nada de ellos).
+> **M2** = el índice que existirá cuando los apruebes: **1513 fragmentos**.
 > El `top-4` es el que de verdad entra al contexto del modelo.
 
 ---
@@ -14,7 +14,7 @@
 | | HOY | M2 |
 | --- | --- | --- |
 | Preguntas con su fuente en el top-4 | 136/136 (100 %) | **136/136 (100 %)** |
-| …y además de primeras | 106 (78 %) | **106 (78 %)** |
+| …y además de primeras | 107 (79 %) | **107 (79 %)** |
 | Preguntas que reciben «eso se me escapa» | 0 | **0** |
 
 
@@ -26,7 +26,7 @@
 
 | Familia | Preguntas | Con su fuente en top-4 | De primeras |
 | --- | --- | --- | --- |
-| trayectoria | 25 | 25 (100 %) | 15 (60 %) |
+| trayectoria | 25 | 25 (100 %) | 16 (64 %) |
 | forma-de-trabajar | 12 | 12 (100 %) | 10 (83 %) |
 | certificaciones | 10 | 10 (100 %) | 9 (90 %) |
 | ia-y-agentes | 16 | 16 (100 %) | 13 (81 %) |
@@ -65,12 +65,12 @@ Preguntas que un reclutador hace y que **el corpus no contesta hoy**, con el doc
 
 **✅ ¿Dónde trabaja Henry actualmente?**
 
-- top-4: a-fondo-fundacion-ctic-cuando-usar, contacto, a-fondo-fundacion-ctic-el-rol-actual~1, a-fondo-procesos-y-simulacion-de-las-preguntas-a-las-investigaciones~1
+- top-4: a-fondo-fundacion-ctic-cuando-usar, contacto, a-fondo-fundacion-ctic-el-rol-actual~1, casestudy-inglopres-3
 - primer fragmento: «Mi rol actual: 42 productos analíticos en Power BI para 20 líderes de 15 procesos, gobierno y calidad de datos en salud, y la estrategia institucional de IA bajo UNE-ISO/IEC 42001:2025 con 23 instrumentos, 12 oportunidad…»
 
 **✅ ¿Qué hace en la Fundación CTIC?**
 
-- top-4: a-fondo-fundacion-ctic-el-limite-de-confidencialidad, a-fondo-procesos-y-simulacion-por-que-me-hace-mejor-disenando~2, trayectoria-0, a-fondo-fundacion-ctic-convergencia-de-la-trayectoria~2
+- top-4: a-fondo-fundacion-ctic-el-limite-de-confidencialidad, a-fondo-procesos-y-simulacion-por-que-me-hace-mejor-disenando~2, a-fondo-fundacion-ctic-convergencia-de-la-trayectoria~2, a-fondo-fundacion-ctic-el-agente-experto-en-iso-42001-en-ctic
 - primer fragmento: «Todo lo que comunico sobre esta experiencia conserva un límite que considero innegociable: no expongo datos de pacientes ni información clínica; tampoco detalles sensibles de los procesos, ni conocimiento interno cuya di…»
 
 **✅ ¿Tiene experiencia con datos del sector salud?**
@@ -85,7 +85,7 @@ Preguntas que un reclutador hace y que **el corpus no contesta hoy**, con el doc
 
 **☑️ ¿Cuánto tiempo estuvo en Vesting y con qué cargo?**
 
-- top-4: a-fondo-bi-que-se-adopta-adopcion-con-nombre-de-cargo~2, a-fondo-vesting-el-tamano-de-lo-construido~1, a-fondo-como-aprendo-los-plazos~1, a-fondo-transmilenio-cm-las-cinco-fuentes~2
+- top-4: a-fondo-bi-que-se-adopta-adopcion-con-nombre-de-cargo~2, a-fondo-vesting-el-tamano-de-lo-construido~1, casestudy-vesting, a-fondo-como-aprendo-los-plazos~1
 - primer fragmento: «En C&M Consorcio 2018, entre noviembre de 2018 y mayo de 2020, desarrollé tableros e informes de desempeño orientados al control y la transparencia de la supervisión de TransMilenio: 2 informes semanales, 1 consolidado m…»
 - nota: El hito de la trayectoria es tan buena fuente como el documento a fondo: es el que trae el periodo y el cargo exactos.
 
@@ -112,7 +112,7 @@ Preguntas que un reclutador hace y que **el corpus no contesta hoy**, con el doc
 
 **☑️ ¿Qué hizo en Cafam?**
 
-- top-4: a-fondo-origenes-el-hilo~2, a-fondo-como-trabajo-seguimiento-visible~3, a-fondo-cafam-resultados-en-cifras~2, trayectoria-4
+- top-4: a-fondo-origenes-el-hilo~2, a-fondo-como-trabajo-seguimiento-visible~3, trayectoria-4, a-fondo-cafam-resultados-en-cifras~2
 - primer fragmento: «- **Estudio de tiempos y suplementos por fatiga**, en Inglopres, con la tabla de la OIT: un tiempo observado no es un estándar hasta que reconoce el esfuerzo de quien lo ejecuta. - **Balanceo de líneas y teoría de restri…»
 
 **✅ ¿Ha participado en la implementación de un sistema de gestión de bodega?**
@@ -147,7 +147,7 @@ Preguntas que un reclutador hace y que **el corpus no contesta hoy**, con el doc
 
 **✅ ¿Ha presentado resultados ante una junta directiva?**
 
-- top-4: a-fondo-ceinfes-la-junta-directiva~2, a-fondo-ceinfes-la-junta-directiva~1, a-fondo-como-trabajo-junta-directiva-y-mesas-sitp~1, a-fondo-como-trabajo-junta-directiva-y-mesas-sitp~3
+- top-4: a-fondo-ceinfes-la-junta-directiva~2, casestudy-ceinfes-5, a-fondo-ceinfes-la-junta-directiva~1, a-fondo-como-trabajo-junta-directiva-y-mesas-sitp~1
 - primer fragmento: «También comprendí que presentar resultados no es suficiente. La información debe organizarse alrededor de la decisión que busca habilitar. Cada informe respondía cinco cosas: qué estaba ocurriendo, por qué era relevante,…»
 
 **✅ ¿Cuál fue su primer empleo al salir de la universidad?**
@@ -157,12 +157,12 @@ Preguntas que un reclutador hace y que **el corpus no contesta hoy**, con el doc
 
 **☑️ ¿Ha liderado la implementación de un ERP?**
 
-- top-4: a-fondo-cafam-el-equipo-de-veinte~2, a-fondo-inglopres-el-erp~1, a-fondo-como-trabajo-equipos-que-he-liderado~1, a-fondo-las-investigaciones-reemplazo-del-erp~1
+- top-4: a-fondo-cafam-el-equipo-de-veinte~2, a-fondo-inglopres-el-erp~1, a-fondo-como-trabajo-equipos-que-he-liderado~1, casestudy-inglopres-1
 - primer fragmento: «La duración de esta fase permitió superar la validación de escenarios ideales y observar también excepciones, reincidencias y comportamientos que solo se hacen visibles cuando el sistema se somete de manera sostenida a l…»
 
 **✅ ¿Tiene experiencia en cadena de suministro y logística?**
 
-- top-4: a-fondo-inglopres-cadena-de-suministro~1, a-fondo-inglopres-cadena-de-suministro~2, a-fondo-inglopres-cuando-usar, a-fondo-procesos-y-simulacion-iso-9001~1
+- top-4: a-fondo-inglopres-cadena-de-suministro~1, a-fondo-inglopres-cadena-de-suministro~2, casestudy-inglopres-4, a-fondo-inglopres-cuando-usar
 - primer fragmento: «También lideré iniciativas de optimización de la cadena de suministro orientadas a reducir costos operativos, fortalecer la coordinación de recursos y asegurar el cumplimiento de los requisitos asociados con la norma ISO…»
 
 **✅ ¿En qué industrias o sectores ha trabajado?**
@@ -182,13 +182,13 @@ Preguntas que un reclutador hace y que **el corpus no contesta hoy**, con el doc
 
 **✅ ¿Ha trabajado para entidades públicas o con operación de ciudad?**
 
-- top-4: a-fondo-transmilenio-cm-el-problema~1, a-fondo-cm-operaciones-la-operacion-de-una-ciudad~2, a-fondo-cm-operaciones-la-operacion-de-una-ciudad~1, a-fondo-los-tableros-banca-colombiana~1
+- top-4: a-fondo-transmilenio-cm-el-problema~1, a-fondo-cm-operaciones-la-operacion-de-una-ciudad~2, a-fondo-los-tableros-banca-colombiana~1, a-fondo-los-tableros-banca-colombiana~3
 - primer fragmento: «Regresé al entorno de TransMilenio en julio de 2021, esta vez como Profesional de Análisis Post-Operacional en C&M Consultores, dentro de la Fuerza Operativa de TransMilenio S.A., y permanecí en el cargo hasta mayo de 20…»
 
-**☑️ ¿Qué pasó entre mayo de 2022 y marzo de 2023?**
+**✅ ¿Qué pasó entre mayo de 2022 y marzo de 2023?**
 
-- top-4: a-fondo-como-aprendo-ibm-y-las-rutas-en-curso~2, a-fondo-origenes-los-tres-saltos~2, a-fondo-como-aprendo-ibm-y-las-rutas-en-curso~1, a-fondo-bi-que-se-adopta-adopcion-medida~2
-- primer fragmento: «Actualmente desarrollo las rutas AI-103 y AI-300 porque corresponden con la siguiente etapa de mi trayectoria: 21 y 10 módulos a la fecha. El AI-103 profundiza en la construcción de aplicaciones y agentes de inteligencia…»
+- top-4: a-fondo-origenes-los-tres-saltos~2, a-fondo-como-aprendo-ibm-y-las-rutas-en-curso~2, a-fondo-como-aprendo-ibm-y-las-rutas-en-curso~1, a-fondo-bi-que-se-adopta-adopcion-medida~2
+- primer fragmento: «| Periodo | Rol y organización | Qué cambió de escala | | --- | --- | --- | | agosto 2016 – junio 2017 | Ingeniero de Procesos, Inglopres | un proceso: el ERP (Odoo), las bases de datos que faltaban, un equipo de 12 | |…»
 
 ### forma-de-trabajar
 
@@ -229,7 +229,7 @@ Preguntas que un reclutador hace y que **el corpus no contesta hoy**, con el doc
 
 **✅ ¿Tiene formación en diseño?**
 
-- top-4: a-fondo-origenes-la-formacion-en-diseno~1, a-fondo-origenes-la-formacion-en-diseno~2, a-fondo-bi-que-se-adopta-formacion-y-adopcion~2, a-fondo-banco-pichincha-programa-de-formacion~1
+- top-4: a-fondo-origenes-la-formacion-en-diseno~1, a-fondo-origenes-la-formacion-en-diseno~2, a-fondo-bi-que-se-adopta-formacion-y-adopcion~2, casestudy-banco-pichincha-5
 - primer fragmento: «En paralelo, cursé estudios de pregrado en Diseño Industrial en la misma universidad, entre 2011 y 2016, con un enfoque en sostenibilidad y en el impacto cultural del diseño. Esta formación complementó mi pensamiento de…»
 
 **✅ ¿Cómo pasó de la ingeniería de procesos a los datos?**
@@ -324,7 +324,7 @@ Preguntas que un reclutador hace y que **el corpus no contesta hoy**, con el doc
 
 **✅ ¿Cómo monitorea un agente de IA en producción?**
 
-- top-4: a-fondo-vesting-monitoreo-de-agentes~1, a-fondo-agentes-en-produccion-cuando-usar, a-fondo-agentes-en-produccion-monitorear-no-es-mirar-si-esta-arriba~1, a-fondo-vesting-monitoreo-de-agentes~2
+- top-4: a-fondo-vesting-monitoreo-de-agentes~1, casestudy-vesting-4, a-fondo-agentes-en-produccion-cuando-usar, a-fondo-agentes-en-produccion-monitorear-no-es-mirar-si-esta-arriba~1
 - primer fragmento: «Uno de los principales objetivos del ecosistema de datos fue establecer la capacidad de monitorear agentes en producción, y llegó a vigilar 23 agentes a la vez, en tiempo real. La observabilidad debía responder una pregu…»
 
 **✅ ¿Qué frameworks de agentes ha usado?**
@@ -427,7 +427,7 @@ Preguntas que un reclutador hace y que **el corpus no contesta hoy**, con el doc
 
 **✅ ¿Qué tan fuerte es en SQL?**
 
-- top-4: a-fondo-inglopres-las-bases-de-datos~1, a-fondo-origenes-el-punto-de-inflexion~2, a-fondo-analitica-predictiva-las-herramientas~2, a-fondo-cm-operaciones-la-automatizacion~1
+- top-4: a-fondo-inglopres-las-bases-de-datos~1, casestudy-cafam-5, a-fondo-analitica-predictiva-las-herramientas~2, a-fondo-origenes-el-punto-de-inflexion~2
 - primer fragmento: «Para evaluar los procesos necesitaba indicadores confiables, pero una parte importante de la información requerida no existía, no se capturaba de forma consistente o permanecía distribuida entre diferentes registros que…»
 
 **☑️ ¿Tiene experiencia con Azure?**
@@ -452,18 +452,18 @@ Preguntas que un reclutador hace y que **el corpus no contesta hoy**, con el doc
 
 **☑️ ¿Ha trabajado con big data o procesamiento distribuido?**
 
-- top-4: trayectoria-1, proyecto-vesting, a-fondo-vesting-la-arquitectura~1, casestudy-vesting
-- primer fragmento: «2024: Líder de Estrategia de Datos, Vesting — startup de agentes de automatización. Ecosistema de datos para agentes de IA en Microsoft Fabric, desde cero: arquitectura, gobernanza, monitoreo de agentes en tiempo real y…»
+- top-4: casestudy-vesting-1, proyecto-vesting, a-fondo-vesting-la-arquitectura~1, trayectoria-1
+- primer fragmento: «Diseñé el ecosistema en Microsoft Fabric: Big Data, Data Warehouse y procesamiento distribuido sobre un lakehouse en OneLake, con pipelines que recibían los flujos de n8n que orquestaban a los agentes. La decisión clave…»
 
 **✅ ¿Ha construido pipelines de datos que corran solos?**
 
-- top-4: a-fondo-transmilenio-cm-validaciones-en-el-pipeline~1, a-fondo-transmilenio-cm-validaciones-en-el-pipeline~2, a-fondo-agentes-en-produccion-la-segunda-trayectoria~1, a-fondo-vesting-la-arquitectura~2
+- top-4: a-fondo-transmilenio-cm-validaciones-en-el-pipeline~1, a-fondo-transmilenio-cm-validaciones-en-el-pipeline~2, a-fondo-agentes-en-produccion-la-segunda-trayectoria~1, casestudy-inglopres
 - primer fragmento: «Incorporé validaciones en el ETL para identificar datos incompletos, duplicados, inconsistencias y relaciones que no cumplían las reglas esperadas: un servicio ejecutado sin programación que lo respaldara, una transacció…»
 
 **☑️ ¿Qué hace para asegurar la calidad de los datos?**
 
-- top-4: casestudy-cafam, a-fondo-origenes-iso-9001-la-primera-escuela~1, a-fondo-gobierno-de-datos-y-de-ia-gobernar-para-hacer-mas~2, a-fondo-procesos-y-simulacion-verificacion-y-validacion~1
-- primer fragmento: «Cafam implementaba un WMS en su operación logística: un cambio de sistema crítico donde cada error de datos se paga en la bodega. Asegurar la calidad de la implementación coordinando al equipo de pruebas más grande que h…»
+- top-4: a-fondo-origenes-iso-9001-la-primera-escuela~1, casestudy-cafam, a-fondo-gobierno-de-datos-y-de-ia-gobernar-para-hacer-mas~2, a-fondo-procesos-y-simulacion-verificacion-y-validacion~1
+- primer fragmento: «Mi trabajo en Inglopres también abarcó la cadena de suministro y el aseguramiento de la calidad bajo la norma ISO 9001:2015. Este entorno fortaleció una disciplina que ha permanecido en toda mi trayectoria: no basta con…»
 
 **✅ ¿Sabe de integración continua y despliegue automático?**
 
@@ -472,7 +472,7 @@ Preguntas que un reclutador hace y que **el corpus no contesta hoy**, con el doc
 
 **✅ ¿Qué diferencia hay entre un data lake y un data warehouse para él?**
 
-- top-4: a-fondo-fabric-en-la-practica-lago-y-almacen~2, a-fondo-vesting-la-arquitectura~1, a-fondo-fabric-en-la-practica-lago-y-almacen~1, a-fondo-fabric-en-la-practica-direct-lake-y-rls~1
+- top-4: a-fondo-fabric-en-la-practica-lago-y-almacen~2, casestudy-vesting-1, a-fondo-vesting-la-arquitectura~1, a-fondo-fabric-en-la-practica-lago-y-almacen~1
 - primer fragmento: «El warehouse cumplía una función complementaria. Permitía organizar información estructurada mediante un enfoque relacional, desarrollar transformaciones y vistas en T-SQL orientadas al análisis y responder con claridad…»
 
 ### bi-y-analitica
@@ -520,7 +520,7 @@ Preguntas que un reclutador hace y que **el corpus no contesta hoy**, con el doc
 
 **☑️ ¿Qué base estadística tiene?**
 
-- top-4: a-fondo-certificaciones-las-de-ibm~2, a-fondo-cm-operaciones-la-memoria-estadistica~1, a-fondo-analitica-predictiva-cuando-usar, a-fondo-analitica-predictiva-la-estadistica~3
+- top-4: a-fondo-certificaciones-las-de-ibm~2, a-fondo-cm-operaciones-la-memoria-estadistica~1, casestudy-cm-operaciones-4, a-fondo-analitica-predictiva-cuando-usar
 - primer fragmento: «Python aportó la capacidad para convertir un problema analítico en un flujo reproducible. Me permitió avanzar desde la exploración y preparación de los datos hasta el entrenamiento y la evaluación de modelos. SQL proporc…»
 
 **✅ ¿Ha hecho predicción de demanda?**
@@ -540,7 +540,7 @@ Preguntas que un reclutador hace y que **el corpus no contesta hoy**, con el doc
 
 **✅ ¿Ha automatizado reportes o tareas repetitivas?**
 
-- top-4: a-fondo-cm-operaciones-la-automatizacion~1, a-fondo-cm-operaciones-la-automatizacion~2, a-fondo-fabric-en-la-practica-automatizar-power-bi~1, casestudy-transmilenio-cm
+- top-4: a-fondo-cm-operaciones-la-automatizacion~1, a-fondo-cm-operaciones-la-automatizacion~2, casestudy-transmilenio-cm-5, a-fondo-fabric-en-la-practica-automatizar-power-bi~1
 - primer fragmento: «Implementé soluciones para automatizar actividades recurrentes de preparación, validación y consolidación de información, reduciendo la intervención manual y mejorando la consistencia del procesamiento. Las herramientas…»
 
 ### gobierno
@@ -614,8 +614,8 @@ Preguntas que un reclutador hace y que **el corpus no contesta hoy**, con el doc
 
 **☑️ ¿Ha trabajado con metodologías ágiles?**
 
-- top-4: trayectoria-6, a-fondo-procesos-y-simulacion-cuando-usar, a-fondo-ceinfes-gestion-por-procesos~1, a-fondo-procesos-y-simulacion-lean-kanban-y-scrum~1
-- primer fragmento: «2017 — 2018: Coordinador de Operaciones, Ceinfes. KPIs e informes a junta directiva; transición a gestión por procesos con métodos ágiles. KPIs de logística, RRHH y digitalización; informes a junta directiva. Transición…»
+- top-4: a-fondo-procesos-y-simulacion-cuando-usar, a-fondo-ceinfes-gestion-por-procesos~1, a-fondo-procesos-y-simulacion-lean-kanban-y-scrum~1, skills
+- primer fragmento: «La raíz industrial con sus métodos: BPMN con Bizagi en cuatro empresas, simulación de eventos discretos con FlexSim en Inglopres y el despacho de medicamentos de Cafam, capacidad nominal frente a efectiva, estudio de tie…»
 
 **✅ ¿Para qué le sirve la ingeniería industrial en un puesto de datos?**
 

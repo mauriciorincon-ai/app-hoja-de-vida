@@ -51,10 +51,11 @@ trayectoria:
       Analítica y gobierno de datos para decisiones administrativas y
       asistenciales en salud.
     bullets:
-      - "Lidero la estrategia de IA y la implementación de ISO/IEC 42001."
-      - "Modelos de análisis y visualización para líderes administrativos y asistenciales."
-      - "Gobierno y calidad de datos institucional."
-      - "Tableros de BI por procesos y mejora continua."
+      - "Lidero la estrategia institucional de IA bajo UNE-ISO/IEC 42001:2025: 12 oportunidades identificadas, 7 casos evaluados y 3 priorizados."
+      - "42 productos analíticos en Power BI para líderes administrativos y asistenciales: 20 líderes de 15 procesos y unos 75 usuarios."
+      - "Gobierno y calidad de datos institucional, bajo el régimen de habeas data y la Ley 1581."
+      - "Tableros de control por procesos y planes de mejora: cerca de 60 % menos esfuerzo en la preparación de la información."
+      - "23 instrumentos del sistema de gestión de IA, 8 terminados, y un agente experto en ISO 42001 para revisarlos."
     actual: true
   # «2024» es la decisión estética del dueño (revisión post-S8) para que el
   # índice de la trayectoria no repita 2023 con Pichincha; el case study
@@ -68,10 +69,10 @@ trayectoria:
       arquitectura, gobernanza, monitoreo de agentes en tiempo real y proceso
       core replicable.
     bullets:
-      - "Diseñé e implementé desde cero el ecosistema de datos para analítica de agentes de IA en Microsoft Fabric (Big Data + Data Warehouse + procesamiento distribuido)."
-      - "Definí la gobernanza de datos para integrar información de clientes y sistemas."
-      - "Construí el monitoreo en tiempo real de los agentes en producción."
-      - "Documenté el proceso core replicable para diseñar e implementar agentes de IA."
+      - "Diseñé e implementé desde cero el ecosistema de datos para analítica de agentes de IA en Microsoft Fabric (Big Data + Data Warehouse + procesamiento distribuido): 12 clientes, 120 tablas y 1.000 eventos por día."
+      - "Definí la gobernanza de datos para integrar información de clientes y sistemas, con cada cliente aislado en su propio workspace."
+      - "Construí el monitoreo en tiempo real de los agentes en producción: hasta 23 vigilados a la vez."
+      - "Documenté el proceso core replicable, de 11 etapas, con el que se construyeron los 27 agentes del inventario."
   - periodo: "2023"
     rol: "Analista Senior de Analítica y Reportes"
     organizacion: "Banco Pichincha"
@@ -81,12 +82,12 @@ trayectoria:
       predictivos con >90% de precisión y co-liderazgo de la gobernanza de
       datos.
     bullets:
-      - "Dashboards adoptados por 50+ usuarios: +25% en toma de decisiones."
-      - "Optimización de procesos ETL: −35% en tiempos de análisis."
-      - "Modelos predictivos con scikit-learn: >90% de precisión y +35% en predicciones."
+      - "Lideré un equipo de BI de 5 personas: dashboards adoptados por 50+ usuarios, con +25% en toma de decisiones."
+      - "Optimización de procesos ETL en Power Query: −35% en tiempos de análisis."
+      - "Modelos predictivos de fuga, mora y riesgo con scikit-learn: >90% de precisión y +35% en predicciones."
       - "Optimización de modelos semánticos con DAX Studio y Tabular Editor."
       - "Co-liderazgo de la gobernanza de datos del área."
-      - "Programa de formación en analítica: +20% de productividad en la preparación y uso de la información."
+      - "Programa de formación en analítica para 12 profesionales: +20% de productividad en la preparación y uso de la información."
   - periodo: "2021 — 2022"
     rol: "Análisis Post-Operacional"
     organizacion: "C&M Consultores (TransMilenio)"
@@ -96,10 +97,10 @@ trayectoria:
       predicción de demanda con scikit-learn.
     bullets:
       - "Impulsé la adopción de BI en la operación: +35% de eficiencia con 25+ usuarios clave."
-      - "ETL que unificó fuentes heterogéneas: +70% en precisión y velocidad de análisis."
-      - "Scripts de automatización: −40% en tareas repetitivas."
+      - "ETL que unificó cinco fuentes heterogéneas (recaudo, flota y GPS, programación, novedades y PQR): +70% en precisión y velocidad de análisis."
+      - "Scripts de automatización con validaciones y excepciones visibles: −40% en tareas repetitivas."
       - "Mesas de estrategia con la dirección del SITP: +25% en indicadores."
-      - "Predicción de demanda con scikit-learn: +20% de rendimiento del sistema."
+      - "Predicción de demanda con scikit-learn por ruta y franja, diez meses en uso: +20% de rendimiento del sistema."
   - periodo: "2020 — 2021"
     rol: "Analista de Sistemas de Información"
     organizacion: "Cafam"
@@ -108,37 +109,49 @@ trayectoria:
       Lideré 20 personas en la implementación del WMS: −25% de errores y +15%
       de eficiencia operativa.
     bullets:
-      - "Lideré un equipo de 20 personas en las pruebas de implementación del WMS: −25% de errores y +15% de eficiencia operativa."
+      - "Lideré un equipo de 20 personas —14 de Cafam y 6 de Oracle— en seis meses de pruebas de implementación del WMS: −25% de errores y +15% de eficiencia operativa."
+      - "Modelé el proceso en BPMN con Bizagi y simulé el despacho en FlexSim antes de probar."
       - "BI de control operativo: +50% de precisión para 15+ usuarios."
       - "Integraciones VBA con el WMS: +15% de automatización y −50% de errores de datos."
-      - "Mejoras de calidad de datos en SQL: +20%."
+      - "Calidad de datos en SQL con conciliación 80-20 por medicamentos: +20%."
   - periodo: "2018 — 2020"
     rol: "Analista de Operaciones"
     organizacion: "C&M Consorcio (TransMilenio)"
+    proyecto: "cm-operaciones"
     descripcion: >-
-      Dashboards e indicadores que elevaron el control operativo del sistema.
+      Supervisión con datos de unas 150 rutas de TransMilenio: indicadores
+      trazables, automatización y la memoria estadística del sistema.
     bullets:
-      - "Dashboards interactivos e informes de desempeño de la operación."
-      - "Automatización de reportes y bases estadísticas del sistema."
+      - "Supervisión con datos de unas 150 rutas de 10 concesionarios, cruzando recaudo, flota y GPS, programación, novedades y PQR."
+      - "Tableros e informes de desempeño —dos semanales y un consolidado mensual— trazables hasta el evento operativo."
+      - "Automatización con Excel, VBA y SQL: al menos −40% en el tiempo de procesamiento."
+      - "Memoria estadística del sistema en SQLite: el histórico de la operación, semana a semana."
+      - "Auditoría del cumplimiento de protocolos operativos, con indicadores de consecuencia contractual."
   - periodo: "2017 — 2018"
     rol: "Coordinador de Operaciones"
     organizacion: "Ceinfes"
+    proyecto: "ceinfes"
     descripcion: >-
       KPIs e informes a junta directiva; transición a gestión por procesos con
       métodos ágiles.
     bullets:
-      - "KPIs de logística, RRHH y digitalización; informes a junta directiva."
-      - "Transición a gestión por procesos con Kanban y metodologías ágiles."
-      - "Coordinación de equipos multidisciplinarios."
+      - "KPIs de programación, logística y digitalización para más de 100 colegios al año; informes semanales a la junta directiva."
+      - "Coordinación de cerca de 40 personas en tres frentes y unos 50 profesores aplicadores."
+      - "Balanceo de la línea de digitalización: unas 250 hojas por jornada en dos estaciones de escaneo."
+      - "Macro en VBA que optimizó la programación de profesores con restricciones explícitas."
+      - "Transición a gestión por procesos con BPMN, Kanban y Scrum."
   - periodo: "2016 — 2017"
     rol: "Ingeniero de Procesos"
     organizacion: "Inglopres"
+    proyecto: "inglopres"
     descripcion: >-
       ERP, bases de datos y cadena de suministro bajo ISO 9001; equipo de 12
       con 95% de satisfacción de cliente.
     bullets:
-      - "Gestión de ERP y estructuras de bases de datos para la cadena de suministro."
-      - "Aseguramiento de calidad bajo ISO 9001:2015."
+      - "Lideré la implementación del ERP Odoo para integrar los procesos de la organización."
+      - "Diseñé en SQLite y SQL las bases de datos de análisis que la operación no tenía."
+      - "Estudio del trabajo con suplementos por fatiga para estándares de tiempo sostenibles."
+      - "Cadena de suministro y aseguramiento de calidad bajo ISO 9001:2015."
       - "Equipo de 12 personas con 95% de satisfacción de cliente."
 # Estudios (revisión post-S7): sección propia en la HOME, en el /cv y en el PDF.
 # `periodo` va vacío hasta que pongas los años — no se inventa una fecha.
@@ -172,6 +185,12 @@ logros:
   - desde: "2016-08"
     etiqueta: "años de trayectoria profesional"
     descripcion: "De la ingeniería de procesos a plataformas de datos para agentes de IA (agosto 2016 → hoy)."
+  - valor: 27
+    etiqueta: "agentes de IA construidos con el proceso core que estructuré"
+    descripcion: "Vesting: 12 clientes integrados y hasta 23 agentes vigilados a la vez, en tiempo real, sobre Microsoft Fabric."
+  - valor: 42
+    etiqueta: "productos analíticos en uso en salud"
+    descripcion: "Fundación CTIC: 20 líderes de 15 procesos y unos 75 usuarios, sobre definiciones institucionales comunes."
   - valor: 50
     sufijo: "+"
     etiqueta: "usuarios adoptaron mis dashboards en banca"
@@ -206,6 +225,7 @@ proyectos:
       ["Microsoft Fabric", "Gobernanza de datos", "Monitoreo en tiempo real"]
     destacado: true
     casestudy:
+      titular: "La plataforma de datos de una startup de agentes de IA, diseñada desde cero: datos para que los agentes operen y datos sobre los agentes para poder confiar en ellos."
       contexto: >-
         Vesting, una startup de agentes de automatización, crecía sin
         infraestructura de datos: la analítica de sus agentes de IA no tenía
@@ -214,16 +234,53 @@ proyectos:
         Construir desde cero el ecosistema de datos capaz de soportar la
         analítica y el monitoreo de agentes de IA en producción — con
         gobernanza desde el día uno y sin frenar a la startup.
-      acciones:
-        - "Diseñé la arquitectura del ecosistema en Microsoft Fabric: Big Data, Data Warehouse y procesamiento distribuido."
-        - "Definí la gobernanza de datos para integrar información de clientes y sistemas de forma consistente."
-        - "Construí el monitoreo en tiempo real de los agentes de IA en producción."
-        - "Documenté el proceso core replicable para diseñar e implementar agentes de IA."
+      cifras:
+        - valor: 12
+          etiqueta: "clientes integrados a la plataforma"
+        - valor: 27
+          etiqueta: "agentes construidos con el proceso core"
+        - valor: 23
+          etiqueta: "agentes vigilados a la vez, en tiempo real"
+        - valor: 11
+          etiqueta: "etapas del proceso core replicable"
+      capitulos:
+        - titulo: "La arquitectura en Microsoft Fabric"
+          texto: >-
+            Diseñé el ecosistema en Microsoft Fabric: Big Data, Data Warehouse y procesamiento
+            distribuido sobre un lakehouse en OneLake, con pipelines que recibían los flujos de n8n
+            que orquestaban a los agentes. La decisión clave fue normalizar los eventos desde el
+            ingreso: sesiones, solicitudes, respuestas, tiempos, estados y costo en tokens, iguales
+            para los 27 agentes.
+        - titulo: "Lo común y lo configurable"
+          texto: >-
+            Un agente o un cliente nuevo no podía requerir una tabla nueva para lo que ya tenía
+            nombre en la plataforma, y sí podía traer atributos propios. Lo común era la condición
+            de comparar; lo configurable, la condición de no frenar a la startup.
+        - titulo: "Gobernanza desde el diseño"
+          texto: >-
+            Definí la gobernanza para integrar datos de clientes y sistemas con un contrato de
+            eventos validado desde el ingreso. Los 12 clientes quedaron aislados en workspaces
+            separados: el límite de acceso coincidía con el límite del cliente y no dependía de un
+            filtro bien escrito.
+        - titulo: "Monitorear agentes en producción"
+          texto: >-
+            Construí el monitoreo en tiempo real en Power BI, con la sesión como unidad de análisis
+            y cuatro dimensiones: operativa, de uso, económica y funcional. La funcional era la más
+            difícil: un agente puede responder sin resolver nada.
+        - titulo: "El proceso core de once etapas"
+          texto: >-
+            Estructuré, documenté y validé el proceso core con el que se construyeron los 27
+            agentes: del caso de uso y el nivel de autonomía a la definición de terminado, la
+            adopción y la operación observable. El activo no era un agente, sino la capacidad de
+            construir el siguiente sin mí.
       impacto:
         - "El ecosistema de datos quedó operativo desde cero en Microsoft Fabric: 12 clientes integrados, 120 tablas, 20 GB y 1.000 eventos por día."
         - "27 agentes en el inventario y hasta 23 monitoreados a la vez, en tiempo real."
         - "El proceso core replicable, de 11 etapas, estandarizó cómo se diseñan e implementan los agentes."
         - "El puente exacto entre la ingeniería de analítica (DP-600) y la ingeniería de IA."
+      leccion: >-
+        Cuanto mayor es la capacidad de actuación de un sistema, mayor debe ser la
+        trazabilidad de sus datos, su comportamiento y sus límites.
   - slug: "banco-pichincha"
     nombre: "BI que el negocio sí usa — Banco Pichincha (2023)"
     resumen: >-
@@ -233,6 +290,7 @@ proyectos:
       subió la productividad 20%.
     stack: ["BI", "ETL", "scikit-learn"]
     casestudy:
+      titular: "Cinco meses en banca para cerrar la distancia entre el dato y la decisión: tableros que el negocio sí usa, modelos en producción y personas capaces de sostenerlos."
       contexto: >-
         El área de analítica y reportes del banco producía tableros que el
         negocio no terminaba de adoptar, con procesos ETL lentos y modelos
@@ -240,17 +298,56 @@ proyectos:
       reto: >-
         Convertir el BI en una herramienta que el negocio use a diario y
         llevar los modelos predictivos a producción con precisión confiable.
-      acciones:
-        - "Diseñé dashboards orientados a decisión que adoptaron 50+ usuarios del negocio."
-        - "Optimicé los procesos ETL reduciendo 35% los tiempos de análisis."
-        - "Entrené y llevé a producción modelos predictivos con scikit-learn."
-        - "Optimicé los modelos semánticos con DAX Studio y Tabular Editor."
-        - "Co-lideré la gobernanza de datos y un programa de formación en analítica."
+      cifras:
+        - valor: 50
+          sufijo: "+"
+          etiqueta: "usuarios adoptaron los dashboards"
+        - valor: 25
+          prefijo: "+"
+          sufijo: "%"
+          etiqueta: "en toma de decisiones"
+        - valor: 90
+          prefijo: ">"
+          sufijo: "%"
+          etiqueta: "de precisión en modelos en producción"
+        - valor: 12
+          etiqueta: "profesionales formados en analítica"
+      capitulos:
+        - titulo: "Diseñar desde la decisión"
+          texto: >-
+            Lideré a un equipo de cinco personas en dashboards orientados a decisión que adoptaron
+            más de 50 usuarios del negocio. Cada tablero partía de la decisión que debía respaldar y
+            ofrecía una ruta del agregado a la evidencia, construida en el modelo semántico y no en
+            la página.
+        - titulo: "Una sola definición por concepto"
+          texto: >-
+            Centralicé las medidas en DAX y optimicé los modelos semánticos con DAX Studio y Tabular
+            Editor. Una medida definida una vez es la forma técnica de una decisión de negocio: la
+            mora o la fuga se calculan de una sola manera.
+        - titulo: "Un ETL que se entiende"
+          texto: >-
+            Optimicé el ETL en Power Query separando la conexión, la preparación y las tablas del
+            modelo, con selección temprana de filas y columnas y validaciones antes del modelo. El
+            −35 % en tiempos de análisis salió de decisiones de estructura, no de un truco de
+            rendimiento.
+        - titulo: "Fuga, mora y riesgo en producción"
+          texto: >-
+            Entrené y llevé a producción con scikit-learn modelos de fuga, mora y riesgo, evaluados
+            por segmentos y por lo que cuesta cada error: llamar a un cliente que no iba a irse
+            cuesta una llamada; no llamar al que sí se va cuesta el cliente.
+        - titulo: "Formación y gobierno"
+          texto: >-
+            Diseñé un programa de formación para 12 profesionales —Power Query, modelado, DAX y
+            comunicación, sobre sus propios datos— y co-lideré el gobierno de datos. La frontera
+            quedó clara: explorar era libre; redefinir qué es la mora, no.
       impacto:
         - "+25% en toma de decisiones sobre los tableros adoptados."
         - "−35% en tiempos de análisis por la optimización del ETL."
         - ">90% de precisión y +35% en predicciones de los modelos en producción."
         - "+20% de productividad en la preparación y uso de la información tras el programa de formación."
+      leccion: >-
+        La sofisticación de una solución no determina por sí sola su valor. Lo
+        importante es la función que cumple dentro de una decisión.
   - slug: "transmilenio-cm"
     nombre: "Datos que mueven una ciudad — TransMilenio / C&M (2021–2022)"
     resumen: >-
@@ -260,6 +357,7 @@ proyectos:
       estrategia con la dirección del SITP (+25% en indicadores).
     stack: ["BI", "ETL", "scikit-learn"]
     casestudy:
+      titular: "Volví al mismo sistema con otra pregunta: ya no supervisar el cumplimiento, sino explicar la operación del SITP y ayudar a decidir cómo ajustarla."
       contexto: >-
         El análisis post-operacional del sistema TransMilenio dependía de
         fuentes heterogéneas y reportes manuales: la operación de la ciudad
@@ -267,17 +365,55 @@ proyectos:
       reto: >-
         Unificar las fuentes, acelerar el análisis y llevar los datos a las
         mesas donde se decide la operación del sistema de transporte.
-      acciones:
-        - "Impulsé la adopción de BI en la operación con 25+ usuarios clave."
-        - "Construí el ETL que unificó las fuentes heterogéneas del sistema."
-        - "Automaticé tareas repetitivas con scripts (−40%)."
-        - "Llevé la analítica a mesas de estrategia con la dirección del SITP."
-        - "Desarrollé la predicción de demanda con scikit-learn."
+      cifras:
+        - valor: 70
+          prefijo: "+"
+          sufijo: "%"
+          etiqueta: "en precisión y velocidad de análisis"
+        - valor: 25
+          sufijo: "+"
+          etiqueta: "usuarios clave adoptaron el BI"
+        - valor: 25
+          prefijo: "+"
+          sufijo: "%"
+          etiqueta: "en los indicadores intervenidos con el SITP"
+        - valor: 10
+          etiqueta: "meses en uso del modelo de demanda"
+      capitulos:
+        - titulo: "Cinco fuentes, una operación"
+          texto: >-
+            Construí el ETL que unificó recaudo, flota y GPS, programación, novedades y PQR sobre
+            claves comunes: ruta, servicio, vehículo, franja y día. Las validaciones vivían dentro
+            del pipeline, escritas como reglas: un servicio sin programación o un bus con GPS y sin
+            despacho quedaban a la vista, no corregidos en silencio.
+        - titulo: "BI alrededor de preguntas operacionales"
+          texto: >-
+            Impulsé la adopción de Power BI con más de 25 usuarios clave: quienes programaban y
+            decidían el servicio. Cada tablero respondía una pregunta concreta, como en qué rutas y
+            franjas la demanda supera la oferta programada o qué concesionarios concentran las
+            novedades.
+        - titulo: "Evidencia, mecanismo y consecuencia"
+          texto: >-
+            Llevé la analítica a mesas de trabajo con la dirección de concesionarios del SITP. Cada
+            recomendación conectaba evidencia, mecanismo y consecuencia, y el mismo pipeline seguía
+            midiendo después de actuar: por eso el +25 % se pudo afirmar.
+        - titulo: "Predecir la demanda para programar"
+          texto: >-
+            Desarrollé con scikit-learn un modelo de demanda por ruta y franja, con actualización
+            mensual, validado con RMSE respetando el orden temporal. Corrió diez meses dentro del
+            informe con el que se decidía cuántos buses asignar y en qué horarios.
+        - titulo: "Automatizar con controles"
+          texto: >-
+            Los scripts recortaron un 40 % el tiempo de las tareas repetitivas, con validación de
+            entradas y excepciones visibles: una base que llega con una columna menos no se carga en
+            silencio ni tumba el proceso. Ese tiempo se fue al modelo y a las mesas.
       impacto:
         - "+35% de eficiencia de los procesos analíticos por la adopción de BI."
         - "+70% en precisión y velocidad de análisis con el ETL unificado."
         - "+25% en indicadores tras las mesas de estrategia con el SITP."
         - "+20% de rendimiento del sistema con la predicción de demanda."
+      leccion: >-
+        Una decisión confiable requiere un recorrido de datos igualmente confiable.
   - slug: "cafam"
     nombre: "Liderar la calidad de un WMS — Cafam (2020–2021)"
     resumen: >-
@@ -286,22 +422,62 @@ proyectos:
       integraciones VBA (−50% de errores de datos).
     stack: ["WMS", "BI", "VBA"]
     casestudy:
+      titular: "Cambiar el sistema que mueve una bodega de medicamentos sin dejar de despachar: seis meses de pruebas con el equipo más grande que he liderado."
       contexto: >-
         Cafam implementaba un WMS en su operación logística: un cambio de
         sistema crítico donde cada error de datos se paga en la bodega.
       reto: >-
         Asegurar la calidad de la implementación coordinando al equipo de
         pruebas más grande que he liderado, sin frenar la operación.
-      acciones:
-        - "Lideré un equipo de 20 personas en las pruebas de implementación del WMS."
-        - "Construí el BI de control operativo de la implementación."
-        - "Desarrollé integraciones VBA con el WMS para automatizar cargas de datos."
-        - "Establecí mejoras de calidad de datos en SQL."
+      cifras:
+        - valor: 20
+          etiqueta: "personas: 14 de Cafam y 6 de Oracle"
+        - valor: 6
+          prefijo: "~"
+          etiqueta: "meses de pruebas del WMS"
+        - valor: 25
+          prefijo: "−"
+          sufijo: "%"
+          etiqueta: "de errores en el registro de inventario"
+        - valor: 50
+          prefijo: "−"
+          sufijo: "%"
+          etiqueta: "de errores de datos con las integraciones VBA"
+      capitulos:
+        - titulo: "Primero el proceso, después el sistema"
+          texto: >-
+            Antes de la primera prueba modelé el centro de distribución en BPMN con Bizagi
+            —recepción, almacenamiento, alistamiento y despacho— y simulé el despacho en FlexSim
+            para saber dónde una regla nueva del WMS podía crear una cola que no existía.
+        - titulo: "Un equipo mixto de veinte"
+          texto: >-
+            Lideré a 14 personas de Cafam y 6 de Oracle durante unos seis meses de pruebas de Oracle
+            WMS Cloud. Mi trabajo era traducir: una queja de inventario se convertía en un escenario
+            reproducible, con entradas, pasos, resultado esperado y evidencia.
+        - titulo: "Instrumentar la implementación"
+          texto: >-
+            Construí el BI de control del propio proyecto para más de 15 usuarios, de los directores
+            a los coordinadores del centro de distribución: cobertura, defectos, reincidencias y
+            reprocesos visibles a diario, no una sensación de avance.
+        - titulo: "Integraciones con dueño y con límite"
+          texto: >-
+            Desarrollé integraciones en VBA con el WMS para sustituir cargas manuales. Cada pieza
+            periférica sabía quién la mantenía, de qué dependía y cuándo se retiraría: sin esas tres
+            condiciones, un puente se convierte en un sistema paralelo.
+        - titulo: "La conciliación 80-20 en SQL"
+          texto: >-
+            Al arrancar, ninguno de los medicamentos principales cuadraba entre el WMS y el sistema
+            de origen. Los concilié en SQL por prioridad de volumen, y cada consulta que encontraba
+            una diferencia quedó como control permanente.
       impacto:
         - "−25% de errores y +15% de eficiencia operativa en la implementación."
         - "+50% de precisión en el control operativo, adoptado por 15+ usuarios."
         - "+15% de automatización y −50% de errores de datos con las integraciones VBA."
         - "+20% en calidad de datos vía SQL."
+      leccion: >-
+        Modernizar no consiste en sustituirlo todo de una vez, sino en diseñar una
+        transición que preserve la continuidad mientras reduce progresivamente la
+        complejidad.
   - slug: "fundacion-ctic"
     nombre: "Analítica en salud — Fundación CTIC (2025–hoy)"
     resumen: >-
@@ -310,6 +486,7 @@ proyectos:
       control por procesos.
     stack: ["Analítica", "Gobierno de datos"]
     casestudy:
+      titular: "Mi rol actual: la analítica con la que una institución de salud mide y decide, y la estrategia con la que gobierna su inteligencia artificial bajo UNE-ISO/IEC 42001:2025."
       contexto: >-
         En salud, las decisiones administrativas y asistenciales dependen de
         datos institucionales que históricamente vivían dispersos y sin
@@ -317,16 +494,257 @@ proyectos:
       reto: >-
         Llevar gobierno, calidad y analítica de datos a las decisiones de
         líderes administrativos y asistenciales de la Fundación.
-      acciones:
-        - "Desarrollo modelos de análisis y visualización para líderes administrativos y asistenciales."
-        - "Estructuro el gobierno y la calidad de datos institucional."
-        - "Construyo tableros de control por procesos con mejora continua."
-        - "Lidero la estrategia institucional de IA bajo UNE-ISO/IEC 42001:2025: 23 instrumentos del sistema de gestión, 8 terminados."
+      cifras:
+        - valor: 42
+          etiqueta: "productos analíticos en uso en Power BI"
+        - valor: 20
+          etiqueta: "líderes respaldados, de 15 procesos"
+        - valor: 12
+          etiqueta: "oportunidades de IA identificadas"
+        - valor: 23
+          etiqueta: "instrumentos del sistema de gestión de IA"
+      capitulos:
+        - titulo: "Analítica por procesos, para dos audiencias"
+          texto: >-
+            Desarrollo en Power BI modelos de análisis y visualización para líderes administrativos
+            y asistenciales: 42 productos, entre ellos 23 tableros de control. Un indicador conserva
+            una sola definición institucional, aunque cada audiencia lo vea con su propio nivel de
+            detalle.
+        - titulo: "Gobierno y calidad de datos en salud"
+          texto: >-
+            Estructuro la calidad de datos institucional con reglas de completitud, duplicados,
+            conciliación y umbrales, bajo el régimen de habeas data y la Ley 1581. Un dato personal
+            se usa para el propósito autorizado, no para cualquiera al que técnicamente se pueda
+            acceder.
+        - titulo: "Tableros por procesos, no por áreas"
+          texto: >-
+            Organizo los tableros por procesos porque un área puede mostrar buenos indicadores
+            mientras el proceso que la atraviesa acumula esperas y reprocesos. Diseño los planes de
+            mejora; los ejecutan los responsables de cada proceso.
+        - titulo: "La estrategia institucional de IA"
+          texto: >-
+            Lidero la estrategia de IA bajo UNE-ISO/IEC 42001:2025: 12 oportunidades identificadas,
+            7 casos evaluados formalmente y 3 priorizados. No todo problema necesita IA, y no toda
+            iniciativa de IA necesita un agente.
+        - titulo: "Un sistema de gestión que se demuestra"
+          texto: >-
+            Construimos 23 instrumentos del sistema de gestión —políticas, procedimientos, matrices
+            y criterios—, 8 de ellos terminados. Para revisarlos construí el agente experto en ISO
+            42001 que publico en la vitrina: cita la norma o declara el vacío, y ningún dictamen
+            avanza sin una persona.
       impacto:
         - "42 productos analíticos en uso para 20 líderes de 15 procesos y unos 75 usuarios."
         - "Cerca de 60% menos esfuerzo en la preparación de la información; 10 planes de análisis en seguimiento."
         - "12 oportunidades de IA identificadas, 7 casos evaluados, 3 priorizados y 2 documentados."
         - "Calidad de datos institucional como práctica, no como evento."
+      leccion: >-
+        Mi propósito no es conseguir que la organización utilice más inteligencia
+        artificial, sino que utilice la inteligencia artificial adecuada para
+        problemas relevantes.
+  - slug: "cm-operaciones"
+    nombre: "Supervisar una ciudad con datos — C&M Consorcio / TransMilenio (2018–2020)"
+    resumen: >-
+      Supervisión con datos de la operación de TransMilenio: unas 150 rutas de 10
+      concesionarios, cinco fuentes cruzadas (recaudo, flota y GPS, programación,
+      novedades y PQR), tableros e informes de desempeño trazables hasta el evento,
+      automatización con Excel, VBA y SQL (al menos −40 % del tiempo de
+      procesamiento) y la memoria estadística del sistema.
+    stack: ["Excel · VBA", "SQL · SQLite", "Tableros de desempeño"]
+    casestudy:
+      titular: "Verificar con evidencia que el sistema de transporte de Bogotá se operara como estaba pactado, cuando de cada cifra podía colgar un descuento o una sanción."
+      contexto: >-
+        Entré al transporte masivo en la supervisión de TransMilenio: unas 150 rutas
+        agrupadas en 10 empresas concesionarias. Ninguna fuente describía sola la
+        operación; había que reconstruirla cruzando recaudo, flota y GPS,
+        programación, novedades y PQR, cada una con su propia estructura y su propia
+        calidad.
+      reto: >-
+        Producir indicadores que resistieran la discusión entre la autoridad y diez
+        concesionarios con intereses distintos: trazables desde el registro de GPS o
+        de recaudo hasta la cifra del informe.
+      cifras:
+        - valor: 150
+          prefijo: "~"
+          etiqueta: "rutas supervisadas"
+        - valor: 10
+          etiqueta: "empresas concesionarias"
+        - valor: 5
+          etiqueta: "fuentes cruzadas para reconstruir la operación"
+        - valor: 40
+          prefijo: "−"
+          sufijo: "%"
+          etiqueta: "de tiempo de procesamiento, como mínimo"
+      capitulos:
+        - titulo: "La trazabilidad como condición de legitimidad"
+          texto: >-
+            Cuando un indicador puede sustentar un descuento o una sanción, su linaje debe ser tan
+            sólido como su cálculo. Cada cifra tenía que poder reconstruirse hasta el evento
+            operativo que la producía; con diez concesionarios del otro lado de la mesa, era el
+            único argumento que resistía.
+        - titulo: "Tableros e informes de desempeño"
+          texto: >-
+            Dos informes semanales, un consolidado mensual y los que se pedían a demanda: servicios
+            programados frente a realizados, recorridos y cobertura, intervalos entre buses y
+            cumplimiento. Aprendí a separar indicadores de resultado de indicadores de
+            comportamiento: el intervalo entre buses avisaba antes que el consolidado.
+        - titulo: "Primero la regla escrita, después la macro"
+          texto: >-
+            Automaticé con Excel, VBA y SQL la extracción, validación y consolidación de las bases
+            semanales de los concesionarios. La validación de entrada —campos obligatorios, rangos
+            posibles, duplicados— fue la parte que más cambió y la que más errores evitó.
+        - titulo: "La memoria estadística del sistema"
+          texto: >-
+            Organicé en SQLite el acumulado de las bases semanales: la misma ruta y el mismo
+            intervalo, mes tras mes. Fue mi primer pipeline de datos completo, y el activo que quedó
+            cuando salí en mayo de 2020.
+        - titulo: "Dos preguntas que hoy son investigaciones"
+          texto: >-
+            Los datos mostraban dos problemas que no podía resolver desde la supervisión: la
+            asignación conductor–vehículo–ruta y el apelotonamiento de buses. Hoy son dos de las
+            investigaciones que publico en la vitrina, con su método y su resultado.
+      impacto:
+        - "Informes semanales y mensuales de desempeño para unas 150 rutas, trazables desde la cifra hasta el registro."
+        - "Al menos un 40 % menos de tiempo de procesamiento con la automatización en Excel, VBA y SQL."
+        - "Una memoria estadística de la operación que dejó de empezar desde cero cada semana."
+        - "Dos preguntas de la operación convertidas, años después, en investigaciones publicadas."
+      leccion: >-
+        Observar un sistema es mucho más que producir indicadores: exige reconstruir
+        sus relaciones y conservar evidencia de cada transformación.
+  - slug: "ceinfes"
+    nombre: "Dirigir una operación con indicadores — Ceinfes (2017–2018)"
+    resumen: >-
+      Coordinación de tres frentes —programación, digitalización y logística, cerca
+      de 40 personas— para evaluaciones en más de 100 colegios al año: KPIs por
+      área, balanceo de la línea de digitalización, una macro en VBA para la
+      programación, informes semanales a la junta directiva y la transición a
+      gestión por procesos con Kanban y Scrum.
+    stack: ["KPIs", "VBA", "BPMN · Bizagi", "Kanban · Scrum"]
+    casestudy:
+      titular: "Tres áreas que funcionaban por separado convertidas en un solo flujo, observable con indicadores y dirigido con evidencia ante la junta directiva."
+      contexto: >-
+        Ceinfes aplicaba simulacros de pruebas a más de 100 colegios al año.
+        Profesores, materiales, exámenes, transporte e información tenían que estar en
+        cada institución en el momento exacto: llegar antes complicaba la custodia;
+        llegar tarde comprometía la aplicación.
+      reto: >-
+        Hacer que programación, digitalización y logística dejaran de operar como
+        unidades independientes y funcionaran como un solo sistema que se pudiera ver,
+        anticipar y dirigir.
+      cifras:
+        - valor: 100
+          sufijo: "+"
+          etiqueta: "colegios atendidos al año"
+        - valor: 40
+          prefijo: "~"
+          etiqueta: "personas en tres frentes"
+        - valor: 250
+          prefijo: "~"
+          etiqueta: "hojas digitalizadas por jornada"
+      capitulos:
+        - titulo: "KPIs como medidores a lo largo del flujo"
+          texto: >-
+            Monté indicadores para programación, logística y digitalización, cada uno con su número
+            del día: demanda por atender, recursos confirmados, material entregado, pruebas
+            recibidas y pendiente de digitalizar. Los intermedios eran los que servían: avisaban
+            antes de que un colegio sintiera el retraso.
+        - titulo: "Una definición compartida por métrica"
+          texto: >-
+            «Entrega completa» o «registro validado» tenían que significar lo mismo para todos, y
+            cada KPI debía poder recorrerse hasta el colegio, el lote o la fecha que lo producían.
+            Si no, la reunión se gasta en discutir el número.
+        - titulo: "La digitalización como línea de producción"
+          texto: >-
+            Traté la digitalización como un problema de balanceo de líneas: dos estaciones de
+            escaneo, unas 250 hojas por jornada y cerca de un 10 % de captura manual. La capacidad
+            efectiva no era la de los escáneres, sino la de la estación de validación, y esa era la
+            que había que proteger.
+        - titulo: "De una memoria personal a una regla"
+          texto: >-
+            La asignación de profesores a colegios se hacía a mano en Google Calendar. Diseñé una
+            macro en VBA que la optimizaba con restricciones explícitas —disponibilidad,
+            competencia, ubicación, ventana del colegio— y el conocimiento pasó de una persona a una
+            regla que el equipo podía ejecutar y discutir.
+        - titulo: "La junta directiva, cada viernes"
+          texto: >-
+            Presenté por primera vez informes semanales a la junta directiva: una síntesis ejecutiva
+            con una base trazable detrás. De ellos salieron incentivos, mejores condiciones
+            laborales y el rediseño de puestos, procesos y software. También lideré la transición a
+            gestión por procesos con BPMN, Kanban y Scrum.
+      impacto:
+        - "Tres áreas convertidas en un solo flujo, con KPIs diarios para más de 100 colegios al año."
+        - "La programación pasó de depender de la memoria de una persona a reglas explícitas en una macro en VBA."
+        - "Informes semanales a la junta directiva que terminaron en programas de incentivos y en el rediseño de puestos, procesos y software."
+        - "Gestión por procesos con Kanban y Scrum, y un primer gobierno del acceso a los resultados de los estudiantes."
+      leccion: >-
+        Inglopres me enseñó a estructurar una operación; Ceinfes me enseñó a dirigirla
+        mediante información.
+  - slug: "inglopres"
+    nombre: "Construir el dato que nadie tenía — Inglopres (2016–2017)"
+    resumen: >-
+      Primer empleo como Ingeniero de Procesos en una empresa de alquiler y venta de
+      maquinaria pesada (unas 120 unidades): implementación del ERP Odoo, bases de
+      datos de análisis en SQLite y SQL, estudio del trabajo con suplementos por
+      fatiga, cadena de suministro bajo ISO 9001:2015 y un equipo de 12 personas con
+      95 % de satisfacción del cliente.
+    stack: ["Odoo (ERP)", "SQLite · SQL", "BPMN · FlexSim", "ISO 9001:2015"]
+    casestudy:
+      titular: "Mi primer empleo: integrar una operación de maquinaria pesada con un ERP y construir los datos que hacían falta para medirla."
+      contexto: >-
+        Inglopres alquilaba, compraba y vendía maquinaria pesada, con un parque de
+        unas 120 unidades. Cada venta o alquiler dependía de qué máquina estaba
+        disponible, en qué estado, en qué obra y con qué mantenimiento pendiente, y
+        esa información vivía en registros dispersos que nadie cruzaba.
+      reto: >-
+        Comprender la operación de extremo a extremo, integrarla en un solo sistema y
+        medirla con indicadores confiables, cuando buena parte de la información
+        necesaria ni siquiera existía.
+      cifras:
+        - valor: 120
+          prefijo: "~"
+          etiqueta: "unidades de maquinaria en el parque"
+        - valor: 12
+          etiqueta: "personas en el equipo que lideré"
+        - valor: 95
+          sufijo: "%"
+          etiqueta: "de satisfacción del cliente"
+      capitulos:
+        - titulo: "Un ERP integra lo que ya se acordó"
+          texto: >-
+            Lideré la implementación de Odoo para que las áreas pasaran de registros dispersos a una
+            sola versión de la operación. Antes de configurar nada levanté el proceso real
+            observando y preguntando, y lo modelé en BPMN con Bizagi: un ERP no integra una
+            organización, integra lo que la organización ya acordó.
+        - titulo: "Los datos que no existían"
+          texto: >-
+            Para medir necesitaba información que nadie capturaba. Diseñé en SQLite la base de
+            análisis —entidades, relaciones y reglas que preservaban el significado de cada campo— y
+            la consulté en SQL. Ahí empezó mi camino hacia los datos: como consecuencia del
+            problema, no como un cambio de profesión.
+        - titulo: "Medir sin castigar a quien trabaja"
+          texto: >-
+            Hice estudio de tiempos formal sobre las actividades repetitivas y añadí los suplementos
+            por fatiga de la tabla de la OIT. Un tiempo observado no es un estándar: sin ese
+            suplemento, el estándar se cumple una semana y se incumple el resto del año.
+        - titulo: "Cadena de suministro bajo ISO 9001:2015"
+          texto: >-
+            Medí tiempo de respuesta, nivel de servicio y disponibilidad del parque con los mismos
+            datos, y aseguré los requisitos de ISO 9001:2015. Esa norma fue mi primera escuela de
+            trazabilidad: lo hecho deja rastro escrito, y la misma estructura me sirve hoy con
+            ISO/IEC 42001.
+        - titulo: "Liderar es reducir la ambigüedad"
+          texto: >-
+            Con doce operarios y técnicos, cada persona sabía qué resultado se esperaba, quién
+            respondía por él, con qué información contaba y qué significaba terminado. El estándar
+            de tiempo que construimos era el mismo con el que se asignaba la tarea.
+      impacto:
+        - "Un ERP (Odoo) implementado desde cero y una base de datos de análisis en SQLite que antes no existía."
+        - "Del orden de un 20 % más de eficiencia operativa —estimación hecha hoy, porque la medición de entonces no se conserva—: menos reprocesos y menos tiempo entre el pedido y la máquina en obra."
+        - "Estándares de tiempo con suplementos por fatiga que el equipo podía cumplir y defender."
+        - "95 % de satisfacción del cliente con un equipo de 12 personas."
+      leccion: >-
+        El problema que resolvía en 2016 —que la decisión necesitaba un dato que nadie
+        había construido— es exactamente el mismo que resuelvo hoy, con otras
+        herramientas y otra escala.
 
 certificaciones:
   # AI-102 salió de la lista el 2026-09-10: Microsoft descontinuó la certificación (decisión del dueño).

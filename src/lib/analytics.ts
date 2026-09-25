@@ -19,6 +19,7 @@ export type AnalyticsEvent =
   | "chat_fallback"
   | "chat_registro_codigo_pedido"
   | "chat_registro_verificado"
+  | "chat_registro_problema"
   | "roadmap_visto"
   | "voto_emitido"
   | "voto_rechazado"

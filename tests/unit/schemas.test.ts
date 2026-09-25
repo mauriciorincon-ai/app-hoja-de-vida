@@ -33,6 +33,25 @@ const cvValido = {
   proyectos: [{ slug: "proyecto", nombre: "Proyecto", resumen: "Resumen" }],
 };
 
+/** Un caso de estudio completo: la forma mínima que el esquema acepta (ADR-009 enmendado). */
+const casoCompleto = {
+  titular: "La tesis.",
+  contexto: "Contexto",
+  reto: "Reto",
+  cifras: [
+    { valor: 12, etiqueta: "clientes" },
+    { valor: 27, etiqueta: "agentes" },
+    { valor: 11, etiqueta: "etapas" },
+  ],
+  capitulos: [
+    { titulo: "Uno", texto: "Hice A." },
+    { titulo: "Dos", texto: "Hice B." },
+    { titulo: "Tres", texto: "Hice C." },
+  ],
+  impacto: ["Logré B"],
+  leccion: "Lo que me llevo.",
+};
+
 describe("aniosCumplidos (el logro que deja de envejecer solo)", () => {
   it("cuenta años COMPLETOS desde YYYY-MM: 2016-08 vale 10 hasta julio de 2027 y 11 después", () => {
     expect(aniosCumplidos("2016-08", new Date(2026, 8, 12))).toBe(10);
@@ -86,44 +105,52 @@ describe("cvSchema", () => {
     expect(cv.proyectos[0].casestudy).toBeUndefined();
   });
 
-  it("accepts a full casestudy (ADR-009 narrative shape)", () => {
+  it("accepts a full casestudy (ADR-009 narrative shape, enmendada 2026-09-24)", () => {
     const cv = cvSchema.parse({
       ...cvValido,
-      proyectos: [
-        {
-          ...cvValido.proyectos[0],
-          casestudy: {
-            contexto: "Contexto",
-            reto: "Reto",
-            acciones: ["Hice A"],
-            impacto: ["Logré B"],
-          },
-        },
-      ],
+      proyectos: [{ ...cvValido.proyectos[0], casestudy: casoCompleto }],
     });
-    expect(cv.proyectos[0].casestudy?.acciones).toHaveLength(1);
+    const caso = cv.proyectos[0].casestudy;
+    expect(caso?.capitulos).toHaveLength(3);
+    expect(caso?.cifras[0].prefijo).toBe("");
+    expect(caso?.cifras[0].decimales).toBe(0);
   });
 
-  it("rejects a casestudy with empty acciones (build fail-safe)", () => {
+  // EL ROJO DE LA ENMIENDA: un caso «simple» —contexto, reto y cuatro frases—
+  // ya no compila. Es exactamente la forma que tenían los cinco casos hasta el
+  // 2026-09-24, y el build los nombró uno a uno al endurecer el esquema.
+  it("rejects the old, thin casestudy shape: no titular, cifras, capítulos or lección", () => {
+    const delgado = {
+      contexto: "C",
+      reto: "R",
+      acciones: ["A"],
+      impacto: ["I"],
+    };
     expect(() =>
       parseCv(
-        {
-          ...cvValido,
-          proyectos: [
-            {
-              ...cvValido.proyectos[0],
-              casestudy: {
-                contexto: "C",
-                reto: "R",
-                acciones: [],
-                impacto: ["I"],
-              },
-            },
-          ],
-        },
+        { ...cvValido, proyectos: [{ ...cvValido.proyectos[0], casestudy: delgado }] },
         "test.yaml",
       ),
-    ).toThrowError(/casestudy\.acciones/);
+    ).toThrowError(
+      /casestudy\.titular[\s\S]*casestudy\.cifras[\s\S]*casestudy\.capitulos[\s\S]*casestudy\.leccion/,
+    );
+  });
+
+  it("rejects a casestudy with fewer than 3 cifras or 3 capítulos (build fail-safe)", () => {
+    const pocas = { ...casoCompleto, cifras: casoCompleto.cifras.slice(0, 2) };
+    expect(() =>
+      parseCv(
+        { ...cvValido, proyectos: [{ ...cvValido.proyectos[0], casestudy: pocas }] },
+        "test.yaml",
+      ),
+    ).toThrowError(/casestudy\.cifras/);
+    const cortos = { ...casoCompleto, capitulos: casoCompleto.capitulos.slice(0, 2) };
+    expect(() =>
+      parseCv(
+        { ...cvValido, proyectos: [{ ...cvValido.proyectos[0], casestudy: cortos }] },
+        "test.yaml",
+      ),
+    ).toThrowError(/casestudy\.capitulos/);
   });
 
   it("rejects a non-kebab-case project slug", () => {
@@ -242,12 +269,7 @@ describe("cvSchema", () => {
       proyectos: [
         {
           ...cvValido.proyectos[0],
-          casestudy: {
-            contexto: "c",
-            reto: "r",
-            acciones: ["a"],
-            impacto: ["i"],
-          },
+          casestudy: casoCompleto,
         },
       ],
     };

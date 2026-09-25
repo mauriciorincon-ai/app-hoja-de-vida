@@ -339,8 +339,15 @@ function columnaIzquierda(doc, cv, labels, yInicial) {
     col.espacio(8);
   }
 
-  col.seccion(labels.proyectos);
-  for (const proyecto of cv.proyectos) {
+  // Solo los proyectos DESTACADOS (2026-09-24). Desde que cada experiencia
+  // tiene su caso de estudio, un proyecto es la misma historia que su hito, y
+  // sus logros con cifras ya están arriba en la experiencia: listar los ocho
+  // repetía esas cifras y llevaba el PDF de dos a tres páginas (medido), una
+  // entera de repeticiones. El PDF es para un ATS y para una impresora: dos
+  // páginas, sin duplicados. `destacado: true` en el YAML decide qué entra.
+  const destacados = cv.proyectos.filter((p) => p.destacado);
+  if (destacados.length > 0) col.seccion(labels.proyectos);
+  for (const proyecto of destacados) {
     estilo(doc, "Helvetica-Bold", 9.5, TINTA);
     col.parrafo(ansi(proyecto.nombre), { juntoCon: 24 });
     estilo(doc, "Helvetica", 9, TINTA);

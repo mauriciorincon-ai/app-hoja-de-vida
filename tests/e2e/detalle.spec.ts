@@ -6,7 +6,13 @@ import { parse } from "yaml";
 type Proyecto = {
   slug: string;
   nombre: string;
-  casestudy?: { contexto: string; acciones: string[] };
+  casestudy?: {
+    titular: string;
+    contexto: string;
+    cifras: { valor: number; etiqueta: string }[];
+    capitulos: { titulo: string; texto: string }[];
+    leccion: string;
+  };
 };
 const cvEs = parse(readFileSync("data/cv.es.yaml", "utf8")) as {
   proyectos: Proyecto[];
@@ -78,11 +84,59 @@ test.describe("Páginas de detalle /proyectos/<slug> (capa 2)", () => {
       expect(res.status()).toBe(200);
       const html = await res.text();
       expect(html).toContain(proyecto.nombre);
-      expect(html).toContain(proyecto.casestudy!.acciones[0]);
+      expect(html).toContain(proyecto.casestudy!.titular);
+      expect(html).toContain(proyecto.casestudy!.capitulos[0].texto);
       expect(html).toContain("application/ld+json");
       expect(html).toContain('hrefLang="es"');
       expect(html).toContain('hrefLang="en"');
     }
+  });
+
+  // Revisión 2026-09-24: cada caso trae su pieza completa — tesis, banda de
+  // cifras, capítulos numerados y lección — y ninguno se queda en cuatro frases.
+  // Recorre los OCHO, leídos del YAML: un caso nuevo entra a esta prueba solo.
+  test("cada caso de estudio muestra tesis, cifras, capítulos y lección", async ({
+    page,
+  }) => {
+    test.slow();
+    const casos = cvEs.proyectos.filter((p) => p.casestudy);
+    expect(casos.length).toBeGreaterThanOrEqual(8);
+    for (const p of casos) {
+      const c = p.casestudy!;
+      await page.goto(`/es/proyectos/${p.slug}`);
+      await expect(page.getByTestId("cs-titular"), p.slug).toHaveText(
+        c.titular,
+      );
+      await expect(
+        page.getByTestId("cs-cifras").getByRole("listitem"),
+        p.slug,
+      ).toHaveCount(c.cifras.length);
+      await expect(page.getByTestId("cs-capitulo"), p.slug).toHaveCount(
+        c.capitulos.length,
+      );
+      await expect(page.getByTestId("cs-leccion"), p.slug).toContainText(
+        c.leccion,
+      );
+    }
+  });
+
+  test("los casos se leen seguidos: el siguiente sigue el orden de la trayectoria", async ({
+    page,
+  }) => {
+    const cv = parse(readFileSync("data/cv.es.yaml", "utf8")) as {
+      trayectoria: { proyecto?: string }[];
+    };
+    const orden = cv.trayectoria.map((h) => h.proyecto).filter(Boolean);
+    await page.goto(`/es/proyectos/${orden[0]}`);
+    await expect(page.getByTestId("cs-vecino-anterior")).toHaveCount(0);
+    await page.getByTestId("cs-vecino-siguiente").click();
+    await expect(page).toHaveURL(new RegExp(`/es/proyectos/${orden[1]}$`), {
+      timeout: 15_000,
+    });
+    await expect(page.getByTestId("cs-vecino-anterior")).toHaveAttribute(
+      "href",
+      `/es/proyectos/${orden[0]}`,
+    );
   });
 
   test("slug desconocido responde 404 localizado", async ({ page }) => {

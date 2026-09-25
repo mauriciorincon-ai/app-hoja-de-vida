@@ -23,7 +23,9 @@ import {
  * `as` porque la vitrina asomada escalona sus cajas dentro de un `<ul>`, y un
  * `<div>` entre `<ul>` y `<li>` es HTML inválido.
  */
-type Etiqueta = "div" | "ul" | "li";
+// `ol` desde 2026-09-24: los capítulos de un caso de estudio son una secuencia
+// numerada, y su número es parte del sentido, no decoración.
+type Etiqueta = "div" | "ul" | "ol" | "li";
 
 export function Stagger({
   children,
@@ -58,7 +60,8 @@ export function Stagger({
         viewport: { once: false, amount: 0.2 },
       };
 
-  const Tag = as === "ul" ? m.ul : as === "li" ? m.li : m.div;
+  const Tag =
+    as === "ul" ? m.ul : as === "ol" ? m.ol : as === "li" ? m.li : m.div;
   return (
     <Tag data-motion="" className={className} {...animProps}>
       {children}
@@ -183,7 +186,8 @@ export function StaggerItem({
   hijos?: { delay: number; escalon: number };
 }) {
   const reduced = useReducedMotion();
-  const Tag = as === "ul" ? m.ul : as === "li" ? m.li : m.div;
+  const Tag =
+    as === "ul" ? m.ul : as === "ol" ? m.ol : as === "li" ? m.li : m.div;
 
   return (
     <Tag

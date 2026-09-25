@@ -64,13 +64,24 @@ describe("guardrail de entrada (off-topic = cero tokens)", () => {
   // preposición «sobre», presente en 42 de 162 fragmentos. El test no lo veía
   // porque preguntaba «chiste DE gatos», y «de» sí era stopword. La preposición
   // entró a STOPWORDS y ahora las dos formas puntúan 0 — por la razón correcta.
+  //
+  // 2026-09-24 — dos salen de esta lista, y no porque el umbral cambiara: los
+  // casos de estudio enriquecidos llevaron al CV palabras que antes solo estaban
+  // en el corpus a fondo. Medido sobre el índice de solo-YAML: «hazme la TAREA de
+  // CÁLCULO integral» puntúa 6,43 (casa «tarea» en Inglopres y «cálculo» en C&M
+  // Consorcio) y «escribe una FUNCIÓN en rust…» 4,92 (casa «función» en la
+  // lección de Banco Pichincha). El contrato del guardrail (guardrails.ts) es
+  // bloquear lo que no comparte NI UN término sustantivo con el índice; estas
+  // dos ya comparten, igual que con el corpus completo desde el S8. Pasan al
+  // test de abajo, el de «lo que este guardrail NO garantiza», y entran dos
+  // ajenas sin vocabulario común para que esta lista no se encoja.
   const preguntasOffTopic = [
     "cuéntame un chiste de gatos",
     "cuéntame un chiste sobre gatos",
     "¿va a llover mañana en Madrid?",
-    "hazme la tarea de cálculo integral",
-    "escribe una función en rust que ordene una lista",
     "¿cuál es la receta del ajiaco?",
+    "¿cómo se prepara un pastel de chocolate?",
+    "traduce esta frase al francés",
     "tell me a joke about cats",
   ];
 
@@ -126,6 +137,14 @@ describe("guardrail de entrada (off-topic = cero tokens)", () => {
       ),
       "si esto pasa a true, alguien subió el umbral: comprueba que no bloqueó también «¿sabe Kubernetes?»",
     ).toBe(false);
+    // Y desde 2026-09-24 también con el índice de solo-YAML: los casos de
+    // estudio trajeron «tarea», «cálculo» y «función» al CV.
+    for (const ajena of [
+      "hazme la tarea de cálculo integral",
+      "escribe una función en rust que ordene una lista",
+    ]) {
+      expect(esOffTopic(retrieverEs.topKStrict(ajena)), ajena).toBe(false);
+    }
     // Y la contraparte que justifica la decisión: la pregunta legítima más
     // floja del conjunto medido sigue pasando.
     expect(

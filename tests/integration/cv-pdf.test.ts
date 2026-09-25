@@ -53,12 +53,37 @@ describe("PDF ATS generado en build desde los YAML", () => {
     }
   });
 
+  // DOS PÁGINAS (2026-09-24). Un CV que lee un ATS y que se imprime tiene un
+  // techo, y nadie lo vigilaba: al darle a cada experiencia su caso de estudio,
+  // la sección «Proyectos» repitió los ocho y el PDF pasó a tres páginas sin
+  // que ninguna prueba se enterara. Se cuentan los objetos `/Type /Page` del
+  // archivo —pdfkit los escribe sin comprimir—, que es lo que ve una impresora.
+  it("cabe en dos páginas, en los dos idiomas", () => {
+    for (const [locale, file] of Object.entries(files)) {
+      const paginas = (
+        readFileSync(file)
+          .toString("latin1")
+          .match(/\/Type\s*\/Page[^s]/g) ?? []
+      ).length;
+      expect(
+        paginas,
+        `el PDF ${locale} tiene ${paginas} páginas`,
+      ).toBeGreaterThan(0);
+      expect(
+        paginas,
+        `el PDF ${locale} tiene ${paginas} páginas`,
+      ).toBeLessThanOrEqual(2);
+    }
+  });
+
   it("el texto del PDF ES es parseable y refleja el YAML", async () => {
     const text = await extractText(files.es);
     expect(text).toContain("Henry Mauricio Rincón Caro");
     expect(text).toContain("EXPERIENCIA");
-    // Métrica real de un bullet (capa de profundidad)
-    expect(text).toContain("50+ usuarios");
+    // Métrica real de un bullet (capa de profundidad). Indiferente al salto de
+    // línea: desde 2026-09-24 el bullet es más largo y el PDF parte «50+» y
+    // «usuarios» en dos renglones, que es maquetación y no contenido.
+    expect(text.replace(/\s+/g, " ")).toContain("50+ usuarios");
     expect(text).toContain("DP-600");
     // Formación desde `cv.estudios` (post-S7), con sus años (2026-09-10).
     expect(text).toContain("FORMACIÓN");
@@ -70,7 +95,7 @@ describe("PDF ATS generado en build desde los YAML", () => {
     const text = await extractText(files.en);
     expect(text).toContain("Henry Mauricio Rincón Caro");
     expect(text).toContain("EXPERIENCE");
-    expect(text).toContain("50+ users");
+    expect(text.replace(/\s+/g, " ")).toContain("50+ users");
     expect(text).toContain("DP-600");
     expect(text).toContain("EDUCATION");
     expect(text).toContain("2009 — 2016");

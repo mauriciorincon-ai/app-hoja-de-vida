@@ -39,10 +39,21 @@ describe("buildChunks (YAML + «a fondo» → chunks con ancla)", () => {
         resumen: "Resumen del proyecto.",
         stack: ["Fabric"],
         casestudy: {
+          titular: "La tesis.",
           contexto: "Contexto.",
           reto: "Reto.",
-          acciones: ["Acción."],
+          cifras: [
+            { valor: 12, prefijo: "", sufijo: "", etiqueta: "clientes" },
+            { valor: 27, prefijo: "", sufijo: "", etiqueta: "agentes" },
+            { valor: 11, prefijo: "", sufijo: "", etiqueta: "etapas" },
+          ],
+          capitulos: [
+            { titulo: "La arquitectura", texto: "Acción." },
+            { titulo: "El monitoreo", texto: "Otra acción." },
+            { titulo: "El proceso", texto: "Tercera acción." },
+          ],
           impacto: ["Impacto."],
+          leccion: "La lección.",
         },
       },
       { slug: "sin-detalle", nombre: "Otro", resumen: "Sin casestudy." },
@@ -127,6 +138,16 @@ describe("buildChunks (YAML + «a fondo» → chunks con ancla)", () => {
 
   it("las apps ya no citan «#apps»: esa sección de la HOME murió en la revisión post-S7", () => {
     expect(porId.get("app-hoja-de-vida")?.ancla).toBe("#vitrina");
+  });
+
+  it("el caso de estudio indexa tesis, cifras, impacto y lección, y un fragmento por capítulo", () => {
+    const principal = porId.get("casestudy-vesting");
+    expect(principal?.texto).toContain("La tesis.");
+    expect(principal?.texto).toContain("27 agentes");
+    expect(principal?.texto).toContain("La lección.");
+    expect(porId.get("casestudy-vesting-2")?.titulo).toContain("El monitoreo");
+    expect(porId.get("casestudy-vesting-2")?.ancla).toBe("/proyectos/vesting");
+    expect(porId.has("casestudy-vesting-4")).toBe(false);
   });
 
   it("los bullets de trayectoria y el casestudy quedan indexados", () => {

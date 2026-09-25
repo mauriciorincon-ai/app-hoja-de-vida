@@ -5,7 +5,7 @@ titulo: "Inglopres — Process Engineer (2016–2017)"
 resumen: "My first job: an ERP (Odoo), the databases that did not exist, the work study and a team of twelve people with 95% customer satisfaction."
 cuando_usar: "Use this when they ask about his first job out of university, an ERP implementation (Odoo), supply chain and logistics for heavy machinery, the time study and the twelve-person team at Inglopres (2016–2017)."
 estado: aprobado
-ancla: "#trayectoria"
+ancla: "/proyectos/inglopres"
 actualizado: 2026-09-20
 preguntas_de_prueba:
   - "What did Henry do at Inglopres?"

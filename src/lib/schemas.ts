@@ -30,6 +30,19 @@ export const LOGO_ALTO_MAX = 48;
  * edición del dueño del contenido (ver docs/MANUAL-DE-USO.md).
  */
 
+/**
+ * Una cifra de la banda de un caso de estudio. Misma forma que un logro de la
+ * HOME (prefijo · valor · sufijo · etiqueta) para que las pinte el mismo
+ * `Counter`, pero sin `desde`: un caso de estudio cuenta un periodo cerrado.
+ */
+const cifraSchema = z.object({
+  valor: z.number(),
+  prefijo: z.string().default(""),
+  sufijo: z.string().default(""),
+  decimales: z.number().int().min(0).max(2).default(0),
+  etiqueta: z.string().min(1),
+});
+
 export const cvSchema = z.object({
   identidad: z.object({
     nombre: z.string().min(1),
@@ -153,13 +166,37 @@ export const cvSchema = z.object({
         stack: z.array(z.string().min(1)).default([]),
         destacado: z.boolean().default(false),
         // Narrativa del case study (ADR-009): con esto presente, el proyecto
-        // gana página propia en /{locale}/proyectos/<slug> — cero código
+        // gana página propia en /{locale}/proyectos/<slug> — cero código.
+        //
+        // Revisión 2026-09-24 (ADR-009, enmienda): la forma pasó de cuatro
+        // listas cortas a una pieza editorial completa, y el esquema la EXIGE.
+        // El dueño encontró el caso de Vesting «súper simple» después de 148 mil
+        // palabras de corpus a fondo: la prosa existía y la página no la
+        // mostraba. Un caso sin titular, sin cifras, sin capítulos o sin lección
+        // ya no compila — el mismo invariante que impide un hito sin contenido.
         casestudy: z
           .object({
+            // La tesis del caso en una frase: va bajo el título, en grande.
+            titular: z.string().min(1),
             contexto: z.string().min(1),
             reto: z.string().min(1),
-            acciones: z.array(z.string().min(1)).min(1),
+            // La banda de cifras: 3 o 4, cada una sacada de su documento a fondo
+            // (lo vigila tests/unit/casos-de-estudio.test.ts).
+            cifras: z.array(cifraSchema).min(3).max(4),
+            // «Cómo lo hice»: capítulos numerados con título y un párrafo corto.
+            // Reemplaza a `acciones`, que eran frases sueltas sin el porqué.
+            capitulos: z
+              .array(
+                z.object({
+                  titulo: z.string().min(1),
+                  texto: z.string().min(1),
+                }),
+              )
+              .min(3)
+              .max(6),
             impacto: z.array(z.string().min(1)).min(1),
+            // «Lo que me llevo»: una frase del propio corpus, en cita editorial.
+            leccion: z.string().min(1),
           })
           .optional(),
       }),
