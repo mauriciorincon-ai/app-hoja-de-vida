@@ -194,9 +194,12 @@ decisions/NNN-titulo.md   (ADRs de implementación)
     (documenta dominio y protección como "qué ve quién sin sesión" **sin escribir la URL** — la URL
     exacta vive en la planeadora, que es privada), ni el manual, ni la guía (su campo de URL se
     llena EN USO), ni `package.json`. El CTA público es la **«lista de espera»** — sin promesa de
-    otorgamiento. **La limpieza del campo homepage es RECURRENTE:** la GitHub App de Vercel lo
-    reescribe tras cada deploy de producción — se re-verifica tras CADA merge a `main`, y JAMÁS se
-    automatiza con un PAT de administración como secret en un repo público. Los documentos que
+    otorgamiento. **El campo homepage NO se vacía (2026-09-24):** la GitHub App de Vercel lo
+    llena con la URL de producción tras cada deploy **solo si está vacío** (Vercel confirma que no
+    se puede apagar), así que lleva el perfil de GitHub del dueño —público, no es la producción—
+    y Vercel no lo toca. Vaciarlo lo reabre. Se re-verifica tras CADA merge a `main` que siga con
+    el perfil, y JAMÁS se automatiza con un PAT de administración como secret en un repo público.
+    Los documentos que
     NARRAN el barrido escriben los patrones **sin el literal** (clase de carácter, p. ej.
     `vercel[.]app`): un summary que cita el patrón tal cual rompe el grep. **El barrido corre sobre
     TODOS los archivos versionados** (jamás con include-list de extensiones):
