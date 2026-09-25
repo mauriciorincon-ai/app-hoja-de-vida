@@ -178,7 +178,7 @@ Preguntas que un reclutador hace y que **el corpus no contesta hoy**, con el doc
 **☑️ ¿Ha trabajado en una startup?**
 
 - top-4: trayectoria-1, a-fondo-como-trabajo-equipos-que-he-liderado~3, a-fondo-vesting-el-contexto~1, a-fondo-vesting-el-contexto~2
-- primer fragmento: «2024: Líder de Estrategia de Datos, Vesting — startup de agentes de automatización. Ecosistema de datos para agentes de IA en Microsoft Fabric, desde cero: arquitectura, gobernanza, monitoreo de agentes en tiempo real y…»
+- primer fragmento: «2023 — 2025: Líder de Estrategia de Datos, Vesting — startup de agentes de automatización. Ecosistema de datos para agentes de IA en Microsoft Fabric, desde cero: arquitectura, gobernanza, monitoreo de agentes en tiempo…»
 
 **✅ ¿Ha trabajado para entidades públicas o con operación de ciudad?**
 

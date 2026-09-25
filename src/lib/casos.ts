@@ -24,6 +24,19 @@ export function nombreCortoDeProyecto(nombre: string): string {
   return donde || nombre;
 }
 
+/** «2023 — 2025» → «2023»; «2025 — hoy» → «2025». Sin año, el texto tal cual. */
+export function anioDe(periodo: string): string {
+  return /\d{4}/.exec(periodo)?.[0] ?? periodo;
+}
+
+/**
+ * El periodo que muestra la línea de tiempo de la HOME: el real, salvo que el
+ * hito declare `periodoEnLaHome` para que el año de transición no se repita.
+ */
+export function periodoEnLaHome(h: Hito): string {
+  return h.periodoEnLaHome ?? h.periodo;
+}
+
 /** El hito de la trayectoria que apunta a este caso, si lo hay. */
 export function hitoDeCaso(cv: Cv, slug: string): Hito | undefined {
   return cv.trayectoria.find((h) => h.proyecto === slug);

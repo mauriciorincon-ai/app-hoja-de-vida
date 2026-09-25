@@ -49,7 +49,10 @@ trayectoria:
       - "Process-based control dashboards and improvement plans: close to 60% less effort preparing information."
       - "23 instruments of the AI management system, 8 finished, and an ISO 42001 expert agent to review them."
     actual: true
-  - periodo: "2024"
+  # Real period (PDF, /cv, chat, cases): 2023 — 2025. «2024» only on the HOME
+  # timeline, by the owner's design, so its year transition doesn't repeat 2023.
+  - periodo: "2023 — 2025"
+    periodoEnLaHome: "2024"
     rol: "Data Strategy Lead"
     organizacion: "Vesting — automation-agents startup"
     proyecto: "vesting"
