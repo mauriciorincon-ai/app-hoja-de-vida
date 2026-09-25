@@ -11,6 +11,7 @@ import { notFound } from "next/navigation";
 import { ChatLauncher } from "@/components/chat/chat-launcher";
 import { MotionProvider } from "@/components/motion/motion-provider";
 import { routing } from "@/i18n/routing";
+import { enMantenimiento } from "@/lib/mantenimiento";
 import { SITE_URL } from "@/lib/site";
 import "../globals.css";
 
@@ -104,8 +105,10 @@ export default async function LocaleLayout({
   };
 
   // Kill-switch del chat (S3): sin CHAT_ENABLED=false el lanzador existe en
-  // todas las páginas; apagado, ni siquiera se monta (defensa primaria).
-  const chatEnabled = process.env.CHAT_ENABLED !== "false";
+  // todas las páginas; apagado, ni siquiera se monta (defensa primaria). En
+  // mantenimiento tampoco: la única página visible es la de mantenimiento.
+  const chatEnabled =
+    process.env.CHAT_ENABLED !== "false" && !enMantenimiento();
 
   return (
     <html

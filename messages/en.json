@@ -345,5 +345,13 @@
   },
   "skills": {
     "linea": "What I use day to day, by group. No made-up percentages: what you see here is what I can do."
+  },
+  "mantenimiento": {
+    "meta": "Under maintenance",
+    "eyebrow": "Under maintenance",
+    "titulo": "I'm fine-tuning my site",
+    "cuerpo": "Come back in a little while. Meanwhile, my full CV is right here, as a PDF.",
+    "descargar": "Download my CV (PDF)",
+    "escribeme": "Rather write to me?"
   }
 }

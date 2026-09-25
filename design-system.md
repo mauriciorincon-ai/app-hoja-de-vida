@@ -205,6 +205,16 @@ animaciones infinitas (sweep/glitch/marquee), scroll-snap de deck, CDNs en `<hea
 - **Roadmap embebido**: dentro de `/vitrina/apps` va como bloque con `border-t paper-2` y título
   `2xl` (no el `clamp` de sección de HOME). Misma isla de votación.
 
+### Página de mantenimiento · 2026-09-24
+
+Con `MANTENIMIENTO=on` en Production, el proxy sirve `/[locale]/mantenimiento` en lugar de
+cualquier página, con un 503 temporal. Una sola columna centrada (`max-w-lg`), **sin encabezado, sin
+pie y sin chat**: no hay a dónde ir. Orden: eyebrow sage con punto → el nombre en mono `ink-2` →
+el titular en la voz display (la única vez) → una frase → **el CTA sage del PDF** (los PDF se siguen
+sirviendo: lo que un reclutador vino a buscar) → filete `paper-3` → «¿Prefieres escribirme?» con
+el correo y LinkedIn como enlaces con subrayado `paper-3`. Ningún componente nuevo. Tarjeta:
+`design-sync/components/componentes-mantenimiento/`.
+
 ### Caso de estudio · revisión 2026-09-24 (ADR-009 enmendado)
 
 El dueño lo pidió «minimalista y elegante, profesional pero impactante a la vista». La página

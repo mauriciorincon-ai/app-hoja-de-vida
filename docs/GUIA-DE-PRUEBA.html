@@ -316,7 +316,7 @@
     <div class="pagina">
       <header>
         <p class="eyebrow">
-          CV Viva · Guía de prueba viva y acumulativa · v9.6 · el dominio en el PDF + los ocho casos de estudio completos + la cita dice de dónde sale y a dónde lleva + la cita conserva la conversación + el corpus alineado + chat/registro + a fondo v2 (el
+          CV Viva · Guía de prueba viva y acumulativa · v9.7 · el modo mantenimiento + el dominio en el PDF + los ocho casos de estudio completos + la cita dice de dónde sale y a dónde lleva + la cita conserva la conversación + el corpus alineado + chat/registro + a fondo v2 (el
           detalle) + revisión post-S8 · 2026-09-12
         </p>
         <h1>Guía de prueba</h1>
@@ -339,7 +339,7 @@
           <strong>esperan a que apruebes el primer documento</strong>.
         </p>
         <p class="chica">
-          <strong>Gate mínimo ⭐: 37 pruebas · ~3 h 35 min.</strong> Es lo que ninguna
+          <strong>Gate mínimo ⭐: 38 pruebas · ~3 h 45 min.</strong> Es lo que ninguna
           automatización puede verificar (juicio humano sobre el contenido,
           aprobación visual, dispositivo real, proveedor de IA real). Lo que la
           CI ya respalda (e2e, unit, axe, budgets) queda fuera del mínimo y se
@@ -357,6 +357,8 @@
           decía 31 cuando las pruebas con estrella ya eran 34.
           <strong>v9.6 suma una</strong>: el juicio visual del dominio en el
           PDF (d3), que se corre cuando el dominio ya apunte al sitio.
+          <strong>v9.7 suma otra</strong>: el modo mantenimiento visto de
+          verdad (p1), en una preview para no tocar producción.
         </p>
         <div class="url-caja">
           <p class="eyebrow" style="margin: 0 0 6px">URL de prueba</p>
@@ -1875,6 +1877,44 @@
         </div>
       </section>
 
+      <!-- ═══════ P. Modo mantenimiento ═══════ -->
+      <section class="bloque">
+        <div class="bloque-cabeza">
+          <span class="letra">P</span>
+          <h2>Modo mantenimiento</h2>
+        </div>
+        <p class="meta-bloque chica suave">
+          ~12 min · Vercel (variables y deployments) y una preview. La p1 se
+          hace en una <strong>preview</strong> para no apagar producción.
+        </p>
+        <ul class="pasos">
+          <li data-origen="nuevo" data-minimo>
+            <input type="checkbox" id="p1" /><label for="p1"
+              >⭐ <strong>Verlo encendido, sin tocar producción.</strong> En
+              Vercel → Settings → Environment Variables, agrega
+              <code>MANTENIMIENTO</code> = <code>on</code> solo para
+              <strong>Preview</strong>. En Deployments, abre la preview más
+              reciente → ⋯ → Redeploy, y ábrela cuando esté lista. Cualquier
+              página (la HOME, <code>/es/cv</code>, un caso) muestra «Estoy
+              afinando mi sitio» con el diseño del sitio, sin menú ni chat; en
+              <code>/en/…</code>, en inglés. «Descargar mi CV (PDF)» baja tu
+              PDF. El correo y LinkedIn funcionan. ¿Te gusta cómo se ve y lo que
+              dice? Al terminar, <strong>borra</strong> la variable de Preview.
+              <span class="origen origen-nuevo">Nuevo · mantenimiento</span
+              ><span class="minimo">⭐ mínimo</span></label
+            >
+          </li>
+          <li data-origen="nuevo">
+            <input type="checkbox" id="p2" /><label for="p2"
+              >Con el sitio arriba, abre <code>/es/mantenimiento</code> en
+              producción: <strong>no existe</strong> (la página 404 de siempre).
+              La variable de Production dice <code>off</code>.
+              <span class="origen origen-nuevo">Nuevo · mantenimiento</span></label
+            >
+          </li>
+        </ul>
+      </section>
+
       <!-- ═══════ J. Accesibilidad y movimiento ═══════ -->
       <section class="bloque">
         <div class="bloque-cabeza">
@@ -1938,6 +1978,14 @@
         <details class="chica">
           <summary>Historial de la guía</summary>
           <ul>
+            <li>
+              <strong>v9.7 · el modo mantenimiento · 2026-09-24:</strong> el
+              dueño pidió una página «En mantenimiento» fácil de poner y
+              quitar: <code>MANTENIMIENTO=on</code> en Vercel + Redeploy. Bloque
+              P nuevo: p1 ⭐ (verlo encendido en una preview) y p2 (con el sitio
+              arriba no existe). Ninguna prueba eliminada. Prefijo de casillas
+              <code>mantenimiento</code>.
+            </li>
             <li>
               <strong>v9.6 · el dominio en el PDF · 2026-09-24:</strong> el
               dueño pidió su dominio «de encabezado grande y resaltado» y, sin
@@ -2203,7 +2251,7 @@
       (function () {
         // NS VERSIONADO POR SPRINT: al publicar la guía de un sprint nuevo se cambia
         // s007c — así una regresión sin correr no aparece marcada por la versión anterior.
-        var NS = "guia-hoja-de-vida:dominio-pdf:";
+        var NS = "guia-hoja-de-vida:mantenimiento:";
         var casillas = Array.prototype.slice.call(
           document.querySelectorAll('input[type="checkbox"]'),
         );

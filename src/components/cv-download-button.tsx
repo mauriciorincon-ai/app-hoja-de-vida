@@ -3,8 +3,18 @@
 import { useLocale } from "next-intl";
 import { trackEvent } from "@/lib/analytics";
 
-/** CTA de descarga del PDF ATS (asset estático generado en build, ADR-008). */
-export function CvDownloadButton({ label }: { label: string }) {
+/**
+ * CTA de descarga del PDF ATS (asset estático generado en build, ADR-008).
+ * `origen` distingue en analítica de dónde se bajó: `/cv` o la página de
+ * mantenimiento, que ofrece el PDF mientras el sitio está en pausa.
+ */
+export function CvDownloadButton({
+  label,
+  origen = "cv_page",
+}: {
+  label: string;
+  origen?: string;
+}) {
   const locale = useLocale();
   const pdfHref = `/cv/Henry-Rincon-CV-${locale.toUpperCase()}.pdf`;
 
@@ -12,9 +22,7 @@ export function CvDownloadButton({ label }: { label: string }) {
     <a
       href={pdfHref}
       download
-      onClick={() =>
-        trackEvent("cv_descargado", { origen: "cv_page", idioma: locale })
-      }
+      onClick={() => trackEvent("cv_descargado", { origen, idioma: locale })}
       className="flex min-h-11 items-center gap-2 rounded-md bg-sage px-6 text-[15px] font-medium text-sage-ink shadow-sh-1 transition-[filter] duration-[120ms] hover:brightness-[0.97]"
     >
       {label}

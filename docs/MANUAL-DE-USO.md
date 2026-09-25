@@ -479,6 +479,25 @@ el mensaje te llega al correo.
   las mismas secciones que el menú de escritorio. Se abre y cierra con teclado (Escape cierra) y
   al elegir una sección se cierra solo. Nada que configurar.
 
+### Modo mantenimiento · desde el 2026-09-24
+
+- **Qué hace:** pone **todo** el sitio en una página de «Estoy afinando mi sitio», en el idioma
+  de quien llega, con dos salidas: **descargar tu CV en PDF** (los PDF se siguen sirviendo) y tu
+  correo y LinkedIn. Sin menú, sin chat y sin formularios.
+- **Cómo se pone:** en Vercel, **Settings → Environment Variables**, cambia `MANTENIMIENTO` a
+  `on` (Production) y haz **Redeploy** del último deploy de Production. En 3–4 minutos, todo
+  el sitio muestra la página.
+- **Cómo se quita:** cambia `MANTENIMIENTO` a `off` y haz **Redeploy**. En 3–4 minutos vuelve el
+  sitio.
+- **A prueba de errores:** solo `on` lo enciende. Con `off`, vacía, sin la variable o con un error
+  de tipeo, el sitio sigue arriba. Nunca se apaga sin querer.
+- **Google no pierde nada:** cada página responde **503** («no disponible por ahora») con
+  `Retry-After`, que le dice al buscador que vuelva después. No reemplaza tu sitio por el aviso.
+- **Tus previews no se afectan:** la variable vive solo en Production.
+- **Con el sitio arriba, `/es/mantenimiento` no existe** (404): nadie la encuentra por error.
+- **Qué lo prueba:** `tests/unit/mantenimiento.test.ts` (el interruptor y el proxy) y
+  `tests/e2e/mantenimiento.spec.ts` (con el sitio arriba no se cuela).
+
 ### Idiomas · desde Sprint 001
 
 - **Qué hace:** la página completa existe en `/es` y `/en`, con el botón ES/EN en el encabezado.
@@ -802,3 +821,4 @@ chat hoy y cuáles traería con la base aprobada. Ese informe **se genera, no se
 | a fondo v2    | El corpus reescrito desde la auditoría del dueño (2026-09-19/20): 25 documentos, ~144.000 palabras por idioma (el texto del dueño, ampliado y alineado, nunca recortado), cero `[CONFIRMAR]`, seis gates de coherencia (cifras del sitio, fechas de cargos, densidad, léxico, repetidos, normas), tres preguntas de prueba por documento, las 32 fichas de la vitrina en el índice del chat con peso 0,5 (ADR-023), banco de 136 preguntas en los dos idiomas, gemelos en inglés y los 25 aprobados. |
 | post-S7 (2.ª) | «Lo que construyo» entra al desplegable Hoja de vida; Estudios con los años del PDF del dueño (tres entradas); AI-102 retirada de todo el contenido (Microsoft la descontinuó) y gate nuevo: una credencial nombrada tiene que estar en `certificaciones:`.                                                                                                                                                                                                                                                                                                                                                                       |
 | casos 2026-09-24 | **Ocho casos de estudio, uno por hito** (nacen C&M Consorcio, Ceinfes e Inglopres, pedidos el 2026-09-13), con la forma completa: tesis, banda de cifras, capítulos numerados, lección y navegación entre casos; cada cifra verificada contra su documento a fondo y el minimalismo medido. Bullets de la trayectoria enriquecidos y dos logros nuevos en la HOME. En el chat, «¿Algo no funciona? Avísame» en la puerta, con diagnóstico del servidor en el correo. |
+| mantenimiento 2026-09-24 | **Modo mantenimiento**: `MANTENIMIENTO=on` en Vercel (Production) + Redeploy pone todo el sitio en una página con el CV en PDF y el contacto, con un 503 temporal que Google entiende; `off` + Redeploy lo quita. Solo `on` lo enciende. |
