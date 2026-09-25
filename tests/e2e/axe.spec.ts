@@ -7,12 +7,15 @@ import { parse } from "yaml";
 // animación (elementos a media opacidad disparan falsos positivos de contraste)
 test.use({ contextOptions: { reducedMotion: "reduce" } });
 
-// Primer case study real: las rutas nuevas del S2 también pasan por axe
+// TODOS los casos de estudio (2026-09-24): hasta ahora entraba solo el primero,
+// porque las páginas eran idénticas salvo el texto. Desde la revisión de los
+// casos cada una trae su banda de cifras y sus capítulos, y tres nacieron hoy:
+// rutas públicas nuevas ⇒ entran a axe en su misma fase.
 const { proyectos } = parse(readFileSync("data/cv.es.yaml", "utf8")) as {
   proyectos: { slug: string; casestudy?: unknown }[];
 };
-const slug = proyectos.find((p) => p.casestudy)?.slug;
-if (!slug) throw new Error("cv.es.yaml sin case studies");
+const slugsCasos = proyectos.filter((p) => p.casestudy).map((p) => p.slug);
+if (slugsCasos.length === 0) throw new Error("cv.es.yaml sin case studies");
 
 // Primera app con brochure (S4): la ruta pública nueva también pasa por axe
 const { apps } = parse(readFileSync("data/apps.yaml", "utf8")) as {
@@ -63,8 +66,7 @@ const piezasDe = (frente: string): string[] => {
 const RUTAS = [
   "/es",
   "/en",
-  `/es/proyectos/${slug}`,
-  `/en/proyectos/${slug}`,
+  ...slugsCasos.flatMap((s) => [`/es/proyectos/${s}`, `/en/proyectos/${s}`]),
   "/es/cv",
   "/en/cv",
   `/es/apps/${brochureSlug}`,
@@ -146,6 +148,8 @@ for (const ruta of RUTAS) {
       .analyze();
 
     expect(results.violations).toEqual([]);
-    expect(erroresDePagina, "errores de página (hidratación incluida)").toEqual([]);
+    expect(erroresDePagina, "errores de página (hidratación incluida)").toEqual(
+      [],
+    );
   });
 }

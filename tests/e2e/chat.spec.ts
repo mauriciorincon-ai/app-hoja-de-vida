@@ -156,6 +156,36 @@ test.describe("chat — flujo estrella", () => {
   });
 });
 
+test.describe("chat — la puerta", () => {
+  // Pedido del dueño (2026-09-24): junto a «Pedir otro código», una forma de
+  // avisar que algo no funciona, sin salir del panel. En e2e el correo es
+  // simulado (RESEND_API_KEY vacío), así que el aviso termina en el log.
+  test("¿no llega el código? el visitante avisa desde el panel", async ({
+    page,
+  }) => {
+    await page.goto("/es");
+    await page.getByTestId("chat-launcher").click();
+    const email = correoUnico();
+    await page.getByTestId("chat-registro-nombre").fill("Ana Prueba");
+    await page.getByTestId("chat-registro-email").fill(email);
+    await page.getByTestId("chat-registro-acepta").check();
+    await page.getByTestId("chat-registro-enviar").click();
+    await expect(page.getByTestId("chat-registro-codigo")).toBeVisible();
+
+    await page.getByTestId("chat-problema-abrir").click();
+    await expect(page.getByTestId("chat-problema-detalle")).toBeFocused();
+    await page
+      .getByTestId("chat-problema-detalle")
+      .fill("El código no me llega al correo.");
+    await page.getByTestId("chat-problema-enviar").click();
+    await expect(page.getByTestId("chat-problema-enviado")).toContainText(
+      email,
+    );
+    // El aviso no bloquea el camino: el código se puede seguir escribiendo.
+    await expect(page.getByTestId("chat-registro-input-codigo")).toBeEnabled();
+  });
+});
+
 test.describe("chat — degradación honesta", () => {
   test("proveedor caído (503) → búsqueda local con aviso y fuentes del índice", async ({
     page,

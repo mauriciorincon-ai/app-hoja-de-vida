@@ -1,6 +1,7 @@
 import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
+import { getCv } from "@/lib/content";
 import {
   DIR_A_FONDO,
   leerDocumentos,
@@ -132,9 +133,23 @@ describe("conservación de la historia retirada (S3 → S8)", () => {
         `data/a-fondo/${id}.es.md no existe: la migración perdió una sección de la historia`,
       ).toBeDefined();
       expect(d!.titulo).toBe(s.titulo);
-      // El único destino que cambió, y con razón declarada: «#apps» murió en la
-      // revisión post-S7 (la sección se retiró y el roadmap se fue a la vitrina).
-      expect(d!.ancla).toBe(s.ancla === "#apps" ? "#vitrina" : s.ancla);
+      // Los destinos que cambiaron, cada uno con su razón declarada:
+      //  · «#apps» murió en la revisión post-S7 (la sección se retiró y el
+      //    roadmap se fue a la vitrina) → «#vitrina».
+      //  · 2026-09-24: Inglopres, Ceinfes y C&M Consorcio ganaron su caso de
+      //    estudio, y la cita de su documento pasó de la trayectoria —donde solo
+      //    había un hito— a su página. Solo se admite ESE salto: de
+      //    «#trayectoria» a «/proyectos/<el mismo slug>», y solo si el caso existe.
+      const conCaso = new Set(
+        getCv("es").proyectos.filter((p) => p.casestudy).map((p) => p.slug),
+      );
+      const esperado =
+        s.ancla === "#apps"
+          ? "#vitrina"
+          : s.ancla === "#trayectoria" && conCaso.has(id)
+            ? `/proyectos/${id}`
+            : s.ancla;
+      expect(d!.ancla).toBe(esperado);
     },
   );
 

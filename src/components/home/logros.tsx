@@ -24,10 +24,14 @@ export async function Logros({ logros }: { logros: Cv["logros"] }) {
             {t("logros")}
           </h2>
         </Reveal>
-        <Stagger className="grid gap-12 md:grid-cols-3 md:gap-8">
+        {/* 2026-09-24: ocho logros (entraron los agentes de Vesting y los
+            productos de CTIC). Tres columnas dejaban dos huérfanos al final;
+            cuatro dan dos filas completas en escritorio y dos por fila en tablet.
+            La cifra baja un punto para que «>90%» quepa en un cuarto de ancho. */}
+        <Stagger className="grid gap-12 sm:grid-cols-2 sm:gap-x-8 lg:grid-cols-4 lg:gap-x-8">
           {logros.map((logro) => (
             <StaggerItem key={logro.etiqueta} className="flex flex-col gap-3">
-              <p className="font-mono text-[clamp(3.5rem,9vw,5.5rem)] leading-[0.9] font-medium tracking-[-0.04em] text-ink-0">
+              <p className="font-mono text-[clamp(3.5rem,8vw,4.75rem)] leading-[0.9] font-medium tracking-[-0.04em] text-ink-0">
                 {logro.prefijo && (
                   <span className="align-top text-[0.4em] text-sage-ink">
                     {logro.prefijo}

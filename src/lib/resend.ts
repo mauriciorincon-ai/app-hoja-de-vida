@@ -1,5 +1,6 @@
 import "server-only";
 import { Resend } from "resend";
+import type { Problema } from "./chat-registro/schemas";
 import type { Propuesta } from "./propuestas";
 import { ETIQUETAS_MOTIVO, type Solicitud } from "./schemas";
 
@@ -84,6 +85,61 @@ export async function sendPropuestaEmail(
       `Correo: ${propuesta.email || "(no dejó correo)"}`,
       "",
       propuesta.propuesta,
+    ].join("\n"),
+  });
+
+  if (error) {
+    throw new Error(`Resend: ${error.message}`);
+  }
+  return { sent: true, simulated: false, id: data?.id };
+}
+
+/**
+ * El aviso de un visitante atascado en la puerta del chat (2026-09-24). Lleva
+ * el diagnóstico del servidor en el momento del aviso, porque el caso que lo
+ * motivó —el secreto de sesión que no llegó al runtime el 2026-09-22— solo se
+ * vio leyendo los logs de Vercel. Con esto, el correo ya dice qué pieza falta.
+ */
+export type DiagnosticoPuerta = {
+  secreto: boolean;
+  almacen: boolean;
+  correo: boolean;
+};
+
+export async function sendProblemaChatEmail(
+  problema: Problema,
+  diagnostico: DiagnosticoPuerta,
+): Promise<SendResult> {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    return { sent: false, simulated: true };
+  }
+
+  const resend = new Resend(apiKey);
+  const to = process.env.SOLICITUDES_TO_EMAIL ?? "mauriciorinconai@gmail.com";
+  const from =
+    process.env.SOLICITUDES_FROM_EMAIL ?? "CV Viva <onboarding@resend.dev>";
+  const si = (v: boolean) => (v ? "sí" : "NO");
+
+  const { data, error } = await resend.emails.send({
+    from,
+    to,
+    replyTo: problema.email,
+    subject: "[CV Viva] Problema con la puerta del chat",
+    text: [
+      `Nombre: ${problema.nombre || "(no lo escribió)"}`,
+      `Email: ${problema.email}`,
+      `Idioma: ${problema.locale}`,
+      `Dónde se atascó: ${problema.paso === "codigo" ? "al escribir el código" : "al pedir el código"}`,
+      "",
+      "Diagnóstico del servidor en el momento del aviso:",
+      `  · secreto de sesión configurado: ${si(diagnostico.secreto)}`,
+      `  · almacén de registros disponible: ${si(diagnostico.almacen)}`,
+      `  · envío real de correos (RESEND_API_KEY): ${si(diagnostico.correo)}`,
+      "",
+      problema.detalle || "(sin detalle)",
+      "",
+      "Responde a este correo y le llega al visitante.",
     ].join("\n"),
   });
 

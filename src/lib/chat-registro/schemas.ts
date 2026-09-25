@@ -37,6 +37,23 @@ export const verificacionConNombreSchema = verificacionSchema.extend({
   nombre: z.string().trim().min(2).max(120),
 });
 
+/**
+ * «¿Algo no funciona? Avísame» (revisión 2026-09-24). El visitante atascado en
+ * la puerta avisa sin salir del panel. El correo es obligatorio porque es a
+ * quien el dueño responde; el detalle, opcional, porque «no me llega» ya dice
+ * mucho. `paso` dice dónde se atascó: al pedir el código o al escribirlo.
+ */
+export const DETALLE_PROBLEMA_MAX = 600;
+export const problemaSchema = z.object({
+  nombre: z.string().trim().max(120).default(""),
+  email: z.string().trim().toLowerCase().email().max(254),
+  locale: z.enum(["es", "en"]),
+  paso: z.enum(["datos", "codigo"]),
+  detalle: z.string().trim().max(DETALLE_PROBLEMA_MAX).default(""),
+  website: z.literal("").default(""),
+});
+export type Problema = z.infer<typeof problemaSchema>;
+
 /** Lo que el cliente manda cuando respondió en modo búsqueda local (sin proveedor). */
 export const registroLocalSchema = z.object({
   locale: z.enum(["es", "en"]),

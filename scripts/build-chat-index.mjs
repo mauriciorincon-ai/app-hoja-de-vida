@@ -159,13 +159,29 @@ export function buildChunks({
     if (p.casestudy) {
       const c = p.casestudy;
       // Título diferenciado: las citas [n] del proyecto y de su case study
-      // no deben salir con la misma etiqueta en los chips del chat
+      // no deben salir con la misma etiqueta en los chips del chat.
+      // Revisión 2026-09-24 (ADR-009 enmendado): el caso ya no son cuatro
+      // listas. El fragmento principal lleva la tesis, el contexto, el reto,
+      // las cifras, el impacto y la lección; cada capítulo va en su propio
+      // fragmento —corto, con su título— para que una pregunta concreta
+      // («¿cómo se validó el modelo?») encuentre el capítulo y no el caso entero.
+      const cifras = (c.cifras ?? [])
+        .map((x) => `${x.prefijo ?? ""}${x.valor}${x.sufijo ?? ""} ${x.etiqueta}`)
+        .join(" · ");
       push(
         `casestudy-${p.slug}`,
         `${p.nombre} · case study`,
-        `${c.contexto} ${c.reto} ${c.acciones.join(" ")} ${c.impacto.join(" ")}`,
+        `${c.titular ?? ""} ${c.contexto} ${c.reto} ${cifras}. ${c.impacto.join(" ")} ${c.leccion ?? ""}`,
         ancla,
       );
+      (c.capitulos ?? []).forEach((cap, i) => {
+        push(
+          `casestudy-${p.slug}-${i + 1}`,
+          `${p.nombre} · ${cap.titulo}`,
+          cap.texto,
+          ancla,
+        );
+      });
     }
   }
 

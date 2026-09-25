@@ -4,6 +4,8 @@ import { existsSync, readFileSync, statSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { beforeAll, describe, expect, it } from "vitest";
+import { ansi } from "../../scripts/generate-cv-pdf.mjs";
+import { getCv } from "@/lib/content";
 
 // pdfjs-dist (dentro de pdf-parse) referencia DOMMatrix al evaluar el módulo,
 // pero la extracción de TEXTO no usa canvas: basta un stub para importar.
@@ -33,6 +35,13 @@ const files = {
   en: path.join(outDir, "Henry-Rincon-CV-EN.pdf"),
 };
 
+/**
+ * Sin saltos de línea ni guiones: dónde parte un renglón es maquetación, no
+ * contenido, y pdfkit parte «cross-referencing» en el guion —el extractor lo
+ * devuelve como «crossreferencing»—.
+ */
+const plano = (t: string) => t.replace(/-\s*/g, "").replace(/\s+/g, " ").trim();
+
 async function extractText(file: string): Promise<string> {
   const parser = new PDFParse({ data: new Uint8Array(readFileSync(file)) });
   const { text } = await parser.getText();
@@ -53,12 +62,72 @@ describe("PDF ATS generado en build desde los YAML", () => {
     }
   });
 
+  // DOS PÁGINAS (2026-09-24). Un CV que lee un ATS y que se imprime tiene un
+  // techo, y nadie lo vigilaba: al darle a cada experiencia su caso de estudio,
+  // la sección «Proyectos» repitió los ocho y el PDF pasó a tres páginas sin
+  // que ninguna prueba se enterara. Se cuentan los objetos `/Type /Page` del
+  // archivo —pdfkit los escribe sin comprimir—, que es lo que ve una impresora.
+  it("cabe en dos páginas, en los dos idiomas", () => {
+    for (const [locale, file] of Object.entries(files)) {
+      const paginas = (
+        readFileSync(file)
+          .toString("latin1")
+          .match(/\/Type\s*\/Page[^s]/g) ?? []
+      ).length;
+      expect(
+        paginas,
+        `el PDF ${locale} tiene ${paginas} páginas`,
+      ).toBeGreaterThan(0);
+      expect(
+        paginas,
+        `el PDF ${locale} tiene ${paginas} páginas`,
+      ).toBeLessThanOrEqual(2);
+    }
+  });
+
+  // EL CRITERIO DEL DUEÑO (2026-09-24): «que no repita, pero también que no
+  // deje por fuera ninguna de mis experiencias y logros más importantes». Dos
+  // pruebas, una por mitad. La que exige que cada cifra de un caso esté en los
+  // logros de su hito vive en `tests/unit/casos-de-estudio.test.ts`; estas
+  // miran el PDF de verdad.
+  it("no deja nada por fuera: cada experiencia y cada uno de sus logros está en el PDF", async () => {
+    for (const locale of ["es", "en"] as const) {
+      const texto = plano(await extractText(files[locale]));
+      const faltan = getCv(locale).trayectoria.flatMap((h) =>
+        [h.rol, h.organizacion, ...h.bullets]
+          .filter((t) => !texto.includes(plano(ansi(t))))
+          .map((t) => `${locale} · ${h.organizacion}: «${t}»`),
+      );
+      expect(faltan.join("\n")).toBe("");
+    }
+  });
+
+  it("no repite: ningún caso de estudio vuelve a contarse como proyecto", async () => {
+    for (const locale of ["es", "en"] as const) {
+      const cv = getCv(locale);
+      const texto = plano(await extractText(files[locale]));
+      const conHito = new Set(cv.trayectoria.map((h) => h.proyecto));
+      // El «qué» del nombre, antes de « — Dónde (cuándo)»: no está en ningún
+      // logro, así que solo aparece si el caso se lista otra vez.
+      const repetidos = cv.proyectos
+        .filter((p) => conHito.has(p.slug))
+        .map((p) => plano(ansi(p.nombre.split(" — ")[0])))
+        .filter((titulo) => texto.includes(titulo));
+      expect(
+        repetidos,
+        `el PDF ${locale} cuenta dos veces estas experiencias`,
+      ).toEqual([]);
+    }
+  });
+
   it("el texto del PDF ES es parseable y refleja el YAML", async () => {
     const text = await extractText(files.es);
     expect(text).toContain("Henry Mauricio Rincón Caro");
     expect(text).toContain("EXPERIENCIA");
-    // Métrica real de un bullet (capa de profundidad)
-    expect(text).toContain("50+ usuarios");
+    // Métrica real de un bullet (capa de profundidad). Indiferente al salto de
+    // línea: desde 2026-09-24 el bullet es más largo y el PDF parte «50+» y
+    // «usuarios» en dos renglones, que es maquetación y no contenido.
+    expect(text.replace(/\s+/g, " ")).toContain("50+ usuarios");
     expect(text).toContain("DP-600");
     // Formación desde `cv.estudios` (post-S7), con sus años (2026-09-10).
     expect(text).toContain("FORMACIÓN");
@@ -70,7 +139,7 @@ describe("PDF ATS generado en build desde los YAML", () => {
     const text = await extractText(files.en);
     expect(text).toContain("Henry Mauricio Rincón Caro");
     expect(text).toContain("EXPERIENCE");
-    expect(text).toContain("50+ users");
+    expect(text.replace(/\s+/g, " ")).toContain("50+ users");
     expect(text).toContain("DP-600");
     expect(text).toContain("EDUCATION");
     expect(text).toContain("2009 — 2016");

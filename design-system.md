@@ -205,6 +205,42 @@ animaciones infinitas (sweep/glitch/marquee), scroll-snap de deck, CDNs en `<hea
 - **Roadmap embebido**: dentro de `/vitrina/apps` va como bloque con `border-t paper-2` y título
   `2xl` (no el `clamp` de sección de HOME). Misma isla de votación.
 
+### Caso de estudio · revisión 2026-09-24 (ADR-009 enmendado)
+
+El dueño lo pidió «minimalista y elegante, profesional pero impactante a la vista». La página
+es **una columna de lectura ≤ 768 px** en siete tiempos, sin ningún componente nuevo: todo es
+receta existente reordenada.
+
+1. **Cabecera.** Eyebrow `sage-ink` con punto («CASO DE ESTUDIO») seguido del **rol** del hito
+   en `ink-2` tras un `·`. `h1` Fraunces `clamp(2rem,5.5vw,3.25rem)` **estático** (candidato
+   LCP). Debajo, la **tesis**: Inter 17 px / 19 px desde md, `leading-[1.65]`, `ink-1`,
+   `max-w-[58ch]`, también estática. Chips de stack como antes.
+2. **Banda de cifras.** Entre dos filetes `paper-3` (`border-y`, `py-8`/`py-10`): 2 columnas
+   en móvil, 4 (o 3 si el caso trae 3) desde md. Cada cifra es el **metric tile de los logros a
+   escala de página**: JetBrains Mono `clamp(2.25rem,6vw,3rem)`, `tracking-[-0.03em]`,
+   `tabular-nums`, prefijo y sufijo a 0,45 em en `sage-ink`, `Counter` con el valor final en el
+   HTML; etiqueta 11 px mayúscula `ink-2`. Entra con `Stagger` `fadeInUp` como `<ul>` real.
+3. **Contexto y reto lado a lado** desde md (`grid-cols-2`, `gap-12`), estáticos.
+4. **«Cómo lo hice».** `<ol>` real (el `Stagger` admite `ol` desde esta revisión) de 3 a 6
+   capítulos. Cada uno: número mono 13 px `sage-ink` en su columna (2,5 rem / 3,25 rem) +
+   título Fraunces 1,25 rem + párrafo Inter 15 px `leading-[1.75]` `ink-1`. Filete `paper-2`
+   entre capítulos. El número es sentido, no decoración: por eso `ol` y no `ul`.
+5. **Impacto**: la tarjeta de siempre (`paper-1`, borde `paper-3`, `r-md`, `sh-1`, glifo ◆).
+6. **Lección («Lo que me llevo»)**: `<figure>` con **filete izquierdo de 2 px `sage-ink`**,
+   rótulo mono 11 px mayúscula `ink-2` y la frase en Fraunces `clamp(1.35rem,3vw,1.75rem)`
+   `ink-0`. Es la **única cita editorial** de la página; la voz display se gasta aquí.
+7. **Casos vecinos.** Dos tarjetas-enlace (`r-md`, borde `paper-3`, hover `paper-1`): rótulo
+   mono «← CASO ANTERIOR» / «CASO SIGUIENTE →», nombre corto en Fraunces y periodo en mono
+   `ink-2`. El orden es el de la trayectoria; el periodo dice hacia dónde va el tiempo. Debajo,
+   el enlace al PDF, bajo un solo filete `paper-2` compartido.
+
+**Prohibido aquí:** CTA de contacto al pie (el dueño lo sintió invasivo, post-S8), iconos por
+capítulo, fondos de color por sección, cifras sin fuente en su documento a fondo (lo vigila un
+test).
+
+**Logros de la HOME · misma revisión:** ocho tiles en **4 columnas** desde `lg` (2 desde `sm`),
+cifra `clamp(3.5rem,8vw,4.75rem)`; tres columnas dejaban dos huérfanos.
+
 ### Menú desplegable del encabezado · post-S5
 
 - **Cuándo se usa:** cuando varias secciones del nav **son la misma cosa**. Hoy, una sola vez: las

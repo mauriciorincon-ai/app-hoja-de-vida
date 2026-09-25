@@ -339,8 +339,18 @@ function columnaIzquierda(doc, cv, labels, yInicial) {
     col.espacio(8);
   }
 
-  col.seccion(labels.proyectos);
-  for (const proyecto of cv.proyectos) {
+  // Cada experiencia se cuenta UNA vez (2026-09-24, criterio del dueño: «que
+  // no repita, y que no deje por fuera ninguna de mis experiencias y logros»).
+  // Un proyecto que es el caso de estudio de un hito es la misma historia que
+  // ese hito, y sus cifras ya están arriba, en los logros de la experiencia
+  // (lo exige `tests/unit/casos-de-estudio.test.ts`). Listarlo otra vez aquí
+  // repetía la historia: con los ocho, una tercera página entera; con solo el
+  // destacado, Vesting dos veces. «Proyectos» queda para lo que NO es ya una
+  // experiencia —hoy nada, así que la sección no se pinta—.
+  const conHito = new Set(cv.trayectoria.map((h) => h.proyecto));
+  const propios = cv.proyectos.filter((p) => !conHito.has(p.slug));
+  if (propios.length > 0) col.seccion(labels.proyectos);
+  for (const proyecto of propios) {
     estilo(doc, "Helvetica-Bold", 9.5, TINTA);
     col.parrafo(ansi(proyecto.nombre), { juntoCon: 24 });
     estilo(doc, "Helvetica", 9, TINTA);
