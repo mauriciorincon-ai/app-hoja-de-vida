@@ -378,15 +378,25 @@ para una impresora, y el dueño lo quiso «simple y minimalista pero un poco má
 la estructura de dos columnas de los comprobadores de CV y un azul navy. Sus tokens viven en
 `scripts/generate-cv-pdf.mjs`, no en Tailwind:
 
-| Token      | Valor                            | Uso                                                                                     |
-| ---------- | -------------------------------- | --------------------------------------------------------------------------------------- |
-| `NAVY`     | `#2B4C7E`                        | eyebrow, organización/institución, grupos de skills, reglas de sección, dominio         |
-| `TINTA`    | `#111111`                        | nombre, títulos de sección y de hito, cuerpo                                            |
-| `GRIS`     | `#555555`                        | periodos, línea de contacto, ubicación                                                  |
-| columnas   | 62 % / 38 % con 14 pt de hueco   | izquierda: experiencia, proyectos · derecha: perfil, formación, certificaciones, skills |
-| tipografía | Helvetica 20 / 11 / 10 / 9 / 8.5 | nombre / eyebrow / secciones e hitos / cuerpo / metadatos                               |
+| Token              | Valor                                                    | Uso                                                                                     |
+| ------------------ | -------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `NAVY`             | `#2B4C7E`                                                | eyebrow, organización/institución, grupos de skills, reglas de sección, dominio         |
+| bloque del dominio | navy, 14 pt blanco en negrilla, 12×8 pt de aire, radio 4 | la cabecera, a la derecha y a la altura del nombre, con el rótulo gris de 7,5 pt debajo |
+| pie                | 7,5 pt, a 26 pt del borde                                | el dominio en navy negrilla + «· n / total» en gris, centrado, en cada página           |
+| `TINTA`            | `#111111`                                                | nombre, títulos de sección y de hito, cuerpo                                            |
+| `GRIS`             | `#555555`                                                | periodos, línea de contacto, ubicación                                                  |
+| columnas           | 62 % / 38 % con 14 pt de hueco                           | izquierda: experiencia, proyectos · derecha: perfil, formación, certificaciones, skills |
+| tipografía         | Helvetica 20 / 11 / 10 / 9 / 8.5                         | nombre / eyebrow / secciones e hitos / cuerpo / metadatos                               |
 
 Reglas: solo texto (nada de iconos ni imágenes: el ATS los pierde); el título de un hito viaja con
 su organización, periodo y primer bullet al saltar de página; el orden de dibujo por página es el
-orden de lectura ATS (cabecera → derecha → izquierda). El dominio del sitio encabeza el contacto
-**solo si el build lo conoce por variable de entorno** (regla 16).
+orden de lectura ATS (cabecera → derecha → izquierda); un título de sección viaja con lo primero
+que encabeza, y un grupo de skills con sus ítems (nunca solos al pie de una página).
+
+**El dominio, muy resaltado (2026-09-24, pedido del dueño).** Tres lugares y ninguno más: el
+**bloque navy** de la cabecera (el único acento lleno del PDF; el nombre y el eyebrow se estrechan
+para no tocarlo), el **cierre del perfil** («Más en mi sitio: dominio.», el dominio en navy) y el
+**pie** de cada página, chico. Los tres se pueden pulsar y llevan a `/es` o `/en` según el PDF.
+Se descartó enlazar cada experiencia a su caso de estudio: un «ver caso» junto al periodo ensucia
+la fecha que el ATS lee. Todo aparece **solo si el build conoce el dominio por variable de
+entorno** (regla 16); sin ella, la cabecera es la de siempre y no hay pie.

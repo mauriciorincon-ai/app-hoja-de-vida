@@ -4,13 +4,13 @@ import { existsSync, readFileSync, statSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { beforeAll, describe, expect, it } from "vitest";
-import { ansi } from "../../scripts/generate-cv-pdf.mjs";
+import { LABELS, ansi } from "../../scripts/generate-cv-pdf.mjs";
 import { getCv } from "@/lib/content";
 
 // pdfjs-dist (dentro de pdf-parse) referencia DOMMatrix al evaluar el módulo,
 // pero la extracción de TEXTO no usa canvas: basta un stub para importar.
 type PDFParseCtor = new (opts: { data: Uint8Array }) => {
-  getText(): Promise<{ text: string }>;
+  getText(): Promise<{ text: string; pages: { text: string }[] }>;
 };
 let PDFParse: PDFParseCtor;
 
@@ -36,11 +36,34 @@ const files = {
 };
 
 /**
+ * Y el MISMO PDF con dominio, que es el que baja un reclutador en producción:
+ * la cabecera crece con el bloque del dominio y cada página gana su pie, así
+ * que las dos páginas y la cobertura se miden también aquí. Un dominio largo a
+ * propósito: si cabe este, cabe el real (que jamás se escribe aquí, regla 16).
+ */
+const DOMINIO = "nombreyapellidolargo.test";
+const outDirDominio = path.join(tmpdir(), `cv-pdf-test-dominio-${process.pid}`);
+const filesDominio = {
+  es: path.join(outDirDominio, "Henry-Rincon-CV-ES.pdf"),
+  en: path.join(outDirDominio, "Henry-Rincon-CV-EN.pdf"),
+};
+const variantes = [
+  ["sin dominio", files],
+  ["con dominio", filesDominio],
+] as const;
+
+/**
  * Sin saltos de línea ni guiones: dónde parte un renglón es maquetación, no
  * contenido, y pdfkit parte «cross-referencing» en el guion —el extractor lo
  * devuelve como «crossreferencing»—.
  */
 const plano = (t: string) => t.replace(/-\s*/g, "").replace(/\s+/g, " ").trim();
+
+async function extractPages(file: string): Promise<string[]> {
+  const parser = new PDFParse({ data: new Uint8Array(readFileSync(file)) });
+  const { pages } = await parser.getText();
+  return pages.map((p) => p.text);
+}
 
 async function extractText(file: string): Promise<string> {
   const parser = new PDFParse({ data: new Uint8Array(readFileSync(file)) });
@@ -53,6 +76,14 @@ describe("PDF ATS generado en build desde los YAML", () => {
     execFileSync(process.execPath, ["scripts/generate-cv-pdf.mjs", outDir], {
       cwd: process.cwd(),
     });
+    execFileSync(
+      process.execPath,
+      ["scripts/generate-cv-pdf.mjs", outDirDominio],
+      {
+        cwd: process.cwd(),
+        env: { ...process.env, NEXT_PUBLIC_SITE_URL: `https://${DOMINIO}` },
+      },
+    );
   });
 
   it("genera ambos PDFs con tamaño > 0", () => {
@@ -67,21 +98,18 @@ describe("PDF ATS generado en build desde los YAML", () => {
   // la sección «Proyectos» repitió los ocho y el PDF pasó a tres páginas sin
   // que ninguna prueba se enterara. Se cuentan los objetos `/Type /Page` del
   // archivo —pdfkit los escribe sin comprimir—, que es lo que ve una impresora.
-  it("cabe en dos páginas, en los dos idiomas", () => {
-    for (const [locale, file] of Object.entries(files)) {
-      const paginas = (
-        readFileSync(file)
-          .toString("latin1")
-          .match(/\/Type\s*\/Page[^s]/g) ?? []
-      ).length;
-      expect(
-        paginas,
-        `el PDF ${locale} tiene ${paginas} páginas`,
-      ).toBeGreaterThan(0);
-      expect(
-        paginas,
-        `el PDF ${locale} tiene ${paginas} páginas`,
-      ).toBeLessThanOrEqual(2);
+  it("cabe en dos páginas, en los dos idiomas, con dominio y sin él", () => {
+    for (const [variante, archivos] of variantes) {
+      for (const [locale, file] of Object.entries(archivos)) {
+        const paginas = (
+          readFileSync(file)
+            .toString("latin1")
+            .match(/\/Type\s*\/Page[^s]/g) ?? []
+        ).length;
+        const nombre = `el PDF ${locale} ${variante} tiene ${paginas} páginas`;
+        expect(paginas, nombre).toBeGreaterThan(0);
+        expect(paginas, nombre).toBeLessThanOrEqual(2);
+      }
     }
   });
 
@@ -91,14 +119,16 @@ describe("PDF ATS generado en build desde los YAML", () => {
   // logros de su hito vive en `tests/unit/casos-de-estudio.test.ts`; estas
   // miran el PDF de verdad.
   it("no deja nada por fuera: cada experiencia y cada uno de sus logros está en el PDF", async () => {
-    for (const locale of ["es", "en"] as const) {
-      const texto = plano(await extractText(files[locale]));
-      const faltan = getCv(locale).trayectoria.flatMap((h) =>
-        [h.rol, h.organizacion, ...h.bullets]
-          .filter((t) => !texto.includes(plano(ansi(t))))
-          .map((t) => `${locale} · ${h.organizacion}: «${t}»`),
-      );
-      expect(faltan.join("\n")).toBe("");
+    for (const [variante, archivos] of variantes) {
+      for (const locale of ["es", "en"] as const) {
+        const texto = plano(await extractText(archivos[locale]));
+        const faltan = getCv(locale).trayectoria.flatMap((h) =>
+          [h.rol, h.organizacion, ...h.bullets]
+            .filter((t) => !texto.includes(plano(ansi(t))))
+            .map((t) => `${locale} ${variante} · ${h.organizacion}: «${t}»`),
+        );
+        expect(faltan.join("\n")).toBe("");
+      }
     }
   });
 
@@ -117,6 +147,76 @@ describe("PDF ATS generado en build desde los YAML", () => {
         repetidos,
         `el PDF ${locale} cuenta dos veces estas experiencias`,
       ).toEqual([]);
+    }
+  });
+
+  // EL DOMINIO, MUY RESALTADO (2026-09-24, pedido del dueño). Lo que una
+  // prueba puede ver: que va arriba —antes del correo—, que cierra el perfil,
+  // que firma el pie de CADA página y que las tres cosas se pueden pulsar y
+  // llevan al sitio en el idioma del PDF. Lo grande y lo resaltado es juicio
+  // visual: la d1 de la guía.
+  it("el dominio encabeza, cierra el perfil, firma cada página y lleva al sitio en su idioma", async () => {
+    for (const locale of ["es", "en"] as const) {
+      const paginas = await extractPages(filesDominio[locale]);
+      const primera = plano(paginas[0]);
+      expect(primera.indexOf(DOMINIO)).toBeGreaterThan(-1);
+      expect(primera.indexOf(DOMINIO)).toBeLessThan(primera.indexOf("@"));
+      expect(primera).toContain(`${LABELS[locale].masEnMiSitio} ${DOMINIO}.`);
+      paginas.forEach((texto, i) => {
+        expect(
+          plano(texto).endsWith(`${DOMINIO} · ${i + 1} / ${paginas.length}`),
+          `el pie de la página ${i + 1} (${locale})`,
+        ).toBe(true);
+      });
+      const enlaces =
+        readFileSync(filesDominio[locale])
+          .toString("latin1")
+          .match(new RegExp(`/URI \\(https://${DOMINIO}/${locale}\\)`, "g")) ??
+        [];
+      // Cabecera + perfil + un pie por página.
+      expect(enlaces.length, `enlaces al sitio (${locale})`).toBe(
+        2 + paginas.length,
+      );
+    }
+    // Sin dominio no hay pie ni enlaces: nada inventado.
+    for (const file of Object.values(files)) {
+      expect(readFileSync(file).toString("latin1")).not.toContain("/URI");
+    }
+  });
+
+  // NINGÚN TÍTULO HUÉRFANO (2026-09-24). «SKILLS» —o el primer grupo, «IA &
+  // ML»— se quedaba solo al pie de la página 1 con su contenido en la 2: en
+  // `main` ya pasaba con el grupo, y la cabecera con dominio lo empeoró. Cada
+  // título tiene que ir, en su página, pegado a lo primero que encabeza.
+  it("ningún título se queda solo al pie de una página", async () => {
+    const quitaVineta = (t: string) => plano(t.replace(/•/g, " "));
+    const primeras = (t: string, n = 2) =>
+      ansi(t).split(/\s+/).slice(0, n).join(" ");
+    for (const [variante, archivos] of variantes) {
+      for (const locale of ["es", "en"] as const) {
+        const cv = getCv(locale);
+        const L = LABELS[locale];
+        const paginas = (await extractPages(archivos[locale])).map(quitaVineta);
+        const pares: [string, string][] = [
+          [L.experiencia, cv.trayectoria[0].rol],
+          [L.formacion, primeras(cv.estudios![0].titulo)],
+          [L.certificaciones, primeras(cv.certificaciones[0].nombre)],
+          [L.skills, cv.skills[0].grupo],
+          ...cv.trayectoria.map(
+            (h) => [h.rol, primeras(h.organizacion)] as [string, string],
+          ),
+          ...cv.skills.map(
+            (g) => [g.grupo, primeras(g.items[0])] as [string, string],
+          ),
+        ];
+        const huerfanos = pares
+          .map(([titulo, sigue]) => quitaVineta(`${ansi(titulo)} ${sigue}`))
+          .filter((junto) => !paginas.some((p) => p.includes(junto)));
+        expect(
+          huerfanos,
+          `títulos separados de lo que encabezan (${locale}, ${variante})`,
+        ).toEqual([]);
+      }
     }
   });
 

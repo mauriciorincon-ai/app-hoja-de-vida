@@ -21,6 +21,8 @@ describe("lineaDeContacto del PDF", () => {
   it("con URL pública, el dominio va destacado y primero; el resto sin protocolo", () => {
     const linea = lineaDeContacto(identidad, "https://www.ejemplo.test/");
     expect(linea.destacado).toBe("ejemplo.test");
+    // Lo que se muestra va sin protocolo; a donde lleva el enlace, completo.
+    expect(linea.origen).toBe("https://www.ejemplo.test");
     expect(linea.resto).toEqual([
       "correo@ejemplo.test",
       "linkedin.com/in/alguien",
@@ -34,6 +36,7 @@ describe("lineaDeContacto del PDF", () => {
       lineaDeContacto(identidad, "http://localhost:3000").destacado,
     ).toBeNull();
     expect(lineaDeContacto(identidad, "no es una url").destacado).toBeNull();
+    expect(lineaDeContacto(identidad, "no es una url").origen).toBeNull();
   });
 });
 
