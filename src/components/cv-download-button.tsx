@@ -2,6 +2,7 @@
 
 import { useLocale } from "next-intl";
 import { trackEvent } from "@/lib/analytics";
+import { rutaDelPdf } from "@/lib/cv-pdf";
 
 /**
  * CTA de descarga del PDF ATS (asset estático generado en build, ADR-008).
@@ -16,7 +17,7 @@ export function CvDownloadButton({
   origen?: string;
 }) {
   const locale = useLocale();
-  const pdfHref = `/cv/Henry-Rincon-CV-${locale.toUpperCase()}.pdf`;
+  const pdfHref = rutaDelPdf(locale);
 
   return (
     <a

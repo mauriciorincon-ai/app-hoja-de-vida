@@ -17,7 +17,8 @@ design-sync/
 ├─ styles.css        los tokens en un solo sitio citable
 ├─ README.md         esto
 └─ components/
-   ├─ fundamentos/       Paleta · Tipografía · Forma y movimiento
+   ├─ fundamentos/       Paleta · Tipografía · Forma y movimiento ·
+   │                     Ícono del sitio (2026-09-26)
    ├─ componentes/       Botón · Card · Chip de estado ·
    │                     Menú desplegable del encabezado
    ├─ componentes-s5/    Muestra de app · Tarjeta de grupo ·

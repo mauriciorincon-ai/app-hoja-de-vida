@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { CvDownloadButton } from "@/components/cv-download-button";
 import { getCv } from "@/lib/content";
+import { rutaDelPdf } from "@/lib/cv-pdf";
 import type { Locale } from "@/i18n/routing";
 import { enMantenimiento } from "@/lib/mantenimiento";
 
@@ -36,14 +37,35 @@ export default async function MantenimientoPage({
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("mantenimiento");
+  const tNav = await getTranslations("nav");
   const { identidad } = getCv(locale as Locale);
+  // El otro idioma (2026-09-26, pedido del dueño): quien llega en español y
+  // prefiere inglés cambia la página entera —el proxy sirve la de `/en`— o
+  // baja directo el CV en el otro idioma.
+  const otro = locale === "es" ? "en" : "es";
   const linkedin = identidad.enlaces.find((e) => /linkedin/i.test(e.url));
 
   return (
     <main
       id="contenido"
-      className="grid min-h-svh flex-1 place-items-center px-4 py-16"
+      className="relative grid min-h-svh flex-1 place-items-center px-4 py-16"
     >
+      <a
+        href={`/${otro}`}
+        hrefLang={otro}
+        aria-label={tNav("cambiarIdioma")}
+        className="absolute top-4 right-4 flex min-h-11 items-center gap-1 rounded-full border border-paper-3 px-3 font-mono text-[11px] tracking-[0.02em] text-ink-1 uppercase transition-colors duration-[120ms] hover:bg-paper-1"
+      >
+        <span className={locale === "es" ? "text-ink-0" : "text-ink-2"}>
+          ES
+        </span>
+        <span aria-hidden="true" className="text-ink-2">
+          /
+        </span>
+        <span className={locale === "en" ? "text-ink-0" : "text-ink-2"}>
+          EN
+        </span>
+      </a>
       <div className="max-w-lg text-center">
         <p className="inline-flex items-center gap-2 text-xs font-medium tracking-[0.18em] text-sage-ink uppercase">
           <span
@@ -61,8 +83,17 @@ export default async function MantenimientoPage({
         <p className="mt-5 text-[17px] leading-relaxed text-ink-1">
           {t("cuerpo")}
         </p>
-        <div className="mt-10 flex justify-center">
+        <div className="mt-10 flex flex-col items-center gap-4">
           <CvDownloadButton label={t("descargar")} origen="mantenimiento" />
+          <a
+            href={rutaDelPdf(otro)}
+            download
+            hrefLang={otro}
+            lang={otro}
+            className="text-[14px] text-ink-2 underline decoration-paper-3 underline-offset-4 hover:text-ink-0 hover:decoration-ink-2"
+          >
+            {t("pdfOtroIdioma")}
+          </a>
         </div>
         <div className="mt-12 border-t border-paper-3 pt-8">
           <p className="text-[15px] text-ink-2">{t("escribeme")}</p>

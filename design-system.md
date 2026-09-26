@@ -211,9 +211,27 @@ Con `MANTENIMIENTO=on` en Production, el proxy sirve `/[locale]/mantenimiento` e
 cualquier página, con un 503 temporal. Una sola columna centrada (`max-w-lg`), **sin encabezado, sin
 pie y sin chat**: no hay a dónde ir. Orden: eyebrow sage con punto → el nombre en mono `ink-2` →
 el titular en la voz display (la única vez) → una frase → **el CTA sage del PDF** (los PDF se siguen
-sirviendo: lo que un reclutador vino a buscar) → filete `paper-3` → «¿Prefieres escribirme?» con
-el correo y LinkedIn como enlaces con subrayado `paper-3`. Ningún componente nuevo. Tarjeta:
+sirviendo: lo que un reclutador vino a buscar) y, bajo él, el CV en el otro idioma como enlace
+`ink-2` → filete `paper-3` → «¿Prefieres escribirme?» con
+el correo y LinkedIn como enlaces con subrayado `paper-3`. Arriba a la derecha, la misma píldora
+ES / EN del encabezado, como enlace a la otra ruta. Ningún componente nuevo. Tarjeta:
 `design-sync/components/componentes-mantenimiento/`.
+
+### Ícono del sitio · 2026-09-26
+
+Las iniciales **HR** en la voz display (Fraunces 500), **en trazos**: un favicon se pinta aislado
+de la página y no carga fuentes web, así que un `<text>` caería a Times. El dueño no tiene logo y
+pidió eso, nada más: sin símbolo ni figura. Dos formas:
+
+- **Letras solas** (`src/app/icon.svg`, la que ven los navegadores de hoy): `ink-0` con tema claro,
+  `paper-0` con el oscuro, vía `prefers-color-scheme` dentro del SVG. Ocupan el 95 % del ancho.
+- **Con loseta** (`favicon.ico` 16/32/48 y `apple-icon.png` 180): letras `ink-0` al 80 % sobre
+  `paper-0`. El .ico con radio del 18 %; el de iOS a sangre, porque el sistema redondea. La loseta
+  existe porque ahí no se sabe el color de fondo.
+
+Los colores salen de los tokens: cambiar la paleta es correr `pnpm iconos`, y
+`tests/unit/iconos.test.ts` falla si quedaron desfasados. Tarjeta:
+`design-sync/components/fundamentos/icono.html`.
 
 ### Caso de estudio · revisión 2026-09-24 (ADR-009 enmendado)
 
@@ -388,15 +406,15 @@ para una impresora, y el dueño lo quiso «simple y minimalista pero un poco má
 la estructura de dos columnas de los comprobadores de CV y un azul navy. Sus tokens viven en
 `scripts/generate-cv-pdf.mjs`, no en Tailwind:
 
-| Token              | Valor                                                    | Uso                                                                                     |
-| ------------------ | -------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| `NAVY`             | `#2B4C7E`                                                | eyebrow, organización/institución, grupos de skills, reglas de sección, dominio         |
-| bloque del dominio | navy, 14 pt blanco en negrilla, 12×8 pt de aire, radio 4 | la cabecera, a la derecha y a la altura del nombre, con el rótulo gris de 7,5 pt debajo |
-| pie                | 7,5 pt, a 26 pt del borde                                | el dominio en navy negrilla + «· n / total» en gris, centrado, en cada página           |
-| `TINTA`            | `#111111`                                                | nombre, títulos de sección y de hito, cuerpo                                            |
-| `GRIS`             | `#555555`                                                | periodos, línea de contacto, ubicación                                                  |
-| columnas           | 62 % / 38 % con 14 pt de hueco                           | izquierda: experiencia, proyectos · derecha: perfil, formación, certificaciones, skills |
-| tipografía         | Helvetica 20 / 11 / 10 / 9 / 8.5                         | nombre / eyebrow / secciones e hitos / cuerpo / metadatos                               |
+| Token              | Valor                                                    | Uso                                                                                                                                                       |
+| ------------------ | -------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `NAVY`             | `#2B4C7E`                                                | eyebrow, organización/institución, grupos de skills, reglas de sección, dominio                                                                           |
+| bloque del dominio | navy, 14 pt blanco en negrilla, 12×8 pt de aire, radio 4 | la cabecera, a la derecha y a la altura del nombre, con el rótulo gris de 7,5 pt debajo en dos líneas, **centrado respecto al bloque** (`inicioCentrado`) |
+| pie                | 7,5 pt, a 26 pt del borde                                | el dominio en navy negrilla + «· n / total» en gris, centrado, en cada página                                                                             |
+| `TINTA`            | `#111111`                                                | nombre, títulos de sección y de hito, cuerpo                                                                                                              |
+| `GRIS`             | `#555555`                                                | periodos, línea de contacto, ubicación                                                                                                                    |
+| columnas           | 62 % / 38 % con 14 pt de hueco                           | izquierda: experiencia, proyectos · derecha: perfil, formación, certificaciones, skills                                                                   |
+| tipografía         | Helvetica 20 / 11 / 10 / 9 / 8.5                         | nombre / eyebrow / secciones e hitos / cuerpo / metadatos                                                                                                 |
 
 Reglas: solo texto (nada de iconos ni imágenes: el ATS los pierde); el título de un hito viaja con
 su organización, periodo y primer bullet al saltar de página; el orden de dibujo por página es el

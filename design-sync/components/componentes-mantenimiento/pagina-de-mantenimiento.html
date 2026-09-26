@@ -32,6 +32,14 @@
   .cta { display:inline-flex; gap:8px; align-items:center; min-height:44px; padding:0 24px;
     margin-top:40px; border-radius:6px; background:var(--sage); color:var(--sage-ink);
     font-weight:500; text-decoration:none; box-shadow:var(--sh-1); }
+  .idioma { position:absolute; top:16px; right:16px; display:flex; gap:4px; align-items:center;
+    min-height:44px; padding:0 12px; border:1px solid var(--paper-3); border-radius:999px;
+    font-family:var(--mono); font-size:11px; text-transform:uppercase; color:var(--ink-2);
+    text-decoration:none; }
+  .idioma b { color:var(--ink-0); font-weight:400; }
+  .otro { display:block; margin-top:16px; font-size:14px; color:var(--ink-2);
+    text-decoration:underline; text-decoration-color:var(--paper-3); text-underline-offset:4px; }
+  main { position:relative; }
   .pie { margin-top:48px; border-top:1px solid var(--paper-3); padding-top:32px; }
   .pie p { margin:0; color:var(--ink-2); }
   .pie a { display:inline-block; margin:12px 10px 0; color:var(--ink-0); font-weight:500;
@@ -44,11 +52,13 @@ en lugar de cualquier otra, con un 503 temporal. Ningún componente nuevo: el ey
 sage, la voz display una vez, el CTA sage del PDF (los PDF siguen sirviéndose) y el contacto como
 enlaces con subrayado <code>paper-3</code>. Sin encabezado, sin pie y sin chat: no hay a dónde ir.</p>
 <main class="pagina">
+  <a class="idioma" href="#"><b>ES</b> / EN</a>
   <p class="eyebrow"><i></i>En mantenimiento</p>
   <p class="nombre">Henry Rincón</p>
   <h1>Estoy afinando mi sitio</h1>
   <p class="cuerpo">Vuelve en un rato. Mientras tanto, mi hoja de vida sigue aquí, completa, en PDF.</p>
   <a class="cta" href="#">Descargar mi CV (PDF) <span aria-hidden="true">↓</span></a>
+  <a class="otro" href="#" lang="en">CV in English (PDF)</a>
   <div class="pie">
     <p>¿Prefieres escribirme?</p>
     <a href="#">correo@ejemplo.test</a><a href="#">LinkedIn</a>

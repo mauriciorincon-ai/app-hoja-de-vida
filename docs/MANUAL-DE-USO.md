@@ -241,7 +241,8 @@ el mensaje te llega al correo.
   izquierda; perfil, formación, certificaciones y skills a la derecha—, acentos en azul navy y
   texto Helvetica seleccionable, en el orden que un ATS lee (cabecera → perfil → experiencia).
   **Tu dominio va muy resaltado** (desde el 2026-09-24): un bloque azul navy con el dominio en
-  blanco arriba a la derecha, a la altura de tu nombre, con «CV interactivo · casos · chat» debajo;
+  blanco arriba a la derecha, a la altura de tu nombre, y debajo, centrado respecto al recuadro, «En mi
+  sitio encontrarás» / «CV interactivo · casos · chat» (desde el 2026-09-26);
   el perfil cierra con «Más en mi sitio: dominio.» y el pie de cada página lo repite pequeño con
   el número de página. Los tres se pueden pulsar y abren el sitio en el idioma del PDF. El dominio
   no se escribe en ningún archivo: el build lo toma de la variable `NEXT_PUBLIC_SITE_URL` de
@@ -483,7 +484,9 @@ el mensaje te llega al correo.
 
 - **Qué hace:** pone **todo** el sitio en una página de «Estoy afinando mi sitio», en el idioma
   de quien llega, con dos salidas: **descargar tu CV en PDF** (los PDF se siguen sirviendo) y tu
-  correo y LinkedIn. Sin menú, sin chat y sin formularios.
+  correo y LinkedIn. Sin menú, sin chat y sin formularios. Arriba a la derecha, **ES / EN** cambia
+  la página de idioma, y bajo el botón hay un enlace al **CV en el otro idioma** (desde el
+  2026-09-26).
 - **Cómo se pone:** en Vercel, **Settings → Environment Variables**, cambia `MANTENIMIENTO` a
   `on` (Production) y haz **Redeploy** del último deploy de Production. En 3–4 minutos, todo
   el sitio muestra la página.
@@ -503,6 +506,26 @@ el mensaje te llega al correo.
 - **Qué hace:** la página completa existe en `/es` y `/en`, con el botón ES/EN en el encabezado.
   Cambiar de idioma conserva la sección donde estaba el visitante.
 - **Cómo se usa:** nada que configurar; el contenido sale de los dos YAML espejo.
+
+### El ícono de la pestaña · desde el 2026-09-26
+
+- **Qué es:** tus iniciales, **HR**, en Fraunces, la letra de los títulos del sitio. Aparece en la
+  pestaña del navegador, en los favoritos, junto a tu sitio en Google y en la pantalla de inicio de
+  un iPhone. Reemplazó al triángulo de Vercel, que venía con la plantilla del proyecto.
+- **Cómo se ve:** en la pestaña, las letras solas, en tinta si el navegador está en tema claro y en
+  papel si está en oscuro. Donde el sistema no sabe el color de fondo (navegadores viejos, Google,
+  el iPhone) van sobre una loseta de papel, para que nunca desaparezcan.
+- **Si cambias la paleta:** corre `pnpm iconos` y los tres archivos se rehacen con los colores
+  nuevos (`src/app/icon.svg`, `favicon.ico` y `apple-icon.png`). Si lo olvidas, un test te lo
+  recuerda.
+- **Si algún día quieres otras letras u otro dibujo:** es un trabajo de diseño, no de datos: pídelo.
+  Cómo se sacaron las letras de la fuente está en la bitácora
+  `sprints/REV-2026-09-26-rotulo-idiomas-icono-bitacora.md`.
+- **Tarda en verse:** los navegadores guardan el ícono mucho tiempo. Si tras el deploy sigues viendo
+  el viejo, abre el sitio en una ventana privada.
+- **Qué lo prueba:** `tests/unit/iconos.test.ts` (que no vuelva el de la plantilla, que sean trazos
+  y no texto, los colores y las medidas) y un e2e en `tests/e2e/home.spec.ts` (que la página los
+  enlace y respondan).
 
 ### El formulario «Escríbeme» · desde Sprint 001 (antes «Solicitar acceso»)
 
@@ -822,3 +845,4 @@ chat hoy y cuáles traería con la base aprobada. Ese informe **se genera, no se
 | post-S7 (2.ª) | «Lo que construyo» entra al desplegable Hoja de vida; Estudios con los años del PDF del dueño (tres entradas); AI-102 retirada de todo el contenido (Microsoft la descontinuó) y gate nuevo: una credencial nombrada tiene que estar en `certificaciones:`.                                                                                                                                                                                                                                                                                                                                                                       |
 | casos 2026-09-24 | **Ocho casos de estudio, uno por hito** (nacen C&M Consorcio, Ceinfes e Inglopres, pedidos el 2026-09-13), con la forma completa: tesis, banda de cifras, capítulos numerados, lección y navegación entre casos; cada cifra verificada contra su documento a fondo y el minimalismo medido. Bullets de la trayectoria enriquecidos y dos logros nuevos en la HOME. En el chat, «¿Algo no funciona? Avísame» en la puerta, con diagnóstico del servidor en el correo. |
 | mantenimiento 2026-09-24 | **Modo mantenimiento**: `MANTENIMIENTO=on` en Vercel (Production) + Redeploy pone todo el sitio en una página con el CV en PDF y el contacto, con un 503 temporal que Google entiende; `off` + Redeploy lo quita. Solo `on` lo enciende. |
+| revisión 2026-09-26 | En el PDF, el rótulo bajo tu dominio dice qué hay allá («En mi sitio encontrarás / CV interactivo · casos · chat»), centrado respecto al recuadro. La página de mantenimiento cambia de idioma y ofrece el CV en el otro idioma. **El ícono de la pestaña**: tus iniciales en la letra de los títulos, en lugar del triángulo de Vercel (`pnpm iconos`). |

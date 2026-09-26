@@ -1,8 +1,19 @@
 #!/bin/sh
-# Hook pre-commit del kit-app: bloquea commits con secretos (gitleaks).
+# Hook pre-commit del kit-app: bloquea commits con secretos (gitleaks) y con archivos de privado/.
 # Cubre los commits MANUALES del usuario; las escrituras de Claude Code las cubre el hook
 # PreToolUse de .claude/settings.json. Se activa con: git config core.hooksPath githooks
 # (lo hace estampar-app.ps1). Requiere gitleaks: winget install Gitleaks.Gitleaks
+
+# privado/ guarda la hoja de vida del dueño (con teléfonos) y la auditoría del «a fondo».
+# Está en .gitignore; esto frena el `git add -f`, que el ignore no ve. El repo es público.
+privados=$(git diff --cached --name-only --diff-filter=ACMR | grep '^privado/')
+if [ -n "$privados" ]; then
+  echo ""
+  echo "privado/ NO se versiona (repo publico): commit bloqueado."
+  echo "$privados"
+  echo "Sacalo del commit con: git reset -- privado/"
+  exit 1
+fi
 
 if command -v gitleaks >/dev/null 2>&1; then
   gitleaks protect --staged --no-banner --redact
