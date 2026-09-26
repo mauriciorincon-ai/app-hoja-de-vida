@@ -91,6 +91,14 @@ Escala (desktop / móvil ~0.88×, cuerpo ≥15px en móvil):
 
 Cifras SIEMPRE con `tabular-nums` (counters, métricas, fechas).
 
+**Carga de las tres fuentes (next/font):** Fraunces 500 estática con `swap` y precarga; Inter y
+JetBrains Mono con `display: optional` **y precarga** (sin salto de layout: si no llegan a tiempo,
+queda el fallback métrico). JetBrains Mono se precarga **desde el 2026-09-26**: sin precarga, la
+primera visita pintaba las cifras de la HOME, de los casos y de `/cv` en Arial (30 de 30 cargas en
+frío). Con precarga llegan en una conexión normal; en la 4G lenta de Lighthouse sigue ganando el
+fallback, y eso es lo que `optional` promete. Lo vigila un e2e que pregunta al motor qué fuente
+pintó el nodo (`tests/e2e/home.spec.ts`).
+
 ### Spacing, radios, sombras
 
 - **Spacing:** múltiplos de 4/8 (escala Tailwind). Lectura larga manda: secciones con respiro
@@ -167,7 +175,9 @@ animaciones infinitas (sweep/glitch/marquee), scroll-snap de deck, CDNs en `<hea
   1.35rem. Los ítems son chips `paper-1` con borde `paper-3` que entran con `scaleInBlur`
   escalonado. El trazo del icono se dibuja al llegar la tarjeta (`pathLength` 0→1, en cascada de
   130 ms por figura) heredando las variantes del `Stagger`; el estado por defecto es el icono
-  dibujado. **Prohibido:** barras o porcentajes de dominio. **Coreografía post-S8, tres capas:**
+  dibujado. Cada tarjeta lleva `id="skills-<id>"` (el `id` del grupo en el YAML): es el destino
+  de las citas del chat de esa capacidad, con `scroll-mt-40` para que el título quede a la vista
+  aunque el salto llegue antes que el `liftIn`. **Prohibido:** barras o porcentajes de dominio. **Coreografía post-S8, tres capas:**
   la tarjeta **aterriza vacía** (`liftIn`, escalón 200 ms) → a los 0,8 s, cuando ya se ve,
   aparece la cabecera (`fadeInUp`) y el trazo del icono se dibuja (1,0 s) → los chips caen uno a
   uno detrás (`scaleInBlur`, 100 ms). Cada tarjeta corre la partitura desplazada por su escalón:

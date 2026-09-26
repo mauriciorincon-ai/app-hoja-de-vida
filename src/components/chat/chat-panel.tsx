@@ -7,6 +7,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "@/i18n/navigation";
 import { trackEvent } from "@/lib/analytics";
+import { agruparFuentes } from "@/lib/ia/fuentes";
 import {
   createRetriever,
   type Retriever,
@@ -373,7 +374,7 @@ export function ChatPanel({
                     <span className="font-mono text-[10px] tracking-[0.02em] text-ink-2 uppercase">
                       {t("fuentes")}
                     </span>
-                    {fuentes.map((f) => (
+                    {agruparFuentes(fuentes).map((f) => (
                       // <Link>, no <a>: un <a> recargaba la página entera y el
                       // visitante volvía a un panel vacío. Con navegación del
                       // lado cliente el lanzador (en el layout) y el panel
@@ -382,16 +383,18 @@ export function ChatPanel({
                       // del dueño, 2026-09-23): los documentos a fondo no se
                       // publican, así que el chip dice de qué fuente salió la
                       // frase («AF-09») y a dónde lleva la cita («Vesting»).
-                      // El título completo queda en el tooltip.
+                      // El título completo queda en el tooltip. Los fragmentos
+                      // del mismo documento y destino van en UN chip con sus
+                      // números: «[3, 4] AF-17 · …» (agruparFuentes).
                       <Link
-                        key={f.n}
+                        key={f.ns.join("-")}
                         href={hrefFuente(f.ancla)}
                         onClick={onCerrar}
                         title={f.titulo}
                         data-testid="chat-fuente"
                         className="rounded-full bg-sage px-2 py-0.5 font-mono text-[10px] text-sage-ink transition-[filter] duration-[120ms] hover:brightness-[0.97] motion-reduce:transition-none"
                       >
-                        [{f.n}] {f.codigo} · {f.destino}
+                        [{f.ns.join(", ")}] {f.codigo} · {f.destino}
                       </Link>
                     ))}
                   </div>

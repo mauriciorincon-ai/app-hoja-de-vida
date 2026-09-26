@@ -75,3 +75,31 @@ Therefore: **`largest-contentful-paint` budget 3500 → 3850ms (~10% engineering
 FCP ≤1500, CLS ≤0.1 and INP ≤200 stay strict; content remains visible from FCP at all
 times. The 3850 line still fails on any real regression (the S2 detail-page bug was
 3.6–4.1s — it would still trip).
+
+## Amendment (2026-09-26): JetBrains Mono is preloaded
+
+The mono voice (`display: optional`, per this ADR's pattern) shipped with `preload: false` since
+Sprint 001 on the grounds that it paints metrics and dates, "mostly below the fold". Measured on
+2026-09-26 with the Chrome DevTools Protocol (`CSS.getPlatformFontsForNode`, cold cache): the
+first visit painted the HOME figures, the case-study figure band and `/cv` in **Arial** (the
+`next/font` fallback) in 30 of 30 loads, throttled or not. Without a preload the font is only
+requested once CSS needs it, which is always too late for `optional`'s block period. The HOME
+figures are the largest numbers on the site, and the first visit is the only one a recruiter
+makes: the same argument this ADR used to keep Fraunces as `swap`.
+
+With the preload: JetBrains Mono in 15 of 15 cold loads unthrottled, with CPU throttling alone
+(4× and 6×), and on a good 4G profile (40 ms, 9 Mb/s). On Lighthouse's slow-4G profile the
+fallback still wins; that is what `optional` promises (no late swap, CLS stays 0).
+
+Cost, measured locally with Lighthouse 12 (median of 3, mobile, simulated throttling):
+
+| URL                     | perf before → after | LCP before → after | TBT before → after | CLS |
+| ----------------------- | ------------------- | ------------------ | ------------------ | --- |
+| `/es`                   | 91 → 90             | 3409 → 3585 ms     | 59 → 64 ms         | 0   |
+| `/es/proyectos/vesting` | 94 → 94             | 3115 → 3128 ms     | 50 → 30 ms         | 0   |
+| `/es/cv`                | 94 → 93             | 3123 → 3124 ms     | 56 → 68 ms         | 0   |
+
+The HOME pays about 176 ms of simulated LCP for one more preloaded file (the 40 KB latin
+variable font). Budgets are unchanged: the CI Lighthouse job (15 URLs, median of 3) is the gate
+that decides whether this fits. An e2e (`tests/e2e/home.spec.ts`) asks the engine which font
+actually painted the figures, so a regression back to Arial fails in CI.

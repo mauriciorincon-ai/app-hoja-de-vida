@@ -243,6 +243,11 @@ export const cvSchema = z.object({
   skills: z
     .array(
       z.object({
+        // El ancla de la tarjeta en la HOME (`#skills-<id>`), igual en los dos
+        // idiomas: una cita del chat aterriza en la tarjeta, no en la sección.
+        id: z
+          .string()
+          .regex(/^[a-z0-9-]+$/, "id en minúsculas, cifras y guiones"),
         grupo: z.string().min(1),
         items: z.array(z.string().min(1)).min(1),
       }),

@@ -766,7 +766,8 @@ certificaciones:
     logoAlto: 16
 
 skills:
-  - grupo: "AI & ML"
+  - id: ia-y-ml
+    grupo: "AI & ML"
     items:
       - "Azure AI"
       - "RAG & agents — being built in the open (see the showcase)"
@@ -775,7 +776,8 @@ skills:
       - "TensorFlow"
       - "Scikit-Learn"
       - "NLP"
-  - grupo: "Data platform"
+  - id: plataforma-de-datos
+    grupo: "Data platform"
     items:
       - "Microsoft Fabric"
       - "Direct Lake"
@@ -786,7 +788,8 @@ skills:
       - "Power Query"
       - "DAX"
       - "Google Cloud — exploring"
-  - grupo: "BI & decision-making"
+  - id: bi-y-decision
+    grupo: "BI & decision-making"
     items:
       - "Power BI"
       - "Data storytelling"
@@ -795,18 +798,21 @@ skills:
       - "Shiny (R)"
       - "Tableau"
       - "Looker Studio"
-  - grupo: "Engineering"
+  - id: ingenieria
+    grupo: "Engineering"
     items:
       - "Python"
       - "Git/GitHub"
       - "CI/CD — this site runs on it"
-  - grupo: "Processes & simulation"
+  - id: procesos-y-simulacion
+    grupo: "Processes & simulation"
     items:
       - "BPMN (Bizagi)"
       - "Discrete-event simulation (FlexSim)"
       - "Time study and line balancing"
       - "Kanban and Scrum"
-  - grupo: "How I work"
+  - id: como-trabajo
+    grupo: "How I work"
     items:
       - "Leading teams of up to 20 people"
       - "Communication with boards and senior leadership"

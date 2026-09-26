@@ -268,6 +268,15 @@ describe("content loader (data/*.yaml reales)", () => {
     expect(es.proyectos.some((p) => p.casestudy)).toBe(true);
   });
 
+  it("las tarjetas de Skills tienen el mismo id en ES y EN (2026-09-26)", () => {
+    // El id es el ancla de la tarjeta (`#skills-<id>`) y los documentos «a
+    // fondo» citan hacia ella en los dos idiomas: si difiere, la cita en
+    // inglés aterriza en una tarjeta que no existe.
+    expect(getCv("en").skills.map((g) => g.id)).toEqual(
+      getCv("es").skills.map((g) => g.id),
+    );
+  });
+
   it("parses data/apps.yaml and includes hoja-de-vida", () => {
     const { apps } = getApps();
     expect(apps.map((a) => a.id)).toContain("hoja-de-vida");

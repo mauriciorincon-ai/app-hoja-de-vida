@@ -28,32 +28,32 @@ un documento nuevo toma el siguiente número libre; un código retirado no se re
 | #  | Código | Documento | Estado | Subsec. | `[CONFIRMAR]` | Cita hacia |
 | -- | ------ | --------- | ------ | ------: | ------------: | ---------- |
 | 1 | AF-15 | `agentes-en-produccion` | aprobado | 23 | 0 | `/vitrina/agentes` |
-| 2 | AF-21 | `analitica-predictiva` | aprobado | 18 | 0 | `#skills` |
+| 2 | AF-21 | `analitica-predictiva` | aprobado | 18 | 0 | `#skills-ia-y-ml` |
 | 3 | AF-12 | `apps-pipeline` | aprobado | 28 | 0 | `#vitrina` |
 | 4 | AF-08 | `banco-pichincha` | aprobado | 25 | 0 | `/proyectos/banco-pichincha` |
-| 5 | AF-20 | `bi-que-se-adopta` | aprobado | 23 | 0 | `#skills` |
+| 5 | AF-20 | `bi-que-se-adopta` | aprobado | 23 | 0 | `#skills-bi-y-decision` |
 | 6 | AF-06 | `cafam` | aprobado | 15 | 0 | `/proyectos/cafam` |
 | 7 | AF-04 | `ceinfes` | aprobado | 12 | 0 | `/proyectos/ceinfes` |
 | 8 | AF-11 | `certificaciones` | aprobado | 15 | 0 | `#certificaciones` |
 | 9 | AF-05 | `cm-operaciones` | aprobado | 13 | 0 | `/proyectos/cm-operaciones` |
 | 10 | AF-19 | `como-aprendo` | aprobado | 18 | 0 | `#certificaciones` |
 | 11 | AF-01 | `como-trabajo` | aprobado | 29 | 0 | `#perfil` |
-| 12 | AF-14 | `fabric-en-la-practica` | aprobado | 22 | 0 | `#skills` |
+| 12 | AF-14 | `fabric-en-la-practica` | aprobado | 22 | 0 | `#skills-plataforma-de-datos` |
 | 13 | AF-10 | `fundacion-ctic` | aprobado | 25 | 0 | `/proyectos/fundacion-ctic` |
-| 14 | AF-17 | `gobierno-de-datos-y-de-ia` | aprobado | 27 | 0 | `#skills` |
+| 14 | AF-17 | `gobierno-de-datos-y-de-ia` | aprobado | 27 | 0 | `#skills-bi-y-decision` |
 | 15 | AF-03 | `inglopres` | aprobado | 9 | 0 | `/proyectos/inglopres` |
 | 16 | AF-24 | `las-investigaciones` | aprobado | 32 | 0 | `/vitrina/investigaciones` |
 | 17 | AF-13 | `lo-que-busco` | aprobado | 19 | 0 | `#contacto` |
 | 18 | AF-25 | `los-agentes-de-la-vitrina` | aprobado | 12 | 0 | `/vitrina/agentes` |
 | 19 | AF-23 | `los-tableros` | aprobado | 28 | 0 | `/vitrina/tableros` |
 | 20 | AF-02 | `origenes` | aprobado | 35 | 0 | `#trayectoria` |
-| 21 | AF-18 | `plataforma-y-despliegue` | aprobado | 18 | 0 | `#skills` |
-| 22 | AF-22 | `procesos-y-simulacion` | aprobado | 25 | 0 | `#skills` |
+| 21 | AF-18 | `plataforma-y-despliegue` | aprobado | 18 | 0 | `#skills-ingenieria` |
+| 22 | AF-22 | `procesos-y-simulacion` | aprobado | 25 | 0 | `#skills-procesos-y-simulacion` |
 | 23 | AF-16 | `rag-y-el-chat` | aprobado | 28 | 0 | `#vitrina` |
 | 24 | AF-07 | `transmilenio-cm` | aprobado | 18 | 0 | `/proyectos/transmilenio-cm` |
 | 25 | AF-09 | `vesting` | aprobado | 24 | 0 | `/proyectos/vesting` |
 
-**25 documentos · 541 subsecciones · 148.112 palabras · 0 `[CONFIRMAR]` por resolver · 25 aprobados.**
+**25 documentos · 541 subsecciones · 148.124 palabras · 0 `[CONFIRMAR]` por resolver · 25 aprobados.**
 
 <!-- tabla-de-documentos:fin -->
 

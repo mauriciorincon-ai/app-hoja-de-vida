@@ -189,6 +189,10 @@ el mensaje te llega al correo.
   **El icono va por la posición del grupo** (1.º IA, 2.º datos, 3.º BI, 4.º ingeniería): si
   reordenas los grupos en el YAML, los iconos se quedan en su posición. Un quinto grupo recibe un
   rombo. Sin porcentajes ni «nivel de dominio», a propósito.
+- **Cada grupo lleva un `id`** (desde 2026-09-26), por ejemplo `id: plataforma-de-datos`: es el
+  ancla de su tarjeta (`#skills-plataforma-de-datos`), a donde llevan las citas del chat de los
+  documentos de esa capacidad. Minúsculas, cifras y guiones, y **el mismo en español y en
+  inglés**: el build y un test lo exigen. Un grupo nuevo necesita su `id`.
 
 ### Estudios · desde la revisión post-S7
 
@@ -504,7 +508,11 @@ el mensaje te llega al correo.
 ### Idiomas · desde Sprint 001
 
 - **Qué hace:** la página completa existe en `/es` y `/en`, con el botón ES/EN en el encabezado.
-  Cambiar de idioma conserva la sección donde estaba el visitante.
+  Cambiar de idioma te deja **en el mismo punto de lectura**: el último hito que pasó por el borde
+  de arriba queda a la misma altura, aunque el inglés sea más corto.
+- **Corregido el 2026-09-26, en móvil:** en la Trayectoria, el año grande que se queda fijo a media
+  pantalla confundía la búsqueda de ese hito, y el que estabas leyendo se corría 42 a 87 px al
+  cambiar de idioma, más cuanto más abajo. Ahora se queda quieto (0–1 px) en móvil y en escritorio.
 - **Cómo se usa:** nada que configurar; el contenido sale de los dos YAML espejo.
 
 ### El ícono de la pestaña · desde el 2026-09-26
@@ -674,8 +682,25 @@ cuando una respuesta te suene rara: `AF-09` es `vesting.{es,en}.md`, y la tabla 
 `data/a-fondo/README.md` los lista todos. Un documento nuevo toma el siguiente número libre y
 **no se reutiliza** un código retirado. Lo que el chat cita del CV lleva `CV`, lo de `apps.yaml`
 lleva `APP` y lo de una ficha de la vitrina lleva `FT` (esa se corrige en origen, no aquí). El
-**destino** («Vesting», «Skills», «Agentes especializados») no lo escribes: sale del nombre del
-proyecto en el CV, de la etiqueta del menú o del nombre del frente o la pieza, en cada idioma.
+**destino** («Vesting», «Plataforma de datos», «Agentes especializados») no lo escribes: sale del
+nombre del proyecto en el CV, de la etiqueta del menú, del nombre de la tarjeta de Skills o del
+nombre del frente o la pieza, en cada idioma.
+
+**Una capacidad cita hacia SU tarjeta de Skills (desde 2026-09-26).** Cada tarjeta de Skills tiene
+su ancla, `#skills-<id>`, con el `id` que lleva el grupo en `data/cv.{es,en}.yaml` (el mismo en los
+dos idiomas; un test lo exige). Un documento sobre una capacidad apunta a la tarjeta, no a la
+sección entera: `ancla: "#skills-plataforma-de-datos"`. Los seis que decían `#skills` quedaron así:
+
+| Documento | Tarjeta |
+| --------- | ------- |
+| `fabric-en-la-practica` (AF-14) | `#skills-plataforma-de-datos` |
+| `gobierno-de-datos-y-de-ia` (AF-17) | `#skills-bi-y-decision` (ahí vive «Gobernanza y calidad de datos») |
+| `plataforma-y-despliegue` (AF-18) | `#skills-ingenieria` (Git, CI/CD: lo que despliego) |
+| `bi-que-se-adopta` (AF-20) | `#skills-bi-y-decision` |
+| `analitica-predictiva` (AF-21) | `#skills-ia-y-ml` |
+| `procesos-y-simulacion` (AF-22) | `#skills-procesos-y-simulacion` |
+
+Si prefieres otra tarjeta para alguno, se cambia esa línea del frontmatter en los dos idiomas.
 
 **Las comillas del `ancla` no son decoración:** sin ellas, un `#perfil` lo lee YAML como un
 comentario y el campo llega vacío. El build lo dice, pero es más fácil no tropezar.
@@ -687,7 +712,9 @@ comentario y el campo llega vacío. El build lo dice, pero es más fácil no tro
 
 El resto es prosa normal, en primera persona, en párrafos. **Cada subsección es un fragmento
 citable**: cuando el chat responde con ella, el chip `[n] AF-NN · destino` lleva al `ancla` del
-documento, y el título de la subsección queda en el tooltip del chip.
+documento, y el título de la subsección queda en el tooltip del chip. Si una respuesta usa **dos
+subsecciones del mismo documento**, van en un solo chip con los dos números, `[3, 4] AF-17 · BI &
+decisión`, y el tooltip lista los dos títulos (desde 2026-09-26; antes salían dos chips idénticos).
 
 **Lo que el build NO te deja publicar** (y te lo dice con archivo y campo):
 
@@ -846,3 +873,4 @@ chat hoy y cuáles traería con la base aprobada. Ese informe **se genera, no se
 | casos 2026-09-24 | **Ocho casos de estudio, uno por hito** (nacen C&M Consorcio, Ceinfes e Inglopres, pedidos el 2026-09-13), con la forma completa: tesis, banda de cifras, capítulos numerados, lección y navegación entre casos; cada cifra verificada contra su documento a fondo y el minimalismo medido. Bullets de la trayectoria enriquecidos y dos logros nuevos en la HOME. En el chat, «¿Algo no funciona? Avísame» en la puerta, con diagnóstico del servidor en el correo. |
 | mantenimiento 2026-09-24 | **Modo mantenimiento**: `MANTENIMIENTO=on` en Vercel (Production) + Redeploy pone todo el sitio en una página con el CV en PDF y el contacto, con un 503 temporal que Google entiende; `off` + Redeploy lo quita. Solo `on` lo enciende. |
 | revisión 2026-09-26 | En el PDF, el rótulo bajo tu dominio dice qué hay allá («En mi sitio encontrarás / CV interactivo · casos · chat»), centrado respecto al recuadro. La página de mantenimiento cambia de idioma y ofrece el CV en el otro idioma. **El ícono de la pestaña**: tus iniciales en la letra de los títulos, en lugar del triángulo de Vercel (`pnpm iconos`). |
+| cifras y citas 2026-09-26 | **Las cifras en su letra desde la primera visita**: la fuente mono se precarga (antes, la primera visita las pintaba en Arial). En el chat, **un chip por documento y destino** (`[3, 4] AF-17 · …`) y los seis documentos de capacidades **citan hacia su tarjeta de Skills** (`#skills-<id>`). En móvil, cambiar de idioma ya no corre el hito que estás leyendo. |

@@ -79,8 +79,20 @@ test.describe("chat — flujo estrella", () => {
     // El chip dice DE DÓNDE salió la frase y A DÓNDE lleva (decisión del
     // dueño, 2026-09-23): «[n] AF-09 · Vesting» o «[n] CV · Vesting», nunca
     // el título del fragmento. El título completo queda en el tooltip.
-    await expect(fuente).toHaveText(/^\[\d\] (AF-\d{2}|CV) · Vesting$/);
+    await expect(fuente).toHaveText(
+      /^\[\d+(, \d+)*\] (AF-\d{2}|CV) · Vesting$/,
+    );
     await expect(fuente).toHaveAttribute("title", /.+/);
+
+    // UN chip por documento y destino (2026-09-26): dos fragmentos del mismo
+    // documento pintaban dos chips idénticos («[3] AF-17 · Skills» «[4] AF-17
+    // · Skills»). Ahora van juntos, con sus dos números: «[3, 4] AF-17 · …».
+    const chips = (
+      await respuesta.getByTestId("chat-fuente").allTextContents()
+    ).map((t) => t.replace(/^\[[^\]]+\] /, ""));
+    expect(new Set(chips).size, `chips repetidos: ${chips.join(" | ")}`).toBe(
+      chips.length,
+    );
     await fuente.click();
     await expect(page).toHaveURL(/\/es\/proyectos\/vesting/, {
       timeout: 15_000,
@@ -113,7 +125,9 @@ test.describe("chat — flujo estrella", () => {
     // («Career», «Profile»…) o un nombre propio («Vesting»).
     const fuente = page.getByTestId("chat-fuente").first();
     await expect(fuente).toHaveAttribute("href", /^\/en/);
-    await expect(fuente).toHaveText(/^\[\d\] (AF-\d{2}|CV|APP|FT) · .+$/);
+    await expect(fuente).toHaveText(
+      /^\[\d+(, \d+)*\] (AF-\d{2}|CV|APP|FT) · .+$/,
+    );
     await expect(fuente).not.toHaveText(/In depth|A fondo/);
   });
 
