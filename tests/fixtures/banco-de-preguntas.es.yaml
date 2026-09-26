@@ -211,6 +211,9 @@ preguntas:
       agentes que he usado» (n8n en Vesting). El 2026-09-26 el dueño sumó el
       ecosistema de LangChain en la Fundación CTIC, que ahora dicen esa
       subsección, su documento de CTIC y la tarjeta de skills.
+  - pregunta: "¿Ha trabajado con n8n?"
+    espera: [agentes-en-produccion, fundacion-ctic, skills]
+    familia: ia-y-agentes
   - pregunta: "¿Ha usado LangChain o LangGraph?"
     espera: [fundacion-ctic, agentes-en-produccion, skills]
     familia: ia-y-agentes

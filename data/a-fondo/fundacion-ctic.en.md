@@ -77,8 +77,8 @@ for administrative and clinical leaders, into data cleaning, integration and sta
 processes, and into process-based dashboards for tracking key indicators. Artificial intelligence
 applications and agents make it possible to turn that information and the organizational
 knowledge into new capabilities for assistance and execution. The agent frameworks I have worked
-with here are those of the LangChain ecosystem: LangChain, LangGraph, LangSmith and Langflow.
-Enterprise architecture finally connects those solutions with the institution's processes,
+with here are n8n, which was already the base of the agents at Vesting, and those of the LangChain
+ecosystem: LangChain, LangGraph, LangSmith and Langflow. Enterprise architecture finally connects those solutions with the institution's processes,
 controls, responsibilities and objectives.
 
 The four functions my CV describes for this position are, in that order, analytics for

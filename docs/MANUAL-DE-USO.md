@@ -208,10 +208,11 @@ el mensaje te llega al correo.
 - **Las herramientas de hoy (revisión 2026-09-26, pedido tuyo):** nueve grupos, con
   «Agentes e IA generativa» y «Desarrollo asistido por IA» delante, para los roles de ingeniería
   de IA. Tres cosas que conviene recordar:
-  - **LangChain, LangGraph, LangSmith y Langflow** van como usados **en la Fundación CTIC**. Lo
-    dicen también dos documentos del chat (`fundacion-ctic` y la subsección de frameworks de
+  - **LangChain, LangGraph, LangSmith y Langflow** van como usados **en la Fundación CTIC**, y
+    **n8n en Vesting y en CTIC** (va junto a ellos, al comienzo de la tarjeta). Lo dicen también
+    dos documentos del chat (`fundacion-ctic` y la subsección de frameworks de
     `agentes-en-produccion`), para que el chat conteste «¿qué frameworks de agentes ha usado?»
-    con eso y no solo con n8n.
+    con todo eso y no solo con n8n en Vesting.
   - **Big data multiplataforma** abre con el chip «Planeador de Fabric, Databricks y Snowflake —
     en preparación». **Cuando el planeador llegue a la vitrina**, ese chip se cambia por uno que
     remita a él (y cuando llegue la app de LangChain, igual). Es la misma regla que «Google

@@ -14,11 +14,15 @@ corpus del chat y las 32 piezas de la vitrina. Se le entregó una lista en cuatr
 | -------------------------------- | --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | A. Ya demostradas y ausentes     | Claude Code, MCP, Codex, Antigravity, el stack de este sitio, Fabric por dentro, Pyomo… | **todas** (con evidencia en la vitrina o en el corpus)                                                                                                                          |
 | B. Las que dijo conocer          | LangChain, «GraphChain», LangSmith, Langflow                                            | **usadas en la Fundación CTIC**; «GraphChain» es **LangGraph**                                                                                                                  |
+| (después, ya con el PR abierto)  | n8n, que ya estaba en la tarjeta pero al final                                          | **«la domino, es de Vesting y CTIC»**: sube junto a las de LangChain y el corpus suma CTIC                                                                                      |
 | C. Candidatas para AI Engineer   | frameworks, recuperación, plataformas, low-code, asistentes de código, gobierno         | Agent Framework, Claude Agent SDK, Azure AI Search, Azure OpenAI, Hugging Face, Ollama, Copilot Studio, Power Automate, Power Apps, Cursor, GitHub Copilot, Gemini CLI, Purview |
 | D. Para el planeador de big data | Databricks, Snowflake, dbt, Iceberg, Airflow, PySpark y lo de Fabric que no aparecía    | **«asegúrate que estas entren»**                                                                                                                                                |
 
 «GraphChain» no existe con ese nombre: se le preguntó y eligió LangGraph. El grupo A no lo
-mencionó en su respuesta: se le preguntó y dijo que entran todas.
+mencionó en su respuesta: se le preguntó y dijo que entran todas. Con el PR ya abierto, el dueño
+echó de menos n8n: estaba, pero era el chip 13 de 15 y no se veía. Subió al lado de las de
+LangChain, y los dos documentos del corpus dicen ahora que también lo usa en la Fundación CTIC
+(hasta entonces el chat solo lo conocía de Vesting). El banco suma «¿Ha trabajado con n8n?».
 
 ## 2. Lo que se construyó
 
@@ -111,6 +115,6 @@ así que la aprobación queda registrada aquí (compromiso del PR #49).
 
 ## Verificación
 
-`pnpm test` **49 archivos, 1335 tests** (18 preguntas nuevas del banco, 3 del icono) ·
+`pnpm test` **49 archivos, 1337 tests** (20 preguntas nuevas del banco, 3 del icono) ·
 `typecheck` y `lint` limpios · build de producción · los dos PDF en 2 páginas · e2e de la HOME y
 de reduced motion en verde en los dos perfiles · capturas en `muestras/2026-09-26-herramientas/`.

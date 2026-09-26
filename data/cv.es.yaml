@@ -804,8 +804,8 @@ skills:
   # roles de ingeniería de IA. Cada grupo tiene SU icono, buscado por `id` en
   # src/components/home/skills-iconos.tsx: un grupo nuevo sin dibujo rompe un
   # test. Los ids viejos no cambian: son el destino de las citas del chat.
-  # Las herramientas de LangChain las usó en la Fundación CTIC (el dueño,
-  # 2026-09-26); el grupo multiplataforma es el planeador que está preparando.
+  # Las herramientas de LangChain y n8n las usó en la Fundación CTIC (el dueño,
+  # 2026-09-26; n8n ya era la base de Vesting); el grupo multiplataforma es el planeador que está preparando.
   - id: agentes-e-ia-generativa
     grupo: "Agentes e IA generativa"
     items:
@@ -813,6 +813,7 @@ skills:
       - "LangGraph"
       - "LangSmith"
       - "Langflow"
+      - "n8n"
       - "Microsoft Agent Framework"
       - "Claude Agent SDK"
       - "MCP (Model Context Protocol)"
@@ -821,7 +822,6 @@ skills:
       - "Hugging Face"
       - "Ollama"
       - "Copilot Studio"
-      - "n8n"
       - "Vercel AI SDK, multiproveedor"
       - "RAG, guardrails y circuit breaker — el chat de este sitio"
   - id: plataforma-de-datos

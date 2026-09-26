@@ -189,9 +189,9 @@ continuous evaluation against real behavior.
 n8n was a fundamental base for automating and coordinating the agents' flows at Vesting. It made
 it possible to connect services, organize work sequences, execute rules and integrate different
 components within processes that needed to operate consistently. That is why it appears among my
-skills today: not as a tool I once saw, but as the base on which 27 agents ran. Outside Vesting,
-at Fundación CTIC, the agent frameworks I have worked with are those of the LangChain ecosystem:
-LangChain, LangGraph, LangSmith and Langflow.
+skills today: not as a tool I once saw, but as the base on which 27 agents ran. At Fundación
+CTIC I still work with n8n and, on top of it, with the agent frameworks of the LangChain
+ecosystem: LangChain, LangGraph, LangSmith and Langflow.
 
 However, using n8n did not mean the architecture was reduced to a collection of visual flows.
 The business value was not in connecting nodes, but in correctly defining what information came

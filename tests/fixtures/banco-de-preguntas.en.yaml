@@ -167,6 +167,9 @@ preguntas:
   - pregunta: "Which agent frameworks has he used?"
     espera: [agentes-en-produccion, fundacion-ctic, skills]
     familia: ia-y-agentes
+  - pregunta: "Has he worked with n8n?"
+    espera: [agentes-en-produccion, fundacion-ctic, skills]
+    familia: ia-y-agentes
   - pregunta: "Has he used LangChain or LangGraph?"
     espera: [fundacion-ctic, agentes-en-produccion, skills]
     familia: ia-y-agentes
