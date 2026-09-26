@@ -231,3 +231,89 @@ test.describe("el ícono de la pestaña", () => {
     });
   }
 });
+
+test.describe("las cifras, en su letra desde la primera visita", () => {
+  // Hasta 2026-09-26 JetBrains Mono iba sin preload: el navegador la pedía
+  // recién cuando el CSS la necesitaba, llegaba tarde a la ventana de
+  // `display: optional`, y la PRIMERA visita —la única de un reclutador—
+  // pintaba las cifras en Arial, el fallback de next/font (30 de 30 cargas en
+  // frío, con y sin red limitada). Aquí se le pregunta al motor qué fuente usó
+  // DE VERDAD para pintar el nodo (CDP), no qué pide el CSS. Cada test abre un
+  // contexto nuevo: caché vacía.
+  const casos: [string, string][] = [
+    ["/es", "#logros p.font-mono"],
+    ["/es/proyectos/vesting", "p.font-mono.tabular-nums"],
+    ["/es/cv", "main .font-mono"],
+  ];
+  for (const [ruta, selector] of casos) {
+    test(`${ruta}: la primera visita pinta las cifras en JetBrains Mono`, async ({
+      page,
+    }, testInfo) => {
+      test.skip(
+        testInfo.project.name !== "chromium",
+        "CDP: basta con Chromium de escritorio",
+      );
+      await page.goto(ruta);
+      await page.locator(selector).first().scrollIntoViewIfNeeded();
+      const cdp = await page.context().newCDPSession(page);
+      await cdp.send("DOM.enable");
+      await cdp.send("CSS.enable");
+      const { root } = await cdp.send("DOM.getDocument", { depth: -1 });
+      const { nodeId } = await cdp.send("DOM.querySelector", {
+        nodeId: root.nodeId,
+        selector,
+      });
+      const { fonts } = await cdp.send("CSS.getPlatformFontsForNode", {
+        nodeId,
+      });
+      expect(
+        fonts.map((f) => f.familyName),
+        `${ruta} pintó ${selector} con otra fuente`,
+      ).toEqual(["JetBrains Mono"]);
+    });
+  }
+});
+
+test.describe("una cita del chat aterriza en su tarjeta de Skills", () => {
+  // 2026-09-26: seis documentos «a fondo» llevan a una tarjeta de Skills
+  // (`#skills-<id>`), no a la sección entera. La tarjeta entra con liftIn (70
+  // px abajo y encogida): si el salto llega antes que la animación, apunta a la
+  // posición de ARRANQUE, y al subir el título quedaba BAJO el encabezado.
+  // Se mide cuando la animación TERMINÓ: a mitad de camino la tarjeta aún está
+  // abajo y la prueba pasaría en falso.
+  test("/es#skills-bi-y-decision deja el título de la tarjeta a la vista", async ({
+    page,
+  }) => {
+    await page.goto("/es#skills-bi-y-decision");
+    const tarjeta = page.locator("#skills-bi-y-decision");
+    // Terminó cuando la tarjeta es del todo visible Y su título dejó de
+    // moverse entre dos lecturas. No sirve mirar el `transform`: el contenedor
+    // lleva una perspectiva fija que nunca vuelve a `none`.
+    let previo = "";
+    await expect
+      .poll(
+        async () => {
+          const ahora = await tarjeta.evaluate((el) => {
+            let opacidad = 1;
+            for (let n: Element | null = el; n; n = n.parentElement) {
+              opacidad *= Number(getComputedStyle(n).opacity);
+            }
+            const y = el.querySelector("h3")!.getBoundingClientRect().y;
+            return `${opacidad.toFixed(2)}|${y.toFixed(1)}`;
+          });
+          const quieta = ahora === previo && ahora.startsWith("1.00|");
+          previo = ahora;
+          return quieta;
+        },
+        { intervals: [250], timeout: 10_000 },
+      )
+      .toBe(true);
+    const encabezado = await page.locator("header").first().boundingBox();
+    const titulo = await tarjeta.locator("h3").boundingBox();
+    expect(titulo && encabezado, "sin caja").toBeTruthy();
+    expect(
+      titulo!.y,
+      "el título de la tarjeta quedó bajo el encabezado",
+    ).toBeGreaterThanOrEqual(encabezado!.y + encabezado!.height);
+  });
+});

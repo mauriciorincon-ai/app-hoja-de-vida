@@ -796,7 +796,8 @@ certificaciones:
     logoAlto: 16
 
 skills:
-  - grupo: "IA & ML"
+  - id: ia-y-ml
+    grupo: "IA & ML"
     items:
       - "Azure AI"
       - "RAG y agentes — en construcción pública (ver showcase)"
@@ -805,7 +806,8 @@ skills:
       - "TensorFlow"
       - "Scikit-Learn"
       - "NLP"
-  - grupo: "Plataforma de datos"
+  - id: plataforma-de-datos
+    grupo: "Plataforma de datos"
     items:
       - "Microsoft Fabric"
       - "Direct Lake"
@@ -816,7 +818,8 @@ skills:
       - "Power Query"
       - "DAX"
       - "Google Cloud — en exploración"
-  - grupo: "BI & decisión"
+  - id: bi-y-decision
+    grupo: "BI & decisión"
     items:
       - "Power BI"
       - "Data storytelling"
@@ -825,13 +828,15 @@ skills:
       - "Shiny (R)"
       - "Tableau"
       - "Looker Studio"
-  - grupo: "Ingeniería"
+  - id: ingenieria
+    grupo: "Ingeniería"
     items:
       - "Python"
       - "Git/GitHub"
       - "CI/CD — este sitio corre con ello"
   # a fondo v2 (2026-09-20, D2/C66): la raíz industrial entra a skills con sus métodos.
-  - grupo: "Procesos y simulación"
+  - id: procesos-y-simulacion
+    grupo: "Procesos y simulación"
     items:
       - "BPMN (Bizagi)"
       - "Simulación de eventos discretos (FlexSim)"
@@ -839,7 +844,8 @@ skills:
       - "Kanban y Scrum"
   # Revisión post-S8, bloque D: el quinto grupo son las habilidades blandas,
   # sacadas del corpus «Mi forma de trabajar» (decisión del dueño, 2026-09-13).
-  - grupo: "Cómo trabajo"
+  - id: como-trabajo
+    grupo: "Cómo trabajo"
     items:
       - "Liderazgo de equipos de hasta 20 personas"
       - "Comunicación con junta directiva y dirección"

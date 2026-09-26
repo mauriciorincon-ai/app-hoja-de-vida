@@ -16,8 +16,7 @@ import { SITE_URL } from "@/lib/site";
 import "../globals.css";
 
 // Presupuesto LCP: la webfont del titular compite con el primer paint.
-// Fraunces va en UN peso estático (todo el display usa 500) y JetBrains Mono
-// sin preload (pinta métricas/fechas, casi todo below-the-fold).
+// Fraunces va en UN peso estático (todo el display usa 500).
 const fraunces = Fraunces({
   variable: "--font-fraunces",
   subsets: ["latin"],
@@ -37,12 +36,15 @@ const inter = Inter({
 // display optional (patrón ADR-006, como Inter): /cv usa la mono de forma
 // estructural (headings, contacto, periodos) y su swap tardío reacomodaba la
 // página entera (CLS 0.125 en CI). Con optional el fallback métrico-ajustado
-// no desplaza nada; visitas con caché ven JetBrains Mono siempre.
+// no desplaza nada.
+// CON preload (2026-09-26): sin él, la fuente se pedía recién cuando el CSS la
+// necesitaba, llegaba tarde a la ventana de optional, y la PRIMERA visita
+// pintaba las cifras de la HOME, de los casos y de /cv en Arial (el fallback
+// de next/font): medido 30 de 30 cargas en frío, con y sin red limitada.
 const jetbrains = JetBrains_Mono({
   variable: "--font-jetbrains",
   subsets: ["latin"],
   display: "optional",
-  preload: false,
 });
 
 export function generateStaticParams() {

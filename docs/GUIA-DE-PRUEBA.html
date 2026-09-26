@@ -316,7 +316,7 @@
     <div class="pagina">
       <header>
         <p class="eyebrow">
-          CV Viva · Guía de prueba viva y acumulativa · v9.8 · rótulo del dominio, idiomas en mantenimiento y el ícono + el modo mantenimiento + el dominio en el PDF + los ocho casos de estudio completos + la cita dice de dónde sale y a dónde lleva + la cita conserva la conversación + el corpus alineado + chat/registro + a fondo v2 (el
+          CV Viva · Guía de prueba viva y acumulativa · v9.9 · las cifras en su letra y las citas del chat + rótulo del dominio, idiomas en mantenimiento y el ícono + el modo mantenimiento + el dominio en el PDF + los ocho casos de estudio completos + la cita dice de dónde sale y a dónde lleva + la cita conserva la conversación + el corpus alineado + chat/registro + a fondo v2 (el
           detalle) + revisión post-S8 · 2026-09-12
         </p>
         <h1>Guía de prueba</h1>
@@ -512,6 +512,18 @@
               ><span class="minimo">⭐ mínimo</span></label
             >
           </li>
+          <li data-origen="nuevo">
+            <input type="checkbox" id="a8" /><label for="a8"
+              >En esa misma <strong>ventana privada</strong> (primera visita, sin
+              caché), baja a Logros: las cifras grandes (10, 27, 42…) salen en
+              la letra mono del sitio —ceros con punto, trazo parejo—, no en una
+              letra redonda de sistema. Igual en la banda de cifras de un caso y
+              en <code>/cv</code>. Hasta el 2026-09-26 la primera visita las
+              pintaba en Arial. Con una conexión muy lenta puede salir la de
+              respaldo, a propósito: la página no se mueve por esperar la fuente.
+              <span class="origen origen-nuevo">Nuevo · cifras y citas</span></label
+            >
+          </li>
         </ul>
         <div class="reportame">
           <p>
@@ -539,9 +551,11 @@
               texto de Perfil): TODO el contenido cambia de idioma y la ventana
               se queda <strong>exactamente donde estabas</strong> — el mismo
               hito a la misma altura, sin saltar al borde de la sección ni al
-              inicio, aunque el inglés sea más corto.
+              inicio, aunque el inglés sea más corto. <strong>Hazlo también en
+              el celular</strong>, leyendo un hito de la mitad para abajo de la
+              Trayectoria: hasta el 2026-09-26 ahí el hito se corría 42–87 px.
               <span class="origen origen-mejorado"
-                >Mejorado · post-S8 (bloque B)</span
+                >Mejorado · cifras y citas</span
               ></label
             >
           </li>
@@ -822,8 +836,15 @@
               página, la conversación sigue ahí</strong> — la cita lleva a la
               evidencia y te devuelve. (Ambas cosas las encontraste tú en
               producción el 2026-09-23: un clic recargaba y borraba todo, y el
-              chip no decía a dónde iba.)
-              <span class="origen origen-mejorado">Mejorado · cita con destino</span></label
+              chip no decía a dónde iba.) <strong>Desde el 2026-09-26:</strong>
+              si la respuesta usa dos partes del mismo documento, van en
+              <strong>un solo chip</strong> con los dos números
+              (<code>[3, 4] AF-17 · BI &amp; decisión</code>), nunca dos chips
+              iguales; y una pregunta sobre una capacidad (Fabric, BI, gobierno
+              de datos, analítica predictiva, procesos) lleva a
+              <strong>su tarjeta</strong> de Skills, con el título a la vista
+              bajo el encabezado, no a la sección entera.
+              <span class="origen origen-mejorado">Mejorado · cifras y citas</span></label
             >
           </li>
           <li data-origen="heredada">
@@ -1999,6 +2020,16 @@
           <summary>Historial de la guía</summary>
           <ul>
             <li>
+              <strong>v9.9 · las cifras en su letra y las citas del chat ·
+              2026-09-26:</strong> la fuente mono se precarga (la primera visita
+              pintaba las cifras en Arial); un chip por documento y destino en
+              el chat; los seis documentos de capacidades citan hacia su tarjeta
+              de Skills; y en móvil el cambio de idioma ya no corre el hito que
+              se lee. a8 nueva; f1 y b1 mejoradas. Sin ⭐ nuevas: lo nuevo lo
+              respalda la CI. Ninguna prueba eliminada. Prefijo de casillas
+              <code>cifras-y-citas</code>.
+            </li>
+            <li>
               <strong>v9.8 · rótulo del dominio, idiomas en mantenimiento y el
               ícono · 2026-09-26:</strong> tras verlo en producción, el dueño
               pidió que el rótulo bajo el dominio del PDF diga qué se encuentra
@@ -2282,7 +2313,7 @@
       (function () {
         // NS VERSIONADO POR SPRINT: al publicar la guía de un sprint nuevo se cambia
         // s007c — así una regresión sin correr no aparece marcada por la versión anterior.
-        var NS = "guia-hoja-de-vida:rotulo-idiomas-icono:";
+        var NS = "guia-hoja-de-vida:cifras-y-citas:";
         var casillas = Array.prototype.slice.call(
           document.querySelectorAll('input[type="checkbox"]'),
         );

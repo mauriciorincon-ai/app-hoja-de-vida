@@ -1,6 +1,6 @@
 # Banco de preguntas — el corpus medido con preguntas de afuera
 
-> **Generado por `pnpm corpus:informe` el 2026-09-25. No se edita a mano.**
+> **Generado por `pnpm corpus:informe` el 2026-09-26. No se edita a mano.**
 > Banco: `tests/fixtures/banco-de-preguntas.es.yaml` — **136 preguntas** de 10 familias, 15 preguntas ajenas y 3 huecos declarados.
 >
 > **HOY** = el índice publicado, tal como está en disco: **1513 fragmentos** (los 24 documentos siguen en `borrador`, así que el chat todavía no ve nada de ellos).
