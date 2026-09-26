@@ -1,6 +1,5 @@
 import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
-import { Fraunces, Inter, JetBrains_Mono } from "next/font/google";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import {
   getMessages,
@@ -13,39 +12,8 @@ import { MotionProvider } from "@/components/motion/motion-provider";
 import { routing } from "@/i18n/routing";
 import { enMantenimiento } from "@/lib/mantenimiento";
 import { SITE_URL } from "@/lib/site";
+import { fraunces, inter, jetbrains } from "../fuentes";
 import "../globals.css";
-
-// Presupuesto LCP: la webfont del titular compite con el primer paint.
-// Fraunces va en UN peso estático (todo el display usa 500).
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
-  subsets: ["latin"],
-  weight: "500",
-  display: "swap",
-});
-
-// display optional: si Inter no llega en el primer instante, la visita usa el
-// fallback métrico-ajustado (sin swap tardío — el repaint del swap re-registra
-// el LCP). Visitas con caché ven Inter siempre. Ver ADR-006.
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  display: "optional",
-});
-
-// display optional (patrón ADR-006, como Inter): /cv usa la mono de forma
-// estructural (headings, contacto, periodos) y su swap tardío reacomodaba la
-// página entera (CLS 0.125 en CI). Con optional el fallback métrico-ajustado
-// no desplaza nada.
-// CON preload (2026-09-26): sin él, la fuente se pedía recién cuando el CSS la
-// necesitaba, llegaba tarde a la ventana de optional, y la PRIMERA visita
-// pintaba las cifras de la HOME, de los casos y de /cv en Arial (el fallback
-// de next/font): medido 30 de 30 cargas en frío, con y sin red limitada.
-const jetbrains = JetBrains_Mono({
-  variable: "--font-jetbrains",
-  subsets: ["latin"],
-  display: "optional",
-});
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));

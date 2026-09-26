@@ -316,7 +316,7 @@
     <div class="pagina">
       <header>
         <p class="eyebrow">
-          CV Viva · Guía de prueba viva y acumulativa · v9.9 · las cifras en su letra y las citas del chat + rótulo del dominio, idiomas en mantenimiento y el ícono + el modo mantenimiento + el dominio en el PDF + los ocho casos de estudio completos + la cita dice de dónde sale y a dónde lleva + la cita conserva la conversación + el corpus alineado + chat/registro + a fondo v2 (el
+          CV Viva · Guía de prueba viva y acumulativa · v9.10 · el ícono navy y el 404 de la raíz + las cifras en su letra y las citas del chat + rótulo del dominio, idiomas en mantenimiento y el ícono + el modo mantenimiento + el dominio en el PDF + los ocho casos de estudio completos + la cita dice de dónde sale y a dónde lleva + la cita conserva la conversación + el corpus alineado + chat/registro + a fondo v2 (el
           detalle) + revisión post-S8 · 2026-09-12
         </p>
         <h1>Guía de prueba</h1>
@@ -499,16 +499,26 @@
               ><span class="minimo">⭐ mínimo</span></label
             >
           </li>
-          <li data-origen="nuevo" data-minimo>
+          <li data-origen="mejorado" data-minimo>
             <input type="checkbox" id="a7" /><label for="a7"
-              >⭐ <strong>El ícono de la pestaña.</strong> Abre tu dominio en una
-              <strong>ventana privada</strong> (el navegador guarda el ícono
-              viejo mucho tiempo): la pestaña muestra <strong>HR</strong> en la
-              letra de los títulos, no el triángulo de Vercel. Si tu navegador
-              está en tema oscuro, las letras salen claras. En el iPhone,
-              «Compartir → Agregar a inicio» pone HR sobre fondo papel. ¿Te
-              gusta cómo se ve?
-              <span class="origen origen-nuevo">Nuevo · ícono</span
+              >⭐ <strong>El ícono de la pestaña.</strong> Los navegadores
+              guardan el ícono viejo mucho tiempo, así que primero se vacía esa
+              memoria. En <strong>Chrome o Brave</strong>: abre tu dominio y
+              recarga con Cmd+Shift+R. En <strong>Safari</strong>, que es el más
+              terco y donde la ventana privada no siempre basta: ciérralo del
+              todo (Cmd+Q); en Finder, Cmd+Shift+G, pega
+              <code>~/Library/Safari/Favicon Cache</code> y manda a la papelera
+              todo lo que hay dentro; repite con
+              <code>~/Library/Safari/Touch Icons Cache</code>; abre Safari y tu
+              dominio. La pestaña muestra <strong>HR blanco sobre un cuadrito
+              navy</strong>: el mismo azul y la misma letra del recuadro de tu
+              dominio en el PDF (la opción A), no el triángulo de Vercel. Con
+              tema claro u oscuro se ve igual. En el iPhone, «Compartir → Agregar
+              a inicio» pone la misma loseta navy. Y arriba a la izquierda de
+              cada página, delante de tu nombre, está la misma loseta: tócala
+              desde <code>/cv</code> o un caso y vuelves al inicio. ¿Es la que
+              querías?
+              <span class="origen origen-mejorado">Mejorado · 404 de la raíz</span
               ><span class="minimo">⭐ mínimo</span></label
             >
           </li>
@@ -522,6 +532,19 @@
               pintaba en Arial. Con una conexión muy lenta puede salir la de
               respaldo, a propósito: la página no se mueve por esperar la fuente.
               <span class="origen origen-nuevo">Nuevo · cifras y citas</span></label
+            >
+          </li>
+          <li data-origen="nuevo">
+            <input type="checkbox" id="a9" /><label for="a9"
+              >Escribe en la barra tu dominio seguido de
+              <code>/favicon.png</code>, un archivo que no existe: sale la
+              página <strong>404 en español y en inglés</strong>, con un botón a
+              cada HOME, en la letra del sitio. Hasta el 2026-09-26 esa dirección
+              (y cualquier otra con punto que no existiera) respondía
+              <strong>error 500</strong>. Y tu dominio seguido de
+              <code>/apple-touch-icon.png</code> muestra tus iniciales sobre
+              fondo papel: es la dirección que Safari pide por su cuenta.
+              <span class="origen origen-nuevo">Nuevo · 404 de la raíz</span></label
             >
           </li>
         </ul>
@@ -2032,6 +2055,22 @@
           <summary>Historial de la guía</summary>
           <ul>
             <li>
+              <strong>v9.10 · el ícono navy y el 404 de la raíz ·
+              2026-09-26:</strong> el ícono pasa a la opción A que el dueño había
+              elegido: HR blanco sobre el navy del PDF (el primer corte salió
+              con las letras solas en Fraunces, por un pedido mal leído), y
+              también es el botón de inicio arriba a la izquierda. Y el
+              dueño seguía viendo el triángulo de
+              Vercel en la pestaña. El servidor ya entregaba HR (verificado byte
+              a byte): era la caché de íconos de Safari, que a7 ahora enseña a
+              vaciar. Al revisarlo apareció un error real: todo archivo
+              inexistente de la raíz, incluido <code>/apple-touch-icon.png</code>
+              que Safari pide solo, respondía 500. Ahora es un 404 bilingüe, y
+              las rutas clásicas del ícono de iOS sirven las iniciales. a9 nueva;
+              a7 mejorada. Sin ⭐ nuevas: lo nuevo lo respalda la CI. Ninguna
+              prueba eliminada. Prefijo de casillas <code>404-de-la-raiz</code>.
+            </li>
+            <li>
               <strong>v9.9 · las cifras en su letra y las citas del chat ·
               2026-09-26:</strong> la fuente mono se precarga (la primera visita
               pintaba las cifras en Arial); un chip por documento y destino en
@@ -2326,7 +2365,7 @@
       (function () {
         // NS VERSIONADO POR SPRINT: al publicar la guía de un sprint nuevo se cambia
         // s007c — así una regresión sin correr no aparece marcada por la versión anterior.
-        var NS = "guia-hoja-de-vida:cifras-y-citas:";
+        var NS = "guia-hoja-de-vida:404-de-la-raiz:";
         var casillas = Array.prototype.slice.call(
           document.querySelectorAll('input[type="checkbox"]'),
         );

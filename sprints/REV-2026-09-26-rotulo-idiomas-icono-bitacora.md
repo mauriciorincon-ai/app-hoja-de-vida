@@ -65,6 +65,9 @@ mantenimiento, da 404.
 
 ## 3. El ícono
 
+> **Corregido el mismo día** (`sprints/REV-2026-09-26-404-de-la-raiz-bitacora.md` §4): el dueño
+> sí había elegido, la opción A. Leí mal su respuesta. Lo que sigue describe el primer corte.
+
 El que había, `src/app/favicon.ico`, era el de la plantilla de `create-next-app`: el triángulo de
 Vercel, ahí desde el Sprint 001. Presenté tres opciones y el dueño eligió ninguna: _«la verdad no
 tengo un logo, así que pon solo las letras HR en el estilo de letra que tenemos en la página»_.
@@ -72,11 +75,11 @@ tengo un logo, así que pon solo las letras HR en el estilo de letra que tenemos
 **Qué quedó.** «HR» en Fraunces Medium, la letra de los títulos, en tres archivos que Next enlaza
 solo, sin tocar el layout:
 
-| Archivo                  | Qué es                                                             | Quién lo ve                              |
-| ------------------------ | ------------------------------------------------------------------ | ---------------------------------------- |
-| `src/app/icon.svg`       | las letras solas; tinta con tema claro, papel con el oscuro        | Chrome, Firefox, Edge, Safari            |
-| `src/app/favicon.ico`    | 16 · 32 · 48 px sobre una loseta de papel redondeada               | navegadores viejos, Google, `/favicon.ico` |
-| `src/app/apple-icon.png` | 180 px a sangre, papel con letras de tinta (iOS redondea)          | la pantalla de inicio del iPhone         |
+| Archivo                  | Qué es                                                      | Quién lo ve                                |
+| ------------------------ | ----------------------------------------------------------- | ------------------------------------------ |
+| `src/app/icon.svg`       | las letras solas; tinta con tema claro, papel con el oscuro | Chrome, Firefox, Edge, Safari              |
+| `src/app/favicon.ico`    | 16 · 32 · 48 px sobre una loseta de papel redondeada        | navegadores viejos, Google, `/favicon.ico` |
+| `src/app/apple-icon.png` | 180 px a sangre, papel con letras de tinta (iOS redondea)   | la pantalla de inicio del iPhone           |
 
 El .ico y el .png llevan loseta porque no saben de qué color es la pestaña: unas letras de tinta
 sobre una pestaña oscura desaparecen. El SVG sí lo sabe (`prefers-color-scheme`).
