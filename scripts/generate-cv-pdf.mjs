@@ -285,7 +285,18 @@ function estilo(doc, fuente, tamano, color) {
  * eyebrow se estrechan para no tocarlo. Es texto sobre un rectángulo, no una
  * imagen: el ATS lo lee. Sin dominio, la cabecera es la de siempre.
  */
-const DOMINIO = { tamano: 14, padX: 12, padY: 8, radio: 4, separacion: 16 };
+const DOMINIO = {
+  tamano: 14,
+  padX: 12,
+  padY: 8,
+  radio: 4,
+  separacion: 16,
+  // Aire entre el rótulo gris y la línea de contacto (2026-09-26, pedido del
+  // dueño: «el link de GitHub está muy pegado»). Eran 4 pt; con los dos
+  // correos la línea de contacto llega hasta debajo del rótulo y se veía
+  // apretada.
+  aireDebajo: 10,
+};
 
 /**
  * Dónde empieza una línea CENTRADA bajo el bloque del dominio (2026-09-26,
@@ -361,7 +372,7 @@ function cabecera(doc, cv, sitio, labels) {
       `${origen}${labels.ruta}`,
       labels.rotuloSitio.map(ansi),
     );
-    y = Math.max(y, bloque.fondo + 4);
+    y = Math.max(y, bloque.fondo + DOMINIO.aireDebajo);
   }
 
   const separador = "   ·   ";
