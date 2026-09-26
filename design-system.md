@@ -241,6 +241,11 @@ un `<text>` caería a otra letra.
   `favicon.ico` (16/32/48) redondeados; `apple-icon.png` (180) a sangre, porque iOS redondea.
 - **Sin variante oscura:** la loseta trae su propio fondo y se lee igual en una pestaña clara y en
   una oscura.
+- **En el encabezado** (desde el mismo día, a pedido del dueño): la loseta a 28 px (`size-7`)
+  reemplaza al glifo ◆ delante del nombre, y el par es el enlace al inicio. Decorativa
+  (`aria-hidden`): el enlace se nombra con el nombre. La pinta `src/components/marca-hr.tsx` desde
+  `src/lib/marca-hr.ts`, que escribe `pnpm iconos` con el mismo trazo, caja y colores que
+  `icon.svg`. El ◆ sigue siendo el glifo editorial de evidencia en el resto del sitio.
 
 El color sale de `scripts/generate-cv-pdf.mjs`: cambiar el navy del PDF es correr `pnpm iconos`, y
 `tests/unit/iconos.test.ts` falla si quedaron desfasados. Tarjeta:
@@ -411,7 +416,8 @@ cifra `clamp(3.5rem,8vw,4.75rem)`; tres columnas dejaban dos huérfanos.
 
 Scroll editorial de una columna, mobile-first (360–420px prioridad, desktop ≥1024px).
 Ancho de lectura narrativa ≤ `760px`; secciones full-bleed solo para timeline y showcase.
-Header slim sticky con anchors + toggle ES/EN. Footer = contacto. Nada de sidebars ni rails.
+Header slim sticky con anchors + toggle ES/EN; a la izquierda, la marca HR y el nombre llevan al
+inicio. Footer = contacto. Nada de sidebars ni rails.
 
 ## Accesibilidad (AA como piso)
 

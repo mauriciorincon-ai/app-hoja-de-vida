@@ -5,6 +5,7 @@ import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { NAVY } from "../../scripts/generate-cv-pdf.mjs";
 import { COLORES, trazoDe } from "../../scripts/generate-icons.mjs";
+import { MARCA_HR } from "../../src/lib/marca-hr";
 
 /**
  * EL ÍCONO DEL SITIO (2026-09-26). Hasta ese día la pestaña del dominio
@@ -17,6 +18,7 @@ import { COLORES, trazoDe } from "../../scripts/generate-icons.mjs";
  *    lo mira, y un `<text>` caería a otra letra donde no haya Helvetica;
  *  - el fondo es el `NAVY` vigente del PDF y las letras van en blanco;
  *  - el .ico trae los tres tamaños de pestaña y el de iOS mide lo que iOS pide.
+ *  - el botón de inicio del encabezado es la MISMA loseta (`src/lib/marca-hr.ts`).
  * Los archivos los escribe `pnpm iconos` (scripts/generate-icons.mjs).
  */
 
@@ -88,5 +90,18 @@ describe("el ícono del sitio", () => {
     expect(svg, "las letras de icon.svg no van en blanco").toMatch(
       /<path\b[^>]*fill="#ffffff"/,
     );
+  });
+
+  it("el botón de inicio del encabezado es la misma loseta de icon.svg", () => {
+    const svg = leer("icon.svg").toString("utf8");
+    const aviso =
+      "src/lib/marca-hr.ts no es la loseta de icon.svg: corre `pnpm iconos`";
+    expect(trazoDe(svg), aviso).toBe(MARCA_HR.d);
+    expect(svg, aviso).toContain(`viewBox="${MARCA_HR.viewBox}"`);
+    expect(svg, aviso).toContain(`rx="${MARCA_HR.rx}"`);
+    expect([MARCA_HR.fondo, MARCA_HR.letras], aviso).toEqual([
+      COLORES.fondo,
+      COLORES.letras,
+    ]);
   });
 });

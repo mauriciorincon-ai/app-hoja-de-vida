@@ -5,6 +5,7 @@ import { ChevronDown, Menu, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { trackEvent } from "@/lib/analytics";
+import { MarcaHR } from "@/components/marca-hr";
 import { rutaDelPdf } from "@/lib/cv-pdf";
 import { guardarAncla, restaurarAncla } from "@/lib/ancla-de-scroll";
 
@@ -160,13 +161,13 @@ export function Header({
         {t("saltarContenido")}
       </a>
       <div className="mx-auto flex h-12 max-w-5xl items-center justify-between gap-4 px-4 md:px-6">
+        {/* La marca HR (la loseta del ícono de la pestaña) y el nombre: el
+            botón para volver al inicio (2026-09-26, antes era un ◆). */}
         <a
           href={enHome ? "#contenido" : `/${locale}`}
-          className="flex min-h-11 items-center gap-2 text-sm font-medium whitespace-nowrap text-ink-0"
+          className="flex min-h-11 items-center gap-2.5 text-sm font-medium whitespace-nowrap text-ink-0"
         >
-          <span aria-hidden="true" className="text-sage-ink">
-            ◆
-          </span>
+          <MarcaHR className="size-7 shrink-0" />
           {nombre}
         </a>
 

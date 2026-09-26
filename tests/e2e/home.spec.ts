@@ -236,6 +236,21 @@ test.describe("el ícono de la pestaña", () => {
     });
   }
 
+  // La misma loseta, arriba a la izquierda, es el botón para volver al inicio
+  // (2026-09-26, antes un ◆). Desde una página interior lleva a la HOME.
+  test("la loseta HR del encabezado lleva al inicio", async ({ page }) => {
+    await page.goto("/es/cv");
+    const inicio = page
+      .getByRole("banner")
+      .getByRole("link", { name: cvEs.identidad.nombre });
+    await expect(
+      inicio.locator('svg rect[fill="#2b4c7e"]'),
+      "la marca HR no está en el enlace al inicio",
+    ).toBeVisible();
+    await inicio.click();
+    await expect(page).toHaveURL(/\/es$/);
+  });
+
   // Safari pide estas dos por su cuenta, sin leer el <link>. Hasta 2026-09-26
   // respondían 500 (ver src/app/layout.tsx); ahora sirven el mismo archivo.
   test("las rutas clásicas del ícono de iOS sirven las iniciales", async ({

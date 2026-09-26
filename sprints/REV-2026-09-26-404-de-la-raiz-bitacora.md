@@ -117,6 +117,23 @@ misma letra que el PDF usa en el bloque del dominio (Helvetica-Bold, una de las 
 de PDF). En trazos, y no como `<text>`, porque Windows no trae Helvetica. Dos corridas seguidas de
 `pnpm iconos` dan los mismos bytes.
 
+## 5. La loseta, también botón de inicio
+
+El dueño la quiso _«también como botón para regresar al inicio en la esquina superior izquierda»_.
+Ahí estaba «◆ Henry Rincón», que ya era el enlace al inicio (a la HOME desde las páginas
+interiores; al principio del contenido en la HOME). La loseta reemplaza al ◆, a 28 px, y el nombre
+se queda: es lo que nombra al enlace para un lector de pantalla, y lo primero que lee un
+reclutador. El ◆ sigue siendo el glifo editorial del resto del sitio.
+
+**Sin segunda copia del dibujo.** `pnpm iconos` escribe también `src/lib/marca-hr.ts` (trazo, caja,
+radio y colores) y `src/components/marca-hr.tsx` la pinta en vector: nítida a cualquier densidad y
+sin pedir un archivo más. Un test exige que ese módulo sea la misma loseta de `icon.svg` (rojo G).
+
+**Cabe en celular.** Medido a 360, 375 y 390 px: la fila del encabezado no desborda. A 360 px
+«CV (PDF)» se parte en dos líneas, **igual que en producción antes de este cambio** (captura
+`prod-360.png`); forzarlo a una línea desbordaría la fila. Capturas en
+`muestras/2026-09-26-marca-en-el-encabezado/` (ignorada).
+
 ## Regla 14 — rojos en este commit
 
 **A. El 404 de la raíz, sin la regla en `getCv`.** Build con la raíz, el 404 bilingüe y las
@@ -182,6 +199,23 @@ Los dos se revirtieron desde su respaldo (`cp`) y la prueba volvió a verde. La 
 reemplazan (los colores del SVG eran los tokens `ink-0` y `paper-0`) se retira con su sujeto: el
 ícono ya no usa esos tokens.
 
+**G. El módulo del encabezado se edita a mano** (una coordenada del trazo en `marca-hr.ts`):
+
+```
+× el botón de inicio del encabezado es la misma loseta de icon.svg
+AssertionError: src/lib/marca-hr.ts no es la loseta de icon.svg: corre `pnpm iconos`: expected 'M881 1474L881 816…' to be 'M880 1474L881 816…'
+```
+
+**H. El encabezado sin la loseta** (se quita `<MarcaHR>` del header, con `next dev`):
+
+```
+Error: la marca HR no está en el enlace al inicio
+expect(locator).toBeVisible() failed · Error: element(s) not found
+```
+
+Los dos se revirtieron desde su respaldo y las mismas pruebas pasaron en verde (la e2e en
+escritorio y en móvil).
+
 ## Verificación
 
 `pnpm test` **48 archivos, 1306 tests** (con el ícono navy) · `typecheck` y `lint` limpios · e2e completo sobre el
@@ -190,3 +224,6 @@ primera vez arranqué `next start` a mano, sin las variables que el config de Pl
 su servidor (la puerta del chat en memoria, el código fijo, el secreto de prueba), y fallaron las
 22 del chat. Con esas mismas variables, el spec del chat pasó 22 de 22. Las 410 son 398 de antes
 más las 12 nuevas (5 en la HOME y 1 de axe, por dos perfiles).
+
+**Con la loseta en el encabezado** (tercer commit): `pnpm test` **48 archivos, 1307 tests** · e2e
+completo **412 pasan**, 14 saltadas (las 410 de antes más la nueva del botón, en dos perfiles).

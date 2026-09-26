@@ -23,6 +23,8 @@
     color:var(--ink-2); }
   .oscura { background:var(--ink-0); padding:12px; border-radius:8px; }
   .ios { border-radius:22%; overflow:hidden; display:block; line-height:0; }
+  .encabezado { display:flex; align-items:center; gap:10px; font-size:14px; font-weight:500;
+    color:var(--ink-0); padding:10px 14px; border-bottom:1px solid var(--paper-3); }
 </style>
 </head>
 <body>
@@ -32,7 +34,8 @@ favicon no puede depender de las fuentes de quien lo mira. La loseta trae su pro
 hay variante oscura. Fuente de verdad del trazo: <code>src/app/icon.svg</code>; el color sale del PDF y
 se regenera con <code>pnpm iconos</code>. Las rutas clásicas
 <code>/apple-touch-icon.png</code> y <code>-precomposed</code>, que Safari pide sin leer la página,
-sirven el mismo archivo de iOS por reescritura, nunca una copia.</p>
+sirven el mismo archivo de iOS por reescritura, nunca una copia. La misma loseta, a 28 px y con el
+nombre al lado, es el botón de inicio del encabezado (antes, un ◆).</p>
 <div class="fila">
   <figure><svg viewBox="-731.8 -1353.8 4181.5 4181.5" width="128" height="128" role="img" aria-label="HR"><rect x="-731.8" y="-1353.8" width="4181.5" height="4181.5" rx="784" fill="#2b4c7e"/><path d="M881 1474L881 816L305 816L305 1474L0 1474L0 0L305 0L305 562L881 562L881 0L1187 0L1187 1474ZM2107 896L1789 896L1789 1474L1488 1474L1488 0L2211 0Q2366 3 2449.5 38Q2533 73 2591 141Q2639 197 2667 265Q2695 333 2695 420Q2695 525 2642 626.5Q2589 728 2467 770Q2569 811 2611.5 886.5Q2654 962 2654 1117L2654 1216Q2654 1317 2662 1353Q2674 1410 2718 1437L2718 1474L2379 1474Q2365 1425 2359 1395Q2347 1333 2346 1268L2344 1131Q2342 990 2292.5 943Q2243 896 2107 896ZM2294 628Q2386 586 2386 462Q2386 328 2297 282Q2247 256 2147 256L1789 256L1789 652L2138 652Q2242 652 2294 628Z" fill="#ffffff"/></svg>
     <figcaption>Loseta · pestaña y .ico</figcaption></figure>
@@ -44,6 +47,8 @@ sirven el mismo archivo de iOS por reescritura, nunca una copia.</p>
     <figcaption>16 px</figcaption></figure>
   <figure><svg viewBox="-731.8 -1353.8 4181.5 4181.5" width="32" height="32" role="img" aria-label="HR"><rect x="-731.8" y="-1353.8" width="4181.5" height="4181.5" rx="784" fill="#2b4c7e"/><path d="M881 1474L881 816L305 816L305 1474L0 1474L0 0L305 0L305 562L881 562L881 0L1187 0L1187 1474ZM2107 896L1789 896L1789 1474L1488 1474L1488 0L2211 0Q2366 3 2449.5 38Q2533 73 2591 141Q2639 197 2667 265Q2695 333 2695 420Q2695 525 2642 626.5Q2589 728 2467 770Q2569 811 2611.5 886.5Q2654 962 2654 1117L2654 1216Q2654 1317 2662 1353Q2674 1410 2718 1437L2718 1474L2379 1474Q2365 1425 2359 1395Q2347 1333 2346 1268L2344 1131Q2342 990 2292.5 943Q2243 896 2107 896ZM2294 628Q2386 586 2386 462Q2386 328 2297 282Q2247 256 2147 256L1789 256L1789 652L2138 652Q2242 652 2294 628Z" fill="#ffffff"/></svg>
     <figcaption>32 px</figcaption></figure>
+  <figure><span class="encabezado"><svg viewBox="-731.8 -1353.8 4181.5 4181.5" width="28" height="28" aria-hidden="true"><rect x="-731.8" y="-1353.8" width="4181.5" height="4181.5" rx="784" fill="#2b4c7e"/><path d="M881 1474L881 816L305 816L305 1474L0 1474L0 0L305 0L305 562L881 562L881 0L1187 0L1187 1474ZM2107 896L1789 896L1789 1474L1488 1474L1488 0L2211 0Q2366 3 2449.5 38Q2533 73 2591 141Q2639 197 2667 265Q2695 333 2695 420Q2695 525 2642 626.5Q2589 728 2467 770Q2569 811 2611.5 886.5Q2654 962 2654 1117L2654 1216Q2654 1317 2662 1353Q2674 1410 2718 1437L2718 1474L2379 1474Q2365 1425 2359 1395Q2347 1333 2346 1268L2344 1131Q2342 990 2292.5 943Q2243 896 2107 896ZM2294 628Q2386 586 2386 462Q2386 328 2297 282Q2247 256 2147 256L1789 256L1789 652L2138 652Q2242 652 2294 628Z" fill="#ffffff"/></svg><span>Henry Rincón</span></span>
+    <figcaption>Encabezado · botón de inicio</figcaption></figure>
 </div>
 </body>
 </html>

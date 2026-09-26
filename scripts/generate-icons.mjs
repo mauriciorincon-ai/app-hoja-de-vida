@@ -19,6 +19,8 @@
  *   src/app/icon.svg        la loseta redondeada, en vector (la pestaña de hoy)
  *   src/app/favicon.ico     la misma loseta a 16 · 32 · 48 px
  *   src/app/apple-icon.png  180 px a sangre (iOS redondea las esquinas)
+ *   src/lib/marca-hr.ts     la misma loseta como datos, para el botón de inicio
+ *                           del encabezado (src/components/marca-hr.tsx)
  *
  *   pnpm iconos
  *
@@ -70,6 +72,29 @@ function svgLoseta(d, bbox, redondeada) {
 `;
 }
 
+/**
+ * La loseta como datos de TypeScript: el encabezado la pinta en vector con el
+ * mismo trazo, la misma caja y los mismos colores que `icon.svg`, sin una
+ * segunda copia a mano (2026-09-26, el dueño la quiso también como botón de
+ * inicio).
+ */
+function moduloMarca(d, bbox) {
+  const c = caja(bbox, ANCHO_LETRAS);
+  return `// La marca HR del encabezado: la misma loseta del ícono de la pestaña.
+// La escribe scripts/generate-icons.mjs (\`pnpm iconos\`); no se edita a mano.
+export const MARCA_HR = {
+  viewBox: "${c.x} ${c.y} ${c.lado} ${c.lado}",
+  x: ${c.x},
+  y: ${c.y},
+  lado: ${c.lado},
+  rx: ${Math.round(c.lado * RADIO_LOSETA)},
+  fondo: "${COLORES.fondo}",
+  letras: "${COLORES.letras}",
+  d: "${d}",
+} as const;
+`;
+}
+
 /** ICO con PNG adentro (Windows Vista en adelante y todos los navegadores de hoy). */
 export function empacarIco(pngs) {
   const cabecera = Buffer.alloc(6 + 16 * pngs.length);
@@ -116,6 +141,7 @@ async function main() {
 
     const conLoseta = svgLoseta(d, bbox, true);
     writeFileSync(path.join(APP, "icon.svg"), conLoseta);
+    writeFileSync(path.join(RAIZ, "src/lib/marca-hr.ts"), moduloMarca(d, bbox));
 
     const pngs = [];
     for (const tamano of TAMANOS_ICO) pngs.push({ tamano, datos: await pintar(conLoseta, tamano) });
@@ -126,7 +152,9 @@ async function main() {
   } finally {
     await navegador.close();
   }
-  console.log(`✓ íconos: icon.svg · favicon.ico (${TAMANOS_ICO.join(" · ")}) · apple-icon.png (${TAMANO_APPLE})`);
+  console.log(
+    `✓ íconos: icon.svg · favicon.ico (${TAMANOS_ICO.join(" · ")}) · apple-icon.png (${TAMANO_APPLE}) · src/lib/marca-hr.ts`,
+  );
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
