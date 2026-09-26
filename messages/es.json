@@ -345,5 +345,13 @@
   },
   "skills": {
     "linea": "Lo que uso a diario, por grupo. Sin porcentajes inventados: lo que aparece aquí es lo que sé hacer."
+  },
+  "mantenimiento": {
+    "meta": "En mantenimiento",
+    "eyebrow": "En mantenimiento",
+    "titulo": "Estoy afinando mi sitio",
+    "cuerpo": "Vuelve en un rato. Mientras tanto, mi hoja de vida sigue aquí, completa, en PDF.",
+    "descargar": "Descargar mi CV (PDF)",
+    "escribeme": "¿Prefieres escribirme?"
   }
 }

@@ -62,9 +62,13 @@ export default defineConfig({
       // memoria, correo simulado y código fijo: el flujo real, sin red.
       CHAT_GATE: "on",
       CHAT_GATE_STORE: "memory",
-      CHAT_SESSION_SECRET: "secreto-solo-para-e2e-con-mas-de-treinta-y-dos-caracteres",
+      CHAT_SESSION_SECRET:
+        "secreto-solo-para-e2e-con-mas-de-treinta-y-dos-caracteres",
       CHAT_CODIGO_PRUEBA: "246810",
       RESEND_API_KEY: "",
+      // El sitio corre ARRIBA en e2e aunque la terminal tenga la variable
+      // exportada: el modo mantenimiento se prueba en unit y en la bitácora.
+      MANTENIMIENTO: "",
     },
   },
 });
