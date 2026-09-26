@@ -106,3 +106,16 @@ describe("el proxy", () => {
     }
   });
 });
+
+// La ruta que enlazan el header, `/cv` y la página de mantenimiento es la del
+// archivo que genera el build (2026-09-26): si una cambia sin la otra, el
+// botón «Descargar mi CV» —el único salvavidas en mantenimiento— da 404.
+describe("la ruta del PDF", () => {
+  it("es la del archivo que genera el build, en los dos idiomas", async () => {
+    const { LABELS } = await import("../../scripts/generate-cv-pdf.mjs");
+    const { rutaDelPdf } = await import("@/lib/cv-pdf");
+    for (const locale of ["es", "en"] as const) {
+      expect(rutaDelPdf(locale)).toBe(`/cv/${LABELS[locale].archivo}`);
+    }
+  });
+});

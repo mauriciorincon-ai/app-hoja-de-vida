@@ -162,6 +162,8 @@ describe("PDF ATS generado en build desde los YAML", () => {
       expect(primera.indexOf(DOMINIO)).toBeGreaterThan(-1);
       expect(primera.indexOf(DOMINIO)).toBeLessThan(primera.indexOf("@"));
       expect(primera).toContain(`${LABELS[locale].masEnMiSitio} ${DOMINIO}.`);
+      // Bajo el bloque, en dos líneas: qué se encuentra en el sitio.
+      expect(primera).toContain(plano(LABELS[locale].rotuloSitio.join(" ")));
       paginas.forEach((texto, i) => {
         expect(
           plano(texto).endsWith(`${DOMINIO} · ${i + 1} / ${paginas.length}`),

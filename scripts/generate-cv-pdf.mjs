@@ -45,7 +45,7 @@ export const LABELS = {
     archivo: "Henry-Rincon-CV-ES.pdf",
     titulo: "CV — Henry Rincón (ES)",
     ruta: "/es",
-    rotuloSitio: "CV interactivo · casos · chat",
+    rotuloSitio: ["En mi sitio encontrarás", "CV interactivo · casos · chat"],
   },
   en: {
     perfil: "PROFILE",
@@ -61,7 +61,7 @@ export const LABELS = {
     archivo: "Henry-Rincon-CV-EN.pdf",
     titulo: "CV — Henry Rincón (EN)",
     ruta: "/en",
-    rotuloSitio: "Interactive CV · cases · chat",
+    rotuloSitio: ["On my site you'll find", "Interactive CV · cases · chat"],
   },
 };
 
@@ -284,6 +284,19 @@ function estilo(doc, fuente, tamano, color) {
  */
 const DOMINIO = { tamano: 14, padX: 12, padY: 8, radio: 4, separacion: 16 };
 
+/**
+ * Dónde empieza una línea CENTRADA bajo el bloque del dominio (2026-09-26,
+ * pedido del dueño: el rótulo, centrado respecto al recuadro azul). Si la
+ * línea es más ancha que el bloque, se centra igual y se corre a la izquierda
+ * lo justo para no pasar el margen derecho.
+ */
+export function inicioCentrado(xBloque, anchoBloque, anchoLinea, bordeDerecho) {
+  const centrado = xBloque + (anchoBloque - anchoLinea) / 2;
+  return Math.min(centrado, bordeDerecho - anchoLinea);
+}
+
+const RENGLON_ROTULO = 9.5;
+
 function bloqueDelDominio(doc, dominio, url, rotulo) {
   estilo(doc, "Helvetica-Bold", DOMINIO.tamano, "#FFFFFF");
   const ancho = doc.widthOfString(dominio) + 2 * DOMINIO.padX;
@@ -296,14 +309,19 @@ function bloqueDelDominio(doc, dominio, url, rotulo) {
     lineBreak: false,
   });
   doc.link(x, y, ancho, alto, url);
+  // Debajo, en gris y centrado respecto al bloque: qué va a encontrar ahí.
   estilo(doc, "Helvetica", 7.5, GRIS);
-  const anchoRotulo = Math.max(ancho, doc.widthOfString(rotulo));
-  doc.text(rotulo, x + ancho - anchoRotulo, y + alto + 4, {
-    width: anchoRotulo,
-    align: "right",
-    lineBreak: false,
+  const bordeDerecho = MARGEN.lado + ANCHO_UTIL;
+  rotulo.forEach((linea, i) => {
+    const anchoLinea = doc.widthOfString(linea);
+    doc.text(
+      linea,
+      inicioCentrado(x, ancho, anchoLinea, bordeDerecho),
+      y + alto + 4 + i * RENGLON_ROTULO,
+      { lineBreak: false },
+    );
   });
-  return { ancho, fondo: y + alto + 4 + 9 };
+  return { ancho, fondo: y + alto + 4 + rotulo.length * RENGLON_ROTULO };
 }
 
 function cabecera(doc, cv, sitio, labels) {
@@ -338,7 +356,7 @@ function cabecera(doc, cv, sitio, labels) {
       doc,
       ansi(destacado),
       `${origen}${labels.ruta}`,
-      ansi(labels.rotuloSitio),
+      labels.rotuloSitio.map(ansi),
     );
     y = Math.max(y, bloque.fondo + 4);
   }

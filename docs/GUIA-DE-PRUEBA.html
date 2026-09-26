@@ -316,7 +316,7 @@
     <div class="pagina">
       <header>
         <p class="eyebrow">
-          CV Viva · Guía de prueba viva y acumulativa · v9.7 · el modo mantenimiento + el dominio en el PDF + los ocho casos de estudio completos + la cita dice de dónde sale y a dónde lleva + la cita conserva la conversación + el corpus alineado + chat/registro + a fondo v2 (el
+          CV Viva · Guía de prueba viva y acumulativa · v9.8 · rótulo del dominio e idiomas en mantenimiento + el modo mantenimiento + el dominio en el PDF + los ocho casos de estudio completos + la cita dice de dónde sale y a dónde lleva + la cita conserva la conversación + el corpus alineado + chat/registro + a fondo v2 (el
           detalle) + revisión post-S8 · 2026-09-12
         </p>
         <h1>Guía de prueba</h1>
@@ -666,21 +666,23 @@
               ><span class="minimo">⭐ mínimo</span></label
             >
           </li>
-          <li data-origen="nuevo" data-minimo>
+          <li data-origen="mejorado" data-minimo>
             <input type="checkbox" id="d3" /><label for="d3"
               >⭐ <strong>El dominio, muy resaltado</strong> (con el dominio ya
               apuntando al sitio y en <code>NEXT_PUBLIC_SITE_URL</code>, tras un
               redeploy). Descarga el PDF en español y en inglés. Arriba a la
               derecha, a la altura del nombre, un <strong>bloque navy con tu
-              dominio en blanco</strong> y debajo, en gris, «CV interactivo ·
-              casos · chat» — ¿se ve grande y resaltado sin competir con tu
-              nombre? Púlsalo: abre el sitio <strong>en el idioma del
+              dominio en blanco</strong> y debajo, en gris y
+              <strong>centrado respecto al recuadro</strong>, dos líneas: «En mi
+              sitio encontrarás» / «CV interactivo · casos · chat» (en inglés,
+              «On my site you'll find» / «Interactive CV · cases · chat») — ¿se
+              ve grande y resaltado sin competir con tu nombre? Púlsalo: abre el sitio <strong>en el idioma del
               PDF</strong> (<code>/es</code> o <code>/en</code>). El perfil
               cierra con «Más en mi sitio: <em>dominio</em>.» con el dominio en
               navy, y también se puede pulsar. Al pie de
               <strong>cada</strong> página, pequeño y centrado: el dominio y
               «1 / 2», «2 / 2». Sigue siendo de dos páginas.
-              <span class="origen origen-nuevo">Nuevo · dominio en el PDF</span
+              <span class="origen origen-mejorado">Mejorado · rótulo e idiomas</span
               ><span class="minimo">⭐ mínimo</span></label
             >
           </li>
@@ -1888,7 +1890,7 @@
           hace en una <strong>preview</strong> para no apagar producción.
         </p>
         <ul class="pasos">
-          <li data-origen="nuevo" data-minimo>
+          <li data-origen="mejorado" data-minimo>
             <input type="checkbox" id="p1" /><label for="p1"
               >⭐ <strong>Verlo encendido, sin tocar producción.</strong> En
               Vercel → Settings → Environment Variables, agrega
@@ -1897,10 +1899,13 @@
               reciente → ⋯ → Redeploy, y ábrela cuando esté lista. Cualquier
               página (la HOME, <code>/es/cv</code>, un caso) muestra «Estoy
               afinando mi sitio» con el diseño del sitio, sin menú ni chat; en
-              <code>/en/…</code>, en inglés. «Descargar mi CV (PDF)» baja tu
-              PDF. El correo y LinkedIn funcionan. ¿Te gusta cómo se ve y lo que
+              <code>/en/…</code>, en inglés. Arriba a la derecha,
+              <strong>ES / EN</strong> cambia la página entera de idioma.
+              «Descargar mi CV (PDF)» baja el PDF del idioma de la página, y el
+              enlace de abajo («CV in English (PDF)» / «CV en español (PDF)»)
+              baja el del otro. El correo y LinkedIn funcionan. ¿Te gusta cómo se ve y lo que
               dice? Al terminar, <strong>borra</strong> la variable de Preview.
-              <span class="origen origen-nuevo">Nuevo · mantenimiento</span
+              <span class="origen origen-mejorado">Mejorado · rótulo e idiomas</span
               ><span class="minimo">⭐ mínimo</span></label
             >
           </li>
@@ -1978,6 +1983,15 @@
         <details class="chica">
           <summary>Historial de la guía</summary>
           <ul>
+            <li>
+              <strong>v9.8 · rótulo del dominio e idiomas en mantenimiento ·
+              2026-09-26:</strong> tras verlo en producción, el dueño pidió que
+              el rótulo bajo el dominio del PDF diga qué se encuentra en el sitio
+              y quede centrado respecto al recuadro, y que la página de
+              mantenimiento deje cambiar a inglés y bajar el CV en el otro
+              idioma. d3 y p1 mejoradas. Ninguna prueba eliminada. Prefijo de
+              casillas <code>rotulo-idiomas</code>.
+            </li>
             <li>
               <strong>v9.7 · el modo mantenimiento · 2026-09-24:</strong> el
               dueño pidió una página «En mantenimiento» fácil de poner y
@@ -2251,7 +2265,7 @@
       (function () {
         // NS VERSIONADO POR SPRINT: al publicar la guía de un sprint nuevo se cambia
         // s007c — así una regresión sin correr no aparece marcada por la versión anterior.
-        var NS = "guia-hoja-de-vida:mantenimiento:";
+        var NS = "guia-hoja-de-vida:rotulo-idiomas:";
         var casillas = Array.prototype.slice.call(
           document.querySelectorAll('input[type="checkbox"]'),
         );

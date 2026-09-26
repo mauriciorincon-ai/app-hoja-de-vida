@@ -5,6 +5,7 @@ import { ChevronDown, Menu, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { trackEvent } from "@/lib/analytics";
+import { rutaDelPdf } from "@/lib/cv-pdf";
 import { guardarAncla, restaurarAncla } from "@/lib/ancla-de-scroll";
 
 /**
@@ -78,7 +79,7 @@ export function Header({
   const router = useRouter();
   const pathname = usePathname();
   const otherLocale = locale === "es" ? "en" : "es";
-  const pdfHref = `/cv/Henry-Rincon-CV-${locale.toUpperCase()}.pdf`;
+  const pdfHref = rutaDelPdf(locale);
 
   const [menuAbierto, setMenuAbierto] = useState(false);
   const toggleRef = useRef<HTMLButtonElement>(null);

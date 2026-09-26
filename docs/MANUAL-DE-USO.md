@@ -241,7 +241,8 @@ el mensaje te llega al correo.
   izquierda; perfil, formación, certificaciones y skills a la derecha—, acentos en azul navy y
   texto Helvetica seleccionable, en el orden que un ATS lee (cabecera → perfil → experiencia).
   **Tu dominio va muy resaltado** (desde el 2026-09-24): un bloque azul navy con el dominio en
-  blanco arriba a la derecha, a la altura de tu nombre, con «CV interactivo · casos · chat» debajo;
+  blanco arriba a la derecha, a la altura de tu nombre, y debajo, centrado respecto al recuadro, «En mi
+  sitio encontrarás» / «CV interactivo · casos · chat» (desde el 2026-09-26);
   el perfil cierra con «Más en mi sitio: dominio.» y el pie de cada página lo repite pequeño con
   el número de página. Los tres se pueden pulsar y abren el sitio en el idioma del PDF. El dominio
   no se escribe en ningún archivo: el build lo toma de la variable `NEXT_PUBLIC_SITE_URL` de
@@ -483,7 +484,9 @@ el mensaje te llega al correo.
 
 - **Qué hace:** pone **todo** el sitio en una página de «Estoy afinando mi sitio», en el idioma
   de quien llega, con dos salidas: **descargar tu CV en PDF** (los PDF se siguen sirviendo) y tu
-  correo y LinkedIn. Sin menú, sin chat y sin formularios.
+  correo y LinkedIn. Sin menú, sin chat y sin formularios. Arriba a la derecha, **ES / EN** cambia
+  la página de idioma, y bajo el botón hay un enlace al **CV en el otro idioma** (desde el
+  2026-09-26).
 - **Cómo se pone:** en Vercel, **Settings → Environment Variables**, cambia `MANTENIMIENTO` a
   `on` (Production) y haz **Redeploy** del último deploy de Production. En 3–4 minutos, todo
   el sitio muestra la página.

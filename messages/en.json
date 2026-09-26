@@ -352,6 +352,7 @@
     "titulo": "I'm fine-tuning my site",
     "cuerpo": "Come back in a little while. Meanwhile, my full CV is right here, as a PDF.",
     "descargar": "Download my CV (PDF)",
-    "escribeme": "Rather write to me?"
+    "escribeme": "Rather write to me?",
+    "pdfOtroIdioma": "CV en español (PDF)"
   }
 }
