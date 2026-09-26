@@ -194,9 +194,30 @@ el mensaje te llega al correo.
   el campo `verificacion:` de cada certificación — el botón "Verificar ↗" aparece solo.
 - **Skills, desde la revisión post-S7:** una tarjeta por grupo con un icono dibujado en casa
   (se termina de trazar al llegar la tarjeta) y los ítems como chips que entran escalonados.
-  **El icono va por la posición del grupo** (1.º IA, 2.º datos, 3.º BI, 4.º ingeniería): si
-  reordenas los grupos en el YAML, los iconos se quedan en su posición. Un quinto grupo recibe un
-  rombo. Sin porcentajes ni «nivel de dominio», a propósito.
+  **El icono va por el `id` del grupo** (desde 2026-09-26): puedes reordenar los grupos en el
+  YAML y cada uno se lleva su icono. Antes iba por posición, y al entrar «Procesos y simulación»
+  en quinto lugar (2026-09-20) esa tarjeta se quedó con el dibujo de «Cómo trabajo» y «Cómo
+  trabajo» con un rombo, en producción. Sin porcentajes ni «nivel de dominio», a propósito.
+- **Un grupo nuevo necesita dos cosas:** su `id` en los dos YAML y **su dibujo** en
+  `src/components/home/skills-iconos.tsx`. Sin dibujo, la tarjeta sale con un rombo de reserva,
+  pero `pnpm test` falla nombrando el grupo, así que no llega a producción. Pídemelo y lo dibujo.
+- **La rejilla es de dos columnas;** si los grupos quedan impares, el último ocupa las dos. El
+  orden de hoy empareja tarjetas de tamaño parecido: Agentes con Plataforma de datos, Desarrollo
+  asistido con Big data. Si agregas muchas herramientas a un grupo, revisa que su pareja no quede
+  vacía al lado.
+- **Las herramientas de hoy (revisión 2026-09-26, pedido tuyo):** nueve grupos, con
+  «Agentes e IA generativa» y «Desarrollo asistido por IA» delante, para los roles de ingeniería
+  de IA. Tres cosas que conviene recordar:
+  - **LangChain, LangGraph, LangSmith y Langflow** van como usados **en la Fundación CTIC**. Lo
+    dicen también dos documentos del chat (`fundacion-ctic` y la subsección de frameworks de
+    `agentes-en-produccion`), para que el chat conteste «¿qué frameworks de agentes ha usado?»
+    con eso y no solo con n8n.
+  - **Big data multiplataforma** abre con el chip «Planeador de Fabric, Databricks y Snowflake —
+    en preparación». **Cuando el planeador llegue a la vitrina**, ese chip se cambia por uno que
+    remita a él (y cuando llegue la app de LangChain, igual). Es la misma regla que «Google
+    Cloud — en exploración»: una etiqueta honesta hasta que haya evidencia pública.
+  - **El PDF sigue en dos páginas, pero la columna de la derecha quedó casi llena.** Si agregas
+    herramientas y el PDF pasa a tres páginas, `pnpm test` lo dice (el test de las dos páginas).
 - **Cada grupo lleva un `id`** (desde 2026-09-26), por ejemplo `id: plataforma-de-datos`: es el
   ancla de su tarjeta (`#skills-plataforma-de-datos`), a donde llevan las citas del chat de los
   documentos de esa capacidad. Minúsculas, cifras y guiones, y **el mismo en español y en
@@ -958,3 +979,4 @@ chat hoy y cuáles traería con la base aprobada. Ese informe **se genera, no se
 | cifras y citas 2026-09-26 | **Las cifras en su letra desde la primera visita**: la fuente mono se precarga (antes, la primera visita las pintaba en Arial). En el chat, **un chip por documento y destino** (`[3, 4] AF-17 · …`) y los seis documentos de capacidades **citan hacia su tarjeta de Skills** (`#skills-<id>`). En móvil, cambiar de idioma ya no corre el hito que estás leyendo. **Los dos correos** (el del dominio y el Gmail) en el sitio, el PDF y el chat; `hola@` llega a tu Gmail por Cloudflare Email Routing.                                                                                                                         |
 | 404 de la raíz 2026-09-26 | **Un archivo que no existe responde 404 bilingüe, no error 500** (`/favicon.png`, `/manifest.webmanifest`, los robots). Las rutas clásicas del ícono de iOS (`/apple-touch-icon.png` y `-precomposed`) sirven tus iniciales; hasta hoy daban 500. Cómo vaciar la caché de íconos de Safari. **El ícono pasa a la opción A que habías elegido**: HR blanco sobre el navy del PDF, también como botón de inicio arriba a la izquierda.                                                                                                                                                                                              |
 | tope del chat 2026-09-26  | **El cupo de cada persona en el chat:** 20 preguntas cada 24 horas por correo (`CHAT_TOPE_DIARIO`) y una lista de correos bloqueados que manejas desde Supabase (`chat_bloqueados`), sin redeploy. Una sola persona ya no puede gastarse la cuota diaria de Groq. Sección nueva: cómo está protegido el chat.                                                                                                                                                                                                                                                                                                                     |
+| herramientas 2026-09-26   | **Las herramientas de hoy en Skills**, a pedido tuyo, para los roles de ingeniería de IA: nueve grupos (entran «Agentes e IA generativa», «Desarrollo asistido por IA» y «Big data multiplataforma»; «IA & ML» pasa a «Machine learning y ciencia de datos»). El ecosistema de LangChain como usado en la Fundación CTIC, también en dos documentos del chat. **Los iconos van por el `id` del grupo** (se corrigió el de «Procesos» y el rombo de «Cómo trabajo», mal puestos desde el 2026-09-20). En el chat, un fragmento por grupo que cita su tarjeta. El PDF sigue en dos páginas. |

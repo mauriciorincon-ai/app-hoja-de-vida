@@ -67,7 +67,7 @@ describe("buildChunks (YAML + «a fondo» → chunks con ancla)", () => {
       },
     ],
     certificaciones: [{ nombre: "AI-102", fecha: "2024", nota: "" }],
-    skills: [{ grupo: "IA", items: ["Azure AI"] }],
+    skills: [{ id: "ia-y-ml", grupo: "IA", items: ["Azure AI"] }],
   };
   const appsMinimas = {
     apps: [
@@ -215,7 +215,8 @@ describe("script real contra los data/ reales (integración del build)", () => {
         file,
       );
       expect(index.locale).toBe(locale);
-      // identidad(2) + 9 hitos + logros + 5×2 proyectos + certs + skills + 4 apps
+      // identidad(2) + 9 hitos + logros + 5×2 proyectos + certs + un fragmento
+      // por grupo de skills + 4 apps
       expect(index.chunks.length).toBeGreaterThan(20);
       expect(index.chunks.some((c) => c.ancla === "/proyectos/vesting")).toBe(
         true,
@@ -229,8 +230,14 @@ describe("script real contra los data/ reales (integración del build)", () => {
         (c) => c.ancla === "/proyectos/vesting",
       );
       expect(vesting?.destino).toBe("Vesting");
-      const skills = index.chunks.find((c) => c.ancla === "#skills");
-      expect(skills?.destino).toBe("Skills");
+      // Un fragmento por grupo de skills (2026-09-26): cada uno cita SU
+      // tarjeta, y el chip lleva el nombre del grupo, no «Skills» a secas.
+      const skills = index.chunks.filter((c) => c.id.startsWith("skills-"));
+      expect(skills.length).toBeGreaterThan(1);
+      for (const c of skills) {
+        expect(c.ancla, c.id).toBe(`#${c.id}`);
+        expect(c.destino, c.id).not.toBe("Skills");
+      }
       const aFondo = index.chunks.filter((c) => c.id.startsWith("a-fondo-"));
       expect(aFondo.length).toBeGreaterThan(0);
       for (const c of aFondo) expect(c.codigo, c.id).toMatch(/^AF-\d{2}$/);

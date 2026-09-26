@@ -6,7 +6,7 @@ resumen: "Dos experiencias con agentes: 27 construidos con el proceso core de Ve
 cuando_usar: "Úsalo cuando pregunten si ha construido agentes de inteligencia artificial, qué frameworks de agentes ha usado (n8n, Claude Code), cómo monitorea un agente en producción, qué es ARKHÉ, cómo evita que el modelo invente, y su experiencia con IA generativa y modelos de lenguaje grandes."
 estado: aprobado
 ancla: "/vitrina/agentes"
-actualizado: 2026-09-21
+actualizado: 2026-09-26
 preguntas_de_prueba:
   - "¿Qué experiencia tiene Henry construyendo agentes de IA?"
   - "¿Cómo se monitorea un agente de IA en producción?"
@@ -102,7 +102,7 @@ Esta disciplina continúa siendo central en mi trabajo actual. La ruta AI-300, q
 
 <!-- seccion: n8n-como-base -->
 
-n8n constituía una base fundamental para la automatización y coordinación de los flujos de los agentes en Vesting. Permitía conectar servicios, organizar secuencias de trabajo, ejecutar reglas e integrar diferentes componentes dentro de procesos que necesitaban operar de manera consistente. Por eso figura hoy entre mis skills: no como una herramienta vista, sino como la base sobre la que corrieron 27 agentes.
+n8n constituía una base fundamental para la automatización y coordinación de los flujos de los agentes en Vesting. Permitía conectar servicios, organizar secuencias de trabajo, ejecutar reglas e integrar diferentes componentes dentro de procesos que necesitaban operar de manera consistente. Por eso figura hoy entre mis skills: no como una herramienta vista, sino como la base sobre la que corrieron 27 agentes. Fuera de Vesting, en la Fundación CTIC, los frameworks de agentes con los que he trabajado son los del ecosistema de LangChain: LangChain, LangGraph, LangSmith y Langflow.
 
 Sin embargo, utilizar n8n no significaba que la arquitectura se redujera a una colección de flujos visuales. El valor empresarial no se encontraba en conectar nodos, sino en definir correctamente qué información ingresaba, qué transformación debía ocurrir, qué servicio o componente intervenía, qué resultado se esperaba y cómo debía manejarse una excepción.
 

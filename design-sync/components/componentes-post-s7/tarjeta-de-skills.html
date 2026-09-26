@@ -35,6 +35,7 @@
   code { font-family:var(--mono); font-size:12.5px; background:var(--paper-1);
     border:1px solid var(--paper-2); border-radius:4px; padding:1px 5px; }
   .rej { display:grid; grid-template-columns:1fr 1fr; gap:20px; max-width:760px; }
+  .t.ancha { grid-column:1 / -1; }
   .t { display:flex; flex-direction:column; gap:20px; background:var(--paper-0); border:1px solid var(--paper-2);
     border-radius:14px; padding:24px; box-shadow:var(--sh-1); transition:box-shadow 180ms var(--ease-out-cubic), transform 180ms var(--ease-out-cubic); }
   .t:hover { transform:translateY(-2px); box-shadow:var(--sh-2); }
@@ -54,25 +55,42 @@
   significa nada y nadie lo puede medir.</p>
 
 <div class="rej">
-  <article class="t"><div class="cab"><span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/><path d="M5.6 5.6l2.2 2.2M16.2 16.2l2.2 2.2M5.6 18.4l2.2-2.2M16.2 7.8l2.2-2.2"/></svg></span><h2>IA &amp; ML</h2></div>
-    <div class="chips"><span class="chip">Azure AI</span><span class="chip">PyTorch</span><span class="chip">Scikit-Learn</span><span class="chip">NLP</span></div></article>
+  <article class="t"><div class="cab"><span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.6"/><circle cx="5" cy="5" r="1.9"/><circle cx="19" cy="5" r="1.9"/><circle cx="12" cy="20" r="1.9"/><path d="M6.4 6.4l3.7 3.7M17.6 6.4l-3.7 3.7M12 14.6v3.5"/></svg></span><h2>Agentes e IA generativa</h2></div>
+    <div class="chips"><span class="chip">LangChain</span><span class="chip">LangGraph</span><span class="chip">Microsoft Agent Framework</span><span class="chip">MCP</span></div></article>
   <article class="t"><div class="cab"><span class="ico"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/><path d="M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></span><h2>Plataforma de datos</h2></div>
-    <div class="chips"><span class="chip">Microsoft Fabric</span><span class="chip">SQL</span><span class="chip">DAX</span></div></article>
+    <div class="chips"><span class="chip">Microsoft Fabric</span><span class="chip">Direct Lake</span><span class="chip">DAX</span></div></article>
+  <article class="t"><div class="cab"><span class="ico"><svg viewBox="0 0 24 24"><path d="M8 7l-5 5 5 5"/><path d="M16 7l5 5-5 5"/><path d="M12 8.5l1 2.5 2.5 1-2.5 1-1 2.5-1-2.5-2.5-1 2.5-1z"/></svg></span><h2>Desarrollo asistido por IA</h2></div>
+    <div class="chips"><span class="chip">Claude Code</span><span class="chip">Codex</span><span class="chip">Cursor</span></div></article>
+  <article class="t"><div class="cab"><span class="ico"><svg viewBox="0 0 24 24"><path d="M12 3l9 4.5-9 4.5-9-4.5z"/><path d="M3 12l9 4.5 9-4.5"/><path d="M3 16.5l9 4.5 9-4.5"/></svg></span><h2>Big data multiplataforma</h2></div>
+    <div class="chips"><span class="chip">Databricks</span><span class="chip">Snowflake</span><span class="chip">dbt</span></div></article>
+  <article class="t"><div class="cab"><span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/><path d="M5.6 5.6l2.2 2.2M16.2 16.2l2.2 2.2M5.6 18.4l2.2-2.2M16.2 7.8l2.2-2.2"/></svg></span><h2>Machine learning y ciencia de datos</h2></div>
+    <div class="chips"><span class="chip">PyTorch</span><span class="chip">Scikit-Learn</span><span class="chip">NLP</span></div></article>
   <article class="t"><div class="cab"><span class="ico"><svg viewBox="0 0 24 24"><path d="M4 20h16"/><path d="M5 16l4-5 4 3 6-8"/><circle cx="19" cy="6" r="1.8"/></svg></span><h2>BI &amp; decisión</h2></div>
     <div class="chips"><span class="chip">Power BI</span><span class="chip">Data storytelling</span><span class="chip">KPIs</span></div></article>
-  <article class="t"><div class="cab"><span class="ico"><svg viewBox="0 0 24 24"><circle cx="6" cy="5" r="2"/><circle cx="18" cy="9" r="2"/><circle cx="6" cy="19" r="2"/><path d="M6 7v10M16 9.5c-4 0-8 1.5-8 6"/></svg></span><h2>Ingeniería &amp; liderazgo</h2></div>
-    <div class="chips"><span class="chip">Python</span><span class="chip">Git/GitHub</span><span class="chip">Equipos de hasta 20 personas</span></div></article>
+  <article class="t"><div class="cab"><span class="ico"><svg viewBox="0 0 24 24"><circle cx="6" cy="5" r="2"/><circle cx="18" cy="9" r="2"/><circle cx="6" cy="19" r="2"/><path d="M6 7v10M16 9.5c-4 0-8 1.5-8 6"/></svg></span><h2>Ingeniería de software</h2></div>
+    <div class="chips"><span class="chip">Python</span><span class="chip">TypeScript</span><span class="chip">Next.js</span></div></article>
+  <article class="t"><div class="cab"><span class="ico"><svg viewBox="0 0 24 24"><circle cx="4.5" cy="12" r="2"/><path d="M9 8.5h6v7H9z"/><path d="M19.5 9l2.5 3-2.5 3-2.5-3z"/><path d="M6.5 12H9M15 12h2"/></svg></span><h2>Procesos, simulación y optimización</h2></div>
+    <div class="chips"><span class="chip">BPMN (Bizagi)</span><span class="chip">FlexSim</span><span class="chip">Pyomo</span></div></article>
+  <article class="t ancha"><div class="cab"><span class="ico"><svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="2.5"/><circle cx="16.5" cy="9" r="2"/><path d="M3.5 18c0-2.8 2-4.5 4.5-4.5S12.5 15.2 12.5 18"/><path d="M13.5 17c.3-2.2 1.6-3.5 3.3-3.5 1.8 0 3.2 1.4 3.4 3.5"/><path d="M3 21h18"/></svg></span><h2>Cómo trabajo</h2></div>
+    <div class="chips"><span class="chip">Liderazgo de equipos de hasta 20 personas</span><span class="chip">Inglés profesional (B2)</span></div></article>
 </div>
 
-<p class="nota"><strong>El icono va por POSICIÓN del grupo</strong>, no por su nombre: el nombre es
-  contenido y puede cambiar en el YAML. Cuatro dibujos para los cuatro grupos del content pack;
-  un quinto grupo recibe el rombo. Cada figura lleva <code>pathLength="1"</code> y anima 0→1 en
-  cascada de 130 ms heredando las variantes hidden/visible del <code>Stagger</code> padre —
-  <strong>el estado por defecto es el icono dibujado</strong> (lección del S5: si el disparo no
-  llega, se ve igual). Nunca un emoji.</p>
+<p class="nota"><strong>El icono va por el <code>id</code> del grupo</strong> (2026-09-26), no por
+  su posición. Iba por posición «para que un cambio de nombre no lo rompiera», y lo rompió un cambio
+  de orden: «Procesos y simulación» entró quinto el 2026-09-20, se quedó con las dos personas de
+  «Cómo trabajo» y «Cómo trabajo» recibió el rombo. El <code>id</code> es estable por contrato (ancla
+  y destino del chat). Nueve dibujos, uno por grupo; el rombo queda de reserva para que la página no
+  se rompa, y <code>tests/unit/skills-iconos.test.ts</code> no deja llegar a <code>main</code> un grupo
+  sin su dibujo. Cada figura lleva <code>pathLength="1"</code> y anima 0→1 en cascada heredando las
+  variantes hidden/visible del <code>Stagger</code> padre — <strong>el estado por defecto es el icono
+  dibujado</strong> (lección del S5: si el disparo no llega, se ve igual). Nunca un emoji.</p>
+<p class="nota"><strong>Rejilla de dos columnas; si los grupos son impares, el último ocupa las
+  dos</strong> (2026-09-26: con nueve, la última fila quedaba con un hueco). El orden empareja
+  tarjetas de tamaño parecido.</p>
 <p class="nota"><strong>Cada tarjeta es un destino</strong> (2026-09-26): lleva
   <code>id="skills-&lt;id&gt;"</code>, con el <code>id</code> del grupo en el YAML, y ahí aterrizan
-  las citas del chat de esa capacidad. <code>scroll-mt-40</code>: si el salto llega antes que el
-  <code>liftIn</code> (70 px abajo y encogida), el título igual queda bajo el encabezado y a la vista.</p>
+  las citas del chat de esa capacidad —desde hoy, un fragmento del índice por grupo—.
+  <code>scroll-mt-40</code>: si el salto llega antes que el <code>liftIn</code> (70 px abajo y
+  encogida), el título igual queda bajo el encabezado y a la vista.</p>
 </body>
 </html>

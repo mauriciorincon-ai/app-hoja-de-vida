@@ -165,7 +165,19 @@ preguntas:
     espera: [agentes-en-produccion, vesting]
     familia: ia-y-agentes
   - pregunta: "Which agent frameworks has he used?"
-    espera: [agentes-en-produccion]
+    espera: [agentes-en-produccion, fundacion-ctic, skills]
+    familia: ia-y-agentes
+  - pregunta: "Has he used LangChain or LangGraph?"
+    espera: [fundacion-ctic, agentes-en-produccion, skills]
+    familia: ia-y-agentes
+  - pregunta: "Does he use AI coding assistants, like Claude Code or Cursor?"
+    espera: [skills, como-aprendo]
+    familia: ia-y-agentes
+  - pregunta: "Does he know the Model Context Protocol (MCP)?"
+    espera: [skills, los-agentes-de-la-vitrina]
+    familia: ia-y-agentes
+  - pregunta: "Has he worked with Azure OpenAI or Azure AI Search?"
+    espera: [skills]
     familia: ia-y-agentes
   - pregunta: "Has he worked with large language models?"
     espera: [rag-y-el-chat, agentes-en-produccion]
@@ -233,6 +245,15 @@ preguntas:
     familia: plataforma-y-datos
   - pregunta: "Does he have experience with Docker and Kubernetes?"
     espera: [plataforma-y-despliegue]
+    familia: plataforma-y-datos
+  - pregunta: "Does he know Databricks or Snowflake?"
+    espera: [skills]
+    familia: plataforma-y-datos
+  - pregunta: "Has he used dbt or Airflow?"
+    espera: [skills]
+    familia: plataforma-y-datos
+  - pregunta: "Has he worked with Microsoft Purview?"
+    espera: [skills, gobierno-de-datos-y-de-ia]
     familia: plataforma-y-datos
   - pregunta: "Does he know MLOps?"
     espera: [plataforma-y-despliegue, analitica-predictiva]
@@ -338,6 +359,9 @@ preguntas:
     familia: procesos
   - pregunta: "What good is industrial engineering in a data job?"
     espera: [procesos-y-simulacion, origenes, como-trabajo]
+    familia: procesos
+  - pregunta: "Does he know mathematical optimization, with Pyomo or OR-Tools?"
+    espera: [skills]
     familia: procesos
   # ── vitrina
   - pregunta: "What has he built on his own, outside of work?"

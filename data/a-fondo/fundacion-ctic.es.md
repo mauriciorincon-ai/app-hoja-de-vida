@@ -6,7 +6,7 @@ resumen: "Mi rol actual: 42 productos analíticos en Power BI para 20 líderes d
 cuando_usar: "Úsalo cuando pregunten dónde trabaja actualmente, por la Fundación CTIC (2025–hoy), datos del sector salud, calidad de datos, la estrategia institucional de inteligencia artificial bajo UNE-ISO/IEC 42001:2025, los 23 instrumentos y los tableros de control por proceso."
 estado: aprobado
 ancla: "/proyectos/fundacion-ctic"
-actualizado: 2026-09-20
+actualizado: 2026-09-26
 preguntas_de_prueba:
   - "¿Qué hace Henry en la Fundación CTIC?"
   - "¿Qué experiencia tiene con datos en salud?"
@@ -53,7 +53,7 @@ Trabajo en línea directa con la Directora de Planeación y con los subdirectore
 
 <!-- seccion: los-tres-campos-que-reune-el-rol -->
 
-Este rol reúne los tres campos sobre los que he construido mi perfil profesional. La ingeniería y la analítica de datos proporcionan la estructura necesaria para representar la realidad institucional mediante información confiable: en la Fundación CTIC eso se traduce en modelos de análisis y visualización para líderes administrativos y asistenciales, en procesos de limpieza, integración y estandarización de datos, y en tableros de control por procesos para el seguimiento de indicadores clave. Las aplicaciones y los agentes de inteligencia artificial permiten convertir esa información y el conocimiento organizacional en nuevas capacidades de asistencia y ejecución. La arquitectura empresarial conecta finalmente esas soluciones con los procesos, los controles, las responsabilidades y los objetivos de la institución.
+Este rol reúne los tres campos sobre los que he construido mi perfil profesional. La ingeniería y la analítica de datos proporcionan la estructura necesaria para representar la realidad institucional mediante información confiable: en la Fundación CTIC eso se traduce en modelos de análisis y visualización para líderes administrativos y asistenciales, en procesos de limpieza, integración y estandarización de datos, y en tableros de control por procesos para el seguimiento de indicadores clave. Las aplicaciones y los agentes de inteligencia artificial permiten convertir esa información y el conocimiento organizacional en nuevas capacidades de asistencia y ejecución. Los frameworks de agentes con los que he trabajado aquí son los del ecosistema de LangChain: LangChain, LangGraph, LangSmith y Langflow. La arquitectura empresarial conecta finalmente esas soluciones con los procesos, los controles, las responsabilidades y los objetivos de la institución.
 
 Las cuatro funciones que describe mi hoja de vida para este cargo son, en ese orden, analítica para la toma de decisiones, gobierno y calidad de datos, monitoreo con inteligencia de negocios y mejora continua. La quinta, que no cabía en una viñeta, es la que hoy ocupa la mayor parte de mi criterio: la estrategia institucional de IA bajo UNE-ISO/IEC 42001:2025, con 23 instrumentos del sistema de gestión en distintos estados de avance.
 
