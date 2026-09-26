@@ -10,8 +10,10 @@ import {
 import {
   CODIGO_INTENTOS_MAX,
   CODIGO_VIGENCIA_MS,
+  CUPO_VENTANA_HORAS,
   registroSchema,
   SESION_VIGENCIA_MS,
+  TOPE_DIARIO_DEFECTO,
   verificacionConNombreSchema,
 } from "@/lib/chat-registro/schemas";
 import {
@@ -21,7 +23,7 @@ import {
   leerSesion,
   sesionDeRequest,
 } from "@/lib/chat-registro/sesion";
-import { crearStoreEnMemoria } from "@/lib/chat-registro/store";
+import { crearStoreEnMemoria, topeDiario } from "@/lib/chat-registro/store";
 
 /**
  * Los motores puros de la barrera del chat (ADR-024): el código, la sesión
@@ -198,6 +200,62 @@ describe("el almacén en memoria", () => {
     });
     expect(s.entradas).toHaveLength(1);
     expect(s.entradas[0].modo).toBe("ia");
+  });
+});
+
+describe("el cupo de cada persona (2026-09-26)", () => {
+  const entrada = (email: string) => ({
+    nombre: "Ana",
+    email,
+    locale: "es" as const,
+    pregunta: "¿Qué hizo en Vesting?",
+    respuesta: "…",
+    fuentes: [],
+    modo: "ia" as const,
+  });
+  const HORA = 60 * 60_000;
+
+  it("llega al tope con la pregunta número `limite` de las últimas 24 horas", async () => {
+    const store = crearStoreEnMemoria();
+    const ahora = 1_000 * HORA;
+    for (let i = 0; i < 2; i++)
+      await store.registrar(entrada("ana@prueba.co"), ahora - i * HORA);
+    expect(await store.cupo("ana@prueba.co", 3, ahora)).toBe("ok");
+    await store.registrar(entrada("ana@prueba.co"), ahora);
+    expect(await store.cupo("ana@prueba.co", 3, ahora)).toBe("tope");
+    // Otra persona no hereda el tope ajeno.
+    expect(await store.cupo("beto@prueba.co", 3, ahora)).toBe("ok");
+  });
+
+  it("lo de hace más de 24 horas ya no cuenta, y el correo no distingue mayúsculas", async () => {
+    const store = crearStoreEnMemoria();
+    const ahora = 1_000 * HORA;
+    await store.registrar(
+      entrada("Ana@Prueba.co"),
+      ahora - CUPO_VENTANA_HORAS * HORA,
+    );
+    await store.registrar(entrada("ana@prueba.co"), ahora - HORA);
+    expect(await store.cupo("ANA@prueba.co", 2, ahora)).toBe("ok");
+    await store.registrar(entrada("ana@prueba.co"), ahora);
+    expect(await store.cupo("ana@prueba.co", 2, ahora)).toBe("tope");
+  });
+
+  it("un correo bloqueado no pregunta nunca, aunque no haya preguntado nada", async () => {
+    const store = crearStoreEnMemoria();
+    store.bloqueados.add("Molesto@Prueba.co");
+    expect(await store.cupo("molesto@prueba.co", 20)).toBe("bloqueado");
+  });
+
+  it("CHAT_TOPE_DIARIO cambia el tope; un valor inválido cae a 20, jamás apaga la protección", () => {
+    vi.stubEnv("CHAT_TOPE_DIARIO", "");
+    expect(topeDiario()).toBe(TOPE_DIARIO_DEFECTO);
+    expect(TOPE_DIARIO_DEFECTO).toBe(20);
+    vi.stubEnv("CHAT_TOPE_DIARIO", "35");
+    expect(topeDiario()).toBe(35);
+    for (const invalido of ["0", "-5", "abc", "2.5", "100000"]) {
+      vi.stubEnv("CHAT_TOPE_DIARIO", invalido);
+      expect(topeDiario(), invalido).toBe(TOPE_DIARIO_DEFECTO);
+    }
   });
 });
 

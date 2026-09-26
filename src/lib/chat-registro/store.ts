@@ -4,6 +4,9 @@ import { z } from "zod";
 import {
   CODIGO_INTENTOS_MAX,
   CODIGO_VIGENCIA_MS,
+  CUPO_VENTANA_HORAS,
+  TOPE_DIARIO_DEFECTO,
+  type Cupo,
   type EntradaRegistro,
 } from "./schemas";
 
@@ -29,8 +32,13 @@ export type RegistroStore = {
     coincide: (guardado: string, recibido: string) => boolean,
     ahora?: number,
   ): Promise<ResultadoVerificacion>;
-  /** Una fila por pregunta respondida. */
-  registrar(entrada: EntradaRegistro): Promise<void>;
+  /** Una fila por pregunta respondida (`ahora` solo lo usa la memoria). */
+  registrar(entrada: EntradaRegistro, ahora?: number): Promise<void>;
+  /**
+   * ¿Puede preguntar? Cuenta sus preguntas de las últimas `CUPO_VENTANA_HORAS`
+   * en el registro y mira la lista de bloqueados (2026-09-26).
+   */
+  cupo(email: string, limite: number, ahora?: number): Promise<Cupo>;
 };
 
 export class RegistroUnavailableError extends Error {
@@ -48,12 +56,19 @@ type CodigoEnMemoria = { hash: string; expira: number; intentos: number };
 export function crearStoreEnMemoria(): RegistroStore & {
   entradas: EntradaRegistro[];
   codigos: Map<string, CodigoEnMemoria>;
+  bloqueados: Set<string>;
+  /** Cuándo se registró cada pregunta, por correo: lo que cuenta el cupo. */
+  momentos: Map<string, number[]>;
 } {
   const codigos = new Map<string, CodigoEnMemoria>();
   const entradas: EntradaRegistro[] = [];
+  const bloqueados = new Set<string>();
+  const momentos = new Map<string, number[]>();
   return {
     codigos,
     entradas,
+    bloqueados,
+    momentos,
     async guardarCodigo(email, hash, ahora = Date.now()) {
       codigos.set(email, {
         hash,
@@ -79,13 +94,25 @@ export function crearStoreEnMemoria(): RegistroStore & {
       codigos.delete(email);
       return { ok: true };
     },
-    async registrar(entrada) {
+    async registrar(entrada, ahora = Date.now()) {
       entradas.push(entrada);
+      const email = entrada.email.toLowerCase();
+      momentos.set(email, [...(momentos.get(email) ?? []), ahora]);
+    },
+    async cupo(email, limite, ahora = Date.now()) {
+      const clave = email.toLowerCase();
+      if ([...bloqueados].some((b) => b.toLowerCase() === clave))
+        return "bloqueado";
+      const desde = ahora - CUPO_VENTANA_HORAS * 60 * 60_000;
+      const recientes = (momentos.get(clave) ?? []).filter((t) => t > desde);
+      return recientes.length >= limite ? "tope" : "ok";
     },
   };
 }
 
 // ── Supabase ────────────────────────────────────────────────────────────────
+
+const cupoRpcSchema = z.enum(["ok", "tope", "bloqueado"]);
 
 const verificacionRpcSchema = z.enum([
   "ok",
@@ -138,6 +165,18 @@ export function crearStoreSupabase(client: SupabaseClient): RegistroStore {
       });
       if (error) throw new RegistroUnavailableError(error);
     },
+    async cupo(email, limite) {
+      const { data, error } = await client.rpc("chat_cupo", {
+        p_email: email,
+        p_limite: limite,
+        p_horas: CUPO_VENTANA_HORAS,
+      });
+      if (error) throw new RegistroUnavailableError(error);
+      const parsed = cupoRpcSchema.safeParse(data);
+      if (!parsed.success)
+        throw new RegistroUnavailableError("respuesta inesperada");
+      return parsed.data;
+    },
   };
 }
 
@@ -148,6 +187,18 @@ let memoria: ReturnType<typeof crearStoreEnMemoria> | null = null;
 /** ¿La barrera está encendida? Por defecto sí; `CHAT_GATE=off` la apaga (solo dev). */
 export function gateHabilitado(): boolean {
   return process.env.CHAT_GATE !== "off";
+}
+
+/**
+ * Cuántas preguntas por persona cada 24 horas. `CHAT_TOPE_DIARIO` en Vercel lo
+ * cambia sin tocar código (un entero de 1 a 1000); cualquier otro valor cae al
+ * de siempre, 20, en vez de apagar la protección.
+ */
+export function topeDiario(): number {
+  const crudo = process.env.CHAT_TOPE_DIARIO;
+  if (!crudo || !/^\d+$/.test(crudo.trim())) return TOPE_DIARIO_DEFECTO;
+  const n = Number(crudo.trim());
+  return n >= 1 && n <= 1000 ? n : TOPE_DIARIO_DEFECTO;
 }
 
 /**

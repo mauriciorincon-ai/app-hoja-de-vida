@@ -7,7 +7,11 @@ import {
 } from "@/lib/chat-registro/codigo";
 import { enviarCodigo } from "@/lib/chat-registro/email";
 import { registroSchema } from "@/lib/chat-registro/schemas";
-import { gateHabilitado, resolverStore } from "@/lib/chat-registro/store";
+import {
+  gateHabilitado,
+  resolverStore,
+  topeDiario,
+} from "@/lib/chat-registro/store";
 import { logger } from "@/lib/logger";
 import { checkRateLimit } from "@/lib/rate-limit";
 
@@ -17,8 +21,9 @@ const limiteApagado = () => process.env.DISABLE_RATE_LIMIT === "1";
 /**
  * Paso 1 de la barrera del chat (ADR-024): nombre + correo → código por email.
  * Defensas: gate encendida → rate limit por IP (3/10 min) y por correo
- * (3/10 min) → honeypot → Zod → guardar hash → enviar. Nunca devuelve el
- * código al cliente; en modo simulado (sin RESEND_API_KEY) lo deja en el log.
+ * (3/10 min) → honeypot → Zod → correo bloqueado (2026-09-26) → guardar hash
+ * → enviar. Nunca devuelve el código al cliente; en modo simulado (sin
+ * RESEND_API_KEY) lo deja en el log.
  */
 
 const LIMITE = { limit: 3, windowMs: 10 * 60_000 };
@@ -87,6 +92,17 @@ export async function POST(request: Request): Promise<NextResponse> {
   if (!limiteApagado() && !checkRateLimit(`registro:${email}`, LIMITE).allowed) {
     log.warn({ ms: Date.now() - start }, "rate limited (email)");
     return NextResponse.json({ error: "rate_limited" }, { status: 429 });
+  }
+
+  // Un correo bloqueado no recibe código: ni entra al chat ni gasta un envío
+  // de Resend. Si el almacén no responde, sigue (el chat lo vuelve a mirar).
+  try {
+    if ((await store.cupo(email, topeDiario())) === "bloqueado") {
+      log.warn({ ms: Date.now() - start }, "registro de un correo bloqueado");
+      return NextResponse.json({ error: "bloqueado" }, { status: 403 });
+    }
+  } catch (err) {
+    log.error({ err }, "cupo del chat no disponible — se deja pasar");
   }
 
   const codigo = codigoDePrueba() ?? generarCodigo();

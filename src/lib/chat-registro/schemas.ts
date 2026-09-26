@@ -12,6 +12,18 @@ export const CODIGO_VIGENCIA_MS = 10 * 60_000;
 export const CODIGO_INTENTOS_MAX = 5;
 export const SESION_VIGENCIA_MS = 30 * 24 * 60 * 60_000;
 
+/**
+ * El cupo (2026-09-26, pedido del dueño): cuántas preguntas puede hacer una
+ * persona en una ventana de horas, contadas en el registro. Protege la cuota
+ * diaria del proveedor: sin él, una sola persona registrada podía gastarse
+ * las ~100 respuestas del día de todos. `CHAT_TOPE_DIARIO` lo cambia sin
+ * código (ver `topeDiario()` en store.ts).
+ */
+export const TOPE_DIARIO_DEFECTO = 20;
+export const CUPO_VENTANA_HORAS = 24;
+/** 'bloqueado' manda sobre 'tope': un correo de la lista no pregunta nunca. */
+export type Cupo = "ok" | "tope" | "bloqueado";
+
 /** Paso 1 — pedir el código. `website` es el honeypot; `acepta` es el aviso de datos. */
 export const registroSchema = z.object({
   nombre: z.string().trim().min(2).max(120),

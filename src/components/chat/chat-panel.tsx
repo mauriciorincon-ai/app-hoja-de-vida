@@ -65,6 +65,11 @@ export function ChatPanel({
   const [input, setInput] = useState("");
   const [modo, setModo] = useState<"ia" | "fallback">("ia");
   const [rateLimited, setRateLimited] = useState(false);
+  // El cupo de la persona (2026-09-26): llegó al máximo del día, o su correo
+  // está bloqueado. No es una falla: no se degrada a búsqueda local.
+  const [sinCupo, setSinCupo] = useState<"topeDiario" | "bloqueado" | null>(
+    null,
+  );
   const inputRef = useRef<HTMLInputElement>(null);
   const logRef = useRef<HTMLDivElement>(null);
   const retrieverRef = useRef<Retriever | null>(null);
@@ -81,7 +86,17 @@ export function ChatPanel({
         // Errores HTTP tipados para decidir el estado en onError
         fetch: (async (url: RequestInfo | URL, init?: RequestInit) => {
           const res = await fetch(url, init);
-          if (res.status === 429) throw new Error("rate_limited");
+          if (res.status === 429) {
+            // Dos 429 distintos: el ritmo por minuto y el tope del día.
+            const { error } = (await res
+              .clone()
+              .json()
+              .catch(() => ({}))) as { error?: string };
+            throw new Error(
+              error === "tope_diario" ? "tope_diario" : "rate_limited",
+            );
+          }
+          if (res.status === 403) throw new Error("bloqueado");
           if (res.status === 401) throw new Error("registro_requerido");
           if (!res.ok) throw new Error("fallback");
           return res;
@@ -108,6 +123,15 @@ export function ChatPanel({
       onError: (error) => {
         if (error.message.includes("rate_limited")) {
           setRateLimited(true);
+          return;
+        }
+        if (
+          error.message.includes("tope_diario") ||
+          error.message.includes("bloqueado")
+        ) {
+          setSinCupo(
+            error.message.includes("bloqueado") ? "bloqueado" : "topeDiario",
+          );
           return;
         }
         if (error.message.includes("registro_requerido")) {
@@ -197,6 +221,7 @@ export function ChatPanel({
     const pregunta = texto.trim();
     if (!pregunta || ocupado) return;
     setRateLimited(false);
+    setSinCupo(null);
     setInput("");
     ultimaPreguntaRef.current = pregunta;
     trackEvent("chat_pregunta", { modo });
@@ -415,6 +440,17 @@ export function ChatPanel({
           {rateLimited && (
             <p data-testid="chat-rate-limited" className="text-xs text-ink-2">
               {t("rateLimited")}
+            </p>
+          )}
+
+          {sinCupo && (
+            <p
+              data-testid={
+                sinCupo === "bloqueado" ? "chat-bloqueado" : "chat-tope-diario"
+              }
+              className="text-xs text-ink-2"
+            >
+              {t(sinCupo)}
             </p>
           )}
         </div>

@@ -39,6 +39,7 @@ export function ChatRegistro({
   const mensajeDe = (code: string): string => {
     if (code === "rate_limited") return t("registroRateLimited");
     if (code === "registro_no_disponible") return t("registroNoDisponible");
+    if (code === "bloqueado") return t("registroBloqueado");
     if (code === "incorrecto") return t("codigoIncorrecto");
     if (code === "vencido" || code === "agotado" || code === "sin_codigo")
       return t("codigoVencido");

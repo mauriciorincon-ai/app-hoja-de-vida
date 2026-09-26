@@ -174,6 +174,8 @@
     "fallbackAviso": "El asistente de IA no está disponible en este momento, así que te muestro los fragmentos de la hoja de vida que mejor responden a tu pregunta:",
     "fallbackVacio": "No encontré nada sobre eso en la hoja de vida. Prueba con otra pregunta o escríbele a Henry desde Contacto.",
     "rateLimited": "Muchas preguntas muy seguidas — dame un minuto de respiro y seguimos.",
+    "topeDiario": "Llegaste al máximo de preguntas de hoy. Vuelve mañana, o escríbeme desde Contacto y seguimos la conversación.",
+    "bloqueado": "Este correo no tiene acceso al chat. Si crees que es un error, escríbeme desde Contacto.",
     "error": "No pude responder esa pregunta. Intenta de nuevo.",
     "registroTitulo": "Antes de empezar, dime quién eres",
     "registroIntro": "Para chatear con mi hoja de vida te pido nombre y correo; te envío un código de seis dígitos y con él entras. Así sé quién pregunta y puedo seguir la conversación si me interesa lo que buscas.",
@@ -201,6 +203,7 @@
     "registroError": "No pude enviar el código. Inténtalo en un momento.",
     "registroRateLimited": "Demasiados intentos seguidos. Espera unos minutos.",
     "registroNoDisponible": "El registro del chat no está disponible en este momento.",
+    "registroBloqueado": "Este correo no tiene acceso al chat. Si crees que es un error, escríbeme desde Contacto.",
     "saludo": "Hola, {nombre}. Pregunta lo que quieras sobre mi trayectoria.",
     "sesionRequerida": "Tu sesión terminó. Vuelve a registrarte para seguir chateando."
   },

@@ -83,3 +83,40 @@ registro del chat es, por definición, datos personales. Se hace, y se hace con 
   `chat-route.test.ts` (sin cookie 401; con la puerta apagada no se registra; la respuesta y la
   estática quedan registradas), y el e2e de la puerta (formulario primero, código malo no entra,
   el bueno saluda por el nombre y la cookie sobrevive a recargar).
+
+## Enmienda 2026-09-26 — el cupo de cada persona
+
+**Contexto.** El dueño preguntó cómo estamos protegidos para no pasarnos de tokens con Groq y
+para que nadie abuse del chat. La respuesta honesta tenía un hueco: con el plan gratis de Groq no
+hay factura posible (solo cortes), pero **una sola persona registrada podía gastarse la cuota
+diaria de todos** (~100 respuestas: 200K tokens/día a ~2K por respuesta). El límite de 10 por
+minuto vive en la memoria de cada instancia serverless, así que no es global, y no había forma de
+cortarle el acceso a un correo en particular.
+
+**Decisión.** Tras la sesión y antes del guardrail, `/api/chat` pregunta el **cupo** de esa
+persona con la RPC `chat_cupo` (migración `20260926120000_chat_cupo.sql`):
+
+- **Bloqueado** si el correo está en la tabla nueva `chat_bloqueados` → 403 `bloqueado`. El
+  dueño agrega o quita filas desde el Table Editor de Supabase, con efecto inmediato y sin
+  redeploy. El registro (`/api/chat/registro`) también la consulta: un correo bloqueado no
+  recibe código, así que tampoco gasta un envío de Resend.
+- **Tope** si ya hizo `CHAT_TOPE_DIARIO` preguntas (20 por defecto, entero 1–1000; cualquier
+  otro valor cae a 20, nunca apaga la protección) en las últimas 24 horas → 429 `tope_diario`.
+  Se cuentan **todas** las filas de `chat_registro` de ese correo (ia, offtopic y local): se
+  cuenta en la base, así que vale igual en todas las instancias.
+- Ninguno de los dos llama al proveedor. El panel muestra su aviso propio y no cae a la
+  búsqueda local (no es una falla).
+- **Si el almacén no responde el cupo, deja pasar** y lo registra como error en el log: las
+  otras defensas siguen en pie, y un visitante no paga una falla nuestra.
+
+Mismo patrón de acceso que el resto: RLS encendida sin políticas en `chat_bloqueados`, el anon
+solo ejecuta `chat_cupo` y no puede leer ni escribir la lista.
+
+**Consecuencias.**
+
+- **La migración va a producción antes del merge** (SQL Editor de Supabase). Si falta, el
+  chat sigue funcionando, pero sin cupo, y el log lo grita en cada pregunta.
+- Gates nuevos, con su rojo registrado en `sprints/REV-2026-09-26-tope-diario-bitacora.md`: el
+  almacén en memoria y `topeDiario()` (unit), la ruta del chat y la del registro (integración),
+  la RPC contra Postgres real (`tests/integration/chat-cupo.dbtest.ts`) y los avisos del panel
+  (e2e).

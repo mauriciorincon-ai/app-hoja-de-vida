@@ -18,7 +18,12 @@ import { POST as registro } from "@/app/api/chat/registro/route";
 import { POST as verificar } from "@/app/api/chat/verificar/route";
 import { GET as sesion } from "@/app/api/chat/sesion/route";
 import { POST as log } from "@/app/api/chat/log/route";
-import { resetStoreEnMemoria, resolverStore } from "@/lib/chat-registro/store";
+import { enviarCodigo } from "@/lib/chat-registro/email";
+import {
+  crearStoreEnMemoria,
+  resetStoreEnMemoria,
+  resolverStore,
+} from "@/lib/chat-registro/store";
 
 const SECRETO = "secreto-de-prueba-con-mas-de-treinta-y-dos-caracteres";
 let ipSeq = 0;
@@ -66,6 +71,19 @@ const datos = {
   acepta: true,
   website: "",
 };
+
+describe("un correo bloqueado (2026-09-26)", () => {
+  it("no recibe código: 403 bloqueado, sin guardar el hash ni gastar un envío", async () => {
+    const store = resolverStore() as ReturnType<typeof crearStoreEnMemoria>;
+    store.bloqueados.add("ana@ejemplo.co");
+    vi.mocked(enviarCodigo).mockClear();
+    const res = await post(registro, "/api/chat/registro", datos);
+    expect(res.status).toBe(403);
+    expect(await res.json()).toEqual({ error: "bloqueado" });
+    expect(store.codigos.has("ana@ejemplo.co")).toBe(false);
+    expect(enviarCodigo).not.toHaveBeenCalled();
+  });
+});
 
 describe("registro → verificar → sesión", () => {
   it("el flujo feliz emite una cookie httpOnly y la sesión devuelve el nombre", async () => {

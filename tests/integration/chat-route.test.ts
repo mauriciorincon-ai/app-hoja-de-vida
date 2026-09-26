@@ -88,7 +88,11 @@ afterEach(() => {
 });
 
 const entradas = () =>
-  (resolverStore() as ReturnType<typeof import("@/lib/chat-registro/store").crearStoreEnMemoria>).entradas;
+  (
+    resolverStore() as ReturnType<
+      typeof import("@/lib/chat-registro/store").crearStoreEnMemoria
+    >
+  ).entradas;
 
 describe("la puerta y el registro (ADR-024)", () => {
   it("sin cookie → 401 registro_requerido, sin tocar el proveedor ni el índice", async () => {
@@ -127,7 +131,9 @@ describe("la puerta y el registro (ADR-024)", () => {
       proveedor: "mock",
     });
     expect(entradas()[0].respuesta).toContain("[1]");
-    expect(entradas()[0].fuentes.some((f) => f.ancla === "/proyectos/vesting")).toBe(true);
+    expect(
+      entradas()[0].fuentes.some((f) => f.ancla === "/proyectos/vesting"),
+    ).toBe(true);
   });
 
   it("la respuesta estática de una ajena también se registra, como modo offtopic", async () => {
@@ -139,6 +145,61 @@ describe("la puerta y el registro (ADR-024)", () => {
     await new Promise((r) => setTimeout(r, 20));
     expect(entradas()).toHaveLength(1);
     expect(entradas()[0].modo).toBe("offtopic");
+  });
+});
+
+const memoria = () =>
+  resolverStore() as ReturnType<
+    typeof import("@/lib/chat-registro/store").crearStoreEnMemoria
+  >;
+
+describe("el cupo de cada persona (2026-09-26)", () => {
+  it("con el tope del día ya gastado → 429 tope_diario, sin llamar al modelo", async () => {
+    vi.stubEnv("CHAT_TOPE_DIARIO", "2");
+    for (let i = 0; i < 2; i++) {
+      const res = await chatRequest(preguntaValida);
+      expect(res.status).toBe(200);
+      await res.text();
+    }
+    await new Promise((r) => setTimeout(r, 20));
+    spyLlm.mockClear();
+
+    const res = await chatRequest(preguntaValida);
+    expect(res.status).toBe(429);
+    expect(await res.json()).toEqual({ error: "tope_diario" });
+    expect(spyLlm).not.toHaveBeenCalled();
+  });
+
+  it("las preguntas ajenas también cuentan: el tope es por persona, no por token", async () => {
+    vi.stubEnv("CHAT_TOPE_DIARIO", "1");
+    const ajena = {
+      locale: "es",
+      messages: [{ role: "user", content: "¿Va a llover mañana en Madrid?" }],
+    };
+    await (await chatRequest(ajena)).text();
+    const res = await chatRequest(preguntaValida);
+    expect(res.status).toBe(429);
+    expect(await res.json()).toEqual({ error: "tope_diario" });
+  });
+
+  it("un correo bloqueado → 403, sin llamar al modelo ni registrar nada", async () => {
+    memoria().bloqueados.add("ana@prueba.co");
+    const res = await chatRequest(preguntaValida);
+    expect(res.status).toBe(403);
+    expect(await res.json()).toEqual({ error: "bloqueado" });
+    expect(spyLlm).not.toHaveBeenCalled();
+    expect(entradas()).toHaveLength(0);
+  });
+
+  it("si el almacén no responde el cupo, deja pasar: las otras defensas siguen en pie", async () => {
+    const espia = vi
+      .spyOn(memoria(), "cupo")
+      .mockRejectedValue(new Error("supabase caído"));
+    const res = await chatRequest(preguntaValida);
+    expect(res.status).toBe(200);
+    await res.text();
+    expect(espia).toHaveBeenCalledOnce();
+    espia.mockRestore();
   });
 });
 
