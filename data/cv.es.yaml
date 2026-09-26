@@ -36,6 +36,10 @@ identidad:
   # La disponibilidad de reubicación es señal DELIBERADA para recruiters (pack §1)
   ubicacion: "Bogotá, Colombia · Abierto a reubicación internacional y trabajo remoto"
   email: "mauricio.hmrc@gmail.com"
+  # La dirección del dominio (reenvía al Gmail, Cloudflare Email Routing): aquí va
+  # SOLO la parte antes de la arroba. El dominio lo pone el build desde la URL
+  # del sitio: la regla 16 lo prohíbe en el repo. Sitio y PDF muestran las dos.
+  emailDelDominio: "hola"
   enlaces:
     - etiqueta: "LinkedIn"
       url: "https://www.linkedin.com/in/henry-mauricio-rincon"

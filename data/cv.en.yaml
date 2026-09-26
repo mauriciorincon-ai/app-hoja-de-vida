@@ -28,6 +28,9 @@ identidad:
     anything else? Ask this résumé's chat.
   ubicacion: "Bogotá, Colombia · Open to international relocation and remote work"
   email: "mauricio.hmrc@gmail.com"
+  # The domain address (forwards to Gmail): ONLY the part before the @ goes here.
+  # The build adds the domain from the site URL (rule 16 keeps it out of the repo).
+  emailDelDominio: "hola"
   enlaces:
     - etiqueta: "LinkedIn"
       url: "https://www.linkedin.com/in/henry-mauricio-rincon"

@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { SolicitarAccesoForm } from "@/components/forms/solicitar-acceso-form";
 import { Reveal } from "@/components/motion/reveal";
 import { Link } from "@/i18n/navigation";
+import { correosDe } from "@/lib/correos";
 import type { Cv } from "@/lib/schemas";
 
 /**
@@ -39,13 +40,16 @@ export async function Contacto({ identidad }: { identidad: Cv["identidad"] }) {
               <p className="mt-6 max-w-[46ch] text-[15px] leading-relaxed text-ink-2">
                 {t("subtitulo")}
               </p>
-              <p className="mt-8 font-mono text-[13px] text-ink-2">
-                <a
-                  href={`mailto:${identidad.email}`}
-                  className="border-b border-dashed border-ink-3 transition-colors duration-[120ms] hover:text-ink-0"
-                >
-                  {identidad.email}
-                </a>
+              <p className="mt-8 flex flex-col items-start gap-2 font-mono text-[13px] text-ink-2">
+                {correosDe(identidad).map((correo) => (
+                  <a
+                    key={correo}
+                    href={`mailto:${correo}`}
+                    className="border-b border-dashed border-ink-3 transition-colors duration-[120ms] hover:text-ink-0"
+                  >
+                    {correo}
+                  </a>
+                ))}
               </p>
               <p className="mt-4">
                 <Link

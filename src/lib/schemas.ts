@@ -56,6 +56,14 @@ export const cvSchema = z.object({
     perfil: z.string().default(""),
     ubicacion: z.string().min(1),
     email: z.string().email(),
+    // Solo la parte LOCAL del correo del dominio («hola»): el dominio lo pone
+    // el build desde la URL del sitio, porque la regla 16 lo prohíbe en el
+    // repo (scripts/correos.mjs). Sin arroba: si alguien pega la dirección
+    // entera, el build se detiene antes de que el dominio entre al repo.
+    emailDelDominio: z
+      .string()
+      .regex(/^[a-z0-9._-]+$/, "solo la parte antes de la arroba, sin dominio")
+      .optional(),
     enlaces: z
       .array(
         z.object({

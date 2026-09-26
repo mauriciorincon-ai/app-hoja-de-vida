@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { CvDownloadButton } from "@/components/cv-download-button";
 import { getCv } from "@/lib/content";
+import { correosDe } from "@/lib/correos";
 import { rutaDelPdf } from "@/lib/cv-pdf";
 import type { Locale } from "@/i18n/routing";
 import { enMantenimiento } from "@/lib/mantenimiento";
@@ -98,12 +99,15 @@ export default async function MantenimientoPage({
         <div className="mt-12 border-t border-paper-3 pt-8">
           <p className="text-[15px] text-ink-2">{t("escribeme")}</p>
           <p className="mt-3 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[15px]">
-            <a
-              href={`mailto:${identidad.email}`}
-              className="font-medium text-ink-0 underline decoration-paper-3 underline-offset-4 hover:decoration-ink-2"
-            >
-              {identidad.email}
-            </a>
+            {correosDe(identidad).map((correo) => (
+              <a
+                key={correo}
+                href={`mailto:${correo}`}
+                className="font-medium text-ink-0 underline decoration-paper-3 underline-offset-4 hover:decoration-ink-2"
+              >
+                {correo}
+              </a>
+            ))}
             {linkedin && (
               <a
                 href={linkedin.url}

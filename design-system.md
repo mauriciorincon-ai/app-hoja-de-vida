@@ -223,7 +223,7 @@ pie y sin chat**: no hay a dónde ir. Orden: eyebrow sage con punto → el nombr
 el titular en la voz display (la única vez) → una frase → **el CTA sage del PDF** (los PDF se siguen
 sirviendo: lo que un reclutador vino a buscar) y, bajo él, el CV en el otro idioma como enlace
 `ink-2` → filete `paper-3` → «¿Prefieres escribirme?» con
-el correo y LinkedIn como enlaces con subrayado `paper-3`. Arriba a la derecha, la misma píldora
+los correos (el del dominio y el Gmail, desde 2026-09-26) y LinkedIn como enlaces con subrayado `paper-3`. Arriba a la derecha, la misma píldora
 ES / EN del encabezado, como enlace a la otra ruta. Ningún componente nuevo. Tarjeta:
 `design-sync/components/componentes-mantenimiento/`.
 

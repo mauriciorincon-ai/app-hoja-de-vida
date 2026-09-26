@@ -4,6 +4,7 @@ import process from "node:process";
 import { parse } from "yaml";
 import PDFDocument from "pdfkit";
 import { aniosCumplidos } from "./anios.mjs";
+import { correosPublicos } from "./correos.mjs";
 
 /**
  * PDF ATS del CV, generado en build desde data/cv.{es,en}.yaml (ADR-008):
@@ -120,8 +121,10 @@ export function lineaDeContacto(identidad, sitio) {
       origen = null;
     }
   }
+  // Los dos correos (2026-09-26): el del dominio, armado con el dominio del
+  // build (scripts/correos.mjs), y el Gmail. Sin dominio, solo el Gmail.
   const resto = [
-    identidad.email,
+    ...correosPublicos(identidad, sitio),
     ...identidad.enlaces.map((e) => sinProtocolo(e.url)),
   ].filter(Boolean);
   return { destacado, origen, resto };

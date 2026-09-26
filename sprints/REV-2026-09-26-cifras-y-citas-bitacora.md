@@ -101,6 +101,34 @@ porque en la primera visita la fuente mono era Arial y las alturas coincidían p
 e2e ahora mide lo que el ancla promete, el hito que se está leyendo (su borde 100 px por encima de
 la ventana). Esa versión sí caza el error.
 
+## 5. El correo entrante del dominio, en el BLUEPRINT
+
+El dueño activó Cloudflare Email Routing: `hola@` se reenvía a su Gmail público y lo probó desde
+otra cuenta. Lo verifiqué desde afuera, preguntando al servidor de nombres de Cloudflare (la
+caché local tardaba): tres MX y un SPF en la raíz y la firma DKIM de Cloudflare, que conviven con
+los registros de Resend (`send`, `resend._domainkey`) y con el CNAME aplanado del sitio. El sitio
+siguió respondiendo 200 durante todo el cambio. El BLUEPRINT pasa la caja «futuro» a real y suma
+su fila, el costo (sigue en ≈US$1/mes) y el punto único de falla.
+
+## 6. Los dos correos, en el sitio y el PDF
+
+Pedido del dueño: _«quiero que muestre ambos por si acaso en mi sitio y el PDF»_. El obstáculo es
+la regla 16: `hola@<dominio>` lleva el dominio, y el dominio no puede estar en ningún archivo del
+repo. Así que en el YAML va solo la parte local (`identidad.emailDelDominio: "hola"`), y el
+dominio lo pone el build desde la URL del sitio. Una sola regla, `scripts/correos.mjs`, para los
+tres que muestran el correo:
+
+- **el sitio** (`src/lib/correos.ts` con `SITE_URL`): Contacto, el pie, `/cv`, la página de
+  mantenimiento y el JSON-LD (`Person.email` pasa a lista);
+- **el PDF** (con `NEXT_PUBLIC_SITE_URL`): la línea de contacto, en un solo renglón, bajo el
+  rótulo del dominio. Sigue en dos páginas;
+- **el índice del chat**: el fragmento de contacto.
+
+Sin dominio propio (local, una preview sin la variable, el subdominio del proveedor, una IP) queda
+solo el Gmail: nunca una dirección que no recibe. Y el esquema rechaza una dirección entera en
+`emailDelDominio`, para que el dominio no pueda entrar al repo por ahí. Capturas y PDFs con el
+dominio real en `muestras/2026-09-26-dos-correos/` (ignorada).
+
 ## Regla 14 — rojos en este commit
 
 **A. Sin agrupar** (`agruparFuentes` con una clave por número). Unit:
@@ -168,11 +196,36 @@ Y la e2e de idioma en móvil (en escritorio pasa: allá el año no rompe el orde
 Error: hito a -100px antes, a -165px después
 ```
 
+**G. La regla no arma el correo del dominio** (`correosPublicos` devuelve solo el Gmail): la
+unitaria, el índice del chat y el PDF:
+
+```
+× con dominio propio: el del dominio primero, el Gmail después
+× el contacto lleva los dos correos solo si el build conoce el dominio (2026-09-26)
+× con dominio, los dos correos van en la cabecera: el del dominio primero, el Gmail después
+AssertionError: es: falta el correo del dominio: expected -1 to be greater than -1
+```
+
+**H. Sin la guarda del subdominio del proveedor:**
+
+```
+× local, una IP, un host sin punto o el subdominio del proveedor: no hay dominio
+AssertionError: expected [ 'hola@mi-proyecto.<proveedor>', … ] to deeply equal [ 'correo@ejemplo.test' ]
+```
+
+**I. El esquema acepta la dirección entera** (la regex cambiada por `.min(1)`):
+
+```
+× una dirección entera (con arroba y dominio) no pasa el esquema: el dominio no entra al repo
+AssertionError: expected true to be false
+```
+
 Todo se restauró desde respaldo y volvió a verde.
 
 ## Verificación
 
-`pnpm test` **47 archivos, 1297 tests** · `typecheck` y `lint` limpios · e2e completo **398
+`pnpm test` **48 archivos, 1306 tests** · `typecheck` y `lint` limpios · e2e completo **398
 pasan**, 14 saltadas (las de siempre más las tres de fuente en el perfil móvil, a propósito: basta
 Chromium de escritorio para preguntarle al motor) · `pnpm corpus:informe` regenerado (la tabla de
-`data/a-fondo/README.md` enseña los destinos nuevos).
+`data/a-fondo/README.md` enseña los destinos nuevos) · build con el dominio real en local: el
+JSON-LD lleva los dos `mailto:`, y Contacto, el pie y el PDF los muestran (capturas en `muestras/`).

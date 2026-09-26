@@ -43,6 +43,14 @@ el mensaje te llega al correo.
 - **Dos correos distintos:** el que se **muestra** en la página (contacto público) es el campo
   `email:` del YAML; el que **recibe** las solicitudes del formulario es la variable
   `SOLICITUDES_TO_EMAIL` en Vercel — cambiarlos es independiente.
+- **El correo de tu dominio, al lado del Gmail (desde 2026-09-26):** el sitio (Contacto, el pie,
+  `/cv`, la página de mantenimiento, el JSON-LD), el PDF y el chat muestran **los dos**, primero
+  el del dominio. En el YAML va **solo la parte antes de la arroba**, `emailDelDominio: "hola"`:
+  el dominio lo pone el build desde `NEXT_PUBLIC_SITE_URL`, porque la regla 16 no deja escribirlo
+  en el repo (si pegas la dirección entera, el build se detiene). En local y en las previews, que
+  no tienen tu dominio, solo sale el Gmail: nunca se inventa una dirección que no recibe. Para
+  dejar de mostrarlo, borra la línea en los dos YAML. Esa dirección la reenvía Cloudflare Email
+  Routing a tu Gmail (ver el BLUEPRINT).
 - **Red de seguridad:** si un archivo queda mal formado (falta un campo, un email inválido), la
   publicación **falla antes de salir** con un mensaje que dice exactamente qué campo está mal.
   La página que ya está en línea no se rompe.
@@ -873,4 +881,4 @@ chat hoy y cuáles traería con la base aprobada. Ese informe **se genera, no se
 | casos 2026-09-24 | **Ocho casos de estudio, uno por hito** (nacen C&M Consorcio, Ceinfes e Inglopres, pedidos el 2026-09-13), con la forma completa: tesis, banda de cifras, capítulos numerados, lección y navegación entre casos; cada cifra verificada contra su documento a fondo y el minimalismo medido. Bullets de la trayectoria enriquecidos y dos logros nuevos en la HOME. En el chat, «¿Algo no funciona? Avísame» en la puerta, con diagnóstico del servidor en el correo. |
 | mantenimiento 2026-09-24 | **Modo mantenimiento**: `MANTENIMIENTO=on` en Vercel (Production) + Redeploy pone todo el sitio en una página con el CV en PDF y el contacto, con un 503 temporal que Google entiende; `off` + Redeploy lo quita. Solo `on` lo enciende. |
 | revisión 2026-09-26 | En el PDF, el rótulo bajo tu dominio dice qué hay allá («En mi sitio encontrarás / CV interactivo · casos · chat»), centrado respecto al recuadro. La página de mantenimiento cambia de idioma y ofrece el CV en el otro idioma. **El ícono de la pestaña**: tus iniciales en la letra de los títulos, en lugar del triángulo de Vercel (`pnpm iconos`). |
-| cifras y citas 2026-09-26 | **Las cifras en su letra desde la primera visita**: la fuente mono se precarga (antes, la primera visita las pintaba en Arial). En el chat, **un chip por documento y destino** (`[3, 4] AF-17 · …`) y los seis documentos de capacidades **citan hacia su tarjeta de Skills** (`#skills-<id>`). En móvil, cambiar de idioma ya no corre el hito que estás leyendo. |
+| cifras y citas 2026-09-26 | **Las cifras en su letra desde la primera visita**: la fuente mono se precarga (antes, la primera visita las pintaba en Arial). En el chat, **un chip por documento y destino** (`[3, 4] AF-17 · …`) y los seis documentos de capacidades **citan hacia su tarjeta de Skills** (`#skills-<id>`). En móvil, cambiar de idioma ya no corre el hito que estás leyendo. **Los dos correos** (el del dominio y el Gmail) en el sitio, el PDF y el chat; `hola@` llega a tu Gmail por Cloudflare Email Routing. |
