@@ -217,6 +217,22 @@ el correo y LinkedIn como enlaces con subrayado `paper-3`. Arriba a la derecha, 
 ES / EN del encabezado, como enlace a la otra ruta. Ningún componente nuevo. Tarjeta:
 `design-sync/components/componentes-mantenimiento/`.
 
+### Ícono del sitio · 2026-09-26
+
+Las iniciales **HR** en la voz display (Fraunces 500), **en trazos**: un favicon se pinta aislado
+de la página y no carga fuentes web, así que un `<text>` caería a Times. El dueño no tiene logo y
+pidió eso, nada más: sin símbolo ni figura. Dos formas:
+
+- **Letras solas** (`src/app/icon.svg`, la que ven los navegadores de hoy): `ink-0` con tema claro,
+  `paper-0` con el oscuro, vía `prefers-color-scheme` dentro del SVG. Ocupan el 95 % del ancho.
+- **Con loseta** (`favicon.ico` 16/32/48 y `apple-icon.png` 180): letras `ink-0` al 80 % sobre
+  `paper-0`. El .ico con radio del 18 %; el de iOS a sangre, porque el sistema redondea. La loseta
+  existe porque ahí no se sabe el color de fondo.
+
+Los colores salen de los tokens: cambiar la paleta es correr `pnpm iconos`, y
+`tests/unit/iconos.test.ts` falla si quedaron desfasados. Tarjeta:
+`design-sync/components/fundamentos/icono.html`.
+
 ### Caso de estudio · revisión 2026-09-24 (ADR-009 enmendado)
 
 El dueño lo pidió «minimalista y elegante, profesional pero impactante a la vista». La página

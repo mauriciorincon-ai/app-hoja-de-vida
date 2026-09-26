@@ -2,7 +2,7 @@
 
 > PR de contenido sin sprint (canal de contenido, CLAUDE.md). Rama `contenido/a-fondo-v2`
 > desde `main`. El plan, las preguntas, las respuestas del dueño y los cuatro informes de
-> auditoría viven FUERA del repo (`~/Documents/hoja-de-vida-henry/a-fondo-auditoria/`): citan
+> auditoría viven FUERA del repo (`~/Documents/hoja-de-vida-henry/a-fondo-auditoria/`; desde el 2026-09-26, en `privado/`, ignorada por git — ver `REV-2026-09-26-rotulo-idiomas-icono-bitacora.md` §4): citan
 > datos que todavía no se decidió publicar. Aquí queda lo que el repo puede contar: qué se
 > cambió, qué gate nació, en qué paso salió rojo y a quién nombró.
 

@@ -201,3 +201,33 @@ test.describe("El roadmap vive en la página de cada app (2026-09-13)", () => {
     await expect(page.locator("#roadmap")).toHaveCount(0);
   });
 });
+
+test.describe("el ícono de la pestaña", () => {
+  // Hasta 2026-09-26 era el triángulo de Vercel (el favicon de la plantilla).
+  // Los archivos los cuida tests/unit/iconos.test.ts; esto cuida que Next los
+  // ENLACE en la cabecera: un `icons` en la metadata de un layout reemplaza en
+  // silencio a los íconos por archivo, y el unit no lo vería.
+  for (const locale of ["es", "en"] as const) {
+    test(`/${locale} enlaza las iniciales en SVG, el .ico y el de iOS, y los tres responden`, async ({
+      page,
+      request,
+    }) => {
+      await page.goto(`/${locale}`);
+      const svg = page.locator('head link[rel="icon"][type="image/svg+xml"]');
+      const apple = page.locator('head link[rel="apple-touch-icon"]');
+      await expect(svg).toHaveCount(1);
+      await expect(apple).toHaveCount(1);
+
+      const esperados: [string, string][] = [
+        [(await svg.getAttribute("href")) ?? "", "image/svg+xml"],
+        [(await apple.getAttribute("href")) ?? "", "image/png"],
+        ["/favicon.ico", "image/x-icon"],
+      ];
+      for (const [href, tipo] of esperados) {
+        const r = await request.get(href);
+        expect(r.status(), href).toBe(200);
+        expect(r.headers()["content-type"], href).toContain(tipo);
+      }
+    });
+  }
+});

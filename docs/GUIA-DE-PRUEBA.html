@@ -316,7 +316,7 @@
     <div class="pagina">
       <header>
         <p class="eyebrow">
-          CV Viva · Guía de prueba viva y acumulativa · v9.8 · rótulo del dominio e idiomas en mantenimiento + el modo mantenimiento + el dominio en el PDF + los ocho casos de estudio completos + la cita dice de dónde sale y a dónde lleva + la cita conserva la conversación + el corpus alineado + chat/registro + a fondo v2 (el
+          CV Viva · Guía de prueba viva y acumulativa · v9.8 · rótulo del dominio, idiomas en mantenimiento y el ícono + el modo mantenimiento + el dominio en el PDF + los ocho casos de estudio completos + la cita dice de dónde sale y a dónde lleva + la cita conserva la conversación + el corpus alineado + chat/registro + a fondo v2 (el
           detalle) + revisión post-S8 · 2026-09-12
         </p>
         <h1>Guía de prueba</h1>
@@ -339,7 +339,7 @@
           <strong>esperan a que apruebes el primer documento</strong>.
         </p>
         <p class="chica">
-          <strong>Gate mínimo ⭐: 38 pruebas · ~3 h 45 min.</strong> Es lo que ninguna
+          <strong>Gate mínimo ⭐: 39 pruebas · ~3 h 47 min.</strong> Es lo que ninguna
           automatización puede verificar (juicio humano sobre el contenido,
           aprobación visual, dispositivo real, proveedor de IA real). Lo que la
           CI ya respalda (e2e, unit, axe, budgets) queda fuera del mínimo y se
@@ -359,6 +359,8 @@
           PDF (d3), que se corre cuando el dominio ya apunte al sitio.
           <strong>v9.7 suma otra</strong>: el modo mantenimiento visto de
           verdad (p1), en una preview para no tocar producción.
+          <strong>v9.8 suma otra</strong>: el ícono en la pestaña de tu dominio
+          (a7).
         </p>
         <div class="url-caja">
           <p class="eyebrow" style="margin: 0 0 6px">URL de prueba</p>
@@ -494,6 +496,19 @@
               icono se dibuja, y los chips caen <strong>uno a uno</strong>
               detrás: tres momentos que se distinguen. Aprueba el look general.
               <span class="origen origen-mejorado">Mejorado · post-S8</span
+              ><span class="minimo">⭐ mínimo</span></label
+            >
+          </li>
+          <li data-origen="nuevo" data-minimo>
+            <input type="checkbox" id="a7" /><label for="a7"
+              >⭐ <strong>El ícono de la pestaña.</strong> Abre tu dominio en una
+              <strong>ventana privada</strong> (el navegador guarda el ícono
+              viejo mucho tiempo): la pestaña muestra <strong>HR</strong> en la
+              letra de los títulos, no el triángulo de Vercel. Si tu navegador
+              está en tema oscuro, las letras salen claras. En el iPhone,
+              «Compartir → Agregar a inicio» pone HR sobre fondo papel. ¿Te
+              gusta cómo se ve?
+              <span class="origen origen-nuevo">Nuevo · ícono</span
               ><span class="minimo">⭐ mínimo</span></label
             >
           </li>
@@ -1984,13 +1999,15 @@
           <summary>Historial de la guía</summary>
           <ul>
             <li>
-              <strong>v9.8 · rótulo del dominio e idiomas en mantenimiento ·
-              2026-09-26:</strong> tras verlo en producción, el dueño pidió que
-              el rótulo bajo el dominio del PDF diga qué se encuentra en el sitio
-              y quede centrado respecto al recuadro, y que la página de
+              <strong>v9.8 · rótulo del dominio, idiomas en mantenimiento y el
+              ícono · 2026-09-26:</strong> tras verlo en producción, el dueño
+              pidió que el rótulo bajo el dominio del PDF diga qué se encuentra
+              en el sitio y quede centrado respecto al recuadro, que la página de
               mantenimiento deje cambiar a inglés y bajar el CV en el otro
-              idioma. d3 y p1 mejoradas. Ninguna prueba eliminada. Prefijo de
-              casillas <code>rotulo-idiomas</code>.
+              idioma, y que la pestaña deje de mostrar el triángulo de Vercel:
+              sus iniciales en la letra de los títulos. d3 y p1 mejoradas; a7 ⭐
+              nueva (el ícono). Ninguna prueba eliminada. Prefijo de casillas
+              <code>rotulo-idiomas-icono</code>.
             </li>
             <li>
               <strong>v9.7 · el modo mantenimiento · 2026-09-24:</strong> el
@@ -2265,7 +2282,7 @@
       (function () {
         // NS VERSIONADO POR SPRINT: al publicar la guía de un sprint nuevo se cambia
         // s007c — así una regresión sin correr no aparece marcada por la versión anterior.
-        var NS = "guia-hoja-de-vida:rotulo-idiomas:";
+        var NS = "guia-hoja-de-vida:rotulo-idiomas-icono:";
         var casillas = Array.prototype.slice.call(
           document.querySelectorAll('input[type="checkbox"]'),
         );

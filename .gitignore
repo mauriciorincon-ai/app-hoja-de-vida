@@ -36,3 +36,10 @@ public/chat-index.*.json
 # jamás se versionan: un PDF de muestra lleva el dominio real, y la regla 16
 # prohíbe ese dominio en cualquier archivo del repo.
 /muestras/
+
+# Lo privado del dueño que vive en el repo en vez de tirado por el disco (decisión
+# del dueño, 2026-09-26: «todas las carpetas en el directorio»): su hoja de vida
+# fusionada, con teléfonos, y la auditoría del «a fondo», que cita datos que no
+# decidió publicar. El repo es PÚBLICO: además de este ignore, el hook pre-commit
+# (githooks/pre-commit) frena un `git add -f` sobre la carpeta.
+/privado/
