@@ -153,3 +153,20 @@ for (const ruta of RUTAS) {
     );
   });
 }
+
+// El 404 de la raíz (2026-09-26) no tiene header ni footer: no entra al bucle
+// de arriba, que espera el footer. Es una página que alguien puede ver, así
+// que también se audita.
+test("axe limpio en el 404 de la raíz", async ({ page }) => {
+  const erroresDePagina: string[] = [];
+  page.on("pageerror", (e) => erroresDePagina.push(e.message));
+  const res = await page.goto("/favicon.png");
+  expect(res?.status()).toBe(404);
+  const results = await new AxeBuilder({ page })
+    .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
+    .analyze();
+  expect(results.violations).toEqual([]);
+  expect(erroresDePagina, "errores de página (hidratación incluida)").toEqual(
+    [],
+  );
+});

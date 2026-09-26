@@ -1,9 +1,11 @@
 import "server-only";
 import { readFileSync } from "node:fs";
 import path from "node:path";
+import { hasLocale } from "next-intl";
+import { notFound } from "next/navigation";
 import { cache } from "react";
 import { parse } from "yaml";
-import type { Locale } from "@/i18n/routing";
+import { routing, type Locale } from "@/i18n/routing";
 import {
   parseApps,
   parseCv,
@@ -29,6 +31,11 @@ function readYaml(fileName: string): unknown {
 }
 
 export const getCv = cache((locale: Locale): Cv => {
+  // Un idioma que no existe es una página que no existe (2026-09-26). Pasa
+  // cuando un archivo inexistente de la raíz (`/favicon.png`) cae en
+  // [locale]: el layout pide el 404, pero la página corre en paralelo y leía
+  // `data/cv.favicon.png.yaml`. El ENOENT ganaba y la respuesta era un 500.
+  if (!hasLocale(routing.locales, locale)) notFound();
   const fileName = `cv.${locale}.yaml`;
   return parseCv(readYaml(fileName), `data/${fileName}`);
 });

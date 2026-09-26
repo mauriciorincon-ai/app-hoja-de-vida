@@ -243,6 +243,20 @@ Los colores salen de los tokens: cambiar la paleta es correr `pnpm iconos`, y
 `tests/unit/iconos.test.ts` falla si quedaron desfasados. Tarjeta:
 `design-sync/components/fundamentos/icono.html`.
 
+Las rutas clásicas `/apple-touch-icon.png` y `/apple-touch-icon-precomposed.png`, que Safari pide
+sin leer el `<link>`, sirven el mismo `apple-icon.png` por reescritura en `next.config.ts`
+(2026-09-26): nunca una segunda copia del archivo, que se desfasaría de los tokens.
+
+### 404 de la raíz · 2026-09-26
+
+Un archivo que no existe fuera de `/es` y `/en` (`/favicon.png`) no tiene idioma, así que su 404
+(`src/app/not-found.tsx`) **habla los dos**: la misma pieza que el 404 localizado (rótulo mono
+`404` en `ink-2`, titular display `ink-0`, cuerpo `ink-2`, botón `sage`), con el inglés como
+segunda línea del titular en `text-xl` `ink-2` y `lang="en"`, el cuerpo en dos líneas y **dos
+botones iguales**, uno a cada HOME, que bajan uno junto al otro y se envuelven en pantallas
+angostas. Sin header, footer ni chat: no hay idioma con qué montarlos. Las tres familias vienen de
+`src/app/fuentes.ts`, el mismo módulo que usa el layout de cada idioma.
+
 ### Caso de estudio · revisión 2026-09-24 (ADR-009 enmendado)
 
 El dueño lo pidió «minimalista y elegante, profesional pero impactante a la vista». La página

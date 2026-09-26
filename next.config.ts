@@ -13,6 +13,18 @@ const nextConfig: NextConfig = {
   outputFileTracingIncludes: {
     "/api/chat": ["./public/chat-index.*.json"],
   },
+  // Safari y otros clientes piden el ícono de iOS en su ruta clásica sin leer
+  // el <link> de la página. Se les sirve el mismo archivo de la convención de
+  // Next (src/app/apple-icon.png), sin copiarlo (2026-09-26).
+  async rewrites() {
+    return [
+      { source: "/apple-touch-icon.png", destination: "/apple-icon.png" },
+      {
+        source: "/apple-touch-icon-precomposed.png",
+        destination: "/apple-icon.png",
+      },
+    ];
+  },
 };
 
 export default withNextIntl(nextConfig);

@@ -160,6 +160,11 @@ test.describe("HOME — happy path del sprint", () => {
     await expect(page.getByRole("heading", { level: 1 })).toContainText(
       "Esta página no existe",
     );
+    // Y es el localizado, no el bilingüe de la raíz (2026-09-26): ese no
+    // conoce el idioma y habla los dos.
+    await expect(page.getByRole("heading", { level: 1 })).not.toContainText(
+      "This page doesn't exist",
+    );
   });
 });
 
@@ -230,6 +235,60 @@ test.describe("el ícono de la pestaña", () => {
       }
     });
   }
+
+  // Safari pide estas dos por su cuenta, sin leer el <link>. Hasta 2026-09-26
+  // respondían 500 (ver src/app/layout.tsx); ahora sirven el mismo archivo.
+  test("las rutas clásicas del ícono de iOS sirven las iniciales", async ({
+    request,
+  }) => {
+    const oficial = await (await request.get("/apple-icon.png")).body();
+    for (const ruta of [
+      "/apple-touch-icon.png",
+      "/apple-touch-icon-precomposed.png",
+    ]) {
+      const r = await request.get(ruta);
+      expect(r.status(), ruta).toBe(200);
+      expect(r.headers()["content-type"], ruta).toContain("image/png");
+      expect((await r.body()).equals(oficial), ruta).toBe(true);
+    }
+  });
+});
+
+test.describe("un archivo que no existe en la raíz del sitio", () => {
+  // El proxy no toca las rutas con punto, así que nadie les antepone /es:
+  // caían en [locale] con un idioma inválido y respondían 500 (2026-09-26).
+  const notFound = (locale: "es" | "en") =>
+    (
+      JSON.parse(readFileSync(`messages/${locale}.json`, "utf8")) as {
+        notFound: { titulo: string; volver: string };
+      }
+    ).notFound;
+
+  for (const ruta of [
+    "/favicon.png",
+    "/manifest.webmanifest",
+    "/cualquier-cosa.txt",
+  ]) {
+    test(`${ruta} responde 404, no 500`, async ({ request }) => {
+      expect((await request.get(ruta)).status()).toBe(404);
+    });
+  }
+
+  test("el 404 de la raíz habla los dos idiomas y lleva a las dos HOME", async ({
+    page,
+  }) => {
+    const res = await page.goto("/favicon.png");
+    expect(res?.status()).toBe(404);
+    const h1 = page.getByRole("heading", { level: 1 });
+    await expect(h1).toContainText(notFound("es").titulo);
+    await expect(h1).toContainText(notFound("en").titulo);
+    await expect(
+      page.getByRole("link", { name: notFound("es").volver }),
+    ).toHaveAttribute("href", "/es");
+    await expect(
+      page.getByRole("link", { name: notFound("en").volver }),
+    ).toHaveAttribute("href", "/en");
+  });
 });
 
 test.describe("las cifras, en su letra desde la primera visita", () => {
