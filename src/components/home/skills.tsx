@@ -65,9 +65,17 @@ export async function Skills({ skills }: { skills: Cv["skills"] }) {
               className="h-full"
               hijos={{ delay: RETRASO_CABECERA_S, escalon: ESCALON_CHIP_S }}
             >
+              {/* El id es el destino de una cita del chat: los documentos «a
+                  fondo» de una capacidad llevan a SU tarjeta, no a la sección
+                  entera (scripts/destinos.mjs lo lee de aquí). scroll-mt-40 y
+                  no 16: si la tarjeta aún no entró, el salto apunta a su
+                  posición de ARRANQUE de liftIn (70 px abajo y encogida), y al
+                  subir quedaba bajo el encabezado. 160 px = encabezado + ese
+                  recorrido; ya entrada, solo deja más aire. */}
               <article
+                id={`skills-${grupo.id}`}
                 data-skill-grupo={i}
-                className="skill-tarjeta flex h-full flex-col gap-5 rounded-[14px] border border-paper-2 bg-paper-0 p-6 shadow-sh-1 transition-[box-shadow,transform] duration-[180ms] ease-[var(--ease-out-cubic)] hover:-translate-y-0.5 hover:shadow-sh-2"
+                className="skill-tarjeta scroll-mt-40 flex h-full flex-col gap-5 rounded-[14px] border border-paper-2 bg-paper-0 p-6 shadow-sh-1 transition-[box-shadow,transform] duration-[180ms] ease-[var(--ease-out-cubic)] hover:-translate-y-0.5 hover:shadow-sh-2"
               >
                 <StaggerItem
                   variant="fadeInUp"

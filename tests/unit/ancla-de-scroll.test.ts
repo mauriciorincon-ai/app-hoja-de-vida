@@ -16,6 +16,19 @@ describe("ancla de scroll al cambiar de idioma", () => {
     expect(medirAncla(3900, es)).toEqual({ indice: 5, desfase: 600, y: 3900 });
   });
 
+  it("un candidato fijo (sticky) fuera de orden no corta la búsqueda (2026-09-26)", () => {
+    // El año del índice de la trayectoria va en el orden del documento ANTES
+    // de los hitos, pero se queda a media pantalla: su top va por delante del
+    // scroll. Cortar ahí anclaba al título de la sección, y en móvil el hito
+    // que se leía se corría 42–87 px al cambiar de idioma.
+    const conFijo = [0, 400, 2050, 800, 1600, 2000]; // [2] = el año fijo
+    expect(medirAncla(1650, conFijo)).toEqual({
+      indice: 4,
+      desfase: 50,
+      y: 1650,
+    });
+  });
+
   it("sin hito por encima, el ancla es el scrollY tal cual", () => {
     expect(medirAncla(0, [])).toEqual({ indice: -1, desfase: 0, y: 0 });
     expect(medirAncla(120, [500, 900])).toEqual({

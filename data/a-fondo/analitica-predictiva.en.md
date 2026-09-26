@@ -5,7 +5,7 @@ titulo: "Predictive analytics"
 resumen: "Two families of models in production with scikit-learn —SITP demand by route and time band, and churn, delinquency and risk in banking with over 90% accuracy—, the machine learning tools I use and at what level, the statistics and feature engineering that hold the model up, and Probeta DS."
 cuando_usar: "Use this when they ask about predictive models and machine learning: demand forecasting, churn, delinquency and risk models, the accuracy reached, tools (Python, scikit-learn, pandas, numpy, R, SQL), his statistics background, programming languages, natural language processing and Probeta DS."
 estado: aprobado
-ancla: "#skills"
+ancla: "#skills-ia-y-ml"
 actualizado: 2026-09-20
 preguntas_de_prueba:
   - "What predictive models has Henry built?"

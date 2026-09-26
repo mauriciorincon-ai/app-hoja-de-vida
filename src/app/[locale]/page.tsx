@@ -13,6 +13,7 @@ import { Trayectoria } from "@/components/home/trayectoria";
 import { VitrinaHome } from "@/components/home/vitrina";
 import type { Locale } from "@/i18n/routing";
 import { getCv } from "@/lib/content";
+import { correosDe } from "@/lib/correos";
 import { SITE_URL } from "@/lib/site";
 
 export default async function HomePage({
@@ -37,7 +38,9 @@ export default async function HomePage({
         alternateName: cv.identidad.nombre,
         jobTitle: cv.identidad.eyebrow,
         description: cv.identidad.resumen,
-        email: `mailto:${cv.identidad.email}`,
+        // Los dos correos (el del dominio y el Gmail): schema.org acepta
+        // varios valores, y un ATS toma el que prefiera.
+        email: correosDe(cv.identidad).map((c) => `mailto:${c}`),
         url: `${SITE_URL}/${locale}`,
         sameAs: cv.identidad.enlaces.map((e) => e.url),
       },

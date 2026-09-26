@@ -42,6 +42,23 @@ describe("anclasDeHome — se leen de la HOME, no de una lista", () => {
     }
   });
 
+  it("trae una ancla por tarjeta de Skills, sacada de los datos (2026-09-26)", () => {
+    // Seis documentos «a fondo» citaban la sección entera y los seis chips
+    // decían «Skills». Ahora cada uno lleva a SU tarjeta. El id viene de
+    // `cv.skills[].id`, y el catálogo solo lo lista si el componente montado
+    // declara `id={`skills-${grupo.id}`}`.
+    for (const id of [
+      "ia-y-ml",
+      "plataforma-de-datos",
+      "bi-y-decision",
+      "ingenieria",
+      "procesos-y-simulacion",
+      "como-trabajo",
+    ]) {
+      expect(anclas.has(`#skills-${id}`), `falta #skills-${id}`).toBe(true);
+    }
+  });
+
   it("NO trae «#apps»: esa sección se retiró en la revisión post-S7", () => {
     expect(anclas.has("#apps")).toBe(false);
   });
@@ -123,17 +140,35 @@ describe("nombreDeDestino — a dónde lleva la cita, con el nombre que el visit
     expect(nombreDeDestino("#skills-titulo", es)).toBe("Skills");
   });
 
+  it("una tarjeta de Skills se llama como su grupo, en cada idioma (2026-09-26)", () => {
+    expect(nombreDeDestino("#skills-plataforma-de-datos", es)).toBe(
+      "Plataforma de datos",
+    );
+    expect(nombreDeDestino("#skills-plataforma-de-datos", en)).toBe(
+      "Data platform",
+    );
+    expect(nombreDeDestino("#skills-ia-y-ml", es)).toBe("IA & ML");
+  });
+
   it("un case study toma el DÓNDE del nombre del proyecto, no el nombre entero", () => {
     expect(nombreDeDestino("/proyectos/vesting", es)).toBe("Vesting");
     expect(nombreDeDestino("/proyectos/vesting", en)).toBe("Vesting");
-    expect(nombreDeDestino("/proyectos/transmilenio-cm", es)).toBe("TransMilenio / C&M");
-    expect(nombreDeDestino("/proyectos/vesting#cs-impacto", es)).toBe("Vesting");
+    expect(nombreDeDestino("/proyectos/transmilenio-cm", es)).toBe(
+      "TransMilenio / C&M",
+    );
+    expect(nombreDeDestino("/proyectos/vesting#cs-impacto", es)).toBe(
+      "Vesting",
+    );
   });
 
   it("un frente y una pieza de la vitrina toman su nombre de los datos", () => {
-    expect(nombreDeDestino("/vitrina/agentes", es)).toBe("Agentes especializados");
+    expect(nombreDeDestino("/vitrina/agentes", es)).toBe(
+      "Agentes especializados",
+    );
     expect(nombreDeDestino("/vitrina/agentes", en)).toBe("Specialized agents");
-    expect(nombreDeDestino("/vitrina/agentes/hr-develop-ai-apps", es)).toBeTruthy();
+    expect(
+      nombreDeDestino("/vitrina/agentes/hr-develop-ai-apps", es),
+    ).toBeTruthy();
     expect(nombreDeDestino("/vitrina/apps/habla/detalle", es)).toBeTruthy();
   });
 
@@ -154,12 +189,16 @@ describe("nombreDeDestino — a dónde lleva la cita, con el nombre que el visit
 
   it("nombreCortoDeProyecto: el DÓNDE sin el periodo; sin la forma, el nombre entero", () => {
     expect(
-      nombreCortoDeProyecto("Plataforma de datos para agentes de IA — Vesting (2023–2025)"),
+      nombreCortoDeProyecto(
+        "Plataforma de datos para agentes de IA — Vesting (2023–2025)",
+      ),
     ).toBe("Vesting");
-    expect(nombreCortoDeProyecto("Analítica en salud — Fundación CTIC (2025–hoy)")).toBe(
-      "Fundación CTIC",
+    expect(
+      nombreCortoDeProyecto("Analítica en salud — Fundación CTIC (2025–hoy)"),
+    ).toBe("Fundación CTIC");
+    expect(nombreCortoDeProyecto("Un proyecto sin guion")).toBe(
+      "Un proyecto sin guion",
     );
-    expect(nombreCortoDeProyecto("Un proyecto sin guion")).toBe("Un proyecto sin guion");
   });
 });
 
@@ -226,7 +265,10 @@ describe("los enlaces de la app apuntan a algo que existe", () => {
     expect(
       rotos.join("\n"),
       `Estos enlaces llevan a una sección de la HOME que no existe. La HOME monta hoy: ` +
-        `${[...anclas].filter((a) => !a.endsWith("-titulo")).sort().join(" · ")}.\n` +
+        `${[...anclas]
+          .filter((a) => !a.endsWith("-titulo"))
+          .sort()
+          .join(" · ")}.\n` +
         `Donde están:\n${rotos.join("\n")}`,
     ).toBe("");
   });

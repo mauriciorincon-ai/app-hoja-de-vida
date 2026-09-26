@@ -282,6 +282,28 @@ describe("PDF ATS generado en build desde los YAML", () => {
     expect(await extractText(files.es)).not.toContain("ejemplo.test");
   });
 
+  // LOS DOS CORREOS (2026-09-26, pedido del dueño: «que muestre ambos por si
+  // acaso»). El del dominio se ARMA en el build con el dominio de la variable
+  // (regla 16: no vive en el repo); sin dominio no se inventa una dirección.
+  it("con dominio, los dos correos van en la cabecera: el del dominio primero, el Gmail después", async () => {
+    for (const locale of ["es", "en"] as const) {
+      const { email, emailDelDominio } = getCv(locale).identidad;
+      expect(emailDelDominio, "cv.yaml sin emailDelDominio").toBeTruthy();
+      const conDominio = plano((await extractPages(filesDominio[locale]))[0]);
+      const propio = conDominio.indexOf(`${emailDelDominio}@${DOMINIO}`);
+      expect(propio, `${locale}: falta el correo del dominio`).toBeGreaterThan(
+        -1,
+      );
+      expect(conDominio.indexOf(plano(email))).toBeGreaterThan(propio);
+      const sinDominio = plano((await extractPages(files[locale]))[0]);
+      expect(sinDominio).toContain(plano(email));
+      expect(
+        sinDominio,
+        `${locale}: correo del dominio sin dominio`,
+      ).not.toContain(`${emailDelDominio}@`);
+    }
+  });
+
   it("sin caracteres fuera de WinAnsi que rompan el render (− → ⭐)", async () => {
     const text = await extractText(files.es);
     expect(text).not.toContain("−"); // − minus sign

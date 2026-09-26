@@ -5,7 +5,7 @@ titulo: "Processes and simulation"
 resumen: "The industrial root with its methods: BPMN with Bizagi in four companies, discrete-event simulation with FlexSim at Inglopres and in Cafam's dispatch of medicines, nominal versus effective capacity, time study with ILO allowances, Kanban and Scrum, ISO 9001, and Vesting's replicable process."
 cuando_usar: "Use this when they ask about his industrial engineering roots: process modeling in BPMN with Bizagi, discrete-event simulation with FlexSim, time study and line balancing, capacity and variability, ISO 9001:2015, continuous improvement, agile methodologies and what all of that is good for in a data job."
 estado: aprobado
-ancla: "#skills"
+ancla: "#skills-procesos-y-simulacion"
 actualizado: 2026-09-21
 preguntas_de_prueba:
   - "What does Henry know about process modeling and simulation?"

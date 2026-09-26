@@ -68,3 +68,21 @@ derived at build time and validated by `chatChunkSchema`:
 The chip reads `[n] AF-09 · Vesting`; the full chunk title lives in its tooltip. The code is
 for the owner (which file to fix), the destination is for the visitor (where the evidence is).
 
+
+## Amendment — 2026-09-26: one chip per document and destination; capabilities cite their card
+
+Two follow-ups the owner had left open after the 2026-09-23 amendment:
+
+- **Repeated chips.** Retrieval returns chunks, and two chunks of the same document produced two
+  identical chips (`[3] AF-17 · Skills` `[4] AF-17 · Skills`). The panel now groups fuentes by
+  `codigo` + `ancla` (`agruparFuentes`, `src/lib/ia/fuentes.ts`) into one chip that keeps every
+  number: `[3, 4] AF-17 · …`. The answer cites by number, so no number may be lost; the tooltip
+  joins the distinct chunk titles. The stream contract (`fuenteSchema`, one entry per chunk) and
+  the conversation log are unchanged: grouping is presentation only.
+- **Six documents, one generic destination.** Six capability documents cited `#skills`, so six
+  different chips read «Skills» and landed on a whole section. Each skill group now has a stable
+  `id` in `cv.{es,en}.yaml` (identical in both locales, enforced by test), each card renders
+  `id="skills-<id>"`, and the destination catalog derives those anchors from the data **only if
+  the mounted Skills component declares that id**. Remove it and the gate at build time names the
+  12 files that cite a card. The destination name is the group name («Plataforma de datos»). The
+  CV skills chunk still cites the whole section: it covers every group.

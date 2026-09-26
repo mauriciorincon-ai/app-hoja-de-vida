@@ -62,10 +62,19 @@ export function anclasDeHome() {
     if (!new RegExp(`<${nombre}[\\s/>]`).test(main[1])) continue;
     const archivo = path.join(ROOT, `${rel}.tsx`);
     if (!existsSync(archivo)) continue;
-    for (const m of readFileSync(archivo, "utf8").matchAll(
-      /\bid="([a-z0-9-]+)"/g,
-    )) {
+    const fuente = readFileSync(archivo, "utf8");
+    for (const m of fuente.matchAll(/\bid="([a-z0-9-]+)"/g)) {
       anclas.add(`#${m[1]}`);
+    }
+    // Las tarjetas de Skills (2026-09-26) llevan un id que sale de los DATOS
+    // (`id={`skills-${grupo.id}`}`), no un literal. Se expande con los grupos
+    // de `cv.es.yaml` solo si el componente montado declara ese id: si alguien
+    // se lo quita, las anclas desaparecen y la aduana nombra a los documentos
+    // que citaban hacia una tarjeta.
+    if (fuente.includes("id={`skills-${grupo.id}`}")) {
+      for (const g of leerYaml("data/cv.es.yaml").skills ?? []) {
+        anclas.add(`#skills-${g.id}`);
+      }
     }
   }
   return anclas;
@@ -152,8 +161,11 @@ export function nombresDeDestinos(locale) {
   if (msg.cv?.titulo) nombres.set("/cv", msg.cv.titulo);
 
   const cv = leerYaml(`data/cv.${locale}.yaml`);
+  // Una tarjeta de Skills se llama como su grupo («Plataforma de datos»).
+  for (const g of cv.skills ?? []) nombres.set(`#skills-${g.id}`, g.grupo);
   for (const p of cv.proyectos ?? []) {
-    if (p.casestudy) nombres.set(`/proyectos/${p.slug}`, nombreCortoDeProyecto(p.nombre));
+    if (p.casestudy)
+      nombres.set(`/proyectos/${p.slug}`, nombreCortoDeProyecto(p.nombre));
   }
 
   for (const app of leerYaml("data/apps.yaml").apps ?? []) {
@@ -207,7 +219,9 @@ export function nombreDeDestino(destino, nombres) {
   if (typeof destino !== "string" || destino.length === 0) return null;
   if (destino.startsWith("#")) {
     return (
-      nombres.get(destino) ?? nombres.get(destino.replace(/-titulo$/, "")) ?? null
+      nombres.get(destino) ??
+      nombres.get(destino.replace(/-titulo$/, "")) ??
+      null
     );
   }
   return nombres.get(destino.split("#")[0]) ?? null;

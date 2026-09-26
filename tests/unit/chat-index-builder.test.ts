@@ -91,7 +91,11 @@ describe("buildChunks (YAML + «a fondo» → chunks con ancla)", () => {
         estado: "aprobado",
         ancla: "/proyectos/vesting",
         subsecciones: [
-          { id: "arquitectura", titulo: "La arquitectura", texto: "Fabric desde cero." },
+          {
+            id: "arquitectura",
+            titulo: "La arquitectura",
+            texto: "Fabric desde cero.",
+          },
           { id: "vacia", titulo: "Vacía", texto: "" },
         ],
       },
@@ -101,7 +105,9 @@ describe("buildChunks (YAML + «a fondo» → chunks con ancla)", () => {
         titulo: "Aún sin aprobar",
         estado: "borrador",
         ancla: "#trayectoria",
-        subsecciones: [{ id: "algo", titulo: "Algo", texto: "Prosa del borrador." }],
+        subsecciones: [
+          { id: "algo", titulo: "Algo", texto: "Prosa del borrador." },
+        ],
       },
     ],
     locale: "es",
@@ -133,7 +139,9 @@ describe("buildChunks (YAML + «a fondo» → chunks con ancla)", () => {
     );
     expect(porId.has("a-fondo-vesting-vacia")).toBe(false);
     // Un borrador es material de trabajo del dueño, no evidencia citable.
-    expect([...porId.keys()].filter((k) => k.includes("en-borrador"))).toEqual([]);
+    expect([...porId.keys()].filter((k) => k.includes("en-borrador"))).toEqual(
+      [],
+    );
   });
 
   it("las apps ya no citan «#apps»: esa sección de la HOME murió en la revisión post-S7", () => {
@@ -167,6 +175,26 @@ describe("buildChunks (YAML + «a fondo» → chunks con ancla)", () => {
     for (const c of chunks) expect(c.codigo, c.id).toBeTruthy();
   });
 
+  it("el contacto lleva los dos correos solo si el build conoce el dominio (2026-09-26)", () => {
+    const conHola = {
+      ...cvMinimo,
+      identidad: { ...cvMinimo.identidad, emailDelDominio: "hola" },
+    };
+    const contacto = (sitio: string | undefined) =>
+      buildChunks({
+        cv: conHola,
+        apps: appsMinimas,
+        aFondo: [],
+        locale: "es",
+        sitio,
+      }).find((c) => c.id === "contacto")?.texto;
+    expect(contacto("https://misitio.test")).toContain(
+      "hola@misitio.test · x@example.com",
+    );
+    expect(contacto(undefined)).toContain("Email: x@example.com.");
+    expect(contacto(undefined)).not.toContain("hola@");
+  });
+
   it("las apps usan el nombre/descripción del locale", () => {
     expect(porId.get("app-hoja-de-vida")?.texto).toContain("Esta página");
   });
@@ -197,7 +225,9 @@ describe("script real contra los data/ reales (integración del build)", () => {
       // dice «Vesting», no «Plataforma de datos para agentes de IA — Vesting
       // (2023–2025)» ni el título del fragmento. `parseChatIndex` ya exigió
       // `codigo` y `destino` en cada chunk.
-      const vesting = index.chunks.find((c) => c.ancla === "/proyectos/vesting");
+      const vesting = index.chunks.find(
+        (c) => c.ancla === "/proyectos/vesting",
+      );
       expect(vesting?.destino).toBe("Vesting");
       const skills = index.chunks.find((c) => c.ancla === "#skills");
       expect(skills?.destino).toBe("Skills");

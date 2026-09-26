@@ -41,6 +41,7 @@ import process from "node:process";
 import { parse } from "yaml";
 import { chunksDeAFondo, leerDocumentos, revisarAduana } from "./a-fondo.mjs";
 import { aniosCumplidos } from "./anios.mjs";
+import { correosPublicos } from "./correos.mjs";
 import {
   catalogoDeDestinos,
   destinoExiste,
@@ -90,7 +91,8 @@ function readYaml(fileName) {
 /** Chunks de los YAML estructurados (hechos) + «a fondo» (narrativa). */
 /**
  * @param {{ cv: any, apps: any, aFondo: any[], locale: string,
- *   fichas?: { apps: any[], piezas: any[] } | null }} entrada
+ *   fichas?: { apps: any[], piezas: any[] } | null,
+ *   nombres?: Map<string, string>, sitio?: string }} entrada
  */
 export function buildChunks({
   cv,
@@ -99,6 +101,9 @@ export function buildChunks({
   locale,
   fichas = null,
   nombres = nombresDeDestinos(locale),
+  // La URL del sitio pone el dominio del correo propio (regla 16: no vive en
+  // el repo). Sin ella, el chat solo conoce el Gmail.
+  sitio = process.env.NEXT_PUBLIC_SITE_URL,
 }) {
   const L = LABELS[locale];
   const chunks = [];
@@ -119,7 +124,7 @@ export function buildChunks({
   push(
     "contacto",
     L.contacto,
-    `${identidad.ubicacion}. Email: ${identidad.email}. ${cv.identidad.enlaces
+    `${identidad.ubicacion}. Email: ${correosPublicos(identidad, sitio).join(" · ")}. ${cv.identidad.enlaces
       .map((e) => `${e.etiqueta}: ${e.url}`)
       .join(" · ")}`,
     "#contacto",
@@ -166,7 +171,9 @@ export function buildChunks({
       // fragmento —corto, con su título— para que una pregunta concreta
       // («¿cómo se validó el modelo?») encuentre el capítulo y no el caso entero.
       const cifras = (c.cifras ?? [])
-        .map((x) => `${x.prefijo ?? ""}${x.valor}${x.sufijo ?? ""} ${x.etiqueta}`)
+        .map(
+          (x) => `${x.prefijo ?? ""}${x.valor}${x.sufijo ?? ""} ${x.etiqueta}`,
+        )
         .join(" · ");
       push(
         `casestudy-${p.slug}`,
@@ -284,7 +291,13 @@ function main() {
   mkdirSync(OUT_DIR, { recursive: true });
   for (const locale of LOCALES) {
     const cv = readYaml(`cv.${locale}.yaml`);
-    const chunks = buildChunks({ cv, apps, aFondo: docs[locale], locale, fichas });
+    const chunks = buildChunks({
+      cv,
+      apps,
+      aFondo: docs[locale],
+      locale,
+      fichas,
+    });
 
     // --- EL DESTINO DE TODA CITA EXISTE ------------------------------------
     // Vale para TODOS los chunks, no solo para los del canal nuevo: el `#apps`

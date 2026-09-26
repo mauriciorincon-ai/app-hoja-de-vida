@@ -50,15 +50,21 @@ test.describe("la raíz `/` abre en español, diga lo que diga el navegador", ()
 test.describe("el botón ES/EN conserva el punto exacto de lectura", () => {
   const TOLERANCIA = 24;
 
-  test("a media Trayectoria: el mismo hito queda a la misma altura de la ventana", async ({
+  test("a media Trayectoria: el hito que se está leyendo queda a la misma altura de la ventana", async ({
     page,
   }) => {
     await page.goto("/es");
-    // El tercer hito, a 180 px del borde: a media sección, sin hash de por medio.
-    const hito = page.locator("#trayectoria article").nth(2);
+    // Leyendo DENTRO del cuarto hito: su borde, 100 px por encima de la
+    // ventana. Es lo que el ancla promete (el último hito que ya pasó el
+    // borde). Hasta 2026-09-26 se medía un hito 180 px POR DEBAJO del borde:
+    // entre el ancla y él hay texto, que en inglés es más corto, así que podía
+    // moverse con todo derecho; pasaba solo porque en la primera visita la
+    // fuente mono era Arial. Y escondía un error real: en móvil el año fijo
+    // del índice cortaba la búsqueda del ancla y el hito leído se corría 42–87 px.
+    const hito = page.locator("#trayectoria article").nth(3);
     await page.evaluate(() => {
-      const el = document.querySelectorAll("#trayectoria article")[2];
-      window.scrollTo(0, el.getBoundingClientRect().top + window.scrollY - 180);
+      const el = document.querySelectorAll("#trayectoria article")[3];
+      window.scrollTo(0, el.getBoundingClientRect().top + window.scrollY + 100);
     });
     const antes = await hito.evaluate((el) =>
       Math.round(el.getBoundingClientRect().top),
@@ -72,7 +78,7 @@ test.describe("el botón ES/EN conserva el punto exacto de lectura", () => {
     await page.waitForTimeout(300);
     const despues = await page
       .locator("#trayectoria article")
-      .nth(2)
+      .nth(3)
       .evaluate((el) => Math.round(el.getBoundingClientRect().top));
     expect(
       Math.abs(despues - antes),

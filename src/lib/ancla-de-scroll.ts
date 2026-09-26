@@ -30,15 +30,23 @@ export type Ancla = {
 };
 
 /**
- * Elige el ancla: el último candidato cuyo borde superior ya pasó (o toca) el
- * borde superior de la ventana. `tops` son posiciones absolutas en el
- * documento, en orden. Sin candidato por encima, el ancla es el propio scrollY.
+ * Elige el ancla: de los candidatos cuyo borde superior ya pasó (o toca) el
+ * borde superior de la ventana, el MÁS CERCANO a él. `tops` son posiciones
+ * absolutas en el documento, en orden de documento. Sin candidato por encima,
+ * el ancla es el propio scrollY.
+ *
+ * No se corta en el primer candidato que está por debajo (2026-09-26): el año
+ * del índice de la trayectoria es `sticky` y se queda a media pantalla, así
+ * que su top NO sigue el orden del documento. Con el corte, en móvil el ancla
+ * caía siempre en el título «Trayectoria» y el hito que uno estaba leyendo se
+ * corría al cambiar de idioma: 42 a 87 px, más cuanto más abajo.
  */
 export function medirAncla(scrollY: number, tops: number[]): Ancla {
   let indice = -1;
   for (let i = 0; i < tops.length; i++) {
-    if (tops[i] <= scrollY + 1) indice = i;
-    else break;
+    if (tops[i] <= scrollY + 1 && (indice === -1 || tops[i] >= tops[indice])) {
+      indice = i;
+    }
   }
   return {
     indice,

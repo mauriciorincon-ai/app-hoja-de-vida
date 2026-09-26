@@ -480,8 +480,9 @@ truly support the claim. That is why the tests must verify not only that referen
 that a valid relationship exists between the answer and the evidence. And on that point I prefer
 to write what there is, not what sounds better.
 
-The chips that accompany an answer are the four sources that retrieval handed to the model, and
-each one navigates to its section of the site. There is no output validator today that checks
+The chips that accompany an answer carry the four sources that retrieval handed to the model (two
+chunks of the same document share one chip, with both numbers), and each one navigates to its
+section of the site. There is no output validator today that checks
 that the model used each cited source in each sentence; there is the test that no citation can
 point to a nonexistent destination, and there is the prompt that obliges the model to number the
 sources it uses. The relationship between the claim and the evidence is verified today by whoever

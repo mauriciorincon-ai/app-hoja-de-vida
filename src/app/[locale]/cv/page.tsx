@@ -8,6 +8,7 @@ import { Header } from "@/components/header";
 import { Link } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
 import { getCv } from "@/lib/content";
+import { correosDe } from "@/lib/correos";
 import { SITE_URL } from "@/lib/site";
 
 /**
@@ -79,7 +80,7 @@ export default async function CvPage({ params }: Params) {
                 {cv.identidad.eyebrow}
               </p>
               <p className="mt-2 font-mono text-[13px] text-ink-2">
-                {cv.identidad.ubicacion} · {cv.identidad.email}
+                {cv.identidad.ubicacion} · {correosDe(cv.identidad).join(" · ")}
                 {cv.identidad.enlaces.map((e) => (
                   <span key={e.url}> · {e.url}</span>
                 ))}
