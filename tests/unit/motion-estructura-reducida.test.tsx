@@ -76,7 +76,7 @@ const CASOS: Record<string, React.ReactNode> = {
       </StaggerItem>
     </Stagger>
   ),
-  IconoSkill: <IconoSkill indice={0} />,
+  IconoSkill: <IconoSkill id="ia-y-ml" />,
 };
 
 describe("motion: la estructura del DOM no depende de useReducedMotion()", () => {

@@ -216,12 +216,19 @@ export function buildChunks({
     "#certificaciones",
   );
 
-  push(
-    "skills",
-    L.skills,
-    cv.skills.map((g) => `${g.grupo}: ${g.items.join(", ")}`).join(" · "),
-    "#skills",
-  );
+  // Un fragmento por grupo (2026-09-26). Con nueve grupos, uno solo pasaba de
+  // 250 palabras y la cita caía en la sección entera. Así cada grupo cita SU
+  // tarjeta (`#skills-<id>`), que es donde está la respuesta, y el chip dice
+  // el nombre del grupo. (El banco de preguntas pasa con las dos formas: esto
+  // es por la cita, no por la recuperación.)
+  for (const g of cv.skills) {
+    push(
+      `skills-${g.id}`,
+      `${L.skills} · ${g.grupo}`,
+      `${g.grupo}: ${g.items.join(", ")}`,
+      `#skills-${g.id}`,
+    );
+  }
 
   for (const app of apps.apps) {
     push(

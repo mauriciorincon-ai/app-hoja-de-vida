@@ -147,7 +147,9 @@ describe("nombreDeDestino — a dónde lleva la cita, con el nombre que el visit
     expect(nombreDeDestino("#skills-plataforma-de-datos", en)).toBe(
       "Data platform",
     );
-    expect(nombreDeDestino("#skills-ia-y-ml", es)).toBe("IA & ML");
+    expect(nombreDeDestino("#skills-ia-y-ml", es)).toBe(
+      "Machine learning y ciencia de datos",
+    );
   });
 
   it("un case study toma el DÓNDE del nombre del proyecto, no el nombre entero", () => {

@@ -203,13 +203,29 @@ preguntas:
     espera: [agentes-en-produccion, vesting]
     familia: ia-y-agentes
   - pregunta: "¿Qué frameworks de agentes ha usado?"
-    espera: [agentes-en-produccion]
+    espera: [agentes-en-produccion, fundacion-ctic, skills]
     familia: ia-y-agentes
     nota: >-
-      Pasa, pero floja: el documento llega al top-4 sin nombrar un solo
-      framework, porque el corpus no dice con qué están construidos los trece
-      agentes. Es uno de los cinco huecos que la simulación M2 puso en primer
-      lugar, y la respuesta solo la tiene el dueño.
+      Nota vieja: decía que el corpus no nombraba un solo framework, y desde
+      la v3 `agentes-en-produccion` tiene la subsección «los frameworks de
+      agentes que he usado» (n8n en Vesting). El 2026-09-26 el dueño sumó el
+      ecosistema de LangChain en la Fundación CTIC, que ahora dicen esa
+      subsección, su documento de CTIC y la tarjeta de skills.
+  - pregunta: "¿Ha trabajado con n8n?"
+    espera: [agentes-en-produccion, fundacion-ctic, skills]
+    familia: ia-y-agentes
+  - pregunta: "¿Ha usado LangChain o LangGraph?"
+    espera: [fundacion-ctic, agentes-en-produccion, skills]
+    familia: ia-y-agentes
+  - pregunta: "¿Usa asistentes de IA para programar, como Claude Code o Cursor?"
+    espera: [skills, como-aprendo]
+    familia: ia-y-agentes
+  - pregunta: "¿Conoce el Model Context Protocol (MCP)?"
+    espera: [skills, los-agentes-de-la-vitrina]
+    familia: ia-y-agentes
+  - pregunta: "¿Ha trabajado con Azure OpenAI o Azure AI Search?"
+    espera: [skills]
+    familia: ia-y-agentes
   - pregunta: "¿Ha trabajado con modelos de lenguaje grandes?"
     espera: [rag-y-el-chat, agentes-en-produccion]
     familia: ia-y-agentes
@@ -279,6 +295,15 @@ preguntas:
     familia: plataforma-y-datos
   - pregunta: "¿Tiene experiencia con Docker y Kubernetes?"
     espera: [plataforma-y-despliegue]
+    familia: plataforma-y-datos
+  - pregunta: "¿Sabe Databricks o Snowflake?"
+    espera: [skills]
+    familia: plataforma-y-datos
+  - pregunta: "¿Ha usado dbt o Airflow?"
+    espera: [skills]
+    familia: plataforma-y-datos
+  - pregunta: "¿Ha trabajado con Microsoft Purview?"
+    espera: [skills, gobierno-de-datos-y-de-ia]
     familia: plataforma-y-datos
   - pregunta: "¿Sabe de MLOps?"
     espera: [plataforma-y-despliegue, analitica-predictiva]
@@ -401,6 +426,9 @@ preguntas:
     familia: procesos
   - pregunta: "¿Para qué le sirve la ingeniería industrial en un puesto de datos?"
     espera: [procesos-y-simulacion, origenes, como-trabajo]
+    familia: procesos
+  - pregunta: "¿Sabe de optimización matemática, con Pyomo u OR-Tools?"
+    espera: [skills]
     familia: procesos
 
   # ─────────────────────────────────────────────────────────────────────

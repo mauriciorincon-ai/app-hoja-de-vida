@@ -12,7 +12,9 @@ import {
 /**
  * Skills (revisión post-S7): una tarjeta por grupo, con su icono dibujado en
  * casa —el trazo se termina de dibujar al llegar la tarjeta— y los ítems como
- * chips que entran escalonados. Cuatro grupos, cuatro tarjetas, una rejilla.
+ * chips que entran escalonados. Un grupo, una tarjeta, una rejilla de dos
+ * columnas; si los grupos son impares, el último ocupa las dos (2026-09-26:
+ * nueve grupos dejaban un hueco al final).
  *
  * Lo que NO hay, a propósito: barras de porcentaje ni «nivel de dominio». Un
  * 80 % de Python no significa nada y nadie lo puede medir; lo que aparece es
@@ -62,7 +64,11 @@ export async function Skills({ skills }: { skills: Cv["skills"] }) {
             <StaggerItem
               key={grupo.grupo}
               variant="liftIn"
-              className="h-full"
+              className={
+                i === skills.length - 1 && skills.length % 2 === 1
+                  ? "h-full md:col-span-2"
+                  : "h-full"
+              }
               hijos={{ delay: RETRASO_CABECERA_S, escalon: ESCALON_CHIP_S }}
             >
               {/* El id es el destino de una cita del chat: los documentos «a
@@ -81,7 +87,7 @@ export async function Skills({ skills }: { skills: Cv["skills"] }) {
                   variant="fadeInUp"
                   className="flex items-center gap-4"
                 >
-                  <IconoSkill indice={i} />
+                  <IconoSkill id={grupo.id} />
                   <h3 className="font-display text-[1.35rem] leading-tight font-medium tracking-[-0.015em] text-ink-0">
                     {grupo.grupo}
                   </h3>

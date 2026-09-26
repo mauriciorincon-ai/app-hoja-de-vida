@@ -6,7 +6,7 @@ resumen: "Two experiences with agents: 27 built with Vesting's core process on n
 cuando_usar: "Use this when they ask whether he has built artificial intelligence agents, which agent frameworks he has used (n8n, Claude Code), how he monitors an agent in production, what ARKHÉ is, how he keeps the model from making things up, and his experience with generative AI and large language models."
 estado: aprobado
 ancla: "/vitrina/agentes"
-actualizado: 2026-09-21
+actualizado: 2026-09-26
 preguntas_de_prueba:
   - "Has Henry built artificial intelligence agents in production?"
   - "How is an AI agent monitored in production?"
@@ -189,7 +189,9 @@ continuous evaluation against real behavior.
 n8n was a fundamental base for automating and coordinating the agents' flows at Vesting. It made
 it possible to connect services, organize work sequences, execute rules and integrate different
 components within processes that needed to operate consistently. That is why it appears among my
-skills today: not as a tool I once saw, but as the base on which 27 agents ran.
+skills today: not as a tool I once saw, but as the base on which 27 agents ran. At Fundación
+CTIC I still work with n8n and, on top of it, with the agent frameworks of the LangChain
+ecosystem: LangChain, LangGraph, LangSmith and Langflow.
 
 However, using n8n did not mean the architecture was reduced to a collection of visual flows.
 The business value was not in connecting nodes, but in correctly defining what information came

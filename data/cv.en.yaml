@@ -769,32 +769,79 @@ certificaciones:
     logoAlto: 16
 
 skills:
-  - id: ia-y-ml
-    grupo: "AI & ML"
+  # 2026-09-26 revision (owner's request): today's tools, for the AI
+  # engineering roles. Every group has ITS OWN icon, looked up by `id`.
+  - id: agentes-e-ia-generativa
+    grupo: "Agents & generative AI"
     items:
-      - "Azure AI"
-      - "RAG & agents — being built in the open (see the showcase)"
+      - "LangChain"
+      - "LangGraph"
+      - "LangSmith"
+      - "Langflow"
       - "n8n"
-      - "PyTorch"
-      - "TensorFlow"
-      - "Scikit-Learn"
-      - "NLP"
+      - "Microsoft Agent Framework"
+      - "Claude Agent SDK"
+      - "MCP (Model Context Protocol)"
+      - "Azure OpenAI & Microsoft Foundry"
+      - "Azure AI Search"
+      - "Hugging Face"
+      - "Ollama"
+      - "Copilot Studio"
+      - "Vercel AI SDK, multi-provider"
+      - "RAG, guardrails & circuit breaker — this site's chat"
   - id: plataforma-de-datos
     grupo: "Data platform"
     items:
       - "Microsoft Fabric"
+      - "Lakehouse, Warehouse & OneLake"
+      - "Spark & Delta Parquet"
       - "Direct Lake"
+      - "Data Factory"
+      - "Real-Time Intelligence (Eventhouse & KQL)"
+      - "Fabric Data Agents"
+      - "Microsoft Purview"
       - "RLS (row-level security)"
       - "ETL"
       - "Data modeling"
       - "SQL"
       - "Power Query"
       - "DAX"
+      - "DuckDB & Parquet"
       - "Google Cloud — exploring"
+  - id: desarrollo-con-ia
+    grupo: "AI-assisted development"
+    items:
+      - "Claude Code: subagents, skills & hooks"
+      - "Codex"
+      - "Antigravity"
+      - "Cursor"
+      - "GitHub Copilot"
+      - "Gemini CLI"
+  - id: big-data-multiplataforma
+    grupo: "Multi-platform big data"
+    items:
+      - "Fabric, Databricks & Snowflake planner — in preparation"
+      - "Databricks: Unity Catalog, Delta Lake, Lakeflow & Mosaic AI"
+      - "Snowflake: Snowpark, Cortex AI & Dynamic Tables"
+      - "dbt"
+      - "Apache Iceberg"
+      - "Airflow"
+      - "PySpark"
+  - id: ia-y-ml
+    grupo: "Machine learning & data science"
+    items:
+      - "PyTorch"
+      - "TensorFlow"
+      - "Scikit-Learn"
+      - "NLP"
+      - "Pandas & NumPy"
+      - "Jupyter"
   - id: bi-y-decision
     grupo: "BI & decision-making"
     items:
       - "Power BI"
+      - "Power Apps"
+      - "Power Automate"
       - "Data storytelling"
       - "KPIs"
       - "Data governance & quality"
@@ -802,16 +849,24 @@ skills:
       - "Tableau"
       - "Looker Studio"
   - id: ingenieria
-    grupo: "Engineering"
+    grupo: "Software engineering"
     items:
       - "Python"
+      - "TypeScript"
+      - "Next.js"
+      - "Supabase (PostgreSQL)"
+      - "Zod"
+      - "Vitest & Playwright"
       - "Git/GitHub"
-      - "CI/CD — this site runs on it"
+      - "CI/CD with GitHub Actions — this site runs on it"
+      - "Vercel"
+      - "Sentry"
   - id: procesos-y-simulacion
-    grupo: "Processes & simulation"
+    grupo: "Processes, simulation & optimization"
     items:
       - "BPMN (Bizagi)"
       - "Discrete-event simulation (FlexSim)"
+      - "Optimization: Pyomo, OR-Tools (CP-SAT) & PuLP with HiGHS"
       - "Time study and line balancing"
       - "Kanban and Scrum"
   - id: como-trabajo

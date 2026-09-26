@@ -6,7 +6,7 @@ resumen: "My current role: 42 analytical products in Power BI for 20 leaders of 
 cuando_usar: "Use this when they ask where he works now, about Fundación CTIC (2025–today), healthcare data, data quality, the institutional artificial intelligence strategy under UNE-ISO/IEC 42001:2025, the 23 instruments and the per-process dashboards."
 estado: aprobado
 ancla: "/proyectos/fundacion-ctic"
-actualizado: 2026-09-20
+actualizado: 2026-09-26
 preguntas_de_prueba:
   - "What does Henry do at Fundación CTIC?"
   - "What experience does he have with healthcare data?"
@@ -76,9 +76,10 @@ reliable information: at Fundación CTIC that translates into analysis and visua
 for administrative and clinical leaders, into data cleaning, integration and standardization
 processes, and into process-based dashboards for tracking key indicators. Artificial intelligence
 applications and agents make it possible to turn that information and the organizational
-knowledge into new capabilities for assistance and execution. Enterprise architecture finally
-connects those solutions with the institution's processes, controls, responsibilities and
-objectives.
+knowledge into new capabilities for assistance and execution. The agent frameworks I have worked
+with here are n8n, which was already the base of the agents at Vesting, and those of the LangChain
+ecosystem: LangChain, LangGraph, LangSmith and Langflow. Enterprise architecture finally connects those solutions with the institution's processes,
+controls, responsibilities and objectives.
 
 The four functions my CV describes for this position are, in that order, analytics for
 decision-making, data governance and quality, monitoring with business intelligence and continuous

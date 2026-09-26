@@ -171,13 +171,17 @@ animaciones infinitas (sweep/glitch/marquee), scroll-snap de deck, CDNs en `<hea
   study →») y el panel de bullets abre debajo de la fila.
 - **Tarjeta de skills**: card `paper-0`, borde `paper-2`, `r-[14px]`, `sh-1`, hover
   `-translate-y-0.5` + `sh-2`. Cabecera con el **icono** en cuadro `paper-1` de 48 px (24×24,
-  trazo 1.7, `sage-ink`, dibujado en casa, **por posición del grupo**) y el nombre en Fraunces
+  trazo 1.7, `sage-ink`, dibujado en casa, **uno por grupo, buscado por su `id`** —desde el
+  2026-09-26; antes iba por posición, y un grupo insertado en medio corrió los dibujos: lo vigila
+  `tests/unit/skills-iconos.test.ts`—) y el nombre en Fraunces
   1.35rem. Los ítems son chips `paper-1` con borde `paper-3` que entran con `scaleInBlur`
   escalonado. El trazo del icono se dibuja al llegar la tarjeta (`pathLength` 0→1, en cascada de
   130 ms por figura) heredando las variantes del `Stagger`; el estado por defecto es el icono
   dibujado. Cada tarjeta lleva `id="skills-<id>"` (el `id` del grupo en el YAML): es el destino
   de las citas del chat de esa capacidad, con `scroll-mt-40` para que el título quede a la vista
-  aunque el salto llegue antes que el `liftIn`. **Prohibido:** barras o porcentajes de dominio. **Coreografía post-S8, tres capas:**
+  aunque el salto llegue antes que el `liftIn`. Rejilla de dos columnas; **si los grupos son
+  impares, el último ocupa las dos** (nueve grupos desde el 2026-09-26), y el orden empareja
+  tarjetas de tamaño parecido. **Prohibido:** barras o porcentajes de dominio. **Coreografía post-S8, tres capas:**
   la tarjeta **aterriza vacía** (`liftIn`, escalón 200 ms) → a los 0,8 s, cuando ya se ve,
   aparece la cabecera (`fadeInUp`) y el trazo del icono se dibuja (1,0 s) → los chips caen uno a
   uno detrás (`scaleInBlur`, 100 ms). Cada tarjeta corre la partitura desplazada por su escalón:
