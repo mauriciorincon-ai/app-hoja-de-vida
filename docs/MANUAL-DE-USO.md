@@ -669,6 +669,44 @@ el mensaje te llega al correo.
   configurados. Si dice «NO» en alguno, ya sabes qué variable revisar en Vercel. Límite: tres
   avisos por visitante cada diez minutos.
 
+### Cómo está protegido el chat, y cómo bloquear a alguien · desde el 2026-09-26
+
+- **La factura:** mientras tu cuenta de Groq esté en el plan **Free** no hay cobro posible: el
+  plan gratis no cobra, solo corta cuando se acaba la cuota. Revísalo en console.groq.com, en
+  facturación. Si algún día le pones tarjeta, entonces sí cobra por uso. En el código no hay un
+  contador de dinero.
+- **Las capas, en orden:**
+  1. **La puerta:** nombre, correo y un código de 6 dígitos (10 minutos, 5 intentos). Tres
+     registros cada 10 minutos por conexión y por correo. La sesión dura 30 días.
+  2. **El cupo de cada persona:** **20 preguntas cada 24 horas** por correo, contadas en el
+     registro de Supabase (valen igual en todos los servidores). Cuentan todas, también las
+     que no tienen que ver con tu CV. Quien llega al máximo ve «Llegaste al máximo de preguntas
+     de hoy. Vuelve mañana, o escríbeme desde Contacto…».
+  3. **La lista de bloqueados:** un correo en la lista no recibe código ni puede preguntar.
+  4. **El ritmo:** 10 preguntas por minuto por conexión (en la memoria de cada servidor, así
+     que no es exacto; el cupo sí lo es).
+  5. **El tamaño:** preguntas de 800 caracteres como máximo, solo los últimos 12 mensajes de la
+     conversación, respuestas de 700 tokens como máximo y 30 segundos.
+  6. **Las preguntas ajenas** (el clima, un chiste) reciben una respuesta fija, sin gastar un
+     token.
+  7. **Si Groq se queda sin cuota** (30 pedidos/min, 1.000/día, 8.000 tokens/min, 200.000/día,
+     unas 100 respuestas al día): el chat pasa a búsqueda local y sigue contestando con fuentes.
+  8. **El interruptor:** `CHAT_ENABLED=false` en Vercel + Redeploy apaga el chat entero.
+- **Cómo bloquear a alguien:** en Supabase → **Table Editor** → tabla `chat_bloqueados` →
+  **Insert row** → en `email` su correo (da igual mayúsculas o minúsculas) y, si quieres, un
+  `motivo` → **Save**. El efecto es inmediato, sin redeploy: su próxima pregunta recibe «Este
+  correo no tiene acceso al chat». **Para desbloquear**, borra la fila.
+- **Cómo ver quién llegó al tope:** en `chat_registro`, filtra por `email`: sus preguntas de
+  las últimas 24 horas son las que cuentan.
+- **Cómo cambiar el número:** `CHAT_TOPE_DIARIO` en Vercel (un entero de 1 a 1000) + Redeploy.
+  Sin la variable, o con un valor inválido, vale 20: un error al escribirla nunca apaga la
+  protección.
+- **Si Supabase no responde,** el chat deja pasar la pregunta y lo anota como error en el log:
+  un visitante no paga una falla nuestra, y las otras capas siguen en pie.
+- **La migración** `supabase/migrations/20260926120000_chat_cupo.sql` tiene que estar aplicada
+  en tu proyecto de Supabase (SQL Editor → pegarla → Run). Si falta, el chat funciona igual,
+  pero sin cupo ni lista.
+
 ### Cómo alimentar el «a fondo» (el combustible del chat) · desde Sprint 008
 
 > **Reemplaza a «Cómo alimentar la historia» (S3).** `data/historia/` se retiró en el Sprint 008:
@@ -919,3 +957,4 @@ chat hoy y cuáles traería con la base aprobada. Ese informe **se genera, no se
 | revisión 2026-09-26       | En el PDF, el rótulo bajo tu dominio dice qué hay allá («En mi sitio encontrarás / CV interactivo · casos · chat»), centrado respecto al recuadro. La página de mantenimiento cambia de idioma y ofrece el CV en el otro idioma. **El ícono de la pestaña**: tus iniciales en la letra de los títulos, en lugar del triángulo de Vercel (`pnpm iconos`).                                                                                                                                                                                                                                                                          |
 | cifras y citas 2026-09-26 | **Las cifras en su letra desde la primera visita**: la fuente mono se precarga (antes, la primera visita las pintaba en Arial). En el chat, **un chip por documento y destino** (`[3, 4] AF-17 · …`) y los seis documentos de capacidades **citan hacia su tarjeta de Skills** (`#skills-<id>`). En móvil, cambiar de idioma ya no corre el hito que estás leyendo. **Los dos correos** (el del dominio y el Gmail) en el sitio, el PDF y el chat; `hola@` llega a tu Gmail por Cloudflare Email Routing.                                                                                                                         |
 | 404 de la raíz 2026-09-26 | **Un archivo que no existe responde 404 bilingüe, no error 500** (`/favicon.png`, `/manifest.webmanifest`, los robots). Las rutas clásicas del ícono de iOS (`/apple-touch-icon.png` y `-precomposed`) sirven tus iniciales; hasta hoy daban 500. Cómo vaciar la caché de íconos de Safari. **El ícono pasa a la opción A que habías elegido**: HR blanco sobre el navy del PDF, también como botón de inicio arriba a la izquierda.                                                                                                                                                                                              |
+| tope del chat 2026-09-26  | **El cupo de cada persona en el chat:** 20 preguntas cada 24 horas por correo (`CHAT_TOPE_DIARIO`) y una lista de correos bloqueados que manejas desde Supabase (`chat_bloqueados`), sin redeploy. Una sola persona ya no puede gastarse la cuota diaria de Groq. Sección nueva: cómo está protegido el chat.                                                                                                                                                                                                                                                                                                                     |

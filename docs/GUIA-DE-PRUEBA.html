@@ -316,7 +316,7 @@
     <div class="pagina">
       <header>
         <p class="eyebrow">
-          CV Viva · Guía de prueba viva y acumulativa · v9.10 · el ícono navy y el 404 de la raíz + las cifras en su letra y las citas del chat + rótulo del dominio, idiomas en mantenimiento y el ícono + el modo mantenimiento + el dominio en el PDF + los ocho casos de estudio completos + la cita dice de dónde sale y a dónde lleva + la cita conserva la conversación + el corpus alineado + chat/registro + a fondo v2 (el
+          CV Viva · Guía de prueba viva y acumulativa · v9.11 · el cupo del chat + el ícono navy y el 404 de la raíz + las cifras en su letra y las citas del chat + rótulo del dominio, idiomas en mantenimiento y el ícono + el modo mantenimiento + el dominio en el PDF + los ocho casos de estudio completos + la cita dice de dónde sale y a dónde lleva + la cita conserva la conversación + el corpus alineado + chat/registro + a fondo v2 (el
           detalle) + revisión post-S8 · 2026-09-12
         </p>
         <h1>Guía de prueba</h1>
@@ -339,7 +339,7 @@
           <strong>esperan a que apruebes el primer documento</strong>.
         </p>
         <p class="chica">
-          <strong>Gate mínimo ⭐: 39 pruebas · ~3 h 47 min.</strong> Es lo que ninguna
+          <strong>Gate mínimo ⭐: 40 pruebas · ~3 h 52 min.</strong> Es lo que ninguna
           automatización puede verificar (juicio humano sobre el contenido,
           aprobación visual, dispositivo real, proveedor de IA real). Lo que la
           CI ya respalda (e2e, unit, axe, budgets) queda fuera del mínimo y se
@@ -360,7 +360,8 @@
           <strong>v9.7 suma otra</strong>: el modo mantenimiento visto de
           verdad (p1), en una preview para no tocar producción.
           <strong>v9.8 suma otra</strong>: el ícono en la pestaña de tu dominio
-          (a7).
+          (a7). <strong>v9.11 suma otra</strong>: el cupo del chat en
+          producción (f10), bloqueando tu propio correo.
         </p>
         <div class="url-caja">
           <p class="eyebrow" style="margin: 0 0 6px">URL de prueba</p>
@@ -967,6 +968,22 @@
               correo, los tres en «sí») y, al responder, el destinatario es el
               correo del visitante. El código se sigue pudiendo escribir.
               <span class="origen origen-nuevo">Nuevo · casos completos</span
+              ><span class="minimo">⭐ mínimo</span></label
+            >
+          </li>
+          <li data-origen="nuevo" data-minimo>
+            <input type="checkbox" id="f10" /><label for="f10"
+              >⭐ <strong>El cupo del chat, en producción.</strong> Primero, en
+              Supabase → SQL Editor, corre
+              <code>select public.chat_cupo('prueba@ejemplo.com', 20, 24);</code>:
+              responde <code>ok</code> (si dice que la función no existe, falta
+              aplicar la migración <code>20260926120000_chat_cupo.sql</code>).
+              Después, en Table Editor → <code>chat_bloqueados</code>, agrega una
+              fila con tu correo. En una ventana normal donde ya entraste al
+              chat, haz una pregunta: sale «Este correo no tiene acceso al
+              chat», sin respuesta ni búsqueda local. Borra la fila y vuelve a
+              preguntar: responde como siempre. Nada de esto necesita redeploy.
+              <span class="origen origen-nuevo">Nuevo · tope del chat</span
               ><span class="minimo">⭐ mínimo</span></label
             >
           </li>
@@ -2055,6 +2072,15 @@
           <summary>Historial de la guía</summary>
           <ul>
             <li>
+              <strong>v9.11 · el cupo del chat · 2026-09-26:</strong> el dueño
+              preguntó cómo estamos protegidos para no pasarnos de tokens con
+              Groq y que nadie abuse del chat. Cada persona tiene 20 preguntas
+              cada 24 horas, contadas en Supabase, y hay una lista de correos
+              bloqueados que el dueño maneja desde el panel. f10 ⭐ nueva (verlo
+              en producción). a7 aprobada por el dueño («se ve bien»). Ninguna
+              prueba eliminada. Prefijo de casillas <code>tope-del-chat</code>.
+            </li>
+            <li>
               <strong>v9.10 · el ícono navy y el 404 de la raíz ·
               2026-09-26:</strong> el ícono pasa a la opción A que el dueño había
               elegido: HR blanco sobre el navy del PDF (el primer corte salió
@@ -2365,7 +2391,7 @@
       (function () {
         // NS VERSIONADO POR SPRINT: al publicar la guía de un sprint nuevo se cambia
         // s007c — así una regresión sin correr no aparece marcada por la versión anterior.
-        var NS = "guia-hoja-de-vida:404-de-la-raiz:";
+        var NS = "guia-hoja-de-vida:tope-del-chat:";
         var casillas = Array.prototype.slice.call(
           document.querySelectorAll('input[type="checkbox"]'),
         );

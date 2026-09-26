@@ -174,6 +174,8 @@
     "fallbackAviso": "The AI assistant isn't available right now, so here are the résumé excerpts that best answer your question:",
     "fallbackVacio": "I couldn't find anything about that in the résumé. Try another question or write to Henry from the Contact section.",
     "rateLimited": "Lots of questions in a row — give me a minute to breathe and we'll continue.",
+    "topeDiario": "You've reached today's question limit. Come back tomorrow, or write to me from the Contact section and we'll keep talking.",
+    "bloqueado": "This email doesn't have access to the chat. If you think it's a mistake, write to me from the Contact section.",
     "error": "I couldn't answer that one. Please try again.",
     "registroTitulo": "Before we start, tell me who you are",
     "registroIntro": "To chat with my CV I ask for your name and email; I send you a six-digit code and you're in. That way I know who is asking and can follow up if what you're looking for interests me.",
@@ -201,6 +203,7 @@
     "registroError": "I couldn't send the code. Try again in a moment.",
     "registroRateLimited": "Too many attempts in a row. Wait a few minutes.",
     "registroNoDisponible": "Chat registration is not available right now.",
+    "registroBloqueado": "This email doesn't have access to the chat. If you think it's a mistake, write to me from the Contact section.",
     "saludo": "Hi, {nombre}. Ask anything about my career.",
     "sesionRequerida": "Your session ended. Register again to keep chatting."
   },

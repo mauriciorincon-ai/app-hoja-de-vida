@@ -253,6 +253,57 @@ test.describe("chat — degradación honesta", () => {
   });
 });
 
+test.describe("chat — el cupo de cada persona (2026-09-26)", () => {
+  // El conteo real lo prueban la integración y Postgres (chat-cupo.dbtest.ts);
+  // aquí, lo que VE el visitante con cada respuesta del servidor.
+  for (const [error, status, testId, texto] of [
+    ["tope_diario", 429, "chat-tope-diario", "máximo de preguntas de hoy"],
+    ["bloqueado", 403, "chat-bloqueado", "no tiene acceso al chat"],
+  ] as const) {
+    test(`${status} ${error} → su aviso, sin caer a la búsqueda local`, async ({
+      page,
+    }) => {
+      await page.goto("/es");
+      await abrirChat(page);
+      await page.route("**/api/chat", (route) =>
+        route.fulfill({
+          status,
+          contentType: "application/json",
+          body: JSON.stringify({ error }),
+        }),
+      );
+      await preguntar(page, "¿Qué hizo Henry en Vesting?");
+      await expect(page.getByTestId(testId)).toContainText(texto, {
+        timeout: 15_000,
+      });
+      await expect(page.getByTestId("chat-modo-fallback")).toHaveCount(0);
+      await expect(page.getByTestId("chat-rate-limited")).toHaveCount(0);
+    });
+  }
+
+  test("un correo bloqueado no recibe código: el registro lo dice", async ({
+    page,
+  }) => {
+    await page.route("**/api/chat/registro", (route) =>
+      route.fulfill({
+        status: 403,
+        contentType: "application/json",
+        body: JSON.stringify({ error: "bloqueado" }),
+      }),
+    );
+    await page.goto("/es");
+    await page.getByTestId("chat-launcher").click();
+    await page.getByTestId("chat-registro-nombre").fill("Ana Prueba");
+    await page.getByTestId("chat-registro-email").fill(correoUnico());
+    await page.getByTestId("chat-registro-acepta").check();
+    await page.getByTestId("chat-registro-enviar").click();
+    await expect(page.getByTestId("chat-registro-error")).toContainText(
+      "no tiene acceso al chat",
+    );
+    await expect(page.getByTestId("chat-registro-codigo")).toHaveCount(0);
+  });
+});
+
 test.describe("chat — a11y y reduced-motion", () => {
   test.use({ contextOptions: { reducedMotion: "reduce" } });
 

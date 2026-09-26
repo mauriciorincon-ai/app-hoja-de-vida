@@ -25,11 +25,16 @@ import {
   type Fuente,
 } from "@/lib/ia/schemas";
 import { secretoSesion } from "@/lib/chat-registro/codigo";
-import type { EntradaRegistro, Sesion } from "@/lib/chat-registro/schemas";
+import type {
+  Cupo,
+  EntradaRegistro,
+  Sesion,
+} from "@/lib/chat-registro/schemas";
 import { sesionDeRequest } from "@/lib/chat-registro/sesion";
 import {
   gateHabilitado,
   resolverStore,
+  topeDiario,
   type RegistroStore,
 } from "@/lib/chat-registro/store";
 import { logger } from "@/lib/logger";
@@ -47,6 +52,11 @@ import { checkRateLimit } from "@/lib/rate-limit";
  * consecuencia después: cada pregunta respondida se REGISTRA (quién, qué,
  * respuesta, fuentes, modo, costo) en el almacén del registro. Es la única
  * salida del LLM que se persiste, y se persiste tal cual, como texto.
+ *
+ * Y desde el 2026-09-26, tras la sesión, el CUPO de esa persona: un correo
+ * bloqueado recibe 403 y quien ya hizo `CHAT_TOPE_DIARIO` preguntas (20 por
+ * defecto) en 24 horas recibe 429 `tope_diario`. Ninguno de los dos toca el
+ * proveedor: una sola persona ya no puede gastarse la cuota del día de todos.
  */
 
 const CHAT_RATE_LIMIT = { limit: 10, windowMs: 60_000 };
@@ -139,6 +149,28 @@ export async function POST(request: Request): Promise<Response> {
       );
     }
   }
+  // 3c. El cupo de la persona (2026-09-26): la lista de bloqueados y el
+  //     máximo de preguntas en 24 horas, contados en el registro (vale en
+  //     todos los servidores, a diferencia del límite por minuto). Si el
+  //     almacén no responde, deja pasar y lo grita en el log: las otras
+  //     defensas siguen en pie, y un visitante no paga una falla nuestra.
+  if (sesion && store) {
+    let cupo: Cupo = "ok";
+    try {
+      cupo = await store.cupo(sesion.email, topeDiario());
+    } catch (err) {
+      log.error({ err }, "cupo del chat no disponible — se deja pasar");
+    }
+    if (cupo === "bloqueado") {
+      log.warn({ ms: Date.now() - start }, "chat bloqueado para este correo");
+      return NextResponse.json({ error: "bloqueado" }, { status: 403 });
+    }
+    if (cupo === "tope") {
+      log.warn({ ms: Date.now() - start }, "tope diario alcanzado");
+      return NextResponse.json({ error: "tope_diario" }, { status: 429 });
+    }
+  }
+
   const registrar = (
     entrada: Omit<EntradaRegistro, "nombre" | "email" | "locale">,
   ) => {
