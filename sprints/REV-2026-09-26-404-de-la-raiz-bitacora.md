@@ -1,9 +1,10 @@
-# Revisión 2026-09-26 — El 404 de la raíz y el ícono en Safari
+# Revisión 2026-09-26 — El ícono navy y el 404 de la raíz
 
 > Rama `fix/archivo-inexistente-da-404`, un PR. El dueño seguía viendo el triángulo de Vercel en la
 > pestaña después del merge del PR #46. El servidor ya entregaba las iniciales: era la caché de
 > Safari. Pero al revisarlo apareció un error real, justo en la ruta del ícono que Safari pide por
-> su cuenta: respondía 500.
+> su cuenta: respondía 500. Y con el PR abierto, el dueño aclaró que el ícono que quería era otro:
+> la opción A (§4).
 
 ## 1. El ícono: el servidor entregaba HR
 
@@ -83,7 +84,38 @@ chat). Capturas en `muestras/2026-09-26-404-raiz/` (ignorada).
 Safari y otros clientes piden `/apple-touch-icon.png` y `/apple-touch-icon-precomposed.png` sin
 leer el `<link>` de la página. Con el arreglo de arriba responderían 404; ahora `next.config.ts`
 las reescribe al `apple-icon.png` de la convención de Next. Es el mismo archivo, sin copia: una
-segunda copia se desfasaría de los tokens el día que se corra `pnpm iconos`.
+segunda copia se desfasaría del navy del PDF el día que se corra `pnpm iconos`.
+
+## 4. El ícono: la opción A
+
+**Lo que pasó.** Para el PR #46 le presenté al dueño tres opciones
+(`muestras/2026-09-26-icono/opciones.png`) y recomendé la A: «HR» blanco en Helvetica Bold sobre el
+navy del PDF. Respondió _«la verdad no tengo un logo, así que pon solo las letras HR en el estilo
+de letra que tenemos en la página»_. Lo leí como «las letras solas, sin loseta, en la letra de los
+títulos» y armé HR en Fraunces. Con este PR abierto lo aclaró: _«creo que no usaste este que era
+el que quería: a-hr-navy-512»_. «Solo las letras HR» era por no tener logo, y la letra de la
+página era la del recuadro del dominio.
+
+**Qué queda.** La A, reproducida con las medidas de la muestra que eligió
+(`a-hr-navy-512.png`, medida por píxeles): letras al 65 % del ancho, centradas; loseta con radio
+del 18,75 % del lado (96 de 512); navy `#2B4C7E`. Los tres archivos llevan la misma loseta:
+`icon.svg` y `favicon.ico` redondeados, `apple-icon.png` a sangre. Sin variante oscura: la loseta
+trae su propio fondo. Comparación con la muestra en `muestras/2026-09-26-icono/a-navy-final.png`
+(ignorada).
+
+**El color no se copia: se importa.** `scripts/generate-icons.mjs` toma `NAVY` de
+`scripts/generate-cv-pdf.mjs`, y la letra blanca es la del bloque del dominio. Si el navy del PDF
+cambia y nadie corre `pnpm iconos`, el test falla (rojo E). Los tokens `ink-0` y `paper-0` ya no
+intervienen en el ícono.
+
+**De dónde salió el trazo** (para cambiar las letras algún día): Helvetica Bold de macOS
+(`/System/Library/Fonts/Helvetica.ttc`, PostScript `Helvetica-Bold`, 2048 unidades por em), abierta
+con `fontkit` —dependencia de pdfkit, en el store de pnpm—: `font.layout("HR")`, cada glifo corrido
+por su avance, volteado en Y y corrido para que la caja empiece en (0, 0), y pasado a `toSVG()`.
+Caja: 2718 × 1474 unidades. Ese trazo es el `d` de `icon.svg`; `pnpm iconos` lo toma de ahí. Es la
+misma letra que el PDF usa en el bloque del dominio (Helvetica-Bold, una de las 14 fuentes estándar
+de PDF). En trazos, y no como `<text>`, porque Windows no trae Helvetica. Dos corridas seguidas de
+`pnpm iconos` dan los mismos bytes.
 
 ## Regla 14 — rojos en este commit
 
@@ -132,9 +164,27 @@ servidor: D con `next dev` tras restaurar, y A, B y C sobre el build del arreglo
 fallar?** Sí, las cuatro: ninguna regla anterior cubría estas rutas (el único 404 probado era
 `/es/no-existe`, que pasa por el proxy).
 
+**E. El navy del PDF cambia y nadie regenera** (`NAVY` a `#1F3A63` en `generate-cv-pdf.mjs`):
+
+```
+× el SVG es la loseta navy del PDF con las letras en blanco
+AssertionError: el fondo de icon.svg no es el NAVY vigente del PDF: corre `pnpm iconos`: expected '<svg xmlns=…' to match /<rect\b[^>]*fill="#1f3a63"/
+```
+
+**F. Las letras en otro color** (el `fill` del trazo a `#121110` en `icon.svg`):
+
+```
+× el SVG es la loseta navy del PDF con las letras en blanco
+AssertionError: las letras de icon.svg no van en blanco: expected '<svg xmlns=…' to match /<path\b[^>]*fill="#ffffff"/
+```
+
+Los dos se revirtieron desde su respaldo (`cp`) y la prueba volvió a verde. La aserción que
+reemplazan (los colores del SVG eran los tokens `ink-0` y `paper-0`) se retira con su sujeto: el
+ícono ya no usa esos tokens.
+
 ## Verificación
 
-`pnpm test` **48 archivos, 1306 tests** · `typecheck` y `lint` limpios · e2e completo sobre el
+`pnpm test` **48 archivos, 1306 tests** (con el ícono navy) · `typecheck` y `lint` limpios · e2e completo sobre el
 build del arreglo: **410 pasan**, 14 saltadas (las de siempre). Un detalle de la corrida: la
 primera vez arranqué `next start` a mano, sin las variables que el config de Playwright le pasa a
 su servidor (la puerta del chat en memoria, el código fijo, el secreto de prueba), y fallaron las

@@ -229,23 +229,26 @@ ES / EN del encabezado, como enlace a la otra ruta. Ningún componente nuevo. Ta
 
 ### Ícono del sitio · 2026-09-26
 
-Las iniciales **HR** en la voz display (Fraunces 500), **en trazos**: un favicon se pinta aislado
-de la página y no carga fuentes web, así que un `<text>` caería a Times. El dueño no tiene logo y
-pidió eso, nada más: sin símbolo ni figura. Dos formas:
+Las iniciales **HR** en Helvetica Bold, **blancas sobre una loseta navy** (`NAVY` del PDF,
+`#2B4C7E`): el mismo acento y la misma letra del bloque del dominio en la cabecera del PDF, para que
+el sitio y el PDF lleven una sola marca. Es la opción A de las tres que vio el dueño; un primer
+corte del mismo día salió con las letras solas en Fraunces, por un pedido mal leído. **En trazos**:
+un favicon no puede depender de las fuentes de quien lo mira (Windows no trae Helvetica), así que
+un `<text>` caería a otra letra.
 
-- **Letras solas** (`src/app/icon.svg`, la que ven los navegadores de hoy): `ink-0` con tema claro,
-  `paper-0` con el oscuro, vía `prefers-color-scheme` dentro del SVG. Ocupan el 95 % del ancho.
-- **Con loseta** (`favicon.ico` 16/32/48 y `apple-icon.png` 180): letras `ink-0` al 80 % sobre
-  `paper-0`. El .ico con radio del 18 %; el de iOS a sangre, porque el sistema redondea. La loseta
-  existe porque ahí no se sabe el color de fondo.
+- **La loseta** es la misma en los tres archivos: letras al 65 % del ancho, centradas; radio del
+  18,75 % del lado (96 de 512, la muestra que eligió). `src/app/icon.svg` en vector y
+  `favicon.ico` (16/32/48) redondeados; `apple-icon.png` (180) a sangre, porque iOS redondea.
+- **Sin variante oscura:** la loseta trae su propio fondo y se lee igual en una pestaña clara y en
+  una oscura.
 
-Los colores salen de los tokens: cambiar la paleta es correr `pnpm iconos`, y
+El color sale de `scripts/generate-cv-pdf.mjs`: cambiar el navy del PDF es correr `pnpm iconos`, y
 `tests/unit/iconos.test.ts` falla si quedaron desfasados. Tarjeta:
 `design-sync/components/fundamentos/icono.html`.
 
 Las rutas clásicas `/apple-touch-icon.png` y `/apple-touch-icon-precomposed.png`, que Safari pide
 sin leer el `<link>`, sirven el mismo `apple-icon.png` por reescritura en `next.config.ts`
-(2026-09-26): nunca una segunda copia del archivo, que se desfasaría de los tokens.
+(2026-09-26): nunca una segunda copia del archivo, que se desfasaría del navy del PDF.
 
 ### 404 de la raíz · 2026-09-26
 

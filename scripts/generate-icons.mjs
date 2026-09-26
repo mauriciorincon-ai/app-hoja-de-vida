@@ -1,53 +1,50 @@
 #!/usr/bin/env node
 /**
- * ÍCONOS DEL SITIO — «HR» en la letra de los títulos.
+ * ÍCONOS DEL SITIO — «HR» blanco sobre el navy del PDF (la opción A).
  *
- * El dueño no tiene logo y pidió solo sus iniciales en la letra de la página
- * (2026-09-26): Fraunces Medium, la misma que next/font sirve a los títulos.
- * Hasta ese día la pestaña mostraba el triángulo de Vercel, el favicon que trae
- * la plantilla de create-next-app.
+ * Hasta el 2026-09-26 la pestaña mostraba el triángulo de Vercel, el favicon
+ * que trae la plantilla de create-next-app. Ese día se le mostraron al dueño
+ * tres opciones y él quería la A: «HR» en Helvetica Bold, blanco, sobre una
+ * loseta redondeada del mismo navy y la misma letra del bloque del dominio en
+ * el PDF. Así el sitio y el PDF llevan la misma marca. (Un primer corte, el
+ * mismo día, salió con las letras solas en Fraunces: se leyó mal el pedido.)
  *
- * La fuente de verdad es `src/app/icon.svg`: las dos letras en TRAZOS, no en
- * texto. Un favicon se pinta aislado de la página y no puede cargar una fuente
- * web: con `<text font-family="Fraunces">` el navegador caería en silencio a
- * Times. Este script toma de ahí el trazo, de `globals.css` los dos colores, y
- * escribe los tres archivos que Next publica solo, sin tocar el layout:
+ * La fuente de verdad del TRAZO es `src/app/icon.svg`: las dos letras en
+ * trazos, no en texto. Un favicon se pinta aislado de la página y no puede
+ * depender de las fuentes de quien lo mira: en Windows no hay Helvetica. Los
+ * COLORES salen de `scripts/generate-cv-pdf.mjs` (`NAVY`, y el blanco del
+ * bloque del dominio), así que el ícono y el PDF no pueden separarse. Este
+ * script escribe los tres archivos que Next publica solo, sin tocar el layout:
  *
- *   src/app/icon.svg        las letras solas: tinta con tema claro, papel con el oscuro
- *   src/app/favicon.ico     16 · 32 · 48 px sobre una loseta de papel
+ *   src/app/icon.svg        la loseta redondeada, en vector (la pestaña de hoy)
+ *   src/app/favicon.ico     la misma loseta a 16 · 32 · 48 px
  *   src/app/apple-icon.png  180 px a sangre (iOS redondea las esquinas)
- *
- * El .ico y el .png llevan loseta porque no saben de qué color es la pestaña, y
- * unas letras de tinta sobre una pestaña oscura desaparecen.
  *
  *   pnpm iconos
  *
- * Cambiar los COLORES es cambiar los tokens y volver a correrlo (el test
+ * Cambiar el navy del PDF es volver a correrlo (el test
  * `tests/unit/iconos.test.ts` avisa si quedaron desfasados). Cambiar las LETRAS
  * es volver a sacar el trazo de la fuente; cómo se hizo está en
- * `sprints/REV-2026-09-26-rotulo-idiomas-icono-bitacora.md`.
+ * `sprints/REV-2026-09-26-404-de-la-raiz-bitacora.md`.
  */
 
 import { readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { chromium } from "playwright";
+import { NAVY } from "./generate-cv-pdf.mjs";
 
 const RAIZ = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const APP = path.join(RAIZ, "src/app");
 
-/** Las letras ocupan este tanto del ancho: casi todo en la pestaña, menos con loseta. */
-const ANCHO_LETRAS = { solas: 0.95, loseta: 0.8 };
-/** Radio de la loseta, en fracción del lado (el del .ico; el de iOS lo pone el sistema). */
-const RADIO_LOSETA = 0.18;
+/** Los colores del bloque del dominio en el PDF: el fondo y la letra. */
+export const COLORES = { fondo: NAVY.toLowerCase(), letras: "#ffffff" };
+/** Las letras ocupan este tanto del ancho: lo medido en la muestra que eligió el dueño. */
+const ANCHO_LETRAS = 0.65;
+/** Radio de la loseta, en fracción del lado (96 de 512 en la muestra; el de iOS lo pone el sistema). */
+const RADIO_LOSETA = 0.1875;
 const TAMANOS_ICO = [16, 32, 48];
 const TAMANO_APPLE = 180;
-
-export function token(css, nombre) {
-  const m = css.match(new RegExp(`--color-${nombre}:\\s*(#[0-9a-fA-F]{6})`));
-  if (!m) throw new Error(`globals.css no declara --color-${nombre}`);
-  return m[1].toLowerCase();
-}
 
 export function trazoDe(svg) {
   const m = svg.match(/<path\b[^>]*\sd="([^"]+)"/);
@@ -62,23 +59,15 @@ function caja({ x, y, width, height }, ancho) {
   return { x: r(x - (lado - width) / 2), y: r(y - (lado - height) / 2), lado: r(lado) };
 }
 
-function svgSolas(d, bbox, tinta, papel) {
-  const c = caja(bbox, ANCHO_LETRAS.solas);
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${c.x} ${c.y} ${c.lado} ${c.lado}">
-<!-- «HR» en Fraunces Medium, en trazos: un favicon no carga fuentes web. Lo escribe scripts/generate-icons.mjs -->
-<style>path{fill:${tinta}}@media (prefers-color-scheme:dark){path{fill:${papel}}}</style>
-<path d="${d}"/>
-</svg>
-`;
-}
-
-function svgLoseta(d, bbox, tinta, papel, redondeada) {
-  const c = caja(bbox, ANCHO_LETRAS.loseta);
+function svgLoseta(d, bbox, redondeada) {
+  const c = caja(bbox, ANCHO_LETRAS);
   const rx = redondeada ? Math.round(c.lado * RADIO_LOSETA) : 0;
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${c.x} ${c.y} ${c.lado} ${c.lado}">
-<rect x="${c.x}" y="${c.y}" width="${c.lado}" height="${c.lado}" rx="${rx}" fill="${papel}"/>
-<path d="${d}" fill="${tinta}"/>
-</svg>`;
+<!-- «HR» en Helvetica Bold, en trazos, sobre el navy del PDF. Lo escribe scripts/generate-icons.mjs -->
+<rect x="${c.x}" y="${c.y}" width="${c.lado}" height="${c.lado}" rx="${rx}" fill="${COLORES.fondo}"/>
+<path d="${d}" fill="${COLORES.letras}"/>
+</svg>
+`;
 }
 
 /** ICO con PNG adentro (Windows Vista en adelante y todos los navegadores de hoy). */
@@ -104,9 +93,6 @@ export function empacarIco(pngs) {
 }
 
 async function main() {
-  const css = readFileSync(path.join(APP, "globals.css"), "utf8");
-  const tinta = token(css, "ink-0");
-  const papel = token(css, "paper-0");
   const d = trazoDe(readFileSync(path.join(APP, "icon.svg"), "utf8"));
 
   const navegador = await chromium.launch();
@@ -128,14 +114,14 @@ async function main() {
       return pagina.screenshot({ omitBackground: true, clip: { x: 0, y: 0, width: tamano, height: tamano } });
     };
 
-    writeFileSync(path.join(APP, "icon.svg"), svgSolas(d, bbox, tinta, papel));
+    const conLoseta = svgLoseta(d, bbox, true);
+    writeFileSync(path.join(APP, "icon.svg"), conLoseta);
 
-    const conLoseta = svgLoseta(d, bbox, tinta, papel, true);
     const pngs = [];
     for (const tamano of TAMANOS_ICO) pngs.push({ tamano, datos: await pintar(conLoseta, tamano) });
     writeFileSync(path.join(APP, "favicon.ico"), empacarIco(pngs));
 
-    const aSangre = svgLoseta(d, bbox, tinta, papel, false);
+    const aSangre = svgLoseta(d, bbox, false);
     writeFileSync(path.join(APP, "apple-icon.png"), await pintar(aSangre, TAMANO_APPLE));
   } finally {
     await navegador.close();

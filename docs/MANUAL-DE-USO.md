@@ -525,18 +525,21 @@ el mensaje te llega al correo.
 
 ### El ícono de la pestaña · desde el 2026-09-26
 
-- **Qué es:** tus iniciales, **HR**, en Fraunces, la letra de los títulos del sitio. Aparece en la
-  pestaña del navegador, en los favoritos, junto a tu sitio en Google y en la pantalla de inicio de
-  un iPhone. Reemplazó al triángulo de Vercel, que venía con la plantilla del proyecto.
-- **Cómo se ve:** en la pestaña, las letras solas, en tinta si el navegador está en tema claro y en
-  papel si está en oscuro. Donde el sistema no sabe el color de fondo (navegadores viejos, Google,
-  el iPhone) van sobre una loseta de papel, para que nunca desaparezcan.
-- **Si cambias la paleta:** corre `pnpm iconos` y los tres archivos se rehacen con los colores
-  nuevos (`src/app/icon.svg`, `favicon.ico` y `apple-icon.png`). Si lo olvidas, un test te lo
-  recuerda.
+- **Qué es:** tus iniciales, **HR**, en Helvetica Bold blanca sobre una loseta navy redondeada: el
+  mismo azul y la misma letra del recuadro de tu dominio en el PDF, así que el sitio y el PDF llevan
+  la misma marca. Es la opción A de las tres que viste (`muestras/2026-09-26-icono/opciones.png`).
+  Aparece en la pestaña del navegador, en los favoritos, junto a tu sitio en Google y en la
+  pantalla de inicio de un iPhone. Reemplazó al triángulo de Vercel, que venía con la plantilla del
+  proyecto. (El primer corte, del mismo día, salió con las letras solas en Fraunces: se leyó mal tu
+  pedido.)
+- **Cómo se ve:** igual en todas partes, con tema claro u oscuro: la loseta lleva su propio fondo.
+  En el iPhone va a sangre, porque el sistema redondea las esquinas.
+- **Si cambias el navy del PDF** (`NAVY` en `scripts/generate-cv-pdf.mjs`): corre `pnpm iconos` y
+  los tres archivos se rehacen con el color nuevo (`src/app/icon.svg`, `favicon.ico` y
+  `apple-icon.png`). Si lo olvidas, un test te lo recuerda.
 - **Si algún día quieres otras letras u otro dibujo:** es un trabajo de diseño, no de datos: pídelo.
   Cómo se sacaron las letras de la fuente está en la bitácora
-  `sprints/REV-2026-09-26-rotulo-idiomas-icono-bitacora.md`.
+  `sprints/REV-2026-09-26-404-de-la-raiz-bitacora.md`.
 - **Tarda en verse:** los navegadores guardan el ícono mucho tiempo. En Chrome o Brave basta
   recargar la página con Cmd+Shift+R. **Safari es el más terco:** guarda los íconos en una caché
   propia que casi nunca renueva, y la ventana privada no siempre basta. Para vaciarla: cierra
@@ -911,4 +914,4 @@ chat hoy y cuáles traería con la base aprobada. Ese informe **se genera, no se
 | mantenimiento 2026-09-24  | **Modo mantenimiento**: `MANTENIMIENTO=on` en Vercel (Production) + Redeploy pone todo el sitio en una página con el CV en PDF y el contacto, con un 503 temporal que Google entiende; `off` + Redeploy lo quita. Solo `on` lo enciende.                                                                                                                                                                                                                                                                                                                                                                                          |
 | revisión 2026-09-26       | En el PDF, el rótulo bajo tu dominio dice qué hay allá («En mi sitio encontrarás / CV interactivo · casos · chat»), centrado respecto al recuadro. La página de mantenimiento cambia de idioma y ofrece el CV en el otro idioma. **El ícono de la pestaña**: tus iniciales en la letra de los títulos, en lugar del triángulo de Vercel (`pnpm iconos`).                                                                                                                                                                                                                                                                          |
 | cifras y citas 2026-09-26 | **Las cifras en su letra desde la primera visita**: la fuente mono se precarga (antes, la primera visita las pintaba en Arial). En el chat, **un chip por documento y destino** (`[3, 4] AF-17 · …`) y los seis documentos de capacidades **citan hacia su tarjeta de Skills** (`#skills-<id>`). En móvil, cambiar de idioma ya no corre el hito que estás leyendo. **Los dos correos** (el del dominio y el Gmail) en el sitio, el PDF y el chat; `hola@` llega a tu Gmail por Cloudflare Email Routing.                                                                                                                         |
-| 404 de la raíz 2026-09-26 | **Un archivo que no existe responde 404 bilingüe, no error 500** (`/favicon.png`, `/manifest.webmanifest`, los robots). Las rutas clásicas del ícono de iOS (`/apple-touch-icon.png` y `-precomposed`) sirven tus iniciales; hasta hoy daban 500. Cómo vaciar la caché de íconos de Safari.                                                                                                                                                                                                                                                                                                                                       |
+| 404 de la raíz 2026-09-26 | **Un archivo que no existe responde 404 bilingüe, no error 500** (`/favicon.png`, `/manifest.webmanifest`, los robots). Las rutas clásicas del ícono de iOS (`/apple-touch-icon.png` y `-precomposed`) sirven tus iniciales; hasta hoy daban 500. Cómo vaciar la caché de íconos de Safari. **El ícono pasa a la opción A que habías elegido**: HR blanco sobre el navy del PDF.                                                                                                                                                                                                                                                  |

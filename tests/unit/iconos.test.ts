@@ -3,17 +3,19 @@ import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
-import { token, trazoDe } from "../../scripts/generate-icons.mjs";
+import { NAVY } from "../../scripts/generate-cv-pdf.mjs";
+import { COLORES, trazoDe } from "../../scripts/generate-icons.mjs";
 
 /**
  * EL ÍCONO DEL SITIO (2026-09-26). Hasta ese día la pestaña del dominio
  * mostraba el triángulo de Vercel: el favicon de la plantilla de
- * create-next-app, que nadie cambió desde el Sprint 001. El dueño pidió sus
- * iniciales en la letra de la página. Lo que estas pruebas cuidan:
+ * create-next-app, que nadie cambió desde el Sprint 001. El dueño eligió la
+ * opción A: «HR» en Helvetica Bold, blanco, sobre el navy del bloque del
+ * dominio en el PDF. Lo que estas pruebas cuidan:
  *  - el favicon de la plantilla no vuelve;
- *  - el SVG son TRAZOS: un favicon no carga fuentes web, y un `<text>` caería
- *    en silencio a Times;
- *  - los colores del SVG son los tokens vigentes de `globals.css`;
+ *  - el SVG son TRAZOS: un favicon no puede depender de las fuentes de quien
+ *    lo mira, y un `<text>` caería a otra letra donde no haya Helvetica;
+ *  - el fondo es el `NAVY` vigente del PDF y las letras van en blanco;
  *  - el .ico trae los tres tamaños de pestaña y el de iOS mide lo que iOS pide.
  * Los archivos los escribe `pnpm iconos` (scripts/generate-icons.mjs).
  */
@@ -65,27 +67,26 @@ describe("el ícono del sitio", () => {
     });
   });
 
-  it("el SVG son trazos, no texto: un favicon no carga la fuente de la página", () => {
+  it("el SVG son trazos, no texto: un favicon no depende de las fuentes de quien lo mira", () => {
     const svg = leer("icon.svg").toString("utf8");
     expect(
       svg,
-      "icon.svg usa <text>: el navegador lo pintaría en Times",
+      "icon.svg usa <text>: donde no haya Helvetica, el navegador pintaría otra letra",
     ).not.toMatch(/<text\b/);
     expect(trazoDe(svg).length).toBeGreaterThan(100);
   });
 
-  it("el SVG pinta con los tokens vigentes: tinta en tema claro, papel en el oscuro", () => {
-    const css = leer("globals.css").toString("utf8");
+  it("el SVG es la loseta navy del PDF con las letras en blanco", () => {
     const svg = leer("icon.svg").toString("utf8").toLowerCase();
-    const [claro, oscuro] = svg.split("@media (prefers-color-scheme:dark)");
-    expect(oscuro, "icon.svg no se adapta al tema oscuro").toBeDefined();
+    expect(COLORES.fondo, "el ícono no toma su navy del PDF").toBe(
+      NAVY.toLowerCase(),
+    );
     expect(
-      claro,
-      "la tinta de icon.svg no es --color-ink-0: corre `pnpm iconos`",
-    ).toContain(`fill:${token(css, "ink-0")}`);
-    expect(
-      oscuro,
-      "el papel de icon.svg no es --color-paper-0: corre `pnpm iconos`",
-    ).toContain(`fill:${token(css, "paper-0")}`);
+      svg,
+      "el fondo de icon.svg no es el NAVY vigente del PDF: corre `pnpm iconos`",
+    ).toMatch(new RegExp(`<rect\\b[^>]*fill="${NAVY.toLowerCase()}"`));
+    expect(svg, "las letras de icon.svg no van en blanco").toMatch(
+      /<path\b[^>]*fill="#ffffff"/,
+    );
   });
 });
