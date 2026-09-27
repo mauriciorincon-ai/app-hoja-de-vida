@@ -32,6 +32,14 @@ ve, por URL y por corrida, el LCP, el TBT y las peticiones que el simulador cobr
 
 **Sin regla 14:** subir reportes no es un gate, no puede ponerse rojo ni verde.
 
+**La primera corrida no subió nada** (run 36289599077): `No files were found with the provided
+path: .lighthouseci/lhr-*.json`. La carpeta empieza con punto, y `upload-artifact` ignora lo oculto
+salvo con `include-hidden-files: true`. El `if-no-files-found: ignore` lo callaba. Ahora lleva
+las dos cosas: sube lo oculto y avisa (`warn`) si no encuentra nada.
+
+**Esa misma corrida pasó Lighthouse.** Con el mismo `/es`, la cuenta va en **dos de cuatro**: el
+#52 y la primera del #54 pasaron, y `main` y el #53 cayeron. Es un borde, no una regresión.
+
 ## Lo que dicen los reportes de la CI
 
 _(pendiente: se llena con la primera corrida de este PR)_
