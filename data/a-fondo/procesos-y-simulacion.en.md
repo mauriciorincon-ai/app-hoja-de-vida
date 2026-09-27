@@ -600,7 +600,7 @@ defining components and functionalities.
 In Power BI, this perspective translates into visual hierarchy, navigation, reduced cognitive load
 and correspondence between the screen and the decision. The model may contain a great deal of
 information, but the experience must present only what the person needs in order to move
-forward. At Fundación CTIC, the 42 analytical products serve two very different audiences
+forward. At Fundación CTIC, the more than 40 analytical products serve two very different audiences
 —administrative and clinical leaders— and the same figure is presented with the depth each one
 needs.
 

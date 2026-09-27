@@ -57,7 +57,7 @@ services with users. They are tools for personal use with deliverables and evide
 | ------------------------ | ------- | ----------------------------------------------------------------------------------------------------- | ---------------------------------- |
 | **AI-103 Super Guide**   | initial | no guide exists until a map proves the path covers the official syllabus in proportion to its weights | 29 binary criteria; 0 Azure resources created |
 | **Graduate Assistant**   | initial | every card cites course, session and timestamp, or declares the gap; every citation is generated from CSL-JSON, never written by hand | 50 criteria; 9 of 9 baits fire; transcribes at 19 times real time |
-| **Hiring Copilot**       | initial | every sendable claim links an achievement to its source and a program checks it: the orphan bullet makes the control fail | 99 criteria; 8 of 9 controls with bait |
+| **Hiring Copilot**       | initial | every sendable claim links an achievement to its source and a program checks it: the orphan bullet makes the control fail | 122 criteria; 8 of 9 controls with bait |
 
 The Super Guide executes nothing in Azure: it proposes the commands and you run them, because
 executing is the learning. The Assistant prepares and does not stand in: it does not write the
@@ -126,7 +126,7 @@ repository with a **constitution**: a `CLAUDE.md` file that Claude Code loads si
 the folder and that fixes the agent's laws, its commands and its sources. The ISO 42001 Expert,
 for example, has **8 laws and 9 commands**; Cold Attraction, **8 commands** in its cycle (brand,
 brand manual, campaign, activity, feedback, pipeline, report and closing); the Tax Expert, **12
-commands**; Hiring Copilot, **12 commands over 8 modules**. There is no startup prompt to paste:
+commands**; Hiring Copilot, **14 commands over 8 modules**. There is no startup prompt to paste:
 the constitution is the startup.
 
 On top of that constitution goes the **harness**: the input and output contract, the allowed
@@ -167,11 +167,11 @@ real time with Whisper locally. It prepares, it does not stand in: it does not w
 student's gradable deliverables; it neither hears nor sees —it operates on what the chain
 transcribes—, and it does not enter the program's platforms: the student brings the files.
 
-**Hiring Copilot** (initial, v1.1.1). For an AI professional seeking a mid-to-senior role in
-Colombia or in Europe: every sendable claim links an achievement to its source and a program
-checks it, and the orphan bullet makes the control fail. **99 criteria** in twelve work items, of
-which 16 are met today, with **8 of 9 controls** with bait; a coherence script compares the count
-against the disk on every run. It prepares applications and does not send them; it trains before
+**Hiring Copilot** (initial, v1.5.0). For an AI professional who wants every application to start
+from real evidence, not from memory: every sendable claim links an achievement to its source and a
+program checks it, and the orphan bullet makes the control fail. **122 binary criteria** in twelve
+work items, of which 31 are met today, with **8 of 9 controls** with bait and six human gates; a
+coherence script compares the count against the disk on every run. It prepares applications and does not send them; it trains before
 the interview and never assists during a real one; it issues no ATS score because there is no
 common published one, and it never inserts hidden text into a document.
 
@@ -259,12 +259,9 @@ retrospective, and it is the one that built this very page.
 
 <!-- seccion: sellado-e-inicial -->
 
-The sheets declare a status and a version, and both words have a definition. **Sealed** means the
-agent closed at least one complete run with its real deliverable, that its gates were exercised
-with real tokens and that its version was stamped with a date: the Dashboard Builder (v1.1.0),
+The sheets declare a status and a version, and both words have a definition. **Sealed** means the agent reached its MVP: it closed at least one complete run with its real deliverable, its gates were exercised with real tokens and its version was stamped with a date: the Dashboard Builder (v1.1.0),
 CINE Presentations (v1.5.0), the AI-APPs Factory (v1.1.0), the Animation Workshop (v1.3.0) and
-the Computational Paper Harness (v1.21). **Initial** means the harness is built and verified, but
-its first real run has not yet happened or has not closed: Cold Attraction says so of its eight
+the Computational Paper Harness (v1.21). **Initial** means the harness is built and verified but has not reached its MVP: its first real run has not yet happened or has not closed: Cold Attraction says so of its eight
 commands; the Library, of ten of its twelve; the Graduate Assistant, of its 13 commands with 0
 exercised. Publishing that fact is part of the method: a sheet that said "tested" without a run
 would be the same figure without provenance that the agents forbid themselves.

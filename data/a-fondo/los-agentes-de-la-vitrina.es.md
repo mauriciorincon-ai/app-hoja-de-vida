@@ -57,7 +57,7 @@ la palabra «producción» la reservo para los 27 agentes de Vesting.
 | ------------------------ | ------- | ----------------------------------------------------------------------------------------------------- | ---------------------------------- |
 | **Super guía AI-103**    | inicial | ninguna guía existe hasta que un mapa demuestre que la ruta cubre el temario oficial en proporción a sus pesos | 29 criterios binarios; 0 recursos Azure creados |
 | **Asistente de posgrado**| inicial | cada ficha cita curso, sesión y marca de tiempo, o declara el vacío; toda cita se genera desde CSL-JSON, jamás se redacta | 50 criterios; 9 de 9 carnadas disparan; transcribe a 19 veces el tiempo real |
-| **Hiring Copilot**       | inicial | cada afirmación enviable enlaza un logro con su fuente y un programa lo comprueba: el bullet huérfano hace fallar el control | 99 criterios; 8 de 9 controles con carnada |
+| **Hiring Copilot**       | inicial | cada afirmación enviable enlaza un logro con su fuente y un programa lo comprueba: el bullet huérfano hace fallar el control | 122 criterios; 8 de 9 controles con carnada |
 
 La Super guía no ejecuta nada en Azure: propone los comandos y los corres tú, porque ejecutar es
 el aprendizaje. El Asistente prepara y no suplanta: no escribe los entregables evaluables del
@@ -123,7 +123,7 @@ repositorio con una **constitución**: un archivo `CLAUDE.md` que Claude Code ca
 la carpeta y que fija las leyes del agente, sus comandos y sus fuentes. El Experto ISO 42001, por
 ejemplo, tiene **8 leyes y 9 comandos**; Atracción en Frío, **8 comandos** en su ciclo (marca,
 manual de marca, campaña, actividad, feedback, pipeline, informe y cierre); el Experto Fiscal,
-**12 comandos**; Hiring Copilot, **12 comandos sobre 8 módulos**. No hay prompt de arranque que
+**12 comandos**; Hiring Copilot, **14 comandos sobre 8 módulos**. No hay prompt de arranque que
 pegar: la constitución es el arranque.
 
 Sobre esa constitución va el **harness**: el contrato de entrada y salida, las herramientas
@@ -165,11 +165,11 @@ disparan, y transcribe a unas 19 veces el tiempo real con Whisper en local. Prep
 no escribe los entregables evaluables del estudiante; no oye ni ve —opera sobre lo que la cadena
 transcribe—, y no entra a las plataformas del programa: el estudiante trae los archivos.
 
-**Hiring Copilot** (inicial, v1.1.1). Para un profesional de IA que busca un rol de nivel
-medio-alto en Colombia o en Europa: cada afirmación enviable enlaza un logro con su fuente y un
-programa lo comprueba, y el bullet huérfano hace fallar el control. **99 criterios** en doce
-work-items, de los que 16 están cumplidos hoy, con **8 de 9 controles** con carnada; un script de
-coherencia compara el recuento contra el disco en cada corrida. Prepara candidaturas y no las
+**Hiring Copilot** (inicial, v1.5.0). Para un profesional de IA que quiere que cada candidatura
+parta de evidencia real, no de memoria: cada afirmación enviable enlaza un logro con su fuente y un
+programa lo comprueba, y el bullet huérfano hace fallar el control. **122 criterios binarios** en
+doce work-items, de los que 31 están cumplidos hoy, con **8 de 9 controles** con carnada y seis
+gates humanos; un script de coherencia compara el recuento contra el disco en cada corrida. Prepara candidaturas y no las
 envía; entrena antes de la entrevista y jamás asiste durante una real; no emite puntaje de ATS
 porque no existe uno común publicado, y nunca inserta texto oculto en un documento.
 
@@ -255,12 +255,12 @@ retrospectiva, y es la que construyó esta misma página.
 <!-- seccion: sellado-e-inicial -->
 
 Las fichas declaran un estado y una versión, y las dos palabras tienen definición. **Sellado**
-quiere decir que el agente cerró al menos una corrida completa con su entregable real, que sus
-gates se ejercitaron con tokens de verdad y que su versión quedó estampada con fecha: el
+quiere decir que el agente alcanzó su MVP: cerró al menos una corrida completa con su entregable
+real, sus gates se ejercitaron con tokens de verdad y su versión quedó estampada con fecha: el
 Constructor de Tableros (v1.1.0), Presentaciones CINE (v1.5.0), la Fábrica de AI-APPs (v1.1.0),
 el Taller de Animación (v1.3.0) y el Harness Paper Computacional (v1.21). **Inicial** quiere decir
-que el harness está construido y verificado, pero que su primera corrida real todavía no ocurrió o
-no cerró: Atracción en Frío lo dice de sus ocho comandos; la Biblioteca, de diez de sus doce; el
+que el harness está construido y verificado pero no ha alcanzado su MVP: su primera corrida real
+todavía no ocurrió o no cerró: Atracción en Frío lo dice de sus ocho comandos; la Biblioteca, de diez de sus doce; el
 Asistente de posgrado, de sus 13 comandos con 0 ejercitados. Publicar ese dato es parte del
 método: una ficha que dijera «probado» sin corrida sería la misma cifra sin procedencia que los
 agentes se prohíben a sí mismos.

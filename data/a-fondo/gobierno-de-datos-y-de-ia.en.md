@@ -2,7 +2,7 @@
 slug: gobierno-de-datos-y-de-ia
 codigo: AF-17
 titulo: "Data governance and AI governance"
-resumen: "Governance set up three times —co-led in banking, designed from scratch for 12 clients at an AI-agent startup, and today in healthcare under UNE-ISO/IEC 42001:2025 with 23 instruments— plus the ISO 42001 expert agent and the rules with which I govern my own pipeline."
+resumen: "Governance set up three times —co-led in banking, designed from scratch for 12 clients at an AI-agent startup, and today in healthcare under UNE-ISO/IEC 42001:2025 with more than 20 instruments— plus the ISO 42001 expert agent and the rules with which I govern my own pipeline."
 cuando_usar: "Use this when they ask about data or artificial intelligence governance, the ISO 42001 standard, data policies and guidelines, personal and sensitive data, traceability of information, who decides who sees which data, responsible use of AI, or how he documents what he does."
 estado: aprobado
 ancla: "#skills-bi-y-decision"
@@ -140,9 +140,9 @@ of data and the consequence of a wrong interpretation: completeness of the field
 duplicate detection, reconciliation between sources that describe the same fact, and thresholds
 that, when exceeded, trigger a review before the figure reaches a dashboard. I do not publish the
 figures of those rules; I do publish the principle: data quality as a permanent practice, not as a
-cleaning event before a report. On that base run 42 analytics products in Power BI for 20 leaders of
-15 processes and about 75 users, with close to 60% less effort in preparing the information
-—estimated— and 10 analysis plans under follow-up.
+cleaning event before a report. On that base run more than 40 analytics products in Power BI for some 20 leaders of
+some 15 processes and about 75 users, with close to 60% less effort in preparing the information
+—estimated— and some ten analysis plans under follow-up.
 
 I currently also lead the institutional artificial intelligence strategy, structured from the
 principles and requirements of ISO/IEC 42001 in its Spanish edition, UNE-ISO/IEC 42001:2025. This
@@ -234,7 +234,7 @@ purpose. Third, traceability of who consulted what and for what, because in heal
 that the controls work is not optional.
 
 I apply the same rule to what I say in public. Everything I communicate about that experience is
-aggregated —42 products, 20 leaders, 15 processes— and I do not expose patient data, clinical
+aggregated —more than 40 products, some 20 leaders, some 15 processes— and I do not expose patient data, clinical
 information, sensitive details of the processes or internal knowledge whose disclosure could affect
 the people or the institution. I can explain capabilities, architecture principles and governance
 practices; I do not reveal the information they operate on.
@@ -403,7 +403,7 @@ make any solution developed inside the organization compliant. And I do not clai
 institution is certified: I claim that the system is built with rigor and that every advance can be
 demonstrated.
 
-## Inventory, impact assessment and 23 instruments: the strategy under way
+## Inventory, impact assessment and more than 20 instruments: the strategy under way
 
 <!-- seccion: inventario-y-los-23-instrumentos -->
 
@@ -420,10 +420,9 @@ locate or characterize. Then comes the impact assessment of each system —the A
 the standard— and the criteria for a use case to move forward, with controls proportional to its
 risk.
 
-The management system today comprises **23 instruments** —policies, procedures, matrices, evaluation
-criteria and follow-up mechanisms—, of which **8 are finished and 15 under construction**. On it
-runs the portfolio: **12 opportunities** for artificial intelligence identified, **7 use cases
-formally evaluated**, **3 prioritized** and **2 documented**. The proportion is not a lack of ideas:
+The management system today comprises **more than 20 instruments** —policies, procedures, matrices, evaluation
+criteria and follow-up mechanisms—, of which **a third are finished and the rest under construction**. On it
+runs the portfolio: **more than 10 opportunities** for artificial intelligence identified, **half of them formally evaluated**, **a few prioritized** and **the first ones documented**. The proportion is not a lack of ideas:
 it is the filter working, because every opportunity first had to declare what problem it solved, for
 whom and with what risk before receiving an architecture.
 
@@ -468,7 +467,7 @@ be treated as a property of knowledge and not as a permanent assumption; that is
 stamps the date on which it was verified that the source was still in force, and a regulatory watch
 tracks changes in the standard, the law and the models.
 
-## The ISO 42001 expert agent: what it does not do, and how I use it with the 23 instruments
+## The ISO 42001 expert agent: what it does not do, and how I use it with the more than 20 instruments
 
 <!-- seccion: iso-42001-limites -->
 
@@ -492,7 +491,7 @@ dense and hard to navigate. The agent must reduce the friction of access without
 complexity or replacing the source. Its interface must make it possible to understand the answer and
 return to the basis that supports it.
 
-It is also the tool with which I review, one by one, the 23 instruments of the Fundación CTIC
+It is also the tool with which I review, one by one, the more than 20 instruments of the Fundación CTIC
 management system against the requirements of the standard: which requirement each instrument
 covers, what it lacks and what evidence it would have to produce. The agent does not decide whether
 an instrument is finished; it tells me which clause of the standard demands what from it, with the
@@ -556,7 +555,7 @@ evolving.
 And every figure declares its provenance. The technical sheets of the 32 pieces label every number
 as **measured**, **calculated**, **declared** or **estimated**, and the same criterion rules this
 corpus: the "close to 60%" less effort at Fundación CTIC carries its "close to" because it is an
-estimate, and the 42 products or the 23 instruments do not carry it because they are counted.
+estimate, and the products or the instruments are counted, but they go rounded because they are the institution's internal figures.
 
 These rules were written before the failures made them necessary. That is one of the principles I
 value most in governance: anticipating the conditions under which decisions will be made, instead of
@@ -699,7 +698,7 @@ sessions with the management of the SITP concessionaires —companies with their
 interests— to define improvement strategies, and the indicators rose by 25%. At Cafam I articulated
 a mixed team of 20 people between the organization and the WMS provider, 14 and 6. At Banco
 Pichincha I co-led a governance initiative that required integrating technical and operational
-perspectives. And at Fundación CTIC the AI strategy cuts across 15 processes with 20 leaders who do
+perspectives. And at Fundación CTIC the AI strategy cuts across some 15 processes with some 20 leaders who do
 not report to me.
 
 These experiences taught me that a cross-cutting initiative does not move forward merely because a
@@ -730,8 +729,7 @@ system makes it possible to keep it.
 Some strategy, architecture and artificial intelligence governance positions set a specialization or
 a master's degree as a preferred requirement. My academic training consists of Industrial
 Engineering with an emphasis in Analytical Data Intelligence and studies in Industrial Design, both
-at the Pontificia Universidad Javeriana between 2009 and 2016, complemented by five earned
-credentials —Microsoft's DP-600 and four from IBM in data science, Python, SQL and R— and two tracks
+at the Pontificia Universidad Javeriana between 2009 and 2016, complemented by three earned credentials —Microsoft's DP-600 and two from IBM in data science, Python, SQL and R— and two tracks
 in progress since July 2026, AI-103 and AI-300.
 
 I do not present experience as a universal substitute for advanced education, nor do I dismiss the
@@ -741,7 +739,7 @@ between education and experience, my track record allows a direct evaluation of 
 requirement seeks to represent.
 
 Verifiable evidence adds to the professional experience. DP-600, earned in December 2024, formally
-validates my depth in Microsoft Fabric, Power BI and semantic models. The four IBM credentials back
+validates my depth in Microsoft Fabric, Power BI and semantic models. The two IBM credentials back
 my base in data science, Python, SQL and R. My public portfolio makes it possible to examine 6
 applications, 13 agents, 7 research pieces and 6 dashboards —32 pieces— with their tests, their
 controls and their technical sheets; and among the agents there is one that deals precisely with the
@@ -761,7 +759,7 @@ analytics platforms, predictive models, applications, agents and governance. I h
 governance in banking, at Banco Pichincha; designed the data and observability architecture for an
 agent platform with 12 clients, at Vesting; structured an eleven-stage process used as the framework
 to build 27 agents; and I currently lead an institutional artificial intelligence strategy based on
-UNE-ISO/IEC 42001:2025, with 23 instruments, at Fundación CTIC.
+UNE-ISO/IEC 42001:2025, with more than 20 instruments, at Fundación CTIC.
 
 This experience is not limited to incidental exposure to those domains. I have worked in the
 responsibilities I need to govern: I built pipelines and semantic models before establishing
@@ -791,7 +789,7 @@ the solution level, I bring in purpose, behavior, sources, tools, autonomy, eval
 observability. At the institutional level, I connect those capabilities with responsibilities,
 risks, policies, third parties, decisions and continuous improvement. Each level has its case in my
 track record: the data at Banco Pichincha and in the data quality of Fundación CTIC, the solution in
-the 27 agents at Vesting and the 13 in my showcase, the organization in the 23 instruments of the
+the 27 agents at Vesting and the 13 in my showcase, the organization in the more than 20 instruments of the
 management system.
 
 Industrial Engineering provides the systemic vision needed to understand how these levels influence
@@ -829,9 +827,7 @@ suggestions, and the withdrawal is told on its sheet, not hidden.
 The organization does not need to choose between speed and control as if they were incompatible
 goals. It needs controls that are proportional, applicable and designed inside the processes.
 Innovation without governance accumulates invisible risks. Governance without technical
-understanding accumulates documents that nobody can turn into practice. At Fundación CTIC, 12
-opportunities and 7 evaluated cases in a little over a year, with 8 instruments finished and 15
-under construction, is what a governance that opens the way instead of closing it produces.
+understanding accumulates documents that nobody can turn into practice. At Fundación CTIC, more than 10 opportunities and half of them evaluated in a little over a year, with a third of the instruments finished and the rest under construction, is what a governance that opens the way instead of closing it produces.
 
 My contribution consists of building the bridge between both extremes: understanding the technology
 well enough to design applicable controls, and understanding the organization well enough to ensure

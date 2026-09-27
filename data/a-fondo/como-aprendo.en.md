@@ -128,7 +128,7 @@ knowledge.
 
 <!-- seccion: evidencia-certificaciones -->
 
-I have five earned and verifiable credentials —the DP-600 in Microsoft Fabric and four IBM
+I have three earned and verifiable credentials —the DP-600 in Microsoft Fabric and two IBM
 credentials in data science, Python, SQL and R— and two tracks in progress since July 2026, the
 AI-103 and the AI-300, which I do not count as earned until I pass the exams. The complete table,
 with official names and dates, is in the certifications document; what matters here is the pace.
@@ -151,7 +151,7 @@ studying a platform and formalizing what is already being applied.
 
 <!-- seccion: ibm-y-las-rutas-en-curso -->
 
-The four IBM credentials follow the same pattern. During 2022 I consolidated my base in data science
+The two IBM credentials follow the same pattern. During 2022 I consolidated my base in data science
 through specialized training in Python, SQL, analysis, visualization and machine learning: the
 Professional Certificate in Data Science, Python and SQL, between May and November, in the months I
 devoted to studying and getting certified between two jobs. These credentials allowed me to organize

@@ -55,11 +55,11 @@ trayectoria:
       Analítica, gobierno de datos y estrategia de IA (ISO/IEC 42001) para
       decisiones administrativas y asistenciales en salud.
     bullets:
-      - "Lidero la estrategia institucional de IA bajo UNE-ISO/IEC 42001:2025: 12 oportunidades identificadas, 7 casos evaluados y 3 priorizados."
-      - "42 productos analíticos en Power BI para líderes administrativos y asistenciales: 20 líderes de 15 procesos y unos 75 usuarios."
+      - "Lidero la estrategia institucional de IA bajo UNE-ISO/IEC 42001:2025: más de 10 oportunidades identificadas, la mitad evaluadas y unas pocas priorizadas."
+      - "más de 40 productos analíticos en Power BI para líderes administrativos y asistenciales: unos 20 líderes de unos 15 procesos y unos 75 usuarios."
       - "Gobierno y calidad de datos institucional, bajo el régimen de habeas data y la Ley 1581."
       - "Tableros de control por procesos y planes de mejora: cerca de 60 % menos esfuerzo en la preparación de la información (estimado sobre mi propio trabajo)."
-      - "23 instrumentos del sistema de gestión de IA, 8 terminados, y un agente experto en ISO 42001 para revisarlos."
+      - "más de 20 instrumentos del sistema de gestión de IA, un tercio terminados, y un agente experto en ISO 42001 para revisarlos."
     actual: true
   # Vesting fue de agosto de 2023 a enero de 2025: ese es el periodo REAL, el
   # que leen el PDF, /cv, el chat y los casos. «2024» es la decisión estética
@@ -184,7 +184,7 @@ estudios:
     icono: idiomas
     logo: british-council.svg
     logoAlto: 14
-    nota: "Inglés B2: lectura, escucha y redacción técnica; discusiones profesionales e informes analíticos."
+    nota: "Inglés B2 (equivalencia de IELTS 5,5, 2014): lectura, escucha y redacción técnica; discusiones profesionales e informes analíticos."
 
 logros:
   # Corrección de contenido 2026-09-12: el valor se CALCULA desde `desde` en
@@ -197,7 +197,7 @@ logros:
     descripcion: "Vesting: 12 clientes integrados y hasta 23 agentes vigilados a la vez, en tiempo real, sobre Microsoft Fabric."
   - valor: 42
     etiqueta: "productos analíticos en uso en salud"
-    descripcion: "Fundación CTIC: 20 líderes de 15 procesos y unos 75 usuarios, sobre definiciones institucionales comunes."
+    descripcion: "Fundación CTIC: unos 20 líderes de unos 15 procesos y unos 75 usuarios, sobre definiciones institucionales comunes."
   - valor: 50
     sufijo: "+"
     etiqueta: "usuarios adoptaron mis dashboards en banca"
@@ -214,9 +214,9 @@ logros:
   - valor: 20
     etiqueta: "personas en el mayor equipo que he liderado"
     descripcion: "Implementación del WMS en Cafam: −25% de errores, +15% de eficiencia."
-  - valor: 5
+  - valor: 3
     etiqueta: "certificaciones profesionales"
-    descripcion: "DP-600 de Microsoft y 4 de IBM en ciencia de datos."
+    descripcion: "DP-600 de Microsoft y 2 de IBM en ciencia de datos: el Certificado Profesional (con sus cursos de Python y SQL) y R."
 
 proyectos:
   - slug: "vesting"
@@ -502,19 +502,23 @@ proyectos:
         Llevar gobierno, calidad y analítica de datos a las decisiones de
         líderes administrativos y asistenciales de la Fundación.
       cifras:
-        - valor: 42
+        - valor: 40
+          prefijo: "+"
           etiqueta: "productos analíticos en uso en Power BI"
         - valor: 20
-          etiqueta: "líderes respaldados, de 15 procesos"
-        - valor: 12
+          prefijo: "~"
+          etiqueta: "líderes respaldados, de unos 15 procesos"
+        - valor: 10
+          prefijo: "+"
           etiqueta: "oportunidades de IA identificadas"
-        - valor: 23
+        - valor: 20
+          prefijo: "+"
           etiqueta: "instrumentos del sistema de gestión de IA"
       capitulos:
         - titulo: "Analítica por procesos, para dos audiencias"
           texto: >-
             Desarrollo en Power BI modelos de análisis y visualización para líderes administrativos
-            y asistenciales: 42 productos, entre ellos 23 tableros de control. Un indicador conserva
+            y asistenciales: más de 40 productos, la mitad de ellos tableros de control. Un indicador conserva
             una sola definición institucional, aunque cada audiencia lo vea con su propio nivel de
             detalle.
         - titulo: "Gobierno y calidad de datos en salud"
@@ -530,19 +534,19 @@ proyectos:
             mejora; los ejecutan los responsables de cada proceso.
         - titulo: "La estrategia institucional de IA"
           texto: >-
-            Lidero la estrategia de IA bajo UNE-ISO/IEC 42001:2025: 12 oportunidades identificadas,
-            7 casos evaluados formalmente y 3 priorizados. No todo problema necesita IA, y no toda
+            Lidero la estrategia de IA bajo UNE-ISO/IEC 42001:2025: más de 10 oportunidades identificadas,
+            la mitad evaluadas formalmente y unas pocas priorizadas. No todo problema necesita IA, y no toda
             iniciativa de IA necesita un agente.
         - titulo: "Un sistema de gestión que se demuestra"
           texto: >-
-            Construimos 23 instrumentos del sistema de gestión —políticas, procedimientos, matrices
-            y criterios—, 8 de ellos terminados. Para revisarlos construí el agente experto en ISO
+            Construimos más de 20 instrumentos del sistema de gestión —políticas, procedimientos, matrices
+            y criterios—, un tercio de ellos terminados. Para revisarlos construí el agente experto en ISO
             42001 que publico en la vitrina: cita la norma o declara el vacío, y ningún dictamen
             avanza sin una persona.
       impacto:
-        - "42 productos analíticos en uso para 20 líderes de 15 procesos y unos 75 usuarios."
-        - "Cerca de 60% menos esfuerzo en la preparación de la información (estimado sobre mi propio trabajo); 10 planes de análisis en seguimiento."
-        - "12 oportunidades de IA identificadas, 7 casos evaluados, 3 priorizados y 2 documentados."
+        - "más de 40 productos analíticos en uso para unos 20 líderes de unos 15 procesos y unos 75 usuarios."
+        - "Cerca de 60% menos esfuerzo en la preparación de la información (estimado sobre mi propio trabajo); una decena de planes de análisis en seguimiento."
+        - "más de 10 oportunidades de IA identificadas, la mitad evaluadas, unas pocas priorizadas y las primeras documentadas."
         - "Calidad de datos institucional como práctica, no como evento."
       leccion: >-
         Mi propósito no es conseguir que la organización utilice más inteligencia
@@ -763,7 +767,8 @@ certificaciones:
     logo: microsoft.svg
   # Revisión post-S8 (2026-09-12): el AI-103 entra como credencial EN CURSO
   # (decisión del dueño: «me gusta la sinceridad»). Sin fecha, con chip; el
-  # logro «5 certificaciones» sigue contando solo las obtenidas.
+  # logro «3 certificaciones» sigue contando solo las obtenidas (2026-09-27: Python y SQL
+  # de IBM son cursos del Certificado Profesional, no credenciales aparte).
   - nombre: "Microsoft Certified: Azure AI Apps and Agents Developer Associate (AI-103)"
     estado: "en curso"
     nota: "En preparación: apps y agentes de IA en Azure con Microsoft Foundry, la ruta que hoy curso."
@@ -786,23 +791,10 @@ certificaciones:
     logoAlto: 16
   - nombre: "IBM: Certificado Profesional en Ciencia de Datos"
     fecha: "2022"
-    nota: "Entre dos empleos, la decisión de llegar al siguiente rol con base formal: de preparar los datos a entrenar modelos con scikit-learn."
+    nota: "Entre dos empleos, la decisión de llegar al siguiente rol con base formal: de preparar los datos a entrenar modelos con scikit-learn, con sus cursos de Python y SQL para ciencia de datos."
     icono: datos
     logo: ibm.svg
     logoAlto: 16
-  - nombre: "IBM: Python para Ciencia de Datos"
-    fecha: "2022"
-    nota: "Convertir un problema analítico en un flujo reproducible: exploración, preparación, entrenamiento y evaluación de modelos."
-    icono: codigo
-    logo: ibm.svg
-    logoAlto: 16
-  - nombre: "IBM: SQL para Ciencia de Datos"
-    fecha: "2022"
-    nota: "Antes de modelar, saber localizar, relacionar, filtrar y validar los datos que representan el fenómeno."
-    icono: codigo
-    logo: ibm.svg
-    logoAlto: 16
-
 skills:
   # Revisión 2026-09-26 (pedido del dueño): las herramientas de hoy, para los
   # roles de ingeniería de IA. Cada grupo tiene SU icono, buscado por `id` en
@@ -840,7 +832,7 @@ skills:
       - "Data Factory"
       - "Real-Time Intelligence (Eventhouse y KQL)"
       - "Fabric Data Agents"
-      - "Microsoft Purview"
+      - "Microsoft Purview — prototipo"
       - "RLS (seguridad a nivel de fila)"
       - "ETL"
       - "Modelado de datos"
@@ -862,12 +854,10 @@ skills:
     grupo: "Big data multiplataforma"
     items:
       - "Planeador de Fabric, Databricks y Snowflake — en preparación"
-      - "Databricks: Unity Catalog, Delta Lake, Lakeflow y Mosaic AI"
-      - "Snowflake: Snowpark, Cortex AI y Dynamic Tables"
-      - "dbt"
-      - "Apache Iceberg"
-      - "Airflow"
-      - "PySpark"
+      - "Databricks: Unity Catalog, Delta Lake, Lakeflow y Mosaic AI — prototipo"
+      - "Snowflake: Snowpark, Cortex AI y Dynamic Tables — prototipo"
+      - "Airflow — en estudio"
+      - "PySpark — en estudio"
   - id: ia-y-ml
     grupo: "Machine learning y ciencia de datos"
     items:

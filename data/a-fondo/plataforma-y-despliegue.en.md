@@ -346,7 +346,7 @@ browser— and that is why they have never needed a container.
 I prefer to say it like this, up front, rather than hide it in a list of tools. A résumé that
 names thirty technologies does not distinguish the five it masters from the twenty-five it has
 seen, and whoever interviews finds out in ten minutes. For the same reason I removed from my
-skills tools I used at the time and do not practice today: a short list that is true is better.
+skills tools I used at the time and do not practice today: a short list that is true is better. For that same reason, on September 27, 2026, dbt and Apache Iceberg left the list, since I have not used them; Airflow and PySpark were marked "studying", and Databricks, Snowflake and Microsoft Purview, "prototype".
 
 ## Architectural principles that transcend the platform
 

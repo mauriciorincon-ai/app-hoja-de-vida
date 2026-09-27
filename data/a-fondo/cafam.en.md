@@ -3,7 +3,7 @@ slug: cafam
 codigo: AF-06
 titulo: "Cafam — the WMS and the team of 20 (2020–2021)"
 resumen: "The implementation of Oracle WMS Cloud in a medicines distribution center: 20 people in testing for six months, the control BI, the VBA integrations and data quality in SQL."
-cuando_usar: "Use this when they ask about Cafam (2020–2021): implementing a warehouse management system (Oracle WMS Cloud) in a medicines distribution center, the largest team he has led (20 people), VBA integrations, data quality in SQL and FlexSim simulation."
+cuando_usar: "Use this when they ask what Henry did at Cafam (2020–2021): implementing a warehouse management system (Oracle WMS Cloud) in a medicines distribution center, the largest team he has led (20 people), VBA integrations, data quality in SQL and FlexSim simulation."
 estado: aprobado
 ancla: "/proyectos/cafam"
 actualizado: 2026-09-20
@@ -111,7 +111,7 @@ There is a direct continuity between the test scenario of a WMS —known inputs,
 
 <!-- seccion: el-bi-de-control -->
 
-I designed business intelligence reports and interactive dashboards to control the implementation itself. These solutions improved the accuracy of test tracking by 50% and were adopted by more than 15 users involved in the project: the director of medicines, the IT director, the project director, the director of the distribution center and the coordinators and heads of the distribution center. They were the people who had to decide on progress, not a general audience.
+I designed business intelligence reports and interactive dashboards to control the implementation itself. These solutions improved the accuracy of test tracking by 50% and were adopted by 15+ senior decision-makers involved in the project, from the directorate to the coordinators and heads of the distribution center. They were the people who had to decide on progress, not a general audience.
 
 The most valuable dashboard was not devoted to describing the usual operation of the distribution center, but to observing the progress of the transformation while it was happening. It made it possible to know the scenarios executed, the coverage reached, the results obtained, the defects found, the people responsible for handling them and the cases that had to be tested again after an adjustment.
 

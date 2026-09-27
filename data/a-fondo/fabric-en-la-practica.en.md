@@ -320,7 +320,7 @@ Power BI appears throughout my whole career. It began as part of my analytical t
 consolidated in the analysis of TransMilenio's operation with C&M Consultores, made it possible
 to instrument the implementation of a warehouse management system at Cafam with a control BI
 adopted by more than 15 users, reached an adoption above fifty users at Banco Pichincha and
-currently sustains, at Fundación CTIC, 42 analytical products in use for 20 leaders of 15
+currently sustains, at Fundación CTIC, more than 40 analytical products in use for some 20 leaders of 15
 processes and about 75 users, aimed at administrative and clinical leaders in the health sector.
 
 Over the years I stopped understanding it as the deliverable. The visible product may be a
@@ -504,7 +504,7 @@ should not be treated as a reliable source for decisions. A model that is still 
 should not silently replace the one the operation uses. A published report should not be
 modified without understanding which people, processes or products depend on its metrics. In
 Fabric that differentiation relies on separate workspaces per environment and on deployment
-pipelines between them; at Fundación CTIC, with 42 analytical products in use, the separation is
+pipelines between them; at Fundación CTIC, with more than 40 analytical products in use, the separation is
 what makes it possible to correct a model without 75 users seeing a half-baked figure.
 
 This discipline requires controlling changes to pipelines, semantic models, measures and reports.

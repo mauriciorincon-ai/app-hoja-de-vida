@@ -55,7 +55,7 @@ Esta experiencia amplió mi comprensión de la operación. Ya no bastaba con opt
 
 Bajo mi coordinación convergían tres frentes estrechamente relacionados. El equipo de programación organizaba la asignación logística de profesores y consultores. El equipo de digitalización convertía las respuestas registradas en hojas físicas en datos utilizables, mediante escáneres especializados y, cuando las condiciones del material lo exigían, mediante captura manual. El equipo logístico gestionaba el transporte y la entrega de cartillas, exámenes, libros y demás materiales requeridos por las instituciones.
 
-En personas, eran cerca de 40 directas —unas 7 en programación, unas 12 en digitalización y unas 20 en logística— y, a través de la programación, unos 50 profesores aplicadores que no dependían de mí pero sí de mi calendario.
+En personas, coordinaba cerca de 40 a través de coordinadores —unas 7 en programación, unas 12 en digitalización y unas 20 en logística— y, a través de la programación, unos 50 profesores aplicadores que no dependían de mí pero sí de mi calendario.
 
 | Frente | Qué hacía | Qué pasaba si fallaba |
 | --- | --- | --- |
@@ -161,7 +161,7 @@ También comprendí que el seguimiento es más efectivo cuando hace visible el s
 
 Con cerca de 40 personas en tres oficios distintos, la claridad no podía ser una conversación: tenía que ser un artefacto. El tablero, los KPIs del día y el informe del viernes eran los tres artefactos con los que la operación se veía a sí misma, y eran los mismos para el equipo de logística, para el de digitalización y para la junta directiva.
 
-## Seguridad y acceso a la información: mi primer gobierno de datos
+## Seguridad y acceso a la información: mi primer contacto con el gobierno de datos
 
 <!-- seccion: seguridad-y-acceso -->
 

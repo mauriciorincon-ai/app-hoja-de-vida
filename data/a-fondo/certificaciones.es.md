@@ -2,8 +2,8 @@
 slug: certificaciones
 codigo: AF-11
 titulo: "Certificaciones — el camino desde el DP-600"
-resumen: "Cinco credenciales obtenidas —DP-600 de Microsoft Fabric en diciembre de 2024 y cuatro de IBM en ciencia de datos— y dos rutas en curso desde julio de 2026: AI-103 (aplicaciones y agentes) y AI-300 (MLOps), que reemplaza al DP-100 retirado."
-cuando_usar: "Úsalo cuando pregunten qué certificaciones tiene: el DP-600 de Microsoft Fabric, las cuatro de IBM en ciencia de datos, las rutas AI-103 y AI-300 en curso, cuánto tardó en obtenerlas, y qué certificación piensa sacar después."
+resumen: "Tres credenciales obtenidas —DP-600 de Microsoft Fabric en diciembre de 2024 y dos de IBM en ciencia de datos, una de ellas un certificado profesional con sus cursos— y dos rutas en curso desde julio de 2026: AI-103 (aplicaciones y agentes) y AI-300 (MLOps), que reemplaza al DP-100 retirado."
+cuando_usar: "Úsalo cuando pregunten qué certificaciones tiene: el DP-600 de Microsoft Fabric, las dos de IBM en ciencia de datos, las rutas AI-103 y AI-300 en curso, cuánto tardó en obtenerlas, y qué certificación piensa sacar después."
 estado: aprobado
 ancla: "#certificaciones"
 actualizado: 2026-09-20
@@ -48,11 +48,9 @@ sabes hacer gracias a cada una, cómo se conectan entre sí y con tu trabajo. --
 | AI-103 | Microsoft Certified: Azure AI Apps and Agents Developer Associate   | en curso, 21 módulos | desde julio de 2026            |
 | AI-300 | Microsoft Certified: Machine Learning Operations Engineer Associate | en curso, 10 módulos | desde julio de 2026            |
 | IBM    | Ciencia de Datos Aplicada con R                                     | obtenida             | enero – noviembre de 2024      |
-| IBM    | Certificado Profesional en Ciencia de Datos                         | obtenida             | mayo – noviembre de 2022       |
-| IBM    | Python para Ciencia de Datos                                        | obtenida             | junio – septiembre de 2022     |
-| IBM    | SQL para Ciencia de Datos                                           | obtenida             | septiembre – noviembre de 2022 |
+| IBM    | Certificado Profesional en Ciencia de Datos (con sus cursos de Python y SQL) | obtenida             | mayo – noviembre de 2022       |
 
-Cinco credenciales obtenidas —el DP-600 y cuatro de IBM— y dos rutas en curso: en este momento me estoy certificando en el AI-103 y en el AI-300. Es el mismo conteo que publica el sitio: el logro «5 certificaciones profesionales» cuenta solo las obtenidas, y las dos rutas aparecen con su chip de «en curso».
+Tres credenciales obtenidas —el DP-600 y dos de IBM— y dos rutas en curso: en este momento me estoy certificando en el AI-103 y en el AI-300. Es el mismo conteo que publica el sitio: el logro «3 certificaciones profesionales» cuenta solo las obtenidas, y las dos rutas aparecen con su chip de «en curso».
 
 Dos códigos que aparecen en mi historia y no en la tabla: el AI-102, que Microsoft descontinuó y cuya ruta es hoy el AI-103, y el DP-100, que Microsoft retiró el 1 de junio de 2026 y cuyo reemplazo declarado es el AI-300. Ninguno de los dos se presenta como obtenido, y ninguno aparece ya en mi hoja de vida.
 
@@ -82,7 +80,7 @@ El Diseño Industrial aporta una dimensión complementaria. Una arquitectura ana
 
 La coincidencia entre el estudio y el trabajo en Vesting fue especialmente significativa. La plataforma que construía mientras estudiaba quedó operativa desde cero en Microsoft Fabric: 12 clientes integrados, 120 tablas, 20 GB, 1.000 eventos por día y hasta 23 agentes monitoreados a la vez, en tiempo real. Cada dominio del examen —ingesta, lakehouse, warehouse, modelo semántico, seguridad— tenía un equivalente en algo que estaba desplegando esa misma semana.
 
-Actualmente, esta certificación también respalda mi trabajo en la Fundación CTIC. Allí utilizo Power BI para estructurar 42 productos analíticos dirigidos a líderes administrativos y asistenciales, mientras mi conocimiento de Microsoft Fabric fortalece la visión arquitectónica necesaria para integrar datos, analítica e inteligencia artificial bajo principios comunes de seguridad, trazabilidad y gobierno.
+Actualmente, esta certificación también respalda mi trabajo en la Fundación CTIC. Allí utilizo Power BI para estructurar más de 40 productos analíticos dirigidos a líderes administrativos y asistenciales, mientras mi conocimiento de Microsoft Fabric fortalece la visión arquitectónica necesaria para integrar datos, analítica e inteligencia artificial bajo principios comunes de seguridad, trazabilidad y gobierno.
 
 El DP-600 no define todo mi perfil, pero sí valida su núcleo analítico. Demuestra que puedo desarrollar una solución de extremo a extremo, desde la preparación de los datos hasta el modelo semántico y la experiencia de decisión. Sobre esa base se integran posteriormente las aplicaciones inteligentes, los agentes y las arquitecturas empresariales de inteligencia artificial. Y es la razón por la que, además de los roles de ingeniería y estrategia de IA, me interesa un rol de liderazgo en BI y analítica: el DP-600 es la credencial de ese oficio.
 
@@ -102,7 +100,7 @@ Esta ruta sustituye el espacio formativo que anteriormente ocupaba el AI-102, pe
 
 El AI-103 se conecta directamente con mi experiencia en Vesting. Allí comprendí que desarrollar un agente no consiste únicamente en diseñar un prompt o conectar un modelo. Es necesario definir el propósito de la solución, estructurar el contexto que necesita, seleccionar sus fuentes, delimitar las herramientas que puede utilizar, gestionar excepciones y establecer cuándo debe solicitar intervención humana. Con ese criterio se construyeron los 27 agentes del inventario de Vesting sobre un proceso core de 11 etapas.
 
-También se relaciona con mi responsabilidad actual de liderar una estrategia institucional de inteligencia artificial en la Fundación CTIC. Para evaluar correctamente una propuesta no basta con conocer los principios de gobierno. Es necesario comprender cómo se construyen las aplicaciones, cómo recuperan conocimiento, cómo utilizan herramientas y qué dependencias técnicas introducen. Esa profundidad permite formular controles aplicables y evitar políticas desconectadas de la realidad del desarrollo: los 7 casos de uso evaluados formalmente se juzgaron con esa mirada de constructor.
+También se relaciona con mi responsabilidad actual de liderar una estrategia institucional de inteligencia artificial en la Fundación CTIC. Para evaluar correctamente una propuesta no basta con conocer los principios de gobierno. Es necesario comprender cómo se construyen las aplicaciones, cómo recuperan conocimiento, cómo utilizan herramientas y qué dependencias técnicas introducen. Esa profundidad permite formular controles aplicables y evitar políticas desconectadas de la realidad del desarrollo: los casos de uso evaluados formalmente se juzgaron con esa mirada de constructor.
 
 Mi formación en Ingeniería Industrial aporta el punto de partida: antes de diseñar un agente necesito comprender la actividad, sus entradas, reglas, excepciones y efectos sobre el proceso completo. El Diseño Industrial amplía esa perspectiva hacia la interacción entre la persona y la solución. Un agente no solo debe funcionar; debe comunicar adecuadamente sus capacidades, límites y necesidades de intervención.
 
@@ -148,9 +146,9 @@ El AI-300 completa así el tránsito desde construir una solución hasta convert
 
 <!-- seccion: las-de-ibm -->
 
-Mi formación en ciencia de datos se construyó mediante cuatro credenciales de IBM, desarrolladas en dos etapas y alrededor de los principales lenguajes utilizados para el análisis: Python, SQL y R.
+Mi formación en ciencia de datos se construyó mediante dos credenciales de IBM, desarrolladas en dos etapas y alrededor de los principales lenguajes utilizados para el análisis: Python, SQL y R.
 
-Durante 2022 completé el Certificado Profesional en Ciencia de Datos de IBM (mayo – noviembre), junto con las rutas de Python para Ciencia de Datos (junio – septiembre) y SQL para Ciencia de Datos (septiembre – noviembre). Fueron los meses que dediqué a estudiar y certificarme entre dos empleos, y la inversión fue deliberada: quería llegar al siguiente rol con una base formal. Esta formación fortaleció mis conocimientos en preparación y exploración de información, programación analítica, visualización, consultas relacionales y construcción de modelos mediante bibliotecas como Pandas, NumPy, Matplotlib, Seaborn, Folium y scikit-learn, con Jupyter y GitHub como entorno de trabajo.
+Durante 2022 completé el Certificado Profesional en Ciencia de Datos de IBM (mayo – noviembre), que incluye los cursos de Python para Ciencia de Datos (junio – septiembre) y SQL para Ciencia de Datos (septiembre – noviembre). Fueron los meses que dediqué a estudiar y certificarme entre dos empleos, y la inversión fue deliberada: quería llegar al siguiente rol con una base formal. Esta formación fortaleció mis conocimientos en preparación y exploración de información, programación analítica, visualización, consultas relacionales y construcción de modelos mediante bibliotecas como Pandas, NumPy, Matplotlib, Seaborn, Folium y scikit-learn, con Jupyter y GitHub como entorno de trabajo.
 
 Python aportó la capacidad para convertir un problema analítico en un flujo reproducible. Me permitió avanzar desde la exploración y preparación de los datos hasta el entrenamiento y la evaluación de modelos. SQL proporcionó una comprensión igualmente importante: antes de construir algoritmos avanzados, es necesario saber localizar, relacionar, filtrar y validar la información que representa el fenómeno analizado, con consultas, subconsultas y patrones sobre bases relacionales.
 
@@ -172,7 +170,7 @@ Las credenciales de IBM no constituyen, por tanto, una colección independiente 
 
 <!-- seccion: como-se-conectan -->
 
-Vistas en conjunto, mis cinco credenciales obtenidas y las dos rutas de certificación que actualmente desarrollo representan una arquitectura de capacidades y no una acumulación de títulos. El DP-600 formaliza el núcleo analítico de mi perfil; las cuatro credenciales de IBM proporcionan la base de ciencia de datos; y las rutas AI-103 y AI-300 amplían esa trayectoria hacia el desarrollo y la operación de aplicaciones, agentes y soluciones empresariales de inteligencia artificial.
+Vistas en conjunto, mis tres credenciales obtenidas y las dos rutas de certificación que actualmente desarrollo representan una arquitectura de capacidades y no una acumulación de títulos. El DP-600 formaliza el núcleo analítico de mi perfil; las dos credenciales de IBM proporcionan la base de ciencia de datos; y las rutas AI-103 y AI-300 amplían esa trayectoria hacia el desarrollo y la operación de aplicaciones, agentes y soluciones empresariales de inteligencia artificial.
 
 Las credenciales de IBM proporcionan la base de ciencia de datos: comprender la información, explorarla, formular hipótesis, construir modelos y evaluar resultados. El DP-600 organiza esa capacidad dentro de una plataforma analítica empresarial: prepara y transforma los datos, administra activos analíticos, estructura modelos semánticos y convierte la información en experiencias de decisión mediante Power BI.
 
@@ -202,7 +200,7 @@ Tampoco busco certificarme en todas las tecnologías con las que tengo contacto.
 
 <!-- seccion: el-estado-de-cada-credencial -->
 
-Por disciplina, cada credencial se presenta con su estado exacto. El DP-600 es actualmente mi certificación vigente de Microsoft. Las cuatro de IBM están obtenidas: tres en 2022 y una en 2024. El AI-103 y el AI-300 representan rutas de certificación en desarrollo desde julio de 2026 y no forman parte del conteo de credenciales obtenidas mientras no haya aprobado los exámenes correspondientes.
+Por disciplina, cada credencial se presenta con su estado exacto. El DP-600 es actualmente mi certificación vigente de Microsoft. Las dos de IBM están obtenidas: una en 2022, con sus cursos, y una en 2024. El AI-103 y el AI-300 representan rutas de certificación en desarrollo desde julio de 2026 y no forman parte del conteo de credenciales obtenidas mientras no haya aprobado los exámenes correspondientes.
 
 No presento el AI-103 ni el AI-300 como certificaciones obtenidas. Esta distinción forma parte de la misma disciplina con la que trabajo los datos y la inteligencia artificial: cada afirmación debe corresponder con evidencia verificable y conservar claramente su estado. El sitio aplica la misma regla en código: el gate de contenido exige que el AI-103 y el AI-300 se nombren siempre con «en curso».
 
@@ -210,7 +208,7 @@ No presento el AI-103 ni el AI-300 como certificaciones obtenidas. Esta distinci
 
 <!-- seccion: el-ritmo -->
 
-El calendario de estas credenciales dice algo sobre cómo aprendo. En 2022 consolidé mi base en Python, SQL y ciencia de datos: tres de las cuatro credenciales de IBM, en siete meses. En 2024 amplié esa formación con R y preparé el DP-600 en cinco meses, mientras trabajaba a tiempo completo y construía soluciones sobre Microsoft Fabric. Desde julio de 2026 continúo las rutas AI-103 y AI-300 en paralelo, en coherencia con mi evolución hacia construir y operar aplicaciones y agentes de IA durante todo su ciclo de vida. Los plazos completos, con fechas, están en el documento sobre cómo aprendo.
+El calendario de estas credenciales dice algo sobre cómo aprendo. En 2022 consolidé mi base en Python, SQL y ciencia de datos: el Certificado Profesional de IBM con sus cursos, en siete meses. En 2024 amplié esa formación con R y preparé el DP-600 en cinco meses, mientras trabajaba a tiempo completo y construía soluciones sobre Microsoft Fabric. Desde julio de 2026 continúo las rutas AI-103 y AI-300 en paralelo, en coherencia con mi evolución hacia construir y operar aplicaciones y agentes de IA durante todo su ciclo de vida. Los plazos completos, con fechas, están en el documento sobre cómo aprendo.
 
 No considero que el ritmo de aprendizaje deba medirse únicamente por la cantidad de credenciales obtenidas. También debe observarse en la capacidad para identificar conocimientos relevantes, incorporarlos de forma estructurada, aplicarlos a problemas reales y convertirlos en prácticas, componentes y criterios que otras personas puedan utilizar.
 
@@ -218,6 +216,6 @@ Mi forma de aprender combina estudio formal, experimentación, documentación y 
 
 También entiendo que una certificación tecnológica no representa un conocimiento terminado. Las plataformas, los servicios y los patrones de arquitectura evolucionan —el propio AI-102 y el DP-100 desaparecieron mientras yo estudiaba—, y mantener una competencia profesional exige revisar esos cambios, renovar conocimientos y contrastar continuamente lo aprendido con la práctica. La vigencia formal de una credencial es importante, pero la verdadera actualización se demuestra en la capacidad para incorporar nuevas posibilidades sin perder los principios de calidad, seguridad, trazabilidad y valor empresarial que deben permanecer.
 
-Esta disciplina proviene también de mi formación como ingeniero y diseñador. La Ingeniería Industrial me exige comprender principios, relaciones, restricciones y mecanismos antes de intervenir un sistema. El Diseño Industrial me obliga a convertir ese conocimiento en soluciones aplicables, comprensibles y utilizables por las personas. Las certificaciones proporcionan una estructura formal, pero la competencia profesional aparece cuando esa estructura puede transformarse en una capacidad confiable dentro de una organización.
+Esta disciplina proviene también de mi formación como ingeniero. La Ingeniería Industrial me exige comprender principios, relaciones, restricciones y mecanismos antes de intervenir un sistema. El Diseño Industrial me obliga a convertir ese conocimiento en soluciones aplicables, comprensibles y utilizables por las personas. Las certificaciones proporcionan una estructura formal, pero la competencia profesional aparece cuando esa estructura puede transformarse en una capacidad confiable dentro de una organización.
 
 Lo que distingue mi perfil no es únicamente la lista de conocimientos que he acumulado, sino la capacidad para evolucionarlos de manera coherente. Aprendo con rapidez, pero no de forma improvisada. Cada nueva capacidad se incorpora sobre fundamentos anteriores, se contrasta con la práctica y se integra en una arquitectura profesional cada vez más completa.

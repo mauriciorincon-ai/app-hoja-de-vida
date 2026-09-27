@@ -50,7 +50,7 @@ El problema que quiero resolver puede expresarse de una forma sencilla: cómo co
 
 <!-- seccion: la-trayectoria-que-lo-respalda -->
 
-Esta motivación se encuentra respaldada por mi trayectoria. En Vesting construí desde cero en Microsoft Fabric la plataforma de datos que analizaba y monitoreaba en tiempo real hasta 23 agentes de inteligencia artificial a la vez, con 12 clientes integrados, 120 tablas, 20 GB y 1.000 eventos por día, y estructuré el proceso core replicable de 11 etapas con el que se construyeron los 27 agentes de su inventario. En la Fundación CTIC lidero actualmente la estrategia institucional de inteligencia artificial bajo UNE-ISO/IEC 42001:2025: 23 instrumentos del sistema de gestión, 12 oportunidades identificadas y 7 casos de uso evaluados. A lo largo de mi carrera he desarrollado además pipelines, modelos semánticos, productos en Power BI, aplicaciones, automatizaciones y modelos predictivos conectados con decisiones reales, en banca, transporte, logística y salud.
+Esta motivación se encuentra respaldada por mi trayectoria. En Vesting construí desde cero en Microsoft Fabric la plataforma de datos que analizaba y monitoreaba en tiempo real hasta 23 agentes de inteligencia artificial a la vez, con 12 clientes integrados, 120 tablas, 20 GB y 1.000 eventos por día, y estructuré el proceso core replicable de 11 etapas con el que se construyeron los 27 agentes de su inventario. En la Fundación CTIC lidero actualmente la estrategia institucional de inteligencia artificial bajo UNE-ISO/IEC 42001:2025: más de 20 instrumentos del sistema de gestión, más de 10 oportunidades identificadas y la mitad evaluadas. A lo largo de mi carrera he desarrollado además pipelines, modelos semánticos, productos en Power BI, aplicaciones, automatizaciones y modelos predictivos conectados con decisiones reales, en banca, transporte, logística y salud.
 
 El DP-600 formaliza el núcleo analítico de esta experiencia mediante Microsoft Fabric, modelos semánticos y Power BI. Las rutas AI-103 (aplicaciones y agentes) y AI-300 (operación de modelos y agentes), en curso desde julio de 2026, amplían esa base hacia la construcción de aplicaciones y agentes, y hacia la operación, evaluación y observabilidad de soluciones inteligentes: cierran los dos extremos. No las presento como credenciales obtenidas, sino como parte de una evolución profesional que ya se encuentra vinculada con responsabilidades y proyectos concretos.
 
@@ -63,9 +63,9 @@ Mi perfil puede generar valor en cuatro tipos de responsabilidad estrechamente r
 | Rol                                 | Qué aporto                                                                                               | Evidencia                                                                                                   |
 | ----------------------------------- | -------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
 | Arquitectura e ingeniería de IA     | diseñar ecosistemas agénticos completos: especificación del proceso, conocimiento, harnesses, evaluación | ARKHÉ, mi ecosistema agéntico; 13 agentes de la vitrina; la plataforma de Vesting                           |
-| Estrategia y gobierno de IA         | cómo una organización identifica, evalúa, prioriza y supervisa sus iniciativas, con evidencia técnica    | la estrategia de IA de la Fundación CTIC; el sistema de gestión con 23 instrumentos                         |
+| Estrategia y gobierno de IA         | cómo una organización identifica, evalúa, prioriza y supervisa sus iniciativas, con evidencia técnica    | la estrategia de IA de la Fundación CTIC; el sistema de gestión con más de 20 instrumentos                         |
 | Liderazgo de plataformas analíticas | Microsoft Fabric, pipelines, modelos semánticos, gobierno y adopción como un solo sistema                | la plataforma de Vesting; el DP-600                                                                         |
-| Liderazgo en BI y analítica         | Power BI de extremo a extremo y equipos que lo adoptan                                                   | Banco Pichincha: 50+ usuarios, 5 personas a cargo; TransMilenio: 25+ usuarios; Fundación CTIC: 42 productos |
+| Liderazgo en BI y analítica         | Power BI de extremo a extremo y equipos que lo adoptan                                                   | Banco Pichincha: 50+ usuarios, 5 personas a cargo; TransMilenio: 25+ usuarios; Fundación CTIC: más de 40 productos |
 
 Los cuatro espacios comparten una misma responsabilidad profesional: comprender el sistema, construir la capacidad adecuada y asegurar que pueda utilizarse con confianza. Puedo trabajar cerca de la implementación, cerca de la decisión estratégica o articulando ambas. Mi mayor diferencial aparece precisamente en esa combinación.
 
@@ -81,7 +81,7 @@ Mi aporte en este campo comienza antes de seleccionar el modelo. La Ingeniería 
 
 <!-- seccion: estrategia-y-gobierno-de-ia -->
 
-En estrategia y gobierno de inteligencia artificial puedo contribuir a establecer la forma en que una organización identifica, evalúa, prioriza y supervisa sus iniciativas. Esto comprende la definición de criterios para casos de uso, responsabilidades, gestión de riesgos, evaluación de impactos, gobierno de proveedores, seguimiento del ciclo de vida y adopción de estándares como ISO/IEC 42001. Es lo que hago hoy en la Fundación CTIC, donde de 12 oportunidades identificadas se evaluaron 7 casos y se priorizaron 3.
+En estrategia y gobierno de inteligencia artificial puedo contribuir a establecer la forma en que una organización identifica, evalúa, prioriza y supervisa sus iniciativas. Esto comprende la definición de criterios para casos de uso, responsabilidades, gestión de riesgos, evaluación de impactos, gobierno de proveedores, seguimiento del ciclo de vida y adopción de estándares como ISO/IEC 42001. Es lo que hago hoy en la Fundación CTIC, donde de más de 10 oportunidades identificadas se evaluó la mitad y se priorizaron unas pocas.
 
 En este nivel no me interesa formular políticas desconectadas de la realidad técnica. Mi experiencia construyendo plataformas de datos y observando agentes me permite comprender qué controles son aplicables, qué evidencia puede producir una arquitectura y qué responsabilidades deben permanecer en las personas. Del mismo modo, mi trabajo con la alta dirección —la junta directiva en Ceinfes, los fundadores en Vesting, la Dirección de Planeación y las subdirecciones en la Fundación CTIC— me permite traducir esas decisiones en conversaciones sobre valor, riesgo, capacidad institucional y sostenibilidad.
 
@@ -93,13 +93,13 @@ En liderazgo de plataformas analíticas e inteligentes puedo aportar mi profundi
 
 Esta responsabilidad funciona como puente entre las otras. Sin una arquitectura confiable de datos y modelos semánticos, las aplicaciones inteligentes carecen de contexto y las estrategias de IA no encuentran una base técnica sobre la cual materializarse. Mi especialidad en Power BI me permite, además, acercar esa arquitectura a las personas mediante experiencias analíticas comprensibles y orientadas a decisiones.
 
-El cuarto rol es el más cercano a ese oficio: liderazgo en BI y analítica, Power BI de extremo a extremo y equipos que lo adoptan. Es el rol que el DP-600 certifica y el que más veces he ejercido: en Banco Pichincha, con 5 personas a cargo y tableros que adoptaron más de 50 usuarios, un programa de formación que subió la productividad un 20 % y modelos predictivos en producción; en TransMilenio, con más de 25 usuarios clave y un ETL que unificó las fuentes; en la Fundación CTIC, con 42 productos analíticos para 20 líderes y unos 75 usuarios. Lo pedí explícitamente como cuarto tipo de rol porque no quiero que la ingeniería de IA borre la profundidad en BI: es la base de todo lo demás.
+El cuarto rol es el más cercano a ese oficio: liderazgo en BI y analítica, Power BI de extremo a extremo y equipos que lo adoptan. Es el rol que el DP-600 certifica y el que más veces he ejercido: en Banco Pichincha, con 5 personas a cargo y tableros que adoptaron más de 50 usuarios, un programa de formación que subió la productividad un 20 % y modelos predictivos en producción; en TransMilenio, con más de 25 usuarios clave y un ETL que unificó las fuentes; en la Fundación CTIC, con más de 40 productos analíticos para unos 20 líderes y unos 75 usuarios. Lo pedí explícitamente como cuarto tipo de rol porque no quiero que la ingeniería de IA borre la profundidad en BI: es la base de todo lo demás.
 
 ## La responsabilidad que quiero asumir: de extremo a extremo
 
 <!-- seccion: la-responsabilidad-que-quiero -->
 
-Busco una posición en la que pueda asumir responsabilidad de extremo a extremo y no limitarme a ejecutar una parte aislada de la solución. Quiero participar en la comprensión del problema, la selección del patrón adecuado, el diseño de la arquitectura, la construcción o dirección de la implementación, la evaluación, la adopción y la evolución posterior. Es la responsabilidad que tuve en Vesting, entre 2023 y 2025, y la que tengo en la Fundación CTIC.
+Estoy abierto a una posición en la que pueda asumir responsabilidad de extremo a extremo y no limitarme a ejecutar una parte aislada de la solución. Quiero participar en la comprensión del problema, la selección del patrón adecuado, el diseño de la arquitectura, la construcción o dirección de la implementación, la evaluación, la adopción y la evolución posterior. Es la responsabilidad que tuve en Vesting, entre 2023 y 2025, y la que tengo en la Fundación CTIC.
 
 Esto no significa concentrar todas las decisiones ni reemplazar el conocimiento especializado de otros profesionales. Significa contar con la visibilidad y la autoridad necesarias para conectar las disciplinas que determinan el resultado: negocio, procesos, datos, arquitectura, desarrollo, experiencia de usuario, seguridad, riesgo y gobierno.
 
@@ -116,9 +116,7 @@ No necesito que la organización tenga resueltas todas estas capacidades antes d
 - Ubicación: resido en Bogotá, Colombia. Puedo trabajar de manera presencial, híbrida o remota según la naturaleza de la responsabilidad.
 - Reubicación: tengo disponibilidad para una reubicación nacional o internacional, a otra ciudad o a otro país.
 - Zona horaria: cualquiera. En trabajo remoto adapto la jornada a la del equipo.
-- Inglés: nivel B2, profesional; trabajo con documentación y equipos en inglés a diario.
-
-No tengo restricciones geográficas predeterminadas para reubicarme. Si la oportunidad representa una evolución profesional significativa y las condiciones económicas son favorables y proporcionales al alcance del cargo, puedo considerar una reubicación a cualquier país. La evaluación debe incluir la compensación total, el costo de vida, las condiciones migratorias, la estabilidad contractual y la viabilidad práctica del traslado.
+- Inglés: nivel B2 (equivalencia de IELTS 5,5, 2014), profesional; trabajo con documentación y equipos en inglés a diario.
 
 Esta disposición no es únicamente declarativa. Entre 2013 y 2014 viví y estudié en Melbourne, Australia, donde realicé formación intensiva en inglés y presenté el IELTS. La experiencia me permitió desenvolverme fuera de mi entorno habitual, adaptarme a otro contexto cultural y comprender de forma directa las exigencias de una reubicación internacional.
 
@@ -204,7 +202,7 @@ Con esa regla, en 120 escenarios representativos comparé la arquitectura con un
 
 <!-- seccion: lo-que-espero -->
 
-Busco una organización que considere los datos y la inteligencia artificial como capacidades empresariales y no únicamente como herramientas o proyectos temporales. Esto implica reconocer que su valor depende de la arquitectura, la calidad de la información, la adopción, la evaluación y la claridad con la que se distribuyen las responsabilidades.
+Me interesa una organización que considere los datos y la inteligencia artificial como capacidades empresariales y no únicamente como herramientas o proyectos temporales. Esto implica reconocer que su valor depende de la arquitectura, la calidad de la información, la adopción, la evaluación y la claridad con la que se distribuyen las responsabilidades.
 
 Valoro los entornos en los que existe ambición tecnológica acompañada por disciplina. Quiero trabajar donde sea posible experimentar, pero donde las decisiones relevantes también se documenten, los resultados se midan y los riesgos se gestionen de forma proporcional. La innovación sostenible no exige eliminar los controles, sino diseñarlos para que permitan avanzar con confianza.
 

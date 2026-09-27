@@ -80,7 +80,7 @@ La Ingeniería Industrial aporta este criterio de priorización: los recursos so
 
 <!-- seccion: evidencia-certificaciones -->
 
-Tengo cinco credenciales obtenidas y verificables —el DP-600 de Microsoft Fabric y cuatro credenciales de IBM en ciencia de datos, Python, SQL y R— y dos rutas en curso desde julio de 2026, el AI-103 y el AI-300, que no cuento como obtenidas mientras no apruebe los exámenes. La tabla completa, con nombres oficiales y fechas, está en el documento de certificaciones; aquí importa el ritmo.
+Tengo tres credenciales obtenidas y verificables —el DP-600 de Microsoft Fabric y dos de IBM: el Certificado Profesional en Ciencia de Datos, con sus cursos de Python y SQL, y Ciencia de Datos Aplicada con R— y dos rutas en curso desde julio de 2026, el AI-103 y el AI-300, que no cuento como obtenidas mientras no apruebe los exámenes. La tabla completa, con nombres oficiales y fechas, está en el documento de certificaciones; aquí importa el ritmo.
 
 El caso que mejor lo mide es el DP-600. Lo preparé entre julio y noviembre de 2024, cinco meses, mientras trabajaba a tiempo completo en Vesting, y obtuve la credencial en diciembre de 2024. Microsoft Fabric llevaba entonces menos de un año en disponibilidad general: no había cursos maduros ni comunidad consolidada, y la documentación cambiaba con frecuencia. Me certifiqué sobre la misma plataforma en la que estaba construyendo el ecosistema de datos de la startup: los activos analíticos, pipelines, modelos semánticos, mecanismos de gobierno y soluciones en Power BI que formaban parte de la certificación correspondían con problemas que debía resolver profesionalmente esa misma semana.
 
@@ -90,7 +90,7 @@ Ese proceso consolidó una de las características centrales de mi aprendizaje: 
 
 <!-- seccion: ibm-y-las-rutas-en-curso -->
 
-Las cuatro de IBM siguen el mismo patrón. Durante 2022 consolidé mi base en ciencia de datos mediante formación especializada en Python, SQL, análisis, visualización y aprendizaje automático: el Certificado Profesional en Ciencia de Datos, Python y SQL, entre mayo y noviembre, en los meses que dediqué a estudiar y certificarme entre dos empleos. Estas credenciales me permitieron organizar conocimientos que ya necesitaba en mi trabajo y ampliar mi capacidad para desarrollar análisis reproducibles, consultar información estructurada y construir modelos mediante herramientas como Pandas, NumPy y scikit-learn.
+Las dos de IBM siguen el mismo patrón. Durante 2022 consolidé mi base en ciencia de datos mediante formación especializada en Python, SQL, análisis, visualización y aprendizaje automático: el Certificado Profesional en Ciencia de Datos —con sus cursos de Python y SQL—, entre mayo y noviembre, en los meses que dediqué a estudiar y certificarme entre dos empleos. Estas credenciales me permitieron organizar conocimientos que ya necesitaba en mi trabajo y ampliar mi capacidad para desarrollar análisis reproducibles, consultar información estructurada y construir modelos mediante herramientas como Pandas, NumPy y scikit-learn.
 
 En 2024 complementé esa base con formación aplicada en R, entre enero y noviembre, en paralelo al DP-600. La elección no respondió a la intención de acumular otro lenguaje, sino a la necesidad de fortalecer el razonamiento estadístico, la formulación de hipótesis y la evaluación rigurosa de los resultados. Python amplió mi capacidad para construir soluciones. R profundizó la forma en que examino la evidencia antes de producir una conclusión.
 

@@ -1,26 +1,26 @@
 {
   "schema_version": "1.1.0",
-  "actualizado": "2026-09-12",
+  "actualizado": "2026-09-27",
   "pieza": {
     "slug": "hiring-copilot",
     "nombre": "Hiring Copilot",
     "frente": "agentes",
     "estado": "inicial",
-    "ciclo": "WI-9",
-    "version": "1.1.1",
+    "ciclo": "WI-8 · F0b",
+    "version": "1.5.0",
     "sellado_en": null,
-    "sprints_cerrados": 1
+    "sprints_cerrados": 2
   },
   "promesa": {
     "tagline": "Ninguna afirmación sale de la memoria del modelo.",
-    "para_quien": "Para un profesional de inteligencia artificial que busca un rol de nivel medio-alto en Colombia o en Europa y quiere que cada candidatura parta de evidencia real, no de memoria. Sin esta herramienta rehace el currículum en cada oferta, escribe la carta desde cero, prepara la entrevista de memoria y no sabe qué canal le respondió: cada candidatura cuesta unas cinco horas y empieza en blanco.",
-    "intro": "Su perfil se convierte una sola vez en un banco de logros con procedencia, y desde ahí sale todo: el análisis que descarta la oferta antes de gastarle horas, el currículum y la carta en dos idiomas, el gimnasio que entrena entrevista y código de verdad, y un pipeline que aprende qué canal responde. Él decide y él envía; el harness prepara, verifica y recuerda."
+    "para_quien": "Para un profesional de inteligencia artificial que quiere que cada candidatura parta de evidencia real, no de memoria. Sin esta herramienta rehace el currículum en cada oferta, escribe la carta desde cero, prepara la entrevista de memoria y no sabe qué canal le respondió: cada candidatura cuesta unas cinco horas y empieza en blanco.",
+    "intro": "Su perfil se convierte una sola vez en un banco de logros con procedencia, y de ahí sale todo: el análisis que descarta la oferta antes de gastarle horas, currículum y carta en dos idiomas, el gimnasio de entrevista y código de verdad, una campaña diaria de inglés hablado con temario técnico, y un pipeline que aprende qué canal responde. Él decide y envía; el harness prepara, verifica y recuerda."
   },
   "titular": "Cada afirmación enviable enlaza un logro con su fuente y un programa lo comprueba: el bullet huérfano hace fallar el control. Y ningún control vale su verde sin su carnada, el caso destruido que demuestra que dispara.",
   "stack": [
     {
       "nombre": "Claude Code",
-      "papel": "el runtime del asesor: doce comandos sobre ocho módulos, sin MCP en el núcleo y con todos los datos en el repositorio local"
+      "papel": "el runtime del asesor: catorce comandos sobre ocho módulos, sin MCP en el núcleo; perfil, ofertas y pipeline no salen del repositorio local"
     },
     {
       "nombre": "Node 24",
@@ -28,19 +28,19 @@
     },
     {
       "nombre": "Python 3.14 en entorno virtual",
-      "papel": "ingesta de PDF, pruebas y motor del gimnasio; el marcador PEP 668 del intérprete obliga al .venv, no es preferencia"
+      "papel": "ingesta de PDF, pruebas, los ejercicios en Python y el ensamblador de los prompts orales del día; el marcador PEP 668 obliga al .venv, no es preferencia"
     },
     {
       "nombre": "PuLP con HiGHS",
       "papel": "resuelve el ejercicio de plan de estudio; CBC se declara disponible y no corre en esta máquina, así que el arranque prueba resolviendo"
     },
     {
-      "nombre": "pandoc",
-      "papel": "convierte el currículum de una columna a documento de texto, con plantilla de referencia extraída una sola vez"
+      "nombre": "pandoc y Chrome sin interfaz",
+      "papel": "las dos salidas del currículum: la de una columna a documento de texto y la humana a PDF carta, etiquetado y con las tildes intactas al extraer"
     },
     {
-      "nombre": "Google Chrome sin interfaz",
-      "papel": "renderiza el currículum humano a PDF tamaño carta, etiquetado y con las tildes intactas al extraer el texto"
+      "nombre": "App de Claude en modo de voz",
+      "papel": "el interlocutor del gimnasio oral: cinco bloques al día, uno por sesión nueva, con los prompts que el harness arma y los reportes que luego registra"
     },
     {
       "nombre": "JSON Schema vendorizado",
@@ -54,10 +54,10 @@
   "cifras": [
     {
       "clave": "criterios_binarios",
-      "valor": 99,
+      "valor": 122,
       "etiqueta": "Criterios binarios de aceptación",
       "fuente": "medido",
-      "detalle": "Suma de las casillas de los doce work-items: contando las líneas de casilla en entrega/work-items/ dan 99. Hoy hay 16 cumplidas —las ocho de WI-6, la carnada de WI-7 y las siete de WI-9—, y pipeline/scripts/verificar-coherencia.mjs compara ese recuento contra el disco en cada corrida. El total cuenta las dos casillas, marcada y sin marcar, para que el paquete no encoja al avanzar."
+      "detalle": "Suma de las casillas de los doce work-items en entrega/work-items/: 122. Hoy hay 31 cumplidas —las ocho de WI-6, una de WI-7, las siete de WI-9 y quince de WI-8—, y pipeline/scripts/verificar-coherencia.mjs coteja ese recuento con el disco en cada corrida. Solo WI-9 figura cerrado: WI-6 cumple sus ocho, pero el índice lo deja en «motor cerrado» porque su banco crece con cada oferta."
     },
     {
       "clave": "gates_humanos",
@@ -71,7 +71,7 @@
       "valor": 8,
       "etiqueta": "Controles con carnada, de nueve programas",
       "fuente": "medido",
-      "detalle": "Tabla de verificadores en capacidades.md §3b, contrastada con pipeline/scripts/: nueve programas, ocho de ellos controles con su caso destruido en pipeline/scripts/carnadas/. El noveno, lib-esquema.mjs, es una librería y declara que no lleva carnada propia: las suyas son las de quienes la usan."
+      "detalle": "Tabla de verificadores de capacidades.md §3b, recontada contra pipeline/scripts/: nueve programas, ocho de ellos controles con su caso destruido en pipeline/scripts/carnadas/. El noveno, lib-esquema.mjs, es la librería de tres validadores y no se cuenta, aunque trae su autotest de diez casos. Fuera de esa tabla, el hook de solo lectura y el ensamblador del gimnasio oral traen las suyas."
     },
     {
       "clave": "costo_en_herramientas",
@@ -79,7 +79,7 @@
       "unidad": "COP",
       "etiqueta": "Costo en herramientas",
       "fuente": "declarado",
-      "detalle": "Ficha del paquete en arquitectura/README.md: cero pesos, todo corre local. Sin conectores en el núcleo, sin servicios contratados y sin descargas en corrida, porque los esquemas se vendorizan dentro del paquete con su licencia."
+      "detalle": "Ficha del paquete en arquitectura/README.md: cero pesos. El núcleo corre local, sin conectores ni servicios contratados y sin descargas en corrida; la práctica oral usa la app de Claude, una suscripción que ya existía, y la medida fonética semanal cabe en el nivel gratuito de Azure."
     },
     {
       "clave": "horas_ahorradas_base",
@@ -87,7 +87,7 @@
       "unidad": "h",
       "etiqueta": "Horas ahorradas, escenario base",
       "fuente": "estimacion",
-      "detalle": "Escenario base de arquitectura/roi.json: 30 h ahorradas en un escenario de doce candidaturas más 4,8 h en preparación de entrevistas. El porcentaje de ahorro no está medido: se estima y se corrige con la primera corrida real. El mismo archivo declara que no afirma mejora de la tasa de respuesta y que el delta salarial no se cuenta como retorno."
+      "detalle": "30 h ahorradas al preparar candidaturas y 4,8 h al preparar entrevistas, en el escenario base de arquitectura/roi.json. El porcentaje de ahorro no está medido: se estima y se corrige con la primera corrida real. El mismo archivo declara que no afirma mejora de la tasa de respuesta y que el delta salarial no se cuenta como retorno."
     }
   ],
   "bloques": [
@@ -112,14 +112,14 @@
     {
       "orden": 4,
       "nombre": "El gimnasio",
-      "linea": "Entrevistas con rúbrica, seis ejercicios con sus dos direcciones y exámenes de sesenta preguntas.",
+      "linea": "Entrevistas con rúbrica, seis ejercicios —cuatro ejecutados de verdad— y exámenes de sesenta preguntas.",
       "cuenta": 3
     },
     {
       "orden": 5,
-      "nombre": "Puente de habla",
-      "linea": "Brief hacia el agente externo de práctica oral e ingesta de su informe. No se reconstruye.",
-      "cuenta": 1
+      "nombre": "Gimnasio oral · La Campaña",
+      "linea": "Cinco bloques diarios en la app de Claude; aquí se arma el día y se registra. Un temario para entrevista y examen.",
+      "cuenta": 3
     },
     {
       "orden": 6,
@@ -231,7 +231,7 @@
         "id": "gimnasio",
         "tipo": "tarea",
         "carril": "agente",
-        "texto": "Entrena entrevista, ejercicio y examen"
+        "texto": "Entrena entrevista, ejercicio, examen e inglés"
       },
       {
         "id": "leccion",
@@ -330,6 +330,10 @@
         "texto": "El gate exige la frase «esta pieza sale». El harness deja lista la pieza y no envía nada, nunca."
       },
       {
+        "paso": "gimnasio",
+        "texto": "El inglés se habla en la app de Claude, un bloque por sesión nueva; el harness arma el día y registra lo que vuelve."
+      },
+      {
         "paso": "leccion",
         "texto": "Ninguna corrida cierra sin su lección en la memoria del paquete, y la regla nueva la aprueba él."
       }
@@ -351,23 +355,23 @@
   ],
   "hitos": [
     {
-      "valor": "WI-9",
+      "valor": "WI-8 · F0b",
       "etiqueta": "ciclo"
     },
     {
-      "valor": "1",
+      "valor": "2 de 12",
       "etiqueta": "work-items cerrados"
     },
     {
-      "valor": "2026-09-05",
+      "valor": "2026-09-15",
       "etiqueta": "verificado"
     },
     {
-      "valor": "v1.1.0",
+      "valor": "v1.5.0",
       "etiqueta": "version"
     },
     {
-      "valor": "20",
+      "valor": "26",
       "etiqueta": "decisiones registradas"
     }
   ]

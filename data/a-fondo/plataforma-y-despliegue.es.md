@@ -169,7 +169,7 @@ Google Cloud —Vertex AI, BigQuery, despliegue productivo en ese ecosistema— 
 
 De MLOps tengo una mitad y no la otra, y conviene decir cuál. La mitad de llevar modelos a producción y sostenerlos la he hecho: modelos predictivos en producción en Banco Pichincha y en TransMilenio, el monitoreo en tiempo real de agentes de IA en Vesting, y seis aplicaciones hermanas y este sitio con integración continua, controles que bloquean la publicación y despliegue automático, operadas por mí. La mitad de empaquetar y orquestar con contenedores, no. Mis despliegues son sin servidor propio —Vercel, Cloudflare Workers, el navegador del usuario— y por eso nunca han necesitado un contenedor.
 
-Prefiero decirlo así, de frente, que esconderlo en una lista de herramientas. Un currículum que nombra treinta tecnologías no distingue las cinco que domina de las veinticinco que ha visto, y quien entrevista lo descubre en diez minutos. Por la misma razón retiré de mis skills herramientas que usé en su momento y hoy no practico: es mejor una lista corta que sea cierta.
+Prefiero decirlo así, de frente, que esconderlo en una lista de herramientas. Un currículum que nombra treinta tecnologías no distingue las cinco que domina de las veinticinco que ha visto, y quien entrevista lo descubre en diez minutos. Por la misma razón retiré de mis skills herramientas que usé en su momento y hoy no practico: es mejor una lista corta que sea cierta. Por eso mismo, el 27 de septiembre de 2026 salieron de la lista dbt y Apache Iceberg, que no he usado; Airflow y PySpark quedaron marcados «en estudio», y Databricks, Snowflake y Microsoft Purview, «prototipo».
 
 ## Principios arquitectónicos que trascienden la plataforma
 

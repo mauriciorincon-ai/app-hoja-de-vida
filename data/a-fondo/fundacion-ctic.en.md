@@ -2,8 +2,8 @@
 slug: fundacion-ctic
 codigo: AF-10
 titulo: "Fundación CTIC — analytics in healthcare (2025–today)"
-resumen: "My current role: 42 analytical products in Power BI for 20 leaders of 15 processes, data governance and quality in healthcare, and the institutional AI strategy under UNE-ISO/IEC 42001:2025 with 23 instruments, 12 opportunities and 7 cases evaluated."
-cuando_usar: "Use this when they ask where he works now, about Fundación CTIC (2025–today), healthcare data, data quality, the institutional artificial intelligence strategy under UNE-ISO/IEC 42001:2025, the 23 instruments and the per-process dashboards."
+resumen: "My current role: more than 40 analytical products in Power BI for some 20 leaders of some 15 processes, data governance and quality in healthcare, and the institutional AI strategy under UNE-ISO/IEC 42001:2025 with more than 20 instruments, more than 10 opportunities and half of them evaluated."
+cuando_usar: "Use this when they ask where he works now, about Fundación CTIC (2025–today), healthcare data, data quality, the institutional artificial intelligence strategy under UNE-ISO/IEC 42001:2025, the more than 20 instruments and the per-process dashboards."
 estado: aprobado
 ancla: "/proyectos/fundacion-ctic"
 actualizado: 2026-09-26
@@ -61,7 +61,7 @@ system.
 
 I work in a direct line with the Planning Directorate and with the sub-directorates of technology,
 information management and quality. I do not lead a team of direct reports: I lead complete
-processes that bring together a large number of people —today, 20 leaders of 15 administrative
+processes that bring together a large number of people —today, some 20 leaders of 15 administrative
 and clinical processes and some 75 users of the analytical solutions—. It is a different form of
 leadership from the one I exercised at Cafam with a team of 20 people: there I directed people;
 here I direct the way an institution measures, decides and adopts artificial intelligence.
@@ -86,7 +86,7 @@ objectives.
 The four functions my CV describes for this position are, in that order, analytics for
 decision-making, data governance and quality, monitoring with business intelligence and continuous
 improvement. The fifth, which did not fit in a bullet, is the one that today takes up most of my
-judgment: the institutional AI strategy under UNE-ISO/IEC 42001:2025, with 23 instruments of the
+judgment: the institutional AI strategy under UNE-ISO/IEC 42001:2025, with more than 20 instruments of the
 management system in different states of progress.
 
 ## What I do not tell: patient data and confidentiality in healthcare
@@ -98,7 +98,7 @@ expose patient data or clinical information; nor sensitive details of the proces
 knowledge whose disclosure could affect people or the institution. I can explain the
 capabilities, the architecture principles, the governance practices and the way of working. I do
 not reveal the information those capabilities operate on. That is why the figures in this
-document —42 analytical products, 23 dashboards, 20 leaders, 15 processes, 12 AI opportunities—
+document —more than 40 analytical products, more than 20 dashboards, some 20 leaders, some 15 processes, more than 10 AI opportunities—
 are aggregated and do not name any process, any indicator or any person.
 
 This reserve does not limit the solidity of the narrative. On the contrary, it demonstrates a
@@ -128,8 +128,8 @@ start from the available technology but from the problems, the decisions and the
 institution needs to strengthen.
 
 With that rule, in little more than a year the strategy has made it possible to identify 12
-artificial intelligence opportunities and formally evaluate 7 use cases. The number matters less
-than the filter: each of those 12 opportunities first had to declare what problem it solved and
+artificial intelligence opportunities and formally evaluate half of them. The number matters less
+than the filter: each of those opportunities first had to declare what problem it solved and
 for whom.
 
 ## Not every problem needs AI: how I choose the solution pattern and build the portfolio
@@ -148,7 +148,7 @@ organizing the use cases according to their potential value, feasibility, availa
 information, level of risk, dependence on third parties, integration complexity and adoption
 capacity. Prioritization does not seek to identify only the most innovative ideas, but those that
 can produce learning and value without exceeding the institutional capacity to implement,
-supervise and sustain them. Of the 12 opportunities identified, 7 were formally evaluated and 3
+supervise and sustain them. Of the opportunities identified, half were formally evaluated and a few
 were prioritized: that proportion is the result of applying the filter, not of a lack of ideas.
 
 Each initiative must have an explicit purpose, an institutional owner, a clearly identified
@@ -229,7 +229,7 @@ Risk management is part of the design from the start. Each use case must be anal
 the consequences of incorrect, biased, outdated or out-of-context answers; the effects of an
 unwanted action; dependence on vendors; exposure of information; lack of explainability; and the
 potential impact on people, processes and the institution. That analysis is one of the matrices
-that form part of the 23 instruments of the management system.
+that form part of the more than 20 instruments of the management system.
 
 The impact of the systems must also be assessed —the AI system impact assessment the standard
 asks for, the AIIA—. A solution can be technically functional and still transform the
@@ -238,7 +238,7 @@ a dependency that had not been foreseen. The impact assessment makes it possible
 system beyond its technical performance and consider its effects within the environment in which
 it will be used. In healthcare that view is not optional: the affected group may be a patient.
 
-## Inventory of AI systems, lifecycle and the 23 instruments of the management system
+## Inventory of AI systems, lifecycle and the more than 20 instruments of the management system
 
 <!-- seccion: inventario-y-ciclo-de-vida -->
 
@@ -257,7 +257,7 @@ when they stop fulfilling their purpose.
 
 As part of structuring the management system, the work today comprises 23 institutional
 instruments, among them policies, procedures, evaluation matrices, criteria for use cases and
-follow-up mechanisms: 8 are finished and 15 are under construction. Their progress is measured by
+follow-up mechanisms: a third are finished and the rest under construction. Their progress is measured by
 level of definition, review, approval and application, not only by the existence of the
 document.
 
@@ -272,7 +272,7 @@ demonstrate each advance.
 
 <!-- seccion: el-agente-experto-en-iso-42001-en-ctic -->
 
-To sustain the work on the 23 instruments I built the ISO 42001 expert agent I publish in the
+To sustain the work on the more than 20 instruments I built the ISO 42001 expert agent I publish in the
 showcase, one of the 13 agents of the portfolio. It answers with the standard in hand: every
 normative claim cites its corpus entry with clause and page, or declares the gap, and stamps the
 date on which it was verified to still be in force. Its corpus synthesizes the 38 controls of
@@ -298,7 +298,7 @@ an area.
 Each proposal must clearly present the problem it seeks to solve, the users and processes
 involved, the expected benefit, the information required and the way a satisfactory result will
 be recognized. It must also identify initial risks, dependencies, owners, integration needs and
-adoption conditions. It is the same file that 2 of the 3 prioritized initiatives have complete
+adoption conditions. It is the same file that the first prioritized initiatives have complete
 today.
 
 The evaluation must determine whether artificial intelligence is necessary and, if so, what type
@@ -308,7 +308,7 @@ execution of tasks. Correctly defining that need avoids building agents for prob
 solved with simpler, more predictable and more sustainable instruments —sometimes, with a Power
 BI dashboard—.
 
-## Progressive validation: 12 opportunities, 7 cases evaluated, 3 initiatives prioritized
+## Progressive validation: more than 10 opportunities, half of them evaluated, a few initiatives prioritized
 
 <!-- seccion: validacion-progresiva -->
 
@@ -329,9 +329,9 @@ risk, allocate resources consciously and build an implementation sequence consis
 organization's maturity.
 
 To date, the strategy has made it possible to identify 12 artificial intelligence opportunities,
-formally evaluate 7 use cases and prioritize 3 initiatives for validation or progressive
-development. Of these, 2 have documented owners, expected results, initial risks and evaluation
-criteria. That 5 of the 7 evaluated cases have not yet moved forward is the filter working, not
+formally evaluate half of them and prioritize a few initiatives for validation or progressive
+development. Of these, the first ones have documented owners, expected results, initial risks and evaluation
+criteria. That most of the evaluated cases have not yet moved forward is the filter working, not
 an inventory of failures.
 
 ## Process-based analytics, for two audiences: administrative and clinical leaders
@@ -341,7 +341,7 @@ an inventory of failures.
 I have developed analytical solutions in Power BI for administrative and clinical leaders,
 structuring semantic models, indicators and visualization experiences adapted to their
 responsibilities, but grounded in consistent institutional definitions. They are 42 analytical
-products —among them 23 dashboards— that today are used by 20 leaders of 15 processes and some 75
+products —half of them dashboards— that today are used by some 20 leaders of some 15 processes and some 75
 users.
 
 These audiences work on the same organization, but they do not necessarily ask the same questions
@@ -375,7 +375,7 @@ analysis. This clarity protects trust and prevents an inference from being inter
 certainty.
 
 My goal is not to get every person to look at exactly the same screen. It is to ensure that each
-of the 20 people who lead the 15 processes can act from their responsibility on a coherent and
+of the roughly 20 people who lead some 15 processes can act from their responsibility on a coherent and
 traceable institutional representation of reality.
 
 ## Data governance and quality in healthcare: personal data, habeas data and Law 1581
@@ -408,7 +408,7 @@ the same time, not be sufficiently complete, timely or consistent to support a d
 why the controls must be designed by understanding the process that produces the data and the
 consequence a wrong interpretation could generate.
 
-With that criterion I designed the quality rules that feed the 42 analytical products. I publish
+With that criterion I designed the quality rules that feed the more than 40 analytical products. I publish
 them without figures, because the figures would describe internal processes, but I can say what
 kind they are:
 
@@ -441,7 +441,7 @@ In healthcare, governing data and governing artificial intelligence are closely 
 responsibilities. The reliability of intelligent solutions depends on the quality, provenance,
 context and authorization of the information they use. That is why the AI strategy of Fundación
 CTIC cannot be built as a layer independent of the institutional data architecture and
-governance: the 12 opportunities identified were evaluated, among other criteria, by the
+governance: the opportunities identified were evaluated, among other criteria, by the
 availability and the conditions of use of the information they would need.
 
 ## Analytical solutions and process-based dashboards in Power BI
@@ -451,7 +451,7 @@ availability and the conditions of use of the information they would need.
 I have developed analytical solutions in Power BI for tracking administrative and clinical
 processes, integrating information, semantic models, indicators and visualization experiences
 oriented to the needs of leaders with different responsibilities within the institution: 42
-products, of which 23 are dashboards.
+products, of which half are dashboards.
 
 Power BI does not work in this context only as a tool for building dashboards. It is the
 analytical layer through which data is organized, acquires meaning and becomes usable
@@ -492,8 +492,8 @@ the metrics. Top management needs to observe trends, risks and response capacity
 need to identify constraints, deviations and causal relationships. Operational teams need
 information detailed enough to understand concrete situations. The semantic model must keep a
 single logic, while the Power BI experience adapts its depth and presentation to each
-responsibility: it is what allows 42 products to serve 20 leaders and some 75 users without there
-being 42 different definitions of the same indicator.
+responsibility: it is what allows more than 40 products to serve some 20 leaders and some 75 users without there
+being as many different definitions of the same indicator.
 
 ## Improvement plans: what I designed, what I implemented and the close to 60% less effort
 
@@ -520,9 +520,9 @@ rebuilt each time.
 When the owners adopt a decision, the analytical solutions contribute to tracking its results
 through previously defined indicators. This closes the cycle between observation, decision and
 evaluation without attributing to the platform, or to the analytics team, responsibilities that
-belong to the governance and management of the process. Currently, the 42 analytical products are
-in institutional use or follow-up, supporting 20 leaders of 15 administrative and clinical
-processes, and have supported the 10 analysis plans under follow-up during the period evaluated.
+belong to the governance and management of the process. Currently, the more than 40 analytical products are
+in institutional use or follow-up, supporting some 20 leaders of 15 administrative and clinical
+processes, and have supported the ten or so analysis plans under follow-up during the period evaluated.
 
 ## An institutional architecture for artificial intelligence: reuse without fragmenting
 
@@ -531,8 +531,7 @@ processes, and have supported the 10 analysis plans under follow-up during the p
 Leading the artificial intelligence strategy also means defining how the initiatives will be able
 to coexist, reuse capabilities and evolve without creating a new technological fragmentation.
 Each isolated project can solve a specific need, but a succession of disconnected solutions
-increases costs, repeats mistakes and makes governance harder. With 3 prioritized initiatives and
-12 opportunities in the portfolio, the question is no longer only whether each one works, but
+increases costs, repeats mistakes and makes governance harder. With a few prioritized initiatives and more than 10 opportunities in the portfolio, the question is no longer only whether each one works, but
 what they share.
 
 The institutional architecture must connect the technological capabilities with the decision and
@@ -564,7 +563,7 @@ An institutional AI architecture must also recognize the role of third parties. 
 by vendors also need evaluation, conditions of use, responsibilities, integration, follow-up and
 exit mechanisms. Outsourcing the technology does not automatically transfer the institutional
 responsibility for its effects. At Fundación CTIC, dependence on third parties is one of the
-criteria with which each of the 12 opportunities is prioritized.
+criteria with which each of the opportunities is prioritized.
 
 The evaluation of third parties should not be limited to checking features, price or ease of
 integration. It must also make it possible to understand what information the solution will use,
@@ -587,7 +586,7 @@ proves its value to be integrated, operated, supervised and evolved with consist
 
 <!-- seccion: alcance-y-avance -->
 
-Currently, 42 analytical solutions in Power BI are in institutional use or follow-up and support 20
+Currently, more than 40 analytical solutions in Power BI are in institutional use or follow-up and support 20
 leaders or owners of 15 administrative and clinical processes. Their scope is evaluated not only
 by the number of products developed, but by their effective use, the reliability of their
 indicators and their incorporation into the spaces where institutional performance is analyzed.
@@ -605,14 +604,13 @@ indicators and their incorporation into the spaces where institutional performan
 | AI                | initiatives prioritized · documented          |                    3 · 2 |
 | Management system | instruments: finished · under construction    |                   8 · 15 |
 
-In artificial intelligence, the strategy has made it possible to identify 12 opportunities,
-formally evaluate 7 use cases and prioritize 3 initiatives for exploration, validation or
-progressive development. Of these, 2 have documented purpose, owner, expected results, required
+In artificial intelligence, the strategy has made it possible to identify more than 10 opportunities,
+formally evaluate half of them and prioritize a few initiatives for exploration, validation or
+progressive development. Of these, the first ones have documented purpose, owner, expected results, required
 information, initial risks and evaluation criteria.
 
 The construction of the management system currently comprises 23 institutional instruments among
-policies, procedures, matrices, evaluation criteria and follow-up mechanisms, 8 finished and 15
-under construction. These components are in different states of definition, review, approval or
+policies, procedures, matrices, evaluation criteria and follow-up mechanisms, a third finished and the rest under construction. These components are in different states of definition, review, approval or
 application, so their progress is communicated according to their real state and not only on
 the basis of the existence of documents.
 
