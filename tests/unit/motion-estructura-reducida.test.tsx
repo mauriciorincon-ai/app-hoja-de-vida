@@ -2,7 +2,6 @@
 import { renderToString } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
 import { IconoSkill } from "@/components/home/skills-iconos";
-import { MotionProvider } from "@/components/motion/motion-provider";
 import { Reveal } from "@/components/motion/reveal";
 import { Stagger, StaggerItem } from "@/components/motion/stagger";
 import { TimelineTrack } from "@/components/motion/timeline-track";
@@ -24,10 +23,13 @@ import { TimelineTrack } from "@/components/motion/timeline-track";
  * como lo hace el servidor con los tres valores del hook y exige el mismo
  * HTML, ignorando `style` (motion escribe ahí los valores iniciales).
  */
+// Desde el 2026-09-27 (ADR-027) el hook es propio (`usePrefiereQuieto`) y las
+// primitivas de entrada son componentes de servidor que ni lo leen; el test
+// sigue exigiéndoles el mismo HTML con los tres valores, para que nadie vuelva
+// a ramificar el árbol con él.
 const hook = vi.hoisted(() => ({ reduced: null as boolean | null }));
-vi.mock("motion/react", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("motion/react")>()),
-  useReducedMotion: () => hook.reduced,
+vi.mock("@/components/motion/use-prefiere-quieto", () => ({
+  usePrefiereQuieto: () => hook.reduced,
 }));
 // El enlace al case study y la analítica no son el sujeto: un <a> plano y un
 // no-op bastan (next-intl arrastra `next/navigation`, que no vive en node).
@@ -40,7 +42,7 @@ const sinEstilos = (html: string) => html.replace(/ style="[^"]*"/g, "");
 
 function html(nodo: React.ReactNode, reduced: boolean | null) {
   hook.reduced = reduced;
-  return sinEstilos(renderToString(<MotionProvider>{nodo}</MotionProvider>));
+  return sinEstilos(renderToString(<>{nodo}</>));
 }
 
 const CASOS: Record<string, React.ReactNode> = {

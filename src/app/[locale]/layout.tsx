@@ -9,7 +9,7 @@ import {
 import { notFound } from "next/navigation";
 import { CargaLaMono } from "@/components/carga-la-mono";
 import { ChatLauncher } from "@/components/chat/chat-launcher";
-import { MotionProvider } from "@/components/motion/motion-provider";
+import { Revelador } from "@/components/motion/revelador";
 import { routing } from "@/i18n/routing";
 import { enMantenimiento } from "@/lib/mantenimiento";
 import { SITE_URL } from "@/lib/site";
@@ -87,12 +87,18 @@ export default async function LocaleLayout({
       className={`${fraunces.variable} ${inter.variable} ${jetbrains.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-paper-0 text-ink-1 font-sans">
+        {/* Sin JavaScript, las entradas al hacer scroll no tienen quién las
+            dispare: el contenido se muestra en su estado final (ADR-027). */}
+        <noscript>
+          <style>{`[data-motion]{opacity:1!important;transform:none!important;filter:none!important}[data-motion-svg]{stroke-dasharray:none!important;stroke-dashoffset:0!important}`}</style>
+        </noscript>
         <NextIntlClientProvider messages={clientMessages}>
-          <MotionProvider>{children}</MotionProvider>
+          {children}
           {chatEnabled && <ChatLauncher />}
         </NextIntlClientProvider>
         <Analytics />
         <CargaLaMono />
+        <Revelador />
       </body>
     </html>
   );

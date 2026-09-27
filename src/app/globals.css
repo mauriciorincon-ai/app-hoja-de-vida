@@ -317,6 +317,132 @@
   animation-delay: var(--anim-delay, 0s);
 }
 
+/* ─── LAS ENTRADAS AL HACER SCROLL, EN CSS (2026-09-27, ADR-027) ─────────────
+   `Reveal` escribe data-reveal="<variante>"; `Stagger` data-reveal-group y sus
+   ítems data-reveal-item="<variante>". Todo nace OCULTO (como antes: el SSR
+   traía los estilos iniciales de la librería inline) y pasa a su estado final
+   con una transición cuando `Revelador` marca data-visto en el bloque o en el
+   grupo. El retraso de cada pieza llega en --reveal-delay (`retrasos.ts`).
+   Los números son los del design system y los medidos sobre la versión con
+   la librería: mismas duraciones, mismas curvas, mismos recorridos.
+   Al salir de pantalla vuelve al estado oculto SIN transición (la entrada se
+   repite en la siguiente pasada, `once: false`). Con reduced motion manda el
+   cinturón [data-motion] de más abajo; sin JavaScript, el <noscript> del
+   layout. */
+[data-reveal],
+[data-reveal-item] {
+  transition-property: opacity, transform, filter;
+  transition-delay: var(--reveal-delay, 0s);
+}
+[data-reveal="fadeInUp"],
+[data-reveal-item="fadeInUp"] {
+  transition-duration: 0.7s;
+  transition-timing-function: var(--ease-out-cubic);
+}
+[data-reveal="blurIn"] {
+  transition-duration: 0.9s;
+  transition-timing-function: var(--ease-out-expo);
+}
+[data-reveal="scaleInBlur"],
+[data-reveal-item="scaleInBlur"] {
+  transition-duration: 0.7s;
+  transition-timing-function: var(--ease-out-expo);
+}
+[data-reveal="maskReveal"] > [data-mask] {
+  transition-property: transform;
+  transition-delay: var(--reveal-delay, 0s);
+  transition-duration: 0.8s;
+  transition-timing-function: var(--ease-in-out-cubic);
+}
+[data-reveal-item="fadeInSlow"],
+[data-reveal-item="pulso"] {
+  transition-duration: 1.2s;
+  transition-timing-function: var(--ease-out-expo);
+}
+[data-reveal-item="liftIn"] {
+  transition-duration: 1.4s;
+  transition-timing-function: var(--ease-in-out-cubic);
+  /* La perspectiva es fija y no vuelve a `none`: lo sabe el e2e que espera a
+     que la tarjeta de Skills termine de aterrizar. */
+  transform: perspective(900px);
+}
+[data-reveal-item="trazo"] {
+  transition-property: stroke-dashoffset, opacity;
+  transition-duration: 0.75s;
+  transition-timing-function: var(--ease-out-cubic);
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+[data-reveal="blurIn"],
+[data-reveal="scaleInBlur"],
+[data-reveal-item="scaleInBlur"],
+[data-reveal-item="fadeInSlow"],
+[data-reveal-item="liftIn"] {
+  /* `blur(0)` y no `none`: una transición necesita dos listas del mismo tipo. */
+  filter: blur(0px);
+}
+
+/* Estado oculto: hasta que llega data-visto. Sin transición, para que la
+   vuelta al ocultarse (fuera de pantalla) sea instantánea. */
+[data-reveal]:not([data-visto]),
+[data-reveal="maskReveal"]:not([data-visto]) > [data-mask],
+[data-reveal-group]:not([data-visto]) [data-reveal-item] {
+  transition-duration: 0s;
+  transition-delay: 0s;
+}
+[data-reveal="fadeInUp"]:not([data-visto]),
+[data-reveal-group]:not([data-visto]) [data-reveal-item="fadeInUp"] {
+  opacity: 0;
+  transform: translateY(40px);
+}
+[data-reveal="blurIn"]:not([data-visto]) {
+  opacity: 0;
+  filter: blur(20px);
+  transform: scale(1.05);
+}
+[data-reveal="scaleInBlur"]:not([data-visto]),
+[data-reveal-group]:not([data-visto]) [data-reveal-item="scaleInBlur"] {
+  opacity: 0;
+  transform: scale(0.85);
+  filter: blur(15px);
+}
+[data-reveal="maskReveal"]:not([data-visto]) > [data-mask] {
+  transform: translateY(110%);
+}
+[data-reveal-group]:not([data-visto]) [data-reveal-item="fadeInSlow"] {
+  opacity: 0;
+  transform: translateY(28px);
+  filter: blur(8px);
+}
+[data-reveal-group]:not([data-visto]) [data-reveal-item="liftIn"] {
+  opacity: 0;
+  transform: perspective(900px) translateY(70px) rotateX(14deg) scale(0.94);
+  filter: blur(12px);
+}
+[data-reveal-group]:not([data-visto]) [data-reveal-item="pulso"] {
+  transform: scale(1.5);
+}
+[data-reveal-group]:not([data-visto]) [data-reveal-item="trazo"] {
+  stroke-dashoffset: 1;
+  opacity: 0.4;
+}
+
+/* El año grande del índice de la trayectoria: entra con un fundido corto
+   cada vez que cambia (era un `initial`/`animate` de la librería). */
+@keyframes anio-entra {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.anim-anio {
+  animation: anio-entra 0.35s var(--ease-out-cubic) both;
+}
+
 /* ── Tiras visuales de la vitrina (S5) ──────────────────────────────────────
  * ESQUEMÁTICAS A PROPÓSITO: no fingen ser una captura (banco §7, enmienda kit
  * v1.23.0). Dibujan las IDEAS de cada app con los tokens de CV Viva, para que
@@ -749,10 +875,11 @@
 
 /*
  * Cinturón de seguridad de reduced-motion: los wrappers de motion llevan
- * data-motion y el SSR incluye sus estilos iniciales inline (opacity 0,
- * translate). Esta regla los neutraliza ANTES de la hidratación para que el
- * contenido esté en su estado final desde el primer paint — sin excepciones.
- * Las utilidades .anim-* (CSS puro) también se apagan aquí.
+ * data-motion y nacen en su estado oculto (desde el 2026-09-27 por las reglas
+ * de data-reveal de arriba; antes, por los estilos inline del SSR). Esta regla
+ * los neutraliza ANTES de la hidratación para que el contenido esté en su
+ * estado final desde el primer paint — sin excepciones. Las utilidades
+ * .anim-* (CSS puro) también se apagan aquí.
  */
 @media (prefers-reduced-motion: reduce) {
   /* La apertura por lectura SIGUE funcionando (abrir es contenido, no adorno);
@@ -790,6 +917,7 @@
     opacity: 1 !important;
     transform: none !important;
     filter: none !important;
+    transition: none !important;
   }
   [data-motion-svg] {
     stroke-dasharray: none !important;
@@ -800,7 +928,8 @@
   .anim-blur-in,
   .anim-mask-up,
   .anim-scale-in-blur,
-  .anim-rise {
+  .anim-rise,
+  .anim-anio {
     animation: none !important;
   }
 }

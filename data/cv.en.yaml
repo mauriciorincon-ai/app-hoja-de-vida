@@ -739,7 +739,7 @@ certificaciones:
     logo: microsoft.svg
   - nombre: "Microsoft Certified: Azure AI Apps and Agents Developer Associate (AI-103)"
     estado: "en curso"
-    nota: "In preparation: the Azure AI engineering path."
+    nota: "In preparation: AI apps and agents on Azure, the path I practice today at Fundación CTIC."
     icono: insignia
     logo: microsoft.svg
   - nombre: "Microsoft Certified: Machine Learning Operations Engineer Associate (AI-300)"
@@ -749,21 +749,25 @@ certificaciones:
     logo: microsoft.svg
   - nombre: "IBM: Applied Data Science with R"
     fecha: "2024"
+    nota: "Statistics, hypothesis testing, ggplot2 and Shiny, alongside the DP-600: the discipline of telling a pattern from a conclusion."
     icono: datos
     logo: ibm.svg
     logoAlto: 16
   - nombre: "IBM: Data Science Professional Certificate"
     fecha: "2022"
+    nota: "Between two jobs, the decision to reach the next role with a formal base: from preparing the data to training models with scikit-learn."
     icono: datos
     logo: ibm.svg
     logoAlto: 16
   - nombre: "IBM: Python for Data Science"
     fecha: "2022"
+    nota: "Turning an analytical problem into a reproducible flow: exploration, preparation, training and evaluating models."
     icono: codigo
     logo: ibm.svg
     logoAlto: 16
   - nombre: "IBM: SQL for Data Science"
     fecha: "2022"
+    nota: "Before modeling, knowing how to locate, relate, filter and validate the data that represents the phenomenon."
     icono: codigo
     logo: ibm.svg
     logoAlto: 16

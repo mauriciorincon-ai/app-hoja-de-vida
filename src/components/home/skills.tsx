@@ -5,8 +5,10 @@ import type { Cv } from "@/lib/schemas";
 import {
   ESCALON_CHIP_S,
   ESCALON_SKILLS_S,
+  ESCALON_TRAZO_S,
   IconoSkill,
   RETRASO_CABECERA_S,
+  RETRASO_TRAZO_S,
 } from "./skills-iconos";
 
 /**
@@ -23,10 +25,11 @@ import {
  * Revisión post-S8 — «más impactante, pero elegante», segunda vuelta («no lo
  * veo»): tres momentos que se DISTINGUEN, no tres capas que se pisan. La
  * tarjeta ATERRIZA VACÍA (`liftIn`: 70 px, 14° de perspectiva, 1,4 s
- * ease-in-out, 200 ms de escalón) → a los 0,8 s, cuando ya se ve, aparece la
+ * ease-in-out, 120 ms de escalón) → a los 0,5 s, cuando ya se ve, aparece la
  * cabecera (icono y título) y el trazo del icono se dibuja → los chips caen
- * uno a uno detrás, con 100 ms entre ellos, que es un escalón que el ojo
- * separa. La partitura interna la orquesta LA TARJETA (`hijos` en su
+ * uno a uno detrás, con 60 ms entre ellos, que es un escalón que el ojo
+ * separa (2026-09-27, opción A del dueño: con nueve tarjetas la partitura de
+ * 200/800/100 ms terminaba pasados los 3,5 s). La partitura interna la orquesta LA TARJETA (`hijos` en su
  * `StaggerItem`: `delayChildren` + `staggerChildren`), y así cada tarjeta
  * arrastra a los suyos con su propio escalón — la cuarta no recibe sus chips
  * antes de aterrizar. No es un `Stagger` anidado ni un `delay` por ítem: las
@@ -86,6 +89,7 @@ export async function Skills({ skills }: { skills: Cv["skills"] }) {
                 <StaggerItem
                   variant="fadeInUp"
                   className="flex items-center gap-4"
+                  hijos={{ delay: RETRASO_TRAZO_S, escalon: ESCALON_TRAZO_S }}
                 >
                   <IconoSkill id={grupo.id} />
                   <h3 className="font-display text-[1.35rem] leading-tight font-medium tracking-[-0.015em] text-ink-0">

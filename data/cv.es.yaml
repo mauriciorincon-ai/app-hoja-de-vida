@@ -766,7 +766,7 @@ certificaciones:
   # logro «5 certificaciones» sigue contando solo las obtenidas.
   - nombre: "Microsoft Certified: Azure AI Apps and Agents Developer Associate (AI-103)"
     estado: "en curso"
-    nota: "En preparación: la ruta de ingeniería de IA en Azure."
+    nota: "En preparación: apps y agentes de IA en Azure, la ruta que hoy practico en la Fundación CTIC."
     icono: insignia
     logo: microsoft.svg
   # 2026-09-19 (a fondo v2): el DP-100 SALE y entra el AI-300 en su lugar.
@@ -780,21 +780,25 @@ certificaciones:
     logo: microsoft.svg
   - nombre: "IBM: Ciencia de Datos Aplicada con R"
     fecha: "2024"
+    nota: "Estadística, pruebas de hipótesis, ggplot2 y Shiny, en paralelo al DP-600: la disciplina de distinguir un patrón de una conclusión."
     icono: datos
     logo: ibm.svg
     logoAlto: 16
   - nombre: "IBM: Certificado Profesional en Ciencia de Datos"
     fecha: "2022"
+    nota: "Entre dos empleos, la decisión de llegar al siguiente rol con base formal: de preparar los datos a entrenar modelos con scikit-learn."
     icono: datos
     logo: ibm.svg
     logoAlto: 16
   - nombre: "IBM: Python para Ciencia de Datos"
     fecha: "2022"
+    nota: "Convertir un problema analítico en un flujo reproducible: exploración, preparación, entrenamiento y evaluación de modelos."
     icono: codigo
     logo: ibm.svg
     logoAlto: 16
   - nombre: "IBM: SQL para Ciencia de Datos"
     fecha: "2022"
+    nota: "Antes de modelar, saber localizar, relacionar, filtrar y validar los datos que representan el fenómeno."
     icono: codigo
     logo: ibm.svg
     logoAlto: 16

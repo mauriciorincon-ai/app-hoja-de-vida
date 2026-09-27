@@ -316,7 +316,7 @@
     <div class="pagina">
       <header>
         <p class="eyebrow">
-          CV Viva · Guía de prueba viva y acumulativa · v9.15 · el margen de la home, segunda vuelta + el margen de la home + el aire bajo el dominio + las herramientas de hoy + el cupo del chat + el ícono navy y el 404 de la raíz + las cifras en su letra y las citas del chat + rótulo del dominio, idiomas en mantenimiento y el ícono + el modo mantenimiento + el dominio en el PDF + los ocho casos de estudio completos + la cita dice de dónde sale y a dónde lleva + la cita conserva la conversación + el corpus alineado + chat/registro + a fondo v2 (el
+          CV Viva · Guía de prueba viva y acumulativa · v9.16 · las entradas sin librería + el margen de la home, segunda vuelta + el margen de la home + el aire bajo el dominio + las herramientas de hoy + el cupo del chat + el ícono navy y el 404 de la raíz + las cifras en su letra y las citas del chat + rótulo del dominio, idiomas en mantenimiento y el ícono + el modo mantenimiento + el dominio en el PDF + los ocho casos de estudio completos + la cita dice de dónde sale y a dónde lleva + la cita conserva la conversación + el corpus alineado + chat/registro + a fondo v2 (el
           detalle) + revisión post-S8 · 2026-09-12
         </p>
         <h1>Guía de prueba</h1>
@@ -367,7 +367,9 @@
           d3 (el aire bajo el rótulo del dominio). <strong>v9.14 tampoco</strong>:
           mejora la a8 (la letra de las cifras, que ahora llega sin precarga).
           <strong>v9.15 tampoco</strong>: vuelve a mejorar la a8 (la letra de las
-          cifras llega cuando la página termina de cargar).
+          cifras llega cuando la página termina de cargar). <strong>v9.16
+          tampoco</strong>: mejora la a4 (las animaciones de entrada se rehicieron
+          sin librería; tu ojo es quien confirma que se ven igual).
         </p>
         <div class="url-caja">
           <p class="eyebrow" style="margin: 0 0 6px">URL de prueba</p>
@@ -502,7 +504,15 @@
               en 1,4 s), cuando ya se ve aparecen icono y título, el trazo del
               icono se dibuja, y los chips caen <strong>uno a uno</strong>
               detrás: tres momentos que se distinguen. Aprueba el look general.
-              <span class="origen origen-mejorado">Mejorado · post-S8</span
+              <strong>Desde el 2026-09-27 todo eso corre sin la librería de
+              animación</strong> (CSS puro, con los mismos tiempos medidos):
+              recorre la HOME entera, de arriba abajo y de vuelta arriba, y
+              confirma que cada sección entra como antes —y que al volver a
+              subir vuelven a entrar—. Mira también la línea de la trayectoria
+              (el relleno crece con el scroll y el año grande cambia con un
+              fundido) y las cifras de Logros (cuentan desde cero al llegar).
+              Si algo se siente distinto, dime cuál sección.
+              <span class="origen origen-mejorado">Mejorado · entradas sin librería</span
               ><span class="minimo">⭐ mínimo</span></label
             >
           </li>
@@ -2108,6 +2118,16 @@
           <summary>Historial de la guía</summary>
           <ul>
             <li>
+              <strong>v9.16 · las entradas sin librería · 2026-09-27:</strong>
+              la HOME seguía sin margen en Lighthouse por el JavaScript que
+              pide antes de pintar; la librería de animación era la parte que
+              se podía quitar. Las entradas al hacer scroll, los contadores y la
+              línea de la trayectoria se rehicieron con CSS y observadores del
+              navegador, con los mismos tiempos (medidos antes y después). a4
+              mejorada. Ninguna prueba eliminada. Prefijo de casillas
+              <code>entradas-sin-libreria</code>.
+            </li>
+            <li>
               <strong>v9.15 · el margen de la home, segunda vuelta · 2026-09-26:</strong>
               la v9.14 no alcanzó en la CI: sin precarga, el navegador pedía la
               letra de las cifras igual al armar la página, y la HOME seguía
@@ -2461,7 +2481,7 @@
       (function () {
         // NS VERSIONADO POR SPRINT: al publicar la guía de un sprint nuevo se cambia
         // s007c — así una regresión sin correr no aparece marcada por la versión anterior.
-        var NS = "guia-hoja-de-vida:margen-de-la-home-2:";
+        var NS = "guia-hoja-de-vida:entradas-sin-libreria:";
         var casillas = Array.prototype.slice.call(
           document.querySelectorAll('input[type="checkbox"]'),
         );

@@ -126,7 +126,13 @@ Easings (variables CSS): `--ease-out-expo (.16,1,.3,1)` · `--ease-out-cubic (.2
 `--ease-out-back (.34,1.56,.64,1)` · `--ease-out-quart (.25,1,.5,1)` ·
 `--ease-in-out-cubic (.65,0,.35,1)`. **Prohibido `ease`/`ease-in-out` default.**
 
-Primitivas del motion system (`src/components/motion/`):
+Primitivas del motion system (`src/components/motion/`). **Desde el 2026-09-27 (ADR-027) sin
+librería:** `Reveal`, `Stagger`/`StaggerItem`, `CifraQueLlama` y los iconos de Skills son
+componentes de servidor que escriben `data-reveal` / `data-reveal-group` / `data-reveal-item`; el
+estado oculto, la duración y la curva de cada variante viven en `globals.css`, un solo
+`Revelador` (IntersectionObserver por umbral) marca `data-visto` y reparte los retrasos con el
+modelo medido de `retrasos.ts`. `Counter` y `TimelineTrack` siguen en el cliente con observadores
+propios. Los números de la tabla no cambiaron; se midieron antes y después.
 
 | Primitiva       | Spec exacta                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -187,15 +193,17 @@ animaciones infinitas (sweep/glitch/marquee), scroll-snap de deck, CDNs en `<hea
   `tests/unit/skills-iconos.test.ts`—) y el nombre en Fraunces
   1.35rem. Los ítems son chips `paper-1` con borde `paper-3` que entran con `scaleInBlur`
   escalonado. El trazo del icono se dibuja al llegar la tarjeta (`pathLength` 0→1, en cascada de
-  130 ms por figura) heredando las variantes del `Stagger`; el estado por defecto es el icono
+  200 ms por figura) orquestado por su cabecera; el estado por defecto es el icono
   dibujado. Cada tarjeta lleva `id="skills-<id>"` (el `id` del grupo en el YAML): es el destino
   de las citas del chat de esa capacidad, con `scroll-mt-40` para que el título quede a la vista
   aunque el salto llegue antes que el `liftIn`. Rejilla de dos columnas; **si los grupos son
   impares, el último ocupa las dos** (nueve grupos desde el 2026-09-26), y el orden empareja
-  tarjetas de tamaño parecido. **Prohibido:** barras o porcentajes de dominio. **Coreografía post-S8, tres capas:**
-  la tarjeta **aterriza vacía** (`liftIn`, escalón 200 ms) → a los 0,8 s, cuando ya se ve,
-  aparece la cabecera (`fadeInUp`) y el trazo del icono se dibuja (1,0 s) → los chips caen uno a
-  uno detrás (`scaleInBlur`, 100 ms). Cada tarjeta corre la partitura desplazada por su escalón:
+  tarjetas de tamaño parecido. **Prohibido:** barras o porcentajes de dominio. **Coreografía post-S8, tres capas** (apretada el
+  2026-09-27, opción A del dueño: con nueve tarjetas la de 200/800/100 ms terminaba pasados los
+  3,5 s): la tarjeta **aterriza vacía** (`liftIn`, escalón 120 ms) → a los 0,5 s, cuando ya se
+  ve, aparece la cabecera (`fadeInUp`) y 0,2 s después el trazo del icono se dibuja, figura a
+  figura cada 0,2 s, **siguiendo a su tarjeta** (lo orquesta la cabecera con `hijos`) → los chips
+  caen uno a uno detrás (`scaleInBlur`, 60 ms). Cada tarjeta corre la partitura desplazada por su escalón:
   la orquesta la propia tarjeta (`hijos` en `StaggerItem` = `delayChildren` + `staggerChildren`).
   Segunda vuelta del dueño: la primera versión (1 s ease-out-expo, chips a 45 ms) resolvía el
   87 % del viaje en 300 ms y se leía como un fundido más; el in-out y los tres momentos separados

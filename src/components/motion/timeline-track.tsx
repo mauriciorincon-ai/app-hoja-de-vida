@@ -1,12 +1,6 @@
 "use client";
 
 import {
-  m,
-  useMotionValueEvent,
-  useReducedMotion,
-  useScroll,
-} from "motion/react";
-import {
   useCallback,
   useEffect,
   useLayoutEffect,
@@ -16,7 +10,6 @@ import {
 import { Link } from "@/i18n/navigation";
 import { trackEvent } from "@/lib/analytics";
 import { anioDe } from "@/lib/casos";
-import { EASE_OUT_CUBIC } from "./easings";
 
 /**
  * TimelineTrack — el índice que baja contigo (revisión post-S7).
@@ -163,8 +156,8 @@ export function TimelineTrack({
   items: TimelineItem[];
   labels: TimelineLabels;
 }) {
-  const reduced = useReducedMotion();
   const contenedor = useRef<HTMLDivElement>(null);
+  const relleno = useRef<HTMLDivElement>(null);
   const lista = useRef<HTMLOListElement>(null);
   const hitos = useRef<(HTMLLIElement | null)[]>([]);
 
@@ -173,11 +166,19 @@ export function TimelineTrack({
   const [marcas, setMarcas] = useState<number[]>([]);
 
   // 0 cuando el arranque de la trayectoria cruza la línea del círculo; 1
-  // cuando la cruza el final. Es lo que mueve el relleno de la línea.
-  const { scrollYProgress } = useScroll({
-    target: contenedor,
-    offset: [`start ${LINEA * 100}%`, `end ${LINEA * 100}%`],
-  });
+  // cuando la cruza el final. Es lo que mueve el relleno de la línea. Desde
+  // el 2026-09-27 (ADR-027) se escribe directo en el `transform` del relleno
+  // desde el evento de scroll, sin librería ni re-render: React no vuelve a
+  // tocar ese estilo porque la prop no cambia entre renders.
+  const medirProgreso = useCallback(() => {
+    const c = contenedor.current;
+    const r = relleno.current;
+    if (!c || !r) return;
+    const rect = c.getBoundingClientRect();
+    const linea = window.innerHeight * LINEA;
+    const p = Math.min(1, Math.max(0, (linea - rect.top) / rect.height));
+    r.style.transform = `scaleY(${p})`;
+  }, []);
 
   const medirActivo = useCallback(() => {
     const linea = window.innerHeight * LINEA;
@@ -187,8 +188,6 @@ export function TimelineTrack({
     });
     setActivo((prev) => (prev === i ? prev : i));
   }, []);
-
-  useMotionValueEvent(scrollYProgress, "change", medirActivo);
 
   // Las marcas se miden del layout real (las tarjetas varían de alto) y se
   // vuelven a medir si algo cambia de tamaño — abrir un disclosure, girar el
@@ -207,9 +206,24 @@ export function TimelineTrack({
   }, [items.length, medirActivo]);
 
   useEffect(() => {
-    window.addEventListener("resize", medirActivo);
-    return () => window.removeEventListener("resize", medirActivo);
-  }, [medirActivo]);
+    let raf = 0;
+    const alMover = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        medirProgreso();
+        medirActivo();
+      });
+    };
+    window.addEventListener("scroll", alMover, { passive: true });
+    window.addEventListener("resize", alMover);
+    alMover();
+    return () => {
+      window.removeEventListener("scroll", alMover);
+      window.removeEventListener("resize", alMover);
+      cancelAnimationFrame(raf);
+    };
+  }, [medirProgreso, medirActivo]);
 
   const anio = anioDe(items[activo]?.periodo ?? "");
 
@@ -228,11 +242,12 @@ export function TimelineTrack({
             quieto. La estructura no puede depender de `reduced`, que en el
             servidor es null: ramificarla rompió la hidratación (React #418) para
             los usuarios con esa preferencia (2026-09-10). */}
-        <m.div
+        <div
+          ref={relleno}
           data-motion=""
           data-timeline-relleno
           className="absolute top-0 bottom-0 left-[6px] w-0.5 origin-top bg-lilac-ink"
-          style={{ scaleY: scrollYProgress }}
+          style={{ transform: "scaleY(0)" }}
         />
         {/* Una marca por experiencia, a la altura donde empieza su tarjeta. */}
         {marcas.map((y, i) => (
@@ -255,17 +270,17 @@ export function TimelineTrack({
           style={{ top: `${LINEA * 100}vh` }}
         >
           <span className="relative z-10 block size-3.5 shrink-0 rounded-full bg-lilac-ink ring-4 ring-paper-0" />
-          <m.span
+          {/* `key={anio}`: cada año nuevo nace y entra con `.anim-anio`
+              (0,35 s ease-out-cubic); con reducción de movimiento el
+              cinturón CSS apaga la animación. */}
+          <span
             key={anio}
             data-motion=""
             data-timeline-anio={anio}
-            className="font-display text-[1.5rem] leading-none font-medium tracking-[-0.03em] text-lilac-ink tabular-nums md:text-[2.75rem]"
-            initial={reduced ? false : { opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.35, ease: EASE_OUT_CUBIC }}
+            className="anim-anio font-display text-[1.5rem] leading-none font-medium tracking-[-0.03em] text-lilac-ink tabular-nums md:text-[2.75rem]"
           >
             {anio}
-          </m.span>
+          </span>
         </div>
       </div>
 
