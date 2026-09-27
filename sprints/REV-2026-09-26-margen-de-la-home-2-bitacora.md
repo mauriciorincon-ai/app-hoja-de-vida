@@ -129,3 +129,40 @@ a `mono-lista` antes de leer la cadena de familias.
 - `typecheck` y `lint` limpios.
 - e2e completo en el puerto 3100: **421 pasan y 17 se saltan**. Son las 14 de siempre, y las
   mismas pruebas de fuentes en el perfil móvil, que son solo de Chromium de escritorio.
+
+## En la CI, tres veces
+
+Corrida 36291723868 (f25fc56, el arreglo más el nombre del artefacto por intento), con el job de
+Lighthouse **relanzado dos veces**: tres intentos, 135 reportes. Mediana por URL (entre corchetes,
+la peor de sus tres corridas):
+
+| URL                                     | antes (054b) | intento 1   | intento 2   | intento 3   |
+| --------------------------------------- | ------------ | ----------- | ----------- | ----------- |
+| `/es`                                   | 0,91 [0,64]  | 0,91 [0,77] | 0,92 [0,68] | 0,91 [0,61] |
+| `/es/apps/chat-hoja-de-vida`            | 0,92 [0,92]  | 0,95 [0,94] | 0,97 [0,96] | 0,94 [0,94] |
+| `/es/apps/hoja-de-vida`                 | 0,92 [0,92]  | 0,97 [0,94] | 0,95 [0,95] | 0,95 [0,94] |
+| `/es/cv`                                | 0,92 [0,92]  | 0,94 [0,94] | 0,95 [0,94] | 0,94 [0,94] |
+| `/es/proyectos/vesting`                 | 0,92 [0,92]  | 0,95 [0,93] | 0,94 [0,93] | 0,94 [0,94] |
+| `/es/vitrina`                           | 0,94 [0,93]  | 0,95 [0,95] | 0,95 [0,94] | 0,95 [0,95] |
+| `/es/vitrina/agentes`                   | 0,91 [0,91]  | 0,97 [0,97] | 0,94 [0,94] | 0,93 [0,93] |
+| `/es/vitrina/agentes/hr-develop-ai-apps`| 0,93 [0,91]  | 0,94 [0,94] | 0,93 [0,93] | 0,93 [0,93] |
+| `/es/vitrina/apps`                      | 0,95 [0,91]  | 0,98 [0,96] | 0,98 [0,96] | 0,93 [0,93] |
+| `/es/vitrina/apps/habla`                | 0,95 [0,91]  | 0,93 [0,92] | 0,92 [0,92] | 0,93 [0,93] |
+| `/es/vitrina/apps/habla/detalle`        | 0,91 [0,90]  | 0,92 [0,92] | 0,92 [0,91] | 0,92 [0,92] |
+| `/es/vitrina/investigaciones`           | 0,96 [0,93]  | 0,94 [0,94] | 0,94 [0,94] | 0,95 [0,93] |
+| `/es/vitrina/investigaciones/forja`     | 0,96 [0,91]  | 0,92 [0,92] | 0,94 [0,93] | 0,93 [0,93] |
+| `/es/vitrina/tableros`                  | 0,91 [0,90]  | 0,95 [0,95] | 0,94 [0,91] | 0,93 [0,92] |
+| `/es/vitrina/tableros/banca-colombiana` | 0,91 [0,91]  | 0,94 [0,93] | 0,94 [0,92] | 0,93 [0,93] |
+
+**`/es`:** sin la corrida en frío (la primera URL de cada intento, que la mediana descarta), sus
+seis corridas dan **0,91 · 0,92 · 0,92 · 0,92 · 0,91 · 0,93**, antes 0,89–0,95. Su LCP simulado
+dejó de saltar entre dos niveles (~2,9 o ~3,4 s): ahora queda en **3,20–3,31 s** en las seis.
+La peor mediana de las otras catorce URLs es 0,92, antes 0,91.
+
+**El gate nuevo corrió en la CI** (Linux, Chromium, pruebas 161 y 162 de 438) y pasó: 421 pasan y
+17 se saltan.
+
+**Margen que queda:** uno o dos puntos en `/es`, ya sin el salto que la tiraba a 0,89. La palanca
+siguiente, si vuelve a caer, es su TBT (119–155 ms en estos intentos, el más alto de las quince),
+es decir el JavaScript de la HOME. No se toca en este PR.
+
