@@ -1,78 +1,21 @@
-"use client";
-
-import { m, useReducedMotion, type Variants } from "motion/react";
-import { EASE_IN_OUT_CUBIC, EASE_OUT_CUBIC, EASE_OUT_EXPO } from "./easings";
-
 /**
  * Primitivas de entrada de la referencia destilada (motion-vocabulary.md §1),
- * con sus números exactos. Regla dura: el contenido SIEMPRE está en el HTML;
- * con `prefers-reduced-motion` se renderiza directo en su estado final.
+ * con sus números exactos — desde el 2026-09-27 en CSS (ADR-027): esto es un
+ * componente de SERVIDOR que escribe `data-reveal="<variante>"`, y el estado
+ * oculto, la transición y su curva viven en globals.css. `Revelador` marca
+ * `data-visto` cuando el bloque entra a pantalla. Regla dura: el contenido
+ * SIEMPRE está en el HTML; con `prefers-reduced-motion` el cinturón CSS lo
+ * deja en su estado final, y sin JavaScript también (`<noscript>` del layout).
  */
 export type RevealVariant =
   "fadeInUp" | "blurIn" | "scaleInBlur" | "maskReveal";
 
-const variantsMap: Record<RevealVariant, Variants> = {
-  // 0.7s ease-out-cubic, translateY(40px) → 0
-  fadeInUp: {
-    hidden: { opacity: 0, y: 40 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.7, ease: EASE_OUT_CUBIC },
-    },
-  },
-  // 0.9s ease-out-expo, blur(20px) + scale(1.05) → nítido (solo entradas
-  // one-shot above-the-fold; jamás ligado al avance del scroll)
-  blurIn: {
-    hidden: { opacity: 0, filter: "blur(20px)", scale: 1.05 },
-    visible: {
-      opacity: 1,
-      filter: "blur(0px)",
-      scale: 1,
-      transition: { duration: 0.9, ease: EASE_OUT_EXPO },
-    },
-  },
-  // cards: scale(0.85) + blur(15px) → 1
-  scaleInBlur: {
-    hidden: { opacity: 0, scale: 0.85, filter: "blur(15px)" },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      filter: "blur(0px)",
-      transition: { duration: 0.7, ease: EASE_OUT_EXPO },
-    },
-  },
-  // texto que emerge de un contenedor overflow-hidden, 0.8s ease-in-out-cubic
-  maskReveal: {
-    hidden: { y: "110%" },
-    visible: {
-      y: 0,
-      transition: { duration: 0.8, ease: EASE_IN_OUT_CUBIC },
-    },
-  },
-};
-
-function withDelay(variants: Variants, delay: number): Variants {
-  if (!delay) return variants;
-  const visible = variants.visible as {
-    transition?: Record<string, unknown>;
-  } & Record<string, unknown>;
-  return {
-    ...variants,
-    visible: {
-      ...visible,
-      transition: { ...visible.transition, delay },
-    },
-  };
-}
-
 type RevealProps = {
   children: React.ReactNode;
   variant?: RevealVariant;
+  /** Segundos antes de arrancar. */
   delay?: number;
   className?: string;
-  /** true = anima al montar (hero); false = anima al entrar al viewport */
-  onMount?: boolean;
   /**
    * Fracción del bloque que debe entrar en pantalla para revelar (default 0.25).
    * **Trampa (kit v1.23.0):** un bloque MÁS ALTO que el viewport jamás alcanza un
@@ -84,47 +27,48 @@ type RevealProps = {
   amount?: number | "some" | "all";
 };
 
+export const umbralDe = (amount: number | "some" | "all") =>
+  amount === "some" ? 0 : amount === "all" ? 1 : amount;
+
 export function Reveal({
   children,
   variant = "fadeInUp",
   delay = 0,
   className,
-  onMount = false,
   amount = 0.25,
 }: RevealProps) {
-  const reduced = useReducedMotion();
-
-  // Regla dura: el m.div NUNCA se desmonta al cambiar reduced-motion —
-  // cambiar de elemento dejaría huérfanos los estilos inline del SSR.
-  // Con reduce: sin props de animación (estado final) + el cinturón CSS
-  // de globals.css cubre el HTML pre-hidratación vía [data-motion].
-  const animProps = reduced
-    ? {}
-    : {
-        variants: withDelay(variantsMap[variant], delay),
-        initial: "hidden" as const,
-        ...(onMount
-          ? { animate: "visible" as const }
-          : {
-              // once:false — la entrada se re-ejecuta cada vez que la sección
-              // vuelve a pantalla (feedback del gate de diseño, 2026-07-05)
-              whileInView: "visible" as const,
-              viewport: { once: false, amount },
-            }),
-      };
-
-  const inner = (
-    <m.div
-      data-motion=""
-      className={variant === "maskReveal" ? undefined : className}
-      {...animProps}
-    >
-      {children}
-    </m.div>
-  );
+  const retraso = delay
+    ? ({ "--reveal-delay": `${delay}s` } as React.CSSProperties)
+    : undefined;
 
   if (variant === "maskReveal") {
-    return <div className={`overflow-hidden ${className ?? ""}`}>{inner}</div>;
+    // El texto emerge de un contenedor con overflow-hidden. Se observa EL
+    // CONTENEDOR, no el texto: desplazado un 110 % hacia abajo, el texto
+    // queda fuera del recorte y un IntersectionObserver lo ve con 0 % visible
+    // para siempre (así estuvo el «¿Hablamos?» de Contacto hasta el
+    // 2026-09-27, con la librería y sin ella; lo vigila un e2e de home.spec).
+    return (
+      <div
+        data-reveal="maskReveal"
+        data-umbral={umbralDe(amount)}
+        className={`overflow-hidden ${className ?? ""}`}
+      >
+        <div data-motion="" data-mask="" style={retraso}>
+          {children}
+        </div>
+      </div>
+    );
   }
-  return inner;
+
+  return (
+    <div
+      data-motion=""
+      data-reveal={variant}
+      data-umbral={umbralDe(amount)}
+      className={className}
+      style={retraso}
+    >
+      {children}
+    </div>
+  );
 }

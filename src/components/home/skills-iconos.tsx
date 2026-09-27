@@ -1,7 +1,3 @@
-"use client";
-
-import { m, useReducedMotion, type Variants } from "motion/react";
-import { EASE_OUT_CUBIC } from "@/components/motion/easings";
 
 /**
  * Los iconos de los grupos de skills — dibujados aquí, en la familia del
@@ -16,9 +12,10 @@ import { EASE_OUT_CUBIC } from "@/components/motion/easings";
  * `tests/unit/skills-iconos.test.ts` exige un dibujo propio por grupo.
  *
  * El trazo se DIBUJA al llegar la tarjeta: cada figura lleva `pathLength=1` y
- * anima 0→1 dentro de la orquestación del `Stagger` padre (hereda las
- * variantes hidden/visible). El estado por defecto es el icono dibujado —
- * si el disparo no llegara, se ve igual (lección del S5, globals.css).
+ * su `stroke-dashoffset` va de 1 a 0 en CSS (`data-reveal-item="trazo"`,
+ * globals.css) cuando el grupo de Skills recibe `data-visto`. Es un componente
+ * de servidor desde el 2026-09-27 (ADR-027). El estado por defecto es el
+ * icono dibujado — si el disparo no llegara, se ve igual (lección del S5).
  */
 const DIBUJOS: Record<string, React.ReactElement[]> = {
   // Agentes e IA generativa (2026-09-26) — el agente que orquesta sus
@@ -114,22 +111,7 @@ export const RETRASO_CABECERA_S = 0.8;
 export const RETRASO_TRAZO_S = 1.0;
 export const ESCALON_CHIP_S = 0.1;
 
-const trazo: Variants = {
-  hidden: { pathLength: 0, opacity: 0.4 },
-  visible: (i: number) => ({
-    pathLength: 1,
-    opacity: 1,
-    // El trazo arranca cuando la cabecera ya se ve (0,8 s + su fundido).
-    transition: {
-      duration: 0.75,
-      delay: RETRASO_TRAZO_S + i * ESCALON_SKILLS_S,
-      ease: EASE_OUT_CUBIC,
-    },
-  }),
-};
-
 export function IconoSkill({ id }: { id: string }) {
-  const reduced = useReducedMotion();
   // El rombo queda de reserva para que un grupo nuevo no rompa la página;
   // el test es el que no lo deja llegar a producción.
   const figuras = tieneDibujo(id) ? DIBUJOS[id] : ROMBO;
@@ -150,18 +132,25 @@ export function IconoSkill({ id }: { id: string }) {
         focusable="false"
       >
         {figuras.map((f, i) => {
-          // Cada figura se vuelve `m.<tag>` con pathLength normalizada, y
-          // hereda hidden/visible del Stagger que envuelve la tarjeta.
-          const Tag = m[f.type as "path" | "circle" | "ellipse"];
+          // Cada figura, con pathLength normalizada y su retraso ABSOLUTO
+          // desde el disparo del grupo (medido: el trazo arranca a 1,0 s y
+          // cada figura 0,2 s después de la anterior, en todas las tarjetas
+          // por igual).
+          const Tag = f.type as "path" | "circle" | "ellipse";
           return (
             <Tag
               key={f.key}
               {...(f.props as object)}
               data-motion=""
               data-motion-svg=""
+              data-reveal-item="trazo"
+              data-retraso=""
               pathLength={1}
-              custom={i}
-              variants={reduced ? undefined : trazo}
+              style={
+                {
+                  "--reveal-delay": `${+(RETRASO_TRAZO_S + i * ESCALON_SKILLS_S).toFixed(3)}s`,
+                } as React.CSSProperties
+              }
             />
           );
         })}

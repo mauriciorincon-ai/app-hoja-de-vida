@@ -126,7 +126,13 @@ Easings (variables CSS): `--ease-out-expo (.16,1,.3,1)` · `--ease-out-cubic (.2
 `--ease-out-back (.34,1.56,.64,1)` · `--ease-out-quart (.25,1,.5,1)` ·
 `--ease-in-out-cubic (.65,0,.35,1)`. **Prohibido `ease`/`ease-in-out` default.**
 
-Primitivas del motion system (`src/components/motion/`):
+Primitivas del motion system (`src/components/motion/`). **Desde el 2026-09-27 (ADR-027) sin
+librería:** `Reveal`, `Stagger`/`StaggerItem`, `CifraQueLlama` y los iconos de Skills son
+componentes de servidor que escriben `data-reveal` / `data-reveal-group` / `data-reveal-item`; el
+estado oculto, la duración y la curva de cada variante viven en `globals.css`, un solo
+`Revelador` (IntersectionObserver por umbral) marca `data-visto` y reparte los retrasos con el
+modelo medido de `retrasos.ts`. `Counter` y `TimelineTrack` siguen en el cliente con observadores
+propios. Los números de la tabla no cambiaron; se midieron antes y después.
 
 | Primitiva       | Spec exacta                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

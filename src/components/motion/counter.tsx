@@ -1,7 +1,8 @@
 "use client";
 
-import { useInView, useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
+import { useEnPantalla } from "./use-en-pantalla";
+import { usePrefiereQuieto } from "./use-prefiere-quieto";
 
 /**
  * numberCountUp de la referencia destilada (receta 02): ~1800ms con
@@ -10,6 +11,9 @@ import { useEffect, useRef, useState } from "react";
  * Gate ATS/SEO: el HTML estático (SSR) contiene el valor FINAL; el conteo
  * desde 0 solo ocurre en el cliente cuando el elemento entra al viewport.
  * Con `prefers-reduced-motion` el valor final queda fijo.
+ *
+ * Sin librería desde el 2026-09-27 (ADR-027): un IntersectionObserver propio
+ * dice cuándo está en pantalla y `prefers-reduced-motion` se lee del navegador.
  */
 type CounterProps = {
   value: number;
@@ -32,8 +36,8 @@ export function Counter({
 }: CounterProps) {
   const ref = useRef<HTMLSpanElement>(null);
   // once:false — el conteo se re-ejecuta en cada entrada al viewport
-  const inView = useInView(ref, { once: false, amount: 0.6 });
-  const reduced = useReducedMotion();
+  const inView = useEnPantalla(ref, 0.6);
+  const reduced = usePrefiereQuieto();
   // El estado inicial ES el valor final: así el HTML estático lleva la cifra
   // real y, con reduced-motion, nunca hay movimiento. El conteo re-arranca
   // desde 0 dentro del rAF cuando el elemento entra al viewport.

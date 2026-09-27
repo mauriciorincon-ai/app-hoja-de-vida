@@ -510,6 +510,35 @@ test.describe("JetBrains Mono se pide DESPUÉS de la carga", () => {
   }
 });
 
+test.describe("el título de Contacto emerge de su máscara", () => {
+  // 2026-09-27 (ADR-027). «¿Hablamos?» entra con maskReveal: el texto nace
+  // desplazado un 110 % hacia abajo dentro de un contenedor con
+  // overflow-hidden. Si lo que se observa es EL TEXTO, el observador lo ve con
+  // 0 % visible —está fuera del recorte— y nunca lo revela: así estuvo desde
+  // que existe, con la librería y sin ella, y nadie lo cazó porque el
+  // contenido sí está en el HTML. Se observa el contenedor.
+  test("/es: al llegar a Contacto, «¿Hablamos?» termina visible y en su sitio", async ({
+    page,
+  }) => {
+    await page.goto("/es");
+    await page.locator("#contacto").scrollIntoViewIfNeeded();
+    const titulo = page.locator("#contacto-titulo");
+    await expect
+      .poll(
+        () =>
+          titulo.evaluate((el) => {
+            for (let n: Element | null = el; n; n = n.parentElement) {
+              const t = getComputedStyle(n).transform;
+              if (t !== "none" && t !== "matrix(1, 0, 0, 1, 0, 0)") return t;
+            }
+            return "quieto";
+          }),
+        { timeout: 5_000 },
+      )
+      .toBe("quieto");
+  });
+});
+
 test.describe("una cita del chat aterriza en su tarjeta de Skills", () => {
   // 2026-09-26: seis documentos «a fondo» llevan a una tarjeta de Skills
   // (`#skills-<id>`), no a la sección entera. La tarjeta entra con liftIn (70

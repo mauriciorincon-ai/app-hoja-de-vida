@@ -1,6 +1,6 @@
 # ADR-002: Motion library — Motion (framer-motion v12) over GSAP
 
-- **Status:** accepted
+- **Status:** superseded by ADR-027 (2026-09-27) — the entrances are CSS now; the library is gone
 - **Date:** 2026-07-05
 - **Sprint:** 001
 
