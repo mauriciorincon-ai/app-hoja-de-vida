@@ -9,7 +9,7 @@
     "ciclo": "WI-8 · F0b",
     "version": "1.5.0",
     "sellado_en": null,
-    "sprints_cerrados": 2
+    "sprints_cerrados": 3
   },
   "promesa": {
     "tagline": "Ninguna afirmación sale de la memoria del modelo.",
@@ -57,7 +57,7 @@
       "valor": 122,
       "etiqueta": "Criterios binarios de aceptación",
       "fuente": "medido",
-      "detalle": "Suma de las casillas de los doce work-items en entrega/work-items/: 122. Hoy hay 31 cumplidas —las ocho de WI-6, una de WI-7, las siete de WI-9 y quince de WI-8—, y pipeline/scripts/verificar-coherencia.mjs coteja ese recuento con el disco en cada corrida. Solo WI-9 figura cerrado: WI-6 cumple sus ocho, pero el índice lo deja en «motor cerrado» porque su banco crece con cada oferta."
+      "detalle": "Suma de las casillas de los doce work-items: 122. Hoy hay 42 cumplidas —once de WI-0, ocho de WI-6, una de WI-7, siete de WI-9 y quince de WI-8—, y verificar-coherencia.mjs coteja el recuento con el disco en cada corrida. Cerrados: WI-0, con el gate humano «el banco es cierto», y WI-9; WI-6 cumple sus ocho, pero su banco crece con cada oferta."
     },
     {
       "clave": "gates_humanos",
@@ -359,11 +359,11 @@
       "etiqueta": "ciclo"
     },
     {
-      "valor": "2 de 12",
+      "valor": "3 de 12",
       "etiqueta": "work-items cerrados"
     },
     {
-      "valor": "2026-09-15",
+      "valor": "2026-09-27",
       "etiqueta": "verificado"
     },
     {

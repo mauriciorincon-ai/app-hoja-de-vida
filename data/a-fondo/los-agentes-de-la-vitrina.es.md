@@ -168,7 +168,7 @@ transcribe—, y no entra a las plataformas del programa: el estudiante trae los
 **Hiring Copilot** (inicial, v1.5.0). Para un profesional de IA que quiere que cada candidatura
 parta de evidencia real, no de memoria: cada afirmación enviable enlaza un logro con su fuente y un
 programa lo comprueba, y el bullet huérfano hace fallar el control. **122 criterios binarios** en
-doce work-items, de los que 31 están cumplidos hoy, con **8 de 9 controles** con carnada y seis
+doce work-items, de los que 42 están cumplidos hoy, con **8 de 9 controles** con carnada y seis
 gates humanos; un script de coherencia compara el recuento contra el disco en cada corrida. Prepara candidaturas y no las
 envía; entrena antes de la entrevista y jamás asiste durante una real; no emite puntaje de ATS
 porque no existe uno común publicado, y nunca inserta texto oculto en un documento.

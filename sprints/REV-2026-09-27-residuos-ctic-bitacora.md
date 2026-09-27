@@ -154,3 +154,29 @@ hallazgo 8, que el dueño ya había fijado con otras palabras.
 | e2e home, chat, cv y reduced-motion | 80 en verde, 6 saltados que ya lo estaban                   |
 | El logro en el HTML construido      | «40+ productos analíticos en uso en salud»                  |
 | Barrido de cero enlaces             | limpio, corrido después del último `git add`                |
+
+## Actualización del mismo día: la ficha de Hiring Copilot (hallazgo 27)
+
+La ficha cambió otra vez en origen: WI-0 quedó cerrado. Se copió tal cual desde
+`harness-creator/productos/fichas-cv-viva (en desarrollo)/fichas/ah-hiring-copilot.ficha-tecnica.json`
+a `content/agentes/hiring-copilot.ficha-tecnica.json`, y `cmp` confirma que la copia es idéntica byte a
+byte. Como toda ficha de otra casa, no se editó aquí. La versión sigue en 1.5.0.
+
+| Campo de la ficha                  | Antes      | Después    |
+| ---------------------------------- | ---------- | ---------- |
+| Work-items cerrados                | 2 de 12    | 3 de 12    |
+| Criterios cumplidos, de 122        | 31         | 42         |
+| Sprints cerrados                   | 2          | 3          |
+| Fecha del estado                   | 2026-09-15 | 2026-09-27 |
+
+El corpus citaba el conteo viejo, y el chat lo habría repetido. Frase tocada, en los dos idiomas:
+
+| Archivo                           | Antes                                                  | Después                                                |
+| --------------------------------- | ------------------------------------------------------ | ------------------------------------------------------ |
+| `los-agentes-de-la-vitrina.es.md` | «doce work-items, de los que 31 están cumplidos hoy»   | «doce work-items, de los que 42 están cumplidos hoy»   |
+| `los-agentes-de-la-vitrina.en.md` | «twelve work items, of which 31 are met today»         | «twelve work items, of which 42 are met today»         |
+
+Verificación: el esquema de la ficha valida en `content-fichas.test.ts`. La suite completa da 1359 en
+verde, el informe del banco 158 en verde y el build indexa los 25 documentos. El e2e de la vitrina da 61
+en verde y 7 saltados, que ya lo estaban. La página de la ficha construida muestra «3 de 12» y «42
+cumplidas».
