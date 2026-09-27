@@ -46,8 +46,8 @@ categorias:
       es: "Sin interfaz: se les habla por comandos y ejecutan actividades complejas de principio a fin."
       en: "No interface: you drive them with commands and they carry complex work through, start to finish."
     detalle:
-      es: "Cada agente es un especialista con un oficio acotado: recibe una orden por comando, la ejecuta paso a paso y entrega el resultado. No hay pantallas que recorrer; lo que se mostrará aquí es qué hace cada uno, con qué límites y con qué evidencia."
-      en: "Each agent is a specialist with a narrow trade: it takes an order as a command, works through it step by step and delivers the result. There are no screens to walk through; what will be shown here is what each one does, within which limits, and with what evidence."
+      es: "Cada agente es un especialista con un oficio acotado: recibe una orden por comando, la ejecuta paso a paso y entrega el resultado. No hay pantallas que recorrer; lo que se muestra aquí es qué hace cada uno, con qué límites y con qué evidencia."
+      en: "Each agent is a specialist with a narrow trade: it takes an order as a command, works through it step by step and delivers the result. There are no screens to walk through; what is shown here is what each one does, within which limits, and with what evidence."
 
   - id: investigaciones
     estado: abierta
@@ -58,8 +58,8 @@ categorias:
       es: "Líneas de investigación propias: pasaron la etapa de factibilidad y ya tienen su rumbo elegido."
       en: "In-house research lines: past the feasibility stage, with their direction already chosen."
     detalle:
-      es: "Cada línea nació como una pregunta, pasó por un estudio de factibilidad y salió de él con una decisión: qué se construye y qué no. Aquí se publican las líneas ya validadas —su pregunta, su alcance y lo que se decidió—; la construcción de cada una empieza ahora."
-      en: "Each line began as a question, went through a feasibility study and came out of it with a decision: what gets built and what doesn't. The validated lines are published here — their question, their scope and what was decided; building each one starts now."
+      es: "Cada línea nació como una pregunta, pasó por un estudio de factibilidad y salió de él con una decisión: qué se construye y qué no. Aquí se publican las líneas ya validadas —su pregunta, su alcance y lo que se decidió— y el estado real de cada una vive en su ficha: qué se construyó, qué corrió y qué falta."
+      en: "Each line began as a question, went through a feasibility study and came out of it with a decision: what gets built and what doesn't. The validated lines are published here — their question, their scope and what was decided — and each one's real state lives in its page: what was built, what ran and what is missing."
 
   - id: tableros
     estado: abierta
@@ -70,5 +70,5 @@ categorias:
       es: "Tableros analíticos sobre datos reales, para decidir con evidencia y no con intuición."
       en: "Analytical dashboards on real data, to decide on evidence rather than hunches."
     detalle:
-      es: "Un tablero responde preguntas de negocio con datos reales, a la vista y en una sola pantalla. Los primeros están en selección: se publican cuando estén construidos, cada uno con las preguntas que responde y de dónde salen sus datos. La herramienta importa menos que la pregunta."
-      en: "A dashboard answers business questions with real data, in plain sight and on a single screen. The first ones are being selected: they get published once built, each with the questions it answers and where its data comes from. The tool matters less than the question."
+      es: "Un tablero responde preguntas de negocio con datos reales, a la vista y en una sola pantalla. Cada uno se publica ya construido, con las preguntas que responde y de dónde salen sus datos. La herramienta importa menos que la pregunta."
+      en: "A dashboard answers business questions with real data, in plain sight and on a single screen. Each one is published already built, with the questions it answers and where its data comes from. The tool matters less than the question."

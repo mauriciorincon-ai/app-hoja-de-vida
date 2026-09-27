@@ -185,6 +185,47 @@ conceptos:
       - valor: 494
         razon: "el índice con el corpus v2, antes de que v3 ampliara los documentos"
       - valor: 162
-        razon: "medición intermedia del corpus v2, citada en la auditoría del top-k"
+        razon: "el índice simulado del sprint 8 (la base en borrador forzada a aprobado), donde se midieron las stopwords"
       - valor: 159
-        razon: "medición intermedia del corpus v2, citada en la auditoría del top-k"
+        razon: "el índice del sprint 8 en la primera medición del top-k"
+
+  # ───────────────────────────────────────────────────────────────────────────
+  # LAS DOS SUITES DEL CHAT (2026-09-27)
+  #
+  # El documento del chat se evalúa «con 75 preguntas propias y 136 de afuera», y
+  # el banco crece con cada revisión del corpus —una fila nueva por pregunta que
+  # el corpus no contestaba— sin que nadie vuelva a ese documento. Lo vio de
+  # afuera el harness de hiring: el corpus decía 136 cuando el banco llevaba 146.
+  # La verdad sale de los fixtures que corren en la CI. Las cifras de las
+  # mediciones fechadas (131 y 48 en el sprint 8; 136 el 20 de septiembre de
+  # 2026) son historia y se declaran como hitos.
+  # ───────────────────────────────────────────────────────────────────────────
+
+  - id: preguntas-de-afuera
+    etiqueta: "las preguntas del banco escritas desde afuera"
+    fuente: "tests/fixtures/banco-de-preguntas.es.yaml · lista `preguntas`"
+    sustantivos: ["preguntas de afuera", "preguntas escritas desde afuera", "preguntas legitimas", "de afuera"]
+    # 136 NO es un hito: es el número que envejeció, y como hito el gate lo
+    # habría admitido en presente para siempre. La medición del 20 de septiembre
+    # de 2026 que lo usa —la tabla del top-k y su lectura— se salva por su
+    # contexto, no por su valor.
+    salvedades:
+      - frase: "fuentes por respuesta"
+        razon: "la tabla del top-k, medida el 20 de septiembre de 2026 sobre el banco de entonces"
+      - frase: "con tres fuentes"
+        razon: "la lectura de esa misma tabla"
+      - frase: "entre esos dos numeros"
+        razon: "un subconjunto del banco entre dos puntajes, no el banco entero"
+      - frase: "con el umbral en"
+        razon: "cuántas bloquearía otro umbral, no el tamaño del banco"
+    hitos:
+      - valor: 131
+        razon: "el banco del sprint 8, con el que se midió el top-k la primera vez"
+
+  - id: preguntas-propias
+    etiqueta: "las preguntas de prueba propias del corpus (el golden set)"
+    fuente: "data/a-fondo/*.es.md · `preguntas_de_prueba`"
+    sustantivos: ["preguntas propias"]
+    hitos:
+      - valor: 48
+        razon: "el golden set del sprint 8, antes de que el corpus creciera a 25 documentos"

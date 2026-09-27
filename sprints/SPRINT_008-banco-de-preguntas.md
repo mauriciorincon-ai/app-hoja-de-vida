@@ -386,8 +386,8 @@ Preguntas que un reclutador hace y que **el corpus no contesta hoy**, con el doc
 
 **✅ ¿Con qué proveedor de modelos trabaja?**
 
-- top-4: a-fondo-rag-y-el-chat-cuando-usar, a-fondo-rag-y-el-chat-proveedor-intercambiable~2, a-fondo-cafam-coordinar-equipo-mixto~2, a-fondo-origenes-banco-pichincha-la-capa-analitica~1
-- primer fragmento: «La arquitectura del chat de esta página con sus números: índice en tiempo de build, recuperación léxica con MiniSearch (BM25) sin embeddings, guardrails en capas, umbral medido, citas navegables, cinco proveedores interc…»
+- top-4: a-fondo-rag-y-el-chat-proveedor-intercambiable~1, a-fondo-rag-y-el-chat-cuando-usar, a-fondo-rag-y-el-chat-proveedor-intercambiable~2, a-fondo-cafam-coordinar-equipo-mixto~2
+- primer fragmento: «La arquitectura separa el proveedor generativo del conocimiento y de la lógica principal de la aplicación. El contenido autorizado, el índice, la recuperación y las reglas fundamentales permanecen bajo control del sistem…»
 
 **✅ ¿Cómo evita que el modelo invente respuestas?**
 
@@ -412,7 +412,7 @@ Preguntas que un reclutador hace y que **el corpus no contesta hoy**, con el doc
 **✅ ¿Qué tan grande es su experiencia con IA comparada con la de datos?**
 
 - top-4: a-fondo-origenes-cuantos-anos~3, a-fondo-vesting-trazabilidad-y-naturaleza-de-la-informacion~2, a-fondo-gobierno-de-datos-y-de-ia-experiencia-y-formacion~1, a-fondo-vesting-por-que-sali-y-el-puente~1
-- primer fragmento: «Si la pregunta es qué tan grande es mi experiencia con IA comparada con la de datos: los datos ocupan ocho de esos años; la IA aplicada, con agentes en producción, empieza en agosto de 2023 en Vesting y sigue hoy en la F…»
+- primer fragmento: «Si la pregunta es qué tan grande es mi experiencia con IA comparada con la de datos: los datos ocupan ocho de esos años; la IA aplicada empieza en agosto de 2023 en Vesting, con agentes en producción, y sigue hoy en la F…»
 
 **✅ ¿Ha construido prompts o sistemas con instrucciones para un modelo?**
 
@@ -429,7 +429,7 @@ Preguntas que un reclutador hace y que **el corpus no contesta hoy**, con el doc
 **✅ ¿Ha diseñado una arquitectura de datos desde cero?**
 
 - top-4: a-fondo-vesting-la-arquitectura~1, a-fondo-vesting-la-arquitectura~3, a-fondo-vesting-la-arquitectura~2, a-fondo-vesting-cuando-usar
-- primer fragmento: «Diseñé e implementé en Microsoft Fabric un ecosistema de datos orientado a integrar, transformar y analizar la información generada por los agentes: Big Data, Data Warehouse y procesamiento distribuido sobre un lakehouse…»
+- primer fragmento: «Diseñé e implementé en Microsoft Fabric un ecosistema de datos orientado a integrar, transformar y analizar la información generada por los agentes: Data Warehouse y procesamiento distribuido sobre un lakehouse. La plata…»
 
 **✅ ¿Qué es un lakehouse y lo ha usado?**
 
@@ -463,7 +463,7 @@ Preguntas que un reclutador hace y que **el corpus no contesta hoy**, con el doc
 
 **☑️ ¿Tiene experiencia con Azure?**
 
-- top-4: a-fondo-certificaciones-el-ai-103~1, a-fondo-plataforma-y-despliegue-el-mundo-microsoft~1, a-fondo-apps-pipeline-exploracion-gemini-vertex~1, a-fondo-plataforma-y-despliegue-cuando-usar
+- top-4: a-fondo-certificaciones-el-ai-103~1, a-fondo-plataforma-y-despliegue-el-mundo-microsoft~1, a-fondo-plataforma-y-despliegue-cuando-usar, a-fondo-apps-pipeline-exploracion-gemini-vertex~1
 - primer fragmento: «Desde julio de 2026 desarrollo la ruta correspondiente al examen AI-103, orientado al desarrollo de aplicaciones y agentes de inteligencia artificial en Azure; a la fecha llevo 21 módulos. No presento esta credencial com…»
 
 **✅ ¿Conoce Google Cloud, Vertex AI o BigQuery?**
@@ -498,7 +498,7 @@ Preguntas que un reclutador hace y que **el corpus no contesta hoy**, con el doc
 
 **☑️ ¿Ha trabajado con big data o procesamiento distribuido?**
 
-- top-4: skills-big-data-multiplataforma, casestudy-vesting-1, proyecto-vesting, a-fondo-vesting-la-arquitectura~1
+- top-4: skills-big-data-multiplataforma, casestudy-vesting-1, a-fondo-vesting-la-arquitectura~1, trayectoria-1
 - primer fragmento: «Big data multiplataforma: Planeador de Fabric, Databricks y Snowflake — en preparación, Databricks: Unity Catalog, Delta Lake, Lakeflow y Mosaic AI, Snowflake: Snowpark, Cortex AI y Dynamic Tables, dbt, Apache Iceberg, A…»
 
 **✅ ¿Ha construido pipelines de datos que corran solos?**
@@ -508,8 +508,8 @@ Preguntas que un reclutador hace y que **el corpus no contesta hoy**, con el doc
 
 **☑️ ¿Qué hace para asegurar la calidad de los datos?**
 
-- top-4: casestudy-cafam, a-fondo-origenes-iso-9001-la-primera-escuela~1, a-fondo-gobierno-de-datos-y-de-ia-gobernar-para-hacer-mas~2, a-fondo-procesos-y-simulacion-verificacion-y-validacion~1
-- primer fragmento: «Cambiar el sistema que mueve una bodega de medicamentos sin dejar de despachar: seis meses de pruebas con el equipo más grande que he liderado. Cafam implementaba un WMS en su operación logística: un cambio de sistema cr…»
+- top-4: a-fondo-origenes-iso-9001-la-primera-escuela~1, casestudy-cafam, a-fondo-gobierno-de-datos-y-de-ia-gobernar-para-hacer-mas~2, a-fondo-procesos-y-simulacion-verificacion-y-validacion~1
+- primer fragmento: «Mi trabajo en Inglopres también abarcó la cadena de suministro y el aseguramiento de la calidad bajo la norma ISO 9001:2015. Este entorno fortaleció una disciplina que ha permanecido en toda mi trayectoria: no basta con…»
 
 **✅ ¿Sabe de integración continua y despliegue automático?**
 

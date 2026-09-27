@@ -48,11 +48,11 @@ apps:
             es: "Todo el contenido está en el HTML estático: un recruiter, un bot ATS o un curl sin JavaScript ven la hoja de vida entera, con JSON-LD y hreflang."
             en: "All content is in the static HTML: a recruiter, an ATS bot or a curl without JavaScript see the whole résumé, with JSON-LD and hreflang."
         - titulo:
-            es: "Roadmap votable por quien la visita"
-            en: "A roadmap the visitor votes on"
+            es: "Roadmap votable por app hermana"
+            en: "A roadmap the visitor votes on, per sister app"
           descripcion:
-            es: "Las próximas features se votan con un clic, sin registro, y el contador es real (Supabase con RPC atómico). Si la base de datos cae, lo dice — nunca inventa un número."
-            en: "Upcoming features are voted with one click, no sign-up, and the counter is real (Supabase with an atomic RPC). If the database goes down, it says so — it never fabricates a number."
+            es: "Las próximas features de cada app hermana se votan con un clic en su ficha de la vitrina, sin registro, y el contador es real (Supabase con RPC atómico). Si la base de datos cae, lo dice — nunca inventa un número."
+            en: "Each sister app's upcoming features are voted with one click on its showcase page, no sign-up, and the counter is real (Supabase with an atomic RPC). If the database goes down, it says so — it never fabricates a number."
       metricas:
         - valor: 2
           etiqueta:
@@ -82,8 +82,8 @@ apps:
       es: "Chat con mi hoja de vida"
       en: "Chat with my résumé"
     descripcion:
-      es: "Ya está vivo en esta página (botón flotante): RAG con índice en build-time, citas navegables, proveedor LLM conmutable por env (Groq · Gemini · Azure AI Foundry · Claude) y fallback local — nunca se cae (ingeniería de IA en acción)."
-      en: "Live on this very page (floating button): RAG with a build-time index, navigable citations, an env-switchable LLM provider (Groq · Gemini · Azure AI Foundry · Claude) and a local fallback — it never goes down (AI engineering in action)."
+      es: "Ya está vivo en esta página (botón flotante): RAG con índice en build-time, citas navegables, proveedor LLM conmutable por env (Groq · Gemini · Microsoft Foundry · Claude · OpenAI-compatible) y fallback local si el proveedor falla (ingeniería de IA en acción)."
+      en: "Live on this very page (floating button): RAG with a build-time index, navigable citations, an env-switchable LLM provider (Groq · Gemini · Microsoft Foundry · Claude · OpenAI-compatible) and a local fallback if the provider fails (AI engineering in action)."
     enlaces:
       - etiqueta: "GitHub"
         url: "https://github.com/mauriciorincon-ai/app-hoja-de-vida"
@@ -105,11 +105,11 @@ apps:
             es: "Proveedor LLM conmutable por env"
             en: "Env-switchable LLM provider"
           descripcion:
-            es: "Groq, Gemini, Azure AI Foundry, Claude o un self-host OpenAI-compatible: cambiar de proveedor es cambiar una variable de entorno, cero código. La demostración viva de la ingeniería de IA."
-            en: "Groq, Gemini, Azure AI Foundry, Claude or an OpenAI-compatible self-host: switching provider is switching an environment variable, zero code. AI engineering shown live."
+            es: "Groq, Gemini, Microsoft Foundry, Claude o un self-host OpenAI-compatible: cambiar de proveedor es cambiar una variable de entorno, cero código. La demostración viva de la ingeniería de IA."
+            en: "Groq, Gemini, Microsoft Foundry, Claude or an OpenAI-compatible self-host: switching provider is switching an environment variable, zero code. AI engineering shown live."
         - titulo:
-            es: "Nunca se cae: fallback local"
-            en: "Never down: local fallback"
+            es: "Si el proveedor falla, fallback local"
+            en: "If the provider fails, local fallback"
           descripcion:
             es: "Un circuit breaker degrada a búsqueda instantánea en el cliente cuando el proveedor falla. La primera vez que ocurrió fue una falla real de credencial — y funcionó."
             en: "A circuit breaker degrades to instant client-side search when the provider fails. The first time it happened was a real credential failure — and it worked."
@@ -117,17 +117,17 @@ apps:
             es: "Guardrails y presupuesto"
             en: "Guardrails and budget"
           descripcion:
-            es: "El modelo solo ve fragmentos de mi propio contenido: no tiene de dónde sacar otra cosa. Las preguntas que ni se le parecen se paran antes, sin gastar un token. Rate limit por IP, techo de tokens y kill-switch. Nada de lo que produce el modelo se guarda."
-            en: "The model only ever sees fragments of my own content: it has nowhere else to draw from. Questions that do not even resemble it are stopped earlier, without spending a token. Rate limit per IP, token ceiling and kill-switch. Nothing the model produces is stored."
+            es: "El modelo solo ve fragmentos de mi propio contenido: no tiene de dónde sacar otra cosa. Las preguntas que ni se le parecen se paran antes, sin gastar un token. Rate limit por IP, techo de tokens y kill-switch. Cada pregunta y su respuesta quedan registradas con el nombre y el correo de quien pasó la puerta, y el chat lo dice antes de responder."
+            en: "The model only ever sees fragments of my own content: it has nowhere else to draw from. Questions that do not even resemble it are stopped earlier, without spending a token. Rate limit per IP, token ceiling and kill-switch. Every question and its answer are logged with the name and email of whoever passed the gate, and the chat says so before answering."
       metricas:
-        - valor: 6
+        - valor: 5
           etiqueta:
             es: "proveedores conmutables"
             en: "switchable providers"
-        - valor: 0
+        - valor: 4
           etiqueta:
-            es: "respuestas persistidas"
-            en: "persisted answers"
+            es: "fuentes por respuesta, medidas"
+            en: "sources per answer, measured"
       stack:
         - "Vercel AI SDK"
         - "Groq"

@@ -11,7 +11,7 @@ import {
 } from "../../scripts/evaluar-corpus.mjs";
 
 /**
- * EL BANCO EN INGLÉS (a fondo v2, F5). Las mismas 136 preguntas de afuera,
+ * EL BANCO EN INGLÉS (a fondo v2, F5). Las mismas preguntas de afuera del banco español,
  * traducidas, contra el índice inglés simulado. Lo que vigila:
  *
  * 1. Que el banco inglés sea el GEMELO del español: mismas fuentes esperadas,

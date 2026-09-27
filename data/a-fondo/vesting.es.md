@@ -86,7 +86,7 @@ Los 27 agentes del inventario de Vesting son un conjunto distinto de los agentes
 
 <!-- seccion: la-arquitectura -->
 
-Diseñé e implementé en Microsoft Fabric un ecosistema de datos orientado a integrar, transformar y analizar la información generada por los agentes: Big Data, Data Warehouse y procesamiento distribuido sobre un lakehouse. La plataforma debía conectar capacidades de almacenamiento, procesamiento, modelado y consumo analítico, reduciendo la fragmentación entre componentes y facilitando la construcción de una visión completa de la operación.
+Diseñé e implementé en Microsoft Fabric un ecosistema de datos orientado a integrar, transformar y analizar la información generada por los agentes: Data Warehouse y procesamiento distribuido sobre un lakehouse. La plataforma debía conectar capacidades de almacenamiento, procesamiento, modelado y consumo analítico, reduciendo la fragmentación entre componentes y facilitando la construcción de una visión completa de la operación.
 
 La arquitectura debía responder a dos necesidades simultáneas. La primera era histórica: conservar los eventos necesarios para analizar tendencias, reconstruir sesiones y comparar el comportamiento de los agentes a lo largo del tiempo. La segunda era operacional: ofrecer información suficientemente oportuna para identificar fallas, variaciones o condiciones que requirieran atención mientras todavía existía la posibilidad de intervenir.
 

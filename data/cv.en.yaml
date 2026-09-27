@@ -12,11 +12,11 @@ identidad:
   titular: "From industrial engineering to AI agents: data, platforms and decisions."
   resumen: >-
     Data leader and AI engineer (AI-103 and AI-300, in progress) · Analytics
-    Engineer (DP-600). I design analytics platforms on Microsoft Fabric and take AI
+    Engineer (DP-600). I design analytics platforms on Microsoft Fabric and have taken AI
     agents to production — and this résumé is the sample: walk through it and
     ask.
   perfil: >-
-    Industrial Engineer (Javeriana) with ten years of experience —from
+    Industrial Engineer (Javeriana) with a ten-year career —from
     process engineering to data and AI— turning operational data into
     business decisions, across banking, transport,
     logistics and healthcare. Today I lead AI adoption and governance: the
@@ -43,13 +43,13 @@ trayectoria:
     organizacion: "Fundación CTIC"
     proyecto: "fundacion-ctic"
     descripcion: >-
-      Analytics and data governance for administrative and clinical decisions
-      in healthcare.
+      Analytics, data governance and AI strategy (ISO/IEC 42001) for
+      administrative and clinical decisions in healthcare.
     bullets:
       - "I lead the institutional AI strategy under UNE-ISO/IEC 42001:2025: 12 opportunities identified, 7 cases evaluated and 3 prioritized."
       - "42 analytics products in Power BI for administrative and clinical leaders: 20 leaders of 15 processes and about 75 users."
       - "Institutional data governance and quality, under Colombia's habeas data regime and Law 1581."
-      - "Process-based control dashboards and improvement plans: close to 60% less effort preparing information."
+      - "Process-based control dashboards and improvement plans: close to 60% less effort preparing information (estimated on my own work)."
       - "23 instruments of the AI management system, 8 finished, and an ISO 42001 expert agent to review them."
     actual: true
   # Real period (PDF, /cv, chat, cases): 2023 — 2025. «2024» only on the HOME
@@ -64,7 +64,7 @@ trayectoria:
       architecture, governance, real-time agent monitoring and a replicable
       core process.
     bullets:
-      - "Designed and built from scratch the data ecosystem for AI-agent analytics on Microsoft Fabric (big data + data warehouse + distributed processing): 12 clients, 120 tables and 1,000 events per day."
+      - "Designed and built from scratch the data ecosystem for AI-agent analytics on Microsoft Fabric (data warehouse + distributed processing on a lakehouse): 12 clients, 120 tables and 1,000 events per day."
       - "Defined the data governance to integrate client and system data, with each client isolated in its own workspace."
       - "Built real-time monitoring for the agents in production: up to 23 monitored at once."
       - "Documented the replicable 11-stage core process used to build the 27 agents in the inventory."
@@ -78,12 +78,12 @@ trayectoria:
     bullets:
       - "Led a 5-person BI team: dashboards adopted by 50+ users, driving +25% in decision-making."
       - "ETL process optimization in Power Query: −35% in analysis times."
-      - "Churn, delinquency and risk models with scikit-learn: >90% accuracy and +35% in predictions."
+      - "Churn, delinquency and risk models with scikit-learn: >90% accuracy and up to +35% in predictions, by each model's own metric."
       - "Semantic model optimization with DAX Studio and Tabular Editor."
       - "Co-led the area's data governance."
       - "Analytics training program for 12 professionals: +20% productivity in preparing and using information."
   - periodo: "2021 — 2022"
-    rol: "Post-Operational Analysis"
+    rol: "Post-Operational Analysis Professional"
     organizacion: "C&M Consultores (TransMilenio)"
     proyecto: "transmilenio-cm"
     descripcion: >-
@@ -96,7 +96,7 @@ trayectoria:
       - "Strategy sessions with SITP leadership: +25% in indicators."
       - "Demand forecasting with scikit-learn by route and time slot, ten months in use: +20% system performance."
   - periodo: "2020 — 2021"
-    rol: "Information Systems Analyst"
+    rol: "Information Systems and Projects Analyst"
     organizacion: "Cafam"
     proyecto: "cafam"
     descripcion: >-
@@ -105,11 +105,11 @@ trayectoria:
     bullets:
       - "Led a 20-person team —14 from Cafam and 6 from Oracle— through six months of WMS implementation testing: −25% errors and +15% operational efficiency."
       - "Modeled the process in BPMN with Bizagi and simulated dispatch in FlexSim before testing."
-      - "Operational-control BI: +50% precision for 15+ users."
+      - "Implementation-control BI: +50% precision in follow-up, for 15+ users."
       - "VBA integrations with the WMS: +15% automation and −50% data errors."
       - "SQL data quality with an 80-20 reconciliation by medicine: +20%."
   - periodo: "2018 — 2020"
-    rol: "Operations Analyst"
+    rol: "Junior Operations Analyst"
     organizacion: "C&M Consorcio (TransMilenio)"
     proyecto: "cm-operaciones"
     descripcion: >-
@@ -189,7 +189,7 @@ logros:
     descripcion: "BI dashboards at Banco Pichincha, driving +25% in decision-making."
   - valor: 70
     sufijo: "%"
-    etiqueta: "faster analysis with a unified ETL"
+    etiqueta: "more precise and faster analysis with a unified ETL"
     descripcion: "Unifying heterogeneous sources at C&M Consultores (TransMilenio)."
   - valor: 90
     prefijo: ">"
@@ -208,12 +208,12 @@ proyectos:
     nombre: "A data platform for AI agents — Vesting (2023–2025)"
     resumen: >-
       An automation-agents startup with no data infrastructure: I designed and
-      built from scratch its Microsoft Fabric ecosystem (big data + data
-      warehouse + distributed processing), the governance to integrate client
+      built from scratch its Microsoft Fabric ecosystem (data warehouse +
+      distributed processing on a lakehouse), the governance to integrate client
       and system data, real-time agent monitoring, and the replicable core
       process to design and ship AI agents. The exact bridge between
       analytics engineering and AI engineering.
-    stack: ["Microsoft Fabric", "Data governance", "Real-time monitoring"]
+    stack: ["Microsoft Fabric", "Data governance", "Real-time monitoring", "n8n", "Power BI"]
     destacado: true
     casestudy:
       titular: "The data platform of an AI-agent startup, designed from scratch: data for the agents to operate, and data about the agents so they could be trusted."
@@ -237,7 +237,7 @@ proyectos:
       capitulos:
         - titulo: "The architecture on Microsoft Fabric"
           texto: >-
-            I designed the ecosystem on Microsoft Fabric: big data, data warehouse and distributed
+            I designed the ecosystem on Microsoft Fabric: data warehouse and distributed
             processing over a lakehouse on OneLake, with pipelines that received the n8n flows
             orchestrating the agents. The key decision was normalizing events at ingestion:
             sessions, requests, responses, times, states and token cost, the same for all 27 agents.
@@ -330,7 +330,7 @@ proyectos:
       impacto:
         - "+25% in decision-making on the adopted dashboards."
         - "−35% in analysis times from the ETL optimization."
-        - ">90% accuracy and +35% in predictions from the models in production."
+        - ">90% accuracy and up to +35% in predictions from the models in production, by each model's own metric."
         - "+20% productivity in preparing and using information after the training program."
       leccion: >-
         The sophistication of a solution does not by itself determine its value. What
@@ -459,7 +459,7 @@ proyectos:
             stayed as a permanent control.
       impacto:
         - "−25% errors and +15% operational efficiency across the implementation."
-        - "+50% precision in operational control, adopted by 15+ users."
+        - "+50% precision in implementation follow-up, with a control BI adopted by 15+ users."
         - "+15% automation and −50% data errors with the VBA integrations."
         - "+20% data quality via SQL."
       leccion: >-
@@ -472,7 +472,7 @@ proyectos:
       Analysis and visualization models for administrative and clinical
       leaders, institutional data governance and quality, and process-based
       control dashboards.
-    stack: ["Analytics", "Data governance"]
+    stack: ["Analytics", "Data governance", "AI strategy", "ISO/IEC 42001", "Power BI"]
     casestudy:
       titular: "My current role: the analytics a healthcare institution uses to measure and decide, and the strategy it uses to govern its artificial intelligence under UNE-ISO/IEC 42001:2025."
       contexto: >-
@@ -515,13 +515,13 @@ proyectos:
             initiative needs an agent.
         - titulo: "A management system that can be demonstrated"
           texto: >-
-            We are building 23 instruments of the management system —policies, procedures, matrices
+            We built 23 instruments of the management system —policies, procedures, matrices
             and criteria—, 8 of them finished. To review them I built the ISO 42001 expert agent I
             publish in the showcase: it cites the standard or declares the gap, and no ruling moves
             forward without a person.
       impacto:
         - "42 analytical products in use for 20 leaders across 15 processes and about 75 users."
-        - "About 60% less effort preparing information; 10 analysis plans under follow-up."
+        - "About 60% less effort preparing information (estimated on my own work); 10 analysis plans under follow-up."
         - "12 AI opportunities identified, 7 use cases evaluated, 3 prioritized and 2 documented."
         - "Institutional data quality as a practice, not an event."
       leccion: >-
@@ -739,7 +739,7 @@ certificaciones:
     logo: microsoft.svg
   - nombre: "Microsoft Certified: Azure AI Apps and Agents Developer Associate (AI-103)"
     estado: "en curso"
-    nota: "In preparation: AI apps and agents on Azure, the path I practice today at Fundación CTIC."
+    nota: "In preparation: AI apps and agents on Azure with Microsoft Foundry, the path I'm on today."
     icono: insignia
     logo: microsoft.svg
   - nombre: "Microsoft Certified: Machine Learning Operations Engineer Associate (AI-300)"
@@ -834,9 +834,9 @@ skills:
   - id: ia-y-ml
     grupo: "Machine learning & data science"
     items:
-      - "PyTorch"
-      - "TensorFlow"
-      - "Scikit-Learn"
+      - "PyTorch — exploring"
+      - "TensorFlow — exploring"
+      - "scikit-learn"
       - "NLP"
       - "Pandas & NumPy"
       - "Jupyter"

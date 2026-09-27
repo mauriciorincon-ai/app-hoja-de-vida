@@ -2,7 +2,7 @@
 slug: rag-y-el-chat
 codigo: AF-16
 titulo: "RAG: how this chat works on the inside"
-resumen: "The architecture of this page's chat with its numbers: build-time index, lexical retrieval with MiniSearch (BM25) without embeddings, layered guardrails, a measured threshold, navigable citations, five interchangeable providers, local fallback, a US$20 budget with a real cost of zero, the name and email gate with its six-digit verification code, what data the conversation log stores and who reads it, and how it is evaluated with 75 questions of its own and 136 from outside."
+resumen: "The architecture of this page's chat with its numbers: build-time index, lexical retrieval with MiniSearch (BM25) without embeddings, layered guardrails, a measured threshold, navigable citations, five interchangeable providers, local fallback, a US$20 budget with a real cost of zero, the name and email gate with its six-digit verification code, what data the conversation log stores and who reads it, and how it is evaluated with 77 questions of its own and 146 from outside."
 cuando_usar: "Use this when they ask how the chat on this page works, which RAG architecture he implemented, whether he uses embeddings or lexical search, which model provider he works with, how he keeps the model from making up answers, and how he evaluates the system with a golden set and a question bank. Use it too for everything that has to do with the chat gate and with privacy: why the chat asks for your name and email before answering, what the six-digit verification code that arrives by email is for, what personal data it stores, who can read it, how long it is kept, how to ask for it to be deleted, and why the answers are two or three paragraphs instead of a dump of the corpus."
 estado: aprobado
 ancla: "#vitrina"
@@ -229,10 +229,9 @@ A lexical search is only as good as its list of stopwords. Without it, "en", "de
 the whole corpus and any question looks pertinent. The first list was the obvious one; the second
 batch came out of a measurement, not an intuition.
 
-With the corpus of the time, 28 chunks, a five-word off-topic question —a request for pet humor,
+With the published corpus of the time —sprint 8's, 28 chunks—, a five-word off-topic question —a request for pet humor,
 which shares no noun with the corpus— scored 4.28 and passed the guardrail. The only term that
-matched was the preposition "sobre" ("about"), present in 42 of the 162 chunks of the index at
-that time, and it sustained a false positive on its own. The automated out-of-scope test could
+matched was the preposition "sobre" ("about"), present in 42 of the 162 chunks of the simulated index of that same sprint, which already carried the draft base, and it sustained a false positive on its own. The automated out-of-scope test could
 not see it because it asked the same request with the preposition "de", which was already on the
 list.
 
@@ -260,7 +259,7 @@ produce.
 Embeddings remain a possible evolution, not an automatic improvement. Adding them would make
 sense if a representative set of questions showed that lexical search fails systematically at
 retrieving paraphrases, semantic relationships or concepts expressed with sufficiently different
-vocabularies. Today that set exists —136 questions written from outside— and it does not show
+vocabularies. Today that set exists —146 questions written from outside— and it does not show
 that failure: with four sources per answer, none is left without its own.
 
 In that case, the most reasonable evolution would not necessarily be to replace the current
@@ -507,8 +506,7 @@ main logic. The authorized content, the index, retrieval and the fundamental rul
 system's control, while the provider fulfills a delimited function of synthesis and generation.
 
 The configuration allows selecting, with one environment variable and without touching code,
-among five providers previously adapted and integrated on the Vercel AI SDK: Groq —the initial
-one, with Llama 3.3 70B, chosen in July 2026 for its speed and its free quota—, Gemini 2.5 Flash,
+among five providers previously adapted and integrated on the Vercel AI SDK: Groq —the initial one, chosen in July 2026 for its speed and its free quota; it started with Llama 3.3 70B and since August 2026 runs gpt-oss-120b, because Groq retired that model—, Gemini 2.5 Flash,
 Azure through Microsoft Foundry (formerly Azure AI Foundry), Claude —with Haiku 4.5 by default—
 and any service compatible with the OpenAI API, self-hosted ones included. The switch is made
 through configuration and does not require modifying the chat's core logic. The provider changes;
@@ -788,7 +786,7 @@ first four results. The test travels with the content: adding a document adds it
 the gate without anyone editing the tests. With 25 documents that is 75 questions.
 
 The second is the bank of questions written from outside, the way a recruiter or interviewer
-asks: 136 legitimate questions in ten families —career, way of working, certifications, AI and
+asks: 146 legitimate questions in ten families —career, way of working, certifications, AI and
 agents, platform and data, BI and analytics, governance, processes, showcase and fit—, plus 15
 off-topic ones and 3 declared without coverage. Each legitimate one must bring an expected source
 in the top-4, the expected source must arrive first in at least 60% of the cases, and the 15
@@ -800,7 +798,7 @@ errors, ambiguous queries and requests that do not belong to the domain. They al
 questions whose answer does not exist, because the ability to declare a gap is an essential part
 of correct behavior.
 
-For generation, I verify that each factual claim is supported, that no data foreign to the corpus
+For generation there is no automatic validator yet —the subsection on the chips says so—: the verification is by reading, over the golden set's answers, and it checks that each factual claim is supported, that no data foreign to the corpus
 is introduced and that the answer keeps the requested scope. For citations, I check that each
 reference leads to a valid destination. And I evaluate behavior under failure: the system must
 activate the local search when the provider is unavailable, communicate the degradation and keep
@@ -831,8 +829,7 @@ with it. That two sets written with different criteria land on the same number, 
 part that gives confidence. With a single source the golden set would hit 59%; today the number
 lives in one place in the code and the golden set exercises it directly. Today's index is no
 longer the one of those two measurements —1,467 chunks in Spanish, 1,457 in English—, and that is
-why it is measured again every time the corpus changes: the 4 is a measured number, not an
-inherited constant.
+why it is measured again every time the corpus changes: the 4 is a measured number, not an inherited constant. And a clarification on the bank's two figures: 102 of 131 and 136 of 136 are not the same test twice, but before and after the vocabulary correction of phase F4 —some thirty words the questions said and the corpus did not—, with five more questions in the bank; since then the bank has kept growing with every revision of the corpus.
 
 ## The bank as a vocabulary audit: ETL, lakehouse and the words the corpus did not say
 
@@ -848,9 +845,7 @@ This discipline turns the RAG into an evaluable system and not a demo based on h
 examples. AI-103 provides the patterns for building generative and retrieval applications; AI-300
 extends the capacity to evaluate, observe and operate those solutions in a sustained way. And a
 control only acquires value when it can show that it detects a deviation: the tests include
-provoked failures —citations to nonexistent destinations, out-of-domain queries, missing chunks,
-a downed provider, answers that try to introduce information that was not retrieved— and every
-new gate was seen in red before being accepted.
+provoked failures —citations to nonexistent destinations, out-of-domain queries, missing chunks, a downed provider— and every new gate was seen in red before being accepted; the answer that tries to introduce information that was not retrieved is caught today by reading, not by a gate.
 
 ## What this application demonstrates about generative artificial intelligence
 
@@ -892,6 +887,5 @@ user can understand the answer, walk through its evidence and recognize when the
 degraded.
 
 The difference between declaring experience in RAG and demonstrating it is this application. I do
-not need to limit myself to describing a possible architecture. With 75 questions of my own and
-136 from outside running on every change, the visitor can ask a question, observe the answer,
+not need to limit myself to describing a possible architecture. With 77 questions of my own and 146 from outside running on every change, the visitor can ask a question, observe the answer,
 open its sources and directly examine the decisions that sustain the system.

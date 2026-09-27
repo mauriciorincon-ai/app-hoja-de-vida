@@ -292,7 +292,7 @@ with more context and with a better understanding of its risks.
 
 The programming languages I work with are Python, R, SQL and DAX; the most advanced level is
 Python. Python with scikit-learn constitutes one of my main bases for developing predictive
-models. It is the environment I used in transport, in banking and at Vesting to structure
+models. It is the environment I used in transport and in banking to structure
 variables, train models, compare results and produce predictions applicable to the corresponding
 problem.
 
@@ -329,7 +329,7 @@ the honest list, tool by tool:
 
 | Tool | Level | Where |
 | --- | --- | --- |
-| Python with scikit-learn, Pandas, NumPy | real work in production | Banco Pichincha, TransMilenio and Vesting |
+| Python with scikit-learn, Pandas, NumPy | real work in production | Banco Pichincha and TransMilenio |
 | Matplotlib, Seaborn, Jupyter | real work, exploration and documentation | all modeling projects |
 | R, RStudio, ggplot2, Shiny | real work, statistical analysis | IBM certification of 2024 and my own analyses |
 | SQL | real work | from Inglopres to today |

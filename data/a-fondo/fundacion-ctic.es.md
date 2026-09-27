@@ -47,7 +47,7 @@ Desde marzo de 2025 trabajo como Profesional de Analítica en la Fundación CTIC
 
 Mi trabajo integra dos responsabilidades complementarias. La primera consiste en desarrollar capacidades analíticas en Power BI que permitan integrar información, modelar procesos administrativos y asistenciales, estructurar indicadores confiables y ofrecer a los líderes una base común para comprender el desempeño institucional y respaldar sus decisiones. La segunda, y actualmente una de las más importantes de mi trayectoria, consiste en liderar la estrategia institucional de inteligencia artificial, orientando la forma en que la organización identifica, evalúa, prioriza, diseña y gobierna sus iniciativas de IA, con la implementación de su sistema de gestión de IA.
 
-Trabajo en línea directa con la Directora de Planeación y con los subdirectores de tecnología, de gestión de la información y de calidad. No lidero un equipo de personas a cargo: lidero procesos completos que integran a una gran cantidad de personas —hoy, 20 líderes de 15 procesos administrativos y asistenciales y unos 75 usuarios de las soluciones analíticas—. Es una forma distinta de liderazgo respecto de la que ejercí en Cafam con un equipo de 20 personas: allí dirigía personas; aquí dirijo la forma en que una institución mide, decide y adopta la inteligencia artificial.
+Trabajo en línea directa con la Dirección de Planeación y con las subdirecciones de tecnología, de gestión de la información y de calidad. No lidero un equipo de personas a cargo: lidero procesos completos que integran a una gran cantidad de personas —hoy, 20 líderes de 15 procesos administrativos y asistenciales y unos 75 usuarios de las soluciones analíticas—. Es una forma distinta de liderazgo respecto de la que ejercí en Cafam con un equipo de 20 personas: allí dirigía personas; aquí dirijo la forma en que una institución mide, decide y adopta la inteligencia artificial.
 
 ## Qué reúne este rol: ingeniería de datos, agentes de IA y arquitectura empresarial
 
@@ -246,7 +246,7 @@ Esta distinción es importante: la analítica no sustituye la responsabilidad de
 
 Lo que sí implementé, y mucho, fueron mejoras en mi propio proceso. La preparación y consolidación de la información que antes se hacía a mano se redujo en cerca del 60 % del esfuerzo —una cifra estimada sobre mi propio trabajo, no una medición institucional—, y los 10 planes de análisis que hoy siguen los procesos salen de una misma base gobernada en lugar de rearmarse cada vez.
 
-Cuando los responsables adoptan una decisión, las soluciones analíticas contribuyen al seguimiento de sus resultados mediante indicadores previamente definidos. Así se cierra el ciclo entre observación, decisión y evaluación sin atribuir a la plataforma, ni al equipo analítico, responsabilidades que pertenecen al gobierno y la gestión del proceso. Actualmente, los 42 productos analíticos se encuentran en uso o seguimiento institucional, respaldando a 20 líderes de 15 procesos administrativos y asistenciales, y han sustentado 10 planes o decisiones de mejora durante el periodo evaluado.
+Cuando los responsables adoptan una decisión, las soluciones analíticas contribuyen al seguimiento de sus resultados mediante indicadores previamente definidos. Así se cierra el ciclo entre observación, decisión y evaluación sin atribuir a la plataforma, ni al equipo analítico, responsabilidades que pertenecen al gobierno y la gestión del proceso. Actualmente, los 42 productos analíticos se encuentran en uso o seguimiento institucional, respaldando a 20 líderes de 15 procesos administrativos y asistenciales, y han sustentado los 10 planes de análisis en seguimiento durante el periodo evaluado.
 
 ## Una arquitectura institucional para la inteligencia artificial: reutilizar sin fragmentar
 
@@ -285,7 +285,7 @@ Actualmente, 42 soluciones analíticas en Power BI se encuentran en uso o seguim
 | Analítica          | líderes respaldados · procesos             |                   20 · 15 |
 | Analítica          | usuarios                                   |                       ~75 |
 | Analítica          | reducción de esfuerzo en preparación       | cerca del 60 % (estimado) |
-| Analítica          | planes de análisis o mejora en seguimiento |                        10 |
+| Analítica          | planes de análisis en seguimiento          |                        10 |
 | IA                 | oportunidades identificadas                |                        12 |
 | IA                 | casos de uso evaluados formalmente         |                         7 |
 | IA                 | iniciativas priorizadas · documentadas     |                     3 · 2 |
