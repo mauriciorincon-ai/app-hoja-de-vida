@@ -61,7 +61,7 @@ system.
 
 I work in a direct line with the Planning Directorate and with the sub-directorates of technology,
 information management and quality. I do not lead a team of direct reports: I lead complete
-processes that bring together a large number of people —today, some 20 leaders of 15 administrative
+processes that bring together a large number of people —today, some 20 leaders of some 15 administrative
 and clinical processes and some 75 users of the analytical solutions—. It is a different form of
 leadership from the one I exercised at Cafam with a team of 20 people: there I directed people;
 here I direct the way an institution measures, decides and adopts artificial intelligence.
@@ -127,7 +127,7 @@ risks introduced and the alternatives that could solve the need with less comple
 start from the available technology but from the problems, the decisions and the capabilities the
 institution needs to strengthen.
 
-With that rule, in little more than a year the strategy has made it possible to identify 12
+With that rule, in little more than a year the strategy has made it possible to identify more than 10
 artificial intelligence opportunities and formally evaluate half of them. The number matters less
 than the filter: each of those opportunities first had to declare what problem it solved and
 for whom.
@@ -154,7 +154,7 @@ were prioritized: that proportion is the result of applying the filter, not of a
 Each initiative must have an explicit purpose, an institutional owner, a clearly identified
 population or process, expected results and evaluation criteria defined before it begins. It must
 also specify what information it will use, which decisions it will support, which actions it could
-execute and which responsibilities will necessarily remain with people. Today 2 of the 3
+execute and which responsibilities will necessarily remain with people. Today the first ones among the
 prioritized initiatives have that file complete and documented.
 
 ## From demonstration to institutional capability: a common vision for AI
@@ -175,7 +175,7 @@ Each initiative must be understood as part of an organizational system and not a
 product.
 
 The strategy is in a progressive process of structuring and consolidation. This involves building
-the institutional instruments —23 to date—, establishing responsibilities, evaluating the first
+the institutional instruments —more than 20 to date—, establishing responsibilities, evaluating the first
 use cases and developing the capacity needed to govern the initiatives throughout their entire
 lifecycle. My work therefore combines leadership of the strategic vision with the practical
 construction of the conditions that will make it possible to implement it sustainably.
@@ -255,7 +255,7 @@ find new uses and risks can transform after implementation. That is why solution
 owners, evidence, follow-up mechanisms and criteria for being updated, restricted or withdrawn
 when they stop fulfilling their purpose.
 
-As part of structuring the management system, the work today comprises 23 institutional
+As part of structuring the management system, the work today comprises more than 20 institutional
 instruments, among them policies, procedures, evaluation matrices, criteria for use cases and
 follow-up mechanisms: a third are finished and the rest under construction. Their progress is measured by
 level of definition, review, approval and application, not only by the existence of the
@@ -328,7 +328,7 @@ mechanism. It makes it possible to compare initiatives under common criteria, ba
 risk, allocate resources consciously and build an implementation sequence consistent with the
 organization's maturity.
 
-To date, the strategy has made it possible to identify 12 artificial intelligence opportunities,
+To date, the strategy has made it possible to identify more than 10 artificial intelligence opportunities,
 formally evaluate half of them and prioritize a few initiatives for validation or progressive
 development. Of these, the first ones have documented owners, expected results, initial risks and evaluation
 criteria. That most of the evaluated cases have not yet moved forward is the filter working, not
@@ -340,7 +340,7 @@ an inventory of failures.
 
 I have developed analytical solutions in Power BI for administrative and clinical leaders,
 structuring semantic models, indicators and visualization experiences adapted to their
-responsibilities, but grounded in consistent institutional definitions. They are 42 analytical
+responsibilities, but grounded in consistent institutional definitions. They are more than 40 analytical
 products —half of them dashboards— that today are used by some 20 leaders of some 15 processes and some 75
 users.
 
@@ -450,7 +450,7 @@ availability and the conditions of use of the information they would need.
 
 I have developed analytical solutions in Power BI for tracking administrative and clinical
 processes, integrating information, semantic models, indicators and visualization experiences
-oriented to the needs of leaders with different responsibilities within the institution: 42
+oriented to the needs of leaders with different responsibilities within the institution: more than 40
 products, of which half are dashboards.
 
 Power BI does not work in this context only as a tool for building dashboards. It is the
@@ -513,7 +513,7 @@ traceable information that is fit for its purpose.
 
 What I did implement, and a lot of it, were improvements in my own process. The preparation and
 consolidation of information that used to be done by hand was reduced by close to 60% of the
-effort —a figure estimated on my own work, not an institutional measurement—, and the 10
+effort —a figure estimated on my own work, not an institutional measurement—, and the ten or so
 analysis plans the processes follow today come out of the same governed base instead of being
 rebuilt each time.
 
@@ -521,7 +521,7 @@ When the owners adopt a decision, the analytical solutions contribute to trackin
 through previously defined indicators. This closes the cycle between observation, decision and
 evaluation without attributing to the platform, or to the analytics team, responsibilities that
 belong to the governance and management of the process. Currently, the more than 40 analytical products are
-in institutional use or follow-up, supporting some 20 leaders of 15 administrative and clinical
+in institutional use or follow-up, supporting some 20 leaders of some 15 administrative and clinical
 processes, and have supported the ten or so analysis plans under follow-up during the period evaluated.
 
 ## An institutional architecture for artificial intelligence: reuse without fragmenting
@@ -586,30 +586,30 @@ proves its value to be integrated, operated, supervised and evolved with consist
 
 <!-- seccion: alcance-y-avance -->
 
-Currently, more than 40 analytical solutions in Power BI are in institutional use or follow-up and support 20
-leaders or owners of 15 administrative and clinical processes. Their scope is evaluated not only
+Currently, more than 40 analytical solutions in Power BI are in institutional use or follow-up and support some 20
+leaders or owners of some 15 administrative and clinical processes. Their scope is evaluated not only
 by the number of products developed, but by their effective use, the reliability of their
 indicators and their incorporation into the spaces where institutional performance is analyzed.
 
-| Dimension         | Metric                                        |                    Value |
-| ----------------- | --------------------------------------------- | -----------------------: |
-| Analytics         | analytical products in use or follow-up       |                       42 |
-| Analytics         | dashboards                                    |                       23 |
-| Analytics         | leaders supported · processes                 |                  20 · 15 |
-| Analytics         | users                                         |                      ~75 |
-| Analytics         | reduction of effort in preparation            | close to 60% (estimated) |
-| Analytics         | analysis plans under follow-up                |                       10 |
-| AI                | opportunities identified                      |                       12 |
-| AI                | use cases formally evaluated                  |                        7 |
-| AI                | initiatives prioritized · documented          |                    3 · 2 |
-| Management system | instruments: finished · under construction    |                   8 · 15 |
+| Dimension         | Metric                                     |                    Value |
+| ----------------- | ------------------------------------------ | -----------------------: |
+| Analytics         | analytical products in use or follow-up    |             more than 40 |
+| Analytics         | dashboards                                 |             more than 20 |
+| Analytics         | leaders supported · processes              |        some 20 · some 15 |
+| Analytics         | users                                      |                      ~75 |
+| Analytics         | reduction of effort in preparation         | close to 60% (estimated) |
+| Analytics         | analysis plans under follow-up             |                 some ten |
+| AI                | opportunities identified                   |             more than 10 |
+| AI                | use cases formally evaluated               |                     half |
+| AI                | initiatives prioritized · documented       |   a few · the first ones |
+| Management system | instruments: finished · under construction |       a third · the rest |
 
 In artificial intelligence, the strategy has made it possible to identify more than 10 opportunities,
 formally evaluate half of them and prioritize a few initiatives for exploration, validation or
 progressive development. Of these, the first ones have documented purpose, owner, expected results, required
 information, initial risks and evaluation criteria.
 
-The construction of the management system currently comprises 23 institutional instruments among
+The construction of the management system currently comprises more than 20 institutional instruments among
 policies, procedures, matrices, evaluation criteria and follow-up mechanisms, a third finished and the rest under construction. These components are in different states of definition, review, approval or
 application, so their progress is communicated according to their real state and not only on
 the basis of the existence of documents.

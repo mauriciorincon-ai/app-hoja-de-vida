@@ -125,6 +125,7 @@ export function verdadesDelSitio() {
     "jobs-ci": jobsCi,
     "preguntas-de-afuera": preguntasDeAfuera,
     "preguntas-propias": preguntasPropias,
+    "preguntas-del-golden-set": preguntasPropias,
   };
 }
 

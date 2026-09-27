@@ -872,7 +872,7 @@ we base ourselves on—, understanding artificial intelligence not as a collecti
 projects, but as an organizational capability that requires a management system. My work
 consists of helping AI initiatives develop within a common framework of policies,
 responsibilities, risk assessment, impact analysis, controls, performance monitoring and
-continuous improvement. The management system has more than 20 instruments: 8 are finished and 15 are
+continuous improvement. The management system has more than 20 instruments: a third are finished and the rest are
 under construction.
 
 Applying this approach begins with understanding the organization's context and determining

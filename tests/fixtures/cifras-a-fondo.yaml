@@ -229,3 +229,16 @@ conceptos:
     hitos:
       - valor: 48
         razon: "el golden set del sprint 8, antes de que el corpus creciera a 25 documentos"
+
+  # El mismo conteo dicho de otra forma: «con 25 documentos son 75 preguntas».
+  # «preguntas propias» no lo casaba y el 75 sobrevivió al PR #56, que nació
+  # justo para cazarlo (hallazgo del harness de hiring, 2026-09-27). El
+  # sustantivo solo es demasiado ancho —«las cinco preguntas» del gobierno de
+  # datos, «tres preguntas» de un análisis—, así que se exige delante la
+  # cuenta de documentos o el nombre del golden set.
+  - id: preguntas-del-golden-set
+    etiqueta: "las preguntas del golden set (las `preguntas_de_prueba` de los documentos)"
+    fuente: "data/a-fondo/*.es.md · `preguntas_de_prueba`"
+    sustantivos: [preguntas]
+    contexto_previo: ["documentos son", "documentos, son", "golden set de", "golden set con", "golden set tiene"]
+    ventana_previa: 40

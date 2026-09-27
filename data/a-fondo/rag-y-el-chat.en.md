@@ -780,10 +780,10 @@ a set of representative questions that allows analyzing retrieval, generation, c
 out-of-scope rejection and degradation. Here two sets run on every change, with the same search
 module production uses.
 
-The first is the golden set: each document of this base declares in its header the three
-questions it must answer, and the test requires that each question bring its document among the
+The first is the golden set: each document of this base declares in its header the
+questions it must answer —three in each one and five in this one—, and the test requires that each question bring its document among the
 first four results. The test travels with the content: adding a document adds its questions to
-the gate without anyone editing the tests. With 25 documents that is 75 questions.
+the gate without anyone editing the tests. With 25 documents that is 77 questions.
 
 The second is the bank of questions written from outside, the way a recruiter or interviewer
 asks: 146 legitimate questions in ten families —career, way of working, certifications, AI and
