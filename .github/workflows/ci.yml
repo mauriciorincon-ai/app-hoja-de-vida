@@ -138,11 +138,13 @@ jobs:
       # LCP, el TBT y qué peticiones cobró el simulador, sin adivinar.
       # `.lighthouseci` empieza con punto: sin `include-hidden-files` la acción no
       # sube nada, y con `ignore` lo callaba (primera corrida del PR #54). `warn`
-      # deja la advertencia en el resumen si algún día vuelve a pasar.
+      # deja la advertencia en el resumen si algún día vuelve a pasar. El intento va
+      # en el nombre: al relanzar el job para juntar más corridas, cada intento
+      # guarda las suyas y no choca con el artefacto del anterior.
       - uses: actions/upload-artifact@v7
         if: always()
         with:
-          name: lighthouse-reports
+          name: lighthouse-reports-${{ github.run_attempt }}
           path: .lighthouseci/lhr-*.json
           include-hidden-files: true
           retention-days: 7

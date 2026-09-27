@@ -37,6 +37,9 @@ path: .lighthouseci/lhr-*.json`. La carpeta empieza con punto, y `upload-artifac
 salvo con `include-hidden-files: true`. El `if-no-files-found: ignore` lo callaba. Ahora lleva
 las dos cosas: sube lo oculto y avisa (`warn`) si no encuentra nada.
 
+El nombre del artefacto lleva el intento (`lighthouse-reports-<n>`): para medir el margen se
+relanza el job varias veces, y cada intento guarda sus propios reportes.
+
 **Esa misma corrida pasó Lighthouse.** Con el mismo `/es`, la cuenta va en **dos de cuatro**: el
 #52 y la primera del #54 pasaron, y `main` y el #53 cayeron. Es un borde, no una regresión.
 
