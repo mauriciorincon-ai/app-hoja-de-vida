@@ -24,16 +24,22 @@ export const inter = Inter({
   display: "optional",
 });
 
-// display optional (patrón ADR-006, como Inter): /cv usa la mono de forma
-// estructural (headings, contacto, periodos) y su swap tardío reacomodaba la
-// página entera (CLS 0.125 en CI). Con optional el fallback métrico-ajustado
-// no desplaza nada.
-// CON preload (2026-09-26): sin él, la fuente se pedía recién cuando el CSS la
-// necesitaba, llegaba tarde a la ventana de optional, y la PRIMERA visita
-// pintaba las cifras de la HOME, de los casos y de /cv en Arial (el fallback
-// de next/font): medido 30 de 30 cargas en frío, con y sin red limitada.
+// La mono, tercera vuelta (2026-09-26, ADR-006 enmendado dos veces ese día).
+// 1) `optional` sin precarga: la PRIMERA visita pintaba las cifras en Arial
+//    (30 de 30 cargas en frío). No se usó `swap` porque el fallback de
+//    next/font es Arial, proporcional, y el cambio reacomodaba /cv (CLS 0.125).
+// 2) Con precarga: cifras en su letra, pero ~170 ms más de LCP en la HOME, que
+//    quedó en el borde del 0,90 de Lighthouse y la CI caía una vez de cada dos.
+// 3) Hoy: `swap` SIN precarga y con fallback PROPIO, monoespaciado y calibrado
+//    con las métricas de la fuente (los @font-face «JBM Fallback» de
+//    globals.css). Las cifras llegan a su letra también en la primera visita,
+//    el cambio no mueve nada (CLS 0,000 en las 15 URLs de la CI) y la HOME
+//    recupera el margen. `adjustFontFallback: false` apaga el de Arial.
 export const jetbrains = JetBrains_Mono({
   variable: "--font-jetbrains",
   subsets: ["latin"],
-  display: "optional",
+  display: "swap",
+  preload: false,
+  adjustFontFallback: false,
+  fallback: ["JBM Fallback Menlo", "JBM Fallback Courier", "monospace"],
 });

@@ -307,13 +307,16 @@ test.describe("un archivo que no existe en la raíz del sitio", () => {
 });
 
 test.describe("las cifras, en su letra desde la primera visita", () => {
-  // Hasta 2026-09-26 JetBrains Mono iba sin preload: el navegador la pedía
-  // recién cuando el CSS la necesitaba, llegaba tarde a la ventana de
-  // `display: optional`, y la PRIMERA visita —la única de un reclutador—
-  // pintaba las cifras en Arial, el fallback de next/font (30 de 30 cargas en
-  // frío, con y sin red limitada). Aquí se le pregunta al motor qué fuente usó
-  // DE VERDAD para pintar el nodo (CDP), no qué pide el CSS. Cada test abre un
-  // contexto nuevo: caché vacía.
+  // Hasta 2026-09-26 JetBrains Mono iba sin preload con `display: optional`:
+  // llegaba tarde a su ventana y la PRIMERA visita —la única de un
+  // reclutador— pintaba las cifras en Arial (30 de 30 cargas en frío). Esa
+  // mañana se precargó; esa noche, para devolverle margen al LCP de la HOME,
+  // pasó a `swap` SIN precarga y con un fallback monoespaciado calibrado
+  // (globals.css): la fuente llega un instante después y reemplaza al
+  // fallback sin mover nada. Por eso aquí se espera a `document.fonts.ready`
+  // antes de preguntar. Se le pregunta al motor qué fuente usó DE VERDAD para
+  // pintar el nodo (CDP), no qué pide el CSS. Cada test abre un contexto
+  // nuevo: caché vacía.
   const casos: [string, string][] = [
     ["/es", "#logros p.font-mono"],
     ["/es/proyectos/vesting", "p.font-mono.tabular-nums"],
@@ -329,6 +332,7 @@ test.describe("las cifras, en su letra desde la primera visita", () => {
       );
       await page.goto(ruta);
       await page.locator(selector).first().scrollIntoViewIfNeeded();
+      await page.evaluate(() => document.fonts.ready);
       const cdp = await page.context().newCDPSession(page);
       await cdp.send("DOM.enable");
       await cdp.send("CSS.enable");
@@ -346,6 +350,85 @@ test.describe("las cifras, en su letra desde la primera visita", () => {
       ).toEqual(["JetBrains Mono"]);
     });
   }
+});
+
+test.describe("el fallback de las cifras ocupa la misma caja que JetBrains Mono", () => {
+  // 2026-09-26: con `swap`, las cifras se pintan primero en el fallback y
+  // después en JetBrains Mono. Si el fallback no mide lo mismo, el cambio
+  // MUEVE la página: con el de next/font (Arial, proporcional) una ficha de la
+  // vitrina marcó CLS 0,257 en Lighthouse. El fallback está calibrado en
+  // globals.css contra las métricas de la fuente (avance 0,6 em, ascenso
+  // 1,02, descenso 0,30). Este test lo mide en el sistema donde corre —en la
+  // CI, Linux— y además dice qué fuente local encontró: si no hay ninguna de
+  // las calibradas, cae al `monospace` genérico y aquí se ve.
+  test("mismo ancho y mismo alto de línea, y el fallback es una de las calibradas", async ({
+    page,
+  }, testInfo) => {
+    test.skip(
+      testInfo.project.name !== "chromium",
+      "CDP: basta con Chromium de escritorio",
+    );
+    await page.goto("/es");
+    // Primero, que las cifras DE LA PÁGINA usen este fallback: si alguien
+    // vuelve al de next/font, la medición de abajo seguiría en verde.
+    const familia = await page
+      .locator("#logros p.font-mono")
+      .first()
+      .evaluate((el) => getComputedStyle(el).fontFamily);
+    expect(familia, "las cifras no llevan el fallback calibrado").toMatch(
+      /JetBrains Mono"?,\s*"?JBM Fallback Menlo"?,\s*"?JBM Fallback Courier/,
+    );
+    await page.evaluate(() => document.fonts.load("16px 'JetBrains Mono'"));
+    const cajas = await page.evaluate(() => {
+      const texto = "0123456789 AI-103 · 23 AGENTES / 27";
+      const medir = (familia: string, id: string) => {
+        const s = document.createElement("span");
+        s.id = id;
+        s.textContent = texto;
+        s.style.cssText = `font-family:${familia};font-size:16px;line-height:normal;white-space:nowrap;position:absolute;top:0;left:0`;
+        document.body.appendChild(s);
+        const r = s.getBoundingClientRect();
+        return { ancho: r.width, alto: r.height };
+      };
+      return {
+        jetbrains: medir("'JetBrains Mono'", "caja-jetbrains"),
+        fallback: medir(
+          "'JBM Fallback Menlo', 'JBM Fallback Courier', monospace",
+          "caja-fallback",
+        ),
+      };
+    });
+    const cdp = await page.context().newCDPSession(page);
+    await cdp.send("DOM.enable");
+    await cdp.send("CSS.enable");
+    const { root } = await cdp.send("DOM.getDocument", { depth: -1 });
+    const { nodeId } = await cdp.send("DOM.querySelector", {
+      nodeId: root.nodeId,
+      selector: "#caja-fallback",
+    });
+    const { fonts } = await cdp.send("CSS.getPlatformFontsForNode", { nodeId });
+    const calibradas = [
+      "Menlo",
+      "DejaVu Sans Mono",
+      "Bitstream Vera Sans Mono",
+      "Courier New",
+      "Liberation Mono",
+      "Cousine",
+    ];
+    expect(
+      fonts.map((f) => f.familyName).filter((f) => calibradas.includes(f)),
+      `el fallback se pintó con ${fonts.map((f) => f.familyName).join(", ")}: ninguna es de las calibradas`,
+    ).not.toEqual([]);
+    const { jetbrains, fallback } = cajas;
+    expect(
+      Math.abs(fallback.ancho - jetbrains.ancho) / jetbrains.ancho,
+      `ancho: fallback ${fallback.ancho.toFixed(2)} px, JetBrains ${jetbrains.ancho.toFixed(2)} px`,
+    ).toBeLessThan(0.005);
+    expect(
+      Math.abs(fallback.alto - jetbrains.alto),
+      `alto de línea: fallback ${fallback.alto.toFixed(2)} px, JetBrains ${jetbrains.alto.toFixed(2)} px`,
+    ).toBeLessThan(0.5);
+  });
 });
 
 test.describe("una cita del chat aterriza en su tarjeta de Skills", () => {

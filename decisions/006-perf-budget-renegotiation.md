@@ -103,3 +103,39 @@ The HOME pays about 176 ms of simulated LCP for one more preloaded file (the 40 
 variable font). Budgets are unchanged: the CI Lighthouse job (15 URLs, median of 3) is the gate
 that decides whether this fits. An e2e (`tests/e2e/home.spec.ts`) asks the engine which font
 actually painted the figures, so a regression back to Arial fails in CI.
+
+## Amendment (2026-09-26, evening): JetBrains Mono swaps into a calibrated fallback
+
+The morning's preload left `/es` on the edge of the 0.90 performance floor: after it, the CI
+Lighthouse job failed `/es` at 0.89 twice in a row on a PR that did not touch the page, and passed
+on `main` with the same page. Lighthouse's simulated LCP (lantern) counts **every request that
+started before the observed LCP** (all non-low-priority-image nodes), so a preloaded font is paid
+in full even when the LCP element is plain text in another face.
+
+Measured locally with `lhci collect` (median of 3, all 15 CI URLs) at `cpuSlowdownMultiplier` 12,
+which reproduces the CI's 0.89 on `/es`:
+
+| Option                                                    | `/es` perf | worst URL | max CLS |
+| --------------------------------------------------------- | ---------- | --------- | ------- |
+| main (preload + `optional`)                               | 0.89       | 0.89      | 0.000   |
+| B: `swap`, no preload, next/font fallback (Arial)         | 0.91       | **0.78**  | **0.257** |
+| D: `swap`, no preload, **calibrated monospace fallback**  | 0.91       | 0.91      | 0.000   |
+
+B was rejected: Arial is proportional, and the swap moved `/es/vitrina/agentes/hr-develop-ai-apps`
+by CLS 0.257 (the same failure mode that sent `/cv` to `optional` in Sprint 2). D keeps the swap
+and removes the shift: `adjustFontFallback: false` and two local `@font-face` fallbacks in
+`globals.css`, calibrated from the font's metrics read with fontkit (advance 0.6 em, ascent 1.02,
+descent 0.30, no line gap): "JBM Fallback Menlo" (Menlo / DejaVu Sans Mono, advance 1233/2048,
+size-adjust 99.66 %) and "JBM Fallback Courier" (Courier New / Liberation Mono / Cousine, advance
+1229/2048, size-adjust 99.98 %), each with ascent/descent/line-gap overrides.
+
+At Lighthouse's default CPU, all 15 URLs pass both CI assertions (budget and categories); worst
+median 0.91, `/es` 0.92/0.92/0.92 (it was 0.90/0.91/0.91). The figures still reach JetBrains Mono on
+the first visit, now by swapping instead of by preloading; on a slow connection the visitor may
+see a similar monospace face for a moment, and nothing moves.
+
+Two e2e tests in `tests/e2e/home.spec.ts` guard it: the existing one (which font painted the
+figures, now after `document.fonts.ready`) and a new one: the page's figures carry the calibrated
+fallback chain, the fallback resolves to one of the calibrated local faces, and it occupies the
+same box as JetBrains Mono (width within 0.5 %, line height within 0.5 px). **If the mono font
+changes, the fallback must be recalibrated.**
