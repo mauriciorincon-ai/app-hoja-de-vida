@@ -52,8 +52,25 @@ retraso a la animación de entrada. Es falso: el resumen se pinta **estático, a
 (`src/components/home/hero.tsx` lo dice: «cualquier animación retrasa su registro en el simulador
 móvil»). La causa del retraso no se investigó en este PR.
 
-**Deuda declarada, sin pago en este PR:** el retraso de render del resumen del hero, con su causa
-por encontrar. El umbral no se afloja.
+**Segunda corrida (d609a8f), otra vez 0,89 en `/es`.** Ya no se podía tratar como un tiro de
+dados sin más, así que se midió más cerca de la CI: el runner es más lento que la máquina local, y
+se simuló con `cpuSlowdownMultiplier=12`:
+
+| Skills, CPU ×12 | Rendimiento        | TBT          | LCP     |
+| --------------- | ------------------ | ------------ | ------- |
+| antes del #50   | 0,88 · 0,89 · 0,89 | 116–169 ms   | ~3,6 s  |
+| después del #50 | 0,89 · 0,89 · 0,89 | 125–149 ms   | ~3,6 s  |
+
+Con la CPU lenta se reproduce el 0,89, **y da igual antes o después del #50**. El mismo `/es`
+(idéntico: este PR no lo toca) pasó en `main` tras el merge del #50 y cayó dos veces aquí: la
+página vive en el borde y la CI cae de un lado o del otro. Lo que el reporte muestra, sin más: el
+resumen está en el HTML, no espera fuente (`font-display` en verde), su LCP es casi todo retraso
+de render (~3,2 s) y el arranque de scripts de la página suma ~0,6 s con la CPU ×12
+(`bootup-time`). **Hipótesis, sin comprobar:** que el simulador le cargue al LCP el script que corrió
+antes de la pintura observada.
+
+**Deuda declarada, sin pago en este PR:** darle margen a `/es`, empezando por comprobar esa
+hipótesis. Afecta a cualquier PR, no a este. El umbral no se afloja.
 
 ## Verificación
 
