@@ -93,16 +93,22 @@ Cifras SIEMPRE con `tabular-nums` (counters, métricas, fechas).
 
 **Carga de las tres fuentes (next/font):** Fraunces 500 estática con `swap` y precarga; Inter con
 `display: optional` y precarga (sin salto de layout: si no llega a tiempo, queda el fallback
-métrico). **JetBrains Mono, desde la noche del 2026-09-26: `swap`, SIN precarga y con fallback
-propio**: dos `@font-face` locales («JBM Fallback Menlo» = Menlo / DejaVu Sans Mono y «JBM
-Fallback Courier» = Courier New / Liberation Mono), monoespaciados como ella y **calibrados** con
-sus métricas (avance 0,6 em, ascenso 1,02, descenso 0,30) en `globals.css`. Las cifras llegan a su
-letra también en la primera visita y el cambio no mueve nada (CLS 0,000 en las 15 URLs de la CI).
-Historia: con `optional` sin precarga la primera visita las pintaba en Arial; con precarga
-llegaban, pero la HOME pagaba ~170 ms de LCP y quedaba en el borde del 0,90 de Lighthouse; con
-`swap` y el fallback de next/font (Arial, proporcional) una ficha marcó CLS 0,257. Lo vigilan dos
-e2e de `tests/e2e/home.spec.ts`: qué fuente pintó las cifras, y que el fallback ocupe la misma
-caja que la fuente. **Si cambia la fuente mono, se recalibra el fallback.**
+métrico). **JetBrains Mono, desde la noche del 2026-09-26: `swap`, SIN precarga, encendida DESPUÉS
+del evento `load` y con fallback propio.** `font-mono` apunta a `--fuente-mono`, que es el fallback
+hasta que `carga-la-mono.tsx` marca `mono-lista` en `<html>`: una fuente solo se descarga si algún
+texto la usa, y así no se pide antes de la primera pintura. Ningún componente nombra la familia a
+mano (el BPMN lo hacía y la pedía por su cuenta). El fallback son dos `@font-face` locales («JBM
+Fallback Menlo» = Menlo / DejaVu Sans Mono y «JBM Fallback Courier» = Courier New / Liberation
+Mono), monoespaciados como ella y **calibrados** con sus métricas (avance 0,6 em, ascenso 1,02,
+descenso 0,30) en `globals.css`: las cifras llegan a su letra también en la primera visita y el
+cambio no mueve nada (CLS 0,000 en las 15 URLs de la CI). Historia: con `optional` sin precarga la
+primera visita las pintaba en Arial; con precarga llegaban, pero la HOME pagaba ~170 ms de LCP y
+quedaba en el borde del 0,90 de Lighthouse; con `swap` y el fallback de next/font (Arial,
+proporcional) una ficha marcó CLS 0,257; con `swap` sin precarga el navegador la pedía igual al
+armar la página y en la CI seguía cayendo antes del LCP. Lo vigilan tres e2e de
+`tests/e2e/home.spec.ts`: qué fuente pintó las cifras, que el fallback ocupe la misma caja que la
+fuente y que la petición de JetBrains empiece después de la carga. **Si cambia la fuente mono, se
+recalibra el fallback.**
 
 ### Spacing, radios, sombras
 

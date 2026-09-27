@@ -7,6 +7,7 @@ import {
   setRequestLocale,
 } from "next-intl/server";
 import { notFound } from "next/navigation";
+import { CargaLaMono } from "@/components/carga-la-mono";
 import { ChatLauncher } from "@/components/chat/chat-launcher";
 import { MotionProvider } from "@/components/motion/motion-provider";
 import { routing } from "@/i18n/routing";
@@ -91,6 +92,7 @@ export default async function LocaleLayout({
           {chatEnabled && <ChatLauncher />}
         </NextIntlClientProvider>
         <Analytics />
+        <CargaLaMono />
       </body>
     </html>
   );

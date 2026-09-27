@@ -14,7 +14,13 @@ import { G, trazar, type Proceso } from "@/lib/vitrina/bpmn";
 
 const FUENTE =
   "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif";
-const MONO = "'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace";
+// La mono va por la variable del sitio y no por nombre (2026-09-26): nombrar
+// «JetBrains Mono» aquí hacía que el navegador la pidiera al armar la página,
+// antes de la primera pintura, y el simulador de Lighthouse se la cobraba al
+// LCP de las fichas con proceso. `--fuente-mono` es el fallback calibrado
+// hasta que `carga-la-mono.tsx` enciende JetBrains tras la carga. Va en
+// `style` porque un atributo de presentación de SVG no resuelve `var()`.
+const MONO = { fontFamily: "var(--fuente-mono)" } as const;
 
 export function ProcesoBpmn({
   proceso,
@@ -65,7 +71,7 @@ export function ProcesoBpmn({
           <text
             x={8}
             y={G.MARGEN_SUP - 12}
-            fontFamily={MONO}
+            style={MONO}
             fontSize={10.5}
             fontWeight={500}
             letterSpacing={1.4}
@@ -115,7 +121,7 @@ export function ProcesoBpmn({
                         (c.lineas.length - 1) * 6.5 +
                         li * 13
                       }
-                      fontFamily={MONO}
+                      style={MONO}
                       fontSize={10}
                       fontWeight={500}
                       letterSpacing={1.2}
@@ -163,7 +169,7 @@ export function ProcesoBpmn({
 
           {/* Eventos de enlace (cuando el proceso se parte en filas) */}
           {t.enlaces.map((e) => (
-            <g key={e.letra} fontFamily={MONO} fontSize={10} fontWeight={600}>
+            <g key={e.letra} style={MONO} fontSize={10} fontWeight={600}>
               {[e.salida, e.entrada].map((p, k) => (
                 <g key={k}>
                   <circle
@@ -298,7 +304,7 @@ export function ProcesoBpmn({
                   <text
                     x={n.r - 2}
                     y={n.t + 5.5}
-                    fontFamily={MONO}
+                    style={MONO}
                     fontSize={9}
                     fontWeight={600}
                     textAnchor="middle"

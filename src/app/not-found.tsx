@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import en from "../../messages/en.json";
 import es from "../../messages/es.json";
+import { CargaLaMono } from "@/components/carga-la-mono";
 import { fraunces, inter, jetbrains } from "./fuentes";
 import "./globals.css";
 
@@ -25,6 +26,7 @@ export default function RootNotFound() {
       className={`${fraunces.variable} ${inter.variable} ${jetbrains.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-paper-0 text-ink-1 font-sans">
+        <CargaLaMono />
         <main
           id="contenido"
           className="grid min-h-svh flex-1 place-items-center px-4"

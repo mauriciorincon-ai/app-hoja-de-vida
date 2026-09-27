@@ -306,17 +306,26 @@ test.describe("un archivo que no existe en la raíz del sitio", () => {
   });
 });
 
+/** Que la página haya cargado JetBrains Mono por su cuenta. */
+const jetbrainsCargada = () =>
+  Array.from(document.fonts).some(
+    (f) =>
+      f.family.replace(/["']/g, "") === "JetBrains Mono" &&
+      f.status === "loaded",
+  );
+
 test.describe("las cifras, en su letra desde la primera visita", () => {
   // Hasta 2026-09-26 JetBrains Mono iba sin preload con `display: optional`:
   // llegaba tarde a su ventana y la PRIMERA visita —la única de un
   // reclutador— pintaba las cifras en Arial (30 de 30 cargas en frío). Esa
   // mañana se precargó; esa noche, para devolverle margen al LCP de la HOME,
   // pasó a `swap` SIN precarga y con un fallback monoespaciado calibrado
-  // (globals.css): la fuente llega un instante después y reemplaza al
-  // fallback sin mover nada. Por eso aquí se espera a `document.fonts.ready`
-  // antes de preguntar. Se le pregunta al motor qué fuente usó DE VERDAD para
-  // pintar el nodo (CDP), no qué pide el CSS. Cada test abre un contexto
-  // nuevo: caché vacía.
+  // (globals.css), y desde la misma noche se enciende tras el evento `load`
+  // (`carga-la-mono.tsx`): la fuente llega después y reemplaza al fallback sin
+  // mover nada. Por eso aquí se espera a que la PÁGINA la haya cargado —no se
+  // la carga el test— antes de preguntar. Se le pregunta al motor qué fuente
+  // usó DE VERDAD para pintar el nodo (CDP), no qué pide el CSS. Cada test
+  // abre un contexto nuevo: caché vacía.
   const casos: [string, string][] = [
     ["/es", "#logros p.font-mono"],
     ["/es/proyectos/vesting", "p.font-mono.tabular-nums"],
@@ -332,7 +341,7 @@ test.describe("las cifras, en su letra desde la primera visita", () => {
       );
       await page.goto(ruta);
       await page.locator(selector).first().scrollIntoViewIfNeeded();
-      await page.evaluate(() => document.fonts.ready);
+      await page.waitForFunction(jetbrainsCargada);
       const cdp = await page.context().newCDPSession(page);
       await cdp.send("DOM.enable");
       await cdp.send("CSS.enable");
@@ -369,6 +378,9 @@ test.describe("el fallback de las cifras ocupa la misma caja que JetBrains Mono"
       "CDP: basta con Chromium de escritorio",
     );
     await page.goto("/es");
+    await page.waitForFunction(() =>
+      document.documentElement.classList.contains("mono-lista"),
+    );
     // Primero, que las cifras DE LA PÁGINA usen este fallback: si alguien
     // vuelve al de next/font, la medición de abajo seguiría en verde.
     const familia = await page
@@ -429,6 +441,73 @@ test.describe("el fallback de las cifras ocupa la misma caja que JetBrains Mono"
       `alto de línea: fallback ${fallback.alto.toFixed(2)} px, JetBrains ${jetbrains.alto.toFixed(2)} px`,
     ).toBeLessThan(0.5);
   });
+});
+
+test.describe("JetBrains Mono se pide DESPUÉS de la carga", () => {
+  // 2026-09-26, cuarta vuelta del ADR-006. Sin precarga, el navegador pedía
+  // la mono igual al armar la página, porque hay texto mono en todas; en la CI
+  // eso caía antes del LCP observado y el simulador de Lighthouse se la
+  // cobraba: era la última petición en 43 de 45 corridas y `/es` quedaba en
+  // 0,89 una vez de cada dos. Ahora ningún texto la usa hasta el evento `load`
+  // (`carga-la-mono.tsx`). Este test lee de las @font-face de la página las
+  // URLs de JetBrains y exige que cada petición suya empiece después de
+  // `loadEventStart`. `habla` porque su ficha dibuja un proceso BPMN, que
+  // nombraba la familia a mano y la pedía por su cuenta.
+  for (const ruta of ["/es", "/es/vitrina/apps/habla"]) {
+    test(`${ruta}: la petición de la mono empieza tras el evento load`, async ({
+      page,
+    }, testInfo) => {
+      test.skip(
+        testInfo.project.name !== "chromium",
+        "basta con Chromium de escritorio",
+      );
+      await page.goto(ruta);
+      await page.waitForFunction(jetbrainsCargada);
+      const { peticiones, carga } = await page.evaluate(() => {
+        const urls = new Set<string>();
+        for (const hoja of Array.from(document.styleSheets)) {
+          let reglas: CSSRuleList;
+          try {
+            reglas = hoja.cssRules;
+          } catch {
+            continue;
+          }
+          for (const regla of Array.from(reglas)) {
+            if (!(regla instanceof CSSFontFaceRule)) continue;
+            const familia = regla.style.getPropertyValue("font-family");
+            if (!familia.includes("JetBrains Mono")) continue;
+            const src = regla.style.getPropertyValue("src");
+            for (const m of src.matchAll(/url\("?([^")]+)"?\)/g)) {
+              urls.add(new URL(m[1], hoja.href ?? location.href).href);
+            }
+          }
+        }
+        const nav = performance.getEntriesByType(
+          "navigation",
+        )[0] as PerformanceNavigationTiming;
+        return {
+          peticiones: performance
+            .getEntriesByType("resource")
+            .filter((e) => urls.has(e.name))
+            .map((e) => ({
+              archivo: e.name.split("/").pop(),
+              inicio: Math.round(e.startTime),
+            })),
+          carga: Math.round(nav.loadEventStart),
+        };
+      });
+      expect(
+        peticiones,
+        `${ruta}: JetBrains Mono cargó sin una petición suya registrada`,
+      ).not.toEqual([]);
+      for (const p of peticiones) {
+        expect(
+          p.inicio,
+          `${ruta}: ${p.archivo} se pidió a los ${p.inicio} ms y la página terminó de cargar a los ${carga} ms`,
+        ).toBeGreaterThanOrEqual(carga);
+      }
+    });
+  }
 });
 
 test.describe("una cita del chat aterriza en su tarjeta de Skills", () => {

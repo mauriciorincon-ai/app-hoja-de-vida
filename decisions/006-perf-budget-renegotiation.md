@@ -139,3 +139,32 @@ figures, now after `document.fonts.ready`) and a new one: the page's figures car
 fallback chain, the fallback resolves to one of the calibrated local faces, and it occupies the
 same box as JetBrains Mono (width within 0.5 %, line height within 0.5 px). **If the mono font
 changes, the fallback must be recalibrated.**
+
+## Amendment (2026-09-26, night): JetBrains Mono waits for the load event
+
+The evening amendment did not hold in CI. With the same `/es`, the Lighthouse job passed on PR #52,
+failed on `main` right after the merge (1414006) and on PR #53 (which does not touch the page), and
+passed again on PR #54: two of four, `/es` at 0.89 when it failed. The local CPU ×12 measurement
+(0.91) no longer predicted the runner.
+
+The CI job now uploads its `lhr-*.json` reports (artifact `lighthouse-reports`), and they showed
+why. Without a preload the browser still requested JetBrains Mono while laying out the page,
+because every page has monospace text somewhere. On the runner that request started at ~100 ms and
+the observed LCP landed at ~130 ms, so lantern still counted it. It was the **last** request before
+the observed LCP in 43 of the 45 runs (and before it in all 45), on every URL. On the Mac the paint came first, which is why
+the local numbers improved and CI did not.
+
+A font is only downloaded when some text uses it. `font-mono` now resolves to `--fuente-mono`,
+which is the calibrated fallback until `src/components/carga-la-mono.tsx` adds `mono-lista` to
+`<html>` after the `load` event; then it becomes `var(--font-jetbrains)`. The BPMN diagram named
+`'JetBrains Mono'` directly and requested it on its own; it now uses the same variable (in `style`,
+since an SVG presentation attribute does not resolve `var()`). Without JavaScript the figures stay
+in the fallback, which occupies the same box.
+
+A new e2e in `tests/e2e/home.spec.ts` reads the JetBrains `@font-face` URLs from the page and
+requires every request for them to start after `loadEventStart`, on `/es` and on
+`/es/vitrina/apps/habla` (the one with a BPMN diagram). Locally, JetBrains now starts at 91–155 ms,
+after the observed LCP, and the bytes before it drop from 385 to 345 KB. What remains is mostly
+JavaScript (~234 KB), so this is a point or two of margin, not a jump; the CI reports are what
+confirm it.
+
