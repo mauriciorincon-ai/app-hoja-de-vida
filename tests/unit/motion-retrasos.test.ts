@@ -8,9 +8,11 @@ import { calcularRetrasos } from "@/components/motion/retrasos";
  * pieza de la HOME (`muestras/2026-09-27-tbt/arranques-antes.txt`): los ítems
  * directos a `stagger × i`; en Skills, la cabecera de la tarjeta i a
  * `0,2·i + 0,8` y sus chips detrás cada 0,1 s en la MISMA cuenta que la
- * cabecera; el trazo de los iconos y el pulso de las cifras con retraso
- * absoluto desde el disparo, sin ocupar turno. Este test le exige eso al
- * modelo sobre un DOM con la forma de la página.
+ * cabecera; el pulso de las cifras con retraso absoluto desde el disparo, sin
+ * ocupar turno. (El trazo de los iconos corría también absoluto; desde la
+ * opción A del dueño lo orquesta su cabecera.) Este test le exige eso al
+ * modelo sobre un DOM con la forma de la página; los números son del modelo,
+ * no las constantes vigentes de Skills.
  */
 const retraso = (el: Element | null) =>
   (el as HTMLElement | null)?.style.getPropertyValue("--reveal-delay") ?? null;
@@ -23,10 +25,10 @@ function skills() {
           (i) => `
         <div id="card${i}" data-reveal-item="liftIn" data-hijos="0.8,0.1">
           <article>
-            <div id="cab${i}" data-reveal-item="fadeInUp">
+            <div id="cab${i}" data-reveal-item="fadeInUp" data-hijos="0.2,0.2">
               <svg>
-                <path id="p${i}a" data-reveal-item="trazo" data-retraso style="--reveal-delay: 1s"></path>
-                <path id="p${i}b" data-reveal-item="trazo" data-retraso style="--reveal-delay: 1.2s"></path>
+                <path id="p${i}a" data-reveal-item="trazo"></path>
+                <path id="p${i}b" data-reveal-item="trazo"></path>
               </svg>
             </div>
             <div class="chips">
@@ -75,15 +77,16 @@ describe("calcularRetrasos: el reparto medido sobre la versión con la librería
     expect([r("cab2"), r("c20")]).toEqual(["1.2s", "1.3s"]);
   });
 
-  it("un ítem con data-retraso conserva su retraso absoluto y no ocupa turno", () => {
+  it("el trazo lo orquesta la cabecera: sigue a su tarjeta y no le quita turno a los chips", () => {
     const r = skills();
-    // El trazo: 1,0 s y 1,2 s en TODAS las tarjetas (medido), tal como llegó inline.
-    expect([r("p0a"), r("p0b"), r("p2a")]).toEqual(["1s", "1.2s", "1s"]);
-    // Si los paths ocuparan turno, el primer chip caería en 1,1 s y no en 0,9 s.
+    // cabecera + 0,2, y 0,2 entre figuras — en cada tarjeta desde SU cabecera.
+    expect([r("p0a"), r("p0b"), r("p2a")]).toEqual(["1s", "1.2s", "1.4s"]);
+    // Los paths cuentan bajo la cabecera, no bajo la tarjeta: el primer chip
+    // sigue en 0,9 s.
     expect(r("c00")).toBe("0.9s");
   });
 
-  it("la vitrina asomada: las cajas escalonadas y el pulso de cada una con su retraso propio", () => {
+  it("un ítem con data-retraso conserva su retraso absoluto y no ocupa turno (el pulso de la vitrina)", () => {
     document.body.innerHTML = `
       <ul id="g" data-reveal-group data-stagger="0.14">
         <li id="l0" data-reveal-item="fadeInSlow"><span id="s0" data-reveal-item="pulso" data-retraso style="--reveal-delay: 0s"></span></li>

@@ -140,3 +140,39 @@ Restaurados los dos archivos desde su respaldo, build de nuevo y la prueba en ve
 
 Gate ⭐ del dueño: la a4 de la guía (v9.16) pide recorrer la HOME entera, bajando y subiendo, y
 decir si alguna sección entra distinto. Es el único juez de lo visual.
+
+## Revisión del dueño, el mismo día
+
+**a4 ⭐ APROBADA por el dueño en la preview del PR** (_«Está perfecta, la vi en preview y todo
+fluye bien»_). Las casillas de la guía viven en su navegador; la aprobación queda aquí. La CI del
+primer commit (678d7cd) salió 6/6 en verde: en GitHub, `/es` 0,93 · 0,95 y las otras catorce
+0,94–0,99.
+
+Dos pedidos suyos, en la misma rama:
+
+**1. Certificaciones sin texto.** Solo las tres de Microsoft tenían `nota` (el fondo más oscuro
+marca «tiene nota»); pidió que todas lo tuvieran y que quedaran «bien descritas e impactantes».
+Las cuatro de IBM llevan ahora una nota en los dos idiomas, sacada de su documento
+`certificaciones` del corpus, y la del AI-103 se afinó con lo que ese documento ya dice (la ruta
+que practica en la Fundación CTIC). Aprobadas por el dueño sobre la propuesta; las de DP-600 y
+AI-300 no cambian. El PDF no imprime la nota: sigue en dos páginas.
+
+**2. «Skills se demora en entrar».** No lo causó este PR: los tiempos medidos eran idénticos. La
+partitura se aprobó con cinco tarjetas y desde el #50 son nueve, así que la novena arrancaba a
+los 1,6 s y sus chips terminaban pasados los 3,5 s. El dueño eligió la **opción A**: tarjetas
+cada 0,12 s (lo que ya decía la tabla del design system), cabecera a los 0,5 s, chips cada
+0,06 s; la tarjeta sigue aterrizando en 1,4 s. Y una corrección que la medición dejó ver: con la
+librería el trazo del icono corría con retraso absoluto (1,0 s desde el disparo), así que en las
+tarjetas de atrás se dibujaba **antes de que su cabecera apareciera**, escondido tras la opacidad
+0 de la cabecera. Ahora lo orquesta su cabecera (`hijos` en el `StaggerItem` de la cabecera:
+0,2 s después de ella y 0,2 s entre figuras) y sigue a su tarjeta. `motion-retrasos.test.ts` lo
+exige.
+
+Medido (`arranques-opcion-A.txt`): tarjetas 58 / 174 / 291 ms; cabecera de la tarjeta 0 a 557 y
+de la 1 a 674; trazo de la 0 a 757 y 957, de la 1 a 874 (sigue a su tarjeta); chips de la 0 a
+606 / 674 / 723. La partitura de nueve tarjetas termina hacia los 2,5 s.
+
+Verificación de la vuelta: `pnpm test` 1353 · `typecheck` y `lint` limpios · e2e `home` +
+`reduced-motion` + `axe`: 262 pasan, 6 saltadas · `/es` CPU ×12: 0,94 · 0,94 · 0,94, TBT 57–73
+ms, CLS 0.
+

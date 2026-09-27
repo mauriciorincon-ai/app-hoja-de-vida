@@ -9,8 +9,10 @@
  *    contiene: arrancan a `su propio retraso + hijos.delay + hijos.escalon ×
  *    j`, con la cabecera y los chips en una sola cuenta, en orden del DOM.
  *  - Un ítem con `data-retraso` trae su retraso ABSOLUTO desde el disparo del
- *    grupo, inline en `--reveal-delay` (el pulso de las cifras, el trazo de
- *    los iconos), y no ocupa turno en ninguna cuenta.
+ *    grupo, inline en `--reveal-delay` (el pulso de las cifras de la
+ *    vitrina), y no ocupa turno en ninguna cuenta. (El trazo de los iconos
+ *    corría así con la librería; desde la opción A del dueño lo orquesta su
+ *    cabecera, para que siga a su tarjeta.)
  *
  * Es una función pura sobre el DOM, sin React: la prueba unitaria la corre en
  * jsdom y la pone en rojo cambiando una regla.

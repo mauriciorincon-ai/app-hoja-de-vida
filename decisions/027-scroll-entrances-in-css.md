@@ -48,7 +48,10 @@ Entrances are CSS transitions driven by data attributes, with one small client o
   Playwright on the library version** (`muestras/2026-09-27-tbt/arranques-antes.txt`): direct
   items at `delay + stagger × i`; an item with `hijos` starts its children at
   `its own delay + hijos.delay + hijos.escalon × j`, header and chips in one count in DOM order;
-  an item with `data-retraso` keeps its absolute delay and takes no turn.
+  an item with `data-retraso` keeps its absolute delay and takes no turn. (The icon strokes ran
+  with an absolute delay under the library and were reproduced so first; on the owner's review the
+  same day they became children of the card's header, so each stroke follows its own card — see
+  the log's «Revisión del dueño».)
 - `Counter` and `TimelineTrack` stay client components (they hold state) with their own
   `IntersectionObserver` / scroll listener; `usePrefiereQuieto` replaces `useReducedMotion`
   (`useSyncExternalStore`, `null` on the server — rule 5(a) unchanged). The timeline fill is

@@ -99,17 +99,23 @@ export function tieneDibujo(id: string): boolean {
 const ROMBO = [<path key="a" d="M12 3l9 9-9 9-9-9z" />];
 
 /**
- * La partitura de una tarjeta de Skills (post-S8, segunda vuelta), en segundos
- * desde que la tarjeta arranca. Cada tarjeta corre la suya desplazada
- * `ESCALON_SKILLS_S × i`: aterriza vacía (1,4 s) → a los 0,8 s la cabecera y,
- * 0,2 s después, el trazo → los chips, uno cada 0,1 s, detrás de la cabecera.
- * La cabecera y los chips los orquesta la tarjeta (`hijos`); el trazo lleva su
- * retraso propio porque el `path` no es hijo directo de nadie con escalón.
+ * La partitura de una tarjeta de Skills (post-S8, segunda vuelta; apretada
+ * el 2026-09-27 a pedido del dueño, «opción A»: con nueve tarjetas la de
+ * antes —0,2 s entre tarjetas, cabecera a los 0,8 s, chips cada 0,1 s—
+ * terminaba pasados los 3,5 s), en segundos desde que la tarjeta arranca.
+ * Cada tarjeta corre la suya desplazada `ESCALON_SKILLS_S × i`: aterriza
+ * vacía (1,4 s) → a los 0,5 s la cabecera y, 0,2 s después, el trazo, figura
+ * a figura → los chips, uno cada 0,06 s, detrás de la cabecera. La cabecera y
+ * los chips los orquesta la tarjeta (`hijos`); el trazo lo orquesta la
+ * cabecera (también `hijos`), así sigue a SU tarjeta: con la librería el
+ * trazo corría con retraso absoluto y en las tarjetas de atrás se dibujaba
+ * antes de que la cabecera apareciera.
  */
-export const ESCALON_SKILLS_S = 0.2;
-export const RETRASO_CABECERA_S = 0.8;
-export const RETRASO_TRAZO_S = 1.0;
-export const ESCALON_CHIP_S = 0.1;
+export const ESCALON_SKILLS_S = 0.12;
+export const RETRASO_CABECERA_S = 0.5;
+export const RETRASO_TRAZO_S = 0.2;
+export const ESCALON_TRAZO_S = 0.2;
+export const ESCALON_CHIP_S = 0.06;
 
 export function IconoSkill({ id }: { id: string }) {
   // El rombo queda de reserva para que un grupo nuevo no rompa la página;
@@ -131,11 +137,10 @@ export function IconoSkill({ id }: { id: string }) {
         strokeLinejoin="round"
         focusable="false"
       >
-        {figuras.map((f, i) => {
-          // Cada figura, con pathLength normalizada y su retraso ABSOLUTO
-          // desde el disparo del grupo (medido: el trazo arranca a 1,0 s y
-          // cada figura 0,2 s después de la anterior, en todas las tarjetas
-          // por igual).
+        {figuras.map((f) => {
+          // Cada figura, con pathLength normalizada; su turno se lo da la
+          // cabecera que la contiene (`hijos` en skills.tsx): RETRASO_TRAZO_S
+          // después de ella y ESCALON_TRAZO_S entre figuras.
           const Tag = f.type as "path" | "circle" | "ellipse";
           return (
             <Tag
@@ -144,13 +149,7 @@ export function IconoSkill({ id }: { id: string }) {
               data-motion=""
               data-motion-svg=""
               data-reveal-item="trazo"
-              data-retraso=""
               pathLength={1}
-              style={
-                {
-                  "--reveal-delay": `${+(RETRASO_TRAZO_S + i * ESCALON_SKILLS_S).toFixed(3)}s`,
-                } as React.CSSProperties
-              }
             />
           );
         })}
