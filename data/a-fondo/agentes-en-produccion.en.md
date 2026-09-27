@@ -186,12 +186,13 @@ continuous evaluation against real behavior.
 
 <!-- seccion: n8n-como-base -->
 
-n8n was a fundamental base for automating and coordinating the agents' flows at Vesting. It made
-it possible to connect services, organize work sequences, execute rules and integrate different
+n8n was a fundamental base for automating and coordinating the agents' flows at Vesting. It made it
+possible to connect services, organize work sequences, execute rules and integrate different
 components within processes that needed to operate consistently. That is why it appears among my
-skills today: not as a tool I once saw, but as the base on which 27 agents ran. At Fundación
-CTIC I still work with n8n and, on top of it, with the agent frameworks of the LangChain
-ecosystem: LangChain, LangGraph, LangSmith and Langflow.
+skills today: not as a tool I once saw, but as the base on which 27 agents ran. At Fundación CTIC I
+still work with n8n and, on top of it, with the agent frameworks of the LangChain ecosystem:
+LangChain, LangGraph, LangSmith and Langflow. With Microsoft Agent Framework and Claude Agent SDK,
+by contrast, my work there is experimentation and building prototypes.
 
 However, using n8n did not mean the architecture was reduced to a collection of visual flows.
 The business value was not in connecting nodes, but in correctly defining what information came

@@ -102,7 +102,7 @@ Esta disciplina continúa siendo central en mi trabajo actual. La ruta AI-300, q
 
 <!-- seccion: n8n-como-base -->
 
-n8n constituía una base fundamental para la automatización y coordinación de los flujos de los agentes en Vesting. Permitía conectar servicios, organizar secuencias de trabajo, ejecutar reglas e integrar diferentes componentes dentro de procesos que necesitaban operar de manera consistente. Por eso figura hoy entre mis skills: no como una herramienta vista, sino como la base sobre la que corrieron 27 agentes. En la Fundación CTIC sigo trabajando con n8n y, además, con los frameworks de agentes del ecosistema de LangChain: LangChain, LangGraph, LangSmith y Langflow.
+n8n constituía una base fundamental para la automatización y coordinación de los flujos de los agentes en Vesting. Permitía conectar servicios, organizar secuencias de trabajo, ejecutar reglas e integrar diferentes componentes dentro de procesos que necesitaban operar de manera consistente. Por eso figura hoy entre mis skills: no como una herramienta vista, sino como la base sobre la que corrieron 27 agentes. En la Fundación CTIC sigo trabajando con n8n y con los frameworks del ecosistema de LangChain (LangChain, LangGraph, LangSmith y Langflow); con Microsoft Agent Framework y Claude Agent SDK, en cambio, experimento y construyo prototipos.
 
 Sin embargo, utilizar n8n no significaba que la arquitectura se redujera a una colección de flujos visuales. El valor empresarial no se encontraba en conectar nodos, sino en definir correctamente qué información ingresaba, qué transformación debía ocurrir, qué servicio o componente intervenía, qué resultado se esperaba y cómo debía manejarse una excepción.
 
