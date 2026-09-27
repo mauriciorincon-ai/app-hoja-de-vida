@@ -72,14 +72,16 @@ here I direct the way an institution measures, decides and adopts artificial int
 
 This role brings together the three fields on which I have built my professional profile. Data
 engineering and analytics provide the structure needed to represent institutional reality through
-reliable information: at Fundación CTIC that translates into analysis and visualization models
-for administrative and clinical leaders, into data cleaning, integration and standardization
-processes, and into process-based dashboards for tracking key indicators. Artificial intelligence
-applications and agents make it possible to turn that information and the organizational
-knowledge into new capabilities for assistance and execution. The agent frameworks I have worked
-with here are n8n, which was already the base of the agents at Vesting, and those of the LangChain
-ecosystem: LangChain, LangGraph, LangSmith and Langflow. Enterprise architecture finally connects those solutions with the institution's processes,
-controls, responsibilities and objectives.
+reliable information: at Fundación CTIC that translates into analysis and visualization models for
+administrative and clinical leaders, into data cleaning, integration and standardization processes,
+and into process-based dashboards for tracking key indicators. Artificial intelligence applications
+and agents make it possible to turn that information and the organizational knowledge into new
+capabilities for assistance and execution. The agent frameworks I have worked with here are n8n,
+which was already the base of the agents at Vesting, and those of the LangChain ecosystem:
+LangChain, LangGraph, LangSmith and Langflow. With Microsoft Agent Framework and Claude Agent SDK,
+my work here has been experimentation and building prototypes. Enterprise architecture finally
+connects those solutions with the institution's processes, controls, responsibilities and
+objectives.
 
 The four functions my CV describes for this position are, in that order, analytics for
 decision-making, data governance and quality, monitoring with business intelligence and continuous

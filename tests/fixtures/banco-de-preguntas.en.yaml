@@ -173,6 +173,9 @@ preguntas:
   - pregunta: "Has he used LangChain or LangGraph?"
     espera: [fundacion-ctic, agentes-en-produccion, skills]
     familia: ia-y-agentes
+  - pregunta: "Where has he used Microsoft Agent Framework or Claude Agent SDK?"
+    espera: [fundacion-ctic]
+    familia: ia-y-agentes
   - pregunta: "Does he use AI coding assistants, like Claude Code or Cursor?"
     espera: [skills, como-aprendo]
     familia: ia-y-agentes

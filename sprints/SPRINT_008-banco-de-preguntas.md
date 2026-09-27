@@ -1,10 +1,10 @@
 # Banco de preguntas — el corpus medido con preguntas de afuera
 
-> **Generado por `pnpm corpus:informe` el 2026-09-26. No se edita a mano.**
-> Banco: `tests/fixtures/banco-de-preguntas.es.yaml` — **136 preguntas** de 10 familias, 15 preguntas ajenas y 3 huecos declarados.
+> **Generado por `pnpm corpus:informe` el 2026-09-27. No se edita a mano.**
+> Banco: `tests/fixtures/banco-de-preguntas.es.yaml` — **146 preguntas** de 10 familias, 15 preguntas ajenas y 3 huecos declarados.
 >
-> **HOY** = el índice publicado, tal como está en disco: **1513 fragmentos** (los 24 documentos siguen en `borrador`, así que el chat todavía no ve nada de ellos).
-> **M2** = el índice que existirá cuando los apruebes: **1513 fragmentos**.
+> **HOY** = el índice publicado, tal como está en disco: **1521 fragmentos** (los 24 documentos siguen en `borrador`, así que el chat todavía no ve nada de ellos).
+> **M2** = el índice que existirá cuando los apruebes: **1521 fragmentos**.
 > El `top-4` es el que de verdad entra al contexto del modelo.
 
 ---
@@ -13,8 +13,8 @@
 
 | | HOY | M2 |
 | --- | --- | --- |
-| Preguntas con su fuente en el top-4 | 136/136 (100 %) | **136/136 (100 %)** |
-| …y además de primeras | 107 (79 %) | **107 (79 %)** |
+| Preguntas con su fuente en el top-4 | 146/146 (100 %) | **146/146 (100 %)** |
+| …y además de primeras | 114 (78 %) | **114 (78 %)** |
 | Preguntas que reciben «eso se me escapa» | 0 | **0** |
 
 
@@ -29,17 +29,17 @@
 | trayectoria | 25 | 25 (100 %) | 16 (64 %) |
 | forma-de-trabajar | 12 | 12 (100 %) | 10 (83 %) |
 | certificaciones | 10 | 10 (100 %) | 9 (90 %) |
-| ia-y-agentes | 16 | 16 (100 %) | 13 (81 %) |
-| plataforma-y-datos | 17 | 17 (100 %) | 11 (65 %) |
+| ia-y-agentes | 22 | 22 (100 %) | 18 (82 %) |
+| plataforma-y-datos | 20 | 20 (100 %) | 12 (60 %) |
 | bi-y-analitica | 13 | 13 (100 %) | 11 (85 %) |
 | gobierno | 9 | 9 (100 %) | 7 (78 %) |
-| procesos | 6 | 6 (100 %) | 4 (67 %) |
+| procesos | 7 | 7 (100 %) | 5 (71 %) |
 | vitrina | 15 | 15 (100 %) | 15 (100 %) |
 | encaje | 13 | 13 (100 %) | 11 (85 %) |
 
 ## Las que no traen su fuente
 
-Ninguna: las 136 preguntas del banco traen al menos una de sus fuentes esperadas dentro del top-4.
+Ninguna: las 146 preguntas del banco traen al menos una de sus fuentes esperadas dentro del top-4.
 
 ## Lo que cambia al aprobar
 
@@ -329,9 +329,40 @@ Preguntas que un reclutador hace y que **el corpus no contesta hoy**, con el doc
 
 **✅ ¿Qué frameworks de agentes ha usado?**
 
-- top-4: a-fondo-agentes-en-produccion-n8n-como-base~3, a-fondo-agentes-en-produccion-n8n-como-base~1, a-fondo-agentes-en-produccion-n8n-como-base~2, a-fondo-agentes-en-produccion-cuando-usar
-- primer fragmento: «También aprendí que una herramienta de automatización puede acelerar considerablemente la construcción, pero no elimina la necesidad de arquitectura. A medida que aumentan los agentes, las integraciones y las excepciones…»
-- nota: Pasa, pero floja: el documento llega al top-4 sin nombrar un solo framework, porque el corpus no dice con qué están construidos los trece agentes. Es uno de los cinco huecos que la simulación M2 puso en primer lugar, y la respuesta solo la tiene el dueño.
+- top-4: a-fondo-agentes-en-produccion-n8n-como-base~1, a-fondo-agentes-en-produccion-n8n-como-base~3, a-fondo-agentes-en-produccion-n8n-como-base~2, a-fondo-agentes-en-produccion-cuando-usar
+- primer fragmento: «n8n constituía una base fundamental para la automatización y coordinación de los flujos de los agentes en Vesting. Permitía conectar servicios, organizar secuencias de trabajo, ejecutar reglas e integrar diferentes compo…»
+- nota: Nota vieja: decía que el corpus no nombraba un solo framework, y desde la v3 `agentes-en-produccion` tiene la subsección «los frameworks de agentes que he usado» (n8n en Vesting). El 2026-09-26 el dueño sumó el ecosistema de LangChain en la Fundación CTIC, que ahora dicen esa subsección, su documento de CTIC y la tarjeta de skills.
+
+**✅ ¿Ha trabajado con n8n?**
+
+- top-4: a-fondo-agentes-en-produccion-n8n-como-base~1, a-fondo-agentes-en-produccion-n8n-como-base~2, a-fondo-fundacion-ctic-los-tres-campos-que-reune-el-rol~1, a-fondo-agentes-en-produccion-n8n-como-base~3
+- primer fragmento: «n8n constituía una base fundamental para la automatización y coordinación de los flujos de los agentes en Vesting. Permitía conectar servicios, organizar secuencias de trabajo, ejecutar reglas e integrar diferentes compo…»
+
+**✅ ¿Ha usado LangChain o LangGraph?**
+
+- top-4: a-fondo-agentes-en-produccion-n8n-como-base~1, skills-agentes-e-ia-generativa, a-fondo-fundacion-ctic-los-tres-campos-que-reune-el-rol~1, a-fondo-como-aprendo-incorporar-una-plataforma~3
+- primer fragmento: «n8n constituía una base fundamental para la automatización y coordinación de los flujos de los agentes en Vesting. Permitía conectar servicios, organizar secuencias de trabajo, ejecutar reglas e integrar diferentes compo…»
+
+**☑️ ¿Dónde ha usado Microsoft Agent Framework o Claude Agent SDK?**
+
+- top-4: a-fondo-agentes-en-produccion-n8n-como-base~1, skills-agentes-e-ia-generativa, a-fondo-fundacion-ctic-los-tres-campos-que-reune-el-rol~1, a-fondo-agentes-en-produccion-n8n-como-base~2
+- primer fragmento: «n8n constituía una base fundamental para la automatización y coordinación de los flujos de los agentes en Vesting. Permitía conectar servicios, organizar secuencias de trabajo, ejecutar reglas e integrar diferentes compo…»
+- nota: El dueño, 2026-09-26: en la Fundación CTIC, para experimentación y prototipos. Solo `fundacion-ctic` a propósito: la tarjeta de skills nombra las dos herramientas sin decir dónde, y `agentes-en-produccion` entra al top por la palabra «frameworks» aunque no las nombre. Con cualquiera de las dos en «espera», la pregunta pasaría sin que el corpus contestara el dónde.
+
+**✅ ¿Usa asistentes de IA para programar, como Claude Code o Cursor?**
+
+- top-4: skills-desarrollo-con-ia, a-fondo-los-agentes-de-la-vitrina-como-nace-un-agente~2, a-fondo-agentes-en-produccion-cuando-usar, a-fondo-los-agentes-de-la-vitrina-como-nace-un-agente~1
+- primer fragmento: «Desarrollo asistido por IA: Claude Code: subagentes, skills y hooks, Codex, Antigravity, Cursor, GitHub Copilot, Gemini CLI»
+
+**✅ ¿Conoce el Model Context Protocol (MCP)?**
+
+- top-4: skills-agentes-e-ia-generativa, a-fondo-las-investigaciones-fatiga-y-balanceo, a-fondo-rag-y-el-chat-capa-de-adaptacion~1, a-fondo-lo-que-busco-arquitectura-agentica~2
+- primer fragmento: «Agentes e IA generativa: LangChain, LangGraph, LangSmith, Langflow, n8n, Microsoft Agent Framework, Claude Agent SDK, MCP (Model Context Protocol), Azure OpenAI y Microsoft Foundry, Azure AI Search, Hugging Face, Ollama,…»
+
+**✅ ¿Ha trabajado con Azure OpenAI o Azure AI Search?**
+
+- top-4: skills-agentes-e-ia-generativa, a-fondo-certificaciones-el-ai-103~1, a-fondo-certificaciones-el-ai-103~2, a-fondo-rag-y-el-chat-proveedor-intercambiable~1
+- primer fragmento: «Agentes e IA generativa: LangChain, LangGraph, LangSmith, Langflow, n8n, Microsoft Agent Framework, Claude Agent SDK, MCP (Model Context Protocol), Azure OpenAI y Microsoft Foundry, Azure AI Search, Hugging Face, Ollama,…»
 
 **☑️ ¿Ha trabajado con modelos de lenguaje grandes?**
 
@@ -445,6 +476,21 @@ Preguntas que un reclutador hace y que **el corpus no contesta hoy**, con el doc
 - top-4: a-fondo-plataforma-y-despliegue-cuando-usar, a-fondo-plataforma-y-despliegue-lo-que-no-he-hecho~1, a-fondo-lo-que-busco-lo-que-no-he-hecho-y-el-portafolio~1, a-fondo-fabric-en-la-practica-power-bi~2
 - primer fragmento: «Dónde tengo profundidad de plataforma —Microsoft: Fabric, Power BI, Microsoft Foundry—, qué despliego y opero yo mismo con Git, GitHub Actions, CI/CD, Vercel y Sentry, lo que no he hecho dicho sin rodeos —Docker, Kuberne…»
 
+**✅ ¿Sabe Databricks o Snowflake?**
+
+- top-4: skills-big-data-multiplataforma, a-fondo-lo-que-busco-contexto-controles-y-abstencion~2, a-fondo-cafam-soluciones-perifericas~2, a-fondo-plataforma-y-despliegue-codigo-y-cookie-del-chat~1
+- primer fragmento: «Big data multiplataforma: Planeador de Fabric, Databricks y Snowflake — en preparación, Databricks: Unity Catalog, Delta Lake, Lakeflow y Mosaic AI, Snowflake: Snowpark, Cortex AI y Dynamic Tables, dbt, Apache Iceberg, A…»
+
+**✅ ¿Ha usado dbt o Airflow?**
+
+- top-4: skills-big-data-multiplataforma, a-fondo-como-aprendo-incorporar-una-plataforma~3, a-fondo-como-aprendo-incorporar-una-plataforma~1, a-fondo-como-aprendo-incorporar-una-plataforma~2
+- primer fragmento: «Big data multiplataforma: Planeador de Fabric, Databricks y Snowflake — en preparación, Databricks: Unity Catalog, Delta Lake, Lakeflow y Mosaic AI, Snowflake: Snowpark, Cortex AI y Dynamic Tables, dbt, Apache Iceberg, A…»
+
+**☑️ ¿Ha trabajado con Microsoft Purview?**
+
+- top-4: a-fondo-plataforma-y-despliegue-el-mundo-microsoft~1, a-fondo-fabric-en-la-practica-que-significa-el-dp-600~1, skills-plataforma-de-datos, a-fondo-fabric-en-la-practica-que-significa-el-dp-600~2
+- primer fragmento: «Mi experiencia más profunda de plataforma se encuentra en el ecosistema Microsoft y en Azure. He trabajado con Microsoft Fabric, Power BI, modelos semánticos, lakehouses, warehouses, pipelines y capacidades relacionadas…»
+
 **☑️ ¿Sabe de MLOps?**
 
 - top-4: a-fondo-certificaciones-el-ai-300~1, a-fondo-analitica-predictiva-la-deriva~2, a-fondo-certificaciones-el-ai-300~2, a-fondo-lo-que-busco-contexto-controles-y-abstencion~2
@@ -452,8 +498,8 @@ Preguntas que un reclutador hace y que **el corpus no contesta hoy**, con el doc
 
 **☑️ ¿Ha trabajado con big data o procesamiento distribuido?**
 
-- top-4: casestudy-vesting-1, proyecto-vesting, a-fondo-vesting-la-arquitectura~1, trayectoria-1
-- primer fragmento: «Diseñé el ecosistema en Microsoft Fabric: Big Data, Data Warehouse y procesamiento distribuido sobre un lakehouse en OneLake, con pipelines que recibían los flujos de n8n que orquestaban a los agentes. La decisión clave…»
+- top-4: skills-big-data-multiplataforma, casestudy-vesting-1, proyecto-vesting, a-fondo-vesting-la-arquitectura~1
+- primer fragmento: «Big data multiplataforma: Planeador de Fabric, Databricks y Snowflake — en preparación, Databricks: Unity Catalog, Delta Lake, Lakeflow y Mosaic AI, Snowflake: Snowpark, Cortex AI y Dynamic Tables, dbt, Apache Iceberg, A…»
 
 **✅ ¿Ha construido pipelines de datos que corran solos?**
 
@@ -462,18 +508,18 @@ Preguntas que un reclutador hace y que **el corpus no contesta hoy**, con el doc
 
 **☑️ ¿Qué hace para asegurar la calidad de los datos?**
 
-- top-4: a-fondo-origenes-iso-9001-la-primera-escuela~1, casestudy-cafam, a-fondo-gobierno-de-datos-y-de-ia-gobernar-para-hacer-mas~2, a-fondo-procesos-y-simulacion-verificacion-y-validacion~1
-- primer fragmento: «Mi trabajo en Inglopres también abarcó la cadena de suministro y el aseguramiento de la calidad bajo la norma ISO 9001:2015. Este entorno fortaleció una disciplina que ha permanecido en toda mi trayectoria: no basta con…»
+- top-4: casestudy-cafam, a-fondo-origenes-iso-9001-la-primera-escuela~1, a-fondo-gobierno-de-datos-y-de-ia-gobernar-para-hacer-mas~2, a-fondo-procesos-y-simulacion-verificacion-y-validacion~1
+- primer fragmento: «Cambiar el sistema que mueve una bodega de medicamentos sin dejar de despachar: seis meses de pruebas con el equipo más grande que he liderado. Cafam implementaba un WMS en su operación logística: un cambio de sistema cr…»
 
 **✅ ¿Sabe de integración continua y despliegue automático?**
 
 - top-4: a-fondo-plataforma-y-despliegue-ci-como-calidad~1, a-fondo-plataforma-y-despliegue-lo-que-despliego~2, a-fondo-plataforma-y-despliegue-lo-que-no-he-hecho~1, a-fondo-plataforma-y-despliegue-ci-como-calidad~3
 - primer fragmento: «La integración continua funciona como un mecanismo de calidad y no únicamente como una automatización de despliegue. Antes de publicar, la solución debe superar los controles definidos para su código, comportamiento y ar…»
 
-**✅ ¿Qué diferencia hay entre un data lake y un data warehouse para él?**
+**☑️ ¿Qué diferencia hay entre un data lake y un data warehouse para él?**
 
-- top-4: a-fondo-fabric-en-la-practica-lago-y-almacen~2, casestudy-vesting-1, a-fondo-vesting-la-arquitectura~1, a-fondo-fabric-en-la-practica-lago-y-almacen~1
-- primer fragmento: «El warehouse cumplía una función complementaria. Permitía organizar información estructurada mediante un enfoque relacional, desarrollar transformaciones y vistas en T-SQL orientadas al análisis y responder con claridad…»
+- top-4: skills-big-data-multiplataforma, a-fondo-fabric-en-la-practica-lago-y-almacen~2, skills-plataforma-de-datos, casestudy-vesting-1
+- primer fragmento: «Big data multiplataforma: Planeador de Fabric, Databricks y Snowflake — en preparación, Databricks: Unity Catalog, Delta Lake, Lakeflow y Mosaic AI, Snowflake: Snowpark, Cortex AI y Dynamic Tables, dbt, Apache Iceberg, A…»
 
 ### bi-y-analitica
 
@@ -499,7 +545,7 @@ Preguntas que un reclutador hace y que **el corpus no contesta hoy**, con el doc
 
 **✅ ¿Qué herramientas usa para machine learning?**
 
-- top-4: a-fondo-analitica-predictiva-las-herramientas~2, a-fondo-analitica-predictiva-las-herramientas~1, a-fondo-transmilenio-cm-lo-que-enseno-el-modelo~2, a-fondo-transmilenio-cm-lo-que-enseno-el-modelo~1
+- top-4: a-fondo-analitica-predictiva-las-herramientas~2, a-fondo-analitica-predictiva-las-herramientas~1, a-fondo-transmilenio-cm-lo-que-enseno-el-modelo~2, skills-ia-y-ml
 - primer fragmento: «Jupyter facilita la experimentación y la documentación del recorrido analítico. Sin embargo, no considero el notebook como el destino final de una solución. Es un espacio para explorar, comparar y aprender. Cuando el tra…»
 
 **✅ ¿Qué tan avanzado es en Python?**
@@ -530,7 +576,7 @@ Preguntas que un reclutador hace y que **el corpus no contesta hoy**, con el doc
 
 **✅ ¿Usa scikit-learn, pandas y numpy?**
 
-- top-4: a-fondo-analitica-predictiva-cuando-usar, a-fondo-analitica-predictiva-nivel-por-herramienta~2, a-fondo-analitica-predictiva-nivel-por-herramienta~1, a-fondo-como-aprendo-ibm-y-las-rutas-en-curso~1
+- top-4: a-fondo-analitica-predictiva-cuando-usar, skills-ia-y-ml, a-fondo-analitica-predictiva-nivel-por-herramienta~2, a-fondo-analitica-predictiva-nivel-por-herramienta~1
 - primer fragmento: «Dos familias de modelos en producción con scikit-learn —demanda del SITP por ruta y franja, y fuga, mora y riesgo en banca con más del 90 % de precisión—, las herramientas de machine learning que uso y con qué nivel, la…»
 
 **☑️ ¿Qué precisión alcanzaron los modelos que puso en producción?**
@@ -609,18 +655,23 @@ Preguntas que un reclutador hace y que **el corpus no contesta hoy**, con el doc
 
 **✅ ¿Tiene experiencia en mejora continua y optimización de procesos?**
 
-- top-4: a-fondo-inglopres-cadena-e-iso~2, a-fondo-ceinfes-gestion-por-procesos~2, a-fondo-procesos-y-simulacion-de-iso-9001-a-iso-42001, a-fondo-procesos-y-simulacion-cuando-usar
+- top-4: a-fondo-inglopres-cadena-e-iso~2, a-fondo-ceinfes-gestion-por-procesos~2, a-fondo-procesos-y-simulacion-de-iso-9001-a-iso-42001, skills-procesos-y-simulacion
 - primer fragmento: «Esta experiencia también consolidó mi afinidad por los estándares como instrumentos para convertir principios en sistemas de gestión verificables y sostenibles. Haber desarrollado desde temprano una forma de trabajo basa…»
 
 **☑️ ¿Ha trabajado con metodologías ágiles?**
 
-- top-4: a-fondo-procesos-y-simulacion-cuando-usar, a-fondo-ceinfes-gestion-por-procesos~1, a-fondo-procesos-y-simulacion-lean-kanban-y-scrum~1, skills
+- top-4: a-fondo-procesos-y-simulacion-cuando-usar, skills-como-trabajo, a-fondo-ceinfes-gestion-por-procesos~1, a-fondo-procesos-y-simulacion-lean-kanban-y-scrum~1
 - primer fragmento: «La raíz industrial con sus métodos: BPMN con Bizagi en cuatro empresas, simulación de eventos discretos con FlexSim en Inglopres y el despacho de medicamentos de Cafam, capacidad nominal frente a efectiva, estudio de tie…»
 
 **✅ ¿Para qué le sirve la ingeniería industrial en un puesto de datos?**
 
 - top-4: a-fondo-procesos-y-simulacion-cuando-usar, a-fondo-origenes-cuando-usar, a-fondo-origenes-arquitectura-de-medicion~2, a-fondo-origenes-la-convergencia~1
 - primer fragmento: «La raíz industrial con sus métodos: BPMN con Bizagi en cuatro empresas, simulación de eventos discretos con FlexSim en Inglopres y el despacho de medicamentos de Cafam, capacidad nominal frente a efectiva, estudio de tie…»
+
+**✅ ¿Sabe de optimización matemática, con Pyomo u OR-Tools?**
+
+- top-4: skills-procesos-y-simulacion, a-fondo-las-investigaciones-harness-paper-computacional~1, a-fondo-banco-pichincha-dax-studio-y-tabular-editor~2, a-fondo-fabric-en-la-practica-optimizacion-extremo-a-extremo~1
+- primer fragmento: «Procesos, simulación y optimización: BPMN (Bizagi), Simulación de eventos discretos (FlexSim), Optimización: Pyomo, OR-Tools (CP-SAT) y PuLP con HiGHS, Estudio de tiempos y balanceo de líneas, Kanban y Scrum»
 
 ### vitrina
 

@@ -217,6 +217,16 @@ preguntas:
   - pregunta: "¿Ha usado LangChain o LangGraph?"
     espera: [fundacion-ctic, agentes-en-produccion, skills]
     familia: ia-y-agentes
+  - pregunta: "¿Dónde ha usado Microsoft Agent Framework o Claude Agent SDK?"
+    espera: [fundacion-ctic]
+    familia: ia-y-agentes
+    nota: >-
+      El dueño, 2026-09-26: en la Fundación CTIC, para experimentación y
+      prototipos. Solo `fundacion-ctic` a propósito: la tarjeta de skills
+      nombra las dos herramientas sin decir dónde, y `agentes-en-produccion`
+      entra al top por la palabra «frameworks» aunque no las nombre. Con
+      cualquiera de las dos en «espera», la pregunta pasaría sin que el corpus
+      contestara el dónde.
   - pregunta: "¿Usa asistentes de IA para programar, como Claude Code o Cursor?"
     espera: [skills, como-aprendo]
     familia: ia-y-agentes

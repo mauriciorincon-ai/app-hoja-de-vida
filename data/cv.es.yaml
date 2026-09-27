@@ -805,7 +805,9 @@ skills:
   # src/components/home/skills-iconos.tsx: un grupo nuevo sin dibujo rompe un
   # test. Los ids viejos no cambian: son el destino de las citas del chat.
   # Las herramientas de LangChain y n8n las usó en la Fundación CTIC (el dueño,
-  # 2026-09-26; n8n ya era la base de Vesting); el grupo multiplataforma es el planeador que está preparando.
+  # 2026-09-26; n8n ya era la base de Vesting), y Microsoft Agent Framework y
+  # Claude Agent SDK, también en CTIC, para experimentación y prototipos (el
+  # dueño, 2026-09-26). El grupo multiplataforma es el planeador que está preparando.
   - id: agentes-e-ia-generativa
     grupo: "Agentes e IA generativa"
     items:

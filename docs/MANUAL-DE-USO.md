@@ -620,6 +620,10 @@ el mensaje te llega al correo.
   remitente por defecto (`onboarding@resend.dev`, el de prueba de Resend) solo puede escribirle
   al correo dueño de la cuenta de Resend: para cualquier otro buzón hace falta un dominio
   verificado en Resend y `SOLICITUDES_FROM_EMAIL`.
+- **El cupo de Resend se comparte** (desde 2026-09-26): el plan gratis da 100 correos al día y
+  3.000 al mes, y los gastan tres cosas: este formulario, el código del chat y **tus respuestas
+  como `hola@`** desde Gmail («Enviar como» sale por Resend). Si se agota, hasta el día siguiente
+  no llegan los avisos del formulario ni los códigos del chat, ni salen tus respuestas.
 
 ### El chat que responde por ti · desde Sprint 003
 
@@ -984,3 +988,4 @@ chat hoy y cuáles traería con la base aprobada. Ese informe **se genera, no se
 | aire del dominio 2026-09-26 | En el PDF, **más aire entre el rótulo gris del dominio y la línea de contacto** (de 4 a 10 puntos): GitHub ya no queda pegado a «CV interactivo · casos · chat». Sigue en dos páginas. |
 | margen de la home 2026-09-26 | **La página de inicio recupera margen en Lighthouse** (de 0,89–0,91 a 0,91–0,92): la letra de las cifras (JetBrains Mono) ya no se precarga y llega con una letra de respaldo monoespaciada, calibrada para que el cambio no mueva nada. En una conexión lenta puedes ver un instante una mono parecida. Si algún día cambias la letra mono, hay que recalibrar el respaldo (`globals.css`). |
 | margen de la home, segunda vuelta 2026-09-26 | **Lo anterior no alcanzó en la revisión automática de GitHub**: la página de inicio siguió cayendo en 0,89 una vez de cada dos. Ahora la letra de las cifras **se enciende cuando la página termina de cargar**: hasta entonces se ve la de respaldo, que ocupa lo mismo. Sin JavaScript se queda la de respaldo. **Si agregas un componente con letra mono, usa `font-mono` y no escribas el nombre de la fuente a mano**: nombrarla la pide antes de tiempo. Un test lo vigila en la página de inicio y en la ficha de Habla (la que tiene diagrama de proceso); en las demás páginas lo delataría Lighthouse. |
+| prototipos en CTIC 2026-09-26 | **El chat sabe dónde usaste Microsoft Agent Framework y Claude Agent SDK**: en la Fundación CTIC, para experimentación y prototipos (lo dicen su documento y el de agentes, en los dos idiomas). La tarjeta de Skills no cambia. Y el BLUEPRINT registra que `hola@` también **responde** (Gmail por Resend) y que eso comparte el cupo gratis de Resend. |
