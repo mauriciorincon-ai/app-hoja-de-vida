@@ -586,12 +586,10 @@ automated analytical tasks that previously required manual intervention and deve
 intelligence solutions in Power BI that allowed different managers to observe the performance of
 the system. I also advanced in the use of predictive models to analyze demand and anticipate
 conditions relevant to planning: a demand model by time band with scikit-learn, evaluated with
-RMSE in temporal order and updated every month, which ran for ten months and was used by the
-professionals who presented the reference demand report for the units.
+RMSE in temporal order and updated every month, which stayed in use after I left and was used by the professionals who presented the reference demand report for the units.
 
 The figures of that period are the ones on the site: the ETL that unified the sources raised the
-precision and speed of analysis by 70%; the automation scripts reduced the time of repetitive
-tasks by 40%; BI adoption, with more than 25 key users, increased the efficiency of analytical
+precision and speed of analysis by 70%; the ETL scripts with VBA and Power Query for the post-operational analysis reduced the time of repetitive tasks by 40%; BI adoption, with more than 25 key users, increased the efficiency of analytical
 processes by 35%; and demand forecasting contributed 20% in performance to the system.
 
 The combination of integration, automation, visualization and prediction allowed me to understand

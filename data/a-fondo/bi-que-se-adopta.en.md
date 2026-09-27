@@ -137,10 +137,10 @@ responsible people and validation states while the project was under way, with 2
 At C&M Consorcio 2018, between November 2018 and May 2020, I developed performance dashboards and
 reports aimed at control and transparency in the supervision of TransMilenio: 2 weekly reports, 1
 monthly consolidated report and others on demand, over some 150 routes from 10 concessionaire
-companies, with Excel, VBA and SQL. In this experience I do not have a confirmed user figure, so I
+companies, with Excel, VBA, Power Query and SQL. In this experience I do not have a confirmed user figure, so I
 do not present it as a case of quantified adoption. Its value lies in having turned heterogeneous
 operational records into traceable evidence for supervision and the evaluation of commitments,
-and in processing times dropping by at least 40%.
+and in those reports' processing times dropping by at least 40% with the ETL automation.
 
 At Fundación CTIC, since March 2025, the more than 40 analytical products in Power BI —half of them control dashboards by process— are used by some 20 leaders of some 15 processes and some 75 users, administrative
 and clinical leaders with very different needs. The effect figure I declare as what it is: close
@@ -449,7 +449,7 @@ An exceptional condition that needs immediate attention may be better resolved t
 A repetitive decision may require an application that guides the action. A need for anticipation
 may need a predictive model: at Banco Pichincha, churn, delinquency and risk were not handled
 with one more dashboard but with scikit-learn models that reached production with more than 90%
-accuracy; at TransMilenio, demand by time band with a model that ran for 10 months. A contextual
+accuracy; at TransMilenio, demand by time band with a model that stayed in use after I left. A contextual
 query task can benefit from an agent with access to authorized sources, like the 13 agents in my
 showcase.
 

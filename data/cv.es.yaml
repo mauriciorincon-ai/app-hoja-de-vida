@@ -105,9 +105,9 @@ trayectoria:
     bullets:
       - "Impulsé la adopción de BI en la operación: +35% de eficiencia con 25+ usuarios clave."
       - "ETL que unificó cinco fuentes heterogéneas (recaudo, flota y GPS, programación, novedades y PQR): +70% en precisión y velocidad de análisis."
-      - "Scripts de automatización con validaciones y excepciones visibles: −40% en tareas repetitivas."
+      - "Scripts ETL con VBA y Power Query para el análisis post-operacional, con validaciones y excepciones visibles: −40% en tareas repetitivas."
       - "Mesas de estrategia con la dirección del SITP: +25% en indicadores."
-      - "Predicción de demanda con scikit-learn por ruta y franja, diez meses en uso: +20% de rendimiento del sistema."
+      - "Predicción de demanda con scikit-learn por ruta y franja, que siguió en uso después de mi salida: +20% de rendimiento del sistema."
   - periodo: "2020 — 2021"
     rol: "Analista de Sistemas de Información y de Proyectos"
     organizacion: "Cafam"
@@ -131,7 +131,7 @@ trayectoria:
     bullets:
       - "Supervisión con datos de unas 150 rutas de 10 concesionarios, cruzando cinco fuentes: recaudo, flota y GPS, programación, novedades y PQR."
       - "Tableros e informes de desempeño —dos semanales y un consolidado mensual— trazables hasta el evento operativo."
-      - "Automatización con Excel, VBA y SQL: al menos −40% en el tiempo de procesamiento."
+      - "Automatización ETL con VBA, Power Query y SQL para los informes de supervisión de las rutas: al menos −40% en el tiempo de procesamiento."
       - "Memoria estadística del sistema en SQLite: el histórico de la operación, semana a semana."
       - "Auditoría del cumplimiento de protocolos operativos, con indicadores de consecuencia contractual."
   - periodo: "2017 — 2018"
@@ -384,8 +384,10 @@ proyectos:
           prefijo: "+"
           sufijo: "%"
           etiqueta: "en los indicadores intervenidos con el SITP"
-        - valor: 10
-          etiqueta: "meses en uso del modelo de demanda"
+        - valor: 20
+          prefijo: "+"
+          sufijo: "%"
+          etiqueta: "de rendimiento del sistema con el modelo de demanda"
       capitulos:
         - titulo: "Cinco fuentes, una operación"
           texto: >-
@@ -407,12 +409,12 @@ proyectos:
         - titulo: "Predecir la demanda para programar"
           texto: >-
             Desarrollé con scikit-learn un modelo de demanda por ruta y franja, con actualización
-            mensual, validado con RMSE respetando el orden temporal. Corrió diez meses dentro del
-            informe con el que se decidía cuántos buses asignar y en qué horarios.
+            mensual, validado con RMSE respetando el orden temporal. Entró al informe con el que
+            se decidía cuántos buses asignar y en qué horarios, y siguió en uso después de mi salida.
         - titulo: "Automatizar con controles"
           texto: >-
-            Los scripts recortaron un 40 % el tiempo de las tareas repetitivas, con validación de
-            entradas y excepciones visibles: una base que llega con una columna menos no se carga en
+            Los scripts ETL —VBA y Power Query— recortaron un 40 % el tiempo de preparar la
+            información del análisis post-operacional, con validación de entradas y excepciones visibles: una base que llega con una columna menos no se carga en
             silencio ni tumba el proceso. Ese tiempo se fue al modelo y a las mesas.
       impacto:
         - "+35% de eficiencia de los procesos analíticos por la adopción de BI."
@@ -558,8 +560,8 @@ proyectos:
       Supervisión con datos de la operación de TransMilenio: unas 150 rutas de 10
       concesionarios, cinco fuentes cruzadas (recaudo, flota y GPS, programación,
       novedades y PQR), tableros e informes de desempeño trazables hasta el evento,
-      automatización con Excel, VBA y SQL (al menos −40 % del tiempo de
-      procesamiento) y la memoria estadística del sistema.
+      automatización ETL con VBA, Power Query y SQL para los informes de
+      supervisión (al menos −40 % del tiempo de procesamiento) y la memoria estadística del sistema.
     stack: ["Excel · VBA", "SQL · SQLite", "Tableros de desempeño"]
     casestudy:
       titular: "Verificar con evidencia que el sistema de transporte de Bogotá se operara como estaba pactado, cuando de cada cifra podía colgar un descuento o una sanción."
@@ -615,7 +617,7 @@ proyectos:
             investigaciones que publico en la vitrina, con su método y su resultado.
       impacto:
         - "Informes semanales y mensuales de desempeño para unas 150 rutas, trazables desde la cifra hasta el registro."
-        - "Al menos un 40 % menos de tiempo de procesamiento con la automatización en Excel, VBA y SQL."
+        - "Al menos un 40 % menos de tiempo de procesamiento con la automatización ETL en VBA, Power Query y SQL que alimentaba los informes de supervisión de las rutas."
         - "Una memoria estadística de la operación que dejó de empezar desde cero cada semana."
         - "Dos preguntas de la operación convertidas, años después, en investigaciones publicadas."
       leccion: >-

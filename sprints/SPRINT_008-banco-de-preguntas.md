@@ -3,8 +3,8 @@
 > **Generado por `pnpm corpus:informe` el 2026-09-27. No se edita a mano.**
 > Banco: `tests/fixtures/banco-de-preguntas.es.yaml` — **146 preguntas** de 10 familias, 15 preguntas ajenas y 3 huecos declarados.
 >
-> **HOY** = el índice publicado, tal como está en disco: **1522 fragmentos** (los 24 documentos siguen en `borrador`, así que el chat todavía no ve nada de ellos).
-> **M2** = el índice que existirá cuando los apruebes: **1522 fragmentos**.
+> **HOY** = el índice publicado, tal como está en disco: **1523 fragmentos** (los 24 documentos siguen en `borrador`, así que el chat todavía no ve nada de ellos).
+> **M2** = el índice que existirá cuando los apruebes: **1523 fragmentos**.
 > El `top-4` es el que de verdad entra al contexto del modelo.
 
 ---
@@ -97,8 +97,8 @@ Preguntas que un reclutador hace y que **el corpus no contesta hoy**, con el doc
 
 **☑️ ¿Ha trabajado en un banco?**
 
-- top-4: a-fondo-como-trabajo-personas-que-no-me-reportan~2, a-fondo-como-trabajo-equipos-que-he-liderado~2, a-fondo-como-trabajo-equipos-que-he-liderado~3, a-fondo-banco-pichincha-modelos-predictivos~1
-- primer fragmento: «Cuatro veces he trabajado en iniciativas donde la colaboración no podía ordenarse. En Cafam, el equipo era mixto: 14 personas de la caja y 6 del proveedor del WMS, con intereses contractuales distintos, y la única manera…»
+- top-4: a-fondo-como-trabajo-equipos-que-he-liderado~3, a-fondo-como-trabajo-personas-que-no-me-reportan~2, a-fondo-como-trabajo-equipos-que-he-liderado~2, a-fondo-banco-pichincha-modelos-predictivos~1
+- primer fragmento: «Después de Cafam mi liderazgo cambió de forma —con la excepción del equipo de BI de cinco personas que lideré en Banco Pichincha en 2023—: pasé a liderar **procesos completos que integran una gran cantidad de personas qu…»
 
 **✅ ¿Qué hizo en Banco Pichincha?**
 
@@ -137,7 +137,7 @@ Preguntas que un reclutador hace y que **el corpus no contesta hoy**, con el doc
 
 **✅ ¿Qué es el análisis post-operacional que menciona?**
 
-- top-4: a-fondo-transmilenio-cm-que-es-el-analisis-post-operacional~2, a-fondo-transmilenio-cm-que-es-el-analisis-post-operacional~1, a-fondo-transmilenio-cm-cuando-usar, trayectoria-3
+- top-4: a-fondo-transmilenio-cm-que-es-el-analisis-post-operacional~2, a-fondo-transmilenio-cm-que-es-el-analisis-post-operacional~1, trayectoria-3, a-fondo-transmilenio-cm-cuando-usar
 - primer fragmento: «Lo distingue del análisis de supervisión —mi etapa anterior en el mismo sistema, entre 2018 y 2020— el horizonte y el destinatario. La supervisión mira el cumplimiento de cada servicio y sustenta consecuencias; el anális…»
 
 **☑️ ¿Qué hizo en Ceinfes?**
@@ -199,7 +199,7 @@ Preguntas que un reclutador hace y que **el corpus no contesta hoy**, con el doc
 
 **☑️ ¿Cómo lidera un equipo?**
 
-- top-4: a-fondo-cafam-el-equipo-de-veinte~1, a-fondo-como-trabajo-como-lidero~1, a-fondo-como-trabajo-como-lidero~3, a-fondo-como-trabajo-como-lidero~2
+- top-4: a-fondo-cafam-el-equipo-de-veinte~1, a-fondo-como-trabajo-como-lidero~1, a-fondo-como-trabajo-como-lidero~3, a-fondo-como-trabajo-equipos-que-he-liderado~3
 - primer fragmento: «Lideré un equipo mixto de veinte personas durante la fase de pruebas: catorce integrantes de Cafam y seis profesionales de Oracle, organización que acababa de comprar el producto y lo estaba implantando con sus propios e…»
 
 **✅ ¿Cómo se comunica con las áreas de negocio?**
@@ -586,7 +586,7 @@ Preguntas que un reclutador hace y que **el corpus no contesta hoy**, con el doc
 
 **✅ ¿Ha automatizado reportes o tareas repetitivas?**
 
-- top-4: a-fondo-cm-operaciones-la-automatizacion~1, a-fondo-cm-operaciones-la-automatizacion~2, casestudy-transmilenio-cm-5, a-fondo-fabric-en-la-practica-automatizar-power-bi~1
+- top-4: a-fondo-cm-operaciones-la-automatizacion~1, a-fondo-cm-operaciones-la-automatizacion~2, a-fondo-fabric-en-la-practica-automatizar-power-bi~1, a-fondo-como-trabajo-el-instrumento-para-cada-decision~1
 - primer fragmento: «Implementé soluciones para automatizar actividades recurrentes de preparación, validación y consolidación de información, reduciendo la intervención manual y mejorando la consistencia del procesamiento. Las herramientas…»
 
 ### gobierno

@@ -4,7 +4,8 @@
 > harness actualiza su banco una sola vez»_. Es la segunda mitad de
 > `REV-2026-09-27-hallazgos-hiring-copilot-bitacora.md`: allí quedaron 19 decisiones con propuesta;
 > aquí llegan 14 respuestas (relevadas por el harness, en un bloque del mismo día) y lo que cambió
-> con cada una. **Pendientes, en otro mensaje: 3, 10, 14, 26b y 26e.**
+> con cada una. El complemento del mismo día (3, 10, 14, 26b, 26e y la ampliación del 7) llegó
+> antes del merge y va en esta misma rama: **no queda ninguna pregunta pendiente.**
 
 ## Las respuestas y lo que cambió
 
@@ -90,6 +91,42 @@ la mano más corta que la respuesta permitía.
   (equivalencia de IELTS 5,5, 2014)», y lo mismo `origenes` y `lo-que-busco`. El logo se queda.
 - **39 · Cafam.** _«15+ decisores directivos»_ en `como-trabajo` y en `cafam` (#el-bi-de-control),
   en lugar de la lista de cargos.
+
+## El complemento del mismo día
+
+El harness trajo un segundo bloque con las cinco respuestas que faltaban. Tres ya estaban resueltas
+en este PR o no cambiaban nada: la **ampliación del 7** (tableros, líderes, procesos y planes ya iban
+aproximados), el **3** (el agente ISO 42001 revisa instrumentos anonimizados: el texto de
+`fundacion-ctic` se queda como está) y el **14** (ARKHÉ se queda «sin un artefacto publicado»). Las
+otras tres son cambios, y van en la misma rama porque el PR seguía sin mergear: un solo merge, y el
+harness actualiza su banco una sola vez.
+
+- **10 · El modelo de demanda de TransMilenio.** _«Siguió en uso después de la salida del dueño, sin
+  fecha de fin conocida»_: sale «diez meses» de todo el sitio y entra **«siguió en uso después de mi
+  salida»** (ES) / **«stayed in use after I left»** (EN). La cifra del caso «10 meses en uso» se
+  reemplaza por **«+20 % de rendimiento del sistema con el modelo de demanda»**, que el documento y
+  los bullets ya decían; `casos-de-estudio.test.ts` lo exige en las dos lenguas.
+- **26b · La excepción de Pichincha.** `como-trabajo` (#equipos-que-he-liderado): _«Después de Cafam
+  mi liderazgo cambió de forma —con la excepción del equipo de BI de cinco personas que lideré en
+  Banco Pichincha en 2023—: pasé a liderar procesos completos…»_.
+- **26e · Los dos −40 %.** Cada uno dice ahora qué análisis alimentaba y nombra VBA y Power Query:
+  en C&M Consorcio (2018–2020), la automatización ETL de las bases semanales para **los informes de
+  supervisión del desempeño de las rutas**; en C&M Consultores (2021–2022), los scripts ETL para **el
+  análisis post-operacional para la planeación**, «transformaciones distintas de las de la
+  supervisión de rutas de 2018–2020, porque alimentaban otro análisis».
+
+### Frases tocadas por el complemento (las dos lenguas)
+
+| Dónde                                   | Frase                                                                                                                              |
+| --------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `cv.{es,en}.yaml`                       | bullet de C&M Consultores (modelo de demanda, y scripts ETL); cifra del caso (10 meses → +20 %); capítulo «Predecir la demanda»; capítulo «Automatizar con controles»; bullet, resumen e impacto de C&M Consorcio (ETL con VBA, Power Query y SQL para los informes de supervisión) |
+| `transmilenio-cm`                       | resumen; #el-modelo-de-demanda (dos frases); #la-automatizacion (primera frase); tabla de resultados (dos filas); #lo-que-consolido («el modelo de demanda funcionó con esa lógica») |
+| `cm-operaciones`                        | #la-automatizacion: herramientas y destino de la automatización                                                                    |
+| `analitica-predictiva`                  | #dos-modelos, #de-modelo-a-capacidad, #probeta-ds: «diez meses» → «siguió en uso después de mi salida»                             |
+| `bi-que-se-adopta`                      | #cm-consorcio (Power Query y «de esos informes… con la automatización ETL»); #la-forma-correcta (el modelo)                         |
+| `como-trabajo`                          | #equipos-que-he-liderado (la excepción de Pichincha); #seguimiento-visible (el modelo)                                              |
+| `origenes`                              | #transmilenio (el modelo y los scripts ETL)                                                                                        |
+| `procesos-y-simulacion`                 | #el-metodo-hoy (el modelo)                                                                                                         |
 
 ## Lo que los gates atajaron por el camino
 

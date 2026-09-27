@@ -54,7 +54,7 @@ En C&M Consultores, entre julio de 2021 y mayo de 2022, desarrollé con scikit-l
 
 El horizonte mensual no significaba reducir la demanda a una única cifra agregada. La predicción debía conservar suficiente detalle por ruta, tipo de día y franja horaria para representar cómo podía distribuirse la demanda dentro del periodo. Esta combinación entre horizonte de planeación y granularidad operacional permitía convertir una expectativa mensual en información útil para preparar la programación y orientar la asignación de capacidad.
 
-La validación se hizo con RMSE y respetando el orden temporal: el modelo se evaluaba sobre periodos posteriores a los que había visto, nunca con datos futuros explicando el pasado, porque así lo iba a enfrentar la operación. El modelo corrió diez meses. Lo usaban los profesionales que presentaban el informe de demanda de referencia con el que las unidades programaban, y contribuyó a una mejora reportada del 20 % en el rendimiento del sistema.
+La validación se hizo con RMSE y respetando el orden temporal: el modelo se evaluaba sobre periodos posteriores a los que había visto, nunca con datos futuros explicando el pasado, porque así lo iba a enfrentar la operación. El modelo siguió en uso después de mi salida. Lo usaban los profesionales que presentaban el informe de demanda de referencia con el que las unidades programaban, y contribuyó a una mejora reportada del 20 % en el rendimiento del sistema.
 
 El aprendizaje más importante, sin embargo, fue comprender que una predicción solo produce valor cuando coincide con el momento en el que la organización todavía puede cambiar una decisión. Una estimación exacta que llega después de cerrar la programación puede tener interés analítico, pero pierde una parte importante de su utilidad operacional.
 
@@ -92,7 +92,7 @@ Esta disciplina proviene directamente de mi formación en Ingeniería Industrial
 
 Utilizo con cuidado la expresión modelo en producción. No considero que un modelo alcance ese estado porque haya obtenido una métrica elevada en un notebook, porque pueda ejecutar inferencias o porque sus resultados aparezcan dentro de una presentación.
 
-Un modelo comienza a funcionar como capacidad operativa cuando sus predicciones se integran en un proceso real, llegan dentro del ciclo de decisión, utilizan información disponible y cuentan con responsables capaces de interpretar sus resultados y actuar sobre ellos. En TransMilenio la predicción entraba al informe mensual de demanda durante diez meses; en Banco Pichincha, a la priorización de acciones de retención y cobro.
+Un modelo comienza a funcionar como capacidad operativa cuando sus predicciones se integran en un proceso real, llegan dentro del ciclo de decisión, utilizan información disponible y cuentan con responsables capaces de interpretar sus resultados y actuar sobre ellos. En TransMilenio la predicción entraba al informe mensual de demanda, y siguió allí después de mi salida; en Banco Pichincha, a la priorización de acciones de retención y cobro.
 
 Esto exige un pipeline reproducible. Los datos deben localizarse, validarse y transformarse mediante reglas consistentes. Las variables utilizadas durante la inferencia deben corresponder con aquellas empleadas durante el desarrollo. Las predicciones necesitan conservar la fecha, la versión, el contexto y la población sobre la que fueron producidas.
 
@@ -304,6 +304,6 @@ El despliegue tampoco termina en una inferencia disponible. El modelo necesita p
 
 Mi profundidad técnica abarca Python, scikit-learn, Pandas, NumPy, R y diferentes entornos de análisis y aprendizaje automático. Sin embargo, mi principal diferencial no se encuentra en la cantidad de bibliotecas utilizadas. Se encuentra en la capacidad para conectar conocimiento del proceso, estadística, modelado, ingeniería de datos, producto analítico y decisión.
 
-Probeta DS convierte esta postura en una aplicación pública. Los modelos desarrollados en transporte con C&M Consultores y en banca con Banco Pichincha demuestran su utilización profesional: uno corrió diez meses dentro de un informe mensual; los otros llegaron a producción con más del 90 % de precisión. Mi trabajo con Fabric, Power BI y agentes amplía esa experiencia hacia arquitecturas en las que las predicciones pueden integrarse con nuevas formas de interacción y actuación.
+Probeta DS convierte esta postura en una aplicación pública. Los modelos desarrollados en transporte con C&M Consultores y en banca con Banco Pichincha demuestran su utilización profesional: uno entró a un informe mensual y siguió en uso después de mi salida; los otros llegaron a producción con más del 90 % de precisión. Mi trabajo con Fabric, Power BI y agentes amplía esa experiencia hacia arquitecturas en las que las predicciones pueden integrarse con nuevas formas de interacción y actuación.
 
 No busco construir el modelo con la métrica más llamativa. Busco construir una capacidad predictiva que pueda explicarse, utilizarse, observarse y defenderse cuando una persona pregunte qué significa el resultado y por qué merece influir sobre una decisión.

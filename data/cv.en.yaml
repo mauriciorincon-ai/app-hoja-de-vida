@@ -92,9 +92,9 @@ trayectoria:
     bullets:
       - "Drove BI adoption across operations: +35% efficiency with 25+ key users."
       - "ETL that unified five heterogeneous sources (fare collection, fleet and GPS, scheduling, incidents and user complaints): +70% in analysis precision and speed."
-      - "Automation scripts with validations and visible exceptions: −40% in repetitive tasks."
+      - "ETL scripts with VBA and Power Query for the post-operational analysis, with validations and visible exceptions: −40% in repetitive tasks."
       - "Strategy sessions with SITP leadership: +25% in indicators."
-      - "Demand forecasting with scikit-learn by route and time slot, ten months in use: +20% system performance."
+      - "Demand forecasting with scikit-learn by route and time slot, which stayed in use after I left: +20% system performance."
   - periodo: "2020 — 2021"
     rol: "Information Systems and Projects Analyst"
     organizacion: "Cafam"
@@ -118,7 +118,7 @@ trayectoria:
     bullets:
       - "Data-driven supervision of about 150 routes from 10 concessionaires, cross-referencing five sources: fare collection, fleet and GPS, scheduling, incidents and user complaints."
       - "Performance dashboards and reports —two weekly and one monthly— traceable down to the operational event."
-      - "Automation with Excel, VBA and SQL: at least −40% in processing time."
+      - "ETL automation with VBA, Power Query and SQL for the route supervision reports: at least −40% in processing time."
       - "The system's statistical memory in SQLite: the operation's history, week by week."
       - "Audit of compliance with operating protocols, with indicators carrying contractual consequences."
   - periodo: "2017 — 2018"
@@ -364,8 +364,10 @@ proyectos:
           prefijo: "+"
           sufijo: "%"
           etiqueta: "in the indicators addressed with the SITP"
-        - valor: 10
-          etiqueta: "months in use for the demand model"
+        - valor: 20
+          prefijo: "+"
+          sufijo: "%"
+          etiqueta: "system performance with the demand model"
       capitulos:
         - titulo: "Five sources, one operation"
           texto: >-
@@ -387,12 +389,12 @@ proyectos:
         - titulo: "Forecasting demand to schedule"
           texto: >-
             I developed a demand model with scikit-learn by route and time slot, updated monthly and
-            validated with RMSE respecting temporal order. It ran for ten months inside the report
-            used to decide how many buses to assign and at what times.
+            validated with RMSE respecting temporal order. It went into the report used to decide
+            how many buses to assign and at what times, and stayed in use after I left.
         - titulo: "Automating with controls"
           texto: >-
-            Scripts cut the time spent on repetitive tasks by 40%, with input validation and visible
-            exceptions: a weekly file arriving with a missing column is neither loaded silently nor
+            The ETL scripts —VBA and Power Query— cut by 40% the time spent preparing the
+            post-operational analysis information, with input validation and visible exceptions: a weekly file arriving with a missing column is neither loaded silently nor
             allowed to crash the process. That time went to the model and to the sessions.
       impacto:
         - "+35% efficiency of analytical processes from BI adoption."
@@ -537,8 +539,8 @@ proyectos:
       Data-driven supervision of TransMilenio's operation: about 150 routes from 10
       concessionaires, five sources cross-referenced (fare collection, fleet and
       GPS, scheduling, incidents and user complaints), performance dashboards and
-      reports traceable down to the event, automation with Excel, VBA and SQL (at
-      least −40% processing time) and the system's statistical memory.
+      reports traceable down to the event, ETL automation with VBA, Power Query and SQL for the
+      supervision reports (at least −40% processing time) and the system's statistical memory.
     stack: ["Excel · VBA", "SQL · SQLite", "Performance dashboards"]
     casestudy:
       titular: "Verifying with evidence that Bogotá's mass transit system was operated as agreed, when a discount or a penalty could hang on each figure."
@@ -594,7 +596,7 @@ proyectos:
             showcase, with their method and their result.
       impacto:
         - "Weekly and monthly performance reports for about 150 routes, traceable from the figure to the record."
-        - "At least 40% less processing time with automation in Excel, VBA and SQL."
+        - "At least 40% less processing time with the ETL automation in VBA, Power Query and SQL that fed the route supervision reports."
         - "A statistical memory of the operation that stopped starting from scratch every week."
         - "Two questions from the operation turned, years later, into published research."
       leccion: >-
