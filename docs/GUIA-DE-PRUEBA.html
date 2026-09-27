@@ -316,7 +316,7 @@
     <div class="pagina">
       <header>
         <p class="eyebrow">
-          CV Viva · Guía de prueba viva y acumulativa · v9.13 · el aire bajo el dominio + las herramientas de hoy + el cupo del chat + el ícono navy y el 404 de la raíz + las cifras en su letra y las citas del chat + rótulo del dominio, idiomas en mantenimiento y el ícono + el modo mantenimiento + el dominio en el PDF + los ocho casos de estudio completos + la cita dice de dónde sale y a dónde lleva + la cita conserva la conversación + el corpus alineado + chat/registro + a fondo v2 (el
+          CV Viva · Guía de prueba viva y acumulativa · v9.14 · el margen de la home + el aire bajo el dominio + las herramientas de hoy + el cupo del chat + el ícono navy y el 404 de la raíz + las cifras en su letra y las citas del chat + rótulo del dominio, idiomas en mantenimiento y el ícono + el modo mantenimiento + el dominio en el PDF + los ocho casos de estudio completos + la cita dice de dónde sale y a dónde lleva + la cita conserva la conversación + el corpus alineado + chat/registro + a fondo v2 (el
           detalle) + revisión post-S8 · 2026-09-12
         </p>
         <h1>Guía de prueba</h1>
@@ -364,7 +364,8 @@
           producción (f10), bloqueando tu propio correo. <strong>v9.12 no
           suma</strong>: mejora la n10, que ahora también pide tu juicio sobre
           las herramientas de Skills. <strong>v9.13 tampoco</strong>: mejora la
-          d3 (el aire bajo el rótulo del dominio).
+          d3 (el aire bajo el rótulo del dominio). <strong>v9.14 tampoco</strong>:
+          mejora la a8 (la letra de las cifras, que ahora llega sin precarga).
         </p>
         <div class="url-caja">
           <p class="eyebrow" style="margin: 0 0 6px">URL de prueba</p>
@@ -526,16 +527,18 @@
               ><span class="minimo">⭐ mínimo</span></label
             >
           </li>
-          <li data-origen="nuevo">
+          <li data-origen="mejorado">
             <input type="checkbox" id="a8" /><label for="a8"
               >En esa misma <strong>ventana privada</strong> (primera visita, sin
               caché), baja a Logros: las cifras grandes (10, 27, 42…) salen en
               la letra mono del sitio —ceros con punto, trazo parejo—, no en una
               letra redonda de sistema. Igual en la banda de cifras de un caso y
               en <code>/cv</code>. Hasta el 2026-09-26 la primera visita las
-              pintaba en Arial. Con una conexión muy lenta puede salir la de
-              respaldo, a propósito: la página no se mueve por esperar la fuente.
-              <span class="origen origen-nuevo">Nuevo · cifras y citas</span></label
+              pintaba en Arial. Con una conexión lenta puedes ver un instante una
+              letra mono parecida y enseguida la del sitio: es a propósito, y
+              <strong>nada se mueve</strong> en el cambio (la de respaldo está
+              calibrada al mismo ancho y alto).
+              <span class="origen origen-mejorado">Mejorado · margen de la home</span></label
             >
           </li>
           <li data-origen="nuevo">
@@ -2101,6 +2104,14 @@
           <summary>Historial de la guía</summary>
           <ul>
             <li>
+              <strong>v9.14 · el margen de la home · 2026-09-26:</strong> la
+              HOME estaba en el borde del 0,90 de rendimiento en Lighthouse y la
+              CI caía una vez de cada dos en cualquier PR. La letra de las
+              cifras deja de precargarse y llega con un respaldo monoespaciado
+              calibrado, que no mueve nada al cambiar. a8 mejorada. Ninguna
+              prueba eliminada. Prefijo de casillas <code>margen-de-la-home</code>.
+            </li>
+            <li>
               <strong>v9.13 · el aire bajo el dominio · 2026-09-26:</strong> el
               dueño aprobó la n10 y pidió separar la línea de contacto del
               rótulo del dominio en el PDF: GitHub quedaba pegado a «CV
@@ -2437,7 +2448,7 @@
       (function () {
         // NS VERSIONADO POR SPRINT: al publicar la guía de un sprint nuevo se cambia
         // s007c — así una regresión sin correr no aparece marcada por la versión anterior.
-        var NS = "guia-hoja-de-vida:aire-del-dominio:";
+        var NS = "guia-hoja-de-vida:margen-de-la-home:";
         var casillas = Array.prototype.slice.call(
           document.querySelectorAll('input[type="checkbox"]'),
         );
