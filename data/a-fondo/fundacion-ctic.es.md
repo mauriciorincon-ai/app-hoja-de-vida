@@ -83,7 +83,7 @@ No todos los problemas necesitan inteligencia artificial y no toda iniciativa de
 
 La estrategia también debe establecer una cartera institucional de iniciativas. Esto implica organizar los casos de uso según su valor potencial, viabilidad, disponibilidad de información, nivel de riesgo, dependencia de terceros, complejidad de integración y capacidad de adopción. La priorización no busca identificar únicamente las ideas más innovadoras, sino aquellas que pueden producir aprendizaje y valor sin superar la capacidad institucional para implementarlas, supervisarlas y sostenerlas. De las oportunidades identificadas, la mitad se evaluaron formalmente y unas pocas se priorizaron: esa proporción es el resultado de aplicar el filtro, no de la falta de ideas.
 
-Cada iniciativa debe contar con un propósito explícito, un responsable institucional, una población o proceso claramente identificado, resultados esperados y criterios de evaluación definidos antes de comenzar. También debe especificar qué información utilizará, qué decisiones apoyará, qué acciones podría ejecutar y qué responsabilidades permanecerán necesariamente en las personas. Hoy 2 de las 3 iniciativas priorizadas tienen ese expediente completo y documentado.
+Cada iniciativa debe contar con un propósito explícito, un responsable institucional, una población o proceso claramente identificado, resultados esperados y criterios de evaluación definidos antes de comenzar. También debe especificar qué información utilizará, qué decisiones apoyará, qué acciones podría ejecutar y qué responsabilidades permanecerán necesariamente en las personas. Hoy las primeras de las iniciativas priorizadas tienen ese expediente completo y documentado.
 
 ## De la demostración a la capacidad institucional: una visión común para la IA
 
@@ -93,7 +93,7 @@ Esta forma de trabajo permite diferenciar una demostración tecnológica de una 
 
 Mi responsabilidad es conectar estas dimensiones dentro de una visión común. La estrategia de inteligencia artificial no puede avanzar de manera separada de la estrategia de datos, la arquitectura tecnológica, la seguridad, la gestión de riesgos, el conocimiento de los procesos y las políticas institucionales. Cada iniciativa debe ser comprendida como parte de un sistema organizacional y no como un producto independiente.
 
-La estrategia se encuentra en un proceso progresivo de estructuración y consolidación. Esto implica construir los instrumentos institucionales —23 a la fecha—, establecer responsabilidades, evaluar los primeros casos de uso y desarrollar la capacidad necesaria para gobernar las iniciativas durante todo su ciclo de vida. Mi labor combina, por tanto, el liderazgo de la visión estratégica con la construcción práctica de las condiciones que permitirán implementarla de manera sostenible.
+La estrategia se encuentra en un proceso progresivo de estructuración y consolidación. Esto implica construir los instrumentos institucionales —más de 20 a la fecha—, establecer responsabilidades, evaluar los primeros casos de uso y desarrollar la capacidad necesaria para gobernar las iniciativas durante todo su ciclo de vida. Mi labor combina, por tanto, el liderazgo de la visión estratégica con la construcción práctica de las condiciones que permitirán implementarla de manera sostenible.
 
 ## El sistema de gestión de IA que estamos construyendo bajo UNE-ISO/IEC 42001:2025
 
@@ -143,7 +143,7 @@ En la práctica, me sirve para revisar cada instrumento contra los requisitos qu
 
 Una estrategia adquiere valor cuando puede convertirse en decisiones concretas. Por eso, uno de mis principales focos consiste en establecer un proceso institucional para recibir, analizar y priorizar propuestas de inteligencia artificial. El propósito es evitar que las iniciativas avancen únicamente por entusiasmo tecnológico, presión de un proveedor o interés aislado de un área.
 
-Cada propuesta debe presentar con claridad el problema que busca resolver, los usuarios y procesos involucrados, el beneficio esperado, la información requerida y la forma en que se reconocerá un resultado satisfactorio. También debe identificar riesgos iniciales, dependencias, responsables, necesidades de integración y condiciones de adopción. Es el mismo expediente que hoy tienen completo 2 de las 3 iniciativas priorizadas.
+Cada propuesta debe presentar con claridad el problema que busca resolver, los usuarios y procesos involucrados, el beneficio esperado, la información requerida y la forma en que se reconocerá un resultado satisfactorio. También debe identificar riesgos iniciales, dependencias, responsables, necesidades de integración y condiciones de adopción. Es el mismo expediente que hoy tienen completo las primeras de las iniciativas priorizadas.
 
 La evaluación debe determinar si la inteligencia artificial es necesaria y, en caso afirmativo, qué tipo de capacidad resulta apropiada. Una iniciativa puede requerir analítica predictiva, procesamiento de lenguaje, recuperación de conocimiento, generación de contenido, apoyo a una decisión o ejecución controlada de tareas. Definir correctamente esa necesidad evita construir agentes para problemas que pueden resolverse con instrumentos más simples, previsibles y sostenibles —a veces, con un tablero de Power BI—.
 
@@ -280,16 +280,16 @@ Actualmente, más de 40 soluciones analíticas en Power BI se encuentran en uso 
 
 | Dimensión          | Métrica                                    |                     Valor |
 | ------------------ | ------------------------------------------ | ------------------------: |
-| Analítica          | productos analíticos en uso o seguimiento  |                        42 |
-| Analítica          | tableros de control                        |                        23 |
-| Analítica          | líderes respaldados · procesos             |                   20 · 15 |
+| Analítica          | productos analíticos en uso o seguimiento  |                 más de 40 |
+| Analítica          | tableros de control                        |                 más de 20 |
+| Analítica          | líderes respaldados · procesos             |         unos 20 · unos 15 |
 | Analítica          | usuarios                                   |                       ~75 |
 | Analítica          | reducción de esfuerzo en preparación       | cerca del 60 % (estimado) |
-| Analítica          | planes de análisis en seguimiento          |                        10 |
-| IA                 | oportunidades identificadas                |                        12 |
-| IA                 | casos de uso evaluados formalmente         |                         7 |
-| IA                 | iniciativas priorizadas · documentadas     |                     3 · 2 |
-| Sistema de gestión | instrumentos: terminados · en construcción |                    8 · 15 |
+| Analítica          | planes de análisis en seguimiento          |                una decena |
+| IA                 | oportunidades identificadas                |                 más de 10 |
+| IA                 | casos de uso evaluados formalmente         |                  la mitad |
+| IA                 | iniciativas priorizadas · documentadas     | unas pocas · las primeras |
+| Sistema de gestión | instrumentos: terminados · en construcción |      un tercio · el resto |
 
 En inteligencia artificial, la estrategia ha permitido identificar más de 10 oportunidades, evaluar formalmente la mitad y priorizar unas pocas iniciativas para exploración, validación o desarrollo progresivo. De ellas, las primeras cuentan con propósito, responsable, resultados esperados, información requerida, riesgos iniciales y criterios de evaluación documentados.
 

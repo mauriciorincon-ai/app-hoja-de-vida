@@ -165,7 +165,7 @@ The first question concerns meaning. A column can have a technically valid name 
 interpreted differently by several areas. That is why definitions must be established with the
 business owners and expressed in a way that can be understood, implemented and verified. At Banco
 Pichincha that definition lived in the semantic model as a DAX measure with an owner; at Fundación
-CTIC, in the definition agreed with the process leader before the indicator enters one of the 42
+CTIC, in the definition agreed with the process leader before the indicator enters one of the more than 40
 analytics products.
 
 The second question concerns provenance: **lineage**. An indicator must keep a traceable
@@ -572,7 +572,7 @@ visible the condition it was designed for.
 This distinction matters because an organization can accumulate documents, matrices and approvals
 without developing a real capacity to intervene when a deviation appears. Governance is not measured
 by the number of controls declared, but by the verifiable relationship between each risk, the
-mechanism used to manage it and the evidence that allows its effectiveness to be evaluated. With 23
+mechanism used to manage it and the evidence that allows its effectiveness to be evaluated. With more than 20
 instruments in the Fundación CTIC management system, the question I ask of each one is not whether
 it exists, but which deviation it would detect and what evidence it would leave when detecting it.
 

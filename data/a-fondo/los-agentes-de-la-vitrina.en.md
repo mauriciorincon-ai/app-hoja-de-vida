@@ -170,7 +170,7 @@ transcribes—, and it does not enter the program's platforms: the student bring
 **Hiring Copilot** (initial, v1.5.0). For an AI professional who wants every application to start
 from real evidence, not from memory: every sendable claim links an achievement to its source and a
 program checks it, and the orphan bullet makes the control fail. **122 binary criteria** in twelve
-work items, of which 31 are met today, with **8 of 9 controls** with bait and six human gates; a
+work items, of which 42 are met today, with **8 of 9 controls** with bait and six human gates; a
 coherence script compares the count against the disk on every run. It prepares applications and does not send them; it trains before
 the interview and never assists during a real one; it issues no ATS score because there is no
 common published one, and it never inserts hidden text into a document.

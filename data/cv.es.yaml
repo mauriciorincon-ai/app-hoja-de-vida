@@ -195,7 +195,8 @@ logros:
   - valor: 27
     etiqueta: "agentes de IA construidos con el proceso core que estructuré"
     descripcion: "Vesting: 12 clientes integrados y hasta 23 agentes vigilados a la vez, en tiempo real, sobre Microsoft Fabric."
-  - valor: 42
+  - valor: 40
+    sufijo: "+"
     etiqueta: "productos analíticos en uso en salud"
     descripcion: "Fundación CTIC: unos 20 líderes de unos 15 procesos y unos 75 usuarios, sobre definiciones institucionales comunes."
   - valor: 50

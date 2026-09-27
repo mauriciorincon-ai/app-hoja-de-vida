@@ -180,7 +180,8 @@ logros:
   - valor: 27
     etiqueta: "AI agents built with the core process I structured"
     descripcion: "Vesting: 12 clients integrated and up to 23 agents monitored at once, in real time, on Microsoft Fabric."
-  - valor: 42
+  - valor: 40
+    sufijo: "+"
     etiqueta: "analytics products in use in healthcare"
     descripcion: "Fundación CTIC: some 20 leaders of some 15 processes and about 75 users, on shared institutional definitions."
   - valor: 50
