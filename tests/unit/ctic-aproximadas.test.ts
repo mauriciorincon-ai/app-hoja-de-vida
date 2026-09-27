@@ -1,6 +1,9 @@
 import { readFileSync, readdirSync } from "node:fs";
 import { describe, expect, it } from "vitest";
-import { problemasDeCticExacta } from "../../scripts/ctic-aproximadas.mjs";
+import {
+  problemasDeAfirmacionesDeCtic,
+  problemasDeCticExacta,
+} from "../../scripts/ctic-aproximadas.mjs";
 
 /**
  * LAS CIFRAS DE CTIC, APROXIMADAS EN TODO EL SITIO (decisión del dueño, 2026-09-27).
@@ -93,5 +96,34 @@ describe("el motor, contra textos de juguete", () => {
     );
     expect(rojo).toHaveLength(1);
     expect(rojo[0]).toContain("valor 40");
+  });
+});
+
+describe("lo que el sitio todavía no puede afirmar de CTIC", () => {
+  it("ninguna página ni documento declara implementada ISO/IEC 42001, en español ni en inglés", () => {
+    const problemas = problemasDeAfirmacionesDeCtic(archivosDelSitio);
+    expect(problemas, lista(problemas)).toEqual([]);
+  });
+
+  const juzgar = (texto: string) => problemasDeAfirmacionesDeCtic([{ archivo: "x.md", texto }]);
+
+  it("caza las cuatro formas que el harness y el barrido encontraron, aunque vengan partidas", () => {
+    expect(juzgar("la estrategia y la\n    implementación de ISO/IEC 42001.")).toHaveLength(1);
+    expect(juzgar("y que formalicé implementando ISO/IEC 42001.")).toHaveLength(1);
+    expect(juzgar("the\n    strategy and the ISO/IEC 42001 implementation.")).toHaveLength(1);
+    const rojo = juzgar("intro\nwhich I formalized by implementing ISO/IEC 42001.");
+    expect(rojo).toHaveLength(1);
+    expect(rojo[0]).toContain("x.md:2");
+  });
+
+  it("aprueba la estructuración y deja en pie la descripción de cómo arranca una norma", () => {
+    expect(
+      juzgar(
+        "la estrategia y la estructuración del sistema de gestión bajo ISO/IEC 42001. " +
+          "the structuring of the ISO/IEC 42001 management system. " +
+          "ISO/IEC 42001 comparte la misma estructura de alto nivel, y la implementación empieza igual. " +
+          "and the implementation starts the same way.",
+      ),
+    ).toEqual([]);
   });
 });
