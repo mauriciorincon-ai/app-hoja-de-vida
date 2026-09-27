@@ -3,7 +3,7 @@ slug: cafam
 codigo: AF-06
 titulo: "Cafam — el WMS y el equipo de 20 (2020–2021)"
 resumen: "La implementación de Oracle WMS Cloud en un centro de distribución de medicamentos: 20 personas en pruebas durante seis meses, el BI de control, las integraciones en VBA y la calidad del dato en SQL."
-cuando_usar: "Úsalo cuando pregunten por Cafam (2020–2021): la implementación de un sistema de gestión de bodega (Oracle WMS Cloud) en un centro de distribución de medicamentos, el equipo más grande que ha liderado (20 personas), integraciones en VBA, calidad de datos en SQL y simulación con FlexSim."
+cuando_usar: "Úsalo cuando pregunten qué hizo Henry en Cafam (2020–2021): la implementación de un sistema de gestión de bodega (Oracle WMS Cloud) en un centro de distribución de medicamentos, el equipo más grande que ha liderado (20 personas), integraciones en VBA, calidad de datos en SQL y simulación con FlexSim."
 estado: aprobado
 ancla: "/proyectos/cafam"
 actualizado: 2026-09-20
@@ -111,7 +111,7 @@ Hay una continuidad directa entre el escenario de prueba de un WMS —entradas c
 
 <!-- seccion: el-bi-de-control -->
 
-Diseñé informes de inteligencia de negocios y tableros interactivos para controlar la propia implementación. Estas soluciones mejoraron en un 50 % la precisión del seguimiento de las pruebas y fueron adoptadas por más de 15 usuarios involucrados en el proyecto: el director de medicamentos, el director de TI, el director del proyecto, el director del centro de distribución y los coordinadores y jefes del centro de distribución. Eran las personas que tenían que decidir sobre el avance, no un público general.
+Diseñé informes de inteligencia de negocios y tableros interactivos para controlar la propia implementación. Estas soluciones mejoraron en un 50 % la precisión del seguimiento de las pruebas y fueron adoptadas por más de 15 decisores directivos involucrados en el proyecto, de la dirección a las coordinaciones y jefaturas del centro de distribución. Eran las personas que tenían que decidir sobre el avance, no un público general.
 
 El tablero más valioso no estaba dedicado a describir la operación habitual del centro de distribución, sino a observar el avance de la transformación mientras ocurría. Permitía conocer los escenarios ejecutados, la cobertura alcanzada, los resultados obtenidos, los defectos encontrados, los responsables de atenderlos y los casos que debían probarse nuevamente después de un ajuste.
 

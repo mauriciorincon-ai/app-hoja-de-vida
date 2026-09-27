@@ -2,7 +2,7 @@
 slug: transmilenio-cm
 codigo: AF-07
 titulo: "C&M Consultores / TransMilenio — análisis post-operacional (2021–2022)"
-resumen: "El análisis post-operacional del SITP: el ETL que unificó recaudo, flota, programación, novedades y PQR (+70 %), BI adoptado por 25+ usuarios clave (+35 %), las mesas con la dirección del SITP (+25 %) y un modelo de demanda en scikit-learn que corrió diez meses."
+resumen: "El análisis post-operacional del SITP: el ETL que unificó recaudo, flota, programación, novedades y PQR (+70 %), BI adoptado por 25+ usuarios clave (+35 %), las mesas con la dirección del SITP (+25 %) y un modelo de demanda en scikit-learn que siguió en uso después de mi salida."
 cuando_usar: "Úsalo cuando pregunten por TransMilenio y C&M Consultores (2021–2022): análisis post-operacional, fuentes de datos heterogéneas (recaudo, flota, programación, novedades, PQR), pipelines ETL, predicción de demanda por ruta y franja, mesas con la dirección del SITP y adopción de tableros."
 estado: aprobado
 ancla: "/proyectos/transmilenio-cm"
@@ -167,11 +167,11 @@ Esta experiencia fortaleció mi criterio para evaluar modelos no solo por su pre
 
 <!-- seccion: el-modelo-en-uso -->
 
-El modelo corrió diez meses. Lo usaban los profesionales que presentaban el informe de demanda que las unidades de TransMilenio tomaban como referencia para programar: la predicción por ruta y franja entraba en ese informe mensual y desde ahí llegaba a la decisión de cuántos buses asignar y en qué horarios.
+El modelo siguió en uso después de mi salida. Lo usaban los profesionales que presentaban el informe de demanda que las unidades de TransMilenio tomaban como referencia para programar: la predicción por ruta y franja entraba en ese informe mensual y desde ahí llegaba a la decisión de cuántos buses asignar y en qué horarios.
 
 El modelo contribuyó a una mejora del 20 % en el rendimiento reportado del sistema. Más allá de la cifra, el aprendizaje fundamental fue que una predicción solo genera valor cuando puede incorporarse en un proceso de decisión. Un modelo puede alcanzar un buen desempeño técnico y seguir siendo irrelevante si entrega la respuesta demasiado tarde, utiliza variables que no estarán disponibles al momento de inferir o produce una salida que la organización no puede convertir en una acción. Aquí las tres condiciones se cumplían: llegaba antes de programar, usaba variables disponibles en el momento de programar y salía en la unidad en que se programa, la ruta y la franja.
 
-Esta fue una de mis primeras experiencias conectando aprendizaje automático con una consecuencia operacional real, y un modelo que se sostuvo en uso durante diez meses.
+Esta fue una de mis primeras experiencias conectando aprendizaje automático con una consecuencia operacional real, y un modelo que siguió en uso después de mi salida.
 
 ## Lo que el modelo de demanda me enseñó sobre machine learning
 
@@ -187,7 +187,7 @@ Con el tiempo, esta comprensión se ampliaría hacia aplicaciones y agentes de i
 
 <!-- seccion: la-automatizacion -->
 
-Implementé scripts que redujeron en un 40 % el tiempo dedicado a tareas repetitivas de preparación y procesamiento de información en C&M Consultores. Aunque este logro puede parecer menos sofisticado que un modelo predictivo, fue una condición necesaria para liberar capacidad analítica y concentrar el esfuerzo del equipo en problemas de mayor valor.
+Implementé scripts de tipo ETL, con VBA y Power Query en Excel, que redujeron en un 40 % el tiempo dedicado a preparar y procesar la información del análisis post-operacional para la planeación en C&M Consultores: transformaciones distintas de las de la supervisión de rutas de 2018–2020, porque alimentaban otro análisis. Aunque este logro puede parecer menos sofisticado que un modelo predictivo, fue una condición necesaria para liberar capacidad analítica y concentrar el esfuerzo del equipo en problemas de mayor valor.
 
 La automatización permitió aplicar reglas de forma consistente, reducir la intervención manual y hacer que los ciclos de análisis fueran más rápidos y reproducibles. Actividades que antes debían ejecutarse paso a paso —recibir las bases semanales, validar su estructura, cargarlas al acumulado en SQLite, recalcular los indicadores— podían incorporarse a un flujo estructurado, con entradas conocidas, transformaciones definidas y resultados verificables.
 
@@ -213,9 +213,9 @@ Las cinco cifras del rol, tal como las publica mi hoja de vida y el case study, 
 | -------------------------------------------- | ------------------------------------------------------ | --------------------------------------------------------------------- |
 | Adopción de Power BI en la operación         | +35 % de eficiencia de los procesos analíticos · 25+ usuarios clave | tableros diseñados por pregunta operacional, con definiciones compartidas |
 | ETL que unificó las fuentes heterogéneas     | +70 % en precisión y velocidad de análisis             | cinco fuentes —recaudo, flota/GPS, programación, novedades, PQR— sobre claves comunes |
-| Scripts de automatización                    | −40 % en tareas repetitivas                            | preparación y procesamiento reproducibles, con controles y excepciones |
+| Scripts de automatización                    | −40 % en tareas repetitivas                            | ETL con VBA y Power Query para el análisis post-operacional, con controles y excepciones |
 | Mesas de estrategia con la dirección del SITP | +25 % en los indicadores intervenidos                  | evidencia común, recomendaciones con mecanismo y seguimiento posterior |
-| Predicción de demanda con scikit-learn       | +20 % de rendimiento reportado del sistema             | demanda por ruta y franja, actualización mensual, RMSE con orden temporal, diez meses en uso |
+| Predicción de demanda con scikit-learn       | +20 % de rendimiento reportado del sistema             | demanda por ruta y franja, actualización mensual, RMSE con orden temporal, siguió en uso después de mi salida |
 
 Todo ocurrió entre julio de 2021 y mayo de 2022, en C&M Consultores, dentro de la Fuerza Operativa de TransMilenio S.A.
 
@@ -239,4 +239,4 @@ C&M Consultores marcó, por tanto, mi transición desde el análisis de una oper
 
 También se formó una parte esencial de mi visión sobre inteligencia artificial. Comprendí que un modelo no es valioso por su complejidad ni por su precisión aislada, sino por su capacidad de integrarse en un proceso, llegar en el momento adecuado y mejorar una decisión. Esa misma exigencia guía hoy la forma en que diseño aplicaciones inteligentes, agentes de IA y arquitecturas empresariales orientadas a producir capacidades confiables, observables y sostenibles.
 
-C&M Consultores también consolidó mi convicción de que una capacidad analítica debe aprender de su propia operación. Los datos históricos no solo servían para construir indicadores y entrenar modelos; también debían permitir comparar las predicciones con los resultados observados, revisar los supuestos y ajustar progresivamente las decisiones. Los diez meses del modelo de demanda funcionaron con esa lógica: la actualización mensual permitía contrastar la predicción anterior con la demanda observada en el recaudo antes de producir la siguiente. Esta lógica de evaluación continua se convertiría después en un fundamento de mi trabajo con plataformas analíticas, aplicaciones inteligentes y agentes de IA: ninguna solución está realmente terminada si la organización no puede observar su comportamiento, medir su impacto y mejorarla a partir de nueva evidencia.
+C&M Consultores también consolidó mi convicción de que una capacidad analítica debe aprender de su propia operación. Los datos históricos no solo servían para construir indicadores y entrenar modelos; también debían permitir comparar las predicciones con los resultados observados, revisar los supuestos y ajustar progresivamente las decisiones. El modelo de demanda funcionó con esa lógica: la actualización mensual permitía contrastar la predicción anterior con la demanda observada en el recaudo antes de producir la siguiente. Esta lógica de evaluación continua se convertiría después en un fundamento de mi trabajo con plataformas analíticas, aplicaciones inteligentes y agentes de IA: ninguna solución está realmente terminada si la organización no puede observar su comportamiento, medir su impacto y mejorarla a partir de nueva evidencia.

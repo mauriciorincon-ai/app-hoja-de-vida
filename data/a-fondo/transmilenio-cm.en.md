@@ -2,7 +2,7 @@
 slug: transmilenio-cm
 codigo: AF-07
 titulo: "C&M Consultores / TransMilenio — post-operational analysis (2021–2022)"
-resumen: "The post-operational analysis of the SITP: the ETL that unified fare collection, fleet, scheduling, incidents and PQR (+70%), BI adopted by 25+ key users (+35%), the working sessions with SITP management (+25%) and a demand model in scikit-learn that ran for ten months."
+resumen: "The post-operational analysis of the SITP: the ETL that unified fare collection, fleet, scheduling, incidents and PQR (+70%), BI adopted by 25+ key users (+35%), the working sessions with SITP management (+25%) and a demand model in scikit-learn that stayed in use after I left."
 cuando_usar: "Use this when they ask about TransMilenio and C&M Consultores (2021–2022): post-operational analysis, heterogeneous data sources (fare collection, fleet, scheduling, incidents, PQR), ETL pipelines, demand forecasting by route and time band, working sessions with SITP management and dashboard adoption."
 estado: aprobado
 ancla: "/proyectos/transmilenio-cm"
@@ -316,7 +316,7 @@ analytics document.
 
 <!-- seccion: el-modelo-en-uso -->
 
-The model ran for ten months. It was used by the professionals who presented the demand report
+The model stayed in use after I left. It was used by the professionals who presented the demand report
 that TransMilenio's units took as the reference for scheduling: the prediction by route and time
 band went into that monthly report and from there reached the decision of how many buses to
 assign and at what times.
@@ -331,7 +331,7 @@ scheduling time and it came out in the unit in which scheduling is done, the rou
 band.
 
 This was one of my first experiences connecting machine learning with a real operational
-consequence, and a model that remained in use for ten months.
+consequence, and a model that stayed in use after I left.
 
 ## What the demand model taught me about machine learning
 
@@ -359,8 +359,7 @@ relationship between the result and the decision.
 
 <!-- seccion: la-automatizacion -->
 
-I implemented scripts that reduced by 40% the time spent on repetitive information preparation
-and processing tasks at C&M Consultores. Although this achievement may seem less sophisticated
+I implemented ETL-type scripts, with VBA and Power Query in Excel, that reduced by 40% the time spent preparing and processing the information for the post-operational analysis for planning at C&M Consultores: transformations different from those of the 2018–2020 route supervision, because they fed another analysis. Although this achievement may seem less sophisticated
 than a predictive model, it was a necessary condition for freeing analytical capacity and
 concentrating the team's effort on higher-value problems.
 
@@ -409,9 +408,9 @@ each one:
 | ---------------------------------------------- | -------------------------------------------------------- | ------------------------------------------------------------------------- |
 | Power BI adoption in the operation             | +35% efficiency of analytical processes · 25+ key users  | dashboards designed by operational question, with shared definitions      |
 | ETL that unified the heterogeneous sources     | +70% in analysis precision and speed                     | five sources —fare collection, fleet/GPS, scheduling, incidents, PQR— over common keys |
-| Automation scripts                             | −40% in repetitive tasks                                 | reproducible preparation and processing, with controls and exceptions     |
+| Automation scripts                             | −40% in repetitive tasks                                 | ETL with VBA and Power Query for the post-operational analysis, with controls and exceptions |
 | Strategy sessions with SITP management         | +25% in the intervened indicators                        | common evidence, recommendations with mechanism and later follow-up       |
-| Demand prediction with scikit-learn            | +20% reported system performance                         | demand by route and time band, monthly update, RMSE with temporal order, ten months in use |
+| Demand prediction with scikit-learn            | +20% reported system performance                         | demand by route and time band, monthly update, RMSE with temporal order, stayed in use after I left |
 
 All of it happened between July 2021 and May 2022, at C&M Consultores, within the Operational
 Task Force of TransMilenio S.A.
@@ -462,7 +461,7 @@ aimed at producing reliable, observable and sustainable capabilities.
 C&M Consultores also consolidated my conviction that an analytical capability must learn from
 its own operation. Historical data did not only serve to build indicators and train models; it
 also had to make it possible to compare predictions with observed results, review assumptions
-and progressively adjust decisions. The ten months of the demand model worked with that logic:
+and progressively adjust decisions. The demand model worked with that logic:
 the monthly update made it possible to contrast the previous prediction with the demand observed
 in fare collection before producing the next one. This logic of continuous evaluation would
 later become a foundation of my work with analytics platforms, intelligent applications and AI

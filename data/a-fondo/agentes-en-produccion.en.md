@@ -289,7 +289,7 @@ be deleted.
 
 <!-- seccion: dash-agent-ai -->
 
-Dash Agent AI is an application of my own published in my showcase, which I conceived and designed entirely in 2026, in my own app pipeline and well after Vesting. It is not a bridge from Vesting's platform: it is not part of it and does not use its confidential architecture. It is
+Dash Agent AI is an application of my own published in my showcase, which I conceived and designed entirely in 2026, with my own means and outside Fundación CTIC, in my own app pipeline and well after Vesting. It is not a bridge from Vesting's platform: it is not part of it and does not use its confidential architecture. It is
 an independent application that answers a more current and different question: what information
 an agent knows, keeps or uses about the person it interacts with, and how much it costs that
 person to work with it.

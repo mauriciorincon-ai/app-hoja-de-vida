@@ -55,7 +55,7 @@ This experience broadened my understanding of operations. It was no longer enoug
 
 Three closely related fronts converged under my coordination. The scheduling team organized the logistical assignment of teachers and consultants. The digitization team converted the answers recorded on physical sheets into usable data, through specialized scanners and, when the condition of the material required it, through manual capture. The logistics team managed the transport and delivery of booklets, exams, books and other materials required by the institutions.
 
-In people, there were about 40 direct reports —some 7 in scheduling, some 12 in digitization and some 20 in logistics— and, through scheduling, about 50 test administrators who did not report to me but did depend on my calendar.
+In people, I coordinated about 40 through coordinators —some 7 in scheduling, some 12 in digitization and some 20 in logistics— and, through scheduling, about 50 test administrators who did not report to me but did depend on my calendar.
 
 | Front | What it did | What happened if it failed |
 | --- | --- | --- |
@@ -161,7 +161,7 @@ I also understood that follow-up is more effective when it makes the system visi
 
 With close to 40 people in three different trades, clarity could not be a conversation: it had to be an artifact. The board, the KPIs of the day and the Friday report were the three artifacts through which the operation saw itself, and they were the same for the logistics team, for the digitization team and for the board of directors.
 
-## Security and access to information: my first data governance
+## Security and access to information: my first contact with data governance
 
 <!-- seccion: seguridad-y-acceso -->
 

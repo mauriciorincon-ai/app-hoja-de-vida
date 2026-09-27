@@ -386,7 +386,7 @@ limit myself to its average value. I also seek to understand its distribution, v
 segments and extreme situations. When I evaluate a predictive model, I do not only look at the
 global metric. I analyze where the error concentrates and what consequences the cases outside the
 usual behavior produce: the TransMilenio demand model was validated with RMSE respecting the
-temporal order, and it ran for 10 months because it kept being compared against what was really
+temporal order, and it stayed in use after I left because it kept being compared against what was really
 happening.
 
 I also apply it to artificial intelligence agents. Correct behavior in most executions is not
@@ -600,7 +600,7 @@ defining components and functionalities.
 In Power BI, this perspective translates into visual hierarchy, navigation, reduced cognitive load
 and correspondence between the screen and the decision. The model may contain a great deal of
 information, but the experience must present only what the person needs in order to move
-forward. At Fundación CTIC, the 42 analytical products serve two very different audiences
+forward. At Fundación CTIC, the more than 40 analytical products serve two very different audiences
 —administrative and clinical leaders— and the same figure is presented with the depth each one
 needs.
 

@@ -138,6 +138,10 @@ frases suyas tocadas está en § 4, para que las vete si quiere.
 
 ## 2. Lo que decide el dueño — con la propuesta lista para aplicar
 
+> **Actualización del mismo día:** el dueño contestó 2, 5, 7, 8, 9, 19, 26a, 26c, 26d, 26g, 26i, 27, 30 y 39;
+> lo aplicado está en `REV-2026-09-27-respuestas-del-dueno-bitacora.md` (PR aparte). El complemento
+> del mismo día cerró 3, 10, 14, 26b y 26e en la misma rama: no queda ninguna pendiente.
+
 Ninguno de estos se inventa. Cada uno se resuelve con una frase suya; la propuesta va escrita para
 que baste un «sí» o una corrección.
 

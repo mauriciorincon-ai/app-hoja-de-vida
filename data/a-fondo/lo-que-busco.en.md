@@ -50,7 +50,7 @@ The problem I want to solve can be expressed simply: how to turn reliable data a
 
 <!-- seccion: la-trayectoria-que-lo-respalda -->
 
-This motivation is backed by my track record. At Vesting I built from scratch on Microsoft Fabric the data platform that analyzed and monitored in real time up to 23 artificial intelligence agents at once, with 12 integrated clients, 120 tables, 20 GB and 1,000 events per day, and I structured the replicable 11-stage core process with which the 27 agents in its inventory were built. At Fundación CTIC I currently lead the institutional artificial intelligence strategy under UNE-ISO/IEC 42001:2025: 23 instruments of the management system, 12 opportunities identified and 7 use cases evaluated. Throughout my career I have also developed pipelines, semantic models, Power BI products, applications, automations and predictive models connected to real decisions, in banking, transport, logistics and health.
+This motivation is backed by my track record. At Vesting I built from scratch on Microsoft Fabric the data platform that analyzed and monitored in real time up to 23 artificial intelligence agents at once, with 12 integrated clients, 120 tables, 20 GB and 1,000 events per day, and I structured the replicable 11-stage core process with which the 27 agents in its inventory were built. At Fundación CTIC I currently lead the institutional artificial intelligence strategy under UNE-ISO/IEC 42001:2025: more than 20 instruments of the management system, more than 10 opportunities identified and half of them evaluated. Throughout my career I have also developed pipelines, semantic models, Power BI products, applications, automations and predictive models connected to real decisions, in banking, transport, logistics and health.
 
 DP-600 formalizes the analytical core of this experience through Microsoft Fabric, semantic models and Power BI. The AI-103 (applications and agents) and AI-300 (operation of models and agents) paths, in progress since July 2026, extend that base toward building applications and agents, and toward the operation, evaluation and observability of intelligent solutions: they close the two ends. I do not present them as earned credentials, but as part of a professional evolution that is already linked to concrete responsibilities and projects.
 
@@ -63,9 +63,9 @@ My profile can generate value in four closely related types of responsibility, a
 | Role                                 | What I bring                                                                                              | Evidence                                                                                                       |
 | ------------------------------------ | --------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
 | AI architecture and engineering      | designing complete agentic ecosystems: process specification, knowledge, harnesses, evaluation            | ARKHÉ, my agentic ecosystem; the 13 agents of the showcase; the Vesting platform                               |
-| AI strategy and governance           | how an organization identifies, evaluates, prioritizes and supervises its initiatives, with technical evidence | the AI strategy of Fundación CTIC; the management system with 23 instruments                                |
+| AI strategy and governance           | how an organization identifies, evaluates, prioritizes and supervises its initiatives, with technical evidence | the AI strategy of Fundación CTIC; the management system with more than 20 instruments                                |
 | Leadership of analytical platforms   | Microsoft Fabric, pipelines, semantic models, governance and adoption as a single system                  | the Vesting platform; DP-600                                                                                   |
-| Leadership in BI and analytics       | Power BI end to end and teams that adopt it                                                               | Banco Pichincha: 50+ users, 5 people reporting to me; TransMilenio: 25+ users; Fundación CTIC: 42 products     |
+| Leadership in BI and analytics       | Power BI end to end and teams that adopt it                                                               | Banco Pichincha: 50+ users, 5 people reporting to me; TransMilenio: 25+ users; Fundación CTIC: more than 40 products     |
 
 The four spaces share the same professional responsibility: understanding the system, building the right capability and ensuring it can be used with confidence. I can work close to the implementation, close to the strategic decision or articulating both. My greatest differentiator appears precisely in that combination.
 
@@ -81,7 +81,7 @@ My contribution in this field begins before selecting the model. Industrial Engi
 
 <!-- seccion: estrategia-y-gobierno-de-ia -->
 
-In artificial intelligence strategy and governance I can contribute to establishing the way an organization identifies, evaluates, prioritizes and supervises its initiatives. This covers defining criteria for use cases, responsibilities, risk management, impact assessment, vendor governance, life-cycle monitoring and the adoption of standards such as ISO/IEC 42001. It is what I do today at Fundación CTIC, where out of 12 identified opportunities 7 cases were evaluated and 3 were prioritized.
+In artificial intelligence strategy and governance I can contribute to establishing the way an organization identifies, evaluates, prioritizes and supervises its initiatives. This covers defining criteria for use cases, responsibilities, risk management, impact assessment, vendor governance, life-cycle monitoring and the adoption of standards such as ISO/IEC 42001. It is what I do today at Fundación CTIC, where out of more than 10 identified opportunities half were evaluated and a few were prioritized.
 
 At this level I am not interested in formulating policies disconnected from technical reality. My experience building data platforms and observing agents allows me to understand which controls are applicable, what evidence an architecture can produce and which responsibilities must remain with people. Likewise, my work with senior management —the board of directors at Ceinfes, the founders at Vesting, the Planning Directorate and the sub-directorates at Fundación CTIC— allows me to translate those decisions into conversations about value, risk, institutional capacity and sustainability.
 
@@ -93,13 +93,13 @@ In leadership of analytical and intelligent platforms I can contribute my depth 
 
 This responsibility works as a bridge between the others. Without a reliable architecture of data and semantic models, intelligent applications lack context and AI strategies find no technical base on which to materialize. My specialty in Power BI also allows me to bring that architecture closer to people through understandable, decision-oriented analytical experiences.
 
-The fourth role is the closest to that craft: leadership in BI and analytics, Power BI end to end and teams that adopt it. It is the role DP-600 certifies and the one I have exercised most often: at Banco Pichincha, with 5 people reporting to me and dashboards adopted by more than 50 users, a training program that raised productivity by 20% and predictive models in production; at TransMilenio, with more than 25 key users and an ETL that unified the sources; at Fundación CTIC, with 42 analytical products for 20 leaders and about 75 users. I explicitly asked for it as the fourth type of role because I do not want AI engineering to erase the depth in BI: it is the foundation of everything else.
+The fourth role is the closest to that craft: leadership in BI and analytics, Power BI end to end and teams that adopt it. It is the role DP-600 certifies and the one I have exercised most often: at Banco Pichincha, with 5 people reporting to me and dashboards adopted by more than 50 users, a training program that raised productivity by 20% and predictive models in production; at TransMilenio, with more than 25 key users and an ETL that unified the sources; at Fundación CTIC, with more than 40 analytical products for some 20 leaders and about 75 users. I explicitly asked for it as the fourth type of role because I do not want AI engineering to erase the depth in BI: it is the foundation of everything else.
 
 ## The responsibility I want to take on: end to end
 
 <!-- seccion: la-responsabilidad-que-quiero -->
 
-I am looking for a position in which I can take on end-to-end responsibility and not limit myself to executing an isolated part of the solution. I want to participate in understanding the problem, selecting the right pattern, designing the architecture, building or directing the implementation, evaluation, adoption and subsequent evolution. It is the responsibility I had at Vesting, between 2023 and 2025, and the one I have at Fundación CTIC.
+I am open to a position in which I can take on end-to-end responsibility and not limit myself to executing an isolated part of the solution. I want to participate in understanding the problem, selecting the right pattern, designing the architecture, building or directing the implementation, evaluation, adoption and subsequent evolution. It is the responsibility I had at Vesting, between 2023 and 2025, and the one I have at Fundación CTIC.
 
 This does not mean concentrating all decisions or replacing the specialized knowledge of other professionals. It means having the visibility and the authority needed to connect the disciplines that determine the result: business, processes, data, architecture, development, user experience, security, risk and governance.
 
@@ -116,9 +116,7 @@ I do not need the organization to have all these capabilities resolved before my
 - Location: I live in Bogotá, Colombia. I can work on-site, hybrid or remotely depending on the nature of the responsibility.
 - Relocation: I am available for national or international relocation, to another city or another country.
 - Time zone: any. In remote work I adapt my working day to the team's.
-- English: B2 level, professional; I work with documentation and teams in English daily.
-
-I have no predetermined geographic restrictions for relocating. If the opportunity represents a significant professional evolution and the economic conditions are favorable and proportional to the scope of the position, I can consider relocating to any country. The evaluation must include total compensation, cost of living, immigration conditions, contractual stability and the practical feasibility of the move.
+- English: B2 level (IELTS 5.5 equivalence, 2014), professional; I work with documentation and teams in English daily.
 
 This willingness is not merely declarative. Between 2013 and 2014 I lived and studied in Melbourne, Australia, where I did intensive English training and sat the IELTS. The experience allowed me to function outside my usual environment, adapt to another cultural context and understand first-hand the demands of an international relocation.
 
@@ -204,7 +202,7 @@ With that rule, in 120 representative scenarios I compared the architecture with
 
 <!-- seccion: lo-que-espero -->
 
-I am looking for an organization that considers data and artificial intelligence as enterprise capabilities and not only as tools or temporary projects. This implies recognizing that their value depends on the architecture, the quality of the information, adoption, evaluation and the clarity with which responsibilities are distributed.
+I am interested in an organization that considers data and artificial intelligence as enterprise capabilities and not only as tools or temporary projects. This implies recognizing that their value depends on the architecture, the quality of the information, adoption, evaluation and the clarity with which responsibilities are distributed.
 
 I value environments where there is technological ambition accompanied by discipline. I want to work where it is possible to experiment, but where relevant decisions are also documented, results are measured and risks are managed proportionally. Sustainable innovation does not require removing controls, but designing them so that they allow moving forward with confidence.
 

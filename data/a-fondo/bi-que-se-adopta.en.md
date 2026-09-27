@@ -2,7 +2,7 @@
 slug: bi-que-se-adopta
 codigo: AF-20
 titulo: "BI that gets adopted"
-resumen: "Adoption as the indicator and not the dashboard: 50+ users in banking, 25+ key users in transport, 15+ in logistics and 42 products for 20 leaders in healthcare; training as part of the product, the provenance of every figure and the agent that builds complete Power BI reports."
+resumen: "Adoption as the indicator and not the dashboard: 50+ users in banking, 25+ key users in transport, 15+ in logistics and more than 40 products for some 20 leaders in healthcare; training as part of the product, the provenance of every figure and the agent that builds complete Power BI reports."
 cuando_usar: "Use this when they ask about business intelligence: how he gets people to use the dashboards, how many users have adopted his dashboards, adoption as the indicator, designing around a decision, Power BI, Shiny, Tableau and Looker Studio, and leadership in BI and analytics."
 estado: aprobado
 ancla: "#skills-bi-y-decision"
@@ -80,9 +80,9 @@ design decision.
 Adoption therefore begins long before publishing. It begins when the problem is selected
 correctly, the context of use is understood, the definitions are agreed and a product is designed
 that reduces the effort needed to go from information to action. At Fundación CTIC, since March
-2025, the rule is applied product by product: each of the 42 analytical products is born from a
+2025, the rule is applied product by product: each of the more than 40 analytical products is born from a
 process leader's question and not from an available table, and that is why it can be stated that
-20 leaders of 15 processes use them and not merely that they are published.
+some 20 leaders of some 15 processes use them and not merely that they are published.
 
 Power BI provides very broad capabilities for modeling, analyzing and communicating information.
 However, no functionality replaces the need to understand the process, the audience and the
@@ -102,7 +102,7 @@ to generate value when it is incorporated into the work of the people who can ac
 | **Banco Pichincha**                | March – July 2023          | decision-oriented dashboards, with a team of 5 people                   | **more than 50** business **users**              | +25% in decision-making                                 |
 | **TransMilenio / C&M Consultores** | July 2021 – May 2022       | Power BI in the post-operational analysis                               | **more than 25 key users** of the operation      | +35% in efficiency of the analytical processes          |
 | **Cafam**                          | October 2020 – June 2021   | the BI that controlled the WMS implementation                           | **more than 15** directors, coordinators and heads | +50% in accuracy of test tracking                       |
-| **Fundación CTIC**                 | since March 2025           | 42 analytical products by process, 23 of them control dashboards        | **20 leaders** of 15 processes, some 75 users    | close to 60% less preparation effort, estimated         |
+| **Fundación CTIC**                 | since March 2025           | more than 40 analytical products by process, half of them control dashboards        | **some 20 leaders** of some 15 processes, some 75 users    | close to 60% less preparation effort, estimated         |
 
 ## Banco Pichincha and C&M Consultores: more than 50 users and more than 25 key users
 
@@ -137,15 +137,14 @@ responsible people and validation states while the project was under way, with 2
 At C&M Consorcio 2018, between November 2018 and May 2020, I developed performance dashboards and
 reports aimed at control and transparency in the supervision of TransMilenio: 2 weekly reports, 1
 monthly consolidated report and others on demand, over some 150 routes from 10 concessionaire
-companies, with Excel, VBA and SQL. In this experience I do not have a confirmed user figure, so I
+companies, with Excel, VBA, Power Query and SQL. In this experience I do not have a confirmed user figure, so I
 do not present it as a case of quantified adoption. Its value lies in having turned heterogeneous
 operational records into traceable evidence for supervision and the evaluation of commitments,
-and in processing times dropping by at least 40%.
+and in those reports' processing times dropping by at least 40% with the ETL automation.
 
-At Fundación CTIC, since March 2025, the 42 analytical products in Power BI —23 of them control
-dashboards by process— are used by 20 leaders of 15 processes and some 75 users, administrative
+At Fundación CTIC, since March 2025, the more than 40 analytical products in Power BI —half of them control dashboards by process— are used by some 20 leaders of some 15 processes and some 75 users, administrative
 and clinical leaders with very different needs. The effect figure I declare as what it is: close
-to 60% less effort in preparing the information, estimated, and 10 analysis plans under
+to 60% less effort in preparing the information, estimated, and some ten analysis plans under
 follow-up.
 
 These experiences should not be compared only by the number of users. A solution used by fifteen
@@ -168,7 +167,7 @@ Banco Pichincha is adoption; the "+25% in decision-making" is impact, measured o
 those dashboards supported. "More than 25 key users" at C&M Consultores is adoption by role; the
 "+35% in efficiency" is impact on the analytical processes. "More than 15 users" at Cafam is
 adoption with a job title; the "+50% in accuracy" is impact on test tracking. And at Fundación
-CTIC, "20 leaders of 15 processes" is counted adoption, while the "close to 60%" is an estimate
+CTIC, "some 20 leaders of some 15 processes" is counted adoption, while the "close to 60%" is an estimate
 of impact, and that is why it carries the "close to".
 
 That is why, when I evaluate an analytical solution, I do not only ask how many people can
@@ -338,8 +337,7 @@ I carried this rule into my own portfolio. The technical sheets of the 32 pieces
 —6 applications, 13 agents, 7 research lines and 6 dashboards— declare the provenance of each of
 their figures with those four labels, so that claims about tests, coverage, users, performance
 or results can be related to the corresponding evidence. And I apply it to this very CV: the
-"close to 60%" of Fundación CTIC carries "close to" because it is estimated; the 42 products and
-the 20 leaders do not carry it because they are counted.
+"close to 60%" of Fundación CTIC carries "close to" because it is estimated; the products and the leaders are counted, but they go rounded —"more than 40", "some 20"— because they are the institution's internal figures.
 
 Traceability acquires special importance in executive conversations. When a person questions a
 number, the answer must not depend on who has more authority or on who built the report. There
@@ -451,7 +449,7 @@ An exceptional condition that needs immediate attention may be better resolved t
 A repetitive decision may require an application that guides the action. A need for anticipation
 may need a predictive model: at Banco Pichincha, churn, delinquency and risk were not handled
 with one more dashboard but with scikit-learn models that reached production with more than 90%
-accuracy; at TransMilenio, demand by time band with a model that ran for 10 months. A contextual
+accuracy; at TransMilenio, demand by time band with a model that stayed in use after I left. A contextual
 query task can benefit from an agent with access to authorized sources, like the 13 agents in my
 showcase.
 
@@ -541,7 +539,7 @@ training, documentation and support mechanisms.
 
 After publication, it needs observation. I must understand who uses it, which questions appear,
 which parts generate friction and which new needs arise from its real use. At Fundación CTIC that
-observation has a shape: 10 analysis plans under follow-up on the 42 products, which are the way
+observation has a shape: some ten analysis plans under follow-up on the more than 40 products, which are the way
 to know whether a dashboard changed a decision or was merely published.
 
 Feedback makes it possible to improve the experience, but it must not become an indiscriminate
@@ -567,7 +565,7 @@ That is why, before developing a new product, I evaluate whether the need can be
 an existing semantic model, adding a new experience on a shared base, simplifying a previous
 report or retiring products that have already lost their purpose. Analytical maturity is not
 measured by the number of dashboards available, but by the clarity with which each one occupies a
-function within the decision system. With 42 products for 15 processes at Fundación CTIC —23 of
+function within the decision system. With more than 40 products for some 15 processes at Fundación CTIC —23 of
 them control dashboards—, that question is asked before every new product: if it fits on a model
 that already exists, one more dashboard is not born.
 

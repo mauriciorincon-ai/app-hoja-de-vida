@@ -46,11 +46,11 @@ trayectoria:
       Analytics, data governance and AI strategy (ISO/IEC 42001) for
       administrative and clinical decisions in healthcare.
     bullets:
-      - "I lead the institutional AI strategy under UNE-ISO/IEC 42001:2025: 12 opportunities identified, 7 cases evaluated and 3 prioritized."
-      - "42 analytics products in Power BI for administrative and clinical leaders: 20 leaders of 15 processes and about 75 users."
+      - "I lead the institutional AI strategy under UNE-ISO/IEC 42001:2025: more than 10 opportunities identified, half of them evaluated and a few prioritized."
+      - "more than 40 analytics products in Power BI for administrative and clinical leaders: some 20 leaders of some 15 processes and about 75 users."
       - "Institutional data governance and quality, under Colombia's habeas data regime and Law 1581."
       - "Process-based control dashboards and improvement plans: close to 60% less effort preparing information (estimated on my own work)."
-      - "23 instruments of the AI management system, 8 finished, and an ISO 42001 expert agent to review them."
+      - "more than 20 instruments of the AI management system, a third finished, and an ISO 42001 expert agent to review them."
     actual: true
   # Real period (PDF, /cv, chat, cases): 2023 — 2025. «2024» only on the HOME
   # timeline, by the owner's design, so its year transition doesn't repeat 2023.
@@ -92,9 +92,9 @@ trayectoria:
     bullets:
       - "Drove BI adoption across operations: +35% efficiency with 25+ key users."
       - "ETL that unified five heterogeneous sources (fare collection, fleet and GPS, scheduling, incidents and user complaints): +70% in analysis precision and speed."
-      - "Automation scripts with validations and visible exceptions: −40% in repetitive tasks."
+      - "ETL scripts with VBA and Power Query for the post-operational analysis, with validations and visible exceptions: −40% in repetitive tasks."
       - "Strategy sessions with SITP leadership: +25% in indicators."
-      - "Demand forecasting with scikit-learn by route and time slot, ten months in use: +20% system performance."
+      - "Demand forecasting with scikit-learn by route and time slot, which stayed in use after I left: +20% system performance."
   - periodo: "2020 — 2021"
     rol: "Information Systems and Projects Analyst"
     organizacion: "Cafam"
@@ -118,7 +118,7 @@ trayectoria:
     bullets:
       - "Data-driven supervision of about 150 routes from 10 concessionaires, cross-referencing five sources: fare collection, fleet and GPS, scheduling, incidents and user complaints."
       - "Performance dashboards and reports —two weekly and one monthly— traceable down to the operational event."
-      - "Automation with Excel, VBA and SQL: at least −40% in processing time."
+      - "ETL automation with VBA, Power Query and SQL for the route supervision reports: at least −40% in processing time."
       - "The system's statistical memory in SQLite: the operation's history, week by week."
       - "Audit of compliance with operating protocols, with indicators carrying contractual consequences."
   - periodo: "2017 — 2018"
@@ -171,7 +171,7 @@ estudios:
     icono: idiomas
     logo: british-council.svg
     logoAlto: 14
-    nota: "English B2: reading, listening and technical writing; professional discussions and analytical reports."
+    nota: "English B2 (IELTS 5.5 equivalence, 2014): reading, listening and technical writing; professional discussions and analytical reports."
 
 logros:
   - desde: "2016-08"
@@ -182,7 +182,7 @@ logros:
     descripcion: "Vesting: 12 clients integrated and up to 23 agents monitored at once, in real time, on Microsoft Fabric."
   - valor: 42
     etiqueta: "analytics products in use in healthcare"
-    descripcion: "Fundación CTIC: 20 leaders of 15 processes and about 75 users, on shared institutional definitions."
+    descripcion: "Fundación CTIC: some 20 leaders of some 15 processes and about 75 users, on shared institutional definitions."
   - valor: 50
     sufijo: "+"
     etiqueta: "users adopted my dashboards in banking"
@@ -199,9 +199,9 @@ logros:
   - valor: 20
     etiqueta: "people in the largest team I've led"
     descripcion: "WMS implementation at Cafam: −25% errors, +15% efficiency."
-  - valor: 5
+  - valor: 3
     etiqueta: "professional certifications"
-    descripcion: "Microsoft's DP-600 and 4 from IBM in data science."
+    descripcion: "Microsoft's DP-600 and 2 from IBM in data science: the Professional Certificate (with its Python and SQL courses) and R."
 
 proyectos:
   - slug: "vesting"
@@ -364,8 +364,10 @@ proyectos:
           prefijo: "+"
           sufijo: "%"
           etiqueta: "in the indicators addressed with the SITP"
-        - valor: 10
-          etiqueta: "months in use for the demand model"
+        - valor: 20
+          prefijo: "+"
+          sufijo: "%"
+          etiqueta: "system performance with the demand model"
       capitulos:
         - titulo: "Five sources, one operation"
           texto: >-
@@ -387,12 +389,12 @@ proyectos:
         - titulo: "Forecasting demand to schedule"
           texto: >-
             I developed a demand model with scikit-learn by route and time slot, updated monthly and
-            validated with RMSE respecting temporal order. It ran for ten months inside the report
-            used to decide how many buses to assign and at what times.
+            validated with RMSE respecting temporal order. It went into the report used to decide
+            how many buses to assign and at what times, and stayed in use after I left.
         - titulo: "Automating with controls"
           texto: >-
-            Scripts cut the time spent on repetitive tasks by 40%, with input validation and visible
-            exceptions: a weekly file arriving with a missing column is neither loaded silently nor
+            The ETL scripts —VBA and Power Query— cut by 40% the time spent preparing the
+            post-operational analysis information, with input validation and visible exceptions: a weekly file arriving with a missing column is neither loaded silently nor
             allowed to crash the process. That time went to the model and to the sessions.
       impacto:
         - "+35% efficiency of analytical processes from BI adoption."
@@ -483,19 +485,23 @@ proyectos:
         Bring data governance, quality and analytics to the decisions of the
         Foundation's administrative and clinical leaders.
       cifras:
-        - valor: 42
+        - valor: 40
+          prefijo: "+"
           etiqueta: "analytics products in use in Power BI"
         - valor: 20
-          etiqueta: "leaders supported, across 15 processes"
-        - valor: 12
+          prefijo: "~"
+          etiqueta: "leaders supported, across some 15 processes"
+        - valor: 10
+          prefijo: "+"
           etiqueta: "AI opportunities identified"
-        - valor: 23
+        - valor: 20
+          prefijo: "+"
           etiqueta: "instruments of the AI management system"
       capitulos:
         - titulo: "Process analytics for two audiences"
           texto: >-
             I develop analysis and visualization models in Power BI for administrative and clinical
-            leaders: 42 products, including 23 control dashboards. An indicator keeps a single
+            leaders: more than 40 products, including more than 20 control dashboards. An indicator keeps a single
             institutional definition, even if each audience sees it with its own level of detail.
         - titulo: "Data governance and quality in healthcare"
           texto: >-
@@ -510,19 +516,19 @@ proyectos:
             owners of each process carry them out.
         - titulo: "The institutional AI strategy"
           texto: >-
-            I lead the AI strategy under UNE-ISO/IEC 42001:2025: 12 opportunities identified, 7
-            cases formally evaluated and 3 prioritized. Not every problem needs AI, and not every AI
+            I lead the AI strategy under UNE-ISO/IEC 42001:2025: more than 10 opportunities identified, half of them
+            formally evaluated and a few prioritized. Not every problem needs AI, and not every AI
             initiative needs an agent.
         - titulo: "A management system that can be demonstrated"
           texto: >-
-            We built 23 instruments of the management system —policies, procedures, matrices
-            and criteria—, 8 of them finished. To review them I built the ISO 42001 expert agent I
+            We built more than 20 instruments of the management system —policies, procedures, matrices
+            and criteria—, a third of them finished. To review them I built the ISO 42001 expert agent I
             publish in the showcase: it cites the standard or declares the gap, and no ruling moves
             forward without a person.
       impacto:
-        - "42 analytical products in use for 20 leaders across 15 processes and about 75 users."
-        - "About 60% less effort preparing information (estimated on my own work); 10 analysis plans under follow-up."
-        - "12 AI opportunities identified, 7 use cases evaluated, 3 prioritized and 2 documented."
+        - "more than 40 analytical products in use for some 20 leaders across some 15 processes and about 75 users."
+        - "About 60% less effort preparing information (estimated on my own work); some ten analysis plans under follow-up."
+        - "more than 10 AI opportunities identified, half of them evaluated, a few prioritized and the first ones documented."
         - "Institutional data quality as a practice, not an event."
       leccion: >-
         My purpose is not to get the organization to use more artificial intelligence,
@@ -533,8 +539,8 @@ proyectos:
       Data-driven supervision of TransMilenio's operation: about 150 routes from 10
       concessionaires, five sources cross-referenced (fare collection, fleet and
       GPS, scheduling, incidents and user complaints), performance dashboards and
-      reports traceable down to the event, automation with Excel, VBA and SQL (at
-      least −40% processing time) and the system's statistical memory.
+      reports traceable down to the event, ETL automation with VBA, Power Query and SQL for the
+      supervision reports (at least −40% processing time) and the system's statistical memory.
     stack: ["Excel · VBA", "SQL · SQLite", "Performance dashboards"]
     casestudy:
       titular: "Verifying with evidence that Bogotá's mass transit system was operated as agreed, when a discount or a penalty could hang on each figure."
@@ -590,7 +596,7 @@ proyectos:
             showcase, with their method and their result.
       impacto:
         - "Weekly and monthly performance reports for about 150 routes, traceable from the figure to the record."
-        - "At least 40% less processing time with automation in Excel, VBA and SQL."
+        - "At least 40% less processing time with the ETL automation in VBA, Power Query and SQL that fed the route supervision reports."
         - "A statistical memory of the operation that stopped starting from scratch every week."
         - "Two questions from the operation turned, years later, into published research."
       leccion: >-
@@ -755,23 +761,10 @@ certificaciones:
     logoAlto: 16
   - nombre: "IBM: Data Science Professional Certificate"
     fecha: "2022"
-    nota: "Between two jobs, the decision to reach the next role with a formal base: from preparing the data to training models with scikit-learn."
+    nota: "Between two jobs, the decision to reach the next role with a formal base: from preparing the data to training models with scikit-learn, with its Python and SQL for data science courses."
     icono: datos
     logo: ibm.svg
     logoAlto: 16
-  - nombre: "IBM: Python for Data Science"
-    fecha: "2022"
-    nota: "Turning an analytical problem into a reproducible flow: exploration, preparation, training and evaluating models."
-    icono: codigo
-    logo: ibm.svg
-    logoAlto: 16
-  - nombre: "IBM: SQL for Data Science"
-    fecha: "2022"
-    nota: "Before modeling, knowing how to locate, relate, filter and validate the data that represents the phenomenon."
-    icono: codigo
-    logo: ibm.svg
-    logoAlto: 16
-
 skills:
   # 2026-09-26 revision (owner's request): today's tools, for the AI
   # engineering roles. Every group has ITS OWN icon, looked up by `id`.
@@ -803,7 +796,7 @@ skills:
       - "Data Factory"
       - "Real-Time Intelligence (Eventhouse & KQL)"
       - "Fabric Data Agents"
-      - "Microsoft Purview"
+      - "Microsoft Purview — prototype"
       - "RLS (row-level security)"
       - "ETL"
       - "Data modeling"
@@ -825,12 +818,10 @@ skills:
     grupo: "Multi-platform big data"
     items:
       - "Fabric, Databricks & Snowflake planner — in preparation"
-      - "Databricks: Unity Catalog, Delta Lake, Lakeflow & Mosaic AI"
-      - "Snowflake: Snowpark, Cortex AI & Dynamic Tables"
-      - "dbt"
-      - "Apache Iceberg"
-      - "Airflow"
-      - "PySpark"
+      - "Databricks: Unity Catalog, Delta Lake, Lakeflow & Mosaic AI — prototype"
+      - "Snowflake: Snowpark, Cortex AI & Dynamic Tables — prototype"
+      - "Airflow — studying"
+      - "PySpark — studying"
   - id: ia-y-ml
     grupo: "Machine learning & data science"
     items:

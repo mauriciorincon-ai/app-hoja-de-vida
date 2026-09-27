@@ -310,10 +310,10 @@ preguntas:
     espera: [skills]
     familia: plataforma-y-datos
   - pregunta: "¿Ha usado dbt o Airflow?"
-    espera: [skills]
+    espera: [skills, plataforma-y-despliegue]
     familia: plataforma-y-datos
   - pregunta: "¿Ha trabajado con Microsoft Purview?"
-    espera: [skills, gobierno-de-datos-y-de-ia]
+    espera: [skills, gobierno-de-datos-y-de-ia, plataforma-y-despliegue]
     familia: plataforma-y-datos
   - pregunta: "¿Sabe de MLOps?"
     espera: [plataforma-y-despliegue, analitica-predictiva]

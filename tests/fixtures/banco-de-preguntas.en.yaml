@@ -256,10 +256,10 @@ preguntas:
     espera: [skills]
     familia: plataforma-y-datos
   - pregunta: "Has he used dbt or Airflow?"
-    espera: [skills]
+    espera: [skills, plataforma-y-despliegue]
     familia: plataforma-y-datos
   - pregunta: "Has he worked with Microsoft Purview?"
-    espera: [skills, gobierno-de-datos-y-de-ia]
+    espera: [skills, gobierno-de-datos-y-de-ia, plataforma-y-despliegue]
     familia: plataforma-y-datos
   - pregunta: "Does he know MLOps?"
     espera: [plataforma-y-despliegue, analitica-predictiva]

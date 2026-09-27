@@ -2,8 +2,8 @@
 slug: certificaciones
 codigo: AF-11
 titulo: "Certifications — the path from the DP-600"
-resumen: "Five credentials earned —DP-600 in Microsoft Fabric in December 2024 and four from IBM in data science— and two paths in progress since July 2026: AI-103 (apps and agents) and AI-300 (MLOps), which replaces the retired DP-100."
-cuando_usar: "Use this when they ask which certifications he holds: the Microsoft Fabric DP-600, the four IBM data science certifications, the AI-103 and AI-300 tracks in progress, how long it took him to earn them, and which certification he plans to take next."
+resumen: "Three credentials earned —DP-600 in Microsoft Fabric in December 2024 and two from IBM in data science, one of them a professional certificate with its courses— and two paths in progress since July 2026: AI-103 (apps and agents) and AI-300 (MLOps), which replaces the retired DP-100."
+cuando_usar: "Use this when they ask which certifications he holds: the Microsoft Fabric DP-600, the two IBM data science certifications, the AI-103 and AI-300 tracks in progress, how long it took him to earn them, and which certification he plans to take next."
 estado: aprobado
 ancla: "#certificaciones"
 actualizado: 2026-09-20
@@ -48,11 +48,9 @@ you know how to do thanks to each one, how they connect with each other and with
 | AI-103 | Microsoft Certified: Azure AI Apps and Agents Developer Associate   | in progress, 21 modules  | since July 2026             |
 | AI-300 | Microsoft Certified: Machine Learning Operations Engineer Associate | in progress, 10 modules  | since July 2026             |
 | IBM    | Applied Data Science with R                                         | earned                   | January – November 2024     |
-| IBM    | Data Science Professional Certificate                               | earned                   | May – November 2022         |
-| IBM    | Python for Data Science                                             | earned                   | June – September 2022       |
-| IBM    | SQL for Data Science                                                | earned                   | September – November 2022   |
+| IBM    | Data Science Professional Certificate (with its Python and SQL courses) | earned                   | May – November 2022         |
 
-Five credentials earned —the DP-600 and four from IBM— and two paths in progress: right now I am getting certified in the AI-103 and the AI-300. It is the same count the site publishes: the achievement "5 professional certifications" counts only the earned ones, and the two paths appear with their "in progress" chip.
+Three credentials earned —the DP-600 and two from IBM— and two paths in progress: right now I am getting certified in the AI-103 and the AI-300. It is the same count the site publishes: the achievement "3 professional certifications" counts only the earned ones, and the two paths appear with their "in progress" chip.
 
 Two codes that appear in my story and not in the table: the AI-102, which Microsoft discontinued and whose path is today the AI-103, and the DP-100, which Microsoft retired on June 1, 2026 and whose declared replacement is the AI-300. Neither of the two is presented as earned, and neither appears in my CV any longer.
 
@@ -82,7 +80,7 @@ Industrial Design brings a complementary dimension. An analytical architecture c
 
 The overlap between studying and working at Vesting was especially significant. The platform I was building while I studied ended up operational, from scratch, on Microsoft Fabric: 12 clients integrated, 120 tables, 20 GB, 1,000 events per day and up to 23 agents monitored at a time, in real time. Each domain of the exam —ingestion, lakehouse, warehouse, semantic model, security— had an equivalent in something I was deploying that same week.
 
-Currently, this certification also supports my work at Fundación CTIC. There I use Power BI to structure 42 analytical products aimed at administrative and clinical leaders, while my knowledge of Microsoft Fabric strengthens the architectural vision needed to integrate data, analytics and artificial intelligence under common principles of security, traceability and governance.
+Currently, this certification also supports my work at Fundación CTIC. There I use Power BI to structure more than 40 analytical products aimed at administrative and clinical leaders, while my knowledge of Microsoft Fabric strengthens the architectural vision needed to integrate data, analytics and artificial intelligence under common principles of security, traceability and governance.
 
 The DP-600 does not define my whole profile, but it does validate its analytical core. It proves that I can develop an end-to-end solution, from data preparation to the semantic model and the decision experience. On that base the intelligent applications, the agents and the enterprise artificial intelligence architectures are integrated afterwards. And it is the reason why, in addition to AI engineering and strategy roles, I am interested in a leadership role in BI and analytics: the DP-600 is the credential of that trade.
 
@@ -102,7 +100,7 @@ This path takes over the training space previously occupied by the AI-102, but i
 
 The AI-103 connects directly with my experience at Vesting. There I understood that developing an agent does not consist only of designing a prompt or connecting a model. It is necessary to define the purpose of the solution, structure the context it needs, select its sources, delimit the tools it can use, manage exceptions and establish when it must request human intervention. With that criterion the 27 agents in the Vesting inventory were built on an 11-stage core process.
 
-It also relates to my current responsibility of leading an institutional artificial intelligence strategy at Fundación CTIC. To correctly evaluate a proposal it is not enough to know the principles of governance. It is necessary to understand how the applications are built, how they retrieve knowledge, how they use tools and which technical dependencies they introduce. That depth makes it possible to formulate applicable controls and avoid policies disconnected from the reality of development: the 7 use cases formally evaluated were judged with that builder's eye.
+It also relates to my current responsibility of leading an institutional artificial intelligence strategy at Fundación CTIC. To correctly evaluate a proposal it is not enough to know the principles of governance. It is necessary to understand how the applications are built, how they retrieve knowledge, how they use tools and which technical dependencies they introduce. That depth makes it possible to formulate applicable controls and avoid policies disconnected from the reality of development: the use cases formally evaluated were judged with that builder's eye.
 
 My training in Industrial Engineering provides the starting point: before designing an agent I need to understand the activity, its inputs, rules, exceptions and effects on the complete process. Industrial Design broadens that perspective toward the interaction between the person and the solution. An agent must not only work; it must properly communicate its capabilities, limits and needs for intervention.
 
@@ -148,7 +146,7 @@ The AI-300 thus completes the transition from building a solution to turning it 
 
 <!-- seccion: las-de-ibm -->
 
-My training in data science was built through four IBM credentials, developed in two stages and around the main languages used for analysis: Python, SQL and R.
+My training in data science was built through two IBM credentials, developed in two stages and around the main languages used for analysis: Python, SQL and R.
 
 During 2022 I completed the IBM Data Science Professional Certificate (May – November), together with the Python for Data Science (June – September) and SQL for Data Science (September – November) paths. Those were the months I devoted to studying and getting certified between two jobs, and the investment was deliberate: I wanted to arrive at the next role with a formal base. This training strengthened my knowledge of data preparation and exploration, analytical programming, visualization, relational queries and model building using libraries such as Pandas, NumPy, Matplotlib, Seaborn, Folium and scikit-learn, with Jupyter and GitHub as the working environment.
 
@@ -172,7 +170,7 @@ The IBM credentials are not, therefore, an independent collection of courses. Th
 
 <!-- seccion: como-se-conectan -->
 
-Seen together, my five earned credentials and the two certification paths I am currently developing represent an architecture of capabilities and not an accumulation of titles. The DP-600 formalizes the analytical core of my profile; the four IBM credentials provide the data science base; and the AI-103 and AI-300 paths extend that trajectory toward the development and operation of applications, agents and enterprise artificial intelligence solutions.
+Seen together, my three earned credentials and the two certification paths I am currently developing represent an architecture of capabilities and not an accumulation of titles. The DP-600 formalizes the analytical core of my profile; the two IBM credentials provide the data science base; and the AI-103 and AI-300 paths extend that trajectory toward the development and operation of applications, agents and enterprise artificial intelligence solutions.
 
 The IBM credentials provide the data science base: understanding information, exploring it, formulating hypotheses, building models and evaluating results. The DP-600 organizes that capability within an enterprise analytics platform: it prepares and transforms data, administers analytics assets, structures semantic models and turns information into decision experiences through Power BI.
 
@@ -202,7 +200,7 @@ Nor do I seek to get certified in every technology I come into contact with. I p
 
 <!-- seccion: el-estado-de-cada-credencial -->
 
-As a matter of discipline, each credential is presented with its exact status. The DP-600 is currently my current Microsoft certification. The four from IBM are earned: three in 2022 and one in 2024. The AI-103 and the AI-300 represent certification paths under development since July 2026 and are not part of the count of earned credentials until I have passed the corresponding exams.
+As a matter of discipline, each credential is presented with its exact status. The DP-600 is currently my current Microsoft certification. The two from IBM are earned: one in 2022, with its courses, and one in 2024. The AI-103 and the AI-300 represent certification paths under development since July 2026 and are not part of the count of earned credentials until I have passed the corresponding exams.
 
 I do not present the AI-103 or the AI-300 as earned certifications. This distinction is part of the same discipline with which I work with data and artificial intelligence: every statement must correspond to verifiable evidence and clearly keep its status. The site applies the same rule in code: the content gate requires that the AI-103 and the AI-300 always be named with "in progress".
 
@@ -210,7 +208,7 @@ I do not present the AI-103 or the AI-300 as earned certifications. This distinc
 
 <!-- seccion: el-ritmo -->
 
-The calendar of these credentials says something about how I learn. In 2022 I consolidated my base in Python, SQL and data science: three of the four IBM credentials, in seven months. In 2024 I expanded that training with R and prepared for the DP-600 in five months, while working full time and building solutions on Microsoft Fabric. Since July 2026 I have been continuing the AI-103 and AI-300 paths in parallel, consistent with my evolution toward building and operating AI applications and agents throughout their entire lifecycle. The complete timelines, with dates, are in the document on how I learn.
+The calendar of these credentials says something about how I learn. In 2022 I consolidated my base in Python, SQL and data science: IBM's Professional Certificate with its courses, in seven months. In 2024 I expanded that training with R and prepared for the DP-600 in five months, while working full time and building solutions on Microsoft Fabric. Since July 2026 I have been continuing the AI-103 and AI-300 paths in parallel, consistent with my evolution toward building and operating AI applications and agents throughout their entire lifecycle. The complete timelines, with dates, are in the document on how I learn.
 
 I do not consider that the pace of learning should be measured only by the number of credentials earned. It must also be observed in the ability to identify relevant knowledge, incorporate it in a structured way, apply it to real problems and turn it into practices, components and criteria other people can use.
 
@@ -218,6 +216,6 @@ My way of learning combines formal study, experimentation, documentation and pro
 
 I also understand that a technology certification does not represent finished knowledge. Platforms, services and architecture patterns evolve —the AI-102 itself and the DP-100 disappeared while I was studying—, and maintaining a professional competence requires reviewing those changes, renewing knowledge and continuously contrasting what was learned with practice. The formal validity of a credential is important, but real currency is shown in the ability to incorporate new possibilities without losing the principles of quality, security, traceability and business value that must remain.
 
-This discipline also comes from my training as an engineer and designer. Industrial Engineering requires me to understand principles, relationships, constraints and mechanisms before intervening in a system. Industrial Design forces me to turn that knowledge into solutions that are applicable, understandable and usable by people. Certifications provide a formal structure, but professional competence appears when that structure can be transformed into a reliable capability within an organization.
+This discipline also comes from my training as an engineer. Industrial Engineering requires me to understand principles, relationships, constraints and mechanisms before intervening in a system. Industrial Design forces me to turn that knowledge into solutions that are applicable, understandable and usable by people. Certifications provide a formal structure, but professional competence appears when that structure can be transformed into a reliable capability within an organization.
 
 What distinguishes my profile is not only the knowledge I have accumulated, but the ability to evolve it coherently. I learn quickly, but not in an improvised way. Each new capability builds on previous foundations, contrasted with practice and integrated into an increasingly complete professional architecture.

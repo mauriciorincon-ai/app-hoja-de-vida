@@ -81,7 +81,7 @@ schedule and guiding the allocation of capacity.
 
 Validation was done with RMSE and respecting the temporal order: the model was evaluated on
 periods later than the ones it had seen, never with future data explaining the past, because that
-is how the operation was going to face it. The model ran for ten months. It was used by the
+is how the operation was going to face it. The model stayed in use after I left. It was used by the
 professionals who presented the reference demand report the units scheduled with, and it
 contributed to a reported 20% improvement in the system's performance.
 
@@ -168,7 +168,7 @@ its results appear inside a presentation.
 A model starts working as an operational capability when its predictions are integrated into a
 real process, arrive within the decision cycle, use available information and have responsible
 people capable of interpreting their results and acting on them. At TransMilenio the prediction
-went into the monthly demand report for ten months; at Banco Pichincha, into the prioritization
+went into the monthly demand report, and stayed there after I left; at Banco Pichincha, into the prioritization
 of retention and collection actions.
 
 This requires a reproducible pipeline. The data must be located, validated and transformed by
@@ -617,8 +617,7 @@ libraries used. It lies in the capacity to connect process knowledge, statistics
 engineering, analytical product and decision.
 
 Probeta DS turns this stance into a public application. The models developed in transport with
-C&M Consultores and in banking with Banco Pichincha demonstrate its professional use: one ran for
-ten months inside a monthly report; the others reached production with more than 90% accuracy.
+C&M Consultores and in banking with Banco Pichincha demonstrate its professional use: one went into a monthly report and stayed in use after I left; the others reached production with more than 90% accuracy.
 My work with Fabric, Power BI and agents extends that experience toward architectures in which
 predictions can be integrated with new forms of interaction and action.
 

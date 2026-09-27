@@ -83,7 +83,7 @@ analysis and decision support, and on the modeling and prediction of industrial 
 those three tools.
 
 In the middle of the degree, between 2013 and 2014, I spent a year in Melbourne, Australia, in an
-intensive English course that closed with the IELTS certification. That is where the B2 English
+intensive English course that closed with the IELTS certification. That is where the B2 English —IELTS 5.5 in 2014—
 comes from, the one with which today I read technical documentation, write analytical reports and
 hold a professional discussion.
 
@@ -115,7 +115,7 @@ analytics, my capacity to develop intelligent solutions and my vision for integr
 intelligence into enterprise architectures oriented toward value, trust and transformation.
 
 It is the same foundation with which today, since March 2025, I lead the artificial intelligence
-strategy of Fundación CTIC. And it is the same one with which, between August 2023 and January
+strategy of Fundación CTIC and contribute to incorporating the standard's principles. And it is the same one with which, between August 2023 and January
 2025, I built at Vesting the platform that observed AI agents in production. In both cases the
 starting question was not what the model can do, but what place it occupies within the work
 system, what information it receives and who answers for what it does.
@@ -586,12 +586,10 @@ automated analytical tasks that previously required manual intervention and deve
 intelligence solutions in Power BI that allowed different managers to observe the performance of
 the system. I also advanced in the use of predictive models to analyze demand and anticipate
 conditions relevant to planning: a demand model by time band with scikit-learn, evaluated with
-RMSE in temporal order and updated every month, which ran for ten months and was used by the
-professionals who presented the reference demand report for the units.
+RMSE in temporal order and updated every month, which stayed in use after I left and was used by the professionals who presented the reference demand report for the units.
 
 The figures of that period are the ones on the site: the ETL that unified the sources raised the
-precision and speed of analysis by 70%; the automation scripts reduced the time of repetitive
-tasks by 40%; BI adoption, with more than 25 key users, increased the efficiency of analytical
+precision and speed of analysis by 70%; the ETL scripts with VBA and Power Query for the post-operational analysis reduced the time of repetitive tasks by 40%; BI adoption, with more than 25 key users, increased the efficiency of analytical
 processes by 35%; and demand forecasting contributed 20% in performance to the system.
 
 The combination of integration, automation, visualization and prediction allowed me to understand
@@ -851,8 +849,8 @@ indicators for process monitoring and the formulation of evidence-based improvem
 opportunities. In this context, a metric cannot be separated from its definition, provenance,
 purpose or the conditions under which it can be used to guide a decision.
 
-The figures to date: 42 analytical products in use for 20 leaders of 15 processes and some 75
-users; close to 60% less effort, estimated, in the preparation of information; 10 analysis plans
+The figures to date: more than 40 analytical products in use for some 20 leaders of some 15 processes and some 75
+users; close to 60% less effort, estimated, in the preparation of information; some ten analysis plans
 under follow-up; and improvement plans that I designed from the results so that the processes
 execute them; the improvements I implemented with my own hands were, above all, those of my own
 work process.
@@ -874,7 +872,7 @@ we base ourselves on—, understanding artificial intelligence not as a collecti
 projects, but as an organizational capability that requires a management system. My work
 consists of helping AI initiatives develop within a common framework of policies,
 responsibilities, risk assessment, impact analysis, controls, performance monitoring and
-continuous improvement. The management system has 23 instruments: 8 are finished and 15 are
+continuous improvement. The management system has more than 20 instruments: 8 are finished and 15 are
 under construction.
 
 Applying this approach begins with understanding the organization's context and determining
@@ -883,8 +881,7 @@ the technology or from the availability of a model. I start from the problems, t
 the institutional capabilities that need to be strengthened. From there I evaluate the
 suitability of each use case, the quality and availability of its data, the people potentially
 affected, the associated risks and the level of human intervention that must be preserved. To
-date there are 12 AI opportunities identified, 7 cases evaluated, 3 prioritized and 2
-documented.
+date there are more than 10 AI opportunities identified, half of them evaluated, a few prioritized and the first ones documented.
 
 Leading an artificial intelligence strategy also requires establishing criteria to decide which
 initiatives should move forward and under what conditions. Not every use case needs artificial
@@ -1033,11 +1030,10 @@ In that arc there are eight jobs in eight organizations and seven sectors: heavy
 educational assessment, mass transit, medicines logistics, banking, an AI-agents startup and,
 today, healthcare. Added up, they are about 104 months of effective work as of September 2026, eight years and eight months; the rest, up to the ten, are the pauses between one job and the next. The longest runs
 from June 2022 to February 2023, and I devoted it to studying and getting certified: three of
-the four IBM certifications —the 2022 ones, taken between May and November of that year— are
-from those months, and the fourth, the one in applied data science with R, I finished in 2024.
+IBM's Professional Certificate —taken between May and November 2022, with its Python and SQL courses— is from those months, and the other IBM credential, the one in applied data science with R, I finished in 2024.
 The exact periods, month by month, are in the table above.
 
 If the question is how big my experience with AI is compared with my experience with data: data
 takes up eight of those years; applied AI starts in August 2023 at Vesting, with agents in production, and continues today at Fundación CTIC with experimentation and prototypes. Three of the ten years, and the three most
-recent. The five credentials earned —Microsoft's DP-600 and four from IBM— and the two in
+recent. The three credentials earned —Microsoft's DP-600 and two from IBM— and the two in
 progress —AI-103 and AI-300, since July 2026— follow that same order: first data, then AI.
