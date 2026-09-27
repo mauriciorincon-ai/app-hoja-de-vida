@@ -371,7 +371,7 @@ Preguntas que un reclutador hace y que **el corpus no contesta hoy**, con el doc
 
 **✅ ¿Qué arquitecturas RAG ha implementado?**
 
-- top-4: a-fondo-rag-y-el-chat-que-demuestra~1, a-fondo-rag-y-el-chat-ninguna-capa-basta~2, a-fondo-rag-y-el-chat-embeddings-condicionados~2, a-fondo-rag-y-el-chat-evaluacion-del-rag~1
+- top-4: a-fondo-rag-y-el-chat-que-demuestra~1, a-fondo-rag-y-el-chat-embeddings-condicionados~2, a-fondo-rag-y-el-chat-evaluacion-del-rag~1, a-fondo-rag-y-el-chat-cuando-usar
 - primer fragmento: «El chat demuestra que puedo diseñar una solución de inteligencia artificial generativa como un sistema completo y no únicamente como una llamada a un modelo. La arquitectura comienza en el contenido versionado, continúa…»
 
 **✅ ¿Cómo funciona el chat de esta página?**

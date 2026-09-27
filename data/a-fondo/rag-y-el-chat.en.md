@@ -436,7 +436,7 @@ their work. It is the same logic as an industrial process: the cheap controls go
 expensive resource is used when the part has already passed the earlier gates.
 
 This approach reflects principles I apply in management systems and enterprise architecture, and
-which I formalized by implementing ISO/IEC 42001. Effective control is not a general declaration
+which I am formalizing today by structuring the ISO/IEC 42001 management system. Effective control is not a general declaration
 of safety. It is a distribution of responsibilities among mechanisms capable of preventing,
 detecting, containing and making a deviation visible. And each of those mechanisms has its test:
 the rate limit, the input schema, the circuit breaker, the guardrail and the fallback are

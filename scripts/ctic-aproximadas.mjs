@@ -119,6 +119,65 @@ const FILA_METRICA = new RegExp(
 );
 
 /**
+ * LO QUE EL SITIO TODAVÍA NO PUEDE AFIRMAR DE CTIC (hallazgo del harness, 2026-09-27).
+ *
+ * El corpus dice que el sistema de gestión de IA está en ESTRUCTURACIÓN y que el
+ * dueño no lo declara «completamente implementado» hasta que pueda demostrarse
+ * formalmente (`fundacion-ctic`, «certificacion-y-madurez»). El perfil del CV
+ * decía «la implementación de ISO/IEC 42001» y el documento del chat «formalicé
+ * implementando ISO/IEC 42001»: el sitio contradecía al corpus, y un
+ * reclutador que lea las dos cosas se queda con la más grande.
+ *
+ * Se veta la implementación DE la norma como hecho, no la palabra: «la
+ * implementación empieza igual: por el contexto» describe cómo arranca un
+ * sistema de gestión y sigue en pie. Si el día llega y puede demostrarse, esta
+ * lista se vacía con la misma decisión del dueño que lo declare.
+ */
+const NORMA = String.raw`(?:la\s+norma\s+|the\s+)?(?:UNE-)?ISO(?:\/IEC)?\s*42001`;
+
+/** @type {{ patron: RegExp, que: string }[]} */
+export const AFIRMACIONES_VETADAS_DE_CTIC = [
+  {
+    patron: new RegExp(String.raw`\bimplementaci[oó]n\s+de\s+${NORMA}`, "gi"),
+    que: "«la implementación de ISO/IEC 42001» → «la estructuración del sistema de gestión bajo ISO/IEC 42001»",
+  },
+  {
+    patron: new RegExp(String.raw`\b(?:implement[eé]|implementando|formalic[eé]\s+implementando)\s+${NORMA}`, "gi"),
+    que: "«implementé ISO/IEC 42001» → «estructuro el sistema de gestión bajo ISO/IEC 42001»",
+  },
+  {
+    patron: new RegExp(String.raw`${NORMA}\s+implementation\b`, "gi"),
+    que: "«the ISO/IEC 42001 implementation» → «the structuring of the ISO/IEC 42001 management system»",
+  },
+  {
+    patron: new RegExp(String.raw`\b(?:implemented|implementing)\s+${NORMA}`, "gi"),
+    que: "«implementing ISO/IEC 42001» → «structuring the ISO/IEC 42001 management system»",
+  },
+];
+
+/**
+ * @param {{ archivo: string, texto: string }[]} archivos
+ * @returns {string[]} un problema por afirmación vetada, con archivo y línea
+ */
+export function problemasDeAfirmacionesDeCtic(archivos) {
+  /** @type {string[]} */
+  const problemas = [];
+  for (const { archivo, texto } of archivos) {
+    const plano = texto.replace(/\n/g, " ");
+    for (const { patron, que } of AFIRMACIONES_VETADAS_DE_CTIC) {
+      for (const m of plano.matchAll(new RegExp(patron.source, patron.flags))) {
+        const linea = texto.slice(0, m.index ?? 0).split("\n").length;
+        problemas.push(
+          `${archivo}:${linea}: «${m[0].replace(/\s+/g, " ")}» — ${que}. El sistema de gestión de ` +
+            `IA de CTIC está en estructuración y no se declara implementado hasta poder demostrarlo.`,
+        );
+      }
+    }
+  }
+  return problemas;
+}
+
+/**
  * @param {{ archivo: string, texto: string }[]} archivos
  * @returns {string[]} un problema por cifra exacta, con archivo y línea
  */
