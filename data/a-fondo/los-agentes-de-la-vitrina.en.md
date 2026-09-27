@@ -2,7 +2,7 @@
 slug: los-agentes-de-la-vitrina
 codigo: AF-25
 titulo: "The thirteen agents of the showcase"
-resumen: "The 13 published agents, one by one, in four families: what each one promises, its measured figure, its limit and its \"never\". Five sealed. All with human gates, baits that prove the controls fire, zero cost in tools and the same rule: no claim comes out of the model's memory."
+resumen: "The 13 published agents, one by one, in four families: what each one promises, its measured figure, its limit and its \"never\". Five sealed. All with human gates, baits that prove the controls fire, zero cost in tools (except the Animation Workshop's GPU) and the same rule: no claim comes out of the model's memory."
 cuando_usar: "Use this when they ask which agents he has published in his portfolio, what each of the thirteen showcase agents is for, what a harness is, how he controls quality with human gates and bait, and what the thirteen share."
 estado: aprobado
 ancla: "/vitrina/agentes"
@@ -46,7 +46,7 @@ which is explained in the agents document.
 
 **Five are sealed** —Power BI Dashboard Builder, CINE Presentations, AI-APPs Factory, Animation
 Workshop and Computational Paper Harness— and eight remain in initial state. What they are not:
-services with users. They are tools for personal use with deliverables and evidence; the word
+services with users. They are tools for personal use with deliverables and evidence —even those designed to hand a repository to each client have had no users other than me—; the word
 "production" I reserve for the 27 agents at Vesting.
 
 ## Learning and job hunting with sources
@@ -149,8 +149,7 @@ approved script and storyboard.
 
 <!-- seccion: aprendizaje-uno-por-uno -->
 
-**AI-103 Super Guide** (initial, v2.1.0). It inverts studying: first a real project in Azure AI
-Foundry is defined and the harness proves, with a coverage map against the exam's official
+**AI-103 Super Guide** (initial, v2.1.0). It inverts studying: first a real project in Microsoft Foundry is defined and the harness proves, with a coverage map against the exam's official
 weights, that building it covers the syllabus. Only then does it generate the step-by-step
 guides, with the official callouts injected where they are needed; every pedagogical claim cites
 its official source with URL and date or is marked "to be confirmed". It has **29 binary
@@ -196,7 +195,7 @@ calculates the estimated tax to date, walks through the legal levers that apply 
 prepares what the accountant needs, citing in every claim the article, the source and the
 validity. The corpus has **150 citable rules**: 39 on individual income tax, 39 on corporate
 structure, 30 on the Simple Regime, 20 on calendar and penalties, 12 on VAT and ICA and 9 on
-withholdings. It covers Colombia and the DIAN; it serves a single user, with no server and no
+withholdings: 149 titled plus one discrepancy. It covers Colombia and the DIAN; it serves a single user, with no server and no
 cloud; it does not fill in forms or file before the DIAN, which is a personal act of the
 taxpayer; and a suggestion without its cited rule, its assumptions and its sensitivity is not
 issued.
@@ -290,7 +289,7 @@ putting a number on it today would be inventing it".
   so.
 - **Published limits and "never".** Each sheet declares 3 or 4 limits and up to 5 things the agent
   never does, because an agent that seems to do everything is an agent without governance.
-- **Cost in tools: 0 pesos.** They run on Claude Code and open tools; the return is declared as an
+- **Cost in tools: 0 pesos, except the Animation Workshop's rented GPU.** They run on Claude Code and open tools; the return is declared as an
   estimate, not as a promise.
 - **Recorded decisions.** Between 8 and 17 ADR per agent.
 

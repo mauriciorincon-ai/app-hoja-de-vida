@@ -2,7 +2,7 @@
 slug: los-agentes-de-la-vitrina
 codigo: AF-25
 titulo: "Los trece agentes de la vitrina"
-resumen: "Los 13 agentes publicados, uno a uno, en cuatro familias: qué promete cada uno, su cifra medida, su límite y su «nunca». Cinco sellados. Todos con gates humanos, carnadas que demuestran que los controles disparan, cero costo en herramientas y la misma regla: ninguna afirmación sale de la memoria del modelo."
+resumen: "Los 13 agentes publicados, uno a uno, en cuatro familias: qué promete cada uno, su cifra medida, su límite y su «nunca». Cinco sellados. Todos con gates humanos, carnadas que demuestran que los controles disparan, cero costo en herramientas (salvo la GPU del Taller de Animación) y la misma regla: ninguna afirmación sale de la memoria del modelo."
 cuando_usar: "Úsalo cuando pregunten qué agentes tiene publicados en su portafolio, para qué sirve cada uno de los trece agentes de la vitrina, qué es un harness, cómo controla la calidad con gates humanos y carnadas, y qué comparten los trece."
 estado: aprobado
 ancla: "/vitrina/agentes"
@@ -46,7 +46,7 @@ agéntico, que está explicado en el documento de agentes.
 
 **Cinco están sellados** —Constructor de Tableros Power BI, Presentaciones CINE, Fábrica de
 AI-APPs, Taller de Animación y Harness Paper Computacional— y ocho siguen en estado inicial. Lo
-que no son: servicios con usuarios. Son herramientas de uso personal con entregables y evidencia;
+que no son: servicios con usuarios. Son herramientas de uso personal con entregables y evidencia —incluso las diseñadas para entregar un repositorio por cliente no han tenido usuarios distintos de mí—;
 la palabra «producción» la reservo para los 27 agentes de Vesting.
 
 ## Aprender y buscar trabajo con fuente
@@ -147,7 +147,7 @@ storyboard aprobados.
 <!-- seccion: aprendizaje-uno-por-uno -->
 
 **Super guía AI-103** (inicial, v2.1.0). Invierte el estudio: primero se define un proyecto real
-en Azure AI Foundry y el harness demuestra, con un mapa de cobertura contra los pesos oficiales
+en Microsoft Foundry y el harness demuestra, con un mapa de cobertura contra los pesos oficiales
 del examen, que construirlo cubre el temario. Solo entonces genera las guías paso a paso, con los
 callouts oficiales inyectados donde hacen falta; cada afirmación pedagógica cita su fuente oficial
 con URL y fecha o se marca «a confirmar». Tiene **29 criterios** binarios repartidos en 9
@@ -192,7 +192,7 @@ suyos, calcula el impuesto estimado a la fecha, recorre las palancas legales que
 y prepara lo que el contador necesita, citando en cada afirmación el artículo, la fuente y la
 vigencia. El corpus tiene **150 reglas** citables: 39 de renta de persona natural, 39 de
 estructura societaria, 30 del Régimen Simple, 20 de calendario y sanciones, 12 de IVA e ICA y 9
-de retenciones. Cubre Colombia y la DIAN; sirve a un solo usuario, sin servidor ni nube; no
+de retenciones: 149 fichas tituladas más la ficha de discrepancia. Cubre Colombia y la DIAN; sirve a un solo usuario, sin servidor ni nube; no
 diligencia formularios ni presenta ante la DIAN, que es un acto personal del contribuyente; y una
 sugerencia sin su regla citada, sus supuestos y su sensibilidad no se emite.
 
@@ -283,7 +283,7 @@ porque depende de cifras que aún no están en el gemelo, «y ponerle número ho
   el vacío; ninguna cifra se inventa: es medida, calculada, declarada o estimada, y así lo dice.
 - **Límites y «nunca» publicados.** Cada ficha declara 3 o 4 límites y hasta 5 cosas que el
   agente nunca hace, porque un agente que parece hacer de todo es un agente sin gobierno.
-- **Costo en herramientas: 0 pesos.** Corren sobre Claude Code y herramientas abiertas; el
+- **Costo en herramientas: 0 pesos, salvo la GPU alquilada del Taller de Animación.** Corren sobre Claude Code y herramientas abiertas; el
   retorno se declara como estimación, no como promesa.
 - **Decisiones registradas.** Entre 8 y 17 ADR por agente.
 

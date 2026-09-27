@@ -1031,15 +1031,13 @@ indicators became my job and not a tool of the job.
 
 In that arc there are eight jobs in eight organizations and seven sectors: heavy machinery,
 educational assessment, mass transit, medicines logistics, banking, an AI-agents startup and,
-today, healthcare. Added up, they are about 105 months of effective work, eight years and nine
-months; the rest, up to the ten, are the pauses between one job and the next. The longest runs
+today, healthcare. Added up, they are about 104 months of effective work as of September 2026, eight years and eight months; the rest, up to the ten, are the pauses between one job and the next. The longest runs
 from June 2022 to February 2023, and I devoted it to studying and getting certified: three of
 the four IBM certifications —the 2022 ones, taken between May and November of that year— are
 from those months, and the fourth, the one in applied data science with R, I finished in 2024.
 The exact periods, month by month, are in the table above.
 
 If the question is how big my experience with AI is compared with my experience with data: data
-takes up eight of those years; applied AI, with agents in production, starts in August 2023 at
-Vesting and continues today at Fundación CTIC. Three of the ten years, and the three most
+takes up eight of those years; applied AI starts in August 2023 at Vesting, with agents in production, and continues today at Fundación CTIC with experimentation and prototypes. Three of the ten years, and the three most
 recent. The five credentials earned —Microsoft's DP-600 and four from IBM— and the two in
 progress —AI-103 and AI-300, since July 2026— follow that same order: first data, then AI.

@@ -459,8 +459,7 @@ knows the **24 carrier documents** that an auditor asks for in the documentary p
 certification. It works with **9 conversational commands** —instantiate, intake, gap, plan,
 management, drill, surveillance, models and opinion— and with a checklist of **14 gates**, ten
 foundational and four born from real defects found while verifying it. And a fact that explains why
-it exists: the leading commercial AI-governance platform declares that it covers close to 45% of the
-path to certification; the rest is human judgment, and that is the hole the agent helps to fill
+it exists: the leading commercial AI-governance platform declares —a figure self-reported by the vendor, with no independent measurement— that it covers close to 45% of the path to certification; the rest is human judgment, and that is the hole the agent helps to fill
 without replacing the person.
 
 The agent also keeps the verification date of the sources. A citation can correctly correspond to a

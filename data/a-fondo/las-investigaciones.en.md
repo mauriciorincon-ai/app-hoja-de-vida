@@ -710,8 +710,7 @@ driving, because the analysis is of the operator and of the system. The fatigue 
 most important one: it never serves to pressure workers into performing more, because the
 allowance protects, it does not squeeze; and it never presents synthetic data as if it validated
 the calibration of a protocol. FORJA never presents itself as a replacement for the programmer:
-it is the professional automating their own work. The ERP line never names companies where I
-lived the problem or vendors in an accusatory tone. ARKHÉ never describes its internal
+it is the professional automating their own work. The ERP line never describes the companies where I lived the problem beyond naming them as its origin, nor names vendors in an accusatory tone. ARKHÉ never describes its internal
 mechanics, and the agency spectrum never uses a bias profile that has not demonstrated that it
 expresses its bias measurably: a profile that does not express it does not enter the data, and
 that is an admissibility gate, not an appended report.

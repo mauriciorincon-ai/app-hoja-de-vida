@@ -59,7 +59,7 @@ artificial intelligence strategy, guiding the way the organization identifies, e
 prioritizes, designs and governs its AI initiatives, with the implementation of its AI management
 system.
 
-I work in a direct line with the Director of Planning and with the sub-directors of technology,
+I work in a direct line with the Planning Directorate and with the sub-directorates of technology,
 information management and quality. I do not lead a team of direct reports: I lead complete
 processes that bring together a large number of people —today, 20 leaders of 15 administrative
 and clinical processes and some 75 users of the analytical solutions—. It is a different form of
@@ -522,7 +522,7 @@ through previously defined indicators. This closes the cycle between observation
 evaluation without attributing to the platform, or to the analytics team, responsibilities that
 belong to the governance and management of the process. Currently, the 42 analytical products are
 in institutional use or follow-up, supporting 20 leaders of 15 administrative and clinical
-processes, and have supported 10 improvement plans or decisions during the period evaluated.
+processes, and have supported the 10 analysis plans under follow-up during the period evaluated.
 
 ## An institutional architecture for artificial intelligence: reuse without fragmenting
 
@@ -599,7 +599,7 @@ indicators and their incorporation into the spaces where institutional performan
 | Analytics         | leaders supported · processes                 |                  20 · 15 |
 | Analytics         | users                                         |                      ~75 |
 | Analytics         | reduction of effort in preparation            | close to 60% (estimated) |
-| Analytics         | analysis or improvement plans under follow-up |                       10 |
+| Analytics         | analysis plans under follow-up                |                       10 |
 | AI                | opportunities identified                      |                       12 |
 | AI                | use cases formally evaluated                  |                        7 |
 | AI                | initiatives prioritized · documented          |                    3 · 2 |

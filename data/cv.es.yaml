@@ -15,7 +15,7 @@ identidad:
   # contenido) y el cierre invita en vez de retar (decisión del dueño).
   resumen: >-
     Líder de datos e ingeniero de IA (AI-103 y AI-300, en curso) · Analytics
-    Engineer (DP-600). Diseño plataformas analíticas en Microsoft Fabric y llevo
+    Engineer (DP-600). Diseño plataformas analíticas en Microsoft Fabric y he llevado
     agentes de IA a producción — y esta hoja de vida es la muestra: recórrela
     y pregúntale.
   # Frase del chat (pack §3) restituida en S3: el chat ya es real
@@ -52,13 +52,13 @@ trayectoria:
     organizacion: "Fundación CTIC"
     proyecto: "fundacion-ctic"
     descripcion: >-
-      Analítica y gobierno de datos para decisiones administrativas y
-      asistenciales en salud.
+      Analítica, gobierno de datos y estrategia de IA (ISO/IEC 42001) para
+      decisiones administrativas y asistenciales en salud.
     bullets:
       - "Lidero la estrategia institucional de IA bajo UNE-ISO/IEC 42001:2025: 12 oportunidades identificadas, 7 casos evaluados y 3 priorizados."
       - "42 productos analíticos en Power BI para líderes administrativos y asistenciales: 20 líderes de 15 procesos y unos 75 usuarios."
       - "Gobierno y calidad de datos institucional, bajo el régimen de habeas data y la Ley 1581."
-      - "Tableros de control por procesos y planes de mejora: cerca de 60 % menos esfuerzo en la preparación de la información."
+      - "Tableros de control por procesos y planes de mejora: cerca de 60 % menos esfuerzo en la preparación de la información (estimado sobre mi propio trabajo)."
       - "23 instrumentos del sistema de gestión de IA, 8 terminados, y un agente experto en ISO 42001 para revisarlos."
     actual: true
   # Vesting fue de agosto de 2023 a enero de 2025: ese es el periodo REAL, el
@@ -76,7 +76,7 @@ trayectoria:
       arquitectura, gobernanza, monitoreo de agentes en tiempo real y proceso
       core replicable.
     bullets:
-      - "Diseñé e implementé desde cero el ecosistema de datos para analítica de agentes de IA en Microsoft Fabric (Big Data + Data Warehouse + procesamiento distribuido): 12 clientes, 120 tablas y 1.000 eventos por día."
+      - "Diseñé e implementé desde cero el ecosistema de datos para analítica de agentes de IA en Microsoft Fabric (Data Warehouse + procesamiento distribuido sobre un lakehouse): 12 clientes, 120 tablas y 1.000 eventos por día."
       - "Definí la gobernanza de datos para integrar información de clientes y sistemas, con cada cliente aislado en su propio workspace."
       - "Construí el monitoreo en tiempo real de los agentes en producción: hasta 23 vigilados a la vez."
       - "Documenté el proceso core replicable, de 11 etapas, con el que se construyeron los 27 agentes del inventario."
@@ -91,12 +91,12 @@ trayectoria:
     bullets:
       - "Lideré un equipo de BI de 5 personas: dashboards adoptados por 50+ usuarios, con +25% en toma de decisiones."
       - "Optimización de procesos ETL en Power Query: −35% en tiempos de análisis."
-      - "Modelos predictivos de fuga, mora y riesgo con scikit-learn: >90% de precisión y +35% en predicciones."
+      - "Modelos predictivos de fuga, mora y riesgo con scikit-learn: >90% de precisión y hasta +35% en predicciones, según la métrica de cada modelo."
       - "Optimización de modelos semánticos con DAX Studio y Tabular Editor."
       - "Co-liderazgo de la gobernanza de datos del área."
       - "Programa de formación en analítica para 12 profesionales: +20% de productividad en la preparación y uso de la información."
   - periodo: "2021 — 2022"
-    rol: "Análisis Post-Operacional"
+    rol: "Profesional de Análisis Post-Operacional"
     organizacion: "C&M Consultores (TransMilenio)"
     proyecto: "transmilenio-cm"
     descripcion: >-
@@ -109,7 +109,7 @@ trayectoria:
       - "Mesas de estrategia con la dirección del SITP: +25% en indicadores."
       - "Predicción de demanda con scikit-learn por ruta y franja, diez meses en uso: +20% de rendimiento del sistema."
   - periodo: "2020 — 2021"
-    rol: "Analista de Sistemas de Información"
+    rol: "Analista de Sistemas de Información y de Proyectos"
     organizacion: "Cafam"
     proyecto: "cafam"
     descripcion: >-
@@ -118,11 +118,11 @@ trayectoria:
     bullets:
       - "Lideré un equipo de 20 personas —14 de Cafam y 6 de Oracle— en seis meses de pruebas de implementación del WMS: −25% de errores y +15% de eficiencia operativa."
       - "Modelé el proceso en BPMN con Bizagi y simulé el despacho en FlexSim antes de probar."
-      - "BI de control operativo: +50% de precisión para 15+ usuarios."
+      - "BI de control de la implementación: +50% de precisión en el seguimiento, para 15+ usuarios."
       - "Integraciones VBA con el WMS: +15% de automatización y −50% de errores de datos."
       - "Calidad de datos en SQL con conciliación 80-20 por medicamentos: +20%."
   - periodo: "2018 — 2020"
-    rol: "Analista de Operaciones"
+    rol: "Analista de Operaciones Junior"
     organizacion: "C&M Consorcio (TransMilenio)"
     proyecto: "cm-operaciones"
     descripcion: >-
@@ -204,7 +204,7 @@ logros:
     descripcion: "Tableros de BI en Banco Pichincha, con +25% en toma de decisiones."
   - valor: 70
     sufijo: "%"
-    etiqueta: "más velocidad de análisis con ETL unificado"
+    etiqueta: "más precisión y velocidad de análisis con ETL unificado"
     descripcion: "Unificación de fuentes heterogéneas en C&M Consultores (TransMilenio)."
   - valor: 90
     prefijo: ">"
@@ -223,13 +223,13 @@ proyectos:
     nombre: "Plataforma de datos para agentes de IA — Vesting (2023–2025)"
     resumen: >-
       Startup de agentes de automatización sin infraestructura de datos:
-      diseñé e implementé desde cero el ecosistema en Microsoft Fabric (Big
-      Data + DW + procesamiento distribuido), la gobernanza para integrar
+      diseñé e implementé desde cero el ecosistema en Microsoft Fabric (DW y
+      procesamiento distribuido sobre un lakehouse), la gobernanza para integrar
       datos de clientes y sistemas, el monitoreo en tiempo real de los agentes
       y el proceso core replicable para diseñar e implementar agentes de IA.
       El puente exacto entre la ingeniería de analítica y la ingeniería de IA.
     stack:
-      ["Microsoft Fabric", "Gobernanza de datos", "Monitoreo en tiempo real"]
+      ["Microsoft Fabric", "Gobernanza de datos", "Monitoreo en tiempo real", "n8n", "Power BI"]
     destacado: true
     casestudy:
       titular: "La plataforma de datos de una startup de agentes de IA, diseñada desde cero: datos para que los agentes operen y datos sobre los agentes para poder confiar en ellos."
@@ -253,7 +253,7 @@ proyectos:
       capitulos:
         - titulo: "La arquitectura en Microsoft Fabric"
           texto: >-
-            Diseñé el ecosistema en Microsoft Fabric: Big Data, Data Warehouse y procesamiento
+            Diseñé el ecosistema en Microsoft Fabric: Data Warehouse y procesamiento
             distribuido sobre un lakehouse en OneLake, con pipelines que recibían los flujos de n8n
             que orquestaban a los agentes. La decisión clave fue normalizar los eventos desde el
             ingreso: sesiones, solicitudes, respuestas, tiempos, estados y costo en tokens, iguales
@@ -350,7 +350,7 @@ proyectos:
       impacto:
         - "+25% en toma de decisiones sobre los tableros adoptados."
         - "−35% en tiempos de análisis por la optimización del ETL."
-        - ">90% de precisión y +35% en predicciones de los modelos en producción."
+        - ">90% de precisión y hasta +35% en predicciones de los modelos en producción, según la métrica de cada modelo."
         - "+20% de productividad en la preparación y uso de la información tras el programa de formación."
       leccion: >-
         La sofisticación de una solución no determina por sí sola su valor. Lo
@@ -478,7 +478,7 @@ proyectos:
             una diferencia quedó como control permanente.
       impacto:
         - "−25% de errores y +15% de eficiencia operativa en la implementación."
-        - "+50% de precisión en el control operativo, adoptado por 15+ usuarios."
+        - "+50% de precisión en el seguimiento de la implementación, con un BI de control adoptado por 15+ usuarios."
         - "+15% de automatización y −50% de errores de datos con las integraciones VBA."
         - "+20% en calidad de datos vía SQL."
       leccion: >-
@@ -491,7 +491,7 @@ proyectos:
       Modelos de análisis y visualización para líderes administrativos y
       asistenciales, gobierno y calidad de datos institucional, y tableros de
       control por procesos.
-    stack: ["Analítica", "Gobierno de datos"]
+    stack: ["Analítica", "Gobierno de datos", "Estrategia de IA", "ISO/IEC 42001", "Power BI"]
     casestudy:
       titular: "Mi rol actual: la analítica con la que una institución de salud mide y decide, y la estrategia con la que gobierna su inteligencia artificial bajo UNE-ISO/IEC 42001:2025."
       contexto: >-
@@ -541,7 +541,7 @@ proyectos:
             avanza sin una persona.
       impacto:
         - "42 productos analíticos en uso para 20 líderes de 15 procesos y unos 75 usuarios."
-        - "Cerca de 60% menos esfuerzo en la preparación de la información; 10 planes de análisis en seguimiento."
+        - "Cerca de 60% menos esfuerzo en la preparación de la información (estimado sobre mi propio trabajo); 10 planes de análisis en seguimiento."
         - "12 oportunidades de IA identificadas, 7 casos evaluados, 3 priorizados y 2 documentados."
         - "Calidad de datos institucional como práctica, no como evento."
       leccion: >-
@@ -766,7 +766,7 @@ certificaciones:
   # logro «5 certificaciones» sigue contando solo las obtenidas.
   - nombre: "Microsoft Certified: Azure AI Apps and Agents Developer Associate (AI-103)"
     estado: "en curso"
-    nota: "En preparación: apps y agentes de IA en Azure, la ruta que hoy practico en la Fundación CTIC."
+    nota: "En preparación: apps y agentes de IA en Azure con Microsoft Foundry, la ruta que hoy curso."
     icono: insignia
     logo: microsoft.svg
   # 2026-09-19 (a fondo v2): el DP-100 SALE y entra el AI-300 en su lugar.
@@ -871,9 +871,9 @@ skills:
   - id: ia-y-ml
     grupo: "Machine learning y ciencia de datos"
     items:
-      - "PyTorch"
-      - "TensorFlow"
-      - "Scikit-Learn"
+      - "PyTorch — en exploración"
+      - "TensorFlow — en exploración"
+      - "scikit-learn"
       - "NLP"
       - "Pandas y NumPy"
       - "Jupyter"

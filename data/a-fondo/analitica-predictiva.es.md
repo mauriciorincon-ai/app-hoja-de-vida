@@ -148,7 +148,7 @@ La responsabilidad debe permanecer explícita. Un sistema puede priorizar, orden
 
 <!-- seccion: las-herramientas -->
 
-Los lenguajes de programación con los que trabajo son Python, R, SQL y DAX; el nivel más avanzado es Python. Python con scikit-learn constituye una de mis bases principales para desarrollar modelos predictivos. Es el entorno que utilicé en transporte, en banca y en Vesting para estructurar variables, entrenar modelos, comparar resultados y producir predicciones aplicables al problema correspondiente.
+Los lenguajes de programación con los que trabajo son Python, R, SQL y DAX; el nivel más avanzado es Python. Python con scikit-learn constituye una de mis bases principales para desarrollar modelos predictivos. Es el entorno que utilicé en transporte y en banca para estructurar variables, entrenar modelos, comparar resultados y producir predicciones aplicables al problema correspondiente.
 
 Pandas y NumPy forman parte habitual de mi trabajo de preparación y exploración. Los utilizo para organizar datos, transformar variables, construir conjuntos de análisis, evaluar distribuciones y preparar la información necesaria para los modelos.
 
@@ -168,7 +168,7 @@ No presento las herramientas como equivalentes ni como una competencia definida 
 
 | Herramienta | Nivel | Dónde |
 | --- | --- | --- |
-| Python con scikit-learn, Pandas, NumPy | trabajo real en producción | Banco Pichincha, TransMilenio y Vesting |
+| Python con scikit-learn, Pandas, NumPy | trabajo real en producción | Banco Pichincha y TransMilenio |
 | Matplotlib, Seaborn, Jupyter | trabajo real, exploración y documentación | todos los proyectos de modelado |
 | R, RStudio, ggplot2, Shiny | trabajo real, análisis estadístico | certificación de IBM de 2024 y análisis propios |
 | SQL | trabajo real | desde Inglopres hasta hoy |

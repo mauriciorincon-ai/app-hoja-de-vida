@@ -289,9 +289,7 @@ be deleted.
 
 <!-- seccion: dash-agent-ai -->
 
-Dash Agent AI is an application of my own published in my showcase, which I conceived and
-designed entirely at Fundación CTIC, in 2026, well after Vesting. It is not a bridge from the
-company's platform: it is not part of it and does not use its confidential architecture. It is
+Dash Agent AI is an application of my own published in my showcase, which I conceived and designed entirely in 2026, in my own app pipeline and well after Vesting. It is not a bridge from Vesting's platform: it is not part of it and does not use its confidential architecture. It is
 an independent application that answers a more current and different question: what information
 an agent knows, keeps or uses about the person it interacts with, and how much it costs that
 person to work with it.
@@ -459,8 +457,7 @@ solution meets a condition that exceeds its limits.
 
 I measured it. On 120 representative scenarios, I compared ARKHÉ with a generalist agent that
 received on every execution the entirety of the instructions, the context and the tools. ARKHÉ
-reduced token consumption by 52% and raised instruction compliance from 71% to 93%. They are my
-own calculations, with a declared baseline, sample and metric: the baseline is the generalist,
+reduced token consumption by 52% and raised instruction compliance from 71% to 93%. They are my own calculations, with no published artifact, with a declared baseline, sample and metric: the baseline is the generalist,
 the sample is the 120 scenarios and the two metrics are tokens consumed per completed task and
 proportion of instructions complied with.
 

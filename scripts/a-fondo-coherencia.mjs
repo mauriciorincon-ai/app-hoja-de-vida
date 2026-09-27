@@ -21,6 +21,7 @@ import { readFileSync, readdirSync, existsSync } from "node:fs";
 import path from "node:path";
 import process from "node:process";
 import { parse } from "yaml";
+import { leerDocumentos } from "./a-fondo.mjs";
 
 const ROOT = process.cwd();
 
@@ -95,6 +96,21 @@ export function verdadesDelSitio() {
     ? Object.keys(parse(readFileSync(ci, "utf8")).jobs ?? {}).length
     : 0;
 
+  // LAS DOS SUITES DEL CHAT (2026-09-27). El documento del chat cuenta con
+  // cuántas preguntas se evalúa —«75 propias y 136 de afuera»— y el banco crece
+  // con cada revisión (146 el día que nació este concepto) sin que nadie vuelva
+  // al documento. La verdad sale de los mismos fixtures que corren en la CI:
+  // el banco en español y las `preguntas_de_prueba` de los documentos.
+  // (Hallazgo del harness de hiring, 2026-09-27: el corpus decía 136 con 146.)
+  const banco = parse(
+    readFileSync(path.join(ROOT, "tests/fixtures/banco-de-preguntas.es.yaml"), "utf8"),
+  );
+  const preguntasDeAfuera = (banco.preguntas ?? []).length;
+  const preguntasPropias = leerDocumentos("es").reduce(
+    (n, d) => n + (d.preguntas_de_prueba ?? []).length,
+    0,
+  );
+
   return {
     apps,
     piezas: apps + agentes + investigaciones + tableros,
@@ -107,6 +123,8 @@ export function verdadesDelSitio() {
     "decisiones-arquitectura": decisiones,
     "sprints-cerrados": sprintsCerrados,
     "jobs-ci": jobsCi,
+    "preguntas-de-afuera": preguntasDeAfuera,
+    "preguntas-propias": preguntasPropias,
   };
 }
 
