@@ -316,7 +316,7 @@
     <div class="pagina">
       <header>
         <p class="eyebrow">
-          CV Viva · Guía de prueba viva y acumulativa · v9.14 · el margen de la home + el aire bajo el dominio + las herramientas de hoy + el cupo del chat + el ícono navy y el 404 de la raíz + las cifras en su letra y las citas del chat + rótulo del dominio, idiomas en mantenimiento y el ícono + el modo mantenimiento + el dominio en el PDF + los ocho casos de estudio completos + la cita dice de dónde sale y a dónde lleva + la cita conserva la conversación + el corpus alineado + chat/registro + a fondo v2 (el
+          CV Viva · Guía de prueba viva y acumulativa · v9.15 · el margen de la home, segunda vuelta + el margen de la home + el aire bajo el dominio + las herramientas de hoy + el cupo del chat + el ícono navy y el 404 de la raíz + las cifras en su letra y las citas del chat + rótulo del dominio, idiomas en mantenimiento y el ícono + el modo mantenimiento + el dominio en el PDF + los ocho casos de estudio completos + la cita dice de dónde sale y a dónde lleva + la cita conserva la conversación + el corpus alineado + chat/registro + a fondo v2 (el
           detalle) + revisión post-S8 · 2026-09-12
         </p>
         <h1>Guía de prueba</h1>
@@ -366,6 +366,8 @@
           las herramientas de Skills. <strong>v9.13 tampoco</strong>: mejora la
           d3 (el aire bajo el rótulo del dominio). <strong>v9.14 tampoco</strong>:
           mejora la a8 (la letra de las cifras, que ahora llega sin precarga).
+          <strong>v9.15 tampoco</strong>: vuelve a mejorar la a8 (la letra de las
+          cifras llega cuando la página termina de cargar).
         </p>
         <div class="url-caja">
           <p class="eyebrow" style="margin: 0 0 6px">URL de prueba</p>
@@ -534,11 +536,13 @@
               la letra mono del sitio —ceros con punto, trazo parejo—, no en una
               letra redonda de sistema. Igual en la banda de cifras de un caso y
               en <code>/cv</code>. Hasta el 2026-09-26 la primera visita las
-              pintaba en Arial. Con una conexión lenta puedes ver un instante una
-              letra mono parecida y enseguida la del sitio: es a propósito, y
-              <strong>nada se mueve</strong> en el cambio (la de respaldo está
-              calibrada al mismo ancho y alto).
-              <span class="origen origen-mejorado">Mejorado · margen de la home</span></label
+              pintaba en Arial. La letra del sitio llega cuando la página
+              <strong>termina de cargar</strong>: antes puedes ver un instante una
+              letra mono parecida, sobre todo con una conexión lenta. Es a
+              propósito, y <strong>nada se mueve</strong> en el cambio (la de
+              respaldo está calibrada al mismo ancho y alto). Si en vez de eso
+              ves las cifras en la letra parecida para siempre, repórtamelo.
+              <span class="origen origen-mejorado">Mejorado · margen de la home, segunda vuelta</span></label
             >
           </li>
           <li data-origen="nuevo">
@@ -2104,6 +2108,15 @@
           <summary>Historial de la guía</summary>
           <ul>
             <li>
+              <strong>v9.15 · el margen de la home, segunda vuelta · 2026-09-26:</strong>
+              la v9.14 no alcanzó en la CI: sin precarga, el navegador pedía la
+              letra de las cifras igual al armar la página, y la HOME seguía
+              cayendo en 0,89 una vez de cada dos. Ahora la letra se enciende
+              cuando la página termina de cargar. a8 mejorada otra vez. Ninguna
+              prueba eliminada. Prefijo de casillas
+              <code>margen-de-la-home-2</code>.
+            </li>
+            <li>
               <strong>v9.14 · el margen de la home · 2026-09-26:</strong> la
               HOME estaba en el borde del 0,90 de rendimiento en Lighthouse y la
               CI caía una vez de cada dos en cualquier PR. La letra de las
@@ -2448,7 +2461,7 @@
       (function () {
         // NS VERSIONADO POR SPRINT: al publicar la guía de un sprint nuevo se cambia
         // s007c — así una regresión sin correr no aparece marcada por la versión anterior.
-        var NS = "guia-hoja-de-vida:margen-de-la-home:";
+        var NS = "guia-hoja-de-vida:margen-de-la-home-2:";
         var casillas = Array.prototype.slice.call(
           document.querySelectorAll('input[type="checkbox"]'),
         );

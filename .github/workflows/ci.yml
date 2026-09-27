@@ -132,3 +132,20 @@ jobs:
         # desde el S1 sin que NADIE la midiera: el budget mide tiempos y pesos, que es
         # otra cosa. Este paso es el que la paga.
         run: lhci assert --config=./lighthouse-categorias.json
+      # Los reportes de la CI, siempre (2026-09-26). `lhci assert` solo imprime lo que
+      # FALLA, y medir en local ya engañó una vez: el PR #52 dio 0,91 en `/es` con la
+      # CPU ×12 de la Mac y la CI siguió en 0,89. Con los lhr de ESTE runner se ve el
+      # LCP, el TBT y qué peticiones cobró el simulador, sin adivinar.
+      # `.lighthouseci` empieza con punto: sin `include-hidden-files` la acción no
+      # sube nada, y con `ignore` lo callaba (primera corrida del PR #54). `warn`
+      # deja la advertencia en el resumen si algún día vuelve a pasar. El intento va
+      # en el nombre: al relanzar el job para juntar más corridas, cada intento
+      # guarda las suyas y no choca con el artefacto del anterior.
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: lighthouse-reports-${{ github.run_attempt }}
+          path: .lighthouseci/lhr-*.json
+          include-hidden-files: true
+          retention-days: 7
+          if-no-files-found: warn

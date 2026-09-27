@@ -6,9 +6,10 @@
 
 
 /* EL FALLBACK DE LAS CIFRAS (2026-09-26, ADR-006 enmendado). JetBrains Mono
-   va con `display: swap` y SIN precarga (src/app/fuentes.ts): la precarga le
-   costaba ~170 ms de LCP a la HOME y la dejaba en el borde del 0,90 de
-   Lighthouse. Mientras llega, las cifras se pintan en uno de estos dos, que
+   va con `display: swap`, SIN precarga (src/app/fuentes.ts) y se enciende
+   tras la carga (bloque de abajo): la precarga le costaba ~170 ms de LCP a la
+   HOME y la dejaba en el borde del 0,90 de Lighthouse. Mientras llega, las
+   cifras se pintan en uno de estos dos, que
    son monoespaciados como ella y están CALIBRADOS con sus métricas (avance
    0,6 em, ascenso 1,02, descenso 0,30, sin interlineado; leídas del woff2 con
    fontkit): el cambio no mueve nada. El de next/font (Arial, proporcional)
@@ -33,11 +34,28 @@
   line-gap-override: 0%;
 }
 
+/* JETBRAINS MONO, DESPUÉS DE LA CARGA (2026-09-26, cuarta vuelta del ADR-006).
+   Sin precarga, el navegador la pedía igual al armar la página, porque hay
+   texto mono en todas; en la CI la pedía a los ~100 ms y el LCP se registraba
+   a los ~130: el simulador de Lighthouse la seguía cobrando, era la ÚLTIMA
+   petición de las 15 URLs (43 de 45 corridas) y `/es` caía en 0,89 una de cada
+   dos veces. Una fuente solo se descarga si algún texto la usa: `font-mono`
+   arranca con el fallback calibrado y pasa a JetBrains cuando
+   `src/components/carga-la-mono.tsx` marca `mono-lista`, tras el evento
+   `load`. El cambio no mueve nada (misma caja). Lo vigila un e2e de
+   tests/e2e/home.spec.ts: la petición empieza DESPUÉS de la carga. */
+:root {
+  --fuente-mono: "JBM Fallback Menlo", "JBM Fallback Courier", monospace;
+}
+:root.mono-lista {
+  --fuente-mono: var(--font-jetbrains);
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-inter);
-  --font-mono: var(--font-jetbrains);
+  --font-mono: var(--fuente-mono);
   --font-display: var(--font-fraunces);
   --font-heading: var(--font-fraunces);
   --color-sidebar-ring: var(--sidebar-ring);

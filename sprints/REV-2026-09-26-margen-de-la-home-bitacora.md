@@ -95,3 +95,10 @@ local con las dos aserciones de la CI sobre las 15 URLs, en verde.
 La deuda que declaró el #51 («darle margen a `/es`») queda pagada con este PR. La hipótesis que
 anotó (el script previo a la pintura) resultó ser, más exactamente, **todos los bytes pedidos
 antes de la pintura**, y la parte que se podía mover era la fuente precargada.
+
+## Corrección, la misma noche
+
+**La deuda no quedó pagada.** Tras el merge, `main` (1414006, el mismo árbol que 078be0d) cayó en
+Lighthouse con `/es` en 0,89, y el PR #53, que no toca la página, también. El verde de este PR fue
+una de tres. La CPU ×12 en local daba 0,91 y la CI no. Sigue en
+`REV-2026-09-26-margen-de-la-home-2-bitacora.md`.
