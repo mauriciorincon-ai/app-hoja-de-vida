@@ -168,21 +168,42 @@ Se agregaron dos preguntas por idioma, en la misma posición y con la misma `esp
 ## Rojo de calendario en la CI
 
 En la primera corrida del PR #61, el job `quality` salió rojo en `pnpm audit --audit-level high`. El PR no
-tocaba dependencias: eran avisos nuevos sobre dependencias de herramienta.
+tocaba dependencias: eran avisos nuevos sobre dependencias de herramienta. En esa misma corrida, tests y
+build pasaron antes de llegar a la auditoría.
 
-- **undici y brace-expansion:** los overrides que ya existían subieron a la primera versión parcheada,
-  sin cambiar de mayor. undici quedó en 7.29.1 y brace-expansion en 1.1.21 y 5.0.12. Aparte de esas tres,
-  el conjunto de paquetes del lockfile es idéntico al de main.
-- **braces ≤3.0.3 (GHSA-vfj7-8cjw-p6xm, actualizado el 2026-10-02):** no tiene versión corregida
-  publicada. GitHub declara `first_patched_version: null` y npm no tiene 3.0.4, así que un override no es
-  posible. Lo usan solo el CLI de shadcn y eslint-plugin-next, vía fast-glob y micromatch. Su entrada son
-  patrones que escribe el repo, nunca un visitante.
-- **Decisión del dueño (2026-10-04): «Solucionémoslo como puede ser tu solución: ignorarlo».** Va en
-  `pnpm-workspace.yaml` bajo `auditConfig.ignoreGhsas`, con la razón al lado. Se quita cuando exista
-  `braces@3.0.4` y se reemplaza por el override `'braces@3': ^3.0.4`.
+**undici y brace-expansion tenían parche.** Los overrides que ya existían subieron a la primera versión
+parcheada, sin cambiar de mayor. undici quedó en 7.29.1 y brace-expansion en 1.1.21 y 5.0.12.
 
-Verificado en local: la auditoría sale con «1 high (1 ignored)» y código 0; lint, typecheck, `pnpm peers
-check` y los 1378 tests en verde.
+**braces ≤3.0.3 (GHSA-vfj7-8cjw-p6xm, actualizado el 2026-10-02) no tiene parche publicado.** GitHub declara
+`first_patched_version: null`, npm no tiene 3.0.4 y los PRs del arreglo (#72 y #75 de micromatch/braces)
+siguen abiertos.
+
+**Un error mío, corregido.** Al preguntarle al dueño qué hacer, leí su respuesta «Solucionémoslo, ¿cómo puede
+ser tu solución ignorarlo?» como una autorización para ignorar el aviso. Era lo contrario. Subí un commit
+(e28d1fb) que lo ignoraba con `auditConfig.ignoreGhsas`. El dueño lo corrigió: «si o si tiene que quedar
+solucionado». La CI de ese commit se canceló antes de terminar. La exclusión ya no está en el árbol.
+
+**La solución real: braces sale del árbol.** Entraba por dos caminos, los dos a través de fast-glob y
+micromatch 4.0.8, que exige braces ^3.0.3:
+
+- **El plugin de eslint de Next** (`@next/eslint-plugin-next`, que fija fast-glob 3.3.1, igual que en
+  canary). Usa fast-glob en una sola llamada, `globSync(patrón, { onlyDirectories: true })` en
+  `get-root-dirs.js`, y solo cuando la config define `settings.next.rootDir`, cosa que este repo no hace.
+  Un override acotado a ese padre, `'@next/eslint-plugin-next>fast-glob': npm:tinyglobby@^0.2.17`, lo
+  reemplaza por tinyglobby: misma firma, sin micromatch ni braces. Se probó la llamada directa: resuelve
+  `fast-glob` a tinyglobby y devuelve las carpetas.
+- **El CLI de shadcn**, que era dependencia de la app solo para importar `shadcn/tailwind.css`. Esa hoja
+  se copió tal cual a `src/styles/shadcn-tailwind.css`, con su licencia MIT en la cabecera, y el paquete
+  salió de las dependencias. Para agregar un componente: `pnpm dlx shadcn@4 add <componente>`.
+
+**Verificado en local:**
+
+- `pnpm why braces` y `pnpm why micromatch` no devuelven nada.
+- La auditoría da 0 altas y 1 moderada, sin ninguna excepción.
+- Regla 17: aparte de las tres subidas, el lockfile solo perdió paquetes (212, el árbol del CLI). Ninguno
+  cambió de versión.
+- El CSS compilado es idéntico byte a byte al de antes: 78.557 bytes, el mismo hash.
+- Lint, typecheck, `pnpm peers check`, los 1378 tests y el build, en verde.
 
 ## Anexo · frases tocadas, una por una
 
