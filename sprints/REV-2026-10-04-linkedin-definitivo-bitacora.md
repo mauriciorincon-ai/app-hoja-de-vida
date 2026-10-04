@@ -165,6 +165,25 @@ Se agregaron dos preguntas por idioma, en la misma posición y con la misma `esp
 | HTML construido                | `/es` y `/en`: eyebrow nuevo, el puesto propio, 2015 — 2017, «25+», 11 años, «lidero la estructuración», ningún «40+» |
 | Barrido de cero enlaces        | limpio, después del último `git add`                                                                                  |
 
+## Rojo de calendario en la CI
+
+En la primera corrida del PR #61, el job `quality` salió rojo en `pnpm audit --audit-level high`. El PR no
+tocaba dependencias: eran avisos nuevos sobre dependencias de herramienta.
+
+- **undici y brace-expansion:** los overrides que ya existían subieron a la primera versión parcheada,
+  sin cambiar de mayor. undici quedó en 7.29.1 y brace-expansion en 1.1.21 y 5.0.12. Aparte de esas tres,
+  el conjunto de paquetes del lockfile es idéntico al de main.
+- **braces ≤3.0.3 (GHSA-vfj7-8cjw-p6xm, actualizado el 2026-10-02):** no tiene versión corregida
+  publicada. GitHub declara `first_patched_version: null` y npm no tiene 3.0.4, así que un override no es
+  posible. Lo usan solo el CLI de shadcn y eslint-plugin-next, vía fast-glob y micromatch. Su entrada son
+  patrones que escribe el repo, nunca un visitante.
+- **Decisión del dueño (2026-10-04): «Solucionémoslo como puede ser tu solución: ignorarlo».** Va en
+  `pnpm-workspace.yaml` bajo `auditConfig.ignoreGhsas`, con la razón al lado. Se quita cuando exista
+  `braces@3.0.4` y se reemplaza por el override `'braces@3': ^3.0.4`.
+
+Verificado en local: la auditoría sale con «1 high (1 ignored)» y código 0; lint, typecheck, `pnpm peers
+check` y los 1378 tests en verde.
+
 ## Anexo · frases tocadas, una por una
 
 Se generó comparando cada archivo con `main`, frase por frase. Una fila puede juntar dos frases vecinas

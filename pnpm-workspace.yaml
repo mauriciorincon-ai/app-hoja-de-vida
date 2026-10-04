@@ -21,6 +21,17 @@ overrides:
   'nanoid@3': ^3.3.18
   browserslist: ^4.28.7
 
+# Aviso SIN PARCHE publicado, ignorado por decisión del dueño (2026-10-04).
+# `braces` <=3.0.3, GHSA-vfj7-8cjw-p6xm (actualizado 2026-10-02): GitHub declara
+# `first_patched_version: null` y npm no tiene 3.0.4, así que no cabe override.
+# Llega solo por herramienta (shadcn CLI y eslint-plugin-next, vía fast-glob →
+# micromatch) y su entrada son patrones que escribe el repo, nunca un visitante.
+# Se quita en cuanto exista `braces@3.0.4`: entonces va como override
+# `'braces@3': ^3.0.4`, igual que los de arriba.
+auditConfig:
+  ignoreGhsas:
+    - GHSA-vfj7-8cjw-p6xm
+
 allowBuilds:
   '@parcel/watcher': true
   '@sentry/cli': true
