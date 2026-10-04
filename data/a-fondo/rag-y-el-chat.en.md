@@ -2,7 +2,7 @@
 slug: rag-y-el-chat
 codigo: AF-16
 titulo: "RAG: how this chat works on the inside"
-resumen: "The architecture of this page's chat with its numbers: build-time index, lexical retrieval with MiniSearch (BM25) without embeddings, layered guardrails, a measured threshold, navigable citations, five interchangeable providers, local fallback, a US$20 budget with a real cost of zero, the name and email gate with its six-digit verification code, what data the conversation log stores and who reads it, and how it is evaluated with 77 questions of its own and 146 from outside."
+resumen: "The architecture of this page's chat with its numbers: build-time index, lexical retrieval with MiniSearch (BM25) without embeddings, layered guardrails, a measured threshold, navigable citations, five interchangeable providers, local fallback, a US$20 budget with a real cost of zero, the name and email gate with its six-digit verification code, what data the conversation log stores and who reads it, and how it is evaluated with 77 questions of its own and 148 from outside."
 cuando_usar: "Use this when they ask how the chat on this page works, which RAG architecture he implemented, whether he uses embeddings or lexical search, which model provider he works with, how he keeps the model from making up answers, and how he evaluates the system with a golden set and a question bank. Use it too for everything that has to do with the chat gate and with privacy: why the chat asks for your name and email before answering, what the six-digit verification code that arrives by email is for, what personal data it stores, who can read it, how long it is kept, how to ask for it to be deleted, and why the answers are two or three paragraphs instead of a dump of the corpus."
 estado: aprobado
 ancla: "#vitrina"
@@ -259,7 +259,7 @@ produce.
 Embeddings remain a possible evolution, not an automatic improvement. Adding them would make
 sense if a representative set of questions showed that lexical search fails systematically at
 retrieving paraphrases, semantic relationships or concepts expressed with sufficiently different
-vocabularies. Today that set exists —146 questions written from outside— and it does not show
+vocabularies. Today that set exists —148 questions written from outside— and it does not show
 that failure: with four sources per answer, none is left without its own.
 
 In that case, the most reasonable evolution would not necessarily be to replace the current
@@ -786,7 +786,7 @@ first four results. The test travels with the content: adding a document adds it
 the gate without anyone editing the tests. With 25 documents that is 77 questions.
 
 The second is the bank of questions written from outside, the way a recruiter or interviewer
-asks: 146 legitimate questions in ten families —career, way of working, certifications, AI and
+asks: 148 legitimate questions in ten families —career, way of working, certifications, AI and
 agents, platform and data, BI and analytics, governance, processes, showcase and fit—, plus 15
 off-topic ones and 3 declared without coverage. Each legitimate one must bring an expected source
 in the top-4, the expected source must arrive first in at least 60% of the cases, and the 15
@@ -887,5 +887,5 @@ user can understand the answer, walk through its evidence and recognize when the
 degraded.
 
 The difference between declaring experience in RAG and demonstrating it is this application. I do
-not need to limit myself to describing a possible architecture. With 77 questions of my own and 146 from outside running on every change, the visitor can ask a question, observe the answer,
+not need to limit myself to describing a possible architecture. With 77 questions of my own and 148 from outside running on every change, the visitor can ask a question, observe the answer,
 open its sources and directly examine the decisions that sustain the system.

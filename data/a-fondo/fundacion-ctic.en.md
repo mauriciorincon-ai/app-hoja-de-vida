@@ -2,7 +2,7 @@
 slug: fundacion-ctic
 codigo: AF-10
 titulo: "Fundación CTIC — analytics in healthcare (2025–today)"
-resumen: "My current role: more than 40 analytical products in Power BI for some 20 leaders of some 15 processes, data governance and quality in healthcare, and the institutional AI strategy under UNE-ISO/IEC 42001:2025 with more than 20 instruments, more than 10 opportunities and half of them evaluated."
+resumen: "My current role: more than 25 analytical products in Power BI for some 20 leaders of some 15 processes, data governance and quality in healthcare, and the institutional AI strategy under UNE-ISO/IEC 42001:2025 with more than 20 instruments, more than 10 opportunities and half of them evaluated."
 cuando_usar: "Use this when they ask where he works now, about Fundación CTIC (2025–today), healthcare data, data quality, the institutional artificial intelligence strategy under UNE-ISO/IEC 42001:2025, the more than 20 instruments and the per-process dashboards."
 estado: aprobado
 ancla: "/proyectos/fundacion-ctic"
@@ -10,7 +10,7 @@ actualizado: 2026-09-26
 preguntas_de_prueba:
   - "What does Henry do at Fundación CTIC?"
   - "What experience does he have with healthcare data?"
-  - "How does Henry lead the artificial intelligence strategy at Fundación CTIC?"
+  - "What role does Henry play in the artificial intelligence strategy of Fundación CTIC?"
 ---
 
 <!--
@@ -54,17 +54,14 @@ My work brings together two complementary responsibilities. The first consists o
 analytical capabilities in Power BI that make it possible to integrate information, model
 administrative and clinical processes, structure reliable indicators and offer leaders a common
 base for understanding institutional performance and supporting their decisions. The second, and
-currently one of the most important of my career, consists of leading the institutional
-artificial intelligence strategy, guiding the way the organization identifies, evaluates,
-prioritizes, designs and governs its AI initiatives, with the implementation of its AI management
-system.
+currently one of the most important of my career, consists of leading the structuring of the institutional artificial intelligence strategy, guiding the way the organization identifies, evaluates, prioritizes, designs and governs its AI initiatives, and of taking part in structuring its AI management system.
 
 I work in a direct line with the Planning Directorate and with the sub-directorates of technology,
 information management and quality. I do not lead a team of direct reports: I lead complete
 processes that bring together a large number of people —today, some 20 leaders of some 15 administrative
 and clinical processes and some 75 users of the analytical solutions—. It is a different form of
 leadership from the one I exercised at Cafam with a team of 20 people: there I directed people;
-here I direct the way an institution measures, decides and adopts artificial intelligence.
+here I lead the structuring of the strategy with which an institution measures, decides and adopts artificial intelligence.
 
 ## What this role brings together: data engineering, AI agents and enterprise architecture
 
@@ -98,7 +95,7 @@ expose patient data or clinical information; nor sensitive details of the proces
 knowledge whose disclosure could affect people or the institution. I can explain the
 capabilities, the architecture principles, the governance practices and the way of working. I do
 not reveal the information those capabilities operate on. That is why the figures in this
-document —more than 40 analytical products, more than 20 dashboards, some 20 leaders, some 15 processes, more than 10 AI opportunities—
+document —more than 25 analytics products in Power BI, some 20 leaders, some 15 processes, more than 10 AI opportunities—
 are aggregated and do not name any process, any indicator or any person.
 
 This reserve does not limit the solidity of the narrative. On the contrary, it demonstrates a
@@ -108,11 +105,11 @@ responsibilities and the controls without compromising the confidentiality that 
 possible. It is the same principle I apply to the governance of personal data in healthcare: the
 method is explained and what it protects is respected.
 
-## Leading the institutional artificial intelligence strategy
+## Leading the structuring of the institutional artificial intelligence strategy
 
 <!-- seccion: estrategia-institucional-de-ia -->
 
-Since March 2025 I have led the institutional artificial intelligence strategy with the purpose of
+Since March 2025 I have led the structuring of the institutional artificial intelligence strategy with the purpose of
 turning potentially isolated initiatives into a coherent, governable and sustainable
 organizational capability. My responsibility does not consist only of identifying technological
 opportunities, but of establishing a common way of deciding which initiatives should move
@@ -340,8 +337,7 @@ an inventory of failures.
 
 I have developed analytical solutions in Power BI for administrative and clinical leaders,
 structuring semantic models, indicators and visualization experiences adapted to their
-responsibilities, but grounded in consistent institutional definitions. They are more than 40 analytical
-products —half of them dashboards— that today are used by some 20 leaders of some 15 processes and some 75
+responsibilities, but grounded in consistent institutional definitions. They are more than 25 analytics products in Power BI —control dashboards among them— that today are used by some 20 leaders of some 15 processes and some 75
 users.
 
 These audiences work on the same organization, but they do not necessarily ask the same questions
@@ -408,7 +404,7 @@ the same time, not be sufficiently complete, timely or consistent to support a d
 why the controls must be designed by understanding the process that produces the data and the
 consequence a wrong interpretation could generate.
 
-With that criterion I designed the quality rules that feed the more than 40 analytical products. I publish
+With that criterion I designed the quality rules that feed the more than 25 analytical products. I publish
 them without figures, because the figures would describe internal processes, but I can say what
 kind they are:
 
@@ -450,8 +446,7 @@ availability and the conditions of use of the information they would need.
 
 I have developed analytical solutions in Power BI for tracking administrative and clinical
 processes, integrating information, semantic models, indicators and visualization experiences
-oriented to the needs of leaders with different responsibilities within the institution: more than 40
-products, of which half are dashboards.
+oriented to the needs of leaders with different responsibilities within the institution: more than 25 products, control dashboards among them.
 
 Power BI does not work in this context only as a tool for building dashboards. It is the
 analytical layer through which data is organized, acquires meaning and becomes usable
@@ -492,7 +487,7 @@ the metrics. Top management needs to observe trends, risks and response capacity
 need to identify constraints, deviations and causal relationships. Operational teams need
 information detailed enough to understand concrete situations. The semantic model must keep a
 single logic, while the Power BI experience adapts its depth and presentation to each
-responsibility: it is what allows more than 40 products to serve some 20 leaders and some 75 users without there
+responsibility: it is what allows more than 25 products to serve some 20 leaders and some 75 users without there
 being as many different definitions of the same indicator.
 
 ## Improvement plans: what I designed, what I implemented and the close to 60% less effort
@@ -520,7 +515,7 @@ rebuilt each time.
 When the owners adopt a decision, the analytical solutions contribute to tracking its results
 through previously defined indicators. This closes the cycle between observation, decision and
 evaluation without attributing to the platform, or to the analytics team, responsibilities that
-belong to the governance and management of the process. Currently, the more than 40 analytical products are
+belong to the governance and management of the process. Currently, the more than 25 analytical products are
 in institutional use or follow-up, supporting some 20 leaders of some 15 administrative and clinical
 processes, and have supported the ten or so analysis plans under follow-up during the period evaluated.
 
@@ -528,7 +523,7 @@ processes, and have supported the ten or so analysis plans under follow-up durin
 
 <!-- seccion: arquitectura-institucional-de-ia -->
 
-Leading the artificial intelligence strategy also means defining how the initiatives will be able
+Structuring the artificial intelligence strategy also means defining how the initiatives will be able
 to coexist, reuse capabilities and evolve without creating a new technological fragmentation.
 Each isolated project can solve a specific need, but a succession of disconnected solutions
 increases costs, repeats mistakes and makes governance harder. With a few prioritized initiatives and more than 10 opportunities in the portfolio, the question is no longer only whether each one works, but
@@ -586,15 +581,14 @@ proves its value to be integrated, operated, supervised and evolved with consist
 
 <!-- seccion: alcance-y-avance -->
 
-Currently, more than 40 analytical solutions in Power BI are in institutional use or follow-up and support some 20
+Currently, more than 25 analytical solutions in Power BI are in institutional use or follow-up and support some 20
 leaders or owners of some 15 administrative and clinical processes. Their scope is evaluated not only
 by the number of products developed, but by their effective use, the reliability of their
 indicators and their incorporation into the spaces where institutional performance is analyzed.
 
 | Dimension         | Metric                                     |                    Value |
 | ----------------- | ------------------------------------------ | -----------------------: |
-| Analytics         | analytical products in use or follow-up    |             more than 40 |
-| Analytics         | dashboards                                 |             more than 20 |
+| Analytics         | analytical products in use or follow-up    |             more than 25 |
 | Analytics         | leaders supported · processes              |        some 20 · some 15 |
 | Analytics         | users                                      |                      ~75 |
 | Analytics         | reduction of effort in preparation         | close to 60% (estimated) |
@@ -623,8 +617,7 @@ verifiable evidence.
 
 <!-- seccion: convergencia-de-la-trayectoria -->
 
-Seen in retrospect, my current responsibility brings together the lessons built throughout my
-entire career, since August 2016. At Inglopres I learned to structure processes, build the data
+Seen in retrospect, my current responsibility brings together the lessons built throughout my entire career, since May 2015. At Inglopres I learned to structure processes, build the data
 that did not exist and manage with evidence under ISO 9001:2015. At Ceinfes I learned to direct
 an operation through indicators and to communicate its results to the board of directors every
 week. In Bogotá's transport system, with C&M for TransMilenio, I learned to integrate sources,
@@ -638,8 +631,7 @@ users. At Vesting I built in Microsoft Fabric the platform for observing agents 
 monitored at once— and structured a replicable way of developing intelligent solutions.
 
 At Fundación CTIC these capabilities converge in a broader responsibility. It is no longer only a
-matter of building an analytical product, implementing a solution or designing an agent. It is a
-matter of leading the way a health institution understands, prioritizes, governs and develops
+matter of building an analytical product, implementing a solution or designing an agent. It is a matter of leading the structuring of the strategy with which a health institution understands, prioritizes, governs and develops
 its artificial intelligence capability.
 
 ## What this role brings together: analytics, agents, architecture and management system
@@ -657,8 +649,7 @@ This role represents the most advanced point of my professional evolution. I beg
 understand and improve processes. Then I built the data needed to measure them, the platforms to
 analyze them and the models to anticipate certain behaviors. Power BI allowed me to turn that
 architecture of data and semantic models into reliable decision experiences. Later I designed the
-infrastructure needed to observe AI agents. Today, since March 2025, I lead the strategy with
-which an institution can decide which intelligent capabilities it needs, under what conditions it
+infrastructure needed to observe AI agents. Today, since March 2025, I lead the structuring of the strategy with which an institution can decide which intelligent capabilities it needs, under what conditions it
 can use them and how it should govern them throughout their lifecycle.
 
 My purpose is not to get the organization to use more artificial intelligence. It is to help it

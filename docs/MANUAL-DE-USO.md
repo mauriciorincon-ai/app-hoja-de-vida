@@ -75,6 +75,13 @@ el mensaje te llega al correo.
   Vesting: `periodo: "2023 — 2025"` y `periodoEnLaHome: "2024"`, para no repetir el 2023 de
   Pichincha. Dos pruebas lo cuidan: el periodo real tiene que decir los mismos años que el nombre
   de su caso, y la línea de la HOME no puede repetir un año.
+- **Un hito que no es un empleo** (desde el 2026-10-04): `tipo: proyectos-propios` marca el puesto
+  que trabajas por tu cuenta en paralelo a tus empleos —hoy, «Ingeniero de IA Generativa ·
+  Proyectos propios», desde abril de 2023—. No necesita caso de estudio, no entra en la regla de
+  años de la línea (su 2023 repite el de Pichincha a propósito) y el PDF lo pone en su sección
+  «Proyectos propios», después de la experiencia, con su descripción en vez de sus logros. **Sus
+  logros nombran las piezas y nunca las cuentan**: si escribes «32 piezas» o «6 aplicaciones»
+  ahí, `pnpm test` falla, porque la vitrina crece cada semana. Sin `tipo`, un hito es un empleo.
 - **Ver case study desde el hito:** un hito con `proyecto: <slug>` enseña «Ver caso de estudio →» («View case study →» en inglés) hacia
   `/proyectos/<slug>`. El slug tiene que ser el de un proyecto **con** `casestudy:`; si no, **la
   publicación falla** y te dice qué hito. Es la única puerta a los case studies desde la HOME
@@ -92,8 +99,9 @@ el mensaje te llega al correo.
   bloquea la publicación si se desbalancean).
 - **Desde el 2026-09-24** los bullets de los ocho hitos llevan las cifras del corpus a fondo
   (Inglopres, Ceinfes y C&M Consorcio pasaron de 2 o 3 a 5), y en la sección **Logros** de la
-  HOME entraron dos: los 27 agentes construidos con el proceso core de Vesting y los 42
-  productos analíticos de la Fundación CTIC. Son ocho logros, en cuatro columnas.
+  HOME entraron dos: los 27 agentes construidos con el proceso core de Vesting y los productos
+  analíticos de la Fundación CTIC —hoy «25+», la cifra que corregiste el 2026-10-04—. Son ocho
+  logros, en cuatro columnas.
 
 ### Casos de estudio con página propia · desde Sprint 002 · rehechos el 2026-09-24
 
@@ -285,12 +293,14 @@ el mensaje te llega al correo.
   reclutadores a una dirección que no carga. Una certificación «en curso» dice «(en curso)» en vez de
   fecha.
 - **Dos páginas, sin repetir y sin dejar nada por fuera** (desde el 2026-09-24). El PDF cuenta
-  **cada experiencia una sola vez**: los ocho empleos con **todos** sus logros, y ningún caso de
+  **cada experiencia una sola vez**: los nueve cargos con **todos** sus logros —y, desde el
+  2026-10-04, el puesto de proyectos propios en su propia sección, con su descripción—, y ningún caso de
   estudio vuelve a aparecer como «Proyecto», porque es la misma historia que su experiencia. La
   sección «Proyectos» solo sale si agregas un proyecto que **no** es de ningún empleo (hoy no hay
   ninguno, así que no se pinta). Cuatro pruebas lo cuidan, y la publicación te avisa si una falla:
   - el PDF no pasa de **dos páginas**;
-  - **cada logro de cada experiencia** está en el PDF (nadie puede recortarlos para que quepa);
+  - **cada logro de cada empleo** está en el PDF (nadie puede recortarlos para que quepa); del
+    puesto de proyectos propios van su cargo, su organización y su descripción;
   - **ningún caso se repite** como proyecto;
   - **cada cifra de la banda de un caso está también en los logros de su experiencia**. Si
     agregas una cifra a un caso y no a los logros de su empleo, la prueba te dice cuál falta y
@@ -994,3 +1004,4 @@ chat hoy y cuáles traería con la base aprobada. Ese informe **se genera, no se
 | respuestas del dueño a los hallazgos 2026-09-27 | **El dueño contestó 14 de las 19 decisiones y el sitio las aplica** (los dos idiomas): **las cifras internas de la Fundación CTIC van ahora aproximadas** en todo el sitio («más de 40 productos», «unos 20 líderes», «más de 10 oportunidades», «la mitad evaluadas»…) porque la Fundación no autorizó publicarlas exactas; el logro de certificaciones pasa de 5 a **3** (Python y SQL de IBM son cursos del Certificado Profesional y salen de la lista); las skills sin rastro llevan su nivel («— prototipo», «— en estudio») y dbt y Apache Iceberg se retiran; `lo-que-busco` baja a «abierto a» y pierde el párrafo de condiciones económicas; la ficha de Hiring Copilot es la v1.5.0 (copiada de origen); IELTS 5,5 (2014); «sellado» = alcanzó el MVP. **Si vuelves a escribir una cifra de CTIC, escríbela aproximada.** Y con el complemento del mismo día: el modelo de demanda de TransMilenio «siguió en uso después de mi salida» (fuera «diez meses»), la excepción de Pichincha en el liderazgo, y los dos −40 % contados cada uno con su análisis (VBA y Power Query). No queda ninguna pregunta pendiente. Detalle en `sprints/REV-2026-09-27-respuestas-del-dueno-bitacora.md`. |
 | residuos de CTIC 2026-09-27 | **Las cifras de CTIC que quedaron exactas tras el PR #57 ya van aproximadas**, y ahora **un gate lo vigila**: `tests/unit/ctic-aproximadas.test.ts` falla si el corpus (español e inglés) o los YAML del sitio escriben una cifra interna exacta de la Fundación («42 productos», «12 oportunidades», «2 de las 3 iniciativas», una fila de tabla con el entero…) y nombra archivo y línea. El logro de la HOME se ve ahora **«40+»** productos analíticos. Si escribes una cifra de CTIC, usa las formas aprobadas: «más de 40», «más de 20», «un tercio · el resto», «más de 10 · la mitad», «unas pocas · las primeras», «unos 20 · unos 15», «una decena», «unos 75». Además: el documento del chat dice **77** preguntas propias (el gate de cifras ahora también caza «con N documentos son M preguntas») y el ejemplo de Cafam en «cómo trabajo» dice «más de 15 decisores directivos» en vez de enumerar los cargos. Detalle en `sprints/REV-2026-09-27-residuos-ctic-bitacora.md`. |
 | ISO/IEC 42001 en estructuración 2026-09-27 | **El perfil ya no dice que implementaste ISO/IEC 42001**: dice «la estrategia y la estructuración del sistema de gestión bajo ISO/IEC 42001», que es lo que el corpus sostiene (en estructuración, sin declararlo implementado hasta poder demostrarlo). El documento del chat decía lo mismo con «formalicé implementando» y también cambió. **El gate de CTIC ahora veta esa afirmación** en español e inglés; el día que el sistema esté implementado y pueda demostrarse, se retira la lista de `scripts/ctic-aproximadas.mjs` con esa decisión. Detalle en `sprints/REV-2026-09-27-iso-42001-estructuracion-bitacora.md`. |
+| LinkedIn definitivo 2026-10-04 | **El sitio dice los mismos hechos que tu LinkedIn.** En la Fundación CTIC hay **una sola cifra: más de 25 productos analíticos en Power BI** (la HOME dice «25+»; se fueron «más de 40», «la mitad son tableros» y «más de 20 tableros»), y **lideras la estructuración** de la estrategia de IA y participas en la del sistema de gestión, nunca «lidero la estrategia». **Puesto nuevo** «Ingeniero de IA Generativa · Proyectos propios», desde abril de 2023, segundo en la trayectoria, con `tipo: proyectos-propios`; en el PDF va en su propia sección. **Inglopres empieza en mayo de 2015** (Analista de Procesos, luego Ingeniero de Procesos): «más de diez años», «nueve cargos en ocho organizaciones», unos 121 meses, y la HOME calcula 11. Consorcio C&M: −30 %, 20+ usuarios internos y «Analista de Operaciones»; Cafam gana las más de 10 horas semanales con VBA; Inglopres, los planes de mejora con análisis estadístico. Eyebrow «AI & Analytics Engineer · Ingeniero Industrial» y perfil nuevo. Pichincha y Oracle WMS siguen como estaban: lo que cambias es LinkedIn. **El gate de CTIC aprendió tres cosas** —la cifra retirada, el liderazgo sin estructuración y un número separado de su sustantivo— y un gate nuevo impide escribir totales de piezas en el puesto propio. El PDF sigue en dos páginas con un ajuste mínimo de tipografía (viñetas 8,8 y 7 de aire entre hitos). Detalle en `sprints/REV-2026-10-04-linkedin-definitivo-bitacora.md`. |

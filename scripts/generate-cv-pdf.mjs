@@ -35,6 +35,7 @@ export const LABELS = {
   es: {
     perfil: "PERFIL",
     experiencia: "EXPERIENCIA",
+    proyectosPropios: "PROYECTOS PROPIOS",
     proyectos: "PROYECTOS",
     skills: "SKILLS",
     certificaciones: "CERTIFICACIONES",
@@ -51,6 +52,7 @@ export const LABELS = {
   en: {
     perfil: "PROFILE",
     experiencia: "EXPERIENCE",
+    proyectosPropios: "INDEPENDENT PROJECTS",
     proyectos: "PROJECTS",
     skills: "SKILLS",
     certificaciones: "CERTIFICATIONS",
@@ -497,28 +499,58 @@ function columnaDerecha(doc, cv, labels, yInicial, sitio) {
   return col;
 }
 
-function columnaIzquierda(doc, cv, labels, yInicial) {
-  const col = new Columna(doc, COL_IZQ.x, COL_IZQ.ancho, yInicial);
-
-  col.seccion(labels.experiencia);
-  for (const rol of cv.trayectoria) {
-    estilo(doc, "Helvetica-Bold", 10, TINTA);
-    // El título del hito no se queda solo al pie de una página: viaja con la
-    // organización, el periodo y el primer bullet.
-    col.parrafo(ansi(rol.rol), { juntoCon: 40 });
+/**
+ * Un hito de la trayectoria: rol, organización, periodo y sus logros. Con
+ * `soloDescripcion`, la descripción en vez de los logros.
+ */
+function hito(col, rol, { soloDescripcion = false } = {}) {
+  const { doc } = col;
+  estilo(doc, "Helvetica-Bold", 10, TINTA);
+  // El título del hito no se queda solo al pie de una página: viaja con la
+  // organización, el periodo y el primer bullet.
+  // (El compacto solo arrastra su línea de organización y la descripción.)
+  col.parrafo(ansi(rol.rol), { juntoCon: soloDescripcion ? 26 : 40 });
+  if (soloDescripcion) {
+    // El puesto propio, compacto: organización y periodo en una línea.
+    estilo(doc, "Helvetica-Bold", 9.2, NAVY);
+    col.parrafo(ansi(`${rol.organizacion} · ${rol.periodo}`));
+  } else {
     estilo(doc, "Helvetica-Bold", 9.2, NAVY);
     col.parrafo(ansi(rol.organizacion));
     estilo(doc, "Helvetica", 8.2, GRIS);
     col.parrafo(ansi(rol.periodo));
-    col.espacio(3);
-    estilo(doc, "Helvetica", 9, TINTA);
-    if (rol.bullets.length > 0) {
-      for (const bullet of rol.bullets) col.vineta(ansi(bullet));
-    } else {
-      col.parrafo(ansi(rol.descripcion));
-    }
-    col.espacio(8);
   }
+  col.espacio(3);
+  // 8,8 y 7 de aire entre hitos (eran 9 y 8): el ajuste que dejó caber, en las
+  // dos páginas, el puesto propio y la etapa 2015–2016 de Inglopres (2026-10-04).
+  estilo(doc, "Helvetica", 8.8, TINTA);
+  const bullets = rol.bullets ?? [];
+  if (bullets.length > 0 && !soloDescripcion) {
+    for (const bullet of bullets) col.vineta(ansi(bullet));
+  } else {
+    col.parrafo(ansi(rol.descripcion));
+  }
+  col.espacio(7);
+}
+
+/** Un hito sin `tipo` es un empleo: el YAML llega crudo, sin el default del esquema. */
+export const esProyectoPropio = (/** @type {{ tipo?: string }} */ h) => h.tipo === "proyectos-propios";
+
+function columnaIzquierda(doc, cv, labels, yInicial) {
+  const col = new Columna(doc, COL_IZQ.x, COL_IZQ.ancho, yInicial);
+
+  // Los EMPLEOS van bajo «Experiencia». El puesto de proyectos propios
+  // (2026-10-04) va después, en su propia sección, para que un ATS no lo lea
+  // como un empleador más, y con su DESCRIPCIÓN: sus logros nombran las piezas
+  // de la vitrina, viven en la web y en el chat, y en papel no cabían dentro de
+  // las dos páginas que el dueño fijó el 2026-09-24.
+  col.seccion(labels.experiencia);
+  for (const rol of cv.trayectoria.filter((h) => !esProyectoPropio(h))) hito(col, rol);
+  const propios = cv.trayectoria.filter(esProyectoPropio);
+  // El título de la sección viaja con el hito entero (rol, organización y la
+  // descripción): solo, al pie de la página 2, sería un título huérfano.
+  if (propios.length > 0) col.seccion(labels.proyectosPropios, { juntoCon: 40 });
+  for (const rol of propios) hito(col, rol, { soloDescripcion: true });
 
   // Cada experiencia se cuenta UNA vez (2026-09-24, criterio del dueño: «que
   // no repita, y que no deje por fuera ninguna de mis experiencias y logros»).
@@ -529,9 +561,9 @@ function columnaIzquierda(doc, cv, labels, yInicial) {
   // destacado, Vesting dos veces. «Proyectos» queda para lo que NO es ya una
   // experiencia —hoy nada, así que la sección no se pinta—.
   const conHito = new Set(cv.trayectoria.map((h) => h.proyecto));
-  const propios = cv.proyectos.filter((p) => !conHito.has(p.slug));
-  if (propios.length > 0) col.seccion(labels.proyectos);
-  for (const proyecto of propios) {
+  const sueltos = cv.proyectos.filter((p) => !conHito.has(p.slug));
+  if (sueltos.length > 0) col.seccion(labels.proyectos);
+  for (const proyecto of sueltos) {
     estilo(doc, "Helvetica-Bold", 9.5, TINTA);
     col.parrafo(ansi(proyecto.nombre), { juntoCon: 24 });
     estilo(doc, "Helvetica", 9, TINTA);

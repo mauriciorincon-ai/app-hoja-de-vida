@@ -48,7 +48,7 @@ structuring of an institutional artificial intelligence strategy.
 | --------------------------------- | --------------------------- | --------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
 | **Banco Pichincha**               | March – July 2023           | I co-led the area's data governance initiative            | trust: consistent definitions, an owner per metric, access by purpose                                           |
 | **Vesting**, an agent startup     | August 2023 – January 2025  | I designed the governance from scratch                    | 12 clients on one platform: identity, ownership, isolation and traceability from the first event                |
-| **Fundación CTIC**, healthcare    | since March 2025            | I manage data quality and lead the AI strategy            | data that describe people, authorized purpose and an AI management system under UNE-ISO/IEC 42001:2025          |
+| **Fundación CTIC**, healthcare    | since March 2025            | I manage data quality and lead the structuring of the AI strategy            | data that describe people, authorized purpose and an AI management system under UNE-ISO/IEC 42001:2025          |
 
 This diversity has allowed me to understand that governance cannot be carried from one organization
 to another as an unchanging template. Its principles may remain, but its priorities, controls,
@@ -140,12 +140,11 @@ of data and the consequence of a wrong interpretation: completeness of the field
 duplicate detection, reconciliation between sources that describe the same fact, and thresholds
 that, when exceeded, trigger a review before the figure reaches a dashboard. I do not publish the
 figures of those rules; I do publish the principle: data quality as a permanent practice, not as a
-cleaning event before a report. On that base run more than 40 analytics products in Power BI for some 20 leaders of
+cleaning event before a report. On that base run more than 25 analytics products in Power BI for some 20 leaders of
 some 15 processes and about 75 users, with close to 60% less effort in preparing the information
 —estimated— and some ten analysis plans under follow-up.
 
-I currently also lead the institutional artificial intelligence strategy, structured from the
-principles and requirements of ISO/IEC 42001 in its Spanish edition, UNE-ISO/IEC 42001:2025. This
+I currently also lead the structuring of the institutional artificial intelligence strategy from the principles and requirements of ISO/IEC 42001 in its Spanish edition, UNE-ISO/IEC 42001:2025. This
 responsibility extends governance from the data to the systems that use them to produce analyses,
 recommendations, content or actions. My line of work is direct with the Planning Directorate and
 with the sub-directorates of technology, information management and quality; everything I
@@ -165,7 +164,7 @@ The first question concerns meaning. A column can have a technically valid name 
 interpreted differently by several areas. That is why definitions must be established with the
 business owners and expressed in a way that can be understood, implemented and verified. At Banco
 Pichincha that definition lived in the semantic model as a DAX measure with an owner; at Fundación
-CTIC, in the definition agreed with the process leader before the indicator enters one of the more than 40
+CTIC, in the definition agreed with the process leader before the indicator enters one of the more than 25
 analytics products.
 
 The second question concerns provenance: **lineage**. An indicator must keep a traceable
@@ -234,7 +233,7 @@ purpose. Third, traceability of who consulted what and for what, because in heal
 that the controls work is not optional.
 
 I apply the same rule to what I say in public. Everything I communicate about that experience is
-aggregated —more than 40 products, some 20 leaders, some 15 processes— and I do not expose patient data, clinical
+aggregated —more than 25 products, some 20 leaders, some 15 processes— and I do not expose patient data, clinical
 information, sensitive details of the processes or internal knowledge whose disclosure could affect
 the people or the institution. I can explain capabilities, architecture principles and governance
 practices; I do not reveal the information they operate on.
@@ -371,11 +370,11 @@ keep building in my showcase. The two levels need each other: AI governance with
 watches the behavior of a system fed with information that nobody answers for; data governance
 without AI governance protects the input and leaves the output free.
 
-## Responsible use of artificial intelligence: leading a strategy under UNE-ISO/IEC 42001:2025
+## Responsible use of artificial intelligence: structuring a strategy under UNE-ISO/IEC 42001:2025
 
 <!-- seccion: estrategia-iso-42001 -->
 
-I currently lead the institutional artificial intelligence strategy of Fundación CTIC following the
+I currently lead the structuring of the institutional artificial intelligence strategy of Fundación CTIC following the
 principles and requirements of **UNE-ISO/IEC 42001:2025**, the Spanish adoption of the international
 standard ISO/IEC 42001 and the edition we base ourselves on. My responsibility consists of helping
 the organization not to approach AI as a collection of disconnected initiatives, but as a capability
@@ -750,16 +749,15 @@ with transparency. When the graduate degree works as an indicator of structured 
 depth and the capacity to solve complex problems, my track record allows those qualities to be
 examined through demonstrable results and responsibilities.
 
-## Ten years in the responsibilities I govern today
+## More than ten years in the responsibilities I govern today
 
 <!-- seccion: experiencia-en-lo-que-gobierno -->
 
-For ten years, since August 2016, I have developed capabilities related to processes, data,
+For more than ten years, since May 2015, I have developed capabilities related to processes, data,
 analytics platforms, predictive models, applications, agents and governance. I have co-led data
 governance in banking, at Banco Pichincha; designed the data and observability architecture for an
 agent platform with 12 clients, at Vesting; structured an eleven-stage process used as the framework
-to build 27 agents; and I currently lead an institutional artificial intelligence strategy based on
-UNE-ISO/IEC 42001:2025, with more than 20 instruments, at Fundación CTIC.
+to build 27 agents; and I currently lead the structuring of an institutional artificial intelligence strategy based on UNE-ISO/IEC 42001:2025, and take part in that of the management system, with more than 20 instruments, at Fundación CTIC.
 
 This experience is not limited to incidental exposure to those domains. I have worked in the
 responsibilities I need to govern: I built pipelines and semantic models before establishing

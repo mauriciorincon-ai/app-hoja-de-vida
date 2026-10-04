@@ -167,8 +167,10 @@ describe("los casos de estudio", () => {
   });
 
   it("cada hito de la trayectoria tiene su caso de estudio", () => {
+    // Solo los EMPLEOS: el puesto de proyectos propios (2026-10-04) corre en
+    // paralelo a ellos y su evidencia es la vitrina entera, no un caso.
     const sinCaso = es.trayectoria
-      .filter((h) => !h.proyecto)
+      .filter((h) => h.tipo === "empleo" && !h.proyecto)
       .map((h) => `${h.periodo} · ${h.rol} · ${h.organizacion}`);
     expect(
       sinCaso,
@@ -356,7 +358,12 @@ describe("el periodo de cada hito", () => {
 
   it("la línea de tiempo de la HOME no repite año de transición", () => {
     for (const cv of [es, en]) {
-      const lineas = cv.trayectoria.map((h) => anioDe(periodoEnLaHome(h)));
+      // Los años de transición son los de los EMPLEOS, que se suceden; el
+      // puesto de proyectos propios corre en paralelo desde 2023 y su año
+      // repite el de Pichincha por construcción (revisión del 2026-10-04).
+      const lineas = cv.trayectoria
+        .filter((h) => h.tipo === "empleo")
+        .map((h) => anioDe(periodoEnLaHome(h)));
       const repetidos = lineas.filter((a, i) => lineas.indexOf(a) !== i);
       expect(repetidos, `años de la línea: ${lineas.join(" · ")}`).toEqual([]);
     }

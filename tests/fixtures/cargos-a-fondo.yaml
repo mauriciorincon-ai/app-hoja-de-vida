@@ -27,7 +27,9 @@ cargos:
   - empresa: "Inglopres"
     alias: ["INGLOPRES", "Inglopres S.A.S"]
     organizacion_sitio: "Inglopres"
-    inicio: "2016-08"
+    # 2026-10-04: el dueño declaró empleo su etapa de Analista de Procesos
+    # (mayo de 2015 – agosto de 2016), antes de Ingeniero de Procesos.
+    inicio: "2015-05"
     fin: "2017-06"
 
   - empresa: "Ceinfes"

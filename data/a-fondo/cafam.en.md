@@ -133,7 +133,7 @@ This was an important stage in my evolution toward designing semantic models and
 
 <!-- seccion: integraciones-vba -->
 
-I developed applications in Visual Basic for Applications (VBA) intended to integrate distribution center activities with the warehouse management system: data loads that previously depended on manual handling went on to apply rules in a repeatable way. These solutions increased automation by fifteen percent and contributed to reducing data errors by fifty percent.
+I developed applications in Visual Basic for Applications (VBA) intended to integrate distribution center activities with the warehouse management system: data loads that previously depended on manual handling went on to apply rules in a repeatable way. These solutions increased automation by fifteen percent and contributed to reducing data errors by fifty percent. I also automated in VBA analytical processes that were done by hand: more than ten hours a week of manual work saved, and faster answers to critical operational queries.
 
 The choice of VBA answered to the technological and operational context available at Cafam. It was a tool accessible to the organization, compatible with the resources the teams used and flexible enough to resolve gaps that could affect the continuity of the process. The quality of a solution does not depend on the novelty of the technology, but on its fit for the problem, the possibility of maintaining it and the result it produces.
 
@@ -190,6 +190,7 @@ The project's figures, as my CV and the site's case study publish them, with wha
 | WMS implementation testing               | −25% errors · +15% operational efficiency          | inventory record accuracy (IRA) before and after                        |
 | BI for controlling the implementation    | +50% tracking accuracy · 15+ users                 | scenarios, coverage, defects and recurrences visible daily              |
 | VBA integrations with the WMS            | +15% automation · −50% data errors                 | manual loads replaced and errors in the exchange of information         |
+| Analytical processes automated in VBA | more than 10 hours a week of manual work saved | critical operational queries answered without manual work |
 | Data quality in SQL                      | +20% accuracy and reliability                      | 80-20 reconciliation by medicines between the WMS and the source system |
 
 The team was twenty people —fourteen from Cafam and six from the vendor— during some six months of testing, between October 2020 and June 2021. None of these figures came from increasing supervision: they came from a written process, reproducible scenarios, visible progress and quality controls that ran inside the pipeline and not at the end.

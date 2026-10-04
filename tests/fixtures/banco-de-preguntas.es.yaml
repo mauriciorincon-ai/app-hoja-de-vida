@@ -447,6 +447,13 @@ preguntas:
   - pregunta: "¿Qué ha construido por su cuenta, fuera del trabajo?"
     espera: [apps-pipeline]
     familia: vitrina
+  # 2026-10-04 (revisión LinkedIn definitivo): el puesto de proyectos propios.
+  - pregunta: "¿Qué proyectos propios de IA ha construido?"
+    espera: [trayectoria]
+    familia: vitrina
+  - pregunta: "¿Desde cuándo trabaja en proyectos propios de IA generativa?"
+    espera: [apps-pipeline, trayectoria]
+    familia: vitrina
   - pregunta: "¿Cuántas aplicaciones ha publicado?"
     espera: [apps-pipeline]
     familia: vitrina

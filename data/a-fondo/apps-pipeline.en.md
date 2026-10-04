@@ -53,7 +53,9 @@ included). -->
 
 A résumé asserts; a published piece demonstrates. That is the main reason I build in public: six sister applications, plus this site, and 32 pieces in total, all outside my job and all with their repository.
 
-Throughout my career —ten years since August 2016— I have demanded that every indicator keep its provenance, that every transformation can be explained and that every conclusion is backed by evidence. It seemed incoherent to me to apply that level of rigor to the work of organizations and then present my own profile through claims that nobody could verify. So I decided to treat my professional experience the way I treat any information system: with traceability, evidence, version control and observable results.
+My own generative AI projects did not come out of nowhere. Since April 2023, in parallel to my jobs, I have planned and designed these applications and these agents —their conception and their architecture—, and for years I tried them out on different platforms before building them, from 2026, with the pipeline that produces them today. It is a declared fact, with no 2023 artifact to prove it: what can be examined are the pieces, and each one keeps its own date —Dash Agent AI, for example, was conceived and designed in 2026—.
+
+Throughout my career —more than ten years since May 2015— I have demanded that every indicator keep its provenance, that every transformation can be explained and that every conclusion is backed by evidence. It seemed incoherent to me to apply that level of rigor to the work of organizations and then present my own profile through claims that nobody could verify. So I decided to treat my professional experience the way I treat any information system: with traceability, evidence, version control and observable results.
 
 My portfolio is not a gallery of demos nor a collection of exercises. It is an architecture of professional evidence. Each piece seeks to demonstrate a concrete capability through a product that can be walked through, tested and analyzed. The applications demonstrate the construction of solutions. The agents show how I structure work with artificial intelligence. The research lines make my methodological discipline visible. The dashboards allow evaluating how I turn data into models, indicators and decision experiences.
 
@@ -311,7 +313,7 @@ Three questions are asked of every gate before accepting it. The first: did you 
 
 In artificial intelligence components, the rule takes on greater importance because an output can have a convincing form and be incorrect from a functional point of view. It is not enough to check that the agent answers. It is necessary to design scenarios in which it must recognize insufficient information, refrain from claiming something without evidence, handle an unavailable tool or hand over the decision when the level of uncertainty exceeds its limits.
 
-I also apply this logic to information retrieval mechanisms. I do not consider it sufficient to show that an answer includes citations. I must verify that the retrieval answers the question —with 77 questions of my own and 146 from outside running on every change of this site—, that each citation leads to a destination that exists and that the system can declare when the available evidence is not sufficient.
+I also apply this logic to information retrieval mechanisms. I do not consider it sufficient to show that an answer includes citations. I must verify that the retrieval answers the question —with 77 questions of my own and 148 from outside running on every change of this site—, that each citation leads to a destination that exists and that the system can declare when the available evidence is not sufficient.
 
 ## This very page is also an application
 

@@ -90,6 +90,13 @@ export const cvSchema = z.object({
         // expandibles en el timeline y presentes en el PDF ATS
         bullets: z.array(z.string().min(1)).default([]),
         actual: z.boolean().default(false),
+        // QUÉ ES ESTE HITO (2026-10-04, revisión LinkedIn definitivo): un
+        // `empleo` en una organización, o el puesto de `proyectos-propios` que
+        // el dueño trabaja por su cuenta en paralelo a sus empleos. Un puesto
+        // propio NO cuenta como empleo: no exige caso de estudio, no entra en
+        // la regla de años de transición de la línea de tiempo y el PDF ATS lo
+        // pinta en su propia sección, para que nadie lo lea como empleador.
+        tipo: z.enum(["empleo", "proyectos-propios"]).default("empleo"),
         // El case study de ESTA experiencia, si lo tiene: el slug de un
         // proyecto con `casestudy`. Desde que la sección Proyectos dejó la
         // HOME (revisión post-S7), la puerta a cada case study es su hito.

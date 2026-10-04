@@ -133,7 +133,7 @@ Esta fue una etapa importante en mi evolución hacia el diseño de modelos semá
 
 <!-- seccion: integraciones-vba -->
 
-Desarrollé aplicaciones en Visual Basic para Aplicaciones (VBA) destinadas a integrar actividades del centro de distribución con el sistema de gestión de almacenes: cargas de datos que antes dependían de manipulación manual pasaron a aplicar reglas de forma repetible. Estas soluciones incrementaron la automatización en un quince por ciento y contribuyeron a reducir los errores de datos en un cincuenta por ciento.
+Desarrollé aplicaciones en Visual Basic para Aplicaciones (VBA) destinadas a integrar actividades del centro de distribución con el sistema de gestión de almacenes: cargas de datos que antes dependían de manipulación manual pasaron a aplicar reglas de forma repetible. Estas soluciones incrementaron la automatización en un quince por ciento y contribuyeron a reducir los errores de datos en un cincuenta por ciento. También automaticé en VBA procesos analíticos que se hacían a mano: más de diez horas semanales de trabajo manual menos, y respuestas más rápidas a las consultas operativas críticas.
 
 La elección de VBA respondió al contexto tecnológico y operativo disponible en Cafam. Era una herramienta accesible para la organización, compatible con los recursos utilizados por los equipos y suficientemente flexible para resolver brechas que podían afectar la continuidad del proceso. La calidad de una solución no depende de la novedad de la tecnología, sino de su adecuación al problema, de la posibilidad de mantenerla y del resultado que produce.
 
@@ -190,6 +190,7 @@ Las cifras del proyecto, tal como las publica mi hoja de vida y el case study de
 | Pruebas de implementación del WMS        | −25 % de errores · +15 % de eficiencia operativa   | exactitud de registro de inventario (ERI) antes y después            |
 | BI de control de la implementación       | +50 % de precisión en el seguimiento · 15+ usuarios | escenarios, cobertura, defectos y reincidencias visibles a diario    |
 | Integraciones en VBA con el WMS          | +15 % de automatización · −50 % de errores de datos | cargas manuales sustituidas y errores en el intercambio de información |
+| Procesos analíticos automatizados en VBA | más de 10 horas semanales de trabajo manual menos | consultas operativas críticas respondidas sin trabajo manual |
 | Calidad de datos en SQL                  | +20 % de precisión y confiabilidad                 | conciliación 80-20 por medicamentos entre el WMS y el sistema de origen |
 
 El equipo fue de veinte personas —catorce de Cafam y seis del proveedor— durante unos seis meses de pruebas, entre octubre de 2020 y junio de 2021. Ninguna de estas cifras vino de aumentar la supervisión: vinieron de un proceso escrito, escenarios reproducibles, avance visible y controles de calidad que corrían dentro del pipeline y no al final.

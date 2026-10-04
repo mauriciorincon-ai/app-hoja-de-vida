@@ -2,7 +2,9 @@ import { readFileSync, readdirSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import {
   problemasDeAfirmacionesDeCtic,
+  problemasDeCifrasRetiradasDeCtic,
   problemasDeCticExacta,
+  problemasDeLiderazgoDeCtic,
 } from "../../scripts/ctic-aproximadas.mjs";
 
 /**
@@ -124,6 +126,83 @@ describe("lo que el sitio todavía no puede afirmar de CTIC", () => {
           "ISO/IEC 42001 comparte la misma estructura de alto nivel, y la implementación empieza igual. " +
           "and the implementation starts the same way.",
       ),
+    ).toEqual([]);
+  });
+});
+
+describe("la cifra de productos de CTIC es una sola: más de 25 (decisión del dueño, 2026-10-04)", () => {
+  it("ningún «más de 40», «40+», «la mitad de ellos tableros» ni «más de 20 tableros» de CTIC", () => {
+    const problemas = problemasDeCifrasRetiradasDeCtic(archivosDelSitio);
+    expect(problemas, lista(problemas)).toEqual([]);
+  });
+
+  const juzgar = (texto: string) => problemasDeCifrasRetiradasDeCtic([{ archivo: "x.md", texto }]);
+
+  it("caza la cifra vieja, sus dependientes y el logro, aunque vengan partidos", () => {
+    expect(juzgar("En la Fundación CTIC, más de 40\nproductos analíticos.")).toHaveLength(1);
+    expect(juzgar("more than 40 analytical products —half of them control dashboards—")).toHaveLength(2);
+    expect(juzgar("incluidos más de 20 tableros de control")).toHaveLength(1);
+    expect(juzgar('  - valor: 40\n    sufijo: "+"\n    etiqueta: "productos analíticos en uso en salud"')).toHaveLength(1);
+    expect(juzgar('        - valor: 40\n          prefijo: "+"\n          etiqueta: "analytics products in use in Power BI"')).toHaveLength(1);
+  });
+
+  it("caza las filas de tabla retiradas en un archivo de CTIC", () => {
+    const tabla =
+      "Fundación CTIC\n| Analítica | productos analíticos en uso o seguimiento | más de 40 |\n| Analítica | tableros de control | más de 20 |";
+    expect(juzgar(tabla)).toHaveLength(2);
+  });
+
+  it("aprueba la cifra nueva y no juzga los 40 de otras experiencias", () => {
+    expect(
+      juzgar(
+        "más de 25 productos analíticos en Power BI, tableros de control entre ellos; " +
+          "more than 25 analytics products in Power BI; −40 % en el tiempo de procesamiento; " +
+          "coordinaba cerca de 40 personas; la mitad de las oportunidades evaluadas.",
+      ),
+    ).toEqual([]);
+  });
+});
+
+describe("en CTIC el dueño lidera la estructuración, no la estrategia (decisión del dueño, 2026-10-04)", () => {
+  it("ninguna página ni documento afirma liderar la estrategia, la adopción o el gobierno de la IA", () => {
+    const problemas = problemasDeLiderazgoDeCtic(archivosDelSitio);
+    expect(problemas, lista(problemas)).toEqual([]);
+  });
+
+  const juzgar = (texto: string) => problemasDeLiderazgoDeCtic([{ archivo: "x.md", texto }]);
+
+  it("caza las formas vetadas en los dos idiomas, aunque vengan partidas", () => {
+    expect(juzgar("Hoy lidero la adopción y el gobierno de la IA.")).toHaveLength(1);
+    expect(juzgar("Desde marzo de 2025 lidero la estrategia institucional de IA.")).toHaveLength(1);
+    expect(juzgar("aquí dirijo la forma en que una institución mide y decide")).toHaveLength(1);
+    expect(juzgar("me resulta natural liderar la implementación de una norma")).toHaveLength(1);
+    expect(juzgar("Since March 2025 I have led the institutional artificial\nintelligence strategy")).toHaveLength(1);
+    expect(juzgar("into the\nleadership of the artificial intelligence strategy")).toHaveLength(1);
+    expect(juzgar("Today I lead AI adoption and governance")).toHaveLength(1);
+  });
+
+  it("aprueba la estructuración y deja en paz la estrategia de datos de Vesting", () => {
+    expect(
+      juzgar(
+        "Lidero la estructuración de la estrategia institucional de inteligencia artificial y participo en " +
+          "la estructuración del sistema de gestión. I lead the structuring of the institutional AI strategy. " +
+          "En Vesting lideré la estrategia de datos; at Vesting I led the data strategy.",
+      ),
+    ).toEqual([]);
+  });
+});
+
+describe("el hueco de forma: un número de CTIC separado de su sustantivo (hallazgo del harness, 2026-10-04)", () => {
+  const juzgar = (texto: string) => problemasDeCticExacta([{ archivo: "x.md", texto }]);
+
+  it("caza «23 of them control dashboards» y sus variantes", () => {
+    expect(juzgar("—23 of them control dashboards—")).toHaveLength(1);
+    expect(juzgar("—23 de ellos tableros de control—")).toHaveLength(1);
+  });
+
+  it("no caza los conteos de la vitrina ni las formas aproximadas", () => {
+    expect(
+      juzgar("13 agentes, 7 investigaciones y 6 tableros; 33 tableros de referencia; more than 25 analytics products"),
     ).toEqual([]);
   });
 });

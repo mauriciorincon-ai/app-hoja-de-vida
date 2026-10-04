@@ -2,8 +2,8 @@
 slug: transmilenio-cm
 codigo: AF-07
 titulo: "C&M Consultores / TransMilenio — análisis post-operacional (2021–2022)"
-resumen: "El análisis post-operacional del SITP: el ETL que unificó recaudo, flota, programación, novedades y PQR (+70 %), BI adoptado por 25+ usuarios clave (+35 %), las mesas con la dirección del SITP (+25 %) y un modelo de demanda en scikit-learn que siguió en uso después de mi salida."
-cuando_usar: "Úsalo cuando pregunten por TransMilenio y C&M Consultores (2021–2022): análisis post-operacional, fuentes de datos heterogéneas (recaudo, flota, programación, novedades, PQR), pipelines ETL, predicción de demanda por ruta y franja, mesas con la dirección del SITP y adopción de tableros."
+resumen: "El análisis post-operacional del SITP: el ETL que unificó recaudo, flota, programación, novedades y PQR (+70 %), BI adoptado por 25+ usuarios clave (+35 %), las mesas con la dirección de los concesionarios del SITP (+25 %) y un modelo de demanda en scikit-learn que siguió en uso después de mi salida."
+cuando_usar: "Úsalo cuando pregunten por TransMilenio y C&M Consultores (2021–2022): análisis post-operacional, fuentes de datos heterogéneas (recaudo, flota, programación, novedades, PQR), pipelines ETL, predicción de demanda por ruta y franja, mesas con la dirección de los concesionarios del SITP y adopción de tableros."
 estado: aprobado
 ancla: "/proyectos/transmilenio-cm"
 actualizado: 2026-09-20
@@ -95,7 +95,7 @@ Esta experiencia preparó mi evolución posterior hacia arquitecturas analítica
 
 Incorporé validaciones en el ETL para identificar datos incompletos, duplicados, inconsistencias y relaciones que no cumplían las reglas esperadas: un servicio ejecutado sin programación que lo respaldara, una transacción de recaudo en una ruta que ese día no operó, un vehículo con GPS y sin despacho. El objetivo no era corregir silenciosamente las diferencias al final del recorrido, sino hacerlas visibles, rastrear su origen y evitar que avanzaran hasta indicadores o decisiones sin una explicación adecuada.
 
-Aquí profundicé en uno de los fundamentos de mi trabajo actual con plataformas de datos: un pipeline no es una tubería invisible que solamente transporta información. Es una parte de la lógica empresarial. Contiene decisiones sobre calidad, correspondencia, temporalidad, granularidad y significado que deben poder documentarse, evaluarse y reproducirse. La regla que decide cómo se asigna una transacción de recaudo a un servicio es tan parte del negocio como el indicador que después se presenta a la dirección del SITP.
+Aquí profundicé en uno de los fundamentos de mi trabajo actual con plataformas de datos: un pipeline no es una tubería invisible que solamente transporta información. Es una parte de la lógica empresarial. Contiene decisiones sobre calidad, correspondencia, temporalidad, granularidad y significado que deben poder documentarse, evaluarse y reproducirse. La regla que decide cómo se asigna una transacción de recaudo a un servicio es tan parte del negocio como el indicador que después se presenta a la dirección de los concesionarios del SITP.
 
 Por eso las reglas del ETL se escribieron como reglas y no como pasos de una rutina: cada una con la fuente que tocaba, la condición que evaluaba y qué hacía con el registro que no la cumplía. Así, cuando un indicador cambiaba, se podía saber si había cambiado la operación o había cambiado la forma de calcularlo.
 
@@ -121,11 +121,11 @@ También aprendí que una solución analítica adoptada necesita equilibrar esta
 
 Fue la adopción de Power BI que fijó el criterio que después apliqué en Banco Pichincha con más de 50 usuarios: el tablero se diseña desde la decisión, no desde el dato disponible. Cómo se mide esa adopción, y por qué no son visitas, está en el documento de BI que se adopta.
 
-## Las mesas con la dirección del SITP
+## Las mesas con la dirección de los concesionarios del SITP
 
 <!-- seccion: las-mesas-del-sitp -->
 
-Coordiné mesas de trabajo con la dirección de concesionarios del Sistema Integrado de Transporte Público para analizar resultados, definir estrategias de mejora y articular decisiones sobre los procesos. Este trabajo contribuyó a alcanzar una mejora del 25 % en los indicadores asociados con las intervenciones realizadas. Eran los mismos concesionarios —del orden de diez empresas para unas 150 rutas— cuya operación había supervisado en mi etapa anterior en el sistema; ahora la conversación no era sobre el cumplimiento de cada servicio, sino sobre cómo mejorar la operación.
+Coordiné mesas de trabajo con la dirección de los concesionarios del Sistema Integrado de Transporte Público para analizar resultados, definir estrategias de mejora y articular decisiones sobre los procesos. Este trabajo contribuyó a alcanzar una mejora del 25 % en los indicadores asociados con las intervenciones realizadas. Eran los mismos concesionarios —del orden de diez empresas para unas 150 rutas— cuya operación había supervisado en mi etapa anterior en el sistema; ahora la conversación no era sobre el cumplimiento de cada servicio, sino sobre cómo mejorar la operación.
 
 Estas mesas me enseñaron que la analítica alcanza su mayor valor cuando consigue alinear actores que observan la operación desde perspectivas diferentes. La autoridad, los concesionarios y los equipos técnicos podían tener responsabilidades, restricciones e interpretaciones distintas. Mi función consistía en proporcionar una base de evidencia común que permitiera comprender el problema antes de discutir la solución.
 
@@ -135,7 +135,7 @@ Para llegar a esa conversación, el dato debía estar preparado para ser examina
 
 <!-- seccion: recomendacion-ejecutiva -->
 
-En las mesas del SITP aprendí que una recomendación ejecutiva debe conectar evidencia, mecanismo y consecuencia. No era suficiente señalar que un indicador había empeorado. Era necesario explicar qué condiciones producían el resultado, qué actores podían intervenir, qué alternativas estaban disponibles y cómo se evaluaría posteriormente su efecto.
+En las mesas con los concesionarios del SITP aprendí que una recomendación ejecutiva debe conectar evidencia, mecanismo y consecuencia. No era suficiente señalar que un indicador había empeorado. Era necesario explicar qué condiciones producían el resultado, qué actores podían intervenir, qué alternativas estaban disponibles y cómo se evaluaría posteriormente su efecto.
 
 Esta experiencia fortaleció mi capacidad para comunicar entre niveles operativos, analíticos y directivos. Podía recorrer el problema desde los registros y las reglas de transformación hasta la síntesis ejecutiva, y regresar al detalle cuando una conclusión necesitaba ser explicada o defendida. Esa capacidad continúa siendo esencial en mi trabajo con plataformas analíticas, aplicaciones inteligentes y estrategias empresariales de inteligencia artificial.
 
@@ -163,7 +163,7 @@ La evaluación no debía limitarse a una única medida de desempeño global. Tam
 
 Esta experiencia fortaleció mi criterio para evaluar modelos no solo por su precisión estadística, sino por la estabilidad, utilidad y confiabilidad de sus resultados dentro del contexto en el que serían utilizados. Cómo se evalúan los errores de un modelo y qué significa sostenerlo en producción, con este caso y el de Banco Pichincha comparados, está en el documento de analítica predictiva.
 
-## Diez meses en uso: quién usaba el modelo y para qué
+## En uso después de mi salida: quién usaba el modelo y para qué
 
 <!-- seccion: el-modelo-en-uso -->
 
@@ -214,7 +214,7 @@ Las cinco cifras del rol, tal como las publica mi hoja de vida y el case study, 
 | Adopción de Power BI en la operación         | +35 % de eficiencia de los procesos analíticos · 25+ usuarios clave | tableros diseñados por pregunta operacional, con definiciones compartidas |
 | ETL que unificó las fuentes heterogéneas     | +70 % en precisión y velocidad de análisis             | cinco fuentes —recaudo, flota/GPS, programación, novedades, PQR— sobre claves comunes |
 | Scripts de automatización                    | −40 % en tareas repetitivas                            | ETL con VBA y Power Query para el análisis post-operacional, con controles y excepciones |
-| Mesas de estrategia con la dirección del SITP | +25 % en los indicadores intervenidos                  | evidencia común, recomendaciones con mecanismo y seguimiento posterior |
+| Mesas de estrategia con la dirección de los concesionarios del SITP | +25 % en los indicadores intervenidos                  | evidencia común, recomendaciones con mecanismo y seguimiento posterior |
 | Predicción de demanda con scikit-learn       | +20 % de rendimiento reportado del sistema             | demanda por ruta y franja, actualización mensual, RMSE con orden temporal, siguió en uso después de mi salida |
 
 Todo ocurrió entre julio de 2021 y mayo de 2022, en C&M Consultores, dentro de la Fuerza Operativa de TransMilenio S.A.

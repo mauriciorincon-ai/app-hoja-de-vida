@@ -532,7 +532,7 @@ performance budgets and versioned evolution. I answer for products that can fail
 real mechanisms for prevention, diagnosis and recovery.
 
 I bring data governance and AI governance applied in banking, agent platforms and health: set up
-three times. I currently lead at Fundación CTIC an institutional strategy based on ISO/IEC 42001
+three times. I currently lead at Fundación CTIC the structuring of an institutional strategy based on ISO/IEC 42001
 and I connect policies, risks and responsibilities with the technical components that must
 produce evidence about their operation.
 

@@ -2,8 +2,8 @@
 slug: transmilenio-cm
 codigo: AF-07
 titulo: "C&M Consultores / TransMilenio — post-operational analysis (2021–2022)"
-resumen: "The post-operational analysis of the SITP: the ETL that unified fare collection, fleet, scheduling, incidents and PQR (+70%), BI adopted by 25+ key users (+35%), the working sessions with SITP management (+25%) and a demand model in scikit-learn that stayed in use after I left."
-cuando_usar: "Use this when they ask about TransMilenio and C&M Consultores (2021–2022): post-operational analysis, heterogeneous data sources (fare collection, fleet, scheduling, incidents, PQR), ETL pipelines, demand forecasting by route and time band, working sessions with SITP management and dashboard adoption."
+resumen: "The post-operational analysis of the SITP: the ETL that unified fare collection, fleet, scheduling, incidents and PQR (+70%), BI adopted by 25+ key users (+35%), the working sessions with the management of the SITP concessionaires (+25%) and a demand model in scikit-learn that stayed in use after I left."
+cuando_usar: "Use this when they ask about TransMilenio and C&M Consultores (2021–2022): post-operational analysis, heterogeneous data sources (fare collection, fleet, scheduling, incidents, PQR), ETL pipelines, demand forecasting by route and time band, working sessions with the management of the SITP concessionaires and dashboard adoption."
 estado: aprobado
 ancla: "/proyectos/transmilenio-cm"
 actualizado: 2026-09-20
@@ -157,7 +157,7 @@ pipeline is not an invisible pipe that merely transports information. It is a pa
 business logic. It contains decisions about quality, correspondence, temporality, granularity
 and meaning that must be documentable, evaluable and reproducible. The rule that decides how a
 fare-collection transaction is assigned to a service is as much part of the business as the
-indicator that is later presented to SITP management.
+indicator that is later presented to the management of the SITP concessionaires.
 
 That is why the ETL rules were written as rules and not as steps of a routine: each with the
 source it touched, the condition it evaluated and what it did with the record that did not meet
@@ -213,7 +213,7 @@ more than 50 users: the dashboard is designed from the decision, not from the av
 How that adoption is measured, and why it is not visits, is in the document on BI that gets
 adopted.
 
-## The working sessions with SITP management
+## The working sessions with the management of the SITP concessionaires
 
 <!-- seccion: las-mesas-del-sitp -->
 
@@ -242,7 +242,7 @@ the table to be traced back to the service and the day that produced it.
 
 <!-- seccion: recomendacion-ejecutiva -->
 
-In the SITP working sessions I learned that an executive recommendation must connect evidence,
+In the working sessions with the SITP concessionaires I learned that an executive recommendation must connect evidence,
 mechanism and consequence. It was not enough to point out that an indicator had worsened. It was
 necessary to explain which conditions produced the result, which actors could intervene, which
 alternatives were available and how their effect would later be evaluated.
@@ -312,7 +312,7 @@ in which they would be used. How a model's errors are evaluated and what it mean
 in production, with this case and the Banco Pichincha case compared, is in the predictive
 analytics document.
 
-## Ten months in use: who used the model and for what
+## In use after I left: who used the model and for what
 
 <!-- seccion: el-modelo-en-uso -->
 
@@ -409,7 +409,7 @@ each one:
 | Power BI adoption in the operation             | +35% efficiency of analytical processes · 25+ key users  | dashboards designed by operational question, with shared definitions      |
 | ETL that unified the heterogeneous sources     | +70% in analysis precision and speed                     | five sources —fare collection, fleet/GPS, scheduling, incidents, PQR— over common keys |
 | Automation scripts                             | −40% in repetitive tasks                                 | ETL with VBA and Power Query for the post-operational analysis, with controls and exceptions |
-| Strategy sessions with SITP management         | +25% in the intervened indicators                        | common evidence, recommendations with mechanism and later follow-up       |
+| Strategy sessions with the management of the SITP concessionaires         | +25% in the intervened indicators                        | common evidence, recommendations with mechanism and later follow-up       |
 | Demand prediction with scikit-learn            | +20% reported system performance                         | demand by route and time band, monthly update, RMSE with temporal order, stayed in use after I left |
 
 All of it happened between July 2021 and May 2022, at C&M Consultores, within the Operational

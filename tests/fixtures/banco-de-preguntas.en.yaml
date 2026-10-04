@@ -1,6 +1,6 @@
 # BANCO DE PREGUNTAS EN INGLÉS — el gemelo de banco-de-preguntas.es.yaml (a fondo v2, F5)
 #
-# Las mismas 136 preguntas de afuera, con las mismas fuentes esperadas (`espera`)
+# Las mismas preguntas de afuera del banco español, con las mismas fuentes esperadas (`espera`)
 # y las mismas familias, traducidas. Se miden contra el índice INGLÉS simulado —los
 # documentos .en.md forzados a aprobado, los YAML en inglés y las fichas— en
 # `tests/unit/banco-de-preguntas.test.ts`. Las reglas para ampliarlo son las del
@@ -372,6 +372,13 @@ preguntas:
   # ── vitrina
   - pregunta: "What has he built on his own, outside of work?"
     espera: [apps-pipeline]
+    familia: vitrina
+  # 2026-10-04 (LinkedIn review): the independent projects role.
+  - pregunta: "What independent AI projects has he built?"
+    espera: [trayectoria]
+    familia: vitrina
+  - pregunta: "Since when has he worked on his own generative AI projects?"
+    espera: [apps-pipeline, trayectoria]
     familia: vitrina
   - pregunta: "How many applications has he published?"
     espera: [apps-pipeline]

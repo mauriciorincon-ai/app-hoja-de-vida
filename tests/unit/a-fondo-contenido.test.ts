@@ -132,7 +132,14 @@ describe("conservación de la historia retirada (S3 → S8)", () => {
         d,
         `data/a-fondo/${id}.es.md no existe: la migración perdió una sección de la historia`,
       ).toBeDefined();
-      expect(d!.titulo).toBe(s.titulo);
+      // Los títulos que cambiaron, cada uno con su razón declarada:
+      //  · 2026-10-04: el dueño declaró empleo su etapa de Analista de Procesos en
+      //    Inglopres (mayo de 2015 – agosto de 2016); el título ya no podía decir
+      //    «2016–2017» (revisión LinkedIn definitivo, pregunta P2).
+      const TITULOS_CAMBIADOS: Record<string, string> = {
+        inglopres: "Inglopres — Analista e Ingeniero de Procesos (2015–2017)",
+      };
+      expect(d!.titulo).toBe(TITULOS_CAMBIADOS[id] ?? s.titulo);
       // Los destinos que cambiaron, cada uno con su razón declarada:
       //  · «#apps» murió en la revisión post-S7 (la sección se retiró y el
       //    roadmap se fue a la vitrina) → «#vitrina».

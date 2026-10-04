@@ -2,7 +2,7 @@
 slug: fundacion-ctic
 codigo: AF-10
 titulo: "Fundación CTIC — analítica en salud (2025–hoy)"
-resumen: "Mi rol actual: más de 40 productos analíticos en Power BI para unos 20 líderes de unos 15 procesos, gobierno y calidad de datos en salud, y la estrategia institucional de IA bajo UNE-ISO/IEC 42001:2025 con más de 20 instrumentos, más de 10 oportunidades y la mitad evaluadas."
+resumen: "Mi rol actual: más de 25 productos analíticos en Power BI para unos 20 líderes de unos 15 procesos, gobierno y calidad de datos en salud, y la estrategia institucional de IA bajo UNE-ISO/IEC 42001:2025 con más de 20 instrumentos, más de 10 oportunidades y la mitad evaluadas."
 cuando_usar: "Úsalo cuando pregunten dónde trabaja actualmente, por la Fundación CTIC (2025–hoy), datos del sector salud, calidad de datos, la estrategia institucional de inteligencia artificial bajo UNE-ISO/IEC 42001:2025, los más de 20 instrumentos y los tableros de control por proceso."
 estado: aprobado
 ancla: "/proyectos/fundacion-ctic"
@@ -10,7 +10,7 @@ actualizado: 2026-09-26
 preguntas_de_prueba:
   - "¿Qué hace Henry en la Fundación CTIC?"
   - "¿Qué experiencia tiene con datos en salud?"
-  - "¿Cómo lidera Henry la estrategia de inteligencia artificial en la Fundación CTIC?"
+  - "¿Qué papel tiene Henry en la estrategia de inteligencia artificial de la Fundación CTIC?"
 ---
 
 <!--
@@ -45,9 +45,9 @@ Recuerda: NADA de datos de pacientes ni información interna sensible. -->
 
 Desde marzo de 2025 trabajo como Profesional de Analítica en la Fundación CTIC, una institución del sector salud. Es mi responsabilidad actual y el contexto más exigente en el que he trabajado en materia de calidad, seguridad, privacidad, trazabilidad y gobierno de la información. La razón es fundamental: en salud, los datos no representan únicamente transacciones o indicadores; describen personas, procesos asistenciales y decisiones institucionales que exigen un nivel especialmente alto de responsabilidad.
 
-Mi trabajo integra dos responsabilidades complementarias. La primera consiste en desarrollar capacidades analíticas en Power BI que permitan integrar información, modelar procesos administrativos y asistenciales, estructurar indicadores confiables y ofrecer a los líderes una base común para comprender el desempeño institucional y respaldar sus decisiones. La segunda, y actualmente una de las más importantes de mi trayectoria, consiste en liderar la estrategia institucional de inteligencia artificial, orientando la forma en que la organización identifica, evalúa, prioriza, diseña y gobierna sus iniciativas de IA, con la implementación de su sistema de gestión de IA.
+Mi trabajo integra dos responsabilidades complementarias. La primera consiste en desarrollar capacidades analíticas en Power BI que permitan integrar información, modelar procesos administrativos y asistenciales, estructurar indicadores confiables y ofrecer a los líderes una base común para comprender el desempeño institucional y respaldar sus decisiones. La segunda, y actualmente una de las más importantes de mi trayectoria, consiste en liderar la estructuración de la estrategia institucional de inteligencia artificial, orientando la forma en que la organización identifica, evalúa, prioriza, diseña y gobierna sus iniciativas de IA, y en participar en la estructuración de su sistema de gestión de IA.
 
-Trabajo en línea directa con la Dirección de Planeación y con las subdirecciones de tecnología, de gestión de la información y de calidad. No lidero un equipo de personas a cargo: lidero procesos completos que integran a una gran cantidad de personas —hoy, unos 20 líderes de unos 15 procesos administrativos y asistenciales y unos 75 usuarios de las soluciones analíticas—. Es una forma distinta de liderazgo respecto de la que ejercí en Cafam con un equipo de 20 personas: allí dirigía personas; aquí dirijo la forma en que una institución mide, decide y adopta la inteligencia artificial.
+Trabajo en línea directa con la Dirección de Planeación y con las subdirecciones de tecnología, de gestión de la información y de calidad. No lidero un equipo de personas a cargo: lidero procesos completos que integran a una gran cantidad de personas —hoy, unos 20 líderes de unos 15 procesos administrativos y asistenciales y unos 75 usuarios de las soluciones analíticas—. Es una forma distinta de liderazgo respecto de la que ejercí en Cafam con un equipo de 20 personas: allí dirigía personas; aquí lidero la estructuración de la estrategia con la que una institución mide, decide y adopta la inteligencia artificial.
 
 ## Qué reúne este rol: ingeniería de datos, agentes de IA y arquitectura empresarial
 
@@ -61,15 +61,15 @@ Las cuatro funciones que describe mi hoja de vida para este cargo son, en ese or
 
 <!-- seccion: el-limite-de-confidencialidad -->
 
-Todo lo que comunico sobre esta experiencia conserva un límite que considero innegociable: no expongo datos de pacientes ni información clínica; tampoco detalles sensibles de los procesos, ni conocimiento interno cuya divulgación pueda afectar a las personas o a la institución. Sí puedo explicar las capacidades, los principios de arquitectura, las prácticas de gobierno y la forma de trabajo. No revelo la información sobre la que esas capacidades operan. Por eso las cifras de este documento —más de 40 productos analíticos, más de 20 tableros de control, unos 20 líderes, unos 15 procesos, más de 10 oportunidades de IA— van agregadas, redondeadas y sin nombrar ningún proceso, ningún indicador ni ninguna persona.
+Todo lo que comunico sobre esta experiencia conserva un límite que considero innegociable: no expongo datos de pacientes ni información clínica; tampoco detalles sensibles de los procesos, ni conocimiento interno cuya divulgación pueda afectar a las personas o a la institución. Sí puedo explicar las capacidades, los principios de arquitectura, las prácticas de gobierno y la forma de trabajo. No revelo la información sobre la que esas capacidades operan. Por eso las cifras de este documento —más de 25 productos analíticos en Power BI, unos 20 líderes, unos 15 procesos, más de 10 oportunidades de IA— van agregadas, redondeadas y sin nombrar ningún proceso, ningún indicador ni ninguna persona.
 
 Esta reserva no limita la solidez de la narrativa. Por el contrario, demuestra un principio central de mi trabajo en la Fundación CTIC: la transparencia profesional no consiste en divulgar indiscriminadamente la información, sino en explicar con claridad los métodos, las responsabilidades y los controles sin comprometer la confidencialidad que hace posible la confianza. Es el mismo principio que aplico al gobierno de datos personales en salud: se explica el método y se respeta lo que protege.
 
-## Liderar la estrategia institucional de inteligencia artificial
+## Liderar la estructuración de la estrategia institucional de inteligencia artificial
 
 <!-- seccion: estrategia-institucional-de-ia -->
 
-Desde marzo de 2025 lidero la estrategia institucional de inteligencia artificial con el propósito de convertir iniciativas potencialmente aisladas en una capacidad organizacional coherente, gobernable y sostenible. Mi responsabilidad no consiste únicamente en identificar oportunidades tecnológicas, sino en establecer una forma común de decidir qué iniciativas deben avanzar, bajo qué condiciones pueden hacerlo y cómo se evaluará su comportamiento durante todo su ciclo de vida.
+Desde marzo de 2025 lidero la estructuración de la estrategia institucional de inteligencia artificial con el propósito de convertir iniciativas potencialmente aisladas en una capacidad organizacional coherente, gobernable y sostenible. Mi responsabilidad no consiste únicamente en identificar oportunidades tecnológicas, sino en establecer una forma común de decidir qué iniciativas deben avanzar, bajo qué condiciones pueden hacerlo y cómo se evaluará su comportamiento durante todo su ciclo de vida.
 
 La estrategia parte de una convicción: la inteligencia artificial no debe incorporarse porque una tecnología esté disponible, sino porque existe una necesidad institucional relevante que puede atenderse de manera responsable y verificable. Antes de proponer una solución, necesito comprender el problema, las personas y procesos involucrados, la información disponible, el resultado esperado, los riesgos introducidos y las alternativas que podrían resolver la necesidad con menor complejidad. No parto de la tecnología disponible sino de los problemas, las decisiones y las capacidades que la institución necesita fortalecer.
 
@@ -163,7 +163,7 @@ A la fecha, la estrategia ha permitido identificar más de 10 oportunidades de i
 
 <!-- seccion: dos-audiencias -->
 
-He desarrollado soluciones analíticas en Power BI para líderes administrativos y asistenciales, estructurando modelos semánticos, indicadores y experiencias de visualización adaptadas a sus responsabilidades, pero sustentadas en definiciones institucionales consistentes. Son más de 40 productos analíticos —la mitad de ellos tableros de control— que hoy usan unos 20 líderes de unos 15 procesos y unos 75 usuarios.
+He desarrollado soluciones analíticas en Power BI para líderes administrativos y asistenciales, estructurando modelos semánticos, indicadores y experiencias de visualización adaptadas a sus responsabilidades, pero sustentadas en definiciones institucionales consistentes. Son más de 25 productos analíticos en Power BI —tableros de control entre ellos— que hoy usan unos 20 líderes de unos 15 procesos y unos 75 usuarios.
 
 Estas audiencias trabajan sobre una misma organización, pero no necesariamente formulan las mismas preguntas ni utilizan la información con el mismo propósito. La gestión administrativa se concentra en dimensiones como recursos, capacidad, oportunidad, productividad y cumplimiento. La gestión asistencial observa la continuidad de los procesos, las condiciones de atención y los resultados asociados con su responsabilidad: los indicadores de calidad que una IPS reporta y los que la habilitación exige.
 
@@ -195,7 +195,7 @@ En este contexto, el gobierno no puede limitarse a documentar definiciones o asi
 
 La calidad debe evaluarse en relación con el uso. Un valor puede cumplir con su formato técnico y, al mismo tiempo, no ser suficientemente completo, oportuno o consistente para respaldar una decisión. Por eso, los controles deben diseñarse comprendiendo el proceso que produce el dato y la consecuencia que podría generar una interpretación equivocada.
 
-Con ese criterio diseñé las reglas de calidad que alimentan los más de 40 productos analíticos. Las publico sin cifras, porque las cifras describirían procesos internos, pero sí puedo decir de qué tipo son:
+Con ese criterio diseñé las reglas de calidad que alimentan los más de 25 productos analíticos. Las publico sin cifras, porque las cifras describirían procesos internos, pero sí puedo decir de qué tipo son:
 
 - completitud de los campos que una decisión necesita, no de todos los campos del registro;
 - duplicados entre registros que representan a la misma persona o al mismo evento;
@@ -218,7 +218,7 @@ En salud, gobernar los datos y gobernar la inteligencia artificial son responsab
 
 <!-- seccion: tableros-por-procesos -->
 
-He desarrollado soluciones analíticas en Power BI para el seguimiento de procesos administrativos y asistenciales, integrando información, modelos semánticos, indicadores y experiencias de visualización orientadas a las necesidades de líderes con responsabilidades diferentes dentro de la institución: más de 40 productos, de los cuales la mitad son tableros de control.
+He desarrollado soluciones analíticas en Power BI para el seguimiento de procesos administrativos y asistenciales, integrando información, modelos semánticos, indicadores y experiencias de visualización orientadas a las necesidades de líderes con responsabilidades diferentes dentro de la institución: más de 25 productos, tableros de control entre ellos.
 
 Power BI no funciona en este contexto únicamente como una herramienta para construir tableros. Es la capa analítica mediante la cual los datos se organizan, adquieren significado y se convierten en información utilizable para el seguimiento institucional. Detrás de cada visualización existe un trabajo de preparación en Power Query, integración, modelado, definición de medidas en DAX, validación y control de acceso que determina si el resultado puede utilizarse con confianza.
 
@@ -234,7 +234,7 @@ Los indicadores funcionan como medidores distribuidos a lo largo del flujo. Los 
 
 El diseño comienza por la decisión y no por la visualización. Antes de construir un tablero, procuro establecer quién utilizará la información, qué pregunta necesita responder, qué nivel de detalle requiere, con qué frecuencia debe actualizarse y qué condiciones deben hacerse visibles. Esta orientación evita desarrollar productos extensos que muestran grandes cantidades de información, pero no ayudan a comprender qué merece atención.
 
-También diferencio las necesidades de cada audiencia sin modificar la definición institucional de las métricas. La alta dirección necesita observar tendencias, riesgos y capacidad de respuesta. Los responsables de proceso requieren identificar restricciones, desviaciones y relaciones causales. Los equipos operativos necesitan información suficientemente detallada para comprender situaciones concretas. El modelo semántico debe conservar una única lógica, mientras la experiencia en Power BI adapta su profundidad y presentación a cada responsabilidad: es lo que permite que más de 40 productos sirvan a unos 20 líderes y a unos 75 usuarios sin que existan otras tantas definiciones distintas de un mismo indicador.
+También diferencio las necesidades de cada audiencia sin modificar la definición institucional de las métricas. La alta dirección necesita observar tendencias, riesgos y capacidad de respuesta. Los responsables de proceso requieren identificar restricciones, desviaciones y relaciones causales. Los equipos operativos necesitan información suficientemente detallada para comprender situaciones concretas. El modelo semántico debe conservar una única lógica, mientras la experiencia en Power BI adapta su profundidad y presentación a cada responsabilidad: es lo que permite que más de 25 productos sirvan a unos 20 líderes y a unos 75 usuarios sin que existan otras tantas definiciones distintas de un mismo indicador.
 
 ## Planes de mejora: qué diseñé, qué implementé y el cerca del 60 % menos esfuerzo
 
@@ -246,13 +246,13 @@ Esta distinción es importante: la analítica no sustituye la responsabilidad de
 
 Lo que sí implementé, y mucho, fueron mejoras en mi propio proceso. La preparación y consolidación de la información que antes se hacía a mano se redujo en cerca del 60 % del esfuerzo —una cifra estimada sobre mi propio trabajo, no una medición institucional—, y la decena de planes de análisis que hoy siguen los procesos salen de una misma base gobernada en lugar de rearmarse cada vez.
 
-Cuando los responsables adoptan una decisión, las soluciones analíticas contribuyen al seguimiento de sus resultados mediante indicadores previamente definidos. Así se cierra el ciclo entre observación, decisión y evaluación sin atribuir a la plataforma, ni al equipo analítico, responsabilidades que pertenecen al gobierno y la gestión del proceso. Actualmente, los más de 40 productos analíticos se encuentran en uso o seguimiento institucional, respaldando a unos 20 líderes de unos 15 procesos administrativos y asistenciales, y han sustentado la decena de planes de análisis en seguimiento durante el periodo evaluado.
+Cuando los responsables adoptan una decisión, las soluciones analíticas contribuyen al seguimiento de sus resultados mediante indicadores previamente definidos. Así se cierra el ciclo entre observación, decisión y evaluación sin atribuir a la plataforma, ni al equipo analítico, responsabilidades que pertenecen al gobierno y la gestión del proceso. Actualmente, los más de 25 productos analíticos se encuentran en uso o seguimiento institucional, respaldando a unos 20 líderes de unos 15 procesos administrativos y asistenciales, y han sustentado la decena de planes de análisis en seguimiento durante el periodo evaluado.
 
 ## Una arquitectura institucional para la inteligencia artificial: reutilizar sin fragmentar
 
 <!-- seccion: arquitectura-institucional-de-ia -->
 
-Liderar la estrategia de inteligencia artificial también significa definir cómo las iniciativas podrán coexistir, reutilizar capacidades y evolucionar sin crear una nueva fragmentación tecnológica. Cada proyecto aislado puede resolver una necesidad específica, pero una sucesión de soluciones desconectadas incrementa los costos, repite errores y dificulta el gobierno. Con unas pocas iniciativas priorizadas y más de 10 oportunidades en cartera, la pregunta ya no es solo si cada una funciona, sino qué comparten.
+Estructurar la estrategia de inteligencia artificial también significa definir cómo las iniciativas podrán coexistir, reutilizar capacidades y evolucionar sin crear una nueva fragmentación tecnológica. Cada proyecto aislado puede resolver una necesidad específica, pero una sucesión de soluciones desconectadas incrementa los costos, repite errores y dificulta el gobierno. Con unas pocas iniciativas priorizadas y más de 10 oportunidades en cartera, la pregunta ya no es solo si cada una funciona, sino qué comparten.
 
 La arquitectura institucional debe conectar las capacidades tecnológicas con los procesos de decisión y gobierno. Esto incluye determinar qué componentes pueden compartirse, qué información está autorizada para cada propósito, qué integraciones deben centralizarse, cómo se evaluarán las soluciones y qué mecanismos permitirán supervisarlas durante su operación. Mi objetivo no es definir únicamente cómo se construye una solución, sino establecer las condiciones bajo las cuales diferentes soluciones pueden coexistir, reutilizar capacidades y evolucionar sin fragmentar la institución.
 
@@ -276,12 +276,11 @@ Mi propósito es que la organización pueda innovar sin convertir cada iniciativ
 
 <!-- seccion: alcance-y-avance -->
 
-Actualmente, más de 40 soluciones analíticas en Power BI se encuentran en uso o seguimiento institucional y respaldan a unos 20 líderes o responsables de unos 15 procesos administrativos y asistenciales. Su alcance se evalúa no solo por el número de productos desarrollados, sino por su utilización efectiva, la confiabilidad de sus indicadores y su incorporación en los espacios donde se analiza el desempeño institucional.
+Actualmente, más de 25 soluciones analíticas en Power BI se encuentran en uso o seguimiento institucional y respaldan a unos 20 líderes o responsables de unos 15 procesos administrativos y asistenciales. Su alcance se evalúa no solo por el número de productos desarrollados, sino por su utilización efectiva, la confiabilidad de sus indicadores y su incorporación en los espacios donde se analiza el desempeño institucional.
 
 | Dimensión          | Métrica                                    |                     Valor |
 | ------------------ | ------------------------------------------ | ------------------------: |
-| Analítica          | productos analíticos en uso o seguimiento  |                 más de 40 |
-| Analítica          | tableros de control                        |                 más de 20 |
+| Analítica          | productos analíticos en uso o seguimiento  |                 más de 25 |
 | Analítica          | líderes respaldados · procesos             |         unos 20 · unos 15 |
 | Analítica          | usuarios                                   |                       ~75 |
 | Analítica          | reducción de esfuerzo en preparación       | cerca del 60 % (estimado) |
@@ -301,11 +300,11 @@ Estos resultados se presentan de forma agregada y respetan los límites de confi
 
 <!-- seccion: convergencia-de-la-trayectoria -->
 
-Vista en retrospectiva, mi responsabilidad actual reúne los aprendizajes construidos a lo largo de toda mi trayectoria, desde agosto de 2016. En Inglopres aprendí a estructurar procesos, construir los datos que no existían y gestionar con evidencia bajo ISO 9001:2015. En Ceinfes aprendí a dirigir una operación mediante indicadores y a comunicar sus resultados ante la junta directiva cada semana. En el sistema de transporte de Bogotá, con C&M para TransMilenio, aprendí a integrar fuentes, representar operaciones complejas y avanzar desde la descripción hacia la predicción y la prescripción.
+Vista en retrospectiva, mi responsabilidad actual reúne los aprendizajes construidos a lo largo de toda mi trayectoria, desde mayo de 2015. En Inglopres aprendí a estructurar procesos, construir los datos que no existían y gestionar con evidencia bajo ISO 9001:2015. En Ceinfes aprendí a dirigir una operación mediante indicadores y a comunicar sus resultados ante la junta directiva cada semana. En el sistema de transporte de Bogotá, con C&M para TransMilenio, aprendí a integrar fuentes, representar operaciones complejas y avanzar desde la descripción hacia la predicción y la prescripción.
 
 En Cafam comprendí cómo intervenir una operación crítica mediante una plataforma empresarial, coordinar negocio y tecnología, instrumentar una implementación y proteger la calidad de los datos entre sistemas, liderando un equipo de 20 personas. En Banco Pichincha consolidé mi profundidad en Power BI, modelos semánticos, adopción, formación y gobierno, con tableros que adoptaron más de 50 usuarios. En Vesting construí en Microsoft Fabric la plataforma para observar agentes —hasta 23 vigilados a la vez— y estructuré una forma replicable de desarrollar soluciones inteligentes.
 
-En la Fundación CTIC estas capacidades convergen en una responsabilidad más amplia. Ya no se trata únicamente de construir un producto analítico, implementar una solución o diseñar un agente. Se trata de liderar la forma en que una institución de salud comprende, prioriza, gobierna y desarrolla su capacidad de inteligencia artificial.
+En la Fundación CTIC estas capacidades convergen en una responsabilidad más amplia. Ya no se trata únicamente de construir un producto analítico, implementar una solución o diseñar un agente. Se trata de liderar la estructuración de la estrategia con la que una institución de salud comprende, prioriza, gobierna y desarrolla su capacidad de inteligencia artificial.
 
 ## Lo que este rol reúne: analítica, agentes, arquitectura y sistema de gestión
 
@@ -313,6 +312,6 @@ En la Fundación CTIC estas capacidades convergen en una responsabilidad más am
 
 La analítica continúa siendo indispensable porque permite observar la realidad y construir confianza sobre los datos. Las aplicaciones y los agentes amplían la capacidad para utilizar conocimiento y ejecutar determinadas tareas. La arquitectura empresarial conecta estas soluciones con los procesos, la seguridad, el gobierno y la estrategia. ISO/IEC 42001 proporciona el marco de gestión que permite organizar estas capacidades alrededor de responsabilidades, riesgos, evaluación y mejora continua.
 
-Este rol representa el punto más avanzado de mi evolución profesional. Comencé intentando comprender y mejorar procesos. Después construí los datos necesarios para medirlos, las plataformas para analizarlos y los modelos para anticipar determinados comportamientos. Power BI me permitió convertir esa arquitectura de datos y modelos semánticos en experiencias de decisión confiables. Más adelante diseñé la infraestructura necesaria para observar agentes de IA. Hoy, desde marzo de 2025, lidero la estrategia con la que una institución puede decidir qué capacidades inteligentes necesita, bajo qué condiciones puede utilizarlas y cómo debe gobernarlas durante su ciclo de vida.
+Este rol representa el punto más avanzado de mi evolución profesional. Comencé intentando comprender y mejorar procesos. Después construí los datos necesarios para medirlos, las plataformas para analizarlos y los modelos para anticipar determinados comportamientos. Power BI me permitió convertir esa arquitectura de datos y modelos semánticos en experiencias de decisión confiables. Más adelante diseñé la infraestructura necesaria para observar agentes de IA. Hoy, desde marzo de 2025, lidero la estructuración de la estrategia con la que una institución puede decidir qué capacidades inteligentes necesita, bajo qué condiciones puede utilizarlas y cómo debe gobernarlas durante su ciclo de vida.
 
 Mi propósito no es conseguir que la organización utilice más inteligencia artificial. Es contribuir a que utilice la inteligencia artificial adecuada para problemas relevantes, sobre información autorizada y confiable, dentro de límites explícitos y con evidencia suficiente para evaluar su comportamiento y su valor. La analítica permite comprender la realidad; Power BI la convierte en una experiencia accesible para la decisión; las soluciones inteligentes amplían la capacidad de actuación; y el sistema de gestión asegura que esa evolución ocurra con responsabilidad, trazabilidad y propósito.

@@ -1,9 +1,9 @@
 ---
 slug: inglopres
 codigo: AF-03
-titulo: "Inglopres — Process Engineer (2016–2017)"
+titulo: "Inglopres — Process Analyst and Engineer (2015–2017)"
 resumen: "My first job: an ERP (Odoo), the databases that did not exist, the work study and a team of twelve people with 95% customer satisfaction."
-cuando_usar: "Use this when they ask about his first job out of university, an ERP implementation (Odoo), supply chain and logistics for heavy machinery, the time study and the twelve-person team at Inglopres (2016–2017)."
+cuando_usar: "Use this when they ask about his first job out of university, an ERP implementation (Odoo), supply chain and logistics for heavy machinery, the time study and the twelve-person team at Inglopres (2015–2017), and his stage as Process Analyst with indicators, Lean Six Sigma, Bizagi, VBA and Power Pivot."
 estado: aprobado
 ancla: "/proyectos/inglopres"
 actualizado: 2026-09-20
@@ -43,9 +43,7 @@ of 12 people, what you learned. -->
 
 <!-- seccion: la-operacion -->
 
-I joined Inglopres in August 2016, freshly graduated in Industrial Engineering from the Pontificia
-Universidad Javeriana, to take on my first job as a Process Engineer. I stayed in the organization
-until June 2017: eleven months that, seen from today, contain the statement of almost everything I
+I joined Inglopres in May 2015 as a Process Analyst, and in August 2016, freshly graduated in Industrial Engineering from the Pontificia Universidad Javeriana, I took on the role of Process Engineer. I stayed in the organization until June 2017: two years and two months that, seen from today, contain the statement of almost everything I
 have done since.
 
 Inglopres was dedicated to renting, buying and selling heavy machinery for companies and
@@ -62,6 +60,16 @@ waits or rework appeared and what controls the organization needed to operate mo
 and offer a more consistent service. In practice that meant four things: mapping how the areas
 connected, following where information circulated, locating where waits and rework appeared, and
 proposing the controls that were missing.
+
+## Before the ERP: Process Analyst, from May 2015 to August 2016
+
+<!-- seccion: analista-de-procesos -->
+
+Before becoming Process Engineer I was Process Analyst at the same company, between May 2015 and August 2016. I designed and built key performance indicator (KPI) dashboards to track the performance of the operational processes, analyze trends and find improvement opportunities, and I analyzed statistical data to evaluate how each process behaved and to prioritize the optimizations with quantitative evidence.
+
+With Lean Six Sigma and operations research principles I designed and implemented improvements in inventory management, shift assignment, process costing systems and the layout of equipment, materials and workspaces. I standardized and documented the key processes in Bizagi, with modeling and simulation to evaluate scenarios, anticipate impacts and validate the improvements before implementing them.
+
+I also automated: I developed Excel applications with VBA to automate controls and improve how the processes managed their information, and I implemented analytical models with Power Pivot that turned operational information into tools for tracking indicators and making decisions.
 
 ## The ERP: integrating what was loose
 
@@ -150,7 +158,7 @@ An apparent improvement in speed can produce more errors, increase rework or shi
 load onto another part of the system. From there came a criterion I still use: an improvement in
 speed is not, by itself, an improvement. Optimizing does not consist of maximizing a metric in
 isolation, but of finding a sustainable balance between capacity, quality, cost, service and
-working conditions, and that requires looking at all five at once.
+working conditions, and that requires looking at all five at once. With that criterion I designed and prioritized the improvement plans based on statistical analysis of the processes.
 
 It is the same problem that years later I turned into one of the seven investigations I publish:
 the one on fatigue allowances and line balancing, which reviews the methods by which those
@@ -193,8 +201,7 @@ what is done leaves a written trace.
 This experience also consolidated my affinity for standards as instruments for turning principles
 into verifiable and sustainable management systems. Having developed early on a way of working
 based on processes, responsibilities, controls, evidence and continuous improvement has made it
-easier for me today to incorporate the principles and requirements of ISO/IEC 42001 into the
-leadership of the artificial intelligence strategy, carrying that same rigor over to the
+easier for me today to incorporate the principles and requirements of ISO/IEC 42001 into the structuring of the artificial intelligence strategy I lead, carrying that same rigor over to the
 governance, risk assessment and responsible management of AI solutions. The two standards share
 the high-level structure of ISO management systems, so what I learned in 2016 with one served in
 2025 for the other.
@@ -253,7 +260,7 @@ with a documented process that someone else can execute without me.
 
 <!-- seccion: lo-que-dejo -->
 
-Seen in retrospect, Inglopres brought together, in eleven months, the foundations of everything I
+Seen in retrospect, Inglopres brought together, in two years and two months, the foundations of everything I
 would build later. There I learned to understand an operation as a system, translate processes
 into information structures, integrate areas through technology, measure with attention to
 context, manage with evidence and lead from clarity. I was not yet talking about semantic models,
