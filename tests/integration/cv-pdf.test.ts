@@ -122,12 +122,41 @@ describe("PDF ATS generado en build desde los YAML", () => {
     for (const [variante, archivos] of variantes) {
       for (const locale of ["es", "en"] as const) {
         const texto = plano(await extractText(archivos[locale]));
+        // El puesto de proyectos propios (2026-10-04) va con su descripción, no
+        // con sus logros: nombran las piezas de la vitrina, viven en la web y en
+        // el chat, y en papel no cabían dentro de las dos páginas. Ver
+        // `columnaIzquierda` en scripts/generate-cv-pdf.mjs.
         const faltan = getCv(locale).trayectoria.flatMap((h) =>
-          [h.rol, h.organizacion, ...h.bullets]
+          (h.tipo === "proyectos-propios"
+            ? [h.rol, h.organizacion, h.descripcion]
+            : [h.rol, h.organizacion, ...h.bullets])
             .filter((t) => !texto.includes(plano(ansi(t))))
             .map((t) => `${locale} ${variante} · ${h.organizacion}: «${t}»`),
         );
         expect(faltan.join("\n")).toBe("");
+      }
+    }
+  });
+
+  // UN PUESTO PROPIO NO ES UN EMPLEADOR (2026-10-04). El ATS lee secciones: el
+  // puesto de proyectos propios tiene que estar bajo su propio título, DESPUÉS
+  // de toda la experiencia, y nunca entre los empleos.
+  it("el puesto de proyectos propios va en su propia sección, después de la experiencia", async () => {
+    for (const [variante, archivos] of variantes) {
+      for (const locale of ["es", "en"] as const) {
+        const texto = plano(await extractText(archivos[locale]));
+        const L = LABELS[locale];
+        const cv = getCv(locale);
+        const propio = cv.trayectoria.find((h) => h.tipo === "proyectos-propios");
+        expect(propio, `${locale}: no hay puesto propio que ubicar`).toBeDefined();
+        const empleos = cv.trayectoria.filter((h) => h.tipo === "empleo");
+        const seccion = texto.indexOf(plano(L.proyectosPropios));
+        const nombre = `${locale} ${variante}`;
+        expect(seccion, `${nombre}: falta el título «${L.proyectosPropios}»`).toBeGreaterThan(-1);
+        expect(texto.indexOf(plano(ansi(propio!.rol))), nombre).toBeGreaterThan(seccion);
+        for (const e of empleos) {
+          expect(texto.indexOf(plano(ansi(e.rol))), `${nombre}: «${e.rol}» quedó después de los proyectos propios`).toBeLessThan(seccion);
+        }
       }
     }
   });

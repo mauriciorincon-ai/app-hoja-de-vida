@@ -41,7 +41,7 @@ un documento nuevo toma el siguiente número libre; un código retirado no se re
 | 12 | AF-14 | `fabric-en-la-practica` | aprobado | 22 | 0 | `#skills-plataforma-de-datos` |
 | 13 | AF-10 | `fundacion-ctic` | aprobado | 25 | 0 | `/proyectos/fundacion-ctic` |
 | 14 | AF-17 | `gobierno-de-datos-y-de-ia` | aprobado | 27 | 0 | `#skills-bi-y-decision` |
-| 15 | AF-03 | `inglopres` | aprobado | 9 | 0 | `/proyectos/inglopres` |
+| 15 | AF-03 | `inglopres` | aprobado | 10 | 0 | `/proyectos/inglopres` |
 | 16 | AF-24 | `las-investigaciones` | aprobado | 32 | 0 | `/vitrina/investigaciones` |
 | 17 | AF-13 | `lo-que-busco` | aprobado | 19 | 0 | `#contacto` |
 | 18 | AF-25 | `los-agentes-de-la-vitrina` | aprobado | 12 | 0 | `/vitrina/agentes` |
@@ -53,7 +53,7 @@ un documento nuevo toma el siguiente número libre; un código retirado no se re
 | 24 | AF-07 | `transmilenio-cm` | aprobado | 18 | 0 | `/proyectos/transmilenio-cm` |
 | 25 | AF-09 | `vesting` | aprobado | 24 | 0 | `/proyectos/vesting` |
 
-**25 documentos · 541 subsecciones · 148.771 palabras · 0 `[CONFIRMAR]` por resolver · 25 aprobados.**
+**25 documentos · 542 subsecciones · 149.238 palabras · 0 `[CONFIRMAR]` por resolver · 25 aprobados.**
 
 <!-- tabla-de-documentos:fin -->
 

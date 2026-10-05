@@ -2,7 +2,7 @@
 slug: origenes
 codigo: AF-02
 titulo: "From industrial engineering to data"
-resumen: "The arc: why Industrial Engineering and Industrial Design, the first job that was about processes, the three leaps up to AI with the table of the eight jobs, the thread with its methods, and how many years it adds up to."
+resumen: "The arc: why Industrial Engineering and Industrial Design, the first job that was about processes, the three leaps up to AI with the table of the nine roles, the thread with its methods, and how many years it adds up to."
 cuando_usar: "Use this when they ask why he studied industrial engineering and industrial design, at which university, how he moved from processes to data and to artificial intelligence, how many years of experience he has, in which sectors and companies he has worked, or what happened in the gaps between jobs."
 estado: aprobado
 ancla: "#trayectoria"
@@ -114,8 +114,7 @@ temporary solutions. On that foundation I have built everything else: my depth i
 analytics, my capacity to develop intelligent solutions and my vision for integrating artificial
 intelligence into enterprise architectures oriented toward value, trust and transformation.
 
-It is the same foundation with which today, since March 2025, I lead the artificial intelligence
-strategy of Fundación CTIC and contribute to incorporating the standard's principles. And it is the same one with which, between August 2023 and January
+It is the same foundation with which today, since March 2025, I lead the structuring of the artificial intelligence strategy of Fundación CTIC and contribute to incorporating the standard's principles. And it is the same one with which, between August 2023 and January
 2025, I built at Vesting the platform that observed AI agents in production. In both cases the
 starting question was not what the model can do, but what place it occupies within the work
 system, what information it receives and who answers for what it does.
@@ -173,8 +172,7 @@ first day: understand the system, measure it and give someone the instrument to 
 
 <!-- seccion: el-primer-trabajo -->
 
-My first professional experience began in August 2016, at Inglopres, as a Process Engineer, and I
-was there until June 2017. Inglopres rented, bought and sold heavy machinery, with a fleet of
+My first professional experience began in May 2015, at Inglopres, as a Process Analyst; in August 2016 I became Process Engineer, and I was there until June 2017. Inglopres rented, bought and sold heavy machinery, with a fleet of
 about 120 units between machines and vehicles. At first sight, it might seem a starting point far
 removed from data engineering, business analytics or artificial intelligence. In reality, it was
 the setting in which I understood one of the ideas that has most defined my career: behind every
@@ -315,8 +313,7 @@ how it was produced.
 ISO 9001 and ISO/IEC 42001 share the same high-level structure of ISO management systems. Applied
 in 2016 to the quality of a heavy-machinery operation and in 2025 to the management of artificial
 intelligence in a health institution, the structure is the same, and what is done leaves a
-written trace in both. That continuity is the reason it feels natural to me today to lead the
-implementation of a standard: I learned to work inside one from my first job.
+written trace in both. That continuity is the reason it feels natural to me today to lead the structuring of a strategy under a standard: I learned to work inside one from my first job.
 
 ## What the first job already contained
 
@@ -342,27 +339,26 @@ technological transformation requires a rigorous connection between the operatio
 people who make it possible, the information that represents it and the capability one wants to
 build. That understanding continues to be the foundation on which I design analytical solutions,
 intelligent applications, AI agents and enterprise architectures capable of transforming work
-without losing sight of its human dimension. Eleven months at Inglopres were enough to pose the
-problem; the nine years since have been different scales of the same answer.
+without losing sight of its human dimension. Two years at Inglopres were enough to pose the problem; the nine years since have been different scales of the same answer.
 
-## The three leaps: the table of the eight jobs
+## The three leaps: the table of the nine roles
 
 <!-- seccion: los-tres-saltos -->
 
 After that first year the career took three leaps of scale: from the process to the indicator,
-from the indicator to the platform, and from the platform to artificial intelligence. Eight jobs
-in eight organizations, month by month:
+from the indicator to the platform, and from the platform to artificial intelligence. Nine roles in eight organizations, month by month:
 
 | Period | Role and organization | What changed in scale |
 | --- | --- | --- |
+| May 2015 – August 2016 | Process Analyst, Inglopres | a measured process: KPI dashboards, Lean Six Sigma, Bizagi, VBA and Power Pivot |
 | August 2016 – June 2017 | Process Engineer, Inglopres | a process: the ERP (Odoo), the databases that were missing, a team of 12 |
 | November 2017 – November 2018 | Operations Coordinator, Ceinfes | an operation: KPIs for three fronts and more than 100 schools a year, reports to the board of directors |
-| November 2018 – May 2020 | Junior Operations Analyst, C&M Consorcio 2018 (TransMilenio supervision) | a city: supervising with data some 150 routes of 10 concessionaire companies |
+| November 2018 – May 2020 | Operations Analyst, C&M Consorcio 2018 (TransMilenio supervision) | a city: supervising with data some 150 routes of 10 concessionaire companies |
 | October 2020 – June 2021 | Information Systems and Projects Analyst, Cafam | an enterprise system: the WMS of a medicines distribution center, a team of 20 |
 | July 2021 – May 2022 | Post-Operational Analysis Professional, C&M Consultores (TransMilenio) | a pipeline: ETL, dashboards for 25+ users, +35% analytical efficiency, demand forecasting |
 | March 2023 – July 2023 | Senior Analytics and Reporting Analyst, Banco Pichincha | adoption: BI for 50+ users with a team of 5, −35% in analysis times |
 | August 2023 – January 2025 | Data Strategy Lead, Vesting | a platform: Microsoft Fabric from scratch to monitor AI agents |
-| March 2025 – today | Analytics Professional, Fundación CTIC | the strategy: analytics in healthcare and the AI management system under ISO/IEC 42001 |
+| March 2025 – today | Analytics Professional, Fundación CTIC | the AI strategy being structured: analytics in healthcare and the AI management system under ISO/IEC 42001 |
 
 Each leap has its own document with the detail and the figures; this is the map, and what follows
 is how I lived each one.
@@ -382,10 +378,9 @@ uses is not a deliverable, and adoption is measured.
 
 **From the platform to AI** (Vesting and Fundación CTIC). At Vesting I built from scratch, in
 Microsoft Fabric, the platform with which AI agents were monitored in production, and I documented
-the replicable process for designing them. At CTIC I lead the institutional AI strategy under
-ISO/IEC 42001, in the most demanding sector in privacy and traceability I have worked in.
+the replicable process for designing them. At CTIC I lead the structuring of the institutional AI strategy under ISO/IEC 42001, in the most demanding sector in privacy and traceability I have worked in.
 
-Three leaps across eight organizations, between August 2016 and today; the sectors, counted one by
+Three leaps across eight organizations, between May 2015 and today; the sectors, counted one by
 one, are at the end, in the count of the years.
 
 ## From the process to the indicator: Ceinfes (2017–2018)
@@ -509,7 +504,7 @@ operational event to the executive decision, and return to the operation turned 
 
 <!-- seccion: del-indicador-a-la-plataforma -->
 
-Between November 2018 and May 2020 I worked as a Junior Operations Analyst at C&M Consorcio 2018,
+Between November 2018 and May 2020 I worked as an Operations Analyst at C&M Consorcio 2018,
 within the supervision of TransMilenio. This experience changed the scale of the systems I had to
 understand. I went from analyzing delimited organizational processes to working with an urban
 operation in which vehicles, drivers, routes, scheduling, demand, contractual compliance and
@@ -849,14 +844,13 @@ indicators for process monitoring and the formulation of evidence-based improvem
 opportunities. In this context, a metric cannot be separated from its definition, provenance,
 purpose or the conditions under which it can be used to guide a decision.
 
-The figures to date: more than 40 analytical products in use for some 20 leaders of some 15 processes and some 75
+The figures to date: more than 25 analytical products in use for some 20 leaders of some 15 processes and some 75
 users; close to 60% less effort, estimated, in the preparation of information; some ten analysis plans
 under follow-up; and improvement plans that I designed from the results so that the processes
 execute them; the improvements I implemented with my own hands were, above all, those of my own
 work process.
 
-In addition to these responsibilities, I currently lead the institutional artificial intelligence
-strategy. My purpose is to establish a coherent vision for identifying, prioritizing, designing,
+In addition to these responsibilities, I currently lead the structuring of the institutional artificial intelligence strategy. My purpose is to establish a coherent vision for identifying, prioritizing, designing,
 implementing and governing AI solutions aligned with the organization's needs. This involves
 connecting technological innovation with the institutional objectives, the available
 capabilities, the data architecture, the associated risks and the value each initiative must
@@ -883,7 +877,7 @@ suitability of each use case, the quality and availability of its data, the peop
 affected, the associated risks and the level of human intervention that must be preserved. To
 date there are more than 10 AI opportunities identified, half of them evaluated, a few prioritized and the first ones documented.
 
-Leading an artificial intelligence strategy also requires establishing criteria to decide which
+Structuring an artificial intelligence strategy also requires establishing criteria to decide which
 initiatives should move forward and under what conditions. Not every use case needs artificial
 intelligence, and not every intelligent capability requires the same level of autonomy. Some
 needs can be solved through analytics, conventional automation or process improvements. Others
@@ -980,17 +974,16 @@ limits and allows them to evolve in a secure, reusable way aligned with the inst
 purpose.
 
 At Fundación CTIC, since March 2025, I have taken my career to a new level of responsibility: from
-building analytical and intelligent solutions to leading the strategy through which an
-organization can adopt, govern and scale them. My goal is not to incorporate artificial
+building analytical and intelligent solutions to leading the structuring of the strategy through which an organization can adopt, govern and scale them. My goal is not to incorporate artificial
 intelligence as a succession of technological initiatives, but to establish a management system
 that makes it possible to innovate with purpose, manage risks and turn every lesson into a
 sustainable institutional capability.
 
-## The thread: the method that unites the eight jobs
+## The thread: the method that unites the nine roles
 
 <!-- seccion: el-hilo -->
 
-The thread that unites the eight jobs fits in one sentence: understand a process, measure it, and
+The thread that unites the nine roles fits in one sentence: understand a process, measure it, and
 give someone the instrument to decide about it. The scale changed and the tool changed; the
 method is the same, and it has a name.
 
@@ -1022,18 +1015,15 @@ with access to certain information, limits and a responsibility that has to be d
 My formal education is the undergraduate degree in Industrial Engineering from the Javeriana, with
 an emphasis in Data Analytics Intelligence, and the Industrial Design program; I do not have a
 master's degree, a specialization or any other postgraduate degree: the later deepening is the
-certifications and what I have built. Ten years of professional career, counted from August
-2016. And eight with data at the center, counted from November 2017, when I joined Ceinfes and
+certifications and what I have built. More than ten years of professional career, counted from May 2015. And eight with data at the center, counted from November 2017, when I joined Ceinfes and
 indicators became my job and not a tool of the job.
 
-In that arc there are eight jobs in eight organizations and seven sectors: heavy machinery,
+In that arc there are nine roles in eight organizations and seven sectors: heavy machinery,
 educational assessment, mass transit, medicines logistics, banking, an AI-agents startup and,
-today, healthcare. Added up, they are about 104 months of effective work as of September 2026, eight years and eight months; the rest, up to the ten, are the pauses between one job and the next. The longest runs
-from June 2022 to February 2023, and I devoted it to studying and getting certified: three of
-IBM's Professional Certificate —taken between May and November 2022, with its Python and SQL courses— is from those months, and the other IBM credential, the one in applied data science with R, I finished in 2024.
+today, healthcare. Added up, they are about 121 months of effective work as of October 2026, a little over ten years; the rest, up to the eleven and a half since May 2015, are the pauses between one job and the next. The longest runs
+from June 2022 to February 2023, and I devoted it to studying and getting certified: IBM's Professional Certificate —taken between May and November 2022, with its Python and SQL courses— is from those months, and the other IBM credential, the one in applied data science with R, I finished in 2024.
 The exact periods, month by month, are in the table above.
 
 If the question is how big my experience with AI is compared with my experience with data: data
-takes up eight of those years; applied AI starts in August 2023 at Vesting, with agents in production, and continues today at Fundación CTIC with experimentation and prototypes. Three of the ten years, and the three most
-recent. The three credentials earned —Microsoft's DP-600 and two from IBM— and the two in
+takes up eight of those years; applied AI in a company starts in August 2023 at Vesting, with agents in production, and continues today at Fundación CTIC with experimentation and prototypes; on my own, since April 2023 I have planned and designed the apps and agents I now publish. Three of the more than ten years, and the three most recent. The three credentials earned —Microsoft's DP-600 and two from IBM— and the two in
 progress —AI-103 and AI-300, since July 2026— follow that same order: first data, then AI.

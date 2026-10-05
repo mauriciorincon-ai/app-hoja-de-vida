@@ -8,7 +8,7 @@
 identidad:
   nombre: "Henry Rincón"
   nombreCompleto: "Henry Mauricio Rincón Caro"
-  eyebrow: "Industrial Engineer · Analytics & AI Engineer"
+  eyebrow: "AI & Analytics Engineer · Industrial Engineer"
   titular: "From industrial engineering to AI agents: data, platforms and decisions."
   resumen: >-
     Data leader and AI engineer (AI-103 and AI-300, in progress) · Analytics
@@ -16,16 +16,16 @@ identidad:
     agents to production — and this résumé is the sample: walk through it and
     ask.
   perfil: >-
-    Industrial Engineer (Javeriana) with a ten-year career —from
-    process engineering to data and AI— turning operational data into
-    business decisions, across banking, transport,
-    logistics and healthcare. Today I lead AI adoption and governance: the
-    strategy and the structuring of the ISO/IEC 42001 management system. Before that I designed from
-    scratch the data strategy and platform of an AI-agent startup —Microsoft
-    Fabric and a replicable process to design and monitor agents— and built BI
-    and predictive analytics in banking. Microsoft-certified as a Fabric
-    Analytics Engineer (DP-600), on the way to AI-103 and AI-300. Want to know
-    anything else? Ask this résumé's chat.
+    Industrial Engineer (Javeriana) with more than ten years of career —from
+    process engineering to data and AI— in healthcare, technology, banking,
+    transport, logistics and education. Today I lead the structuring of the
+    institutional AI strategy under ISO/IEC 42001, take part in that of the
+    management system and built more than 25 analytics products in Power BI.
+    Before that I designed from scratch the data platform of an AI-agent
+    startup on Microsoft Fabric. On my own I build apps and agents with RAG
+    and evaluation. Microsoft-certified as a Fabric Analytics Engineer
+    (DP-600), on the way to AI-103 and AI-300. Want to know anything else?
+    Ask this résumé's chat.
   ubicacion: "Bogotá, Colombia · Open to international relocation and remote work"
   email: "mauricio.hmrc@gmail.com"
   # The domain address (forwards to Gmail): ONLY the part before the @ goes here.
@@ -46,11 +46,29 @@ trayectoria:
       Analytics, data governance and AI strategy (ISO/IEC 42001) for
       administrative and clinical decisions in healthcare.
     bullets:
-      - "I lead the institutional AI strategy under UNE-ISO/IEC 42001:2025: more than 10 opportunities identified, half of them evaluated and a few prioritized."
-      - "more than 40 analytics products in Power BI for administrative and clinical leaders: some 20 leaders of some 15 processes and about 75 users."
+      - "I lead the structuring of the institutional AI strategy under UNE-ISO/IEC 42001:2025: more than 10 opportunities identified, half of them evaluated and a few prioritized."
+      - "more than 25 analytics products in Power BI for administrative and clinical leaders: some 20 leaders of some 15 processes and about 75 users."
       - "Institutional data governance and quality, under Colombia's habeas data regime and Law 1581."
       - "Process-based control dashboards and improvement plans: close to 60% less effort preparing information (estimated on my own work)."
-      - "more than 20 instruments of the AI management system, a third finished, and an ISO 42001 expert agent to review them."
+      - "I take part in structuring the AI management system: more than 20 instruments, a third finished and the ISO 42001 Expert agent that reviews them."
+    actual: true
+  # INDEPENDENT PROJECTS (2026-10-04, LinkedIn review): NOT a job
+  # —`tipo: proyectos-propios`—, it runs in parallel to the jobs since April
+  # 2023 and the PDF prints it in its own section. Its bullets NAME the pieces
+  # and never count them: the showcase grows every week (guarded by
+  # tests/unit/content.test.ts).
+  - periodo: "April 2023 — today"
+    rol: "Generative AI Engineer"
+    organizacion: "Independent projects"
+    tipo: "proyectos-propios"
+    descripcion: >-
+      Since 2023, I plan and design the apps and agents I now publish.
+    bullets:
+      - "Two stages: since 2023, the conception and architecture of these apps and agents, which I spent years planning and trying out on different platforms; since 2026, the pieces built with my own pipeline and published in the showcase."
+      - "This interactive résumé, with a RAG chat that answers with citations to the site's sources and is evaluated with its own and outside questions before every change is published."
+      - "Pipeline applications: Dash Agent AI, to analyze the context and cost of AI agents, with 693 tests and 97.5% line coverage (August 2026); Hablemos San, sealed and in use by the family it was built for."
+      - "Agents with binary acceptance criteria and human checkpoints: the ISO 42001 Expert, the Power BI Dashboard Builder, the AI-APPs Factory and the research harnesses."
+      - "Own research: ARKHÉ, which in my measurements cut token consumption by 52%, still without a published artifact; FORJA; the research pieces and the open-data dashboards in the showcase."
     actual: true
   # Real period (PDF, /cv, chat, cases): 2023 — 2025. «2024» only on the HOME
   # timeline, by the owner's design, so its year transition doesn't repeat 2023.
@@ -90,10 +108,10 @@ trayectoria:
       BI adoption (+35% efficiency), an ETL that unified sources (+70%) and
       demand forecasting with scikit-learn.
     bullets:
-      - "Drove BI adoption across operations: +35% efficiency with 25+ key users."
+      - "Led the implementation of Power BI across operations: +35% efficiency with 25+ key users."
       - "ETL that unified five heterogeneous sources (fare collection, fleet and GPS, scheduling, incidents and user complaints): +70% in analysis precision and speed."
       - "ETL scripts with VBA and Power Query for the post-operational analysis, with validations and visible exceptions: −40% in repetitive tasks."
-      - "Strategy sessions with SITP leadership: +25% in indicators."
+      - "Strategy sessions with the SITP concessionaires: +25% in indicators."
       - "Demand forecasting with scikit-learn by route and time slot, which stayed in use after I left: +20% system performance."
   - periodo: "2020 — 2021"
     rol: "Information Systems and Projects Analyst"
@@ -106,10 +124,10 @@ trayectoria:
       - "Led a 20-person team —14 from Cafam and 6 from Oracle— through six months of WMS implementation testing: −25% errors and +15% operational efficiency."
       - "Modeled the process in BPMN with Bizagi and simulated dispatch in FlexSim before testing."
       - "Implementation-control BI: +50% precision in follow-up, for 15+ users."
-      - "VBA integrations with the WMS: +15% automation and −50% data errors."
+      - "VBA integrations with the WMS: +15% automation and −50% data errors; and more than 10 hours a week of manual work automated."
       - "SQL data quality with an 80-20 reconciliation by medicine: +20%."
   - periodo: "2018 — 2020"
-    rol: "Junior Operations Analyst"
+    rol: "Operations Analyst"
     organizacion: "C&M Consorcio (TransMilenio)"
     proyecto: "cm-operaciones"
     descripcion: >-
@@ -117,8 +135,8 @@ trayectoria:
       indicators, automation and the system's statistical memory.
     bullets:
       - "Data-driven supervision of about 150 routes from 10 concessionaires, cross-referencing five sources: fare collection, fleet and GPS, scheduling, incidents and user complaints."
-      - "Performance dashboards and reports —two weekly and one monthly— traceable down to the operational event."
-      - "ETL automation with VBA, Power Query and SQL for the route supervision reports: at least −40% in processing time."
+      - "Performance dashboards and reports —two weekly and one monthly— traceable down to the operational event; 20+ internal users."
+      - "ETL automation with VBA, Power Query and SQL for the route supervision reports: −30% in processing time."
       - "The system's statistical memory in SQLite: the operation's history, week by week."
       - "Audit of compliance with operating protocols, with indicators carrying contractual consequences."
   - periodo: "2017 — 2018"
@@ -134,19 +152,21 @@ trayectoria:
       - "Balancing the digitalization line: about 250 sheets per shift across two scanning stations."
       - "A VBA macro that optimized teacher scheduling with explicit constraints."
       - "Transition to process-based management with BPMN, Kanban and Scrum."
-  - periodo: "2016 — 2017"
-    rol: "Process Engineer"
+  - periodo: "2015 — 2017"
+    rol: "Process Analyst and Engineer"
     organizacion: "Inglopres"
     proyecto: "inglopres"
     descripcion: >-
-      ERP, databases and supply chain under ISO 9001; a team of 12 with 95%
-      client satisfaction.
+      Process Analyst (2015 — 2016) and Process Engineer (2016 — 2017):
+      indicators, ERP, databases and supply chain under ISO 9001; a team of 12
+      with 95% client satisfaction.
     bullets:
       - "Led the implementation of the Odoo ERP to integrate the processes of a heavy-machinery rental and sales company, with a fleet of about 120 units."
       - "Designed in SQLite and SQL the analysis databases the operation did not have."
-      - "Work study with fatigue allowances for sustainable time standards."
+      - "Work study with fatigue allowances and improvement plans prioritized through statistical analysis."
       - "Supply chain and quality assurance under ISO 9001:2015."
       - "A team of 12 people with 95% client satisfaction."
+      - "As Process Analyst (2015 — 2016): KPI dashboards, Lean Six Sigma, Bizagi, VBA and Power Pivot."
 # Education (post-S7 review): its own section on the HOME, in /cv and in the PDF.
 # `periodo` stays empty until you add the years — no date gets made up.
 estudios:
@@ -174,15 +194,15 @@ estudios:
     nota: "English B2 (IELTS 5.5 equivalence, 2014): reading, listening and technical writing; professional discussions and analytical reports."
 
 logros:
-  - desde: "2016-08"
+  - desde: "2015-05"
     etiqueta: "years of professional experience"
-    descripcion: "From process engineering to data platforms for AI agents (August 2016 → today)."
+    descripcion: "From process engineering to data platforms for AI agents (May 2015 → today)."
   - valor: 27
     etiqueta: "AI agents built with the core process I structured"
     descripcion: "Vesting: 12 clients integrated and up to 23 agents monitored at once, in real time, on Microsoft Fabric."
-  - valor: 40
+  - valor: 25
     sufijo: "+"
-    etiqueta: "analytics products in use in healthcare"
+    etiqueta: "analytics products in Power BI in use in healthcare"
     descripcion: "Fundación CTIC: some 20 leaders of some 15 processes and about 75 users, on shared institutional definitions."
   - valor: 50
     sufijo: "+"
@@ -342,7 +362,7 @@ proyectos:
       BI adoption (+35% efficiency, 25+ key users), an ETL that unified
       heterogeneous sources (+70% in precision and speed), demand forecasting
       with scikit-learn (+20% system performance) and strategy sessions with
-      SITP leadership (+25% in indicators).
+      the management of the SITP concessionaires (+25% in indicators).
     stack: ["BI", "ETL", "scikit-learn"]
     casestudy:
       titular: "I returned to the same system with a different question: no longer supervising compliance, but explaining how the SITP operated and helping decide how to adjust it."
@@ -364,7 +384,7 @@ proyectos:
         - valor: 25
           prefijo: "+"
           sufijo: "%"
-          etiqueta: "in the indicators addressed with the SITP"
+          etiqueta: "in the indicators addressed with the SITP concessionaires"
         - valor: 20
           prefijo: "+"
           sufijo: "%"
@@ -378,13 +398,13 @@ proyectos:
             GPS and no dispatch stayed visible, not silently corrected.
         - titulo: "BI around operational questions"
           texto: >-
-            I drove Power BI adoption with more than 25 key users: the people who scheduled and
+            I led the implementation of Power BI, adopted by more than 25 key users: the people who scheduled and
             decided the service. Each dashboard answered a concrete question, such as which routes
             and time slots saw demand exceed the scheduled supply, or which concessionaires
             concentrated the incidents.
         - titulo: "Evidence, mechanism and consequence"
           texto: >-
-            I brought analytics to working sessions with the SITP's concessionaire leadership. Each
+            I brought analytics to working sessions with the management of the SITP concessionaires. Each
             recommendation connected evidence, mechanism and consequence, and the same pipeline kept
             measuring after the action: that is why the +25% could be stated.
         - titulo: "Forecasting demand to schedule"
@@ -400,7 +420,7 @@ proyectos:
       impacto:
         - "+35% efficiency of analytical processes from BI adoption."
         - "+70% in analysis precision and speed with the unified ETL."
-        - "+25% in indicators after the SITP strategy sessions."
+        - "+25% in indicators after the strategy sessions with the SITP concessionaires."
         - "+20% system performance with demand forecasting."
       leccion: >-
         A reliable decision requires an equally reliable data path.
@@ -486,7 +506,7 @@ proyectos:
         Bring data governance, quality and analytics to the decisions of the
         Foundation's administrative and clinical leaders.
       cifras:
-        - valor: 40
+        - valor: 25
           prefijo: "+"
           etiqueta: "analytics products in use in Power BI"
         - valor: 20
@@ -502,7 +522,7 @@ proyectos:
         - titulo: "Process analytics for two audiences"
           texto: >-
             I develop analysis and visualization models in Power BI for administrative and clinical
-            leaders: more than 40 products, including more than 20 control dashboards. An indicator keeps a single
+            leaders: more than 25 products, control dashboards among them. An indicator keeps a single
             institutional definition, even if each audience sees it with its own level of detail.
         - titulo: "Data governance and quality in healthcare"
           texto: >-
@@ -517,7 +537,7 @@ proyectos:
             owners of each process carry them out.
         - titulo: "The institutional AI strategy"
           texto: >-
-            I lead the AI strategy under UNE-ISO/IEC 42001:2025: more than 10 opportunities identified, half of them
+            I lead the structuring of the AI strategy under UNE-ISO/IEC 42001:2025: more than 10 opportunities identified, half of them
             formally evaluated and a few prioritized. Not every problem needs AI, and not every AI
             initiative needs an agent.
         - titulo: "A management system that can be demonstrated"
@@ -527,7 +547,7 @@ proyectos:
             publish in the showcase: it cites the standard or declares the gap, and no ruling moves
             forward without a person.
       impacto:
-        - "more than 40 analytical products in use for some 20 leaders across some 15 processes and about 75 users."
+        - "more than 25 analytical products in use for some 20 leaders across some 15 processes and about 75 users."
         - "About 60% less effort preparing information (estimated on my own work); some ten analysis plans under follow-up."
         - "more than 10 AI opportunities identified, half of them evaluated, a few prioritized and the first ones documented."
         - "Institutional data quality as a practice, not an event."
@@ -541,7 +561,7 @@ proyectos:
       concessionaires, five sources cross-referenced (fare collection, fleet and
       GPS, scheduling, incidents and user complaints), performance dashboards and
       reports traceable down to the event, ETL automation with VBA, Power Query and SQL for the
-      supervision reports (at least −40% processing time) and the system's statistical memory.
+      supervision reports (−30% processing time) and the system's statistical memory.
     stack: ["Excel · VBA", "SQL · SQLite", "Performance dashboards"]
     casestudy:
       titular: "Verifying with evidence that Bogotá's mass transit system was operated as agreed, when a discount or a penalty could hang on each figure."
@@ -563,10 +583,10 @@ proyectos:
           etiqueta: "concession companies"
         - valor: 5
           etiqueta: "sources cross-referenced to rebuild the operation"
-        - valor: 40
+        - valor: 30
           prefijo: "−"
           sufijo: "%"
-          etiqueta: "processing time, at the very least"
+          etiqueta: "processing time"
       capitulos:
         - titulo: "Traceability as a condition of legitimacy"
           texto: >-
@@ -597,7 +617,7 @@ proyectos:
             showcase, with their method and their result.
       impacto:
         - "Weekly and monthly performance reports for about 150 routes, traceable from the figure to the record."
-        - "At least 40% less processing time with the ETL automation in VBA, Power Query and SQL that fed the route supervision reports."
+        - "30% less processing time with the ETL automation in VBA, Power Query and SQL that fed the route supervision reports."
         - "A statistical memory of the operation that stopped starting from scratch every week."
         - "Two questions from the operation turned, years later, into published research."
       leccion: >-
@@ -670,9 +690,9 @@ proyectos:
         Inglopres taught me to structure an operation; Ceinfes taught me to run it
         through information.
   - slug: "inglopres"
-    nombre: "Building the data no one had — Inglopres (2016–2017)"
+    nombre: "Building the data no one had — Inglopres (2015–2017)"
     resumen: >-
-      First job as Process Engineer at a heavy-machinery rental and sales company
+      First job, as Process Analyst and then Process Engineer, at a heavy-machinery rental and sales company
       (about 120 units): implementation of the Odoo ERP, analysis databases in
       SQLite and SQL, work study with fatigue allowances, supply chain under ISO
       9001:2015 and a team of 12 people with 95% client satisfaction.

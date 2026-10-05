@@ -46,7 +46,7 @@ La Ingeniería Industrial me enseñó que el resultado de una organización no d
 
 El Diseño Industrial complementó esa mirada al situar a las personas dentro del sistema. Una solución puede optimizar técnicamente un proceso y fracasar porque aumenta la carga cognitiva, interrumpe el trabajo, utiliza un lenguaje que nadie reconoce o exige una conducta incompatible con el contexto real. Por eso, no considero terminada una solución únicamente porque funciona. También debe poder comprenderse, incorporarse y utilizarse con confianza.
 
-Mi primer empleo, en Inglopres desde agosto de 2016, fue de ingeniero de procesos en una operación de alquiler de maquinaria con un parque de unas 120 entre máquinas y vehículos, y allí esa raíz se volvió oficio: modelar la operación, implantar un ERP, diseñar las bases de datos que no existían y asegurar la calidad bajo ISO 9001:2015. Todo lo que vino después —datos, Power BI, agentes— se construyó sobre esa forma de mirar.
+Mi primer empleo, en Inglopres desde mayo de 2015, fue de analista y luego ingeniero de procesos en una operación de alquiler de maquinaria con un parque de unas 120 entre máquinas y vehículos, y allí esa raíz se volvió oficio: modelar la operación, implantar un ERP, diseñar las bases de datos que no existían y asegurar la calidad bajo ISO 9001:2015. Todo lo que vino después —datos, Power BI, agentes— se construyó sobre esa forma de mirar.
 
 ## Del proceso a la analítica y a los agentes: la misma forma de pensar
 
@@ -94,7 +94,7 @@ Hoy la misma notación sigue en mi trabajo con una diferencia: en mi vitrina el 
 
 <!-- seccion: bizagi-en-cuatro-empresas -->
 
-En **Inglopres**, entre agosto de 2016 y junio de 2017, esta perspectiva resultó relevante para comprender una operación que conectaba gestión comercial, disponibilidad de maquinaria, mantenimiento, logística e información administrativa, sobre un parque de unas 120 entre máquinas y vehículos. La implementación del ERP —una implantación nueva de Odoo— exigía traducir esas relaciones en actividades, estados, reglas y responsabilidades que el sistema pudiera representar de manera consistente. El modelo de proceso funcionaba como puente entre la realidad operativa y su implementación tecnológica.
+En **Inglopres**, entre mayo de 2015 y junio de 2017, esta perspectiva resultó relevante para comprender una operación que conectaba gestión comercial, disponibilidad de maquinaria, mantenimiento, logística e información administrativa, sobre un parque de unas 120 entre máquinas y vehículos. La implementación del ERP —una implantación nueva de Odoo— exigía traducir esas relaciones en actividades, estados, reglas y responsabilidades que el sistema pudiera representar de manera consistente. El modelo de proceso funcionaba como puente entre la realidad operativa y su implementación tecnológica.
 
 En **Ceinfes**, entre noviembre de 2017 y noviembre de 2018, el modelamiento permitía representar las dependencias entre la programación de profesores y consultores, la preparación y distribución de materiales, la aplicación de evaluaciones en más de 100 colegios por año, la recepción de las respuestas y su posterior digitalización, a razón de unas 250 hojas por jornada. Cada frente tenía responsabilidades diferentes —unas 7 personas en programación, unas 12 en digitalización y unas 20 en logística—, pero el resultado dependía de que todos avanzaran de manera coordinada y dentro de ventanas de tiempo precisas.
 
@@ -260,7 +260,7 @@ Un indicador puede estar correctamente calculado y ser difícil de interpretar. 
 
 Diseñar significa conectar la función con la forma en que una persona puede comprenderla y utilizarla. Esto implica observar tareas, contexto, expectativas, lenguaje y restricciones humanas, no solamente definir componentes y funcionalidades.
 
-En Power BI, esta perspectiva se traduce en jerarquía visual, navegación, reducción de carga cognitiva y correspondencia entre la pantalla y la decisión. El modelo puede contener una gran cantidad de información, pero la experiencia debe presentar únicamente aquello que la persona necesita para avanzar. En la Fundación CTIC, los más de 40 productos analíticos atienden a dos audiencias muy distintas —líderes administrativos y asistenciales— y la misma cifra se presenta con la profundidad que cada una necesita.
+En Power BI, esta perspectiva se traduce en jerarquía visual, navegación, reducción de carga cognitiva y correspondencia entre la pantalla y la decisión. El modelo puede contener una gran cantidad de información, pero la experiencia debe presentar únicamente aquello que la persona necesita para avanzar. En la Fundación CTIC, los más de 25 productos analíticos atienden a dos audiencias muy distintas —líderes administrativos y asistenciales— y la misma cifra se presenta con la profundidad que cada una necesita.
 
 En aplicaciones, se traduce en recorridos comprensibles, estados visibles y mecanismos que ayuden al usuario a reconocer qué ocurrió y qué puede hacer después. Una interfaz no debe ocultar información crítica ni exigir que la persona comprenda toda la arquitectura para completar una tarea. Las 6 aplicaciones de mi vitrina pasan pruebas automáticas de accesibilidad en cada cambio, y esta misma hoja de vida respeta la preferencia de movimiento reducido del visitante: no es cortesía, es diseño.
 

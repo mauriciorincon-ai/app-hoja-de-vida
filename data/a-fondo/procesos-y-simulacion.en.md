@@ -63,7 +63,7 @@ uses a language nobody recognizes or demands a behavior incompatible with the re
 is why I do not consider a solution finished merely because it works. It must also be possible to
 understand it, incorporate it and use it with confidence.
 
-My first job, at Inglopres from August 2016, was as a process engineer in a machinery rental
+My first job, at Inglopres from May 2015, was as a process analyst and then process engineer in a machinery rental
 operation with a fleet of some 120 machines and vehicles combined, and there that root became a
 trade: modeling the operation, implementing an ERP, designing the databases that did not exist
 and ensuring quality under ISO 9001:2015. Everything that came afterwards —data, Power BI,
@@ -176,7 +176,7 @@ generates the diagram; I tell that story in the subsection on the process as a l
 
 <!-- seccion: bizagi-en-cuatro-empresas -->
 
-At **Inglopres**, between August 2016 and June 2017, this perspective proved relevant to
+At **Inglopres**, between May 2015 and June 2017, this perspective proved relevant to
 understanding an operation that connected commercial management, machinery availability,
 maintenance, logistics and administrative information, over a fleet of some 120 machines and
 vehicles combined. The ERP implementation —a fresh implementation of Odoo— required translating
@@ -600,7 +600,7 @@ defining components and functionalities.
 In Power BI, this perspective translates into visual hierarchy, navigation, reduced cognitive load
 and correspondence between the screen and the decision. The model may contain a great deal of
 information, but the experience must present only what the person needs in order to move
-forward. At Fundación CTIC, the more than 40 analytical products serve two very different audiences
+forward. At Fundación CTIC, the more than 25 analytical products serve two very different audiences
 —administrative and clinical leaders— and the same figure is presented with the depth each one
 needs.
 

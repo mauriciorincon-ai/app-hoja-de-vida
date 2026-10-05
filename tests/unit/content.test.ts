@@ -60,6 +60,9 @@ describe("content loader (data/*.yaml reales)", () => {
     expect(en.trayectoria.map((t) => t.proyecto ?? null)).toEqual(
       es.trayectoria.map((t) => t.proyecto ?? null),
     );
+    // Y el mismo TIPO en la misma posición: un empleo en un idioma no puede ser
+    // el puesto de proyectos propios en el otro (2026-10-04).
+    expect(en.trayectoria.map((t) => t.tipo)).toEqual(es.trayectoria.map((t) => t.tipo));
     // La puerta a los case studies es la trayectoria: al menos uno enlazado.
     expect(es.trayectoria.some((t) => t.proyecto)).toBe(true);
     // Y la formación ya no se disfraza de hito: ningún periodo sin año.
@@ -321,5 +324,43 @@ describe("showcase data-driven (criterio de aceptación)", () => {
     };
     conCampoViejo.apps[0].solicitable = true;
     expect(() => parseApps(conCampoViejo, "apps.yaml")).toThrow(/solicitable/);
+  });
+});
+
+/**
+ * EL PUESTO DE PROYECTOS PROPIOS NOMBRA LAS PIEZAS, NO LAS CUENTA (2026-10-04).
+ *
+ * La vitrina crece cada semana —seis apps más este sitio el 2026-10-04, y las
+ * nuevas cerrando su MVP—. Un «32 piezas» o un «6 aplicaciones» escrito en un
+ * bullet de `cv.*.yaml` caduca en días, y ningún otro gate lo vería: el de
+ * cifras del corpus solo lee `data/a-fondo/`. Los años («desde 2023») y las
+ * cifras medidas con fecha («693 pruebas») no son totales de piezas y pasan.
+ */
+const NUMERO = String.raw`(?:(?!(?:19|20)\d\d\b)\d{1,4}|uno|una|dos|tres|cuatro|cinco|seis|siete|ocho|nueve|diez|once|doce|trece|catorce|quince|veinte|treinta|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|twenty|thirty)`;
+const PIEZA = String.raw`(?:apps?|aplicaciones|applications|agentes|agents|investigaciones|research|líneas|lines|tableros|dashboards|piezas|pieces)`;
+const TOTAL_DE_PIEZAS = new RegExp(String.raw`\b${NUMERO}\s+(?:[\wáéíóú-]+\s+){0,2}?${PIEZA}\b`, "gi");
+
+function totalesDePiezas(textos: string[]): string[] {
+  return textos.flatMap((t) => [...t.matchAll(new RegExp(TOTAL_DE_PIEZAS.source, "gi"))].map((m) => m[0]));
+}
+
+describe("el puesto de proyectos propios no escribe totales de piezas", () => {
+  it("ningún bullet ni descripción del puesto propio cuenta piezas, en ES ni en EN", () => {
+    for (const locale of ["es", "en"] as const) {
+      const propios = getCv(locale).trayectoria.filter((h) => h.tipo === "proyectos-propios");
+      expect(propios, `${locale}: no hay puesto de proyectos propios que vigilar`).toHaveLength(1);
+      const textos = propios.flatMap((h) => [h.descripcion, ...h.bullets]);
+      const totales = totalesDePiezas(textos);
+      expect(totales, `${locale}: totales escritos a mano, que caducan con la vitrina: ${totales.join(" · ")}`).toEqual([]);
+    }
+  });
+
+  it("el motor caza los totales y deja pasar años y cifras medidas", () => {
+    expect(totalesDePiezas(["Publiqué 32 piezas en la vitrina."])).toEqual(["32 piezas"]);
+    expect(totalesDePiezas(["seis aplicaciones hermanas y 13 agentes publicados"])).toHaveLength(2);
+    expect(totalesDePiezas(["13 published agents and 7 research lines"])).toHaveLength(2);
+    expect(
+      totalesDePiezas(["desde 2023 planeo las apps; desde 2026, las piezas", "693 pruebas y 97,5 % de cobertura"]),
+    ).toEqual([]);
   });
 });

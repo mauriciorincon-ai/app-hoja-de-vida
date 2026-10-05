@@ -10,16 +10,24 @@
 # dependencia que quedó la versión MÁS NUEVA — pnpm degrada en silencio y la CI
 # pasa verde porque ninguna puerta compara el resultado contra la INTENCIÓN.
 overrides:
-  'brace-expansion@1': ^1.1.18
-  'brace-expansion@>=4': ^5.0.9
+  'brace-expansion@1': ^1.1.20
+  'brace-expansion@>=4': ^5.0.11
   fast-uri: ^3.1.6
   sharp: ^0.35.0
   postcss: ^8.5.18
-  undici: ^7.29.0
+  undici: ^7.29.1
   ip-address: ^10.3.1
   'js-yaml@4': ^4.3.2
   'nanoid@3': ^3.3.18
   browserslist: ^4.28.7
+  # braces ≤3.0.3 (GHSA-vfj7-8cjw-p6xm) no tiene versión corregida publicada,
+  # así que no se parchea: se SACA del árbol. Llegaba por fast-glob → micromatch.
+  # El plugin de eslint de Next usa fast-glob en una sola llamada,
+  # `globSync(patrón, { onlyDirectories: true })`, y solo si la config define
+  # `settings.next.rootDir`. tinyglobby tiene esa misma firma y no usa
+  # micromatch ni braces. El otro camino, el CLI de shadcn, salió de las
+  # dependencias (ver src/styles/shadcn-tailwind.css).
+  '@next/eslint-plugin-next>fast-glob': npm:tinyglobby@^0.2.17
 
 allowBuilds:
   '@parcel/watcher': true

@@ -1,9 +1,9 @@
 ---
 slug: inglopres
 codigo: AF-03
-titulo: "Inglopres — Ingeniero de Procesos (2016–2017)"
+titulo: "Inglopres — Analista e Ingeniero de Procesos (2015–2017)"
 resumen: "Mi primer empleo: un ERP (Odoo), las bases de datos que no existían, el estudio del trabajo y un equipo de doce personas con 95 % de satisfacción."
-cuando_usar: "Úsalo cuando pregunten por su primer empleo al salir de la universidad, la implementación de un ERP (Odoo), la cadena de suministro y logística de maquinaria, el estudio de tiempos y el equipo de doce personas en Inglopres (2016–2017)."
+cuando_usar: "Úsalo cuando pregunten por su primer empleo al salir de la universidad, la implementación de un ERP (Odoo), la cadena de suministro y logística de maquinaria, el estudio de tiempos y el equipo de doce personas en Inglopres (2015–2017), y su etapa de Analista de Procesos con indicadores, Lean Six Sigma, Bizagi, VBA y Power Pivot."
 estado: aprobado
 ancla: "/proyectos/inglopres"
 actualizado: 2026-09-20
@@ -43,11 +43,21 @@ de 12 personas, qué aprendiste. -->
 
 <!-- seccion: la-operacion -->
 
-Ingresé a Inglopres en agosto de 2016, recién egresado de Ingeniería Industrial de la Pontificia Universidad Javeriana, para asumir mi primer empleo como Ingeniero de Procesos. Permanecí en la organización hasta junio de 2017: once meses que, vistos desde hoy, contienen el planteamiento de casi todo lo que he hecho después.
+Ingresé a Inglopres en mayo de 2015 como Analista de Procesos, y en agosto de 2016, recién egresado de Ingeniería Industrial de la Pontificia Universidad Javeriana, asumí el cargo de Ingeniero de Procesos. Permanecí en la organización hasta junio de 2017: dos años y dos meses que, vistos desde hoy, contienen el planteamiento de casi todo lo que he hecho después.
 
 Inglopres se dedicaba al alquiler, la compra y la venta de maquinaria pesada para empresas y clientes individuales, con un parque de unas 120 unidades entre máquinas y vehículos. Era una operación intensiva en activos, en la que las decisiones comerciales dependían de la disponibilidad de los equipos, su estado, mantenimiento, ubicación, programación y capacidad para responder oportunamente a las necesidades de cada cliente. Cada venta o alquiler dependía de qué máquina estaba disponible, en qué estado, en qué obra y con qué mantenimiento pendiente. La pregunta del negocio no era comercial antes que operativa: era la misma pregunta.
 
 Mi encargo consistía en comprender esa operación de extremo a extremo y contribuir a integrarla. Debía identificar cómo se conectaban las áreas, cómo circulaba la información, dónde aparecían esperas o reprocesos y qué controles necesitaba la organización para operar con mayor eficiencia y ofrecer un servicio más consistente. En la práctica eso significó cuatro cosas: mapear cómo se conectaban las áreas, seguir por dónde circulaba la información, ubicar dónde aparecían esperas y reprocesos, y proponer los controles que faltaban.
+
+## Antes del ERP: Analista de Procesos, de mayo de 2015 a agosto de 2016
+
+<!-- seccion: analista-de-procesos -->
+
+Antes de ser Ingeniero de Procesos fui Analista de Procesos en la misma empresa, entre mayo de 2015 y agosto de 2016. Diseñé y desarrollé tableros de indicadores clave (KPI) para seguir el desempeño de los procesos operativos, analizar tendencias y ubicar oportunidades de mejora, y analicé datos estadísticos para evaluar el comportamiento de cada proceso y priorizar las optimizaciones con evidencia cuantitativa.
+
+Con principios de Lean Six Sigma y de investigación de operaciones diseñé e implementé mejoras en la gestión de inventarios, la asignación de turnos, los sistemas de costos por proceso y la distribución de equipos, materiales y espacios de trabajo. Estandaricé y documenté los procesos clave en Bizagi, con modelamiento y simulación para evaluar escenarios, anticipar impactos y validar las mejoras antes de implementarlas.
+
+También automaticé: desarrollé aplicaciones en Excel con VBA para automatizar controles y mejorar la gestión de la información de los procesos, e implementé modelos analíticos con Power Pivot que convirtieron la información operativa en herramientas para seguir indicadores y tomar decisiones.
 
 ## El ERP: integrar lo que estaba suelto
 
@@ -79,7 +89,7 @@ El análisis de la operación me llevó a considerar las condiciones humanas baj
 
 La parte que un cronómetro no resuelve son precisamente esos suplementos por fatiga, las allowances del estudio del trabajo. Un tiempo observado no es un estándar: hay que añadirle el suplemento —tomado de la tabla de la OIT— que reconoce el esfuerzo, la repetitividad, las condiciones de ejecución y la variabilidad propia de una persona. Sin ese suplemento, el estándar se cumple una semana y se incumple el resto del año, y la culpa recae sobre quien ejecuta en vez de sobre quien midió. Comprendí que medir productividad exige considerar el esfuerzo, la repetitividad, las condiciones de ejecución y la variabilidad propia del trabajo humano.
 
-Este aprendizaje fue importante porque me enseñó a no interpretar los indicadores fuera de su contexto. Una mejora aparente en velocidad puede producir más errores, aumentar el reproceso o trasladar una carga excesiva hacia otra parte del sistema. De ahí salió un criterio que sigo usando: una mejora en velocidad no es, por sí sola, una mejora. Optimizar no consiste en maximizar aisladamente una métrica, sino en encontrar un equilibrio sostenible entre capacidad, calidad, costo, servicio y condiciones de trabajo, y eso exige mirar los cinco a la vez.
+Este aprendizaje fue importante porque me enseñó a no interpretar los indicadores fuera de su contexto. Una mejora aparente en velocidad puede producir más errores, aumentar el reproceso o trasladar una carga excesiva hacia otra parte del sistema. De ahí salió un criterio que sigo usando: una mejora en velocidad no es, por sí sola, una mejora. Optimizar no consiste en maximizar aisladamente una métrica, sino en encontrar un equilibrio sostenible entre capacidad, calidad, costo, servicio y condiciones de trabajo, y eso exige mirar los cinco a la vez. Con ese criterio diseñé y prioricé los planes de mejora a partir del análisis estadístico de los procesos.
 
 Es el mismo problema que años después convertí en una de las siete investigaciones que publico: la de suplementos por fatiga y balanceo de línea, que revisa los métodos con los que se derivan esos suplementos y prueba, sobre un modelo de balanceo, que calibrarlos cambia el resultado.
 
@@ -99,7 +109,7 @@ Mejorar cualquiera de las tres exigía la misma información que había tenido q
 
 La norma ISO 9001:2015 fue mi primera escuela formal de trazabilidad y rigor documental. No bastaba con que un proceso funcionara. Era necesario definir cómo debía funcionar, quién respondía por cada actividad, qué controles se aplicaban y qué evidencia permitía demostrar el cumplimiento. Aprendí que la calidad no debe depender de la memoria de las personas, sino de una forma de trabajo que pueda ser comprendida, verificada y repetida. De ahí salió el hábito que no he soltado: lo hecho deja rastro escrito.
 
-Esta experiencia también consolidó mi afinidad por los estándares como instrumentos para convertir principios en sistemas de gestión verificables y sostenibles. Haber desarrollado desde temprano una forma de trabajo basada en procesos, responsabilidades, controles, evidencia y mejora continua me ha facilitado incorporar actualmente los principios y requisitos de ISO/IEC 42001 en el liderazgo de la estrategia de inteligencia artificial, trasladando ese mismo rigor al gobierno, la evaluación de riesgos y la gestión responsable de las soluciones de IA. Las dos normas comparten la estructura de alto nivel de los sistemas de gestión ISO, así que lo aprendido en 2016 con una sirvió en 2025 para la otra.
+Esta experiencia también consolidó mi afinidad por los estándares como instrumentos para convertir principios en sistemas de gestión verificables y sostenibles. Haber desarrollado desde temprano una forma de trabajo basada en procesos, responsabilidades, controles, evidencia y mejora continua me ha facilitado incorporar actualmente los principios y requisitos de ISO/IEC 42001 en la estructuración de la estrategia de inteligencia artificial que lidero, trasladando ese mismo rigor al gobierno, la evaluación de riesgos y la gestión responsable de las soluciones de IA. Las dos normas comparten la estructura de alto nivel de los sistemas de gestión ISO, así que lo aprendido en 2016 con una sirvió en 2025 para la otra.
 
 Esa disciplina continúa presente en todo lo que construyo. Hoy la aplico en la trazabilidad de pipelines y modelos semánticos, en la documentación de aplicaciones y en la evaluación de soluciones y agentes de inteligencia artificial. Un dato debe conservar su procedencia, una transformación debe poder reproducirse y una respuesta generada mediante IA debe distinguir claramente entre aquello que proviene de una fuente, lo que fue calculado, lo que fue inferido y aquello que no se puede sostener con evidencia.
 
@@ -127,7 +137,7 @@ También comprendí que una operación no mejora de manera sostenible cuando el 
 
 <!-- seccion: lo-que-dejo -->
 
-Vista en retrospectiva, Inglopres reunió, en once meses, los fundamentos de todo lo que construiría después. Allí aprendí a comprender una operación como sistema, traducir procesos en estructuras de información, integrar áreas mediante tecnología, medir con atención al contexto, gestionar con evidencia y liderar desde la claridad. Todavía no hablaba de modelos semánticos, plataformas analíticas o arquitecturas de inteligencia artificial, pero ya trabajaba sobre los problemas que esas capacidades me permitirían abordar posteriormente con mayor profundidad y escala.
+Vista en retrospectiva, Inglopres reunió, en dos años y dos meses, los fundamentos de todo lo que construiría después. Allí aprendí a comprender una operación como sistema, traducir procesos en estructuras de información, integrar áreas mediante tecnología, medir con atención al contexto, gestionar con evidencia y liderar desde la claridad. Todavía no hablaba de modelos semánticos, plataformas analíticas o arquitecturas de inteligencia artificial, pero ya trabajaba sobre los problemas que esas capacidades me permitirían abordar posteriormente con mayor profundidad y escala.
 
 El inventario de ese año es concreto: un ERP implementado desde cero, una base de datos de análisis en SQLite que no existía, el proceso modelado en BPMN y simulado antes de cambiarlo, un estudio de tiempos con suplementos por fatiga, una cadena de suministro medida con sus tres variables, la calidad bajo ISO 9001:2015 y un equipo de doce con un 95 % de satisfacción del cliente.
 

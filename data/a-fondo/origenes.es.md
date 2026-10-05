@@ -2,7 +2,7 @@
 slug: origenes
 codigo: AF-02
 titulo: "De la ingeniería industrial a los datos"
-resumen: "El arco: por qué Ingeniería Industrial y Diseño Industrial, el primer trabajo que fue de procesos, los tres saltos hasta la IA con la tabla de los ocho empleos, el hilo con sus métodos, y cuántos años son."
+resumen: "El arco: por qué Ingeniería Industrial y Diseño Industrial, el primer trabajo que fue de procesos, los tres saltos hasta la IA con la tabla de los nueve cargos, el hilo con sus métodos, y cuántos años son."
 cuando_usar: "Úsalo cuando pregunten por qué estudió ingeniería industrial y diseño industrial, en qué universidad, cómo pasó de los procesos a los datos y a la inteligencia artificial, cuántos años de experiencia tiene, en qué sectores y empresas ha trabajado, o qué pasó en las pausas entre empleos."
 estado: aprobado
 ancla: "#trayectoria"
@@ -95,7 +95,7 @@ Las tres formaciones tienen fecha: la ingeniería y su énfasis en analítica, e
 
 <!-- seccion: el-primer-trabajo -->
 
-Mi primera experiencia profesional comenzó en agosto de 2016, en Inglopres, como Ingeniero de Procesos, y estuve allí hasta junio de 2017. Inglopres alquilaba, compraba y vendía maquinaria pesada, con un parque de unas 120 unidades entre máquinas y vehículos. A primera vista, podría parecer un punto de partida distante de la ingeniería de datos, la analítica empresarial o la inteligencia artificial. En realidad, fue el escenario en el que comprendí una de las ideas que más ha definido mi trayectoria: detrás de toda capacidad analítica o inteligente existe un proceso que debe ser entendido, una información que debe ser estructurada y una decisión que debe ser mejorada.
+Mi primera experiencia profesional comenzó en mayo de 2015, en Inglopres, como Analista de Procesos; en agosto de 2016 pasé a Ingeniero de Procesos, y estuve allí hasta junio de 2017. Inglopres alquilaba, compraba y vendía maquinaria pesada, con un parque de unas 120 unidades entre máquinas y vehículos. A primera vista, podría parecer un punto de partida distante de la ingeniería de datos, la analítica empresarial o la inteligencia artificial. En realidad, fue el escenario en el que comprendí una de las ideas que más ha definido mi trayectoria: detrás de toda capacidad analítica o inteligente existe un proceso que debe ser entendido, una información que debe ser estructurada y una decisión que debe ser mejorada.
 
 Ingresé con la responsabilidad de comprender cómo funcionaba la organización y contribuir a integrar sus procesos mediante la implementación de un sistema de planificación de recursos empresariales, un ERP: Odoo, en una implementación nueva. El desafío no consistía únicamente en desplegar una plataforma. Era necesario identificar cómo se ejecutaba el trabajo, armonizar definiciones entre diferentes áreas, establecer responsabilidades, modelar flujos de información y traducir la operación real en estructuras que el sistema pudiera representar de manera consistente. Los flujos los modelé en BPMN con Bizagi, y con FlexSim simulé la operación para comparar alternativas antes de cambiarla.
 
@@ -145,7 +145,7 @@ Mi trabajo en Inglopres también abarcó la cadena de suministro y el aseguramie
 
 La gestión de calidad me enseñó a pensar en términos de criterios, controles, trazabilidad, responsabilidades y mejora continua. Años después, esos mismos principios se convertirían en elementos esenciales de mi trabajo con datos e inteligencia artificial. Un dato debe poder rastrearse hasta su origen. Una métrica debe tener una definición verificable. Una transformación debe ser reproducible. Una solución debe poder observarse. Un agente debe operar dentro de límites explícitos. Y una decisión asistida por inteligencia artificial debe conservar la evidencia necesaria para comprender cómo se produjo.
 
-ISO 9001 e ISO/IEC 42001 comparten la misma estructura de alto nivel de los sistemas de gestión ISO. Aplicada en 2016 a la calidad de una operación de maquinaria pesada y en 2025 a la gestión de la inteligencia artificial en una institución de salud, la estructura es la misma, y lo hecho deja rastro escrito en las dos. Esa continuidad es la razón de que hoy me resulte natural liderar la implementación de una norma: aprendí a trabajar dentro de una desde el primer empleo.
+ISO 9001 e ISO/IEC 42001 comparten la misma estructura de alto nivel de los sistemas de gestión ISO. Aplicada en 2016 a la calidad de una operación de maquinaria pesada y en 2025 a la gestión de la inteligencia artificial en una institución de salud, la estructura es la misma, y lo hecho deja rastro escrito en las dos. Esa continuidad es la razón de que hoy me resulte natural liderar la estructuración de una estrategia bajo una norma: aprendí a trabajar dentro de una desde el primer empleo.
 
 ## Lo que ya contenía el primer empleo
 
@@ -155,24 +155,25 @@ Vista en retrospectiva, mi primera experiencia profesional ya contenía los elem
 
 Por eso, no considero que haya pasado de los procesos a los datos y, posteriormente, de los datos a la inteligencia artificial. Mi evolución ha consistido en ampliar progresivamente mi capacidad para conectar esas dimensiones. Comencé comprendiendo cómo funciona el trabajo, aprendí a representar su realidad mediante datos, avancé hacia soluciones analíticas que convierten esos datos en decisiones y llegué al diseño de aplicaciones y agentes capaces de utilizar información, conocimiento y herramientas para asistir o ejecutar parte de ese trabajo.
 
-Mi primer empleo fue formalmente un rol de procesos, pero allí comenzó mi trayectoria en datos, arquitectura y soluciones inteligentes. Fue el lugar donde comprendí que toda transformación tecnológica de alto valor requiere una conexión rigurosa entre la realidad operativa, las personas que la hacen posible, la información que la representa y la capacidad que se desea construir. Esa comprensión continúa siendo la base sobre la que diseño soluciones analíticas, aplicaciones inteligentes, agentes de IA y arquitecturas empresariales capaces de transformar el trabajo sin perder de vista su dimensión humana. Once meses en Inglopres bastaron para plantear el problema; los nueve años siguientes han sido distintas escalas de la misma respuesta.
+Mi primer empleo fue formalmente un rol de procesos, pero allí comenzó mi trayectoria en datos, arquitectura y soluciones inteligentes. Fue el lugar donde comprendí que toda transformación tecnológica de alto valor requiere una conexión rigurosa entre la realidad operativa, las personas que la hacen posible, la información que la representa y la capacidad que se desea construir. Esa comprensión continúa siendo la base sobre la que diseño soluciones analíticas, aplicaciones inteligentes, agentes de IA y arquitecturas empresariales capaces de transformar el trabajo sin perder de vista su dimensión humana. Dos años en Inglopres bastaron para plantear el problema; los nueve años siguientes han sido distintas escalas de la misma respuesta.
 
-## Los tres saltos: la tabla de los ocho empleos
+## Los tres saltos: la tabla de los nueve cargos
 
 <!-- seccion: los-tres-saltos -->
 
-Después de ese primer año la trayectoria dio tres saltos de escala: del proceso al indicador, del indicador a la plataforma, y de la plataforma a la inteligencia artificial. Ocho empleos en ocho organizaciones, mes a mes:
+Después de ese primer año la trayectoria dio tres saltos de escala: del proceso al indicador, del indicador a la plataforma, y de la plataforma a la inteligencia artificial. Nueve cargos en ocho organizaciones, mes a mes:
 
 | Periodo | Rol y organización | Qué cambió de escala |
 | --- | --- | --- |
+| mayo 2015 – agosto 2016 | Analista de Procesos, Inglopres | un proceso medido: tableros de KPI, Lean Six Sigma, Bizagi, VBA y Power Pivot |
 | agosto 2016 – junio 2017 | Ingeniero de Procesos, Inglopres | un proceso: el ERP (Odoo), las bases de datos que faltaban, un equipo de 12 |
 | noviembre 2017 – noviembre 2018 | Coordinador de Operaciones, Ceinfes | una operación: KPIs para tres frentes y más de 100 colegios al año, informes a la junta directiva |
-| noviembre 2018 – mayo 2020 | Analista de Operaciones Junior, C&M Consorcio 2018 (supervisión de TransMilenio) | una ciudad: supervisar con datos unas 150 rutas de 10 empresas concesionarias |
+| noviembre 2018 – mayo 2020 | Analista de Operaciones, C&M Consorcio 2018 (supervisión de TransMilenio) | una ciudad: supervisar con datos unas 150 rutas de 10 empresas concesionarias |
 | octubre 2020 – junio 2021 | Analista de Sistemas de Información y de Proyectos, Cafam | un sistema empresarial: el WMS de un centro de distribución de medicamentos, un equipo de 20 |
 | julio 2021 – mayo 2022 | Profesional de Análisis Postoperacional, C&M Consultores (TransMilenio) | un pipeline: ETL, tableros para 25+ usuarios, +35 % de eficiencia analítica, predicción de demanda |
 | marzo 2023 – julio 2023 | Analista Senior de Analítica y Reportes, Banco Pichincha | la adopción: BI para 50+ usuarios con un equipo de 5, −35 % en tiempos de análisis |
 | agosto 2023 – enero 2025 | Líder de Estrategia de Datos, Vesting | una plataforma: Microsoft Fabric desde cero para monitorear agentes de IA |
-| marzo 2025 – hoy | Profesional de Analítica, Fundación CTIC | la estrategia: analítica en salud y el sistema de gestión de IA bajo ISO/IEC 42001 |
+| marzo 2025 – hoy | Profesional de Analítica, Fundación CTIC | la estrategia de IA en estructuración: analítica en salud y el sistema de gestión de IA bajo ISO/IEC 42001 |
 
 Cada salto tiene su documento con el detalle y las cifras; este es el mapa, y lo que sigue es cómo viví cada uno.
 
@@ -184,9 +185,9 @@ Cada salto tiene su documento con el detalle y las cifras; este es el mapa, y lo
 
 **Del indicador a la plataforma** (Cafam, C&M Consultores y Banco Pichincha). El dato dejó de ser un reporte y pasó a ser un sistema: la implementación de un WMS, un pipeline de ETL y tableros que cruzaban fuentes heterogéneas, y en banca la lección más dura del BI: un tablero que nadie usa no es un entregable, y la adopción se mide.
 
-**De la plataforma a la IA** (Vesting y Fundación CTIC). En Vesting construí desde cero, en Microsoft Fabric, la plataforma con la que se monitoreaban agentes de IA en producción, y documenté el proceso replicable para diseñarlos. En CTIC lidero la estrategia institucional de IA bajo ISO/IEC 42001, en el sector más exigente en privacidad y trazabilidad en el que he trabajado.
+**De la plataforma a la IA** (Vesting y Fundación CTIC). En Vesting construí desde cero, en Microsoft Fabric, la plataforma con la que se monitoreaban agentes de IA en producción, y documenté el proceso replicable para diseñarlos. En CTIC lidero la estructuración de la estrategia institucional de IA bajo ISO/IEC 42001, en el sector más exigente en privacidad y trazabilidad en el que he trabajado.
 
-Tres saltos en ocho organizaciones, entre agosto de 2016 y hoy; los sectores, contados uno a uno, están al final, en la cuenta de los años.
+Tres saltos en ocho organizaciones, entre mayo de 2015 y hoy; los sectores, contados uno a uno, están al final, en la cuenta de los años.
 
 ## Del proceso al indicador: Ceinfes (2017–2018)
 
@@ -234,7 +235,7 @@ En Ceinfes esa cadena terminaba cada viernes en la junta directiva, con un infor
 
 <!-- seccion: del-indicador-a-la-plataforma -->
 
-Entre noviembre de 2018 y mayo de 2020 trabajé como Analista de Operaciones Junior en C&M Consorcio 2018, dentro de la supervisión de TransMilenio. Esta experiencia cambió la escala de los sistemas que debía comprender. Pasé de analizar procesos organizacionales delimitados a trabajar con una operación urbana en la que interactuaban vehículos, conductores, rutas, programación, demanda, cumplimiento contractual y calidad del servicio: unas 150 rutas operadas por 10 empresas concesionarias.
+Entre noviembre de 2018 y mayo de 2020 trabajé como Analista de Operaciones en C&M Consorcio 2018, dentro de la supervisión de TransMilenio. Esta experiencia cambió la escala de los sistemas que debía comprender. Pasé de analizar procesos organizacionales delimitados a trabajar con una operación urbana en la que interactuaban vehículos, conductores, rutas, programación, demanda, cumplimiento contractual y calidad del servicio: unas 150 rutas operadas por 10 empresas concesionarias.
 
 En este contexto, los datos no procedían de una única fuente ni describían la realidad desde una perspectiva común. Cada sistema registraba una parte de la operación —el recaudo, la flota y el GPS de los buses, la programación de servicios, las novedades y las PQR de los usuarios—, con estructuras, reglas, frecuencias y niveles de calidad diferentes. Para construir una visión confiable era necesario integrar esas fuentes, relacionar eventos e interpretar cada registro dentro del proceso que lo producía. La extracción, transformación y carga de datos dejó entonces de ser para mí una técnica aislada y se convirtió en el mecanismo para reconstruir analíticamente un sistema complejo.
 
@@ -366,9 +367,9 @@ Desde marzo de 2025 trabajo como Profesional de Analítica en la Fundación CTIC
 
 Mi trabajo comprende la construcción de soluciones analíticas para líderes administrativos y asistenciales, la integración y estandarización de información, el desarrollo de modelos e indicadores para el monitoreo de procesos y la formulación de oportunidades de mejora sustentadas en evidencia. En este contexto, una métrica no puede separarse de su definición, procedencia, propósito ni de las condiciones bajo las cuales puede utilizarse para orientar una decisión.
 
-Las cifras a hoy: más de 40 productos analíticos en uso para unos 20 líderes de unos 15 procesos y unos 75 usuarios; cerca de un 60 % menos de esfuerzo, estimado, en la preparación de la información; una decena de planes de análisis en seguimiento; y planes de mejora que diseñé a partir de los resultados para que los procesos los ejecuten; las mejoras que implementé con mis propias manos fueron, sobre todo, las de mi proceso de trabajo.
+Las cifras a hoy: más de 25 productos analíticos en uso para unos 20 líderes de unos 15 procesos y unos 75 usuarios; cerca de un 60 % menos de esfuerzo, estimado, en la preparación de la información; una decena de planes de análisis en seguimiento; y planes de mejora que diseñé a partir de los resultados para que los procesos los ejecuten; las mejoras que implementé con mis propias manos fueron, sobre todo, las de mi proceso de trabajo.
 
-Además de estas responsabilidades, actualmente lidero la estrategia institucional de inteligencia artificial. Mi propósito es establecer una visión coherente para identificar, priorizar, diseñar, implementar y gobernar soluciones de IA alineadas con las necesidades de la organización. Esto implica conectar la innovación tecnológica con los objetivos institucionales, las capacidades disponibles, la arquitectura de datos, los riesgos asociados y el valor que cada iniciativa debe producir para los procesos asistenciales y administrativos.
+Además de estas responsabilidades, actualmente lidero la estructuración de la estrategia institucional de inteligencia artificial. Mi propósito es establecer una visión coherente para identificar, priorizar, diseñar, implementar y gobernar soluciones de IA alineadas con las necesidades de la organización. Esto implica conectar la innovación tecnológica con los objetivos institucionales, las capacidades disponibles, la arquitectura de datos, los riesgos asociados y el valor que cada iniciativa debe producir para los procesos asistenciales y administrativos.
 
 ## La estrategia de IA bajo UNE-ISO/IEC 42001:2025: un sistema de gestión, no una lista de proyectos
 
@@ -378,7 +379,7 @@ La estrategia de IA de la Fundación CTIC se estructura siguiendo los principios
 
 La aplicación de este enfoque comienza por comprender el contexto de la organización y determinar dónde la inteligencia artificial puede producir un valor legítimo y verificable. No parto de la tecnología ni de la disponibilidad de un modelo. Parto de los problemas, las decisiones y las capacidades institucionales que necesitan fortalecerse. A partir de allí evalúo la conveniencia de cada caso de uso, la calidad y disponibilidad de sus datos, las personas potencialmente afectadas, los riesgos asociados y el nivel de intervención humana que debe conservarse. A hoy son más de 10 oportunidades de IA identificadas, la mitad evaluadas, unas pocas priorizadas y las primeras documentadas.
 
-Liderar una estrategia de inteligencia artificial también exige establecer criterios para decidir qué iniciativas deben avanzar y bajo qué condiciones. No todos los casos de uso necesitan inteligencia artificial, y no todas las capacidades inteligentes requieren el mismo nivel de autonomía. Algunas necesidades pueden resolverse mediante analítica, automatización convencional o mejoras en los procesos. Otras justifican aplicaciones inteligentes, modelos especializados o agentes capaces de consultar información, utilizar herramientas y ejecutar tareas dentro de límites definidos.
+Estructurar una estrategia de inteligencia artificial también exige establecer criterios para decidir qué iniciativas deben avanzar y bajo qué condiciones. No todos los casos de uso necesitan inteligencia artificial, y no todas las capacidades inteligentes requieren el mismo nivel de autonomía. Algunas necesidades pueden resolverse mediante analítica, automatización convencional o mejoras en los procesos. Otras justifican aplicaciones inteligentes, modelos especializados o agentes capaces de consultar información, utilizar herramientas y ejecutar tareas dentro de límites definidos.
 
 Por eso, procuro que cada iniciativa cuente desde el comienzo con un propósito explícito, responsables identificados, resultados esperados, criterios de evaluación y mecanismos para gestionar sus riesgos. Una solución no debe evaluarse únicamente por su viabilidad técnica. También debe analizarse por su impacto potencial, su posibilidad de integración, la confiabilidad de sus fuentes, su sostenibilidad operativa y la capacidad institucional para supervisarla y mejorarla.
 
@@ -414,13 +415,13 @@ Mi responsabilidad no se limita, por tanto, a proponer casos de uso o implementa
 
 Esta etapa integra los tres fundamentos que hoy definen mi perfil profesional. La ingeniería y la analítica de datos permiten construir una representación confiable de la realidad. Las aplicaciones y los agentes de inteligencia artificial convierten la información y el conocimiento en capacidades de asistencia o ejecución. La arquitectura empresarial conecta estas soluciones, establece sus límites y permite que evolucionen de manera segura, reutilizable y alineada con el propósito institucional.
 
-En la Fundación CTIC, desde marzo de 2025, he llevado mi trayectoria a un nuevo nivel de responsabilidad: de construir soluciones analíticas e inteligentes a liderar la estrategia mediante la cual una organización puede adoptarlas, gobernarlas y escalarlas. Mi objetivo no es incorporar inteligencia artificial como una sucesión de iniciativas tecnológicas, sino establecer un sistema de gestión que permita innovar con propósito, administrar los riesgos y convertir cada aprendizaje en una capacidad institucional sostenible.
+En la Fundación CTIC, desde marzo de 2025, he llevado mi trayectoria a un nuevo nivel de responsabilidad: de construir soluciones analíticas e inteligentes a liderar la estructuración de la estrategia mediante la cual una organización puede adoptarlas, gobernarlas y escalarlas. Mi objetivo no es incorporar inteligencia artificial como una sucesión de iniciativas tecnológicas, sino establecer un sistema de gestión que permita innovar con propósito, administrar los riesgos y convertir cada aprendizaje en una capacidad institucional sostenible.
 
-## El hilo: el método que une los ocho empleos
+## El hilo: el método que une los nueve cargos
 
 <!-- seccion: el-hilo -->
 
-El hilo que une los ocho empleos cabe en una frase: entender un proceso, medirlo, y darle a alguien el instrumento para decidir sobre él. Cambió la escala y cambió la herramienta; el método es el mismo, y tiene nombre.
+El hilo que une los nueve cargos cabe en una frase: entender un proceso, medirlo, y darle a alguien el instrumento para decidir sobre él. Cambió la escala y cambió la herramienta; el método es el mismo, y tiene nombre.
 
 - **Estudio de tiempos y suplementos por fatiga**, en Inglopres, con la tabla de la OIT: un tiempo observado no es un estándar hasta que reconoce el esfuerzo de quien lo ejecuta.
 - **Balanceo de líneas y teoría de restricciones**, en Ceinfes: el cuello de botella fija el ritmo real, y la capacidad efectiva —con excepciones y reprocesos— no es la teórica.
@@ -435,8 +436,8 @@ Por eso mi trayectoria no es un alejamiento de la Ingeniería Industrial sino su
 
 <!-- seccion: cuantos-anos -->
 
-Mi formación formal es el pregrado en Ingeniería Industrial de la Javeriana, con énfasis en Inteligencia Analítica de Datos, y el programa de Diseño Industrial; no tengo maestría, especialización ni otro posgrado: la profundización posterior son las certificaciones y lo construido. Diez años de trayectoria profesional, contados desde agosto de 2016. Y ocho con los datos en el centro, contados desde noviembre de 2017, cuando entré a Ceinfes y los indicadores pasaron a ser mi trabajo y no una herramienta del trabajo.
+Mi formación formal es el pregrado en Ingeniería Industrial de la Javeriana, con énfasis en Inteligencia Analítica de Datos, y el programa de Diseño Industrial; no tengo maestría, especialización ni otro posgrado: la profundización posterior son las certificaciones y lo construido. Más de diez años de trayectoria profesional, contados desde mayo de 2015. Y ocho con los datos en el centro, contados desde noviembre de 2017, cuando entré a Ceinfes y los indicadores pasaron a ser mi trabajo y no una herramienta del trabajo.
 
-En ese arco hay ocho empleos en ocho organizaciones y siete sectores: maquinaria pesada, evaluación educativa, transporte masivo, logística de medicamentos, banca, una startup de agentes de IA y, hoy, la salud. Sumados, son unos 104 meses de trabajo efectivo a septiembre de 2026, ocho años y ocho meses; el resto, hasta los diez, son las pausas entre un empleo y el siguiente. La más larga va de junio de 2022 a febrero de 2023, y la dediqué a estudiar y a certificarme: el Certificado Profesional de IBM —cursado entre mayo y noviembre de 2022, con sus cursos de Python y SQL— es de esos meses, y la otra credencial de IBM, la de ciencia de datos aplicada con R, la terminé en 2024. Los periodos exactos, mes a mes, están en la tabla de arriba.
+En ese arco hay nueve cargos en ocho organizaciones y siete sectores: maquinaria pesada, evaluación educativa, transporte masivo, logística de medicamentos, banca, una startup de agentes de IA y, hoy, la salud. Sumados, son unos 121 meses de trabajo efectivo a octubre de 2026, algo más de diez años; el resto, hasta los once y medio desde mayo de 2015, son las pausas entre un empleo y el siguiente. La más larga va de junio de 2022 a febrero de 2023, y la dediqué a estudiar y a certificarme: el Certificado Profesional de IBM —cursado entre mayo y noviembre de 2022, con sus cursos de Python y SQL— es de esos meses, y la otra credencial de IBM, la de ciencia de datos aplicada con R, la terminé en 2024. Los periodos exactos, mes a mes, están en la tabla de arriba.
 
-Si la pregunta es qué tan grande es mi experiencia con IA comparada con la de datos: los datos ocupan ocho de esos años; la IA aplicada empieza en agosto de 2023 en Vesting, con agentes en producción, y sigue hoy en la Fundación CTIC con experimentación y prototipos. Tres años de los diez, y los tres más recientes. Las tres credenciales obtenidas —el DP-600 de Microsoft y dos de IBM— y las dos en curso —AI-103 y AI-300, desde julio de 2026— siguen ese mismo orden: primero los datos, después la IA.
+Si la pregunta es qué tan grande es mi experiencia con IA comparada con la de datos: los datos ocupan ocho de esos años; la IA aplicada en una empresa empieza en agosto de 2023 en Vesting, con agentes en producción, y sigue hoy en la Fundación CTIC con experimentación y prototipos; por mi cuenta, desde abril de 2023 planeo y diseño las apps y los agentes que hoy publico. Tres años de los más de diez, y los tres más recientes. Las tres credenciales obtenidas —el DP-600 de Microsoft y dos de IBM— y las dos en curso —AI-103 y AI-300, desde julio de 2026— siguen ese mismo orden: primero los datos, después la IA.

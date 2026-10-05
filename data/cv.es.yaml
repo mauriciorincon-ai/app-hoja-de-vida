@@ -9,7 +9,7 @@
 identidad:
   nombre: "Henry Rincón"
   nombreCompleto: "Henry Mauricio Rincón Caro"
-  eyebrow: "Ingeniero Industrial · Analytics & AI Engineer"
+  eyebrow: "AI & Analytics Engineer · Ingeniero Industrial"
   titular: "De la ingeniería industrial a los agentes de IA: datos, plataformas y decisiones."
   # Revisión post-S8 (2026-09-12): AI-103 se nombra CON «en curso» (gate de
   # contenido) y el cierre invita en vez de retar (decisión del dueño).
@@ -22,16 +22,15 @@ identidad:
   # Revisión post-S8: sin cifras — los logros tienen su sección — y con lo que
   # el dueño hace HOY (estrategia de IA e ISO/IEC 42001).
   perfil: >-
-    Ingeniero Industrial (Javeriana) con diez años de trayectoria —de la
-    ingeniería de procesos a los datos y la IA— convirtiendo datos
-    operativos en decisiones de negocio, en banca, transporte, logística y
-    salud. Hoy lidero la adopción y el gobierno de la IA: la estrategia y la
-    estructuración del sistema de gestión bajo ISO/IEC 42001. Antes diseñé desde cero la estrategia y la
-    plataforma de datos de una startup de agentes de IA —Microsoft Fabric y un
-    proceso replicable para diseñar y monitorear agentes— y construí BI y
-    analítica predictiva en banca. Certificado por Microsoft como Fabric
-    Analytics Engineer (DP-600), en ruta al AI-103 y al AI-300. ¿Quieres saber
-    algo más?
+    Ingeniero Industrial (Javeriana) con más de diez años de trayectoria —de
+    la ingeniería de procesos a los datos y la IA— en salud, tecnología,
+    banca, transporte, logística y educación. Hoy lidero la estructuración de
+    la estrategia institucional de IA bajo ISO/IEC 42001, participo en la del
+    sistema de gestión y construí más de 25 productos analíticos en Power BI.
+    Antes diseñé desde cero la plataforma de datos de una startup de agentes
+    de IA en Microsoft Fabric. Por mi cuenta construyo apps y agentes con RAG
+    y evaluación. Certificado por Microsoft como Fabric Analytics Engineer
+    (DP-600), en ruta al AI-103 y al AI-300. ¿Quieres saber algo más?
     Pregúntaselo al chat de esta hoja de vida.
   # La disponibilidad de reubicación es señal DELIBERADA para recruiters (pack §1)
   ubicacion: "Bogotá, Colombia · Abierto a reubicación internacional y trabajo remoto"
@@ -55,11 +54,29 @@ trayectoria:
       Analítica, gobierno de datos y estrategia de IA (ISO/IEC 42001) para
       decisiones administrativas y asistenciales en salud.
     bullets:
-      - "Lidero la estrategia institucional de IA bajo UNE-ISO/IEC 42001:2025: más de 10 oportunidades identificadas, la mitad evaluadas y unas pocas priorizadas."
-      - "más de 40 productos analíticos en Power BI para líderes administrativos y asistenciales: unos 20 líderes de unos 15 procesos y unos 75 usuarios."
+      - "Lidero la estructuración de la estrategia institucional de IA bajo UNE-ISO/IEC 42001:2025: más de 10 oportunidades identificadas, la mitad evaluadas y unas pocas priorizadas."
+      - "más de 25 productos analíticos en Power BI para líderes administrativos y asistenciales: unos 20 líderes de unos 15 procesos y unos 75 usuarios."
       - "Gobierno y calidad de datos institucional, bajo el régimen de habeas data y la Ley 1581."
       - "Tableros de control por procesos y planes de mejora: cerca de 60 % menos esfuerzo en la preparación de la información (estimado sobre mi propio trabajo)."
-      - "más de 20 instrumentos del sistema de gestión de IA, un tercio terminados, y un agente experto en ISO 42001 para revisarlos."
+      - "Participo en la estructuración del sistema de gestión de IA: más de 20 instrumentos, un tercio listos y el agente Experto ISO 42001 que los revisa."
+    actual: true
+  # PROYECTOS PROPIOS (2026-10-04, revisión LinkedIn definitivo): NO es un
+  # empleo —`tipo: proyectos-propios`—, corre en paralelo a los empleos desde
+  # abril de 2023 y el PDF lo pinta en su propia sección. Sus bullets NOMBRAN
+  # las piezas y no las cuentan: la vitrina crece cada semana y un total escrito
+  # aquí caducaría en días (lo vigila tests/unit/content.test.ts).
+  - periodo: "abril 2023 — hoy"
+    rol: "Ingeniero de IA Generativa"
+    organizacion: "Proyectos propios · independiente"
+    tipo: "proyectos-propios"
+    descripcion: >-
+      Desde 2023, planeo y diseño las apps y agentes que hoy publico.
+    bullets:
+      - "Dos etapas: desde 2023, la concepción y la arquitectura de estas apps y agentes, que llevo años planeando e intentando en distintas plataformas; desde 2026, las piezas construidas con un pipeline propio y publicadas en la vitrina."
+      - "Esta hoja de vida interactiva, con un chat RAG que responde con citas a las fuentes del sitio y se evalúa con preguntas propias y de afuera antes de publicar cada cambio."
+      - "Aplicaciones del pipeline: Dash Agent AI, para analizar el contexto y el costo de los agentes de IA, con 693 pruebas y 97,5 % de cobertura de líneas (agosto de 2026); Hablemos San, sellada y en uso por la familia para la que se construyó."
+      - "Agentes con criterios binarios de aceptación y puntos de control humano: el Experto ISO 42001, el Constructor de Tableros Power BI, la Fábrica de AI-APPs y los harnesses de investigación."
+      - "Investigación propia: ARKHÉ, que en mis mediciones redujo un 52 % el consumo de tokens, aún sin un artefacto publicado; FORJA; las investigaciones y los tableros sobre datos abiertos de la vitrina."
     actual: true
   # Vesting fue de agosto de 2023 a enero de 2025: ese es el periodo REAL, el
   # que leen el PDF, /cv, el chat y los casos. «2024» es la decisión estética
@@ -103,10 +120,10 @@ trayectoria:
       Adopción de BI (+35% de eficiencia), ETL que unificó fuentes (+70%) y
       predicción de demanda con scikit-learn.
     bullets:
-      - "Impulsé la adopción de BI en la operación: +35% de eficiencia con 25+ usuarios clave."
+      - "Lideré la implementación de Power BI en la operación: +35% de eficiencia con 25+ usuarios clave."
       - "ETL que unificó cinco fuentes heterogéneas (recaudo, flota y GPS, programación, novedades y PQR): +70% en precisión y velocidad de análisis."
       - "Scripts ETL con VBA y Power Query para el análisis post-operacional, con validaciones y excepciones visibles: −40% en tareas repetitivas."
-      - "Mesas de estrategia con la dirección del SITP: +25% en indicadores."
+      - "Mesas de estrategia con los concesionarios del SITP: +25% en indicadores."
       - "Predicción de demanda con scikit-learn por ruta y franja, que siguió en uso después de mi salida: +20% de rendimiento del sistema."
   - periodo: "2020 — 2021"
     rol: "Analista de Sistemas de Información y de Proyectos"
@@ -119,10 +136,10 @@ trayectoria:
       - "Lideré un equipo de 20 personas —14 de Cafam y 6 de Oracle— en seis meses de pruebas de implementación del WMS: −25% de errores y +15% de eficiencia operativa."
       - "Modelé el proceso en BPMN con Bizagi y simulé el despacho en FlexSim antes de probar."
       - "BI de control de la implementación: +50% de precisión en el seguimiento, para 15+ usuarios."
-      - "Integraciones VBA con el WMS: +15% de automatización y −50% de errores de datos."
+      - "Integraciones VBA con el WMS: +15% de automatización y −50% de errores de datos; y más de 10 horas semanales de trabajo manual automatizadas."
       - "Calidad de datos en SQL con conciliación 80-20 por medicamentos: +20%."
   - periodo: "2018 — 2020"
-    rol: "Analista de Operaciones Junior"
+    rol: "Analista de Operaciones"
     organizacion: "C&M Consorcio (TransMilenio)"
     proyecto: "cm-operaciones"
     descripcion: >-
@@ -130,8 +147,8 @@ trayectoria:
       trazables, automatización y la memoria estadística del sistema.
     bullets:
       - "Supervisión con datos de unas 150 rutas de 10 concesionarios, cruzando cinco fuentes: recaudo, flota y GPS, programación, novedades y PQR."
-      - "Tableros e informes de desempeño —dos semanales y un consolidado mensual— trazables hasta el evento operativo."
-      - "Automatización ETL con VBA, Power Query y SQL para los informes de supervisión de las rutas: al menos −40% en el tiempo de procesamiento."
+      - "Tableros e informes de desempeño —dos semanales y un consolidado mensual— trazables hasta el evento operativo; 20+ usuarios internos."
+      - "Automatización ETL con VBA, Power Query y SQL para los informes de supervisión de las rutas: −30% en el tiempo de procesamiento."
       - "Memoria estadística del sistema en SQLite: el histórico de la operación, semana a semana."
       - "Auditoría del cumplimiento de protocolos operativos, con indicadores de consecuencia contractual."
   - periodo: "2017 — 2018"
@@ -147,19 +164,21 @@ trayectoria:
       - "Balanceo de la línea de digitalización: unas 250 hojas por jornada en dos estaciones de escaneo."
       - "Macro en VBA que optimizó la programación de profesores con restricciones explícitas."
       - "Transición a gestión por procesos con BPMN, Kanban y Scrum."
-  - periodo: "2016 — 2017"
-    rol: "Ingeniero de Procesos"
+  - periodo: "2015 — 2017"
+    rol: "Analista e Ingeniero de Procesos"
     organizacion: "Inglopres"
     proyecto: "inglopres"
     descripcion: >-
-      ERP, bases de datos y cadena de suministro bajo ISO 9001; equipo de 12
-      con 95% de satisfacción de cliente.
+      Analista de Procesos (2015 — 2016) e Ingeniero de Procesos (2016 — 2017):
+      indicadores, ERP, bases de datos y cadena de suministro bajo ISO 9001;
+      equipo de 12 con 95% de satisfacción de cliente.
     bullets:
       - "Lideré la implementación del ERP Odoo para integrar los procesos de una empresa de alquiler y venta de maquinaria pesada, con un parque de unas 120 unidades."
       - "Diseñé en SQLite y SQL las bases de datos de análisis que la operación no tenía."
-      - "Estudio del trabajo con suplementos por fatiga para estándares de tiempo sostenibles."
+      - "Estudio del trabajo con suplementos por fatiga y planes de mejora priorizados con análisis estadístico."
       - "Cadena de suministro y aseguramiento de calidad bajo ISO 9001:2015."
       - "Equipo de 12 personas con 95% de satisfacción de cliente."
+      - "Como Analista de Procesos (2015 — 2016): tableros de KPI, Lean Six Sigma, Bizagi, VBA y Power Pivot."
 # Estudios (revisión post-S7): sección propia en la HOME, en el /cv y en el PDF.
 # `periodo` va vacío hasta que pongas los años — no se inventa una fecha.
 estudios:
@@ -188,16 +207,17 @@ estudios:
 
 logros:
   # Corrección de contenido 2026-09-12: el valor se CALCULA desde `desde` en
-  # build (años cumplidos) — 10 hasta julio de 2027, 11 después. No se escribe.
-  - desde: "2016-08"
+  # build (años cumplidos) — 11 hasta abril de 2027, 12 después (desde mayo de
+  # 2015: el dueño declaró empleo su etapa de Analista de Procesos, 2026-10-04).
+  - desde: "2015-05"
     etiqueta: "años de trayectoria profesional"
-    descripcion: "De la ingeniería de procesos a plataformas de datos para agentes de IA (agosto 2016 → hoy)."
+    descripcion: "De la ingeniería de procesos a plataformas de datos para agentes de IA (mayo 2015 → hoy)."
   - valor: 27
     etiqueta: "agentes de IA construidos con el proceso core que estructuré"
     descripcion: "Vesting: 12 clientes integrados y hasta 23 agentes vigilados a la vez, en tiempo real, sobre Microsoft Fabric."
-  - valor: 40
+  - valor: 25
     sufijo: "+"
-    etiqueta: "productos analíticos en uso en salud"
+    etiqueta: "productos analíticos en Power BI en uso en salud"
     descripcion: "Fundación CTIC: unos 20 líderes de unos 15 procesos y unos 75 usuarios, sobre definiciones institucionales comunes."
   - valor: 50
     sufijo: "+"
@@ -362,7 +382,7 @@ proyectos:
       Adopción de BI (+35% de eficiencia, 25+ usuarios clave), ETL que unificó
       fuentes heterogéneas (+70% en precisión y velocidad), predicción de
       demanda con scikit-learn (+20% de rendimiento del sistema) y mesas de
-      estrategia con la dirección del SITP (+25% en indicadores).
+      estrategia con la dirección de los concesionarios del SITP (+25% en indicadores).
     stack: ["BI", "ETL", "scikit-learn"]
     casestudy:
       titular: "Volví al mismo sistema con otra pregunta: ya no supervisar el cumplimiento, sino explicar la operación del SITP y ayudar a decidir cómo ajustarla."
@@ -384,7 +404,7 @@ proyectos:
         - valor: 25
           prefijo: "+"
           sufijo: "%"
-          etiqueta: "en los indicadores intervenidos con el SITP"
+          etiqueta: "en los indicadores intervenidos con los concesionarios del SITP"
         - valor: 20
           prefijo: "+"
           sufijo: "%"
@@ -398,13 +418,13 @@ proyectos:
             despacho quedaban a la vista, no corregidos en silencio.
         - titulo: "BI alrededor de preguntas operacionales"
           texto: >-
-            Impulsé la adopción de Power BI con más de 25 usuarios clave: quienes programaban y
+            Lideré la implementación de Power BI, adoptado por más de 25 usuarios clave: quienes programaban y
             decidían el servicio. Cada tablero respondía una pregunta concreta, como en qué rutas y
             franjas la demanda supera la oferta programada o qué concesionarios concentran las
             novedades.
         - titulo: "Evidencia, mecanismo y consecuencia"
           texto: >-
-            Llevé la analítica a mesas de trabajo con la dirección de concesionarios del SITP. Cada
+            Llevé la analítica a mesas de trabajo con la dirección de los concesionarios del SITP. Cada
             recomendación conectaba evidencia, mecanismo y consecuencia, y el mismo pipeline seguía
             midiendo después de actuar: por eso el +25 % se pudo afirmar.
         - titulo: "Predecir la demanda para programar"
@@ -420,7 +440,7 @@ proyectos:
       impacto:
         - "+35% de eficiencia de los procesos analíticos por la adopción de BI."
         - "+70% en precisión y velocidad de análisis con el ETL unificado."
-        - "+25% en indicadores tras las mesas de estrategia con el SITP."
+        - "+25% en indicadores tras las mesas de estrategia con los concesionarios del SITP."
         - "+20% de rendimiento del sistema con la predicción de demanda."
       leccion: >-
         Una decisión confiable requiere un recorrido de datos igualmente confiable.
@@ -505,7 +525,7 @@ proyectos:
         Llevar gobierno, calidad y analítica de datos a las decisiones de
         líderes administrativos y asistenciales de la Fundación.
       cifras:
-        - valor: 40
+        - valor: 25
           prefijo: "+"
           etiqueta: "productos analíticos en uso en Power BI"
         - valor: 20
@@ -521,7 +541,7 @@ proyectos:
         - titulo: "Analítica por procesos, para dos audiencias"
           texto: >-
             Desarrollo en Power BI modelos de análisis y visualización para líderes administrativos
-            y asistenciales: más de 40 productos, la mitad de ellos tableros de control. Un indicador conserva
+            y asistenciales: más de 25 productos, tableros de control entre ellos. Un indicador conserva
             una sola definición institucional, aunque cada audiencia lo vea con su propio nivel de
             detalle.
         - titulo: "Gobierno y calidad de datos en salud"
@@ -537,7 +557,7 @@ proyectos:
             mejora; los ejecutan los responsables de cada proceso.
         - titulo: "La estrategia institucional de IA"
           texto: >-
-            Lidero la estrategia de IA bajo UNE-ISO/IEC 42001:2025: más de 10 oportunidades identificadas,
+            Lidero la estructuración de la estrategia de IA bajo UNE-ISO/IEC 42001:2025: más de 10 oportunidades identificadas,
             la mitad evaluadas formalmente y unas pocas priorizadas. No todo problema necesita IA, y no toda
             iniciativa de IA necesita un agente.
         - titulo: "Un sistema de gestión que se demuestra"
@@ -547,7 +567,7 @@ proyectos:
             42001 que publico en la vitrina: cita la norma o declara el vacío, y ningún dictamen
             avanza sin una persona.
       impacto:
-        - "más de 40 productos analíticos en uso para unos 20 líderes de unos 15 procesos y unos 75 usuarios."
+        - "más de 25 productos analíticos en uso para unos 20 líderes de unos 15 procesos y unos 75 usuarios."
         - "Cerca de 60% menos esfuerzo en la preparación de la información (estimado sobre mi propio trabajo); una decena de planes de análisis en seguimiento."
         - "más de 10 oportunidades de IA identificadas, la mitad evaluadas, unas pocas priorizadas y las primeras documentadas."
         - "Calidad de datos institucional como práctica, no como evento."
@@ -562,7 +582,7 @@ proyectos:
       concesionarios, cinco fuentes cruzadas (recaudo, flota y GPS, programación,
       novedades y PQR), tableros e informes de desempeño trazables hasta el evento,
       automatización ETL con VBA, Power Query y SQL para los informes de
-      supervisión (al menos −40 % del tiempo de procesamiento) y la memoria estadística del sistema.
+      supervisión (−30 % del tiempo de procesamiento) y la memoria estadística del sistema.
     stack: ["Excel · VBA", "SQL · SQLite", "Tableros de desempeño"]
     casestudy:
       titular: "Verificar con evidencia que el sistema de transporte de Bogotá se operara como estaba pactado, cuando de cada cifra podía colgar un descuento o una sanción."
@@ -584,10 +604,10 @@ proyectos:
           etiqueta: "empresas concesionarias"
         - valor: 5
           etiqueta: "fuentes cruzadas para reconstruir la operación"
-        - valor: 40
+        - valor: 30
           prefijo: "−"
           sufijo: "%"
-          etiqueta: "de tiempo de procesamiento, como mínimo"
+          etiqueta: "de tiempo de procesamiento"
       capitulos:
         - titulo: "La trazabilidad como condición de legitimidad"
           texto: >-
@@ -618,7 +638,7 @@ proyectos:
             investigaciones que publico en la vitrina, con su método y su resultado.
       impacto:
         - "Informes semanales y mensuales de desempeño para unas 150 rutas, trazables desde la cifra hasta el registro."
-        - "Al menos un 40 % menos de tiempo de procesamiento con la automatización ETL en VBA, Power Query y SQL que alimentaba los informes de supervisión de las rutas."
+        - "Un 30 % menos de tiempo de procesamiento con la automatización ETL en VBA, Power Query y SQL que alimentaba los informes de supervisión de las rutas."
         - "Una memoria estadística de la operación que dejó de empezar desde cero cada semana."
         - "Dos preguntas de la operación convertidas, años después, en investigaciones publicadas."
       leccion: >-
@@ -693,9 +713,9 @@ proyectos:
         Inglopres me enseñó a estructurar una operación; Ceinfes me enseñó a dirigirla
         mediante información.
   - slug: "inglopres"
-    nombre: "Construir el dato que nadie tenía — Inglopres (2016–2017)"
+    nombre: "Construir el dato que nadie tenía — Inglopres (2015–2017)"
     resumen: >-
-      Primer empleo como Ingeniero de Procesos en una empresa de alquiler y venta de
+      Primer empleo, como Analista y luego Ingeniero de Procesos, en una empresa de alquiler y venta de
       maquinaria pesada (unas 120 unidades): implementación del ERP Odoo, bases de
       datos de análisis en SQLite y SQL, estudio del trabajo con suplementos por
       fatiga, cadena de suministro bajo ISO 9001:2015 y un equipo de 12 personas con

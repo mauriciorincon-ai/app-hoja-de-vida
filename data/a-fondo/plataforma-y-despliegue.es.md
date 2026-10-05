@@ -253,7 +253,7 @@ Aporto experiencia en agentes desde dos perspectivas complementarias. En un ento
 
 Aporto práctica directa de despliegue. Mantengo seis aplicaciones hermanas públicas y este sitio, todas con procesos automatizados en GitHub Actions, pruebas, controles de calidad, accesibilidad, presupuestos de rendimiento y evolución versionada. Respondo por productos que pueden fallar y que necesitan mecanismos reales de prevención, diagnóstico y recuperación.
 
-Aporto gobierno de datos e inteligencia artificial aplicado en banca, plataformas de agentes y salud: montado tres veces. Actualmente lidero en la Fundación CTIC una estrategia institucional basada en ISO/IEC 42001 y conecto políticas, riesgos y responsabilidades con los componentes técnicos que deben producir evidencia sobre su funcionamiento.
+Aporto gobierno de datos e inteligencia artificial aplicado en banca, plataformas de agentes y salud: montado tres veces. Actualmente lidero en la Fundación CTIC la estructuración de una estrategia institucional basada en ISO/IEC 42001 y conecto políticas, riesgos y responsabilidades con los componentes técnicos que deben producir evidencia sobre su funcionamiento.
 
 Aporto una cultura de calidad y trazabilidad que se originó en mi experiencia con sistemas de gestión bajo ISO 9001 y se quedó. Las decisiones relevantes quedan documentadas. Los controles deben demostrar que pueden detectar una falla. Las cifras conservan su procedencia. Los cambios necesitan una razón y una forma de comprobar su efecto.
 

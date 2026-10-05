@@ -53,7 +53,9 @@ CV Viva incluida). -->
 
 Un currículum afirma; una pieza publicada demuestra. Esa es la razón principal por la que construyo en público: seis aplicaciones hermanas, más este sitio, y 32 piezas en total, todas fuera de mi trabajo y todas con su repositorio.
 
-Durante mi trayectoria —diez años desde agosto de 2016— he exigido que cada indicador conserve su procedencia, que cada transformación pueda explicarse y que cada conclusión esté respaldada por evidencia. Me parecía incoherente aplicar ese nivel de rigor al trabajo de las organizaciones y presentar mi propio perfil mediante afirmaciones que nadie pudiera verificar. Por eso decidí tratar mi experiencia profesional como trato cualquier sistema de información: con trazabilidad, evidencia, control de versiones y resultados observables.
+Mis proyectos propios de IA generativa no salieron de la nada. Desde abril de 2023, en paralelo a mis empleos, planeo y diseño estas aplicaciones y estos agentes —su concepción y su arquitectura—, y durante años los intenté en distintas plataformas antes de construirlos, desde 2026, con el pipeline que hoy los produce. Es un hecho declarado, sin un artefacto de 2023 que lo pruebe: lo que sí puede examinarse son las piezas, y cada una conserva su propia fecha —Dash Agent AI, por ejemplo, se concibió y diseñó en 2026—.
+
+Durante mi trayectoria —más de diez años desde mayo de 2015— he exigido que cada indicador conserve su procedencia, que cada transformación pueda explicarse y que cada conclusión esté respaldada por evidencia. Me parecía incoherente aplicar ese nivel de rigor al trabajo de las organizaciones y presentar mi propio perfil mediante afirmaciones que nadie pudiera verificar. Por eso decidí tratar mi experiencia profesional como trato cualquier sistema de información: con trazabilidad, evidencia, control de versiones y resultados observables.
 
 Mi portafolio no es una galería de demostraciones ni una colección de ejercicios. Es una arquitectura de evidencia profesional. Cada pieza busca demostrar una capacidad concreta mediante un producto que puede recorrerse, probarse y analizarse. Las aplicaciones demuestran construcción de soluciones. Los agentes muestran cómo estructuro el trabajo con inteligencia artificial. Las investigaciones hacen visible mi disciplina metodológica. Los tableros permiten evaluar mi forma de convertir datos en modelos, indicadores y experiencias de decisión.
 
@@ -311,7 +313,7 @@ Tres preguntas se le hacen a cada gate antes de darlo por bueno. La primera: ¿l
 
 En componentes de inteligencia artificial, la regla adquiere mayor importancia porque una salida puede tener una forma convincente y ser incorrecta desde el punto de vista funcional. No basta con comprobar que el agente responde. Es necesario diseñar escenarios en los que deba reconocer información insuficiente, abstenerse de afirmar algo sin evidencia, manejar una herramienta no disponible o transferir la decisión cuando el nivel de incertidumbre supera sus límites.
 
-También aplico esta lógica a los mecanismos de recuperación de información. No considero suficiente mostrar que una respuesta incluye citas. Debo verificar que la recuperación responda a la pregunta —con 77 preguntas propias y 146 de afuera corriendo en cada cambio de este sitio—, que cada cita conduzca a un destino que existe y que el sistema pueda declarar cuando la evidencia disponible no es suficiente.
+También aplico esta lógica a los mecanismos de recuperación de información. No considero suficiente mostrar que una respuesta incluye citas. Debo verificar que la recuperación responda a la pregunta —con 77 preguntas propias y 148 de afuera corriendo en cada cambio de este sitio—, que cada cita conduzca a un destino que existe y que el sistema pueda declarar cuando la evidencia disponible no es suficiente.
 
 ## Esta misma página también es una aplicación
 
