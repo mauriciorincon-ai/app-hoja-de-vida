@@ -62,29 +62,35 @@ trayectoria:
     actual: true
   # PROYECTOS PROPIOS (2026-10-04, revisión LinkedIn definitivo): NO es un
   # empleo —`tipo: proyectos-propios`—, corre en paralelo a los empleos desde
-  # abril de 2023 y el PDF lo pinta en su propia sección. Sus bullets NOMBRAN
-  # las piezas y no las cuentan: la vitrina crece cada semana y un total escrito
-  # aquí caducaría en días (lo vigila tests/unit/content.test.ts).
-  - periodo: "abril 2023 — hoy"
+  # abril de 2024 (el dueño movió el inicio de 2023 a 2024 el 2026-10-05) y el
+  # PDF lo pinta en su propia sección. La descripción es la primera línea de
+  # su LinkedIn, dictada por él. Sus bullets NOMBRAN las piezas y no las
+  # cuentan: la vitrina crece cada semana y un total escrito aquí caducaría en
+  # días. Lo vigila tests/unit/content.test.ts, que además exige que ni este
+  # hito ni el corpus fechen el inicio en otro año que el de `periodo`.
+  - periodo: "abril 2024 — hoy"
     rol: "Ingeniero de IA Generativa"
     organizacion: "Proyectos propios · independiente"
     tipo: "proyectos-propios"
     descripcion: >-
-      Desde 2023, planeo y diseño las apps y agentes que hoy publico.
+      Desarrollo proyectos propios de ingeniería e inteligencia artificial para
+      explorar arquitecturas, agentes, sistemas RAG y mecanismos de evaluación.
     bullets:
-      - "Dos etapas: desde 2023, la concepción y la arquitectura de estas apps y agentes, que llevo años planeando e intentando en distintas plataformas; desde 2026, las piezas construidas con un pipeline propio y publicadas en la vitrina."
       - "Esta hoja de vida interactiva, con un chat RAG que responde con citas a las fuentes del sitio y se evalúa con preguntas propias y de afuera antes de publicar cada cambio."
-      - "Aplicaciones del pipeline: Dash Agent AI, para analizar el contexto y el costo de los agentes de IA, con 693 pruebas y 97,5 % de cobertura de líneas (agosto de 2026); Hablemos San, sellada y en uso por la familia para la que se construyó."
-      - "Agentes con criterios binarios de aceptación y puntos de control humano: el Experto ISO 42001, el Constructor de Tableros Power BI, la Fábrica de AI-APPs y los harnesses de investigación."
+      - "Probeta DS, una aplicación del pipeline que ejecuta Python, pandas y scikit-learn en el navegador, sin enviar los datos a ningún servidor: compara algoritmos contra líneas base explícitas, evalúa sobre el conjunto de prueba sin fuga de datos y entrega una model card con sus límites."
+      - "Otras aplicaciones del pipeline: Dash Agent AI, para analizar el contexto y el costo de los agentes de IA, con 693 pruebas y 97,5 % de cobertura de líneas (agosto de 2026); Hablemos San, sellada y en uso por la familia para la que se construyó."
+      - "Agentes con criterios binarios de aceptación y puntos de control humano: el Experto ISO 42001, el Constructor de Tableros Power BI y la Fábrica de AI-APPs."
+      - "Un pipeline de investigación, con los harnesses Design Science y Paper Computacional, que fija los criterios antes de medir, mide el vacío de la literatura y lleva cada estudio hasta un manuscrito listo para enviar."
       - "Investigación propia: ARKHÉ, que en mis mediciones redujo un 52 % el consumo de tokens, aún sin un artefacto publicado; FORJA; las investigaciones y los tableros sobre datos abiertos de la vitrina."
     actual: true
   # Vesting fue de agosto de 2023 a enero de 2025: ese es el periodo REAL, el
-  # que leen el PDF, /cv, el chat y los casos. «2024» es la decisión estética
-  # del dueño (revisión post-S8) SOLO para la línea de tiempo de la HOME, para
-  # que su año de transición no repita el 2023 de Pichincha. No es un error:
-  # no se «corrige» ni se vuelve a preguntar.
+  # que leen el PDF, /cv, el chat y los casos. «2024 — 2025» es la decisión
+  # estética del dueño SOLO para la línea de tiempo de la HOME: el año grande
+  # dice 2024 para no repetir el 2023 de Pichincha (revisión post-S8), y desde
+  # el 2026-10-05 la línea dice también cuándo terminó, para que no parezca un
+  # puesto abierto. No es un error: no se «corrige» ni se vuelve a preguntar.
   - periodo: "2023 — 2025"
-    periodoEnLaHome: "2024"
+    periodoEnLaHome: "2024 — 2025"
     rol: "Líder de Estrategia de Datos"
     organizacion: "Vesting — startup de agentes de automatización"
     proyecto: "vesting"

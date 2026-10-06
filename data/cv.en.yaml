@@ -54,26 +54,33 @@ trayectoria:
     actual: true
   # INDEPENDENT PROJECTS (2026-10-04, LinkedIn review): NOT a job
   # —`tipo: proyectos-propios`—, it runs in parallel to the jobs since April
-  # 2023 and the PDF prints it in its own section. Its bullets NAME the pieces
-  # and never count them: the showcase grows every week (guarded by
-  # tests/unit/content.test.ts).
-  - periodo: "April 2023 — today"
+  # 2024 (the owner moved the start from 2023 to 2024 on 2026-10-05) and the
+  # PDF prints it in its own section. The description is the first line of his
+  # LinkedIn, in his words. Its bullets NAME the pieces and never count them:
+  # the showcase grows every week. Guarded by tests/unit/content.test.ts, which
+  # also requires that neither this entry nor the corpus date the start in any
+  # year other than the one in `periodo`.
+  - periodo: "April 2024 — today"
     rol: "Generative AI Engineer"
     organizacion: "Independent projects"
     tipo: "proyectos-propios"
     descripcion: >-
-      Since 2023, I plan and design the apps and agents I now publish.
+      I develop my own engineering and artificial intelligence projects to
+      explore architectures, agents, RAG systems and evaluation mechanisms.
     bullets:
-      - "Two stages: since 2023, the conception and architecture of these apps and agents, which I spent years planning and trying out on different platforms; since 2026, the pieces built with my own pipeline and published in the showcase."
       - "This interactive résumé, with a RAG chat that answers with citations to the site's sources and is evaluated with its own and outside questions before every change is published."
-      - "Pipeline applications: Dash Agent AI, to analyze the context and cost of AI agents, with 693 tests and 97.5% line coverage (August 2026); Hablemos San, sealed and in use by the family it was built for."
-      - "Agents with binary acceptance criteria and human checkpoints: the ISO 42001 Expert, the Power BI Dashboard Builder, the AI-APPs Factory and the research harnesses."
+      - "Probeta DS, a pipeline application that runs Python, pandas and scikit-learn in the browser, without sending the data to any server: it compares algorithms against explicit baselines, evaluates on the test set with no data leakage and delivers a model card with its limits."
+      - "Other pipeline applications: Dash Agent AI, to analyze the context and cost of AI agents, with 693 tests and 97.5% line coverage (August 2026); Hablemos San, sealed and in use by the family it was built for."
+      - "Agents with binary acceptance criteria and human checkpoints: the ISO 42001 Expert, the Power BI Dashboard Builder and the AI-APPs Factory."
+      - "A research pipeline, with the Design Science and Computational Paper harnesses, that fixes the criteria before measuring, measures the literature gap and takes every study through to a manuscript ready to submit."
       - "Own research: ARKHÉ, which in my measurements cut token consumption by 52%, still without a published artifact; FORJA; the research pieces and the open-data dashboards in the showcase."
     actual: true
-  # Real period (PDF, /cv, chat, cases): 2023 — 2025. «2024» only on the HOME
-  # timeline, by the owner's design, so its year transition doesn't repeat 2023.
+  # Real period (PDF, /cv, chat, cases): 2023 — 2025. «2024 — 2025» only on the
+  # HOME timeline, by the owner's design: the big year says 2024 so it doesn't
+  # repeat Pichincha's 2023, and since 2026-10-05 the line also says when it
+  # ended, so it doesn't read as an open position.
   - periodo: "2023 — 2025"
-    periodoEnLaHome: "2024"
+    periodoEnLaHome: "2024 — 2025"
     rol: "Data Strategy Lead"
     organizacion: "Vesting — automation-agents startup"
     proyecto: "vesting"

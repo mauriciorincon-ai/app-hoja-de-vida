@@ -359,8 +359,9 @@ describe("el periodo de cada hito", () => {
   it("la línea de tiempo de la HOME no repite año de transición", () => {
     for (const cv of [es, en]) {
       // Los años de transición son los de los EMPLEOS, que se suceden; el
-      // puesto de proyectos propios corre en paralelo desde 2023 y su año
-      // repite el de Pichincha por construcción (revisión del 2026-10-04).
+      // puesto de proyectos propios corre en paralelo desde abril de 2024 y su
+      // año repite el 2024 que la línea le da a Vesting por construcción
+      // (revisiones del 2026-10-04 y del 2026-10-05).
       const lineas = cv.trayectoria
         .filter((h) => h.tipo === "empleo")
         .map((h) => anioDe(periodoEnLaHome(h)));
