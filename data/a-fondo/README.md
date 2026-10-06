@@ -53,7 +53,7 @@ un documento nuevo toma el siguiente número libre; un código retirado no se re
 | 24 | AF-07 | `transmilenio-cm` | aprobado | 18 | 0 | `/proyectos/transmilenio-cm` |
 | 25 | AF-09 | `vesting` | aprobado | 24 | 0 | `/proyectos/vesting` |
 
-**25 documentos · 542 subsecciones · 149.238 palabras · 0 `[CONFIRMAR]` por resolver · 25 aprobados.**
+**25 documentos · 542 subsecciones · 149.235 palabras · 0 `[CONFIRMAR]` por resolver · 25 aprobados.**
 
 <!-- tabla-de-documentos:fin -->
 

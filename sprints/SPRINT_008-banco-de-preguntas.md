@@ -1,6 +1,6 @@
 # Banco de preguntas — el corpus medido con preguntas de afuera
 
-> **Generado por `pnpm corpus:informe` el 2026-10-04. No se edita a mano.**
+> **Generado por `pnpm corpus:informe` el 2026-10-06. No se edita a mano.**
 > Banco: `tests/fixtures/banco-de-preguntas.es.yaml` — **148 preguntas** de 10 familias, 15 preguntas ajenas y 3 huecos declarados.
 >
 > **HOY** = el índice publicado, tal como está en disco: **1526 fragmentos** (los 24 documentos siguen en `borrador`, así que el chat todavía no ve nada de ellos).
@@ -187,7 +187,7 @@ Preguntas que un reclutador hace y que **el corpus no contesta hoy**, con el doc
 
 **☑️ ¿Qué pasó entre mayo de 2022 y marzo de 2023?**
 
-- top-4: a-fondo-como-aprendo-ibm-y-las-rutas-en-curso~2, a-fondo-origenes-los-tres-saltos~2, a-fondo-como-aprendo-ibm-y-las-rutas-en-curso~1, a-fondo-bi-que-se-adopta-adopcion-medida~2
+- top-4: a-fondo-como-aprendo-ibm-y-las-rutas-en-curso~2, a-fondo-origenes-los-tres-saltos~2, a-fondo-bi-que-se-adopta-adopcion-medida~2, a-fondo-como-aprendo-ibm-y-las-rutas-en-curso~1
 - primer fragmento: «Actualmente desarrollo las rutas AI-103 y AI-300 porque corresponden con la siguiente etapa de mi trayectoria: 21 y 10 módulos a la fecha. El AI-103 profundiza en la construcción de aplicaciones y agentes de inteligencia…»
 
 ### forma-de-trabajar
@@ -412,7 +412,7 @@ Preguntas que un reclutador hace y que **el corpus no contesta hoy**, con el doc
 **✅ ¿Qué tan grande es su experiencia con IA comparada con la de datos?**
 
 - top-4: a-fondo-origenes-cuantos-anos~3, a-fondo-vesting-trazabilidad-y-naturaleza-de-la-informacion~2, a-fondo-gobierno-de-datos-y-de-ia-experiencia-y-formacion~1, a-fondo-vesting-por-que-sali-y-el-puente~1
-- primer fragmento: «Si la pregunta es qué tan grande es mi experiencia con IA comparada con la de datos: los datos ocupan ocho de esos años; la IA aplicada en una empresa empieza en agosto de 2023 en Vesting, con agentes en producción, y si…»
+- primer fragmento: «Si la pregunta es qué tan grande es mi experiencia con IA comparada con la de datos: los datos ocupan ocho de esos años; la IA aplicada empieza en agosto de 2023 en Vesting, con agentes en producción, y sigue hoy en la F…»
 
 **✅ ¿Ha construido prompts o sistemas con instrucciones para un modelo?**
 
@@ -683,16 +683,16 @@ Preguntas que un reclutador hace y que **el corpus no contesta hoy**, con el doc
 **✅ ¿Qué proyectos propios de IA ha construido?**
 
 - top-4: trayectoria-1, a-fondo-agentes-en-produccion-la-segunda-trayectoria~1, a-fondo-apps-pipeline-por-que-en-publico~1, a-fondo-vesting-el-tamano-de-lo-construido~2
-- primer fragmento: «abril 2023 — hoy: Ingeniero de IA Generativa, Proyectos propios · independiente. Desde 2023, planeo y diseño las apps y agentes que hoy publico. Dos etapas: desde 2023, la concepción y la arquitectura de estas apps y age…»
+- primer fragmento: «abril 2024 — hoy: Ingeniero de IA Generativa, Proyectos propios · independiente. Desarrollo proyectos propios de ingeniería e inteligencia artificial para explorar arquitecturas, agentes, sistemas RAG y mecanismos de eva…»
 
 **✅ ¿Desde cuándo trabaja en proyectos propios de IA generativa?**
 
 - top-4: trayectoria-1, a-fondo-apps-pipeline-por-que-en-publico~1, a-fondo-origenes-la-estrategia-bajo-42001~1, a-fondo-agentes-en-produccion-sistemas-de-trabajo~2
-- primer fragmento: «abril 2023 — hoy: Ingeniero de IA Generativa, Proyectos propios · independiente. Desde 2023, planeo y diseño las apps y agentes que hoy publico. Dos etapas: desde 2023, la concepción y la arquitectura de estas apps y age…»
+- primer fragmento: «abril 2024 — hoy: Ingeniero de IA Generativa, Proyectos propios · independiente. Desarrollo proyectos propios de ingeniería e inteligencia artificial para explorar arquitecturas, agentes, sistemas RAG y mecanismos de eva…»
 
 **✅ ¿Cuántas aplicaciones ha publicado?**
 
-- top-4: a-fondo-apps-pipeline-cuando-usar, a-fondo-como-aprendo-evidencia-construido~1, a-fondo-apps-pipeline-las-seis-apps-en-cifras~1, trayectoria-1
+- top-4: a-fondo-apps-pipeline-cuando-usar, a-fondo-como-aprendo-evidencia-construido~1, a-fondo-apps-pipeline-las-seis-apps-en-cifras~1, a-fondo-ceinfes-la-programacion-de-recursos~2
 - primer fragmento: «El pipeline AI-APPs: seis aplicaciones hermanas más CV Viva, 13 agentes, 7 investigaciones y 6 tableros —32 piezas— construidos con dos casas, un agente de fábrica, cuatro jobs de CI, un contrato de ficha desde Zod, cost…»
 
 **✅ ¿Tiene código público o repositorios que se puedan revisar?**

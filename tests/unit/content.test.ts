@@ -62,7 +62,9 @@ describe("content loader (data/*.yaml reales)", () => {
     );
     // Y el mismo TIPO en la misma posición: un empleo en un idioma no puede ser
     // el puesto de proyectos propios en el otro (2026-10-04).
-    expect(en.trayectoria.map((t) => t.tipo)).toEqual(es.trayectoria.map((t) => t.tipo));
+    expect(en.trayectoria.map((t) => t.tipo)).toEqual(
+      es.trayectoria.map((t) => t.tipo),
+    );
     // La puerta a los case studies es la trayectoria: al menos uno enlazado.
     expect(es.trayectoria.some((t) => t.proyecto)).toBe(true);
     // Y la formación ya no se disfraza de hito: ningún periodo sin año.
@@ -338,29 +340,179 @@ describe("showcase data-driven (criterio de aceptación)", () => {
  */
 const NUMERO = String.raw`(?:(?!(?:19|20)\d\d\b)\d{1,4}|uno|una|dos|tres|cuatro|cinco|seis|siete|ocho|nueve|diez|once|doce|trece|catorce|quince|veinte|treinta|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|twenty|thirty)`;
 const PIEZA = String.raw`(?:apps?|aplicaciones|applications|agentes|agents|investigaciones|research|líneas|lines|tableros|dashboards|piezas|pieces)`;
-const TOTAL_DE_PIEZAS = new RegExp(String.raw`\b${NUMERO}\s+(?:[\wáéíóú-]+\s+){0,2}?${PIEZA}\b`, "gi");
+const TOTAL_DE_PIEZAS = new RegExp(
+  String.raw`\b${NUMERO}\s+(?:[\wáéíóú-]+\s+){0,2}?${PIEZA}\b`,
+  "gi",
+);
 
 function totalesDePiezas(textos: string[]): string[] {
-  return textos.flatMap((t) => [...t.matchAll(new RegExp(TOTAL_DE_PIEZAS.source, "gi"))].map((m) => m[0]));
+  return textos.flatMap((t) =>
+    [...t.matchAll(new RegExp(TOTAL_DE_PIEZAS.source, "gi"))].map((m) => m[0]),
+  );
 }
 
 describe("el puesto de proyectos propios no escribe totales de piezas", () => {
   it("ningún bullet ni descripción del puesto propio cuenta piezas, en ES ni en EN", () => {
     for (const locale of ["es", "en"] as const) {
-      const propios = getCv(locale).trayectoria.filter((h) => h.tipo === "proyectos-propios");
-      expect(propios, `${locale}: no hay puesto de proyectos propios que vigilar`).toHaveLength(1);
+      const propios = getCv(locale).trayectoria.filter(
+        (h) => h.tipo === "proyectos-propios",
+      );
+      expect(
+        propios,
+        `${locale}: no hay puesto de proyectos propios que vigilar`,
+      ).toHaveLength(1);
       const textos = propios.flatMap((h) => [h.descripcion, ...h.bullets]);
       const totales = totalesDePiezas(textos);
-      expect(totales, `${locale}: totales escritos a mano, que caducan con la vitrina: ${totales.join(" · ")}`).toEqual([]);
+      expect(
+        totales,
+        `${locale}: totales escritos a mano, que caducan con la vitrina: ${totales.join(" · ")}`,
+      ).toEqual([]);
     }
   });
 
   it("el motor caza los totales y deja pasar años y cifras medidas", () => {
-    expect(totalesDePiezas(["Publiqué 32 piezas en la vitrina."])).toEqual(["32 piezas"]);
-    expect(totalesDePiezas(["seis aplicaciones hermanas y 13 agentes publicados"])).toHaveLength(2);
-    expect(totalesDePiezas(["13 published agents and 7 research lines"])).toHaveLength(2);
+    expect(totalesDePiezas(["Publiqué 32 piezas en la vitrina."])).toEqual([
+      "32 piezas",
+    ]);
     expect(
-      totalesDePiezas(["desde 2023 planeo las apps; desde 2026, las piezas", "693 pruebas y 97,5 % de cobertura"]),
+      totalesDePiezas(["seis aplicaciones hermanas y 13 agentes publicados"]),
+    ).toHaveLength(2);
+    expect(
+      totalesDePiezas(["13 published agents and 7 research lines"]),
+    ).toHaveLength(2);
+    expect(
+      totalesDePiezas([
+        "desde 2024 planeo las apps; desde 2026, las piezas",
+        "693 pruebas y 97,5 % de cobertura",
+      ]),
     ).toEqual([]);
+  });
+});
+
+/**
+ * EL PUESTO PROPIO Y EL CORPUS DICEN EL MISMO AÑO DE INICIO (2026-10-05).
+ *
+ * El dueño movió el inicio de sus proyectos propios de abril de 2023 a abril de
+ * 2024. Ese año no vive en un solo dato: lo dice el `periodo` del hito, y lo
+ * repiten la descripción, las viñetas y las frases del corpus que fechan cuándo
+ * empezó («desde abril de 2024 planeo y diseño…»). Ningún gate los comparaba,
+ * así que un cambio de fecha dejaba el chat contestando el año viejo. Dos
+ * aserciones: (a) el hito no nombra un año anterior a su propio inicio —las
+ * ediciones de una norma, «42001:2023», no son fechas del puesto—; (b) toda
+ * frase de `data/a-fondo/` que fecha el inicio dice el año del `periodo`.
+ */
+const ANIO_ANTERIOR = /(?<![:\d])\b(?:19|20)\d\d\b/g;
+const INICIO_DICHO = new RegExp(
+  [
+    String.raw`\b(?:desde|since)\s+(?:(?:abril|april)\s+(?:de\s+)?)?((?:19|20)\d\d)\b[^.;]{0,80}?\b(?:planeo\s+y\s+diseño|(?:I\s+)?(?:have\s+)?plan(?:ned)?\s+and\s+design(?:ed)?)`,
+    String.raw`\b(?:proyectos\s+propios|independent\s+projects|own\s+(?:generative\s+)?AI\s+projects)\b[^.;]{0,80}?\b(?:desde|since)\s+(?:(?:abril|april)\s+(?:de\s+)?)?((?:19|20)\d\d)\b`,
+  ].join("|"),
+  "gi",
+);
+
+function aniosAnterioresAlInicio(textos: string[], inicio: number): string[] {
+  return textos.flatMap((t) =>
+    (t.match(ANIO_ANTERIOR) ?? []).filter((a) => Number(a) < inicio),
+  );
+}
+
+function iniciosDichos(
+  texto: string,
+): { anio: string; linea: number; frase: string }[] {
+  const plano = texto.replace(/\n/g, " ");
+  return [...plano.matchAll(new RegExp(INICIO_DICHO.source, "gi"))].map(
+    (m) => ({
+      anio: m[1] ?? m[2],
+      linea: texto.slice(0, m.index).split("\n").length,
+      frase: m[0],
+    }),
+  );
+}
+
+describe("el puesto propio y el corpus dicen el mismo año de inicio", () => {
+  const inicioDe = (locale: "es" | "en") => {
+    const propio = getCv(locale).trayectoria.find(
+      (h) => h.tipo === "proyectos-propios",
+    );
+    expect(
+      propio,
+      `${locale}: no hay puesto de proyectos propios`,
+    ).toBeDefined();
+    return Number(/\d{4}/.exec(propio!.periodo)?.[0]);
+  };
+
+  it("el puesto propio no nombra un año anterior a su inicio, en ES ni en EN", () => {
+    for (const locale of ["es", "en"] as const) {
+      const propio = getCv(locale).trayectoria.find(
+        (h) => h.tipo === "proyectos-propios",
+      )!;
+      const viejos = aniosAnterioresAlInicio(
+        [propio.descripcion, ...propio.bullets],
+        inicioDe(locale),
+      );
+      expect(
+        viejos,
+        `${locale}: el puesto empieza en ${propio.periodo} y su texto dice ${viejos.join(" · ")}`,
+      ).toEqual([]);
+    }
+  });
+
+  it("toda frase del corpus que fecha el inicio dice el año del periodo", () => {
+    const distintos: string[] = [];
+    for (const archivo of readdirSync(DIR_A_FONDO).filter((f) =>
+      /\.(es|en)\.md$/.test(f),
+    )) {
+      const locale = archivo.endsWith(".es.md") ? "es" : "en";
+      const inicio = String(inicioDe(locale));
+      for (const d of iniciosDichos(
+        readFileSync(join(DIR_A_FONDO, archivo), "utf8"),
+      )) {
+        if (d.anio !== inicio)
+          distintos.push(
+            `data/a-fondo/${archivo}:${d.linea}: «${d.frase}» — el puesto empieza en ${inicio}`,
+          );
+      }
+    }
+    expect(distintos.join("\n")).toBe("");
+  });
+
+  it("el motor reconoce la fecha de inicio y deja pasar las demás", () => {
+    expect(
+      iniciosDichos(
+        "Desde abril de 2023, en paralelo a mis empleos, planeo y diseño estas apps.",
+      ).map((d) => d.anio),
+    ).toEqual(["2023"]);
+    expect(
+      iniciosDichos(
+        "since April 2024 I have planned and designed the apps",
+      ).map((d) => d.anio),
+    ).toEqual(["2024"]);
+    expect(
+      iniciosDichos("Trabaja en proyectos propios desde 2023.").map(
+        (d) => d.anio,
+      ),
+    ).toEqual(["2023"]);
+    // Vesting en 2023 no es el inicio del puesto propio; Dash Agent AI en 2026 tampoco.
+    expect(
+      iniciosDichos(
+        "la IA aplicada empieza en agosto de 2023 en Vesting; por mi cuenta, desde abril de 2024 planeo y diseño",
+      ).map((d) => d.anio),
+    ).toEqual(["2024"]);
+    expect(
+      iniciosDichos("Dash Agent AI se concibió y diseñó en 2026."),
+    ).toEqual([]);
+    expect(
+      iniciosDichos("una línea\nDesde abril de 2023,\nplaneo y diseño")[0]
+        ?.linea,
+    ).toBe(2);
+    expect(
+      aniosAnterioresAlInicio(
+        [
+          "desde 2023 la concepción; desde 2026 las piezas",
+          "bajo ISO/IEC 42001:2023",
+        ],
+        2024,
+      ),
+    ).toEqual(["2023"]);
   });
 });

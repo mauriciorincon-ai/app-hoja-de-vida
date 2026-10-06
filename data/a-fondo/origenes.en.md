@@ -1025,5 +1025,5 @@ from June 2022 to February 2023, and I devoted it to studying and getting certif
 The exact periods, month by month, are in the table above.
 
 If the question is how big my experience with AI is compared with my experience with data: data
-takes up eight of those years; applied AI in a company starts in August 2023 at Vesting, with agents in production, and continues today at Fundación CTIC with experimentation and prototypes; on my own, since April 2023 I have planned and designed the apps and agents I now publish. Three of the more than ten years, and the three most recent. The three credentials earned —Microsoft's DP-600 and two from IBM— and the two in
+takes up eight of those years; applied AI starts in August 2023 at Vesting, with agents in production, and continues today at Fundación CTIC with experimentation and prototypes; on my own, since April 2024 I have planned and designed the apps and agents I now publish. Three of the more than ten years, and the three most recent. The three credentials earned —Microsoft's DP-600 and two from IBM— and the two in
 progress —AI-103 and AI-300, since July 2026— follow that same order: first data, then AI.
