@@ -140,6 +140,19 @@ Los únicos «2023» que aparecen en esos fragmentos son la edición de la norma
 - **«Sin que ningún dato salga del equipo» en Dash Agent AI:** fuera, por Q4. El sitio conserva la cifra medida.
 - **Las filas de historial** del manual y de la guía que dicen «abril de 2023»: cuentan lo que pasó entonces.
 
+## Rojo de calendario en la CI
+
+En la primera corrida del PR #64, `quality` salió rojo en `pnpm audit --audit-level high`, no en los
+tests. Apareció un aviso alto nuevo, **source-map-js <1.2.2** (GHSA-68fv-2mgg-jv7q). Su parche, la 1.2.2,
+salió el 2026-09-30. Llega por la cadena de CSS del build: `next → postcss` y `@tailwindcss/postcss`.
+
+- **La solución:** tiene parche, así que va como override `source-map-js: ^1.2.2` en `pnpm-workspace.yaml`, en la misma mayor, igual que los demás. De paso, `fast-uri` subió de `^3.1.6` a `^3.1.8` por un aviso moderado, que no frenaba la CI. La cabecera del archivo ya no nombra el CLI de shadcn, que salió en el PR #61.
+- **Regla 17:** frente a main, el lockfile cambió exactamente dos paquetes, fast-uri 3.1.7 → 3.1.8 y source-map-js 1.2.1 → 1.2.2. Nada bajó de versión.
+- **Verificado en local:**
+  - `pnpm audit` da «No known vulnerabilities found»;
+  - el CSS compilado sale idéntico byte a byte, con el mismo hash antes y después;
+  - peers, typecheck, lint y los 1381 tests, en verde.
+
 ## Verificación
 
 | Qué                            | Resultado                                                                                                                                                                                                                                                                   |
