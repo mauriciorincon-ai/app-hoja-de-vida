@@ -11,8 +11,9 @@ import { FichaTecnica } from "@/components/vitrina/ficha-tecnica";
 import { ListaDeEspera } from "@/components/vitrina/lista-de-espera";
 import { Link } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
-import { getCv } from "@/lib/content";
+import { getCategoriasApps, getCv } from "@/lib/content";
 import { SITE_URL } from "@/lib/site";
+import { nombreVisible } from "@/lib/vitrina/categorias-apps";
 import {
   getFichaTecnica,
   getFichasTecnicas,
@@ -50,10 +51,16 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const ft = getFichaTecnica(app);
   if (!ft) return {};
   const t = await getTranslations({ locale, namespace: "fichaTecnica" });
+  const nombre = nombreVisible(
+    getCategoriasApps(),
+    app,
+    ft.pieza.nombre,
+    locale as Locale,
+  );
 
   return {
     metadataBase: new URL(SITE_URL),
-    title: `${ft.pieza.nombre} — ${t("eyebrow")} — Henry Rincón`,
+    title: `${nombre} — ${t("eyebrow")} — Henry Rincón`,
     description: ft.promesa.tagline,
     alternates: {
       languages: {
@@ -70,11 +77,20 @@ export default async function FichaTecnicaAppPage({ params }: Params) {
   if (!hasLocale(routing.locales, locale)) notFound();
   setRequestLocale(locale);
 
-  const ft = getFichaTecnica(app);
-  if (!ft) notFound();
+  const ft0 = getFichaTecnica(app);
+  if (!ft0) notFound();
 
   const l = locale as Locale;
   const cv = getCv(l);
+  // Nombre oficial (alias, ADR-028): la ficha, el formulario y las vecinas lo
+  // dicen igual; el export y el manifest no se tocan.
+  const categorias = getCategoriasApps();
+  const nombreDe = (slug: string, delExport: string) =>
+    nombreVisible(categorias, slug, delExport, l);
+  const ft = {
+    ...ft0,
+    pieza: { ...ft0.pieza, nombre: nombreDe(app, ft0.pieza.nombre) },
+  };
   const t = await getTranslations("vitrina");
   // El roadmap votable de ESTA app (2026-09-13): cierre de plan que entrega la
   // planeadora en su complemento. Sin features, la sección no se monta.
@@ -140,7 +156,7 @@ export default async function FichaTecnicaAppPage({ params }: Params) {
                       ← {t("appAnterior")}
                     </span>
                     <span className="mt-1 font-display text-[1.05rem] font-medium text-ink-0">
-                      {anterior.pieza.nombre}
+                      {nombreDe(anterior.pieza.slug, anterior.pieza.nombre)}
                     </span>
                   </Link>
                 ) : (
@@ -155,7 +171,7 @@ export default async function FichaTecnicaAppPage({ params }: Params) {
                       {t("appSiguiente")} →
                     </span>
                     <span className="mt-1 font-display text-[1.05rem] font-medium text-ink-0">
-                      {siguiente.pieza.nombre}
+                      {nombreDe(siguiente.pieza.slug, siguiente.pieza.nombre)}
                     </span>
                   </Link>
                 )}

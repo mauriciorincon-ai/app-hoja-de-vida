@@ -60,7 +60,14 @@ const TITULO_SECCION =
 const RESUMEN =
   "flex min-h-11 cursor-pointer list-none items-center gap-2 font-mono text-[11px] tracking-[0.08em] text-ink-2 uppercase marker:content-none";
 
-export async function FichaApp({ ficha }: { ficha: FichaVitrina }) {
+export async function FichaApp({
+  ficha,
+  nombre,
+}: {
+  ficha: FichaVitrina;
+  /** Nombre oficial (alias de `data/categorias-apps.yaml`); sin él, el del export. */
+  nombre?: string;
+}) {
   const t = await getTranslations("vitrina");
   const { ancla, export: exp } = ficha;
   const { promesa, funcionalidades, metricas, privacidad, enlaces, stack } =
@@ -99,7 +106,7 @@ export async function FichaApp({ ficha }: { ficha: FichaVitrina }) {
 
         <div>
           <h2 className="font-display text-[clamp(1.6rem,3.6vw,2.1rem)] leading-tight font-medium tracking-[-0.02em] text-ink-0">
-            {exp.app.nombre}
+            {nombre ?? exp.app.nombre}
           </h2>
           <p className="mt-2 max-w-[46ch] font-display text-[clamp(1.05rem,2.2vw,1.3rem)] leading-snug text-ink-1">
             {promesa.tagline}
@@ -139,7 +146,7 @@ export async function FichaApp({ ficha }: { ficha: FichaVitrina }) {
       </header>
 
       {/* ── Las cifras: cada una con su procedencia ──────────────────────── */}
-      <section aria-label={`${t("metricas")} — ${exp.app.nombre}`}>
+      <section aria-label={`${t("metricas")} — ${nombre ?? exp.app.nombre}`}>
         <p className={`mb-3 ${ROTULO}`}>{t("metricas")}</p>
         <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {metricas.map((m) => (

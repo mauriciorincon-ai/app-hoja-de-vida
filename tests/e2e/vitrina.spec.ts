@@ -47,6 +47,24 @@ const EXPORTS: Export[] = readdirSync("content/vitrina")
   );
 if (EXPORTS.length === 0) throw new Error("content/vitrina sin exports");
 
+/**
+ * Las dos categorías de las apps y sus nombres oficiales (Sprint 009), leídas
+ * del mismo YAML que renderiza la página: una app nueva entra al e2e sola.
+ */
+type EntradaCategoria = { slug: string; nombre: { es: string; en: string } };
+const CATEGORIAS = parse(
+  readFileSync("data/categorias-apps.yaml", "utf8"),
+) as Record<"profesionales" | "personales", EntradaCategoria[]>;
+const nombreVisible = (exp: Export, l: "es" | "en" = "es") =>
+  [...CATEGORIAS.profesionales, ...CATEGORIAS.personales].find(
+    (e) => e.slug === exp.app.slug,
+  )?.nombre[l] ?? exp.app.nombre;
+/** Los slugs de una categoría que SÍ tienen export, en el orden del YAML. */
+const enCategoria = (c: "profesionales" | "personales") =>
+  CATEGORIAS[c]
+    .map((e) => e.slug)
+    .filter((s) => EXPORTS.some((x) => x.app.slug === s));
+
 /** Los frentes del portal, de la misma fuente que la página (ADR-015). */
 type Frente = {
   id: string;
@@ -141,7 +159,7 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
     const primera = MAS_LARGA;
     await page
       .locator(`[data-muestra-slug="${primera.app.slug}"]`)
-      .getByRole("link", { name: primera.app.nombre })
+      .getByRole("link", { name: nombreVisible(primera) })
       .click();
 
     // Primero la FICHA TÉCNICA (ADR-016) …
@@ -162,6 +180,45 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
     ).toBeVisible();
   });
 
+  test("las apps van en dos bloques —profesionales primero— en el orden del YAML, con su nombre oficial", async ({
+    page,
+  }) => {
+    for (const l of ["es", "en"] as const) {
+      await page.goto(`/${l}/vitrina/apps`);
+      const bloques = page.locator("section[data-categoria]");
+      await expect(bloques).toHaveCount(2);
+      // Profesionales ANTES que personales, y cada una con su h2.
+      expect(
+        await bloques.evaluateAll((els) =>
+          els.map((e) => e.getAttribute("data-categoria")),
+        ),
+      ).toEqual(["profesionales", "personales"]);
+      await expect(
+        page.locator('[data-categoria="profesionales"] h2').first(),
+      ).toHaveText(l === "es" ? "Profesionales" : "Professional");
+      await expect(
+        page.locator('[data-categoria="personales"] h2').first(),
+      ).toHaveText(l === "es" ? "Personales" : "Personal");
+      // Pertenencia y orden de las muestras dentro de cada bloque.
+      for (const c of ["profesionales", "personales"] as const) {
+        const slugs = await page
+          .locator(`[data-categoria="${c}"] [data-muestra-slug]`)
+          .evaluateAll((els) =>
+            els.map((e) => e.getAttribute("data-muestra-slug")),
+          );
+        expect(slugs, `${l}/${c}`).toEqual(enCategoria(c));
+      }
+      // Y la muestra dice el nombre OFICIAL, no el del export.
+      for (const exp of EXPORTS) {
+        await expect(
+          page
+            .locator(`[data-muestra-slug="${exp.app.slug}"]`)
+            .getByRole("link", { name: nombreVisible(exp, l), exact: true }),
+        ).toBeVisible();
+      }
+    }
+  });
+
   test("cada app tiene su ruta propia y solo su ficha vive en ella", async ({
     page,
   }) => {
@@ -172,7 +229,7 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
       await expect(fichas).toHaveCount(1);
       await expect(fichas).toHaveAttribute("data-app-slug", exp.app.slug);
       await expect(
-        page.getByRole("heading", { level: 2, name: exp.app.nombre }),
+        page.getByRole("heading", { level: 2, name: nombreVisible(exp) }),
       ).toBeVisible();
     }
   });

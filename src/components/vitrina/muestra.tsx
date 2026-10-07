@@ -18,9 +18,19 @@ import { Maqueta } from "./maquetas";
  * La tira va aquí porque es lo que hace reconocible a la app de un vistazo, y
  * es dibujo de esta casa: seis muestras que se ven de la misma familia.
  *
+ * Su nombre es un `h3`: desde el Sprint 009 las muestras viven dentro de un bloque
+ * de categoría (Profesionales · Personales) que lleva el `h2`.
+ *
  * Cero enlaces (regla dura 16): el único destino es una ruta de este repo.
  */
-export async function MuestraApp({ ficha }: { ficha: FichaVitrina }) {
+export async function MuestraApp({
+  ficha,
+  nombre,
+}: {
+  ficha: FichaVitrina;
+  /** Nombre oficial (alias de `data/categorias-apps.yaml`); sin él, el del export. */
+  nombre?: string;
+}) {
   const t = await getTranslations("vitrina");
   const { ancla, export: exp } = ficha;
 
@@ -46,7 +56,7 @@ export async function MuestraApp({ ficha }: { ficha: FichaVitrina }) {
         </div>
 
         <div>
-          <h2 className="font-display text-[1.45rem] leading-tight font-medium tracking-[-0.02em] text-ink-0">
+          <h3 className="font-display text-[1.45rem] leading-tight font-medium tracking-[-0.02em] text-ink-0">
             {/* El enlace estira su área de clic a toda la tarjeta, pero su
                 nombre accesible sigue siendo el de la app — una sola parada de
                 tabulador por muestra, y se lee «Habla», no «leer más». */}
@@ -54,9 +64,9 @@ export async function MuestraApp({ ficha }: { ficha: FichaVitrina }) {
               href={`/vitrina/apps/${ancla.slug}`}
               className="after:absolute after:inset-0 after:rounded-[14px] after:content-['']"
             >
-              {exp.app.nombre}
+              {nombre ?? exp.app.nombre}
             </Link>
-          </h2>
+          </h3>
           <p className="mt-1.5 font-display text-[1.02rem] leading-snug text-ink-1">
             {exp.promesa.tagline}
           </p>

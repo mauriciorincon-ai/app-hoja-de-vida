@@ -1,0 +1,42 @@
+# Las dos categorías de las apps de la vitrina (Sprint 009, 2026-10-06).
+#
+# /vitrina/apps las muestra en dos bloques: PROFESIONALES primero (encabezado
+# mayor) y PERSONALES después. Cada app se clasifica aquí por su `slug`, que es
+# el de su `content/vitrina/<slug>.brochure-export.json`.
+#
+# Reglas (las hace cumplir src/lib/vitrina/categorias-apps.ts y su test):
+#  · El ORDEN de cada lista es el orden en la página.
+#  · Un export SIN categoría rompe el build y nombra el slug: una app nueva se
+#    clasifica el mismo día que llega, o no se publica.
+#  · Un slug declarado SIN export se ignora: aparece solo el día que llega su
+#    export (AngelGhost, planlang, Big-D y HackGuard hoy no están en CV Viva).
+#  · Un slug no puede estar en las dos listas.
+#
+# `nombre` es el NOMBRE OFICIAL con el que CV Viva muestra la app (alias): el
+# export no se edita (regla de content/), así que el alias vive solo aquí. Se
+# ve en la muestra, en la ficha técnica, en el detalle y en sus vecinas; el chat
+# y el manifest siguen con el nombre del export (ADR-028).
+
+profesionales:
+  - slug: ds
+    nombre: { es: "Probeta DS", en: "Probeta DS" }
+  - slug: dash-agent-ai
+    nombre: { es: "Dash Agent", en: "Dash Agent" }
+  - slug: anonimizador
+    nombre: { es: "Anonimizador Velo", en: "Velo Anonymizer" }
+  - slug: copiloto-consultor
+    nombre: { es: "AngelGhost", en: "AngelGhost" }
+  - slug: planlang
+    nombre: { es: "planlang", en: "planlang" }
+  - slug: big-d
+    nombre: { es: "Big-D", en: "Big-D" }
+  - slug: hackguard
+    nombre: { es: "HackGuard", en: "HackGuard" }
+
+personales:
+  - slug: habla
+    nombre: { es: "Habla San", en: "Habla San" }
+  - slug: inmobiliaria
+    nombre: { es: "Innmobiliaria", en: "Innmobiliaria" }
+  - slug: nutri-kids
+    nombre: { es: "Nutrikids", en: "Nutrikids" }
