@@ -110,6 +110,26 @@ export function repartirApps<F extends ConSlug>(
 }
 
 /**
+ * Cualquier lista de apps, en el ORDEN DEL ESCAPARATE: profesionales primero y
+ * después personales, cada una en el orden del YAML. Es lo que ordena a las
+ * vecinas «App anterior / App siguiente» y el selector de la lista de espera:
+ * si siguieran el orden del loader (selladas primero, luego por fecha), «siguiente»
+ * dejaría de significar lo que el visitante acaba de ver en `/vitrina/apps`.
+ * Falla igual que `repartirApps` si alguna app no tiene categoría.
+ */
+export function ordenDeEscaparate<T>(
+  items: readonly T[],
+  slugDe: (item: T) => string,
+  categorias: CategoriasApps,
+): T[] {
+  const reparto = repartirApps(
+    items.map((item) => ({ ancla: { slug: slugDe(item) }, item })),
+    categorias,
+  );
+  return CATEGORIAS_APPS.flatMap((c) => reparto[c].map((f) => f.item));
+}
+
+/**
  * El nombre con el que CV Viva muestra la app (alias, ADR-028): el declarado
  * en el YAML o, si la app no está ahí, el que trae su export.
  */

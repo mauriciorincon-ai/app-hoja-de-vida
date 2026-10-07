@@ -234,6 +234,41 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
     }
   });
 
+  test("las vecinas «App anterior / App siguiente» siguen el orden del escaparate, en la ficha y en el detalle", async ({
+    page,
+  }) => {
+    // El orden que el visitante acaba de ver: profesionales y después personales.
+    await page.goto("/es/vitrina/apps");
+    const orden = await page
+      .locator("[data-muestra-slug]")
+      .evaluateAll((els) =>
+        els.map((e) => e.getAttribute("data-muestra-slug") as string),
+      );
+    expect(orden).toHaveLength(EXPORTS.length);
+
+    for (const sufijo of ["", "/detalle"]) {
+      for (const [i, slug] of orden.entries()) {
+        await page.goto(`/es/vitrina/apps/${slug}${sufijo}`);
+        const anterior = page.getByRole("link", { name: /App anterior/ });
+        const siguiente = page.getByRole("link", { name: /App siguiente/ });
+        const ruta = (v: string) => new RegExp(`/vitrina/apps/${v}${sufijo}$`);
+        if (i === 0) await expect(anterior, `${slug}${sufijo}`).toHaveCount(0);
+        else
+          await expect(anterior, `${slug}${sufijo}`).toHaveAttribute(
+            "href",
+            ruta(orden[i - 1]),
+          );
+        if (i === orden.length - 1)
+          await expect(siguiente, `${slug}${sufijo}`).toHaveCount(0);
+        else
+          await expect(siguiente, `${slug}${sufijo}`).toHaveAttribute(
+            "href",
+            ruta(orden[i + 1]),
+          );
+      }
+    }
+  });
+
   test("se navega entre apps vecinas sin volver al índice", async ({
     page,
   }) => {

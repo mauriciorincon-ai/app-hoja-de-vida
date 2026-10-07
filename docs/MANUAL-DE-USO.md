@@ -509,6 +509,31 @@ el mensaje te llega al correo.
 - **Lo que se muestra es la versión anclada** del export (con su fecha, a la vista al pie de cada
   ficha), no el estado en tiempo real de la app.
 
+#### Categorías y carrusel · desde Sprint 009
+
+- **Dos categorías de apps.** `/es/vitrina/apps` muestra las apps en dos bloques: **Profesionales**
+  primero (título más grande) y **Personales** después. La pertenencia no vive en el código ni en el
+  export: vive en `data/categorias-apps.yaml`, una lista por categoría con el `slug` de cada app
+  (el de su `content/vitrina/<slug>.brochure-export.json`) y su **nombre oficial** en español y en
+  inglés. **El orden de la lista es el orden de la página**, y también el de los botones «App
+  anterior / App siguiente» de cada ficha y el del selector de la lista de espera.
+- **Cómo clasificar una app nueva.** El día que llega su export, se agrega su `slug` a una de las dos
+  listas del YAML. **Si no lo haces, la publicación falla** y el error dice el slug que falta: una
+  app nueva se clasifica el mismo día, o no se publica. Una app que ya está en el YAML pero todavía
+  no tiene export (hoy AngelGhost, planlang, Big-D y HackGuard) **se ignora** y aparece sola el día
+  que llegue su export. Un `slug` no puede estar en las dos listas.
+- **El nombre oficial (alias).** Es el nombre con el que CV Viva muestra la app: en la muestra, en la
+  ficha técnica, en el detalle, en las apps vecinas, en el título del formulario de propuestas y en
+  el selector de la lista de espera. **El export no se toca**: el alias vive solo aquí (ADR-028).
+  No llega al chat, a los correos ni al texto de tu hoja de vida, que siguen con el nombre del
+  export; por eso hoy el sitio dice «Habla San» donde el chat dice «Hablemos San». Cambiar un
+  nombre es cambiar una línea del YAML.
+- **El carrusel de «Cómo se ve».** La galería de cada ficha de tablero (de 1 a 12 capturas, la que
+  declara `galeria` en su ficha) es un **carrusel horizontal**: se desliza con el dedo, con los
+  botones ← y → o con el teclado, y un indicador dice «1 de 6». Nada se mueve solo. Con **una sola
+  captura** no hay botones ni indicador. No hay que hacer nada para que una ficha nueva lo tenga:
+  la galería de la ficha se convierte sola en carrusel.
+
 ### El menú del encabezado · desde Sprint 001 · reorganizado 2026-09-05
 
 - **Qué hace:** el menú tiene **tres destinos**: **Hoja de vida** (que despliega Trayectoria,
@@ -1010,3 +1035,4 @@ chat hoy y cuáles traería con la base aprobada. Ese informe **se genera, no se
 | ISO/IEC 42001 en estructuración 2026-09-27 | **El perfil ya no dice que implementaste ISO/IEC 42001**: dice «la estrategia y la estructuración del sistema de gestión bajo ISO/IEC 42001», que es lo que el corpus sostiene (en estructuración, sin declararlo implementado hasta poder demostrarlo). El documento del chat decía lo mismo con «formalicé implementando» y también cambió. **El gate de CTIC ahora veta esa afirmación** en español e inglés; el día que el sistema esté implementado y pueda demostrarse, se retira la lista de `scripts/ctic-aproximadas.mjs` con esa decisión. Detalle en `sprints/REV-2026-09-27-iso-42001-estructuracion-bitacora.md`. |
 | LinkedIn definitivo 2026-10-04 | **El sitio dice los mismos hechos que tu LinkedIn.** En la Fundación CTIC hay **una sola cifra: más de 25 productos analíticos en Power BI** (la HOME dice «25+»; se fueron «más de 40», «la mitad son tableros» y «más de 20 tableros»), y **lideras la estructuración** de la estrategia de IA y participas en la del sistema de gestión, nunca «lidero la estrategia». **Puesto nuevo** «Ingeniero de IA Generativa · Proyectos propios», desde abril de 2023, segundo en la trayectoria, con `tipo: proyectos-propios`; en el PDF va en su propia sección. **Inglopres empieza en mayo de 2015** (Analista de Procesos, luego Ingeniero de Procesos): «más de diez años», «nueve cargos en ocho organizaciones», unos 121 meses, y la HOME calcula 11. Consorcio C&M: −30 %, 20+ usuarios internos y «Analista de Operaciones»; Cafam gana las más de 10 horas semanales con VBA; Inglopres, los planes de mejora con análisis estadístico. Eyebrow «AI & Analytics Engineer · Ingeniero Industrial» y perfil nuevo. Pichincha y Oracle WMS siguen como estaban: lo que cambias es LinkedIn. **El gate de CTIC aprendió tres cosas** —la cifra retirada, el liderazgo sin estructuración y un número separado de su sustantivo— y un gate nuevo impide escribir totales de piezas en el puesto propio. El PDF sigue en dos páginas con un ajuste mínimo de tipografía (viñetas 8,8 y 7 de aire entre hitos). Detalle en `sprints/REV-2026-10-04-linkedin-definitivo-bitacora.md`. |
 | proyectos propios desde 2024 2026-10-05 | **Tu puesto de proyectos propios empieza en abril de 2024**, no en 2023, en la trayectoria, el PDF y el chat (las frases de `apps-pipeline` y `origenes` que fechan el inicio dicen 2024). Su **descripción es tu primera línea de LinkedIn** («Desarrollo proyectos propios de ingeniería e inteligencia artificial…»); salió la viñeta de «las dos etapas» (el hecho sigue en `apps-pipeline`, donde el chat lo busca) y **entraron Probeta DS y tu pipeline de investigación**, sin totales. Dash Agent AI conserva sus 693 pruebas y su 97,5 %. **Vesting dice «2024 — 2025»** en la línea de la HOME, para que no parezca un puesto abierto. **Gate nuevo**: si el `periodo` del puesto propio y una frase del puesto o del corpus dicen años de inicio distintos, `pnpm test` falla y nombra el archivo y la línea. El PDF sigue en dos páginas. Detalle en `sprints/REV-2026-10-05-proyectos-propios-2024-bitacora.md`. |
+| Sprint 009 | **Las apps, en dos categorías, y el carrusel de los tableros.** `/vitrina/apps` muestra las apps en dos bloques —**Profesionales** primero y **Personales** después— con los nombres oficiales que tú elegiste (el alias vive solo en CV Viva; los exports no se tocan, ADR-028), y «Cómo se ve» de cada tablero es un **carrusel horizontal** nativo (botones, indicador «n de N», teclado, sin movimiento automático). Una app nueva sin categoría no pasa el build. Sección «Categorías y carrusel» arriba; detalle en `sprints/SPRINT_009-cierre.md`. |

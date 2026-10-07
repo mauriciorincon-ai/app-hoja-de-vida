@@ -13,7 +13,10 @@ import { Link } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
 import { getCategoriasApps, getCv } from "@/lib/content";
 import { SITE_URL } from "@/lib/site";
-import { nombreVisible } from "@/lib/vitrina/categorias-apps";
+import {
+  nombreVisible,
+  ordenDeEscaparate,
+} from "@/lib/vitrina/categorias-apps";
 import {
   getFichaTecnica,
   getFichasTecnicas,
@@ -96,8 +99,13 @@ export default async function FichaTecnicaAppPage({ params }: Params) {
   // planeadora en su complemento. Sin features, la sección no se monta.
   const roadmap = roadmapDe(app);
 
-  // Vecinas en el orden del escaparate.
-  const todas = getFichasTecnicas();
+  // Vecinas en el orden del escaparate (profesionales, personales): el mismo
+  // que el visitante acaba de ver en /vitrina/apps, no el del loader.
+  const todas = ordenDeEscaparate(
+    getFichasTecnicas(),
+    (f) => f.pieza.slug,
+    categorias,
+  );
   const i = todas.findIndex((f) => f.pieza.slug === app);
   const anterior = todas[i - 1];
   const siguiente = todas[i + 1];

@@ -5,6 +5,7 @@ import { getCategoriasApps } from "@/lib/content";
 import {
   CATEGORIAS_APPS,
   nombreVisible,
+  ordenDeEscaparate,
   parseCategoriasApps,
   repartirApps,
 } from "@/lib/vitrina/categorias-apps";
@@ -53,23 +54,34 @@ describe("el YAML real de categorías", () => {
     expect(repartidas).toHaveLength(enDisco.length);
   });
 
-  it("las seis apps de hoy van como pidió el dueño: tres profesionales y tres personales", () => {
+  // Estos dos tests se calculan del YAML y de los exports, no de la lista de
+  // hoy: el día que llegue el export de AngelGhost, planlang, Big-D o HackGuard,
+  // esas apps «aparecen solas» (promesa del manual y del ADR-028) y la CI no
+  // debe ponerse roja por eso. Un gate que se activa en el camino feliz del
+  // diseño es un gate mal puesto (regla 14).
+  it("cada app va en la categoría que el dueño declaró, en el orden del YAML", () => {
     const reparto = repartirApps(fichas, categorias);
-    const slugs = (c: "profesionales" | "personales") =>
-      reparto[c].map((f) => f.ancla.slug);
-    expect(slugs("profesionales")).toEqual([
-      "ds",
-      "dash-agent-ai",
-      "anonimizador",
-    ]);
-    expect(slugs("personales")).toEqual([
-      "habla",
-      "inmobiliaria",
-      "nutri-kids",
-    ]);
+    for (const c of CATEGORIAS_APPS) {
+      const esperado = categorias[c]
+        .map((e) => e.slug)
+        .filter((s) => fichas.some((f) => f.ancla.slug === s));
+      expect(
+        reparto[c].map((f) => f.ancla.slug),
+        c,
+      ).toEqual(esperado);
+    }
   });
 
-  it("AngelGhost se declara UNA sola vez, y las apps sin export (hoy) se ignoran", () => {
+  it("la clasificación que el dueño pidió se conserva: Probeta DS, Dash Agent y Anonimizador Velo son profesionales; Habla San, Innmobiliaria y Nutrikids, personales", () => {
+    const de = (c: "profesionales" | "personales") =>
+      categorias[c].map((e) => e.slug);
+    for (const s of ["ds", "dash-agent-ai", "anonimizador"])
+      expect(de("profesionales"), s).toContain(s);
+    for (const s of ["habla", "inmobiliaria", "nutri-kids"])
+      expect(de("personales"), s).toContain(s);
+  });
+
+  it("AngelGhost se declara UNA sola vez, y las apps declaradas sin export se ignoran", () => {
     const todos = [...categorias.profesionales, ...categorias.personales].map(
       (e) => e.slug,
     );
@@ -79,17 +91,27 @@ describe("el YAML real de categorías", () => {
     const vistos = CATEGORIAS_APPS.flatMap((c) =>
       reparto[c].map((f) => f.ancla.slug),
     );
-    for (const sinExport of [
-      "copiloto-consultor",
-      "planlang",
-      "big-d",
-      "hackguard",
-    ]) {
-      expect(todos, `${sinExport} está declarada`).toContain(sinExport);
-      expect(vistos, `${sinExport} no tiene export: no aparece`).not.toContain(
-        sinExport,
-      );
+    const sinExport = todos.filter(
+      (s) => !fichas.some((f) => f.ancla.slug === s),
+    );
+    for (const slug of sinExport) {
+      expect(vistos, `${slug} no tiene export: no aparece`).not.toContain(slug);
     }
+    // Y toda app que SÍ tiene export aparece una sola vez.
+    expect(new Set(vistos).size).toBe(vistos.length);
+    expect(vistos.sort()).toEqual(fichas.map((f) => f.ancla.slug).sort());
+  });
+
+  it("el orden del escaparate es profesionales y después personales: el de las vecinas", () => {
+    const reparto = repartirApps(fichas, categorias);
+    const esperado = [...reparto.profesionales, ...reparto.personales].map(
+      (f) => f.ancla.slug,
+    );
+    expect(
+      ordenDeEscaparate(fichas, (f) => f.ancla.slug, categorias).map(
+        (f) => f.ancla.slug,
+      ),
+    ).toEqual(esperado);
   });
 
   it("los nombres oficiales salen del YAML, en español y en inglés", () => {
@@ -167,6 +189,25 @@ describe("el motor (con fixtures: aquí viven los rojos)", () => {
       personales: [],
     };
     expect(() => parseCategoriasApps(mal, "fixture")).toThrow(/slug/);
+  });
+
+  it("ordenDeEscaparate reordena cualquier lista: profesionales primero, cada una en el orden del YAML", () => {
+    const desordenadas = ["habla", "velo", "ds"].map(ficha);
+    expect(
+      ordenDeEscaparate(desordenadas, (f) => f.ancla.slug, categorias).map(
+        (f) => f.ancla.slug,
+      ),
+    ).toEqual(["ds", "velo", "habla"]);
+  });
+
+  it("ROJO: ordenDeEscaparate también falla si una app no tiene categoría", () => {
+    expect(() =>
+      ordenDeEscaparate(
+        [ficha("ds"), ficha("zzz-nueva")],
+        (f) => f.ancla.slug,
+        categorias,
+      ),
+    ).toThrow(/zzz-nueva/);
   });
 
   it("una app que no está en el YAML conserva el nombre de su export", () => {
