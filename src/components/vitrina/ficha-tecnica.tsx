@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
@@ -6,6 +5,7 @@ import type { FichaTecnica as Datos } from "@/lib/vitrina/ficha-tecnica/schema";
 import { COLOR_ESTADO, intlLocale } from "@/lib/vitrina/estilos";
 import { numerarSecciones } from "@/lib/vitrina/ficha-tecnica/secciones";
 import type { FuenteMetrica } from "@/lib/vitrina/schemas";
+import { GaleriaCarrusel } from "./galeria-carrusel";
 import { IconoGrupo } from "./iconos-grupo";
 import { ProcesoBpmn } from "./proceso-bpmn";
 
@@ -381,33 +381,21 @@ export async function FichaTecnica({
           titulo={t("galeria")}
           sub={t("galeriaSub")}
         >
-          <ul className="grid gap-4 sm:grid-cols-2">
-            {galeria.map((g, i) => (
-              <li key={i} data-captura={i + 1}>
-                <figure className="m-0">
-                  <div className="overflow-hidden rounded-[12px] border border-paper-2 bg-paper-1 shadow-sh-1">
-                    {/* La ruta de la ficha es relativa; CV Viva la sirve desde
-                        public/piezas/<frente>/. Perezosa: vive bajo el pliegue. */}
-                    <Image
-                      src={`/piezas/${pieza.frente}/${g.archivo}`}
-                      alt={g.pie}
-                      width={2560}
-                      height={1440}
-                      sizes="(min-width: 1024px) 480px, (min-width: 640px) 50vw, 100vw"
-                      loading="lazy"
-                      className="block h-auto w-full"
-                    />
-                  </div>
-                  <figcaption className="mt-2 flex flex-wrap items-baseline gap-x-2 text-[12.5px] leading-snug text-ink-2">
-                    <span className="font-mono text-[10px] tracking-[0.06em] uppercase">
-                      {t("galeriaPie", { n: i + 1, total: galeria.length })}
-                    </span>
-                    <span>· {g.pie}</span>
-                  </figcaption>
-                </figure>
-              </li>
-            ))}
-          </ul>
+          <GaleriaCarrusel
+            capturas={galeria}
+            frente={pieza.frente}
+            etiquetas={{
+              etiqueta: t("carruselEtiqueta"),
+              anterior: t("carruselAnterior"),
+              siguiente: t("carruselSiguiente"),
+              indicadores: galeria.map((_, i) =>
+                t("carruselIndicador", { n: i + 1, total: galeria.length }),
+              ),
+              pies: galeria.map((_, i) =>
+                t("galeriaPie", { n: i + 1, total: galeria.length }),
+              ),
+            }}
+          />
         </Seccion>
       )}
 

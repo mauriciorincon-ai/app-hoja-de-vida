@@ -330,6 +330,10 @@
     "galeria": "What it looks like",
     "galeriaSub": "Real screens of the piece, as it runs. Untouched.",
     "galeriaPie": "Screen {n} of {total}",
+    "carruselEtiqueta": "Screens of the product",
+    "carruselAnterior": "Previous screen",
+    "carruselSiguiente": "Next screen",
+    "carruselIndicador": "{n} of {total}",
     "hitos": {
       "ciclo": "cycle",
       "sprints": "closed sprints",

@@ -330,6 +330,10 @@
     "galeria": "Cómo se ve",
     "galeriaSub": "Pantallas reales del producto, tal como corre. Sin retocar.",
     "galeriaPie": "Pantalla {n} de {total}",
+    "carruselEtiqueta": "Pantallas del producto",
+    "carruselAnterior": "Pantalla anterior",
+    "carruselSiguiente": "Pantalla siguiente",
+    "carruselIndicador": "{n} de {total}",
     "hitos": {
       "ciclo": "ciclo",
       "sprints": "sprints cerrados",
