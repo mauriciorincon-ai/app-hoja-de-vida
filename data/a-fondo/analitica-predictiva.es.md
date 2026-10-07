@@ -280,7 +280,7 @@ El Diseño Industrial influye especialmente en esta pieza. El reto no era única
 
 La analítica predictiva constituye uno de los fundamentos de la inteligencia artificial empresarial, pero no agota su alcance. Un modelo produce una estimación, clasificación o prioridad. Una aplicación puede integrar esa salida con reglas, contexto y una experiencia de usuario. Un agente puede además recuperar conocimiento, utilizar herramientas y coordinar acciones dentro de límites definidos.
 
-Esta progresión no convierte automáticamente al agente en una solución superior. Cada nivel introduce capacidades y responsabilidades adicionales. Cuando una predicción es suficiente, agregar una arquitectura generativa puede aumentar costo, variabilidad y dificultad de evaluación sin producir valor proporcional. Es la regla de código primero con la que construyo mis aplicaciones: Velo e Innmobiliaria no tienen un solo modelo de IA porque no lo necesitan.
+Esta progresión no convierte automáticamente al agente en una solución superior. Cada nivel introduce capacidades y responsabilidades adicionales. Cuando una predicción es suficiente, agregar una arquitectura generativa puede aumentar costo, variabilidad y dificultad de evaluación sin producir valor proporcional. Es la regla de código primero con la que construyo mis aplicaciones: Anonimizador Velo e Innmobiliaria no tienen un solo modelo de IA porque no lo necesitan.
 
 Mi experiencia predictiva aporta una disciplina importante al desarrollo de agentes: definir el objetivo, construir una línea base, separar entrenamiento y evaluación, analizar errores, observar segmentos y comparar el resultado con un criterio explícito.
 

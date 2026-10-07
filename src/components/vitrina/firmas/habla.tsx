@@ -1,5 +1,5 @@
 /**
- * FIRMA de «Hablemos San» — el clímax de su brochure, RE-DIBUJADO en los
+ * FIRMA de «Habla San» — el clímax de su brochure, RE-DIBUJADO en los
  * tokens de CV Viva (decisión del usuario en el gate M1: la identidad de cada
  * brochure entra reconstruida, jamás fotografiada ni recoloreada).
  *

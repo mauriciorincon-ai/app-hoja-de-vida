@@ -1,5 +1,5 @@
 /**
- * Tira visual de «Nutri-Kids» — S5. Esquemática a propósito (banco §7).
+ * Tira visual de «Nutrikids» — S5. Esquemática a propósito (banco §7).
  */
 export function MaquetaNutriKids() {
   return (
@@ -7,7 +7,7 @@ export function MaquetaNutriKids() {
       viewBox="0 0 320 92"
       className="maqueta"
       role="img"
-      aria-label="Esquema de Nutri-Kids: la pregunta de si esto se puede, el día en comidas que se van marcando, las preguntas con tus palabras, y que nunca hay nota ni porcentaje."
+      aria-label="Esquema de Nutrikids: la pregunta de si esto se puede, el día en comidas que se van marcando, las preguntas con tus palabras, y que nunca hay nota ni porcentaje."
     >
       {/* ── 1 · ¿Esto se puede? El semáforo del alimento ────────────────── */}
       <circle className="mq-veto-fondo" cx="40" cy="30" r="15" />

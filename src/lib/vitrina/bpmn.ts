@@ -58,7 +58,7 @@ export type Nodo = {
    * partido en `lineas` (convención BPMN: el rótulo de la compuerta va fuera).
    * Dentro solo cuando es corto — «¿Supera?» sí, «¿Con sus palabras?» no:
    * con 18 caracteres desbordaba 60px a cada lado y la flecha de entrada lo
-   * atravesaba (Nutri-Kids, 2026-09-06).
+   * atravesaba (Nutrikids, 2026-09-06).
    */
   rotuloFuera?: boolean;
 };

@@ -13,7 +13,7 @@ import { routing, type Locale } from "@/i18n/routing";
 import { getCategoriasApps, getCv } from "@/lib/content";
 import { SITE_URL } from "@/lib/site";
 import { getFrente } from "@/lib/vitrina/categorias";
-import { nombreVisible, repartirApps } from "@/lib/vitrina/categorias-apps";
+import { repartirApps } from "@/lib/vitrina/categorias-apps";
 import { getFichasVitrina } from "@/lib/vitrina/loader";
 
 /**
@@ -166,16 +166,7 @@ export default async function VitrinaAppsPage({ params }: Params) {
                 </p>
                 <ul className="grid gap-5 sm:grid-cols-2">
                   {b.fichas.map((ficha) => (
-                    <MuestraApp
-                      key={ficha.ancla.slug}
-                      ficha={ficha}
-                      nombre={nombreVisible(
-                        categorias,
-                        ficha.ancla.slug,
-                        ficha.export.app.nombre,
-                        l,
-                      )}
-                    />
+                    <MuestraApp key={ficha.ancla.slug} ficha={ficha} />
                   ))}
                 </ul>
               </section>

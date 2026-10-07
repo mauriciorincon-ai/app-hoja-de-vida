@@ -212,7 +212,7 @@ const APPS = {
     ],
   },
 
-  /** Nutri-Kids trae su «Dieta demo» de fábrica: datos sintéticos propios. */
+  /** Nutrikids trae su «Dieta demo» de fábrica: datos sintéticos propios. */
   "nutri-kids": {
     repo: "app-nutri-kids",
     puerto: 3284,

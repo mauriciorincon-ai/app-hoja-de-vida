@@ -1,4 +1,4 @@
-# Complemento de la ficha técnica de Dash Agent AI (ADR-016). PROCEDENCIA:
+# Complemento de la ficha técnica de Dash Agent (ADR-016). PROCEDENCIA:
 # cv-viva — derivado de su export por CV Viva; se retira cuando la app mande el suyo.
 schema_version: "1.0.0"
 app: dash-agent-ai

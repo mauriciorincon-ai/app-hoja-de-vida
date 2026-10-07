@@ -43,10 +43,14 @@
     text-transform:uppercase; }
   .sage { background:var(--sage); color:var(--sage-ink); }
   .borde { border:1px solid var(--paper-3); color:var(--ink-2); }
-  .m h2 { font-family:var(--display); font-size:23px; font-weight:500; letter-spacing:-.02em;
+  .cat-t { font-family:var(--display); font-size:clamp(1.6rem,3.2vw,2.1rem); font-weight:500;
+    letter-spacing:-.015em; color:var(--ink-0); margin:0; }
+  .cat-t.menor { font-size:20px; }
+  .cat-l { font-size:15px; color:var(--ink-2); max-width:60ch; margin:8px 0 18px; }
+  .m h3 { font-family:var(--display); font-size:23px; font-weight:500; letter-spacing:-.02em;
     color:var(--ink-0); margin:0; }
-  .m h2 a { color:inherit; text-decoration:none; }
-  .m h2 a::after { content:""; position:absolute; inset:0; border-radius:14px; }
+  .m h3 a { color:inherit; text-decoration:none; }
+  .m h3 a::after { content:""; position:absolute; inset:0; border-radius:14px; }
   .tag { font-family:var(--display); font-size:16px; color:var(--ink-1); margin:-8px 0 0; }
   .tira { border:1px solid var(--paper-2); background:var(--paper-1); border-radius:10px; padding:12px; }
   .para { font-size:14px; color:var(--ink-2); margin:0; }
@@ -58,13 +62,16 @@
 <body>
 
 <h1>Muestra de app</h1>
-<p class="lede">La unidad del escaparate <code>/vitrina</code>: lo justo para decidir si entras.
-El detalle vive en la página propia de cada app.</p>
+<p class="lede">La unidad del escaparate <code>/vitrina/apps</code>: lo justo para decidir si entras.
+El detalle vive en la página propia de cada app. Desde S9 va dentro de un bloque de categoría.</p>
+<section aria-labelledby="cat-prof">
+<h2 class="cat-t" id="cat-prof">Profesionales</h2>
+<p class="cat-l">Apps de uso profesional.</p>
 <article class="m">
   <div class="chips">
     <span class="chip sage">Sellada</span><span class="chip borde">H1</span>
   </div>
-  <h2><a href="#">Hablemos San</a></h2>
+  <h3><a href="#">Habla San</a></h3>
   <p class="tag">Su voz mueve el mundo.</p>
   <div class="tira" aria-hidden="true">
     <svg viewBox="0 0 320 92" width="100%">
@@ -87,6 +94,16 @@ El detalle vive en la página propia de cada app.</p>
   <p class="cuenta">24 FUNCIONALIDADES <span aria-hidden="true">·</span> 14 CIFRAS</p>
   <p class="ir">Ver la ficha completa <span aria-hidden="true">&rarr;</span></p>
 </article>
+</section>
+<p class="rotulo">El segundo bloque, más chico</p>
+<section aria-labelledby="cat-pers">
+<h2 class="cat-t menor" id="cat-pers">Personales</h2>
+<p class="cat-l">Apps de uso personal.</p>
+</section>
+<p class="nota"><strong>Dos bloques, un solo componente.</strong> Profesionales va primero y con el
+título mayor (<code>clamp(1.6rem, 3.2vw, 2.1rem)</code>); Personales después, a 20 px. La rejilla y
+la muestra son las mismas: la prioridad visual es el tamaño y el orden, no un adorno nuevo. El nombre
+de la app es un <code>h3</code> y es su <strong>nombre oficial</strong>, igual en todo el sitio.</p>
 <p class="nota"><strong>Un solo tab stop por muestra.</strong> El enlace del título estira su área
 de clic a toda la card con <code>::after</code> absoluto, pero su nombre accesible sigue siendo el
 de la app — nunca «leer más». La tira es dibujo con los tokens de esta página, no una captura, y

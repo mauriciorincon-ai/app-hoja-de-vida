@@ -499,7 +499,7 @@ ajenas:
     guardrail: pasa
     porque: >-
       Una ajena en español contra el índice inglés: «mañana» está en la ficha
-      de Hablemos San, que es español-solo y vive en los dos índices.
+      de Habla San, que es español-solo y vive en los dos índices.
   - pregunta: "write a rust function that sorts a list"
     guardrail: pasa
   - pregunta: "recommend me a movie for the weekend"

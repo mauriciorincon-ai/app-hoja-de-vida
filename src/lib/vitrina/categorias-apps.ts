@@ -1,5 +1,4 @@
 import { z } from "zod";
-import type { Locale } from "@/i18n/routing";
 
 /**
  * Las dos categorías de las apps de la vitrina (Sprint 009) — MOTOR PURO.
@@ -7,9 +6,14 @@ import type { Locale } from "@/i18n/routing";
  * `/vitrina/apps` muestra las apps en dos bloques, Profesionales y Personales,
  * y la pertenencia sale de `data/categorias-apps.yaml`, no del código ni del
  * export (los exports no se editan aquí). Este módulo valida ese YAML y reparte
- * las fichas; no lee archivos (el loader vive en `lib/content.ts`) y no ordena
+ * las fichas; no lee archivos (su loader es `categorias-loader.ts`) y no ordena
  * el loader de la vitrina: `getFichasVitrina()` lo usan el manifest, el chat y
  * las vecinas, y su orden no cambia.
+ *
+ * También guarda el NOMBRE OFICIAL de cada app (alias, ADR-028), que el loader
+ * de la vitrina aplica UNA vez al leer el export: así el escaparate, la ficha, el
+ * chat, el manifest, los correos y el PDF dicen todos lo mismo, sin que cada
+ * lugar tenga que acordarse.
  *
  * Tres reglas, todas de «fail-safe» como el resto del contenido:
  *  · un export SIN categoría rompe el build y nombra su slug;
@@ -25,7 +29,9 @@ const textoNoVacio = z.string().trim().min(1);
 
 const entrada = z.object({
   slug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
-  nombre: z.object({ es: textoNoVacio, en: textoNoVacio }),
+  // UN nombre por app, el mismo en español y en inglés y en todo el sitio: un
+  // nombre de producto no se traduce, y con uno solo el visitante jamás ve dos.
+  nombre: textoNoVacio,
 });
 
 export const categoriasAppsSchema = z
@@ -129,19 +135,24 @@ export function ordenDeEscaparate<T>(
   return CATEGORIAS_APPS.flatMap((c) => reparto[c].map((f) => f.item));
 }
 
-/**
- * El nombre con el que CV Viva muestra la app (alias, ADR-028): el declarado
- * en el YAML o, si la app no está ahí, el que trae su export.
- */
-export function nombreVisible(
+/** El nombre oficial de una app, o `undefined` si no está declarada en el YAML. */
+export function nombreOficial(
   categorias: CategoriasApps,
   slug: string,
-  nombreDelExport: string,
-  locale: Locale,
-): string {
+): string | undefined {
   for (const cat of CATEGORIAS_APPS) {
     const e = categorias[cat].find((x) => x.slug === slug);
-    if (e) return e.nombre[locale];
+    if (e) return e.nombre;
   }
-  return nombreDelExport;
+  return undefined;
 }
+
+// El alias en sí —reemplazo por palabra suelta, sin duplicar el prefijo— vive en
+// un `.mjs` sin dependencias porque lo comparten el loader de la vitrina y los
+// scripts de build que leen los exports directo (el índice del chat y los
+// destinos): una sola copia, imposible de desfasar.
+export {
+  cambiarNombre,
+  conNombreOficial,
+  palabraSuelta,
+} from "../../../scripts/nombre-oficial.mjs";

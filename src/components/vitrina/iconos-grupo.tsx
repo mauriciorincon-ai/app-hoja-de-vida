@@ -19,7 +19,7 @@
 
 type Dibujo = () => React.ReactElement;
 
-/* ── habla · «Hablemos San» ────────────────────────────────────────────────
+/* ── habla · «Habla San» ────────────────────────────────────────────────
  * 1–6: idénticos a app-habla/docs/BROCHURE.html (export sellado 2026-08-08).
  * 7–8: dibujados aquí — el brochure resuelve esos dos mensajes con escenas a
  *      página completa, no con tarjeta, así que no había icono que copiar.
@@ -108,7 +108,7 @@ const ROMBO: Dibujo = () => (
   </svg>
 );
 
-/* ── anonimizador · «Velo» ─────────────────────────────────────────────────
+/* ── anonimizador · «Anonimizador Velo» ─────────────────────────────────────────────────
  * Los 5, idénticos a app-anonimizador/docs/BROCHURE.html.
  */
 const LUPA: Dibujo = () => (

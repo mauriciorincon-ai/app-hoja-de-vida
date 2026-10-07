@@ -698,7 +698,7 @@
   stroke-dasharray: 3 3;
   stroke-dashoffset: 0;
 }
-/* La bóveda de Velo: se queda de este lado de la frontera. */
+/* La bóveda de Anonimizador Velo: se queda de este lado de la frontera. */
 .firma-clima .fc-boveda {
   fill: var(--color-sage);
   stroke: var(--color-sage-ink);

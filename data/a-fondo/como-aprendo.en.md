@@ -204,21 +204,21 @@ software that runs.
 The most compelling evidence of my learning capacity is found in what I have built, because every
 piece can be examined and related to concrete decisions, tests and results.
 
-My portfolio brings together six published sister applications —Velo, Dash Agent AI, Probeta DS,
-Hablemos San, Innmobiliaria and Nutri-Kids— plus CV Viva, this site. All of them reached their MVP,
-are in sustained operation and keep evolving; Hablemos San is the most advanced.
+My portfolio brings together six published sister applications —Anonimizador Velo, Dash Agent, Probeta DS,
+Habla San, Innmobiliaria and Nutrikids— plus CV Viva, this site. All of them reached their MVP,
+are in sustained operation and keep evolving; Habla San is the most advanced.
 
 | Application   | Automated tests        | Coverage  | Decisions (ADR) | What it required learning                                         |
 | ------------- | ---------------------- | --------: | --------------: | ----------------------------------------------------------------- |
-| Velo          | 740 unit, 153 e2e      |    96.17% |               8 | local processing with no server, 500,000 rows                     |
-| Dash Agent AI | 693 unit               |     97.5% |              13 | making visible the context an agent keeps                         |
+| Anonimizador Velo          | 740 unit, 153 e2e      |    96.17% |               8 | local processing with no server, 500,000 rows                     |
+| Dash Agent | 693 unit               |     97.5% |              13 | making visible the context an agent keeps                         |
 | Probeta DS    | 267 unit, 24 e2e       |    90.69% |               8 | Python, Pandas and scikit-learn in the browser with WebAssembly   |
-| Hablemos San  | 261 unit, 169 e2e      |    94.02% |              14 | 50 capsules and 16 content milestones, without recording the voice |
+| Habla San  | 261 unit, 169 e2e      |    94.02% |              14 | 50 capsules and 16 content milestones, without recording the voice |
 | Innmobiliaria | 172 unit, 76 e2e       |    98.31% |               6 | business flows with validation                                    |
-| Nutri-Kids    | 214 unit, 94 e2e       |    99.52% |               7 | a calculation engine with almost total coverage                   |
+| Nutrikids    | 214 unit, 94 e2e       |    99.52% |               7 | a calculation engine with almost total coverage                   |
 
 Probeta DS led me to run Python, Pandas and scikit-learn inside the browser through WebAssembly.
-Velo demanded local file processing and an architecture that avoided transferring information to a
+Anonimizador Velo demanded local file processing and an architecture that avoided transferring information to a
 server. Other applications incorporated web workers, embedded databases, installable capabilities,
 offline operation, edge deployment, speech synthesis and audio capture in the browser.
 
@@ -326,8 +326,8 @@ dependence on recipes and produces knowledge that remains even when the tool cha
 Documenting is not an activity that comes after learning. It is one of the mechanisms through which
 I learn. Writing a decision forces me to state which problem it solved, which alternatives I
 considered, which evidence I used and under which conditions it could stop being valid. In the
-applications that takes the form of architecture decision records, the ADRs: 14 in Hablemos San, 13
-in Dash Agent AI, 8 in Velo.
+applications that takes the form of architecture decision records, the ADRs: 14 in Habla San, 13
+in Dash Agent, 8 in Anonimizador Velo.
 
 A note that merely records a command or a sequence of steps has operational usefulness, but it does
 not necessarily preserve the reasoning. I try to document the purpose, the assumptions and the

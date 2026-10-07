@@ -11,10 +11,7 @@ import { Link } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
 import { getCategoriasApps, getCv } from "@/lib/content";
 import { SITE_URL } from "@/lib/site";
-import {
-  nombreVisible,
-  ordenDeEscaparate,
-} from "@/lib/vitrina/categorias-apps";
+import { ordenDeEscaparate } from "@/lib/vitrina/categorias-apps";
 import { getFicha, getFichasVitrina } from "@/lib/vitrina/loader";
 
 /**
@@ -56,7 +53,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 
   return {
     metadataBase: new URL(SITE_URL),
-    title: `${nombreVisible(getCategoriasApps(), app, ficha.export.app.nombre, locale as Locale)} — ${t("detalleTitulo")} — Henry Rincón`,
+    title: `${ficha.export.app.nombre} — ${t("detalleTitulo")} — Henry Rincón`,
     description: ficha.export.promesa.tagline,
     alternates: {
       languages: {
@@ -79,10 +76,7 @@ export default async function DetalleAppPage({ params }: Params) {
   const l = locale as Locale;
   const cv = getCv(l);
   const t = await getTranslations("vitrina");
-  // Nombre oficial (alias, ADR-028): ficha, vecinas y título lo dicen igual.
   const categorias = getCategoriasApps();
-  const nombreDe = (slug: string, delExport: string) =>
-    nombreVisible(categorias, slug, delExport, l);
 
   // Vecinas en el MISMO orden del índice (profesionales, personales), para que
   // «siguiente» signifique lo que el visitante acaba de ver arriba.
@@ -113,10 +107,7 @@ export default async function DetalleAppPage({ params }: Params) {
           {/* La ficha nace visible: es el contenido de esta ruta, no un premio
               al scroll. Sin `Reveal` alrededor, su portada es el LCP y arranca
               pintada (patrón `lcp-nace-estatico`). */}
-          <FichaApp
-            ficha={ficha}
-            nombre={nombreDe(app, ficha.export.app.nombre)}
-          />
+          <FichaApp ficha={ficha} />
           {/* Una isla gobierna la apertura por lectura de las tarjetas. */}
           <AperturaPorLectura selector=".tarjeta-vitrina" />
 
@@ -136,10 +127,7 @@ export default async function DetalleAppPage({ params }: Params) {
                       ← {t("appAnterior")}
                     </span>
                     <span className="mt-1 font-display text-[1.05rem] font-medium text-ink-0">
-                      {nombreDe(
-                        anterior.ancla.slug,
-                        anterior.export.app.nombre,
-                      )}
+                      {anterior.export.app.nombre}
                     </span>
                   </Link>
                 ) : (
@@ -154,10 +142,7 @@ export default async function DetalleAppPage({ params }: Params) {
                       {t("appSiguiente")} →
                     </span>
                     <span className="mt-1 font-display text-[1.05rem] font-medium text-ink-0">
-                      {nombreDe(
-                        siguiente.ancla.slug,
-                        siguiente.export.app.nombre,
-                      )}
+                      {siguiente.export.app.nombre}
                     </span>
                   </Link>
                 )}

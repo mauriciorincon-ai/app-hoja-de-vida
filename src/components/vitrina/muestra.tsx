@@ -23,14 +23,7 @@ import { Maqueta } from "./maquetas";
  *
  * Cero enlaces (regla dura 16): el único destino es una ruta de este repo.
  */
-export async function MuestraApp({
-  ficha,
-  nombre,
-}: {
-  ficha: FichaVitrina;
-  /** Nombre oficial (alias de `data/categorias-apps.yaml`); sin él, el del export. */
-  nombre?: string;
-}) {
+export async function MuestraApp({ ficha }: { ficha: FichaVitrina }) {
   const t = await getTranslations("vitrina");
   const { ancla, export: exp } = ficha;
 
@@ -64,7 +57,7 @@ export async function MuestraApp({
               href={`/vitrina/apps/${ancla.slug}`}
               className="after:absolute after:inset-0 after:rounded-[14px] after:content-['']"
             >
-              {nombre ?? exp.app.nombre}
+              {exp.app.nombre}
             </Link>
           </h3>
           <p className="mt-1.5 font-display text-[1.02rem] leading-snug text-ink-1">

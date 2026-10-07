@@ -1,5 +1,5 @@
 /**
- * Tira visual de «Hablemos San» — S5.
+ * Tira visual de «Habla San» — S5.
  *
  * **Es esquemática A PROPÓSITO: no finge ser una captura.** El banco de
  * técnicas §7 (enmienda kit v1.23.0, veredicto del usuario en el gate de
@@ -18,7 +18,7 @@ export function MaquetaHabla() {
       viewBox="0 0 320 92"
       className="maqueta"
       role="img"
-      aria-label="Esquema de Hablemos San: una idea al día, la voz que hace subir el juego, la voz que no se guarda y los días que se suman."
+      aria-label="Esquema de Habla San: una idea al día, la voz que hace subir el juego, la voz que no se guarda y los días que se suman."
     >
       {/* ── 1 · Una idea al día ─────────────────────────────────────────── */}
       <rect className="mq-caja" x="20" y="14" width="40" height="34" rx="6" />

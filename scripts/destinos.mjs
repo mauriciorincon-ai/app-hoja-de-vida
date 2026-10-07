@@ -18,6 +18,7 @@ import { existsSync, readFileSync, readdirSync } from "node:fs";
 import path from "node:path";
 import process from "node:process";
 import { parse } from "yaml";
+import { leerNombresOficiales } from "./nombres-oficiales.mjs";
 
 const ROOT = process.cwd();
 
@@ -177,11 +178,14 @@ export function nombresDeDestinos(locale) {
     if (frente.estado !== "abierta") continue;
     if (frente.id === "apps") {
       const dir = path.join(ROOT, "content", "vitrina");
+      // Nombre oficial (ADR-028): el chip y la cita dicen lo que dice la página.
+      const oficiales = leerNombresOficiales();
       for (const f of existsSync(dir) ? readdirSync(dir) : []) {
         if (!f.endsWith(".brochure-export.json")) continue;
         const { app } = JSON.parse(readFileSync(path.join(dir, f), "utf8"));
-        nombres.set(`/vitrina/apps/${app.slug}`, app.nombre);
-        nombres.set(`/vitrina/apps/${app.slug}/detalle`, app.nombre);
+        const nombre = oficiales.get(app.slug) ?? app.nombre;
+        nombres.set(`/vitrina/apps/${app.slug}`, nombre);
+        nombres.set(`/vitrina/apps/${app.slug}/detalle`, nombre);
       }
       continue;
     }

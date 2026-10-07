@@ -12,31 +12,33 @@
 #    export (AngelGhost, planlang, Big-D y HackGuard hoy no están en CV Viva).
 #  · Un slug no puede estar en las dos listas.
 #
-# `nombre` es el NOMBRE OFICIAL con el que CV Viva muestra la app (alias): el
-# export no se edita (regla de content/), así que el alias vive solo aquí. Se
-# ve en la muestra, en la ficha técnica, en el detalle y en sus vecinas; el chat
-# y el manifest siguen con el nombre del export (ADR-028).
+# `nombre` es el NOMBRE OFICIAL de la app, UNO solo, igual en español y en inglés
+# y en todo el sitio (ADR-028). El export no se edita (regla de content/), así
+# que el alias vive aquí y el loader de la vitrina lo aplica al leerlo: de ahí lo
+# heredan el escaparate, la ficha, el detalle, las vecinas, el manifest, el chat,
+# los correos y el PDF. Los textos propios (`data/**`) usan este mismo nombre, y
+# un test falla si vuelve a colarse el del export.
 
 profesionales:
   - slug: ds
-    nombre: { es: "Probeta DS", en: "Probeta DS" }
+    nombre: "Probeta DS"
   - slug: dash-agent-ai
-    nombre: { es: "Dash Agent", en: "Dash Agent" }
+    nombre: "Dash Agent"
   - slug: anonimizador
-    nombre: { es: "Anonimizador Velo", en: "Velo Anonymizer" }
+    nombre: "Anonimizador Velo"
   - slug: copiloto-consultor
-    nombre: { es: "AngelGhost", en: "AngelGhost" }
+    nombre: "AngelGhost"
   - slug: planlang
-    nombre: { es: "planlang", en: "planlang" }
+    nombre: "planlang"
   - slug: big-d
-    nombre: { es: "Big-D", en: "Big-D" }
+    nombre: "Big-D"
   - slug: hackguard
-    nombre: { es: "HackGuard", en: "HackGuard" }
+    nombre: "HackGuard"
 
 personales:
   - slug: habla
-    nombre: { es: "Habla San", en: "Habla San" }
+    nombre: "Habla San"
   - slug: inmobiliaria
-    nombre: { es: "Innmobiliaria", en: "Innmobiliaria" }
+    nombre: "Innmobiliaria"
   - slug: nutri-kids
-    nombre: { es: "Nutrikids", en: "Nutrikids" }
+    nombre: "Nutrikids"

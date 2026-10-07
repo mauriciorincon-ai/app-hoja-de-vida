@@ -14,10 +14,6 @@ import {
   type Cv,
   type Vitrina,
 } from "./schemas";
-import {
-  parseCategoriasApps,
-  type CategoriasApps,
-} from "./vitrina/categorias-apps";
 import { getManifestVitrina } from "./vitrina/loader";
 import { frentesConPiezas } from "./vitrina/piezas";
 
@@ -66,13 +62,9 @@ export const getVitrina = cache((): Vitrina => {
 });
 
 /**
- * Las dos categorías de las apps y sus nombres oficiales (Sprint 009). El
- * reparto en sí —y el fallo si un export no tiene categoría— vive en el motor
- * puro `vitrina/categorias-apps.ts`.
+ * Las dos categorías de las apps y sus nombres oficiales (Sprint 009). Se lee en
+ * `vitrina/categorias-loader.ts` (aquí solo se re-exporta, para que las páginas
+ * sigan pidiendo el contenido a un solo sitio); el reparto en sí —y el fallo si
+ * un export no tiene categoría— vive en el motor puro `categorias-apps.ts`.
  */
-export const getCategoriasApps = cache((): CategoriasApps =>
-  parseCategoriasApps(
-    readYaml("categorias-apps.yaml"),
-    "data/categorias-apps.yaml",
-  ),
-);
+export { getCategoriasApps } from "./vitrina/categorias-loader";

@@ -1,5 +1,5 @@
 /**
- * Tira visual de «Velo» — S5. **Esquemática A PROPÓSITO: no finge ser una
+ * Tira visual de «Anonimizador Velo» — S5. **Esquemática A PROPÓSITO: no finge ser una
  * captura** (banco §7). Las pantallas reales de la app viven dentro de las
  * tarjetas; esto son sus IDEAS en el lenguaje de CV Viva.
  *
@@ -12,7 +12,7 @@ export function MaquetaAnonimizador() {
       viewBox="0 0 320 92"
       className="maqueta"
       role="img"
-      aria-label="Esquema de Velo: la tabla que delata, los datos que se velan, la frontera que solo cruza el archivo velado, y el regreso que devuelve los originales."
+      aria-label="Esquema de Anonimizador Velo: la tabla que delata, los datos que se velan, la frontera que solo cruza el archivo velado, y el regreso que devuelve los originales."
     >
       {/* ── 1 · Mira lo que te delata ───────────────────────────────────── */}
       <rect className="mq-caja" x="18" y="14" width="44" height="34" rx="4" />

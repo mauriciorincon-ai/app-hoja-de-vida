@@ -101,10 +101,10 @@ applications built and deployed directly by me. This practice forces me to take 
 cycle: definition, architecture, development, testing, integration, publication, observation and
 evolution.
 
-Currently, the portfolio gathers six sister applications —Velo, Dash Agent AI, Probeta DS,
-Hablemos San, Innmobiliaria and Nutri-Kids— plus CV Viva, this site. All are in sustained
+Currently, the portfolio gathers six sister applications —Anonimizador Velo, Dash Agent, Probeta DS,
+Habla San, Innmobiliaria and Nutrikids— plus CV Viva, this site. All are in sustained
 operation: if they are on the site it is because they reached MVP condition, and they remain in
-permanent evolution; Hablemos San, sealed in August 2026, is the most advanced. Not all serve
+permanent evolution; Habla San, sealed in August 2026, is the most advanced. Not all serve
 the same purpose or use the same architecture, but they share criteria on documentation,
 testing, accessibility, performance, traceability and change control, and they share the same
 toolchain:
@@ -117,7 +117,7 @@ toolchain:
   gitleaks goes one step earlier, as a pre-commit hook: a secret never even gets to exist in the
   history, which is where it really costs to get it out;
 - deployment on Vercel, with a preview for every change and production from the main branch;
-  Innmobiliaria is served from the edge on Cloudflare Workers, and Dash Agent AI is not deployed
+  Innmobiliaria is served from the edge on Cloudflare Workers, and Dash Agent is not deployed
   because it lives entirely on the machine of whoever uses it;
 - a managed database with Supabase where something really has to be stored —Innmobiliaria and
   this site—, and transactional email with Resend for whatever goes out by email;
@@ -142,17 +142,17 @@ from the published sheets of each app in 2026:
 
 | App | Unit and integration tests | End-to-end tests | Line coverage |
 | --- | --- | --- | --- |
-| Velo | 740 | 153 | 96% |
-| Dash Agent AI | 693 | — | 97.5% |
+| Anonimizador Velo | 740 | 153 | 96% |
+| Dash Agent | 693 | — | 97.5% |
 | Probeta DS | 267 | 24 | 90.7% |
-| Hablemos San | 261 | 169 | 94% |
+| Habla San | 261 | 169 | 94% |
 | Innmobiliaria | 172 | 76 | 98.3% of the engine |
-| Nutri-Kids | 214 | 94 | 99.5% of the engine |
+| Nutrikids | 214 | 94 | 99.5% of the engine |
 
 These figures must be kept in sync with the repositories, because their value depends on their
-being observable and verifiable. Some of those tests are permanent by design: Dash Agent AI has
-one that fails if the runtime opens an outbound socket; Velo, one that intercepts every browser
-request and fails if a single one carries user data; Hablemos San, one that verifies that after
+being observable and verifiable. Some of those tests are permanent by design: Dash Agent has
+one that fails if the runtime opens an outbound socket; Anonimizador Velo, one that intercepts every browser
+request and fails if a single one carries user data; Habla San, one that verifies that after
 playing no trace of the child's voice remains in any storage.
 
 I do not use the number of tests as a substitute for quality. An extensive suite can offer
@@ -178,7 +178,7 @@ the problem to an external infrastructure team.
 Prevention is the CI that blocks; detection is Sentry and structured logging; rollback is the
 per-change preview on Vercel and the possibility of going back to the previous version of the
 main branch; learning is the summary of each sprint and the ADR of each decision, which remain
-in the repository. When an app runs in the user's browser —Velo with Web Workers and Web Crypto,
+in the repository. When an app runs in the user's browser —Anonimizador Velo with Web Workers and Web Crypto,
 Probeta DS with Python in WebAssembly— rollback is even more important, because there is no
 server to switch off.
 
@@ -297,7 +297,7 @@ My experience already covers a good part of this cycle. I have built pipelines a
 models, developed predictive models in banking and in transport, designed at Vesting the
 platform that observed up to 23 agents at a time in production, maintained public applications
 and created ARKHÉ, my own ecosystem of harnesses, sources, tools, validators and retrieval
-mechanisms. In three of the apps —Probeta DS, Nutri-Kids and CV Viva— generative AI runs with
+mechanisms. In three of the apps —Probeta DS, Nutrikids and CV Viva— generative AI runs with
 guardrails, a declared budget and a deterministic fallback if the provider fails or the response
 does not pass verification.
 
@@ -486,7 +486,7 @@ The data, the business definitions, the evaluation criteria and the institutiona
 responsibilities should not be confused with a particular service. The models, the tools and the
 managed capabilities can evolve as long as the architecture preserves enough separation between
 the organization's own knowledge and the external technology used to process it. It is the same
-reason why this site's chat and the Nutri-Kids assistant switch model provider through an
+reason why this site's chat and the Nutrikids assistant switch model provider through an
 environment variable: the corpus, the guardrails and the tests are mine; the model is
 replaceable.
 

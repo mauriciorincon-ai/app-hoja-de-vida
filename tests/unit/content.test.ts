@@ -492,14 +492,14 @@ describe("el puesto propio y el corpus dicen el mismo año de inicio", () => {
         (d) => d.anio,
       ),
     ).toEqual(["2023"]);
-    // Vesting en 2023 no es el inicio del puesto propio; Dash Agent AI en 2026 tampoco.
+    // Vesting en 2023 no es el inicio del puesto propio; Dash Agent en 2026 tampoco.
     expect(
       iniciosDichos(
         "la IA aplicada empieza en agosto de 2023 en Vesting; por mi cuenta, desde abril de 2024 planeo y diseño",
       ).map((d) => d.anio),
     ).toEqual(["2024"]);
     expect(
-      iniciosDichos("Dash Agent AI se concibió y diseñó en 2026."),
+      iniciosDichos("Dash Agent se concibió y diseñó en 2026."),
     ).toEqual([]);
     expect(
       iniciosDichos("una línea\nDesde abril de 2023,\nplaneo y diseño")[0]

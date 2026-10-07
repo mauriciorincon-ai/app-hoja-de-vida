@@ -64,11 +64,11 @@ El Diseño Industrial incorpora la dimensión de uso. Una plataforma puede opera
 
 Además de mi experiencia en plataformas empresariales, mantengo un portafolio de aplicaciones públicas construidas y desplegadas directamente por mí. Esta práctica me obliga a asumir el ciclo completo: definición, arquitectura, desarrollo, pruebas, integración, publicación, observación y evolución.
 
-Actualmente, el portafolio reúne seis aplicaciones hermanas —Velo, Dash Agent AI, Probeta DS, Hablemos San, Innmobiliaria y Nutri-Kids— más CV Viva, este sitio. Todas están en operación sostenida: si están en el sitio es porque alcanzaron la condición de MVP, y siguen en evolución permanente; Hablemos San, sellada en agosto de 2026, es la más avanzada. No todas responden al mismo propósito ni utilizan la misma arquitectura, pero comparten criterios sobre documentación, pruebas, accesibilidad, rendimiento, trazabilidad y control de cambios, y comparten la misma cadena de herramientas:
+Actualmente, el portafolio reúne seis aplicaciones hermanas —Anonimizador Velo, Dash Agent, Probeta DS, Habla San, Innmobiliaria y Nutrikids— más CV Viva, este sitio. Todas están en operación sostenida: si están en el sitio es porque alcanzaron la condición de MVP, y siguen en evolución permanente; Habla San, sellada en agosto de 2026, es la más avanzada. No todas responden al mismo propósito ni utilizan la misma arquitectura, pero comparten criterios sobre documentación, pruebas, accesibilidad, rendimiento, trazabilidad y control de cambios, y comparten la misma cadena de herramientas:
 
 - Git y GitHub como fuente de verdad, con commits convencionales, ramas por sprint y decisiones de arquitectura registradas en ADR;
 - integración y despliegue continuos (CI/CD) con GitHub Actions: pruebas unitarias, de integración y de extremo a extremo, accesibilidad con axe y presupuesto de rendimiento con Lighthouse, y ninguna rama llega a producción con uno solo de esos trabajos en rojo. El barrido de secretos con gitleaks va un paso antes, como enganche de pre-commit: un secreto no llega siquiera a existir en el historial, que es donde de verdad cuesta sacarlo;
-- despliegue en Vercel, con una vista previa por cada cambio y producción desde la rama principal; Innmobiliaria se sirve desde el borde en Cloudflare Workers, y Dash Agent AI no se despliega porque vive entera en la máquina de quien la usa;
+- despliegue en Vercel, con una vista previa por cada cambio y producción desde la rama principal; Innmobiliaria se sirve desde el borde en Cloudflare Workers, y Dash Agent no se despliega porque vive entera en la máquina de quien la usa;
 - base de datos gestionada con Supabase donde de verdad hay que guardar algo —Innmobiliaria y este sitio—, y correo transaccional con Resend para lo que sale por email;
 - observabilidad con Sentry y registro estructurado con Pino, siempre con metadatos y nunca con contenido del usuario, para saber qué falló y dónde.
 
@@ -84,14 +84,14 @@ Las pruebas incluyen distintos niveles según la naturaleza de cada producto. La
 
 | App | Pruebas unitarias y de integración | Pruebas de extremo a extremo | Cobertura de líneas |
 | --- | --- | --- | --- |
-| Velo | 740 | 153 | 96 % |
-| Dash Agent AI | 693 | — | 97,5 % |
+| Anonimizador Velo | 740 | 153 | 96 % |
+| Dash Agent | 693 | — | 97,5 % |
 | Probeta DS | 267 | 24 | 90,7 % |
-| Hablemos San | 261 | 169 | 94 % |
+| Habla San | 261 | 169 | 94 % |
 | Innmobiliaria | 172 | 76 | 98,3 % del motor |
-| Nutri-Kids | 214 | 94 | 99,5 % del motor |
+| Nutrikids | 214 | 94 | 99,5 % del motor |
 
-Estas cifras deben mantenerse sincronizadas con los repositorios, porque su valor depende de que sean observables y verificables. Algunas de esas pruebas son permanentes por diseño: Dash Agent AI tiene una que falla si el runtime abre un socket saliente; Velo, una que intercepta todas las peticiones del navegador y falla si una sola lleva datos del usuario; Hablemos San, una que verifica que tras jugar no queda rastro de la voz del niño en ningún almacenamiento.
+Estas cifras deben mantenerse sincronizadas con los repositorios, porque su valor depende de que sean observables y verificables. Algunas de esas pruebas son permanentes por diseño: Dash Agent tiene una que falla si el runtime abre un socket saliente; Anonimizador Velo, una que intercepta todas las peticiones del navegador y falla si una sola lleva datos del usuario; Habla San, una que verifica que tras jugar no queda rastro de la voz del niño en ningún almacenamiento.
 
 No utilizo el número de pruebas como sustituto de la calidad. Una suite extensa puede ofrecer poca protección si verifica detalles irrelevantes o nunca demuestra que puede detectar una falla real. Por eso, cada control debe estar relacionado con una condición concreta y, cuando se incorpora, debe observarse fallando frente al escenario que pretende proteger. Esa regla —un gate se demuestra fallando— es del pipeline y está explicada en su documento.
 
@@ -103,7 +103,7 @@ También aplico presupuestos de rendimiento y criterios de accesibilidad. Una fu
 
 Estos despliegues tienen consecuencias reales. Una modificación incorrecta puede romper una experiencia pública, afectar un flujo o producir información inconsistente. Esa responsabilidad me obliga a diseñar mecanismos de prevención, detección, reversión y aprendizaje sin depender de trasladar el problema a un equipo externo de infraestructura.
 
-La prevención es la CI que bloquea; la detección es Sentry y el registro estructurado; la reversión es la vista previa por cambio en Vercel y la posibilidad de volver a la versión anterior de la rama principal; el aprendizaje es el resumen de cada sprint y el ADR de cada decisión, que quedan en el repositorio. Cuando una app corre en el navegador del usuario —Velo con Web Workers y Web Crypto, Probeta DS con Python en WebAssembly— la reversión es todavía más importante, porque no hay un servidor que apagar.
+La prevención es la CI que bloquea; la detección es Sentry y el registro estructurado; la reversión es la vista previa por cambio en Vercel y la posibilidad de volver a la versión anterior de la rama principal; el aprendizaje es el resumen de cada sprint y el ADR de cada decisión, que quedan en el repositorio. Cuando una app corre en el navegador del usuario —Anonimizador Velo con Web Workers y Web Crypto, Probeta DS con Python en WebAssembly— la reversión es todavía más importante, porque no hay un servidor que apagar.
 
 Esta práctica fortalece mi criterio para entornos empresariales. Una arquitectura no termina cuando el código funciona en desarrollo. Necesita una ruta de publicación, condiciones verificables, visibilidad sobre las fallas y una forma controlada de evolucionar. Lo que aprendí operando seis aplicaciones y este sitio es lo mismo que exigía en Vesting a cada integración nueva, con la diferencia de que aquí no hay nadie más a quien llamar cuando algo se rompe.
 
@@ -149,7 +149,7 @@ Una aplicación convencional puede validarse mediante entradas y resultados espe
 
 Por esta razón distingo entre desplegar una aplicación y operar una capacidad de inteligencia artificial. La segunda exige conocer no solo si el servicio está disponible, sino si continúa cumpliendo su propósito, si utiliza correctamente las fuentes autorizadas, si conserva sus límites y si el costo de producir un resultado permanece proporcional al valor generado.
 
-Mi experiencia ya recorre buena parte de este ciclo. He construido pipelines y modelos analíticos, desarrollado modelos predictivos en banca y en transporte, diseñado en Vesting la plataforma que observaba hasta 23 agentes a la vez en producción, mantenido aplicaciones públicas y creado ARKHÉ, mi ecosistema propio de harnesses, fuentes, herramientas, validadores y mecanismos de recuperación. En tres de las apps —Probeta DS, Nutri-Kids y CV Viva— la IA generativa corre con guardrails, presupuesto declarado y un fallback determinista si el proveedor falla o la respuesta no pasa la verificación.
+Mi experiencia ya recorre buena parte de este ciclo. He construido pipelines y modelos analíticos, desarrollado modelos predictivos en banca y en transporte, diseñado en Vesting la plataforma que observaba hasta 23 agentes a la vez en producción, mantenido aplicaciones públicas y creado ARKHÉ, mi ecosistema propio de harnesses, fuentes, herramientas, validadores y mecanismos de recuperación. En tres de las apps —Probeta DS, Nutrikids y CV Viva— la IA generativa corre con guardrails, presupuesto declarado y un fallback determinista si el proveedor falla o la respuesta no pasa la verificación.
 
 ## La puesta en producción es el comienzo de la validación
 
@@ -231,7 +231,7 @@ Mi especialidad principal continuará estando en Microsoft, donde concentro la m
 
 No entiendo una estrategia multicloud como la obligación de reproducir cada componente en dos proveedores ni como una lista extensa de servicios conocidos. La entiendo como la capacidad para diseñar arquitecturas que reconozcan qué activos deben permanecer bajo control de la organización, qué dependencias pueden sustituirse y qué capacidades conviene ubicar en cada plataforma.
 
-Los datos, las definiciones del negocio, los criterios de evaluación y las responsabilidades institucionales no deberían quedar confundidos con un servicio particular. Los modelos, las herramientas y las capacidades administradas pueden evolucionar siempre que la arquitectura conserve suficiente separación entre el conocimiento propio y la tecnología externa utilizada para procesarlo. Es la misma razón por la que el chat de este sitio y el asistente de Nutri-Kids conmutan de proveedor de modelo por una variable de entorno: el corpus, los guardrails y las pruebas son míos; el modelo es reemplazable.
+Los datos, las definiciones del negocio, los criterios de evaluación y las responsabilidades institucionales no deberían quedar confundidos con un servicio particular. Los modelos, las herramientas y las capacidades administradas pueden evolucionar siempre que la arquitectura conserve suficiente separación entre el conocimiento propio y la tecnología externa utilizada para procesarlo. Es la misma razón por la que el chat de este sitio y el asistente de Nutrikids conmutan de proveedor de modelo por una variable de entorno: el corpus, los guardrails y las pruebas son míos; el modelo es reemplazable.
 
 Este principio también se aplica a los agentes. Su propósito, fuentes, herramientas, límites y criterios de evaluación deben poder comprenderse independientemente del proveedor generativo. Un cambio de modelo puede modificar el comportamiento, el costo o la latencia, pero no debería redefinir silenciosamente la responsabilidad de la solución.
 

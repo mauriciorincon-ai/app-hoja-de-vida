@@ -1,15 +1,22 @@
-import { readdirSync, readFileSync } from "node:fs";
+import { readdirSync, readFileSync, statSync } from "node:fs";
+import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { parse } from "yaml";
 import { getCategoriasApps } from "@/lib/content";
 import {
   CATEGORIAS_APPS,
-  nombreVisible,
+  cambiarNombre,
+  conNombreOficial,
+  nombreOficial,
+  palabraSuelta,
   ordenDeEscaparate,
   parseCategoriasApps,
   repartirApps,
 } from "@/lib/vitrina/categorias-apps";
-import { getFichasVitrina } from "@/lib/vitrina/loader";
+import { getFichaTecnica } from "@/lib/vitrina/ficha-tecnica/loader";
+import { getFichasVitrina, getManifestVitrina } from "@/lib/vitrina/loader";
+import { nombresDeDestinos } from "../../scripts/destinos.mjs";
+import { chunksDeFichas, leerFichas } from "../../scripts/fichas-al-indice.mjs";
 
 /**
  * LAS DOS CATEGORÍAS DE LAS APPS (Sprint 009).
@@ -28,14 +35,11 @@ const ficha = (slug: string) => ({
 
 const YAML = {
   profesionales: [
-    { slug: "ds", nombre: { es: "Probeta DS", en: "Probeta DS" } },
-    { slug: "fantasma", nombre: { es: "Fantasma", en: "Ghost" } },
-    {
-      slug: "velo",
-      nombre: { es: "Anonimizador Velo", en: "Velo Anonymizer" },
-    },
+    { slug: "ds", nombre: "Probeta DS" },
+    { slug: "fantasma", nombre: "Fantasma" },
+    { slug: "velo", nombre: "Anonimizador Velo" },
   ],
-  personales: [{ slug: "habla", nombre: { es: "Habla San", en: "Habla San" } }],
+  personales: [{ slug: "habla", nombre: "Habla San" }],
 };
 
 describe("el YAML real de categorías", () => {
@@ -114,30 +118,159 @@ describe("el YAML real de categorías", () => {
     ).toEqual(esperado);
   });
 
-  it("los nombres oficiales salen del YAML, en español y en inglés", () => {
-    expect(nombreVisible(categorias, "habla", "Hablemos San", "es")).toBe(
-      "Habla San",
-    );
-    expect(nombreVisible(categorias, "anonimizador", "Velo", "es")).toBe(
-      "Anonimizador Velo",
-    );
-    expect(nombreVisible(categorias, "anonimizador", "Velo", "en")).toBe(
-      "Velo Anonymizer",
-    );
-    expect(nombreVisible(categorias, "nutri-kids", "Nutri-Kids", "en")).toBe(
-      "Nutrikids",
-    );
-  });
-
-  it("el alias vive solo en el YAML: el export conserva su nombre", () => {
-    const habla = fichas.find((f) => f.ancla.slug === "habla");
-    expect(habla?.export.app.nombre).toBe("Hablemos San");
+  it("el YAML declara UN nombre por app: el mismo en español y en inglés", () => {
     const crudo = parse(
       readFileSync("data/categorias-apps.yaml", "utf8"),
     ) as typeof YAML;
-    expect(crudo.personales.find((e) => e.slug === "habla")?.nombre.es).toBe(
-      "Habla San",
+    for (const e of [...crudo.profesionales, ...crudo.personales]) {
+      expect(typeof e.nombre, e.slug).toBe("string");
+    }
+    expect(nombreOficial(categorias, "habla")).toBe("Habla San");
+    expect(nombreOficial(categorias, "anonimizador")).toBe("Anonimizador Velo");
+    expect(nombreOficial(categorias, "no-existe")).toBeUndefined();
+  });
+});
+
+describe("UN solo nombre por app, en todo el sitio (ADR-028)", () => {
+  const categorias = getCategoriasApps();
+  const crudos = readdirSync("content/vitrina")
+    .filter((f) => f.endsWith(".brochure-export.json"))
+    .map(
+      (f) =>
+        JSON.parse(readFileSync(path.join("content/vitrina", f), "utf8")) as {
+          app: { slug: string; nombre: string };
+        },
     );
+
+  // La puerta contra el desfase: el nombre que trae cada export y que el
+  // oficial REEMPLAZA no puede seguir en los textos propios del sitio ni en el
+  // código. Se calcula de los exports, no de una lista: el día que llegue el
+  // export de otra app con otro nombre, esta puerta la vigila sola.
+  const retirados = crudos
+    .map((c) => ({
+      slug: c.app.slug,
+      viejo: c.app.nombre,
+      oficial: nombreOficial(categorias, c.app.slug) ?? c.app.nombre,
+    }))
+    .filter((n) => n.oficial !== n.viejo);
+  /** Las veces que `texto` dice el nombre viejo SIN ser el oficial («Velo» suelto, no «Anonimizador Velo»). */
+  const sueltas = (texto: string, r: (typeof retirados)[number]) =>
+    r.oficial.includes(r.viejo)
+      ? texto.split(r.oficial).filter((p) => palabraSuelta(r.viejo).test(p))
+          .length
+      : (texto.match(palabraSuelta(r.viejo)) ?? []).length;
+
+  function archivos(dir: string, out: string[] = []): string[] {
+    for (const e of readdirSync(dir)) {
+      const p = path.join(dir, e);
+      if (statSync(p).isDirectory()) archivos(p, out);
+      else if (/\.(ya?ml|md|json|tsx?|css)$/.test(e)) out.push(p);
+    }
+    return out;
+  }
+
+  it("el loader entrega a cada app su nombre oficial —ancla, export, manifest y ficha técnica—, y el archivo de content/ queda intacto", () => {
+    for (const crudo of crudos) {
+      const oficial = nombreOficial(categorias, crudo.app.slug);
+      expect(oficial, crudo.app.slug).toBeDefined();
+      const ficha = getFichasVitrina().find(
+        (f) => f.ancla.slug === crudo.app.slug,
+      );
+      expect(ficha?.ancla.nombre, crudo.app.slug).toBe(oficial);
+      expect(ficha?.export.app.nombre, crudo.app.slug).toBe(oficial);
+      expect(
+        getManifestVitrina().find((a) => a.slug === crudo.app.slug)?.nombre,
+      ).toBe(oficial);
+      expect(getFichaTecnica(crudo.app.slug)?.pieza.nombre).toBe(oficial);
+    }
+    // El archivo no se editó: sigue diciendo lo que dijo su casa.
+    expect(crudos.find((c) => c.app.slug === "habla")?.app.nombre).toBe(
+      "Hablemos San",
+    );
+  });
+
+  it("el chat dice lo mismo: el índice de las fichas y los nombres de destino llevan el nombre oficial", () => {
+    const chunks = chunksDeFichas(leerFichas());
+    const texto = chunks.map((c) => `${c.titulo}\n${c.texto}`).join("\n");
+    const destinos = nombresDeDestinos("es");
+    for (const crudo of crudos) {
+      const oficial = nombreOficial(categorias, crudo.app.slug)!;
+      expect(texto, crudo.app.slug).toContain(oficial);
+      expect(destinos.get(`/vitrina/apps/${crudo.app.slug}`)).toBe(oficial);
+      expect(destinos.get(`/vitrina/apps/${crudo.app.slug}/detalle`)).toBe(
+        oficial,
+      );
+    }
+    for (const viejo of ["Hablemos San", "Nutri-Kids", "Dash Agent AI"]) {
+      expect(texto).not.toContain(viejo);
+    }
+    // «Velo» solo aparece completo: «Anonimizador Velo».
+    expect(texto.match(palabraSuelta("Velo"))).not.toBeNull();
+    expect(
+      sueltas(
+        texto,
+        retirados.find((r) => r.viejo === "Velo")!,
+      ),
+    ).toBe(0);
+  });
+
+  it("conNombreOficial cambia el nombre en cada texto, a cualquier profundidad, y nada más", () => {
+    const antes = {
+      app: { nombre: "Viejo", version: 2, activa: true },
+      lista: ["El acceso a Viejo se pide por lista", "otra cosa"],
+      anidado: { a: { b: "Viejo y Viejo" } },
+      nulo: null,
+    };
+    expect(conNombreOficial(antes, "Nuevo")).toEqual({
+      app: { nombre: "Nuevo", version: 2, activa: true },
+      lista: ["El acceso a Nuevo se pide por lista", "otra cosa"],
+      anidado: { a: { b: "Nuevo y Nuevo" } },
+      nulo: null,
+    });
+    // No muta el original.
+    expect(antes.app.nombre).toBe("Viejo");
+  });
+
+  it("si el oficial CONTIENE al nombre del export («Velo» en «Anonimizador Velo»), lo suelto se completa y lo que ya es el oficial no se duplica", () => {
+    const antes = {
+      app: { nombre: "Velo" },
+      texto: "Velo no sube nada; Anonimizador Velo tampoco.",
+    };
+    expect(conNombreOficial(antes, "Anonimizador Velo")).toEqual({
+      app: { nombre: "Anonimizador Velo" },
+      texto: "Anonimizador Velo no sube nada; Anonimizador Velo tampoco.",
+    });
+  });
+
+  it("solo cambia el nombre como palabra suelta: «Velocidad», «velo» y «Velo-x» quedan como están", () => {
+    expect(
+      cambiarNombre(
+        "La Velocidad, el velo y Velo-x; pero Velo sí.",
+        "Velo",
+        "Anonimizador Velo",
+      ),
+    ).toBe("La Velocidad, el velo y Velo-x; pero Anonimizador Velo sí.");
+  });
+
+  it("hay nombres retirados que vigilar (si no, esta puerta no puede fallar)", () => {
+    expect(retirados.map((r) => r.viejo).sort()).toEqual(
+      ["Dash Agent AI", "Hablemos San", "Nutri-Kids", "Velo"].sort(),
+    );
+  });
+
+  it("ROJO si vuelve a colarse: ningún dato, mensaje ni código propio dice el nombre del export", () => {
+    const hallazgos: string[] = [];
+    for (const dir of ["data", "messages", "src"]) {
+      for (const archivo of archivos(dir)) {
+        const texto = readFileSync(archivo, "utf8");
+        for (const r of retirados) {
+          if (sueltas(texto, r) > 0) {
+            hallazgos.push(`${archivo}: «${r.viejo}» → «${r.oficial}»`);
+          }
+        }
+      }
+    }
+    expect(hallazgos).toEqual([]);
   });
 });
 
@@ -170,8 +303,8 @@ describe("el motor (con fixtures: aquí viven los rojos)", () => {
 
   it("ROJO: un slug en las dos categorías lo rechaza el esquema", () => {
     const repetido = {
-      profesionales: [{ slug: "ds", nombre: { es: "A", en: "A" } }],
-      personales: [{ slug: "ds", nombre: { es: "A", en: "A" } }],
+      profesionales: [{ slug: "ds", nombre: "A" }],
+      personales: [{ slug: "ds", nombre: "A" }],
     };
     expect(() => parseCategoriasApps(repetido, "fixture")).toThrow(
       /una sola categoría/,
@@ -180,12 +313,12 @@ describe("el motor (con fixtures: aquí viven los rojos)", () => {
 
   it("ROJO: un nombre oficial vacío o un slug mal formado lo rechaza el esquema", () => {
     const vacio = {
-      profesionales: [{ slug: "ds", nombre: { es: " ", en: "A" } }],
+      profesionales: [{ slug: "ds", nombre: " " }],
       personales: [],
     };
-    expect(() => parseCategoriasApps(vacio, "fixture")).toThrow(/nombre\.es/);
+    expect(() => parseCategoriasApps(vacio, "fixture")).toThrow(/nombre/);
     const mal = {
-      profesionales: [{ slug: "Mala Ruta", nombre: { es: "A", en: "A" } }],
+      profesionales: [{ slug: "Mala Ruta", nombre: "A" }],
       personales: [],
     };
     expect(() => parseCategoriasApps(mal, "fixture")).toThrow(/slug/);
@@ -208,11 +341,5 @@ describe("el motor (con fixtures: aquí viven los rojos)", () => {
         categorias,
       ),
     ).toThrow(/zzz-nueva/);
-  });
-
-  it("una app que no está en el YAML conserva el nombre de su export", () => {
-    expect(nombreVisible(categorias, "otra", "Nombre del export", "es")).toBe(
-      "Nombre del export",
-    );
   });
 });

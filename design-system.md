@@ -396,6 +396,16 @@ cifra `clamp(3.5rem,8vw,4.75rem)`; tres columnas dejaban dos huérfanos.
   esquemática enmarcada en paper-1, para-quién en `ink-2`, conteos en mono y cierre «ver la ficha».
   El enlace estira su área de clic a toda la card (`after:absolute inset-0`) **conservando el
   nombre de la app como nombre accesible** — una sola parada de tabulador, y nunca «leer más».
+  **Desde S9 su nombre es un `h3`** (cuelga del `h2` del bloque de categoría) y es **el nombre
+  oficial** de la app, el mismo en toda la CV Viva (ADR-028).
+- **Bloque de categoría de apps** (`/vitrina/apps` · S9): las muestras de app van en dos
+  `<section data-categoria aria-labelledby>`, **Profesionales primero** y Personales después, cada
+  una en el orden de `data/categorias-apps.yaml`. Cada bloque abre con un `h2` en Fraunces 500,
+  `tracking-[-0.015em]`, `ink-0`, y una línea de 15 px en `ink-2` (máx. 60ch) que dice solo lo
+  que el dato dice («Apps de uso profesional.»). **La prioridad visual es el tamaño del título y
+  el orden, no un adorno nuevo**: el título profesional es `clamp(1.6rem, 3.2vw, 2.1rem)` y el
+  personal `text-xl` (1.25rem); la rejilla es la misma de siempre (`grid gap-5 sm:grid-cols-2`)
+  y la muestra no cambia. Sin tokens nuevos. Un bloque vacío no se pinta.
 - **Muestra de pieza** (escaparate de un frente que no es apps, `/vitrina/<frente>` · S7): la
   hermana de la muestra de app, y se parece en todo menos en una cosa — **una app se reconoce por
   su pantalla y una pieza sin interfaz no tiene ninguna**. Un agente vive en una terminal, una
@@ -414,11 +424,23 @@ cifra `clamp(3.5rem,8vw,4.75rem)`; tres columnas dejaban dos huérfanos.
   tarjetas paper-1 en rejilla; cada una abre con **la cifra en Fraunces** y su unidad en mono
   `ink-2`, luego el título y el texto, y cierra con **su chip de procedencia**. La regla del chip
   no se relaja aquí: _un hallazgo con número y sin procedencia es una opinión disfrazada._
-- **Galería** («Cómo se ve», solo si la ficha trae `galeria` · S7): de 1 a 12 capturas de la pieza
-  corriendo, cada una en `<figure>` con marco paper-1 y `figcaption` mono «Pantalla N de T».
-  `loading="lazy"`, `sizes` responsivo, y se sirven de `/piezas/<frente>/…` —espacio propio, que
-  no colisiona con la ruta de la ficha—. **Se guardan tal como llegaron**: convertirlas obligaría
-  a editar la ficha de otra casa.
+- **Galería en carrusel** («Cómo se ve», solo si la ficha trae `galeria` · S7, carrusel desde
+  S9): de 1 a 12 capturas de la pieza corriendo, **una a la vez y a todo el ancho**, que se
+  recorren en horizontal. Nativo, sin librería: pista `flex` con `snap-x snap-mandatory` y
+  `overflow-x-auto`, una captura por pantalla (`snap-start`, `snap-always`), cada una en `<figure>`
+  con marco paper-1, `r-[12px]` y `sh-1`, y `figcaption` mono «Pantalla N de T» + el pie. Debajo,
+  una **fila de control**: botón ← y botón → de 44 px (`size-11`, `r-full`, borde paper-3, fondo
+  paper-0, `ink-1`; hover paper-1 + `ink-0`; **deshabilitados en los extremos**, a 40 % de
+  opacidad) y, en medio, el indicador «1 de 6» en mono 11 px `ink-2`. Patrón **APG de carrusel**:
+  región con `aria-roledescription="carousel"` y nombre; cada captura es un grupo `slide` con su
+  «n de N»; el indicador es `role="status" aria-live="polite"`; la pista recibe foco (`tabindex=0`)
+  y las flechas la recorren. **Nada se mueve solo** —ni autoplay ni rotación—. Con
+  **«reducir movimiento»** el desplazamiento de los botones no se anima, pero ocurre (la FORMA del
+  árbol no depende de eso, regla 5a). Con **una sola captura** no hay botones, indicador, foco ni
+  roles de carrusel: queda la figura. `loading="lazy"` y `sizes="(min-width: 1024px) 976px,
+  100vw"`; se sirven de `/piezas/<frente>/…` —espacio propio—, **tal como llegaron**: convertirlas
+  obligaría a editar la ficha de otra casa. Sin JS la pista sigue siendo una tira que se desliza
+  con el dedo o la rueda.
 - **Tarjeta de grupo** (dentro de una ficha): `r-md`, borde paper-3. Cabecera `<h4><button>` —
   jamás `<button><h4>` — con índice mono, icono del DS de la app de origen, nombre, línea y
   chevron. Cerrada, el interior va con `visibility: hidden` (fuera del árbol de accesibilidad);

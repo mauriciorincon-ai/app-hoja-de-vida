@@ -49,16 +49,17 @@ if (EXPORTS.length === 0) throw new Error("content/vitrina sin exports");
 
 /**
  * Las dos categorías de las apps y sus nombres oficiales (Sprint 009), leídas
- * del mismo YAML que renderiza la página: una app nueva entra al e2e sola.
+ * del mismo YAML que renderiza la página: una app nueva entra al e2e sola. El
+ * nombre es UNO por app, el mismo en los dos idiomas (ADR-028).
  */
-type EntradaCategoria = { slug: string; nombre: { es: string; en: string } };
+type EntradaCategoria = { slug: string; nombre: string };
 const CATEGORIAS = parse(
   readFileSync("data/categorias-apps.yaml", "utf8"),
 ) as Record<"profesionales" | "personales", EntradaCategoria[]>;
-const nombreVisible = (exp: Export, l: "es" | "en" = "es") =>
+const nombreVisible = (exp: Export) =>
   [...CATEGORIAS.profesionales, ...CATEGORIAS.personales].find(
     (e) => e.slug === exp.app.slug,
-  )?.nombre[l] ?? exp.app.nombre;
+  )?.nombre ?? exp.app.nombre;
 /** Los slugs de una categoría que SÍ tienen export, en el orden del YAML. */
 const enCategoria = (c: "profesionales" | "personales") =>
   CATEGORIAS[c]
@@ -213,7 +214,7 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
         await expect(
           page
             .locator(`[data-muestra-slug="${exp.app.slug}"]`)
-            .getByRole("link", { name: nombreVisible(exp, l), exact: true }),
+            .getByRole("link", { name: nombreVisible(exp), exact: true }),
         ).toBeVisible();
       }
     }
@@ -265,6 +266,50 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
             "href",
             ruta(orden[i + 1]),
           );
+      }
+    }
+  });
+
+  test("cada app lleva UN nombre, el oficial, en la muestra, la ficha técnica, el detalle, el título y el selector, en español y en inglés", async ({
+    page,
+  }) => {
+    for (const l of ["es", "en"] as const) {
+      for (const exp of EXPORTS) {
+        const nombre = nombreVisible(exp);
+        const slug = exp.app.slug;
+
+        await page.goto(`/${l}/vitrina/apps/${slug}`);
+        await expect(
+          page.getByRole("heading", { level: 1, name: nombre, exact: true }),
+          `${l}/${slug} ficha técnica`,
+        ).toBeVisible();
+        await expect(page, `${l}/${slug} título`).toHaveTitle(
+          new RegExp(`^${nombre}`),
+        );
+        // El selector de la lista de espera nombra a TODAS las apps con su nombre oficial.
+        const opciones = await page
+          .locator("#contacto-vitrina select option")
+          .allTextContents();
+        expect(opciones, `${l}/${slug} selector`).toContain(nombre);
+
+        await page.goto(`/${l}/vitrina/apps/${slug}/detalle`);
+        await expect(
+          page.getByRole("heading", { level: 2, name: nombre, exact: true }),
+          `${l}/${slug} detalle`,
+        ).toBeVisible();
+        await expect(page, `${l}/${slug} título del detalle`).toHaveTitle(
+          new RegExp(`^${nombre}`),
+        );
+      }
+      // Y ningún nombre que trae un export (y el oficial reemplaza) queda a la vista.
+      for (const exp of EXPORTS) {
+        const oficial = nombreVisible(exp);
+        if (oficial === exp.app.nombre || oficial.includes(exp.app.nombre))
+          continue;
+        const cuerpo = await (
+          await page.request.get(`/${l}/vitrina/apps/${exp.app.slug}/detalle`)
+        ).text();
+        expect(cuerpo, `${l}/${exp.app.slug}`).not.toContain(exp.app.nombre);
       }
     }
   });

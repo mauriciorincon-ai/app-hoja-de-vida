@@ -1,5 +1,5 @@
 /**
- * FIRMA de «Dash Agent AI» — su clímax re-dibujado en los tokens de CV Viva.
+ * FIRMA de «Dash Agent» — su clímax re-dibujado en los tokens de CV Viva.
  *
  * La escena original (app-dash-agent-ai/docs/BROCHURE.html, «Lo que saben de
  * ti — y si sigue siendo cierto»): un archivo de instrucciones de 408 líneas

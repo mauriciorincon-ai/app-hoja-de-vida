@@ -43,7 +43,7 @@ describe("el motor, contra fichas de juguete", () => {
   it("una app usa el brochure y su complemento, y cita a /vitrina/apps/<slug>", () => {
     const chunks = chunksDeApp({
       brochure: {
-        app: { slug: "habla", nombre: "Hablemos San", estado: "sellado" },
+        app: { slug: "habla", nombre: "Habla San", estado: "sellado" },
         promesa: { tagline: "Su voz mueve el mundo." },
         funcionalidades: { grupos: [{ nombre: "Juegos", linea: "Se juegan hablando.", features: [{ nombre: "Cápsula", que_hace: "Una idea al día." }] }] },
         metricas: [{ etiqueta: "Pruebas", valor: 261, unidad: "pruebas", fuente: "medido" }],

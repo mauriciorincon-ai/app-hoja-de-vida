@@ -1,4 +1,4 @@
-# Complemento de la ficha técnica de Velo (ADR-016). PROCEDENCIA: cv-viva —
+# Complemento de la ficha técnica de Anonimizador Velo (ADR-016). PROCEDENCIA: cv-viva —
 # derivado de su export por CV Viva; se retira cuando la app mande el suyo.
 schema_version: "1.0.0"
 app: anonimizador
@@ -19,7 +19,7 @@ proceso:
   titulo: "Entregar sin entregar, y recuperar"
   carriles:
     - { id: persona, nombre: "Quien entrega" }
-    - { id: velo, nombre: "Velo · en el navegador" }
+    - { id: velo, nombre: "Anonimizador Velo · en el navegador" }
     - { id: tercero, nombre: "El tercero" }
   pasos:
     - { id: ini, tipo: inicio, carril: persona, texto: "Un archivo con datos de personas" }
@@ -68,8 +68,8 @@ roadmap:
       es: "Anonimización sin pantalla, dentro de tus pipelines"
       en: "Screen-free anonymization inside your pipelines"
     descripcion:
-      es: "Llamas a Velo desde tus propios procesos y la anonimización ocurre sola, con las mismas políticas y el mismo certificado que hoy obtienes a mano."
-      en: "Call Velo from your own processes and anonymization runs on its own, with the same policies and the same certificate you get by hand today."
+      es: "Llamas a Anonimizador Velo desde tus propios procesos y la anonimización ocurre sola, con las mismas políticas y el mismo certificado que hoy obtienes a mano."
+      en: "Call Anonimizador Velo from your own processes and anonymization runs on its own, with the same policies and the same certificate you get by hand today."
   - id: privacidad-diferencial
     titulo:
       es: "Privacidad diferencial: garantía matemática, no solo k-anonimato"
@@ -82,8 +82,8 @@ roadmap:
       es: "La generalización óptima, no la primera que sirve"
       en: "The optimal generalization, not the first one that works"
     descripcion:
-      es: "Velo explora jerarquías completas y elige la que destruye menos utilidad para el mismo nivel de protección que pediste."
-      en: "Velo explores full hierarchies and picks the one that destroys the least utility for the protection level you asked for."
+      es: "Anonimizador Velo explora jerarquías completas y elige la que destruye menos utilidad para el mismo nivel de protección que pediste."
+      en: "Anonimizador Velo explores full hierarchies and picks the one that destroys the least utility for the protection level you asked for."
   - id: metadatos-de-pdf-e-imagenes
     titulo:
       es: "Limpiar lo que delata un PDF o una foto"

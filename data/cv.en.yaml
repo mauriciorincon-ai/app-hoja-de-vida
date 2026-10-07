@@ -70,7 +70,7 @@ trayectoria:
     bullets:
       - "This interactive résumé, with a RAG chat that answers with citations to the site's sources and is evaluated with its own and outside questions before every change is published."
       - "Probeta DS, a pipeline application that runs Python, pandas and scikit-learn in the browser, without sending the data to any server: it compares algorithms against explicit baselines, evaluates on the test set with no data leakage and delivers a model card with its limits."
-      - "Other pipeline applications: Dash Agent AI, to analyze the context and cost of AI agents, with 693 tests and 97.5% line coverage (August 2026); Hablemos San, sealed and in use by the family it was built for."
+      - "Other pipeline applications: Dash Agent, to analyze the context and cost of AI agents, with 693 tests and 97.5% line coverage (August 2026); Habla San, sealed and in use by the family it was built for."
       - "Agents with binary acceptance criteria and human checkpoints: the ISO 42001 Expert, the Power BI Dashboard Builder and the AI-APPs Factory."
       - "A research pipeline, with the Design Science and Computational Paper harnesses, that fixes the criteria before measuring, measures the literature gap and takes every study through to a manuscript ready to submit."
       - "Own research: ARKHÉ, which in my measurements cut token consumption by 52%, still without a published artifact; FORJA; the research pieces and the open-data dashboards in the showcase."
