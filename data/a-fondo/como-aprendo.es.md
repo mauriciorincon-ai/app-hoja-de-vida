@@ -121,18 +121,18 @@ Lo último que aprendí desde cero, sin certificado de por medio, fueron Codex, 
 
 La evidencia más contundente de mi capacidad de aprendizaje se encuentra en lo que he construido, porque cada pieza puede examinarse y relacionarse con decisiones, pruebas y resultados concretos.
 
-Mi portafolio reúne seis aplicaciones hermanas publicadas —Velo, Dash Agent AI, Probeta DS, Hablemos San, Innmobiliaria y Nutri-Kids— más CV Viva, este sitio. Todas alcanzaron su MVP, están en operación sostenida y siguen evolucionando; Hablemos San es la más avanzada.
+Mi portafolio reúne seis aplicaciones hermanas publicadas —Anonimizador Velo, Dash Agent, Probeta DS, Habla San, Innmobiliaria y Nutrikids— más CV Viva, este sitio. Todas alcanzaron su MVP, están en operación sostenida y siguen evolucionando; Habla San es la más avanzada.
 
 | Aplicación    | Pruebas automatizadas  | Cobertura | Decisiones (ADR) | Lo que exigió aprender                                        |
 | ------------- | ---------------------- | --------: | ---------------: | ------------------------------------------------------------- |
-| Velo          | 740 unitarias, 153 e2e |   96,17 % |                8 | procesamiento local sin servidor, 500.000 filas               |
-| Dash Agent AI | 693 unitarias          |    97,5 % |               13 | hacer visible el contexto que un agente conserva              |
+| Anonimizador Velo          | 740 unitarias, 153 e2e |   96,17 % |                8 | procesamiento local sin servidor, 500.000 filas               |
+| Dash Agent | 693 unitarias          |    97,5 % |               13 | hacer visible el contexto que un agente conserva              |
 | Probeta DS    | 267 unitarias, 24 e2e  |   90,69 % |                8 | Python, Pandas y scikit-learn en el navegador con WebAssembly |
-| Hablemos San  | 261 unitarias, 169 e2e |   94,02 % |               14 | 50 cápsulas y 16 hitos de contenido, sin grabar la voz        |
+| Habla San  | 261 unitarias, 169 e2e |   94,02 % |               14 | 50 cápsulas y 16 hitos de contenido, sin grabar la voz        |
 | Innmobiliaria | 172 unitarias, 76 e2e  |   98,31 % |                6 | flujos de negocio con validación                              |
-| Nutri-Kids    | 214 unitarias, 94 e2e  |   99,52 % |                7 | un motor de cálculo con cobertura casi total                  |
+| Nutrikids    | 214 unitarias, 94 e2e  |   99,52 % |                7 | un motor de cálculo con cobertura casi total                  |
 
-Probeta DS me llevó a ejecutar Python, Pandas y scikit-learn dentro del navegador mediante WebAssembly. Velo exigió procesamiento local de archivos y una arquitectura que evitara transferir información hacia un servidor. Otras aplicaciones incorporaron trabajadores web, bases de datos embebidas, capacidades instalables, operación sin conexión, despliegue en el borde, síntesis de voz y captura de audio en el navegador.
+Probeta DS me llevó a ejecutar Python, Pandas y scikit-learn dentro del navegador mediante WebAssembly. Anonimizador Velo exigió procesamiento local de archivos y una arquitectura que evitara transferir información hacia un servidor. Otras aplicaciones incorporaron trabajadores web, bases de datos embebidas, capacidades instalables, operación sin conexión, despliegue en el borde, síntesis de voz y captura de audio en el navegador.
 
 No abordé estas tecnologías mediante ejercicios separados del producto. Cada una apareció porque una necesidad de la aplicación exigía comprenderla y utilizarla correctamente. El aprendizaje tenía un criterio de aceptación concreto: la funcionalidad debía integrarse con el resto de la arquitectura, superar sus pruebas y quedar disponible para ser utilizada por otras personas.
 
@@ -184,7 +184,7 @@ Mi objetivo no es memorizar todas las opciones de una plataforma. Busco comprend
 
 <!-- seccion: documentacion-del-aprendizaje -->
 
-Documentar no es una actividad posterior al aprendizaje. Es uno de los mecanismos mediante los cuales aprendo. Escribir una decisión me obliga a expresar qué problema resolvía, qué alternativas consideré, qué evidencia utilicé y bajo qué condiciones podría dejar de ser válida. En las aplicaciones eso toma la forma de registros de decisiones de arquitectura, los ADR: 14 en Hablemos San, 13 en Dash Agent AI, 8 en Velo.
+Documentar no es una actividad posterior al aprendizaje. Es uno de los mecanismos mediante los cuales aprendo. Escribir una decisión me obliga a expresar qué problema resolvía, qué alternativas consideré, qué evidencia utilicé y bajo qué condiciones podría dejar de ser válida. En las aplicaciones eso toma la forma de registros de decisiones de arquitectura, los ADR: 14 en Habla San, 13 en Dash Agent, 8 en Anonimizador Velo.
 
 Una nota que se limita a registrar un comando o una secuencia de pasos tiene utilidad operativa, pero no conserva necesariamente el razonamiento. Procuro documentar también el propósito, los supuestos y las consecuencias, porque esa información permite adaptar el conocimiento cuando cambia el contexto.
 

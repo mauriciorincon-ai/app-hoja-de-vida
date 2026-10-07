@@ -1,5 +1,5 @@
 /**
- * FIRMA de «Nutri-Kids» — su clímax re-dibujado en los tokens de CV Viva.
+ * FIRMA de «Nutrikids» — su clímax re-dibujado en los tokens de CV Viva.
  *
  * La escena original (app-nutri-kids/docs/BROCHURE.html, «Aquí nadie califica
  * a tu hijo»): el resumen del día dice «ya hiciste 7 de 10» **en palabras**, y

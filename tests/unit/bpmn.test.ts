@@ -183,7 +183,7 @@ describe("trazar — invariantes del diagrama", () => {
 });
 
 /**
- * Lo que el usuario cazó a ojo el 2026-09-06 en DS y Nutri-Kids, convertido
+ * Lo que el usuario cazó a ojo el 2026-09-06 en DS y Nutrikids, convertido
  * en invariante sobre LOS SEIS procesos reales: rótulos que se pisaban
  * («no supera» + «sí»), un rótulo tachado por la vertical de otro flujo
  * («vuelve a los datos») y el texto de una compuerta atravesado por su flecha

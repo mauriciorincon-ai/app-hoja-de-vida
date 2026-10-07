@@ -23,7 +23,7 @@ export type AppConRoadmap = {
   roadmap: RoadmapFeature[];
 };
 
-/** Apps con al menos una feature votable, en el orden del escaparate. */
+/** Apps con al menos una feature votable, en el orden del manifest de la vitrina. */
 export function appsConRoadmap(): AppConRoadmap[] {
   return getManifestVitrina()
     .map((a) => ({

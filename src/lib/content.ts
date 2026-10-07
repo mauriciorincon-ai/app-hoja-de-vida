@@ -60,3 +60,11 @@ export const getVitrina = cache((): Vitrina => {
     ...conPiezas,
   ]);
 });
+
+/**
+ * Las dos categorías de las apps y sus nombres oficiales (Sprint 009). Se lee en
+ * `vitrina/categorias-loader.ts` (aquí solo se re-exporta, para que las páginas
+ * sigan pidiendo el contenido a un solo sitio); el reparto en sí —y el fallo si
+ * un export no tiene categoría— vive en el motor puro `categorias-apps.ts`.
+ */
+export { getCategoriasApps } from "./vitrina/categorias-loader";

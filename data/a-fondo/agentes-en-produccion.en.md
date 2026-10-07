@@ -271,7 +271,7 @@ capability.
 I distinguish two things that are often confused. Telemetry serves the responsible team to
 understand the technical behavior of a solution. Transparency serves the affected person to know
 what information is kept and used about them. Both are necessary, but they answer to different
-audiences and responsibilities: at Vesting I built the first; Dash Agent AI, years later, was
+audiences and responsibilities: at Vesting I built the first; Dash Agent, years later, was
 born from the second.
 
 The main lesson was that it is not possible to govern an intelligent solution whose operation
@@ -285,16 +285,16 @@ the two sides met: the telemetry is mine, and the transparency belongs to whoeve
 writing their first line ticks a notice that says what is stored about them and how to ask for it to
 be deleted.
 
-## Dash Agent AI and transparency about the context
+## Dash Agent and transparency about the context
 
 <!-- seccion: dash-agent-ai -->
 
-Dash Agent AI is an application of my own published in my showcase, which I conceived and designed entirely in 2026, with my own means and outside Fundación CTIC, in my own app pipeline and well after Vesting. It is not a bridge from Vesting's platform: it is not part of it and does not use its confidential architecture. It is
+Dash Agent is an application of my own published in my showcase, which I conceived and designed entirely in 2026, with my own means and outside Fundación CTIC, in my own app pipeline and well after Vesting. It is not a bridge from Vesting's platform: it is not part of it and does not use its confidential architecture. It is
 an independent application that answers a more current and different question: what information
 an agent knows, keeps or uses about the person it interacts with, and how much it costs that
 person to work with it.
 
-Dash Agent AI turns an abstract dimension of trust into an examinable experience. Instead of
+Dash Agent turns an abstract dimension of trust into an examinable experience. Instead of
 asking the user to accept in general terms that an agent uses context or memory, the application
 shows which elements are available and how they can influence the interaction. Its star feature
 is the memory auditor: the inventory of everything the agents have written about the person
@@ -313,7 +313,7 @@ is not enough for an architecture to be technically observable for its developer
 necessary to design understandable ways of communicating to the user what is happening, what
 they can control and what limits they must recognize.
 
-## Dash Agent AI on the inside: demonstrable read-only and a withdrawn feature
+## Dash Agent on the inside: demonstrable read-only and a withdrawn feature
 
 <!-- seccion: dash-por-dentro -->
 
@@ -665,7 +665,7 @@ fewer tokens on the 120 scenarios: not a cheaper model, but less useless context
 I also evaluate the total cost of completing a task and not only the tokens used in one call. A
 seemingly cheap answer can turn out expensive if it needs multiple retries, corrections or
 manual reviews. The useful measure is the consumption needed to obtain an acceptable result, not
-the isolated price of the first answer. Dash Agent AI exists in part to measure that on real
+the isolated price of the first answer. Dash Agent exists in part to measure that on real
 work: where the spending goes without producing anything —retries, abandoned sessions, massive
 re-reads—, each pattern with its threshold written down.
 

@@ -566,7 +566,7 @@ ajenas:
     guardrail: pasa
     porque: >-
       Desde que las fichas de la vitrina entran al índice (ADR-023), «mañana»
-      aparece en la ficha de Hablemos San («cada mañana»). La ficha es de otra
+      aparece en la ficha de Habla San («cada mañana»). La ficha es de otra
       casa y no se edita aquí; la pregunta llega al modelo y el prompt la
       declina.
   - pregunta: "¿cuál es la receta del ajiaco?"

@@ -1,4 +1,4 @@
-# Complemento de la ficha técnica de Nutri-Kids (ADR-016). PROCEDENCIA:
+# Complemento de la ficha técnica de Nutrikids (ADR-016). PROCEDENCIA:
 # cv-viva — derivado de su export por CV Viva; se retira cuando la app mande el suyo.
 schema_version: "1.0.0"
 app: nutri-kids
@@ -19,7 +19,7 @@ proceso:
   titulo: "La dieta, viva en el bolsillo"
   carriles:
     - { id: cuida, nombre: "Quien cuida" }
-    - { id: app, nombre: "Nutri-Kids · en el teléfono" }
+    - { id: app, nombre: "Nutrikids · en el teléfono" }
     - { id: asistente, nombre: "El asistente de IA" }
   pasos:
     - { id: ini, tipo: inicio, carril: cuida, texto: "Un plan médico en un documento" }

@@ -2,6 +2,8 @@ import "server-only";
 import { readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { cache } from "react";
+import { conNombreOficial, nombreOficial } from "./categorias-apps";
+import { getCategoriasApps } from "./categorias-loader";
 import {
   brochureExportSchema,
   versionCompatible,
@@ -17,6 +19,8 @@ import {
  *
  * Los exports NO se editan aquí (regla dura 4): si uno está mal, el error de
  * build es el aviso para reportarlo a la planeadora y que su app lo corrija.
+ * Lo único que cambia al leerlos es el NOMBRE de la app, por su nombre oficial
+ * (`data/categorias-apps.yaml`, ADR-028).
  */
 
 const VITRINA_DIR = path.join(process.cwd(), "content", "vitrina");
@@ -98,11 +102,17 @@ export const getFichasVitrina = cache((): FichaVitrina[] => {
     .filter((f) => f.endsWith(SUFIJO))
     .sort();
 
+  const categorias = getCategoriasApps();
   const fichas = archivos.map((archivo) => {
     const raw = JSON.parse(
       readFileSync(path.join(VITRINA_DIR, archivo), "utf8"),
     ) as unknown;
-    const exp = parseOrThrow(raw, archivo);
+    const leido = parseOrThrow(raw, archivo);
+    // NOMBRE OFICIAL (ADR-028): se aplica aquí, UNA vez, y de aquí lo heredan el
+    // escaparate, la ficha, el chat, el manifest, los correos y el PDF. El
+    // archivo de `content/` no cambia: es una lectura con alias.
+    const oficial = nombreOficial(categorias, leido.app.slug);
+    const exp = oficial ? conNombreOficial(leido, oficial) : leido;
     return { ancla: ancla(exp, archivo), export: exp };
   });
 

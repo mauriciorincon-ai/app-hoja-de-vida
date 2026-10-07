@@ -4,7 +4,7 @@ import { useEffect } from "react";
 
 /**
  * APERTURA POR LECTURA — adopción ENTERA del patrón del banco de técnicas §7
- * (`wiki/patterns/apertura-por-lectura.md`). Nacido en Velo tras 5 rondas de
+ * (`wiki/patterns/apertura-por-lectura.md`). Nacido en Anonimizador Velo tras 5 rondas de
  * gate visual y re-derivado a ciegas por nutri-kids en 5 más: por eso el método
  * exige adoptarlo completo y **no re-derivarlo por rondas**.
  *

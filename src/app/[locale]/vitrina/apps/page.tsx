@@ -10,9 +10,10 @@ import { MuestraApp } from "@/components/vitrina/muestra";
 import { appsConBrochure } from "@/lib/brochure";
 import { Link } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
-import { getCv } from "@/lib/content";
+import { getCategoriasApps, getCv } from "@/lib/content";
 import { SITE_URL } from "@/lib/site";
 import { getFrente } from "@/lib/vitrina/categorias";
+import { repartirApps } from "@/lib/vitrina/categorias-apps";
 import { getFichasVitrina } from "@/lib/vitrina/loader";
 
 /**
@@ -72,6 +73,27 @@ export default async function VitrinaAppsPage({ params }: Params) {
   const cv = getCv(l);
   const t = await getTranslations("vitrina");
   const fichas = getFichasVitrina();
+  // Dos categorías (Sprint 009): el reparto sale de `data/categorias-apps.yaml`
+  // y FALLA el build si un export no tiene categoría. El loader no se reordena.
+  const categorias = getCategoriasApps();
+  const reparto = repartirApps(fichas, categorias);
+  const bloques = [
+    {
+      id: "profesionales",
+      titulo: t("categoriaProfesionales"),
+      linea: t("categoriaProfesionalesLinea"),
+      // Prioridad visual a las profesionales: encabezado mayor.
+      claseTitulo: "text-[clamp(1.6rem,3.2vw,2.1rem)]",
+      fichas: reparto.profesionales,
+    },
+    {
+      id: "personales",
+      titulo: t("categoriaPersonales"),
+      linea: t("categoriaPersonalesLinea"),
+      claseTitulo: "text-xl",
+      fichas: reparto.personales,
+    },
+  ].filter((b) => b.fichas.length > 0);
   // El párrafo del hero sale del YAML del frente, como el de los otros tres.
   const frente = getFrente("apps");
   if (!frente) notFound();
@@ -126,13 +148,30 @@ export default async function VitrinaAppsPage({ params }: Params) {
             )}
           </header>
 
-          <Reveal variant="fadeInUp" amount="some">
-            <ul className="grid gap-5 sm:grid-cols-2">
-              {fichas.map((ficha) => (
-                <MuestraApp key={ficha.ancla.slug} ficha={ficha} />
-              ))}
-            </ul>
-          </Reveal>
+          {bloques.map((b, i) => (
+            <Reveal key={b.id} variant="fadeInUp" amount="some">
+              <section
+                aria-labelledby={`categoria-${b.id}`}
+                data-categoria={b.id}
+                className={i === 0 ? "" : "mt-14"}
+              >
+                <h2
+                  id={`categoria-${b.id}`}
+                  className={`font-display font-medium tracking-[-0.015em] text-ink-0 ${b.claseTitulo}`}
+                >
+                  {b.titulo}
+                </h2>
+                <p className="mt-2 mb-5 max-w-[60ch] text-[15px] leading-relaxed text-ink-2">
+                  {b.linea}
+                </p>
+                <ul className="grid gap-5 sm:grid-cols-2">
+                  {b.fichas.map((ficha) => (
+                    <MuestraApp key={ficha.ancla.slug} ficha={ficha} />
+                  ))}
+                </ul>
+              </section>
+            </Reveal>
+          ))}
 
           {/* ── Qué viene: el roadmap votable, con las apps ── */}
 

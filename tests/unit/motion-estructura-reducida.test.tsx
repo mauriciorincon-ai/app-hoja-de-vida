@@ -1,10 +1,13 @@
 // @vitest-environment node
+/* eslint-disable @next/next/no-img-element -- el mock de next/image pinta una <img> plana a propósito */
 import { renderToString } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
 import { IconoSkill } from "@/components/home/skills-iconos";
 import { Reveal } from "@/components/motion/reveal";
 import { Stagger, StaggerItem } from "@/components/motion/stagger";
 import { TimelineTrack } from "@/components/motion/timeline-track";
+import { GaleriaCarrusel } from "@/components/vitrina/galeria-carrusel";
+import type { EtiquetasCarrusel } from "@/components/vitrina/galeria-carrusel";
 
 /**
  * LA ESTRUCTURA DEL DOM NO DEPENDE DE `useReducedMotion()` (2026-09-10).
@@ -37,6 +40,12 @@ vi.mock("@/i18n/navigation", () => ({
   Link: (props: React.ComponentProps<"a">) => <a {...props} />,
 }));
 vi.mock("@/lib/analytics", () => ({ trackEvent: () => {} }));
+// El carrusel pinta `next/image`; en node basta una <img> plana.
+vi.mock("next/image", () => ({
+  default: ({ src, alt }: { src: string; alt: string }) => (
+    <img src={src} alt={alt} />
+  ),
+}));
 
 const sinEstilos = (html: string) => html.replace(/ style="[^"]*"/g, "");
 
@@ -44,6 +53,14 @@ function html(nodo: React.ReactNode, reduced: boolean | null) {
   hook.reduced = reduced;
   return sinEstilos(renderToString(<>{nodo}</>));
 }
+
+const ETIQUETAS_CARRUSEL: EtiquetasCarrusel = {
+  etiqueta: "Pantallas",
+  anterior: "Anterior",
+  siguiente: "Siguiente",
+  indicadores: ["1 de 2", "2 de 2"],
+  pies: ["Pantalla 1 de 2", "Pantalla 2 de 2"],
+};
 
 const CASOS: Record<string, React.ReactNode> = {
   TimelineTrack: (
@@ -58,9 +75,19 @@ const CASOS: Record<string, React.ReactNode> = {
           actual: true,
           hrefCaseStudy: "/proyectos/uno",
         },
-        { periodo: "2021 — 2022", rol: "Rol B", organizacion: "Org B", descripcion: "Dos." },
+        {
+          periodo: "2021 — 2022",
+          rol: "Rol B",
+          organizacion: "Org B",
+          descripcion: "Dos.",
+        },
       ]}
-      labels={{ verMas: "Más", verMenos: "Menos", verCaseStudy: "Ver", indiceAria: "Año" }}
+      labels={{
+        verMas: "Más",
+        verMenos: "Menos",
+        verCaseStudy: "Ver",
+        indiceAria: "Año",
+      }}
     />
   ),
   Reveal: (
@@ -79,6 +106,18 @@ const CASOS: Record<string, React.ReactNode> = {
     </Stagger>
   ),
   IconoSkill: <IconoSkill id="ia-y-ml" />,
+  // Sprint 009: el carrusel de la galería usa el hook SOLO para el `behavior`
+  // del desplazamiento; la forma del árbol no puede depender de él.
+  GaleriaCarrusel: (
+    <GaleriaCarrusel
+      capturas={[
+        { archivo: "a.png", pie: "Uno" },
+        { archivo: "b.png", pie: "Dos" },
+      ]}
+      frente="tableros"
+      etiquetas={ETIQUETAS_CARRUSEL}
+    />
+  ),
 };
 
 describe("motion: la estructura del DOM no depende de useReducedMotion()", () => {

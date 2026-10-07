@@ -47,6 +47,25 @@ const EXPORTS: Export[] = readdirSync("content/vitrina")
   );
 if (EXPORTS.length === 0) throw new Error("content/vitrina sin exports");
 
+/**
+ * Las dos categorías de las apps y sus nombres oficiales (Sprint 009), leídas
+ * del mismo YAML que renderiza la página: una app nueva entra al e2e sola. El
+ * nombre es UNO por app, el mismo en los dos idiomas (ADR-028).
+ */
+type EntradaCategoria = { slug: string; nombre: string };
+const CATEGORIAS = parse(
+  readFileSync("data/categorias-apps.yaml", "utf8"),
+) as Record<"profesionales" | "personales", EntradaCategoria[]>;
+const nombreVisible = (exp: Export) =>
+  [...CATEGORIAS.profesionales, ...CATEGORIAS.personales].find(
+    (e) => e.slug === exp.app.slug,
+  )?.nombre ?? exp.app.nombre;
+/** Los slugs de una categoría que SÍ tienen export, en el orden del YAML. */
+const enCategoria = (c: "profesionales" | "personales") =>
+  CATEGORIAS[c]
+    .map((e) => e.slug)
+    .filter((s) => EXPORTS.some((x) => x.app.slug === s));
+
 /** Los frentes del portal, de la misma fuente que la página (ADR-015). */
 type Frente = {
   id: string;
@@ -141,7 +160,7 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
     const primera = MAS_LARGA;
     await page
       .locator(`[data-muestra-slug="${primera.app.slug}"]`)
-      .getByRole("link", { name: primera.app.nombre })
+      .getByRole("link", { name: nombreVisible(primera) })
       .click();
 
     // Primero la FICHA TÉCNICA (ADR-016) …
@@ -162,6 +181,45 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
     ).toBeVisible();
   });
 
+  test("las apps van en dos bloques —profesionales primero— en el orden del YAML, con su nombre oficial", async ({
+    page,
+  }) => {
+    for (const l of ["es", "en"] as const) {
+      await page.goto(`/${l}/vitrina/apps`);
+      const bloques = page.locator("section[data-categoria]");
+      await expect(bloques).toHaveCount(2);
+      // Profesionales ANTES que personales, y cada una con su h2.
+      expect(
+        await bloques.evaluateAll((els) =>
+          els.map((e) => e.getAttribute("data-categoria")),
+        ),
+      ).toEqual(["profesionales", "personales"]);
+      await expect(
+        page.locator('[data-categoria="profesionales"] h2').first(),
+      ).toHaveText(l === "es" ? "Profesionales" : "Professional");
+      await expect(
+        page.locator('[data-categoria="personales"] h2').first(),
+      ).toHaveText(l === "es" ? "Personales" : "Personal");
+      // Pertenencia y orden de las muestras dentro de cada bloque.
+      for (const c of ["profesionales", "personales"] as const) {
+        const slugs = await page
+          .locator(`[data-categoria="${c}"] [data-muestra-slug]`)
+          .evaluateAll((els) =>
+            els.map((e) => e.getAttribute("data-muestra-slug")),
+          );
+        expect(slugs, `${l}/${c}`).toEqual(enCategoria(c));
+      }
+      // Y la muestra dice el nombre OFICIAL, no el del export.
+      for (const exp of EXPORTS) {
+        await expect(
+          page
+            .locator(`[data-muestra-slug="${exp.app.slug}"]`)
+            .getByRole("link", { name: nombreVisible(exp), exact: true }),
+        ).toBeVisible();
+      }
+    }
+  });
+
   test("cada app tiene su ruta propia y solo su ficha vive en ella", async ({
     page,
   }) => {
@@ -172,8 +230,87 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
       await expect(fichas).toHaveCount(1);
       await expect(fichas).toHaveAttribute("data-app-slug", exp.app.slug);
       await expect(
-        page.getByRole("heading", { level: 2, name: exp.app.nombre }),
+        page.getByRole("heading", { level: 2, name: nombreVisible(exp) }),
       ).toBeVisible();
+    }
+  });
+
+  test("las vecinas «App anterior / App siguiente» siguen el orden del escaparate, en la ficha y en el detalle", async ({
+    page,
+  }) => {
+    // El orden que el visitante acaba de ver: profesionales y después personales.
+    await page.goto("/es/vitrina/apps");
+    const orden = await page
+      .locator("[data-muestra-slug]")
+      .evaluateAll((els) =>
+        els.map((e) => e.getAttribute("data-muestra-slug") as string),
+      );
+    expect(orden).toHaveLength(EXPORTS.length);
+
+    for (const sufijo of ["", "/detalle"]) {
+      for (const [i, slug] of orden.entries()) {
+        await page.goto(`/es/vitrina/apps/${slug}${sufijo}`);
+        const anterior = page.getByRole("link", { name: /App anterior/ });
+        const siguiente = page.getByRole("link", { name: /App siguiente/ });
+        const ruta = (v: string) => new RegExp(`/vitrina/apps/${v}${sufijo}$`);
+        if (i === 0) await expect(anterior, `${slug}${sufijo}`).toHaveCount(0);
+        else
+          await expect(anterior, `${slug}${sufijo}`).toHaveAttribute(
+            "href",
+            ruta(orden[i - 1]),
+          );
+        if (i === orden.length - 1)
+          await expect(siguiente, `${slug}${sufijo}`).toHaveCount(0);
+        else
+          await expect(siguiente, `${slug}${sufijo}`).toHaveAttribute(
+            "href",
+            ruta(orden[i + 1]),
+          );
+      }
+    }
+  });
+
+  test("cada app lleva UN nombre, el oficial, en la muestra, la ficha técnica, el detalle, el título y el selector, en español y en inglés", async ({
+    page,
+  }) => {
+    for (const l of ["es", "en"] as const) {
+      for (const exp of EXPORTS) {
+        const nombre = nombreVisible(exp);
+        const slug = exp.app.slug;
+
+        await page.goto(`/${l}/vitrina/apps/${slug}`);
+        await expect(
+          page.getByRole("heading", { level: 1, name: nombre, exact: true }),
+          `${l}/${slug} ficha técnica`,
+        ).toBeVisible();
+        await expect(page, `${l}/${slug} título`).toHaveTitle(
+          new RegExp(`^${nombre}`),
+        );
+        // El selector de la lista de espera nombra a TODAS las apps con su nombre oficial.
+        const opciones = await page
+          .locator("#contacto-vitrina select option")
+          .allTextContents();
+        expect(opciones, `${l}/${slug} selector`).toContain(nombre);
+
+        await page.goto(`/${l}/vitrina/apps/${slug}/detalle`);
+        await expect(
+          page.getByRole("heading", { level: 2, name: nombre, exact: true }),
+          `${l}/${slug} detalle`,
+        ).toBeVisible();
+        await expect(page, `${l}/${slug} título del detalle`).toHaveTitle(
+          new RegExp(`^${nombre}`),
+        );
+      }
+      // Y ningún nombre que trae un export (y el oficial reemplaza) queda a la vista.
+      for (const exp of EXPORTS) {
+        const oficial = nombreVisible(exp);
+        if (oficial === exp.app.nombre || oficial.includes(exp.app.nombre))
+          continue;
+        const cuerpo = await (
+          await page.request.get(`/${l}/vitrina/apps/${exp.app.slug}/detalle`)
+        ).text();
+        expect(cuerpo, `${l}/${exp.app.slug}`).not.toContain(exp.app.nombre);
+      }
     }
   });
 
@@ -1150,5 +1287,164 @@ test.describe("Apertura por lectura — el patrón, no una imitación", () => {
           .locator(".tarjeta-detalle-interior"),
       ).toHaveCSS("visibility", "visible");
     });
+  });
+});
+
+/**
+ * EL CARRUSEL DE LA GALERÍA (Sprint 009) — «Cómo se ve» de cada tablero.
+ *
+ * Reconstruido sin librería (la galería nació como cuadrícula, `4a09c29`). Se
+ * prueba a 1280 y a 390 px, con el teclado, con «reducir movimiento» y con la
+ * carga: las capturas fuera de la pista no se piden hasta deslizar. Data-driven:
+ * la pieza sale de `content/tableros/`, la misma fuente que la página.
+ */
+test.describe("Vitrina — el carrusel de la galería (Sprint 009)", () => {
+  const conGaleria = piezasDe("tableros").filter(
+    (p) => (p.galeria?.length ?? 0) > 1,
+  );
+  const pieza = conGaleria[0];
+  const N = pieza?.galeria?.length ?? 0;
+  const ruta = (l = "es") => `/${l}/vitrina/tableros/${pieza.pieza.slug}`;
+
+  test.beforeAll(() => {
+    if (!pieza)
+      throw new Error(
+        "ningún tablero trae una galería de varias capturas: el carrusel no tiene sujeto",
+      );
+  });
+
+  for (const ancho of [
+    { w: 1280, h: 800 },
+    { w: 390, h: 844 },
+  ]) {
+    test(`a ${ancho.w}px: «siguiente» y «anterior» recorren las ${N} pantallas y el indicador las cuenta`, async ({
+      page,
+    }, testInfo) => {
+      test.skip(
+        testInfo.project.name === "mobile",
+        "el ancho se fija aquí, en un solo proyecto",
+      );
+      await page.setViewportSize({ width: ancho.w, height: ancho.h });
+      await page.goto(ruta());
+      const carrusel = page.locator("[data-carrusel]");
+      await carrusel.scrollIntoViewIfNeeded();
+      await expect(carrusel).toHaveAttribute(
+        "aria-roledescription",
+        "carousel",
+      );
+      await expect(carrusel.locator("[data-captura]")).toHaveCount(N);
+      const indicador = carrusel.locator("[data-indicador]");
+      await expect(indicador).toHaveText(`1 de ${N}`);
+      await expect(
+        carrusel.getByRole("button", { name: "Pantalla anterior" }),
+      ).toBeDisabled();
+
+      await carrusel
+        .getByRole("button", { name: "Pantalla siguiente" })
+        .click();
+      await expect(indicador).toHaveText(`2 de ${N}`);
+      // La segunda captura quedó realmente a la vista, no solo en el texto.
+      await expect(carrusel.locator('[data-captura="2"]')).toBeInViewport({
+        ratio: 0.6,
+      });
+      await expect(carrusel.locator('[data-captura="1"]')).not.toBeInViewport({
+        ratio: 0.3,
+      });
+
+      await carrusel.getByRole("button", { name: "Pantalla anterior" }).click();
+      await expect(indicador).toHaveText(`1 de ${N}`);
+
+      // Hasta el final: el último deshabilita «siguiente».
+      for (let i = 2; i <= N; i++) {
+        await carrusel
+          .getByRole("button", { name: "Pantalla siguiente" })
+          .click();
+        await expect(indicador).toHaveText(`${i} de ${N}`);
+      }
+      await expect(
+        carrusel.getByRole("button", { name: "Pantalla siguiente" }),
+      ).toBeDisabled();
+    });
+  }
+
+  test("el teclado llega a la pista y a los botones, y Enter avanza", async ({
+    page,
+  }, testInfo) => {
+    test.skip(
+      testInfo.project.name === "mobile",
+      "el teclado es del proyecto de escritorio",
+    );
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto(ruta());
+    const carrusel = page.locator("[data-carrusel]");
+    await carrusel.scrollIntoViewIfNeeded();
+    await carrusel.locator("[data-pista]").focus();
+    await expect(carrusel.locator("[data-pista]")).toBeFocused();
+    // «Anterior» está deshabilitado: el siguiente Tab cae en «siguiente».
+    await page.keyboard.press("Tab");
+    await expect(
+      carrusel.getByRole("button", { name: "Pantalla siguiente" }),
+    ).toBeFocused();
+    await page.keyboard.press("Enter");
+    await expect(carrusel.locator("[data-indicador]")).toHaveText(`2 de ${N}`);
+  });
+
+  test("con «reducir movimiento» el carrusel funciona igual, sin animar", async ({
+    page,
+  }, testInfo) => {
+    test.skip(testInfo.project.name === "mobile", "una emulación basta");
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.goto(ruta());
+    const carrusel = page.locator("[data-carrusel]");
+    await carrusel.scrollIntoViewIfNeeded();
+    await carrusel.getByRole("button", { name: "Pantalla siguiente" }).click();
+    await expect(carrusel.locator("[data-indicador]")).toHaveText(`2 de ${N}`);
+    await expect(carrusel.locator('[data-captura="2"]')).toBeInViewport({
+      ratio: 0.6,
+    });
+  });
+
+  test("en inglés el carrusel habla inglés", async ({ page }, testInfo) => {
+    test.skip(testInfo.project.name === "mobile", "una emulación basta");
+    await page.goto(ruta("en"));
+    const carrusel = page.locator("[data-carrusel]");
+    await expect(carrusel.locator("[data-indicador]")).toHaveText(`1 of ${N}`);
+    await expect(
+      carrusel.getByRole("button", { name: "Next screen" }),
+    ).toBeEnabled();
+    await expect(
+      carrusel.getByRole("button", { name: "Previous screen" }),
+    ).toBeDisabled();
+  });
+
+  test("carga: antes de deslizar no se piden las N capturas; al recorrerlas llegan todas", async ({
+    page,
+  }, testInfo) => {
+    test.skip(testInfo.project.name === "mobile", "la red se mide una vez");
+    await page.setViewportSize({ width: 1280, height: 800 });
+    const pedidas = new Set<string>();
+    page.on("request", (r) => {
+      const url = decodeURIComponent(r.url());
+      const m = /capturas\/[^/]+\/([^&?]+)/.exec(url);
+      if (m && (url.includes("/_next/image") || url.includes("/piezas/")))
+        pedidas.add(m[1]);
+    });
+    await page.goto(ruta());
+    await page.locator("[data-carrusel]").scrollIntoViewIfNeeded();
+    await page.waitForTimeout(1500);
+    // La carga perezosa nativa difiere las que quedan fuera de la pista y lejos
+    // de la vista (el umbral lo decide el navegador según la velocidad de la
+    // red): nunca llegan las N antes de deslizar. La primera sí.
+    expect(
+      pedidas.size,
+      "capturas pedidas sin deslizar",
+    ).toBeGreaterThanOrEqual(1);
+    expect(pedidas.size, "capturas pedidas sin deslizar").toBeLessThan(N);
+
+    const siguiente = page
+      .locator("[data-carrusel]")
+      .getByRole("button", { name: "Pantalla siguiente" });
+    for (let i = 1; i < N; i++) await siguiente.click();
+    await expect.poll(() => pedidas.size, { timeout: 10_000 }).toBe(N);
   });
 });

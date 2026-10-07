@@ -1,5 +1,5 @@
 /**
- * Tira visual de «Dash Agent AI» — S5. Esquemática a propósito (banco §7):
+ * Tira visual de «Dash Agent» — S5. Esquemática a propósito (banco §7):
  * las ideas de la app, no su interfaz.
  */
 export function MaquetaDash() {
@@ -8,7 +8,7 @@ export function MaquetaDash() {
       viewBox="0 0 320 92"
       className="maqueta"
       role="img"
-      aria-label="Esquema de Dash Agent AI: los archivos que tus agentes leen, las instrucciones que se contradicen, lo que costó cada modelo, y que todo se lee en tu equipo."
+      aria-label="Esquema de Dash Agent: los archivos que tus agentes leen, las instrucciones que se contradicen, lo que costó cada modelo, y que todo se lee en tu equipo."
     >
       {/* ── 1 · Lo que saben de ti: los archivos que se cargan ──────────── */}
       {[0, 1, 2].map((i) => (

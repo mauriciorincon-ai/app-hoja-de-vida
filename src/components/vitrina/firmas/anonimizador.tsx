@@ -1,9 +1,9 @@
 /**
- * FIRMA de «Velo» — su clímax re-dibujado en los tokens de CV Viva.
+ * FIRMA de «Anonimizador Velo» — su clímax re-dibujado en los tokens de CV Viva.
  *
  * La escena original (app-anonimizador/docs/BROCHURE.html, «El viaje completo,
  * de ida y de vuelta»): las demás herramientas hacen media travesía —
- * anonimizan y se despiden. Velo cubre el viaje entero: tu mesa vela el
+ * anonimizan y se despiden. Anonimizador Velo cubre el viaje entero: tu mesa vela el
  * archivo, lo velado es lo ÚNICO que cruza la frontera, el tercero trabaja
  * encima, y con tu bóveda —que nunca cruzó— lo recuperas.
  *

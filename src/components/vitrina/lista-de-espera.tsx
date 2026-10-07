@@ -1,6 +1,8 @@
 import { getTranslations } from "next-intl/server";
 import { ListaDeEsperaForm } from "@/components/forms/lista-de-espera-form";
 import { Reveal } from "@/components/motion/reveal";
+import { getCategoriasApps } from "@/lib/content";
+import { ordenDeEscaparate } from "@/lib/vitrina/categorias-apps";
 import { getManifestVitrina } from "@/lib/vitrina/loader";
 
 /**
@@ -12,10 +14,13 @@ import { getManifestVitrina } from "@/lib/vitrina/loader";
  */
 export async function ListaDeEspera({ appInicial }: { appInicial?: string }) {
   const t = await getTranslations("vitrina");
-  const apps = getManifestVitrina().map((a) => ({
-    slug: a.slug,
-    nombre: a.nombre,
-  }));
+  const categorias = getCategoriasApps();
+  // El selector sigue el orden del escaparate; el nombre ya es el oficial.
+  const apps = ordenDeEscaparate(
+    getManifestVitrina(),
+    (a) => a.slug,
+    categorias,
+  ).map((a) => ({ slug: a.slug, nombre: a.nombre }));
 
   return (
     <Reveal variant="fadeInUp">

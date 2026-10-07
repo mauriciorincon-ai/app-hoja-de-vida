@@ -567,7 +567,7 @@ additionally retrieve knowledge, use tools and coordinate actions within defined
 This progression does not automatically make the agent a superior solution. Each level introduces
 additional capabilities and responsibilities. When a prediction is enough, adding a generative
 architecture can increase cost, variability and difficulty of evaluation without producing
-proportional value. It is the code-first rule with which I build my applications: Velo and
+proportional value. It is the code-first rule with which I build my applications: Anonimizador Velo and
 Innmobiliaria do not have a single AI model because they do not need one.
 
 My predictive experience brings an important discipline to agent development: define the

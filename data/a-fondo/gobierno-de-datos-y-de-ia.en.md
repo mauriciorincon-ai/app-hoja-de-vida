@@ -818,7 +818,7 @@ Nor do I consider an initiative governed merely because it meets a set of contro
 protect the purpose for which the solution was authorized and make it possible to evaluate whether
 it keeps generating the expected value. A capability that has stopped being useful, that operates
 outside its context or that introduces a disproportionate risk needs to be reviewed, restricted or
-withdrawn, even if it technically keeps working. In my showcase I have done it: in Dash Agent AI,
+withdrawn, even if it technically keeps working. In my showcase I have done it: in Dash Agent,
 one of the 6 applications, a feature was withdrawn when the evidence showed 83 out-of-context
 suggestions, and the withdrawal is told on its sheet, not hidden.
 

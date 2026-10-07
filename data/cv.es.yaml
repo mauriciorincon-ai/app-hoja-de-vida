@@ -78,7 +78,7 @@ trayectoria:
     bullets:
       - "Esta hoja de vida interactiva, con un chat RAG que responde con citas a las fuentes del sitio y se evalúa con preguntas propias y de afuera antes de publicar cada cambio."
       - "Probeta DS, una aplicación del pipeline que ejecuta Python, pandas y scikit-learn en el navegador, sin enviar los datos a ningún servidor: compara algoritmos contra líneas base explícitas, evalúa sobre el conjunto de prueba sin fuga de datos y entrega una model card con sus límites."
-      - "Otras aplicaciones del pipeline: Dash Agent AI, para analizar el contexto y el costo de los agentes de IA, con 693 pruebas y 97,5 % de cobertura de líneas (agosto de 2026); Hablemos San, sellada y en uso por la familia para la que se construyó."
+      - "Otras aplicaciones del pipeline: Dash Agent, para analizar el contexto y el costo de los agentes de IA, con 693 pruebas y 97,5 % de cobertura de líneas (agosto de 2026); Habla San, sellada y en uso por la familia para la que se construyó."
       - "Agentes con criterios binarios de aceptación y puntos de control humano: el Experto ISO 42001, el Constructor de Tableros Power BI y la Fábrica de AI-APPs."
       - "Un pipeline de investigación, con los harnesses Design Science y Paper Computacional, que fija los criterios antes de medir, mide el vacío de la literatura y lleva cada estudio hasta un manuscrito listo para enviar."
       - "Investigación propia: ARKHÉ, que en mis mediciones redujo un 52 % el consumo de tokens, aún sin un artefacto publicado; FORJA; las investigaciones y los tableros sobre datos abiertos de la vitrina."
