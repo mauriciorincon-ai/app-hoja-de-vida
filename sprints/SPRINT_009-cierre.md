@@ -36,3 +36,5 @@
 **Auditoría de una pasada** (subagente independiente, solo el diff): 3 Altos → A1 y A2 pagados en `550affe`, A3 (diseño) pagado en `fdfbe1a`; 4 Medios y 9 Bajos a deuda (M4 se pagó con el nombre único).
 
 **Ajuste 2026-10-07 (revisión del dueño, post-merge):** los dos títulos de bloque miden lo mismo y las muestras de cada bloque van en un carrusel (`CarruselDeMuestras`, dos por vista); commit `f065c04`; capturas `apps-carrusel-{1280,390}.png`.
+
+**Segundo ajuste 2026-10-08 (revisión del dueño):** el carrusel de apps gira sin fin y deja asomar un pedazo difuminado de la siguiente tarjeta (sin clones: el orden visual es CSS `order`); commit `b3d0ff5`; capturas reemplazadas.

@@ -1,5 +1,5 @@
 import { existsSync, readdirSync, readFileSync } from "node:fs";
-import { expect, test, type Page } from "@playwright/test";
+import { expect, test, type Locator, type Page } from "@playwright/test";
 import { parse } from "yaml";
 
 /**
@@ -1450,15 +1450,43 @@ test.describe("Vitrina — el carrusel de la galería (Sprint 009)", () => {
 });
 
 /**
- * LOS BLOQUES DE APPS (ajuste post-S9, 2026-10-07): los dos títulos miden lo
- * mismo y las muestras de cada bloque van en un carrusel —dos por vista desde
- * 640 px, una con la siguiente asomando en el teléfono—. Data-driven: cuántas
+ * LOS BLOQUES DE APPS (ajuste post-S9, 2026-10-07 y 08): los dos títulos miden
+ * lo mismo y las muestras de cada bloque van en un carrusel que GIRA SIN FIN
+ * —dos tarjetas enteras y un pedazo de la tercera desde 640 px, una y un pedazo
+ * de la siguiente en el teléfono; ningún botón se apaga—. Data-driven: cuántas
  * tarjetas hay en cada bloque sale del mismo YAML que renderiza la página.
  */
 test.describe("Vitrina — los bloques de apps y su carrusel de tarjetas", () => {
   const CATEGORIAS_CON_CARRUSEL = (["profesionales", "personales"] as const)
     .map((c) => ({ c, n: enCategoria(c).length }))
     .filter((x) => x.n > 1);
+
+  /** Qué fracción del ANCHO de la tarjeta `k` (1..n) se ve dentro del recorte del carrusel. */
+  const fraccion = (carrusel: Locator, k: number) =>
+    carrusel.evaluate((el, i) => {
+      const caja = (
+        el.querySelector("[data-pista]")!.parentElement as HTMLElement
+      ).getBoundingClientRect();
+      const r = el
+        .querySelector(`[data-tarjeta="${i}"]`)!
+        .getBoundingClientRect();
+      const visible =
+        Math.min(r.right, caja.right) - Math.max(r.left, caja.left);
+      return Math.max(0, visible) / r.width;
+    }, k);
+  /**
+   * El giro terminó: la pista quedó en reposo, sin transición en curso y en su
+   * sitio (al girar hacia atrás parte, sin animar, un paso a la izquierda).
+   */
+  const reposo = (carrusel: Locator) =>
+    expect
+      .poll(() =>
+        carrusel.locator("[data-pista]").evaluate((el) => {
+          const st = (el as HTMLElement).style;
+          return `${st.transition}|${st.transform}`;
+        }),
+      )
+      .toBe("none|translateX(0px)");
 
   test("los dos títulos de bloque miden exactamente lo mismo, a 1280 y a 390 px", async ({
     page,
@@ -1489,7 +1517,7 @@ test.describe("Vitrina — los bloques de apps y su carrusel de tarjetas", () =>
     { w: 1280, h: 800, cuantas: 2 },
     { w: 390, h: 844, cuantas: 1 },
   ]) {
-    test(`a ${ancho.w}px: cada bloque enseña ${ancho.cuantas} tarjeta${ancho.cuantas > 1 ? "s" : ""} y las flechas recorren todas`, async ({
+    test(`a ${ancho.w}px: enseña ${ancho.cuantas} tarjeta${ancho.cuantas > 1 ? "s" : ""} entera${ancho.cuantas > 1 ? "s" : ""} y un pedazo de la siguiente, y GIRA SIN FIN en los dos sentidos`, async ({
       page,
     }, testInfo) => {
       test.skip(
@@ -1510,45 +1538,52 @@ test.describe("Vitrina — los bloques de apps y su carrusel de tarjetas", () =>
         );
         await expect(carrusel.locator("[data-tarjeta]"), c).toHaveCount(n);
         const indicador = carrusel.locator("[data-indicador]");
-        await expect(indicador, c).toHaveText(`1 de ${n}`);
-        await expect(
-          carrusel.getByRole("button", { name: "Tarjeta anterior" }),
-          c,
-        ).toBeDisabled();
-
-        // A la vista al cargar: las primeras `cuantas`, y la siguiente no.
-        for (let i = 1; i <= ancho.cuantas; i++) {
-          await expect(
-            carrusel.locator(`[data-tarjeta="${i}"]`),
-            `${c} #${i}`,
-          ).toBeInViewport({ ratio: 0.6 });
-        }
-        await expect(
-          carrusel.locator(`[data-tarjeta="${ancho.cuantas + 1}"]`),
-          `${c} #${ancho.cuantas + 1}`,
-        ).not.toBeInViewport({ ratio: 0.5 });
-
-        // La primera pulsación avanza una y el indicador la cuenta.
         const siguiente = carrusel.getByRole("button", {
           name: "Tarjeta siguiente",
         });
-        await siguiente.click();
-        await expect(indicador, c).toHaveText(`2 de ${n}`);
-        await expect(
-          carrusel.getByRole("button", { name: "Tarjeta anterior" }),
-          c,
-        ).toBeEnabled();
+        const anterior = carrusel.getByRole("button", {
+          name: "Tarjeta anterior",
+        });
 
-        // Hasta el final: la última tarjeta queda a la vista y «siguiente» se apaga.
-        for (let k = 0; k < n && (await siguiente.isEnabled()); k++) {
-          await siguiente.click();
-          await page.waitForTimeout(350);
+        /** Lo que el visitante ve: enteras, y un pedazo de la siguiente. */
+        async function verifica(inicio: number, etiqueta: string) {
+          await reposo(carrusel);
+          await expect(indicador, etiqueta).toHaveText(`${inicio + 1} de ${n}`);
+          for (let pos = 0; pos < ancho.cuantas; pos++) {
+            const k = ((inicio + pos) % n) + 1;
+            expect(
+              await fraccion(carrusel, k),
+              `${etiqueta}: la tarjeta ${k} va entera`,
+            ).toBeGreaterThan(0.98);
+          }
+          if (n > ancho.cuantas) {
+            // El pedazo de la siguiente asoma —se ve algo— pero no entra entera.
+            const k = ((inicio + ancho.cuantas) % n) + 1;
+            const f = await fraccion(carrusel, k);
+            expect(f, `${etiqueta}: la tarjeta ${k} asoma`).toBeGreaterThan(
+              0.05,
+            );
+            expect(
+              f,
+              `${etiqueta}: la tarjeta ${k} no entra entera`,
+            ).toBeLessThan(0.5);
+          }
+          // Nunca llega a un límite: los dos botones siempre responden.
+          await expect(siguiente, etiqueta).toBeEnabled();
+          await expect(anterior, etiqueta).toBeEnabled();
         }
-        await expect(siguiente, c).toBeDisabled();
-        await expect(
-          carrusel.locator(`[data-tarjeta="${n}"]`),
-          `${c} última`,
-        ).toBeInViewport({ ratio: 0.6 });
+
+        await verifica(0, `${c} inicio`);
+        // Vuelta completa hacia delante y una más: pasa por el «final» y regresa al principio.
+        for (let k = 1; k <= n + 1; k++) {
+          await siguiente.click();
+          await verifica(k % n, `${c} adelante ${k}`);
+        }
+        // Y hacia atrás, también más de una vuelta: de la primera se llega a la última.
+        for (let k = 1; k <= n + 1; k++) {
+          await anterior.click();
+          await verifica((((1 - k) % n) + n) % n, `${c} atrás ${k}`);
+        }
       }
     });
   }
@@ -1567,7 +1602,7 @@ test.describe("Vitrina — los bloques de apps y su carrusel de tarjetas", () =>
     ]);
   });
 
-  test("el teclado llega a la pista y a los botones, y Enter avanza", async ({
+  test("el teclado llega a la pista, las flechas giran y Enter en un botón también", async ({
     page,
   }, testInfo) => {
     test.skip(
@@ -1581,21 +1616,82 @@ test.describe("Vitrina — los bloques de apps y su carrusel de tarjetas", () =>
       `[data-categoria="${c}"] [data-carrusel-apps]`,
     );
     await carrusel.scrollIntoViewIfNeeded();
-    await carrusel.locator("[data-pista]").focus();
-    await expect(carrusel.locator("[data-pista]")).toBeFocused();
-    // Tras la pista vienen los enlaces de las tarjetas (el contenido) y, al
-    // final, los botones: aquí se llega a «siguiente» con el teclado y Enter
-    // avanza. «Anterior» está deshabilitado, así que no estorba.
+    const pista = carrusel.locator("[data-pista]");
+    await pista.focus();
+    await expect(pista).toBeFocused();
+    await page.keyboard.press("ArrowRight");
+    await expect(carrusel.locator("[data-indicador]")).toHaveText(`2 de ${n}`);
+    await reposo(carrusel);
+    await page.keyboard.press("ArrowLeft");
+    await expect(carrusel.locator("[data-indicador]")).toHaveText(`1 de ${n}`);
+    await reposo(carrusel);
+    // De la primera, «atrás» da la vuelta a la última.
+    await page.keyboard.press("ArrowLeft");
+    await expect(carrusel.locator("[data-indicador]")).toHaveText(
+      `${n} de ${n}`,
+    );
     const siguiente = carrusel.getByRole("button", {
       name: "Tarjeta siguiente",
     });
+    await reposo(carrusel);
     await siguiente.focus();
     await expect(siguiente).toBeFocused();
     await page.keyboard.press("Enter");
+    await expect(carrusel.locator("[data-indicador]")).toHaveText(`1 de ${n}`);
+  });
+
+  test("arrastrar la pista con el puntero gira, y un roce no", async ({
+    page,
+  }, testInfo) => {
+    test.skip(
+      testInfo.project.name === "mobile",
+      "el puntero es de escritorio",
+    );
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto("/es/vitrina/apps");
+    const { c, n } = CATEGORIAS_CON_CARRUSEL[0];
+    const carrusel = page.locator(
+      `[data-categoria="${c}"] [data-carrusel-apps]`,
+    );
+    await carrusel.scrollIntoViewIfNeeded();
+    const caja = (await carrusel.locator("[data-pista]").boundingBox())!;
+    const y = caja.y + 40; // sobre la tarjeta, lejos de su enlace
+    await page.mouse.move(caja.x + 600, y);
+    await page.mouse.down();
+    await page.mouse.move(caja.x + 450, y, { steps: 5 });
+    await page.mouse.up();
+    await expect(carrusel.locator("[data-indicador]")).toHaveText(`2 de ${n}`);
+    await reposo(carrusel);
+    await page.mouse.move(caja.x + 400, y);
+    await page.mouse.down();
+    await page.mouse.move(caja.x + 410, y, { steps: 2 });
+    await page.mouse.up();
     await expect(carrusel.locator("[data-indicador]")).toHaveText(`2 de ${n}`);
   });
 
-  test("con «reducir movimiento» el carrusel funciona igual, sin animar", async ({
+  test("Tab a una tarjeta que está fuera de la vista la trae a la vista, sin descentrar el carrusel", async ({
+    page,
+  }, testInfo) => {
+    test.skip(testInfo.project.name === "mobile", "el foco es de escritorio");
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto("/es/vitrina/apps");
+    const { c, n } = CATEGORIAS_CON_CARRUSEL[0];
+    const carrusel = page.locator(
+      `[data-categoria="${c}"] [data-carrusel-apps]`,
+    );
+    await carrusel.scrollIntoViewIfNeeded();
+    // La última tarjeta asoma, pero su enlace sigue en el HTML: se puede enfocar.
+    await carrusel.locator(`[data-tarjeta="${n}"] a`).first().focus();
+    await reposo(carrusel);
+    await expect.poll(() => fraccion(carrusel, n)).toBeGreaterThan(0.98);
+    // El contenedor recortado no quedó desplazado por el foco.
+    const desplazado = await carrusel
+      .locator("[data-pista]")
+      .evaluate((el) => (el.parentElement as HTMLElement).scrollLeft);
+    expect(desplazado).toBe(0);
+  });
+
+  test("con «reducir movimiento» el carrusel gira igual, sin animar", async ({
     page,
   }, testInfo) => {
     test.skip(testInfo.project.name === "mobile", "una emulación basta");
@@ -1609,9 +1705,13 @@ test.describe("Vitrina — los bloques de apps y su carrusel de tarjetas", () =>
     await carrusel.scrollIntoViewIfNeeded();
     await carrusel.getByRole("button", { name: "Tarjeta siguiente" }).click();
     await expect(carrusel.locator("[data-indicador]")).toHaveText(`2 de ${n}`);
-    await expect(carrusel.locator('[data-tarjeta="2"]')).toBeInViewport({
-      ratio: 0.6,
-    });
+    await expect.poll(() => fraccion(carrusel, 2)).toBeGreaterThan(0.98);
+    // Sin transición: la pista no quedó animándose.
+    expect(
+      await carrusel
+        .locator("[data-pista]")
+        .evaluate((el) => (el as HTMLElement).style.transition),
+    ).toBe("none");
   });
 
   test("en inglés el carrusel habla inglés", async ({ page }, testInfo) => {
@@ -1628,6 +1728,6 @@ test.describe("Vitrina — los bloques de apps y su carrusel de tarjetas", () =>
     ).toBeEnabled();
     await expect(
       carrusel.getByRole("button", { name: "Previous card" }),
-    ).toBeDisabled();
+    ).toBeEnabled();
   });
 });
