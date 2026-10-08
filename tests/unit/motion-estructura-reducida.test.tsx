@@ -6,6 +6,7 @@ import { IconoSkill } from "@/components/home/skills-iconos";
 import { Reveal } from "@/components/motion/reveal";
 import { Stagger, StaggerItem } from "@/components/motion/stagger";
 import { TimelineTrack } from "@/components/motion/timeline-track";
+import { CarruselDeMuestras } from "@/components/vitrina/carrusel-de-muestras";
 import { GaleriaCarrusel } from "@/components/vitrina/galeria-carrusel";
 import type { EtiquetasCarrusel } from "@/components/vitrina/galeria-carrusel";
 
@@ -117,6 +118,21 @@ const CASOS: Record<string, React.ReactNode> = {
       frente="tableros"
       etiquetas={ETIQUETAS_CARRUSEL}
     />
+  ),
+  // Ajuste post-S9: el carrusel de tarjetas de apps, misma regla (5a).
+  CarruselDeMuestras: (
+    <CarruselDeMuestras
+      etiquetas={{
+        etiqueta: "Apps profesionales",
+        anterior: "Tarjeta anterior",
+        siguiente: "Tarjeta siguiente",
+        indicadores: ["1 de 3", "2 de 3", "3 de 3"],
+      }}
+    >
+      <article>Uno</article>
+      <article>Dos</article>
+      <article>Tres</article>
+    </CarruselDeMuestras>
   ),
 };
 
