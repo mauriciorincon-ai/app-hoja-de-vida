@@ -1450,9 +1450,10 @@ test.describe("Vitrina — el carrusel de la galería (Sprint 009)", () => {
 });
 
 /**
- * LOS BLOQUES DE APPS (ajuste post-S9, 2026-10-07): los dos títulos miden lo
- * mismo y las muestras de cada bloque van en un carrusel —dos por vista desde
- * 640 px, una con la siguiente asomando en el teléfono—. Data-driven: cuántas
+ * LOS BLOQUES DE APPS (ajuste post-S9, 2026-10-07 y 08): los dos títulos miden
+ * lo mismo y las muestras de cada bloque van en un carrusel que GIRA SIN FIN
+ * —dos tarjetas enteras y un pedazo de la tercera desde 640 px, una y un pedazo
+ * de la siguiente en el teléfono; ningún botón se apaga—. Data-driven: cuántas
  * tarjetas hay en cada bloque sale del mismo YAML que renderiza la página.
  */
 test.describe("Vitrina — los bloques de apps y su carrusel de tarjetas", () => {

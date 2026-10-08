@@ -21,7 +21,7 @@ design-sync/
    │                     Ícono del sitio (2026-09-26)
    ├─ componentes/       Botón · Card · Chip de estado ·
    │                     Menú desplegable del encabezado
-   ├─ componentes-s5/    Muestra de app (con el bloque de categoría y su carrusel, S9 · ajuste 2026-10-07) · Tarjeta de grupo ·
+   ├─ componentes-s5/    Muestra de app (con el bloque de categoría y su carrusel sin fin, S9 · ajuste 2026-10-08) · Tarjeta de grupo ·
    │                     Chip de procedencia · Captura repintada ·
    │                     Caja de frente (post-S5, ADR-015) ·
    │                     Ficha técnica y proceso BPMN (post-S5, ADR-016)

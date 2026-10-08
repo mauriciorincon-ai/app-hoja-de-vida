@@ -406,17 +406,29 @@ cifra `clamp(3.5rem,8vw,4.75rem)`; tres columnas dejaban dos huérfanos.
   de 15 px en `ink-2` (máx. 60ch) que dice solo lo que el dato dice («Apps de uso profesional.»).
   Profesionales va pegado al hero; Personales abre con la regla fina `border-t border-paper-2` y
   `pt-10` que abre las demás secciones de la página («De esta casa», «Cómo se accede»).
-  **Las muestras van en un carrusel** (`CarruselDeMuestras`), no en rejilla: con tres por bloque la
-  rejilla de dos columnas dejaba una tarjeta huérfana. **Dos por vista desde 640 px**
-  (`calc((100% - 1.25rem) / 2)` con `gap-5`: el ancho de la columna de antes, así los rótulos de la
-  tira dibujada conservan su tamaño; con tres por vista bajarían a ~6 px y dejarían de leerse) y,
-  en el teléfono, **una tarjeta al 88 % con la siguiente asomando**. Misma mecánica y mismos
-  controles que la galería de los tableros: pista `snap-x snap-mandatory`, botones ← y → de 44 px
-  (`size-11`, `r-full`, borde paper-3, fondo paper-0, deshabilitados en los extremos), indicador
-  «n de N» en mono 11 px `ink-2`, patrón APG (grupo `carousel`, cada tarjeta un `slide`, `status`
-  educado, pista con foco), **sin autoplay, sin bucle, sin librería**; con «reducir movimiento» el
-  desplazamiento no se anima. Con **una sola tarjeta** en el bloque no hay controles, foco ni roles.
-  La tarjeta no cambia. Sin tokens nuevos. Un bloque vacío no se pinta.
+  **Las muestras van en un carrusel que gira sin fin** (`CarruselDeMuestras`), no en rejilla: con tres
+  por bloque la rejilla de dos columnas dejaba una tarjeta huérfana, y un carrusel con extremos
+  parecía tener solo dos. **De la última se pasa a la primera y de la primera a la última; ningún
+  botón se apaga jamás.** Para que se note que hay más, **cada vista deja asomar un pedazo de la
+  siguiente tarjeta**: dos enteras y el 20 % de la tercera desde 640 px (`calc((100% - 2.5rem) /
+  2.2)` con `gap-5`) y, en el teléfono, una al 85 % con el 15 % de la siguiente; un **velo del color
+  de la página** (`paper-0` → transparente, 48 px en el teléfono, 64 px desde 640 px, más angosto
+  que el asomo para que algo siga leyéndose) la funde por el borde derecho. Con dos por vista la
+  tarjeta conserva el ancho de la columna de antes, así los rótulos de la tira dibujada no pierden
+  tamaño; con tres por vista bajarían a ~6 px y dejarían de leerse.
+  **Cómo gira sin clones:** el HTML tiene EXACTAMENTE las N tarjetas en el orden del YAML; el orden
+  visual lo da `order` (CSS) y el giro es un `transform` de 320 ms (`--ease-out-cubic`) que, al
+  terminar, rota el orden y devuelve la pista a cero sin transición. Un scroll nativo tiene
+  principio y fin, y un bucle sobre él obliga a duplicar enlaces y nombres en el HTML. Mismos
+  botones que la galería de los tableros (← y → de 44 px, `size-11`, `r-full`, borde paper-3, fondo
+  paper-0), indicador «n de N» en mono 11 px `ink-2`, patrón APG (grupo `carousel`, cada tarjeta un
+  `slide` con su índice real, `status` educado, pista con foco). **Sin autoplay y sin librería**;
+  gira con los botones, **con el dedo** (arrastre horizontal ≥ 40 px, `touch-action: pan-y`), con las
+  **flechas del teclado** y, si el foco cae en una tarjeta fuera de la vista, esa tarjeta pasa a
+  primera. Con «reducir movimiento» el giro es inmediato. Con **una sola tarjeta** en el bloque no
+  hay controles, velo, foco ni roles. La tarjeta no cambia. Sin tokens nuevos. Un bloque vacío no
+  se pinta. *(La galería «Cómo se ve» de los tableros conserva su mecánica con extremos: son las
+  pantallas de UNA pieza, no un conjunto que gire.)*
 - **Muestra de pieza** (escaparate de un frente que no es apps, `/vitrina/<frente>` · S7): la
   hermana de la muestra de app, y se parece en todo menos en una cosa — **una app se reconoce por
   su pantalla y una pieza sin interfaz no tiene ninguna**. Un agente vive en una terminal, una

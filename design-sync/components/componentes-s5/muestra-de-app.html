@@ -46,14 +46,15 @@
   .cat-t { font-family:var(--display); font-size:clamp(1.6rem,3.2vw,2.1rem); font-weight:500;
     letter-spacing:-.015em; color:var(--ink-0); margin:0; }
   .cat-l { font-size:15px; color:var(--ink-2); max-width:60ch; margin:8px 0 18px; }
-  .pista { display:flex; gap:20px; overflow-x:auto; scroll-snap-type:x mandatory; overscroll-behavior-x:contain;
-    scrollbar-width:thin; padding:12px 0; margin:-12px 0; }
-  .slide { flex:0 0 calc((100% - 20px) / 2); scroll-snap-align:start; scroll-snap-stop:always; }
+  .pista { display:flex; gap:20px; overflow:hidden; padding:12px 0; margin:-12px 0; }
+  .slide { flex:0 0 calc((100% - 40px) / 2.2); scroll-snap-align:start; scroll-snap-stop:always; }
+  .vista { position:relative; overflow:hidden; }
+  .vista::after { content:""; position:absolute; top:0; bottom:0; right:0; width:64px; pointer-events:none;
+    background:linear-gradient(to left, var(--paper-0), transparent); }
   .slide .m { max-width:none; height:100%; }
   .ctl { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; }
   .ctl button { width:44px; height:44px; border-radius:99px; border:1px solid var(--paper-3);
     background:var(--paper-0); color:var(--ink-1); font-size:16px; cursor:pointer; }
-  .ctl button:disabled { opacity:.4; cursor:not-allowed; }
   .ctl p { margin:0; font-family:var(--mono); font-size:11px; letter-spacing:.08em;
     text-transform:uppercase; color:var(--ink-2); }
   .m h3 { font-family:var(--display); font-size:23px; font-weight:500; letter-spacing:-.02em;
@@ -77,6 +78,7 @@ El detalle vive en la página propia de cada app. Desde S9 va dentro de un bloqu
 <h2 class="cat-t" id="cat-prof">Profesionales</h2>
 <p class="cat-l">Apps de uso profesional.</p>
 <div role="group" aria-roledescription="carousel" aria-label="Apps profesionales">
+<div class="vista">
 <div class="pista" tabindex="0" role="group" aria-label="Apps profesionales">
 <div class="slide" role="group" aria-roledescription="slide" aria-label="1 de 3">
 <article class="m">
@@ -136,9 +138,13 @@ El detalle vive en la página propia de cada app. Desde S9 va dentro de un bloqu
   <p class="ir">Ver la ficha completa <span aria-hidden="true">&rarr;</span></p>
 </article>
 </div>
+<div class="slide" role="group" aria-roledescription="slide" aria-label="3 de 3">
+<article class="m"><div class="chips"><span class="chip borde">H1</span></div><h3><a href="#">Anonimizador Velo</a></h3><p class="tag">Velo para entregar. Desvelo para recuperar.</p></article>
+</div>
+</div>
 </div>
 <div class="ctl">
-  <button type="button" aria-label="Tarjeta anterior" disabled>&larr;</button>
+  <button type="button" aria-label="Tarjeta anterior">&larr;</button>
   <p role="status" aria-live="polite">1 de 3</p>
   <button type="button" aria-label="Tarjeta siguiente">&rarr;</button>
 </div>
@@ -146,9 +152,10 @@ El detalle vive en la página propia de cada app. Desde S9 va dentro de un bloqu
 </section>
 <p class="nota"><strong>Dos bloques iguales, un carrusel.</strong> Profesionales va primero y
 Personales después, con <strong>el mismo título</strong> (<code>clamp(1.6rem, 3.2vw, 2.1rem)</code>):
-la prioridad es el orden, nunca un título más chico. Las muestras van en un carrusel —dos por vista
-desde 640&nbsp;px, una con la siguiente asomando en el teléfono— con los botones y el indicador de la
-galería de tableros, sin autoplay y sin bucle. Esta tarjeta es un dibujo: aquí los botones no se mueven.
+la prioridad es el orden, nunca un título más chico. Las muestras van en un carrusel <strong>que gira sin fin</strong> —de la última se pasa a la primera y
+ningún botón se apaga— con <strong>un pedazo de la siguiente tarjeta asomando, difuminado</strong> (dos enteras y
+el 20&nbsp;% de la tercera desde 640&nbsp;px; una y el 15&nbsp;% de la siguiente en el teléfono), con los botones y
+el indicador de la galería de tableros y sin autoplay. Esta tarjeta es un dibujo: aquí los botones no se mueven.
 El nombre de la app es un <code>h3</code> y es su <strong>nombre oficial</strong>, igual en todo el sitio.</p>
 <p class="nota"><strong>Un solo tab stop por muestra.</strong> El enlace del título estira su área
 de clic a toda la card con <code>::after</code> absoluto, pero su nombre accesible sigue siendo el

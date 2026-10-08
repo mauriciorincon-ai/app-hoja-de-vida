@@ -531,12 +531,14 @@ el mensaje te llega al correo.
   `data/fichas/`, `data/a-fondo/`) usan ese mismo nombre, y **un test falla** si el nombre que trae un
   export vuelve a colarse ahí. **Si cambias un nombre**: edítalo en `data/categorias-apps.yaml` y
   corre la búsqueda del nombre viejo en `data/` (el test te lista cada archivo).
-- **Las tarjetas de cada bloque van en carrusel** (ajuste del 2026-10-07). Dos por vista en
-  escritorio y una, con la siguiente asomando, en el teléfono; se recorren con las flechas ← y →,
-  con el dedo o con el teclado, y un indicador dice «1 de 3». Nada se mueve solo y no da la vuelta:
-  en cada extremo la flecha se apaga. No hay que hacer nada para que una app nueva entre: se
-  clasifica en el YAML y su tarjeta aparece en su bloque, dentro del carrusel. Si un bloque tiene
-  una sola app, se ve la tarjeta sola, sin flechas.
+- **Las tarjetas de cada bloque van en un carrusel que gira sin fin** (ajuste del 2026-10-08). Se ven
+  dos tarjetas enteras y un pedazo difuminado de la tercera en escritorio (una entera y un pedazo de
+  la siguiente en el teléfono): así se nota que hay más. Se recorre con las flechas ← y →, con el
+  dedo o con las flechas del teclado, y un indicador dice «1 de 3». **No tiene extremos**: de la
+  última se pasa a la primera y ninguna flecha se apaga. Nada se mueve solo. No hay que hacer nada
+  para que una app nueva entre: se clasifica en el YAML y su tarjeta aparece en su bloque, dentro del
+  carrusel. Si un bloque tiene una sola app, se ve la tarjeta sola, sin flechas ni velo. La galería
+  «Cómo se ve» de los tableros (abajo) no cambia.
 - **El carrusel de «Cómo se ve».** La galería de cada ficha de tablero (de 1 a 12 capturas, la que
   declara `galeria` en su ficha) es un **carrusel horizontal**: se desliza con el dedo, con los
   botones ← y → o con el teclado, y un indicador dice «1 de 6». Nada se mueve solo. Con **una sola
@@ -1046,3 +1048,4 @@ chat hoy y cuáles traería con la base aprobada. Ese informe **se genera, no se
 | proyectos propios desde 2024 2026-10-05 | **Tu puesto de proyectos propios empieza en abril de 2024**, no en 2023, en la trayectoria, el PDF y el chat (las frases de `apps-pipeline` y `origenes` que fechan el inicio dicen 2024). Su **descripción es tu primera línea de LinkedIn** («Desarrollo proyectos propios de ingeniería e inteligencia artificial…»); salió la viñeta de «las dos etapas» (el hecho sigue en `apps-pipeline`, donde el chat lo busca) y **entraron Probeta DS y tu pipeline de investigación**, sin totales. Dash Agent AI conserva sus 693 pruebas y su 97,5 %. **Vesting dice «2024 — 2025»** en la línea de la HOME, para que no parezca un puesto abierto. **Gate nuevo**: si el `periodo` del puesto propio y una frase del puesto o del corpus dicen años de inicio distintos, `pnpm test` falla y nombra el archivo y la línea. El PDF sigue en dos páginas. Detalle en `sprints/REV-2026-10-05-proyectos-propios-2024-bitacora.md`. |
 | Sprint 009 | **Las apps, en dos categorías, y el carrusel de los tableros.** `/vitrina/apps` muestra las apps en dos bloques —**Profesionales** primero y **Personales** después— con los nombres oficiales que tú elegiste (un solo nombre por app, igual en todo el sitio, el chat, los correos y el PDF; los exports no se tocan, ADR-028), y «Cómo se ve» de cada tablero es un **carrusel horizontal** nativo (botones, indicador «n de N», teclado, sin movimiento automático). Una app nueva sin categoría no pasa el build. Sección «Categorías y carrusel» arriba; detalle en `sprints/SPRINT_009-cierre.md`. |
 | Ajuste post-S9 2026-10-07 | **Los bloques de apps, bien montados.** Los títulos «Profesionales» y «Personales» miden lo mismo, Personales abre con la raya fina de las demás secciones y las tarjetas de cada bloque van en un **carrusel** (dos por vista en escritorio, una con la siguiente asomando en el teléfono; sin autoplay). Sección «Categorías y carrusel» arriba. |
+| Ajuste post-S9 2026-10-08 | **El carrusel de apps gira sin fin y deja ver que hay más.** Cada vista deja asomar un pedazo difuminado de la tarjeta siguiente; de la última se pasa a la primera y ninguna flecha se apaga; también gira con el dedo y con el teclado. La galería de los tableros no cambia. Sección «Categorías y carrusel» arriba. |
