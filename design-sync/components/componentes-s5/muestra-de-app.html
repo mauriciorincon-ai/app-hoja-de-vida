@@ -47,10 +47,20 @@
     letter-spacing:-.015em; color:var(--ink-0); margin:0; }
   .cat-l { font-size:15px; color:var(--ink-2); max-width:60ch; margin:8px 0 18px; }
   .pista { display:flex; gap:20px; overflow:hidden; padding:12px 0; margin:-12px 0; }
-  .slide { flex:0 0 calc((100% - 40px) / 2.2); scroll-snap-align:start; scroll-snap-stop:always; }
+  .pista { --tw:calc((100% - 40px) / 2.2); --paso:calc(var(--tw) + 20px);
+    --o:calc((100% - 2 * var(--tw) - 20px) / 2); }
+  .slide { flex:0 0 var(--tw); }
   .vista { position:relative; overflow:hidden; }
-  .vista::after { content:""; position:absolute; top:0; bottom:0; right:0; width:64px; pointer-events:none;
-    background:linear-gradient(to left, var(--paper-0), transparent); }
+  .vista::before, .vista::after { content:""; position:absolute; top:0; bottom:0; width:40px; z-index:1;
+    pointer-events:none; }
+  .vista::after { right:0; background:linear-gradient(to left, var(--paper-0), transparent); }
+  /* El velo izquierdo solo existe LEJOS del inicio: en el inicio el borde limpio dice «aquí empieza». */
+  .vista::before { left:0; opacity:0; background:linear-gradient(to right, var(--paper-0), transparent);
+    transition:opacity 320ms var(--ease-out-cubic); }
+  .vista.lejos::before { opacity:1; }
+  /* Lejos: las completas centradas; el pedazo izquierdo es una copia decorativa de la tarjeta anterior. */
+  .lejos .pista { overflow:visible; transform:translateX(calc(var(--o) - var(--paso))); }
+  .copia { position:relative; }
   .slide .m { max-width:none; height:100%; }
   .ctl { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; }
   .ctl button { width:44px; height:44px; border-radius:99px; border:1px solid var(--paper-3);
@@ -74,6 +84,7 @@
 <h1>Muestra de app</h1>
 <p class="lede">La unidad del escaparate <code>/vitrina/apps</code>: lo justo para decidir si entras.
 El detalle vive en la página propia de cada app. Desde S9 va dentro de un bloque de categoría.</p>
+<h2 class="rotulo">En el inicio</h2>
 <section aria-labelledby="cat-prof">
 <h2 class="cat-t" id="cat-prof">Profesionales</h2>
 <p class="cat-l">Apps de uso profesional.</p>
@@ -150,12 +161,43 @@ El detalle vive en la página propia de cada app. Desde S9 va dentro de un bloqu
 </div>
 </div>
 </section>
-<p class="nota"><strong>Dos bloques iguales, un carrusel.</strong> Profesionales va primero y
+<h2 class="rotulo">Lejos del inicio (tras un clic, en cualquier sentido)</h2>
+<section aria-label="Estado lejos del inicio">
+<div role="group" aria-roledescription="carousel" aria-label="Apps profesionales">
+<div class="vista lejos">
+<div class="pista" tabindex="0" role="group" aria-label="Apps profesionales">
+<div class="slide copia" aria-hidden="true">
+<article class="m"><div class="chips"><span class="chip borde">H1</span></div><h3>Probeta DS</h3><p class="tag">Construye un modelo que puedas defender.</p></article>
+</div>
+<div class="slide" role="group" aria-roledescription="slide" aria-label="2 de 3">
+<article class="m"><div class="chips"><span class="chip sage">Sellada</span><span class="chip borde">H1</span></div><h3><a href="#">Dash Agent</a></h3><p class="tag">Tus agentes de IA saben todo de ti.</p></article>
+</div>
+<div class="slide" role="group" aria-roledescription="slide" aria-label="3 de 3">
+<article class="m"><div class="chips"><span class="chip borde">H1</span></div><h3><a href="#">Anonimizador Velo</a></h3><p class="tag">Velo para entregar. Desvelo para recuperar.</p></article>
+</div>
+<div class="slide" role="group" aria-roledescription="slide" aria-label="1 de 3">
+<article class="m"><div class="chips"><span class="chip sage">Sellada</span><span class="chip borde">H1</span></div><h3><a href="#">Probeta DS</a></h3><p class="tag">Construye un modelo que puedas defender.</p></article>
+</div>
+</div>
+</div>
+<div class="ctl">
+  <button type="button" aria-label="Tarjeta anterior">&larr;</button>
+  <p role="status" aria-live="polite">2 de 3</p>
+  <button type="button" aria-label="Tarjeta siguiente">&rarr;</button>
+</div>
+</div>
+</section>
+<p class="nota"><strong>Dos bloques iguales, un carrusel con dos estados.</strong> Profesionales va primero y
 Personales después, con <strong>el mismo título</strong> (<code>clamp(1.6rem, 3.2vw, 2.1rem)</code>):
 la prioridad es el orden, nunca un título más chico. Las muestras van en un carrusel <strong>que gira sin fin</strong> —de la última se pasa a la primera y
-ningún botón se apaga— con <strong>un pedazo de la siguiente tarjeta asomando, difuminado</strong> (dos enteras y
-el 20&nbsp;% de la tercera desde 640&nbsp;px; una y el 15&nbsp;% de la siguiente en el teléfono), con los botones y
-el indicador de la galería de tableros y sin autoplay. Esta tarjeta es un dibujo: aquí los botones no se mueven.
+ningún botón se apaga— y <strong>se nota dónde empieza</strong>: <strong>en el inicio</strong> (la primera tarjeta va primera)
+el borde izquierdo queda limpio, con dos tarjetas enteras y el 20&nbsp;% de la tercera difuminado a la derecha
+(una y el 20&nbsp;% de la siguiente en el teléfono); <strong>lejos del inicio</strong> aparece un pedazo difuminado a cada lado
+y las enteras van centradas. Al volver a la primera regresa el estado de inicio y el velo izquierdo se desvanece
+(320&nbsp;ms). Con tres tarjetas los dos pedazos son la misma tarjeta: el de la izquierda es una <strong>copia decorativa</strong>
+(<code>aria-hidden</code> + <code>inert</code>) que solo existe lejos del inicio o mientras gira. En el sitio la envoltura sangra
+hasta el borde del contenedor para que los pedazos midan lo suficiente. Botones e indicador como los de la galería de tableros, sin autoplay.
+Esta tarjeta es un dibujo: aquí los botones no se mueven.
 El nombre de la app es un <code>h3</code> y es su <strong>nombre oficial</strong>, igual en todo el sitio.</p>
 <p class="nota"><strong>Un solo tab stop por muestra.</strong> El enlace del título estira su área
 de clic a toda la card con <code>::after</code> absoluto, pero su nombre accesible sigue siendo el
