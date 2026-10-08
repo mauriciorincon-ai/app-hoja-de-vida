@@ -6,6 +6,7 @@ import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { Reveal } from "@/components/motion/reveal";
 import { ListaDeEspera } from "@/components/vitrina/lista-de-espera";
+import { CarruselDeMuestras } from "@/components/vitrina/carrusel-de-muestras";
 import { MuestraApp } from "@/components/vitrina/muestra";
 import { appsConBrochure } from "@/lib/brochure";
 import { Link } from "@/i18n/navigation";
@@ -75,6 +76,8 @@ export default async function VitrinaAppsPage({ params }: Params) {
   const fichas = getFichasVitrina();
   // Dos categorías (Sprint 009): el reparto sale de `data/categorias-apps.yaml`
   // y FALLA el build si un export no tiene categoría. El loader no se reordena.
+  // Ajuste 2026-10-07: los dos títulos miden lo mismo y las muestras de cada
+  // bloque van en un carrusel (dos por vista); el orden es la prioridad.
   const categorias = getCategoriasApps();
   const reparto = repartirApps(fichas, categorias);
   const bloques = [
@@ -82,15 +85,14 @@ export default async function VitrinaAppsPage({ params }: Params) {
       id: "profesionales",
       titulo: t("categoriaProfesionales"),
       linea: t("categoriaProfesionalesLinea"),
-      // Prioridad visual a las profesionales: encabezado mayor.
-      claseTitulo: "text-[clamp(1.6rem,3.2vw,2.1rem)]",
+      etiquetaCarrusel: t("carruselProfesionales"),
       fichas: reparto.profesionales,
     },
     {
       id: "personales",
       titulo: t("categoriaPersonales"),
       linea: t("categoriaPersonalesLinea"),
-      claseTitulo: "text-xl",
+      etiquetaCarrusel: t("carruselPersonales"),
       fichas: reparto.personales,
     },
   ].filter((b) => b.fichas.length > 0);
@@ -153,22 +155,34 @@ export default async function VitrinaAppsPage({ params }: Params) {
               <section
                 aria-labelledby={`categoria-${b.id}`}
                 data-categoria={b.id}
-                className={i === 0 ? "" : "mt-14"}
+                className={i === 0 ? "" : "mt-14 border-t border-paper-2 pt-10"}
               >
                 <h2
                   id={`categoria-${b.id}`}
-                  className={`font-display font-medium tracking-[-0.015em] text-ink-0 ${b.claseTitulo}`}
+                  className="font-display text-[clamp(1.6rem,3.2vw,2.1rem)] font-medium tracking-[-0.015em] text-ink-0"
                 >
                   {b.titulo}
                 </h2>
                 <p className="mt-2 mb-5 max-w-[60ch] text-[15px] leading-relaxed text-ink-2">
                   {b.linea}
                 </p>
-                <ul className="grid gap-5 sm:grid-cols-2">
+                <CarruselDeMuestras
+                  etiquetas={{
+                    etiqueta: b.etiquetaCarrusel,
+                    anterior: t("carruselTarjetaAnterior"),
+                    siguiente: t("carruselTarjetaSiguiente"),
+                    indicadores: b.fichas.map((_, k) =>
+                      t("carruselIndicador", {
+                        n: k + 1,
+                        total: b.fichas.length,
+                      }),
+                    ),
+                  }}
+                >
                   {b.fichas.map((ficha) => (
                     <MuestraApp key={ficha.ancla.slug} ficha={ficha} />
                   ))}
-                </ul>
+                </CarruselDeMuestras>
               </section>
             </Reveal>
           ))}

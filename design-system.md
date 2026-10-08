@@ -398,14 +398,25 @@ cifra `clamp(3.5rem,8vw,4.75rem)`; tres columnas dejaban dos huérfanos.
   nombre de la app como nombre accesible** — una sola parada de tabulador, y nunca «leer más».
   **Desde S9 su nombre es un `h3`** (cuelga del `h2` del bloque de categoría) y es **el nombre
   oficial** de la app, el mismo en toda la CV Viva (ADR-028).
-- **Bloque de categoría de apps** (`/vitrina/apps` · S9): las muestras de app van en dos
-  `<section data-categoria aria-labelledby>`, **Profesionales primero** y Personales después, cada
-  una en el orden de `data/categorias-apps.yaml`. Cada bloque abre con un `h2` en Fraunces 500,
-  `tracking-[-0.015em]`, `ink-0`, y una línea de 15 px en `ink-2` (máx. 60ch) que dice solo lo
-  que el dato dice («Apps de uso profesional.»). **La prioridad visual es el tamaño del título y
-  el orden, no un adorno nuevo**: el título profesional es `clamp(1.6rem, 3.2vw, 2.1rem)` y el
-  personal `text-xl` (1.25rem); la rejilla es la misma de siempre (`grid gap-5 sm:grid-cols-2`)
-  y la muestra no cambia. Sin tokens nuevos. Un bloque vacío no se pinta.
+- **Bloque de categoría de apps** (`/vitrina/apps` · S9 · ajuste 2026-10-07): las muestras de app
+  van en dos `<section data-categoria aria-labelledby>`, **Profesionales primero** y Personales
+  después, cada una en el orden de `data/categorias-apps.yaml`. **Los dos bloques se montan igual**:
+  `h2` en Fraunces 500, `clamp(1.6rem, 3.2vw, 2.1rem)`, `tracking-[-0.015em]`, `ink-0` —el mismo
+  tamaño en los dos: la jerarquía entre ellos es el orden, nunca un título más chico—, y una línea
+  de 15 px en `ink-2` (máx. 60ch) que dice solo lo que el dato dice («Apps de uso profesional.»).
+  Profesionales va pegado al hero; Personales abre con la regla fina `border-t border-paper-2` y
+  `pt-10` que abre las demás secciones de la página («De esta casa», «Cómo se accede»).
+  **Las muestras van en un carrusel** (`CarruselDeMuestras`), no en rejilla: con tres por bloque la
+  rejilla de dos columnas dejaba una tarjeta huérfana. **Dos por vista desde 640 px**
+  (`calc((100% - 1.25rem) / 2)` con `gap-5`: el ancho de la columna de antes, así los rótulos de la
+  tira dibujada conservan su tamaño; con tres por vista bajarían a ~6 px y dejarían de leerse) y,
+  en el teléfono, **una tarjeta al 88 % con la siguiente asomando**. Misma mecánica y mismos
+  controles que la galería de los tableros: pista `snap-x snap-mandatory`, botones ← y → de 44 px
+  (`size-11`, `r-full`, borde paper-3, fondo paper-0, deshabilitados en los extremos), indicador
+  «n de N» en mono 11 px `ink-2`, patrón APG (grupo `carousel`, cada tarjeta un `slide`, `status`
+  educado, pista con foco), **sin autoplay, sin bucle, sin librería**; con «reducir movimiento» el
+  desplazamiento no se anima. Con **una sola tarjeta** en el bloque no hay controles, foco ni roles.
+  La tarjeta no cambia. Sin tokens nuevos. Un bloque vacío no se pinta.
 - **Muestra de pieza** (escaparate de un frente que no es apps, `/vitrina/<frente>` · S7): la
   hermana de la muestra de app, y se parece en todo menos en una cosa — **una app se reconoce por
   su pantalla y una pieza sin interfaz no tiene ninguna**. Un agente vive en una terminal, una

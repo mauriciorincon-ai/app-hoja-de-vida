@@ -1448,3 +1448,186 @@ test.describe("Vitrina — el carrusel de la galería (Sprint 009)", () => {
     await expect.poll(() => pedidas.size, { timeout: 10_000 }).toBe(N);
   });
 });
+
+/**
+ * LOS BLOQUES DE APPS (ajuste post-S9, 2026-10-07): los dos títulos miden lo
+ * mismo y las muestras de cada bloque van en un carrusel —dos por vista desde
+ * 640 px, una con la siguiente asomando en el teléfono—. Data-driven: cuántas
+ * tarjetas hay en cada bloque sale del mismo YAML que renderiza la página.
+ */
+test.describe("Vitrina — los bloques de apps y su carrusel de tarjetas", () => {
+  const CATEGORIAS_CON_CARRUSEL = (["profesionales", "personales"] as const)
+    .map((c) => ({ c, n: enCategoria(c).length }))
+    .filter((x) => x.n > 1);
+
+  test("los dos títulos de bloque miden exactamente lo mismo, a 1280 y a 390 px", async ({
+    page,
+  }, testInfo) => {
+    test.skip(
+      testInfo.project.name === "mobile",
+      "el ancho se fija aquí, en un solo proyecto",
+    );
+    for (const w of [1280, 390]) {
+      await page.setViewportSize({ width: w, height: 844 });
+      await page.goto("/es/vitrina/apps");
+      const medidas = await page
+        .locator("section[data-categoria] > h2")
+        .evaluateAll((els) =>
+          els.map((e) => {
+            const s = getComputedStyle(e);
+            return `${s.fontSize}/${s.fontWeight}/${s.fontFamily}`;
+          }),
+        );
+      expect(medidas, `a ${w}px`).toHaveLength(2);
+      expect(medidas[0], `a ${w}px: Personales = Profesionales`).toBe(
+        medidas[1],
+      );
+    }
+  });
+
+  for (const ancho of [
+    { w: 1280, h: 800, cuantas: 2 },
+    { w: 390, h: 844, cuantas: 1 },
+  ]) {
+    test(`a ${ancho.w}px: cada bloque enseña ${ancho.cuantas} tarjeta${ancho.cuantas > 1 ? "s" : ""} y las flechas recorren todas`, async ({
+      page,
+    }, testInfo) => {
+      test.skip(
+        testInfo.project.name === "mobile",
+        "el ancho se fija aquí, en un solo proyecto",
+      );
+      await page.setViewportSize({ width: ancho.w, height: ancho.h });
+      await page.goto("/es/vitrina/apps");
+      expect(CATEGORIAS_CON_CARRUSEL.length).toBeGreaterThan(0);
+      for (const { c, n } of CATEGORIAS_CON_CARRUSEL) {
+        const carrusel = page.locator(
+          `[data-categoria="${c}"] [data-carrusel-apps]`,
+        );
+        await carrusel.scrollIntoViewIfNeeded();
+        await expect(carrusel, c).toHaveAttribute(
+          "aria-roledescription",
+          "carousel",
+        );
+        await expect(carrusel.locator("[data-tarjeta]"), c).toHaveCount(n);
+        const indicador = carrusel.locator("[data-indicador]");
+        await expect(indicador, c).toHaveText(`1 de ${n}`);
+        await expect(
+          carrusel.getByRole("button", { name: "Tarjeta anterior" }),
+          c,
+        ).toBeDisabled();
+
+        // A la vista al cargar: las primeras `cuantas`, y la siguiente no.
+        for (let i = 1; i <= ancho.cuantas; i++) {
+          await expect(
+            carrusel.locator(`[data-tarjeta="${i}"]`),
+            `${c} #${i}`,
+          ).toBeInViewport({ ratio: 0.6 });
+        }
+        await expect(
+          carrusel.locator(`[data-tarjeta="${ancho.cuantas + 1}"]`),
+          `${c} #${ancho.cuantas + 1}`,
+        ).not.toBeInViewport({ ratio: 0.5 });
+
+        // La primera pulsación avanza una y el indicador la cuenta.
+        const siguiente = carrusel.getByRole("button", {
+          name: "Tarjeta siguiente",
+        });
+        await siguiente.click();
+        await expect(indicador, c).toHaveText(`2 de ${n}`);
+        await expect(
+          carrusel.getByRole("button", { name: "Tarjeta anterior" }),
+          c,
+        ).toBeEnabled();
+
+        // Hasta el final: la última tarjeta queda a la vista y «siguiente» se apaga.
+        for (let k = 0; k < n && (await siguiente.isEnabled()); k++) {
+          await siguiente.click();
+          await page.waitForTimeout(350);
+        }
+        await expect(siguiente, c).toBeDisabled();
+        await expect(
+          carrusel.locator(`[data-tarjeta="${n}"]`),
+          `${c} última`,
+        ).toBeInViewport({ ratio: 0.6 });
+      }
+    });
+  }
+
+  test("las seis tarjetas siguen en el HTML y en el orden del YAML, dentro de sus bloques", async ({
+    page,
+  }) => {
+    const res = await page.request.get("/es/vitrina/apps");
+    const html = await res.text();
+    const slugs = [...html.matchAll(/data-muestra-slug="([a-z0-9-]+)"/g)].map(
+      (m) => m[1],
+    );
+    expect(slugs).toEqual([
+      ...enCategoria("profesionales"),
+      ...enCategoria("personales"),
+    ]);
+  });
+
+  test("el teclado llega a la pista y a los botones, y Enter avanza", async ({
+    page,
+  }, testInfo) => {
+    test.skip(
+      testInfo.project.name === "mobile",
+      "el teclado es del proyecto de escritorio",
+    );
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto("/es/vitrina/apps");
+    const { c, n } = CATEGORIAS_CON_CARRUSEL[0];
+    const carrusel = page.locator(
+      `[data-categoria="${c}"] [data-carrusel-apps]`,
+    );
+    await carrusel.scrollIntoViewIfNeeded();
+    await carrusel.locator("[data-pista]").focus();
+    await expect(carrusel.locator("[data-pista]")).toBeFocused();
+    // Tras la pista vienen los enlaces de las tarjetas (el contenido) y, al
+    // final, los botones: aquí se llega a «siguiente» con el teclado y Enter
+    // avanza. «Anterior» está deshabilitado, así que no estorba.
+    const siguiente = carrusel.getByRole("button", {
+      name: "Tarjeta siguiente",
+    });
+    await siguiente.focus();
+    await expect(siguiente).toBeFocused();
+    await page.keyboard.press("Enter");
+    await expect(carrusel.locator("[data-indicador]")).toHaveText(`2 de ${n}`);
+  });
+
+  test("con «reducir movimiento» el carrusel funciona igual, sin animar", async ({
+    page,
+  }, testInfo) => {
+    test.skip(testInfo.project.name === "mobile", "una emulación basta");
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto("/es/vitrina/apps");
+    const { c, n } = CATEGORIAS_CON_CARRUSEL[0];
+    const carrusel = page.locator(
+      `[data-categoria="${c}"] [data-carrusel-apps]`,
+    );
+    await carrusel.scrollIntoViewIfNeeded();
+    await carrusel.getByRole("button", { name: "Tarjeta siguiente" }).click();
+    await expect(carrusel.locator("[data-indicador]")).toHaveText(`2 de ${n}`);
+    await expect(carrusel.locator('[data-tarjeta="2"]')).toBeInViewport({
+      ratio: 0.6,
+    });
+  });
+
+  test("en inglés el carrusel habla inglés", async ({ page }, testInfo) => {
+    test.skip(testInfo.project.name === "mobile", "una emulación basta");
+    await page.goto("/en/vitrina/apps");
+    const { c, n } = CATEGORIAS_CON_CARRUSEL[0];
+    const carrusel = page.locator(
+      `[data-categoria="${c}"] [data-carrusel-apps]`,
+    );
+    await expect(carrusel).toHaveAttribute("aria-label", /apps/i);
+    await expect(carrusel.locator("[data-indicador]")).toHaveText(`1 of ${n}`);
+    await expect(
+      carrusel.getByRole("button", { name: "Next card" }),
+    ).toBeEnabled();
+    await expect(
+      carrusel.getByRole("button", { name: "Previous card" }),
+    ).toBeDisabled();
+  });
+});

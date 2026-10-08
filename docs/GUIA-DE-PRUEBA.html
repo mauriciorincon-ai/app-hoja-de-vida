@@ -316,7 +316,7 @@
     <div class="pagina">
       <header>
         <p class="eyebrow">
-          CV Viva · Guía de prueba viva y acumulativa · v9.19 · dos categorías de apps y el carrusel de los tableros + proyectos propios desde 2024 + LinkedIn definitivo + las entradas sin librería + el margen de la home, segunda vuelta + el margen de la home + el aire bajo el dominio + las herramientas de hoy + el cupo del chat + el ícono navy y el 404 de la raíz + las cifras en su letra y las citas del chat + rótulo del dominio, idiomas en mantenimiento y el ícono + el modo mantenimiento + el dominio en el PDF + los ocho casos de estudio completos + la cita dice de dónde sale y a dónde lleva + la cita conserva la conversación + el corpus alineado + chat/registro + a fondo v2 (el
+          CV Viva · Guía de prueba viva y acumulativa · v9.20 · los bloques de apps con sus tarjetas en carrusel + dos categorías de apps y el carrusel de los tableros + proyectos propios desde 2024 + LinkedIn definitivo + las entradas sin librería + el margen de la home, segunda vuelta + el margen de la home + el aire bajo el dominio + las herramientas de hoy + el cupo del chat + el ícono navy y el 404 de la raíz + las cifras en su letra y las citas del chat + rótulo del dominio, idiomas en mantenimiento y el ícono + el modo mantenimiento + el dominio en el PDF + los ocho casos de estudio completos + la cita dice de dónde sale y a dónde lleva + la cita conserva la conversación + el corpus alineado + chat/registro + a fondo v2 (el
           detalle) + revisión post-S8 · 2026-09-12
         </p>
         <h1>Guía de prueba</h1>
@@ -376,7 +376,10 @@
           suma</strong>: mejora la a10 (el puesto propio desde abril de 2024,
           con tu primera línea de LinkedIn) y la a2 (Vesting dice 2024 — 2025).
         <strong>v9.19 suma dos</strong>: las dos categorías de apps (k15) y el
-          carrusel de los tableros en tu teléfono (k16).
+          carrusel de los tableros en tu teléfono (k16). <strong>v9.20 no
+          suma</strong>: mejora la k15 (los dos títulos del mismo tamaño y las
+          tarjetas de cada bloque en carrusel; su casilla pasa a k15b para que
+          la marca anterior no cuente).
         </p>
         <div class="url-caja">
           <p class="eyebrow" style="margin: 0 0 6px">URL de prueba</p>
@@ -1273,7 +1276,7 @@
               Investigaciones <strong>7</strong> · Tableros <strong>6</strong>.
               Pulsa <strong>Apps</strong>: llegas al escaparate con
               <strong>seis tarjetas</strong>, una por app, <strong>en dos bloques</strong>
-              (Profesionales y Personales: prueba k15), cada una con su
+              (Profesionales y Personales, en carrusel: prueba k15b), cada una con su
               estado, su promesa, un esquema dibujado y cuántas funcionalidades
               tiene. <span class="origen origen-heredada">S7</span
               ><span class="origen origen-mejorado">Mejorado · S9</span></label
@@ -1425,20 +1428,24 @@
             >
           </li>
           <li data-origen="nuevo" data-minimo>
-            <input type="checkbox" id="k15" /><label for="k15"
-              >⭐ <strong>Las dos categorías de las apps</strong>, en
+            <input type="checkbox" id="k15b" /><label for="k15b"
+              >⭐ <strong>Los dos bloques de apps y su carrusel</strong>, en
               <code>/es/vitrina/apps</code> y <code>/en/vitrina/apps</code>, en
-              escritorio y en el teléfono. Debajo del encabezado hay dos bloques:
-              <strong>Profesionales</strong> primero, con el título más grande
-              (Probeta DS · Dash Agent · Anonimizador Velo), y
-              <strong>Personales</strong> después (Habla San · Innmobiliaria ·
-              Nutrikids). Juzga a ojo: ¿se distingue lo profesional de lo
-              personal de un vistazo, y lo profesional tiene la prioridad visual
-              que querías? Los nombres son los oficiales (los del YAML) y son
-              los mismos en toda la CV Viva: en la HOME, la hoja de vida en PDF,
-              el chat y los correos. Una app nueva sin categoría no pasa el
-              <em>build</em>: eso ya lo vigila un test.
-              <span class="origen origen-nuevo">Nuevo · S9</span
+              escritorio y en el teléfono. Hay dos bloques:
+              <strong>Profesionales</strong> primero (Probeta DS · Dash Agent ·
+              Anonimizador Velo) y <strong>Personales</strong> después (Habla
+              San · Innmobiliaria · Nutrikids). <strong>Los dos títulos miden
+              exactamente lo mismo</strong>, y Personales abre con la misma raya
+              fina que «De esta casa». Cada bloque enseña las tarjetas en
+              carrusel: <strong>dos por vista</strong> en escritorio y
+              <strong>una con la siguiente asomando</strong> en el teléfono; las
+              flechas ← y → (o el dedo) las recorren hasta la tercera, el
+              indicador dice «1 de 3», nada se mueve solo y la flecha de cada
+              extremo se apaga. Juzga a ojo: ¿el bloque se lee ordenado, sin
+              una tarjeta huérfana, y lo profesional va primero? Los nombres
+              son los oficiales y los mismos en toda la CV Viva. Una app nueva
+              sin categoría no pasa el <em>build</em>: eso ya lo vigila un test.
+              <span class="origen origen-mejorado">Mejorado · post-S9</span
               ><span class="minimo">⭐ mínimo</span></label
             >
           </li>
@@ -2188,6 +2195,16 @@
         <details class="chica">
           <summary>Historial de la guía</summary>
           <ul>
+            <li>
+              <strong>v9.20 · los bloques de apps con sus tarjetas en carrusel · 2026-10-07:</strong>
+              Ajuste de tu revisión de producción. Los títulos «Profesionales» y
+              «Personales» miden lo mismo (Personales subió al tamaño del otro),
+              Personales abre con la raya fina de las demás secciones y las
+              tarjetas de cada bloque van en un carrusel: dos por vista en
+              escritorio, una con la siguiente asomando en el teléfono. La k15
+              se reescribe y su casilla pasa a <code>k15b</code>. Ninguna prueba
+              eliminada. Prefijo de casillas <code>s9</code>.
+            </li>
             <li>
               <strong>v9.19 · dos categorías de apps y el carrusel de los tableros · 2026-10-06:</strong>
               Sprint 009. /vitrina/apps muestra las apps en dos bloques
