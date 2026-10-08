@@ -409,16 +409,29 @@ cifra `clamp(3.5rem,8vw,4.75rem)`; tres columnas dejaban dos huérfanos.
   **Las muestras van en un carrusel que gira sin fin** (`CarruselDeMuestras`), no en rejilla: con tres
   por bloque la rejilla de dos columnas dejaba una tarjeta huérfana, y un carrusel con extremos
   parecía tener solo dos. **De la última se pasa a la primera y de la primera a la última; ningún
-  botón se apaga jamás.** Para que se note que hay más, **cada vista deja asomar un pedazo de la
-  siguiente tarjeta**: dos enteras y el 20 % de la tercera desde 640 px (`calc((100% - 2.5rem) /
-  2.2)` con `gap-5`) y, en el teléfono, una al 85 % con el 15 % de la siguiente; un **velo del color
-  de la página** (`paper-0` → transparente, 48 px en el teléfono, 64 px desde 640 px, más angosto
-  que el asomo para que algo siga leyéndose) la funde por el borde derecho. Con dos por vista la
-  tarjeta conserva el ancho de la columna de antes, así los rótulos de la tira dibujada no pierden
+  botón se apaga jamás.** **Tiene dos estados, para que se note dónde empieza:** **en el inicio**
+  (la primera tarjeta va primera) las dos primeras van enteras y pegadas al borde izquierdo y un
+  pedazo difuminado de la tercera asoma a la derecha (`calc((100% - 2.5rem) / 2.2)` con gap 20 px
+  desde 640 px; en el teléfono una tarjeta al 80 % con gap 12 px y el pedazo de la siguiente);
+  **nada a la izquierda: el borde limpio ES la señal de «aquí empieza»**. **Lejos del inicio**
+  (cualquier otra va primera, tras un clic en cualquier sentido) aparece un pedazo difuminado a la
+  izquierda y otro a la derecha, y las enteras quedan centradas. Al volver a la primera regresa el
+  estado de inicio y el velo izquierdo se desvanece (`opacity`, 320 ms). Los **velos** son del color de
+  la página (`paper-0` → transparente, 24 px en el teléfono, 40 px desde 640 px, más angostos que el
+  pedazo para que algo siga leyéndose); el izquierdo solo se enciende lejos del inicio. Para que los
+  pedazos midan lo suficiente, **la envoltura sangra hasta el borde del contenedor de la página**
+  (`-mx-4 px-4 md:-mx-6 md:px-6`): el inicio no se mueve, los pedazos ganan 16–24 px. Con dos por vista
+  la tarjeta conserva el ancho de la columna de antes, así los rótulos de la tira dibujada no pierden
   tamaño; con tres por vista bajarían a ~6 px y dejarían de leerse.
-  **Cómo gira sin clones:** el HTML tiene EXACTAMENTE las N tarjetas en el orden del YAML; el orden
-  visual lo da `order` (CSS) y el giro es un `transform` de 320 ms (`--ease-out-cubic`) que, al
-  terminar, rota el orden y devuelve la pista a cero sin transición. Un scroll nativo tiene
+  **Cómo gira sin clones en el HTML:** el HTML tiene EXACTAMENTE las N tarjetas en el orden del YAML;
+  el orden visual lo da `order` (CSS). Con tres tarjetas, lejos del inicio hacen falta cuatro huecos
+  (pedazo · entera · entera · pedazo): la tarjeta que no está en el centro asoma a los dos lados y
+  una de las dos veces es una **copia decorativa** (`aria-hidden` + `inert`, absoluta, sin roles),
+  montada solo lejos del inicio o mientras gira; el servidor y el primer render no la tienen. La
+  geometría es CSS puro: `--tw` (ancho), `--hu` (hueco), `--k` (enteras por vista), `--paso` y `--o`
+  (el margen que centra), y la pista se coloca con `translateX(calc(A·paso + B·o))`. El giro es un
+  `transform` de 320 ms (`--ease-out-cubic`) que, al terminar, rota el orden y deja la pista en
+  reposo sin transición (los píxeles quedan idénticos: no hay salto). Un scroll nativo tiene
   principio y fin, y un bucle sobre él obliga a duplicar enlaces y nombres en el HTML. Mismos
   botones que la galería de los tableros (← y → de 44 px, `size-11`, `r-full`, borde paper-3, fondo
   paper-0), indicador «n de N» en mono 11 px `ink-2`, patrón APG (grupo `carousel`, cada tarjeta un

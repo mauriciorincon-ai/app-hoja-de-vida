@@ -316,7 +316,7 @@
     <div class="pagina">
       <header>
         <p class="eyebrow">
-          CV Viva · Guía de prueba viva y acumulativa · v9.21 · el carrusel de apps que gira sin fin + los bloques de apps con sus tarjetas en carrusel + dos categorías de apps y el carrusel de los tableros + proyectos propios desde 2024 + LinkedIn definitivo + las entradas sin librería + el margen de la home, segunda vuelta + el margen de la home + el aire bajo el dominio + las herramientas de hoy + el cupo del chat + el ícono navy y el 404 de la raíz + las cifras en su letra y las citas del chat + rótulo del dominio, idiomas en mantenimiento y el ícono + el modo mantenimiento + el dominio en el PDF + los ocho casos de estudio completos + la cita dice de dónde sale y a dónde lleva + la cita conserva la conversación + el corpus alineado + chat/registro + a fondo v2 (el
+          CV Viva · Guía de prueba viva y acumulativa · v9.22 · el carrusel de apps muestra dónde empieza + el carrusel de apps que gira sin fin + los bloques de apps con sus tarjetas en carrusel + dos categorías de apps y el carrusel de los tableros + proyectos propios desde 2024 + LinkedIn definitivo + las entradas sin librería + el margen de la home, segunda vuelta + el margen de la home + el aire bajo el dominio + las herramientas de hoy + el cupo del chat + el ícono navy y el 404 de la raíz + las cifras en su letra y las citas del chat + rótulo del dominio, idiomas en mantenimiento y el ícono + el modo mantenimiento + el dominio en el PDF + los ocho casos de estudio completos + la cita dice de dónde sale y a dónde lleva + la cita conserva la conversación + el corpus alineado + chat/registro + a fondo v2 (el
           detalle) + revisión post-S8 · 2026-09-12
         </p>
         <h1>Guía de prueba</h1>
@@ -381,7 +381,10 @@
           tarjetas de cada bloque en carrusel). <strong>v9.21 no suma</strong>:
           vuelve a mejorar la k15 (el carrusel gira sin fin y deja asomar un
           pedazo difuminado de la siguiente tarjeta; su casilla pasa a k15c para
-          que la marca anterior no cuente).
+          que la marca anterior no cuente). <strong>v9.22 no suma</strong>: el
+          carrusel de apps ahora muestra dónde empieza (en el inicio, borde
+          limpio a la izquierda; lejos del inicio, un pedazo difuminado a cada
+          lado); su casilla pasa a k15d por la misma razón.
         </p>
         <div class="url-caja">
           <p class="eyebrow" style="margin: 0 0 6px">URL de prueba</p>
@@ -1278,7 +1281,7 @@
               Investigaciones <strong>7</strong> · Tableros <strong>6</strong>.
               Pulsa <strong>Apps</strong>: llegas al escaparate con
               <strong>seis tarjetas</strong>, una por app, <strong>en dos bloques</strong>
-              (Profesionales y Personales, en carrusel sin fin: prueba k15c), cada una con su
+              (Profesionales y Personales, en carrusel sin fin: prueba k15d), cada una con su
               estado, su promesa, un esquema dibujado y cuántas funcionalidades
               tiene. <span class="origen origen-heredada">S7</span
               ><span class="origen origen-mejorado">Mejorado · S9</span></label
@@ -1430,23 +1433,27 @@
             >
           </li>
           <li data-origen="nuevo" data-minimo>
-            <input type="checkbox" id="k15c" /><label for="k15c"
-              >⭐ <strong>Los dos bloques de apps y su carrusel sin fin</strong>,
-              en <code>/es/vitrina/apps</code> y <code>/en/vitrina/apps</code>,
-              en escritorio y en el teléfono. Hay dos bloques:
-              <strong>Profesionales</strong> primero (Probeta DS · Dash Agent ·
-              Anonimizador Velo) y <strong>Personales</strong> después (Habla
-              San · Innmobiliaria · Nutrikids), con <strong>el mismo
-              título</strong>. Cada bloque enseña las tarjetas en carrusel:
-              <strong>dos enteras y un pedazo difuminado de la tercera</strong>
-              en escritorio; <strong>una entera y un pedazo de la siguiente</strong>
-              en el teléfono. Juzga a ojo: ¿se nota de un vistazo que hay más
-              apps y que se desliza? Pulsa → tres veces seguidas: el indicador
-              va «2 de 3» · «3 de 3» · <strong>«1 de 3»</strong> (da la vuelta) y
-              ninguna flecha se apaga nunca. Pulsa ← desde «1 de 3»: llegas a
-              «3 de 3». En el teléfono también gira arrastrando con el dedo, y con
-              el teclado (flechas ← →) en escritorio. Nada se mueve solo. Los
-              nombres son los oficiales y los mismos en toda la CV Viva.
+            <input type="checkbox" id="k15d" /><label for="k15d"
+              >⭐ <strong>Los dos bloques de apps y su carrusel que se nota
+              dónde empieza</strong>, en <code>/es/vitrina/apps</code> y
+              <code>/en/vitrina/apps</code>, en escritorio y en el teléfono. Hay
+              dos bloques: <strong>Profesionales</strong> primero (Probeta DS ·
+              Dash Agent · Anonimizador Velo) y <strong>Personales</strong> después
+              (Habla San · Innmobiliaria · Nutrikids), con <strong>el mismo
+              título</strong>. <strong>Al entrar (el inicio):</strong> las dos
+              primeras tarjetas enteras pegadas a la izquierda y un pedazo
+              difuminado de la tercera a la derecha; en el teléfono, una entera y
+              un pedazo de la siguiente. <strong>Nada a la izquierda</strong>: ese
+              borde limpio dice «aquí empieza». <strong>Pulsa → (o ←)</strong>:
+              ahora aparece un pedazo difuminado <strong>a la izquierda y otro a
+              la derecha</strong> y las tarjetas enteras quedan en el centro.
+              Sigue pulsando →: el indicador va «2 de 3» · «3 de 3» ·
+              <strong>«1 de 3»</strong> (da la vuelta) y, al volver a la primera,
+              <strong>regresa el efecto de inicio</strong> (el pedazo de la
+              izquierda se desvanece). Ninguna flecha se apaga nunca. En el
+              teléfono también gira arrastrando con el dedo, y con el teclado
+              (flechas ← →) en escritorio. Nada se mueve solo. Los nombres son los
+              oficiales y los mismos en toda la CV Viva.
               <span class="origen origen-mejorado">Mejorado · post-S9</span
               ><span class="minimo">⭐ mínimo</span></label
             >
@@ -2197,6 +2204,18 @@
         <details class="chica">
           <summary>Historial de la guía</summary>
           <ul>
+            <li>
+              <strong>v9.22 · el carrusel de apps muestra dónde empieza · 2026-10-08:</strong>
+              Tercer ajuste de tu revisión de producción: aunque giraba sin fin,
+              no se notaba el principio. Ahora, <em>en el inicio</em>, el borde
+              izquierdo queda limpio (dos tarjetas enteras y un pedazo de la
+              tercera a la derecha) y, <em>lejos del inicio</em>, aparece un
+              pedazo difuminado a cada lado con las enteras al centro; al volver
+              a la primera regresa el efecto inicial. La galería «Cómo se ve»
+              de los tableros no cambia. La k15 se reescribe y su casilla pasa a
+              <code>k15d</code>. Ninguna prueba eliminada. Prefijo de casillas
+              <code>s9</code>.
+            </li>
             <li>
               <strong>v9.21 · el carrusel de apps que gira sin fin · 2026-10-08:</strong>
               Segundo ajuste de tu revisión de producción: con extremos y dos

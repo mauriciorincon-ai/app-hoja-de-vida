@@ -1452,8 +1452,10 @@ test.describe("Vitrina — el carrusel de la galería (Sprint 009)", () => {
 /**
  * LOS BLOQUES DE APPS (ajuste post-S9, 2026-10-07 y 08): los dos títulos miden
  * lo mismo y las muestras de cada bloque van en un carrusel que GIRA SIN FIN
- * —dos tarjetas enteras y un pedazo de la tercera desde 640 px, una y un pedazo
- * de la siguiente en el teléfono; ningún botón se apaga—. Data-driven: cuántas
+ * —dos tarjetas enteras desde 640 px, una en el teléfono; ningún botón se apaga—
+ * con DOS ESTADOS: en el inicio, borde izquierdo limpio y un pedazo de la
+ * siguiente a la derecha; lejos del inicio, un pedazo difuminado a cada lado y
+ * las enteras al centro. Data-driven: cuántas
  * tarjetas hay en cada bloque sale del mismo YAML que renderiza la página.
  */
 test.describe("Vitrina — los bloques de apps y su carrusel de tarjetas", () => {
@@ -1474,19 +1476,40 @@ test.describe("Vitrina — los bloques de apps y su carrusel de tarjetas", () =>
         Math.min(r.right, caja.right) - Math.max(r.left, caja.left);
       return Math.max(0, visible) / r.width;
     }, k);
+  /** Qué fracción del ancho de `selector` se ve dentro del recorte del carrusel. */
+  const fraccionDe = async (carrusel: Locator, selector: string) => {
+    const ancho = await carrusel.evaluate(
+      (el, sel) => el.querySelector(sel)!.getBoundingClientRect().width,
+      selector,
+    );
+    return (await pixeles(carrusel, selector)) / ancho;
+  };
+  /** Cuántos píxeles de ANCHO de `selector` se ven dentro del recorte del carrusel. */
+  const pixeles = (carrusel: Locator, selector: string) =>
+    carrusel.evaluate((el, sel) => {
+      const caja = (
+        el.querySelector("[data-pista]")!.parentElement as HTMLElement
+      ).getBoundingClientRect();
+      const r = el.querySelector(sel)!.getBoundingClientRect();
+      return Math.max(
+        0,
+        Math.min(r.right, caja.right) - Math.max(r.left, caja.left),
+      );
+    }, selector);
   /**
-   * El giro terminó: la pista quedó en reposo, sin transición en curso y en su
-   * sitio (al girar hacia atrás parte, sin animar, un paso a la izquierda).
+   * El giro terminó: la pista quedó en reposo (sin `data-moviendo`) y sin
+   * transición en curso. Dónde queda el reposo —pegada al borde en el inicio,
+   * centrada lejos de él— lo comprueban `verifica` y las fracciones.
    */
   const reposo = (carrusel: Locator) =>
     expect
       .poll(() =>
         carrusel.locator("[data-pista]").evaluate((el) => {
-          const st = (el as HTMLElement).style;
-          return `${st.transition}|${st.transform}`;
+          const e = el as HTMLElement;
+          return `${e.hasAttribute("data-moviendo")}|${e.style.transition}`;
         }),
       )
-      .toBe("none|translateX(0px)");
+      .toBe("false|none");
 
   test("los dos títulos de bloque miden exactamente lo mismo, a 1280 y a 390 px", async ({
     page,
@@ -1571,6 +1594,69 @@ test.describe("Vitrina — los bloques de apps y su carrusel de tarjetas", () =>
           // Nunca llega a un límite: los dos botones siempre responden.
           await expect(siguiente, etiqueta).toBeEnabled();
           await expect(anterior, etiqueta).toBeEnabled();
+          // La sangría lateral no abre scroll horizontal en la página.
+          expect(
+            await page.evaluate(
+              () =>
+                document.documentElement.scrollWidth <=
+                document.documentElement.clientWidth,
+            ),
+            `${etiqueta}: sin scroll horizontal de página`,
+          ).toBe(true);
+
+          const velo = () =>
+            carrusel
+              .locator("[data-pista]")
+              .evaluate(
+                (el) =>
+                  getComputedStyle(el.parentElement as HTMLElement, "::before")
+                    .opacity,
+              );
+          if (inicio === 0) {
+            // EL INICIO: borde izquierdo limpio —ni copia ni velo— y la 1.ª pegada a la columna.
+            await expect(
+              carrusel.locator("[data-clon]"),
+              `${etiqueta}: en el inicio no hay pedazo a la izquierda`,
+            ).toHaveCount(0);
+            await expect.poll(velo, etiqueta).toBe("0");
+            const desfase = await carrusel.evaluate((el) => {
+              const columna = el
+                .querySelector("[data-pista]")!
+                .getBoundingClientRect().left;
+              const primera = el
+                .querySelector('[data-tarjeta="1"]')!
+                .getBoundingClientRect().left;
+              return Math.abs(primera - columna);
+            });
+            expect(
+              desfase,
+              `${etiqueta}: la 1.ª va pegada al borde`,
+            ).toBeLessThan(1.5);
+          } else {
+            // LEJOS: un pedazo difuminado a la IZQUIERDA (la copia), distinto de cero y menor que media tarjeta…
+            await expect(
+              carrusel.locator("[data-clon]"),
+              `${etiqueta}: lejos del inicio hay copias`,
+            ).toHaveCount(2);
+            await expect.poll(velo, etiqueta).toBe("1");
+            const f = await fraccionDe(carrusel, '[data-clon="izquierda"]');
+            expect(
+              f,
+              `${etiqueta}: asoma un pedazo a la izquierda`,
+            ).toBeGreaterThan(0.05);
+            expect(
+              f,
+              `${etiqueta}: el pedazo izquierdo no es una tarjeta`,
+            ).toBeLessThan(0.5);
+            // …y simétrico al derecho: las enteras van centradas.
+            const izq = await pixeles(carrusel, '[data-clon="izquierda"]');
+            const kDer = ((inicio + ancho.cuantas) % n) + 1;
+            const der = await pixeles(carrusel, `[data-tarjeta="${kDer}"]`);
+            expect(
+              Math.abs(izq - der),
+              `${etiqueta}: pedazos simétricos (${izq} / ${der})`,
+            ).toBeLessThan(3);
+          }
         }
 
         await verifica(0, `${c} inicio`);
