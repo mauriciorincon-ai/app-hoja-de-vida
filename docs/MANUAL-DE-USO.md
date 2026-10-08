@@ -512,7 +512,8 @@ el mensaje te llega al correo.
 #### Categorías y carrusel · desde Sprint 009
 
 - **Dos categorías de apps.** `/es/vitrina/apps` muestra las apps en dos bloques: **Profesionales**
-  primero (título más grande) y **Personales** después. La pertenencia no vive en el código ni en el
+  primero y **Personales** después, con **el mismo título** en los dos (la prioridad de lo
+  profesional es el orden, no un título más grande). La pertenencia no vive en el código ni en el
   export: vive en `data/categorias-apps.yaml`, una lista por categoría con el `slug` de cada app
   (el de su `content/vitrina/<slug>.brochure-export.json`) y su **nombre oficial**, uno solo, igual
   en español y en inglés. **El orden de la lista es el orden de la página**, y también el de los botones «App
@@ -530,6 +531,12 @@ el mensaje te llega al correo.
   `data/fichas/`, `data/a-fondo/`) usan ese mismo nombre, y **un test falla** si el nombre que trae un
   export vuelve a colarse ahí. **Si cambias un nombre**: edítalo en `data/categorias-apps.yaml` y
   corre la búsqueda del nombre viejo en `data/` (el test te lista cada archivo).
+- **Las tarjetas de cada bloque van en carrusel** (ajuste del 2026-10-07). Dos por vista en
+  escritorio y una, con la siguiente asomando, en el teléfono; se recorren con las flechas ← y →,
+  con el dedo o con el teclado, y un indicador dice «1 de 3». Nada se mueve solo y no da la vuelta:
+  en cada extremo la flecha se apaga. No hay que hacer nada para que una app nueva entre: se
+  clasifica en el YAML y su tarjeta aparece en su bloque, dentro del carrusel. Si un bloque tiene
+  una sola app, se ve la tarjeta sola, sin flechas.
 - **El carrusel de «Cómo se ve».** La galería de cada ficha de tablero (de 1 a 12 capturas, la que
   declara `galeria` en su ficha) es un **carrusel horizontal**: se desliza con el dedo, con los
   botones ← y → o con el teclado, y un indicador dice «1 de 6». Nada se mueve solo. Con **una sola
@@ -1038,3 +1045,4 @@ chat hoy y cuáles traería con la base aprobada. Ese informe **se genera, no se
 | LinkedIn definitivo 2026-10-04 | **El sitio dice los mismos hechos que tu LinkedIn.** En la Fundación CTIC hay **una sola cifra: más de 25 productos analíticos en Power BI** (la HOME dice «25+»; se fueron «más de 40», «la mitad son tableros» y «más de 20 tableros»), y **lideras la estructuración** de la estrategia de IA y participas en la del sistema de gestión, nunca «lidero la estrategia». **Puesto nuevo** «Ingeniero de IA Generativa · Proyectos propios», desde abril de 2023, segundo en la trayectoria, con `tipo: proyectos-propios`; en el PDF va en su propia sección. **Inglopres empieza en mayo de 2015** (Analista de Procesos, luego Ingeniero de Procesos): «más de diez años», «nueve cargos en ocho organizaciones», unos 121 meses, y la HOME calcula 11. Consorcio C&M: −30 %, 20+ usuarios internos y «Analista de Operaciones»; Cafam gana las más de 10 horas semanales con VBA; Inglopres, los planes de mejora con análisis estadístico. Eyebrow «AI & Analytics Engineer · Ingeniero Industrial» y perfil nuevo. Pichincha y Oracle WMS siguen como estaban: lo que cambias es LinkedIn. **El gate de CTIC aprendió tres cosas** —la cifra retirada, el liderazgo sin estructuración y un número separado de su sustantivo— y un gate nuevo impide escribir totales de piezas en el puesto propio. El PDF sigue en dos páginas con un ajuste mínimo de tipografía (viñetas 8,8 y 7 de aire entre hitos). Detalle en `sprints/REV-2026-10-04-linkedin-definitivo-bitacora.md`. |
 | proyectos propios desde 2024 2026-10-05 | **Tu puesto de proyectos propios empieza en abril de 2024**, no en 2023, en la trayectoria, el PDF y el chat (las frases de `apps-pipeline` y `origenes` que fechan el inicio dicen 2024). Su **descripción es tu primera línea de LinkedIn** («Desarrollo proyectos propios de ingeniería e inteligencia artificial…»); salió la viñeta de «las dos etapas» (el hecho sigue en `apps-pipeline`, donde el chat lo busca) y **entraron Probeta DS y tu pipeline de investigación**, sin totales. Dash Agent AI conserva sus 693 pruebas y su 97,5 %. **Vesting dice «2024 — 2025»** en la línea de la HOME, para que no parezca un puesto abierto. **Gate nuevo**: si el `periodo` del puesto propio y una frase del puesto o del corpus dicen años de inicio distintos, `pnpm test` falla y nombra el archivo y la línea. El PDF sigue en dos páginas. Detalle en `sprints/REV-2026-10-05-proyectos-propios-2024-bitacora.md`. |
 | Sprint 009 | **Las apps, en dos categorías, y el carrusel de los tableros.** `/vitrina/apps` muestra las apps en dos bloques —**Profesionales** primero y **Personales** después— con los nombres oficiales que tú elegiste (un solo nombre por app, igual en todo el sitio, el chat, los correos y el PDF; los exports no se tocan, ADR-028), y «Cómo se ve» de cada tablero es un **carrusel horizontal** nativo (botones, indicador «n de N», teclado, sin movimiento automático). Una app nueva sin categoría no pasa el build. Sección «Categorías y carrusel» arriba; detalle en `sprints/SPRINT_009-cierre.md`. |
+| Ajuste post-S9 2026-10-07 | **Los bloques de apps, bien montados.** Los títulos «Profesionales» y «Personales» miden lo mismo, Personales abre con la raya fina de las demás secciones y las tarjetas de cada bloque van en un **carrusel** (dos por vista en escritorio, una con la siguiente asomando en el teléfono; sin autoplay). Sección «Categorías y carrusel» arriba. |

@@ -45,8 +45,17 @@
   .borde { border:1px solid var(--paper-3); color:var(--ink-2); }
   .cat-t { font-family:var(--display); font-size:clamp(1.6rem,3.2vw,2.1rem); font-weight:500;
     letter-spacing:-.015em; color:var(--ink-0); margin:0; }
-  .cat-t.menor { font-size:20px; }
   .cat-l { font-size:15px; color:var(--ink-2); max-width:60ch; margin:8px 0 18px; }
+  .pista { display:flex; gap:20px; overflow-x:auto; scroll-snap-type:x mandatory; overscroll-behavior-x:contain;
+    scrollbar-width:thin; padding:12px 0; margin:-12px 0; }
+  .slide { flex:0 0 calc((100% - 20px) / 2); scroll-snap-align:start; scroll-snap-stop:always; }
+  .slide .m { max-width:none; height:100%; }
+  .ctl { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; }
+  .ctl button { width:44px; height:44px; border-radius:99px; border:1px solid var(--paper-3);
+    background:var(--paper-0); color:var(--ink-1); font-size:16px; cursor:pointer; }
+  .ctl button:disabled { opacity:.4; cursor:not-allowed; }
+  .ctl p { margin:0; font-family:var(--mono); font-size:11px; letter-spacing:.08em;
+    text-transform:uppercase; color:var(--ink-2); }
   .m h3 { font-family:var(--display); font-size:23px; font-weight:500; letter-spacing:-.02em;
     color:var(--ink-0); margin:0; }
   .m h3 a { color:inherit; text-decoration:none; }
@@ -67,12 +76,15 @@ El detalle vive en la página propia de cada app. Desde S9 va dentro de un bloqu
 <section aria-labelledby="cat-prof">
 <h2 class="cat-t" id="cat-prof">Profesionales</h2>
 <p class="cat-l">Apps de uso profesional.</p>
+<div role="group" aria-roledescription="carousel" aria-label="Apps profesionales">
+<div class="pista" tabindex="0" role="group" aria-label="Apps profesionales">
+<div class="slide" role="group" aria-roledescription="slide" aria-label="1 de 3">
 <article class="m">
   <div class="chips">
     <span class="chip sage">Sellada</span><span class="chip borde">H1</span>
   </div>
-  <h3><a href="#">Habla San</a></h3>
-  <p class="tag">Su voz mueve el mundo.</p>
+  <h3><a href="#">Probeta DS</a></h3>
+  <p class="tag">Construye un modelo que puedas defender.</p>
   <div class="tira" aria-hidden="true">
     <svg viewBox="0 0 320 92" width="100%">
       <g fill="none" stroke="#5e5c55" stroke-width="1.5" stroke-linecap="round">
@@ -89,21 +101,55 @@ El detalle vive en la página propia de cada app. Desde S9 va dentro de un bloqu
       </g>
     </svg>
   </div>
-  <p class="para">Para el papá o la mamá de un niño de 4 a 6 años que está aprendiendo a hablar y
-    ya va a sus terapias del lenguaje.</p>
+  <p class="para">Para el profesional que no es científico de datos y tiene que defender un modelo
+    ante su jefe o su comité.</p>
   <p class="cuenta">24 FUNCIONALIDADES <span aria-hidden="true">·</span> 14 CIFRAS</p>
   <p class="ir">Ver la ficha completa <span aria-hidden="true">&rarr;</span></p>
 </article>
+</div>
+<div class="slide" role="group" aria-roledescription="slide" aria-label="2 de 3">
+<article class="m">
+  <div class="chips">
+    <span class="chip sage">Sellada</span><span class="chip borde">H1</span>
+  </div>
+  <h3><a href="#">Dash Agent</a></h3>
+  <p class="tag">Tus agentes de IA saben todo de ti.</p>
+  <div class="tira" aria-hidden="true">
+    <svg viewBox="0 0 320 92" width="100%">
+      <g fill="none" stroke="#5e5c55" stroke-width="1.5" stroke-linecap="round">
+        <rect x="18" y="16" width="44" height="30" rx="4"/>
+        <path d="M26 26h20M26 34h28"/>
+        <path d="M104 44v-8M112 44v-16M120 44v-24M128 44v-14"/>
+        <circle cx="200" cy="30" r="14"/><path d="M193 37l14-14"/>
+        <rect x="262" y="18" width="10" height="10" rx="2"/><rect x="276" y="18" width="10" height="10" rx="2"/>
+        <rect x="262" y="32" width="10" height="10" rx="2"/><rect x="276" y="32" width="10" height="10" rx="2"/>
+      </g>
+      <g font-family="var(--mono)" font-size="6" fill="#5e5c55" text-anchor="middle" letter-spacing="1">
+        <text x="40" y="72">IDEA DEL DÍA</text><text x="120" y="72">LA VOZ SUBE</text>
+        <text x="200" y="72">NO SE GUARDA</text><text x="280" y="72">RACHA DE DÍAS</text>
+      </g>
+    </svg>
+  </div>
+  <p class="para">Para quien trabaja a diario con agentes de IA y quiere saber qué contexto guardan
+    sobre él.</p>
+  <p class="cuenta">24 FUNCIONALIDADES <span aria-hidden="true">·</span> 14 CIFRAS</p>
+  <p class="ir">Ver la ficha completa <span aria-hidden="true">&rarr;</span></p>
+</article>
+</div>
+</div>
+<div class="ctl">
+  <button type="button" aria-label="Tarjeta anterior" disabled>&larr;</button>
+  <p role="status" aria-live="polite">1 de 3</p>
+  <button type="button" aria-label="Tarjeta siguiente">&rarr;</button>
+</div>
+</div>
 </section>
-<p class="rotulo">El segundo bloque, más chico</p>
-<section aria-labelledby="cat-pers">
-<h2 class="cat-t menor" id="cat-pers">Personales</h2>
-<p class="cat-l">Apps de uso personal.</p>
-</section>
-<p class="nota"><strong>Dos bloques, un solo componente.</strong> Profesionales va primero y con el
-título mayor (<code>clamp(1.6rem, 3.2vw, 2.1rem)</code>); Personales después, a 20 px. La rejilla y
-la muestra son las mismas: la prioridad visual es el tamaño y el orden, no un adorno nuevo. El nombre
-de la app es un <code>h3</code> y es su <strong>nombre oficial</strong>, igual en todo el sitio.</p>
+<p class="nota"><strong>Dos bloques iguales, un carrusel.</strong> Profesionales va primero y
+Personales después, con <strong>el mismo título</strong> (<code>clamp(1.6rem, 3.2vw, 2.1rem)</code>):
+la prioridad es el orden, nunca un título más chico. Las muestras van en un carrusel —dos por vista
+desde 640&nbsp;px, una con la siguiente asomando en el teléfono— con los botones y el indicador de la
+galería de tableros, sin autoplay y sin bucle. Esta tarjeta es un dibujo: aquí los botones no se mueven.
+El nombre de la app es un <code>h3</code> y es su <strong>nombre oficial</strong>, igual en todo el sitio.</p>
 <p class="nota"><strong>Un solo tab stop por muestra.</strong> El enlace del título estira su área
 de clic a toda la card con <code>::after</code> absoluto, pero su nombre accesible sigue siendo el
 de la app — nunca «leer más». La tira es dibujo con los tokens de esta página, no una captura, y
