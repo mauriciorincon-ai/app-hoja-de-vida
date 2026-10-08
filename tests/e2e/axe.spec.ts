@@ -170,3 +170,26 @@ test("axe limpio en el 404 de la raíz", async ({ page }) => {
     [],
   );
 });
+
+// El carrusel de apps, LEJOS del inicio (post-S9): ahí viven las copias
+// decorativas de los pedazos laterales (`aria-hidden` + `inert`, con enlaces
+// dentro). El scan de la ruta en reposo no las ve: este las monta y las audita.
+test("axe limpio en /es/vitrina/apps con los carruseles lejos del inicio", async ({
+  page,
+}) => {
+  test.slow();
+  const erroresDePagina: string[] = [];
+  page.on("pageerror", (e) => erroresDePagina.push(e.message));
+  await page.goto("/es/vitrina/apps");
+  const siguientes = page.getByRole("button", { name: "Tarjeta siguiente" });
+  for (let i = 0; i < (await siguientes.count()); i++)
+    await siguientes.nth(i).click();
+  await expect(page.locator("[data-clon]")).toHaveCount(4);
+  const results = await new AxeBuilder({ page })
+    .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
+    .analyze();
+  expect(results.violations).toEqual([]);
+  expect(erroresDePagina, "errores de página (hidratación incluida)").toEqual(
+    [],
+  );
+});

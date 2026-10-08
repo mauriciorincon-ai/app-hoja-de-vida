@@ -19,6 +19,10 @@ import {
  * (CSS) a partir de `inicio`. jsdom no anima: el test dispara `transitionEnd`
  * sobre la pista cuando el giro «termina», y mira el `order` de cada tarjeta
  * para saber quién va primera.
+ *
+ * Dos estados: en el INICIO (la primera va primera) nada a la izquierda; LEJOS
+ * del inicio, un velo izquierdo (`data-lejos`) y dos copias decorativas
+ * (`data-clon`, `aria-hidden` + `inert`) que pintan los pedazos laterales.
  */
 const hook = vi.hoisted(() => ({ quieto: false as boolean | null }));
 vi.mock("@/components/motion/use-prefiere-quieto", () => ({
@@ -62,7 +66,12 @@ const ordenes = (c: HTMLElement) =>
     Number(t.style.order),
   );
 /** El giro animado «termina»: lo que en un navegador dispara `transitionend`. */
-const terminar = (c: HTMLElement) => fireEvent.transitionEnd(pista(c));
+const terminar = (c: HTMLElement) =>
+  fireEvent.transitionEnd(pista(c), { propertyName: "transform" });
+const clones = (c: HTMLElement) => [
+  ...c.querySelectorAll<HTMLElement>("[data-clon]"),
+];
+const lejos = (c: HTMLElement) => c.querySelector("[data-lejos]") !== null;
 const indicador = () => screen.getByRole("status");
 
 describe("CarruselDeMuestras — con varias tarjetas", () => {
@@ -109,13 +118,16 @@ describe("CarruselDeMuestras — con varias tarjetas", () => {
     const { container } = montar();
     fireEvent.click(siguiente());
     // Mientras anima: la pista se desplaza y la rotación aún no ocurrió.
-    expect(pista(container).style.transform).toMatch(/translateX\(-\d+px\)/);
+    expect(pista(container).style.transform).toContain("-1 * var(--paso)");
     expect(pista(container).style.transition).toContain("320ms");
+    expect(pista(container)).toHaveAttribute("data-moviendo");
     expect(indicador()).toHaveTextContent("1 de 3");
     terminar(container);
     expect(indicador()).toHaveTextContent("2 de 3");
     expect(ordenes(container)).toEqual([2, 0, 1]);
-    expect(pista(container).style.transform).toBe("translateX(0px)");
+    // En reposo: sin giro en curso, sin transición y la pista CENTRADA (lejos del inicio).
+    expect(pista(container)).not.toHaveAttribute("data-moviendo");
+    expect(pista(container).style.transform).toContain("1 * var(--o)");
     expect(pista(container).style.transition).toBe("none");
   });
 
@@ -135,6 +147,66 @@ describe("CarruselDeMuestras — con varias tarjetas", () => {
     fireEvent.click(anterior());
     terminar(container);
     expect(indicador()).toHaveTextContent("2 de 3");
+  });
+
+  it("EN EL INICIO nada a la izquierda: ni copias ni velo izquierdo; el HTML tiene solo las N tarjetas", () => {
+    const { container } = montar();
+    expect(clones(container)).toHaveLength(0);
+    expect(lejos(container)).toBe(false);
+    expect(container.querySelectorAll("[data-tarjeta]")).toHaveLength(N);
+    expect(pista(container).style.transform).toContain("0 * var(--o)");
+  });
+
+  it("LEJOS DEL INICIO aparecen los pedazos de los dos lados: velo izquierdo y dos copias decorativas", () => {
+    const { container } = montar();
+    fireEvent.click(siguiente());
+    // El velo izquierdo se enciende desde que arranca el giro.
+    expect(lejos(container)).toBe(true);
+    terminar(container);
+    const [izq, der] = clones(container);
+    expect(clones(container)).toHaveLength(2);
+    expect(izq).toHaveAttribute("data-clon", "izquierda");
+    expect(der).toHaveAttribute("data-clon", "derecha");
+    for (const c of [izq, der]) {
+      expect(c).toHaveAttribute("aria-hidden", "true");
+      expect(c).toHaveAttribute("inert");
+      expect(c).not.toHaveAttribute("role");
+      expect(c).not.toHaveAttribute("data-tarjeta");
+    }
+    // Con la 2.ª primera: a la izquierda va la 1.ª (la anterior) y a la derecha la 2.ª (la que cierra el ciclo).
+    expect(izq).toHaveTextContent("App 1");
+    expect(der).toHaveTextContent("App 2");
+    // Las tarjetas reales siguen siendo N, con sus roles.
+    expect(container.querySelectorAll("[data-tarjeta]")).toHaveLength(N);
+  });
+
+  it("al VOLVER al inicio regresa el efecto inicial: sin copias y sin velo izquierdo", () => {
+    const { container } = montar();
+    for (let k = 0; k < N; k++) {
+      fireEvent.click(siguiente());
+      terminar(container);
+    }
+    expect(indicador()).toHaveTextContent("1 de 3");
+    expect(clones(container)).toHaveLength(0);
+    expect(lejos(container)).toBe(false);
+    // Y hacia atrás: de la 2.ª a la 1.ª también regresa.
+    fireEvent.click(siguiente());
+    terminar(container);
+    fireEvent.click(anterior());
+    expect(lejos(container)).toBe(false); // el velo se apaga desde que arranca el giro
+    terminar(container);
+    expect(indicador()).toHaveTextContent("1 de 3");
+    expect(clones(container)).toHaveLength(0);
+  });
+
+  it("«anterior» desde el inicio también va lejos: copias y velo izquierdo, con la última primera", () => {
+    const { container } = montar();
+    fireEvent.click(anterior());
+    expect(lejos(container)).toBe(true);
+    expect(clones(container)).toHaveLength(2);
+    terminar(container);
+    expect(indicador()).toHaveTextContent("3 de 3");
+    expect(clones(container)).toHaveLength(2);
   });
 
   it("mientras gira, una pulsación más no se come el giro ni lo duplica", () => {
@@ -163,7 +235,11 @@ describe("CarruselDeMuestras — con varias tarjetas", () => {
     expect(indicador()).toHaveTextContent("2 de 3");
     expect(ordenes(container)).toEqual([2, 0, 1]);
     expect(pista(container).style.transition).toBe("none");
+    expect(lejos(container)).toBe(true);
+    expect(clones(container)).toHaveLength(2);
     fireEvent.click(anterior());
+    expect(lejos(container)).toBe(false);
+    expect(clones(container)).toHaveLength(0);
     fireEvent.click(anterior());
     expect(indicador()).toHaveTextContent("3 de 3");
   });
@@ -251,6 +327,8 @@ describe("CarruselDeMuestras — con una sola tarjeta", () => {
     expect(container.querySelector("[tabindex]")).toBeNull();
     expect(container.querySelector("[role]")).toBeNull();
     expect(container.querySelector(".after\\:absolute")).toBeNull();
+    expect(container.querySelector("[data-lejos]")).toBeNull();
+    expect(container.querySelector("[data-clon]")).toBeNull();
     // La tarjeta sigue ahí.
     expect(container.querySelectorAll("[data-muestra-slug]")).toHaveLength(1);
   });
