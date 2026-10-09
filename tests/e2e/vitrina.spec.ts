@@ -1451,11 +1451,12 @@ test.describe("Vitrina — el carrusel de la galería (Sprint 009)", () => {
 
 /**
  * LOS BLOQUES DE APPS (ajuste post-S9, 2026-10-07 y 08): los dos títulos miden
- * lo mismo y las muestras de cada bloque van en un carrusel que GIRA SIN FIN
- * —dos tarjetas enteras desde 640 px, una en el teléfono; ningún botón se apaga—
- * con DOS ESTADOS: en el inicio, borde izquierdo limpio y un pedazo de la
- * siguiente a la derecha; lejos del inicio, un pedazo difuminado a cada lado y
- * las enteras al centro. Data-driven: cuántas
+ * lo mismo y las muestras de cada bloque van en un carrusel con TRES
+ * POSICIONES —inicio (borde izquierdo limpio + pedazo a la derecha), intermedio
+ * (pedazos a los dos lados, enteras al centro) y final (el espejo del inicio)—
+ * que da la vuelta con un barrido: desde el final «siguiente» regresa al inicio.
+ * Dos tarjetas enteras desde 640 px, una en el teléfono; ningún botón se apaga;
+ * la rueda lateral y el trackpad también lo recorren. Data-driven: cuántas
  * tarjetas hay en cada bloque sale del mismo YAML que renderiza la página.
  */
 test.describe("Vitrina — los bloques de apps y su carrusel de tarjetas", () => {
@@ -1463,27 +1464,6 @@ test.describe("Vitrina — los bloques de apps y su carrusel de tarjetas", () =>
     .map((c) => ({ c, n: enCategoria(c).length }))
     .filter((x) => x.n > 1);
 
-  /** Qué fracción del ANCHO de la tarjeta `k` (1..n) se ve dentro del recorte del carrusel. */
-  const fraccion = (carrusel: Locator, k: number) =>
-    carrusel.evaluate((el, i) => {
-      const caja = (
-        el.querySelector("[data-pista]")!.parentElement as HTMLElement
-      ).getBoundingClientRect();
-      const r = el
-        .querySelector(`[data-tarjeta="${i}"]`)!
-        .getBoundingClientRect();
-      const visible =
-        Math.min(r.right, caja.right) - Math.max(r.left, caja.left);
-      return Math.max(0, visible) / r.width;
-    }, k);
-  /** Qué fracción del ancho de `selector` se ve dentro del recorte del carrusel. */
-  const fraccionDe = async (carrusel: Locator, selector: string) => {
-    const ancho = await carrusel.evaluate(
-      (el, sel) => el.querySelector(sel)!.getBoundingClientRect().width,
-      selector,
-    );
-    return (await pixeles(carrusel, selector)) / ancho;
-  };
   /** Cuántos píxeles de ANCHO de `selector` se ven dentro del recorte del carrusel. */
   const pixeles = (carrusel: Locator, selector: string) =>
     carrusel.evaluate((el, sel) => {
@@ -1496,20 +1476,51 @@ test.describe("Vitrina — los bloques de apps y su carrusel de tarjetas", () =>
         Math.min(r.right, caja.right) - Math.max(r.left, caja.left),
       );
     }, selector);
-  /**
-   * El giro terminó: la pista quedó en reposo (sin `data-moviendo`) y sin
-   * transición en curso. Dónde queda el reposo —pegada al borde en el inicio,
-   * centrada lejos de él— lo comprueban `verifica` y las fracciones.
-   */
+  /** Qué fracción del ancho de la tarjeta `k` (1..n) se ve dentro del recorte. */
+  const fraccion = async (carrusel: Locator, k: number) => {
+    const sel = `[data-tarjeta="${k}"]`;
+    const ancho = await carrusel.evaluate(
+      (el, s) => el.querySelector(s)!.getBoundingClientRect().width,
+      sel,
+    );
+    return (await pixeles(carrusel, sel)) / ancho;
+  };
+  /** Los bordes de la COLUMNA de la página: el recorte menos su relleno lateral. */
+  const columna = (carrusel: Locator) =>
+    carrusel.evaluate((el) => {
+      const caja = el.querySelector("[data-pista]")!
+        .parentElement as HTMLElement;
+      const r = caja.getBoundingClientRect();
+      const st = getComputedStyle(caja);
+      return {
+        izq: r.left + parseFloat(st.paddingLeft),
+        der: r.right - parseFloat(st.paddingRight),
+      };
+    });
+  const borde = (carrusel: Locator, k: number) =>
+    carrusel.evaluate((el, i) => {
+      const r = el
+        .querySelector(`[data-tarjeta="${i}"]`)!
+        .getBoundingClientRect();
+      return { izq: r.left, der: r.right };
+    }, k);
+  /** El giro terminó: ninguna transición en curso sobre la pista. */
   const reposo = (carrusel: Locator) =>
     expect
       .poll(() =>
-        carrusel.locator("[data-pista]").evaluate((el) => {
-          const e = el as HTMLElement;
-          return `${e.hasAttribute("data-moviendo")}|${e.style.transition}`;
-        }),
+        carrusel
+          .locator("[data-pista]")
+          .evaluate((el) => (el as HTMLElement).getAnimations().length),
       )
-      .toBe("false|none");
+      .toBe(0);
+  /** Opacidad calculada de un velo de la envoltura. */
+  const velo = (carrusel: Locator, cual: "::before" | "::after") =>
+    carrusel
+      .locator("[data-pista]")
+      .evaluate(
+        (el, c) => getComputedStyle(el.parentElement as HTMLElement, c).opacity,
+        cual,
+      );
 
   test("los dos títulos de bloque miden exactamente lo mismo, a 1280 y a 390 px", async ({
     page,
@@ -1540,7 +1551,7 @@ test.describe("Vitrina — los bloques de apps y su carrusel de tarjetas", () =>
     { w: 1280, h: 800, cuantas: 2 },
     { w: 390, h: 844, cuantas: 1 },
   ]) {
-    test(`a ${ancho.w}px: enseña ${ancho.cuantas} tarjeta${ancho.cuantas > 1 ? "s" : ""} entera${ancho.cuantas > 1 ? "s" : ""} y un pedazo de la siguiente, y GIRA SIN FIN en los dos sentidos`, async ({
+    test(`a ${ancho.w}px: INICIO limpio a la izquierda, FINAL espejo a la derecha y el barrido de regreso`, async ({
       page,
     }, testInfo) => {
       test.skip(
@@ -1560,6 +1571,9 @@ test.describe("Vitrina — los bloques de apps y su carrusel de tarjetas", () =>
           "carousel",
         );
         await expect(carrusel.locator("[data-tarjeta]"), c).toHaveCount(n);
+        // Cuántas enteras caben decide dónde acaba el recorrido.
+        const max = n - ancho.cuantas;
+        await expect(carrusel, c).toHaveAttribute("data-max", String(max));
         const indicador = carrusel.locator("[data-indicador]");
         const siguiente = carrusel.getByRole("button", {
           name: "Tarjeta siguiente",
@@ -1568,29 +1582,87 @@ test.describe("Vitrina — los bloques de apps y su carrusel de tarjetas", () =>
           name: "Tarjeta anterior",
         });
 
-        /** Lo que el visitante ve: enteras, y un pedazo de la siguiente. */
-        async function verifica(inicio: number, etiqueta: string) {
+        /** Lo que el visitante ve en la posición `i`: inicio · intermedio · final. */
+        async function verifica(i: number, etiqueta: string) {
           await reposo(carrusel);
-          await expect(indicador, etiqueta).toHaveText(`${inicio + 1} de ${n}`);
+          await expect(carrusel, etiqueta).toHaveAttribute("data-i", String(i));
+          await expect(indicador, etiqueta).toHaveText(`${i + 1} de ${n}`);
+          // Nunca hay copias: el HTML tiene exactamente las N tarjetas.
+          await expect(carrusel.locator("[data-clon]"), etiqueta).toHaveCount(
+            0,
+          );
+          // Las enteras van enteras.
           for (let pos = 0; pos < ancho.cuantas; pos++) {
-            const k = ((inicio + pos) % n) + 1;
             expect(
-              await fraccion(carrusel, k),
-              `${etiqueta}: la tarjeta ${k} va entera`,
+              await fraccion(carrusel, i + pos + 1),
+              `${etiqueta}: la tarjeta ${i + pos + 1} va entera`,
             ).toBeGreaterThan(0.98);
           }
-          if (n > ancho.cuantas) {
-            // El pedazo de la siguiente asoma —se ve algo— pero no entra entera.
-            const k = ((inicio + ancho.cuantas) % n) + 1;
-            const f = await fraccion(carrusel, k);
-            expect(f, `${etiqueta}: la tarjeta ${k} asoma`).toBeGreaterThan(
-              0.05,
-            );
+          const col = await columna(carrusel);
+          const hayIzq = i > 0;
+          const hayDer = i < max;
+          // Pedazo izquierdo: la tarjeta anterior, asomando.
+          if (hayIzq) {
+            const f = await fraccion(carrusel, i);
             expect(
               f,
-              `${etiqueta}: la tarjeta ${k} no entra entera`,
+              `${etiqueta}: asoma un pedazo a la izquierda`,
+            ).toBeGreaterThan(0.05);
+            expect(
+              f,
+              `${etiqueta}: el pedazo izquierdo no es una tarjeta`,
             ).toBeLessThan(0.5);
           }
+          // Pedazo derecho: la tarjeta siguiente, asomando.
+          if (hayDer) {
+            const f = await fraccion(carrusel, i + ancho.cuantas + 1);
+            expect(
+              f,
+              `${etiqueta}: asoma un pedazo a la derecha`,
+            ).toBeGreaterThan(0.05);
+            expect(
+              f,
+              `${etiqueta}: el pedazo derecho no es una tarjeta`,
+            ).toBeLessThan(0.5);
+          }
+          if (i === 0) {
+            // EL INICIO: la 1.ª pegada al borde izquierdo de la columna.
+            const b = await borde(carrusel, 1);
+            expect(
+              Math.abs(b.izq - col.izq),
+              `${etiqueta}: la 1.ª va pegada al borde izquierdo`,
+            ).toBeLessThan(1.5);
+          }
+          if (i === max) {
+            // EL FINAL (espejo): la última pegada al borde DERECHO de la columna.
+            const b = await borde(carrusel, n);
+            expect(
+              Math.abs(b.der - col.der),
+              `${etiqueta}: la última va pegada al borde derecho`,
+            ).toBeLessThan(1.5);
+          }
+          if (hayIzq && hayDer) {
+            // INTERMEDIO: los dos pedazos miden lo mismo (las enteras van centradas).
+            const izq = await pixeles(carrusel, `[data-tarjeta="${i}"]`);
+            const der = await pixeles(
+              carrusel,
+              `[data-tarjeta="${i + ancho.cuantas + 1}"]`,
+            );
+            expect(
+              Math.abs(izq - der),
+              `${etiqueta}: pedazos simétricos (${izq} / ${der})`,
+            ).toBeLessThan(3);
+          }
+          // Los velos: izquierdo solo si hay algo detrás; derecho solo si hay algo delante.
+          await expect
+            .poll(
+              () => velo(carrusel, "::before"),
+              `${etiqueta}: velo izquierdo`,
+            )
+            .toBe(hayIzq ? "1" : "0");
+          await expect
+            .poll(() => velo(carrusel, "::after"), `${etiqueta}: velo derecho`)
+            .toBe(hayDer ? "1" : "0");
           // Nunca llega a un límite: los dos botones siempre responden.
           await expect(siguiente, etiqueta).toBeEnabled();
           await expect(anterior, etiqueta).toBeEnabled();
@@ -1603,76 +1675,47 @@ test.describe("Vitrina — los bloques de apps y su carrusel de tarjetas", () =>
             ),
             `${etiqueta}: sin scroll horizontal de página`,
           ).toBe(true);
-
-          const velo = () =>
-            carrusel
-              .locator("[data-pista]")
-              .evaluate(
-                (el) =>
-                  getComputedStyle(el.parentElement as HTMLElement, "::before")
-                    .opacity,
-              );
-          if (inicio === 0) {
-            // EL INICIO: borde izquierdo limpio —ni copia ni velo— y la 1.ª pegada a la columna.
-            await expect(
-              carrusel.locator("[data-clon]"),
-              `${etiqueta}: en el inicio no hay pedazo a la izquierda`,
-            ).toHaveCount(0);
-            await expect.poll(velo, etiqueta).toBe("0");
-            const desfase = await carrusel.evaluate((el) => {
-              const columna = el
-                .querySelector("[data-pista]")!
-                .getBoundingClientRect().left;
-              const primera = el
-                .querySelector('[data-tarjeta="1"]')!
-                .getBoundingClientRect().left;
-              return Math.abs(primera - columna);
-            });
-            expect(
-              desfase,
-              `${etiqueta}: la 1.ª va pegada al borde`,
-            ).toBeLessThan(1.5);
-          } else {
-            // LEJOS: un pedazo difuminado a la IZQUIERDA (la copia), distinto de cero y menor que media tarjeta…
-            await expect(
-              carrusel.locator("[data-clon]"),
-              `${etiqueta}: lejos del inicio hay copias`,
-            ).toHaveCount(2);
-            await expect.poll(velo, etiqueta).toBe("1");
-            const f = await fraccionDe(carrusel, '[data-clon="izquierda"]');
-            expect(
-              f,
-              `${etiqueta}: asoma un pedazo a la izquierda`,
-            ).toBeGreaterThan(0.05);
-            expect(
-              f,
-              `${etiqueta}: el pedazo izquierdo no es una tarjeta`,
-            ).toBeLessThan(0.5);
-            // …y simétrico al derecho: las enteras van centradas.
-            const izq = await pixeles(carrusel, '[data-clon="izquierda"]');
-            const kDer = ((inicio + ancho.cuantas) % n) + 1;
-            const der = await pixeles(carrusel, `[data-tarjeta="${kDer}"]`);
-            expect(
-              Math.abs(izq - der),
-              `${etiqueta}: pedazos simétricos (${izq} / ${der})`,
-            ).toBeLessThan(3);
-          }
         }
 
         await verifica(0, `${c} inicio`);
-        // Vuelta completa hacia delante y una más: pasa por el «final» y regresa al principio.
-        for (let k = 1; k <= n + 1; k++) {
+        // Hacia delante hasta el final, y UNA más: el barrido regresa al inicio.
+        for (let i = 1; i <= max; i++) {
           await siguiente.click();
-          await verifica(k % n, `${c} adelante ${k}`);
+          await verifica(i, `${c} adelante ${i}`);
         }
-        // Y hacia atrás, también más de una vuelta: de la primera se llega a la última.
-        for (let k = 1; k <= n + 1; k++) {
+        await siguiente.click();
+        await verifica(0, `${c} barrido final → inicio`);
+        // Hacia atrás desde el inicio: el barrido va al final y luego se desanda.
+        await anterior.click();
+        await verifica(max, `${c} barrido inicio → final`);
+        for (let i = max - 1; i >= 0; i--) {
           await anterior.click();
-          await verifica((((1 - k) % n) + n) % n, `${c} atrás ${k}`);
+          await verifica(i, `${c} atrás ${i}`);
         }
       }
     });
   }
+
+  test("el barrido de regreso es más rápido que un paso: dura más tiempo en pantalla pero cruza varias tarjetas", async ({
+    page,
+  }, testInfo) => {
+    test.skip(testInfo.project.name === "mobile", "una sola vez basta");
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto("/es/vitrina/apps");
+    const { c } = CATEGORIAS_CON_CARRUSEL[0];
+    const carrusel = page.locator(
+      `[data-categoria="${c}"] [data-carrusel-apps]`,
+    );
+    await carrusel.scrollIntoViewIfNeeded();
+    const pista = carrusel.locator("[data-pista]");
+    const duracion = () =>
+      pista.evaluate((el) => (el as HTMLElement).style.transition);
+    await carrusel.getByRole("button", { name: "Tarjeta anterior" }).click();
+    expect(await duracion(), "inicio → final: barrido").toContain("560ms");
+    await reposo(carrusel);
+    await carrusel.getByRole("button", { name: "Tarjeta anterior" }).click();
+    expect(await duracion(), "un paso normal").toContain("320ms");
+  });
 
   test("las seis tarjetas siguen en el HTML y en el orden del YAML, dentro de sus bloques", async ({
     page,
@@ -1686,6 +1729,8 @@ test.describe("Vitrina — los bloques de apps y su carrusel de tarjetas", () =>
       ...enCategoria("profesionales"),
       ...enCategoria("personales"),
     ]);
+    // Sin JS no hay copias: el pedazo lateral es siempre una tarjeta real.
+    expect(html).not.toContain("data-clon");
   });
 
   test("el teclado llega a la pista, las flechas giran y Enter en un botón también", async ({
@@ -1707,19 +1752,14 @@ test.describe("Vitrina — los bloques de apps y su carrusel de tarjetas", () =>
     await expect(pista).toBeFocused();
     await page.keyboard.press("ArrowRight");
     await expect(carrusel.locator("[data-indicador]")).toHaveText(`2 de ${n}`);
-    await reposo(carrusel);
     await page.keyboard.press("ArrowLeft");
     await expect(carrusel.locator("[data-indicador]")).toHaveText(`1 de ${n}`);
-    await reposo(carrusel);
-    // De la primera, «atrás» da la vuelta a la última.
+    // Del inicio, «atrás» barre hasta el final.
     await page.keyboard.press("ArrowLeft");
-    await expect(carrusel.locator("[data-indicador]")).toHaveText(
-      `${n} de ${n}`,
-    );
+    await expect(carrusel).toHaveAttribute("data-i", String(n - 2));
     const siguiente = carrusel.getByRole("button", {
       name: "Tarjeta siguiente",
     });
-    await reposo(carrusel);
     await siguiente.focus();
     await expect(siguiente).toBeFocused();
     await page.keyboard.press("Enter");
@@ -1748,11 +1788,49 @@ test.describe("Vitrina — los bloques de apps y su carrusel de tarjetas", () =>
     await page.mouse.up();
     await expect(carrusel.locator("[data-indicador]")).toHaveText(`2 de ${n}`);
     await reposo(carrusel);
-    await page.mouse.move(caja.x + 400, y);
+    // Un roce (10 px) en el hueco entre dos tarjetas —un toque sobre una tarjeta
+    // abre su ficha, y eso es lo correcto— no gira.
+    const hueco =
+      (await carrusel
+        .locator('[data-tarjeta="2"]')
+        .evaluate((el) => el.getBoundingClientRect().right)) + 8;
+    await page.mouse.move(hueco, y);
     await page.mouse.down();
-    await page.mouse.move(caja.x + 410, y, { steps: 2 });
+    await page.mouse.move(hueco + 10, y, { steps: 2 });
     await page.mouse.up();
     await expect(carrusel.locator("[data-indicador]")).toHaveText(`2 de ${n}`);
+  });
+
+  test("la rueda LATERAL (el pad con dos dedos) avanza UNA tarjeta por gesto; la vertical sigue bajando la página", async ({
+    page,
+  }, testInfo) => {
+    test.skip(testInfo.project.name === "mobile", "la rueda es de escritorio");
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto("/es/vitrina/apps");
+    const { c, n } = CATEGORIAS_CON_CARRUSEL[0];
+    const carrusel = page.locator(
+      `[data-categoria="${c}"] [data-carrusel-apps]`,
+    );
+    await carrusel.scrollIntoViewIfNeeded();
+    const caja = (await carrusel.locator("[data-pista]").boundingBox())!;
+    await page.mouse.move(caja.x + 300, caja.y + 60);
+    // Un gesto lateral con su cola de inercia: UNA sola tarjeta.
+    for (const dx of [80, 60, 40, 20]) await page.mouse.wheel(dx, 0);
+    await expect(carrusel).toHaveAttribute("data-i", "1");
+    await expect(carrusel.locator("[data-indicador]")).toHaveText(`2 de ${n}`);
+    await reposo(carrusel);
+    await page.waitForTimeout(400); // el gesto terminó
+    await page.mouse.wheel(-120, 0);
+    await expect(carrusel).toHaveAttribute("data-i", "0");
+    await reposo(carrusel);
+    // La rueda vertical NO es del carrusel: la página baja y la posición no cambia.
+    await page.waitForTimeout(400);
+    const y0 = await page.evaluate(() => window.scrollY);
+    await page.mouse.wheel(0, 300);
+    await expect
+      .poll(() => page.evaluate(() => window.scrollY))
+      .toBeGreaterThan(y0);
+    await expect(carrusel).toHaveAttribute("data-i", "0");
   });
 
   test("Tab a una tarjeta que está fuera de la vista la trae a la vista, sin descentrar el carrusel", async ({

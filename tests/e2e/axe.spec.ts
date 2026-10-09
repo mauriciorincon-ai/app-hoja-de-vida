@@ -171,20 +171,25 @@ test("axe limpio en el 404 de la raíz", async ({ page }) => {
   );
 });
 
-// El carrusel de apps, LEJOS del inicio (post-S9): ahí viven las copias
-// decorativas de los pedazos laterales (`aria-hidden` + `inert`, con enlaces
-// dentro). El scan de la ruta en reposo no las ve: este las monta y las audita.
-test("axe limpio en /es/vitrina/apps con los carruseles lejos del inicio", async ({
+// El carrusel de apps, en el FINAL (post-S9): el estado cambia la posición de la
+// pista y los velos, y el pedazo lateral es una tarjeta real con su enlace. El
+// scan de la ruta en reposo (inicio) no lo ve: este lo audita.
+test("axe limpio en /es/vitrina/apps con los carruseles en el final", async ({
   page,
 }) => {
   test.slow();
   const erroresDePagina: string[] = [];
   page.on("pageerror", (e) => erroresDePagina.push(e.message));
   await page.goto("/es/vitrina/apps");
-  const siguientes = page.getByRole("button", { name: "Tarjeta siguiente" });
-  for (let i = 0; i < (await siguientes.count()); i++)
-    await siguientes.nth(i).click();
-  await expect(page.locator("[data-clon]")).toHaveCount(4);
+  const carruseles = page.locator("[data-carrusel-apps]");
+  for (let c = 0; c < (await carruseles.count()); c++) {
+    const carrusel = carruseles.nth(c);
+    const max = Number(await carrusel.getAttribute("data-max"));
+    for (let paso = 0; paso < max; paso++)
+      await carrusel.getByRole("button", { name: "Tarjeta siguiente" }).click();
+    await expect(carrusel).toHaveAttribute("data-i", String(max));
+  }
+  await expect(page.locator("[data-clon]")).toHaveCount(0);
   const results = await new AxeBuilder({ page })
     .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
     .analyze();
