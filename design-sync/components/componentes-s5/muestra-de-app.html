@@ -54,13 +54,14 @@
   .vista::before, .vista::after { content:""; position:absolute; top:0; bottom:0; width:40px; z-index:1;
     pointer-events:none; }
   .vista::after { right:0; background:linear-gradient(to left, var(--paper-0), transparent); }
-  /* El velo izquierdo solo existe LEJOS del inicio: en el inicio el borde limpio dice «aquí empieza». */
+  /* Velos: el izquierdo solo si hay algo detrás; el derecho solo si hay algo delante. */
   .vista::before { left:0; opacity:0; background:linear-gradient(to right, var(--paper-0), transparent);
     transition:opacity 320ms var(--ease-out-cubic); }
-  .vista.lejos::before { opacity:1; }
-  /* Lejos: las completas centradas; el pedazo izquierdo es una copia decorativa de la tarjeta anterior. */
-  .lejos .pista { overflow:visible; transform:translateX(calc(var(--o) - var(--paso))); }
-  .copia { position:relative; }
+  .vista::after { transition:opacity 320ms var(--ease-out-cubic); }
+  /* FINAL (espejo del inicio): las últimas enteras pegadas a la derecha (B = 2), pedazo a la izquierda. */
+  .vista.final::before { opacity:1; }
+  .vista.final::after { opacity:0; }
+  .final .pista { overflow:visible; transform:translateX(calc(-1 * var(--paso) + 2 * var(--o))); }
   .slide .m { max-width:none; height:100%; }
   .ctl { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; }
   .ctl button { width:44px; height:44px; border-radius:99px; border:1px solid var(--paper-3);
@@ -161,22 +162,19 @@ El detalle vive en la página propia de cada app. Desde S9 va dentro de un bloqu
 </div>
 </div>
 </section>
-<h2 class="rotulo">Lejos del inicio (tras un clic, en cualquier sentido)</h2>
-<section aria-label="Estado lejos del inicio">
+<h2 class="rotulo">En el final (el espejo del inicio)</h2>
+<section aria-label="Estado final">
 <div role="group" aria-roledescription="carousel" aria-label="Apps profesionales">
-<div class="vista lejos">
+<div class="vista final">
 <div class="pista" tabindex="0" role="group" aria-label="Apps profesionales">
-<div class="slide copia" aria-hidden="true">
-<article class="m"><div class="chips"><span class="chip borde">H1</span></div><h3>Probeta DS</h3><p class="tag">Construye un modelo que puedas defender.</p></article>
+<div class="slide" role="group" aria-roledescription="slide" aria-label="1 de 3">
+<article class="m"><div class="chips"><span class="chip sage">Sellada</span><span class="chip borde">H1</span></div><h3><a href="#">Probeta DS</a></h3><p class="tag">Construye un modelo que puedas defender.</p></article>
 </div>
 <div class="slide" role="group" aria-roledescription="slide" aria-label="2 de 3">
 <article class="m"><div class="chips"><span class="chip sage">Sellada</span><span class="chip borde">H1</span></div><h3><a href="#">Dash Agent</a></h3><p class="tag">Tus agentes de IA saben todo de ti.</p></article>
 </div>
 <div class="slide" role="group" aria-roledescription="slide" aria-label="3 de 3">
 <article class="m"><div class="chips"><span class="chip borde">H1</span></div><h3><a href="#">Anonimizador Velo</a></h3><p class="tag">Velo para entregar. Desvelo para recuperar.</p></article>
-</div>
-<div class="slide" role="group" aria-roledescription="slide" aria-label="1 de 3">
-<article class="m"><div class="chips"><span class="chip sage">Sellada</span><span class="chip borde">H1</span></div><h3><a href="#">Probeta DS</a></h3><p class="tag">Construye un modelo que puedas defender.</p></article>
 </div>
 </div>
 </div>
@@ -187,17 +185,17 @@ El detalle vive en la página propia de cada app. Desde S9 va dentro de un bloqu
 </div>
 </div>
 </section>
-<p class="nota"><strong>Dos bloques iguales, un carrusel con dos estados.</strong> Profesionales va primero y
+<p class="nota"><strong>Dos bloques iguales, un carrusel con tres posiciones.</strong> Profesionales va primero y
 Personales después, con <strong>el mismo título</strong> (<code>clamp(1.6rem, 3.2vw, 2.1rem)</code>):
-la prioridad es el orden, nunca un título más chico. Las muestras van en un carrusel <strong>que gira sin fin</strong> —de la última se pasa a la primera y
-ningún botón se apaga— y <strong>se nota dónde empieza</strong>: <strong>en el inicio</strong> (la primera tarjeta va primera)
-el borde izquierdo queda limpio, con dos tarjetas enteras y el 20&nbsp;% de la tercera difuminado a la derecha
-(una y el 20&nbsp;% de la siguiente en el teléfono); <strong>lejos del inicio</strong> aparece un pedazo difuminado a cada lado
-y las enteras van centradas. Al volver a la primera regresa el estado de inicio y el velo izquierdo se desvanece
-(320&nbsp;ms). Con tres tarjetas los dos pedazos son la misma tarjeta: el de la izquierda es una <strong>copia decorativa</strong>
-(<code>aria-hidden</code> + <code>inert</code>) que solo existe lejos del inicio o mientras gira. En el sitio la envoltura sangra
-hasta el borde del contenedor para que los pedazos midan lo suficiente. Botones e indicador como los de la galería de tableros, sin autoplay.
-Esta tarjeta es un dibujo: aquí los botones no se mueven.
+la prioridad es el orden, nunca un título más chico. <strong>Inicio</strong>: el borde izquierdo queda limpio, con dos
+tarjetas enteras y un pedazo difuminado de la tercera a la derecha (una y un pedazo en el teléfono).
+<strong>Intermedio</strong> (con más tarjetas): un pedazo difuminado a cada lado y las enteras centradas.
+<strong>Final</strong>: el espejo del inicio —las últimas enteras pegadas a la derecha y un pedazo a la izquierda—.
+Los pedazos son siempre tarjetas reales vecinas: <strong>no hay copias</strong>. Desde el final «siguiente» regresa al inicio
+con un <strong>barrido acelerado</strong> (560&nbsp;ms) y desde el inicio «anterior» barre al final; ningún botón se apaga.
+Se recorre con los botones, el dedo, las flechas del teclado y el gesto <strong>lateral</strong> del trackpad o la rueda
+(una tarjeta por gesto; la rueda vertical sigue siendo de la página). En el sitio la envoltura sangra hasta el borde
+del contenedor para que los pedazos midan lo suficiente. Esta tarjeta es un dibujo: aquí los botones no se mueven.
 El nombre de la app es un <code>h3</code> y es su <strong>nombre oficial</strong>, igual en todo el sitio.</p>
 <p class="nota"><strong>Un solo tab stop por muestra.</strong> El enlace del título estira su área
 de clic a toda la card con <code>::after</code> absoluto, pero su nombre accesible sigue siendo el

@@ -531,17 +531,21 @@ el mensaje te llega al correo.
   `data/fichas/`, `data/a-fondo/`) usan ese mismo nombre, y **un test falla** si el nombre que trae un
   export vuelve a colarse ahí. **Si cambias un nombre**: edítalo en `data/categorias-apps.yaml` y
   corre la búsqueda del nombre viejo en `data/` (el test te lista cada archivo).
-- **Las tarjetas de cada bloque van en un carrusel que gira sin fin y que muestra dónde empieza**
+- **Las tarjetas de cada bloque van en un carrusel que muestra dónde empieza y dónde acaba**
   (ajustes del 2026-10-08). **Al entrar** ves las dos primeras tarjetas enteras, pegadas a la
   izquierda, y un pedazo difuminado de la tercera a la derecha (en el teléfono, una entera y un pedazo
-  de la siguiente): ese borde izquierdo limpio es la señal de «aquí empieza». **Cuando pulsas una
-  flecha**, en cualquier sentido, aparece un pedazo difuminado **a la izquierda y otro a la derecha** y
-  las tarjetas enteras quedan al centro; **al volver a la primera** regresa el efecto de inicio. Se
-  recorre con las flechas ← y →, con el dedo o con las flechas del teclado, y un indicador dice
-  «1 de 3». **No tiene extremos**: de la última se pasa a la primera y ninguna flecha se apaga. Nada
-  se mueve solo. No hay que hacer nada para que una app nueva entre: se clasifica en el YAML y su
-  tarjeta aparece en su bloque, dentro del carrusel. Si un bloque tiene una sola app, se ve la tarjeta
-  sola, sin flechas ni velo. La galería «Cómo se ve» de los tableros (abajo) no cambia.
+  de la siguiente): ese borde izquierdo limpio es la señal de «aquí empieza». **Con las flechas** el
+  carrusel avanza; cuando hay más tarjetas que las que caben, en el medio ves un pedazo difuminado a
+  cada lado, y **al final** ves el espejo del inicio: las dos últimas enteras pegadas a la derecha y un
+  pedazo difuminado a la izquierda. **Desde el final, «siguiente» regresa al inicio con un barrido
+  rápido**, y desde el inicio, «anterior» barre hasta el final: ninguna flecha se apaga. Se recorre
+  con las flechas ← y →, con el dedo, con las flechas del teclado y **con el gesto lateral del pad**
+  (en el Mac, dos dedos de lado con el cursor sobre las tarjetas; en un ratón, rueda inclinada o
+  Shift + rueda): una tarjeta por gesto. La rueda vertical sigue desplazando la página. Un indicador
+  dice «1 de 3» (la primera tarjeta visible). Nada se mueve solo. No hay que hacer nada para que una
+  app nueva entre: se clasifica en el YAML y su tarjeta aparece en su bloque, dentro del carrusel. Si
+  un bloque tiene una sola app, se ve la tarjeta sola, sin flechas ni velo. La galería «Cómo se ve» de
+  los tableros (abajo) no cambia.
 - **El carrusel de «Cómo se ve».** La galería de cada ficha de tablero (de 1 a 12 capturas, la que
   declara `galeria` en su ficha) es un **carrusel horizontal**: se desliza con el dedo, con los
   botones ← y → o con el teclado, y un indicador dice «1 de 6». Nada se mueve solo. Con **una sola
@@ -1053,3 +1057,4 @@ chat hoy y cuáles traería con la base aprobada. Ese informe **se genera, no se
 | Ajuste post-S9 2026-10-07 | **Los bloques de apps, bien montados.** Los títulos «Profesionales» y «Personales» miden lo mismo, Personales abre con la raya fina de las demás secciones y las tarjetas de cada bloque van en un **carrusel** (dos por vista en escritorio, una con la siguiente asomando en el teléfono; sin autoplay). Sección «Categorías y carrusel» arriba. |
 | Ajuste post-S9 2026-10-08 | **El carrusel de apps gira sin fin y deja ver que hay más.** Cada vista deja asomar un pedazo difuminado de la tarjeta siguiente; de la última se pasa a la primera y ninguna flecha se apaga; también gira con el dedo y con el teclado. La galería de los tableros no cambia. Sección «Categorías y carrusel» arriba. |
 | Ajuste post-S9 2026-10-08 (2) | **El carrusel de apps muestra dónde empieza.** En el inicio queda el borde izquierdo limpio (dos tarjetas enteras y un pedazo difuminado de la tercera); tras pulsar una flecha aparece un pedazo difuminado a cada lado con las enteras al centro; al volver a la primera regresa el efecto inicial. Sección «Categorías y carrusel» arriba. |
+| Ajuste post-S9 2026-10-08 (3) | **El carrusel de apps muestra dónde acaba y se recorre con el pad.** Tres posiciones: inicio (borde izquierdo limpio), intermedio y final, el espejo del inicio (dos enteras pegadas a la derecha y un pedazo difuminado a la izquierda). Desde el final «siguiente» regresa al inicio con un barrido rápido. El gesto lateral del pad (dos dedos de lado) o Shift + rueda avanza una tarjeta por gesto; la rueda vertical sigue siendo de la página. Sección «Categorías y carrusel» arriba. |
