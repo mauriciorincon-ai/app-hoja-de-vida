@@ -521,8 +521,9 @@ el mensaje te llega al correo.
 - **Cómo clasificar una app nueva.** El día que llega su export, se agrega su `slug` a una de las dos
   listas del YAML. **Si no lo haces, la publicación falla** y el error dice el slug que falta: una
   app nueva se clasifica el mismo día, o no se publica. Una app que ya está en el YAML pero todavía
-  no tiene export (hoy AngelGhost, planlang, Big-D y HackGuard) **se ignora** y aparece sola el día
-  que llegue su export. Un `slug` no puede estar en las dos listas.
+  no tiene export **se ignora** y aparece sola el día que llegue su export (así entraron AngelGhost,
+  planlang, Big-D y HackGuard el 2026-10-11: las diez apps del YAML ya tienen el suyo). Un `slug` no
+  puede estar en las dos listas.
 - **El nombre oficial (alias).** Cada app tiene **un solo nombre** en toda la CV Viva: en la
   muestra, la ficha técnica, el detalle, las apps vecinas, el formulario de propuestas, el selector
   de la lista de espera, los correos, el manifest, el chat (su índice y sus citas) y el PDF. **El
