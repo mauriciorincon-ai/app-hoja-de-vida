@@ -9,7 +9,7 @@
 #  · Un export SIN categoría rompe el build y nombra el slug: una app nueva se
 #    clasifica el mismo día que llega, o no se publica.
 #  · Un slug declarado SIN export se ignora: aparece solo el día que llega su
-#    export (AngelGhost, planlang, Big-D y HackGuard hoy no están en CV Viva).
+#    export (así entraron AngelGhost, planlang, Big-D y HackGuard el 2026-10-11).
 #  · Un slug no puede estar en las dos listas.
 #
 # `nombre` es el NOMBRE OFICIAL de la app, UNO solo, igual en español y en inglés
