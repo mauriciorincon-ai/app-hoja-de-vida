@@ -2,7 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { COLOR_ESTADO } from "@/lib/vitrina/estilos";
 import type { FichaVitrina } from "@/lib/vitrina/loader";
-import { Maqueta } from "./maquetas";
+import { Maqueta, tieneMaqueta } from "./maquetas";
 
 /**
  * MUESTRA CORTA de una app en el índice de la vitrina (S5).
@@ -16,7 +16,10 @@ import { Maqueta } from "./maquetas";
  * vez el peso de las seis.
  *
  * La tira va aquí porque es lo que hace reconocible a la app de un vistazo, y
- * es dibujo de esta casa: seis muestras que se ven de la misma familia.
+ * es dibujo de esta casa: muestras que se ven de la misma familia. Sin tira no
+ * se pinta ni su marco (el 2026-10-11 cuatro apps entraron sin dibujo y el
+ * marco quedó como una caja vacía); el gate que exige la tira vive en
+ * `tests/unit/maquetas.test.tsx`.
  *
  * Su nombre es un `h3`: desde el Sprint 009 las muestras viven dentro de un bloque
  * de categoría (Profesionales · Personales) que lleva el `h2`. La raíz es el
@@ -66,12 +69,14 @@ export async function MuestraApp({ ficha }: { ficha: FichaVitrina }) {
         </p>
       </div>
 
-      <div
-        aria-hidden="true"
-        className="overflow-hidden rounded-[10px] border border-paper-2 bg-paper-1 p-3"
-      >
-        <Maqueta slug={ancla.slug} />
-      </div>
+      {tieneMaqueta(ancla.slug) && (
+        <div
+          aria-hidden="true"
+          className="overflow-hidden rounded-[10px] border border-paper-2 bg-paper-1 p-3"
+        >
+          <Maqueta slug={ancla.slug} />
+        </div>
+      )}
 
       <p className="text-[14px] leading-relaxed text-ink-2">
         {exp.promesa.para_quien}

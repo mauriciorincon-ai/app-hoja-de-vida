@@ -489,8 +489,12 @@ cifra `clamp(3.5rem,8vw,4.75rem)`; tres columnas dejaban dos huérfanos.
   `sage`=medido · `sky`=calculada · `lilac`=declarado · `peach`=estimación. **Ninguna cifra se
   pinta sin él.**
 - **Tira y firma** (dibujo, no captura): SVG con los tokens de esta página. La **tira** resume las
-  ideas de la app en cuatro columnas (viewBox 320×92, rótulos mono 6px); la **firma** re-dibuja la
-  escena clímax de su brochure. Se declaran como dibujo en su pie: jamás fingen ser una captura.
+  ideas de la app en cuatro columnas (viewBox 320×92, rótulos mono 6px de **13 caracteres como
+  máximo**: uno más largo se toca con el vecino); la **firma** re-dibuja la escena clímax de su
+  brochure. Se declaran como dibujo en su pie: jamás fingen ser una captura. **Toda app con export
+  lleva su tira** (diez desde 2026-10-11: AngelGhost, planlang, Big-D y HackGuard entraron sin ella y
+  la muestra pintó el marco vacío) y **sin tira no se pinta ni el marco**; la gramática y la
+  presencia las vigila `tests/unit/maquetas.test.tsx`, y el escaparate las cuenta en e2e.
 - **Captura repintada**: pantalla real de la app hermana corriendo, fotografiada con los tokens de
   CV Viva inyectados (`scripts/tema-cv-viva.mjs`) para que las seis se vean de la misma casa.
   Banner apaisado enmarcado en paper-1, `alt=""` con pie visible que **declara el repintado** —
