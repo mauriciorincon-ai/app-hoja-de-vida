@@ -152,8 +152,14 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
       .click();
     await expect(page).toHaveURL(/\/es\/vitrina\/apps$/);
 
-    // Las seis muestras, cada una con su tarjeta.
+    // Las muestras, cada una con su tarjeta…
     await expect(page.locator("[data-muestra-slug]")).toHaveCount(
+      EXPORTS.length,
+    );
+    // … y cada una con su tira dibujada. Sin tira no hay marco (una caja
+    // vacía entró con cuatro apps nuevas el 2026-10-11); una app nueva sin
+    // dibujo cae aquí y en tests/unit/maquetas.test.tsx, no en producción.
+    await expect(page.locator("[data-muestra-slug] svg.maqueta")).toHaveCount(
       EXPORTS.length,
     );
 
