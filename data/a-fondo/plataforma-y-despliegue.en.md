@@ -101,10 +101,10 @@ applications built and deployed directly by me. This practice forces me to take 
 cycle: definition, architecture, development, testing, integration, publication, observation and
 evolution.
 
-Currently, the portfolio gathers six sister applications —Anonimizador Velo, Dash Agent, Probeta DS,
-Habla San, Innmobiliaria and Nutrikids— plus CV Viva, this site. All are in sustained
+Currently, the portfolio gathers ten sister applications —Anonimizador Velo, Dash Agent, Probeta DS,
+Habla San, Innmobiliaria, Nutrikids, planlang, AngelGhost, Big-D and HackGuard— plus CV Viva, this site. Six are in sustained
 operation: if they are on the site it is because they reached MVP condition, and they remain in
-permanent evolution; Habla San, sealed in August 2026, is the most advanced. Not all serve
+permanent evolution; the other four are in their initial stage; Habla San, sealed in August 2026, is the most advanced. Not all serve
 the same purpose or use the same architecture, but they share criteria on documentation,
 testing, accessibility, performance, traceability and change control, and they share the same
 toolchain:
@@ -401,7 +401,7 @@ The second is one of method, and it has dates. I learned Fabric from scratch at 
 in August 2023, with the platform less than a year past general availability, and I earned the
 DP-600 in December 2024 after five months of study. Next.js and the application pipeline I took
 up from July 2026, and with them technologies I had not used —WebAssembly, local processing in
-the browser, edge deployment—, and today they are six sister applications and this site, built
+the browser, edge deployment—, and today they are ten sister applications and this site, built
 and published. The AI-103 and AI-300 paths I have been taking since July 2026. And the last
 thing I learned from scratch, with no certificate involved, was Codex, Antigravity and Claude
 Code: I took them up from their release and it took me around a month to work with them
@@ -430,7 +430,7 @@ end-to-end solution designed from the platform's own principles and services.
 The architecture will have to integrate open or synthetic information, analytical processing,
 controlled access to structured data, knowledge retrieval and tool usage. The agent will have a
 delimited purpose, input and output contracts, acceptance criteria and conditions under which it
-must abstain or request intervention, which is exactly what I demand today of the 13 agents
+must abstain or request intervention, which is exactly what I demand today of the 15 agents
 published in my showcase.
 
 BigQuery will make it possible to structure the data and analytics dimension. Google's
@@ -526,7 +526,7 @@ I designed the platform and the core process used as the framework to build 27 a
 own work I developed ARKHÉ, a high-level agentic ecosystem based on specialized harnesses,
 selective retrieval, tools, memory, contracts, controls and evaluation mechanisms.
 
-I bring direct deployment practice. I maintain six public sister applications and this site,
+I bring direct deployment practice. I maintain ten public sister applications and this site,
 all with automated processes in GitHub Actions, tests, quality controls, accessibility,
 performance budgets and versioned evolution. I answer for products that can fail and that need
 real mechanisms for prevention, diagnosis and recovery.

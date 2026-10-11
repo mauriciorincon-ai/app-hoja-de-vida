@@ -133,7 +133,7 @@ Mi objetivo no es declarar que la institución ya cuenta con una certificación 
 
 <!-- seccion: el-agente-experto-en-iso-42001-en-ctic -->
 
-Para sostener el trabajo sobre los más de 20 instrumentos construí el agente experto en ISO 42001 que publico en la vitrina, uno de los 13 agentes del portafolio. Responde con la norma en la mano: cada afirmación normativa cita su entrada del corpus con apartado y página, o declara el vacío, y estampa la fecha en que se verificó que sigue vigente. Su corpus sintetiza los 38 controles del Anexo A y los 24 documentos portadores que un auditor pide en la fase documental de una certificación.
+Para sostener el trabajo sobre los más de 20 instrumentos construí el agente experto en ISO 42001 que publico en la vitrina, uno de los 15 agentes del portafolio. Responde con la norma en la mano: cada afirmación normativa cita su entrada del corpus con apartado y página, o declara el vacío, y estampa la fecha en que se verificó que sigue vigente. Su corpus sintetiza los 38 controles del Anexo A y los 24 documentos portadores que un auditor pide en la fase documental de una certificación.
 
 En la práctica, me sirve para revisar cada instrumento contra los requisitos que le corresponden y para no dictaminar desde la memoria de un modelo: ningún dictamen con consecuencias avanza sin la aprobación de una persona. No sustituye una auditoría ni certifica a nadie; localiza requisitos, ordena preguntas y hace visible lo que falta. Su diseño completo —por qué un agente experto no es un documento metido en un RAG— está en el documento de gobierno de datos y de IA.
 

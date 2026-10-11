@@ -1,0 +1,17 @@
+# Complemento de la ficha técnica de HackGuard (`hackguard`). PROCEDENCIA: planeadora (curado desde VISION
+# v1.0.0 y el brief, 2026-10-11). Se copia tal cual a data/fichas/hackguard.yaml de hoja-de-vida junto con el export.
+# `cifras_destacadas` son CLAVES de `metricas[]` del export: el export debe traerlas con su fuente.
+schema_version: "1.0.0"
+app: hackguard
+declarado_en: "2026-10-11"
+titular: "Cuaderno de pruebas de seguridad que vuelve evidencia «qué probé, qué esperaba, qué obtuve y qué me falta»: cada prueba respalda un control de ISO/IEC 42001, cada hallazgo demuestra cuál falla y solo se cierra cuando la re-prueba sale bien."
+cifras_destacadas: [funcionalidades, pruebas_en_el_catalogo, controles_iso_42001, pruebas_automaticas, costo_operacion_mensual]
+limites:
+  - "No ejecuta las pruebas: las corres afuera, con herramientas abiertas, y traes los resultados."
+  - "Describe qué se verifica, nunca cómo se rompe: un filtro marca el texto que parezca una instrucción de ataque."
+  - "La IA solo propone pruebas nuevas y ordena resultados pegados; cada veredicto lo confirmas tú."
+nunca:
+  - "Genera ni guarda cargas, exploits o crudos que sirvan para atacar."
+  - "Prueba infraestructura de terceros."
+  - "Certifica cumplimiento: da evidencia control por control, no un sello."
+  - "Decide un veredicto sin tu confirmación."

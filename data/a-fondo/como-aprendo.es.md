@@ -2,7 +2,7 @@
 slug: como-aprendo
 codigo: AF-19
 titulo: "Cómo aprendo"
-resumen: "El argumento con medida: el DP-600 en cinco meses sobre un Fabric con menos de un año en el mercado, Codex, Antigravity y Claude Code en un mes desde su salida, este sitio en ocho sprints desde julio de 2026, y 32 piezas públicas con sus pruebas y coberturas."
+resumen: "El argumento con medida: el DP-600 en cinco meses sobre un Fabric con menos de un año en el mercado, Codex, Antigravity y Claude Code en un mes desde su salida, este sitio en ocho sprints desde julio de 2026, y 38 piezas públicas con sus pruebas y coberturas."
 cuando_usar: "Úsalo cuando pregunten cómo aprende una tecnología nueva, qué hace cuando el puesto pide algo que nunca ha usado, cuánto tardó en certificarse, qué está estudiando ahora, o cómo documenta y demuestra lo que aprendió."
 estado: aprobado
 ancla: "#certificaciones"
@@ -72,7 +72,7 @@ El segundo criterio es la permanencia del aprendizaje. Una herramienta puede cam
 
 El tercero es la posibilidad de producir evidencia. Una ruta merece prioridad cuando puede terminar en una aplicación, una arquitectura, una certificación, una investigación o un componente reutilizable. Si no puedo establecer qué resultado demostrará que realmente aprendí, la iniciativa todavía no está suficientemente definida.
 
-El cuarto es el costo de oportunidad. Cada nueva capacidad compite con productos, investigaciones y responsabilidades que ya están en curso: 32 piezas públicas que mantener y una estrategia institucional de IA que liderar. Por eso, el aprendizaje debe responder a una prioridad explícita y no únicamente a la novedad tecnológica. Elegir qué no estudiar en un momento determinado es parte de mantener profundidad y coherencia.
+El cuarto es el costo de oportunidad. Cada nueva capacidad compite con productos, investigaciones y responsabilidades que ya están en curso: 38 piezas públicas que mantener y una estrategia institucional de IA que liderar. Por eso, el aprendizaje debe responder a una prioridad explícita y no únicamente a la novedad tecnológica. Elegir qué no estudiar en un momento determinado es parte de mantener profundidad y coherencia.
 
 La Ingeniería Industrial aporta este criterio de priorización: los recursos son limitados y deben asignarse según el valor, la restricción y el resultado esperado. El Diseño Industrial conserva la relación con la persona y el problema real. Una tecnología merece incorporarse cuando amplía de manera significativa lo que puedo construir para otros, no solamente cuando aumenta la longitud de mi lista de conocimientos.
 
@@ -111,7 +111,7 @@ Las últimas veces que aprendí algo desde cero, y cuánto tardé:
 | Microsoft Fabric                      | agosto de 2023 | 5 meses de estudio (jul–nov 2024) | DP-600 en diciembre de 2024, plataforma de Vesting operando |
 | Next.js y el pipeline de aplicaciones | julio de 2026  | 8 sprints                         | este sitio, CV Viva, con su CI, sus pruebas y sus ADR       |
 | AI-103 y AI-300                       | julio de 2026  | 21 y 10 módulos a la fecha        | dos rutas en curso, con la Super guía AI-103 publicada      |
-| Codex, Antigravity y Claude Code      | su salida      | cerca de un mes cada uno          | el pipeline con el que se construyen las 32 piezas          |
+| Codex, Antigravity y Claude Code      | su salida      | cerca de un mes cada uno          | el pipeline con el que se construyen las 38 piezas          |
 
 Lo último que aprendí desde cero, sin certificado de por medio, fueron Codex, Antigravity y Claude Code: los tomé desde su salida y en cerca de un mes cada uno estaban en uso real, no en prueba. No son cursos terminados: son capacidades en uso, cada una con un artefacto que alguien puede abrir. La fila de Fabric es la única que termina en una credencial; las otras tres terminan en software que corre.
 
@@ -121,7 +121,7 @@ Lo último que aprendí desde cero, sin certificado de por medio, fueron Codex, 
 
 La evidencia más contundente de mi capacidad de aprendizaje se encuentra en lo que he construido, porque cada pieza puede examinarse y relacionarse con decisiones, pruebas y resultados concretos.
 
-Mi portafolio reúne seis aplicaciones hermanas publicadas —Anonimizador Velo, Dash Agent, Probeta DS, Habla San, Innmobiliaria y Nutrikids— más CV Viva, este sitio. Todas alcanzaron su MVP, están en operación sostenida y siguen evolucionando; Habla San es la más avanzada.
+Mi portafolio reúne diez aplicaciones hermanas publicadas —Anonimizador Velo, Dash Agent, Probeta DS, Habla San, Innmobiliaria, Nutrikids, planlang, AngelGhost, Big-D y HackGuard— más CV Viva, este sitio. Seis alcanzaron su MVP y siguen evolucionando en operación sostenida; las otras cuatro están en etapa inicial; Habla San es la más avanzada.
 
 | Aplicación    | Pruebas automatizadas  | Cobertura | Decisiones (ADR) | Lo que exigió aprender                                        |
 | ------------- | ---------------------- | --------: | ---------------: | ------------------------------------------------------------- |
@@ -138,11 +138,11 @@ No abordé estas tecnologías mediante ejercicios separados del producto. Cada u
 
 Las cifras salen de los repositorios y no sustituyen la evaluación de la calidad. Una suite extensa puede proteger poco si verifica aspectos irrelevantes. Por eso, relaciono cada control con una condición concreta y procuro demostrar que puede ponerse en rojo frente a la falla que debe detectar.
 
-## Las 32 piezas: 13 agentes, 7 investigaciones y 6 tableros, cuatro formas de aprender
+## Las 35 piezas: 15 agentes, 7 investigaciones y 6 tableros, cuatro formas de aprender
 
 <!-- seccion: las-cuatro-familias -->
 
-A las seis aplicaciones hermanas se suman 13 agentes publicados, 7 investigaciones y 6 tableros construidos sobre datos públicos. En total, la vitrina reúne 32 piezas dentro de esas cuatro familias, y las cifras de cada una se cuadran contra las fichas visibles de la vitrina.
+A las diez aplicaciones hermanas se suman 15 agentes publicados, 7 investigaciones y 6 tableros construidos sobre datos públicos. En total, la vitrina reúne 38 piezas dentro de esas cuatro familias, y las cifras de cada una se cuadran contra las fichas visibles de la vitrina.
 
 Cada familia demuestra una forma diferente de aprendizaje. Las aplicaciones exigen transformar nuevas tecnologías en experiencias utilizables. Los agentes requieren comprender modelos, fuentes, herramientas, contexto, memoria y evaluación. Las investigaciones obligan a formular preguntas, revisar evidencia y controlar afirmaciones. Los tableros requieren convertir fuentes públicas en modelos semánticos de Power BI, medidas verificables en DAX y experiencias de decisión, con datos que cualquiera puede verificar.
 
@@ -212,7 +212,7 @@ El aprendizaje adquiere mayor profundidad cuando incluye las condiciones de frac
 
 <!-- seccion: la-guia-del-ai-103 -->
 
-Cuando la ruta AI-103 se convirtió en el camino vigente para profundizar en aplicaciones y agentes de inteligencia artificial sobre Azure, no quise depender únicamente de una secuencia de cursos seleccionados por terceros. Construí un agente capaz de estructurar y verificar una guía de estudio a partir de fuentes oficiales: la Super guía AI-103, uno de los 13 agentes publicados en la vitrina.
+Cuando la ruta AI-103 se convirtió en el camino vigente para profundizar en aplicaciones y agentes de inteligencia artificial sobre Azure, no quise depender únicamente de una secuencia de cursos seleccionados por terceros. Construí un agente capaz de estructurar y verificar una guía de estudio a partir de fuentes oficiales: la Super guía AI-103, uno de los 15 agentes publicados en la vitrina.
 
 La herramienta aplica la misma disciplina que utilizo para aprender. El estudio se invierte: primero se define un proyecto real en Microsoft Foundry, y ninguna ruta se considera completa hasta que un mapa de cobertura demuestra cómo sus contenidos se relacionan con los dominios oficiales y con la proporción que cada uno representa dentro de la evaluación.
 

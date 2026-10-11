@@ -156,7 +156,7 @@ measurement beside it.
 <!-- seccion: fichas-en-el-indice -->
 
 Until September 2026 the index was assembled from the résumé data and from the documents of this
-base. The 32 showcase pieces —six apps with brochure and complement, 13 agents, 7 research pieces
+base. The 32 showcase pieces —ten apps with brochure and complement, 15 agents, 7 research pieces
 and 6 dashboards— have sheets with a promise, figures with provenance, limits, "nevers" and
 blocks, and the chat could not see them: when someone asked about a specific piece, the answer
 came from the prose I wrote about the showcase, not from the sheet.

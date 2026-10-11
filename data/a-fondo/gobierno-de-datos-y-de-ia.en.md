@@ -353,7 +353,7 @@ accuracy and its lineage; an agent that acts is governed, in addition, by what i
 Autonomy must be designed in proportion to risk. A solution can limit itself to retrieving
 information, generating a draft or recommending an action. Only certain tasks should allow direct
 execution, especially when the result can be verified, reverted and kept within clearly defined
-limits. In the 13 agents of my showcase that decision is written on each sheet: what it does, what
+limits. In the 15 agents of my showcase that decision is written on each sheet: what it does, what
 limits it has and what it "never" does; the Power BI Dashboard Builder, for example, has 5
 human-approval gates and does not close a run without a person approving the result.
 
@@ -438,7 +438,7 @@ improvements is in my own analytics process, which is the one I govern from begi
 <!-- seccion: iso-42001 -->
 
 I built an agent specialized in ISO/IEC 42001, the **ISO 42001 Expert**, and published it in my
-showcase as one of the 13 agents, as evidence of my way of working with generative artificial
+showcase as one of the 15 agents, as evidence of my way of working with generative artificial
 intelligence and normative knowledge.
 
 The agent does not use the model's general memory as the authority on the standard. Its answers must
@@ -503,7 +503,7 @@ statement, it must not present it with normative authority.
 <!-- seccion: gobierno-de-mi-proceso -->
 
 I apply these principles to my own pipeline of applications, agents, research pieces and dashboards:
-the 32 pieces of the showcase. The purpose is to demonstrate that governance is not a set of
+the 38 pieces of the showcase. The purpose is to demonstrate that governance is not a set of
 recommendations aimed at others, but a discipline I use to control my own work.
 
 No application moves forward without two documented decisions. The first confirms its priority
@@ -548,10 +548,10 @@ I also keep differentiated states for the pieces. An exploration, a prototype, a
 and a capability operated in a sustained manner do not represent the same level of maturity. This
 distinction avoids presenting intentions as results and protects the credibility of the portfolio:
 the Google Cloud exploration appears as an exploration, with no horizon and no real use declared,
-and the 6 applications appear as operated because they reached their minimum product and keep
-evolving.
+and six of the 10 applications appear as operated because they reached their minimum product and keep
+evolving, while the other four appear in their initial stage.
 
-And every figure declares its provenance. The technical sheets of the 32 pieces label every number
+And every figure declares its provenance. The technical sheets of the 38 pieces label every number
 as **measured**, **calculated**, **declared** or **estimated**, and the same criterion rules this
 corpus: the "close to 60%" less effort at Fundación CTIC carries its "close to" because it is an
 estimate, and the products or the instruments are counted, but they go rounded because they are the institution's internal figures.
@@ -740,7 +740,7 @@ requirement seeks to represent.
 Verifiable evidence adds to the professional experience. DP-600, earned in December 2024, formally
 validates my depth in Microsoft Fabric, Power BI and semantic models. The two IBM credentials back
 my base in data science, Python, SQL and R. My public portfolio makes it possible to examine 6
-applications, 13 agents, 7 research pieces and 6 dashboards —32 pieces— with their tests, their
+applications, 15 agents, 7 research pieces and 6 dashboards —38 pieces— with their tests, their
 controls and their technical sheets; and among the agents there is one that deals precisely with the
 standard I implement.
 
@@ -819,7 +819,7 @@ protect the purpose for which the solution was authorized and make it possible t
 it keeps generating the expected value. A capability that has stopped being useful, that operates
 outside its context or that introduces a disproportionate risk needs to be reviewed, restricted or
 withdrawn, even if it technically keeps working. In my showcase I have done it: in Dash Agent,
-one of the 6 applications, a feature was withdrawn when the evidence showed 83 out-of-context
+one of the 10 applications, a feature was withdrawn when the evidence showed 83 out-of-context
 suggestions, and the withdrawal is told on its sheet, not hidden.
 
 The organization does not need to choose between speed and control as if they were incompatible

@@ -1,3 +1,4 @@
+import { readdirSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import {
   getFicha,
@@ -11,8 +12,15 @@ import {
  */
 
 describe("loader de la vitrina", () => {
-  it("carga las 6 fichas del portafolio", () => {
-    expect(getFichasVitrina()).toHaveLength(6);
+  it("carga una ficha por cada export del portafolio en content/vitrina", () => {
+    // El conteo sale del disco: una app nueva (con categoría) no rompe este
+    // test; un export que el loader no entregue, sí. El gate de «export sin
+    // categoría rompe el build» vive en `vitrina-categorias-apps.test.ts`.
+    const enDisco = readdirSync("content/vitrina").filter((f) =>
+      f.endsWith(".brochure-export.json"),
+    ).length;
+    expect(enDisco).toBeGreaterThan(0);
+    expect(getFichasVitrina()).toHaveLength(enDisco);
   });
 
   it("ancla la procedencia de cada ficha (slug · fecha · versión)", () => {

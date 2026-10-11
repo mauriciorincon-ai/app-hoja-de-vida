@@ -1,0 +1,17 @@
+# Complemento de la ficha técnica de Big-D (`big-d`). PROCEDENCIA: planeadora (curado desde VISION v1.1.2
+# y el brief, 2026-10-11). Se copia tal cual a data/fichas/big-d.yaml de hoja-de-vida junto con el export.
+# `cifras_destacadas` son CLAVES de `metricas[]` del export: el export debe traerlas con su fuente.
+schema_version: "1.0.0"
+app: big-d
+declarado_en: "2026-10-11"
+titular: "Elige tu plataforma de datos con evidencia fechada y un cálculo que puedes repetir: quién gana, por cuánto, qué tan seguro es y con qué peso cambiarías de opinión; y entiende Databricks, Fabric y Snowflake con el mismo mapa, en dos idiomas."
+cifras_destacadas: [funcionalidades, plataformas_en_el_atlas, evidencias_fechadas, pruebas_automaticas, costo_operacion_mensual]
+limites:
+  - "Compara con evidencia pública fechada; no se conecta a ninguna plataforma ni corre cargas reales."
+  - "Las plataformas son N por diseño: hoy tres; agregar una es agregar datos, no código."
+  - "La única IA es un investigador a demanda cuyas propuestas apruebas afirmación por afirmación."
+nunca:
+  - "Opera, prueba o se conecta a una plataforma: cero cuentas."
+  - "Escribe la narrativa con un modelo de lenguaje."
+  - "Muestra logos de fabricantes ni cifras virales sin fuente fechada."
+  - "Cablea el número de plataformas."
