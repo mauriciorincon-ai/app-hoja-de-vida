@@ -53,7 +53,36 @@ mismas de siempre) · `pnpm audit --audit-level high` limpio · barrido de cero 
 Capturas del bloque Profesionales a 1280 (posiciones 4 de 7 y 6 de 7, donde viven las cuatro):
 `sprints/REV-2026-10-11-tiras-capturas/`.
 
-## 5. Lo que queda fuera
+## 5. Segunda parte: las cuentas de la guía y del manual
+
+Después del merge del #75, el dueño preguntó si los documentos de referencia estaban al día «con
+tantos cambios últimos». Esta parte va en un PR propio: el primer intento la empujó a la rama del #75
+ya mergeado y reescribió su descripción para anunciarla; la descripción se restauró a lo que de
+verdad entró. No lo estaban: el #73 llevó la vitrina a 10 apps, 15 agentes y 38 fichas, y solo
+el corpus del chat se alineó, porque solo él tenía gate de cifras (ADR-025). La guía de prueba y el
+manual seguían con «Apps 6 · Agentes 13», «las 32 fichas», «recorre las seis».
+
+- **Guía v9.25:** k1 y n4 (cuentas del portal y de la HOME), m1 y el pie del bloque M, g1 (siete
+  apps con roadmap; AngelGhost, Big-D y HackGuard aún sin él), l5 ⭐ y o12 al día; sus casillas pasan
+  a k1b, n4b, m1b, g1b, l5b y o12b. **Nueva k17** (sin ⭐): la ficha sin proceso no tiene «Cómo
+  funciona» ni deja hueco. La introducción deja de nombrar el Sprint 008 y sale su aviso, que ya no
+  aplicaba. Las ⭐ siguen en 43.
+- **Manual:** cuentas del portal y del chat, y una viñeta que explica el gate nuevo.
+- **CLAUDE.md:** `data/fichas/` ya no dice que todo complemento es de CV Viva.
+- **BLUEPRINT:** sin cambios de infraestructura; su encabezado decía «Última actualización:
+  2026-07-20» con historial hasta el 2026-09-26, y ahora dice esa fecha.
+- **Gate nuevo** `tests/unit/documentos-cuentas.test.ts`: doce anclas, cada una una frase con una
+  cuenta; exige que la frase exista y que cada número sea el del disco (`verdadesDelSitio()` del
+  gate del corpus, más las apps con roadmap). No mira los historiales.
+
+| Gate                                           | Cómo se puso en rojo                                     | Qué dijo                                                                                                                                                                                                                                                                                                                                                                               |
+| ---------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `documentos-cuentas.test.ts` (10 de 12 anclas) | correrlo contra la guía y el manual de antes del arreglo | `guía dice «Apps 6 · Agentes 13 · Investigaciones 7 · Tableros 6»: expected [ 6, 13, 7, 6 ] to deeply equal [ 10, 15, 7, 6 ]`, y así las otras nueve, cada una con su frase: «seis tarjetas», «las seis fichas seguidas», «Recorre las seis» (7), «Las 26 fichas» (28), «13 productos publicadas» (15), «Son las 32 fichas» (38), y en el manual «6 piezas», «13 piezas» y «32 fichas» |
+
+Las dos anclas que pasaron (investigaciones y tableros del manual) eran ciertas. Tras el arreglo: 12
+de 12, sin tocar el test. Suite completa: 1492 pasadas.
+
+## 6. Lo que queda fuera
 
 Las **capturas reales** de las fichas (`public/vitrina/*.webp`, dentro de la ficha técnica) siguen
 sin existir para las cuatro apps nuevas; ahí el componente se oculta limpio y no hay hueco. Son

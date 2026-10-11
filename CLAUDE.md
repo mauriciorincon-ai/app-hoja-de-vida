@@ -71,8 +71,10 @@ data/a-fondo/      (S8 — el corpus profundo del chat: <slug>.{es,en}.md, un do
                     `tests/fixtures/banco-de-preguntas.es.yaml`, porque el buscador es léxico y
                     una palabra que el corpus no dice no existe para quien pregunta)
 data/vitrina.yaml  (S6 — los cuatro FRENTES de la vitrina: id, estado, nombre, intro, detalle)
-data/fichas/       (S6 — complementos de CURACIÓN de CV Viva por app, `procedencia: cv-viva`:
-                    titular · cifras destacadas · límites · nunca · proceso)
+data/fichas/       (S6 — complementos de CURACIÓN por app: titular · cifras destacadas · límites ·
+                    nunca · proceso (opcional) · roadmap. Los seis de la línea base son de CV Viva
+                    (`procedencia: cv-viva`); los de las apps nuevas los escribe la planeadora
+                    (`vitrina/apps/*.complemento.yaml`) y llegan por copia)
 content/vitrina/   (S5 — los brochure-export.json de las apps hermanas; NO se editan a mano)
 content/<frente>/  (S7 — fichas técnicas COMPLETAS producidas por otras casas; NO se editan aquí:
                     agentes/ · investigaciones/ · tableros/, un <slug>.ficha-tecnica.json por pieza)
