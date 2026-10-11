@@ -2,8 +2,8 @@
 slug: apps-pipeline
 codigo: AF-12
 titulo: "Las apps que estoy construyendo en público"
-resumen: "El pipeline AI-APPs: seis aplicaciones hermanas más CV Viva, 13 agentes, 7 investigaciones y 6 tableros —32 piezas— construidos con dos casas, un agente de fábrica, cuatro jobs de CI, un contrato de ficha desde Zod, costo real de US$0 al mes y dos reglas: código primero y todo control se demuestra fallando."
-cuando_usar: "Úsalo cuando pregunten qué ha construido por su cuenta fuera del trabajo, cuántas aplicaciones ha publicado, si tiene código público, cómo es su pipeline de construcción con Next.js, pruebas automatizadas y CI, y qué demuestra cada una de las seis apps de la vitrina."
+resumen: "El pipeline AI-APPs: diez aplicaciones hermanas más CV Viva, 15 agentes, 7 investigaciones y 6 tableros —38 piezas— construidos con dos casas, un agente de fábrica, cuatro jobs de CI, un contrato de ficha desde Zod, costo real de US$0 al mes y dos reglas: código primero y todo control se demuestra fallando."
+cuando_usar: "Úsalo cuando pregunten qué ha construido por su cuenta fuera del trabajo, cuántas aplicaciones ha publicado, si tiene código público, cómo es su pipeline de construcción con Next.js, pruebas automatizadas y CI, y qué demuestra cada una de las diez apps de la vitrina."
 estado: aprobado
 ancla: "#vitrina"
 actualizado: 2026-09-27
@@ -51,7 +51,7 @@ CV Viva incluida). -->
 
 <!-- seccion: por-que-en-publico -->
 
-Un currículum afirma; una pieza publicada demuestra. Esa es la razón principal por la que construyo en público: seis aplicaciones hermanas, más este sitio, y 32 piezas en total, todas fuera de mi trabajo y todas con su repositorio.
+Un currículum afirma; una pieza publicada demuestra. Esa es la razón principal por la que construyo en público: diez aplicaciones hermanas, más este sitio, y 38 piezas en total, todas fuera de mi trabajo y todas con su repositorio.
 
 Mis proyectos propios de IA generativa no salieron de la nada. Desde abril de 2024, en paralelo a mis empleos, planeo y diseño estas aplicaciones y estos agentes —su concepción y su arquitectura—, y durante años los intenté en distintas plataformas antes de construirlos, desde 2026, con el pipeline que hoy los produce. Es un hecho declarado, sin un artefacto de 2024 que lo pruebe: lo que sí puede examinarse son las piezas, y cada una conserva su propia fecha —Dash Agent, por ejemplo, se concibió y diseñó en 2026—.
 
@@ -67,7 +67,7 @@ Construir en público es, en última instancia, una forma de responsabilidad pro
 
 Construir en público introduce una consecuencia deliberadamente incómoda: aquello que no está terminado no puede presentarse como si lo estuviera. Una idea puede declararse en exploración, un prototipo puede mostrar una hipótesis y una solución terminada puede demostrar una capacidad, pero estos estados no deben confundirse. Hacer visible esa diferencia protege la credibilidad del portafolio y me obliga a describir cada resultado con precisión.
 
-Los estados están escritos en los datos, no en la prosa. El catálogo de apps admite tres: en producción —URL viva, repositorio y CI en verde—, en construcción —repositorio con commits reales— y en exploración —objetivo declarado, sin fechas prometidas—. Las fichas de las piezas admiten dos: inicial, cuando la construcción está cerrada, y sellado, cuando la pieza alcanzó su MVP y lleva su fecha de sello. De los 13 agentes publicados, cinco están sellados y ocho en estado inicial; los seis tableros están sellados, y las siete investigaciones son iniciales; cinco tienen su manuscrito listo para enviar y ninguno se ha enviado.
+Los estados están escritos en los datos, no en la prosa. El catálogo de apps admite tres: en producción —URL viva, repositorio y CI en verde—, en construcción —repositorio con commits reales— y en exploración —objetivo declarado, sin fechas prometidas—. Las fichas de las piezas admiten dos: inicial, cuando la construcción está cerrada, y sellado, cuando la pieza alcanzó su MVP y lleva su fecha de sello. De los 15 agentes publicados, cinco están sellados y diez en estado inicial; los seis tableros están sellados, y las siete investigaciones son iniciales; cinco tienen su manuscrito listo para enviar y ninguno se ha enviado.
 
 También me obliga a mantener una correspondencia entre lo que afirmo y lo que entrego. Si digo que una solución es reproducible, debe existir una forma de comprender cómo fue construida. Si afirmo que una cifra fue calculada, debo poder explicar el método. Si una aplicación utiliza inteligencia artificial, debe quedar claro qué función cumple, qué información utiliza y por qué esa capacidad no podía resolverse adecuadamente mediante programación convencional.
 
@@ -103,9 +103,9 @@ Esta distinción es especialmente importante en investigaciones y agentes. La ap
 
 <!-- seccion: que-hay-construido -->
 
-El pipeline produce cuatro familias principales de activos: aplicaciones, agentes, investigaciones y tableros analíticos. Todas las piezas terminadas se publican en la vitrina del sitio y cuentan con una ficha que explica su propósito, alcance, estado y principales decisiones de diseño. Hoy la vitrina reúne 32 piezas: seis aplicaciones hermanas, 13 agentes, 7 investigaciones y 6 tableros.
+El pipeline produce cuatro familias principales de activos: aplicaciones, agentes, investigaciones y tableros analíticos. Todas las piezas terminadas se publican en la vitrina del sitio y cuentan con una ficha que explica su propósito, alcance, estado y principales decisiones de diseño. Hoy la vitrina reúne 38 piezas: diez aplicaciones hermanas, 15 agentes, 7 investigaciones y 6 tableros.
 
-Las seis aplicaciones son Anonimizador Velo, Dash Agent, Probeta DS, Habla San, Innmobiliaria y Nutrikids, más CV Viva, que es este mismo sitio y no una pieza del escaparate. Cada una responde a una promesa diferente, pero todas deben superar el mismo criterio: convertir una necesidad en una experiencia funcional, documentada y verificable, no únicamente en una interfaz convincente o una demostración técnica.
+Las diez aplicaciones son Anonimizador Velo, Dash Agent, Probeta DS, Habla San, Innmobiliaria y Nutrikids, más cuatro en su etapa inicial —planlang, AngelGhost, Big-D y HackGuard—, más CV Viva, que es este mismo sitio y no una pieza del escaparate. Cada una responde a una promesa diferente, pero todas deben superar el mismo criterio: convertir una necesidad en una experiencia funcional, documentada y verificable, no únicamente en una interfaz convincente o una demostración técnica.
 
 | Aplicación        | Qué demuestra                                                                                                                                              |
 | ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -116,9 +116,9 @@ Las seis aplicaciones son Anonimizador Velo, Dash Agent, Probeta DS, Habla San, 
 | **Innmobiliaria** | flujos de negocio con validación real —el certificado se ve y nunca se almacena— y 98 % de cobertura en su motor                                           |
 | **Nutrikids**    | un motor de cálculo con 99,5 % de cobertura y un registro del día que jamás sale del teléfono                                                              |
 
-Todas alcanzaron su MVP y están en operación sostenida —si están en el sitio es porque llegaron a esa condición—, y todas siguen en evolución permanente. Habla San es la más avanzada: la única sellada, desde agosto de 2026, y en uso por la familia para la que se construyó.
+Las seis de la tabla alcanzaron su MVP y están en operación sostenida —si están en el sitio es porque llegaron a esa condición—, y todas siguen en evolución permanente. Las otras cuatro —planlang, AngelGhost, Big-D y HackGuard— están en su etapa inicial: ciclo H1, versión 0.1.0 y sin sellar. Habla San es la más avanzada: la única sellada, desde agosto de 2026, y en uso por la familia para la que se construyó.
 
-## Las seis aplicaciones, en cifras
+## Las diez aplicaciones, en cifras
 
 <!-- seccion: las-seis-apps-en-cifras -->
 
@@ -133,15 +133,21 @@ Cada aplicación publica su brochure con cifras que declaran su fuente, y esta t
 | **Innmobiliaria** |              13 |        11 |                             172 |                           76 |             98,31 % |   6 |
 | **Nutrikids**    |              19 |         8 |                             214 |                           94 |             99,52 % |   7 |
 
-El costo de operación mensual de las seis es US$0, calculado como la suma de los servicios contratados: hosting en plan gratuito, sin servidores propios y, cuando hay un proveedor de IA, dentro de su cuota gratuita. Cuatro de las seis no usan inteligencia artificial en absoluto —Anonimizador Velo, Dash Agent, Habla San e Innmobiliaria, que la tiene en cero modelos por regla de producto—, y sus fichas lo declaran como regla, no como ausencia; Probeta DS y Nutrikids la usan en una sola función, con fallback determinista y conmutable por variable de entorno.
+El costo de operación mensual de las seis de la tabla es US$0, calculado como la suma de los servicios contratados: hosting en plan gratuito, sin servidores propios y, cuando hay un proveedor de IA, dentro de su cuota gratuita. Cuatro de las seis de la tabla no usan inteligencia artificial en absoluto —Anonimizador Velo, Dash Agent, Habla San e Innmobiliaria, que la tiene en cero modelos por regla de producto—, y sus fichas lo declaran como regla, no como ausencia; Probeta DS y Nutrikids la usan en una sola función, con fallback determinista y conmutable por variable de entorno.
 
 Estas cifras son una foto con fecha, se refrescan desde el repositorio de cada app, y una suite grande no protege por sí sola: lo que protege es que cada prueba esté atada a una condición concreta que sabe ponerse en rojo. Tres ejemplos: Anonimizador Velo tiene una prueba permanente que intercepta todas las peticiones del navegador y falla si una sola lleva datos; Habla San tiene pruebas en la integración continua que rompen el código si alguien intenta guardar o enviar el audio del menor; Probeta DS tiene pruebas que fallan si alguien ajusta el preprocesamiento fuera de la mitad de entrenamiento.
 
-## Trece agentes, siete investigaciones y seis tableros
+## Las cuatro en etapa inicial
+
+<!-- seccion: apps-en-etapa-inicial -->
+
+Las cuatro restantes están en su etapa inicial —ciclo H1, versión 0.1.0, sin sellar— y publican sus propias cifras con fuente en su brochure, por eso no entran en la tabla anterior. planlang (tres sprints cerrados): escribes el plan de un agente como un contrato y un verificador sin IA mide, caso por caso, la brecha entre lo que el plan prometía y lo que el agente hizo; 19 funcionalidades, 16 ADR, 16 criterios cumplidos, 1.204 decisiones cruzadas sobre 220 casos sintéticos, cero llamadas a modelos en la vitrina y un costo de US$5,21 por corrida. AngelGhost (cinco sprints): una ventana en tu Mac que el cliente no ve aunque compartas pantalla y que te acerca tu propia experiencia en el momento justo de la reunión; 20 funcionalidades, 1.475 pruebas automáticas, 21 ADR y cero bytes que salen del equipo. Big-D (tres sprints): un planeador abierto y reproducible para elegir entre plataformas de datos con evidencia fechada; 8 funcionalidades, 3 plataformas y 63 componentes en el atlas, 33 evidencias fechadas, 2.614 pruebas automáticas y 98,55 % de cobertura. HackGuard (dos sprints): un catálogo vivo de pruebas de seguridad que te dice qué probaste, qué esperabas, qué obtuviste y qué te falta; 19 funcionalidades, 38 pruebas en el catálogo cruzadas con 38 controles de ISO/IEC 42001, 2.431 pruebas automáticas y 94,55 % de cobertura. Las cuatro cuestan US$0 al mes de operación.
+
+## Quince agentes, siete investigaciones y seis tableros
 
 <!-- seccion: agentes-investigaciones-tableros -->
 
-El portafolio incluye además trece agentes publicados, concebidos como sistemas de trabajo especializados. No los presento como conversaciones genéricas ni como demostraciones de generación de texto. Cada agente debe tener un propósito delimitado, unas fuentes o conocimientos identificables, reglas de actuación, resultados esperados y condiciones bajo las cuales debe reconocer sus límites. Cinco están sellados —el Constructor de Tableros Power BI en junio de 2026, la Fábrica de AI-APPs en julio, Presentaciones CINE y el Taller de Animación entre julio y agosto, y el Harness Paper Computacional en agosto—; su documento propio los recorre uno por uno.
+El portafolio incluye además quince agentes publicados, concebidos como sistemas de trabajo especializados. No los presento como conversaciones genéricas ni como demostraciones de generación de texto. Cada agente debe tener un propósito delimitado, unas fuentes o conocimientos identificables, reglas de actuación, resultados esperados y condiciones bajo las cuales debe reconocer sus límites. Cinco están sellados —el Constructor de Tableros Power BI en junio de 2026, la Fábrica de AI-APPs en julio, Presentaciones CINE y el Taller de Animación entre julio y agosto, y el Harness Paper Computacional en agosto—; su documento propio los recorre uno por uno.
 
 Las siete líneas de investigación representan otra dimensión del pipeline. Su propósito no es respaldar retrospectivamente una idea mediante referencias seleccionadas, sino formular una pregunta, caracterizar el vacío que la hace relevante y construir una ruta metodológica capaz de producir evidencia. Cada trabajo debe distinguir claramente entre aquello que está sustentado, lo que todavía constituye una hipótesis y lo que no puede afirmarse con los resultados disponibles. Cada una publica su vacío con el número de obras revisadas —de 119 marcos a 1.414 obras— y su documento explica el método.
 
@@ -153,7 +159,7 @@ Los seis tableros construidos sobre datos públicos permiten demostrar la capa a
 
 Estas cuatro familias no compiten entre sí. Forman un sistema progresivo de capacidades. Los datos permiten observar. Los tableros convierten esa observación en comprensión. Las investigaciones permiten formular y contrastar explicaciones. Las aplicaciones integran capacidades dentro de una experiencia utilizable. Los agentes amplían esa experiencia mediante conocimiento, razonamiento y herramientas dentro de límites definidos.
 
-Las familias también se alimentan entre sí en el pipeline real. Los dos harnesses de investigación son agentes de la vitrina y producen las siete investigaciones. La Fábrica de AI-APPs es un agente y coordina las seis aplicaciones. El Constructor de Tableros Power BI —construido y probado: crea el proyecto completo con su modelo semántico, la preparación en Power Query M, las medidas DAX y las visuales, y puede extraer datos— es un agente que produce la clase de artefacto que los seis tableros demuestran a mano. Y la investigación sobre el espectro de agencia estudia justamente cuándo una decisión merece un tablero, una alerta, una recomendación o un agente.
+Las familias también se alimentan entre sí en el pipeline real. Los dos harnesses de investigación son agentes de la vitrina y producen las siete investigaciones. La Fábrica de AI-APPs es un agente y coordina las diez aplicaciones. El Constructor de Tableros Power BI —construido y probado: crea el proyecto completo con su modelo semántico, la preparación en Power Query M, las medidas DAX y las visuales, y puede extraer datos— es un agente que produce la clase de artefacto que los seis tableros demuestran a mano. Y la investigación sobre el espectro de agencia estudia justamente cuándo una decisión merece un tablero, una alerta, una recomendación o un agente.
 
 Cada ficha también debe declarar qué capacidad profesional pretende demostrar. Una aplicación puede evidenciar arquitectura, desarrollo o experiencia de usuario. Un agente puede demostrar recuperación de conocimiento, uso de herramientas o evaluación. Una investigación puede demostrar método. Un tablero puede demostrar ingeniería de datos, modelado semántico o comunicación analítica. Esta relación evita que las piezas se conviertan en proyectos interesantes, pero desconectados del perfil que deben sustentar.
 
@@ -173,7 +179,7 @@ La regla no es decorativa. Un portafolio que exige procedencia a los datos de su
 
 La ficha debe diferenciar igualmente entre capacidad demostrada y tecnología utilizada. Una herramienta no constituye por sí sola una competencia. Utilizar Microsoft Fabric, Power BI, Python, un modelo generativo o un framework determinado solo adquiere significado cuando queda claro qué problema permitió resolver, qué decisión arquitectónica representó y qué evidencia demuestra que la solución cumplió su propósito.
 
-Por eso el stack de cada ficha no es una lista de logotipos: cada tecnología va con su papel. En Anonimizador Velo, los Web Workers son la frontera donde viven los datos crudos y hacia la interfaz solo cruzan conteos y muestras enmascaradas; la Web Crypto es la bóveda cifrada. En Probeta DS, Pyodide es la razón de que pandas y scikit-learn corran en un hilo aparte del navegador y el dataset nunca se suba. En Innmobiliaria, Supabase es una base de datos con permisos por fila desde la primera tabla y toda escritura por función transaccional. La misma palabra —Next.js— aparece en las seis, y en cada una significa una decisión distinta: una PWA instalable y local en Habla San, un servidor que escucha solo en la máquina local en Dash Agent, una app servida desde el borde en Innmobiliaria.
+Por eso el stack de cada ficha no es una lista de logotipos: cada tecnología va con su papel. En Anonimizador Velo, los Web Workers son la frontera donde viven los datos crudos y hacia la interfaz solo cruzan conteos y muestras enmascaradas; la Web Crypto es la bóveda cifrada. En Probeta DS, Pyodide es la razón de que pandas y scikit-learn corran en un hilo aparte del navegador y el dataset nunca se suba. En Innmobiliaria, Supabase es una base de datos con permisos por fila desde la primera tabla y toda escritura por función transaccional. La misma palabra —Next.js— aparece en las diez, y en cada una significa una decisión distinta: una PWA instalable y local en Habla San, un servidor que escucha solo en la máquina local en Dash Agent, una app servida desde el borde en Innmobiliaria.
 
 Esa disciplina es la que uso para leer una hoja de vida ajena, y la que pido que usen con la mía.
 
@@ -279,7 +285,7 @@ Una de las reglas más importantes del pipeline —la regla 13— es no incorpor
 
 Esta regla no implica construir primero una solución convencional que sé que será descartada. Significa evaluar conscientemente si la necesidad puede resolverse mediante reglas, transformaciones, búsquedas estructuradas, algoritmos o flujos de trabajo convencionales. Cuando estas alternativas cumplen el propósito, suelen ofrecer mayor previsibilidad, menor costo, mejor capacidad de prueba y una explicación más directa de su comportamiento.
 
-La regla se ve en las seis aplicaciones. Anonimizador Velo anonimiza con criptografía y validadores que citan su fuente oficial, y por eso el mismo archivo produce siempre el mismo resultado. Dash Agent detecta lo que dejó de ser cierto de forma determinista, sin un modelo que opine. Habla San mide energía y tono de la voz con la API de audio del navegador y no finge reconocer la palabra, porque ninguna tecnología lo hace hoy con fiabilidad en español para niños de 4 a 6 años. Innmobiliaria tiene cero modelos por regla de producto. Y donde sí hay un modelo —la narración del porqué en Probeta DS, las preguntas abiertas en Nutrikids—, es una función opcional, con fallback determinista y verificación de que no cite una cifra que no existe.
+La regla se ve en las diez aplicaciones. Anonimizador Velo anonimiza con criptografía y validadores que citan su fuente oficial, y por eso el mismo archivo produce siempre el mismo resultado. Dash Agent detecta lo que dejó de ser cierto de forma determinista, sin un modelo que opine. Habla San mide energía y tono de la voz con la API de audio del navegador y no finge reconocer la palabra, porque ninguna tecnología lo hace hoy con fiabilidad en español para niños de 4 a 6 años. Innmobiliaria tiene cero modelos por regla de producto. planlang mide cada caso con un verificador sin IA: un modelo nunca decide si el agente acertó. Y donde sí hay un modelo —la narración del porqué en Probeta DS, las preguntas abiertas en Nutrikids—, es una función opcional, con fallback determinista y verificación de que no cite una cifra que no existe.
 
 La inteligencia artificial se incorpora cuando agrega una capacidad necesaria y demostrable, no cuando simplemente hace que la solución parezca más avanzada. Su inclusión debe estar acompañada por criterios de evaluación, límites operativos, mecanismos de observación y una definición clara de las responsabilidades que permanecen en el código y en las personas.
 
@@ -343,7 +349,7 @@ También materializa la convergencia entre Ingeniería Industrial y Diseño Indu
 
 <!-- seccion: en-exploracion -->
 
-El pipeline distingue claramente entre piezas terminadas y capacidades en exploración. Utilizo esta palabra de forma deliberada porque una intención, una arquitectura propuesta o un desarrollo inicial no deben presentarse con el mismo nivel de certeza que una solución publicada y verificable. Las dos exploraciones están declaradas con esa palabra en el catálogo de apps, sin fechas prometidas, y no cuentan entre las 32 piezas.
+El pipeline distingue claramente entre piezas terminadas y capacidades en exploración. Utilizo esta palabra de forma deliberada porque una intención, una arquitectura propuesta o un desarrollo inicial no deben presentarse con el mismo nivel de certeza que una solución publicada y verificable. Las dos exploraciones están declaradas con esa palabra en el catálogo de apps, sin fechas prometidas, y no cuentan entre las 38 piezas.
 
 Una de las exploraciones corresponde a una solución analítica de extremo a extremo sobre Microsoft Fabric utilizando datos abiertos de Colombia. Su propósito es demostrar públicamente el recorrido completo desde la ingestión y el almacenamiento en un lakehouse hasta el modelo semántico y la experiencia en Power BI embebido.
 

@@ -9,6 +9,7 @@ import {
 } from "@/lib/vitrina/ficha-tecnica/loader";
 import {
   complementoSchema,
+  procedencias,
   fichaTecnicaSchema,
   procesoSchema,
 } from "@/lib/vitrina/ficha-tecnica/schema";
@@ -28,6 +29,16 @@ const complementos = readdirSync("data/fichas")
         unknown
       >,
   );
+
+/** Las seis apps cuyo complemento (y proceso BPMN) curó CV Viva en el S6. */
+const LINEA_BASE = [
+  "anonimizador",
+  "dash-agent-ai",
+  "ds",
+  "habla",
+  "inmobiliaria",
+  "nutri-kids",
+];
 
 function habla() {
   return structuredClone(complementos.find((c) => c.app === "habla")!) as {
@@ -102,10 +113,22 @@ describe("complementos reales", () => {
       expect(complementoSchema.safeParse(c).success).toBe(true);
   });
 
-  it("los seis procesos son BPMN válido y hoy los declara CV Viva", () => {
+  // El proceso es OPCIONAL (contrato v1.1.0). Las seis apps de la línea base
+  // lo traen curado por CV Viva; las que llegan con complemento de otra casa
+  // (planlang, AngelGhost, Big-D, HackGuard · 2026-10-11) todavía no. Un
+  // proceso sin dueño sigue siendo una cifra sin fuente.
+  it("todo complemento con proceso lo trae con su procedencia y es BPMN válido; la línea base sigue trayéndolo", () => {
     for (const c of complementos) {
-      expect(c.procedencia).toBe("cv-viva");
-      expect(procesoSchema.safeParse(c.proceso).success).toBe(true);
+      if (!c.proceso) continue;
+      expect(procedencias, String(c.app)).toContain(c.procedencia);
+      expect(procesoSchema.safeParse(c.proceso).success, String(c.app)).toBe(
+        true,
+      );
+    }
+    for (const app of LINEA_BASE) {
+      const c = complementos.find((x) => x.app === app)!;
+      expect(c.proceso, app).toBeDefined();
+      expect(c.procedencia, app).toBe("cv-viva");
     }
   });
 });
@@ -181,8 +204,12 @@ describe("armarFichaTecnica", () => {
     );
   });
 
-  it("las seis fichas técnicas se arman (una sola fuente de piezas)", () => {
-    expect(getFichasTecnicas()).toHaveLength(6);
+  it("hay una ficha técnica por cada app del disco y todas se arman (una sola fuente de piezas)", () => {
+    const enDisco = readdirSync("content/vitrina").filter((f) =>
+      f.endsWith(".brochure-export.json"),
+    ).length;
+    expect(enDisco).toBeGreaterThan(0);
+    expect(getFichasTecnicas()).toHaveLength(enDisco);
   });
 
   it("más de cinco cifras no es infografía", () => {
@@ -345,10 +372,17 @@ describe("el proceso es opcional (contrato v1.1.0)", () => {
     );
   });
 
-  it("las seis apps siguen trayendo su proceso", () => {
-    for (const ft of getFichasTecnicas()) {
-      expect(ft.proceso, ft.pieza.slug).toBeDefined();
-      expect(ft.procedencia_proceso).toBe("cv-viva");
+  it("las seis apps de la línea base siguen trayendo su proceso, y toda ficha con proceso trae su procedencia", () => {
+    const fichas = getFichasTecnicas();
+    for (const ft of fichas) {
+      if (ft.proceso)
+        expect(ft.procedencia_proceso, ft.pieza.slug).toBeDefined();
+      else expect(ft.procedencia_proceso, ft.pieza.slug).toBeUndefined();
+    }
+    for (const slug of LINEA_BASE) {
+      const ft = fichas.find((f) => f.pieza.slug === slug)!;
+      expect(ft.proceso, slug).toBeDefined();
+      expect(ft.procedencia_proceso, slug).toBe("cv-viva");
     }
   });
 });

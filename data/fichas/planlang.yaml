@@ -1,0 +1,38 @@
+# Complemento de la ficha técnica de planlang, propuesto por la app (procedencia: app).
+# Lo genera `pnpm fichas` en planlang (docs/fichas/planlang.complemento-propuesto.json); no se edita aquí.
+# El bloque `roadmap:` lo administra la planeadora: si este archivo ya lo trae en hoja-de-vida, la entrega
+# lo conserva (`pnpm paquete:vitrina --hoja-de-vida <ruta>` lo fusiona); nunca se borra al copiar.
+schema_version: "1.0.0"
+app: "planlang"
+declarado_en: "2026-10-04"
+titular: "El plan de un agente se escribe como contrato, y un verificador sin IA publica, caso por caso, la brecha entre lo planeado y lo que el agente hizo, con sus fallas a la vista."
+cifras_destacadas:
+  - "criterios_cumplidos"
+  - "decisiones_cruzadas"
+  - "casos_sinteticos"
+  - "llamadas_a_modelos_en_la_vitrina"
+  - "costo_de_una_corrida"
+limites:
+  - "Es una simulación: no opera casos reales ni decide sobre personas."
+  - "El entrevistador corre en la consola, no en la vitrina: aquí se ve el plan que propuso para el demo B, revisado y aprobado por una persona."
+  - "Mide lo que el plan declaró; lo que no previó aparece como brecha, no como veredicto."
+nunca:
+  - "Usa datos reales: todo caso, afiliado, médico, solicitante y lista de control es sintético."
+  - "Deja que un modelo decida si el agente acertó."
+  - "Niega o rechaza un caso sin que lo revise una persona."
+  - "Esconde un resultado desfavorable."
+roadmap:
+  - id: "calibracion-conformal"
+    titulo:
+      es: "Calibración conformal y cobertura conjunta"
+      en: "Conformal calibration and joint coverage"
+    descripcion:
+      es: "Garantías de cobertura en pipelines de varias etapas y calibración conformal del supuesto de confianza, medidas sobre las trazas."
+      en: "Coverage guarantees across multi-stage pipelines and conformal calibration of the confidence assumption, measured on the traces."
+  - id: "recorrido-animado-de-un-caso"
+    titulo:
+      es: "Recorrido animado de un caso por el grafo"
+      en: "Animated walk of one case through the graph"
+    descripcion:
+      es: "Paso a paso por el grafo real: qué señal decidió cada arista, dónde pausó a una persona y qué salió."
+      en: "Step by step through the real graph: which signal decided each edge, where it paused for a person and what came out."

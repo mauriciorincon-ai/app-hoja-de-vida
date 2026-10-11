@@ -1,15 +1,15 @@
 ---
 slug: los-agentes-de-la-vitrina
 codigo: AF-25
-titulo: "Los trece agentes de la vitrina"
-resumen: "Los 13 agentes publicados, uno a uno, en cuatro familias: qué promete cada uno, su cifra medida, su límite y su «nunca». Cinco sellados. Todos con gates humanos, carnadas que demuestran que los controles disparan, cero costo en herramientas (salvo la GPU del Taller de Animación) y la misma regla: ninguna afirmación sale de la memoria del modelo."
-cuando_usar: "Úsalo cuando pregunten qué agentes tiene publicados en su portafolio, para qué sirve cada uno de los trece agentes de la vitrina, qué es un harness, cómo controla la calidad con gates humanos y carnadas, y qué comparten los trece."
+titulo: "Los quince agentes de la vitrina"
+resumen: "Los 15 agentes publicados: los trece de ARKHÉ, uno a uno y en cuatro familias, y los agentes demostrativos de planlang. De cada uno de los trece: qué promete, su cifra medida, su límite y su «nunca». Cinco sellados. Todos con gates humanos, carnadas que demuestran que los controles disparan, cero costo en herramientas (salvo la GPU del Taller de Animación) y la misma regla: ninguna afirmación sale de la memoria del modelo."
+cuando_usar: "Úsalo cuando pregunten qué agentes tiene publicados en su portafolio, para qué sirve cada uno de los quince agentes de la vitrina, qué es un harness, cómo controla la calidad con gates humanos y carnadas, y qué comparten los trece."
 estado: aprobado
 ancla: "/vitrina/agentes"
 actualizado: 2026-09-21
 preguntas_de_prueba:
-  - "¿Qué son los trece agentes de la vitrina y qué no son?"
-  - "¿Qué comparten los trece agentes de la vitrina?"
+  - "¿Qué son los quince agentes de la vitrina y qué no son?"
+  - "¿Qué comparten los quince agentes de la vitrina?"
   - "¿Cómo producen piezas los agentes con gates humanos?"
 ---
 
@@ -38,11 +38,15 @@ CÓMO SE ESCRIBE ESTE ARCHIVO
 
 <!-- seccion: que-son -->
 
-La vitrina publica **13 agentes**, cada uno con su ficha técnica: promesa, cifras con procedencia,
-límites, «nunca» y el proceso dibujado. Son sistemas de trabajo que corren sobre **Claude Code**
-dentro de un **harness** —el envoltorio que le fija al agente su función, sus fuentes, sus
-herramientas y su contrato de entrada y salida—, y todos pertenecen a **ARKHÉ**, mi ecosistema
-agéntico, que está explicado en el documento de agentes.
+La vitrina publica **15 agentes**, cada uno con su ficha técnica: promesa, cifras con procedencia,
+límites, «nunca» y el proceso dibujado. Trece de ellos —los que describe este documento— son
+sistemas de trabajo que corren sobre **Claude Code** dentro de un **harness** —el envoltorio que
+le fija al agente su función, sus fuentes, sus herramientas y su contrato de entrada y salida—, y
+todos pertenecen a **ARKHÉ**, mi ecosistema agéntico, que está explicado en el documento de
+agentes. Los otros dos son los agentes demostrativos de planlang: el Agente A, de autorizaciones
+médicas, y el Agente B, de vinculación con debida diligencia. Deciden sobre casos sintéticos, pasan
+a una persona toda negación o coincidencia dudosa, y su ficha publica lo que miden; no son
+servicios, son demostraciones medidas contra su plan, y están en estado inicial.
 
 **Cinco están sellados** —Constructor de Tableros Power BI, Presentaciones CINE, Fábrica de
 AI-APPs, Taller de Animación y Harness Paper Computacional— y ocho siguen en estado inicial. Lo

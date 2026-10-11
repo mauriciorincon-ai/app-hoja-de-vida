@@ -1,3 +1,4 @@
+import { readdirSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { chunksDeApp, chunksDeFichas, chunksDePieza, leerFichas } from "../../scripts/fichas-al-indice.mjs";
 import { catalogoDeDestinos, destinoExiste } from "../../scripts/destinos.mjs";
@@ -7,7 +8,7 @@ import { TOPE_PALABRAS_CHUNK } from "../../scripts/a-fondo.mjs";
  * LAS FICHAS DE LA VITRINA EN EL ÍNDICE DEL CHAT (a fondo v2, D3).
  *
  * Dos bloques: el motor contra fichas de juguete —sabe aprobar y sabe
- * plantarse— y el motor contra las 32 piezas reales: cada chunk cita a una
+ * plantarse— y el motor contra las piezas reales (las que hay en disco): cada chunk cita a una
  * página que existe, ningún id se repite y ninguna ventana pasa del tope salvo
  * que un solo párrafo lo pase por sí mismo (regla de `ventanasPorParrafo`).
  */
@@ -66,14 +67,27 @@ describe("el motor, contra fichas de juguete", () => {
   });
 });
 
-describe("las 32 piezas reales", () => {
+/** Cuántos archivos reales de una carpeta de `content/` terminan en `sufijo`. */
+const enDisco = (carpeta: string, sufijo: string) =>
+  readdirSync(`content/${carpeta}`).filter((f) => f.endsWith(sufijo)).length;
+
+describe("las piezas reales", () => {
   const fichas = leerFichas();
   const chunks = chunksDeFichas(fichas, "es");
   const catalogo = catalogoDeDestinos();
 
-  it("hay 32 piezas y todas producen chunks", () => {
-    expect(fichas.apps.length + fichas.piezas.length).toBe(32);
-    expect(new Set(chunks.map((c) => c.ancla)).size).toBe(32);
+  it("hay tantas piezas como archivos en disco y todas producen chunks", () => {
+    // El conteo sale de `content/`, no de un número escrito a mano: una pieza
+    // nueva no debe romper este test, pero una que no llegue al índice, sí.
+    const enContent =
+      enDisco("vitrina", ".brochure-export.json") +
+      ["agentes", "investigaciones", "tableros"].reduce(
+        (n, f) => n + enDisco(f, ".ficha-tecnica.json"),
+        0,
+      );
+    expect(enContent).toBeGreaterThan(0);
+    expect(fichas.apps.length + fichas.piezas.length).toBe(enContent);
+    expect(new Set(chunks.map((c) => c.ancla)).size).toBe(enContent);
   });
 
   it("cada chunk cita a una página que existe en el sitio", () => {

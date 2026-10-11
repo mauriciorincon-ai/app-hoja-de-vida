@@ -15,6 +15,10 @@ const eslintConfig = defineConfig([
     "coverage/**",
     "playwright-report/**",
     "test-results/**",
+    // Lo que llega construido de otras casas (S7: capturas; 2026-10-11: el
+    // sitio estático de planlang con sus chunks minificados) no es código de
+    // este repo: se sirve tal cual y no se lintea.
+    "public/piezas/**",
   ]),
 ]);
 

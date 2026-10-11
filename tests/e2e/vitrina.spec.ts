@@ -427,7 +427,8 @@ test.describe("Vitrina — la ficha técnica (ADR-016)", () => {
     titular: string;
     cifras_destacadas: string[];
     nunca: string[];
-    proceso: {
+    procedencia?: string;
+    proceso?: {
       titulo: string;
       carriles: { id: string; nombre: string }[];
       pasos: { id: string; tipo: string; texto: string }[];
@@ -437,6 +438,13 @@ test.describe("Vitrina — la ficha técnica (ADR-016)", () => {
   const COMPLEMENTOS: Complemento[] = readdirSync("data/fichas")
     .filter((f) => f.endsWith(".yaml"))
     .map((f) => parse(readFileSync(`data/fichas/${f}`, "utf8")) as Complemento);
+  /** La ficha más larga ENTRE LAS QUE TRAEN PROCESO: lo que prueban el gate ATS y el móvil. */
+  const CON_PROCESO = EXPORTS.filter(
+    (e) => COMPLEMENTOS.find((c) => c.app === e.app.slug)?.proceso,
+  );
+  const MAS_LARGA_CON_PROCESO = CON_PROCESO.reduce((a, b) =>
+    b.funcionalidades.grupos.length > a.funcionalidades.grupos.length ? b : a,
+  );
 
   test("cada app tiene su ficha técnica: titular, 3–5 cifras con procedencia, proceso y «nunca»", async ({
     page,
@@ -475,19 +483,28 @@ test.describe("Vitrina — la ficha técnica (ADR-016)", () => {
         ).toHaveAttribute("data-fuente", m.fuente);
       }
 
-      // El proceso: un nodo por paso, y las anotaciones como notas al pie.
+      // El proceso es OPCIONAL (contrato v1.1.0): las seis apps de la línea
+      // base lo traen curado por CV Viva; las que llegan con complemento de
+      // otra casa (planlang, AngelGhost, Big-D, HackGuard · 2026-10-11) aún no,
+      // y entonces la ficha no pinta ni el diagrama ni una procedencia vacía.
       const proceso = ft.locator(`[data-proceso="${exp.app.slug}"]`);
-      await expect(proceso.locator("[data-paso]")).toHaveCount(
-        comp.proceso.pasos.length,
-      );
-      await expect(proceso.locator("[data-nota]")).toHaveCount(
-        comp.proceso.anotaciones.length,
-      );
-      // Y su procedencia se declara (hoy: CV Viva).
-      await expect(ft.locator("[data-procedencia-proceso]")).toHaveAttribute(
-        "data-procedencia-proceso",
-        "cv-viva",
-      );
+      if (comp.proceso) {
+        // Un nodo por paso, y las anotaciones como notas al pie.
+        await expect(proceso.locator("[data-paso]")).toHaveCount(
+          comp.proceso.pasos.length,
+        );
+        await expect(proceso.locator("[data-nota]")).toHaveCount(
+          comp.proceso.anotaciones.length,
+        );
+        // Y su procedencia se declara junto con él.
+        await expect(ft.locator("[data-procedencia-proceso]")).toHaveAttribute(
+          "data-procedencia-proceso",
+          comp.procedencia!,
+        );
+      } else {
+        await expect(proceso).toHaveCount(0);
+        await expect(ft.locator("[data-procedencia-proceso]")).toHaveCount(0);
+      }
 
       await expect(ft.locator("[data-nunca] li")).toHaveCount(
         comp.nunca.length,
@@ -501,20 +518,21 @@ test.describe("Vitrina — la ficha técnica (ADR-016)", () => {
   test("gate ATS/SEO: la ficha técnica entrega el proceso como texto en el HTML", async ({
     page,
   }) => {
-    const exp = MAS_LARGA;
+    const exp = MAS_LARGA_CON_PROCESO;
     const comp = COMPLEMENTOS.find((c) => c.app === exp.app.slug)!;
+    const proceso = comp.proceso!;
     const html = await (
       await page.request.get(`/es/vitrina/apps/${exp.app.slug}`)
     ).text();
     expect(html).toContain(comp.titular.slice(0, 40));
     // Los pasos del proceso son <text> del SVG: un rastreador los lee.
-    for (const paso of comp.proceso.pasos
+    for (const paso of proceso.pasos
       .filter((p) => p.tipo === "tarea")
       .slice(0, 3)) {
       const primeraPalabra = paso.texto.split(" ")[0];
       expect(html).toContain(primeraPalabra);
     }
-    expect(html).toContain(comp.proceso.titulo.toUpperCase());
+    expect(html).toContain(proceso.titulo.toUpperCase());
   });
 
   test("la ficha técnica en móvil no encoge el proceso: se desliza", async ({
@@ -522,7 +540,7 @@ test.describe("Vitrina — la ficha técnica (ADR-016)", () => {
     isMobile,
   }) => {
     test.skip(!isMobile, "solo en el proyecto móvil");
-    await page.goto(`/es/vitrina/apps/${MAS_LARGA.app.slug}`);
+    await page.goto(`/es/vitrina/apps/${MAS_LARGA_CON_PROCESO.app.slug}`);
     const caja = page.locator(
       `[data-proceso="${MAS_LARGA.app.slug}"] [data-desliza]`,
     );

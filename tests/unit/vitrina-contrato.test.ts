@@ -32,8 +32,12 @@ function clonar<T>(valor: T): T {
 }
 
 describe("contrato brochure-export v1.0.0 — los exports reales", () => {
-  it("llegaron los 6 exports del portafolio", () => {
-    expect(archivos).toHaveLength(6);
+  it("llegaron los exports del portafolio: uno por archivo en content/vitrina", () => {
+    const enDisco = readdirSync("content/vitrina").filter((f) =>
+      f.endsWith(".brochure-export.json"),
+    );
+    expect(enDisco.length).toBeGreaterThan(0);
+    expect(archivos).toHaveLength(enDisco.length);
   });
 
   it.each(archivos)("%s cumple el contrato", (archivo) => {

@@ -1,0 +1,18 @@
+# Complemento de la ficha técnica de AngelGhost (`copiloto-consultor`). PROCEDENCIA: planeadora
+# (curado desde VISION v1.5.0 y el brief, 2026-10-11; primera ficha sin línea base de CV Viva).
+# Se copia tal cual a data/fichas/copiloto-consultor.yaml de hoja-de-vida junto con el export.
+# `cifras_destacadas` son CLAVES de `metricas[]` del export: el export debe traerlas con su fuente.
+schema_version: "1.0.0"
+app: copiloto-consultor
+declarado_en: "2026-10-11"
+titular: "Tu propia experiencia en la reunión, en el momento justo, en una ventana que el cliente no ve aunque compartas pantalla: responde desde tu propuesta, tu marco y tu trayectoria, corre entera en tu Mac y al cerrar no queda nada."
+cifras_destacadas: [funcionalidades, pruebas_automaticas, bytes_que_salen_del_equipo, costo_operacion_mensual]
+limites:
+  - "Corre en macOS; Windows llega en el ciclo H2 y el modo presencial cubre entretanto cualquier reunión."
+  - "Responde solo con lo que tú le diste: sin corpus propio no hay ficha que mostrar."
+  - "El modelo local redacta una sugerencia breve y se puede apagar; no reemplaza tu criterio ni habla por ti."
+nunca:
+  - "Entra como bot a la reunión ni graba audio o transcripción."
+  - "Envía audio, capturas o texto a un servicio externo por defecto."
+  - "Se presenta como «indetectable»: la promesa es «nada queda», demostrable con un contador."
+  - "Accede, sondea o actúa sobre el computador de la contraparte."

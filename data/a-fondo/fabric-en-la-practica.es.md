@@ -298,7 +298,7 @@ El modelo semántico tendrá un papel central. Deberá contener dimensiones y he
 
 La pieza también debe preparar activos reutilizables por consumidores diferentes. Además del análisis humano, exploraré cómo determinadas definiciones, medidas o estructuras pueden ponerse a disposición de aplicaciones o agentes sin permitir que reconstruyan libremente la lógica institucional.
 
-Permanece declarada como exploración porque todavía no cumple todos los criterios necesarios para incorporarse al inventario de las 32 piezas construidas de la vitrina. No cambiará de estado por tener una conexión funcionando o un tablero convincente. Deberá contar con arquitectura documentada, despliegue reproducible, controles de calidad, modelo semántico verificable, criterios de rendimiento y evidencia suficiente sobre sus resultados, que es el mismo listón que cumplen las 6 aplicaciones hermanas ya publicadas.
+Permanece declarada como exploración porque todavía no cumple todos los criterios necesarios para incorporarse al inventario de las 38 piezas construidas de la vitrina. No cambiará de estado por tener una conexión funcionando o un tablero convincente. Deberá contar con arquitectura documentada, despliegue reproducible, controles de calidad, modelo semántico verificable, criterios de rendimiento y evidencia suficiente sobre sus resultados, que es el mismo listón que cumplen las 10 aplicaciones hermanas ya publicadas.
 
 Cuando esté terminada, no sustituirá la evidencia de mi experiencia profesional ni de la certificación. Cumplirá otra función: permitirá que cualquier persona examine públicamente cómo convierto los principios de Fabric, Power BI, gobierno y preparación de datos para IA en una solución completa.
 

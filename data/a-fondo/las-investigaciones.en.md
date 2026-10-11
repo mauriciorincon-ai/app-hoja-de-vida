@@ -276,7 +276,7 @@ The seven come from different moments of my trajectory —from an ERP in 2016 to
 2024—, but they share the same root. Each begins with a real system whose representation was
 insufficient, a decision that could be improved or an organizational capability that did not yet
 have a sufficiently clear method to evolve. And all seven are produced with the same two
-harnesses, published among the 13 agents of the showcase.
+harnesses, published among the 15 agents of the showcase.
 
 ## Three lines on operations under variability
 
@@ -475,7 +475,7 @@ to learn to speak without naming it.
 
 <!-- seccion: los-harnesses -->
 
-The research is produced with two harnesses, published among the 13 agents of the showcase. Both
+The research is produced with two harnesses, published among the 15 agents of the showcase. Both
 declare the paper in a single configuration file —questions, falsifiable principles, metrics,
 corpus, disclosure boundary— and drive ten phases up to a manuscript ready to submit, stopping at
 gates where only an exact phrase of mine lets it through: "framing approved", "artifact

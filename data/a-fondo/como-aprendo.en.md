@@ -189,7 +189,7 @@ The last few times I learned something from scratch, and how long it took:
 | Microsoft Fabric                       | August 2023    | 5 months of study (Jul–Nov 2024)    | DP-600 in December 2024, Vesting platform in operation        |
 | Next.js and the application pipeline   | July 2026      | 8 sprints                           | this site, CV Viva, with its CI, its tests and its ADRs       |
 | AI-103 and AI-300                      | July 2026      | 21 and 10 modules to date           | two tracks in progress, with the AI-103 Super Guide published |
-| Codex, Antigravity and Claude Code     | their release  | close to a month each               | the pipeline with which the 32 pieces are built               |
+| Codex, Antigravity and Claude Code     | their release  | close to a month each               | the pipeline with which the 38 pieces are built               |
 
 The last things I learned from scratch, with no certificate involved, were Codex, Antigravity and
 Claude Code: I took them up from their release and within close to a month each was in real use, not
@@ -197,16 +197,16 @@ in trial. They are not finished courses: they are capabilities in use, each with
 someone can open. The Fabric row is the only one that ends in a credential; the other three end in
 software that runs.
 
-## The evidence of what has been built: six applications with their tests and coverage
+## The evidence of what has been built: ten applications with their tests and coverage
 
 <!-- seccion: evidencia-construido -->
 
 The most compelling evidence of my learning capacity is found in what I have built, because every
 piece can be examined and related to concrete decisions, tests and results.
 
-My portfolio brings together six published sister applications —Anonimizador Velo, Dash Agent, Probeta DS,
-Habla San, Innmobiliaria and Nutrikids— plus CV Viva, this site. All of them reached their MVP,
-are in sustained operation and keep evolving; Habla San is the most advanced.
+My portfolio brings together ten published sister applications —Anonimizador Velo, Dash Agent, Probeta DS,
+Habla San, Innmobiliaria, Nutrikids, planlang, AngelGhost, Big-D and HackGuard— plus CV Viva, this site. Six of them reached their
+MVP and keep evolving in sustained operation; the other four are in their initial stage; Habla San is the most advanced.
 
 | Application   | Automated tests        | Coverage  | Decisions (ADR) | What it required learning                                         |
 | ------------- | ---------------------- | --------: | --------------: | ----------------------------------------------------------------- |
@@ -231,12 +231,12 @@ The figures come from the repositories and do not replace the evaluation of qual
 suite can protect little if it verifies irrelevant aspects. That is why I relate every control to a
 concrete condition and try to demonstrate that it can go red against the failure it must detect.
 
-## The 32 pieces: 13 agents, 7 research pieces and 6 dashboards, four ways of learning
+## The 38 pieces: 15 agents, 7 research pieces and 6 dashboards, four ways of learning
 
 <!-- seccion: las-cuatro-familias -->
 
-To the six sister applications are added 13 published agents, 7 research pieces and 6 dashboards
-built on public data. In total, the showcase brings together 32 pieces within those four families,
+To the ten sister applications are added 15 published agents, 7 research pieces and 6 dashboards
+built on public data. In total, the showcase brings together 38 pieces within those four families,
 and the figures of each one are reconciled against the visible sheets of the showcase.
 
 Each family demonstrates a different way of learning. The applications require transforming new
@@ -395,7 +395,7 @@ makes it possible to take responsibility for it.
 When the AI-103 track became the current path to go deeper into artificial intelligence applications
 and agents on Azure, I did not want to depend solely on a sequence of courses selected by third
 parties. I built an agent capable of structuring and verifying a study guide from official sources:
-the AI-103 Super Guide, one of the 13 agents published in the showcase.
+the AI-103 Super Guide, one of the 15 agents published in the showcase.
 
 The tool applies the same discipline I use to learn. Study is inverted: first a real project is
 defined in Microsoft Foundry, and no track is considered complete until a coverage map demonstrates

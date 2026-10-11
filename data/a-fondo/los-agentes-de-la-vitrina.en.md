@@ -1,15 +1,15 @@
 ---
 slug: los-agentes-de-la-vitrina
 codigo: AF-25
-titulo: "The thirteen agents of the showcase"
-resumen: "The 13 published agents, one by one, in four families: what each one promises, its measured figure, its limit and its \"never\". Five sealed. All with human gates, baits that prove the controls fire, zero cost in tools (except the Animation Workshop's GPU) and the same rule: no claim comes out of the model's memory."
+titulo: "The fifteen agents of the showcase"
+resumen: "The 15 published agents: the thirteen of ARKHÉ, one by one in four families, and planlang's demonstration agents. For each of the thirteen: what it promises, its measured figure, its limit and its \"never\". Five sealed. All with human gates, baits that prove the controls fire, zero cost in tools (except the Animation Workshop's GPU) and the same rule: no claim comes out of the model's memory."
 cuando_usar: "Use this when they ask which agents he has published in his portfolio, what each of the thirteen showcase agents is for, what a harness is, how he controls quality with human gates and bait, and what the thirteen share."
 estado: aprobado
 ancla: "/vitrina/agentes"
 actualizado: 2026-09-21
 preguntas_de_prueba:
-  - "What are the thirteen agents of the showcase and what are they not?"
-  - "What do the thirteen agents of the showcase share?"
+  - "What are the fifteen agents of the showcase and what are they not?"
+  - "What do the fifteen agents of the showcase share?"
   - "How do the agents produce pieces with human gates?"
 ---
 
@@ -38,11 +38,15 @@ HOW THIS FILE IS WRITTEN
 
 <!-- seccion: que-son -->
 
-The showcase publishes **13 agents**, each with its technical sheet: promise, figures with
-provenance, limits, "never" and the process drawn. They are work systems that run on **Claude
-Code** inside a **harness** —the wrapper that fixes the agent's function, its sources, its tools
-and its input and output contract—, and all of them belong to **ARKHÉ**, my agentic ecosystem,
-which is explained in the agents document.
+The showcase publishes **15 agents**, each with its technical sheet: promise, figures with
+provenance, limits, "never" and the process drawn. Thirteen of them —the ones this document
+describes— are work systems that run on **Claude Code** inside a **harness** —the wrapper that
+fixes the agent's function, its sources, its tools and its input and output contract—, and all of
+them belong to **ARKHÉ**, my agentic ecosystem, which is explained in the agents document. The
+other two are planlang's demonstration agents: Agent A, for medical authorizations, and Agent B,
+for onboarding with due diligence. They decide on synthetic cases, hand every denial or doubtful
+match to a person, and their sheet publishes what they measure; they are not services but
+demonstrations measured against their plan, and they are in initial state.
 
 **Five are sealed** —Power BI Dashboard Builder, CINE Presentations, AI-APPs Factory, Animation
 Workshop and Computational Paper Harness— and eight remain in initial state. What they are not:

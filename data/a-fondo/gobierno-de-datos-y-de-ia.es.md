@@ -118,7 +118,7 @@ Mi regla de trabajo con datos de personas, la que aplico en la Fundación CTIC d
 
 La misma regla la aplico a lo que digo en público. Todo lo que comunico sobre esa experiencia va agregado —más de 25 productos, unos 20 líderes, unos 15 procesos— y no expongo datos de pacientes, información clínica, detalles sensibles de los procesos ni conocimiento interno cuya divulgación pueda afectar a las personas o a la institución. Puedo explicar capacidades, principios de arquitectura y prácticas de gobierno; no revelo la información sobre la que operan.
 
-Y la llevé a mi vitrina: una de las 6 aplicaciones publicadas es un anonimizador, porque la primera necesidad de quien quiere analizar datos de personas con inteligencia artificial es dejar de tener a las personas en los datos. La regla no es de un empleo: es mía. Y desde septiembre de 2026 dejó de aplicarse solo a lo que hago para otros: esta misma hoja de vida empezó a recoger datos personales, y lo que sigue cuenta cuáles y cómo se gobiernan.
+Y la llevé a mi vitrina: una de las 10 aplicaciones publicadas es un anonimizador, porque la primera necesidad de quien quiere analizar datos de personas con inteligencia artificial es dejar de tener a las personas en los datos. La regla no es de un empleo: es mía. Y desde septiembre de 2026 dejó de aplicarse solo a lo que hago para otros: esta misma hoja de vida empezó a recoger datos personales, y lo que sigue cuenta cuáles y cómo se gobiernan.
 
 ## Qué datos personales recoge este sitio: nombre y correo para chatear
 
@@ -166,7 +166,7 @@ También cambia la naturaleza del resultado. Un dato puede ser incorrecto o esta
 
 <!-- seccion: autonomia-y-dos-niveles -->
 
-La autonomía debe diseñarse de forma proporcional al riesgo. Una solución puede limitarse a recuperar información, generar un borrador o recomendar una acción. Solo determinadas tareas deberían permitir una ejecución directa, especialmente cuando el resultado puede verificarse, revertirse y mantenerse dentro de límites claramente definidos. En los 13 agentes de mi vitrina esa decisión está escrita en cada ficha: qué hace, qué límites tiene y qué «nunca» hace; el Constructor de Tableros Power BI, por ejemplo, tiene 5 gates de aprobación humana y no cierra una corrida sin que una persona apruebe el resultado.
+La autonomía debe diseñarse de forma proporcional al riesgo. Una solución puede limitarse a recuperar información, generar un borrador o recomendar una acción. Solo determinadas tareas deberían permitir una ejecución directa, especialmente cuando el resultado puede verificarse, revertirse y mantenerse dentro de límites claramente definidos. En los 15 agentes de mi vitrina esa decisión está escrita en cada ficha: qué hace, qué límites tiene y qué «nunca» hace; el Constructor de Tableros Power BI, por ejemplo, tiene 5 gates de aprobación humana y no cierra una corrida sin que una persona apruebe el resultado.
 
 Quien ha trabajado en gobierno de datos cuenta con una base importante, pero no con el camino completo. El inventario, la responsabilidad sobre los activos, el linaje, los controles y las revisiones continúan siendo necesarios. El gobierno de IA agrega evaluación de impactos, comportamiento del sistema, supervisión humana, dependencia de proveedores, observabilidad y administración del ciclo de vida.
 
@@ -200,7 +200,7 @@ La estrategia también debe convertir el gobierno en decisiones aplicables. Un c
 
 <!-- seccion: iso-42001 -->
 
-Construí un agente especializado en ISO/IEC 42001, el **Experto ISO 42001**, y lo publiqué en mi vitrina como uno de los 13 agentes, como evidencia de mi manera de trabajar con inteligencia artificial generativa y conocimiento normativo.
+Construí un agente especializado en ISO/IEC 42001, el **Experto ISO 42001**, y lo publiqué en mi vitrina como uno de los 15 agentes, como evidencia de mi manera de trabajar con inteligencia artificial generativa y conocimiento normativo.
 
 El agente no utiliza la memoria general del modelo como autoridad sobre la norma. Sus respuestas deben sustentarse en un corpus autorizado y cada afirmación normativa debe relacionarse con la ubicación correspondiente dentro de la fuente: **cita el apartado y la página**. Cuando el contenido disponible no permite sostener una conclusión, el sistema debe **declarar el vacío**. Esta regla protege una distinción fundamental: el modelo puede interpretar y explicar, pero no puede inventar el fundamento normativo. La fluidez de una respuesta no le concede autoridad. La confiabilidad depende de la evidencia recuperada y de la relación verificable entre esa evidencia y la explicación generada.
 
@@ -224,9 +224,9 @@ Es también la herramienta con la que reviso, uno a uno, los más de 20 instrume
 
 <!-- seccion: gobierno-de-mi-proceso -->
 
-Aplico estos principios sobre mi propio pipeline de aplicaciones, agentes, investigaciones y tableros: las 32 piezas de la vitrina. El propósito es demostrar que el gobierno no es un conjunto de recomendaciones dirigidas a otros, sino una disciplina que utilizo para controlar mi propio trabajo.
+Aplico estos principios sobre mi propio pipeline de aplicaciones, agentes, investigaciones y tableros: las 38 piezas de la vitrina. El propósito es demostrar que el gobierno no es un conjunto de recomendaciones dirigidas a otros, sino una disciplina que utilizo para controlar mi propio trabajo.
 
-Ninguna aplicación avanza sin dos decisiones documentadas. La primera confirma su prioridad frente a otras iniciativas. La segunda establece la visión del producto, su propósito, las capacidades esperadas y los límites dentro de los cuales debe construirse. Las 6 aplicaciones publicadas tienen las dos, escritas antes del primer sprint.
+Ninguna aplicación avanza sin dos decisiones documentadas. La primera confirma su prioridad frente a otras iniciativas. La segunda establece la visión del producto, su propósito, las capacidades esperadas y los límites dentro de los cuales debe construirse. Las 10 aplicaciones publicadas tienen las dos, escritas antes del primer sprint.
 
 Ningún ciclo se considera cerrado sin un resumen que conserve las decisiones tomadas, las pruebas ejecutadas, los cambios frente a la visión inicial, los problemas encontrados y el trabajo pendiente. Esta memoria reduce la dependencia del conocimiento informal y permite que cada iteración comience desde el aprendizaje anterior. Las decisiones de arquitectura no anticipadas quedan en registros de decisión numerados, con su contexto y su alternativa descartada, para que dentro de un año se sepa por qué se eligió lo que se eligió.
 
@@ -240,9 +240,9 @@ Incorporar inteligencia artificial generativa también exige una decisión justi
 
 Los controles deben demostrar su capacidad para fallar. Una prueba que siempre aparece en verde, pero nunca ha sido observada detectando la desviación para la que fue diseñada, todavía no demuestra que proteja el sistema. Por eso, cada control necesita una relación verificable con un riesgo o condición concreta, y en mi pipeline la regla es literal: un control nuevo nace con su demostración en rojo, registrada en la bitácora del sprint, en el mismo cambio que lo introduce. El origen de esa regla y su precedente viven en el documento del pipeline.
 
-También mantengo estados diferenciados para las piezas. Una exploración, un prototipo, una solución publicada y una capacidad operada de manera sostenida no representan el mismo nivel de madurez. Esta distinción evita presentar intenciones como resultados y protege la credibilidad del portafolio: la exploración de Google Cloud figura como exploración, sin horizonte y sin uso real declarado, y las 6 aplicaciones figuran como operadas porque alcanzaron su producto mínimo y siguen evolucionando.
+También mantengo estados diferenciados para las piezas. Una exploración, un prototipo, una solución publicada y una capacidad operada de manera sostenida no representan el mismo nivel de madurez. Esta distinción evita presentar intenciones como resultados y protege la credibilidad del portafolio: la exploración de Google Cloud figura como exploración, sin horizonte y sin uso real declarado, y seis de las 10 aplicaciones figuran como operadas porque alcanzaron su producto mínimo y siguen evolucionando, mientras que las otras cuatro figuran en su etapa inicial.
 
-Y cada cifra declara su procedencia. Las fichas técnicas de las 32 piezas etiquetan cada número como **medido**, **calculado**, **declarado** o **estimado**, y el mismo criterio rige este corpus: el «cerca de 60 %» de menor esfuerzo en la Fundación CTIC lleva su «cerca de» porque es una estimación, y los productos o los instrumentos están contados, pero van redondeados porque son cifras internas de la institución.
+Y cada cifra declara su procedencia. Las fichas técnicas de las 38 piezas etiquetan cada número como **medido**, **calculado**, **declarado** o **estimado**, y el mismo criterio rige este corpus: el «cerca de 60 %» de menor esfuerzo en la Fundación CTIC lleva su «cerca de» porque es una estimación, y los productos o los instrumentos están contados, pero van redondeados porque son cifras internas de la institución.
 
 Estas reglas fueron escritas antes de que las fallas las hicieran necesarias. Ese es uno de los principios que más valoro del gobierno: anticipar las condiciones bajo las cuales se tomarán decisiones, en lugar de improvisarlas cuando ya existe presión por justificar un resultado.
 
@@ -316,7 +316,7 @@ Algunas posiciones de estrategia, arquitectura y gobierno de inteligencia artifi
 
 No presento la experiencia como sustituto universal de la educación avanzada ni desconozco el valor de un posgrado. Una especialización o maestría puede aportar investigación guiada, profundidad conceptual y una estructura formal de aprendizaje. Sin embargo, cuando una organización admite equivalencia entre educación y experiencia, mi trayectoria permite evaluar directamente las competencias que ese requisito busca representar.
 
-A la experiencia profesional se suma evidencia verificable. DP-600, obtenido en diciembre de 2024, valida formalmente mi profundidad en Microsoft Fabric, Power BI y modelos semánticos. Las dos credenciales de IBM respaldan mi base en ciencia de datos, Python, SQL y R. Mi portafolio público permite examinar 6 aplicaciones, 13 agentes, 7 investigaciones y 6 tableros —32 piezas— con sus pruebas, sus controles y sus fichas técnicas; y entre los agentes hay uno que trata precisamente de la norma que implemento.
+A la experiencia profesional se suma evidencia verificable. DP-600, obtenido en diciembre de 2024, valida formalmente mi profundidad en Microsoft Fabric, Power BI y modelos semánticos. Las dos credenciales de IBM respaldan mi base en ciencia de datos, Python, SQL y R. Mi portafolio público permite examinar 10 aplicaciones, 15 agentes, 7 investigaciones y 6 tableros —38 piezas— con sus pruebas, sus controles y sus fichas técnicas; y entre los agentes hay uno que trata precisamente de la norma que implemento.
 
 Si una posición establece un posgrado como requisito formal e insustituible, lo reconozco con transparencia. Cuando el posgrado funciona como indicador de pensamiento estructurado, profundidad técnica y capacidad para resolver problemas complejos, mi trayectoria permite examinar esas cualidades mediante resultados y responsabilidades demostrables.
 
@@ -352,7 +352,7 @@ Mi profundidad en Power BI y modelos semánticos me permite convertir definicion
 
 No entiendo el gobierno como una actividad destinada a detener la innovación. Lo entiendo como la arquitectura institucional que permite innovar de manera sostenible. Su función es hacer explícitas las decisiones, conservar evidencia, distribuir responsabilidades y proporcionar mecanismos para intervenir cuando cambian los datos, la tecnología, los riesgos o el contexto.
 
-Tampoco considero que una iniciativa esté gobernada únicamente porque cumple un conjunto de controles. El gobierno debe proteger el propósito para el que la solución fue autorizada y permitir evaluar si continúa generando el valor esperado. Una capacidad que ha dejado de ser útil, que opera fuera de su contexto o que introduce un riesgo desproporcionado necesita revisarse, restringirse o retirarse, incluso si técnicamente continúa funcionando. En mi vitrina lo he hecho: en Dash Agent, una de las 6 aplicaciones, una funcionalidad se retiró cuando la evidencia mostró 83 sugerencias fuera de contexto, y el retiro está contado en su ficha, no escondido.
+Tampoco considero que una iniciativa esté gobernada únicamente porque cumple un conjunto de controles. El gobierno debe proteger el propósito para el que la solución fue autorizada y permitir evaluar si continúa generando el valor esperado. Una capacidad que ha dejado de ser útil, que opera fuera de su contexto o que introduce un riesgo desproporcionado necesita revisarse, restringirse o retirarse, incluso si técnicamente continúa funcionando. En mi vitrina lo he hecho: en Dash Agent, una de las 10 aplicaciones, una funcionalidad se retiró cuando la evidencia mostró 83 sugerencias fuera de contexto, y el retiro está contado en su ficha, no escondido.
 
 La organización no necesita elegir entre velocidad y control como si fueran objetivos incompatibles. Necesita controles proporcionales, aplicables y diseñados dentro de los procesos. La innovación sin gobierno acumula riesgos invisibles. El gobierno sin comprensión técnica acumula documentos que nadie puede convertir en práctica. En la Fundación CTIC, más de 10 oportunidades y la mitad evaluadas en poco más de un año, con un tercio de los instrumentos terminados y el resto en construcción, es lo que produce un gobierno que abre camino en vez de cerrarlo.
 

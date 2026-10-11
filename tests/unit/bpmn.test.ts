@@ -190,14 +190,18 @@ describe("trazar — invariantes del diagrama", () => {
  * de entrada («¿Con sus palabras?»). Geometría estimada: ~6.3px por carácter
  * a 10.5px semibold, 11px de alto.
  */
+// El proceso es OPCIONAL en el contrato (v1.1.0): las apps que llegan con un
+// complemento de otra casa (planlang, AngelGhost, Big-D, HackGuard desde
+// 2026-10-11) no lo traen todavía. Aquí se trazan los que existen.
 const procesosReales = readdirSync("data/fichas")
   .filter((f) => f.endsWith(".yaml"))
   .map((f) => ({
     slug: f.replace(/\.yaml$/, ""),
     proceso: (
-      parse(readFileSync(`data/fichas/${f}`, "utf8")) as { proceso: Proceso }
+      parse(readFileSync(`data/fichas/${f}`, "utf8")) as { proceso?: Proceso }
     ).proceso,
-  }));
+  }))
+  .filter((p): p is { slug: string; proceso: Proceso } => Boolean(p.proceso));
 
 type Caja = { l: number; r: number; t: number; b: number };
 const PX_CARACTER = 6.3;
@@ -239,7 +243,7 @@ function segmentos(d: string): [number, number, number, number][] {
 const seCruzan = (a: Caja, b: Caja) =>
   !(a.r <= b.l || b.r <= a.l || a.b <= b.t || b.b <= a.t);
 
-describe("trazar — los rótulos se leen (los seis procesos reales)", () => {
+describe("trazar — los rótulos se leen (los procesos reales)", () => {
   for (const { slug, proceso } of procesosReales) {
     it(`${slug}: dos rótulos de flujo nunca se pisan`, () => {
       const t = trazar(proceso);
@@ -306,7 +310,7 @@ describe("trazar — los rótulos se leen (los seis procesos reales)", () => {
  * atraviesa una caja ajena, y ningún rótulo queda cruzado por un tramo ajeno
  * (horizontal o vertical).
  */
-describe("trazar — los flujos no se esconden (los seis procesos reales)", () => {
+describe("trazar — los flujos no se esconden (los procesos reales)", () => {
   for (const { slug, proceso } of procesosReales) {
     it(`${slug}: ningún flujo atraviesa una caja ajena`, () => {
       const t = trazar(proceso);
