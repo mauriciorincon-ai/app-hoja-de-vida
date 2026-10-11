@@ -316,27 +316,15 @@
     <div class="pagina">
       <header>
         <p class="eyebrow">
-          CV Viva · Guía de prueba viva y acumulativa · v9.24 · las tiras de las cuatro apps nuevas + el carrusel de apps muestra dónde acaba y se recorre con el pad + el carrusel de apps muestra dónde empieza + el carrusel de apps que gira sin fin + los bloques de apps con sus tarjetas en carrusel + dos categorías de apps y el carrusel de los tableros + proyectos propios desde 2024 + LinkedIn definitivo + las entradas sin librería + el margen de la home, segunda vuelta + el margen de la home + el aire bajo el dominio + las herramientas de hoy + el cupo del chat + el ícono navy y el 404 de la raíz + las cifras en su letra y las citas del chat + rótulo del dominio, idiomas en mantenimiento y el ícono + el modo mantenimiento + el dominio en el PDF + los ocho casos de estudio completos + la cita dice de dónde sale y a dónde lleva + la cita conserva la conversación + el corpus alineado + chat/registro + a fondo v2 (el
+          CV Viva · Guía de prueba viva y acumulativa · v9.25 · las cuentas al día + las tiras de las cuatro apps nuevas + el carrusel de apps muestra dónde acaba y se recorre con el pad + el carrusel de apps muestra dónde empieza + el carrusel de apps que gira sin fin + los bloques de apps con sus tarjetas en carrusel + dos categorías de apps y el carrusel de los tableros + proyectos propios desde 2024 + LinkedIn definitivo + las entradas sin librería + el margen de la home, segunda vuelta + el margen de la home + el aire bajo el dominio + las herramientas de hoy + el cupo del chat + el ícono navy y el 404 de la raíz + las cifras en su letra y las citas del chat + rótulo del dominio, idiomas en mantenimiento y el ícono + el modo mantenimiento + el dominio en el PDF + los ocho casos de estudio completos + la cita dice de dónde sale y a dónde lleva + la cita conserva la conversación + el corpus alineado + chat/registro + a fondo v2 (el
           detalle) + revisión post-S8 · 2026-09-12
         </p>
         <h1>Guía de prueba</h1>
         <p class="suave">
-          Todas las pruebas vigentes de la app — las nuevas del
-          <strong>Sprint 008 (el «a fondo»)</strong> y las 83 heredadas de S1–S7
-          y de las dos revisiones de la HOME, que se corren como regresión.
+          Todas las pruebas vigentes de la app: las nuevas y las heredadas de
+          todos los sprints y revisiones, que se corren como regresión.
           Filtra por origen para recorrer todo o solo lo que cambió. Las
           casillas se guardan solas en este navegador.
-        </p>
-        <p class="chica suave">
-          <strong>Aviso sobre este sprint:</strong> el S8 casi no cambió lo que
-          ve quien visita, y es a propósito. Construyó el
-          <strong>corpus profundo del chat</strong> —24 documentos que viven en
-          el repositorio y <strong>no se publican en ninguna página</strong>— y
-          los dejó en <code>borrador</code>, así que el chat todavía no los
-          cita. Por eso el bloque <strong>O</strong> se prueba más con el
-          repositorio delante que con el navegador, y sus dos pruebas de chat
-          (⭐ o7 y o8)
-          <strong>esperan a que apruebes el primer documento</strong>.
         </p>
         <p class="chica">
           <strong>Gate mínimo ⭐: 43 pruebas · ~4 h 22 min.</strong> Es lo que ninguna
@@ -391,7 +379,10 @@
           k15e por la misma razón. <strong>v9.24 no suma</strong>: las cuatro
           apps nuevas (AngelGhost · planlang · Big-D · HackGuard) estrenan su
           tira dibujada y ninguna tarjeta muestra una caja vacía; su casilla
-          pasa a k15f por la misma razón.
+          pasa a k15f por la misma razón. <strong>v9.25 no suma</strong>: las
+          cuentas quedan al día (10 apps, 15 agentes, 38 fichas), entra la k17
+          (sin ⭐) y seis casillas cambian de nombre (k1b, n4b, m1b, g1b, l5b,
+          o12b) para que una marca vieja no cuente.
         </p>
         <div class="url-caja">
           <p class="eyebrow" style="margin: 0 0 6px">URL de prueba</p>
@@ -1098,19 +1089,20 @@
             planeadora. Ninguna feature de CV Viva se muestra en ningún lado. En
             <code>localhost</code> no hay credenciales de Supabase: la votación
             se declara «no disponible» por diseño, así que
-            <strong>g2–g4 solo se prueban en producción</strong>; g1 y g5 se
+            <strong>g2–g4 solo se prueban en producción</strong>; g1b y g5 se
             pueden juzgar aquí.
           </p>
         </div>
         <ul class="pasos">
           <li data-origen="mejorado">
-            <input type="checkbox" id="g1" /><label for="g1"
+            <input type="checkbox" id="g1b" /><label for="g1b"
               >Entra a la página de una app hermana
               (<code>/es/vitrina/apps/habla</code>): debajo de la ficha técnica
               está la sección <strong>Roadmap</strong> con las features de
-              <em>esa</em> app (cinco; tres en dash-agent-ai), cada una con su
-              descripción y un número de votos. Recorre las seis: cada una tiene
-              su propio grupo.
+              <em>esa</em> app (cinco; tres en dash-agent-ai y dos en planlang), cada una con su
+              descripción y un número de votos. Recorre las siete que lo tienen: cada una tiene
+              su propio grupo. AngelGhost, Big-D y HackGuard todavía no tienen
+              roadmap y su página no muestra la sección.
               <strong
                 >Ni en <code>/es/vitrina/apps</code> ni en la HOME hay
                 roadmap</strong
@@ -1118,7 +1110,7 @@
               contenido: ¿son disruptivas, de cierre de plan, y ninguna es lo
               que ya se está construyendo?
               <span class="origen origen-mejorado"
-                >Mejorado · post-S8 (bloque G)</span
+                >Mejorado · post-S9</span
               ></label
             >
           </li>
@@ -1277,21 +1269,21 @@
         </div>
         <p class="meta-bloque chica suave">~30 min · escritorio y un teléfono real.</p>
         <ul class="pasos">
-          <li data-origen="heredada">
-            <input type="checkbox" id="k1" /><label for="k1"
+          <li data-origen="mejorado">
+            <input type="checkbox" id="k1b" /><label for="k1b"
               >Entra a <strong>Vitrina</strong> desde el menú: ves el
               <strong>portal</strong> con <strong>cuatro cajas</strong> en este
               orden — Apps · Agentes especializados · Investigaciones · Tableros
               de datos — cada una con su icono, una frase y su estado.
               <strong>Las cuatro dicen "Entrar"</strong> y cada una su cuenta:
-              Apps <strong>6</strong> · Agentes <strong>13</strong> ·
+              Apps <strong>10</strong> · Agentes <strong>15</strong> ·
               Investigaciones <strong>7</strong> · Tableros <strong>6</strong>.
               Pulsa <strong>Apps</strong>: llegas al escaparate con
-              <strong>seis tarjetas</strong>, una por app, <strong>en dos bloques</strong>
+              <strong>diez tarjetas</strong>, una por app, <strong>en dos bloques</strong>
               (Profesionales y Personales, en carrusel: prueba k15f), cada una con su
               estado, su promesa, un esquema dibujado y cuántas funcionalidades
               tiene. <span class="origen origen-heredada">S7</span
-              ><span class="origen origen-mejorado">Mejorado · S9</span></label
+              ><span class="origen origen-mejorado">Mejorado · post-S9</span></label
             >
           </li>
           <li data-origen="heredada">
@@ -1352,6 +1344,18 @@
               <code>data/fichas/&lt;app&gt;.yaml</code>.
               <span class="origen origen-heredada">post-S5</span
               ><span class="minimo">⭐ mínimo</span></label
+            >
+          </li>
+          <li data-origen="nuevo">
+            <input type="checkbox" id="k17" /><label for="k17"
+              >Abre la ficha técnica de <strong>planlang</strong> y la de
+              <strong>Big-D</strong>: no tienen el bloque <strong>«Cómo
+              funciona»</strong> ni la nota de quién declaró el proceso, y el
+              resto de la ficha sigue en su orden, sin un hueco. El proceso es
+              opcional: hoy lo traen solo las seis apps de siempre (Probeta DS,
+              Dash Agent, Anonimizador Velo, Habla San, Innmobiliaria y
+              Nutrikids).
+              <span class="origen origen-nuevo">Nuevo · post-S9</span></label
             >
           </li>
           <li data-origen="heredada" data-minimo>
@@ -1533,13 +1537,14 @@
               <span class="origen origen-heredada">S5</span></label
             >
           </li>
-          <li data-origen="heredada" data-minimo>
-            <input type="checkbox" id="l5" /><label for="l5"
-              >⭐ <strong>Aprobación visual:</strong> recorre las seis fichas
+          <li data-origen="mejorado" data-minimo>
+            <input type="checkbox" id="l5b" /><label for="l5b"
+              >⭐ <strong>Aprobación visual:</strong> recorre las diez fichas
               seguidas. Todas se ven de <strong>la misma casa</strong> que el
               resto de tu hoja de vida — ninguna trae los colores de su propia
               marca ni desentona. <span class="origen origen-heredada">S5</span
-              ><span class="minimo">⭐ mínimo</span></label
+              ><span class="minimo">⭐ mínimo</span><span class="origen origen-mejorado">Mejorado · post-S9</span
+              ></label
             >
           </li>
           <li data-origen="heredada" data-minimo>
@@ -1572,22 +1577,23 @@
           <h2>Las estanterías: los frentes con piezas</h2>
         </div>
         <p class="meta-bloque chica suave">
-          ~20 min · escritorio + un teléfono real. Las 26 fichas de agentes,
+          ~20 min · escritorio + un teléfono real. Las 28 fichas de agentes,
           investigaciones y tableros las escribió
           <strong>quien construyó cada pieza</strong>, no esta app: aquí se
           comprueba que llegaron enteras y se leen bien.
         </p>
         <ul class="pasos">
-          <li data-origen="heredada">
-            <input type="checkbox" id="m1" /><label for="m1"
+          <li data-origen="mejorado">
+            <input type="checkbox" id="m1b" /><label for="m1b"
               >Desde el portal entra a <strong>Agentes especializados</strong>:
-              el encabezado dice <strong>"13 productos publicadas"</strong> y
-              debajo hay <strong>13 tarjetas</strong>. Cuéntalas. Las
+              el encabezado dice <strong>"15 productos publicados"</strong> y
+              debajo hay <strong>15 tarjetas</strong>. Cuéntalas. Las
               <strong>selladas van primero</strong> y dentro de cada grupo el
               orden es alfabético — no cambia aunque recargues. Repite en
               <strong>Investigaciones</strong> (7) y en
               <strong>Tableros de datos</strong> (6).
-              <span class="origen origen-heredada">S7</span></label
+              <span class="origen origen-heredada">S7</span><span class="origen origen-mejorado">Mejorado · post-S9</span
+              ></label
             >
           </li>
           <li data-origen="heredada">
@@ -1789,14 +1795,15 @@
               <span class="origen origen-heredada">post-S7</span></label
             >
           </li>
-          <li data-origen="heredada">
-            <input type="checkbox" id="n4" /><label for="n4"
+          <li data-origen="mejorado">
+            <input type="checkbox" id="n4b" /><label for="n4b"
               >La sección <strong>"Vitrina"</strong> (antes «Lo que construyo»)
               ocupa el sitio de Proyectos: las cuatro cajas de la vitrina con su
-              cuenta (Apps 6 · Agentes 13 · Investigaciones 7 · Tableros 6) y el
+              cuenta (Apps 10 · Agentes 15 · Investigaciones 7 · Tableros 6) y el
               botón "Explora el portafolio", que lleva al portal. Pulsa una
               caja: entras a ese frente.
-              <span class="origen origen-heredada">post-S7</span></label
+              <span class="origen origen-heredada">post-S7</span><span class="origen origen-mejorado">Mejorado · post-S9</span
+              ></label
             >
           </li>
           <li data-origen="heredada">
@@ -2056,16 +2063,17 @@
               ><span class="minimo">⭐ mínimo</span></label
             >
           </li>
-          <li data-origen="nuevo">
-            <input type="checkbox" id="o12" /><label for="o12"
+          <li data-origen="mejorado">
+            <input type="checkbox" id="o12b" /><label for="o12b"
               >Las fichas hablan por el chat: pregunta «¿Qué límites tiene
               Habla San?» o «¿Cuántos criterios tiene el Harness Paper
               Computacional?». La respuesta sale de la ficha, nombra la app con
               su nombre oficial y la cita navega a
               <code>/vitrina/apps/habla</code> o a la ficha del agente
-              — no a la HOME. Son las 32 fichas, con la mitad del peso que tus
+              — no a la HOME. Son las 38 fichas, con la mitad del peso que tus
               documentos (ADR-023).
-              <span class="origen origen-nuevo">Nuevo · a fondo v2</span></label
+              <span class="origen origen-nuevo">Nuevo · a fondo v2</span><span class="origen origen-mejorado">Mejorado · post-S9</span
+              ></label
             >
           </li>
           <li data-origen="nuevo">
@@ -2220,6 +2228,22 @@
         <details class="chica">
           <summary>Historial de la guía</summary>
           <ul>
+            <li>
+              <strong>v9.25 · las cuentas al día · 2026-10-11:</strong> el PR de
+              contenido #73 llevó la vitrina a 10 apps, 15 agentes y 38 fichas y
+              la guía seguía con las cuentas de antes. Se actualizan k1 y n4
+              (cuentas del portal y de la HOME), m1 y el pie del bloque M (15
+              agentes, 28 fichas), g1 (siete apps con roadmap; AngelGhost, Big-D
+              y HackGuard aún sin él), l5 ⭐ (diez fichas) y o12 (38 fichas en
+              el chat); sus casillas pasan a k1b, n4b, m1b, g1b, l5b y o12b.
+              <strong>Nueva k17</strong>: una ficha sin proceso no tiene «Cómo
+              funciona» y no deja hueco. La introducción deja de nombrar el
+              Sprint 008 y sale su aviso, que ya no aplicaba (o7 y o8 no
+              esperan nada desde a fondo v2). Un gate nuevo
+              (<code>tests/unit/documentos-cuentas.test.ts</code>) compara
+              estas cuentas y las del manual con las del disco. Ninguna prueba
+              eliminada. Prefijo de casillas <code>s9</code>.
+            </li>
             <li>
               <strong>v9.24 · las tiras de las cuatro apps nuevas · 2026-10-11:</strong>
               Al entrar AngelGhost, planlang, Big-D y HackGuard al escaparate
