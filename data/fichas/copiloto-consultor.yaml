@@ -16,3 +16,46 @@ nunca:
   - "Envía audio, capturas o texto a un servicio externo por defecto."
   - "Se presenta como «indetectable»: la promesa es «nada queda», demostrable con un contador."
   - "Accede, sondea o actúa sobre el computador de la contraparte."
+roadmap:
+  - id: iphone-presencial
+    titulo:
+      es: "Tu iPhone en modo presencial"
+      en: "Your iPhone in in-person mode"
+    descripcion:
+      es: "La misma app en el celular, escuchando la sala por su micrófono y mostrándote la ficha; depende de un spike de compilación para iOS."
+      en: "The same app on your phone, listening to the room through its mic and showing you the card; depends on an iOS build spike."
+  - id: varias-voces
+    titulo:
+      es: "Varias voces en el mismo canal"
+      en: "Several voices on the same channel"
+    descripcion:
+      es: "Distinguir a dos o más personas del lado del cliente, sin biometría."
+      en: "Tell two or more people apart on the client's side, with no biometrics."
+  - id: sin-auriculares
+    titulo:
+      es: "Sin auriculares"
+      en: "No headphones needed"
+    descripcion:
+      es: "Cancelación de eco para usar los parlantes sin que tu propia voz vuelva como del cliente."
+      en: "Echo cancellation so you can use speakers without your own voice coming back as the client's."
+  - id: streaming-nativo
+    titulo:
+      es: "Transcripción en streaming nativo"
+      en: "Native streaming transcription"
+    descripcion:
+      es: "Un motor con latencia aún menor, cuando esté medido en Apple Silicon."
+      en: "An engine with even lower latency, once measured on Apple Silicon."
+  - id: leer-el-dashboard
+    titulo:
+      es: "Leer el dashboard del cliente como consultor"
+      en: "Read the client's dashboard like a consultant"
+    descripcion:
+      es: "Interpretar gráficos y tablas en pantalla, no solo el texto."
+      en: "Interpret charts and tables on screen, not just the text."
+  - id: acuerdos-detectados
+    titulo:
+      es: "Acuerdos detectados"
+      en: "Detected commitments"
+    descripcion:
+      es: "«Quedamos en», «te envío», «para el viernes» se vuelven propuestas de acuerdo que confirmas con un clic."
+      en: "“We agreed”, “I'll send you”, “by Friday” become commitment proposals you confirm with one click."
