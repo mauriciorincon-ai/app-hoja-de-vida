@@ -469,8 +469,10 @@ cifra `clamp(3.5rem,8vw,4.75rem)`; tres columnas dejaban dos huérfanos.
   `overflow-x-auto`, una captura por pantalla (`snap-start`, `snap-always`), cada una en `<figure>`
   con marco paper-1, `r-[12px]` y `sh-1`, y `figcaption` mono «Pantalla N de T» + el pie. Debajo,
   una **fila de control**: botón ← y botón → de 44 px (`size-11`, `r-full`, borde paper-3, fondo
-  paper-0, `ink-1`; hover paper-1 + `ink-0`; **deshabilitados en los extremos**, a 40 % de
-  opacidad) y, en medio, el indicador «1 de 6» en mono 11 px `ink-2`. Patrón **APG de carrusel**:
+  paper-0, `ink-1`; hover paper-1 + `ink-0`; **apagados en los extremos** con `aria-disabled`, a
+  40 % de opacidad y sin hover —**nunca `disabled`**: el botón que tiene el foco al llegar al final
+  lo perdería, y WebKit (Safari) lo manda al `<body>`; apagado conserva el foco, se anuncia como no
+  disponible y no hace nada; deuda M1 del S9, pagada el 2026-10-12—) y, en medio, el indicador «1 de 6» en mono 11 px `ink-2`. Patrón **APG de carrusel**:
   región con `aria-roledescription="carousel"` y nombre; cada captura es un grupo `slide` con su
   «n de N»; el indicador es `role="status" aria-live="polite"`; la pista recibe foco (`tabindex=0`)
   y las flechas la recorren. **Nada se mueve solo** —ni autoplay ni rotación—. Con
@@ -499,6 +501,17 @@ cifra `clamp(3.5rem,8vw,4.75rem)`; tres columnas dejaban dos huérfanos.
   CV Viva inyectados (`scripts/tema-cv-viva.mjs`) para que las seis se vean de la misma casa.
   Banner apaisado enmarcado en paper-1, `alt=""` con pie visible que **declara el repintado** —
   una imagen retocada que se presenta como cruda miente igual que una maqueta que finge ser foto.
+- **Página de simulación** (`/vitrina/apps/<slug>/simulacion`, 2026-10-12, ADR-029): para la app
+  privada cuya casa entrega una simulación estática. Contenedor `max-w-6xl`; arriba lo de CV Viva
+  —el regreso a la ficha en mono, el **rótulo «Simulación · no operativo» en `peach`** (chip
+  `r-full`, mono 11 px), el `h1` en Fraunces «<app>: la simulación» y la nota en 16 px `ink-1`—.
+  Debajo, **la fachada**: un panel paper-1, `r-[14px]`, `sh-1`, con una línea y dos acciones —
+  «Abrir la simulación aquí» (botón `sage`, el principal) y «pantalla completa» (borde paper-3,
+  fondo paper-0)—. El marco nace **al pulsar**, a ancho completo, `78dvh` (mínimo 560 px), en
+  la misma caja; el botón desaparece y **el foco pasa al marco**. Sin JavaScript la pantalla
+  completa es un enlace y funciona. Lo de dentro del marco es de la otra casa: ni se repinta ni
+  se edita. En la ficha técnica, el cierre ofrece «Ver la simulación» (borde `sage-ink`, texto
+  `sage-ink`) junto a «Ver la ficha completa».
 
 ## Layout
 

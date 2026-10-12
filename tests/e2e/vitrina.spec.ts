@@ -1322,6 +1322,122 @@ test.describe("Apertura por lectura — el patrón, no una imitación", () => {
  * carga: las capturas fuera de la pista no se piden hasta deslizar. Data-driven:
  * la pieza sale de `content/tableros/`, la misma fuente que la página.
  */
+// LA SIMULACIÓN DE UNA APP (2026-10-12): la ruta existe solo para las apps de
+// data/simulaciones.yaml, muestra el paquete en un marco del mismo sitio y la
+// ficha la ofrece en su cierre. El resto de las apps no la tiene (404).
+type SimulacionYaml = {
+  simulaciones: {
+    slug: string;
+    carpeta: string;
+    entrada: { es: string; en: string };
+  }[];
+};
+const SIMULACIONES = (
+  parse(readFileSync("data/simulaciones.yaml", "utf8")) as SimulacionYaml
+).simulaciones;
+
+test.describe("Vitrina — la simulación de una app", () => {
+  const sim = SIMULACIONES[0];
+  const sinSimulacion = EXPORTS.find(
+    (e) => !SIMULACIONES.some((s) => s.slug === e.app.slug),
+  );
+
+  test.beforeAll(() => {
+    if (!sim)
+      throw new Error("data/simulaciones.yaml no trae ninguna simulación");
+  });
+
+  for (const l of ["es", "en"] as const) {
+    test(`en ${l}: la página abre el paquete en un marco del mismo sitio al pedirlo, con su rótulo y su regreso`, async ({
+      page,
+    }) => {
+      const r = await page.goto(`/${l}/vitrina/apps/${sim.slug}/simulacion`);
+      expect(r?.status()).toBe(200);
+      await expect(
+        page.locator(`[data-simulacion="${sim.slug}"]`),
+      ).toBeVisible();
+      await expect(page.getByRole("heading", { level: 1 })).toContainText(
+        l === "es" ? "simulación" : "simulation",
+      );
+      // Fachada: el marco NO se carga de entrada (el paquete pesa lo que una
+      // app entera); el panel ofrece abrirlo aquí o a pantalla completa.
+      const marco = page.locator("iframe[data-marco-simulacion]");
+      await expect(marco).toHaveCount(0);
+      const entrada = `/piezas/${sim.carpeta}/${sim.entrada[l]}`;
+      await expect(
+        page.locator(
+          '[data-panel-simulacion] [data-cta="simulacion-completa"]',
+        ),
+      ).toHaveAttribute("href", entrada);
+      await page.locator('[data-cta="abrir-simulacion"]').click();
+      await expect(marco).toHaveAttribute("src", entrada);
+      await expect(marco).toHaveAttribute("title", /.+/);
+      // El botón pulsado desaparece: el foco pasa al marco, no al <body>.
+      await expect(marco).toBeFocused();
+      // El documento del marco cargó de verdad (no un 404 del paquete).
+      const dentro = page.frameLocator("iframe[data-marco-simulacion]");
+      await expect(dentro.locator("h1, h2").first()).toBeVisible();
+      // Abierto, sigue a mano la pantalla completa.
+      await expect(
+        page.locator('[data-cta="simulacion-completa"]'),
+      ).toHaveAttribute("href", entrada);
+      // Y el regreso a la ficha técnica.
+      await page
+        .getByRole("link", {
+          name:
+            l === "es"
+              ? "Volver a la ficha técnica"
+              : "Back to the technical sheet",
+        })
+        .click();
+      await expect(page).toHaveURL(
+        new RegExp(`/${l}/vitrina/apps/${sim.slug}$`),
+      );
+    });
+  }
+
+  test("la ficha de una app con simulación la ofrece en su cierre; una sin ella, no", async ({
+    page,
+  }) => {
+    await page.goto(`/es/vitrina/apps/${sim.slug}`);
+    const cta = page.locator('[data-cta="simulacion"]');
+    await expect(cta).toHaveAttribute(
+      "href",
+      `/es/vitrina/apps/${sim.slug}/simulacion`,
+    );
+    await cta.click();
+    await expect(page).toHaveURL(
+      new RegExp(`/es/vitrina/apps/${sim.slug}/simulacion$`),
+    );
+
+    if (sinSimulacion) {
+      await page.goto(`/es/vitrina/apps/${sinSimulacion.app.slug}`);
+      await expect(page.locator('[data-cta="detalle"]')).toBeVisible();
+      await expect(page.locator('[data-cta="simulacion"]')).toHaveCount(0);
+    }
+  });
+
+  test("una app sin simulación no tiene esa ruta (404)", async ({ page }) => {
+    test.skip(!sinSimulacion, "todas las apps tienen simulación");
+    const r = await page.goto(
+      `/es/vitrina/apps/${sinSimulacion!.app.slug}/simulacion`,
+    );
+    expect(r?.status()).toBe(404);
+  });
+
+  test("sin JavaScript la simulación se alcanza igual: el enlace viaja en el HTML (gate ATS)", async ({
+    request,
+  }) => {
+    const html = await (
+      await request.get(`/es/vitrina/apps/${sim.slug}/simulacion`)
+    ).text();
+    // Sin JavaScript el botón no abre nada, pero el enlace a pantalla completa
+    // sí: viaja en el HTML estático.
+    expect(html).toContain("data-panel-simulacion");
+    expect(html).toContain(`href="/piezas/${sim.carpeta}/${sim.entrada.es}"`);
+  });
+});
+
 test.describe("Vitrina — el carrusel de la galería (Sprint 009)", () => {
   const conGaleria = piezasDe("tableros").filter(
     (p) => (p.galeria?.length ?? 0) > 1,
@@ -1404,13 +1520,66 @@ test.describe("Vitrina — el carrusel de la galería (Sprint 009)", () => {
     await carrusel.scrollIntoViewIfNeeded();
     await carrusel.locator("[data-pista]").focus();
     await expect(carrusel.locator("[data-pista]")).toBeFocused();
-    // «Anterior» está deshabilitado: el siguiente Tab cae en «siguiente».
+    // «Anterior» está apagado (aria-disabled) pero sigue en el orden del
+    // teclado: un Tab llega a él y el siguiente a «siguiente».
     await page.keyboard.press("Tab");
     await expect(
-      carrusel.getByRole("button", { name: "Pantalla siguiente" }),
+      carrusel.getByRole("button", { name: "Pantalla anterior" }),
     ).toBeFocused();
+    await page.keyboard.press("Tab");
+    const siguiente = carrusel.getByRole("button", {
+      name: "Pantalla siguiente",
+    });
+    await expect(siguiente).toBeFocused();
     await page.keyboard.press("Enter");
     await expect(carrusel.locator("[data-indicador]")).toHaveText(`2 de ${N}`);
+  });
+
+  // Deuda M1 del S9 (2026-10-12). Con `disabled`, el botón del extremo dejaba
+  // de ser enfocable justo cuando tenía el foco: en WebKit (Safari, el del Mac
+  // y el iPhone) el foco caía al <body> y el siguiente Tab arrancaba desde el
+  // principio de la página; Chromium y Firefox lo conservaban, por eso la
+  // CI —solo Chromium— nunca lo vio. Ahora el extremo queda APAGADO
+  // (`aria-disabled`): sigue enfocable y pulsarlo no hace nada. La etiqueta
+  // @webkit la corre también en el proyecto webkit de playwright.config.
+  test("al llegar al final con el teclado, el foco se queda en «siguiente» @webkit", async ({
+    page,
+  }, testInfo) => {
+    test.skip(
+      testInfo.project.name === "mobile",
+      "el teclado es de los proyectos de escritorio",
+    );
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto(ruta());
+    const carrusel = page.locator("[data-carrusel]");
+    await carrusel.scrollIntoViewIfNeeded();
+    const indicador = carrusel.locator("[data-indicador]");
+    const siguiente = carrusel.getByRole("button", {
+      name: "Pantalla siguiente",
+    });
+    await siguiente.focus();
+    await expect(siguiente).toBeFocused();
+    // Cada Enter espera a que su captura llegue a la vista: a mitad del
+    // desplazamiento suave el indicador pasa por las intermedias, y un Enter
+    // en ese instante arrancaría desde una de ellas (no es M1, es el ritmo).
+    for (let i = 2; i <= N; i++) {
+      await page.keyboard.press("Enter");
+      await expect(indicador).toHaveText(`${i} de ${N}`);
+      await expect(carrusel.locator(`[data-captura="${i}"]`)).toBeInViewport({
+        ratio: 0.6,
+      });
+    }
+    await expect(indicador).toHaveText(`${N} de ${N}`);
+    await expect(siguiente).toBeDisabled();
+    await expect(siguiente).toBeFocused();
+    // Pulsarlo apagado no mueve nada…
+    await page.keyboard.press("Enter");
+    await expect(indicador).toHaveText(`${N} de ${N}`);
+    // … y Shift+Tab sigue DENTRO del carrusel, no al principio de la página.
+    // (Chromium va a «anterior»; WebKit, como Safari por defecto, no pone los
+    // botones en el recorrido del Tab y va a la pista: los dos se quedan aquí.)
+    await page.keyboard.press("Shift+Tab");
+    await expect(carrusel.locator(":focus")).toHaveCount(1);
   });
 
   test("con «reducir movimiento» el carrusel funciona igual, sin animar", async ({

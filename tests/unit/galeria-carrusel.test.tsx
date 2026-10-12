@@ -88,6 +88,21 @@ function aLaVista(i: number) {
   });
 }
 
+/**
+ * Un botón del extremo queda APAGADO, no deshabilitado (deuda M1 del S9): con
+ * `disabled` el navegador le quita el foco al que llegó al final con el
+ * teclado, y el foco cae al <body>. Con `aria-disabled` sigue enfocable, se
+ * anuncia como no disponible y pulsarlo no hace nada.
+ */
+function expectApagado(boton: HTMLElement) {
+  expect(boton).toHaveAttribute("aria-disabled", "true");
+  expect(boton).not.toHaveAttribute("disabled");
+}
+function expectEncendido(boton: HTMLElement) {
+  expect(boton).not.toHaveAttribute("aria-disabled");
+  expect(boton).not.toHaveAttribute("disabled");
+}
+
 describe("GaleriaCarrusel — con varias capturas", () => {
   it("es una región «carousel» con nombre, y cada captura es un «slide» con su «n de N»", () => {
     montar();
@@ -108,14 +123,10 @@ describe("GaleriaCarrusel — con varias capturas", () => {
     );
   });
 
-  it("los dos botones tienen nombre accesible; el anterior arranca deshabilitado", () => {
+  it("los dos botones tienen nombre accesible; el anterior arranca apagado", () => {
     montar();
-    expect(
-      screen.getByRole("button", { name: "Pantalla anterior" }),
-    ).toBeDisabled();
-    expect(
-      screen.getByRole("button", { name: "Pantalla siguiente" }),
-    ).toBeEnabled();
+    expectApagado(screen.getByRole("button", { name: "Pantalla anterior" }));
+    expectEncendido(screen.getByRole("button", { name: "Pantalla siguiente" }));
   });
 
   it("el indicador es un «status» educado y arranca en «1 de N»", () => {
@@ -131,9 +142,7 @@ describe("GaleriaCarrusel — con varias capturas", () => {
     expect(scrollTo).toHaveBeenCalledTimes(1);
     expect(scrollTo.mock.calls[0][0]).toMatchObject({ behavior: "smooth" });
     expect(screen.getByRole("status")).toHaveTextContent("2 de 6");
-    expect(
-      screen.getByRole("button", { name: "Pantalla anterior" }),
-    ).toBeEnabled();
+    expectEncendido(screen.getByRole("button", { name: "Pantalla anterior" }));
   });
 
   it("con «reducir movimiento» el desplazamiento no se anima, pero ocurre", () => {
@@ -150,12 +159,32 @@ describe("GaleriaCarrusel — con varias capturas", () => {
     expect(screen.getByRole("status")).toHaveTextContent("3 de 6");
     aLaVista(N - 1);
     expect(screen.getByRole("status")).toHaveTextContent("6 de 6");
-    expect(
-      screen.getByRole("button", { name: "Pantalla siguiente" }),
-    ).toBeDisabled();
-    expect(
-      screen.getByRole("button", { name: "Pantalla anterior" }),
-    ).toBeEnabled();
+    expectApagado(screen.getByRole("button", { name: "Pantalla siguiente" }));
+    expectEncendido(screen.getByRole("button", { name: "Pantalla anterior" }));
+  });
+
+  it("al llegar al final con «siguiente», el botón conserva el foco y pulsarlo otra vez no hace nada (M1)", () => {
+    montar();
+    const siguiente = screen.getByRole("button", {
+      name: "Pantalla siguiente",
+    });
+    siguiente.focus();
+    for (let i = 2; i <= N; i++) fireEvent.click(siguiente);
+    expect(screen.getByRole("status")).toHaveTextContent(`${N} de ${N}`);
+    expectApagado(siguiente);
+    expect(document.activeElement).toBe(siguiente);
+
+    scrollTo.mockClear();
+    fireEvent.click(siguiente);
+    expect(scrollTo).not.toHaveBeenCalled();
+    expect(screen.getByRole("status")).toHaveTextContent(`${N} de ${N}`);
+  });
+
+  it("«anterior» apagado en el inicio tampoco hace nada al pulsarlo", () => {
+    montar();
+    fireEvent.click(screen.getByRole("button", { name: "Pantalla anterior" }));
+    expect(scrollTo).not.toHaveBeenCalled();
+    expect(screen.getByRole("status")).toHaveTextContent(`1 de ${N}`);
   });
 
   it("la pista con scroll se alcanza con el teclado (foco) y tiene nombre", () => {

@@ -238,7 +238,7 @@ information, sensitive details of the processes or internal knowledge whose disc
 the people or the institution. I can explain capabilities, architecture principles and governance
 practices; I do not reveal the information they operate on.
 
-And I brought it to my showcase: one of the 6 published applications is an anonymizer, because the
+And I brought it to my showcase: one of the 10 published applications is an anonymizer, because the
 first need of anyone who wants to analyze people's data with artificial intelligence is to stop
 having the people in the data. The rule does not belong to one job: it is mine. And since September
 2026 it stopped applying only to what I do for others: this very CV started collecting personal
@@ -508,7 +508,7 @@ recommendations aimed at others, but a discipline I use to control my own work.
 
 No application moves forward without two documented decisions. The first confirms its priority
 against other initiatives. The second establishes the product vision, its purpose, the expected
-capabilities and the limits within which it must be built. The 6 published applications have both,
+capabilities and the limits within which it must be built. The 10 published applications have both,
 written before the first sprint.
 
 No cycle is considered closed without a summary that preserves the decisions made, the tests
@@ -739,7 +739,7 @@ requirement seeks to represent.
 
 Verifiable evidence adds to the professional experience. DP-600, earned in December 2024, formally
 validates my depth in Microsoft Fabric, Power BI and semantic models. The two IBM credentials back
-my base in data science, Python, SQL and R. My public portfolio makes it possible to examine 6
+my base in data science, Python, SQL and R. My public portfolio makes it possible to examine 10
 applications, 15 agents, 7 research pieces and 6 dashboards —38 pieces— with their tests, their
 controls and their technical sheets; and among the agents there is one that deals precisely with the
 standard I implement.

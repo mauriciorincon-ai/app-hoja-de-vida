@@ -19,6 +19,7 @@ import {
   getFichasTecnicas,
 } from "@/lib/vitrina/ficha-tecnica/loader";
 import { getFichasVitrina } from "@/lib/vitrina/loader";
+import { getSimulacion } from "@/lib/vitrina/simulaciones-loader";
 import { roadmapDe } from "@/lib/votes/roadmap";
 
 /**
@@ -113,6 +114,9 @@ export default async function FichaTecnicaAppPage({ params }: Params) {
             datos={ft}
             locale={l}
             hrefDetalle={`/vitrina/apps/${app}/detalle`}
+            hrefSimulacion={
+              getSimulacion(app) ? `/vitrina/apps/${app}/simulacion` : undefined
+            }
             listaDeEspera
           />
 

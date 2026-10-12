@@ -89,7 +89,11 @@ export function verdadesDelSitio() {
 
   // Un ADR es un archivo numerado; un README o una plantilla en la misma carpeta no lo es.
   const decisiones = cuentaMd("decisions", (f) => /^\d{3}-/.test(f));
-  const sprintsCerrados = cuentaMd("sprints", (f) => /-summary\.md$/.test(f));
+  // Un sprint cerrado deja su summary; el S9 lo dejó como `-cierre.md` (cierre
+  // ejecutivo) y el conteo se quedó en 8 con nueve cerrados (2026-10-12).
+  const sprintsCerrados = cuentaMd("sprints", (f) =>
+    /^SPRINT_\d{3}-(summary|cierre)\.md$/.test(f),
+  );
 
   const ci = path.join(ROOT, ".github/workflows/ci.yml");
   const jobsCi = existsSync(ci)

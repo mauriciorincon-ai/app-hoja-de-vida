@@ -26,6 +26,13 @@ if (!brochureSlug) throw new Error("apps.yaml sin brochures");
 
 // Las apps hermanas de la vitrina (S5), leídas de los exports igual que la
 // página: el slug sale del contenido, no del nombre del archivo.
+// Las apps con simulación (2026-10-12): su página entra al scan, sin el
+// interior del marco (ver abajo).
+const slugsSimulacion = (
+  parse(readFileSync("data/simulaciones.yaml", "utf8")) as {
+    simulaciones: { slug: string }[];
+  }
+).simulaciones.map((s) => s.slug);
 const slugsVitrina = readdirSync("content/vitrina")
   .filter((f) => f.endsWith(".brochure-export.json"))
   .map(
@@ -86,6 +93,10 @@ const RUTAS = [
     `/es/vitrina/apps/${s}/detalle`,
     `/en/vitrina/apps/${s}/detalle`,
   ]),
+  ...slugsSimulacion.flatMap((s) => [
+    `/es/vitrina/apps/${s}/simulacion`,
+    `/en/vitrina/apps/${s}/simulacion`,
+  ]),
   // Cada frente, y cada pieza de los que están abiertos (S7).
   ...frentesYaml.flatMap((f) => [
     `/es/vitrina/${f.id}`,
@@ -145,6 +156,11 @@ for (const ruta of RUTAS) {
 
     const results = await new AxeBuilder({ page })
       .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
+      // El interior del marco de una simulación es el paquete de OTRA casa:
+      // no se edita aquí (CLAUDE.md, canal de contenido). Lo que se le
+      // encuentre se reporta en origen; esta casa audita todo lo demás,
+      // incluido el propio <iframe> (su title).
+      .exclude("iframe[data-marco-simulacion]")
       .analyze();
 
     expect(results.violations).toEqual([]);
@@ -153,6 +169,26 @@ for (const ruta of RUTAS) {
     );
   });
 }
+
+// La simulación ABIERTA (2026-10-12): el scan de la ruta ve el panel; este ve
+// el marco ya cargado y el enlace que aparece debajo. El interior del marco es
+// de otra casa y queda fuera.
+test("axe limpio en la simulación abierta", async ({ page }) => {
+  test.skip(!slugsSimulacion.length, "ninguna app tiene simulación");
+  const erroresDePagina: string[] = [];
+  page.on("pageerror", (e) => erroresDePagina.push(e.message));
+  await page.goto(`/es/vitrina/apps/${slugsSimulacion[0]}/simulacion`);
+  await page.locator('[data-cta="abrir-simulacion"]').click();
+  await expect(page.locator("iframe[data-marco-simulacion]")).toBeVisible();
+  const results = await new AxeBuilder({ page })
+    .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
+    .exclude("iframe[data-marco-simulacion]")
+    .analyze();
+  expect(results.violations).toEqual([]);
+  expect(erroresDePagina, "errores de página (hidratación incluida)").toEqual(
+    [],
+  );
+});
 
 // El 404 de la raíz (2026-09-26) no tiene header ni footer: no entra al bucle
 // de arriba, que espera el footer. Es una página que alguien puede ver, así
@@ -184,10 +220,22 @@ test("axe limpio en /es/vitrina/apps con los carruseles en el final", async ({
   const carruseles = page.locator("[data-carrusel-apps]");
   for (let c = 0; c < (await carruseles.count()); c++) {
     const carrusel = carruseles.nth(c);
-    const max = Number(await carrusel.getAttribute("data-max"));
-    for (let paso = 0; paso < max; paso++)
-      await carrusel.getByRole("button", { name: "Tarjeta siguiente" }).click();
-    await expect(carrusel).toHaveAttribute("data-i", String(max));
+    // `data-max` se MIDE en el cliente (cuántas tarjetas caben): vale N − 1
+    // hasta la primera medida y luego N − 2 a dos por vista. Leerlo de entrada
+    // y pulsar esa cantidad de veces se pasaba del final con 7 apps y el
+    // barrido volvía al inicio (2026-10-12). Se avanza de a un paso hasta que
+    // el carrusel marque su final, y entonces se compara con el max ya medido.
+    await expect(async () => {
+      if ((await carrusel.locator("[data-final]").count()) === 0)
+        await carrusel
+          .getByRole("button", { name: "Tarjeta siguiente" })
+          .click();
+      await expect(carrusel.locator("[data-final]")).toHaveCount(1, {
+        timeout: 1_000,
+      });
+    }).toPass({ timeout: 20_000 });
+    const max = await carrusel.getAttribute("data-max");
+    await expect(carrusel).toHaveAttribute("data-i", max ?? "");
   }
   await expect(page.locator("[data-clon]")).toHaveCount(0);
   const results = await new AxeBuilder({ page })

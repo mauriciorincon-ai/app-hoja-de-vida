@@ -724,7 +724,7 @@ with which it recognizes its limits.
 
 At Vesting I learned to build the organizational capability needed to develop and observe
 agents: a platform and a process with which a startup built 27 agents for 12 clients and watched
-them in real time. In ARKHÉ I turned those lessons into an advanced agentic architecture, with 13
+them in real time. In ARKHÉ I turned those lessons into an advanced agentic architecture, with 15
 published agents as the visible part and a research piece that supports it. One experience
 demonstrates professional scale and repeatability; the other, architectural depth,
 specialization, measurement and independent evolution.

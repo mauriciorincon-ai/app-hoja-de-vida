@@ -46,7 +46,8 @@ Contrato de alcance: `portafolio/hoja-de-vida/VISION.md` (planeadora, aprobada 2
 ```
 src/
 ├─ app/[locale]/   (App Router, rutas /es /en)
-│  └─ vitrina/     (S5–S6 — portal · apps/ (escaparate · <slug> ficha técnica · <slug>/detalle)
+│  └─ vitrina/     (S5–S6 — portal · apps/ (escaparate · <slug> ficha técnica · <slug>/detalle
+│                   · <slug>/simulacion (2026-10-12, ADR-029: el paquete de la app en un marco))
 │                   · [categoria] (un frente: escaparate si abierta, «en preparación» si no)
 │                   · [categoria]/[pieza] (S7 — la ficha de una pieza no-app))
 ├─ components/     (UI sin lógica de negocio; home/ (hero · perfil · trayectoria · logros ·
@@ -71,6 +72,9 @@ data/a-fondo/      (S8 — el corpus profundo del chat: <slug>.{es,en}.md, un do
                     `tests/fixtures/banco-de-preguntas.es.yaml`, porque el buscador es léxico y
                     una palabra que el corpus no dice no existe para quien pregunta)
 data/vitrina.yaml  (S6 — los cuatro FRENTES de la vitrina: id, estado, nombre, intro, detalle)
+data/simulaciones.yaml (2026-10-12 — las apps con simulación estática: slug · carpeta en
+                    public/piezas/ · el .html de entrada por idioma · una nota; el build falla
+                    si falta el export o el archivo)
 data/fichas/       (S6 — complementos de CURACIÓN por app: titular · cifras destacadas · límites ·
                     nunca · proceso (opcional) · roadmap. Los seis de la línea base son de CV Viva
                     (`procedencia: cv-viva`); los de las apps nuevas los escribe la planeadora

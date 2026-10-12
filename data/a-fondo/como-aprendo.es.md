@@ -2,7 +2,7 @@
 slug: como-aprendo
 codigo: AF-19
 titulo: "Cómo aprendo"
-resumen: "El argumento con medida: el DP-600 en cinco meses sobre un Fabric con menos de un año en el mercado, Codex, Antigravity y Claude Code en un mes desde su salida, este sitio en ocho sprints desde julio de 2026, y 38 piezas públicas con sus pruebas y coberturas."
+resumen: "El argumento con medida: el DP-600 en cinco meses sobre un Fabric con menos de un año en el mercado, Codex, Antigravity y Claude Code en un mes desde su salida, este sitio en nueve sprints desde julio de 2026, y 38 piezas públicas con sus pruebas y coberturas."
 cuando_usar: "Úsalo cuando pregunten cómo aprende una tecnología nueva, qué hace cuando el puesto pide algo que nunca ha usado, cuánto tardó en certificarse, qué está estudiando ahora, o cómo documenta y demuestra lo que aprendió."
 estado: aprobado
 ancla: "#certificaciones"
@@ -109,7 +109,7 @@ Las últimas veces que aprendí algo desde cero, y cuánto tardé:
 | Qué                                   | Desde          | Plazo                             | Resultado                                                   |
 | ------------------------------------- | -------------- | --------------------------------- | ----------------------------------------------------------- |
 | Microsoft Fabric                      | agosto de 2023 | 5 meses de estudio (jul–nov 2024) | DP-600 en diciembre de 2024, plataforma de Vesting operando |
-| Next.js y el pipeline de aplicaciones | julio de 2026  | 8 sprints                         | este sitio, CV Viva, con su CI, sus pruebas y sus ADR       |
+| Next.js y el pipeline de aplicaciones | julio de 2026  | 9 sprints                         | este sitio, CV Viva, con su CI, sus pruebas y sus ADR       |
 | AI-103 y AI-300                       | julio de 2026  | 21 y 10 módulos a la fecha        | dos rutas en curso, con la Super guía AI-103 publicada      |
 | Codex, Antigravity y Claude Code      | su salida      | cerca de un mes cada uno          | el pipeline con el que se construyen las 38 piezas          |
 
@@ -138,7 +138,7 @@ No abordé estas tecnologías mediante ejercicios separados del producto. Cada u
 
 Las cifras salen de los repositorios y no sustituyen la evaluación de la calidad. Una suite extensa puede proteger poco si verifica aspectos irrelevantes. Por eso, relaciono cada control con una condición concreta y procuro demostrar que puede ponerse en rojo frente a la falla que debe detectar.
 
-## Las 35 piezas: 15 agentes, 7 investigaciones y 6 tableros, cuatro formas de aprender
+## Las 38 piezas: 15 agentes, 7 investigaciones y 6 tableros, cuatro formas de aprender
 
 <!-- seccion: las-cuatro-familias -->
 
@@ -162,7 +162,7 @@ No descarto tutoriales, artículos o comunidades, pero los utilizo como apoyo y 
 
 Desde el primer día registro decisiones, supuestos, pruebas y problemas encontrados. Lo que no se documenta necesita volver a descubrirse. Lo que sí queda estructurado puede convertirse en una guía, un componente, una plantilla, una prueba o una regla reutilizable.
 
-El aprendizaje avanza mediante ciclos cortos. Construyo una capacidad limitada, observo su comportamiento, identifico el siguiente vacío y amplío la solución. Esta secuencia reduce la posibilidad de dedicar semanas a una arquitectura extensa antes de comprobar sus supuestos principales. Este sitio se construyó así: 8 sprints, cada uno con su plan, su bitácora y su resumen.
+El aprendizaje avanza mediante ciclos cortos. Construyo una capacidad limitada, observo su comportamiento, identifico el siguiente vacío y amplío la solución. Esta secuencia reduce la posibilidad de dedicar semanas a una arquitectura extensa antes de comprobar sus supuestos principales. Este sitio se construyó así: 9 sprints, cada uno con su plan, su bitácora y su resumen.
 
 ## Retroalimentación, crítica técnica y corregir el rumbo: familiaridad no es dominio
 

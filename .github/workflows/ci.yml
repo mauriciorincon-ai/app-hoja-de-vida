@@ -40,7 +40,8 @@ jobs:
       - uses: actions/setup-node@v7
         with: { node-version: 22, cache: pnpm }
       - run: pnpm install --frozen-lockfile
-      - run: pnpm exec playwright install --with-deps chromium
+      # webkit: solo para las pruebas `@webkit` (playwright.config, deuda M1 del S9).
+      - run: pnpm exec playwright install --with-deps chromium webkit
       - run: pnpm test:e2e        # incluye scans axe (@axe-core/playwright); la
                                   # votación corre en modo "no disponible" sin BD
                                   # (el gate real-vote vive en el job integration)

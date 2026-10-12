@@ -302,7 +302,14 @@
     "deEstaCasaLinea": "What holds up the page you are reading: they are pipeline apps too, and they can also be walked through.",
     "verLaApp": "See the app",
     "detalleTitulo": "Full card",
-    "volverFichaTecnica": "Back to the technical sheet"
+    "volverFichaTecnica": "Back to the technical sheet",
+    "simulacionTitulo": "The simulation",
+    "simulacionRotulo": "Simulation · not operational",
+    "simulacionMarco": "Simulation of {app}",
+    "simulacionAbrir": "Open the simulation full screen",
+    "simulacionPie": "It is a static package the app's house delivers and CV Viva publishes as is: you browse it here; nothing is downloaded or connected.",
+    "simulacionAbrirAqui": "Open the simulation here",
+    "simulacionPanel": "The simulation is a whole app: it loads when you open it, right here or full screen."
   },
   "fichaTecnica": {
     "eyebrow": "Technical sheet",
@@ -348,6 +355,7 @@
       "decisiones": "recorded decisions"
     },
     "verDetalle": "Open the full card",
+    "verSimulacion": "See the simulation",
     "cierreNota": "Shown here; not handed over.",
     "volverFichaTecnica": "Back to the technical sheet"
   },
