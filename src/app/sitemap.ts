@@ -5,6 +5,7 @@ import { getCv } from "@/lib/content";
 import { SITE_URL } from "@/lib/site";
 import { FRENTE_PROPIO, getFrentes } from "@/lib/vitrina/categorias";
 import { getManifestVitrina } from "@/lib/vitrina/loader";
+import { getSimulaciones } from "@/lib/vitrina/simulaciones-loader";
 import { esFrente, getPiezas } from "@/lib/vitrina/piezas";
 
 /** HOME + /cv + case studies + brochures + vitrina por frentes (data-driven: una ruta nueva entra sola). */
@@ -59,6 +60,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
         alternates: alternatesFor(`/vitrina/apps/${a.slug}${sub}`),
       })),
     ),
+    // Y su simulación, si la tiene (data/simulaciones.yaml, 2026-10-12).
+    ...getSimulaciones().map((s) => ({
+      url: `${SITE_URL}/${locale}/vitrina/apps/${s.slug}/simulacion`,
+      lastModified: new Date(),
+      alternates: alternatesFor(`/vitrina/apps/${s.slug}/simulacion`),
+    })),
     // Cada frente que no es «apps» (que tiene su propia ruta arriba), esté
     // abierto o en preparación — y, si está abierto, TODAS sus piezas. Se lee
     // de `content/<frente>/`: una ficha nueva entra al sitemap sola.

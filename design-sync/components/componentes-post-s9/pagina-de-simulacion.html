@@ -1,0 +1,92 @@
+<!-- @dsCard group="Componentes · post-S9" name="Página de simulación" -->
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Página de simulación — CV Viva</title>
+<style>
+  :root {
+    --paper-0:#fbfaf7; --paper-1:#f5f3ed; --paper-2:#ece9e0; --paper-3:#ddd8cb;
+    --ink-0:#121110; --ink-1:#2a2927; --ink-2:#5e5c55; --ink-3:#9c9a90;
+    --sage:#cfe3cf; --sage-ink:#3c5a3c; --peach:#f2dec4; --peach-ink:#6b4820;
+    --sh-1:0 1px 0 rgba(18,17,16,.04), 0 1px 2px rgba(18,17,16,.04);
+    --display:Fraunces,'Iowan Old Style',Georgia,serif;
+    --sans:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; padding:28px; background:var(--paper-0); color:var(--ink-1);
+    font-family:var(--sans); font-size:15px; line-height:1.6; }
+  h1.card { font-family:var(--display); font-size:26px; font-weight:500; letter-spacing:-.02em;
+    color:var(--ink-0); margin:0 0 6px; }
+  .lede { color:var(--ink-2); margin:0 0 24px; max-width:62ch; }
+  .nota { color:var(--ink-2); font-size:13.5px; max-width:70ch; margin-top:22px;
+    border-left:2px solid var(--paper-3); padding-left:12px; }
+  .rotulo { font-family:var(--mono); font-size:11px; letter-spacing:.08em;
+    text-transform:uppercase; color:var(--ink-2); margin:26px 0 10px; }
+  code { font-family:var(--mono); font-size:12.5px; background:var(--paper-1);
+    border:1px solid var(--paper-2); border-radius:4px; padding:1px 5px; }
+  .pagina { max-width:760px; border:1px dashed var(--paper-3); border-radius:12px; padding:22px; }
+  .miga { font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-2); }
+  .chip { display:inline-block; margin-top:16px; border-radius:99px; padding:4px 12px;
+    background:var(--peach); color:var(--peach-ink); font-family:var(--mono); font-size:11px;
+    letter-spacing:.08em; text-transform:uppercase; }
+  .h1 { font-family:var(--display); font-size:34px; line-height:1.08; font-weight:500;
+    letter-spacing:-.02em; color:var(--ink-0); margin:14px 0 0; }
+  .h1 span { color:var(--ink-2); }
+  .intro { margin:12px 0 0; max-width:62ch; color:var(--ink-1); }
+  .panel { margin-top:24px; min-height:220px; display:flex; flex-direction:column; align-items:center;
+    justify-content:center; gap:16px; border:1px solid var(--paper-2); border-radius:14px;
+    background:var(--paper-1); box-shadow:var(--sh-1); padding:32px 20px; text-align:center; }
+  .panel p { margin:0; max-width:52ch; color:var(--ink-1); }
+  .acciones { display:flex; flex-wrap:wrap; gap:12px; justify-content:center; }
+  .btn { display:inline-flex; align-items:center; gap:8px; min-height:44px; padding:0 22px;
+    border-radius:8px; font-size:15px; font-weight:500; border:0; font-family:var(--sans); }
+  .btn.pri { background:var(--sage); color:var(--sage-ink); box-shadow:var(--sh-1); }
+  .btn.sec { background:var(--paper-0); color:var(--ink-1); border:1px solid var(--paper-3); }
+  .marco { margin-top:24px; height:260px; border:1px solid var(--paper-2); border-radius:14px;
+    background:var(--paper-0); box-shadow:var(--sh-1); display:grid; place-items:center;
+    color:var(--ink-2); font-family:var(--mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; }
+  .completa { display:inline-flex; margin-top:12px; color:var(--sage-ink); font-weight:500; font-size:14px; }
+  .pie { margin:12px 0 0; font-size:13px; color:var(--ink-2); max-width:60ch; }
+</style>
+</head>
+<body>
+<h1 class="card">Página de simulación</h1>
+<p class="lede">Una app privada que su casa entrega como <strong>simulación estática</strong> se
+  muestra en <code>/vitrina/apps/&lt;slug&gt;/simulacion</code> (ADR-029). Arriba es de CV Viva
+  —rótulo, título, nota, regreso—; dentro del marco es de la otra casa y no se edita aquí.</p>
+
+<p class="rotulo">Al llegar · el panel (fachada)</p>
+<div class="pagina">
+  <div class="miga">← Volver a la ficha técnica</div>
+  <span class="chip">Simulación · no operativo</span>
+  <p class="h1">planlang<span>: </span>la simulación</p>
+  <p class="intro">La vitrina de planlang tal como la entrega su casa: el plan, el agente y la
+    brecha de dos demos, caso por caso, y un playground para mover umbrales.</p>
+  <div class="panel">
+    <p>La simulación es una app entera: se carga cuando la abres, aquí mismo o a pantalla completa.</p>
+    <div class="acciones">
+      <button class="btn pri" type="button">Abrir la simulación aquí <span aria-hidden="true">↓</span></button>
+      <a class="btn sec" href="#">Abrir la simulación a pantalla completa <span aria-hidden="true">↗</span></a>
+    </div>
+  </div>
+  <p class="pie">Es un paquete estático que entrega la casa de la app y CV Viva publica tal cual.</p>
+</div>
+
+<p class="rotulo">Al pulsar · el marco</p>
+<div class="pagina">
+  <div class="marco">iframe · /piezas/planlang/es.html · 78 dvh</div>
+  <a class="completa" href="#">Abrir la simulación a pantalla completa ↗</a>
+</div>
+
+<p class="nota"><strong>El marco nace al pulsar.</strong> Cargado de entrada, el paquete (una app
+entera, en el mismo hilo) pasaba el presupuesto de scripts y el de bloqueo: con el panel, la página
+pesa lo que cualquier ficha y el paquete solo para quien lo abre. El botón pulsado desaparece, así
+que <strong>el foco pasa al marco</strong>. Sin JavaScript, la pantalla completa es un enlace al
+<code>.html</code> del paquete y funciona igual. Rótulo en <code>peach</code>; botón principal
+<code>sage</code>; panel <code>paper-1</code>, <code>r-[14px]</code>, <code>sh-1</code>. Esta
+tarjeta es un dibujo: el marco es un rectángulo.</p>
+</body>
+</html>

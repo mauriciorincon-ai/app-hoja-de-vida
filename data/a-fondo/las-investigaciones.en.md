@@ -806,7 +806,7 @@ results feed applications, agents, models, patterns and architecture decisions.
 FORJA can become an applicable method for specifying activities before developing applications
 or agents, and it enters ARKHÉ as a demonstrative case: the specification method as
 architectural core. ARKHÉ organizes concepts and functions that already guide an artificial
-intelligence architecture: it is the architecture that produces the other six lines and the 32
+intelligence architecture: it is the architecture that produces the other six lines and the 38
 pieces of the showcase. The agency spectrum offers a criterion for selecting whether a decision
 needs a dashboard, an alert, a recommendation, an application or a system with the capacity to
 act.

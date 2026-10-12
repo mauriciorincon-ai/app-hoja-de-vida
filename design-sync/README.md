@@ -27,6 +27,7 @@ design-sync/
    │                     Ficha técnica y proceso BPMN (post-S5, ADR-016)
    ├─ componentes-s7/    Muestra de pieza · Hallazgos y galería, con el carrusel (S7, ADR-017; S9)
    ├─ componentes-post-s7/  Índice que baja contigo · Tarjeta de skills (ADR-018)
+   ├─ componentes-post-s9/  Página de simulación (2026-10-12, ADR-029)
    ├─ componentes-casos/    Caso de estudio (2026-09-24, ADR-009 enmendado)
    └─ componentes-mantenimiento/  Página de mantenimiento (2026-09-24)
 ```

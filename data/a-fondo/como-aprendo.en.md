@@ -2,7 +2,7 @@
 slug: como-aprendo
 codigo: AF-19
 titulo: "How I learn"
-resumen: "The argument with a measure: the DP-600 in five months on a Fabric with less than a year on the market, Codex, Antigravity and Claude Code within a month of their release, this site in eight sprints since July 2026, and 32 public pieces with their tests and coverage."
+resumen: "The argument with a measure: the DP-600 in five months on a Fabric with less than a year on the market, Codex, Antigravity and Claude Code within a month of their release, this site in nine sprints since July 2026, and 38 public pieces with their tests and coverage."
 cuando_usar: "Use this when they ask how he learns a new technology, what he does when the job asks for something he has never used, how long it took him to get certified, what he is studying now, or how he documents and proves what he learned."
 estado: aprobado
 ancla: "#certificaciones"
@@ -113,7 +113,7 @@ establish which result will demonstrate that I really learned, the initiative is
 sufficiently defined.
 
 The fourth is opportunity cost. Every new capability competes with products, research and
-responsibilities that are already under way: 32 public pieces to maintain and an institutional AI
+responsibilities that are already under way: 38 public pieces to maintain and an institutional AI
 strategy to lead. That is why learning must respond to an explicit priority and not only to
 technological novelty. Choosing what not to study at a given moment is part of maintaining depth and
 coherence.
@@ -187,7 +187,7 @@ The last few times I learned something from scratch, and how long it took:
 | What                                   | Since          | Time frame                          | Result                                                        |
 | -------------------------------------- | -------------- | ----------------------------------- | ------------------------------------------------------------- |
 | Microsoft Fabric                       | August 2023    | 5 months of study (Jul–Nov 2024)    | DP-600 in December 2024, Vesting platform in operation        |
-| Next.js and the application pipeline   | July 2026      | 8 sprints                           | this site, CV Viva, with its CI, its tests and its ADRs       |
+| Next.js and the application pipeline   | July 2026      | 9 sprints | this site, CV Viva, with its CI, its tests and its ADRs       |
 | AI-103 and AI-300                      | July 2026      | 21 and 10 modules to date           | two tracks in progress, with the AI-103 Super Guide published |
 | Codex, Antigravity and Claude Code     | their release  | close to a month each               | the pipeline with which the 38 pieces are built               |
 
@@ -279,7 +279,7 @@ test or a reusable rule.
 
 Learning advances through short cycles. I build a limited capability, observe its behavior, identify
 the next gap and extend the solution. This sequence reduces the chance of spending weeks on an
-extensive architecture before checking its main assumptions. This site was built that way: 8
+extensive architecture before checking its main assumptions. This site was built that way: 9
 sprints, each with its plan, its log and its summary.
 
 ## Feedback, technical critique and correcting course: familiarity is not mastery

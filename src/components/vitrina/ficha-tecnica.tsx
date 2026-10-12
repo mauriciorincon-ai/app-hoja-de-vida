@@ -96,12 +96,15 @@ export async function FichaTecnica({
   datos,
   locale,
   hrefDetalle,
+  hrefSimulacion,
   listaDeEspera = false,
 }: {
   datos: Datos;
   locale: Locale;
   /** Ruta del detalle, si la pieza lo tiene. */
   hrefDetalle?: string;
+  /** Solo las apps con simulación (`data/simulaciones.yaml`): el cierre la ofrece. */
+  hrefSimulacion?: string;
   /** Solo las apps: el cierre enlaza a `#contacto-vitrina` de la misma página. */
   listaDeEspera?: boolean;
 }) {
@@ -484,6 +487,16 @@ export async function FichaTecnica({
             className="flex min-h-11 items-center gap-2 rounded-md bg-sage px-6 text-[15px] font-medium text-sage-ink shadow-sh-1 transition-[filter] duration-[120ms] hover:brightness-[0.97]"
           >
             {t("verDetalle")}
+            <span aria-hidden="true">→</span>
+          </Link>
+        )}
+        {hrefSimulacion && (
+          <Link
+            href={hrefSimulacion}
+            data-cta="simulacion"
+            className="flex min-h-11 items-center gap-2 rounded-md border border-sage-ink/40 px-6 text-[15px] font-medium text-sage-ink transition-colors duration-[120ms] hover:bg-sage/40"
+          >
+            {t("verSimulacion")}
             <span aria-hidden="true">→</span>
           </Link>
         )}

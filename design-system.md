@@ -501,6 +501,17 @@ cifra `clamp(3.5rem,8vw,4.75rem)`; tres columnas dejaban dos huérfanos.
   CV Viva inyectados (`scripts/tema-cv-viva.mjs`) para que las seis se vean de la misma casa.
   Banner apaisado enmarcado en paper-1, `alt=""` con pie visible que **declara el repintado** —
   una imagen retocada que se presenta como cruda miente igual que una maqueta que finge ser foto.
+- **Página de simulación** (`/vitrina/apps/<slug>/simulacion`, 2026-10-12, ADR-029): para la app
+  privada cuya casa entrega una simulación estática. Contenedor `max-w-6xl`; arriba lo de CV Viva
+  —el regreso a la ficha en mono, el **rótulo «Simulación · no operativo» en `peach`** (chip
+  `r-full`, mono 11 px), el `h1` en Fraunces «<app>: la simulación» y la nota en 16 px `ink-1`—.
+  Debajo, **la fachada**: un panel paper-1, `r-[14px]`, `sh-1`, con una línea y dos acciones —
+  «Abrir la simulación aquí» (botón `sage`, el principal) y «pantalla completa» (borde paper-3,
+  fondo paper-0)—. El marco nace **al pulsar**, a ancho completo, `78dvh` (mínimo 560 px), en
+  la misma caja; el botón desaparece y **el foco pasa al marco**. Sin JavaScript la pantalla
+  completa es un enlace y funciona. Lo de dentro del marco es de la otra casa: ni se repinta ni
+  se edita. En la ficha técnica, el cierre ofrece «Ver la simulación» (borde `sage-ink`, texto
+  `sage-ink`) junto a «Ver la ficha completa».
 
 ## Layout
 

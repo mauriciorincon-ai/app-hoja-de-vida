@@ -1322,6 +1322,122 @@ test.describe("Apertura por lectura — el patrón, no una imitación", () => {
  * carga: las capturas fuera de la pista no se piden hasta deslizar. Data-driven:
  * la pieza sale de `content/tableros/`, la misma fuente que la página.
  */
+// LA SIMULACIÓN DE UNA APP (2026-10-12): la ruta existe solo para las apps de
+// data/simulaciones.yaml, muestra el paquete en un marco del mismo sitio y la
+// ficha la ofrece en su cierre. El resto de las apps no la tiene (404).
+type SimulacionYaml = {
+  simulaciones: {
+    slug: string;
+    carpeta: string;
+    entrada: { es: string; en: string };
+  }[];
+};
+const SIMULACIONES = (
+  parse(readFileSync("data/simulaciones.yaml", "utf8")) as SimulacionYaml
+).simulaciones;
+
+test.describe("Vitrina — la simulación de una app", () => {
+  const sim = SIMULACIONES[0];
+  const sinSimulacion = EXPORTS.find(
+    (e) => !SIMULACIONES.some((s) => s.slug === e.app.slug),
+  );
+
+  test.beforeAll(() => {
+    if (!sim)
+      throw new Error("data/simulaciones.yaml no trae ninguna simulación");
+  });
+
+  for (const l of ["es", "en"] as const) {
+    test(`en ${l}: la página abre el paquete en un marco del mismo sitio al pedirlo, con su rótulo y su regreso`, async ({
+      page,
+    }) => {
+      const r = await page.goto(`/${l}/vitrina/apps/${sim.slug}/simulacion`);
+      expect(r?.status()).toBe(200);
+      await expect(
+        page.locator(`[data-simulacion="${sim.slug}"]`),
+      ).toBeVisible();
+      await expect(page.getByRole("heading", { level: 1 })).toContainText(
+        l === "es" ? "simulación" : "simulation",
+      );
+      // Fachada: el marco NO se carga de entrada (el paquete pesa lo que una
+      // app entera); el panel ofrece abrirlo aquí o a pantalla completa.
+      const marco = page.locator("iframe[data-marco-simulacion]");
+      await expect(marco).toHaveCount(0);
+      const entrada = `/piezas/${sim.carpeta}/${sim.entrada[l]}`;
+      await expect(
+        page.locator(
+          '[data-panel-simulacion] [data-cta="simulacion-completa"]',
+        ),
+      ).toHaveAttribute("href", entrada);
+      await page.locator('[data-cta="abrir-simulacion"]').click();
+      await expect(marco).toHaveAttribute("src", entrada);
+      await expect(marco).toHaveAttribute("title", /.+/);
+      // El botón pulsado desaparece: el foco pasa al marco, no al <body>.
+      await expect(marco).toBeFocused();
+      // El documento del marco cargó de verdad (no un 404 del paquete).
+      const dentro = page.frameLocator("iframe[data-marco-simulacion]");
+      await expect(dentro.locator("h1, h2").first()).toBeVisible();
+      // Abierto, sigue a mano la pantalla completa.
+      await expect(
+        page.locator('[data-cta="simulacion-completa"]'),
+      ).toHaveAttribute("href", entrada);
+      // Y el regreso a la ficha técnica.
+      await page
+        .getByRole("link", {
+          name:
+            l === "es"
+              ? "Volver a la ficha técnica"
+              : "Back to the technical sheet",
+        })
+        .click();
+      await expect(page).toHaveURL(
+        new RegExp(`/${l}/vitrina/apps/${sim.slug}$`),
+      );
+    });
+  }
+
+  test("la ficha de una app con simulación la ofrece en su cierre; una sin ella, no", async ({
+    page,
+  }) => {
+    await page.goto(`/es/vitrina/apps/${sim.slug}`);
+    const cta = page.locator('[data-cta="simulacion"]');
+    await expect(cta).toHaveAttribute(
+      "href",
+      `/es/vitrina/apps/${sim.slug}/simulacion`,
+    );
+    await cta.click();
+    await expect(page).toHaveURL(
+      new RegExp(`/es/vitrina/apps/${sim.slug}/simulacion$`),
+    );
+
+    if (sinSimulacion) {
+      await page.goto(`/es/vitrina/apps/${sinSimulacion.app.slug}`);
+      await expect(page.locator('[data-cta="detalle"]')).toBeVisible();
+      await expect(page.locator('[data-cta="simulacion"]')).toHaveCount(0);
+    }
+  });
+
+  test("una app sin simulación no tiene esa ruta (404)", async ({ page }) => {
+    test.skip(!sinSimulacion, "todas las apps tienen simulación");
+    const r = await page.goto(
+      `/es/vitrina/apps/${sinSimulacion!.app.slug}/simulacion`,
+    );
+    expect(r?.status()).toBe(404);
+  });
+
+  test("sin JavaScript la simulación se alcanza igual: el enlace viaja en el HTML (gate ATS)", async ({
+    request,
+  }) => {
+    const html = await (
+      await request.get(`/es/vitrina/apps/${sim.slug}/simulacion`)
+    ).text();
+    // Sin JavaScript el botón no abre nada, pero el enlace a pantalla completa
+    // sí: viaja en el HTML estático.
+    expect(html).toContain("data-panel-simulacion");
+    expect(html).toContain(`href="/piezas/${sim.carpeta}/${sim.entrada.es}"`);
+  });
+});
+
 test.describe("Vitrina — el carrusel de la galería (Sprint 009)", () => {
   const conGaleria = piezasDe("tableros").filter(
     (p) => (p.galeria?.length ?? 0) > 1,

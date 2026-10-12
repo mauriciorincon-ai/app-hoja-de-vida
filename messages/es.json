@@ -302,7 +302,14 @@
     "deEstaCasaLinea": "Lo que sostiene la página que estás leyendo: también son apps del pipeline, y también se pueden recorrer.",
     "verLaApp": "Ver la app",
     "detalleTitulo": "Ficha completa",
-    "volverFichaTecnica": "Volver a la ficha técnica"
+    "volverFichaTecnica": "Volver a la ficha técnica",
+    "simulacionTitulo": "La simulación",
+    "simulacionRotulo": "Simulación · no operativo",
+    "simulacionMarco": "Simulación de {app}",
+    "simulacionAbrir": "Abrir la simulación a pantalla completa",
+    "simulacionPie": "Es un paquete estático que entrega la casa de la app y CV Viva publica tal cual: se recorre aquí, no se descarga ni se conecta a nada.",
+    "simulacionAbrirAqui": "Abrir la simulación aquí",
+    "simulacionPanel": "La simulación es una app entera: se carga cuando la abres, aquí mismo o a pantalla completa."
   },
   "fichaTecnica": {
     "eyebrow": "Ficha técnica",
@@ -348,6 +355,7 @@
       "decisiones": "decisiones registradas"
     },
     "verDetalle": "Ver la ficha completa",
+    "verSimulacion": "Ver la simulación",
     "cierreNota": "Aquí se muestra; no se entrega.",
     "volverFichaTecnica": "Volver a la ficha técnica"
   },

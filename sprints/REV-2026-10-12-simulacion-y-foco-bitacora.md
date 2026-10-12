@@ -63,3 +63,83 @@ en `--repeat-each`.
 **Documentos:** `design-system.md` (apagados con `aria-disabled`, nunca `disabled`), bundle
 `design-sync/` (hallazgos y galería), manual (el carrusel de «Cómo se ve»), guía v9.26 (k16 →
 `k16b`).
+
+## 2. La página de simulación de planlang (ADR-029)
+
+**El hallazgo de partida** (2026-10-11): el paquete de planlang estaba publicado en
+`/piezas/planlang/` desde el PR #73, pero ninguna página lo enlazaba. La planeadora lo esperaba
+como «página SSG en iframe del mismo sitio» (planlang SPRINT_002, Big-D C21).
+
+**Lo construido:**
+
+- `data/simulaciones.yaml` + `src/lib/vitrina/simulaciones.ts` (motor puro) +
+  `simulaciones-loader.ts`: el build falla si el slug no es una app con export, si el `.html` de
+  entrada no existe en el paquete, si la entrada no es un `.html` relativo o si una app aparece dos
+  veces.
+- Ruta `/vitrina/apps/<slug>/simulacion` (`dynamicParams = false`), con rótulo «Simulación · no
+  operativo», nota, regreso a la ficha y `MarcoDeSimulacion`. En el sitemap.
+- La ficha técnica gana `hrefSimulacion`: «Ver la simulación» en su cierre, solo si la app tiene
+  simulación.
+- Textos ES/EN en `messages/`.
+
+**La decisión que salió de medir.** Con el marco cargado de entrada, Lighthouse local (3 corridas,
+mediana) dio `resource-summary.script.size` **342 KB > 300 KB**: 197 KB de CV Viva (lo de
+cualquier ficha) + 136 KB del paquete, que además corre en el mismo hilo (TBT 142–286 ms contra un
+tope de 200; una ficha da ~30). En vez de subir el presupuesto de esta ruta, el marco pasó a
+**fachada**: un panel con «Abrir la simulación aquí» (monta el `<iframe>` y le da el foco) y
+«pantalla completa» (un enlace al `.html`, que funciona sin JavaScript). Medido otra vez: **198 KB
+de scripts, 0 peticiones al paquete, TBT 12–56 ms, performance 0,95–0,96, accesibilidad 1**, en
+`/es` y `/en`. La ruta entra a `lighthouse-urls.json`.
+
+_Una medición falsa en el camino:_ la segunda corrida volvió a dar 342 KB porque un servidor viejo
+seguía vivo en el puerto 3102 y el nuevo no pudo arrancar. El HTML del build nuevo traía el panel
+y ningún `iframe`; matado el servidor, la medida fue la de arriba.
+
+**Gates y sus rojos:**
+
+| Gate                                                         | Cómo se puso en rojo                                        | Qué dijo                                                                                                                                                                          |
+| ------------------------------------------------------------ | ----------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| unit «el YAML real valida contra los exports y los archivos» | `entrada.en: en-no-existe.html` en `data/simulaciones.yaml` | `Simulaciones inválidas en data/simulaciones.yaml: planlang.entrada.en: public/piezas/planlang/en-no-existe.html no existe`                                                       |
+| unit «un archivo de entrada que no existe rompe la carga»    | comprobación de existencia apagada en el motor              | `expected [Function] to throw an error`                                                                                                                                           |
+| e2e «la simulación de una app» (5 pruebas)                   | contra el build sin la página                               | 4 de 5 rojas: `Expected: 200 · Received: 404` y la ficha sin `data-cta="simulacion"`; «una app sin simulación no tiene esa ruta» pasa también antes (es cierto en los dos mundos) |
+
+Unit del componente (`tests/unit/marco-de-simulacion.test.tsx`): de entrada no hay `iframe`; al
+pulsar nace con su `src` y su `title`, recibe el foco y el botón desaparece.
+
+**Accesibilidad:** axe en las dos rutas y con la simulación abierta, **excluyendo el interior del
+marco** (es de otra casa). Un scan único de siete páginas del paquete (`es.html`, `en.html`,
+`plan`, `agente`, `brecha`, `playground`, `comparar`) dio **0 violaciones**: nada que reportar a
+planlang.
+
+## 3. El corpus del chat: tres cosas que el ADR nuevo destapó
+
+1. **29 decisiones.** El ADR-029 movió la cuenta; el gate de cifras del corpus lo nombró
+   (`dice «28 decisiones» y … son 29`) en `apps-pipeline` (dos secciones). Corregido en ES y EN.
+2. **Nueve sprints, no ocho.** El gate cuenta los sprints cerrados por `-summary.md`, y el S9
+   cerró con `SPRINT_009-cierre.md`: contaba 8 con nueve cerrados (la planeadora lo da por cerrado
+   desde el 2026-10-10). El conteo acepta ahora `-summary` y `-cierre`. La frase de
+   `apps-pipeline` no la juzga el gate (su sección habla de «la fábrica» y el patrón la salta a
+   propósito, para no confundirla con los sprints del pipeline entero), así que se corrigió a mano,
+   junto con las de `como-aprendo` (ES y EN).
+3. **El inglés se había quedado atrás.** El PR #73 alineó el corpus en español a 10 apps, 15
+   agentes y 38 piezas, y diez secciones en inglés siguieron con 6, 13 y 32: el gate de cifras lee
+   solo el español y la paridad ES/EN solo exige que existan las mismas secciones. Además, el
+   título español de `como-aprendo` quedó en «Las 35 piezas» por un error del propio #73 (el total
+   es 38, como ya decía el inglés). **Gate nuevo** `tests/unit/a-fondo-cifras-gemelas.test.ts`:
+   cada sección dice los mismos números en los dos idiomas, con dos excepciones escritas y su
+   razón («más de diez» con letras; «desde el 21», una fecha) que el test pide retirar si dejan de
+   hacer falta.
+
+| Gate                             | Cómo se puso en rojo             | Qué dijo                                                                                                                                                                                                                   |
+| -------------------------------- | -------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `a-fondo-cifras-gemelas.test.ts` | correrlo con el corpus de `main` | 10 secciones, p. ej. `agentes-en-produccion · escala-frente-a-profundidad: solo en español {"15":1} · solo en inglés {"13":1}` y `como-aprendo · evidencia-construido: solo en español {"35":1} · solo en inglés {"38":1}` |
+
+## 4. Verificación
+
+`pnpm vitest run` 1504/1504 · typecheck · lint · build · e2e completo en :3100 en los tres
+proyectos (Chromium, teléfono, WebKit `@webkit`): 507 pasadas, 34 saltadas · axe (rutas nuevas y
+simulación abierta) · Lighthouse local de la ruta nueva (presupuesto y categorías) ·
+`pnpm audit --audit-level high` limpio · barrido de cero enlaces tras el último `git add`.
+
+Capturas: `sprints/REV-2026-10-12-capturas/` (panel y simulación abierta a 1280 y 390, y el cierre
+de la ficha con «Ver la simulación»).
