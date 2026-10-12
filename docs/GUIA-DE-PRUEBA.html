@@ -316,7 +316,7 @@
     <div class="pagina">
       <header>
         <p class="eyebrow">
-          CV Viva · Guía de prueba viva y acumulativa · v9.25 · las cuentas al día + las tiras de las cuatro apps nuevas + el carrusel de apps muestra dónde acaba y se recorre con el pad + el carrusel de apps muestra dónde empieza + el carrusel de apps que gira sin fin + los bloques de apps con sus tarjetas en carrusel + dos categorías de apps y el carrusel de los tableros + proyectos propios desde 2024 + LinkedIn definitivo + las entradas sin librería + el margen de la home, segunda vuelta + el margen de la home + el aire bajo el dominio + las herramientas de hoy + el cupo del chat + el ícono navy y el 404 de la raíz + las cifras en su letra y las citas del chat + rótulo del dominio, idiomas en mantenimiento y el ícono + el modo mantenimiento + el dominio en el PDF + los ocho casos de estudio completos + la cita dice de dónde sale y a dónde lleva + la cita conserva la conversación + el corpus alineado + chat/registro + a fondo v2 (el
+          CV Viva · Guía de prueba viva y acumulativa · v9.26 · el foco al final de la galería + v9.25 · las cuentas al día + las tiras de las cuatro apps nuevas + el carrusel de apps muestra dónde acaba y se recorre con el pad + el carrusel de apps muestra dónde empieza + el carrusel de apps que gira sin fin + los bloques de apps con sus tarjetas en carrusel + dos categorías de apps y el carrusel de los tableros + proyectos propios desde 2024 + LinkedIn definitivo + las entradas sin librería + el margen de la home, segunda vuelta + el margen de la home + el aire bajo el dominio + las herramientas de hoy + el cupo del chat + el ícono navy y el 404 de la raíz + las cifras en su letra y las citas del chat + rótulo del dominio, idiomas en mantenimiento y el ícono + el modo mantenimiento + el dominio en el PDF + los ocho casos de estudio completos + la cita dice de dónde sale y a dónde lleva + la cita conserva la conversación + el corpus alineado + chat/registro + a fondo v2 (el
           detalle) + revisión post-S8 · 2026-09-12
         </p>
         <h1>Guía de prueba</h1>
@@ -382,7 +382,9 @@
           pasa a k15f por la misma razón. <strong>v9.25 no suma</strong>: las
           cuentas quedan al día (10 apps, 15 agentes, 38 fichas), entra la k17
           (sin ⭐) y seis casillas cambian de nombre (k1b, n4b, m1b, g1b, l5b,
-          o12b) para que una marca vieja no cuente.
+          o12b) para que una marca vieja no cuente. <strong>v9.26 no
+          suma</strong>: en la galería de los tableros el botón del extremo ya
+          no pierde el foco; su casilla pasa a k16b.
         </p>
         <div class="url-caja">
           <p class="eyebrow" style="margin: 0 0 6px">URL de prueba</p>
@@ -1478,20 +1480,23 @@
               ><span class="minimo">⭐ mínimo</span></label
             >
           </li>
-          <li data-origen="nuevo" data-minimo>
-            <input type="checkbox" id="k16" /><label for="k16"
+          <li data-origen="mejorado" data-minimo>
+            <input type="checkbox" id="k16b" /><label for="k16b"
               >⭐ <strong>El carrusel de «Cómo se ve»</strong>, en
               <code>/es/vitrina/tableros/banca-colombiana</code>, en
               <strong>escritorio y en tu teléfono real</strong> (datos móviles).
               Las seis capturas se recorren a lo ancho: desliza con el dedo y
               suelta (cada captura se acomoda sola), y prueba los botones
               <strong>←</strong> y <strong>→</strong>; el indicador cuenta
-              «1 de 6», «2 de 6»… y el botón de cada extremo se deshabilita. Con
-              el teclado: Tab llega a las capturas y luego a los botones; Enter
-              avanza. Nada se mueve solo. ¿Se ve como se usa el tablero, pantalla
+              «1 de 6», «2 de 6»… y el botón de cada extremo se ve atenuado y no
+              hace nada. Con el teclado: Tab llega a las capturas y luego a los
+              botones; Enter avanza. <strong>Llega al final con Enter</strong>: el
+              foco se queda en el botón → (en Safari, antes, saltaba al principio
+              de la página). Nada se mueve solo. ¿Se ve como se usa el tablero, pantalla
               a pantalla, y los botones se alcanzan cómodos con el pulgar?
               <span class="origen origen-nuevo">Nuevo · S9</span
-              ><span class="minimo">⭐ mínimo</span></label
+              ><span class="minimo">⭐ mínimo</span><span class="origen origen-mejorado">Mejorado · post-S9</span
+              ></label
             >
           </li>
         </ul>
@@ -2228,6 +2233,18 @@
         <details class="chica">
           <summary>Historial de la guía</summary>
           <ul>
+            <li>
+              <strong>v9.26 · el foco al final de la galería · 2026-10-12:</strong>
+              se paga la deuda M1 del Sprint 009. En «Cómo se ve» de los
+              tableros, el botón de cada extremo pasa de deshabilitado a
+              <em>apagado</em> (atenuado, se anuncia como no disponible y no
+              hace nada) y conserva el foco: quien llegaba al final con el
+              teclado en Safari perdía el foco al principio de la página. La
+              k16 ⭐ lo pide y su casilla pasa a <code>k16b</code>. Un e2e nuevo
+              corre en el motor de Safari (proyecto <code>webkit</code>, solo
+              las pruebas <code>@webkit</code>). Ninguna prueba eliminada.
+              Prefijo de casillas <code>s9</code>.
+            </li>
             <li>
               <strong>v9.25 · las cuentas al día · 2026-10-11:</strong> el PR de
               contenido #73 llevó la vitrina a 10 apps, 15 agentes y 38 fichas y

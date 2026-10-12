@@ -469,8 +469,10 @@ cifra `clamp(3.5rem,8vw,4.75rem)`; tres columnas dejaban dos huérfanos.
   `overflow-x-auto`, una captura por pantalla (`snap-start`, `snap-always`), cada una en `<figure>`
   con marco paper-1, `r-[12px]` y `sh-1`, y `figcaption` mono «Pantalla N de T» + el pie. Debajo,
   una **fila de control**: botón ← y botón → de 44 px (`size-11`, `r-full`, borde paper-3, fondo
-  paper-0, `ink-1`; hover paper-1 + `ink-0`; **deshabilitados en los extremos**, a 40 % de
-  opacidad) y, en medio, el indicador «1 de 6» en mono 11 px `ink-2`. Patrón **APG de carrusel**:
+  paper-0, `ink-1`; hover paper-1 + `ink-0`; **apagados en los extremos** con `aria-disabled`, a
+  40 % de opacidad y sin hover —**nunca `disabled`**: el botón que tiene el foco al llegar al final
+  lo perdería, y WebKit (Safari) lo manda al `<body>`; apagado conserva el foco, se anuncia como no
+  disponible y no hace nada; deuda M1 del S9, pagada el 2026-10-12—) y, en medio, el indicador «1 de 6» en mono 11 px `ink-2`. Patrón **APG de carrusel**:
   región con `aria-roledescription="carousel"` y nombre; cada captura es un grupo `slide` con su
   «n de N»; el indicador es `role="status" aria-live="polite"`; la pista recibe foco (`tabindex=0`)
   y las flechas la recorren. **Nada se mueve solo** —ni autoplay ni rotación—. Con

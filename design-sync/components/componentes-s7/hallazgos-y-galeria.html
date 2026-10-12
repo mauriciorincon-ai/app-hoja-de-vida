@@ -177,7 +177,7 @@
         font-size: 16px;
         cursor: pointer;
       }
-      .ctl button:disabled {
+      .ctl button[aria-disabled="true"] {
         opacity: 0.4;
         cursor: not-allowed;
       }
@@ -354,7 +354,7 @@
         </div>
       </div>
       <div class="ctl">
-        <button type="button" aria-label="Pantalla anterior" disabled>←</button>
+        <button type="button" aria-label="Pantalla anterior" aria-disabled="true">←</button>
         <p role="status" aria-live="polite">1 de 3</p>
         <button type="button" aria-label="Pantalla siguiente">→</button>
       </div>
@@ -377,7 +377,9 @@
     <p class="nota">
       <strong>El carrusel es nativo y no se mueve solo.</strong> Pista con
       <code>scroll-snap</code>, una captura por pantalla, botones ← y → de 44 px
-      (deshabilitados en los extremos) e indicador «n de N» en una región
+      (apagados en los extremos con <code>aria-disabled</code>, nunca
+      <code>disabled</code>: así el que tiene el foco no lo pierde) e indicador
+      «n de N» en una región
       <code>status</code> educada; patrón APG, con foco en la pista. Con
       «reducir movimiento» el desplazamiento no se anima. Con una sola captura
       no hay controles. Esta tarjeta es un dibujo: aquí los botones no se mueven.

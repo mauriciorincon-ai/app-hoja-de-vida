@@ -15,12 +15,21 @@ import { usePrefiereQuieto } from "@/components/motion/use-prefiere-quieto";
  * **Patrón APG de carrusel** (https://www.w3.org/WAI/ARIA/apg/patterns/carousel/):
  *  · región con `aria-roledescription="carousel"` y nombre;
  *  · cada captura es un grupo `slide` con su «n de N»;
- *  · los botones son `<button>` nativos con nombre y se deshabilitan en los
- *    extremos; **sin rotación automática** (nada se mueve solo);
+ *  · los botones son `<button>` nativos con nombre y en los extremos quedan
+ *    APAGADOS con `aria-disabled`, no con `disabled`; **sin rotación
+ *    automática** (nada se mueve solo);
  *  · el indicador es una región `status` educada: lo que se ve se anuncia;
  *  · la pista recibe foco cuando hay más de una captura —un contenedor con
  *    scroll tiene que ser alcanzable con el teclado— y las flechas la recorren
  *    de forma nativa.
+ *
+ * **Apagado, no deshabilitado (deuda M1 del S9, 2026-10-12).** Con `disabled`,
+ * el botón del extremo dejaba de ser enfocable justo cuando tenía el foco —quien
+ * llega al final pulsando «siguiente» con el teclado lo tiene ahí—, y WebKit
+ * (Safari) lo mandaba al <body>: el siguiente Tab arrancaba desde el principio
+ * de la página. Con `aria-disabled` el botón conserva el foco, se anuncia como
+ * no disponible, se ve atenuado igual que antes y pulsarlo no hace nada. Lo
+ * vigila un e2e `@webkit` que corre en el motor de Safari.
  *
  * **Una captura:** sin botones, sin indicador, sin foco: solo la imagen y su
  * pie, como cualquier figura.
@@ -99,8 +108,11 @@ export function GaleriaCarrusel({
     setActivo(i);
   }
 
+  const enInicio = activo === 0;
+  const enFinal = activo === total - 1;
+
   const boton =
-    "inline-flex size-11 items-center justify-center rounded-full border border-paper-3 bg-paper-0 text-ink-1 transition-colors duration-[120ms] hover:bg-paper-1 hover:text-ink-0 disabled:cursor-not-allowed disabled:opacity-40 motion-reduce:transition-none";
+    "inline-flex size-11 items-center justify-center rounded-full border border-paper-3 bg-paper-0 text-ink-1 transition-colors duration-[120ms] hover:bg-paper-1 hover:text-ink-0 aria-disabled:cursor-not-allowed aria-disabled:opacity-40 aria-disabled:hover:bg-paper-0 aria-disabled:hover:text-ink-1 motion-reduce:transition-none";
 
   return (
     <section
@@ -156,8 +168,10 @@ export function GaleriaCarrusel({
           <button
             type="button"
             aria-label={etiquetas.anterior}
-            disabled={activo === 0}
-            onClick={() => ir(activo - 1)}
+            aria-disabled={enInicio || undefined}
+            onClick={() => {
+              if (!enInicio) ir(activo - 1);
+            }}
             className={boton}
           >
             <span aria-hidden="true">←</span>
@@ -173,8 +187,10 @@ export function GaleriaCarrusel({
           <button
             type="button"
             aria-label={etiquetas.siguiente}
-            disabled={activo === total - 1}
-            onClick={() => ir(activo + 1)}
+            aria-disabled={enFinal || undefined}
+            onClick={() => {
+              if (!enFinal) ir(activo + 1);
+            }}
             className={boton}
           >
             <span aria-hidden="true">→</span>

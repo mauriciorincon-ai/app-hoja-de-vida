@@ -560,8 +560,10 @@ el mensaje te llega al correo.
   los tableros (abajo) no cambia.
 - **El carrusel de «Cómo se ve».** La galería de cada ficha de tablero (de 1 a 12 capturas, la que
   declara `galeria` en su ficha) es un **carrusel horizontal**: se desliza con el dedo, con los
-  botones ← y → o con el teclado, y un indicador dice «1 de 6». Nada se mueve solo. Con **una sola
-  captura** no hay botones ni indicador. No hay que hacer nada para que una ficha nueva lo tenga:
+  botones ← y → o con el teclado, y un indicador dice «1 de 6». Nada se mueve solo. En cada extremo
+  el botón que ya no lleva a ningún lado se ve **atenuado** y no hace nada, pero **conserva el foco**:
+  quien llega al final con el teclado sigue en el carrusel (antes, en Safari, el foco saltaba al
+  principio de la página). Con **una sola captura** no hay botones ni indicador. No hay que hacer nada para que una ficha nueva lo tenga:
   la galería de la ficha se convierte sola en carrusel.
 
 ### El menú del encabezado · desde Sprint 001 · reorganizado 2026-09-05

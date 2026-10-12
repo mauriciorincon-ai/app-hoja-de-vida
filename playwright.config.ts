@@ -24,6 +24,11 @@ export default defineConfig({
   projects: [
     { name: "chromium", use: { ...devices["Desktop Chrome"] } },
     { name: "mobile", use: { ...devices["Pixel 7"] } },
+    // WebKit (el motor de Safari) SOLO para las pruebas marcadas `@webkit`:
+    // lo que se comporta distinto ahí y no en Chromium. Nació con la deuda M1
+    // del S9 (el foco que WebKit le quita a un botón que se deshabilita). No
+    // corre la suite entera: cuesta una instalación y unos segundos, no 4 min.
+    { name: "webkit", use: { ...devices["Desktop Safari"] }, grep: /@webkit/ },
   ],
   webServer: {
     // Build de producción: los e2e validan el HTML estático real (gate ATS/SEO)

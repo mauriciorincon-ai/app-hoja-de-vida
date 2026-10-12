@@ -1404,13 +1404,66 @@ test.describe("Vitrina — el carrusel de la galería (Sprint 009)", () => {
     await carrusel.scrollIntoViewIfNeeded();
     await carrusel.locator("[data-pista]").focus();
     await expect(carrusel.locator("[data-pista]")).toBeFocused();
-    // «Anterior» está deshabilitado: el siguiente Tab cae en «siguiente».
+    // «Anterior» está apagado (aria-disabled) pero sigue en el orden del
+    // teclado: un Tab llega a él y el siguiente a «siguiente».
     await page.keyboard.press("Tab");
     await expect(
-      carrusel.getByRole("button", { name: "Pantalla siguiente" }),
+      carrusel.getByRole("button", { name: "Pantalla anterior" }),
     ).toBeFocused();
+    await page.keyboard.press("Tab");
+    const siguiente = carrusel.getByRole("button", {
+      name: "Pantalla siguiente",
+    });
+    await expect(siguiente).toBeFocused();
     await page.keyboard.press("Enter");
     await expect(carrusel.locator("[data-indicador]")).toHaveText(`2 de ${N}`);
+  });
+
+  // Deuda M1 del S9 (2026-10-12). Con `disabled`, el botón del extremo dejaba
+  // de ser enfocable justo cuando tenía el foco: en WebKit (Safari, el del Mac
+  // y el iPhone) el foco caía al <body> y el siguiente Tab arrancaba desde el
+  // principio de la página; Chromium y Firefox lo conservaban, por eso la
+  // CI —solo Chromium— nunca lo vio. Ahora el extremo queda APAGADO
+  // (`aria-disabled`): sigue enfocable y pulsarlo no hace nada. La etiqueta
+  // @webkit la corre también en el proyecto webkit de playwright.config.
+  test("al llegar al final con el teclado, el foco se queda en «siguiente» @webkit", async ({
+    page,
+  }, testInfo) => {
+    test.skip(
+      testInfo.project.name === "mobile",
+      "el teclado es de los proyectos de escritorio",
+    );
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto(ruta());
+    const carrusel = page.locator("[data-carrusel]");
+    await carrusel.scrollIntoViewIfNeeded();
+    const indicador = carrusel.locator("[data-indicador]");
+    const siguiente = carrusel.getByRole("button", {
+      name: "Pantalla siguiente",
+    });
+    await siguiente.focus();
+    await expect(siguiente).toBeFocused();
+    // Cada Enter espera a que su captura llegue a la vista: a mitad del
+    // desplazamiento suave el indicador pasa por las intermedias, y un Enter
+    // en ese instante arrancaría desde una de ellas (no es M1, es el ritmo).
+    for (let i = 2; i <= N; i++) {
+      await page.keyboard.press("Enter");
+      await expect(indicador).toHaveText(`${i} de ${N}`);
+      await expect(carrusel.locator(`[data-captura="${i}"]`)).toBeInViewport({
+        ratio: 0.6,
+      });
+    }
+    await expect(indicador).toHaveText(`${N} de ${N}`);
+    await expect(siguiente).toBeDisabled();
+    await expect(siguiente).toBeFocused();
+    // Pulsarlo apagado no mueve nada…
+    await page.keyboard.press("Enter");
+    await expect(indicador).toHaveText(`${N} de ${N}`);
+    // … y Shift+Tab sigue DENTRO del carrusel, no al principio de la página.
+    // (Chromium va a «anterior»; WebKit, como Safari por defecto, no pone los
+    // botones en el recorrido del Tab y va a la pista: los dos se quedan aquí.)
+    await page.keyboard.press("Shift+Tab");
+    await expect(carrusel.locator(":focus")).toHaveCount(1);
   });
 
   test("con «reducir movimiento» el carrusel funciona igual, sin animar", async ({

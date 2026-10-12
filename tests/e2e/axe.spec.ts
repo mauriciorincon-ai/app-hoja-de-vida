@@ -184,10 +184,22 @@ test("axe limpio en /es/vitrina/apps con los carruseles en el final", async ({
   const carruseles = page.locator("[data-carrusel-apps]");
   for (let c = 0; c < (await carruseles.count()); c++) {
     const carrusel = carruseles.nth(c);
-    const max = Number(await carrusel.getAttribute("data-max"));
-    for (let paso = 0; paso < max; paso++)
-      await carrusel.getByRole("button", { name: "Tarjeta siguiente" }).click();
-    await expect(carrusel).toHaveAttribute("data-i", String(max));
+    // `data-max` se MIDE en el cliente (cuántas tarjetas caben): vale N − 1
+    // hasta la primera medida y luego N − 2 a dos por vista. Leerlo de entrada
+    // y pulsar esa cantidad de veces se pasaba del final con 7 apps y el
+    // barrido volvía al inicio (2026-10-12). Se avanza de a un paso hasta que
+    // el carrusel marque su final, y entonces se compara con el max ya medido.
+    await expect(async () => {
+      if ((await carrusel.locator("[data-final]").count()) === 0)
+        await carrusel
+          .getByRole("button", { name: "Tarjeta siguiente" })
+          .click();
+      await expect(carrusel.locator("[data-final]")).toHaveCount(1, {
+        timeout: 1_000,
+      });
+    }).toPass({ timeout: 20_000 });
+    const max = await carrusel.getAttribute("data-max");
+    await expect(carrusel).toHaveAttribute("data-i", max ?? "");
   }
   await expect(page.locator("[data-clon]")).toHaveCount(0);
   const results = await new AxeBuilder({ page })
