@@ -93,7 +93,7 @@ const ANCLAS: Ancla[] = [
   },
   {
     doc: "guía",
-    nombre: "apps con roadmap (g1b)",
+    nombre: "apps con roadmap (g1c)",
     patron:
       /Recorre las (\S+?)(?: que lo tienen)?: cada una tiene su propio grupo/g,
     esperado: [APPS_CON_ROADMAP],
