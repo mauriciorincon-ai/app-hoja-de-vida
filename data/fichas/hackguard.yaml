@@ -15,3 +15,83 @@ nunca:
   - "Prueba infraestructura de terceros."
   - "Certifica cumplimiento: da evidencia control por control, no un sello."
   - "Decide un veredicto sin tu confirmación."
+# Roadmap votable (G-Plan del S9, P3, 2026-10-13): los 11 `[roadmap]` de la VISION sin «severidad sugerida por el
+# extractor» (sale por el plan v2 de los agentes, D3; G-Plan del S8, P3). Los `id` son estables: cambiarlos reinicia su conteo.
+roadmap:
+  - id: diferencias-entre-catalogos
+    titulo:
+      es: "Diferencias entre dos versiones del catálogo"
+      en: "Differences between two catalog versions"
+    descripcion:
+      es: "Ver qué pruebas entraron, cambiaron o se retiraron entre dos instantáneas congeladas, cada una con su huella."
+      en: "See which tests came in, changed or were retired between two frozen snapshots, each with its fingerprint."
+  - id: activo-desde-ficha
+    titulo:
+      es: "Importar un activo desde su ficha técnica"
+      en: "Import an asset from its technical sheet"
+    descripcion:
+      es: "Describir tu app como activo leyendo su ficha técnica, en vez de llenar el perfil a mano."
+      en: "Describe your app as an asset by reading its technical sheet instead of filling in the profile by hand."
+  - id: historial-del-activo
+    titulo:
+      es: "Historial del perfil de un activo"
+      en: "Asset profile history"
+    descripcion:
+      es: "Cada cambio del perfil queda registrado y el plan se marca como desactualizado cuando el activo cambia."
+      en: "Every profile change is recorded, and the plan is flagged as out of date when the asset changes."
+  - id: re-planeacion
+    titulo:
+      es: "Re-planeación con diferencias"
+      en: "Re-planning with differences"
+    descripcion:
+      es: "Volver a planear un activo y ver qué pruebas entran, cuáles salen y por qué."
+      en: "Plan an asset again and see which tests come in, which go out and why."
+  - id: hallazgos-reabiertos
+    titulo:
+      es: "Hallazgos reabiertos"
+      en: "Reopened findings"
+    descripcion:
+      es: "Un hallazgo cerrado se reabre solo cuando una re-prueba posterior vuelve a fallar, con la cadena completa a la vista."
+      en: "A closed finding reopens when a later retest fails again, with the whole chain in view."
+  - id: tendencia-entre-informes
+    titulo:
+      es: "Tendencia entre informes"
+      en: "Trend across reports"
+    descripcion:
+      es: "Cómo evolucionan la cobertura, las fallas y los vencidos de un informe al siguiente."
+      en: "How coverage, failures and overdue findings evolve from one report to the next."
+  - id: adaptador-promptfoo
+    titulo:
+      es: "Adaptador para promptfoo"
+      en: "promptfoo adapter"
+    descripcion:
+      es: "Que los reportes de promptfoo entren como lotes de evidencia, igual que hoy entran los de Garak y ZAP."
+      en: "Let promptfoo reports come in as evidence batches, just as Garak and ZAP reports do today."
+  - id: exportar-defectdojo
+    titulo:
+      es: "Exportar a DefectDojo"
+      en: "Export to DefectDojo"
+    descripcion:
+      es: "Llevar los hallazgos a un formato que DefectDojo lea, sin perder su control ni su severidad."
+      en: "Take findings to a format DefectDojo can read, keeping their control and their severity."
+  - id: adaptadores-pyrit-inspect
+    titulo:
+      es: "Adaptadores para PyRIT e Inspect"
+      en: "PyRIT and Inspect adapters"
+    descripcion:
+      es: "Dos herramientas abiertas más para pruebas de modelos y agentes, con sus resultados como evidencia."
+      en: "Two more open tools for testing models and agents, with their results as evidence."
+  - id: ejecutor-opcional
+    titulo:
+      es: "Un ejecutor opcional de pruebas"
+      en: "An optional test runner"
+    descripcion:
+      es: "Correr pruebas desde la herramienta, bajo las mismas reglas: activo propio, alcance autorizado y nunca una carga guardada."
+      en: "Run tests from the tool under the same rules: your own asset, authorized scope and never a stored payload."
+  - id: controles-propios
+    titulo:
+      es: "Controles propios de una organización"
+      en: "An organization's own controls"
+    descripcion:
+      es: "Una capa de controles de tu organización, superpuesta a la de ISO/IEC 42001 sin tocarla."
+      en: "A layer of your organization's own controls on top of ISO/IEC 42001, without touching it."
