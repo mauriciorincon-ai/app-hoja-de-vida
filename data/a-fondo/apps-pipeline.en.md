@@ -6,7 +6,7 @@ resumen: "The AI-APPs pipeline: ten sister applications plus CV Viva, 15 agents,
 cuando_usar: "Use this when they ask what he has built on his own outside of work, how many applications he has published, whether he has public code, how his build pipeline works with Next.js, automated tests and CI, and what each of the ten showcase apps demonstrates."
 estado: aprobado
 ancla: "#vitrina"
-actualizado: 2026-09-27
+actualizado: 2026-10-14
 preguntas_de_prueba:
   - "What applications is Henry building?"
   - "Why does he build in public?"
@@ -26,13 +26,14 @@ HOW THIS FILE IS WRITTEN
 - Normal prose, in the first person, in paragraphs.
 - Every subsection starts with a `##` title followed by a
   `<!-- seccion: id -->` comment. Those are the ONLY 2 marks.
+
 - `estado: borrador` → the chat does NOT index it and no English twin is required.
   `estado: aprobado` → the chat indexes it and requires the complete `.en.md` twin,
   subsection by subsection.
 - No figure, date or achievement without a source. Whatever is missing goes as
   a CONFIRMAR marker in square brackets stating what is missing, never as plausible filler.
 - Full guide: docs/MANUAL-DE-USO.md → "How to feed the in-depth documents".
--->
+  -->
 
 <!-- The S3 skeleton pointed at "#apps"; that HOME section was removed in the
      post-S7 review and today what the HOME shows of what has been built is the
@@ -107,14 +108,14 @@ The pipeline produces four main families of assets: applications, agents, resear
 
 The ten applications are Anonimizador Velo, Dash Agent, Probeta DS, Habla San, Innmobiliaria and Nutrikids, plus four in their initial stage —planlang, AngelGhost, Big-D and HackGuard—, plus CV Viva, which is this very site and not a piece of the storefront. Each answers a different promise, but all must pass the same criterion: turning a need into a functional, documented and verifiable experience, not only into a convincing interface or a technical demo.
 
-| Application       | What it demonstrates                                                                                                                                                  |
-| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Anonimizador Velo**          | anonymizing and recovering 500,000 rows without the file leaving the browser, with zero network calls carrying data                                                   |
-| **Dash Agent** | what context your agents keep about you and what they cost you, on your machine and without a single network call; it withdrew a feature of 83 suggestions that did not help |
-| **Probeta DS**    | Python, Pandas and scikit-learn in the browser with Pyodide (WebAssembly), with a verdict that says "does not beat" when it does not beat                              |
-| **Habla San**  | 50 capsules and 16 milestones to practice speech as a family, with 169 end-to-end tests and the child's voice never recorded                                          |
-| **Innmobiliaria** | business flows with real validation —the certificate is seen and never stored— and 98% coverage in its engine                                                         |
-| **Nutrikids**    | a calculation engine with 99.5% coverage and a daily log that never leaves the phone                                                                                  |
+| Application           | What it demonstrates                                                                                                                                                         |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Anonimizador Velo** | anonymizing and recovering 500,000 rows without the file leaving the browser, with zero network calls carrying data                                                          |
+| **Dash Agent**        | what context your agents keep about you and what they cost you, on your machine and without a single network call; it withdrew a feature of 83 suggestions that did not help |
+| **Probeta DS**        | Python, Pandas and scikit-learn in the browser with Pyodide (WebAssembly), with a verdict that says "does not beat" when it does not beat                                    |
+| **Habla San**         | 50 capsules and 16 milestones to practice speech as a family, with 169 end-to-end tests and the child's voice never recorded                                                 |
+| **Innmobiliaria**     | business flows with real validation —the certificate is seen and never stored— and 98% coverage in its engine                                                                |
+| **Nutrikids**         | a calculation engine with 99.5% coverage and a daily log that never leaves the phone                                                                                         |
 
 The six in the table reached their MVP and are in sustained operation —if they are on the site it is because they reached that condition—, and all keep evolving permanently. The other four —planlang, AngelGhost, Big-D and HackGuard— are in their initial stage: cycle H1, version 0.1.0 and unsealed. Habla San is the most advanced: the only one sealed, since August 2026, and in use by the family it was built for.
 
@@ -124,14 +125,14 @@ The six in the table reached their MVP and are in sustained operation —if they
 
 Each application publishes its brochure with figures that declare their source, and this table gathers them as they stood in their August 2026 exports:
 
-| Application       | Features | Screens | Unit and integration tests | End-to-end tests | Line coverage | ADRs |
-| ----------------- | -------: | ------: | -------------------------: | ---------------: | ------------: | ---: |
-| **Anonimizador Velo**          |       14 |       5 |                        740 |              153 |        96.17% |    8 |
-| **Dash Agent** |       12 |       8 |                        693 |                — |         97.5% |   13 |
-| **Probeta DS**    |       33 |       5 |                        267 |               24 |        90.69% |    8 |
-| **Habla San**  |       24 |      10 |                        261 |              169 |        94.02% |   14 |
-| **Innmobiliaria** |       13 |      11 |                        172 |               76 |        98.31% |    6 |
-| **Nutrikids**    |       19 |       8 |                        214 |               94 |        99.52% |    7 |
+| Application           | Features | Screens | Unit and integration tests | End-to-end tests | Line coverage | ADRs |
+| --------------------- | -------: | ------: | -------------------------: | ---------------: | ------------: | ---: |
+| **Anonimizador Velo** |       14 |       5 |                        740 |              153 |        96.17% |    8 |
+| **Dash Agent**        |       12 |       8 |                        693 |                — |         97.5% |   13 |
+| **Probeta DS**        |       33 |       5 |                        267 |               24 |        90.69% |    8 |
+| **Habla San**         |       24 |      10 |                        261 |              169 |        94.02% |   14 |
+| **Innmobiliaria**     |       13 |      11 |                        172 |               76 |        98.31% |    6 |
+| **Nutrikids**         |       19 |       8 |                        214 |               94 |        99.52% |    7 |
 
 The monthly operating cost of the six in the table is US$0, calculated as the sum of the contracted services: hosting on a free plan, no servers of our own and, when there is an AI provider, within its free quota. Four of the six in the table do not use artificial intelligence at all —Anonimizador Velo, Dash Agent, Habla San and Innmobiliaria, which has it at zero models by product rule—, and their sheets declare it as a rule, not as an absence; Probeta DS and Nutrikids use it in a single feature, with a deterministic fallback and switchable by environment variable.
 
@@ -141,7 +142,7 @@ These figures are a dated snapshot, they are refreshed from each app's repositor
 
 <!-- seccion: apps-en-etapa-inicial -->
 
-The remaining four are in their initial stage —cycle H1, version 0.1.0, unsealed— and publish their own sourced figures in their brochure, which is why they do not enter the table above. planlang (three sprints closed): you write an agent's plan as a contract and a verifier without AI measures, case by case, the gap between what the plan promised and what the agent did; 19 features, 16 ADRs, 16 criteria met, 1,204 crossed decisions over 220 synthetic cases, zero model calls in the showcase and a cost of US$5.21 per run. AngelGhost (five sprints): a window on your Mac that the client does not see even when you share your screen, bringing you your own experience at the right moment of the meeting; 20 features, 1,475 automated tests, 21 ADRs and zero bytes leaving the machine. Big-D (three sprints): an open, reproducible planner for choosing between data platforms with dated evidence; 8 features, 3 platforms and 63 components in the atlas, 33 dated pieces of evidence, 2,614 automated tests and 98.55% coverage. HackGuard (nine sprints): a living catalog of security tests that tells you what you tested, what you expected, what you got and what you are missing; 18 features, 38 tests in the catalog crossed with 38 ISO/IEC 42001 controls, 4,390 automated tests and 97.54% coverage. All four cost US$0 a month to operate.
+The remaining four are in their initial stage —cycle H1, version 0.1.0, unsealed— and publish their own sourced figures in their brochure, which is why they do not enter the table above. planlang (seven sprints closed): you write an agent's plan as a contract and a verifier without AI measures, case by case, the gap between what the plan promised and what the agent did; 19 features, 16 ADRs, 16 criteria met, 1,204 crossed decisions over 220 synthetic cases, zero model calls in the showcase and a cost of US$5.21 per run. AngelGhost (five sprints): a window on your Mac that the client does not see even when you share your screen, bringing you your own experience at the right moment of the meeting; 20 features, 1,475 automated tests, 21 ADRs and zero bytes leaving the machine. Big-D (three sprints): an open, reproducible planner for choosing between data platforms with dated evidence; 8 features, 3 platforms and 63 components in the atlas, 33 dated pieces of evidence, 2,614 automated tests and 98.55% coverage. HackGuard (nine sprints): a living catalog of security tests that tells you what you tested, what you expected, what you got and what you are missing; 18 features, 38 tests in the catalog crossed with 38 ISO/IEC 42001 controls, 4,390 automated tests and 97.54% coverage. All four cost US$0 a month to operate.
 
 ## Fifteen agents, seven research lines and six dashboards
 
