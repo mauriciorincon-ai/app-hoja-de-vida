@@ -6,7 +6,7 @@ resumen: "El pipeline AI-APPs: diez aplicaciones hermanas más CV Viva, 15 agent
 cuando_usar: "Úsalo cuando pregunten qué ha construido por su cuenta fuera del trabajo, cuántas aplicaciones ha publicado, si tiene código público, cómo es su pipeline de construcción con Next.js, pruebas automatizadas y CI, y qué demuestra cada una de las diez apps de la vitrina."
 estado: aprobado
 ancla: "#vitrina"
-actualizado: 2026-09-27
+actualizado: 2026-10-14
 preguntas_de_prueba:
   - "¿Qué aplicaciones está construyendo Henry?"
   - "¿Por qué construye en público?"
@@ -26,13 +26,14 @@ CÓMO SE ESCRIBE ESTE ARCHIVO
 - Prosa normal, en primera persona, en párrafos.
 - Cada subsección empieza con un título `##` seguido de un comentario
   `<!-- seccion: id -->`. Esas son las ÚNICAS 2 marcas.
+
 - `estado: borrador` → el chat NO lo indexa y no se le exige gemelo en inglés.
   `estado: aprobado` → el chat lo indexa y exige el gemelo `.en.md` completo,
   subsección por subsección.
 - Ninguna cifra, fecha ni logro sin fuente. Lo que falte va como
   `[CONFIRMAR: qué falta]`, jamás relleno plausible.
 - Guía completa: docs/MANUAL-DE-USO.md → «Cómo alimentar el a fondo».
--->
+  -->
 
 <!-- El esqueleto del S3 apuntaba a «#apps»; esa sección de la HOME se retiró en
      la revisión post-S7 y hoy lo que la HOME enseña de lo construido es la
@@ -107,14 +108,14 @@ El pipeline produce cuatro familias principales de activos: aplicaciones, agente
 
 Las diez aplicaciones son Anonimizador Velo, Dash Agent, Probeta DS, Habla San, Innmobiliaria y Nutrikids, más cuatro en su etapa inicial —planlang, AngelGhost, Big-D y HackGuard—, más CV Viva, que es este mismo sitio y no una pieza del escaparate. Cada una responde a una promesa diferente, pero todas deben superar el mismo criterio: convertir una necesidad en una experiencia funcional, documentada y verificable, no únicamente en una interfaz convincente o una demostración técnica.
 
-| Aplicación        | Qué demuestra                                                                                                                                              |
-| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Anonimizador Velo**          | anonimizar y recuperar 500.000 filas sin que el archivo salga del navegador, con cero llamadas de red que lleven datos                                     |
-| **Dash Agent** | qué contexto conservan tus agentes sobre ti y qué te cuestan, en tu máquina y sin una llamada de red; retiró una función de 83 sugerencias que no ayudaban |
-| **Probeta DS**    | Python, Pandas y scikit-learn en el navegador con Pyodide (WebAssembly), con un veredicto que dice «no supera» cuando no supera                            |
-| **Habla San**  | 50 cápsulas y 16 hitos para practicar el habla en familia, con 169 pruebas de extremo a extremo y la voz del niño jamás grabada                            |
-| **Innmobiliaria** | flujos de negocio con validación real —el certificado se ve y nunca se almacena— y 98 % de cobertura en su motor                                           |
-| **Nutrikids**    | un motor de cálculo con 99,5 % de cobertura y un registro del día que jamás sale del teléfono                                                              |
+| Aplicación            | Qué demuestra                                                                                                                                              |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Anonimizador Velo** | anonimizar y recuperar 500.000 filas sin que el archivo salga del navegador, con cero llamadas de red que lleven datos                                     |
+| **Dash Agent**        | qué contexto conservan tus agentes sobre ti y qué te cuestan, en tu máquina y sin una llamada de red; retiró una función de 83 sugerencias que no ayudaban |
+| **Probeta DS**        | Python, Pandas y scikit-learn en el navegador con Pyodide (WebAssembly), con un veredicto que dice «no supera» cuando no supera                            |
+| **Habla San**         | 50 cápsulas y 16 hitos para practicar el habla en familia, con 169 pruebas de extremo a extremo y la voz del niño jamás grabada                            |
+| **Innmobiliaria**     | flujos de negocio con validación real —el certificado se ve y nunca se almacena— y 98 % de cobertura en su motor                                           |
+| **Nutrikids**         | un motor de cálculo con 99,5 % de cobertura y un registro del día que jamás sale del teléfono                                                              |
 
 Las seis de la tabla alcanzaron su MVP y están en operación sostenida —si están en el sitio es porque llegaron a esa condición—, y todas siguen en evolución permanente. Las otras cuatro —planlang, AngelGhost, Big-D y HackGuard— están en su etapa inicial: ciclo H1, versión 0.1.0 y sin sellar. Habla San es la más avanzada: la única sellada, desde agosto de 2026, y en uso por la familia para la que se construyó.
 
@@ -124,14 +125,14 @@ Las seis de la tabla alcanzaron su MVP y están en operación sostenida —si es
 
 Cada aplicación publica su brochure con cifras que declaran su fuente, y esta tabla las reúne tal como estaban en sus exports de agosto de 2026:
 
-| Aplicación        | Funcionalidades | Pantallas | Pruebas unitarias e integración | Pruebas de extremo a extremo | Cobertura de líneas | ADR |
-| ----------------- | --------------: | --------: | ------------------------------: | ---------------------------: | ------------------: | --: |
-| **Anonimizador Velo**          |              14 |         5 |                             740 |                          153 |             96,17 % |   8 |
-| **Dash Agent** |              12 |         8 |                             693 |                            — |              97,5 % |  13 |
-| **Probeta DS**    |              33 |         5 |                             267 |                           24 |             90,69 % |   8 |
-| **Habla San**  |              24 |        10 |                             261 |                          169 |             94,02 % |  14 |
-| **Innmobiliaria** |              13 |        11 |                             172 |                           76 |             98,31 % |   6 |
-| **Nutrikids**    |              19 |         8 |                             214 |                           94 |             99,52 % |   7 |
+| Aplicación            | Funcionalidades | Pantallas | Pruebas unitarias e integración | Pruebas de extremo a extremo | Cobertura de líneas | ADR |
+| --------------------- | --------------: | --------: | ------------------------------: | ---------------------------: | ------------------: | --: |
+| **Anonimizador Velo** |              14 |         5 |                             740 |                          153 |             96,17 % |   8 |
+| **Dash Agent**        |              12 |         8 |                             693 |                            — |              97,5 % |  13 |
+| **Probeta DS**        |              33 |         5 |                             267 |                           24 |             90,69 % |   8 |
+| **Habla San**         |              24 |        10 |                             261 |                          169 |             94,02 % |  14 |
+| **Innmobiliaria**     |              13 |        11 |                             172 |                           76 |             98,31 % |   6 |
+| **Nutrikids**         |              19 |         8 |                             214 |                           94 |             99,52 % |   7 |
 
 El costo de operación mensual de las seis de la tabla es US$0, calculado como la suma de los servicios contratados: hosting en plan gratuito, sin servidores propios y, cuando hay un proveedor de IA, dentro de su cuota gratuita. Cuatro de las seis de la tabla no usan inteligencia artificial en absoluto —Anonimizador Velo, Dash Agent, Habla San e Innmobiliaria, que la tiene en cero modelos por regla de producto—, y sus fichas lo declaran como regla, no como ausencia; Probeta DS y Nutrikids la usan en una sola función, con fallback determinista y conmutable por variable de entorno.
 
@@ -141,7 +142,7 @@ Estas cifras son una foto con fecha, se refrescan desde el repositorio de cada a
 
 <!-- seccion: apps-en-etapa-inicial -->
 
-Las cuatro restantes están en su etapa inicial —ciclo H1, versión 0.1.0, sin sellar— y publican sus propias cifras con fuente en su brochure, por eso no entran en la tabla anterior. planlang (tres sprints cerrados): escribes el plan de un agente como un contrato y un verificador sin IA mide, caso por caso, la brecha entre lo que el plan prometía y lo que el agente hizo; 19 funcionalidades, 16 ADR, 16 criterios cumplidos, 1.204 decisiones cruzadas sobre 220 casos sintéticos, cero llamadas a modelos en la vitrina y un costo de US$5,21 por corrida. AngelGhost (cinco sprints): una ventana en tu Mac que el cliente no ve aunque compartas pantalla y que te acerca tu propia experiencia en el momento justo de la reunión; 20 funcionalidades, 1.475 pruebas automáticas, 21 ADR y cero bytes que salen del equipo. Big-D (tres sprints): un planeador abierto y reproducible para elegir entre plataformas de datos con evidencia fechada; 8 funcionalidades, 3 plataformas y 63 componentes en el atlas, 33 evidencias fechadas, 2.614 pruebas automáticas y 98,55 % de cobertura. HackGuard (nueve sprints): un catálogo vivo de pruebas de seguridad que te dice qué probaste, qué esperabas, qué obtuviste y qué te falta; 18 funcionalidades, 38 pruebas en el catálogo cruzadas con 38 controles de ISO/IEC 42001, 4.390 pruebas automáticas y 97,54 % de cobertura. Las cuatro cuestan US$0 al mes de operación.
+Las cuatro restantes están en su etapa inicial —ciclo H1, versión 0.1.0, sin sellar— y publican sus propias cifras con fuente en su brochure, por eso no entran en la tabla anterior. planlang (siete sprints cerrados): escribes el plan de un agente como un contrato y un verificador sin IA mide, caso por caso, la brecha entre lo que el plan prometía y lo que el agente hizo; 19 funcionalidades, 16 ADR, 16 criterios cumplidos, 1.204 decisiones cruzadas sobre 220 casos sintéticos, cero llamadas a modelos en la vitrina y un costo de US$5,21 por corrida. AngelGhost (cinco sprints): una ventana en tu Mac que el cliente no ve aunque compartas pantalla y que te acerca tu propia experiencia en el momento justo de la reunión; 20 funcionalidades, 1.475 pruebas automáticas, 21 ADR y cero bytes que salen del equipo. Big-D (tres sprints): un planeador abierto y reproducible para elegir entre plataformas de datos con evidencia fechada; 8 funcionalidades, 3 plataformas y 63 componentes en el atlas, 33 evidencias fechadas, 2.614 pruebas automáticas y 98,55 % de cobertura. HackGuard (nueve sprints): un catálogo vivo de pruebas de seguridad que te dice qué probaste, qué esperabas, qué obtuviste y qué te falta; 18 funcionalidades, 38 pruebas en el catálogo cruzadas con 38 controles de ISO/IEC 42001, 4.390 pruebas automáticas y 97,54 % de cobertura. Las cuatro cuestan US$0 al mes de operación.
 
 ## Quince agentes, siete investigaciones y seis tableros
 
