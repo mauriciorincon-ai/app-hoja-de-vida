@@ -844,7 +844,7 @@ skills:
       - "Microsoft Agent Framework"
       - "Claude Agent SDK"
       - "MCP (Model Context Protocol)"
-      - "Azure OpenAI y Microsoft Foundry"
+      - "Azure OpenAI y Microsoft Foundry (antes Azure AI Foundry)"
       - "Azure AI Search"
       - "Hugging Face"
       - "Ollama"
