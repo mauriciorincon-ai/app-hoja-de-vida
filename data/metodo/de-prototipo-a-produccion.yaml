@@ -235,7 +235,7 @@ bloques:
             es: "GitHub activó por defecto la protección contra secretos en los push a repositorios públicos: si detecta uno, bloquea el push hasta que se quite o se decida pasarlo por alto."
             en: "GitHub turned on secret scanning push protection by default for pushes to public repositories: if it detects one, it blocks the push until the secret is removed or the block is deliberately bypassed."
           fuentes: [9]
-      - nombre: { es: "Antes de publicar: corren los controles y una persona decide", en: "Before publishing: the checks run and a person decides" }
+      - nombre: { es: "Antes de publicar: corren los controles y una persona decide", en: "Take it to production: the checks run before publishing and a person decides" }
         entradas:
           - { es: "La vista previa del cambio.", en: "The change’s preview." }
           - { es: "Las conclusiones de cada control requerido.", en: "The conclusions of every required control." }
