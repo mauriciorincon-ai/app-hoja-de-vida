@@ -79,9 +79,9 @@ pieces and the documents of this knowledge base— without depending on retraini
 waiting for a provider to have absorbed recent information. When an experience, certification
 or project changes, the update happens at the source and propagates to the index during the
 next build of the site. It is not that I cannot fine-tune a model: I did it on Microsoft Foundry
-(formerly Azure AI Foundry). But a fine-tune changes how the model behaves, it is not the way to
-keep up to date a fact that changes, and that is why here the knowledge lives in the source and
-not in the weights.
+(formerly Azure AI Foundry), in several prototypes of my own. But a fine-tune changes how the
+model behaves, it is not the way to keep up to date a fact that changes, and that is why here
+the knowledge lives in the source and not in the weights.
 
 The architecture reflects a fundamental decision: generative intelligence must not take the
 place of verifiable knowledge. It should help find it, relate it and communicate it without
