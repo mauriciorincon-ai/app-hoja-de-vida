@@ -589,7 +589,7 @@ el mensaje te llega al correo.
 - **Qué hace:** `/es/metodo` y `/en/metodo` listan tus infografías; cada una vive en
   `/metodo/<slug>` y es una página larga que contesta **una pregunta de entrevista con tu
   método**: las fases, las decisiones, los controles y tu evidencia. En una entrevista abres la
-  página y la muestras. Hoy hay dos piezas publicadas —la lista de `/metodo` las cuenta y las nombra— y las
+  página y la muestras. Hoy hay tres piezas publicadas —la lista de `/metodo` las cuenta y las nombra— y las
   otras llegan una por sprint. «Mi método» está en el menú, junto a Portafolio y Contacto. **La cuenta de
   piezas de la lista se mide** de `data/metodo/`: nunca la escribas.
 - **Cómo se lee:** son **diez bloques fijos, siempre en el mismo orden**: 1 la pregunta (y su
@@ -617,7 +617,7 @@ el mensaje te llega al correo.
   llevan su voz dentro del texto («lo que el campo hace — Anthropic, 2025-06-13»), así que el chat
   no te atribuye lo que hace el campo. Pesan **la mitad** que tus documentos a fondo (como las
   fichas): medido, a peso 1 la pieza le quitaba el contexto a tus propios documentos.
-- **Limitaciones conocidas:** dos piezas publicadas hasta ahora; el segundo idioma se
+- **Limitaciones conocidas:** tres piezas publicadas hasta ahora; el segundo idioma se
   revisa a ojo al cierre del hito, no en cada sprint; sin PDF descargable (decisión tuya).
 
 #### Cómo se escribe una infografía nueva
