@@ -282,11 +282,11 @@ function main() {
   try {
     metodo = leerMetodo();
   } catch (e) {
-    detener("«Mi método» (data/metodo/)", [e.message]);
+    detener("«Métodos» (data/metodo/)", [e.message]);
   }
   const catalogo = catalogoDeDestinos();
   const enlacesRotos = problemasDeEvidencia(metodo.piezas, (d) => destinoExiste(d, catalogo));
-  if (enlacesRotos.length > 0) detener("«Mi método»: enlaces de la evidencia", enlacesRotos);
+  if (enlacesRotos.length > 0) detener("«Métodos»: enlaces de la evidencia", enlacesRotos);
 
   // --- ADUANA DEL CANAL «A FONDO» -----------------------------------------
   const docs = {};
