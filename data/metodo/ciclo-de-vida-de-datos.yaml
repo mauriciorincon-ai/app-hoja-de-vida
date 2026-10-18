@@ -1,35 +1,38 @@
-# «MI MÉTODO» · T6 — Cómo estructuro el ciclo de vida de un proyecto de datos a escala (S13, 2026-10-18).
+# «MÉTODOS» · T6 — Cómo se debe estructurar el ciclo de vida de un proyecto de datos a escala (S13, 2026-10-18; voz
+# impersonal desde el S14).
 #
-# Tres voces, separadas por el esquema (src/lib/metodo/schema.ts):
-#   · voz: hice      → solo lo que dice el corpus del sitio; `corpus:` nombra el documento de data/a-fondo/.
+# Tres voces, separadas por el esquema (src/lib/metodo/schema.ts); en la página: Evidencia · Estado del campo · Criterio.
+#   · voz: hice      → la evidencia: solo lo que dice el corpus del sitio, con el proyecto como sujeto;
+#                      `corpus:` nombra el documento de data/a-fondo/.
 #   · voz: campo     → lo que el campo hace en 2025–2026; `fuentes:` numera la fuente del bloque 10.
-#   · voz: posicion  → mi criterio, rotulado como tal; sin fuente ni corpus.
-# Lo que va sin voz (bloques 1, 2, 6, 7 y la base de las fases) es el método mismo: mi posición sobre cómo se hace.
+#   · voz: posicion  → el criterio del autor, rotulado como tal; sin fuente ni corpus.
+# Lo que va sin voz (bloques 1, 2, 6, 7 y la base de las fases) es el método mismo. Desde el S14 todo el texto
+# publicado va en voz impersonal —ni primera persona ni «entrevista»—; lo vigila tests/unit/metodo-voz-piezas.test.ts.
 #
 # Investigación del 2026-10-18: documentación oficial (Microsoft Learn: Fabric y Azure Databricks), solo contenido
 # público servido al navegador, sin credenciales ajenas ni endpoints de terceros; ninguna página leída traía texto
 # dirigido a agentes. La evidencia sale de `vesting`, `fabric-en-la-practica`, `plataforma-y-despliegue` y
-# `certificaciones`. Límites con las palabras del corpus: Eventhouse y KQL como temario del DP-600, Databricks y
-# Snowflake prototipo, Airflow y PySpark en estudio, dbt e Iceberg fuera de mis herramientas, la pieza pública de
-# Fabric en exploración. El bloque 7 no lleva cifras propias. Los títulos de la fase 5 y de la evidencia de Vesting
+# `certificaciones`. Límites con las palabras del corpus: Eventhouse y KQL a nivel de consulta, como SQL (respuesta
+# del dueño, 2026-10-18), Databricks y Snowflake prototipo, Airflow y PySpark en estudio, dbt e Iceberg fuera de sus
+# herramientas, la pieza pública de Fabric en exploración. El bloque 7 no lleva cifras propias. Los títulos de la fase 5 y de la evidencia de Vesting
 # llevan las palabras de las preguntas del banco, medidas antes de escribirlos.
 
 id: T6
 slug: ciclo-de-vida-de-datos
 nombre:
-  es: "Cómo estructuro el ciclo de vida de un proyecto de datos a escala"
-  en: "How I structure the life cycle of a data project at scale"
+  es: "Cómo se debe estructurar el ciclo de vida de un proyecto de datos a escala"
+  en: "How the life cycle of a data project at scale should be structured"
 bloques:
   # ─── 1 · La pregunta ────────────────────────────────────────────────────────
   - n: 1
     pregunta:
-      es: "¿Cómo diseñas una plataforma de datos y el ciclo de vida de lo que corre en ella?"
-      en: "How do you design a data platform and the life cycle of what runs on it?"
+      es: "Diseñar una plataforma de datos y el ciclo de vida de lo que corre en ella para que crezca por integraciones sin multiplicar copias, sin mezclar clientes y sin llevar a producción cambios que nadie probó."
+      en: "Designing a data platform and the life cycle of what runs on it so that it grows through integrations without multiplying copies, without mixing clients and without taking untested changes to production."
     respuesta:
-      - es: "Empiezo por el recorrido del dato y sus consumidores, no por los componentes: de dónde llega, qué transformación le falta para ser confiable y quién lo consume, con qué motor —personas, aplicaciones o agentes—. Así diseñé desde cero la plataforma de datos de Vesting en Microsoft Fabric."
-        en: "I start from the data’s path and its consumers, not from the components: where it comes from, what transformation it still needs to be trustworthy and who consumes it, with which engine —people, applications or agents—. That is how I designed Vesting’s data platform from scratch on Microsoft Fabric."
-      - es: "Separo lo común de lo configurable: un contrato de eventos y una normalización temprana para que todo hable el mismo idioma, capas que avanzan de la recepción al consumo, una sola copia del dato en formato abierto y el aislamiento como propiedad de la arquitectura —un workspace por cliente—, no como un filtro."
-        en: "I separate what is common from what is configurable: an event contract and early normalization so everything speaks the same language, layers that move from intake to consumption, a single copy of the data in an open format and isolation as a property of the architecture —one workspace per client—, not as a filter."
+      - es: "Se empieza por el recorrido del dato y sus consumidores, no por los componentes: de dónde llega, qué transformación le falta para ser confiable y quién lo consume, con qué motor —personas, aplicaciones o agentes—. Así se diseñó desde cero la plataforma de datos de Vesting en Microsoft Fabric."
+        en: "The starting point is the data’s path and its consumers, not the components: where it comes from, what transformation it still needs to be trustworthy and who consumes it, with which engine —people, applications or agents—. That is how Vesting’s data platform was designed from scratch on Microsoft Fabric."
+      - es: "Lo común se separa de lo configurable: un contrato de eventos y una normalización temprana para que todo hable el mismo idioma, capas que avanzan de la recepción al consumo, una sola copia del dato en formato abierto y el aislamiento como propiedad de la arquitectura —un workspace por cliente—, no como un filtro."
+        en: "What is common is kept apart from what is configurable: an event contract and early normalization so everything speaks the same language, layers that move from intake to consumption, a single copy of the data in an open format and isolation as a property of the architecture —one workspace per client—, not as a filter."
       - es: "El ciclo de vida no termina al publicar: desarrollo, prueba y producción separados, cambios versionados y promovidos entre ambientes, una conciliación que detiene la publicación si una cifra no cuadra y el retiro de lo que dejó de responder a una necesidad."
         en: "The life cycle does not end at publishing: development, test and production kept apart, changes versioned and promoted between environments, a reconciliation that stops publishing when a figure does not add up, and retiring whatever no longer answers a need."
 
@@ -182,8 +185,8 @@ bloques:
         nota:
           voz: hice
           texto:
-            es: "Antes de crear un artefacto en Fabric me hago tres preguntas: quién va a consumir este dato y con qué motor, qué transformación le falta para ser confiable y cuál de las copias posibles será la referencia."
-            en: "Before creating an artifact in Fabric I ask myself three questions: who is going to consume this data and with which engine, what transformation it still needs to be trustworthy, and which of the possible copies will be the reference."
+            es: "Antes de crear un artefacto en Fabric, la práctica del autor es responder tres preguntas: quién va a consumir este dato y con qué motor, qué transformación le falta para ser confiable y cuál de las copias posibles será la referencia."
+            en: "Before creating an artifact in Fabric, the author’s practice is to answer three questions: who is going to consume this data and with which engine, what transformation it still needs to be trustworthy, and which of the possible copies will be the reference."
           corpus: [fabric-en-la-practica]
       - nombre: { es: "Fijar el contrato de eventos y normalizar en el ingreso", en: "Set the event contract and normalize at intake" }
         entradas:
@@ -309,8 +312,8 @@ bloques:
         porQue:
           voz: hice
           texto:
-            es: "Diseñé la plataforma de datos de Vesting con el nivel mínimo de estandarización que conservara la agilidad de la startup sin renunciar a la trazabilidad ni a la calidad."
-            en: "I designed Vesting’s data platform with the minimum level of standardization that kept the startup’s agility without giving up traceability or quality."
+            es: "La plataforma de datos de Vesting se diseñó con el nivel mínimo de estandarización que conservara la agilidad de la startup sin renunciar a la trazabilidad ni a la calidad."
+            en: "Vesting’s data platform was designed with the minimum level of standardization that kept the startup’s agility without giving up traceability or quality."
           corpus: [vesting]
         nota:
           voz: posicion
@@ -422,8 +425,8 @@ bloques:
         nota:
           voz: hice
           texto:
-            es: "En Vesting las tablas vivían en Delta sobre OneLake y el modelo las leía desde ahí; Apache Iceberg salió de mi lista de herramientas porque no lo he usado."
-            en: "At Vesting the tables lived in Delta on OneLake and the model read them from there; Apache Iceberg left my list of tools because I have not used it."
+            es: "En Vesting las tablas vivían en Delta sobre OneLake y el modelo las leía desde ahí; Apache Iceberg salió de la lista de herramientas del autor por no haberse usado."
+            en: "At Vesting the tables lived in Delta on OneLake and the model read them from there; Apache Iceberg left the author’s list of tools for lack of use."
           corpus: [fabric-en-la-practica, plataforma-y-despliegue]
       - titulo: { es: "Atajos y espejado: leer el dato donde está", en: "Shortcuts and mirroring: reading data where it lives" }
         queCambia:
@@ -433,18 +436,18 @@ bloques:
         nota:
           voz: posicion
           texto:
-            es: "Antes de copiar, preguntaría si un atajo basta: menos copias son menos cifras que pueden contradecirse."
-            en: "Before copying, I would ask whether a shortcut is enough: fewer copies are fewer figures that can contradict each other."
+            es: "Antes de copiar, conviene preguntar si un atajo basta: menos copias son menos cifras que pueden contradecirse."
+            en: "Before copying, it is worth asking whether a shortcut is enough: fewer copies are fewer figures that can contradict each other."
       - titulo: { es: "Capas declarativas con vistas materializadas del lakehouse", en: "Declarative layers with materialized lake views" }
         queCambia:
-          es: "Las vistas materializadas del lakehouse, definidas en Spark SQL o PySpark, expresan como declaraciones las transformaciones de bronce a plata y a oro: Fabric sigue sus dependencias, las refresca en orden y aplica reglas de calidad en cada etapa; Microsoft advierte que no sirven para lógica que no es SQL ni para flujos que piden actualizaciones de menos de un segundo."
-          en: "Materialized lake views, defined in Spark SQL or PySpark, express the bronze-to-silver-to-gold transformations as declarative statements: Fabric tracks their dependencies, refreshes them in order and enforces quality rules at every stage; Microsoft warns they do not fit non-SQL logic or streams that need sub-second updates."
+          es: "Las vistas materializadas del lakehouse, definidas en Spark SQL o —en versión preliminar y solo con actualización completa— en PySpark, expresan como declaraciones las transformaciones de bronce a plata y a oro: Fabric sigue sus dependencias, las refresca en orden y aplica reglas de calidad en cada etapa; Microsoft advierte que no sirven para lógica que no es SQL ni para flujos que piden actualizaciones de menos de un segundo."
+          en: "Materialized lake views, defined in Spark SQL or —in preview, and with full refresh only— in PySpark, express the bronze-to-silver-to-gold transformations as declarative statements: Fabric tracks their dependencies, refreshes them in order and enforces quality rules at every stage; Microsoft warns they do not fit non-SQL logic or streams that need sub-second updates."
         fuentes: [5]
         nota:
           voz: hice
           texto:
-            es: "Mis reglas de calidad viven dentro de los pipelines: faltantes, tipos inesperados, duplicados y relaciones que no cierran se ven antes de llegar al modelo."
-            en: "My quality rules live inside the pipelines: missing values, unexpected types, duplicates and relationships that do not close show up before they reach the model."
+            es: "Las reglas de calidad viven dentro de los pipelines: faltantes, tipos inesperados, duplicados y relaciones que no cierran se ven antes de llegar al modelo."
+            en: "The quality rules live inside the pipelines: missing values, unexpected types, duplicates and relationships that do not close show up before they reach the model."
           corpus: [fabric-en-la-practica]
       - titulo: { es: "CI/CD de Fabric: Git, pipelines de despliegue y variables por etapa", en: "Fabric CI/CD: Git, deployment pipelines and per-stage variables" }
         queCambia:
@@ -454,8 +457,8 @@ bloques:
         nota:
           voz: hice
           texto:
-            es: "Versiono el modelo semántico como proyecto —con Tabular Editor o en formato PBIP, en un repositorio Git— para comparar un cambio y volver a la versión anterior sin reconstruir nada a mano."
-            en: "I version the semantic model as a project —with Tabular Editor or in PBIP format, in a Git repository— to compare a change and go back to the previous version without rebuilding anything by hand."
+            es: "El modelo semántico se versiona como proyecto —con Tabular Editor o en formato PBIP, en un repositorio Git— para comparar un cambio y volver a la versión anterior sin reconstruir nada a mano."
+            en: "The semantic model is versioned as a project —with Tabular Editor or in PBIP format, in a Git repository— to compare a change and go back to the previous version without rebuilding anything by hand."
           corpus: [fabric-en-la-practica]
       - titulo: { es: "El agente de datos de Fabric sobre el modelo gobernado", en: "The Fabric data agent on top of the governed model" }
         queCambia:
@@ -468,7 +471,7 @@ bloques:
             es: "Un agente que lee una medida gobernada hereda su definición; uno que lee una tabla cruda hereda la obligación de interpretarla, y esa obligación tiene que estar escrita en alguna parte."
             en: "An agent that reads a governed measure inherits its definition; one that reads a raw table inherits the obligation to interpret it, and that obligation has to be written down somewhere."
           corpus: [fabric-en-la-practica]
-      - titulo: { es: "Fabric frente a Databricks: diferencias y un puente", en: "Fabric versus Databricks: differences and a bridge" }
+      - titulo: { es: "Fabric y Databricks: un puente entre catálogos", en: "Fabric and Databricks: a bridge between catalogs" }
         queCambia:
           es: "Muchas organizaciones registran sus datos en Unity Catalog, dentro de Azure Databricks; Fabric puede espejar ese catálogo sin mover ni replicar los datos —solo copia la estructura y los lee por atajos—, de modo que lee las mismas tablas sin copiarlas, con cambios que pueden tardar de segundos a minutos en verse."
           en: "Many organizations register their data in Unity Catalog, within Azure Databricks; Fabric can mirror that catalog without moving or replicating the data —it only copies the structure and reads the data through shortcuts—, so it reads the same tables without copying them, with changes that can take from seconds to minutes to show up."
@@ -476,10 +479,10 @@ bloques:
         nota:
           voz: hice
           texto:
-            es: "Databricks y Snowflake están en mi perfil como prototipo; Microsoft Fabric es la plataforma que usé de extremo a extremo, en Vesting."
-            en: "Databricks and Snowflake are on my profile as prototype; Microsoft Fabric is the platform I used end to end, at Vesting."
+            es: "En el perfil del autor, Databricks y Snowflake figuran como prototipo; Microsoft Fabric es la plataforma usada de extremo a extremo, en Vesting."
+            en: "On the author’s profile, Databricks and Snowflake are listed as prototype; Microsoft Fabric is the platform used end to end, at Vesting."
           corpus: [plataforma-y-despliegue, vesting]
-      - titulo: { es: "El DP-600 que se evalúa desde octubre de 2026", en: "The DP-600 as assessed from October 2026" }
+      - titulo: { es: "El DP-600 que se evalúa a partir del 19 de octubre de 2026", en: "The DP-600 as assessed from October 19, 2026" }
         queCambia:
           es: "La guía del DP-600 pide configurar el control de versiones de un workspace, crear pipelines de despliegue, analizar el impacto sobre lo que depende de un lakehouse o de un modelo y elegir entre Direct Lake sobre OneLake y sobre el punto de conexión SQL."
           en: "The DP-600 guide asks for configuring version control for a workspace, creating deployment pipelines, analyzing the impact on whatever depends on a lakehouse or a model, and choosing between Direct Lake on OneLake and on the SQL analytics endpoint."
@@ -487,8 +490,8 @@ bloques:
         nota:
           voz: hice
           texto:
-            es: "Obtuve el DP-600 en diciembre de 2024, dentro de mi rol en Vesting, mientras construía la plataforma que el temario describe."
-            en: "I earned the DP-600 in December 2024, within my role at Vesting, while building the platform the syllabus describes."
+            es: "El DP-600 se obtuvo en diciembre de 2024, dentro del rol del autor en Vesting, mientras se construía la plataforma que el temario describe."
+            en: "The DP-600 was earned in December 2024, within the author’s role at Vesting, while the platform the syllabus describes was being built."
           corpus: [fabric-en-la-practica, vesting]
 
   # ─── 6 · Modos de falla y cómo se ven venir ─────────────────────────────────
@@ -550,8 +553,8 @@ bloques:
       - nombre: { es: "Vesting: cómo se diseñó su plataforma de datos", en: "Vesting: the design of its data platform" }
         nivel: uso-real
         texto:
-          es: "Entre agosto de 2023 y enero de 2025 diseñé e implementé en Vesting la plataforma de datos de una startup de agentes: 12 clientes integrados, 27 agentes en el inventario, 1.000 eventos por día, 120 tablas y 20 GB al cierre, con monitoreo en tiempo real de hasta 23 agentes a la vez."
-          en: "Between August 2023 and January 2025 I designed and implemented at Vesting the data platform of an agent startup: 12 clients integrated, 27 agents in the inventory, 1,000 events per day, 120 tables and 20 GB at the close, with real-time monitoring of up to 23 agents at once."
+          es: "Entre agosto de 2023 y enero de 2025 se diseñó e implementó en Vesting la plataforma de datos de una startup de agentes: 12 clientes integrados, 27 agentes en el inventario, 1.000 eventos por día, 120 tablas y 20 GB al cierre, con monitoreo en tiempo real de hasta 23 agentes a la vez."
+          en: "Between August 2023 and January 2025 the data platform of an agent startup was designed and implemented at Vesting: 12 clients integrated, 27 agents in the inventory, 1,000 events per day, 120 tables and 20 GB at the close, with real-time monitoring of up to 23 agents at once."
         corpus: [vesting]
         href: /proyectos/vesting
       - nombre: { es: "La normalización temprana como decisión de arquitectura", en: "Early normalization as an architecture decision" }
@@ -563,8 +566,8 @@ bloques:
       - nombre: { es: "Lakehouse y warehouse sobre OneLake, con modos combinados", en: "Lakehouse and warehouse on OneLake, with combined modes" }
         nivel: uso-real
         texto:
-          es: "El lakehouse conservaba y transformaba los eventos con Spark, el warehouse servía en T-SQL lo que pedían los tableros, y los modelos combinaban Direct Lake, importación y DirectQuery según la frescura, el volumen y el costo."
-          en: "The lakehouse kept and transformed the events with Spark, the warehouse served in T-SQL what the dashboards needed, and the models combined Direct Lake, import and DirectQuery according to freshness, volume and cost."
+          es: "El lakehouse conservaba los eventos y permitía transformarlos con Spark, el warehouse servía en T-SQL lo que pedían los tableros, y los modelos combinaban Direct Lake, importación y DirectQuery según la frescura, el volumen y el costo."
+          en: "The lakehouse kept the events and allowed transforming them with Spark, the warehouse served in T-SQL what the dashboards needed, and the models combined Direct Lake, import and DirectQuery according to freshness, volume and cost."
         corpus: [fabric-en-la-practica]
       - nombre: { es: "Gobierno desde el diseño: un workspace por cliente y seguridad por fila", en: "Governance by design: one workspace per client and row-level security" }
         nivel: uso-real
@@ -575,8 +578,8 @@ bloques:
       - nombre: { es: "Conciliar y versionar los modelos semánticos", en: "Reconciling and versioning semantic models" }
         nivel: uso-real
         texto:
-          es: "En mis modelos de Power BI el total de una medida clave en el modelo nuevo debe coincidir con el del vigente y con la fuente —tres cifras, una sola verdad—, y versiono el modelo como proyecto en Git para volver atrás sin reconstruir nada."
-          en: "In my Power BI models the total of a key measure in the new model must match the current model’s and the source’s —three figures, one single truth—, and I version the model as a project in Git to go back without rebuilding anything."
+          es: "En los modelos de Power BI del autor, el total de una medida clave en el modelo nuevo debe coincidir con el del vigente y con la fuente —tres cifras, una sola verdad—, y el modelo se versiona como proyecto en Git para volver atrás sin reconstruir nada."
+          en: "In the author’s Power BI models, the total of a key measure in the new model must match the current model’s and the source’s —three figures, one single truth—, and the model is versioned as a project in Git to go back without rebuilding anything."
         corpus: [fabric-en-la-practica]
       - nombre: { es: "Separar desarrollo y producción en la Fundación CTIC", en: "Keeping development and production apart at Fundación CTIC" }
         nivel: uso-real
@@ -596,32 +599,32 @@ bloques:
     limites:
       - voz: hice
         texto:
-          es: "Eventhouse y KQL aparecen en mis documentos como temario del DP-600, que exige trabajar con SQL, KQL y DAX, no como un proyecto."
-          en: "Eventhouse and KQL show up in my documents as DP-600 syllabus, which requires working with SQL, KQL and DAX, not as a project."
+          es: "Eventhouse y KQL los conoce el autor a nivel de consulta, como SQL —el DP-600 exige trabajar con SQL, KQL y DAX—, no por un proyecto."
+          en: "The author knows Eventhouse and KQL at the query level, like SQL —the DP-600 requires working with SQL, KQL and DAX—, not from a project."
         corpus: [fabric-en-la-practica]
       - voz: hice
         texto:
-          es: "Databricks y Snowflake los tengo como prototipo; Airflow y PySpark, en estudio; el 27 de septiembre de 2026 dbt y Apache Iceberg salieron de mi lista porque no los he usado."
-          en: "I have Databricks and Snowflake as prototype; Airflow and PySpark, in study; on September 27, 2026 dbt and Apache Iceberg left my list because I have not used them."
+          es: "En el perfil del autor, Databricks y Snowflake figuran como prototipo; Airflow y PySpark, en estudio; el 27 de septiembre de 2026 dbt y Apache Iceberg salieron de su lista de herramientas por no haberse usado."
+          en: "On the author’s profile, Databricks and Snowflake are listed as prototype; Airflow and PySpark, in study; on September 27, 2026 dbt and Apache Iceberg left the list of tools for lack of use."
         corpus: [plataforma-y-despliegue]
       - voz: hice
         texto:
-          es: "Esta pieza no describe experiencia con AWS ni con Redshift: mi plataforma de datos de extremo a extremo es Microsoft Fabric, en Vesting."
-          en: "This piece does not describe experience with AWS or Redshift: my end-to-end data platform is Microsoft Fabric, at Vesting."
+          es: "Esta publicación no describe experiencia con AWS ni con Redshift: la plataforma de datos de extremo a extremo de la evidencia es Microsoft Fabric, en Vesting."
+          en: "This publication does not describe experience with AWS or Redshift: the end-to-end data platform in the evidence is Microsoft Fabric, at Vesting."
         corpus: [vesting]
       - voz: hice
         texto:
-          es: "Mi pieza pública de Fabric con datos abiertos de Colombia sigue en exploración: no la presento como construida."
-          en: "My public Fabric piece with Colombian open data is still in exploration: I do not present it as built."
+          es: "La pieza pública de Fabric con datos abiertos de Colombia sigue en exploración: no se presenta como construida."
+          en: "The public Fabric piece with Colombian open data is still in exploration: it is not presented as built."
         corpus: [fabric-en-la-practica]
       - voz: posicion
         texto:
-          es: "Lo que haría distinto hoy: empezaría los modelos nuevos con Direct Lake sobre OneLake y dejaría DirectQuery solo para el detalle que no cabe en memoria."
-          en: "What I would do differently today: I would start new models with Direct Lake on OneLake and leave DirectQuery only for the detail that does not fit in memory."
+          es: "Lo que conviene hacer distinto hoy: empezar los modelos nuevos con Direct Lake sobre OneLake y dejar DirectQuery solo para el detalle que no cabe en memoria."
+          en: "What should be done differently today: start new models with Direct Lake on OneLake and leave DirectQuery only for the detail that does not fit in memory."
       - voz: posicion
         texto:
-          es: "Entre Fabric y Databricks no elegiría por el motor sino por dónde vive ya el gobierno de la organización y quién lo opera; con el catálogo espejado, la pregunta deja de ser una u otra."
-          en: "Between Fabric and Databricks I would not choose by the engine but by where the organization’s governance already lives and who runs it; with the catalog mirrored, the question stops being one or the other."
+          es: "Entre Fabric y Databricks no conviene elegir por el motor sino por dónde vive ya el gobierno de la organización y quién lo opera; con el catálogo espejado, la pregunta deja de ser una u otra."
+          en: "Between Fabric and Databricks the choice should not follow the engine but where the organization’s governance already lives and who runs it; with the catalog mirrored, the question stops being one or the other."
 
   # ─── 10 · Fuentes y fecha de revisión ───────────────────────────────────────
   - n: 10

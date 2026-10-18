@@ -206,10 +206,10 @@ describe("las anclas de «Mi método» se validan, no solo la ruta", () => {
     expect(nombreDeDestino("/metodos", es)).toBe("Métodos");
     expect(nombreDeDestino("/metodos", en)).toBe("Methods");
     expect(nombreDeDestino("/metodos/sistema-de-agentes#bloque-3", es)).toBe(
-      "Cómo estructuro un sistema de agentes",
+      "Cómo se debe estructurar un sistema de agentes",
     );
     expect(nombreDeDestino("/metodos/sistema-de-agentes#bloque-3", en)).toBe(
-      "How I structure an agent system",
+      "How an agent system should be structured",
     );
   });
 });

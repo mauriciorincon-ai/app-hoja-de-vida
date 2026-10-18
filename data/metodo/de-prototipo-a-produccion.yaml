@@ -1,10 +1,13 @@
-# «MI MÉTODO» · T4 — Cómo llevo un prototipo de IA a producción y lo mantengo (S12, 2026-10-18).
+# «MÉTODOS» · T4 — Cómo se debe llevar un prototipo de IA a producción y mantenerlo (S12, 2026-10-18; voz impersonal
+# desde el S14).
 #
-# Tres voces, separadas por el esquema (src/lib/metodo/schema.ts):
-#   · voz: hice      → solo lo que dice el corpus del sitio; `corpus:` nombra el documento de data/a-fondo/.
+# Tres voces, separadas por el esquema (src/lib/metodo/schema.ts); en la página: Evidencia · Estado del campo · Criterio.
+#   · voz: hice      → la evidencia: solo lo que dice el corpus del sitio, con el proyecto como sujeto;
+#                      `corpus:` nombra el documento de data/a-fondo/.
 #   · voz: campo     → lo que el campo hace en 2025–2026; `fuentes:` numera la fuente del bloque 10.
-#   · voz: posicion  → mi criterio, rotulado como tal; sin fuente ni corpus.
-# Lo que va sin voz (bloques 1, 2, 6, 7 y la base de las fases) es el método mismo: mi posición sobre cómo se hace.
+#   · voz: posicion  → el criterio del autor, rotulado como tal; sin fuente ni corpus.
+# Lo que va sin voz (bloques 1, 2, 6, 7 y la base de las fases) es el método mismo. Desde el S14 todo el texto
+# publicado va en voz impersonal —ni primera persona ni «entrevista»—; lo vigila tests/unit/metodo-voz-piezas.test.ts.
 #
 # Investigación del 2026-10-18: documentación oficial primero (Microsoft Learn, OWASP, GitHub), solo contenido
 # público servido al navegador, sin credenciales ajenas ni endpoints de terceros; ninguna página leída traía texto
@@ -18,21 +21,21 @@
 id: T4
 slug: de-prototipo-a-produccion
 nombre:
-  es: "Cómo llevo un prototipo de IA a producción y lo mantengo"
-  en: "How I take an AI prototype to production and keep it running"
+  es: "Cómo se debe llevar un prototipo de IA a producción y mantenerlo"
+  en: "How an AI prototype should be taken to production and kept running"
 bloques:
   # ─── 1 · La pregunta ────────────────────────────────────────────────────────
   - n: 1
     pregunta:
-      es: "¿Cómo pasas del prototipo a producción, y cómo lo mantienes sano, barato y seguro?"
-      en: "How do you go from a prototype to production, and how do you keep it healthy, cheap and safe?"
+      es: "Pasar un prototipo de IA a producción y mantenerlo sano, barato y seguro una vez publicado."
+      en: "Taking an AI prototype to production and keeping it healthy, cheap and safe once it is published."
     respuesta:
-      - es: "Un prototipo pasa a producción cuando supera condiciones escritas que ya se vieron fallar. Los controles que corren antes de que publique son las pruebas unitarias, de integración y de extremo a extremo, la accesibilidad, el rendimiento y el bloqueo de secretos, y si hay un modelo, preguntas de prueba que corren en cada cambio como cualquier otra prueba."
-        en: "A prototype goes to production when it passes written conditions that have already been seen failing. The checks that run before I publish are unit, integration and end-to-end tests, accessibility, performance and the secret blocking, and if there is a model, test questions that run on every change like any other test."
+      - es: "Un prototipo pasa a producción cuando supera condiciones escritas que ya se vieron fallar. Los controles que corren antes de publicar son las pruebas unitarias, de integración y de extremo a extremo, la accesibilidad, el rendimiento y el bloqueo de secretos, y si hay un modelo, preguntas de prueba que corren en cada cambio como cualquier otra prueba."
+        en: "A prototype goes to production when it passes written conditions that have already been seen failing. The checks that run before publishing are unit, integration and end-to-end tests, accessibility, performance and the secret blocking, and if there is a model, test questions that run on every change like any other test."
       - es: "Antes de la IA va el código: el modelo entra solo donde una regla no alcanza, detrás de una capa que permite cambiar de proveedor y con una salida más simple, anunciada, para cuando falla."
         en: "Code comes before AI: the model only goes where a rule falls short, behind a layer that lets the provider change and with a simpler, announced way out for when it fails."
-      - es: "Publicar es el comienzo de la validación: lo mantengo con metadatos y no con el contenido de quien lo usa, con límites y un techo de costo escritos, y con un resumen de cada ciclo que convierte la falla en regla."
-        en: "Publishing is where validation starts: I keep it running with metadata and not with its users’ content, with written limits and a written cost ceiling, and with a summary of every cycle that turns the failure into a rule."
+      - es: "Publicar es el comienzo de la validación: se mantiene con metadatos y no con el contenido de quien lo usa, con límites y un techo de costo escritos, y con un resumen de cada ciclo que convierte la falla en regla."
+        en: "Publishing is where validation starts: it is kept running with metadata and not with its users’ content, with written limits and a written cost ceiling, and with a summary of every cycle that turns the failure into a rule."
 
   # ─── 2 · El mapa ────────────────────────────────────────────────────────────
   - n: 2
@@ -183,8 +186,8 @@ bloques:
         nota:
           voz: hice
           texto:
-            es: "En mis apps activar una función generativa exige una decisión de arquitectura escrita: Innmobiliaria tiene cero modelos por regla de producto, y donde sí hay uno es opcional y con un fallback determinista."
-            en: "In my apps, switching on a generative feature requires a written architecture decision: Innmobiliaria has zero models as a product rule, and where there is one it is optional and has a deterministic fallback."
+            es: "En las apps del autor, activar una función generativa exige una decisión de arquitectura escrita: Innmobiliaria tiene cero modelos por regla de producto, y donde sí hay uno es opcional y con un fallback determinista."
+            en: "In the author’s apps, switching on a generative feature requires a written architecture decision: Innmobiliaria has zero models as a product rule, and where there is one it is optional and has a deterministic fallback."
           corpus: [apps-pipeline]
       - nombre: { es: "Convertir el prototipo en algo verificable", en: "Turn the prototype into something verifiable" }
         entradas:
@@ -251,8 +254,8 @@ bloques:
         nota:
           voz: hice
           texto:
-            es: "A cada control le hago tres preguntas antes de darlo por bueno: ¿lo viste fallar?, ¿lo viste correr? —un job saltado no es verde— y ¿puede fallar siquiera?"
-            en: "I ask every control three questions before accepting it: did you see it fail?, did you see it run? —a skipped job is not green— and can it fail at all?"
+            es: "A cada control se le hacen tres preguntas antes de darlo por bueno: ¿se vio fallar?, ¿se vio correr? —un job saltado no es verde— y ¿puede fallar siquiera?"
+            en: "Every control is asked three questions before it is accepted: was it seen failing?, was it seen running? —a skipped job is not green— and can it fail at all?"
           corpus: [apps-pipeline]
       - nombre: { es: "Operar: medir, acotar y degradar", en: "Operate: measure, bound and degrade" }
         entradas:
@@ -311,14 +314,14 @@ bloques:
         porQue:
           voz: hice
           texto:
-            es: "Es la regla 13 de mi pipeline: antes de usar IA generativa demuestro qué característica del problema la exige, y activarla pide una decisión de arquitectura escrita."
-            en: "It is rule 13 of my pipeline: before using generative AI I show which feature of the problem requires it, and switching it on calls for a written architecture decision."
+            es: "Es la regla 13 del pipeline del autor: antes de usar IA generativa se demuestra qué característica del problema la exige, y activarla pide una decisión de arquitectura escrita."
+            en: "It is rule 13 of the author’s pipeline: before using generative AI, the feature of the problem that requires it has to be shown, and switching it on calls for a written architecture decision."
           corpus: [apps-pipeline]
         nota:
           voz: posicion
           texto:
-            es: "La pregunta no es si puedo meter IA, sino si la mejora justifica lo que trae: dependencias, costo, variabilidad y una evaluación que alguien tiene que sostener."
-            en: "The question is not whether I can add AI, but whether the improvement justifies what it brings along: dependencies, cost, variability and an evaluation someone has to keep up."
+            es: "La pregunta no es si se puede meter IA, sino si la mejora justifica lo que trae: dependencias, costo, variabilidad y una evaluación que alguien tiene que sostener."
+            en: "The question is not whether AI can be added, but whether the improvement justifies what it brings along: dependencies, cost, variability and an evaluation someone has to keep up."
       - titulo: { es: "Un proveedor fijo o una capa que lo cambia", en: "A fixed provider or a layer that changes it" }
         cuandoSi:
           es: "Una capa conmutable, cuando el producto debe sobrevivir a que un modelo se retire, una cuota cambie o un proveedor se caiga."
@@ -354,7 +357,7 @@ bloques:
           voz: hice
           texto:
             es: "En este sitio la recuperación se evalúa en cada cambio con preguntas propias y de afuera; la respuesta que intenta meter algo no recuperado la caza hoy la lectura, no un gate."
-            en: "On this site retrieval is evaluated on every change with questions of my own and from outside; the answer that tries to slip in something not retrieved is caught today by reading, not by a gate."
+            en: "On this site retrieval is evaluated on every change with in-house questions and questions from outside; the answer that tries to slip in something not retrieved is caught today by reading, not by a gate."
           corpus: [rag-y-el-chat]
       - titulo: { es: "Contenedores propios o despliegue sin servidor", en: "Own containers or serverless deployment" }
         cuandoSi:
@@ -366,8 +369,8 @@ bloques:
         porQue:
           voz: hice
           texto:
-            es: "Mis despliegues son sin servidor propio —Vercel, Cloudflare Workers, el navegador del usuario— y por eso nunca han necesitado un contenedor."
-            en: "My deployments run with no server of their own —Vercel, Cloudflare Workers, the user’s browser— and that is why they have never needed a container."
+            es: "Los despliegues del autor son sin servidor propio —Vercel, Cloudflare Workers, el navegador del usuario— y por eso nunca han necesitado un contenedor."
+            en: "The author’s deployments run with no server of their own —Vercel, Cloudflare Workers, the user’s browser— and that is why they have never needed a container."
           corpus: [plataforma-y-despliegue]
         nota:
           voz: campo
@@ -385,8 +388,8 @@ bloques:
         porQue:
           voz: hice
           texto:
-            es: "En mis apps lo que se observa viaja como metadatos por Pino y Sentry; el chat de este sitio sí guarda pregunta y respuesta desde el 21 de septiembre de 2026, y lo advierte antes de que el visitante escriba."
-            en: "In my apps what is observed travels as metadata through Pino and Sentry; this site’s chat does store question and answer since September 21, 2026, and warns about it before the visitor writes."
+            es: "En las apps del autor lo que se observa viaja como metadatos por Pino y Sentry; el chat de este sitio sí guarda pregunta y respuesta desde el 21 de septiembre de 2026, y lo advierte antes de que el visitante escriba."
+            en: "In the author’s apps what is observed travels as metadata through Pino and Sentry; this site’s chat does store question and answer since September 21, 2026, and warns about it before the visitor writes."
           corpus: [plataforma-y-despliegue, rag-y-el-chat]
         nota:
           voz: campo
@@ -406,8 +409,8 @@ bloques:
         nota:
           voz: hice
           texto:
-            es: "Mi experiencia con Microsoft Foundry —sus límites, en el bloque 9—: lo conecté al chat como uno de sus proveedores, y estudio su temario en la ruta del AI-103, que está en curso."
-            en: "My experience with Microsoft Foundry —its limits are in block 9—: I connected it to the chat as one of its providers, and I study its syllabus on the AI-103 path, which is in progress."
+            es: "La experiencia del autor con Microsoft Foundry —sus límites, en el bloque 9—: se conectó al chat como uno de sus proveedores, y su temario se estudia en la ruta del AI-103, que está en curso."
+            en: "The author’s experience with Microsoft Foundry —its limits are in block 9—: it was connected to the chat as one of its providers, and its syllabus is studied on the AI-103 path, which is in progress."
           corpus: [rag-y-el-chat, certificaciones]
       - titulo: { es: "Las evaluaciones como una prueba más del pipeline", en: "Evaluations as one more test in the pipeline" }
         queCambia:
@@ -417,10 +420,10 @@ bloques:
         nota:
           voz: hice
           texto:
-            es: "En este sitio las preguntas de prueba ya corren en cada cambio como cualquier otra prueba; para la respuesta del modelo no tengo un juez automático."
-            en: "On this site the test questions already run on every change like any other test; for the model’s answer I have no automatic judge."
+            es: "En este sitio las preguntas de prueba ya corren en cada cambio como cualquier otra prueba; para la respuesta del modelo no hay un juez automático."
+            en: "On this site the test questions already run on every change like any other test; for the model’s answer there is no automatic judge."
           corpus: [rag-y-el-chat]
-      - titulo: { es: "Atacarse a uno mismo antes de publicar", en: "Attacking yourself before publishing" }
+      - titulo: { es: "Atacarse a uno mismo antes de publicar", en: "Attacking one’s own system before publishing" }
         queCambia:
           es: "El agente de red teaming de Foundry prueba la aplicación con estrategias de ataque de PyRIT y mide la tasa de ataques exitosos; Microsoft advierte que el juez es generativo, que puede dar falsos positivos y que los resultados se revisan antes de actuar."
           en: "Foundry’s red teaming agent probes the application with PyRIT attack strategies and measures the attack success rate; Microsoft warns that the judge is generative, that it can produce false positives and that results are reviewed before acting on them."
@@ -428,8 +431,8 @@ bloques:
         nota:
           voz: posicion
           texto:
-            es: "Lo correría antes de abrir al público una función generativa nueva, y leería los ataques que pasaron antes de tocar un solo filtro."
-            en: "I would run it before opening a new generative feature to the public, and read the attacks that got through before touching a single filter."
+            es: "Conviene correrlo antes de abrir al público una función generativa nueva, y leer los ataques que pasaron antes de tocar un solo filtro."
+            en: "It should run before a new generative feature opens to the public, and the attacks that got through should be read before touching a single filter."
       - titulo: { es: "Mandar cada pedido al modelo que alcanza", en: "Sending each request to the model that is enough" }
         queCambia:
           es: "El enrutador de modelos de Foundry analiza cada pedido y lo manda a un modelo pequeño cuando basta y a uno de frontera cuando lo exige; dice qué modelo respondió, y Microsoft aclara que no quita la necesidad de evaluar."
@@ -438,8 +441,8 @@ bloques:
         nota:
           voz: hice
           texto:
-            es: "El ahorro de mi chat ocurre antes del modelo: las preguntas fuera de alcance no consumen tokens y solo viajan los fragmentos relevantes, no el sitio entero."
-            en: "My chat’s savings happen before the model: out-of-scope questions consume no tokens and only the relevant passages travel, not the whole site."
+            es: "El ahorro del chat de este sitio ocurre antes del modelo: las preguntas fuera de alcance no consumen tokens y solo viajan los fragmentos relevantes, no el sitio entero."
+            en: "The savings of this site’s chat happen before the model: out-of-scope questions consume no tokens and only the relevant passages travel, not the whole site."
           corpus: [rag-y-el-chat]
       - titulo: { es: "Reutilizar el principio del prompt", en: "Reusing the beginning of the prompt" }
         queCambia:
@@ -449,8 +452,8 @@ bloques:
         nota:
           voz: posicion
           texto:
-            es: "Es una palanca cuando las instrucciones son largas y se repiten idénticas; antes de contar con ella mediría cuánto del pedido es de verdad estable."
-            en: "It is a lever when the instructions are long and repeat identically; before relying on it I would measure how much of the request is truly stable."
+            es: "Es una palanca cuando las instrucciones son largas y se repiten idénticas; antes de contar con ella conviene medir cuánto del pedido es de verdad estable."
+            en: "It is a lever when the instructions are long and repeat identically; before relying on it, it is worth measuring how much of the request is truly stable."
       - titulo: { es: "El consumo sin límite, tratado como riesgo de seguridad", en: "Unbounded consumption, treated as a security risk" }
         queCambia:
           es: "El Top 10 de OWASP para aplicaciones con LLM de 2025 trata el consumo sin control como riesgo —denegación de servicio, pérdidas económicas— y pide validar el tamaño de las entradas, limitar la frecuencia por origen, poner tiempos máximos y vigilar el uso de recursos."
@@ -459,8 +462,8 @@ bloques:
         nota:
           voz: hice
           texto:
-            es: "Mi chat tiene esos límites escritos como números y no como intenciones: 800 caracteres por pregunta, 700 tokens de salida, 30 segundos y 12 mensajes de historial."
-            en: "My chat has those limits written as numbers, not as intentions: 800 characters per question, 700 output tokens, 30 seconds and 12 messages of history."
+            es: "El chat de este sitio tiene esos límites escritos como números y no como intenciones: 800 caracteres por pregunta, 700 tokens de salida, 30 segundos y 12 mensajes de historial."
+            en: "This site’s chat has those limits written as numbers, not as intentions: 800 characters per question, 700 output tokens, 30 seconds and 12 messages of history."
           corpus: [rag-y-el-chat]
       - titulo: { es: "La cadena de suministro también es la de la IA", en: "The supply chain is also AI’s" }
         queCambia:
@@ -481,8 +484,8 @@ bloques:
         nota:
           voz: hice
           texto:
-            es: "Sigo la ruta del AI-300 desde julio de 2026; está en curso y no la presento como obtenida."
-            en: "I have been following the AI-300 path since July 2026; it is in progress and I do not present it as earned."
+            es: "La ruta del AI-300 se sigue desde julio de 2026; está en curso y no se presenta como obtenida."
+            en: "The AI-300 path is in progress, followed since July 2026, and is not presented as earned."
           corpus: [certificaciones]
 
   # ─── 6 · Modos de falla y cómo se ven venir ─────────────────────────────────
@@ -544,11 +547,11 @@ bloques:
   # ─── 8 · Mi evidencia ───────────────────────────────────────────────────────
   - n: 8
     evidencia:
-      - nombre: { es: "La cadena de publicación que comparten mis apps", en: "The publishing chain my apps share" }
+      - nombre: { es: "La cadena de publicación que comparten las apps del autor", en: "The publishing chain the author’s apps share" }
         nivel: uso-real
         texto:
-          es: "Mis aplicaciones hermanas y este sitio comparten criterios y, en lo esencial, esta cadena: Git y GitHub, integración continua con pruebas unitarias, de integración y de extremo a extremo, accesibilidad con axe, presupuesto de rendimiento con Lighthouse y despliegue en Vercel con una vista previa por cambio (Innmobiliaria sale desde el borde en Cloudflare Workers y Dash Agent no se despliega); ninguna rama llega a producción con uno de esos trabajos en rojo."
-          en: "My sibling apps and this site share criteria and, in essence, this chain: Git and GitHub, continuous integration with unit, integration and end-to-end tests, accessibility with axe, a performance budget with Lighthouse and deployment on Vercel with one preview per change (Innmobiliaria is served from the edge on Cloudflare Workers and Dash Agent is not deployed); no branch reaches production with one of those jobs red."
+          es: "Las aplicaciones hermanas y este sitio comparten criterios y, en lo esencial, esta cadena: Git y GitHub, integración continua con pruebas unitarias, de integración y de extremo a extremo, accesibilidad con axe, presupuesto de rendimiento con Lighthouse y despliegue en Vercel con una vista previa por cambio (Innmobiliaria sale desde el borde en Cloudflare Workers y Dash Agent no se despliega); ninguna rama llega a producción con uno de esos trabajos en rojo."
+          en: "The sibling apps and this site share criteria and, in essence, this chain: Git and GitHub, continuous integration with unit, integration and end-to-end tests, accessibility with axe, a performance budget with Lighthouse and deployment on Vercel with one preview per change (Innmobiliaria is served from the edge on Cloudflare Workers and Dash Agent is not deployed); no branch reaches production with one of those jobs red."
         corpus: [plataforma-y-despliegue]
         href: /vitrina/apps
       - nombre: { es: "Este sitio: la integración continua contra una base real", en: "This site: continuous integration against a real database" }
@@ -580,8 +583,8 @@ bloques:
       - nombre: { es: "Observar agentes en producción", en: "Observing agents in production" }
         nivel: uso-real
         texto:
-          es: "En Vesting diseñé la plataforma que observaba hasta 23 agentes a la vez en producción: los eventos viajaban a Microsoft Fabric y de ahí a Power BI, y la telemetría por sesión mostró a un agente que acumulaba reintentos antes de que un usuario lo reportara."
-          en: "At Vesting I designed the platform that observed up to 23 agents at a time in production: events traveled to Microsoft Fabric and from there to Power BI, and per-session telemetry showed an agent piling up retries before a user reported it."
+          es: "En Vesting se diseñó la plataforma que observaba hasta 23 agentes a la vez en producción: los eventos viajaban a Microsoft Fabric y de ahí a Power BI, y la telemetría por sesión mostró a un agente que acumulaba reintentos antes de que un usuario lo reportara."
+          en: "At Vesting a platform was designed that observed up to 23 agents at a time in production: events traveled to Microsoft Fabric and from there to Power BI, and per-session telemetry showed an agent piling up retries before a user reported it."
         corpus: [plataforma-y-despliegue]
         href: /proyectos/vesting
       - nombre: { es: "Datos con seguridad por filas y acceso solo por funciones", en: "Data with row-level security and access only through functions" }
@@ -593,8 +596,8 @@ bloques:
       - nombre: { es: "Modelos en producción, sostenidos", en: "Models in production, sustained" }
         nivel: uso-real
         texto:
-          es: "La mitad de MLOps que consiste en llevar modelos a producción y sostenerlos la he hecho: modelos predictivos en Banco Pichincha y en TransMilenio, el monitoreo de agentes en Vesting y aplicaciones públicas con integración continua y despliegue automático, operadas por mí."
-          en: "The half of MLOps that is about taking models to production and keeping them there I have done: predictive models at Banco Pichincha and TransMilenio, agent monitoring at Vesting and public applications with continuous integration and automatic deployment, operated by me."
+          es: "La mitad de MLOps que consiste en llevar modelos a producción y sostenerlos está hecha: modelos predictivos en Banco Pichincha y en TransMilenio, el monitoreo de agentes en Vesting y aplicaciones públicas con integración continua y despliegue automático, operadas por el autor."
+          en: "The half of MLOps that is about taking models to production and keeping them there is done: predictive models at Banco Pichincha and TransMilenio, agent monitoring at Vesting and public applications with continuous integration and automatic deployment, operated by the author."
         corpus: [plataforma-y-despliegue]
 
   # ─── 9 · Lo que haría distinto y lo que no he hecho ─────────────────────────
@@ -602,18 +605,18 @@ bloques:
     limites:
       - voz: hice
         texto:
-          es: "Contenedores en producción con Docker y Kubernetes no están en mi experiencia: Kubernetes lo conozco como estudio, no como operación, y la mitad de MLOps que empaqueta y orquesta con contenedores no la he hecho."
-          en: "Containers in production with Docker and Kubernetes are not in my experience: I know Kubernetes from study, not from operating it, and the half of MLOps that packages and orchestrates with containers I have not done."
+          es: "Contenedores en producción con Docker y Kubernetes no están en la experiencia del autor: Kubernetes se conoce por estudio, no por operación, y la mitad de MLOps que empaqueta y orquesta con contenedores no está hecha."
+          en: "Containers in production with Docker and Kubernetes are not part of the author’s experience: Kubernetes is known from study, not from operating it, and the half of MLOps that packages and orchestrates with containers has not been done."
         corpus: [plataforma-y-despliegue]
       - voz: hice
         texto:
-          es: "Con Microsoft Foundry mi experiencia es el adaptador de proveedor de este chat, ajustes de modelos que hice ahí, en varios prototipos propios, y el estudio del AI-103, que está en curso; no describo ningún despliegue propio en Azure."
-          en: "With Microsoft Foundry my experience is this chat’s provider adapter, fine-tunes of models I did there, in several prototypes of my own, and studying for the AI-103, which is in progress; I do not describe any deployment of my own on Azure."
+          es: "Con Microsoft Foundry la experiencia es el adaptador de proveedor de este chat, ajustes de modelos hechos ahí, en varios prototipos propios, y el estudio del AI-103, que está en curso; no se describe ningún despliegue propio en Azure."
+          en: "With Microsoft Foundry the experience is this chat’s provider adapter, fine-tunes of models done there, in several in-house prototypes, and studying for the AI-103, which is in progress; no deployment of the author’s own on Azure is described."
         corpus: [rag-y-el-chat, certificaciones]
       - voz: hice
         texto:
-          es: "El AI-300 está en curso: es la certificación de operar modelos y agentes, y no la presento como obtenida."
-          en: "The AI-300 is in progress: it is the certification for operating models and agents, and I do not present it as earned."
+          es: "El AI-300 está en curso: es la certificación de operar modelos y agentes, y no se presenta como obtenida."
+          en: "The AI-300 is in progress: it is the certification for operating models and agents, and it is not presented as earned."
         corpus: [certificaciones]
       - voz: hice
         texto:
@@ -622,17 +625,17 @@ bloques:
         corpus: [rag-y-el-chat]
       - voz: hice
         texto:
-          es: "Las fases de lanzamiento y de operación de mi fábrica de apps siguen sin validarse en una corrida real: son método escrito, no experiencia."
-          en: "The launch and operation phases of my app factory have still not been validated in a real run: they are written method, not experience."
+          es: "Las fases de lanzamiento y de operación de la fábrica de apps del autor siguen sin validarse en una corrida real: son método escrito, no experiencia."
+          en: "The launch and operation phases of the author’s app factory have still not been validated in a real run: they are written method, not experience."
         corpus: [apps-pipeline]
       - voz: posicion
         texto:
-          es: "Lo que haría distinto hoy: la evaluación con un juez calibrado como un trabajo más de la integración continua desde el primer sprint con IA, y un red teaming automatizado antes de abrir una función generativa al público."
-          en: "What I would do differently today: evaluation with a calibrated judge as one more continuous integration job from the first sprint with AI, and automated red teaming before opening a generative feature to the public."
+          es: "Lo que conviene hacer distinto hoy: la evaluación con un juez calibrado como un trabajo más de la integración continua desde el primer sprint con IA, y un red teaming automatizado antes de abrir una función generativa al público."
+          en: "What should be done differently today: evaluation with a calibrated judge as one more continuous integration job from the first sprint with AI, and automated red teaming before opening a generative feature to the public."
       - voz: posicion
         texto:
-          es: "Y no empezaría por la plataforma: empezaría por las condiciones de publicación, escritas y vistas fallar; la plataforma se elige después, por lo que esas condiciones necesitan."
-          en: "And I would not start with the platform: I would start with the publishing conditions, written down and seen failing; the platform is chosen afterwards, for what those conditions need."
+          es: "Y no conviene empezar por la plataforma: mejor empezar por las condiciones de publicación, escritas y vistas fallar; la plataforma se elige después, por lo que esas condiciones necesitan."
+          en: "And it is better not to start with the platform: start with the publishing conditions, written down and seen failing; the platform is chosen afterwards, for what those conditions need."
 
   # ─── 10 · Fuentes y fecha de revisión ───────────────────────────────────────
   - n: 10
