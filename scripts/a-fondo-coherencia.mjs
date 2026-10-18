@@ -95,6 +95,12 @@ export function verdadesDelSitio() {
     /^SPRINT_\d{3}-(summary|cierre)\.md$/.test(f),
   );
 
+  // Las infografías de «Mi método» (S10): una por archivo de `data/metodo/`. La lista
+  // las cuenta del disco; el manual y la guía decían «hoy hay una» a mano (S11).
+  const piezasMetodo = existsSync(path.join(ROOT, "data/metodo"))
+    ? readdirSync(path.join(ROOT, "data/metodo")).filter((f) => f.endsWith(".yaml")).length
+    : 0;
+
   const ci = path.join(ROOT, ".github/workflows/ci.yml");
   const jobsCi = existsSync(ci)
     ? Object.keys(parse(readFileSync(ci, "utf8")).jobs ?? {}).length
@@ -121,6 +127,7 @@ export function verdadesDelSitio() {
     "agentes-vitrina": agentes,
     investigaciones,
     tableros,
+    "piezas-metodo": piezasMetodo,
     "credenciales-obtenidas": certificaciones.filter((c) => !c.estado).length,
     "credenciales-ibm": certificaciones.filter((c) => !c.estado && /^IBM/i.test(c.nombre)).length,
     "credenciales-en-curso": certificaciones.filter((c) => c.estado === "en curso").length,
@@ -207,17 +214,25 @@ export function problemasDeCifras(docs, conceptos, verdades) {
           // confunde ese caso con «la recuperación de los cuatro fragmentos», que
           // habla del top-k y no del tamaño del índice: el mismo sustantivo, dos
           // magnitudes que se diferencian en tres órdenes.
+          const dicho = /^[\d.]+$/.test(m[1])
+            ? Number(m[1].replace(/\./g, ""))
+            : NUMEROS_ES.get(m[1]);
           if (previos.length) {
             const antes = texto.slice(
               Math.max(0, m.index - (concepto.ventana_previa ?? 40)),
               m.index,
             );
-            if (!previos.some((c) => antes.includes(c))) continue;
+            // `sin_contexto_desde`: un conteo de este tamaño no necesita sujeto delante para
+            // ser del concepto. Nació con el tamaño del índice (S11): «el de hoy tiene 1.467
+            // fragmentos» y «el índice —1.467 fragmentos—» no llevaban «índice de/en/con…» al
+            // lado y se le escapaban al gate (el corpus decía 1.467 cuando el índice era 1.633).
+            // Ningún otro «N fragmentos» pasa de un dígito (el top-k): mil o más es el índice.
+            const sinSujeto =
+              concepto.sin_contexto_desde !== undefined &&
+              dicho >= Number(concepto.sin_contexto_desde);
+            if (!sinSujeto && !previos.some((c) => antes.includes(c))) continue;
           }
           if (salvedades.some((s) => vecindad.includes(s))) continue;
-          const dicho = /^[\d.]+$/.test(m[1])
-            ? Number(m[1].replace(/\./g, ""))
-            : NUMEROS_ES.get(m[1]);
           if (dicho === valor) continue;
           // `hitos`: un número que el corpus cita como HISTORIA —de dónde venía el
           // índice, cuánto aportó cada tanda— no es una afirmación sobre hoy, y

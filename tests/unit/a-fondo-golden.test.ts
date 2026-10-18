@@ -6,6 +6,7 @@ import { chatChunkSchema } from "@/lib/ia/schemas";
 import { leerDocumentos, simularAprobacion } from "../../scripts/a-fondo.mjs";
 import { buildChunks } from "../../scripts/build-chat-index.mjs";
 import { leerFichas } from "../../scripts/fichas-al-indice.mjs";
+import { leerMetodo } from "../../scripts/metodo-al-indice.mjs";
 
 /**
  * EL GOLDEN SET DEL CORPUS (S8).
@@ -49,6 +50,7 @@ const chunks = buildChunks({
   // Las 32 fichas de la vitrina también viven en el índice (ADR-023): medir
   // el golden sin ellas sería medir contra un índice que no existe.
   fichas: leerFichas(),
+  metodo: leerMetodo(),
 }).map((c: unknown) => chatChunkSchema.parse(c));
 const retriever = createRetriever(chunks);
 
@@ -126,6 +128,7 @@ describe("golden set en inglés — cada gemelo contesta sus propias preguntas",
     aFondo: simularAprobacion(docsEn),
     locale: "en",
     fichas: leerFichas(),
+    metodo: leerMetodo(),
   }).map((c: unknown) => chatChunkSchema.parse(c));
   const retrieverEn = createRetriever(chunksEn);
   const casosEn = docsEn.flatMap((d) =>

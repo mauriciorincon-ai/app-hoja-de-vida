@@ -50,6 +50,12 @@ conceptos:
       - "en la vitrina"
       - "del portafolio"
       - "en el portafolio"
+    # Los 27 agentes de Vesting son los de una startup, no los de la vitrina; su inventario
+    # vive fuera de este repositorio (ver la nota de arriba). Entró con las infografías de
+    # «Mi método» (S11): «los 27 agentes de Vesting» y «los de la vitrina» van en una frase.
+    salvedades:
+      - frase: "agentes de vesting"
+        razon: "los agentes de Vesting son de una startup, no los publicados en la vitrina; su inventario está fuera de este repositorio"
 
   - id: investigaciones
     etiqueta: "las investigaciones publicadas"
@@ -162,6 +168,11 @@ conceptos:
     # sustantivo, tres órdenes de magnitud de diferencia.
     contexto_previo: ["indice de", "indice en", "indice con", "indice tiene", "indice suma"]
     ventana_previa: 24
+    # Y UN CONTEO DE MIL O MÁS ES EL ÍNDICE, lleve o no sujeto delante (S11). El corpus
+    # decía «el de hoy tiene 1.467 fragmentos», «ya va en 1.467» e «índice —1.467 fragmentos—»:
+    # ninguna llevaba «índice de/en/con…» pegado, y el gate no las veía mientras el índice
+    # real ya era 1.633. El top-k (cuántas fuentes entran a una respuesta) no pasa de un dígito.
+    sin_contexto_desde: 1000
     salvedades:
       - frase: "fragmentos relevantes"
         razon: "el top-k de una respuesta, no el tamaño del índice"
@@ -169,6 +180,10 @@ conceptos:
         razon: "el top-k de una respuesta, no el tamaño del índice"
       - frase: "recuperacion de los"
         razon: "el top-k de una respuesta, no el tamaño del índice"
+      # Esta NO es un hito (un hito exime el número en TODAS partes, y el 1.467 «de hoy» tiene
+      # que seguir juzgándose): es la frase de historia, y solo ella.
+      - frase: "salto de 494 a"
+        razon: "historia: el índice con el corpus v3 (de unas 30.000 a unas 158.000 palabras por idioma), antes de las fichas de la vitrina y de «Mi método»"
     # TOLERANCIA, y por qué. Este número se mueve con CADA edición del corpus:
     # añadir un párrafo lo cambia. Exigirlo exacto haría el gate circular —
     # corriges la cifra, y corregirla mueve la cifra. Con una banda del 5 %, una

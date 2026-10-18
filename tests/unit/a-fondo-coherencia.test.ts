@@ -4,6 +4,7 @@ import { parse } from "yaml";
 import { leerDocumentos } from "../../scripts/a-fondo.mjs";
 import { buildChunks } from "../../scripts/build-chat-index.mjs";
 import { leerFichas } from "../../scripts/fichas-al-indice.mjs";
+import { leerMetodo } from "../../scripts/metodo-al-indice.mjs";
 import {
   conPortada,
   fixture,
@@ -60,6 +61,9 @@ const fragmentosDelIndice = buildChunks({
   aFondo: docs,
   locale: "es",
   fichas: leerFichas(),
+  // Las infografías de «Mi método» entran al índice real (build-chat-index.mjs); sin ellas
+  // este número quedaba 46 fragmentos por debajo del que publica el chat (S10 → S11).
+  metodo: leerMetodo(),
 }).length;
 
 describe("coherencia del corpus a fondo", () => {
@@ -240,6 +244,39 @@ describe("los motores de coherencia, uno a uno", () => {
     );
     expect(rojo).toHaveLength(1);
     expect(rojo[0]).toContain("«494 fragmentos»");
+  });
+
+  it("cifras del repo: `sin_contexto_desde` juzga un conteo grande aunque no lleve sujeto delante (S11)", () => {
+    // «el de hoy tiene 1.467 fragmentos» no lleva «índice de» pegado: sin esta opción el
+    // gate no la veía mientras el índice real era 1.633. Mil o más es el índice; el top-k no.
+    const base = {
+      id: "fragmentos-indice",
+      etiqueta: "los fragmentos del índice",
+      fuente: "el builder",
+      sustantivos: ["fragmentos"],
+      contexto_previo: ["indice de"],
+      ventana_previa: 24,
+    };
+    const verdades = { "fragmentos-indice": 1633 };
+    const frase = "El de hoy tiene 1.467 fragmentos en español.";
+    // SIN la opción: la frase se escapa (el hueco que se halló).
+    expect(problemasDeCifras([doc("x", [{ id: "s", texto: frase }])], [base], verdades)).toEqual([]);
+    // CON la opción: rojo, nombrando la cifra.
+    const rojo = problemasDeCifras(
+      [doc("x", [{ id: "s", texto: frase }])],
+      [{ ...base, sin_contexto_desde: 1000 }],
+      verdades,
+    );
+    expect(rojo).toHaveLength(1);
+    expect(rojo[0]).toContain("«1.467 fragmentos»");
+    // El top-k sigue sin juzgarse, aunque la opción esté puesta.
+    expect(
+      problemasDeCifras(
+        [doc("x", [{ id: "s", texto: "Entran cuatro fragmentos a cada respuesta." }])],
+        [{ ...base, sin_contexto_desde: 1000 }],
+        verdades,
+      ),
+    ).toEqual([]);
   });
 
   it("cifras del repo: un `hito` declarado es historia, no una afirmación sobre hoy", () => {
