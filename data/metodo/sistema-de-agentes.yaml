@@ -457,8 +457,8 @@ bloques:
           corpus: [fundacion-ctic]
       - titulo: { es: "La agencia excesiva, riesgo de primera línea", en: "Excessive agency as a front-line risk" }
         queCambia:
-          es: "En la edición 2026 de su Top 10 para aplicaciones con LLM, OWASP subió la agencia excesiva del sexto al tercer lugar: darle a un agente más funciones, permisos o autonomía de los que necesita queda entre los tres riesgos primeros de la lista."
-          en: "In the 2026 edition of its Top 10 for LLM applications, OWASP moved excessive agency from sixth to third place: giving an agent more functions, permissions or autonomy than it needs now ranks among the top three risks on the list."
+          es: "En el anuncio de su Top 10 2026 para aplicaciones con LLM, OWASP recoge, por boca de un colaborador del proyecto, que la agencia excesiva está ahora en el número tres (en la edición 2025 era el LLM06): darle a un agente más funciones, permisos o autonomía de los que necesita queda entre los tres riesgos primeros de la lista."
+          en: "In the announcement of its 2026 Top 10 for LLM applications, OWASP reports, through a contributor to the project, that excessive agency is now number three (it was LLM06 in the 2025 edition): giving an agent more functions, permissions or autonomy than it needs now ranks among the top three risks on the list."
         fuentes: [16, 4]
 
   # ─── 6 · Modos de falla y cómo se ven venir ─────────────────────────────────
