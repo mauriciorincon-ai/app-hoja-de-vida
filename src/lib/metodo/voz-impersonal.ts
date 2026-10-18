@@ -18,7 +18,9 @@
  * La lista de verbos es un PISO, no un techo: atrapa la regresión a las
  * formas que ya se vieron, no todo verbo posible. Lo demás lo lee quien
  * audita. Solo se juzga lo que el autor escribe (`{ es, en }`): el título y el
- * editor de una fuente citada son de un tercero y no se editan.
+ * editor de una fuente citada son de un tercero y no se editan. Y lo que va
+ * ENTRE COMILLAS («…», “…”) es la voz de otro —la respuesta fija del chat,
+ * «eso se me escapa»; una cita—, así que tampoco se juzga.
  */
 
 export type Idioma = "es" | "en";
@@ -59,11 +61,15 @@ const ENTREVISTA = solo(
   "entrevistas?|entrevistad[oa]s?|entrevistador(?:a|es|as)?|entrevistar|interviews?|interviewers?|interviewing|interviewed",
 );
 
+/** Lo citado entre comillas («…», “…”) se borra antes de juzgar: es la voz de otro. */
+const sinCitas = (texto: string) => texto.replace(/«[^»]*»|“[^”]*”/g, (c) => " ".repeat(c.length));
+
 const recoger = (re: RegExp, texto: string, clase: ClaseDeHallazgo): Hallazgo[] =>
   [...texto.matchAll(re)].map((m) => ({ termino: m[0], clase }));
 
 /** Lo que de primera persona o de «entrevista» hay en un texto, en el orden en que aparece. */
-export function hallazgosDeVoz(texto: string, idioma: Idioma): Hallazgo[] {
+export function hallazgosDeVoz(textoCompleto: string, idioma: Idioma): Hallazgo[] {
+  const texto = sinCitas(textoCompleto);
   const hallazgos =
     idioma === "es"
       ? [...recoger(PERSONA_ES, texto, "persona"), ...recoger(VERBOS_ES, texto, "verbo")]

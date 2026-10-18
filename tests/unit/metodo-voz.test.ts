@@ -29,6 +29,8 @@ describe("el motor: lo que atrapa", () => {
     ["No he operado agentes en contenedor", ["he"]],
     ["Una pregunta de entrevista", ["entrevista"]],
     ["El entrevistador pregunta", ["entrevistador"]],
+    // Fuera de las comillas la voz se sigue juzgando.
+    ["Diseñé la respuesta «no sé»", ["Diseñé"]],
   ])("es: «%s»", (texto, esperados) => {
     expect(termino(texto, "es")).toEqual(esperados);
   });
@@ -41,6 +43,7 @@ describe("el motor: lo que atrapa", () => {
     ["Each page answers an interview question", ["interview"]],
     ["The interviewer asks", ["interviewer"]],
     ["It is up to us", ["us"]],
+    ["I wrote “I don’t know” myself", ["I", "myself"]],
   ])("en: «%s»", (texto, esperados) => {
     expect(termino(texto, "en").sort()).toEqual([...esperados].sort());
   });
@@ -56,6 +59,8 @@ describe("el motor: lo que NO debe atrapar", () => {
     "El costo es de US$20 al mes y el techo de US$20",
     "Cómo se debe llevar un prototipo de IA a producción",
     "Quien decide: producto, operaciones y líderes de proceso",
+    // Lo citado es la voz de otro: la respuesta fija del chat, no la del autor.
+    "Diez legítimas recibían «eso se me escapa» y una recibe «no sé»",
   ])("es: «%s»", (texto) => {
     expect(hallazgosDeVoz(texto, "es")).toEqual([]);
   });
@@ -66,6 +71,7 @@ describe("el motor: lo que NO debe atrapar", () => {
     "Whoever decides reads dashboards built on the same meaning",
     "Phase 1 of the AI program",
     "The thresholds are examples of the method",
+    "A legitimate question gets “I don’t know”",
   ])("en: «%s»", (texto) => {
     expect(hallazgosDeVoz(texto, "en")).toEqual([]);
   });
