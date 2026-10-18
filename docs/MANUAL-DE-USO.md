@@ -677,11 +677,12 @@ Una infografía es **un archivo de datos**, no una página: un archivo `data/met
 10. **Prueba antes de mergear:** `pnpm test` (esquema, índice del chat, banco), `pnpm build` y los
    e2e de «Mi método»; el spec lee `data/metodo/` y cubre la pieza nueva **sin tocarlo**.
 11. **Node:** el índice del chat lo arma un script que importa archivos `.ts`, y eso solo funciona
-   desde **Node 22.18**. El proyecto lo declara (`engines` en `package.json`), `.nvmrc` trae la versión
-   exacta que usa la CI en sus cuatro trabajos, y un test (`node-declarado`) falla si el mínimo, el
-   `.nvmrc` o la CI se contradicen. Si no tienes esa versión, `nvm use` la lee del `.nvmrc`. Ojo: la
-   producción no usa el `.nvmrc`: Vercel lee el rango del `package.json` y, con un piso abierto,
-   corre la última mayor (hoy 24.x); la CI es la que prueba la 22.18.0.
+   desde **Node 22.18**. El proyecto declara la **mayor** (`engines` en `package.json`: `22.x`, que es
+   lo que lee Vercel) y `.nvmrc` trae la versión exacta que prueban los cuatro trabajos de la CI
+   (la 22.18.0): producción y CI corren la misma mayor. Un test (`node-declarado`) falla si `engines`
+   es un rango abierto, si el `.nvmrc` o los tipos (`@types/node`) son de otra mayor, o si un trabajo
+   de la CI lee la versión antes de traer el repositorio. Si tu Node local es otra (hoy la 24), pnpm
+   avisa «Unsupported engine» y sigue; `nvm use` toma el `.nvmrc` si tienes la 22.
 
 **Qué hace fallar el build** (y lo dice con el archivo y el campo): un bloque que falta o está fuera
 de orden · una fuente sin fecha, sin editor o sin enlace `https://`, o más nueva que la revisión ·

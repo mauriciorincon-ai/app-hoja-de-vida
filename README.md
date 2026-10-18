@@ -27,7 +27,7 @@ promete fecha.
 
 ## Correrla en local
 
-Necesita **Node 22.18 o posterior** (`engines` en `package.json`); `.nvmrc` trae la versión exacta que usa la CI, así que `nvm use` la deja puesta.
+Necesita **Node 22** (`engines`: `22.x`; el índice del chat pide desde la 22.18); `.nvmrc` trae la versión exacta que usa la CI, así que `nvm use` la deja puesta. Con otra mayor, pnpm avisa («Unsupported engine») pero no se detiene.
 
 ```bash
 pnpm install
