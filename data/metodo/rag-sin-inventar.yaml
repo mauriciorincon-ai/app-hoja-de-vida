@@ -11,7 +11,7 @@
 # documentación de LangSmith traía por título texto dirigido a agentes («Documentation Index»): no se abrió, se ignora y
 # queda anotado en el cierre del sprint. La evidencia sale solo de `rag-y-el-chat` (y de `certificaciones` para el
 # AI-103) y del propio chat, que se puede abrir y probar. Límites con las palabras del corpus: sin embeddings ni base
-# vectorial por decisión escrita (un argumento, no una experiencia), sin juez automático de la respuesta, sin validador
+# vectorial en el chat por decisión escrita (comparadas con la léxica), sin juez automático de la respuesta, sin validador
 # de citas por frase. Ninguna cifra que se mueva sola con el corpus (el tamaño del índice, el tamaño del banco): las de
 # aquí son mediciones fechadas o configuración, y el gate de cifras las ata a su documento.
 
@@ -617,8 +617,8 @@ bloques:
     limites:
       - voz: hice
         texto:
-          es: "Embeddings y base vectorial son, en este chat, una decisión escrita de no usarlos mientras una medición no lo justifique: es un argumento con su medición del lado léxico, no una experiencia con embeddings."
-          en: "Embeddings and a vector database are, in this chat, a written decision not to use them until a measurement justifies it: it is an argument backed by measurement on the lexical side, not an experience with embeddings."
+          es: "Embeddings y base vectorial no entran a este chat por una decisión escrita, no por desconocerlos: comparé la búsqueda vectorial con la léxica, y entran el día que una medición lo justifique."
+          en: "Embeddings and a vector database are out of this chat by a written decision, not for lack of knowing them: I compared vector search with lexical search, and they come in the day a measurement justifies it."
         corpus: [rag-y-el-chat]
       - voz: hice
         texto:
@@ -632,13 +632,13 @@ bloques:
         corpus: [rag-y-el-chat]
       - voz: hice
         texto:
-          es: "El chat no ajusta ni reentrena ningún modelo: cuando algo de mi trayectoria cambia, cambia en la fuente y entra al índice en el siguiente build."
-          en: "The chat does not fine-tune or retrain any model: when something in my career changes, it changes at the source and enters the index on the next build."
+          es: "El chat no ajusta ni reentrena ningún modelo, y no es por no saber: ajusté uno en Microsoft Foundry. Un ajuste cambia cómo se comporta el modelo; lo que cambia en mi trayectoria cambia en la fuente y entra al índice en el siguiente build."
+          en: "The chat does not fine-tune or retrain any model, and it is not for lack of knowing how: I fine-tuned one on Microsoft Foundry. A fine-tune changes how a model behaves; what changes in my career changes at the source and enters the index on the next build."
         corpus: [rag-y-el-chat]
       - voz: hice
         texto:
-          es: "Con Microsoft Foundry, mi experiencia es el adaptador de proveedor de este chat y el estudio del AI-103, que está en curso."
-          en: "With Microsoft Foundry, my experience is this chat’s provider adapter and studying for the AI-103, which is in progress."
+          es: "Con Microsoft Foundry, mi experiencia es el adaptador de proveedor de este chat, ese ajuste y el estudio del AI-103, que está en curso; Azure AI Search lo estudié a fondo en esa ruta."
+          en: "With Microsoft Foundry, my experience is this chat’s provider adapter, that fine-tune and studying for the AI-103, which is in progress; I studied Azure AI Search in depth in that path."
         corpus: [rag-y-el-chat, certificaciones]
       - voz: posicion
         texto:
