@@ -178,7 +178,7 @@ export function MapaSvg({
           viewBox={`0 0 ${ancho} ${alto}`}
           width={ancho}
           height={alto}
-          className="mx-auto block h-auto max-w-none print:max-w-full"
+          className="mx-auto block h-auto max-w-none md:max-w-full print:max-w-full"
           style={{ minWidth: Math.min(ancho, 720) }}
         >
           <title id="mapa-titulo">{bloque.titulo[idioma]}</title>
@@ -207,6 +207,11 @@ export function MapaSvg({
               const ch = centro(hasta);
               const p1 = salida(cd, ch);
               const p2 = salida(ch, cd, 3);
+              // Entre dos celdas vecinas de la misma fila el hueco mide 36 px:
+              // la etiqueta, centrada en la flecha, quedaría tapada por los
+              // nodos. Ahí va encima de la franja de los nodos, sobre la flecha.
+              const horizontal = Math.abs(cd.y - ch.y) < 1;
+              const ly = horizontal ? cd.y - NH / 2 - 6 : (p1.y + p2.y) / 2 - 6;
               return (
                 <g key={i} data-arista={`${a.de}-${a.a}`}>
                   <line
@@ -221,7 +226,7 @@ export function MapaSvg({
                   {a.etiqueta && (
                     <text
                       x={(p1.x + p2.x) / 2}
-                      y={(p1.y + p2.y) / 2 - 6}
+                      y={ly}
                       textAnchor="middle"
                       fontSize={11}
                       strokeWidth={4}
