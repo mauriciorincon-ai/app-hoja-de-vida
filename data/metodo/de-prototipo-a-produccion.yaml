@@ -132,7 +132,7 @@ bloques:
           es: "Proveedor, modelo, milisegundos, tokens y errores: lo necesario para saber qué falló, dónde y cuánto costó."
           en: "Provider, model, milliseconds, tokens and errors: what is needed to know what failed, where and what it cost."
       - n: 12
-        etiqueta: { es: "Resumen y decisión registrada", en: "Summary and recorded decision" }
+        etiqueta: { es: "Resumen del ciclo", en: "Cycle summary" }
         tipo: dato
         col: 0
         fila: 3
