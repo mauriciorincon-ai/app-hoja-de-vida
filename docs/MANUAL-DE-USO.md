@@ -613,7 +613,8 @@ el mensaje te llega al correo.
   pregunta «¿Cómo estructura Henry un sistema multiagente?» recibe una cita con el chip
   «T2 · Cómo estructuro un sistema de agentes» que lleva **al bloque** exacto; con «¿Cómo evita el
   chat de Henry inventar respuestas?» la cita es «T3 · Cómo hago que un LLM responda con los datos de la
-  empresa y no invente». Los fragmentos
+  empresa y no invente»; y con «¿Cómo lleva Henry una aplicación de IA a producción?» es
+  «T4 · Cómo llevo un prototipo de IA a producción y lo mantengo». Los fragmentos
   llevan su voz dentro del texto («lo que el campo hace — Anthropic, 2025-06-13»), así que el chat
   no te atribuye lo que hace el campo. Pesan **la mitad** que tus documentos a fondo (como las
   fichas): medido, a peso 1 la pieza le quitaba el contexto a tus propios documentos.
@@ -659,7 +660,10 @@ Una infografía es **un archivo de datos**, no una página: un archivo `data/met
    (la palabra de quien pregunta tiene que existir en el título de sus elementos), no el banco. La
    pregunta de una pieza puede llegar detrás del documento de fondo (la de los embeddings de T3 llega
    4.ª en español); mientras entre al top-4 la fila pasa, y es el primer sitio donde mirar cuando el
-   índice crezca. Y como el banco crece, el número de preguntas de afuera
+   índice crezca. Con T4 pasó al revés: dos de sus tres preguntas no entraban («qué controles corren
+   antes de publicar» y «qué experiencia tengo con Microsoft Foundry»); se ajustó el nombre de una
+   fase y el de un elemento de la pieza, con las palabras de quien pregunta, y las filas quedaron como
+   estaban. Y como el banco crece, el número de preguntas de afuera
    que dicen los documentos `rag-y-el-chat` y `apps-pipeline` (en los dos idiomas) **tiene que
    subir**: el test de coherencia te dice cuál.
 8. **Rendimiento y capturas:** suma `/es/metodo/<slug>` a `lighthouse-urls.json` y corre
@@ -672,6 +676,10 @@ Una infografía es **un archivo de datos**, no una página: un archivo `data/met
    corriges con el número en letras.
 10. **Prueba antes de mergear:** `pnpm test` (esquema, índice del chat, banco), `pnpm build` y los
    e2e de «Mi método»; el spec lee `data/metodo/` y cubre la pieza nueva **sin tocarlo**.
+11. **Node:** el índice del chat lo arma un script que importa archivos `.ts`, y eso solo funciona
+   desde **Node 22.18**. El proyecto lo declara (`engines` en `package.json`), `.nvmrc` trae la versión
+   exacta que usa la CI en sus cuatro trabajos, y un test (`node-declarado`) falla si el mínimo, el
+   `.nvmrc` o la CI se contradicen. Si no tienes esa versión, `nvm use` la lee del `.nvmrc`.
 
 **Qué hace fallar el build** (y lo dice con el archivo y el campo): un bloque que falta o está fuera
 de orden · una fuente sin fecha, sin editor o sin enlace `https://`, o más nueva que la revisión ·
@@ -1199,3 +1207,4 @@ chat hoy y cuáles traería con la base aprobada. Ese informe **se genera, no se
 | Ajuste post-S9 2026-10-08 (3) | **El carrusel de apps muestra dónde acaba y se recorre con el pad.** Tres posiciones: inicio (borde izquierdo limpio), intermedio y final, el espejo del inicio (dos enteras pegadas a la derecha y un pedazo difuminado a la izquierda). Desde el final «siguiente» regresa al inicio con un barrido rápido. El gesto lateral del pad (dos dedos de lado) o Shift + rueda avanza una tarjeta por gesto; la rueda vertical sigue siendo de la página. Sección «Categorías y carrusel» arriba. |
 | Sprint 010 | **«Mi método»: tu método de trabajo, una infografía por pregunta de entrevista.** Sección nueva `/metodo` (en el menú, junto a Portafolio y Contacto) y una página por pieza, `/metodo/<slug>`, con **diez bloques fijos**, anclas `#bloque-1…10`, un mapa SVG con texto real y su lectura nodo por nodo, un riel de fases y **tres voces que nunca se mezclan** (lo que hice · lo que el campo hace · mi posición, cada una con símbolo, palabra y color). Se imprime en A4 y en carta. Cada infografía es **un archivo de datos** (`data/metodo/<slug>.yaml`) con esquema que rompe el build si falta un bloque, una fuente sin fecha, una afirmación sin su evidencia, cifras distintas entre idiomas o un `[CONFIRMAR]`. Primera pieza: **«Cómo estructuro un sistema de agentes» (T2)**, con 16 fuentes fechadas. **El chat la cita bloque a bloque** (chip «T2 · …» que lleva al bloque) y el banco suma tres preguntas por idioma. Sección nueva arriba: cómo se escribe una infografía. Detalle en `sprints/SPRINT_010-cierre.md`. |
 | Sprint 011 | **«Mi método», segunda pieza: «Cómo hago que un LLM responda con los datos de la empresa y no invente» (T3).** Diez bloques con 14 fuentes fechadas (documentación oficial de Microsoft Learn, Anthropic y OWASP primero); lo que hice sale solo de `rag-y-el-chat`, y los embeddings aparecen como decisión escrita, no como experiencia. **Es la pieza que se demuestra sola:** el chat de esta página la cita bloque a bloque, y el banco suma tres preguntas por idioma. **El mecanismo quedó blindado:** el índice del chat pasa por el esquema antes de armarse, los enlaces de la evidencia se comprueban contra el catálogo, un documento citado debe estar aprobado en los dos idiomas, cada cifra de «lo que hice» debe estar en su documento, la cifra de la Fundación CTIC vigila también `data/metodo/`, y los totales de piezas del manual y la guía se miden. En la lista `/metodo`, las dos tarjetas miden lo mismo. Detalle en `sprints/SPRINT_011-cierre.md`. |
+| Sprint 012 | **«Mi método», tercera pieza: «Cómo llevo un prototipo de IA a producción y lo mantengo» (T4).** Diez bloques con 12 fuentes fechadas (Microsoft Learn, OWASP y GitHub); lo que hice sale de `plataforma-y-despliegue`, `apps-pipeline`, `rag-y-el-chat` y `certificaciones`, y lo que no he hecho —contenedores y Kubernetes en producción, un despliegue propio en Azure— está escrito como límite, con el AI-300 «en curso». Es la pieza donde la evidencia es el propio pipeline. **El proyecto declara la versión de Node que necesita** (22.18, `engines` y `.nvmrc`) y la CI corre exactamente esa. La lista `/metodo` cuenta tres piezas, medidas. Detalle en `sprints/SPRINT_012-cierre.md`. |
