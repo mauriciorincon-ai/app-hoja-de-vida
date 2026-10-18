@@ -28,6 +28,8 @@ import { existsSync, readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import process from "node:process";
 import { parse } from "yaml";
+import { mundoDelCorpus } from "../src/lib/metodo/corpus.ts";
+import { parsePieza } from "../src/lib/metodo/schema.ts";
 import { TOPE_PALABRAS_CHUNK, ventanasPorParrafo } from "./a-fondo.mjs";
 
 const ROOT = process.cwd();
@@ -52,16 +54,59 @@ export function anclasDeBloques(slug) {
   return Array.from({ length: N_BLOQUES }, (_, i) => `/metodo/${slug}#bloque-${i + 1}`);
 }
 
-/** Lee lo que hay en disco. Tolera que la sección no exista todavía (un repo sin piezas). */
-export function leerMetodo() {
-  const dir = path.join(ROOT, "data", "metodo");
+/**
+ * Lee lo que hay en disco y lo VALIDA con el mismo esquema Zod que la página
+ * (`parsePieza`), antes de armar ningún fragmento. El índice del chat corre
+ * ANTES de `next build` (`package.json › build`), así que sin esto un `tipo`,
+ * una `voz` o un `nivel` mal escritos llegaban al chunker como un TypeError
+ * opaco —o, peor, escribían «undefined» en un fragmento—. Ahora el build para
+ * aquí, nombrando archivo y campo, con el mensaje de siempre del esquema. Los
+ * documentos del corpus que la pieza cita deben estar aprobados (`corpus.ts`).
+ *
+ * `raiz` permite ejercer los rojos contra carpetas de prueba; los mensajes
+ * (`messages/<locale>.json`) salen siempre del repo. Tolera que la sección no
+ * exista todavía (un repo sin piezas).
+ */
+export function leerMetodo(raiz = ROOT) {
+  const dir = path.join(raiz, "data", "metodo");
+  const mundo = mundoDelCorpus(raiz);
   const piezas = (existsSync(dir) ? readdirSync(dir) : [])
     .filter((f) => f.endsWith(".yaml"))
-    .map((f) => ({ archivo: `data/metodo/${f}`, pieza: parse(readFileSync(path.join(dir, f), "utf8")) }))
+    .map((f) => {
+      const archivo = `data/metodo/${f}`;
+      return {
+        archivo,
+        pieza: parsePieza(parse(readFileSync(path.join(dir, f), "utf8")), archivo, mundo),
+      };
+    })
     .sort((a, b) => String(a.pieza?.id).localeCompare(String(b.pieza?.id)));
   const mensajes = (locale) =>
     JSON.parse(readFileSync(path.join(ROOT, "messages", `${locale}.json`), "utf8")).metodo;
   return { piezas, etiquetas: { es: mensajes("es"), en: mensajes("en") } };
+}
+
+/**
+ * ¿Cada enlace de la evidencia (bloque 8) lleva a un destino que existe?
+ * `existe` es `destinoExiste` con el catálogo de `scripts/destinos.mjs`; se
+ * recibe por parámetro porque `destinos.mjs` ya importa este módulo (un ciclo
+ * de más no). El esquema solo valida la FORMA de la ruta: un `/proyectos/vestin`
+ * pasaba y publicaba un enlace roto en la evidencia del dueño.
+ */
+export function problemasDeEvidencia(piezas, existe) {
+  const problemas = [];
+  for (const { archivo, pieza } of piezas) {
+    const i = (pieza.bloques ?? []).findIndex((b) => b.n === 8);
+    if (i < 0) continue;
+    (pieza.bloques[i].evidencia ?? []).forEach((e, j) => {
+      if (e.href && !existe(e.href)) {
+        problemas.push(
+          `${archivo}: bloques.${i}.evidencia.${j}.href = «${e.href}» no es un destino del sitio ` +
+            `(catálogo de scripts/destinos.mjs); un enlace roto en la evidencia rompe la promesa de la pieza.`,
+        );
+      }
+    });
+  }
+  return problemas;
 }
 
 const limpio = (s) => String(s ?? "").replace(/\s+/g, " ").trim();

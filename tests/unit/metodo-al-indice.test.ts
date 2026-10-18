@@ -1,6 +1,8 @@
 // @vitest-environment node
-import { readFileSync } from "node:fs";
-import { describe, expect, it } from "vitest";
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
+import path from "node:path";
+import { afterEach, describe, expect, it } from "vitest";
 import { parse } from "yaml";
 import { TOPE_PALABRAS_CHUNK } from "../../scripts/a-fondo.mjs";
 import { buildChunks } from "../../scripts/build-chat-index.mjs";
@@ -17,6 +19,7 @@ import {
   leerMetodo,
   N_BLOQUES,
   PESO_METODO,
+  problemasDeEvidencia,
 } from "../../scripts/metodo-al-indice.mjs";
 
 /**
@@ -284,5 +287,102 @@ describe("buildChunks mete «Mi método» al índice, con su código y su destin
     expect(sin.some((c: { id: string }) => c.id.startsWith("metodo-"))).toBe(
       false,
     );
+  });
+});
+
+// ───────────────────────────────────────────────────────────────────────────
+// S11 · EL ÍNDICE PASA POR ZOD ANTES DE ARMARSE, Y LOS ENLACES DE LA EVIDENCIA EXISTEN
+// ───────────────────────────────────────────────────────────────────────────
+
+describe("ROJO · leerMetodo valida con el esquema antes de armar el índice (S11)", () => {
+  const TEXTO = readFileSync("tests/fixtures/metodo/ejemplo-sintetico.yaml", "utf8");
+  const APROBADO = "---\nestado: aprobado\n---\n# doc\n";
+  const carpetas: string[] = [];
+  afterEach(() => {
+    for (const c of carpetas.splice(0)) rmSync(c, { recursive: true, force: true });
+  });
+
+  /** Una raíz de prueba con la pieza dada y el corpus que ella cita, aprobado en ES y EN. */
+  function raiz(yaml: string): string {
+    const r = mkdtempSync(path.join(tmpdir(), "metodo-indice-"));
+    carpetas.push(r);
+    mkdirSync(path.join(r, "data", "metodo"), { recursive: true });
+    mkdirSync(path.join(r, "data", "a-fondo"), { recursive: true });
+    writeFileSync(path.join(r, "data", "metodo", "ejemplo-sintetico.yaml"), yaml);
+    for (const slug of ["como-trabajo", "vesting"])
+      for (const l of ["es", "en"])
+        writeFileSync(path.join(r, "data", "a-fondo", `${slug}.${l}.md`), APROBADO);
+    return r;
+  }
+
+  it("la pieza de juguete válida se lee (el control: sin esto, los rojos no prueban nada)", () => {
+    expect(leerMetodo(raiz(TEXTO)).piezas.map((p) => p.pieza.slug)).toEqual(["ejemplo-sintetico"]);
+  });
+
+  it("un tipo de nodo que no existe rompe nombrando archivo y campo, no con un TypeError", () => {
+    const malo = TEXTO.replace("tipo: humano", "tipo: persona");
+    expect(malo).not.toBe(TEXTO);
+    expect(() => leerMetodo(raiz(malo))).toThrowError(
+      /data\/metodo\/ejemplo-sintetico\.yaml[\s\S]*nodos\.6\.tipo/,
+    );
+  });
+
+  it("una voz que no existe rompe nombrando el campo", () => {
+    const malo = TEXTO.replace("voz: hice", "voz: otra");
+    expect(malo).not.toBe(TEXTO);
+    expect(() => leerMetodo(raiz(malo))).toThrowError(
+      /data\/metodo\/ejemplo-sintetico\.yaml[\s\S]*voz/,
+    );
+  });
+
+  it("un nivel que no existe rompe en vez de escribir «undefined» en un fragmento", () => {
+    const malo = TEXTO.replace("nivel: uso-real", "nivel: produccion");
+    expect(malo).not.toBe(TEXTO);
+    expect(() => leerMetodo(raiz(malo))).toThrowError(
+      /data\/metodo\/ejemplo-sintetico\.yaml[\s\S]*evidencia\.0\.nivel/,
+    );
+  });
+
+  it("un documento del corpus en borrador rompe también aquí (el índice no lo citaría)", () => {
+    const r = raiz(TEXTO);
+    writeFileSync(path.join(r, "data", "a-fondo", "vesting.es.md"), "---\nestado: borrador\n---\n# doc\n");
+    expect(() => leerMetodo(r)).toThrowError(/«vesting» existe en data\/a-fondo\/ pero no se puede citar/);
+  });
+});
+
+describe("ROJO · los enlaces de la evidencia llevan a un destino que existe (S11)", () => {
+  const piezas = (hrefs: (string | undefined)[]) => {
+    const pieza = structuredClone(EJEMPLO);
+    const b8 = pieza.bloques.find((b: { n: number }) => b.n === 8);
+    b8.evidencia.forEach((e: { href?: string }, i: number) => {
+      e.href = hrefs[i];
+    });
+    return [{ archivo: "data/metodo/ejemplo-sintetico.yaml", pieza }];
+  };
+
+  it("los enlaces reales de data/metodo/ existen en el catálogo de destinos", () => {
+    const problemas = problemasDeEvidencia(metodo.piezas, (d: string) => destinoExiste(d));
+    expect(problemas, "\n" + problemas.join("\n")).toEqual([]);
+  });
+
+  it("un enlace con un typo rompe nombrando archivo, campo y el valor", () => {
+    const malos = problemasDeEvidencia(
+      piezas(["/proyectos/vestin"]),
+      (d: string) => destinoExiste(d),
+    );
+    expect(malos).toHaveLength(1);
+    expect(malos[0]).toMatch(
+      /data\/metodo\/ejemplo-sintetico\.yaml: bloques\.7\.evidencia\.0\.href = «\/proyectos\/vestin» no es un destino del sitio/,
+    );
+  });
+
+  it("una evidencia sin enlace es válida (el enlace es opcional)", () => {
+    expect(problemasDeEvidencia(piezas([undefined, undefined]), (d: string) => destinoExiste(d))).toEqual([]);
+  });
+
+  it("un enlace con ancla se juzga por su ruta (la página es lo que decide)", () => {
+    expect(
+      problemasDeEvidencia(piezas(["/proyectos/vesting#cs-impacto"]), (d: string) => destinoExiste(d)),
+    ).toEqual([]);
   });
 });

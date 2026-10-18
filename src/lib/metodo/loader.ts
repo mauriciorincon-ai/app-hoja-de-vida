@@ -3,6 +3,7 @@ import { existsSync, readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { cache } from "react";
 import { parse } from "yaml";
+import { mundoDelCorpus } from "./corpus";
 import { parsePieza, type PiezaMetodo } from "./schema";
 
 /**
@@ -11,7 +12,8 @@ import { parsePieza, type PiezaMetodo } from "./schema";
  * build FALLA, nombrando archivo y campo, si una pieza está malformada, si el
  * nombre del archivo no es su slug, si dos piezas comparten tema (`id`) o si
  * una afirmación de «lo que hice» cita un documento que no existe en
- * `data/a-fondo/` (la experiencia sale del corpus, no se inventa).
+ * `data/a-fondo/` o que no está aprobado en español e inglés (la experiencia
+ * sale del corpus, no se inventa; ver `corpus.ts`).
  *
  * Misma convención que `piezas.ts`: `cache()` de React memoiza por render, así
  * que en producción hay además un memo de módulo (cada página del build volvía
@@ -23,17 +25,6 @@ const SUFIJO = ".yaml";
 const MEMORIZAR = process.env.NODE_ENV === "production";
 let memo: PiezaMetodo[] | undefined;
 
-/** Los slugs de los documentos del corpus a fondo (el `.es.md` marca que existe). */
-function slugsDelCorpus(raiz: string): Set<string> {
-  const dir = path.join(raiz, "data", "a-fondo");
-  if (!existsSync(dir)) return new Set();
-  return new Set(
-    readdirSync(dir)
-      .filter((f) => f.endsWith(".es.md"))
-      .map((f) => f.slice(0, -".es.md".length)),
-  );
-}
-
 /**
  * Lee y valida todas las piezas de una raíz. Exportada (con `raiz`) para poder
  * ejercer los rojos contra carpetas de prueba sin tocar `data/metodo/` real.
@@ -42,7 +33,7 @@ function slugsDelCorpus(raiz: string): Set<string> {
 export function leerPiezasDeDisco(raiz: string = process.cwd()): PiezaMetodo[] {
   const dir = path.join(raiz, "data", "metodo");
   if (!existsSync(dir)) return [];
-  const corpus = slugsDelCorpus(raiz);
+  const mundo = mundoDelCorpus(raiz);
 
   const piezas = readdirSync(dir)
     .filter((f) => f.endsWith(SUFIJO))
@@ -52,7 +43,7 @@ export function leerPiezasDeDisco(raiz: string = process.cwd()): PiezaMetodo[] {
       const pieza = parsePieza(
         parse(readFileSync(path.join(dir, archivo), "utf8")) as unknown,
         fuente,
-        { corpus },
+        mundo,
       );
       if (`${pieza.slug}${SUFIJO}` !== archivo)
         throw new Error(

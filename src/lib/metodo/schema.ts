@@ -548,7 +548,12 @@ export function corpusNombrado(p: PiezaMetodo): string[] {
 }
 
 /** Lo que el mundo sabe y el esquema no: qué documentos del corpus existen. */
-export type Mundo = { corpus?: ReadonlySet<string> };
+export type Mundo = {
+  /** Los documentos del corpus que una pieza puede citar (aprobados en ES y EN). */
+  corpus?: ReadonlySet<string>;
+  /** De cada documento que existe pero no entra, por qué (para que el error lo diga). */
+  motivos?: ReadonlyMap<string, string>;
+};
 
 function formato(source: string, lineas: string[]): Error {
   return new Error(`Contenido inválido en ${source}:\n${lineas.join("\n")}`);
@@ -579,10 +584,12 @@ export function parsePieza(
     if (desconocidos.length > 0)
       throw formato(
         source,
-        desconocidos.map(
-          (s) =>
-            `  - corpus: «${s}» no es un documento de data/a-fondo/ (la experiencia sale del corpus, no se inventa)`,
-        ),
+        desconocidos.map((s) => {
+          const motivo = mundo.motivos?.get(s);
+          return motivo
+            ? `  - corpus: «${s}» existe en data/a-fondo/ pero no se puede citar: ${motivo} (lo que hice sale de un documento aprobado)`
+            : `  - corpus: «${s}» no es un documento de data/a-fondo/ (la experiencia sale del corpus, no se inventa)`;
+        }),
       );
   }
   return pieza;
