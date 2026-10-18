@@ -589,8 +589,8 @@ el mensaje te llega al correo.
 - **Qué hace:** `/es/metodo` y `/en/metodo` listan tus infografías; cada una vive en
   `/metodo/<slug>` y es una página larga que contesta **una pregunta de entrevista con tu
   método**: las fases, las decisiones, los controles y tu evidencia. En una entrevista abres la
-  página y la muestras. Hoy hay una —«Cómo estructuro un sistema de agentes» (tema T2)— y las otras
-  llegan una por sprint. «Mi método» está en el menú, junto a Portafolio y Contacto. **La cuenta de
+  página y la muestras. Hoy hay una pieza publicada —la lista de `/metodo` las cuenta y las nombra— y las
+  otras llegan una por sprint. «Mi método» está en el menú, junto a Portafolio y Contacto. **La cuenta de
   piezas de la lista se mide** de `data/metodo/`: nunca la escribas.
 - **Cómo se lee:** son **diez bloques fijos, siempre en el mismo orden**: 1 la pregunta (y su
   respuesta en tres líneas) · 2 el mapa · 3 las fases · 4 las decisiones de diseño · 5 lo innovador
@@ -615,7 +615,7 @@ el mensaje te llega al correo.
   llevan su voz dentro del texto («lo que el campo hace — Anthropic, 2025-06-13»), así que el chat
   no te atribuye lo que hace el campo. Pesan **la mitad** que tus documentos a fondo (como las
   fichas): medido, a peso 1 la pieza le quitaba el contexto a tus propios documentos.
-- **Limitaciones conocidas:** una sola pieza publicada hasta ahora; el segundo idioma se
+- **Limitaciones conocidas:** una pieza publicada hasta ahora; el segundo idioma se
   revisa a ojo al cierre del hito, no en cada sprint; sin PDF descargable (decisión tuya).
 
 #### Cómo se escribe una infografía nueva
@@ -1050,13 +1050,13 @@ construye el build, igual que las otras: **aquí tampoco se escribe ningún núm
 Dos detalles de ese gate, porque el corpus los necesita:
 
 - **La historia del índice se declara.** El índice nació con 28 fragmentos, las fichas de la
-  vitrina aportaron 226, con el corpus v2 eran 494 y hoy son del orden de 1.400. Contar de dónde
+  vitrina aportaron 226, con el corpus v2 eran 494 y hoy son del orden de 1.600. Contar de dónde
   viene es parte del argumento y es verdad, así que el número de cada etapa se declara como hito
   en `tests/fixtures/cifras-a-fondo.yaml`, con su razón escrita al lado. Lo que el gate no deja
   pasar es presentar un número de otra época como si fuera el de hoy.
 - **El tamaño del índice admite una banda del 5 %.** Ese número se mueve con cada párrafo que
   escribas; exigirlo exacto volvería el gate circular, porque corregir la cifra la mueve otra
-  vez. Con la banda, «del orden de 1.400 fragmentos» pasa y «494» no.
+  vez. Con la banda, «del orden de 1.600 fragmentos» pasa y «494» no.
 
 **El ritmo:** escribe un documento → déjalo en `borrador` todo el tiempo que quieras → cuando
 esté bien, `aprobado` + su gemelo en inglés → commit + push. En local puedes comprobarlo con
