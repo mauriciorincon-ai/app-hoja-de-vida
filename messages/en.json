@@ -19,7 +19,8 @@
     "menu": "Menu",
     "portafolio": "Portfolio",
     "hojaDeVida": "Résumé",
-    "estudios": "Education"
+    "estudios": "Education",
+    "metodo": "My method"
   },
   "hero": {
     "ctaApps": "Explore my portfolio",
@@ -358,6 +359,128 @@
     "verSimulacion": "See the simulation",
     "cierreNota": "Shown here; not handed over.",
     "volverFichaTecnica": "Back to the technical sheet"
+  },
+  "metodo": {
+    "eyebrow": "My method",
+    "titulo": "How I work, one page per question",
+    "intro": "Each page answers an interview question with my method: the phases, the decisions, the controls and the evidence. What I did comes from my own site; what the field does, from dated sources; and what I think is labeled as a position.",
+    "metaDescripcion": "My way of working, one long infographic per interview question: phases, decisions, controls, evidence and dated sources.",
+    "piezasPublicadas": "{n, plural, one {# infographic published} other {# infographics published}}",
+    "sinPiezas": "No infographics are published yet.",
+    "tema": "Topic {id}",
+    "abrir": "Open the infographic",
+    "volver": "Back to My method",
+    "migaEtiqueta": "Breadcrumb",
+    "indiceEtiqueta": "Blocks of this infographic",
+    "imprimirAyuda": "It prints in full from the browser, on A4 or Letter.",
+    "revisado": "Reviewed {fecha}",
+    "bloque": "Block {n}",
+    "bloques": {
+      "1": "The question",
+      "2": "The map",
+      "3": "The phases",
+      "4": "The design decisions",
+      "5": "What is new in 2026",
+      "6": "Failure modes and how they show up",
+      "7": "Metrics and controls",
+      "8": "My evidence",
+      "9": "What I would do differently and what I have not done",
+      "10": "Sources and review date"
+    },
+    "respuestaEnTres": "The answer in three lines",
+    "voces": {
+      "titulo": "Three voices, always kept apart",
+      "sinRotulo": "What carries no label is my method: my position on how it is done.",
+      "hice": {
+        "nombre": "What I did",
+        "ayuda": "It comes only from this site's own corpus."
+      },
+      "campo": {
+        "nombre": "What the field does",
+        "ayuda": "It comes from a source with title, publisher, date and link."
+      },
+      "posicion": {
+        "nombre": "My position",
+        "ayuda": "It is my judgment, not a fact."
+      }
+    },
+    "mapa": {
+      "leyenda": "Legend of shapes and colors",
+      "lectura": "Reading the map, node by node",
+      "nodo": "Node {n}",
+      "conexiones": "Connections",
+      "flecha": "from {de} to {a}",
+      "desliza": "Swipe to see the whole map."
+    },
+    "tipos": {
+      "actor": {
+        "nombre": "Actor",
+        "ayuda": "who does the work"
+      },
+      "dato": {
+        "nombre": "Data",
+        "ayuda": "what is stored and read"
+      },
+      "control": {
+        "nombre": "Control",
+        "ayuda": "a rule that gets checked"
+      },
+      "humano": {
+        "nombre": "Person",
+        "ayuda": "a person decides"
+      },
+      "externo": {
+        "nombre": "External",
+        "ayuda": "what comes from outside"
+      }
+    },
+    "fases": {
+      "fase": "Phase {n}",
+      "avance": "Progress through the phases",
+      "entradas": "Inputs",
+      "actividades": "Activities",
+      "artefactos": "Artifacts",
+      "decide": "Who decides",
+      "control": "Control that closes the phase"
+    },
+    "decisiones": {
+      "cuandoSi": "When yes",
+      "cuandoNo": "When no",
+      "porQue": "Why"
+    },
+    "innovador": {
+      "queCambia": "What changes from common practice",
+      "fuentes": "Sources"
+    },
+    "fallas": {
+      "falla": "What breaks",
+      "senal": "How it shows up",
+      "control": "Control that catches it"
+    },
+    "metricas": {
+      "metrica": "What is measured",
+      "umbral": "Threshold",
+      "aprueba": "Who approves the step to production",
+      "nota": "The thresholds are examples of the method, not figures from a project of mine."
+    },
+    "evidencia": {
+      "nivel": "Level",
+      "ver": "See where"
+    },
+    "niveles": {
+      "uso-real": "Real use",
+      "prototipo": "Prototype",
+      "en-estudio": "Studying",
+      "exploracion": "Exploring"
+    },
+    "fuentes": {
+      "titulo": "Title",
+      "editor": "Publisher",
+      "fecha": "Date",
+      "enlace": "Link",
+      "abrir": "Open the source",
+      "cita": "Source {n}"
+    }
   },
   "vitrinaHome": {
     "titulo": "Showcase",

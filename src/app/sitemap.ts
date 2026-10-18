@@ -5,6 +5,7 @@ import { getCv } from "@/lib/content";
 import { SITE_URL } from "@/lib/site";
 import { FRENTE_PROPIO, getFrentes } from "@/lib/vitrina/categorias";
 import { getManifestVitrina } from "@/lib/vitrina/loader";
+import { getPiezasMetodo } from "@/lib/metodo/loader";
 import { getSimulaciones } from "@/lib/vitrina/simulaciones-loader";
 import { esFrente, getPiezas } from "@/lib/vitrina/piezas";
 
@@ -52,6 +53,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       alternates: alternatesFor("/vitrina/apps"),
     },
+    // «Mi método» (S10): la lista y cada infografía, desde data/metodo/ — una
+    // pieza nueva entra al sitemap sola.
+    {
+      url: `${SITE_URL}/${locale}/metodo`,
+      lastModified: new Date(),
+      alternates: alternatesFor("/metodo"),
+    },
+    ...getPiezasMetodo().map((p) => ({
+      url: `${SITE_URL}/${locale}/metodo/${p.slug}`,
+      lastModified: new Date(),
+      alternates: alternatesFor(`/metodo/${p.slug}`),
+    })),
     // Por app: la ficha técnica (ADR-016) y su detalle.
     ...getManifestVitrina().flatMap((a) =>
       ["", "/detalle"].map((sub) => ({

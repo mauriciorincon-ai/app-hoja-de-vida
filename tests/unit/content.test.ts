@@ -91,6 +91,21 @@ describe("content loader (data/*.yaml reales)", () => {
   // RAZÓN. Un código que no esté en ninguna de las dos rompe igual.
   const CODIGO_CREDENCIAL = /\b(?:AI|DP|AZ|PL|DA|MB|MS|SC)-\d{3}\b/g;
   type Hallazgo = { ruta: string; codigo: string };
+
+  // «Mi método» (S10): las infografías de `data/metodo/` son otra superficie
+  // publicada, y la especificación lo dice sin rodeos — el AI-102 nunca se
+  // obtuvo, el AI-103 y el AI-300 están en curso, el DP-100 se retiró. Cada
+  // archivo trae los dos idiomas, así que se barre entero.
+  const DIR_METODO = "data/metodo";
+  const piezasMetodoCrudas = (): { ruta: string; dato: unknown }[] =>
+    existsSync(DIR_METODO)
+      ? readdirSync(DIR_METODO)
+          .filter((f) => f.endsWith(".yaml"))
+          .map((f) => ({
+            ruta: `metodo/${f}`,
+            dato: parse(readFileSync(join(DIR_METODO, f), "utf8")) as unknown,
+          }))
+      : [];
   function codigosEn(valor: unknown, ruta: string, out: Hallazgo[]) {
     if (typeof valor === "string") {
       for (const codigo of valor.match(CODIGO_CREDENCIAL) ?? [])
@@ -136,6 +151,8 @@ describe("content loader (data/*.yaml reales)", () => {
         );
       }
       codigosEn(apps, "apps", halladas);
+      for (const { ruta, dato } of piezasMetodoCrudas())
+        codigosEn(dato, ruta, halladas);
       // Revisión post-S8 (2026-09-12): la descripción SEO de `messages/` es una
       // superficie publicada más — y ahí AI-102 sobrevivió al retiro del
       // 2026-09-10 porque este barrido no la miraba. Google sí la indexa.
@@ -156,12 +173,16 @@ describe("content loader (data/*.yaml reales)", () => {
       const huerfanas = halladas
         .filter((h) => !listadas.has(h.codigo))
         .filter(
-          (h) => !(h.ruta.startsWith("a-fondo/") && declarada.has(h.codigo)),
+          (h) =>
+            !(
+              (h.ruta.startsWith("a-fondo/") || h.ruta.startsWith("metodo/")) &&
+              declarada.has(h.codigo)
+            ),
         )
         .map((h) => `${h.codigo} en ${h.ruta}`);
       expect(
         huerfanas,
-        "una credencial nombrada es una credencial listada: en el CV, en messages/ y en apps.yaml, el código está en `certificaciones` de cv.*.yaml o no se nombra; en la prosa de data/a-fondo/ vale además el segundo estado declarado en data/credenciales-nombradas.yaml, con su razón",
+        "una credencial nombrada es una credencial listada: en el CV, en messages/, en apps.yaml y en data/metodo/, el código está en `certificaciones` de cv.*.yaml o no se nombra; en la prosa de data/a-fondo/ vale además el segundo estado declarado en data/credenciales-nombradas.yaml, con su razón",
       ).toEqual([]);
     }
   });
@@ -221,6 +242,8 @@ describe("content loader (data/*.yaml reales)", () => {
         aSecas,
       );
       mencionesSinMarca(apps, "apps", enCurso, aSecas);
+      for (const { ruta, dato } of piezasMetodoCrudas())
+        mencionesSinMarca(dato, ruta, enCurso, aSecas);
       expect(
         aSecas,
         "un código listado como «en curso» se nombra siempre con esa marca a menos de 48 caracteres: sin ella, el titular afirma una credencial que no se tiene",

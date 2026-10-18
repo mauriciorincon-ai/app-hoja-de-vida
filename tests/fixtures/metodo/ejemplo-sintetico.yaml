@@ -1,0 +1,167 @@
+# PIEZA DE EJEMPLO SINTÉTICA — solo para probar el mecanismo de «Mi método» (S10).
+# Nada de lo que dice es una afirmación real sobre el dueño ni sobre el campo: los
+# textos son de relleno rotulado como tal, las fuentes son de un dominio de ejemplo
+# (RFC 2606) y los slugs del corpus son documentos que existen solo para que el
+# esquema pueda comprobar que existen. La pieza real (T2) la reemplaza en la F2.
+
+id: T1
+slug: ejemplo-sintetico
+nombre:
+  es: "Ejemplo sintético: cómo se estructura un sistema de ejemplo"
+  en: "Synthetic example: how an example system is structured"
+bloques:
+  - n: 1
+    pregunta:
+      es: "¿Cómo se estructura un sistema de ejemplo? (pregunta de relleno)"
+      en: "How is an example system structured? (placeholder question)"
+    respuesta:
+      - es: "Primera línea de la respuesta: se parte del problema, no de la herramienta."
+        en: "First line of the answer: start from the problem, not the tool."
+      - es: "Segunda línea: cada paso deja un artefacto que alguien revisa."
+        en: "Second line: every step leaves an artifact that someone reviews."
+      - es: "Tercera línea: un control cierra cada fase antes de pasar a la siguiente."
+        en: "Third line: a control closes each phase before moving to the next."
+
+  - n: 2
+    titulo:
+      es: "Mapa de ejemplo: de la solicitud a la revisión humana"
+      en: "Example map: from the request to the human review"
+    resumen:
+      es: "Una solicitud entra a un supervisor, que la reparte entre dos especialistas. Los dos escriben en un estado compartido; un control de calidad lo revisa y una persona aprueba el paso."
+      en: "A request enters a supervisor, which splits it between two specialists. Both write to a shared state; a quality control checks it and a person approves the step."
+    nodos:
+      - { n: 1, etiqueta: { es: "Solicitud", en: "Request" }, tipo: externo, col: 0, fila: 1, detalle: { es: "Lo que llega desde fuera del sistema.", en: "What arrives from outside the system." } }
+      - { n: 2, etiqueta: { es: "Supervisor", en: "Supervisor" }, tipo: actor, col: 1, fila: 1, detalle: { es: "Reparte el trabajo y junta el resultado.", en: "Splits the work and gathers the result." } }
+      - { n: 3, etiqueta: { es: "Especialista A", en: "Specialist A" }, tipo: actor, col: 2, fila: 0, detalle: { es: "Hace una parte acotada del trabajo.", en: "Does a bounded part of the work." } }
+      - { n: 4, etiqueta: { es: "Especialista B", en: "Specialist B" }, tipo: actor, col: 2, fila: 2, detalle: { es: "Hace la otra parte acotada.", en: "Does the other bounded part." } }
+      - { n: 5, etiqueta: { es: "Estado", en: "State" }, tipo: dato, col: 3, fila: 1, detalle: { es: "Lo que los especialistas escriben y el control lee.", en: "What the specialists write and the control reads." } }
+      - { n: 6, etiqueta: { es: "Control", en: "Control" }, tipo: control, col: 4, fila: 1, detalle: { es: "Una regla que se puede comprobar sin opinar.", en: "A rule that can be checked without opinion." } }
+      - { n: 7, etiqueta: { es: "Persona", en: "Person" }, tipo: humano, col: 5, fila: 1, detalle: { es: "Aprueba o devuelve el paso.", en: "Approves or sends the step back." } }
+    aristas:
+      - { de: 1, a: 2 }
+      - { de: 2, a: 3, etiqueta: { es: "reparte", en: "splits" } }
+      - { de: 2, a: 4, etiqueta: { es: "reparte", en: "splits" } }
+      - { de: 3, a: 5 }
+      - { de: 4, a: 5 }
+      - { de: 5, a: 6, etiqueta: { es: "revisa", en: "checks" } }
+      - { de: 6, a: 7, etiqueta: { es: "aprueba", en: "approves" } }
+
+  - n: 3
+    fases:
+      - nombre: { es: "Definir", en: "Define" }
+        entradas:
+          - { es: "El problema escrito en una frase.", en: "The problem written in one sentence." }
+        actividades:
+          - { es: "Acotar qué entra y qué no.", en: "Bound what is in and what is out." }
+          - { es: "Elegir el criterio de aceptación.", en: "Choose the acceptance criterion." }
+        artefactos:
+          - { es: "Una hoja de alcance.", en: "A scope sheet." }
+        decide: { es: "Quien pide el trabajo.", en: "Whoever asks for the work." }
+        control: { es: "El criterio se puede comprobar con un sí o un no.", en: "The criterion can be checked with a yes or a no." }
+        nota:
+          voz: posicion
+          texto: { es: "Texto de ejemplo con el rótulo de posición: aquí iría un criterio propio.", en: "Example text with the position label: a personal judgment would go here." }
+      - nombre: { es: "Construir", en: "Build" }
+        entradas:
+          - { es: "La hoja de alcance.", en: "The scope sheet." }
+        actividades:
+          - { es: "Escribir el primer paso y su prueba.", en: "Write the first step and its test." }
+        artefactos:
+          - { es: "Código y pruebas.", en: "Code and tests." }
+        decide: { es: "Quien construye, dentro del alcance.", en: "Whoever builds, within the scope." }
+        control: { es: "Las pruebas pasan antes de seguir.", en: "Tests pass before moving on." }
+        nota:
+          voz: hice
+          texto: { es: "Ejemplo del rótulo «lo que hice»: aquí iría un hecho del corpus, con su documento.", en: "Example of the «what I did» label: a fact from the corpus would go here, with its document." }
+          corpus: [como-trabajo]
+      - nombre: { es: "Operar", en: "Operate" }
+        entradas:
+          - { es: "Lo construido, ya probado.", en: "What was built, already tested." }
+        actividades:
+          - { es: "Mirar lo que pasa y corregir.", en: "Watch what happens and fix it." }
+        artefactos:
+          - { es: "Un registro de lo observado.", en: "A log of what was observed." }
+        decide: { es: "Quien responde por el resultado.", en: "Whoever answers for the result." }
+        control: { es: "Una señal avisa antes de que falle.", en: "A signal warns before it fails." }
+
+  - n: 4
+    decisiones:
+      - titulo: { es: "Un agente o varios", en: "One agent or several" }
+        cuandoSi: { es: "Cuando las tareas necesitan contextos distintos.", en: "When the tasks need different contexts." }
+        cuandoNo: { es: "Cuando una sola tarea cabe en un solo contexto.", en: "When a single task fits in a single context." }
+        porQue: { voz: posicion, texto: { es: "Porque cada pieza extra es algo más que mantener (texto de ejemplo).", en: "Because every extra piece is one more thing to maintain (example text)." } }
+      - titulo: { es: "Dónde vive el estado", en: "Where state lives" }
+        cuandoSi: { es: "Cuando el trabajo dura más que una conversación.", en: "When the work lasts longer than a conversation." }
+        cuandoNo: { es: "Cuando todo termina en una sola pasada.", en: "When everything ends in a single pass." }
+        porQue: { voz: campo, texto: { es: "Un estado persistido permite retomar tras una interrupción (cita de ejemplo).", en: "A persisted state allows resuming after an interruption (example citation)." }, fuentes: [1] }
+      - titulo: { es: "Qué decide una persona", en: "What a person decides" }
+        cuandoSi: { es: "Cuando el error cuesta caro o no se puede deshacer.", en: "When the error is costly or cannot be undone." }
+        cuandoNo: { es: "Cuando el control automático alcanza.", en: "When the automatic control is enough." }
+        porQue: { voz: posicion, texto: { es: "Porque la responsabilidad no se delega (texto de ejemplo).", en: "Because responsibility is not delegated (example text)." } }
+      - titulo: { es: "Cómo se mide", en: "How it is measured" }
+        cuandoSi: { es: "Cuando hay una respuesta conocida contra la cual comparar.", en: "When there is a known answer to compare against." }
+        cuandoNo: { es: "Cuando medir cuesta más que equivocarse.", en: "When measuring costs more than being wrong." }
+        porQue: { voz: posicion, texto: { es: "Porque lo que no se mide no se corrige (texto de ejemplo).", en: "Because what is not measured is not corrected (example text)." } }
+
+  - n: 5
+    elementos:
+      - titulo: { es: "Ejecución durable (ejemplo)", en: "Durable execution (example)" }
+        queCambia: { es: "El trabajo sobrevive a una interrupción en vez de empezar de cero.", en: "The work survives an interruption instead of starting over." }
+        fuentes: [1]
+      - titulo: { es: "Evaluación continua (ejemplo)", en: "Continuous evaluation (example)" }
+        queCambia: { es: "Se evalúa en cada cambio, no solo antes de publicar.", en: "It is evaluated on every change, not only before publishing." }
+        fuentes: [2]
+      - titulo: { es: "Protocolo común de herramientas (ejemplo)", en: "Common tool protocol (example)" }
+        queCambia: { es: "Las herramientas se conectan una vez y las usan todos los agentes.", en: "Tools connect once and every agent uses them." }
+        fuentes: [3]
+
+  - n: 6
+    fallas:
+      - falla: { es: "El supervisor reparte mal", en: "The supervisor splits badly" }
+        senal: { es: "Dos especialistas hacen lo mismo.", en: "Two specialists do the same thing." }
+        control: { es: "Una prueba revisa que cada tarea tenga un solo dueño.", en: "A test checks that each task has a single owner." }
+      - falla: { es: "El estado se contamina", en: "The state gets polluted" }
+        senal: { es: "Un valor viejo aparece en una corrida nueva.", en: "An old value shows up in a new run." }
+        control: { es: "Cada corrida empieza de un estado limpio y conocido.", en: "Every run starts from a clean, known state." }
+      - falla: { es: "Nadie revisa", en: "Nobody reviews" }
+        senal: { es: "Las aprobaciones se vuelven automáticas.", en: "Approvals become automatic." }
+        control: { es: "Se cuenta cuántas veces una persona devolvió el paso.", en: "Count how many times a person sent the step back." }
+
+  - n: 7
+    metricas:
+      - metrica: { es: "Aciertos sobre casos conocidos", en: "Hits on known cases" }
+        umbral: { es: "Umbral de ejemplo: 90 %.", en: "Example threshold: 90%." }
+        aprueba: { es: "Quien responde por el resultado.", en: "Whoever answers for the result." }
+      - metrica: { es: "Pasos devueltos por una persona", en: "Steps sent back by a person" }
+        umbral: { es: "Umbral de ejemplo: menos de 1 de cada 10.", en: "Example threshold: fewer than 1 in 10." }
+        aprueba: { es: "Quien construye, con el visto bueno de quien pide.", en: "Whoever builds, with sign-off from whoever asks." }
+      - metrica: { es: "Costo por corrida", en: "Cost per run" }
+        umbral: { es: "Umbral de ejemplo: el tope acordado.", en: "Example threshold: the agreed cap." }
+        aprueba: { es: "Quien paga la cuenta.", en: "Whoever pays the bill." }
+
+  - n: 8
+    evidencia:
+      - nombre: { es: "Ejemplo de proyecto", en: "Example project" }
+        nivel: uso-real
+        texto: { es: "Entrada de ejemplo: así se vería un proyecto con su nivel real.", en: "Example entry: this is how a project would look with its real level." }
+        corpus: [vesting]
+        href: /proyectos/vesting
+      - nombre: { es: "Ejemplo de herramienta", en: "Example tool" }
+        nivel: prototipo
+        texto: { es: "Entrada de ejemplo: una herramienta con el nivel que el corpus le da.", en: "Example entry: a tool with the level the corpus gives it." }
+        corpus: [como-trabajo]
+
+  - n: 9
+    limites:
+      - voz: hice
+        texto: { es: "Ejemplo de un límite propio: algo que el corpus dice que no se ha hecho.", en: "Example of an own limit: something the corpus says has not been done." }
+        corpus: [como-trabajo]
+      - voz: posicion
+        texto: { es: "Ejemplo de lo que se haría distinto, rotulado como posición.", en: "Example of what would be done differently, labeled as a position." }
+
+  - n: 10
+    revisado: 2026-10-17
+    fuentes:
+      - { id: 1, titulo: "Ejemplo uno (documento de relleno)", editor: "Editor de ejemplo", fecha: 2026-09-01, url: "https://example.org/ejemplo-uno" }
+      - { id: 2, titulo: "Ejemplo dos (documento de relleno)", editor: "Editor de ejemplo", fecha: 2026-09-15, url: "https://example.org/ejemplo-dos" }
+      - { id: 3, titulo: "Ejemplo tres (documento de relleno)", editor: "Editor de ejemplo", fecha: 2026-10-01, url: "https://example.org/ejemplo-tres" }
