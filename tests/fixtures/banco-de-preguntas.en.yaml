@@ -501,6 +501,14 @@ preguntas:
     espera: [metodo-de-prototipo-a-produccion]
     familia: ia-y-agentes
 
+  # ── mi método (S13): the twins of the two T6 questions; same `espera`, same order
+  - pregunta: "How does Henry structure the life cycle of a project in Microsoft Fabric?"
+    espera: [metodo-ciclo-de-vida-de-datos]
+    familia: plataforma-y-datos
+  - pregunta: "What differences does Henry see between Fabric and Databricks?"
+    espera: [metodo-ciclo-de-vida-de-datos]
+    familia: plataforma-y-datos
+
 ajenas:
   - pregunta: "tell me a joke about cats"
     guardrail: bloquea

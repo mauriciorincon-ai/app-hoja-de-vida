@@ -2,7 +2,7 @@
 slug: rag-y-el-chat
 codigo: AF-16
 titulo: "RAG: how this chat works on the inside"
-resumen: "The architecture of this page's chat with its numbers: build-time index, lexical retrieval with MiniSearch (BM25) without embeddings, layered guardrails, a measured threshold, navigable citations, five interchangeable providers, local fallback, a US$20 budget with a real cost of zero, the name and email gate with its six-digit verification code, what data the conversation log stores and who reads it, and how it is evaluated with 77 questions of its own and 157 from outside."
+resumen: "The architecture of this page's chat with its numbers: build-time index, lexical retrieval with MiniSearch (BM25) without embeddings, layered guardrails, a measured threshold, navigable citations, five interchangeable providers, local fallback, a US$20 budget with a real cost of zero, the name and email gate with its six-digit verification code, what data the conversation log stores and who reads it, and how it is evaluated with 77 questions of its own and 159 from outside."
 cuando_usar: "Use this when they ask how the chat on this page works, which RAG architecture he implemented, whether he uses embeddings or lexical search, which model provider he works with, how he keeps the model from making up answers, and how he evaluates the system with a golden set and a question bank. Use it too for everything that has to do with the chat gate and with privacy: why the chat asks for your name and email before answering, what the six-digit verification code that arrives by email is for, what personal data it stores, who can read it, how long it is kept, how to ask for it to be deleted, and why the answers are two or three paragraphs instead of a dump of the corpus."
 estado: aprobado
 ancla: "#vitrina"
@@ -117,7 +117,7 @@ with itself; with that cap, the worst case of one answer's context is bounded at
 The index has a history and it is worth telling: it started with 28 chunks per language, drawn
 only from the résumé YAML files; the 32 showcase sheets added 226; with the first long version of
 this base it reached 494; and today, with the 25 approved documents and the "when to use"
-description each one declares, there are 1,724 chunks in Spanish and 1,717 in English. The number
+description each one declares, there are 1,767 chunks in Spanish and 1,759 in English. The number
 is printed by every build and is a regenerated artifact, not something edited by hand.
 
 This decision shifts toward the build process activities that do not need to be repeated on
@@ -188,7 +188,7 @@ showcase ones— still receive a sheet. Going lower buys nothing more and makes 
 sheets are not edited to index better: they belong to other houses, and adding one to the
 showcase puts it into the chat on the next build, without writing new prose. The weight lives in
 a constant in the code, with its measurement beside it, and it is still at 0.5 over an index that
-is now up to 1,724 chunks.
+is now up to 1,767 chunks.
 
 ## Lexical retrieval is an architecture decision
 
@@ -246,7 +246,7 @@ that previously could not see the case now sees it.
 
 It is a small lesson that holds for any RAG: the vocabulary a question shares with the corpus is
 not always content. Part of it is grammar, and grammar gets measured and discarded. Those counts
-belong to the old index; today's has 1,724 chunks in Spanish and 1,717 in English, and the
+belong to the old index; today's has 1,767 chunks in Spanish and 1,759 in English, and the
 arithmetic did not change: a preposition present in a quarter of the chunks sustained a false
 positive on its own, and no list written by eye would have caught it.
 
@@ -262,7 +262,7 @@ produce.
 Embeddings remain a possible evolution, not an automatic improvement. Adding them would make
 sense if a representative set of questions showed that lexical search fails systematically at
 retrieving paraphrases, semantic relationships or concepts expressed with sufficiently different
-vocabularies. Today that set exists —157 questions written from outside— and it does not show
+vocabularies. Today that set exists —159 questions written from outside— and it does not show
 that failure: with four sources per answer, none is left without its own. I do not leave them out
 because I do not know them: I compared vector search with lexical search.
 
@@ -383,7 +383,7 @@ and there the prompt that forbids answering outside the sources stops them. The 
 guarantee is the prompt; the threshold is a token saving and a first line. The worst possible
 failure of this chat is not spending tokens on an off-topic question: it is answering "that one
 escapes me" to a legitimate question about my career. When the corpus grows, the threshold is
-measured again, not assumed, and the index is now up to 1,724 chunks.
+measured again, not assumed, and the index is now up to 1,767 chunks.
 
 ## How I keep the model from making things up: distributed guardrails, not a prompt
 
@@ -546,7 +546,7 @@ This decision relates to enterprise artificial intelligence architecture. Models
 and external dependencies can change. Designing a sustainable solution requires separating what
 belongs to the organization, such as its data, definitions and rules, from what can be replaced,
 such as the generative service used to process them. On Microsoft Foundry, on Groq or on a
-self-hosted model, the index —1,724 chunks in Spanish— and the nine server defenses are exactly
+self-hosted model, the index —1,767 chunks in Spanish— and the nine server defenses are exactly
 the same.
 
 ## The system degrades without hiding it
@@ -790,7 +790,7 @@ first four results. The test travels with the content: adding a document adds it
 the gate without anyone editing the tests. With 25 documents that is 77 questions.
 
 The second is the bank of questions written from outside, the way a recruiter or interviewer
-asks: 157 legitimate questions in ten families —career, way of working, certifications, AI and
+asks: 159 legitimate questions in ten families —career, way of working, certifications, AI and
 agents, platform and data, BI and analytics, governance, processes, showcase and fit—, plus 15
 off-topic ones and 3 declared without coverage. Each legitimate one must bring an expected source
 in the top-4, the expected source must arrive first in at least 60% of the cases, and the 15
@@ -832,7 +832,7 @@ fails, and going up to five rescues no one: it only enlarges the context by 25%,
 with it. That two sets written with different criteria land on the same number, twice, is the
 part that gives confidence. With a single source the golden set would hit 59%; today the number
 lives in one place in the code and the golden set exercises it directly. Today's index is no
-longer the one of those two measurements —1,724 chunks in Spanish, 1,717 in English—, and that is
+longer the one of those two measurements —1,767 chunks in Spanish, 1,759 in English—, and that is
 why it is measured again every time the corpus changes: the 4 is a measured number, not an inherited constant. And a clarification on the bank's two figures: 102 of 131 and 136 of 136 are not the same test twice, but before and after the vocabulary correction of phase F4 —some thirty words the questions said and the corpus did not—, with five more questions in the bank; since then the bank has kept growing with every revision of the corpus.
 
 ## The bank as a vocabulary audit: ETL, lakehouse and the words the corpus did not say
@@ -891,5 +891,5 @@ user can understand the answer, walk through its evidence and recognize when the
 degraded.
 
 The difference between declaring experience in RAG and demonstrating it is this application. I do
-not need to limit myself to describing a possible architecture. With 77 questions of my own and 157 from outside running on every change, the visitor can ask a question, observe the answer,
+not need to limit myself to describing a possible architecture. With 77 questions of my own and 159 from outside running on every change, the visitor can ask a question, observe the answer,
 open its sources and directly examine the decisions that sustain the system.
