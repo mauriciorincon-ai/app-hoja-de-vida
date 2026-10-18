@@ -182,6 +182,47 @@ for (const idioma of IDIOMAS) {
         }
       });
 
+      test("la impresión muestra los diez títulos de bloque sin haber hecho scroll ni pedido «reducir movimiento»", async ({
+        browser,
+      }) => {
+        // Imprimir no dispara el IntersectionObserver de Reveal: sin una regla
+        // de impresión, todo bloque que no estaba en pantalla sale sin título.
+        // El contexto pide EXPLÍCITAMENTE movimiento normal: con «reduce» el
+        // cinturón de reduced-motion lo ocultaba (las capturas del S10 se
+        // tomaron así y no vieron el hueco).
+        const ctx = await browser.newContext({
+          reducedMotion: "no-preference",
+          viewport: { width: 794, height: 1123 },
+        });
+        const page = await ctx.newPage();
+        await page.goto(ruta);
+        await page.emulateMedia({ media: "print" });
+        const opacidades = await page
+          .locator("section[data-bloque] h2")
+          .evaluateAll((titulos) =>
+            titulos.map((h2) => {
+              let o = 1;
+              for (let e: Element | null = h2; e; e = e.parentElement)
+                o *= Number(getComputedStyle(e).opacity);
+              return o;
+            }),
+          );
+        expect(opacidades).toHaveLength(10);
+        expect(
+          opacidades,
+          "opacidad efectiva de cada título de bloque al imprimir",
+        ).toEqual(Array(10).fill(1));
+        // Lo mismo para todo lo que lleva `data-motion`: el papel no espera.
+        const ocultos = await page
+          .locator("[data-motion]")
+          .evaluateAll(
+            (els) =>
+              els.filter((e) => Number(getComputedStyle(e).opacity) < 1).length,
+          );
+        expect(ocultos).toBe(0);
+        await ctx.close();
+      });
+
       test("con «reducir movimiento» el relleno del riel queda entero y quieto, y la pieza se lee igual", async ({
         browser,
       }) => {

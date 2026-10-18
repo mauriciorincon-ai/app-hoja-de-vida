@@ -23,6 +23,8 @@
  * Con «reducir movimiento» (`reducedMotion: "reduce"`): el cinturón CSS deja
  * todo en su estado final, así que la captura entera no depende de qué bloque
  * alcanzó a revelarse. Es la misma garantía que le da la página a quien lo pide.
+ * La IMPRESIÓN, en cambio, se captura con movimiento normal (sin esa ayuda):
+ * es lo que ve quien imprime de verdad.
  *
  * Solo toca `http://localhost:<puerto>`: ninguna URL del sitio publicado (regla
  * 17, cero enlaces), y la pieza se lee de `data/metodo/`, no de un dato escrito
@@ -105,9 +107,12 @@ try {
   }
 
   // La impresión: la hoja de estilo `@media print`, a A4, con el PDF que daría el navegador.
+  // Con movimiento NORMAL, a propósito: quien imprime casi nunca pidió «reducir movimiento»,
+  // y con «reduce» el cinturón de esa preferencia ocultaba que los títulos de bloque salían
+  // en blanco (el S10 lo halló en la auditoría; ahora lo cubre `@media print` en globals.css).
   const contexto = await navegador.newContext({
     viewport: { width: 794, height: 1123 },
-    reducedMotion: "reduce",
+    reducedMotion: "no-preference",
   });
   const p = await contexto.newPage();
   await p.goto(ruta, { waitUntil: "networkidle" });
