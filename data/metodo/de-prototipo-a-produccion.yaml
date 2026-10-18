@@ -1,0 +1,700 @@
+# «MI MÉTODO» · T4 — Cómo llevo un prototipo de IA a producción y lo mantengo (S12, 2026-10-18).
+#
+# Tres voces, separadas por el esquema (src/lib/metodo/schema.ts):
+#   · voz: hice      → solo lo que dice el corpus del sitio; `corpus:` nombra el documento de data/a-fondo/.
+#   · voz: campo     → lo que el campo hace en 2025–2026; `fuentes:` numera la fuente del bloque 10.
+#   · voz: posicion  → mi criterio, rotulado como tal; sin fuente ni corpus.
+# Lo que va sin voz (bloques 1, 2, 6, 7 y la base de las fases) es el método mismo: mi posición sobre cómo se hace.
+#
+# Investigación del 2026-10-18: documentación oficial primero (Microsoft Learn, OWASP, GitHub), solo contenido
+# público servido al navegador, sin credenciales ajenas ni endpoints de terceros; ninguna página leída traía texto
+# dirigido a agentes. La evidencia sale de `plataforma-y-despliegue`, `apps-pipeline`, `rag-y-el-chat` (incluido lo
+# que entró el 2026-10-18: el ajuste de un modelo en Microsoft Foundry, sin nivel declarado) y `certificaciones`.
+# Límites con las palabras del corpus: contenedores y Kubernetes en producción no están en la experiencia, ningún
+# despliegue propio en Azure, el ajuste en Foundry entra solo como límite y sin crecer, AI-300 y AI-103 en curso.
+# El bloque 7 no lleva cifras propias (la nota fija de la página lo dice); ninguna cifra que se mueva sola con el
+# sitio (aplicaciones, preguntas, sprints, fragmentos).
+
+id: T4
+slug: de-prototipo-a-produccion
+nombre:
+  es: "Cómo llevo un prototipo de IA a producción y lo mantengo"
+  en: "How I take an AI prototype to production and keep it running"
+bloques:
+  # ─── 1 · La pregunta ────────────────────────────────────────────────────────
+  - n: 1
+    pregunta:
+      es: "¿Cómo pasas del prototipo a producción, y cómo lo mantienes sano, barato y seguro?"
+      en: "How do you go from a prototype to production, and how do you keep it healthy, cheap and safe?"
+    respuesta:
+      - es: "Un prototipo pasa a producción cuando supera condiciones escritas que ya se vieron fallar. Los controles que corren antes de que publique son las pruebas unitarias, de integración y de extremo a extremo, la accesibilidad, el rendimiento y el bloqueo de secretos, y si hay un modelo, preguntas de prueba que corren en cada cambio como cualquier otra prueba."
+        en: "A prototype goes to production when it passes written conditions that have already been seen failing. The checks that run before I publish are unit, integration and end-to-end tests, accessibility, performance and the secret blocking, and if there is a model, test questions that run on every change like any other test."
+      - es: "Antes de la IA va el código: el modelo entra solo donde una regla no alcanza, detrás de una capa que permite cambiar de proveedor y con una salida más simple, anunciada, para cuando falla."
+        en: "Code comes before AI: the model only goes where a rule falls short, behind a layer that lets the provider change and with a simpler, announced way out for when it fails."
+      - es: "Publicar es el comienzo de la validación: lo mantengo con metadatos y no con el contenido de quien lo usa, con límites y un techo de costo escritos, y con un resumen de cada ciclo que convierte la falla en regla."
+        en: "Publishing is where validation starts: I keep it running with metadata and not with its users’ content, with written limits and a written cost ceiling, and with a summary of every cycle that turns the failure into a rule."
+
+  # ─── 2 · El mapa ────────────────────────────────────────────────────────────
+  - n: 2
+    titulo:
+      es: "Del prototipo a producción, y de producción a la siguiente versión"
+      en: "From prototype to production, and from production to the next version"
+    resumen:
+      es: "Un prototipo empieza con una decisión escrita: si necesita un modelo, por qué una regla no basta. Después cruza los controles de publicación —pruebas en tres niveles, accesibilidad, rendimiento y, si hay modelo, preguntas de prueba—, el bloqueo de secretos y la revisión de dependencias. Con todo en verde, el cambio se despliega en una vista previa propia, una persona la revisa y decide publicarlo. En producción, sin servidor propio, el producto llama al modelo a través de una capa que cambia de proveedor por configuración; los límites y el techo de costo acotan esas llamadas, y si el proveedor falla, el producto ofrece una función más simple y se lo dice a quien lo usa. La operación deja metadatos —no contenido— y cada ciclo cierra con un resumen y una decisión registrada, de donde parte la versión siguiente."
+      en: "A prototype starts with a written decision: if it needs a model, why a rule is not enough. Then it goes through the publishing controls —tests at three levels, accessibility, performance and, if there is a model, test questions—, the secret blocking and the dependency review. With everything green, the change is deployed to its own preview, a person reviews it and decides to publish it. In production, with no server of its own, the product calls the model through a layer that switches providers by configuration; limits and the cost ceiling bound those calls, and if the provider fails, the product offers a simpler function and tells its user so. Operations leave metadata —not content— and every cycle closes with a summary and a recorded decision, which is where the next version starts."
+    nodos:
+      - n: 1
+        etiqueta: { es: "Prototipo", en: "Prototype" }
+        tipo: dato
+        col: 0
+        fila: 0
+        detalle:
+          es: "Algo que ya funciona en una máquina: todavía no es un producto."
+          en: "Something that already works on one machine: it is not a product yet."
+      - n: 2
+        etiqueta: { es: "Decisión escrita", en: "Written decision" }
+        tipo: control
+        col: 1
+        fila: 0
+        detalle:
+          es: "Código primero: un modelo entra solo con una decisión de arquitectura que diga qué no resuelve una regla."
+          en: "Code first: a model only comes in with an architecture decision that says what a rule cannot solve."
+      - n: 3
+        etiqueta: { es: "Pruebas y evaluaciones", en: "Tests and evaluations" }
+        tipo: control
+        col: 2
+        fila: 0
+        detalle:
+          es: "Unitarias, de integración y de extremo a extremo, accesibilidad, rendimiento y, si hay modelo, preguntas de prueba: todas en cada cambio."
+          en: "Unit, integration and end-to-end tests, accessibility, performance and, if there is a model, test questions: all of them on every change."
+      - n: 4
+        etiqueta: { es: "Secretos y dependencias", en: "Secrets and dependencies" }
+        tipo: control
+        col: 3
+        fila: 0
+        detalle:
+          es: "Un secreto se bloquea antes de entrar al historial; una dependencia vulnerable frena el cambio."
+          en: "A secret is blocked before it enters the history; a vulnerable dependency stops the change."
+      - n: 5
+        etiqueta: { es: "Vista previa por cambio", en: "Preview per change" }
+        tipo: dato
+        col: 4
+        fila: 0
+        detalle:
+          es: "Cada cambio se despliega aparte y se mira antes de llegar a producción."
+          en: "Every change is deployed on its own and looked at before it reaches production."
+      - n: 6
+        etiqueta: { es: "Quien aprueba", en: "Whoever approves" }
+        tipo: humano
+        col: 5
+        fila: 0
+        detalle:
+          es: "Una persona revisa la vista previa y, con cada control requerido en verde por sí mismo, decide publicar."
+          en: "A person reviews the preview and, with every required control green on its own, decides to publish."
+      - n: 7
+        etiqueta: { es: "Producción sin servidor propio", en: "Production with no server of its own" }
+        tipo: externo
+        col: 5
+        fila: 1
+        detalle:
+          es: "Páginas estáticas, funciones en el borde y una base gestionada con seguridad por filas: nada que operar a mano."
+          en: "Static pages, functions at the edge and a managed database with row-level security: nothing to operate by hand."
+      - n: 8
+        etiqueta: { es: "Capa de proveedor", en: "Provider layer" }
+        tipo: actor
+        col: 4
+        fila: 2
+        detalle:
+          es: "El único módulo que conoce proveedores concretos: una variable elige cuál, y fallas seguidas abren el circuito."
+          en: "The only module that knows concrete providers: one variable picks which, and consecutive failures open the circuit."
+      - n: 9
+        etiqueta: { es: "Degradación anunciada", en: "Announced degradation" }
+        tipo: control
+        col: 3
+        fila: 2
+        detalle:
+          es: "Sin proveedor, el producto ofrece una función más simple que conserva lo esencial, y lo dice."
+          en: "Without a provider, the product offers a simpler function that keeps the essentials, and says so."
+      - n: 10
+        etiqueta: { es: "Límites y techo de costo", en: "Limits and cost ceiling" }
+        tipo: control
+        col: 3
+        fila: 1
+        detalle:
+          es: "Frecuencia, tamaño, tokens, tiempo e historial escritos como números, y un presupuesto mensual que no decide solo la factura."
+          en: "Rate, size, tokens, time and history written down as numbers, and a monthly budget the bill does not get to decide alone."
+      - n: 11
+        etiqueta: { es: "Metadatos, no contenido", en: "Metadata, not content" }
+        tipo: control
+        col: 5
+        fila: 3
+        detalle:
+          es: "Proveedor, modelo, milisegundos, tokens y errores: lo necesario para saber qué falló, dónde y cuánto costó."
+          en: "Provider, model, milliseconds, tokens and errors: what is needed to know what failed, where and what it cost."
+      - n: 12
+        etiqueta: { es: "Resumen del ciclo", en: "Cycle summary" }
+        tipo: dato
+        col: 0
+        fila: 3
+        detalle:
+          es: "Cada ciclo cierra con lo que falló y por qué; una falla que se repite se vuelve regla con su prueba."
+          en: "Every cycle closes with what failed and why; a failure that repeats becomes a rule with its test."
+      - n: 13
+        etiqueta: { es: "Quien usa el producto", en: "Whoever uses the product" }
+        tipo: humano
+        col: 2
+        fila: 2
+        detalle:
+          es: "Recibe la respuesta completa o la función simple, y en los dos casos sabe cuál recibió."
+          en: "Gets the full answer or the simple function, and in both cases knows which one it was."
+    aristas:
+      - { de: 1, a: 2, etiqueta: { es: "se justifica", en: "justified" } }
+      - { de: 2, a: 3 }
+      - { de: 3, a: 4 }
+      - { de: 4, a: 5, etiqueta: { es: "todo en verde", en: "all green" } }
+      - { de: 5, a: 6, etiqueta: { es: "se revisa", en: "reviewed" } }
+      - { de: 6, a: 7, etiqueta: { es: "publica", en: "publishes" } }
+      - { de: 7, a: 8, etiqueta: { es: "llama al modelo", en: "calls the model" } }
+      - { de: 10, a: 8, etiqueta: { es: "acota", en: "bounds" } }
+      - { de: 8, a: 9, etiqueta: { es: "si falla", en: "if it fails" } }
+      - { de: 9, a: 13, etiqueta: { es: "lo dice", en: "says so" } }
+      - { de: 7, a: 11, etiqueta: { es: "deja", en: "leaves" } }
+      - { de: 11, a: 12, etiqueta: { es: "se aprende", en: "learned from" } }
+      - { de: 12, a: 1, etiqueta: { es: "siguiente versión", en: "next version" } }
+
+  # ─── 3 · Las fases ──────────────────────────────────────────────────────────
+  - n: 3
+    fases:
+      - nombre: { es: "Decidir si hace falta un modelo", en: "Decide whether a model is needed" }
+        entradas:
+          - { es: "El problema y el proceso donde vive.", en: "The problem and the process it lives in." }
+          - { es: "Lo que una regla, una búsqueda o un algoritmo ya resuelven.", en: "What a rule, a search or an algorithm already solves." }
+        actividades:
+          - es: "Escribir qué parte exige interpretar, generar, recuperar por contexto o coordinar herramientas."
+            en: "Write down which part requires interpreting, generating, retrieving by context or coordinating tools."
+          - es: "Resolver primero con código lo que el código resuelve."
+            en: "Solve with code first whatever code solves."
+          - es: "Dejar la decisión registrada, con lo que el modelo no debe hacer."
+            en: "Leave the decision on record, including what the model must not do."
+        artefactos:
+          - { es: "Una decisión de arquitectura escrita.", en: "A written architecture decision." }
+        decide: { es: "Quien responde por el producto.", en: "Whoever answers for the product." }
+        control: { es: "Sin decisión escrita, la función generativa no se activa.", en: "Without a written decision, the generative feature is not switched on." }
+        nota:
+          voz: hice
+          texto:
+            es: "En mis apps activar una función generativa exige una decisión de arquitectura escrita: Innmobiliaria tiene cero modelos por regla de producto, y donde sí hay uno es opcional y con un fallback determinista."
+            en: "In my apps, switching on a generative feature requires a written architecture decision: Innmobiliaria has zero models as a product rule, and where there is one it is optional and has a deterministic fallback."
+          corpus: [apps-pipeline]
+      - nombre: { es: "Convertir el prototipo en algo verificable", en: "Turn the prototype into something verifiable" }
+        entradas:
+          - { es: "El prototipo.", en: "The prototype." }
+          - { es: "Las condiciones de publicación, escritas.", en: "The publishing conditions, written down." }
+        actividades:
+          - es: "Pruebas unitarias, de integración y de extremo a extremo; accesibilidad y presupuesto de rendimiento."
+            en: "Unit, integration and end-to-end tests; accessibility and a performance budget."
+          - es: "Si hay modelo: preguntas de prueba y casos donde debe abstenerse, declarar que no sabe o rechazar."
+            en: "If there is a model: test questions and cases where it must abstain, say it does not know or refuse."
+          - es: "Ver fallar cada control nuevo frente a lo que pretende atrapar, antes de darlo por bueno."
+            en: "Watch every new control fail against what it means to catch, before accepting it."
+        artefactos:
+          - { es: "La suite en la integración continua.", en: "The suite in continuous integration." }
+          - { es: "La demostración en rojo de cada control nuevo.", en: "The red demonstration of every new control." }
+        decide: { es: "Quien construye.", en: "Whoever builds." }
+        control: { es: "Un control nuevo entra solo después de verse fallar.", en: "A new control only goes in after it has been seen failing." }
+        nota:
+          voz: campo
+          texto:
+            es: "Microsoft recomienda incorporar pruebas cualitativas en los pipelines de publicación, porque la IA no es determinista, y que el monitoreo alimente las puertas de calidad en todo el ciclo."
+            en: "Microsoft recommends building qualitative tests into release pipelines, because AI is nondeterministic, and having monitoring feed the quality gates across the whole life cycle."
+          fuentes: [8]
+      - nombre: { es: "Proteger lo que se publica", en: "Protect what gets published" }
+        entradas:
+          - { es: "El repositorio, que puede ser público.", en: "The repository, which may be public." }
+          - { es: "Las credenciales del proveedor y de la base de datos.", en: "The provider’s and the database’s credentials." }
+        actividades:
+          - es: "Bloquear los secretos antes del commit y probar ese bloqueo con una carnada que sí lo dispara."
+            en: "Block secrets before the commit and test that block with a bait that actually triggers it."
+          - es: "Dejar las claves solo en las variables de entorno del despliegue, nunca en el código que llega al navegador."
+            en: "Keep keys only in the deployment’s environment variables, never in the code that reaches the browser."
+          - es: "Probar cada credencial antes de construir contra ella."
+            en: "Test every credential before building against it."
+          - es: "Auditar las dependencias y actualizarlas en lotes pequeños, verificados uno a uno."
+            en: "Audit dependencies and update them in small batches, verified one at a time."
+        artefactos:
+          - { es: "El bloqueo de secretos y su carnada verificada.", en: "The secret block and its verified bait." }
+          - { es: "La configuración del entorno, fuera del repositorio.", en: "The environment configuration, outside the repository." }
+        decide: { es: "Quien construye.", en: "Whoever builds." }
+        control: { es: "Un commit con un secreto no llega a existir.", en: "A commit with a secret never comes to exist." }
+        nota:
+          voz: campo
+          texto:
+            es: "GitHub activó por defecto la protección contra secretos en los push a repositorios públicos: si detecta uno, bloquea el push hasta que se quite o se decida pasarlo por alto."
+            en: "GitHub turned on secret scanning push protection by default for pushes to public repositories: if it detects one, it blocks the push until the secret is removed or the block is deliberately bypassed."
+          fuentes: [9]
+      - nombre: { es: "Antes de publicar: corren los controles y una persona decide", en: "Before publishing: the checks run and a person decides" }
+        entradas:
+          - { es: "La vista previa del cambio.", en: "The change’s preview." }
+          - { es: "Las conclusiones de cada control requerido.", en: "The conclusions of every required control." }
+        actividades:
+          - es: "Revisar la vista previa como la verá quien la usa."
+            en: "Review the preview the way its users will see it."
+          - es: "Comprobar que cada control requerido corrió y terminó en verde por sí mismo: uno saltado no es verde."
+            en: "Check that every required control ran and finished green on its own: a skipped one is not green."
+          - es: "Publicar desde la rama principal, con la versión anterior a la mano para volver."
+            en: "Publish from the main branch, with the previous version at hand to go back to."
+        artefactos:
+          - { es: "El cambio en producción.", en: "The change in production." }
+          - { es: "Una forma de volver a la versión anterior.", en: "A way back to the previous version." }
+        decide: { es: "Quien es dueño del producto.", en: "Whoever owns the product." }
+        control: { es: "Ningún control requerido saltado ni en rojo.", en: "No required control skipped or red." }
+        nota:
+          voz: hice
+          texto:
+            es: "A cada control le hago tres preguntas antes de darlo por bueno: ¿lo viste fallar?, ¿lo viste correr? —un job saltado no es verde— y ¿puede fallar siquiera?"
+            en: "I ask every control three questions before accepting it: did you see it fail?, did you see it run? —a skipped job is not green— and can it fail at all?"
+          corpus: [apps-pipeline]
+      - nombre: { es: "Operar: medir, acotar y degradar", en: "Operate: measure, bound and degrade" }
+        entradas:
+          - { es: "El uso real.", en: "Real use." }
+          - { es: "El presupuesto escrito.", en: "The written budget." }
+        actividades:
+          - es: "Registrar metadatos estructurados y reportar los errores, sin el contenido de quien usa el producto."
+            en: "Log structured metadata and report errors, without the content of the product’s users."
+          - es: "Poner límites de frecuencia, longitud, salida, tiempo e historial."
+            en: "Set limits on rate, length, output, time and history."
+          - es: "Abrir el circuito tras fallas seguidas y pasar a la función simple, diciéndolo."
+            en: "Open the circuit after consecutive failures and switch to the simple function, saying so."
+          - es: "Tener un interruptor que apague la función generativa sin tumbar el resto."
+            en: "Keep a switch that turns off the generative feature without taking down the rest."
+        artefactos:
+          - { es: "Registros estructurados y alertas de errores.", en: "Structured logs and error alerts." }
+          - { es: "El modo degradado, probado.", en: "The degraded mode, tested." }
+        decide: { es: "Quien paga y responde por la operación.", en: "Whoever pays for and answers for the operation." }
+        control: { es: "Con el proveedor caído, el producto sigue cumpliendo lo esencial y lo dice.", en: "With the provider down, the product still does the essentials and says so." }
+        nota:
+          voz: hice
+          texto:
+            es: "En el chat de este sitio, tras tres fallas consecutivas el circuito se abre y el navegador busca en el mismo índice, diciendo que no es una respuesta del modelo."
+            en: "In this site’s chat, after three consecutive failures the circuit opens and the browser searches the same index, saying it is not the model’s answer."
+          corpus: [rag-y-el-chat]
+      - nombre: { es: "Aprender y empezar la siguiente versión", en: "Learn and start the next version" }
+        entradas:
+          - { es: "Las fallas, las mediciones y lo que encontró quien usa el producto.", en: "The failures, the measurements and what the product’s users found." }
+        actividades:
+          - es: "Escribir el resumen del ciclo: qué se hizo, qué falló y qué quedó pendiente."
+            en: "Write the cycle’s summary: what was done, what failed and what was left pending."
+          - es: "Convertir el incidente en una regla con su prueba, no en una anécdota."
+            en: "Turn the incident into a rule with its test, not into an anecdote."
+        artefactos:
+          - { es: "El resumen y la decisión registrada.", en: "The summary and the recorded decision." }
+          - { es: "La regla nueva y su demostración en rojo.", en: "The new rule and its red demonstration." }
+        decide: { es: "Quien es dueño del método.", en: "Whoever owns the method." }
+        control: { es: "Sin resumen escrito, el ciclo no cierra.", en: "Without a written summary, the cycle does not close." }
+        nota:
+          voz: hice
+          texto:
+            es: "En el sprint 3 de este sitio una credencial del proveedor devolvió un 401 en la integración; desde entonces toda credencial pasa una prueba de humo antes de construir contra ella, y la integración continua la repite en cada corrida."
+            en: "In this site’s sprint 3 a provider credential returned a 401 in integration; since then every credential goes through a smoke test before anything is built against it, and continuous integration repeats it on every run."
+          corpus: [apps-pipeline]
+
+  # ─── 4 · Las decisiones de diseño ───────────────────────────────────────────
+  - n: 4
+    decisiones:
+      - titulo: { es: "Código primero o un modelo", en: "Code first or a model" }
+        cuandoSi:
+          es: "Un modelo, cuando el problema exige interpretar, generar, recuperar por contexto o coordinar herramientas con flexibilidad, y una regla no alcanza."
+          en: "A model, when the problem requires interpreting, generating, retrieving by context or coordinating tools flexibly, and a rule falls short."
+        cuandoNo:
+          es: "Cuando una regla, una búsqueda estructurada o un algoritmo cumplen el propósito: son más previsibles, más baratos y más fáciles de probar."
+          en: "When a rule, a structured search or an algorithm does the job: they are more predictable, cheaper and easier to test."
+        porQue:
+          voz: hice
+          texto:
+            es: "Es la regla 13 de mi pipeline: antes de usar IA generativa demuestro qué característica del problema la exige, y activarla pide una decisión de arquitectura escrita."
+            en: "It is rule 13 of my pipeline: before using generative AI I show which feature of the problem requires it, and switching it on calls for a written architecture decision."
+          corpus: [apps-pipeline]
+        nota:
+          voz: posicion
+          texto:
+            es: "La pregunta no es si puedo meter IA, sino si la mejora justifica lo que trae: dependencias, costo, variabilidad y una evaluación que alguien tiene que sostener."
+            en: "The question is not whether I can add AI, but whether the improvement justifies what it brings along: dependencies, cost, variability and an evaluation someone has to keep up."
+      - titulo: { es: "Un proveedor fijo o una capa que lo cambia", en: "A fixed provider or a layer that changes it" }
+        cuandoSi:
+          es: "Una capa conmutable, cuando el producto debe sobrevivir a que un modelo se retire, una cuota cambie o un proveedor se caiga."
+          en: "A switchable layer, when the product must survive a model being retired, a quota changing or a provider going down."
+        cuandoNo:
+          es: "Un proveedor fijo, cuando la función depende de algo que solo uno ofrece y esa dependencia se acepta por escrito."
+          en: "A fixed provider, when the feature depends on something only one offers and that dependency is accepted in writing."
+        porQue:
+          voz: hice
+          texto:
+            es: "En el chat una variable de entorno elige entre cinco proveedores adaptados, y una capa de adaptación es el único módulo que los conoce: cambia quien redacta, no el índice ni los hechos."
+            en: "In the chat an environment variable chooses among five adapted providers, and an adaptation layer is the only module that knows them: who writes changes, not the index or the facts."
+          corpus: [rag-y-el-chat]
+        nota:
+          voz: posicion
+          texto:
+            es: "Cambiar de proveedor es fácil cuando el conocimiento no vive en él; lo que hay que probar es que el nuevo conserve las citas, los rechazos y el tamaño de la respuesta."
+            en: "Switching providers is easy when the knowledge does not live in the provider; what has to be tested is that the new one keeps the citations, the refusals and the answer length."
+      - titulo: { es: "Qué se evalúa en cada cambio y qué se revisa a mano", en: "What gets evaluated on every change and what gets reviewed by hand" }
+        cuandoSi:
+          es: "En cada cambio, lo que se mide de forma barata y determinista: que la recuperación traiga su fuente, que los destinos existan, que las preguntas ajenas se corten."
+          en: "On every change, whatever can be measured cheaply and deterministically: that retrieval brings back its source, that destinations exist, that off-topic questions get stopped."
+        cuandoNo:
+          es: "Un juez con modelo en cada commit, cuando cuesta más de lo que protege: ahí va por lotes, antes de publicar."
+          en: "A model-based judge on every commit, when it costs more than it protects: there it goes in batches, before publishing."
+        porQue:
+          voz: campo
+          texto:
+            es: "Microsoft documenta, en vista previa, una acción de GitHub que evalúa agentes dentro de la integración continua, con intervalos de confianza y pruebas de significancia para saber si un cambio mejoró o solo varió, y aconseja no correrla en cada commit para contener el costo."
+            en: "Microsoft documents, in preview, a GitHub Action that evaluates agents inside continuous integration, with confidence intervals and significance tests to tell whether a change improved or merely varied, and advises against running it on every commit to keep costs down."
+          fuentes: [3]
+        nota:
+          voz: hice
+          texto:
+            es: "En este sitio la recuperación se evalúa en cada cambio con preguntas propias y de afuera; la respuesta que intenta meter algo no recuperado la caza hoy la lectura, no un gate."
+            en: "On this site retrieval is evaluated on every change with questions of my own and from outside; the answer that tries to slip in something not retrieved is caught today by reading, not by a gate."
+          corpus: [rag-y-el-chat]
+      - titulo: { es: "Contenedores propios o despliegue sin servidor", en: "Own containers or serverless deployment" }
+        cuandoSi:
+          es: "Sin servidor propio, cuando el producto es estático o de funciones cortas y nadie debería tener que operar una máquina: el borde y el navegador alcanzan."
+          en: "No server of its own, when the product is static or made of short functions and nobody should have to operate a machine: the edge and the browser are enough."
+        cuandoNo:
+          es: "Cuando la carga pide procesos largos, estado en memoria o un control del entorno que la plataforma no da: ahí un contenedor paga lo que cuesta operarlo."
+          en: "When the workload needs long processes, in-memory state or control over the environment that the platform does not give: there a container pays for what it costs to run."
+        porQue:
+          voz: hice
+          texto:
+            es: "Mis despliegues son sin servidor propio —Vercel, Cloudflare Workers, el navegador del usuario— y por eso nunca han necesitado un contenedor."
+            en: "My deployments run with no server of their own —Vercel, Cloudflare Workers, the user’s browser— and that is why they have never needed a container."
+          corpus: [plataforma-y-despliegue]
+        nota:
+          voz: campo
+          texto:
+            es: "Para desplegar un modelo, Microsoft recomienda empezar por plataforma como servicio y soluciones sin servidor para simplificar la adopción y la operación; el cómputo gestionado es una opción viable para necesidades avanzadas, y el autoalojamiento, otra opción."
+            en: "To deploy a model, Microsoft recommends starting with platform as a service and serverless solutions to simplify adoption and management; managed compute is a viable option for advanced needs, and self-hosting is another option."
+          fuentes: [8]
+      - titulo: { es: "Qué se guarda para observar", en: "What gets stored in order to observe" }
+        cuandoSi:
+          es: "Metadatos —proveedor, modelo, milisegundos, tokens, errores— para saber qué falló, dónde y cuánto costó."
+          en: "Metadata —provider, model, milliseconds, tokens, errors— to know what failed, where and what it cost."
+        cuandoNo:
+          es: "El contenido de quien usa el producto, salvo que el producto lo necesite, se diga antes de la primera palabra y tenga su decisión registrada."
+          en: "The content of the product’s users, unless the product needs it, it is said before the first word and it has its recorded decision."
+        porQue:
+          voz: hice
+          texto:
+            es: "En mis apps lo que se observa viaja como metadatos por Pino y Sentry; el chat de este sitio sí guarda pregunta y respuesta desde el 21 de septiembre de 2026, y lo advierte antes de que el visitante escriba."
+            en: "In my apps what is observed travels as metadata through Pino and Sentry; this site’s chat does store question and answer since September 21, 2026, and warns about it before the visitor writes."
+          corpus: [plataforma-y-despliegue, rag-y-el-chat]
+        nota:
+          voz: campo
+          texto:
+            es: "Microsoft Foundry (antes Azure AI Foundry) traza cada llamada al modelo y a las herramientas sobre el estándar OpenTelemetry, y su monitoreo de producción sigue consumo de tokens, latencia, tasa de errores y calidad, con alertas cuando una salida no pasa sus umbrales."
+            en: "Microsoft Foundry (formerly Azure AI Foundry) traces every call to the model and to tools on the OpenTelemetry standard, and its production monitoring follows token consumption, latency, error rates and quality, with alerts when an output fails its thresholds."
+          fuentes: [2]
+
+  # ─── 5 · Lo innovador en 2026 ───────────────────────────────────────────────
+  - n: 5
+    elementos:
+      - titulo: { es: "Microsoft Foundry, una plataforma que junta evaluar, observar y poner barreras", en: "Microsoft Foundry, one platform that brings together evaluating, observing and guarding" }
+        queCambia:
+          es: "Microsoft Foundry reúne agentes, modelos y herramientas en un solo recurso, con trazas, monitoreo y evaluaciones incorporados; sus barreras de seguridad pueden revisar la entrada, la salida y, para agentes y en vista previa, la llamada a una herramienta y su respuesta."
+          en: "Microsoft Foundry brings agents, models and tools together in a single resource, with tracing, monitoring and evaluations built in; its guardrails can scan the input, the output and, for agents and in preview, the call to a tool and its response."
+        fuentes: [1, 12]
+        nota:
+          voz: hice
+          texto:
+            es: "Mi experiencia con Microsoft Foundry —sus límites, en el bloque 9—: lo conecté al chat como uno de sus proveedores, y estudio su temario en la ruta del AI-103, que está en curso."
+            en: "My experience with Microsoft Foundry —its limits are in block 9—: I connected it to the chat as one of its providers, and I study its syllabus on the AI-103 path, which is in progress."
+          corpus: [rag-y-el-chat, certificaciones]
+      - titulo: { es: "Las evaluaciones como una prueba más del pipeline", en: "Evaluations as one more test in the pipeline" }
+        queCambia:
+          es: "La observabilidad deja de empezar en producción: Foundry integra puertas de calidad automáticas en la integración continua (con una acción de GitHub en vista previa), aplica evaluadores de calidad, de RAG y de seguridad a un conjunto de consultas, y después evalúa una muestra del tráfico real."
+          en: "Observability no longer starts in production: Foundry plugs automated quality gates into continuous integration (with a GitHub Action in preview), applies quality, RAG and safety evaluators to a set of queries, and afterwards evaluates a sample of real traffic."
+        fuentes: [2, 3]
+        nota:
+          voz: hice
+          texto:
+            es: "En este sitio las preguntas de prueba ya corren en cada cambio como cualquier otra prueba; para la respuesta del modelo no tengo un juez automático."
+            en: "On this site the test questions already run on every change like any other test; for the model’s answer I have no automatic judge."
+          corpus: [rag-y-el-chat]
+      - titulo: { es: "Atacarse a uno mismo antes de publicar", en: "Attacking yourself before publishing" }
+        queCambia:
+          es: "El agente de red teaming de Foundry prueba la aplicación con estrategias de ataque de PyRIT y mide la tasa de ataques exitosos; Microsoft advierte que el juez es generativo, que puede dar falsos positivos y que los resultados se revisan antes de actuar."
+          en: "Foundry’s red teaming agent probes the application with PyRIT attack strategies and measures the attack success rate; Microsoft warns that the judge is generative, that it can produce false positives and that results are reviewed before acting on them."
+        fuentes: [4]
+        nota:
+          voz: posicion
+          texto:
+            es: "Lo correría antes de abrir al público una función generativa nueva, y leería los ataques que pasaron antes de tocar un solo filtro."
+            en: "I would run it before opening a new generative feature to the public, and read the attacks that got through before touching a single filter."
+      - titulo: { es: "Mandar cada pedido al modelo que alcanza", en: "Sending each request to the model that is enough" }
+        queCambia:
+          es: "El enrutador de modelos de Foundry analiza cada pedido y lo manda a un modelo pequeño cuando basta y a uno de frontera cuando lo exige; dice qué modelo respondió, y Microsoft aclara que no quita la necesidad de evaluar."
+          en: "Foundry’s model router analyzes each request and sends it to a small model when that is enough and to a frontier one when it is needed; it says which model answered, and Microsoft makes clear it does not remove the need to evaluate."
+        fuentes: [5]
+        nota:
+          voz: hice
+          texto:
+            es: "El ahorro de mi chat ocurre antes del modelo: las preguntas fuera de alcance no consumen tokens y solo viajan los fragmentos relevantes, no el sitio entero."
+            en: "My chat’s savings happen before the model: out-of-scope questions consume no tokens and only the relevant passages travel, not the whole site."
+          corpus: [rag-y-el-chat]
+      - titulo: { es: "Reutilizar el principio del prompt", en: "Reusing the beginning of the prompt" }
+        queCambia:
+          es: "Si los primeros 1.024 tokens de un pedido son idénticos a uno anterior, el servicio reutiliza el cómputo y cobra con descuento esa lectura; por eso lo estable va al principio y lo que cambia, al final."
+          en: "If the first 1,024 tokens of a request are identical to an earlier one, the service reuses the computation and bills that read at a discount; that is why what is stable goes first and what changes goes last."
+        fuentes: [6]
+        nota:
+          voz: posicion
+          texto:
+            es: "Es una palanca cuando las instrucciones son largas y se repiten idénticas; antes de contar con ella mediría cuánto del pedido es de verdad estable."
+            en: "It is a lever when the instructions are long and repeat identically; before relying on it I would measure how much of the request is truly stable."
+      - titulo: { es: "El consumo sin límite, tratado como riesgo de seguridad", en: "Unbounded consumption, treated as a security risk" }
+        queCambia:
+          es: "El Top 10 de OWASP para aplicaciones con LLM de 2025 trata el consumo sin control como riesgo —denegación de servicio, pérdidas económicas— y pide validar el tamaño de las entradas, limitar la frecuencia por origen, poner tiempos máximos y vigilar el uso de recursos."
+          en: "OWASP’s 2025 Top 10 for LLM applications treats uncontrolled consumption as a risk —denial of service, economic losses— and asks for input size validation, rate limits per source, timeouts and monitoring of resource usage."
+        fuentes: [10]
+        nota:
+          voz: hice
+          texto:
+            es: "Mi chat tiene esos límites escritos como números y no como intenciones: 800 caracteres por pregunta, 700 tokens de salida, 30 segundos y 12 mensajes de historial."
+            en: "My chat has those limits written as numbers, not as intentions: 800 characters per question, 700 output tokens, 30 seconds and 12 messages of history."
+          corpus: [rag-y-el-chat]
+      - titulo: { es: "La cadena de suministro también es la de la IA", en: "The supply chain is also AI’s" }
+        queCambia:
+          es: "OWASP extiende la cadena de suministro a modelos, datos y plataformas, y pide revisar a los proveedores, mantener un inventario de componentes al día —una lista de materiales de software— y una política de parches para lo vulnerable o desactualizado."
+          en: "OWASP extends the supply chain to models, data and platforms, and asks for vetting suppliers, keeping an up-to-date inventory of components —a software bill of materials— and a patching policy for what is vulnerable or outdated."
+        fuentes: [11]
+        nota:
+          voz: hice
+          texto:
+            es: "Anonimizador Velo audita sus dependencias en la integración continua contra tres familias vetadas de SDK de IA, y una dependencia transitiva cuenta igual que una directa."
+            en: "Anonimizador Velo audits its dependencies in continuous integration against three banned families of AI SDKs, and a transitive dependency counts the same as a direct one."
+          corpus: [apps-pipeline]
+      - titulo: { es: "Operar IA ya es una certificación", en: "Operating AI is now a certification" }
+        queCambia:
+          es: "La guía de estudio de Microsoft para su certificación de operaciones de aprendizaje automático y de IA generativa pide versionar los prompts en Git, montar evaluaciones automáticas con métricas de calidad y de seguridad, y seguir el costo en tokens junto a la latencia y el rendimiento."
+          en: "Microsoft’s study guide for its machine learning and generative AI operations certification asks for versioning prompts in Git, setting up automated evaluations with quality and safety metrics, and tracking token cost alongside latency and throughput."
+        fuentes: [7]
+        nota:
+          voz: hice
+          texto:
+            es: "Sigo la ruta del AI-300 desde julio de 2026; está en curso y no la presento como obtenida."
+            en: "I have been following the AI-300 path since July 2026; it is in progress and I do not present it as earned."
+          corpus: [certificaciones]
+
+  # ─── 6 · Modos de falla y cómo se ven venir ─────────────────────────────────
+  - n: 6
+    fallas:
+      - falla: { es: "Un control que siempre da verde", en: "A control that is always green" }
+        senal: { es: "Nadie lo vio fallar; un job saltado aparece entre los requeridos sin alarma.", en: "Nobody saw it fail; a skipped job shows up among the required ones with no alarm." }
+        control: { es: "La demostración en rojo viaja en el mismo commit que el control, y cada verificación requerida tiene su propia conclusión.", en: "The red demonstration travels in the same commit as the control, and every required check has its own conclusion." }
+      - falla: { es: "Un secreto llega al repositorio", en: "A secret reaches the repository" }
+        senal: { es: "Una clave en un commit, en un registro o en el código que llega al navegador.", en: "A key in a commit, in a log or in the code that reaches the browser." }
+        control: { es: "Barrido de secretos antes del commit, probado con una carnada que sí lo dispara; claves solo en el entorno del despliegue.", en: "Secret scanning before the commit, tested with a bait that actually triggers it; keys only in the deployment’s environment." }
+      - falla: { es: "Una credencial inválida se descubre al final", en: "An invalid credential is found out at the end" }
+        senal: { es: "El primer uso real devuelve un 401.", en: "The first real use returns a 401." }
+        control: { es: "Prueba de humo de cada credencial antes de construir contra ella, repetida en la integración continua.", en: "A smoke test of every credential before building against it, repeated in continuous integration." }
+      - falla: { es: "El proveedor se cae, se queda sin cuota o retira el modelo", en: "The provider goes down, runs out of quota or retires the model" }
+        senal: { es: "Fallas seguidas, tiempos vencidos, un modelo que deja de existir.", en: "Consecutive failures, timeouts, a model that stops existing." }
+        control: { es: "Capa de proveedor conmutable, cortacircuitos y una función degradada que se anuncia como tal.", en: "A switchable provider layer, a circuit breaker and a degraded function announced as such." }
+      - falla: { es: "El costo crece sin que nadie lo decida", en: "Cost grows without anyone deciding it" }
+        senal: { es: "Más tokens por respuesta, pedidos ajenos que llegan al modelo, picos de un solo origen.", en: "More tokens per answer, off-topic requests reaching the model, spikes from a single source." }
+        control: { es: "Un filtro antes del modelo, límites de frecuencia y tamaño, y un techo de costo escrito.", en: "A filter before the model, rate and size limits, and a written cost ceiling." }
+      - falla: { es: "La calidad se degrada en silencio después de publicar", en: "Quality degrades silently after publishing" }
+        senal: { es: "Reintentos que se acumulan con una integración, respuestas que dejan de citar, latencia que sube.", en: "Retries piling up with an integration, answers that stop citing, latency going up." }
+        control: { es: "Telemetría por sesión con metadatos y las preguntas de prueba corriendo contra cada cambio.", en: "Per-session telemetry with metadata and the test questions running against every change." }
+      - falla: { es: "Una dependencia vulnerable o desactualizada", en: "A vulnerable or outdated dependency" }
+        senal: { es: "Un aviso de seguridad, o un paquete que baja de versión sin que nadie lo pida.", en: "A security advisory, or a package that drops a version without anyone asking." }
+        control: { es: "Auditoría de dependencias en la integración continua y actualizaciones en lotes pequeños, cada uno verificado.", en: "Dependency auditing in continuous integration and updates in small batches, each one verified." }
+      - falla: { es: "La telemetría se lleva datos de quien usa el producto", en: "Telemetry carries away its users’ data" }
+        senal: { es: "Contenido de un usuario en un registro o en un error reportado.", en: "A user’s content in a log or in a reported error." }
+        control: { es: "Registro estructurado solo con metadatos; lo que sí se guarda se declara antes y tiene su decisión escrita.", en: "Structured logging with metadata only; whatever is stored is declared beforehand and has its written decision." }
+
+  # ─── 7 · Métricas y controles ───────────────────────────────────────────────
+  - n: 7
+    metricas:
+      - metrica: { es: "Controles requeridos con conclusión propia en verde", en: "Required controls with their own green conclusion" }
+        umbral: { es: "Todos; uno saltado cuenta como no verde.", en: "All of them; a skipped one counts as not green." }
+        aprueba: { es: "Quien publica, leyendo cada conclusión.", en: "Whoever publishes, reading every conclusion." }
+      - metrica: { es: "Controles nuevos vistos fallando", en: "New controls seen failing" }
+        umbral: { es: "Todos, antes de entrar.", en: "All of them, before going in." }
+        aprueba: { es: "Quien construye, con la demostración registrada.", en: "Whoever builds, with the demonstration on record." }
+      - metrica: { es: "Preguntas de prueba con su fuente entre las que entran", en: "Test questions with their source among those that go in" }
+        umbral: { es: "Un piso escrito que no baja de un cambio al siguiente.", en: "A written floor that does not drop from one change to the next." }
+        aprueba: { es: "Quien es dueño del contenido.", en: "Whoever owns the content." }
+      - metrica: { es: "Secretos en el historial", en: "Secrets in the history" }
+        umbral: { es: "Cero: uno solo detiene el commit.", en: "Zero: a single one stops the commit." }
+        aprueba: { es: "El bloqueo de secretos, sin excepciones.", en: "The secret block, with no exceptions." }
+      - metrica: { es: "Costo mensual frente al techo escrito", en: "Monthly cost against the written ceiling" }
+        umbral: { es: "Por debajo del techo; si se acerca, se recorta contexto y extensión antes de cambiar de modelo.", en: "Below the ceiling; if it gets close, context and length are trimmed before switching models." }
+        aprueba: { es: "Quien paga la operación.", en: "Whoever pays for the operation." }
+      - metrica: { es: "Latencia y errores del proveedor", en: "Provider latency and errors" }
+        umbral: { es: "Dentro del tiempo máximo por pedido; fallas seguidas abren el circuito.", en: "Within the maximum time per request; consecutive failures open the circuit." }
+        aprueba: { es: "Quien responde por el producto.", en: "Whoever answers for the product." }
+      - metrica: { es: "Función esencial con el proveedor caído", en: "Essential function with the provider down" }
+        umbral: { es: "Disponible y rotulada como degradada.", en: "Available and labeled as degraded." }
+        aprueba: { es: "Quien responde por el producto.", en: "Whoever answers for the product." }
+      - metrica: { es: "Contenido de usuarios en la telemetría", en: "Users’ content in telemetry" }
+        umbral: { es: "Cero.", en: "Zero." }
+        aprueba: { es: "Quien responde por los datos.", en: "Whoever answers for the data." }
+
+  # ─── 8 · Mi evidencia ───────────────────────────────────────────────────────
+  - n: 8
+    evidencia:
+      - nombre: { es: "La cadena de publicación que comparten mis apps", en: "The publishing chain my apps share" }
+        nivel: uso-real
+        texto:
+          es: "Mis aplicaciones hermanas y este sitio comparten criterios y, en lo esencial, esta cadena: Git y GitHub, integración continua con pruebas unitarias, de integración y de extremo a extremo, accesibilidad con axe, presupuesto de rendimiento con Lighthouse y despliegue en Vercel con una vista previa por cambio (Innmobiliaria sale desde el borde en Cloudflare Workers y Dash Agent no se despliega); ninguna rama llega a producción con uno de esos trabajos en rojo."
+          en: "My sibling apps and this site share criteria and, in essence, this chain: Git and GitHub, continuous integration with unit, integration and end-to-end tests, accessibility with axe, a performance budget with Lighthouse and deployment on Vercel with one preview per change (Innmobiliaria is served from the edge on Cloudflare Workers and Dash Agent is not deployed); no branch reaches production with one of those jobs red."
+        corpus: [plataforma-y-despliegue]
+        href: /vitrina/apps
+      - nombre: { es: "Este sitio: la integración continua contra una base real", en: "This site: continuous integration against a real database" }
+        nivel: uso-real
+        texto:
+          es: "El trabajo de integración levanta un Supabase real, le aplica las migraciones y prueba contra Postgres; un permiso de la base se da por verificado cuando una prueba intenta saltárselo y no puede."
+          en: "The integration job spins up a real Supabase, applies the migrations and tests against Postgres; a database permission counts as verified when a test tries to get around it and cannot."
+        corpus: [plataforma-y-despliegue]
+        href: /apps/hoja-de-vida
+      - nombre: { es: "Un control se demuestra fallando", en: "A control proves itself by failing" }
+        nivel: uso-real
+        texto:
+          es: "Cada control nuevo trae en el mismo commit su demostración en rojo. La regla nació el 15 de julio de 2026, cuando el barrido de secretos pasó en silencio dos veces con una carnada floja: desde entonces la carnada canónica está verificada."
+          en: "Every new control brings its red demonstration in the same commit. The rule was born on July 15, 2026, when secret scanning passed silently twice with a weak bait: since then the canonical bait has been verified."
+        corpus: [apps-pipeline]
+      - nombre: { es: "La capa de proveedor y la degradación, probadas en una falla real", en: "The provider layer and degradation, tested by a real failure" }
+        nivel: uso-real
+        texto:
+          es: "Una variable de entorno elige el proveedor del chat. En el sprint 3 una credencial devolvió un 401 en la integración, el circuito se abrió y la búsqueda local respondió sobre el mismo índice, diciendo que no era una respuesta del modelo."
+          en: "An environment variable picks the chat’s provider. In sprint 3 a credential returned a 401 in integration, the circuit opened and local search answered over the same index, saying it was not the model’s answer."
+        corpus: [rag-y-el-chat]
+        href: /apps/chat-hoja-de-vida
+      - nombre: { es: "Un techo de costo y el costo medido", en: "A cost ceiling and the measured cost" }
+        nivel: uso-real
+        texto:
+          es: "El chat opera con un techo de US$20 al mes y un costo real observado de US$0, porque el uso cabe en la cuota gratuita del proveedor inicial y las consultas ajenas se resuelven sin invocarlo: es una medición, no una promesa de gratuidad."
+          en: "The chat runs under a ceiling of US$20 a month and an observed real cost of US$0, because usage fits in the initial provider’s free quota and off-topic queries are resolved without calling it: it is a measurement, not a promise of free service."
+        corpus: [rag-y-el-chat]
+      - nombre: { es: "Observar agentes en producción", en: "Observing agents in production" }
+        nivel: uso-real
+        texto:
+          es: "En Vesting diseñé la plataforma que observaba hasta 23 agentes a la vez en producción: los eventos viajaban a Microsoft Fabric y de ahí a Power BI, y la telemetría por sesión mostró a un agente que acumulaba reintentos antes de que un usuario lo reportara."
+          en: "At Vesting I designed the platform that observed up to 23 agents at a time in production: events traveled to Microsoft Fabric and from there to Power BI, and per-session telemetry showed an agent piling up retries before a user reported it."
+        corpus: [plataforma-y-despliegue]
+        href: /proyectos/vesting
+      - nombre: { es: "Datos con seguridad por filas y acceso solo por funciones", en: "Data with row-level security and access only through functions" }
+        nivel: uso-real
+        texto:
+          es: "La base de este sitio tiene la seguridad por filas encendida y sin políticas: el rol anónimo solo ejecuta funciones con privilegios del definidor, y la llave de servicio no viaja al navegador ni vive en el repositorio."
+          en: "This site’s database has row-level security on and no policies: the anonymous role can only run definer-privilege functions, and the service key neither travels to the browser nor lives in the repository."
+        corpus: [plataforma-y-despliegue]
+      - nombre: { es: "Modelos en producción, sostenidos", en: "Models in production, sustained" }
+        nivel: uso-real
+        texto:
+          es: "La mitad de MLOps que consiste en llevar modelos a producción y sostenerlos la he hecho: modelos predictivos en Banco Pichincha y en TransMilenio, el monitoreo de agentes en Vesting y aplicaciones públicas con integración continua y despliegue automático, operadas por mí."
+          en: "The half of MLOps that is about taking models to production and keeping them there I have done: predictive models at Banco Pichincha and TransMilenio, agent monitoring at Vesting and public applications with continuous integration and automatic deployment, operated by me."
+        corpus: [plataforma-y-despliegue]
+
+  # ─── 9 · Lo que haría distinto y lo que no he hecho ─────────────────────────
+  - n: 9
+    limites:
+      - voz: hice
+        texto:
+          es: "Contenedores en producción con Docker y Kubernetes no están en mi experiencia: Kubernetes lo conozco como estudio, no como operación, y la mitad de MLOps que empaqueta y orquesta con contenedores no la he hecho."
+          en: "Containers in production with Docker and Kubernetes are not in my experience: I know Kubernetes from study, not from operating it, and the half of MLOps that packages and orchestrates with containers I have not done."
+        corpus: [plataforma-y-despliegue]
+      - voz: hice
+        texto:
+          es: "Con Microsoft Foundry mi experiencia es el adaptador de proveedor de este chat, un ajuste de un modelo que hice ahí y el estudio del AI-103, que está en curso; no describo ningún despliegue propio en Azure."
+          en: "With Microsoft Foundry my experience is this chat’s provider adapter, a fine-tune of a model I did there and studying for the AI-103, which is in progress; I do not describe any deployment of my own on Azure."
+        corpus: [rag-y-el-chat, certificaciones]
+      - voz: hice
+        texto:
+          es: "El AI-300 está en curso: es la certificación de operar modelos y agentes, y no la presento como obtenida."
+          en: "The AI-300 is in progress: it is the certification for operating models and agents, and I do not present it as earned."
+        corpus: [certificaciones]
+      - voz: hice
+        texto:
+          es: "La respuesta del modelo todavía se revisa leyendo: la que intenta introducir información no recuperada la caza la lectura, no un gate."
+          en: "The model’s answer is still reviewed by reading: the one that tries to bring in information that was not retrieved is caught by reading, not by a gate."
+        corpus: [rag-y-el-chat]
+      - voz: hice
+        texto:
+          es: "Las fases de lanzamiento y de operación de mi fábrica de apps siguen sin validarse en una corrida real: son método escrito, no experiencia."
+          en: "The launch and operation phases of my app factory have still not been validated in a real run: they are written method, not experience."
+        corpus: [apps-pipeline]
+      - voz: posicion
+        texto:
+          es: "Lo que haría distinto hoy: la evaluación con un juez calibrado como un trabajo más de la integración continua desde el primer sprint con IA, y un red teaming automatizado antes de abrir una función generativa al público."
+          en: "What I would do differently today: evaluation with a calibrated judge as one more continuous integration job from the first sprint with AI, and automated red teaming before opening a generative feature to the public."
+      - voz: posicion
+        texto:
+          es: "Y no empezaría por la plataforma: empezaría por las condiciones de publicación, escritas y vistas fallar; la plataforma se elige después, por lo que esas condiciones necesitan."
+          en: "And I would not start with the platform: I would start with the publishing conditions, written down and seen failing; the platform is chosen afterwards, for what those conditions need."
+
+  # ─── 10 · Fuentes y fecha de revisión ───────────────────────────────────────
+  - n: 10
+    revisado: "2026-10-18"
+    fuentes:
+      - id: 1
+        titulo: "What is Microsoft Foundry?"
+        editor: "Microsoft Learn"
+        fecha: "2026-08-13"
+        url: "https://learn.microsoft.com/en-us/azure/foundry/what-is-foundry"
+      - id: 2
+        titulo: "Observability in Generative AI"
+        editor: "Microsoft Learn"
+        fecha: "2026-10-15"
+        url: "https://learn.microsoft.com/en-us/azure/foundry/concepts/observability"
+      - id: 3
+        titulo: "How to run an evaluation in GitHub Action"
+        editor: "Microsoft Learn"
+        fecha: "2026-04-30"
+        url: "https://learn.microsoft.com/en-us/azure/foundry/how-to/evaluation-github-action"
+      - id: 4
+        titulo: "AI Red Teaming Agent"
+        editor: "Microsoft Learn"
+        fecha: "2026-08-19"
+        url: "https://learn.microsoft.com/en-us/azure/foundry/concepts/ai-red-teaming-agent"
+      - id: 5
+        titulo: "How model router works in Microsoft Foundry"
+        editor: "Microsoft Learn"
+        fecha: "2026-09-09"
+        url: "https://learn.microsoft.com/en-us/azure/foundry/openai/concepts/model-router-how-it-works"
+      - id: 6
+        titulo: "Prompt caching with Azure OpenAI in Microsoft Foundry Models"
+        editor: "Microsoft Learn"
+        fecha: "2026-08-11"
+        url: "https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/prompt-caching"
+      - id: 7
+        titulo: "Study guide for Exam AI-300: Operationalizing Machine Learning and Generative AI Solutions"
+        editor: "Microsoft Learn"
+        fecha: "2026-02-18"
+        url: "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/ai-300"
+      - id: 8
+        titulo: "MLOps and GenAIOps for AI Workloads on Azure (Azure Well-Architected Framework)"
+        editor: "Microsoft Learn"
+        fecha: "2024-11-01"
+        url: "https://learn.microsoft.com/en-us/azure/well-architected/ai/mlops-genaiops"
+      - id: 9
+        titulo: "Keeping secrets out of public repositories"
+        editor: "GitHub"
+        fecha: "2024-02-29"
+        url: "https://github.blog/news-insights/product-news/keeping-secrets-out-of-public-repositories/"
+      - id: 10
+        titulo: "LLM10:2025 Unbounded Consumption (OWASP Top 10 for LLM Applications 2025)"
+        editor: "OWASP GenAI Security Project"
+        fecha: "2024-11-17"
+        url: "https://genai.owasp.org/llmrisk/llm102025-unbounded-consumption/"
+      - id: 11
+        titulo: "LLM03:2025 Supply Chain (OWASP Top 10 for LLM Applications 2025)"
+        editor: "OWASP GenAI Security Project"
+        fecha: "2024-11-17"
+        url: "https://genai.owasp.org/llmrisk/llm032025-supply-chain/"
+      - id: 12
+        titulo: "Guardrails and controls overview in Microsoft Foundry"
+        editor: "Microsoft Learn"
+        fecha: "2026-07-31"
+        url: "https://learn.microsoft.com/en-us/azure/foundry/guardrails/guardrails-overview"

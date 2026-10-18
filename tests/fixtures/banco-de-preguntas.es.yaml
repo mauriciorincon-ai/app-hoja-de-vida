@@ -577,6 +577,24 @@ preguntas:
     espera: [metodo-rag-sin-inventar]
     familia: ia-y-agentes
 
+  # ─────────────────────────────────────────────────────────────────────
+  # Mi método (S12): las tres preguntas de T4. Su fuente esperada es la PIEZA: los
+  # documentos que la sostienen (`plataforma-y-despliegue`, `apps-pipeline`,
+  # `certificaciones`) ya contestan algo de cada una, y una fila que los aceptara
+  # no podría fallar. Medidas ANTES de escribirlas, la 2.ª y la 3.ª no entraban al
+  # top-4: se ajustaron los títulos de la pieza (la fase 4 y el primer elemento de
+  # «Lo innovador»), no esta expectativa.
+  # ─────────────────────────────────────────────────────────────────────
+  - pregunta: "¿Cómo lleva Henry una aplicación de IA a producción?"
+    espera: [metodo-de-prototipo-a-produccion]
+    familia: ia-y-agentes
+  - pregunta: "¿Qué controles corren antes de que Henry publique?"
+    espera: [metodo-de-prototipo-a-produccion]
+    familia: ia-y-agentes
+  - pregunta: "¿Qué experiencia tiene Henry con Microsoft Foundry?"
+    espera: [metodo-de-prototipo-a-produccion]
+    familia: ia-y-agentes
+
 # Preguntas AJENAS. Cada una declara qué le hace el guardrail de entrada, y hay
 # DOS resultados legítimos —confundirlos sería mentir sobre lo que el guardrail
 # promete (`src/lib/ia/guardrails.ts`)—:

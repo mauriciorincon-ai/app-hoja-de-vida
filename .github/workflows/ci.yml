@@ -21,7 +21,7 @@ jobs:
       - uses: pnpm/action-setup@v6
         with: { version: 11 }
       - uses: actions/setup-node@v7
-        with: { node-version: 22, cache: pnpm }
+        with: { node-version-file: .nvmrc, cache: pnpm }
       - run: pnpm install --frozen-lockfile
       - run: pnpm peers check    # único gate que ve un peer insatisfecho (kit v1.24.0)
       # Regla 18 (kit v1.32.0): ningún paquete por debajo de `main`. pnpm degrada en silencio y la CI
@@ -56,7 +56,7 @@ jobs:
       - uses: pnpm/action-setup@v6
         with: { version: 11 }
       - uses: actions/setup-node@v7
-        with: { node-version: 22, cache: pnpm }
+        with: { node-version-file: .nvmrc, cache: pnpm }
       - run: pnpm install --frozen-lockfile
       # webkit: solo para las pruebas `@webkit` (playwright.config, deuda M1 del S9).
       - run: pnpm exec playwright install --with-deps chromium webkit
@@ -85,7 +85,7 @@ jobs:
       - uses: pnpm/action-setup@v6
         with: { version: 11 }
       - uses: actions/setup-node@v7
-        with: { node-version: 22, cache: pnpm }
+        with: { node-version-file: .nvmrc, cache: pnpm }
       - run: pnpm install --frozen-lockfile
       - uses: supabase/setup-cli@v3
         with: { version: latest }
@@ -123,7 +123,7 @@ jobs:
       - uses: pnpm/action-setup@v6
         with: { version: 11 }
       - uses: actions/setup-node@v7
-        with: { node-version: 22, cache: pnpm }
+        with: { node-version-file: .nvmrc, cache: pnpm }
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
       - name: Lighthouse CI — recolección (3 corridas por URL)

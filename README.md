@@ -27,6 +27,8 @@ promete fecha.
 
 ## Correrla en local
 
+Necesita **Node 22.18 o posterior** (`engines` en `package.json`); `.nvmrc` trae la versión exacta que usa la CI, así que `nvm use` la deja puesta.
+
 ```bash
 pnpm install
 pnpm dev          # http://localhost:3000
