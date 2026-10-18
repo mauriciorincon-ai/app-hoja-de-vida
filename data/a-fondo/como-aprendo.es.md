@@ -2,7 +2,7 @@
 slug: como-aprendo
 codigo: AF-19
 titulo: "Cómo aprendo"
-resumen: "El argumento con medida: el DP-600 en cinco meses sobre un Fabric con menos de un año en el mercado, Codex, Antigravity y Claude Code en un mes desde su salida, este sitio en doce sprints desde julio de 2026, y 38 piezas públicas con sus pruebas y coberturas."
+resumen: "El argumento con medida: el DP-600 en cinco meses sobre un Fabric con menos de un año en el mercado, Codex, Antigravity y Claude Code en un mes desde su salida, este sitio en trece sprints desde julio de 2026, y 38 piezas públicas con sus pruebas y coberturas."
 cuando_usar: "Úsalo cuando pregunten cómo aprende una tecnología nueva, qué hace cuando el puesto pide algo que nunca ha usado, cuánto tardó en certificarse, qué está estudiando ahora, o cómo documenta y demuestra lo que aprendió."
 estado: aprobado
 ancla: "#certificaciones"
@@ -94,7 +94,7 @@ Las dos de IBM siguen el mismo patrón. Durante 2022 consolidé mi base en cienc
 
 En 2024 complementé esa base con formación aplicada en R, entre enero y noviembre, en paralelo al DP-600. La elección no respondió a la intención de acumular otro lenguaje, sino a la necesidad de fortalecer el razonamiento estadístico, la formulación de hipótesis y la evaluación rigurosa de los resultados. Python amplió mi capacidad para construir soluciones. R profundizó la forma en que examino la evidencia antes de producir una conclusión.
 
-Actualmente desarrollo las rutas AI-103 y AI-300 porque corresponden con la siguiente etapa de mi trayectoria: 21 y 10 módulos a la fecha. El AI-103 profundiza en la construcción de aplicaciones y agentes de inteligencia artificial. El AI-300 amplía las prácticas necesarias para desplegar, evaluar, observar y mantener modelos, aplicaciones generativas y agentes durante su ciclo de vida.
+Actualmente desarrollo las rutas AI-103 y AI-300 porque corresponden con la siguiente etapa de mi trayectoria: del AI-103 completé el curso y me falta el examen, y del AI-300 llevo 10 módulos. El AI-103 profundiza en la construcción de aplicaciones y agentes de inteligencia artificial. El AI-300 amplía las prácticas necesarias para desplegar, evaluar, observar y mantener modelos, aplicaciones generativas y agentes durante su ciclo de vida.
 
 Estas rutas no representan intereses hipotéticos. Se conectan con capacidades que ya he desarrollado: la plataforma de Vesting para monitorear hasta 23 agentes a la vez, el proceso core de 11 etapas con el que se construyeron los 27 agentes de su inventario, ARKHÉ —mi ecosistema propio de harnesses especializados— y una estrategia institucional de inteligencia artificial sustentada en ISO/IEC 42001.
 
@@ -109,8 +109,8 @@ Las últimas veces que aprendí algo desde cero, y cuánto tardé:
 | Qué                                   | Desde          | Plazo                             | Resultado                                                   |
 | ------------------------------------- | -------------- | --------------------------------- | ----------------------------------------------------------- |
 | Microsoft Fabric                      | agosto de 2023 | 5 meses de estudio (jul–nov 2024) | DP-600 en diciembre de 2024, plataforma de Vesting operando |
-| Next.js y el pipeline de aplicaciones | julio de 2026  | 12 sprints                        | este sitio, CV Viva, con su CI, sus pruebas y sus ADR       |
-| AI-103 y AI-300                       | julio de 2026  | 21 y 10 módulos a la fecha        | dos rutas en curso, con la Super guía AI-103 publicada      |
+| Next.js y el pipeline de aplicaciones | julio de 2026  | 13 sprints                        | este sitio, CV Viva, con su CI, sus pruebas y sus ADR       |
+| AI-103 y AI-300                       | julio de 2026  | curso completo y 10 módulos       | dos rutas en curso, con la Super guía AI-103 publicada      |
 | Codex, Antigravity y Claude Code      | su salida      | cerca de un mes cada uno          | el pipeline con el que se construyen las 38 piezas          |
 
 Lo último que aprendí desde cero, sin certificado de por medio, fueron Codex, Antigravity y Claude Code: los tomé desde su salida y en cerca de un mes cada uno estaban en uso real, no en prueba. No son cursos terminados: son capacidades en uso, cada una con un artefacto que alguien puede abrir. La fila de Fabric es la única que termina en una credencial; las otras tres terminan en software que corre.
@@ -162,7 +162,7 @@ No descarto tutoriales, artículos o comunidades, pero los utilizo como apoyo y 
 
 Desde el primer día registro decisiones, supuestos, pruebas y problemas encontrados. Lo que no se documenta necesita volver a descubrirse. Lo que sí queda estructurado puede convertirse en una guía, un componente, una plantilla, una prueba o una regla reutilizable.
 
-El aprendizaje avanza mediante ciclos cortos. Construyo una capacidad limitada, observo su comportamiento, identifico el siguiente vacío y amplío la solución. Esta secuencia reduce la posibilidad de dedicar semanas a una arquitectura extensa antes de comprobar sus supuestos principales. Este sitio se construyó así: 12 sprints, cada uno con su plan, su bitácora y su resumen.
+El aprendizaje avanza mediante ciclos cortos. Construyo una capacidad limitada, observo su comportamiento, identifico el siguiente vacío y amplío la solución. Esta secuencia reduce la posibilidad de dedicar semanas a una arquitectura extensa antes de comprobar sus supuestos principales. Este sitio se construyó así: 13 sprints, cada uno con su plan, su bitácora y su resumen.
 
 ## Retroalimentación, crítica técnica y corregir el rumbo: familiaridad no es dominio
 
