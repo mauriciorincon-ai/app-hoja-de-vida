@@ -589,8 +589,8 @@ el mensaje te llega al correo.
 - **Qué hace:** `/es/metodo` y `/en/metodo` listan tus infografías; cada una vive en
   `/metodo/<slug>` y es una página larga que contesta **una pregunta de entrevista con tu
   método**: las fases, las decisiones, los controles y tu evidencia. En una entrevista abres la
-  página y la muestras. Hoy hay una —«Cómo estructuro un sistema de agentes» (tema T2)— y las otras
-  llegan una por sprint. «Mi método» está en el menú, junto a Portafolio y Contacto. **La cuenta de
+  página y la muestras. Hoy hay dos piezas publicadas —la lista de `/metodo` las cuenta y las nombra— y las
+  otras llegan una por sprint. «Mi método» está en el menú, junto a Portafolio y Contacto. **La cuenta de
   piezas de la lista se mide** de `data/metodo/`: nunca la escribas.
 - **Cómo se lee:** son **diez bloques fijos, siempre en el mismo orden**: 1 la pregunta (y su
   respuesta en tres líneas) · 2 el mapa · 3 las fases · 4 las decisiones de diseño · 5 lo innovador
@@ -611,11 +611,13 @@ el mensaje te llega al correo.
   carta. No hay PDF generado: la impresión del navegador es el PDF.
 - **El chat la cita, bloque a bloque:** cada bloque entra al índice del chat con su ancla. Quien
   pregunta «¿Cómo estructura Henry un sistema multiagente?» recibe una cita con el chip
-  «T2 · Cómo estructuro un sistema de agentes» que lleva **al bloque** exacto. Los fragmentos
+  «T2 · Cómo estructuro un sistema de agentes» que lleva **al bloque** exacto; con «¿Cómo evita el
+  chat de Henry inventar respuestas?» la cita es «T3 · Cómo hago que un LLM responda con los datos de la
+  empresa y no invente». Los fragmentos
   llevan su voz dentro del texto («lo que el campo hace — Anthropic, 2025-06-13»), así que el chat
   no te atribuye lo que hace el campo. Pesan **la mitad** que tus documentos a fondo (como las
   fichas): medido, a peso 1 la pieza le quitaba el contexto a tus propios documentos.
-- **Limitaciones conocidas:** una sola pieza publicada hasta ahora; el segundo idioma se
+- **Limitaciones conocidas:** dos piezas publicadas hasta ahora; el segundo idioma se
   revisa a ojo al cierre del hito, no en cada sprint; sin PDF descargable (decisión tuya).
 
 #### Cómo se escribe una infografía nueva
@@ -639,21 +641,36 @@ Una infografía es **un archivo de datos**, no una página: un archivo `data/met
    `corpus: [slug-del-documento-a-fondo]`; `voz: campo` con `fuentes: [n]` (el número de la fuente
    del bloque 10); `voz: posicion` sin ninguna de las dos. Nada sube de nivel: una herramienta
    aparece con el que el corpus le da (`uso-real`, `prototipo`, `en-estudio`, `exploracion`) y las
-   credenciales, como las declara `data/credenciales-nombradas.yaml`.
+   credenciales, como las declara `data/credenciales-nombradas.yaml`. **Cada cifra de «lo que
+   hice» y de la evidencia tiene que estar, con ese número, en el documento que la pieza cita**
+   (`tests/unit/metodo-cifras.test.ts`); y ese documento tiene que estar **aprobado en español y en
+   inglés** (un borrador, o uno sin gemelo, rompe el build). Una cifra que se mueve sola con el
+   corpus —cuántos fragmentos tiene el índice, cuántas preguntas el banco— **no se escribe en la
+   pieza**: queda en los documentos, donde el gate de cifras la vigila.
 5. **Lo que no sepas, no lo inventes:** va como `[CONFIRMAR]` **en el cierre del sprint**, como
    pregunta para ti, **nunca dentro de la pieza** (el build se detiene si uno se cuela).
 6. **Foundry:** la primera vez que la pieza lo nombra va «Microsoft Foundry (antes Azure AI
    Foundry)» (en inglés, «formerly»); después, «Microsoft Foundry».
 7. **Para el chat:** agrega **tres preguntas por idioma** al banco
    (`tests/fixtures/banco-de-preguntas.es.yaml` y `.en.yaml`, en el mismo orden) con
-   `espera: [metodo-<slug>]`. Si una no trae la pieza, **se ajusta la pieza** (la palabra de quien
-   pregunta tiene que existir), no el banco. Y como el banco crece, el número de preguntas de afuera
+   `espera: [metodo-<slug>]` —**solo la pieza**: si un documento a fondo ya contesta la pregunta, una
+   fila que lo aceptara también no podría fallar y no probaría que la pieza entra—. Primero **mide**
+   dónde cae cada pregunta, antes de escribir la fila. Si una no trae la pieza, **se ajusta la pieza**
+   (la palabra de quien pregunta tiene que existir en el título de sus elementos), no el banco. La
+   pregunta de una pieza puede llegar detrás del documento de fondo (la de los embeddings de T3 llega
+   4.ª en español); mientras entre al top-4 la fila pasa, y es el primer sitio donde mirar cuando el
+   índice crezca. Y como el banco crece, el número de preguntas de afuera
    que dicen los documentos `rag-y-el-chat` y `apps-pipeline` (en los dos idiomas) **tiene que
    subir**: el test de coherencia te dice cuál.
 8. **Rendimiento y capturas:** suma `/es/metodo/<slug>` a `lighthouse-urls.json` y corre
    `node scripts/capturas-metodo.mjs <slug>` (con el sitio servido en local) para las capturas de
-   escritorio, móvil e impresa del PR.
-9. **Prueba antes de mergear:** `pnpm test` (esquema, índice del chat, banco), `pnpm build` y los
+   escritorio, móvil e impresa del PR, y mira `/metodo`: **con más de una pieza, las tarjetas de una
+   misma fila miden lo mismo** (lo vigila el e2e de la lista).
+9. **Los totales de piezas no se escriben a mano:** las dos frases de este manual que dicen cuántas
+   hay (la de «Qué hace» y la de «Limitaciones conocidas») y la de la guía (prueba q1) se comparan con
+   lo que hay en `data/metodo/`; cuando entra una pieza, `pnpm test` te dice cuál quedó atrás y la
+   corriges con el número en letras.
+10. **Prueba antes de mergear:** `pnpm test` (esquema, índice del chat, banco), `pnpm build` y los
    e2e de «Mi método»; el spec lee `data/metodo/` y cubre la pieza nueva **sin tocarlo**.
 
 **Qué hace fallar el build** (y lo dice con el archivo y el campo): un bloque que falta o está fuera
@@ -664,7 +681,13 @@ sin fuente · un slug del corpus que no existe · un nivel fuera de los cuatro �
 evidencia que no sea una ruta del sitio · una arista a un nodo que no existe, o dos nodos en la
 misma celda · un texto sin uno de los dos idiomas, o con cifras distintas en cada uno · un
 `[CONFIRMAR]` · la primera mención de Foundry sin su nombre completo · una credencial que
-`certificaciones` no lista (o «en curso» a secas) · un destino de cita (`#bloque-n`) que no existe.
+`certificaciones` no lista (o «en curso» a secas) · un destino de cita (`#bloque-n`) que no existe ·
+**(desde el Sprint 011)** un enlace de la evidencia (`href`) que no es un destino real del sitio, un
+documento del corpus en borrador o sin su gemelo, y un `tipo`, una `voz` o un `nivel` mal escritos
+—ahora el índice del chat pasa por el mismo esquema **antes** de armarse, así que el build se detiene
+nombrando archivo y campo, no con un error opaco—. En las pruebas (`pnpm test`, el job `quality`):
+una cifra de «lo que hice» que el documento citado no dice, un conteo del sitio que la pieza dice mal
+(apps, agentes, piezas…) y una cifra exacta de la Fundación CTIC.
 
 ### El menú del encabezado · desde Sprint 001 · reorganizado 2026-09-05
 
@@ -1050,13 +1073,13 @@ construye el build, igual que las otras: **aquí tampoco se escribe ningún núm
 Dos detalles de ese gate, porque el corpus los necesita:
 
 - **La historia del índice se declara.** El índice nació con 28 fragmentos, las fichas de la
-  vitrina aportaron 226, con el corpus v2 eran 494 y hoy son del orden de 1.400. Contar de dónde
+  vitrina aportaron 226, con el corpus v2 eran 494 y hoy son del orden de 1.600. Contar de dónde
   viene es parte del argumento y es verdad, así que el número de cada etapa se declara como hito
   en `tests/fixtures/cifras-a-fondo.yaml`, con su razón escrita al lado. Lo que el gate no deja
   pasar es presentar un número de otra época como si fuera el de hoy.
 - **El tamaño del índice admite una banda del 5 %.** Ese número se mueve con cada párrafo que
   escribas; exigirlo exacto volvería el gate circular, porque corregir la cifra la mueve otra
-  vez. Con la banda, «del orden de 1.400 fragmentos» pasa y «494» no.
+  vez. Con la banda, «del orden de 1.600 fragmentos» pasa y «494» no.
 
 **El ritmo:** escribe un documento → déjalo en `borrador` todo el tiempo que quieras → cuando
 esté bien, `aprobado` + su gemelo en inglés → commit + push. En local puedes comprobarlo con
@@ -1175,3 +1198,4 @@ chat hoy y cuáles traería con la base aprobada. Ese informe **se genera, no se
 | Ajuste post-S9 2026-10-08 (2) | **El carrusel de apps muestra dónde empieza.** En el inicio queda el borde izquierdo limpio (dos tarjetas enteras y un pedazo difuminado de la tercera); tras pulsar una flecha aparece un pedazo difuminado a cada lado con las enteras al centro; al volver a la primera regresa el efecto inicial. Sección «Categorías y carrusel» arriba. |
 | Ajuste post-S9 2026-10-08 (3) | **El carrusel de apps muestra dónde acaba y se recorre con el pad.** Tres posiciones: inicio (borde izquierdo limpio), intermedio y final, el espejo del inicio (dos enteras pegadas a la derecha y un pedazo difuminado a la izquierda). Desde el final «siguiente» regresa al inicio con un barrido rápido. El gesto lateral del pad (dos dedos de lado) o Shift + rueda avanza una tarjeta por gesto; la rueda vertical sigue siendo de la página. Sección «Categorías y carrusel» arriba. |
 | Sprint 010 | **«Mi método»: tu método de trabajo, una infografía por pregunta de entrevista.** Sección nueva `/metodo` (en el menú, junto a Portafolio y Contacto) y una página por pieza, `/metodo/<slug>`, con **diez bloques fijos**, anclas `#bloque-1…10`, un mapa SVG con texto real y su lectura nodo por nodo, un riel de fases y **tres voces que nunca se mezclan** (lo que hice · lo que el campo hace · mi posición, cada una con símbolo, palabra y color). Se imprime en A4 y en carta. Cada infografía es **un archivo de datos** (`data/metodo/<slug>.yaml`) con esquema que rompe el build si falta un bloque, una fuente sin fecha, una afirmación sin su evidencia, cifras distintas entre idiomas o un `[CONFIRMAR]`. Primera pieza: **«Cómo estructuro un sistema de agentes» (T2)**, con 16 fuentes fechadas. **El chat la cita bloque a bloque** (chip «T2 · …» que lleva al bloque) y el banco suma tres preguntas por idioma. Sección nueva arriba: cómo se escribe una infografía. Detalle en `sprints/SPRINT_010-cierre.md`. |
+| Sprint 011 | **«Mi método», segunda pieza: «Cómo hago que un LLM responda con los datos de la empresa y no invente» (T3).** Diez bloques con 14 fuentes fechadas (documentación oficial de Microsoft Learn, Anthropic y OWASP primero); lo que hice sale solo de `rag-y-el-chat`, y los embeddings aparecen como decisión escrita, no como experiencia. **Es la pieza que se demuestra sola:** el chat de esta página la cita bloque a bloque, y el banco suma tres preguntas por idioma. **El mecanismo quedó blindado:** el índice del chat pasa por el esquema antes de armarse, los enlaces de la evidencia se comprueban contra el catálogo, un documento citado debe estar aprobado en los dos idiomas, cada cifra de «lo que hice» debe estar en su documento, la cifra de la Fundación CTIC vigila también `data/metodo/`, y los totales de piezas del manual y la guía se miden. En la lista `/metodo`, las dos tarjetas miden lo mismo. Detalle en `sprints/SPRINT_011-cierre.md`. |

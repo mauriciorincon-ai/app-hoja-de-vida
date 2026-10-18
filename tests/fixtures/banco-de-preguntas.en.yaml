@@ -479,6 +479,17 @@ preguntas:
     espera: [metodo-sistema-de-agentes]
     familia: ia-y-agentes
 
+  # ── mi método (S11): the twins of the three T3 questions; same `espera`, same order
+  - pregunta: "How does Henry's chat avoid making up answers?"
+    espera: [metodo-rag-sin-inventar]
+    familia: ia-y-agentes
+  - pregunta: "Why doesn't Henry's RAG use embeddings?"
+    espera: [metodo-rag-sin-inventar]
+    familia: ia-y-agentes
+  - pregunta: "How does Henry evaluate retrieval before publishing a change?"
+    espera: [metodo-rag-sin-inventar]
+    familia: ia-y-agentes
+
 ajenas:
   - pregunta: "tell me a joke about cats"
     guardrail: bloquea

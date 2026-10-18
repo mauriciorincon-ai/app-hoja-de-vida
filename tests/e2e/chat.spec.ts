@@ -131,14 +131,16 @@ test.describe("chat — flujo estrella", () => {
     await expect(fuente).not.toHaveText(/In depth|A fondo/);
   });
 
-  // «Mi método» (S10, F3): el chat cita la infografía, bloque a bloque. La
-  // pregunta es la primera de T2 del banco de preguntas; el chip dice el código
-  // del tema y el nombre de la pieza, y la cita lleva al BLOQUE, no a la página.
-  for (const [idioma, pregunta, nombre] of [
-    ["es", "¿Cómo estructura Henry un sistema multiagente?", "Cómo estructuro un sistema de agentes"],
-    ["en", "How does Henry structure a multi-agent system?", "How I structure an agent system"],
+  // «Mi método» (S10, F3; T3 en el S11): el chat cita la infografía, bloque a
+  // bloque. Cada pieza trae la primera de sus preguntas del banco; el chip dice el
+  // código del tema y el nombre de la pieza, y la cita lleva al BLOQUE, no a la página.
+  for (const [slug, codigo, idioma, pregunta, nombre] of [
+    ["sistema-de-agentes", "T2", "es", "¿Cómo estructura Henry un sistema multiagente?", "Cómo estructuro un sistema de agentes"],
+    ["sistema-de-agentes", "T2", "en", "How does Henry structure a multi-agent system?", "How I structure an agent system"],
+    ["rag-sin-inventar", "T3", "es", "¿Cómo evita el chat de Henry inventar respuestas?", "Cómo hago que un LLM responda con los datos de la empresa y no invente"],
+    ["rag-sin-inventar", "T3", "en", "How does Henry's chat avoid making up answers?", "How I make an LLM answer with the company’s data, and not make things up"],
   ] as const) {
-    test(`la cita de una infografía de «Mi método» lleva al bloque exacto (${idioma})`, async ({
+    test(`la cita de ${codigo} lleva al bloque exacto (${idioma})`, async ({
       page,
     }) => {
       await page.goto(`/${idioma}`);
@@ -147,19 +149,19 @@ test.describe("chat — flujo estrella", () => {
 
       const chip = page
         .locator(
-          `[data-testid="chat-fuente"][href*="/${idioma}/metodo/sistema-de-agentes#bloque-"]`,
+          `[data-testid="chat-fuente"][href*="/${idioma}/metodo/${slug}#bloque-"]`,
         )
         .first();
       await expect(chip).toBeVisible({ timeout: 15_000 });
       await expect(chip).toHaveText(
-        new RegExp(`^\\[\\d+(, \\d+)*\\] T2 · ${nombre}$`),
+        new RegExp(`^\\[\\d+(, \\d+)*\\] ${codigo} · ${nombre}$`),
       );
 
       const href = (await chip.getAttribute("href"))!;
       const bloque = href.match(/#bloque-(\d+)$/)![1];
       await chip.click();
       await expect(page).toHaveURL(
-        new RegExp(`/${idioma}/metodo/sistema-de-agentes#bloque-${bloque}$`),
+        new RegExp(`/${idioma}/metodo/${slug}#bloque-${bloque}$`),
         { timeout: 15_000 },
       );
       // Aterriza en el bloque que la cita nombra, con su título a la vista.

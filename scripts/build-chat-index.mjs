@@ -50,7 +50,7 @@ import {
   nombresDeDestinos,
 } from "./destinos.mjs";
 import { chunksDeFichas, leerFichas } from "./fichas-al-indice.mjs";
-import { chunksDeMetodo, leerMetodo } from "./metodo-al-indice.mjs";
+import { chunksDeMetodo, leerMetodo, problemasDeEvidencia } from "./metodo-al-indice.mjs";
 
 const ROOT = process.cwd();
 // Los tests pasan un directorio temporal como argv[2] (patrón del script del PDF)
@@ -276,8 +276,17 @@ function detener(titulo, problemas) {
 function main() {
   const apps = readYaml("apps.yaml");
   const fichas = leerFichas();
-  const metodo = leerMetodo();
+  // «Mi método» pasa por el esquema Zod ANTES de armar ningún fragmento: este script
+  // corre antes de `next build`, y un campo mal escrito no debe llegar como un TypeError.
+  let metodo;
+  try {
+    metodo = leerMetodo();
+  } catch (e) {
+    detener("«Mi método» (data/metodo/)", [e.message]);
+  }
   const catalogo = catalogoDeDestinos();
+  const enlacesRotos = problemasDeEvidencia(metodo.piezas, (d) => destinoExiste(d, catalogo));
+  if (enlacesRotos.length > 0) detener("«Mi método»: enlaces de la evidencia", enlacesRotos);
 
   // --- ADUANA DEL CANAL «A FONDO» -----------------------------------------
   const docs = {};

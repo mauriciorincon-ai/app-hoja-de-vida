@@ -42,14 +42,26 @@ describe("ROJO · el cargador contra carpetas de prueba", () => {
     for (const c of carpetas.splice(0)) rmSync(c, { recursive: true, force: true });
   });
 
-  /** Una raíz de prueba con `data/metodo/<archivo>` y los documentos del corpus dados. */
-  function raiz(archivos: Record<string, string>, corpus: string[] = ["como-trabajo", "vesting"]): string {
+  const APROBADO = "---\nestado: aprobado\n---\n# doc\n";
+  const BORRADOR = "---\nestado: borrador\n---\n# doc\n";
+
+  /**
+   * Una raíz de prueba con `data/metodo/<archivo>` y los documentos del corpus dados
+   * (aprobados en ES y EN; `docs` deja escribir uno concreto, p. ej. un borrador).
+   */
+  function raiz(
+    archivos: Record<string, string>,
+    corpus: string[] = ["como-trabajo", "vesting"],
+    docs: Record<string, string> = {},
+  ): string {
     const r = mkdtempSync(path.join(tmpdir(), "metodo-"));
     carpetas.push(r);
     mkdirSync(path.join(r, "data", "metodo"), { recursive: true });
     mkdirSync(path.join(r, "data", "a-fondo"), { recursive: true });
     for (const [n, c] of Object.entries(archivos)) writeFileSync(path.join(r, "data", "metodo", n), c);
-    for (const s of corpus) writeFileSync(path.join(r, "data", "a-fondo", `${s}.es.md`), "# doc\n");
+    for (const s of corpus)
+      for (const l of ["es", "en"]) writeFileSync(path.join(r, "data", "a-fondo", `${s}.${l}.md`), APROBADO);
+    for (const [n, c] of Object.entries(docs)) writeFileSync(path.join(r, "data", "a-fondo", n), c);
     return r;
   }
 
@@ -81,6 +93,25 @@ describe("ROJO · el cargador contra carpetas de prueba", () => {
     const r = raiz({ "ejemplo-sintetico.yaml": EJEMPLO }, ["vesting"]); // falta como-trabajo
     expect(() => leerPiezasDeDisco(r)).toThrowError(
       /data\/metodo\/ejemplo-sintetico\.yaml[\s\S]*«como-trabajo» no es un documento de data\/a-fondo\//,
+    );
+  });
+
+  it("un documento del corpus en borrador rompe: lo que hice sale de un documento aprobado", () => {
+    const r = raiz({ "ejemplo-sintetico.yaml": EJEMPLO }, ["vesting"], {
+      "como-trabajo.es.md": BORRADOR,
+      "como-trabajo.en.md": APROBADO,
+    });
+    expect(() => leerPiezasDeDisco(r)).toThrowError(
+      /data\/metodo\/ejemplo-sintetico\.yaml[\s\S]*«como-trabajo» existe en data\/a-fondo\/ pero no se puede citar: como-trabajo\.es\.md está en estado «borrador», no «aprobado»/,
+    );
+  });
+
+  it("un documento del corpus sin su gemelo en inglés rompe, nombrando el que falta", () => {
+    const r = raiz({ "ejemplo-sintetico.yaml": EJEMPLO }, ["vesting"], {
+      "como-trabajo.es.md": APROBADO,
+    });
+    expect(() => leerPiezasDeDisco(r)).toThrowError(
+      /«como-trabajo» existe en data\/a-fondo\/ pero no se puede citar: le falta el gemelo como-trabajo\.en\.md/,
     );
   });
 

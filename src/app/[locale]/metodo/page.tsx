@@ -86,7 +86,7 @@ export default async function MetodoPage({ params }: Params) {
             <ul className="mt-10 grid gap-5 md:grid-cols-2">
               {piezas.map((p) => (
                 <li key={p.slug}>
-                  <Reveal variant="fadeInUp" amount={0.3}>
+                  <Reveal variant="fadeInUp" amount={0.3} className="h-full">
                     <Link
                       href={`/metodo/${p.slug}`}
                       data-pieza={p.slug}
