@@ -78,7 +78,10 @@ changes to the files that represent it —the résumé data in YAML, the sheets 
 pieces and the documents of this knowledge base— without depending on retraining a model or
 waiting for a provider to have absorbed recent information. When an experience, certification
 or project changes, the update happens at the source and propagates to the index during the
-next build of the site.
+next build of the site. It is not that I cannot fine-tune a model: I did it on Microsoft Foundry
+(formerly Azure AI Foundry). But a fine-tune changes how the model behaves, it is not the way to
+keep up to date a fact that changes, and that is why here the knowledge lives in the source and
+not in the weights.
 
 The architecture reflects a fundamental decision: generative intelligence must not take the
 place of verifiable knowledge. It should help find it, relate it and communicate it without
@@ -114,7 +117,7 @@ with itself; with that cap, the worst case of one answer's context is bounded at
 The index has a history and it is worth telling: it started with 28 chunks per language, drawn
 only from the résumé YAML files; the 32 showcase sheets added 226; with the first long version of
 this base it reached 494; and today, with the 25 approved documents and the "when to use"
-description each one declares, there are 1,677 chunks in Spanish and 1,670 in English. The number
+description each one declares, there are 1,679 chunks in Spanish and 1,672 in English. The number
 is printed by every build and is a regenerated artifact, not something edited by hand.
 
 This decision shifts toward the build process activities that do not need to be repeated on
@@ -185,7 +188,7 @@ showcase ones— still receive a sheet. Going lower buys nothing more and makes 
 sheets are not edited to index better: they belong to other houses, and adding one to the
 showcase puts it into the chat on the next build, without writing new prose. The weight lives in
 a constant in the code, with its measurement beside it, and it is still at 0.5 over an index that
-is now up to 1,677 chunks.
+is now up to 1,679 chunks.
 
 ## Lexical retrieval is an architecture decision
 
@@ -243,7 +246,7 @@ that previously could not see the case now sees it.
 
 It is a small lesson that holds for any RAG: the vocabulary a question shares with the corpus is
 not always content. Part of it is grammar, and grammar gets measured and discarded. Those counts
-belong to the old index; today's has 1,677 chunks in Spanish and 1,670 in English, and the
+belong to the old index; today's has 1,679 chunks in Spanish and 1,672 in English, and the
 arithmetic did not change: a preposition present in a quarter of the chunks sustained a false
 positive on its own, and no list written by eye would have caught it.
 
@@ -260,7 +263,8 @@ Embeddings remain a possible evolution, not an automatic improvement. Adding the
 sense if a representative set of questions showed that lexical search fails systematically at
 retrieving paraphrases, semantic relationships or concepts expressed with sufficiently different
 vocabularies. Today that set exists —154 questions written from outside— and it does not show
-that failure: with four sources per answer, none is left without its own.
+that failure: with four sources per answer, none is left without its own. I do not leave them out
+because I do not know them: I compared vector search with lexical search.
 
 In that case, the most reasonable evolution would not necessarily be to replace the current
 mechanism completely. It could consist of a hybrid retrieval that combined the precision of
@@ -379,7 +383,7 @@ and there the prompt that forbids answering outside the sources stops them. The 
 guarantee is the prompt; the threshold is a token saving and a first line. The worst possible
 failure of this chat is not spending tokens on an off-topic question: it is answering "that one
 escapes me" to a legitimate question about my career. When the corpus grows, the threshold is
-measured again, not assumed, and the index is now up to 1,677 chunks.
+measured again, not assumed, and the index is now up to 1,679 chunks.
 
 ## How I keep the model from making things up: distributed guardrails, not a prompt
 
@@ -542,7 +546,7 @@ This decision relates to enterprise artificial intelligence architecture. Models
 and external dependencies can change. Designing a sustainable solution requires separating what
 belongs to the organization, such as its data, definitions and rules, from what can be replaced,
 such as the generative service used to process them. On Microsoft Foundry, on Groq or on a
-self-hosted model, the index —1,677 chunks in Spanish— and the nine server defenses are exactly
+self-hosted model, the index —1,679 chunks in Spanish— and the nine server defenses are exactly
 the same.
 
 ## The system degrades without hiding it
@@ -828,7 +832,7 @@ fails, and going up to five rescues no one: it only enlarges the context by 25%,
 with it. That two sets written with different criteria land on the same number, twice, is the
 part that gives confidence. With a single source the golden set would hit 59%; today the number
 lives in one place in the code and the golden set exercises it directly. Today's index is no
-longer the one of those two measurements —1,677 chunks in Spanish, 1,670 in English—, and that is
+longer the one of those two measurements —1,679 chunks in Spanish, 1,672 in English—, and that is
 why it is measured again every time the corpus changes: the 4 is a measured number, not an inherited constant. And a clarification on the bank's two figures: 102 of 131 and 136 of 136 are not the same test twice, but before and after the vocabulary correction of phase F4 —some thirty words the questions said and the corpus did not—, with five more questions in the bank; since then the bank has kept growing with every revision of the corpus.
 
 ## The bank as a vocabulary audit: ETL, lakehouse and the words the corpus did not say
