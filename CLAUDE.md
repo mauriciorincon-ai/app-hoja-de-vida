@@ -1,361 +1,134 @@
-# CV Viva (app-hoja-de-vida) — constitución de la app (Claude Code)
+# CV Viva — constitución de la app (núcleo, kit v2.3.0)
 
-> Auto-cargado en cada sesión de este repo. Esta app pertenece al pipeline **AI-APPs**; su plan
-> vive en la casa planeadora. Estampada desde kit-app v1.0.0 el 2026-07-04 (Sprint 001).
+> Auto-cargado en cada sesión de este repo. Esta app pertenece al pipeline **AI-APPs**; su plan vive en la casa planeadora.
+> Núcleo regenerado por la planeadora (`/nueva-app hoja-de-vida` modo regenerar) el 2026-10-17 para el S10; sustituye a la
+> constitución v1 (kit v1.26.0, 361 líneas, estampada el 2026-07-04). Las reglas del kit en detalle viven en `docs/REGLAS-ANEXO.md`
+> y se leen solo cuando una regla se cita. Las de producto están aquí, completas; lo que era narrativa vive en el manual y los ADR.
 
-## Las dos casas (regla dura)
+## Identidad y las dos casas (regla dura)
 
-| Casa           | Path                            | Escritor único   | Qué vive ahí                                                                     |
-| -------------- | ------------------------------- | ---------------- | -------------------------------------------------------------------------------- |
-| **Planeadora** | `C:\Code\hr01-develop-ai-apps\` | su propia sesión | brief, VISION, sprints (plan+retro), órdenes de construcción, método, estándares |
-| **Esta app**   | este repo                       | **tú**           | código, tests, ADRs de implementación, bitácora y summary del sprint             |
+- **Planeadora** (`~/Code/hr01-develop-ai-apps/`, privada): brief, visión, el archivo del sprint (inicio ejecutivo + plan + prompt), método y estándares. La **lees** (`additionalDirectories` o path absoluto); **nunca escribes ahí**.
+- **Esta app** (`~/Code/app-hoja-de-vida`, pública): código, tests, ADRs, `sprints/SPRINT_NNN-cierre.md`. Escritor único: **tú**. El avance vive solo aquí; la planeadora te lee, tú no le reportas a mano. Si el plan necesita cambio, lo declaras en el cierre ejecutivo («desviaciones») y avisas al usuario.
+- **Qué es:** **CV Viva**, la hoja de vida interactiva y bilingüe del dueño: HOME editorial animada, casos de estudio, PDF ATS, **el chat que responde con su evidencia y cita** (la estrella), la **vitrina** de lo que construye (apps · agentes · investigaciones · tableros, con lista de espera solo en apps y roadmap votable por app hermana) y, desde el S10, **«Mi método»**: nueve infografías largas en `/metodo/<slug>`, una por pregunta de entrevista. En producción y en uso real (búsqueda de trabajo): H-1 cerrado, H-2 en curso. Contrato de alcance: VISION v1.2.0 (14 funcionalidades). Principio rector: **simplicidad optimizada sin sacrificar impacto al visitante**.
+- **Stack:** Next.js 16 (App Router, **SSG-first**: todo el contenido en HTML estático, gate ATS/SEO) + TypeScript strict + Tailwind v4 + shadcn/ui · i18n por rutas `/es` `/en` con next-intl (`messages/{es,en}.json`, paridad probada) · Supabase solo para la votación anónima (RPC `SECURITY DEFINER`, RLS encendida sin políticas, GRANTs explícitos, cero PII; ADR-011) · Resend para el formulario y el registro del chat (ADR-024) · chat multi-proveedor por el Vercel AI SDK con adaptador conmutable por env (Groq inicial · Gemini · Microsoft Foundry (antes Azure AI Foundry) · Claude · OpenAI-compatible), índice RAG léxico generado en build, guardrails en el servidor y degradación a búsqueda local (ADR-003, ADR-010) · Vercel Hobby (ADR-004; vitrina personal, no comercial) · Pino + Sentry metadata-only + Vercel Analytics · Vitest + Playwright + Testing Library + @axe-core/playwright · Lighthouse CI contra `perf-budget.json` y `lighthouse-urls.json`.
+- **Perfil:** web (no escritorio): la línea siguiente es la declaración del perfil escritorio y aquí no aplica.
+  captura_terceros: false
+- **Estructura:** `src/app/[locale]` (`page.tsx` HOME · `cv` · `proyectos/[slug]` · `vitrina/` (portal · `apps/[app]` + `detalle` + `simulacion` · `[categoria]/[pieza]`) · `metodo/[slug]` desde el S10 · `mantenimiento` · `api/`) · `src/components` (`home/` · `motion/` (`Reveal`, `Stagger`, `Counter`, `TimelineTrack`, `use-prefiere-quieto`) · `vitrina/` · `chat/` · `forms/` · `ui/`) · `src/lib` (motores puros por dominio, cobertura > 80 %: `ia/` · `votes/` · `vitrina/` (loader de exports · `ficha-tecnica/` · `piezas.ts` · `categorias-apps.ts` · `bpmn.ts`) · `content.ts` · `schemas.ts`; aquí no hay `src/engine/`) · `data/` (`cv.{es,en}.yaml` · `apps.yaml` · `vitrina.yaml` · `categorias-apps.yaml` · `simulaciones.yaml` · `credenciales-nombradas.yaml` · `fichas/` · `a-fondo/` · `metodo/` desde el S10) · `content/` (`vitrina/` exports de las apps · `agentes/` · `investigaciones/` · `tableros/`) · `public/piezas/` · `scripts/` (`build-chat-index.mjs` · `a-fondo.mjs` · `fichas-al-indice.mjs` · `destinos.mjs` · `generate-cv-pdf.mjs` · `horas-sprint.mjs`) · `tests/{unit,integration,e2e}` + `tests/fixtures/banco-de-preguntas.{es,en}.yaml` · `design-system.md` · `design-sync/` · `docs/{MANUAL-DE-USO.md,GUIA-DE-PRUEBA.html,BLUEPRINT.html,contrato-ficha-tecnica/,kit-de-prueba/}` · `sprints/SPRINT_NNN-cierre.md` · `decisions/NNN-titulo.md`.
 
-- ✅ Puedes **leer** la planeadora (agregada como `additionalDirectories`, o por path absoluto).
-- ❌ **Nunca escribes** en la planeadora. Si el plan necesita cambio, lo anotas en tu
-  `sprints/SPRINT_NNN-implementation-log.md` bajo `## Desviación del plan` y avisas al usuario.
-- El avance de implementación vive **solo aquí** — la planeadora te lee, tú no le reportas a mano.
+## Reglas duras de CV Viva (producto, no estilo — 8, completas)
 
-## Qué es esta app
+1. **Contenido = datos versionados, validados con Zod en build; el build FALLA si el contenido está malformado** (fail-safe con archivo y campo). Ningún texto de contenido vive en componentes. Todo es bilingüe estructural: cada entrada existe en ES y EN, rutas `/es` `/en` + hreflang, nunca strings sueltos por idioma.
+2. **Canal de contenido de la vitrina (decisión del usuario, 2026-09-06):** esta app es el DESTINO, no el autor. Las fichas de las apps las administra la planeadora (export + complemento); las de agentes, investigaciones y tableros las produce quien construye cada pieza con `docs/contrato-ficha-tecnica/` (vigente v1.3.1). Llegan **por copia** a `content/<frente>/` con un **PR de contenido sin sprint**. **Las fichas de otras casas NO se editan aquí, ni para que quepan:** se reporta archivo + campo + regla y se corrige en origen; si varias no caben por una razón legítima, contrato aditivo en plan mode. Un solo contrato y un solo renderizador (`FichaTecnica`): nada específico por frente en el código. El estado de un frente y su conteo **se miden** de `content/`, nunca se escriben.
+3. **El chat responde solo con evidencia del sitio y cita algo visible.** Índice léxico en build (`build-chat-index.mjs`): `cv.*.yaml`, `apps.yaml`, el a-fondo **aprobado**, las fichas de la vitrina y, desde el S10, las infografías por bloque. Toda cita navega a un destino del catálogo (`destinos.mjs`; el build falla si no existe). Guardrails de entrada devuelven respuesta estática sin gastar un token; circuit breaker a búsqueda local: **el chat nunca muere**. Techo de runtime ≤ US$20/mes; gasto real ≈ US$0. El registro de conversaciones guarda nombre y correo que el visitante da, nada más (ADR-024); bloqueo de abusos documentado en el manual.
+4. **El a-fondo (`data/a-fondo/<slug>.{es,en}.md`, código `AF-NN` fijo) no se publica: es combustible.** `estado: borrador` no se indexa ni exige gemelo; `aprobado` indexa, exige el gemelo subsección a subsección y **no admite un `[CONFIRMAR]`** (el build para). Las cifras gemelas ES/EN se comparan en test; el contenido se prueba con preguntas de afuera (`tests/fixtures/banco-de-preguntas.*.yaml`); la tabla del README se genera con `pnpm corpus:informe`.
+5. **Nada sube de nivel ni se inventa:** una herramienta aparece con el nivel que el corpus le da (uso real · prototipo · en estudio · exploración); credenciales solo como las declara `data/credenciales-nombradas.yaml` (AI-102 jamás; AI-103 y AI-300 en curso; DP-600 obtenido; DP-100 retirado); ninguna cifra sin corpus o sin fuente fechada; ningún nombre de cliente, paciente o tercero que el sitio no publique; ningún salario ni costo de cliente; «Microsoft Foundry (antes Azure AI Foundry)» la primera vez en cada página. Un hecho que falta es un `[CONFIRMAR]` para el dueño, nunca una suposición.
+6. **Un nombre oficial por app, el mismo en todo el sitio** (`data/categorias-apps.yaml`, ADR-028), aplicado al LEER el export (loader, índice del chat, correos, PDF); el export no se edita. Las apps se muestran en dos categorías (profesionales primero) desde el YAML; una app sin categoría rompe el build.
+7. **Motion con dos gates propios:** la FORMA del árbol jamás depende de `useReducedMotion()` (vale `null` en servidor: hidratación rota justo para quien pide menos movimiento; `tests/unit/motion-estructura-reducida.test.tsx` + axe bajo reduced-motion con cero errores de consola) · los tokens de tinta vetados como texto (`ink-3`) fallan en `tests/unit/design-tokens-vetados.test.ts`, no en axe al final. Solo `transform`/`opacity` en scroll; las animaciones no negocian el budget. Todo estado lleva símbolo + texto + color.
+8. **«Mi método» (desde el S10):** cada infografía es un dato con esquema Zod de **diez bloques fijos** (pregunta · mapa · fases · decisiones · lo innovador en 2026 · modos de falla · métricas y controles · mi evidencia · lo que haría distinto · fuentes con fecha de revisión), anclas `#bloque-n`, un renderizador para las nueve; **tres voces separadas en la página** (lo que hizo: solo corpus · lo que el campo hace: fuente con título, editor, fecha y enlace · lo que opina: rotulado como posición); diagramas SVG propios con texto real y alternativa textual; hoja de impresión; investigación con las prohibiciones de lectura del sprint; fuente sin fecha o bloque faltante ⇒ el esquema falla. Especificación: `portafolio/hoja-de-vida/investigacion/2026-10-17-mi-metodo-especificacion.md` (planeadora, RO).
 
-**CV Viva** — hoja de vida interactiva bilingüe (ES/EN): experiencia scroll-animada de alto
-impacto (S1) + profundidad y PDF ATS (S2) + chat con la HV (S3) + roadmap con votación real y
-brochures por app (S4). **Ciclo H1 CERRADO — MVP funcional completo.** Desde S5 abre el ciclo
-**H2: la VITRINA** — esta app es el DESTINO del portafolio a nivel de brochure re-expresado.
-Principio rector: **simplicidad optimizada sin sacrificar impacto al visitante.**
-Contrato de alcance: `portafolio/hoja-de-vida/VISION.md` (planeadora, aprobada 2026-07-04).
+## Workflow del sprint (5 pasos)
 
-## Stack
+1. **Plan.** El usuario trae el archivo del sprint de la planeadora (`portafolio/<slug>/sprints/SPRINT_NNN.md`: inicio ejecutivo + plan técnico breve + prompt de arranque). En **plan mode** corres `/plan-sprint`: estado real del código, riesgos, plan en ≤ 3 fases con criterio observable y horas estimadas por fase, recomendación de modelo. **La aprobación del plan NO arranca nada:** esperas el **«construye»** explícito. Branch `sprint-NNN/<tema>`.
+2. **Construcción.** ≤ 3 fases; commits convencionales con la etiqueta `[F1]` / `[F2]` / `[F3]` en el subject (de ahí salen las horas por fase). **Un solo STOP al final de la construcción** con el resumen de las fases, **más como máximo 1 mirada de DECISIÓN** si el sprint cambia una decisión del usuario, la promesa o su máquina (las paradas de contenido donde el usuario aprueba datos son producto y no cuentan). Sin STOP por fase; FORMA y TEXTO se maquetan «no vistas» (registro de una línea) y van al gate humano del hito. **Pieza visual de primera línea en esta app (en uso real): captura escritorio + móvil adjunta al PR antes del merge** (evidencia, no parada; lección del S9).
+3. **Auditoría de una pasada + checklist manual.** `/audita-sprint` (un auditor independiente en solo lectura, 4 casillas; **críticos y altos se pagan en el sprint, medios y bajos van al lote del hito**). Luego `/deploy-check`: ≤ 10 casillas manuales — **la CI es el gate; si no está en la CI, no es casilla.**
+4. **Cierre ejecutivo.** `sprints/SPRINT_NNN-cierre.md` ≤ 40 líneas con la salida de `node scripts/horas-sprint.mjs` pegada (campos abajo). Reemplaza al summary, la bitácora y la auditoría como archivos aparte (la auditoría es una sección del cierre).
+5. **PR normal** (no en borrador) con el cierre dentro; checks requeridos con conclusión propia `success` leídos **al final**, no tras cada push. **Antes de abrirlo, `gh pr list --state open` (regla 18): un PR vivo por app.** Al pedir el merge entregas la lista de PRs abiertos, que debe ser ese uno. **El merge squash lo hace el usuario** y borra la rama; después corre `/cierre-sprint <slug>` en la planeadora. Tras cada merge a `main` se re-verifica que el campo homepage del repo siga con el perfil público del dueño (Vercel lo llena solo si está vacío; jamás se automatiza con un PAT).
 
-- **Frontend:** Next.js 16 (ADR-001) + TypeScript strict + Tailwind v4 + shadcn/ui, **SSG-first** (todo el
-  contenido en HTML estático — gate ATS/SEO), i18n por rutas `/es` `/en` (lib → ADR).
-- **Backend/BD/Auth:** **Supabase desde S4** — votación anónima del roadmap (tabla `votes` + RPC
-  `SECURITY DEFINER`, RLS encendida y sin políticas, GRANTs explícitos, cero PII; ADR-011). El
-  otro endpoint sigue siendo el formulario → Resend (S1). Sin auth: no hay usuarios.
-- **IA embebida:** **el chat con la HV, desde S3** — multi-proveedor vía Vercel AI SDK con
-  **adapter conmutable por env** (Groq inicial · Gemini / Azure AI Foundry / Claude / self-host
-  OpenAI-compatible), presupuesto runtime ≤ US$20/mes, guardrails + circuit breaker con fallback
-  a búsqueda local (ADR-003 el adapter, ADR-010 el índice/retrieval). Patrón obligatorio: skill
-  `ia-embebida`.
-- **Tests:** Vitest (unit/integration) + Playwright (e2e) + Testing Library + @axe-core/playwright.
-- **Deploy:** Vercel Hobby (preview por PR, prod desde `main`) — **hosting resuelto en ADR-004**
-  (la cláusula no comercial de Hobby aplica y esta app es vitrina personal, no comercial).
-  **Observabilidad:** Pino + Sentry + Vercel Analytics/PostHog.
+- **Por hito, no por sprint:** gate humano único (≈ 20 min con la página abierta; ⭐/⭐⭐ de la guía, FORMA y TEXTO pendientes, juicio de diseño) · lote de hallazgos medios y bajos · `design-sync/` y `/design-sync` · `docs/BLUEPRINT.html` · pruebas y capturas en el segundo idioma · adopción del kit y de esta constitución (una vez al abrir el hito; el kit versiona ≤ 1 vez al mes). Esta app es la vitrina misma: no produce brochure ni export propios.
+- **Matriz de hitos (método v2.3.0; 4 hitos, ninguno más).** Un hito = los sprints que su objetivo necesite; el gate humano es uno por hito (≈ 20 min con la página abierta).
 
-## Estructura
+  | Hito | Objetivo | Entra cuando | Sale cuando (gate humano) | Lo que suma el kit en este hito |
+  |---|---|---|---|---|
+  | **H-1 Vitrina funcional** (= MVP) | diseño, experiencia, propuesta de valor y funciones esenciales, demostrables | visión + maqueta aprobadas (G-Diseño) | flujo principal navegable de punta a punta con datos sintéticos · manual · gate humano aprobado · deuda registrada · **ficha publicada en CV Viva** (export + complemento, build verde; apps de vitrina) · **documentos de arquitectura al día** (`docs/BLUEPRINT.html` as-built, ADRs, `design-system.md`) | automático en cada PR: tests + e2e contra el build · CI con checks propios · gitleaks · Lighthouse 1 corrida · a11y · bilingüe con paridad · cero enlaces · brochure + export |
+  | **H-2 Producto completo** (ensayo general; **no robusto**) | todo lo que el cliente verá y usará, construido y funcionando de punta a punta como en producción | H-1 cerrado | inventario de la VISION 100 % construido o descartado con nombre · servicios reales sin mocks, en un entorno igual al de producción · bilingüe completo · **ensayo general del usuario** (todos los flujos como cliente; lo no visto no cuenta) · arquitectura al día | lo mismo que H-1 |
+  | **H-3 Robustez** | calidad, mantenibilidad, datos y conectividad proporcionales | **H-2 cerrado** (apps para terceros); vitrina: terceros a la vista o riesgo material | pruebas esenciales de lo que cambia · persistencia e integraciones definitivas · lote de medios y bajos pagado · arquitectura al día | cobertura > 70 % en módulos no-UI · request-id y timing · rate limiting · `design-sync/` + checklist de diseño · techo de costo de IA declarado |
+  | **H-4 Producción** (= G-Release) | seguridad, privacidad, despliegue, operación y legal proporcionales | **H-2 y H-3 cerrados** · usuarios reales o salida comercial | checklist de release corto · observabilidad mínima · legal · smoke en producción · arquitectura al día | suite completa verde en `main` · alerta activa · OWASP + red teaming si hay IA · WCAG AA manual · Privacy Policy + ToS · `/release-check` |
 
-```
-src/
-├─ app/[locale]/   (App Router, rutas /es /en)
-│  └─ vitrina/     (S5–S6 — portal · apps/ (escaparate · <slug> ficha técnica · <slug>/detalle
-│                   · <slug>/simulacion (2026-10-12, ADR-029: el paquete de la app en un marco))
-│                   · [categoria] (un frente: escaparate si abierta, «en preparación» si no)
-│                   · [categoria]/[pieza] (S7 — la ficha de una pieza no-app))
-├─ components/     (UI sin lógica de negocio; home/ (hero · perfil · trayectoria · logros ·
-│                   vitrina · estudios · certificaciones · skills · roadmap (vive en
-│                   /vitrina/apps) · contacto) · motion/ · forms/ · vitrina/)
-├─ lib/            (content.ts · i18n.ts · resend.ts · analytics.ts)
-│  ├─ ia/          (S3 — patrón IA-embebida: schemas · provider · retrieval · guardrails)
-│  ├─ votes/       (S4 — votación: schemas.ts · client.ts · roadmap.ts)
-│  └─ vitrina/     (S5–S7 — MOTORES PUROS de la vitrina, sin side-effects, cobertura >80%:
-│                   loader.ts de exports · schemas.ts · categorias.ts (frentes)
-│                   · bpmn.ts (motor puro del proceso) · ficha-tecnica/ (schema · armar
-│                   · secciones · loader) · piezas.ts (S7 — loader genérico por frente))
-└─ types/
-data/              (cv.es.yaml · cv.en.yaml (identidad · trayectoria · estudios · logros ·
-                    proyectos · certificaciones · skills) · apps.yaml — LA fuente)
-data/a-fondo/      (S8 — el corpus profundo del chat: <slug>.{es,en}.md, un documento por tema,
-                    con frontmatter Zod + subsecciones `<!-- seccion: id -->`. NO se publican:
-                    son combustible, y la cita navega al `ancla`, que es algo visible.
-                    `estado: borrador` no se indexa ni exige gemelo; `aprobado` hace las dos y
-                    además NO puede llevar un `[CONFIRMAR]` — el chat lo citaría tal cual.
-                    El contenido se prueba con preguntas de AFUERA: el banco de
-                    `tests/fixtures/banco-de-preguntas.es.yaml`, porque el buscador es léxico y
-                    una palabra que el corpus no dice no existe para quien pregunta)
-data/vitrina.yaml  (S6 — los cuatro FRENTES de la vitrina: id, estado, nombre, intro, detalle)
-data/simulaciones.yaml (2026-10-12 — las apps con simulación estática: slug · carpeta en
-                    public/piezas/ · el .html de entrada por idioma · una nota; el build falla
-                    si falta el export o el archivo)
-data/fichas/       (S6 — complementos de CURACIÓN por app: titular · cifras destacadas · límites ·
-                    nunca · proceso (opcional) · roadmap. Los seis de la línea base son de CV Viva
-                    (`procedencia: cv-viva`); los de las apps nuevas los escribe la planeadora
-                    (`vitrina/apps/*.complemento.yaml`) y llegan por copia)
-content/vitrina/   (S5 — los brochure-export.json de las apps hermanas; NO se editan a mano)
-content/<frente>/  (S7 — fichas técnicas COMPLETAS producidas por otras casas; NO se editan aquí:
-                    agentes/ · investigaciones/ · tableros/, un <slug>.ficha-tecnica.json por pieza)
-public/piezas/<frente>/  (S7 — las capturas que la `galeria` de una ficha referencia, tal como
-                    llegaron; se sirven en /piezas/<frente>/… — espacio propio, no choca con
-                    /vitrina/<frente>/<slug>)
-tests/{unit,integration,e2e}/
-design-system.md          (fuente de verdad visual — se crea en el sprint 1, skill diseno-ui)
-design-sync/              (bundle publicable del design system — espejo 1:1, regla 15)
-docs/MANUAL-DE-USO.md     (manual de uso general — OBLIGATORIO, vivo desde el sprint 1)
-docs/contrato-ficha-tecnica/  (S6 — el contrato publicado DESDE el Zod: schema · ejemplo ·
-                           CLAVE-VISUAL.md · referencia; lo generan los tests, no la mano)
-sprints/SPRINT_NNN-implementation-log.md · SPRINT_NNN-summary.md
-decisions/NNN-titulo.md   (ADRs de implementación)
-```
+  La vitrina exige H-1 (y H-2 como ensayo general corto). **H-2 es el producto completo, no robusto: se cierra antes de H-3 y H-4 en toda app para terceros** (decisión del usuario, 2026-10-17); que el usuario use la app en su vida real no es un hito. Evolución y escalabilidad no son hitos: cada versión repite H-2 → H-4. El sprint de cierre del hito trae lote de medios y bajos, guía al día, manual, BLUEPRINT, `design-sync` y auditoría de la constitución.
+- **Solo por cambio:** aprovisionamiento (tabla y humo solo si hay uno nuevo) · demo en rojo (solo gates propios nuevos) · `CONTRATO.lock` de reusables (solo si el contrato cambia) · roadmap de CV Viva (solo si el sprint toca una feature votada) · ADR (solo decisiones irreversibles).
+- **Tamaño:** ≈ 4 h activas de builder por defecto; hasta ≈ 12 h con una línea de justificación. Si el real supera el estimado en más del 50 %, el cierre explica la causa y propone una medida.
+- **Modelo por DECISIÓN, nunca por descuido (regla dura del usuario, 2026-10-11; kit v2.2.0).** Cada fase del plan declara el modelo requerido y un esfuerzo **sugerido**; el modelo tope ordinario es **Opus 5.5**; **Fable 5.1 solo en emergencia declarada por el usuario** (validación o planeación extraordinaria), jamás por iniciativa del builder, de una skill ni de un subagente.
 
-## Reglas de desarrollo
+  | Actividad | Modelo requerido | Esfuerzo (sugerido, no se verifica) |
+  |---|---|---|
+  | Planear sprint, cerrar sprint, preguntas de la planeadora | Opus 5.5 | medium |
+  | Checkpoint de hito, decisión irreversible, auditoría del proceso | Opus 5.5 | high |
+  | **Emergencia declarada por el usuario** (validación o planeación extraordinaria) | Fable 5.1 | — (solo si él lo pide en el mensaje) |
+  | Construcción con alcance claro (interfaz, lógica, pruebas) | Sonnet 5.5 | medium |
+  | Construcción simple: ajustes de interfaz, textos, cambios pequeños | Haiku 5.5 (en prueba) | medium |
+  | Depuración difícil, Rust, concurrencia, seguridad, nativo | Opus 5.5 | high |
+  | Auditoría de una pasada | Sonnet 5.5 | high |
+  | Cierre ejecutivo, script de horas, documentación corta | Haiku 5.5 | low |
+  | Subagentes de búsqueda o lectura de archivos | Haiku 5.5 | — |
 
-1. **TypeScript strict.** Sin `any` ni `@ts-ignore` sin justificación en comentario.
-2. **Tests con cada feature.** Motores puros >80%, UI >50%, ≥1 e2e por feature core.
-3. **Motor separado de UI.** Lógica pura en `src/lib/` (aquí NO hay `src/engine/`: los motores
-   —`bpmn.ts`, `secciones.ts`, `retrieval.ts`, `roadmap.ts`— viven bajo `lib/` por dominio);
-   componentes sin lógica de negocio.
-4. **Toda salida de LLM que se persista pasa por esquema Zod** (skill `ia-embebida`) — aplica
-   desde S3; nunca texto libre directo a la BD.
-5. **A11y desde el inicio:** tabindex, aria-labels, contraste AA, `prefers-reduced-motion`.
-   **Y dos reglas que nacen de reincidencias de ESTA app (kit v1.26.0):**
-   (a) **La FORMA del árbol jamás depende de `useReducedMotion()`.** El hook vale `null` en el
-   servidor y `true` en el navegador con «reducir movimiento»: si decide QUÉ elementos se pintan,
-   el HTML del servidor y el primer render del cliente no coinciden (React #418) y la página se
-   regenera entera **justo para quien el cinturón quería cuidar**. Reduced motion cambia
-   PROPIEDADES (`initial`, `variants`, `transition`) o lo hace el CSS. Dos gates:
-   `tests/unit/motion-estructura-reducida.test.tsx` (mismo HTML con `null` / `true` / `false`) +
-   axe bajo emulación de reduced-motion en `tests/e2e/axe.spec.ts`, que además falla si la página
-   emite un solo error de consola. *(Precedente: el relleno del `TimelineTrack` se pintaba tras un
-   `{!reduced && …}`; la CI cayó dos veces con «footer no está en el DOM» y cinco intentos de
-   reproducción local fallaron — el rojo no se leía sin las trazas.)*
-   (b) **Los tokens de tinta VETADOS como texto se declaran en `design-system.md` y FALLAN en
-   test, no en axe al final.** La lista legible por máquina vive en el bloque
-   `tokens-vetados-como-texto` del design system y la barre
-   `tests/unit/design-tokens-vetados.test.ts` sobre `src/**` en sus tres formas: la clase de
-   Tailwind, `color: var(--color-…)` y el hex suelto. **Vetado como TEXTO no es vetado a secas**
-   —`border-`, `bg-`, `decoration-`, `fill` y `stroke` siguen siendo legítimos—. *(Precedente:
-   `ink-3` (2,7:1) cazado por axe DOS veces en esta app, S6 y post-S7; las dos veces la defensa
-   fue prosa en el design system, y la prosa no corre.)*
-6. **Commits convencionales**; branch `sprint-NNN/<tema>`; **jamás push directo a `main`** (hook lo
-   bloquea); PR con CI verde + preview probado.
-7. **Secrets solo en `.env.local` (gitignored) y Vercel env vars.** Doble protección gitleaks: hook
-   `pre-commit` de git (`githooks/`, commits manuales) + hook PreToolUse de Claude Code (escrituras
-   del agente). Si un commit con secreto de prueba NO es bloqueado, el gate está muerto — repáralo
-   antes de seguir. **Carnada canónica verificada (kit v1.6.3; viaja PARTIDA aquí para no disparar
-   el hook al comitear este archivo): ármala concatenando `AWS_ACCESS_KEY_ID=` + `AKIAQ7RTZ4PX` +
-   `KM2WNB3S` SOLO en el archivo de prueba del hook.** No improvises el secreto de prueba: las
-   reglas modernas de gitleaks exigen alfabeto real (base32 tras `AKIA`) y entropía, y una carnada
-   floja pasa en silencio dando falsa tranquilidad (lección 2026-07-15: dos falsos "todo bien"
-   seguidos). Si gitleaks sube de versión mayor, re-verificar la carnada en sandbox.
-8. **Presupuesto de esfuerzo:** ~12 pasos por pantalla; si lo excedes, detente y simplifica o consulta.
-9. **Manual de uso vivo (`docs/MANUAL-DE-USO.md`, obligatorio).** Toda feature que llegue a `main`
-   queda documentada ahí **en el mismo sprint**: qué hace, cómo se usa, y — clave en esta app —
-   **cómo alimentar la CV Viva** (editar `data/*.yaml` + push). En español llano.
-10. **Diseño vanguardista con gate (`design-system.md` + skill `diseno-ui`).** El sprint 1 crea el
-    `design-system.md` desde los tokens del prototipo (READ-ONLY, ver abajo); toda pantalla lo
-    obedece. Cada sprint con UI cierra con el checklist de revisión de diseño + aprobación visual
-    del usuario sobre la preview. Enlazable a Claude Design vía `/design-sync`. **Al CERRAR un
-    ciclo la publicación del design system consolidado es obligatoria** (ver § Cierre de CICLO).
-11. **Guía de prueba viva y ACUMULATIVA (`docs/GUIA-DE-PRUEBA.html`, OBLIGATORIA en todo sprint
-    con UI).** HTML **autocontenido** (cero CDNs; casillas en `localStorage` con **prefijo
-    versionado por sprint**, para que una regresión sin correr jamás aparezca marcada por el sprint
-    anterior): qué probar, cómo y qué resultado esperar, por bloques. **Es bola de nieve:** la
-    última versión contiene **TODAS las pruebas vigentes**; el sprint N hereda ENTERAS las del N−1
-    — jamás las resume en un "verificar que sigue funcionando" (comprimir borra la regresión). Cada
-    prueba lleva su **origen en su línea** (`Nuevo · SN` · `Mejorado en SN` · `SN` = heredada ⇒
-    regresión) con filtros por origen; una prueba solo se elimina si su feature dejó de existir,
-    declarado en el historial del pie. Marca el **gate mínimo ⭐** (filtro propio, criterio FIJO):
-    solo lo que ninguna automatización puede verificar — juicio humano sobre el contenido,
-    aprobación visual, hardware real; lo que la CI ya respalda queda fuera. **Kit de prueba:** si un
-    paso requiere documento/código/dataset, se entrega en `docs/kit-de-prueba/` enlazado desde su
-    bloque.
-12. **PROHIBIDO entregar por artifacts de Claude o cualquier plataforma externa.** Todo entregable
-    —guías, reportes, documentos visuales— es un **archivo del repo** (HTML autocontenido o
-    Markdown) que el usuario pueda abrir, versionar y llevarse. Sin excepciones, ni "para verlo
-    rápido".
-13. **Código primero, IA generativa después.** Toda funcionalidad nativa interna se resuelve
-    PRIMERO con programación — código, librerías, algoritmos deterministas — antes de acudir a IA
-    generativa. Activar una feature LLM exige un ADR que justifique por qué el código no alcanza.
-    La IA es acento con fallback determinista, jamás columna vertebral.
-14. **Un gate se demuestra FALLANDO (regla dura del pipeline).** Todo gate nuevo que este repo
-    agregue —job de CI, hook, aserción, umbral, script de verificación— nace con su **demo**: un
-    cambio deliberado que lo pone en **rojo**, registrado en
-    `sprints/SPRINT_NNN-implementation-log.md` (qué se cambió, en qué paso salió rojo, a quién
-    nombró). Un gate que nunca se vio fallar no es un gate, es decorado — y decorado que da falsa
-    tranquilidad (precedente: dos "todo bien" seguidos con una carnada floja de gitleaks,
-    2026-07-15). **Y su hermana: un gate que nunca EJECUTÓ tampoco es un gate.** `skipped` no es
-    verde: un job con `needs:` sobre otro que falló queda saltado y GitHub lo lista entre los
-    requeridos **sin alarma**. Antes de cerrar, **cada check requerido debe tener conclusión propia
-    `success`** (`gh pr checks`), y si uno corrió por primera vez en este PR se dice en el summary
-    — sin histórico no puede afirmarse ni regresión ni no-regresión.
-    **Y el rojo VIAJA EN EL MISMO COMMIT que introduce el gate (kit v1.25.0).** Un gate que se
-    agrega hoy y se demuestra mañana pasa una revisión entera —y a veces un merge— sin que nadie
-    haya visto que sabe fallar; y si la demo se aplaza, se olvida. El commit que trae la aserción
-    trae también su demo registrada en la bitácora: qué se rompió a propósito, qué salió rojo y a
-    quién nombró.
-    **Y la tercera pregunta (kit v1.26.0): ¿puede este gate FALLAR siquiera?** Antes de
-    escribirlo, comprueba que existe un estado del repo que lo pondría en rojo y que **ninguna
-    regla anterior lo hace inalcanzable** — un schema que ya rechaza el caso, un test que ya lo
-    cubre, un build que rompe antes. Si no puede fallar, no es un gate: se retira y se anota cuál
-    regla lo cubría (precedente: S7, un gate nuevo resultó inalcanzable por una regla previa y
-    solo se supo al exigirle el rojo). Las tres, juntas: ¿lo viste **fallar**? · ¿lo viste
-    **correr**? · ¿**puede** fallar?
-15. **El bundle publicable del design system es un ARTEFACTO DEL REPO (kit v1.17.0).**
-    `design-sync/` se versiona aquí como **espejo 1:1** de lo publicado en Claude Design, con
-    jerarquía fija: `design-system.md` (fuente de verdad) → `design-sync/` (bundle) → el proyecto
-    remoto (**jamás se edita allá**). **Todo sprint que toque UI actualiza el bundle en su MISMO
-    PR**; publicar puede esperar al cierre de ciclo, y así el cierre es un delta pequeño y nunca
-    una reconstrucción.
-16. **CERO ENLACES: la producción se MUESTRA, jamás se ENTREGA (regla dura del pipeline, F0 #8).**
-    Ningún archivo de este repo público ni campo de GitHub contiene la URL de producción o de
-    previews: ni el `README.md`, ni el campo About/website del repo, ni el `BLUEPRINT.html`
-    (documenta dominio y protección como "qué ve quién sin sesión" **sin escribir la URL** — la URL
-    exacta vive en la planeadora, que es privada), ni el manual, ni la guía (su campo de URL se
-    llena EN USO), ni `package.json`. El CTA público es la **«lista de espera»** — sin promesa de
-    otorgamiento. **El campo homepage NO se vacía (2026-09-24):** la GitHub App de Vercel lo
-    llena con la URL de producción tras cada deploy **solo si está vacío** (Vercel confirma que no
-    se puede apagar), así que lleva el perfil de GitHub del dueño —público, no es la producción—
-    y Vercel no lo toca. Vaciarlo lo reabre. Se re-verifica tras CADA merge a `main` que siga con
-    el perfil, y JAMÁS se automatiza con un PAT de administración como secret en un repo público.
-    Los documentos que
-    NARRAN el barrido escriben los patrones **sin el literal** (clase de carácter, p. ej.
-    `vercel[.]app`): un summary que cita el patrón tal cual rompe el grep. **El barrido corre sobre
-    TODOS los archivos versionados** (jamás con include-list de extensiones):
-    `git grep -nE "vercel[.]app|workers[.]dev|pages[.]dev" -- ':!pnpm-lock.yaml'`
-    **Y todo comando que sea un gate viaja ENTRE BACKTICKS y se prueba copiándolo del RENDER**
-    (kit v1.24.0): sin backticks el markdown come las barras invertidas y entrega un grep que no
-    encuentra nada nunca — un gate muerto que pasa en verde para siempre.
-    **Y el barrido corre sobre el árbol que se VA A SUBIR: DESPUÉS del último `git add` (kit
-    v1.26.0).** Un barrido temprano deja ciega la ventana entre él y el push — así entraron al PR
-    del S5 los artefactos de `.lighthouseci/` con seis falsos positivos. **Y vale también para
-    código y comentarios de tests:** el comentario de un spec que cita el dominio de preview es
-    una fuga igual que una URL en el README.
-17. **PRs de dependencias: máximo DOS abiertos y el lockfile NO se pelea (kit v1.24.0).**
-    dependabot con techo real de 2 (limit 1 por ecosistema, todo agrupado). Se mergean **DE A UNO,
-    dejando a dependabot REGENERAR** entre merges (`@dependabot rebase` puede no obedecer, y el
-    hand-merge del lockfile le rompe el parser). Si un conflicto de lockfile TOCA resolverse a
-    mano: la resolución **parte del lado que trae los bumps** y se verifica dependencia por
-    dependencia que quedó la versión MÁS NUEVA de ambos lados — pnpm degrada en silencio y la CI
-    pasa VERDE porque **ninguna puerta compara el resultado contra la INTENCIÓN del PR**: leer la
-    salida del install ES el gate. `pnpm peers check` corre en `quality` (es lo único que ve un
-    peer insatisfecho). Overrides: en `pnpm-workspace.yaml`, jamás en `package.json`.
-    **El lote semanal solo lleva minor y patch** (`update-types` en el grupo, 2026-09-06, PRs
-    #10/#14): un mayor sin soporte metido en el lote lo pone rojo entero y se arrastra semana a
-    semana. Los mayores llegan SUELTOS, uno por dependencia, cuando el cupo está libre — un mayor
-    es una decisión, no un bump. El `ignore` del archivo NO es barrera (`@dependabot show <dep>
-ignore conditions` devolvió `[]`): se conserva, pero no se confía en él. Invariantes vigiladas
-    por `tests/unit/dependabot-config.test.ts`.
+  - **Gate de modelo al abrir cada fase:** tu primera línea es «Fase N · modelo requerido: X · modelo activo: Y» (Y lo lees de tu propio encabezado de sesión). Si coinciden, arrancas. **Si no coinciden, NO construyes nada** hasta que el usuario escriba «vamos con Y» (queda registrado en el archivo del sprint como decisión) o cambie con `/model X`. Es un renglón, no una parada del techo. Trabajo de rutina en Opus o Fable también se detiene y se recomienda bajar.
+  - **El esfuerzo es sugerido:** no se verifica, no se reporta como desvío y nunca detiene nada; `/effort` es opcional.
+  - **Relevo, nunca loop (regla 29):** al **segundo intento fallido** sobre el mismo problema, o a los **20 min sin avance verificable** (un test que pasa, un error que cambia), **paras**: escribes en el cierre o la bitácora qué intentaste, qué falló y qué sabes, y pides relevo en UNA línea: «Relevo: modelo actual X · recomiendo Y · por qué · `/model Y`». Prohibido el tercer intento por el mismo camino con el mismo modelo. Escalón: Haiku → Sonnet → Opus; si Opus pide relevo, decide el usuario (Fable solo si él lo declara emergencia).
+  - **Haiku 5.5 en construcción simple está en prueba:** su relevo es Sonnet 5.5 (regla 29); el cierre registra si Haiku bastó o no; tras 3 sprints se decide si se queda. Nombre completo `claude-haiku-5-5` en `/model` hasta confirmar que el alias `haiku` apunta a esa versión.
+  - Al cambiar de fase, si el contexto anterior no se necesita, recomienda `/clear` o `/compact`: el archivo del sprint conserva el estado.
+  - Los subagentes declaran su modelo en su definición (búsqueda y lectura: Haiku 5.5; auditor: Sonnet 5.5); ninguno hereda Opus o Fable por omisión.
+
+## Reglas (29, una línea cada una)
+
+Frecuencia: `[sprint]` cuesta algo en cada sprint · `[hito]` se ejecuta al cerrar o abrir un hito · `[cambio]` solo cuando el sprint toca lo que la regla cubre · `[siempre]` pasiva, costo cero. 🔒 = privacidad o seguridad, sin cambio de fondo. El detalle, origen y precedentes de cada una: `docs/REGLAS-ANEXO.md § N`.
+
+1. `[siempre]` **TypeScript strict.** Sin `any` ni `@ts-ignore` sin justificación en comentario. — detalle: docs/REGLAS-ANEXO.md § 1
+2. `[sprint]` **Tests de lo que cambia.** Motores puros > 80 %, UI > 50 %, ≥ 1 e2e por feature core; `--coverage` en el script `test` desde los primeros tests; directorios generados a `globalIgnores`. — detalle: docs/REGLAS-ANEXO.md § 2
+3. `[siempre]` **Motor separado de UI.** Lógica pura en `engine/`/`lib/`; componentes sin lógica de negocio. — detalle: docs/REGLAS-ANEXO.md § 3
+4. `[siempre]` **Toda salida de LLM que se persista pasa por esquema Zod** (skill `ia-embebida`); nunca texto libre directo a la BD. — detalle: docs/REGLAS-ANEXO.md § 4
+5. `[siempre]` **A11y desde el inicio:** tabindex, aria-labels, contraste AA; `prefers-reduced-motion` cambia propiedades, jamás la forma del árbol (test de árbol + axe solo si el sprint toca motion); tokens de tinta vetados fallan en lint; el color nunca solo (símbolo + texto + color). — detalle: docs/REGLAS-ANEXO.md § 5
+6. `[siempre]` **Commits convencionales**; branch `sprint-NNN/<tema>`; jamás push directo a `main` (hook); ruleset `main-protegida` con checks requeridos desde el estampado; un job de CI nuevo entra a la ruleset en el mismo sprint. — detalle: docs/REGLAS-ANEXO.md § 6
+7. `[siempre]` 🔒 **Secrets solo en `.env.local` y Vercel env;** gitleaks a doble cinturón (hook PreToolUse + `githooks/pre-commit`, `core.hooksPath` por `prepare`); se prueba con la carnada canónica, nunca improvisada. — detalle: docs/REGLAS-ANEXO.md § 7
+8. `[sprint]` **Presupuesto medido:** ≈ 4 h activas por defecto, ≤ 12 h con justificación; horas con `scripts/horas-sprint.mjs`; ~12 pasos por pantalla como orientación — si lo excedes, simplifica o consulta. — detalle: docs/REGLAS-ANEXO.md § 8
+9. `[sprint]` **Manual de uso vivo** (`docs/MANUAL-DE-USO.md`): toda feature que llega a `main` tiene su sección en el mismo sprint, en lenguaje de usuario final (qué hace, cómo se usa, limitaciones; en esta app, cómo alimentar el dato). — detalle: docs/REGLAS-ANEXO.md § 9
+10. `[hito]` **El diseño va antes del código:** G-Diseño una vez por app, en UNA sesión sobre la maqueta entera (`docs/diseno/` + `design-system.md`); FIDELIDAD del primer sprint con UI indiferible; de las tres clases de mirada solo **DECISIÓN** abre parada (máx. 1 por sprint; pregunta llana en la primera línea + dónde abrirla; registro de una línea); FORMA y TEXTO al gate humano del hito. — detalle: docs/REGLAS-ANEXO.md § 10
+11. `[cambio]` **Guía de prueba viva y acumulativa** (`docs/GUIA-DE-PRUEBA.html`, autocontenida, origen por línea, prefijo `localStorage` versionado): se toca solo si el sprint cambia un flujo visible; ⭐/⭐⭐ se corren en el gate humano del hito, sin acumulados ni contrapesos; kit de prueba (`docs/kit-de-prueba/`) solo por cambio. — detalle: docs/REGLAS-ANEXO.md § 11
+12. `[siempre]` **Prohibido entregar por artifacts o plataformas externas:** todo entregable es un archivo del repo (HTML autocontenido o Markdown) y se entrega su ruta. — detalle: docs/REGLAS-ANEXO.md § 12
+13. `[hito]` **Brochure** (`docs/BROCHURE.html` + `/conoce` + `docs/brochure-export.json`): se produce una vez, con storyboard aprobado y el banco de técnicas, cuando la app entra al hito Vitrina; se ajusta al cierre de cada hito posterior, no por sprint. (CV Viva es la vitrina: exenta.) — detalle: docs/REGLAS-ANEXO.md § 13
+14. `[siempre]` **Código primero, IA generativa después:** toda funcionalidad nativa se resuelve con programación; una feature LLM exige ADR «código primero» (`decisions/PLANTILLA-ADR-codigo-primero.md`); la IA es acento con fallback determinista. — detalle: docs/REGLAS-ANEXO.md § 14
+15. `[cambio]` **Un gate se demuestra fallando:** la demo en rojo (`scripts/demo-rojo.sh`) solo para gates PROPIOS nuevos de esta app (los del kit la traen en sus tests); el rojo viaja en el mismo commit que el gate; un gate que nunca ejecutó (`skipped`) no es verde: cada check requerido con conclusión propia `success`; antes de escribirlo, ¿puede fallar siquiera? — detalle: docs/REGLAS-ANEXO.md § 15
+16. `[hito]` **El bundle `design-sync/` es un artefacto del repo,** espejo del DS publicado, y se actualiza al cierre del hito; `/design-sync` lo invoca el usuario y tú lo ejecutas. — detalle: docs/REGLAS-ANEXO.md § 16
+17-bis. `[siempre]` **Lo que la app escribe también es superficie:** un derivado jamás nace menos privado que su fuente (700/600, reparación al abrir); todo arnés que pueda tocar fuentes declara su árbol al arrancar y aborta ante datos reales. — detalle: docs/REGLAS-ANEXO.md § 17-bis
+17. `[siempre]` 🔒 **Cero enlaces: la producción se muestra, jamás se entrega.** Ningún archivo versionado ni campo de GitHub publica la URL de producción o de previews (CTA = «lista de espera»; homepage del repo = el perfil público del dueño, decisión 2026-09-24; los documentos escriben el patrón con clase de carácter); el barrido de árbol + homepage es un paso del job `quality` de la CI (`scripts/cero-enlaces.mjs`, dominios en `cero-enlaces.json`) y corre DESPUÉS del último `git add`. — detalle: docs/REGLAS-ANEXO.md § 17
+18. `[siempre]` **UN SOLO PR VIVO POR APP (regla dura del usuario, 2026-10-11; kit v2.1.0).** Dependabot cuenta. Antes de abrir cualquier PR: `gh pr list --state open`; si hay uno, se procesa (mergea o cierra) o se sigue en su rama. Un segundo PR solo si es complementario del primero y su cuerpo EMPIEZA con «complementa #N: <por qué no cabe en #N>». El job `un-pr-vivo` de la CI falla al segundo PR sin esa línea. Dependencias: agrupadas, de a uno, al arrancar el sprint y antes de abrir el PR del sprint; ningún paquete por debajo de `main` (`scripts/verificar-dependencias.mjs`); overrides y excepciones en `pnpm-workspace.yaml`, excepción solo por advisory sin parche y con ADR; el lote semanal solo lleva minor y patch, los mayores llegan sueltos (`tests/unit/dependabot-config.test.ts`). — detalle: docs/REGLAS-ANEXO.md § 18
+19. `[cambio]` **Todo puente entre dos lenguajes exige su gate de contrato** en el sprint que lo cruza: fixture escrito por el serializador real, tipo validado del lado que lee, un test de punta a punta. — detalle: docs/REGLAS-ANEXO.md § 19
+20. `[siempre]` **Bilingüe ES/EN en todo desde el primer sprint:** el dato nace como mapa `{ es, en }`, redactado (no traducido), con test automático de paridad de claves; e2e y capturas en UN idioma por sprint, el otro al cierre del hito. Conversación y cierres en español; código, commits y ADRs en inglés. — detalle: docs/REGLAS-ANEXO.md § 20
+21. `[cambio]` **IA de construcción por suscripción (7-S):** solo el binario oficial de Claude Code, token jamás en env, trazas ni repo, directorio temporal limpio con MCP vacío, lotes pequeños fuera de CI, ADR de cumplimiento con relectura de términos por release. — detalle: docs/REGLAS-ANEXO.md § 21
+22. `[cambio]` **Todo control dibujado tiene su script cargado** (gate `tests/unit/controladores-maqueta`); si el sprint toca una maqueta o pantalla, la pasada de capturas activa cada control y comprueba que algo cambió. — detalle: docs/REGLAS-ANEXO.md § 22
+23. `[cambio]` **Matriz de envejecimiento:** todo dato con fecha de cambio de estado trae un gate que construye la página en cada fecha en que algo cambia; la fecha de consulta es perilla de build, nunca el reloj. — detalle: docs/REGLAS-ANEXO.md § 23
+24. `[cambio]` 🔒 **Las protecciones del sistema del usuario se enseñan antes de tocarlas:** matriz de una fila por acción (qué · para qué · qué aviso verá · cómo se deshace) y un «sí» por acción; vale para scripts, tests y tus propios comandos. — detalle: docs/REGLAS-ANEXO.md § 24
+25. `[siempre]` **El comando de pruebas por defecto no toca hardware ni permisos:** marca `hardware` (la CI, `--include-ignored --skip en_vivo_`) y prefijo `en_vivo_` (solo la máquina del usuario, con matriz y «sí»). — detalle: docs/REGLAS-ANEXO.md § 25
+26. `[siempre]` **Worktrees prohibidos:** todo ocurre en el checkout `~/Code/app-<slug>`; nada de `git worktree` ni `git stash` a secas sobre trabajo ajeno. — detalle: docs/REGLAS-ANEXO.md § 26
+27. `[siempre]` **La evidencia se escribe después del hecho** («leído como imagen», «N de N», «en verde») con la cuenta tomada del resultado; extremos de magnitud en capturas y spike de costos solo por cambio. — detalle: docs/REGLAS-ANEXO.md § 27
+28. `[cambio]` **Parejas de versiones entre dos ecosistemas** (npm ↔ crates / Python) se vigilan con un test entre lockfiles (`tests/unit/tauri-a-la-par.test.ts`); si entró un lote de dependencias, se construye también el binario. — detalle: docs/REGLAS-ANEXO.md § 28
+29. `[siempre]` **Relevo, nunca loop (regla dura del usuario, 2026-10-11; kit v2.2.0).** Segundo intento fallido sobre el mismo problema, o 20 min sin avance verificable ⇒ paras, escribes qué intentaste y pides relevo en una línea con el `/model` del escalón siguiente (Haiku → Sonnet → Opus; de Opus decide el usuario). Jamás un tercer intento por el mismo camino con el mismo modelo. — detalle: docs/REGLAS-ANEXO.md § 29
+
+## Cierre ejecutivo (`sprints/SPRINT_NNN-cierre.md`, ≤ 40 líneas)
+
+Frontmatter `sprint · app · hito · opened · closed · branch · pr`, y los campos, cada uno en una línea o una tabla corta:
+nombre · objetivo planeado · resultado · estado · tiempo estimado · tiempo real (salida de `scripts/horas-sprint.mjs`) · diferencia ·
+fases planeadas y resultado real · tiempo estimado y real por fase · entregables · no completado · desviaciones · causas · decisiones ·
+deuda generada o aplazada (medios y bajos con `archivo:línea`, al lote del hito) · aprendizajes reutilizables · recomendación para el siguiente ·
+evaluación esfuerzo-beneficio · **auditoría** (4 casillas; C/A con `pagado · <commit>`) · si una fase se pasó más del 50 %: causa y medida ·
+**modelo usado por fase y si hubo desvío** (una línea; si una fase corrió con Haiku 5.5, si bastó o no) · **relevos** (cuántos · de qué modelo a cuál · por qué; o «ninguno») ·
+«Para mergear: squash y borrar la rama; después `/cierre-sprint <slug>`».
+
+## Comandos
+
+`/plan-sprint` (paso 1) · `/audita-sprint` (paso 3) · `/deploy-check` (paso 3) · `/design-sync` (hito; lo invoca el usuario) ·
+`/self-review`, `/run-tests`, `/security-audit` (opcionales: la CI ya corre lo que verifican). Scripts: `scripts/horas-sprint.mjs` (horas del sprint) ·
+`scripts/demo-rojo.sh` (demo en rojo de un gate propio) · `scripts/verificar-dependencias.mjs` · `pnpm corpus:informe` · `pnpm build:chat-index`.
 
 ## Estándares (los 6+1, gates en CI)
 
-Testing · CI/CD · Observabilidad · Seguridad · Performance (contra `perf-budget.json`) · UX+A11y ·
-**IA embebida responsable** (desde S3). Detalle canónico: `estandares/estandares.md` de la
-planeadora (read-only). Ítem rojo ⇒ deuda técnica explícita en el summary o el sprint no cierra.
-
-## Workflow de un sprint
-
-**Apertura** — el usuario trae la **orden de construcción**
-(`portafolio/hoja-de-vida/ordenes/SPRINT_NNN-orden.md` de la planeadora). Léela entera + sus
-referencias (SPRINT_NNN.md, VISION.md, brief, prototipo y motion READ-ONLY).
-**Plan mode primero, siempre.** **La aprobación del plan NO arranca la construcción** (gate de
-arranque, kit v1.6.2): aprobado el plan, emite el **bloque de arranque** — tu recomendación de
-**modelo y esfuerzo** para el sprint (por fase si difiere; el usuario los fija con `/model`) +
-espacio para sus ajustes — y espera su **«construye»** explícito antes de tocar cualquier archivo.
-El plan incluye SIEMPRE la sección **«Riesgos de integración con lo existente»** (kit v1.7.3) y la
-fase 0 corre el **humo de credenciales** (kit v1.7.4) antes de construir contra ellas.
-Branch `sprint-NNN/<tema>`.
-
-**Durante** — construye por fases (setup → motor → UI → integración → e2e). Mantén viva la
-bitácora `sprints/SPRINT_NNN-implementation-log.md`. ADRs en `decisions/` para decisiones no
-anticipadas. `/self-review` tras cada bloque; `/run-tests` frecuente.
-
-**Referencias READ-ONLY de la planeadora (regla de extracción):**
-
-- `referencias-ui/hoja-de-vida/HV Web/design-system.md` → **SÍ**: paleta pastel editorial,
-  tipografía (Fraunces/Inter/JetBrains Mono), radios, sombras, microcopy sobrio.
-  **NO**: el layout dashboard 3-columnas del prototipo (concepto viejo — CV Viva es scroll
-  editorial mobile-first).
-- `referencias-ui/hoja-de-vida/motion/` → **SÍ**: `motion-vocabulary.md` + recetas 01/02/09/10
-  como spec numérica de `Reveal`/`Counter`/`TimelineTrack`/`Hero` (leer `LEEME-DESTILACION.md`).
-  **NO**: three.js/WebGL, animaciones infinitas, andamiaje de deck, CDNs (libs por npm).
-- ❌ Nunca importes archivos ni copies código tal cual ni heredes gaps (testing/a11y/perf).
-
-**Cierre — summary OBLIGATORIO.** Con la DoD completa: `/deploy-check` → genera
-`sprints/SPRINT_NNN-summary.md` (plantilla abajo) → PR → merge con CI verde. **Sin summary el
-sprint NO está cerrado** (es lo que la planeadora lee para la retrospectiva).
-
-**Cierre de CICLO (método v1.8.1 — cuando este sprint es el ÚLTIMO de un ciclo H1/fase/MVP; la
-orden lo declara).** Además de la DoD del sprint, el ciclo entrega:
-
-1. **`docs/BLUEPRINT.html`** — as-built de TODA la infraestructura que sostiene la app (plantilla
-   `kit-app/docs/BLUEPRINT.plantilla.html`: **HTML autocontenido con diagrama SVG embebido**,
-   jamás mermaid ni CDNs + tabla por pieza + **costo real/mes** desglosado + **punto único de
-   falla**). Se escribe con lo DESPLEGADO de verdad, no con lo planeado; es **vivo y acumulativo**
-   (el ciclo siguiente lo actualiza y declara los cambios en el historial del pie). Jamás incluye
-   secretos ni URLs privadas de administración — solo qué gestor los guarda.
-2. **Design system publicado en Claude Design** (`/design-sync`) — durante el ciclo es bajo
-   demanda; al cierre, obligatorio.
-3. **Guía de prueba ACUMULATIVA al día** (regla 11) + su kit de prueba.
-4. **Gate ⭐ del usuario** sobre esa guía — cuando el ciclo acumula gates diferidos, el gate del
-   cierre los paga y **jamás se difiere** (lo único pausable es el momento de ejecutarlo).
-
-Todo ciclo tiene MÍNIMO 3 sprints (regla dura 2026-07-17).
-
-### Plantilla del summary
-
-```markdown
----
-sprint: NNN
-app: hoja-de-vida
-status: closed
-opened: YYYY-MM-DD
-closed: YYYY-MM-DD
-branch: sprint-NNN/<tema>
-pr: <link>
----
-
-# Sprint NNN Summary — CV Viva
-
-## Outcome [¿Se logró el outcome del SPRINT_NNN.md? Sí/No/Parcial + 1 frase]
-
-## Qué se construyó [features/pantallas/componentes]
-
-## DoD — checklist [los 6+1 estándares, uno a uno, con evidencia breve]
-
-## Métricas técnicas [cumplidas vs. no, del SPRINT_NNN.md]
-
-## Decisiones no anticipadas [ADR-NNN: resumen]
-
-## Bugs + resoluciones
-
-## Qué salió bien / qué generó fricción
-
-## Sugerencias de mejora al método [¿algo de metodo/metodo.md debería cambiar?]
-
-## Deuda técnica aceptada [qué, por qué, sprint de pago]
-
-## Archivos clave (máx. 10) · ## Cómo probar
-```
+Testing · CI/CD · Observabilidad · Seguridad · Performance (`perf-budget.json`, Lighthouse una corrida, categorías ≥ 0.9) · UX+A11y · IA embebida responsable.
+Detalle canónico: `estandares/estandares.md` de la planeadora (solo lectura). Ítem rojo ⇒ deuda explícita en el cierre ejecutivo o el sprint no cierra.
 
 ## Patrones de dominio de esta app
 
-- **Contenido = datos versionados.** TODO el contenido vive en `data/cv.es.yaml`, `data/cv.en.yaml`
-  y `data/apps.yaml`, validado con Zod en build (**el build FALLA si el contenido está
-  malformado** — fail-safe). Editar YAML + push = la CV Viva se actualiza. Ningún texto de
-  contenido hardcodeado en componentes.
-- **Motion system central en `src/components/motion/`** (`Reveal`, `Stagger`, `Counter`,
-  `TimelineTrack`): specs numéricas de la referencia destilada; hook global de
-  `prefers-reduced-motion` sin excepciones; solo `transform`/`opacity` en animaciones de scroll;
-  performance vigilada por Lighthouse CI (las animaciones no negocian el budget).
-- **Bilingüe estructural:** cada entrada de contenido existe en ES y EN; rutas `/es` `/en` +
-  hreflang; el idioma jamás se resuelve con strings sueltos en componentes.
-- **ATS/SEO como gate:** `curl` de cualquier ruta devuelve el contenido íntegro sin JS; JSON-LD
-  (`Person`, `WebSite`) válido; sitemap + robots generados.
-- **Showcase data-driven:** agregar/cambiar una app del pipeline en el brochure = editar
-  `data/apps.yaml` (estados: en construcción / en exploración), cero cambios de código.
-- **CANAL DE CONTENIDO DE LA VITRINA (decisión del usuario, 2026-09-06).** Esta app es el
-  DESTINO, no el autor, del contenido de las piezas. Quién produce qué: las fichas de las **apps**
-  las administra la planeadora (`vitrina/apps/`: export del repo de cada app + complemento curado
-  → ficha completa); las de **agentes · investigaciones · tableros** las produce quien construye
-  cada pieza, con `docs/contrato-ficha-tecnica/`. Todas llegan **por copia** a `content/<frente>/`
-  y se publican con un **PR de contenido sin sprint** (la CI valida esquema, cero enlaces, axe y
-  e2e). **Las fichas de otras casas NO se editan aquí — ni para que quepan:** si una no valida, se
-  reporta archivo + campo + regla y se corrige EN ORIGEN; si varias no caben por una razón
-  legítima del frente, se propone **contrato aditivo** en plan mode (así nacieron v1.2.0 y v1.3.0; vigente: **v1.3.1**). La misma regla que ya
-  rige para `content/vitrina/`, extendida a todo lo que llega de afuera.
-- **Un solo contrato, un solo renderizador.** `FichaTecnica` renderiza `fichaTecnicaSchema` y no
-  un tipo de pieza: nada específico por frente vive en el componente. Lo específico por frente
-  vive en datos (`data/vitrina.yaml`) o en el escaparate del frente.
+- **Referencias READ-ONLY de la planeadora (regla de extracción):** `referencias-ui/hoja-de-vida/HV Web/design-system.md` → SÍ paleta, tipografía (Fraunces · Inter · JetBrains Mono), radios, sombras, microcopy; NO el layout dashboard de 3 columnas (CV Viva es scroll editorial mobile-first). `referencias-ui/hoja-de-vida/motion/` → SÍ el vocabulario y las recetas como spec numérica de `Reveal`/`Counter`/`TimelineTrack`/`Hero`; NO three.js, animaciones infinitas ni CDNs. Nunca se importa ni se copia código tal cual.
+- **ATS/SEO como gate:** `curl` de cualquier ruta devuelve el contenido íntegro sin JS; JSON-LD (`Person`, `WebSite`) válido; sitemap y robots generados; un 404 responde en los dos idiomas.
+- **Fichas al chat (a fondo v2, D3):** `fichas-al-indice.mjs` convierte cada ficha de la vitrina en chunks con la forma del índice (`{id, titulo, texto, ancla}`); las infografías entran por el mismo molde, un chunk por bloque con ancla `/metodo/<slug>#bloque-n`.
+- **Modo mantenimiento** por variable de entorno, documentado en el manual; **tema claro único** (modo oscuro = deuda de diseño declarada); el conmutador de tema es accesibilidad, no estética.
 
-## Idioma
-
-Español en conversación y bitácoras. Inglés en código, commits, nombres y ADRs.
-El contenido de la app es bilingüe ES/EN (vive en `data/`, no en el código).
+Constitución núcleo kit v2.3.0 — CV Viva, regenerada 2026-10-17 para el S10 (sustituye la v1 de kit v1.26.0). Las reglas del kit en detalle viven en docs/REGLAS-ANEXO.md y se leen solo cuando una regla se cita.
