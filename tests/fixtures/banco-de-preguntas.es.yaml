@@ -559,6 +559,24 @@ preguntas:
     espera: [metodo-sistema-de-agentes]
     familia: ia-y-agentes
 
+  # ─────────────────────────────────────────────────────────────────────
+  # Mi método (S11): las tres preguntas de T3. Su fuente esperada es la PIEZA, no
+  # `rag-y-el-chat`: ese documento ya contesta las tres (es su fuente de fondo), así
+  # que una fila que aceptara a los dos no podría fallar y no probaría que T3 entra
+  # al top-4. Si T3 sale, se ajustan los títulos de la pieza, no esta expectativa.
+  # La de los embeddings llega 4.ª, detrás de AF-16: es lo honesto, y es el primer
+  # lugar donde mirar cuando el índice crezca con las piezas que siguen.
+  # ─────────────────────────────────────────────────────────────────────
+  - pregunta: "¿Cómo evita el chat de Henry inventar respuestas?"
+    espera: [metodo-rag-sin-inventar]
+    familia: ia-y-agentes
+  - pregunta: "¿Por qué el RAG de Henry no usa embeddings?"
+    espera: [metodo-rag-sin-inventar]
+    familia: ia-y-agentes
+  - pregunta: "¿Cómo evalúa Henry la recuperación antes de publicar un cambio?"
+    espera: [metodo-rag-sin-inventar]
+    familia: ia-y-agentes
+
 # Preguntas AJENAS. Cada una declara qué le hace el guardrail de entrada, y hay
 # DOS resultados legítimos —confundirlos sería mentir sobre lo que el guardrail
 # promete (`src/lib/ia/guardrails.ts`)—:
