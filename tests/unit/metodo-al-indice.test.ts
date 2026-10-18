@@ -54,7 +54,7 @@ describe("el motor, contra la pieza de juguete", () => {
     for (let n = 1; n <= N_BLOQUES; n++) {
       const delBloque = chunks.filter(
         (c: { ancla: string }) =>
-          c.ancla === `/metodo/ejemplo-sintetico#bloque-${n}`,
+          c.ancla === `/metodos/ejemplo-sintetico#bloque-${n}`,
       );
       expect(delBloque.length, `bloque ${n}`).toBeGreaterThan(0);
     }
@@ -71,14 +71,14 @@ describe("el motor, contra la pieza de juguete", () => {
     expect(PESO_METODO).toBe(0.5);
   });
 
-  it("la voz viaja DENTRO del texto: el campo con su fuente, lo mío con su rótulo", () => {
+  it("la voz viaja DENTRO del texto: el estado del campo con su fuente, el criterio con su rótulo", () => {
     const todo = chunks.map((c: { texto: string }) => c.texto).join("\n");
     // El ejemplo cita la fuente 1 (Editor de ejemplo, 2026-09-01) en el bloque 4.
     expect(todo).toContain(
-      "[Lo que el campo hace — Editor de ejemplo, 2026-09-01]",
+      "[Estado del campo — Editor de ejemplo, 2026-09-01]",
     );
-    expect(todo).toContain("[Mi posición]");
-    expect(todo).toContain("[Lo que hice]");
+    expect(todo).toContain("[Criterio]");
+    expect(todo).toContain("[Evidencia]");
   });
 
   it("en inglés los rótulos y los textos salen en inglés", () => {
@@ -86,11 +86,11 @@ describe("el motor, contra la pieza de juguete", () => {
       .map((c: { texto: string }) => c.texto)
       .join("\n");
     expect(en).toContain(
-      "[What the field does — Editor de ejemplo, 2026-09-01]",
+      "[State of the field — Editor de ejemplo, 2026-09-01]",
     );
-    expect(en).toContain("[My position]");
+    expect(en).toContain("[Judgment]");
     expect(en).toContain("start from the problem, not the tool");
-    expect(en).not.toContain("Lo que el campo hace");
+    expect(en).not.toContain("Estado del campo");
   });
 
   it("los bloques de lista dan un chunk por elemento, con SU nombre en el título", () => {
@@ -113,7 +113,7 @@ describe("el motor, contra la pieza de juguete", () => {
       .filter((c: { ancla: string }) => c.ancla.endsWith("#bloque-7"))
       .map((c: { texto: string }) => c.texto)
       .join("\n");
-    expect(b7).toContain("no cifras de un proyecto mío");
+    expect(b7).toContain("no cifras de un proyecto concreto");
   });
 
   it("la evidencia lleva el nivel que el corpus le da", () => {
@@ -180,19 +180,19 @@ describe("las anclas de «Mi método» se validan, no solo la ruta", () => {
   });
 
   it("la lista y la página existen; el bloque 11, el bloque 0 y un slug inventado no", () => {
-    expect(destinoExiste("/metodo", catalogo)).toBe(true);
-    expect(destinoExiste("/metodo/sistema-de-agentes", catalogo)).toBe(true);
+    expect(destinoExiste("/metodos", catalogo)).toBe(true);
+    expect(destinoExiste("/metodos/sistema-de-agentes", catalogo)).toBe(true);
     expect(
-      destinoExiste("/metodo/sistema-de-agentes#bloque-11", catalogo),
+      destinoExiste("/metodos/sistema-de-agentes#bloque-11", catalogo),
     ).toBe(false);
-    expect(destinoExiste("/metodo/sistema-de-agentes#bloque-0", catalogo)).toBe(
+    expect(destinoExiste("/metodos/sistema-de-agentes#bloque-0", catalogo)).toBe(
       false,
     );
-    expect(destinoExiste("/metodo/sistema-de-agentes#algo", catalogo)).toBe(
+    expect(destinoExiste("/metodos/sistema-de-agentes#algo", catalogo)).toBe(
       false,
     );
-    expect(destinoExiste("/metodo/inventada#bloque-1", catalogo)).toBe(false);
-    expect(destinoExiste("/metodo/inventada", catalogo)).toBe(false);
+    expect(destinoExiste("/metodos/inventada#bloque-1", catalogo)).toBe(false);
+    expect(destinoExiste("/metodos/inventada", catalogo)).toBe(false);
   });
 
   it("los destinos de las demás rutas siguen juzgándose por la ruta (no se rompió lo anterior)", () => {
@@ -200,15 +200,15 @@ describe("las anclas de «Mi método» se validan, no solo la ruta", () => {
     expect(destinoExiste("/proyectos/inventado#algo", catalogo)).toBe(false);
   });
 
-  it("el destino tiene nombre en los dos idiomas: «Mi método» y el nombre de la pieza", () => {
+  it("el destino tiene nombre en los dos idiomas: «Métodos» y el nombre de la pieza", () => {
     const es = nombresDeDestinos("es");
     const en = nombresDeDestinos("en");
-    expect(nombreDeDestino("/metodo", es)).toBe("Mi método");
-    expect(nombreDeDestino("/metodo", en)).toBe("My method");
-    expect(nombreDeDestino("/metodo/sistema-de-agentes#bloque-3", es)).toBe(
+    expect(nombreDeDestino("/metodos", es)).toBe("Métodos");
+    expect(nombreDeDestino("/metodos", en)).toBe("Methods");
+    expect(nombreDeDestino("/metodos/sistema-de-agentes#bloque-3", es)).toBe(
       "Cómo estructuro un sistema de agentes",
     );
-    expect(nombreDeDestino("/metodo/sistema-de-agentes#bloque-3", en)).toBe(
+    expect(nombreDeDestino("/metodos/sistema-de-agentes#bloque-3", en)).toBe(
       "How I structure an agent system",
     );
   });
@@ -228,7 +228,7 @@ describe("las piezas reales de data/metodo/", () => {
             expect(
               chunks.some(
                 (c: { ancla: string }) =>
-                  c.ancla === `/metodo/${pieza.slug}#bloque-${n}`,
+                  c.ancla === `/metodos/${pieza.slug}#bloque-${n}`,
               ),
               `${pieza.slug} bloque ${n}`,
             ).toBe(true);
@@ -258,7 +258,7 @@ describe("las piezas reales de data/metodo/", () => {
         const todo = chunks.map((c: { texto: string }) => c.texto).join("\n");
         expect(todo).not.toMatch(/\[CONFIRMAR/i);
         const otro =
-          locale === "es" ? "What the field does" : "Lo que el campo hace";
+          locale === "es" ? "State of the field" : "Estado del campo";
         expect(todo).not.toContain(otro);
         expect(todo).toContain(etiquetas[locale].voces.campo.nombre);
         expect(todo).toContain(etiquetas[locale].voces.hice.nombre);

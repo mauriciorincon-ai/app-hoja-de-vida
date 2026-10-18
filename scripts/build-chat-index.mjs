@@ -254,7 +254,7 @@ export function buildChunks({
   // pieza. El texto es el que mandó cada casa, en español, en los dos índices.
   if (fichas) chunks.push(...chunksDeFichas(fichas, locale));
   // «Mi método» (S10): cada infografía entra por bloques, con su ancla
-  // `/metodo/<slug>#bloque-n` y el rótulo de su voz dentro del texto. Su código
+  // `/metodos/<slug>#bloque-n` y el rótulo de su voz dentro del texto. Su código
   // es el id del tema (T2…): el chip dice «T2 · <la pieza>».
   if (metodo) chunks.push(...chunksDeMetodo(metodo, locale));
   // El NOMBRE del destino viaja en el chunk: es lo que el chip enseña. Un

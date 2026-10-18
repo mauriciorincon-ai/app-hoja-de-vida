@@ -13,7 +13,7 @@ import { bloqueDe } from "@/lib/metodo/schema";
 import { SITE_URL } from "@/lib/site";
 
 /**
- * UNA INFOGRAFÍA DE «MI MÉTODO» — `/metodo/<slug>` (S10).
+ * UNA PUBLICACIÓN DE «MÉTODOS» — `/metodos/<slug>` (S10; S14: antes «Mi método»).
  *
  * 100% SSG: `generateStaticParams` cruza idiomas con las piezas de
  * `data/metodo/`, y `dynamicParams = false` manda a 404 cualquier otro slug.
@@ -42,7 +42,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const pieza = getPiezaMetodo(slug);
   if (!pieza) return {};
   const l = locale as Locale;
-  const ruta = `/metodo/${slug}`;
+  const ruta = `/metodos/${slug}`;
 
   return {
     metadataBase: new URL(SITE_URL),
@@ -77,7 +77,7 @@ export default async function InfografiaPage({ params }: Params) {
     inLanguage: l,
     dateModified: bloqueDe(pieza, 10).revisado,
     author: { "@type": "Person", name: cv.identidad.nombre },
-    mainEntityOfPage: `${SITE_URL}/${l}/metodo/${slug}`,
+    mainEntityOfPage: `${SITE_URL}/${l}/metodos/${slug}`,
   };
 
   return (
@@ -89,7 +89,7 @@ export default async function InfografiaPage({ params }: Params) {
         <div className="mx-auto max-w-5xl px-4 py-10 md:px-6 md:py-14 print:py-0">
           <nav aria-label={t("migaEtiqueta")} className="mb-8 print:hidden">
             <Link
-              href="/metodo"
+              href="/metodos"
               className="inline-flex min-h-11 items-center gap-2 font-mono text-[11px] tracking-[0.08em] text-ink-2 uppercase hover:text-ink-0"
             >
               <span aria-hidden="true">←</span>

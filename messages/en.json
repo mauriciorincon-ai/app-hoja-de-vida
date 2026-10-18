@@ -20,7 +20,7 @@
     "portafolio": "Portfolio",
     "hojaDeVida": "Résumé",
     "estudios": "Education",
-    "metodo": "My method"
+    "metodo": "Methods"
   },
   "hero": {
     "ctaApps": "Explore my portfolio",
@@ -361,47 +361,47 @@
     "volverFichaTecnica": "Back to the technical sheet"
   },
   "metodo": {
-    "eyebrow": "My method",
-    "titulo": "How I work, one page per question",
-    "intro": "Each page answers an interview question with my method: the phases, the decisions, the controls and the evidence. What I did comes from my own site; what the field does, from dated sources; and what I think is labeled as a position.",
-    "metaDescripcion": "My way of working, one long infographic per interview question: phases, decisions, controls, evidence and dated sources.",
-    "piezasPublicadas": "{n, plural, one {# infographic published} other {# infographics published}}",
-    "sinPiezas": "No infographics are published yet.",
+    "eyebrow": "Methods",
+    "titulo": "How AI, data and BI systems are designed",
+    "intro": "Publications on how AI, data and BI systems are designed and taken to production, with evidence from projects and dated sources. Each one states a problem and sets out the method: the phases, the decisions, the controls and the evidence. The evidence comes from this site; the state of the field, from dated sources; and the judgment is labeled as the author's position.",
+    "metaDescripcion": "Publications on how AI, data and BI systems are designed and taken to production: phases, decisions, controls, evidence from projects and dated sources.",
+    "piezasPublicadas": "{n, plural, one {# publication} other {# publications}}",
+    "sinPiezas": "No publications yet.",
     "tema": "Topic {id}",
-    "abrir": "Open the infographic",
-    "volver": "Back to My method",
+    "abrir": "Read the publication",
+    "volver": "Back to Methods",
     "migaEtiqueta": "Breadcrumb",
-    "indiceEtiqueta": "Blocks of this infographic",
+    "indiceEtiqueta": "Blocks of this publication",
     "imprimirAyuda": "It prints in full from the browser, on A4 or Letter.",
     "revisado": "Reviewed {fecha}",
     "bloque": "Block {n}",
     "bloques": {
-      "1": "The question",
+      "1": "The problem",
       "2": "The map",
       "3": "The phases",
       "4": "The design decisions",
       "5": "What is new in 2026",
-      "6": "Failure modes and how they show up",
+      "6": "Failure modes and how to anticipate them",
       "7": "Metrics and controls",
-      "8": "My evidence",
-      "9": "What I would do differently and what I have not done",
+      "8": "Evidence from projects",
+      "9": "Limits and scope",
       "10": "Sources and review date"
     },
-    "respuestaEnTres": "The answer in three lines",
+    "respuestaEnTres": "Summary in three lines",
     "voces": {
       "titulo": "Three voices, always kept apart",
-      "sinRotulo": "What carries no label is my method: my position on how it is done.",
+      "sinRotulo": "What carries no label is the method: the author's judgment on how it is done.",
       "hice": {
-        "nombre": "What I did",
+        "nombre": "Evidence",
         "ayuda": "It comes only from this site's own corpus."
       },
       "campo": {
-        "nombre": "What the field does",
+        "nombre": "State of the field",
         "ayuda": "It comes from a source with title, publisher, date and link."
       },
       "posicion": {
-        "nombre": "My position",
-        "ayuda": "It is my judgment, not a fact."
+        "nombre": "Judgment",
+        "ayuda": "The author's position, not a fact."
       }
     },
     "mapa": {
@@ -461,7 +461,7 @@
       "metrica": "What is measured",
       "umbral": "Threshold",
       "aprueba": "Who approves the step to production",
-      "nota": "The thresholds are examples of the method, not figures from a project of mine."
+      "nota": "The thresholds are examples of the method, not figures from a specific project."
     },
     "evidencia": {
       "nivel": "Level",

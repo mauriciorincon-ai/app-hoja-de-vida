@@ -3,9 +3,9 @@ import { expect, test } from "@playwright/test";
 import { parse } from "yaml";
 
 /**
- * «MI MÉTODO» (S10) — `/metodo` y `/metodo/<slug>`. El spec se alimenta de
- * `data/metodo/`, igual que la página: una pieza nueva entra a estas pruebas
- * SOLA, sin tocar el archivo.
+ * «MÉTODOS» (S10; renombrada en el S14) — `/metodos` y `/metodos/<slug>`. El spec se
+ * alimenta de `data/metodo/`, igual que la página: una pieza nueva entra a estas
+ * pruebas SOLA, sin tocar el archivo. La ruta vieja (`/metodo`) redirige con 301.
  */
 
 type Pieza = { id: string; slug: string; nombre: { es: string; en: string } };
@@ -17,11 +17,11 @@ if (piezas.length === 0) throw new Error("data/metodo/ sin piezas");
 const IDIOMAS = ["es", "en"] as const;
 
 for (const idioma of IDIOMAS) {
-  test.describe(`Mi método — la lista (${idioma})`, () => {
+  test.describe(`Métodos — la lista (${idioma})`, () => {
     test("lista las piezas publicadas, con el conteo medido de data/metodo/", async ({
       page,
     }) => {
-      const res = await page.goto(`/${idioma}/metodo`);
+      const res = await page.goto(`/${idioma}/metodos`);
       expect(res?.status()).toBe(200);
       await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
       await expect(page.locator("[data-conteo]")).toHaveAttribute(
@@ -32,7 +32,7 @@ for (const idioma of IDIOMAS) {
       for (const p of piezas)
         await expect(page.locator(`a[data-pieza="${p.slug}"]`)).toHaveAttribute(
           "href",
-          `/${idioma}/metodo/${p.slug}`,
+          `/${idioma}/metodos/${p.slug}`,
         );
     });
 
@@ -43,7 +43,7 @@ for (const idioma of IDIOMAS) {
       page,
     }) => {
       await page.setViewportSize({ width: 1280, height: 900 });
-      await page.goto(`/${idioma}/metodo`);
+      await page.goto(`/${idioma}/metodos`);
       const cajas = await page.$$eval("a[data-pieza]", (els) =>
         els.map((e) => {
           const r = e.getBoundingClientRect();
@@ -62,8 +62,8 @@ for (const idioma of IDIOMAS) {
   });
 
   for (const pieza of piezas) {
-    test.describe(`Mi método — ${pieza.slug} (${idioma})`, () => {
-      const ruta = `/${idioma}/metodo/${pieza.slug}`;
+    test.describe(`Métodos — ${pieza.slug} (${idioma})`, () => {
+      const ruta = `/${idioma}/metodos/${pieza.slug}`;
 
       test("200, un h1 con el nombre y los diez bloques con su ancla, del 1 al 10", async ({
         page,
@@ -265,20 +265,20 @@ for (const idioma of IDIOMAS) {
   }
 }
 
-test.describe("Mi método — lo que no existe", () => {
+test.describe("Métodos — lo que no existe", () => {
   for (const idioma of IDIOMAS)
     test(`un slug que no es una pieza es 404 (${idioma})`, async ({ page }) => {
-      const res = await page.goto(`/${idioma}/metodo/no-existe`);
+      const res = await page.goto(`/${idioma}/metodos/no-existe`);
       expect(res?.status()).toBe(404);
     });
 });
 
-test.describe("Mi método — móvil", () => {
+test.describe("Métodos — móvil", () => {
   test("a 390 px la página no se desborda de lado y el mapa se desliza dentro de su región", async ({
     page,
   }) => {
     await page.setViewportSize({ width: 390, height: 844 });
-    await page.goto(`/es/metodo/${piezas[0].slug}`);
+    await page.goto(`/es/metodos/${piezas[0].slug}`);
     const m = await page.evaluate(() => ({
       pagina:
         document.documentElement.scrollWidth -
@@ -299,8 +299,8 @@ test.describe("Mi método — móvil", () => {
   });
 });
 
-test.describe("Mi método — descubrimiento", () => {
-  test("el menú lleva a /metodo desde el primer nivel (escritorio)", async ({
+test.describe("Métodos — descubrimiento", () => {
+  test("el menú lleva a /metodos desde el primer nivel (escritorio)", async ({
     page,
     isMobile,
   }) => {
@@ -309,9 +309,9 @@ test.describe("Mi método — descubrimiento", () => {
     await page.goto("/es");
     await page
       .getByRole("navigation", { name: "Secciones" })
-      .getByRole("link", { name: "Mi método", exact: true })
+      .getByRole("link", { name: "Métodos", exact: true })
       .click();
-    await expect(page).toHaveURL(/\/es\/metodo$/);
+    await expect(page).toHaveURL(/\/es\/metodos$/);
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
   });
 
@@ -320,9 +320,54 @@ test.describe("Mi método — descubrimiento", () => {
   }) => {
     const xml = await (await request.get("/sitemap.xml")).text();
     for (const idioma of IDIOMAS) {
-      expect(xml).toContain(`/${idioma}/metodo</loc>`);
+      expect(xml).toContain(`/${idioma}/metodos</loc>`);
       for (const p of piezas)
-        expect(xml).toContain(`/${idioma}/metodo/${p.slug}</loc>`);
+        expect(xml).toContain(`/${idioma}/metodos/${p.slug}</loc>`);
     }
+  });
+});
+
+// La ruta vieja (S14). «Mi método» (`/metodo`) pasó a «Métodos» (`/metodos`): los
+// enlaces que ya circulan no pueden dejar de servir. 301 (permanente, el que pide
+// el criterio de fin; `redirects()` de Next solo emite 308) y el ancla sobrevive.
+test.describe("Métodos — la ruta vieja redirige", () => {
+  for (const idioma of IDIOMAS) {
+    test(`la lista y una pieza viejas dan 301 a /metodos (${idioma})`, async ({
+      request,
+    }) => {
+      const slug = piezas[0].slug;
+      for (const [vieja, nueva] of [
+        [`/${idioma}/metodo`, `/${idioma}/metodos`],
+        [`/${idioma}/metodo/${slug}`, `/${idioma}/metodos/${slug}`],
+      ]) {
+        const res = await request.get(vieja, { maxRedirects: 0 });
+        expect(res.status(), vieja).toBe(301);
+        expect(
+          new URL(res.headers()["location"], "http://sitio.test").pathname,
+          vieja,
+        ).toBe(nueva);
+      }
+    });
+
+    test(`un enlace viejo a un bloque llega a /metodos con su ancla (${idioma})`, async ({
+      page,
+    }) => {
+      const slug = piezas[0].slug;
+      await page.goto(`/${idioma}/metodo/${slug}#bloque-3`);
+      await expect(page).toHaveURL(
+        new RegExp(`/${idioma}/metodos/${slug}#bloque-3$`),
+      );
+      await expect(page.locator("#bloque-3-titulo")).toBeInViewport();
+    });
+  }
+
+  test("sin idioma, /metodo da 301 a la lista en español", async ({
+    request,
+  }) => {
+    const res = await request.get("/metodo", { maxRedirects: 0 });
+    expect(res.status()).toBe(301);
+    expect(
+      new URL(res.headers()["location"], "http://sitio.test").pathname,
+    ).toBe("/es/metodos");
   });
 });

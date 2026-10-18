@@ -97,7 +97,7 @@ describe("ROJO · los diez bloques son fijos", () => {
     const dos = con(
       (x) => (bloque(x, 1).respuesta = bloque(x, 1).respuesta.slice(0, 2)),
     );
-    expect(rojo(dos)).toThrowError(/respuesta: la respuesta es de tres líneas/);
+    expect(rojo(dos)).toThrowError(/respuesta: la síntesis es de tres líneas/);
   });
 });
 

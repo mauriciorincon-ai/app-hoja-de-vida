@@ -69,7 +69,7 @@ if (!["es", "en"].includes(idioma)) {
   process.exit(1);
 }
 const pieza = parse(readFileSync(path.join(RAIZ, "data", "metodo", `${slug}.yaml`), "utf8"));
-const ruta = `http://localhost:${puerto}/${idioma}/metodo/${slug}`;
+const ruta = `http://localhost:${puerto}/${idioma}/metodos/${slug}`;
 mkdirSync(salida, { recursive: true });
 
 const base = `${slug}-${idioma}`;

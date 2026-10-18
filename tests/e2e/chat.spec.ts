@@ -153,7 +153,7 @@ test.describe("chat — flujo estrella", () => {
 
       const chip = page
         .locator(
-          `[data-testid="chat-fuente"][href*="/${idioma}/metodo/${slug}#bloque-"]`,
+          `[data-testid="chat-fuente"][href*="/${idioma}/metodos/${slug}#bloque-"]`,
         )
         .first();
       await expect(chip).toBeVisible({ timeout: 15_000 });
@@ -165,7 +165,7 @@ test.describe("chat — flujo estrella", () => {
       const bloque = href.match(/#bloque-(\d+)$/)![1];
       await chip.click();
       await expect(page).toHaveURL(
-        new RegExp(`/${idioma}/metodo/${slug}#bloque-${bloque}$`),
+        new RegExp(`/${idioma}/metodos/${slug}#bloque-${bloque}$`),
         { timeout: 15_000 },
       );
       // Aterriza en el bloque que la cita nombra, con su título a la vista.

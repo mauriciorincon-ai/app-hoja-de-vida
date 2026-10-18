@@ -107,9 +107,9 @@ const RUTAS = [
     `/en/vitrina/apps/${s}/simulacion`,
   ]),
   // «Mi método»: la lista y cada infografía (mapa SVG, riel, voces, fuentes).
-  "/es/metodo",
-  "/en/metodo",
-  ...slugsMetodo.flatMap((s) => [`/es/metodo/${s}`, `/en/metodo/${s}`]),
+  "/es/metodos",
+  "/en/metodos",
+  ...slugsMetodo.flatMap((s) => [`/es/metodos/${s}`, `/en/metodos/${s}`]),
   // Cada frente, y cada pieza de los que están abiertos (S7).
   ...frentesYaml.flatMap((f) => [
     `/es/vitrina/${f.id}`,

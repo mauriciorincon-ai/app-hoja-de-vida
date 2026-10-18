@@ -96,8 +96,8 @@ export function rutasDeDatos() {
 
   // «Mi método» (S10): la lista y una página por infografía de `data/metodo/`.
   // La ruta sale del archivo, igual que la página (`generateStaticParams`).
-  rutas.add("/metodo");
-  for (const { slug } of piezasDeMetodo()) rutas.add(`/metodo/${slug}`);
+  rutas.add("/metodos");
+  for (const { slug } of piezasDeMetodo()) rutas.add(`/metodos/${slug}`);
 
   for (const locale of ["es", "en"]) {
     const cv = leerYaml(`data/cv.${locale}.yaml`);
@@ -175,9 +175,9 @@ export function nombresDeDestinos(locale) {
   }
   if (msg.cv?.titulo) nombres.set("/cv", msg.cv.titulo);
   // «Mi método»: la lista se llama como el menú; cada pieza, como su nombre.
-  if (msg.nav?.metodo) nombres.set("/metodo", msg.nav.metodo);
+  if (msg.nav?.metodo) nombres.set("/metodos", msg.nav.metodo);
   for (const p of piezasDeMetodo()) {
-    if (p.nombre?.[locale]) nombres.set(`/metodo/${p.slug}`, p.nombre[locale]);
+    if (p.nombre?.[locale]) nombres.set(`/metodos/${p.slug}`, p.nombre[locale]);
   }
 
   const cv = leerYaml(`data/cv.${locale}.yaml`);
@@ -256,7 +256,7 @@ export function catalogoDeDestinos() {
 }
 
 /**
- * Las anclas de «Mi método»: `/metodo/<slug>#bloque-1…10`. A diferencia del
+ * Las anclas de «Mi método»: `/metodos/<slug>#bloque-1…10`. A diferencia del
  * resto de las rutas —donde se juzga solo la ruta—, aquí el ancla también se
  * valida: una cita a `#bloque-11` o a un bloque que no existe aterrizaría en la
  * cabecera de la página sin avisar, y la promesa de la cita es llevar al
@@ -277,6 +277,6 @@ export function destinoExiste(destino, catalogo = catalogoDeDestinos()) {
   if (destino.startsWith("#")) return catalogo.has(destino);
   if (!destino.startsWith("/")) return false;
   // Una cita a un bloque de una infografía valida el bloque, no solo la página.
-  if (/^\/metodo\/[^#]+#/.test(destino)) return catalogo.has(destino);
+  if (/^\/metodos\/[^#]+#/.test(destino)) return catalogo.has(destino);
   return catalogo.has(destino.split("#")[0]);
 }

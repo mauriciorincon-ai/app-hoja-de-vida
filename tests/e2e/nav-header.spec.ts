@@ -46,10 +46,10 @@ test.describe("Nav móvil (disclosure del header)", () => {
     await expect(
       panel.getByRole("link", { name: "Portafolio", exact: true }),
     ).toHaveAttribute("href", "/es/vitrina");
-    // «Mi método» (S10) también es una RUTA, en el primer nivel del menú móvil.
+    // «Métodos» (S10, antes «Mi método») también es una RUTA, en el primer nivel del menú móvil.
     await expect(
-      panel.getByRole("link", { name: "Mi método", exact: true }),
-    ).toHaveAttribute("href", "/es/metodo");
+      panel.getByRole("link", { name: "Métodos", exact: true }),
+    ).toHaveAttribute("href", "/es/metodos");
     // «Roadmap» ya no es destino de la HOME (vive en /vitrina/apps).
     await expect(panel.getByRole("link", { name: "Roadmap" })).toHaveCount(0);
 
@@ -84,8 +84,8 @@ test.describe("Nav móvil (disclosure del header)", () => {
 
 /** Los destinos del primer nivel, en orden. */
 // TRES desde la revisión post-S7 («Roadmap» se fue con las apps a la vitrina) y
-// CUATRO desde el S10: «Mi método» (`/metodo`) es una sección propia.
-const PRIMER_NIVEL = ["Hoja de vida", "Portafolio", "Mi método", "Contacto"];
+// CUATRO desde el S10: «Métodos» (`/metodos`; «Mi método» hasta el S14) es una sección propia.
+const PRIMER_NIVEL = ["Hoja de vida", "Portafolio", "Métodos", "Contacto"];
 
 test.describe("Desplegable «Hoja de vida» (escritorio)", () => {
   test.use({ viewport: { width: 1280, height: 900 } });

@@ -53,8 +53,9 @@ const HOJA_DE_VIDA = [
  * Destinos que se ganan su sitio en el primer nivel. «Roadmap» ya no está:
  * es una pregunta sobre las apps y vive con ellas, en /vitrina/apps
  * (revisión post-S7). El primer nivel quedaba en TRES: Hoja de vida · Vitrina
- * · Contacto. Con «Mi método» (S10, 2026-10-17) son CUATRO: es la sección propia
- * `/metodo`, la forma en que el dueño enseña cómo trabaja.
+ * · Contacto. Con «Métodos» (S10, 2026-10-17; «Mi método» hasta el S14) son CUATRO:
+ * es la sección propia `/metodos`, las publicaciones sobre cómo se diseñan y se
+ * llevan a producción sistemas de IA, datos y BI.
  */
 const DIRECTAS = ["contacto"] as const;
 
@@ -219,9 +220,9 @@ export function Header({
           <a href={`/${locale}/vitrina`} className={ENLACE}>
             {t("portafolio")}
           </a>
-          {/* «Mi método» (S10) también es RUTA propia (`/metodo`), no ancla de la
+          {/* «Métodos» (S10) también es RUTA propia (`/metodos`), no ancla de la
               HOME: por eso no entra en DIRECTAS, que son secciones de la HOME. */}
-          <a href={`/${locale}/metodo`} className={ENLACE}>
+          <a href={`/${locale}/metodos`} className={ENLACE}>
             {t("metodo")}
           </a>
           {DIRECTAS.map((s) => (
@@ -324,7 +325,7 @@ export function Header({
             </li>
             <li>
               <a
-                href={`/${locale}/metodo`}
+                href={`/${locale}/metodos`}
                 onClick={() => setMenuAbierto(false)}
                 className="flex min-h-11 items-center text-sm text-ink-1 transition-colors duration-[120ms] hover:text-ink-0"
               >
