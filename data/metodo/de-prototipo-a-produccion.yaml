@@ -27,8 +27,8 @@ bloques:
       es: "¿Cómo pasas del prototipo a producción, y cómo lo mantienes sano, barato y seguro?"
       en: "How do you go from a prototype to production, and how do you keep it healthy, cheap and safe?"
     respuesta:
-      - es: "Un prototipo pasa a producción cuando supera condiciones escritas que ya se vieron fallar: pruebas, accesibilidad, rendimiento y secretos, y si hay un modelo, preguntas de prueba que corren en cada cambio como cualquier otra prueba."
-        en: "A prototype goes to production when it passes written conditions that have already been seen failing: tests, accessibility, performance and secrets, and if there is a model, test questions that run on every change like any other test."
+      - es: "Un prototipo pasa a producción cuando supera condiciones escritas que ya se vieron fallar. Los controles que corren antes de que publique son las pruebas unitarias, de integración y de extremo a extremo, la accesibilidad, el rendimiento y el bloqueo de secretos, y si hay un modelo, preguntas de prueba que corren en cada cambio como cualquier otra prueba."
+        en: "A prototype goes to production when it passes written conditions that have already been seen failing. The checks that run before I publish are unit, integration and end-to-end tests, accessibility, performance and the secret blocking, and if there is a model, test questions that run on every change like any other test."
       - es: "Antes de la IA va el código: el modelo entra solo donde una regla no alcanza, detrás de una capa que permite cambiar de proveedor y con una salida más simple, anunciada, para cuando falla."
         en: "Code comes before AI: the model only goes where a rule falls short, behind a layer that lets the provider change and with a simpler, announced way out for when it fails."
       - es: "Publicar es el comienzo de la validación: lo mantengo con metadatos y no con el contenido de quien lo usa, con límites y un techo de costo escritos, y con un resumen de cada ciclo que convierte la falla en regla."
@@ -232,7 +232,7 @@ bloques:
             es: "GitHub activó por defecto la protección contra secretos en los push a repositorios públicos: si detecta uno, bloquea el push hasta que se quite o se decida pasarlo por alto."
             en: "GitHub turned on secret scanning push protection by default for pushes to public repositories: if it detects one, it blocks the push until the secret is removed or the block is deliberately bypassed."
           fuentes: [9]
-      - nombre: { es: "Publicar con una persona en el circuito", en: "Publish with a person in the loop" }
+      - nombre: { es: "Antes de publicar: corren los controles y una persona decide", en: "Before publishing: the checks run and a person decides" }
         entradas:
           - { es: "La vista previa del cambio.", en: "The change’s preview." }
           - { es: "Las conclusiones de cada control requerido.", en: "The conclusions of every required control." }
@@ -398,7 +398,7 @@ bloques:
   # ─── 5 · Lo innovador en 2026 ───────────────────────────────────────────────
   - n: 5
     elementos:
-      - titulo: { es: "Una plataforma que junta evaluar, observar y poner barreras", en: "One platform that brings together evaluating, observing and guarding" }
+      - titulo: { es: "Microsoft Foundry, una plataforma que junta evaluar, observar y poner barreras", en: "Microsoft Foundry, one platform that brings together evaluating, observing and guarding" }
         queCambia:
           es: "Microsoft Foundry reúne agentes, modelos y herramientas en un solo recurso, con trazas, monitoreo y evaluaciones incorporados; sus barreras de seguridad pueden revisar la entrada, la salida y, para agentes y en vista previa, la llamada a una herramienta y su respuesta."
           en: "Microsoft Foundry brings agents, models and tools together in a single resource, with tracing, monitoring and evaluations built in; its guardrails can scan the input, the output and, for agents and in preview, the call to a tool and its response."
@@ -406,8 +406,8 @@ bloques:
         nota:
           voz: hice
           texto:
-            es: "Conecté Microsoft Foundry al chat como uno de sus proveedores, y estudio su temario en la ruta del AI-103, que está en curso."
-            en: "I connected Microsoft Foundry to the chat as one of its providers, and I study its syllabus on the AI-103 path, which is in progress."
+            es: "Mi experiencia con Microsoft Foundry, completa en el bloque 9: lo conecté al chat como uno de sus proveedores, y estudio su temario en la ruta del AI-103, que está en curso."
+            en: "My experience with Microsoft Foundry, set out in full in block 9: I connected it to the chat as one of its providers, and I study its syllabus on the AI-103 path, which is in progress."
           corpus: [rag-y-el-chat, certificaciones]
       - titulo: { es: "Las evaluaciones como una prueba más del pipeline", en: "Evaluations as one more test in the pipeline" }
         queCambia:

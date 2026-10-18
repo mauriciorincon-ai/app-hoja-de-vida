@@ -490,6 +490,17 @@ preguntas:
     espera: [metodo-rag-sin-inventar]
     familia: ia-y-agentes
 
+  # ── mi método (S12): the twins of the three T4 questions; same `espera`, same order
+  - pregunta: "How does Henry take an AI application to production?"
+    espera: [metodo-de-prototipo-a-produccion]
+    familia: ia-y-agentes
+  - pregunta: "What checks run before Henry publishes?"
+    espera: [metodo-de-prototipo-a-produccion]
+    familia: ia-y-agentes
+  - pregunta: "What experience does Henry have with Microsoft Foundry?"
+    espera: [metodo-de-prototipo-a-produccion]
+    familia: ia-y-agentes
+
 ajenas:
   - pregunta: "tell me a joke about cats"
     guardrail: bloquea
