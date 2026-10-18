@@ -35,6 +35,30 @@ for (const idioma of IDIOMAS) {
           `/${idioma}/metodo/${p.slug}`,
         );
     });
+
+    // El Bajo del S10 que la segunda pieza volvió visible (S11): la tarjeta lleva
+    // `h-full` dentro de un `Reveal`, y sin `h-full` también en el `Reveal` la
+    // tarjeta más corta de una fila no llenaba la celda (214 px frente a 243 px).
+    test("a 1280 px las tarjetas de una misma fila miden lo mismo", async ({
+      page,
+    }) => {
+      await page.setViewportSize({ width: 1280, height: 900 });
+      await page.goto(`/${idioma}/metodo`);
+      const cajas = await page.$$eval("a[data-pieza]", (els) =>
+        els.map((e) => {
+          const r = e.getBoundingClientRect();
+          return { top: Math.round(r.top), alto: Math.round(r.height) };
+        }),
+      );
+      const filas = new Map<number, number[]>();
+      for (const c of cajas)
+        filas.set(c.top, [...(filas.get(c.top) ?? []), c.alto]);
+      for (const [top, altos] of filas)
+        expect(
+          new Set(altos).size,
+          `fila en y=${top}: ${altos.join(", ")}`,
+        ).toBe(1);
+    });
   });
 
   for (const pieza of piezas) {
