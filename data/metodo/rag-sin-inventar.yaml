@@ -617,8 +617,8 @@ bloques:
     limites:
       - voz: hice
         texto:
-          es: "La búsqueda vectorial no la he comparado con la léxica sobre este corpus: lo que defiendo es una decisión con su medición del lado léxico, no una experiencia con embeddings."
-          en: "I have not compared vector search with lexical search on this corpus: what I defend is a decision backed by measurement on the lexical side, not an experience with embeddings."
+          es: "Embeddings y base vectorial son, en este chat, una decisión escrita de no usarlos mientras una medición no lo justifique: es un argumento con su medición del lado léxico, no una experiencia con embeddings."
+          en: "Embeddings and a vector database are, in this chat, a written decision not to use them until a measurement justifies it: it is an argument backed by measurement on the lexical side, not an experience with embeddings."
         corpus: [rag-y-el-chat]
       - voz: hice
         texto:
