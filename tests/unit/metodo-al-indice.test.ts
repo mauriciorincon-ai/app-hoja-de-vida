@@ -1,5 +1,11 @@
 // @vitest-environment node
-import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import {
+  mkdirSync,
+  mkdtempSync,
+  readFileSync,
+  rmSync,
+  writeFileSync,
+} from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
@@ -274,12 +280,27 @@ describe("buildChunks mete «Mi método» al índice, con su código y su destin
     c.id.startsWith("metodo-"),
   );
 
-  it("los chunks de la pieza están, con código T2 y el destino con el nombre de la pieza", () => {
-    expect(delMetodo.length).toBeGreaterThanOrEqual(10);
-    for (const c of delMetodo) {
-      expect(c.codigo).toBe("T2");
-      expect(c.destino).toBe("Cómo estructuro un sistema de agentes");
+  it("cada pieza trae sus chunks, con SU código (T1…T9) y su nombre como destino", () => {
+    expect(metodo.piezas.length).toBeGreaterThan(0);
+    for (const { pieza } of metodo.piezas) {
+      const suyos = delMetodo.filter((c: { id: string }) =>
+        c.id.startsWith(`metodo-${pieza.slug}-`),
+      );
+      expect(suyos.length, pieza.slug).toBeGreaterThanOrEqual(10);
+      for (const c of suyos) {
+        expect(c.codigo).toBe(pieza.id);
+        expect(c.destino).toBe(pieza.nombre.es);
+      }
     }
+    // Y ningún chunk del método queda sin pieza que lo reclame.
+    const slugs = metodo.piezas.map(
+      ({ pieza }: { pieza: { slug: string } }) => pieza.slug,
+    );
+    for (const c of delMetodo)
+      expect(
+        slugs.some((s: string) => c.id.startsWith(`metodo-${s}-`)),
+        c.id,
+      ).toBe(true);
   });
 
   it("sin el argumento `metodo`, el índice no los trae (los tests del builder no lo arrastran)", () => {
@@ -295,11 +316,15 @@ describe("buildChunks mete «Mi método» al índice, con su código y su destin
 // ───────────────────────────────────────────────────────────────────────────
 
 describe("ROJO · leerMetodo valida con el esquema antes de armar el índice (S11)", () => {
-  const TEXTO = readFileSync("tests/fixtures/metodo/ejemplo-sintetico.yaml", "utf8");
+  const TEXTO = readFileSync(
+    "tests/fixtures/metodo/ejemplo-sintetico.yaml",
+    "utf8",
+  );
   const APROBADO = "---\nestado: aprobado\n---\n# doc\n";
   const carpetas: string[] = [];
   afterEach(() => {
-    for (const c of carpetas.splice(0)) rmSync(c, { recursive: true, force: true });
+    for (const c of carpetas.splice(0))
+      rmSync(c, { recursive: true, force: true });
   });
 
   /** Una raíz de prueba con la pieza dada y el corpus que ella cita, aprobado en ES y EN. */
@@ -308,15 +333,23 @@ describe("ROJO · leerMetodo valida con el esquema antes de armar el índice (S1
     carpetas.push(r);
     mkdirSync(path.join(r, "data", "metodo"), { recursive: true });
     mkdirSync(path.join(r, "data", "a-fondo"), { recursive: true });
-    writeFileSync(path.join(r, "data", "metodo", "ejemplo-sintetico.yaml"), yaml);
+    writeFileSync(
+      path.join(r, "data", "metodo", "ejemplo-sintetico.yaml"),
+      yaml,
+    );
     for (const slug of ["como-trabajo", "vesting"])
       for (const l of ["es", "en"])
-        writeFileSync(path.join(r, "data", "a-fondo", `${slug}.${l}.md`), APROBADO);
+        writeFileSync(
+          path.join(r, "data", "a-fondo", `${slug}.${l}.md`),
+          APROBADO,
+        );
     return r;
   }
 
   it("la pieza de juguete válida se lee (el control: sin esto, los rojos no prueban nada)", () => {
-    expect(leerMetodo(raiz(TEXTO)).piezas.map((p) => p.pieza.slug)).toEqual(["ejemplo-sintetico"]);
+    expect(leerMetodo(raiz(TEXTO)).piezas.map((p) => p.pieza.slug)).toEqual([
+      "ejemplo-sintetico",
+    ]);
   });
 
   it("un tipo de nodo que no existe rompe nombrando archivo y campo, no con un TypeError", () => {
@@ -345,8 +378,13 @@ describe("ROJO · leerMetodo valida con el esquema antes de armar el índice (S1
 
   it("un documento del corpus en borrador rompe también aquí (el índice no lo citaría)", () => {
     const r = raiz(TEXTO);
-    writeFileSync(path.join(r, "data", "a-fondo", "vesting.es.md"), "---\nestado: borrador\n---\n# doc\n");
-    expect(() => leerMetodo(r)).toThrowError(/«vesting» existe en data\/a-fondo\/ pero no se puede citar/);
+    writeFileSync(
+      path.join(r, "data", "a-fondo", "vesting.es.md"),
+      "---\nestado: borrador\n---\n# doc\n",
+    );
+    expect(() => leerMetodo(r)).toThrowError(
+      /«vesting» existe en data\/a-fondo\/ pero no se puede citar/,
+    );
   });
 });
 
@@ -361,7 +399,9 @@ describe("ROJO · los enlaces de la evidencia llevan a un destino que existe (S1
   };
 
   it("los enlaces reales de data/metodo/ existen en el catálogo de destinos", () => {
-    const problemas = problemasDeEvidencia(metodo.piezas, (d: string) => destinoExiste(d));
+    const problemas = problemasDeEvidencia(metodo.piezas, (d: string) =>
+      destinoExiste(d),
+    );
     expect(problemas, "\n" + problemas.join("\n")).toEqual([]);
   });
 
@@ -377,12 +417,19 @@ describe("ROJO · los enlaces de la evidencia llevan a un destino que existe (S1
   });
 
   it("una evidencia sin enlace es válida (el enlace es opcional)", () => {
-    expect(problemasDeEvidencia(piezas([undefined, undefined]), (d: string) => destinoExiste(d))).toEqual([]);
+    expect(
+      problemasDeEvidencia(piezas([undefined, undefined]), (d: string) =>
+        destinoExiste(d),
+      ),
+    ).toEqual([]);
   });
 
   it("un enlace con ancla se juzga por su ruta (la página es lo que decide)", () => {
     expect(
-      problemasDeEvidencia(piezas(["/proyectos/vesting#cs-impacto"]), (d: string) => destinoExiste(d)),
+      problemasDeEvidencia(
+        piezas(["/proyectos/vesting#cs-impacto"]),
+        (d: string) => destinoExiste(d),
+      ),
     ).toEqual([]);
   });
 });
