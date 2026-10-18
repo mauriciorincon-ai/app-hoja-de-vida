@@ -5,6 +5,7 @@ import { parse } from "yaml";
 import {
   BLOQUES,
   bloqueDe,
+  cifrasDe,
   corpusNombrado,
   parsePieza,
   type PiezaMetodo,
@@ -325,5 +326,100 @@ describe("ROJO · paridad y limpieza del texto", () => {
       expect(m).toMatch(/id:/);
       expect(m).toMatch(/faltan: 7/);
     }
+  });
+});
+
+describe("ROJO · las cifras gemelas: una traducción no cambia un número", () => {
+  it("cifrasDe quita el formato: 99,5 % y 99.5%, 1.405 y 1,405 son la misma cifra", () => {
+    expect(cifrasDe("el 99,5 % de 1.405 obras")).toEqual(
+      cifrasDe("99.5% of 1,405 works"),
+    );
+    expect(cifrasDe("sin cifras")).toEqual([]);
+    // El punto final de una frase no es un separador.
+    expect(cifrasDe("son 27.")).toEqual(["27"]);
+  });
+
+  it("una cifra distinta en inglés rompe nombrando el texto y las dos cifras", () => {
+    const c = con(
+      (x) =>
+        (bloque(x, 7).metricas[1].umbral.en =
+          "Example threshold: fewer than 2 in 10."),
+    );
+    expect(rojo(c)).toThrowError(
+      /bloques\.6\.metricas\.1\.umbral: las cifras de ES y EN no coinciden \(es: 1, 10 · en: 10, 2\)/,
+    );
+  });
+
+  it("una cifra que falta en un idioma rompe", () => {
+    const c = con(
+      (x) =>
+        (bloque(x, 7).metricas[0].umbral.es = "Umbral de ejemplo: el tope."),
+    );
+    expect(rojo(c)).toThrowError(/umbral: las cifras de ES y EN no coinciden/);
+  });
+
+  it("el formato distinto del mismo número NO es un rojo", () => {
+    const c = con((x) => {
+      bloque(x, 7).metricas[0].umbral.es = "Umbral de ejemplo: 99,5 %.";
+      bloque(x, 7).metricas[0].umbral.en = "Example threshold: 99.5%.";
+    });
+    expect(rojo(c)).not.toThrow();
+  });
+});
+
+describe("ROJO · Foundry: la primera mención lleva su nombre completo", () => {
+  /** El ejemplo con una frase de Foundry en la decisión 1 del bloque 4. */
+  const conFoundry = (es: string, en: string) =>
+    con((x) => {
+      bloque(x, 4).decisiones[0].cuandoSi.es = es;
+      bloque(x, 4).decisiones[0].cuandoSi.en = en;
+    });
+
+  it("la primera mención como «Microsoft Foundry» a secas rompe", () => {
+    const c = conFoundry(
+      "Se aloja en Microsoft Foundry.",
+      "It is hosted in Microsoft Foundry.",
+    );
+    expect(rojo(c)).toThrowError(
+      /decisiones\.0\.cuandoSi\.es: la primera mención de Foundry en la pieza lleva su nombre completo, «Microsoft Foundry \(antes Azure AI Foundry\)»/,
+    );
+    expect(rojo(c)).toThrowError(
+      /decisiones\.0\.cuandoSi\.en: .*«Microsoft Foundry \(formerly Azure AI Foundry\)»/,
+    );
+  });
+
+  it("con el nombre completo la primera vez, pasa; y después va «Microsoft Foundry» a secas", () => {
+    const c = con((x) => {
+      bloque(x, 4).decisiones[0].cuandoSi.es =
+        "Se aloja en Microsoft Foundry (antes Azure AI Foundry).";
+      bloque(x, 4).decisiones[0].cuandoSi.en =
+        "It is hosted in Microsoft Foundry (formerly Azure AI Foundry).";
+      bloque(x, 4).decisiones[1].cuandoSi.es = "Y sigue en Microsoft Foundry.";
+      bloque(x, 4).decisiones[1].cuandoSi.en = "And it stays in Microsoft Foundry.";
+    });
+    expect(rojo(c)).not.toThrow();
+  });
+
+  it("una mención suelta ANTES de la que lleva el nombre completo rompe", () => {
+    const c = con((x) => {
+      bloque(x, 3).fases[0].decide.es = "Foundry decide el alojamiento.";
+      bloque(x, 3).fases[0].decide.en = "Foundry decides the hosting.";
+      bloque(x, 4).decisiones[0].cuandoSi.es =
+        "Se aloja en Microsoft Foundry (antes Azure AI Foundry).";
+      bloque(x, 4).decisiones[0].cuandoSi.en =
+        "It is hosted in Microsoft Foundry (formerly Azure AI Foundry).";
+    });
+    expect(rojo(c)).toThrowError(/fases\.0\.decide\.es: la primera mención de Foundry/);
+  });
+
+  it("el título de una fuente que dice Foundry no cuenta: es el título de la fuente", () => {
+    const c = con((x) => {
+      bloque(x, 10).fuentes[0].titulo = "Hosted agents in Microsoft Foundry";
+    });
+    expect(rojo(c)).not.toThrow();
+  });
+
+  it("una pieza que no habla de Foundry no tiene nada que nombrar", () => {
+    expect(rojo(crudo())).not.toThrow();
   });
 });

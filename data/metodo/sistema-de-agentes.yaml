@@ -352,8 +352,8 @@ bloques:
         nota:
           voz: hice
           texto:
-            es: "FORJA, una de mis investigaciones, abre cada actividad del BPMN con entradas, función y salidas y compila el diagrama a una orquestación de agentes: en el paper sellado conservó el 99,5 % de la estructura del BPMN, y el único elemento de 204 que quedó sin trazar estaba fuera del subconjunto especificado."
-            en: "FORJA, one of my research lines, opens up every BPMN activity with inputs, function and outputs and compiles the diagram into an orchestration of agents: in the sealed paper it kept 99.5% of the BPMN structure, and the only element out of 204 left untraced was outside the specified subset."
+            es: "FORJA, una de mis investigaciones, abre cada actividad del BPMN con entradas, función y salidas y compila el diagrama a una orquestación de agentes que conserva la estructura del BPMN: en el paper sellado conservó el 99,5 %, y el único elemento de 204 que quedó sin trazar estaba fuera del subconjunto especificado."
+            en: "FORJA, one of my research lines, opens up every BPMN activity with inputs, function and outputs and compiles the diagram into an orchestration of agents that preserves the BPMN structure: in the sealed paper it preserved 99.5%, and the only element out of 204 left untraced was outside the specified subset."
           corpus: [las-investigaciones]
       - titulo: { es: "Cómo se juzga un resultado", en: "How a result is judged" }
         cuandoSi:
@@ -534,8 +534,8 @@ bloques:
       - nombre: { es: "FORJA: del BPMN a una orquestación de agentes", en: "FORJA: from BPMN to an orchestration of agents" }
         nivel: prototipo
         texto:
-          es: "Un compilador convierte el diagrama en una orquestación donde cada elemento traza a su realización y verificadores de distintas familias vigilan la conformidad; en el paper sellado conservó el 99,5 % de la estructura. El demostrador existe."
-          en: "A compiler turns the diagram into an orchestration where every element traces to its realization and verifiers from different families watch for conformance; in the sealed paper it kept 99.5% of the structure. The demonstrator exists."
+          es: "FORJA es una de mis investigaciones: un compilador que convierte un proceso dibujado en BPMN en una orquestación de agentes. Del BPMN conserva la estructura —cada actividad se abre con entradas, función y salidas, y cada elemento traza a su realización—: en el paper sellado conservó el 99,5 %. Verificadores de distintas familias vigilan la conformidad. El demostrador existe."
+          en: "FORJA is one of my research lines: a compiler that turns a process drawn in BPMN into an orchestration of agents. From the BPMN it preserves the structure —every activity is opened up with inputs, function and outputs, and every element traces to its realization—: in the sealed paper it preserved 99.5%. Verifiers from different families watch for conformance. The demonstrator exists."
         corpus: [las-investigaciones]
         href: /vitrina/investigaciones/forja
       - nombre: { es: "Los agentes de la vitrina, sobre Claude Code", en: "The showcase agents, on Claude Code" }

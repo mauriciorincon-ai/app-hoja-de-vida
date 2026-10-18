@@ -242,6 +242,22 @@ describe("script real contra los data/ reales (integración del build)", () => {
       expect(aFondo.length).toBeGreaterThan(0);
       for (const c of aFondo) expect(c.codigo, c.id).toMatch(/^AF-\d{2}$/);
 
+      // «Mi método» (S10, F3): cada infografía entra por bloques con su código
+      // de tema (T1…T9), su ancla `/metodo/<slug>#bloque-n` y el nombre de la
+      // pieza como destino; los diez bloques están representados.
+      const metodo = index.chunks.filter((c) => c.id.startsWith("metodo-"));
+      expect(metodo.length, "chunks de «Mi método»").toBeGreaterThanOrEqual(10);
+      for (const c of metodo) {
+        expect(c.codigo, c.id).toMatch(/^T[1-9]$/);
+        expect(c.ancla, c.id).toMatch(/^\/metodo\/[a-z0-9-]+#bloque-\d+$/);
+        expect(c.peso, c.id).toBe(0.5);
+      }
+      for (let n = 1; n <= 10; n++)
+        expect(
+          metodo.some((c) => c.ancla.endsWith(`#bloque-${n}`)),
+          `bloque ${n} sin chunk`,
+        ).toBe(true);
+
       // EL DESTINO DE TODA CITA EXISTE. La regla nació de encontrar «#apps»
       // —muerto desde la revisión post-S7— vivo en el índice publicado.
       const catalogo = catalogoDeDestinos();

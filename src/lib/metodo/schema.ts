@@ -42,8 +42,35 @@ const cadena = z
     "un [CONFIRMAR] va en el cierre del sprint, nunca en la pieza",
   );
 
-/** Un texto bilingüe: los dos idiomas redactados, ninguno vacío. */
-const texto = z.object({ es: cadena, en: cadena }).strict();
+/**
+ * Las cifras de un texto, sin su formato: `99,5 %` y `99.5%` son la misma (995),
+ * `1.405` y `1,405` también. Solo cuenta lo que lleva dígitos; una cifra escrita
+ * con letras («once») no se compara, porque el esquema no puede saber que
+ * «eleven» es lo mismo sin un diccionario.
+ */
+export function cifrasDe(s: string): string[] {
+  return (s.match(/\d+(?:[.,]\d+)*/g) ?? [])
+    .map((n) => n.replace(/[.,]/g, ""))
+    .sort();
+}
+
+/**
+ * Un texto bilingüe: los dos idiomas redactados, ninguno vacío, y **las mismas
+ * cifras en los dos** (las cifras gemelas, igual que en el corpus a fondo: una
+ * traducción que cambia un número es otro hecho, no una traducción).
+ */
+const texto = z
+  .object({ es: cadena, en: cadena })
+  .strict()
+  .superRefine((t, ctx) => {
+    const es = cifrasDe(t.es);
+    const en = cifrasDe(t.en);
+    if (es.join(" ") !== en.join(" "))
+      ctx.addIssue({
+        code: "custom",
+        message: `las cifras de ES y EN no coinciden (es: ${es.join(", ") || "ninguna"} · en: ${en.join(", ") || "ninguna"}): una traducción no cambia un número`,
+      });
+  });
 export type Texto = z.infer<typeof texto>;
 
 const slug = z
@@ -361,6 +388,29 @@ function citasDe(bloques: Bloque[]): Cita[] {
   return citas;
 }
 
+/** Cada texto bilingüe de la pieza, en el orden en que se lee, con su ruta. */
+function textosEnOrden(
+  valor: unknown,
+  ruta: (string | number)[] = [],
+  salida: { ruta: (string | number)[]; es: string; en: string }[] = [],
+) {
+  if (Array.isArray(valor)) {
+    valor.forEach((v, i) => textosEnOrden(v, [...ruta, i], salida));
+  } else if (valor && typeof valor === "object") {
+    const o = valor as Record<string, unknown>;
+    if (
+      typeof o.es === "string" &&
+      typeof o.en === "string" &&
+      Object.keys(o).length === 2
+    )
+      salida.push({ ruta, es: o.es, en: o.en });
+    else
+      for (const [k, v] of Object.entries(o))
+        textosEnOrden(v, [...ruta, k], salida);
+  }
+  return salida;
+}
+
 export const piezaSchema = z
   .object({
     /** T1…T9: los nueve temas de la especificación; el orden de la lista es el de su número. */
@@ -391,6 +441,25 @@ export const piezaSchema = z
           `el bloque en la posición ${i + 1} debe ser el ${i + 1} (${BLOQUES[i]?.clave ?? "?"}), no el ${b.n}`,
         );
     });
+
+    // — Foundry: la primera mención, con su nombre completo (regla 5 de la constitución) —
+    // Se lee en orden de bloques; los títulos de las fuentes (bloque 10) no son
+    // texto de la pieza —son los de la fuente— y quedan fuera.
+    const FRASE_FOUNDRY = {
+      es: "Microsoft Foundry (antes Azure AI Foundry)",
+      en: "Microsoft Foundry (formerly Azure AI Foundry)",
+    } as const;
+    const textos = textosEnOrden({ nombre: p.nombre, bloques: p.bloques });
+    for (const idioma of ["es", "en"] as const) {
+      const primero = textos.find((x) => /Foundry/i.test(x[idioma]));
+      if (!primero) continue;
+      const j = primero[idioma].indexOf(FRASE_FOUNDRY[idioma]);
+      if (j === -1 || /Foundry/i.test(primero[idioma].slice(0, j)))
+        agregar(
+          [...primero.ruta, idioma],
+          `la primera mención de Foundry en la pieza lleva su nombre completo, «${FRASE_FOUNDRY[idioma]}»; después, «Microsoft Foundry»`,
+        );
+    }
 
     // — El mapa: nodos numerados 1…n, aristas a nodos que existen, una cosa por celda —
     const iMapa = p.bloques.findIndex((b) => b.n === 2);

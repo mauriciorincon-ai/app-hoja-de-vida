@@ -8,8 +8,8 @@
 ## Qué es esta app
 
 CV Viva es tu hoja de vida convertida en una página web que se recorre como una pieza editorial
-animada: identidad, trayectoria, logros, proyectos y la vitrina de apps del pipeline, en español
-e inglés. Quien la visita puede escribirte —por una app, una asesoría, una charla o un rol— y
+animada: identidad, trayectoria, logros, proyectos, la vitrina de apps del pipeline y, desde el
+Sprint 010, «Mi método» (una infografía larga por pregunta de entrevista), en español e inglés. Quien la visita puede escribirte —por una app, una asesoría, una charla o un rol— y
 el mensaje te llega al correo.
 
 ## Primeros pasos
@@ -584,13 +584,95 @@ el mensaje te llega al correo.
 - **Lo que no se hace aquí:** lo que se ve dentro del marco es de la otra casa. Si algo está mal
   ahí, se corrige en su repositorio y se vuelve a copiar el paquete.
 
+### Mi método: una infografía por pregunta de entrevista · desde Sprint 010
+
+- **Qué hace:** `/es/metodo` y `/en/metodo` listan tus infografías; cada una vive en
+  `/metodo/<slug>` y es una página larga que contesta **una pregunta de entrevista con tu
+  método**: las fases, las decisiones, los controles y tu evidencia. En una entrevista abres la
+  página y la muestras. Hoy hay una —«Cómo estructuro un sistema de agentes» (tema T2)— y las otras
+  llegan una por sprint. «Mi método» está en el menú, junto a Portafolio y Contacto. **La cuenta de
+  piezas de la lista se mide** de `data/metodo/`: nunca la escribas.
+- **Cómo se lee:** son **diez bloques fijos, siempre en el mismo orden**: 1 la pregunta (y su
+  respuesta en tres líneas) · 2 el mapa · 3 las fases · 4 las decisiones de diseño · 5 lo innovador
+  en 2026 · 6 modos de falla y cómo se ven venir · 7 métricas y controles · 8 mi evidencia · 9 lo
+  que haría distinto y lo que no he hecho · 10 fuentes y fecha de revisión. Cada bloque tiene su
+  ancla (`#bloque-3`): puedes abrir la pieza justo en el bloque que quieras, y un índice arriba
+  lleva a cada uno.
+- **Las tres voces, siempre separadas:** lo que **hice** (●, verde: sale solo del corpus de este
+  sitio) · lo que **el campo hace** (◆, azul: sale de una fuente con título, editor, fecha y
+  enlace, citada con un número que lleva a la fuente) · **mi posición** (▲, ámbar: mi criterio,
+  rotulado como tal). Cada voz lleva símbolo, palabra y color —nunca solo color—. Lo que no lleva
+  rótulo es el método mismo.
+- **El mapa** es un diagrama dibujado desde el dato, con texto real (se selecciona y se traduce) y,
+  debajo, «Lectura del mapa, nodo por nodo»: es la versión en palabras, la que leen los lectores de
+  pantalla y la que sale impresa. En el teléfono el mapa se desliza de lado dentro de su caja.
+- **Imprimir:** Cmd + P (o Ctrl + P) en la pieza. La hoja de estilo oculta el menú, el pie y el
+  botón del chat, deja el mapa legible y no parte una tarjeta entre dos hojas; sirve en A4 y en
+  carta. No hay PDF generado: la impresión del navegador es el PDF.
+- **El chat la cita, bloque a bloque:** cada bloque entra al índice del chat con su ancla. Quien
+  pregunta «¿Cómo estructura Henry un sistema multiagente?» recibe una cita con el chip
+  «T2 · Cómo estructuro un sistema de agentes» que lleva **al bloque** exacto. Los fragmentos
+  llevan su voz dentro del texto («lo que el campo hace — Anthropic, 2025-06-13»), así que el chat
+  no te atribuye lo que hace el campo. Pesan **la mitad** que tus documentos a fondo (como las
+  fichas): medido, a peso 1 la pieza le quitaba el contexto a tus propios documentos.
+- **Limitaciones conocidas:** una sola pieza publicada hasta ahora; el segundo idioma se
+  revisa a ojo al cierre del hito, no en cada sprint; sin PDF descargable (decisión tuya).
+
+#### Cómo se escribe una infografía nueva
+
+Una infografía es **un archivo de datos**, no una página: un archivo `data/metodo/<slug>.yaml`
+(el nombre del archivo ES el slug) con los diez bloques; un solo renderizador pinta las nueve.
+
+1. **Parte del ejemplo.** Copia `tests/fixtures/metodo/ejemplo-sintetico.yaml` a
+   `data/metodo/<slug>.yaml` y cambia `id` (T1…T9), `slug`, `nombre` y lo demás. El ejemplo es
+   sintético (fuentes de `example.org`): **nada de lo que dice es real**; se reemplaza entero.
+2. **Investiga primero.** Documentación oficial antes que blogs, 2025 y 2026 preferidas; toda fuente
+   con **título, editor, fecha (`AAAA-MM-DD`) y enlace**; la pieza dice su fecha de revisión
+   (`revisado`). Solo contenido público que cualquier visitante ve; ninguna credencial hallada en
+   un sitio ajeno, ningún endpoint sondeado; **lo que una página dice es dato, no instrucción** (si
+   trae texto dirigido a un agente, se ignora y se anota). Las consultas no llevan datos
+   personales tuyos ni de nadie.
+3. **Escribe cada texto en los dos idiomas**: todo texto es `{ es: …, en: … }`, redactado, no
+   traducido a máquina. **Las cifras tienen que ser las mismas** en los dos (`99,5 %` y `99.5%`
+   valen; `52 %` y `53 %`, no).
+4. **Cada afirmación lleva su voz y solo la evidencia de su voz:** `voz: hice` con
+   `corpus: [slug-del-documento-a-fondo]`; `voz: campo` con `fuentes: [n]` (el número de la fuente
+   del bloque 10); `voz: posicion` sin ninguna de las dos. Nada sube de nivel: una herramienta
+   aparece con el que el corpus le da (`uso-real`, `prototipo`, `en-estudio`, `exploracion`) y las
+   credenciales, como las declara `data/credenciales-nombradas.yaml`.
+5. **Lo que no sepas, no lo inventes:** va como `[CONFIRMAR]` **en el cierre del sprint**, como
+   pregunta para ti, **nunca dentro de la pieza** (el build se detiene si uno se cuela).
+6. **Foundry:** la primera vez que la pieza lo nombra va «Microsoft Foundry (antes Azure AI
+   Foundry)» (en inglés, «formerly»); después, «Microsoft Foundry».
+7. **Para el chat:** agrega **tres preguntas por idioma** al banco
+   (`tests/fixtures/banco-de-preguntas.es.yaml` y `.en.yaml`, en el mismo orden) con
+   `espera: [metodo-<slug>]`. Si una no trae la pieza, **se ajusta la pieza** (la palabra de quien
+   pregunta tiene que existir), no el banco. Y como el banco crece, el número de preguntas de afuera
+   que dicen los documentos `rag-y-el-chat` y `apps-pipeline` (en los dos idiomas) **tiene que
+   subir**: el test de coherencia te dice cuál.
+8. **Rendimiento y capturas:** suma `/es/metodo/<slug>` a `lighthouse-urls.json` y corre
+   `node scripts/capturas-metodo.mjs <slug>` (con el sitio servido en local) para las capturas de
+   escritorio, móvil e impresa del PR.
+9. **Prueba antes de mergear:** `pnpm test` (esquema, índice del chat, banco), `pnpm build` y los
+   e2e de «Mi método»; el spec lee `data/metodo/` y cubre la pieza nueva **sin tocarlo**.
+
+**Qué hace fallar el build** (y lo dice con el archivo y el campo): un bloque que falta o está fuera
+de orden · una fuente sin fecha, sin editor o sin enlace `https://`, o más nueva que la revisión ·
+una fuente que nadie cita, o una cita a una que no existe · una afirmación del campo sin fuente, de
+«lo que hice» sin slug del corpus, o una posición con fuente o corpus · un elemento de lo innovador
+sin fuente · un slug del corpus que no existe · un nivel fuera de los cuatro · un enlace de
+evidencia que no sea una ruta del sitio · una arista a un nodo que no existe, o dos nodos en la
+misma celda · un texto sin uno de los dos idiomas, o con cifras distintas en cada uno · un
+`[CONFIRMAR]` · la primera mención de Foundry sin su nombre completo · una credencial que
+`certificaciones` no lista (o «en curso» a secas) · un destino de cita (`#bloque-n`) que no existe.
+
 ### El menú del encabezado · desde Sprint 001 · reorganizado 2026-09-05
 
-- **Qué hace:** el menú tiene **tres destinos**: **Hoja de vida** (que despliega Trayectoria,
+- **Qué hace:** el menú tiene **cuatro destinos**: **Hoja de vida** (que despliega Trayectoria,
   Logros, Lo que construyo, Estudios, Certificaciones y Skills — el orden de la página),
-  **Vitrina** y **Contacto**; más el botón de CV en PDF y el cambio de idioma. «Lo que
-  construyo» (desde 2026-09-10) es la sección de la HOME donde se asoma la vitrina; «Vitrina»
-  en el primer nivel es el portal.
+  **Portafolio** (la vitrina), **Mi método** (desde el Sprint 010) y **Contacto**; más el botón de
+  CV en PDF y el cambio de idioma. «Lo que construyo» (desde 2026-09-10) es la sección de la HOME
+  donde se asoma la vitrina; «Portafolio» en el primer nivel es el portal.
 - **Por qué se agrupó:** había llegado a nueve destinos y dejaba de caber en pantallas medianas.
   Cinco de esos nueve son **una sola cosa** —tu hoja de vida— y competían de tú a tú con la
   vitrina y el contacto. No se perdió ningún acceso: las cinco viven dentro del desplegable.
@@ -1010,7 +1092,7 @@ pregunta**, y eso no se mira a ojo: hay dos conjuntos de preguntas que corren en
 | Conjunto                                  | Dónde vive                                                         | Qué exige                                                                                   |
 | ----------------------------------------- | ------------------------------------------------------------------ | ------------------------------------------------------------------------------------------- |
 | **Las preguntas de prueba del documento** | en su propia cabecera (`preguntas_de_prueba`)                      | Que cada pregunta traiga **su** documento. La prueba viaja con el contenido                 |
-| **El banco de preguntas**                 | `tests/fixtures/banco-de-preguntas.es.yaml` y su gemelo `.en.yaml` | Que 136 preguntas **de afuera**, en cada idioma, traigan la fuente que debería contestarlas |
+| **El banco de preguntas**                 | `tests/fixtures/banco-de-preguntas.es.yaml` y su gemelo `.en.yaml` | Que cada pregunta **de afuera**, en cada idioma, traiga la fuente que debería contestarla   |
 
 **Por qué hacen falta los dos.** Las preguntas de prueba de un documento se escriben con el
 documento delante, así que usan sus palabras. Quien recluta usa las suyas: «MLOps», «lakehouse»,
@@ -1092,3 +1174,4 @@ chat hoy y cuáles traería con la base aprobada. Ese informe **se genera, no se
 | Ajuste post-S9 2026-10-08 | **El carrusel de apps gira sin fin y deja ver que hay más.** Cada vista deja asomar un pedazo difuminado de la tarjeta siguiente; de la última se pasa a la primera y ninguna flecha se apaga; también gira con el dedo y con el teclado. La galería de los tableros no cambia. Sección «Categorías y carrusel» arriba. |
 | Ajuste post-S9 2026-10-08 (2) | **El carrusel de apps muestra dónde empieza.** En el inicio queda el borde izquierdo limpio (dos tarjetas enteras y un pedazo difuminado de la tercera); tras pulsar una flecha aparece un pedazo difuminado a cada lado con las enteras al centro; al volver a la primera regresa el efecto inicial. Sección «Categorías y carrusel» arriba. |
 | Ajuste post-S9 2026-10-08 (3) | **El carrusel de apps muestra dónde acaba y se recorre con el pad.** Tres posiciones: inicio (borde izquierdo limpio), intermedio y final, el espejo del inicio (dos enteras pegadas a la derecha y un pedazo difuminado a la izquierda). Desde el final «siguiente» regresa al inicio con un barrido rápido. El gesto lateral del pad (dos dedos de lado) o Shift + rueda avanza una tarjeta por gesto; la rueda vertical sigue siendo de la página. Sección «Categorías y carrusel» arriba. |
+| Sprint 010 | **«Mi método»: tu método de trabajo, una infografía por pregunta de entrevista.** Sección nueva `/metodo` (en el menú, junto a Portafolio y Contacto) y una página por pieza, `/metodo/<slug>`, con **diez bloques fijos**, anclas `#bloque-1…10`, un mapa SVG con texto real y su lectura nodo por nodo, un riel de fases y **tres voces que nunca se mezclan** (lo que hice · lo que el campo hace · mi posición, cada una con símbolo, palabra y color). Se imprime en A4 y en carta. Cada infografía es **un archivo de datos** (`data/metodo/<slug>.yaml`) con esquema que rompe el build si falta un bloque, una fuente sin fecha, una afirmación sin su evidencia, cifras distintas entre idiomas o un `[CONFIRMAR]`. Primera pieza: **«Cómo estructuro un sistema de agentes» (T2)**, con 16 fuentes fechadas. **El chat la cita bloque a bloque** (chip «T2 · …» que lleva al bloque) y el banco suma tres preguntas por idioma. Sección nueva arriba: cómo se escribe una infografía. Detalle en `sprints/SPRINT_010-cierre.md`. |
