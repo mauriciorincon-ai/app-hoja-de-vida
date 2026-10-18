@@ -1,0 +1,707 @@
+# «MI MÉTODO» · T2 — Cómo estructuro un sistema de agentes (S10, 2026-10-17).
+#
+# Tres voces, separadas por el esquema (src/lib/metodo/schema.ts):
+#   · voz: hice      → solo lo que dice el corpus del sitio; `corpus:` nombra el documento de data/a-fondo/.
+#   · voz: campo     → lo que el campo hace en 2025–2026; `fuentes:` numera la fuente del bloque 10.
+#   · voz: posicion  → mi criterio, rotulado como tal; sin fuente ni corpus.
+# Lo que va sin voz (bloques 1, 2, 6, 7 y la base de las fases) es el método mismo: mi posición sobre cómo se hace.
+#
+# Investigación del 2026-10-17: documentación oficial primero, solo contenido público servido al navegador, sin
+# credenciales ajenas ni endpoints de terceros. Dos páginas leídas traían texto dirigido a agentes («fetch the
+# documentation index…», en la documentación de LangGraph y en la del protocolo MCP): se ignoró y queda anotado en el
+# cierre del sprint. Ningún nivel sube: Microsoft Agent Framework y Claude Agent SDK son experimentación y prototipos;
+# «producción» es solo Vesting; las cifras de ARKHÉ son «en mis mediciones», sin artefacto publicado.
+
+id: T2
+slug: sistema-de-agentes
+nombre:
+  es: "Cómo estructuro un sistema de agentes"
+  en: "How I structure an agent system"
+bloques:
+  # ─── 1 · La pregunta ────────────────────────────────────────────────────────
+  - n: 1
+    pregunta:
+      es: "¿Cómo diseñas un sistema multiagente que funcione en producción, y cómo sabes que funciona?"
+      en: "How do you design a multi-agent system that works in production, and how do you know it works?"
+    respuesta:
+      - es: "Estructuro un sistema multiagente desde el proceso y no desde el framework: cada actividad se especifica con entradas, función, salidas y excepciones, y solo se vuelve agente la que necesita interpretar; lo demás es código."
+        en: "I structure a multi-agent system from the process, not from the framework: every activity is specified with inputs, function, outputs and exceptions, and only the one that needs to interpret becomes an agent; the rest is code."
+      - es: "Reparto el trabajo entre especialistas con su propio contexto, guardo el estado en cada paso y doy una autonomía proporcional al riesgo: lo que no se puede deshacer lo aprueba una persona."
+        en: "I split the work among specialists with their own context, save the state at every step and grant autonomy in proportion to risk: whatever cannot be undone is approved by a person."
+      - es: "Sé que funciona porque lo evalúo antes de ponerlo en producción y después: criterios que pasan o no pasan, un caso roto a propósito para cada control y la sesión entera observada en cuatro dimensiones."
+        en: "I know it works because I evaluate it before putting it into production and afterwards: criteria that pass or fail, a case broken on purpose for every control, and the whole session observed across four dimensions."
+
+  # ─── 2 · El mapa ────────────────────────────────────────────────────────────
+  - n: 2
+    titulo:
+      es: "El sistema de un vistazo: de la solicitud a la persona que aprueba"
+      en: "The system at a glance: from the request to the person who approves"
+    resumen:
+      es: "Una solicitud llega al orquestador, que sigue el grafo fijado por el contrato del proceso y delega en dos especialistas, cada uno con su propio contexto. Uno de ellos usa herramientas conectadas por MCP, con permisos mínimos. Los dos escriben en un estado que se guarda paso a paso; validadores de código lo revisan, y lo que no se puede deshacer pasa a una persona que aprueba. Cada paso deja rastro en las trazas de la sesión, que se evalúan y le informan a esa misma persona."
+      en: "A request reaches the orchestrator, which follows the graph set by the process contract and delegates to two specialists, each with its own context. One of them uses tools connected over MCP, with minimal permissions. Both write to a state that is saved step by step; code validators check it, and whatever cannot be undone goes to a person who approves. Every step leaves a record in the session traces, which are evaluated and reported to that same person."
+    nodos:
+      - n: 1
+        etiqueta: { es: "Solicitud", en: "Request" }
+        tipo: externo
+        col: 0
+        fila: 1
+        detalle:
+          es: "Lo que llega de afuera: una pregunta, un caso, un documento por procesar."
+          en: "What arrives from outside: a question, a case, a document to process."
+      - n: 2
+        etiqueta: { es: "Contrato del proceso", en: "Process contract" }
+        tipo: dato
+        col: 1
+        fila: 0
+        detalle:
+          es: "El proceso dibujado en BPMN con cada actividad abierta: qué recibe, qué hace, qué entrega y cuándo se detiene. De aquí salen el grafo y los criterios."
+          en: "The process drawn in BPMN with every activity opened up: what it receives, what it does, what it delivers and when it stops. The graph and the criteria come from here."
+      - n: 3
+        etiqueta: { es: "Orquestador", en: "Orchestrator" }
+        tipo: actor
+        col: 1
+        fila: 1
+        detalle:
+          es: "Sigue el grafo, reparte el trabajo y junta los resultados; no hace el trabajo de los especialistas."
+          en: "Follows the graph, hands out the work and gathers the results; it does not do the specialists’ work."
+      - n: 4
+        etiqueta: { es: "Especialista A", en: "Specialist A" }
+        tipo: actor
+        col: 2
+        fila: 0
+        detalle:
+          es: "Trabaja dentro de su harness —el envoltorio que le fija función, fuentes, herramientas y contrato de entrada y salida— y recibe solo el contexto que su tarea necesita."
+          en: "Works inside its harness —the wrapper that sets its function, sources, tools and input and output contract— and receives only the context its task needs."
+      - n: 5
+        etiqueta: { es: "Especialista B", en: "Specialist B" }
+        tipo: actor
+        col: 2
+        fila: 2
+        detalle:
+          es: "Otro especialista con su propio harness; este además usa herramientas externas."
+          en: "Another specialist with its own harness; this one also uses external tools."
+      - n: 6
+        etiqueta: { es: "Herramientas por MCP", en: "Tools over MCP" }
+        tipo: externo
+        col: 2
+        fila: 3
+        detalle:
+          es: "Fuentes y acciones conectadas por un protocolo común (MCP), habilitadas solo si la tarea las necesita y con los permisos mínimos."
+          en: "Sources and actions connected through a shared protocol (MCP), enabled only if the task needs them and with minimal permissions."
+      - n: 7
+        etiqueta: { es: "Estado guardado", en: "Saved state" }
+        tipo: dato
+        col: 3
+        fila: 1
+        detalle:
+          es: "Cada paso se guarda: el trabajo se retoma tras una falla o una pausa. La memoria larga guarda decisiones y lecciones, no conversaciones enteras."
+          en: "Every step is saved: work resumes after a failure or a pause. Long-term memory keeps decisions and lessons, not whole conversations."
+      - n: 8
+        etiqueta: { es: "Validadores de código", en: "Code validators" }
+        tipo: control
+        col: 4
+        fila: 1
+        detalle:
+          es: "Lo que exige exactitud lo comprueba código: un esquema, un cálculo, una cita que debe existir. El modelo no se califica a sí mismo."
+          en: "Whatever demands exactness is checked by code: a schema, a calculation, a citation that must exist. The model does not grade itself."
+      - n: 9
+        etiqueta: { es: "Persona que aprueba", en: "Person who approves" }
+        tipo: humano
+        col: 4
+        fila: 2
+        detalle:
+          es: "Aprueba con una palabra exacta lo que no se puede deshacer; sin esa palabra, el sistema no sigue."
+          en: "Approves, with an exact word, whatever cannot be undone; without that word, the system does not continue."
+      - n: 10
+        etiqueta: { es: "Trazas de la sesión", en: "Session traces" }
+        tipo: dato
+        col: 3
+        fila: 3
+        detalle:
+          es: "La sesión completa: qué se pidió, con qué contexto, qué respondió cada especialista, cuánto tardó, cuánto costó y en qué estado terminó."
+          en: "The whole session: what was asked, with which context, what each specialist answered, how long it took, what it cost and how it ended."
+      - n: 11
+        etiqueta: { es: "Evaluación", en: "Evaluation" }
+        tipo: control
+        col: 4
+        fila: 3
+        detalle:
+          es: "Criterios binarios y casos rotos a propósito antes de publicar; después, la conversación entera y el camino paso a paso."
+          en: "Binary criteria and cases broken on purpose before release; afterwards, the whole conversation and the path step by step."
+    aristas:
+      - { de: 1, a: 3 }
+      - { de: 2, a: 3, etiqueta: { es: "fija el grafo", en: "sets the graph" } }
+      - { de: 3, a: 4, etiqueta: { es: "delega", en: "delegates" } }
+      - { de: 3, a: 5, etiqueta: { es: "delega", en: "delegates" } }
+      - { de: 5, a: 6, etiqueta: { es: "usa", en: "uses" } }
+      - { de: 4, a: 7, etiqueta: { es: "escribe", en: "writes" } }
+      - { de: 5, a: 7, etiqueta: { es: "escribe", en: "writes" } }
+      - { de: 7, a: 8, etiqueta: { es: "revisa", en: "checks" } }
+      - { de: 8, a: 9, etiqueta: { es: "lo irreversible", en: "the irreversible" } }
+      - { de: 7, a: 10, etiqueta: { es: "deja rastro", en: "leaves a record" } }
+      - { de: 10, a: 11, etiqueta: { es: "se evalúa", en: "evaluated" } }
+      - { de: 11, a: 9, etiqueta: { es: "informa", en: "reports" } }
+
+  # ─── 3 · Las fases ──────────────────────────────────────────────────────────
+  - n: 3
+    fases:
+      - nombre: { es: "Especificar el proceso", en: "Specify the process" }
+        entradas:
+          - { es: "El proceso del negocio, dibujado en BPMN.", en: "The business process, drawn in BPMN." }
+          - { es: "La decisión o la acción que el sistema debe habilitar.", en: "The decision or action the system must enable." }
+        actividades:
+          - es: "Abrir cada actividad: entradas, función, salidas, fuentes, herramientas y cuándo detenerse."
+            en: "Open up every activity: inputs, function, outputs, sources, tools and when to stop."
+          - es: "Escribir las excepciones: falta información, hay contradicción, una herramienta no responde."
+            en: "Write down the exceptions: missing information, a contradiction, a tool that does not respond."
+          - es: "Separar lo que necesita interpretar (agente) de lo que exige exactitud (código)."
+            en: "Separate what needs interpretation (agent) from what demands exactness (code)."
+        artefactos:
+          - { es: "El contrato de cada actividad.", en: "The contract of each activity." }
+          - { es: "La lista de excepciones con su respuesta.", en: "The list of exceptions, each with its response." }
+        decide: { es: "El responsable del proceso, con quien construye.", en: "The process owner, together with whoever builds." }
+        control: { es: "Cada actividad traza a un elemento del proceso; ninguna queda sin dueño.", en: "Every activity traces back to an element of the process; none is left without an owner." }
+        nota:
+          voz: hice
+          texto:
+            es: "En Vesting esta descomposición —entradas, reglas, fuentes, herramientas, salidas y cuándo pedir a una persona— fue la antesala del proceso core de once etapas con el que se construyeron 27 agentes."
+            en: "At Vesting, this breakdown —inputs, rules, sources, tools, outputs and when to call in a person— came before the eleven-stage core process that 27 agents were built with."
+          corpus: [vesting]
+      - nombre: { es: "Repartir y fijar la autonomía", en: "Split the work and set the autonomy" }
+        entradas:
+          - { es: "El contrato de cada actividad.", en: "The contract of each activity." }
+        actividades:
+          - es: "Decidir si basta un agente o hace falta un grafo de especialistas."
+            en: "Decide whether one agent is enough or a graph of specialists is needed."
+          - es: "Asignar a cada actividad un nivel: consultar, recomendar o ejecutar."
+            en: "Give each activity a level: consult, recommend or execute."
+          - es: "Dar a cada especialista solo las fuentes y las herramientas que su tarea necesita."
+            en: "Give each specialist only the sources and tools its task needs."
+        artefactos:
+          - { es: "El grafo: quién hace qué y qué pasa entre ellos.", en: "The graph: who does what and what passes between them." }
+          - { es: "El nivel de autonomía escrito por actividad.", en: "The autonomy level, written down per activity." }
+        decide: { es: "El responsable del proceso; lo irreversible queda en una persona.", en: "The process owner; whatever is irreversible stays with a person." }
+        control: { es: "Ninguna acción irreversible sin un punto de aprobación humana en el grafo.", en: "No irreversible action without a human approval point in the graph." }
+        nota:
+          voz: hice
+          texto:
+            es: "En Vesting los tres niveles —consultar, recomendar, ejecutar— se decidían caso por caso y quedaban escritos antes de construir."
+            en: "At Vesting the three levels —consult, recommend, execute— were decided case by case and written down before building."
+          corpus: [vesting]
+      - nombre: { es: "Construir con contratos", en: "Build with contracts" }
+        entradas:
+          - { es: "El grafo y los niveles de autonomía.", en: "The graph and the autonomy levels." }
+        actividades:
+          - es: "Escribir la constitución de cada agente: sus leyes, sus comandos y sus fuentes."
+            en: "Write each agent’s constitution: its laws, its commands and its sources."
+          - es: "Escribir criterios de aceptación que pasan o no pasan, sin juicio intermedio."
+            en: "Write acceptance criteria that pass or fail, with no judgment in between."
+          - es: "Preparar, para cada control, un caso roto a propósito que demuestre que dispara."
+            en: "Prepare, for every control, a case broken on purpose that proves it fires."
+          - es: "Resolver con código lo que exige exactitud: cálculos, formatos, consultas."
+            en: "Solve with code whatever demands exactness: calculations, formats, queries."
+        artefactos:
+          - { es: "El harness de cada especialista.", en: "Each specialist’s harness." }
+          - { es: "Los criterios binarios y su carnada, el caso roto de cada control.", en: "The binary criteria and their bait, the broken case for each control." }
+        decide: { es: "Quien construye, dentro del contrato.", en: "Whoever builds, within the contract." }
+        control: { es: "Cada control se ve fallar con su caso roto antes de darse por bueno.", en: "Every control is seen failing on its broken case before it is accepted." }
+        nota:
+          voz: hice
+          texto:
+            es: "Así nacen los trece agentes de mi vitrina que corren sobre Claude Code: una constitución en un CLAUDE.md, el harness con sus criterios binarios —20 en el Constructor de Tableros Power BI, 44 en el Harness Paper Computacional— y una carnada por control."
+            en: "That is how the thirteen agents in my showcase that run on Claude Code are born: a constitution in a CLAUDE.md, the harness with its binary criteria —20 in the Power BI Dashboard Builder, 44 in the Computational Paper Harness— and a bait case for each control."
+          corpus: [los-agentes-de-la-vitrina]
+      - nombre: { es: "Evaluar antes de ponerlo en producción", en: "Evaluate before putting it into production" }
+        entradas:
+          - { es: "El agente construido y sus criterios.", en: "The built agent and its criteria." }
+          - { es: "Escenarios habituales, excepciones conocidas y condiciones límite.", en: "Usual scenarios, known exceptions and edge conditions." }
+        actividades:
+          - es: "Correr la batería de escenarios contra los criterios."
+            en: "Run the scenario battery against the criteria."
+          - es: "Comparar contra una línea base declarada, con la misma muestra y la misma métrica."
+            en: "Compare against a declared baseline, with the same sample and the same metric."
+          - es: "Comprobar que el agente se abstiene o pasa el caso cuando la evidencia no alcanza."
+            en: "Check that the agent abstains or hands the case over when the evidence falls short."
+          - es: "Probar las transiciones entre especialistas, no solo a cada uno por separado."
+            en: "Test the handoffs between specialists, not just each one on its own."
+        artefactos:
+          - { es: "El informe de criterios: cuáles pasan y cuáles no.", en: "The criteria report: which pass and which do not." }
+          - { es: "La comparación con la línea base: muestra, métrica y resultado.", en: "The comparison with the baseline: sample, metric and result." }
+        decide: { es: "Quien responde por el resultado, con la definición de terminado acordada al inicio.", en: "Whoever answers for the result, with the definition of done agreed at the start." }
+        control: { es: "Se juzga lo que se escribió, no si el agente «se ve bien».", en: "What was written down is judged, not whether the agent “looks good”." }
+        nota:
+          voz: hice
+          texto:
+            es: "Con ARKHÉ comparé 120 escenarios contra un agente generalista que recibía todo en cada ejecución: en mis mediciones, 52 % menos tokens y el cumplimiento de instrucciones del 71 % al 93 %, sin un artefacto publicado."
+            en: "With ARKHÉ I compared 120 scenarios against a generalist agent that received everything on every run: in my own measurements, 52% fewer tokens and instruction compliance from 71% to 93%, with no published artifact."
+          corpus: [agentes-en-produccion]
+      - nombre: { es: "Operar y aprender", en: "Operate and learn" }
+        entradas:
+          - { es: "El agente publicado.", en: "The released agent." }
+          - { es: "Los eventos de cada sesión.", en: "The events of every session." }
+        actividades:
+          - es: "Reconstruir la sesión completa: solicitud, contexto, respuesta, tiempo, costo y estado final."
+            en: "Rebuild the whole session: request, context, response, time, cost and final state."
+          - es: "Mirar cuatro dimensiones a la vez: operativa, de uso, económica y funcional."
+            en: "Look at four dimensions at once: operational, usage, economic and functional."
+          - es: "Convertir cada falla en un caso nuevo de la batería."
+            en: "Turn every failure into a new case in the battery."
+        artefactos:
+          - { es: "Tableros de operación por agente.", en: "Operations dashboards per agent." }
+          - { es: "Casos nuevos para la siguiente evaluación.", en: "New cases for the next evaluation." }
+        decide: { es: "Producto y operación, con el tablero delante.", en: "Product and operations, with the dashboard in front of them." }
+        control: { es: "Una señal avisa antes de que el usuario lo note.", en: "A signal warns before the user notices." }
+        nota:
+          voz: hice
+          texto:
+            es: "En Vesting la plataforma llegó a vigilar hasta 23 agentes a la vez, en tiempo real, con la sesión como unidad de análisis y esas cuatro dimensiones."
+            en: "At Vesting the platform came to watch up to 23 agents at once, in real time, with the session as the unit of analysis and those four dimensions."
+          corpus: [vesting]
+
+  # ─── 4 · Las decisiones de diseño ───────────────────────────────────────────
+  - n: 4
+    decisiones:
+      - titulo: { es: "Un agente o un grafo de especialistas", en: "One agent or a graph of specialists" }
+        cuandoSi:
+          es: "Cuando las tareas necesitan contextos, fuentes o herramientas distintas, o se pueden hacer en paralelo."
+          en: "When the tasks need different contexts, sources or tools, or can run in parallel."
+        cuandoNo:
+          es: "Cuando todos los pasos comparten el mismo contexto o dependen mucho unos de otros: ahí repartir solo suma costo."
+          en: "When every step shares the same context or depends heavily on the others: there, splitting only adds cost."
+        porQue:
+          voz: campo
+          texto:
+            es: "Según Anthropic, un sistema multiagente gasta unas quince veces los tokens de una conversación, y los dominios donde todos los agentes comparten el mismo contexto o dependen mucho entre sí hoy no le sientan bien."
+            en: "According to Anthropic, a multi-agent system spends about fifteen times the tokens of a chat, and domains where all agents share the same context or depend heavily on one another are not a good fit today."
+          fuentes: [1]
+        nota:
+          voz: hice
+          texto:
+            es: "ARKHÉ evita al agente generalista que recibe todo el conocimiento, todas las herramientas y todas las responsabilidades: reparte el trabajo entre capacidades especializadas con reglas explícitas de coordinación."
+            en: "ARKHÉ avoids the generalist agent that receives all the knowledge, all the tools and all the responsibilities: it splits the work among specialized capabilities with explicit coordination rules."
+          corpus: [agentes-en-produccion]
+      - titulo: { es: "Qué es agente y qué es código", en: "What is an agent and what is code" }
+        cuandoSi:
+          es: "Agente, cuando la tarea necesita interpretar, sintetizar o coordinar de forma flexible."
+          en: "An agent, when the task needs to interpret, synthesize or coordinate flexibly."
+        cuandoNo:
+          es: "Cuando la tarea exige exactitud, repetibilidad o una validación inequívoca: un cálculo, un formato, una consulta."
+          en: "When the task demands exactness, repeatability or an unambiguous check: a calculation, a format, a query."
+        porQue:
+          voz: campo
+          texto:
+            es: "Microsoft lo deja escrito en la documentación de su Agent Framework: si puedes escribir una función que resuelva la tarea, hazlo en vez de usar un agente."
+            en: "Microsoft puts it in writing in its Agent Framework documentation: if you can write a function to handle the task, do that instead of using an agent."
+          fuentes: [2]
+        nota:
+          voz: hice
+          texto:
+            es: "En el Experto Fiscal la aritmética corre en Python con Decimal y el modelo no toca una cifra; en el Constructor de Tableros Power BI cada medida DAX se prueba con una consulta antes de pasar de fase."
+            en: "In the Tax Expert, the arithmetic runs in Python with Decimal and the model never touches a figure; in the Power BI Dashboard Builder, every DAX measure is tested with a query before moving to the next phase."
+          corpus: [agentes-en-produccion]
+      - titulo: { es: "Dónde vive el estado", en: "Where the state lives" }
+        cuandoSi:
+          es: "Estado guardado, cuando el trabajo dura más que una conversación, puede fallar a mitad de camino o debe esperar a una persona."
+          en: "Saved state, when the work outlasts a conversation, can fail halfway, or has to wait for a person."
+        cuandoNo:
+          es: "Cuando todo termina en una sola pasada y repetirla cuesta menos que guardarla."
+          en: "When everything finishes in a single pass and rerunning it costs less than saving it."
+        porQue:
+          voz: campo
+          texto:
+            es: "LangGraph 1.0 guarda el estado de la ejecución automáticamente y permite pausar para que una persona revise, modifique o apruebe, y retomar desde ahí."
+            en: "LangGraph 1.0 persists execution state automatically and lets a run pause so a person can review, modify or approve, then resume from there."
+          fuentes: [3]
+        nota:
+          voz: hice
+          texto:
+            es: "En ARKHÉ la memoria se diseña por función: decisiones que persisten, resultados reutilizables, contexto temporal y detalle que se descarta; en los agentes publicados toma forma de bitácora, lecciones de cada corrida y decisiones de arquitectura registradas."
+            en: "In ARKHÉ memory is designed by function: decisions that persist, reusable results, temporary context and detail that is discarded; in the published agents it takes the form of a log, lessons from each run and recorded architecture decisions."
+          corpus: [agentes-en-produccion]
+      - titulo: { es: "Cuánta autonomía, y dónde se detiene ante una persona", en: "How much autonomy, and where it stops for a person" }
+        cuandoSi:
+          es: "Que ejecute solo, cuando la acción es reversible, verificable y de bajo impacto."
+          en: "Let it act alone when the action is reversible, verifiable and low-impact."
+        cuandoNo:
+          es: "Cuando la consecuencia es significativa, difícil de revertir o poco observable: ahí el agente recomienda y una persona decide."
+          en: "When the consequence is significant, hard to reverse or hard to observe: there the agent recommends and a person decides."
+        porQue:
+          voz: campo
+          texto:
+            es: "OWASP llama agencia excesiva a darle a un agente más funciones, permisos o autonomía de los necesarios, y recomienda la aprobación humana de las acciones de alto impacto y la autorización en el sistema de destino, no en el criterio del modelo."
+            en: "OWASP calls it excessive agency when an agent gets more functions, permissions or autonomy than it needs, and recommends human approval for high-impact actions and authorization enforced in the downstream system, not left to the model’s judgment."
+          fuentes: [4]
+        nota:
+          voz: hice
+          texto:
+            es: "En mis agentes el punto de aprobación es mecánica, no un recordatorio: el agente se detiene hasta que la persona escribe una palabra literal. El Constructor de Tableros Power BI tiene 5 de esos gates."
+            en: "In my agents the approval point is mechanics, not a reminder: the agent stops until the person types a literal word. The Power BI Dashboard Builder has 5 of those gates."
+          corpus: [los-agentes-de-la-vitrina]
+      - titulo: { es: "Del BPMN a la orquestación", en: "From BPMN to orchestration" }
+        cuandoSi:
+          es: "Cuando el proceso ya existe y está aprobado: el diagrama es la mejor especificación inicial del grafo."
+          en: "When the process already exists and is approved: the diagram is the best starting specification for the graph."
+        cuandoNo:
+          es: "Cuando la tarea es abierta y no tiene pasos definidos: un diagrama inventado solo da falsa precisión."
+          en: "When the task is open-ended and has no defined steps: an invented diagram only gives false precision."
+        porQue:
+          voz: posicion
+          texto:
+            es: "Un diagrama muestra la secuencia, pero no lo que cada actividad recibe, transforma y entrega. Si el proceso está aprobado, lo que corre debe trazar a él caja por caja; si no, lo aprobado y lo que corre se separan sin que nadie lo vea."
+            en: "A diagram shows the sequence, but not what each activity receives, transforms and delivers. If the process is approved, what runs must trace back to it box by box; otherwise, what was approved and what runs drift apart without anyone noticing."
+        nota:
+          voz: hice
+          texto:
+            es: "FORJA, una de mis investigaciones, abre cada actividad del BPMN con entradas, función y salidas y compila el diagrama a una orquestación de agentes que conserva la estructura del BPMN: en el paper sellado conservó el 99,5 %, y el único elemento de 204 que quedó sin trazar estaba fuera del subconjunto especificado."
+            en: "FORJA, one of my research lines, opens up every BPMN activity with inputs, function and outputs and compiles the diagram into an orchestration of agents that preserves the BPMN structure: in the sealed paper it preserved 99.5%, and the only element out of 204 left untraced was outside the specified subset."
+          corpus: [las-investigaciones]
+      - titulo: { es: "Cómo se juzga un resultado", en: "How a result is judged" }
+        cuandoSi:
+          es: "Criterio binario, cuando el resultado se puede comprobar: un formato, una fuente citada, una herramienta bien elegida, una abstención correcta."
+          en: "A binary criterion, when the result can be checked: a format, a cited source, a well-chosen tool, a correct abstention."
+        cuandoNo:
+          es: "Cuando el criterio es difuso: ahí ayuda un modelo como juez, calibrado contra el juicio de una persona y nunca como único control."
+          en: "When the criterion is fuzzy: there a model acting as judge helps, calibrated against a person’s judgment and never as the only control."
+        porQue:
+          voz: campo
+          texto:
+            es: "Anthropic describe tres formas de que un agente verifique su trabajo —reglas, retroalimentación visual y un modelo como juez— y advierte que el juez, en general, no es un método muy robusto."
+            en: "Anthropic describes three ways for an agent to verify its work —rules, visual feedback and a model acting as judge— and warns that the judge is generally not a very robust method."
+          fuentes: [5]
+        nota:
+          voz: posicion
+          texto:
+            es: "Prefiero un criterio que pasa o no pasa a una nota de 1 a 5: la nota se discute, el criterio se cumple o no."
+            en: "I prefer a criterion that passes or fails to a score from 1 to 5: a score gets argued over; a criterion is either met or not."
+      - titulo: { es: "Qué modelo para cada paso", en: "Which model for each step" }
+        cuandoSi:
+          es: "Un modelo grande, para el paso que coordina, planea o razona sobre mucha información."
+          en: "A large model, for the step that coordinates, plans or reasons over a lot of information."
+        cuandoNo:
+          es: "Para los pasos acotados y repetitivos: ahí un modelo pequeño basta y cuesta menos."
+          en: "For bounded, repetitive steps: there a small model is enough and costs less."
+        porQue:
+          voz: campo
+          texto:
+            es: "El enrutador de modelos de Microsoft Foundry (antes Azure AI Foundry) usa modelos más pequeños y baratos cuando bastan y reserva los grandes para lo complejo; el sistema de investigación de Anthropic dirige con un modelo mayor y delega en subagentes de un modelo menor."
+            en: "The model router in Microsoft Foundry (formerly Azure AI Foundry) uses smaller, cheaper models when they are enough and keeps the larger ones for complex work; Anthropic’s research system leads with a larger model and delegates to subagents running a smaller one."
+          fuentes: [6, 1]
+        nota:
+          voz: hice
+          texto:
+            es: "En ARKHÉ el ahorro no vino de un modelo más barato: en mis mediciones, el 52 % menos de tokens salió de mandar menos contexto inútil en cada llamada."
+            en: "In ARKHÉ the savings did not come from a cheaper model: in my own measurements, the 52% fewer tokens came from sending less useless context on every call."
+          corpus: [agentes-en-produccion]
+
+  # ─── 5 · Lo innovador en 2026 ───────────────────────────────────────────────
+  - n: 5
+    elementos:
+      - titulo: { es: "Ejecución durable: el estado se guarda en cada paso", en: "Durable execution: state saved at every step" }
+        queCambia:
+          es: "Un trabajo largo sobrevive a una falla o a la espera de una persona y se retoma desde el último paso guardado, en vez de empezar de cero. LangGraph 1.0 guarda el estado automáticamente y Agent Framework 1.0 lo ofrece en sus flujos con puntos de guardado."
+          en: "Long-running work survives a failure or a wait for a person and resumes from the last saved step instead of starting over. LangGraph 1.0 persists state automatically, and Agent Framework 1.0 offers it in its workflows through checkpoints."
+        fuentes: [3, 7, 1]
+        nota:
+          voz: posicion
+          texto:
+            es: "Mi regla: si un paso va a esperar a una persona, el estado se guarda antes de preguntarle."
+            en: "My rule: if a step is going to wait for a person, the state is saved before asking."
+      - titulo: { es: "Ingeniería de contexto, no solo de prompts", en: "Context engineering, not just prompt engineering" }
+        queCambia:
+          es: "La pregunta deja de ser cómo redactar la instrucción y pasa a ser qué entra al contexto de cada llamada. El contexto se trata como un recurso finito: se compacta cuando se llena, se anota fuera de la ventana y se reparte entre subagentes con contexto limpio que devuelven solo un resumen."
+          en: "The question stops being how to word the instruction and becomes what goes into each call’s context. Context is treated as a finite resource: it is compacted when it fills up, written to notes outside the window, and split among subagents with clean contexts that hand back only a summary."
+        fuentes: [8, 5]
+        nota:
+          voz: hice
+          texto:
+            es: "Es la idea con la que trabaja ARKHÉ: ningún componente recibe información solo porque está disponible; recibe lo que su tarea necesita, recuperado de fuentes autorizadas."
+            en: "It is the idea ARKHÉ works with: no component receives information just because it is available; it receives what its task needs, retrieved from authorized sources."
+          corpus: [agentes-en-produccion]
+      - titulo: { es: "Protocolos comunes: MCP para herramientas, A2A entre agentes", en: "Shared protocols: MCP for tools, A2A between agents" }
+        queCambia:
+          es: "Una herramienta se conecta una vez por un estándar y la usan agentes de cualquier framework; los servidores se descubren en un registro abierto, y agentes de plataformas distintas pueden hablarse. En su revisión de julio de 2026, MCP se volvió sin estado y llevó las tareas largas a una extensión oficial."
+          en: "A tool is connected once through a standard and agents from any framework can use it; servers are found in an open registry, and agents on different platforms can talk to each other. In its July 2026 revision, MCP became stateless and moved long-running tasks into an official extension."
+        fuentes: [9, 10, 11]
+        nota:
+          voz: hice
+          texto:
+            es: "El Constructor de Tableros Power BI crea las medidas, columnas y relaciones por el servidor MCP de modelado, probando cada medida en DAX antes de seguir."
+            en: "The Power BI Dashboard Builder creates measures, columns and relationships through the modeling MCP server, testing every measure in DAX before moving on."
+          corpus: [los-agentes-de-la-vitrina]
+      - titulo: { es: "Evaluar la conversación entera y el camino, no solo la respuesta", en: "Evaluating the whole conversation and the path, not just the answer" }
+        queCambia:
+          es: "Lo que se prueba antes de publicar solo cubre lo que uno anticipó; por eso la evaluación sigue en producción sobre la conversación completa —si el agente logró el objetivo— y sobre el proceso paso a paso: qué herramienta eligió, con qué parámetros y qué hizo con el resultado."
+          en: "What is tested before release only covers what you anticipated; so evaluation continues in production over the whole conversation —did the agent reach the goal?— and over the process step by step: which tool it chose, with which parameters, and what it did with the result."
+        fuentes: [12, 13]
+        nota:
+          voz: hice
+          texto:
+            es: "En Vesting la sesión ya era la unidad de análisis: se reconstruía evento por evento para ver en qué momento una interacción se había desviado."
+            en: "At Vesting the session was already the unit of analysis: it was rebuilt event by event to see at what point an interaction had gone off course."
+          corpus: [vesting]
+      - titulo: { es: "Trazas con OpenTelemetry de punta a punta", en: "End-to-end traces with OpenTelemetry" }
+        queCambia:
+          es: "La traza del agente viaja por el mismo estándar abierto que el resto del sistema, así que una falla se sigue desde la solicitud hasta la herramienta aunque cruce frameworks y servidores."
+          en: "The agent’s trace travels over the same open standard as the rest of the system, so a failure can be followed from the request to the tool even when it crosses frameworks and servers."
+        fuentes: [14, 9, 7]
+      - titulo: { es: "Frameworks que convergen y una plataforma que los aloja", en: "Frameworks that converge, and a platform that hosts them" }
+        queCambia:
+          es: "Microsoft unió Semantic Kernel y AutoGen en Agent Framework 1.0, con flujos en grafo, aprobaciones humanas, MCP y A2A. Microsoft Foundry aloja agentes escritos con él o con LangGraph y le da a cada uno su propia identidad, con el estado de sesión y la observabilidad gestionados."
+          en: "Microsoft merged Semantic Kernel and AutoGen into Agent Framework 1.0, with graph-based workflows, human approvals, MCP and A2A. Microsoft Foundry hosts agents written with it or with LangGraph and gives each one its own identity, with session state and observability managed for it."
+        fuentes: [7, 15]
+        nota:
+          voz: hice
+          texto:
+            es: "Con Microsoft Agent Framework y Claude Agent SDK experimento y construyo prototipos en la Fundación CTIC; con el ecosistema de LangChain trabajo allí junto con n8n."
+            en: "With Microsoft Agent Framework and the Claude Agent SDK I experiment and build prototypes at Fundación CTIC; with the LangChain ecosystem I work there alongside n8n."
+          corpus: [fundacion-ctic]
+      - titulo: { es: "La agencia excesiva, riesgo de primera línea", en: "Excessive agency as a front-line risk" }
+        queCambia:
+          es: "En el anuncio de su Top 10 2026 para aplicaciones con LLM, OWASP recoge, por boca de un colaborador del proyecto, que la agencia excesiva está ahora en el número tres (en la edición 2025 era el LLM06): darle a un agente más funciones, permisos o autonomía de los que necesita queda entre los tres riesgos primeros de la lista."
+          en: "In the announcement of its 2026 Top 10 for LLM applications, OWASP reports, through a contributor to the project, that excessive agency is now number three (it was LLM06 in the 2025 edition): giving an agent more functions, permissions or autonomy than it needs now ranks among the top three risks on the list."
+        fuentes: [16, 4]
+
+  # ─── 6 · Modos de falla y cómo se ven venir ─────────────────────────────────
+  - n: 6
+    fallas:
+      - falla: { es: "El agente responde, pero no resuelve", en: "The agent answers, but does not resolve" }
+        senal: { es: "Sesiones que terminan sin el estado esperado o con una persona interviniendo.", en: "Sessions that end without the expected state, or with a person stepping in." }
+        control: { es: "La dimensión funcional del monitoreo: estados finales y sesiones que necesitaron intervención, por agente.", en: "The functional dimension of monitoring: final states and sessions that needed intervention, per agent." }
+      - falla: { es: "El contexto se llena de ruido", en: "The context fills up with noise" }
+        senal: { es: "Suben los tokens por tarea completada sin que suba el cumplimiento.", en: "Tokens per completed task go up while compliance does not." }
+        control: { es: "Tokens por tarea completada medidos junto con el cumplimiento de instrucciones, contra la línea base.", en: "Tokens per completed task measured together with instruction compliance, against the baseline." }
+      - falla: { es: "Un especialista le entrega al siguiente algo incompleto", en: "A specialist hands the next one something incomplete" }
+        senal: { es: "Cada pieza pasa sus pruebas y el conjunto falla.", en: "Every piece passes its tests and the whole fails." }
+        control: { es: "Contratos de entrada y salida entre especialistas, con pruebas de la transición y no solo de cada uno.", en: "Input and output contracts between specialists, with tests of the handoff and not only of each one." }
+      - falla: { es: "El agente hace más de lo que le tocaba", en: "The agent does more than it was supposed to" }
+        senal: { es: "Una acción con consecuencias aparece en las trazas sin una aprobación al lado.", en: "An action with consequences shows up in the traces without an approval next to it." }
+        control: { es: "Permisos mínimos por especialista y un punto de aprobación con palabra literal antes de lo irreversible.", en: "Minimal permissions per specialist and an approval point with a literal word before anything irreversible." }
+      - falla: { es: "El modelo inventa una cifra o una fuente", en: "The model makes up a figure or a source" }
+        senal: { es: "Una afirmación verificable sin el fragmento que la sostiene.", en: "A verifiable claim without the passage that supports it." }
+        control: { es: "Fuente autorizada o vacío declarado: un validador rechaza la salida que cita lo que no existe.", en: "An authorized source or a declared gap: a validator rejects any output that cites what does not exist." }
+      - falla: { es: "Un control que nunca falla", en: "A control that never fails" }
+        senal: { es: "Una prueba siempre en verde que nadie ha visto ponerse en rojo.", en: "A test that is always green and that nobody has ever seen turn red." }
+        control: { es: "Una carnada por control: el caso roto a propósito que demuestra que dispara.", en: "A bait case for every control: the case broken on purpose that proves it fires." }
+      - falla: { es: "El costo crece en silencio", en: "Cost grows silently" }
+        senal: { es: "Reintentos, sesiones abandonadas o relecturas masivas que no producen nada.", en: "Retries, abandoned sessions or mass re-reads that produce nothing." }
+        control: { es: "Costo en tokens por sesión y por agente, visto junto a lo que resuelve, con un umbral escrito para cada patrón.", en: "Token cost per session and per agent, seen next to what it resolves, with a written threshold for each pattern." }
+      - falla: { es: "Una instrucción entra por una herramienta", en: "An instruction sneaks in through a tool" }
+        senal: { es: "Un texto leído de una página o de un documento le pide algo al agente.", en: "A text read from a page or a document asks the agent to do something." }
+        control: { es: "Lo que dice una fuente es dato, no instrucción: se ignora, se registra, y la autorización vive en el sistema de destino.", en: "What a source says is data, not an instruction: it is ignored and logged, and authorization lives in the downstream system." }
+
+  # ─── 7 · Métricas y controles ───────────────────────────────────────────────
+  - n: 7
+    metricas:
+      - metrica: { es: "Criterios de aceptación cumplidos", en: "Acceptance criteria met" }
+        umbral: { es: "Todos en verde: un criterio binario no se negocia.", en: "All green: a binary criterion is not negotiable." }
+        aprueba: { es: "Quien responde por el resultado, contra la definición de terminado acordada al inicio.", en: "Whoever answers for the result, against the definition of done agreed at the start." }
+      - metrica: { es: "Controles con una carnada que dispara", en: "Controls with a bait case that fires" }
+        umbral: { es: "Todos los controles críticos; el que no la tenga se declara como tal.", en: "Every critical control; any control without one is declared as such." }
+        aprueba: { es: "Quien construye, revisado por alguien que no construyó.", en: "Whoever builds, reviewed by someone who did not build." }
+      - metrica: { es: "Cumplimiento de instrucciones en la batería de escenarios", en: "Instruction compliance on the scenario battery" }
+        umbral: { es: "Igual o mejor que la línea base declarada, sobre la misma muestra.", en: "Equal to or better than the declared baseline, on the same sample." }
+        aprueba: { es: "Quien responde por el resultado.", en: "Whoever answers for the result." }
+      - metrica: { es: "Tokens por tarea completada", en: "Tokens per completed task" }
+        umbral: { es: "No peor que la línea base, y nunca a costa del cumplimiento.", en: "No worse than the baseline, and never at the expense of compliance." }
+        aprueba: { es: "Quien paga la operación.", en: "Whoever pays for the operation." }
+      - metrica: { es: "Abstenciones correctas", en: "Correct abstentions" }
+        umbral: { es: "En cada caso sin evidencia, el agente declara el vacío o pasa el caso; un solo dato inventado frena el paso.", en: "In every case without evidence, the agent declares the gap or hands the case over; a single made-up fact stops the release." }
+        aprueba: { es: "El responsable del proceso.", en: "The process owner." }
+      - metrica: { es: "Sesiones que necesitaron intervención humana", en: "Sessions that needed human intervention" }
+        umbral: { es: "Por debajo del tope acordado para la versión; si lo pasa, la versión vuelve a evaluación.", en: "Below the cap agreed for the version; if it goes over, the version goes back to evaluation." }
+        aprueba: { es: "Producto y operación, con el tablero delante.", en: "Product and operations, with the dashboard in front of them." }
+      - metrica: { es: "Acciones irreversibles sin aprobación", en: "Irreversible actions without approval" }
+        umbral: { es: "Cero.", en: "Zero." }
+        aprueba: { es: "El responsable del proceso.", en: "The process owner." }
+
+  # ─── 8 · Mi evidencia ───────────────────────────────────────────────────────
+  - n: 8
+    evidencia:
+      - nombre: { es: "Vesting: 27 agentes en producción", en: "Vesting: 27 agents in production" }
+        nivel: uso-real
+        texto:
+          es: "Definí, documenté y validé el proceso core de once etapas con el que una startup construyó 27 agentes para 12 clientes sobre n8n, y diseñé en Microsoft Fabric la plataforma que llegó a vigilar 23 a la vez, en tiempo real."
+          en: "I defined, documented and validated the eleven-stage core process that a startup used to build 27 agents for 12 clients on n8n, and designed in Microsoft Fabric the platform that came to watch 23 at once, in real time."
+        corpus: [vesting, agentes-en-produccion]
+        href: /proyectos/vesting
+      - nombre: { es: "ARKHÉ: mi ecosistema agéntico", en: "ARKHÉ: my agentic ecosystem" }
+        nivel: uso-real
+        texto:
+          es: "Harnesses especializados que fijan a cada agente función, fuentes, herramientas y contrato. En mis mediciones sobre 120 escenarios, frente a un generalista: 52 % menos tokens y cumplimiento de instrucciones del 71 % al 93 %. Es de uso personal; no lo llamo producción."
+          en: "Specialized harnesses that set each agent’s function, sources, tools and contract. In my own measurements over 120 scenarios, against a generalist: 52% fewer tokens and instruction compliance from 71% to 93%. It is for personal use; I do not call it production."
+        corpus: [agentes-en-produccion, las-investigaciones]
+        href: /vitrina/investigaciones/arkhe
+      - nombre: { es: "FORJA: del BPMN a una orquestación de agentes", en: "FORJA: from BPMN to an orchestration of agents" }
+        nivel: prototipo
+        texto:
+          es: "FORJA es una de mis investigaciones: un compilador que convierte un proceso dibujado en BPMN en una orquestación de agentes. Del BPMN conserva la estructura —cada actividad se abre con entradas, función y salidas, y cada elemento traza a su realización—: en el paper sellado conservó el 99,5 %. Verificadores de distintas familias vigilan la conformidad. El demostrador existe."
+          en: "FORJA is one of my research lines: a compiler that turns a process drawn in BPMN into an orchestration of agents. From the BPMN it preserves the structure —every activity is opened up with inputs, function and outputs, and every element traces to its realization—: in the sealed paper it preserved 99.5%. Verifiers from different families watch for conformance. The demonstrator exists."
+        corpus: [las-investigaciones]
+        href: /vitrina/investigaciones/forja
+      - nombre: { es: "Los agentes de la vitrina, sobre Claude Code", en: "The showcase agents, on Claude Code" }
+        nivel: uso-real
+        texto:
+          es: "Trece sistemas de trabajo con constitución, harness, criterios binarios, carnadas y gates humanos con palabra literal; cinco están sellados. Son de uso personal, con entregables y evidencia."
+          en: "Thirteen work systems with a constitution, a harness, binary criteria, bait cases and human gates with a literal word; five are sealed. They are for personal use, with deliverables and evidence."
+        corpus: [los-agentes-de-la-vitrina]
+        href: /vitrina/agentes
+      - nombre: { es: "Constructor de Tableros Power BI", en: "Power BI Dashboard Builder" }
+        nivel: uso-real
+        texto:
+          es: "Crea medidas, columnas y relaciones por el servidor MCP de modelado, probando cada medida en DAX, y escribe el reporte en el JSON nativo de Power BI; 20 criterios y 5 gates humanos, y ninguna corrida cierra sin el render aprobado por una persona."
+          en: "Creates measures, columns and relationships through the modeling MCP server, testing every measure in DAX, and writes the report in Power BI’s native JSON; 20 criteria and 5 human gates, and no run closes without a person approving the render."
+        corpus: [los-agentes-de-la-vitrina]
+        href: /vitrina/agentes/constructor-tableros-powerbi
+      - nombre: { es: "Experto ISO 42001", en: "ISO 42001 Expert" }
+        nivel: uso-real
+        texto:
+          es: "Cada afirmación normativa cita apartado y página o declara el vacío, y ningún dictamen con consecuencias avanza sin la aprobación de una persona. Es el que uso en la estrategia de IA de la Fundación CTIC."
+          en: "Every normative claim cites clause and page or declares the gap, and no ruling with consequences moves forward without a person’s approval. It is the one I use in Fundación CTIC’s AI strategy."
+        corpus: [los-agentes-de-la-vitrina, fundacion-ctic]
+        href: /vitrina/agentes/experto-iso42001
+      - nombre: { es: "LangChain, LangGraph, LangSmith y Langflow", en: "LangChain, LangGraph, LangSmith and Langflow" }
+        nivel: uso-real
+        texto:
+          es: "Son, con n8n, los frameworks de agentes con los que trabajo en la Fundación CTIC. Ese trabajo no tiene un entregable publicado en este sitio."
+          en: "Together with n8n, they are the agent frameworks I work with at Fundación CTIC. That work has no deliverable published on this site."
+        corpus: [fundacion-ctic]
+        href: /proyectos/fundacion-ctic
+      - nombre: { es: "Microsoft Agent Framework y Claude Agent SDK", en: "Microsoft Agent Framework and Claude Agent SDK" }
+        nivel: prototipo
+        texto:
+          es: "Con ellos experimento y construyo prototipos en la Fundación CTIC."
+          en: "I experiment with them and build prototypes at Fundación CTIC."
+        corpus: [fundacion-ctic, agentes-en-produccion]
+      - nombre: { es: "El chat de este sitio", en: "This site’s chat" }
+        nivel: uso-real
+        texto:
+          es: "Recupera del corpus, cita lo que recuperó y, si no encuentra, lo dice. Desde septiembre de 2026 guarda una fila por respuesta: quién preguntó, qué se contestó, con qué fuentes, con qué proveedor, cuántos tokens y cuántos milisegundos."
+          en: "It retrieves from the corpus, cites what it retrieved and, if it finds nothing, says so. Since September 2026 it keeps one row per answer: who asked, what was answered, with which sources, with which provider, how many tokens and how many milliseconds."
+        corpus: [agentes-en-produccion]
+
+  # ─── 9 · Lo que haría distinto y lo que no he hecho ─────────────────────────
+  - n: 9
+    limites:
+      - voz: hice
+        texto:
+          es: "La palabra «producción» la reservo para los 27 agentes de Vesting. Los de ARKHÉ y los de la vitrina son sistemas de trabajo de uso personal: no han tenido usuarios distintos de mí."
+          en: "I keep the word “production” for the 27 agents at Vesting. The ones in ARKHÉ and in the showcase are personal-use work systems: they have had no users other than me."
+        corpus: [agentes-en-produccion, los-agentes-de-la-vitrina]
+      - voz: hice
+        texto:
+          es: "Las cifras de ARKHÉ son mis propios cálculos, sin un artefacto publicado: miden menos contexto inútil y más obediencia a la especificación, no la calidad en abstracto, y no sirven para comparar con otro ecosistema sin repetir los mismos escenarios."
+          en: "The ARKHÉ figures are my own calculations, with no published artifact: they measure less useless context and more adherence to the specification, not quality in the abstract, and they cannot be compared with another ecosystem without rerunning the same scenarios."
+        corpus: [agentes-en-produccion]
+      - voz: hice
+        texto:
+          es: "Con Microsoft Agent Framework y Claude Agent SDK he hecho experimentación y prototipos, no producción. Con el ecosistema de LangChain trabajo en la Fundación CTIC, sin un entregable publicado aquí."
+          en: "With Microsoft Agent Framework and the Claude Agent SDK I have done experimentation and prototypes, not production. With the LangChain ecosystem I work at Fundación CTIC, with no deliverable published here."
+        corpus: [fundacion-ctic]
+      - voz: hice
+        texto:
+          es: "No he operado agentes en contenedores: Docker y Kubernetes en producción no están en mi experiencia profesional."
+          en: "I have not run agents in containers: Docker and Kubernetes in production are not part of my professional experience."
+        corpus: [plataforma-y-despliegue]
+      - voz: hice
+        texto:
+          es: "Con Microsoft Foundry, mi experiencia es el adaptador de proveedor del chat de este sitio y el estudio del AI-103, que está en curso; un sistema de agentes alojado allí no está en mi experiencia."
+          en: "With Microsoft Foundry, my experience is the provider adapter in this site’s chat and studying for the AI-103, which is in progress; an agent system hosted there is not part of my experience."
+        corpus: [rag-y-el-chat, certificaciones]
+      - voz: hice
+        texto:
+          es: "FORJA tiene su demostrador —compilador, cinco procesos, línea base y compuertas de aprobación—, pero que los profesionales lo usen se demuestra con profesionales, y esa prueba falta."
+          en: "FORJA has its demonstrator —compiler, five processes, baseline and approval gates—, but whether professionals use it can only be shown with professionals, and that test is still missing."
+        corpus: [las-investigaciones]
+      - voz: posicion
+        texto:
+          es: "Lo que haría distinto hoy: trazas con un estándar abierto desde el primer agente, para seguir una sesión aunque cruce frameworks, y la conversación entera evaluada en línea, no solo antes de publicar."
+          en: "What I would do differently today: traces on an open standard from the very first agent, so a session can be followed even when it crosses frameworks, and the whole conversation evaluated online, not only before release."
+      - voz: posicion
+        texto:
+          es: "Y no empezaría por un grafo de muchos agentes: empezaría con uno, lo mediría contra una línea base y solo repartiría el trabajo donde el contexto o el paralelismo lo justifiquen."
+          en: "And I would not start with a graph of many agents: I would start with one, measure it against a baseline and only split the work where context or parallelism justify it."
+
+  # ─── 10 · Fuentes y fecha de revisión ───────────────────────────────────────
+  - n: 10
+    revisado: "2026-10-17"
+    fuentes:
+      - id: 1
+        titulo: "How we built our multi-agent research system"
+        editor: "Anthropic"
+        fecha: "2025-06-13"
+        url: "https://www.anthropic.com/engineering/multi-agent-research-system"
+      - id: 2
+        titulo: "Microsoft Agent Framework Overview"
+        editor: "Microsoft Learn"
+        fecha: "2026-07-29"
+        url: "https://learn.microsoft.com/en-us/agent-framework/overview/"
+      - id: 3
+        titulo: "LangChain and LangGraph Agent Frameworks Reach v1.0 Milestones"
+        editor: "LangChain"
+        fecha: "2025-10-22"
+        url: "https://www.langchain.com/blog/langchain-langgraph-1dot0"
+      - id: 4
+        titulo: "LLM06:2025 Excessive Agency (OWASP Top 10 for LLM Applications 2025)"
+        editor: "OWASP GenAI Security Project"
+        fecha: "2024-11-17"
+        url: "https://genai.owasp.org/llmrisk/llm062025-excessive-agency/"
+      - id: 5
+        titulo: "Building agents with the Claude Agent SDK"
+        editor: "Anthropic"
+        fecha: "2025-09-29"
+        url: "https://claude.com/blog/building-agents-with-the-claude-agent-sdk"
+      - id: 6
+        titulo: "Model router for Microsoft Foundry concepts"
+        editor: "Microsoft Learn"
+        fecha: "2026-09-01"
+        url: "https://learn.microsoft.com/en-us/azure/foundry/openai/concepts/model-router"
+      - id: 7
+        titulo: "Microsoft Agent Framework Version 1.0"
+        editor: "Microsoft"
+        fecha: "2026-04-03"
+        url: "https://devblogs.microsoft.com/agent-framework/microsoft-agent-framework-version-1-0/"
+      - id: 8
+        titulo: "Effective context engineering for AI agents"
+        editor: "Anthropic"
+        fecha: "2025-09-29"
+        url: "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents"
+      - id: 9
+        titulo: "Model Context Protocol specification 2026-07-28: Key Changes"
+        editor: "Model Context Protocol"
+        fecha: "2026-07-28"
+        url: "https://modelcontextprotocol.io/specification/2026-07-28/changelog"
+      - id: 10
+        titulo: "Introducing the MCP Registry"
+        editor: "Model Context Protocol"
+        fecha: "2025-09-08"
+        url: "https://blog.modelcontextprotocol.io/posts/2025-09-08-mcp-registry-preview/"
+      - id: 11
+        titulo: "Linux Foundation Launches the Agent2Agent Protocol Project to Enable Secure, Intelligent Communication Between AI Agents"
+        editor: "Linux Foundation"
+        fecha: "2025-06-23"
+        url: "https://www.linuxfoundation.org/press/linux-foundation-launches-the-agent2agent-protocol-project-to-enable-secure-intelligent-communication-between-ai-agents"
+      - id: 12
+        titulo: "Improve agent quality with Insights Agent and Multi-turn Evals, now in LangSmith"
+        editor: "LangChain"
+        fecha: "2025-10-23"
+        url: "https://www.langchain.com/blog/insights-agent-multiturn-evals-langsmith"
+      - id: 13
+        titulo: "Agent Evaluators for Generative AI"
+        editor: "Microsoft Learn"
+        fecha: "2026-09-30"
+        url: "https://learn.microsoft.com/en-us/azure/foundry/concepts/evaluation-evaluators/agent-evaluators"
+      - id: 14
+        titulo: "Introducing End-to-End OpenTelemetry Support in LangSmith"
+        editor: "LangChain"
+        fecha: "2025-03-26"
+        url: "https://www.langchain.com/blog/end-to-end-opentelemetry-langsmith"
+      - id: 15
+        titulo: "Hosted agents in Foundry Agent Service"
+        editor: "Microsoft Learn"
+        fecha: "2026-09-11"
+        url: "https://learn.microsoft.com/en-us/azure/foundry/agents/concepts/hosted-agents"
+      - id: 16
+        titulo: "OWASP GenAI Security Project Unveils 2026 Top 10 for LLM Applications, New Agent Control Standard and Sponsors as Community Tops 30,000 Members"
+        editor: "OWASP GenAI Security Project"
+        fecha: "2026-09-01"
+        url: "https://genai.owasp.org/announcement/owasp-genai-security-project-unveils-2026-top-10-for-llm-applications-new-agent-control-standard-and-sponsors-as-community-tops-30000-members/"

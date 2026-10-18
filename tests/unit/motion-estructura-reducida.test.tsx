@@ -7,8 +7,11 @@ import { Reveal } from "@/components/motion/reveal";
 import { Stagger, StaggerItem } from "@/components/motion/stagger";
 import { TimelineTrack } from "@/components/motion/timeline-track";
 import { CarruselDeMuestras } from "@/components/vitrina/carrusel-de-muestras";
+import { InfografiaVista } from "@/components/metodo/infografia";
+import { RielDeFases } from "@/components/metodo/riel-de-fases";
 import { GaleriaCarrusel } from "@/components/vitrina/galeria-carrusel";
 import type { EtiquetasCarrusel } from "@/components/vitrina/galeria-carrusel";
+import { ejemploSintetico, traductorDe } from "../fixtures/metodo/ayudas";
 
 /**
  * LA ESTRUCTURA DEL DOM NO DEPENDE DE `useReducedMotion()` (2026-09-10).
@@ -133,6 +136,29 @@ const CASOS: Record<string, React.ReactNode> = {
       <article>Dos</article>
       <article>Tres</article>
     </CarruselDeMuestras>
+  ),
+  // S10 («Mi método»): el riel de fases escribe su relleno directo en el scroll
+  // y la infografía entera lleva `Reveal` por bloque; ninguna de las dos puede
+  // ramificar el árbol con el hook (regla 5a).
+  RielDeFases: (
+    <RielDeFases
+      fases={[
+        { nombre: "Uno", entradas: ["a"], actividades: ["b"], artefactos: ["c"], decide: "X", control: "Y" },
+        { nombre: "Dos", entradas: ["a"], actividades: ["b"], artefactos: ["c"], decide: "X", control: "Y" },
+      ]}
+      etiquetas={{
+        fase: "Fase {n}",
+        avance: "Avance",
+        entradas: "Entradas",
+        actividades: "Actividades",
+        artefactos: "Artefactos",
+        decide: "Decide",
+        control: "Control",
+      }}
+    />
+  ),
+  InfografiaVista: (
+    <InfografiaVista pieza={ejemploSintetico()} idioma="es" t={traductorDe("es")} />
   ),
 };
 

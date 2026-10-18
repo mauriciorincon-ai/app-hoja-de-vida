@@ -19,7 +19,8 @@
     "menu": "Menú",
     "portafolio": "Portafolio",
     "hojaDeVida": "Hoja de vida",
-    "estudios": "Estudios"
+    "estudios": "Estudios",
+    "metodo": "Mi método"
   },
   "hero": {
     "ctaApps": "Explora mi portafolio",
@@ -358,6 +359,128 @@
     "verSimulacion": "Ver la simulación",
     "cierreNota": "Aquí se muestra; no se entrega.",
     "volverFichaTecnica": "Volver a la ficha técnica"
+  },
+  "metodo": {
+    "eyebrow": "Mi método",
+    "titulo": "Cómo trabajo, una página por pregunta",
+    "intro": "Cada página contesta una pregunta de entrevista con mi método: las fases, las decisiones, los controles y la evidencia. Lo que hice sale de mi propio sitio; lo que el campo hace, de fuentes con fecha; y lo que opino va rotulado como posición.",
+    "metaDescripcion": "Mi método de trabajo, una infografía larga por pregunta de entrevista: fases, decisiones, controles, evidencia y fuentes con fecha.",
+    "piezasPublicadas": "{n, plural, one {# infografía publicada} other {# infografías publicadas}}",
+    "sinPiezas": "Todavía no hay infografías publicadas.",
+    "tema": "Tema {id}",
+    "abrir": "Abrir la infografía",
+    "volver": "Volver a Mi método",
+    "migaEtiqueta": "Ruta de navegación",
+    "indiceEtiqueta": "Bloques de esta infografía",
+    "imprimirAyuda": "Se imprime completa desde el navegador, en A4 o en carta.",
+    "revisado": "Revisado el {fecha}",
+    "bloque": "Bloque {n}",
+    "bloques": {
+      "1": "La pregunta",
+      "2": "El mapa",
+      "3": "Las fases",
+      "4": "Las decisiones de diseño",
+      "5": "Lo innovador en 2026",
+      "6": "Modos de falla y cómo se ven venir",
+      "7": "Métricas y controles",
+      "8": "Mi evidencia",
+      "9": "Lo que haría distinto y lo que no he hecho",
+      "10": "Fuentes y fecha de revisión"
+    },
+    "respuestaEnTres": "La respuesta en tres líneas",
+    "voces": {
+      "titulo": "Tres voces, siempre separadas",
+      "sinRotulo": "Lo que no lleva rótulo es mi método: mi posición sobre cómo se hace.",
+      "hice": {
+        "nombre": "Lo que hice",
+        "ayuda": "Sale solo del corpus de este sitio."
+      },
+      "campo": {
+        "nombre": "Lo que el campo hace",
+        "ayuda": "Sale de una fuente con título, editor, fecha y enlace."
+      },
+      "posicion": {
+        "nombre": "Mi posición",
+        "ayuda": "Es mi criterio, no un hecho."
+      }
+    },
+    "mapa": {
+      "leyenda": "Leyenda de formas y colores",
+      "lectura": "Lectura del mapa, nodo por nodo",
+      "nodo": "Nodo {n}",
+      "conexiones": "Conexiones",
+      "flecha": "de {de} a {a}",
+      "desliza": "Desliza para ver el mapa completo."
+    },
+    "tipos": {
+      "actor": {
+        "nombre": "Actor",
+        "ayuda": "quien hace el trabajo"
+      },
+      "dato": {
+        "nombre": "Dato",
+        "ayuda": "lo que se guarda y se lee"
+      },
+      "control": {
+        "nombre": "Control",
+        "ayuda": "una regla que se comprueba"
+      },
+      "humano": {
+        "nombre": "Persona",
+        "ayuda": "una persona decide"
+      },
+      "externo": {
+        "nombre": "Externo",
+        "ayuda": "lo que viene de afuera"
+      }
+    },
+    "fases": {
+      "fase": "Fase {n}",
+      "avance": "Avance por las fases",
+      "entradas": "Entradas",
+      "actividades": "Actividades",
+      "artefactos": "Artefactos",
+      "decide": "Quién decide",
+      "control": "Control que cierra la fase"
+    },
+    "decisiones": {
+      "cuandoSi": "Cuándo sí",
+      "cuandoNo": "Cuándo no",
+      "porQue": "Por qué"
+    },
+    "innovador": {
+      "queCambia": "Qué cambia frente a la práctica común",
+      "fuentes": "Fuentes"
+    },
+    "fallas": {
+      "falla": "Qué se rompe",
+      "senal": "Cómo se ve venir",
+      "control": "Control que la atrapa"
+    },
+    "metricas": {
+      "metrica": "Qué se mide",
+      "umbral": "Umbral",
+      "aprueba": "Quién aprueba el paso a producción",
+      "nota": "Los umbrales son ejemplos del método, no cifras de un proyecto mío."
+    },
+    "evidencia": {
+      "nivel": "Nivel",
+      "ver": "Ver dónde"
+    },
+    "niveles": {
+      "uso-real": "Uso real",
+      "prototipo": "Prototipo",
+      "en-estudio": "En estudio",
+      "exploracion": "Exploración"
+    },
+    "fuentes": {
+      "titulo": "Título",
+      "editor": "Editor",
+      "fecha": "Fecha",
+      "enlace": "Enlace",
+      "abrir": "Abrir la fuente",
+      "cita": "Fuente {n}"
+    }
   },
   "vitrinaHome": {
     "titulo": "Vitrina",

@@ -18,11 +18,20 @@ import { existsSync, readFileSync, readdirSync } from "node:fs";
 import path from "node:path";
 import process from "node:process";
 import { parse } from "yaml";
+import { anclasDeBloques } from "./metodo-al-indice.mjs";
 import { leerNombresOficiales } from "./nombres-oficiales.mjs";
 
 const ROOT = process.cwd();
 
 const leerYaml = (rel) => parse(readFileSync(path.join(ROOT, rel), "utf8"));
+
+/** Las infografías de «Mi método»: `{slug, nombre: {es, en}}` por cada archivo de `data/metodo/`. */
+function piezasDeMetodo() {
+  const dir = path.join(ROOT, "data", "metodo");
+  return (existsSync(dir) ? readdirSync(dir) : [])
+    .filter((f) => f.endsWith(".yaml"))
+    .map((f) => leerYaml(`data/metodo/${f}`));
+}
 
 /**
  * Las anclas de la HOME se leen de la HOME, en dos saltos:
@@ -84,6 +93,11 @@ export function anclasDeHome() {
 /** Las rutas salen de los mismos datos con los que se generan las páginas. */
 export function rutasDeDatos() {
   const rutas = new Set(["/", "/cv", "/vitrina"]);
+
+  // «Mi método» (S10): la lista y una página por infografía de `data/metodo/`.
+  // La ruta sale del archivo, igual que la página (`generateStaticParams`).
+  rutas.add("/metodo");
+  for (const { slug } of piezasDeMetodo()) rutas.add(`/metodo/${slug}`);
 
   for (const locale of ["es", "en"]) {
     const cv = leerYaml(`data/cv.${locale}.yaml`);
@@ -160,6 +174,11 @@ export function nombresDeDestinos(locale) {
     nombres.set("#contenido", msg.nav.hojaDeVida);
   }
   if (msg.cv?.titulo) nombres.set("/cv", msg.cv.titulo);
+  // «Mi método»: la lista se llama como el menú; cada pieza, como su nombre.
+  if (msg.nav?.metodo) nombres.set("/metodo", msg.nav.metodo);
+  for (const p of piezasDeMetodo()) {
+    if (p.nombre?.[locale]) nombres.set(`/metodo/${p.slug}`, p.nombre[locale]);
+  }
 
   const cv = leerYaml(`data/cv.${locale}.yaml`);
   // Una tarjeta de Skills se llama como su grupo («Plataforma de datos»).
@@ -233,7 +252,18 @@ export function nombreDeDestino(destino, nombres) {
 
 /** Todos los destinos válidos hoy: anclas de la HOME + rutas reales. */
 export function catalogoDeDestinos() {
-  return new Set([...anclasDeHome(), ...rutasDeDatos()]);
+  return new Set([...anclasDeHome(), ...rutasDeDatos(), ...anclasDeMetodo()]);
+}
+
+/**
+ * Las anclas de «Mi método»: `/metodo/<slug>#bloque-1…10`. A diferencia del
+ * resto de las rutas —donde se juzga solo la ruta—, aquí el ancla también se
+ * valida: una cita a `#bloque-11` o a un bloque que no existe aterrizaría en la
+ * cabecera de la página sin avisar, y la promesa de la cita es llevar al
+ * bloque exacto.
+ */
+export function anclasDeMetodo() {
+  return new Set(piezasDeMetodo().flatMap((p) => anclasDeBloques(p.slug)));
 }
 
 /**
@@ -246,5 +276,7 @@ export function destinoExiste(destino, catalogo = catalogoDeDestinos()) {
   if (typeof destino !== "string" || destino.length === 0) return false;
   if (destino.startsWith("#")) return catalogo.has(destino);
   if (!destino.startsWith("/")) return false;
+  // Una cita a un bloque de una infografía valida el bloque, no solo la página.
+  if (/^\/metodo\/[^#]+#/.test(destino)) return catalogo.has(destino);
   return catalogo.has(destino.split("#")[0]);
 }

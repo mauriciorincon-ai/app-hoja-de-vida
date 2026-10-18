@@ -33,6 +33,15 @@ const slugsSimulacion = (
     simulaciones: { slug: string }[];
   }
 ).simulaciones.map((s) => s.slug);
+// «Mi método» (S10): la lista y cada infografía, leídas de data/metodo/ como la
+// página: una pieza nueva entra al scan sola.
+const slugsMetodo = readdirSync("data/metodo")
+  .filter((f) => f.endsWith(".yaml"))
+  .map(
+    (f) =>
+      (parse(readFileSync(`data/metodo/${f}`, "utf8")) as { slug: string })
+        .slug,
+  );
 const slugsVitrina = readdirSync("content/vitrina")
   .filter((f) => f.endsWith(".brochure-export.json"))
   .map(
@@ -97,6 +106,10 @@ const RUTAS = [
     `/es/vitrina/apps/${s}/simulacion`,
     `/en/vitrina/apps/${s}/simulacion`,
   ]),
+  // «Mi método»: la lista y cada infografía (mapa SVG, riel, voces, fuentes).
+  "/es/metodo",
+  "/en/metodo",
+  ...slugsMetodo.flatMap((s) => [`/es/metodo/${s}`, `/en/metodo/${s}`]),
   // Cada frente, y cada pieza de los que están abiertos (S7).
   ...frentesYaml.flatMap((f) => [
     `/es/vitrina/${f.id}`,

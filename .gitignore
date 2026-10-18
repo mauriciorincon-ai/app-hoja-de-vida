@@ -43,3 +43,6 @@ public/chat-index.*.json
 # decidió publicar. El repo es PÚBLICO: además de este ignore, el hook pre-commit
 # (githooks/pre-commit) frena un `git add -f` sobre la carpeta.
 /privado/
+
+# Carpeta de trabajo de scripts/demo-rojo.sh (kit v1.40.0): copias de la mutación y restauración.
+.demo-rojo/

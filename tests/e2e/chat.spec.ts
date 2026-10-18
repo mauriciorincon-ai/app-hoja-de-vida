@@ -126,10 +126,46 @@ test.describe("chat — flujo estrella", () => {
     const fuente = page.getByTestId("chat-fuente").first();
     await expect(fuente).toHaveAttribute("href", /^\/en/);
     await expect(fuente).toHaveText(
-      /^\[\d+(, \d+)*\] (AF-\d{2}|CV|APP|FT) · .+$/,
+      /^\[\d+(, \d+)*\] (AF-\d{2}|CV|APP|FT|T\d) · .+$/,
     );
     await expect(fuente).not.toHaveText(/In depth|A fondo/);
   });
+
+  // «Mi método» (S10, F3): el chat cita la infografía, bloque a bloque. La
+  // pregunta es la primera de T2 del banco de preguntas; el chip dice el código
+  // del tema y el nombre de la pieza, y la cita lleva al BLOQUE, no a la página.
+  for (const [idioma, pregunta, nombre] of [
+    ["es", "¿Cómo estructura Henry un sistema multiagente?", "Cómo estructuro un sistema de agentes"],
+    ["en", "How does Henry structure a multi-agent system?", "How I structure an agent system"],
+  ] as const) {
+    test(`la cita de una infografía de «Mi método» lleva al bloque exacto (${idioma})`, async ({
+      page,
+    }) => {
+      await page.goto(`/${idioma}`);
+      await abrirChat(page);
+      await preguntar(page, pregunta);
+
+      const chip = page
+        .locator(
+          `[data-testid="chat-fuente"][href*="/${idioma}/metodo/sistema-de-agentes#bloque-"]`,
+        )
+        .first();
+      await expect(chip).toBeVisible({ timeout: 15_000 });
+      await expect(chip).toHaveText(
+        new RegExp(`^\\[\\d+(, \\d+)*\\] T2 · ${nombre}$`),
+      );
+
+      const href = (await chip.getAttribute("href"))!;
+      const bloque = href.match(/#bloque-(\d+)$/)![1];
+      await chip.click();
+      await expect(page).toHaveURL(
+        new RegExp(`/${idioma}/metodo/sistema-de-agentes#bloque-${bloque}$`),
+        { timeout: 15_000 },
+      );
+      // Aterriza en el bloque que la cita nombra, con su título a la vista.
+      await expect(page.locator(`#bloque-${bloque}-titulo`)).toBeInViewport();
+    });
+  }
 
   test("pregunta off-topic → respuesta estática elegante (sin proveedor)", async ({
     page,

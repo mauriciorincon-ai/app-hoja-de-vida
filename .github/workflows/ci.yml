@@ -1,6 +1,7 @@
 # CI del kit-app — corre en cada PR y en push a main.
 # Gates: typecheck, lint, tests+cobertura, build, audit de deps, e2e, Lighthouse
-# vs perf-budget.json, e integración con Postgres real (Supabase) para la votación.
+# vs perf-budget.json, e integración con Postgres real (Supabase) para la votación,
+# más dos gates del kit v2: cero enlaces (job quality) y un solo PR vivo (un-pr-vivo.yml).
 name: CI
 on:
   pull_request:
@@ -23,11 +24,28 @@ jobs:
         with: { node-version: 22, cache: pnpm }
       - run: pnpm install --frozen-lockfile
       - run: pnpm peers check    # único gate que ve un peer insatisfecho (kit v1.24.0)
+      # Regla 18 (kit v1.32.0): ningún paquete por debajo de `main`. pnpm degrada en silencio y la CI
+      # pasa verde; este script compara el lockfile del PR contra la INTENCIÓN. Solo en pull_request.
+      - name: Regla 18 — ningún paquete por debajo de main
+        if: github.event_name == 'pull_request'
+        run: |
+          git fetch origin main --depth=1
+          node scripts/verificar-dependencias.mjs origin/main
       - run: pnpm typecheck
       - run: pnpm lint
       - run: pnpm test            # vitest run --coverage (umbral 70% en vitest.config)
       - run: pnpm build
       - run: pnpm audit --audit-level high
+      # kit v2.0.0 — regla 17 (cero enlaces): gate de CI en vez de casilla manual. Dos superficies: los
+      # archivos versionados (git grep) y el campo `homepage` del repo (la fuga de otra app vivía ahí).
+      # Los dominios salen de cero-enlaces.json; el dominio PROPIO del dueño no puede ir ahí (sería la fuga).
+      # Demo en rojo: tests/unit/cero-enlaces.test.ts.
+      - name: Cero enlaces — árbol y homepage del repo (regla 17)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          HOMEPAGE="$(gh api "repos/${GITHUB_REPOSITORY}" --jq '.homepage // ""')"
+          node scripts/cero-enlaces.mjs --homepage "$HOMEPAGE"
 
   e2e:
     runs-on: ubuntu-latest

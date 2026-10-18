@@ -468,6 +468,17 @@ preguntas:
     espera: [plataforma-y-despliegue, como-aprendo]
     familia: encaje
 
+  # ── mi método (S10): the twins of the three T2 questions; same `espera`, same order
+  - pregunta: "How does Henry structure a multi-agent system?"
+    espera: [metodo-sistema-de-agentes]
+    familia: ia-y-agentes
+  - pregunta: "What is FORJA and what does it preserve from a BPMN?"
+    espera: [metodo-sistema-de-agentes]
+    familia: procesos
+  - pregunta: "How does Henry evaluate an agent before putting it into production?"
+    espera: [metodo-sistema-de-agentes]
+    familia: ia-y-agentes
+
 ajenas:
   - pregunta: "tell me a joke about cats"
     guardrail: bloquea

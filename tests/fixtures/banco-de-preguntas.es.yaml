@@ -543,6 +543,22 @@ preguntas:
     espera: [plataforma-y-despliegue, como-aprendo]
     familia: encaje
 
+  # ─────────────────────────────────────────────────────────────────────
+  # Mi método (S10): las preguntas de la primera infografía, T2. Su fuente
+  # esperada es la PIEZA, no un documento a fondo: `metodo-sistema-de-agentes`
+  # casa con sus diez bloques (`metodo-sistema-de-agentes-bloque-N`). Si una no
+  # la trae, se ajusta la pieza, no esta expectativa.
+  # ─────────────────────────────────────────────────────────────────────
+  - pregunta: "¿Cómo estructura Henry un sistema multiagente?"
+    espera: [metodo-sistema-de-agentes]
+    familia: ia-y-agentes
+  - pregunta: "¿Qué es FORJA y qué conserva de un BPMN?"
+    espera: [metodo-sistema-de-agentes]
+    familia: procesos
+  - pregunta: "¿Cómo evalúa Henry un agente antes de ponerlo en producción?"
+    espera: [metodo-sistema-de-agentes]
+    familia: ia-y-agentes
+
 # Preguntas AJENAS. Cada una declara qué le hace el guardrail de entrada, y hay
 # DOS resultados legítimos —confundirlos sería mentir sobre lo que el guardrail
 # promete (`src/lib/ia/guardrails.ts`)—:

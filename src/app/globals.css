@@ -934,6 +934,26 @@
   }
 }
 
+/*
+ * El papel no espera: imprimir no hace scroll, así que el IntersectionObserver
+ * de Reveal jamás marca `data-visto` y todo lo que nace oculto (`data-motion`)
+ * saldría en blanco en la hoja. Se aplica el mismo cinturón de reduced-motion:
+ * el estado final, sin transición ni filtro (S10: los títulos de bloque de
+ * «Mi método» salían sin título al imprimir; /cv comparte el hueco).
+ */
+@media print {
+  [data-motion] {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+  [data-motion-svg] {
+    stroke-dasharray: none !important;
+    stroke-dashoffset: 0 !important;
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

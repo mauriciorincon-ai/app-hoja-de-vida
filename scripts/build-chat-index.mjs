@@ -5,7 +5,8 @@
  *
  * Fuentes por locale: data/cv.{es,en}.yaml + data/apps.yaml +
  * data/a-fondo/<slug>.{es,en}.md (el corpus profundo, y el principal cuando
- * tiene documentos aprobados).
+ * tiene documentos aprobados) + las fichas de la vitrina + las infografías de
+ * «Mi método» (data/metodo/, un chunk por bloque).
  * Salida: public/chat-index.{es,en}.json — UN solo asset que sirve doble:
  * retrieval del RAG en el server (/api/chat) y búsqueda local del fallback
  * en el cliente (fetch lazy).
@@ -14,7 +15,7 @@
  * ("#trayectoria") o página ("/proyectos/<slug>"); el cliente antepone
  * "/{locale}". Y desde 2026-09-23 lleva además `codigo` (de qué fuente salió:
  * `AF-NN` un documento a fondo, `CV` el YAML del CV, `APP` apps.yaml, `FT`
- * una ficha de la vitrina) y `destino` (el NOMBRE de a dónde lleva la cita,
+ * una ficha de la vitrina, `T1…T9` una infografía de «Mi método») y `destino` (el NOMBRE de a dónde lleva la cita,
  * derivado de las mismas fuentes que pintan cada destino). El chip enseña
  * «AF-09 · Vesting» en vez del título del fragmento.
  *
@@ -49,6 +50,7 @@ import {
   nombresDeDestinos,
 } from "./destinos.mjs";
 import { chunksDeFichas, leerFichas } from "./fichas-al-indice.mjs";
+import { chunksDeMetodo, leerMetodo } from "./metodo-al-indice.mjs";
 
 const ROOT = process.cwd();
 // Los tests pasan un directorio temporal como argv[2] (patrón del script del PDF)
@@ -92,6 +94,7 @@ function readYaml(fileName) {
 /**
  * @param {{ cv: any, apps: any, aFondo: any[], locale: string,
  *   fichas?: { apps: any[], piezas: any[] } | null,
+ *   metodo?: { piezas: any[], etiquetas: Record<string, any> } | null,
  *   nombres?: Map<string, string>, sitio?: string }} entrada
  */
 export function buildChunks({
@@ -100,6 +103,7 @@ export function buildChunks({
   aFondo,
   locale,
   fichas = null,
+  metodo = null,
   nombres = nombresDeDestinos(locale),
   // La URL del sitio pone el dominio del correo propio (regla 16: no vive en
   // el repo). Sin ella, el chat solo conoce el Gmail.
@@ -249,6 +253,10 @@ export function buildChunks({
   // cifras con procedencia, límites y «nunca», citando a la página de cada
   // pieza. El texto es el que mandó cada casa, en español, en los dos índices.
   if (fichas) chunks.push(...chunksDeFichas(fichas, locale));
+  // «Mi método» (S10): cada infografía entra por bloques, con su ancla
+  // `/metodo/<slug>#bloque-n` y el rótulo de su voz dentro del texto. Su código
+  // es el id del tema (T2…): el chip dice «T2 · <la pieza>».
+  if (metodo) chunks.push(...chunksDeMetodo(metodo, locale));
   // El NOMBRE del destino viaja en el chunk: es lo que el chip enseña. Un
   // destino sin nombre queda sin el campo, y el esquema del índice —y el gate
   // de main()— lo paran con su id.
@@ -268,6 +276,7 @@ function detener(titulo, problemas) {
 function main() {
   const apps = readYaml("apps.yaml");
   const fichas = leerFichas();
+  const metodo = leerMetodo();
   const catalogo = catalogoDeDestinos();
 
   // --- ADUANA DEL CANAL «A FONDO» -----------------------------------------
@@ -304,6 +313,7 @@ function main() {
       aFondo: docs[locale],
       locale,
       fichas,
+      metodo,
     });
 
     // --- EL DESTINO DE TODA CITA EXISTE ------------------------------------

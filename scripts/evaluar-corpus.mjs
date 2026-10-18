@@ -34,6 +34,7 @@ import { z } from "zod";
 import { leerDocumentos, simularAprobacion } from "./a-fondo.mjs";
 import { buildChunks } from "./build-chat-index.mjs";
 import { leerFichas } from "./fichas-al-indice.mjs";
+import { leerMetodo } from "./metodo-al-indice.mjs";
 
 export const RUTA_BANCO = "tests/fixtures/banco-de-preguntas.es.yaml";
 export const RUTA_BANCO_EN = "tests/fixtures/banco-de-preguntas.en.yaml";
@@ -107,6 +108,7 @@ export function corpusPublicado(locale = "es") {
     aFondo: leerDocumentos(locale),
     locale,
     fichas: leerFichas(),
+    metodo: leerMetodo(),
   });
 }
 
@@ -124,6 +126,7 @@ export function corpusSimulado(locale = "es") {
     aFondo: simularAprobacion(leerDocumentos(locale)),
     locale,
     fichas: leerFichas(),
+    metodo: leerMetodo(),
   });
 }
 
