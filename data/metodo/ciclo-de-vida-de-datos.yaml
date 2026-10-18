@@ -83,7 +83,7 @@ bloques:
           es: "Estructuras relacionales y agregados para preguntas predecibles, en una sola copia y en formato abierto."
           en: "Relational structures and aggregates for predictable questions, as a single copy and in an open format."
       - n: 6
-        etiqueta: { es: "Modelo semántico gobernado", en: "Governed semantic model" }
+        etiqueta: { es: "Semántica gobernada", en: "Governed semantics" }
         tipo: dato
         col: 5
         fila: 0
