@@ -773,7 +773,7 @@ certificaciones:
     logo: microsoft.svg
   - nombre: "Microsoft Certified: Azure AI Apps and Agents Developer Associate (AI-103)"
     estado: "en curso"
-    nota: "In preparation: AI apps and agents on Azure with Microsoft Foundry, the path I'm on today."
+    nota: "In preparation: AI apps and agents on Azure with Microsoft Foundry; I have completed the course and the exam is still pending."
     icono: insignia
     logo: microsoft.svg
   - nombre: "Microsoft Certified: Machine Learning Operations Engineer Associate (AI-300)"
@@ -822,7 +822,7 @@ skills:
       - "Spark & Delta Parquet"
       - "Direct Lake"
       - "Data Factory"
-      - "Real-Time Intelligence (Eventhouse & KQL)"
+      - "Real-Time Intelligence (Eventhouse & KQL, at the query level)"
       - "Fabric Data Agents"
       - "Microsoft Purview — prototype"
       - "RLS (row-level security)"
