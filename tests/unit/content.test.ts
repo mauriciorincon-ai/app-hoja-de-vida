@@ -197,6 +197,11 @@ describe("content loader (data/*.yaml reales)", () => {
   const MARCA_EN_CURSO =
     /en curso|en ruta|en preparaci[oó]n|in progress|on the way|preparing/i;
   const VENTANA = 48;
+  // S12: el título de una fuente citada (bloque 10 de «Mi método») es el de un
+  // tercero, copiado tal cual —«Study guide for Exam AI-300: …»—: es una
+  // referencia, no un titular del dueño, y no admite una marca añadida. La
+  // frase de la pieza que cita esa fuente sí se lee, como todas.
+  const TITULO_DE_FUENTE = /\.fuentes\[\d+\]\.titulo$/;
   function mencionesSinMarca(
     valor: unknown,
     ruta: string,
@@ -204,6 +209,7 @@ describe("content loader (data/*.yaml reales)", () => {
     out: string[],
   ) {
     if (typeof valor === "string") {
+      if (TITULO_DE_FUENTE.test(ruta)) return;
       for (const m of valor.matchAll(CODIGO_CREDENCIAL)) {
         if (!codigos.has(m[0])) continue;
         const i = m.index ?? 0;
