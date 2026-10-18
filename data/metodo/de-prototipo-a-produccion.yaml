@@ -347,8 +347,8 @@ bloques:
         porQue:
           voz: campo
           texto:
-            es: "Microsoft documenta una acción de GitHub que evalúa agentes dentro de la integración continua, con intervalos de confianza y pruebas de significancia para saber si un cambio mejoró o solo varió, y aconseja no correrla en cada commit para contener el costo."
-            en: "Microsoft documents a GitHub Action that evaluates agents inside continuous integration, with confidence intervals and significance tests to tell whether a change improved or merely varied, and advises against running it on every commit to keep costs down."
+            es: "Microsoft documenta, en vista previa, una acción de GitHub que evalúa agentes dentro de la integración continua, con intervalos de confianza y pruebas de significancia para saber si un cambio mejoró o solo varió, y aconseja no correrla en cada commit para contener el costo."
+            en: "Microsoft documents, in preview, a GitHub Action that evaluates agents inside continuous integration, with confidence intervals and significance tests to tell whether a change improved or merely varied, and advises against running it on every commit to keep costs down."
           fuentes: [3]
         nota:
           voz: hice
@@ -372,8 +372,8 @@ bloques:
         nota:
           voz: campo
           texto:
-            es: "Para cargas de IA, Microsoft recomienda empezar por plataforma como servicio y opciones sin servidor para simplificar la adopción y la operación, y dejar el autoalojamiento para necesidades avanzadas."
-            en: "For AI workloads, Microsoft recommends starting with platform as a service and serverless options to simplify adoption and management, and leaving self-hosting for advanced needs."
+            es: "Para desplegar un modelo, Microsoft recomienda empezar por plataforma como servicio y soluciones sin servidor para simplificar la adopción y la operación; el cómputo gestionado es una opción viable para necesidades avanzadas, y el autoalojamiento, otra opción."
+            en: "To deploy a model, Microsoft recommends starting with platform as a service and serverless solutions to simplify adoption and management; managed compute is a viable option for advanced needs, and self-hosting is another option."
           fuentes: [8]
       - titulo: { es: "Qué se guarda para observar", en: "What gets stored in order to observe" }
         cuandoSi:
@@ -406,13 +406,13 @@ bloques:
         nota:
           voz: hice
           texto:
-            es: "Mi experiencia con Microsoft Foundry, completa en el bloque 9: lo conecté al chat como uno de sus proveedores, y estudio su temario en la ruta del AI-103, que está en curso."
-            en: "My experience with Microsoft Foundry, set out in full in block 9: I connected it to the chat as one of its providers, and I study its syllabus on the AI-103 path, which is in progress."
+            es: "Mi experiencia con Microsoft Foundry —sus límites, en el bloque 9—: lo conecté al chat como uno de sus proveedores, y estudio su temario en la ruta del AI-103, que está en curso."
+            en: "My experience with Microsoft Foundry —its limits are in block 9—: I connected it to the chat as one of its providers, and I study its syllabus on the AI-103 path, which is in progress."
           corpus: [rag-y-el-chat, certificaciones]
       - titulo: { es: "Las evaluaciones como una prueba más del pipeline", en: "Evaluations as one more test in the pipeline" }
         queCambia:
-          es: "La observabilidad deja de empezar en producción: Foundry integra puertas de calidad automáticas en la integración continua, aplica evaluadores de calidad, de RAG y de seguridad a un conjunto de consultas, y después evalúa una muestra del tráfico real."
-          en: "Observability no longer starts in production: Foundry plugs automated quality gates into continuous integration, applies quality, RAG and safety evaluators to a set of queries, and afterwards evaluates a sample of real traffic."
+          es: "La observabilidad deja de empezar en producción: Foundry integra puertas de calidad automáticas en la integración continua (con una acción de GitHub en vista previa), aplica evaluadores de calidad, de RAG y de seguridad a un conjunto de consultas, y después evalúa una muestra del tráfico real."
+          en: "Observability no longer starts in production: Foundry plugs automated quality gates into continuous integration (with a GitHub Action in preview), applies quality, RAG and safety evaluators to a set of queries, and afterwards evaluates a sample of real traffic."
         fuentes: [2, 3]
         nota:
           voz: hice
@@ -547,8 +547,8 @@ bloques:
       - nombre: { es: "La cadena de publicación que comparten mis apps", en: "The publishing chain my apps share" }
         nivel: uso-real
         texto:
-          es: "Mis aplicaciones hermanas y este sitio comparten la misma cadena: Git y GitHub, integración continua con pruebas unitarias, de integración y de extremo a extremo, accesibilidad con axe, presupuesto de rendimiento con Lighthouse y despliegue con una vista previa por cambio; ninguna rama llega a producción con uno de esos trabajos en rojo."
-          en: "My sibling apps and this site share the same chain: Git and GitHub, continuous integration with unit, integration and end-to-end tests, accessibility with axe, a performance budget with Lighthouse and deployment with one preview per change; no branch reaches production with one of those jobs red."
+          es: "Mis aplicaciones hermanas y este sitio comparten criterios y, en lo esencial, esta cadena: Git y GitHub, integración continua con pruebas unitarias, de integración y de extremo a extremo, accesibilidad con axe, presupuesto de rendimiento con Lighthouse y despliegue en Vercel con una vista previa por cambio (Innmobiliaria sale desde el borde en Cloudflare Workers y Dash Agent no se despliega); ninguna rama llega a producción con uno de esos trabajos en rojo."
+          en: "My sibling apps and this site share criteria and, in essence, this chain: Git and GitHub, continuous integration with unit, integration and end-to-end tests, accessibility with axe, a performance budget with Lighthouse and deployment on Vercel with one preview per change (Innmobiliaria is served from the edge on Cloudflare Workers and Dash Agent is not deployed); no branch reaches production with one of those jobs red."
         corpus: [plataforma-y-despliegue]
         href: /vitrina/apps
       - nombre: { es: "Este sitio: la integración continua contra una base real", en: "This site: continuous integration against a real database" }

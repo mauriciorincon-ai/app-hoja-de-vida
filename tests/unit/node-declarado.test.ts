@@ -13,7 +13,9 @@ import { parse } from "yaml";
  * suya y nadie comparaba nada contra la intención.
  *
  * Tres declaraciones tienen que contar la misma historia:
- *   · `package.json` → `engines.node`, que es lo que Vercel lee (solo la mayor);
+ *   · `package.json` → `engines.node`, que es lo que Vercel lee: un rango abierto como
+ *                       «>=22.18.0» se resuelve a la última mayor (24.x al escribir esto), así
+ *                       que producción puede correr más nuevo que la CI (que prueba 22.18.0);
  *   · `.nvmrc`        → la versión exacta con la que se trabaja y se prueba;
  *   · `ci.yml`        → cada `setup-node` lee `.nvmrc`: el job corre exactamente
  *                       lo declarado, sin una segunda copia que se desfase.

@@ -679,7 +679,9 @@ Una infografía es **un archivo de datos**, no una página: un archivo `data/met
 11. **Node:** el índice del chat lo arma un script que importa archivos `.ts`, y eso solo funciona
    desde **Node 22.18**. El proyecto lo declara (`engines` en `package.json`), `.nvmrc` trae la versión
    exacta que usa la CI en sus cuatro trabajos, y un test (`node-declarado`) falla si el mínimo, el
-   `.nvmrc` o la CI se contradicen. Si no tienes esa versión, `nvm use` la lee del `.nvmrc`.
+   `.nvmrc` o la CI se contradicen. Si no tienes esa versión, `nvm use` la lee del `.nvmrc`. Ojo: la
+   producción no usa el `.nvmrc`: Vercel lee el rango del `package.json` y, con un piso abierto,
+   corre la última mayor (hoy 24.x); la CI es la que prueba la 22.18.0.
 
 **Qué hace fallar el build** (y lo dice con el archivo y el campo): un bloque que falta o está fuera
 de orden · una fuente sin fecha, sin editor o sin enlace `https://`, o más nueva que la revisión ·
