@@ -49,8 +49,8 @@ bloques:
         col: 0
         fila: 0
         detalle:
-          es: "Lo que el sitio publica: datos del currículum, documentos aprobados, fichas. Lo que no está publicado no existe para el chat."
-          en: "What the site publishes: résumé data, approved documents, showcase sheets. What is not published does not exist for the chat."
+          es: "Lo que el sitio publica: datos del currículum, documentos aprobados, fichas e infografías como esta. Lo que no está publicado no existe para el chat."
+          en: "What the site publishes: résumé data, approved documents, showcase sheets and infographics like this one. What is not published does not exist for the chat."
       - n: 2
         etiqueta: { es: "Índice del build", en: "Build-time index" }
         tipo: dato
@@ -549,7 +549,7 @@ bloques:
         umbral: { es: "Todas.", en: "All of them." }
         aprueba: { es: "Quien es dueño del contenido, con la integración continua delante.", en: "Whoever owns the content, with continuous integration in front of them." }
       - metrica: { es: "Fuente esperada en el primer lugar", en: "Expected source in first place" }
-        umbral: { es: "Al menos el 60 % del banco.", en: "At least 60% of the bank." }
+        umbral: { es: "Un piso escrito, no un promedio: no baja de un cambio al siguiente.", en: "A written floor, not an average: it does not drop from one change to the next." }
         aprueba: { es: "Quien es dueño del contenido.", en: "Whoever owns the content." }
       - metrica: { es: "Preguntas propias de cada documento", en: "Each document’s own questions" }
         umbral: { es: "Todas con su documento entre las primeras fuentes.", en: "All with their document among the first sources." }
@@ -599,11 +599,11 @@ bloques:
           es: "Las cuatro fuentes por respuesta salieron de dos mediciones con dos conjuntos independientes —con cuatro, 75 de 75 y 136 de 136—, y el peso de 0,5 de las fichas de la vitrina devolvió el banco de 94 a 102 aciertos de 131."
           en: "The four sources per answer came from two measurements with two independent sets —with four, 75 out of 75 and 136 out of 136—, and the 0.5 weight on the showcase sheets brought the bank back from 94 to 102 hits out of 131."
         corpus: [rag-y-el-chat]
-      - nombre: { es: "Cinco proveedores, una variable de entorno", en: "Five providers, one environment variable" }
+      - nombre: { es: "La capa que adapta el proveedor, una variable de entorno", en: "The layer that adapts the provider, one environment variable" }
         nivel: uso-real
         texto:
-          es: "Groq en producción desde julio de 2026 —con gpt-oss-120b desde agosto—, y Gemini 2.5 Flash, Azure a través de Microsoft Foundry, Claude con Haiku 4.5 y cualquier servicio compatible con la API de OpenAI, adaptados e integrados sobre el Vercel AI SDK: se cambia con una variable de entorno, y el índice y las defensas no cambian."
-          en: "Groq in production since July 2026 —running gpt-oss-120b since August—, and Gemini 2.5 Flash, Azure through Microsoft Foundry, Claude with Haiku 4.5 and any service compatible with the OpenAI API, adapted and integrated on the Vercel AI SDK: it is switched with an environment variable, and the index and the defenses do not change."
+          es: "Una variable de entorno elige entre cinco proveedores adaptados e integrados sobre el Vercel AI SDK: Groq, el inicial, elegido en julio de 2026 —con gpt-oss-120b desde agosto, porque Groq retiró el modelo anterior—, Gemini 2.5 Flash, Azure a través de Microsoft Foundry, Claude con Haiku 4.5 y cualquier servicio compatible con la API de OpenAI. El índice y las defensas no cambian."
+          en: "An environment variable chooses among five providers adapted and integrated on the Vercel AI SDK: Groq, the initial one, chosen in July 2026 —running gpt-oss-120b since August, because Groq retired the earlier model—, Gemini 2.5 Flash, Azure through Microsoft Foundry, Claude with Haiku 4.5 and any service compatible with the OpenAI API. The index and the defenses do not change."
         corpus: [rag-y-el-chat]
       - nombre: { es: "La degradación, probada en una falla real", en: "Degradation, tested by a real failure" }
         nivel: uso-real
