@@ -52,8 +52,8 @@ bloques:
         col: 0
         fila: 0
         detalle:
-          es: "Lo que el sitio publica: datos del currículum, documentos aprobados, fichas e infografías como esta. Lo que no está publicado no existe para el chat."
-          en: "What the site publishes: résumé data, approved documents, showcase sheets and infographics like this one. What is not published does not exist for the chat."
+          es: "Lo que el sitio publica: datos del currículum, documentos aprobados, fichas y publicaciones como esta. Lo que no está publicado no existe para el chat."
+          en: "What the site publishes: résumé data, approved documents, showcase sheets and publications like this one. What is not published does not exist for the chat."
       - n: 2
         etiqueta: { es: "Índice del build", en: "Build-time index" }
         tipo: dato
@@ -636,7 +636,7 @@ bloques:
       - voz: hice
         texto:
           es: "El chat no ajusta ni reentrena ningún modelo, y no es por no saber: el autor ajustó modelos en Microsoft Foundry, en varios prototipos propios. Un ajuste cambia cómo se comporta el modelo; lo que cambia en la trayectoria del autor cambia en la fuente y entra al índice en el siguiente build."
-          en: "The chat does not fine-tune or retrain any model, and it is not for lack of knowing how: the author fine-tuned models on Microsoft Foundry, in several in-house prototypes. A fine-tune changes how a model behaves; what changes in the author’s career changes at the source and enters the index on the next build."
+          en: "The chat does not fine-tune or retrain any model, and it is not for lack of knowing how: the author fine-tuned models on Microsoft Foundry, in several prototypes of the author’s own. A fine-tune changes how a model behaves; what changes in the author’s career changes at the source and enters the index on the next build."
         corpus: [rag-y-el-chat]
       - voz: hice
         texto:

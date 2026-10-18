@@ -235,7 +235,7 @@ bloques:
             es: "GitHub activó por defecto la protección contra secretos en los push a repositorios públicos: si detecta uno, bloquea el push hasta que se quite o se decida pasarlo por alto."
             en: "GitHub turned on secret scanning push protection by default for pushes to public repositories: if it detects one, it blocks the push until the secret is removed or the block is deliberately bypassed."
           fuentes: [9]
-      - nombre: { es: "Antes de publicar: corren los controles y una persona decide", en: "Take it to production: the checks run before publishing and a person decides" }
+      - nombre: { es: "Llevarlo a producción: corren los controles antes de publicar y una persona decide", en: "Take it to production: the checks run before publishing and a person decides" }
         entradas:
           - { es: "La vista previa del cambio.", en: "The change’s preview." }
           - { es: "Las conclusiones de cada control requerido.", en: "The conclusions of every required control." }
@@ -611,7 +611,7 @@ bloques:
       - voz: hice
         texto:
           es: "Con Microsoft Foundry la experiencia es el adaptador de proveedor de este chat, ajustes de modelos hechos ahí, en varios prototipos propios, y el estudio del AI-103, que está en curso; no se describe ningún despliegue propio en Azure."
-          en: "With Microsoft Foundry the experience is this chat’s provider adapter, fine-tunes of models done there, in several in-house prototypes, and studying for the AI-103, which is in progress; no deployment of the author’s own on Azure is described."
+          en: "With Microsoft Foundry the experience is this chat’s provider adapter, fine-tunes of models done there, in several prototypes of the author’s own, and studying for the AI-103, which is in progress; no deployment of the author’s own on Azure is described."
         corpus: [rag-y-el-chat, certificaciones]
       - voz: hice
         texto:

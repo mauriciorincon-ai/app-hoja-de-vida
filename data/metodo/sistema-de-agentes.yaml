@@ -454,8 +454,8 @@ bloques:
         nota:
           voz: hice
           texto:
-            es: "En la Fundación CTIC, Microsoft Agent Framework y Claude Agent SDK se usan para experimentar y construir prototipos; el ecosistema de LangChain se usa allí junto con n8n."
-            en: "At Fundación CTIC, Microsoft Agent Framework and the Claude Agent SDK are used for experimentation and prototypes; the LangChain ecosystem is used there alongside n8n."
+            es: "En la Fundación CTIC, Microsoft Agent Framework y Claude Agent SDK se usan para experimentar y construir prototipos; el autor trabaja allí con el ecosistema de LangChain junto con n8n."
+            en: "At Fundación CTIC, Microsoft Agent Framework and the Claude Agent SDK are used for experimentation and prototypes; the author works there with the LangChain ecosystem alongside n8n."
           corpus: [fundacion-ctic]
       - titulo: { es: "La agencia excesiva, riesgo de primera línea", en: "Excessive agency as a front-line risk" }
         queCambia:
@@ -596,13 +596,13 @@ bloques:
         corpus: [agentes-en-produccion]
       - voz: hice
         texto:
-          es: "Con Microsoft Agent Framework y Claude Agent SDK hay experimentación y prototipos, no producción. El ecosistema de LangChain se usa en la Fundación CTIC, sin un entregable publicado aquí."
-          en: "With Microsoft Agent Framework and the Claude Agent SDK there has been experimentation and prototypes, not production. The LangChain ecosystem is used at Fundación CTIC, with no deliverable published here."
+          es: "Con Microsoft Agent Framework y Claude Agent SDK hay experimentación y prototipos, no producción. El autor trabaja con el ecosistema de LangChain en la Fundación CTIC, sin un entregable publicado aquí."
+          en: "With Microsoft Agent Framework and the Claude Agent SDK there has been experimentation and prototypes, not production. The author works with the LangChain ecosystem at Fundación CTIC, with no deliverable published here."
         corpus: [fundacion-ctic]
       - voz: hice
         texto:
-          es: "No hay agentes operados en contenedores: Docker y Kubernetes en producción no están en la experiencia profesional del autor."
-          en: "No agents have been run in containers: Docker and Kubernetes in production are not part of the author’s professional experience."
+          es: "El autor no ha operado agentes en contenedores: Docker y Kubernetes en producción no están en su experiencia profesional."
+          en: "The author has not run agents in containers: Docker and Kubernetes in production are not part of the author’s professional experience."
         corpus: [plataforma-y-despliegue]
       - voz: hice
         texto:
