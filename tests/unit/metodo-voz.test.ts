@@ -26,6 +26,9 @@ describe("el motor: lo que atrapa", () => {
     ["Diseñé la plataforma y la medí en cada cambio", ["Diseñé", "medí"]],
     ["Empiezo por el recorrido y separo lo común", ["Empiezo", "separo"]],
     ["Cómo llevo un prototipo a producción", ["llevo"]],
+    ["Guardo la copia y evalúo cada cambio", ["Guardo", "evalúo"]],
+    ["Sé que funciona y tengo la prueba", ["Sé", "tengo"]],
+    ["Mantengo el índice y presento el resultado", ["Mantengo", "presento"]],
     ["No he operado agentes en contenedor", ["he"]],
     ["Una pregunta de entrevista", ["entrevista"]],
     ["El entrevistador pregunta", ["entrevistador"]],
@@ -58,6 +61,9 @@ describe("el motor: lo que NO debe atrapar", () => {
     "El DP-600 se obtuvo en diciembre de 2024",
     "El costo es de US$20 al mes y el techo de US$20",
     "Cómo se debe llevar un prototipo de IA a producción",
+    // Un sustantivo y un condicional que también es de tercera persona: se lee la pieza.
+    "El reparto del trabajo entre especialistas se sabe de antemano",
+    "La búsqueda léxica seguiría ahí y la prueba se pagaría sola",
     "Quien decide: producto, operaciones y líderes de proceso",
     // Lo citado es la voz de otro: la respuesta fija del chat, no la del autor.
     "Diez legítimas recibían «eso se me escapa» y una recibe «no sé»",

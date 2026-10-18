@@ -52,6 +52,9 @@ const VERBOS_ES = solo(
     "diseñé|medí|comparé|usé|implementé|conecté|construí|ajusté|estudié|definí|documenté|validé|hice|obtuve",
     // presente
     "hago|versiono|construyo|empiezo|separo|sigo|conozco|pido|pongo|mido|miro|digo|prefiero|estructuro|llevo",
+    "guardo|doy|evalúo|reservo|presento|mantengo|tengo|puedo|sé",
+    // Sin condicionales («haría», «usaría»): son idénticos en tercera persona y se lee la pieza.
+    // Sin «reparto»: es también un sustantivo («el reparto del trabajo»).
     // «he hecho», «he operado»: el auxiliar solo, seguido de un participio
     "he(?= \\p{L}+(?:ado|ido|to|cho)(?![\\p{L}]))",
   ].join("|"),
