@@ -45,7 +45,7 @@ sabes hacer gracias a cada una, cómo se conectan entre sí y con tu trabajo. --
 | Código | Nombre oficial                                                      | Estado               | Fecha                          |
 | ------ | ------------------------------------------------------------------- | -------------------- | ------------------------------ |
 | DP-600 | Microsoft Certified: Fabric Analytics Engineer Associate            | obtenida, vigente    | diciembre de 2024              |
-| AI-103 | Microsoft Certified: Azure AI Apps and Agents Developer Associate   | en curso, 21 módulos | desde julio de 2026            |
+| AI-103 | Microsoft Certified: Azure AI Apps and Agents Developer Associate   | en curso: curso completo, examen pendiente | desde julio de 2026            |
 | AI-300 | Microsoft Certified: Machine Learning Operations Engineer Associate | en curso, 10 módulos | desde julio de 2026            |
 | IBM    | Ciencia de Datos Aplicada con R                                     | obtenida             | enero – noviembre de 2024      |
 | IBM    | Certificado Profesional en Ciencia de Datos (con sus cursos de Python y SQL) | obtenida             | mayo – noviembre de 2022       |
@@ -88,7 +88,7 @@ El DP-600 no define todo mi perfil, pero sí valida su núcleo analítico. Demue
 
 <!-- seccion: el-ai-103 -->
 
-Desde julio de 2026 desarrollo la ruta correspondiente al examen AI-103, orientado al desarrollo de aplicaciones y agentes de inteligencia artificial en Azure; a la fecha llevo 21 módulos. No presento esta credencial como obtenida. Mientras no apruebe el examen, debe aparecer en mi perfil como una certificación en preparación y no formar parte del conteo de certificaciones alcanzadas.
+Desde julio de 2026 desarrollo la ruta correspondiente al examen AI-103, orientado al desarrollo de aplicaciones y agentes de inteligencia artificial en Azure; a la fecha completé el curso y me falta el examen. No presento esta credencial como obtenida. Mientras no apruebe el examen, debe aparecer en mi perfil como una certificación en preparación y no formar parte del conteo de certificaciones alcanzadas.
 
 El AI-103 conduce a la certificación Microsoft Certified: Azure AI Apps and Agents Developer Associate. Su enfoque está en el diseño, desarrollo e implementación de soluciones avanzadas de inteligencia artificial mediante Python, servicios de Azure y Microsoft Foundry (antes Azure AI Foundry). La ruta comprende aplicaciones de inteligencia artificial generativa, agentes, procesamiento de lenguaje natural, extracción de información y soluciones relacionadas con contenido visual. De esta ruta, y de las credenciales de IBM, viene el NLP que declaro entre mis skills, y en ella estudié a fondo Azure AI Search, el servicio de búsqueda de Azure.
 

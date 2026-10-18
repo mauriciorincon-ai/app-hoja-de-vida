@@ -2,7 +2,7 @@
 slug: como-aprendo
 codigo: AF-19
 titulo: "How I learn"
-resumen: "The argument with a measure: the DP-600 in five months on a Fabric with less than a year on the market, Codex, Antigravity and Claude Code within a month of their release, this site in twelve sprints since July 2026, and 38 public pieces with their tests and coverage."
+resumen: "The argument with a measure: the DP-600 in five months on a Fabric with less than a year on the market, Codex, Antigravity and Claude Code within a month of their release, this site in thirteen sprints since July 2026, and 38 public pieces with their tests and coverage."
 cuando_usar: "Use this when they ask how he learns a new technology, what he does when the job asks for something he has never used, how long it took him to get certified, what he is studying now, or how he documents and proves what he learned."
 estado: aprobado
 ancla: "#certificaciones"
@@ -165,7 +165,7 @@ evaluation of results. Python expanded my capacity to build solutions. R deepene
 evidence before producing a conclusion.
 
 I am currently working through the AI-103 and AI-300 tracks because they correspond to the next
-stage of my career: 21 and 10 modules to date. The AI-103 goes deeper into building artificial
+stage of my career: for the AI-103 I have completed the course and the exam is pending, and for the AI-300 I am 10 modules in. The AI-103 goes deeper into building artificial
 intelligence applications and agents. The AI-300 expands the practices needed to deploy, evaluate,
 observe and maintain models, generative applications and agents throughout their life cycle.
 
@@ -187,8 +187,8 @@ The last few times I learned something from scratch, and how long it took:
 | What                                   | Since          | Time frame                          | Result                                                        |
 | -------------------------------------- | -------------- | ----------------------------------- | ------------------------------------------------------------- |
 | Microsoft Fabric                       | August 2023    | 5 months of study (Jul–Nov 2024)    | DP-600 in December 2024, Vesting platform in operation        |
-| Next.js and the application pipeline   | July 2026      | 12 sprints | this site, CV Viva, with its CI, its tests and its ADRs       |
-| AI-103 and AI-300                      | July 2026      | 21 and 10 modules to date           | two tracks in progress, with the AI-103 Super Guide published |
+| Next.js and the application pipeline   | July 2026      | 13 sprints | this site, CV Viva, with its CI, its tests and its ADRs       |
+| AI-103 and AI-300                      | July 2026      | course complete and 10 modules      | two tracks in progress, with the AI-103 Super Guide published |
 | Codex, Antigravity and Claude Code     | their release  | close to a month each               | the pipeline with which the 38 pieces are built               |
 
 The last things I learned from scratch, with no certificate involved, were Codex, Antigravity and
@@ -279,7 +279,7 @@ test or a reusable rule.
 
 Learning advances through short cycles. I build a limited capability, observe its behavior, identify
 the next gap and extend the solution. This sequence reduces the chance of spending weeks on an
-extensive architecture before checking its main assumptions. This site was built that way: 12
+extensive architecture before checking its main assumptions. This site was built that way: 13
 sprints, each with its plan, its log and its summary.
 
 ## Feedback, technical critique and correcting course: familiarity is not mastery

@@ -9,7 +9,7 @@
 # Investigación del 2026-10-18: documentación oficial primero (Microsoft Learn, OWASP, GitHub), solo contenido
 # público servido al navegador, sin credenciales ajenas ni endpoints de terceros; ninguna página leída traía texto
 # dirigido a agentes. La evidencia sale de `plataforma-y-despliegue`, `apps-pipeline`, `rag-y-el-chat` (incluido lo
-# que entró el 2026-10-18: el ajuste de un modelo en Microsoft Foundry, sin nivel declarado) y `certificaciones`.
+# que entró el 2026-10-18: el ajuste de modelos en Microsoft Foundry, en varios prototipos propios) y `certificaciones`.
 # Límites con las palabras del corpus: contenedores y Kubernetes en producción no están en la experiencia, ningún
 # despliegue propio en Azure, el ajuste en Foundry entra solo como límite y sin crecer, AI-300 y AI-103 en curso.
 # El bloque 7 no lleva cifras propias (la nota fija de la página lo dice); ninguna cifra que se mueva sola con el
@@ -607,8 +607,8 @@ bloques:
         corpus: [plataforma-y-despliegue]
       - voz: hice
         texto:
-          es: "Con Microsoft Foundry mi experiencia es el adaptador de proveedor de este chat, un ajuste de un modelo que hice ahí y el estudio del AI-103, que está en curso; no describo ningún despliegue propio en Azure."
-          en: "With Microsoft Foundry my experience is this chat’s provider adapter, a fine-tune of a model I did there and studying for the AI-103, which is in progress; I do not describe any deployment of my own on Azure."
+          es: "Con Microsoft Foundry mi experiencia es el adaptador de proveedor de este chat, ajustes de modelos que hice ahí, en varios prototipos propios, y el estudio del AI-103, que está en curso; no describo ningún despliegue propio en Azure."
+          en: "With Microsoft Foundry my experience is this chat’s provider adapter, fine-tunes of models I did there, in several prototypes of my own, and studying for the AI-103, which is in progress; I do not describe any deployment of my own on Azure."
         corpus: [rag-y-el-chat, certificaciones]
       - voz: hice
         texto:

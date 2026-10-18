@@ -589,7 +589,7 @@ el mensaje te llega al correo.
 - **Qué hace:** `/es/metodo` y `/en/metodo` listan tus infografías; cada una vive en
   `/metodo/<slug>` y es una página larga que contesta **una pregunta de entrevista con tu
   método**: las fases, las decisiones, los controles y tu evidencia. En una entrevista abres la
-  página y la muestras. Hoy hay tres piezas publicadas —la lista de `/metodo` las cuenta y las nombra— y las
+  página y la muestras. Hoy hay cuatro piezas publicadas —la lista de `/metodo` las cuenta y las nombra— y las
   otras llegan una por sprint. «Mi método» está en el menú, junto a Portafolio y Contacto. **La cuenta de
   piezas de la lista se mide** de `data/metodo/`: nunca la escribas.
 - **Cómo se lee:** son **diez bloques fijos, siempre en el mismo orden**: 1 la pregunta (y su
@@ -614,11 +614,13 @@ el mensaje te llega al correo.
   «T2 · Cómo estructuro un sistema de agentes» que lleva **al bloque** exacto; con «¿Cómo evita el
   chat de Henry inventar respuestas?» la cita es «T3 · Cómo hago que un LLM responda con los datos de la
   empresa y no invente»; y con «¿Cómo lleva Henry una aplicación de IA a producción?» es
-  «T4 · Cómo llevo un prototipo de IA a producción y lo mantengo». Los fragmentos
+  «T4 · Cómo llevo un prototipo de IA a producción y lo mantengo»; con «¿Qué diferencias ve Henry
+  entre Fabric y Databricks?» es «T6 · Cómo estructuro el ciclo de vida de un proyecto de datos a
+  escala». Los fragmentos
   llevan su voz dentro del texto («lo que el campo hace — Anthropic, 2025-06-13»), así que el chat
   no te atribuye lo que hace el campo. Pesan **la mitad** que tus documentos a fondo (como las
   fichas): medido, a peso 1 la pieza le quitaba el contexto a tus propios documentos.
-- **Limitaciones conocidas:** tres piezas publicadas hasta ahora; el segundo idioma se
+- **Limitaciones conocidas:** cuatro piezas publicadas hasta ahora; el segundo idioma se
   revisa a ojo al cierre del hito, no en cada sprint; sin PDF descargable (decisión tuya).
 
 #### Cómo se escribe una infografía nueva
@@ -663,7 +665,10 @@ Una infografía es **un archivo de datos**, no una página: un archivo `data/met
    índice crezca. Con T4 pasó al revés: dos de sus tres preguntas no entraban («qué controles corren
    antes de publicar» y «qué experiencia tengo con Microsoft Foundry»); se ajustó el nombre de una
    fase y el de un elemento de la pieza, con las palabras de quien pregunta, y las filas quedaron como
-   estaban. Y como el banco crece, el número de preguntas de afuera
+   estaban. Con T6 entraron dos de las tres: la de «cómo diseñó Henry la plataforma de datos de Vesting»
+   no trae la pieza (ES 4.ª por muy poco, EN 30.ª) porque el documento de Vesting es su fuente natural y la
+   pieza pesa la mitad; el banco exige la misma fila en los dos idiomas, así que esa fila no se escribió y
+   el cierre del sprint la declara. Y como el banco crece, el número de preguntas de afuera
    que dicen los documentos `rag-y-el-chat` y `apps-pipeline` (en los dos idiomas) **tiene que
    subir**: el test de coherencia te dice cuál.
 8. **Rendimiento y capturas:** suma `/es/metodo/<slug>` a `lighthouse-urls.json` y corre
@@ -677,11 +682,12 @@ Una infografía es **un archivo de datos**, no una página: un archivo `data/met
 10. **Prueba antes de mergear:** `pnpm test` (esquema, índice del chat, banco), `pnpm build` y los
    e2e de «Mi método»; el spec lee `data/metodo/` y cubre la pieza nueva **sin tocarlo**.
 11. **Node:** el índice del chat lo arma un script que importa archivos `.ts`, y eso solo funciona
-   desde **Node 22.18**. El proyecto lo declara (`engines` en `package.json`), `.nvmrc` trae la versión
-   exacta que usa la CI en sus cuatro trabajos, y un test (`node-declarado`) falla si el mínimo, el
-   `.nvmrc` o la CI se contradicen. Si no tienes esa versión, `nvm use` la lee del `.nvmrc`. Ojo: la
-   producción no usa el `.nvmrc`: Vercel lee el rango del `package.json` y, con un piso abierto,
-   corre la última mayor (hoy 24.x); la CI es la que prueba la 22.18.0.
+   desde **Node 22.18**. El proyecto declara la **mayor** (`engines` en `package.json`: `22.x`, que es
+   lo que lee Vercel) y `.nvmrc` trae la versión exacta que prueban los cuatro trabajos de la CI
+   (la 22.18.0): producción y CI corren la misma mayor. Un test (`node-declarado`) falla si `engines`
+   es un rango abierto, si el `.nvmrc` o los tipos (`@types/node`) son de otra mayor, o si un trabajo
+   de la CI lee la versión antes de traer el repositorio. Si tu Node local es otra (hoy la 24), pnpm
+   avisa «Unsupported engine» y sigue; `nvm use` toma el `.nvmrc` si tienes la 22.
 
 **Qué hace fallar el build** (y lo dice con el archivo y el campo): un bloque que falta o está fuera
 de orden · una fuente sin fecha, sin editor o sin enlace `https://`, o más nueva que la revisión ·
@@ -1210,3 +1216,4 @@ chat hoy y cuáles traería con la base aprobada. Ese informe **se genera, no se
 | Sprint 010 | **«Mi método»: tu método de trabajo, una infografía por pregunta de entrevista.** Sección nueva `/metodo` (en el menú, junto a Portafolio y Contacto) y una página por pieza, `/metodo/<slug>`, con **diez bloques fijos**, anclas `#bloque-1…10`, un mapa SVG con texto real y su lectura nodo por nodo, un riel de fases y **tres voces que nunca se mezclan** (lo que hice · lo que el campo hace · mi posición, cada una con símbolo, palabra y color). Se imprime en A4 y en carta. Cada infografía es **un archivo de datos** (`data/metodo/<slug>.yaml`) con esquema que rompe el build si falta un bloque, una fuente sin fecha, una afirmación sin su evidencia, cifras distintas entre idiomas o un `[CONFIRMAR]`. Primera pieza: **«Cómo estructuro un sistema de agentes» (T2)**, con 16 fuentes fechadas. **El chat la cita bloque a bloque** (chip «T2 · …» que lleva al bloque) y el banco suma tres preguntas por idioma. Sección nueva arriba: cómo se escribe una infografía. Detalle en `sprints/SPRINT_010-cierre.md`. |
 | Sprint 011 | **«Mi método», segunda pieza: «Cómo hago que un LLM responda con los datos de la empresa y no invente» (T3).** Diez bloques con 14 fuentes fechadas (documentación oficial de Microsoft Learn, Anthropic y OWASP primero); lo que hice sale solo de `rag-y-el-chat`, y los embeddings aparecen como decisión escrita, no como experiencia. **Es la pieza que se demuestra sola:** el chat de esta página la cita bloque a bloque, y el banco suma tres preguntas por idioma. **El mecanismo quedó blindado:** el índice del chat pasa por el esquema antes de armarse, los enlaces de la evidencia se comprueban contra el catálogo, un documento citado debe estar aprobado en los dos idiomas, cada cifra de «lo que hice» debe estar en su documento, la cifra de la Fundación CTIC vigila también `data/metodo/`, y los totales de piezas del manual y la guía se miden. En la lista `/metodo`, las dos tarjetas miden lo mismo. Detalle en `sprints/SPRINT_011-cierre.md`. |
 | Sprint 012 | **«Mi método», tercera pieza: «Cómo llevo un prototipo de IA a producción y lo mantengo» (T4).** Diez bloques con 12 fuentes fechadas (Microsoft Learn, OWASP y GitHub); lo que hice sale de `plataforma-y-despliegue`, `apps-pipeline`, `rag-y-el-chat` y `certificaciones`, y lo que no he hecho —contenedores y Kubernetes en producción, un despliegue propio en Azure— está escrito como límite, con el AI-300 «en curso». Es la pieza donde la evidencia es el propio pipeline. **El proyecto declara la versión de Node que necesita** (22.18, `engines` y `.nvmrc`) y la CI corre exactamente esa. La lista `/metodo` cuenta tres piezas, medidas. Detalle en `sprints/SPRINT_012-cierre.md`. |
+| Sprint 013 | **«Mi método», cuarta pieza: «Cómo estructuro el ciclo de vida de un proyecto de datos a escala» (T6).** Diez bloques con 13 fuentes fechadas (todas de Microsoft Learn: Fabric y Azure Databricks); lo que hice sale de `vesting`, `fabric-en-la-practica`, `plataforma-y-despliegue` y `certificaciones` (el DP-600, obtenido en diciembre de 2024), y lo que no he hecho —Eventhouse y KQL más allá del temario del DP-600, Databricks y Snowflake más allá del prototipo, AWS— está escrito como límite. Es la pieza que explica la plataforma de datos de Vesting. **Node:** `engines` pasó a `22.x` (producción y la CI corren la misma mayor) y el test `node-declarado` lo vigila. **Tus dos respuestas del S12 entran al corpus:** el AI-103 con el curso completo y el examen pendiente, y el ajuste de modelos en Microsoft Foundry (antes Azure AI Foundry) hecho en varios prototipos propios. La lista `/metodo` cuenta cuatro piezas, medidas. En la ficha de Innmobiliaria sale «Compradores verificados» del roadmap votable, porque su sprint 8 ya lo entrega. Detalle en `sprints/SPRINT_013-cierre.md`. |

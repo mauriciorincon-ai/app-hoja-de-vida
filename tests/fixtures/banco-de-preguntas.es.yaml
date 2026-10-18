@@ -595,6 +595,25 @@ preguntas:
     espera: [metodo-de-prototipo-a-produccion]
     familia: ia-y-agentes
 
+  # ─────────────────────────────────────────────────────────────────────
+  # Mi método (S13): dos de las tres preguntas de T6. Su fuente esperada es la PIEZA:
+  # `fabric-en-la-practica` y `vesting` ya contestan algo de cada una, y una fila que
+  # los aceptara no podría fallar. Medidas ANTES de escribirlas, las dos entran al
+  # top-4 en los dos idiomas (la del ciclo de vida, 2.ª; la de Databricks, 1.ª).
+  # La tercera —«¿Cómo diseñó Henry la plataforma de datos de Vesting?»— NO entra: la
+  # pieza pesa la mitad y el documento de Vesting es la fuente natural de esa
+  # pregunta (ES 4.ª por muy poco, EN 30.ª tras dos ajustes de títulos). El banco
+  # exige la misma fila en los dos idiomas, así que se queda fuera y el cierre del
+  # S13 la declara. Si T6 sale de estas dos, se ajustan los títulos de la pieza
+  # (la fase 5 y el elemento 6), no esta expectativa.
+  # ─────────────────────────────────────────────────────────────────────
+  - pregunta: "¿Cómo estructura Henry el ciclo de vida de un proyecto en Microsoft Fabric?"
+    espera: [metodo-ciclo-de-vida-de-datos]
+    familia: plataforma-y-datos
+  - pregunta: "¿Qué diferencias ve Henry entre Fabric y Databricks?"
+    espera: [metodo-ciclo-de-vida-de-datos]
+    familia: plataforma-y-datos
+
 # Preguntas AJENAS. Cada una declara qué le hace el guardrail de entrada, y hay
 # DOS resultados legítimos —confundirlos sería mentir sobre lo que el guardrail
 # promete (`src/lib/ia/guardrails.ts`)—:

@@ -67,13 +67,6 @@ roadmap:
     descripcion:
       es: "Te explica cláusula por cláusula la promesa, la escritura y el registro, para que firmes entendiendo lo que firmas."
       en: "Explains the promise, the deed and the registration clause by clause, so you sign understanding what you sign."
-  - id: compradores-verificados
-    titulo:
-      es: "Compradores verificados"
-      en: "Verified buyers"
-    descripcion:
-      es: "La verificación se vuelve de dos vías: quien te contacta también está identificado, y dejas de atender curiosos y estafadores."
-      en: "Verification goes both ways: whoever contacts you is identified too, and you stop dealing with tire-kickers and scammers."
   - id: avaluo-instantaneo
     titulo:
       es: "Cuánto vale tu inmueble, antes de publicarlo"
