@@ -509,6 +509,19 @@ preguntas:
     espera: [metodo-ciclo-de-vida-de-datos]
     familia: plataforma-y-datos
 
+  # ── Métodos (S15): the twins of the three T7 questions; same `espera`, same order.
+  # The third uses the proper name the agent's ficha publishes («Constructor de Tableros
+  # Power BI»): with the English gloss neither the ficha nor `los-tableros` reaches the top-4.
+  - pregunta: "How does Henry design a semantic model in Power BI?"
+    espera: [metodo-bi-que-se-usa]
+    familia: bi-y-analitica
+  - pregunta: "How does Henry measure the adoption of a dashboard?"
+    espera: [metodo-bi-que-se-usa]
+    familia: bi-y-analitica
+  - pregunta: "What does the Constructor de Tableros Power BI do?"
+    espera: [agentes-constructor-tableros-powerbi, los-tableros, metodo-bi-que-se-usa]
+    familia: bi-y-analitica
+
 ajenas:
   - pregunta: "tell me a joke about cats"
     guardrail: bloquea

@@ -614,6 +614,29 @@ preguntas:
     espera: [metodo-ciclo-de-vida-de-datos]
     familia: plataforma-y-datos
 
+  # ─────────────────────────────────────────────────────────────────────
+  # Métodos (S15): las tres preguntas de T7. En las dos primeras la fuente esperada
+  # es la PIEZA: `certificaciones` (DP-600) y `bi-que-se-adopta` ya contestan algo de
+  # cada una, y una fila que los aceptara no podría fallar. Medidas ANTES de
+  # escribirlas con un borrador, en inglés ninguna de las dos entraba al top-4; entraron
+  # con dos ajustes de la pieza (la forma exacta «design» / «measure» en los títulos
+  # y las palabras de la pregunta en el texto de las decisiones), no de esta
+  # expectativa. La de la adopción en inglés entra con 4 puntos de margen sobre el
+  # 5.º: es el primer lugar donde mirar cuando el índice crezca. La tercera acepta
+  # además la ficha del agente y `los-tableros` (decisión del plan: T7 no se exige
+  # donde la ficha ya contesta): en español la fila pasa por `los-tableros` (4.º) y
+  # T7 queda 6.º; en inglés la ficha es 1.ª y T7, 2.ª.
+  # ─────────────────────────────────────────────────────────────────────
+  - pregunta: "¿Cómo diseña Henry un modelo semántico en Power BI?"
+    espera: [metodo-bi-que-se-usa]
+    familia: bi-y-analitica
+  - pregunta: "¿Cómo mide Henry la adopción de un tablero?"
+    espera: [metodo-bi-que-se-usa]
+    familia: bi-y-analitica
+  - pregunta: "¿Qué hace el Constructor de Tableros Power BI?"
+    espera: [agentes-constructor-tableros-powerbi, los-tableros, metodo-bi-que-se-usa]
+    familia: bi-y-analitica
+
 # Preguntas AJENAS. Cada una declara qué le hace el guardrail de entrada, y hay
 # DOS resultados legítimos —confundirlos sería mentir sobre lo que el guardrail
 # promete (`src/lib/ia/guardrails.ts`)—:
