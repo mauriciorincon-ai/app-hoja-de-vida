@@ -312,7 +312,7 @@ export function chunksDePieza({ archivo = "data/metodo/?.yaml", pieza }, locale,
     })),
   );
 
-  // 9 · Lo que haría distinto y lo que no he hecho
+  // 9 · Límites y alcance
   bloque(9, (bloques.get(9).limites ?? []).map(conVoz));
 
   // 10 · Fuentes y fecha de revisión (título, editor y fecha; el enlace vive en la página)
