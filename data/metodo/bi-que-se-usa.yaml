@@ -356,8 +356,8 @@ bloques:
         porQue:
           voz: hice
           texto:
-            es: "En Vesting un mismo modelo combinaba Direct Lake, importación y DirectQuery; los seis tableros de datos abiertos usan importación, que con 6,4 millones de filas de hechos en el mayor lo sostiene sin dificultad."
-            en: "At Vesting a single model combined Direct Lake, import and DirectQuery; the six open-data dashboards use import, which, with 6.4 million fact rows in the largest of them, sustains it without difficulty."
+            es: "En Vesting los modelos combinaban Direct Lake, importación y DirectQuery según el uso; los seis tableros de datos abiertos usan importación, que con 6,4 millones de filas de hechos en el mayor lo sostiene sin dificultad."
+            en: "At Vesting the models combined Direct Lake, import and DirectQuery depending on use; the six open-data dashboards use import, which, with 6.4 million fact rows in the largest of them, sustains it without difficulty."
           corpus: [fabric-en-la-practica, los-tableros]
         nota:
           voz: campo
@@ -419,8 +419,8 @@ bloques:
         nota:
           voz: campo
           texto:
-            es: "La hoja de ruta de adopción de Microsoft advierte que las estadísticas de uso por sí solas no indican una adopción exitosa, y el informe de métricas de uso de Power BI cuenta vistas, espectadores únicos y tiempos de apertura."
-            en: "Microsoft’s adoption roadmap warns that usage statistics alone don’t indicate successful user adoption, and the Power BI usage metrics report counts views, unique viewers and opening times."
+            es: "La hoja de ruta de adopción de Microsoft advierte que las estadísticas de uso por sí solas no indican una adopción exitosa, y el informe de métricas de uso de Power BI, en versión preliminar, cuenta vistas, espectadores únicos y tiempos de apertura."
+            en: "Microsoft’s adoption roadmap warns that usage statistics alone don’t indicate successful user adoption, and the Power BI usage metrics report, in preview, counts views, unique viewers and opening times."
           fuentes: [17, 19]
 
   # ─── 5 · Lo innovador en 2026 ───────────────────────────────────────────────
@@ -428,8 +428,8 @@ bloques:
     elementos:
       - titulo: { es: "Copilot y los agentes de datos de Fabric leen el modelo semántico", en: "Copilot and Fabric data agents read the semantic model" }
         queCambia:
-          es: "Copilot en Power BI usa lo que se guarda en el modelo semántico con la función «Prep data for AI» —un esquema de datos, respuestas verificadas e instrucciones, guardados en el modelo y no en el reporte— y pide un área de trabajo en una capacidad de Fabric de pago (F2 o superior), en una Premium (P1 o superior) o en una capacidad de Copilot de Fabric; un agente de datos de Fabric consulta modelos semánticos generando DAX, solo de lectura y con los permisos de quien pregunta."
-          en: "Copilot in Power BI uses what is saved in the semantic model with “Prep data for AI” —a data schema, verified answers and instructions, saved on the model and not on the report— and requires a workspace on a paid Fabric capacity (F2 or higher), on a Premium one (P1 or higher) or on a Fabric Copilot capacity; a Fabric data agent queries semantic models by generating DAX, read-only and with the permissions of whoever asks."
+          es: "Copilot en Power BI usa lo que se guarda en el modelo semántico con la función «Prep data for AI» (en versión preliminar) —un esquema de datos, respuestas verificadas e instrucciones, guardados en el modelo y no en el reporte— y pide un área de trabajo en una capacidad de Fabric de pago (F2 o superior), en una Premium (P1 o superior) o en una capacidad de Copilot de Fabric; un agente de datos de Fabric consulta modelos semánticos generando DAX, solo de lectura y con los permisos de quien pregunta."
+          en: "Copilot in Power BI uses what is saved in the semantic model with “Prep data for AI” (in preview) —a data schema, verified answers and instructions, saved on the model and not on the report— and requires a workspace on a paid Fabric capacity (F2 or higher), on a Premium one (P1 or higher) or on a Fabric Copilot capacity; a Fabric data agent queries semantic models by generating DAX, read-only and with the permissions of whoever asks."
         fuentes: [14, 15, 16]
         nota:
           voz: posicion
@@ -509,12 +509,12 @@ bloques:
       - falla: { es: "La seguridad por fila no alcanza a quien edita", en: "Row-level security does not reach whoever edits" }
         senal: { es: "Quien tiene un rol de miembro o de colaborador en el área de trabajo ve filas que su rol de seguridad no le daría.", en: "Someone with a member or contributor role in the workspace sees rows their security role would not give them." }
         control: { es: "Quien consume, con el rol de Visor; cada rol, probado suplantándolo antes de publicar.", en: "Whoever consumes, with the Viewer role; every role, tested by impersonating it before publishing." }
-      - falla: { es: "Direct Lake cae a DirectQuery sin avisar", en: "Direct Lake falls back to DirectQuery without warning" }
+      - falla: { es: "Direct Lake cae a DirectQuery cuando la seguridad por fila está en el punto de conexión SQL", en: "Direct Lake falls back to DirectQuery when row-level security is at the SQL analytics endpoint" }
         senal: { es: "El tablero se vuelve lento justo en las tablas con seguridad por fila definida en el punto de conexión SQL.", en: "The dashboard slows down exactly on the tables with row-level security defined at the SQL analytics endpoint." }
         control: { es: "Direct Lake sobre OneLake para modelos nuevos, o la seguridad en el modelo con identidad fija, y la caída vigilada.", en: "Direct Lake on OneLake for new models, or the security in the model with a fixed identity, and the fallback watched." }
       - falla: { es: "Una medida lenta aleja a la audiencia", en: "A slow measure drives the audience away" }
         senal: { es: "Segundos de espera multiplicados por cada persona que abre el tablero.", en: "Seconds of waiting multiplied by every person who opens the dashboard." }
-        control: { es: "Las medidas costosas medidas con DAX Studio antes y después de cada ajuste, antes de publicar.", en: "Costly measures timed with DAX Studio before and after every adjustment, before publishing." }
+        control: { es: "Las medidas costosas se miden con DAX Studio antes y después de cada ajuste y antes de publicar.", en: "Costly measures timed with DAX Studio before and after every adjustment, before publishing." }
       - falla: { es: "El portafolio crece y fragmenta la atención", en: "The portfolio grows and fragments attention" }
         senal: { es: "Tableros que repiten indicadores y compiten por la misma pregunta.", en: "Dashboards that repeat indicators and compete for the same question." }
         control: { es: "Antes de un producto nuevo: ampliar un modelo existente, simplificar o retirar.", en: "Before a new product: extend an existing model, simplify or retire." }
