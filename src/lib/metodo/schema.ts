@@ -190,13 +190,17 @@ export const NIVELES = [
 ] as const;
 export type Nivel = (typeof NIVELES)[number];
 
+// Bloque 1, «El problema» (S14): `pregunta` guarda el PLANTEAMIENTO del problema en una
+// línea y `respuesta` su síntesis en tres, en voz impersonal. Los nombres vienen del
+// primer marco (una pregunta y su respuesta) y se conservan: renombrarlos toca medio
+// centenar de puntos (tests, índice del chat, páginas) sin que el visitante lo vea.
 const bloque1 = z
   .object({
     n: z.literal(1),
     pregunta: texto,
     respuesta: z
       .array(texto)
-      .length(3, "la respuesta es de tres líneas, ni más ni menos"),
+      .length(3, "la síntesis es de tres líneas, ni más ni menos"),
   })
   .strict();
 

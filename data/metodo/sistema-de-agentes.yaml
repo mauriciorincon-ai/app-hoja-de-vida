@@ -1,10 +1,12 @@
-# «MI MÉTODO» · T2 — Cómo estructuro un sistema de agentes (S10, 2026-10-17).
+# «MÉTODOS» · T2 — Cómo se debe estructurar un sistema de agentes (S10, 2026-10-17; voz impersonal desde el S14).
 #
-# Tres voces, separadas por el esquema (src/lib/metodo/schema.ts):
-#   · voz: hice      → solo lo que dice el corpus del sitio; `corpus:` nombra el documento de data/a-fondo/.
+# Tres voces, separadas por el esquema (src/lib/metodo/schema.ts); en la página: Evidencia · Estado del campo · Criterio.
+#   · voz: hice      → la evidencia: solo lo que dice el corpus del sitio, con el proyecto como sujeto;
+#                      `corpus:` nombra el documento de data/a-fondo/.
 #   · voz: campo     → lo que el campo hace en 2025–2026; `fuentes:` numera la fuente del bloque 10.
-#   · voz: posicion  → mi criterio, rotulado como tal; sin fuente ni corpus.
-# Lo que va sin voz (bloques 1, 2, 6, 7 y la base de las fases) es el método mismo: mi posición sobre cómo se hace.
+#   · voz: posicion  → el criterio del autor, rotulado como tal; sin fuente ni corpus.
+# Lo que va sin voz (bloques 1, 2, 6, 7 y la base de las fases) es el método mismo. Desde el S14 todo el texto
+# publicado va en voz impersonal —ni primera persona ni «entrevista»—; lo vigila tests/unit/metodo-voz-piezas.test.ts.
 #
 # Investigación del 2026-10-17: documentación oficial primero, solo contenido público servido al navegador, sin
 # credenciales ajenas ni endpoints de terceros. Dos páginas leídas traían texto dirigido a agentes («fetch the
@@ -15,21 +17,21 @@
 id: T2
 slug: sistema-de-agentes
 nombre:
-  es: "Cómo estructuro un sistema de agentes"
-  en: "How I structure an agent system"
+  es: "Cómo se debe estructurar un sistema de agentes"
+  en: "How an agent system should be structured"
 bloques:
   # ─── 1 · La pregunta ────────────────────────────────────────────────────────
   - n: 1
     pregunta:
-      es: "¿Cómo diseñas un sistema multiagente que funcione en producción, y cómo sabes que funciona?"
-      en: "How do you design a multi-agent system that works in production, and how do you know it works?"
+      es: "Estructurar un sistema multiagente que funcione en producción y poder demostrar, antes y después de ponerlo en producción, que funciona."
+      en: "Structuring a multi-agent system that works in production, and being able to show, before and after putting it into production, that it works."
     respuesta:
-      - es: "Estructuro un sistema multiagente desde el proceso y no desde el framework: cada actividad se especifica con entradas, función, salidas y excepciones, y solo se vuelve agente la que necesita interpretar; lo demás es código."
-        en: "I structure a multi-agent system from the process, not from the framework: every activity is specified with inputs, function, outputs and exceptions, and only the one that needs to interpret becomes an agent; the rest is code."
-      - es: "Reparto el trabajo entre especialistas con su propio contexto, guardo el estado en cada paso y doy una autonomía proporcional al riesgo: lo que no se puede deshacer lo aprueba una persona."
-        en: "I split the work among specialists with their own context, save the state at every step and grant autonomy in proportion to risk: whatever cannot be undone is approved by a person."
-      - es: "Sé que funciona porque lo evalúo antes de ponerlo en producción y después: criterios que pasan o no pasan, un caso roto a propósito para cada control y la sesión entera observada en cuatro dimensiones."
-        en: "I know it works because I evaluate it before putting it into production and afterwards: criteria that pass or fail, a case broken on purpose for every control, and the whole session observed across four dimensions."
+      - es: "Un sistema multiagente se estructura desde el proceso y no desde el framework: cada actividad se especifica con entradas, función, salidas y excepciones, y solo se vuelve agente la que necesita interpretar; lo demás es código."
+        en: "A multi-agent system is structured from the process, not from the framework: every activity is specified with inputs, function, outputs and exceptions, and only the one that needs to interpret becomes an agent; the rest is code."
+      - es: "El trabajo se reparte entre especialistas con su propio contexto, el estado se guarda en cada paso y la autonomía es proporcional al riesgo: lo que no se puede deshacer lo aprueba una persona."
+        en: "The work is split among specialists with their own context, the state is saved at every step and autonomy is granted in proportion to risk: whatever cannot be undone is approved by a person."
+      - es: "Se sabe que funciona porque se evalúa antes de ponerlo en producción y después: criterios que pasan o no pasan, un caso roto a propósito para cada control y la sesión entera observada en cuatro dimensiones."
+        en: "It is known to work because it is evaluated before going into production and afterwards: criteria that pass or fail, a case broken on purpose for every control, and the whole session observed across four dimensions."
 
   # ─── 2 · El mapa ────────────────────────────────────────────────────────────
   - n: 2
@@ -208,8 +210,8 @@ bloques:
         nota:
           voz: hice
           texto:
-            es: "Así nacen los trece agentes de mi vitrina que corren sobre Claude Code: una constitución en un CLAUDE.md, el harness con sus criterios binarios —20 en el Constructor de Tableros Power BI, 44 en el Harness Paper Computacional— y una carnada por control."
-            en: "That is how the thirteen agents in my showcase that run on Claude Code are born: a constitution in a CLAUDE.md, the harness with its binary criteria —20 in the Power BI Dashboard Builder, 44 in the Computational Paper Harness— and a bait case for each control."
+            es: "Así nacen los trece agentes que este sitio muestra y que corren sobre Claude Code: una constitución en un CLAUDE.md, el harness con sus criterios binarios —20 en el Constructor de Tableros Power BI, 44 en el Harness Paper Computacional— y una carnada por control."
+            en: "That is how the thirteen agents in this site’s showcase that run on Claude Code are born: a constitution in a CLAUDE.md, the harness with its binary criteria —20 in the Power BI Dashboard Builder, 44 in the Computational Paper Harness— and a bait case for each control."
           corpus: [los-agentes-de-la-vitrina]
       - nombre: { es: "Evaluar antes de ponerlo en producción", en: "Evaluate before putting it into production" }
         entradas:
@@ -232,8 +234,8 @@ bloques:
         nota:
           voz: hice
           texto:
-            es: "Con ARKHÉ comparé 120 escenarios contra un agente generalista que recibía todo en cada ejecución: en mis mediciones, 52 % menos tokens y el cumplimiento de instrucciones del 71 % al 93 %, sin un artefacto publicado."
-            en: "With ARKHÉ I compared 120 scenarios against a generalist agent that received everything on every run: in my own measurements, 52% fewer tokens and instruction compliance from 71% to 93%, with no published artifact."
+            es: "Con ARKHÉ se compararon 120 escenarios contra un agente generalista que recibía todo en cada ejecución: en mediciones propias del autor, 52 % menos tokens y el cumplimiento de instrucciones del 71 % al 93 %, sin un artefacto publicado."
+            en: "With ARKHÉ, 120 scenarios were compared against a generalist agent that received everything on every run: in the author’s own measurements, 52% fewer tokens and instruction compliance from 71% to 93%, with no published artifact."
           corpus: [agentes-en-produccion]
       - nombre: { es: "Operar y aprender", en: "Operate and learn" }
         entradas:
@@ -334,8 +336,8 @@ bloques:
         nota:
           voz: hice
           texto:
-            es: "En mis agentes el punto de aprobación es mecánica, no un recordatorio: el agente se detiene hasta que la persona escribe una palabra literal. El Constructor de Tableros Power BI tiene 5 de esos gates."
-            en: "In my agents the approval point is mechanics, not a reminder: the agent stops until the person types a literal word. The Power BI Dashboard Builder has 5 of those gates."
+            es: "En los agentes del autor el punto de aprobación es mecánica, no un recordatorio: el agente se detiene hasta que la persona escribe una palabra literal. El Constructor de Tableros Power BI tiene 5 de esos gates."
+            en: "In the author’s agents the approval point is mechanics, not a reminder: the agent stops until the person types a literal word. The Power BI Dashboard Builder has 5 of those gates."
           corpus: [los-agentes-de-la-vitrina]
       - titulo: { es: "Del BPMN a la orquestación", en: "From BPMN to orchestration" }
         cuandoSi:
@@ -352,8 +354,8 @@ bloques:
         nota:
           voz: hice
           texto:
-            es: "FORJA, una de mis investigaciones, abre cada actividad del BPMN con entradas, función y salidas y compila el diagrama a una orquestación de agentes que conserva la estructura del BPMN: en el paper sellado conservó el 99,5 %, y el único elemento de 204 que quedó sin trazar estaba fuera del subconjunto especificado."
-            en: "FORJA, one of my research lines, opens up every BPMN activity with inputs, function and outputs and compiles the diagram into an orchestration of agents that preserves the BPMN structure: in the sealed paper it preserved 99.5%, and the only element out of 204 left untraced was outside the specified subset."
+            es: "FORJA, una de las investigaciones del autor, abre cada actividad del BPMN con entradas, función y salidas y compila el diagrama a una orquestación de agentes que conserva la estructura del BPMN: en el paper sellado conservó el 99,5 %, y el único elemento de 204 que quedó sin trazar estaba fuera del subconjunto especificado."
+            en: "FORJA, one of the author’s research lines, opens up every BPMN activity with inputs, function and outputs and compiles the diagram into an orchestration of agents that preserves the BPMN structure: in the sealed paper it preserved 99.5%, and the only element out of 204 left untraced was outside the specified subset."
           corpus: [las-investigaciones]
       - titulo: { es: "Cómo se juzga un resultado", en: "How a result is judged" }
         cuandoSi:
@@ -371,8 +373,8 @@ bloques:
         nota:
           voz: posicion
           texto:
-            es: "Prefiero un criterio que pasa o no pasa a una nota de 1 a 5: la nota se discute, el criterio se cumple o no."
-            en: "I prefer a criterion that passes or fails to a score from 1 to 5: a score gets argued over; a criterion is either met or not."
+            es: "Conviene más un criterio que pasa o no pasa que una nota de 1 a 5: la nota se discute, el criterio se cumple o no."
+            en: "A criterion that passes or fails is better than a score from 1 to 5: a score gets argued over; a criterion is either met or not."
       - titulo: { es: "Qué modelo para cada paso", en: "Which model for each step" }
         cuandoSi:
           es: "Un modelo grande, para el paso que coordina, planea o razona sobre mucha información."
@@ -389,8 +391,8 @@ bloques:
         nota:
           voz: hice
           texto:
-            es: "En ARKHÉ el ahorro no vino de un modelo más barato: en mis mediciones, el 52 % menos de tokens salió de mandar menos contexto inútil en cada llamada."
-            en: "In ARKHÉ the savings did not come from a cheaper model: in my own measurements, the 52% fewer tokens came from sending less useless context on every call."
+            es: "En ARKHÉ el ahorro no vino de un modelo más barato: en mediciones propias del autor, el 52 % menos de tokens salió de mandar menos contexto inútil en cada llamada."
+            en: "In ARKHÉ the savings did not come from a cheaper model: in the author’s own measurements, the 52% fewer tokens came from sending less useless context on every call."
           corpus: [agentes-en-produccion]
 
   # ─── 5 · Lo innovador en 2026 ───────────────────────────────────────────────
@@ -404,8 +406,8 @@ bloques:
         nota:
           voz: posicion
           texto:
-            es: "Mi regla: si un paso va a esperar a una persona, el estado se guarda antes de preguntarle."
-            en: "My rule: if a step is going to wait for a person, the state is saved before asking."
+            es: "La regla: si un paso va a esperar a una persona, el estado se guarda antes de preguntarle."
+            en: "The rule: if a step is going to wait for a person, the state is saved before asking."
       - titulo: { es: "Ingeniería de contexto, no solo de prompts", en: "Context engineering, not just prompt engineering" }
         queCambia:
           es: "La pregunta deja de ser cómo redactar la instrucción y pasa a ser qué entra al contexto de cada llamada. El contexto se trata como un recurso finito: se compacta cuando se llena, se anota fuera de la ventana y se reparte entre subagentes con contexto limpio que devuelven solo un resumen."
@@ -431,7 +433,7 @@ bloques:
       - titulo: { es: "Evaluar la conversación entera y el camino, no solo la respuesta", en: "Evaluating the whole conversation and the path, not just the answer" }
         queCambia:
           es: "Lo que se prueba antes de publicar solo cubre lo que uno anticipó; por eso la evaluación sigue en producción sobre la conversación completa —si el agente logró el objetivo— y sobre el proceso paso a paso: qué herramienta eligió, con qué parámetros y qué hizo con el resultado."
-          en: "What is tested before release only covers what you anticipated; so evaluation continues in production over the whole conversation —did the agent reach the goal?— and over the process step by step: which tool it chose, with which parameters, and what it did with the result."
+          en: "What is tested before release only covers what was anticipated; so evaluation continues in production over the whole conversation —did the agent reach the goal?— and over the process step by step: which tool it chose, with which parameters, and what it did with the result."
         fuentes: [12, 13]
         nota:
           voz: hice
@@ -452,8 +454,8 @@ bloques:
         nota:
           voz: hice
           texto:
-            es: "Con Microsoft Agent Framework y Claude Agent SDK experimento y construyo prototipos en la Fundación CTIC; con el ecosistema de LangChain trabajo allí junto con n8n."
-            en: "With Microsoft Agent Framework and the Claude Agent SDK I experiment and build prototypes at Fundación CTIC; with the LangChain ecosystem I work there alongside n8n."
+            es: "En la Fundación CTIC, Microsoft Agent Framework y Claude Agent SDK se usan para experimentar y construir prototipos; el autor trabaja allí con el ecosistema de LangChain junto con n8n."
+            en: "At Fundación CTIC, Microsoft Agent Framework and the Claude Agent SDK are used for experimentation and prototypes; the author works there with the LangChain ecosystem alongside n8n."
           corpus: [fundacion-ctic]
       - titulo: { es: "La agencia excesiva, riesgo de primera línea", en: "Excessive agency as a front-line risk" }
         queCambia:
@@ -520,22 +522,22 @@ bloques:
       - nombre: { es: "Vesting: 27 agentes en producción", en: "Vesting: 27 agents in production" }
         nivel: uso-real
         texto:
-          es: "Definí, documenté y validé el proceso core de once etapas con el que una startup construyó 27 agentes para 12 clientes sobre n8n, y diseñé en Microsoft Fabric la plataforma que llegó a vigilar 23 a la vez, en tiempo real."
-          en: "I defined, documented and validated the eleven-stage core process that a startup used to build 27 agents for 12 clients on n8n, and designed in Microsoft Fabric the platform that came to watch 23 at once, in real time."
+          es: "Se definió, documentó y validó el proceso core de once etapas con el que una startup construyó 27 agentes para 12 clientes sobre n8n, y se diseñó en Microsoft Fabric la plataforma que llegó a vigilar 23 a la vez, en tiempo real."
+          en: "The eleven-stage core process that a startup used to build 27 agents for 12 clients on n8n was defined, documented and validated, and the platform that came to watch 23 at once, in real time, was designed in Microsoft Fabric."
         corpus: [vesting, agentes-en-produccion]
         href: /proyectos/vesting
-      - nombre: { es: "ARKHÉ: mi ecosistema agéntico", en: "ARKHÉ: my agentic ecosystem" }
+      - nombre: { es: "ARKHÉ: el ecosistema agéntico del autor", en: "ARKHÉ: the author’s agentic ecosystem" }
         nivel: uso-real
         texto:
-          es: "Harnesses especializados que fijan a cada agente función, fuentes, herramientas y contrato. En mis mediciones sobre 120 escenarios, frente a un generalista: 52 % menos tokens y cumplimiento de instrucciones del 71 % al 93 %. Es de uso personal; no lo llamo producción."
-          en: "Specialized harnesses that set each agent’s function, sources, tools and contract. In my own measurements over 120 scenarios, against a generalist: 52% fewer tokens and instruction compliance from 71% to 93%. It is for personal use; I do not call it production."
+          es: "Harnesses especializados que fijan a cada agente función, fuentes, herramientas y contrato. En mediciones propias del autor sobre 120 escenarios, frente a un generalista: 52 % menos tokens y cumplimiento de instrucciones del 71 % al 93 %. Es de uso personal; no se presenta como producción."
+          en: "Specialized harnesses that set each agent’s function, sources, tools and contract. In the author’s own measurements over 120 scenarios, against a generalist: 52% fewer tokens and instruction compliance from 71% to 93%. It is for personal use; it is not presented as production."
         corpus: [agentes-en-produccion, las-investigaciones]
         href: /vitrina/investigaciones/arkhe
       - nombre: { es: "FORJA: del BPMN a una orquestación de agentes", en: "FORJA: from BPMN to an orchestration of agents" }
         nivel: prototipo
         texto:
-          es: "FORJA es una de mis investigaciones: un compilador que convierte un proceso dibujado en BPMN en una orquestación de agentes. Del BPMN conserva la estructura —cada actividad se abre con entradas, función y salidas, y cada elemento traza a su realización—: en el paper sellado conservó el 99,5 %. Verificadores de distintas familias vigilan la conformidad. El demostrador existe."
-          en: "FORJA is one of my research lines: a compiler that turns a process drawn in BPMN into an orchestration of agents. From the BPMN it preserves the structure —every activity is opened up with inputs, function and outputs, and every element traces to its realization—: in the sealed paper it preserved 99.5%. Verifiers from different families watch for conformance. The demonstrator exists."
+          es: "FORJA es una de las investigaciones del autor: un compilador que convierte un proceso dibujado en BPMN en una orquestación de agentes. Del BPMN conserva la estructura —cada actividad se abre con entradas, función y salidas, y cada elemento traza a su realización—: en el paper sellado conservó el 99,5 %. Verificadores de distintas familias vigilan la conformidad. El demostrador existe."
+          en: "FORJA is one of the author’s research lines: a compiler that turns a process drawn in BPMN into an orchestration of agents. From the BPMN it preserves the structure —every activity is opened up with inputs, function and outputs, and every element traces to its realization—: in the sealed paper it preserved 99.5%. Verifiers from different families watch for conformance. The demonstrator exists."
         corpus: [las-investigaciones]
         href: /vitrina/investigaciones/forja
       - nombre: { es: "Los agentes de la vitrina, sobre Claude Code", en: "The showcase agents, on Claude Code" }
@@ -555,22 +557,22 @@ bloques:
       - nombre: { es: "Experto ISO 42001", en: "ISO 42001 Expert" }
         nivel: uso-real
         texto:
-          es: "Cada afirmación normativa cita apartado y página o declara el vacío, y ningún dictamen con consecuencias avanza sin la aprobación de una persona. Es el que uso en la estrategia de IA de la Fundación CTIC."
-          en: "Every normative claim cites clause and page or declares the gap, and no ruling with consequences moves forward without a person’s approval. It is the one I use in Fundación CTIC’s AI strategy."
+          es: "Cada afirmación normativa cita apartado y página o declara el vacío, y ningún dictamen con consecuencias avanza sin la aprobación de una persona. Es el que se usa en la estrategia de IA de la Fundación CTIC."
+          en: "Every normative claim cites clause and page or declares the gap, and no ruling with consequences moves forward without a person’s approval. It is the one used in Fundación CTIC’s AI strategy."
         corpus: [los-agentes-de-la-vitrina, fundacion-ctic]
         href: /vitrina/agentes/experto-iso42001
       - nombre: { es: "LangChain, LangGraph, LangSmith y Langflow", en: "LangChain, LangGraph, LangSmith and Langflow" }
         nivel: uso-real
         texto:
-          es: "Son, con n8n, los frameworks de agentes con los que trabajo en la Fundación CTIC. Ese trabajo no tiene un entregable publicado en este sitio."
-          en: "Together with n8n, they are the agent frameworks I work with at Fundación CTIC. That work has no deliverable published on this site."
+          es: "Son, con n8n, los frameworks de agentes con los que se trabaja en la Fundación CTIC. Ese trabajo no tiene un entregable publicado en este sitio."
+          en: "Together with n8n, they are the agent frameworks used at Fundación CTIC. That work has no deliverable published on this site."
         corpus: [fundacion-ctic]
         href: /proyectos/fundacion-ctic
       - nombre: { es: "Microsoft Agent Framework y Claude Agent SDK", en: "Microsoft Agent Framework and Claude Agent SDK" }
         nivel: prototipo
         texto:
-          es: "Con ellos experimento y construyo prototipos en la Fundación CTIC."
-          en: "I experiment with them and build prototypes at Fundación CTIC."
+          es: "Con ellos se experimenta y se construyen prototipos en la Fundación CTIC."
+          en: "They are used for experimentation and prototypes at Fundación CTIC."
         corpus: [fundacion-ctic, agentes-en-produccion]
       - nombre: { es: "El chat de este sitio", en: "This site’s chat" }
         nivel: uso-real
@@ -584,28 +586,28 @@ bloques:
     limites:
       - voz: hice
         texto:
-          es: "La palabra «producción» la reservo para los 27 agentes de Vesting. Los de ARKHÉ y los de la vitrina son sistemas de trabajo de uso personal: no han tenido usuarios distintos de mí."
-          en: "I keep the word “production” for the 27 agents at Vesting. The ones in ARKHÉ and in the showcase are personal-use work systems: they have had no users other than me."
+          es: "La palabra «producción» se reserva para los 27 agentes de Vesting. Los de ARKHÉ y los de la vitrina son sistemas de trabajo de uso personal: no han tenido usuarios distintos de su autor."
+          en: "The word “production” is reserved for the 27 agents at Vesting. The ones in ARKHÉ and in the showcase are personal-use work systems: they have had no users other than their author."
         corpus: [agentes-en-produccion, los-agentes-de-la-vitrina]
       - voz: hice
         texto:
-          es: "Las cifras de ARKHÉ son mis propios cálculos, sin un artefacto publicado: miden menos contexto inútil y más obediencia a la especificación, no la calidad en abstracto, y no sirven para comparar con otro ecosistema sin repetir los mismos escenarios."
-          en: "The ARKHÉ figures are my own calculations, with no published artifact: they measure less useless context and more adherence to the specification, not quality in the abstract, and they cannot be compared with another ecosystem without rerunning the same scenarios."
+          es: "Las cifras de ARKHÉ son cálculos propios del autor, sin un artefacto publicado: miden menos contexto inútil y más obediencia a la especificación, no la calidad en abstracto, y no sirven para comparar con otro ecosistema sin repetir los mismos escenarios."
+          en: "The ARKHÉ figures are the author’s own calculations, with no published artifact: they measure less useless context and more adherence to the specification, not quality in the abstract, and they cannot be compared with another ecosystem without rerunning the same scenarios."
         corpus: [agentes-en-produccion]
       - voz: hice
         texto:
-          es: "Con Microsoft Agent Framework y Claude Agent SDK he hecho experimentación y prototipos, no producción. Con el ecosistema de LangChain trabajo en la Fundación CTIC, sin un entregable publicado aquí."
-          en: "With Microsoft Agent Framework and the Claude Agent SDK I have done experimentation and prototypes, not production. With the LangChain ecosystem I work at Fundación CTIC, with no deliverable published here."
+          es: "Con Microsoft Agent Framework y Claude Agent SDK hay experimentación y prototipos, no producción. El autor trabaja con el ecosistema de LangChain en la Fundación CTIC, sin un entregable publicado aquí."
+          en: "With Microsoft Agent Framework and the Claude Agent SDK there has been experimentation and prototypes, not production. The author works with the LangChain ecosystem at Fundación CTIC, with no deliverable published here."
         corpus: [fundacion-ctic]
       - voz: hice
         texto:
-          es: "No he operado agentes en contenedores: Docker y Kubernetes en producción no están en mi experiencia profesional."
-          en: "I have not run agents in containers: Docker and Kubernetes in production are not part of my professional experience."
+          es: "El autor no ha operado agentes en contenedores: Docker y Kubernetes en producción no están en su experiencia profesional."
+          en: "The author has not run agents in containers: Docker and Kubernetes in production are not part of the author’s professional experience."
         corpus: [plataforma-y-despliegue]
       - voz: hice
         texto:
-          es: "Con Microsoft Foundry, mi experiencia es el adaptador de proveedor del chat de este sitio y el estudio del AI-103, que está en curso; un sistema de agentes alojado allí no está en mi experiencia."
-          en: "With Microsoft Foundry, my experience is the provider adapter in this site’s chat and studying for the AI-103, which is in progress; an agent system hosted there is not part of my experience."
+          es: "Con Microsoft Foundry, la experiencia es el adaptador de proveedor del chat de este sitio y el estudio del AI-103, que está en curso; un sistema de agentes alojado allí no forma parte de la experiencia del autor."
+          en: "With Microsoft Foundry, the experience is the provider adapter in this site’s chat and studying for the AI-103, which is in progress; an agent system hosted there is not part of the author’s experience."
         corpus: [rag-y-el-chat, certificaciones]
       - voz: hice
         texto:
@@ -614,12 +616,12 @@ bloques:
         corpus: [las-investigaciones]
       - voz: posicion
         texto:
-          es: "Lo que haría distinto hoy: trazas con un estándar abierto desde el primer agente, para seguir una sesión aunque cruce frameworks, y la conversación entera evaluada en línea, no solo antes de publicar."
-          en: "What I would do differently today: traces on an open standard from the very first agent, so a session can be followed even when it crosses frameworks, and the whole conversation evaluated online, not only before release."
+          es: "Lo que conviene hacer distinto hoy: trazas con un estándar abierto desde el primer agente, para seguir una sesión aunque cruce frameworks, y la conversación entera evaluada en línea, no solo antes de publicar."
+          en: "What should be done differently today: traces on an open standard from the very first agent, so a session can be followed even when it crosses frameworks, and the whole conversation evaluated online, not only before release."
       - voz: posicion
         texto:
-          es: "Y no empezaría por un grafo de muchos agentes: empezaría con uno, lo mediría contra una línea base y solo repartiría el trabajo donde el contexto o el paralelismo lo justifiquen."
-          en: "And I would not start with a graph of many agents: I would start with one, measure it against a baseline and only split the work where context or parallelism justify it."
+          es: "Y no conviene empezar por un grafo de muchos agentes: mejor empezar con uno, medirlo contra una línea base y solo repartir el trabajo donde el contexto o el paralelismo lo justifiquen."
+          en: "And it is better not to start with a graph of many agents: start with one, measure it against a baseline and only split the work where context or parallelism justify it."
 
   # ─── 10 · Fuentes y fecha de revisión ───────────────────────────────────────
   - n: 10

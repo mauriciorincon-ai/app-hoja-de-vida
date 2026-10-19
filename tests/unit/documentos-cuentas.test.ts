@@ -145,19 +145,19 @@ const ANCLAS: Ancla[] = [
   },
   {
     doc: "guía",
-    nombre: "infografías de «Mi método» publicadas (q1)",
-    patron: /llegas a \/es\/metodo, con (\S+) infografías? publicadas?/g,
+    nombre: "publicaciones de «Métodos» (q1)",
+    patron: /llegas a \/es\/metodos, con (\S+) publicaciones?/g,
     esperado: [V["piezas-metodo"]],
   },
   {
     doc: "manual",
-    nombre: "infografías de «Mi método» publicadas (hoy hay)",
+    nombre: "publicaciones de «Métodos» (hoy hay)",
     patron: /Hoy hay (\S+) piezas? publicadas?/g,
     esperado: [V["piezas-metodo"]],
   },
   {
     doc: "manual",
-    nombre: "infografías de «Mi método» publicadas (limitaciones)",
+    nombre: "publicaciones de «Métodos» (limitaciones)",
     patron: /(\S+) piezas? publicadas? hasta ahora/g,
     esperado: [V["piezas-metodo"]],
   },

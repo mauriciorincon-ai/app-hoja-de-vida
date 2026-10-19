@@ -2,8 +2,9 @@ import type { Afirmacion, Voz } from "@/lib/metodo/schema";
 import type { IdiomaMetodo, Traductor } from "./traductor";
 
 /**
- * LAS TRES VOCES de «Mi método»: lo que hice · lo que el campo hace · lo que
- * opino. Se distinguen por TRES señales a la vez — nunca solo por color (el
+ * LAS TRES VOCES de «Métodos»: evidencia · estado del campo · criterio (la
+ * posición del autor). Las claves del dato siguen siendo `hice`, `campo` y
+ * `posicion`. Se distinguen por TRES señales a la vez — nunca solo por color (el
  * dueño es daltónico leve y es accesibilidad básica): el símbolo, la PALABRA y
  * el trazo del filete lateral (continuo, rayado, punteado). Un hecho nunca se
  * disfraza de posición ni al revés: el esquema ya lo impide en el dato, y aquí

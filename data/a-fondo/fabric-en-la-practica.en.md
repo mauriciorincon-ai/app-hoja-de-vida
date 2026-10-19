@@ -47,7 +47,8 @@ DP-600 covers the complete journey of an analytical solution: exploring and sele
 stores, preparing and transforming information, designing dimensional models, building and
 optimizing semantic models, managing their life cycle and applying security and governance
 mechanisms. Its scope also requires working with SQL, KQL and DAX, and understanding how
-lakehouses, warehouses, eventhouses, Power BI and the other Fabric components connect.
+lakehouses, warehouses, eventhouses, Power BI and the other Fabric components connect. I know
+KQL and Eventhouse at the query level, like SQL.
 
 For me, this certification does not represent knowledge separate from experience. I prepared it
 and earned it within my role at Vesting, while building from scratch a data ecosystem on

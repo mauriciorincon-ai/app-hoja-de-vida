@@ -13,9 +13,11 @@ import { bloqueDe } from "@/lib/metodo/schema";
 import { SITE_URL } from "@/lib/site";
 
 /**
- * «MI MÉTODO» — la lista de infografías (S10, `/metodo`). Una sección propia,
- * fuera de la vitrina (decisión del dueño, 2026-10-17): cada infografía
- * contesta una pregunta de entrevista con su método.
+ * «MÉTODOS» — la lista de publicaciones (S10, `/metodos`; antes «Mi método» en
+ * `/metodo`, que redirige con 301). Una sección propia, fuera de la vitrina
+ * (decisión del dueño, 2026-10-17): cada publicación plantea un problema y
+ * expone el método con evidencia de proyectos y fuentes fechadas, en voz
+ * impersonal (S14).
  *
  * 100% SSG y data-driven: la lista sale de `data/metodo/` y el conteo se MIDE,
  * no se escribe — ningún total de piezas vive a mano en el código ni en los
@@ -39,9 +41,9 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     description: t("metaDescripcion"),
     alternates: {
       languages: {
-        es: "/es/metodo",
-        en: "/en/metodo",
-        "x-default": "/es/metodo",
+        es: "/es/metodos",
+        en: "/en/metodos",
+        "x-default": "/es/metodos",
       },
     },
   };
@@ -88,7 +90,7 @@ export default async function MetodoPage({ params }: Params) {
                 <li key={p.slug}>
                   <Reveal variant="fadeInUp" amount={0.3} className="h-full">
                     <Link
-                      href={`/metodo/${p.slug}`}
+                      href={`/metodos/${p.slug}`}
                       data-pieza={p.slug}
                       className="flex h-full min-h-11 flex-col gap-3 rounded-[14px] border border-paper-2 bg-paper-0 p-6 shadow-sh-1 transition-[box-shadow,transform] duration-[180ms] ease-[var(--ease-out-cubic)] hover:-translate-y-0.5 hover:shadow-sh-2"
                     >

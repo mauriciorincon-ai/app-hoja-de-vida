@@ -135,14 +135,14 @@ test.describe("chat — flujo estrella", () => {
   // bloque. Cada pieza trae la primera de sus preguntas del banco; el chip dice el
   // código del tema y el nombre de la pieza, y la cita lleva al BLOQUE, no a la página.
   for (const [slug, codigo, idioma, pregunta, nombre] of [
-    ["sistema-de-agentes", "T2", "es", "¿Cómo estructura Henry un sistema multiagente?", "Cómo estructuro un sistema de agentes"],
-    ["sistema-de-agentes", "T2", "en", "How does Henry structure a multi-agent system?", "How I structure an agent system"],
-    ["rag-sin-inventar", "T3", "es", "¿Cómo evita el chat de Henry inventar respuestas?", "Cómo hago que un LLM responda con los datos de la empresa y no invente"],
-    ["rag-sin-inventar", "T3", "en", "How does Henry's chat avoid making up answers?", "How I make an LLM answer with the company’s data, and not make things up"],
-    ["de-prototipo-a-produccion", "T4", "es", "¿Cómo lleva Henry una aplicación de IA a producción?", "Cómo llevo un prototipo de IA a producción y lo mantengo"],
-    ["de-prototipo-a-produccion", "T4", "en", "How does Henry take an AI application to production?", "How I take an AI prototype to production and keep it running"],
-    ["ciclo-de-vida-de-datos", "T6", "es", "¿Qué diferencias ve Henry entre Fabric y Databricks?", "Cómo estructuro el ciclo de vida de un proyecto de datos a escala"],
-    ["ciclo-de-vida-de-datos", "T6", "en", "What differences does Henry see between Fabric and Databricks?", "How I structure the life cycle of a data project at scale"],
+    ["sistema-de-agentes", "T2", "es", "¿Cómo estructura Henry un sistema multiagente?", "Cómo se debe estructurar un sistema de agentes"],
+    ["sistema-de-agentes", "T2", "en", "How does Henry structure a multi-agent system?", "How an agent system should be structured"],
+    ["rag-sin-inventar", "T3", "es", "¿Cómo evita el chat de Henry inventar respuestas?", "Cómo se debe lograr que un LLM responda con los datos de la empresa y no invente"],
+    ["rag-sin-inventar", "T3", "en", "How does Henry's chat avoid making up answers?", "How an LLM should be made to answer with the company’s data, without making things up"],
+    ["de-prototipo-a-produccion", "T4", "es", "¿Cómo lleva Henry una aplicación de IA a producción?", "Cómo se debe llevar un prototipo de IA a producción y mantenerlo"],
+    ["de-prototipo-a-produccion", "T4", "en", "How does Henry take an AI application to production?", "How an AI prototype should be taken to production and kept running"],
+    ["ciclo-de-vida-de-datos", "T6", "es", "¿Qué diferencias ve Henry entre Fabric y Databricks?", "Cómo se debe estructurar el ciclo de vida de un proyecto de datos a escala"],
+    ["ciclo-de-vida-de-datos", "T6", "en", "What differences does Henry see between Fabric and Databricks?", "How the life cycle of a data project at scale should be structured"],
   ] as const) {
     test(`la cita de ${codigo} lleva al bloque exacto (${idioma})`, async ({
       page,
@@ -153,7 +153,7 @@ test.describe("chat — flujo estrella", () => {
 
       const chip = page
         .locator(
-          `[data-testid="chat-fuente"][href*="/${idioma}/metodo/${slug}#bloque-"]`,
+          `[data-testid="chat-fuente"][href*="/${idioma}/metodos/${slug}#bloque-"]`,
         )
         .first();
       await expect(chip).toBeVisible({ timeout: 15_000 });
@@ -165,7 +165,7 @@ test.describe("chat — flujo estrella", () => {
       const bloque = href.match(/#bloque-(\d+)$/)![1];
       await chip.click();
       await expect(page).toHaveURL(
-        new RegExp(`/${idioma}/metodo/${slug}#bloque-${bloque}$`),
+        new RegExp(`/${idioma}/metodos/${slug}#bloque-${bloque}$`),
         { timeout: 15_000 },
       );
       // Aterriza en el bloque que la cita nombra, con su título a la vista.

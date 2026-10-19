@@ -9,7 +9,7 @@
 
 CV Viva es tu hoja de vida convertida en una página web que se recorre como una pieza editorial
 animada: identidad, trayectoria, logros, proyectos, la vitrina de apps del pipeline y, desde el
-Sprint 010, «Mi método» (una infografía larga por pregunta de entrevista), en español e inglés. Quien la visita puede escribirte —por una app, una asesoría, una charla o un rol— y
+Sprint 010, «Métodos» (publicaciones largas sobre cómo se diseñan sistemas de IA, datos y BI; antes «Mi método»), en español e inglés. Quien la visita puede escribirte —por una app, una asesoría, una charla o un rol— y
 el mensaje te llega al correo.
 
 ## Primeros pasos
@@ -584,25 +584,28 @@ el mensaje te llega al correo.
 - **Lo que no se hace aquí:** lo que se ve dentro del marco es de la otra casa. Si algo está mal
   ahí, se corrige en su repositorio y se vuelve a copiar el paquete.
 
-### Mi método: una infografía por pregunta de entrevista · desde Sprint 010
+### Métodos: una publicación por tema · desde Sprint 010 (hasta el Sprint 013 se llamó «Mi método»)
 
-- **Qué hace:** `/es/metodo` y `/en/metodo` listan tus infografías; cada una vive en
-  `/metodo/<slug>` y es una página larga que contesta **una pregunta de entrevista con tu
-  método**: las fases, las decisiones, los controles y tu evidencia. En una entrevista abres la
-  página y la muestras. Hoy hay cuatro piezas publicadas —la lista de `/metodo` las cuenta y las nombra— y las
-  otras llegan una por sprint. «Mi método» está en el menú, junto a Portafolio y Contacto. **La cuenta de
-  piezas de la lista se mide** de `data/metodo/`: nunca la escribas.
-- **Cómo se lee:** son **diez bloques fijos, siempre en el mismo orden**: 1 la pregunta (y su
-  respuesta en tres líneas) · 2 el mapa · 3 las fases · 4 las decisiones de diseño · 5 lo innovador
-  en 2026 · 6 modos de falla y cómo se ven venir · 7 métricas y controles · 8 mi evidencia · 9 lo
-  que haría distinto y lo que no he hecho · 10 fuentes y fecha de revisión. Cada bloque tiene su
+- **Qué hace:** `/es/metodos` y `/en/metodos` listan las publicaciones; cada una vive en
+  `/metodos/<slug>` y es una página larga que contesta **una pregunta de método en tercera
+  persona** —«Cómo se debe…»—: las fases, las decisiones, los controles y la evidencia de
+  proyectos. Se muestra tal cual: ni habla de «yo» ni de «entrevista». Hoy hay cuatro piezas publicadas —la lista de `/metodos` las cuenta y las nombra— y las
+  otras llegan una por sprint. «Métodos» está en el menú, junto a Portafolio y Contacto. **La cuenta de
+  piezas de la lista se mide** de `data/metodo/`: nunca la escribas. **Las direcciones viejas siguen
+  vivas:** `/metodo` y `/metodo/<slug>` (con o sin idioma, y con su `#bloque-n`) redirigen con un
+  301 permanente a `/metodos/…`, así que un enlace guardado no se rompe.
+- **Cómo se lee:** son **diez bloques fijos, siempre en el mismo orden**: 1 el problema (y su
+  síntesis en tres líneas) · 2 el mapa · 3 las fases · 4 las decisiones de diseño · 5 lo innovador
+  en 2026 · 6 modos de falla y cómo anticiparlos · 7 métricas y controles · 8 evidencia en
+  proyectos · 9 límites y alcance (con lo que conviene hacer distinto hoy) · 10 fuentes y fecha de revisión. Cada bloque tiene su
   ancla (`#bloque-3`): puedes abrir la pieza justo en el bloque que quieras, y un índice arriba
   lleva a cada uno.
-- **Las tres voces, siempre separadas:** lo que **hice** (●, verde: sale solo del corpus de este
-  sitio) · lo que **el campo hace** (◆, azul: sale de una fuente con título, editor, fecha y
-  enlace, citada con un número que lleva a la fuente) · **mi posición** (▲, ámbar: mi criterio,
-  rotulado como tal). Cada voz lleva símbolo, palabra y color —nunca solo color—. Lo que no lleva
-  rótulo es el método mismo.
+- **Las tres voces, siempre separadas:** la **Evidencia** (●, verde: lo que se hizo en un proyecto
+  con nombre; sale solo del corpus de este sitio) · el **Estado del campo** (◆, azul: lo que el
+  campo hace, de una fuente con título, editor, fecha y enlace, citada con un número que lleva a
+  la fuente) · el **Criterio** (▲, ámbar: la posición del autor, rotulada como tal, «no un hecho»).
+  Cada voz lleva símbolo, palabra y color —nunca solo color—. Lo que no lleva rótulo es el método
+  mismo.
 - **El mapa** es un diagrama dibujado desde el dato, con texto real (se selecciona y se traduce) y,
   debajo, «Lectura del mapa, nodo por nodo»: es la versión en palabras, la que leen los lectores de
   pantalla y la que sale impresa. En el teléfono el mapa se desliza de lado dentro de su caja.
@@ -611,17 +614,17 @@ el mensaje te llega al correo.
   carta. No hay PDF generado: la impresión del navegador es el PDF.
 - **El chat la cita, bloque a bloque:** cada bloque entra al índice del chat con su ancla. Quien
   pregunta «¿Cómo estructura Henry un sistema multiagente?» recibe una cita con el chip
-  «T2 · Cómo estructuro un sistema de agentes» que lleva **al bloque** exacto; con «¿Cómo evita el
-  chat de Henry inventar respuestas?» la cita es «T3 · Cómo hago que un LLM responda con los datos de la
+  «T2 · Cómo se debe estructurar un sistema de agentes» que lleva **al bloque** exacto; con «¿Cómo evita el
+  chat de Henry inventar respuestas?» la cita es «T3 · Cómo se debe lograr que un LLM responda con los datos de la
   empresa y no invente»; y con «¿Cómo lleva Henry una aplicación de IA a producción?» es
-  «T4 · Cómo llevo un prototipo de IA a producción y lo mantengo»; con «¿Qué diferencias ve Henry
-  entre Fabric y Databricks?» es «T6 · Cómo estructuro el ciclo de vida de un proyecto de datos a
+  «T4 · Cómo se debe llevar un prototipo de IA a producción y mantenerlo»; con «¿Qué diferencias ve Henry
+  entre Fabric y Databricks?» es «T6 · Cómo se debe estructurar el ciclo de vida de un proyecto de datos a
   escala». Los fragmentos
-  llevan su voz dentro del texto («lo que el campo hace — Anthropic, 2025-06-13»), así que el chat
+  llevan su voz dentro del texto («Estado del campo — Anthropic, 2025-06-13»), así que el chat
   no te atribuye lo que hace el campo. Pesan **la mitad** que tus documentos a fondo (como las
   fichas): medido, a peso 1 la pieza le quitaba el contexto a tus propios documentos.
 - **Limitaciones conocidas:** cuatro piezas publicadas hasta ahora; el segundo idioma se
-  revisa a ojo al cierre del hito, no en cada sprint; sin PDF descargable (decisión tuya).
+  revisa a ojo al cierre del hito, no en cada sprint; sin PDF descargable (decisión tuya); las respuestas fijas del chat y los documentos a fondo siguen en primera persona, a propósito.
 
 #### Cómo se escribe una infografía nueva
 
@@ -668,19 +671,19 @@ Una infografía es **un archivo de datos**, no una página: un archivo `data/met
    estaban. Con T6 entraron dos de las tres: la de «cómo diseñó Henry la plataforma de datos de Vesting»
    no trae la pieza (ES 4.ª por muy poco, EN 30.ª) porque el documento de Vesting es su fuente natural y la
    pieza pesa la mitad; el banco exige la misma fila en los dos idiomas, así que esa fila no se escribió y
-   el cierre del sprint la declara. Y como el banco crece, el número de preguntas de afuera
+   el cierre del sprint la declara. Al renombrar las cuatro piezas (Sprint 014) se midieron de nuevo todas las filas: ninguna salió del top-4; una de T4 en inglés bajó al 4.º puesto con un punto de margen y se recuperó con el título de una fase. Y como el banco crece, el número de preguntas de afuera
    que dicen los documentos `rag-y-el-chat` y `apps-pipeline` (en los dos idiomas) **tiene que
    subir**: el test de coherencia te dice cuál.
-8. **Rendimiento y capturas:** suma `/es/metodo/<slug>` a `lighthouse-urls.json` y corre
+8. **Rendimiento y capturas:** suma `/es/metodos/<slug>` a `lighthouse-urls.json` y corre
    `node scripts/capturas-metodo.mjs <slug>` (con el sitio servido en local) para las capturas de
-   escritorio, móvil e impresa del PR, y mira `/metodo`: **con más de una pieza, las tarjetas de una
+   escritorio, móvil e impresa del PR, y mira `/metodos`: **con más de una pieza, las tarjetas de una
    misma fila miden lo mismo** (lo vigila el e2e de la lista).
 9. **Los totales de piezas no se escriben a mano:** las dos frases de este manual que dicen cuántas
    hay (la de «Qué hace» y la de «Limitaciones conocidas») y la de la guía (prueba q1) se comparan con
    lo que hay en `data/metodo/`; cuando entra una pieza, `pnpm test` te dice cuál quedó atrás y la
    corriges con el número en letras.
 10. **Prueba antes de mergear:** `pnpm test` (esquema, índice del chat, banco), `pnpm build` y los
-   e2e de «Mi método»; el spec lee `data/metodo/` y cubre la pieza nueva **sin tocarlo**.
+   e2e de «Métodos»; el spec lee `data/metodo/` y cubre la pieza nueva **sin tocarlo**.
 11. **Node:** el índice del chat lo arma un script que importa archivos `.ts`, y eso solo funciona
    desde **Node 22.18**. El proyecto declara la **mayor** (`engines` en `package.json`: `22.x`, que es
    lo que lee Vercel) y `.nvmrc` trae la versión exacta que prueban los cuatro trabajos de la CI
@@ -688,6 +691,17 @@ Una infografía es **un archivo de datos**, no una página: un archivo `data/met
    es un rango abierto, si el `.nvmrc` o los tipos (`@types/node`) son de otra mayor, o si un trabajo
    de la CI lee la versión antes de traer el repositorio. Si tu Node local es otra (hoy la 24), pnpm
    avisa «Unsupported engine» y sigue; `nvm use` toma el `.nvmrc` si tienes la 22.
+12. **Voz impersonal (desde el Sprint 014):** las piezas se escriben en tercera persona o en
+   impersonal —«se diseñó», «el autor», «la práctica del autor»—; **la evidencia nombra el
+   proyecto** («En Vesting se diseñó…», «el chat de este sitio…») y el criterio va rotulado como
+   posición del autor. Ni «yo», «mi», «nos» ni «entrevista», ni verbos en primera persona, ni en
+   las piezas ni en los textos de interfaz (`messages/*.json`, sección `metodo` y `nav.metodo`), en
+   español y en inglés. Lo vigilan `tests/unit/metodo-voz.test.ts` (el motor y el diccionario) y
+   `tests/unit/metodo-voz-piezas.test.ts` (cada pieza de `data/metodo/`); el mensaje dice el
+   archivo, el campo, el idioma y la palabra. **Las citas entre comillas («…», “…») no se
+   juzgan** —son la voz de una fuente o del chat—. El motor es un piso, no un techo: la lista de
+   verbos en español es cerrada, así que también se lee la pieza. `data/a-fondo/` y el chat
+   siguen en primera persona.
 
 **Qué hace fallar el build** (y lo dice con el archivo y el campo): un bloque que falta o está fuera
 de orden · una fuente sin fecha, sin editor o sin enlace `https://`, o más nueva que la revisión ·
@@ -709,7 +723,7 @@ una cifra de «lo que hice» que el documento citado no dice, un conteo del siti
 
 - **Qué hace:** el menú tiene **cuatro destinos**: **Hoja de vida** (que despliega Trayectoria,
   Logros, Lo que construyo, Estudios, Certificaciones y Skills — el orden de la página),
-  **Portafolio** (la vitrina), **Mi método** (desde el Sprint 010) y **Contacto**; más el botón de
+  **Portafolio** (la vitrina), **Métodos** (desde el Sprint 010, antes «Mi método») y **Contacto**; más el botón de
   CV en PDF y el cambio de idioma. «Lo que construyo» (desde 2026-09-10) es la sección de la HOME
   donde se asoma la vitrina; «Portafolio» en el primer nivel es el portal.
 - **Por qué se agrupó:** había llegado a nueve destinos y dejaba de caber en pantallas medianas.
@@ -1217,3 +1231,4 @@ chat hoy y cuáles traería con la base aprobada. Ese informe **se genera, no se
 | Sprint 011 | **«Mi método», segunda pieza: «Cómo hago que un LLM responda con los datos de la empresa y no invente» (T3).** Diez bloques con 14 fuentes fechadas (documentación oficial de Microsoft Learn, Anthropic y OWASP primero); lo que hice sale solo de `rag-y-el-chat`, y los embeddings aparecen como decisión escrita, no como experiencia. **Es la pieza que se demuestra sola:** el chat de esta página la cita bloque a bloque, y el banco suma tres preguntas por idioma. **El mecanismo quedó blindado:** el índice del chat pasa por el esquema antes de armarse, los enlaces de la evidencia se comprueban contra el catálogo, un documento citado debe estar aprobado en los dos idiomas, cada cifra de «lo que hice» debe estar en su documento, la cifra de la Fundación CTIC vigila también `data/metodo/`, y los totales de piezas del manual y la guía se miden. En la lista `/metodo`, las dos tarjetas miden lo mismo. Detalle en `sprints/SPRINT_011-cierre.md`. |
 | Sprint 012 | **«Mi método», tercera pieza: «Cómo llevo un prototipo de IA a producción y lo mantengo» (T4).** Diez bloques con 12 fuentes fechadas (Microsoft Learn, OWASP y GitHub); lo que hice sale de `plataforma-y-despliegue`, `apps-pipeline`, `rag-y-el-chat` y `certificaciones`, y lo que no he hecho —contenedores y Kubernetes en producción, un despliegue propio en Azure— está escrito como límite, con el AI-300 «en curso». Es la pieza donde la evidencia es el propio pipeline. **El proyecto declara la versión de Node que necesita** (22.18, `engines` y `.nvmrc`) y la CI corre exactamente esa. La lista `/metodo` cuenta tres piezas, medidas. Detalle en `sprints/SPRINT_012-cierre.md`. |
 | Sprint 013 | **«Mi método», cuarta pieza: «Cómo estructuro el ciclo de vida de un proyecto de datos a escala» (T6).** Diez bloques con 13 fuentes fechadas (todas de Microsoft Learn: Fabric y Azure Databricks); lo que hice sale de `vesting`, `fabric-en-la-practica`, `plataforma-y-despliegue` y `certificaciones` (el DP-600, obtenido en diciembre de 2024), y lo que no he hecho —Eventhouse y KQL más allá del temario del DP-600, Databricks y Snowflake más allá del prototipo, AWS— está escrito como límite. Es la pieza que explica la plataforma de datos de Vesting. **Node:** `engines` pasó a `22.x` (producción y la CI corren la misma mayor) y el test `node-declarado` lo vigila. **Tus dos respuestas del S12 entran al corpus:** el AI-103 con el curso completo y el examen pendiente, y el ajuste de modelos en Microsoft Foundry (antes Azure AI Foundry) hecho en varios prototipos propios. La lista `/metodo` cuenta cuatro piezas, medidas. En la ficha de Innmobiliaria sale «Compradores verificados» del roadmap votable, porque su sprint 8 ya lo entrega. Detalle en `sprints/SPRINT_013-cierre.md`. |
+| Sprint 014 | **«Métodos», en tercera persona.** La sección pasó de «Mi método» a **«Métodos»** (`/metodos`; `/metodo` y `/metodo/<slug>` redirigen con un 301, con idioma o sin él, y conservan el `#bloque-n`). Las cuatro piezas se reescribieron como publicaciones en voz impersonal con título «Cómo se debe…»; el bloque 1 es «El problema» y las voces se llaman **Evidencia** (nombra el proyecto), **Estado del campo** y **Criterio** (posición del autor). Ningún hecho, cifra, nivel ni fuente cambió: un comparador lo midió contra `main`, pieza por pieza. **Un gate de voz** (`metodo-voz` y `metodo-voz-piezas`) falla si reaparece una primera persona o «entrevista» en una pieza o en sus textos de interfaz, con sus demos en rojo. Se pagó la deuda del S13 (el puente entre catálogos de Fabric y Databricks, PySpark en versión preliminar, el DP-600 vigente desde el 19 de octubre de 2026, Eventhouse y KQL «a nivel de consulta, como SQL») y tu respuesta sobre KQL entró al CV y al corpus. El banco se midió antes y después de cada título. **El botón de idioma** ya dice en su nombre accesible lo que muestra («ES / EN — Switch to English»): la regla nueva de axe 4.14 (etiqueta en el nombre) lo exigía y dejaba en rojo el lote de dependencias. Detalle en `sprints/SPRINT_014-cierre.md`. |

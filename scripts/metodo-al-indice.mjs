@@ -4,7 +4,7 @@
  * Cada infografía de `data/metodo/` entra al índice como UN CHUNK POR BLOQUE
  * (a veces dos o tres ventanas, si el bloque pasa del tope), con la misma forma
  * que el resto —`{id, codigo, titulo, texto, ancla, peso}`— y su ancla estable:
- * `/metodo/<slug>#bloque-n`. Es el molde de `fichas-al-indice.mjs`; lo único
+ * `/metodos/<slug>#bloque-n`. Es el molde de `fichas-al-indice.mjs`; lo único
  * propio es que la pieza trae TRES VOCES, y el chat no puede mezclarlas:
  *
  *   · «Lo que hice» — solo del corpus del sitio;
@@ -46,12 +46,12 @@ export const PESO_METODO = 0.5;
 export const N_BLOQUES = 10;
 
 /**
- * Las anclas que una cita puede traer hacia una pieza: `/metodo/<slug>#bloque-n`
+ * Las anclas que una cita puede traer hacia una pieza: `/metodos/<slug>#bloque-n`
  * para los diez bloques. El catálogo de destinos las lista; la pieza siempre
  * trae los diez (el esquema lo garantiza), así que un `#bloque-11` es un error.
  */
 export function anclasDeBloques(slug) {
-  return Array.from({ length: N_BLOQUES }, (_, i) => `/metodo/${slug}#bloque-${i + 1}`);
+  return Array.from({ length: N_BLOQUES }, (_, i) => `/metodos/${slug}#bloque-${i + 1}`);
 }
 
 /**
@@ -166,7 +166,7 @@ export function chunksDePieza({ archivo = "data/metodo/?.yaml", pieza }, locale,
   const unidos = (xs) => (xs ?? []).map((x) => t(x).replace(/[.\s]+$/, "")).join("; ");
   const etiqueta = (nombre, valor) => `${nombre}: ${valor}`;
 
-  const ancla = (n) => `/metodo/${pieza.slug}#bloque-${n}`;
+  const ancla = (n) => `/metodos/${pieza.slug}#bloque-${n}`;
   const nombrePieza = t(pieza.nombre);
   const chunks = [];
   const tituloDeBloque = (n) => `${etiquetas.eyebrow} — ${nombrePieza} · ${etiquetas.bloques[String(n)]}`;

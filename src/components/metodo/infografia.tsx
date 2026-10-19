@@ -15,15 +15,17 @@ import type { IdiomaMetodo, Traductor } from "./traductor";
 import { AfirmacionConVoz, Citas, LeyendaDeVoces, RotuloDeVoz } from "./voz";
 
 /**
- * LA INFOGRAFÍA (S10): UN renderizador para las nueve piezas de «Mi método».
+ * LA PUBLICACIÓN (S10): UN renderizador para las nueve piezas de «Métodos».
  * Pinta, en orden y sin saltarse ninguno, los diez bloques del dato:
- * la pregunta · el mapa · las fases · las decisiones · lo innovador en 2026 ·
- * los modos de falla · las métricas y controles · mi evidencia · lo que haría
- * distinto · las fuentes y la fecha de revisión. Nada específico de un tema
+ * el problema · el mapa · las fases · las decisiones · lo innovador en 2026 ·
+ * los modos de falla · las métricas y controles · la evidencia en proyectos ·
+ * los límites y el alcance · las fuentes y la fecha de revisión. (El campo
+ * `pregunta` del esquema guarda hoy el planteamiento del problema: conserva su
+ * nombre para no tocar medio centenar de puntos.) Nada específico de un tema
  * vive aquí: lo específico es el dato (`data/metodo/<slug>.yaml`).
  *
- * Cada bloque lleva su ancla estable `#bloque-n` (para abrir la pieza en una
- * entrevista donde se quiera, y para la cita del chat) y la hoja de impresión
+ * Cada bloque lleva su ancla estable `#bloque-n` (para abrir la pieza
+ * donde se quiera, y para la cita del chat) y la hoja de impresión
  * mantiene cada tarjeta entera: la pieza cabe en PDF desde el navegador, con el
  * mapa legible.
  *

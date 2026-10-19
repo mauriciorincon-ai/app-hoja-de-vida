@@ -56,14 +56,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // «Mi método» (S10): la lista y cada infografía, desde data/metodo/ — una
     // pieza nueva entra al sitemap sola.
     {
-      url: `${SITE_URL}/${locale}/metodo`,
+      url: `${SITE_URL}/${locale}/metodos`,
       lastModified: new Date(),
-      alternates: alternatesFor("/metodo"),
+      alternates: alternatesFor("/metodos"),
     },
     ...getPiezasMetodo().map((p) => ({
-      url: `${SITE_URL}/${locale}/metodo/${p.slug}`,
+      url: `${SITE_URL}/${locale}/metodos/${p.slug}`,
       lastModified: new Date(),
-      alternates: alternatesFor(`/metodo/${p.slug}`),
+      alternates: alternatesFor(`/metodos/${p.slug}`),
     })),
     // Por app: la ficha técnica (ADR-016) y su detalle.
     ...getManifestVitrina().flatMap((a) =>

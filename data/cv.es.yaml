@@ -800,7 +800,7 @@ certificaciones:
   # de IBM son cursos del Certificado Profesional, no credenciales aparte).
   - nombre: "Microsoft Certified: Azure AI Apps and Agents Developer Associate (AI-103)"
     estado: "en curso"
-    nota: "En preparación: apps y agentes de IA en Azure con Microsoft Foundry, la ruta que hoy curso."
+    nota: "En preparación: apps y agentes de IA en Azure con Microsoft Foundry; completé el curso y me falta el examen."
     icono: insignia
     logo: microsoft.svg
   # 2026-09-19 (a fondo v2): el DP-100 SALE y entra el AI-300 en su lugar.
@@ -859,7 +859,7 @@ skills:
       - "Spark y Delta Parquet"
       - "Direct Lake"
       - "Data Factory"
-      - "Real-Time Intelligence (Eventhouse y KQL)"
+      - "Real-Time Intelligence (Eventhouse y KQL, a nivel de consulta)"
       - "Fabric Data Agents"
       - "Microsoft Purview — prototipo"
       - "RLS (seguridad a nivel de fila)"

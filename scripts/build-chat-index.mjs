@@ -254,7 +254,7 @@ export function buildChunks({
   // pieza. El texto es el que mandó cada casa, en español, en los dos índices.
   if (fichas) chunks.push(...chunksDeFichas(fichas, locale));
   // «Mi método» (S10): cada infografía entra por bloques, con su ancla
-  // `/metodo/<slug>#bloque-n` y el rótulo de su voz dentro del texto. Su código
+  // `/metodos/<slug>#bloque-n` y el rótulo de su voz dentro del texto. Su código
   // es el id del tema (T2…): el chip dice «T2 · <la pieza>».
   if (metodo) chunks.push(...chunksDeMetodo(metodo, locale));
   // El NOMBRE del destino viaja en el chunk: es lo que el chip enseña. Un
@@ -282,11 +282,11 @@ function main() {
   try {
     metodo = leerMetodo();
   } catch (e) {
-    detener("«Mi método» (data/metodo/)", [e.message]);
+    detener("«Métodos» (data/metodo/)", [e.message]);
   }
   const catalogo = catalogoDeDestinos();
   const enlacesRotos = problemasDeEvidencia(metodo.piezas, (d) => destinoExiste(d, catalogo));
-  if (enlacesRotos.length > 0) detener("«Mi método»: enlaces de la evidencia", enlacesRotos);
+  if (enlacesRotos.length > 0) detener("«Métodos»: enlaces de la evidencia", enlacesRotos);
 
   // --- ADUANA DEL CANAL «A FONDO» -----------------------------------------
   const docs = {};

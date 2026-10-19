@@ -1,6 +1,7 @@
 import createMiddleware from "next-intl/middleware";
 import { NextResponse, type NextRequest } from "next/server";
 import { routing } from "./i18n/routing";
+import { rutaNuevaDeMetodo } from "./lib/metodo/redireccion";
 import {
   REINTENTO_SEGUNDOS,
   enMantenimiento,
@@ -28,6 +29,16 @@ export default function proxy(request: NextRequest) {
         "Cache-Control": "no-store",
       },
     });
+  }
+  // «Mi método» (`/metodo`) pasó a «Métodos» (`/metodos`) en el S14: los enlaces
+  // viejos llegan por un 301 (permanente), con la consulta intacta. Va DESPUÉS
+  // del mantenimiento —con el sitio apagado, toda página responde 503— y ANTES
+  // de next-intl, que si no la mandaría primero a `/es/metodo`.
+  const nueva = rutaNuevaDeMetodo(request.nextUrl.pathname);
+  if (nueva) {
+    const destino = request.nextUrl.clone();
+    destino.pathname = nueva;
+    return NextResponse.redirect(destino, 301);
   }
   return intl(request);
 }

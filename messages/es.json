@@ -11,7 +11,7 @@
     "certificaciones": "Certificaciones",
     "roadmap": "Roadmap",
     "contacto": "Contacto",
-    "cambiarIdioma": "Switch to English",
+    "cambiarIdioma": "ES / EN — Switch to English",
     "saltarContenido": "Saltar al contenido",
     "descargarCv": "CV (PDF)",
     "abrirMenu": "Abrir el menú",
@@ -20,7 +20,7 @@
     "portafolio": "Portafolio",
     "hojaDeVida": "Hoja de vida",
     "estudios": "Estudios",
-    "metodo": "Mi método"
+    "metodo": "Métodos"
   },
   "hero": {
     "ctaApps": "Explora mi portafolio",
@@ -361,47 +361,47 @@
     "volverFichaTecnica": "Volver a la ficha técnica"
   },
   "metodo": {
-    "eyebrow": "Mi método",
-    "titulo": "Cómo trabajo, una página por pregunta",
-    "intro": "Cada página contesta una pregunta de entrevista con mi método: las fases, las decisiones, los controles y la evidencia. Lo que hice sale de mi propio sitio; lo que el campo hace, de fuentes con fecha; y lo que opino va rotulado como posición.",
-    "metaDescripcion": "Mi método de trabajo, una infografía larga por pregunta de entrevista: fases, decisiones, controles, evidencia y fuentes con fecha.",
-    "piezasPublicadas": "{n, plural, one {# infografía publicada} other {# infografías publicadas}}",
-    "sinPiezas": "Todavía no hay infografías publicadas.",
+    "eyebrow": "Métodos",
+    "titulo": "Cómo se diseñan sistemas de IA, datos y BI",
+    "intro": "Publicaciones sobre cómo se diseñan y se llevan a producción sistemas de IA, datos y BI, con evidencia de proyectos y fuentes fechadas. Cada una plantea un problema y expone el método: las fases, las decisiones, los controles y la evidencia. La evidencia sale de este sitio; el estado del campo, de fuentes con fecha; y el criterio va rotulado como posición del autor.",
+    "metaDescripcion": "Publicaciones sobre cómo se diseñan y se llevan a producción sistemas de IA, datos y BI: fases, decisiones, controles, evidencia en proyectos y fuentes con fecha.",
+    "piezasPublicadas": "{n, plural, one {# publicación} other {# publicaciones}}",
+    "sinPiezas": "Todavía no hay publicaciones.",
     "tema": "Tema {id}",
-    "abrir": "Abrir la infografía",
-    "volver": "Volver a Mi método",
+    "abrir": "Leer la publicación",
+    "volver": "Volver a Métodos",
     "migaEtiqueta": "Ruta de navegación",
-    "indiceEtiqueta": "Bloques de esta infografía",
+    "indiceEtiqueta": "Bloques de esta publicación",
     "imprimirAyuda": "Se imprime completa desde el navegador, en A4 o en carta.",
     "revisado": "Revisado el {fecha}",
     "bloque": "Bloque {n}",
     "bloques": {
-      "1": "La pregunta",
+      "1": "El problema",
       "2": "El mapa",
       "3": "Las fases",
       "4": "Las decisiones de diseño",
       "5": "Lo innovador en 2026",
-      "6": "Modos de falla y cómo se ven venir",
+      "6": "Modos de falla y cómo anticiparlos",
       "7": "Métricas y controles",
-      "8": "Mi evidencia",
-      "9": "Lo que haría distinto y lo que no he hecho",
+      "8": "Evidencia en proyectos",
+      "9": "Límites y alcance",
       "10": "Fuentes y fecha de revisión"
     },
-    "respuestaEnTres": "La respuesta en tres líneas",
+    "respuestaEnTres": "Síntesis en tres líneas",
     "voces": {
       "titulo": "Tres voces, siempre separadas",
-      "sinRotulo": "Lo que no lleva rótulo es mi método: mi posición sobre cómo se hace.",
+      "sinRotulo": "Lo que no lleva rótulo es el método: el criterio del autor sobre cómo se hace.",
       "hice": {
-        "nombre": "Lo que hice",
+        "nombre": "Evidencia",
         "ayuda": "Sale solo del corpus de este sitio."
       },
       "campo": {
-        "nombre": "Lo que el campo hace",
+        "nombre": "Estado del campo",
         "ayuda": "Sale de una fuente con título, editor, fecha y enlace."
       },
       "posicion": {
-        "nombre": "Mi posición",
-        "ayuda": "Es mi criterio, no un hecho."
+        "nombre": "Criterio",
+        "ayuda": "Posición del autor, no un hecho."
       }
     },
     "mapa": {
@@ -461,7 +461,7 @@
       "metrica": "Qué se mide",
       "umbral": "Umbral",
       "aprueba": "Quién aprueba el paso a producción",
-      "nota": "Los umbrales son ejemplos del método, no cifras de un proyecto mío."
+      "nota": "Los umbrales son ejemplos del método, no cifras de un proyecto concreto."
     },
     "evidencia": {
       "nivel": "Nivel",

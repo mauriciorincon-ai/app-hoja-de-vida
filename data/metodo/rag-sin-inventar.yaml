@@ -1,10 +1,13 @@
-# «MI MÉTODO» · T3 — Cómo hago que un LLM responda con los datos de la empresa y no invente (S11, 2026-10-18).
+# «MÉTODOS» · T3 — Cómo se debe lograr que un LLM responda con los datos de la empresa y no invente (S11, 2026-10-18;
+# voz impersonal desde el S14).
 #
-# Tres voces, separadas por el esquema (src/lib/metodo/schema.ts):
-#   · voz: hice      → solo lo que dice el corpus del sitio; `corpus:` nombra el documento de data/a-fondo/.
+# Tres voces, separadas por el esquema (src/lib/metodo/schema.ts); en la página: Evidencia · Estado del campo · Criterio.
+#   · voz: hice      → la evidencia: solo lo que dice el corpus del sitio, con el proyecto como sujeto;
+#                      `corpus:` nombra el documento de data/a-fondo/.
 #   · voz: campo     → lo que el campo hace en 2025–2026; `fuentes:` numera la fuente del bloque 10.
-#   · voz: posicion  → mi criterio, rotulado como tal; sin fuente ni corpus.
-# Lo que va sin voz (bloques 1, 2, 6, 7 y la base de las fases) es el método mismo: mi posición sobre cómo se hace.
+#   · voz: posicion  → el criterio del autor, rotulado como tal; sin fuente ni corpus.
+# Lo que va sin voz (bloques 1, 2, 6, 7 y la base de las fases) es el método mismo. Desde el S14 todo el texto
+# publicado va en voz impersonal —ni primera persona ni «entrevista»—; lo vigila tests/unit/metodo-voz-piezas.test.ts.
 #
 # Investigación del 2026-10-18: documentación oficial primero (Microsoft Learn, Anthropic, OWASP), solo contenido
 # público servido al navegador, sin credenciales ajenas ni endpoints de terceros. Un resultado de búsqueda de la
@@ -18,21 +21,21 @@
 id: T3
 slug: rag-sin-inventar
 nombre:
-  es: "Cómo hago que un LLM responda con los datos de la empresa y no invente"
-  en: "How I make an LLM answer with the company’s data, and not make things up"
+  es: "Cómo se debe lograr que un LLM responda con los datos de la empresa y no invente"
+  en: "How an LLM should be made to answer with the company’s data, without making things up"
 bloques:
   # ─── 1 · La pregunta ────────────────────────────────────────────────────────
   - n: 1
     pregunta:
-      es: "¿Cómo garantizas que el modelo responda con nuestros datos y no alucine, y cómo lo mides?"
-      en: "How do you make sure the model answers with our data and does not hallucinate, and how do you measure it?"
+      es: "Lograr que el modelo responda con los datos de la empresa y no alucine, y medir que lo hace."
+      en: "Making the model answer with the company’s data and not hallucinate, and measuring that it does."
     respuesta:
-      - es: "No le pido al modelo que recuerde: el conocimiento vive en contenido versionado que se indexa antes de la pregunta, y el modelo solo recibe los pocos fragmentos que la recuperación eligió, cada uno con su procedencia."
-        en: "I do not ask the model to remember: the knowledge lives in versioned content that is indexed before the question, and the model only receives the few passages that retrieval picked, each with its provenance."
-      - es: "Pongo controles en capas, los baratos primero —alcance, validación, recuperación, instrucciones—, y cada respuesta cita fuentes que navegan a algo visible, para que quien lee pueda comprobarla."
-        en: "I put controls in layers, the cheap ones first —scope, validation, retrieval, instructions—, and every answer cites sources that lead to something visible, so whoever reads it can check it."
-      - es: "Lo mido en cada cambio con dos conjuntos de preguntas, uno propio y otro escrito desde afuera, contra el mismo buscador que corre en producción: hasta cuántas fuentes entran a una respuesta sale de esa medición, no del gusto."
-        en: "I measure it on every change with two sets of questions, one of my own and one written from the outside, against the same search that runs in production: even how many sources go into an answer comes from that measurement, not from taste."
+      - es: "Al modelo no se le pide que recuerde: el conocimiento vive en contenido versionado que se indexa antes de la pregunta, y el modelo solo recibe los pocos fragmentos que la recuperación eligió, cada uno con su procedencia."
+        en: "The model is not asked to remember: the knowledge lives in versioned content that is indexed before the question, and the model only receives the few passages that retrieval picked, each with its provenance."
+      - es: "Los controles van en capas, los baratos primero —alcance, validación, recuperación, instrucciones—, y cada respuesta cita fuentes que navegan a algo visible, para que quien lee pueda comprobarla."
+        en: "Controls go in layers, the cheap ones first —scope, validation, retrieval, instructions—, and every answer cites sources that lead to something visible, so whoever reads it can check it."
+      - es: "Se mide en cada cambio con dos conjuntos de preguntas, uno propio y otro escrito desde afuera, contra el mismo buscador que corre en producción: hasta cuántas fuentes entran a una respuesta sale de esa medición, no del gusto."
+        en: "It is measured on every change with two sets of questions, one in-house and one written from the outside, against the same search that runs in production: even how many sources go into an answer comes from that measurement, not from taste."
 
   # ─── 2 · El mapa ────────────────────────────────────────────────────────────
   - n: 2
@@ -49,8 +52,8 @@ bloques:
         col: 0
         fila: 0
         detalle:
-          es: "Lo que el sitio publica: datos del currículum, documentos aprobados, fichas e infografías como esta. Lo que no está publicado no existe para el chat."
-          en: "What the site publishes: résumé data, approved documents, showcase sheets and infographics like this one. What is not published does not exist for the chat."
+          es: "Lo que el sitio publica: datos del currículum, documentos aprobados, fichas y publicaciones como esta. Lo que no está publicado no existe para el chat."
+          en: "What the site publishes: résumé data, approved documents, showcase sheets and publications like this one. What is not published does not exist for the chat."
       - n: 2
         etiqueta: { es: "Índice del build", en: "Build-time index" }
         tipo: dato
@@ -66,7 +69,7 @@ bloques:
         fila: 0
         detalle:
           es: "Preguntas propias y preguntas escritas desde afuera, contra el índice real y el mismo buscador de producción."
-          en: "Questions of my own and questions written from the outside, against the real index and the same search used in production."
+          en: "In-house questions and questions written from the outside, against the real index and the same search used in production."
       - n: 4
         etiqueta: { es: "Pregunta", en: "Question" }
         tipo: externo
@@ -197,8 +200,8 @@ bloques:
         nota:
           voz: hice
           texto:
-            es: "El tope de 180 palabras por fragmento lo medí sobre el corpus real: la subsección típica tenía 143 palabras y la más larga 247, y con ese tope solo se parte el 4 % de las subsecciones."
-            en: "I measured the 180-word cap per passage on the real corpus: the typical subsection had 143 words and the longest 247, and with that cap only 4% of the subsections get split."
+            es: "El tope de 180 palabras por fragmento se midió sobre el corpus real: la subsección típica tenía 143 palabras y la más larga 247, y con ese tope solo se parte el 4 % de las subsecciones."
+            en: "The 180-word cap per passage was measured on the real corpus: the typical subsection had 143 words and the longest 247, and with that cap only 4% of the subsections get split."
           corpus: [rag-y-el-chat]
       - nombre: { es: "Recuperar y medir cuántas fuentes entran", en: "Retrieve, and measure how many sources go in" }
         entradas:
@@ -256,7 +259,7 @@ bloques:
           - es: "Comprobar que las preguntas ajenas se comportan como está declarado."
             en: "Check that off-topic questions behave as declared."
           - es: "Leer las respuestas de las preguntas propias: cada afirmación sostenida, nada ajeno al corpus."
-            en: "Read the answers to my own questions: every claim supported, nothing from outside the corpus."
+            en: "Read the answers to the in-house questions: every claim supported, nothing from outside the corpus."
           - es: "Tratar una palabra que el corpus no dice como un hallazgo de contenido, no de la prueba."
             en: "Treat a word the corpus does not say as a content finding, not a test problem."
         artefactos:
@@ -267,8 +270,8 @@ bloques:
         nota:
           voz: hice
           texto:
-            es: "Cuando el banco descubrió que «ETL» y «lakehouse» no aparecían en mis documentos —yo había escrito «integración de información»—, se corrigió el contenido, no la expectativa."
-            en: "When the bank found that “ETL” and “lakehouse” did not appear in my documents —I had written “information integration”—, the content was fixed, not the expectation."
+            es: "Cuando el banco descubrió que «ETL» y «lakehouse» no aparecían en los documentos del autor —que decían «integración de información»—, se corrigió el contenido, no la expectativa."
+            en: "When the bank found that “ETL” and “lakehouse” did not appear in the author’s documents —which said “information integration”—, the content was fixed, not the expectation."
           corpus: [rag-y-el-chat]
       - nombre: { es: "Operar, degradar y volver a medir", en: "Operate, degrade and measure again" }
         entradas:
@@ -311,8 +314,8 @@ bloques:
         nota:
           voz: hice
           texto:
-            es: "Mi chat busca con BM25, sin embeddings ni base vectorial, por una decisión escrita: entran el día que el banco muestre una familia de preguntas que la léxica pierde de forma sistemática, y hoy ninguna se queda sin su fuente entre las cuatro primeras."
-            en: "My chat searches with BM25, without embeddings or a vector database, by a written decision: they come in the day the bank shows a family of questions that lexical search loses systematically, and today none is left without its source among the first four."
+            es: "El chat de este sitio busca con BM25, sin embeddings ni base vectorial, por una decisión escrita: entran el día que el banco muestre una familia de preguntas que la léxica pierde de forma sistemática, y hoy ninguna se queda sin su fuente entre las cuatro primeras."
+            en: "This site’s chat searches with BM25, without embeddings or a vector database, by a written decision: they come in the day the bank shows a family of questions that lexical search loses systematically, and today none is left without its source among the first four."
           corpus: [rag-y-el-chat]
       - titulo: { es: "Reordenar o no los resultados", en: "Whether to rerank the results" }
         cuandoSi:
@@ -330,8 +333,8 @@ bloques:
         nota:
           voz: posicion
           texto:
-            es: "Antes de añadir un reordenador miro dónde cae la fuente correcta: si ya llega entre las primeras, el reordenador es gasto."
-            en: "Before adding a reranker I look at where the right source lands: if it already comes in among the first ones, the reranker is just spending."
+            es: "Antes de añadir un reordenador conviene mirar dónde cae la fuente correcta: si ya llega entre las primeras, el reordenador es gasto."
+            en: "Before adding a reranker, it is worth looking at where the right source lands: if it already comes in among the first ones, the reranker is just spending."
       - titulo: { es: "Cuántas fuentes entran a una respuesta", en: "How many sources go into an answer" }
         cuandoSi:
           es: "Más fuentes, cuando la medición muestra preguntas que se quedan sin la suya."
@@ -348,8 +351,8 @@ bloques:
         nota:
           voz: hice
           texto:
-            es: "En mi chat lo midieron dos conjuntos independientes, dos veces: con cuatro fuentes por respuesta, el golden set dio 75 de 75 y el banco 136 de 136; con cinco no se rescató ninguna más."
-            en: "In my chat two independent sets measured it, twice: with four sources per answer, the golden set scored 75 out of 75 and the bank 136 out of 136; with five, not one more was rescued."
+            es: "En el chat de este sitio lo midieron dos conjuntos independientes, dos veces: con cuatro fuentes por respuesta, el golden set dio 75 de 75 y el banco 136 de 136; con cinco no se rescató ninguna más."
+            en: "In this site’s chat two independent sets measured it, twice: with four sources per answer, the golden set scored 75 out of 75 and the bank 136 out of 136; with five, not one more was rescued."
           corpus: [rag-y-el-chat]
       - titulo: { es: "Qué hace el chat cuando la pregunta no es suya: el umbral de alcance", en: "What the chat does when the question is not its business: the scope threshold" }
         cuandoSi:
@@ -361,8 +364,8 @@ bloques:
         porQue:
           voz: hice
           texto:
-            es: "Lo medí y el hallazgo fue negativo: la pregunta legítima que peor puntúa da 5,92 y la ajena que mejor puntúa, 16,90; con el umbral en 7, diez legítimas recibían «eso se me escapa» a cambio de bloquear tres ajenas más. Por eso el umbral es 1 —«casó algo sustantivo»— y la corrección la garantiza el prompt."
-            en: "I measured it and the finding was negative: the lowest-scoring legitimate question gets 5.92 and the highest-scoring off-topic one, 16.90; with the threshold at 7, ten legitimate questions got “that one escapes me” in exchange for blocking three more off-topic ones. That is why the threshold is 1 —“something substantive matched”— and correctness is guaranteed by the prompt."
+            es: "Se midió y el hallazgo fue negativo: la pregunta legítima que peor puntúa da 5,92 y la ajena que mejor puntúa, 16,90; con el umbral en 7, diez legítimas recibían «eso se me escapa» a cambio de bloquear tres ajenas más. Por eso el umbral es 1 —«casó algo sustantivo»— y la corrección la garantiza el prompt."
+            en: "It was measured and the finding was negative: the lowest-scoring legitimate question gets 5.92 and the highest-scoring off-topic one, 16.90; with the threshold at 7, ten legitimate questions got “that one escapes me” in exchange for blocking three more off-topic ones. That is why the threshold is 1 —“something substantive matched”— and correctness is guaranteed by the prompt."
           corpus: [rag-y-el-chat]
         nota:
           voz: posicion
@@ -375,7 +378,7 @@ bloques:
           en: "Always: every source that goes into the answer leads to a visible section, and a broken destination stops the build."
         cuandoNo:
           es: "No basta cuando la respuesta tiene consecuencias: ahí hace falta además comprobar por máquina que cada afirmación se apoya en la fuente que cita."
-          en: "It is not enough when the answer has consequences: there you also need a machine check that every claim rests on the source it cites."
+          en: "It is not enough when the answer has consequences: there a machine check is also needed that every claim rests on the source it cites."
         porQue:
           voz: campo
           texto:
@@ -385,8 +388,8 @@ bloques:
         nota:
           voz: hice
           texto:
-            es: "En mi chat las fuentes que el modelo tuvo delante aparecen junto a la respuesta y cada una navega a su sección; no existe todavía un validador que compruebe que el modelo usó cada fuente en cada frase, y lo digo así: esa relación la verifica hoy quien lee."
-            en: "In my chat, the sources the model had in front of it appear next to the answer and each one leads to its section; there is no validator yet that checks the model used each source in each sentence, and I say so: today that relationship is checked by whoever reads."
+            es: "En el chat de este sitio las fuentes que el modelo tuvo delante aparecen junto a la respuesta y cada una navega a su sección; no existe todavía un validador que compruebe que el modelo usó cada fuente en cada frase, y se dice así: esa relación la verifica hoy quien lee."
+            en: "In this site’s chat, the sources the model had in front of it appear next to the answer and each one leads to its section; there is no validator yet that checks the model used each source in each sentence, and it is stated as such: today that relationship is checked by whoever reads."
           corpus: [rag-y-el-chat]
       - titulo: { es: "Mandarlo todo en el contexto o recuperar: cuándo no usar RAG", en: "Send everything in the context, or retrieve: when not to use RAG" }
         cuandoSi:
@@ -404,8 +407,8 @@ bloques:
         nota:
           voz: hice
           texto:
-            es: "Con cuatro fuentes de hasta 180 palabras, el contexto de una respuesta de mi chat ronda las 540 palabras —del orden de 800 tokens—, aunque la base haya crecido de unas 30.000 a unas 158.000 palabras por idioma."
-            en: "With four sources of up to 180 words, the context of an answer in my chat stays around 540 words —on the order of 800 tokens—, even though the knowledge base has grown from about 30,000 to about 158,000 words per language."
+            es: "Con cuatro fuentes de hasta 180 palabras, el contexto de una respuesta del chat de este sitio ronda las 540 palabras —del orden de 800 tokens—, aunque la base haya crecido de unas 30.000 a unas 158.000 palabras por idioma."
+            en: "With four sources of up to 180 words, the context of an answer in this site’s chat stays around 540 words —on the order of 800 tokens—, even though the knowledge base has grown from about 30,000 to about 158,000 words per language."
           corpus: [rag-y-el-chat]
       - titulo: { es: "Caché de prompt sí; caché semántica, no en un chat de hechos", en: "Prompt caching yes; semantic caching, not in a chat about facts" }
         cuandoSi:
@@ -423,8 +426,8 @@ bloques:
         nota:
           voz: posicion
           texto:
-            es: "No pondría una caché semántica en un chat que responde por hechos sin un registro que muestre preguntas repetidas: devolver por parecido la respuesta de otra pregunta es una forma elegante de inventar."
-            en: "I would not put a semantic cache in a chat that answers about facts without a log showing repeated questions: returning another question’s answer because it looks similar is an elegant way of making things up."
+            es: "No conviene poner una caché semántica en un chat que responde por hechos sin un registro que muestre preguntas repetidas: devolver por parecido la respuesta de otra pregunta es una forma elegante de inventar."
+            en: "A semantic cache does not belong in a chat that answers about facts without a log showing repeated questions: returning another question’s answer because it looks similar is an elegant way of making things up."
 
   # ─── 5 · Lo innovador en 2026 ───────────────────────────────────────────────
   - n: 5
@@ -437,8 +440,8 @@ bloques:
         nota:
           voz: posicion
           texto:
-            es: "Si un día el banco muestra paráfrasis perdidas, este es mi siguiente paso, no un reemplazo: la léxica seguiría ahí para los nombres y las siglas."
-            en: "If one day the bank shows lost paraphrases, this is my next step, not a replacement: lexical search would stay for names and acronyms."
+            es: "Si un día el banco muestra paráfrasis perdidas, este es el siguiente paso, no un reemplazo: la léxica seguiría ahí para los nombres y las siglas."
+            en: "If one day the bank shows lost paraphrases, this is the next step, not a replacement: lexical search would stay for names and acronyms."
       - titulo: { es: "Recuperación agéntica: la pregunta se planea antes de buscar", en: "Agentic retrieval: the question is planned before searching" }
         queCambia:
           es: "Para preguntas con varias partes o que dependen de la conversación, un modelo las parte en subconsultas que corren en paralelo, cada una se reordena y el resultado se funde con referencias para citar. Microsoft advierte que agrega latencia frente a una sola consulta, y en Azure AI Search la planificación con modelo sigue en vista previa."
@@ -447,8 +450,8 @@ bloques:
         nota:
           voz: posicion
           texto:
-            es: "Para preguntas cortas y directas pagaría esa latencia solo si la medición mostrara preguntas compuestas que se quedan sin su fuente."
-            en: "For short, direct questions I would pay that latency only if the measurement showed compound questions left without their source."
+            es: "Para preguntas cortas y directas, esa latencia solo se justifica si la medición muestra preguntas compuestas que se quedan sin su fuente."
+            en: "For short, direct questions, that latency is only worth paying if the measurement shows compound questions left without their source."
       - titulo: { es: "Contexto añadido a cada fragmento antes de indexarlo", en: "Context added to each passage before indexing it" }
         queCambia:
           es: "Un fragmento suelto pierde de qué documento y de qué sección viene. La recuperación contextual le antepone una explicación breve, generada a partir del documento entero, antes de los embeddings y del índice BM25: en las pruebas de Anthropic, los fallos de recuperación entre los 20 primeros fragmentos bajaron un 49 %, y un 67 % al sumar reordenamiento."
@@ -457,8 +460,8 @@ bloques:
         nota:
           voz: hice
           texto:
-            es: "En mi índice cada fragmento conserva el título de su sección, el título pesa el doble que el cuerpo, y cada documento declara además cuándo usarlo: es contexto escrito a mano, sin un modelo de por medio."
-            en: "In my index every passage keeps its section title, the title weighs twice as much as the body, and every document also declares when to use it: it is context written by hand, with no model in between."
+            es: "En el índice de este sitio cada fragmento conserva el título de su sección, el título pesa el doble que el cuerpo, y cada documento declara además cuándo usarlo: es contexto escrito a mano, sin un modelo de por medio."
+            en: "In this site’s index every passage keeps its section title, the title weighs twice as much as the body, and every document also declares when to use it: it is context written by hand, with no model in between."
           corpus: [rag-y-el-chat]
       - titulo: { es: "GraphRAG para preguntas sobre el conjunto entero", en: "GraphRAG for questions about the whole dataset" }
         queCambia:
@@ -468,8 +471,8 @@ bloques:
         nota:
           voz: posicion
           texto:
-            es: "Mis preguntas son locales —una empresa, una cifra, una decisión—; un grafo pagaría si me preguntaran por patrones de toda la trayectoria y el banco mostrara que no los contesto."
-            en: "My questions are local —a company, a figure, a decision—; a graph would pay off if I were asked about patterns across my whole career and the bank showed I cannot answer them."
+            es: "Las preguntas de este sitio son locales —una empresa, una cifra, una decisión—; un grafo pagaría si se preguntara por patrones de toda la trayectoria y el banco mostrara que quedan sin respuesta."
+            en: "This site’s questions are local —a company, a figure, a decision—; a graph would pay off if questions came about patterns across the whole career and the bank showed they go unanswered."
       - titulo: { es: "Citas ancladas a la frase exacta", en: "Citations anchored to the exact sentence" }
         queCambia:
           es: "La API de citas de Anthropic parte los documentos en frases y devuelve, con la respuesta, las frases exactas que la sostienen; según sus evaluaciones internas, supera a la mayoría de las implementaciones propias, con hasta un 15 % más de exactitud de recuperación."
@@ -478,8 +481,8 @@ bloques:
         nota:
           voz: hice
           texto:
-            es: "Mis citas llegan a la sección, no a la frase: el destino está garantizado en cada build; la relación con cada frase, no."
-            en: "My citations reach the section, not the sentence: the destination is guaranteed on every build; the link to each sentence is not."
+            es: "Las citas de este chat llegan a la sección, no a la frase: el destino está garantizado en cada build; la relación con cada frase, no."
+            en: "This chat’s citations reach the section, not the sentence: the destination is guaranteed on every build; the link to each sentence is not."
           corpus: [rag-y-el-chat]
       - titulo: { es: "Evaluar la recuperación y la respuesta por separado, con un juez calibrado contra personas", en: "Evaluating retrieval and the answer separately, with a judge calibrated against people" }
         queCambia:
@@ -489,19 +492,19 @@ bloques:
         nota:
           voz: hice
           texto:
-            es: "En mi chat la recuperación se evalúa en cada cambio con dos conjuntos, contra el índice real y con el mismo módulo de búsqueda que corre en producción."
-            en: "In my chat retrieval is evaluated on every change with two sets, against the real index and with the same search module that runs in production."
+            es: "En el chat de este sitio la recuperación se evalúa en cada cambio con dos conjuntos, contra el índice real y con el mismo módulo de búsqueda que corre en producción."
+            en: "In this site’s chat retrieval is evaluated on every change with two sets, against the real index and with the same search module that runs in production."
           corpus: [rag-y-el-chat]
       - titulo: { es: "El contexto largo no reemplaza la recuperación", en: "Long context does not replace retrieval" }
         queCambia:
           es: "Las ventanas de contexto grandes invitan a mandarlo todo. Chroma midió 18 modelos y vio que el rendimiento cae al crecer la entrada, que un solo distractor ya lo baja y que importa cómo se presenta la información: elegir qué entra sigue siendo el trabajo."
-          en: "Large context windows invite you to send everything. Chroma measured 18 models and saw that performance drops as input grows, that a single distractor already lowers it and that how the information is presented matters: choosing what goes in is still the job."
+          en: "Large context windows invite sending everything. Chroma measured 18 models and saw that performance drops as input grows, that a single distractor already lowers it and that how the information is presented matters: choosing what goes in is still the job."
         fuentes: [9]
         nota:
           voz: hice
           texto:
-            es: "Mi chat le entrega al modelo solo los fragmentos recuperados, numerados, y no el contenido entero del sitio."
-            en: "My chat hands the model only the retrieved passages, numbered, and not the site’s whole content."
+            es: "El chat de este sitio le entrega al modelo solo los fragmentos recuperados, numerados, y no el contenido entero del sitio."
+            en: "This site’s chat hands the model only the retrieved passages, numbered, and not the site’s whole content."
           corpus: [rag-y-el-chat]
       - titulo: { es: "Salidas que siguen un esquema exacto", en: "Outputs that follow an exact schema" }
         queCambia:
@@ -511,8 +514,8 @@ bloques:
         nota:
           voz: posicion
           texto:
-            es: "Es la pieza que usaría para un validador de citas: que el modelo devuelva en un esquema qué fuente sostiene cada afirmación, y que el código lo compruebe."
-            en: "It is the piece I would use for a citation validator: the model returns, in a schema, which source supports each claim, and code checks it."
+            es: "Es la pieza indicada para un validador de citas: que el modelo devuelva en un esquema qué fuente sostiene cada afirmación, y que el código lo compruebe."
+            en: "It is the right piece for a citation validator: the model returns, in a schema, which source supports each claim, and code checks it."
 
   # ─── 6 · Modos de falla y cómo se ven venir ─────────────────────────────────
   - n: 6
@@ -576,8 +579,8 @@ bloques:
       - nombre: { es: "El chat de esta página", en: "This site’s chat" }
         nivel: uso-real
         texto:
-          es: "Lo construí y está en uso público desde julio de 2026: índice en el build, recuperación con BM25, nueve defensas en el servidor, citas que navegan a una sección visible y búsqueda local si el proveedor falla. Se puede abrir y probar."
-          en: "I built it and it has been in public use since July 2026: a build-time index, BM25 retrieval, nine defenses on the server, citations that lead to a visible section and local search if the provider fails. It can be opened and tried."
+          es: "Se construyó y está en uso público desde julio de 2026: índice en el build, recuperación con BM25, nueve defensas en el servidor, citas que navegan a una sección visible y búsqueda local si el proveedor falla. Se puede abrir y probar."
+          en: "It was built and has been in public use since July 2026: a build-time index, BM25 retrieval, nine defenses on the server, citations that lead to a visible section and local search if the provider fails. It can be opened and tried."
         corpus: [rag-y-el-chat]
         href: /apps/chat-hoja-de-vida
       - nombre: { es: "El índice como puerta de calidad", en: "The index as a quality gate" }
@@ -617,8 +620,8 @@ bloques:
     limites:
       - voz: hice
         texto:
-          es: "Embeddings y base vectorial no entran a este chat por una decisión escrita, no por desconocerlos: comparé la búsqueda vectorial con la léxica, y entran el día que una medición lo justifique."
-          en: "Embeddings and a vector database are out of this chat by a written decision, not for lack of knowing them: I compared vector search with lexical search, and they come in the day a measurement justifies it."
+          es: "Embeddings y base vectorial no entran a este chat por una decisión escrita, no por desconocerlos: se comparó la búsqueda vectorial con la léxica, y entran el día que una medición lo justifique."
+          en: "Embeddings and a vector database are out of this chat by a written decision, not for lack of knowing them: vector search was compared with lexical search, and they come in the day a measurement justifies it."
         corpus: [rag-y-el-chat]
       - voz: hice
         texto:
@@ -627,27 +630,27 @@ bloques:
         corpus: [rag-y-el-chat]
       - voz: hice
         texto:
-          es: "Para la respuesta no tengo un juez automático: las respuestas de prueba se revisan leyendo."
-          en: "For the answer I have no automatic judge: the test answers are reviewed by reading them."
+          es: "Para la respuesta no hay un juez automático: las respuestas de prueba se revisan leyendo."
+          en: "For the answer there is no automatic judge: the test answers are reviewed by reading them."
         corpus: [rag-y-el-chat]
       - voz: hice
         texto:
-          es: "El chat no ajusta ni reentrena ningún modelo, y no es por no saber: ajusté modelos en Microsoft Foundry, en varios prototipos propios. Un ajuste cambia cómo se comporta el modelo; lo que cambia en mi trayectoria cambia en la fuente y entra al índice en el siguiente build."
-          en: "The chat does not fine-tune or retrain any model, and it is not for lack of knowing how: I fine-tuned models on Microsoft Foundry, in several prototypes of my own. A fine-tune changes how a model behaves; what changes in my career changes at the source and enters the index on the next build."
+          es: "El chat no ajusta ni reentrena ningún modelo, y no es por no saber: el autor ajustó modelos en Microsoft Foundry, en varios prototipos propios. Un ajuste cambia cómo se comporta el modelo; lo que cambia en la trayectoria del autor cambia en la fuente y entra al índice en el siguiente build."
+          en: "The chat does not fine-tune or retrain any model, and it is not for lack of knowing how: the author fine-tuned models on Microsoft Foundry, in several prototypes of the author’s own. A fine-tune changes how a model behaves; what changes in the author’s career changes at the source and enters the index on the next build."
         corpus: [rag-y-el-chat]
       - voz: hice
         texto:
-          es: "Con Microsoft Foundry, mi experiencia es el adaptador de proveedor de este chat, esos ajustes y el estudio del AI-103, que está en curso; Azure AI Search lo estudié a fondo en esa ruta."
-          en: "With Microsoft Foundry, my experience is this chat’s provider adapter, those fine-tunes and studying for the AI-103, which is in progress; I studied Azure AI Search in depth in that path."
+          es: "Con Microsoft Foundry, la experiencia es el adaptador de proveedor de este chat, esos ajustes y el estudio del AI-103, que está en curso; Azure AI Search se estudió a fondo en esa ruta."
+          en: "With Microsoft Foundry, the experience is this chat’s provider adapter, those fine-tunes and studying for the AI-103, which is in progress; Azure AI Search was studied in depth in that path."
         corpus: [rag-y-el-chat, certificaciones]
       - voz: posicion
         texto:
-          es: "Lo que haría distinto hoy: un validador de citas desde el primer día —el modelo dice en un esquema qué fuente sostiene cada afirmación y el código lo comprueba— y un juez de la respuesta calibrado contra una muestra calificada a mano."
-          en: "What I would do differently today: a citation validator from day one —the model states in a schema which source supports each claim and code checks it— and a judge for the answer calibrated against a sample graded by hand."
+          es: "Lo que conviene hacer distinto hoy: un validador de citas desde el primer día —el modelo dice en un esquema qué fuente sostiene cada afirmación y el código lo comprueba— y un juez de la respuesta calibrado contra una muestra calificada a mano."
+          en: "What should be done differently today: a citation validator from day one —the model states in a schema which source supports each claim and code checks it— and a judge for the answer calibrated against a sample graded by hand."
       - voz: posicion
         texto:
-          es: "Y no empezaría por la arquitectura más sofisticada: empezaría por un índice que se pueda abrir y un banco de preguntas escritas desde afuera; la búsqueda vectorial, el reordenador o el grafo entran cuando ese banco muestre qué falla."
-          en: "And I would not start with the most sophisticated architecture: I would start with an index you can open and a bank of questions written from the outside; vector search, the reranker or the graph come in when that bank shows what fails."
+          es: "Y no conviene empezar por la arquitectura más sofisticada: mejor empezar por un índice que se pueda abrir y un banco de preguntas escritas desde afuera; la búsqueda vectorial, el reordenador o el grafo entran cuando ese banco muestre qué falla."
+          en: "And it is better not to start with the most sophisticated architecture: start with an index that can be opened and a bank of questions written from the outside; vector search, the reranker or the graph come in when that bank shows what fails."
 
   # ─── 10 · Fuentes y fecha de revisión ───────────────────────────────────────
   - n: 10
