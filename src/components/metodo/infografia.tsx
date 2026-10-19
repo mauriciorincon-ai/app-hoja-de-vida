@@ -329,7 +329,7 @@ export function InfografiaVista({
         </p>
       </Bloque>
 
-      {/* 8 · Mi evidencia */}
+      {/* 8 · Evidencia en proyectos */}
       <Bloque n={8} t={t}>
         <ul className="grid gap-5 md:grid-cols-2">
           {b8.evidencia.map((e, i) => (
@@ -368,7 +368,7 @@ export function InfografiaVista({
         </ul>
       </Bloque>
 
-      {/* 9 · Lo que haría distinto y lo que no he hecho */}
+      {/* 9 · Límites y alcance */}
       <Bloque n={9} t={t}>
         <ul className="flex flex-col gap-4">
           {b9.limites.map((l, i) => (

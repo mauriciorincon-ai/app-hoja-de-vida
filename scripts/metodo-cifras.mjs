@@ -1,7 +1,7 @@
 /**
- * LAS CIFRAS DE «MI MÉTODO» (S11) — ninguna cifra sin corpus.
+ * LAS CIFRAS DE «MÉTODOS» (S11) — ninguna cifra sin corpus.
  *
- * Una infografía dice dos clases de cifras sobre el dueño y su sitio, y las dos
+ * Una publicación dice dos clases de cifras sobre el dueño y su sitio, y las dos
  * se vigilan:
  *
  *   1. Las de «lo que hice» y las de la evidencia (bloque 8): salen de un

@@ -1,19 +1,19 @@
 /**
- * «MI MÉTODO» AL ÍNDICE DEL CHAT (S10, F3).
+ * «MÉTODOS» AL ÍNDICE DEL CHAT (S10, F3).
  *
- * Cada infografía de `data/metodo/` entra al índice como UN CHUNK POR BLOQUE
+ * Cada publicación de `data/metodo/` entra al índice como UN CHUNK POR BLOQUE
  * (a veces dos o tres ventanas, si el bloque pasa del tope), con la misma forma
  * que el resto —`{id, codigo, titulo, texto, ancla, peso}`— y su ancla estable:
  * `/metodos/<slug>#bloque-n`. Es el molde de `fichas-al-indice.mjs`; lo único
  * propio es que la pieza trae TRES VOCES, y el chat no puede mezclarlas:
  *
- *   · «Lo que hice» — solo del corpus del sitio;
- *   · «Lo que el campo hace» — con la fuente que la respalda (editor y fecha);
- *   · «Mi posición» — mi criterio, no un hecho.
+ *   · «Evidencia» — solo del corpus del sitio, con el proyecto como sujeto;
+ *   · «Estado del campo» — con la fuente que la respalda (editor y fecha);
+ *   · «Criterio» — la posición del autor, no un hecho.
  *
  * Por eso cada afirmación con voz lleva su rótulo DENTRO del texto del chunk:
- * el modelo que responde sobre «lo que el campo hace» no puede atribuírmelo, y
- * el que cita una posición no la presenta como un hecho. Los rótulos y los
+ * el modelo que responde sobre el estado del campo no puede atribuírselo al
+ * dueño, y el que cita un criterio no lo presenta como un hecho. Los rótulos y los
  * nombres de los bloques salen de `messages/<locale>.json` (`metodo.*`), el
  * mismo que pinta la página: lo que el chat dice es lo que la página dice.
  *
@@ -35,7 +35,7 @@ import { TOPE_PALABRAS_CHUNK, ventanasPorParrafo } from "./a-fondo.mjs";
 const ROOT = process.cwd();
 
 /**
- * Peso de un bloque de la infografía en el ranking del chat. Como las fichas
+ * Peso de un bloque de la publicación en el ranking del chat. Como las fichas
  * (ADR-023): es evidencia ordenada de UN tema, no la voz del dueño en sus
  * documentos a fondo, y a peso 1 le quitaría contexto a esos documentos. Se
  * mide, no se supone: el banco de preguntas lo vigila en los dos idiomas.
@@ -140,7 +140,7 @@ export function chunksDePieza({ archivo = "data/metodo/?.yaml", pieza }, locale,
   const bloques = new Map((pieza.bloques ?? []).map((b) => [b.n, b]));
   const faltan = Array.from({ length: N_BLOQUES }, (_, i) => i + 1).filter((n) => !bloques.has(n));
   if (faltan.length > 0) {
-    throw new Error(`${archivo}: faltan los bloques ${faltan.join(", ")}; la infografía lleva los diez y cada uno se cita con su ancla #bloque-n.`);
+    throw new Error(`${archivo}: faltan los bloques ${faltan.join(", ")}; la publicación lleva los diez y cada uno se cita con su ancla #bloque-n.`);
   }
 
   const t = (x) => limpio(x?.[locale]);
@@ -303,7 +303,7 @@ export function chunksDePieza({ archivo = "data/metodo/?.yaml", pieza }, locale,
     etiquetas.metricas.nota,
   ]);
 
-  // 8 · Mi evidencia: «lo que hice», con el nivel que le da el corpus
+  // 8 · Evidencia en proyectos: lo hecho, con el nivel que le da el corpus
   lista(
     8,
     (bloques.get(8).evidencia ?? []).map((e) => ({
@@ -327,7 +327,7 @@ export function chunksDePieza({ archivo = "data/metodo/?.yaml", pieza }, locale,
   return chunks;
 }
 
-/** Todas las piezas de «Mi método», para un locale. */
+/** Todas las piezas de «Métodos», para un locale. */
 export function chunksDeMetodo({ piezas, etiquetas }, locale, opciones = {}) {
   return piezas.flatMap((p) => chunksDePieza(p, locale, etiquetas[locale], opciones));
 }

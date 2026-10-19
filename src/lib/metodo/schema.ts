@@ -1,9 +1,9 @@
 import { z } from "zod";
 
 /**
- * «MI MÉTODO» — el esquema de una infografía (S10, 2026-10-17). Motor puro.
+ * «MÉTODOS» — el esquema de una publicación (S10, 2026-10-17). Motor puro.
  *
- * Una infografía es un DATO con DIEZ bloques fijos y un solo renderizador: las
+ * Una publicación es un DATO con DIEZ bloques fijos y un solo renderizador: las
  * nueve piezas del método son archivos de `data/metodo/`, no páginas. Este
  * módulo valida ese archivo sin tocar el disco (quien llama le dice qué
  * documentos del corpus existen), así que cada rojo se prueba con un objeto.
@@ -436,7 +436,7 @@ export const piezaSchema = z
     if (faltan.length > 0)
       agregar(
         ["bloques"],
-        `la infografía lleva los diez bloques fijos y faltan: ${faltan.join(", ")}`,
+        `la publicación lleva los diez bloques fijos y faltan: ${faltan.join(", ")}`,
       );
     p.bloques.forEach((b, i) => {
       if (b.n !== i + 1 && presentes.size === p.bloques.length)
@@ -564,7 +564,7 @@ function formato(source: string, lineas: string[]): Error {
 }
 
 /**
- * Valida el archivo de una infografía. Rompe nombrando archivo, campo y regla;
+ * Valida el archivo de una publicación. Rompe nombrando archivo, campo y regla;
  * junta TODOS los problemas de una pasada (no se arregla de a uno por build).
  */
 export function parsePieza(

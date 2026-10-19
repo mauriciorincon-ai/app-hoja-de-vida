@@ -25,7 +25,7 @@ const ROOT = process.cwd();
 
 const leerYaml = (rel) => parse(readFileSync(path.join(ROOT, rel), "utf8"));
 
-/** Las infografías de «Mi método»: `{slug, nombre: {es, en}}` por cada archivo de `data/metodo/`. */
+/** Las publicaciones de «Métodos»: `{slug, nombre: {es, en}}` por cada archivo de `data/metodo/`. */
 function piezasDeMetodo() {
   const dir = path.join(ROOT, "data", "metodo");
   return (existsSync(dir) ? readdirSync(dir) : [])
@@ -94,7 +94,7 @@ export function anclasDeHome() {
 export function rutasDeDatos() {
   const rutas = new Set(["/", "/cv", "/vitrina"]);
 
-  // «Mi método» (S10): la lista y una página por infografía de `data/metodo/`.
+  // «Métodos» (S10): la lista y una página por publicación de `data/metodo/`.
   // La ruta sale del archivo, igual que la página (`generateStaticParams`).
   rutas.add("/metodos");
   for (const { slug } of piezasDeMetodo()) rutas.add(`/metodos/${slug}`);
@@ -174,7 +174,7 @@ export function nombresDeDestinos(locale) {
     nombres.set("#contenido", msg.nav.hojaDeVida);
   }
   if (msg.cv?.titulo) nombres.set("/cv", msg.cv.titulo);
-  // «Mi método»: la lista se llama como el menú; cada pieza, como su nombre.
+  // «Métodos»: la lista se llama como el menú; cada pieza, como su nombre.
   if (msg.nav?.metodo) nombres.set("/metodos", msg.nav.metodo);
   for (const p of piezasDeMetodo()) {
     if (p.nombre?.[locale]) nombres.set(`/metodos/${p.slug}`, p.nombre[locale]);
@@ -256,7 +256,7 @@ export function catalogoDeDestinos() {
 }
 
 /**
- * Las anclas de «Mi método»: `/metodos/<slug>#bloque-1…10`. A diferencia del
+ * Las anclas de «Métodos»: `/metodos/<slug>#bloque-1…10`. A diferencia del
  * resto de las rutas —donde se juzga solo la ruta—, aquí el ancla también se
  * valida: una cita a `#bloque-11` o a un bloque que no existe aterrizaría en la
  * cabecera de la página sin avisar, y la promesa de la cita es llevar al
@@ -276,7 +276,7 @@ export function destinoExiste(destino, catalogo = catalogoDeDestinos()) {
   if (typeof destino !== "string" || destino.length === 0) return false;
   if (destino.startsWith("#")) return catalogo.has(destino);
   if (!destino.startsWith("/")) return false;
-  // Una cita a un bloque de una infografía valida el bloque, no solo la página.
+  // Una cita a un bloque de una publicación valida el bloque, no solo la página.
   if (/^\/metodos\/[^#]+#/.test(destino)) return catalogo.has(destino);
   return catalogo.has(destino.split("#")[0]);
 }
