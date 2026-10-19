@@ -626,9 +626,9 @@ el mensaje te llega al correo.
 - **Limitaciones conocidas:** cuatro piezas publicadas hasta ahora; el segundo idioma se
   revisa a ojo al cierre del hito, no en cada sprint; sin PDF descargable (decisión tuya); las respuestas fijas del chat y los documentos a fondo siguen en primera persona, a propósito.
 
-#### Cómo se escribe una infografía nueva
+#### Cómo se escribe una publicación nueva
 
-Una infografía es **un archivo de datos**, no una página: un archivo `data/metodo/<slug>.yaml`
+Una publicación es **un archivo de datos**, no una página: un archivo `data/metodo/<slug>.yaml`
 (el nombre del archivo ES el slug) con los diez bloques; un solo renderizador pinta las nueve.
 
 1. **Parte del ejemplo.** Copia `tests/fixtures/metodo/ejemplo-sintetico.yaml` a
