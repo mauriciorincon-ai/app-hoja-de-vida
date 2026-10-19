@@ -400,7 +400,7 @@ describe("ROJO · los enlaces de la evidencia llevan a un destino que existe (S1
 
   it("los enlaces reales de data/metodo/ existen en el catálogo de destinos", () => {
     // El catálogo se arma UNA vez: `destinoExiste(d)` sin él lo reconstruye por
-    // cada enlace (14 en cuatro piezas) y en un runner cargado pasaba de 5 s.
+    // cada enlace (decenas, entre todas las piezas) y en un runner cargado pasaba de 5 s.
     const catalogo = catalogoDeDestinos();
     const problemas = problemasDeEvidencia(metodo.piezas, (d: string) =>
       destinoExiste(d, catalogo),
