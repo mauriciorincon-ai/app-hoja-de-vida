@@ -516,7 +516,7 @@ bloques:
         umbral: { es: "Cero.", en: "Zero." }
         aprueba: { es: "El responsable del proceso.", en: "The process owner." }
 
-  # ─── 8 · Mi evidencia ───────────────────────────────────────────────────────
+  # ─── 8 · Evidencia en proyectos ─────────────────────────────────────────────
   - n: 8
     evidencia:
       - nombre: { es: "Vesting: 27 agentes en producción", en: "Vesting: 27 agents in production" }

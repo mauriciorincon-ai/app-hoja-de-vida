@@ -544,7 +544,7 @@ bloques:
         umbral: { es: "Cero.", en: "Zero." }
         aprueba: { es: "Quien responde por los datos.", en: "Whoever answers for the data." }
 
-  # ─── 8 · Mi evidencia ───────────────────────────────────────────────────────
+  # ─── 8 · Evidencia en proyectos ─────────────────────────────────────────────
   - n: 8
     evidencia:
       - nombre: { es: "La cadena de publicación que comparten las apps del autor", en: "The publishing chain the author’s apps share" }
