@@ -5,7 +5,7 @@ hito: H-2
 opened: 2026-10-18
 closed: 2026-10-18
 branch: sprint-014/metodos
-pr: pendiente (se completa al abrir el PR)
+pr: https://github.com/mauriciorincon-ai/app-hoja-de-vida/pull/90
 ---
 
 # Sprint 014 — Cierre ejecutivo · CV Viva · «Métodos, en tercera persona»
