@@ -131,7 +131,7 @@ test.describe("chat — flujo estrella", () => {
     await expect(fuente).not.toHaveText(/In depth|A fondo/);
   });
 
-  // «Mi método» (S10, F3; T3 en el S11, T4 en el S12, T6 en el S13): el chat cita la infografía, bloque a
+  // «Métodos» (S10, F3; T3 en el S11, T4 en el S12, T6 en el S13): el chat cita la publicación, bloque a
   // bloque. Cada pieza trae la primera de sus preguntas del banco; el chip dice el
   // código del tema y el nombre de la pieza, y la cita lleva al BLOQUE, no a la página.
   for (const [slug, codigo, idioma, pregunta, nombre] of [

@@ -137,8 +137,8 @@ const CASOS: Record<string, React.ReactNode> = {
       <article>Tres</article>
     </CarruselDeMuestras>
   ),
-  // S10 («Mi método»): el riel de fases escribe su relleno directo en el scroll
-  // y la infografía entera lleva `Reveal` por bloque; ninguna de las dos puede
+  // S10 («Métodos»): el riel de fases escribe su relleno directo en el scroll
+  // y la publicación entera lleva `Reveal` por bloque; ninguna de las dos puede
   // ramificar el árbol con el hook (regla 5a).
   RielDeFases: (
     <RielDeFases

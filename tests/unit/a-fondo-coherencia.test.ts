@@ -61,7 +61,7 @@ const fragmentosDelIndice = buildChunks({
   aFondo: docs,
   locale: "es",
   fichas: leerFichas(),
-  // Las infografías de «Mi método» entran al índice real (build-chat-index.mjs); sin ellas
+  // Las publicaciones de «Métodos» entran al índice real (build-chat-index.mjs); sin ellas
   // este número quedaba 46 fragmentos por debajo del que publica el chat (S10 → S11).
   metodo: leerMetodo(),
 }).length;

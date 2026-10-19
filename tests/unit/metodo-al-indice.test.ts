@@ -29,7 +29,7 @@ import {
 } from "../../scripts/metodo-al-indice.mjs";
 
 /**
- * «MI MÉTODO» EN EL ÍNDICE DEL CHAT (S10, F3). Dos mitades, como las fichas:
+ * «MÉTODOS» EN EL ÍNDICE DEL CHAT (S10, F3). Dos mitades, como las fichas:
  * el motor contra la pieza de juguete (cada regla, con su rojo) y el motor
  * contra las piezas REALES de `data/metodo/` (cada chunk cita a un bloque que
  * existe, en los dos idiomas).
@@ -170,7 +170,7 @@ describe("ROJO · sin la pieza completa no hay cita", () => {
   });
 });
 
-describe("las anclas de «Mi método» se validan, no solo la ruta", () => {
+describe("las anclas de «Métodos» se validan, no solo la ruta", () => {
   const catalogo = catalogoDeDestinos();
 
   it("los diez bloques de una pieza real existen como destino", () => {
@@ -272,7 +272,7 @@ describe("las piezas reales de data/metodo/", () => {
   }
 });
 
-describe("buildChunks mete «Mi método» al índice, con su código y su destino", () => {
+describe("buildChunks mete «Métodos» al índice, con su código y su destino", () => {
   const cv = parse(readFileSync("data/cv.es.yaml", "utf8"));
   const apps = parse(readFileSync("data/apps.yaml", "utf8"));
   const indice = buildChunks({ cv, apps, aFondo: [], locale: "es", metodo });

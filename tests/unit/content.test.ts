@@ -92,7 +92,7 @@ describe("content loader (data/*.yaml reales)", () => {
   const CODIGO_CREDENCIAL = /\b(?:AI|DP|AZ|PL|DA|MB|MS|SC)-\d{3}\b/g;
   type Hallazgo = { ruta: string; codigo: string };
 
-  // «Mi método» (S10): las infografías de `data/metodo/` son otra superficie
+  // «Métodos» (S10): las publicaciones de `data/metodo/` son otra superficie
   // publicada, y la especificación lo dice sin rodeos — el AI-102 nunca se
   // obtuvo, el AI-103 y el AI-300 están en curso, el DP-100 se retiró. Cada
   // archivo trae los dos idiomas, así que se barre entero.
@@ -197,7 +197,7 @@ describe("content loader (data/*.yaml reales)", () => {
   const MARCA_EN_CURSO =
     /en curso|en ruta|en preparaci[oó]n|in progress|on the way|preparing/i;
   const VENTANA = 48;
-  // S12: el título de una fuente citada (bloque 10 de «Mi método») es el de un
+  // S12: el título de una fuente citada (bloque 10 de «Métodos») es el de un
   // tercero, copiado tal cual —«Study guide for Exam AI-300: …»—: es una
   // referencia, no un titular del dueño, y no admite una marca añadida. La
   // frase de la pieza que cita esa fuente sí se lee, como todas.

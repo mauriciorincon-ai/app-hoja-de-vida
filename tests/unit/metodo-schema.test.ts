@@ -12,7 +12,7 @@ import {
 } from "@/lib/metodo/schema";
 
 /**
- * «MI MÉTODO» — el esquema de una infografía (S10). Cada `it` con rojo es la
+ * «MÉTODOS» — el esquema de una publicación (S10). Cada `it` con rojo es la
  * demo de la regla 15: una pieza deliberadamente rota que el esquema debe
  * rechazar NOMBRANDO el campo y la regla, no con un «inválido» genérico.
  */

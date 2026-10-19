@@ -33,7 +33,7 @@ const slugsSimulacion = (
     simulaciones: { slug: string }[];
   }
 ).simulaciones.map((s) => s.slug);
-// «Mi método» (S10): la lista y cada infografía, leídas de data/metodo/ como la
+// «Métodos» (S10): la lista y cada publicación, leídas de data/metodo/ como la
 // página: una pieza nueva entra al scan sola.
 const slugsMetodo = readdirSync("data/metodo")
   .filter((f) => f.endsWith(".yaml"))
@@ -106,7 +106,7 @@ const RUTAS = [
     `/es/vitrina/apps/${s}/simulacion`,
     `/en/vitrina/apps/${s}/simulacion`,
   ]),
-  // «Mi método»: la lista y cada infografía (mapa SVG, riel, voces, fuentes).
+  // «Métodos»: la lista y cada publicación (mapa SVG, riel, voces, fuentes).
   "/es/metodos",
   "/en/metodos",
   ...slugsMetodo.flatMap((s) => [`/es/metodos/${s}`, `/en/metodos/${s}`]),

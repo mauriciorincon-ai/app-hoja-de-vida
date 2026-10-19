@@ -9,7 +9,7 @@ import en from "../../messages/en.json";
 import { ejemploSintetico, traductorDe } from "../fixtures/metodo/ayudas";
 
 /**
- * LA INFOGRAFÍA DE «MI MÉTODO» (S10): un solo renderizador, diez bloques, tres
+ * LA PUBLICACIÓN DE «MÉTODOS» (S10): un solo renderizador, diez bloques, tres
  * voces, un mapa con texto real. Se renderiza como lo hace el servidor y se
  * lee el HTML — con la traducción REAL (`traductorDe` lanza si falta una clave).
  */

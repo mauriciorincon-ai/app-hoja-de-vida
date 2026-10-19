@@ -544,7 +544,7 @@ preguntas:
     familia: encaje
 
   # ─────────────────────────────────────────────────────────────────────
-  # Mi método (S10): las preguntas de la primera infografía, T2. Su fuente
+  # Métodos (S10): las preguntas de la primera publicación, T2. Su fuente
   # esperada es la PIEZA, no un documento a fondo: `metodo-sistema-de-agentes`
   # casa con sus diez bloques (`metodo-sistema-de-agentes-bloque-N`). Si una no
   # la trae, se ajusta la pieza, no esta expectativa.
@@ -560,7 +560,7 @@ preguntas:
     familia: ia-y-agentes
 
   # ─────────────────────────────────────────────────────────────────────
-  # Mi método (S11): las tres preguntas de T3. Su fuente esperada es la PIEZA, no
+  # Métodos (S11): las tres preguntas de T3. Su fuente esperada es la PIEZA, no
   # `rag-y-el-chat`: ese documento ya contesta las tres (es su fuente de fondo), así
   # que una fila que aceptara a los dos no podría fallar y no probaría que T3 entra
   # al top-4. Si T3 sale, se ajustan los títulos de la pieza, no esta expectativa.
@@ -578,7 +578,7 @@ preguntas:
     familia: ia-y-agentes
 
   # ─────────────────────────────────────────────────────────────────────
-  # Mi método (S12): las tres preguntas de T4. Su fuente esperada es la PIEZA: los
+  # Métodos (S12): las tres preguntas de T4. Su fuente esperada es la PIEZA: los
   # documentos que la sostienen (`plataforma-y-despliegue`, `apps-pipeline`,
   # `certificaciones`) ya contestan algo de cada una, y una fila que los aceptara
   # no podría fallar. Medidas ANTES de escribirlas, la 2.ª y la 3.ª no entraban al
@@ -596,7 +596,7 @@ preguntas:
     familia: ia-y-agentes
 
   # ─────────────────────────────────────────────────────────────────────
-  # Mi método (S13): dos de las tres preguntas de T6. Su fuente esperada es la PIEZA:
+  # Métodos (S13): dos de las tres preguntas de T6. Su fuente esperada es la PIEZA:
   # `fabric-en-la-practica` y `vesting` ya contestan algo de cada una, y una fila que
   # los aceptara no podría fallar. Medidas ANTES de escribirlas, las dos entran al
   # top-4 en los dos idiomas (la del ciclo de vida, 2.ª; la de Databricks, 1.ª).

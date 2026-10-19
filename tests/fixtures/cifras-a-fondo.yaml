@@ -51,8 +51,8 @@ conceptos:
       - "del portafolio"
       - "en el portafolio"
     # Los 27 agentes de Vesting son los de una startup, no los de la vitrina; su inventario
-    # vive fuera de este repositorio (ver la nota de arriba). Entró con las infografías de
-    # «Mi método» (S11): «los 27 agentes de Vesting» y «los de la vitrina» van en una frase.
+    # vive fuera de este repositorio (ver la nota de arriba). Entró con las publicaciones de
+    # «Métodos» (S11): «los 27 agentes de Vesting» y «los de la vitrina» van en una frase.
     salvedades:
       - frase: "agentes de vesting"
         razon: "los agentes de Vesting son de una startup, no los publicados en la vitrina; su inventario está fuera de este repositorio"
@@ -183,7 +183,7 @@ conceptos:
       # Esta NO es un hito (un hito exime el número en TODAS partes, y el 1.467 «de hoy» tiene
       # que seguir juzgándose): es la frase de historia, y solo ella.
       - frase: "salto de 494 a"
-        razon: "historia: el índice con el corpus v3 (de unas 30.000 a unas 158.000 palabras por idioma), antes de las fichas de la vitrina y de «Mi método»"
+        razon: "historia: el índice con el corpus v3 (de unas 30.000 a unas 158.000 palabras por idioma), antes de las fichas de la vitrina y de «Métodos»"
     # TOLERANCIA, y por qué. Este número se mueve con CADA edición del corpus:
     # añadir un párrafo lo cambia. Exigirlo exacto haría el gate circular —
     # corriges la cifra, y corregirla mueve la cifra. Con una banda del 5 %, una
