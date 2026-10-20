@@ -522,6 +522,18 @@ preguntas:
     espera: [agentes-constructor-tableros-powerbi, los-tableros, metodo-bi-que-se-usa]
     familia: bi-y-analitica
 
+  # ── Métodos (S16): the twins of the three T1 questions; same `espera`, same order.
+  # The third also accepts T7 and `bi-que-se-adopta` (G-Plan 1a); today T1 is 1st in both languages.
+  - pregunta: "How would Henry bring AI to a company that is just starting out?"
+    espera: [metodo-ia-en-la-organizacion]
+    familia: ia-y-agentes
+  - pregunta: "What criteria does Henry use to prioritize AI use cases?"
+    espera: [metodo-ia-en-la-organizacion]
+    familia: gobierno
+  - pregunta: "How does Henry measure the adoption of a new tool?"
+    espera: [metodo-ia-en-la-organizacion, metodo-bi-que-se-usa, bi-que-se-adopta]
+    familia: forma-de-trabajar
+
 ajenas:
   - pregunta: "tell me a joke about cats"
     guardrail: bloquea
