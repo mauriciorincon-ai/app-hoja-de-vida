@@ -150,6 +150,30 @@ for (const idioma of IDIOMAS) {
         ).toBeVisible();
       });
 
+      // Bajo del S15 (T7, 20 fuentes): el `[n]` no tenía ancho propio, y con diez o
+      // más fuentes los títulos de [1]–[9] arrancaban unos píxeles antes que los de
+      // [10] en adelante. La columna del número ahora mide lo mismo en todas.
+      test("con diez o más fuentes, los títulos de la lista empiezan en la misma columna (1280 y 390 px)", async ({
+        page,
+      }) => {
+        for (const ancho of [1280, 390]) {
+          await page.setViewportSize({ width: ancho, height: 900 });
+          await page.goto(ruta);
+          const fuentes = page.locator("li[data-fuente]");
+          const n = await fuentes.count();
+          test.skip(n < 10, "la pieza tiene menos de diez fuentes");
+          const izquierda = async (i: number) =>
+            (await fuentes.nth(i).locator('a[href^="https://"]').boundingBox())!
+              .x;
+          const primera = await izquierda(0);
+          const decima = await izquierda(9);
+          expect(
+            Math.abs(primera - decima),
+            `a ${ancho} px la fuente [1] empieza en x=${primera} y la [10] en x=${decima}`,
+          ).toBeLessThan(0.5);
+        }
+      });
+
       test("gate ATS/SEO: el HTML sin JavaScript trae los diez bloques, la pregunta y el JSON-LD Article", async ({
         request,
       }) => {

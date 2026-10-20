@@ -394,7 +394,7 @@ export function InfografiaVista({
               data-fuente={f.id}
               className="scroll-mt-24 flex gap-3 print:break-inside-avoid"
             >
-              <span className="mt-0.5 font-mono text-[13px] text-sky-ink tabular-nums">
+              <span className="mt-0.5 min-w-[4ch] shrink-0 font-mono text-[13px] text-sky-ink tabular-nums">
                 [{f.id}]
               </span>
               <div className="flex flex-col gap-1">
