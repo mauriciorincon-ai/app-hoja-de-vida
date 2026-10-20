@@ -133,12 +133,16 @@ export function corpusSimulado(locale = "es") {
 /**
  * ¿Este fragmento es la fuente esperada? `vesting` casa con todos los
  * fragmentos del documento a fondo de Vesting; `trayectoria`, con cualquier
- * hito; `estudios`, con el fragmento exacto de los YAML.
+ * hito; `estudios`, con el fragmento exacto de los YAML. Un texto largo se parte
+ * en tramos `<id>~1`, `<id>~2`…: el primero también es la fuente (S16; hasta el
+ * S15 solo casaban los fragmentos con guion, y el primer tramo de una ficha
+ * larga no contaba como la ficha).
  */
 export function casa(idChunk, esperado) {
   return (
     idChunk === esperado ||
     idChunk.startsWith(`${esperado}-`) ||
+    idChunk.startsWith(`${esperado}~`) ||
     idChunk.startsWith(`a-fondo-${esperado}-`)
   );
 }
