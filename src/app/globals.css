@@ -939,7 +939,7 @@
  * de Reveal jamás marca `data-visto` y todo lo que nace oculto (`data-motion`)
  * saldría en blanco en la hoja. Se aplica el mismo cinturón de reduced-motion:
  * el estado final, sin transición ni filtro (S10: los títulos de bloque de
- * «Mi método» salían sin título al imprimir; /cv comparte el hueco).
+ * «Métodos» salían sin título al imprimir; /cv comparte el hueco).
  */
 @media print {
   [data-motion] {

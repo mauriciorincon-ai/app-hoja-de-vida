@@ -53,7 +53,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       alternates: alternatesFor("/vitrina/apps"),
     },
-    // «Mi método» (S10): la lista y cada infografía, desde data/metodo/ — una
+    // «Métodos» (S10): la lista y cada publicación, desde data/metodo/ — una
     // pieza nueva entra al sitemap sola.
     {
       url: `${SITE_URL}/${locale}/metodos`,

@@ -7,7 +7,7 @@ import { mundoDelCorpus } from "./corpus";
 import { parsePieza, type PiezaMetodo } from "./schema";
 
 /**
- * Las infografías de «Mi método» (S10): un archivo por pieza en
+ * Las publicaciones de «Métodos» (S10): un archivo por pieza en
  * `data/metodo/<slug>.yaml`, validado contra el esquema Y contra el disco. El
  * build FALLA, nombrando archivo y campo, si una pieza está malformada, si el
  * nombre del archivo no es su slug, si dos piezas comparten tema (`id`) o si
@@ -57,7 +57,7 @@ export function leerPiezasDeDisco(raiz: string = process.cwd()): PiezaMetodo[] {
     const otro = dueño.get(p.id);
     if (otro)
       throw new Error(
-        `Contenido inválido en data/metodo/:\n  - id: «${p.id}» lo declaran dos piezas (${otro} y ${p.slug}); cada tema es una sola infografía`,
+        `Contenido inválido en data/metodo/:\n  - id: «${p.id}» lo declaran dos piezas (${otro} y ${p.slug}); cada tema es una sola publicación`,
       );
     dueño.set(p.id, p.slug);
   }

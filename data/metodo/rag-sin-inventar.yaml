@@ -573,7 +573,7 @@ bloques:
         umbral: { es: "Quien pregunta sigue recibiendo fragmentos relevantes, rotulados como búsqueda local.", en: "Whoever asks still gets relevant passages, labeled as a local search." }
         aprueba: { es: "Quien responde por el producto.", en: "Whoever answers for the product." }
 
-  # ─── 8 · Mi evidencia ───────────────────────────────────────────────────────
+  # ─── 8 · Evidencia en proyectos ─────────────────────────────────────────────
   - n: 8
     evidencia:
       - nombre: { es: "El chat de esta página", en: "This site’s chat" }

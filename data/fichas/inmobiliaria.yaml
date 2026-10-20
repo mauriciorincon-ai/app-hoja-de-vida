@@ -53,13 +53,6 @@ proceso:
 # cv-viva (la planeadora lo administra; llega por copia y no se edita aquí). Los
 # `id` son ESTABLES: el par (app, id) es la clave del voto en la BD.
 roadmap:
-  - id: abrir-a-compradores
-    titulo:
-      es: "Abrir el catálogo a quien busca"
-      en: "Open the catalog to buyers"
-    descripcion:
-      es: "Quien busca encuentra tu inmueble, recibe alertas cuando aparece lo que quiere y te contacta directo, sin comisión ni intermediario."
-      en: "Buyers find your property, get alerts when what they want shows up, and contact you directly, with no commission and no middleman."
   - id: copiloto-del-papeleo
     titulo:
       es: "Copiloto del papeleo legal"

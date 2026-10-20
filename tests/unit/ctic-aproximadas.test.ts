@@ -37,8 +37,8 @@ const archivosDelSitio = [
   ...readdirSync("data/fichas")
     .filter((f) => f.endsWith(".yaml") || f.endsWith(".json"))
     .map((f) => `data/fichas/${f}`),
-  // Las infografías de «Mi método» (S10): T1, T5 y T7 hablarán de la Fundación CTIC, y la
-  // aduana de cifras tenía que mirarlas desde antes de que llegaran.
+  // Las publicaciones de «Métodos» (S10): varias hablan de la Fundación CTIC (T7 ya; T1 y T5
+  // llegan después), y la aduana de cifras las mira todas, las de hoy y las que vienen.
   ...readdirSync("data/metodo")
     .filter((f) => f.endsWith(".yaml"))
     .map((f) => `data/metodo/${f}`),

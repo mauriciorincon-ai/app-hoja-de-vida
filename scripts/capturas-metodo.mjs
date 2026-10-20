@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 /**
- * CAPTURAS DE UNA INFOGRAFÍA DE «MI MÉTODO» — la evidencia visual de cada pieza.
+ * CAPTURAS DE UNA PUBLICACIÓN DE «MÉTODOS» — la evidencia visual de cada pieza.
  *
- * Cada sprint de «Mi método» (S10–S18) entrega una pieza visual de primera
+ * Cada sprint de «Métodos» (S10–S18) entrega una pieza visual de primera
  * línea, y la constitución pide su captura de escritorio y de móvil adjunta al
  * PR antes del merge: evidencia, no parada. Este script las produce siempre
  * igual, contra el sitio ya construido y servido en local:

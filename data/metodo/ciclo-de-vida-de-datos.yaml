@@ -547,7 +547,7 @@ bloques:
         umbral: { es: "Ninguno: cada cliente en su workspace y la seguridad por fila probada antes de publicar.", en: "None: each client in its own workspace and row-level security tested before publishing." }
         aprueba: { es: "Quien responde por los datos.", en: "Whoever answers for the data." }
 
-  # ─── 8 · Mi evidencia ───────────────────────────────────────────────────────
+  # ─── 8 · Evidencia en proyectos ─────────────────────────────────────────────
   - n: 8
     evidencia:
       - nombre: { es: "Vesting: cómo se diseñó su plataforma de datos", en: "Vesting: the design of its data platform" }

@@ -95,7 +95,7 @@ export function verdadesDelSitio() {
     /^SPRINT_\d{3}-(summary|cierre)\.md$/.test(f),
   );
 
-  // Las infografías de «Mi método» (S10): una por archivo de `data/metodo/`. La lista
+  // Las publicaciones de «Métodos» (S10): una por archivo de `data/metodo/`. La lista
   // las cuenta del disco; el manual y la guía decían «hoy hay una» a mano (S11).
   const piezasMetodo = existsSync(path.join(ROOT, "data/metodo"))
     ? readdirSync(path.join(ROOT, "data/metodo")).filter((f) => f.endsWith(".yaml")).length

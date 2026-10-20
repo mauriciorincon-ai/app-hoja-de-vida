@@ -1,5 +1,5 @@
 /**
- * El traductor que reciben las piezas síncronas de «Mi método». Es la firma de
+ * El traductor que reciben las piezas síncronas de «Métodos». Es la firma de
  * `getTranslations("metodo")`, reducida a lo que se usa: así cada pieza se
  * prueba con la traducción REAL (`messages/*.json`) sin montar next-intl, y una
  * clave que falta rompe el test en vez de pintar «metodo.fases.xx» en pantalla.

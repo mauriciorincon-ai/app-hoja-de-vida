@@ -242,11 +242,11 @@ describe("script real contra los data/ reales (integración del build)", () => {
       expect(aFondo.length).toBeGreaterThan(0);
       for (const c of aFondo) expect(c.codigo, c.id).toMatch(/^AF-\d{2}$/);
 
-      // «Mi método» (S10, F3): cada infografía entra por bloques con su código
+      // «Métodos» (S10, F3): cada publicación entra por bloques con su código
       // de tema (T1…T9), su ancla `/metodos/<slug>#bloque-n` y el nombre de la
       // pieza como destino; los diez bloques están representados.
       const metodo = index.chunks.filter((c) => c.id.startsWith("metodo-"));
-      expect(metodo.length, "chunks de «Mi método»").toBeGreaterThanOrEqual(10);
+      expect(metodo.length, "chunks de «Métodos»").toBeGreaterThanOrEqual(10);
       for (const c of metodo) {
         expect(c.codigo, c.id).toMatch(/^T[1-9]$/);
         expect(c.ancla, c.id).toMatch(/^\/metodos\/[a-z0-9-]+#bloque-\d+$/);

@@ -6,7 +6,7 @@ import { afterEach, describe, expect, it } from "vitest";
 import { getPiezaMetodo, getPiezasMetodo, leerPiezasDeDisco } from "@/lib/metodo/loader";
 
 /**
- * EL CARGADOR DE «MI MÉTODO» (S10). Dos mitades: los datos REALES de
+ * EL CARGADOR DE «MÉTODOS» (S10). Dos mitades: los datos REALES de
  * `data/metodo/` (el gate que rompe el build si una pieza se malforma) y las
  * carpetas de prueba (cada rojo del cargador, sin tocar los datos reales).
  */
@@ -83,7 +83,7 @@ describe("ROJO · el cargador contra carpetas de prueba", () => {
     );
   });
 
-  it("dos piezas con el mismo tema (id) rompen: cada tema es una sola infografía", () => {
+  it("dos piezas con el mismo tema (id) rompen: cada tema es una sola publicación", () => {
     const copia = EJEMPLO.replace("slug: ejemplo-sintetico", "slug: copia");
     const r = raiz({ "ejemplo-sintetico.yaml": EJEMPLO, "copia.yaml": copia });
     expect(() => leerPiezasDeDisco(r)).toThrowError(/id: «T1» lo declaran dos piezas/);

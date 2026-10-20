@@ -1,0 +1,757 @@
+# «MÉTODOS» · T7 — Cómo se debe diseñar una solución de BI que la gente sí use (S15, 2026-10-18; voz impersonal
+# desde el primer commit).
+#
+# Tres voces, separadas por el esquema (src/lib/metodo/schema.ts); en la página: Evidencia · Estado del campo · Criterio.
+#   · voz: hice      → la evidencia: solo lo que dice el corpus del sitio, con el proyecto como sujeto;
+#                      `corpus:` nombra el documento de data/a-fondo/.
+#   · voz: campo     → lo que el campo hace en 2025–2026; `fuentes:` numera la fuente del bloque 10.
+#   · voz: posicion  → el criterio del autor, rotulado como tal; sin fuente ni corpus.
+# Lo que va sin voz (bloques 1, 2, 6, 7 y la base de las fases) es el método mismo. Todo el texto publicado va en voz
+# impersonal —ni primera persona ni «entrevista»—; lo vigila tests/unit/metodo-voz-piezas.test.ts.
+#
+# Investigación del 2026-10-18: documentación oficial (Microsoft Learn: Power BI, Fabric y DAX), solo contenido público
+# servido al navegador, sin credenciales ajenas ni endpoints de terceros; ninguna página leída traía texto dirigido a
+# agentes. La fecha de cada fuente es la que la página publica (`ms.date`). La evidencia sale de `bi-que-se-adopta`,
+# `los-tableros`, `banco-pichincha`, `fundacion-ctic`, `transmilenio-cm`, `fabric-en-la-practica` y
+# `los-agentes-de-la-vitrina`. Límites con las palabras del corpus: Shiny, Tableau y Looker Studio «no ocupan el mismo
+# nivel»; Copilot en Power BI y los agentes de datos de Fabric solo como estado del campo. El bloque 7 no lleva cifras
+# propias; las de la Fundación CTIC van aproximadas. Los títulos de la fase 3, de la decisión del modelo y de la
+# decisión de la adopción llevan las palabras de las preguntas del banco, medidas antes de escribirlos.
+
+id: T7
+slug: bi-que-se-usa
+nombre:
+  es: "Cómo se debe diseñar una solución de BI que la gente sí use"
+  en: "How a BI solution people actually use should be designed"
+bloques:
+  # ─── 1 · El problema ────────────────────────────────────────────────────────
+  - n: 1
+    pregunta:
+      es: "Diseñar un modelo semántico y los tableros que se apoyan en él para que quien decide los use de verdad: que vuelva a ellos en cada ciclo de decisión, confíe en cada cifra y no tenga que preguntar cómo se calculó."
+      en: "Designing a semantic model and the dashboards built on it so that whoever decides actually uses them: comes back to them in every decision cycle, trusts every figure and never has to ask how it was calculated."
+    respuesta:
+      - es: "Se empieza por la decisión, no por los datos disponibles: quién decide, con qué frecuencia y qué acción sigue a una cifra. La adopción se formula como hipótesis de diseño desde el comienzo y se valida en la operación; a veces la respuesta no es un tablero, sino una alerta, una aplicación o un modelo."
+        en: "The starting point is the decision, not the data available: who decides, how often and what action follows a figure. Adoption is framed as a design hypothesis from the start and validated in operation; sometimes the answer is not a dashboard but an alert, an application or a model."
+      - es: "El significado vive en el modelo semántico de Power BI: un esquema en estrella con el grano declarado, toda la preparación en Power Query y cada indicador como una sola medida DAX, con su definición acordada y su responsable. La seguridad por fila y el modo de almacenamiento se deciden al diseñar, no al publicar."
+        en: "Meaning lives in the Power BI semantic model: a star schema with its grain declared, all preparation in Power Query and every indicator as a single DAX measure, with its agreed definition and its owner. Row-level security and the storage mode are decided at design time, not at publishing time."
+      - es: "Ninguna cifra se publica sin un control que pueda fallar —una línea base independiente, identidades que cierran, una conciliación externa—, y después de publicar la adopción se mide con señales de uso real, no con visitas; lo que perdió su función se retira."
+        en: "No figure is published without a control that can fail —an independent baseline, identities that close, an external reconciliation—, and after publishing, adoption is measured with signals of real use, not with visits; whatever lost its purpose is retired."
+
+  # ─── 2 · El mapa ────────────────────────────────────────────────────────────
+  - n: 2
+    titulo:
+      es: "De la decisión al modelo semántico, y del tablero publicado a la adopción medida"
+      en: "From the decision to the semantic model, and from the published dashboard to measured adoption"
+    resumen:
+      es: "Todo empieza en una decisión y en quien la toma: esa decisión pide fuentes cuya procedencia se conserva. Power Query las prepara antes de la primera medida, y una línea base independiente lee los archivos crudos para predecir lo que el modelo tiene que cargar. El modelo en estrella, con su grano declarado, sostiene una medida DAX por indicador; esas medidas alimentan un tablero escrito como código y también las leen aplicaciones y agentes, en vez de reinterpretar la tabla. Quien usa el tablero lo ve filtrado por la seguridad por fila y aprende a leerlo con una formación sobre sus propios productos. El uso real deja señales de adopción; esa evidencia decide si el producto se mejora, se integra o se retira, y lo que se aprende vuelve a la decisión."
+      en: "Everything starts with a decision and whoever makes it: that decision calls for sources whose provenance is kept. Power Query prepares them before the first measure, and an independent baseline reads the raw files to predict what the model has to load. The star schema, with its grain declared, holds one DAX measure per indicator; those measures feed a dashboard written as code and are also read by applications and agents, instead of reinterpreting the table. Whoever uses the dashboard sees it filtered by row-level security and learns to read it through training on their own products. Real use leaves adoption signals; that evidence decides whether the product is improved, merged or retired, and what is learned goes back to the decision."
+    nodos:
+      - n: 1
+        etiqueta: { es: "La decisión y quien la toma", en: "The decision and its owner" }
+        tipo: humano
+        col: 0
+        fila: 0
+        detalle:
+          es: "Quién decide, con qué frecuencia y qué acción sigue a la cifra: el punto de partida del diseño."
+          en: "Who decides, how often and what action follows the figure: the starting point of the design."
+      - n: 2
+        etiqueta: { es: "Fuentes con procedencia", en: "Sources with provenance" }
+        tipo: externo
+        col: 1
+        fila: 0
+        detalle:
+          es: "Cada archivo con su organismo, su periodo y su fecha de descarga, para reconstruir el recorrido de cada cifra."
+          en: "Every file with its publisher, its period and its download date, so the path of every figure can be rebuilt."
+      - n: 3
+        etiqueta: { es: "Preparación en Power Query", en: "Preparation in Power Query" }
+        tipo: control
+        col: 2
+        fila: 0
+        detalle:
+          es: "Toda la transformación antes de la primera medida: tipos, duplicados, faltantes y desacumulados, a la vista y versionados."
+          en: "All transformation before the first measure: types, duplicates, missing values and de-accumulation, visible and versioned."
+      - n: 4
+        etiqueta: { es: "Estrella y su grano", en: "Star schema, grain" }
+        tipo: dato
+        col: 3
+        fila: 0
+        detalle:
+          es: "Dimensiones para filtrar y agrupar, hechos para resumir, y el grano de cada tabla de hechos escrito antes de la primera medida."
+          en: "Dimensions to filter and group, facts to summarize, and the grain of every fact table written down before the first measure."
+      - n: 5
+        etiqueta: { es: "Medidas DAX acordadas", en: "Agreed DAX measures" }
+        tipo: dato
+        col: 4
+        fila: 0
+        detalle:
+          es: "Cada indicador con una definición acordada, un responsable y una regla de cálculo que todos los reportes reutilizan."
+          en: "Every indicator with an agreed definition, an owner and a calculation rule that every report reuses."
+      - n: 6
+        etiqueta: { es: "Tablero como código", en: "Report as code" }
+        tipo: dato
+        col: 5
+        fila: 0
+        detalle:
+          es: "Páginas y visuales generados desde un solo juego de medidas, versionados y revisables como cualquier cambio."
+          en: "Pages and visuals generated from a single set of measures, versioned and reviewable like any other change."
+      - n: 7
+        etiqueta: { es: "Línea base independiente", en: "Independent baseline" }
+        tipo: control
+        col: 2
+        fila: 1
+        detalle:
+          es: "Un script aparte predice conteos y cifras de control desde los archivos crudos, antes de que el modelo se refresque."
+          en: "A separate script predicts counts and control figures from the raw files, before the model is refreshed."
+      - n: 8
+        etiqueta: { es: "Aplicaciones y agentes", en: "Applications and agents" }
+        tipo: actor
+        col: 3
+        fila: 1
+        detalle:
+          es: "Consumidores nuevos: leen la medida gobernada en vez de reconstruir la métrica por su cuenta."
+          en: "New consumers: they read the governed measure instead of rebuilding the metric on their own."
+      - n: 9
+        etiqueta: { es: "Seguridad por fila", en: "Row-level security" }
+        tipo: control
+        col: 4
+        fila: 1
+        detalle:
+          es: "Filtros sobre las dimensiones, probados suplantando cada rol antes de publicar."
+          en: "Filters on the dimensions, tested by impersonating every role before publishing."
+      - n: 10
+        etiqueta: { es: "Quien usa el tablero", en: "Whoever uses the dashboard" }
+        tipo: humano
+        col: 5
+        fila: 1
+        detalle:
+          es: "Cada audiencia lee la misma cifra con la profundidad que pide su responsabilidad."
+          en: "Each audience reads the same figure at the depth its responsibility calls for."
+      - n: 11
+        etiqueta: { es: "Mejorar, integrar o retirar", en: "Improve, merge or retire" }
+        tipo: control
+        col: 0
+        fila: 2
+        detalle:
+          es: "Cada cambio pedido se evalúa contra el propósito del producto; lo que perdió su función se retira."
+          en: "Every requested change is weighed against the product’s purpose; whatever lost its purpose is retired."
+      - n: 12
+        etiqueta: { es: "Señales de adopción", en: "Adoption signals" }
+        tipo: control
+        col: 4
+        fila: 2
+        detalle:
+          es: "Recurrencia, profundidad de uso, sustitución, conversación, acción y resultado: uso real, no visitas."
+          en: "Recurrence, depth of use, substitution, conversation, action and outcome: real use, not visits."
+      - n: 13
+        etiqueta: { es: "Formación sobre sus productos", en: "Training on their own products" }
+        tipo: humano
+        col: 5
+        fila: 2
+        detalle:
+          es: "Quien usa el tablero aprende a leer la medida, a cuestionarla y a hacer la siguiente pregunta."
+          en: "Whoever uses the dashboard learns to read the measure, to question it and to ask the next question."
+    aristas:
+      - { de: 1, a: 2, etiqueta: { es: "pide", en: "calls for" } }
+      - { de: 2, a: 3 }
+      - { de: 2, a: 7, etiqueta: { es: "crudo", en: "raw" } }
+      - { de: 3, a: 4, etiqueta: { es: "carga", en: "loads" } }
+      - { de: 7, a: 4, etiqueta: { es: "predice", en: "predicts" } }
+      - { de: 4, a: 5 }
+      - { de: 5, a: 6, etiqueta: { es: "alimenta", en: "feeds" } }
+      - { de: 5, a: 8, etiqueta: { es: "la leen", en: "read it" } }
+      - { de: 6, a: 10, etiqueta: { es: "presenta", en: "shows" } }
+      - { de: 9, a: 10, etiqueta: { es: "filtra", en: "filters" } }
+      - { de: 13, a: 10, etiqueta: { es: "forma", en: "trains" } }
+      - { de: 10, a: 12, etiqueta: { es: "uso real", en: "real use" } }
+      - { de: 12, a: 11, etiqueta: { es: "evidencia", en: "evidence" } }
+      - { de: 11, a: 1, etiqueta: { es: "vuelve a la decisión", en: "back to the decision" } }
+
+  # ─── 3 · Las fases ──────────────────────────────────────────────────────────
+  - n: 3
+    fases:
+      - nombre: { es: "Partir de la decisión y de quien la toma", en: "Start from the decision and whoever makes it" }
+        entradas:
+          - { es: "El proceso y las decisiones que el dato debe sostener.", en: "The process and the decisions the data must support." }
+          - { es: "Las audiencias y lo que cada una ya usa para decidir.", en: "The audiences and what each one already uses to decide." }
+        actividades:
+          - es: "Identificar quién decide, con qué frecuencia, qué información usa hoy y cuánto tiempo conserva valor esa información."
+            en: "Identify who decides, how often, what information they use today and how long that information keeps its value."
+          - es: "Elegir el instrumento: un tablero para explorar y comparar; una alerta, una aplicación o un modelo cuando la decisión pide otra cosa."
+            en: "Choose the instrument: a dashboard to explore and compare; an alert, an application or a model when the decision calls for something else."
+          - es: "Escribir la adopción esperada como hipótesis: quién la usará, para qué decisión y cada cuánto."
+            en: "Write the expected adoption down as a hypothesis: who will use it, for which decision and how often."
+        artefactos:
+          - { es: "La ficha de la decisión: audiencia, frecuencia y acción.", en: "The decision sheet: audience, frequency and action." }
+          - { es: "La hipótesis de adopción.", en: "The adoption hypothesis." }
+        decide: { es: "El responsable del proceso.", en: "The process owner." }
+        control: { es: "Si nadie puede nombrar la decisión que el tablero respalda, el tablero no se construye.", en: "If nobody can name the decision the dashboard supports, the dashboard is not built." }
+        nota:
+          voz: hice
+          texto:
+            es: "En la Fundación CTIC cada uno de los más de 25 productos analíticos nace de la pregunta de un líder de proceso y no de una tabla disponible; por eso se puede afirmar que los usan unos 20 líderes de unos 15 procesos, y no solo que están publicados."
+            en: "At Fundación CTIC each of the more than 25 analytics products is born from a process leader’s question and not from an available table; that is why it can be stated that some 20 leaders of some 15 processes use them, and not merely that they are published."
+          corpus: [bi-que-se-adopta]
+      - nombre: { es: "Preparar los datos en Power Query, con su procedencia", en: "Prepare the data in Power Query, with its provenance" }
+        entradas:
+          - { es: "Las fuentes y su documentación.", en: "The sources and their documentation." }
+          - { es: "Las trampas conocidas de cada origen.", en: "The known traps of each source." }
+        actividades:
+          - es: "Conservar el archivo, el periodo, el organismo y la fecha de descarga de cada fuente."
+            en: "Keep the file, the period, the publisher and the download date of every source."
+          - es: "Separar la conexión, la preparación y la construcción de las tablas del modelo, y resolver tipos, duplicados, faltantes y acumulados antes de la primera medida."
+            en: "Separate connecting, preparing and building the model’s tables, and resolve types, duplicates, missing values and accumulations before the first measure."
+          - es: "Correr una línea base independiente que prediga desde los archivos crudos los conteos y las cifras de control que el modelo tiene que cargar."
+            en: "Run an independent baseline that predicts from the raw files the counts and control figures the model has to load."
+        artefactos:
+          - { es: "Las consultas de Power Query, versionadas.", en: "The Power Query queries, versioned." }
+          - { es: "La línea base con sus predicciones.", en: "The baseline with its predictions." }
+        decide: { es: "Quien responde por el modelo.", en: "Whoever answers for the model." }
+        control: { es: "El conteo que carga el modelo coincide con el que predijo la línea base; una diferencia sin explicación detiene el refresco.", en: "The count the model loads matches the one the baseline predicted; an unexplained difference stops the refresh." }
+        nota:
+          voz: hice
+          texto:
+            es: "En el tablero del gasto público, la línea base en Python sobre los archivos crudos detectó por aritmética un desacumulado que perdía dos de cada tres pesos —19 filas por serie donde solo caben 12 meses— antes de que llegara a Power BI."
+            en: "In the public spending dashboard, the Python baseline over the raw files caught, by arithmetic, a de-accumulation that was losing two out of every three pesos —19 rows per series where only 12 months fit— before it reached Power BI."
+          corpus: [los-tableros]
+      - nombre: { es: "Diseñar el modelo semántico en Power BI: estrella, grano y medidas DAX", en: "Design the semantic model in Power BI: star schema, grain and DAX measures" }
+        entradas:
+          - { es: "Las tablas preparadas.", en: "The prepared tables." }
+          - { es: "Las definiciones acordadas con el negocio.", en: "The definitions agreed with the business." }
+        actividades:
+          - es: "Fijar la unidad de análisis y el grano de cada tabla de hechos antes de escribir una medida."
+            en: "Set the unit of analysis and the grain of every fact table before writing a measure."
+          - es: "Separar las dimensiones, que filtran y agrupan, de los hechos, que se resumen, con relaciones de uno a muchos."
+            en: "Separate the dimensions, which filter and group, from the facts, which get summarized, with one-to-many relationships."
+          - es: "Escribir cada indicador como una medida DAX explícita, sin columnas calculadas, con su definición y su responsable."
+            en: "Write every indicator as an explicit DAX measure, with no calculated columns, with its definition and its owner."
+          - es: "No relacionar dos tablas de hechos cuyos perímetros o claves no cruzan: se conforman solo por las dimensiones que comparten."
+            en: "Do not relate two fact tables whose scopes or keys do not match: they are conformed only through the dimensions they share."
+        artefactos:
+          - { es: "El modelo en estrella.", en: "The star schema." }
+          - { es: "El catálogo de medidas, cada una con su definición y su responsable.", en: "The catalog of measures, each one with its definition and its owner." }
+        decide: { es: "El negocio acuerda la definición; el modelo la convierte en regla.", en: "The business agrees on the definition; the model turns it into a rule." }
+        control: { es: "Las identidades que garantiza el origen cierran sobre el universo completo, no sobre una muestra.", en: "The identities the source guarantees close over the full universe, not over a sample." }
+        nota:
+          voz: campo
+          texto:
+            es: "Microsoft pide que cada tabla del modelo sea de dimensión o de hechos, sin mezclarlas, y que cada tabla de hechos cargue siempre con un grano consistente: las dimensiones filtran y agrupan, los hechos resumen."
+            en: "Microsoft asks for every model table to be either a dimension or a fact table, without mixing the two, and for every fact table to always load data at a consistent grain: dimensions filter and group, facts summarize."
+          fuentes: [1]
+      - nombre: { es: "Proteger, verificar y medir el rendimiento antes de publicar", en: "Secure, verify and measure performance before publishing" }
+        entradas:
+          - { es: "El modelo semántico con sus medidas.", en: "The semantic model with its measures." }
+          - { es: "Quién puede ver qué.", en: "Who can see what." }
+        actividades:
+          - es: "Definir la seguridad por fila sobre las dimensiones y probar cada rol suplantándolo."
+            en: "Define row-level security on the dimensions and test every role by impersonating it."
+          - es: "Elegir el modo de almacenamiento por la frescura, el volumen y el costo que pide cada uso."
+            en: "Choose the storage mode by the freshness, volume and cost each use calls for."
+          - es: "Medir las consultas y las medidas costosas con DAX Studio antes y después de cada ajuste, y ordenar el modelo con Tabular Editor."
+            en: "Measure costly queries and measures with DAX Studio before and after every adjustment, and organize the model with Tabular Editor."
+          - es: "Conciliar la cifra de control con una fuente externa, cuando existe."
+            en: "Reconcile the control figure against an external source, when there is one."
+        artefactos:
+          - { es: "Los roles probados.", en: "The tested roles." }
+          - { es: "Las mediciones de antes y después.", en: "The before-and-after measurements." }
+        decide: { es: "Quien responde por el modelo.", en: "Whoever answers for the model." }
+        control: { es: "Un rol que no se probó suplantándolo no se publica, y una medida lenta se corrige antes de que la audiencia la sufra.", en: "A role that was not tested by impersonating it is not published, and a slow measure is fixed before the audience suffers it." }
+        nota:
+          voz: hice
+          texto:
+            es: "En Banco Pichincha, en 2023, DAX Studio sirvió para identificar cálculos costosos y comparar antes y después de cada ajuste, y Tabular Editor para ordenar los modelos semánticos que usaban más de 50 usuarios."
+            en: "At Banco Pichincha, in 2023, DAX Studio served to identify costly calculations and compare before and after every adjustment, and Tabular Editor to organize the semantic models used by more than 50 users."
+          corpus: [banco-pichincha]
+      - nombre: { es: "Escribir el tablero como código y versionarlo", en: "Write the dashboard as code and version it" }
+        entradas:
+          - { es: "El modelo verificado.", en: "The verified model." }
+          - { es: "La paleta, los textos y la jerarquía de la decisión.", en: "The palette, the texts and the hierarchy of the decision." }
+        actividades:
+          - es: "Generar las páginas y los visuales desde un solo juego de medidas, con la jerarquía visual de la decisión."
+            en: "Generate the pages and visuals from a single set of measures, following the visual hierarchy of the decision."
+          - es: "Validar antes de abrir Power BI: referencias de campo, colores de la paleta y textos que caben en su caja."
+            en: "Validate before opening Power BI: field references, palette colors and texts that fit their box."
+          - es: "Versionar el modelo y el reporte en Git, y dejar la revisión humana del render como última capa."
+            en: "Version the model and the report in Git, and keep the human review of the render as the last layer."
+        artefactos:
+          - { es: "El proyecto versionado, con el reporte y el modelo como texto.", en: "The versioned project, with the report and the model as text." }
+          - { es: "El validador y su resultado.", en: "The validator and its result." }
+        decide: { es: "Quien aprueba el render.", en: "Whoever approves the render." }
+        control: { es: "Ningún tablero se publica con una referencia rota entre reporte y modelo ni sin revisión humana del render.", en: "No dashboard is published with a broken reference between report and model or without a human review of the render." }
+        nota:
+          voz: hice
+          texto:
+            es: "En los seis tableros de datos abiertos, el reporte en PBIR se escribe con Python desde un solo juego de medidas, con un script que falla ante un color huérfano, un enlace roto o un texto sin traducir; en energía y clima quedaron 0 de 354 referencias rotas entre reporte y modelo."
+            en: "In the six open-data dashboards, the PBIR report is written with Python from a single set of measures, with a script that fails on an orphan color, a broken link or an untranslated text; in energy and climate, 0 of 354 references between report and model were broken."
+          corpus: [los-tableros]
+      - nombre: { es: "Formar, observar el uso y retirar lo que perdió su función", en: "Train, observe use and retire what lost its purpose" }
+        entradas:
+          - { es: "El tablero publicado y su audiencia.", en: "The published dashboard and its audience." }
+          - { es: "La hipótesis de adopción.", en: "The adoption hypothesis." }
+        actividades:
+          - es: "Formar sobre los productos propios de cada audiencia, con la profundidad que pide su responsabilidad."
+            en: "Train on each audience’s own products, at the depth its responsibility calls for."
+          - es: "Observar quién usa el producto, qué preguntas aparecen y dónde hay fricción."
+            en: "Observe who uses the product, which questions come up and where there is friction."
+          - es: "Evaluar cada cambio pedido contra el propósito del producto y retirar lo que dejó de aportar valor, avisando a sus usuarios."
+            en: "Weigh every requested change against the product’s purpose and retire whatever stopped adding value, telling its users."
+        artefactos:
+          - { es: "El programa de formación.", en: "The training program." }
+          - { es: "La lectura de las señales de adopción y la decisión de mejorar, integrar o retirar.", en: "The reading of the adoption signals and the decision to improve, merge or retire." }
+        decide: { es: "El responsable del proceso, con quien responde por el portafolio analítico.", en: "The process owner, together with whoever answers for the analytics portfolio." }
+        control: { es: "Antes de un producto nuevo se pregunta si cabe sobre un modelo que ya existe.", en: "Before a new product, the question is whether it fits on a model that already exists." }
+        nota:
+          voz: hice
+          texto:
+            es: "En Banco Pichincha la formación se diseñó junto con los tableros, para 12 profesionales y sobre sus propios productos, y contribuyó a mejorar un 20 % la productividad en la preparación y el uso de la información."
+            en: "At Banco Pichincha the training was designed together with the dashboards, for 12 professionals and on their own products, and it contributed to a 20% improvement in productivity when preparing and using information."
+          corpus: [banco-pichincha]
+
+  # ─── 4 · Las decisiones de diseño ───────────────────────────────────────────
+  - n: 4
+    decisiones:
+      - titulo: { es: "Cómo se diseña el modelo semántico en Power BI: estrella y grano declarado", en: "Semantic model design in Power BI: star schema and declared grain" }
+        cuandoSi:
+          es: "Siempre que haya hechos que resumir y entidades que filtrar: el modelo semántico de Power BI lleva las dimensiones de un lado, los hechos del otro y cada tabla de hechos con un grano consistente."
+          en: "Whenever there are facts to summarize and entities to filter: the Power BI semantic model puts dimensions on one side, facts on the other and every fact table at a consistent grain."
+        cuandoNo:
+          es: "Una tabla plana copiada del sistema de origen, o dos hechos relacionados entre sí cuando sus perímetros o sus claves no cruzan: ahí la relación honesta es ninguna."
+          en: "A flat table copied from the source system, or two facts related to each other when their scopes or keys do not match: there the honest relationship is none."
+        porQue:
+          voz: hice
+          texto:
+            es: "Los seis tableros de datos abiertos son modelos en estrella —16 tablas en banca, 25 en la Fórmula 1—, y en banca los cuatro hechos no se relacionan entre sí porque tienen perímetros distintos."
+            en: "The six open-data dashboards are star schemas —16 tables in banking, 25 in Formula 1—, and in banking the four facts are not related to each other because they have different scopes."
+          corpus: [los-tableros]
+        nota:
+          voz: posicion
+          texto:
+            es: "En el diseño del modelo semántico, el grano se escribe antes que la primera medida: una relación entre granos distintos duplica cifras que siguen pareciendo plausibles."
+            en: "In semantic model design, the grain is written down before the first measure: a relationship between different grains duplicates figures that still look plausible."
+      - titulo: { es: "Medidas DAX explícitas y preparación en Power Query, sin columnas calculadas", en: "Explicit DAX measures and preparation in Power Query, with no calculated columns" }
+        cuandoSi:
+          es: "Toda transformación de filas va a Power Query, donde se ve, se versiona y se prueba; en DAX queda lo que depende del contexto de filtro: las medidas."
+          en: "Every row transformation goes to Power Query, where it is seen, versioned and tested; DAX keeps what depends on filter context: the measures."
+        cuandoNo:
+          es: "Una columna calculada solo cuando la fórmula necesita evaluar medidas o una función que solo existe en DAX, como las de jerarquías padre-hijo."
+          en: "A calculated column only when the formula needs to evaluate measures or a function that exists only in DAX, such as those for parent-child hierarchies."
+        porQue:
+          voz: hice
+          texto:
+            es: "Ninguno de los seis tableros de datos abiertos tiene una columna calculada: suman 329 medidas DAX, y la preparación —24 consultas en el ciclo monetario, 33 en la Fórmula 1— vive en Power Query."
+            en: "None of the six open-data dashboards has a calculated column: they add up to 329 DAX measures, and the preparation —24 queries in the monetary cycle, 33 in Formula 1— lives in Power Query."
+          corpus: [los-tableros]
+        nota:
+          voz: campo
+          texto:
+            es: "Microsoft explica que una columna calculada en DAX suele comprimirse peor y se construye después de cargar todas las tablas, y por eso prefiere la columna personalizada de Power Query."
+            en: "Microsoft explains that a DAX calculated column typically compresses less efficiently and is built after all tables load, which is why it prefers a Power Query custom column."
+          fuentes: [2]
+      - titulo: { es: "Importación, Direct Lake o DirectQuery, y la trampa de la seguridad por fila", en: "Import, Direct Lake or DirectQuery, and the row-level security trap" }
+        cuandoSi:
+          es: "Importación cuando el volumen cabe en memoria y la cifra debe ser estable; Direct Lake sobre OneLake cuando el dato ya vive en tablas Delta y debe verse al momento."
+          en: "Import when the volume fits in memory and the figure must be stable; Direct Lake on OneLake when the data already lives in Delta tables and must be seen right away."
+        cuandoNo:
+          es: "Direct Lake sobre el punto de conexión SQL cuando ese punto aplica seguridad por fila: la consulta deja de leer en memoria y se vuelve más lenta."
+          en: "Direct Lake on the SQL analytics endpoint when that endpoint enforces row-level security: the query stops reading from memory and gets slower."
+        porQue:
+          voz: hice
+          texto:
+            es: "En Vesting los modelos combinaban Direct Lake, importación y DirectQuery según el uso; los seis tableros de datos abiertos usan importación, que con 6,4 millones de filas de hechos en el mayor lo sostiene sin dificultad."
+            en: "At Vesting the models combined Direct Lake, import and DirectQuery depending on use; the six open-data dashboards use import, which, with 6.4 million fact rows in the largest of them, sustains it without difficulty."
+          corpus: [fabric-en-la-practica, los-tableros]
+        nota:
+          voz: campo
+          texto:
+            es: "Con Direct Lake sobre el punto de conexión SQL, una tabla con seguridad por fila definida en SQL hace caer la consulta a DirectQuery, o la hace fallar si esa caída está desactivada; Direct Lake sobre OneLake no aplica esa seguridad de SQL, y para la seguridad por fila del modelo Microsoft recomienda una conexión con identidad fija."
+            en: "With Direct Lake on the SQL analytics endpoint, a table with row-level security defined in SQL makes the query fall back to DirectQuery, or fail if that fallback is disabled; Direct Lake on OneLake does not apply that SQL security, and for the model’s row-level security Microsoft recommends a fixed-identity connection."
+          fuentes: [3, 4]
+      - titulo: { es: "Seguridad por fila en un solo modelo o un modelo por audiencia", en: "Row-level security in a single model or a model per audience" }
+        cuandoSi:
+          es: "Un solo modelo con seguridad por fila cuando las audiencias comparten las definiciones y solo cambia lo que cada una puede ver."
+          en: "A single model with row-level security when the audiences share the definitions and only what each one can see changes."
+        cuandoNo:
+          es: "Solo un filtro cuando el límite no puede depender de que el filtro esté bien escrito: entonces se separan las áreas de trabajo."
+          en: "Only a filter when the boundary cannot depend on the filter being well written: then the workspaces are separated."
+        porQue:
+          voz: hice
+          texto:
+            es: "En Vesting la seguridad por fila se definía como filtros DAX sobre las dimensiones y se probaba suplantando roles antes de publicar; entre los 12 clientes, además, el aislamiento iba por áreas de trabajo separadas."
+            en: "At Vesting row-level security was defined as DAX filters on the dimension tables and tested by impersonating roles before publishing; across the 12 clients, isolation also ran through separate workspaces."
+          corpus: [fabric-en-la-practica]
+        nota:
+          voz: campo
+          texto:
+            es: "Microsoft aconseja aplicar los filtros sobre las dimensiones y no sobre los hechos, probar cada rol con «Ver como» —con reglas dinámicas, también ante valores inesperados— y advierte que la seguridad por fila solo restringe a quien tiene el rol de Visor en el área de trabajo."
+            en: "Microsoft advises enforcing the filters on dimension tables rather than fact tables, testing every role with “View as” —with dynamic rules, against unexpected values too— and warns that row-level security only restricts those with the Viewer role in the workspace."
+          fuentes: [5, 6]
+      - titulo: { es: "El tablero escrito como código o construido a mano", en: "The dashboard written as code or built by hand" }
+        cuandoSi:
+          es: "Como código cuando hay varias páginas, dos idiomas o tableros que se repiten: el diseño queda en archivos que se leen, se comparan y se regeneran."
+          en: "As code when there are several pages, two languages or dashboards that repeat: the design stays in files that can be read, compared and regenerated."
+        cuandoNo:
+          es: "A mano cuando es una pieza única y exploratoria que todavía busca su pregunta."
+          en: "By hand when it is a single, exploratory piece still looking for its question."
+        porQue:
+          voz: hice
+          texto:
+            es: "Las doce páginas de cada tablero de datos abiertos —seis en español y seis en inglés— salen del mismo modelo y del mismo juego de medidas, y los visuales —142 en empresas, 112 en energía, 78 en la Fórmula 1— se generan con Python."
+            en: "The twelve pages of each open-data dashboard —six in Spanish and six in English— come out of the same model and the same set of measures, and the visuals —142 in companies, 112 in energy, 78 in Formula 1— are generated with Python."
+          corpus: [los-tableros]
+        nota:
+          voz: hice
+          texto:
+            es: "El Constructor de Tableros Power BI lleva el mismo principio a un agente: crea cada medida por el servidor MCP de modelado, probándola en DAX antes de seguir, y escribe el reporte en el JSON nativo de Power BI."
+            en: "The Power BI Dashboard Builder takes the same principle to an agent: it creates every measure through the modeling MCP server, testing it in DAX before moving on, and writes the report in Power BI’s native JSON."
+          corpus: [los-agentes-de-la-vitrina]
+      - titulo: { es: "Cómo se mide la adopción de un tablero: uso real o visitas", en: "How to measure the adoption of a dashboard: real use or visits" }
+        cuandoSi:
+          es: "La adopción de un tablero se mide con señales de uso real —recurrencia, profundidad de uso, sustitución de archivos y conciliaciones, conversación, acción y resultado—, con cada cifra en su escalón: acceso, uso, adopción o impacto."
+          en: "To measure the adoption of a dashboard: signals of real use —recurrence, depth of use, substitution of files and reconciliations, conversation, action and outcome—, with every figure on its rung: access, use, adoption or impact."
+        cuandoNo:
+          es: "Contar visitas o accesos como adopción: una visita puede ser curiosidad, una validación puntual o una instrucción recibida."
+          en: "Counting visits or access as adoption: a visit can be curiosity, a one-off check or an instruction received."
+        porQue:
+          voz: hice
+          texto:
+            es: "En Banco Pichincha «más de 50 usuarios» es adopción y el +25 % en la toma de decisiones es impacto; en la Fundación CTIC, «unos 20 líderes de unos 15 procesos» es adopción contada y el «cerca de 60 %» es una estimación, y por eso lleva el «cerca de»."
+            en: "At Banco Pichincha “more than 50 users” is adoption and the +25% in decision-making is impact; at Fundación CTIC, “some 20 leaders of some 15 processes” is counted adoption and the “close to 60%” is an estimate, which is why it carries the “close to”."
+          corpus: [bi-que-se-adopta]
+        nota:
+          voz: campo
+          texto:
+            es: "La hoja de ruta de adopción de Microsoft advierte que las estadísticas de uso por sí solas no indican una adopción exitosa, y el informe de métricas de uso de Power BI, en versión preliminar, cuenta vistas, espectadores únicos y tiempos de apertura."
+            en: "Microsoft’s adoption roadmap warns that usage statistics alone don’t indicate successful user adoption, and the Power BI usage metrics report, in preview, counts views, unique viewers and opening times."
+          fuentes: [17, 19]
+
+  # ─── 5 · Lo innovador en 2026 ───────────────────────────────────────────────
+  - n: 5
+    elementos:
+      - titulo: { es: "Copilot y los agentes de datos de Fabric leen el modelo semántico", en: "Copilot and Fabric data agents read the semantic model" }
+        queCambia:
+          es: "Copilot en Power BI usa lo que se guarda en el modelo semántico con la función «Prep data for AI» (en versión preliminar) —un esquema de datos, respuestas verificadas e instrucciones, guardados en el modelo y no en el reporte— y pide un área de trabajo en una capacidad de Fabric de pago (F2 o superior), en una Premium (P1 o superior) o en una capacidad de Copilot de Fabric; un agente de datos de Fabric consulta modelos semánticos generando DAX, solo de lectura y con los permisos de quien pregunta."
+          en: "Copilot in Power BI uses what is saved in the semantic model with “Prep data for AI” (in preview) —a data schema, verified answers and instructions, saved on the model and not on the report— and requires a workspace on a paid Fabric capacity (F2 or higher), on a Premium one (P1 or higher) or on a Fabric Copilot capacity; a Fabric data agent queries semantic models by generating DAX, read-only and with the permissions of whoever asks."
+        fuentes: [14, 15, 16]
+        nota:
+          voz: posicion
+          texto:
+            es: "Lo que responde un asistente depende de la medida que lee: un indicador con dos definiciones también le da dos respuestas."
+            en: "What an assistant answers depends on the measure it reads: an indicator with two definitions gives it two answers too."
+      - titulo: { es: "Q&A, la herramienta heredada de lenguaje natural, queda en desuso en diciembre de 2026", en: "Q&A, the legacy natural-language tool, is deprecated in December 2026" }
+        queCambia:
+          es: "En su actualización de enero de 2026, Microsoft anunció que Q&A queda en desuso en diciembre de 2026 y orientó a usar Copilot para consultar los datos en lenguaje natural."
+          en: "In its January 2026 update, Microsoft announced that Q&A is deprecated in December 2026 and pointed to Copilot for querying data in natural language."
+        fuentes: [20]
+        nota:
+          voz: posicion
+          texto:
+            es: "Un retiro anunciado es una fecha de trabajo: los tableros que dependen de lo que se retira se inventarían antes, no después."
+            en: "An announced retirement is a work date: the dashboards that depend on what is being retired are inventoried before, not after."
+      - titulo: { es: "PBIR y PBIP: el reporte y el modelo como texto versionable", en: "PBIR and PBIP: the report and the model as versionable text" }
+        queCambia:
+          es: "Un proyecto de Power BI guarda el reporte y el modelo semántico como archivos de texto listos para Git y para generarse por programa; el formato de reporte PBIR ya es el predeterminado, guarda cada página y cada visual en un archivo JSON con esquema público, y Power BI convierte un reporte heredado al editarlo y guardarlo."
+          en: "A Power BI project saves the report and the semantic model as text files ready for Git and for programmatic generation; the PBIR report format is now the default, saves every page and every visual in a JSON file with a public schema, and Power BI converts a legacy report when it is edited and saved."
+        fuentes: [10, 11]
+        nota:
+          voz: hice
+          texto:
+            es: "Los seis tableros de datos abiertos se publican como proyecto versionado, con el reporte en PBIR escrito por Python: la revisión de una página es la revisión de un cambio."
+            en: "The six open-data dashboards are published as a versioned project, with the PBIR report written by Python: reviewing a page is reviewing a change."
+          corpus: [los-tableros]
+      - titulo: { es: "Un servidor MCP para escribir el modelo semántico", en: "An MCP server to author the semantic model" }
+        queCambia:
+          es: "El servidor MCP de autoría de Power BI —local, con disponibilidad general, y alojado, en versión preliminar— le permite a un agente crear tablas, medidas, relaciones, grupos de cálculo y roles de seguridad, y ejecutar DAX para validar el modelo mientras lo construye; Microsoft aconseja trabajar sobre archivos PBIP en Git para revisar cada cambio del agente antes de confirmarlo y poder revertirlo."
+          en: "The Power BI Authoring MCP server —local, generally available, and hosted, in preview— lets an agent create tables, measures, relationships, calculation groups and security roles, and run DAX to validate the model while building it; Microsoft advises working on PBIP files under Git to review every change the agent makes before committing it and to be able to revert it."
+        fuentes: [12, 13]
+        nota:
+          voz: hice
+          texto:
+            es: "El Constructor de Tableros Power BI propone la lista de medidas, columnas y relaciones para que una persona la apruebe, las crea por el servidor MCP de modelado probando cada medida en DAX y entrega un proyecto local versionado."
+            en: "The Power BI Dashboard Builder proposes the list of measures, columns and relationships for a person to approve, creates them through the modeling MCP server testing every measure in DAX, and delivers a versioned local project."
+          corpus: [los-agentes-de-la-vitrina]
+      - titulo: { es: "Menos medidas repetidas: grupos de cálculo, funciones definidas por el usuario y cálculos visuales", en: "Fewer repeated measures: calculation groups, user-defined functions and visual calculations" }
+        queCambia:
+          es: "Los grupos de cálculo aplican un mismo patrón —el año anterior, el acumulado— a cualquier medida explícita; las funciones DAX definidas por el usuario, con disponibilidad general desde la versión de junio de 2026, empaquetan lógica con parámetros que se reutiliza en medidas, columnas y cálculos visuales; y los cálculos visuales operan sobre lo que ya está en el visual, con plantillas como la suma acumulada o la comparación con el valor anterior."
+          en: "Calculation groups apply the same pattern —prior year, year to date— to any explicit measure; DAX user-defined functions, generally available since the June 2026 release, package parameterized logic that is reused in measures, columns and visual calculations; and visual calculations operate on what is already in the visual, with templates such as the running sum or the comparison with the previous value."
+        fuentes: [7, 8, 9]
+        nota:
+          voz: hice
+          texto:
+            es: "En Banco Pichincha cada medida nueva pasaba por una pregunta: si ya existía una que hiciera lo mismo con otro nombre."
+            en: "At Banco Pichincha every new measure went through one question: whether there was already one doing the same thing under another name."
+          corpus: [banco-pichincha]
+      - titulo: { es: "La adopción en tres niveles: organización, usuario y solución", en: "Adoption at three levels: organization, user and solution" }
+        queCambia:
+          es: "La hoja de ruta de adopción de Fabric separa la adopción de la organización, la de cada usuario —de la conciencia a la competencia— y la de una solución, que llega a «esencial» cuando sus usuarios la usan de forma activa y rutinaria para decidir; la planeación de Power BI pide definir los objetivos, las conductas que los sostienen y los indicadores que las miden, revisados con una cadencia fija."
+          en: "The Fabric adoption roadmap separates organizational adoption, the adoption of each user —from awareness to proficiency— and the adoption of a solution, which becomes “essential” when its users actively and routinely use it to decide; Power BI planning asks for defining the objectives, the behaviors that sustain them and the indicators that measure them, reviewed at a consistent cadence."
+        fuentes: [17, 18]
+        nota:
+          voz: hice
+          texto:
+            es: "En la Fundación CTIC la observación después de publicar tiene forma: una decena de planes de análisis en seguimiento sobre los más de 25 productos."
+            en: "At Fundación CTIC observation after publishing has a shape: some ten analysis plans under follow-up on the more than 25 products."
+          corpus: [bi-que-se-adopta]
+
+  # ─── 6 · Modos de falla y cómo se ven venir ─────────────────────────────────
+  - n: 6
+    fallas:
+      - falla: { es: "Un tablero correcto que nadie vuelve a abrir", en: "A correct dashboard nobody opens again" }
+        senal: { es: "Solo lo consultan quienes lo construyeron, y las reuniones siguen empezando con un archivo aparte.", en: "Only those who built it look at it, and meetings still start from a separate file." }
+        control: { es: "Diseño desde la decisión y adopción escrita como hipótesis desde el comienzo, validada en la operación.", en: "Design from the decision and adoption written down as a hypothesis from the start, validated in operation." }
+      - falla: { es: "Dos cifras para el mismo indicador", en: "Two figures for the same indicator" }
+        senal: { es: "Cada reunión empieza discutiendo cuál número es el correcto.", en: "Every meeting starts by arguing about which number is right." }
+        control: { es: "Una sola medida por indicador en el modelo semántico, con su definición acordada y su responsable.", en: "A single measure per indicator in the semantic model, with its agreed definition and its owner." }
+      - falla: { es: "Una relación entre granos distintos duplica totales", en: "A relationship between different grains duplicates totals" }
+        senal: { es: "Totales plausibles que no cierran contra el origen, en un tablero que sigue funcionando.", en: "Plausible totals that do not close against the source, in a dashboard that keeps working." }
+        control: { es: "El grano escrito por tabla de hechos y las identidades del origen corridas sobre el universo completo.", en: "The grain written down per fact table and the source identities run over the full universe." }
+      - falla: { es: "Una transformación escondida en una columna calculada", en: "A transformation hidden in a calculated column" }
+        senal: { es: "Una cifra cambia y nadie encuentra dónde se transformó.", en: "A figure changes and nobody can find where it was transformed." }
+        control: { es: "Toda la preparación en Power Query, versionada; ninguna columna calculada sin una razón que solo DAX resuelva.", en: "All preparation in Power Query, versioned; no calculated column without a reason only DAX can solve." }
+      - falla: { es: "La seguridad por fila no alcanza a quien edita", en: "Row-level security does not reach whoever edits" }
+        senal: { es: "Quien tiene un rol de miembro o de colaborador en el área de trabajo ve filas que su rol de seguridad no le daría.", en: "Someone with a member or contributor role in the workspace sees rows their security role would not give them." }
+        control: { es: "Quien consume, con el rol de Visor; cada rol, probado suplantándolo antes de publicar.", en: "Whoever consumes, with the Viewer role; every role, tested by impersonating it before publishing." }
+      - falla: { es: "Direct Lake cae a DirectQuery cuando la seguridad por fila está en el punto de conexión SQL", en: "Direct Lake falls back to DirectQuery when row-level security is at the SQL analytics endpoint" }
+        senal: { es: "El tablero se vuelve lento justo en las tablas con seguridad por fila definida en el punto de conexión SQL.", en: "The dashboard slows down exactly on the tables with row-level security defined at the SQL analytics endpoint." }
+        control: { es: "Direct Lake sobre OneLake para modelos nuevos, o la seguridad en el modelo con identidad fija, y la caída vigilada.", en: "Direct Lake on OneLake for new models, or the security in the model with a fixed identity, and the fallback watched." }
+      - falla: { es: "Una medida lenta aleja a la audiencia", en: "A slow measure drives the audience away" }
+        senal: { es: "Segundos de espera multiplicados por cada persona que abre el tablero.", en: "Seconds of waiting multiplied by every person who opens the dashboard." }
+        control: { es: "Las medidas costosas se miden con DAX Studio antes y después de cada ajuste y antes de publicar.", en: "Costly measures timed with DAX Studio before and after every adjustment, before publishing." }
+      - falla: { es: "El portafolio crece y fragmenta la atención", en: "The portfolio grows and fragments attention" }
+        senal: { es: "Tableros que repiten indicadores y compiten por la misma pregunta.", en: "Dashboards that repeat indicators and compete for the same question." }
+        control: { es: "Antes de un producto nuevo: ampliar un modelo existente, simplificar o retirar.", en: "Before a new product: extend an existing model, simplify or retire." }
+
+  # ─── 7 · Métricas y controles ───────────────────────────────────────────────
+  - n: 7
+    metricas:
+      - metrica: { es: "Adopción por audiencia", en: "Adoption by audience" }
+        umbral: { es: "Cada audiencia objetivo vuelve al tablero en cada ciclo de decisión que lo justifica; se cuenta por función, no por accesos.", en: "Every target audience comes back to the dashboard in every decision cycle that justifies it; it is counted by role, not by access." }
+        aprueba: { es: "El responsable del proceso.", en: "The process owner." }
+      - metrica: { es: "Indicadores con una definición y un responsable", en: "Indicators with one definition and one owner" }
+        umbral: { es: "Todos los que usa más de un reporte.", en: "All of those used by more than one report." }
+        aprueba: { es: "El responsable del negocio.", en: "The business owner." }
+      - metrica: { es: "Conteos y cifras de control frente a la línea base", en: "Counts and control figures against the baseline" }
+        umbral: { es: "Coinciden todos antes del refresco; una diferencia sin explicación detiene la publicación.", en: "All of them match before the refresh; an unexplained difference stops publishing." }
+        aprueba: { es: "Quien responde por el modelo.", en: "Whoever answers for the model." }
+      - metrica: { es: "Identidades del origen", en: "Source identities" }
+        umbral: { es: "Cierran sobre el universo completo; la que no cierra se explica o se publica como límite.", en: "They close over the full universe; the one that does not close is explained or published as a limit." }
+        aprueba: { es: "Quien responde por el modelo.", en: "Whoever answers for the model." }
+      - metrica: { es: "Roles de seguridad probados", en: "Security roles tested" }
+        umbral: { es: "Todos, suplantando cada rol antes de publicar.", en: "All of them, impersonating every role before publishing." }
+        aprueba: { es: "Quien responde por los datos.", en: "Whoever answers for the data." }
+      - metrica: { es: "Tiempo de respuesta de las medidas críticas", en: "Response time of critical measures" }
+        umbral: { es: "Medido antes y después de cada cambio; ninguna regresión sin explicación.", en: "Measured before and after every change; no regression without an explanation." }
+        aprueba: { es: "Quien responde por el modelo.", en: "Whoever answers for the model." }
+      - metrica: { es: "Referencias entre reporte y modelo", en: "References between report and model" }
+        umbral: { es: "Ninguna rota antes de abrir Power BI.", en: "None broken before opening Power BI." }
+        aprueba: { es: "Quien construye el tablero.", en: "Whoever builds the dashboard." }
+      - metrica: { es: "Productos sin uso", en: "Products without use" }
+        umbral: { es: "Revisados en cada ciclo: o recuperan su función o se retiran.", en: "Reviewed every cycle: they either regain their purpose or are retired." }
+        aprueba: { es: "Quien responde por el portafolio analítico.", en: "Whoever answers for the analytics portfolio." }
+
+  # ─── 8 · Evidencia en proyectos ─────────────────────────────────────────────
+  - n: 8
+    evidencia:
+      - nombre: { es: "Banco Pichincha: tableros que el negocio sí usó", en: "Banco Pichincha: dashboards the business did use" }
+        nivel: uso-real
+        texto:
+          es: "Entre marzo y julio de 2023, un equipo de inteligencia de negocios de 5 personas desarrolló y fortaleció tableros en Power BI que usaron más de 50 usuarios del negocio, con una mejora reportada del 25 % en la toma de decisiones; el ETL en Power Query redujo un 35 % los tiempos de análisis y los modelos semánticos se optimizaron con DAX Studio y Tabular Editor."
+          en: "Between March and July 2023, a business intelligence team of 5 people developed and strengthened Power BI dashboards used by more than 50 business users, with a reported 25% improvement in decision-making; the ETL in Power Query cut analysis times by 35% and the semantic models were optimized with DAX Studio and Tabular Editor."
+        corpus: [bi-que-se-adopta]
+        href: /proyectos/banco-pichincha
+      - nombre: { es: "Banco Pichincha: la formación como parte del producto", en: "Banco Pichincha: training as part of the product" }
+        nivel: uso-real
+        texto:
+          es: "Un programa diseñado junto con los tableros, para 12 profesionales y sobre sus propios productos —Power Query, modelado semántico, DAX y comunicación ejecutiva—, contribuyó a mejorar un 20 % la productividad en la preparación y el uso de la información."
+          en: "A program designed together with the dashboards, for 12 professionals and on their own products —Power Query, semantic modeling, DAX and executive communication—, contributed to a 20% improvement in productivity when preparing and using information."
+        corpus: [banco-pichincha]
+        href: /proyectos/banco-pichincha
+      - nombre: { es: "TransMilenio: Power BI en el análisis post-operacional", en: "TransMilenio: Power BI in post-operational analysis" }
+        nivel: uso-real
+        texto:
+          es: "Entre julio de 2021 y mayo de 2022, en C&M Consultores, Power BI fue adoptado por más de 25 usuarios clave —responsables de programación, seguimiento y decisión, no solo personas con acceso— y contribuyó a mejorar un 35 % la eficiencia de los procesos analíticos; cada cifra podía recorrerse hasta la fuente que la produjo."
+          en: "Between July 2021 and May 2022, at C&M Consultores, Power BI was adopted by more than 25 key users —people responsible for scheduling, monitoring and decisions, not merely people with access— and contributed to a 35% improvement in the efficiency of analytical processes; every figure could be traced back to the source that produced it."
+        corpus: [bi-que-se-adopta]
+        href: /proyectos/transmilenio-cm
+      - nombre: { es: "Cafam: un BI de control adoptado por cargo", en: "Cafam: a control BI adopted by role" }
+        nivel: uso-real
+        texto:
+          es: "Entre octubre de 2020 y junio de 2021, el BI de control de la implementación de Oracle WMS Cloud en un centro de distribución de medicamentos lo adoptaron más de 15 usuarios con cargo —direcciones, coordinadores y jefes— y mejoró un 50 % la precisión del seguimiento de las pruebas."
+          en: "Between October 2020 and June 2021, the control BI for the Oracle WMS Cloud implementation at a medicine distribution center was adopted by more than 15 users with a title —directors, coordinators and heads— and improved the accuracy of test tracking by 50%."
+        corpus: [bi-que-se-adopta]
+        href: /proyectos/cafam
+      - nombre: { es: "Fundación CTIC: productos analíticos por procesos", en: "Fundación CTIC: analytics products by process" }
+        nivel: uso-real
+        texto:
+          es: "Desde marzo de 2025, más de 25 productos analíticos en Power BI —tableros de control entre ellos— los usan unos 20 líderes de unos 15 procesos y unos 75 usuarios, administrativos y asistenciales; cada indicador conserva una definición institucional y cada audiencia lo lee con la profundidad de su responsabilidad. El efecto se declara como estimación: cerca de un 60 % menos de esfuerzo de preparación."
+          en: "Since March 2025, more than 25 analytics products in Power BI —control dashboards among them— are used by some 20 leaders of some 15 processes and some 75 users, administrative and clinical; every indicator keeps one institutional definition and each audience reads it at the depth of its responsibility. The effect is declared as an estimate: close to 60% less preparation effort."
+        corpus: [bi-que-se-adopta, fundacion-ctic]
+        href: /proyectos/fundacion-ctic
+      - nombre: { es: "Los seis tableros de datos abiertos", en: "The six open-data dashboards" }
+        nivel: uso-real
+        texto:
+          es: "Seis tableros sobre fuentes públicas, sellados en septiembre de 2026 tras siete fases de construcción cada uno: modelos en estrella, 329 medidas DAX y ninguna columna calculada; una línea base independiente en Python antes de cada refresco y la cobertura publicada como cifra, como el 84,9 % del ranking de las diez mil empresas más grandes."
+          en: "Six dashboards on public sources, sealed in September 2026 after seven build phases each: star schemas, 329 DAX measures and no calculated columns; an independent Python baseline before every refresh and coverage published as a figure, such as 84.9% of the ranking of the ten thousand largest companies."
+        corpus: [los-tableros]
+        href: /vitrina/tableros
+      - nombre: { es: "Las empresas de Colombia en cifras: el sesgo de composición, corregido", en: "Las empresas de Colombia en cifras: composition bias, corrected" }
+        nivel: uso-real
+        texto:
+          es: "El agregado decía que 2020 cayó 2,2 %; sobre las mismas 23.321 empresas presentes en los dos años, la contracción fue del 7,4 %. Por eso el tablero nunca presenta el crecimiento agregado solo: al lado va el de las mismas empresas, en el mismo eje."
+          en: "The aggregate said 2020 fell 2.2%; over the same 23,321 companies present in both years, the contraction was 7.4%. That is why the dashboard never shows aggregate growth alone: next to it goes the growth of the same companies, on the same axis."
+        corpus: [los-tableros]
+        href: /vitrina/tableros/empresas-de-colombia
+      - nombre: { es: "Constructor de Tableros Power BI", en: "Power BI Dashboard Builder (Constructor de Tableros Power BI)" }
+        nivel: uso-real
+        texto:
+          es: "Un agente construido y probado que, a partir de un texto de requerimientos y un proyecto con las tablas, produce el proyecto .pbip completo —modelo semántico, Power Query M, medidas DAX y visuales en el JSON nativo del reporte—; una corrida se acepta contra 20 criterios binarios, atraviesa 5 gates de aprobación humana y no cierra sin el render aprobado por una persona en Power BI Desktop."
+          en: "An agent built and tested that, from a requirements text and a project with the tables, produces the complete .pbip project —semantic model, Power Query M, DAX measures and visuals in the report’s native JSON—; a run is accepted against 20 binary criteria, goes through 5 human approval gates and does not close without a person approving the render in Power BI Desktop."
+        corpus: [bi-que-se-adopta]
+        href: /vitrina/agentes/constructor-tableros-powerbi
+      - nombre: { es: "Vesting: modos de almacenamiento y seguridad por fila sobre Fabric", en: "Vesting: storage modes and row-level security on Fabric" }
+        nivel: uso-real
+        texto:
+          es: "Sobre Microsoft Fabric, los modelos combinaban Direct Lake para el monitoreo operativo, importación para el histórico y DirectQuery para bajar a los eventos de una sesión; la seguridad por fila se definía con filtros DAX sobre las dimensiones y se probaba suplantando roles antes de publicar."
+          en: "On Microsoft Fabric, the models combined Direct Lake for operational monitoring, import for the history and DirectQuery to drill down to a session’s events; row-level security was defined with DAX filters on the dimension tables and tested by impersonating roles before publishing."
+        corpus: [fabric-en-la-practica]
+        href: /proyectos/vesting
+
+  # ─── 9 · Límites y alcance ──────────────────────────────────────────────────
+  - n: 9
+    limites:
+      - voz: hice
+        texto:
+          es: "Los seis tableros de datos abiertos no usan Microsoft Fabric: son piezas de escritorio en modo import, publicadas como proyecto versionado, y sus datos son una foto fechada que no se actualiza sola."
+          en: "The six open-data dashboards do not use Microsoft Fabric: they are desktop pieces in import mode, published as a versioned project, and their data is a dated snapshot that does not update on its own."
+        corpus: [los-tableros]
+      - voz: hice
+        texto:
+          es: "En el perfil del autor, Shiny, Tableau y Looker Studio no ocupan el mismo nivel que Power BI y Microsoft Fabric."
+          en: "On the author’s profile, Shiny, Tableau and Looker Studio do not occupy the same level as Power BI and Microsoft Fabric."
+        corpus: [los-tableros]
+      - voz: hice
+        texto:
+          es: "Copilot en Power BI y los agentes de datos de Fabric aparecen aquí como estado del campo: la evidencia de un agente que trabaja sobre un modelo semántico es el Constructor de Tableros Power BI, que lo hace sin el ecosistema Fabric, construye desde cero, entrega un proyecto local versionado y no publica al servicio en la nube."
+          en: "Copilot in Power BI and Fabric data agents appear here as the state of the field: the evidence of an agent working on a semantic model is the Power BI Dashboard Builder, which does it with no Fabric ecosystem, builds from scratch, delivers a versioned local project and does not publish to the cloud service."
+        corpus: [los-agentes-de-la-vitrina]
+      - voz: hice
+        texto:
+          es: "En el Constructor de Tableros Power BI, el ahorro de horas que justifica su existencia es una estimación declarada como tal: ninguna corrida está cronometrada todavía contra la línea base de un tablero hecho a mano."
+          en: "In the Power BI Dashboard Builder, the hours saved that justify its existence are an estimate declared as such: no run has yet been timed against the baseline of a dashboard built by hand."
+        corpus: [bi-que-se-adopta]
+      - voz: hice
+        texto:
+          es: "En la Fundación CTIC las cifras se publican agregadas y aproximadas, y el cerca de 60 % menos de esfuerzo es una estimación sobre el trabajo propio, no una medición institucional."
+          en: "At Fundación CTIC the figures are published aggregated and approximate, and the close to 60% less effort is an estimate on the author’s own work, not an institutional measurement."
+        corpus: [fundacion-ctic]
+      - voz: posicion
+        texto:
+          es: "Lo que conviene hacer distinto hoy: preparar el modelo para Copilot —esquema, respuestas verificadas e instrucciones— como parte del diseño del modelo, no como un añadido posterior."
+          en: "What should be done differently today: prepare the model for Copilot —schema, verified answers and instructions— as part of designing the model, not as an afterthought."
+      - voz: posicion
+        texto:
+          es: "Un tablero que nadie abre no se corrige con otra visualización: se vuelve a la decisión que debía respaldar."
+          en: "A dashboard nobody opens is not fixed with another visual: the work goes back to the decision it was meant to support."
+
+  # ─── 10 · Fuentes y fecha de revisión ───────────────────────────────────────
+  - n: 10
+    revisado: "2026-10-18"
+    fuentes:
+      - id: 1
+        titulo: "Understand star schema and the importance for Power BI"
+        editor: "Microsoft Learn"
+        fecha: "2024-12-30"
+        url: "https://learn.microsoft.com/en-us/power-bi/guidance/star-schema"
+      - id: 2
+        titulo: "Data reduction techniques for Import modeling"
+        editor: "Microsoft Learn"
+        fecha: "2024-12-30"
+        url: "https://learn.microsoft.com/en-us/power-bi/guidance/import-modeling-data-reduction"
+      - id: 3
+        titulo: "Direct Lake overview"
+        editor: "Microsoft Learn"
+        fecha: "2026-09-02"
+        url: "https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-overview"
+      - id: 4
+        titulo: "Integrate Direct Lake security"
+        editor: "Microsoft Learn"
+        fecha: "2025-09-22"
+        url: "https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-security-integration"
+      - id: 5
+        titulo: "Row-level security (RLS) guidance in Power BI Desktop"
+        editor: "Microsoft Learn"
+        fecha: "2024-12-30"
+        url: "https://learn.microsoft.com/en-us/power-bi/guidance/rls-guidance"
+      - id: 6
+        titulo: "Row-level security (RLS) with Power BI"
+        editor: "Microsoft Learn"
+        fecha: "2026-05-13"
+        url: "https://learn.microsoft.com/en-us/fabric/security/service-admin-row-level-security"
+      - id: 7
+        titulo: "Create calculation groups"
+        editor: "Microsoft Learn"
+        fecha: "2025-02-26"
+        url: "https://learn.microsoft.com/en-us/power-bi/transform-model/calculation-groups"
+      - id: 8
+        titulo: "Visual calculations"
+        editor: "Microsoft Learn"
+        fecha: "2026-10-13"
+        url: "https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-visual-calculations-overview"
+      - id: 9
+        titulo: "DAX user-defined functions"
+        editor: "Microsoft Learn"
+        fecha: "2026-07-01"
+        url: "https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-user-defined-functions-overview"
+      - id: 10
+        titulo: "Power BI Desktop projects"
+        editor: "Microsoft Learn"
+        fecha: "2026-09-23"
+        url: "https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-overview"
+      - id: 11
+        titulo: "Power BI Desktop project report folder"
+        editor: "Microsoft Learn"
+        fecha: "2026-09-23"
+        url: "https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-report"
+      - id: 12
+        titulo: "Power BI MCP servers overview"
+        editor: "Microsoft Learn"
+        fecha: "2026-09-24"
+        url: "https://learn.microsoft.com/en-us/power-bi/developer/mcp/mcp-servers-overview"
+      - id: 13
+        titulo: "Power BI Authoring MCP server"
+        editor: "Microsoft Learn"
+        fecha: "2026-09-01"
+        url: "https://learn.microsoft.com/en-us/power-bi/developer/mcp/power-bi-authoring-mcp"
+      - id: 14
+        titulo: "Prepare your data for AI to improve Copilot results (preview)"
+        editor: "Microsoft Learn"
+        fecha: "2026-05-26"
+        url: "https://learn.microsoft.com/en-us/power-bi/create-reports/copilot-prepare-data-ai"
+      - id: 15
+        titulo: "Copilot in Power BI tutorial: Get started"
+        editor: "Microsoft Learn"
+        fecha: "2026-05-26"
+        url: "https://learn.microsoft.com/en-us/power-bi/create-reports/tutorial-copilot-power-bi-get-started"
+      - id: 16
+        titulo: "Fabric data agent concepts"
+        editor: "Microsoft Learn"
+        fecha: "2026-05-11"
+        url: "https://learn.microsoft.com/en-us/fabric/data-science/concept-data-agent"
+      - id: 17
+        titulo: "Microsoft Fabric adoption roadmap maturity levels"
+        editor: "Microsoft Learn"
+        fecha: "2024-12-30"
+        url: "https://learn.microsoft.com/en-us/power-bi/guidance/fabric-adoption-roadmap-maturity-levels"
+      - id: 18
+        titulo: "Power BI implementation planning: Adoption tracking"
+        editor: "Microsoft Learn"
+        fecha: "2024-12-30"
+        url: "https://learn.microsoft.com/en-us/power-bi/guidance/powerbi-implementation-planning-adoption-tracking"
+      - id: 19
+        titulo: "Monitor usage metrics in Power BI workspaces (preview)"
+        editor: "Microsoft Learn"
+        fecha: "2025-12-01"
+        url: "https://learn.microsoft.com/en-us/power-bi/collaborate-share/service-modern-usage-metrics"
+      - id: 20
+        titulo: "Previous monthly updates to Power BI Desktop and the Power BI service"
+        editor: "Microsoft Learn"
+        fecha: "2026-08-18"
+        url: "https://learn.microsoft.com/en-us/power-bi/fundamentals/desktop-latest-update-archive"

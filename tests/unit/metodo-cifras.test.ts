@@ -15,7 +15,7 @@ import {
 import { leerMetodo } from "../../scripts/metodo-al-indice.mjs";
 
 /**
- * NINGUNA CIFRA SIN CORPUS (S11). Las infografías de «Mi método» dicen dos clases
+ * NINGUNA CIFRA SIN CORPUS (S11). Las publicaciones de «Métodos» dicen dos clases
  * de cifras y las dos se vigilan desde el disco:
  *
  *   · las de «lo que hice» y las de la evidencia: están en el documento del
@@ -110,7 +110,7 @@ describe("ROJO · el motor contra piezas de juguete", () => {
   });
 });
 
-describe("las cifras del sitio que dicen las infografías son las que el disco publica", () => {
+describe("las cifras del sitio que dicen las publicaciones son las que el disco publica", () => {
   const fixture = parse(
     readFileSync("tests/fixtures/cifras-a-fondo.yaml", "utf8"),
   );

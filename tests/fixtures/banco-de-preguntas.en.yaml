@@ -468,7 +468,7 @@ preguntas:
     espera: [plataforma-y-despliegue, como-aprendo]
     familia: encaje
 
-  # ── mi método (S10): the twins of the three T2 questions; same `espera`, same order
+  # ── Métodos (S10): the twins of the three T2 questions; same `espera`, same order
   - pregunta: "How does Henry structure a multi-agent system?"
     espera: [metodo-sistema-de-agentes]
     familia: ia-y-agentes
@@ -479,7 +479,7 @@ preguntas:
     espera: [metodo-sistema-de-agentes]
     familia: ia-y-agentes
 
-  # ── mi método (S11): the twins of the three T3 questions; same `espera`, same order
+  # ── Métodos (S11): the twins of the three T3 questions; same `espera`, same order
   - pregunta: "How does Henry's chat avoid making up answers?"
     espera: [metodo-rag-sin-inventar]
     familia: ia-y-agentes
@@ -490,7 +490,7 @@ preguntas:
     espera: [metodo-rag-sin-inventar]
     familia: ia-y-agentes
 
-  # ── mi método (S12): the twins of the three T4 questions; same `espera`, same order
+  # ── Métodos (S12): the twins of the three T4 questions; same `espera`, same order
   - pregunta: "How does Henry take an AI application to production?"
     espera: [metodo-de-prototipo-a-produccion]
     familia: ia-y-agentes
@@ -501,13 +501,26 @@ preguntas:
     espera: [metodo-de-prototipo-a-produccion]
     familia: ia-y-agentes
 
-  # ── mi método (S13): the twins of the two T6 questions; same `espera`, same order
+  # ── Métodos (S13): the twins of the two T6 questions; same `espera`, same order
   - pregunta: "How does Henry structure the life cycle of a project in Microsoft Fabric?"
     espera: [metodo-ciclo-de-vida-de-datos]
     familia: plataforma-y-datos
   - pregunta: "What differences does Henry see between Fabric and Databricks?"
     espera: [metodo-ciclo-de-vida-de-datos]
     familia: plataforma-y-datos
+
+  # ── Métodos (S15): the twins of the three T7 questions; same `espera`, same order.
+  # The third uses the proper name the agent's ficha publishes («Constructor de Tableros
+  # Power BI»): with the English gloss neither the ficha nor `los-tableros` reaches the top-4.
+  - pregunta: "How does Henry design a semantic model in Power BI?"
+    espera: [metodo-bi-que-se-usa]
+    familia: bi-y-analitica
+  - pregunta: "How does Henry measure the adoption of a dashboard?"
+    espera: [metodo-bi-que-se-usa]
+    familia: bi-y-analitica
+  - pregunta: "What does the Constructor de Tableros Power BI do?"
+    espera: [agentes-constructor-tableros-powerbi, los-tableros, metodo-bi-que-se-usa]
+    familia: bi-y-analitica
 
 ajenas:
   - pregunta: "tell me a joke about cats"

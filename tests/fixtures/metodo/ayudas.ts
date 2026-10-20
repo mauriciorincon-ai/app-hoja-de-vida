@@ -6,7 +6,7 @@ import en from "../../../messages/en.json";
 import { parsePieza, type PiezaMetodo } from "@/lib/metodo/schema";
 
 /**
- * Ayudas de las pruebas de «Mi método»: la pieza sintética ya validada y un
+ * Ayudas de las pruebas de «Métodos»: la pieza sintética ya validada y un
  * traductor que lee `messages/*.json` DE VERDAD. Una clave que falta LANZA, en
  * vez de pintar «metodo.fases.xx»: así el test de un componente también es el
  * gate de que cada etiqueta que usa existe en los dos idiomas.

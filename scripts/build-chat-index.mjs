@@ -5,8 +5,8 @@
  *
  * Fuentes por locale: data/cv.{es,en}.yaml + data/apps.yaml +
  * data/a-fondo/<slug>.{es,en}.md (el corpus profundo, y el principal cuando
- * tiene documentos aprobados) + las fichas de la vitrina + las infografías de
- * «Mi método» (data/metodo/, un chunk por bloque).
+ * tiene documentos aprobados) + las fichas de la vitrina + las publicaciones de
+ * «Métodos» (data/metodo/, un chunk por bloque).
  * Salida: public/chat-index.{es,en}.json — UN solo asset que sirve doble:
  * retrieval del RAG en el server (/api/chat) y búsqueda local del fallback
  * en el cliente (fetch lazy).
@@ -15,7 +15,7 @@
  * ("#trayectoria") o página ("/proyectos/<slug>"); el cliente antepone
  * "/{locale}". Y desde 2026-09-23 lleva además `codigo` (de qué fuente salió:
  * `AF-NN` un documento a fondo, `CV` el YAML del CV, `APP` apps.yaml, `FT`
- * una ficha de la vitrina, `T1…T9` una infografía de «Mi método») y `destino` (el NOMBRE de a dónde lleva la cita,
+ * una ficha de la vitrina, `T1…T9` una publicación de «Métodos») y `destino` (el NOMBRE de a dónde lleva la cita,
  * derivado de las mismas fuentes que pintan cada destino). El chip enseña
  * «AF-09 · Vesting» en vez del título del fragmento.
  *
@@ -253,7 +253,7 @@ export function buildChunks({
   // cifras con procedencia, límites y «nunca», citando a la página de cada
   // pieza. El texto es el que mandó cada casa, en español, en los dos índices.
   if (fichas) chunks.push(...chunksDeFichas(fichas, locale));
-  // «Mi método» (S10): cada infografía entra por bloques, con su ancla
+  // «Métodos» (S10): cada publicación entra por bloques, con su ancla
   // `/metodos/<slug>#bloque-n` y el rótulo de su voz dentro del texto. Su código
   // es el id del tema (T2…): el chip dice «T2 · <la pieza>».
   if (metodo) chunks.push(...chunksDeMetodo(metodo, locale));
@@ -276,7 +276,7 @@ function detener(titulo, problemas) {
 function main() {
   const apps = readYaml("apps.yaml");
   const fichas = leerFichas();
-  // «Mi método» pasa por el esquema Zod ANTES de armar ningún fragmento: este script
+  // Las publicaciones de «Métodos» pasan por el esquema Zod ANTES de armar ningún fragmento: este script
   // corre antes de `next build`, y un campo mal escrito no debe llegar como un TypeError.
   let metodo;
   try {
