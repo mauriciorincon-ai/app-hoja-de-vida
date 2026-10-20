@@ -265,8 +265,8 @@ bloques:
         nota:
           voz: hice
           texto:
-            es: "En la Fundación CTIC la validación es progresiva: una exploración de datos, una prueba controlada o un prototipo limitado deciden si avanzar, modificar el enfoque o detener antes de comprometer más recursos."
-            en: "At Fundación CTIC validation is progressive: a data exploration, a controlled test or a limited prototype decides whether to move forward, change the approach or stop before committing more resources."
+            es: "En la Fundación CTIC se procura que la validación sea progresiva: una exploración de datos, una prueba controlada o un prototipo limitado pueden generar evidencia suficiente para avanzar, modificar el enfoque o detener antes de comprometer más recursos."
+            en: "At Fundación CTIC the aim is for validation to be progressive: a data exploration, a controlled test or a limited prototype can generate enough evidence to move forward, change the approach or stop before committing more resources."
           corpus: [fundacion-ctic]
       - nombre:
           es: "Pilotear con una métrica de negocio que puede detenerlo"
@@ -329,8 +329,8 @@ bloques:
         nota:
           voz: hice
           texto:
-            es: "En la Fundación CTIC la estrategia se estructura siguiendo ISO/IEC 42001, en su adopción UNE-ISO/IEC 42001:2025, con más de 20 instrumentos del sistema de gestión; entre ellos, la matriz de riesgos y la evaluación de impacto de los sistemas de IA."
-            en: "At Fundación CTIC the strategy is structured following ISO/IEC 42001, in its UNE-ISO/IEC 42001:2025 adoption, with more than 20 instruments of the management system; among them, the risk matrix and the impact assessment of AI systems."
+            es: "En la Fundación CTIC la estrategia se estructura siguiendo ISO/IEC 42001, en su adopción UNE-ISO/IEC 42001:2025, con más de 20 instrumentos del sistema de gestión; una de sus matrices es el análisis de riesgos de cada caso de uso, y la norma pide además evaluar el impacto de los sistemas de IA."
+            en: "At Fundación CTIC the strategy is structured following ISO/IEC 42001, in its UNE-ISO/IEC 42001:2025 adoption, with more than 20 instruments of the management system; one of its matrices is the risk analysis of each use case, and the standard also requires assessing the impact of AI systems."
           corpus: [fundacion-ctic]
       - nombre:
           es: "Formar, medir la adopción y decidir si escalar, ajustar o retirar"
@@ -380,8 +380,8 @@ bloques:
         porQue:
           voz: hice
           texto:
-            es: "En Inglopres la implantación del ERP (Odoo) mostró que digitalizar un proceso sin revisarlo traslada sus inconsistencias a la tecnología: el proceso ejecutado se levantó y se modeló en BPMN antes de configurar la solución."
-            en: "At Inglopres the ERP rollout (Odoo) showed that digitizing a process without reviewing it carries its inconsistencies into the technology: the executed process was mapped and modeled in BPMN before configuring the solution."
+            es: "En Inglopres la implantación del ERP (Odoo) mostró que digitalizar un proceso sin revisarlo puede trasladar sus inconsistencias a la tecnología: el proceso ejecutado se levantó y se modeló en BPMN antes de configurar la solución."
+            en: "At Inglopres the ERP rollout (Odoo) showed that digitizing a process without reviewing it can carry its inconsistencies into the technology: the executed process was mapped and modeled in BPMN before configuring the solution."
           corpus: [inglopres]
         nota:
           voz: campo
@@ -443,8 +443,8 @@ bloques:
         porQue:
           voz: hice
           texto:
-            es: "En la Fundación CTIC la evaluación decide primero si la IA es necesaria y qué tipo de capacidad conviene, para no construir agentes donde basta un instrumento más simple, como un producto analítico en Power BI."
-            en: "At Fundación CTIC the evaluation first decides whether AI is needed and which kind of capability fits, so as not to build agents where a simpler instrument, such as an analytics product in Power BI, is enough."
+            es: "En la Fundación CTIC la evaluación debe determinar primero si la IA es necesaria y qué tipo de capacidad conviene, para no construir agentes donde basta un instrumento más simple, como un producto analítico en Power BI."
+            en: "At Fundación CTIC the evaluation must first determine whether AI is needed and which kind of capability fits, so as not to build agents where a simpler instrument, such as an analytics product in Power BI, is enough."
           corpus: [fundacion-ctic]
         nota:
           voz: campo
@@ -464,8 +464,8 @@ bloques:
         porQue:
           voz: hice
           texto:
-            es: "En la Fundación CTIC el marco de gobierno reparte las decisiones: el negocio responde por el propósito y los resultados, los responsables de datos por la calidad y las condiciones de uso, y seguridad, riesgo, cumplimiento y tecnología intervienen según la iniciativa."
-            en: "At Fundación CTIC the governance framework splits the decisions: the business answers for the purpose and the results, data owners for quality and conditions of use, and security, risk, compliance and technology step in according to the initiative."
+            es: "En la Fundación CTIC la estrategia busca establecer un marco de gobierno que reparta las decisiones: el negocio debe responder por el propósito y los resultados, los responsables de datos por la calidad y las condiciones de uso, y seguridad, riesgo, cumplimiento y tecnología deben intervenir según la iniciativa."
+            en: "At Fundación CTIC the strategy seeks to establish a governance framework that splits the decisions: the business must answer for the purpose and the results, data owners for quality and conditions of use, and security, risk, compliance and technology must step in according to the initiative."
           corpus: [fundacion-ctic]
         nota:
           voz: campo
@@ -606,15 +606,15 @@ bloques:
       - nombre: { es: "Fundación CTIC: una cartera de IA con criterios comunes", en: "Fundación CTIC: an AI portfolio with shared criteria" }
         nivel: uso-real
         texto:
-          es: "Desde marzo de 2025 se estructura en la Fundación CTIC la estrategia institucional de IA: más de 10 oportunidades identificadas, la mitad evaluadas formalmente y unas pocas priorizadas, con responsables, resultados esperados, riesgos iniciales y criterios de evaluación documentados."
-          en: "Since March 2025 Fundación CTIC's institutional AI strategy has been structured: more than 10 opportunities identified, half of them formally evaluated and a few prioritized, with owners, expected results, initial risks and evaluation criteria documented."
+          es: "Desde marzo de 2025 se estructura en la Fundación CTIC la estrategia institucional de IA: más de 10 oportunidades identificadas, la mitad evaluadas formalmente y unas pocas priorizadas; de estas, las primeras ya tienen responsables, resultados esperados, riesgos iniciales y criterios de evaluación documentados."
+          en: "Since March 2025 Fundación CTIC's institutional AI strategy has been structured: more than 10 opportunities identified, half of them formally evaluated and a few prioritized; of these, the first ones already have owners, expected results, initial risks and evaluation criteria documented."
         corpus: [fundacion-ctic]
         href: /proyectos/fundacion-ctic
       - nombre: { es: "Fundación CTIC: el sistema de gestión bajo ISO/IEC 42001", en: "Fundación CTIC: the management system under ISO/IEC 42001" }
         nivel: uso-real
         texto:
-          es: "La estrategia sigue los principios y requisitos de ISO/IEC 42001, con más de 20 instrumentos del sistema de gestión, un inventario de sistemas de IA con su ciclo de vida y un reparto de roles entre el negocio, los responsables de datos y las funciones de riesgo, seguridad y tecnología."
-          en: "The strategy follows the principles and requirements of ISO/IEC 42001, with more than 20 instruments of the management system, an inventory of AI systems with their life cycle and a split of roles between the business, the data owners and the risk, security and technology functions."
+          es: "La estrategia sigue los principios y requisitos de ISO/IEC 42001, con más de 20 instrumentos del sistema de gestión y, en construcción, un inventario progresivo de sistemas de IA y un marco de gobierno que busca repartir los roles entre el negocio, los responsables de datos y las funciones de riesgo, seguridad y tecnología."
+          en: "The strategy follows the principles and requirements of ISO/IEC 42001, with more than 20 instruments of the management system and, under construction, a progressive inventory of AI systems and a governance framework that seeks to split roles between the business, the data owners and the risk, security and technology functions."
         corpus: [fundacion-ctic]
         href: /proyectos/fundacion-ctic
       - nombre: { es: "La fábrica de apps: dos aprobaciones escritas", en: "The app factory: two written approvals" }
@@ -655,8 +655,8 @@ bloques:
       - nombre: { es: "Inglopres: el ERP como antecedente", en: "Inglopres: the ERP as a precedent" }
         nivel: uso-real
         texto:
-          es: "Entre 2015 y 2017, la implantación de un ERP (Odoo) llevó la operación de registros dispersos a un solo lugar; antes de configurarlo se levantó el proceso ejecutado y se modeló en BPMN."
-          en: "Between 2015 and 2017, an ERP rollout (Odoo) took the operation from scattered records to a single place; before configuring it, the executed process was mapped and modeled in BPMN."
+          es: "En Inglopres (2015–2017), la implantación de un ERP (Odoo) llevó la operación de registros dispersos a un solo lugar; antes de configurarlo se levantó el proceso ejecutado y se modeló en BPMN."
+          en: "At Inglopres (2015–2017), an ERP rollout (Odoo) took the operation from scattered records to a single place; before configuring it, the executed process was mapped and modeled in BPMN."
         corpus: [inglopres]
         href: /proyectos/inglopres
 
@@ -680,8 +680,8 @@ bloques:
         corpus: [apps-pipeline]
       - voz: hice
         texto:
-          es: "El centro de excelencia y la decisión de construir, comprar o componer aparecen aquí como estado del campo y criterio: la evidencia de la Fundación CTIC es la cartera con criterios comunes y el reparto de roles del marco de gobierno."
-          en: "The center of excellence and the decision to build, buy or compose appear here as state of the field and criterion: the evidence from Fundación CTIC is the portfolio with shared criteria and the split of roles in the governance framework."
+          es: "El centro de excelencia y la decisión de construir, comprar o componer aparecen aquí como estado del campo y criterio: la evidencia de la Fundación CTIC es la cartera con criterios comunes y el marco de gobierno que se busca establecer."
+          en: "The center of excellence and the decision to build, buy or compose appear here as state of the field and criterion: the evidence from Fundación CTIC is the portfolio with shared criteria and the governance framework it seeks to establish."
         corpus: [fundacion-ctic]
       - voz: hice
         texto:
