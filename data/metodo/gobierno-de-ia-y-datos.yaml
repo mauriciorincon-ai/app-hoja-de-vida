@@ -16,7 +16,8 @@
 # gobierno de la IA y de los agentes, Purview para IA generativa y la página de ISO/IEC 42001)—. Solo contenido público servido
 # al navegador, sin credenciales ajenas ni endpoints de terceros; ninguna página leída traía texto dirigido a agentes. iso.org
 # no se leyó: en el S16 respondió con un desafío anti-bot, y la IEC, coeditora de las normas, publica su ficha en abierto.
-# La fecha de cada fuente es la que la página publica (`ms.date` en Microsoft Learn).
+# La fecha de cada fuente es la que la página publica (`ms.date` en Microsoft Learn); la de OWASP es la de salida de su lista 2025
+# (la página no muestra fecha), la misma que usan T2, T3 y T4.
 # La evidencia sale de `gobierno-de-datos-y-de-ia`, `fundacion-ctic`, `ceinfes` y `plataforma-y-despliegue`. En la Fundación
 # CTIC: «estructuración», cifras aproximadas, ningún proceso, indicador ni persona, ningún dato de paciente y ninguna
 # certificación afirmada; el sistema de gestión lleva el nivel «En construcción». NIST y el AI Act son mapa del campo, nunca
@@ -349,8 +350,8 @@ bloques:
         porQue:
           voz: hice
           texto:
-            es: "En Vesting la identidad, la propiedad, el aislamiento y la trazabilidad de los datos se definieron desde el primer evento, y esa misma estandarización hizo monitoreables a los agentes: uno que no dejaba rastro conforme al estándar no salía a producción."
-            en: "At Vesting the identity, ownership, isolation and traceability of the data were defined from the first event, and that same standardization made the agents monitorable: one that left no trace according to the standard did not go to production."
+            es: "En Vesting la identidad, la propiedad, el aislamiento y la trazabilidad de los datos se conservaron desde el ingreso de cada evento, y la estandarización de qué debía registrar cada agente, con qué identidad y en qué formato, hizo posible monitorearlos: uno que no dejaba rastro conforme al estándar no podía monitorearse y no salía a producción."
+            en: "At Vesting the identity, ownership, isolation and traceability of the data were preserved from the ingestion of each event, and the standardization of what each agent had to record, with what identity and in what format, made it possible to monitor them: one that left no trace according to the standard could not be monitored and did not go to production."
           corpus: [gobierno-de-datos-y-de-ia]
         nota:
           voz: campo
@@ -412,8 +413,8 @@ bloques:
         porQue:
           voz: campo
           texto:
-            es: "ISO/IEC 42005:2025 orienta cuándo y cómo evaluar el impacto de un sistema de IA sobre las personas y las sociedades a lo largo de su ciclo de vida, y cómo integrar esa evaluación en la gestión de riesgos y en el sistema de gestión de IA."
-            en: "ISO/IEC 42005:2025 gives guidance on when and how to assess an AI system's impact on individuals and societies across its life cycle, and how to integrate that assessment into risk management and the AI management system."
+            es: "ISO/IEC 42005:2025 orienta cuándo y cómo evaluar el impacto de un sistema de IA sobre las personas y las sociedades, y en qué etapas de su ciclo de vida, y cómo integrar esa evaluación en la gestión de riesgos y en el sistema de gestión de IA."
+            en: "ISO/IEC 42005:2025 gives guidance on when and how to assess an AI system's impact on individuals and societies, and at what stages of its life cycle, and how to integrate that assessment into risk management and the AI management system."
           fuentes: [5]
         nota:
           voz: hice
@@ -489,8 +490,8 @@ bloques:
         fuentes: [9]
       - titulo: { es: "La evaluación de impacto, con norma propia", en: "Impact assessment, with its own standard" }
         queCambia:
-          es: "La evaluación de impacto deja de ser una sección del análisis de riesgos: ISO/IEC 42005:2025 la orienta a lo largo del ciclo de vida, e ISO/IEC 23894:2023 da la guía para integrar la gestión del riesgo propio de la IA en la actividad de la organización."
-          en: "Impact assessment stops being a section of the risk analysis: ISO/IEC 42005:2025 guides it across the life cycle, and ISO/IEC 23894:2023 gives guidance for integrating the management of AI-specific risk into the organization's activities."
+          es: "La evaluación de impacto deja de ser una sección del análisis de riesgos: ISO/IEC 42005:2025 la orienta —cuándo, cómo y en qué etapas del ciclo de vida—, e ISO/IEC 23894:2023 da la guía para integrar la gestión del riesgo propio de la IA en la actividad de la organización."
+          en: "Impact assessment stops being a section of the risk analysis: ISO/IEC 42005:2025 guides it —when, how and at what stages of the life cycle—, and ISO/IEC 23894:2023 gives guidance for integrating the management of AI-specific risk into the organization's activities."
         fuentes: [5, 6]
         nota:
           voz: posicion
@@ -504,8 +505,8 @@ bloques:
         fuentes: [2, 3]
       - titulo: { es: "El calendario del AI Act, después del AI Omnibus", en: "The AI Act timeline, after the AI Omnibus" }
         queCambia:
-          es: "Las prohibiciones y la alfabetización en IA rigen desde el 2 de febrero de 2025 y las obligaciones de los modelos de propósito general desde el 2 de agosto de 2025; tras el AI Omnibus, en vigor desde el 27 de julio de 2026, los sistemas de alto riesgo en áreas sensibles (Anexo III) pasan al 2 de diciembre de 2027 y los integrados en productos regulados, al 2 de agosto de 2028."
-          en: "The prohibitions and AI literacy have applied since February 2, 2025 and the obligations for general-purpose models since August 2, 2025; after the AI Omnibus, in force since July 27, 2026, high-risk systems in sensitive areas (Annex III) move to December 2, 2027 and those embedded in regulated products, to August 2, 2028."
+          es: "El AI Act es aplicable en general desde el 2 de agosto de 2026, con excepciones: las prohibiciones y la alfabetización en IA rigen desde el 2 de febrero de 2025 y las obligaciones de los modelos de propósito general desde el 2 de agosto de 2025; tras el AI Omnibus, en vigor desde el 27 de julio de 2026, los sistemas de alto riesgo en áreas sensibles (Anexo III) pasan al 2 de diciembre de 2027 y los integrados en productos regulados, al 2 de agosto de 2028."
+          en: "The AI Act has been generally applicable since August 2, 2026, with exceptions: the prohibitions and AI literacy have applied since February 2, 2025 and the obligations for general-purpose models since August 2, 2025; after the AI Omnibus, in force since July 27, 2026, high-risk systems in sensitive areas (Annex III) move to December 2, 2027 and those embedded in regulated products, to August 2, 2028."
         fuentes: [1]
         nota:
           voz: posicion

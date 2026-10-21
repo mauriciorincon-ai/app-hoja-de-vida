@@ -1,5 +1,5 @@
 /**
- * EL NIVEL DE LO QUE SE ESTÁ CONSTRUYENDO (S17, 2026-10-21). Motor puro.
+ * EL NIVEL DE LO QUE SE ESTÁ CONSTRUYENDO (S17, 2026-10-20). Motor puro.
  *
  * El corpus dice del sistema de gestión de IA de la Fundación CTIC que está «en
  * estructuración»: más de 20 instrumentos, un tercio terminados, sin certificación.
