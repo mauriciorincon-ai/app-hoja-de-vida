@@ -48,6 +48,7 @@ const NIVEL_ESTILO: Record<Nivel, string> = {
   prototipo: "bg-lilac text-lilac-ink",
   "en-estudio": "bg-sky text-sky-ink",
   exploracion: "bg-citron text-citron-ink",
+  "en-construccion": "bg-peach text-peach-ink",
 };
 
 /** «17 de octubre de 2026» / «October 17, 2026», sin depender de la zona horaria. */

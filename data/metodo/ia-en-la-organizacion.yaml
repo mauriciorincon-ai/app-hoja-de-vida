@@ -521,8 +521,8 @@ bloques:
         nota:
           voz: posicion
           texto:
-            es: "Un sistema de gestión que nace con el primer caso de uso cuesta menos que uno que llega a auditar lo que ya está en operación."
-            en: "A management system born with the first use case costs less than one that arrives to audit what is already in operation."
+            es: "Un sistema de gestión que nace con el primer caso de uso suele costar menos que uno que llega a auditar lo que ya está en operación."
+            en: "A management system born with the first use case tends to cost less than one that arrives to audit what is already in operation."
       - titulo: { es: "El centro de excelencia pasa de control a asesoría", en: "The center of excellence moves from control to advice" }
         queCambia:
           es: "El centro de excelencia de IA arranca centralizado para concentrar la experiencia y, cuando aparecen demoras y cuellos de botella, pasa a asesorar y fijar límites mientras los equipos de producto entregan; para agentes, la estructura se elige por patrón de adopción y madurez, no por organigrama."
@@ -611,7 +611,7 @@ bloques:
         corpus: [fundacion-ctic]
         href: /proyectos/fundacion-ctic
       - nombre: { es: "Fundación CTIC: el sistema de gestión bajo ISO/IEC 42001", en: "Fundación CTIC: the management system under ISO/IEC 42001" }
-        nivel: uso-real
+        nivel: en-construccion
         texto:
           es: "La estrategia sigue los principios y requisitos de ISO/IEC 42001, con más de 20 instrumentos del sistema de gestión y, en construcción, un inventario progresivo de sistemas de IA y un marco de gobierno que busca repartir los roles entre el negocio, los responsables de datos y las funciones de riesgo, seguridad y tecnología."
           en: "The strategy follows the principles and requirements of ISO/IEC 42001, with more than 20 instruments of the management system and, under construction, a progressive inventory of AI systems and a governance framework that seeks to split roles between the business, the data owners and the risk, security and technology functions."
@@ -627,8 +627,8 @@ bloques:
       - nombre: { es: "La vitrina, producto de la fábrica", en: "The showcase, a product of the factory" }
         nivel: uso-real
         texto:
-          es: "Diez aplicaciones hermanas más CV Viva, 15 agentes, 7 investigaciones y 6 tableros —38 piezas— salen de un pipeline con dos casas, un agente de fábrica, cuatro jobs de integración continua y un contrato de ficha."
-          en: "Ten sister applications plus CV Viva, 15 agents, 7 research lines and 6 dashboards —38 pieces— come out of a pipeline with two houses, a factory agent, four CI jobs and a sheet contract."
+          es: "Diez aplicaciones hermanas, 15 agentes, 7 investigaciones y 6 tableros —38 piezas, sin contar este sitio— salen de un pipeline con dos casas, un agente de fábrica, cuatro jobs de integración continua y un contrato de ficha."
+          en: "Ten sister applications, 15 agents, 7 research lines and 6 dashboards —38 pieces, not counting this site— come out of a pipeline with two houses, a factory agent, four CI jobs and a sheet contract."
         corpus: [apps-pipeline]
         href: /vitrina
       - nombre: { es: "Banco Pichincha: adopción y formación como parte del producto", en: "Banco Pichincha: adoption and training as part of the product" }

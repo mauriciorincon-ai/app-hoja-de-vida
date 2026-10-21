@@ -187,6 +187,9 @@ export const NIVELES = [
   "prototipo",
   "en-estudio",
   "exploracion",
+  // Lo que el corpus describe como «en estructuración / en construcción» (S17): un sistema
+  // que se está armando no es «uso real» ni un prototipo de una herramienta.
+  "en-construccion",
 ] as const;
 export type Nivel = (typeof NIVELES)[number];
 

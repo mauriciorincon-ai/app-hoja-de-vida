@@ -648,8 +648,11 @@ Una publicación es **un archivo de datos**, no una página: un archivo `data/me
 4. **Cada afirmación lleva su voz y solo la evidencia de su voz:** `voz: hice` con
    `corpus: [slug-del-documento-a-fondo]`; `voz: campo` con `fuentes: [n]` (el número de la fuente
    del bloque 10); `voz: posicion` sin ninguna de las dos. Nada sube de nivel: una herramienta
-   aparece con el que el corpus le da (`uso-real`, `prototipo`, `en-estudio`, `exploracion`) y las
-   credenciales, como las declara `data/credenciales-nombradas.yaml`. **Cada cifra de «lo que
+   aparece con el que el corpus le da (`uso-real`, `prototipo`, `en-estudio`, `exploracion`; y desde
+   el Sprint 017 `en-construccion`, «En construcción», para lo que el corpus describe en
+   estructuración: el sistema de gestión de la Fundación CTIC la lleva por regla, la vigila
+   `tests/unit/metodo-nivel-en-construccion.test.ts`) y las credenciales, como las declara
+   `data/credenciales-nombradas.yaml`. **Cada cifra de «lo que
    hice» y de la evidencia tiene que estar, con ese número, en el documento que la pieza cita**
    (`tests/unit/metodo-cifras.test.ts`); y ese documento tiene que estar **aprobado en español y en
    inglés** (un borrador, o uno sin gemelo, rompe el build). Una cifra que se mueve sola con el
