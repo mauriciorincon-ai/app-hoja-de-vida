@@ -657,6 +657,45 @@ preguntas:
     espera: [metodo-ia-en-la-organizacion, metodo-bi-que-se-usa, bi-que-se-adopta]
     familia: forma-de-trabajar
 
+  # ─────────────────────────────────────────────────────────────────────
+  # Métodos (S17): las cuatro preguntas de T5. Solo la de la evaluación de impacto EXIGE
+  # la pieza (decisión del dueño en F2, tras el relevo de la regla 29: la del sistema de
+  # gestión no entró al top-4 con tres ajustes de título, porque `fundacion-ctic`,
+  # `procesos-y-simulacion` y `origenes` la contestan en primera persona y con las
+  # palabras exactas). Las otras tres aceptan la pieza o su casa natural —una fila que
+  # no puede fallar no prueba nada, así que se mide lo que de verdad pasa—. Medidas con
+  # la pieza commiteada (índice de 1.903 fragmentos): la de impacto, T5 1.ª (135 contra
+  # 79 del 4.º); la del sistema de gestión, T5 5.ª y la fila pasa por `origenes`; la de
+  # ISO y la de la Ley 1581 pasan por su casa. Ninguna de las 165 filas anteriores salió
+  # del top-4.
+  # ─────────────────────────────────────────────────────────────────────
+  - pregunta: "¿Qué experiencia tiene Henry con ISO/IEC 42001?"
+    espera:
+      [
+        metodo-gobierno-de-ia-y-datos,
+        fundacion-ctic,
+        gobierno-de-datos-y-de-ia,
+        procesos-y-simulacion,
+      ]
+    familia: gobierno
+  - pregunta: "¿Cómo estructura Henry un sistema de gestión de IA?"
+    espera:
+      [
+        metodo-gobierno-de-ia-y-datos,
+        fundacion-ctic,
+        gobierno-de-datos-y-de-ia,
+        procesos-y-simulacion,
+        origenes,
+      ]
+    familia: gobierno
+  - pregunta: "¿Cómo aplica Henry la Ley 1581 en la analítica?"
+    espera:
+      [metodo-gobierno-de-ia-y-datos, gobierno-de-datos-y-de-ia, fundacion-ctic]
+    familia: gobierno
+  - pregunta: "¿Cómo evalúa Henry el impacto de un sistema de IA?"
+    espera: [metodo-gobierno-de-ia-y-datos]
+    familia: gobierno
+
 # Preguntas AJENAS. Cada una declara qué le hace el guardrail de entrada, y hay
 # DOS resultados legítimos —confundirlos sería mentir sobre lo que el guardrail
 # promete (`src/lib/ia/guardrails.ts`)—:

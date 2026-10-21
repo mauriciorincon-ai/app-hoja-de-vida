@@ -60,13 +60,6 @@ roadmap:
     descripcion:
       es: "Te explica cláusula por cláusula la promesa, la escritura y el registro, para que firmes entendiendo lo que firmas."
       en: "Explains the promise, the deed and the registration clause by clause, so you sign understanding what you sign."
-  - id: avaluo-instantaneo
-    titulo:
-      es: "Cuánto vale tu inmueble, antes de publicarlo"
-      en: "What your property is worth, before you list it"
-    descripcion:
-      es: "Al entrar obtienes un rango de valor con su explicación, para fijar el precio con datos y no con una corazonada."
-      en: "On arrival you get a value range with its reasoning, to set the price on data rather than a hunch."
   - id: fotos-que-venden
     titulo:
       es: "Fotos que venden"

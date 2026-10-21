@@ -131,7 +131,7 @@ test.describe("chat — flujo estrella", () => {
     await expect(fuente).not.toHaveText(/In depth|A fondo/);
   });
 
-  // «Métodos» (S10, F3; T3 en el S11, T4 en el S12, T6 en el S13, T7 en el S15, T1 en el S16): el chat cita la publicación, bloque a
+  // «Métodos» (S10, F3; T3 en el S11, T4 en el S12, T6 en el S13, T7 en el S15, T1 en el S16, T5 en el S17): el chat cita la publicación, bloque a
   // bloque. Cada pieza trae la primera de sus preguntas del banco; el chip dice el
   // código del tema y el nombre de la pieza, y la cita lleva al BLOQUE, no a la página.
   for (const [slug, codigo, idioma, pregunta, nombre] of [
@@ -147,6 +147,8 @@ test.describe("chat — flujo estrella", () => {
     ["bi-que-se-usa", "T7", "en", "How does Henry design a semantic model in Power BI?", "How a BI solution people actually use should be designed"],
     ["ia-en-la-organizacion", "T1", "es", "¿Cómo llevaría Henry la IA a una empresa que apenas empieza?", "Cómo se debe llevar la IA a una organización"],
     ["ia-en-la-organizacion", "T1", "en", "How would Henry bring AI to a company that is just starting out?", "How AI should be brought into an organization"],
+    ["gobierno-de-ia-y-datos", "T5", "es", "¿Cómo evalúa Henry el impacto de un sistema de IA?", "Cómo se deben gobernar la IA y los datos"],
+    ["gobierno-de-ia-y-datos", "T5", "en", "How does Henry assess the impact of an AI system?", "How AI and data should be governed"],
   ] as const) {
     test(`la cita de ${codigo} lleva al bloque exacto (${idioma})`, async ({
       page,

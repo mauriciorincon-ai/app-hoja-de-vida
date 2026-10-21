@@ -1,0 +1,743 @@
+# «MÉTODOS» · T5 — Cómo se deben gobernar la IA y los datos (S17, 2026-10-20; voz impersonal desde el primer commit).
+#
+# Tres voces, separadas por el esquema (src/lib/metodo/schema.ts); en la página: Evidencia · Estado del campo · Criterio.
+#   · voz: hice      → la evidencia: solo lo que dice el corpus del sitio, con el proyecto como sujeto;
+#                      `corpus:` nombra el documento de data/a-fondo/.
+#   · voz: campo     → lo que el campo hace en 2025–2026; `fuentes:` numera la fuente del bloque 10.
+#   · voz: posicion  → el criterio del autor, rotulado como tal; sin fuente ni corpus.
+# Lo que va sin voz (bloques 1, 2, 6, 7 y la base de las fases) es el método mismo. Todo el texto publicado va en voz
+# impersonal —ni primera persona ni «entrevista»—; lo vigila tests/unit/metodo-voz-piezas.test.ts.
+#
+# Investigación del 2026-10-20 (≈ 5 min, 19:48 → 19:53): documentación oficial primero —la Comisión Europea (la página del
+# AI Act, actualizada el 19 de octubre de 2026, con el calendario que dejó el AI Omnibus), NIST (AI RMF 1.0 y su perfil de IA
+# generativa, NIST AI 600-1), la tienda de la IEC para ISO/IEC 42005 y 23894 (la ficha pública de cada norma), el DNP sobre el
+# CONPES 4144, la sede electrónica de la SIC (Circular Externa 2 de 2024: se cita solo su título y su fecha, porque el texto
+# publicado es un PDF escaneado sin texto legible), OWASP (LLM06:2025) y Microsoft Learn (Cloud Adoption Framework para el
+# gobierno de la IA y de los agentes, Purview para IA generativa y la página de ISO/IEC 42001)—. Solo contenido público servido
+# al navegador, sin credenciales ajenas ni endpoints de terceros; ninguna página leída traía texto dirigido a agentes. iso.org
+# no se leyó: en el S16 respondió con un desafío anti-bot, y la IEC, coeditora de las normas, publica su ficha en abierto.
+# La fecha de cada fuente es la que la página publica (`ms.date` en Microsoft Learn); la de OWASP es la de salida de su lista 2025
+# (la página no muestra fecha), la misma que usan T2, T3 y T4.
+# La evidencia sale de `gobierno-de-datos-y-de-ia`, `fundacion-ctic`, `ceinfes` y `plataforma-y-despliegue`. En la Fundación
+# CTIC: «estructuración», cifras aproximadas, ningún proceso, indicador ni persona, ningún dato de paciente y ninguna
+# certificación afirmada; el sistema de gestión lleva el nivel «En construcción». NIST y el AI Act son mapa del campo, nunca
+# experiencia. El bloque 7 no lleva cifras propias. El título de la decisión 1 y el de la fase 4 llevan las palabras de la
+# pregunta que el banco exige («estructura… un sistema de gestión de IA»), medidas antes de escribirlos.
+
+id: T5
+slug: gobierno-de-ia-y-datos
+nombre:
+  es: "Cómo se deben gobernar la IA y los datos"
+  en: "How AI and data should be governed"
+bloques:
+  # ─── 1 · El problema ────────────────────────────────────────────────────────
+  - n: 1
+    pregunta:
+      es: "Gobernar la IA sobre un gobierno de datos que funcione: que cada dato tenga significado, dueño y propósito, que cada sistema de IA esté inventariado, evaluado y vigilado, y que la organización pueda demostrarlo sin afirmar más de lo que tiene."
+      en: "Governing AI on top of data governance that works: every piece of data with a meaning, an owner and a purpose, every AI system inventoried, assessed and monitored, and an organization able to prove it without claiming more than it has."
+    respuesta:
+      - es: "El gobierno de la IA continúa el de los datos y lo amplía: siguen las preguntas del dato —qué representa, de dónde viene, quién responde, quién puede usarlo y qué pasa cuando cambia— y se suman qué puede hacer el sistema y cuándo debe detenerse."
+        en: "AI governance continues data governance and extends it: the questions about data remain —what it represents, where it comes from, who answers for it, who may use it and what happens when it changes— and two are added: what the system may do and when it must stop."
+      - es: "Un sistema de gestión de IA ordena el trabajo: contexto, roles, riesgos, evaluación de impacto, inventario y mejora continua, con controles que demuestran que funcionan y no solo que existen."
+        en: "An AI management system organizes the work: context, roles, risks, impact assessment, inventory and continual improvement, with controls that show they work and not only that they exist."
+      - es: "Las normas y los marcos se usan como mapa: el sistema se estructura con una norma de gestión, cumple la ley de datos personales que aplica y no afirma una certificación que no tiene."
+        en: "Standards and frameworks are used as a map: the system is structured with a management standard, complies with the personal data law that applies and does not claim a certification it does not have."
+
+  # ─── 2 · El mapa ────────────────────────────────────────────────────────────
+  - n: 2
+    titulo:
+      es: "Del dato con dueño y propósito al sistema de IA inventariado, evaluado y vigilado"
+      en: "From data with an owner and a purpose to an AI system that is inventoried, assessed and monitored"
+    resumen:
+      es: "El negocio y los dueños del dato fijan definiciones compartidas; esas definiciones se verifican con reglas de calidad y linaje, que habilitan un acceso por propósito, y ese acceso restringe el uso de los datos personales antes de que alimenten un sistema de IA. Cada sistema, propio o de un proveedor, se registra en un inventario; el inventario lleva a evaluar su impacto, la evaluación fija cuánta autonomía tiene según su riesgo, y esa autonomía se vigila con trazas. Debajo corre la institución: la dirección asigna roles, designa a los dueños del dato y responde por un sistema de gestión de IA, que recibe como evidencia lo que las trazas muestran."
+      en: "The business and the data owners set shared definitions; those definitions are checked with quality and lineage rules, which enable purpose-based access, and that access restricts the use of personal data before it feeds an AI system. Every system, in-house or from a vendor, is registered in an inventory; the inventory leads to assessing its impact, the assessment sets how much autonomy it gets according to its risk, and that autonomy is monitored through traces. The institution runs underneath: leadership assigns roles, appoints the data owners and answers for an AI management system, which receives as evidence what the traces show."
+    nodos:
+      - n: 1
+        etiqueta: { es: "Negocio y dueños del dato", en: "Business and data owners" }
+        tipo: humano
+        col: 0
+        fila: 0
+        detalle:
+          es: "Quien responde por el significado de cada dato y decide para qué puede usarse."
+          en: "Whoever answers for the meaning of each piece of data and decides what it may be used for."
+      - n: 2
+        etiqueta: { es: "Definiciones compartidas", en: "Shared definitions" }
+        tipo: dato
+        col: 1
+        fila: 0
+        detalle:
+          es: "Cada indicador con una definición, un responsable y una regla de cálculo única, reutilizada por todos los productos."
+          en: "Each indicator with one definition, one owner and one calculation rule, reused by every product."
+      - n: 3
+        etiqueta: { es: "Calidad y linaje", en: "Quality and lineage" }
+        tipo: control
+        col: 2
+        fila: 0
+        detalle:
+          es: "Reglas de completitud, duplicados y conciliación, con umbrales que disparan una revisión, y el recorrido de cada cifra hasta su fuente."
+          en: "Completeness, duplicate and reconciliation rules, with thresholds that trigger a review, and the path of every figure back to its source."
+      - n: 4
+        etiqueta: { es: "Acceso por propósito", en: "Purpose-based access" }
+        tipo: control
+        col: 3
+        fila: 0
+        detalle:
+          es: "No solo quién puede ver un dato, sino para qué y con qué detalle: el mismo dato agregado para una decisión de gestión no se consulta identificado para otra cosa."
+          en: "Not only who may see a piece of data, but what for and at what level of detail: the same data seen in aggregate for a management decision is not queried in identified form for anything else."
+      - n: 5
+        etiqueta: { es: "Datos personales protegidos", en: "Protected personal data" }
+        tipo: control
+        col: 4
+        fila: 0
+        detalle:
+          es: "Anonimización cuando el análisis no necesita identificar a nadie, finalidad autorizada y trazabilidad de cada consulta."
+          en: "Anonymization when the analysis does not need to identify anyone, an authorized purpose and traceability of every query."
+      - n: 6
+        etiqueta: { es: "Sistema de IA", en: "AI system" }
+        tipo: actor
+        col: 5
+        fila: 0
+        detalle:
+          es: "Un modelo, una aplicación generativa o un agente: interpreta, recomienda o actúa con los datos que recibe."
+          en: "A model, a generative application or an agent: it interprets, recommends or acts on the data it receives."
+      - n: 7
+        etiqueta: { es: "Inventario de sistemas", en: "AI system inventory" }
+        tipo: dato
+        col: 5
+        fila: 1
+        detalle:
+          es: "Propósito, responsable, proveedor, fuentes, usuarios, nivel de autonomía, estado y riesgos principales de cada sistema."
+          en: "Purpose, owner, vendor, sources, users, level of autonomy, status and main risks of each system."
+      - n: 8
+        etiqueta: { es: "Evaluación de impacto", en: "Impact assessment" }
+        tipo: control
+        col: 4
+        fila: 1
+        detalle:
+          es: "Qué puede hacerle el sistema a las personas, a los grupos y a los procesos, más allá de su rendimiento técnico."
+          en: "What the system can do to people, groups and processes, beyond its technical performance."
+      - n: 9
+        etiqueta: { es: "Autonomía según el riesgo", en: "Autonomy by risk" }
+        tipo: control
+        col: 3
+        fila: 1
+        detalle:
+          es: "Recuperar, redactar, recomendar o ejecutar: solo actúa sin aprobación lo que se puede verificar y revertir."
+          en: "Retrieve, draft, recommend or execute: only what can be verified and reversed acts without approval."
+      - n: 10
+        etiqueta: { es: "Trazas y vigilancia", en: "Traces and monitoring" }
+        tipo: control
+        col: 2
+        fila: 1
+        detalle:
+          es: "Qué hizo cada sistema, con qué datos, para quién y con qué resultado; una excepción que no aparece es un control que no funciona."
+          en: "What each system did, with which data, for whom and with what result; an exception that does not show up is a control that does not work."
+      - n: 11
+        etiqueta: { es: "Dirección y roles", en: "Leadership and roles" }
+        tipo: humano
+        col: 0
+        fila: 2
+        detalle:
+          es: "Prioridades, recursos y niveles de riesgo aceptables; el negocio, datos, seguridad, riesgo, cumplimiento y tecnología con su parte."
+          en: "Priorities, resources and acceptable risk levels; the business, data, security, risk, compliance and technology each with their share."
+      - n: 12
+        etiqueta: { es: "Sistema de gestión de IA", en: "AI management system" }
+        tipo: control
+        col: 1
+        fila: 2
+        detalle:
+          es: "Contexto, políticas, objetivos, controles, evaluación y mejora continua: la IA como capacidad que se gestiona y se demuestra."
+          en: "Context, policies, objectives, controls, evaluation and continual improvement: AI as a capability that is managed and proven."
+      - n: 13
+        etiqueta: { es: "Proveedores y modelos", en: "Vendors and models" }
+        tipo: externo
+        col: 5
+        fila: 2
+        detalle:
+          es: "Plataformas, modelos y agentes de terceros: entran al mismo inventario y su cambio pide una nueva evaluación."
+          en: "Third-party platforms, models and agents: they enter the same inventory and a change on their side calls for a new assessment."
+    aristas:
+      - { de: 1, a: 2, etiqueta: { es: "define", en: "defines" } }
+      - { de: 2, a: 3, etiqueta: { es: "se verifica", en: "is checked" } }
+      - { de: 3, a: 4, etiqueta: { es: "habilita", en: "enables" } }
+      - { de: 4, a: 5, etiqueta: { es: "restringe", en: "restricts" } }
+      - { de: 5, a: 6, etiqueta: { es: "alimenta", en: "feeds" } }
+      - { de: 6, a: 7, etiqueta: { es: "se registra", en: "is registered" } }
+      - { de: 13, a: 7, etiqueta: { es: "también", en: "also" } }
+      - { de: 7, a: 8, etiqueta: { es: "se evalúa", en: "is assessed" } }
+      - { de: 8, a: 9, etiqueta: { es: "fija", en: "sets" } }
+      - { de: 9, a: 10, etiqueta: { es: "se vigila", en: "is monitored" } }
+      - { de: 10, a: 12, etiqueta: { es: "evidencia", en: "evidence" } }
+      - { de: 11, a: 12, etiqueta: { es: "responde por", en: "answers for" } }
+      - { de: 11, a: 1, etiqueta: { es: "designa", en: "appoints" } }
+
+  # ─── 3 · Las fases ──────────────────────────────────────────────────────────
+  - n: 3
+    fases:
+      - nombre:
+          es: "Gobernar el significado: definiciones, dueños y linaje"
+          en: "Govern meaning: definitions, owners and lineage"
+        entradas:
+          - es: "Los indicadores y los datos de los que dependen las decisiones."
+            en: "The indicators and data that decisions depend on."
+          - es: "Las versiones distintas de una misma cifra que circulan entre áreas."
+            en: "The different versions of the same figure circulating between areas."
+        actividades:
+          - es: "Acordar cada definición con el responsable del negocio, no solo con el equipo técnico."
+            en: "Agree each definition with the business owner, not only with the technical team."
+          - es: "Centralizar la regla de cálculo en un modelo semántico que todos los productos reutilicen."
+            en: "Centralize the calculation rule in a semantic model that every product reuses."
+          - es: "Dejar el recorrido de cada cifra hasta las fuentes y las reglas que la producen."
+            en: "Record the path of every figure back to the sources and rules that produce it."
+        artefactos:
+          - es: "El glosario de definiciones con su dueño."
+            en: "The glossary of definitions with their owner."
+          - es: "El linaje de los indicadores críticos."
+            en: "The lineage of the critical indicators."
+        decide:
+          es: "El dueño del dato en el negocio."
+          en: "The data owner in the business."
+        control:
+          es: "Ningún indicador llega a un producto analítico sin definición, responsable y regla de cálculo única."
+          en: "No indicator reaches an analytics product without a definition, an owner and a single calculation rule."
+        nota:
+          voz: hice
+          texto:
+            es: "En Banco Pichincha cada indicador tenía una definición, un responsable y una regla de cálculo única, centralizada en el modelo semántico y reutilizada por todos los productos; la lección fue que la seguridad protege el acceso, y la semántica y el linaje, la interpretación."
+            en: "At Banco Pichincha each indicator had one definition, one owner and one calculation rule, centralized in the semantic model and reused by every product; the lesson was that security protects access, and semantics and lineage protect interpretation."
+          corpus: [gobierno-de-datos-y-de-ia]
+      - nombre:
+          es: "Controlar el acceso por propósito y proteger los datos personales"
+          en: "Control purpose-based access and protect personal data"
+        entradas:
+          - es: "Los datos que describen personas y la ley de datos personales que aplica."
+            en: "The data that describes people and the personal data law that applies."
+          - es: "Las decisiones que necesitan cada dato y con qué nivel de detalle."
+            en: "The decisions that need each piece of data and at what level of detail."
+        actividades:
+          - es: "Escribir las políticas de acceso sobre la finalidad, no sobre el cargo."
+            en: "Write access policies around purpose, not around job title."
+          - es: "Anonimizar cuando el análisis no necesita identificar a nadie."
+            en: "Anonymize when the analysis does not need to identify anyone."
+          - es: "Registrar quién consultó qué y para qué."
+            en: "Record who queried what and what for."
+        artefactos:
+          - es: "Las políticas de acceso por propósito."
+            en: "The purpose-based access policies."
+          - es: "El registro de consultas a datos personales."
+            en: "The log of queries to personal data."
+        decide:
+          es: "El dueño del dato, con el responsable de protección de datos."
+          en: "The data owner, with whoever is responsible for data protection."
+        control:
+          es: "Ningún dato personal se usa para un propósito distinto del autorizado, aunque técnicamente se pueda acceder a él."
+          en: "No personal data is used for a purpose other than the authorized one, even if it can technically be reached."
+        nota:
+          voz: hice
+          texto:
+            es: "En la Fundación CTIC, desde 2025, el trabajo con datos de personas sigue tres reglas: anonimización cuando el análisis no necesita identificar a nadie, acceso por propósito y no por cargo, y trazabilidad de quién consultó qué y para qué."
+            en: "At Fundación CTIC, since 2025, work with data about people follows three rules: anonymization when the analysis does not need to identify anyone, access by purpose rather than by job title, and traceability of who queried what and what for."
+          corpus: [gobierno-de-datos-y-de-ia]
+      - nombre:
+          es: "Inventariar los sistemas de IA y evaluar su impacto"
+          en: "Inventory the AI systems and assess their impact"
+        entradas:
+          - es: "Las capacidades de IA que la organización desarrolla, adquiere o usa."
+            en: "The AI capabilities the organization develops, acquires or uses."
+          - es: "Las personas, los grupos y los procesos que cada sistema puede afectar."
+            en: "The people, groups and processes each system can affect."
+        actividades:
+          - es: "Registrar cada sistema con su propósito, responsable, proveedor, fuentes, usuarios, nivel de autonomía, estado y riesgos."
+            en: "Register each system with its purpose, owner, vendor, sources, users, level of autonomy, status and risks."
+          - es: "Evaluar el impacto del sistema sobre las personas y los procesos, no solo su rendimiento."
+            en: "Assess the system's impact on people and processes, not only its performance."
+          - es: "Fijar los criterios para que un caso de uso avance, con controles proporcionales a su riesgo."
+            en: "Set the criteria for a use case to move forward, with controls proportional to its risk."
+        artefactos:
+          - es: "El inventario de sistemas de IA."
+            en: "The AI system inventory."
+          - es: "La evaluación de impacto de cada sistema."
+            en: "The impact assessment of each system."
+        decide:
+          es: "El responsable del sistema, con riesgo y cumplimiento."
+          en: "The system owner, with risk and compliance."
+        control:
+          es: "Ningún sistema de IA opera sin estar en el inventario y sin su evaluación de impacto."
+          en: "No AI system operates without being in the inventory and without its impact assessment."
+        nota:
+          voz: hice
+          texto:
+            es: "En la Fundación CTIC la estrategia contempla la construcción progresiva de un inventario de sistemas de IA, y la norma pide además evaluar el impacto de cada sistema —la AIIA—."
+            en: "At Fundación CTIC the strategy provides for progressively building an inventory of AI systems, and the standard also calls for assessing the impact of each system —the AIIA—."
+          corpus: [fundacion-ctic]
+      - nombre:
+          es: "Cómo se estructura el sistema de gestión de IA: contexto, roles, riesgos y controles"
+          en: "Structure the AI management system: context, roles, risks and controls"
+        entradas:
+          - es: "Por qué la organización usa o podría usar IA y qué partes interesadas se ven afectadas."
+            en: "Why the organization uses or could use AI and which stakeholders are affected."
+          - es: "Las obligaciones jurídicas, institucionales y éticas que aplican."
+            en: "The legal, institutional and ethical obligations that apply."
+        actividades:
+          - es: "Asignar roles, responsabilidades y autoridades: no toda decisión de IA es del equipo técnico."
+            en: "Assign roles, responsibilities and authorities: not every AI decision belongs to the technical team."
+          - es: "Convertir la norma de gestión en instrumentos: políticas, procedimientos, matrices, criterios de evaluación y seguimiento."
+            en: "Turn the management standard into instruments: policies, procedures, matrices, evaluation criteria and follow-up mechanisms."
+          - es: "Medir el avance de cada instrumento por su definición, revisión, aprobación y aplicación, no por su existencia."
+            en: "Measure each instrument's progress by its definition, review, approval and application, not by its existence."
+        artefactos:
+          - es: "El sistema de gestión de IA y sus instrumentos."
+            en: "The AI management system and its instruments."
+          - es: "La relación entre cada requisito, el instrumento que lo cubre y la evidencia que produce."
+            en: "The link between each requirement, the instrument that covers it and the evidence it produces."
+        decide:
+          es: "La alta dirección, con los responsables de negocio, datos, riesgo y tecnología."
+          en: "Senior leadership, with the business, data, risk and technology owners."
+        control:
+          es: "Ningún instrumento se da por terminado sin la evidencia de que se aplica."
+          en: "No instrument is considered finished without evidence that it is applied."
+        nota:
+          voz: hice
+          texto:
+            es: "En la Fundación CTIC la estrategia institucional de IA se estructura siguiendo los principios y requisitos de UNE-ISO/IEC 42001:2025; el sistema de gestión comprende más de 20 instrumentos, de los cuales un tercio están terminados y el resto en construcción, y no se afirma que la institución esté certificada."
+            en: "At Fundación CTIC the institutional AI strategy is structured following the principles and requirements of UNE-ISO/IEC 42001:2025; the management system comprises more than 20 instruments, a third of them finished and the rest under construction, and the institution is not claimed to be certified."
+          corpus: [gobierno-de-datos-y-de-ia]
+      - nombre:
+          es: "Vigilar el comportamiento y demostrar que los controles funcionan"
+          en: "Monitor behavior and prove that the controls work"
+        entradas:
+          - es: "Los sistemas en operación y los controles que se declararon."
+            en: "The systems in operation and the controls that were declared."
+          - es: "Los cambios de fuentes, de modelos y de proveedores."
+            en: "Changes in sources, models and vendors."
+        actividades:
+          - es: "Registrar el evento de cada ejecución: solicitud, respuesta, estado, costo y resultado."
+            en: "Record the event of each run: request, response, status, cost and result."
+          - es: "Demostrar cada control en rojo frente a la condición que debe detectar."
+            en: "Show each control failing against the condition it must detect."
+          - es: "Revisar los controles cuando cambian el sistema, sus fuentes o su proveedor."
+            en: "Review the controls when the system, its sources or its vendor change."
+        artefactos:
+          - es: "Las trazas de ejecución."
+            en: "The execution traces."
+          - es: "La evidencia de que cada control detecta lo que debe."
+            en: "The evidence that each control detects what it must."
+        decide:
+          es: "Quien administra el sistema de gestión, con el responsable de cada sistema."
+          en: "Whoever runs the management system, with each system's owner."
+        control:
+          es: "Un control que nunca se vio detectar su desviación no cuenta como implementado."
+          en: "A control that was never seen detecting its deviation does not count as implemented."
+        nota:
+          voz: hice
+          texto:
+            es: "En Vesting el monitoreo en tiempo real de hasta 23 agentes a la vez, sobre un inventario de 27, registraba qué hizo cada agente, para qué cliente, con qué costo y con qué resultado; una excepción que no aparecía en el monitoreo era un control que no funcionaba."
+            en: "At Vesting, real-time monitoring of up to 23 agents at once, out of an inventory of 27, recorded what each agent did, for which client, at what cost and with what result; an exception that did not show up in monitoring was a control that was not working."
+          corpus: [gobierno-de-datos-y-de-ia]
+
+  # ─── 4 · Las decisiones de diseño ───────────────────────────────────────────
+  - n: 4
+    decisiones:
+      - titulo:
+          es: "Cómo se estructura un sistema de gestión de IA: sobre el gobierno de datos, no al lado"
+          en: "How to structure an AI management system: on top of data governance, not beside it"
+        cuandoSi:
+          es: "Cuando la organización usa o va a usar IA, el sistema de gestión de IA se estructura como continuación del gobierno de datos: los mismos dueños, el mismo linaje y el mismo inventario, ampliados a modelos, agentes y proveedores."
+          en: "When the organization uses or is going to use AI, the AI management system is structured as a continuation of data governance: the same owners, the same lineage and the same inventory, extended to models, agents and vendors."
+        cuandoNo:
+          es: "Cuando se plantea un sistema de gestión de IA como proyecto aparte, con políticas que no se conectan con los datos que el sistema usa."
+          en: "When an AI management system is proposed as a separate project, with policies that do not connect to the data the system uses."
+        porQue:
+          voz: hice
+          texto:
+            es: "En Vesting la identidad, la propiedad, el aislamiento y la trazabilidad de los datos se conservaron desde el ingreso de cada evento, y la estandarización de qué debía registrar cada agente, con qué identidad y en qué formato, hizo posible monitorearlos: uno que no dejaba rastro conforme al estándar no podía monitorearse y no salía a producción."
+            en: "At Vesting the identity, ownership, isolation and traceability of the data were preserved from the ingestion of each event, and the standardization of what each agent had to record, with what identity and in what format, made it possible to monitor them: one that left no trace according to the standard could not be monitored and did not go to production."
+          corpus: [gobierno-de-datos-y-de-ia]
+        nota:
+          voz: campo
+          texto:
+            es: "El Cloud Adoption Framework recomienda asignar el gobierno de los agentes a los mismos responsables del gobierno de la nube, la seguridad y el cumplimiento, y evitar modelos de gobierno paralelos."
+            en: "The Cloud Adoption Framework recommends assigning agent governance to the same leaders responsible for cloud governance, security and compliance, and avoiding parallel governance models."
+          fuentes: [8]
+      - titulo:
+          es: "Acceso por propósito, no por cargo"
+          en: "Access by purpose, not by job title"
+        cuandoSi:
+          es: "Cuando el mismo dato sirve a decisiones distintas o describe personas: la política dice para qué puede usarse y con qué detalle, no solo quién lo ve."
+          en: "When the same data serves different decisions or describes people: the policy says what it may be used for and at what level of detail, not only who sees it."
+        cuandoNo:
+          es: "Cuando el dato no describe personas ni información sensible y un permiso por rol basta para el riesgo que tiene."
+          en: "When the data does not describe people or sensitive information and a role-based permission is enough for the risk it carries."
+        porQue:
+          voz: hice
+          texto:
+            es: "En Vesting el acceso por propósito tomó la forma de un workspace separado de Microsoft Fabric para cada uno de los 12 clientes, con su identidad y su propiedad sobre los datos: ninguna consulta cruzaba esa frontera por accidente."
+            en: "At Vesting purpose-based access took the form of a separate Microsoft Fabric workspace for each of the 12 clients, with its own identity and ownership of the data: no query crossed that boundary by accident."
+          corpus: [gobierno-de-datos-y-de-ia]
+        nota:
+          voz: campo
+          texto:
+            es: "El Cloud Adoption Framework pide conceder a cada agente acceso solo a los datos que su función requiere y que, cuando actúa en nombre de un usuario, herede los permisos de ese usuario."
+            en: "The Cloud Adoption Framework asks that each agent be granted access only to the data its function requires and that, when it acts on behalf of a user, it inherit that user's permissions."
+          fuentes: [8]
+      - titulo:
+          es: "Autonomía proporcional al riesgo"
+          en: "Autonomy proportional to risk"
+        cuandoSi:
+          es: "Cuando el resultado se puede verificar, revertir y mantener dentro de límites claros, una tarea puede ejecutarse sin aprobación previa."
+          en: "When the result can be verified, reversed and kept within clear limits, a task can run without prior approval."
+        cuandoNo:
+          es: "Cuando la acción es de alto impacto o no se puede revertir: el sistema recomienda o redacta, y una persona aprueba."
+          en: "When the action is high-impact or cannot be reversed: the system recommends or drafts, and a person approves."
+        porQue:
+          voz: hice
+          texto:
+            es: "En los 15 agentes de la vitrina, qué hace cada uno, qué límites tiene y qué «nunca» hace está escrito en su ficha."
+            en: "For the 15 agents in the showcase, what each one does, what limits it has and what it «never» does is written in its sheet."
+          corpus: [gobierno-de-datos-y-de-ia]
+        nota:
+          voz: campo
+          texto:
+            es: "OWASP llama agencia excesiva al riesgo de que un sistema con modelo de lenguaje ejecute acciones dañinas por tener funciones, permisos o autonomía de más, y recomienda el mínimo privilegio y la aprobación humana de las acciones de alto impacto."
+            en: "OWASP calls excessive agency the risk that a system built on a language model performs damaging actions because it has too many functions, permissions or too much autonomy, and recommends least privilege and human approval of high-impact actions."
+          fuentes: [9]
+      - titulo:
+          es: "Cómo se evalúa el impacto de un sistema de IA: antes de operar y cada vez que cambia"
+          en: "How to assess the impact of an AI system: before operating and every time it changes"
+        cuandoSi:
+          es: "Cuando un sistema de IA puede afectar a personas, a grupos o a la distribución de responsabilidades: el impacto se evalúa antes de operar y otra vez cuando cambian el modelo, las fuentes o el uso."
+          en: "When an AI system can affect people, groups or the distribution of responsibilities: the impact is assessed before operating and again when the model, the sources or the use change."
+        cuandoNo:
+          es: "Cuando la herramienta no toca datos de personas ni decisiones sobre ellas: basta el análisis de riesgos del caso de uso."
+          en: "When the tool does not touch data about people or decisions about them: the use case's risk analysis is enough."
+        porQue:
+          voz: campo
+          texto:
+            es: "ISO/IEC 42005:2025 orienta cuándo y cómo evaluar el impacto de un sistema de IA sobre las personas y las sociedades, y en qué etapas de su ciclo de vida, y cómo integrar esa evaluación en la gestión de riesgos y en el sistema de gestión de IA."
+            en: "ISO/IEC 42005:2025 gives guidance on when and how to assess an AI system's impact on individuals and societies, and at what stages of its life cycle, and how to integrate that assessment into risk management and the AI management system."
+          fuentes: [5]
+        nota:
+          voz: hice
+          texto:
+            es: "En la Fundación CTIC la evaluación de impacto se plantea porque una solución puede ser técnicamente funcional y, aun así, afectar a determinados grupos o introducir una dependencia que no se había previsto."
+            en: "At Fundación CTIC the impact assessment is raised because a solution can be technically functional and still affect certain groups or introduce a dependency that had not been foreseen."
+          corpus: [fundacion-ctic]
+      - titulo:
+          es: "Gobernar también lo que se compra"
+          en: "Govern what is bought as well"
+        cuandoSi:
+          es: "Cuando la capacidad la aporta un proveedor: se evalúa qué datos usa, dónde se procesan, qué dependencia introduce y cómo se conocerán sus cambios."
+          en: "When the capability comes from a vendor: what data it uses, where it is processed, what dependency it introduces and how its changes will become known are all assessed."
+        cuandoNo:
+          es: "Cuando se supone que comprar la tecnología transfiere la responsabilidad sobre su uso y sus efectos: esa responsabilidad se queda en la organización."
+          en: "When buying the technology is assumed to transfer responsibility for its use and effects: that responsibility stays with the organization."
+        porQue:
+          voz: hice
+          texto:
+            es: "En Cafam, en 2020, la implementación de Oracle WMS Cloud se probó durante meses con 6 personas del proveedor dentro del equipo de 20, y cada diferencia entre el sistema y la operación se resolvió con su responsable."
+            en: "At Cafam, in 2020, the Oracle WMS Cloud implementation was tested for months with 6 vendor people inside the team of 20, and every difference between the system and the operation was resolved with its owner."
+          corpus: [gobierno-de-datos-y-de-ia]
+        nota:
+          voz: campo
+          texto:
+            es: "El Cloud Adoption Framework pide identificar los riesgos de las dependencias externas —datos, modelos, bibliotecas e integraciones de terceros— y fijar políticas para que se ajusten a los estándares de privacidad, seguridad y cumplimiento de la organización."
+            en: "The Cloud Adoption Framework asks to identify the risks of external dependencies —third-party data, models, libraries and integrations— and to set policies so that they meet the organization's privacy, security and compliance standards."
+          fuentes: [7]
+      - titulo:
+          es: "Documentar lo que un auditor pide, sin confundir documento con cumplimiento"
+          en: "Document what an auditor asks for, without mistaking a document for compliance"
+        cuandoSi:
+          es: "Cuando la organización necesita demostrar su sistema: cada requisito con el instrumento que lo cubre, el documento que lo sostiene y la evidencia que produce."
+          en: "When the organization needs to prove its system: every requirement with the instrument that covers it, the document that supports it and the evidence it produces."
+        cuandoNo:
+          es: "Cuando se espera que el uso de servicios de terceros que cumplen la norma vuelva conformes los procesos propios: esos se evalúan por separado."
+          en: "When using third-party services that meet the standard is expected to make one's own processes conformant: those are assessed separately."
+        porQue:
+          voz: hice
+          texto:
+            es: "El Experto ISO 42001 de la vitrina sintetiza los 38 controles del Anexo A y conoce los 24 documentos portadores que un auditor pide en la fase documental; cada afirmación normativa cita apartado y página o declara el vacío."
+            en: "The ISO 42001 Expert in the showcase synthesizes the 38 Annex A controls and knows the 24 supporting documents an auditor asks for in the documentation stage; every normative statement cites clause and page or declares the gap."
+          corpus: [gobierno-de-datos-y-de-ia]
+        nota:
+          voz: campo
+          texto:
+            es: "Microsoft Learn precisa que quien usa servicios con ISO/IEC 42001 sigue siendo responsable de contratar a un evaluador para sus propios controles y procesos."
+            en: "Microsoft Learn notes that whoever uses services covered by ISO/IEC 42001 remains responsible for engaging an assessor for their own controls and processes."
+          fuentes: [4]
+
+  # ─── 5 · Lo innovador en 2026 ───────────────────────────────────────────────
+  - n: 5
+    elementos:
+      - titulo: { es: "El sistema de gestión de IA se estructura como un sistema de gestión", en: "The structure of an AI management system is that of a management system" }
+        queCambia:
+          es: "ISO/IEC 42001 especifica los requisitos de un sistema de gestión de IA y ofrece una forma estructurada de gestionar los riesgos y las oportunidades de la IA."
+          en: "ISO/IEC 42001 specifies the requirements of an AI management system and sets out a structured way to manage the risks and opportunities of AI."
+        fuentes: [4]
+      - titulo: { es: "Los agentes, con registro y dueño", en: "Agents, with a registry and an owner" }
+        queCambia:
+          es: "Cada agente se registra en un inventario único de la organización con su dueño, su propósito, su plataforma y su alcance de acceso, y la organización decide de antemano cómo apagarlo si falla: no se gobierna un agente que no se sabe que existe."
+          en: "Each agent is recorded in a single organizational inventory with its owner, purpose, platform and access scope, and the organization decides in advance how to disable it if it malfunctions: an agent nobody knows exists cannot be governed."
+        fuentes: [8]
+        nota:
+          voz: posicion
+          texto:
+            es: "Un agente sin dueño ni registro no es un riesgo técnico: es un vacío de gobierno."
+            en: "An agent with no owner and no record is not a technical risk: it is a governance gap."
+      - titulo: { es: "La agencia excesiva como riesgo con nombre", en: "Excessive agency as a named risk" }
+        queCambia:
+          es: "El riesgo de un agente deja de ser genérico: tiene tres causas —funciones, permisos o autonomía de más— y controles concretos: mínimo privilegio, aprobación humana de las acciones de alto impacto y registro de la actividad."
+          en: "An agent's risk stops being generic: it has three causes —too many functions, permissions or too much autonomy— and concrete controls: least privilege, human approval of high-impact actions and activity logging."
+        fuentes: [9]
+      - titulo: { es: "La evaluación de impacto, con norma propia", en: "Impact assessment, with its own standard" }
+        queCambia:
+          es: "La evaluación de impacto deja de ser una sección del análisis de riesgos: ISO/IEC 42005:2025 la orienta —cuándo, cómo y en qué etapas del ciclo de vida—, e ISO/IEC 23894:2023 da la guía para integrar la gestión del riesgo propio de la IA en la actividad de la organización."
+          en: "Impact assessment stops being a section of the risk analysis: ISO/IEC 42005:2025 guides it —when, how and at what stages of the life cycle—, and ISO/IEC 23894:2023 gives guidance for integrating the management of AI-specific risk into the organization's activities."
+        fuentes: [5, 6]
+        nota:
+          voz: posicion
+          texto:
+            es: "Un sistema de gestión que nace con el primer caso de uso suele costar menos que uno que llega a auditar lo que ya está en operación."
+            en: "A management system born with the first use case tends to cost less than one that arrives to audit what is already in operation."
+      - titulo: { es: "La IA generativa con su propio perfil de riesgo", en: "Generative AI with its own risk profile" }
+        queCambia:
+          es: "El NIST AI RMF organiza la gestión del riesgo en cuatro funciones —gobernar, mapear, medir y gestionar—, con el gobierno como función transversal, y su perfil de IA generativa ayuda a identificar los riesgos propios de esa tecnología; los dos son de uso voluntario."
+          en: "The NIST AI RMF organizes risk management into four functions —govern, map, measure and manage—, with govern as a cross-cutting function, and its generative AI profile helps identify the risks unique to that technology; both are for voluntary use."
+        fuentes: [2, 3]
+      - titulo: { es: "El calendario del AI Act, después del AI Omnibus", en: "The AI Act timeline, after the AI Omnibus" }
+        queCambia:
+          es: "El AI Act es aplicable en general desde el 2 de agosto de 2026, con excepciones: las prohibiciones y la alfabetización en IA rigen desde el 2 de febrero de 2025 y las obligaciones de los modelos de propósito general desde el 2 de agosto de 2025; tras el AI Omnibus, en vigor desde el 27 de julio de 2026, los sistemas de alto riesgo en áreas sensibles (Anexo III) pasan al 2 de diciembre de 2027 y los integrados en productos regulados, al 2 de agosto de 2028."
+          en: "The AI Act has been generally applicable since August 2, 2026, with exceptions: the prohibitions and AI literacy have applied since February 2, 2025 and the obligations for general-purpose models since August 2, 2025; after the AI Omnibus, in force since July 27, 2026, high-risk systems in sensitive areas (Annex III) move to December 2, 2027 and those embedded in regulated products, to August 2, 2028."
+        fuentes: [1]
+        nota:
+          voz: posicion
+          texto:
+            es: "Un calendario regulatorio que se movió una vez puede moverse otra: la fecha de revisión de la pieza es parte del dato."
+            en: "A regulatory timeline that moved once can move again: the piece's review date is part of the data."
+      - titulo: { es: "Colombia: una política nacional y un regulador de datos que ya hablan de IA", en: "Colombia: a national policy and a data regulator that already address AI" }
+        queCambia:
+          es: "El CONPES 4144, aprobado el 14 de febrero de 2025, es la Política Nacional de Inteligencia Artificial, con acciones hasta 2030 y seis ejes y la gobernanza y la ética como el primero; la Superintendencia de Industria y Comercio publicó en 2024 lineamientos sobre el tratamiento de datos personales en sistemas de inteligencia artificial."
+          en: "CONPES 4144, approved on February 14, 2025, is Colombia's National Artificial Intelligence Policy, with actions through 2030 and six axes and governance and ethics as the first; the Superintendence of Industry and Commerce published guidelines in 2024 on processing personal data in artificial intelligence systems."
+        fuentes: [12, 13]
+        nota:
+          voz: posicion
+          texto:
+            es: "La ley de datos personales ya gobierna la IA que usa datos de personas: no hace falta esperar una ley de IA para cumplirla."
+            en: "Personal data law already governs the AI that uses data about people: there is no need to wait for an AI law to comply with it."
+      - titulo: { es: "Cumplimiento automatizado donde se puede, juicio humano donde no", en: "Automated compliance where possible, human judgment where not" }
+        queCambia:
+          es: "Las políticas de IA se aplican con herramientas donde es posible —plantillas de evaluación para regulaciones de IA, auditoría de las interacciones— y con revisión humana donde la automatización no alcanza, con puntos de control en el diseño, las pruebas y la aprobación previa al lanzamiento."
+          en: "AI policies are enforced with tools where possible —assessment templates for AI regulations, auditing of interactions— and with human review where automation falls short, with checkpoints at design, testing and pre-launch approval."
+        fuentes: [7, 10, 11]
+
+  # ─── 6 · Modos de falla y cómo anticiparlos ─────────────────────────────────
+  - n: 6
+    fallas:
+      - falla: { es: "Políticas sin mecanismo", en: "Policies without a mechanism" }
+        senal: { es: "Una política exige trazabilidad y ningún sistema registra el evento que la demostraría.", en: "A policy demands traceability and no system records the event that would prove it." }
+        control: { es: "Cada principio con su control, cada control con su evidencia y cada evidencia con un responsable.", en: "Every principle with its control, every control with its evidence and every piece of evidence with an owner." }
+      - falla: { es: "Agentes sin dueño ni registro", en: "Agents with no owner and no record" }
+        senal: { es: "Nadie sabe cuántos agentes hay, qué pueden hacer ni quién los apaga.", en: "Nobody knows how many agents there are, what they can do or who shuts them down." }
+        control: { es: "Inventario obligatorio antes de operar, con dueño y alcance de acceso.", en: "A mandatory inventory before operating, with an owner and an access scope." }
+      - falla: { es: "Agencia excesiva", en: "Excessive agency" }
+        senal: { es: "Un agente con herramientas o permisos que su función no usa.", en: "An agent with tools or permissions its function does not use." }
+        control: { es: "Mínimo privilegio y aprobación humana de las acciones de alto impacto.", en: "Least privilege and human approval of high-impact actions." }
+      - falla: { es: "Un indicador que cambia en silencio", en: "An indicator that changes silently" }
+        senal: { es: "El mismo nombre con otra regla de cálculo en otro producto.", en: "The same name with a different calculation rule in another product." }
+        control: { es: "Definición única con dueño, y aviso a los productos y decisiones que dependen de ella.", en: "A single definition with an owner, and notice to the products and decisions that depend on it." }
+      - falla: { es: "Datos personales usados para otro propósito", en: "Personal data used for another purpose" }
+        senal: { es: "Un reporte con personas identificadas donde bastaba un agregado.", en: "A report with identified people where an aggregate was enough." }
+        control: { es: "Anonimización por defecto y acceso escrito sobre la finalidad.", en: "Anonymization by default and access written around purpose." }
+      - falla: { es: "Cumplimiento heredado del proveedor", en: "Compliance inherited from the vendor" }
+        senal: { es: "Se presenta como propio el cumplimiento de un servicio de terceros.", en: "A third-party service's compliance is presented as one's own." }
+        control: { es: "Los controles y procesos propios se evalúan por separado, con su evidencia.", en: "One's own controls and processes are assessed separately, with their evidence." }
+      - falla: { es: "Un control que nunca falló", en: "A control that never failed" }
+        senal: { es: "Siempre en verde, y nadie lo ha visto detectar la desviación para la que existe.", en: "Always green, and nobody has seen it detect the deviation it exists for." }
+        control: { es: "Cada control se demuestra en rojo frente a la condición que debe detectar.", en: "Every control is shown failing against the condition it must detect." }
+      - falla: { es: "El proveedor cambia sin aviso", en: "The vendor changes without notice" }
+        senal: { es: "El comportamiento cambia sin que la organización haya cambiado nada.", en: "Behavior changes without the organization having changed anything." }
+        control: { es: "Vigilancia de los cambios del proveedor y nueva evaluación cuando cambian el modelo o sus condiciones.", en: "Monitoring of vendor changes and a new assessment when the model or its terms change." }
+
+  # ─── 7 · Métricas y controles ───────────────────────────────────────────────
+  - n: 7
+    metricas:
+      - metrica: { es: "Sistemas de IA en el inventario", en: "AI systems in the inventory" }
+        umbral: { es: "Todos, propios y de terceros, antes de operar.", en: "All of them, in-house and third-party, before operating." }
+        aprueba: { es: "Quien administra el sistema de gestión.", en: "Whoever runs the management system." }
+      - metrica: { es: "Sistemas con evaluación de impacto vigente", en: "Systems with a current impact assessment" }
+        umbral: { es: "Todos los que tocan personas o decisiones sobre ellas.", en: "All of those that touch people or decisions about them." }
+        aprueba: { es: "El responsable del sistema, con riesgo y cumplimiento.", en: "The system owner, with risk and compliance." }
+      - metrica: { es: "Acciones de alto impacto con aprobación humana", en: "High-impact actions with human approval" }
+        umbral: { es: "Todas.", en: "All of them." }
+        aprueba: { es: "El dueño del proceso.", en: "The process owner." }
+      - metrica: { es: "Indicadores con definición y dueño", en: "Indicators with a definition and an owner" }
+        umbral: { es: "Todos los que llegan a un producto analítico.", en: "All of those that reach an analytics product." }
+        aprueba: { es: "El dueño del dato en el negocio.", en: "The data owner in the business." }
+      - metrica: { es: "Consultas a datos personales con propósito registrado", en: "Queries to personal data with a recorded purpose" }
+        umbral: { es: "Todas.", en: "All of them." }
+        aprueba: { es: "El responsable de protección de datos.", en: "Whoever is responsible for data protection." }
+      - metrica: { es: "Controles demostrados en rojo", en: "Controls shown failing" }
+        umbral: { es: "Todos los que se declaran implementados.", en: "All of those declared as implemented." }
+        aprueba: { es: "Quien audita el sistema de gestión.", en: "Whoever audits the management system." }
+      - metrica: { es: "Instrumentos con evidencia de aplicación", en: "Instruments with evidence of application" }
+        umbral: { es: "Cada uno, no solo su existencia.", en: "Each one, not just its existence." }
+        aprueba: { es: "La alta dirección, en la revisión del sistema.", en: "Senior leadership, in the system review." }
+
+  # ─── 8 · Evidencia en proyectos ─────────────────────────────────────────────
+  - n: 8
+    evidencia:
+      - nombre: { es: "Banco Pichincha: el gobierno del significado", en: "Banco Pichincha: governing meaning" }
+        nivel: uso-real
+        texto:
+          es: "Entre marzo y julio de 2023, en Banco Pichincha, se co-lideró una iniciativa de gobierno de datos: cada indicador tenía una definición, un responsable y una regla de cálculo única, centralizada en el modelo semántico, y el programa de formación a 12 profesionales funcionó también como instrumento de gobierno."
+          en: "Between March and July 2023, at Banco Pichincha, a data governance initiative was co-led: each indicator had one definition, one owner and one calculation rule, centralized in the semantic model, and the training program for 12 professionals also worked as a governance instrument."
+        corpus: [gobierno-de-datos-y-de-ia]
+        href: /proyectos/banco-pichincha
+      - nombre: { es: "Vesting: gobernanza desde el diseño para 12 clientes", en: "Vesting: governance by design for 12 clients" }
+        nivel: uso-real
+        texto:
+          es: "Entre agosto de 2023 y enero de 2025, en Vesting, cada uno de los 12 clientes tuvo su workspace separado en Microsoft Fabric, con su identidad y su propiedad sobre los datos, y el monitoreo en tiempo real vigilaba hasta 23 agentes a la vez, sobre un inventario de 27."
+          en: "Between August 2023 and January 2025, at Vesting, each of the 12 clients had its own Microsoft Fabric workspace, with its identity and ownership of the data, and real-time monitoring watched up to 23 agents at once, out of an inventory of 27."
+        corpus: [gobierno-de-datos-y-de-ia]
+        href: /proyectos/vesting
+      - nombre: { es: "Fundación CTIC: calidad de datos y datos personales en salud", en: "Fundación CTIC: data quality and personal data in healthcare" }
+        nivel: uso-real
+        texto:
+          es: "Desde marzo de 2025, en la Fundación CTIC, las reglas de calidad se diseñan desde el proceso que produce cada dato —completitud, duplicados, conciliación entre fuentes y umbrales que disparan una revisión— y los datos de personas se tratan con anonimización, acceso por propósito y trazabilidad, bajo el habeas data y la Ley 1581."
+          en: "Since March 2025, at Fundación CTIC, quality rules are designed from the process that produces each piece of data —completeness, duplicates, reconciliation between sources and thresholds that trigger a review— and data about people is handled with anonymization, purpose-based access and traceability, under habeas data and Law 1581."
+        corpus: [gobierno-de-datos-y-de-ia]
+        href: /proyectos/fundacion-ctic
+      - nombre: { es: "Fundación CTIC: el sistema de gestión de IA bajo UNE-ISO/IEC 42001:2025", en: "Fundación CTIC: the AI management system under UNE-ISO/IEC 42001:2025" }
+        nivel: en-construccion
+        texto:
+          es: "La estrategia institucional de IA se estructura siguiendo los principios y requisitos de UNE-ISO/IEC 42001:2025, con más de 20 instrumentos —políticas, procedimientos, matrices, criterios de evaluación y mecanismos de seguimiento—, de los cuales un tercio están terminados y el resto en construcción; no se afirma que la institución esté certificada."
+          en: "The institutional AI strategy is structured following the principles and requirements of UNE-ISO/IEC 42001:2025, with more than 20 instruments —policies, procedures, matrices, evaluation criteria and follow-up mechanisms—, a third of them finished and the rest under construction; the institution is not claimed to be certified."
+        corpus: [gobierno-de-datos-y-de-ia, fundacion-ctic]
+        href: /proyectos/fundacion-ctic
+      - nombre: { es: "El Experto ISO 42001: la norma con apartado y página", en: "The ISO 42001 Expert: the standard with clause and page" }
+        nivel: uso-real
+        texto:
+          es: "Agente de la vitrina con los 38 controles del Anexo A y los 24 documentos portadores que pide un auditor; cada afirmación normativa cita apartado y página o declara el vacío, y estampa la fecha en que se verificó la fuente. Con él se revisan los instrumentos del sistema de gestión contra la norma, pero no decide si uno está terminado ni sustituye una auditoría."
+          en: "A showcase agent with the 38 Annex A controls and the 24 supporting documents an auditor asks for; every normative statement cites clause and page or declares the gap, and stamps the date on which the source was verified. The management system's instruments are reviewed against the standard with it, but it does not decide whether one is finished nor does it replace an audit."
+        corpus: [gobierno-de-datos-y-de-ia]
+        href: /vitrina/agentes/experto-iso42001
+      - nombre: { es: "Ceinfes: el acceso como parte del diseño", en: "Ceinfes: access as part of the design" }
+        nivel: uso-real
+        texto:
+          es: "En 2018, con resultados de estudiantes de más de 100 colegios, quién consultaba qué y para qué se definió antes de construir el reporte: el permiso fue parte del diseño del proceso, no un trámite posterior."
+          en: "In 2018, with results from students at more than 100 schools, who queried what and what for was defined before building the report: the permission was part of the process design, not an afterthought."
+        corpus: [ceinfes]
+        href: /proyectos/ceinfes
+      - nombre: { es: "La vitrina: la autonomía escrita en cada ficha", en: "The showcase: autonomy written in each sheet" }
+        nivel: uso-real
+        texto:
+          es: "En los 15 agentes de la vitrina, qué hace cada uno, qué límites tiene y qué «nunca» hace está escrito en su ficha técnica."
+          en: "For the 15 agents in the showcase, what each one does, what limits it has and what it «never» does is written in its technical sheet."
+        corpus: [gobierno-de-datos-y-de-ia]
+        href: /vitrina/agentes
+
+  # ─── 9 · Límites y alcance ──────────────────────────────────────────────────
+  - n: 9
+    limites:
+      - voz: hice
+        texto:
+          es: "En la Fundación CTIC el sistema de gestión de IA sigue en un proceso progresivo de estructuración y consolidación, con un tercio de sus instrumentos terminados; sus cifras se publican aproximadas y no se afirma ninguna certificación."
+          en: "At Fundación CTIC the AI management system is still in a progressive process of structuring and consolidation, with a third of its instruments finished; its figures are published as approximations and no certification is claimed."
+        corpus: [fundacion-ctic]
+      - voz: hice
+        texto:
+          es: "Lo que se publica de la Fundación CTIC va agregado: ningún proceso, indicador ni persona, y ningún dato de paciente."
+          en: "What is published about Fundación CTIC is aggregated: no process, indicator or person, and no patient data."
+        corpus: [gobierno-de-datos-y-de-ia]
+      - voz: hice
+        texto:
+          es: "El Experto ISO 42001 apoya la revisión de los instrumentos, pero no decide si uno está terminado: esa decisión sigue siendo humana."
+          en: "The ISO 42001 Expert supports the review of the instruments, but it does not decide whether one is finished: that decision remains human."
+        corpus: [gobierno-de-datos-y-de-ia]
+      - voz: hice
+        texto:
+          es: "La norma de gestión no reemplaza la ley: ISO/IEC 42001 estructura el sistema y la legislación colombiana —habeas data y Ley 1581— fija lo que puede tratarse; el NIST AI RMF y el AI Act aparecen aquí como mapa del campo, no como experiencia."
+          en: "The management standard does not replace the law: ISO/IEC 42001 structures the system and Colombian legislation —habeas data and Law 1581— sets what may be processed; the NIST AI RMF and the AI Act appear here as a map of the field, not as experience."
+        corpus: [gobierno-de-datos-y-de-ia]
+      - voz: hice
+        texto:
+          es: "Microsoft Purview figura como prototipo: lo que la pieza dice de Purview es estado del campo, no experiencia."
+          en: "Microsoft Purview is listed as a prototype: what the piece says about Purview is state of the field, not experience."
+        corpus: [plataforma-y-despliegue]
+      - voz: posicion
+        texto:
+          es: "Lo que conviene hacer distinto hoy: abrir el inventario de sistemas de IA el mismo día del primer piloto, no cuando ya hay varios en operación."
+          en: "What is worth doing differently today: open the AI system inventory on the day of the first pilot, not when several are already in operation."
+      - voz: posicion
+        texto:
+          es: "Un gobierno que no puede demostrar sus controles es una promesa, no un sistema."
+          en: "A governance that cannot prove its controls is a promise, not a system."
+
+  # ─── 10 · Fuentes y fecha de revisión ───────────────────────────────────────
+  - n: 10
+    revisado: "2026-10-20"
+    fuentes:
+      - id: 1
+        titulo: "AI Act"
+        editor: "European Commission — Shaping Europe's digital future"
+        fecha: "2026-10-19"
+        url: "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai"
+      - id: 2
+        titulo: "Artificial Intelligence Risk Management Framework (AI RMF 1.0)"
+        editor: "NIST"
+        fecha: "2023-01-26"
+        url: "https://doi.org/10.6028/NIST.AI.100-1"
+      - id: 3
+        titulo: "Artificial Intelligence Risk Management Framework: Generative Artificial Intelligence Profile (NIST AI 600-1)"
+        editor: "NIST"
+        fecha: "2024-07-26"
+        url: "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence"
+      - id: 4
+        titulo: "ISO/IEC 42001:2023 Artificial Intelligence Management System Standards"
+        editor: "Microsoft Learn"
+        fecha: "2026-03-11"
+        url: "https://learn.microsoft.com/en-us/compliance/regulatory/offering-iso-42001"
+      - id: 5
+        titulo: "ISO/IEC 42005:2025 Information technology - Artificial intelligence (AI) - AI system impact assessment"
+        editor: "IEC Webstore (ISO/IEC JTC 1/SC 42)"
+        fecha: "2025-05-28"
+        url: "https://webstore.iec.ch/en/publication/107659"
+      - id: 6
+        titulo: "ISO/IEC 23894:2023 Information technology - Artificial intelligence - Guidance on risk management"
+        editor: "IEC Webstore (ISO/IEC JTC 1/SC 42)"
+        fecha: "2023-02-06"
+        url: "https://webstore.iec.ch/en/publication/82914"
+      - id: 7
+        titulo: "Govern AI - Guidance to set up your organization's AI governance process"
+        editor: "Microsoft Learn"
+        fecha: "2025-07-01"
+        url: "https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ai/govern"
+      - id: 8
+        titulo: "Govern and secure AI agents across the organization"
+        editor: "Microsoft Learn"
+        fecha: "2026-04-09"
+        url: "https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ai-agents/governance-security-across-organization"
+      - id: 9
+        titulo: "LLM06:2025 Excessive Agency (OWASP Top 10 for LLM Applications 2025)"
+        editor: "OWASP GenAI Security Project"
+        fecha: "2024-11-17"
+        url: "https://genai.owasp.org/llmrisk/llm062025-excessive-agency/"
+      - id: 10
+        titulo: "Microsoft Purview data security and compliance protections for Microsoft 365 Copilot and other generative AI apps"
+        editor: "Microsoft Learn"
+        fecha: "2026-05-27"
+        url: "https://learn.microsoft.com/en-us/purview/ai-microsoft-purview"
+      - id: 11
+        titulo: "Responsible AI Policies"
+        editor: "Microsoft Learn"
+        fecha: "2025-06-25"
+        url: "https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ai/responsible-ai-policies"
+      - id: 12
+        titulo: "CONPES 4144: La hoja de ruta de Colombia en Inteligencia Artificial para los retos actuales y la transformación futura"
+        editor: "Departamento Nacional de Planeación (DNP)"
+        fecha: "2025-05-16"
+        url: "https://www.dnp.gov.co/publicaciones/Planeacion/Paginas/conpes-4144-hoja-de-ruta-colombia-inteligencia-artificial-retos-actuales-transformacion-futura.aspx"
+      - id: 13
+        titulo: "Circular Externa 2 de 2024: Lineamientos sobre el Tratamiento de Datos personales en Sistemas de Inteligencia Artificial"
+        editor: "Superintendencia de Industria y Comercio (SIC)"
+        fecha: "2024-08-21"
+        url: "https://sedeelectronica.sic.gov.co/transparencia/normativa/circular-externa-2-de-2024-de-la-superintendencia-de-industria-y-comercio-lineamientos-sobre-el-tratamiento-de-datos"

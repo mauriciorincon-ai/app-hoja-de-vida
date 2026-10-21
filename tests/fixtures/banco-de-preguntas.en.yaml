@@ -534,6 +534,39 @@ preguntas:
     espera: [metodo-ia-en-la-organizacion, metodo-bi-que-se-usa, bi-que-se-adopta]
     familia: forma-de-trabajar
 
+  # ── Métodos (S17): the twins of the four T5 questions; same `espera`, same order.
+  # Only the impact question REQUIRES the piece (the owner's decision in F2, after the
+  # rule-29 relay); the other three accept it or its natural home. Measured with the
+  # committed piece (1,895 chunks): impact, T5 3rd (167 against 154 for the 4th); the
+  # management-system question, T5 5th and the row passes through `procesos-y-simulacion`;
+  # ISO and Law 1581 pass through their home documents. None of the 165 earlier rows left the top-4.
+  - pregunta: "What experience does Henry have with ISO/IEC 42001?"
+    espera:
+      [
+        metodo-gobierno-de-ia-y-datos,
+        fundacion-ctic,
+        gobierno-de-datos-y-de-ia,
+        procesos-y-simulacion,
+      ]
+    familia: gobierno
+  - pregunta: "How does Henry structure an AI management system?"
+    espera:
+      [
+        metodo-gobierno-de-ia-y-datos,
+        fundacion-ctic,
+        gobierno-de-datos-y-de-ia,
+        procesos-y-simulacion,
+        origenes,
+      ]
+    familia: gobierno
+  - pregunta: "How does Henry apply Law 1581 in analytics?"
+    espera:
+      [metodo-gobierno-de-ia-y-datos, gobierno-de-datos-y-de-ia, fundacion-ctic]
+    familia: gobierno
+  - pregunta: "How does Henry assess the impact of an AI system?"
+    espera: [metodo-gobierno-de-ia-y-datos]
+    familia: gobierno
+
 ajenas:
   - pregunta: "tell me a joke about cats"
     guardrail: bloquea
