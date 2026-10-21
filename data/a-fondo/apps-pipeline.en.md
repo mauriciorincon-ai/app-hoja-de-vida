@@ -320,7 +320,7 @@ Three questions are asked of every gate before accepting it. The first: did you 
 
 In artificial intelligence components, the rule takes on greater importance because an output can have a convincing form and be incorrect from a functional point of view. It is not enough to check that the agent answers. It is necessary to design scenarios in which it must recognize insufficient information, refrain from claiming something without evidence, handle an unavailable tool or hand over the decision when the level of uncertainty exceeds its limits.
 
-I also apply this logic to information retrieval mechanisms. I do not consider it sufficient to show that an answer includes citations. I must verify that the retrieval answers the question —with 77 questions of my own and 165 from outside running on every change of this site—, that each citation leads to a destination that exists and that the system can declare when the available evidence is not sufficient.
+I also apply this logic to information retrieval mechanisms. I do not consider it sufficient to show that an answer includes citations. I must verify that the retrieval answers the question —with 77 questions of my own and 169 from outside running on every change of this site—, that each citation leads to a destination that exists and that the system can declare when the available evidence is not sufficient.
 
 ## This very page is also an application
 
