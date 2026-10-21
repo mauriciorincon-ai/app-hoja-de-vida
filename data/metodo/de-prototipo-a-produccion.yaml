@@ -600,7 +600,7 @@ bloques:
           en: "The half of MLOps that is about taking models to production and keeping them there is done: predictive models at Banco Pichincha and TransMilenio, agent monitoring at Vesting and public applications with continuous integration and automatic deployment, operated by the author."
         corpus: [plataforma-y-despliegue]
 
-  # ─── 9 · Lo que haría distinto y lo que no he hecho ─────────────────────────
+  # ─── 9 · Límites y alcance ──────────────────────────────────────────────────
   - n: 9
     limites:
       - voz: hice

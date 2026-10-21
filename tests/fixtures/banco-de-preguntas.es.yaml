@@ -637,6 +637,26 @@ preguntas:
     espera: [agentes-constructor-tableros-powerbi, los-tableros, metodo-bi-que-se-usa]
     familia: bi-y-analitica
 
+  # ─────────────────────────────────────────────────────────────────────
+  # Métodos (S16): las tres preguntas de T1. Las dos primeras exigen la PIEZA
+  # (`fundacion-ctic`, `lo-que-busco` y `vesting` ya contestan algo de cada una, y una
+  # fila que los aceptara no podría fallar). Medidas ANTES de escribirlas con un
+  # borrador, las tres entraron al top-4 en los dos idiomas con el primer texto, sin
+  # ajustar un solo título. La de los criterios es la más ajustada: en español T1 es 2.ª, a
+  # 3 puntos de `lo-que-busco-estrategia-y-gobierno-de-ia` (384 contra 387); en inglés es
+  # 1.ª. La tercera acepta además T7 y `bi-que-se-adopta` (G-Plan 1a: la adopción de una
+  # herramienta también la contestan ellas); hoy T1 es 1.ª en los dos idiomas.
+  # ─────────────────────────────────────────────────────────────────────
+  - pregunta: "¿Cómo llevaría Henry la IA a una empresa que apenas empieza?"
+    espera: [metodo-ia-en-la-organizacion]
+    familia: ia-y-agentes
+  - pregunta: "¿Qué criterios usa Henry para priorizar casos de uso de IA?"
+    espera: [metodo-ia-en-la-organizacion]
+    familia: gobierno
+  - pregunta: "¿Cómo mide Henry la adopción de una herramienta nueva?"
+    espera: [metodo-ia-en-la-organizacion, metodo-bi-que-se-usa, bi-que-se-adopta]
+    familia: forma-de-trabajar
+
 # Preguntas AJENAS. Cada una declara qué le hace el guardrail de entrada, y hay
 # DOS resultados legítimos —confundirlos sería mentir sobre lo que el guardrail
 # promete (`src/lib/ia/guardrails.ts`)—:

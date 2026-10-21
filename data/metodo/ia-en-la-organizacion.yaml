@@ -1,0 +1,763 @@
+# «MÉTODOS» · T1 — Cómo se debe llevar la IA a una organización (S16, 2026-10-19; voz impersonal desde el primer commit).
+#
+# Tres voces, separadas por el esquema (src/lib/metodo/schema.ts); en la página: Evidencia · Estado del campo · Criterio.
+#   · voz: hice      → la evidencia: solo lo que dice el corpus del sitio, con el proyecto como sujeto;
+#                      `corpus:` nombra el documento de data/a-fondo/.
+#   · voz: campo     → lo que el campo hace en 2025–2026; `fuentes:` numera la fuente del bloque 10.
+#   · voz: posicion  → el criterio del autor, rotulado como tal; sin fuente ni corpus.
+# Lo que va sin voz (bloques 1, 2, 6, 7 y la base de las fases) es el método mismo. Todo el texto publicado va en voz
+# impersonal —ni primera persona ni «entrevista»—; lo vigila tests/unit/metodo-voz-piezas.test.ts.
+#
+# Investigación del 2026-10-19: documentación oficial (Microsoft Learn: Cloud Adoption Framework para IA, el modelo de
+# madurez y los patrones de adopción de agentes, la hoja de ruta de adopción de Fabric, Well-Architected y la página de
+# cumplimiento de ISO/IEC 42001), solo contenido público servido al navegador, sin credenciales ajenas ni endpoints de
+# terceros; ninguna página leída traía texto dirigido a agentes. La fecha de cada fuente es la que la página publica
+# (`ms.date`). iso.org respondió con un desafío anti-bot («Just a moment…»): no se forzó y la fuente se dejó; la
+# descripción de la norma sale de Microsoft Learn.
+# La evidencia sale de `fundacion-ctic`, `apps-pipeline`, `como-trabajo`, `banco-pichincha`, `transmilenio-cm`, `cafam` e
+# `inglopres`. La fábrica de apps se describe solo con lo que `apps-pipeline` publica; ningún nombre de cliente. En la
+# Fundación CTIC: «estructuración», cifras aproximadas y procesos, no un equipo de personas a cargo. Construir, comprar o
+# componer y el centro de excelencia no están en el corpus: entran como estado del campo y criterio, nunca como evidencia.
+# El bloque 7 no lleva cifras propias. Los títulos de la decisión 1, la decisión 2 y la decisión 6 llevan las palabras de
+# las preguntas del banco, medidas antes de escribirlos.
+
+id: T1
+slug: ia-en-la-organizacion
+nombre:
+  es: "Cómo se debe llevar la IA a una organización"
+  en: "How AI should be brought into an organization"
+bloques:
+  # ─── 1 · El problema ────────────────────────────────────────────────────────
+  - n: 1
+    pregunta:
+      es: "Llevar la IA a una organización que apenas empieza de modo que lo que se prueba llegue a operar, la gente lo adopte y el valor se pueda demostrar más allá del piloto."
+      en: "Bringing AI into an organization that is just starting so that what gets tested reaches operation, people adopt it and its value can be shown beyond the pilot."
+    respuesta:
+      - es: "Se empieza por los problemas de la organización, no por la tecnología disponible: cada oportunidad declara qué problema resuelve, para quién y cómo se reconocerá un buen resultado, y no toda necesidad pide IA."
+        en: "The starting point is the organization's problems, not the technology available: each opportunity states which problem it solves, for whom and how a good result will be recognized, and not every need calls for AI."
+      - es: "Una cartera con criterios comunes decide qué avanza; la validación es progresiva —prueba de valor, piloto, escala— y en cada paso una métrica de negocio puede detener la iniciativa."
+        en: "A portfolio with shared criteria decides what moves forward; validation is progressive —proof of value, pilot, scale— and at each step a business metric can stop the initiative."
+      - es: "El gobierno es la columna del programa y no un trámite final: roles y responsables, riesgos e impacto evaluados desde el diseño, y la adopción medida en usuarios y decisiones, no en accesos."
+        en: "Governance is the backbone of the program, not a final formality: roles and owners, risks and impact assessed from the design, and adoption measured in users and decisions, not in access."
+
+  # ─── 2 · El mapa ────────────────────────────────────────────────────────────
+  - n: 2
+    titulo:
+      es: "Del problema de la organización a la capacidad adoptada y gobernada"
+      en: "From the organization's problem to an adopted, governed capability"
+    resumen:
+      es: "La organización y su problema alimentan una cartera de oportunidades que se filtra con criterios de prioridad. Lo priorizado pasa por una prueba de valor —que también decide si construir, comprar o componer con proveedores y plataformas— y por un piloto con métrica, y solo entonces escala a una capacidad en operación. Esa capacidad llega a personas formadas, su uso real se mide como adopción, y esa evidencia decide escalar, ajustar o detener; lo que se ajusta vuelve a la cartera. Debajo corre el gobierno: la organización designa roles y responsables, que responden por un sistema de gestión de IA; el sistema evalúa riesgos e impacto, y ese análisis condiciona cada decisión de escalar."
+      en: "The organization and its problem feed an opportunity portfolio that is filtered with prioritization criteria. What gets prioritized goes through a proof of value —which also decides whether to build, buy or compose with vendors and platforms— and a pilot with a metric, and only then scales into a capability in operation. That capability reaches trained people, its real use is measured as adoption, and that evidence decides whether to scale, adjust or stop; what gets adjusted goes back to the portfolio. Governance runs underneath: the organization appoints roles and owners, who answer for an AI management system; the system assesses risks and impact, and that analysis conditions every decision to scale."
+    nodos:
+      - n: 1
+        etiqueta: { es: "La organización y su problema", en: "The organization and its problem" }
+        tipo: humano
+        col: 0
+        fila: 0
+        detalle:
+          es: "Quién decide, qué proceso falla y qué resultado se espera: el punto de partida, antes que cualquier herramienta."
+          en: "Who decides, which process falls short and what result is expected: the starting point, before any tool."
+      - n: 2
+        etiqueta: { es: "Cartera de oportunidades", en: "Opportunity portfolio" }
+        tipo: dato
+        col: 1
+        fila: 0
+        detalle:
+          es: "Cada oportunidad escrita como problema, usuarios y resultado esperado, con su responsable."
+          en: "Each opportunity written as a problem, its users and the expected result, with its owner."
+      - n: 3
+        etiqueta: { es: "Criterios de prioridad", en: "Prioritization criteria" }
+        tipo: control
+        col: 2
+        fila: 0
+        detalle:
+          es: "Valor, viabilidad, datos disponibles, riesgo, dependencia de terceros, integración y capacidad de adopción, iguales para toda la cartera."
+          en: "Value, feasibility, available data, risk, third-party dependency, integration and capacity for adoption, the same for the whole portfolio."
+      - n: 4
+        etiqueta: { es: "Prueba de valor", en: "Proof of value" }
+        tipo: control
+        col: 3
+        fila: 0
+        detalle:
+          es: "La hipótesis principal, comprobada con el menor costo y riesgo razonables, y la línea base del indicador fijada antes del piloto."
+          en: "The main hypothesis, tested at the lowest reasonable cost and risk, and the indicator's baseline set before the pilot."
+      - n: 5
+        etiqueta: { es: "Piloto con métrica", en: "Pilot with a metric" }
+        tipo: control
+        col: 4
+        fila: 0
+        detalle:
+          es: "Usuarios reales y un resultado acordado de antemano; si no se alcanza, el piloto se pausa y se revisa."
+          en: "Real users and a result agreed beforehand; if it is not reached, the pilot is paused and reviewed."
+      - n: 6
+        etiqueta: { es: "Capacidad en operación", en: "Capability in operation" }
+        tipo: actor
+        col: 5
+        fila: 0
+        detalle:
+          es: "La solución integrada al proceso, con supervisión, documentación y alguien que responde cuando el resultado no es el esperado."
+          en: "The solution integrated into the process, with oversight, documentation and someone who answers when the result is not the expected one."
+      - n: 7
+        etiqueta: { es: "Personas formadas", en: "Trained people" }
+        tipo: humano
+        col: 5
+        fila: 1
+        detalle:
+          es: "Quienes usan la capacidad aprenden sobre sus propios procesos y productos, no sobre una demostración genérica."
+          en: "Those who use the capability learn on their own processes and products, not on a generic demo."
+      - n: 8
+        etiqueta: { es: "Adopción medida", en: "Measured adoption" }
+        tipo: control
+        col: 4
+        fila: 1
+        detalle:
+          es: "Usuarios con responsabilidad sobre el proceso, uso recurrente y decisiones que se apoyan en la capacidad: uso real, no accesos."
+          en: "Users responsible for the process, recurring use and decisions that rely on the capability: real use, not access."
+      - n: 9
+        etiqueta: { es: "Escalar, ajustar o detener", en: "Scale, adjust or stop" }
+        tipo: control
+        col: 3
+        fila: 1
+        detalle:
+          es: "La evidencia de adopción y de valor decide; detener después de invalidar bien una hipótesis no es un fracaso."
+          en: "The evidence of adoption and value decides; stopping after properly invalidating a hypothesis is not a failure."
+      - n: 10
+        etiqueta: { es: "Roles y responsables", en: "Roles and owners" }
+        tipo: humano
+        col: 0
+        fila: 2
+        detalle:
+          es: "El negocio responde por el propósito y los resultados; datos, seguridad, riesgo, cumplimiento y tecnología intervienen según la iniciativa."
+          en: "The business answers for the purpose and the results; data, security, risk, compliance and technology step in according to the initiative."
+      - n: 11
+        etiqueta: { es: "Sistema de gestión de IA", en: "AI management system" }
+        tipo: control
+        col: 1
+        fila: 2
+        detalle:
+          es: "Políticas, objetivos, procesos, controles y mejora continua: la IA tratada como capacidad que se gestiona, no como suma de proyectos."
+          en: "Policies, objectives, processes, controls and continual improvement: AI treated as a capability that is managed, not as a sum of projects."
+      - n: 12
+        etiqueta: { es: "Riesgos y su impacto", en: "Risks and impact" }
+        tipo: dato
+        col: 2
+        fila: 2
+        detalle:
+          es: "Las consecuencias de una respuesta incorrecta o de una acción no deseada, la dependencia de proveedores y el efecto sobre las personas y los procesos."
+          en: "The consequences of a wrong answer or an unwanted action, vendor dependency and the effect on people and processes."
+      - n: 13
+        etiqueta: { es: "Proveedores y plataformas", en: "Vendors and platforms" }
+        tipo: externo
+        col: 2
+        fila: 1
+        detalle:
+          es: "Lo que ya existe afuera: se compra o se compone cuando resuelve la necesidad con menos operación propia."
+          en: "What already exists outside: it is bought or composed when it meets the need with less operation of one's own."
+    aristas:
+      - { de: 1, a: 2, etiqueta: { es: "plantea", en: "raises" } }
+      - { de: 2, a: 3, etiqueta: { es: "se filtra", en: "is filtered" } }
+      - { de: 3, a: 4, etiqueta: { es: "prioriza", en: "prioritizes" } }
+      - { de: 13, a: 4, etiqueta: { es: "compone", en: "composes" } }
+      - { de: 4, a: 5, etiqueta: { es: "valida", en: "validates" } }
+      - { de: 5, a: 6, etiqueta: { es: "escala", en: "scales" } }
+      - { de: 6, a: 7, etiqueta: { es: "llega a", en: "reaches" } }
+      - { de: 7, a: 8, etiqueta: { es: "uso real", en: "real use" } }
+      - { de: 8, a: 9, etiqueta: { es: "evidencia", en: "evidence" } }
+      - { de: 9, a: 2, etiqueta: { es: "regresa", en: "returns" } }
+      - { de: 1, a: 10, etiqueta: { es: "designa", en: "appoints" } }
+      - { de: 10, a: 11, etiqueta: { es: "responde por", en: "answers for" } }
+      - { de: 11, a: 12, etiqueta: { es: "evalúa", en: "assesses" } }
+      - { de: 12, a: 9, etiqueta: { es: "condiciona", en: "conditions" } }
+
+  # ─── 3 · Las fases ──────────────────────────────────────────────────────────
+  - n: 3
+    fases:
+      - nombre:
+          es: "Partir de los problemas de la empresa, no de la tecnología"
+          en: "Start from the company's problems, not from the technology"
+        entradas:
+          - es: "Los procesos, las decisiones y los resultados que hoy no alcanzan lo esperado."
+            en: "The processes, decisions and results that fall short of expectations today."
+          - es: "Las capacidades y los datos que la organización ya tiene."
+            en: "The capabilities and data the organization already has."
+        actividades:
+          - es: "Levantar el proceso ejecutado, no el de los manuales, antes de proponer una solución."
+            en: "Map the process as it is executed, not as the manuals describe it, before proposing a solution."
+          - es: "Escribir cada oportunidad como problema, usuarios, resultado esperado y responsable."
+            en: "Write each opportunity as a problem, its users, the expected result and an owner."
+          - es: "Separar lo que se resuelve con una mejora del proceso, una regla o un producto analítico de lo que pide IA."
+            en: "Separate what a process improvement, a rule or an analytics product can solve from what calls for AI."
+        artefactos:
+          - es: "Las oportunidades escritas, con su problema y su responsable."
+            en: "The written opportunities, with their problem and their owner."
+          - es: "El mapa del proceso ejecutado."
+            en: "The map of the executed process."
+        decide:
+          es: "La dirección, con los responsables de cada proceso."
+          en: "Leadership, with the owner of each process."
+        control:
+          es: "Ninguna oportunidad entra a la cartera sin decir qué problema resuelve y para quién."
+          en: "No opportunity enters the portfolio without stating which problem it solves and for whom."
+        nota:
+          voz: hice
+          texto:
+            es: "En la Fundación CTIC cada oportunidad tuvo que declarar primero qué problema resolvía y para quién; con esa regla se identificaron más de 10 y se evaluó formalmente la mitad."
+            en: "At Fundación CTIC each opportunity first had to state which problem it solved and for whom; with that rule more than 10 were identified and half of them were formally evaluated."
+          corpus: [fundacion-ctic]
+      - nombre:
+          es: "Priorizar los casos de uso de IA con criterios comunes"
+          en: "Prioritize the AI use cases with shared criteria"
+        entradas:
+          - es: "La cartera de oportunidades."
+            en: "The opportunity portfolio."
+          - es: "Los criterios de prioridad, acordados antes de puntuar."
+            en: "The prioritization criteria, agreed before scoring."
+        actividades:
+          - es: "Puntuar cada caso por valor, viabilidad, datos disponibles, riesgo, dependencia de terceros, integración y capacidad de adopción."
+            en: "Score each case on value, feasibility, available data, risk, third-party dependency, integration and capacity for adoption."
+          - es: "Elegir el patrón de solución: no toda iniciativa de IA requiere un agente."
+            en: "Choose the solution pattern: not every AI initiative needs an agent."
+          - es: "Abrir un expediente por iniciativa priorizada."
+            en: "Open a file for each prioritized initiative."
+        artefactos:
+          - es: "La cartera priorizada."
+            en: "The prioritized portfolio."
+          - es: "El expediente con responsable, resultados esperados, riesgos iniciales y criterios de evaluación."
+            en: "The file with its owner, expected results, initial risks and evaluation criteria."
+        decide:
+          es: "Quien patrocina la cartera, con las áreas que la usarán."
+          en: "Whoever sponsors the portfolio, with the areas that will use it."
+        control:
+          es: "Cada iniciativa priorizada tiene responsable, resultados esperados, riesgos iniciales y criterios de evaluación escritos antes de comenzar."
+          en: "Every prioritized initiative has an owner, expected results, initial risks and evaluation criteria written down before it starts."
+        nota:
+          voz: campo
+          texto:
+            es: "El Cloud Adoption Framework pide evaluar cada caso de uso por viabilidad, valor estratégico y recursos, y puntuarlo por impacto de negocio, complejidad técnica, recursos requeridos y alineación con los objetivos."
+            en: "The Cloud Adoption Framework asks to evaluate each use case on feasibility, strategic value and resources, and to score it on business impact, technical complexity, resource requirements and alignment with goals."
+          fuentes: [2]
+      - nombre:
+          es: "Validar con una prueba de valor antes de construir"
+          en: "Validate with a proof of value before building"
+        entradas:
+          - es: "La iniciativa priorizada y su hipótesis principal."
+            en: "The prioritized initiative and its main hypothesis."
+          - es: "El indicador que el caso promete mover."
+            en: "The indicator the case promises to move."
+        actividades:
+          - es: "Comprobar la hipótesis con una exploración de datos, una prueba controlada o un prototipo limitado."
+            en: "Test the hypothesis with a data exploration, a controlled test or a limited prototype."
+          - es: "Empezar por un caso interno, sin clientes expuestos."
+            en: "Start with an internal case, with no customers exposed."
+          - es: "Fijar la línea base del indicador antes del piloto."
+            en: "Set the indicator's baseline before the pilot."
+        artefactos:
+          - es: "La hipótesis confirmada o descartada, por escrito."
+            en: "The hypothesis confirmed or discarded, in writing."
+          - es: "La línea base."
+            en: "The baseline."
+        decide:
+          es: "El responsable de la iniciativa."
+          en: "The owner of the initiative."
+        control:
+          es: "Si la hipótesis no se sostiene, la iniciativa se detiene o se rediseña: detener también es un resultado."
+          en: "If the hypothesis does not hold, the initiative is stopped or redesigned: stopping is also a result."
+        nota:
+          voz: hice
+          texto:
+            es: "En la Fundación CTIC se procura que la validación sea progresiva: una exploración de datos, una prueba controlada o un prototipo limitado pueden generar evidencia suficiente para avanzar, modificar el enfoque o detener antes de comprometer más recursos."
+            en: "At Fundación CTIC the aim is for validation to be progressive: a data exploration, a controlled test or a limited prototype can generate enough evidence to move forward, change the approach or stop before committing more resources."
+          corpus: [fundacion-ctic]
+      - nombre:
+          es: "Pilotear con una métrica de negocio que puede detenerlo"
+          en: "Pilot with a business metric that can stop it"
+        entradas:
+          - es: "La prueba de valor aprobada y su línea base."
+            en: "The approved proof of value and its baseline."
+          - es: "El resultado acordado con el patrocinador."
+            en: "The result agreed with the sponsor."
+        actividades:
+          - es: "Operar con usuarios reales en un alcance acotado."
+            en: "Run with real users in a bounded scope."
+          - es: "Medir contra la línea base, no contra una impresión."
+            en: "Measure against the baseline, not against an impression."
+          - es: "Escribir la decisión: escalar, cambiar de rumbo o detener."
+            en: "Write down the decision: scale, change course or stop."
+        artefactos:
+          - es: "El resultado del piloto frente a lo acordado."
+            en: "The pilot's result against what was agreed."
+          - es: "La decisión escrita, con su responsable."
+            en: "The written decision, with its owner."
+        decide:
+          es: "El patrocinador, con el responsable del proceso."
+          en: "The sponsor, with the process owner."
+        control:
+          es: "El piloto que no alcanza el resultado acordado se pausa y se revisa; nada escala por inercia."
+          en: "A pilot that does not reach the agreed result is paused and reviewed; nothing scales by inertia."
+        nota:
+          voz: campo
+          texto:
+            es: "El Cloud Adoption Framework propone usar las métricas de negocio como puertas de decisión: si un piloto no alcanza los resultados acordados, el trabajo se pausa y se reevalúa el caso de uso."
+            en: "The Cloud Adoption Framework proposes using business metrics as decision gates: if a pilot doesn't meet the agreed-upon results, the work is paused and the use case reassessed."
+          fuentes: [4]
+      - nombre:
+          es: "Escalar con gobierno: roles, riesgos e impacto"
+          en: "Scale with governance: roles, risks and impact"
+        entradas:
+          - es: "El piloto aprobado."
+            en: "The approved pilot."
+          - es: "Las políticas y obligaciones que aplican a la organización."
+            en: "The policies and obligations that apply to the organization."
+        actividades:
+          - es: "Asignar roles, responsabilidades y autoridades: no toda decisión de IA es del equipo técnico."
+            en: "Assign roles, responsibilities and authorities: not every AI decision belongs to the technical team."
+          - es: "Evaluar riesgos e impacto del sistema antes de ampliarlo."
+            en: "Assess the system's risks and impact before extending it."
+          - es: "Registrar el sistema en el inventario, con su ciclo de vida."
+            en: "Record the system in the inventory, with its life cycle."
+        artefactos:
+          - es: "La matriz de riesgos y la evaluación de impacto."
+            en: "The risk matrix and the impact assessment."
+          - es: "El inventario de sistemas de IA."
+            en: "The inventory of AI systems."
+        decide:
+          es: "La alta dirección, con los responsables de negocio, datos, riesgo y tecnología."
+          en: "Senior leadership, with the business, data, risk and technology owners."
+        control:
+          es: "Ningún sistema pasa a operación sin responsable, evaluación de riesgos e impacto y su lugar en el inventario."
+          en: "No system goes into operation without an owner, a risk and impact assessment and its place in the inventory."
+        nota:
+          voz: hice
+          texto:
+            es: "En la Fundación CTIC la estrategia se estructura siguiendo ISO/IEC 42001, en su adopción UNE-ISO/IEC 42001:2025, con más de 20 instrumentos del sistema de gestión; una de sus matrices es el análisis de riesgos de cada caso de uso, y la norma pide además evaluar el impacto de los sistemas de IA."
+            en: "At Fundación CTIC the strategy is structured following ISO/IEC 42001, in its UNE-ISO/IEC 42001:2025 adoption, with more than 20 instruments of the management system; one of its matrices is the risk analysis of each use case, and the standard also requires assessing the impact of AI systems."
+          corpus: [fundacion-ctic]
+      - nombre:
+          es: "Formar, medir la adopción y decidir si escalar, ajustar o retirar"
+          en: "Train, measure adoption and decide whether to scale, adjust or retire"
+        entradas:
+          - es: "La capacidad en operación."
+            en: "The capability in operation."
+          - es: "Las personas que la van a usar."
+            en: "The people who are going to use it."
+        actividades:
+          - es: "Formar sobre los propios procesos y productos, como parte de la entrega."
+            en: "Train on people's own processes and products, as part of the delivery."
+          - es: "Medir el uso real: usuarios con responsabilidad, recurrencia y decisiones apoyadas."
+            en: "Measure real use: users with responsibility, recurrence and supported decisions."
+          - es: "Comparar con la línea base y decidir escalar, ajustar o retirar."
+            en: "Compare against the baseline and decide whether to scale, adjust or retire."
+        artefactos:
+          - es: "El programa de formación."
+            en: "The training program."
+          - es: "La lectura de adopción y de valor."
+            en: "The reading of adoption and value."
+        decide:
+          es: "El responsable del proceso."
+          en: "The process owner."
+        control:
+          es: "Lo que no se usa o no mueve el indicador vuelve a la cartera para ajustarse o retirarse."
+          en: "What is not used or does not move the indicator goes back to the portfolio to be adjusted or retired."
+        nota:
+          voz: hice
+          texto:
+            es: "En Banco Pichincha la formación a 12 profesionales sobre sus propios productos fue parte del producto y contribuyó a un aumento del 20 % en la productividad de la preparación y el uso de la información."
+            en: "At Banco Pichincha the training of 12 professionals on their own products was part of the product and contributed to a 20% increase in productivity in preparing and using information."
+          corpus: [banco-pichincha]
+
+  # ─── 4 · Las decisiones de diseño ───────────────────────────────────────────
+  - n: 4
+    decisiones:
+      - titulo:
+          es: "Cómo llevar la IA a una empresa que apenas empieza: por sus problemas, no por la herramienta"
+          en: "How to bring AI to a company that is just starting: through its problems, not the tool"
+        cuandoSi:
+          es: "Cuando la empresa apenas empieza con IA, el primer inventario es de problemas, procesos y decisiones; para llevar la IA a la empresa, cada uno se escribe con su usuario y su resultado esperado."
+          en: "When a company is just starting with AI, the first inventory is of problems, processes and decisions; to bring AI to the company, each one is written with its user and expected result."
+        cuandoNo:
+          es: "Cuando la iniciativa llega empujada por un proveedor o por entusiasmo con una herramienta: no entra a la cartera hasta declarar qué problema resuelve."
+          en: "When the initiative arrives pushed by a vendor or by enthusiasm for a tool: it does not enter the portfolio until it states which problem it solves."
+        porQue:
+          voz: hice
+          texto:
+            es: "En Inglopres la implantación del ERP (Odoo) mostró que digitalizar un proceso sin revisarlo puede trasladar sus inconsistencias a la tecnología: el proceso ejecutado se levantó y se modeló en BPMN antes de configurar la solución."
+            en: "At Inglopres the ERP rollout (Odoo) showed that digitizing a process without reviewing it can carry its inconsistencies into the technology: the executed process was mapped and modeled in BPMN before configuring the solution."
+          corpus: [inglopres]
+        nota:
+          voz: campo
+          texto:
+            es: "El Cloud Adoption Framework pide a los líderes definir los resultados de negocio que la IA debe apoyar, y a la estrategia de IA documentar las prioridades, los derechos de decisión y cómo se mide el valor de la inversión."
+            en: "The Cloud Adoption Framework asks leaders to define the business outcomes AI is expected to support, and the AI strategy to document priorities, decision rights and how the value of the investment is measured."
+          fuentes: [1]
+      - titulo:
+          es: "Qué criterios usar para priorizar casos de uso de IA"
+          en: "What criteria to use to prioritize AI use cases"
+        cuandoSi:
+          es: "Para priorizar casos de uso de IA, los criterios son el valor potencial, la viabilidad, la disponibilidad de información, el nivel de riesgo, la dependencia de terceros, la complejidad de integración y la capacidad de adopción, aplicados a toda la cartera."
+          en: "To prioritize AI use cases, the criteria are potential value, feasibility, data availability, risk level, third-party dependency, integration complexity and capacity for adoption, applied to the whole portfolio."
+        cuandoNo:
+          es: "Cuando un caso de uso se elige solo por ser el más innovador: los criterios buscan aprendizaje y valor sin superar la capacidad de la organización para implementarlo, supervisarlo y sostenerlo."
+          en: "When a use case is chosen only for being the most innovative: the criteria look for learning and value without exceeding the organization's capacity to implement, oversee and sustain it."
+        porQue:
+          voz: hice
+          texto:
+            es: "En la Fundación CTIC los casos de uso se priorizan con esos siete criterios: de más de 10 oportunidades se evaluó formalmente la mitad y se priorizaron unas pocas, y esa proporción es el filtro funcionando, no falta de ideas."
+            en: "At Fundación CTIC use cases are prioritized with those seven criteria: of more than 10 opportunities half were formally evaluated and a few were prioritized, and that proportion is the filter working, not a lack of ideas."
+          corpus: [fundacion-ctic]
+        nota:
+          voz: campo
+          texto:
+            es: "Microsoft recomienda que un centro de excelencia de IA cree un proceso de entrada y priorización con criterios consistentes de valor de negocio, viabilidad técnica y recursos, y mantenga una cartera priorizada de iniciativas."
+            en: "Microsoft recommends that an AI Center of Excellence create an intake and prioritization process with consistent criteria for business value, technical feasibility and resource requirements, and maintain a prioritized initiative backlog."
+          fuentes: [3]
+      - titulo:
+          es: "Prueba de valor, piloto y escala: cuándo avanzar y cuándo detener"
+          en: "Proof of value, pilot and scale: when to move forward and when to stop"
+        cuandoSi:
+          es: "Cuando hay incertidumbre sobre los datos, la tecnología o la adopción: se comprueba la hipótesis principal con el menor costo y se fija la línea base antes del piloto."
+          en: "When there is uncertainty about the data, the technology or adoption: the main hypothesis is tested at the lowest cost and the baseline is set before the pilot."
+        cuandoNo:
+          es: "Cuando la necesidad se resuelve con un instrumento conocido y de bajo riesgo: una prueba de valor solo retrasa lo que ya está claro."
+          en: "When the need is met by a known, low-risk instrument: a proof of value only delays what is already clear."
+        porQue:
+          voz: hice
+          texto:
+            es: "En la Fundación CTIC detener o rediseñar un caso después de invalidar bien una hipótesis no cuenta como fracaso: que la mayoría de los casos evaluados no avanzara todavía es el filtro funcionando."
+            en: "At Fundación CTIC stopping or redesigning a case after properly invalidating a hypothesis does not count as a failure: that most of the evaluated cases have not moved forward yet is the filter working."
+          corpus: [fundacion-ctic]
+        nota:
+          voz: campo
+          texto:
+            es: "El Well-Architected Framework advierte que, sin un liderazgo fuerte y un plan claro, los esfuerzos de IA se fragmentan rápido y pueden no pasar de una prueba de concepto."
+            en: "The Well-Architected Framework warns that, without strong leadership and a clear plan, AI efforts can quickly become fragmented and might not evolve beyond a proof of concept."
+          fuentes: [10]
+      - titulo:
+          es: "Construir, comprar o componer: la solución con menos operación propia"
+          en: "Build, buy or compose: the solution with the least operational ownership"
+        cuandoSi:
+          es: "Comprar o componer cuando una capacidad existente resuelve la necesidad con menos operación propia; construir cuando la diferencia está en el proceso propio y hay quién la opere."
+          en: "Buy or compose when an existing capability meets the need with less operation of one's own; build when the difference lies in one's own process and someone will run it."
+        cuandoNo:
+          es: "Construir un agente para un problema que se resuelve con una mejora del proceso, un producto analítico o una automatización convencional."
+          en: "Building an agent for a problem that a process improvement, an analytics product or a conventional automation can solve."
+        porQue:
+          voz: hice
+          texto:
+            es: "En la Fundación CTIC la evaluación debe determinar primero si la IA es necesaria y qué tipo de capacidad conviene, para no construir agentes donde basta un instrumento más simple, como un producto analítico en Power BI."
+            en: "At Fundación CTIC the evaluation must first determine whether AI is needed and which kind of capability fits, so as not to build agents where a simpler instrument, such as an analytics product in Power BI, is enough."
+          corpus: [fundacion-ctic]
+        nota:
+          voz: campo
+          texto:
+            es: "El Cloud Adoption Framework recomienda aprobar la solución que cumple los requisitos con la menor responsabilidad operativa: más personalización suele exigir habilidades más especializadas y más propiedad operativa."
+            en: "The Cloud Adoption Framework recommends approving the solution that meets the requirements with the least operational responsibility: greater customization generally requires more specialized skills and greater operational ownership."
+          fuentes: [1]
+      - titulo:
+          es: "Centro de excelencia o modelo federado: centralizar al empezar, delegar al madurar"
+          en: "Center of excellence or federated model: centralize to start, delegate as it matures"
+        cuandoSi:
+          es: "Un centro de excelencia central cuando la organización apenas empieza: concentra la experiencia y fija estándares; al madurar, asesora y las áreas construyen dentro de esos límites."
+          en: "A central center of excellence when the organization is just starting: it concentrates expertise and sets standards; as it matures, it advises and the areas build within those limits."
+        cuandoNo:
+          es: "Un equipo central que aprueba todo cuando ya hay solicitudes en cola y cuellos de botella: el gobierno se incorpora a la plataforma y el centro deja de ser una aduana."
+          en: "A central team that approves everything when requests are already queuing and bottlenecks appear: governance is built into the platform and the center stops being a checkpoint."
+        porQue:
+          voz: hice
+          texto:
+            es: "En la Fundación CTIC la estrategia busca establecer un marco de gobierno que reparta las decisiones: el negocio debe responder por el propósito y los resultados, los responsables de datos por la calidad y las condiciones de uso, y seguridad, riesgo, cumplimiento y tecnología deben intervenir según la iniciativa."
+            en: "At Fundación CTIC the strategy seeks to establish a governance framework that splits the decisions: the business must answer for the purpose and the results, data owners for quality and conditions of use, and security, risk, compliance and technology must step in according to the initiative."
+          corpus: [fundacion-ctic]
+        nota:
+          voz: campo
+          texto:
+            es: "Microsoft recomienda empezar con un centro de excelencia de IA centralizado y pasar a un rol de asesoría cuando la adopción madura; para agentes, la mayoría de las organizaciones combina estructuras centralizadas y federadas según el patrón, y la hoja de ruta de Fabric encuentra más eficaces los modelos unificado o federado."
+            en: "Microsoft recommends starting with a centralized AI Center of Excellence and moving to an advisory role as adoption matures; for agents, most organizations blend centralized and federated structures by pattern, and the Fabric roadmap finds the unified or federated models most effective."
+          fuentes: [3, 5, 9]
+      - titulo:
+          es: "Cómo se mide la adopción de una herramienta nueva: usuarios, uso y decisiones"
+          en: "How to measure the adoption of a new tool: users, use and decisions"
+        cuandoSi:
+          es: "La adopción de una herramienta nueva se mide en usuarios con responsabilidad sobre el proceso, uso recurrente y decisiones que se apoyan en ella, con la formación como parte de la entrega."
+          en: "To measure the adoption of a new tool: users responsible for the process, recurring use and decisions that rely on it, with training as part of the delivery."
+        cuandoNo:
+          es: "Contar accesos o licencias asignadas como si fueran adopción."
+          en: "Counting access or assigned licenses as if they were adoption."
+        porQue:
+          voz: hice
+          texto:
+            es: "La adopción se ha medido cuatro veces, con usuarios y decisiones distintas: más de 50 usuarios en Banco Pichincha, más de 25 usuarios clave en TransMilenio, más de 15 roles con responsabilidad directa en Cafam y unos 20 líderes de unos 15 procesos en la Fundación CTIC."
+            en: "Adoption has been measured four times, with different users and decisions: more than 50 users at Banco Pichincha, more than 25 key users at TransMilenio, more than 15 roles with direct responsibility at Cafam and some 20 leaders of some 15 processes at Fundación CTIC."
+          corpus: [como-trabajo]
+        nota:
+          voz: campo
+          texto:
+            es: "En el patrón de habilitación de empleados con IA, Microsoft separa las señales tempranas de adopción —usuarios activos frente a licencias asignadas, uso semanal, retención— de las tardías de valor de negocio: la adopción es la primera señal y el valor, la prueba."
+            en: "In the employee AI enablement pattern, Microsoft separates the early adoption signals —active users against assigned licenses, weekly use, retention— from the lagging signals of business value: adoption is the earliest signal and value is the proof."
+          fuentes: [6]
+
+  # ─── 5 · Lo innovador en 2026 ───────────────────────────────────────────────
+  - n: 5
+    elementos:
+      - titulo: { es: "El valor se decide en puertas, no al final", en: "Value is decided at gates, not at the end" }
+        queCambia:
+          es: "Antes de desarrollar se fija la línea base de los indicadores; en cada etapa la métrica de negocio decide seguir, cambiar de rumbo o detener, y después del despliegue la evidencia decide escalar, mejorar o retirar."
+          en: "Before development, the indicators' baseline is set; at each stage the business metric decides whether to continue, change direction or stop, and after deployment the evidence decides whether to scale, improve or retire."
+        fuentes: [4, 7]
+        nota:
+          voz: posicion
+          texto:
+            es: "Una prueba de valor sin línea base no prueba nada: solo muestra que algo funciona."
+            en: "A proof of value without a baseline proves nothing: it only shows that something works."
+      - titulo: { es: "La estrategia de IA como carta con derechos de decisión", en: "The AI strategy as a charter with decision rights" }
+        queCambia:
+          es: "La estrategia de IA documenta las prioridades de la organización, los derechos de decisión y cómo se mide el valor de la inversión, y el acceso amplio a las capacidades aprobadas va acompañado de formación."
+          en: "The AI strategy documents the organization's priorities, decision rights and how the value of the investment is measured, and broad access to approved capabilities is paired with training."
+        fuentes: [1]
+      - titulo: { es: "ISO/IEC 42001 como columna del programa, no solo de cumplimiento", en: "ISO/IEC 42001 as the backbone of the program, not only of compliance" }
+        queCambia:
+          es: "La norma especifica cómo establecer, implementar, mantener y mejorar de forma continua un sistema de gestión de IA, y ofrece una manera estructurada de gestionar riesgos y oportunidades que equilibra innovación y gobierno."
+          en: "The standard specifies how to establish, implement, maintain and continually improve an AI management system, and offers a structured way to manage risks and opportunities that balances innovation with governance."
+        fuentes: [11]
+        nota:
+          voz: posicion
+          texto:
+            es: "Un sistema de gestión que nace con el primer caso de uso cuesta menos que uno que llega a auditar lo que ya está en operación."
+            en: "A management system born with the first use case costs less than one that arrives to audit what is already in operation."
+      - titulo: { es: "El centro de excelencia pasa de control a asesoría", en: "The center of excellence moves from control to advice" }
+        queCambia:
+          es: "El centro de excelencia de IA arranca centralizado para concentrar la experiencia y, cuando aparecen demoras y cuellos de botella, pasa a asesorar y fijar límites mientras los equipos de producto entregan; para agentes, la estructura se elige por patrón de adopción y madurez, no por organigrama."
+          en: "The AI Center of Excellence starts centralized to concentrate expertise and, when delays and bottlenecks appear, moves to advising and setting guardrails while product teams deliver; for agents, the structure is chosen by adoption pattern and maturity, not by org chart."
+        fuentes: [3, 5]
+      - titulo: { es: "Gobierno incorporado al flujo de trabajo", en: "Governance built into the workflow" }
+        queCambia:
+          es: "Estándares centrales con implementación distribuida: puntos de control de IA responsable en las revisiones de diseño, las pruebas y la aprobación previa al lanzamiento, y aprobaciones formales para la IA de alto riesgo."
+          en: "Centralized standards with distributed implementation: responsible AI checkpoints at design reviews, testing and prelaunch approvals, and formal sign-offs for high-risk AI."
+        fuentes: [12]
+      - titulo: { es: "Doce áreas de adopción, transferibles a la IA", en: "Twelve adoption areas, transferable to AI" }
+        queCambia:
+          es: "La hoja de ruta de adopción de Fabric ordena la adopción en doce áreas —entre ellas cultura de datos, patrocinio, propiedad del contenido, centro de excelencia, gobierno, formación, comunidad y gestión del cambio— y distingue tres estrategias de propiedad del contenido."
+          en: "The Fabric adoption roadmap organizes adoption into twelve areas —among them data culture, sponsorship, content ownership, center of excellence, governance, user enablement, community and change management— and distinguishes three content ownership strategies."
+        fuentes: [8, 9]
+        nota:
+          voz: posicion
+          texto:
+            es: "El marco nació para la analítica y sus áreas sirven para la IA casi sin cambios: el patrocinio, la propiedad y la formación pesan más que la herramienta."
+            en: "The framework was born for analytics and its areas serve AI almost unchanged: sponsorship, ownership and enablement weigh more than the tool."
+
+  # ─── 6 · Modos de falla y cómo anticiparlos ─────────────────────────────────
+  - n: 6
+    fallas:
+      - falla: { es: "Pilotos que no pasan de la demostración", en: "Pilots that never get past the demo" }
+        senal: { es: "Varias pruebas de concepto abiertas y ninguna con responsable ni métrica para escalar.", en: "Several proofs of concept open and none with an owner or a metric to scale." }
+        control: { es: "Cada piloto nace con su línea base, su responsable y la decisión que lo cierra.", en: "Every pilot is born with its baseline, its owner and the decision that closes it." }
+      - falla: { es: "La herramienta elige el caso de uso", en: "The tool picks the use case" }
+        senal: { es: "La iniciativa llega con el producto escogido y sin el problema escrito.", en: "The initiative arrives with the product already chosen and no written problem." }
+        control: { es: "Ninguna oportunidad entra a la cartera sin problema, usuario y resultado esperado.", en: "No opportunity enters the portfolio without a problem, a user and an expected result." }
+      - falla: { es: "Un agente para un problema que pedía una regla", en: "An agent for a problem that needed a rule" }
+        senal: { es: "Costo y riesgo de operación desproporcionados frente al resultado.", en: "Operating cost and risk out of proportion to the result." }
+        control: { es: "La evaluación decide primero si la IA es necesaria y qué capacidad conviene.", en: "The evaluation first decides whether AI is needed and which capability fits." }
+      - falla: { es: "Experimentos aislados por área", en: "Isolated experiments by area" }
+        senal: { es: "Soluciones parecidas construidas dos veces, con datos y criterios distintos.", en: "Similar solutions built twice, with different data and criteria." }
+        control: { es: "Una cartera común con los mismos criterios y un inventario de sistemas de IA.", en: "One shared portfolio with the same criteria and an inventory of AI systems." }
+      - falla: { es: "El gobierno llega tarde", en: "Governance arrives late" }
+        senal: { es: "Riesgos, sesgos o exposición de información descubiertos ya en operación.", en: "Risks, bias or information exposure discovered once in operation." }
+        control: { es: "Roles, riesgos e impacto evaluados desde el diseño, dentro del sistema de gestión.", en: "Roles, risks and impact assessed from the design, inside the management system." }
+      - falla: { es: "Licencias asignadas confundidas con adopción", en: "Assigned licenses mistaken for adoption" }
+        senal: { es: "Muchos accesos y pocas decisiones que cambian.", en: "Plenty of access and few decisions that change." }
+        control: { es: "Adopción medida en usuarios con responsabilidad, uso recurrente y decisiones apoyadas.", en: "Adoption measured in responsible users, recurring use and supported decisions." }
+      - falla: { es: "Un centro de excelencia que se vuelve cuello de botella", en: "A center of excellence that becomes a bottleneck" }
+        senal: { es: "Solicitudes en cola y equipos que lo esquivan.", en: "Requests queuing and teams going around it." }
+        control: { es: "Pasar a un rol de asesoría con el gobierno incorporado a la plataforma.", en: "Moving to an advisory role with governance built into the platform." }
+      - falla: { es: "La capacidad depende de quien la construyó", en: "The capability depends on whoever built it" }
+        senal: { es: "Nadie más sabe operarla ni explicarla cuando cambia el equipo.", en: "Nobody else can run or explain it when the team changes." }
+        control: { es: "Documentación, responsables y transferencia de conocimiento como parte de la entrega.", en: "Documentation, owners and knowledge transfer as part of the delivery." }
+
+  # ─── 7 · Métricas y controles ───────────────────────────────────────────────
+  - n: 7
+    metricas:
+      - metrica: { es: "Oportunidades con problema y responsable escritos", en: "Opportunities with a written problem and owner" }
+        umbral: { es: "Todas las que entran a la cartera.", en: "All of those entering the portfolio." }
+        aprueba: { es: "Quien patrocina la cartera.", en: "Whoever sponsors the portfolio." }
+      - metrica: { es: "Iniciativas con criterios de evaluación previos", en: "Initiatives with evaluation criteria set beforehand" }
+        umbral: { es: "Ninguna arranca sin ellos.", en: "None starts without them." }
+        aprueba: { es: "Quien patrocina la cartera.", en: "Whoever sponsors the portfolio." }
+      - metrica: { es: "Hipótesis de la prueba de valor", en: "Proof-of-value hypothesis" }
+        umbral: { es: "Una decisión escrita: avanzar, ajustar o detener.", en: "A written decision: move forward, adjust or stop." }
+        aprueba: { es: "El responsable de la iniciativa.", en: "The owner of the initiative." }
+      - metrica: { es: "Indicador del piloto frente a su línea base", en: "The pilot's indicator against its baseline" }
+        umbral: { es: "El resultado acordado antes de empezar.", en: "The result agreed before starting." }
+        aprueba: { es: "El patrocinador del piloto.", en: "The pilot's sponsor." }
+      - metrica: { es: "Riesgos e impacto evaluados", en: "Risks and impact assessed" }
+        umbral: { es: "Antes del paso a operación.", en: "Before going into operation." }
+        aprueba: { es: "Riesgo, cumplimiento y el responsable del sistema.", en: "Risk, compliance and the system owner." }
+      - metrica: { es: "Usuarios activos frente a usuarios previstos", en: "Active users against intended users" }
+        umbral: { es: "Una meta fijada antes del lanzamiento.", en: "A target set before launch." }
+        aprueba: { es: "El responsable del proceso.", en: "The process owner." }
+      - metrica: { es: "Decisiones o tareas apoyadas por la capacidad", en: "Decisions or tasks supported by the capability" }
+        umbral: { es: "Que crezcan frente a la línea base.", en: "Growing against the baseline." }
+        aprueba: { es: "El responsable del proceso.", en: "The process owner." }
+      - metrica: { es: "Sistemas de IA en el inventario, con su ciclo de vida", en: "AI systems in the inventory, with their life cycle" }
+        umbral: { es: "Todos los que operan.", en: "All of those in operation." }
+        aprueba: { es: "Quien administra el sistema de gestión.", en: "Whoever runs the management system." }
+
+  # ─── 8 · Evidencia en proyectos ─────────────────────────────────────────────
+  - n: 8
+    evidencia:
+      - nombre: { es: "Fundación CTIC: una cartera de IA con criterios comunes", en: "Fundación CTIC: an AI portfolio with shared criteria" }
+        nivel: uso-real
+        texto:
+          es: "Desde marzo de 2025 se estructura en la Fundación CTIC la estrategia institucional de IA: más de 10 oportunidades identificadas, la mitad evaluadas formalmente y unas pocas priorizadas; de estas, las primeras ya tienen responsables, resultados esperados, riesgos iniciales y criterios de evaluación documentados."
+          en: "Since March 2025 Fundación CTIC's institutional AI strategy has been structured: more than 10 opportunities identified, half of them formally evaluated and a few prioritized; of these, the first ones already have owners, expected results, initial risks and evaluation criteria documented."
+        corpus: [fundacion-ctic]
+        href: /proyectos/fundacion-ctic
+      - nombre: { es: "Fundación CTIC: el sistema de gestión bajo ISO/IEC 42001", en: "Fundación CTIC: the management system under ISO/IEC 42001" }
+        nivel: uso-real
+        texto:
+          es: "La estrategia sigue los principios y requisitos de ISO/IEC 42001, con más de 20 instrumentos del sistema de gestión y, en construcción, un inventario progresivo de sistemas de IA y un marco de gobierno que busca repartir los roles entre el negocio, los responsables de datos y las funciones de riesgo, seguridad y tecnología."
+          en: "The strategy follows the principles and requirements of ISO/IEC 42001, with more than 20 instruments of the management system and, under construction, a progressive inventory of AI systems and a governance framework that seeks to split roles between the business, the data owners and the risk, security and technology functions."
+        corpus: [fundacion-ctic]
+        href: /proyectos/fundacion-ctic
+      - nombre: { es: "La fábrica de apps: dos aprobaciones escritas", en: "The app factory: two written approvals" }
+        nivel: uso-real
+        texto:
+          es: "En el pipeline AI-APPs ninguna aplicación avanza sin dos aprobaciones escritas —la prioridad vigente y la visión del producto— y las decisiones críticas conservan responsables humanos: de 12 iniciativas concebidas, solo 7 tienen repositorio."
+          en: "In the AI-APPs pipeline no application moves forward without two written approvals —the current priority and the product vision— and critical decisions keep explicit human owners: of 12 initiatives conceived, only 7 have a repository."
+        corpus: [apps-pipeline]
+        href: /vitrina/apps
+      - nombre: { es: "La vitrina, producto de la fábrica", en: "The showcase, a product of the factory" }
+        nivel: uso-real
+        texto:
+          es: "Diez aplicaciones hermanas más CV Viva, 15 agentes, 7 investigaciones y 6 tableros —38 piezas— salen de un pipeline con dos casas, un agente de fábrica, cuatro jobs de integración continua y un contrato de ficha."
+          en: "Ten sister applications plus CV Viva, 15 agents, 7 research lines and 6 dashboards —38 pieces— come out of a pipeline with two houses, a factory agent, four CI jobs and a sheet contract."
+        corpus: [apps-pipeline]
+        href: /vitrina
+      - nombre: { es: "Banco Pichincha: adopción y formación como parte del producto", en: "Banco Pichincha: adoption and training as part of the product" }
+        nivel: uso-real
+        texto:
+          es: "En 2023, más de 50 usuarios del negocio adoptaron las soluciones del equipo, con una mejora reportada del 25 % en la toma de decisiones; la formación a 12 profesionales sobre sus propios productos contribuyó a un 20 % más de productividad."
+          en: "In 2023, more than 50 business users adopted the team's solutions, with a reported 25% improvement in decision-making; training 12 professionals on their own products contributed to 20% higher productivity."
+        corpus: [banco-pichincha]
+        href: /proyectos/banco-pichincha
+      - nombre: { es: "TransMilenio: adopción por usuarios clave", en: "TransMilenio: adoption by key users" }
+        nivel: uso-real
+        texto:
+          es: "Entre julio de 2021 y mayo de 2022, en C&M Consultores, Power BI fue adoptado por más de 25 usuarios clave —responsables de programación, seguimiento y decisión, no solo personas con acceso— y contribuyó a mejorar un 35 % la eficiencia de los procesos analíticos."
+          en: "Between July 2021 and May 2022, at C&M Consultores, Power BI was adopted by more than 25 key users —people responsible for scheduling, monitoring and decisions, not just people with access— and helped improve the efficiency of the analytical processes by 35%."
+        corpus: [transmilenio-cm]
+        href: /proyectos/transmilenio-cm
+      - nombre: { es: "Cafam: una tecnología nueva que entra por el proceso", en: "Cafam: a new technology that enters through the process" }
+        nivel: uso-real
+        texto:
+          es: "Entre octubre de 2020 y junio de 2021, en la implementación de Oracle WMS Cloud, un equipo de 20 personas probó el sistema y el proceso a la vez; el BI de control lo adoptaron más de 15 decisores directivos del proyecto y mejoró un 50 % la precisión del seguimiento de las pruebas."
+          en: "Between October 2020 and June 2021, in the Oracle WMS Cloud implementation, a team of 20 people tested the system and the process at the same time; the control BI was adopted by more than 15 senior decision-makers in the project and improved the accuracy of test tracking by 50%."
+        corpus: [cafam]
+        href: /proyectos/cafam
+      - nombre: { es: "Inglopres: el ERP como antecedente", en: "Inglopres: the ERP as a precedent" }
+        nivel: uso-real
+        texto:
+          es: "En Inglopres (2015–2017), la implantación de un ERP (Odoo) llevó la operación de registros dispersos a un solo lugar; antes de configurarlo se levantó el proceso ejecutado y se modeló en BPMN."
+          en: "At Inglopres (2015–2017), an ERP rollout (Odoo) took the operation from scattered records to a single place; before configuring it, the executed process was mapped and modeled in BPMN."
+        corpus: [inglopres]
+        href: /proyectos/inglopres
+
+  # ─── 9 · Límites y alcance ──────────────────────────────────────────────────
+  - n: 9
+    limites:
+      - voz: hice
+        texto:
+          es: "En la Fundación CTIC la estrategia y el sistema de gestión siguen en un proceso progresivo de estructuración y consolidación, y sus cifras se publican aproximadas."
+          en: "At Fundación CTIC the strategy and the management system are still in a progressive process of structuring and consolidation, and their figures are published as approximations."
+        corpus: [fundacion-ctic]
+      - voz: hice
+        texto:
+          es: "En la Fundación CTIC no hay un equipo de personas a cargo: el trabajo integra procesos completos, con unos 20 líderes de unos 15 procesos, y los planes de mejora los ejecutan los responsables de proceso."
+          en: "At Fundación CTIC there is no team of direct reports: the work integrates whole processes, with some 20 leaders of some 15 processes, and the improvement plans are carried out by the process owners."
+        corpus: [fundacion-ctic]
+      - voz: hice
+        texto:
+          es: "La fábrica de apps es trabajo propio, construido en público fuera del empleo: muestra cómo se aprueba y se gobierna lo que se construye, no una implementación en una organización cliente."
+          en: "The app factory is the author's own work, built in public outside employment: it shows how what gets built is approved and governed, not an implementation in a client organization."
+        corpus: [apps-pipeline]
+      - voz: hice
+        texto:
+          es: "El centro de excelencia y la decisión de construir, comprar o componer aparecen aquí como estado del campo y criterio: la evidencia de la Fundación CTIC es la cartera con criterios comunes y el marco de gobierno que se busca establecer."
+          en: "The center of excellence and the decision to build, buy or compose appear here as state of the field and criterion: the evidence from Fundación CTIC is the portfolio with shared criteria and the governance framework it seeks to establish."
+        corpus: [fundacion-ctic]
+      - voz: hice
+        texto:
+          es: "El ERP de Inglopres y el WMS de Cafam son antecedentes de implementación de tecnología, no de IA: lo que enseñan es que una tecnología nueva entra por el proceso."
+          en: "The Inglopres ERP and the Cafam WMS are precedents of technology implementation, not of AI: what they teach is that a new technology enters through the process."
+        corpus: [inglopres, cafam]
+      - voz: posicion
+        texto:
+          es: "Lo que conviene hacer distinto hoy: fijar la línea base y la métrica que detiene un piloto antes de la primera prueba de valor, no después."
+          en: "What should be done differently today: set the baseline and the metric that stops a pilot before the first proof of value, not afterwards."
+      - voz: posicion
+        texto:
+          es: "Un programa de IA se juzga por las decisiones que cambia, no por los pilotos que abre."
+          en: "An AI program is judged by the decisions it changes, not by the pilots it opens."
+
+  # ─── 10 · Fuentes y fecha de revisión ───────────────────────────────────────
+  - n: 10
+    revisado: "2026-10-19"
+    fuentes:
+      - id: 1
+        titulo: "AI adoption"
+        editor: "Microsoft Learn"
+        fecha: "2026-06-26"
+        url: "https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ai/strategy"
+      - id: 2
+        titulo: "Plan for AI adoption"
+        editor: "Microsoft Learn"
+        fecha: "2025-07-01"
+        url: "https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ai/plan"
+      - id: 3
+        titulo: "Establish an AI Center of Excellence"
+        editor: "Microsoft Learn"
+        fecha: "2025-06-09"
+        url: "https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ai/center-of-excellence"
+      - id: 4
+        titulo: "Business plan for AI agents"
+        editor: "Microsoft Learn"
+        fecha: "2026-02-13"
+        url: "https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ai-agents/business-strategy-plan"
+      - id: 5
+        titulo: "Choose your CoE structure and operating model"
+        editor: "Microsoft Learn"
+        fecha: "2026-07-13"
+        url: "https://learn.microsoft.com/en-us/agents/center-of-excellence/operating-models"
+      - id: 6
+        titulo: "Employee AI enablement pattern"
+        editor: "Microsoft Learn"
+        fecha: "2026-07-14"
+        url: "https://learn.microsoft.com/en-us/agents/adoption-patterns/pattern-employee-ai-enablement"
+      - id: 7
+        titulo: "Agentic AI maturity model - Business strategy"
+        editor: "Microsoft Learn"
+        fecha: "2026-03-31"
+        url: "https://learn.microsoft.com/en-us/agents/adoption-maturity-model/maturity-model-business-process"
+      - id: 8
+        titulo: "Microsoft Fabric adoption roadmap"
+        editor: "Microsoft Learn"
+        fecha: "2024-12-30"
+        url: "https://learn.microsoft.com/en-us/power-bi/guidance/fabric-adoption-roadmap"
+      - id: 9
+        titulo: "Microsoft Fabric adoption roadmap: Center of Excellence"
+        editor: "Microsoft Learn"
+        fecha: "2024-12-30"
+        url: "https://learn.microsoft.com/en-us/power-bi/guidance/fabric-adoption-roadmap-center-of-excellence"
+      - id: 10
+        titulo: "Build an AI Strategy for your SaaS Business"
+        editor: "Microsoft Learn"
+        fecha: "2025-11-25"
+        url: "https://learn.microsoft.com/en-us/azure/well-architected/saas/ai-strategy"
+      - id: 11
+        titulo: "ISO/IEC 42001:2023 Artificial Intelligence Management System Standards"
+        editor: "Microsoft Learn"
+        fecha: "2026-03-11"
+        url: "https://learn.microsoft.com/en-us/compliance/regulatory/offering-iso-42001"
+      - id: 12
+        titulo: "Responsible AI Policies"
+        editor: "Microsoft Learn"
+        fecha: "2025-06-25"
+        url: "https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ai/responsible-ai-policies"

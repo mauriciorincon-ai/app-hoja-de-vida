@@ -581,7 +581,7 @@ bloques:
           en: "It retrieves from the corpus, cites what it retrieved and, if it finds nothing, says so. Since September 2026 it keeps one row per answer: who asked, what was answered, with which sources, with which provider, how many tokens and how many milliseconds."
         corpus: [agentes-en-produccion]
 
-  # ─── 9 · Lo que haría distinto y lo que no he hecho ─────────────────────────
+  # ─── 9 · Límites y alcance ──────────────────────────────────────────────────
   - n: 9
     limites:
       - voz: hice

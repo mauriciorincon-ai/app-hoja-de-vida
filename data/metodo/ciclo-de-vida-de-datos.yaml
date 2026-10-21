@@ -594,7 +594,7 @@ bloques:
           en: "In 2023, reorganizing the ETL processes into separate steps for connecting, preparing and building the model’s tables cut analysis times by 35%."
         corpus: [fabric-en-la-practica]
 
-  # ─── 9 · Lo que haría distinto y lo que no he hecho ─────────────────────────
+  # ─── 9 · Límites y alcance ──────────────────────────────────────────────────
   - n: 9
     limites:
       - voz: hice
