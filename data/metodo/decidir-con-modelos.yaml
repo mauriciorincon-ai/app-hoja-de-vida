@@ -638,7 +638,7 @@ bloques:
         corpus: [las-investigaciones]
         href: /vitrina/investigaciones
       - nombre: { es: "Convoyes de buses: la política, contra el mejor control clásico", en: "Bus bunching: the policy, against the best classic control" }
-        nivel: uso-real
+        nivel: prototipo
         texto:
           es: "En la investigación sobre convoyes de buses, la política propuesta se prueba en una simulación de eventos discretos con verdad conocida por construcción y se compara contra el mejor control clásico, nunca contra no hacer nada; las experiencias medidas son de un corredor simulado, y su ficha no afirma cifras del sistema real."
           en: "In the research on bus bunching, the proposed policy is tested in a discrete-event simulation with ground truth known by construction and compared against the best classic control, never against doing nothing; the experiences measured come from a simulated corridor, and its technical sheet claims no figures for the real system."

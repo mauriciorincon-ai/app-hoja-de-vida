@@ -26,7 +26,7 @@ import type { PiezaMetodo } from "@/lib/metodo/schema";
  * árbol no depende de `useReducedMotion()` (`motion-estructura-reducida`).
  */
 
-/** Escalón entre entradas: más corto que el de la vitrina, hay hasta nueve. */
+/** Escalón entre entradas: más corto que el de la vitrina, porque la lista es larga. */
 const ESCALON_S = 0.06;
 
 export function PuertaMetodos({
