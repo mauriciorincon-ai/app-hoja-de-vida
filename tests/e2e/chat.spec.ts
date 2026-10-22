@@ -131,7 +131,7 @@ test.describe("chat — flujo estrella", () => {
     await expect(fuente).not.toHaveText(/In depth|A fondo/);
   });
 
-  // «Métodos» (S10, F3; T3 en el S11, T4 en el S12, T6 en el S13, T7 en el S15, T1 en el S16, T5 en el S17): el chat cita la publicación, bloque a
+  // «Métodos» (S10, F3; T3 en el S11, T4 en el S12, T6 en el S13, T7 en el S15, T1 en el S16, T5 en el S17, T9 en el S18): el chat cita la publicación, bloque a
   // bloque. Cada pieza trae la primera de sus preguntas del banco; el chip dice el
   // código del tema y el nombre de la pieza, y la cita lleva al BLOQUE, no a la página.
   for (const [slug, codigo, idioma, pregunta, nombre] of [
@@ -149,6 +149,8 @@ test.describe("chat — flujo estrella", () => {
     ["ia-en-la-organizacion", "T1", "en", "How would Henry bring AI to a company that is just starting out?", "How AI should be brought into an organization"],
     ["gobierno-de-ia-y-datos", "T5", "es", "¿Cómo evalúa Henry el impacto de un sistema de IA?", "Cómo se deben gobernar la IA y los datos"],
     ["gobierno-de-ia-y-datos", "T5", "en", "How does Henry assess the impact of an AI system?", "How AI and data should be governed"],
+    ["de-proceso-a-operacion", "T9", "es", "¿Cómo decide Henry qué automatizar y con qué herramienta?", "Cómo se debe convertir un proceso en una operación inteligente"],
+    ["de-proceso-a-operacion", "T9", "en", "How does Henry decide what to automate and with which tool?", "How a process should be turned into an intelligent operation"],
   ] as const) {
     test(`la cita de ${codigo} lleva al bloque exacto (${idioma})`, async ({
       page,
