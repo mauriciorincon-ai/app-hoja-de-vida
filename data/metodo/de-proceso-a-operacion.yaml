@@ -1,0 +1,724 @@
+# T9 · «Cómo se debe convertir un proceso en una operación inteligente» (S18, 2026-10-21).
+#
+# Publicación de «Métodos» en voz impersonal desde el primer commit: diez bloques fijos, tres voces separadas
+# (Evidencia = corpus del sitio, con el proyecto como sujeto · Estado del campo = fuente con título, editor, fecha
+# y enlace · Criterio = posición del autor, rotulada). Ninguna cifra sin corpus; nada sube de nivel.
+#
+# Investigación del 2026-10-21 (19:36 → 19:41): documentación oficial primero —Microsoft Learn (minería de procesos
+# y registros centrados en objetos en Power Automate, la guía HEAT y el modelo de madurez de automatización, los flujos
+# de escritorio, los flujos de agente y las herramientas de Copilot Studio, los patrones de agentes orientados a flujo),
+# la IEC (ISO/IEC 19510, la norma de BPMN) y arXiv (la especificación OCEL 2.0)—. Solo contenido público servido al
+# navegador, sin credenciales ajenas ni endpoints de terceros; ninguna página leída traía texto dirigido a agentes.
+# Hallazgos: ocel-standard.org no publica fecha (se cita la especificación en arXiv, del 2024-03-04); la página de la
+# OMG sobre BPMN 2.0.2 solo dice «enero de 2014», sin día (se cita la ISO/IEC 19510 en la IEC, con fecha completa);
+# iso.org no se leyó (en el S16 respondió con un desafío anti-bot). La fecha de cada fuente de Learn es su `ms.date`.
+#
+# La evidencia sale de `procesos-y-simulacion`, `como-trabajo`, `ceinfes`, `cafam`, `vesting`, `agentes-en-produccion`,
+# `las-investigaciones` y `fundacion-ctic`. La RPA y los flujos low-code (Power Automate, Power Apps, Copilot Studio) no
+# tienen un caso en ningún documento a fondo: aquí son estado del campo, nunca experiencia, y el cierre del sprint lo
+# lleva como [CONFIRMAR]. FORJA se enlaza a T2 (`/metodos/sistema-de-agentes#bloque-4`), no se reescribe. El título de la
+# fase 3 y el de la decisión 2 llevan las palabras de la pregunta que el banco exige («decide qué automatizar y con qué
+# herramienta»), medidas antes de fijarlos. El bloque 7 no lleva cifras propias.
+
+id: T9
+slug: de-proceso-a-operacion
+nombre:
+  es: "Cómo se debe convertir un proceso en una operación inteligente"
+  en: "How a process should be turned into an intelligent operation"
+bloques:
+  # ─── 1 · El problema ────────────────────────────────────────────────────────
+  - n: 1
+    pregunta:
+      es: "Convertir un proceso en una operación inteligente sin automatizar un proceso malo: modelarlo antes de tocar la tecnología, decidir qué automatizar y con qué herramienta, y dejar a cada decisión el control humano que su riesgo exige."
+      en: "Turning a process into an intelligent operation without automating a bad process: modeling it before touching the technology, deciding what to automate and with which tool, and giving each decision the human control its risk calls for."
+    respuesta:
+      - es: "El proceso va antes que la herramienta: un BPMN con responsables, compuertas, eventos y datos sirve para acordar con el negocio, especificar para tecnología y decidir qué eventos capturar para medir."
+        en: "The process comes before the tool: a BPMN with owners, gateways, events and data serves to agree with the business, specify for technology and decide which events to capture in order to measure."
+      - es: "La herramienta se elige subiendo una escalera: primero la intervención más sencilla —arreglar el proceso, una regla en código—, después los flujos y, solo donde hace falta interpretar, un agente con límites."
+        en: "The tool is chosen by climbing a ladder: first the simplest intervention —fixing the process, a rule in code—, then flows and, only where interpretation is needed, an agent with limits."
+      - es: "Cada automatización se mide contra el proceso que reemplaza y se vigila después: el ritmo lo fija la capacidad real, no el cronograma, y la autonomía crece con la evidencia."
+        en: "Every automation is measured against the process it replaces and monitored afterwards: the pace is set by real capacity, not by the schedule, and autonomy grows with the evidence."
+
+  # ─── 2 · El mapa ────────────────────────────────────────────────────────────
+  - n: 2
+    titulo:
+      es: "Del proceso acordado a la operación inteligente, peldaño por peldaño"
+      en: "From an agreed process to an intelligent operation, rung by rung"
+    resumen:
+      es: "El dueño del proceso lo modela en BPMN; lo esperado se contrasta con lo ejecutado, que llega del registro de eventos, y el proceso se corrige antes de medir su capacidad real y su restricción. Con esa medida se prioriza qué automatizar y se empieza por el peldaño más sencillo: código y reglas; si no hay API, RPA sobre la interfaz; con conectores, flujos low-code; con la plataforma de datos, flujos de n8n; y solo donde hay que interpretar, un agente con código. El agente actúa dentro de límites, bajo un control humano que depende del tipo de decisión; la operación queda observable, deja su rastro en el registro de eventos y se mide, y las métricas vuelven al dueño del proceso."
+      en: "The process owner models it in BPMN; what is expected is checked against what was executed, which comes from the event log, and the process is fixed before its real capacity and its constraint are measured. With that measurement, what to automate is prioritized and the work starts on the simplest rung: code and rules; with no API, RPA on the interface; with connectors, low-code flows; with the data platform, n8n flows; and only where interpretation is needed, an agent in code. The agent acts within limits, under a human control that depends on the type of decision; the operation stays observable, leaves its trace in the event log and is measured, and the metrics go back to the process owner."
+    nodos:
+      - n: 1
+        etiqueta: { es: "Dueño del proceso", en: "Process owner" }
+        tipo: humano
+        col: 0
+        fila: 0
+        detalle:
+          es: "Quien responde por el resultado del proceso y decide qué se automatiza, con qué herramienta y con cuánto control."
+          en: "Whoever answers for the result of the process and decides what is automated, with which tool and with how much control."
+      - n: 2
+        etiqueta: { es: "El proceso en BPMN", en: "The process in BPMN" }
+        tipo: dato
+        col: 1
+        fila: 0
+        detalle:
+          es: "Carriles por responsable, compuertas con su regla, eventos que lo disparan y objetos de datos que viajan entre actividades."
+          en: "Lanes per owner, gateways with their rule, the events that trigger it and the data objects that travel between activities."
+      - n: 3
+        etiqueta: { es: "Formal frente a ejecutado", en: "Designed versus executed" }
+        tipo: control
+        col: 2
+        fila: 0
+        detalle:
+          es: "Dónde lo que el procedimiento dice y lo que la operación hace se separan: decisiones informales, correcciones manuales y excepciones."
+          en: "Where what the procedure says and what the operation does drift apart: informal decisions, manual corrections and exceptions."
+      - n: 4
+        etiqueta: { es: "Capacidad y restricción", en: "Capacity and constraint" }
+        tipo: control
+        col: 3
+        fila: 0
+        detalle:
+          es: "Tiempo estándar, capacidad efectiva y la estación que fija el ritmo del flujo completo, medidos antes de cambiar nada."
+          en: "Standard time, effective capacity and the station that sets the pace of the whole flow, measured before anything changes."
+      - n: 5
+        etiqueta: { es: "Qué automatizar", en: "What to automate" }
+        tipo: control
+        col: 4
+        fila: 0
+        detalle:
+          es: "Valor, frecuencia, datos disponibles y riesgo de equivocarse: se automatiza lo estable y lo que vale la pena, no lo que sigue en discusión."
+          en: "Value, frequency, available data and the risk of being wrong: what is stable and worth it gets automated, not what is still under discussion."
+      - n: 6
+        etiqueta: { es: "Registro de eventos", en: "Event log" }
+        tipo: dato
+        col: 2
+        fila: 1
+        detalle:
+          es: "Qué pasó, cuándo, sobre qué objetos y quién lo hizo: la base para comparar lo esperado con lo ejecutado."
+          en: "What happened, when, on which objects and who did it: the basis for comparing what was expected with what was executed."
+      - n: 7
+        etiqueta: { es: "Código y reglas", en: "Code and rules" }
+        tipo: actor
+        col: 5
+        fila: 1
+        detalle:
+          es: "Una macro, un script o una consulta que aplica reglas explícitas: el peldaño más sencillo y el primero que se prueba."
+          en: "A macro, a script or a query that applies explicit rules: the simplest rung and the first one tried."
+      - n: 8
+        etiqueta: { es: "RPA sobre la interfaz", en: "RPA on the interface" }
+        tipo: actor
+        col: 5
+        fila: 2
+        detalle:
+          es: "Un robot que repite clics y tecleo donde el sistema no ofrece API; depende de que la pantalla no cambie."
+          en: "A robot that repeats clicks and keystrokes where the system offers no API; it depends on the screen not changing."
+      - n: 9
+        etiqueta: { es: "Flujos low-code", en: "Low-code flows" }
+        tipo: actor
+        col: 4
+        fila: 2
+        detalle:
+          es: "Flujos entre aplicaciones con conectores y aprobaciones: deterministas, la misma entrada da la misma salida."
+          en: "Flows between applications with connectors and approvals: deterministic, the same input gives the same output."
+      - n: 10
+        etiqueta: { es: "Flujos n8n con datos", en: "n8n flows with data" }
+        tipo: actor
+        col: 3
+        fila: 2
+        detalle:
+          es: "Flujos que conectan servicios, reglas y agentes, con una plataforma de datos que guarda cada evento para observarlos."
+          en: "Flows that connect services, rules and agents, with a data platform that keeps every event so they can be observed."
+      - n: 11
+        etiqueta: { es: "Agente con código", en: "Agent in code" }
+        tipo: actor
+        col: 2
+        fila: 2
+        detalle:
+          es: "Interpreta lenguaje, recupera conocimiento o elige entre opciones dentro de límites, con criterios verificables; entra donde una regla fija no alcanza."
+          en: "Interprets language, retrieves knowledge or chooses between options within limits, with verifiable criteria; it comes in where a fixed rule is not enough."
+      - n: 12
+        etiqueta: { es: "Control humano por decisión", en: "Human control per decision" }
+        tipo: control
+        col: 1
+        fila: 2
+        detalle:
+          es: "Informar, recomendar o ejecutar: la autonomía depende del costo de equivocarse y de si la acción se puede revertir."
+          en: "Inform, recommend or execute: autonomy depends on the cost of being wrong and on whether the action can be reversed."
+      - n: 13
+        etiqueta: { es: "Operación observable", en: "Observable operation" }
+        tipo: dato
+        col: 1
+        fila: 1
+        detalle:
+          es: "Cada ejecución con su estado, su tiempo, sus excepciones y su costo, registrada fuera del componente que hace el trabajo."
+          en: "Every run with its status, its time, its exceptions and its cost, recorded outside the component that does the work."
+      - n: 14
+        etiqueta: { es: "Métricas de la automatización", en: "Automation metrics" }
+        tipo: control
+        col: 0
+        fila: 1
+        detalle:
+          es: "Tiempo de ciclo, retrabajo, errores y trabajo manual que queda, comparados con la línea base del proceso."
+          en: "Cycle time, rework, errors and the manual work that remains, compared with the baseline of the process."
+    aristas:
+      - { de: 1, a: 2, etiqueta: { es: "modela", en: "models" } }
+      - { de: 2, a: 3, etiqueta: { es: "lo esperado", en: "expected" } }
+      - { de: 6, a: 3, etiqueta: { es: "lo ejecutado", en: "executed" } }
+      - { de: 3, a: 4, etiqueta: { es: "se corrige", en: "is fixed" } }
+      - { de: 4, a: 5, etiqueta: { es: "prioriza", en: "prioritizes" } }
+      - { de: 5, a: 7, etiqueta: { es: "empieza por", en: "starts with" } }
+      - { de: 7, a: 8, etiqueta: { es: "sin API", en: "no API" } }
+      - { de: 8, a: 9, etiqueta: { es: "con conectores", en: "with connectors" } }
+      - { de: 9, a: 10, etiqueta: { es: "con datos", en: "with data" } }
+      - { de: 10, a: 11, etiqueta: { es: "hay que interpretar", en: "needs interpreting" } }
+      - { de: 11, a: 12, etiqueta: { es: "dentro de límites", en: "within limits" } }
+      - { de: 12, a: 13, etiqueta: { es: "opera", en: "operates" } }
+      - { de: 13, a: 6, etiqueta: { es: "deja su rastro", en: "leaves its trace" } }
+      - { de: 13, a: 14, etiqueta: { es: "se mide", en: "is measured" } }
+      - { de: 14, a: 1, etiqueta: { es: "informa", en: "informs" } }
+
+  # ─── 3 · Las fases ──────────────────────────────────────────────────────────
+  - n: 3
+    fases:
+      - nombre:
+          es: "Modelar el proceso antes de tocar la tecnología"
+          en: "Model the process before touching the technology"
+        entradas:
+          - es: "El proceso tal como se ejecuta hoy, con sus excepciones y sus archivos auxiliares."
+            en: "The process as it runs today, with its exceptions and its side files."
+          - es: "Los procedimientos escritos y las personas que hacen cada actividad."
+            en: "The written procedures and the people who do each activity."
+        actividades:
+          - es: "Dibujar el proceso en BPMN: quién hace cada actividad, qué decisión bifurca el flujo, qué evento lo dispara y qué información viaja."
+            en: "Draw the process in BPMN: who does each activity, which decision splits the flow, which event triggers it and what information travels."
+          - es: "Contrastar el proceso formal con el ejecutado y anotar cada divergencia."
+            en: "Check the formal process against the executed one and record every divergence."
+          - es: "Decidir con el dueño qué se conserva, qué se transforma y qué falta acordar."
+            en: "Decide with the owner what is kept, what is transformed and what still needs agreement."
+        artefactos:
+          - es: "El BPMN acordado con el dueño del proceso."
+            en: "The BPMN agreed with the process owner."
+          - es: "La lista de divergencias entre lo formal y lo ejecutado."
+            en: "The list of divergences between the formal and the executed process."
+        decide:
+          es: "El dueño del proceso."
+          en: "The process owner."
+        control:
+          es: "Ninguna automatización empieza sobre un proceso que su dueño no ha acordado."
+          en: "No automation starts on a process its owner has not agreed to."
+        nota:
+          voz: hice
+          texto:
+            es: "En Cafam, en 2020, el proceso de la bodega que el WMS esperaba y el que la bodega ejecutaba no eran el mismo, y las pruebas existían para encontrar cada punto en que divergían."
+            en: "At Cafam, in 2020, the warehouse process the WMS expected and the one the warehouse carried out were not the same, and the tests existed to find every point where they diverged."
+          corpus: [procesos-y-simulacion]
+      - nombre:
+          es: "Medir la capacidad real y la restricción"
+          en: "Measure real capacity and the constraint"
+        entradas:
+          - es: "Los tiempos observados de cada operación y quién la ejecuta."
+            en: "The observed times of each operation and who performs it."
+          - es: "Los volúmenes, las estaciones y las colas del flujo completo."
+            en: "The volumes, stations and queues of the whole flow."
+        actividades:
+          - es: "Calcular el tiempo estándar con la valoración del ritmo y los suplementos por fatiga."
+            en: "Calculate the standard time with pace rating and fatigue allowances."
+          - es: "Encontrar la estación que fija el ritmo del flujo completo."
+            en: "Find the station that sets the pace of the whole flow."
+          - es: "Balancear el flujo hacia la restricción, no acelerar cada estación por separado."
+            en: "Balance the flow toward the constraint, not speed up each station separately."
+        artefactos:
+          - es: "Los tiempos estándar de las operaciones."
+            en: "The standard times of the operations."
+          - es: "El mapa de capacidad con su cuello de botella."
+            en: "The capacity map with its bottleneck."
+        decide:
+          es: "El dueño del proceso, con quien lo opera."
+          en: "The process owner, with whoever runs it."
+        control:
+          es: "Ninguna meta de automatización se fija contra la capacidad nominal."
+          en: "No automation target is set against nominal capacity."
+        nota:
+          voz: hice
+          texto:
+            es: "En Ceinfes, en 2018, no tenía sentido acelerar el escaneo si la captura manual no daba abasto: balancear no fue comprar más escáneres, sino mover personas hacia la restricción y medir cada jornada el avance y el pendiente de digitalización."
+            en: "At Ceinfes, in 2018, speeding up scanning made no sense if manual capture could not keep up: balancing was not buying more scanners, but moving people toward the constraint and measuring each day the progress and the backlog of digitization."
+          corpus: [procesos-y-simulacion]
+      - nombre:
+          es: "Decidir qué automatizar y con qué herramienta"
+          en: "Decide what to automate and with which tool"
+        entradas:
+          - es: "El proceso acordado, su capacidad y su restricción."
+            en: "The agreed process, its capacity and its constraint."
+          - es: "El valor, la frecuencia y el riesgo de equivocarse de cada actividad."
+            en: "The value, frequency and risk of being wrong of each activity."
+        actividades:
+          - es: "Descartar lo que se resuelve cambiando el proceso, aclarando una definición o mejorando el dato."
+            en: "Rule out what is solved by changing the process, clarifying a definition or improving the data."
+          - es: "Elegir el peldaño más bajo de la escalera que produce el resultado."
+            en: "Choose the lowest rung of the ladder that produces the result."
+          - es: "Escribir por qué no alcanza el peldaño de abajo cada vez que se sube uno."
+            en: "Write down why the rung below is not enough every time one is climbed."
+        artefactos:
+          - es: "La cola priorizada de automatizaciones."
+            en: "The prioritized queue of automations."
+          - es: "La decisión escrita de herramienta para cada una."
+            en: "The written tool decision for each one."
+        decide:
+          es: "El dueño del proceso, con quien opera la tecnología."
+          en: "The process owner, with whoever runs the technology."
+        control:
+          es: "Ningún agente donde una regla fija alcanza, y nada se automatiza sin línea base."
+          en: "No agent where a fixed rule is enough, and nothing is automated without a baseline."
+        nota:
+          voz: hice
+          texto:
+            es: "En Banco Pichincha, en la escalera de instrumentos del reporte al agente, el escalón correcto para fuga y mora fue el modelo predictivo con la persona decidiendo, no un agente; en Vesting, agentes que actuaban con límites explícitos y monitoreo en tiempo real."
+            en: "At Banco Pichincha, on the ladder of instruments from the report to the agent, the right rung for churn and delinquency was the predictive model with the person deciding, not an agent; at Vesting, agents that acted within explicit limits and real-time monitoring."
+          corpus: [como-trabajo]
+      - nombre:
+          es: "Construir con el control humano que cada decisión exige"
+          en: "Build with the human control each decision calls for"
+        entradas:
+          - es: "La actividad elegida y su peldaño."
+            en: "The chosen activity and its rung."
+          - es: "Las decisiones que toca y lo que cuesta equivocarse en cada una."
+            en: "The decisions it touches and what being wrong costs in each one."
+        actividades:
+          - es: "Especificar cada actividad con entradas, reglas, salidas, excepciones y criterios verificables."
+            en: "Specify each activity with inputs, rules, outputs, exceptions and verifiable criteria."
+          - es: "Fijar qué informa, qué recomienda y qué ejecuta solo, y bajo qué condiciones."
+            en: "Set what it informs, what it recommends and what it executes on its own, and under which conditions."
+          - es: "Probar contra la definición de terminado antes de operar."
+            en: "Test against the definition of done before operating."
+        artefactos:
+          - es: "La especificación con sus criterios de aceptación."
+            en: "The specification with its acceptance criteria."
+          - es: "La matriz de autonomía por tipo de decisión."
+            en: "The autonomy matrix by type of decision."
+        decide:
+          es: "El dueño del proceso aprueba el nivel de autonomía."
+          en: "The process owner approves the level of autonomy."
+        control:
+          es: "Ninguna acción de alto impacto sin aprobación humana, y la definición de terminado se acuerda antes."
+          en: "No high-impact action without human approval, and the definition of done is agreed beforehand."
+        nota:
+          voz: hice
+          texto:
+            es: "En Vesting el proceso core de once etapas fijaba el nivel de autonomía de cada agente —consultar, recomendar o ejecutar, y bajo qué condiciones— antes de construirlo, y la definición de terminado se acordaba antes, no se demostraba después."
+            en: "At Vesting the eleven-stage core process set each agent's level of autonomy —consult, recommend or execute, and under which conditions— before building it, and the definition of done was agreed beforehand, not shown afterwards."
+          corpus: [vesting, agentes-en-produccion]
+      - nombre:
+          es: "Operar, observar y medir contra la línea base"
+          en: "Operate, observe and measure against the baseline"
+        entradas:
+          - es: "Los eventos de cada ejecución."
+            en: "The events of every run."
+          - es: "La línea base del proceso antes de automatizar."
+            en: "The baseline of the process before automating."
+        actividades:
+          - es: "Registrar cada ejecución con su estado, su tiempo, sus excepciones y su costo."
+            en: "Record every run with its status, its time, its exceptions and its cost."
+          - es: "Comparar lo ejecutado con lo esperado y con la línea base."
+            en: "Compare what was executed with what was expected and with the baseline."
+          - es: "Decidir si se corrige la operación o se actualiza el modelo del proceso."
+            en: "Decide whether to correct the operation or update the process model."
+        artefactos:
+          - es: "El tablero de la operación automatizada."
+            en: "The dashboard of the automated operation."
+          - es: "El registro de excepciones con su responsable."
+            en: "The exception log with its owner."
+        decide:
+          es: "El dueño del proceso, con producto y operaciones."
+          en: "The process owner, with product and operations."
+        control:
+          es: "El componente que hace el trabajo no es el único que afirma que el trabajo se hizo bien."
+          en: "The component that does the work is not the only one that claims the work was done right."
+        nota:
+          voz: hice
+          texto:
+            es: "En Vesting n8n coordinaba parte de la ejecución de los agentes y Microsoft Fabric conservaba sus eventos —sesiones, solicitudes, respuestas, tiempos, estados y costo en tokens—, que Power BI ponía frente a producto y operaciones: la ejecución y la observación se separaban, porque el componente que hace el trabajo no debería ser el único que afirma que se hizo bien."
+            en: "At Vesting n8n coordinated part of the agents' execution and Microsoft Fabric kept their events —sessions, requests, responses, times, statuses and token cost—, which Power BI put in front of product and operations: execution and observation were kept apart, because the component that does the work should not be the only one claiming it was done right."
+          corpus: [agentes-en-produccion]
+
+  # ─── 4 · Las decisiones de diseño ───────────────────────────────────────────
+  - n: 4
+    decisiones:
+      - titulo:
+          es: "El BPMN antes que la herramienta"
+          en: "BPMN before the tool"
+        cuandoSi:
+          es: "Cuando el proceso cruza áreas, tiene excepciones o nadie ha escrito cómo se ejecuta de verdad: el diagrama acuerda con el negocio, especifica para tecnología y dice qué eventos capturar para medir."
+          en: "When the process crosses areas, has exceptions or nobody has written down how it really runs: the diagram agrees with the business, specifies for technology and says which events to capture in order to measure."
+        cuandoNo:
+          es: "Cuando la tarea es de una sola persona, con pasos estables y conocidos: basta con escribirla."
+          en: "When the task belongs to a single person, with stable and known steps: writing it down is enough."
+        porQue:
+          voz: hice
+          texto:
+            es: "En Cafam cada actividad del despacho tenía que dejar un registro en el WMS, y si no lo dejaba, el BI de control no podía verla: el BPMN va antes que el modelo de datos, y el modelo de datos antes que cualquier tablero."
+            en: "At Cafam every dispatch activity had to leave a record in the WMS, and if it did not, the control BI could not see it: BPMN comes before the data model, and the data model before any dashboard."
+          corpus: [procesos-y-simulacion]
+        nota:
+          voz: campo
+          texto:
+            es: "La norma de BPMN busca una notación que todos los usuarios del negocio entiendan y un puente estandarizado entre el diseño de un proceso y su implementación."
+            en: "The BPMN standard seeks a notation readily understandable by all business users and a standardized bridge between the design of a process and its implementation."
+          fuentes: [1]
+      - titulo:
+          es: "Cómo se decide qué automatizar y con qué herramienta: la intervención más sencilla que produce el resultado"
+          en: "How to decide what to automate and with which tool: the simplest intervention that produces the result"
+        cuandoSi:
+          es: "Siempre: primero se prueba si basta cambiar el proceso, aclarar una definición o mejorar el dato; después, el peldaño más bajo que resuelve —una regla en código antes que un flujo, un flujo antes que un agente—."
+          en: "Always: first check whether changing the process, clarifying a definition or improving the data is enough; then, the lowest rung that solves it —a rule in code before a flow, a flow before an agent—."
+        cuandoNo:
+          es: "Cuando la actividad todavía está en discusión o cambia cada semana: automatizarla congela la discusión dentro de una herramienta."
+          en: "When the activity is still under discussion or changes every week: automating it freezes the discussion inside a tool."
+        porQue:
+          voz: hice
+          texto:
+            es: "En Ceinfes la programación de profesores y consultores para más de 100 colegios al año, que se hacía a mano en Google Calendar, no necesitó un sistema: necesitó una macro en VBA que la optimizara con las restricciones escritas —disponibilidad, competencia, ubicación y ventana de cada colegio—."
+            en: "At Ceinfes the scheduling of teachers and consultants for more than 100 schools a year, done by hand in Google Calendar, did not need a system: it needed a VBA macro that optimized it with the constraints written down —availability, competence, location and each school's window—."
+          corpus: [ceinfes, como-trabajo]
+        nota:
+          voz: campo
+          texto:
+            es: "La guía HEAT de Microsoft parte de que no todo proceso puede automatizarse: propone escoger cada automatización por su retorno esperado y usar la minería de procesos para descubrir cuál automatizar."
+            en: "Microsoft's HEAT guidance starts from the fact that not every process can be automated: it proposes picking each automation by its expected return and using process mining to discover which one to automate."
+          fuentes: [5]
+      - titulo:
+          es: "RPA solo donde no hay otra puerta"
+          en: "RPA only where there is no other door"
+        cuandoSi:
+          es: "Cuando el sistema no ofrece API ni conector, la pantalla es estable y las reglas se pueden escribir: un robot repite el trabajo sobre la interfaz."
+          en: "When the system offers no API or connector, the screen is stable and the rules can be written down: a robot repeats the work on the interface."
+        cuandoNo:
+          es: "Cuando existe una API o un conector, o la pantalla cambia con frecuencia: la automatización por interfaz se rompe con cada rediseño."
+          en: "When an API or a connector exists, or the screen changes often: interface automation breaks with every redesign."
+        porQue:
+          voz: campo
+          texto:
+            es: "Los flujos de escritorio amplían la automatización robótica de procesos (RPA) de Power Automate: automatizan tareas repetitivas basadas en reglas sobre aplicaciones modernas y heredadas."
+            en: "Desktop flows broaden Power Automate's robotic process automation (RPA) capabilities: they automate repetitive rule-based tasks on modern and legacy applications."
+          fuentes: [7]
+        nota:
+          voz: posicion
+          texto:
+            es: "Un robot sobre la interfaz dura lo que dura la pantalla: necesita dueño y fecha de revisión desde el primer día."
+            en: "A robot on the interface lasts as long as the screen does: it needs an owner and a review date from day one."
+      - titulo:
+          es: "Flujos deterministas para lo que debe salir igual, agentes para lo que hay que interpretar"
+          en: "Deterministic flows for what must come out the same, agents for what needs interpreting"
+        cuandoSi:
+          es: "Cuando la misma entrada debe producir siempre la misma salida —una aprobación, una carga, una notificación—, el paso es un flujo; el agente entra solo en el paso que exige interpretar lenguaje, recuperar conocimiento o elegir entre opciones."
+          en: "When the same input must always produce the same output —an approval, a load, a notification—, the step is a flow; the agent comes in only at the step that requires interpreting language, retrieving knowledge or choosing between options."
+        cuandoNo:
+          es: "Cuando se pone un agente a ejecutar un paso que una regla fija resuelve: se gana variabilidad y se pierde la trazabilidad de la regla."
+          en: "When an agent is set to run a step a fixed rule solves: variability is gained and the traceability of the rule is lost."
+        porQue:
+          voz: campo
+          texto:
+            es: "En Copilot Studio los flujos de agente son deterministas: siguen un camino basado en reglas, y la misma entrada produce siempre la misma salida."
+            en: "In Copilot Studio agent flows are deterministic: they follow a rule-based path, and the same input always produces the same output."
+          fuentes: [9]
+        nota:
+          voz: hice
+          texto:
+            es: "En Vesting n8n fue una base fundamental para la automatización de los flujos de los agentes, no la arquitectura completa: el valor estaba en definir qué información entraba, qué transformación ocurría, qué resultado se esperaba y cómo se manejaba una excepción."
+            en: "At Vesting n8n was a fundamental base for automating the agents' flows, not the whole architecture: the value lay in defining what information came in, what transformation happened, what result was expected and how an exception was handled."
+          corpus: [agentes-en-produccion]
+      - titulo:
+          es: "Control humano por tipo de decisión"
+          en: "Human control by type of decision"
+        cuandoSi:
+          es: "Cuando una decisión tiene consecuencias que no se pueden revertir o su error cuesta caro: la automatización informa o recomienda, y una persona aprueba."
+          en: "When a decision has consequences that cannot be reversed or its error is costly: the automation informs or recommends, and a person approves."
+        cuandoNo:
+          es: "Cuando la acción se puede verificar y revertir, y aprobar cada caso volvería a la persona el cuello de botella."
+          en: "When the action can be verified and reversed, and approving each case would turn the person into the bottleneck."
+        porQue:
+          voz: hice
+          texto:
+            es: "En los 15 agentes de la vitrina los límites de cada uno y lo que «nunca» hace están escritos en su ficha técnica, y el Constructor de Tableros Power BI tiene 5 gates de aprobación humana: ninguna corrida cierra sin que una persona apruebe el resultado."
+            en: "In the 15 showcase agents each one's limits and what it «never» does are written in its technical sheet, and the Power BI Dashboard Builder has 5 human approval gates: no run closes without a person approving the result."
+          corpus: [como-trabajo]
+        nota:
+          voz: campo
+          texto:
+            es: "Copilot Studio separa tres capas de control: la determinista para las acciones críticas o irreversibles, una intermedia con puntos de aprobación para el riesgo medio y la generativa para lo de bajo riesgo, con límites de decisión explícitos."
+            en: "Copilot Studio separates three layers of control: the deterministic one for critical or irreversible actions, an intermediate one with approval checkpoints for medium risk and the generative one for low-risk work, with explicit decision boundaries."
+          fuentes: [11]
+      - titulo:
+          es: "Medir la automatización contra la línea base del proceso"
+          en: "Measure the automation against the baseline of the process"
+        cuandoSi:
+          es: "Siempre que una automatización sale a operar: se compara con el proceso que reemplaza —tiempo de ciclo, retrabajo, errores, trabajo manual que queda— y no con su demostración."
+          en: "Whenever an automation goes into operation: it is compared with the process it replaces —cycle time, rework, errors, the manual work that remains— and not with its demo."
+        cuandoNo:
+          es: "Cuando no hay línea base: primero se mide el proceso y después se automatiza."
+          en: "When there is no baseline: the process is measured first and automated afterwards."
+        porQue:
+          voz: hice
+          texto:
+            es: "En Cafam, la exactitud de registro de inventario se medía antes y después de las pruebas de implementación del WMS, y las aplicaciones en VBA que reemplazaron cargas manuales subieron un 15 % la automatización y contribuyeron a bajar un 50 % los errores de datos."
+            en: "At Cafam, inventory record accuracy was measured before and after the WMS implementation testing, and the VBA applications that replaced manual loads raised automation by 15% and contributed to cutting data errors by 50%."
+          corpus: [cafam]
+        nota:
+          voz: campo
+          texto:
+            es: "En el modelo de madurez de automatización de Microsoft, desde el primer nivel se fijan indicadores para medir los beneficios de la automatización y su efecto en las métricas operativas."
+            en: "In Microsoft's automation maturity model, indicators to measure the benefits of automation and its effect on operational metrics are set from the first level."
+          fuentes: [6]
+
+  # ─── 5 · Lo innovador en 2026 ───────────────────────────────────────────────
+  - n: 5
+    elementos:
+      - titulo: { es: "La minería de procesos centrada en objetos", en: "Object-centric process mining" }
+        queCambia:
+          es: "Un registro de eventos ya no supone un solo caso por proceso: OCEL 2.0 registra eventos que tocan varios objetos a la vez, los cambios de esos objetos y sus relaciones calificadas, con tres formatos de intercambio —SQLite, XML y JSON—, y Power Automate documenta cómo preparar un registro centrado en objetos —un CSV en Azure Data Lake u OneLake, o una tabla delta en un Lakehouse de Fabric— para ingerirlo en su minería de procesos."
+          en: "An event log no longer assumes a single case per process: OCEL 2.0 records events that touch several objects at once, the changes of those objects and their qualified relationships, with three exchange formats —SQLite, XML and JSON—, and Power Automate documents how to prepare an object-centric log —a CSV in Azure Data Lake or OneLake, or a delta table in a Fabric Lakehouse— to ingest it into its process mining."
+        fuentes: [2, 3]
+        nota:
+          voz: posicion
+          texto:
+            es: "La minería de procesos muestra lo que se ejecutó, no lo que debería ejecutarse: el modelo acordado sigue haciendo falta para saber cuál de los dos se corrige."
+            en: "Process mining shows what was executed, not what should be: the agreed model is still needed to know which of the two gets corrected."
+      - titulo: { es: "La minería de procesos para descubrir qué automatizar", en: "Process mining to discover what to automate" }
+        queCambia:
+          es: "La minería de procesos de Power Automate usa los registros de eventos del sistema de origen para dibujar el proceso real con datos y métricas; entre sus usos declara ver los pasos reales, detectar procesos no conformes y descubrir oportunidades de automatización, y la minería de tareas mira lo que ocurre en el escritorio."
+          en: "Power Automate's process mining uses the event logs of the system of record to draw the real process with data and metrics; among its uses it lists seeing the actual steps, detecting noncompliant processes and discovering automation opportunities, and task mining looks at what happens on the desktop."
+        fuentes: [4]
+      - titulo: { es: "Agentes que usan el computador frente a la RPA", en: "Computer-using agents versus RPA" }
+        queCambia:
+          es: "La RPA sigue reglas predefinidas sobre el árbol de la interfaz; un agente que usa el computador ve la pantalla, razona y se corrige. Microsoft recomienda la RPA cuando la interfaz es estable, las reglas son claras y el volumen es alto, y el agente cuando las interfaces cambian o la decisión es difusa."
+          en: "RPA follows predefined rules over the interface tree; a computer-using agent sees the screen, reasons and corrects itself. Microsoft recommends RPA when the interface is stable, the rules are clear and the volume is high, and the agent when interfaces shift or the decision is fuzzy."
+        fuentes: [8]
+        nota:
+          voz: posicion
+          texto:
+            es: "Un agente que usa el computador no reemplaza la pregunta de fondo: si existe una API, la interfaz sigue siendo la puerta equivocada."
+            en: "A computer-using agent does not replace the underlying question: if an API exists, the interface is still the wrong door."
+      - titulo: { es: "Del proceso a un flujo que llama agentes", en: "From the process to a flow that calls agents" }
+        queCambia:
+          es: "Cuando un proceso exige orden estricto, reglas de negocio y auditoría, puede ser apropiado encadenar los agentes en un flujo con una secuencia predefinida: cada paso con precondiciones, poscondiciones y umbrales, y compuertas de aprobación humana."
+          en: "When a process requires strict ordering, business rules and auditability, it can be appropriate to chain agents in a flow with a predefined sequence: each step with preconditions, post-conditions and thresholds, and human approval gates."
+        fuentes: [10]
+        nota:
+          voz: posicion
+          texto:
+            es: "Un diagrama aprobado es la mejor primera especificación de esa secuencia, siempre que cada actividad declare qué recibe, qué hace y qué entrega."
+            en: "An approved diagram is the best first specification of that sequence, as long as every activity declares what it receives, what it does and what it delivers."
+      - titulo: { es: "Una automatización se diseña para fallar bien", en: "An automation is designed to fail well" }
+        queCambia:
+          es: "La guía HEAT de Microsoft pone entre los principios de diseño de una automatización el registro, la gestión de credenciales y las pruebas, la estrategia de manejo de errores y reintentos, y la elección entre API e interfaz."
+          en: "Microsoft's HEAT guidance lists among the design principles of an automation logging, credential management and testing, the error handling and retry strategy, and the choice between API and interface."
+        fuentes: [5]
+
+  # ─── 6 · Modos de falla y cómo anticiparlos ─────────────────────────────────
+  - n: 6
+    fallas:
+      - falla: { es: "Automatizar un proceso malo", en: "Automating a bad process" }
+        senal: { es: "La automatización repite más rápido los reprocesos y las excepciones que ya existían.", en: "The automation repeats the existing rework and exceptions faster." }
+        control: { es: "Ninguna automatización sobre un proceso sin acordar y sin contrastar lo formal con lo ejecutado.", en: "No automation on a process that has not been agreed and checked, formal against executed." }
+      - falla: { es: "Optimizar fuera de la restricción", en: "Optimizing away from the constraint" }
+        senal: { es: "Una estación va más rápido, la cola crece en la siguiente y el tiempo total no cambia.", en: "One station goes faster, the queue grows at the next one and the total time does not change." }
+        control: { es: "Medir el flujo completo y automatizar primero donde está la restricción.", en: "Measure the whole flow and automate first where the constraint is." }
+      - falla: { es: "El robot que se rompe con la pantalla", en: "The robot that breaks with the screen" }
+        senal: { es: "Una RPA falla después de un cambio de interfaz que nadie avisó.", en: "An RPA fails after an interface change nobody announced." }
+        control: { es: "API o conector cuando existen; la RPA con dueño, fecha de revisión y alerta de fallo.", en: "An API or connector when they exist; RPA with an owner, a review date and a failure alert." }
+      - falla: { es: "Un agente donde bastaba una regla", en: "An agent where a rule was enough" }
+        senal: { es: "La misma entrada produce salidas distintas en un paso que tenía una regla fija.", en: "The same input produces different outputs at a step that had a fixed rule." }
+        control: { es: "Flujo determinista para lo que debe salir igual; el agente solo en el paso que exige interpretar.", en: "A deterministic flow for what must come out the same; the agent only at the step that requires interpreting." }
+      - falla: { es: "Una automatización sin dueño", en: "An automation with no owner" }
+        senal: { es: "Un flujo corre y nadie sabe qué actividad cubre ni qué pasa si deja de correr.", en: "A flow runs and nobody knows which activity it covers or what happens if it stops." }
+        control: { es: "Cada automatización con dueño, límite y la actividad que cubre, escritos.", en: "Every automation with its owner, limit and the activity it covers, written down." }
+      - falla: { es: "Un ahorro sin línea base", en: "Savings with no baseline" }
+        senal: { es: "Se anuncia un ahorro que nadie puede comparar con el proceso de antes.", en: "Savings are announced that nobody can compare with the process before." }
+        control: { es: "La línea base del proceso se mide antes de automatizar.", en: "The baseline of the process is measured before automating." }
+      - falla: { es: "Autonomía antes que confianza", en: "Autonomy before trust" }
+        senal: { es: "Un agente ejecuta acciones que nunca se revisaron mientras solo recomendaba.", en: "An agent executes actions that were never reviewed while it only recommended." }
+        control: { es: "Autonomía gradual: informar, después recomendar y, con evidencia, ejecutar.", en: "Gradual autonomy: inform, then recommend and, with evidence, execute." }
+      - falla: { es: "Excepciones que nadie ve", en: "Exceptions nobody sees" }
+        senal: { es: "El flujo marca éxito y el caso quedó a medias.", en: "The flow reports success and the case was left half done." }
+        control: { es: "Los eventos de cada ejecución van a una plataforma aparte de la que ejecuta.", en: "The events of every run go to a platform separate from the one that executes." }
+
+  # ─── 7 · Métricas y controles ───────────────────────────────────────────────
+  - n: 7
+    metricas:
+      - metrica: { es: "Tiempo de ciclo del proceso", en: "Process cycle time" }
+        umbral: { es: "Menor que la línea base, medido en el flujo completo y no en una actividad.", en: "Lower than the baseline, measured on the whole flow and not on one activity." }
+        aprueba: { es: "El dueño del proceso.", en: "The process owner." }
+      - metrica: { es: "Trabajo manual que queda", en: "Manual work that remains" }
+        umbral: { es: "Medido por actividad y comparado con la línea base.", en: "Measured per activity and compared with the baseline." }
+        aprueba: { es: "El dueño del proceso.", en: "The process owner." }
+      - metrica: { es: "Errores de datos y retrabajo", en: "Data errors and rework" }
+        umbral: { es: "Por debajo de la línea base, con cada excepción registrada.", en: "Below the baseline, with every exception recorded." }
+        aprueba: { es: "Quien opera el proceso.", en: "Whoever runs the process." }
+      - metrica: { es: "Excepciones de alto impacto resueltas por una persona", en: "High-impact exceptions resolved by a person" }
+        umbral: { es: "Todas.", en: "All of them." }
+        aprueba: { es: "El dueño del proceso.", en: "The process owner." }
+      - metrica: { es: "Automatizaciones con dueño y límite escritos", en: "Automations with a written owner and limit" }
+        umbral: { es: "Todas, antes de operar.", en: "All of them, before operating." }
+        aprueba: { es: "Quien administra las automatizaciones.", en: "Whoever manages the automations." }
+      - metrica: { es: "Divergencias entre lo modelado y lo ejecutado", en: "Divergences between what was modeled and what was executed" }
+        umbral: { es: "Revisadas en cada ciclo; ninguna sin decidir si cambia el proceso o el modelo.", en: "Reviewed every cycle; none left without deciding whether the process or the model changes." }
+        aprueba: { es: "El dueño del proceso.", en: "The process owner." }
+      - metrica: { es: "Acciones ejecutadas sin aprobación", en: "Actions executed without approval" }
+        umbral: { es: "Solo las que se pueden verificar y revertir.", en: "Only those that can be verified and reversed." }
+        aprueba: { es: "El dueño del proceso, con riesgo.", en: "The process owner, with risk." }
+
+  # ─── 8 · Evidencia en proyectos ─────────────────────────────────────────────
+  - n: 8
+    evidencia:
+      - nombre: { es: "El BPMN antes de la tecnología, en cuatro empleos", en: "BPMN before the technology, in four jobs" }
+        nivel: uso-real
+        texto:
+          es: "En cuatro empleos el proceso se modeló en BPMN con Bizagi antes de tocar la tecnología: en Inglopres, la operación de alquiler de maquinaria antes de implantar el ERP; en Ceinfes, la cadena de programación, material, aplicación y digitalización; en Cafam, recepción, almacenamiento, alistamiento y despacho, contrastados con el WMS antes de probarlo; y en Banco Pichincha, los productos analíticos situados en las decisiones que debían respaldar."
+          en: "In four jobs the process was modeled in BPMN with Bizagi before touching the technology: at Inglopres, the machinery rental operation before implementing the ERP; at Ceinfes, the chain of scheduling, materials, test sittings and digitization; at Cafam, receiving, storage, picking and dispatch, checked against the WMS before testing it; and at Banco Pichincha, the analytics products placed within the decisions they had to support."
+        corpus: [como-trabajo]
+        href: /cv
+      - nombre: { es: "Inglopres: el estudio de tiempos con suplementos de la OIT", en: "Inglopres: the time study with ILO allowances" }
+        nivel: uso-real
+        texto:
+          es: "En Inglopres, en 2016, el estudio de tiempos cronometró las operaciones, valoró el ritmo de quien las ejecutaba, calculó el tiempo estándar y le aplicó suplementos por fatiga de la tabla de la OIT: un tiempo observado no es un estándar hasta que reconoce el esfuerzo de quien lo ejecuta."
+          en: "At Inglopres, in 2016, the time study timed the operations, rated the pace of whoever performed them, calculated the standard time and applied fatigue allowances from the ILO table: an observed time is not a standard until it acknowledges the effort of whoever performs it."
+        corpus: [procesos-y-simulacion]
+        href: /proyectos/inglopres
+      - nombre: { es: "Ceinfes: la digitalización balanceada como una línea", en: "Ceinfes: digitization balanced as a line" }
+        nivel: uso-real
+        texto:
+          es: "En Ceinfes, en 2018, la digitalización de unas 250 hojas por jornada se trató como una línea de estaciones —2 de escaneo, más alistamiento, organización, validación y reordenamiento—; cerca del 10 % de las hojas exigía captura manual, y esa estación fijaba el ritmo de toda la línea."
+          en: "At Ceinfes, in 2018, the digitization of some 250 sheets per day was treated as a line of stations —2 for scanning, plus preparation, sorting, validation and reordering—; about 10% of the sheets required manual capture, and that station set the pace of the whole line."
+        corpus: [procesos-y-simulacion]
+        href: /proyectos/ceinfes
+      - nombre: { es: "Cafam: integraciones en VBA con dueño y con límite", en: "Cafam: VBA integrations with an owner and a limit" }
+        nivel: uso-real
+        texto:
+          es: "En Cafam, en 2020, la integración del centro de distribución con el WMS se resolvió con aplicaciones en VBA —disponibles, útiles y mantenibles en esa organización— y no con una plataforma nueva: subieron un 15 % la automatización, contribuyeron a bajar un 50 % los errores de datos y siguieron corriendo después de la salida a producción, como piezas con dueño y con límite."
+          en: "At Cafam, in 2020, the integration of the distribution center with the WMS was solved with VBA applications —available, useful and maintainable in that organization— and not with a new platform: they raised automation by 15%, helped cut data errors by 50% and kept running after go-live, as pieces with an owner and a limit."
+        corpus: [como-trabajo, cafam]
+        href: /proyectos/cafam
+      - nombre: { es: "Ceinfes: Kanban para las solicitudes, Scrum para los proyectos", en: "Ceinfes: Kanban for requests, Scrum for projects" }
+        nivel: uso-real
+        texto:
+          es: "Entre noviembre de 2017 y noviembre de 2018, en Ceinfes, Kanban se usó para el flujo de solicitudes del área de tecnología —cada tarjeta, una solicitud visible con su estado y su responsable— y Scrum para los proyectos tecnológicos, durante la transición a un modelo de gestión por procesos apoyado en sistemas de información."
+          en: "Between November 2017 and November 2018, at Ceinfes, Kanban was used for the technology area's flow of requests —each card, a visible request with its status and its owner— and Scrum for the technology projects, during the transition to a process-based management model supported by information systems."
+        corpus: [procesos-y-simulacion]
+        href: /proyectos/ceinfes
+      - nombre: { es: "Vesting: el proceso core de once etapas, sobre n8n", en: "Vesting: the eleven-stage core process, on n8n" }
+        nivel: uso-real
+        texto:
+          es: "Entre agosto de 2023 y enero de 2025, en Vesting, el proceso core de once etapas —del caso de uso a la operación observable— sirvió de marco para construir los 27 agentes del inventario, con n8n como base de automatización y sus eventos en Microsoft Fabric."
+          en: "Between August 2023 and January 2025, at Vesting, the eleven-stage core process —from the use case to observable operation— served as the framework to build the 27 agents in the inventory, with n8n as the automation base and their events in Microsoft Fabric."
+        corpus: [vesting, agentes-en-produccion]
+        href: /proyectos/vesting
+      - nombre: { es: "La vitrina: el BPMN que se genera solo", en: "The showcase: the BPMN that generates itself" }
+        nivel: uso-real
+        texto:
+          es: "En la vitrina, el diagrama BPMN de cada pieza se genera desde la definición de su proceso con un motor propio y se valida en el build: si la definición cambia, el diagrama cambia con ella, y si está malformada, la publicación falla antes de salir."
+          en: "In the showcase, the BPMN diagram of every piece is generated from the definition of its process by an in-house engine and validated at build time: if the definition changes, the diagram changes with it, and if it is malformed, publishing fails before it goes out."
+        corpus: [como-trabajo]
+        href: /vitrina
+      - nombre: { es: "FORJA: del BPMN a una orquestación de agentes", en: "FORJA: from BPMN to an orchestration of agents" }
+        nivel: prototipo
+        texto:
+          es: "FORJA, una de las investigaciones del autor, propone abrir cada actividad del BPMN con entradas, función y salidas, y su compilador convierte el diagrama en una orquestación de agentes donde cada elemento traza a su realización; el paso del BPMN a la orquestación se desarrolla en la publicación sobre sistemas de agentes."
+          en: "FORJA, one of the author's research lines, proposes opening up every BPMN activity with inputs, function and outputs, and its compiler turns the diagram into an orchestration of agents where every element traces to its realization; the step from BPMN to orchestration is developed in the publication on agent systems."
+        corpus: [las-investigaciones]
+        href: /metodos/sistema-de-agentes#bloque-4
+
+  # ─── 9 · Límites y alcance ──────────────────────────────────────────────────
+  - n: 9
+    limites:
+      - voz: hice
+        texto:
+          es: "La minería de procesos sobre un registro de eventos real es un método que se aplicaría, no un caso corrido en una empresa; lo más cercano fue Vesting, donde cada uno de los 27 agentes dejaba su rastro de eventos y el proceso core definía lo que debía ocurrir."
+          en: "Process mining on a real event log is a method that would be applied, not a case run at a company; the closest was Vesting, where each of the 27 agents left its event trail and the core process defined what should happen."
+        corpus: [procesos-y-simulacion]
+      - voz: hice
+        texto:
+          es: "Los detalles internos de la arquitectura de Vesting, sus componentes propios y la secuencia exacta de implementación son conocimiento confidencial de la organización: la pieza cita las etapas y la disciplina, no los mecanismos."
+          en: "The internal details of Vesting's architecture, its own components and the exact implementation sequence are the organization's confidential knowledge: the piece cites the stages and the discipline, not the mechanisms."
+        corpus: [agentes-en-produccion]
+      - voz: hice
+        texto:
+          es: "En la Fundación CTIC se ha trabajado con n8n y con el ecosistema de LangChain, pero el corpus no nombra un entregable hecho con ellos: la base de automatización documentada es la de Vesting."
+          en: "At Fundación CTIC the work has used n8n and the LangChain ecosystem, but the corpus names no deliverable built with them: the documented automation base is Vesting's."
+        corpus: [agentes-en-produccion, fundacion-ctic]
+      - voz: hice
+        texto:
+          es: "FORJA tiene su demostrador —compilador, cinco procesos, línea base y compuertas de aprobación—, pero que los profesionales lo usen se demuestra con profesionales, no con el prototipo."
+          en: "FORJA has its demonstrator —compiler, five processes, baseline and approval gates—, but whether professionals use it can only be shown with professionals, not with the prototype."
+        corpus: [las-investigaciones]
+      - voz: posicion
+        texto:
+          es: "La escalera nombra peldaños que esta pieza trata solo como estado del campo —la RPA, los flujos low-code y los agentes que usan el computador—: la experiencia que se afirma es la del bloque 8, con el nivel que el corpus le da."
+          en: "The ladder names rungs this piece treats only as state of the field —RPA, low-code flows and computer-using agents—: the experience it claims is that of block 8, at the level the corpus gives it."
+      - voz: posicion
+        texto:
+          es: "Lo que conviene hacer distinto hoy: medir la línea base del proceso antes de la primera automatización, no cuando alguien pregunta cuánto se ahorró."
+          en: "What is worth doing differently today: measure the baseline of the process before the first automation, not when someone asks how much was saved."
+      - voz: posicion
+        texto:
+          es: "Automatizar un proceso que nadie ha acordado convierte un desacuerdo en código."
+          en: "Automating a process nobody has agreed on turns a disagreement into code."
+
+  # ─── 10 · Fuentes y fecha de revisión ───────────────────────────────────────
+  - n: 10
+    revisado: "2026-10-21"
+    fuentes:
+      - id: 1
+        titulo: "ISO/IEC 19510:2013 Information technology - Object Management Group Business Process Model and Notation"
+        editor: "IEC Webstore (ISO/IEC JTC 1)"
+        fecha: "2013-07-15"
+        url: "https://webstore.iec.ch/publication/10695"
+      - id: 2
+        titulo: "OCEL (Object-Centric Event Log) 2.0 Specification"
+        editor: "arXiv"
+        fecha: "2024-03-04"
+        url: "https://arxiv.org/abs/2403.01975"
+      - id: 3
+        titulo: "Create an object-centric event log"
+        editor: "Microsoft Learn"
+        fecha: "2026-08-17"
+        url: "https://learn.microsoft.com/en-us/power-automate/object-centric-create-event-log"
+      - id: 4
+        titulo: "Overview of process mining and task mining in Power Automate"
+        editor: "Microsoft Learn"
+        fecha: "2026-08-28"
+        url: "https://learn.microsoft.com/en-us/power-automate/process-advisor-overview"
+      - id: 5
+        titulo: "Holistic enterprise automation techniques (HEAT)"
+        editor: "Microsoft Learn"
+        fecha: "2022-09-28"
+        url: "https://learn.microsoft.com/en-us/power-automate/guidance/automation-coe/heat"
+      - id: 6
+        titulo: "Microsoft Power Platform automation maturity model overview"
+        editor: "Microsoft Learn"
+        fecha: "2024-07-01"
+        url: "https://learn.microsoft.com/en-us/power-automate/guidance/automation-coe/automation-maturity-model-overview"
+      - id: 7
+        titulo: "Introduction to desktop flows"
+        editor: "Microsoft Learn"
+        fecha: "2026-08-23"
+        url: "https://learn.microsoft.com/en-us/power-automate/desktop-flows/introduction"
+      - id: 8
+        titulo: "Use agent tools to extend, automate, and enhance your agents"
+        editor: "Microsoft Learn"
+        fecha: "2026-10-05"
+        url: "https://learn.microsoft.com/en-us/microsoft-copilot-studio/guidance/agent-tools"
+      - id: 9
+        titulo: "Agent flows overview"
+        editor: "Microsoft Learn"
+        fecha: "2026-06-18"
+        url: "https://learn.microsoft.com/en-us/microsoft-copilot-studio/flows-overview"
+      - id: 10
+        titulo: "Workflow-oriented multi-agent patterns"
+        editor: "Microsoft Learn"
+        fecha: "2026-02-03"
+        url: "https://learn.microsoft.com/en-us/agents/architecture/multi-agent-workflow-oriented"
+      - id: 11
+        titulo: "Apply generative orchestration capabilities"
+        editor: "Microsoft Learn"
+        fecha: "2026-09-18"
+        url: "https://learn.microsoft.com/en-us/microsoft-copilot-studio/guidance/generative-orchestration"

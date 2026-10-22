@@ -567,6 +567,28 @@ preguntas:
     espera: [metodo-gobierno-de-ia-y-datos]
     familia: gobierno
 
+  # ── Métodos (S18): the twins of the three T9 questions; same `espera`, same order.
+  # Only the «what to automate and with which tool» question REQUIRES the piece (the
+  # owner's G-Plan decision); the BPMN→orchestration one accepts T2 or T9 and the companies
+  # one accepts T9 or its home documents. Measured with the committed piece (1,936 chunks):
+  # automate, T9 1st (97 against 44 for the 4th); BPMN→orchestration, T2 1st and T9 3rd;
+  # companies, `como-trabajo` 1st and T9 4th. None of the 169 earlier rows left the top-4.
+  - pregunta: "How does Henry decide what to automate and with which tool?"
+    espera: [metodo-de-proceso-a-operacion]
+    familia: forma-de-trabajar
+  - pregunta: "How does Henry go from a BPMN to an agent orchestration?"
+    espera: [metodo-sistema-de-agentes, metodo-de-proceso-a-operacion]
+    familia: procesos
+  - pregunta: "In which companies did Henry model processes in BPMN before touching the technology?"
+    espera:
+      [
+        metodo-de-proceso-a-operacion,
+        procesos-y-simulacion,
+        como-trabajo,
+        cafam,
+      ]
+    familia: procesos
+
 ajenas:
   - pregunta: "tell me a joke about cats"
     guardrail: bloquea

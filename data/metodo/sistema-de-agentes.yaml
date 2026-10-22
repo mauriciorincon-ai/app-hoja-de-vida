@@ -557,8 +557,8 @@ bloques:
       - nombre: { es: "Experto ISO 42001", en: "ISO 42001 Expert" }
         nivel: uso-real
         texto:
-          es: "Cada afirmación normativa cita apartado y página o declara el vacío, y ningún dictamen con consecuencias avanza sin la aprobación de una persona. Es el que se usa en la estrategia de IA de la Fundación CTIC."
-          en: "Every normative claim cites clause and page or declares the gap, and no ruling with consequences moves forward without a person’s approval. It is the one used in Fundación CTIC’s AI strategy."
+          es: "Cada afirmación normativa cita apartado y página o declara el vacío, y ningún dictamen con consecuencias avanza sin la aprobación de una persona. Es el que se usa en la estrategia de IA de la Fundación CTIC, en la versión inicial (v1.0.0) de su ficha."
+          en: "Every normative claim cites clause and page or declares the gap, and no ruling with consequences moves forward without a person’s approval. It is the one used in Fundación CTIC’s AI strategy, in the initial version (v1.0.0) of its technical sheet."
         corpus: [los-agentes-de-la-vitrina, fundacion-ctic]
         href: /vitrina/agentes/experto-iso42001
       - nombre: { es: "LangChain, LangGraph, LangSmith y Langflow", en: "LangChain, LangGraph, LangSmith and Langflow" }
