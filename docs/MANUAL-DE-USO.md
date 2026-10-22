@@ -589,7 +589,7 @@ el mensaje te llega al correo.
 - **Qué hace:** `/es/metodos` y `/en/metodos` listan las publicaciones; cada una vive en
   `/metodos/<slug>` y es una página larga que contesta **una pregunta de método en tercera
   persona** —«Cómo se debe…»—: las fases, las decisiones, los controles y la evidencia de
-  proyectos. Se muestra tal cual: ni habla de «yo» ni de «entrevista». Hoy hay siete piezas publicadas —la lista de `/metodos` las cuenta y las nombra— y las
+  proyectos. Se muestra tal cual: ni habla de «yo» ni de «entrevista». Hoy hay ocho piezas publicadas —la lista de `/metodos` las cuenta y las nombra— y las
   otras llegan una por sprint. «Métodos» está en el menú, junto a Portafolio y Contacto. **La cuenta de
   piezas de la lista se mide** de `data/metodo/`: nunca la escribas. **Las direcciones viejas siguen
   vivas:** `/metodo` y `/metodo/<slug>` (con o sin idioma, y con su `#bloque-n`) redirigen con un
@@ -626,7 +626,7 @@ el mensaje te llega al correo.
   llevan su voz dentro del texto («Estado del campo — Anthropic, 2025-06-13»), así que el chat
   no te atribuye lo que hace el campo. Pesan **la mitad** que tus documentos a fondo (como las
   fichas): medido, a peso 1 la pieza le quitaba el contexto a tus propios documentos.
-- **Limitaciones conocidas:** siete piezas publicadas hasta ahora; el segundo idioma se
+- **Limitaciones conocidas:** ocho piezas publicadas hasta ahora; el segundo idioma se
   revisa a ojo al cierre del hito, no en cada sprint; sin PDF descargable (decisión tuya); las respuestas fijas del chat y los documentos a fondo siguen en primera persona, a propósito.
 
 #### Cómo se escribe una publicación nueva
