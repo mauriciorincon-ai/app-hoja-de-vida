@@ -200,7 +200,7 @@ test("usuario crea un dashboard desde CSV y lo exporta", async ({ page }) => {
 - **UI pura (solo markup):** no obligatorio testear.
 - **Total del app:** >70%.
 
-Configurar en `vitest.config.ts`:
+Configurar en `vitest.config.mts`:
 
 ```typescript
 export default defineConfig({
