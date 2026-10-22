@@ -273,8 +273,8 @@ bloques:
         nota:
           voz: hice
           texto:
-            es: "En Banco Pichincha el escalón correcto para fuga y mora fue el modelo predictivo con la persona decidiendo, no un agente; en Vesting, agentes que actuaban con límites explícitos y monitoreo en tiempo real."
-            en: "At Banco Pichincha the right rung for churn and delinquency was the predictive model with the person deciding, not an agent; at Vesting, agents that acted within explicit limits and real-time monitoring."
+            es: "En Banco Pichincha, en la escalera de instrumentos del reporte al agente, el escalón correcto para fuga y mora fue el modelo predictivo con la persona decidiendo, no un agente; en Vesting, agentes que actuaban con límites explícitos y monitoreo en tiempo real."
+            en: "At Banco Pichincha, on the ladder of instruments from the report to the agent, the right rung for churn and delinquency was the predictive model with the person deciding, not an agent; at Vesting, agents that acted within explicit limits and real-time monitoring."
           corpus: [como-trabajo]
       - nombre:
           es: "Construir con el control humano que cada decisión exige"
@@ -398,8 +398,8 @@ bloques:
         porQue:
           voz: campo
           texto:
-            es: "Los flujos de escritorio son la automatización robótica de procesos de Power Automate: automatizan tareas repetitivas basadas en reglas sobre aplicaciones modernas y heredadas."
-            en: "Desktop flows are Power Automate's robotic process automation: they automate repetitive rule-based tasks on modern and legacy applications."
+            es: "Los flujos de escritorio amplían la automatización robótica de procesos (RPA) de Power Automate: automatizan tareas repetitivas basadas en reglas sobre aplicaciones modernas y heredadas."
+            en: "Desktop flows broaden Power Automate's robotic process automation (RPA) capabilities: they automate repetitive rule-based tasks on modern and legacy applications."
           fuentes: [7]
         nota:
           voz: posicion
@@ -460,9 +460,9 @@ bloques:
         porQue:
           voz: hice
           texto:
-            es: "En Ceinfes, con la macro, el indicador de cumplimiento de la programación —cuántas aplicaciones ocurrieron donde y cuando estaban previstas— pasó a medir un proceso con reglas explícitas en lugar de una habilidad individual."
-            en: "At Ceinfes, with the macro, the scheduling compliance indicator —how many test sittings took place where and when they were planned— came to measure a process with explicit rules instead of an individual skill."
-          corpus: [ceinfes]
+            es: "En Cafam, la exactitud de registro de inventario se medía antes y después de las pruebas de implementación del WMS, y las aplicaciones en VBA que reemplazaron cargas manuales subieron un 15 % la automatización y contribuyeron a bajar un 50 % los errores de datos."
+            en: "At Cafam, inventory record accuracy was measured before and after the WMS implementation testing, and the VBA applications that replaced manual loads raised automation by 15% and contributed to cutting data errors by 50%."
+          corpus: [cafam]
         nota:
           voz: campo
           texto:
@@ -475,8 +475,8 @@ bloques:
     elementos:
       - titulo: { es: "La minería de procesos centrada en objetos", en: "Object-centric process mining" }
         queCambia:
-          es: "Un registro de eventos ya no supone un solo caso por proceso: OCEL 2.0 registra eventos que tocan varios objetos a la vez, los cambios de esos objetos y sus relaciones calificadas, con tres formatos de intercambio —SQLite, XML y JSON—, y Power Automate construye registros centrados en objetos para su minería de procesos."
-          en: "An event log no longer assumes a single case per process: OCEL 2.0 records events that touch several objects at once, the changes of those objects and their qualified relationships, with three exchange formats —SQLite, XML and JSON—, and Power Automate builds object-centric logs for its process mining."
+          es: "Un registro de eventos ya no supone un solo caso por proceso: OCEL 2.0 registra eventos que tocan varios objetos a la vez, los cambios de esos objetos y sus relaciones calificadas, con tres formatos de intercambio —SQLite, XML y JSON—, y Power Automate documenta cómo preparar un registro centrado en objetos —un CSV en Azure Data Lake u OneLake, o una tabla delta en un Lakehouse de Fabric— para ingerirlo en su minería de procesos."
+          en: "An event log no longer assumes a single case per process: OCEL 2.0 records events that touch several objects at once, the changes of those objects and their qualified relationships, with three exchange formats —SQLite, XML and JSON—, and Power Automate documents how to prepare an object-centric log —a CSV in Azure Data Lake or OneLake, or a delta table in a Fabric Lakehouse— to ingest it into its process mining."
         fuentes: [2, 3]
         nota:
           voz: posicion
@@ -500,8 +500,8 @@ bloques:
             en: "A computer-using agent does not replace the underlying question: if an API exists, the interface is still the wrong door."
       - titulo: { es: "Del proceso a un flujo que llama agentes", en: "From the process to a flow that calls agents" }
         queCambia:
-          es: "Cuando un proceso exige orden estricto, reglas de negocio y auditoría, los agentes se encadenan en un flujo con una secuencia predefinida: cada paso con precondiciones, poscondiciones y umbrales, y compuertas de aprobación humana."
-          en: "When a process requires strict ordering, business rules and auditability, agents are chained in a flow with a predefined sequence: each step with preconditions, post-conditions and thresholds, and human approval gates."
+          es: "Cuando un proceso exige orden estricto, reglas de negocio y auditoría, puede ser apropiado encadenar los agentes en un flujo con una secuencia predefinida: cada paso con precondiciones, poscondiciones y umbrales, y compuertas de aprobación humana."
+          en: "When a process requires strict ordering, business rules and auditability, it can be appropriate to chain agents in a flow with a predefined sequence: each step with preconditions, post-conditions and thresholds, and human approval gates."
         fuentes: [10]
         nota:
           voz: posicion
@@ -674,7 +674,7 @@ bloques:
         url: "https://webstore.iec.ch/publication/10695"
       - id: 2
         titulo: "OCEL (Object-Centric Event Log) 2.0 Specification"
-        editor: "arXiv — RWTH Aachen University"
+        editor: "arXiv"
         fecha: "2024-03-04"
         url: "https://arxiv.org/abs/2403.01975"
       - id: 3
