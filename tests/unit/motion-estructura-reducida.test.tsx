@@ -2,6 +2,7 @@
 /* eslint-disable @next/next/no-img-element -- el mock de next/image pinta una <img> plana a propósito */
 import { renderToString } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
+import { PuertaMetodos } from "@/components/home/metodos";
 import { IconoSkill } from "@/components/home/skills-iconos";
 import { Reveal } from "@/components/motion/reveal";
 import { Stagger, StaggerItem } from "@/components/motion/stagger";
@@ -11,6 +12,7 @@ import { InfografiaVista } from "@/components/metodo/infografia";
 import { RielDeFases } from "@/components/metodo/riel-de-fases";
 import { GaleriaCarrusel } from "@/components/vitrina/galeria-carrusel";
 import type { EtiquetasCarrusel } from "@/components/vitrina/galeria-carrusel";
+import { leerPiezasDeDisco } from "@/lib/metodo/loader";
 import { ejemploSintetico, traductorDe } from "../fixtures/metodo/ayudas";
 
 /**
@@ -159,6 +161,15 @@ const CASOS: Record<string, React.ReactNode> = {
   ),
   InfografiaVista: (
     <InfografiaVista pieza={ejemploSintetico()} idioma="es" t={traductorDe("es")} />
+  ),
+  // S19: la puerta a «Métodos» en la HOME (Reveal + Stagger sobre la lista de
+  // `data/metodo/`): misma regla, el árbol no depende del hook.
+  PuertaMetodos: (
+    <PuertaMetodos
+      piezas={leerPiezasDeDisco()}
+      locale="es"
+      t={traductorDe("es")}
+    />
   ),
 };
 
