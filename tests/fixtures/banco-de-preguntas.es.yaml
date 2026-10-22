@@ -732,7 +732,8 @@ preguntas:
   # palabras exactas, 1.ª y 2.ª; T8 queda en el puesto 59) y se declara así porque la
   # pregunta ya la ganaba una casa antes de la pieza. Medidas con la pieza commiteada (índice
   # de 1.988 fragmentos). Ninguna de las 172 filas anteriores salió del top-4 y T8 no entró al
-  # de ninguna otra salvo «¿Sabe de MLOps?» (margen 10 → 9), que la acepta.
+  # de ninguna otra salvo «¿Sabe de MLOps?», donde entra al top-4 sin ser su fuente esperada
+  # (el margen de la fila pasa de 10 a 9).
   # ─────────────────────────────────────────────────────────────────────
   - pregunta: "¿Cómo formula Henry un problema de optimización?"
     espera: [metodo-decidir-con-modelos]
