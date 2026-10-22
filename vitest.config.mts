@@ -1,6 +1,11 @@
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vitest/config";
+
+// `.mts`: el paquete es CommonJS y este archivo es ESM; Vite avisaba (`configLoader: 'native'`) de que un
+// `.ts` con sintaxis ESM dejará de cargarse. `__dirname` no existe en ESM: se saca de `import.meta.url`.
+const raiz = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   plugins: [react()],
@@ -20,9 +25,9 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "src"),
+      "@": path.resolve(raiz, "src"),
       // El guard "server-only" no aplica dentro del runner de tests
-      "server-only": path.resolve(__dirname, "tests/mocks/server-only.ts"),
+      "server-only": path.resolve(raiz, "tests/mocks/server-only.ts"),
     },
   },
 });
