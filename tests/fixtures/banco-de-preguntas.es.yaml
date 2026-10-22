@@ -696,6 +696,32 @@ preguntas:
     espera: [metodo-gobierno-de-ia-y-datos]
     familia: gobierno
 
+  # ─────────────────────────────────────────────────────────────────────
+  # Métodos (S18): las tres preguntas de T9. Solo la de «qué automatizar y con qué
+  # herramienta» EXIGE la pieza (decisión del dueño en el G-Plan): es la única donde
+  # ninguna casa contesta con las palabras exactas, y con la pieza commiteada T9 es 1.ª
+  # (96 contra 38 del 4.º). La de BPMN→orquestación acepta T2 o T9 (T9 1.ª, T2 2.ª) y la de
+  # las empresas acepta T9 o su casa natural (`como-trabajo`, `procesos-y-simulacion`,
+  # `cafam` la contestan en primera persona y con las palabras exactas; T9 2.ª). Medidas con
+  # la pieza commiteada (índice de 1.945 fragmentos). Ninguna de las 169 filas anteriores
+  # salió del top-4 y T9 no entró al de ninguna otra.
+  # ─────────────────────────────────────────────────────────────────────
+  - pregunta: "¿Cómo decide Henry qué automatizar y con qué herramienta?"
+    espera: [metodo-de-proceso-a-operacion]
+    familia: forma-de-trabajar
+  - pregunta: "¿Cómo pasa Henry de un BPMN a una orquestación de agentes?"
+    espera: [metodo-sistema-de-agentes, metodo-de-proceso-a-operacion]
+    familia: procesos
+  - pregunta: "¿En qué empresas modeló Henry procesos en BPMN antes de tocar la tecnología?"
+    espera:
+      [
+        metodo-de-proceso-a-operacion,
+        procesos-y-simulacion,
+        como-trabajo,
+        cafam,
+      ]
+    familia: procesos
+
 # Preguntas AJENAS. Cada una declara qué le hace el guardrail de entrada, y hay
 # DOS resultados legítimos —confundirlos sería mentir sobre lo que el guardrail
 # promete (`src/lib/ia/guardrails.ts`)—:

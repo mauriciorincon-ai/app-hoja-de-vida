@@ -320,7 +320,7 @@ Tres preguntas se le hacen a cada gate antes de darlo por bueno. La primera: ¿l
 
 En componentes de inteligencia artificial, la regla adquiere mayor importancia porque una salida puede tener una forma convincente y ser incorrecta desde el punto de vista funcional. No basta con comprobar que el agente responde. Es necesario diseñar escenarios en los que deba reconocer información insuficiente, abstenerse de afirmar algo sin evidencia, manejar una herramienta no disponible o transferir la decisión cuando el nivel de incertidumbre supera sus límites.
 
-También aplico esta lógica a los mecanismos de recuperación de información. No considero suficiente mostrar que una respuesta incluye citas. Debo verificar que la recuperación responda a la pregunta —con 77 preguntas propias y 169 de afuera corriendo en cada cambio de este sitio—, que cada cita conduzca a un destino que existe y que el sistema pueda declarar cuando la evidencia disponible no es suficiente.
+También aplico esta lógica a los mecanismos de recuperación de información. No considero suficiente mostrar que una respuesta incluye citas. Debo verificar que la recuperación responda a la pregunta —con 77 preguntas propias y 172 de afuera corriendo en cada cambio de este sitio—, que cada cita conduzca a un destino que existe y que el sistema pueda declarar cuando la evidencia disponible no es suficiente.
 
 ## Esta misma página también es una aplicación
 
