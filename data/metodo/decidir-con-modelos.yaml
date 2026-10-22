@@ -1,0 +1,738 @@
+# T8 · «Cómo se debe decidir con modelos» (S19, 2026-10-21).
+#
+# Publicación de «Métodos» en voz impersonal desde el primer commit: diez bloques fijos, tres voces separadas
+# (Evidencia = corpus del sitio, con el proyecto como sujeto · Estado del campo = fuente con título, editor, fecha
+# y enlace · Criterio = posición del autor, rotulada). Ninguna cifra sin corpus; nada sube de nivel.
+#
+# Investigación del 2026-10-21 (21:59 → 22:01): documentación oficial primero —Microsoft Learn (la ciencia de datos en
+# Microsoft Fabric, el registro automático con MLflow y MLflow 3, el modelo de madurez de MLOps, la vigilancia de modelos
+# de Azure Machine Learning y la guía del examen AI-300)— y arXiv (GIFT-Eval y una reconstrucción de 2026 de los modelos
+# fundacionales de series de tiempo; OptiMUS-0.3 y MIPLIB-NL sobre el LLM como asistente de formulación). Solo contenido
+# público servido al navegador, sin credenciales ajenas ni endpoints de terceros; ninguna página leída traía texto dirigido
+# a agentes. Hallazgos: el glosario de Gartner sobre inteligencia de decisiones respondió 403 (no se forzó; el tema no
+# entra, porque ninguna otra fuente oficial lo sostenía). La fecha de cada fuente de Learn es su `ms.date`; la de arXiv, la
+# de la versión leída.
+#
+# La evidencia sale de `analitica-predictiva`, `transmilenio-cm`, `banco-pichincha`, `las-investigaciones`,
+# `procesos-y-simulacion`, `cm-operaciones`, `plataforma-y-despliegue` y `certificaciones`. Probeta DS se enlaza a su
+# ficha (`/vitrina/apps/ds`), no se reescribe, y va como «Prototipo»: la vitrina la ofrece con lista de espera y su ficha
+# está en estado inicial (el cierre del sprint lo lleva como [CONFIRMAR]); no se cita su número de funcionalidades porque
+# el corpus (33) y la ficha de hoy no coinciden. Sin caso propio de deriva observada, sin capa prescriptiva en un empleo,
+# PyTorch y TensorFlow como exploración, el DP-100 retirado y el AI-300 en curso. El título de la decisión 4 y el de la
+# tarjeta de Probeta DS llevan las palabras de las preguntas que el banco exige («formula un problema de optimización»,
+# «qué garantiza»). El bloque 7 no lleva cifras propias.
+
+id: T8
+slug: decidir-con-modelos
+nombre:
+  es: "Cómo se debe decidir con modelos"
+  en: "How decisions should be made with models"
+bloques:
+  # ─── 1 · El problema ────────────────────────────────────────────────────────
+  - n: 1
+    pregunta:
+      es: "Decidir con modelos sin engañarse: que cada modelo supere una línea base, se valide como lo enfrentará la operación, llegue con sus límites a quien decide y se vigile después de entregarlo, y que la optimización se formule de modo que su resultado se pueda verificar."
+      en: "Making decisions with models without fooling oneself: every model has to beat a baseline, be validated the way operations will face it, reach the decision maker with its limits and be monitored after delivery, and optimization has to be formulated so that its result can be verified."
+    respuesta:
+      - es: "El problema nace del proceso: qué se anticipa, sobre qué unidad, con cuánta anticipación y qué decisión cambia con el resultado; y antes del algoritmo, la línea base que el modelo tiene que superar."
+        en: "The problem starts from the process: what is anticipated, on which unit, how far ahead and which decision changes with the result; and before the algorithm, the baseline the model has to beat."
+      - es: "El modelo se valida como lo enfrentará la operación —orden temporal, prueba sin fuga, error por segmento— y llega con su ficha y sus límites a quien decide, que recibe una señal y no una decisión."
+        en: "The model is validated the way operations will face it —temporal order, a leak-free test, error by segment— and reaches the decision maker with its card and its limits, as a signal and not a decision."
+      - es: "Cuando la pregunta es qué elegir y no qué pasará, el problema se formula como optimización, dos veces, y se simula bajo variabilidad; y todo modelo publicado se vigila, porque la deriva no avisa."
+        en: "When the question is what to choose and not what will happen, the problem is formulated as optimization, twice, and simulated under variability; and every published model is monitored, because drift gives no warning."
+
+  # ─── 2 · El mapa ────────────────────────────────────────────────────────────
+  - n: 2
+    titulo:
+      es: "Del problema del proceso a la decisión vigilada"
+      en: "From the process problem to a monitored decision"
+    resumen:
+      es: "El dueño de la decisión define el problema y su horizonte; primero se fija la línea base y después se construyen las variables con lo que existe a tiempo. El modelo candidato se valida en orden temporal y se mide en una prueba sin fuga; sus errores se leen por segmento, se escriben en la ficha del modelo y la predicción se entrega donde se decide. Quien decide recibe una señal; cuando la pregunta es qué elegir, entra la optimización, y la simulación aporta escenarios a lo que se entrega. En operación, la vigilancia de la deriva avisa al dueño de la decisión."
+      en: "The decision owner defines the problem and its horizon; the baseline is set first, and then the variables are built from what exists in time. The candidate model is validated in temporal order and measured on a leak-free test; its errors are read by segment and written into the model card, and the prediction is delivered where the decision is made. The decision maker receives a signal; when the question is what to choose, optimization comes in, and simulation adds scenarios to what is delivered. In operation, drift monitoring alerts the decision owner."
+    nodos:
+      - n: 1
+        etiqueta: { es: "Dueño de la decisión", en: "Decision owner" }
+        tipo: humano
+        col: 0
+        fila: 0
+        detalle:
+          es: "Quien responde por la decisión que el modelo debe mejorar y fija qué error cuesta más."
+          en: "Whoever answers for the decision the model has to improve and sets which error costs more."
+      - n: 2
+        etiqueta: { es: "Problema y horizonte", en: "Problem and horizon" }
+        tipo: control
+        col: 1
+        fila: 0
+        detalle:
+          es: "Qué se anticipa, sobre qué unidad, con cuánta anticipación y qué decisión puede cambiar con el resultado."
+          en: "What is anticipated, on which unit, how far ahead and which decision can change with the result."
+      - n: 3
+        etiqueta: { es: "Línea base", en: "Baseline" }
+        tipo: control
+        col: 2
+        fila: 0
+        detalle:
+          es: "Una regla simple, una media histórica o la forma actual de decidir: lo que el modelo tiene que superar."
+          en: "A simple rule, a historical average or the current way of deciding: what the model has to beat."
+      - n: 4
+        etiqueta: { es: "Variables a tiempo", en: "Data known in time" }
+        tipo: dato
+        col: 3
+        fila: 0
+        detalle:
+          es: "Solo lo que existe en el momento de predecir: nada del futuro filtrado al entrenamiento."
+          en: "Only what exists at prediction time: nothing from the future leaked into training."
+      - n: 5
+        etiqueta: { es: "Modelo candidato", en: "Candidate model" }
+        tipo: actor
+        col: 4
+        fila: 0
+        detalle:
+          es: "Los modelos compiten con el mismo preprocesamiento y se eligen por su error, no por su novedad."
+          en: "Models compete with the same preprocessing and are chosen by their error, not by their novelty."
+      - n: 6
+        etiqueta: { es: "Orden temporal", en: "Temporal order" }
+        tipo: control
+        col: 5
+        fila: 0
+        detalle:
+          es: "Se entrena con el pasado y se mide sobre periodos posteriores, como lo enfrentará la operación."
+          en: "Training uses the past and measurement uses later periods, the way operations will face it."
+      - n: 7
+        etiqueta: { es: "Prueba sin fuga", en: "Leak-free test" }
+        tipo: control
+        col: 5
+        fila: 1
+        detalle:
+          es: "Las métricas salen de datos que el entrenamiento no vio, con el preprocesamiento ajustado solo en entrenamiento."
+          en: "The metrics come from data training never saw, with preprocessing fitted on the training data only."
+      - n: 8
+        etiqueta: { es: "Errores por segmento", en: "Errors per segment" }
+        tipo: dato
+        col: 4
+        fila: 1
+        detalle:
+          es: "La matriz de confusión, el error por ruta, clase o grupo y lo que cuesta cada tipo de error."
+          en: "The confusion matrix, the error by route, class or group and what each kind of error costs."
+      - n: 9
+        etiqueta: { es: "La ficha del modelo", en: "The model card" }
+        tipo: dato
+        col: 3
+        fila: 1
+        detalle:
+          es: "Datos, partición, método, métricas, veredicto frente a la línea base y límites, escritos."
+          en: "Data, split, method, metrics, verdict against the baseline and limits, written down."
+      - n: 10
+        etiqueta: { es: "Entrega donde se decide", en: "Delivery at the decision" }
+        tipo: actor
+        col: 2
+        fila: 1
+        detalle:
+          es: "La predicción llega con su contexto al tablero o al informe que ya se usa, antes de que la decisión se cierre."
+          en: "The prediction arrives with its context in the dashboard or report already in use, before the decision closes."
+      - n: 11
+        etiqueta: { es: "Quien decide", en: "Decision maker" }
+        tipo: humano
+        col: 1
+        fila: 1
+        detalle:
+          es: "Recibe una señal, no una decisión: prioriza, revisa y responde por la acción."
+          en: "Receives a signal, not a decision: prioritizes, reviews and answers for the action."
+      - n: 12
+        etiqueta: { es: "Vigilancia y deriva", en: "Monitoring and drift" }
+        tipo: control
+        col: 0
+        fila: 1
+        detalle:
+          es: "Entradas, distribución, desempeño, uso e impacto, vigilados después de publicar y no solo antes."
+          en: "Inputs, distribution, performance, use and impact, monitored after publishing and not only before."
+      - n: 13
+        etiqueta: { es: "Optimización", en: "Optimization" }
+        tipo: actor
+        col: 1
+        fila: 2
+        detalle:
+          es: "El mismo problema como programación entera y como programación por restricciones: los óptimos deben coincidir."
+          en: "The same problem as integer programming and as constraint programming: the optima must match."
+      - n: 14
+        etiqueta: { es: "Simulación", en: "Simulation" }
+        tipo: actor
+        col: 2
+        fila: 2
+        detalle:
+          es: "Compara políticas y asignaciones bajo variabilidad antes de intervenir la operación."
+          en: "Compares policies and assignments under variability before intervening in operations."
+    aristas:
+      - { de: 1, a: 2, etiqueta: { es: "define", en: "defines" } }
+      - { de: 2, a: 3, etiqueta: { es: "primero", en: "first" } }
+      - { de: 3, a: 4, etiqueta: { es: "después", en: "then" } }
+      - { de: 4, a: 5, etiqueta: { es: "entrena", en: "trains" } }
+      - { de: 5, a: 6, etiqueta: { es: "se valida", en: "is validated" } }
+      - { de: 6, a: 7, etiqueta: { es: "se mide", en: "is measured" } }
+      - { de: 7, a: 8, etiqueta: { es: "muestra", en: "shows" } }
+      - { de: 8, a: 9, etiqueta: { es: "se escribe", en: "is written" } }
+      - { de: 9, a: 10, etiqueta: { es: "se entrega", en: "is delivered" } }
+      - { de: 10, a: 11, etiqueta: { es: "informa", en: "informs" } }
+      - { de: 11, a: 12, etiqueta: { es: "en operación", en: "in operation" } }
+      - { de: 12, a: 1, etiqueta: { es: "avisa", en: "alerts" } }
+      - { de: 11, a: 13, etiqueta: { es: "si hay que elegir", en: "to choose" } }
+      - { de: 13, a: 14, etiqueta: { es: "bajo variabilidad", en: "under variability" } }
+      - { de: 14, a: 10, etiqueta: { es: "aporta escenarios", en: "adds scenarios" } }
+
+  # ─── 3 · Las fases ──────────────────────────────────────────────────────────
+  - n: 3
+    fases:
+      - nombre:
+          es: "Formular el problema desde la decisión"
+          en: "Formulate the problem from the decision"
+        entradas:
+          - es: "La decisión que se quiere mejorar y quien responde por ella."
+            en: "The decision to be improved and whoever answers for it."
+          - es: "El proceso, sus eventos y la forma actual de decidir."
+            en: "The process, its events and the current way of deciding."
+        actividades:
+          - es: "Definir el fenómeno, la unidad de análisis y el horizonte de predicción frente al de decisión."
+            en: "Define the phenomenon, the unit of analysis and the prediction horizon against the decision horizon."
+          - es: "Fijar la línea base y el costo de cada tipo de error antes de entrenar."
+            en: "Set the baseline and the cost of each kind of error before training."
+          - es: "Decidir si la pregunta es anticipar o elegir: predicción u optimización."
+            en: "Decide whether the question is to anticipate or to choose: prediction or optimization."
+        artefactos:
+          - es: "La definición del problema: fenómeno, unidad, horizonte y decisión."
+            en: "The problem definition: phenomenon, unit, horizon and decision."
+          - es: "La línea base escrita."
+            en: "The written baseline."
+        decide:
+          es: "El dueño de la decisión."
+          en: "The decision owner."
+        control:
+          es: "Ningún modelo se entrena sin una línea base y sin una decisión que su resultado pueda cambiar."
+          en: "No model is trained without a baseline and without a decision its result can change."
+        nota:
+          voz: hice
+          texto:
+            es: "En TransMilenio la unidad era la ruta en una franja horaria de un tipo de día, con un horizonte mensual: la programación del mes siguiente se decide antes de que ese mes empiece, y una predicción que llegara después no servía."
+            en: "At TransMilenio the unit was the route in a time band of a type of day, with a monthly horizon: the next month's schedule is decided before that month starts, and a prediction arriving later was of no use."
+          corpus: [analitica-predictiva, transmilenio-cm]
+      - nombre:
+          es: "Construir las variables con lo que existe a tiempo"
+          en: "Build the variables from what exists in time"
+        entradas:
+          - es: "Los eventos, estados y fuentes del proceso."
+            en: "The events, states and sources of the process."
+          - es: "El momento exacto en que se producirá cada predicción."
+            en: "The exact moment each prediction will be produced."
+        actividades:
+          - es: "Construir cada variable con un significado, una fuente, una ventana temporal y su relación con la unidad."
+            en: "Build every variable with a meaning, a source, a time window and its relation to the unit."
+          - es: "Descartar lo que solo aparece después del evento que se quiere anticipar."
+            en: "Discard whatever only appears after the event to be anticipated."
+          - es: "Usar en la inferencia la misma transformación que en el entrenamiento."
+            en: "Use the same transformation at inference as in training."
+        artefactos:
+          - es: "El conjunto de variables con su fuente y su ventana."
+            en: "The set of variables with their source and window."
+          - es: "Las reglas de transformación versionadas."
+            en: "The versioned transformation rules."
+        decide:
+          es: "Quien construye el modelo, con quien conoce el proceso."
+          en: "Whoever builds the model, with whoever knows the process."
+        control:
+          es: "Ninguna variable entra si no puede calcularse antes del evento objetivo."
+          en: "No variable gets in if it cannot be computed before the target event."
+        nota:
+          voz: hice
+          texto:
+            es: "En Banco Pichincha cada variable tenía que poder calcularse con la información disponible antes del evento: un modelo de mora que usa información posterior al impago es perfecto en el laboratorio e inútil en operación."
+            en: "At Banco Pichincha every variable had to be computable with the information available before the event: a delinquency model that uses information from after the default is perfect in the lab and useless in operation."
+          corpus: [analitica-predictiva, banco-pichincha]
+      - nombre:
+          es: "Validar como lo enfrentará la operación"
+          en: "Validate the way operations will face it"
+        entradas:
+          - es: "Los modelos candidatos y la línea base."
+            en: "The candidate models and the baseline."
+          - es: "Periodos posteriores a los que el modelo vio."
+            en: "Periods later than those the model saw."
+        actividades:
+          - es: "Medir sobre periodos posteriores, nunca con una partición al azar en un problema temporal."
+            en: "Measure on later periods, never with a random split in a temporal problem."
+          - es: "Leer la matriz de confusión y el error por segmento, no solo la métrica global."
+            en: "Read the confusion matrix and the error by segment, not only the overall metric."
+          - es: "Revisar la calibración cuando la salida se usa como probabilidad."
+            en: "Check calibration when the output is used as a probability."
+        artefactos:
+          - es: "El veredicto frente a la línea base."
+            en: "The verdict against the baseline."
+          - es: "El mapa de errores por segmento."
+            en: "The map of errors by segment."
+        decide:
+          es: "El dueño de la decisión, con quien construye el modelo."
+          en: "The decision owner, with whoever builds the model."
+        control:
+          es: "Un modelo que no supera la línea base no pasa, y el veredicto lo dice."
+          en: "A model that does not beat the baseline does not pass, and the verdict says so."
+        nota:
+          voz: hice
+          texto:
+            es: "En TransMilenio un buen promedio podía esconder errores en los segmentos críticos: acertar en la mayoría de las rutas de baja demanda y fallar en las troncales de hora pico es un buen promedio y una mala predicción."
+            en: "At TransMilenio a good average could hide errors in the critical segments: getting most low-demand routes right and missing the peak-hour trunk lines is a good average and a bad prediction."
+          corpus: [transmilenio-cm]
+      - nombre:
+          es: "Entregar donde se decide, con la ficha del modelo"
+          en: "Deliver where the decision is made, with the model card"
+        entradas:
+          - es: "El modelo aprobado, su ficha y sus límites."
+            en: "The approved model, its card and its limits."
+          - es: "El tablero, el informe o el flujo que ya usa quien decide."
+            en: "The dashboard, report or flow the decision maker already uses."
+        actividades:
+          - es: "Presentar la predicción con el contexto que permite interpretarla."
+            en: "Present the prediction with the context that allows it to be interpreted."
+          - es: "Conservar la fecha, la versión, los datos y la población de cada predicción."
+            en: "Keep the date, version, data and population of every prediction."
+          - es: "Definir qué pasa cuando los datos de entrada no cumplen lo esperado."
+            en: "Define what happens when the input data do not meet expectations."
+        artefactos:
+          - es: "La predicción en el producto que ya se usa."
+            en: "The prediction in the product already in use."
+          - es: "El registro que permite reconstruir cada predicción."
+            en: "The record that allows every prediction to be reconstructed."
+        decide:
+          es: "Quien decide, con el dueño del producto analítico."
+          en: "The decision maker, with the owner of the analytics product."
+        control:
+          es: "Ninguna predicción llega sin contexto ni después de que la decisión se cierre."
+          en: "No prediction arrives without context or after the decision closes."
+        nota:
+          voz: hice
+          texto:
+            es: "En Banco Pichincha las predicciones llegaban por Power BI, junto con la información histórica y contextual del cliente, a los mismos tableros que habían adoptado más de 50 usuarios del negocio: el canal de entrega era parte del diseño del modelo."
+            en: "At Banco Pichincha the predictions arrived through Power BI, together with the customer's historical and contextual information, in the same dashboards that more than 50 business users had adopted: the delivery channel was part of the model's design."
+          corpus: [analitica-predictiva]
+      - nombre:
+          es: "Vigilar el modelo y decidir qué hacer con lo que se ve"
+          en: "Monitor the model and decide what to do with what shows up"
+        entradas:
+          - es: "Las entradas, las predicciones y el resultado real cuando llega."
+            en: "The inputs, the predictions and the actual outcome when it arrives."
+          - es: "El uso que los responsables hacen de la predicción."
+            en: "The use the people in charge make of the prediction."
+        actividades:
+          - es: "Vigilar cinco niveles: calidad de las entradas, distribución, desempeño observado, uso e impacto."
+            en: "Monitor five levels: input quality, distribution, observed performance, use and impact."
+          - es: "Comparar la predicción con lo que de verdad ocurrió, segmento por segmento."
+            en: "Compare the prediction with what actually happened, segment by segment."
+          - es: "Decidir ante cada desviación: investigar la fuente, recalibrar, reentrenar, restringir o volver a una versión anterior."
+            en: "Decide for each deviation: investigate the source, recalibrate, retrain, restrict or roll back to an earlier version."
+        artefactos:
+          - es: "El tablero de vigilancia del modelo."
+            en: "The model monitoring dashboard."
+          - es: "El registro de cada decisión tomada sobre el modelo."
+            en: "The record of every decision taken about the model."
+        decide:
+          es: "El dueño del modelo, con el dueño de la decisión."
+          en: "The model owner, with the decision owner."
+        control:
+          es: "Ninguna alerta queda sin una acción decidida."
+          en: "No alert is left without a decided action."
+        nota:
+          voz: hice
+          texto:
+            es: "En TransMilenio el resultado real llegaba con el recaudo del mes: la predicción por ruta y franja se contrastaba con lo que de verdad ocurrió."
+            en: "At TransMilenio the actual outcome arrived with the month's fare collection: the prediction by route and time band was checked against what actually happened."
+          corpus: [analitica-predictiva]
+
+  # ─── 4 · Las decisiones de diseño ───────────────────────────────────────────
+  - n: 4
+    decisiones:
+      - titulo:
+          es: "La línea base antes que el algoritmo"
+          en: "The baseline before the algorithm"
+        cuandoSi:
+          es: "Siempre: antes de entrenar se escribe qué tiene que superar el modelo —una regla simple, una media histórica o la forma actual de decidir— y el veredicto puede decir «no supera»."
+          en: "Always: before training, what the model has to beat is written down —a simple rule, a historical average or the current way of deciding— and the verdict can say «does not beat it»."
+        cuandoNo:
+          es: "Cuando nadie puede decir qué decisión cambiaría con el resultado: entonces el problema todavía no es predictivo."
+          en: "When nobody can say which decision would change with the result: then the problem is not yet a predictive one."
+        porQue:
+          voz: hice
+          texto:
+            es: "En Banco Pichincha la línea base era la predicción que ya existía, y el modelo la mejoró hasta un 35 %; en Probeta DS la línea base está a la vista por diseño —clase mayoritaria y regresión logística—."
+            en: "At Banco Pichincha the baseline was the prediction that already existed, and the model improved on it by up to 35%; in Probeta DS the baseline is in plain sight by design —majority class and logistic regression—."
+          corpus: [analitica-predictiva]
+        nota:
+          voz: posicion
+          texto:
+            es: "La sofisticación del algoritmo no vale por sí sola: vale lo que mejora frente a la forma en que ya se decide."
+            en: "The sophistication of the algorithm is worth nothing on its own: what counts is how much it improves on the way decisions are already made."
+      - titulo:
+          es: "Validar en orden temporal, nunca con una partición al azar"
+          en: "Validate in temporal order, never with a random split"
+        cuandoSi:
+          es: "Cuando el fenómeno tiene dimensión temporal —demanda, fuga, mora—: se entrena con el pasado y se mide sobre periodos posteriores."
+          en: "When the phenomenon has a temporal dimension —demand, churn, delinquency—: training uses the past and measurement uses later periods."
+        cuandoNo:
+          es: "Cuando las observaciones no dependen del tiempo ni del orden en que llegan: una partición al azar, estratificada, basta."
+          en: "When the observations depend neither on time nor on the order in which they arrive: a stratified random split is enough."
+        porQue:
+          voz: hice
+          texto:
+            es: "En TransMilenio el modelo de demanda se entrenaba con los meses anteriores y se medía con RMSE sobre los siguientes, nunca con una partición aleatoria que dejara ver el futuro dentro del entrenamiento."
+            en: "At TransMilenio the demand model was trained on the previous months and measured with RMSE on the following ones, never with a random split that let the future show up inside training."
+          corpus: [transmilenio-cm]
+        nota:
+          voz: posicion
+          texto:
+            es: "Una precisión que la operación no va a repetir es peor que una precisión modesta: promete lo que nadie va a recibir."
+            en: "An accuracy that operations will not repeat is worse than a modest one: it promises what nobody will get."
+      - titulo:
+          es: "Evaluar por el error que cuesta, no por la exactitud"
+          en: "Evaluate by the error that costs, not by accuracy"
+        cuandoSi:
+          es: "Cuando las clases están desbalanceadas o un falso positivo y un falso negativo no cuestan lo mismo: la matriz de confusión y el umbral se leen contra ese costo."
+          en: "When the classes are imbalanced or a false positive and a false negative do not cost the same: the confusion matrix and the threshold are read against that cost."
+        cuandoNo:
+          es: "Cuando los dos errores cuestan lo mismo y las clases están equilibradas: la métrica global sirve como primera lectura."
+          en: "When the two errors cost the same and the classes are balanced: the overall metric works as a first reading."
+        porQue:
+          voz: hice
+          texto:
+            es: "En Banco Pichincha llamar a un cliente que no iba a irse costaba una llamada, y no llamar al que sí se iba costaba el cliente: por eso el análisis miraba dónde se concentraban los errores y no solo cuántos había."
+            en: "At Banco Pichincha calling a customer who was not going to leave cost a call, and not calling the one who was leaving cost the customer: that is why the analysis looked at where the errors piled up and not only how many there were."
+          corpus: [banco-pichincha, analitica-predictiva]
+      - titulo:
+          es: "Cómo se formula un problema de optimización: dos veces, y los óptimos tienen que coincidir"
+          en: "How an optimization problem is formulated: twice, and the optima have to match"
+        cuandoSi:
+          es: "Cuando la decisión es elegir una combinación de recursos bajo restricciones —asignar, programar, balancear—: el problema se formula como programación entera y como programación por restricciones, y una diferencia entre sus óptimos delata una traducción mal hecha."
+          en: "When the decision is choosing a combination of resources under constraints —assigning, scheduling, balancing—: the problem is formulated as integer programming and as constraint programming, and a difference between their optima exposes a faulty translation."
+        cuandoNo:
+          es: "Cuando la pregunta es qué va a pasar y no qué conviene elegir: ahí basta un modelo predictivo con su línea base."
+          en: "When the question is what will happen and not what is worth choosing: a predictive model with its baseline is enough there."
+        porQue:
+          voz: hice
+          texto:
+            es: "En el Harness Paper Computacional del autor cada problema se formula dos veces —programación entera mixta con Pyomo y HiGHS, y programación por restricciones con OR-Tools— y sus óptimos deben coincidir o el modelo está mal traducido; renunciar a una de las dos formulaciones exige una justificación escrita."
+            en: "In the author's Computational Paper Harness every problem is formulated twice —mixed-integer programming with Pyomo and HiGHS, and constraint programming with OR-Tools— and their optima must match or the model was translated wrong; giving up one of the two formulations requires a written justification."
+          corpus: [las-investigaciones]
+        nota:
+          voz: campo
+          texto:
+            es: "Los sistemas que traducen con un LLM un enunciado en lenguaje natural a un modelo de optimización se han evaluado sobre todo con problemas de juguete o sintéticos; reconstruidos 223 problemas reales de MIPLIB 2017, los que rinden bien en esas pruebas se degradan de forma sustancial."
+            en: "Systems that use an LLM to translate a natural-language statement into an optimization model have mostly been evaluated on toy or synthetic problems; with 223 real MIPLIB 2017 problems reconstructed, the ones that do well on those tests degrade substantially."
+          fuentes: [10]
+      - titulo:
+          es: "Simular antes de intervenir cuando la variabilidad decide"
+          en: "Simulate before intervening when variability decides"
+        cuandoSi:
+          es: "Cuando el resultado depende de colas, de recursos que compiten y de tiempos que varían: la simulación de eventos discretos compara escenarios antes de tocar la operación."
+          en: "When the result depends on queues, competing resources and times that vary: discrete-event simulation compares scenarios before the operation is touched."
+        cuandoNo:
+          es: "Cuando el promedio basta para la decisión y cambiarla no altera la dinámica del sistema."
+          en: "When the average is enough for the decision and changing it does not alter the dynamics of the system."
+        porQue:
+          voz: hice
+          texto:
+            es: "En Cafam, en 2021, el modelo en FlexSim del despacho de medicamentos con la lógica del nuevo WMS mostró dónde una regla razonable en una actividad producía esperas en otra: la cola no estaba donde el promedio decía que iba a estar."
+            en: "At Cafam, in 2021, the FlexSim model of medicine dispatch with the logic of the new WMS showed where a reasonable rule in one activity produced waiting in another: the queue was not where the average said it would be."
+          corpus: [procesos-y-simulacion]
+        nota:
+          voz: posicion
+          texto:
+            es: "Una simulación no predice lo que va a pasar: compara escenarios bajo supuestos escritos, y vale lo que valen esos supuestos."
+            en: "A simulation does not predict what will happen: it compares scenarios under written assumptions, and it is worth what those assumptions are worth."
+      - titulo:
+          es: "Una señal para quien decide, no una decisión automática"
+          en: "A signal for the decision maker, not an automatic decision"
+        cuandoSi:
+          es: "Cuando la acción exige conocimiento adicional, juicio o rendición de cuentas: el modelo prioriza u ordena, y la persona autorizada decide."
+          en: "When the action requires additional knowledge, judgment or accountability: the model prioritizes or ranks, and the authorized person decides."
+        cuandoNo:
+          es: "Cuando la acción es verificable, reversible y de bajo costo, y revisar cada caso volvería a la persona el cuello de botella."
+          en: "When the action is verifiable, reversible and low-cost, and reviewing each case would turn the person into the bottleneck."
+        porQue:
+          voz: hice
+          texto:
+            es: "En los modelos de fuga, mora y riesgo de Banco Pichincha el modelo generaba evidencia para apoyar una decisión, no una decisión automática que sustituyera el criterio de los responsables."
+            en: "In Banco Pichincha's churn, delinquency and risk models the model produced evidence to support a decision, not an automatic decision replacing the judgment of the people in charge."
+          corpus: [analitica-predictiva]
+        nota:
+          voz: campo
+          texto:
+            es: "En Microsoft Fabric las predicciones se escriben en OneLake y los informes de Power BI las leen en modo Direct Lake, directamente y sin copiarlas al modelo semántico."
+            en: "In Microsoft Fabric the predictions are written to OneLake and Power BI reports read them in Direct Lake mode, directly and without copying them into the semantic model."
+          fuentes: [1]
+      - titulo:
+          es: "Vigilar después de publicar: la deriva no avisa"
+          en: "Monitor after publishing: drift gives no warning"
+        cuandoSi:
+          es: "Siempre que un modelo entra a operar: las entradas, la distribución y el desempeño se vigilan frente a los del entrenamiento, con umbrales y una respuesta definida para cada alerta."
+          en: "Whenever a model goes into operation: inputs, distribution and performance are monitored against those of training, with thresholds and a defined response for each alert."
+        cuandoNo:
+          es: "Cuando el modelo responde una sola pregunta que no se repite: basta escribir sus límites y no volver a usarlo."
+          en: "When the model answers a single question that is not repeated: writing down its limits and not using it again is enough."
+        porQue:
+          voz: campo
+          texto:
+            es: "Los cambios en la distribución de los datos, la diferencia entre el entrenamiento y el servicio, los problemas de calidad, los cambios del entorno y los del comportamiento de los consumidores pueden volver obsoleto un modelo, y su desempeño puede degradarse hasta dejar de aportar valor al negocio."
+            en: "Changes in data distribution, training-serving skew, data quality problems, shifts in the environment and changes in consumer behavior can all make a model stale, and its performance can degrade to the point that it fails to add business value."
+          fuentes: [5]
+        nota:
+          voz: hice
+          texto:
+            es: "En Vesting, entre agosto de 2023 y enero de 2025, el monitoreo en tiempo real de hasta 23 agentes recogía por sesión entradas, salidas, tiempos, estados y costo, y lo llevaba a Microsoft Fabric y a Power BI, donde una degradación se veía como una tendencia y no como una queja."
+            en: "At Vesting, between August 2023 and January 2025, real-time monitoring of up to 23 agents collected inputs, outputs, times, statuses and cost per session, and took them to Microsoft Fabric and Power BI, where a degradation showed up as a trend and not as a complaint."
+          corpus: [analitica-predictiva]
+
+  # ─── 5 · Lo innovador en 2026 ───────────────────────────────────────────────
+  - n: 5
+    elementos:
+      - titulo: { es: "El experimento y el modelo quedan registrados solos", en: "The experiment and the model are recorded automatically" }
+        queCambia:
+          es: "En la ciencia de datos de Microsoft Fabric el registro automático con MLflow captura, mientras se entrena, los parámetros, las métricas y los artefactos de cada corrida, y con MLflow 3 cada modelo que se guarda queda enlazado a la corrida que lo produjo, con sus parámetros, sus métricas y los conjuntos de datos con que se entrenó."
+          en: "In Microsoft Fabric data science, autologging with MLflow captures each run's parameters, metrics and items during training, and with MLflow 3 every logged model stays linked to the run that produced it, with its parameters, its metrics and the datasets it was trained on."
+        fuentes: [2, 3]
+        nota:
+          voz: posicion
+          texto:
+            es: "El registro automático guarda lo que pasó; la línea base y el criterio de aceptación se siguen escribiendo antes de la primera corrida."
+            en: "Autologging keeps what happened; the baseline and the acceptance criterion are still written before the first run."
+      - titulo: { es: "La predicción llega al tablero sin copias", en: "The prediction reaches the dashboard without copies" }
+        queCambia:
+          es: "Las predicciones escritas en OneLake se leen desde Power BI en modo Direct Lake, sin copiarlas al modelo semántico: la predicción se mantiene al día sin mover datos de más."
+          en: "Predictions written to OneLake are read from Power BI in Direct Lake mode, without copying them into the semantic model: the prediction stays up to date without redundant data movement."
+        fuentes: [1]
+      - titulo: { es: "La deriva como una señal con umbral", en: "Drift as a signal with a threshold" }
+        queCambia:
+          es: "Azure Machine Learning ofrece señales de vigilancia para datos tabulares —deriva de los datos, deriva de la predicción, calidad de los datos, deriva de la atribución de variables y desempeño del modelo—, y la guía de estudio del examen de Microsoft sobre operar modelos de aprendizaje automático y de IA generativa incluye detectar y analizar la deriva de datos y configurar alertas o reentrenamientos cuando se superan los umbrales."
+          en: "Azure Machine Learning offers monitoring signals for tabular data —data drift, prediction drift, data quality, feature attribution drift and model performance—, and Microsoft's study guide for the exam on operationalizing machine learning and generative AI solutions includes detecting and analyzing data drift and configuring retraining or alert triggers when thresholds are exceeded."
+        fuentes: [5, 6]
+        nota:
+          voz: posicion
+          texto:
+            es: "Una señal de deriva abre una revisión; reentrenar porque cambió una distribución puede borrar justo lo que había que investigar."
+            en: "A drift signal opens a review; retraining because a distribution changed can erase exactly what needed investigating."
+      - titulo: { es: "Modelos fundacionales para series de tiempo", en: "Foundation models for time series" }
+        queCambia:
+          es: "GIFT-Eval compara modelos estadísticos, de aprendizaje profundo y fundacionales en 23 conjuntos de datos con más de 144.000 series de tiempo, y un trabajo de 2026 sostiene que un Transformer de parches estándar, entrenado con un protocolo sencillo, alcanza el estado del arte en pronóstico sin entrenarse con las series que pronostica, con un análisis de qué lo mueve: la escala, la composición de los datos y las técnicas de entrenamiento."
+          en: "GIFT-Eval compares statistical, deep learning and foundation models across 23 datasets with more than 144,000 time series, and a 2026 paper argues that a standard patch Transformer, trained with a straightforward protocol, reaches state-of-the-art zero-shot forecasting, without training on the series it forecasts, with an analysis of what drives it: scale, data composition and training techniques."
+        fuentes: [7, 8]
+        nota:
+          voz: posicion
+          texto:
+            es: "Un modelo fundacional entra como un candidato más: se valida en orden temporal y contra la misma línea base que cualquier otro."
+            en: "A foundation model comes in as one more candidate: it is validated in temporal order and against the same baseline as any other."
+      - titulo: { es: "El LLM como asistente de formulación", en: "The LLM as a formulation assistant" }
+        queCambia:
+          es: "OptiMUS-0.3 usa un LLM para convertir la descripción en lenguaje natural de un problema de programación lineal o entera en un modelo matemático y en código para el solver, y después evalúa y corrige lo que generó; sus autores encuentran que la arquitectura del sistema pesa más en el resultado que la capacidad del modelo."
+          en: "OptiMUS-0.3 uses an LLM to turn the natural-language description of a linear or integer programming problem into a mathematical model and solver code, and then evaluates and corrects what it generated; its authors find that the system's architecture drives the result more than the model's capability."
+        fuentes: [9]
+        nota:
+          voz: posicion
+          texto:
+            es: "Una formulación propuesta por un LLM se verifica como cualquier otra: con una segunda formulación independiente y óptimos que coinciden."
+            en: "A formulation proposed by an LLM is verified like any other: with a second, independent formulation and optima that match."
+      - titulo: { es: "MLOps por niveles, no como un salto", en: "MLOps in levels, not as a leap" }
+        queCambia:
+          es: "El modelo de madurez de MLOps de Microsoft describe cinco niveles, del trabajo sin MLOps a la operación automatizada en la que las señales de deriva o de regresión disparan el reentrenamiento, y advierte que una organización suele mostrar rasgos de más de un nivel a la vez."
+          en: "Microsoft's MLOps maturity model describes five levels, from work without MLOps to automated operations in which drift or regression signals trigger retraining, and notes that an organization often shows characteristics of more than one level at the same time."
+        fuentes: [4]
+
+  # ─── 6 · Modos de falla y cómo anticiparlos ─────────────────────────────────
+  - n: 6
+    fallas:
+      - falla: { es: "Información del futuro en el entrenamiento", en: "Information from the future in training" }
+        senal: { es: "Una métrica casi perfecta en el laboratorio que la operación no repite.", en: "A near-perfect metric in the lab that operations do not repeat." }
+        control: { es: "Variables solo con lo disponible al predecir, preprocesamiento ajustado solo en entrenamiento y una métrica redonda tratada como sospechosa.", en: "Variables only from what is available at prediction time, preprocessing fitted on training only and a too-good metric treated as suspicious." }
+      - falla: { es: "Partición al azar en un problema temporal", en: "A random split in a temporal problem" }
+        senal: { es: "El error en operación es mucho mayor que el de la validación.", en: "The error in operation is much larger than in validation." }
+        control: { es: "Validación sobre periodos posteriores a los que el modelo vio.", en: "Validation on periods later than those the model saw." }
+      - falla: { es: "Exactitud alta sobre una clase desbalanceada", en: "High accuracy on an imbalanced class" }
+        senal: { es: "El modelo acierta la mayoría y falla justo en los casos que justificaron construirlo.", en: "The model gets the majority right and fails exactly on the cases that justified building it." }
+        control: { es: "Matriz de confusión, métricas por clase y un umbral según el costo de cada error.", en: "Confusion matrix, per-class metrics and a threshold set by the cost of each error." }
+      - falla: { es: "Un modelo sin línea base", en: "A model with no baseline" }
+        senal: { es: "Nadie puede decir si el modelo mejora la forma actual de decidir.", en: "Nobody can say whether the model improves on the current way of deciding." }
+        control: { es: "La línea base se fija antes de entrenar y el veredicto puede decir «no supera».", en: "The baseline is set before training and the verdict can say «does not beat it»." }
+      - falla: { es: "El promedio que esconde el segmento", en: "The average that hides the segment" }
+        senal: { es: "Un error aceptable en el agregado y sistemático en las rutas, clases o clientes que importan.", en: "An acceptable error in aggregate and a systematic one on the routes, classes or customers that matter." }
+        control: { es: "Error por segmento allí donde se usará la predicción.", en: "Error by segment wherever the prediction will be used." }
+      - falla: { es: "La predicción que llega tarde", en: "The prediction that arrives late" }
+        senal: { es: "La estimación aparece después de que la decisión se cerró.", en: "The estimate shows up after the decision has closed." }
+        control: { es: "El horizonte de predicción se alinea con el de decisión.", en: "The prediction horizon is aligned with the decision horizon." }
+      - falla: { es: "Deriva sin vigilancia", en: "Unmonitored drift" }
+        senal: { es: "El modelo se degrada y nadie lo nota hasta que alguien se queja.", en: "The model degrades and nobody notices until someone complains." }
+        control: { es: "Entradas, distribución, desempeño, uso e impacto vigilados en operación, con umbrales y una respuesta definida.", en: "Inputs, distribution, performance, use and impact monitored in operation, with thresholds and a defined response." }
+      - falla: { es: "Una formulación mal traducida", en: "A badly translated formulation" }
+        senal: { es: "El solver entrega un óptimo que no respeta una restricción real.", en: "The solver returns an optimum that does not respect a real constraint." }
+        control: { es: "Dos formulaciones independientes cuyos óptimos deben coincidir.", en: "Two independent formulations whose optima must match." }
+
+  # ─── 7 · Métricas y controles ───────────────────────────────────────────────
+  - n: 7
+    metricas:
+      - metrica: { es: "Mejora frente a la línea base", en: "Improvement over the baseline" }
+        umbral: { es: "La supera en la prueba; si no la supera, el veredicto lo dice y el modelo no pasa.", en: "Beats it on the test; if it does not, the verdict says so and the model does not pass." }
+        aprueba: { es: "El dueño de la decisión.", en: "The decision owner." }
+      - metrica: { es: "Error en los segmentos que se usarán", en: "Error in the segments that will be used" }
+        umbral: { es: "Dentro del margen acordado en cada segmento, no solo en el agregado.", en: "Within the agreed margin in every segment, not only in aggregate." }
+        aprueba: { es: "El dueño de la decisión, con quien construye el modelo.", en: "The decision owner, with whoever builds the model." }
+      - metrica: { es: "Calibración de las probabilidades", en: "Calibration of the probabilities" }
+        umbral: { es: "La probabilidad anunciada corresponde con la frecuencia observada en los grupos que se priorizan.", en: "The announced probability matches the observed frequency in the groups that get prioritized." }
+        aprueba: { es: "Quien reparte la capacidad de intervención.", en: "Whoever allocates the capacity to intervene." }
+      - metrica: { es: "Oportunidad de la predicción", en: "Timeliness of the prediction" }
+        umbral: { es: "Siempre antes de que la decisión se cierre.", en: "Always before the decision closes." }
+        aprueba: { es: "El dueño de la decisión.", en: "The decision owner." }
+      - metrica: { es: "Variables disponibles al predecir", en: "Variables available at prediction time" }
+        umbral: { es: "Todas, verificadas antes de entrenar.", en: "All of them, checked before training." }
+        aprueba: { es: "Quien construye el modelo.", en: "Whoever builds the model." }
+      - metrica: { es: "Alertas de deriva atendidas", en: "Drift alerts handled" }
+        umbral: { es: "Todas, cada una con una acción decidida.", en: "All of them, each with a decided action." }
+        aprueba: { es: "El dueño del modelo.", en: "The model owner." }
+      - metrica: { es: "Coincidencia de las dos formulaciones", en: "Agreement of the two formulations" }
+        umbral: { es: "Óptimos iguales en cada instancia; si difieren, el modelo está mal traducido.", en: "Equal optima on every instance; if they differ, the model was translated wrong." }
+        aprueba: { es: "Quien formula el problema.", en: "Whoever formulates the problem." }
+
+  # ─── 8 · Evidencia en proyectos ─────────────────────────────────────────────
+  - n: 8
+    evidencia:
+      - nombre: { es: "TransMilenio: la demanda por ruta y franja, en uso después de la salida", en: "TransMilenio: demand by route and time band, still in use after the departure" }
+        nivel: uso-real
+        texto:
+          es: "En C&M Consultores, entre julio de 2021 y mayo de 2022, un modelo con scikit-learn predijo la demanda del sistema por ruta, tipo de día y franja horaria con un horizonte mensual; se validó con RMSE respetando el orden temporal, entró al informe de demanda con el que las unidades programaban, siguió en uso después de la salida del autor y contribuyó a una mejora reportada del 20 % en el rendimiento del sistema."
+          en: "At C&M Consultores, between July 2021 and May 2022, a scikit-learn model predicted the system's demand by route, type of day and time band with a monthly horizon; it was validated with RMSE respecting temporal order, went into the demand report the units scheduled with, stayed in use after the author left and contributed to a reported 20% improvement in system performance."
+        corpus: [analitica-predictiva, transmilenio-cm]
+        href: /proyectos/transmilenio-cm
+      - nombre: { es: "Banco Pichincha: fuga, mora y riesgo, con la persona decidiendo", en: "Banco Pichincha: churn, delinquency and risk, with the person deciding" }
+        nivel: uso-real
+        texto:
+          es: "En Banco Pichincha, en 2023, modelos con scikit-learn para fuga de clientes, mora y riesgo llegaron a producción con resultados reportados de más del 90 % de precisión y hasta un 35 % de mejora frente a las predicciones que existían; la evaluación miraba dónde se concentraban los errores y las predicciones llegaban por Power BI a quienes decidían."
+          en: "At Banco Pichincha, in 2023, scikit-learn models for customer churn, delinquency and risk went into production with reported results above 90% accuracy and up to a 35% improvement over the existing predictions; the evaluation looked at where the errors piled up, and the predictions reached the decision makers through Power BI."
+        corpus: [analitica-predictiva, banco-pichincha]
+        href: /proyectos/banco-pichincha
+      - nombre: { es: "Probeta DS: lo que garantiza por construcción", en: "Probeta DS: what it guarantees by construction" }
+        nivel: prototipo
+        texto:
+          es: "Probeta DS, una aplicación del autor, ejecuta Python, Pandas y scikit-learn en el navegador con Pyodide: dos modelos compiten contra dos líneas base a la vista —la clase mayoritaria y una regresión logística— y el veredicto dice «no supera» cuando no supera; las cinco métricas se calculan sobre el conjunto de prueba, con la matriz de confusión al lado; la fuga es imposible porque el preprocesamiento se ajusta solo con la mitad de entrenamiento, y una model card descargable guarda datos, partición, método, métricas, veredicto y límites."
+          en: "Probeta DS, one of the author's applications, runs Python, Pandas and scikit-learn in the browser with Pyodide: two models compete against two baselines in plain sight —the majority class and a logistic regression— and the verdict says «does not beat it» when it does not; the five metrics are computed on the test set, with the confusion matrix beside them; leakage is impossible because preprocessing is fitted on the training half only, and a downloadable model card keeps data, split, method, metrics, verdict and limits."
+        corpus: [analitica-predictiva]
+        href: /vitrina/apps/ds
+      - nombre: { es: "La optimización formulada dos veces", en: "Optimization formulated twice" }
+        nivel: uso-real
+        texto:
+          es: "En el paper de asignación conductor y bus, producido con el Harness Paper Computacional, las dos formulaciones independientes —programación entera y programación por restricciones— dieron 14.251 óptimos idénticos en 14.251 comparaciones, sobre la topología real de rutas de los datos abiertos del sistema y con un generador sintético declarado."
+          en: "In the driver-and-bus assignment paper, produced with the Computational Paper Harness, the two independent formulations —integer programming and constraint programming— gave 14,251 identical optima in 14,251 comparisons, on the real route topology from the system's open data and with a declared synthetic generator."
+        corpus: [las-investigaciones]
+        href: /vitrina/investigaciones/asignacion-con-fallas
+      - nombre: { es: "FlexSim en Inglopres y en Cafam: simular antes de intervenir", en: "FlexSim at Inglopres and Cafam: simulate before intervening" }
+        nivel: uso-real
+        texto:
+          es: "En Inglopres, en 2016, la simulación de eventos discretos con FlexSim comparó alternativas de la operación de alquiler de maquinaria antes de cambiarla; en Cafam, en 2021, el modelo del despacho de medicamentos con la lógica del nuevo WMS se validó contra la operación que conocía el equipo de pruebas: si el modelo hacía cola donde la bodega no la hacía, el error estaba en el modelo."
+          en: "At Inglopres, in 2016, discrete-event simulation with FlexSim compared alternatives for the machinery rental operation before changing it; at Cafam, in 2021, the model of medicine dispatch with the logic of the new WMS was validated against the operation the testing team knew firsthand: if the model queued where the warehouse did not, the error was in the model."
+        corpus: [procesos-y-simulacion]
+        href: /proyectos/cafam
+      - nombre: { es: "Criterios congelados y resultados negativos publicados", en: "Frozen criteria and published negative results" }
+        nivel: uso-real
+        texto:
+          es: "En las investigaciones del autor los umbrales que deciden si una tesis se sostiene se congelan antes de que exista un solo resultado, y lo que sale se publica: en el paper piloto, dos de los tres principios evaluados quedaron refutados por sus propias métricas, y así se escribieron."
+          en: "In the author's research the thresholds that decide whether a thesis holds are frozen before a single result exists, and whatever comes out is published: in the pilot paper, two of the three principles evaluated were refuted by their own metrics, and that is how they were written up."
+        corpus: [las-investigaciones]
+        href: /vitrina/investigaciones
+      - nombre: { es: "Convoyes de buses: la política, contra el mejor control clásico", en: "Bus bunching: the policy, against the best classic control" }
+        nivel: uso-real
+        texto:
+          es: "En la investigación sobre convoyes de buses, la política propuesta se prueba en una simulación de eventos discretos con verdad conocida por construcción y se compara contra el mejor control clásico, nunca contra no hacer nada; las experiencias medidas son de un corredor simulado, y su ficha no afirma cifras del sistema real."
+          en: "In the research on bus bunching, the proposed policy is tested in a discrete-event simulation with ground truth known by construction and compared against the best classic control, never against doing nothing; the experiences measured come from a simulated corridor, and its technical sheet claims no figures for the real system."
+        corpus: [las-investigaciones]
+        href: /vitrina/investigaciones/convoyes-de-buses
+
+  # ─── 9 · Límites y alcance ──────────────────────────────────────────────────
+  - n: 9
+    limites:
+      - voz: hice
+        texto:
+          es: "No hay un caso propio de deriva observada que pueda contarse con sus cifras: lo que existe es la infraestructura para verla, construida en Vesting."
+          en: "There is no case of observed drift of the author's own that can be told with its figures: what exists is the infrastructure to see it, built at Vesting."
+        corpus: [analitica-predictiva]
+      - voz: hice
+        texto:
+          es: "La capa prescriptiva no se hizo en un empleo: en Vesting faltaba la tercera capa, la simulación de escenarios sobre la base de eventos, y la asignación conductor–vehículo–ruta se detectó en los datos de TransMilenio, pero su formulación y su respuesta llegaron después, en una investigación."
+          en: "The prescriptive layer was not built in a job: at Vesting the third layer, scenario simulation on top of the event base, was missing, and the driver–vehicle–route assignment was spotted in TransMilenio's data, but its formulation and its answer came later, in a research line."
+        corpus: [procesos-y-simulacion, cm-operaciones]
+      - voz: hice
+        texto:
+          es: "Las magnitudes de la asignación y de los convoyes son de instancias sintéticas y de un corredor simulado: el mecanismo se demuestra; las cifras reales exigen datos de un operador."
+          en: "The magnitudes of the assignment and bunching work come from synthetic instances and a simulated corridor: the mechanism is demonstrated; real figures require an operator's data."
+        corpus: [las-investigaciones]
+      - voz: hice
+        texto:
+          es: "PyTorch y TensorFlow son exploración: redes neuronales y aprendizaje profundo, sin caso en producción; los modelos en producción son de scikit-learn."
+          en: "PyTorch and TensorFlow are exploration: neural networks and deep learning, with no case in production; the models in production are scikit-learn ones."
+        corpus: [analitica-predictiva]
+      - voz: hice
+        texto:
+          es: "De MLOps está hecha la mitad de llevar modelos a producción y sostenerlos, no la de empaquetar y orquestar con contenedores; la ruta del AI-300, en curso, reemplazó al DP-100 retirado y no se presenta como obtenida."
+          en: "Of MLOps, the half of taking models to production and sustaining them has been done, not the half of packaging and orchestrating with containers; the AI-300 path, in progress, replaced the retired DP-100 and is not presented as earned."
+        corpus: [plataforma-y-despliegue, certificaciones]
+      - voz: posicion
+        texto:
+          es: "MLflow, los modelos fundacionales de series de tiempo y los asistentes de formulación con LLM entran aquí como estado del campo: la experiencia que se afirma es la del bloque 8, con el nivel que el corpus le da."
+          en: "MLflow, time-series foundation models and LLM formulation assistants come in here as state of the field: the experience this piece claims is that of block 8, at the level the corpus gives it."
+      - voz: posicion
+        texto:
+          es: "Lo que conviene hacer distinto hoy: escribir la línea base y el umbral de aceptación antes de abrir el primer notebook, no cuando el modelo ya promete."
+          en: "What is worth doing differently today: write down the baseline and the acceptance threshold before opening the first notebook, not once the model already looks promising."
+
+  # ─── 10 · Fuentes y fecha de revisión ───────────────────────────────────────
+  - n: 10
+    revisado: "2026-10-21"
+    fuentes:
+      - id: 1
+        titulo: "What is Data Science in Microsoft Fabric?"
+        editor: "Microsoft Learn"
+        fecha: "2025-12-03"
+        url: "https://learn.microsoft.com/en-us/fabric/data-science/data-science-overview"
+      - id: 2
+        titulo: "Autologging in Data Science"
+        editor: "Microsoft Learn"
+        fecha: "2026-05-15"
+        url: "https://learn.microsoft.com/en-us/fabric/data-science/mlflow-autologging"
+      - id: 3
+        titulo: "MLflow 3 in Fabric Data Science"
+        editor: "Microsoft Learn"
+        fecha: "2026-05-15"
+        url: "https://learn.microsoft.com/en-us/fabric/data-science/mlflow-3-overview"
+      - id: 4
+        titulo: "MLOps maturity model"
+        editor: "Microsoft Learn (Azure Architecture Center)"
+        fecha: "2026-06-03"
+        url: "https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/mlops-maturity-model"
+      - id: 5
+        titulo: "Azure Machine Learning model monitoring"
+        editor: "Microsoft Learn"
+        fecha: "2026-01-27"
+        url: "https://learn.microsoft.com/en-us/azure/machine-learning/concept-model-monitoring"
+      - id: 6
+        titulo: "Study guide for Exam AI-300: Operationalizing Machine Learning and Generative AI Solutions"
+        editor: "Microsoft Learn"
+        fecha: "2026-02-18"
+        url: "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/ai-300"
+      - id: 7
+        titulo: "GIFT-Eval: A Benchmark For General Time Series Forecasting Model Evaluation"
+        editor: "arXiv"
+        fecha: "2024-11-11"
+        url: "https://arxiv.org/abs/2410.10393"
+      - id: 8
+        titulo: "Revisiting the Generic Transformer: Deconstructing a Strong Baseline for Time Series Foundation Models"
+        editor: "arXiv"
+        fecha: "2026-02-06"
+        url: "https://arxiv.org/abs/2602.06909"
+      - id: 9
+        titulo: "OptiMUS-0.3: Using Large Language Models to Model and Solve Optimization Problems at Scale"
+        editor: "arXiv"
+        fecha: "2026-06-26"
+        url: "https://arxiv.org/abs/2407.19633"
+      - id: 10
+        titulo: "Constructing Industrial-Scale Optimization Modeling Benchmark"
+        editor: "arXiv"
+        fecha: "2026-05-26"
+        url: "https://arxiv.org/abs/2602.10450"
