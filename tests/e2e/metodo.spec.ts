@@ -8,7 +8,12 @@ import { parse } from "yaml";
  * pruebas SOLA, sin tocar el archivo. La ruta vieja (`/metodo`) redirige con 301.
  */
 
-type Pieza = { id: string; slug: string; nombre: { es: string; en: string } };
+type Pieza = {
+  id: string;
+  slug: string;
+  nombre: { es: string; en: string };
+  bloques: { n: number; revisado?: string }[];
+};
 const piezas: Pieza[] = readdirSync("data/metodo")
   .filter((f) => f.endsWith(".yaml"))
   .map((f) => parse(readFileSync(`data/metodo/${f}`, "utf8")) as Pieza);
@@ -347,6 +352,22 @@ test.describe("Métodos — descubrimiento", () => {
       expect(xml).toContain(`/${idioma}/metodos</loc>`);
       for (const p of piezas)
         expect(xml).toContain(`/${idioma}/metodos/${p.slug}</loc>`);
+    }
+  });
+
+  // S10-B18: `lastmod` de cada pieza = su fecha de revisión (bloque 10), no la del build.
+  test("el sitemap fecha cada pieza con su fecha de revisión, no con la del despliegue", async ({
+    request,
+  }) => {
+    const xml = await (await request.get("/sitemap.xml")).text();
+    for (const p of piezas) {
+      const revisado = p.bloques.find((b) => b.n === 10)?.revisado;
+      expect(revisado, `${p.slug}: sin fecha de revisión`).toBeTruthy();
+      const entrada = xml
+        .split("<url>")
+        .find((u) => u.includes(`/es/metodos/${p.slug}</loc>`));
+      expect(entrada, `${p.slug}: sin entrada en el sitemap`).toBeTruthy();
+      expect(entrada!, p.slug).toContain(`<lastmod>${revisado}`);
     }
   });
 });

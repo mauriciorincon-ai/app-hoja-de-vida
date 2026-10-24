@@ -6,6 +6,7 @@ import { SITE_URL } from "@/lib/site";
 import { FRENTE_PROPIO, getFrentes } from "@/lib/vitrina/categorias";
 import { getManifestVitrina } from "@/lib/vitrina/loader";
 import { getPiezasMetodo } from "@/lib/metodo/loader";
+import { bloqueDe } from "@/lib/metodo/schema";
 import { getSimulaciones } from "@/lib/vitrina/simulaciones-loader";
 import { esFrente, getPiezas } from "@/lib/vitrina/piezas";
 
@@ -55,14 +56,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     // «Métodos» (S10): la lista y cada publicación, desde data/metodo/ — una
     // pieza nueva entra al sitemap sola.
+    // `lastmod` = la fecha de revisión de la pieza (bloque 10), no la del build: decir que
+    // nueve publicaciones cambiaron en cada despliegue es ruido (S10-B18). La lista toma la
+    // más reciente de sus piezas.
     {
       url: `${SITE_URL}/${locale}/metodos`,
-      lastModified: new Date(),
+      lastModified: new Date(
+        getPiezasMetodo()
+          .map((p) => bloqueDe(p, 10).revisado)
+          .sort()
+          .at(-1) ?? new Date(),
+      ),
       alternates: alternatesFor("/metodos"),
     },
     ...getPiezasMetodo().map((p) => ({
       url: `${SITE_URL}/${locale}/metodos/${p.slug}`,
-      lastModified: new Date(),
+      lastModified: new Date(bloqueDe(p, 10).revisado),
       alternates: alternatesFor(`/metodos/${p.slug}`),
     })),
     // Por app: la ficha técnica (ADR-016) y su detalle.
