@@ -627,8 +627,8 @@ bloques:
       - nombre: { es: "La vitrina, producto de la fábrica", en: "The showcase, a product of the factory" }
         nivel: uso-real
         texto:
-          es: "Diez aplicaciones hermanas, 15 agentes, 7 investigaciones y 6 tableros —38 piezas, sin contar este sitio— salen de un pipeline con dos casas, un agente de fábrica, cuatro jobs de integración continua y un contrato de ficha."
-          en: "Ten sister applications, 15 agents, 7 research lines and 6 dashboards —38 pieces, not counting this site— come out of a pipeline with two houses, a factory agent, four CI jobs and a sheet contract."
+          es: "Diez aplicaciones hermanas, 14 agentes, 7 investigaciones y 6 tableros —37 piezas, sin contar este sitio— salen de un pipeline con dos casas, un agente de fábrica, cuatro jobs de integración continua y un contrato de ficha."
+          en: "Ten sister applications, 14 agents, 7 research lines and 6 dashboards —37 pieces, not counting this site— come out of a pipeline with two houses, a factory agent, four CI jobs and a sheet contract."
         corpus: [apps-pipeline]
         href: /vitrina
       - nombre: { es: "Banco Pichincha: adopción y formación como parte del producto", en: "Banco Pichincha: adoption and training as part of the product" }

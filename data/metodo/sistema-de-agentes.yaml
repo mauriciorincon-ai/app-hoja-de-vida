@@ -210,8 +210,8 @@ bloques:
         nota:
           voz: hice
           texto:
-            es: "Así nacen los trece agentes que este sitio muestra y que corren sobre Claude Code: una constitución en un CLAUDE.md, el harness con sus criterios binarios —20 en el Constructor de Tableros Power BI, 44 en el Harness Paper Computacional— y una carnada por control."
-            en: "That is how the thirteen agents in this site’s showcase that run on Claude Code are born: a constitution in a CLAUDE.md, the harness with its binary criteria —20 in the Power BI Dashboard Builder, 44 in the Computational Paper Harness— and a bait case for each control."
+            es: "Así nacen los doce agentes que este sitio muestra y que corren sobre Claude Code: una constitución en un CLAUDE.md, el harness con sus criterios binarios —20 en el Constructor de Tableros Power BI, 44 en el Harness Paper Computacional— y una carnada por control."
+            en: "That is how the twelve agents in this site’s showcase that run on Claude Code are born: a constitution in a CLAUDE.md, the harness with its binary criteria —20 in the Power BI Dashboard Builder, 44 in the Computational Paper Harness— and a bait case for each control."
           corpus: [los-agentes-de-la-vitrina]
       - nombre: { es: "Evaluar antes de ponerlo en producción", en: "Evaluate before putting it into production" }
         entradas:
@@ -543,8 +543,8 @@ bloques:
       - nombre: { es: "Los agentes de la vitrina, sobre Claude Code", en: "The showcase agents, on Claude Code" }
         nivel: uso-real
         texto:
-          es: "Trece sistemas de trabajo con constitución, harness, criterios binarios, carnadas y gates humanos con palabra literal; cinco están sellados. Son de uso personal, con entregables y evidencia."
-          en: "Thirteen work systems with a constitution, a harness, binary criteria, bait cases and human gates with a literal word; five are sealed. They are for personal use, with deliverables and evidence."
+          es: "Doce sistemas de trabajo con constitución, harness, criterios binarios, carnadas y gates humanos con palabra literal; cinco están sellados. Son de uso personal, con entregables y evidencia."
+          en: "Twelve work systems with a constitution, a harness, binary criteria, bait cases and human gates with a literal word; five are sealed. They are for personal use, with deliverables and evidence."
         corpus: [los-agentes-de-la-vitrina]
         href: /vitrina/agentes
       - nombre: { es: "Constructor de Tableros Power BI", en: "Power BI Dashboard Builder" }
