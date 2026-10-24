@@ -4,7 +4,8 @@
 > tokens del prototipo `referencias-ui/hoja-de-vida/HV Web/design-system.md` (planeadora,
 > READ-ONLY), **re-aplicados a un layout scroll editorial mobile-first** — el shell dashboard de
 > 3 columnas del prototipo NO existe aquí. Toda pantalla posterior obedece este documento; se
-> extiende por ADR, nunca se contradice en silencio.
+> extiende por ADR, nunca se contradice en silencio. Puesto al día contra el código en el S20
+> (2026-10-23, cierre del H-2).
 
 ## Personalidad
 
@@ -164,10 +165,12 @@ animaciones infinitas (sweep/glitch/marquee), scroll-snap de deck, CDNs en `<hea
   borde paper-3; ghost = transparente con hover paper-1. Táctil ≥44px.
 - **Card**: paper-0, borde paper-3 1px, `r-md`, `sh-1`. Variante editorial: paper-1 + título Fraunces.
 - **Chip de estado de app**: `r-full`, label mono uppercase 11px. `citron` + citron-ink = "en
-  construcción"; `peach` + peach-ink = "en exploración". Sin fechas prometidas.
+  construcción"; `peach` + peach-ink = "en exploración". Sin fechas prometidas. (Son los chips de **apps**: los niveles de
+  «Métodos» usan otra paleta —`citron` = exploración, `peach` = en construcción—; ver abajo.)
 - **Input/Textarea**: paper-0, borde paper-3, focus ring 2px `sky-ink` offset 2px.
 - **Metric tile (logros)**: número mono grande con Counter, caption label, sin sparklines en S1.
-- **Glifo ◆**: marca de evidencia/lista editorial (heredado del prototipo).
+- **Glifo ◆**: marca de lista editorial (heredado del prototipo). **No significa «evidencia»**: en «Métodos» el ◆ es la voz
+  *Estado del campo* y la *Evidencia* es el ● (ver «Métodos · S10 → S20»).
 - **Iconografía**: Lucide, stroke 1.5px, 16/20px, siempre con `aria-label` si es interactivo.
 
 ### Componentes de la HOME · revisión post-S7
@@ -512,6 +515,46 @@ cifra `clamp(3.5rem,8vw,4.75rem)`; tres columnas dejaban dos huérfanos.
   completa es un enlace y funciona. Lo de dentro del marco es de la otra casa: ni se repinta ni
   se edita. En la ficha técnica, el cierre ofrece «Ver la simulación» (borde `sage-ink`, texto
   `sage-ink`) junto a «Ver la ficha completa».
+
+### «Métodos» · S10 → S20 (publicaciones largas en tercera persona)
+
+Una publicación por tema de método, en `/metodos` (la lista) y `/metodos/<slug>` (una pieza). Misma gramática que el resto del sitio
+—tarjetas `paper-0` de borde `paper-2`, `r-lg` (14 px) y `sh-1`; Fraunces para los títulos, Inter para el cuerpo, JetBrains Mono para
+los rótulos—, sin color nuevo. Cada pieza lleva los **diez bloques fijos** con ancla `#bloque-n` y una **hoja de impresión** (tarjetas
+con `break-inside-avoid`, títulos de bloque con `break-after-avoid`). *Texto, símbolo y color siempre juntos.* La voz de las
+publicaciones y de sus textos de interfaz es **impersonal** (desde el S14); la primera persona de la «Personalidad» vale para el resto del
+sitio y para el chat.
+
+- **Las tres voces** (`src/components/metodo/voz.tsx`): el rótulo es un chip `r-full` mono 11 px uppercase con **símbolo + palabra + color**, y la
+  afirmación lleva un **filete lateral** cuyo trazo también la distingue (no solo el color: el dueño es daltónico leve).
+
+  | Voz | Símbolo y palabra | Color del chip | Filete |
+  |---|---|---|---|
+  | Evidencia (`hice`: lo hecho en un proyecto con nombre) | ● Evidencia | `sage` / `sage-ink` | continuo |
+  | Estado del campo (`campo`: una fuente con título, editor, fecha y enlace) | ◆ Estado del campo | `sky` / `sky-ink` | rayado |
+  | Criterio (`posicion`: la posición del autor, rotulada como tal) | ▲ Criterio | `peach` / `peach-ink` | punteado |
+
+- **Chips de nivel** (`infografia.tsx`): el nivel que el corpus le da a una herramienta; nada sube de nivel. `sage` = Uso real · `lilac` =
+  Prototipo · `sky` = En estudio · `citron` = Exploración · `peach` = En construcción (el quinto nivel, S17). Mismo chip `r-full` mono 11 px
+  con la palabra siempre escrita.
+- **El mapa** (bloque 2, `mapa-svg.tsx`): un SVG dibujado desde el dato, con **texto real** (jamás una imagen de un texto). Cada tipo de nodo
+  se distingue por **forma + palabra de la leyenda + color**: *Actor* = rectángulo redondeado `sage` · *Dato* = rectángulo con barra lateral
+  `sky` · *Control* = hexágono `citron` · *Humano* = elipse `lilac` · *Externo* = rectángulo de trazo discontinuo sobre `paper-1`. Celda de
+  176 × 104, nodo de 140 × 60; la etiqueta ocupa a lo sumo **dos líneas de 22 caracteres** (un gate falla si un nodo no cabe en su caja).
+  `role="img"` con `<title>` y `<desc>`, y debajo la **«Lectura del mapa, nodo por nodo»** como alternativa textual visible (sale también
+  impresa). En el teléfono el mapa conserva su tamaño y se desliza de lado, dentro de una región con foco.
+- **El riel de fases** (bloque 3, `riel-de-fases.tsx`): la misma gramática que la trayectoria —una línea continua y un relleno que crece con lo
+  leído— con ítems de fase (entradas · actividades · artefactos · quién decide · control). El relleno existe siempre y se mueve escribiendo su
+  `transform` desde el evento de scroll; con «reducir movimiento» queda entero y quieto, y **la forma del árbol no cambia** (regla 5a). La línea
+  y el relleno son decoración (`aria-hidden`); la lista de fases es HTML siempre.
+- **Citas y fuentes**: la cita `[n]` va en `sky-ink`, mono 11 px, y enlaza a `#fuente-n` del bloque 10; en la lista de fuentes el `[n]` es mono
+  13 px `sky-ink` con ancho mínimo de 4 caracteres, para que los títulos arranquen alineados con 10 o más fuentes.
+- **La puerta en la HOME** (`src/components/home/metodos.tsx`, sección `#metodos`): entre la Vitrina y los Estudios, sin imágenes y bajo el pliegue
+  (el presupuesto de la HOME es el más ajustado). Título Fraunces, una línea de contexto de 60 caracteres de ancho, una cuadrícula de dos columnas
+  con una tarjeta por publicación (`r-md` 12 px, `sh-1`, mín. 44 px de alto) que lleva el chip `lilac` «Tema N» y el nombre, y el botón `sage`
+  «Ver todas las publicaciones →». La lista sale de `data/metodo/`: **ningún total vive escrito** (un gate lo exige contra el disco).
+- **Tres cosas que no hace**: no usa `ink-3` como texto (gate de tokens vetados), no anima nada con `width`/`height`/`top`/`left` (solo
+  `transform` y `opacity`) y no escribe una cuenta de piezas en ningún texto.
 
 ## Layout
 
