@@ -250,6 +250,13 @@ describe("la guía v21 · las sentadas y las sumas", () => {
     expect(seccion).toMatch(/data-calc="rev-min">—</);
     expect(seccion).toMatch(/data-calc="rev-n">—</);
   });
+
+  it("ningún bloque trae una estimación de minutos escrita a mano: los minutos los suma la página", () => {
+    // Fuera del historial (los <details>), donde cada versión conserva lo que fue cierto ese día.
+    const sinHistorial = HTML.replace(/<details[\s\S]*?<\/details>/g, "");
+    const texto = sinHistorial.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ");
+    expect(texto.match(/~\s*\d+\s*(min|h)\b/g) ?? []).toEqual([]);
+  });
 });
 
 describe("la guía v21 · el sí/no y la nota", () => {
@@ -314,6 +321,31 @@ describe("la guía v21 · el sí/no y la nota", () => {
     filtro("revision").click();
     expect(calc("rev-no")).toBe("2");
   });
+
+  it("una respuesta marcada por error se quita y la fila vuelve a pendiente", () => {
+    const { doc, window, calc, click } = abrir();
+    const antes = Number(calc("rev-pendientes"));
+    const boton = doc.querySelector<HTMLButtonElement>("#a1 .p-limpiar")!;
+    expect(boton.hidden, "sin respuesta no se ofrece quitarla").toBe(true);
+    click("a1-no");
+    expect(boton.hidden).toBe(false);
+    expect(calc("rev-pendientes")).toBe(String(antes - 1));
+    boton.click();
+    expect((doc.getElementById("a1-no") as HTMLInputElement).checked).toBe(
+      false,
+    );
+    expect(window.localStorage.getItem(`${NS}a1`)).toBeNull();
+    expect(calc("rev-pendientes")).toBe(String(antes));
+    expect(calc("rev-no")).toBe("0");
+    expect(boton.hidden).toBe(true);
+  });
+
+  it("los radios no se restauran solos: las filas cambian de sitio y el navegador marcaría otro", () => {
+    const sin = (
+      HTML.match(/<input type="radio"(?! autocomplete="off")/g) ?? []
+    ).length;
+    expect(sin).toBe(0);
+  });
 });
 
 describe("la guía v21 · «Copiar mis respuestas»", () => {
@@ -363,8 +395,8 @@ describe("la guía v21 · «Copiar mis respuestas»", () => {
     expect(copiado).toContain("· a2 — ");
     expect(copiado).toContain("el orden es distinto");
     // Los pendientes van por sentada, con el opcional marcado, y los respondidos no están.
-    expect(copiado).toMatch(/PENDIENTES \(\d+\)/);
-    expect(copiado).toMatch(/Sentada 10: .*q26 \(opcional\)/);
+    expect(copiado).toMatch(/PENDIENTES \(\d+ y 1 opcional\)/);
+    expect(copiado).toMatch(/Sentada 11: .*q26 \(opcional\)/);
     expect(copiado).not.toMatch(/Sentada 1: .*\ba1\b/);
     expect(doc.getElementById("rev-estado")!.textContent).toContain("Copiado");
     expect(doc.getElementById("rev-texto")!.hasAttribute("hidden")).toBe(true);
@@ -397,9 +429,9 @@ describe("la guía v21 · «Copiar mis respuestas»", () => {
 });
 
 describe("la guía v21 · lo que entra", () => {
-  it("las cinco pruebas nuevas existen, son del S21, tienen sentada y la opcional lo dice", () => {
+  it("las seis pruebas nuevas existen, son del S21, tienen sentada y la opcional lo dice", () => {
     const { doc } = abrir();
-    for (const id of ["m15", "f12", "q25", "q26", "o15"]) {
+    for (const id of ["m15", "f12", "q25", "q26", "o15", "o16"]) {
       const li = doc.getElementById(id)!;
       expect(li, id).toBeTruthy();
       expect(li.getAttribute("data-origen"), id).toBe("nuevo");

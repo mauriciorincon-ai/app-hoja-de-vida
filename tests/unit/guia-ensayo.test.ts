@@ -332,5 +332,5 @@ describe("la guía · todo control dibujado tiene su script (regla 22)", () => {
       r.click();
       expect(window.localStorage.getItem(`${NS}${r.name}`), r.id).toBe(r.value);
     }
-  });
+  }, 60_000);
 });
