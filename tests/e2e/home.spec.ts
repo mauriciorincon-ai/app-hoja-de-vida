@@ -134,7 +134,9 @@ test.describe("HOME — happy path del sprint", () => {
       // entrada por publicación del disco.
       expect(html).toContain('id="metodos"');
       for (const slug of piezasMetodo)
-        expect(html, `puerta: ${slug}`).toContain(`data-puerta-pieza="${slug}"`);
+        expect(html, `puerta: ${slug}`).toContain(
+          `data-puerta-pieza="${slug}"`,
+        );
       expect(html).toContain('id="estudios"');
       expect(html).toContain("Pontificia Universidad Javeriana");
     }
@@ -180,13 +182,26 @@ test.describe("HOME — happy path del sprint", () => {
       }
     }
 
-    // Un clic en una entrada llega a su publicación.
-    await page.goto("/es");
+    // Un clic en una entrada llega a su publicación, y el botón a la lista:
+    // en los dos idiomas (S20: el segundo idioma también se prueba).
     const primera = piezasMetodo[0];
-    await page.locator(`#metodos a[data-puerta-pieza="${primera}"]`).click();
-    await expect(page).toHaveURL(new RegExp(`/es/metodos/${primera}$`), {
-      timeout: 15_000,
-    });
+    for (const locale of ["es", "en"]) {
+      await page.goto(`/${locale}`);
+      await page.locator(`#metodos a[data-puerta-pieza="${primera}"]`).click();
+      await expect(page, `la entrada de la puerta en /${locale}`).toHaveURL(
+        new RegExp(`/${locale}/metodos/${primera}$`),
+        {
+          timeout: 15_000,
+        },
+      );
+
+      await page.goto(`/${locale}`);
+      await page.locator("#metodos a[data-ir-metodos]").click();
+      await expect(page, `el botón de la puerta en /${locale}`).toHaveURL(
+        new RegExp(`/${locale}/metodos$`),
+        { timeout: 15_000 },
+      );
+    }
   });
 
   test("disclosure del timeline: expande y contrae accesible por teclado", async ({

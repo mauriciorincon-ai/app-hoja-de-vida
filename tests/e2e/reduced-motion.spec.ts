@@ -82,6 +82,26 @@ test.describe("prefers-reduced-motion (criterio de aceptación e2e)", () => {
     await expect(counter).toHaveText(new RegExp(String(primerLogro)));
   });
 
+  test("la puerta a «Métodos» queda visible sin movimiento también en inglés", async ({
+    page,
+  }) => {
+    await page.goto("/en");
+    await page.locator("form[data-hydrated=true]").waitFor();
+
+    // Mismo árbol que en español: la puerta nace entera, sin scroll previo.
+    for (const selector of [
+      "#metodos-titulo",
+      "#metodos li:first-child [data-puerta-pieza]",
+      "#metodos [data-ir-metodos]",
+    ]) {
+      await expect(page.locator(selector), selector).toBeVisible();
+      expect(
+        await findAnimatedAncestor(page.locator(selector)),
+        selector,
+      ).toBeNull();
+    }
+  });
+
   test("el disclosure expande sin animación y el contenido queda visible", async ({
     page,
   }) => {
