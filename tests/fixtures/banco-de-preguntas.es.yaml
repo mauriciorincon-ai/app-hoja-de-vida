@@ -25,6 +25,13 @@
 # El gemelo en inglés (`banco-de-preguntas.en.yaml`) nace cuando existan los
 # documentos `.en.md`, es decir cuando el dueño apruebe.
 
+# S20 — NUEVE FILAS AMPLIADAS (vigía de márgenes del cierre del H-2). Medido el margen REAL a fallar
+# (la fila cae cuando cuatro fragmentos que no son su fuente superan a su mejor fragmento): nueve filas
+# estaban a ≤ 3 puntos (banco, TransMilenio, Ceinfes, DAX, Azure, base estadística, Vesting, Cafam y big
+# data). En todas, el competidor que las desplazaba habla DE VERDAD del tema (su texto nombra el tema, comprobado fragmento a fragmento), así que su
+# casa entra en `espera` junto a la natural: la fila deja de ser una alarma por ruido sin dejar de caer si
+# todas esas fuentes desaparecen. Las demás filas con margen ≤ 8 (ERP 5, trazabilidad 4, inglés 4,
+# certificaciones, MLOps 5, adopción 4…) siguen como estaban: su casa va 1.ª–3.ª y el gate las nombra si salen.
 preguntas:
   # ─────────────────────────────────────────────────────────────────────
   # Trayectoria: los ocho empleos, que es por donde empieza toda entrevista
@@ -39,7 +46,7 @@ preguntas:
     espera: [fundacion-ctic]
     familia: trayectoria
   - pregunta: "¿Qué hizo en Vesting?"
-    espera: [vesting]
+    espera: [vesting, agentes-en-produccion, trayectoria]
     familia: trayectoria
   - pregunta: "¿Cuánto tiempo estuvo en Vesting y con qué cargo?"
     espera: [vesting, trayectoria, casestudy-vesting]
@@ -55,7 +62,7 @@ preguntas:
       exige aquí es que traiga el documento de Vesting: con esas fuentes
       delante, el modelo contesta lo que sí consta y declara lo que no.
   - pregunta: "¿Ha trabajado en un banco?"
-    espera: [banco-pichincha]
+    espera: [banco-pichincha, como-trabajo]
     familia: trayectoria
   - pregunta: "¿Qué hizo en Banco Pichincha?"
     espera: [banco-pichincha]
@@ -64,7 +71,7 @@ preguntas:
     espera: [banco-pichincha]
     familia: trayectoria
   - pregunta: "¿Qué hizo en Cafam?"
-    espera: [cafam]
+    espera: [cafam, trayectoria, casestudy-cafam]
     familia: trayectoria
   - pregunta: "¿Ha participado en la implementación de un sistema de gestión de bodega?"
     espera: [cafam]
@@ -76,13 +83,13 @@ preguntas:
     espera: [transmilenio-cm, cm-operaciones]
     familia: trayectoria
   - pregunta: "¿Qué trabajo hizo para TransMilenio?"
-    espera: [transmilenio-cm, cm-operaciones]
+    espera: [transmilenio-cm, cm-operaciones, como-trabajo, origenes]
     familia: trayectoria
   - pregunta: "¿Qué es el análisis post-operacional que menciona?"
     espera: [transmilenio-cm]
     familia: trayectoria
   - pregunta: "¿Qué hizo en Ceinfes?"
-    espera: [ceinfes]
+    espera: [ceinfes, trayectoria, como-trabajo, origenes]
     familia: trayectoria
   - pregunta: "¿Ha presentado resultados ante una junta directiva?"
     espera: [ceinfes, como-trabajo]
@@ -289,7 +296,7 @@ preguntas:
     espera: [fabric-en-la-practica, bi-que-se-adopta]
     familia: plataforma-y-datos
   - pregunta: "¿Sabe DAX?"
-    espera: [fabric-en-la-practica, banco-pichincha]
+    espera: [fabric-en-la-practica, banco-pichincha, los-tableros]
     familia: plataforma-y-datos
   - pregunta: "¿Ha construido procesos ETL?"
     espera: [transmilenio-cm, banco-pichincha]
@@ -298,7 +305,7 @@ preguntas:
     espera: [cafam, certificaciones, inglopres]
     familia: plataforma-y-datos
   - pregunta: "¿Tiene experiencia con Azure?"
-    espera: [plataforma-y-despliegue, fabric-en-la-practica]
+    espera: [plataforma-y-despliegue, fabric-en-la-practica, certificaciones]
     familia: plataforma-y-datos
   - pregunta: "¿Conoce Google Cloud, Vertex AI o BigQuery?"
     espera: [plataforma-y-despliegue]
@@ -319,7 +326,7 @@ preguntas:
     espera: [plataforma-y-despliegue, analitica-predictiva]
     familia: plataforma-y-datos
   - pregunta: "¿Ha trabajado con big data o procesamiento distribuido?"
-    espera: [vesting, fabric-en-la-practica]
+    espera: [vesting, fabric-en-la-practica, skills]
     familia: plataforma-y-datos
   - pregunta: "¿Ha construido pipelines de datos que corran solos?"
     espera: [transmilenio-cm, vesting, plataforma-y-despliegue]
@@ -370,7 +377,7 @@ preguntas:
       palabra con contenido es una letra suelta es invisible para este chat, y
       está declarado como límite conocido de ADR-010.
   - pregunta: "¿Qué base estadística tiene?"
-    espera: [analitica-predictiva]
+    espera: [analitica-predictiva, cm-operaciones, certificaciones]
     familia: bi-y-analitica
   - pregunta: "¿Ha hecho predicción de demanda?"
     espera: [transmilenio-cm, analitica-predictiva]

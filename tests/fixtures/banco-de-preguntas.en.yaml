@@ -9,6 +9,12 @@
 # Las ajenas se declaran igual que en español y se miden aparte: el vocabulario
 # inglés del corpus es otro, así que «pasa» y «bloquea» pueden diferir.
 
+# S20 — NINE WIDENED ROWS (margin watch of the H-2 closing). The REAL margin to failure was measured (a row
+# fails when four chunks that are not its source outscore its best chunk): nine rows sat at <= 3 points (bank,
+# TransMilenio, Ceinfes, DAX, Azure, statistics, Vesting, Cafam and big data). In each one the competitor that
+# displaced them REALLY talks about the topic (its text names it, checked chunk by chunk), so its home enters `espera` next to the
+# natural one: the row stops being a noise alarm without ceasing to fail if all those sources disappear. The
+# other rows with margin <= 8 stay as they were: their home is 1st-3rd and the gate names them if they leave.
 preguntas:
   # ── trayectoria
   - pregunta: "Where does Henry work now?"
@@ -21,7 +27,7 @@ preguntas:
     espera: [fundacion-ctic]
     familia: trayectoria
   - pregunta: "What did he do at Vesting?"
-    espera: [vesting]
+    espera: [vesting, agentes-en-produccion, trayectoria]
     familia: trayectoria
   - pregunta: "How long was he at Vesting and in what role?"
     espera: [vesting, trayectoria, casestudy-vesting]
@@ -30,7 +36,7 @@ preguntas:
     espera: [vesting]
     familia: trayectoria
   - pregunta: "Has he worked at a bank?"
-    espera: [banco-pichincha]
+    espera: [banco-pichincha, como-trabajo]
     familia: trayectoria
   - pregunta: "What did he do at Banco Pichincha?"
     espera: [banco-pichincha]
@@ -39,7 +45,7 @@ preguntas:
     espera: [banco-pichincha]
     familia: trayectoria
   - pregunta: "What did he do at Cafam?"
-    espera: [cafam]
+    espera: [cafam, trayectoria, casestudy-cafam]
     familia: trayectoria
   - pregunta: "Has he taken part in implementing a warehouse management system?"
     espera: [cafam]
@@ -51,13 +57,13 @@ preguntas:
     espera: [transmilenio-cm, cm-operaciones]
     familia: trayectoria
   - pregunta: "What work did he do for TransMilenio?"
-    espera: [transmilenio-cm, cm-operaciones]
+    espera: [transmilenio-cm, cm-operaciones, como-trabajo, origenes]
     familia: trayectoria
   - pregunta: "What is the post-operational analysis he mentions?"
     espera: [transmilenio-cm]
     familia: trayectoria
   - pregunta: "What did he do at Ceinfes?"
-    espera: [ceinfes]
+    espera: [ceinfes, trayectoria, como-trabajo, origenes]
     familia: trayectoria
   - pregunta: "Has he presented results to a board of directors?"
     espera: [ceinfes, como-trabajo]
@@ -235,7 +241,7 @@ preguntas:
     espera: [fabric-en-la-practica, bi-que-se-adopta]
     familia: plataforma-y-datos
   - pregunta: "Does he know DAX?"
-    espera: [fabric-en-la-practica, banco-pichincha]
+    espera: [fabric-en-la-practica, banco-pichincha, los-tableros]
     familia: plataforma-y-datos
   - pregunta: "Has he built ETL processes?"
     espera: [transmilenio-cm, banco-pichincha]
@@ -244,7 +250,7 @@ preguntas:
     espera: [cafam, certificaciones, inglopres]
     familia: plataforma-y-datos
   - pregunta: "Does he have experience with Azure?"
-    espera: [plataforma-y-despliegue, fabric-en-la-practica]
+    espera: [plataforma-y-despliegue, fabric-en-la-practica, certificaciones]
     familia: plataforma-y-datos
   - pregunta: "Does he know Google Cloud, Vertex AI or BigQuery?"
     espera: [plataforma-y-despliegue]
@@ -265,7 +271,7 @@ preguntas:
     espera: [plataforma-y-despliegue, analitica-predictiva]
     familia: plataforma-y-datos
   - pregunta: "Has he worked with big data or distributed processing?"
-    espera: [vesting, fabric-en-la-practica]
+    espera: [vesting, fabric-en-la-practica, skills]
     familia: plataforma-y-datos
   - pregunta: "Has he built data pipelines that run on their own?"
     espera: [transmilenio-cm, vesting, plataforma-y-despliegue]
@@ -305,7 +311,7 @@ preguntas:
     espera: [certificaciones, analitica-predictiva]
     familia: bi-y-analitica
   - pregunta: "What is his statistics background?"
-    espera: [analitica-predictiva]
+    espera: [analitica-predictiva, cm-operaciones, certificaciones]
     familia: bi-y-analitica
   - pregunta: "Has he done demand forecasting?"
     espera: [transmilenio-cm, analitica-predictiva]
