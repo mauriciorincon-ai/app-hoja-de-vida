@@ -187,7 +187,7 @@ The last few times I learned something from scratch, and how long it took:
 | What                                   | Since          | Time frame                          | Result                                                        |
 | -------------------------------------- | -------------- | ----------------------------------- | ------------------------------------------------------------- |
 | Microsoft Fabric                       | August 2023    | 5 months of study (Jul–Nov 2024)    | DP-600 in December 2024, Vesting platform in operation        |
-| Next.js and the application pipeline   | July 2026      | 19 sprints | this site, CV Viva, with its CI, its tests and its ADRs       |
+| Next.js and the application pipeline   | July 2026      | 20 sprints | this site, CV Viva, with its CI, its tests and its ADRs       |
 | AI-103 and AI-300                      | July 2026      | course complete and 10 modules      | two tracks in progress, with the AI-103 Super Guide published |
 | Codex, Antigravity and Claude Code     | their release  | close to a month each               | the pipeline with which the 38 pieces are built               |
 
@@ -280,7 +280,7 @@ test or a reusable rule.
 Learning advances through short cycles. I build a limited capability, observe its behavior, identify
 the next gap and extend the solution. This sequence reduces the chance of spending weeks on an
 extensive architecture before checking its main assumptions. This site was built that way: 19
-sprints, each with its plan, its log and its summary.
+sprints, each with its plan and its closing.
 
 ## Feedback, technical critique and correcting course: familiarity is not mastery
 
@@ -337,7 +337,7 @@ context changes.
 Documentation turns an individual experience into reusable memory. A test avoids rediscovering a
 failure. A template preserves a validated structure. A guide organizes the sources. A cycle summary
 lets the next piece of work start from the real state and not from a later reconstruction: every
-sprint of this site closes with a log and a summary that the next one reads before starting.
+sprint of this site closes with an executive closing that the next one reads before starting.
 
 I also keep a clear distinction between different states of knowledge. A hypothesis is not a
 finding. An exploration is not a consolidated capability. A practice recommended by a source is not

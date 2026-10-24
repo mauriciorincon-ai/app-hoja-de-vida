@@ -515,8 +515,8 @@ errors it produces, in which segments it works better or worse and under what co
 result can be used. It is designed for the professional who is not a data scientist and has to
 defend a model before their boss or their committee, not win a leaderboard.
 
-The application has 33 features, 267 unit and integration tests, 24 end-to-end tests and 90.69%
-line coverage, according to the measurements published in its technical sheet of August 2026.
+The application has 41 features, 862 unit and integration tests, 72 end-to-end tests and 94.49%
+line coverage, according to the measurements published in its technical sheet of October 2026.
 These figures describe the state of the piece, but they do not replace the evaluation of the
 methodological quality of the models built with it.
 

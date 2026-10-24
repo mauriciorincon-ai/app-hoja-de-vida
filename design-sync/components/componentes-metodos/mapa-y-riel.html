@@ -1,0 +1,104 @@
+<!-- @dsCard group="Métodos" name="El mapa y el riel de fases" -->
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>El mapa y el riel de fases — CV Viva</title>
+<style>
+  :root {
+    --paper-0:#fbfaf7; --paper-1:#f5f3ed; --paper-2:#ece9e0; --paper-3:#ddd8cb;
+    --ink-0:#121110; --ink-1:#2a2927; --ink-2:#5e5c55; --ink-3:#9c9a90;
+    --sage:#cfe3cf; --sage-ink:#3c5a3c; --rose:#f2d6d6; --rose-ink:#7a3f3f;
+    --sky:#cedde9; --sky-ink:#2e4e6b; --citron:#e6e3b8; --citron-ink:#5e5a1e;
+    --lilac:#ddd3e8; --lilac-ink:#4e3e6b; --peach:#f2dec4; --peach-ink:#6b4820;
+    --danger:#c97a7a;
+    --sh-1:0 1px 0 rgba(18,17,16,.04), 0 1px 2px rgba(18,17,16,.04);
+    --sh-2:0 4px 12px -4px rgba(18,17,16,.08), 0 2px 4px rgba(18,17,16,.04);
+    --sh-3:0 12px 32px -8px rgba(18,17,16,.14);
+    --ease-out-cubic:cubic-bezier(.21,.61,.35,1);
+    --ease-in-out-cubic:cubic-bezier(.65,0,.35,1);
+    --display:Fraunces,'Iowan Old Style',Georgia,serif;
+    --sans:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; padding:28px; background:var(--paper-0); color:var(--ink-1);
+    font-family:var(--sans); font-size:15px; line-height:1.6; }
+  h1 { font-family:var(--display); font-size:26px; font-weight:500; letter-spacing:-.02em;
+    color:var(--ink-0); margin:0 0 6px; }
+  .lede { color:var(--ink-2); margin:0 0 24px; max-width:62ch; }
+  .nota { color:var(--ink-2); font-size:13.5px; max-width:70ch; margin-top:20px;
+    border-left:2px solid var(--paper-3); padding-left:12px; }
+  .rotulo { font-family:var(--mono); font-size:11px; letter-spacing:.08em;
+    text-transform:uppercase; color:var(--ink-2); margin:26px 0 10px; }
+  code { font-family:var(--mono); font-size:12.5px; background:var(--paper-1);
+    border:1px solid var(--paper-2); border-radius:4px; padding:1px 5px; }
+  svg { display:block; max-width:100%; height:auto; }
+  svg text { font-family:var(--sans); font-size:12px; fill:var(--ink-0); }
+  .leyenda { display:flex; flex-wrap:wrap; gap:18px; margin:0; padding:0; list-style:none; }
+  .leyenda li { display:flex; align-items:center; gap:8px; font-size:13px; color:var(--ink-1); }
+  .tarjeta { background:var(--paper-0); border:1px solid var(--paper-2); border-radius:14px;
+    box-shadow:var(--sh-1); padding:18px 20px; max-width:62ch; }
+  .fases { list-style:none; margin:0; padding:0 0 0 22px; position:relative; max-width:62ch; }
+  .fases::before { content:""; position:absolute; left:6px; top:6px; bottom:6px; width:2px;
+    background:var(--paper-3); }
+  .fases::after { content:""; position:absolute; left:6px; top:6px; height:46%; width:2px;
+    background:var(--sage-ink); }
+  .fase { position:relative; padding:0 0 16px; }
+  .fase::before { content:""; position:absolute; left:-22px; top:5px; width:14px; height:14px;
+    border-radius:99px; background:var(--paper-0); border:2px solid var(--sage-ink); }
+  .fase b { font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--ink-2); display:block; }
+  .fase span { color:var(--ink-1); }
+</style>
+</head>
+<body>
+
+<h1>El mapa y el riel de fases</h1>
+<p class="lede">Los dos dibujos de una publicación. El mapa es un SVG con <strong>texto real</strong> y
+cada tipo de nodo se distingue por <strong>forma + palabra + color</strong>; el riel acompaña la lectura
+de las fases con una línea que se rellena.</p>
+
+<p class="rotulo">La leyenda del mapa — cada forma con su palabra</p>
+<ul class="leyenda">
+  <li><svg width="44" height="26" viewBox="0 0 44 26" aria-hidden="true"><rect x="2" y="2" width="40" height="22" rx="8" fill="#cfe3cf" stroke="#3c5a3c" stroke-width="1.5"/></svg> Actor · quien hace el trabajo</li>
+  <li><svg width="44" height="26" viewBox="0 0 44 26" aria-hidden="true"><rect x="2" y="2" width="40" height="22" rx="3" fill="#cedde9" stroke="#2e4e6b" stroke-width="1.5"/><line x1="10" y1="2" x2="10" y2="24" stroke="#2e4e6b" stroke-width="1.5"/></svg> Dato · lo que se guarda y se lee</li>
+  <li><svg width="44" height="26" viewBox="0 0 44 26" aria-hidden="true"><polygon points="9,2 35,2 42,13 35,24 9,24 2,13" fill="#e6e3b8" stroke="#5e5a1e" stroke-width="1.5"/></svg> Control · lo que verifica</li>
+  <li><svg width="44" height="26" viewBox="0 0 44 26" aria-hidden="true"><ellipse cx="22" cy="13" rx="20" ry="11" fill="#ddd3e8" stroke="#4e3e6b" stroke-width="1.5"/></svg> Humano · quien decide</li>
+  <li><svg width="44" height="26" viewBox="0 0 44 26" aria-hidden="true"><rect x="2" y="2" width="40" height="22" rx="6" fill="#f5f3ed" stroke="#5e5c55" stroke-width="1.5" stroke-dasharray="6 4"/></svg> Externo · fuera del sistema</li>
+</ul>
+
+<p class="rotulo">Un mapa de ejemplo</p>
+<svg viewBox="0 0 560 120" role="img" aria-label="Mapa de ejemplo: un actor produce un dato que un control revisa y una persona decide">
+  <title>Mapa de ejemplo</title>
+  <desc>Un actor escribe un dato; un control lo revisa y un humano decide.</desc>
+  <defs><marker id="p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#2a2927"/></marker></defs>
+  <rect x="8" y="30" width="112" height="56" rx="12" fill="#cfe3cf" stroke="#3c5a3c" stroke-width="1.5"/>
+  <text x="64" y="55" text-anchor="middle">1 · Agente</text><text x="64" y="71" text-anchor="middle">redacta</text>
+  <line x1="120" y1="58" x2="158" y2="58" stroke="#2a2927" stroke-width="1.5" marker-end="url(#p)"/>
+  <rect x="160" y="30" width="112" height="56" rx="3" fill="#cedde9" stroke="#2e4e6b" stroke-width="1.5"/><line x1="174" y1="30" x2="174" y2="86" stroke="#2e4e6b" stroke-width="1.5"/>
+  <text x="222" y="55" text-anchor="middle">2 · Borrador</text><text x="222" y="71" text-anchor="middle">guardado</text>
+  <line x1="272" y1="58" x2="310" y2="58" stroke="#2a2927" stroke-width="1.5" marker-end="url(#p)"/>
+  <polygon points="326,30 402,30 424,58 402,86 326,86 312,58" fill="#e6e3b8" stroke="#5e5a1e" stroke-width="1.5"/>
+  <text x="368" y="55" text-anchor="middle">3 · Control</text><text x="368" y="71" text-anchor="middle">revisa</text>
+  <line x1="424" y1="58" x2="448" y2="58" stroke="#2a2927" stroke-width="1.5" marker-end="url(#p)"/>
+  <ellipse cx="504" cy="58" rx="54" ry="30" fill="#ddd3e8" stroke="#4e3e6b" stroke-width="1.5"/>
+  <text x="504" y="55" text-anchor="middle">4 · Persona</text><text x="504" y="71" text-anchor="middle">decide</text>
+</svg>
+<p class="nota">La etiqueta de un nodo ocupa a lo sumo <strong>dos líneas de 22 caracteres</strong>. Debajo
+del SVG va siempre la <strong>«Lectura del mapa, nodo por nodo»</strong>: la alternativa textual visible,
+que también sale impresa. En el teléfono el mapa conserva su tamaño y se desliza de lado dentro de una
+región con foco.</p>
+
+<p class="rotulo">El riel de fases (bloque 3)</p>
+<ol class="fases">
+  <li class="fase"><b>Fase 1</b><span>Entradas, actividades y artefactos; quién decide y qué control la cierra.</span></li>
+  <li class="fase"><b>Fase 2</b><span>La línea se rellena con lo que llevas leído (<code>transform</code>, nunca <code>height</code>).</span></li>
+  <li class="fase"><b>Fase 3</b><span>Con «reducir movimiento» el relleno queda entero y quieto; el árbol no cambia.</span></li>
+</ol>
+<p class="nota">La línea y el relleno son decoración (<code>aria-hidden</code>); la lista de fases es HTML
+siempre.</p>
+
+</body>
+</html>

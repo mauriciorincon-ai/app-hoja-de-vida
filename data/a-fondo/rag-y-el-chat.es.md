@@ -64,7 +64,7 @@ Es la misma regla que aplico en una plataforma de datos: el dato no adquiere con
 
 <!-- seccion: el-indice -->
 
-El conocimiento utilizado por el chat se compila durante la construcción del sitio y no en el momento en que una persona formula una pregunta. Un script del build recorre las fuentes autorizadas —los datos del currículum, las apps del pipeline, las fichas de la vitrina y los documentos aprobados de esta base—, extrae sus contenidos y produce un índice separado por idioma, español e inglés, con fragmentos, títulos, metadatos y destinos navegables.
+El conocimiento utilizado por el chat se compila durante la construcción del sitio y no en el momento en que una persona formula una pregunta. Un script del build recorre las fuentes autorizadas —los datos del currículum, las apps del pipeline, las fichas de la vitrina, las publicaciones de «Métodos» y los documentos aprobados de esta base—, extrae sus contenidos y produce un índice separado por idioma, español e inglés, con fragmentos, títulos, metadatos y destinos navegables.
 
 Cada fragmento conserva una referencia hacia la sección o página de la que proviene. La recuperación no entrega únicamente texto al modelo. También suministra la identidad de la fuente y el destino que posteriormente permitirá al usuario verificar la afirmación dentro del sitio.
 

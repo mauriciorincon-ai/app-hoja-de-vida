@@ -388,8 +388,8 @@ bloques:
         nota:
           voz: hice
           texto:
-            es: "En el chat de este sitio las fuentes que el modelo tuvo delante aparecen junto a la respuesta y cada una navega a su sección; no existe todavía un validador que compruebe que el modelo usó cada fuente en cada frase, y se dice así: esa relación la verifica hoy quien lee."
-            en: "In this site’s chat, the sources the model had in front of it appear next to the answer and each one leads to its section; there is no validator yet that checks the model used each source in each sentence, and it is stated as such: today that relationship is checked by whoever reads."
+            es: "En el chat de este sitio las fuentes que el modelo tuvo delante aparecen junto a la respuesta y cada una navega a su sección; a la fecha de revisión de esta publicación no existe un validador que compruebe que el modelo usó cada fuente en cada frase, y se dice así: esa relación la verifica quien lee."
+            en: "In this site’s chat, the sources the model had in front of it appear next to the answer and each one leads to its section; as of this publication’s review date there is no validator that checks the model used each source in each sentence, and it is stated as such: that relationship is checked by whoever reads."
           corpus: [rag-y-el-chat]
       - titulo: { es: "Mandarlo todo en el contexto o recuperar: cuándo no usar RAG", en: "Send everything in the context, or retrieve: when not to use RAG" }
         cuandoSi:
@@ -486,8 +486,8 @@ bloques:
           corpus: [rag-y-el-chat]
       - titulo: { es: "Evaluar la recuperación y la respuesta por separado, con un juez calibrado contra personas", en: "Evaluating retrieval and the answer separately, with a judge calibrated against people" }
         queCambia:
-          es: "Microsoft separa la evaluación del proceso —si la recuperación trajo lo relevante, medido contra etiquetas humanas— de la del sistema: si la respuesta se apoya en el contexto sin inventar, que es la precisión, y si no deja fuera lo esencial, que es la exhaustividad. Cuando el juez es un modelo, LangSmith propone calificar primero una muestra a mano y ajustar las instrucciones del juez hasta que coincida con esas notas."
-          en: "Microsoft separates process evaluation —whether retrieval brought back what is relevant, measured against human labels— from system evaluation: whether the answer rests on the context without making things up, which is precision, and whether it leaves nothing essential out, which is recall. When the judge is a model, LangSmith proposes grading a sample by hand first and adjusting the judge’s instructions until it agrees with those grades."
+          es: "Microsoft separa la evaluación del proceso —si la recuperación trajo lo relevante, medido contra etiquetas humanas en el evaluador de recuperación de documentos o por un juez de modelo en el de recuperación— de la del sistema: si la respuesta se apoya en el contexto sin inventar, que es la precisión, y si no deja fuera lo esencial, que es la exhaustividad. Cuando el juez es un modelo, LangSmith propone calificar primero una muestra a mano y ajustar las instrucciones del juez hasta que coincida con esas notas."
+          en: "Microsoft separates process evaluation —whether retrieval brought back what is relevant, measured against human labels in the document-retrieval evaluator or by a model judge in the retrieval evaluator— from system evaluation: whether the answer rests on the context without making things up, which is precision, and whether it leaves nothing essential out, which is recall. When the judge is a model, LangSmith proposes grading a sample by hand first and adjusting the judge’s instructions until it agrees with those grades."
         fuentes: [7, 8]
         nota:
           voz: hice
@@ -625,13 +625,13 @@ bloques:
         corpus: [rag-y-el-chat]
       - voz: hice
         texto:
-          es: "No existe todavía un validador que compruebe que el modelo usó cada fuente citada en cada frase: es trabajo futuro declarado."
-          en: "There is no validator yet that checks the model used each cited source in each sentence: it is declared future work."
+          es: "A la fecha de revisión de esta publicación no existe un validador que compruebe que el modelo usó cada fuente citada en cada frase: es trabajo futuro declarado."
+          en: "As of this publication’s review date there is no validator that checks the model used each cited source in each sentence: it is declared future work."
         corpus: [rag-y-el-chat]
       - voz: hice
         texto:
-          es: "Para la respuesta no hay un juez automático: las respuestas de prueba se revisan leyendo."
-          en: "For the answer there is no automatic judge: the test answers are reviewed by reading them."
+          es: "Para la respuesta no hay un validador automático: las respuestas de prueba se revisan leyendo."
+          en: "For the answer there is no automatic validator: the test answers are reviewed by reading them."
         corpus: [rag-y-el-chat]
       - voz: hice
         texto:

@@ -62,6 +62,7 @@ function html(nodo: React.ReactNode, reduced: boolean | null) {
 
 const ETIQUETAS_CARRUSEL: EtiquetasCarrusel = {
   etiqueta: "Pantallas",
+  pista: "Recorrido",
   anterior: "Anterior",
   siguiente: "Siguiente",
   indicadores: ["1 de 2", "2 de 2"],

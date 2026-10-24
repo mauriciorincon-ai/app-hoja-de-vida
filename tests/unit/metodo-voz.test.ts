@@ -34,6 +34,8 @@ describe("el motor: lo que atrapa", () => {
     ["El entrevistador pregunta", ["entrevistador"]],
     // Fuera de las comillas la voz se sigue juzgando.
     ["Diseñé la respuesta «no sé»", ["Diseñé"]],
+    // Una cita larga (un párrafo entero entre comillas) ya no es invisible al gate (S14-B4).
+    [`Dice «${"Reparto el trabajo y guardo la copia de cada versión. ".repeat(4)}» sin más`, ["guardo", "guardo", "guardo", "guardo"]],
   ])("es: «%s»", (texto, esperados) => {
     expect(termino(texto, "es")).toEqual(esperados);
   });

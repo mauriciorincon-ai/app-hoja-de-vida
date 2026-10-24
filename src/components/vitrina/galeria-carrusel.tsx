@@ -43,7 +43,9 @@ import { usePrefiereQuieto } from "@/components/motion/use-prefiere-quieto";
  * navegador solo pide la primera hasta que se desliza. Lo vigila el e2e.
  *
  * Sin JS la pista sigue siendo una tira que se desliza con el dedo o la rueda:
- * el contenido llega íntegro en el HTML (gate ATS).
+ * el contenido llega íntegro en el HTML (gate ATS). Los botones y el indicador
+ * no harían nada sin script, así que un `<noscript>` los oculta (deuda B3 del
+ * S9, pagada en el S20): con JS el navegador no aplica ese estilo y nada cambia.
  *
  * Los textos llegan por props (el namespace de next-intl no viaja al bundle
  * cliente), igual que en `TimelineTrack`.
@@ -53,6 +55,11 @@ export type CapturaCarrusel = { archivo: string; pie: string };
 export type EtiquetasCarrusel = {
   /** Nombre accesible de la región, p. ej. «Pantallas del tablero». */
   etiqueta: string;
+  /**
+   * Nombre accesible de la PISTA que se desliza (tiene foco y rol de grupo): distinto
+   * del de la región, para que un lector de pantalla no diga lo mismo dos veces.
+   */
+  pista: string;
   anterior: string;
   siguiente: string;
   /** «1 de 6», «2 de 6»…: uno por captura, ya traducido. */
@@ -119,7 +126,6 @@ export function GaleriaCarrusel({
       aria-roledescription="carousel"
       aria-label={etiquetas.etiqueta}
       data-carrusel=""
-      data-total={total}
     >
       <div
         ref={pista}
@@ -127,7 +133,7 @@ export function GaleriaCarrusel({
         // scrollable-region-focusable); con una sola captura no hay scroll.
         tabIndex={hay ? 0 : undefined}
         role={hay ? "group" : undefined}
-        aria-label={hay ? etiquetas.etiqueta : undefined}
+        aria-label={hay ? etiquetas.pista : undefined}
         data-pista=""
         className="flex snap-x snap-mandatory overflow-x-auto overscroll-x-contain rounded-[12px] [scrollbar-width:thin]"
       >
@@ -164,7 +170,10 @@ export function GaleriaCarrusel({
       </div>
 
       {hay && (
-        <div className="mt-3 flex items-center justify-between gap-3">
+        <div
+          data-controles=""
+          className="mt-3 flex items-center justify-between gap-3"
+        >
           <button
             type="button"
             aria-label={etiquetas.anterior}
@@ -196,6 +205,11 @@ export function GaleriaCarrusel({
             <span aria-hidden="true">→</span>
           </button>
         </div>
+      )}
+      {hay && (
+        <noscript>
+          <style>{"[data-carrusel] [data-controles]{display:none}"}</style>
+        </noscript>
       )}
     </section>
   );

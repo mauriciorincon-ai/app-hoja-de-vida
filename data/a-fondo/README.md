@@ -78,7 +78,7 @@ distinto:
   un documento traen ese documento y no otro. Si una pregunta trae un documento distinto pero
   correcto, la mal escrita suele ser la pregunta.
 - **El banco de preguntas** (`tests/fixtures/banco-de-preguntas.es.yaml`) te dice si el corpus
-  contesta las **131 preguntas que hace alguien de afuera**. Es el que encuentra lo que los otros
+  contesta las preguntas que hace alguien de afuera (`pnpm corpus:informe` dice cuántas son). Es el que encuentra lo que los otros
   dos no pueden: como la búsqueda del chat es léxica, una palabra que tú no escribes no existe
   para quien pregunta. Así se descubrió que el corpus decía «extracción, transformación y carga»
   y nunca «ETL», «el lago y el almacén» y nunca «lakehouse», y que no decía «MLOps» ni

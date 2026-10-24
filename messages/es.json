@@ -344,6 +344,7 @@
     "galeriaSub": "Pantallas reales del producto, tal como corre. Sin retocar.",
     "galeriaPie": "Pantalla {n} de {total}",
     "carruselEtiqueta": "Pantallas del producto",
+    "carruselPista": "Recorrido de las pantallas",
     "carruselAnterior": "Pantalla anterior",
     "carruselSiguiente": "Pantalla siguiente",
     "carruselIndicador": "{n} de {total}",

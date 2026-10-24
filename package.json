@@ -52,7 +52,7 @@
   },
   "devDependencies": {
     "@ai-sdk/provider": "^4.0.26",
-    "@axe-core/playwright": "^4.13.0",
+    "@axe-core/playwright": "^4.14.0",
     "@playwright/test": "^1.64.0",
     "@tailwindcss/postcss": "^4",
     "@testing-library/jest-dom": "^6.9.1",

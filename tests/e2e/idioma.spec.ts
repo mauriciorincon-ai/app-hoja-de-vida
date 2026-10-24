@@ -50,6 +50,19 @@ test.describe("la raíz `/` abre en español, diga lo que diga el navegador", ()
 test.describe("el botón ES/EN conserva el punto exacto de lectura", () => {
   const TOLERANCIA = 24;
 
+  // `idioma.spec.ts:89` era intermitente (S16: 3 de 10 en la CI): medía con un reloj fijo
+  // (300 ms) mientras las fuentes de la página —la mono entra DESPUÉS del `load`— aún podían
+  // moverse, y el «antes» se tomaba sin esperarlas. Ahora el punto de partida se mide con la
+  // página asentada (`load` + fuentes + dos cuadros) y el «después» es una condición que se
+  // reintenta (hasta 5 s), no un instante.
+  async function asentada(page: import("@playwright/test").Page) {
+    await page.waitForLoadState("load");
+    await page.evaluate(async () => {
+      await document.fonts.ready;
+      await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+    });
+  }
+
   test("a media Trayectoria: el hito que se está leyendo queda a la misma altura de la ventana", async ({
     page,
   }) => {
@@ -62,6 +75,7 @@ test.describe("el botón ES/EN conserva el punto exacto de lectura", () => {
     // fuente mono era Arial. Y escondía un error real: en móvil el año fijo
     // del índice cortaba la búsqueda del ancla y el hito leído se corría 42–87 px.
     const hito = page.locator("#trayectoria article").nth(3);
+    await asentada(page);
     await page.evaluate(() => {
       const el = document.querySelectorAll("#trayectoria article")[3];
       window.scrollTo(0, el.getBoundingClientRect().top + window.scrollY + 100);
@@ -75,15 +89,20 @@ test.describe("el botón ES/EN conserva el punto exacto de lectura", () => {
     await expect(page.locator("#trayectoria h2")).toHaveText("Career", {
       timeout: 15_000,
     });
-    await page.waitForTimeout(300);
-    const despues = await page
-      .locator("#trayectoria article")
-      .nth(3)
-      .evaluate((el) => Math.round(el.getBoundingClientRect().top));
-    expect(
-      Math.abs(despues - antes),
-      `hito a ${antes}px antes, a ${despues}px después`,
-    ).toBeLessThanOrEqual(TOLERANCIA);
+    await asentada(page);
+    await expect
+      .poll(
+        async () =>
+          Math.abs(
+            (await page
+              .locator("#trayectoria article")
+              .nth(3)
+              .evaluate((el) => Math.round(el.getBoundingClientRect().top))) -
+              antes,
+          ),
+        { message: `hito a ${antes}px antes: no volvió a su sitio`, timeout: 5_000 },
+      )
+      .toBeLessThanOrEqual(TOLERANCIA);
   });
 
   test("a media Perfil: el título de la sección queda a la misma altura", async ({
@@ -91,6 +110,7 @@ test.describe("el botón ES/EN conserva el punto exacto de lectura", () => {
   }) => {
     await page.goto("/es");
     const perfil = page.locator("#perfil");
+    await asentada(page);
     // 120 px por debajo del borde de la sección: dentro del texto.
     await page.evaluate(() => {
       const el = document.querySelector("#perfil")!;
@@ -105,13 +125,18 @@ test.describe("el botón ES/EN conserva el punto exacto de lectura", () => {
     await expect(page.locator("#perfil h2")).toHaveText("Profile", {
       timeout: 15_000,
     });
-    await page.waitForTimeout(300);
-    const despues = await page
-      .locator("#perfil")
-      .evaluate((el) => Math.round(el.getBoundingClientRect().top));
-    expect(
-      Math.abs(despues - antes),
-      `sección a ${antes}px antes, a ${despues}px después`,
-    ).toBeLessThanOrEqual(TOLERANCIA);
+    await asentada(page);
+    await expect
+      .poll(
+        async () =>
+          Math.abs(
+            (await page
+              .locator("#perfil")
+              .evaluate((el) => Math.round(el.getBoundingClientRect().top))) -
+              antes,
+          ),
+        { message: `sección a ${antes}px antes: no volvió a su sitio`, timeout: 5_000 },
+      )
+      .toBeLessThanOrEqual(TOLERANCIA);
   });
 });

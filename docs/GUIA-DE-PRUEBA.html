@@ -253,6 +253,87 @@
         color: var(--tinta-suave);
         border-color: var(--borde);
       }
+
+      .ens-cuerpo {
+        flex: 1 1 auto;
+        min-width: 0;
+      }
+      .ens-cuerpo p {
+        margin: 0.25em 0;
+      }
+      @media (max-width: 560px) {
+        ul.pasos li.ens-fila {
+          flex-direction: column;
+          gap: 6px;
+        }
+      }
+      .ens-min {
+        font-family: ui-monospace, Menlo, monospace;
+        font-size: 0.72rem;
+        color: var(--tinta-suave);
+        margin-left: 6px;
+        white-space: nowrap;
+      }
+      fieldset.ens-resp {
+        flex: none;
+        display: flex;
+        gap: 6px;
+        border: 0;
+        margin: 0;
+        padding: 0;
+      }
+      fieldset.ens-resp legend {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        white-space: nowrap;
+      }
+      fieldset.ens-resp label {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        min-height: 36px;
+        padding: 0 10px;
+        border: 1px solid var(--borde);
+        border-radius: 99px;
+        background: var(--fondo);
+        font-size: 0.85rem;
+      }
+      fieldset.ens-resp label:has(input:checked) {
+        border-color: var(--acento);
+        background: var(--acento-suave);
+      }
+      .ens-resumen {
+        background: var(--fondo);
+        border: 1px solid var(--borde);
+        border-radius: 10px;
+        padding: 10px 12px;
+        margin: 10px 0 14px;
+        font-size: 0.875rem;
+      }
+      .ens-resumen .pasada {
+        color: var(--alerta);
+        font-weight: 600;
+      }
+      h3.sentada {
+        font-family: Georgia, serif;
+        font-weight: 400;
+        font-size: 1.05rem;
+        margin: 18px 0 4px;
+      }
+      #ensayo-fuera ul {
+        margin: 6px 0 0;
+        padding-left: 18px;
+        font-size: 0.85rem;
+      }
+      .fuera-ensayo {
+        display: block;
+        margin-top: 2px;
+        font-size: 0.78rem;
+        color: var(--tinta-suave);
+      }
       .minimo {
         font-size: 0.75rem;
         white-space: nowrap;
@@ -316,7 +397,7 @@
     <div class="pagina">
       <header>
         <p class="eyebrow">
-          CV Viva · Guía de prueba viva y acumulativa · v19 · Métodos: la novena pieza (T8) y la puerta en la HOME + v18 · Métodos: la octava pieza (T9) + v17 · Métodos: la séptima pieza (T5) + v16 · Métodos: la sexta pieza (T1) + v15 · Métodos: la quinta pieza (T7) + v14 · Métodos, en tercera persona + v13 · Mi método: la cuarta pieza (T6) + v12 · Mi método: la tercera pieza (T4) + v11 · Mi método: la segunda pieza (T3) + v10 · Mi método: la primera infografía (T2) + v9.29 · la ficha y el roadmap de HackGuard + v9.28 · el roadmap de AngelGhost + v9.27 · la simulación de planlang + v9.26 · el foco al final de la galería + v9.25 · las cuentas al día + las tiras de las cuatro apps nuevas + el carrusel de apps muestra dónde acaba y se recorre con el pad + el carrusel de apps muestra dónde empieza + el carrusel de apps que gira sin fin + los bloques de apps con sus tarjetas en carrusel + dos categorías de apps y el carrusel de los tableros + proyectos propios desde 2024 + LinkedIn definitivo + las entradas sin librería + el margen de la home, segunda vuelta + el margen de la home + el aire bajo el dominio + las herramientas de hoy + el cupo del chat + el ícono navy y el 404 de la raíz + las cifras en su letra y las citas del chat + rótulo del dominio, idiomas en mantenimiento y el ícono + el modo mantenimiento + el dominio en el PDF + los ocho casos de estudio completos + la cita dice de dónde sale y a dónde lleva + la cita conserva la conversación + el corpus alineado + chat/registro + a fondo v2 (el
+          CV Viva · Guía de prueba viva y acumulativa · v20 · El ensayo general del H-2 + v19 · Métodos: la novena pieza (T8) y la puerta en la HOME + v18 · Métodos: la octava pieza (T9) + v17 · Métodos: la séptima pieza (T5) + v16 · Métodos: la sexta pieza (T1) + v15 · Métodos: la quinta pieza (T7) + v14 · Métodos, en tercera persona + v13 · Mi método: la cuarta pieza (T6) + v12 · Mi método: la tercera pieza (T4) + v11 · Mi método: la segunda pieza (T3) + v10 · Mi método: la primera infografía (T2) + v9.29 · la ficha y el roadmap de HackGuard + v9.28 · el roadmap de AngelGhost + v9.27 · la simulación de planlang + v9.26 · el foco al final de la galería + v9.25 · las cuentas al día + las tiras de las cuatro apps nuevas + el carrusel de apps muestra dónde acaba y se recorre con el pad + el carrusel de apps muestra dónde empieza + el carrusel de apps que gira sin fin + los bloques de apps con sus tarjetas en carrusel + dos categorías de apps y el carrusel de los tableros + proyectos propios desde 2024 + LinkedIn definitivo + las entradas sin librería + el margen de la home, segunda vuelta + el margen de la home + el aire bajo el dominio + las herramientas de hoy + el cupo del chat + el ícono navy y el 404 de la raíz + las cifras en su letra y las citas del chat + rótulo del dominio, idiomas en mantenimiento y el ícono + el modo mantenimiento + el dominio en el PDF + los ocho casos de estudio completos + la cita dice de dónde sale y a dónde lleva + la cita conserva la conversación + el corpus alineado + chat/registro + a fondo v2 (el
           detalle) + revisión post-S8 · 2026-09-12
         </p>
         <h1>Guía de prueba</h1>
@@ -327,13 +408,12 @@
           casillas se guardan solas en este navegador.
         </p>
         <p class="chica">
-          <strong>Gate mínimo ⭐: 49 pruebas · ~4 h 59 min.</strong> Es lo que ninguna
+          <strong>Gate mínimo ⭐: <span data-calc="minimo-n">—</span> pruebas.</strong> Es lo que ninguna
           automatización puede verificar (juicio humano sobre el contenido,
           aprobación visual, dispositivo real, proveedor de IA real). Lo que la
           CI ya respalda (e2e, unit, axe, budgets) queda fuera del mínimo y se
-          corre en pases completos. Las 6 del S8 son casi todas de
-          <strong>lectura</strong> —el corpus— y por eso el mínimo crece de ~85
-          min a ~3 h.
+          corre en pases completos. Las del S8 son casi todas de
+          <strong>lectura</strong> —el corpus—.
           <strong
             >Las 5 ⭐ del Sprint 007, las 3 de la revisión de la HOME y las 6
             del Sprint 008 se dejan al acumulado del ciclo H2</strong
@@ -434,7 +514,11 @@
           vivo: el chat cita T8 bloque a bloque, y la <strong>q24 ⭐</strong>, tu
           mirada sobre la puerta de la HOME (Gate mínimo ⭐: de 48 a 49, unos 5
           minutos más). La q3 y la q4 suman la página nueva. El
-          prefijo de las casillas cambia a s19.
+          prefijo de las casillas cambia a s19. <strong>v20 suma un
+          filtro, no una prueba</strong>: «Ensayo general H-2» (bloque R). El
+          Gate mínimo ⭐ no cambia de contenido, pero deja de llevar un tiempo
+          escrito: la cuenta y los minutos los suma la página. El prefijo de las
+          casillas cambia a s20.
         </p>
         <div class="url-caja">
           <p class="eyebrow" style="margin: 0 0 6px">URL de prueba</p>
@@ -467,8 +551,471 @@
             Lo que cambió último
           </button>
           <button type="button" data-filtro="minimo">Gate mínimo ⭐</button>
+          <button type="button" data-filtro="ensayo">Ensayo general H-2</button>
         </div>
       </div>
+
+
+      <!-- ═══════ R. Ensayo general del H-2 ═══════ -->
+      <section class="bloque" id="ensayo">
+        <div class="bloque-cabeza">
+          <span class="letra">R</span>
+          <h2>Ensayo general del H-2</h2>
+        </div>
+        <p class="meta-bloque chica suave">
+          Sobre producción, como cliente · <span data-calc="ensayo-n">—</span>
+          flujos en <span data-calc="ensayo-sentadas">—</span> sentadas · lo no visto no cuenta.
+        </p>
+        <p class="chica">
+          Un flujo por fila, con un <strong>sí o un no</strong>. Los ⭐ que ya
+          cubre un flujo o que la CI respalda salen de este filtro —con su razón
+          a la vista abajo y en su fila, no se borran—. Las sumas las hace la
+          página: ningún total está escrito aquí.
+        </p>
+        <div class="ens-resumen" id="ensayo-resumen" data-limite="45">
+          <p>
+            <strong>Ensayo:</strong>
+            <span data-calc="ensayo-n">—</span> flujos ·
+            <span data-calc="ensayo-min">—</span> min en total ·
+            respondidos: sí <span data-calc="ensayo-si">0</span> · no
+            <span data-calc="ensayo-no">0</span> · pendientes
+            <span data-calc="ensayo-pendientes">—</span>.
+          </p>
+          <p data-sentada-resumen="1">
+            Sentada 1: <span data-calc="sentada-1-n">—</span> flujos ·
+            <span data-calc="sentada-1-min">—</span> min
+            <span data-calc="sentada-1-aviso"></span>
+          </p>
+          <p data-sentada-resumen="2">
+            Sentada 2: <span data-calc="sentada-2-n">—</span> flujos ·
+            <span data-calc="sentada-2-min">—</span> min
+            <span data-calc="sentada-2-aviso"></span>
+          </p>
+          <p data-sentada-resumen="3">
+            Sentada 3: <span data-calc="sentada-3-n">—</span> flujos ·
+            <span data-calc="sentada-3-min">—</span> min
+            <span data-calc="sentada-3-aviso"></span>
+          </p>
+        </div>
+
+        <h3 class="sentada">Sentada 1 · en escritorio: la casa, el CV, el contacto y el chat</h3>
+        <ul class="pasos">
+          <li
+            class="ens-fila"
+            data-origen="nuevo"
+            data-ensayo="6"
+            data-sentada="1"
+            data-cubre="a4 a10 n9 n10 n11"
+          >
+            <div class="ens-cuerpo">
+              <p>
+                <strong>R1 · La HOME de punta a punta.</strong>
+                <span class="ens-min">6 min</span>
+                <span class="origen origen-nuevo">Nuevo · S20</span>
+              </p>
+              <p>Abre la raíz de tu sitio en producción y baja la HOME entera, de la presentación a Contacto, como la baja un reclutador: Perfil, Trayectoria (el índice que baja contigo), Logros, Vitrina, Métodos, Estudios, Certificaciones y Skills. ¿Se siente editorial y sobria, sin saltos ni parpadeos? ¿Tu LinkedIn (el puesto de proyectos propios desde abril de 2024), tus estudios y tus certificaciones son lo que quieres que lea?</p>
+              <p class="chica suave">Cubre: <code>a4</code> · <code>a10</code> · <code>n9</code> · <code>n10</code> · <code>n11</code>.</p>
+            </div>
+            <fieldset class="ens-resp">
+              <legend>¿Salió como esperabas? (R1)</legend>
+              <label><input type="radio" name="r1" id="r1-si" value="si" /> Sí</label>
+              <label><input type="radio" name="r1" id="r1-no" value="no" /> No</label>
+            </fieldset>
+          </li>
+          <li
+            class="ens-fila"
+            data-origen="nuevo"
+            data-ensayo="4"
+            data-sentada="1"
+            data-cubre="b2"
+          >
+            <div class="ens-cuerpo">
+              <p>
+                <strong>R2 · El inglés.</strong>
+                <span class="ens-min">4 min</span>
+                <span class="origen origen-nuevo">Nuevo · S20</span>
+              </p>
+              <p>Pulsa EN y lee en <code>/en</code> la presentación y dos secciones más. ¿Suena natural, no a traducción, y dice lo mismo que el español? Vuelve a ES por el mismo botón.</p>
+              <p class="chica suave">Cubre: <code>b2</code>.</p>
+            </div>
+            <fieldset class="ens-resp">
+              <legend>¿Salió como esperabas? (R2)</legend>
+              <label><input type="radio" name="r2" id="r2-si" value="si" /> Sí</label>
+              <label><input type="radio" name="r2" id="r2-no" value="no" /> No</label>
+            </fieldset>
+          </li>
+          <li
+            class="ens-fila"
+            data-origen="nuevo"
+            data-ensayo="6"
+            data-sentada="1"
+            data-cubre="c3 c4"
+          >
+            <div class="ens-cuerpo">
+              <p>
+                <strong>R3 · Dos casos de estudio.</strong>
+                <span class="ens-min">6 min</span>
+                <span class="origen origen-nuevo">Nuevo · S20</span>
+              </p>
+              <p>Desde la Trayectoria abre dos casos de estudio. ¿Son fieles a lo que hiciste, sin exagerar ni inventar? ¿La banda de cifras y la lección se sienten editoriales, sin competir con el título, en escritorio?</p>
+              <p class="chica suave">Cubre: <code>c3</code> · <code>c4</code>.</p>
+            </div>
+            <fieldset class="ens-resp">
+              <legend>¿Salió como esperabas? (R3)</legend>
+              <label><input type="radio" name="r3" id="r3-si" value="si" /> Sí</label>
+              <label><input type="radio" name="r3" id="r3-no" value="no" /> No</label>
+            </fieldset>
+          </li>
+          <li
+            class="ens-fila"
+            data-origen="nuevo"
+            data-ensayo="6"
+            data-sentada="1"
+            data-cubre="d2 d3"
+          >
+            <div class="ens-cuerpo">
+              <p>
+                <strong>R4 · El CV en PDF.</strong>
+                <span class="ens-min">6 min</span>
+                <span class="origen origen-nuevo">Nuevo · S20</span>
+              </p>
+              <p>Descarga el PDF en español y en inglés y ábrelos: arriba a la derecha el bloque navy con tu dominio y debajo las dos líneas en gris. Sube uno a LinkedIn («subir CV») o a un lector de CV: ¿extrae nombre, experiencia y skills en un orden legible?</p>
+              <p class="chica suave">Cubre: <code>d2</code> · <code>d3</code>.</p>
+            </div>
+            <fieldset class="ens-resp">
+              <legend>¿Salió como esperabas? (R4)</legend>
+              <label><input type="radio" name="r4" id="r4-si" value="si" /> Sí</label>
+              <label><input type="radio" name="r4" id="r4-no" value="no" /> No</label>
+            </fieldset>
+          </li>
+          <li
+            class="ens-fila"
+            data-origen="nuevo"
+            data-ensayo="4"
+            data-sentada="1"
+            data-cubre="e3"
+          >
+            <div class="ens-cuerpo">
+              <p>
+                <strong>R5 · Escríbeme.</strong>
+                <span class="ens-min">4 min</span>
+                <span class="origen origen-nuevo">Nuevo · S20</span>
+              </p>
+              <p>Envía el formulario de Contacto desde producción con un correo que puedas leer. La página debe decir que recibió la solicitud y el mensaje debe llegar a tu bandeja interna (mira también spam); responde y confirma que la respuesta sale como <code>hola@</code>.</p>
+              <p class="chica suave">Cubre: <code>e3</code>.</p>
+            </div>
+            <fieldset class="ens-resp">
+              <legend>¿Salió como esperabas? (R5)</legend>
+              <label><input type="radio" name="r5" id="r5-si" value="si" /> Sí</label>
+              <label><input type="radio" name="r5" id="r5-no" value="no" /> No</label>
+            </fieldset>
+          </li>
+          <li
+            class="ens-fila"
+            data-origen="nuevo"
+            data-ensayo="12"
+            data-sentada="1"
+            data-cubre="f5 f8 f9 o9 o10"
+          >
+            <div class="ens-cuerpo">
+              <p>
+                <strong>R6 · El chat, como visitante nuevo.</strong>
+                <span class="ens-min">12 min</span>
+                <span class="origen origen-nuevo">Nuevo · S20</span>
+              </p>
+              <p>En una ventana privada abre el chat: pide el código con un correo real y confirma que llega y que entras. Con el proveedor real haz cinco preguntas —una sobre Vesting, una de trayectoria, una de IA, una incómoda («¿qué no ha hecho nunca?») y una sobre «Métodos»—: ¿responde con tu evidencia, cita, y la cita navega a algo visible? Pregúntale también por su propia puerta («¿qué datos guardan sobre mí?»). Por último pulsa «¿Algo no funciona? Avísame» y envía una línea.</p>
+              <p class="chica suave">Cubre: <code>f5</code> · <code>f8</code> · <code>f9</code> · <code>o9</code> · <code>o10</code>.</p>
+            </div>
+            <fieldset class="ens-resp">
+              <legend>¿Salió como esperabas? (R6)</legend>
+              <label><input type="radio" name="r6" id="r6-si" value="si" /> Sí</label>
+              <label><input type="radio" name="r6" id="r6-no" value="no" /> No</label>
+            </fieldset>
+          </li>
+          <li
+            class="ens-fila"
+            data-origen="nuevo"
+            data-ensayo="6"
+            data-sentada="1"
+            data-cubre="e5 g6"
+          >
+            <div class="ens-cuerpo">
+              <p>
+                <strong>R7 · Votar, proponer y la lista de espera.</strong>
+                <span class="ens-min">6 min</span>
+                <span class="origen origen-nuevo">Nuevo · S20</span>
+              </p>
+              <p>En la ficha de una app con roadmap vota una funcionalidad: el contador sube y el botón queda marcado; recarga y el voto sigue (si la página dice «no disponible» en producción, es un no). Debajo del roadmap escribe una propuesta y envíala: «Recibí tu propuesta. Gracias.» y el correo llega. En el pie de Vitrina → Apps pide un lugar en la lista de espera de una app: confirma y el correo llega.</p>
+              <p class="chica suave">Cubre: <code>e5</code> · <code>g6</code> (los dos sin ⭐) y el voto, que es un flujo propio del ensayo.</p>
+            </div>
+            <fieldset class="ens-resp">
+              <legend>¿Salió como esperabas? (R7)</legend>
+              <label><input type="radio" name="r7" id="r7-si" value="si" /> Sí</label>
+              <label><input type="radio" name="r7" id="r7-no" value="no" /> No</label>
+            </fieldset>
+          </li>
+        </ul>
+
+        <h3 class="sentada">Sentada 2 · la vitrina, «Métodos» y el teléfono real</h3>
+        <ul class="pasos">
+          <li
+            class="ens-fila"
+            data-origen="nuevo"
+            data-ensayo="9"
+            data-sentada="2"
+            data-cubre="k7 k13 k14 k15f k18 l5b l6 h4"
+          >
+            <div class="ens-cuerpo">
+              <p>
+                <strong>R8 · La vitrina de apps.</strong>
+                <span class="ens-min">9 min</span>
+                <span class="origen origen-nuevo">Nuevo · S20</span>
+              </p>
+              <p>Entra a la Vitrina → Apps: Profesionales primero y Personales después, con el carrusel de cada bloque. Abre dos fichas: ¿la promesa y las cifras dicen la verdad, y «Cómo funciona» tiene los actores correctos? Recorre las capturas de una. En un trackpad, desliza dos dedos de lado sobre el carrusel de apps: avanza una tarjeta por gesto, sin tocar un botón. Abre la simulación de planlang («Ver la simulación») y la brochure de una app: ¿todo se ve de la misma casa, sin colores ajenos ni capturas cortadas ni datos de personas reales?</p>
+              <p class="chica suave">Cubre: <code>k7</code> · <code>k13</code> · <code>k14</code> · <code>k15f</code> · <code>k18</code> · <code>l5b</code> · <code>l6</code> · <code>h4</code>.</p>
+            </div>
+            <fieldset class="ens-resp">
+              <legend>¿Salió como esperabas? (R8)</legend>
+              <label><input type="radio" name="r8" id="r8-si" value="si" /> Sí</label>
+              <label><input type="radio" name="r8" id="r8-no" value="no" /> No</label>
+            </fieldset>
+          </li>
+          <li
+            class="ens-fila"
+            data-origen="nuevo"
+            data-ensayo="8"
+            data-sentada="2"
+            data-cubre="k9 m10 m11 m12"
+          >
+            <div class="ens-cuerpo">
+              <p>
+                <strong>R9 · Agentes, investigaciones y tableros.</strong>
+                <span class="ens-min">8 min</span>
+                <span class="origen origen-nuevo">Nuevo · S20</span>
+              </p>
+              <p>En el portal de la Vitrina lee los cuatro frentes y abre una pieza de cada uno (un agente, una investigación, un tablero). ¿Dicen la verdad sobre tu trabajo —promesa, cifras, límites—, ninguno promete fecha y los escaparates se ven de la misma casa? En un tablero mira las capturas: ¿se leen nítidas, sin cortes?</p>
+              <p class="chica suave">Cubre: <code>k9</code> · <code>m10</code> · <code>m11</code> · <code>m12</code>.</p>
+            </div>
+            <fieldset class="ens-resp">
+              <legend>¿Salió como esperabas? (R9)</legend>
+              <label><input type="radio" name="r9" id="r9-si" value="si" /> Sí</label>
+              <label><input type="radio" name="r9" id="r9-no" value="no" /> No</label>
+            </fieldset>
+          </li>
+          <li
+            class="ens-fila"
+            data-origen="nuevo"
+            data-ensayo="8"
+            data-sentada="2"
+            data-cubre="q2 q7 q24"
+          >
+            <div class="ens-cuerpo">
+              <p>
+                <strong>R10 · «Métodos»: la puerta y dos publicaciones.</strong>
+                <span class="ens-min">8 min</span>
+                <span class="origen origen-nuevo">Nuevo · S20</span>
+              </p>
+              <p>En la HOME baja a «Métodos», entre la Vitrina y los Estudios: ¿se entiende de un vistazo qué es y a dónde lleva, y están todas las publicaciones con su chip «Tema»? Entra a T2 (agentes) y a T3 (RAG) y léelas como tuyas: cada nota de Evidencia (●) ¿es verdad?, cada límite ¿lo firmarías?, el Criterio (▲) ¿es tu posición? ¿Los diez bloques van en el orden que contarías?</p>
+              <p class="chica suave">Cubre: <code>q2</code> · <code>q7</code> · <code>q24</code>.</p>
+            </div>
+            <fieldset class="ens-resp">
+              <legend>¿Salió como esperabas? (R10)</legend>
+              <label><input type="radio" name="r10" id="r10-si" value="si" /> Sí</label>
+              <label><input type="radio" name="r10" id="r10-no" value="no" /> No</label>
+            </fieldset>
+          </li>
+          <li
+            class="ens-fila"
+            data-origen="nuevo"
+            data-ensayo="4"
+            data-sentada="2"
+            data-cubre="q4"
+          >
+            <div class="ens-cuerpo">
+              <p>
+                <strong>R11 · «Métodos», impresa.</strong>
+                <span class="ens-min">4 min</span>
+                <span class="origen origen-nuevo">Nuevo · S20</span>
+              </p>
+              <p>En una publicación pulsa Cmd + P: sin menú, pie ni botón del chat; el mapa entero y legible; ninguna tarjeta partida entre dos hojas. Guárdala como PDF: ¿la compartirías tal cual?</p>
+              <p class="chica suave">Cubre: <code>q4</code>.</p>
+            </div>
+            <fieldset class="ens-resp">
+              <legend>¿Salió como esperabas? (R11)</legend>
+              <label><input type="radio" name="r11" id="r11-si" value="si" /> Sí</label>
+              <label><input type="radio" name="r11" id="r11-no" value="no" /> No</label>
+            </fieldset>
+          </li>
+          <li
+            class="ens-fila"
+            data-origen="nuevo"
+            data-ensayo="12"
+            data-sentada="2"
+            data-cubre="i2 j3 l7 m13 m14 k16b q3"
+          >
+            <div class="ens-cuerpo">
+              <p>
+                <strong>R12 · El teléfono real, con datos móviles.</strong>
+                <span class="ens-min">12 min</span>
+                <span class="origen origen-nuevo">Nuevo · S20</span>
+              </p>
+              <p>En tu teléfono personal, con datos móviles: abre el menú (cómodo, sin toques pequeños); recorre una ficha larga y la galería de un tablero (cargan al llegar a ellas, nada se sale a lo ancho, el carrusel se desliza con el dedo); abre una publicación de «Métodos» (la página no se mueve de lado, el mapa se desliza dentro de su caja y el riel se rellena al bajar). Con «reducir movimiento» activo ninguna sección queda en blanco ni parpadea.</p>
+              <p class="chica suave">Cubre: <code>i2</code> · <code>j3</code> · <code>l7</code> · <code>m13</code> · <code>m14</code> · <code>k16b</code> · <code>q3</code>.</p>
+            </div>
+            <fieldset class="ens-resp">
+              <legend>¿Salió como esperabas? (R12)</legend>
+              <label><input type="radio" name="r12" id="r12-si" value="si" /> Sí</label>
+              <label><input type="radio" name="r12" id="r12-no" value="no" /> No</label>
+            </fieldset>
+          </li>
+          <li
+            class="ens-fila"
+            data-origen="nuevo"
+            data-ensayo="3"
+            data-sentada="2"
+            data-cubre="a7 o11"
+          >
+            <div class="ens-cuerpo">
+              <p>
+                <strong>R13 · El ícono y el 404.</strong>
+                <span class="ens-min">3 min</span>
+                <span class="origen origen-nuevo">Nuevo · S20</span>
+              </p>
+              <p>Mira la pestaña de tu dominio: ¿está el ícono navy (vacía antes la memoria del navegador)? Abre una ruta que no existe en ES y en EN: el 404 se lee. El «/» entre ES y EN del encabezado y el texto de ayuda del chat también se leen a simple vista.</p>
+              <p class="chica suave">Cubre: <code>a7</code> · <code>o11</code>.</p>
+            </div>
+            <fieldset class="ens-resp">
+              <legend>¿Salió como esperabas? (R13)</legend>
+              <label><input type="radio" name="r13" id="r13-si" value="si" /> Sí</label>
+              <label><input type="radio" name="r13" id="r13-no" value="no" /> No</label>
+            </fieldset>
+          </li>
+        </ul>
+
+        <h3 class="sentada">Sentada 3 · lo que solo tú puedes firmar: los Criterios de «Métodos»</h3>
+        <ul class="pasos">
+          <li
+            class="ens-fila"
+            data-origen="nuevo"
+            data-ensayo="7"
+            data-sentada="3"
+            data-cubre="q16"
+          >
+            <div class="ens-cuerpo">
+              <p>
+                <strong>R14 · T1, la IA en la organización.</strong>
+                <span class="ens-min">7 min</span>
+                <span class="origen origen-nuevo">Nuevo · S20</span>
+              </p>
+              <p>Abre <code>/es/metodos/ia-en-la-organizacion</code> y léela como tuya. Cada nota de Evidencia (●) ¿es verdad y sale de tus documentos? Cada Criterio (▲) ¿es tu posición? Decide en especial que la publicación no afirme como hecho «construir, comprar o componer» ni el centro de excelencia.</p>
+              <p class="chica suave">Cubre: <code>q16</code> (sin ⭐: es la lectura de la guía completa, bloque Q).</p>
+            </div>
+            <fieldset class="ens-resp">
+              <legend>¿Salió como esperabas? (R14)</legend>
+              <label><input type="radio" name="r14" id="r14-si" value="si" /> Sí</label>
+              <label><input type="radio" name="r14" id="r14-no" value="no" /> No</label>
+            </fieldset>
+          </li>
+          <li
+            class="ens-fila"
+            data-origen="nuevo"
+            data-ensayo="7"
+            data-sentada="3"
+            data-cubre="q18"
+          >
+            <div class="ens-cuerpo">
+              <p>
+                <strong>R15 · T5, el gobierno de la IA y los datos.</strong>
+                <span class="ens-min">7 min</span>
+                <span class="origen origen-nuevo">Nuevo · S20</span>
+              </p>
+              <p>Abre <code>/es/metodos/gobierno-de-ia-y-datos</code> y léela como tuya: las notas de Evidencia (●) sobre la Fundación CTIC (cifras aproximadas, «estructuración»), cada Criterio (▲) y los límites. ¿Los firmarías tal cual?</p>
+              <p class="chica suave">Cubre: <code>q18</code> (sin ⭐: es la lectura de la guía completa, bloque Q).</p>
+            </div>
+            <fieldset class="ens-resp">
+              <legend>¿Salió como esperabas? (R15)</legend>
+              <label><input type="radio" name="r15" id="r15-si" value="si" /> Sí</label>
+              <label><input type="radio" name="r15" id="r15-no" value="no" /> No</label>
+            </fieldset>
+          </li>
+          <li
+            class="ens-fila"
+            data-origen="nuevo"
+            data-ensayo="7"
+            data-sentada="3"
+            data-cubre="q14"
+          >
+            <div class="ens-cuerpo">
+              <p>
+                <strong>R16 · T7, el BI que la gente sí usa.</strong>
+                <span class="ens-min">7 min</span>
+                <span class="origen origen-nuevo">Nuevo · S20</span>
+              </p>
+              <p>Abre <code>/es/metodos/bi-que-se-usa</code> y léela como tuya: las notas de Evidencia (●) de Banco Pichincha, TransMilenio, Cafam y la Fundación CTIC, y cada Criterio (▲): ¿es tu posición?</p>
+              <p class="chica suave">Cubre: <code>q14</code> (sin ⭐: es la lectura de la guía completa, bloque Q).</p>
+            </div>
+            <fieldset class="ens-resp">
+              <legend>¿Salió como esperabas? (R16)</legend>
+              <label><input type="radio" name="r16" id="r16-si" value="si" /> Sí</label>
+              <label><input type="radio" name="r16" id="r16-no" value="no" /> No</label>
+            </fieldset>
+          </li>
+          <li
+            class="ens-fila"
+            data-origen="nuevo"
+            data-ensayo="7"
+            data-sentada="3"
+            data-cubre="q22"
+          >
+            <div class="ens-cuerpo">
+              <p>
+                <strong>R17 · T8, decidir con modelos.</strong>
+                <span class="ens-min">7 min</span>
+                <span class="origen origen-nuevo">Nuevo · S20</span>
+              </p>
+              <p>Abre <code>/es/metodos/decidir-con-modelos</code> y léela como tuya. Decide dos cosas: que Probeta DS y los convoyes vayan con el nivel «Prototipo», y que MLflow, los modelos fundacionales de series de tiempo y los asistentes de formulación con LLM queden solo como estado del campo, sin caso tuyo. Cada Criterio (▲) ¿es tu posición?</p>
+              <p class="chica suave">Cubre: <code>q22</code> (sin ⭐: es la lectura de la guía completa, bloque Q).</p>
+            </div>
+            <fieldset class="ens-resp">
+              <legend>¿Salió como esperabas? (R17)</legend>
+              <label><input type="radio" name="r17" id="r17-si" value="si" /> Sí</label>
+              <label><input type="radio" name="r17" id="r17-no" value="no" /> No</label>
+            </fieldset>
+          </li>
+          <li
+            class="ens-fila"
+            data-origen="nuevo"
+            data-ensayo="7"
+            data-sentada="3"
+            data-cubre="q20"
+          >
+            <div class="ens-cuerpo">
+              <p>
+                <strong>R18 · T9, de un proceso a una operación.</strong>
+                <span class="ens-min">7 min</span>
+                <span class="origen origen-nuevo">Nuevo · S20</span>
+              </p>
+              <p>Abre <code>/es/metodos/de-proceso-a-operacion</code> y léela como tuya. Decide que RPA y Power Automate, y la minería de procesos, queden sin caso tuyo (solo estado del campo), y que el BPMN antes de la tecnología sea lo que de verdad hiciste. Cada Criterio (▲) ¿es tu posición?</p>
+              <p class="chica suave">Cubre: <code>q20</code> (sin ⭐: es la lectura de la guía completa, bloque Q).</p>
+            </div>
+            <fieldset class="ens-resp">
+              <legend>¿Salió como esperabas? (R18)</legend>
+              <label><input type="radio" name="r18" id="r18-si" value="si" /> Sí</label>
+              <label><input type="radio" name="r18" id="r18-no" value="no" /> No</label>
+            </fieldset>
+          </li>
+        </ul>
+
+        <div id="ensayo-fuera" hidden>
+          <h3 class="sentada">Fuera del ensayo, con su razón</h3>
+          <p class="chica suave">
+            Las ⭐ que no son un flujo propio: o las cubre un flujo de arriba, o
+            la CI las respalda, o no son un flujo de cliente. Siguen en el Gate
+            mínimo ⭐.
+          </p>
+          <ul id="ensayo-fuera-lista"></ul>
+        </div>
+      </section>
 
       <!-- ═══════ A. La HOME se recorre ═══════ -->
       <section class="bloque">
@@ -554,7 +1101,8 @@
               <span class="origen origen-heredada">post-S5</span></label
             >
           </li>
-          <li data-origen="mejorado" data-minimo>
+          <li data-origen="mejorado" data-minimo
+            data-ensayo-fuera="cubierta por el flujo R1 del ensayo.">
             <input type="checkbox" id="a4" /><label for="a4"
               >⭐ <strong>Juicio visual:</strong> la página se siente editorial,
               sobria y coherente; las animaciones al hacer scroll son elegantes,
@@ -583,7 +1131,8 @@
               ><span class="minimo">⭐ mínimo</span></label
             >
           </li>
-          <li data-origen="mejorado" data-minimo>
+          <li data-origen="mejorado" data-minimo
+            data-ensayo-fuera="cubierta por el flujo R13 del ensayo.">
             <input type="checkbox" id="a7" /><label for="a7"
               >⭐ <strong>El ícono de la pestaña.</strong> Los navegadores
               guardan el ícono viejo mucho tiempo, así que primero se vacía esa
@@ -635,7 +1184,8 @@
               <span class="origen origen-nuevo">Nuevo · 404 de la raíz</span></label
             >
           </li>
-          <li data-origen="mejorado" data-minimo>
+          <li data-origen="mejorado" data-minimo
+            data-ensayo-fuera="cubierta por el flujo R1 del ensayo.">
             <input type="checkbox" id="a10" /><label for="a10"
               >⭐ <strong>Tu LinkedIn, en el sitio</strong>, en el teléfono y en
               escritorio, en <code>/es</code> y <code>/en</code>. En la
@@ -696,7 +1246,8 @@
               ></label
             >
           </li>
-          <li data-origen="heredada" data-minimo>
+          <li data-origen="heredada" data-minimo
+            data-ensayo-fuera="cubierta por el flujo R2 del ensayo.">
             <input type="checkbox" id="b2" /><label for="b2"
               >⭐ <strong>Juicio de contenido:</strong> el inglés se lee natural
               (no traducción robótica) y dice lo mismo que el español. Revisa
@@ -752,7 +1303,8 @@
               ></label
             >
           </li>
-          <li data-origen="mejorado" data-minimo>
+          <li data-origen="mejorado" data-minimo
+            data-ensayo-fuera="cubierta por el flujo R3 del ensayo.">
             <input type="checkbox" id="c3" /><label for="c3"
               >⭐ <strong>Juicio de contenido de los ocho:</strong> son fieles a
               lo que hiciste y están bien escritos, sin exagerar ni inventar.
@@ -766,7 +1318,8 @@
               ><span class="minimo">⭐ mínimo</span></label
             >
           </li>
-          <li data-origen="nuevo" data-minimo>
+          <li data-origen="nuevo" data-minimo
+            data-ensayo-fuera="cubierta por el flujo R3 del ensayo.">
             <input type="checkbox" id="c4" /><label for="c4"
               >⭐ <strong>Juicio visual del caso</strong>, en escritorio y en el
               teléfono: la banda de cifras y la lección se sienten
@@ -823,7 +1376,8 @@
               ></label
             >
           </li>
-          <li data-origen="heredada" data-minimo>
+          <li data-origen="heredada" data-minimo
+            data-ensayo-fuera="cubierta por el flujo R4 del ensayo.">
             <input type="checkbox" id="d2" /><label for="d2"
               >⭐ <strong>Prueba ATS real:</strong> sube el PDF a un
               lector/parser de CV (o LinkedIn "subir CV") y confirma que extrae
@@ -832,7 +1386,8 @@
               ><span class="minimo">⭐ mínimo</span></label
             >
           </li>
-          <li data-origen="mejorado" data-minimo>
+          <li data-origen="mejorado" data-minimo
+            data-ensayo-fuera="cubierta por el flujo R4 del ensayo.">
             <input type="checkbox" id="d3" /><label for="d3"
               >⭐ <strong>El dominio, muy resaltado</strong> (con el dominio ya
               apuntando al sitio y en <code>NEXT_PUBLIC_SITE_URL</code>, tras un
@@ -902,7 +1457,8 @@
               ></label
             >
           </li>
-          <li data-origen="heredada" data-minimo>
+          <li data-origen="heredada" data-minimo
+            data-ensayo-fuera="cubierta por el flujo R5 del ensayo.">
             <input type="checkbox" id="e3" /><label for="e3"
               >⭐ <strong>Email real — SOLO en producción:</strong> en
               <code>localhost</code> no hay <code>RESEND_API_KEY</code>, el
@@ -1019,7 +1575,8 @@
               animación. <span class="origen origen-heredada">S3</span></label
             >
           </li>
-          <li data-origen="heredada" data-minimo>
+          <li data-origen="heredada" data-minimo
+            data-ensayo-fuera="cubierta por el flujo R6 del ensayo.">
             <input type="checkbox" id="f5" /><label for="f5"
               >⭐ <strong>Proveedor REAL (kit):</strong> con la
               <code>GROQ_API_KEY</code> regenerada, corre las preguntas
@@ -1041,7 +1598,8 @@
               <span class="origen origen-nuevo">Nuevo · chat/registro</span></label
             >
           </li>
-          <li data-origen="nuevo" data-minimo>
+          <li data-origen="nuevo" data-minimo
+            data-ensayo-fuera="respaldada por la CI: tests/integration/chat-cupo.dbtest.ts y tests/integration/chat-registro-route.test.ts corren el registro del chat contra Postgres real.">
             <input type="checkbox" id="f7" /><label for="f7"
               >⭐ <strong>El registro y la longitud.</strong> Con el proveedor
               real, haz tres preguntas (una de trayectoria, una ajena, y una con
@@ -1056,7 +1614,8 @@
               ><span class="minimo">⭐ mínimo</span></label
             >
           </li>
-          <li data-origen="nuevo" data-minimo>
+          <li data-origen="nuevo" data-minimo
+            data-ensayo-fuera="cubierta por el flujo R6 del ensayo.">
             <input type="checkbox" id="f8" /><label for="f8"
               >⭐ <strong>El chat sabe explicar su propia puerta.</strong> Con el
               proveedor real, pregúntale tres cosas sobre él mismo:
@@ -1071,7 +1630,8 @@
               ><span class="minimo">⭐ mínimo</span></label
             >
           </li>
-          <li data-origen="nuevo" data-minimo>
+          <li data-origen="nuevo" data-minimo
+            data-ensayo-fuera="cubierta por el flujo R6 del ensayo.">
             <input type="checkbox" id="f9" /><label for="f9"
               >⭐ <strong>«¿Algo no funciona? Avísame».</strong> En producción,
               en una ventana privada, pide el código y bajo «Pedir otro código»
@@ -1086,7 +1646,8 @@
               ><span class="minimo">⭐ mínimo</span></label
             >
           </li>
-          <li data-origen="nuevo" data-minimo>
+          <li data-origen="nuevo" data-minimo
+            data-ensayo-fuera="aprobada por el dueño al mergear el cupo del chat (PR #49, 2026-09-26) y respaldada por tests/integration/chat-cupo.dbtest.ts, que corre la RPC contra Postgres real.">
             <input type="checkbox" id="f10" /><label for="f10"
               >⭐ <strong>El cupo del chat, en producción.</strong> Primero, en
               Supabase → SQL Editor, corre
@@ -1189,7 +1750,8 @@
               datos). <span class="origen origen-heredada">S4</span></label
             >
           </li>
-          <li data-origen="heredada" data-minimo>
+          <li data-origen="heredada" data-minimo
+            data-ensayo-fuera="respaldada por la CI: tests/e2e/votacion.spec.ts comprueba que sin base la votación dice «no disponible» y deja los botones apagados; en producción está encendida, así que no se puede ver apagada.">
             <input type="checkbox" id="g5" /><label for="g5"
               >⭐ <strong>Contador honesto:</strong> apaga la votación (<code
                 >VOTACION_ENABLED=false</code
@@ -1273,7 +1835,8 @@
               <span class="origen origen-heredada">S4</span></label
             >
           </li>
-          <li data-origen="heredada" data-minimo>
+          <li data-origen="heredada" data-minimo
+            data-ensayo-fuera="cubierta por el flujo R8 del ensayo.">
             <input type="checkbox" id="h4" /><label for="h4"
               >⭐ <strong>Juicio visual:</strong> las animaciones de la brochure
               son impresionantes y cumplen la promesa "funcionalidades en
@@ -1303,7 +1866,8 @@
               <span class="origen origen-heredada">S4</span></label
             >
           </li>
-          <li data-origen="heredada" data-minimo>
+          <li data-origen="heredada" data-minimo
+            data-ensayo-fuera="cubierta por el flujo R12 del ensayo.">
             <input type="checkbox" id="i2" /><label for="i2"
               >⭐ <strong>Teléfono real:</strong> en tu móvil, el menú se abre
               cómodo, los toques son fáciles (nada demasiado pequeño) y
@@ -1387,7 +1951,8 @@
               <span class="origen origen-heredada">post-S5</span></label
             >
           </li>
-          <li data-origen="heredada" data-minimo>
+          <li data-origen="heredada" data-minimo
+            data-ensayo-fuera="cubierta por el flujo R8 del ensayo.">
             <input type="checkbox" id="k13" /><label for="k13"
               >⭐ <strong>Juicio de proceso:</strong> abre las fichas técnicas
               de <strong>dos apps</strong> y lee su "Cómo funciona" como
@@ -1412,7 +1977,8 @@
               <span class="origen origen-nuevo">Nuevo · post-S9</span></label
             >
           </li>
-          <li data-origen="nuevo" data-minimo>
+          <li data-origen="nuevo" data-minimo
+            data-ensayo-fuera="cubierta por el flujo R8 del ensayo.">
             <input type="checkbox" id="k18" /><label for="k18"
               >⭐ <strong>La simulación de planlang</strong>, en escritorio y en
               tu teléfono real (datos móviles). En la ficha técnica de
@@ -1431,7 +1997,8 @@
               ><span class="minimo">⭐ mínimo</span></label
             >
           </li>
-          <li data-origen="heredada" data-minimo>
+          <li data-origen="heredada" data-minimo
+            data-ensayo-fuera="cubierta por el flujo R8 del ensayo.">
             <input type="checkbox" id="k14" /><label for="k14"
               >⭐ <strong>Aprobación visual de la infografía:</strong> con la
               ficha técnica de Habla San en pantalla, decide si es la capa
@@ -1476,7 +2043,8 @@
               <span class="origen origen-heredada">S5</span></label
             >
           </li>
-          <li data-origen="heredada" data-minimo>
+          <li data-origen="heredada" data-minimo
+            data-ensayo-fuera="cubierta por el flujo R8 del ensayo.">
             <input type="checkbox" id="k7" /><label for="k7"
               >⭐ <strong>Juicio de contenido:</strong> lee la promesa y las
               cifras de dos apps distintas y confirma que dicen la verdad sobre
@@ -1502,7 +2070,8 @@
               <span class="origen origen-heredada">S7</span></label
             >
           </li>
-          <li data-origen="heredada" data-minimo>
+          <li data-origen="heredada" data-minimo
+            data-ensayo-fuera="cubierta por el flujo R9 del ensayo.">
             <input type="checkbox" id="k9" /><label for="k9"
               >⭐ <strong>Juicio de contenido de los frentes:</strong> lee la
               frase y el párrafo de los <strong>cuatro</strong> frentes en el
@@ -1516,7 +2085,8 @@
               ><span class="minimo">⭐ mínimo</span></label
             >
           </li>
-          <li data-origen="nuevo" data-minimo>
+          <li data-origen="mejorado" data-minimo
+            data-ensayo-fuera="cubierta por el flujo R8 del ensayo.">
             <input type="checkbox" id="k15f" /><label for="k15f"
               >⭐ <strong>Los dos bloques de apps y su carrusel con inicio,
               final y vuelta</strong>, en <code>/es/vitrina/apps</code> y
@@ -1551,7 +2121,8 @@
               ><span class="minimo">⭐ mínimo</span></label
             >
           </li>
-          <li data-origen="mejorado" data-minimo>
+          <li data-origen="mejorado" data-minimo
+            data-ensayo-fuera="cubierta por el flujo R12 del ensayo.">
             <input type="checkbox" id="k16b" /><label for="k16b"
               >⭐ <strong>El carrusel de «Cómo se ve»</strong>, en
               <code>/es/vitrina/tableros/banca-colombiana</code>, en
@@ -1613,7 +2184,8 @@
               <span class="origen origen-heredada">S5</span></label
             >
           </li>
-          <li data-origen="mejorado" data-minimo>
+          <li data-origen="mejorado" data-minimo
+            data-ensayo-fuera="cubierta por el flujo R8 del ensayo.">
             <input type="checkbox" id="l5b" /><label for="l5b"
               >⭐ <strong>Aprobación visual:</strong> recorre las diez fichas
               seguidas. Todas se ven de <strong>la misma casa</strong> que el
@@ -1623,7 +2195,8 @@
               ></label
             >
           </li>
-          <li data-origen="heredada" data-minimo>
+          <li data-origen="heredada" data-minimo
+            data-ensayo-fuera="cubierta por el flujo R8 del ensayo.">
             <input type="checkbox" id="l6" /><label for="l6"
               >⭐ <strong>Juicio sobre las imágenes:</strong> dentro de las
               tarjetas, cada captura muestra de verdad la pantalla de la que
@@ -1634,7 +2207,8 @@
               ><span class="minimo">⭐ mínimo</span></label
             >
           </li>
-          <li data-origen="heredada" data-minimo>
+          <li data-origen="heredada" data-minimo
+            data-ensayo-fuera="cubierta por el flujo R12 del ensayo.">
             <input type="checkbox" id="l7" /><label for="l7"
               >⭐ <strong>Teléfono real:</strong> recorre una ficha larga en tu
               móvil. Las tarjetas se abren cómodas al ritmo de la lectura, las
@@ -1759,7 +2333,8 @@
               <span class="origen origen-heredada">S7</span></label
             >
           </li>
-          <li data-origen="heredada" data-minimo>
+          <li data-origen="heredada" data-minimo
+            data-ensayo-fuera="cubierta por el flujo R9 del ensayo.">
             <input type="checkbox" id="m10" /><label for="m10"
               >⭐
               <strong>Juicio de contenido de los productos ajenos:</strong> lee
@@ -1772,7 +2347,8 @@
               ><span class="minimo">⭐ mínimo</span></label
             >
           </li>
-          <li data-origen="heredada" data-minimo>
+          <li data-origen="heredada" data-minimo
+            data-ensayo-fuera="cubierta por el flujo R9 del ensayo.">
             <input type="checkbox" id="m11" /><label for="m11"
               >⭐ <strong>Aprobación visual de los escaparates:</strong> recorre
               los cuatro escaparates seguidos y decide si los cuatro se ven
@@ -1783,7 +2359,8 @@
               ><span class="minimo">⭐ mínimo</span></label
             >
           </li>
-          <li data-origen="heredada" data-minimo>
+          <li data-origen="heredada" data-minimo
+            data-ensayo-fuera="cubierta por el flujo R9 del ensayo.">
             <input type="checkbox" id="m12" /><label for="m12"
               >⭐ <strong>Juicio de las capturas de tableros:</strong> abre las
               seis fichas de tableros y mira sus 36 capturas: cada una muestra
@@ -1794,7 +2371,8 @@
               ><span class="minimo">⭐ mínimo</span></label
             >
           </li>
-          <li data-origen="heredada" data-minimo>
+          <li data-origen="heredada" data-minimo
+            data-ensayo-fuera="cubierta por el flujo R12 del ensayo.">
             <input type="checkbox" id="m13" /><label for="m13"
               >⭐ <strong>Teléfono real — la tarjeta y las cifras:</strong> abre
               un escaparate en tu móvil. Las tarjetas se leen cómodas en una
@@ -1805,7 +2383,8 @@
               ><span class="minimo">⭐ mínimo</span></label
             >
           </li>
-          <li data-origen="heredada" data-minimo>
+          <li data-origen="heredada" data-minimo
+            data-ensayo-fuera="cubierta por el flujo R12 del ensayo.">
             <input type="checkbox" id="m14" /><label for="m14"
               >⭐ <strong>Teléfono real — la galería:</strong> abre una ficha de
               tablero en tu móvil y recorre "Cómo se ve": las capturas se ven
@@ -1926,7 +2505,8 @@
               <span class="origen origen-heredada">post-S7</span></label
             >
           </li>
-          <li data-origen="heredada" data-minimo>
+          <li data-origen="heredada" data-minimo
+            data-ensayo-fuera="cubierta por el flujo R1 del ensayo.">
             <input type="checkbox" id="n9" /><label for="n9"
               >⭐ <strong>Aprobación visual del índice:</strong> recorre la
               trayectoria entera en escritorio y en tu teléfono y decide si la
@@ -1936,7 +2516,8 @@
               ><span class="minimo">⭐ mínimo</span></label
             >
           </li>
-          <li data-origen="mejorado" data-minimo>
+          <li data-origen="mejorado" data-minimo
+            data-ensayo-fuera="cubierta por el flujo R1 del ensayo.">
             <input type="checkbox" id="n10" /><label for="n10"
               >⭐ <strong>Aprobación de Skills, contenido y forma:</strong>
               ¿"elegante pero atractivo"? Decide si los nueve iconos dicen lo que
@@ -1952,7 +2533,8 @@
               ><span class="minimo">⭐ mínimo</span></label
             >
           </li>
-          <li data-origen="heredada" data-minimo>
+          <li data-origen="heredada" data-minimo
+            data-ensayo-fuera="cubierta por el flujo R1 del ensayo.">
             <input type="checkbox" id="n11" /><label for="n11"
               >⭐
               <strong
@@ -2048,7 +2630,8 @@
               <span class="origen origen-mejorada">Mejorado en a fondo v2</span></label
             >
           </li>
-          <li data-origen="mejorada" data-minimo>
+          <li data-origen="mejorada" data-minimo
+            data-ensayo-fuera="no es un flujo de cliente: es una lectura del repositorio (data/a-fondo/), no de producción; queda para el gate de juicio del hito.">
             <input type="checkbox" id="o6" /><label for="o6"
               >⭐
               <strong>Lee un documento entero y decide si es tuyo.</strong>
@@ -2063,7 +2646,8 @@
               ><span class="minimo">⭐ mínimo</span></label
             >
           </li>
-          <li data-origen="nuevo" data-minimo>
+          <li data-origen="nuevo" data-minimo
+            data-ensayo-fuera="no es un flujo de cliente: es una lectura del repositorio (data/a-fondo/), no de producción; tests/unit/ctic-aproximadas.test.ts respalda lo medible y el resto queda para el gate de juicio del hito.">
             <input type="checkbox" id="o7" /><label for="o7"
               >⭐ <strong>Cero terceros identificables.</strong> Barre los 25,
               en los dos idiomas, buscando el nombre de una persona —un jefe, un cliente, un
@@ -2075,7 +2659,8 @@
               ><span class="minimo">⭐ mínimo</span></label
             >
           </li>
-          <li data-origen="mejorada" data-minimo>
+          <li data-origen="mejorada" data-minimo
+            data-ensayo-fuera="no es un flujo de cliente: es una lectura del repositorio (data/a-fondo/), no de producción; tests/unit/a-fondo-cifras-gemelas.test.ts respalda las cifras y el resto queda para el gate de juicio del hito.">
             <input type="checkbox" id="o8" /><label for="o8"
               >⭐
               <strong>Las cifras y las fechas son verdaderas.</strong> Contrasta
@@ -2091,7 +2676,8 @@
               ><span class="minimo">⭐ mínimo</span></label
             >
           </li>
-          <li data-origen="mejorada" data-minimo>
+          <li data-origen="mejorada" data-minimo
+            data-ensayo-fuera="cubierta por el flujo R6 del ensayo.">
             <input type="checkbox" id="o9" /><label for="o9"
               >⭐
               <strong>M1, ya activa.</strong> En la preview, con el proveedor
@@ -2105,7 +2691,8 @@
               ><span class="minimo">⭐ mínimo</span></label
             >
           </li>
-          <li data-origen="mejorada" data-minimo>
+          <li data-origen="mejorada" data-minimo
+            data-ensayo-fuera="cubierta por el flujo R6 del ensayo.">
             <input type="checkbox" id="o10" /><label for="o10"
               >⭐ <strong>M2, ya activa.</strong> Con el proveedor real, hazle
               al chat <strong>cinco preguntas del banco</strong> —una de
@@ -2121,7 +2708,8 @@
               ><span class="minimo">⭐ mínimo</span></label
             >
           </li>
-          <li data-origen="nuevo" data-minimo>
+          <li data-origen="nuevo" data-minimo
+            data-ensayo-fuera="cubierta por el flujo R13 del ensayo.">
             <input type="checkbox" id="o11" /><label for="o11"
               >⭐
               <strong
@@ -2168,7 +2756,8 @@
               <span class="origen origen-nuevo">Nuevo · a fondo v2</span></label
             >
           </li>
-          <li data-origen="nuevo" data-minimo>
+          <li data-origen="nuevo" data-minimo
+            data-ensayo-fuera="no es un flujo de cliente: es una lectura del repositorio (data/a-fondo/), no de producción; tests/unit/a-fondo-cifras-gemelas.test.ts respalda las cifras gemelas y el resto queda para el gate de juicio del hito.">
             <input type="checkbox" id="o14" /><label for="o14"
               >⭐ <strong>El inglés suena a ti.</strong> Lee entero un gemelo
               —<code>data/a-fondo/lo-que-busco.en.md</code>— al lado de su
@@ -2211,7 +2800,8 @@
           hace en una <strong>preview</strong> para no apagar producción.
         </p>
         <ul class="pasos">
-          <li data-origen="mejorado" data-minimo>
+          <li data-origen="mejorado" data-minimo
+            data-ensayo-fuera="no es un flujo de cliente: el modo mantenimiento se enciende en Vercel, en una preview; su lógica la vigilan tests/unit/mantenimiento.test.ts y tests/e2e/mantenimiento.spec.ts.">
             <input type="checkbox" id="p1" /><label for="p1"
               >⭐ <strong>Verlo encendido, sin tocar producción.</strong> En
               Vercel → Settings → Environment Variables, agrega
@@ -2276,7 +2866,8 @@
               <span class="origen origen-nuevo">Nuevo · S10</span></label
             >
           </li>
-          <li data-origen="nuevo" data-minimo>
+          <li data-origen="nuevo" data-minimo
+            data-ensayo-fuera="cubierta por el flujo R10 del ensayo.">
             <input type="checkbox" id="q2" /><label for="q2"
               >⭐ <strong>La publicación en pantalla grande, de corrido.</strong>
               Abre <code>/es/metodos/sistema-de-agentes</code> y léela completa
@@ -2295,7 +2886,8 @@
               ><span class="minimo">⭐ mínimo</span></label
             >
           </li>
-          <li data-origen="nuevo" data-minimo>
+          <li data-origen="nuevo" data-minimo
+            data-ensayo-fuera="cubierta por el flujo R12 del ensayo.">
             <input type="checkbox" id="q3" /><label for="q3"
               >⭐ <strong>La publicación en tu teléfono real</strong> (datos
               móviles). Abre la misma página: la página <strong>no se mueve de
@@ -2316,7 +2908,8 @@
               ><span class="minimo">⭐ mínimo</span></label
             >
           </li>
-          <li data-origen="nuevo" data-minimo>
+          <li data-origen="nuevo" data-minimo
+            data-ensayo-fuera="cubierta por el flujo R11 del ensayo.">
             <input type="checkbox" id="q4" /><label for="q4"
               >⭐ <strong>La publicación impresa.</strong> En
               <code>/es/metodos/sistema-de-agentes</code> pulsa Cmd + P (o Ctrl +
@@ -2364,7 +2957,8 @@
               <span class="origen origen-nuevo">Nuevo · S10</span></label
             >
           </li>
-          <li data-origen="nuevo" data-minimo>
+          <li data-origen="nuevo" data-minimo
+            data-ensayo-fuera="cubierta por el flujo R10 del ensayo.">
             <input type="checkbox" id="q7" /><label for="q7"
               >⭐ <strong>La segunda publicación, T3, como tuya.</strong> Abre
               <code>/es/metodos/rag-sin-inventar</code> y léela completa. Lo que solo
@@ -2734,7 +3328,8 @@
               <span class="origen origen-nuevo">Nuevo · S19</span></label
             >
           </li>
-          <li data-origen="nuevo" data-minimo>
+          <li data-origen="nuevo" data-minimo
+            data-ensayo-fuera="cubierta por el flujo R10 del ensayo.">
             <input type="checkbox" id="q24" /><label for="q24"
               >⭐ <strong>La puerta de «Métodos» en la HOME.</strong> Abre
               <code>/es</code> y baja: entre la Vitrina y los Estudios hay una
@@ -2798,7 +3393,8 @@
               <span class="origen origen-heredada">S7</span></label
             >
           </li>
-          <li data-origen="heredada" data-minimo>
+          <li data-origen="heredada" data-minimo
+            data-ensayo-fuera="cubierta por el flujo R12 del ensayo.">
             <input type="checkbox" id="j3" /><label for="j3"
               >⭐ <strong>Dispositivo real:</strong> en un teléfono real con
               reduced-motion activo, confirma que ninguna sección queda en
@@ -3390,9 +3986,9 @@
               aprobación visual de la infografía (K14 ⭐). Mejorada: la entrada
               a una app, que ahora pasa por la ficha técnica antes del detalle
               (K2). <strong>Ninguna prueba eliminada:</strong> el detalle del S5
-              sigue entero, un nivel más abajo. Gate mínimo ⭐: de 15 a 17. Las
-              pruebas de S5 y post-S5 siguen marcadas como nuevas: su gate ⭐
-              aún no se ha corrido.
+              sigue entero, un nivel más abajo. Gate mínimo ⭐: de 15 a 17. Entonces
+              las pruebas de S5 y post-S5 seguían marcadas como nuevas: su gate
+              ⭐ no se había corrido.
             </li>
             <li>
               <strong>v4 · post-S5 · 2026-09-05:</strong> la vitrina se reparte
@@ -3404,8 +4000,8 @@
               las brochures, que se movió con el escaparate a
               <code>/vitrina/apps</code> (H1).
               <strong>Ninguna prueba eliminada.</strong> Gate mínimo ⭐: de 14 a
-              15. Las pruebas del S5 y las de post-S5 siguen marcadas como
-              nuevas: su gate ⭐ aún no se ha corrido.
+              15. Entonces las pruebas del S5 y las de post-S5 seguían marcadas
+              como nuevas: su gate ⭐ no se había corrido.
             </li>
             <li>
               <strong>v3 · post-S5 · 2026-09-05:</strong> reorganización del
@@ -3420,10 +4016,10 @@
               exploraciones desde el formulario de contacto (bloque E). Gate
               mínimo ⭐ sin cambios: 14.
               <strong
-                >Las 15 pruebas del S5 siguen marcadas como nuevas a
+                >Las 15 pruebas del S5 seguían marcadas como nuevas a
                 propósito:</strong
               >
-              su gate ⭐ aún no se ha corrido, así que todavía no son regresión.
+              su gate ⭐ no se había corrido, así que entonces no eran regresión.
             </li>
             <li>
               <strong>v2 · S5 · 2026-08-23:</strong> abre el ciclo H2. Nuevas:
@@ -3458,9 +4054,15 @@
       (function () {
         // NS VERSIONADO POR SPRINT: al publicar la guía de un sprint nuevo se cambia
         // s007c — así una regresión sin correr no aparece marcada por la versión anterior.
-        var NS = "guia-hoja-de-vida:s19:";
+        var NS = "guia-hoja-de-vida:s20:";
         var casillas = Array.prototype.slice.call(
           document.querySelectorAll('input[type="checkbox"]'),
+        );
+        var radios = Array.prototype.slice.call(
+          document.querySelectorAll('input[type="radio"]'),
+        );
+        var filas = Array.prototype.slice.call(
+          document.querySelectorAll("ul.pasos li"),
         );
         var barra = document.getElementById("barra-avance");
         var contador = document.getElementById("contador");
@@ -3470,10 +4072,15 @@
         var secciones = Array.prototype.slice.call(
           document.querySelectorAll("section.bloque"),
         );
+        var fueraCaja = document.getElementById("ensayo-fuera");
+        var fueraLista = document.getElementById("ensayo-fuera-lista");
+        var resumen = document.getElementById("ensayo-resumen");
+        var LIMITE = Number(resumen && resumen.getAttribute("data-limite")) || 45;
 
         function visible(li, filtro) {
           if (filtro === "todo") return true;
           if (filtro === "minimo") return li.hasAttribute("data-minimo");
+          if (filtro === "ensayo") return li.hasAttribute("data-ensayo");
           var o = li.getAttribute("data-origen");
           return o === "nuevo" || o === "mejorado" || o === "mejorada"; // filtro "cambios"
         }
@@ -3497,6 +4104,10 @@
               sec.setAttribute("hidden", "");
             }
           });
+          if (fueraCaja) {
+            if (filtro === "ensayo") fueraCaja.removeAttribute("hidden");
+            else fueraCaja.setAttribute("hidden", "");
+          }
           botones.forEach(function (b) {
             b.classList.toggle(
               "activo",
@@ -3505,22 +4116,97 @@
           });
           actualizar();
         }
+        function hecha(li) {
+          var c = li.querySelector('input[type="checkbox"]');
+          if (c) return c.checked;
+          return !!li.querySelector('input[type="radio"]:checked');
+        }
         function actualizar() {
-          var vis = casillas.filter(function (c) {
-            var li = c.closest("li"),
-              sec = c.closest("section");
-            return (
-              !(li && li.hasAttribute("hidden")) &&
-              !(sec && sec.hasAttribute("hidden"))
-            );
+          var vis = filas.filter(function (li) {
+            var sec = li.closest("section");
+            return !li.hasAttribute("hidden") && !(sec && sec.hasAttribute("hidden"));
           });
-          var hechas = vis.filter(function (c) {
-            return c.checked;
-          }).length;
+          var hechas = vis.filter(hecha).length;
           barra.style.width =
             (vis.length ? (hechas / vis.length) * 100 : 0) + "%";
           contador.textContent = hechas + "/" + vis.length;
+          calcular();
         }
+        function poner(clave, valor) {
+          Array.prototype.forEach.call(
+            document.querySelectorAll('[data-calc="' + clave + '"]'),
+            function (e) {
+              e.textContent = String(valor);
+            },
+          );
+        }
+        // Todas las cuentas de la guía salen de aquí: ninguna se escribe a mano.
+        function calcular() {
+          poner(
+            "minimo-n",
+            document.querySelectorAll("ul.pasos li[data-minimo]").length,
+          );
+          var flujos = filas.filter(function (li) {
+            return li.hasAttribute("data-ensayo");
+          });
+          var min = { 1: 0, 2: 0, 3: 0 };
+          var n = { 1: 0, 2: 0, 3: 0 };
+          var total = 0;
+          flujos.forEach(function (li) {
+            var m = Number(li.getAttribute("data-ensayo")) || 0;
+            var s = li.getAttribute("data-sentada");
+            min[s] = (min[s] || 0) + m;
+            n[s] = (n[s] || 0) + 1;
+            total += m;
+          });
+          var si = flujos.filter(function (li) {
+            return li.querySelector('input[value="si"]:checked');
+          }).length;
+          var no = flujos.filter(function (li) {
+            return li.querySelector('input[value="no"]:checked');
+          }).length;
+          poner("ensayo-n", flujos.length);
+          poner(
+            "ensayo-sentadas",
+            [1, 2, 3].filter(function (s) {
+              return n[s] > 0;
+            }).length,
+          );
+          poner("ensayo-min", total);
+          poner("ensayo-si", si);
+          poner("ensayo-no", no);
+          poner("ensayo-pendientes", flujos.length - si - no);
+          [1, 2, 3].forEach(function (s) {
+            poner("sentada-" + s + "-n", n[s] || 0);
+            poner("sentada-" + s + "-min", min[s] || 0);
+            var pasada = (min[s] || 0) > LIMITE;
+            poner(
+              "sentada-" + s + "-aviso",
+              pasada ? "· pasa de " + LIMITE + " min: parte esta sentada" : "",
+            );
+            var fila = document.querySelector('[data-sentada-resumen="' + s + '"]');
+            if (fila) fila.classList.toggle("pasada", pasada);
+          });
+        }
+        // Las ⭐ que salen del ensayo llevan su razón: en su fila y en la lista del filtro.
+        filas.forEach(function (li) {
+          var razon = li.getAttribute("data-ensayo-fuera");
+          if (!razon) return;
+          var id = li.querySelector("input").id;
+          var nota = document.createElement("small");
+          nota.className = "fuera-ensayo";
+          nota.textContent = "Fuera del ensayo: " + razon;
+          var cuerpo = li.querySelector("label");
+          if (cuerpo) cuerpo.appendChild(nota);
+          if (fueraLista) {
+            var item = document.createElement("li");
+            var cod = document.createElement("code");
+            cod.textContent = id;
+            item.appendChild(cod);
+            item.appendChild(document.createTextNode(" — " + razon));
+            fueraLista.appendChild(item);
+          }
+        });
         botones.forEach(function (b) {
           var f = b.getAttribute("data-filtro"),
             n = 0;
@@ -3539,6 +4225,18 @@
           c.addEventListener("change", function () {
             try {
               localStorage.setItem(NS + c.id, c.checked ? "1" : "0");
+            } catch (e) {}
+            actualizar();
+          });
+        });
+        // El sí/no de cada flujo del ensayo (un radio por respuesta, guardado por flujo).
+        radios.forEach(function (r) {
+          try {
+            r.checked = localStorage.getItem(NS + r.name) === r.value;
+          } catch (e) {}
+          r.addEventListener("change", function () {
+            try {
+              if (r.checked) localStorage.setItem(NS + r.name, r.value);
             } catch (e) {}
             actualizar();
           });

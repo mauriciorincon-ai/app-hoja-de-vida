@@ -46,6 +46,16 @@ describe("cero-enlaces (regla 17)", () => {
     expect(hallazgos[0]).toMatch(/^README\.md:1:/);
   });
 
+  // `git grep -I` (el barrido del kit) NO mira los archivos binarios: un PDF versionado con una URL
+  // de producción dentro pasaría el gate sin que nadie lo viera (S10-B22). La salida del repo es no
+  // versionar PDF —la hoja impresa de cada pieza vive en su captura PNG— y este test lo vigila.
+  it("ningún PDF versionado: el barrido (-I) no los lee", () => {
+    const pdf = execFileSync("git", ["ls-files", "*.pdf", "*.PDF"], { encoding: "utf8" })
+      .split("\n")
+      .filter(Boolean);
+    expect(pdf, `PDF versionados (invisibles para el barrido de cero enlaces): ${pdf.join(", ")}`).toEqual([]);
+  });
+
   it("el patrón escapa los puntos para que cero-enlaces.json y los workflows no se detecten a sí mismos", () => {
     expect(patronDesde(config)).toBe("vercel[.]app|workers[.]dev|pages[.]dev|netlify[.]app|github[.]io|onrender[.]com|fly[.]dev|herokuapp[.]com");
   });

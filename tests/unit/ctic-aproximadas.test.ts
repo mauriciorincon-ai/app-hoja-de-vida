@@ -37,8 +37,8 @@ const archivosDelSitio = [
   ...readdirSync("data/fichas")
     .filter((f) => f.endsWith(".yaml") || f.endsWith(".json"))
     .map((f) => `data/fichas/${f}`),
-  // Las publicaciones de «Métodos» (S10): varias hablan de la Fundación CTIC (T7 ya; T1 y T5
-  // llegan después), y la aduana de cifras las mira todas, las de hoy y las que vienen.
+  // Las publicaciones de «Métodos» (S10): varias hablan de la Fundación CTIC, y la aduana de
+  // cifras las mira todas, las que hay hoy y las que se agreguen.
   ...readdirSync("data/metodo")
     .filter((f) => f.endsWith(".yaml"))
     .map((f) => `data/metodo/${f}`),

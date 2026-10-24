@@ -76,7 +76,7 @@ function Bloque({
       className="scroll-mt-24 border-t border-paper-2 pt-10 print:pt-6"
     >
       <Reveal variant="fadeInUp" amount={0.5}>
-        <header className="mb-6 flex flex-col gap-2">
+        <header className="mb-6 flex flex-col gap-2 print:break-after-avoid">
           <span className={`${ROTULO} tabular-nums`}>{t("bloque", { n })}</span>
           <h2
             id={`bloque-${n}-titulo`}

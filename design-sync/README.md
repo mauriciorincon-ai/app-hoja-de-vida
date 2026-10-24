@@ -28,6 +28,7 @@ design-sync/
    ├─ componentes-s7/    Muestra de pieza · Hallazgos y galería, con el carrusel (S7, ADR-017; S9)
    ├─ componentes-post-s7/  Índice que baja contigo · Tarjeta de skills (ADR-018)
    ├─ componentes-post-s9/  Página de simulación (2026-10-12, ADR-029)
+   ├─ componentes-metodos/  Las tres voces y los niveles · El mapa y el riel de fases · La puerta en la HOME (S20, «Métodos»)
    ├─ componentes-casos/    Caso de estudio (2026-09-24, ADR-009 enmendado)
    └─ componentes-mantenimiento/  Página de mantenimiento (2026-09-24)
 ```
@@ -52,7 +53,8 @@ design-sync/` dice exactamente qué subir.
 
 ## Estado
 
-**Sin publicar todavía.** `projectId` está en `null` (ver `project.json`). El bundle nace en el
+**Sin publicar todavía.** `projectId` está en `null` (ver `project.json`). En el S20 (2026-10-23, cierre del H-2) el bundle se puso al día con «Métodos» y
+quedó listo; **publicarlo lo hace el dueño cuando invoque `/design-sync`**: este sprint no publicó nada. El bundle nace en el
 Sprint 005 —primero del ciclo H2— para que el cierre de ciclo sea un delta pequeño y no una
 reconstrucción. Esa es justamente la lección que originó la regla: en el cierre H1 de otra app el
 bundle vivió en un scratchpad efímero y al retomarlo quedaban 4 de 13 archivos.
@@ -66,3 +68,7 @@ los componentes de S1–S4 que `design-system.md` describe en prosa pero aún no
 input/textarea, metric tile, glifo ◆, primitivas de motion (`fadeInUp`, `blurIn`, `maskReveal`,
 `scaleInBlur`, `Counter`, `TimelineTrack` y, desde post-S8, `fadeInSlow`, `liftIn` y `CifraQueLlama`)
 y los bloques del chat y de la votación.
+
+Desde el S20 cubre también **«Métodos»** (las tres voces con su símbolo, palabra y filete, los cinco niveles, el mapa SVG con su leyenda de formas, el
+riel de fases y la puerta de la HOME); lo que `design-system.md` describe de esa sección y el bundle muestra es lo mismo. Siguen sin tarjeta propia
+los bloques de texto de una publicación (tarjetas de decisión, de evidencia y de límites) porque son la tarjeta canon con otro dato.

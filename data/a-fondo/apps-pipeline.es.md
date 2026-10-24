@@ -2,7 +2,7 @@
 slug: apps-pipeline
 codigo: AF-12
 titulo: "Las apps que estoy construyendo en público"
-resumen: "El pipeline AI-APPs: diez aplicaciones hermanas más CV Viva, 15 agentes, 7 investigaciones y 6 tableros —38 piezas— construidos con dos casas, un agente de fábrica, cuatro jobs de CI, un contrato de ficha desde Zod, costo real de US$0 al mes y dos reglas: código primero y todo control se demuestra fallando."
+resumen: "El pipeline AI-APPs: diez aplicaciones hermanas, 15 agentes, 7 investigaciones y 6 tableros —38 piezas, sin contar este sitio— construidos con dos casas, un agente de fábrica, cuatro jobs de CI, un contrato de ficha desde Zod, costo real de US$0 al mes y dos reglas: código primero y todo control se demuestra fallando."
 cuando_usar: "Úsalo cuando pregunten qué ha construido por su cuenta fuera del trabajo, cuántas aplicaciones ha publicado, si tiene código público, cómo es su pipeline de construcción con Next.js, pruebas automatizadas y CI, y qué demuestra cada una de las diez apps de la vitrina."
 estado: aprobado
 ancla: "#vitrina"
@@ -52,7 +52,7 @@ CV Viva incluida). -->
 
 <!-- seccion: por-que-en-publico -->
 
-Un currículum afirma; una pieza publicada demuestra. Esa es la razón principal por la que construyo en público: diez aplicaciones hermanas, más este sitio, y 38 piezas en total, todas fuera de mi trabajo y todas con su repositorio.
+Un currículum afirma; una pieza publicada demuestra. Esa es la razón principal por la que construyo en público: 38 piezas en total, sin contar este sitio —diez de ellas aplicaciones hermanas—, todas fuera de mi trabajo y todas con su repositorio.
 
 Mis proyectos propios de IA generativa no salieron de la nada. Desde abril de 2024, en paralelo a mis empleos, planeo y diseño estas aplicaciones y estos agentes —su concepción y su arquitectura—, y durante años los intenté en distintas plataformas antes de construirlos, desde 2026, con el pipeline que hoy los produce. Es un hecho declarado, sin un artefacto de 2024 que lo pruebe: lo que sí puede examinarse son las piezas, y cada una conserva su propia fecha —Dash Agent, por ejemplo, se concibió y diseñó en 2026—.
 
@@ -230,7 +230,7 @@ Lo coordina la Fábrica de AI-APPs, un agente sellado el 2 de julio de 2026 que 
 
 La Fábrica declara tres límites, y prefiero escribirlos a esconderlos: no escribe código de producción —eso ocurre en el repositorio de cada app, jamás en la planeadora—; las fases de lanzamiento y de operación siguen sin validarse en una corrida real, son método escrito y no experiencia; y no hay librerías compartidas vivas entre apps, el reúso viaja estampado en el kit. Su retorno solo cuenta la coordinación eliminada —una estimación de 108 horas al año, con sus supuestos declarados—; el valor comercial del portafolio queda como opción no cuantificada.
 
-Este sitio lleva diecinueve sprints cerrados así y 29 decisiones de arquitectura registradas en su repositorio. Cada cambio pasa por cuatro jobs de integración continua —calidad, integración contra una base de datos real, pruebas de extremo a extremo con accesibilidad y Lighthouse con presupuesto de rendimiento— y por el barrido de secretos. La infraestructura que lo sostiene está dibujada en un blueprint con su costo real, US$0 al mes, y con su punto único de falla declarado: la cuenta de GitHub, que es el inicio de sesión del hosting y de la base de datos, mitigado con doble factor. Y si la base de datos cae, la votación se declara no disponible; si el proveedor de IA cae, el chat pasa a búsqueda local: ninguno de los dos tumba el sitio.
+Este sitio lleva veinte sprints cerrados así y 29 decisiones de arquitectura registradas en su repositorio. Cada cambio pasa por cuatro jobs de integración continua —calidad, integración contra una base de datos real, pruebas de extremo a extremo con accesibilidad y Lighthouse con presupuesto de rendimiento— y por el barrido de secretos. La infraestructura que lo sostiene está dibujada en un blueprint con su costo real, US$0 al mes, y con su punto único de falla declarado: la cuenta de GitHub, que es el inicio de sesión del hosting y de la base de datos, mitigado con doble factor. Y si la base de datos cae, la votación se declara no disponible; si el proveedor de IA cae, el chat pasa a búsqueda local: ninguno de los dos tumba el sitio.
 
 ## Dos aprobaciones escritas y responsables humanos explícitos
 

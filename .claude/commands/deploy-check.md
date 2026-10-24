@@ -128,8 +128,8 @@ Corre cada verificación en orden y reporta estado:
 - [ ] Si hay decisión arquitectónica: ADR en `decisions/` de este repo.
 
 ### 10. Cierre del sprint (las dos casas)
-- [ ] Bitácora `sprints/SPRINT_NNN-implementation-log.md` al día en este repo.
-- [ ] Si este merge cierra el sprint: `sprints/SPRINT_NNN-summary.md` generado (plantilla en CLAUDE.md) — es lo que la planeadora lee para la retrospectiva.
+- [ ] **Cierre ejecutivo** `sprints/SPRINT_NNN-cierre.md` (≤ 40 líneas, frontmatter `sprint · app · hito · opened · closed · branch · pr`) con la salida de `node scripts/horas-sprint.mjs` pegada y la auditoría como una sección suya: reemplaza a la bitácora, al summary y a la auditoría como archivos aparte (flujo v2, CLAUDE.md § «Cierre ejecutivo»). La planeadora lo lee en `/cierre-sprint`.
+- [ ] Las demos en rojo del sprint constan en el cierre con **archivo · mutación · a quién nombró** (`scripts/demo-rojo.sh` no se edita).
 - [ ] (Si aplicó IA embebida) checklist del skill `ia-embebida` completo.
 
 ### 11. Los checks del PR — ¿EJECUTARON, o solo no están en rojo? (kit v1.16.0)
@@ -151,7 +151,7 @@ Corre cada verificación en orden y reporta estado:
       ```
       **`skipped`, `cancelled`, `neutral` y ausente NO cuentan como verde.** Si alguno sale así,
       repórtalo **nombrando de qué `needs:` colgaba** y no cierres hasta que ejecute.
-- [ ] **Si un job corrió por PRIMERA VEZ en este PR, dilo en el summary** — no hay histórico con
+- [ ] **Si un job corrió por PRIMERA VEZ en este PR, dilo en el cierre ejecutivo** — no hay histórico con
       el que comparar, así que **no puede afirmarse ni regresión ni no-regresión**, y eso se
       escribe tal cual en vez de darlo por bueno.
 

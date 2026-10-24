@@ -62,8 +62,8 @@
 <body>
 <main>
   <h1>CV Viva — Blueprint de infraestructura <span class="badge">as-built</span></h1>
-  <p class="meta">Ciclo: <strong>H1 (MVP funcional)</strong> · Cerrado: <strong>2026-07-20</strong> · Sprints del ciclo: <strong>S1–S4</strong> · Última actualización: <strong>2026-09-26</strong></p>
-  <p class="nota"><strong>Mapa real de TODA la infraestructura que sostiene CV Viva</strong>, escrito con lo DESPLEGADO de verdad al cerrar el ciclo H1. Vivo y acumulativo: el próximo ciclo lo actualiza (no lo reescribe) y declara sus cambios en el historial. Nunca contiene secretos ni URLs privadas de administración — solo qué gestor los guarda.</p>
+  <p class="meta">Ciclo: <strong>H-2 (producto completo)</strong> · H-1 cerrado: <strong>2026-07-20</strong> (S1–S4) · Sprints del ciclo: <strong>S5–S20</strong> · Última actualización: <strong>2026-10-23</strong> (S20; el H-2 se cierra con el ensayo general del dueño, después del merge)</p>
+  <p class="nota"><strong>Mapa real de TODA la infraestructura que sostiene CV Viva</strong>, escrito con lo DESPLEGADO de verdad: la versión inicial es del cierre del H-1 y la de hoy, del cierre del H-2 (S20). Vivo y acumulativo: el próximo ciclo lo actualiza (no lo reescribe) y declara sus cambios en el historial. Nunca contiene secretos ni URLs privadas de administración — solo qué gestor los guarda.</p>
 
   <h2>Diagrama</h2>
   <div class="diagrama">
@@ -82,16 +82,16 @@
     <!-- Hosting (Vercel) -->
     <rect class="caja caja-principal" x="290" y="150" width="240" height="116" rx="10"/>
     <text class="titulo-caja" x="410" y="180" text-anchor="middle">Vercel Hobby</text>
-    <text class="detalle-caja" x="410" y="200" text-anchor="middle">Next.js 16 · SSG + route handlers</text>
+    <text class="detalle-caja" x="410" y="200" text-anchor="middle">Next.js 16.4.2 · Node 22.x · SSG</text>
     <text class="detalle-caja" x="410" y="217" text-anchor="middle">prod desde main · preview por PR</text>
     <text class="detalle-caja" x="410" y="234" text-anchor="middle">dominio propio · DNS Cloudflare (sin proxy)</text>
 
     <!-- Base de datos (Supabase) -->
     <rect class="caja caja-bd" x="640" y="40" width="290" height="104" rx="10"/>
-    <text class="titulo-caja" x="785" y="68" text-anchor="middle">Supabase (free) · S4</text>
-    <text class="detalle-caja" x="785" y="86" text-anchor="middle">Postgres · tabla votes · RLS ON</text>
-    <text class="detalle-caja" x="785" y="103" text-anchor="middle">RPC emitir_voto / conteo_votos</text>
-    <text class="detalle-caja" x="785" y="120" text-anchor="middle">anon: solo EXECUTE · cero PII</text>
+    <text class="titulo-caja" x="785" y="68" text-anchor="middle">Supabase (free)</text>
+    <text class="detalle-caja" x="785" y="86" text-anchor="middle">Postgres · RLS ON sin políticas</text>
+    <text class="detalle-caja" x="785" y="103" text-anchor="middle">votes (cero PII) · chat_registro · chat_cupo</text>
+    <text class="detalle-caja" x="785" y="120" text-anchor="middle">anon: solo EXECUTE · RPC SECURITY DEFINER</text>
 
     <!-- Servicios externos -->
     <rect class="caja" x="640" y="180" width="290" height="100" rx="10"/>
@@ -104,7 +104,7 @@
     <rect class="caja" x="290" y="330" width="240" height="86" rx="10"/>
     <text class="titulo-caja" x="410" y="358" text-anchor="middle">GitHub (público)</text>
     <text class="detalle-caja" x="410" y="376" text-anchor="middle">ruleset main-protegida</text>
-    <text class="detalle-caja" x="410" y="393" text-anchor="middle">CI: quality·e2e·integration·lighthouse</text>
+    <text class="detalle-caja" x="410" y="393" text-anchor="middle">CI: quality·e2e·integration·lighthouse·un-pr-vivo</text>
 
     <!-- El correo de hola@ (real desde 2026-09-26; antes era la caja «futuro»). Entra por
          Cloudflare y, desde el mismo día, también sale: Gmail «Enviar como» por Resend -->
@@ -114,7 +114,7 @@
     <text class="detalle-caja" x="110" y="381" text-anchor="middle">sale: Gmail → SMTP de Resend</text>
 
     <!-- Futuro -->
-    <text class="detalle-caja detalle-futuro" x="110" y="424" text-anchor="middle">(futuro · H2) buzón (C4, PWA…)</text>
+    <text class="detalle-caja detalle-futuro" x="110" y="424" text-anchor="middle">(descartado en el H-2) buzón: C4, PWA…</text>
 
     <!-- Flechas -->
     <path class="flecha" d="M 190 208 L 285 208"/>
@@ -136,16 +136,16 @@
   <table>
     <thead><tr><th>Pieza</th><th>Servicio + plan</th><th>Detalle operativo</th></tr></thead>
     <tbody>
-      <tr><td>Código / versionamiento</td><td>GitHub <code>mauriciorincon-ai/app-hoja-de-vida</code> (público)</td><td>ruleset <code>main-protegida</code>; checks requeridos: quality · e2e · integration · lighthouse</td></tr>
-      <tr><td>CI/CD</td><td>GitHub Actions (4 jobs)</td><td>quality (typecheck·lint·test·build·audit) · e2e (Playwright+axe) · integration (Postgres real) · lighthouse (perf-budget)</td></tr>
-      <tr><td>Hosting / publicación</td><td>Vercel Hobby</td><td>Next.js 16 SSG + route handlers; prod desde <code>main</code>, preview por PR; uso NO comercial (cláusula Hobby verificada, ADR-004). <strong>Modo mantenimiento</strong> (2026-09-24): <code>MANTENIMIENTO=on</code> en Production + Redeploy → el proxy sirve una sola página con el CV en PDF y el contacto, con 503 + <code>Retry-After</code>; solo <code>on</code> lo enciende</td></tr>
+      <tr><td>Código / versionamiento</td><td>GitHub <code>mauriciorincon-ai/app-hoja-de-vida</code> (público)</td><td>ruleset <code>main-protegida</code>; <strong>cinco checks requeridos</strong>, cada uno con su conclusión propia: quality · e2e · integration · lighthouse · un-pr-vivo (el último, desde el S10: un solo PR vivo por app). Merge squash que hace el dueño; nunca push directo a <code>main</code></td></tr>
+      <tr><td>CI/CD</td><td>GitHub Actions (cinco jobs en dos workflows)</td><td><code>ci.yml</code>: quality (peers · ningún paquete por debajo de <code>main</code> · typecheck · lint · test con cobertura · build · <code>pnpm audit --audit-level high</code> · cero enlaces del árbol y del homepage) · e2e (Playwright en Chromium, móvil y WebKit, con axe) · integration (Postgres real) · lighthouse (perf-budget, mediana de 3). <code>un-pr-vivo.yml</code>: falla al segundo PR vivo sin «complementa #N». Node sale de <code>.nvmrc</code> (<code>node-version-file</code>); un gate (<code>node-declarado</code>) lee todos los workflows. Los avisos de seguridad pueden aparecer después de un PR verde: el CI de <code>main</code> se mira tras cada merge</td></tr>
+      <tr><td>Hosting / publicación</td><td>Vercel Hobby</td><td>Next.js 16.4.2 (fijada) con React 19 · SSG + route handlers · <code>engines.node</code> = <code>22.x</code>: Vercel despliega la última 22.x con ese rango (documentación «Supported Node.js versions», Vercel, actualizada el 2026-02-27); el registro del build se confirma en el ensayo · prod desde <code>main</code>, preview por PR; uso NO comercial (cláusula Hobby verificada, ADR-004). <strong>Modo mantenimiento</strong> (2026-09-24): <code>MANTENIMIENTO=on</code> en Production + Redeploy → el proxy sirve una sola página con el CV en PDF y el contacto, con 503 + <code>Retry-After</code>; solo <code>on</code> lo enciende</td></tr>
       <tr><td>Base de datos</td><td><strong>Supabase free</strong> (nueva en S4, ADR-011)</td><td>Postgres; tabla <code>votes</code> (app·feature·created_at, <strong>cero PII</strong>); RLS ON sin políticas; RPC SECURITY DEFINER; anon solo EXECUTE. proyecto propio del org (desde 2026-09-23; antes no existía en la nube y la votación se declaraba «no disponible»); <strong>desde ADR-024, tablas <code>chat_codigos</code> y <code>chat_registro</code> (y desde el 2026-09-26 <code>chat_bloqueados</code>, con la RPC <code>chat_cupo</code>) (nombre, correo, pregunta, respuesta — datos personales con aviso Ley 1581), RLS ON sin políticas, tres RPC SECURITY DEFINER; lectura solo con service_role</strong></td></tr>
       <tr><td>Auth</td><td><strong>sesión firmada por correo verificado</strong> (ADR-024, sin proveedor)</td><td>el chat pide nombre y correo, manda un código de 6 dígitos (Resend), y emite una cookie HMAC httpOnly de 30 días; sin cuentas ni contraseñas. La votación sigue anónima</td></tr>
-      <tr><td>Almacenamiento de archivos</td><td>no aplica</td><td>el PDF ATS se genera en build y se sirve estático desde <code>public/</code></td></tr>
+      <tr><td>Almacenamiento de archivos</td><td>no aplica</td><td>el PDF ATS se genera en build y se sirve estático desde <code>public/</code>; las capturas de la vitrina viven en <code>public/piezas/</code> y los índices del chat (<code>chat-index.es.json</code> y <code>.en.json</code>) se generan en cada build</td></tr>
       <tr><td>Email / notificaciones</td><td>Resend (free)</td><td>formulario de contacto → correo al dueño; <strong>código del chat → correo al visitante</strong> (dominio propio <strong>verificado en Resend</strong> desde 2026-09-23 — DKIM TXT + dos CNAME en DNS only; remitente <code>SOLICITUDES_FROM_EMAIL</code>); sin key la app simula el envío (solo logs). <strong>Desde 2026-09-26, un tercer uso fuera de la app: las respuestas del dueño como <code>hola@</code></strong> (Gmail «Enviar como» por el SMTP de Resend, con una clave propia solo de envío). <strong>Los tres comparten el cupo gratis: 100 correos/día · 3.000/mes.</strong> Si se agota, el formulario no avisa al dueño y el código del chat no llega hasta el día siguiente</td></tr>
       <tr><td>Correo de <code>hola@</code></td><td><strong>Cloudflare Email Routing</strong> (free, desde 2026-09-26) para entrar; <strong>Gmail + SMTP de Resend</strong> para salir</td><td>una sola dirección, <code>hola@</code> del dominio, reenviada al Gmail público del dueño (destino verificado). Tres MX y un SPF en la raíz del dominio, más la firma DKIM de Cloudflare (<code>cf2024-1._domainkey</code>); conviven con los registros de Resend (<code>send</code>, <code>resend._domainkey</code>) y con el CNAME aplanado del sitio. <em>Catch-all</em> apagado: cualquier otra dirección se rechaza. <strong>Responde como <code>hola@</code> desde 2026-09-26:</strong> Gmail «Enviar como», con salida por el SMTP de Resend (fila de arriba), sin servidor de correo propio. DMARC publicado en modo observación (<code>p=none</code>). El sitio, el PDF y el chat publican las dos direcciones; la del dominio se arma en el build desde <code>NEXT_PUBLIC_SITE_URL</code> (en el repo solo vive la parte local, <code>emailDelDominio</code>)</td></tr>
-      <tr><td>IA embebida</td><td>Groq (free) — adapter conmutable</td><td>chat RAG (S3, ADR-003); índice MiniSearch build-time; fallback local sin red; guardrails + breaker + kill-switch; <strong>cupo por persona</strong> (20 preguntas cada 24 h, contadas en Supabase, y lista de correos bloqueados; ADR-024, enmienda 2026-09-26); conmutable a Gemini/Azure/Claude/self-host por env</td></tr>
-      <tr><td>Observabilidad</td><td>Pino · Sentry · Vercel Analytics</td><td>logs estructurados en los route handlers (request-id, latencia); Sentry client-only inerte sin DSN; eventos de producto en Analytics</td></tr>
+      <tr><td>IA embebida</td><td>Groq (free) — adapter conmutable</td><td>chat RAG (S3, ADR-003; modelo por defecto <code>openai/gpt-oss-120b</code>); índice léxico MiniSearch generado en build con el currículum, las apps, el a-fondo aprobado, las fichas de la vitrina y, desde el S10, las publicaciones de «Métodos» (un fragmento por bloque, peso 0,5; ver la sección de abajo); fallback local sin red; guardrails + breaker + kill-switch; <strong>cupo por persona</strong> (20 preguntas cada 24 h, contadas en Supabase, y lista de correos bloqueados; ADR-024, enmienda 2026-09-26); conmutable a Gemini/Azure/Claude/self-host por env</td></tr>
+      <tr><td>Observabilidad</td><td>Pino · Sentry · Vercel Analytics</td><td>logs estructurados en los route handlers (request-id, latencia); Sentry solo metadatos e inerte sin DSN; eventos de producto en Analytics</td></tr>
       <tr><td>Crons / keep-alives</td><td>ninguno</td><td>no hay procesos programados; todo es request-driven o build-time</td></tr>
       <tr><td>Secretos</td><td><code>.env.local</code> (gitignored) + Vercel env vars</td><td>doble hook gitleaks (pre-commit + PreToolUse); jamás en el repo</td></tr>
       <tr><td>Dominio</td><td><strong>el sitio vive en el dominio propio desde 2026-09-24</strong> — la URL exacta NO se publica aquí (regla 16)</td><td>Cloudflare Registrar (auto-renew, vence 2027-09-22) y su DNS: dos CNAME al destino del proyecto en Vercel (el principal con <em>CNAME flattening</em>), <strong>DNS only, sin proxy</strong> — Vercel desaconseja un proxy delante, y los límites por IP del chat y los formularios necesitan ver la IP real del visitante. Dominio principal sin <code>www</code>; el <code>www</code> redirige con 308. Certificado Let's Encrypt emitido y renovado por Vercel. <code>NEXT_PUBLIC_SITE_URL</code> en Production (tipo Config, no es secreto) alimenta canonical, hreflang, sitemap y el PDF. El subdominio del proveedor sigue respondiendo</td></tr>
@@ -155,11 +155,48 @@
   </table>
   </div>
 
+  <h2>Rutas desplegadas (as-built H-2)</h2>
+  <p class="nota">Todas las páginas son estáticas (SSG) en <code>/es</code> y <code>/en</code>, con hreflang y 404 en los dos idiomas; el contenido llega íntegro en el HTML sin JavaScript (gate ATS). Lo dinámico es solo la API de abajo.</p>
+  <div class="tabla-scroll">
+  <table>
+    <thead><tr><th>Ruta</th><th>Qué sirve</th><th>De dónde sale</th></tr></thead>
+    <tbody>
+      <tr><td><code>/[locale]</code></td><td>HOME editorial: perfil, trayectoria, logros, Vitrina, la puerta a «Métodos», estudios, certificaciones, skills y contacto</td><td><code>data/cv.*.yaml</code>, <code>data/apps.yaml</code>; la puerta se mide de <code>data/metodo/</code> sin escribir un total</td></tr>
+      <tr><td><code>/[locale]/cv</code> · <code>/proyectos/[slug]</code></td><td>El CV completo (más el PDF ATS) y los casos de estudio</td><td><code>data/cv.*.yaml</code>; el PDF se genera en build</td></tr>
+      <tr><td><code>/[locale]/apps/[slug]</code></td><td>La brochure animada de una aplicación propia (ADR-012): la ganan solo las apps que declaran <code>brochure</code></td><td><code>data/apps.yaml</code>, una plantilla única guiada por datos</td></tr>
+      <tr><td><code>/[locale]/vitrina</code> · <code>/vitrina/apps</code> · <code>/vitrina/apps/[app]</code> (+ <code>/detalle</code>, <code>/simulacion</code>) · <code>/vitrina/[categoria]</code> · <code>/vitrina/[categoria]/[pieza]</code></td><td>El portal de lo que se construye: apps en dos categorías (profesionales primero), agentes, investigaciones y tableros, cada pieza con su ficha técnica</td><td><code>content/**</code> (exports y fichas de otras casas, por copia) más <code>data/vitrina.yaml</code> y <code>data/categorias-apps.yaml</code>; el conteo de cada frente se mide, nunca se escribe</td></tr>
+      <tr><td><code>/[locale]/metodos</code> · <code>/metodos/[slug]</code></td><td>«Métodos»: las publicaciones largas en tercera persona, una por tema de método</td><td><code>data/metodo/&lt;slug&gt;.yaml</code>; <code>/metodo</code> y <code>/es/metodo/…</code> redirigen con un <strong>301</strong> desde <code>src/proxy.ts</code></td></tr>
+      <tr><td><code>/[locale]/solicitud-enviada</code> · <code>/mantenimiento</code> · <code>/[...rest]</code></td><td>Confirmación del formulario, página de mantenimiento (503) y el 404 de cada idioma</td><td>mensajes de <code>messages/{es,en}.json</code></td></tr>
+      <tr><td><code>/robots.txt</code> · <code>/sitemap.xml</code></td><td>Generados; la fecha de cada publicación de «Métodos» es la de su revisión (bloque 10), no la del build</td><td><code>src/app/robots.ts</code> · <code>src/app/sitemap.ts</code></td></tr>
+      <tr><td><code>/api/chat</code> (+ <code>/registro</code> · <code>/verificar</code> · <code>/sesion</code> · <code>/log</code> · <code>/problema</code>)</td><td>El chat: nombre y correo → código por email → cookie firmada de 30 días; la respuesta con guardrails, cupo y degradación a búsqueda local</td><td>Groq conmutable por env · Supabase (registro y cupo) · Resend</td></tr>
+      <tr><td><code>/api/roadmap/votar</code> · <code>/roadmap/votos</code> · <code>/api/propuestas</code> · <code>/api/solicitar-acceso</code></td><td>La votación anónima del roadmap, las propuestas de funcionalidad y la lista de espera (solo en apps)</td><td>Supabase (RPC) · Resend</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2>«Métodos» y el índice del chat</h2>
+  <div class="tabla-scroll">
+  <table>
+    <thead><tr><th>Pieza</th><th>Qué es</th><th>Cómo se vigila</th></tr></thead>
+    <tbody>
+      <tr><td>Publicación</td><td>Un dato con esquema Zod de <strong>diez bloques fijos</strong> (el problema · mapa · fases · decisiones · lo innovador en 2026 · modos de falla · métricas y controles · evidencia en proyectos · límites y alcance · fuentes con fecha de revisión), anclas <code>#bloque-n</code>, un solo renderizador, mapa SVG propio con alternativa textual y hoja de impresión</td><td>El build falla con archivo y campo si falta un bloque o una fuente sin fecha</td></tr>
+      <tr><td>Las tres voces</td><td>● Evidencia (lo hecho en un proyecto con nombre, solo corpus) · ◆ Estado del campo (fuente con título, editor, fecha y enlace) · ▲ Criterio (posición del autor, rotulada como tal); símbolo + palabra + color</td><td>Gates de voz impersonal, de cifras contra el corpus y de cifras aproximadas de la Fundación CTIC</td></tr>
+      <tr><td>Los cinco niveles</td><td>Uso real · Prototipo · En estudio · Exploración · En construcción: el nivel que el corpus le da a una herramienta; nada sube de nivel</td><td>Esquema (<code>NIVELES</code>) y el gate del nivel «En construcción»</td></tr>
+      <tr><td>Índice del chat</td><td><code>scripts/metodo-al-indice.mjs</code> convierte cada publicación en un fragmento por bloque con ancla <code>/metodos/&lt;slug&gt;#bloque-n</code> y <strong>peso 0,5</strong> frente a la ficha o el documento a fondo que contesta la misma pregunta</td><td>Toda cita navega a un destino del catálogo (<code>destinos.mjs</code>; el build falla si no existe); el banco de preguntas (ES y EN, mismas filas) mide el margen real de cada fila</td></tr>
+      <tr><td>La puerta de la HOME</td><td>Una sección entre la Vitrina y los Estudios que lista las publicaciones y lleva a <code>/metodos</code></td><td>Sin total escrito: lo mide un gate contra <code>data/metodo/</code></td></tr>
+    </tbody>
+  </table>
+  </div>
+
   <h2>Historial del blueprint</h2>
   <div class="tabla-scroll">
   <table>
     <thead><tr><th>Fecha</th><th>Ciclo</th><th>Cambios</th></tr></thead>
     <tbody>
+      <tr><td>2026-10-23</td><td>H-2 (S20)</td><td><strong>Cierre del H-2:</strong> el blueprint se pone al día con lo desplegado. Nuevas secciones de rutas y de «Métodos»; Next.js 16.4.2 y Node 22.x declarados; los cinco checks requeridos; el buzón pasa de «futuro» a «descartado en el H-2». Sin servicio nuevo ni costo (≈US$1/mes); el punto único de falla no cambia.</td></tr>
+      <tr><td>2026-10-23</td><td>H-2 (S19)</td><td><strong>Avisos de seguridad:</strong> Next.js 16.4.2, <code>@sentry/nextjs</code>, <code>zod</code>, <code>undici</code> y <code>fast-uri</code> parchados tras once avisos que pusieron <code>main</code> en rojo; ningún servicio cambia.</td></tr>
+      <tr><td>2026-10-18</td><td>H-2 (S12–S14)</td><td><strong>Node declarado y ruta nueva:</strong> <code>engines.node</code> = <code>22.x</code> (lo lee Vercel, que despliega la última 22.x) y <code>.nvmrc</code> (lo lee la CI, que fija una versión exacta; no son la misma); «Mi método» pasa a «Métodos» en <code>/metodos</code> con un 301 desde <code>src/proxy.ts</code>.</td></tr>
+      <tr><td>2026-10-17</td><td>H-2 (S10)</td><td><strong>«Métodos» y el kit v2.3.0:</strong> las publicaciones entran al índice del chat por bloque (peso 0,5) y la constitución se adopta del kit; <code>un-pr-vivo</code> pasa a check requerido.</td></tr>
       <tr><td>2026-09-26</td><td>H2 (fuera de sprint)</td><td><strong>Responder como <code>hola@</code>:</strong> el dueño configuró en su Gmail «Enviar como» <code>hola@</code>, con salida por el SMTP de Resend (clave propia, solo de envío). Resend pasa a tres usos que comparten el cupo gratis (100/día · 3.000/mes); la caja del diagrama pasa a «Correo de hola@», con entrada y salida. DMARC en <code>p=none</code>. Sin servicio nuevo ni costo; el punto único de falla no cambia.</td></tr>
       <tr><td>2026-09-26</td><td>H2 (fuera de sprint)</td><td><strong>El cupo del chat:</strong> tabla <code>chat_bloqueados</code> y RPC <code>chat_cupo</code> en Supabase (RLS ON sin políticas, anon solo EXECUTE). Una persona ya no puede gastarse la cuota diaria de Groq de todos: 20 preguntas cada 24 h por correo (<code>CHAT_TOPE_DIARIO</code>), contadas en el registro. Sin servicio nuevo ni costo.</td></tr>
       <tr><td>2026-09-24</td><td>H2 (fuera de sprint)</td><td><strong>Modo mantenimiento:</strong> una variable de Production (<code>MANTENIMIENTO</code>) + Redeploy pone todo el sitio en una página con 503 temporal; sin servicio nuevo ni costo.</td></tr>

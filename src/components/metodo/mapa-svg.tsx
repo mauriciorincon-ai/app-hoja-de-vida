@@ -32,7 +32,12 @@ const M = 16; // margen del lienzo
 
 type Nodo = BloqueDe<2>["nodos"][number];
 
-/** Parte una etiqueta en a lo sumo dos líneas, por palabras. */
+/**
+ * Parte una etiqueta en a lo sumo dos líneas, por palabras. No recorta: la 2.ª línea no tiene
+ * tope aquí porque ninguna palabra se pierde (la lectura del mapa y las aristas repiten el
+ * nombre entero); el tope vive en `metodo-infografia.test.tsx`, que falla si el nodo de una
+ * pieza no cabe en su caja.
+ */
 export function partirEtiqueta(texto: string, max = 17): string[] {
   const palabras = texto.split(/\s+/).filter(Boolean);
   const lineas: string[] = [];

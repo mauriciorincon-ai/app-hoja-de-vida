@@ -2,7 +2,7 @@
 slug: apps-pipeline
 codigo: AF-12
 titulo: "The apps I am building in public"
-resumen: "The AI-APPs pipeline: ten sister applications plus CV Viva, 15 agents, 7 research lines and 6 dashboards —38 pieces— built with two houses, a factory agent, four CI jobs, a sheet contract generated from Zod, a real cost of US$0 a month and two rules: code first, and every control is demonstrated by failing."
+resumen: "The AI-APPs pipeline: ten sister applications, 15 agents, 7 research lines and 6 dashboards —38 pieces, not counting this site— built with two houses, a factory agent, four CI jobs, a sheet contract generated from Zod, a real cost of US$0 a month and two rules: code first, and every control is demonstrated by failing."
 cuando_usar: "Use this when they ask what he has built on his own outside of work, how many applications he has published, whether he has public code, how his build pipeline works with Next.js, automated tests and CI, and what each of the ten showcase apps demonstrates."
 estado: aprobado
 ancla: "#vitrina"
@@ -52,7 +52,7 @@ included). -->
 
 <!-- seccion: por-que-en-publico -->
 
-A résumé asserts; a published piece demonstrates. That is the main reason I build in public: ten sister applications, plus this site, and 38 pieces in total, all outside my job and all with their repository.
+A résumé asserts; a published piece demonstrates. That is the main reason I build in public: 38 pieces in total, not counting this site —ten of them sister applications—, all outside my job and all with their repository.
 
 My own generative AI projects did not come out of nowhere. Since April 2024, in parallel to my jobs, I have planned and designed these applications and these agents —their conception and their architecture—, and for years I tried them out on different platforms before building them, from 2026, with the pipeline that produces them today. It is a declared fact, with no 2024 artifact to prove it: what can be examined are the pieces, and each one keeps its own date —Dash Agent, for example, was conceived and designed in 2026—.
 
@@ -230,7 +230,7 @@ It is coordinated by the AI-APPs Factory, an agent sealed on July 2, 2026 that i
 
 The Factory declares three limits, and I prefer writing them down to hiding them: it does not write production code —that happens in each app's repository, never in the planning house—; the launch and operation phases remain unvalidated in a real run, they are written method and not experience; and there are no live shared libraries between apps, reuse travels stamped in the kit. Its return only counts the coordination eliminated —an estimate of 108 hours a year, with its assumptions declared—; the commercial value of the portfolio remains an unquantified option.
 
-This site carries nineteen sprints closed this way and 29 architecture decisions recorded in its repository. Every change goes through four continuous integration jobs —quality, integration against a real database, end-to-end tests with accessibility, and Lighthouse with a performance budget— and through the secrets sweep. The infrastructure that supports it is drawn in a blueprint with its real cost, US$0 a month, and with its single point of failure declared: the GitHub account, which is the login for the hosting and the database, mitigated with two-factor authentication. And if the database goes down, voting is declared unavailable; if the AI provider goes down, the chat switches to local search: neither of the two brings down the site.
+This site carries twenty sprints closed this way and 29 architecture decisions recorded in its repository. Every change goes through four continuous integration jobs —quality, integration against a real database, end-to-end tests with accessibility, and Lighthouse with a performance budget— and through the secrets sweep. The infrastructure that supports it is drawn in a blueprint with its real cost, US$0 a month, and with its single point of failure declared: the GitHub account, which is the login for the hosting and the database, mitigated with two-factor authentication. And if the database goes down, voting is declared unavailable; if the AI provider goes down, the chat switches to local search: neither of the two brings down the site.
 
 ## Two written approvals and explicit human owners
 

@@ -3,6 +3,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import { InfografiaVista, fechaLarga } from "@/components/metodo/infografia";
 import { MapaSvg, partirEtiqueta } from "@/components/metodo/mapa-svg";
 import { RielDeFases } from "@/components/metodo/riel-de-fases";
+import { leerPiezasDeDisco } from "@/lib/metodo/loader";
 import { bloqueDe, BLOQUES, NIVELES, TIPOS_NODO } from "@/lib/metodo/schema";
 import es from "../../messages/es.json";
 import en from "../../messages/en.json";
@@ -187,6 +188,36 @@ describe("MapaSvg · texto real, alternativa textual, todo color con una palabra
     expect(larga.length).toBeLessThanOrEqual(2);
     expect(larga.join(" ")).toBe("Una etiqueta bastante más larga que cabe");
   });
+});
+
+// S10-M3: `partirEtiqueta` deja la 2.ª línea sin tope (no pierde palabras: la «Lectura del mapa»
+// y las aristas ya repiten el nombre entero), así que lo que impide que una etiqueta se salga de su
+// nodo es ESTE gate sobre los datos: dos líneas y ninguna más ancha que la más ancha que ya se ve
+// entera en las capturas (20 caracteres). Una etiqueta nueva que no quepa falla nombrando pieza y nodo.
+const LINEA_MAXIMA_DEL_NODO = 22;
+
+describe("MapaSvg · ninguna etiqueta de nodo desborda su caja (todas las piezas, ES y EN)", () => {
+  const piezas = leerPiezasDeDisco();
+
+  it("hay piezas en disco (si no, esta prueba no mide nada)", () => {
+    expect(piezas.length).toBeGreaterThan(0);
+  });
+
+  for (const p of piezas) {
+    for (const idioma of ["es", "en"] as const) {
+      it(`${p.slug} (${idioma}): cada etiqueta cabe en dos líneas de ≤ ${LINEA_MAXIMA_DEL_NODO} caracteres`, () => {
+        const mapa = bloqueDe(p, 2);
+        const largas = mapa.nodos
+          .map((nodo) => ({ n: nodo.n, lineas: partirEtiqueta(nodo.etiqueta[idioma]) }))
+          .filter((x) => x.lineas.length > 2 || x.lineas.some((l) => l.length > LINEA_MAXIMA_DEL_NODO));
+        expect(
+          largas,
+          `${p.slug} (${idioma}): etiquetas que no caben en su nodo: ` +
+            largas.map((x) => `nodo ${x.n} «${x.lineas.join(" / ")}»`).join(" · "),
+        ).toEqual([]);
+      });
+    }
+  }
 });
 
 describe("RielDeFases · el relleno existe siempre (regla 5a)", () => {

@@ -7,6 +7,7 @@ import {
   screen,
   within,
 } from "@testing-library/react";
+import { renderToStaticMarkup } from "react-dom/server";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
   GaleriaCarrusel,
@@ -65,6 +66,7 @@ const capturas = Array.from({ length: N }, (_, i) => ({
 }));
 const etiquetas = (n: number): EtiquetasCarrusel => ({
   etiqueta: "Pantallas del producto",
+  pista: "Recorrido de las pantallas",
   anterior: "Pantalla anterior",
   siguiente: "Pantalla siguiente",
   indicadores: Array.from({ length: n }, (_, i) => `${i + 1} de ${n}`),
@@ -191,7 +193,11 @@ describe("GaleriaCarrusel — con varias capturas", () => {
     montar();
     const pista = within(screen.getByRole("region")).getAllByRole("group")[0];
     expect(pista).toHaveAttribute("tabindex", "0");
-    expect(pista).toHaveAttribute("aria-label", "Pantallas del producto");
+    // Nombre propio, distinto del de la región: un lector no repite la misma frase.
+    expect(pista).toHaveAttribute("aria-label", "Recorrido de las pantallas");
+    expect(pista.getAttribute("aria-label")).not.toBe(
+      screen.getByRole("region").getAttribute("aria-label"),
+    );
   });
 
   it("nada se mueve solo: ningún temporizador ni rotación automática", () => {
@@ -201,6 +207,39 @@ describe("GaleriaCarrusel — con varias capturas", () => {
     expect(scrollTo).not.toHaveBeenCalled();
     expect(screen.getByRole("status")).toHaveTextContent("1 de 6");
     vi.useRealTimers();
+  });
+});
+
+describe("GaleriaCarrusel — sin JavaScript (deuda B3 del S9)", () => {
+  it("el HTML del servidor trae un <noscript> que oculta los botones y el indicador", () => {
+    // Sin script los botones no mueven nada: la pista sigue siendo una tira
+    // que se desliza a mano, y los controles inertes no se ofrecen.
+    const html = renderToStaticMarkup(
+      <GaleriaCarrusel
+        capturas={capturas}
+        frente="tableros"
+        etiquetas={etiquetas(N)}
+      />,
+    );
+    expect(html).toMatch(
+      /<noscript><style>\[data-carrusel\] \[data-controles\]\{display:none\}<\/style><\/noscript>/,
+    );
+    // El bloque oculto es justo el de los botones y el indicador…
+    expect(html).toMatch(/<div data-controles=""[^>]*><button/);
+    // …y las N capturas siguen en el HTML (gate ATS).
+    expect(html.match(/data-captura="/g)).toHaveLength(N);
+  });
+
+  it("con una sola captura no hay controles que ocultar", () => {
+    const html = renderToStaticMarkup(
+      <GaleriaCarrusel
+        capturas={capturas.slice(0, 1)}
+        frente="tableros"
+        etiquetas={etiquetas(1)}
+      />,
+    );
+    expect(html).not.toContain("<noscript>");
+    expect(html).not.toContain("data-controles");
   });
 });
 

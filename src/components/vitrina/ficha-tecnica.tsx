@@ -389,6 +389,7 @@ export async function FichaTecnica({
             frente={pieza.frente}
             etiquetas={{
               etiqueta: t("carruselEtiqueta"),
+              pista: t("carruselPista"),
               anterior: t("carruselAnterior"),
               siguiente: t("carruselSiguiente"),
               indicadores: galeria.map((_, i) =>

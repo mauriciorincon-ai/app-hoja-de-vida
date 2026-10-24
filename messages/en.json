@@ -344,6 +344,7 @@
     "galeriaSub": "Real screens of the piece, as it runs. Untouched.",
     "galeriaPie": "Screen {n} of {total}",
     "carruselEtiqueta": "Screens of the product",
+    "carruselPista": "Screens, scroll sideways",
     "carruselAnterior": "Previous screen",
     "carruselSiguiente": "Next screen",
     "carruselIndicador": "{n} of {total}",

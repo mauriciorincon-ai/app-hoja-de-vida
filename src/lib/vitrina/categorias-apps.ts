@@ -15,6 +15,11 @@ import { z } from "zod";
  * chat, el manifest, los correos y el PDF dicen todos lo mismo, sin que cada
  * lugar tenga que acordarse.
  *
+ * «Categoría» tiene aquí UN sentido: Profesionales o Personales, dentro de las
+ * apps. Los cuatro «frentes» de la vitrina (apps · agentes · investigaciones ·
+ * tableros) se llaman frentes en el código y viven en `categorias.ts` y en
+ * `data/vitrina.yaml` (cuyo campo `categorias:` es el de los frentes).
+ *
  * Tres reglas, todas de «fail-safe» como el resto del contenido:
  *  · un export SIN categoría rompe el build y nombra su slug;
  *  · un slug declarado SIN export se ignora —aparece el día que llegue su

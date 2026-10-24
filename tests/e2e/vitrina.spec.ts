@@ -1276,6 +1276,12 @@ test.describe("Apertura por lectura — el patrón, no una imitación", () => {
     const t = page.locator(".tarjeta-vitrina").nth(3);
     await t.waitFor();
 
+    // La cabecera se pone ENTERA A LA VISTA y por debajo de la línea de apertura (a 0,75 de la
+    // ventana; la línea está en los dos tercios): sin esto, el clic de más abajo hace su propio
+    // scroll hasta la tarjeta, la cruza, la «apertura por lectura» la abre sola y el clic la
+    // CIERRA (aria-expanded vuelve a «false»): 2 de 30 bajo carga, S9–S19.
+    await ponerCabecera(page, 3, 0.75);
+
     const boton = t.locator(".tarjeta-boton");
     await expect(boton).toHaveAttribute("aria-expanded", "false");
 
@@ -1506,6 +1512,37 @@ test.describe("Vitrina — el carrusel de la galería (Sprint 009)", () => {
       ).toBeDisabled();
     });
   }
+
+  // S9-M3: todos los e2e de arriba mueven el estado con un CLIC (`setActivo` directo); ninguno
+  // probaba que el indicador siga al deslizado a mano, que es lo que lo mueve de verdad
+  // (`IntersectionObserver` sobre la pista). El gesto real de un pad o un dedo lo cubre la guía
+  // (⭐ k15e); aquí se desliza la pista por scroll —lo que hace el gesto—, sin pasar por los botones.
+  test("deslizar la pista a mano mueve el indicador (sin tocar un botón)", async ({
+    page,
+  }, testInfo) => {
+    test.skip(
+      testInfo.project.name === "mobile",
+      "el ancho se fija aquí, en un solo proyecto",
+    );
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto(ruta());
+    const carrusel = page.locator("[data-carrusel]");
+    await carrusel.scrollIntoViewIfNeeded();
+    const indicador = carrusel.locator("[data-indicador]");
+    await expect(indicador).toHaveText(`1 de ${N}`);
+
+    await carrusel.locator("[data-pista]").evaluate((el) => {
+      (el as HTMLElement).scrollTo({ left: el.clientWidth, behavior: "instant" });
+    });
+    await expect(indicador).toHaveText(`2 de ${N}`);
+    await expect(carrusel.locator('[data-captura="2"]')).toBeInViewport({ ratio: 0.6 });
+
+    // Y de vuelta, también a mano.
+    await carrusel.locator("[data-pista]").evaluate((el) => {
+      (el as HTMLElement).scrollTo({ left: 0, behavior: "instant" });
+    });
+    await expect(indicador).toHaveText(`1 de ${N}`);
+  });
 
   test("el teclado llega a la pista y a los botones, y Enter avanza", async ({
     page,

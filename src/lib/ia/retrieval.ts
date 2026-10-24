@@ -182,11 +182,13 @@ type Hit = {
 
 /**
  * Peso por fragmento (ADR-023): multiplica el puntaje BM25 del fragmento. Las
- * fichas de la vitrina viajan con `peso: 0.5`; todo lo demás, sin campo, vale 1.
- * Medido con el banco de 131 preguntas sobre el índice completo (494
- * fragmentos): a peso 1 las fichas desplazaban a los documentos a fondo en 8
- * preguntas (94/131); a 0,5 el banco vuelve a 102/131 —el mismo número que sin
- * fichas— y aun así 11 preguntas reciben una ficha en su contexto.
+ * fichas de la vitrina y las publicaciones de «Métodos» (`PESO_METODO`, S10)
+ * viajan con `peso: 0.5`; todo lo demás, sin campo, vale 1. Medido en el S8 con
+ * el banco de entonces (131 preguntas) sobre un índice de 494 fragmentos: a peso
+ * 1 las fichas desplazaban a los documentos a fondo en 8 preguntas (94/131); a
+ * 0,5 el banco vuelve a 102/131 —el mismo número que sin fichas— y aun así 11
+ * preguntas reciben una ficha en su contexto. El banco de hoy (`pnpm
+ * corpus:informe`) vuelve a medir el peso de las publicaciones en cada cambio.
  */
 const pesoDe = (_id: string, _term: string, stored?: Record<string, unknown>) =>
   typeof stored?.peso === "number" ? stored.peso : 1;
