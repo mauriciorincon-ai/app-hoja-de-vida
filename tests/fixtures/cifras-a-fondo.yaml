@@ -135,7 +135,7 @@ conceptos:
 
   - id: sprints-cerrados
     etiqueta: "los sprints cerrados de este sitio"
-    fuente: "sprints/SPRINT_NNN-summary.md"
+    fuente: "sprints/SPRINT_NNN-summary.md o SPRINT_NNN-cierre.md (el gate cuenta los dos, a-fondo-coherencia.mjs:95)"
     sustantivos: [sprints]
     contexto: ["cerrados"]
     ventana: 16
