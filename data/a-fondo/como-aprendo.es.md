@@ -109,7 +109,7 @@ Las últimas veces que aprendí algo desde cero, y cuánto tardé:
 | Qué                                   | Desde          | Plazo                             | Resultado                                                   |
 | ------------------------------------- | -------------- | --------------------------------- | ----------------------------------------------------------- |
 | Microsoft Fabric                      | agosto de 2023 | 5 meses de estudio (jul–nov 2024) | DP-600 en diciembre de 2024, plataforma de Vesting operando |
-| Next.js y el pipeline de aplicaciones | julio de 2026  | 19 sprints                        | este sitio, CV Viva, con su CI, sus pruebas y sus ADR       |
+| Next.js y el pipeline de aplicaciones | julio de 2026  | 20 sprints                        | este sitio, CV Viva, con su CI, sus pruebas y sus ADR       |
 | AI-103 y AI-300                       | julio de 2026  | curso completo y 10 módulos       | dos rutas en curso, con la Super guía AI-103 publicada      |
 | Codex, Antigravity y Claude Code      | su salida      | cerca de un mes cada uno          | el pipeline con el que se construyen las 38 piezas          |
 

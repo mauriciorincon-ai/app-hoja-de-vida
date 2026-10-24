@@ -187,7 +187,7 @@ The last few times I learned something from scratch, and how long it took:
 | What                                   | Since          | Time frame                          | Result                                                        |
 | -------------------------------------- | -------------- | ----------------------------------- | ------------------------------------------------------------- |
 | Microsoft Fabric                       | August 2023    | 5 months of study (Jul–Nov 2024)    | DP-600 in December 2024, Vesting platform in operation        |
-| Next.js and the application pipeline   | July 2026      | 19 sprints | this site, CV Viva, with its CI, its tests and its ADRs       |
+| Next.js and the application pipeline   | July 2026      | 20 sprints | this site, CV Viva, with its CI, its tests and its ADRs       |
 | AI-103 and AI-300                      | July 2026      | course complete and 10 modules      | two tracks in progress, with the AI-103 Super Guide published |
 | Codex, Antigravity and Claude Code     | their release  | close to a month each               | the pipeline with which the 38 pieces are built               |
 
