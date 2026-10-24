@@ -66,6 +66,7 @@ const capturas = Array.from({ length: N }, (_, i) => ({
 }));
 const etiquetas = (n: number): EtiquetasCarrusel => ({
   etiqueta: "Pantallas del producto",
+  pista: "Recorrido de las pantallas",
   anterior: "Pantalla anterior",
   siguiente: "Pantalla siguiente",
   indicadores: Array.from({ length: n }, (_, i) => `${i + 1} de ${n}`),
@@ -192,7 +193,11 @@ describe("GaleriaCarrusel — con varias capturas", () => {
     montar();
     const pista = within(screen.getByRole("region")).getAllByRole("group")[0];
     expect(pista).toHaveAttribute("tabindex", "0");
-    expect(pista).toHaveAttribute("aria-label", "Pantallas del producto");
+    // Nombre propio, distinto del de la región: un lector no repite la misma frase.
+    expect(pista).toHaveAttribute("aria-label", "Recorrido de las pantallas");
+    expect(pista.getAttribute("aria-label")).not.toBe(
+      screen.getByRole("region").getAttribute("aria-label"),
+    );
   });
 
   it("nada se mueve solo: ningún temporizador ni rotación automática", () => {

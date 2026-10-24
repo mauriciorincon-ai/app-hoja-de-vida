@@ -55,6 +55,11 @@ export type CapturaCarrusel = { archivo: string; pie: string };
 export type EtiquetasCarrusel = {
   /** Nombre accesible de la región, p. ej. «Pantallas del tablero». */
   etiqueta: string;
+  /**
+   * Nombre accesible de la PISTA que se desliza (tiene foco y rol de grupo): distinto
+   * del de la región, para que un lector de pantalla no diga lo mismo dos veces.
+   */
+  pista: string;
   anterior: string;
   siguiente: string;
   /** «1 de 6», «2 de 6»…: uno por captura, ya traducido. */
@@ -128,7 +133,7 @@ export function GaleriaCarrusel({
         // scrollable-region-focusable); con una sola captura no hay scroll.
         tabIndex={hay ? 0 : undefined}
         role={hay ? "group" : undefined}
-        aria-label={hay ? etiquetas.etiqueta : undefined}
+        aria-label={hay ? etiquetas.pista : undefined}
         data-pista=""
         className="flex snap-x snap-mandatory overflow-x-auto overscroll-x-contain rounded-[12px] [scrollbar-width:thin]"
       >
