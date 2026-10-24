@@ -241,7 +241,6 @@ export function CarruselDeMuestras({
       aria-roledescription={hay ? "carousel" : undefined}
       aria-label={hay ? etiquetas.etiqueta : undefined}
       data-carrusel-apps=""
-      data-total={total}
       data-i={hay ? idx : undefined}
       data-max={hay ? max : undefined}
     >

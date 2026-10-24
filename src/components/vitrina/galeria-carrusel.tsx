@@ -43,7 +43,9 @@ import { usePrefiereQuieto } from "@/components/motion/use-prefiere-quieto";
  * navegador solo pide la primera hasta que se desliza. Lo vigila el e2e.
  *
  * Sin JS la pista sigue siendo una tira que se desliza con el dedo o la rueda:
- * el contenido llega íntegro en el HTML (gate ATS).
+ * el contenido llega íntegro en el HTML (gate ATS). Los botones y el indicador
+ * no harían nada sin script, así que un `<noscript>` los oculta (deuda B3 del
+ * S9, pagada en el S20): con JS el navegador no aplica ese estilo y nada cambia.
  *
  * Los textos llegan por props (el namespace de next-intl no viaja al bundle
  * cliente), igual que en `TimelineTrack`.
@@ -119,7 +121,6 @@ export function GaleriaCarrusel({
       aria-roledescription="carousel"
       aria-label={etiquetas.etiqueta}
       data-carrusel=""
-      data-total={total}
     >
       <div
         ref={pista}
@@ -164,7 +165,10 @@ export function GaleriaCarrusel({
       </div>
 
       {hay && (
-        <div className="mt-3 flex items-center justify-between gap-3">
+        <div
+          data-controles=""
+          className="mt-3 flex items-center justify-between gap-3"
+        >
           <button
             type="button"
             aria-label={etiquetas.anterior}
@@ -196,6 +200,11 @@ export function GaleriaCarrusel({
             <span aria-hidden="true">→</span>
           </button>
         </div>
+      )}
+      {hay && (
+        <noscript>
+          <style>{"[data-carrusel] [data-controles]{display:none}"}</style>
+        </noscript>
       )}
     </section>
   );
