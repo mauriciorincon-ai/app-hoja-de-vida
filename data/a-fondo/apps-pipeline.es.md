@@ -2,7 +2,7 @@
 slug: apps-pipeline
 codigo: AF-12
 titulo: "Las apps que estoy construyendo en público"
-resumen: "El pipeline AI-APPs: diez aplicaciones hermanas, 15 agentes, 7 investigaciones y 6 tableros —38 piezas, sin contar este sitio— construidos con dos casas, un agente de fábrica, cuatro jobs de CI, un contrato de ficha desde Zod, costo real de US$0 al mes y dos reglas: código primero y todo control se demuestra fallando."
+resumen: "El pipeline AI-APPs: diez aplicaciones hermanas, 14 agentes, 7 investigaciones y 6 tableros —37 piezas, sin contar este sitio— construidos con dos casas, un agente de fábrica, cuatro jobs de CI, un contrato de ficha desde Zod, costo real de US$0 al mes y dos reglas: código primero y todo control se demuestra fallando."
 cuando_usar: "Úsalo cuando pregunten qué ha construido por su cuenta fuera del trabajo, cuántas aplicaciones ha publicado, si tiene código público, cómo es su pipeline de construcción con Next.js, pruebas automatizadas y CI, y qué demuestra cada una de las diez apps de la vitrina."
 estado: aprobado
 ancla: "#vitrina"
@@ -52,7 +52,7 @@ CV Viva incluida). -->
 
 <!-- seccion: por-que-en-publico -->
 
-Un currículum afirma; una pieza publicada demuestra. Esa es la razón principal por la que construyo en público: 38 piezas en total, sin contar este sitio —diez de ellas aplicaciones hermanas—, todas fuera de mi trabajo y todas con su repositorio.
+Un currículum afirma; una pieza publicada demuestra. Esa es la razón principal por la que construyo en público: 37 piezas en total, sin contar este sitio —diez de ellas aplicaciones hermanas—, todas fuera de mi trabajo y todas con su repositorio.
 
 Mis proyectos propios de IA generativa no salieron de la nada. Desde abril de 2024, en paralelo a mis empleos, planeo y diseño estas aplicaciones y estos agentes —su concepción y su arquitectura—, y durante años los intenté en distintas plataformas antes de construirlos, desde 2026, con el pipeline que hoy los produce. Es un hecho declarado, sin un artefacto de 2024 que lo pruebe: lo que sí puede examinarse son las piezas, y cada una conserva su propia fecha —Dash Agent, por ejemplo, se concibió y diseñó en 2026—.
 
@@ -68,7 +68,7 @@ Construir en público es, en última instancia, una forma de responsabilidad pro
 
 Construir en público introduce una consecuencia deliberadamente incómoda: aquello que no está terminado no puede presentarse como si lo estuviera. Una idea puede declararse en exploración, un prototipo puede mostrar una hipótesis y una solución terminada puede demostrar una capacidad, pero estos estados no deben confundirse. Hacer visible esa diferencia protege la credibilidad del portafolio y me obliga a describir cada resultado con precisión.
 
-Los estados están escritos en los datos, no en la prosa. El catálogo de apps admite tres: en producción —URL viva, repositorio y CI en verde—, en construcción —repositorio con commits reales— y en exploración —objetivo declarado, sin fechas prometidas—. Las fichas de las piezas admiten dos: inicial, cuando la construcción está cerrada, y sellado, cuando la pieza alcanzó su MVP y lleva su fecha de sello. De los 15 agentes publicados, cinco están sellados y diez en estado inicial; los seis tableros están sellados, y las siete investigaciones son iniciales; cinco tienen su manuscrito listo para enviar y ninguno se ha enviado.
+Los estados están escritos en los datos, no en la prosa. El catálogo de apps admite tres: en producción —URL viva, repositorio y CI en verde—, en construcción —repositorio con commits reales— y en exploración —objetivo declarado, sin fechas prometidas—. Las fichas de las piezas admiten dos: inicial, cuando la construcción está cerrada, y sellado, cuando la pieza alcanzó su MVP y lleva su fecha de sello. De los 14 agentes publicados, cinco están sellados y nueve en estado inicial; los seis tableros están sellados, y las siete investigaciones son iniciales; cinco tienen su manuscrito listo para enviar y ninguno se ha enviado.
 
 También me obliga a mantener una correspondencia entre lo que afirmo y lo que entrego. Si digo que una solución es reproducible, debe existir una forma de comprender cómo fue construida. Si afirmo que una cifra fue calculada, debo poder explicar el método. Si una aplicación utiliza inteligencia artificial, debe quedar claro qué función cumple, qué información utiliza y por qué esa capacidad no podía resolverse adecuadamente mediante programación convencional.
 
@@ -104,7 +104,7 @@ Esta distinción es especialmente importante en investigaciones y agentes. La ap
 
 <!-- seccion: que-hay-construido -->
 
-El pipeline produce cuatro familias principales de activos: aplicaciones, agentes, investigaciones y tableros analíticos. Todas las piezas terminadas se publican en la vitrina del sitio y cuentan con una ficha que explica su propósito, alcance, estado y principales decisiones de diseño. Hoy la vitrina reúne 38 piezas: diez aplicaciones hermanas, 15 agentes, 7 investigaciones y 6 tableros.
+El pipeline produce cuatro familias principales de activos: aplicaciones, agentes, investigaciones y tableros analíticos. Todas las piezas terminadas se publican en la vitrina del sitio y cuentan con una ficha que explica su propósito, alcance, estado y principales decisiones de diseño. Hoy la vitrina reúne 37 piezas: diez aplicaciones hermanas, 14 agentes, 7 investigaciones y 6 tableros.
 
 Las diez aplicaciones son Anonimizador Velo, Dash Agent, Probeta DS, Habla San, Innmobiliaria y Nutrikids, más cuatro en su etapa inicial —planlang, AngelGhost, Big-D y HackGuard—, más CV Viva, que es este mismo sitio y no una pieza del escaparate. Cada una responde a una promesa diferente, pero todas deben superar el mismo criterio: convertir una necesidad en una experiencia funcional, documentada y verificable, no únicamente en una interfaz convincente o una demostración técnica.
 
@@ -144,11 +144,11 @@ Estas cifras son una foto con fecha, se refrescan desde el repositorio de cada a
 
 Las cuatro restantes están en su etapa inicial —ciclo H1, versión 0.1.0, sin sellar— y publican sus propias cifras con fuente en su brochure, por eso no entran en la tabla anterior. planlang (siete sprints cerrados): escribes el plan de un agente como un contrato y un verificador sin IA mide, caso por caso, la brecha entre lo que el plan prometía y lo que el agente hizo; 21 funcionalidades, 16 ADR, 16 criterios cumplidos, 1.204 decisiones cruzadas sobre 220 casos sintéticos, cero llamadas a modelos en la vitrina y un costo de US$5,21 por corrida. AngelGhost (ocho sprints): una ventana en tu Mac que el cliente no ve aunque compartas pantalla y que te acerca tu propia experiencia en el momento justo de la reunión; 20 funcionalidades, 1.806 pruebas automáticas, 23 ADR y cero bytes que salen del equipo. Big-D (tres sprints): un planeador abierto y reproducible para elegir entre plataformas de datos con evidencia fechada; 14 funcionalidades, 3 plataformas y 63 componentes en el atlas, 33 evidencias fechadas, 2.614 pruebas automáticas y 98,55 % de cobertura. HackGuard (nueve sprints): un catálogo vivo de pruebas de seguridad que te dice qué probaste, qué esperabas, qué obtuviste y qué te falta; 18 funcionalidades, 38 pruebas en el catálogo cruzadas con 38 controles de ISO/IEC 42001, 4.390 pruebas automáticas y 97,54 % de cobertura. Las cuatro cuestan US$0 al mes de operación.
 
-## Quince agentes, siete investigaciones y seis tableros
+## Catorce agentes, siete investigaciones y seis tableros
 
 <!-- seccion: agentes-investigaciones-tableros -->
 
-El portafolio incluye además quince agentes publicados, concebidos como sistemas de trabajo especializados. No los presento como conversaciones genéricas ni como demostraciones de generación de texto. Cada agente debe tener un propósito delimitado, unas fuentes o conocimientos identificables, reglas de actuación, resultados esperados y condiciones bajo las cuales debe reconocer sus límites. Cinco están sellados —el Constructor de Tableros Power BI en junio de 2026, la Fábrica de AI-APPs en julio, Presentaciones CINE y el Taller de Animación entre julio y agosto, y el Harness Paper Computacional en agosto—; su documento propio los recorre uno por uno.
+El portafolio incluye además catorce agentes publicados, concebidos como sistemas de trabajo especializados. No los presento como conversaciones genéricas ni como demostraciones de generación de texto. Cada agente debe tener un propósito delimitado, unas fuentes o conocimientos identificables, reglas de actuación, resultados esperados y condiciones bajo las cuales debe reconocer sus límites. Cinco están sellados —el Constructor de Tableros Power BI en junio de 2026, la Fábrica de AI-APPs en julio, Presentaciones CINE y el Taller de Animación entre julio y agosto, y el Harness Paper Computacional en agosto—; su documento propio los recorre uno por uno.
 
 Las siete líneas de investigación representan otra dimensión del pipeline. Su propósito no es respaldar retrospectivamente una idea mediante referencias seleccionadas, sino formular una pregunta, caracterizar el vacío que la hace relevante y construir una ruta metodológica capaz de producir evidencia. Cada trabajo debe distinguir claramente entre aquello que está sustentado, lo que todavía constituye una hipótesis y lo que no puede afirmarse con los resultados disponibles. Cada una publica su vacío con el número de obras revisadas —de 119 marcos a 1.414 obras— y su documento explica el método.
 
@@ -350,7 +350,7 @@ También materializa la convergencia entre Ingeniería Industrial y Diseño Indu
 
 <!-- seccion: en-exploracion -->
 
-El pipeline distingue claramente entre piezas terminadas y capacidades en exploración. Utilizo esta palabra de forma deliberada porque una intención, una arquitectura propuesta o un desarrollo inicial no deben presentarse con el mismo nivel de certeza que una solución publicada y verificable. Las dos exploraciones están declaradas con esa palabra en el catálogo de apps, sin fechas prometidas, y no cuentan entre las 38 piezas.
+El pipeline distingue claramente entre piezas terminadas y capacidades en exploración. Utilizo esta palabra de forma deliberada porque una intención, una arquitectura propuesta o un desarrollo inicial no deben presentarse con el mismo nivel de certeza que una solución publicada y verificable. Las dos exploraciones están declaradas con esa palabra en el catálogo de apps, sin fechas prometidas, y no cuentan entre las 37 piezas.
 
 Una de las exploraciones corresponde a una solución analítica de extremo a extremo sobre Microsoft Fabric utilizando datos abiertos de Colombia. Su propósito es demostrar públicamente el recorrido completo desde la ingestión y el almacenamiento en un lakehouse hasta el modelo semántico y la experiencia en Power BI embebido.
 
