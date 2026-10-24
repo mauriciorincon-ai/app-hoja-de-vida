@@ -139,7 +139,9 @@ export function problemasDelLote(md: string): string[] {
 
     if (
       f.estado === "pagado" &&
-      !/\b[0-9a-f]{7,40}\b|\.\w{2,5}\b/.test(f.prueba)
+      !/\b(?=[0-9a-f]*\d)(?=[0-9a-f]*[a-f])[0-9a-f]{7,40}\b|\.\w{2,5}\b/.test(
+        f.prueba,
+      )
     )
       problemas.push(`${f.id}: un «pagado» nombra su commit o su archivo`);
     if (f.estado === "imposible" && !/Sitio:/.test(f.prueba))
@@ -182,6 +184,66 @@ export function sitiosRotos(md: string, raiz = RAIZ): string[] {
   return rotos;
 }
 
+const norm = (t: string) => t.toLowerCase().replace(/\s+/g, " ").trim();
+
+/**
+ * Lo que una prueba dice que dice un archivo, el archivo lo dice: cada cita entre
+ * «…» de una fila que nombra archivos de texto del repo aparece en alguno de
+ * ellos. (Una cita con «…» adentro se omite: elide.) Habría atrapado una prueba
+ * que atribuía a un YAML una frase que era de otra fila (auditoría S20, M1).
+ */
+export function citasQueNoEstan(md: string, raiz = RAIZ): string[] {
+  const problemas: string[] = [];
+  for (const f of leerFilas(md).filas) {
+    const textos: string[] = [];
+    for (const [, token] of f.prueba.matchAll(/`([^`]+)`/g)) {
+      const c = rutaCitada(token);
+      if (!c) continue;
+      const abs = path.join(raiz, c.ruta);
+      if (existsSync(abs) && /\.\w+$/.test(c.ruta))
+        textos.push(norm(readFileSync(abs, "utf8")));
+    }
+    if (!textos.length) continue;
+    for (const [, cita] of f.prueba.matchAll(/«([^»]{8,})»/g)) {
+      if (cita.includes("…")) continue;
+      if (!textos.some((t) => t.includes(norm(cita))))
+        problemas.push(
+          `${f.id}: la prueba cita «${cita}» y ninguno de los archivos que nombra lo dice`,
+        );
+    }
+  }
+  return problemas;
+}
+
+/**
+ * Las ⭐ y los flujos de la guía que el lote cita existen: un id de prueba
+ * (`q16`, `k15f`) es un `id` de la guía y un flujo del ensayo (`R14`) existe.
+ * Habría atrapado una `k15e` que ya no existe (auditoría S20, M2).
+ */
+export function idsDeLaGuiaRotos(md: string, guia: string): string[] {
+  const problemas: string[] = [];
+  const ids = new Set([...guia.matchAll(/\bid="([^"]+)"/g)].map((m) => m[1]));
+  for (const linea of md.split("\n")) {
+    if (!/^\|\s*(S\d{2}-|\d+\s*\|)/.test(linea)) continue;
+    const quien = linea.match(/^\|\s*([^|\s]+)/)?.[1] ?? "?";
+    for (const [, id] of linea.matchAll(
+      /\b(?:guía|prueba|⭐)\s+([a-p]\d{1,2}[a-z]?)\b/g,
+    )) {
+      if (id && !ids.has(id))
+        problemas.push(
+          `${quien}: cita la prueba «${id}» y la guía ya no la tiene`,
+        );
+    }
+    for (const [, flujo] of linea.matchAll(/\b(R\d{1,2})\b/g)) {
+      if (!ids.has(`${flujo.toLowerCase()}-si`))
+        problemas.push(
+          `${quien}: cita el flujo ${flujo} y la guía no lo tiene`,
+        );
+    }
+  }
+  return problemas;
+}
+
 const lote = readFileSync(RUTA, "utf8");
 
 describe("El lote del cierre del H-2 (sprints/SPRINT_020-lote.md)", () => {
@@ -191,6 +253,29 @@ describe("El lote del cierre del H-2 (sprints/SPRINT_020-lote.md)", () => {
 
   it("los archivos y las líneas que las pruebas citan existen hoy", () => {
     expect(sitiosRotos(lote)).toEqual([]);
+  });
+
+  it("lo que una prueba atribuye a un archivo, el archivo lo dice", () => {
+    expect(citasQueNoEstan(lote)).toEqual([]);
+  });
+
+  it("las pruebas de la guía y los flujos del ensayo que el lote cita existen", () => {
+    const guia = readFileSync(
+      path.join(RAIZ, "docs", "GUIA-DE-PRUEBA.html"),
+      "utf8",
+    );
+    expect(idsDeLaGuiaRotos(lote, guia)).toEqual([]);
+  });
+
+  it("imprime la cuenta por estado (las cuentas del lote las da el gate, no el texto)", () => {
+    const { filas } = leerFilas(lote);
+    const cuenta = Object.fromEntries(
+      ESTADOS.map((e) => [e, filas.filter((f) => f.estado === e).length]),
+    );
+    console.info(
+      `lote del cierre del H-2: ${filas.length} filas · ${JSON.stringify(cuenta)}`,
+    );
+    expect(Object.values(cuenta).reduce((a, b) => a + b, 0)).toBe(filas.length);
   });
 
   it("las decisiones del dueño y los reportes a otras casas dicen dónde se miran", () => {
