@@ -269,14 +269,14 @@ describe("la guía v21 · el sí/no y la nota", () => {
       ];
       expect(radios.map((r) => r.value).sort(), li.id).toEqual(["no", "si"]);
       expect(
-        li.querySelector(`input.p-nota[data-nota-de="${li.id}"]`),
+        li.querySelector(`textarea.p-nota[data-nota-de="${li.id}"]`),
         `${li.id}: su nota`,
       ).toBeTruthy();
     }
     const pendientes = Number(calc("rev-pendientes"));
     expect(pendientes).toBeGreaterThan(100);
     click("a1-no");
-    const nota = doc.querySelector<HTMLInputElement>('[data-nota-de="a1"]')!;
+    const nota = doc.querySelector<HTMLTextAreaElement>('[data-nota-de="a1"]')!;
     nota.value = "el botón no responde";
     nota.dispatchEvent(new window.Event("input", { bubbles: true }));
     expect(window.localStorage.getItem(`${NS}a1`)).toBe("no");
@@ -306,7 +306,7 @@ describe("la guía v21 · el sí/no y la nota", () => {
       true,
     );
     expect(
-      doc.querySelector<HTMLInputElement>('[data-nota-de="a1"]')!.value,
+      doc.querySelector<HTMLTextAreaElement>('[data-nota-de="a1"]')!.value,
     ).toBe("se corta en el teléfono");
     expect(
       (doc.getElementById("a2-no") as HTMLInputElement).checked,
@@ -346,6 +346,46 @@ describe("la guía v21 · el sí/no y la nota", () => {
     ).length;
     expect(sin).toBe(0);
   });
+
+  it("la nota es un cuadro de varias líneas de hasta 2000 caracteres, no una línea de 300", () => {
+    const { doc } = abrir();
+    const notas = [...doc.querySelectorAll<HTMLElement>(".p-nota")];
+    expect(notas.length).toBeGreaterThan(140);
+    const malas = notas
+      .filter(
+        (n) =>
+          n.tagName !== "TEXTAREA" || n.getAttribute("maxlength") !== "2000",
+      )
+      .map((n) => n.getAttribute("data-nota-de"));
+    expect(malas).toEqual([]);
+  });
+
+  it("una nota larga y con saltos de línea se guarda entera y vuelve al recargar", () => {
+    const larga = `${"a".repeat(900)}\n${"b".repeat(600)}`;
+    const { doc, window } = abrir();
+    const nota = doc.querySelector<HTMLTextAreaElement>('[data-nota-de="a2"]')!;
+    nota.value = larga;
+    nota.dispatchEvent(new window.Event("input", { bubbles: true }));
+    expect(window.localStorage.getItem(`${NS}a2:nota`)).toBe(larga);
+    const otra = abrir({ [`${NS}a2:nota`]: larga });
+    expect(
+      otra.doc.querySelector<HTMLTextAreaElement>('[data-nota-de="a2"]')!.value,
+    ).toBe(larga);
+  });
+
+  it("lo guardado con la nota de una línea sigue valiendo: la clave y el prefijo no cambiaron", () => {
+    const { doc, calc } = abrir({
+      [`${NS}a2`]: "no",
+      [`${NS}a2:nota`]: "una nota corta de antes",
+    });
+    expect((doc.getElementById("a2-no") as HTMLInputElement).checked).toBe(
+      true,
+    );
+    expect(
+      doc.querySelector<HTMLTextAreaElement>('[data-nota-de="a2"]')!.value,
+    ).toBe("una nota corta de antes");
+    expect(calc("rev-no")).toBe("1");
+  });
 });
 
 describe("la guía v21 · «Copiar mis respuestas»", () => {
@@ -357,11 +397,15 @@ describe("la guía v21 · «Copiar mis respuestas»", () => {
         configurable: true,
       });
     a.click("a1-no");
-    const nota = a.doc.querySelector<HTMLInputElement>('[data-nota-de="a1"]')!;
+    const nota = a.doc.querySelector<HTMLTextAreaElement>(
+      '[data-nota-de="a1"]',
+    )!;
     nota.value = "el botón no responde";
     nota.dispatchEvent(new a.window.Event("input", { bubbles: true }));
     a.click("a2-si");
-    const nota2 = a.doc.querySelector<HTMLInputElement>('[data-nota-de="a2"]')!;
+    const nota2 = a.doc.querySelector<HTMLTextAreaElement>(
+      '[data-nota-de="a2"]',
+    )!;
     nota2.value = "el orden es distinto";
     nota2.dispatchEvent(new a.window.Event("input", { bubbles: true }));
     a.click("r1-no");
@@ -400,6 +444,28 @@ describe("la guía v21 · «Copiar mis respuestas»", () => {
     expect(copiado).not.toMatch(/Sentada 1: .*\ba1\b/);
     expect(doc.getElementById("rev-estado")!.textContent).toContain("Copiado");
     expect(doc.getElementById("rev-texto")!.hasAttribute("hidden")).toBe(true);
+  });
+
+  it("una nota de varias líneas se copia en una sola, con todo su texto", async () => {
+    let copiado = "";
+    const { doc, window } = abrir({
+      [`${NS}a1`]: "no",
+      [`${NS}a1:nota`]: "primero esto\n\nluego esto otro\n  y al final eso",
+    });
+    Object.defineProperty(window.navigator, "clipboard", {
+      value: {
+        writeText: (t: string) => {
+          copiado = t;
+          return Promise.resolve();
+        },
+      },
+      configurable: true,
+    });
+    (doc.getElementById("rev-copiar") as HTMLButtonElement).click();
+    await new Promise((r) => setTimeout(r, 0));
+    expect(copiado).toContain(
+      "nota: primero esto ⏎ luego esto otro ⏎ y al final eso",
+    );
   });
 
   it("si el portapapeles falla, el texto queda a la vista y seleccionado", async () => {

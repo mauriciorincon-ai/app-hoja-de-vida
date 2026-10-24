@@ -1212,7 +1212,7 @@ chat hoy y cuáles traería con la base aprobada. Ese informe **se genera, no se
 
 - **Qué hace:** la guía de prueba abre ahora con el filtro **«Revisión completa»**: toda la guía en una sola pasada, en **sentadas de a lo
   sumo 45 minutos y ordenadas por lugar y aparato** (el escritorio, el chat, la vitrina, «Métodos», la accesibilidad, el teléfono real, los
-  Criterios, el repositorio y el panel de Vercel). Cada prueba vigente aparece **una sola vez** y lleva **un sí o un no y una nota corta**;
+  Criterios, el repositorio y el panel de Vercel). Cada prueba vigente aparece **una sola vez** y lleva **un sí o un no y una nota (hasta 2000 caracteres, con varias líneas)**;
   los flujos del ensayo (R1 a R18) abren cada sentada y llevan dentro las ⭐ que cubren. Cuántas pruebas hay, cuántos minutos suma cada
   sentada y cuántas horas la revisión entera lo calcula la página: ningún total está escrito, y una sentada que pase de 45 minutos se marca en rojo.
 - **Cómo se usa:** pega tu dominio en «URL de prueba» y ve sentada tras sentada, en tu computador personal y, el teléfono, con datos móviles.
