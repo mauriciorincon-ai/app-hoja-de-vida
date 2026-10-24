@@ -158,7 +158,8 @@ const ANCLAS: Ancla[] = [
   {
     doc: "manual",
     nombre: "publicaciones de «Métodos» (limitaciones)",
-    patron: /(\S+) piezas? publicadas? hasta ahora/g,
+    // S19: con la novena pieza la serie quedó completa y «hasta ahora» dejó de ser cierto.
+    patron: /las (\S+) piezas de la serie están publicadas/g,
     esperado: [V["piezas-metodo"]],
   },
   {

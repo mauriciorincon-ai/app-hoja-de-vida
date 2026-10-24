@@ -508,7 +508,7 @@ bloques:
           texto:
             es: "Un diagrama aprobado es la mejor primera especificación de esa secuencia, siempre que cada actividad declare qué recibe, qué hace y qué entrega."
             en: "An approved diagram is the best first specification of that sequence, as long as every activity declares what it receives, what it does and what it delivers."
-      - titulo: { es: "Una automatización se diseña para fallar bien", en: "An automation is designed to fail well" }
+      - titulo: { es: "Los principios de diseño de una automatización", en: "Design principles for an automation" }
         queCambia:
           es: "La guía HEAT de Microsoft pone entre los principios de diseño de una automatización el registro, la gestión de credenciales y las pruebas, la estrategia de manejo de errores y reintentos, y la elección entre API e interfaz."
           en: "Microsoft's HEAT guidance lists among the design principles of an automation logging, credential management and testing, the error handling and retry strategy, and the choice between API and interface."

@@ -174,8 +174,10 @@ export function nombresDeDestinos(locale) {
     nombres.set("#contenido", msg.nav.hojaDeVida);
   }
   if (msg.cv?.titulo) nombres.set("/cv", msg.cv.titulo);
-  // «Métodos»: la lista se llama como el menú; cada pieza, como su nombre.
+  // «Métodos»: la lista se llama como el menú; cada pieza, como su nombre; y la
+  // puerta de la HOME (S19, `#metodos`) se llama como su título.
   if (msg.nav?.metodo) nombres.set("/metodos", msg.nav.metodo);
+  if (msg.metodo?.puertaTitulo) nombres.set("#metodos", msg.metodo.puertaTitulo);
   for (const p of piezasDeMetodo()) {
     if (p.nombre?.[locale]) nombres.set(`/metodos/${p.slug}`, p.nombre[locale]);
   }

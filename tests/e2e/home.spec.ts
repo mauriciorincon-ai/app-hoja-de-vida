@@ -4,12 +4,14 @@ import { parse } from "yaml";
 
 // El orden de la HOME desde la revisión post-S7: la vitrina ocupa el sitio de
 // «Proyectos», los estudios tienen sección propia, y el roadmap se fue con las
-// apps a /vitrina/apps.
+// apps a /vitrina/apps. Desde el S19, «Métodos» asoma sus publicaciones entre la
+// vitrina y los estudios.
 const SECTIONS = [
   "perfil",
   "trayectoria",
   "logros",
   "vitrina",
+  "metodos",
   "estudios",
   "certificaciones",
   "skills",
@@ -31,6 +33,13 @@ if (!hitoConBullets?.bullets) {
 }
 const primerBullet = hitoConBullets.bullets[0];
 const nombre = cvEs.identidad.nombre;
+
+// La puerta a «Métodos» (S19) nombra lo que hay en `data/metodo/`: la cuenta
+// sale del disco, no de este archivo.
+const piezasMetodo = readdirSync("data/metodo")
+  .filter((f) => f.endsWith(".yaml"))
+  .map((f) => f.replace(/\.yaml$/, ""))
+  .sort();
 
 // Roadmap votable (S4 · por app hermana desde 2026-09-13): las features viven
 // en el complemento curado de cada app, `data/fichas/<slug>.yaml`, y se votan
@@ -121,12 +130,63 @@ test.describe("HOME — happy path del sprint", () => {
       // sigue exigiendo en el HTML estático es la vitrina asomada con sus
       // cuatro frentes y los estudios recién nacidos como sección.
       expect(html).toContain('id="vitrina"');
+      // La puerta a «Métodos» (S19) también vive en el HTML estático, con una
+      // entrada por publicación del disco.
+      expect(html).toContain('id="metodos"');
+      for (const slug of piezasMetodo)
+        expect(html, `puerta: ${slug}`).toContain(`data-puerta-pieza="${slug}"`);
       expect(html).toContain('id="estudios"');
       expect(html).toContain("Pontificia Universidad Javeriana");
     }
     // El grueso (capa 2) también vive en el HTML aunque nazca colapsado
     const res = await request.get("/es");
     expect(await res.text()).toContain(primerBullet);
+  });
+
+  test("la puerta a «Métodos»: una entrada por publicación del disco, sin desborde y con blancos táctiles", async ({
+    page,
+  }) => {
+    for (const locale of ["es", "en"]) {
+      await page.goto(`/${locale}`);
+      const puerta = page.locator("#metodos");
+      await puerta.scrollIntoViewIfNeeded();
+
+      await expect(puerta.locator("[data-puerta-pieza]")).toHaveCount(
+        piezasMetodo.length,
+      );
+      for (const slug of piezasMetodo) {
+        await expect(
+          puerta.locator(`a[data-puerta-pieza="${slug}"]`),
+          slug,
+        ).toHaveAttribute("href", `/${locale}/metodos/${slug}`);
+      }
+      await expect(puerta.locator("a[data-ir-metodos]")).toHaveAttribute(
+        "href",
+        `/${locale}/metodos`,
+      );
+
+      // Sin desborde horizontal y con blancos de al menos 44 px (móvil y escritorio).
+      const desborde = await page.evaluate(
+        () =>
+          document.documentElement.scrollWidth -
+          document.documentElement.clientWidth,
+      );
+      expect(desborde, `desborde horizontal en /${locale}`).toBeLessThanOrEqual(
+        0,
+      );
+      for (const enlace of await puerta.locator("a").all()) {
+        const caja = await enlace.boundingBox();
+        expect(caja?.height ?? 0).toBeGreaterThanOrEqual(44);
+      }
+    }
+
+    // Un clic en una entrada llega a su publicación.
+    await page.goto("/es");
+    const primera = piezasMetodo[0];
+    await page.locator(`#metodos a[data-puerta-pieza="${primera}"]`).click();
+    await expect(page).toHaveURL(new RegExp(`/es/metodos/${primera}$`), {
+      timeout: 15_000,
+    });
   });
 
   test("disclosure del timeline: expande y contrae accesible por teclado", async ({

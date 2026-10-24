@@ -33,6 +33,7 @@ describe("anclasDeHome — se leen de la HOME, no de una lista", () => {
       "#trayectoria",
       "#logros",
       "#vitrina",
+      "#metodos",
       "#estudios",
       "#certificaciones",
       "#skills",
@@ -138,6 +139,12 @@ describe("nombreDeDestino — a dónde lleva la cita, con el nombre que el visit
 
   it("«#skills-titulo» es la sección «#skills»", () => {
     expect(nombreDeDestino("#skills-titulo", es)).toBe("Skills");
+  });
+
+  it("la puerta de la HOME a «Métodos» (S19) se llama «Métodos» / «Methods», y su título es la sección", () => {
+    expect(nombreDeDestino("#metodos", es)).toBe("Métodos");
+    expect(nombreDeDestino("#metodos", en)).toBe("Methods");
+    expect(nombreDeDestino("#metodos-titulo", es)).toBe("Métodos");
   });
 
   it("una tarjeta de Skills se llama como su grupo, en cada idioma (2026-09-26)", () => {

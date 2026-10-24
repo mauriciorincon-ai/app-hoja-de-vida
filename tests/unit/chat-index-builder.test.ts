@@ -203,7 +203,10 @@ describe("buildChunks (YAML + «a fondo» → chunks con ancla)", () => {
 describe("script real contra los data/ reales (integración del build)", () => {
   const outDir = path.join(tmpdir(), `chat-index-test-${process.pid}`);
 
-  it("genera índices ES y EN válidos con el contenido vigente", () => {
+  // Corre el script real del build: solo tarda unos 4 s y, con la suite entera en
+  // paralelo y la cobertura, pasaba de los 5 s por defecto (S19, nueve piezas de
+  // «Métodos» en el índice). Un tope propio, no un reintento.
+  it("genera índices ES y EN válidos con el contenido vigente", { timeout: 30_000 }, () => {
     execFileSync(process.execPath, ["scripts/build-chat-index.mjs", outDir], {
       cwd: process.cwd(),
     });

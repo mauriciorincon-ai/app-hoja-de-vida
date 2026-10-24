@@ -7,6 +7,7 @@ import { Contacto } from "@/components/home/contacto";
 import { Estudios } from "@/components/home/estudios";
 import { Hero } from "@/components/home/hero";
 import { Logros } from "@/components/home/logros";
+import { MetodosHome } from "@/components/home/metodos";
 import { Perfil } from "@/components/home/perfil";
 import { Skills } from "@/components/home/skills";
 import { Trayectoria } from "@/components/home/trayectoria";
@@ -65,6 +66,9 @@ export default async function HomePage({
             los case studies se abren desde su hito en la trayectoria. El
             roadmap se fue con las apps, a /vitrina/apps. */}
         <VitrinaHome locale={locale as Locale} />
+        {/* La puerta a «Métodos» (S19): las publicaciones, nombradas desde
+            `data/metodo/`, entre lo construido y los estudios. */}
+        <MetodosHome locale={locale as Locale} />
         <Estudios estudios={cv.estudios} />
         <Certificaciones certificaciones={cv.certificaciones} />
         <Skills skills={cv.skills} />

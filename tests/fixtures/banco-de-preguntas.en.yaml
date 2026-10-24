@@ -589,6 +589,22 @@ preguntas:
       ]
     familia: procesos
 
+  # ── Métodos (S19): the twins of the three T8 questions; same `espera`, same order.
+  # The optimization-formulation question and the Probeta DS one REQUIRE the piece (the
+  # owner's G-Plan decision); the one about models taken to production accepts T8 or its two
+  # home documents. Measured with the committed piece (1,978 chunks): optimization, T8 1st
+  # (77 against 53 for the 4th); Probeta DS, T8 1st (33 against 19); models, the home
+  # documents 1st and 2nd and T8 at rank 32. None of the 172 earlier rows left the top-4.
+  - pregunta: "How does Henry formulate an optimization problem?"
+    espera: [metodo-decidir-con-modelos]
+    familia: procesos
+  - pregunta: "What is Probeta DS and what does it guarantee?"
+    espera: [metodo-decidir-con-modelos]
+    familia: vitrina
+  - pregunta: "Which predictive models has Henry taken to production?"
+    espera: [metodo-decidir-con-modelos, analitica-predictiva, banco-pichincha]
+    familia: bi-y-analitica
+
 ajenas:
   - pregunta: "tell me a joke about cats"
     guardrail: bloquea
