@@ -398,7 +398,7 @@ el mensaje te llega al correo.
   y **cada uno con su propio espacio**. Desde el Sprint 007 **los cuatro tienen piezas reales**:
   - **Apps** (`/es/vitrina/apps`): las apps del pipeline. **10 piezas.**
   - **Agentes especializados** (`/es/vitrina/agentes`): agentes sin interfaz que se manejan por
-    comandos. **15 piezas.**
+    comandos. **14 piezas.**
   - **Investigaciones** (`/es/vitrina/investigaciones`): líneas de investigación ya validadas.
     **7 piezas.**
   - **Tableros de datos** (`/es/vitrina/tableros`): tableros analíticos, sin atarse a una
@@ -1140,7 +1140,7 @@ dashboard, a fondo → in-depth…) vive en la bitácora `sprints/CONTENIDO-a-fo
 
 ### Las fichas de la vitrina también hablan por el chat · desde a fondo v2
 
-Desde el 2026-09-20 (ADR-023) el índice del chat incluye las **38 fichas de la vitrina**: por
+Desde el 2026-09-20 (ADR-023) el índice del chat incluye las **37 fichas de la vitrina**: por
 cada app, su presentación, funcionalidades, cifras y límites; por cada agente, investigación o
 tablero, su presentación, cifras, límites y bloques. Cada fragmento cita hacia la ficha
 (`/vitrina/apps/<slug>` o `/vitrina/<frente>/<slug>`). No hay nada que escribir: **una ficha que
