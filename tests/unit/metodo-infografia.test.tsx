@@ -208,7 +208,7 @@ describe("MapaSvg · ninguna etiqueta de nodo desborda su caja (todas las piezas
       it(`${p.slug} (${idioma}): cada etiqueta cabe en dos líneas de ≤ ${LINEA_MAXIMA_DEL_NODO} caracteres`, () => {
         const mapa = bloqueDe(p, 2);
         const largas = mapa.nodos
-          .map((n) => ({ n: n.id, lineas: partirEtiqueta(n.etiqueta[idioma]) }))
+          .map((nodo) => ({ n: nodo.n, lineas: partirEtiqueta(nodo.etiqueta[idioma]) }))
           .filter((x) => x.lineas.length > 2 || x.lineas.some((l) => l.length > LINEA_MAXIMA_DEL_NODO));
         expect(
           largas,

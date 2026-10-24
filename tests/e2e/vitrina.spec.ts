@@ -1276,6 +1276,12 @@ test.describe("Apertura por lectura — el patrón, no una imitación", () => {
     const t = page.locator(".tarjeta-vitrina").nth(3);
     await t.waitFor();
 
+    // La cabecera se pone ENTERA A LA VISTA y por debajo de la línea de apertura (a 0,75 de la
+    // ventana; la línea está en los dos tercios): sin esto, el clic de más abajo hace su propio
+    // scroll hasta la tarjeta, la cruza, la «apertura por lectura» la abre sola y el clic la
+    // CIERRA (aria-expanded vuelve a «false»): 2 de 30 bajo carga, S9–S19.
+    await ponerCabecera(page, 3, 0.75);
+
     const boton = t.locator(".tarjeta-boton");
     await expect(boton).toHaveAttribute("aria-expanded", "false");
 
