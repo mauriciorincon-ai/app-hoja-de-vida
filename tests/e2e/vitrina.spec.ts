@@ -1513,6 +1513,37 @@ test.describe("Vitrina — el carrusel de la galería (Sprint 009)", () => {
     });
   }
 
+  // S9-M3: todos los e2e de arriba mueven el estado con un CLIC (`setActivo` directo); ninguno
+  // probaba que el indicador siga al deslizado a mano, que es lo que lo mueve de verdad
+  // (`IntersectionObserver` sobre la pista). El gesto real de un pad o un dedo lo cubre la guía
+  // (⭐ k15e); aquí se desliza la pista por scroll —lo que hace el gesto—, sin pasar por los botones.
+  test("deslizar la pista a mano mueve el indicador (sin tocar un botón)", async ({
+    page,
+  }, testInfo) => {
+    test.skip(
+      testInfo.project.name === "mobile",
+      "el ancho se fija aquí, en un solo proyecto",
+    );
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto(ruta());
+    const carrusel = page.locator("[data-carrusel]");
+    await carrusel.scrollIntoViewIfNeeded();
+    const indicador = carrusel.locator("[data-indicador]");
+    await expect(indicador).toHaveText(`1 de ${N}`);
+
+    await carrusel.locator("[data-pista]").evaluate((el) => {
+      (el as HTMLElement).scrollTo({ left: el.clientWidth, behavior: "instant" });
+    });
+    await expect(indicador).toHaveText(`2 de ${N}`);
+    await expect(carrusel.locator('[data-captura="2"]')).toBeInViewport({ ratio: 0.6 });
+
+    // Y de vuelta, también a mano.
+    await carrusel.locator("[data-pista]").evaluate((el) => {
+      (el as HTMLElement).scrollTo({ left: 0, behavior: "instant" });
+    });
+    await expect(indicador).toHaveText(`1 de ${N}`);
+  });
+
   test("el teclado llega a la pista y a los botones, y Enter avanza", async ({
     page,
   }, testInfo) => {
