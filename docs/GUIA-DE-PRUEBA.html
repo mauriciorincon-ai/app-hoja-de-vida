@@ -349,6 +349,19 @@
         align-items: flex-end;
         width: 15rem;
       }
+      .p-limpiar {
+        font: inherit;
+        font-size: 0.75rem;
+        padding: 0;
+        border: 0;
+        background: none;
+        color: var(--tinta-suave);
+        text-decoration: underline;
+        cursor: pointer;
+      }
+      .p-limpiar[hidden] {
+        display: none;
+      }
       .p-nota {
         font: inherit;
         font-size: 0.8rem;
@@ -592,7 +605,7 @@
           filtro, no una prueba</strong>: «Ensayo general H-2» (bloque R). El
           Gate mínimo ⭐ no cambia de contenido, pero deja de llevar un tiempo
           escrito: la cuenta y los minutos los suma la página. El prefijo de las
-          casillas cambia a s20. <strong>v21 suma cinco pruebas y un filtro</strong>: «Revisión completa», el primero de la barra y el activo al abrir (sentadas de a lo sumo 45 min por lugar y aparato, cada prueba una vez, sí/no con nota y «Copiar mis respuestas»); entran la m15, la f12, la q25, la q26 (opcional) y la o15. El prefijo de las respuestas cambia a s21.
+          casillas cambia a s20. <strong>v21 suma seis pruebas y un filtro</strong>: «Revisión completa», el primero de la barra y el activo al abrir (sentadas de a lo sumo 45 min por lugar y aparato, cada prueba una vez, sí/no con nota y «Copiar mis respuestas»); entran la m15, la f12, la q25, la q26 (opcional), la o15 y la o16. El prefijo de las respuestas cambia a s21.
         </p>
         </details>
         <div class="url-caja">
@@ -643,7 +656,7 @@
         <p class="chica">
           Toda la guía en una sola pasada, ordenada por <strong>lugar y aparato</strong>: cada prueba vigente aparece
           <strong>una vez</strong>, con un <strong>sí o un no</strong> y una nota corta si la quieres. Los flujos R
-          (el ensayo general) abren cada sentada y llevan dentro las ⭐ que cubren: esas no se repiten. Lo que la CI
+          (el ensayo general; sus tandas son las del filtro «Ensayo general H-2») abren las sentadas que los traen y llevan dentro las ⭐ que cubren: esas no se repiten. Lo que la CI
           respalda y no se ve en producción está al final, con su razón. Partes la revisión en los días que quieras: lo
           que respondes queda en este navegador. Al parar o al terminar, <strong>«Copiar mis respuestas»</strong> arma
           el texto para pegarlo en la planeadora. Las sumas las hace la página: ningún total está escrito aquí.
@@ -785,8 +798,8 @@
           <ul class="pasos" data-rev-lista="9"></ul>
         </div>
         <div class="rev-sentada" data-rev-sentada="10">
-          <h3 class="sentada">Sentada 10 · en el repositorio y en el panel de Vercel</h3>
-          <p class="chica suave">El repositorio abierto y la terminal; para el Node del build, el panel de Vercel.</p>
+          <h3 class="sentada">Sentada 10 · tus decisiones abiertas: lo que ningún gate puede dar</h3>
+          <p class="chica suave">Tu computador personal. Preguntas que solo tú puedes contestar: la respuesta va en la nota («sin cambio» también vale).</p>
           <p class="rev-sent-resumen chica" data-rev-resumen="10">
             <span data-calc="rev-s10-n">—</span> pruebas ·
             <span data-calc="rev-s10-min">—</span> min · sí
@@ -796,6 +809,19 @@
             <span data-calc="rev-s10-aviso"></span>
           </p>
           <ul class="pasos" data-rev-lista="10"></ul>
+        </div>
+<div class="rev-sentada" data-rev-sentada="11">
+          <h3 class="sentada">Sentada 11 · en el repositorio y en el panel de Vercel</h3>
+          <p class="chica suave">El repositorio abierto y la terminal; para el Node del build, el panel de Vercel.</p>
+          <p class="rev-sent-resumen chica" data-rev-resumen="11">
+            <span data-calc="rev-s11-n">—</span> pruebas ·
+            <span data-calc="rev-s11-min">—</span> min · sí
+            <span data-calc="rev-s11-si">0</span> · no
+            <span data-calc="rev-s11-no">0</span> · pendientes
+            <span data-calc="rev-s11-pend">—</span>
+            <span data-calc="rev-s11-aviso"></span>
+          </p>
+          <ul class="pasos" data-rev-lista="11"></ul>
         </div>
 
         <div id="revision-fuera">
@@ -815,7 +841,7 @@
         </div>
         <p class="meta-bloque chica suave">
           Sobre producción, como cliente · <span data-calc="ensayo-n">—</span>
-          flujos en <span data-calc="ensayo-sentadas">—</span> sentadas · lo no visto no cuenta.
+          flujos en <span data-calc="ensayo-sentadas">—</span> tandas · lo no visto no cuenta.
         </p>
         <p class="chica">
           Un flujo por fila, con un <strong>sí o un no</strong>. Los ⭐ que ya
@@ -833,23 +859,23 @@
             <span data-calc="ensayo-pendientes">—</span>.
           </p>
           <p data-sentada-resumen="1">
-            Sentada 1: <span data-calc="sentada-1-n">—</span> flujos ·
+            Tanda 1: <span data-calc="sentada-1-n">—</span> flujos ·
             <span data-calc="sentada-1-min">—</span> min
             <span data-calc="sentada-1-aviso"></span>
           </p>
           <p data-sentada-resumen="2">
-            Sentada 2: <span data-calc="sentada-2-n">—</span> flujos ·
+            Tanda 2: <span data-calc="sentada-2-n">—</span> flujos ·
             <span data-calc="sentada-2-min">—</span> min
             <span data-calc="sentada-2-aviso"></span>
           </p>
           <p data-sentada-resumen="3">
-            Sentada 3: <span data-calc="sentada-3-n">—</span> flujos ·
+            Tanda 3: <span data-calc="sentada-3-n">—</span> flujos ·
             <span data-calc="sentada-3-min">—</span> min
             <span data-calc="sentada-3-aviso"></span>
           </p>
         </div>
 
-        <h3 class="sentada">Sentada 1 · en escritorio: la casa, el CV, el contacto y el chat</h3>
+        <h3 class="sentada">Tanda 1 · en escritorio: la casa, el CV, el contacto y el chat</h3>
         <ul class="pasos">
           <li class="ens-fila" data-origen="nuevo" data-ensayo="6" data-sentada="1" data-rev="1" data-cubre="a4 a10 n9 n10 n11">
             <div class="ens-cuerpo">
@@ -863,8 +889,8 @@
             </div>
             <div class="p-resp"><fieldset class="ens-resp">
               <legend>¿Salió como esperabas? (R1)</legend>
-              <label><input type="radio" name="r1" id="r1-si" value="si" /> Sí</label>
-              <label><input type="radio" name="r1" id="r1-no" value="no" /> No</label>
+              <label><input type="radio" autocomplete="off" name="r1" id="r1-si" value="si" /> Sí</label>
+              <label><input type="radio" autocomplete="off" name="r1" id="r1-no" value="no" /> No</label>
             </fieldset><input type="text" class="p-nota" data-nota-de="r1" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de R1" autocomplete="off" /></div>
           </li>
           <li class="ens-fila" data-origen="nuevo" data-ensayo="4" data-sentada="1" data-rev="1" data-cubre="b2">
@@ -879,8 +905,8 @@
             </div>
             <div class="p-resp"><fieldset class="ens-resp">
               <legend>¿Salió como esperabas? (R2)</legend>
-              <label><input type="radio" name="r2" id="r2-si" value="si" /> Sí</label>
-              <label><input type="radio" name="r2" id="r2-no" value="no" /> No</label>
+              <label><input type="radio" autocomplete="off" name="r2" id="r2-si" value="si" /> Sí</label>
+              <label><input type="radio" autocomplete="off" name="r2" id="r2-no" value="no" /> No</label>
             </fieldset><input type="text" class="p-nota" data-nota-de="r2" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de R2" autocomplete="off" /></div>
           </li>
           <li class="ens-fila" data-origen="nuevo" data-ensayo="6" data-sentada="1" data-rev="2" data-cubre="c3 c4">
@@ -895,8 +921,8 @@
             </div>
             <div class="p-resp"><fieldset class="ens-resp">
               <legend>¿Salió como esperabas? (R3)</legend>
-              <label><input type="radio" name="r3" id="r3-si" value="si" /> Sí</label>
-              <label><input type="radio" name="r3" id="r3-no" value="no" /> No</label>
+              <label><input type="radio" autocomplete="off" name="r3" id="r3-si" value="si" /> Sí</label>
+              <label><input type="radio" autocomplete="off" name="r3" id="r3-no" value="no" /> No</label>
             </fieldset><input type="text" class="p-nota" data-nota-de="r3" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de R3" autocomplete="off" /></div>
           </li>
           <li class="ens-fila" data-origen="nuevo" data-ensayo="6" data-sentada="1" data-rev="2" data-cubre="d2 d3">
@@ -911,8 +937,8 @@
             </div>
             <div class="p-resp"><fieldset class="ens-resp">
               <legend>¿Salió como esperabas? (R4)</legend>
-              <label><input type="radio" name="r4" id="r4-si" value="si" /> Sí</label>
-              <label><input type="radio" name="r4" id="r4-no" value="no" /> No</label>
+              <label><input type="radio" autocomplete="off" name="r4" id="r4-si" value="si" /> Sí</label>
+              <label><input type="radio" autocomplete="off" name="r4" id="r4-no" value="no" /> No</label>
             </fieldset><input type="text" class="p-nota" data-nota-de="r4" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de R4" autocomplete="off" /></div>
           </li>
           <li class="ens-fila" data-origen="nuevo" data-ensayo="4" data-sentada="1" data-rev="2" data-cubre="e3">
@@ -927,8 +953,8 @@
             </div>
             <div class="p-resp"><fieldset class="ens-resp">
               <legend>¿Salió como esperabas? (R5)</legend>
-              <label><input type="radio" name="r5" id="r5-si" value="si" /> Sí</label>
-              <label><input type="radio" name="r5" id="r5-no" value="no" /> No</label>
+              <label><input type="radio" autocomplete="off" name="r5" id="r5-si" value="si" /> Sí</label>
+              <label><input type="radio" autocomplete="off" name="r5" id="r5-no" value="no" /> No</label>
             </fieldset><input type="text" class="p-nota" data-nota-de="r5" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de R5" autocomplete="off" /></div>
           </li>
           <li class="ens-fila" data-origen="nuevo" data-ensayo="12" data-sentada="1" data-rev="3" data-cubre="f5 f8 f9 o9 o10">
@@ -943,8 +969,8 @@
             </div>
             <div class="p-resp"><fieldset class="ens-resp">
               <legend>¿Salió como esperabas? (R6)</legend>
-              <label><input type="radio" name="r6" id="r6-si" value="si" /> Sí</label>
-              <label><input type="radio" name="r6" id="r6-no" value="no" /> No</label>
+              <label><input type="radio" autocomplete="off" name="r6" id="r6-si" value="si" /> Sí</label>
+              <label><input type="radio" autocomplete="off" name="r6" id="r6-no" value="no" /> No</label>
             </fieldset><input type="text" class="p-nota" data-nota-de="r6" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de R6" autocomplete="off" /></div>
           </li>
           <li class="ens-fila" data-origen="nuevo" data-ensayo="6" data-sentada="1" data-rev="3" data-cubre="e5 g6">
@@ -959,13 +985,13 @@
             </div>
             <div class="p-resp"><fieldset class="ens-resp">
               <legend>¿Salió como esperabas? (R7)</legend>
-              <label><input type="radio" name="r7" id="r7-si" value="si" /> Sí</label>
-              <label><input type="radio" name="r7" id="r7-no" value="no" /> No</label>
+              <label><input type="radio" autocomplete="off" name="r7" id="r7-si" value="si" /> Sí</label>
+              <label><input type="radio" autocomplete="off" name="r7" id="r7-no" value="no" /> No</label>
             </fieldset><input type="text" class="p-nota" data-nota-de="r7" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de R7" autocomplete="off" /></div>
           </li>
         </ul>
 
-        <h3 class="sentada">Sentada 2 · la vitrina, «Métodos» y el teléfono real</h3>
+        <h3 class="sentada">Tanda 2 · la vitrina, «Métodos» y el teléfono real</h3>
         <ul class="pasos">
           <li class="ens-fila" data-origen="nuevo" data-ensayo="9" data-sentada="2" data-rev="4" data-cubre="k7 k13 k14 k15f k18 l5b l6 h4">
             <div class="ens-cuerpo">
@@ -979,8 +1005,8 @@
             </div>
             <div class="p-resp"><fieldset class="ens-resp">
               <legend>¿Salió como esperabas? (R8)</legend>
-              <label><input type="radio" name="r8" id="r8-si" value="si" /> Sí</label>
-              <label><input type="radio" name="r8" id="r8-no" value="no" /> No</label>
+              <label><input type="radio" autocomplete="off" name="r8" id="r8-si" value="si" /> Sí</label>
+              <label><input type="radio" autocomplete="off" name="r8" id="r8-no" value="no" /> No</label>
             </fieldset><input type="text" class="p-nota" data-nota-de="r8" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de R8" autocomplete="off" /></div>
           </li>
           <li class="ens-fila" data-origen="nuevo" data-ensayo="8" data-sentada="2" data-rev="5" data-cubre="k9 m10 m11 m12">
@@ -995,8 +1021,8 @@
             </div>
             <div class="p-resp"><fieldset class="ens-resp">
               <legend>¿Salió como esperabas? (R9)</legend>
-              <label><input type="radio" name="r9" id="r9-si" value="si" /> Sí</label>
-              <label><input type="radio" name="r9" id="r9-no" value="no" /> No</label>
+              <label><input type="radio" autocomplete="off" name="r9" id="r9-si" value="si" /> Sí</label>
+              <label><input type="radio" autocomplete="off" name="r9" id="r9-no" value="no" /> No</label>
             </fieldset><input type="text" class="p-nota" data-nota-de="r9" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de R9" autocomplete="off" /></div>
           </li>
           <li class="ens-fila" data-origen="nuevo" data-ensayo="8" data-sentada="2" data-rev="6" data-cubre="q2 q7 q24">
@@ -1011,8 +1037,8 @@
             </div>
             <div class="p-resp"><fieldset class="ens-resp">
               <legend>¿Salió como esperabas? (R10)</legend>
-              <label><input type="radio" name="r10" id="r10-si" value="si" /> Sí</label>
-              <label><input type="radio" name="r10" id="r10-no" value="no" /> No</label>
+              <label><input type="radio" autocomplete="off" name="r10" id="r10-si" value="si" /> Sí</label>
+              <label><input type="radio" autocomplete="off" name="r10" id="r10-no" value="no" /> No</label>
             </fieldset><input type="text" class="p-nota" data-nota-de="r10" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de R10" autocomplete="off" /></div>
           </li>
           <li class="ens-fila" data-origen="nuevo" data-ensayo="4" data-sentada="2" data-rev="6" data-cubre="q4">
@@ -1027,8 +1053,8 @@
             </div>
             <div class="p-resp"><fieldset class="ens-resp">
               <legend>¿Salió como esperabas? (R11)</legend>
-              <label><input type="radio" name="r11" id="r11-si" value="si" /> Sí</label>
-              <label><input type="radio" name="r11" id="r11-no" value="no" /> No</label>
+              <label><input type="radio" autocomplete="off" name="r11" id="r11-si" value="si" /> Sí</label>
+              <label><input type="radio" autocomplete="off" name="r11" id="r11-no" value="no" /> No</label>
             </fieldset><input type="text" class="p-nota" data-nota-de="r11" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de R11" autocomplete="off" /></div>
           </li>
           <li class="ens-fila" data-origen="nuevo" data-ensayo="12" data-sentada="2" data-rev="8" data-cubre="i2 j3 l7 m13 m14 k16b q3">
@@ -1043,8 +1069,8 @@
             </div>
             <div class="p-resp"><fieldset class="ens-resp">
               <legend>¿Salió como esperabas? (R12)</legend>
-              <label><input type="radio" name="r12" id="r12-si" value="si" /> Sí</label>
-              <label><input type="radio" name="r12" id="r12-no" value="no" /> No</label>
+              <label><input type="radio" autocomplete="off" name="r12" id="r12-si" value="si" /> Sí</label>
+              <label><input type="radio" autocomplete="off" name="r12" id="r12-no" value="no" /> No</label>
             </fieldset><input type="text" class="p-nota" data-nota-de="r12" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de R12" autocomplete="off" /></div>
           </li>
           <li class="ens-fila" data-origen="nuevo" data-ensayo="3" data-sentada="2" data-rev="1" data-cubre="a7 o11">
@@ -1059,13 +1085,13 @@
             </div>
             <div class="p-resp"><fieldset class="ens-resp">
               <legend>¿Salió como esperabas? (R13)</legend>
-              <label><input type="radio" name="r13" id="r13-si" value="si" /> Sí</label>
-              <label><input type="radio" name="r13" id="r13-no" value="no" /> No</label>
+              <label><input type="radio" autocomplete="off" name="r13" id="r13-si" value="si" /> Sí</label>
+              <label><input type="radio" autocomplete="off" name="r13" id="r13-no" value="no" /> No</label>
             </fieldset><input type="text" class="p-nota" data-nota-de="r13" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de R13" autocomplete="off" /></div>
           </li>
         </ul>
 
-        <h3 class="sentada">Sentada 3 · lo que solo tú puedes firmar: los Criterios de «Métodos»</h3>
+        <h3 class="sentada">Tanda 3 · lo que solo tú puedes firmar: los Criterios de «Métodos»</h3>
         <ul class="pasos">
           <li class="ens-fila" data-origen="nuevo" data-ensayo="7" data-sentada="3" data-rev="9" data-cubre="q16">
             <div class="ens-cuerpo">
@@ -1079,8 +1105,8 @@
             </div>
             <div class="p-resp"><fieldset class="ens-resp">
               <legend>¿Salió como esperabas? (R14)</legend>
-              <label><input type="radio" name="r14" id="r14-si" value="si" /> Sí</label>
-              <label><input type="radio" name="r14" id="r14-no" value="no" /> No</label>
+              <label><input type="radio" autocomplete="off" name="r14" id="r14-si" value="si" /> Sí</label>
+              <label><input type="radio" autocomplete="off" name="r14" id="r14-no" value="no" /> No</label>
             </fieldset><input type="text" class="p-nota" data-nota-de="r14" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de R14" autocomplete="off" /></div>
           </li>
           <li class="ens-fila" data-origen="nuevo" data-ensayo="7" data-sentada="3" data-rev="9" data-cubre="q18">
@@ -1095,8 +1121,8 @@
             </div>
             <div class="p-resp"><fieldset class="ens-resp">
               <legend>¿Salió como esperabas? (R15)</legend>
-              <label><input type="radio" name="r15" id="r15-si" value="si" /> Sí</label>
-              <label><input type="radio" name="r15" id="r15-no" value="no" /> No</label>
+              <label><input type="radio" autocomplete="off" name="r15" id="r15-si" value="si" /> Sí</label>
+              <label><input type="radio" autocomplete="off" name="r15" id="r15-no" value="no" /> No</label>
             </fieldset><input type="text" class="p-nota" data-nota-de="r15" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de R15" autocomplete="off" /></div>
           </li>
           <li class="ens-fila" data-origen="nuevo" data-ensayo="7" data-sentada="3" data-rev="9" data-cubre="q14">
@@ -1111,8 +1137,8 @@
             </div>
             <div class="p-resp"><fieldset class="ens-resp">
               <legend>¿Salió como esperabas? (R16)</legend>
-              <label><input type="radio" name="r16" id="r16-si" value="si" /> Sí</label>
-              <label><input type="radio" name="r16" id="r16-no" value="no" /> No</label>
+              <label><input type="radio" autocomplete="off" name="r16" id="r16-si" value="si" /> Sí</label>
+              <label><input type="radio" autocomplete="off" name="r16" id="r16-no" value="no" /> No</label>
             </fieldset><input type="text" class="p-nota" data-nota-de="r16" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de R16" autocomplete="off" /></div>
           </li>
           <li class="ens-fila" data-origen="nuevo" data-ensayo="7" data-sentada="3" data-rev="9" data-cubre="q22">
@@ -1127,8 +1153,8 @@
             </div>
             <div class="p-resp"><fieldset class="ens-resp">
               <legend>¿Salió como esperabas? (R17)</legend>
-              <label><input type="radio" name="r17" id="r17-si" value="si" /> Sí</label>
-              <label><input type="radio" name="r17" id="r17-no" value="no" /> No</label>
+              <label><input type="radio" autocomplete="off" name="r17" id="r17-si" value="si" /> Sí</label>
+              <label><input type="radio" autocomplete="off" name="r17" id="r17-no" value="no" /> No</label>
             </fieldset><input type="text" class="p-nota" data-nota-de="r17" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de R17" autocomplete="off" /></div>
           </li>
           <li class="ens-fila" data-origen="nuevo" data-ensayo="7" data-sentada="3" data-rev="9" data-cubre="q20">
@@ -1143,8 +1169,8 @@
             </div>
             <div class="p-resp"><fieldset class="ens-resp">
               <legend>¿Salió como esperabas? (R18)</legend>
-              <label><input type="radio" name="r18" id="r18-si" value="si" /> Sí</label>
-              <label><input type="radio" name="r18" id="r18-no" value="no" /> No</label>
+              <label><input type="radio" autocomplete="off" name="r18" id="r18-si" value="si" /> Sí</label>
+              <label><input type="radio" autocomplete="off" name="r18" id="r18-no" value="no" /> No</label>
             </fieldset><input type="text" class="p-nota" data-nota-de="r18" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de R18" autocomplete="off" /></div>
           </li>
         </ul>
@@ -1167,7 +1193,7 @@
           <h2>La HOME se recorre</h2>
         </div>
         <p class="meta-bloque chica suave">
-          ~4 min · en <code>/es</code> · la experiencia editorial y su
+          En <code>/es</code> · la experiencia editorial y su
           navegación.
         </p>
         <ul class="pasos">
@@ -1190,8 +1216,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (a1)</legend>
-                <label><input type="radio" name="a1" id="a1-si" value="si" /> Sí</label>
-                <label><input type="radio" name="a1" id="a1-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="a1" id="a1-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="a1" id="a1-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="a1" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de a1" autocomplete="off" />
             </div>
@@ -1218,8 +1244,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (a2)</legend>
-                <label><input type="radio" name="a2" id="a2-si" value="si" /> Sí</label>
-                <label><input type="radio" name="a2" id="a2-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="a2" id="a2-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="a2" id="a2-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="a2" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de a2" autocomplete="off" />
             </div>
@@ -1238,8 +1264,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (a3b)</legend>
-                <label><input type="radio" name="a3b" id="a3b-si" value="si" /> Sí</label>
-                <label><input type="radio" name="a3b" id="a3b-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="a3b" id="a3b-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="a3b" id="a3b-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="a3b" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de a3b" autocomplete="off" />
             </div>
@@ -1261,8 +1287,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (a5)</legend>
-                <label><input type="radio" name="a5" id="a5-si" value="si" /> Sí</label>
-                <label><input type="radio" name="a5" id="a5-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="a5" id="a5-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="a5" id="a5-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="a5" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de a5" autocomplete="off" />
             </div>
@@ -1277,8 +1303,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (a6)</legend>
-                <label><input type="radio" name="a6" id="a6-si" value="si" /> Sí</label>
-                <label><input type="radio" name="a6" id="a6-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="a6" id="a6-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="a6" id="a6-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="a6" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de a6" autocomplete="off" />
             </div>
@@ -1314,8 +1340,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (a4)</legend>
-                <label><input type="radio" name="a4" id="a4-si" value="si" /> Sí</label>
-                <label><input type="radio" name="a4" id="a4-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="a4" id="a4-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="a4" id="a4-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="a4" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de a4" autocomplete="off" />
             </div>
@@ -1345,8 +1371,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (a7)</legend>
-                <label><input type="radio" name="a7" id="a7-si" value="si" /> Sí</label>
-                <label><input type="radio" name="a7" id="a7-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="a7" id="a7-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="a7" id="a7-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="a7" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de a7" autocomplete="off" />
             </div>
@@ -1369,8 +1395,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (a8)</legend>
-                <label><input type="radio" name="a8" id="a8-si" value="si" /> Sí</label>
-                <label><input type="radio" name="a8" id="a8-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="a8" id="a8-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="a8" id="a8-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="a8" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de a8" autocomplete="off" />
             </div>
@@ -1390,8 +1416,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (a9)</legend>
-                <label><input type="radio" name="a9" id="a9-si" value="si" /> Sí</label>
-                <label><input type="radio" name="a9" id="a9-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="a9" id="a9-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="a9" id="a9-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="a9" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de a9" autocomplete="off" />
             </div>
@@ -1424,8 +1450,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (a10)</legend>
-                <label><input type="radio" name="a10" id="a10-si" value="si" /> Sí</label>
-                <label><input type="radio" name="a10" id="a10-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="a10" id="a10-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="a10" id="a10-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="a10" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de a10" autocomplete="off" />
             </div>
@@ -1447,7 +1473,7 @@
           <h2>Bilingüe ES/EN</h2>
         </div>
         <p class="meta-bloque chica suave">
-          ~3 min · el botón ES/EN del encabezado.
+          El botón ES/EN del encabezado.
         </p>
         <ul class="pasos">
           <li id="b1" class="ens-fila" data-origen="mejorado" data-rev="1" data-rev-min="2">
@@ -1467,8 +1493,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (b1)</legend>
-                <label><input type="radio" name="b1" id="b1-si" value="si" /> Sí</label>
-                <label><input type="radio" name="b1" id="b1-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="b1" id="b1-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="b1" id="b1-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="b1" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de b1" autocomplete="off" />
             </div>
@@ -1483,8 +1509,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (b2)</legend>
-                <label><input type="radio" name="b2" id="b2-si" value="si" /> Sí</label>
-                <label><input type="radio" name="b2" id="b2-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="b2" id="b2-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="b2" id="b2-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="b2" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de b2" autocomplete="off" />
             </div>
@@ -1499,7 +1525,7 @@
           <h2>Profundidad: bullets y case studies</h2>
         </div>
         <p class="meta-bloque chica suave">
-          ~5 min · Trayectoria (los case studies se abren desde sus hitos).
+          Trayectoria (los case studies se abren desde sus hitos).
         </p>
         <ul class="pasos">
           <li id="c1" class="ens-fila" data-origen="mejorado" data-rev="2" data-rev-min="1">
@@ -1517,8 +1543,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (c1)</legend>
-                <label><input type="radio" name="c1" id="c1-si" value="si" /> Sí</label>
-                <label><input type="radio" name="c1" id="c1-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="c1" id="c1-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="c1" id="c1-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="c1" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de c1" autocomplete="off" />
             </div>
@@ -1547,8 +1573,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (c2)</legend>
-                <label><input type="radio" name="c2" id="c2-si" value="si" /> Sí</label>
-                <label><input type="radio" name="c2" id="c2-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="c2" id="c2-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="c2" id="c2-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="c2" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de c2" autocomplete="off" />
             </div>
@@ -1569,8 +1595,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (c3)</legend>
-                <label><input type="radio" name="c3" id="c3-si" value="si" /> Sí</label>
-                <label><input type="radio" name="c3" id="c3-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="c3" id="c3-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="c3" id="c3-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="c3" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de c3" autocomplete="off" />
             </div>
@@ -1588,8 +1614,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (c4)</legend>
-                <label><input type="radio" name="c4" id="c4-si" value="si" /> Sí</label>
-                <label><input type="radio" name="c4" id="c4-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="c4" id="c4-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="c4" id="c4-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="c4" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de c4" autocomplete="off" />
             </div>
@@ -1606,8 +1632,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (c5)</legend>
-                <label><input type="radio" name="c5" id="c5-si" value="si" /> Sí</label>
-                <label><input type="radio" name="c5" id="c5-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="c5" id="c5-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="c5" id="c5-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="c5" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de c5" autocomplete="off" />
             </div>
@@ -1622,7 +1648,7 @@
           <h2>Descargar CV en PDF (ATS)</h2>
         </div>
         <p class="meta-bloque chica suave">
-          ~6 min · botón "CV (PDF)" y ruta <code>/cv</code>. La d3 necesita el
+          Botón "CV (PDF)" y ruta <code>/cv</code>. La d3 necesita el
           dominio ya configurado en Vercel (<code>NEXT_PUBLIC_SITE_URL</code>);
           sin él, el PDF sale sin bloque del dominio ni pie, a propósito.
         </p>
@@ -1650,8 +1676,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (d1)</legend>
-                <label><input type="radio" name="d1" id="d1-si" value="si" /> Sí</label>
-                <label><input type="radio" name="d1" id="d1-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="d1" id="d1-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="d1" id="d1-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="d1" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de d1" autocomplete="off" />
             </div>
@@ -1667,8 +1693,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (d2)</legend>
-                <label><input type="radio" name="d2" id="d2-si" value="si" /> Sí</label>
-                <label><input type="radio" name="d2" id="d2-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="d2" id="d2-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="d2" id="d2-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="d2" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de d2" autocomplete="off" />
             </div>
@@ -1697,8 +1723,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (d3)</legend>
-                <label><input type="radio" name="d3" id="d3-si" value="si" /> Sí</label>
-                <label><input type="radio" name="d3" id="d3-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="d3" id="d3-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="d3" id="d3-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="d3" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de d3" autocomplete="off" />
             </div>
@@ -1712,7 +1738,7 @@
           <span class="letra">E</span>
           <h2>Escríbeme (el formulario de contacto)</h2>
         </div>
-        <p class="meta-bloque chica suave">~4 min · sección Contacto.</p>
+        <p class="meta-bloque chica suave">Sección Contacto.</p>
         <ul class="pasos">
           <li id="e1" class="ens-fila" data-origen="mejorado" data-rev="2" data-rev-min="1">
             <div class="ens-cuerpo">
@@ -1731,8 +1757,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (e1)</legend>
-                <label><input type="radio" name="e1" id="e1-si" value="si" /> Sí</label>
-                <label><input type="radio" name="e1" id="e1-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="e1" id="e1-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="e1" id="e1-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="e1" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de e1" autocomplete="off" />
             </div>
@@ -1748,8 +1774,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (e2)</legend>
-                <label><input type="radio" name="e2" id="e2-si" value="si" /> Sí</label>
-                <label><input type="radio" name="e2" id="e2-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="e2" id="e2-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="e2" id="e2-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="e2" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de e2" autocomplete="off" />
             </div>
@@ -1769,8 +1795,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (e4)</legend>
-                <label><input type="radio" name="e4" id="e4-si" value="si" /> Sí</label>
-                <label><input type="radio" name="e4" id="e4-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="e4" id="e4-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="e4" id="e4-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="e4" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de e4" autocomplete="off" />
             </div>
@@ -1793,8 +1819,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (e3)</legend>
-                <label><input type="radio" name="e3" id="e3-si" value="si" /> Sí</label>
-                <label><input type="radio" name="e3" id="e3-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="e3" id="e3-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="e3" id="e3-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="e3" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de e3" autocomplete="off" />
             </div>
@@ -1822,8 +1848,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (e5)</legend>
-                <label><input type="radio" name="e5" id="e5-si" value="si" /> Sí</label>
-                <label><input type="radio" name="e5" id="e5-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="e5" id="e5-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="e5" id="e5-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="e5" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de e5" autocomplete="off" />
             </div>
@@ -1842,8 +1868,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (e6)</legend>
-                <label><input type="radio" name="e6" id="e6-si" value="si" /> Sí</label>
-                <label><input type="radio" name="e6" id="e6-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="e6" id="e6-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="e6" id="e6-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="e6" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de e6" autocomplete="off" />
             </div>
@@ -1866,7 +1892,7 @@
           <h2>El chat que responde por ti</h2>
         </div>
         <p class="meta-bloque chica suave">
-          ~8 min · botón flotante "Pregúntale a mi HV".
+          Botón flotante "Pregúntale a mi HV".
         </p>
         <ul class="pasos">
           <li id="f1" class="ens-fila" data-origen="mejorado" data-rev="3" data-rev-min="2">
@@ -1897,8 +1923,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (f1)</legend>
-                <label><input type="radio" name="f1" id="f1-si" value="si" /> Sí</label>
-                <label><input type="radio" name="f1" id="f1-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="f1" id="f1-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="f1" id="f1-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="f1" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de f1" autocomplete="off" />
             </div>
@@ -1912,8 +1938,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (f2)</legend>
-                <label><input type="radio" name="f2" id="f2-si" value="si" /> Sí</label>
-                <label><input type="radio" name="f2" id="f2-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="f2" id="f2-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="f2" id="f2-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="f2" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de f2" autocomplete="off" />
             </div>
@@ -1927,8 +1953,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (f3)</legend>
-                <label><input type="radio" name="f3" id="f3-si" value="si" /> Sí</label>
-                <label><input type="radio" name="f3" id="f3-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="f3" id="f3-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="f3" id="f3-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="f3" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de f3" autocomplete="off" />
             </div>
@@ -1942,8 +1968,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (f4)</legend>
-                <label><input type="radio" name="f4" id="f4-si" value="si" /> Sí</label>
-                <label><input type="radio" name="f4" id="f4-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="f4" id="f4-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="f4" id="f4-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="f4" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de f4" autocomplete="off" />
             </div>
@@ -1960,8 +1986,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (f5)</legend>
-                <label><input type="radio" name="f5" id="f5-si" value="si" /> Sí</label>
-                <label><input type="radio" name="f5" id="f5-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="f5" id="f5-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="f5" id="f5-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="f5" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de f5" autocomplete="off" />
             </div>
@@ -1980,8 +2006,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (f6)</legend>
-                <label><input type="radio" name="f6" id="f6-si" value="si" /> Sí</label>
-                <label><input type="radio" name="f6" id="f6-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="f6" id="f6-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="f6" id="f6-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="f6" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de f6" autocomplete="off" />
             </div>
@@ -2003,8 +2029,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (f7)</legend>
-                <label><input type="radio" name="f7" id="f7-si" value="si" /> Sí</label>
-                <label><input type="radio" name="f7" id="f7-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="f7" id="f7-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="f7" id="f7-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="f7" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de f7" autocomplete="off" />
             </div>
@@ -2026,8 +2052,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (f8)</legend>
-                <label><input type="radio" name="f8" id="f8-si" value="si" /> Sí</label>
-                <label><input type="radio" name="f8" id="f8-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="f8" id="f8-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="f8" id="f8-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="f8" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de f8" autocomplete="off" />
             </div>
@@ -2049,8 +2075,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (f9)</legend>
-                <label><input type="radio" name="f9" id="f9-si" value="si" /> Sí</label>
-                <label><input type="radio" name="f9" id="f9-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="f9" id="f9-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="f9" id="f9-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="f9" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de f9" autocomplete="off" />
             </div>
@@ -2073,8 +2099,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (f10)</legend>
-                <label><input type="radio" name="f10" id="f10-si" value="si" /> Sí</label>
-                <label><input type="radio" name="f10" id="f10-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="f10" id="f10-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="f10" id="f10-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="f10" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de f10" autocomplete="off" />
             </div>
@@ -2093,8 +2119,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (f11)</legend>
-                <label><input type="radio" name="f11" id="f11-si" value="si" /> Sí</label>
-                <label><input type="radio" name="f11" id="f11-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="f11" id="f11-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="f11" id="f11-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="f11" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de f11" autocomplete="off" />
             </div>
@@ -2106,8 +2132,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (f12)</legend>
-                <label><input type="radio" name="f12" id="f12-si" value="si" /> Sí</label>
-                <label><input type="radio" name="f12" id="f12-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="f12" id="f12-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="f12" id="f12-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="f12" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de f12" autocomplete="off" />
             </div>
@@ -2129,7 +2155,7 @@
           <h2>Roadmap con votación anónima</h2>
         </div>
         <p class="meta-bloque chica suave">
-          ~6 min · en <code>/es/vitrina/apps/&lt;slug&gt;</code>, sección
+          En <code>/es/vitrina/apps/&lt;slug&gt;</code>, sección
           Roadmap de cada app · la feature estrella del S4.
         </p>
         <div class="reportame">
@@ -2168,8 +2194,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (g1d)</legend>
-                <label><input type="radio" name="g1d" id="g1d-si" value="si" /> Sí</label>
-                <label><input type="radio" name="g1d" id="g1d-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="g1d" id="g1d-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="g1d" id="g1d-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="g1d" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de g1d" autocomplete="off" />
             </div>
@@ -2183,8 +2209,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (g2)</legend>
-                <label><input type="radio" name="g2" id="g2-si" value="si" /> Sí</label>
-                <label><input type="radio" name="g2" id="g2-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="g2" id="g2-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="g2" id="g2-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="g2" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de g2" autocomplete="off" />
             </div>
@@ -2198,8 +2224,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (g3)</legend>
-                <label><input type="radio" name="g3" id="g3-si" value="si" /> Sí</label>
-                <label><input type="radio" name="g3" id="g3-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="g3" id="g3-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="g3" id="g3-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="g3" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de g3" autocomplete="off" />
             </div>
@@ -2213,8 +2239,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (g4)</legend>
-                <label><input type="radio" name="g4" id="g4-si" value="si" /> Sí</label>
-                <label><input type="radio" name="g4" id="g4-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="g4" id="g4-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="g4" id="g4-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="g4" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de g4" autocomplete="off" />
             </div>
@@ -2234,8 +2260,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (g5)</legend>
-                <label><input type="radio" name="g5" id="g5-si" value="si" /> Sí</label>
-                <label><input type="radio" name="g5" id="g5-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="g5" id="g5-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="g5" id="g5-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="g5" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de g5" autocomplete="off" />
             </div>
@@ -2258,8 +2284,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (g6)</legend>
-                <label><input type="radio" name="g6" id="g6-si" value="si" /> Sí</label>
-                <label><input type="radio" name="g6" id="g6-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="g6" id="g6-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="g6" id="g6-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="g6" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de g6" autocomplete="off" />
             </div>
@@ -2288,7 +2314,7 @@
           <h2>Página brochure por app</h2>
         </div>
         <p class="meta-bloque chica suave">
-          ~5 min · bloque «De esta casa» en la vitrina y rutas
+          Bloque «De esta casa» en la vitrina y rutas
           <code>/apps/&lt;app&gt;</code>.
         </p>
         <ul class="pasos">
@@ -2306,8 +2332,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (h1)</legend>
-                <label><input type="radio" name="h1" id="h1-si" value="si" /> Sí</label>
-                <label><input type="radio" name="h1" id="h1-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="h1" id="h1-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="h1" id="h1-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="h1" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de h1" autocomplete="off" />
             </div>
@@ -2322,8 +2348,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (h2)</legend>
-                <label><input type="radio" name="h2" id="h2-si" value="si" /> Sí</label>
-                <label><input type="radio" name="h2" id="h2-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="h2" id="h2-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="h2" id="h2-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="h2" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de h2" autocomplete="off" />
             </div>
@@ -2337,8 +2363,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (h3)</legend>
-                <label><input type="radio" name="h3" id="h3-si" value="si" /> Sí</label>
-                <label><input type="radio" name="h3" id="h3-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="h3" id="h3-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="h3" id="h3-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="h3" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de h3" autocomplete="off" />
             </div>
@@ -2354,8 +2380,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (h4)</legend>
-                <label><input type="radio" name="h4" id="h4-si" value="si" /> Sí</label>
-                <label><input type="radio" name="h4" id="h4-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="h4" id="h4-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="h4" id="h4-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="h4" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de h4" autocomplete="off" />
             </div>
@@ -2370,7 +2396,7 @@
           <h2>Menú en móvil</h2>
         </div>
         <p class="meta-bloque chica suave">
-          ~3 min · en un teléfono o ventana angosta.
+          En un teléfono o ventana angosta.
         </p>
         <ul class="pasos">
           <li id="i1" class="ens-fila" data-origen="heredada" data-rev="8" data-rev-min="1">
@@ -2382,8 +2408,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (i1)</legend>
-                <label><input type="radio" name="i1" id="i1-si" value="si" /> Sí</label>
-                <label><input type="radio" name="i1" id="i1-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="i1" id="i1-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="i1" id="i1-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="i1" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de i1" autocomplete="off" />
             </div>
@@ -2399,8 +2425,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (i2)</legend>
-                <label><input type="radio" name="i2" id="i2-si" value="si" /> Sí</label>
-                <label><input type="radio" name="i2" id="i2-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="i2" id="i2-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="i2" id="i2-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="i2" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de i2" autocomplete="off" />
             </div>
@@ -2414,7 +2440,7 @@
           <span class="letra">K</span>
           <h2>La vitrina: el portal, las apps y los frentes</h2>
         </div>
-        <p class="meta-bloque chica suave">~30 min · escritorio y un teléfono real.</p>
+        <p class="meta-bloque chica suave">Escritorio y un teléfono real.</p>
         <ul class="pasos">
           <li id="k1b" class="ens-fila" data-origen="mejorado" data-rev="4" data-rev-min="2">
             <div class="ens-cuerpo">
@@ -2435,8 +2461,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (k1b)</legend>
-                <label><input type="radio" name="k1b" id="k1b-si" value="si" /> Sí</label>
-                <label><input type="radio" name="k1b" id="k1b-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="k1b" id="k1b-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="k1b" id="k1b-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="k1b" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de k1b" autocomplete="off" />
             </div>
@@ -2456,8 +2482,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (k2)</legend>
-                <label><input type="radio" name="k2" id="k2-si" value="si" /> Sí</label>
-                <label><input type="radio" name="k2" id="k2-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="k2" id="k2-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="k2" id="k2-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="k2" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de k2" autocomplete="off" />
             </div>
@@ -2477,8 +2503,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (k10)</legend>
-                <label><input type="radio" name="k10" id="k10-si" value="si" /> Sí</label>
-                <label><input type="radio" name="k10" id="k10-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="k10" id="k10-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="k10" id="k10-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="k10" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de k10" autocomplete="off" />
             </div>
@@ -2498,8 +2524,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (k11)</legend>
-                <label><input type="radio" name="k11" id="k11-si" value="si" /> Sí</label>
-                <label><input type="radio" name="k11" id="k11-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="k11" id="k11-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="k11" id="k11-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="k11" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de k11" autocomplete="off" />
             </div>
@@ -2514,8 +2540,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (k12)</legend>
-                <label><input type="radio" name="k12" id="k12-si" value="si" /> Sí</label>
-                <label><input type="radio" name="k12" id="k12-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="k12" id="k12-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="k12" id="k12-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="k12" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de k12" autocomplete="off" />
             </div>
@@ -2535,8 +2561,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (k13)</legend>
-                <label><input type="radio" name="k13" id="k13-si" value="si" /> Sí</label>
-                <label><input type="radio" name="k13" id="k13-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="k13" id="k13-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="k13" id="k13-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="k13" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de k13" autocomplete="off" />
             </div>
@@ -2555,8 +2581,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (k17)</legend>
-                <label><input type="radio" name="k17" id="k17-si" value="si" /> Sí</label>
-                <label><input type="radio" name="k17" id="k17-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="k17" id="k17-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="k17" id="k17-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="k17" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de k17" autocomplete="off" />
             </div>
@@ -2582,8 +2608,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (k18)</legend>
-                <label><input type="radio" name="k18" id="k18-si" value="si" /> Sí</label>
-                <label><input type="radio" name="k18" id="k18-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="k18" id="k18-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="k18" id="k18-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="k18" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de k18" autocomplete="off" />
             </div>
@@ -2600,8 +2626,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (k14)</legend>
-                <label><input type="radio" name="k14" id="k14-si" value="si" /> Sí</label>
-                <label><input type="radio" name="k14" id="k14-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="k14" id="k14-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="k14" id="k14-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="k14" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de k14" autocomplete="off" />
             </div>
@@ -2615,8 +2641,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (k3)</legend>
-                <label><input type="radio" name="k3" id="k3-si" value="si" /> Sí</label>
-                <label><input type="radio" name="k3" id="k3-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="k3" id="k3-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="k3" id="k3-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="k3" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de k3" autocomplete="off" />
             </div>
@@ -2634,8 +2660,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (k4)</legend>
-                <label><input type="radio" name="k4" id="k4-si" value="si" /> Sí</label>
-                <label><input type="radio" name="k4" id="k4-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="k4" id="k4-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="k4" id="k4-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="k4" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de k4" autocomplete="off" />
             </div>
@@ -2650,8 +2676,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (k5)</legend>
-                <label><input type="radio" name="k5" id="k5-si" value="si" /> Sí</label>
-                <label><input type="radio" name="k5" id="k5-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="k5" id="k5-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="k5" id="k5-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="k5" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de k5" autocomplete="off" />
             </div>
@@ -2667,8 +2693,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (k6)</legend>
-                <label><input type="radio" name="k6" id="k6-si" value="si" /> Sí</label>
-                <label><input type="radio" name="k6" id="k6-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="k6" id="k6-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="k6" id="k6-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="k6" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de k6" autocomplete="off" />
             </div>
@@ -2684,8 +2710,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (k7)</legend>
-                <label><input type="radio" name="k7" id="k7-si" value="si" /> Sí</label>
-                <label><input type="radio" name="k7" id="k7-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="k7" id="k7-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="k7" id="k7-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="k7" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de k7" autocomplete="off" />
             </div>
@@ -2709,8 +2735,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (k8)</legend>
-                <label><input type="radio" name="k8" id="k8-si" value="si" /> Sí</label>
-                <label><input type="radio" name="k8" id="k8-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="k8" id="k8-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="k8" id="k8-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="k8" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de k8" autocomplete="off" />
             </div>
@@ -2731,8 +2757,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (k9)</legend>
-                <label><input type="radio" name="k9" id="k9-si" value="si" /> Sí</label>
-                <label><input type="radio" name="k9" id="k9-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="k9" id="k9-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="k9" id="k9-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="k9" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de k9" autocomplete="off" />
             </div>
@@ -2774,8 +2800,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (k15f)</legend>
-                <label><input type="radio" name="k15f" id="k15f-si" value="si" /> Sí</label>
-                <label><input type="radio" name="k15f" id="k15f-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="k15f" id="k15f-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="k15f" id="k15f-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="k15f" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de k15f" autocomplete="off" />
             </div>
@@ -2801,8 +2827,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (k16b)</legend>
-                <label><input type="radio" name="k16b" id="k16b-si" value="si" /> Sí</label>
-                <label><input type="radio" name="k16b" id="k16b-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="k16b" id="k16b-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="k16b" id="k16b-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="k16b" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de k16b" autocomplete="off" />
             </div>
@@ -2817,7 +2843,7 @@
           <h2>Las fichas por dentro: tarjetas que se abren al leer</h2>
         </div>
         <p class="meta-bloque chica suave">
-          ~10 min · escritorio + un teléfono real.
+          Escritorio + un teléfono real.
         </p>
         <ul class="pasos">
           <li id="l1" class="ens-fila" data-origen="heredada" data-rev="4" data-rev-min="2">
@@ -2830,8 +2856,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (l1)</legend>
-                <label><input type="radio" name="l1" id="l1-si" value="si" /> Sí</label>
-                <label><input type="radio" name="l1" id="l1-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="l1" id="l1-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="l1" id="l1-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="l1" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de l1" autocomplete="off" />
             </div>
@@ -2844,8 +2870,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (l2)</legend>
-                <label><input type="radio" name="l2" id="l2-si" value="si" /> Sí</label>
-                <label><input type="radio" name="l2" id="l2-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="l2" id="l2-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="l2" id="l2-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="l2" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de l2" autocomplete="off" />
             </div>
@@ -2860,8 +2886,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (l3)</legend>
-                <label><input type="radio" name="l3" id="l3-si" value="si" /> Sí</label>
-                <label><input type="radio" name="l3" id="l3-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="l3" id="l3-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="l3" id="l3-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="l3" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de l3" autocomplete="off" />
             </div>
@@ -2876,8 +2902,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (l4)</legend>
-                <label><input type="radio" name="l4" id="l4-si" value="si" /> Sí</label>
-                <label><input type="radio" name="l4" id="l4-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="l4" id="l4-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="l4" id="l4-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="l4" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de l4" autocomplete="off" />
             </div>
@@ -2894,8 +2920,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (l5b)</legend>
-                <label><input type="radio" name="l5b" id="l5b-si" value="si" /> Sí</label>
-                <label><input type="radio" name="l5b" id="l5b-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="l5b" id="l5b-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="l5b" id="l5b-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="l5b" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de l5b" autocomplete="off" />
             </div>
@@ -2913,8 +2939,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (l6)</legend>
-                <label><input type="radio" name="l6" id="l6-si" value="si" /> Sí</label>
-                <label><input type="radio" name="l6" id="l6-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="l6" id="l6-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="l6" id="l6-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="l6" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de l6" autocomplete="off" />
             </div>
@@ -2930,8 +2956,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (l7)</legend>
-                <label><input type="radio" name="l7" id="l7-si" value="si" /> Sí</label>
-                <label><input type="radio" name="l7" id="l7-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="l7" id="l7-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="l7" id="l7-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="l7" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de l7" autocomplete="off" />
             </div>
@@ -2946,7 +2972,7 @@
           <h2>Las estanterías: los frentes con piezas</h2>
         </div>
         <p class="meta-bloque chica suave">
-          ~20 min · escritorio + un teléfono real. Las 27 fichas de agentes,
+          Escritorio + un teléfono real. Las 27 fichas de agentes,
           investigaciones y tableros las escribió
           <strong>quien construyó cada pieza</strong>, no esta app: aquí se
           comprueba que llegaron enteras y se leen bien.
@@ -2967,8 +2993,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (m1b)</legend>
-                <label><input type="radio" name="m1b" id="m1b-si" value="si" /> Sí</label>
-                <label><input type="radio" name="m1b" id="m1b-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="m1b" id="m1b-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="m1b" id="m1b-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="m1b" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de m1b" autocomplete="off" />
             </div>
@@ -2987,8 +3013,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (m2)</legend>
-                <label><input type="radio" name="m2" id="m2-si" value="si" /> Sí</label>
-                <label><input type="radio" name="m2" id="m2-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="m2" id="m2-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="m2" id="m2-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="m2" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de m2" autocomplete="off" />
             </div>
@@ -3006,8 +3032,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (m3)</legend>
-                <label><input type="radio" name="m3" id="m3-si" value="si" /> Sí</label>
-                <label><input type="radio" name="m3" id="m3-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="m3" id="m3-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="m3" id="m3-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="m3" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de m3" autocomplete="off" />
             </div>
@@ -3026,8 +3052,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (m4)</legend>
-                <label><input type="radio" name="m4" id="m4-si" value="si" /> Sí</label>
-                <label><input type="radio" name="m4" id="m4-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="m4" id="m4-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="m4" id="m4-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="m4" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de m4" autocomplete="off" />
             </div>
@@ -3047,8 +3073,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (m5)</legend>
-                <label><input type="radio" name="m5" id="m5-si" value="si" /> Sí</label>
-                <label><input type="radio" name="m5" id="m5-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="m5" id="m5-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="m5" id="m5-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="m5" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de m5" autocomplete="off" />
             </div>
@@ -3064,8 +3090,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (m6)</legend>
-                <label><input type="radio" name="m6" id="m6-si" value="si" /> Sí</label>
-                <label><input type="radio" name="m6" id="m6-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="m6" id="m6-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="m6" id="m6-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="m6" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de m6" autocomplete="off" />
             </div>
@@ -3081,8 +3107,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (m7)</legend>
-                <label><input type="radio" name="m7" id="m7-si" value="si" /> Sí</label>
-                <label><input type="radio" name="m7" id="m7-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="m7" id="m7-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="m7" id="m7-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="m7" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de m7" autocomplete="off" />
             </div>
@@ -3101,8 +3127,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (m8)</legend>
-                <label><input type="radio" name="m8" id="m8-si" value="si" /> Sí</label>
-                <label><input type="radio" name="m8" id="m8-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="m8" id="m8-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="m8" id="m8-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="m8" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de m8" autocomplete="off" />
             </div>
@@ -3117,8 +3143,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (m9)</legend>
-                <label><input type="radio" name="m9" id="m9-si" value="si" /> Sí</label>
-                <label><input type="radio" name="m9" id="m9-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="m9" id="m9-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="m9" id="m9-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="m9" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de m9" autocomplete="off" />
             </div>
@@ -3138,8 +3164,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (m10)</legend>
-                <label><input type="radio" name="m10" id="m10-si" value="si" /> Sí</label>
-                <label><input type="radio" name="m10" id="m10-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="m10" id="m10-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="m10" id="m10-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="m10" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de m10" autocomplete="off" />
             </div>
@@ -3157,8 +3183,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (m11)</legend>
-                <label><input type="radio" name="m11" id="m11-si" value="si" /> Sí</label>
-                <label><input type="radio" name="m11" id="m11-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="m11" id="m11-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="m11" id="m11-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="m11" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de m11" autocomplete="off" />
             </div>
@@ -3176,8 +3202,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (m12)</legend>
-                <label><input type="radio" name="m12" id="m12-si" value="si" /> Sí</label>
-                <label><input type="radio" name="m12" id="m12-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="m12" id="m12-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="m12" id="m12-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="m12" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de m12" autocomplete="off" />
             </div>
@@ -3195,8 +3221,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (m13)</legend>
-                <label><input type="radio" name="m13" id="m13-si" value="si" /> Sí</label>
-                <label><input type="radio" name="m13" id="m13-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="m13" id="m13-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="m13" id="m13-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="m13" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de m13" autocomplete="off" />
             </div>
@@ -3213,8 +3239,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (m14)</legend>
-                <label><input type="radio" name="m14" id="m14-si" value="si" /> Sí</label>
-                <label><input type="radio" name="m14" id="m14-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="m14" id="m14-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="m14" id="m14-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="m14" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de m14" autocomplete="off" />
             </div>
@@ -3226,8 +3252,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (m15)</legend>
-                <label><input type="radio" name="m15" id="m15-si" value="si" /> Sí</label>
-                <label><input type="radio" name="m15" id="m15-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="m15" id="m15-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="m15" id="m15-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="m15" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de m15" autocomplete="off" />
             </div>
@@ -3254,7 +3280,7 @@
           </h2>
         </div>
         <p class="meta-bloque chica suave">
-          ~15 min · en <code>/es</code> · escritorio + un teléfono real.
+          En <code>/es</code> · escritorio + un teléfono real.
         </p>
         <ul class="pasos">
           <li id="n1" class="ens-fila" data-origen="heredada" data-rev="1" data-rev-min="2">
@@ -3271,8 +3297,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (n1)</legend>
-                <label><input type="radio" name="n1" id="n1-si" value="si" /> Sí</label>
-                <label><input type="radio" name="n1" id="n1-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="n1" id="n1-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="n1" id="n1-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="n1" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de n1" autocomplete="off" />
             </div>
@@ -3288,8 +3314,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (n2)</legend>
-                <label><input type="radio" name="n2" id="n2-si" value="si" /> Sí</label>
-                <label><input type="radio" name="n2" id="n2-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="n2" id="n2-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="n2" id="n2-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="n2" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de n2" autocomplete="off" />
             </div>
@@ -3304,8 +3330,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (n3)</legend>
-                <label><input type="radio" name="n3" id="n3-si" value="si" /> Sí</label>
-                <label><input type="radio" name="n3" id="n3-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="n3" id="n3-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="n3" id="n3-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="n3" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de n3" autocomplete="off" />
             </div>
@@ -3323,8 +3349,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (n4b)</legend>
-                <label><input type="radio" name="n4b" id="n4b-si" value="si" /> Sí</label>
-                <label><input type="radio" name="n4b" id="n4b-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="n4b" id="n4b-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="n4b" id="n4b-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="n4b" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de n4b" autocomplete="off" />
             </div>
@@ -3344,8 +3370,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (n5)</legend>
-                <label><input type="radio" name="n5" id="n5-si" value="si" /> Sí</label>
-                <label><input type="radio" name="n5" id="n5-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="n5" id="n5-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="n5" id="n5-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="n5" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de n5" autocomplete="off" />
             </div>
@@ -3366,8 +3392,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (n6)</legend>
-                <label><input type="radio" name="n6" id="n6-si" value="si" /> Sí</label>
-                <label><input type="radio" name="n6" id="n6-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="n6" id="n6-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="n6" id="n6-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="n6" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de n6" autocomplete="off" />
             </div>
@@ -3383,8 +3409,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (n7)</legend>
-                <label><input type="radio" name="n7" id="n7-si" value="si" /> Sí</label>
-                <label><input type="radio" name="n7" id="n7-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="n7" id="n7-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="n7" id="n7-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="n7" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de n7" autocomplete="off" />
             </div>
@@ -3399,8 +3425,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (n8)</legend>
-                <label><input type="radio" name="n8" id="n8-si" value="si" /> Sí</label>
-                <label><input type="radio" name="n8" id="n8-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="n8" id="n8-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="n8" id="n8-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="n8" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de n8" autocomplete="off" />
             </div>
@@ -3417,8 +3443,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (n9)</legend>
-                <label><input type="radio" name="n9" id="n9-si" value="si" /> Sí</label>
-                <label><input type="radio" name="n9" id="n9-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="n9" id="n9-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="n9" id="n9-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="n9" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de n9" autocomplete="off" />
             </div>
@@ -3441,8 +3467,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (n10)</legend>
-                <label><input type="radio" name="n10" id="n10-si" value="si" /> Sí</label>
-                <label><input type="radio" name="n10" id="n10-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="n10" id="n10-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="n10" id="n10-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="n10" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de n10" autocomplete="off" />
             </div>
@@ -3464,8 +3490,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (n11)</legend>
-                <label><input type="radio" name="n11" id="n11-si" value="si" /> Sí</label>
-                <label><input type="radio" name="n11" id="n11-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="n11" id="n11-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="n11" id="n11-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="n11" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de n11" autocomplete="off" />
             </div>
@@ -3488,7 +3514,7 @@
           <h2>El «a fondo»: el corpus que alimenta al chat</h2>
         </div>
         <p class="meta-bloque chica suave">
-          ~25 min · la mitad con el repositorio delante, no con el navegador ·
+          La mitad con el repositorio delante, no con el navegador ·
           los documentos <strong>no tienen página</strong>: son combustible del
           chat.
         </p>
@@ -3503,8 +3529,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (o1)</legend>
-                <label><input type="radio" name="o1" id="o1-si" value="si" /> Sí</label>
-                <label><input type="radio" name="o1" id="o1-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="o1" id="o1-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="o1" id="o1-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="o1" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de o1" autocomplete="off" />
             </div>
@@ -3520,26 +3546,26 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (o2)</legend>
-                <label><input type="radio" name="o2" id="o2-si" value="si" /> Sí</label>
-                <label><input type="radio" name="o2" id="o2-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="o2" id="o2-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="o2" id="o2-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="o2" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de o2" autocomplete="off" />
             </div>
           </li>
-          <li id="o3" class="ens-fila" data-origen="mejorada" data-rev="10" data-rev-min="2">
+          <li id="o3" class="ens-fila" data-origen="mejorada" data-rev="11" data-rev-min="2">
             <div class="ens-cuerpo">
               <p class="p-texto"><code class="p-id">o3</code> Abre <code>data/a-fondo/README.md</code>: la tabla dice cuántos documentos, subsecciones y palabras tiene el corpus (las cuentas las escribe el generador, no este texto), <strong>0 <code>[CONFIRMAR]</code></strong> y que todos están aprobados. Corre <code>pnpm corpus:informe</code> y comprueba que la tabla se regenera sola. <span class="origen origen-mejorada">Mejorado en a fondo v2</span></p>
             </div>
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (o3)</legend>
-                <label><input type="radio" name="o3" id="o3-si" value="si" /> Sí</label>
-                <label><input type="radio" name="o3" id="o3-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="o3" id="o3-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="o3" id="o3-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="o3" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de o3" autocomplete="off" />
             </div>
           </li>
-          <li id="o4" class="ens-fila" data-origen="mejorada" data-rev="10" data-rev-min="3">
+          <li id="o4" class="ens-fila" data-origen="mejorada" data-rev="11" data-rev-min="3">
             <div class="ens-cuerpo">
               <p class="p-texto"><code class="p-id">o4</code> Mira cómo se defiende el canal: en cualquier
               <code>.en.md</code> cambia el id de una subsección
@@ -3554,26 +3580,26 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (o4)</legend>
-                <label><input type="radio" name="o4" id="o4-si" value="si" /> Sí</label>
-                <label><input type="radio" name="o4" id="o4-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="o4" id="o4-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="o4" id="o4-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="o4" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de o4" autocomplete="off" />
             </div>
           </li>
-          <li id="o5" class="ens-fila" data-origen="mejorada" data-rev="10" data-rev-min="2">
+          <li id="o5" class="ens-fila" data-origen="mejorada" data-rev="11" data-rev-min="2">
             <div class="ens-cuerpo">
               <p class="p-texto"><code class="p-id">o5</code> Corre <code>pnpm corpus:informe</code> (reescribe <code>sprints/SPRINT_008-banco-de-preguntas.md</code>; descártalo después con git) y ábrelo: en «El número», <strong>todas</strong> las preguntas de afuera traen su fuente en el top-4 y <strong>cero</strong> preguntas legítimas reciben «eso se me escapa»; en «Preguntas ajenas», las que no son tuyas las para el guardrail sin gastar tokens o las declina el prompt. Los tres huecos declarados (salario, disponibilidad, viajes) son tuyos. <span class="origen origen-mejorada">Mejorado en a fondo v2</span></p>
             </div>
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (o5)</legend>
-                <label><input type="radio" name="o5" id="o5-si" value="si" /> Sí</label>
-                <label><input type="radio" name="o5" id="o5-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="o5" id="o5-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="o5" id="o5-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="o5" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de o5" autocomplete="off" />
             </div>
           </li>
-          <li id="o6" class="ens-fila" data-origen="mejorada" data-minimo data-ensayo-fuera="no es un flujo de cliente: es una lectura del repositorio (data/a-fondo/), no de producción; queda para el gate de juicio del hito." data-rev="10" data-rev-min="7">
+          <li id="o6" class="ens-fila" data-origen="mejorada" data-minimo data-ensayo-fuera="no es un flujo de cliente: es una lectura del repositorio (data/a-fondo/), no de producción; queda para el gate de juicio del hito." data-rev="11" data-rev-min="7">
             <div class="ens-cuerpo">
               <p class="p-texto"><code class="p-id">o6</code> ⭐
               <strong>Lee un documento entero y decide si es tuyo.</strong>
@@ -3590,13 +3616,13 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (o6)</legend>
-                <label><input type="radio" name="o6" id="o6-si" value="si" /> Sí</label>
-                <label><input type="radio" name="o6" id="o6-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="o6" id="o6-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="o6" id="o6-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="o6" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de o6" autocomplete="off" />
             </div>
           </li>
-          <li id="o7" class="ens-fila" data-origen="nuevo" data-minimo data-ensayo-fuera="no es un flujo de cliente: es una lectura del repositorio (data/a-fondo/), no de producción; tests/unit/ctic-aproximadas.test.ts respalda lo medible y el resto queda para el gate de juicio del hito." data-rev="10" data-rev-min="5">
+          <li id="o7" class="ens-fila" data-origen="nuevo" data-minimo data-ensayo-fuera="no es un flujo de cliente: es una lectura del repositorio (data/a-fondo/), no de producción; tests/unit/ctic-aproximadas.test.ts respalda lo medible y el resto queda para el gate de juicio del hito." data-rev="11" data-rev-min="5">
             <div class="ens-cuerpo">
               <p class="p-texto"><code class="p-id">o7</code> ⭐ <strong>Cero terceros identificables.</strong> Barre los 25,
               en los dos idiomas, buscando el nombre de una persona —un jefe, un cliente, un
@@ -3610,13 +3636,13 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (o7)</legend>
-                <label><input type="radio" name="o7" id="o7-si" value="si" /> Sí</label>
-                <label><input type="radio" name="o7" id="o7-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="o7" id="o7-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="o7" id="o7-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="o7" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de o7" autocomplete="off" />
             </div>
           </li>
-          <li id="o8" class="ens-fila" data-origen="mejorada" data-minimo data-ensayo-fuera="no es un flujo de cliente: es una lectura del repositorio (data/a-fondo/), no de producción; tests/unit/a-fondo-cifras-gemelas.test.ts respalda las cifras y el resto queda para el gate de juicio del hito." data-rev="10" data-rev-min="6">
+          <li id="o8" class="ens-fila" data-origen="mejorada" data-minimo data-ensayo-fuera="no es un flujo de cliente: es una lectura del repositorio (data/a-fondo/), no de producción; tests/unit/a-fondo-cifras-gemelas.test.ts respalda las cifras y el resto queda para el gate de juicio del hito." data-rev="11" data-rev-min="6">
             <div class="ens-cuerpo">
               <p class="p-texto"><code class="p-id">o8</code> ⭐
               <strong>Las cifras y las fechas son verdaderas.</strong> Contrasta
@@ -3634,8 +3660,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (o8)</legend>
-                <label><input type="radio" name="o8" id="o8-si" value="si" /> Sí</label>
-                <label><input type="radio" name="o8" id="o8-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="o8" id="o8-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="o8" id="o8-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="o8" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de o8" autocomplete="off" />
             </div>
@@ -3656,8 +3682,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (o9)</legend>
-                <label><input type="radio" name="o9" id="o9-si" value="si" /> Sí</label>
-                <label><input type="radio" name="o9" id="o9-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="o9" id="o9-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="o9" id="o9-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="o9" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de o9" autocomplete="off" />
             </div>
@@ -3680,8 +3706,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (o10)</legend>
-                <label><input type="radio" name="o10" id="o10-si" value="si" /> Sí</label>
-                <label><input type="radio" name="o10" id="o10-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="o10" id="o10-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="o10" id="o10-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="o10" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de o10" autocomplete="off" />
             </div>
@@ -3706,8 +3732,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (o11)</legend>
-                <label><input type="radio" name="o11" id="o11-si" value="si" /> Sí</label>
-                <label><input type="radio" name="o11" id="o11-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="o11" id="o11-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="o11" id="o11-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="o11" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de o11" autocomplete="off" />
             </div>
@@ -3727,13 +3753,13 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (o12b)</legend>
-                <label><input type="radio" name="o12b" id="o12b-si" value="si" /> Sí</label>
-                <label><input type="radio" name="o12b" id="o12b-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="o12b" id="o12b-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="o12b" id="o12b-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="o12b" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de o12b" autocomplete="off" />
             </div>
           </li>
-          <li id="o13" class="ens-fila" data-origen="nuevo" data-rev="10" data-rev-min="3">
+          <li id="o13" class="ens-fila" data-origen="nuevo" data-rev="11" data-rev-min="3">
             <div class="ens-cuerpo">
               <p class="p-texto"><code class="p-id">o13</code> Mira cómo se defienden las cifras: en
               <code>data/a-fondo/cafam.es.md</code> cambia «20 personas» por
@@ -3751,13 +3777,13 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (o13)</legend>
-                <label><input type="radio" name="o13" id="o13-si" value="si" /> Sí</label>
-                <label><input type="radio" name="o13" id="o13-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="o13" id="o13-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="o13" id="o13-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="o13" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de o13" autocomplete="off" />
             </div>
           </li>
-          <li id="o14" class="ens-fila" data-origen="nuevo" data-minimo data-ensayo-fuera="no es un flujo de cliente: es una lectura del repositorio (data/a-fondo/), no de producción; tests/unit/a-fondo-cifras-gemelas.test.ts respalda las cifras gemelas y el resto queda para el gate de juicio del hito." data-rev="10" data-rev-min="6">
+          <li id="o14" class="ens-fila" data-origen="nuevo" data-minimo data-ensayo-fuera="no es un flujo de cliente: es una lectura del repositorio (data/a-fondo/), no de producción; tests/unit/a-fondo-cifras-gemelas.test.ts respalda las cifras gemelas y el resto queda para el gate de juicio del hito." data-rev="11" data-rev-min="6">
             <div class="ens-cuerpo">
               <p class="p-texto"><code class="p-id">o14</code> ⭐ <strong>El inglés suena a ti.</strong> Lee entero un gemelo
               —<code>data/a-fondo/lo-que-busco.en.md</code>— al lado de su
@@ -3772,8 +3798,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (o14)</legend>
-                <label><input type="radio" name="o14" id="o14-si" value="si" /> Sí</label>
-                <label><input type="radio" name="o14" id="o14-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="o14" id="o14-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="o14" id="o14-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="o14" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de o14" autocomplete="off" />
             </div>
@@ -3785,10 +3811,23 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (o15)</legend>
-                <label><input type="radio" name="o15" id="o15-si" value="si" /> Sí</label>
-                <label><input type="radio" name="o15" id="o15-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="o15" id="o15-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="o15" id="o15-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="o15" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de o15" autocomplete="off" />
+            </div>
+          </li>
+          <li id="o16" class="ens-fila" data-origen="nuevo" data-rev="10" data-rev-min="6">
+            <div class="ens-cuerpo">
+              <p class="p-texto"><code class="p-id">o16</code> Las preguntas que siguen abiertas de los cierres S10 a S13: viven solo en esos cierres, ninguna se escribió en el corpus ni en las piezas. Contéstalas en la nota, una línea cada una, o escribe «sin cambio»: <strong>(1)</strong> ARKHÉ en la evidencia: ¿«Uso real» (uso personal) o «Prototipo»? (S10) · <strong>(2)</strong> ¿hay un entregable que se pueda nombrar de LangChain, LangGraph o LangSmith en la Fundación CTIC, y usaste la evaluación de LangSmith (conjuntos, evaluadores en línea)? (S10) · <strong>(3)</strong> el ajuste fino de un modelo en Foundry: ¿qué modelo, qué tarea, qué resultado, y fue proyecto real, prototipo o laboratorio del curso? (S11 y S12; la q9 lo lee en T4) · <strong>(4)</strong> Azure AI Search, Hugging Face y Ollama: ¿hay una historia de uso real que contar, o quedan solo como habilidades? (S11) · <strong>(5)</strong> la comparación entre búsqueda vectorial y léxica: ¿dónde, cuándo y con qué resultado? (S11) · <strong>(6)</strong> AI-103: ¿«curso completo» o «21 módulos»? El corpus dice «curso completo, examen pendiente» (S12) · <strong>(7)</strong> ¿aceptas que la pregunta de Vesting quede fuera del banco de preguntas, y qué nivel llevan Eventhouse y KQL en tu CV? (S13). Sí = no queda nada abierto aquí; no = traigo estas respuestas a la sesión de Claude. <span class="origen origen-nuevo">Nuevo · S21</span></p>
+            </div>
+            <div class="p-resp">
+              <fieldset class="ens-resp">
+                <legend>¿Salió como esperabas? (o16)</legend>
+                <label><input type="radio" autocomplete="off" name="o16" id="o16-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="o16" id="o16-no" value="no" /> No</label>
+              </fieldset>
+              <input type="text" class="p-nota" data-nota-de="o16" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de o16" autocomplete="off" />
             </div>
           </li>
         </ul>
@@ -3817,7 +3856,7 @@
           <h2>Modo mantenimiento</h2>
         </div>
         <p class="meta-bloque chica suave">
-          ~12 min · Vercel (variables y deployments) y una preview. La p1 se
+          Vercel (variables y deployments) y una preview. La p1 se
           hace en una <strong>preview</strong> para no apagar producción.
         </p>
         <ul class="pasos">
@@ -3842,13 +3881,13 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (p1)</legend>
-                <label><input type="radio" name="p1" id="p1-si" value="si" /> Sí</label>
-                <label><input type="radio" name="p1" id="p1-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="p1" id="p1-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="p1" id="p1-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="p1" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de p1" autocomplete="off" />
             </div>
           </li>
-          <li id="p2" class="ens-fila" data-origen="nuevo" data-rev="10" data-rev-min="2">
+          <li id="p2" class="ens-fila" data-origen="nuevo" data-rev="11" data-rev-min="2">
             <div class="ens-cuerpo">
               <p class="p-texto"><code class="p-id">p2</code> Con el sitio arriba, abre <code>/es/mantenimiento</code> en
               producción: <strong>no existe</strong> (la página 404 de siempre).
@@ -3858,8 +3897,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (p2)</legend>
-                <label><input type="radio" name="p2" id="p2-si" value="si" /> Sí</label>
-                <label><input type="radio" name="p2" id="p2-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="p2" id="p2-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="p2" id="p2-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="p2" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de p2" autocomplete="off" />
             </div>
@@ -3874,7 +3913,7 @@
           <h2>Métodos</h2>
         </div>
         <p class="meta-bloque chica suave">
-          ~85 min · escritorio, teléfono real (datos móviles) e impresión · en
+          Escritorio, teléfono real (datos móviles) e impresión · en
           <code>/es/metodos</code>, <code>/es/metodos/sistema-de-agentes</code>,
           <code>/es/metodos/rag-sin-inventar</code>,
           <code>/es/metodos/de-prototipo-a-produccion</code>,
@@ -3904,8 +3943,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (q1)</legend>
-                <label><input type="radio" name="q1" id="q1-si" value="si" /> Sí</label>
-                <label><input type="radio" name="q1" id="q1-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="q1" id="q1-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="q1" id="q1-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="q1" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de q1" autocomplete="off" />
             </div>
@@ -3931,8 +3970,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (q2)</legend>
-                <label><input type="radio" name="q2" id="q2-si" value="si" /> Sí</label>
-                <label><input type="radio" name="q2" id="q2-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="q2" id="q2-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="q2" id="q2-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="q2" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de q2" autocomplete="off" />
             </div>
@@ -3960,8 +3999,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (q3)</legend>
-                <label><input type="radio" name="q3" id="q3-si" value="si" /> Sí</label>
-                <label><input type="radio" name="q3" id="q3-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="q3" id="q3-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="q3" id="q3-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="q3" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de q3" autocomplete="off" />
             </div>
@@ -3990,8 +4029,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (q4)</legend>
-                <label><input type="radio" name="q4" id="q4-si" value="si" /> Sí</label>
-                <label><input type="radio" name="q4" id="q4-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="q4" id="q4-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="q4" id="q4-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="q4" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de q4" autocomplete="off" />
             </div>
@@ -4010,8 +4049,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (q5)</legend>
-                <label><input type="radio" name="q5" id="q5-si" value="si" /> Sí</label>
-                <label><input type="radio" name="q5" id="q5-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="q5" id="q5-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="q5" id="q5-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="q5" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de q5" autocomplete="off" />
             </div>
@@ -4032,8 +4071,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (q6)</legend>
-                <label><input type="radio" name="q6" id="q6-si" value="si" /> Sí</label>
-                <label><input type="radio" name="q6" id="q6-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="q6" id="q6-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="q6" id="q6-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="q6" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de q6" autocomplete="off" />
             </div>
@@ -4057,8 +4096,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (q7)</legend>
-                <label><input type="radio" name="q7" id="q7-si" value="si" /> Sí</label>
-                <label><input type="radio" name="q7" id="q7-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="q7" id="q7-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="q7" id="q7-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="q7" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de q7" autocomplete="off" />
             </div>
@@ -4082,8 +4121,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (q8)</legend>
-                <label><input type="radio" name="q8" id="q8-si" value="si" /> Sí</label>
-                <label><input type="radio" name="q8" id="q8-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="q8" id="q8-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="q8" id="q8-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="q8" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de q8" autocomplete="off" />
             </div>
@@ -4107,8 +4146,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (q9)</legend>
-                <label><input type="radio" name="q9" id="q9-si" value="si" /> Sí</label>
-                <label><input type="radio" name="q9" id="q9-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="q9" id="q9-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="q9" id="q9-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="q9" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de q9" autocomplete="off" />
             </div>
@@ -4129,8 +4168,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (q10)</legend>
-                <label><input type="radio" name="q10" id="q10-si" value="si" /> Sí</label>
-                <label><input type="radio" name="q10" id="q10-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="q10" id="q10-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="q10" id="q10-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="q10" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de q10" autocomplete="off" />
             </div>
@@ -4156,8 +4195,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (q11)</legend>
-                <label><input type="radio" name="q11" id="q11-si" value="si" /> Sí</label>
-                <label><input type="radio" name="q11" id="q11-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="q11" id="q11-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="q11" id="q11-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="q11" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de q11" autocomplete="off" />
             </div>
@@ -4180,8 +4219,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (q12)</legend>
-                <label><input type="radio" name="q12" id="q12-si" value="si" /> Sí</label>
-                <label><input type="radio" name="q12" id="q12-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="q12" id="q12-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="q12" id="q12-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="q12" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de q12" autocomplete="off" />
             </div>
@@ -4203,8 +4242,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (q13)</legend>
-                <label><input type="radio" name="q13" id="q13-si" value="si" /> Sí</label>
-                <label><input type="radio" name="q13" id="q13-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="q13" id="q13-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="q13" id="q13-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="q13" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de q13" autocomplete="off" />
             </div>
@@ -4236,8 +4275,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (q14)</legend>
-                <label><input type="radio" name="q14" id="q14-si" value="si" /> Sí</label>
-                <label><input type="radio" name="q14" id="q14-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="q14" id="q14-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="q14" id="q14-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="q14" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de q14" autocomplete="off" />
             </div>
@@ -4259,8 +4298,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (q15)</legend>
-                <label><input type="radio" name="q15" id="q15-si" value="si" /> Sí</label>
-                <label><input type="radio" name="q15" id="q15-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="q15" id="q15-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="q15" id="q15-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="q15" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de q15" autocomplete="off" />
             </div>
@@ -4297,8 +4336,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (q16)</legend>
-                <label><input type="radio" name="q16" id="q16-si" value="si" /> Sí</label>
-                <label><input type="radio" name="q16" id="q16-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="q16" id="q16-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="q16" id="q16-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="q16" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de q16" autocomplete="off" />
             </div>
@@ -4323,8 +4362,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (q17)</legend>
-                <label><input type="radio" name="q17" id="q17-si" value="si" /> Sí</label>
-                <label><input type="radio" name="q17" id="q17-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="q17" id="q17-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="q17" id="q17-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="q17" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de q17" autocomplete="off" />
             </div>
@@ -4367,8 +4406,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (q18)</legend>
-                <label><input type="radio" name="q18" id="q18-si" value="si" /> Sí</label>
-                <label><input type="radio" name="q18" id="q18-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="q18" id="q18-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="q18" id="q18-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="q18" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de q18" autocomplete="off" />
             </div>
@@ -4395,8 +4434,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (q19)</legend>
-                <label><input type="radio" name="q19" id="q19-si" value="si" /> Sí</label>
-                <label><input type="radio" name="q19" id="q19-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="q19" id="q19-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="q19" id="q19-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="q19" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de q19" autocomplete="off" />
             </div>
@@ -4443,8 +4482,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (q20)</legend>
-                <label><input type="radio" name="q20" id="q20-si" value="si" /> Sí</label>
-                <label><input type="radio" name="q20" id="q20-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="q20" id="q20-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="q20" id="q20-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="q20" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de q20" autocomplete="off" />
             </div>
@@ -4470,8 +4509,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (q21)</legend>
-                <label><input type="radio" name="q21" id="q21-si" value="si" /> Sí</label>
-                <label><input type="radio" name="q21" id="q21-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="q21" id="q21-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="q21" id="q21-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="q21" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de q21" autocomplete="off" />
             </div>
@@ -4513,8 +4552,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (q22)</legend>
-                <label><input type="radio" name="q22" id="q22-si" value="si" /> Sí</label>
-                <label><input type="radio" name="q22" id="q22-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="q22" id="q22-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="q22" id="q22-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="q22" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de q22" autocomplete="off" />
             </div>
@@ -4538,8 +4577,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (q23)</legend>
-                <label><input type="radio" name="q23" id="q23-si" value="si" /> Sí</label>
-                <label><input type="radio" name="q23" id="q23-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="q23" id="q23-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="q23" id="q23-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="q23" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de q23" autocomplete="off" />
             </div>
@@ -4567,34 +4606,34 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (q24)</legend>
-                <label><input type="radio" name="q24" id="q24-si" value="si" /> Sí</label>
-                <label><input type="radio" name="q24" id="q24-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="q24" id="q24-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="q24" id="q24-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="q24" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de q24" autocomplete="off" />
             </div>
           </li>
-          <li id="q25" class="ens-fila" data-origen="nuevo" data-rev="6" data-rev-min="3">
+          <li id="q25" class="ens-fila" data-origen="nuevo" data-rev="10" data-rev-min="3">
             <div class="ens-cuerpo">
               <p class="p-texto"><code class="p-id">q25</code> El Experto ISO 42001 dice <strong>«versión inicial»</strong> (decisión 1b del S17, aún sin tu palabra). Abre <code>/es/metodos/sistema-de-agentes</code> (T2) y <code>/es/metodos/gobierno-de-ia-y-datos</code> (T5), busca el Experto ISO 42001 en el bloque 8 («Evidencia en proyectos») de cada una: dice «en la versión inicial (v1.0.0) de su ficha» y lleva el nivel «Uso real». ¿Te parece bien dejarlo así, o prefieres otro nivel o quitar el nivel de esa tarjeta? Anótalo en la nota. <span class="origen origen-nuevo">Nuevo · S21</span></p>
             </div>
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (q25)</legend>
-                <label><input type="radio" name="q25" id="q25-si" value="si" /> Sí</label>
-                <label><input type="radio" name="q25" id="q25-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="q25" id="q25-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="q25" id="q25-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="q25" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de q25" autocomplete="off" />
             </div>
           </li>
-          <li id="q26" class="ens-fila" data-origen="nuevo" data-rev="10" data-rev-min="3" data-rev-opcional>
+          <li id="q26" class="ens-fila" data-origen="nuevo" data-rev="11" data-rev-min="3" data-rev-opcional>
             <div class="ens-cuerpo">
               <p class="p-texto"><code class="p-id">q26</code> <strong>El Node del build</strong> (confirmación aplazada desde el S13). En el panel de Vercel: el proyecto → Deployments → el despliegue de producción → Build Logs; busca la línea de Node: debería decir 22.x (el repo declara <code>22.x</code> y <code>.nvmrc</code> 22.18.0). Si no la haces, queda como pendiente opcional, no como «no». <span class="origen origen-nuevo">Nuevo · S21</span> <span class="origen origen-heredada">opcional</span></p>
             </div>
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (q26)</legend>
-                <label><input type="radio" name="q26" id="q26-si" value="si" /> Sí</label>
-                <label><input type="radio" name="q26" id="q26-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="q26" id="q26-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="q26" id="q26-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="q26" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de q26" autocomplete="off" />
             </div>
@@ -4609,7 +4648,7 @@
           <h2>Accesibilidad y movimiento</h2>
         </div>
         <p class="meta-bloque chica suave">
-          ~5 min · ajustes del sistema + teclado.
+          Ajustes del sistema + teclado.
         </p>
         <ul class="pasos">
           <li id="j1" class="ens-fila" data-origen="heredada" data-rev="7" data-rev-min="2">
@@ -4621,8 +4660,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (j1)</legend>
-                <label><input type="radio" name="j1" id="j1-si" value="si" /> Sí</label>
-                <label><input type="radio" name="j1" id="j1-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="j1" id="j1-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="j1" id="j1-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="j1" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de j1" autocomplete="off" />
             </div>
@@ -4637,8 +4676,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (j2)</legend>
-                <label><input type="radio" name="j2" id="j2-si" value="si" /> Sí</label>
-                <label><input type="radio" name="j2" id="j2-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="j2" id="j2-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="j2" id="j2-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="j2" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de j2" autocomplete="off" />
             </div>
@@ -4652,8 +4691,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (j4)</legend>
-                <label><input type="radio" name="j4" id="j4-si" value="si" /> Sí</label>
-                <label><input type="radio" name="j4" id="j4-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="j4" id="j4-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="j4" id="j4-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="j4" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de j4" autocomplete="off" />
             </div>
@@ -4668,8 +4707,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (j5)</legend>
-                <label><input type="radio" name="j5" id="j5-si" value="si" /> Sí</label>
-                <label><input type="radio" name="j5" id="j5-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="j5" id="j5-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="j5" id="j5-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="j5" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de j5" autocomplete="off" />
             </div>
@@ -4685,8 +4724,8 @@
             <div class="p-resp">
               <fieldset class="ens-resp">
                 <legend>¿Salió como esperabas? (j3)</legend>
-                <label><input type="radio" name="j3" id="j3-si" value="si" /> Sí</label>
-                <label><input type="radio" name="j3" id="j3-no" value="no" /> No</label>
+                <label><input type="radio" autocomplete="off" name="j3" id="j3-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="j3" id="j3-no" value="no" /> No</label>
               </fieldset>
               <input type="text" class="p-nota" data-nota-de="j3" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de j3" autocomplete="off" />
             </div>
@@ -4715,18 +4754,17 @@
               vez, un sí o un no y una nota por prueba, y el botón «Copiar mis
               respuestas» que arma el texto para la planeadora. Las casillas de
               siempre pasan a sí/no con nota en todos los filtros, y los flujos R
-              abren cada sentada y llevan dentro las ⭐ que cubren.
-              <strong>Entran cinco pruebas:</strong> la m15 (el agente de estudio
+              abren las sentadas que los traen y llevan dentro las ⭐ que cubren.
+              <strong>Entran seis pruebas:</strong> la m15 (el agente de estudio
               del AI-103 ya no está en la vitrina y su dirección vieja da 404), la
               f12 (el chat no lo presenta como agente), la q25 (el Experto ISO
-              42001 dice «versión inicial»), la q26 (el Node del build, opcional) y
-              la o15 (los pasajes del corpus que el retiro tocó).
+              42001 dice «versión inicial»), la q26 (el Node del build, opcional), la o15 (los pasajes del corpus que el retiro tocó) y la o16 (las preguntas que siguen abiertas de los cierres S10 a S13).
               <strong>Salen de la revisión, con su razón y sin borrarse:</strong>
               la k8 (sin sujeto desde el S7) y la f7, la f10, la g5 y la p1
               (respaldadas por la CI o que apagarían producción).
               <strong>Cambian de texto:</strong> la o3 y la o5 ya no escriben
               cuántos documentos, subsecciones o preguntas hay (lo dicen el
-              generador y el informe), las cuentas de agentes y de fichas bajaron con el retiro, y se corrigieron las que ya no describían el sitio: la a2 (el Perfil sí trae «más de diez años»), la c1, la c2 y la c3 (hay nueve hitos y ocho casos), la e5 (el asunto dice «Habla San»), la i1 (el menú ya no tiene Roadmap), la k1b (las cajas dicen «Explora»), la m3 (las fichas de agentes no tienen lista de espera), la m7 («Producto siguiente»), la n2 (los años de la trayectoria), la n3 («Ver caso de estudio»), la n5 (el logro dice tres certificaciones profesionales), la o1 (el número de chunks sale del build) y la o13 (el número de apps sale del disco). <strong>El prefijo de las respuestas cambia a
+              generador y el informe), las cuentas de agentes y de fichas bajaron con el retiro, y se corrigieron las que ya no describían el sitio: la a2 (el Perfil sí trae «más de diez años»), la c1, la c2 y la c3 (hay nueve hitos y ocho casos), la e5 (el asunto dice «Habla San»), la i1 (el menú ya no tiene Roadmap), la k1b (las cajas dicen «Explora»), la m3 (las fichas de agentes no tienen lista de espera), la m7 («Producto siguiente»), la n2 (los años de la trayectoria), la n3 («Ver caso de estudio»), la n5 (el logro dice tres certificaciones profesionales), la o1 (el número de chunks sale del build) y la o13 (el número de apps sale del disco). Salieron de la cabeza de cada bloque los «~N min» escritos a mano (los minutos los suma la página), las sentadas del filtro «Ensayo general H-2» pasan a llamarse tandas para no confundirse con las de la revisión, y cada fila tiene «Quitar respuesta» por si marcaste por error. <strong>El prefijo de las respuestas cambia a
               <code>s21</code></strong>: ninguna marca vieja vale.
             </li>
             <li>
@@ -5482,6 +5520,10 @@
             var sec = li.closest("section");
             return !li.hasAttribute("hidden") && !(sec && sec.hasAttribute("hidden"));
           });
+          filas.forEach(function (li) {
+            var b = li.querySelector(".p-limpiar");
+            if (b) b.hidden = !hecha(li);
+          });
           var hechas = vis.filter(hecha).length;
           barra.style.width =
             (vis.length ? (hechas / vis.length) * 100 : 0) + "%";
@@ -5551,7 +5593,7 @@
             var pasada = (min[s] || 0) > LIMITE;
             poner(
               "sentada-" + s + "-aviso",
-              pasada ? "· pasa de " + LIMITE + " min: parte esta sentada" : "",
+              pasada ? "· pasa de " + LIMITE + " min: parte esta tanda" : "",
             );
             var fila = document.querySelector('[data-sentada-resumen="' + s + '"]');
             if (fila) fila.classList.toggle("pasada", pasada);
@@ -5683,7 +5725,7 @@
             L.push("  · " + idDe(li) + " — " + tituloDe(li) + ": " + notaDe(li));
           });
           L.push("");
-          L.push("PENDIENTES (" + pend.length + ")");
+          L.push("PENDIENTES (" + obligatorias.length + (pend.length > obligatorias.length ? " y " + (pend.length - obligatorias.length) + " opcional" : "") + ")");
           if (!pend.length) L.push("  ninguno");
           sentadasRev.forEach(function (sec) {
             var s = sec.getAttribute("data-rev-sentada");
@@ -5782,6 +5824,30 @@
             } catch (e) {}
             actualizar();
           });
+        });
+        // Una respuesta marcada por error se puede quitar: la fila vuelve a pendiente.
+        filas.forEach(function (li) {
+          var caja = li.querySelector(".p-resp");
+          if (!caja) return;
+          var b = document.createElement("button");
+          b.type = "button";
+          b.className = "p-limpiar";
+          b.textContent = "Quitar respuesta";
+          b.setAttribute("aria-label", "Quitar mi respuesta de " + idDe(li));
+          b.hidden = true;
+          b.addEventListener("click", function () {
+            Array.prototype.forEach.call(
+              li.querySelectorAll('input[type="radio"]'),
+              function (r) {
+                r.checked = false;
+                try {
+                  localStorage.removeItem(NS + r.name);
+                } catch (e) {}
+              },
+            );
+            actualizar();
+          });
+          caja.insertBefore(b, caja.querySelector(".p-nota"));
         });
         // La nota corta de cada fila.
         notas.forEach(function (n) {
