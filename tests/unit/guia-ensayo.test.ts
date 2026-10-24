@@ -1,7 +1,7 @@
 import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { JSDOM } from "jsdom";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
 /**
  * EL ENSAYO GENERAL DEL H-2 EN LA GUÍA (Sprint 020) — `docs/GUIA-DE-PRUEBA.html`.
@@ -19,6 +19,10 @@ import { describe, expect, it } from "vitest";
  *    guarda por flujo y se restaura al recargar;
  *  · ningún tiempo ni total quedó escrito a mano en el encabezado.
  */
+// La guía pesa más de 200 KB y cada prueba arranca su propio jsdom con su script: con la
+// suite entera en paralelo el tope de 5 s se queda corto (falló una vez con 5,2 s).
+vi.setConfig({ testTimeout: 30_000 });
+
 const RUTA = path.join(process.cwd(), "docs", "GUIA-DE-PRUEBA.html");
 const HTML = readFileSync(RUTA, "utf8");
 const LIMITE = 45;
