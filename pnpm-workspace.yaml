@@ -12,13 +12,16 @@
 overrides:
   'brace-expansion@1': ^1.1.20
   'brace-expansion@>=4': ^5.0.11
-  fast-uri: ^3.1.8
+  fast-uri: ^3.1.9
   sharp: ^0.35.5
   postcss: ^8.5.18
-  undici: ^7.29.1
+  undici: ^7.30.1
   ip-address: ^10.3.1
   'js-yaml@4': ^4.3.2
   'nanoid@3': ^3.3.18
+  # zod <4.6.6 (GHSA-mrhx-c7xc-m3w5): una copia llegaba por eslint-plugin-react-hooks
+  # (eslint-config-next) con la versión que el lockfile ya tenía y que su rango permitía.
+  'zod@4': ^4.6.7
   browserslist: ^4.28.7
   source-map-js: ^1.2.2
   # braces ≤3.0.3 (GHSA-vfj7-8cjw-p6xm) no tiene versión corregida publicada,
