@@ -113,7 +113,7 @@ establish which result will demonstrate that I really learned, the initiative is
 sufficiently defined.
 
 The fourth is opportunity cost. Every new capability competes with products, research and
-responsibilities that are already under way: 38 public pieces to maintain and an institutional AI
+responsibilities that are already under way: 37 public pieces to maintain and an institutional AI
 strategy to lead. That is why learning must respond to an explicit priority and not only to
 technological novelty. Choosing what not to study at a given moment is part of maintaining depth and
 coherence.
@@ -188,8 +188,8 @@ The last few times I learned something from scratch, and how long it took:
 | -------------------------------------- | -------------- | ----------------------------------- | ------------------------------------------------------------- |
 | Microsoft Fabric                       | August 2023    | 5 months of study (Jul–Nov 2024)    | DP-600 in December 2024, Vesting platform in operation        |
 | Next.js and the application pipeline   | July 2026      | 20 sprints | this site, CV Viva, with its CI, its tests and its ADRs       |
-| AI-103 and AI-300                      | July 2026      | course complete and 10 modules      | two tracks in progress, with the AI-103 Super Guide published |
-| Codex, Antigravity and Claude Code     | their release  | close to a month each               | the pipeline with which the 38 pieces are built               |
+| AI-103 and AI-300                      | July 2026      | course complete and 10 modules      | two tracks in progress                                        |
+| Codex, Antigravity and Claude Code     | their release  | close to a month each               | the pipeline with which the 37 pieces are built               |
 
 The last things I learned from scratch, with no certificate involved, were Codex, Antigravity and
 Claude Code: I took them up from their release and within close to a month each was in real use, not
@@ -231,12 +231,12 @@ The figures come from the repositories and do not replace the evaluation of qual
 suite can protect little if it verifies irrelevant aspects. That is why I relate every control to a
 concrete condition and try to demonstrate that it can go red against the failure it must detect.
 
-## The 38 pieces: 15 agents, 7 research pieces and 6 dashboards, four ways of learning
+## The 37 pieces: 14 agents, 7 research pieces and 6 dashboards, four ways of learning
 
 <!-- seccion: las-cuatro-familias -->
 
-To the ten sister applications are added 15 published agents, 7 research pieces and 6 dashboards
-built on public data. In total, the showcase brings together 38 pieces within those four families,
+To the ten sister applications are added 14 published agents, 7 research pieces and 6 dashboards
+built on public data. In total, the showcase brings together 37 pieces within those four families,
 and the figures of each one are reconciled against the visible sheets of the showcase.
 
 Each family demonstrates a different way of learning. The applications require transforming new
@@ -387,47 +387,6 @@ criteria.
 Learning gains more depth when it includes the conditions of failure. Understanding how a technology
 works is important. Understanding how it fails, how that is detected and how it recovers is what
 makes it possible to take responsibility for it.
-
-## The AI-103 Super Guide turns the method into a tool
-
-<!-- seccion: la-guia-del-ai-103 -->
-
-When the AI-103 track became the current path to go deeper into artificial intelligence applications
-and agents on Azure, I did not want to depend solely on a sequence of courses selected by third
-parties. I built an agent capable of structuring and verifying a study guide from official sources:
-the AI-103 Super Guide, one of the 15 agents published in the showcase.
-
-The tool applies the same discipline I use to learn. Study is inverted: first a real project is
-defined in Microsoft Foundry, and no track is considered complete until a coverage map demonstrates
-how its contents relate to the official domains and to the proportion each one represents within the
-assessment.
-
-Every pedagogical statement needs an identifiable source and a verification date: every note carries
-its source, its URL and its capture date, and a live ingestion warns which guide has expired when
-the documentation changes. This condition is especially important in technologies that evolve
-quickly, because a technically correct explanation can become outdated when the services, the names,
-the interfaces or the assessed capabilities change.
-
-The agent does not freely decide what a person should study from the model's memory. It retrieves
-documentation, organizes contents, identifies gaps and preserves evidence about the provenance of
-every recommendation.
-
-The guide also distinguishes between nominal coverage and sufficient depth. Including a link for
-every topic does not demonstrate that the track really prepares the student. It is necessary to
-evaluate whether there are contents, exercises and verifications proportional to the importance and
-difficulty of the domain: every guide closes with a checkpoint, and the result reorders the track
-toward where I am weak.
-
-This system turns certification preparation into a knowledge-architecture problem. There are
-sources, entities, dependencies, weights, currency states, gaps and criteria for done —29 binary
-acceptance criteria on its sheet—. The tool organizes those relationships and makes visible what is
-still missing.
-
-The project also demonstrates an important principle of my agentic ecosystem: agents must produce
-verifiable deliverables and not only answers that are useful in the moment. The guide can be
-reviewed, updated and used by other people because its value remains after the conversation ends. It
-is my learning method transformed into a public piece: official sources, measurable coverage,
-declared gaps, controlled updating and a result that another person can examine and use.
 
 ## What I do when the role asks for something I have never used: the capability map and Google Cloud in exploration
 

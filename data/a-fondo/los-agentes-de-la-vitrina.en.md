@@ -1,15 +1,15 @@
 ---
 slug: los-agentes-de-la-vitrina
 codigo: AF-25
-titulo: "The fifteen agents of the showcase"
-resumen: "The 15 published agents: the thirteen of ARKHÉ, one by one in four families, and planlang's demonstration agents. For each of the thirteen: what it promises, its measured figure, its limit and its \"never\". Five sealed. All with human gates, baits that prove the controls fire, zero cost in tools (except the Animation Workshop's GPU) and the same rule: no claim comes out of the model's memory."
-cuando_usar: "Use this when they ask which agents he has published in his portfolio, what each of the thirteen showcase agents is for, what a harness is, how he controls quality with human gates and bait, and what the thirteen share."
+titulo: "The fourteen agents of the showcase"
+resumen: "The 14 published agents: the twelve of ARKHÉ, one by one in four families, and planlang's demonstration agents. For each of the twelve: what it promises, its measured figure, its limit and its \"never\". Five sealed. All with human gates, baits that prove the controls fire, zero cost in tools (except the Animation Workshop's GPU) and the same rule: no claim comes out of the model's memory."
+cuando_usar: "Use this when they ask which agents he has published in his portfolio, what each of the twelve showcase agents is for, what a harness is, how he controls quality with human gates and bait, and what the twelve share."
 estado: aprobado
 ancla: "/vitrina/agentes"
 actualizado: 2026-09-21
 preguntas_de_prueba:
-  - "What are the fifteen agents of the showcase and what are they not?"
-  - "What do the fifteen agents of the showcase share?"
+  - "What are the fourteen agents of the showcase and what are they not?"
+  - "What do the fourteen agents of the showcase share?"
   - "How do the agents produce pieces with human gates?"
 ---
 
@@ -38,8 +38,8 @@ HOW THIS FILE IS WRITTEN
 
 <!-- seccion: que-son -->
 
-The showcase publishes **15 agents**, each with its technical sheet: promise, figures with
-provenance, limits, "never" and the process drawn. Thirteen of them —the ones this document
+The showcase publishes **14 agents**, each with its technical sheet: promise, figures with
+provenance, limits, "never" and the process drawn. Twelve of them —the ones this document
 describes— are work systems that run on **Claude Code** inside a **harness** —the wrapper that
 fixes the agent's function, its sources, its tools and its input and output contract—, and all of
 them belong to **ARKHÉ**, my agentic ecosystem, which is explained in the agents document. The
@@ -49,7 +49,7 @@ match to a person, and their sheet publishes what they measure; they are not ser
 demonstrations measured against their plan, and they are in initial state.
 
 **Five are sealed** —Power BI Dashboard Builder, CINE Presentations, AI-APPs Factory, Animation
-Workshop and Computational Paper Harness— and eight remain in initial state. What they are not:
+Workshop and Computational Paper Harness— and seven remain in initial state. What they are not:
 services with users. They are tools for personal use with deliverables and evidence —even those designed to hand a repository to each client have had no users other than me—; the word
 "production" I reserve for the 27 agents at Vesting.
 
@@ -59,12 +59,10 @@ services with users. They are tools for personal use with deliverables and evide
 
 | Agent                    | Status  | What it promises                                                                                      | Measured figure                    |
 | ------------------------ | ------- | ----------------------------------------------------------------------------------------------------- | ---------------------------------- |
-| **AI-103 Super Guide**   | initial | no guide exists until a map proves the path covers the official syllabus in proportion to its weights | 29 binary criteria; 0 Azure resources created |
 | **Graduate Assistant**   | initial | every card cites course, session and timestamp, or declares the gap; every citation is generated from CSL-JSON, never written by hand | 50 criteria; 9 of 9 baits fire; transcribes at 19 times real time |
 | **Hiring Copilot**       | initial | every sendable claim links an achievement to its source and a program checks it: the orphan bullet makes the control fail | 122 criteria; 8 of 9 controls with bait |
 
-The Super Guide executes nothing in Azure: it proposes the commands and you run them, because
-executing is the learning. The Assistant prepares and does not stand in: it does not write the
+The Assistant prepares and does not stand in: it does not write the
 student's gradable deliverables. Hiring Copilot trains before the interview and never assists
 during a real one, does not insert hidden text into a document and never reveals the current
 income in a negotiation piece.
@@ -125,7 +123,7 @@ libraries: those are its three declared limits.
 
 <!-- seccion: como-nace-un-agente -->
 
-The thirteen share an anatomy, and it is worth describing it just once. Each agent is a
+The twelve share an anatomy, and it is worth describing it just once. Each agent is a
 repository with a **constitution**: a `CLAUDE.md` file that Claude Code loads simply by opening
 the folder and that fixes the agent's laws, its commands and its sources. The ISO 42001 Expert,
 for example, has **8 laws and 9 commands**; Cold Attraction, **8 commands** in its cycle (brand,
@@ -135,8 +133,7 @@ the constitution is the startup.
 
 On top of that constitution goes the **harness**: the input and output contract, the allowed
 tools, the format of each deliverable and the **binary acceptance criteria** —pass or fail, with
-no intermediate judgment— that are counted one by one in the package's work items: 29 in the
-AI-103 Super Guide, 50 in the Graduate Assistant, 99 in Hiring Copilot, 20 in the Dashboard
+no intermediate judgment— that are counted one by one in the package's work items: 50 in the Graduate Assistant, 99 in Hiring Copilot, 20 in the Dashboard
 Builder, 33 in the Animation Workshop, 52 in the Design Science Harness and 44 in the
 Computational Paper Harness. A criterion that cannot fail is not a criterion, and that is why
 each control carries its **bait**: the case deliberately destroyed that proves the control fires.
@@ -144,23 +141,13 @@ each control carries its **bait**: the case deliberately destroyed that proves t
 And on top of the harness, the **human gates**: points where the agent stops and does not continue
 until the person types a literal token. CINE Presentations has **8 gates** with a verbal token,
 one per cut; the Animation Workshop, **6**; Cold Attraction, **6**; the Dashboard Builder, **5**
-human approval gates. The gate is not a reminder: it is mechanics. The Super Guide does not
-generate a guide before the coverage map is approved; the Library does not integrate a card
+human approval gates. The gate is not a reminder: it is mechanics. The Library does not integrate a card
 without the curator's token recorded with a date; the Workshop does not turn on the GPU without an
 approved script and storyboard.
 
 ## The learning agents, one by one
 
 <!-- seccion: aprendizaje-uno-por-uno -->
-
-**AI-103 Super Guide** (initial, v2.1.0). It inverts studying: first a real project in Microsoft Foundry is defined and the harness proves, with a coverage map against the exam's official
-weights, that building it covers the syllabus. Only then does it generate the step-by-step
-guides, with the official callouts injected where they are needed; every pedagogical claim cites
-its official source with URL and date or is marked "to be confirmed". It has **29 binary
-criteria** spread across 9 work items and **6 smart notes** seeded. It executes nothing in Azure,
-it is not an exam simulator (five to ten questions per guide) and it delivers HTML files that
-open in the browser. It is the agent with which I study my own certification in progress, and
-that is why it is in the showcase: it is evidence of how I learn.
 
 **Graduate Assistant** (initial, v1.0.1). Each class session enters a Markdown library with exact
 provenance down to the timestamp of the recording or the slide number; that library feeds the
@@ -270,14 +257,13 @@ commands; the Library, of ten of its twelve; the Graduate Assistant, of its 13 c
 exercised. Publishing that fact is part of the method: a sheet that said "tested" without a run
 would be the same figure without provenance that the agents forbid themselves.
 
-The return follows the same rule in all thirteen sheets: **it is declared as an estimate with
-assumptions**, never as a promise. The Super Guide monetizes the certification in billable hours
-at the user's rate and does not claim a salary jump; Cold Attraction models hours freed up; CINE
+The return follows the same rule in all twelve sheets: **it is declared as an estimate with
+assumptions**, never as a promise. Cold Attraction models hours freed up; CINE
 and the Workshop declare their saving as a hypothesis to calibrate; the Tax Expert does not
 estimate the direct tax saving because it depends on figures that are not yet in the twin, "and
 putting a number on it today would be inventing it".
 
-## What the thirteen share
+## What the twelve share
 
 <!-- seccion: lo-que-comparten -->
 

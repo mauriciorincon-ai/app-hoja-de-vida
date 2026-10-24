@@ -106,14 +106,6 @@ My training in Industrial Engineering provides the starting point: before design
 
 The AI-103 completes the building dimension of my profile. The DP-600 organizes the data and the analytical capability. The AI-103 extends that base toward applications and agents capable of interpreting information, connecting knowledge and using tools within business processes.
 
-## The AI-103 study guide: a path with a coverage map and dated sources
-
-<!-- seccion: la-guia-de-estudio-del-ai-103 -->
-
-As part of this path, I have structured a study guide with traceability criteria, and I turned it into a public agent: the AI-103 Super Guide, one of the 15 agents in the showcase. Every piece of content must be linked to current official documentation and every block must correspond to the capabilities evaluated by the exam. I do not consider a learning path complete until a coverage map proves that the content adequately represents the officially established domains and proportions: two domains weigh close to 60% of the exam, and studying flat ignores them.
-
-This approach turns preparation into an applied exercise in knowledge architecture. Information must be obtained from authorized sources, keep its date, be organized according to a verifiable structure and be updated when the documentation changes. The guide does not limit itself to presenting content; it demonstrates what it covers, where it comes from and which part of the learning objective it represents. In the figures of its sheet: 29 binary acceptance criteria, every note with its source, URL and capture date, and 0 Azure resources created by the harness —it proposes the commands and I run them—. How that guide is my learning method turned into a tool is in the document on how I learn.
-
 ## The AI-300: taking artificial intelligence to a reliable operation (MLOps and GenAIOps)
 
 <!-- seccion: el-ai-300 -->

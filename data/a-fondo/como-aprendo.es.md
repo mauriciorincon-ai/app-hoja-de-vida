@@ -2,7 +2,7 @@
 slug: como-aprendo
 codigo: AF-19
 titulo: "Cómo aprendo"
-resumen: "El argumento con medida: el DP-600 en cinco meses sobre un Fabric con menos de un año en el mercado, Codex, Antigravity y Claude Code en un mes desde su salida, este sitio en diecinueve sprints desde julio de 2026, y 38 piezas públicas con sus pruebas y coberturas."
+resumen: "El argumento con medida: el DP-600 en cinco meses sobre un Fabric con menos de un año en el mercado, Codex, Antigravity y Claude Code en un mes desde su salida, este sitio en diecinueve sprints desde julio de 2026, y 37 piezas públicas con sus pruebas y coberturas."
 cuando_usar: "Úsalo cuando pregunten cómo aprende una tecnología nueva, qué hace cuando el puesto pide algo que nunca ha usado, cuánto tardó en certificarse, qué está estudiando ahora, o cómo documenta y demuestra lo que aprendió."
 estado: aprobado
 ancla: "#certificaciones"
@@ -72,7 +72,7 @@ El segundo criterio es la permanencia del aprendizaje. Una herramienta puede cam
 
 El tercero es la posibilidad de producir evidencia. Una ruta merece prioridad cuando puede terminar en una aplicación, una arquitectura, una certificación, una investigación o un componente reutilizable. Si no puedo establecer qué resultado demostrará que realmente aprendí, la iniciativa todavía no está suficientemente definida.
 
-El cuarto es el costo de oportunidad. Cada nueva capacidad compite con productos, investigaciones y responsabilidades que ya están en curso: 38 piezas públicas que mantener y una estrategia institucional de IA que liderar. Por eso, el aprendizaje debe responder a una prioridad explícita y no únicamente a la novedad tecnológica. Elegir qué no estudiar en un momento determinado es parte de mantener profundidad y coherencia.
+El cuarto es el costo de oportunidad. Cada nueva capacidad compite con productos, investigaciones y responsabilidades que ya están en curso: 37 piezas públicas que mantener y una estrategia institucional de IA que liderar. Por eso, el aprendizaje debe responder a una prioridad explícita y no únicamente a la novedad tecnológica. Elegir qué no estudiar en un momento determinado es parte de mantener profundidad y coherencia.
 
 La Ingeniería Industrial aporta este criterio de priorización: los recursos son limitados y deben asignarse según el valor, la restricción y el resultado esperado. El Diseño Industrial conserva la relación con la persona y el problema real. Una tecnología merece incorporarse cuando amplía de manera significativa lo que puedo construir para otros, no solamente cuando aumenta la longitud de mi lista de conocimientos.
 
@@ -110,8 +110,8 @@ Las últimas veces que aprendí algo desde cero, y cuánto tardé:
 | ------------------------------------- | -------------- | --------------------------------- | ----------------------------------------------------------- |
 | Microsoft Fabric                      | agosto de 2023 | 5 meses de estudio (jul–nov 2024) | DP-600 en diciembre de 2024, plataforma de Vesting operando |
 | Next.js y el pipeline de aplicaciones | julio de 2026  | 20 sprints                        | este sitio, CV Viva, con su CI, sus pruebas y sus ADR       |
-| AI-103 y AI-300                       | julio de 2026  | curso completo y 10 módulos       | dos rutas en curso, con la Super guía AI-103 publicada      |
-| Codex, Antigravity y Claude Code      | su salida      | cerca de un mes cada uno          | el pipeline con el que se construyen las 38 piezas          |
+| AI-103 y AI-300                       | julio de 2026  | curso completo y 10 módulos       | dos rutas en curso                                          |
+| Codex, Antigravity y Claude Code      | su salida      | cerca de un mes cada uno          | el pipeline con el que se construyen las 37 piezas          |
 
 Lo último que aprendí desde cero, sin certificado de por medio, fueron Codex, Antigravity y Claude Code: los tomé desde su salida y en cerca de un mes cada uno estaban en uso real, no en prueba. No son cursos terminados: son capacidades en uso, cada una con un artefacto que alguien puede abrir. La fila de Fabric es la única que termina en una credencial; las otras tres terminan en software que corre.
 
@@ -138,11 +138,11 @@ No abordé estas tecnologías mediante ejercicios separados del producto. Cada u
 
 Las cifras salen de los repositorios y no sustituyen la evaluación de la calidad. Una suite extensa puede proteger poco si verifica aspectos irrelevantes. Por eso, relaciono cada control con una condición concreta y procuro demostrar que puede ponerse en rojo frente a la falla que debe detectar.
 
-## Las 38 piezas: 15 agentes, 7 investigaciones y 6 tableros, cuatro formas de aprender
+## Las 37 piezas: 14 agentes, 7 investigaciones y 6 tableros, cuatro formas de aprender
 
 <!-- seccion: las-cuatro-familias -->
 
-A las diez aplicaciones hermanas se suman 15 agentes publicados, 7 investigaciones y 6 tableros construidos sobre datos públicos. En total, la vitrina reúne 38 piezas dentro de esas cuatro familias, y las cifras de cada una se cuadran contra las fichas visibles de la vitrina.
+A las diez aplicaciones hermanas se suman 14 agentes publicados, 7 investigaciones y 6 tableros construidos sobre datos públicos. En total, la vitrina reúne 37 piezas dentro de esas cuatro familias, y las cifras de cada una se cuadran contra las fichas visibles de la vitrina.
 
 Cada familia demuestra una forma diferente de aprendizaje. Las aplicaciones exigen transformar nuevas tecnologías en experiencias utilizables. Los agentes requieren comprender modelos, fuentes, herramientas, contexto, memoria y evaluación. Las investigaciones obligan a formular preguntas, revisar evidencia y controlar afirmaciones. Los tableros requieren convertir fuentes públicas en modelos semánticos de Power BI, medidas verificables en DAX y experiencias de decisión, con datos que cualquiera puede verificar.
 
@@ -207,24 +207,6 @@ La primera obliga a comprender el problema antes de delegarlo. Intentar resolver
 La segunda es una forma de estudiar. No considero comprendido un mecanismo de seguridad, recuperación o tolerancia a fallas de una plataforma hasta haber observado qué ocurre cuando deja de funcionar. La ruta ideal muestra que una capacidad existe. La falla muestra si realmente sé operarla. Aplica igual a datos, software e inteligencia artificial: una validación de datos tiene que detectar su inconsistencia, y un agente tiene que evaluarse frente a información insuficiente, fuentes ausentes, herramientas no disponibles e instrucciones que intenten llevarlo fuera de su función. El AI-300 es especialmente relevante aquí, porque operar inteligencia artificial exige controles que detecten degradación, cambios de comportamiento, errores de integración y resultados que ya no cumplen los criterios definidos.
 
 El aprendizaje adquiere mayor profundidad cuando incluye las condiciones de fracaso. Comprender cómo funciona una tecnología es importante. Comprender cómo falla, cómo se detecta y cómo se recupera es lo que permite asumir responsabilidad sobre ella.
-
-## La Super guía AI-103 convierte el método en una herramienta
-
-<!-- seccion: la-guia-del-ai-103 -->
-
-Cuando la ruta AI-103 se convirtió en el camino vigente para profundizar en aplicaciones y agentes de inteligencia artificial sobre Azure, no quise depender únicamente de una secuencia de cursos seleccionados por terceros. Construí un agente capaz de estructurar y verificar una guía de estudio a partir de fuentes oficiales: la Super guía AI-103, uno de los 15 agentes publicados en la vitrina.
-
-La herramienta aplica la misma disciplina que utilizo para aprender. El estudio se invierte: primero se define un proyecto real en Microsoft Foundry, y ninguna ruta se considera completa hasta que un mapa de cobertura demuestra cómo sus contenidos se relacionan con los dominios oficiales y con la proporción que cada uno representa dentro de la evaluación.
-
-Cada afirmación pedagógica necesita una fuente identificable y una fecha de verificación: cada nota lleva su fuente, su URL y su fecha de captura, y una ingesta viva avisa qué guía quedó vencida cuando la documentación cambia. Esta condición es especialmente importante en tecnologías que evolucionan con rapidez, porque una explicación técnicamente correcta puede quedar desactualizada cuando cambian los servicios, los nombres, las interfaces o las capacidades evaluadas.
-
-El agente no decide libremente qué debería estudiar una persona a partir de la memoria del modelo. Recupera documentación, organiza contenidos, identifica vacíos y conserva evidencia sobre la procedencia de cada recomendación.
-
-La guía también diferencia entre cobertura nominal y profundidad suficiente. Incluir un enlace para cada tema no demuestra que la ruta prepare realmente al estudiante. Es necesario evaluar si existen contenidos, ejercicios y verificaciones proporcionales a la importancia y dificultad del dominio: cada guía cierra con un checkpoint, y el resultado reordena la ruta hacia donde flaqueo.
-
-Este sistema convierte la preparación de una certificación en un problema de arquitectura del conocimiento. Existen fuentes, entidades, dependencias, pesos, estados de vigencia, vacíos y criterios de terminado —29 criterios binarios de aceptación en su ficha—. La herramienta organiza esas relaciones y hace visible aquello que todavía falta.
-
-El proyecto demuestra además un principio importante de mi ecosistema agéntico: los agentes deben producir entregables verificables y no únicamente respuestas útiles en el momento. La guía puede revisarse, actualizarse y utilizarse por otras personas porque su valor permanece después de terminar la conversación. Es mi método de aprendizaje transformado en una pieza pública: fuentes oficiales, cobertura medible, vacíos declarados, actualización controlada y un resultado que otra persona puede examinar y utilizar.
 
 ## Qué hago cuando el puesto pide algo que nunca he usado: el mapa de capacidades y Google Cloud en exploración
 
