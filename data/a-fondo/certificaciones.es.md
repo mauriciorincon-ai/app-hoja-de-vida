@@ -106,14 +106,6 @@ Mi formación en Ingeniería Industrial aporta el punto de partida: antes de dis
 
 El AI-103 completa la dimensión de construcción de mi perfil. El DP-600 organiza los datos y la capacidad analítica. El AI-103 amplía esa base hacia aplicaciones y agentes capaces de interpretar información, conectar conocimiento y utilizar herramientas dentro de procesos empresariales.
 
-## La guía de estudio del AI-103: una ruta con mapa de cobertura y fuentes fechadas
-
-<!-- seccion: la-guia-de-estudio-del-ai-103 -->
-
-Como parte de esta ruta, he estructurado una guía de estudio con criterios de trazabilidad, y la convertí en un agente público: la Super guía AI-103, uno de los 15 agentes de la vitrina. Cada contenido debe vincularse con documentación oficial vigente y cada bloque debe corresponder con las capacidades evaluadas por el examen. No considero completa una ruta de aprendizaje hasta que un mapa de cobertura demuestra que el contenido representa adecuadamente los dominios y proporciones establecidos oficialmente: dos dominios pesan cerca del 60 % del examen, y estudiar plano los ignora.
-
-Este enfoque convierte la preparación en un ejercicio aplicado de arquitectura del conocimiento. La información debe obtenerse de fuentes autorizadas, conservar su fecha, organizarse según una estructura verificable y actualizarse cuando cambia la documentación. La guía no se limita a presentar contenidos; demuestra qué cubre, de dónde proviene y qué parte del objetivo de aprendizaje representa. En cifras de su ficha: 29 criterios binarios de aceptación, cada nota con fuente, URL y fecha de captura, y 0 recursos de Azure creados por el harness —propone los comandos y los corro yo—. Cómo esa guía es mi método de aprendizaje convertido en herramienta está en el documento sobre cómo aprendo.
-
 ## El AI-300: llevar la inteligencia artificial a una operación confiable (MLOps y GenAIOps)
 
 <!-- seccion: el-ai-300 -->

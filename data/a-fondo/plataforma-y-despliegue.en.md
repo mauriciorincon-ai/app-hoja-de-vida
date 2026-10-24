@@ -430,7 +430,7 @@ end-to-end solution designed from the platform's own principles and services.
 The architecture will have to integrate open or synthetic information, analytical processing,
 controlled access to structured data, knowledge retrieval and tool usage. The agent will have a
 delimited purpose, input and output contracts, acceptance criteria and conditions under which it
-must abstain or request intervention, which is exactly what I demand today of the 15 agents
+must abstain or request intervention, which is exactly what I demand today of the 14 agents
 published in my showcase.
 
 BigQuery will make it possible to structure the data and analytics dimension. Google's

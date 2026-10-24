@@ -2,7 +2,7 @@
 slug: apps-pipeline
 codigo: AF-12
 titulo: "The apps I am building in public"
-resumen: "The AI-APPs pipeline: ten sister applications, 15 agents, 7 research lines and 6 dashboards —38 pieces, not counting this site— built with two houses, a factory agent, four CI jobs, a sheet contract generated from Zod, a real cost of US$0 a month and two rules: code first, and every control is demonstrated by failing."
+resumen: "The AI-APPs pipeline: ten sister applications, 14 agents, 7 research lines and 6 dashboards —37 pieces, not counting this site— built with two houses, a factory agent, four CI jobs, a sheet contract generated from Zod, a real cost of US$0 a month and two rules: code first, and every control is demonstrated by failing."
 cuando_usar: "Use this when they ask what he has built on his own outside of work, how many applications he has published, whether he has public code, how his build pipeline works with Next.js, automated tests and CI, and what each of the ten showcase apps demonstrates."
 estado: aprobado
 ancla: "#vitrina"
@@ -52,7 +52,7 @@ included). -->
 
 <!-- seccion: por-que-en-publico -->
 
-A résumé asserts; a published piece demonstrates. That is the main reason I build in public: 38 pieces in total, not counting this site —ten of them sister applications—, all outside my job and all with their repository.
+A résumé asserts; a published piece demonstrates. That is the main reason I build in public: 37 pieces in total, not counting this site —ten of them sister applications—, all outside my job and all with their repository.
 
 My own generative AI projects did not come out of nowhere. Since April 2024, in parallel to my jobs, I have planned and designed these applications and these agents —their conception and their architecture—, and for years I tried them out on different platforms before building them, from 2026, with the pipeline that produces them today. It is a declared fact, with no 2024 artifact to prove it: what can be examined are the pieces, and each one keeps its own date —Dash Agent, for example, was conceived and designed in 2026—.
 
@@ -68,7 +68,7 @@ Building in public is, ultimately, a form of professional responsibility. I do n
 
 Building in public introduces a deliberately uncomfortable consequence: what is not finished cannot be presented as if it were. An idea can be declared in exploration, a prototype can show a hypothesis and a finished solution can demonstrate a capability, but these states must not be confused. Making that difference visible protects the credibility of the portfolio and forces me to describe every result with precision.
 
-The states are written in the data, not in the prose. The app catalog admits three: in production —live URL, repository and CI in green—, under construction —repository with real commits— and in exploration —declared objective, no promised dates—. The sheets of the pieces admit two: initial, when construction is closed, and sealed, when the piece reached its MVP and carries its sealing date. Of the 15 published agents, five are sealed and ten are in the initial state; the six dashboards are sealed, and the seven research lines are initial; five have their manuscript ready to submit and none has been submitted.
+The states are written in the data, not in the prose. The app catalog admits three: in production —live URL, repository and CI in green—, under construction —repository with real commits— and in exploration —declared objective, no promised dates—. The sheets of the pieces admit two: initial, when construction is closed, and sealed, when the piece reached its MVP and carries its sealing date. Of the 14 published agents, five are sealed and nine are in the initial state; the six dashboards are sealed, and the seven research lines are initial; five have their manuscript ready to submit and none has been submitted.
 
 It also forces me to keep a correspondence between what I claim and what I deliver. If I say a solution is reproducible, there must be a way to understand how it was built. If I claim a figure was calculated, I must be able to explain the method. If an application uses artificial intelligence, it must be clear what function it serves, what information it uses and why that capability could not be adequately solved through conventional programming.
 
@@ -104,7 +104,7 @@ This distinction is especially important in research and agents. Openness allows
 
 <!-- seccion: que-hay-construido -->
 
-The pipeline produces four main families of assets: applications, agents, research lines and analytical dashboards. All finished pieces are published in the site's showcase and have a sheet that explains their purpose, scope, state and main design decisions. Today the showcase gathers 38 pieces: ten sister applications, 15 agents, 7 research lines and 6 dashboards.
+The pipeline produces four main families of assets: applications, agents, research lines and analytical dashboards. All finished pieces are published in the site's showcase and have a sheet that explains their purpose, scope, state and main design decisions. Today the showcase gathers 37 pieces: ten sister applications, 14 agents, 7 research lines and 6 dashboards.
 
 The ten applications are Anonimizador Velo, Dash Agent, Probeta DS, Habla San, Innmobiliaria and Nutrikids, plus four in their initial stage —planlang, AngelGhost, Big-D and HackGuard—, plus CV Viva, which is this very site and not a piece of the storefront. Each answers a different promise, but all must pass the same criterion: turning a need into a functional, documented and verifiable experience, not only into a convincing interface or a technical demo.
 
@@ -144,11 +144,11 @@ These figures are a dated snapshot, they are refreshed from each app's repositor
 
 The remaining four are in their initial stage —cycle H1, version 0.1.0, unsealed— and publish their own sourced figures in their brochure, which is why they do not enter the table above. planlang (seven sprints closed): you write an agent's plan as a contract and a verifier without AI measures, case by case, the gap between what the plan promised and what the agent did; 21 features, 16 ADRs, 16 criteria met, 1,204 crossed decisions over 220 synthetic cases, zero model calls in the showcase and a cost of US$5.21 per run. AngelGhost (eight sprints): a window on your Mac that the client does not see even when you share your screen, bringing you your own experience at the right moment of the meeting; 20 features, 1,806 automated tests, 23 ADRs and zero bytes leaving the machine. Big-D (three sprints): an open, reproducible planner for choosing between data platforms with dated evidence; 14 features, 3 platforms and 63 components in the atlas, 33 dated pieces of evidence, 2,614 automated tests and 98.55% coverage. HackGuard (nine sprints): a living catalog of security tests that tells you what you tested, what you expected, what you got and what you are missing; 18 features, 38 tests in the catalog crossed with 38 ISO/IEC 42001 controls, 4,390 automated tests and 97.54% coverage. All four cost US$0 a month to operate.
 
-## Fifteen agents, seven research lines and six dashboards
+## Fourteen agents, seven research lines and six dashboards
 
 <!-- seccion: agentes-investigaciones-tableros -->
 
-The portfolio also includes fifteen published agents, conceived as specialized work systems. I do not present them as generic conversations or as text-generation demos. Each agent must have a delimited purpose, identifiable sources or knowledge, rules of action, expected results and conditions under which it must recognize its limits. Five are sealed —the Power BI Dashboard Builder in June 2026, the AI-APPs Factory in July, CINE Presentations and the Animation Workshop between July and August, and the Computational Paper Harness in August—; their own document walks through them one by one.
+The portfolio also includes fourteen published agents, conceived as specialized work systems. I do not present them as generic conversations or as text-generation demos. Each agent must have a delimited purpose, identifiable sources or knowledge, rules of action, expected results and conditions under which it must recognize its limits. Five are sealed —the Power BI Dashboard Builder in June 2026, the AI-APPs Factory in July, CINE Presentations and the Animation Workshop between July and August, and the Computational Paper Harness in August—; their own document walks through them one by one.
 
 The seven research lines represent another dimension of the pipeline. Their purpose is not to retrospectively back an idea with selected references, but to formulate a question, characterize the gap that makes it relevant and build a methodological route capable of producing evidence. Each work must clearly distinguish between what is supported, what is still a hypothesis and what cannot be claimed with the available results. Each one publishes its gap with the number of works reviewed —from 119 frameworks to 1,414 works— and its document explains the method.
 
@@ -230,7 +230,7 @@ It is coordinated by the AI-APPs Factory, an agent sealed on July 2, 2026 that i
 
 The Factory declares three limits, and I prefer writing them down to hiding them: it does not write production code —that happens in each app's repository, never in the planning house—; the launch and operation phases remain unvalidated in a real run, they are written method and not experience; and there are no live shared libraries between apps, reuse travels stamped in the kit. Its return only counts the coordination eliminated —an estimate of 108 hours a year, with its assumptions declared—; the commercial value of the portfolio remains an unquantified option.
 
-This site carries twenty sprints closed this way and 29 architecture decisions recorded in its repository. Every change goes through four continuous integration jobs —quality, integration against a real database, end-to-end tests with accessibility, and Lighthouse with a performance budget— and through the secrets sweep. The infrastructure that supports it is drawn in a blueprint with its real cost, US$0 a month, and with its single point of failure declared: the GitHub account, which is the login for the hosting and the database, mitigated with two-factor authentication. And if the database goes down, voting is declared unavailable; if the AI provider goes down, the chat switches to local search: neither of the two brings down the site.
+This site carries twenty-one sprints closed this way and 29 architecture decisions recorded in its repository. Every change goes through four continuous integration jobs —quality, integration against a real database, end-to-end tests with accessibility, and Lighthouse with a performance budget— and through the secrets sweep. The infrastructure that supports it is drawn in a blueprint with its real cost, US$0 a month, and with its single point of failure declared: the GitHub account, which is the login for the hosting and the database, mitigated with two-factor authentication. And if the database goes down, voting is declared unavailable; if the AI provider goes down, the chat switches to local search: neither of the two brings down the site.
 
 ## Two written approvals and explicit human owners
 
@@ -350,7 +350,7 @@ It also materializes the convergence between Industrial Engineering and Industri
 
 <!-- seccion: en-exploracion -->
 
-The pipeline clearly distinguishes between finished pieces and capabilities in exploration. I use this word deliberately because an intention, a proposed architecture or an initial development must not be presented with the same level of certainty as a published and verifiable solution. The two explorations are declared with that word in the app catalog, without promised dates, and they do not count among the 38 pieces.
+The pipeline clearly distinguishes between finished pieces and capabilities in exploration. I use this word deliberately because an intention, a proposed architecture or an initial development must not be presented with the same level of certainty as a published and verifiable solution. The two explorations are declared with that word in the app catalog, without promised dates, and they do not count among the 37 pieces.
 
 One of the explorations corresponds to an end-to-end analytical solution on Microsoft Fabric using open data from Colombia. Its purpose is to publicly demonstrate the complete journey from ingestion and storage in a lakehouse to the semantic model and the experience in embedded Power BI.
 

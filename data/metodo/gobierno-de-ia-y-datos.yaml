@@ -392,8 +392,8 @@ bloques:
         porQue:
           voz: hice
           texto:
-            es: "En los 15 agentes de la vitrina, qué hace cada uno, qué límites tiene y qué «nunca» hace está escrito en su ficha."
-            en: "For the 15 agents in the showcase, what each one does, what limits it has and what it «never» does is written in its sheet."
+            es: "En los 14 agentes de la vitrina, qué hace cada uno, qué límites tiene y qué «nunca» hace está escrito en su ficha."
+            en: "For the 14 agents in the showcase, what each one does, what limits it has and what it «never» does is written in its sheet."
           corpus: [gobierno-de-datos-y-de-ia]
         nota:
           voz: campo
@@ -630,8 +630,8 @@ bloques:
       - nombre: { es: "La vitrina: la autonomía escrita en cada ficha", en: "The showcase: autonomy written in each sheet" }
         nivel: uso-real
         texto:
-          es: "En los 15 agentes de la vitrina, qué hace cada uno, qué límites tiene y qué «nunca» hace está escrito en su ficha técnica."
-          en: "For the 15 agents in the showcase, what each one does, what limits it has and what it «never» does is written in its technical sheet."
+          es: "En los 14 agentes de la vitrina, qué hace cada uno, qué límites tiene y qué «nunca» hace está escrito en su ficha técnica."
+          en: "For the 14 agents in the showcase, what each one does, what limits it has and what it «never» does is written in its technical sheet."
         corpus: [gobierno-de-datos-y-de-ia]
         href: /vitrina/agentes
 

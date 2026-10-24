@@ -410,7 +410,7 @@ preguntas:
   - pregunta: "Which agents has he published in his portfolio?"
     espera: [agentes-en-produccion, apps-pipeline, los-agentes-de-la-vitrina]
     familia: vitrina
-  - pregunta: "What are the thirteen showcase agents for?"
+  - pregunta: "What are the twelve showcase agents for?"
     espera: [los-agentes-de-la-vitrina]
     familia: vitrina
   - pregunta: "What is a harness and how does he use it in his agents?"

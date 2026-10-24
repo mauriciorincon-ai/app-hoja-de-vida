@@ -1,15 +1,15 @@
 ---
 slug: los-agentes-de-la-vitrina
 codigo: AF-25
-titulo: "Los quince agentes de la vitrina"
-resumen: "Los 15 agentes publicados: los trece de ARKHÉ, uno a uno y en cuatro familias, y los agentes demostrativos de planlang. De cada uno de los trece: qué promete, su cifra medida, su límite y su «nunca». Cinco sellados. Todos con gates humanos, carnadas que demuestran que los controles disparan, cero costo en herramientas (salvo la GPU del Taller de Animación) y la misma regla: ninguna afirmación sale de la memoria del modelo."
-cuando_usar: "Úsalo cuando pregunten qué agentes tiene publicados en su portafolio, para qué sirve cada uno de los quince agentes de la vitrina, qué es un harness, cómo controla la calidad con gates humanos y carnadas, y qué comparten los trece."
+titulo: "Los catorce agentes de la vitrina"
+resumen: "Los 14 agentes publicados: los doce de ARKHÉ, uno a uno y en cuatro familias, y los agentes demostrativos de planlang. De cada uno de los doce: qué promete, su cifra medida, su límite y su «nunca». Cinco sellados. Todos con gates humanos, carnadas que demuestran que los controles disparan, cero costo en herramientas (salvo la GPU del Taller de Animación) y la misma regla: ninguna afirmación sale de la memoria del modelo."
+cuando_usar: "Úsalo cuando pregunten qué agentes tiene publicados en su portafolio, para qué sirve cada uno de los catorce agentes de la vitrina, qué es un harness, cómo controla la calidad con gates humanos y carnadas, y qué comparten los doce."
 estado: aprobado
 ancla: "/vitrina/agentes"
 actualizado: 2026-09-21
 preguntas_de_prueba:
-  - "¿Qué son los quince agentes de la vitrina y qué no son?"
-  - "¿Qué comparten los quince agentes de la vitrina?"
+  - "¿Qué son los catorce agentes de la vitrina y qué no son?"
+  - "¿Qué comparten los catorce agentes de la vitrina?"
   - "¿Cómo producen piezas los agentes con gates humanos?"
 ---
 
@@ -38,8 +38,8 @@ CÓMO SE ESCRIBE ESTE ARCHIVO
 
 <!-- seccion: que-son -->
 
-La vitrina publica **15 agentes**, cada uno con su ficha técnica: promesa, cifras con procedencia,
-límites, «nunca» y el proceso dibujado. Trece de ellos —los que describe este documento— son
+La vitrina publica **14 agentes**, cada uno con su ficha técnica: promesa, cifras con procedencia,
+límites, «nunca» y el proceso dibujado. Doce de ellos —los que describe este documento— son
 sistemas de trabajo que corren sobre **Claude Code** dentro de un **harness** —el envoltorio que
 le fija al agente su función, sus fuentes, sus herramientas y su contrato de entrada y salida—, y
 todos pertenecen a **ARKHÉ**, mi ecosistema agéntico, que está explicado en el documento de
@@ -49,7 +49,7 @@ a una persona toda negación o coincidencia dudosa, y su ficha publica lo que mi
 servicios, son demostraciones medidas contra su plan, y están en estado inicial.
 
 **Cinco están sellados** —Constructor de Tableros Power BI, Presentaciones CINE, Fábrica de
-AI-APPs, Taller de Animación y Harness Paper Computacional— y ocho siguen en estado inicial. Lo
+AI-APPs, Taller de Animación y Harness Paper Computacional— y siete siguen en estado inicial. Lo
 que no son: servicios con usuarios. Son herramientas de uso personal con entregables y evidencia —incluso las diseñadas para entregar un repositorio por cliente no han tenido usuarios distintos de mí—;
 la palabra «producción» la reservo para los 27 agentes de Vesting.
 
@@ -59,12 +59,10 @@ la palabra «producción» la reservo para los 27 agentes de Vesting.
 
 | Agente                   | Estado  | Qué promete                                                                                           | Cifra medida                       |
 | ------------------------ | ------- | ----------------------------------------------------------------------------------------------------- | ---------------------------------- |
-| **Super guía AI-103**    | inicial | ninguna guía existe hasta que un mapa demuestre que la ruta cubre el temario oficial en proporción a sus pesos | 29 criterios binarios; 0 recursos Azure creados |
 | **Asistente de posgrado**| inicial | cada ficha cita curso, sesión y marca de tiempo, o declara el vacío; toda cita se genera desde CSL-JSON, jamás se redacta | 50 criterios; 9 de 9 carnadas disparan; transcribe a 19 veces el tiempo real |
 | **Hiring Copilot**       | inicial | cada afirmación enviable enlaza un logro con su fuente y un programa lo comprueba: el bullet huérfano hace fallar el control | 122 criterios; 8 de 9 controles con carnada |
 
-La Super guía no ejecuta nada en Azure: propone los comandos y los corres tú, porque ejecutar es
-el aprendizaje. El Asistente prepara y no suplanta: no escribe los entregables evaluables del
+El Asistente prepara y no suplanta: no escribe los entregables evaluables del
 estudiante. Hiring Copilot entrena antes de la entrevista y nunca asiste durante una real, no
 inserta texto oculto en un documento y nunca revela el ingreso actual en una pieza de negociación.
 
@@ -122,7 +120,7 @@ librerías compartidas: son sus tres límites declarados.
 
 <!-- seccion: como-nace-un-agente -->
 
-Los trece comparten una anatomía, y conviene describirla una sola vez. Cada agente es un
+Los doce comparten una anatomía, y conviene describirla una sola vez. Cada agente es un
 repositorio con una **constitución**: un archivo `CLAUDE.md` que Claude Code carga solo al abrir
 la carpeta y que fija las leyes del agente, sus comandos y sus fuentes. El Experto ISO 42001, por
 ejemplo, tiene **8 leyes y 9 comandos**; Atracción en Frío, **8 comandos** en su ciclo (marca,
@@ -132,8 +130,7 @@ pegar: la constitución es el arranque.
 
 Sobre esa constitución va el **harness**: el contrato de entrada y salida, las herramientas
 permitidas, el formato de cada entregable y los **criterios binarios de aceptación** —pasa o no
-pasa, sin juicio intermedio— que se cuentan uno a uno en los work-items del paquete: 29 en la
-Super guía AI-103, 50 en el Asistente de posgrado, 99 en Hiring Copilot, 20 en el Constructor de
+pasa, sin juicio intermedio— que se cuentan uno a uno en los work-items del paquete: 50 en el Asistente de posgrado, 99 en Hiring Copilot, 20 en el Constructor de
 Tableros, 33 en el Taller de Animación, 52 en el Harness Design Science y 44 en el Harness Paper
 Computacional. Un criterio que no puede fallar no es un criterio, y por eso cada control lleva su
 **carnada**: el caso destruido a propósito que demuestra que el control dispara.
@@ -141,24 +138,13 @@ Computacional. Un criterio que no puede fallar no es un criterio, y por eso cada
 Y sobre el harness, los **gates humanos**: puntos donde el agente se detiene y no sigue hasta que
 la persona escribe un token literal. Presentaciones CINE tiene **8 gates** con token verbal, uno
 por corte; el Taller de Animación, **6**; Atracción en Frío, **6**; el Constructor de Tableros,
-**5** gates de aprobación humana. El gate no es un recordatorio: es mecánica. La Super guía no
-genera una guía antes de que el mapa de cobertura esté aprobado; la Biblioteca no integra una
+**5** gates de aprobación humana. El gate no es un recordatorio: es mecánica. La Biblioteca no integra una
 ficha sin el token del curador registrado con fecha; el Taller no enciende la GPU sin guion y
 storyboard aprobados.
 
 ## Los agentes de aprendizaje, uno por uno
 
 <!-- seccion: aprendizaje-uno-por-uno -->
-
-**Super guía AI-103** (inicial, v2.1.0). Invierte el estudio: primero se define un proyecto real
-en Microsoft Foundry y el harness demuestra, con un mapa de cobertura contra los pesos oficiales
-del examen, que construirlo cubre el temario. Solo entonces genera las guías paso a paso, con los
-callouts oficiales inyectados donde hacen falta; cada afirmación pedagógica cita su fuente oficial
-con URL y fecha o se marca «a confirmar». Tiene **29 criterios** binarios repartidos en 9
-work-items y **6 notas inteligentes** sembradas. No ejecuta nada en Azure, no es un simulador de
-examen (cinco a diez preguntas por guía) y entrega archivos HTML que se abren en el navegador. Es
-el agente con el que estudio mi propia certificación en curso, y por eso está en la vitrina: es
-evidencia de cómo aprendo.
 
 **Asistente de posgrado** (inicial, v1.0.1). Cada sesión de clase entra a una biblioteca en
 Markdown con procedencia exacta hasta la marca de tiempo de la grabación o el número de
@@ -269,13 +255,12 @@ Asistente de posgrado, de sus 13 comandos con 0 ejercitados. Publicar ese dato e
 método: una ficha que dijera «probado» sin corrida sería la misma cifra sin procedencia que los
 agentes se prohíben a sí mismos.
 
-El retorno sigue la misma regla en las trece fichas: **se declara como estimación con supuestos**,
-nunca como promesa. La Super guía monetiza la certificación en horas facturables a la tarifa del
-usuario y no afirma salto salarial; Atracción en Frío modela horas liberadas; CINE y el Taller
+El retorno sigue la misma regla en las doce fichas: **se declara como estimación con supuestos**,
+nunca como promesa. Atracción en Frío modela horas liberadas; CINE y el Taller
 declaran su ahorro como hipótesis a calibrar; el Experto Fiscal no estima el ahorro fiscal directo
 porque depende de cifras que aún no están en el gemelo, «y ponerle número hoy sería inventarlo».
 
-## Lo que los trece comparten
+## Lo que los doce comparten
 
 <!-- seccion: lo-que-comparten -->
 

@@ -398,7 +398,7 @@ el mensaje te llega al correo.
   y **cada uno con su propio espacio**. Desde el Sprint 007 **los cuatro tienen piezas reales**:
   - **Apps** (`/es/vitrina/apps`): las apps del pipeline. **10 piezas.**
   - **Agentes especializados** (`/es/vitrina/agentes`): agentes sin interfaz que se manejan por
-    comandos. **15 piezas.**
+    comandos. **14 piezas.**
   - **Investigaciones** (`/es/vitrina/investigaciones`): líneas de investigación ya validadas.
     **7 piezas.**
   - **Tableros de datos** (`/es/vitrina/tableros`): tableros analíticos, sin atarse a una
@@ -1140,7 +1140,7 @@ dashboard, a fondo → in-depth…) vive en la bitácora `sprints/CONTENIDO-a-fo
 
 ### Las fichas de la vitrina también hablan por el chat · desde a fondo v2
 
-Desde el 2026-09-20 (ADR-023) el índice del chat incluye las **38 fichas de la vitrina**: por
+Desde el 2026-09-20 (ADR-023) el índice del chat incluye las **37 fichas de la vitrina**: por
 cada app, su presentación, funcionalidades, cifras y límites; por cada agente, investigación o
 tablero, su presentación, cifras, límites y bloques. Cada fragmento cita hacia la ficha
 (`/vitrina/apps/<slug>` o `/vitrina/<frente>/<slug>`). No hay nada que escribir: **una ficha que
@@ -1190,10 +1190,10 @@ chat hoy y cuáles traería con la base aprobada. Ese informe **se genera, no se
 
 - **Qué hace:** la guía de prueba (`docs/GUIA-DE-PRUEBA.html`, un archivo que se abre en el navegador, sin servidor) tiene un filtro nuevo,
   **«Ensayo general H-2»**. Muestra solo los flujos que tú recorres sobre producción, como lo haría un cliente: **una fila por flujo,
-  con un sí y un no**. La página suma los minutos de cada sentada y del ensayo entero; ninguna cuenta está escrita a mano. Las sentadas
+  con un sí y un no**. La página suma los minutos de cada tanda y del ensayo entero; ninguna cuenta está escrita a mano. Las tandas
   son de a lo sumo 45 minutos: si la suma pasa de eso, la página lo avisa en rojo con el número y hay que partirla.
-- **Cómo se usa:** abre la guía, pega tu dominio en la caja «URL de prueba», pulsa «Ensayo general H-2» y corre una sentada tras otra (la
-  página dice cuántas hay y cuánto suma cada una). En cada fila marca **sí** (salió como esperabas) o **no**. Las respuestas se guardan solas en ese navegador (prefijo `s20`): si la cierras y la
+- **Cómo se usa:** abre la guía, pega tu dominio en la caja «URL de prueba», pulsa «Ensayo general H-2» y corre una tanda tras otra (la
+  página dice cuántas hay y cuánto suma cada una). En cada fila marca **sí** (salió como esperabas) o **no**. Las respuestas se guardan solas en ese navegador (prefijo `s21` desde el Sprint 021): si la cierras y la
   vuelves a abrir, siguen ahí, y el contador de arriba cuenta cada flujo respondido. Cuando una fila diga «no», anótalo y cuéntaselo a
   Claude en la sesión del siguiente sprint: eso es lo que ese sprint corrige.
 - **Lo que queda fuera:** las pruebas con ⭐ que un flujo ya cubre, o que la CI respalda, o que no son un flujo de cliente (lecturas del
@@ -1202,10 +1202,34 @@ chat hoy y cuáles traería con la base aprobada. Ese informe **se genera, no se
 - **El lote de medios y bajos:** el cierre del H-2 deja cada hallazgo medio o bajo de los cierres S9–S19 con un estado final y su prueba
   (`pagado`, `ya no aplica` o `imposible`, nunca «abierto») en `sprints/SPRINT_020-lote.md`; un gate de pruebas lo vigila, y lo que no se
   puede resolver aquí (fichas de otras casas, archivos del kit) queda con su sitio y su destinatario. Las decisiones tuyas que ningún gate
-  puede dar (los Criterios ▲, los niveles de Probeta DS, la puerta de la HOME) viajan en una tabla aparte, y las que son lectura tuya (los Criterios) van en la sentada 3 del ensayo.
+  puede dar (los Criterios ▲, los niveles de Probeta DS, la puerta de la HOME) viajan en una tabla aparte, y las que son lectura tuya (los Criterios) van en la tanda 3 del ensayo.
 - **Limitaciones conocidas:** el ensayo corre contra producción, así que hace falta el dominio ya apuntando al sitio; la guía no sube tus
   respuestas a ningún lado (están en tu navegador) y cambiar de navegador las pierde; el Node del build de Vercel se confirma mirando un
   build (la documentación dice que `22.x` despliega la última 22.x).
+  (Desde el Sprint 021 las del ensayo se llaman «tandas» y las de la revisión completa, «sentadas», para no confundirlas.)
+
+### La revisión completa y el retiro del agente de estudio del AI-103 · desde Sprint 021
+
+- **Qué hace:** la guía de prueba abre ahora con el filtro **«Revisión completa»**: toda la guía en una sola pasada, en **sentadas de a lo
+  sumo 45 minutos y ordenadas por lugar y aparato** (el escritorio, el chat, la vitrina, «Métodos», la accesibilidad, el teléfono real, los
+  Criterios, el repositorio y el panel de Vercel). Cada prueba vigente aparece **una sola vez** y lleva **un sí o un no y una nota corta**;
+  los flujos del ensayo (R1 a R18) abren cada sentada y llevan dentro las ⭐ que cubren. Cuántas pruebas hay, cuántos minutos suma cada
+  sentada y cuántas horas la revisión entera lo calcula la página: ningún total está escrito, y una sentada que pase de 45 minutos se marca en rojo.
+- **Cómo se usa:** pega tu dominio en «URL de prueba» y ve sentada tras sentada, en tu computador personal y, el teléfono, con datos móviles.
+  Puedes parar y seguir otro día: las respuestas y las notas se guardan solas en ese navegador (prefijo `s21`). **«Copiar mis respuestas»**
+  copia un texto con la fecha, la versión de la guía, los totales, cada «no» con su nota, los «sí» que llevan nota y los pendientes por
+  sentada; pégalo en la sesión de la planeadora. Si el navegador no deja copiar solo, el texto aparece abajo ya seleccionado: cópialo con Cmd+C. Si marcaste una respuesta por error, **«Quitar respuesta»** (en la misma fila) la devuelve a pendiente.
+- **Lo que queda fuera de la revisión:** lo que la CI respalda y no se ve en producción (el registro y el cupo del chat contra Postgres, la
+  votación apagada, el modo mantenimiento, una prueba sin sujeto desde el Sprint 007) se ve al final **con su razón y sin sí/no**; no se
+  borra. Hay una prueba opcional: el Node del build en el panel de Vercel.
+- **El retiro del agente de estudio del AI-103:** el dueño desmontó ese agente de la Fábrica el 2026-10-23 (nunca operó). Su ficha salió de la
+  vitrina: la de agentes muestra una tarjeta menos y su dirección vieja responde 404 en los dos idiomas. Los tres documentos del a fondo que
+  lo presentaban dejaron de hacerlo sin afirmar nada nuevo, y las cuentas (agentes, piezas, «los de ARKHÉ») bajan solas desde el disco. La
+  certificación AI-103 sigue «en curso» y el chat ya no presenta ese agente. Un gate (`tests/unit/retiro-super-guia.test.ts`) barre el sitio
+  con el patrón de la orden de la Fábrica y falla si el nombre vuelve.
+- **Limitaciones conocidas:** la guía no sube tus respuestas a ningún lado (cambiar de navegador las pierde); el sí/no de un flujo R es el
+  mismo en la revisión y en el filtro «Ensayo general H-2»; lo que dependa de ti en el corpus (por ejemplo, si quieres hablar de una guía de
+  estudio propia, o las preguntas que siguen abiertas de los cierres S10 a S13) no se escribió: va como pregunta en la sentada de tus decisiones abiertas, y la lectura del corpus va en la del repositorio.
 
 ### Animaciones y accesibilidad · desde Sprint 001
 
@@ -1273,3 +1297,4 @@ chat hoy y cuáles traería con la base aprobada. Ese informe **se genera, no se
 | Sprint 018 | **«Métodos», octava pieza: «Cómo se debe convertir un proceso en una operación inteligente» (T9).** Diez bloques con 11 fuentes fechadas (la norma ISO/IEC 19510 de BPMN en la IEC, la especificación de OCEL 2.0 en arXiv y nueve páginas de Microsoft Learn sobre minería de procesos, RPA, flujos y agentes; de julio de 2013 a octubre de 2026) y un mapa de 14 nodos, del proceso acordado en BPMN a la operación observable, con la escalera de la automatización (código y reglas, RPA sobre la interfaz, flujos low-code, flujos de n8n con datos y agente con código) y el control humano según el tipo de decisión. La Evidencia sale de `como-trabajo` y `procesos-y-simulacion` (el BPMN antes de la tecnología en cuatro empleos), `inglopres`, `ceinfes`, `cafam`, `vesting` y `agentes-en-produccion`; FORJA se enlaza a T2 como prototipo, sin reescribirla. RPA, Power Automate, Power Apps y Copilot Studio no tienen un caso en ningún documento a fondo: entran solo como estado del campo y como límite de alcance, y la minería de procesos se declara como un método que se aplicaría, no como un caso corrido. La lista `/metodos` cuenta ocho piezas, medidas. El banco suma tres preguntas por idioma y solo la de «qué automatizar y con qué herramienta» exige la pieza (la decisión del dueño); los contadores del corpus pasan de 169 a 172 preguntas de afuera y de diecisiete a dieciocho sprints. Se pagó la deuda corta del Sprint 017: el Experto ISO 42001 sigue en «Uso real» y su tarjeta dice «versión inicial (v1.0.0)» en T2 y T5, T5 dice solo lo que la página de NIST AI 600-1 sostiene y suma la prohibición 9 del AI Omnibus (diciembre de 2026), y `vitest.config.ts` pasó a `.mts` para que Vite deje de avisar de su cargador. Detalle en `sprints/SPRINT_018-cierre.md`. |
 | Sprint 019 | **«Métodos», novena y última pieza: «Cómo se debe decidir con modelos» (T8), y la puerta en la HOME.** Diez bloques con 10 fuentes fechadas (seis páginas de Microsoft Learn sobre ciencia de datos en Fabric, MLflow, el modelo de madurez de MLOps, la vigilancia de modelos y la guía de estudio del AI-300, que está en curso, y cuatro trabajos de arXiv sobre modelos fundacionales de series de tiempo y modelos de lenguaje como asistentes de formulación; de noviembre de 2024 a junio de 2026) y un mapa de 14 nodos, del problema del proceso a la decisión vigilada, con la línea base, el orden temporal, la prueba sin fuga, el error por segmento, la ficha del modelo y la deriva, y la optimización formulada dos veces y la simulación al lado. La Evidencia sale de `analitica-predictiva` (TransMilenio y Banco Pichincha), `las-investigaciones`, `procesos-y-simulacion` y `cm-operaciones`; Probeta DS se enlaza a su ficha con el nivel «Prototipo», sin reescribirla. MLflow, los modelos fundacionales de series de tiempo y los asistentes de formulación no tienen un caso en ningún documento a fondo: entran solo como estado del campo. Sin deriva observada propia y sin una capa prescriptiva en un empleo: así lo dice la pieza. La lista `/metodos` y la nueva puerta de la HOME cuentan nueve piezas, medidas; «hasta ahora» y «las otras llegan una por sprint» salieron del manual y de la guía porque la serie quedó completa. El banco suma tres preguntas por idioma y exigen la pieza la de la formulación de un problema de optimización y la de Probeta DS (la decisión del dueño); los contadores del corpus pasan de 172 a 175 preguntas de afuera y de dieciocho a diecinueve sprints. Se pagó la deuda corta del Sprint 018: el título del bloque 5 de T9 dice lo que dice HEAT y la guía del skill de pruebas apunta a `vitest.config.mts`. Detalle en `sprints/SPRINT_019-cierre.md`. |
 | Sprint 020 | **Cierre del H-2.** El lote de medios y bajos de los cierres S9 a S19 queda con un estado final y su prueba (`sprints/SPRINT_020-lote.md`, con su gate); la prueba intermitente de la vitrina se arregla en su causa (fallaba 2 de 30 bajo carga y después 0 de 80) y la del idioma cambia su espera fija por una condición, sin que se haya podido medir su efecto (se vigila en la CI); la redirección de `/metodo` es exacta y el motor de voz ya no ignora un párrafo entero entre comillas; el sitemap fecha cada publicación con su revisión; las etiquetas del mapa tienen su tope; el banco de preguntas se midió fila por fila. El blueprint, `design-system.md` y `design-sync/` se ponen al día con «Métodos» (el bundle no se publica: eso lo dispara el dueño con `/design-sync`), `CLAUDE.md` corrige sus hechos de producto y la puerta de la HOME se prueba también en inglés, con capturas. La guía de prueba v20 trae el filtro «Ensayo general H-2». |
+| Sprint 021 | **La revisión completa.** La guía de prueba abre con el filtro «Revisión completa»: todo lo pendiente en sentadas de a lo sumo 45 minutos por lugar y aparato, cada prueba una vez, con un sí o un no, una nota y el botón «Copiar mis respuestas»; entran cinco pruebas, catorce se corrigen porque ya no describían el sitio y lo que la CI respalda queda a la vista con su razón. El agente de estudio del AI-103 sale de la vitrina, del a fondo, de las cuentas y del índice del chat por orden de la Fábrica (las cuentas bajan solas desde el disco), con un gate que barre el sitio. |

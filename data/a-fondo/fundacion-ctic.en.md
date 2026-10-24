@@ -270,7 +270,7 @@ demonstrate each advance.
 <!-- seccion: el-agente-experto-en-iso-42001-en-ctic -->
 
 To sustain the work on the more than 20 instruments I built the ISO 42001 expert agent I publish in the
-showcase, one of the 15 agents of the portfolio. It answers with the standard in hand: every
+showcase, one of the 14 agents of the portfolio. It answers with the standard in hand: every
 normative claim cites its corpus entry with clause and page, or declares the gap, and stamps the
 date on which it was verified to still be in force. Its corpus synthesizes the 38 controls of
 Annex A and the 24 carrier documents an auditor asks for in the documentary phase of a

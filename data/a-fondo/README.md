@@ -29,14 +29,14 @@ un documento nuevo toma el siguiente número libre; un código retirado no se re
 | -- | ------ | --------- | ------ | ------: | ------------: | ---------- |
 | 1 | AF-15 | `agentes-en-produccion` | aprobado | 23 | 0 | `/vitrina/agentes` |
 | 2 | AF-21 | `analitica-predictiva` | aprobado | 18 | 0 | `#skills-ia-y-ml` |
-| 3 | AF-12 | `apps-pipeline` | aprobado | 28 | 0 | `#vitrina` |
+| 3 | AF-12 | `apps-pipeline` | aprobado | 29 | 0 | `#vitrina` |
 | 4 | AF-08 | `banco-pichincha` | aprobado | 25 | 0 | `/proyectos/banco-pichincha` |
 | 5 | AF-20 | `bi-que-se-adopta` | aprobado | 23 | 0 | `#skills-bi-y-decision` |
 | 6 | AF-06 | `cafam` | aprobado | 15 | 0 | `/proyectos/cafam` |
 | 7 | AF-04 | `ceinfes` | aprobado | 12 | 0 | `/proyectos/ceinfes` |
-| 8 | AF-11 | `certificaciones` | aprobado | 15 | 0 | `#certificaciones` |
+| 8 | AF-11 | `certificaciones` | aprobado | 14 | 0 | `#certificaciones` |
 | 9 | AF-05 | `cm-operaciones` | aprobado | 13 | 0 | `/proyectos/cm-operaciones` |
-| 10 | AF-19 | `como-aprendo` | aprobado | 18 | 0 | `#certificaciones` |
+| 10 | AF-19 | `como-aprendo` | aprobado | 17 | 0 | `#certificaciones` |
 | 11 | AF-01 | `como-trabajo` | aprobado | 29 | 0 | `#perfil` |
 | 12 | AF-14 | `fabric-en-la-practica` | aprobado | 22 | 0 | `#skills-plataforma-de-datos` |
 | 13 | AF-10 | `fundacion-ctic` | aprobado | 25 | 0 | `/proyectos/fundacion-ctic` |
@@ -53,7 +53,7 @@ un documento nuevo toma el siguiente número libre; un código retirado no se re
 | 24 | AF-07 | `transmilenio-cm` | aprobado | 18 | 0 | `/proyectos/transmilenio-cm` |
 | 25 | AF-09 | `vesting` | aprobado | 24 | 0 | `/proyectos/vesting` |
 
-**25 documentos · 542 subsecciones · 149.235 palabras · 0 `[CONFIRMAR]` por resolver · 25 aprobados.**
+**25 documentos · 541 subsecciones · 148.898 palabras · 0 `[CONFIRMAR]` por resolver · 25 aprobados.**
 
 <!-- tabla-de-documentos:fin -->
 
