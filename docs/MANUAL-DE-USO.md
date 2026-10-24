@@ -1190,9 +1190,9 @@ chat hoy y cuáles traería con la base aprobada. Ese informe **se genera, no se
 
 - **Qué hace:** la guía de prueba (`docs/GUIA-DE-PRUEBA.html`, un archivo que se abre en el navegador, sin servidor) tiene un filtro nuevo,
   **«Ensayo general H-2»**. Muestra solo los flujos que tú recorres sobre producción, como lo haría un cliente: **una fila por flujo,
-  con un sí y un no**. La página suma los minutos de cada sentada y del ensayo entero; ninguna cuenta está escrita a mano. Las sentadas
+  con un sí y un no**. La página suma los minutos de cada tanda y del ensayo entero; ninguna cuenta está escrita a mano. Las tandas
   son de a lo sumo 45 minutos: si la suma pasa de eso, la página lo avisa en rojo con el número y hay que partirla.
-- **Cómo se usa:** abre la guía, pega tu dominio en la caja «URL de prueba», pulsa «Ensayo general H-2» y corre una sentada tras otra (la
+- **Cómo se usa:** abre la guía, pega tu dominio en la caja «URL de prueba», pulsa «Ensayo general H-2» y corre una tanda tras otra (la
   página dice cuántas hay y cuánto suma cada una). En cada fila marca **sí** (salió como esperabas) o **no**. Las respuestas se guardan solas en ese navegador (prefijo `s21` desde el Sprint 021): si la cierras y la
   vuelves a abrir, siguen ahí, y el contador de arriba cuenta cada flujo respondido. Cuando una fila diga «no», anótalo y cuéntaselo a
   Claude en la sesión del siguiente sprint: eso es lo que ese sprint corrige.
@@ -1202,10 +1202,11 @@ chat hoy y cuáles traería con la base aprobada. Ese informe **se genera, no se
 - **El lote de medios y bajos:** el cierre del H-2 deja cada hallazgo medio o bajo de los cierres S9–S19 con un estado final y su prueba
   (`pagado`, `ya no aplica` o `imposible`, nunca «abierto») en `sprints/SPRINT_020-lote.md`; un gate de pruebas lo vigila, y lo que no se
   puede resolver aquí (fichas de otras casas, archivos del kit) queda con su sitio y su destinatario. Las decisiones tuyas que ningún gate
-  puede dar (los Criterios ▲, los niveles de Probeta DS, la puerta de la HOME) viajan en una tabla aparte, y las que son lectura tuya (los Criterios) van en la sentada 3 del ensayo.
+  puede dar (los Criterios ▲, los niveles de Probeta DS, la puerta de la HOME) viajan en una tabla aparte, y las que son lectura tuya (los Criterios) van en la tanda 3 del ensayo.
 - **Limitaciones conocidas:** el ensayo corre contra producción, así que hace falta el dominio ya apuntando al sitio; la guía no sube tus
   respuestas a ningún lado (están en tu navegador) y cambiar de navegador las pierde; el Node del build de Vercel se confirma mirando un
   build (la documentación dice que `22.x` despliega la última 22.x).
+  (Desde el Sprint 021 las del ensayo se llaman «tandas» y las de la revisión completa, «sentadas», para no confundirlas.)
 
 ### La revisión completa y el retiro del agente de estudio del AI-103 · desde Sprint 021
 
@@ -1217,7 +1218,7 @@ chat hoy y cuáles traería con la base aprobada. Ese informe **se genera, no se
 - **Cómo se usa:** pega tu dominio en «URL de prueba» y ve sentada tras sentada, en tu computador personal y, el teléfono, con datos móviles.
   Puedes parar y seguir otro día: las respuestas y las notas se guardan solas en ese navegador (prefijo `s21`). **«Copiar mis respuestas»**
   copia un texto con la fecha, la versión de la guía, los totales, cada «no» con su nota, los «sí» que llevan nota y los pendientes por
-  sentada; pégalo en la sesión de la planeadora. Si el navegador no deja copiar solo, el texto aparece abajo ya seleccionado: cópialo con Cmd+C.
+  sentada; pégalo en la sesión de la planeadora. Si el navegador no deja copiar solo, el texto aparece abajo ya seleccionado: cópialo con Cmd+C. Si marcaste una respuesta por error, **«Quitar respuesta»** (en la misma fila) la devuelve a pendiente.
 - **Lo que queda fuera de la revisión:** lo que la CI respalda y no se ve en producción (el registro y el cupo del chat contra Postgres, la
   votación apagada, el modo mantenimiento, una prueba sin sujeto desde el Sprint 007) se ve al final **con su razón y sin sí/no**; no se
   borra. Hay una prueba opcional: el Node del build en el panel de Vercel.
@@ -1228,7 +1229,7 @@ chat hoy y cuáles traería con la base aprobada. Ese informe **se genera, no se
   con el patrón de la orden de la Fábrica y falla si el nombre vuelve.
 - **Limitaciones conocidas:** la guía no sube tus respuestas a ningún lado (cambiar de navegador las pierde); el sí/no de un flujo R es el
   mismo en la revisión y en el filtro «Ensayo general H-2»; lo que dependa de ti en el corpus (por ejemplo, si quieres hablar de una guía de
-  estudio propia) no se escribió: va como pregunta en la última sentada, junto con la lectura del corpus.
+  estudio propia, o las preguntas que siguen abiertas de los cierres S10 a S13) no se escribió: va como pregunta en la sentada de tus decisiones abiertas, y la lectura del corpus va en la del repositorio.
 
 ### Animaciones y accesibilidad · desde Sprint 001
 
