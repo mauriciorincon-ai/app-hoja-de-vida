@@ -280,7 +280,7 @@ test or a reusable rule.
 Learning advances through short cycles. I build a limited capability, observe its behavior, identify
 the next gap and extend the solution. This sequence reduces the chance of spending weeks on an
 extensive architecture before checking its main assumptions. This site was built that way: 19
-sprints, each with its plan, its log and its summary.
+sprints, each with its plan and its closing.
 
 ## Feedback, technical critique and correcting course: familiarity is not mastery
 
@@ -337,7 +337,7 @@ context changes.
 Documentation turns an individual experience into reusable memory. A test avoids rediscovering a
 failure. A template preserves a validated structure. A guide organizes the sources. A cycle summary
 lets the next piece of work start from the real state and not from a later reconstruction: every
-sprint of this site closes with a log and a summary that the next one reads before starting.
+sprint of this site closes with an executive closing that the next one reads before starting.
 
 I also keep a clear distinction between different states of knowledge. A hypothesis is not a
 finding. An exploration is not a consolidated capability. A practice recommended by a source is not

@@ -258,7 +258,7 @@ Probeta DS no se concentra únicamente en entrenar un algoritmo y mostrar una m�
 
 La palabra defender es deliberada. Un modelo defendible necesita responder qué fenómeno intenta anticipar, qué datos utilizó, cómo se construyeron las variables, qué línea base debía superar, qué errores produce, en qué segmentos funciona mejor o peor y bajo qué condiciones su resultado puede utilizarse. Está pensada para el profesional que no es científico de datos y tiene que defender un modelo ante su jefe o su comité, no ganar una tabla de clasificación.
 
-La aplicación cuenta con 33 funcionalidades, 267 pruebas unitarias y de integración, 24 pruebas de extremo a extremo y un 90,69 % de cobertura de líneas, de acuerdo con las mediciones publicadas en su ficha técnica de agosto de 2026. Estas cifras describen el estado de la pieza, pero no sustituyen la evaluación de la calidad metodológica de los modelos construidos con ella.
+La aplicación cuenta con 41 funcionalidades, 862 pruebas unitarias y de integración, 72 pruebas de extremo a extremo y un 94,49 % de cobertura de líneas, de acuerdo con las mediciones publicadas en su ficha técnica de octubre de 2026. Estas cifras describen el estado de la pieza, pero no sustituyen la evaluación de la calidad metodológica de los modelos construidos con ella.
 
 ## Qué hace Probeta DS por dentro: baselines, fuga imposible y cifras de prueba
 

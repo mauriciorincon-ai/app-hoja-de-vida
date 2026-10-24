@@ -103,7 +103,7 @@ content, in the structure of the index and in the preservation of its metadata.
 
 The knowledge the chat uses is compiled during the build of the site, not at the moment a person
 asks a question. A build script walks the authorized sources —the résumé data, the pipeline's
-apps, the showcase sheets and the approved documents of this base—, extracts their contents and
+apps, the showcase sheets, the «Methods» publications and the approved documents of this base—, extracts their contents and
 produces an index separated by language, Spanish and English, with chunks, titles, metadata and
 navigable destinations.
 

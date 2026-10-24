@@ -2,7 +2,7 @@
 slug: apps-pipeline
 codigo: AF-12
 titulo: "Las apps que estoy construyendo en público"
-resumen: "El pipeline AI-APPs: diez aplicaciones hermanas más CV Viva, 15 agentes, 7 investigaciones y 6 tableros —38 piezas— construidos con dos casas, un agente de fábrica, cuatro jobs de CI, un contrato de ficha desde Zod, costo real de US$0 al mes y dos reglas: código primero y todo control se demuestra fallando."
+resumen: "El pipeline AI-APPs: diez aplicaciones hermanas, 15 agentes, 7 investigaciones y 6 tableros —38 piezas, sin contar este sitio— construidos con dos casas, un agente de fábrica, cuatro jobs de CI, un contrato de ficha desde Zod, costo real de US$0 al mes y dos reglas: código primero y todo control se demuestra fallando."
 cuando_usar: "Úsalo cuando pregunten qué ha construido por su cuenta fuera del trabajo, cuántas aplicaciones ha publicado, si tiene código público, cómo es su pipeline de construcción con Next.js, pruebas automatizadas y CI, y qué demuestra cada una de las diez apps de la vitrina."
 estado: aprobado
 ancla: "#vitrina"

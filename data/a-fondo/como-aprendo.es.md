@@ -162,7 +162,7 @@ No descarto tutoriales, artículos o comunidades, pero los utilizo como apoyo y 
 
 Desde el primer día registro decisiones, supuestos, pruebas y problemas encontrados. Lo que no se documenta necesita volver a descubrirse. Lo que sí queda estructurado puede convertirse en una guía, un componente, una plantilla, una prueba o una regla reutilizable.
 
-El aprendizaje avanza mediante ciclos cortos. Construyo una capacidad limitada, observo su comportamiento, identifico el siguiente vacío y amplío la solución. Esta secuencia reduce la posibilidad de dedicar semanas a una arquitectura extensa antes de comprobar sus supuestos principales. Este sitio se construyó así: 19 sprints, cada uno con su plan, su bitácora y su resumen.
+El aprendizaje avanza mediante ciclos cortos. Construyo una capacidad limitada, observo su comportamiento, identifico el siguiente vacío y amplío la solución. Esta secuencia reduce la posibilidad de dedicar semanas a una arquitectura extensa antes de comprobar sus supuestos principales. Este sitio se construyó así: 19 sprints, cada uno con su plan y su cierre.
 
 ## Retroalimentación, crítica técnica y corregir el rumbo: familiaridad no es dominio
 
@@ -188,7 +188,7 @@ Documentar no es una actividad posterior al aprendizaje. Es uno de los mecanismo
 
 Una nota que se limita a registrar un comando o una secuencia de pasos tiene utilidad operativa, pero no conserva necesariamente el razonamiento. Procuro documentar también el propósito, los supuestos y las consecuencias, porque esa información permite adaptar el conocimiento cuando cambia el contexto.
 
-La documentación convierte una experiencia individual en memoria reutilizable. Una prueba evita redescubrir una falla. Una plantilla conserva una estructura validada. Una guía organiza las fuentes. Un resumen de ciclo permite que el trabajo siguiente comience desde el estado real y no desde una reconstrucción posterior: cada sprint de este sitio cierra con una bitácora y un resumen que el siguiente lee antes de empezar.
+La documentación convierte una experiencia individual en memoria reutilizable. Una prueba evita redescubrir una falla. Una plantilla conserva una estructura validada. Una guía organiza las fuentes. Un resumen de ciclo permite que el trabajo siguiente comience desde el estado real y no desde una reconstrucción posterior: cada sprint de este sitio cierra con un cierre ejecutivo que el siguiente lee antes de empezar.
 
 También mantengo una distinción clara entre distintos estados del conocimiento. Una hipótesis no es un hallazgo. Una exploración no es una capacidad consolidada. Una práctica recomendada por una fuente no es automáticamente una decisión adecuada para mi arquitectura. Documentar el estado evita que una idea inicial adquiera autoridad únicamente por haber permanecido suficiente tiempo en el repositorio.
 

@@ -2,7 +2,7 @@
 slug: apps-pipeline
 codigo: AF-12
 titulo: "The apps I am building in public"
-resumen: "The AI-APPs pipeline: ten sister applications plus CV Viva, 15 agents, 7 research lines and 6 dashboards —38 pieces— built with two houses, a factory agent, four CI jobs, a sheet contract generated from Zod, a real cost of US$0 a month and two rules: code first, and every control is demonstrated by failing."
+resumen: "The AI-APPs pipeline: ten sister applications, 15 agents, 7 research lines and 6 dashboards —38 pieces, not counting this site— built with two houses, a factory agent, four CI jobs, a sheet contract generated from Zod, a real cost of US$0 a month and two rules: code first, and every control is demonstrated by failing."
 cuando_usar: "Use this when they ask what he has built on his own outside of work, how many applications he has published, whether he has public code, how his build pipeline works with Next.js, automated tests and CI, and what each of the ten showcase apps demonstrates."
 estado: aprobado
 ancla: "#vitrina"
