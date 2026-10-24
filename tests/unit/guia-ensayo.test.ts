@@ -48,9 +48,9 @@ function abrir(almacen?: Record<string, string>) {
   return { dom, doc, filas, calc, filtro, window: dom.window };
 }
 
-const NS = "guia-hoja-de-vida:s20:";
+const NS = "guia-hoja-de-vida:s21:";
 
-describe("la guía v20 · el filtro «Ensayo general H-2»", () => {
+describe("la guía · el filtro «Ensayo general H-2» (desde el S20)", () => {
   it("el filtro existe, cuenta sus flujos y muestra solo esos", () => {
     const { doc, filas, filtro } = abrir();
     const flujos = filas("ul.pasos li[data-ensayo]");
@@ -110,7 +110,7 @@ describe("la guía v20 · el filtro «Ensayo general H-2»", () => {
     );
     const problemas: string[] = [];
     for (const li of filas("ul.pasos li[data-minimo]")) {
-      const id = li.querySelector("input")!.id;
+      const id = li.id;
       const razon = li.getAttribute("data-ensayo-fuera") ?? "";
       if (razon.length < 20) {
         problemas.push(`${id}: una ⭐ sin su razón de salir del ensayo`);
@@ -149,7 +149,7 @@ describe("la guía v20 · el filtro «Ensayo general H-2»", () => {
     const estrellas = filas("ul.pasos li[data-minimo]");
     expect(items).toHaveLength(estrellas.length);
     for (const li of estrellas) {
-      const id = li.querySelector("input")!.id;
+      const id = li.id;
       const razon = li.getAttribute("data-ensayo-fuera")!;
       const item = items.find(
         (i) => i.querySelector("code")?.textContent === id,
@@ -163,7 +163,7 @@ describe("la guía v20 · el filtro «Ensayo general H-2»", () => {
   });
 });
 
-describe("la guía v20 · las sumas las hace la página", () => {
+describe("la guía · las sumas del ensayo las hace la página", () => {
   it("cada flujo declara minutos y sentada, y ninguna sentada pasa de 45 min", () => {
     const { filas, calc } = abrir();
     const flujos = filas("ul.pasos li[data-ensayo]");
@@ -230,7 +230,7 @@ describe("la guía v20 · las sumas las hace la página", () => {
   });
 });
 
-describe("la guía v20 · el sí/no", () => {
+describe("la guía · el sí/no", () => {
   it("cada flujo tiene su sí y su no, y marcar uno lo guarda y cuenta", () => {
     const { doc, window, calc } = abrir();
     const flujos = [...doc.querySelectorAll("li[data-ensayo]")];
@@ -258,11 +258,12 @@ describe("la guía v20 · el sí/no", () => {
     expect(calc("ensayo-no")).toBe("1");
   });
 
-  it("al recargar, el sí/no y las casillas vuelven como se dejaron", () => {
+  it("al recargar, el sí/no y las notas vuelven como se dejaron", () => {
     const { doc, calc } = abrir({
       [`${NS}r2`]: "no",
       [`${NS}r3`]: "si",
-      [`${NS}a4`]: "1",
+      [`${NS}a4`]: "no",
+      [`${NS}a4:nota`]: "el logo se ve borroso",
     });
     expect((doc.getElementById("r2-no") as HTMLInputElement).checked).toBe(
       true,
@@ -270,12 +271,15 @@ describe("la guía v20 · el sí/no", () => {
     expect((doc.getElementById("r3-si") as HTMLInputElement).checked).toBe(
       true,
     );
-    expect((doc.getElementById("a4") as HTMLInputElement).checked).toBe(true);
+    expect((doc.getElementById("a4-no") as HTMLInputElement).checked).toBe(true);
+    expect(
+      (doc.querySelector('[data-nota-de="a4"]') as HTMLInputElement).value,
+    ).toBe("el logo se ve borroso");
     expect(calc("ensayo-si")).toBe("1");
     expect(calc("ensayo-no")).toBe("1");
   });
 
-  it("el avance cuenta un flujo respondido igual que una casilla marcada", () => {
+  it("el avance cuenta un flujo respondido igual que una prueba respondida", () => {
     const { doc, filtro } = abrir();
     filtro("ensayo").click();
     const antes = doc.getElementById("contador")!.textContent!;
@@ -284,12 +288,14 @@ describe("la guía v20 · el sí/no", () => {
     expect(doc.getElementById("contador")!.textContent).toMatch(/^1\/\d+$/);
   });
 
-  it("el prefijo de las casillas es el del sprint (s20): una marca vieja no cuenta", () => {
+  it("el prefijo de las respuestas es el del sprint (s21): una marca vieja no cuenta", () => {
     const { doc } = abrir({
-      "guia-hoja-de-vida:s19:a4": "1",
-      "guia-hoja-de-vida:s19:r1": "si",
+      "guia-hoja-de-vida:s20:a4": "si",
+      "guia-hoja-de-vida:s20:r1": "si",
     });
-    expect((doc.getElementById("a4") as HTMLInputElement).checked).toBe(false);
+    expect((doc.getElementById("a4-si") as HTMLInputElement).checked).toBe(
+      false,
+    );
     expect((doc.getElementById("r1-si") as HTMLInputElement).checked).toBe(
       false,
     );
@@ -297,7 +303,7 @@ describe("la guía v20 · el sí/no", () => {
 });
 
 describe("la guía · todo control dibujado tiene su script (regla 22)", () => {
-  it("cada botón de filtro, casilla y radio reacciona", () => {
+  it("cada botón de filtro, nota y radio reacciona", () => {
     const { doc, window } = abrir();
     for (const b of doc.querySelectorAll<HTMLButtonElement>(
       ".filtros button",
@@ -305,17 +311,24 @@ describe("la guía · todo control dibujado tiene su script (regla 22)", () => {
       b.click();
       expect(b.classList.contains("activo"), b.textContent!).toBe(true);
     }
-    const cajas = [
-      ...doc.querySelectorAll<HTMLInputElement>('input[type="checkbox"]'),
-    ];
-    expect(cajas.length).toBeGreaterThan(100);
-    for (const c of cajas.slice(0, 5)) {
-      c.click();
-      expect(window.localStorage.getItem(`${NS}${c.id}`), c.id).toBe("1");
+    const notas = [...doc.querySelectorAll<HTMLInputElement>("input.p-nota")];
+    expect(notas.length).toBeGreaterThan(100);
+    for (const n of notas.slice(0, 5)) {
+      n.value = "una nota";
+      n.dispatchEvent(new window.Event("input", { bubbles: true }));
+      expect(
+        window.localStorage.getItem(`${NS}${n.dataset.notaDe}:nota`),
+        n.dataset.notaDe,
+      ).toBe("una nota");
     }
-    for (const r of doc.querySelectorAll<HTMLInputElement>(
-      'input[type="radio"]',
-    )) {
+    // Todos los flujos del ensayo y una de cada cinco respuestas de las pruebas: cada
+    // radio recibe su manejador en el mismo ciclo, así que la muestra es representativa
+    // (y en jsdom, con 300 clics, la prueba pasaba del tope).
+    const radios = [
+      ...doc.querySelectorAll<HTMLInputElement>('input[type="radio"]'),
+    ].filter((r, i) => /^r\d+$/.test(r.name) || i % 5 === 0);
+    expect(radios.length).toBeGreaterThan(50);
+    for (const r of radios) {
       r.click();
       expect(window.localStorage.getItem(`${NS}${r.name}`), r.id).toBe(r.value);
     }
