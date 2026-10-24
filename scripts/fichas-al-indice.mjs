@@ -1,8 +1,8 @@
 /**
  * LAS FICHAS DE LA VITRINA, AL ÍNDICE DEL CHAT (a fondo v2, D3).
  *
- * La vitrina publica 32 piezas —6 apps, 13 agentes, 7 investigaciones, 6
- * tableros— y cada una trae, en su ficha, lo que un visitante pregunta: qué
+ * La vitrina publica sus piezas —apps, agentes, investigaciones y tableros;
+ * cuántas sale del disco, no de este comentario— y cada una trae, en su ficha, lo que un visitante pregunta: qué
  * promete, sus cifras con procedencia, sus límites y lo que nunca hace. Hasta
  * hoy el chat no las veía: bebía de `cv.*.yaml`, `apps.yaml` y el corpus a
  * fondo. Es la recomendación de mayor rendimiento de la auditoría: ~160 cifras
