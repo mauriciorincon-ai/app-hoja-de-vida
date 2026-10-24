@@ -2,7 +2,7 @@
 slug: como-aprendo
 codigo: AF-19
 titulo: "Cómo aprendo"
-resumen: "El argumento con medida: el DP-600 en cinco meses sobre un Fabric con menos de un año en el mercado, Codex, Antigravity y Claude Code en un mes desde su salida, este sitio en diecinueve sprints desde julio de 2026, y 37 piezas públicas con sus pruebas y coberturas."
+resumen: "El argumento con medida: el DP-600 en cinco meses sobre un Fabric con menos de un año en el mercado, Codex, Antigravity y Claude Code en un mes desde su salida, este sitio en veintiún sprints desde julio de 2026, y 37 piezas públicas con sus pruebas y coberturas."
 cuando_usar: "Úsalo cuando pregunten cómo aprende una tecnología nueva, qué hace cuando el puesto pide algo que nunca ha usado, cuánto tardó en certificarse, qué está estudiando ahora, o cómo documenta y demuestra lo que aprendió."
 estado: aprobado
 ancla: "#certificaciones"
@@ -109,7 +109,7 @@ Las últimas veces que aprendí algo desde cero, y cuánto tardé:
 | Qué                                   | Desde          | Plazo                             | Resultado                                                   |
 | ------------------------------------- | -------------- | --------------------------------- | ----------------------------------------------------------- |
 | Microsoft Fabric                      | agosto de 2023 | 5 meses de estudio (jul–nov 2024) | DP-600 en diciembre de 2024, plataforma de Vesting operando |
-| Next.js y el pipeline de aplicaciones | julio de 2026  | 20 sprints                        | este sitio, CV Viva, con su CI, sus pruebas y sus ADR       |
+| Next.js y el pipeline de aplicaciones | julio de 2026  | 21 sprints                        | este sitio, CV Viva, con su CI, sus pruebas y sus ADR       |
 | AI-103 y AI-300                       | julio de 2026  | curso completo y 10 módulos       | dos rutas en curso                                          |
 | Codex, Antigravity y Claude Code      | su salida      | cerca de un mes cada uno          | el pipeline con el que se construyen las 37 piezas          |
 
