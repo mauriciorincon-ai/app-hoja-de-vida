@@ -52,7 +52,7 @@ included). -->
 
 <!-- seccion: por-que-en-publico -->
 
-A résumé asserts; a published piece demonstrates. That is the main reason I build in public: ten sister applications, plus this site, and 38 pieces in total, all outside my job and all with their repository.
+A résumé asserts; a published piece demonstrates. That is the main reason I build in public: 38 pieces in total, not counting this site —ten of them sister applications—, all outside my job and all with their repository.
 
 My own generative AI projects did not come out of nowhere. Since April 2024, in parallel to my jobs, I have planned and designed these applications and these agents —their conception and their architecture—, and for years I tried them out on different platforms before building them, from 2026, with the pipeline that produces them today. It is a declared fact, with no 2024 artifact to prove it: what can be examined are the pieces, and each one keeps its own date —Dash Agent, for example, was conceived and designed in 2026—.
 

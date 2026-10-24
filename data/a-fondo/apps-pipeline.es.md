@@ -52,7 +52,7 @@ CV Viva incluida). -->
 
 <!-- seccion: por-que-en-publico -->
 
-Un currículum afirma; una pieza publicada demuestra. Esa es la razón principal por la que construyo en público: diez aplicaciones hermanas, más este sitio, y 38 piezas en total, todas fuera de mi trabajo y todas con su repositorio.
+Un currículum afirma; una pieza publicada demuestra. Esa es la razón principal por la que construyo en público: 38 piezas en total, sin contar este sitio —diez de ellas aplicaciones hermanas—, todas fuera de mi trabajo y todas con su repositorio.
 
 Mis proyectos propios de IA generativa no salieron de la nada. Desde abril de 2024, en paralelo a mis empleos, planeo y diseño estas aplicaciones y estos agentes —su concepción y su arquitectura—, y durante años los intenté en distintas plataformas antes de construirlos, desde 2026, con el pipeline que hoy los produce. Es un hecho declarado, sin un artefacto de 2024 que lo pruebe: lo que sí puede examinarse son las piezas, y cada una conserva su propia fecha —Dash Agent, por ejemplo, se concibió y diseñó en 2026—.
 
