@@ -14,8 +14,12 @@
  * la petición: el navegador la conserva al seguir la redirección.
  */
 
-/** `/metodo` o `/metodo/…`, con idioma (`/es`, `/en`) o sin él. */
-const RUTA_VIEJA = /^\/(?:(es|en)(?=\/))?\/?metodo(\/.*)?$/;
+/**
+ * `/metodo` o `/metodo/…`, con idioma (`/es`, `/en`) o sin él. Exacta: ni `//metodo` ni
+ * `/es//metodo` (barras de más) ni `/Metodo` (mayúscula) son la ruta vieja; el sitio no
+ * normaliza mayúsculas ni barras en ninguna otra ruta y estas dan 404 como cualquier otra.
+ */
+const RUTA_VIEJA = /^(?:\/(es|en))?\/metodo(\/.*)?$/;
 
 /**
  * La ruta nueva de una ruta vieja de la sección, o `null` si no lo es.

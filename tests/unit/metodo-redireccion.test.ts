@@ -52,6 +52,11 @@ describe("la ruta nueva de una ruta vieja, como función", () => {
     "/es/metodo-x",
     "/es/metodologia",
     "/esmetodo",
+    // Barras de más y mayúsculas no son la ruta vieja (S14-B3, S14-B9).
+    "//metodo",
+    "/es//metodo",
+    "/Metodo",
+    "/es/Metodo",
     "/es/vitrina/metodo",
     "/es/cv",
     "/",

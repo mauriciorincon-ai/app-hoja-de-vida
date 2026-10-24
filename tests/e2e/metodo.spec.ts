@@ -385,6 +385,17 @@ test.describe("Métodos — la ruta vieja redirige", () => {
     });
   }
 
+  // S14-B9: lo que solo se parece a la ruta vieja no redirige; el sitio no normaliza
+  // mayúsculas en ninguna ruta y `/Metodo` termina en el 404 de siempre.
+  test("`/Metodo` (mayúscula) no es la ruta vieja: no da 301 a /metodos", async ({
+    request,
+  }) => {
+    const res = await request.get("/Metodo", { maxRedirects: 0 });
+    expect(res.status()).not.toBe(301);
+    const final = await request.get("/Metodo");
+    expect(final.status()).toBe(404);
+  });
+
   test("sin idioma, /metodo da 301 a la lista en español", async ({
     request,
   }) => {

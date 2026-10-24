@@ -64,8 +64,14 @@ const ENTREVISTA = solo(
   "entrevistas?|entrevistad[oa]s?|entrevistador(?:a|es|as)?|entrevistar|interviews?|interviewers?|interviewing|interviewed",
 );
 
-/** Lo citado entre comillas («…», “…”) se borra antes de juzgar: es la voz de otro. */
-const sinCitas = (texto: string) => texto.replace(/«[^»]*»|“[^”]*”/g, (c) => " ".repeat(c.length));
+/**
+ * Lo citado entre comillas («…», “…”) se borra antes de juzgar: es la voz de otro. Solo si es
+ * una cita CORTA (≤ 120 caracteres: un título, una frase de la fuente); un párrafo entero entre
+ * comillas ya no se vuelve invisible al gate (S14-B4).
+ */
+const TOPE_DE_CITA = 120;
+const sinCitas = (texto: string) =>
+  texto.replace(new RegExp(`«[^»]{0,${TOPE_DE_CITA}}»|“[^”]{0,${TOPE_DE_CITA}}”`, "g"), (c) => " ".repeat(c.length));
 
 const recoger = (re: RegExp, texto: string, clase: ClaseDeHallazgo): Hallazgo[] =>
   [...texto.matchAll(re)].map((m) => ({ termino: m[0], clase }));
