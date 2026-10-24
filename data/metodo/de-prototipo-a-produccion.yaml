@@ -456,8 +456,8 @@ bloques:
             en: "It is a lever when the instructions are long and repeat identically; before relying on it, it is worth measuring how much of the request is truly stable."
       - titulo: { es: "El consumo sin límite, tratado como riesgo de seguridad", en: "Unbounded consumption, treated as a security risk" }
         queCambia:
-          es: "El Top 10 de OWASP para aplicaciones con LLM de 2025 trata el consumo sin control como riesgo —denegación de servicio, pérdidas económicas— y pide validar el tamaño de las entradas, limitar la frecuencia por origen, poner tiempos máximos y vigilar el uso de recursos."
-          en: "OWASP’s 2025 Top 10 for LLM applications treats uncontrolled consumption as a risk —denial of service, economic losses— and asks for input size validation, rate limits per source, timeouts and monitoring of resource usage."
+          es: "El Top 10 de OWASP para aplicaciones con LLM de 2025 trata el consumo sin control como riesgo —denegación de servicio, pérdidas económicas— y pide validar el tamaño de las entradas, limitar la frecuencia por usuario o entidad, poner tiempos máximos y vigilar el uso de recursos."
+          en: "OWASP’s 2025 Top 10 for LLM applications treats uncontrolled consumption as a risk —denial of service, economic losses— and asks for input size validation, rate limits per user or entity, timeouts and monitoring of resource usage."
         fuentes: [10]
         nota:
           voz: hice
