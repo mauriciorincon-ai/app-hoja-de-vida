@@ -1,0 +1,187 @@
+---
+sprint: 020
+app: hoja-de-vida
+hito: H-2
+---
+
+# Sprint 020 — El lote de medios y bajos de los cierres S9–S19
+
+Cada hallazgo medio o bajo de los cierres del S9 al S19 tiene aquí **un estado final y su prueba**. Se conciliaron contra `main` (40b226a) **antes de pagar**: cada fila se leyó en el código de hoy, no de memoria. Los críticos y altos se pagaron en su propio sprint y no figuran.
+
+- **Estados (los únicos tres):** `pagado` (commit y sitio) · `ya no aplica` (razón que se puede comprobar hoy) · `imposible` (razón y sitio). «No reproducible» no cierra una fila y nada queda abierto sin nombre.
+- **ID:** sprint + número del informe del auditor (o `D` para lo que solo está en la deuda del cierre). Los repetidos entre cierres se fundieron en una fila con todos sus orígenes.
+- **Hashes:** los de ramas ya mergeadas (squash) llevan el commit de la rama y el squash que los contiene; los de este sprint, `(PR #98)`.
+- **Las cuentas no se escriben:** las imprime el gate (`pnpm exec vitest run tests/unit/lote-h2.test.ts`).
+- Los S10 sin texto son filas `imposible` con su sitio: el informe de aquel auditor no se conservó (solo `archivo:línea` en el cierre).
+
+## Filas
+
+| ID | Origen | Hallazgo | Estado | Prueba |
+|---|---|---|---|---|
+| S09-M1 | S9 informe | Galería: el botón del extremo se deshabilita y el foco cae al `<body>` (`galeria-carrusel.tsx:159,176`). | pagado | 81661de (PR #78, `aria-disabled` en vez de `disabled`; e2e `@webkit`); hoy `galeria-carrusel.tsx` marca los extremos con `aria-disabled`. |
+| S09-M2 | S9 informe | Carga diferida: Chrome pide 3 de 6 capturas a 1280 y las 6 a 390, no «solo la primera» (e2e relajado a `< N`). | ya no aplica | Desviación declarada en `SPRINT_009-cierre.md:14`; el comportamiento es el de `loading="lazy"` del navegador (`galeria-carrusel.tsx`, `<Image loading="lazy">`), sin CLS (0,0000) ni efecto en el LCP. |
+| S09-M3 | S9 informe | Ningún e2e comprueba que el indicador siga el deslizado manual (`IntersectionObserver` solo probado con mocks). | pagado | 538b56c (PR #98): e2e «deslizar la pista a mano mueve el indicador (sin tocar un botón)» en `tests/e2e/vitrina.spec.ts`; demo en rojo con `if (false && e.isIntersecting)` en `galeria-carrusel.tsx`. |
+| S09-M4 | S9 informe | Nombres viejos donde se muestra el alias (aria-labels de las maquetas, `h3 sr-only` del roadmap, carril de `nutri-kids.yaml`). | pagado | PR #67 (f994807): «M4 se pagó con el nombre único»; `git grep -n -e "Hablemos San" -e "Nutri-Kids" -e "Esquema de Velo" -- src/components/vitrina/maquetas` vacío. |
+| S09-M5 | S9 informe | Rojos solo en commits y conflicto cierre/summary frente al gate «ocho sprints». | ya no aplica | El gate cuenta ambos archivos (`scripts/a-fondo-coherencia.mjs:95`, etiqueta de `sprints-cerrados` en `tests/fixtures/cifras-a-fondo.yaml`, afinada en e65a63f); desde el S10 el cierre trae la tabla de demos «archivo · mutación · a quién nombró». |
+| S09-B1 | S9 informe | Guía: k1 conserva `data-origen="heredada"` con el sello «Mejorado · S9»; m5/m12/m14 sin sello. | ya no aplica | Barrido de las 144 filas de `docs/GUIA-DE-PRUEBA.html` (S20): ninguna lleva sello «Mejorado» con `data-origen="heredada"`; la k15f se corrigió en 943c20e. |
+| S09-B2 | S9 informe | Galería: el `role="group"` de la pista repite el `aria-label` de la región. | ya no aplica | Decisión vigente con su gate: la pista recibe foco (tabindex 0, `scrollable-region-focusable`) y un elemento enfocable lleva nombre propio; `tests/unit/galeria-carrusel.test.tsx:190-195` («la pista con scroll se alcanza con el teclado y tiene nombre»); axe en `/vitrina/apps` y tableros: 0 violaciones. |
+| S09-B3 | S9 informe | Con JS apagado los botones de la galería se pintan pero no hacen nada. | pagado | 389538b (PR #98): `<noscript>` que oculta el bloque `[data-controles]` (`galeria-carrusel.tsx`) y gate unitario con su demo en rojo. |
+| S09-B4 | S9 informe | Vocabulario: «categoría» ya significaba «frente» y ahora también categoría de app. | pagado | 389538b (PR #98): encabezado de `src/lib/vitrina/categorias-apps.ts` fija el único sentido de «categoría» y nombra dónde viven los frentes. |
+| S09-B5 | S9 informe | `CLAUDE.md` (Estructura) no listaba `categorias-apps.yaml`, `categorias-apps.ts` ni el carrusel. | ya no aplica | `CLAUDE.md` (regenerado el 2026-10-17) lista `data/categorias-apps.yaml` y `lib/vitrina/categorias-apps.ts`; los datos de la estructura se corrigen en F2. |
+| S09-B6 | S9 informe | `prettier --check` falla en `scripts/horas-sprint.mjs` y `tests/unit/horas-sprint.test.ts` (copias del kit). | ya no aplica | Ningún job de CI corre prettier (`.github/workflows/`), y las dos son copias idénticas del kit: reformatearlas rompe la identidad con su origen (el cambio va en la planeadora). |
+| S09-B7 | S9 informe | `horas-sprint.mjs` da un piso de horas: aclararlo al pegarlo en el cierre. | ya no aplica | Todos los cierres desde el S10 lo rotulan («piso del script»); `SPRINT_019-cierre.md:15` y la cabecera del propio script. |
+| S09-B8 | S9 informe | `data-total` sin lector; la prop `sizes` solo recibe el valor por defecto. | pagado | 389538b (PR #98): `data-total` quitado de `galeria-carrusel.tsx` y de `carrusel-de-muestras.tsx` (`git grep data-total` vacío); `sizes` queda como API del componente con su valor por defecto (único llamador `ficha-tecnica.tsx:387`). |
+| S09-B9 | S9 informe | Los exports de otras apps citan «Dash Agent AI» en su prosa mientras la tarjeta dice «Dash Agent». | imposible | `content/vitrina/**` es de otra casa (regla dura 2: se reporta, no se edita); el ADR-028 §3 lo permite. Sitio: reporte a la planeadora (exports con nombre viejo). |
+| S09-D1 | S9 cierre | Aplazado: los exports conservan el nombre viejo (lo de fondo es que la planeadora los renombre) y `referencia.html/.png` del contrato. | imposible | `content/vitrina/**` y `docs/contrato-ficha-tecnica/` son de la planeadora; el alias los cubre al leer (ADR-028). Sitio: reporte en «Reportes a otras casas». |
+| S09-D2 | S9 cierre | El gesto real del trackpad (rueda lateral del pad) no tiene e2e: solo emulado. | imposible | Playwright no emula el gesto físico de un trackpad; se prueba a mano en la ⭐ k15e de la guía, que viaja al ensayo (ver «Decisiones del dueño…»). Sitio: `docs/GUIA-DE-PRUEBA.html`, prueba k15e. |
+| S09-D3 | S9 cierre | Las capturas del S9 se tomaron con un script efímero y no se regeneran desde el repo. | ya no aplica | Declarado como desviación en `SPRINT_009-cierre.md:14`: son evidencia de un sprint cerrado; desde el S10 las capturas salen de `scripts/capturas-metodo.mjs` y `scripts/capturas-vitrina.mjs`. |
+| S09-D4 | S9 cierre | Límite conocido: con `max = 0` (caben todas las tarjetas) los botones del carrusel de apps no mueven nada. | ya no aplica | Documentado en `carrusel-de-muestras.tsx:61` y sin efecto hoy: con 6 apps y a lo más 2 por vista `max` vale 4; el recorrido sale cuando `max === 0` (`:141`). |
+| S10-M1 | S10 cierre | `schema.ts:90,296`: el href de una evidencia no se valida contra el catálogo de destinos. | ya no aplica | El índice valida cada href contra el catálogo y el build falla si no existe: `tests/unit/metodo-al-indice.test.ts:174-186`. |
+| S10-M2 | S10 cierre | `ctic-aproximadas.test.ts:30` no barre `data/metodo`. | ya no aplica | `tests/unit/ctic-aproximadas.test.ts:42` barre las piezas de `data/metodo` (desde el S11). |
+| S10-M3 | S10 cierre | `mapa-svg.tsx:36`: la segunda línea de la etiqueta de un nodo no tiene tope. | pagado | 98b4bfb (PR #98): gate «MapaSvg · ninguna etiqueta de nodo desborda su caja» (≤ 2 líneas de ≤ 22 caracteres) en `tests/unit/metodo-infografia.test.tsx`; demo en rojo con una etiqueta alargada de `decidir-con-modelos.yaml`. |
+| S10-M4 | S10 cierre | `.claude/commands/deploy-check.md:99,131` es el flujo v1 (bitácora y summary). | pagado | 37d88bb (PR #98): el punto 10 pasa al cierre ejecutivo del flujo v2. |
+| S10-M5 | S10 cierre | `rag-y-el-chat.{es,en}.md` dice 1.467 → 1.633 fragmentos; `a-fondo-coherencia.test.ts:57` no incluye `metodo`; `MANUAL-DE-USO.md:1053,1059`. | ya no aplica | Las cifras de fragmentos y piezas ya las miden los gates de cifras gemelas (`tests/fixtures/cifras-a-fondo.yaml`, `tests/unit/a-fondo-cifras-gemelas.test.ts`) y `tests/unit/documentos-cuentas.test.ts` desde el disco. |
+| S10-M6 | S10 cierre | `cifras-a-fondo.yaml:~145` + `a-fondo-coherencia.mjs:~203`: el gate de sprints cerrados. | pagado | e65a63f (PR #98): la etiqueta de `sprints-cerrados.fuente` nombra el resumen y el cierre ejecutivo. |
+| S10-M7 | S10 cierre | `metodo-al-indice.mjs:103,175,266`: el índice se arma antes que Zod (TypeError opaco o «undefined»). | ya no aplica | `scripts/metodo-al-indice.mjs:58-79` valida cada documento con su esquema antes de armar nada y nombra archivo y campo. |
+| S10-M8 | S10 cierre | `loader.ts:27`: las cifras y el «aprobado» de lo que cita del corpus no tienen gate. | ya no aplica | `src/lib/metodo/corpus.ts:53` (estado `aprobado`) y `scripts/metodo-cifras.mjs` con `tests/unit/metodo-cifras.test.ts` (desde el S11). |
+| S10-M9 | S10 cierre | `MANUAL-DE-USO.md:592,618` y `GUIA-DE-PRUEBA.html:2220`: totales escritos a mano. | ya no aplica | `tests/unit/documentos-cuentas.test.ts` ancla cada cuenta del manual y de la guía contra el disco. |
+| S10-B1 | S10 cierre | `riel-de-fases.tsx:83`. | imposible | El informe del auditor del S10 no se conservó y el cierre solo da archivo:línea; la línea de hoy se leyó en S20 y no muestra un defecto que se pueda nombrar. Sitio: `src/components/metodo/riel-de-fases.tsx:83`. |
+| S10-B2 | S10 cierre | `metodo-al-indice.mjs:147`. | imposible | El informe del auditor del S10 no se conservó y el cierre solo da archivo:línea; la línea de hoy se leyó en S20 y no muestra un defecto que se pueda nombrar. Sitio: `scripts/metodo-al-indice.mjs:147`. |
+| S10-B3 | S10 cierre | `messages/es.json:453,477`. | imposible | El informe del auditor del S10 no se conservó y el cierre solo da archivo:línea; la línea de hoy se leyó en S20 y no muestra un defecto que se pueda nombrar. Sitio: `messages/es.json:453,477`. |
+| S10-B4 | S10 cierre | `destinos.mjs:21`. | imposible | El informe del auditor del S10 no se conservó y el cierre solo da archivo:línea; la línea de hoy se leyó en S20 y no muestra un defecto que se pueda nombrar. Sitio: `scripts/destinos.mjs:21`. |
+| S10-B5 | S10 cierre | `mapa-svg.tsx:169,182`. | imposible | El informe del auditor del S10 no se conservó y el cierre solo da archivo:línea; la línea de hoy se leyó en S20 y no muestra un defecto que se pueda nombrar. Sitio: `src/components/metodo/mapa-svg.tsx:169,182`. |
+| S10-B6 | S10 cierre | `metodo/page.tsx:89`: las tarjetas de la lista no llenan su celda. | pagado | df9b43b (rama del S11, squash 1b3afc8) con su guarda e2e; hoy `src/app/[locale]/metodos/page.tsx:91` lleva `className="h-full"`. |
+| S10-B7 | S10 cierre | `[slug]/page.tsx:85`. | imposible | El informe del auditor del S10 no se conservó y el cierre solo da archivo:línea; la línea de hoy se leyó en S20 y no muestra un defecto que se pueda nombrar. Sitio: `src/app/[locale]/metodos/[slug]/page.tsx:85`. |
+| S10-B8 | S10 cierre | `metodo-infografia.test.tsx:137`. | imposible | El informe del auditor del S10 no se conservó y el cierre solo da archivo:línea; la línea de hoy se leyó en S20 y no muestra un defecto que se pueda nombrar. Sitio: `tests/unit/metodo-infografia.test.tsx:137`. |
+| S10-B9 | S10 cierre | `design-system.md:332` + `menu-desplegable.html:176`: el primer nivel del menú «queda en tres». | pagado | 943c20e (PR #98): `design-system.md` dice cuatro destinos y `design-sync/components/componentes/menu-desplegable.html` suma Métodos. |
+| S10-B10 | S10 cierre | `BLUEPRINT.html:107,139`. | pagado | 943c20e (PR #98) (`un-pr-vivo` entre los checks) y el BLUEPRINT as-built completo de la F2 de este sprint. |
+| S10-B11 | S10 cierre | `GUIA:1260`. | imposible | El informe del auditor del S10 no se conservó y el cierre solo da archivo:línea; la línea de hoy se leyó en S20 y no muestra un defecto que se pueda nombrar. Sitio: `docs/GUIA-DE-PRUEBA.html:1260`. |
+| S10-B12 | S10 cierre | `MANUAL:39,808`: el bullet «aún sin sección… Sprint 2». | pagado | 943c20e (PR #98): la línea 39 reemplazada por lo que el manual hace hoy; la sección de «Métodos» se releyó entera y no queda una promesa aplazada (`git grep -n -e "aún sin sección" -- docs/MANUAL-DE-USO.md` vacío). |
+| S10-B13 | S10 cierre | `retrieval.ts:185`: el peso de las piezas. | pagado | 943c20e (PR #98): el comentario nombra `PESO_METODO` (0,5) de `scripts/metodo-al-indice.mjs`. |
+| S10-B14 | S10 cierre | `a-fondo/README.md:81`: «131 preguntas» (son más). | pagado | 1ca6108 (PR #98): la línea ya no escribe el total (lo da `pnpm corpus:informe`). |
+| S10-B15 | S10 cierre | `README.md:52`: la fila de `data/` no nombra `metodo/`. | pagado | 943c20e (PR #98): `README.md` nombra `data/metodo/`. |
+| S10-B16 | S10 cierre | `.claude/skills/*`. | ya no aplica | `git grep -n -e "Mi método" -e "infograf" -e "vitest.config.ts" -- .claude/skills` vacío en S20 (el único resto, `testing-patterns.md:203`, se pagó en el S19). |
+| S10-B17 | S10 cierre | `infografia.tsx:75,395`: título huérfano al imprimir y ancho del `[n]` de las fuentes. | pagado | e65a63f (PR #98): `print:break-after-avoid` en el encabezado; el ancho del `[n]` se pagó en el S16 (7ba2e74). |
+| S10-B18 | S10 cierre | `sitemap.ts:63`: `lastmod` de cada pieza era la fecha del build. | pagado | 0af3c92 (PR #98): `lastModified` = `revisado` del bloque 10 y e2e «el sitemap fecha cada pieza con su fecha de revisión». |
+| S10-B19 | S10 cierre | `como-aprendo.{es:165,191;en:283,340}`: prosa que dice «bitácora y resumen». | pagado | 1ca6108 (PR #98): «plan y cierre» / «un cierre ejecutivo» en `data/a-fondo/como-aprendo.{es,en}.md`. |
+| S10-B20 | S10 cierre | `guardrails.ts:115`: atribución de voz del chat (contrato aditivo, plan mode). | imposible | Contrato del chat, fuera del alcance del S20 (excluido por el archivo del sprint); pide plan mode propio. Sitio: `src/lib/ia/guardrails.ts:115`, H-3. |
+| S10-B21 | S10 cierre | `cero-enlaces.mjs:58` (un homepage vacío pasa y el mensaje manda vaciarlo) y `:26`. | imposible | El archivo es copia idéntica del kit (`kit-app/scripts/cero-enlaces.mjs`): se reporta a la planeadora. Sitio: reporte 3 de «Reportes a otras casas»; `:26` (`-I` salta los PDF) quedó cubierto aquí quitando los 4 PDF versionados y el gate «ningún PDF versionado» (37d88bb (PR #98)). |
+| S10-B22 | S10 cierre | `cero-enlaces.mjs:26`: `git grep -I` ignora los PDF versionados. | pagado | 37d88bb (PR #98): los 4 PDF de `sprints/SPRINT_010..013-capturas/` salen del árbol y `tests/unit/cero-enlaces.test.ts` falla si vuelve uno (demo en rojo con un PDF preparado). |
+| S11-M1 | S11 informe | El texto fijo `metodo.metricas.nota` («umbrales de ejemplo, no de un proyecto mío») contradice el 60 % real de T3. | pagado | 8e6da58 (rama del S11, squash 1b3afc8): `messages/{es,en}.json` y la nota de T3. |
+| S11-M2 | S11 informe | `rag-y-el-chat.{es:67,en:102}` no lista las publicaciones entre lo que arma el índice (prosa del dueño). | pagado | 1ca6108 (PR #98): ambos idiomas listan las publicaciones de «Métodos» (señalado por el lote; no se tocó más prosa). |
+| S11-M3 | S11 informe | `metodo-al-indice.mjs:31`: Node ≥ 22.18 sin `engines` ni `.nvmrc`. | pagado | PR #87 (8cd8390): `engines` y `.nvmrc`, y `tests/unit/node-declarado.test.ts`; fijado en `22.x` en el PR #88 (3a6dc63). |
+| S11-M4 | S11 informe | `rag-sin-inventar.yaml:602`: los cinco proveedores con `nivel: uso-real` (solo Groq está en producción). | pagado | 8e6da58 (rama del S11, squash 1b3afc8): nivel corregido. |
+| S11-B1 | S11 informe | `rag-sin-inventar.yaml:486`: «etiquetas humanas» es solo del evaluador Document Retrieval. | pagado | 98b4bfb (PR #98): «etiquetas humanas en el evaluador de recuperación de documentos o por un juez de modelo en el de recuperación» (ES y EN). |
+| S11-B2 | S11 informe | `:630`: «no tengo un juez automático» parafrasea. | pagado | 98b4bfb (PR #98): «validador automático», en tercera persona y con el alcance del corpus. |
+| S11-B3 | S11 cierre | `:589`: el enlace de la evidencia «El índice como puerta de calidad» va a la página de la app, no al índice. | ya no aplica | No existe una página pública del índice: el a-fondo es combustible y no se publica (regla dura 4); `/apps/hoja-de-vida` (`data/apps.yaml:13`) es el destino más cercano que el catálogo reconoce y `metodo-al-indice.test.ts:174-186` valida cada href. |
+| S11-B4 | S11 cierre | `metodo-cifras.mjs` ve la cifra en cualquier parte del documento, no números en letras, y solo corre en tests. | imposible | Es el diseño del gate (cifra atada al documento citado, no a la frase); lo compensa la relectura de cada frase `hice` contra el corpus en cada auditoría. Sitio: `scripts/metodo-cifras.mjs`, H-3. |
+| S11-B5 | S11 cierre | La fila de embeddings del banco cae 4.ª: frágil cuando entren T4 y siguientes. | pagado | 55612a0 (PR #98): medido el margen real (mejor esperado − 4.º ajeno) de las 175 filas por idioma; las nueve más frágiles se ampliaron a las casas que de verdad contestan. |
+| S11-B6 | S11 cierre | «No existe todavía un validador» (`yaml:388,625`) envejece sin gate. | pagado | 98b4bfb (PR #98): «A la fecha de revisión de esta publicación no existe un validador…» (ES y EN), anclada a la fecha del bloque 10. |
+| S11-B7 | S11 cierre | `rag-y-el-chat`: «32 fichas» frente a «38 piezas». | ya no aplica | Cuenta histórica del ADR-023 que el gate fija (`tests/fixtures/cifras-a-fondo.yaml:199`, `tests/unit/a-fondo-golden.test.ts:50`); la cuenta de hoy (38 = 10 + 15 + 7 + 6) la mide `scripts/a-fondo-coherencia.mjs`. |
+| S12-M1 | S12 informe | `engines` y el Node de producción: con `>=22.18.0` Vercel compila en 24.x mientras la CI prueba 22.18. | pagado | PR #88 (3a6dc63): `engines.node` = `22.x`; Vercel («Supported Node.js versions», Vercel, actualizada el 2026-02-27) despliega la última 22.x con ese rango; el registro del build se confirma en «Decisiones del dueño…». |
+| S12-M2 | S12 informe | T4 bloque 8: «comparten la misma cadena» sobregeneraliza el corpus. | pagado | 91f18f2 (rama del S12, squash 8cd8390). |
+| S12-M3 | S12 informe | T4 bloque 4, cuarta decisión: voz «campo» estirada (fuente 8). | pagado | 91f18f2 (rama del S12, squash 8cd8390). |
+| S12-M4 | S12 informe | La fila de embeddings del banco no consta remedida con T4. | pagado | Remedida en el S12 (4.ª en ES, 2.ª en EN) y de nuevo en 55612a0 (PR #98) con el margen real. |
+| S12-B1 | S12 informe | La acción de GitHub de evaluación está en vista previa y la pieza no lo dice. | pagado | 91f18f2 (rama del S12, squash 8cd8390). |
+| S12-B2 | S12 informe | `de-prototipo-a-produccion.yaml:456`: «por origen» parafrasea «per user or entity». | pagado | 98b4bfb (PR #98): «por usuario o entidad» / «per user or entity». |
+| S12-B3 | S12 informe | La nota «completa en el bloque 9» se lee como inventario cerrado. | pagado | 91f18f2 (rama del S12, squash 8cd8390). |
+| S12-B4 | S12 informe | `node-declarado.test.ts` solo lee `ci.yml` y no ordena `checkout` antes de `setup-node`. | ya no aplica | `tests/unit/node-declarado.test.ts:72` lee todos los workflows y `:163` vigila el orden `checkout` → `setup-node`. |
+| S12-B5 | S12 informe | Las fechas de las fuentes 1–8 y 12 de T4 no se pudieron releer con el MCP de Learn. | pagado | Releídas en S20 del HTML público de Learn (`ms.date`): 9 de 9 coinciden con el bloque 10 de `de-prototipo-a-produccion.yaml`. |
+| S12-D1 | S12 cierre | `package.json:60`: `@types/node` ^20 con Node 22. | pagado | PR #88 (3a6dc63): `@types/node` 22.20.5. |
+| S12-D2 | S12 cierre | La fila de T4 «¿Cómo lleva…?» quedó 3.ª en ES: frágil al crecer el índice. | pagado | 55612a0 (PR #98): margen medido hoy 19 (ES) y 14 (EN) sobre el 4.º ajeno. |
+| S13-M1 | S13 informe | T6 bloque 5: el título «Fabric frente a Databricks: diferencias y un puente» promete más que el texto. | pagado | PR #90 (a3e749d): `ciclo-de-vida-de-datos.yaml:474` dice «Fabric y Databricks: un puente entre catálogos»; la fila del banco se movió con él. |
+| S13-M2 | S13 informe | `cv.es.yaml:862` lista Eventhouse y KQL sin nivel y T6 los dice «solo temario». | pagado | PR #90 (a3e749d): el CV dice «Eventhouse y KQL, a nivel de consulta». |
+| S13-B1 | S13 informe | `cv.es.yaml:803`: «la ruta que hoy curso» (AI-103 ya completo). | pagado | PR #90 (a3e749d), con la respuesta del dueño: `data/cv.es.yaml` ya no dice «la ruta que hoy curso». |
+| S13-B2 | S13 informe | T6 `:441`: vistas materializadas con PySpark están en Preview. | pagado | PR #90 (a3e749d): `data/metodo/ciclo-de-vida-de-datos.yaml` nombra la vista previa de PySpark en las vistas materializadas. |
+| S13-B3 | S13 informe | T6 `:566`: «transformaba los eventos con Spark» (el corpus dice «permitía»). | pagado | PR #90 (a3e749d): `data/metodo/ciclo-de-vida-de-datos.yaml` dice «Skills measured as of October 19, 2026» con su fecha exacta. |
+| S13-B4 | S13 informe | T6 `:482`: el temario del DP-600 rige desde el 19 de octubre, no desde antes. | pagado | PR #90 (a3e749d): el temario del DP-600 se fecha en `data/metodo/ciclo-de-vida-de-datos.yaml` desde el 19 de octubre, no desde la revisión. |
+| S13-B5 | S13 informe | `MANUAL-DE-USO.md:592,623`: «cuatro piezas» a mano. | ya no aplica | Descartado ya en el S13: `tests/unit/documentos-cuentas.test.ts:150-162` vigila el conteo de piezas contra el disco. |
+| S13-B6 | S13 informe · S14 cierre | Ficha de Innmobiliaria: su BPMN no muestra el flujo de la visita y `abrir-a-compradores` pudo adelantarse. | imposible | `data/fichas/inmobiliaria.yaml` / `content/vitrina/**` es de otra casa (regla dura 2). Sitio: reporte en «Reportes a otras casas». |
+| S13-B7 | S13 informe | `pnpm-lock.yaml`: ruido de re-resolución (el peer `supports-color` desaparece de ~160 entradas). | ya no aplica | Ningún paquete bajó (`node scripts/verificar-dependencias.mjs origin/main`); el lockfile se regeneró en los PR #96 y #97. |
+| S13-B8 | S13 informe | `SPRINT_013-capturas/`: los PDF traen un enlace a `localhost`. | ya no aplica | Los PDF versionados salieron del árbol (37d88bb (PR #98)) y `tests/unit/cero-enlaces.test.ts` falla si vuelve uno; desde el S14 las capturas son PNG leídos como imagen. |
+| S13-D1 | S13 cierre | El adaptador real de identidad de Innmobiliaria no se ejerce hasta su ensayo general. | imposible | App de otra casa (Innmobiliaria): no hay nada que correr aquí. Sitio: reporte en «Reportes a otras casas». |
+| S13-D2 | S13 cierre | La 3.ª fila del banco (Vesting) no entró: ES 4.ª por poco y EN 30.ª. | ya no aplica | Decisión declarada en `tests/fixtures/banco-de-preguntas.es.yaml:610-611` (regla 29 en el S13): la pieza pesa la mitad y el documento de Vesting es su fuente natural; las filas de Vesting existentes quedaron ampliadas en 55612a0 (PR #98). |
+| S14-M1 | S14 informe | `voz-impersonal.ts:47-56`: el motor deja pasar casi la mitad de las formas viejas. | pagado | 463050f (rama del S14, squash a3e749d): nueve verbos más y los casos de `metodo-voz.test.ts`. |
+| S14-M2 | S14 informe | T4 `:238`: el título de la fase 4 ya no dice lo mismo en ES y en EN. | pagado | 5f7cf52 (rama del S14, squash a3e749d). |
+| S14-M3 | S14 informe | T2 `:604-605`: un límite personal pasó a afirmación universal. | pagado | 5f7cf52 (rama del S14, squash a3e749d): «El autor no ha operado agentes en contenedores…». |
+| S14-M4 | S14 informe | `rag-sin-inventar.yaml:55-56`: «infografías como esta». | pagado | 5f7cf52 (rama del S14, squash a3e749d); `git grep -niE "infograf" -- data/metodo` vacío. |
+| S14-B1 | S14 informe | Manual y guía dicen «infografía» (`MANUAL-DE-USO.md:629-631`, `GUIA-DE-PRUEBA.html:2252…2395`). | pagado | S15 F1-B1 (squash 07f2b6e): «publicación» en el manual y en los ⭐; quedan solo la capa de ficha de apps y el historial. |
+| S14-B2 | S14 informe | Comentarios y mensajes de desarrollo con «Mi método» / «Mi evidencia». | pagado | S15 F1-B2 (squash 07f2b6e); `git grep -n -e "Mi método" -e "Mi evidencia" -- src scripts` solo deja las excepciones declaradas (el 301, el menú y las dos `page.tsx`). |
+| S14-B3 | S14 informe | `redireccion.ts:17`: `//metodo` redirige y `/es//metodo` no. | pagado | 648c7b7 (PR #98): la expresión es exacta (idioma opcional, `/metodo` y nada más que un subcamino) y `tests/unit/metodo-redireccion.test.ts` cubre `//metodo`, `/es//metodo`; demo en rojo. |
+| S14-B4 | S14 informe | `sinCitas` ignora un párrafo entero entre comillas. | pagado | 648c7b7 (PR #98): `TOPE_DE_CITA = 120` en `voz-impersonal.ts`; `tests/unit/metodo-voz.test.ts` atrapa la cita larga; demo en rojo. |
+| S14-B5 | S14 informe | Las demos en rojo del gate de voz viven en tests y commits, no en `scripts/demo-rojo.sh`. | ya no aplica | `demo-rojo.sh` es del kit y no se edita (regla 15 la reserva a gates propios); cada cierre desde el S15 pega «archivo · mutación · a quién nombró» (p. ej. `SPRINT_019-cierre.md:19`). |
+| S14-B6 | S14 informe | Exports de `voz-impersonal.ts` sin lector fuera de los tests. | ya no aplica | Es lo esperado de un gate (la propia auditoría: «no hay campos huérfanos de verdad»): `src/lib/metodo/voz-impersonal.ts` solo lo leen sus tests y `src/proxy.ts`. |
+| S14-B7 | S14 informe | «Prototipos propios» → «in-house prototypes» sugiere «de la empresa» (EN). | pagado | 463050f (rama del S14, squash a3e749d): «the author’s own prototypes». |
+| S14-B8 | S14 informe | `sistema-de-agentes.yaml:457,599`: «se usa en la Fundación CTIC» pierde el sujeto. | pagado | 5f7cf52 (rama del S14, squash a3e749d). |
+| S14-B9 | S14 informe | El e2e de redirección no cubre `/Metodo` ni `//`. | pagado | 648c7b7 (PR #98): `tests/e2e/metodo.spec.ts` «`/Metodo` (mayúscula) no es la ruta vieja». |
+| S14-D1 | S14 cierre | `CLAUDE.md` aún dice «Mi método» y `/metodo`. | pagado | PR #91 (90c380a): la constitución dice «Métodos» y `/metodos`; el resto de los hechos de producto se corrige en la F2. |
+| S15-M1 | S15 informe | T7 `:359`: «un mismo modelo» combinaba los tres modos (el corpus dice «los modelos»). | pagado | 0fd96e3 (rama del S15, squash 07f2b6e). |
+| S15-M2 | S15 informe | Guía q14 lista 3 de los 5 Criterios de T7. | pagado | 685548d (rama del S15, squash 07f2b6e). |
+| S15-B1 | S15 informe | T7: «Prep data for AI» y el informe de métricas son preview y la pieza no lo dice. | pagado | 0fd96e3 (rama del S15, squash 07f2b6e). |
+| S15-B2 | S15 informe | T7: «Direct Lake cae a DirectQuery sin avisar» no está en las fuentes. | pagado | 0fd96e3 (rama del S15, squash 07f2b6e). |
+| S15-B3 | S15 informe | Dos comentarios de test rancios (`ctic-aproximadas.test.ts:40`, `metodo-al-indice.test.ts:403`). | pagado | 685548d (rama del S15, squash 07f2b6e). |
+| S15-D1 | S15 cierre | `infografia.tsx:397`: el `[n]` de las fuentes sin ancho fijo. | pagado | S16 (squash 7ba2e74): `src/components/metodo/infografia.tsx` fija el ancho del `[n]` de las fuentes. |
+| S15-D2 | S15 cierre | Comentario «9 · Lo que haría distinto…» en cuatro YAML. | pagado | S16 (squash 7ba2e74); `git grep -n "9 · Lo que haría distinto" -- data/metodo` vacío. |
+| S15-D3 | S15 cierre | `evaluar-corpus.mjs:138`: `casa()` no empareja `<id>~N` con `<id>`. | pagado | S16 (squash 7ba2e74): `scripts/evaluar-corpus.mjs` empareja `<id>~N` con `<id>` en `casa()`. |
+| S16-M4 | S16 informe | T1: modalidad «debe/procuro/puede» pasa a indicativo (`:383,446,268`). | pagado | d1c026d (rama del S16, squash 7ba2e74). |
+| S16-M5 | S16 informe | T1 `:658`: 2015–2017 es el empleo, no la implantación del ERP. | pagado | d1c026d (rama del S16, squash 7ba2e74). |
+| S16-B6 | S16 informe | `MANUAL-DE-USO.md:676`: «cuatro puntos de margen» ya no es cierto tras T1. | pagado | d1c026d (rama del S16, squash 7ba2e74). |
+| S16-B7 | S16 informe · S16–S19 cierres | T1 `:630`: «Diez aplicaciones hermanas más CV Viva… 38 piezas» no suma; el corpus (`apps-pipeline:5`) arrastra lo mismo. | pagado | 0d5afc7 (rama del S17, squash d08a2e4) en la pieza; 1ca6108 (PR #98): `apps-pipeline.{es,en}.md:5` dice «38 piezas, sin contar este sitio». |
+| S16-B8 | S16 informe · S16–S19 cierres | T1 `:524`: «cuesta menos» es una afirmación empírica en indicativo. | pagado | 0d5afc7 (rama del S17, squash d08a2e4): «suele costar menos» / «tends to cost less». |
+| S16-B9 | S16 informe · S16–S19 cierres | T1 `:614`: la evidencia del sistema de gestión lleva `nivel: uso-real` y el corpus dice «en estructuración». | pagado | 0d5afc7 (rama del S17, squash d08a2e4): quinto nivel «En construcción» con su gate `tests/unit/metodo-nivel-en-construccion.test.ts`. |
+| S16-B10 | S16 informe · S16–S19 cierres | Las demos en rojo viven en cuerpos de commit, no en el cierre. | ya no aplica | Desde el S17 el cierre pega «archivo · mutación · a quién nombró» (`SPRINT_019-cierre.md:19`); `demo-rojo.sh` es del kit y no se edita. |
+| S16-D1 | S16–S19 cierres | `idioma.spec.ts:89` («a media Perfil») intermitente y preexistente. | pagado | 3388d03 (PR #98): la espera fija de 300 ms pasa a `expect.poll` con el layout asentado (`asentada(page)`: carga + `document.fonts.ready` + 2 rAF). No se reproduce en local (0/180 antes y después): se declara en el cierre; la causa que se cambió es la espera por reloj. |
+| S16-D2 | S18, S19 cierres | `vitrina.spec.ts:1271` («cerrada, la tarjeta no está en el árbol de accesibilidad») intermitente. | pagado | 3388d03 (PR #98): causa hallada (el clic cruza la línea de apertura de las 2/3 de pantalla y cierra); la cabecera se ubica a 0,75: fallaba 2 de 30 por proyecto bajo carga, 0 de 80 después. |
+| S17-M1 | S17 informe | `MANUAL-DE-USO.md:1243`: rango «de agosto de 2024 a octubre de 2026» (NIST y la ISO son de 2023). | pagado | efb5253 (rama del S17, squash d08a2e4). |
+| S17-M2 | S17 informe | T5 `:721`: la fecha de la fuente 9 (OWASP LLM06) no la muestra la página. | pagado | efb5253 (rama del S17, squash d08a2e4): el encabezado de `gobierno-de-ia-y-datos.yaml:19` declara que la de OWASP es la de salida de su lista 2025. |
+| S17-M3 | S17 informe | T5 `:507`: la nota del AI Act omite que es aplicable en general desde el 2 de agosto de 2026. | pagado | efb5253 (rama del S17, squash d08a2e4); hoy `gobierno-de-ia-y-datos.yaml:508`. |
+| S17-B1 | S17 informe | T5 `:352`: «esa misma estandarización hizo monitoreables a los agentes» empalma dos cosas del corpus. | pagado | efb5253 (rama del S17, squash d08a2e4); la frase ya no existe (`git grep -n "estandarización hizo" -- data/metodo` vacío). |
+| S17-B2 | S17 informe | T5 `:415`: «a lo largo de su ciclo de vida» es más fuerte que la página de la IEC. | pagado | efb5253 (rama del S17, squash d08a2e4). |
+| S17-B3 | S17 informe | T5 `:616`: el Experto ISO 42001 va «Uso real» y su ficha dice «inicial v1.0.0». | pagado | ee9e716 (rama del S18, squash c2873bb): la tarjeta dice «en la versión inicial (v1.0.0) de su ficha» (`gobierno-de-ia-y-datos.yaml:617-619`). |
+| S17-B4 | S17 informe | `nivel-en-construccion.ts:2`: el comentario fecha el motor en el futuro. | pagado | efb5253 (rama del S17, squash d08a2e4): «S17, 2026-10-20». |
+| S17-B5 | S17 informe | Comentarios del banco: la fila del sistema de gestión «pasa por» casas distintas en ES y EN. | pagado | efb5253 (rama del S17, squash d08a2e4): el comentario del banco medido por idioma. |
+| S17-B6 | S17 informe | `MANUAL-DE-USO.md:1243` remite a `SPRINT_017-cierre.md`, que aún no existía. | pagado | El cierre del S17 existe (`sprints/SPRINT_017-cierre.md`). |
+| S17-B7 | S17 informe · S17 cierre | Aviso `configLoader` de vitest con vite 8.3 (`vitest.config.ts:1`). | pagado | ee9e716 (rama del S18, squash c2873bb): `vitest.config.mts`. |
+| S17-B8 | S17 informe | T5 `:402`/`:507`: el bloque 5 omite la prohibición 9 que entra en vigor en diciembre de 2026. | pagado | ee9e716 (rama del S18, squash c2873bb); hoy `gobierno-de-ia-y-datos.yaml:508` la nombra. |
+| S17-D1 | S17 cierre | T5 `:503`: «ayuda a identificar los riesgos propios» no lo confirma la página del NIST 600-1. | pagado | ee9e716 (rama del S18, squash c2873bb); hoy `:503` dice «perfil transversal… recurso complementario del marco». |
+| S18-M1 | S18 informe | T9 `:503`: «los agentes se encadenan en un flujo» es una condición de idoneidad, no un hecho. | pagado | ee9e716 (rama del S18, squash c2873bb). |
+| S18-M2 | S18 informe | T9 decisión 6: la evidencia de Ceinfes no habla de línea base. | pagado | ee9e716 (rama del S18, squash c2873bb). |
+| S18-M3 | S18 informe | T9 `:276`: dos escaleras distintas bajo la misma palabra. | pagado | ee9e716 (rama del S18, squash c2873bb). |
+| S18-B1 | S18 informe | T9 `:401`: «Los flujos de escritorio son la RPA de Power Automate». | pagado | ee9e716 (rama del S18, squash c2873bb): «amplían la RPA de Power Automate». |
+| S18-B2 | S18 informe | `tests/mocks/server-only.ts:1` y `.claude/skills/testing-patterns.md:203` dicen `vitest.config.ts`. | pagado | ee9e716 (squash c2873bb) el mock y 5c4919e (S19 F1) el skill. |
+| S18-B3 | S18 informe | T9 fuente 2: el editor «arXiv — RWTH Aachen University» no se pudo contrastar. | pagado | ee9e716 (rama del S18, squash c2873bb). |
+| S18-B4 | S18 informe | T9 `:511`: el título «se diseña para fallar bien» es un giro del autor. | pagado | 5c4919e (S19 F1, PR #96): título del bloque 5 de T9. |
+| S18-B5 | S18 informe · S19 cierre | Banco EN: en la fila «empresas…» T9 es 4.ª; no se midió el margen. | pagado | 55612a0 (PR #98): medido hoy, T9 queda con margen mayor de 40 sobre el 4.º ajeno en inglés. |
+| S18-B6 | S18 informe | `MANUAL-DE-USO.md:681`: «sin ajustar un solo título» contradice la cabecera del YAML. | pagado | ee9e716 (rama del S18, squash c2873bb): «sin ajustar tras el commit». |
+| S18-B7 | S18 informe | `vitest.config.mts` usa `import.meta.url`, no `import.meta.dirname`. | ya no aplica | Desviación aceptada y declarada en `SPRINT_018-cierre.md` (desviación 2): Vite empaqueta el archivo y la configuración funciona igual. |
+| S19-M1 | S19 informe | `GUIA-DE-PRUEBA.html:503-505` (a2): el orden de las secciones de la HOME caducó con la puerta. | pagado | d9761e7 (rama del S19, squash 5c4919e). |
+| S19-M2 | S19 informe | Falta `sprints/SPRINT_019-cierre.md` y el manual ya lo cita. | pagado | El cierre del S19 existe (`sprints/SPRINT_019-cierre.md`). |
+| S19-B1 | S19 informe | T8: los convoyes llevan la insignia «Uso real» junto a un corredor simulado. | pagado | d9761e7 (rama del S19, squash 5c4919e): nivel «Prototipo». |
+| S19-B2 | S19 informe | `metodos.tsx:29` dice «hay hasta nueve»: un total escrito a mano en un comentario. | pagado | d9761e7 (rama del S19, squash 5c4919e); `git grep -n "hasta nueve" -- src` vacío. |
+| S19-B3 | S19 informe | El gate «ningún total» de la puerta nunca se demostró rojo. | pagado | d9761e7 (rama del S19, squash 5c4919e): demo en rojo con `puertaIr` → «Ver las nueve publicaciones» (2 rojas de 9). |
+| S19-D1 | S19 cierre | Márgenes ≤ 5 del banco: «¿Ha trabajado en un banco?» 0, certificaciones 4. | pagado | 55612a0 (PR #98): ES 0 filas con margen ≤ 3 y EN 1 (Vesting, 3) tras ampliar nueve filas; 0 de 175 fuera del top-4. |
+| S19-D2 | S19 cierre | `analitica-predictiva.es.md:261` dice 33 funcionalidades de Probeta DS y su ficha hoy 41. | pagado | 1ca6108 (PR #98): 41 funcionalidades, 862 pruebas y 72 e2e, «ficha técnica de octubre de 2026», en ES (`:261`) y EN (`:518`). |
+
+## Decisiones del dueño que viajan al ensayo
+
+No son medios ni bajos: son juicios del dueño que ningún gate puede dar. Cada una tiene dónde mirarse.
+
+| # | Decisión | Dónde se mira |
+|---|---|---|
+| 1 | Los **Criterios (▲)** de T1, T5, T7, T8 y T9 son posiciones del autor, no hechos | Guía: q16 (T1), q18 (T5), q14 (T7), q22 (T8), q20 (T9) |
+| 2 | T9: RPA / Power Automate **sin caso** en el corpus y minería de procesos **sin caso corrido** (solo estado del campo) | T9 «Límites» · guía q20 |
+| 3 | T8: MLflow, modelos fundacionales de series de tiempo y asistentes de formulación con LLM **sin caso** (solo estado del campo) | T8 «Límites» · guía q22 |
+| 4 | **Probeta DS «Prototipo»** (33 → 41 funcionalidades) y **los convoyes «Prototipo»** | T8 «Evidencia en proyectos» · guía q22 |
+| 5 | La **puerta de «Métodos» en la HOME**: dónde está, cómo suena | Guía q24 ⭐ |
+| 6 | T1 no afirma «construir, comprar o componer» ni el centro de excelencia como hecho | T1 «Límites» · guía q16 |
+| 7 | Los **`[CONFIRMAR]` del S17** siguen aplazados al gate del hito, por decisión del dueño | `SPRINT_017-cierre.md` |
+| 8 | El **Node del build de Vercel**: la documentación dice que `22.x` despliega la última 22.x; confirmarlo con `node -v` en el Build Command es opcional (el registro del build no se lee desde este repo) | Panel de Vercel, un build |
+| 9 | El **gesto real del trackpad** en la galería (Playwright no lo emula) | Guía k15e ⭐ |
+
+## Reportes a otras casas (regla dura 2: aquí no se editan)
+
+| # | Reporte | Para |
+|---|---|---|
+| 1 | Exports de apps con el nombre viejo y `referencia.html/.png` del contrato (S9) | Planeadora |
+| 2 | Ficha de Innmobiliaria: BPMN de la visita, `abrir-a-compradores` y su adaptador de identidad (S13) | Casa de Innmobiliaria, vía la planeadora |
+| 3 | `scripts/cero-enlaces.mjs:58`: el mensaje del rojo manda vaciar el homepage y un homepage vacío pasa; es copia idéntica del kit (S10-B21) | Planeadora (kit) |
