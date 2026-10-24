@@ -36,10 +36,9 @@ el mensaje te llega al correo.
   2. Edita los textos. Desde el content pack v1 (jul 2026) el contenido es el real — sin
      placeholders.
   3. Guarda, haz commit y push (o edítalos directo en GitHub). El deploy sale solo.
-- **Campos guardados pero aún sin sección en la página:** `perfil` (texto largo),
-  `certificaciones` y `skills` ya viven en los YAML y se validan, pero su sección visual llega
-  con el Sprint 2. Cuando tengas los links de verificación de tus certificaciones (Credly /
-  Microsoft Learn), pégalos en el campo `verificacion:` de cada una.
+- **Perfil, certificaciones y skills:** `perfil` (texto largo), `certificaciones` y `skills` viven
+  en los YAML, se validan y tienen su sección en la HOME. Cuando tengas los links de verificación
+  de tus certificaciones (Credly / Microsoft Learn), pégalos en el campo `verificacion:` de cada una.
 - **Dos correos distintos:** el que se **muestra** en la página (contacto público) es el campo
   `email:` del YAML; el que **recibe** las solicitudes del formulario es la variable
   `SOLICITUDES_TO_EMAIL` en Vercel — cambiarlos es independiente.

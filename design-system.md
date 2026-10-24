@@ -329,7 +329,7 @@ cifra `clamp(3.5rem,8vw,4.75rem)`; tres columnas dejaban dos huérfanos.
 - **Cuándo se usa:** cuando varias secciones del nav **son la misma cosa**. Hoy, una sola vez: las
   seis secciones del CV bajo «Hoja de vida» (Trayectoria · Logros · Vitrina · Estudios ·
   Certificaciones · Skills — el orden de la página; la vitrina asomada entra con su nombre de
-  sección). El primer nivel queda en tres: Hoja de vida · **Portafolio** · Contacto. **Post-S8:**
+  sección). El primer nivel queda en cuatro: Hoja de vida · **Portafolio** · **Métodos** · Contacto. **Post-S8:**
   la sección recuperó el nombre «Vitrina» y por eso el portal pasó a «Portafolio» — dos enlaces
   con el mismo nombre a destinos distintos en un mismo menú son una trampa para el lector de
   pantalla y para cualquiera. No es un patrón para repartir: un header con dos

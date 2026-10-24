@@ -104,7 +104,7 @@
     <rect class="caja" x="290" y="330" width="240" height="86" rx="10"/>
     <text class="titulo-caja" x="410" y="358" text-anchor="middle">GitHub (público)</text>
     <text class="detalle-caja" x="410" y="376" text-anchor="middle">ruleset main-protegida</text>
-    <text class="detalle-caja" x="410" y="393" text-anchor="middle">CI: quality·e2e·integration·lighthouse</text>
+    <text class="detalle-caja" x="410" y="393" text-anchor="middle">CI: quality·e2e·integration·lighthouse·un-pr-vivo</text>
 
     <!-- El correo de hola@ (real desde 2026-09-26; antes era la caja «futuro»). Entra por
          Cloudflare y, desde el mismo día, también sale: Gmail «Enviar como» por Resend -->
@@ -136,7 +136,7 @@
   <table>
     <thead><tr><th>Pieza</th><th>Servicio + plan</th><th>Detalle operativo</th></tr></thead>
     <tbody>
-      <tr><td>Código / versionamiento</td><td>GitHub <code>mauriciorincon-ai/app-hoja-de-vida</code> (público)</td><td>ruleset <code>main-protegida</code>; checks requeridos: quality · e2e · integration · lighthouse</td></tr>
+      <tr><td>Código / versionamiento</td><td>GitHub <code>mauriciorincon-ai/app-hoja-de-vida</code> (público)</td><td>ruleset <code>main-protegida</code>; checks requeridos: quality · e2e · integration · lighthouse · un-pr-vivo</td></tr>
       <tr><td>CI/CD</td><td>GitHub Actions (4 jobs)</td><td>quality (typecheck·lint·test·build·audit) · e2e (Playwright+axe) · integration (Postgres real) · lighthouse (perf-budget)</td></tr>
       <tr><td>Hosting / publicación</td><td>Vercel Hobby</td><td>Next.js 16 SSG + route handlers; prod desde <code>main</code>, preview por PR; uso NO comercial (cláusula Hobby verificada, ADR-004). <strong>Modo mantenimiento</strong> (2026-09-24): <code>MANTENIMIENTO=on</code> en Production + Redeploy → el proxy sirve una sola página con el CV en PDF y el contacto, con 503 + <code>Retry-After</code>; solo <code>on</code> lo enciende</td></tr>
       <tr><td>Base de datos</td><td><strong>Supabase free</strong> (nueva en S4, ADR-011)</td><td>Postgres; tabla <code>votes</code> (app·feature·created_at, <strong>cero PII</strong>); RLS ON sin políticas; RPC SECURITY DEFINER; anon solo EXECUTE. proyecto propio del org (desde 2026-09-23; antes no existía en la nube y la votación se declaraba «no disponible»); <strong>desde ADR-024, tablas <code>chat_codigos</code> y <code>chat_registro</code> (y desde el 2026-09-26 <code>chat_bloqueados</code>, con la RPC <code>chat_cupo</code>) (nombre, correo, pregunta, respuesta — datos personales con aviso Ley 1581), RLS ON sin políticas, tres RPC SECURITY DEFINER; lectura solo con service_role</strong></td></tr>
