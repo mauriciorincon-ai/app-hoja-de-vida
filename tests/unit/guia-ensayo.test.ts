@@ -125,10 +125,10 @@ describe("la guía v20 · el filtro «Ensayo general H-2»", () => {
     for (const [flujo, cubre] of flujos) {
       for (const id of cubre) {
         const li = doc.getElementById(id)?.closest("li");
-        if (!li?.hasAttribute("data-minimo"))
-          problemas.push(
-            `${flujo}: cubre «${id}», que no es una ⭐ de la guía`,
-          );
+        if (!li)
+          problemas.push(`${flujo}: cubre «${id}», que no existe en la guía`);
+        // Una fila sin ⭐ (una lectura de la guía completa) no sale de ningún filtro.
+        else if (!li.hasAttribute("data-minimo")) continue;
         else if (
           li.getAttribute("data-ensayo-fuera") !==
           `cubierta por el flujo ${flujo.toUpperCase()} del ensayo.`
@@ -171,7 +171,12 @@ describe("la guía v20 · las sumas las hace la página", () => {
       expect(Number.isInteger(min) && min > 0, `${id}: minutos del flujo`).toBe(
         true,
       );
-      expect(["1", "2"], `${id}: sentada del flujo`).toContain(sentada);
+      expect(["1", "2", "3"], `${id}: sentada del flujo`).toContain(sentada);
+      // El texto visible de los minutos no se aparta del dato que se suma.
+      expect(
+        li.querySelector(".ens-min")?.textContent?.trim(),
+        `${id}: los minutos que se leen y los que se suman`,
+      ).toBe(`${min} min`);
       por.set(sentada, (por.get(sentada) ?? 0) + min);
     }
     for (const [s, min] of por) {
@@ -185,9 +190,13 @@ describe("la guía v20 · las sumas las hace la página", () => {
     expect(calc("ensayo-min")).toBe(String(total));
     expect(calc("ensayo-n")).toBe(String(flujos.length));
     // Si todo cabe en 45 min no hacen falta dos sentadas; si no, hacen falta las dos.
-    expect(por.size).toBe(total > LIMITE ? 2 : 1);
-    expect(calc("sentada-1-aviso")).toBe("");
-    expect(calc("sentada-2-aviso")).toBe("");
+    // Las sentadas son consecutivas desde la 1 y hay las que hacen falta para que
+    // ninguna pase del tope: con más de 45 min en total no caben en una sola.
+    const claves = [...por.keys()].sort();
+    expect(claves).toEqual(["1", "2", "3"].slice(0, claves.length));
+    expect(claves.length).toBeGreaterThanOrEqual(Math.ceil(total / LIMITE));
+    expect(calc("ensayo-sentadas")).toBe(String(claves.length));
+    for (const s of claves) expect(calc(`sentada-${s}-aviso`)).toBe("");
   });
 
   it("una sentada que pasa de 45 min lo dice con su número", () => {
