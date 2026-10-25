@@ -2,7 +2,11 @@ import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { parse } from "yaml";
-import { sinVitrina, sinVitrinaEnTodo } from "../../scripts/sin-vitrina.mjs";
+import {
+  CONCORDANCIA_ROTA,
+  sinVitrina,
+  sinVitrinaEnTodo,
+} from "../../scripts/sin-vitrina.mjs";
 
 /**
  * UNA SOLA PALABRA: «PORTAFOLIO» (S23, 2026-10-25).
@@ -44,6 +48,30 @@ describe("sinVitrina: la palabra con su concordancia", () => {
     ["nuestra vitrina", "nuestro portafolio"],
     ["la propia vitrina", "el propio portafolio"],
     ["en mi propia vitrina", "en mi propio portafolio"],
+    // Lo contiguo que concuerda: la contracción se hace una sola vez, al principio.
+    ["de la propia vitrina", "del propio portafolio"],
+    ["a la propia vitrina", "al propio portafolio"],
+    ["de toda la vitrina", "de todo el portafolio"],
+    ["Toda la vitrina", "Todo el portafolio"],
+    ["de otra vitrina", "de otro portafolio"],
+    ["a la misma vitrina", "al mismo portafolio"],
+    ["la única vitrina", "el único portafolio"],
+    ["La Única vitrina", "El Único portafolio"],
+    ["unas vitrinas", "unos portafolios"],
+    ["aquella vitrina", "aquel portafolio"],
+    ["alguna vitrina", "algún portafolio"],
+    ["ninguna vitrina", "ningún portafolio"],
+    ["la primera vitrina", "el primer portafolio"],
+    ["de la última vitrina", "del último portafolio"],
+    ["las demás vitrinas", "los demás portafolios"],
+    ["la gran vitrina", "el gran portafolio"],
+    ["de la mejor vitrina", "del mejor portafolio"],
+    ["la actual vitrina", "el actual portafolio"],
+    ["de las vitrinas", "de los portafolios"],
+    ["a una vitrina", "a un portafolio"],
+    ["su propia vitrina", "su propio portafolio"],
+    // Una palabra de función en medio no es un adjetivo.
+    ["la app esta en vitrina", "la app esta en portafolio"],
     ["las vitrinas", "los portafolios"],
     ["desde la vitrina", "desde el portafolio"],
     ["para la vitrina", "para el portafolio"],
@@ -96,6 +124,38 @@ describe("sinVitrina: la palabra con su concordancia", () => {
     expect(sinVitrinaEnTodo(una)).toEqual(una);
     // No muta lo que recibe.
     expect(arbol.vitrina.es).toBe("La vitrina");
+  });
+});
+
+describe("sinVitrina lanza si la concordancia no se puede arreglar sola", () => {
+  it.each([
+    // Un adjetivo femenino entre el determinante y la palabra: «la nueva portafolio».
+    ["la nueva vitrina", /adjetivo sin concordancia/],
+    ["su nueva vitrina", /adjetivo sin concordancia/],
+    ["una sola vitrina", /adjetivo sin concordancia/],
+    // Lo que ya llegó roto (u otra casa lo escribe así): no se publica.
+    ["la portafolio", /concordancia rota/],
+    ["de la portafolio", /concordancia rota/],
+    ["las portafolios", /concordancia rota/],
+    ["toda portafolio", /concordancia rota/],
+    // «una de las vitrinas» queda «una de los portafolios»: el sujeto no concuerda.
+    ["una de las vitrinas", /concordancia rota/],
+    ["ninguna de esas vitrinas", /concordancia rota/],
+  ])("%j", (texto, mensaje) => {
+    expect(() => sinVitrina(texto)).toThrow(mensaje);
+    expect(() => sinVitrina(texto)).toThrow(/FRASES/);
+  });
+
+  it("y una frase en FRASES se arregla sin lanzar (la salida que el error pide)", () => {
+    expect(sinVitrina("La vitrina es estática")).toBe(
+      "El portafolio es estático",
+    );
+  });
+
+  it("el error trae la frase y su contexto", () => {
+    expect(() => sinVitrina("Se publicó en la nueva vitrina de apps")).toThrow(
+      /«la nueva vitrina» en «.*Se publicó en la nueva vitrina de apps/,
+    );
   });
 });
 
@@ -373,14 +433,10 @@ describe("lo que escriben otras casas se lee sin la palabra vieja", () => {
 // ── 5 · la concordancia en lo que escribe esta casa ────────────────────────
 
 /**
- * «la / una / esta / esa / nuestra / las portafolio» y «el / un / este / ese /
- * del / al vitrina» son el rastro de cambiar la palabra sin su determinante.
+ * El patrón es el MISMO que hace lanzar a `sinVitrina` (`CONCORDANCIA_ROTA`, en
+ * `scripts/sin-vitrina.mjs`): una sola copia. Aquí se barre lo que escribe esta
+ * casa, que no pasa por la función: corpus, mensajes, datos y documentos.
  */
-const CONCORDANCIA_ROTA = [
-  /\b(?:la|una|esta|esa|nuestra|las|de\s+la|a\s+la)\s+portafolios?\b/giu,
-  /\b(?:el|un|este|ese|del|al|los)\s+vitrinas?\b/giu,
-];
-
 describe("la concordancia no se rompió", () => {
   it("el patrón caza lo roto y deja lo bueno", () => {
     const caza = (t: string) =>
@@ -389,6 +445,11 @@ describe("la concordancia no se rompió", () => {
       "de la portafolio",
       "en la\nportafolio",
       "La portafolio muestra",
+      "toda portafolio",
+      "otra portafolio",
+      "la misma portafolio",
+      "algún vitrina",
+      "una de los portafolios",
       "del vitrina",
       "el vitrina",
     ]) {
@@ -400,6 +461,11 @@ describe("la concordancia no se rompió", () => {
       "un portafolio",
       "mi portafolio",
       "la vitrina",
+      "todo el portafolio",
+      "un gran portafolio",
+      "los demás portafolios",
+      "una de las vitrinas",
+      "data/vitrina.yaml",
     ]) {
       expect(caza(t), t).toBe(false);
     }
