@@ -61,7 +61,7 @@ internal details of the architecture, the proprietary components and the exact i
 sequence are part of the organization's confidential knowledge and I do not expose them in this
 document. I closed that stage by leaving the ecosystem and the process documented.
 
-## I have built artificial intelligence agents twice: ARKHÉ and the fourteen published agents
+## I have built artificial intelligence agents twice: ARKHÉ and the eleven published agents
 
 <!-- seccion: la-segunda-trayectoria -->
 
@@ -71,10 +71,10 @@ of its components. It is a system of my own, built later with another vision, ot
 a level of specialization aimed at producing verifiable assets within my pipeline of
 applications, research, dashboards and professional knowledge.
 
-Currently, the showcase gathers 14 published agents, each with a specific function and technical
-sheet. However, those fourteen agents do not by themselves constitute the complete ecosystem.
+Currently, the showcase gathers 11 published agents, each with a specific function and technical
+sheet. However, those eleven agents do not by themselves constitute the complete ecosystem.
 They are visible capabilities built on a common architecture of harnesses, sources, tools,
-memory, controls and coordination rules. The twelve, one by one, are in their own document;
+memory, controls and coordination rules. The eleven, one by one, are in their own document;
 here I talk about the architecture that sustains them.
 
 In this ecosystem, agents are neither independent automations nor specialized conversations.
@@ -280,7 +280,7 @@ actions, the more important it becomes to keep evidence about what it received, 
 used and the result it produced. That lesson is what today leads the chat on this site to store,
 since September 2026, a whole row per answer —who asked, what they asked, what they were answered,
 with which sources, in which mode, with which provider, how many tokens and how many milliseconds—
-and not merely its cost; and my 14 published agents to leave evidence of every run. That is where
+and not merely its cost; and my 11 published agents to leave evidence of every run. That is where
 the two sides met: the telemetry is mine, and the transparency belongs to whoever asks, who before
 writing their first line ticks a notice that says what is stored about them and how to ask for it to
 be deleted.
@@ -586,8 +586,7 @@ not in the ledger, it is not in the paper. Every figure is a function of the led
 provenance is not documented: it becomes hard to break. This rule keeps the text from becoming an
 autonomous source of numbers that cannot be reconstructed. Three papers came out this way, with
 44 binary verification criteria, and after three papers of different classes the diff of the
-phases and of the contract is still empty; its sibling, the Design Science Harness, works with 52
-criteria.
+phases and of the contract is still empty.
 
 The AI-APPs Factory, which coordinates the pipeline of my applications, does not let an
 application move forward merely because there is enthusiasm to build it either. It needs two
@@ -724,7 +723,7 @@ with which it recognizes its limits.
 
 At Vesting I learned to build the organizational capability needed to develop and observe
 agents: a platform and a process with which a startup built 27 agents for 12 clients and watched
-them in real time. In ARKHÉ I turned those lessons into an advanced agentic architecture, with 14
+them in real time. In ARKHÉ I turned those lessons into an advanced agentic architecture, with 11
 published agents as the visible part and a research piece that supports it. One experience
 demonstrates professional scale and repeatability; the other, architectural depth,
 specialization, measurement and independent evolution.

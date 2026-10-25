@@ -1,15 +1,15 @@
 ---
 slug: los-agentes-de-la-vitrina
 codigo: AF-25
-titulo: "Los catorce agentes de la vitrina"
-resumen: "Los 14 agentes publicados: los doce de ARKHÉ, uno a uno y en cuatro familias, y los agentes demostrativos de planlang. De cada uno de los doce: qué promete, su cifra medida, su límite y su «nunca». Cinco sellados. Todos con gates humanos, carnadas que demuestran que los controles disparan, cero costo en herramientas (salvo la GPU del Taller de Animación) y la misma regla: ninguna afirmación sale de la memoria del modelo."
-cuando_usar: "Úsalo cuando pregunten qué agentes tiene publicados en su portafolio, para qué sirve cada uno de los catorce agentes de la vitrina, qué es un harness, cómo controla la calidad con gates humanos y carnadas, y qué comparten los doce."
+titulo: "Los once agentes de la vitrina"
+resumen: "Los 11 agentes publicados, todos de ARKHÉ, uno a uno y en cuatro familias. De cada uno: qué promete, su cifra medida, su límite y su «nunca». Cinco sellados. Todos con gates humanos, carnadas que demuestran que los controles disparan, cero costo en herramientas (salvo la GPU del Taller de Animación) y la misma regla: ninguna afirmación sale de la memoria del modelo."
+cuando_usar: "Úsalo cuando pregunten qué agentes tiene publicados en su portafolio, para qué sirve cada uno de los once agentes de la vitrina, qué es un harness, cómo controla la calidad con gates humanos y carnadas, y qué comparten los once."
 estado: aprobado
 ancla: "/vitrina/agentes"
 actualizado: 2026-09-21
 preguntas_de_prueba:
-  - "¿Qué son los catorce agentes de la vitrina y qué no son?"
-  - "¿Qué comparten los catorce agentes de la vitrina?"
+  - "¿Qué son los once agentes de la vitrina y qué no son?"
+  - "¿Qué comparten los once agentes de la vitrina?"
   - "¿Cómo producen piezas los agentes con gates humanos?"
 ---
 
@@ -38,18 +38,15 @@ CÓMO SE ESCRIBE ESTE ARCHIVO
 
 <!-- seccion: que-son -->
 
-La vitrina publica **14 agentes**, cada uno con su ficha técnica: promesa, cifras con procedencia,
-límites, «nunca» y el proceso dibujado. Doce de ellos —los que describe este documento— son
+La vitrina publica **11 agentes**, cada uno con su ficha técnica: promesa, cifras con procedencia,
+límites, «nunca» y el proceso dibujado. Son
 sistemas de trabajo que corren sobre **Claude Code** dentro de un **harness** —el envoltorio que
 le fija al agente su función, sus fuentes, sus herramientas y su contrato de entrada y salida—, y
 todos pertenecen a **ARKHÉ**, mi ecosistema agéntico, que está explicado en el documento de
-agentes. Los otros dos son los agentes demostrativos de planlang: el Agente A, de autorizaciones
-médicas, y el Agente B, de vinculación con debida diligencia. Deciden sobre casos sintéticos, pasan
-a una persona toda negación o coincidencia dudosa, y su ficha publica lo que miden; no son
-servicios, son demostraciones medidas contra su plan, y están en estado inicial.
+agentes.
 
 **Cinco están sellados** —Constructor de Tableros Power BI, Presentaciones CINE, Fábrica de
-AI-APPs, Taller de Animación y Harness Paper Computacional— y siete siguen en estado inicial. Lo
+AI-APPs, Taller de Animación y Harness Paper Computacional— y seis siguen en estado inicial. Lo
 que no son: servicios con usuarios. Son herramientas de uso personal con entregables y evidencia —incluso las diseñadas para entregar un repositorio por cliente no han tenido usuarios distintos de mí—;
 la palabra «producción» la reservo para los 27 agentes de Vesting.
 
@@ -106,12 +103,11 @@ produce actividad nueva mientras la anterior siga sin resultados registrados.
 
 | Agente                           | Estado  | Qué promete                                                                                          | Cifra medida                                  |
 | -------------------------------- | ------- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------- |
-| **Harness Design Science**       | inicial | congela los umbrales antes de medir y publica lo que salga: en su paper piloto, dos de tres principios quedaron refutados por sus propias métricas | **52 criterios**; 10 fases D0–D9; 7 controles endurecidos |
 | **Harness Paper Computacional**  | sellado | si no está en el ledger, no está en el paper; tras tres papers de clases distintas el diff de las fases sigue vacío | **44 criterios**; 3 papers listos; 0 campos nuevos del contrato |
 | **Fábrica de AI-APPs**           | sellado | dos casas, un escritor por casa; ninguna app avanza sin dos aprobaciones escritas y ningún sprint cierra sin el resumen del repo de la app | 7 repositorios de app estampados; 24 sprints cerrados; 6 gates |
 
-Los dos harnesses de investigación no publican: la producción termina en «listo para enviar», y
-el envío a revista lo ejecuta el autor con su token; y ninguno menciona el ecosistema del autor
+El harness de investigación no publica: la producción termina en «listo para enviar», y
+el envío a revista lo ejecuta el autor con su token; y no menciona el ecosistema del autor
 en un manuscrito, cosa que un lint verifica dos veces. La Fábrica no escribe código de
 producción, no ha validado sus fases de lanzamiento y operación en una corrida real, y no tiene
 librerías compartidas: son sus tres límites declarados.
@@ -120,7 +116,7 @@ librerías compartidas: son sus tres límites declarados.
 
 <!-- seccion: como-nace-un-agente -->
 
-Los doce comparten una anatomía, y conviene describirla una sola vez. Cada agente es un
+Los once comparten una anatomía, y conviene describirla una sola vez. Cada agente es un
 repositorio con una **constitución**: un archivo `CLAUDE.md` que Claude Code carga solo al abrir
 la carpeta y que fija las leyes del agente, sus comandos y sus fuentes. El Experto ISO 42001, por
 ejemplo, tiene **8 leyes y 9 comandos**; Atracción en Frío, **8 comandos** en su ciclo (marca,
@@ -131,7 +127,7 @@ pegar: la constitución es el arranque.
 Sobre esa constitución va el **harness**: el contrato de entrada y salida, las herramientas
 permitidas, el formato de cada entregable y los **criterios binarios de aceptación** —pasa o no
 pasa, sin juicio intermedio— que se cuentan uno a uno en los work-items del paquete: 50 en el Asistente de posgrado, 99 en Hiring Copilot, 20 en el Constructor de
-Tableros, 33 en el Taller de Animación, 52 en el Harness Design Science y 44 en el Harness Paper
+Tableros, 33 en el Taller de Animación y 44 en el Harness Paper
 Computacional. Un criterio que no puede fallar no es un criterio, y por eso cada control lleva su
 **carnada**: el caso destruido a propósito que demuestra que el control dispara.
 
@@ -233,12 +229,10 @@ legal de cada contacto. **8 comandos**, **6 gates** y 19 ítems de checklist, to
 porque la primera corrida real es su primer work-item. No publica ni envía, monta video pero no lo
 anima, y el ROI modela horas liberadas (su reducción del 63,2 % sigue siendo supuesto).
 
-**Harness Design Science** (inicial, v1.0.0), **Harness Paper Computacional** (sellado, v1.21) y
-**Fábrica de AI-APPs** (sellado, v1.1.0) tienen su relato en el documento de las investigaciones y
-en el del pipeline: el primero conduce diez fases D0–D9 con **52 criterios** y publica lo que
-salga, refutaciones incluidas; el segundo produjo **3 papers** listos para publicar con sus **44
-criterios** y su ledger; la tercera estampó siete repositorios y cerró **24 sprints** con
-retrospectiva, y es la que construyó esta misma página.
+**Harness Paper Computacional** (sellado, v1.21) y **Fábrica de AI-APPs** (sellado, v1.1.0) tienen su
+relato en el documento de las investigaciones y en el del pipeline: el primero produjo **3 papers**
+listos para publicar con sus **44 criterios** y su ledger; la segunda estampó siete repositorios y
+cerró **24 sprints** con retrospectiva, y es la que construyó esta misma página.
 
 ## Qué significa «sellado» y qué significa «inicial»
 
@@ -255,12 +249,12 @@ Asistente de posgrado, de sus 13 comandos con 0 ejercitados. Publicar ese dato e
 método: una ficha que dijera «probado» sin corrida sería la misma cifra sin procedencia que los
 agentes se prohíben a sí mismos.
 
-El retorno sigue la misma regla en las doce fichas: **se declara como estimación con supuestos**,
+El retorno sigue la misma regla en las once fichas: **se declara como estimación con supuestos**,
 nunca como promesa. Atracción en Frío modela horas liberadas; CINE y el Taller
 declaran su ahorro como hipótesis a calibrar; el Experto Fiscal no estima el ahorro fiscal directo
 porque depende de cifras que aún no están en el gemelo, «y ponerle número hoy sería inventarlo».
 
-## Lo que los doce comparten
+## Lo que los once comparten
 
 <!-- seccion: lo-que-comparten -->
 
@@ -270,7 +264,7 @@ porque depende de cifras que aún no están en el gemelo, «y ponerle número ho
   dispara: Hiring Copilot tiene 8 de 9 controles con carnada; el Asistente de posgrado, 9 de 9.
 - **Ninguna afirmación sale de la memoria del modelo.** Cita la fuente con su ubicación o declara
   el vacío; ninguna cifra se inventa: es medida, calculada, declarada o estimada, y así lo dice.
-- **Límites y «nunca» publicados.** Cada ficha declara 3 o 4 límites y hasta 5 cosas que el
+- **Límites y «nunca» publicados.** Cada ficha declara 4 límites y hasta 5 cosas que el
   agente nunca hace, porque un agente que parece hacer de todo es un agente sin gobierno.
 - **Costo en herramientas: 0 pesos, salvo la GPU alquilada del Taller de Animación.** Corren sobre Claude Code y herramientas abiertas; el
   retorno se declara como estimación, no como promesa.

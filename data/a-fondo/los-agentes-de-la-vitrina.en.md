@@ -1,15 +1,15 @@
 ---
 slug: los-agentes-de-la-vitrina
 codigo: AF-25
-titulo: "The fourteen agents of the showcase"
-resumen: "The 14 published agents: the twelve of ARKHÉ, one by one in four families, and planlang's demonstration agents. For each of the twelve: what it promises, its measured figure, its limit and its \"never\". Five sealed. All with human gates, baits that prove the controls fire, zero cost in tools (except the Animation Workshop's GPU) and the same rule: no claim comes out of the model's memory."
-cuando_usar: "Use this when they ask which agents he has published in his portfolio, what each of the twelve showcase agents is for, what a harness is, how he controls quality with human gates and bait, and what the twelve share."
+titulo: "The eleven agents of the showcase"
+resumen: "The 11 published agents, all from ARKHÉ, one by one in four families. For each one: what it promises, its measured figure, its limit and its \"never\". Five sealed. All with human gates, baits that prove the controls fire, zero cost in tools (except the Animation Workshop's GPU) and the same rule: no claim comes out of the model's memory."
+cuando_usar: "Use this when they ask which agents he has published in his portfolio, what each of the eleven showcase agents is for, what a harness is, how he controls quality with human gates and bait, and what the eleven share."
 estado: aprobado
 ancla: "/vitrina/agentes"
 actualizado: 2026-09-21
 preguntas_de_prueba:
-  - "What are the fourteen agents of the showcase and what are they not?"
-  - "What do the fourteen agents of the showcase share?"
+  - "What are the eleven agents of the showcase and what are they not?"
+  - "What do the eleven agents of the showcase share?"
   - "How do the agents produce pieces with human gates?"
 ---
 
@@ -38,18 +38,13 @@ HOW THIS FILE IS WRITTEN
 
 <!-- seccion: que-son -->
 
-The showcase publishes **14 agents**, each with its technical sheet: promise, figures with
-provenance, limits, "never" and the process drawn. Twelve of them —the ones this document
-describes— are work systems that run on **Claude Code** inside a **harness** —the wrapper that
+The showcase publishes **11 agents**, each with its technical sheet: promise, figures with
+provenance, limits, "never" and the process drawn. They are work systems that run on **Claude Code** inside a **harness** —the wrapper that
 fixes the agent's function, its sources, its tools and its input and output contract—, and all of
-them belong to **ARKHÉ**, my agentic ecosystem, which is explained in the agents document. The
-other two are planlang's demonstration agents: Agent A, for medical authorizations, and Agent B,
-for onboarding with due diligence. They decide on synthetic cases, hand every denial or doubtful
-match to a person, and their sheet publishes what they measure; they are not services but
-demonstrations measured against their plan, and they are in initial state.
+them belong to **ARKHÉ**, my agentic ecosystem, which is explained in the agents document.
 
 **Five are sealed** —Power BI Dashboard Builder, CINE Presentations, AI-APPs Factory, Animation
-Workshop and Computational Paper Harness— and seven remain in initial state. What they are not:
+Workshop and Computational Paper Harness— and six remain in initial state. What they are not:
 services with users. They are tools for personal use with deliverables and evidence —even those designed to hand a repository to each client have had no users other than me—; the word
 "production" I reserve for the 27 agents at Vesting.
 
@@ -109,12 +104,11 @@ results.
 
 | Agent                            | Status  | What it promises                                                                                     | Measured figure                               |
 | -------------------------------- | ------- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------- |
-| **Design Science Harness**       | initial | it freezes the thresholds before measuring and publishes whatever comes out: in its pilot paper, two of three principles were refuted by their own metrics | **52 criteria**; 10 phases D0–D9; 7 hardened controls |
 | **Computational Paper Harness**  | sealed  | if it is not in the ledger, it is not in the paper; after three papers of different classes the diff of the phases is still empty | **44 criteria**; 3 papers ready; 0 new contract fields |
 | **AI-APPs Factory**              | sealed  | two houses, one writer per house; no app moves forward without two written approvals and no sprint closes without the summary from the app's repo | 7 app repositories stamped; 24 sprints closed; 6 gates |
 
-The two research harnesses do not publish: production ends at "ready to submit", and submission
-to a journal is executed by the author with their token; and neither mentions the author's
+The research harness does not publish: production ends at "ready to submit", and submission
+to a journal is executed by the author with their token; and it does not mention the author's
 ecosystem in a manuscript, something a lint verifies twice. The Factory does not write production
 code, has not validated its launch and operation phases in a real run, and has no shared
 libraries: those are its three declared limits.
@@ -123,7 +117,7 @@ libraries: those are its three declared limits.
 
 <!-- seccion: como-nace-un-agente -->
 
-The twelve share an anatomy, and it is worth describing it just once. Each agent is a
+The eleven share an anatomy, and it is worth describing it just once. Each agent is a
 repository with a **constitution**: a `CLAUDE.md` file that Claude Code loads simply by opening
 the folder and that fixes the agent's laws, its commands and its sources. The ISO 42001 Expert,
 for example, has **8 laws and 9 commands**; Cold Attraction, **8 commands** in its cycle (brand,
@@ -134,7 +128,7 @@ the constitution is the startup.
 On top of that constitution goes the **harness**: the input and output contract, the allowed
 tools, the format of each deliverable and the **binary acceptance criteria** —pass or fail, with
 no intermediate judgment— that are counted one by one in the package's work items: 50 in the Graduate Assistant, 99 in Hiring Copilot, 20 in the Dashboard
-Builder, 33 in the Animation Workshop, 52 in the Design Science Harness and 44 in the
+Builder, 33 in the Animation Workshop and 44 in the
 Computational Paper Harness. A criterion that cannot fail is not a criterion, and that is why
 each control carries its **bait**: the case deliberately destroyed that proves the control fires.
 
@@ -239,12 +233,10 @@ because the first real run is its first work item. It does not publish or send, 
 video but does not animate it, and the ROI models hours freed up (its 63.2% reduction is still an
 assumption).
 
-**Design Science Harness** (initial, v1.0.0), **Computational Paper Harness** (sealed, v1.21) and
-**AI-APPs Factory** (sealed, v1.1.0) have their story in the investigations document and in the
-pipeline one: the first drives ten phases D0–D9 with **52 criteria** and publishes whatever comes
-out, refutations included; the second produced **3 papers** ready to publish with its **44
-criteria** and its ledger; the third stamped seven repositories and closed **24 sprints** with a
-retrospective, and it is the one that built this very page.
+**Computational Paper Harness** (sealed, v1.21) and **AI-APPs Factory** (sealed, v1.1.0) have their
+story in the investigations document and in the pipeline one: the first produced **3 papers** ready
+to publish with its **44 criteria** and its ledger; the second stamped seven repositories and closed
+**24 sprints** with a retrospective, and it is the one that built this very page.
 
 ## What "sealed" means and what "initial" means
 
@@ -257,13 +249,13 @@ commands; the Library, of ten of its twelve; the Graduate Assistant, of its 13 c
 exercised. Publishing that fact is part of the method: a sheet that said "tested" without a run
 would be the same figure without provenance that the agents forbid themselves.
 
-The return follows the same rule in all twelve sheets: **it is declared as an estimate with
+The return follows the same rule in all eleven sheets: **it is declared as an estimate with
 assumptions**, never as a promise. Cold Attraction models hours freed up; CINE
 and the Workshop declare their saving as a hypothesis to calibrate; the Tax Expert does not
 estimate the direct tax saving because it depends on figures that are not yet in the twin, "and
 putting a number on it today would be inventing it".
 
-## What the twelve share
+## What the eleven share
 
 <!-- seccion: lo-que-comparten -->
 
@@ -274,7 +266,7 @@ putting a number on it today would be inventing it".
 - **No claim comes out of the model's memory.** It cites the source with its location or declares
   the gap; no figure is invented: it is measured, calculated, declared or estimated, and it says
   so.
-- **Published limits and "never".** Each sheet declares 3 or 4 limits and up to 5 things the agent
+- **Published limits and "never".** Each sheet declares 4 limits and up to 5 things the agent
   never does, because an agent that seems to do everything is an agent without governance.
 - **Cost in tools: 0 pesos, except the Animation Workshop's rented GPU.** They run on Claude Code and open tools; the return is declared as an
   estimate, not as a promise.

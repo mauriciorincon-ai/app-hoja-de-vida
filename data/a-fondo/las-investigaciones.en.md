@@ -276,7 +276,7 @@ The seven come from different moments of my trajectory —from an ERP in 2016 to
 2024—, but they share the same root. Each begins with a real system whose representation was
 insufficient, a decision that could be improved or an organizational capability that did not yet
 have a sufficiently clear method to evolve. And all seven are produced with the same two
-harnesses, published among the 14 agents of the showcase.
+harnesses, one of which, the Computational Paper Harness, is published among the 11 agents of the showcase.
 
 ## Three lines on operations under variability
 
@@ -475,7 +475,7 @@ to learn to speak without naming it.
 
 <!-- seccion: los-harnesses -->
 
-The research is produced with two harnesses, published among the 14 agents of the showcase. Both
+The research is produced with two harnesses, one of which, the Computational Paper Harness, is published among the 11 agents of the showcase. Both
 declare the paper in a single configuration file —questions, falsifiable principles, metrics,
 corpus, disclosure boundary— and drive ten phases up to a manuscript ready to submit, stopping at
 gates where only an exact phrase of mine lets it through: "framing approved", "artifact
@@ -806,7 +806,7 @@ results feed applications, agents, models, patterns and architecture decisions.
 FORJA can become an applicable method for specifying activities before developing applications
 or agents, and it enters ARKHÉ as a demonstrative case: the specification method as
 architectural core. ARKHÉ organizes concepts and functions that already guide an artificial
-intelligence architecture: it is the architecture that produces the other six lines and the 37
+intelligence architecture: it is the architecture that produces the other six lines and the 34
 pieces of the showcase. The agency spectrum offers a criterion for selecting whether a decision
 needs a dashboard, an alert, a recommendation, an application or a system with the capacity to
 act.

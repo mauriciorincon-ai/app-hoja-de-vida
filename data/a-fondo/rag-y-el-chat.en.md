@@ -74,7 +74,7 @@ knowledge is the published content; the model acts as an interpretation layer co
 that content.
 
 This separation protects the integrity of the system. My profile can evolve through controlled
-changes to the files that represent it —the résumé data in YAML, the sheets of the 37 showcase
+changes to the files that represent it —the résumé data in YAML, the sheets of the 34 showcase
 pieces and the documents of this knowledge base— without depending on retraining a model or
 waiting for a provider to have absorbed recent information. When an experience, certification
 or project changes, the update happens at the source and propagates to the index during the
@@ -159,7 +159,7 @@ measurement beside it.
 <!-- seccion: fichas-en-el-indice -->
 
 Until September 2026 the index was assembled from the résumé data and from the documents of this
-base. The 37 showcase pieces —ten apps with brochure and complement, 14 agents, 7 research pieces
+base. The 34 showcase pieces —ten apps with brochure and complement, 11 agents, 7 research pieces
 and 6 dashboards— have sheets with a promise, figures with provenance, limits, "nevers" and
 blocks, and the chat could not see them: when someone asked about a specific piece, the answer
 came from the prose I wrote about the showcase, not from the sheet.

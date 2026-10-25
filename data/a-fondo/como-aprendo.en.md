@@ -113,7 +113,7 @@ establish which result will demonstrate that I really learned, the initiative is
 sufficiently defined.
 
 The fourth is opportunity cost. Every new capability competes with products, research and
-responsibilities that are already under way: 37 public pieces to maintain and an institutional AI
+responsibilities that are already under way: 34 public pieces to maintain and an institutional AI
 strategy to lead. That is why learning must respond to an explicit priority and not only to
 technological novelty. Choosing what not to study at a given moment is part of maintaining depth and
 coherence.
@@ -189,7 +189,7 @@ The last few times I learned something from scratch, and how long it took:
 | Microsoft Fabric                       | August 2023    | 5 months of study (Jul–Nov 2024)    | DP-600 in December 2024, Vesting platform in operation        |
 | Next.js and the application pipeline   | July 2026      | 21 sprints | this site, CV Viva, with its CI, its tests and its ADRs       |
 | AI-103 and AI-300                      | July 2026      | course complete and 10 modules      | two tracks in progress                                        |
-| Codex, Antigravity and Claude Code     | their release  | close to a month each               | the pipeline with which the 37 pieces are built               |
+| Codex, Antigravity and Claude Code     | their release  | close to a month each               | the pipeline with which the 34 pieces are built               |
 
 The last things I learned from scratch, with no certificate involved, were Codex, Antigravity and
 Claude Code: I took them up from their release and within close to a month each was in real use, not
@@ -231,12 +231,12 @@ The figures come from the repositories and do not replace the evaluation of qual
 suite can protect little if it verifies irrelevant aspects. That is why I relate every control to a
 concrete condition and try to demonstrate that it can go red against the failure it must detect.
 
-## The 37 pieces: 14 agents, 7 research pieces and 6 dashboards, four ways of learning
+## The 34 pieces: 11 agents, 7 research pieces and 6 dashboards, four ways of learning
 
 <!-- seccion: las-cuatro-familias -->
 
-To the ten sister applications are added 14 published agents, 7 research pieces and 6 dashboards
-built on public data. In total, the showcase brings together 37 pieces within those four families,
+To the ten sister applications are added 11 published agents, 7 research pieces and 6 dashboards
+built on public data. In total, the showcase brings together 34 pieces within those four families,
 and the figures of each one are reconciled against the visible sheets of the showcase.
 
 Each family demonstrates a different way of learning. The applications require transforming new

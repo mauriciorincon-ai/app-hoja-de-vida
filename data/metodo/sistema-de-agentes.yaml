@@ -210,8 +210,8 @@ bloques:
         nota:
           voz: hice
           texto:
-            es: "Así nacen los doce agentes que este sitio muestra y que corren sobre Claude Code: una constitución en un CLAUDE.md, el harness con sus criterios binarios —20 en el Constructor de Tableros Power BI, 44 en el Harness Paper Computacional— y una carnada por control."
-            en: "That is how the twelve agents in this site’s showcase that run on Claude Code are born: a constitution in a CLAUDE.md, the harness with its binary criteria —20 in the Power BI Dashboard Builder, 44 in the Computational Paper Harness— and a bait case for each control."
+            es: "Así nacen los once agentes que este sitio muestra y que corren sobre Claude Code: una constitución en un CLAUDE.md, el harness con sus criterios binarios —20 en el Constructor de Tableros Power BI, 44 en el Harness Paper Computacional— y una carnada por control."
+            en: "That is how the eleven agents in this site’s showcase that run on Claude Code are born: a constitution in a CLAUDE.md, the harness with its binary criteria —20 in the Power BI Dashboard Builder, 44 in the Computational Paper Harness— and a bait case for each control."
           corpus: [los-agentes-de-la-vitrina]
       - nombre: { es: "Evaluar antes de ponerlo en producción", en: "Evaluate before putting it into production" }
         entradas:
