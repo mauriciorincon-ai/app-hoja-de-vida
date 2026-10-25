@@ -1,0 +1,11 @@
+# El nombre con el que el sitio llama a una pieza de agentes, investigaciones o
+# tableros, cuando no es el que trae su ficha (extiende el ADR-028 de las apps, 2026-10-24).
+#
+# Las fichas de otras casas no se editan aquí: el nombre se aplica al LEER la ficha,
+# y de ahí lo heredan el escaparate, la página de la pieza, el índice del chat y las
+# citas. Si la casa de origen cambia el nombre en su ficha, la línea sobra.
+#
+# Forma: <frente>: { <slug de la pieza>: "<nombre>" }. Un slug sin ficha rompe la prueba.
+agentes:
+  # El dueño quitó la palabra «Harness» de los nombres de los agentes: todos lo son.
+  harness-paper-computacional: "Paper Computacional"

@@ -391,22 +391,24 @@ el mensaje te llega al correo.
   roadmap. Una app sin `brochure:` simplemente no tiene página (su URL da 404).
 - **Analítica:** evento `brochure_vista` (con la app y el idioma).
 
-### La vitrina: cuatro frentes · desde Sprint 005 · los cuatro abiertos desde Sprint 007
+### La vitrina: cuatro frentes · desde Sprint 005 · tres abiertos desde Sprint 007 e Investigaciones en pausa desde Sprint 022
 
 - **Qué hace:** `/es/vitrina` es el **portal** de lo que se construye aquí, repartido en
   **cuatro frentes**, cada uno con su caja —nombre, una frase, su estado y cuántas piezas tiene—
-  y **cada uno con su propio espacio**. Desde el Sprint 007 **los cuatro tienen piezas reales**:
+  y **cada uno con su propio espacio**. Desde el Sprint 007 **los cuatro tienen piezas reales**; desde el Sprint 022 **Investigaciones está en pausa** (ver más abajo):
   - **Apps** (`/es/vitrina/apps`): las apps del pipeline. **10 piezas.**
   - **Agentes especializados** (`/es/vitrina/agentes`): agentes sin interfaz que se manejan por
-    comandos. **14 piezas.**
-  - **Investigaciones** (`/es/vitrina/investigaciones`): líneas de investigación ya validadas.
-    **7 piezas.**
+    comandos. **11 piezas.**
+  - **Investigaciones** (`/es/vitrina/investigaciones`): líneas de investigación, **en pausa desde el
+    2026-10-24** porque se están rehaciendo (ver «Tres agentes fuera…» más abajo): la página dice «Esta
+    sección se está rehaciendo» y no enseña tarjetas. Sus fichas siguen en `content/`. **7 piezas.**
   - **Tableros de datos** (`/es/vitrina/tableros`): tableros analíticos, sin atarse a una
     herramienta. **6 piezas.**
 - **Un frente «en preparación» tiene página igual:** dice qué es y en qué punto está, **sin
   fecha prometida**, y cierra como los demás frentes (lista de espera solo si es `apps`). Marca el
-  inicio; no lo disfraza. Hoy **ningún frente
-  está así** — esa página espera al próximo frente que declares.
+  inicio —o una pausa—; no lo disfraza. Hoy lo está **Investigaciones** (pausa): su aviso propio sale
+  de `enPreparacion` en `data/vitrina.yaml` (y entonces la página no pinta el `detalle`, que dice lo que «se publica aquí»); sin él, la página dice el texto
+  genérico «este frente empieza».
 - **Cómo cambiar el nombre, la intro o el estado de un frente (cero código):** edita
   `data/vitrina.yaml` y haz push. Cada frente lleva `nombre`, `intro` (la frase de su caja) y
   `detalle` (el párrafo de su página), en ES y EN. El orden del archivo es el orden del portal.
@@ -1140,7 +1142,7 @@ dashboard, a fondo → in-depth…) vive en la bitácora `sprints/CONTENIDO-a-fo
 
 ### Las fichas de la vitrina también hablan por el chat · desde a fondo v2
 
-Desde el 2026-09-20 (ADR-023) el índice del chat incluye las **37 fichas de la vitrina**: por
+Desde el 2026-09-20 (ADR-023) el índice del chat incluye las **27 fichas de la vitrina** (las de un frente en pausa no entran: no tienen página que citar): por
 cada app, su presentación, funcionalidades, cifras y límites; por cada agente, investigación o
 tablero, su presentación, cifras, límites y bloques. Cada fragmento cita hacia la ficha
 (`/vitrina/apps/<slug>` o `/vitrina/<frente>/<slug>`). No hay nada que escribir: **una ficha que
@@ -1212,7 +1214,7 @@ chat hoy y cuáles traería con la base aprobada. Ese informe **se genera, no se
 
 - **Qué hace:** la guía de prueba abre ahora con el filtro **«Revisión completa»**: toda la guía en una sola pasada, en **sentadas de a lo
   sumo 45 minutos y ordenadas por lugar y aparato** (el escritorio, el chat, la vitrina, «Métodos», la accesibilidad, el teléfono real, los
-  Criterios, el repositorio y el panel de Vercel). Cada prueba vigente aparece **una sola vez** y lleva **un sí o un no y una nota corta**;
+  Criterios, el repositorio y el panel de Vercel). Cada prueba vigente aparece **una sola vez** y lleva **un sí o un no y una nota (hasta 2000 caracteres, con varias líneas)**;
   los flujos del ensayo (R1 a R18) abren cada sentada y llevan dentro las ⭐ que cubren. Cuántas pruebas hay, cuántos minutos suma cada
   sentada y cuántas horas la revisión entera lo calcula la página: ningún total está escrito, y una sentada que pase de 45 minutos se marca en rojo.
 - **Cómo se usa:** pega tu dominio en «URL de prueba» y ve sentada tras sentada, en tu computador personal y, el teléfono, con datos móviles.
@@ -1225,11 +1227,34 @@ chat hoy y cuáles traería con la base aprobada. Ese informe **se genera, no se
 - **El retiro del agente de estudio del AI-103:** el dueño desmontó ese agente de la Fábrica el 2026-10-23 (nunca operó). Su ficha salió de la
   vitrina: la de agentes muestra una tarjeta menos y su dirección vieja responde 404 en los dos idiomas. Los tres documentos del a fondo que
   lo presentaban dejaron de hacerlo sin afirmar nada nuevo, y las cuentas (agentes, piezas, «los de ARKHÉ») bajan solas desde el disco. La
-  certificación AI-103 sigue «en curso» y el chat ya no presenta ese agente. Un gate (`tests/unit/retiro-super-guia.test.ts`) barre el sitio
+  certificación AI-103 sigue «en curso» y el chat ya no presenta ese agente. Un gate (`tests/unit/retiro-piezas.test.ts`, que desde el Sprint 022 vigila todas las piezas retiradas) barre el sitio
   con el patrón de la orden de la Fábrica y falla si el nombre vuelve.
 - **Limitaciones conocidas:** la guía no sube tus respuestas a ningún lado (cambiar de navegador las pierde); el sí/no de un flujo R es el
   mismo en la revisión y en el filtro «Ensayo general H-2»; lo que dependa de ti en el corpus (por ejemplo, si quieres hablar de una guía de
   estudio propia, o las preguntas que siguen abiertas de los cierres S10 a S13) no se escribió: va como pregunta en la sentada de tus decisiones abiertas, y la lectura del corpus va en la del repositorio.
+
+### Tres agentes fuera, nombres sin «Harness» e investigaciones en pausa · desde Sprint 022
+
+- **Qué hace:** salieron de la vitrina de agentes los dos agentes de demostración de planlang (por decisión del dueño) y el Harness Design Science
+  (duplicado del Paper Computacional). Los agentes pasan de 14 a **11**; las
+  cuentas del corpus, de «Métodos», de la guía y de este manual bajan con el disco. El método de investigación que describen
+  `las-investigaciones` y el CV (Design Science) se conserva: cuenta cómo se hicieron las investigaciones, no es una ficha publicada.
+  Un gate (`tests/unit/retiro-piezas.test.ts`) falla si vuelve el nombre o la dirección de una pieza retirada.
+- **Nombres que da el sitio (cero código):** `data/nombres-piezas.yaml` cambia el nombre de una pieza de agentes, investigaciones o tableros
+  **al leer su ficha**, sin editar la ficha (que es de otra casa). Hoy: el agente de investigación que traía «Harness» en el nombre se llama **«Paper Computacional»**
+  en el escaparate, la página, el chat y las citas. Forma: `<frente>:` y debajo `<slug>: "<nombre>"`; un frente que no existe o un slug sin
+  ficha rompen la prueba. Si la casa de origen cambia el nombre en su ficha, la línea sobra.
+- **Investigaciones en pausa:** `data/vitrina.yaml` las tiene `estado: en-preparacion` con su aviso (`enPreparacion`, en ES y EN). Las 7 fichas se
+  quedan en `content/investigaciones/`, pero el sitio no las enseña, no las lista en el sitemap, el chat no las cita y cada una da 404. Cuatro
+  evidencias de «Métodos» que enlazaban a una investigación apuntan, mientras dure la pausa, al frente (la línea del YAML guarda el slug para
+  volver). **Para reabrirlas:** (1) `estado: abierta` en `data/vitrina.yaml` (el aviso `enPreparacion` puede quedarse; no se usa); (2) devolver los cuatro enlaces de
+  `data/metodo/sistema-de-agentes.yaml` y `decidir-con-modelos.yaml` a `/vitrina/investigaciones/<slug>` (la línea del YAML guarda el slug); (3) volver a
+  poner `/es/vitrina/investigaciones/forja` en `lighthouse-urls.json` si se quiere medir; (4) las cuentas de la guía y de este manual (27 → 34 piezas) y la
+  fila m4 y la k8 de la guía, que describen la pausa, se actualizan a mano. Ninguna prueba de código fija «investigaciones» en pausa: miran el YAML.
+- **Limitaciones conocidas:** el corpus del chat sigue diciendo «7 investigaciones» y «34 piezas» porque cuenta lo que hay en disco; no se
+  reescribió su prosa mientras dure la pausa (queda como pregunta al dueño). La simulación de planlang (`public/piezas/planlang`) todavía
+  rotula «Agente A» y «Agente B» en sus páginas de fichas: es de otra casa y se pidió allí. «Qué tiene» sigue llamándose así en las fichas
+  (la clave es compartida con el contrato de la ficha técnica); el cambio a «Qué aporta» se decide con el rediseño de las fichas.
 
 ### Animaciones y accesibilidad · desde Sprint 001
 
@@ -1298,3 +1323,4 @@ chat hoy y cuáles traería con la base aprobada. Ese informe **se genera, no se
 | Sprint 019 | **«Métodos», novena y última pieza: «Cómo se debe decidir con modelos» (T8), y la puerta en la HOME.** Diez bloques con 10 fuentes fechadas (seis páginas de Microsoft Learn sobre ciencia de datos en Fabric, MLflow, el modelo de madurez de MLOps, la vigilancia de modelos y la guía de estudio del AI-300, que está en curso, y cuatro trabajos de arXiv sobre modelos fundacionales de series de tiempo y modelos de lenguaje como asistentes de formulación; de noviembre de 2024 a junio de 2026) y un mapa de 14 nodos, del problema del proceso a la decisión vigilada, con la línea base, el orden temporal, la prueba sin fuga, el error por segmento, la ficha del modelo y la deriva, y la optimización formulada dos veces y la simulación al lado. La Evidencia sale de `analitica-predictiva` (TransMilenio y Banco Pichincha), `las-investigaciones`, `procesos-y-simulacion` y `cm-operaciones`; Probeta DS se enlaza a su ficha con el nivel «Prototipo», sin reescribirla. MLflow, los modelos fundacionales de series de tiempo y los asistentes de formulación no tienen un caso en ningún documento a fondo: entran solo como estado del campo. Sin deriva observada propia y sin una capa prescriptiva en un empleo: así lo dice la pieza. La lista `/metodos` y la nueva puerta de la HOME cuentan nueve piezas, medidas; «hasta ahora» y «las otras llegan una por sprint» salieron del manual y de la guía porque la serie quedó completa. El banco suma tres preguntas por idioma y exigen la pieza la de la formulación de un problema de optimización y la de Probeta DS (la decisión del dueño); los contadores del corpus pasan de 172 a 175 preguntas de afuera y de dieciocho a diecinueve sprints. Se pagó la deuda corta del Sprint 018: el título del bloque 5 de T9 dice lo que dice HEAT y la guía del skill de pruebas apunta a `vitest.config.mts`. Detalle en `sprints/SPRINT_019-cierre.md`. |
 | Sprint 020 | **Cierre del H-2.** El lote de medios y bajos de los cierres S9 a S19 queda con un estado final y su prueba (`sprints/SPRINT_020-lote.md`, con su gate); la prueba intermitente de la vitrina se arregla en su causa (fallaba 2 de 30 bajo carga y después 0 de 80) y la del idioma cambia su espera fija por una condición, sin que se haya podido medir su efecto (se vigila en la CI); la redirección de `/metodo` es exacta y el motor de voz ya no ignora un párrafo entero entre comillas; el sitemap fecha cada publicación con su revisión; las etiquetas del mapa tienen su tope; el banco de preguntas se midió fila por fila. El blueprint, `design-system.md` y `design-sync/` se ponen al día con «Métodos» (el bundle no se publica: eso lo dispara el dueño con `/design-sync`), `CLAUDE.md` corrige sus hechos de producto y la puerta de la HOME se prueba también en inglés, con capturas. La guía de prueba v20 trae el filtro «Ensayo general H-2». |
 | Sprint 021 | **La revisión completa.** La guía de prueba abre con el filtro «Revisión completa»: todo lo pendiente en sentadas de a lo sumo 45 minutos por lugar y aparato, cada prueba una vez, con un sí o un no, una nota y el botón «Copiar mis respuestas»; entran cinco pruebas, catorce se corrigen porque ya no describían el sitio y lo que la CI respalda queda a la vista con su razón. El agente de estudio del AI-103 sale de la vitrina, del a fondo, de las cuentas y del índice del chat por orden de la Fábrica (las cuentas bajan solas desde el disco), con un gate que barre el sitio. |
+| Sprint 022 | **Sentada 5 de la revisión: tres agentes fuera, nombres sin «Harness» e investigaciones en pausa.** Salen de la vitrina Agente A, Agente B y el Harness Design Science (14 → 11 agentes); el agente de investigación se llama «Paper Computacional» por un alias de nombre que no edita la ficha (`data/nombres-piezas.yaml`); el frente de Investigaciones queda en pausa con su aviso propio (`enPreparacion`), sin tarjetas, fuera del sitemap y del chat y con sus fichas en 404. Gates: `retiro-piezas`, `nombres-piezas`, la pausa del índice del chat y el e2e de la pausa. La nota de cada fila de la guía admite 2000 caracteres. 

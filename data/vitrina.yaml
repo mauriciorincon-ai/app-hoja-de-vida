@@ -50,7 +50,18 @@ categorias:
       en: "Each agent is a specialist with a narrow trade: it takes an order as a command, works through it step by step and delivers the result. There are no screens to walk through; what is shown here is what each one does, within which limits, and with what evidence."
 
   - id: investigaciones
-    estado: abierta
+    # EN PAUSA desde 2026-10-24 (decisión del dueño): las líneas se están rehaciendo
+    # por completo y la información nueva llega después. Sus fichas se quedan en
+    # content/investigaciones/; el sitio deja de enseñarlas, de enlazarlas y de
+    # citarlas hasta que el dueño las reabra. Reabrir = volver este estado a `abierta`.
+    estado: en-preparacion
+    enPreparacion:
+      titulo:
+        es: "Esta sección se está rehaciendo"
+        en: "This section is being rebuilt"
+      linea:
+        es: "Las líneas de investigación se están reelaborando por completo y se publican de nuevo aquí cuando estén listas. Sin fecha prometida."
+        en: "The research lines are being reworked from the ground up and will be published here again when they are ready. No date promised."
     nombre:
       es: "Investigaciones"
       en: "Research"

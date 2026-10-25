@@ -19,7 +19,7 @@ import path from "node:path";
 import process from "node:process";
 import { parse } from "yaml";
 import { anclasDeBloques } from "./metodo-al-indice.mjs";
-import { leerNombresOficiales } from "./nombres-oficiales.mjs";
+import { leerNombresDePiezas, leerNombresOficiales } from "./nombres-oficiales.mjs";
 
 const ROOT = process.cwd();
 
@@ -194,6 +194,8 @@ export function nombresDeDestinos(locale) {
     if (app.brochure) nombres.set(`/apps/${app.id}`, app.nombre[locale]);
   }
 
+  // Nombre de la pieza (ADR-028, adenda del S22): el mismo que da la página.
+  const deLasPiezas = leerNombresDePiezas();
   for (const frente of leerYaml("data/vitrina.yaml").categorias ?? []) {
     nombres.set(`/vitrina/${frente.id}`, frente.nombre[locale]);
     if (frente.estado !== "abierta") continue;
@@ -214,7 +216,10 @@ export function nombresDeDestinos(locale) {
     for (const f of existsSync(dir) ? readdirSync(dir) : []) {
       if (!f.endsWith(".ficha-tecnica.json")) continue;
       const { pieza } = JSON.parse(readFileSync(path.join(dir, f), "utf8"));
-      nombres.set(`/vitrina/${frente.id}/${pieza.slug}`, pieza.nombre);
+      nombres.set(
+        `/vitrina/${frente.id}/${pieza.slug}`,
+        deLasPiezas.get(`${frente.id}/${pieza.slug}`) ?? pieza.nombre,
+      );
     }
   }
   return nombres;

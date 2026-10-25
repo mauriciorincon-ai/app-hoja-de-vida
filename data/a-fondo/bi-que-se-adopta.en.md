@@ -332,8 +332,8 @@ kind of evidence supports each value and which questions are reasonable before u
 
 <!-- seccion: procedencia-en-la-vitrina -->
 
-I carried this rule into my own portfolio. The technical sheets of the 37 pieces of the showcase
-—10 applications, 14 agents, 7 research lines and 6 dashboards— declare the provenance of each of
+I carried this rule into my own portfolio. The technical sheets of the 34 pieces of the showcase
+—10 applications, 11 agents, 7 research lines and 6 dashboards— declare the provenance of each of
 their figures with those four labels, so that claims about tests, coverage, users, performance
 or results can be related to the corresponding evidence. And I apply it to this very CV: the
 "close to 60%" of Fundación CTIC carries "close to" because it is estimated; the products and the leaders are counted, but they go rounded —"more than 25", "some 20"— because they are the institution's internal figures.
@@ -449,7 +449,7 @@ A repetitive decision may require an application that guides the action. A need 
 may need a predictive model: at Banco Pichincha, churn, delinquency and risk were not handled
 with one more dashboard but with scikit-learn models that reached production with more than 90%
 accuracy; at TransMilenio, demand by time band with a model that stayed in use after I left. A contextual
-query task can benefit from an agent with access to authorized sources, like the 14 agents in my
+query task can benefit from an agent with access to authorized sources, like the 11 agents in my
 showcase.
 
 Selecting the right instrument requires understanding how long the information keeps its value,
@@ -471,7 +471,7 @@ When manual and repetitive construction activities begin to limit speed, consist
 capacity to scale, the very production of analytical artifacts can become an object of
 automation.
 
-I built the **Power BI Dashboard Builder**, one of the 14 agents in my showcase, and it is fully
+I built the **Power BI Dashboard Builder**, one of the 11 agents in my showcase, and it is fully
 tested: from a requirements text and a project with the tables, it produces the complete project
 in .pbip format —the semantic model with its relationships and columns, the transformations in
 Power Query M, the DAX measures and the visuals written in the report's native JSON—, and it can

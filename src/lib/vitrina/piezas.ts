@@ -2,11 +2,18 @@ import "server-only";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { cache } from "react";
+import { parse } from "yaml";
+import { conNombreDePieza } from "../../../scripts/nombre-oficial.mjs";
 import {
   fichaTecnicaSchema,
   frentes,
   type FichaTecnica,
 } from "./ficha-tecnica/schema";
+import {
+  nombreDePieza,
+  parseNombresPiezas,
+  type NombresPiezas,
+} from "./nombres-piezas";
 import { SCHEMA_MAYOR_SOPORTADO, versionCompatible } from "./schemas";
 
 /**
@@ -129,12 +136,32 @@ export function leerFichaDeTexto(
   return ficha;
 }
 
-function leerFicha(frente: Frente, archivo: string): FichaTecnica {
-  return leerFichaDeTexto(
+/**
+ * El nombre que el sitio da a cada pieza (`data/nombres-piezas.yaml`, extiende el
+ * ADR-028). Se lee una vez por render; el memo de producción es el de las piezas.
+ */
+export const getNombresPiezas = cache((): NombresPiezas => {
+  const ruta = "data/nombres-piezas.yaml";
+  return parseNombresPiezas(
+    parse(readFileSync(path.join(process.cwd(), ruta), "utf8")),
+    ruta,
+  );
+});
+
+function leerFicha(
+  frente: Frente,
+  archivo: string,
+  nombres: ReturnType<typeof getNombresPiezas>,
+): FichaTecnica {
+  const ficha = leerFichaDeTexto(
     readFileSync(path.join(carpeta(frente), archivo), "utf8"),
     frente,
     archivo,
   );
+  // NOMBRE DE LA PIEZA: se aplica aquí, UNA vez, como el alias de las apps. La ficha
+  // de `content/` no cambia; el escaparate, la página y el chat dicen lo mismo.
+  const oficial = nombreDePieza(nombres, frente, ficha.pieza.slug);
+  return oficial ? conNombreDePieza(ficha, oficial) : ficha;
 }
 
 /**
@@ -169,10 +196,11 @@ export const getPiezas = cache((frente: Frente): FichaTecnica[] => {
   const dir = carpeta(frente);
   if (!existsSync(dir)) return [];
 
+  const nombres = getNombresPiezas();
   const piezas = readdirSync(dir)
     .filter((f) => f.endsWith(SUFIJO))
     .sort()
-    .map((archivo) => leerFicha(frente, archivo));
+    .map((archivo) => leerFicha(frente, archivo, nombres));
 
   // NO hace falta comprobar aquí que los slugs no se repitan DENTRO del frente:
   // la regla de arriba (archivo = «<slug>.ficha-tecnica.json») ya lo garantiza,

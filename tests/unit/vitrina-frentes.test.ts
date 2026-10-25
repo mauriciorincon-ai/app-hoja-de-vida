@@ -119,6 +119,46 @@ describe("data/vitrina.yaml — los frentes", () => {
     });
     expect(vitrinaSchema.safeParse(inventado).success).toBe(false);
   });
+
+  it("un frente en pausa dice su propio aviso en los dos idiomas, y un aviso a medias rompe", () => {
+    const aviso = {
+      titulo: { es: "Se está rehaciendo", en: "Being rebuilt" },
+      linea: { es: "Vuelve pronto.", en: "Back soon." },
+    };
+    const conAviso = conCambio((cs) => {
+      Object.assign(cs[2], { estado: "en-preparacion", enPreparacion: aviso });
+    });
+    const r = parseVitrina(conAviso, "x.yaml", ["apps", "agentes", "tableros"]);
+    expect(r.categorias[2].enPreparacion?.titulo.en).toBe("Being rebuilt");
+    // Sin el inglés no hay aviso: ningún texto de contenido vive en un solo idioma.
+    const sinIngles = conCambio((cs) => {
+      Object.assign(cs[2], {
+        estado: "en-preparacion",
+        enPreparacion: { ...aviso, linea: { es: "Vuelve pronto." } },
+      });
+    });
+    expect(vitrinaSchema.safeParse(sinIngles).success).toBe(false);
+    // Un campo inventado dentro del aviso tampoco pasa (esquema estricto).
+    const inventadoDentro = conCambio((cs) => {
+      Object.assign(cs[2], {
+        enPreparacion: { ...aviso, fecha: "2026-12-01" },
+      });
+    });
+    expect(vitrinaSchema.safeParse(inventadoDentro).success).toBe(false);
+  });
+
+  it("un frente en pausa (en preparación con fichas en disco) dice su aviso propio en los dos idiomas", () => {
+    // Sin sujeto el día que se reabre el frente: lo que se vigila es la regla, no «investigaciones».
+    const enPausa = getFrentes().filter(
+      (f) => f.estado === "en-preparacion" && f.piezas > 0,
+    );
+    for (const f of enPausa) {
+      expect(f.enPreparacion?.titulo.es, `${f.id}: título ES`).toBeTruthy();
+      expect(f.enPreparacion?.titulo.en, `${f.id}: título EN`).toBeTruthy();
+      expect(f.enPreparacion?.linea.es, `${f.id}: línea ES`).toBeTruthy();
+      expect(f.enPreparacion?.linea.en, `${f.id}: línea EN`).toBeTruthy();
+    }
+  });
 });
 
 describe("lib/vitrina/categorias — la cuenta de piezas", () => {

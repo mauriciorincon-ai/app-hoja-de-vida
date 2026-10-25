@@ -400,6 +400,14 @@ const categoriaVitrina = z
     // no se entregan, así que nadie tiene por qué pedir acceso. Con `true`, el
     // cierre de la página del frente enlaza a la lista de espera de las apps.
     listaDeEspera: z.boolean().default(false),
+    // Lo que dice la página de un frente `en-preparacion` en lugar del texto genérico
+    // de «este frente empieza» (2026-10-24): una pausa —las fichas se están rehaciendo
+    // y vuelven— no es un frente que empieza. Opcional y por frente, en el YAML: el
+    // código no sabe de investigaciones.
+    enPreparacion: z
+      .object({ titulo: localizedText, linea: localizedText })
+      .strict()
+      .optional(),
   })
   .strict();
 

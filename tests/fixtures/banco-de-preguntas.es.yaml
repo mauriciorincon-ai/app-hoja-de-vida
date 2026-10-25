@@ -485,7 +485,7 @@ preguntas:
   - pregunta: "¿Qué agentes tiene publicados en su portafolio?"
     espera: [agentes-en-produccion, apps-pipeline, los-agentes-de-la-vitrina]
     familia: vitrina
-  - pregunta: "¿Para qué sirven los doce agentes de la vitrina?"
+  - pregunta: "¿Para qué sirven los once agentes de la vitrina?"
     espera: [los-agentes-de-la-vitrina]
     familia: vitrina
   - pregunta: "¿Qué es un harness y cómo lo usa en sus agentes?"

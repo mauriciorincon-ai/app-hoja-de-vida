@@ -439,8 +439,8 @@ bloques:
         porQue:
           voz: hice
           texto:
-            es: "En los 14 agentes de la vitrina los límites de cada uno y lo que «nunca» hace están escritos en su ficha técnica, y el Constructor de Tableros Power BI tiene 5 gates de aprobación humana: ninguna corrida cierra sin que una persona apruebe el resultado."
-            en: "In the 14 showcase agents each one's limits and what it «never» does are written in its technical sheet, and the Power BI Dashboard Builder has 5 human approval gates: no run closes without a person approving the result."
+            es: "En los 11 agentes de la vitrina los límites de cada uno y lo que «nunca» hace están escritos en su ficha técnica, y el Constructor de Tableros Power BI tiene 5 gates de aprobación humana: ninguna corrida cierra sin que una persona apruebe el resultado."
+            en: "In the 11 showcase agents each one's limits and what it «never» does are written in its technical sheet, and the Power BI Dashboard Builder has 5 human approval gates: no run closes without a person approving the result."
           corpus: [como-trabajo]
         nota:
           voz: campo

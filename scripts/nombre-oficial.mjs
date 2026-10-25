@@ -53,16 +53,39 @@ export function cambiarNombre(texto, viejo, oficial) {
 export function conNombreOficial(exp, oficial) {
   const viejo = exp.app.nombre;
   if (viejo === oficial) return exp;
-  /** @param {unknown} v @returns {unknown} */
-  const cambiar = (v) => {
-    if (typeof v === "string") return cambiarNombre(v, viejo, oficial);
-    if (Array.isArray(v)) return v.map(cambiar);
-    if (v && typeof v === "object") {
-      return Object.fromEntries(
-        Object.entries(v).map(([k, x]) => [k, cambiar(x)]),
-      );
-    }
-    return v;
-  };
-  return /** @type {T} */ (cambiar(exp));
+  return /** @type {T} */ (cambiarEnTodo(exp, viejo, oficial));
+}
+
+/**
+ * Cambia `viejo` por `oficial` en cada texto de un árbol de datos, sin mutarlo.
+ * @param {unknown} v
+ * @param {string} viejo
+ * @param {string} oficial
+ * @returns {unknown}
+ */
+function cambiarEnTodo(v, viejo, oficial) {
+  if (typeof v === "string") return cambiarNombre(v, viejo, oficial);
+  if (Array.isArray(v)) return v.map((x) => cambiarEnTodo(x, viejo, oficial));
+  if (v && typeof v === "object") {
+    return Object.fromEntries(
+      Object.entries(v).map(([k, x]) => [k, cambiarEnTodo(x, viejo, oficial)]),
+    );
+  }
+  return v;
+}
+
+/**
+ * Lo mismo para la ficha técnica de un agente, una investigación o un tablero
+ * (2026-10-24, extiende el ADR-028): `pieza.nombre` pasa a ser el oficial y, en
+ * cada texto de la ficha, el nombre con el que la otra casa la llamó se cambia por
+ * el oficial. La ficha de `content/` no se edita: es una lectura con alias.
+ * @template {{ pieza: { nombre: string } }} T
+ * @param {T} ficha
+ * @param {string} oficial
+ * @returns {T}
+ */
+export function conNombreDePieza(ficha, oficial) {
+  const viejo = ficha.pieza.nombre;
+  if (viejo === oficial) return ficha;
+  return /** @type {T} */ (cambiarEnTodo(ficha, viejo, oficial));
 }

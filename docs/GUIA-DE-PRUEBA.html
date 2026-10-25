@@ -365,6 +365,9 @@
       .p-nota {
         font: inherit;
         font-size: 0.8rem;
+        line-height: 1.4;
+        resize: vertical;
+        max-height: 60vh;
         width: 100%;
         box-sizing: border-box;
         padding: 6px 8px;
@@ -490,7 +493,7 @@
         <p class="suave">
           Todas las pruebas vigentes de la app: las nuevas y las heredadas de
           todos los sprints y revisiones, que se corren como regresión.
-          Filtra por origen para recorrer todo o solo lo que cambió. Abre con el filtro «Revisión completa»: todo lo pendiente, ordenado por lugar y aparato, cada prueba una vez. Cada prueba lleva un sí o un no y una nota corta, y todo se guarda solo en este navegador.
+          Filtra por origen para recorrer todo o solo lo que cambió. Abre con el filtro «Revisión completa»: todo lo pendiente, ordenado por lugar y aparato, cada prueba una vez. Cada prueba lleva un sí o un no y una nota, y todo se guarda solo en este navegador.
         </p>
         <details class="chica">
           <summary>Gate mínimo ⭐: qué es y cómo creció</summary>
@@ -605,7 +608,7 @@
           filtro, no una prueba</strong>: «Ensayo general H-2» (bloque R). El
           Gate mínimo ⭐ no cambia de contenido, pero deja de llevar un tiempo
           escrito: la cuenta y los minutos los suma la página. El prefijo de las
-          casillas cambia a s20. <strong>v21 suma seis pruebas y un filtro</strong>: «Revisión completa», el primero de la barra y el activo al abrir (sentadas de a lo sumo 45 min por lugar y aparato, cada prueba una vez, sí/no con nota y «Copiar mis respuestas»); entran la m15, la f12, la q25, la q26 (opcional), la o15 y la o16. El prefijo de las respuestas cambia a s21.
+          casillas cambia a s20. <strong>v21 suma seis pruebas y un filtro</strong>: «Revisión completa», el primero de la barra y el activo al abrir (sentadas de a lo sumo 45 min por lugar y aparato, cada prueba una vez, sí/no con nota y «Copiar mis respuestas»); entran la m15, la f12, la q25, la q26 (opcional), la o15 y la o16. El prefijo de las respuestas cambia a s21. <strong>Ajuste del mismo día:</strong> la nota de cada fila admite hasta 2000 caracteres y varias líneas (antes, una línea de 300); el prefijo sigue siendo s21, así que lo ya guardado se conserva. <strong>v22 cambia lo que ve el visitante</strong>: salen del sitio los dos agentes de demostración de planlang y el agente duplicado de Design Science (los agentes pasan de 14 a 11), el agente de investigación se llama «Paper Computacional» y el frente de Investigaciones queda en pausa. Cambian de texto la k1b, la n4b, la m1b, la m4, la m6, la k9, la m10, la m11 y la R9; la k8 vuelve a la revisión (ya tiene sujeto: Investigaciones en pausa) y entra la o17, con las cuatro preguntas que dejó el retiro; el prefijo de las respuestas sigue siendo s21 y las filas que cambiaron llevan «Mejorado · S22».
         </p>
         </details>
         <div class="url-caja">
@@ -643,7 +646,7 @@
 
 
       <!-- ═══════ S. Revisión completa (v21) ═══════ -->
-      <section class="bloque" id="revision" data-version="v21">
+      <section class="bloque" id="revision" data-version="v22">
         <div class="bloque-cabeza">
           <span class="letra">S</span>
           <h2>Revisión completa</h2>
@@ -655,7 +658,7 @@
         </p>
         <p class="chica">
           Toda la guía en una sola pasada, ordenada por <strong>lugar y aparato</strong>: cada prueba vigente aparece
-          <strong>una vez</strong>, con un <strong>sí o un no</strong> y una nota corta si la quieres. Los flujos R
+          <strong>una vez</strong>, con un <strong>sí o un no</strong> y una nota (hasta 2000 caracteres, con varias líneas) si la quieres. Los flujos R
           (el ensayo general; sus tandas son las del filtro «Ensayo general H-2») abren las sentadas que los traen y llevan dentro las ⭐ que cubren: esas no se repiten. Lo que la CI
           respalda y no se ve en producción está al final, con su razón. Partes la revisión en los días que quieras: lo
           que respondes queda en este navegador. Al parar o al terminar, <strong>«Copiar mis respuestas»</strong> arma
@@ -891,7 +894,7 @@
               <legend>¿Salió como esperabas? (R1)</legend>
               <label><input type="radio" autocomplete="off" name="r1" id="r1-si" value="si" /> Sí</label>
               <label><input type="radio" autocomplete="off" name="r1" id="r1-no" value="no" /> No</label>
-            </fieldset><input type="text" class="p-nota" data-nota-de="r1" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de R1" autocomplete="off" /></div>
+            </fieldset><textarea class="p-nota" data-nota-de="r1" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de R1" autocomplete="off"></textarea></div>
           </li>
           <li class="ens-fila" data-origen="nuevo" data-ensayo="4" data-sentada="1" data-rev="1" data-cubre="b2">
             <div class="ens-cuerpo">
@@ -907,7 +910,7 @@
               <legend>¿Salió como esperabas? (R2)</legend>
               <label><input type="radio" autocomplete="off" name="r2" id="r2-si" value="si" /> Sí</label>
               <label><input type="radio" autocomplete="off" name="r2" id="r2-no" value="no" /> No</label>
-            </fieldset><input type="text" class="p-nota" data-nota-de="r2" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de R2" autocomplete="off" /></div>
+            </fieldset><textarea class="p-nota" data-nota-de="r2" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de R2" autocomplete="off"></textarea></div>
           </li>
           <li class="ens-fila" data-origen="nuevo" data-ensayo="6" data-sentada="1" data-rev="2" data-cubre="c3 c4">
             <div class="ens-cuerpo">
@@ -923,7 +926,7 @@
               <legend>¿Salió como esperabas? (R3)</legend>
               <label><input type="radio" autocomplete="off" name="r3" id="r3-si" value="si" /> Sí</label>
               <label><input type="radio" autocomplete="off" name="r3" id="r3-no" value="no" /> No</label>
-            </fieldset><input type="text" class="p-nota" data-nota-de="r3" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de R3" autocomplete="off" /></div>
+            </fieldset><textarea class="p-nota" data-nota-de="r3" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de R3" autocomplete="off"></textarea></div>
           </li>
           <li class="ens-fila" data-origen="nuevo" data-ensayo="6" data-sentada="1" data-rev="2" data-cubre="d2 d3">
             <div class="ens-cuerpo">
@@ -939,7 +942,7 @@
               <legend>¿Salió como esperabas? (R4)</legend>
               <label><input type="radio" autocomplete="off" name="r4" id="r4-si" value="si" /> Sí</label>
               <label><input type="radio" autocomplete="off" name="r4" id="r4-no" value="no" /> No</label>
-            </fieldset><input type="text" class="p-nota" data-nota-de="r4" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de R4" autocomplete="off" /></div>
+            </fieldset><textarea class="p-nota" data-nota-de="r4" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de R4" autocomplete="off"></textarea></div>
           </li>
           <li class="ens-fila" data-origen="nuevo" data-ensayo="4" data-sentada="1" data-rev="2" data-cubre="e3">
             <div class="ens-cuerpo">
@@ -955,7 +958,7 @@
               <legend>¿Salió como esperabas? (R5)</legend>
               <label><input type="radio" autocomplete="off" name="r5" id="r5-si" value="si" /> Sí</label>
               <label><input type="radio" autocomplete="off" name="r5" id="r5-no" value="no" /> No</label>
-            </fieldset><input type="text" class="p-nota" data-nota-de="r5" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de R5" autocomplete="off" /></div>
+            </fieldset><textarea class="p-nota" data-nota-de="r5" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de R5" autocomplete="off"></textarea></div>
           </li>
           <li class="ens-fila" data-origen="nuevo" data-ensayo="12" data-sentada="1" data-rev="3" data-cubre="f5 f8 f9 o9 o10">
             <div class="ens-cuerpo">
@@ -971,7 +974,7 @@
               <legend>¿Salió como esperabas? (R6)</legend>
               <label><input type="radio" autocomplete="off" name="r6" id="r6-si" value="si" /> Sí</label>
               <label><input type="radio" autocomplete="off" name="r6" id="r6-no" value="no" /> No</label>
-            </fieldset><input type="text" class="p-nota" data-nota-de="r6" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de R6" autocomplete="off" /></div>
+            </fieldset><textarea class="p-nota" data-nota-de="r6" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de R6" autocomplete="off"></textarea></div>
           </li>
           <li class="ens-fila" data-origen="nuevo" data-ensayo="6" data-sentada="1" data-rev="3" data-cubre="e5 g6">
             <div class="ens-cuerpo">
@@ -987,7 +990,7 @@
               <legend>¿Salió como esperabas? (R7)</legend>
               <label><input type="radio" autocomplete="off" name="r7" id="r7-si" value="si" /> Sí</label>
               <label><input type="radio" autocomplete="off" name="r7" id="r7-no" value="no" /> No</label>
-            </fieldset><input type="text" class="p-nota" data-nota-de="r7" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de R7" autocomplete="off" /></div>
+            </fieldset><textarea class="p-nota" data-nota-de="r7" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de R7" autocomplete="off"></textarea></div>
           </li>
         </ul>
 
@@ -1007,7 +1010,7 @@
               <legend>¿Salió como esperabas? (R8)</legend>
               <label><input type="radio" autocomplete="off" name="r8" id="r8-si" value="si" /> Sí</label>
               <label><input type="radio" autocomplete="off" name="r8" id="r8-no" value="no" /> No</label>
-            </fieldset><input type="text" class="p-nota" data-nota-de="r8" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de R8" autocomplete="off" /></div>
+            </fieldset><textarea class="p-nota" data-nota-de="r8" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de R8" autocomplete="off"></textarea></div>
           </li>
           <li class="ens-fila" data-origen="nuevo" data-ensayo="8" data-sentada="2" data-rev="5" data-cubre="k9 m10 m11 m12">
             <div class="ens-cuerpo">
@@ -1016,14 +1019,14 @@
                 <span class="ens-min">8 min</span>
                 <span class="origen origen-nuevo">Nuevo · S20</span>
               </p>
-              <p>En el portal de la Vitrina lee los cuatro frentes y abre una pieza de cada uno (un agente, una investigación, un tablero). ¿Dicen la verdad sobre tu trabajo —promesa, cifras, límites—, ninguno promete fecha y los escaparates se ven de la misma casa? En un tablero mira las capturas: ¿se leen nítidas, sin cortes?</p>
+              <p>En el portal de la Vitrina lee los frentes y abre una pieza de cada frente abierto (un agente y un tablero); Investigaciones está en pausa: lee su aviso. ¿Dicen la verdad sobre tu trabajo —promesa, cifras, límites—, ninguno promete fecha y los escaparates se ven de la misma casa? En un tablero mira las capturas: ¿se leen nítidas, sin cortes?</p>
               <p class="chica suave">Cubre: <code>k9</code> · <code>m10</code> · <code>m11</code> · <code>m12</code>.</p>
             </div>
             <div class="p-resp"><fieldset class="ens-resp">
               <legend>¿Salió como esperabas? (R9)</legend>
               <label><input type="radio" autocomplete="off" name="r9" id="r9-si" value="si" /> Sí</label>
               <label><input type="radio" autocomplete="off" name="r9" id="r9-no" value="no" /> No</label>
-            </fieldset><input type="text" class="p-nota" data-nota-de="r9" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de R9" autocomplete="off" /></div>
+            </fieldset><textarea class="p-nota" data-nota-de="r9" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de R9" autocomplete="off"></textarea></div>
           </li>
           <li class="ens-fila" data-origen="nuevo" data-ensayo="8" data-sentada="2" data-rev="6" data-cubre="q2 q7 q24">
             <div class="ens-cuerpo">
@@ -1039,7 +1042,7 @@
               <legend>¿Salió como esperabas? (R10)</legend>
               <label><input type="radio" autocomplete="off" name="r10" id="r10-si" value="si" /> Sí</label>
               <label><input type="radio" autocomplete="off" name="r10" id="r10-no" value="no" /> No</label>
-            </fieldset><input type="text" class="p-nota" data-nota-de="r10" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de R10" autocomplete="off" /></div>
+            </fieldset><textarea class="p-nota" data-nota-de="r10" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de R10" autocomplete="off"></textarea></div>
           </li>
           <li class="ens-fila" data-origen="nuevo" data-ensayo="4" data-sentada="2" data-rev="6" data-cubre="q4">
             <div class="ens-cuerpo">
@@ -1055,7 +1058,7 @@
               <legend>¿Salió como esperabas? (R11)</legend>
               <label><input type="radio" autocomplete="off" name="r11" id="r11-si" value="si" /> Sí</label>
               <label><input type="radio" autocomplete="off" name="r11" id="r11-no" value="no" /> No</label>
-            </fieldset><input type="text" class="p-nota" data-nota-de="r11" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de R11" autocomplete="off" /></div>
+            </fieldset><textarea class="p-nota" data-nota-de="r11" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de R11" autocomplete="off"></textarea></div>
           </li>
           <li class="ens-fila" data-origen="nuevo" data-ensayo="12" data-sentada="2" data-rev="8" data-cubre="i2 j3 l7 m13 m14 k16b q3">
             <div class="ens-cuerpo">
@@ -1071,7 +1074,7 @@
               <legend>¿Salió como esperabas? (R12)</legend>
               <label><input type="radio" autocomplete="off" name="r12" id="r12-si" value="si" /> Sí</label>
               <label><input type="radio" autocomplete="off" name="r12" id="r12-no" value="no" /> No</label>
-            </fieldset><input type="text" class="p-nota" data-nota-de="r12" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de R12" autocomplete="off" /></div>
+            </fieldset><textarea class="p-nota" data-nota-de="r12" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de R12" autocomplete="off"></textarea></div>
           </li>
           <li class="ens-fila" data-origen="nuevo" data-ensayo="3" data-sentada="2" data-rev="1" data-cubre="a7 o11">
             <div class="ens-cuerpo">
@@ -1087,7 +1090,7 @@
               <legend>¿Salió como esperabas? (R13)</legend>
               <label><input type="radio" autocomplete="off" name="r13" id="r13-si" value="si" /> Sí</label>
               <label><input type="radio" autocomplete="off" name="r13" id="r13-no" value="no" /> No</label>
-            </fieldset><input type="text" class="p-nota" data-nota-de="r13" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de R13" autocomplete="off" /></div>
+            </fieldset><textarea class="p-nota" data-nota-de="r13" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de R13" autocomplete="off"></textarea></div>
           </li>
         </ul>
 
@@ -1107,7 +1110,7 @@
               <legend>¿Salió como esperabas? (R14)</legend>
               <label><input type="radio" autocomplete="off" name="r14" id="r14-si" value="si" /> Sí</label>
               <label><input type="radio" autocomplete="off" name="r14" id="r14-no" value="no" /> No</label>
-            </fieldset><input type="text" class="p-nota" data-nota-de="r14" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de R14" autocomplete="off" /></div>
+            </fieldset><textarea class="p-nota" data-nota-de="r14" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de R14" autocomplete="off"></textarea></div>
           </li>
           <li class="ens-fila" data-origen="nuevo" data-ensayo="7" data-sentada="3" data-rev="9" data-cubre="q18">
             <div class="ens-cuerpo">
@@ -1123,7 +1126,7 @@
               <legend>¿Salió como esperabas? (R15)</legend>
               <label><input type="radio" autocomplete="off" name="r15" id="r15-si" value="si" /> Sí</label>
               <label><input type="radio" autocomplete="off" name="r15" id="r15-no" value="no" /> No</label>
-            </fieldset><input type="text" class="p-nota" data-nota-de="r15" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de R15" autocomplete="off" /></div>
+            </fieldset><textarea class="p-nota" data-nota-de="r15" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de R15" autocomplete="off"></textarea></div>
           </li>
           <li class="ens-fila" data-origen="nuevo" data-ensayo="7" data-sentada="3" data-rev="9" data-cubre="q14">
             <div class="ens-cuerpo">
@@ -1139,7 +1142,7 @@
               <legend>¿Salió como esperabas? (R16)</legend>
               <label><input type="radio" autocomplete="off" name="r16" id="r16-si" value="si" /> Sí</label>
               <label><input type="radio" autocomplete="off" name="r16" id="r16-no" value="no" /> No</label>
-            </fieldset><input type="text" class="p-nota" data-nota-de="r16" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de R16" autocomplete="off" /></div>
+            </fieldset><textarea class="p-nota" data-nota-de="r16" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de R16" autocomplete="off"></textarea></div>
           </li>
           <li class="ens-fila" data-origen="nuevo" data-ensayo="7" data-sentada="3" data-rev="9" data-cubre="q22">
             <div class="ens-cuerpo">
@@ -1155,7 +1158,7 @@
               <legend>¿Salió como esperabas? (R17)</legend>
               <label><input type="radio" autocomplete="off" name="r17" id="r17-si" value="si" /> Sí</label>
               <label><input type="radio" autocomplete="off" name="r17" id="r17-no" value="no" /> No</label>
-            </fieldset><input type="text" class="p-nota" data-nota-de="r17" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de R17" autocomplete="off" /></div>
+            </fieldset><textarea class="p-nota" data-nota-de="r17" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de R17" autocomplete="off"></textarea></div>
           </li>
           <li class="ens-fila" data-origen="nuevo" data-ensayo="7" data-sentada="3" data-rev="9" data-cubre="q20">
             <div class="ens-cuerpo">
@@ -1171,7 +1174,7 @@
               <legend>¿Salió como esperabas? (R18)</legend>
               <label><input type="radio" autocomplete="off" name="r18" id="r18-si" value="si" /> Sí</label>
               <label><input type="radio" autocomplete="off" name="r18" id="r18-no" value="no" /> No</label>
-            </fieldset><input type="text" class="p-nota" data-nota-de="r18" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de R18" autocomplete="off" /></div>
+            </fieldset><textarea class="p-nota" data-nota-de="r18" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de R18" autocomplete="off"></textarea></div>
           </li>
         </ul>
 
@@ -1219,7 +1222,7 @@
                 <label><input type="radio" autocomplete="off" name="a1" id="a1-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="a1" id="a1-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="a1" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de a1" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="a1" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de a1" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="a2" class="ens-fila" data-origen="mejorado" data-rev="1" data-rev-min="3">
@@ -1247,7 +1250,7 @@
                 <label><input type="radio" autocomplete="off" name="a2" id="a2-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="a2" id="a2-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="a2" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de a2" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="a2" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de a2" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="a3b" class="ens-fila" data-origen="mejorado" data-rev="1" data-rev-min="1">
@@ -1267,7 +1270,7 @@
                 <label><input type="radio" autocomplete="off" name="a3b" id="a3b-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="a3b" id="a3b-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="a3b" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de a3b" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="a3b" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de a3b" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="a5" class="ens-fila" data-origen="mejorado" data-rev="1" data-rev-min="2">
@@ -1290,7 +1293,7 @@
                 <label><input type="radio" autocomplete="off" name="a5" id="a5-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="a5" id="a5-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="a5" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de a5" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="a5" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de a5" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="a6" class="ens-fila" data-origen="heredada" data-rev="1" data-rev-min="2">
@@ -1306,7 +1309,7 @@
                 <label><input type="radio" autocomplete="off" name="a6" id="a6-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="a6" id="a6-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="a6" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de a6" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="a6" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de a6" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="a4" class="ens-fila" data-origen="mejorado" data-minimo data-ensayo-fuera="cubierta por el flujo R1 del ensayo.">
@@ -1343,7 +1346,7 @@
                 <label><input type="radio" autocomplete="off" name="a4" id="a4-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="a4" id="a4-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="a4" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de a4" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="a4" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de a4" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="a7" class="ens-fila" data-origen="mejorado" data-minimo data-ensayo-fuera="cubierta por el flujo R13 del ensayo.">
@@ -1374,7 +1377,7 @@
                 <label><input type="radio" autocomplete="off" name="a7" id="a7-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="a7" id="a7-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="a7" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de a7" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="a7" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de a7" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="a8" class="ens-fila" data-origen="mejorado" data-rev="1" data-rev-min="3">
@@ -1398,7 +1401,7 @@
                 <label><input type="radio" autocomplete="off" name="a8" id="a8-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="a8" id="a8-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="a8" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de a8" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="a8" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de a8" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="a9" class="ens-fila" data-origen="nuevo" data-rev="1" data-rev-min="1">
@@ -1419,7 +1422,7 @@
                 <label><input type="radio" autocomplete="off" name="a9" id="a9-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="a9" id="a9-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="a9" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de a9" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="a9" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de a9" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="a10" class="ens-fila" data-origen="mejorado" data-minimo data-ensayo-fuera="cubierta por el flujo R1 del ensayo.">
@@ -1453,7 +1456,7 @@
                 <label><input type="radio" autocomplete="off" name="a10" id="a10-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="a10" id="a10-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="a10" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de a10" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="a10" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de a10" autocomplete="off"></textarea>
             </div>
           </li>
         </ul>
@@ -1496,7 +1499,7 @@
                 <label><input type="radio" autocomplete="off" name="b1" id="b1-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="b1" id="b1-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="b1" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de b1" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="b1" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de b1" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="b2" class="ens-fila" data-origen="heredada" data-minimo data-ensayo-fuera="cubierta por el flujo R2 del ensayo.">
@@ -1512,7 +1515,7 @@
                 <label><input type="radio" autocomplete="off" name="b2" id="b2-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="b2" id="b2-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="b2" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de b2" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="b2" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de b2" autocomplete="off"></textarea>
             </div>
           </li>
         </ul>
@@ -1546,7 +1549,7 @@
                 <label><input type="radio" autocomplete="off" name="c1" id="c1-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="c1" id="c1-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="c1" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de c1" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="c1" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de c1" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="c2" class="ens-fila" data-origen="mejorado" data-rev="2" data-rev-min="2">
@@ -1576,7 +1579,7 @@
                 <label><input type="radio" autocomplete="off" name="c2" id="c2-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="c2" id="c2-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="c2" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de c2" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="c2" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de c2" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="c3" class="ens-fila" data-origen="mejorado" data-minimo data-ensayo-fuera="cubierta por el flujo R3 del ensayo.">
@@ -1598,7 +1601,7 @@
                 <label><input type="radio" autocomplete="off" name="c3" id="c3-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="c3" id="c3-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="c3" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de c3" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="c3" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de c3" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="c4" class="ens-fila" data-origen="nuevo" data-minimo data-ensayo-fuera="cubierta por el flujo R3 del ensayo.">
@@ -1617,7 +1620,7 @@
                 <label><input type="radio" autocomplete="off" name="c4" id="c4-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="c4" id="c4-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="c4" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de c4" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="c4" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de c4" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="c5" class="ens-fila" data-origen="nuevo" data-rev="2" data-rev-min="2">
@@ -1635,7 +1638,7 @@
                 <label><input type="radio" autocomplete="off" name="c5" id="c5-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="c5" id="c5-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="c5" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de c5" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="c5" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de c5" autocomplete="off"></textarea>
             </div>
           </li>
         </ul>
@@ -1679,7 +1682,7 @@
                 <label><input type="radio" autocomplete="off" name="d1" id="d1-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="d1" id="d1-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="d1" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de d1" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="d1" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de d1" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="d2" class="ens-fila" data-origen="heredada" data-minimo data-ensayo-fuera="cubierta por el flujo R4 del ensayo.">
@@ -1696,7 +1699,7 @@
                 <label><input type="radio" autocomplete="off" name="d2" id="d2-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="d2" id="d2-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="d2" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de d2" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="d2" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de d2" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="d3" class="ens-fila" data-origen="mejorado" data-minimo data-ensayo-fuera="cubierta por el flujo R4 del ensayo.">
@@ -1726,7 +1729,7 @@
                 <label><input type="radio" autocomplete="off" name="d3" id="d3-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="d3" id="d3-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="d3" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de d3" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="d3" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de d3" autocomplete="off"></textarea>
             </div>
           </li>
         </ul>
@@ -1760,7 +1763,7 @@
                 <label><input type="radio" autocomplete="off" name="e1" id="e1-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="e1" id="e1-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="e1" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de e1" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="e1" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de e1" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="e2" class="ens-fila" data-origen="mejorado" data-rev="2" data-rev-min="2">
@@ -1777,7 +1780,7 @@
                 <label><input type="radio" autocomplete="off" name="e2" id="e2-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="e2" id="e2-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="e2" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de e2" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="e2" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de e2" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="e4" class="ens-fila" data-origen="mejorado" data-rev="2" data-rev-min="2">
@@ -1798,7 +1801,7 @@
                 <label><input type="radio" autocomplete="off" name="e4" id="e4-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="e4" id="e4-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="e4" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de e4" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="e4" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de e4" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="e3" class="ens-fila" data-origen="heredada" data-minimo data-ensayo-fuera="cubierta por el flujo R5 del ensayo.">
@@ -1822,7 +1825,7 @@
                 <label><input type="radio" autocomplete="off" name="e3" id="e3-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="e3" id="e3-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="e3" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de e3" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="e3" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de e3" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="e5" class="ens-fila" data-origen="nuevo">
@@ -1839,7 +1842,7 @@
               Lista de espera: Habla San». Y en <code>/es/vitrina/agentes</code>,
               <code>/investigaciones</code> y <code>/tableros</code>
               <strong>NO hay lista de espera</strong> ni en el frente ni en sus
-              fichas: cierran con «Este frente se muestra para enseñar
+              fichas (las de Investigaciones no se ven mientras dure la pausa): cierran con «Este frente se muestra para enseñar
               capacidades…» y un «Escríbeme» al formulario general.
               <span class="origen origen-nuevo"
                 >Nuevo · post-S8 (bloque E)</span
@@ -1851,7 +1854,7 @@
                 <label><input type="radio" autocomplete="off" name="e5" id="e5-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="e5" id="e5-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="e5" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de e5" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="e5" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de e5" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="e6" class="ens-fila" data-origen="nuevo" data-rev="2" data-rev-min="2">
@@ -1871,7 +1874,7 @@
                 <label><input type="radio" autocomplete="off" name="e6" id="e6-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="e6" id="e6-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="e6" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de e6" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="e6" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de e6" autocomplete="off"></textarea>
             </div>
           </li>
         </ul>
@@ -1926,7 +1929,7 @@
                 <label><input type="radio" autocomplete="off" name="f1" id="f1-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="f1" id="f1-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="f1" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de f1" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="f1" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de f1" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="f2" class="ens-fila" data-origen="heredada" data-rev="3" data-rev-min="1">
@@ -1941,7 +1944,7 @@
                 <label><input type="radio" autocomplete="off" name="f2" id="f2-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="f2" id="f2-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="f2" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de f2" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="f2" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de f2" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="f3" class="ens-fila" data-origen="heredada" data-rev="3" data-rev-min="2">
@@ -1956,7 +1959,7 @@
                 <label><input type="radio" autocomplete="off" name="f3" id="f3-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="f3" id="f3-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="f3" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de f3" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="f3" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de f3" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="f4" class="ens-fila" data-origen="heredada" data-rev="3" data-rev-min="2">
@@ -1971,7 +1974,7 @@
                 <label><input type="radio" autocomplete="off" name="f4" id="f4-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="f4" id="f4-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="f4" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de f4" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="f4" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de f4" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="f5" class="ens-fila" data-origen="heredada" data-minimo data-ensayo-fuera="cubierta por el flujo R6 del ensayo.">
@@ -1989,7 +1992,7 @@
                 <label><input type="radio" autocomplete="off" name="f5" id="f5-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="f5" id="f5-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="f5" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de f5" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="f5" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de f5" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="f6" class="ens-fila" data-origen="nuevo" data-rev="3" data-rev-min="2">
@@ -2009,7 +2012,7 @@
                 <label><input type="radio" autocomplete="off" name="f6" id="f6-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="f6" id="f6-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="f6" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de f6" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="f6" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de f6" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="f7" class="ens-fila" data-origen="nuevo" data-minimo data-ensayo-fuera="respaldada por la CI: tests/integration/chat-cupo.dbtest.ts y tests/integration/chat-registro-route.test.ts corren el registro del chat contra Postgres real." data-rev-fuera="respaldada por la CI: tests/integration/chat-cupo.dbtest.ts y tests/integration/chat-registro-route.test.ts corren el registro del chat contra Postgres real.">
@@ -2032,7 +2035,7 @@
                 <label><input type="radio" autocomplete="off" name="f7" id="f7-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="f7" id="f7-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="f7" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de f7" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="f7" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de f7" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="f8" class="ens-fila" data-origen="nuevo" data-minimo data-ensayo-fuera="cubierta por el flujo R6 del ensayo.">
@@ -2055,7 +2058,7 @@
                 <label><input type="radio" autocomplete="off" name="f8" id="f8-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="f8" id="f8-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="f8" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de f8" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="f8" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de f8" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="f9" class="ens-fila" data-origen="nuevo" data-minimo data-ensayo-fuera="cubierta por el flujo R6 del ensayo.">
@@ -2078,7 +2081,7 @@
                 <label><input type="radio" autocomplete="off" name="f9" id="f9-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="f9" id="f9-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="f9" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de f9" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="f9" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de f9" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="f10" class="ens-fila" data-origen="nuevo" data-minimo data-ensayo-fuera="aprobada por el dueño al mergear el cupo del chat (PR #49, 2026-09-26) y respaldada por tests/integration/chat-cupo.dbtest.ts, que corre la RPC contra Postgres real." data-rev-fuera="aprobada por el dueño al mergear el cupo del chat (PR #49, 2026-09-26) y respaldada por tests/integration/chat-cupo.dbtest.ts; repetirla pide tocar la base de producción.">
@@ -2102,7 +2105,7 @@
                 <label><input type="radio" autocomplete="off" name="f10" id="f10-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="f10" id="f10-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="f10" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de f10" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="f10" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de f10" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="f11" class="ens-fila" data-origen="nuevo" data-rev="3" data-rev-min="1">
@@ -2122,7 +2125,7 @@
                 <label><input type="radio" autocomplete="off" name="f11" id="f11-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="f11" id="f11-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="f11" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de f11" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="f11" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de f11" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="f12" class="ens-fila" data-origen="nuevo" data-rev="3" data-rev-min="3">
@@ -2135,7 +2138,7 @@
                 <label><input type="radio" autocomplete="off" name="f12" id="f12-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="f12" id="f12-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="f12" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de f12" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="f12" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de f12" autocomplete="off"></textarea>
             </div>
           </li>
         </ul>
@@ -2197,7 +2200,7 @@
                 <label><input type="radio" autocomplete="off" name="g1d" id="g1d-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="g1d" id="g1d-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="g1d" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de g1d" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="g1d" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de g1d" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="g2" class="ens-fila" data-origen="heredada" data-rev="3" data-rev-min="1">
@@ -2212,7 +2215,7 @@
                 <label><input type="radio" autocomplete="off" name="g2" id="g2-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="g2" id="g2-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="g2" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de g2" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="g2" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de g2" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="g3" class="ens-fila" data-origen="heredada" data-rev="3" data-rev-min="1">
@@ -2227,7 +2230,7 @@
                 <label><input type="radio" autocomplete="off" name="g3" id="g3-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="g3" id="g3-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="g3" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de g3" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="g3" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de g3" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="g4" class="ens-fila" data-origen="heredada" data-rev="3" data-rev-min="1">
@@ -2242,7 +2245,7 @@
                 <label><input type="radio" autocomplete="off" name="g4" id="g4-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="g4" id="g4-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="g4" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de g4" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="g4" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de g4" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="g5" class="ens-fila" data-origen="heredada" data-minimo data-ensayo-fuera="respaldada por la CI: tests/e2e/votacion.spec.ts comprueba que sin base la votación dice «no disponible» y deja los botones apagados; en producción está encendida, así que no se puede ver apagada." data-rev-fuera="respaldada por la CI: tests/e2e/votacion.spec.ts comprueba que sin base la votación dice «no disponible» y deja los botones apagados; en producción está encendida, así que no se puede ver apagada.">
@@ -2263,7 +2266,7 @@
                 <label><input type="radio" autocomplete="off" name="g5" id="g5-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="g5" id="g5-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="g5" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de g5" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="g5" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de g5" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="g6" class="ens-fila" data-origen="nuevo">
@@ -2287,7 +2290,7 @@
                 <label><input type="radio" autocomplete="off" name="g6" id="g6-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="g6" id="g6-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="g6" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de g6" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="g6" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de g6" autocomplete="off"></textarea>
             </div>
           </li>
         </ul>
@@ -2335,7 +2338,7 @@
                 <label><input type="radio" autocomplete="off" name="h1" id="h1-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="h1" id="h1-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="h1" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de h1" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="h1" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de h1" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="h2" class="ens-fila" data-origen="heredada" data-rev="4" data-rev-min="2">
@@ -2351,7 +2354,7 @@
                 <label><input type="radio" autocomplete="off" name="h2" id="h2-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="h2" id="h2-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="h2" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de h2" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="h2" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de h2" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="h3" class="ens-fila" data-origen="heredada" data-rev="4" data-rev-min="1">
@@ -2366,7 +2369,7 @@
                 <label><input type="radio" autocomplete="off" name="h3" id="h3-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="h3" id="h3-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="h3" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de h3" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="h3" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de h3" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="h4" class="ens-fila" data-origen="heredada" data-minimo data-ensayo-fuera="cubierta por el flujo R8 del ensayo.">
@@ -2383,7 +2386,7 @@
                 <label><input type="radio" autocomplete="off" name="h4" id="h4-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="h4" id="h4-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="h4" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de h4" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="h4" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de h4" autocomplete="off"></textarea>
             </div>
           </li>
         </ul>
@@ -2411,7 +2414,7 @@
                 <label><input type="radio" autocomplete="off" name="i1" id="i1-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="i1" id="i1-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="i1" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de i1" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="i1" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de i1" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="i2" class="ens-fila" data-origen="heredada" data-minimo data-ensayo-fuera="cubierta por el flujo R12 del ensayo.">
@@ -2428,7 +2431,7 @@
                 <label><input type="radio" autocomplete="off" name="i2" id="i2-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="i2" id="i2-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="i2" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de i2" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="i2" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de i2" autocomplete="off"></textarea>
             </div>
           </li>
         </ul>
@@ -2448,9 +2451,7 @@
               <strong>portal</strong> con <strong>cuatro cajas</strong> en este
               orden — Apps · Agentes especializados · Investigaciones · Tableros
               de datos — cada una con su icono, una frase y su estado.
-              <strong>Las cuatro dicen «Explora»</strong> y cada una su cuenta:
-              Apps <strong>10</strong> · Agentes <strong>14</strong> ·
-              Investigaciones <strong>7</strong> · Tableros <strong>6</strong>.
+              <strong>Tres dicen «Explora»</strong> y cada una su cuenta: Apps <strong>10</strong> · Agentes <strong>11</strong> · Tableros <strong>6</strong>; <strong>Investigaciones</strong> dice <strong>«En preparación»</strong> (está en pausa) y su botón es «Ver qué viene».
               Pulsa <strong>Apps</strong>: llegas al escaparate con
               <strong>diez tarjetas</strong>, una por app, <strong>en dos bloques</strong>
               (Profesionales y Personales, en carrusel: prueba k15f), cada una con su
@@ -2464,7 +2465,7 @@
                 <label><input type="radio" autocomplete="off" name="k1b" id="k1b-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="k1b" id="k1b-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="k1b" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de k1b" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="k1b" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de k1b" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="k2" class="ens-fila" data-origen="heredada" data-rev="4" data-rev-min="2">
@@ -2485,7 +2486,7 @@
                 <label><input type="radio" autocomplete="off" name="k2" id="k2-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="k2" id="k2-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="k2" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de k2" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="k2" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de k2" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="k10" class="ens-fila" data-origen="heredada" data-rev="4" data-rev-min="2">
@@ -2506,7 +2507,7 @@
                 <label><input type="radio" autocomplete="off" name="k10" id="k10-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="k10" id="k10-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="k10" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de k10" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="k10" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de k10" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="k11" class="ens-fila" data-origen="heredada" data-rev="4" data-rev-min="2">
@@ -2527,7 +2528,7 @@
                 <label><input type="radio" autocomplete="off" name="k11" id="k11-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="k11" id="k11-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="k11" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de k11" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="k11" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de k11" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="k12" class="ens-fila" data-origen="heredada" data-rev="8" data-rev-min="2">
@@ -2543,7 +2544,7 @@
                 <label><input type="radio" autocomplete="off" name="k12" id="k12-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="k12" id="k12-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="k12" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de k12" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="k12" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de k12" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="k13" class="ens-fila" data-origen="heredada" data-minimo data-ensayo-fuera="cubierta por el flujo R8 del ensayo.">
@@ -2564,7 +2565,7 @@
                 <label><input type="radio" autocomplete="off" name="k13" id="k13-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="k13" id="k13-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="k13" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de k13" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="k13" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de k13" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="k17" class="ens-fila" data-origen="nuevo" data-rev="4" data-rev-min="1">
@@ -2584,7 +2585,7 @@
                 <label><input type="radio" autocomplete="off" name="k17" id="k17-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="k17" id="k17-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="k17" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de k17" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="k17" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de k17" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="k18" class="ens-fila" data-origen="nuevo" data-minimo data-ensayo-fuera="cubierta por el flujo R8 del ensayo.">
@@ -2611,7 +2612,7 @@
                 <label><input type="radio" autocomplete="off" name="k18" id="k18-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="k18" id="k18-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="k18" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de k18" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="k18" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de k18" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="k14" class="ens-fila" data-origen="heredada" data-minimo data-ensayo-fuera="cubierta por el flujo R8 del ensayo.">
@@ -2629,7 +2630,7 @@
                 <label><input type="radio" autocomplete="off" name="k14" id="k14-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="k14" id="k14-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="k14" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de k14" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="k14" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de k14" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="k3" class="ens-fila" data-origen="heredada" data-rev="4" data-rev-min="1">
@@ -2644,7 +2645,7 @@
                 <label><input type="radio" autocomplete="off" name="k3" id="k3-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="k3" id="k3-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="k3" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de k3" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="k3" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de k3" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="k4" class="ens-fila" data-origen="mejorado" data-rev="4" data-rev-min="1">
@@ -2663,7 +2664,7 @@
                 <label><input type="radio" autocomplete="off" name="k4" id="k4-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="k4" id="k4-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="k4" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de k4" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="k4" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de k4" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="k5" class="ens-fila" data-origen="heredada" data-rev="4" data-rev-min="1">
@@ -2679,7 +2680,7 @@
                 <label><input type="radio" autocomplete="off" name="k5" id="k5-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="k5" id="k5-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="k5" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de k5" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="k5" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de k5" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="k6" class="ens-fila" data-origen="heredada" data-rev="4" data-rev-min="1">
@@ -2696,7 +2697,7 @@
                 <label><input type="radio" autocomplete="off" name="k6" id="k6-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="k6" id="k6-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="k6" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de k6" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="k6" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de k6" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="k7" class="ens-fila" data-origen="heredada" data-minimo data-ensayo-fuera="cubierta por el flujo R8 del ensayo.">
@@ -2713,24 +2714,17 @@
                 <label><input type="radio" autocomplete="off" name="k7" id="k7-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="k7" id="k7-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="k7" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de k7" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="k7" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de k7" autocomplete="off"></textarea>
             </div>
           </li>
-          <li id="k8" class="ens-fila" data-origen="heredada" data-rev-fuera="sin sujeto: desde el S7 los cuatro frentes tienen piezas y ninguno está «en preparación»; las tres pruebas automáticas que la vigilaban se saltan declarando esta misma razón (queda para el día en que exista un frente vacío).">
+          <li id="k8" class="ens-fila" data-origen="mejorado" data-rev="5" data-rev-min="1">
             <div class="ens-cuerpo">
-              <p class="p-texto"><code class="p-id">k8</code> <strong>EN ESPERA — hoy no hay sujeto.</strong> Desde el S7 los
-              cuatro frentes tienen productos, así que ninguno está "en
-              preparación". La página existe y espera al próximo frente que
-              declares: el día que exista uno sin productos, comprueba que tiene
-              su nombre, el chip "En preparación", la frase y el párrafo del
-              frente, el recuadro <strong>"Este frente empieza"</strong> sin
-              fecha prometida, los otros frentes como vecinos y el botón de
-              lista de espera al pie, sin ningún enlace externo.
-              <em
-                >Las tres pruebas automáticas que la vigilaban se saltan
-                declarando esta misma razón.</em
-              >
-              <span class="origen origen-heredada">S7</span></p>
+              <p class="p-texto"><code class="p-id">k8</code> El frente en pausa visto desde el portal. En <code>/es/vitrina</code> la caja de <strong>Investigaciones</strong> dice
+              <strong>«En preparación»</strong> (símbolo, texto y color) y las otras tres dicen «Entrar» con su cuenta. Entra al frente: ves su
+              nombre, el aviso <strong>«Esta sección se está rehaciendo»</strong> sin fecha prometida, <strong>ningún párrafo que diga lo que «se publica aquí»</strong>,
+              los otros tres frentes como vecinos y, al pie, <strong>ningún botón de lista de espera</strong> (la lista es solo de apps) ni enlace externo. Antes esta
+              prueba esperaba un frente vacío que no existía; hoy lo es Investigaciones.
+              <span class="origen origen-mejorado">Mejorado · S22</span></p>
             </div>
             <div class="p-resp">
               <fieldset class="ens-resp">
@@ -2738,7 +2732,7 @@
                 <label><input type="radio" autocomplete="off" name="k8" id="k8-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="k8" id="k8-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="k8" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de k8" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="k8" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de k8" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="k9" class="ens-fila" data-origen="heredada" data-minimo data-ensayo-fuera="cubierta por el flujo R9 del ensayo.">
@@ -2746,8 +2740,7 @@
               <p class="p-texto"><code class="p-id">k9</code> ⭐ <strong>Juicio de contenido de los frentes:</strong> lee la
               frase y el párrafo de los <strong>cuatro</strong> frentes en el
               portal y confirma tres cosas: que describen lo que de verdad son
-              (agentes por comandos; investigaciones ya validadas, con rumbo
-              elegido; tableros analíticos), que
+              (agentes por comandos; investigaciones (hoy en pausa, con su aviso); tableros analíticos), que
               <strong>ninguno promete fecha</strong>, y que el de tableros
               <strong>no nombra ninguna herramienta</strong>. Si algo no te
               suena a ti, se corrige en <code>data/vitrina.yaml</code>.
@@ -2760,7 +2753,7 @@
                 <label><input type="radio" autocomplete="off" name="k9" id="k9-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="k9" id="k9-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="k9" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de k9" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="k9" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de k9" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="k15f" class="ens-fila" data-origen="mejorado" data-minimo data-ensayo-fuera="cubierta por el flujo R8 del ensayo.">
@@ -2803,7 +2796,7 @@
                 <label><input type="radio" autocomplete="off" name="k15f" id="k15f-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="k15f" id="k15f-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="k15f" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de k15f" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="k15f" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de k15f" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="k16b" class="ens-fila" data-origen="mejorado" data-minimo data-ensayo-fuera="cubierta por el flujo R12 del ensayo.">
@@ -2830,7 +2823,7 @@
                 <label><input type="radio" autocomplete="off" name="k16b" id="k16b-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="k16b" id="k16b-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="k16b" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de k16b" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="k16b" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de k16b" autocomplete="off"></textarea>
             </div>
           </li>
         </ul>
@@ -2859,7 +2852,7 @@
                 <label><input type="radio" autocomplete="off" name="l1" id="l1-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="l1" id="l1-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="l1" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de l1" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="l1" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de l1" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="l2" class="ens-fila" data-origen="heredada" data-rev="4" data-rev-min="1">
@@ -2873,7 +2866,7 @@
                 <label><input type="radio" autocomplete="off" name="l2" id="l2-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="l2" id="l2-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="l2" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de l2" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="l2" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de l2" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="l3" class="ens-fila" data-origen="heredada" data-rev="4" data-rev-min="1">
@@ -2889,7 +2882,7 @@
                 <label><input type="radio" autocomplete="off" name="l3" id="l3-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="l3" id="l3-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="l3" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de l3" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="l3" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de l3" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="l4" class="ens-fila" data-origen="heredada" data-rev="4" data-rev-min="1">
@@ -2905,7 +2898,7 @@
                 <label><input type="radio" autocomplete="off" name="l4" id="l4-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="l4" id="l4-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="l4" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de l4" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="l4" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de l4" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="l5b" class="ens-fila" data-origen="mejorado" data-minimo data-ensayo-fuera="cubierta por el flujo R8 del ensayo.">
@@ -2923,7 +2916,7 @@
                 <label><input type="radio" autocomplete="off" name="l5b" id="l5b-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="l5b" id="l5b-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="l5b" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de l5b" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="l5b" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de l5b" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="l6" class="ens-fila" data-origen="heredada" data-minimo data-ensayo-fuera="cubierta por el flujo R8 del ensayo.">
@@ -2942,7 +2935,7 @@
                 <label><input type="radio" autocomplete="off" name="l6" id="l6-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="l6" id="l6-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="l6" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de l6" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="l6" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de l6" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="l7" class="ens-fila" data-origen="heredada" data-minimo data-ensayo-fuera="cubierta por el flujo R12 del ensayo.">
@@ -2959,7 +2952,7 @@
                 <label><input type="radio" autocomplete="off" name="l7" id="l7-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="l7" id="l7-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="l7" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de l7" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="l7" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de l7" autocomplete="off"></textarea>
             </div>
           </li>
         </ul>
@@ -2972,8 +2965,7 @@
           <h2>Las estanterías: los frentes con piezas</h2>
         </div>
         <p class="meta-bloque chica suave">
-          Escritorio + un teléfono real. Las 27 fichas de agentes,
-          investigaciones y tableros las escribió
+          Escritorio + un teléfono real. Las 17 fichas de agentes y tableros (las de investigaciones, en pausa, no se ven) las escribió
           <strong>quien construyó cada pieza</strong>, no esta app: aquí se
           comprueba que llegaron enteras y se leen bien.
         </p>
@@ -2981,14 +2973,12 @@
           <li id="m1b" class="ens-fila" data-origen="mejorado" data-rev="5" data-rev-min="2">
             <div class="ens-cuerpo">
               <p class="p-texto"><code class="p-id">m1b</code> Desde el portal entra a <strong>Agentes especializados</strong>:
-              el encabezado dice <strong>"14 productos publicados"</strong> y
-              debajo hay <strong>14 tarjetas</strong>. Cuéntalas. Las
+              el encabezado dice <strong>"11 productos publicados"</strong> y
+              debajo hay <strong>11 tarjetas</strong>. Cuéntalas. Las
               <strong>selladas van primero</strong> y dentro de cada grupo el
-              orden es alfabético — no cambia aunque recargues. Repite en
-              <strong>Investigaciones</strong> (7) y en
-              <strong>Tableros de datos</strong> (6).
+              orden es alfabético — no cambia aunque recargues. «Paper Computacional» queda antes de «Presentaciones CINE»: ningún agente lleva «Harness» en el nombre. Repite en <strong>Tableros de datos</strong> (6). <strong>Investigaciones</strong> está en pausa y no tiene tarjetas (ver la m4).
               <span class="origen origen-heredada">S7</span><span class="origen origen-mejorado">Mejorado · post-S9</span
-              ></p>
+              ><span class="origen origen-mejorado">Mejorado · S22</span></p>
             </div>
             <div class="p-resp">
               <fieldset class="ens-resp">
@@ -2996,7 +2986,7 @@
                 <label><input type="radio" autocomplete="off" name="m1b" id="m1b-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="m1b" id="m1b-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="m1b" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de m1b" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="m1b" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de m1b" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="m2" class="ens-fila" data-origen="heredada" data-rev="5" data-rev-min="1">
@@ -3016,7 +3006,7 @@
                 <label><input type="radio" autocomplete="off" name="m2" id="m2-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="m2" id="m2-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="m2" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de m2" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="m2" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de m2" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="m3" class="ens-fila" data-origen="heredada" data-rev="5" data-rev-min="2">
@@ -3035,19 +3025,12 @@
                 <label><input type="radio" autocomplete="off" name="m3" id="m3-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="m3" id="m3-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="m3" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de m3" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="m3" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de m3" autocomplete="off"></textarea>
             </div>
           </li>
-          <li id="m4" class="ens-fila" data-origen="heredada" data-rev="5" data-rev-min="1">
+          <li id="m4" class="ens-fila" data-origen="mejorado" data-rev="5" data-rev-min="2">
             <div class="ens-cuerpo">
-              <p class="p-texto"><code class="p-id">m4</code> Abre una ficha de <strong>Investigaciones</strong>:
-              <strong>no tiene "Cómo funciona"</strong> (no traen proceso) y las
-              secciones van <strong>01 · 02 · 03 · 04 seguidas</strong>, sin
-              saltarse un número. Comprueba también que
-              <strong>en ninguna tarjeta dice "0 funcionalidades"</strong>: una
-              investigación tiene aportes, no funciones, y la app no le inventa
-              una cuenta que la ficha no dio.
-              <span class="origen origen-heredada">S7</span></p>
+              <p class="p-texto"><code class="p-id">m4</code> Abre <code>/es/vitrina/investigaciones</code>: el frente está <strong>en pausa</strong> porque las investigaciones se están rehaciendo. La página dice <strong>«Esta sección se está rehaciendo»</strong> con «En preparación» y «Sin fecha prometida», <strong>sin tarjetas y sin lista de espera</strong>; y la dirección de una ficha de investigación (por ejemplo <code>/es/vitrina/investigaciones/arkhe</code>) da <strong>404</strong>. Repite en <code>/en/…</code>: «This section is being rebuilt». Reabrirlas es una línea de <code>data/vitrina.yaml</code>. <span class="origen origen-mejorado">Mejorado · S22</span></p>
             </div>
             <div class="p-resp">
               <fieldset class="ens-resp">
@@ -3055,7 +3038,7 @@
                 <label><input type="radio" autocomplete="off" name="m4" id="m4-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="m4" id="m4-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="m4" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de m4" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="m4" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de m4" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="m5" class="ens-fila" data-origen="heredada" data-rev="5" data-rev-min="1">
@@ -3076,15 +3059,14 @@
                 <label><input type="radio" autocomplete="off" name="m5" id="m5-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="m5" id="m5-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="m5" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de m5" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="m5" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de m5" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="m6" class="ens-fila" data-origen="heredada" data-rev="5" data-rev-min="1">
             <div class="ens-cuerpo">
               <p class="p-texto"><code class="p-id">m6</code> Vuelve al escaparate de <strong>Tableros</strong>: cada tarjeta
               enseña su <strong>primera pantalla como portada</strong>, arriba
-              del todo. En Agentes e Investigaciones, que no traen capturas, la
-              tarjeta <strong>no</strong> deja un hueco donde iría la imagen.
+              del todo. En Agentes, que no trae capturas, la tarjeta <strong>no</strong> deja un hueco donde iría la imagen.
               <span class="origen origen-heredada">S7</span></p>
             </div>
             <div class="p-resp">
@@ -3093,7 +3075,7 @@
                 <label><input type="radio" autocomplete="off" name="m6" id="m6-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="m6" id="m6-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="m6" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de m6" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="m6" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de m6" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="m7" class="ens-fila" data-origen="heredada" data-rev="5" data-rev-min="1">
@@ -3110,7 +3092,7 @@
                 <label><input type="radio" autocomplete="off" name="m7" id="m7-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="m7" id="m7-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="m7" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de m7" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="m7" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de m7" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="m8" class="ens-fila" data-origen="mejorado" data-rev="5" data-rev-min="2">
@@ -3130,7 +3112,7 @@
                 <label><input type="radio" autocomplete="off" name="m8" id="m8-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="m8" id="m8-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="m8" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de m8" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="m8" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de m8" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="m9" class="ens-fila" data-origen="heredada" data-rev="5" data-rev-min="2">
@@ -3146,15 +3128,14 @@
                 <label><input type="radio" autocomplete="off" name="m9" id="m9-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="m9" id="m9-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="m9" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de m9" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="m9" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de m9" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="m10" class="ens-fila" data-origen="heredada" data-minimo data-ensayo-fuera="cubierta por el flujo R9 del ensayo.">
             <div class="ens-cuerpo">
               <p class="p-texto"><code class="p-id">m10</code> ⭐
               <strong>Juicio de contenido de los productos ajenos:</strong> lee
-              entera <strong>una ficha de cada frente</strong> (un agente, una
-              investigación, un tablero) y confirma que dicen la verdad sobre tu
+              entera <strong>una ficha de cada frente abierto</strong> (un agente, un tablero; las investigaciones están en pausa) y confirma que dicen la verdad sobre tu
               trabajo: la promesa, las cifras y los límites. Estas fichas
               <strong>no se editan aquí</strong> — si algo está mal, se corrige
               en el repositorio que la produjo y se vuelve a entregar.
@@ -3167,15 +3148,12 @@
                 <label><input type="radio" autocomplete="off" name="m10" id="m10-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="m10" id="m10-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="m10" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de m10" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="m10" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de m10" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="m11" class="ens-fila" data-origen="heredada" data-minimo data-ensayo-fuera="cubierta por el flujo R9 del ensayo.">
             <div class="ens-cuerpo">
-              <p class="p-texto"><code class="p-id">m11</code> ⭐ <strong>Aprobación visual de los escaparates:</strong> recorre
-              los cuatro escaparates seguidos y decide si los cuatro se ven
-              <strong>de la misma casa</strong>: la tarjeta de un agente, la de
-              una investigación y la de un tablero conviven sin que ninguna
+              <p class="p-texto"><code class="p-id">m11</code> ⭐ <strong>Aprobación visual de los escaparates:</strong> recorre los escaparates abiertos seguidos y decide si se ven <strong>de la misma casa</strong>: la tarjeta de un agente y la de un tablero conviven sin que ninguna
               desentone, y ninguna promete más de lo que la pieza es.
               <span class="origen origen-heredada">S7</span
               ><span class="minimo">⭐ mínimo</span></p>
@@ -3186,7 +3164,7 @@
                 <label><input type="radio" autocomplete="off" name="m11" id="m11-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="m11" id="m11-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="m11" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de m11" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="m11" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de m11" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="m12" class="ens-fila" data-origen="heredada" data-minimo data-ensayo-fuera="cubierta por el flujo R9 del ensayo.">
@@ -3205,7 +3183,7 @@
                 <label><input type="radio" autocomplete="off" name="m12" id="m12-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="m12" id="m12-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="m12" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de m12" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="m12" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de m12" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="m13" class="ens-fila" data-origen="heredada" data-minimo data-ensayo-fuera="cubierta por el flujo R12 del ensayo.">
@@ -3224,7 +3202,7 @@
                 <label><input type="radio" autocomplete="off" name="m13" id="m13-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="m13" id="m13-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="m13" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de m13" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="m13" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de m13" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="m14" class="ens-fila" data-origen="heredada" data-minimo data-ensayo-fuera="cubierta por el flujo R12 del ensayo.">
@@ -3242,7 +3220,7 @@
                 <label><input type="radio" autocomplete="off" name="m14" id="m14-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="m14" id="m14-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="m14" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de m14" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="m14" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de m14" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="m15" class="ens-fila" data-origen="nuevo" data-rev="5" data-rev-min="2">
@@ -3255,7 +3233,7 @@
                 <label><input type="radio" autocomplete="off" name="m15" id="m15-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="m15" id="m15-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="m15" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de m15" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="m15" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de m15" autocomplete="off"></textarea>
             </div>
           </li>
         </ul>
@@ -3300,7 +3278,7 @@
                 <label><input type="radio" autocomplete="off" name="n1" id="n1-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="n1" id="n1-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="n1" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de n1" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="n1" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de n1" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="n2" class="ens-fila" data-origen="heredada" data-rev="1" data-rev-min="2">
@@ -3317,7 +3295,7 @@
                 <label><input type="radio" autocomplete="off" name="n2" id="n2-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="n2" id="n2-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="n2" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de n2" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="n2" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de n2" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="n3" class="ens-fila" data-origen="heredada" data-rev="1" data-rev-min="1">
@@ -3333,14 +3311,14 @@
                 <label><input type="radio" autocomplete="off" name="n3" id="n3-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="n3" id="n3-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="n3" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de n3" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="n3" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de n3" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="n4b" class="ens-fila" data-origen="mejorado" data-rev="1" data-rev-min="2">
             <div class="ens-cuerpo">
               <p class="p-texto"><code class="p-id">n4b</code> La sección <strong>"Vitrina"</strong> (antes «Lo que construyo»)
               ocupa el sitio de Proyectos: las cuatro cajas de la vitrina con su
-              cuenta (Apps 10 · Agentes 14 · Investigaciones 7 · Tableros 6) y el
+              cuenta (Apps 10 · Agentes 11 · Tableros 6; Investigaciones dice «En preparación») y el
               botón "Explora el portafolio", que lleva al portal. Pulsa una
               caja: entras a ese frente.
               <span class="origen origen-heredada">post-S7</span><span class="origen origen-mejorado">Mejorado · post-S9</span
@@ -3352,7 +3330,7 @@
                 <label><input type="radio" autocomplete="off" name="n4b" id="n4b-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="n4b" id="n4b-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="n4b" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de n4b" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="n4b" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de n4b" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="n5" class="ens-fila" data-origen="heredada" data-rev="1" data-rev-min="1">
@@ -3373,7 +3351,7 @@
                 <label><input type="radio" autocomplete="off" name="n5" id="n5-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="n5" id="n5-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="n5" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de n5" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="n5" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de n5" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="n6" class="ens-fila" data-origen="mejorado" data-rev="1" data-rev-min="2">
@@ -3395,7 +3373,7 @@
                 <label><input type="radio" autocomplete="off" name="n6" id="n6-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="n6" id="n6-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="n6" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de n6" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="n6" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de n6" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="n7" class="ens-fila" data-origen="heredada" data-rev="7" data-rev-min="2">
@@ -3412,7 +3390,7 @@
                 <label><input type="radio" autocomplete="off" name="n7" id="n7-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="n7" id="n7-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="n7" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de n7" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="n7" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de n7" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="n8" class="ens-fila" data-origen="heredada" data-rev="1" data-rev-min="2">
@@ -3428,7 +3406,7 @@
                 <label><input type="radio" autocomplete="off" name="n8" id="n8-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="n8" id="n8-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="n8" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de n8" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="n8" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de n8" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="n9" class="ens-fila" data-origen="heredada" data-minimo data-ensayo-fuera="cubierta por el flujo R1 del ensayo.">
@@ -3446,7 +3424,7 @@
                 <label><input type="radio" autocomplete="off" name="n9" id="n9-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="n9" id="n9-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="n9" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de n9" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="n9" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de n9" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="n10" class="ens-fila" data-origen="mejorado" data-minimo data-ensayo-fuera="cubierta por el flujo R1 del ensayo.">
@@ -3470,7 +3448,7 @@
                 <label><input type="radio" autocomplete="off" name="n10" id="n10-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="n10" id="n10-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="n10" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de n10" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="n10" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de n10" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="n11" class="ens-fila" data-origen="heredada" data-minimo data-ensayo-fuera="cubierta por el flujo R1 del ensayo.">
@@ -3493,7 +3471,7 @@
                 <label><input type="radio" autocomplete="off" name="n11" id="n11-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="n11" id="n11-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="n11" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de n11" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="n11" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de n11" autocomplete="off"></textarea>
             </div>
           </li>
         </ul>
@@ -3532,7 +3510,7 @@
                 <label><input type="radio" autocomplete="off" name="o1" id="o1-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="o1" id="o1-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="o1" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de o1" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="o1" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de o1" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="o2" class="ens-fila" data-origen="nuevo" data-rev="1" data-rev-min="1">
@@ -3549,7 +3527,7 @@
                 <label><input type="radio" autocomplete="off" name="o2" id="o2-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="o2" id="o2-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="o2" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de o2" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="o2" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de o2" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="o3" class="ens-fila" data-origen="mejorada" data-rev="11" data-rev-min="2">
@@ -3562,7 +3540,7 @@
                 <label><input type="radio" autocomplete="off" name="o3" id="o3-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="o3" id="o3-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="o3" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de o3" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="o3" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de o3" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="o4" class="ens-fila" data-origen="mejorada" data-rev="11" data-rev-min="3">
@@ -3583,7 +3561,7 @@
                 <label><input type="radio" autocomplete="off" name="o4" id="o4-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="o4" id="o4-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="o4" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de o4" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="o4" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de o4" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="o5" class="ens-fila" data-origen="mejorada" data-rev="11" data-rev-min="2">
@@ -3596,7 +3574,7 @@
                 <label><input type="radio" autocomplete="off" name="o5" id="o5-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="o5" id="o5-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="o5" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de o5" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="o5" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de o5" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="o6" class="ens-fila" data-origen="mejorada" data-minimo data-ensayo-fuera="no es un flujo de cliente: es una lectura del repositorio (data/a-fondo/), no de producción; queda para el gate de juicio del hito." data-rev="11" data-rev-min="7">
@@ -3619,7 +3597,7 @@
                 <label><input type="radio" autocomplete="off" name="o6" id="o6-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="o6" id="o6-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="o6" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de o6" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="o6" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de o6" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="o7" class="ens-fila" data-origen="nuevo" data-minimo data-ensayo-fuera="no es un flujo de cliente: es una lectura del repositorio (data/a-fondo/), no de producción; tests/unit/ctic-aproximadas.test.ts respalda lo medible y el resto queda para el gate de juicio del hito." data-rev="11" data-rev-min="5">
@@ -3639,7 +3617,7 @@
                 <label><input type="radio" autocomplete="off" name="o7" id="o7-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="o7" id="o7-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="o7" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de o7" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="o7" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de o7" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="o8" class="ens-fila" data-origen="mejorada" data-minimo data-ensayo-fuera="no es un flujo de cliente: es una lectura del repositorio (data/a-fondo/), no de producción; tests/unit/a-fondo-cifras-gemelas.test.ts respalda las cifras y el resto queda para el gate de juicio del hito." data-rev="11" data-rev-min="6">
@@ -3663,7 +3641,7 @@
                 <label><input type="radio" autocomplete="off" name="o8" id="o8-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="o8" id="o8-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="o8" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de o8" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="o8" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de o8" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="o9" class="ens-fila" data-origen="mejorada" data-minimo data-ensayo-fuera="cubierta por el flujo R6 del ensayo.">
@@ -3685,7 +3663,7 @@
                 <label><input type="radio" autocomplete="off" name="o9" id="o9-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="o9" id="o9-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="o9" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de o9" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="o9" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de o9" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="o10" class="ens-fila" data-origen="mejorada" data-minimo data-ensayo-fuera="cubierta por el flujo R6 del ensayo.">
@@ -3709,7 +3687,7 @@
                 <label><input type="radio" autocomplete="off" name="o10" id="o10-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="o10" id="o10-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="o10" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de o10" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="o10" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de o10" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="o11" class="ens-fila" data-origen="nuevo" data-minimo data-ensayo-fuera="cubierta por el flujo R13 del ensayo.">
@@ -3735,17 +3713,17 @@
                 <label><input type="radio" autocomplete="off" name="o11" id="o11-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="o11" id="o11-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="o11" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de o11" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="o11" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de o11" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="o12b" class="ens-fila" data-origen="mejorado" data-rev="3" data-rev-min="2">
             <div class="ens-cuerpo">
               <p class="p-texto"><code class="p-id">o12b</code> Las fichas hablan por el chat: pregunta «¿Qué límites tiene
-              Habla San?» o «¿Cuántos criterios tiene el Harness Paper
+              Habla San?» o «¿Cuántos criterios tiene el Paper
               Computacional?». La respuesta sale de la ficha, nombra la app con
               su nombre oficial y la cita navega a
               <code>/vitrina/apps/habla</code> o a la ficha del agente
-              — no a la HOME. Son las 37 fichas, con la mitad del peso que tus
+              — no a la HOME. Son las 27 fichas, con la mitad del peso que tus
               documentos (ADR-023).
               <span class="origen origen-nuevo">Nuevo · a fondo v2</span><span class="origen origen-mejorado">Mejorado · post-S9</span
               ></p>
@@ -3756,7 +3734,7 @@
                 <label><input type="radio" autocomplete="off" name="o12b" id="o12b-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="o12b" id="o12b-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="o12b" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de o12b" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="o12b" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de o12b" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="o13" class="ens-fila" data-origen="nuevo" data-rev="11" data-rev-min="3">
@@ -3780,7 +3758,7 @@
                 <label><input type="radio" autocomplete="off" name="o13" id="o13-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="o13" id="o13-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="o13" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de o13" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="o13" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de o13" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="o14" class="ens-fila" data-origen="nuevo" data-minimo data-ensayo-fuera="no es un flujo de cliente: es una lectura del repositorio (data/a-fondo/), no de producción; tests/unit/a-fondo-cifras-gemelas.test.ts respalda las cifras gemelas y el resto queda para el gate de juicio del hito." data-rev="11" data-rev-min="6">
@@ -3801,7 +3779,7 @@
                 <label><input type="radio" autocomplete="off" name="o14" id="o14-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="o14" id="o14-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="o14" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de o14" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="o14" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de o14" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="o15" class="ens-fila" data-origen="nuevo" data-rev="10" data-rev-min="4">
@@ -3814,7 +3792,7 @@
                 <label><input type="radio" autocomplete="off" name="o15" id="o15-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="o15" id="o15-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="o15" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de o15" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="o15" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de o15" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="o16" class="ens-fila" data-origen="nuevo" data-rev="10" data-rev-min="6">
@@ -3827,7 +3805,20 @@
                 <label><input type="radio" autocomplete="off" name="o16" id="o16-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="o16" id="o16-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="o16" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de o16" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="o16" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de o16" autocomplete="off"></textarea>
+            </div>
+          </li>
+          <li id="o17" class="ens-fila" data-origen="nuevo" data-rev="10" data-rev-min="4">
+            <div class="ens-cuerpo">
+              <p class="p-texto"><code class="p-id">o17</code> Lo que dejó abierto el retiro de tres agentes y la pausa de Investigaciones (Sprint 22). Contéstalas en la nota, una línea cada una, o escribe «sin cambio»: <strong>(1)</strong> mientras dure la pausa, el corpus (<code>las-investigaciones</code>, <code>cm-operaciones</code>, <code>inglopres</code>, <code>procesos-y-simulacion</code>), el CV y la pieza «IA en la organización» de Métodos siguen diciendo «siete investigaciones» y «34 piezas», porque cuentan lo que hay en el disco; ¿reescribo esas líneas para que digan lo que el visitante ve (27 piezas, investigaciones en preparación) o las dejas hasta que reabras? · <strong>(2)</strong> el método de Design Science sigue descrito en <code>las-investigaciones</code> y en el CV (cuenta cómo se hicieron las investigaciones; ya no hay ficha de ese agente): ¿se queda o también sale? · <strong>(3)</strong> la simulación de planlang y la ficha de planlang (brochure) todavía hablan de «Agente A / Agente B» y «Demo A / Demo B», que son los dos agentes de demostración retirados del escaparate; viven en el export de otra casa, así que quitarlos pasa por la planeadora: ¿quieres que se los pida? · <strong>(4)</strong> en <code>apps-pipeline</code> quité el ejemplo «52 criterios binarios, cinco puertas, una frase exacta mía» del agente retirado; tu propio texto de <code>las-investigaciones</code> da «44 criterios» para el Paper Computacional: ¿lo pongo como ejemplo en su lugar o queda sin ejemplo? <span class="origen origen-nuevo">Nuevo · S22</span></p>
+            </div>
+            <div class="p-resp">
+              <fieldset class="ens-resp">
+                <legend>¿Salió como esperabas? (o17)</legend>
+                <label><input type="radio" autocomplete="off" name="o17" id="o17-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="o17" id="o17-no" value="no" /> No</label>
+              </fieldset>
+              <textarea class="p-nota" data-nota-de="o17" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de o17" autocomplete="off"></textarea>
             </div>
           </li>
         </ul>
@@ -3884,7 +3875,7 @@
                 <label><input type="radio" autocomplete="off" name="p1" id="p1-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="p1" id="p1-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="p1" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de p1" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="p1" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de p1" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="p2" class="ens-fila" data-origen="nuevo" data-rev="11" data-rev-min="2">
@@ -3900,7 +3891,7 @@
                 <label><input type="radio" autocomplete="off" name="p2" id="p2-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="p2" id="p2-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="p2" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de p2" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="p2" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de p2" autocomplete="off"></textarea>
             </div>
           </li>
         </ul>
@@ -3946,7 +3937,7 @@
                 <label><input type="radio" autocomplete="off" name="q1" id="q1-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="q1" id="q1-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="q1" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de q1" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="q1" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de q1" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="q2" class="ens-fila" data-origen="nuevo" data-minimo data-ensayo-fuera="cubierta por el flujo R10 del ensayo.">
@@ -3973,7 +3964,7 @@
                 <label><input type="radio" autocomplete="off" name="q2" id="q2-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="q2" id="q2-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="q2" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de q2" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="q2" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de q2" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="q3" class="ens-fila" data-origen="nuevo" data-minimo data-ensayo-fuera="cubierta por el flujo R12 del ensayo.">
@@ -4002,7 +3993,7 @@
                 <label><input type="radio" autocomplete="off" name="q3" id="q3-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="q3" id="q3-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="q3" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de q3" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="q3" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de q3" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="q4" class="ens-fila" data-origen="nuevo" data-minimo data-ensayo-fuera="cubierta por el flujo R11 del ensayo.">
@@ -4032,7 +4023,7 @@
                 <label><input type="radio" autocomplete="off" name="q4" id="q4-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="q4" id="q4-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="q4" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de q4" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="q4" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de q4" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="q5" class="ens-fila" data-origen="nuevo" data-rev="6" data-rev-min="2">
@@ -4052,7 +4043,7 @@
                 <label><input type="radio" autocomplete="off" name="q5" id="q5-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="q5" id="q5-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="q5" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de q5" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="q5" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de q5" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="q6" class="ens-fila" data-origen="nuevo" data-rev="6" data-rev-min="2">
@@ -4074,7 +4065,7 @@
                 <label><input type="radio" autocomplete="off" name="q6" id="q6-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="q6" id="q6-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="q6" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de q6" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="q6" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de q6" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="q7" class="ens-fila" data-origen="nuevo" data-minimo data-ensayo-fuera="cubierta por el flujo R10 del ensayo.">
@@ -4099,7 +4090,7 @@
                 <label><input type="radio" autocomplete="off" name="q7" id="q7-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="q7" id="q7-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="q7" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de q7" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="q7" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de q7" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="q8" class="ens-fila" data-origen="nuevo" data-rev="6" data-rev-min="2">
@@ -4124,7 +4115,7 @@
                 <label><input type="radio" autocomplete="off" name="q8" id="q8-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="q8" id="q8-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="q8" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de q8" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="q8" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de q8" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="q9" class="ens-fila" data-origen="nuevo" data-rev="9" data-rev-min="4">
@@ -4149,7 +4140,7 @@
                 <label><input type="radio" autocomplete="off" name="q9" id="q9-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="q9" id="q9-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="q9" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de q9" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="q9" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de q9" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="q10" class="ens-fila" data-origen="nuevo" data-rev="6" data-rev-min="2">
@@ -4171,7 +4162,7 @@
                 <label><input type="radio" autocomplete="off" name="q10" id="q10-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="q10" id="q10-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="q10" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de q10" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="q10" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de q10" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="q11" class="ens-fila" data-origen="nuevo" data-rev="9" data-rev-min="4">
@@ -4198,7 +4189,7 @@
                 <label><input type="radio" autocomplete="off" name="q11" id="q11-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="q11" id="q11-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="q11" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de q11" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="q11" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de q11" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="q12" class="ens-fila" data-origen="nuevo" data-rev="6" data-rev-min="2">
@@ -4222,7 +4213,7 @@
                 <label><input type="radio" autocomplete="off" name="q12" id="q12-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="q12" id="q12-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="q12" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de q12" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="q12" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de q12" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="q13" class="ens-fila" data-origen="nuevo" data-rev="6" data-rev-min="3">
@@ -4245,7 +4236,7 @@
                 <label><input type="radio" autocomplete="off" name="q13" id="q13-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="q13" id="q13-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="q13" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de q13" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="q13" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de q13" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="q14" class="ens-fila" data-origen="nuevo">
@@ -4278,7 +4269,7 @@
                 <label><input type="radio" autocomplete="off" name="q14" id="q14-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="q14" id="q14-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="q14" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de q14" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="q14" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de q14" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="q15" class="ens-fila" data-origen="nuevo" data-rev="6" data-rev-min="2">
@@ -4301,7 +4292,7 @@
                 <label><input type="radio" autocomplete="off" name="q15" id="q15-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="q15" id="q15-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="q15" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de q15" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="q15" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de q15" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="q16" class="ens-fila" data-origen="nuevo">
@@ -4339,7 +4330,7 @@
                 <label><input type="radio" autocomplete="off" name="q16" id="q16-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="q16" id="q16-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="q16" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de q16" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="q16" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de q16" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="q17" class="ens-fila" data-origen="nuevo" data-rev="6" data-rev-min="2">
@@ -4365,7 +4356,7 @@
                 <label><input type="radio" autocomplete="off" name="q17" id="q17-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="q17" id="q17-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="q17" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de q17" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="q17" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de q17" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="q18" class="ens-fila" data-origen="nuevo">
@@ -4409,7 +4400,7 @@
                 <label><input type="radio" autocomplete="off" name="q18" id="q18-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="q18" id="q18-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="q18" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de q18" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="q18" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de q18" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="q19" class="ens-fila" data-origen="nuevo" data-rev="6" data-rev-min="2">
@@ -4437,7 +4428,7 @@
                 <label><input type="radio" autocomplete="off" name="q19" id="q19-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="q19" id="q19-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="q19" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de q19" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="q19" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de q19" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="q20" class="ens-fila" data-origen="nuevo">
@@ -4485,7 +4476,7 @@
                 <label><input type="radio" autocomplete="off" name="q20" id="q20-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="q20" id="q20-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="q20" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de q20" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="q20" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de q20" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="q21" class="ens-fila" data-origen="nuevo" data-rev="6" data-rev-min="2">
@@ -4512,7 +4503,7 @@
                 <label><input type="radio" autocomplete="off" name="q21" id="q21-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="q21" id="q21-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="q21" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de q21" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="q21" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de q21" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="q22" class="ens-fila" data-origen="nuevo">
@@ -4555,7 +4546,7 @@
                 <label><input type="radio" autocomplete="off" name="q22" id="q22-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="q22" id="q22-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="q22" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de q22" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="q22" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de q22" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="q23" class="ens-fila" data-origen="nuevo" data-rev="6" data-rev-min="2">
@@ -4580,7 +4571,7 @@
                 <label><input type="radio" autocomplete="off" name="q23" id="q23-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="q23" id="q23-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="q23" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de q23" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="q23" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de q23" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="q24" class="ens-fila" data-origen="nuevo" data-minimo data-ensayo-fuera="cubierta por el flujo R10 del ensayo.">
@@ -4609,7 +4600,7 @@
                 <label><input type="radio" autocomplete="off" name="q24" id="q24-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="q24" id="q24-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="q24" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de q24" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="q24" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de q24" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="q25" class="ens-fila" data-origen="nuevo" data-rev="10" data-rev-min="3">
@@ -4622,7 +4613,7 @@
                 <label><input type="radio" autocomplete="off" name="q25" id="q25-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="q25" id="q25-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="q25" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de q25" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="q25" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de q25" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="q26" class="ens-fila" data-origen="nuevo" data-rev="11" data-rev-min="3" data-rev-opcional>
@@ -4635,7 +4626,7 @@
                 <label><input type="radio" autocomplete="off" name="q26" id="q26-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="q26" id="q26-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="q26" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de q26" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="q26" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de q26" autocomplete="off"></textarea>
             </div>
           </li>
         </ul>
@@ -4663,7 +4654,7 @@
                 <label><input type="radio" autocomplete="off" name="j1" id="j1-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="j1" id="j1-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="j1" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de j1" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="j1" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de j1" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="j2" class="ens-fila" data-origen="heredada" data-rev="7" data-rev-min="3">
@@ -4679,7 +4670,7 @@
                 <label><input type="radio" autocomplete="off" name="j2" id="j2-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="j2" id="j2-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="j2" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de j2" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="j2" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de j2" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="j4" class="ens-fila" data-origen="heredada" data-rev="7" data-rev-min="2">
@@ -4694,7 +4685,7 @@
                 <label><input type="radio" autocomplete="off" name="j4" id="j4-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="j4" id="j4-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="j4" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de j4" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="j4" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de j4" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="j5" class="ens-fila" data-origen="heredada" data-rev="7" data-rev-min="2">
@@ -4710,7 +4701,7 @@
                 <label><input type="radio" autocomplete="off" name="j5" id="j5-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="j5" id="j5-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="j5" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de j5" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="j5" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de j5" autocomplete="off"></textarea>
             </div>
           </li>
           <li id="j3" class="ens-fila" data-origen="heredada" data-minimo data-ensayo-fuera="cubierta por el flujo R12 del ensayo.">
@@ -4727,7 +4718,7 @@
                 <label><input type="radio" autocomplete="off" name="j3" id="j3-si" value="si" /> Sí</label>
                 <label><input type="radio" autocomplete="off" name="j3" id="j3-no" value="no" /> No</label>
               </fieldset>
-              <input type="text" class="p-nota" data-nota-de="j3" maxlength="300" placeholder="Nota (opcional)" aria-label="Nota de j3" autocomplete="off" />
+              <textarea class="p-nota" data-nota-de="j3" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de j3" autocomplete="off"></textarea>
             </div>
           </li>
         </ul>
@@ -4744,6 +4735,10 @@
         <details class="chica">
           <summary>Historial de la guía</summary>
           <ul>
+            <li>
+              <strong>v22 · Sentada 5: tres agentes fuera y una sección en pausa · 2026-10-24:</strong>
+              salen del sitio los dos agentes de demostración de planlang y el agente duplicado de Design Science (los agentes pasan de 14 a 11 y las piezas de 37 a 34 en disco); el agente de investigación pasa a llamarse «Paper Computacional» y ningún agente lleva «Harness» en el nombre; el frente de Investigaciones queda <em>en pausa</em> («En preparación», con su aviso, sin tarjetas, fuera del sitemap y del chat, y con sus fichas dando 404). Cambian de texto la k1b y la n4b (las cuentas del portal: tres con número e Investigaciones en preparación), la m1b (11 agentes y su orden), la m4 (ahora mira la página en pausa, no una ficha de investigación), la m6, la k9, la m10, la m11 y la R9, y el bloque M y la o12b suman lo publicado (17 y 27 fichas). Vuelve a la revisión la k8 (esperaba un frente vacío que no existía; hoy lo es Investigaciones) y entra la o17 (las cuatro preguntas que dejó el retiro, en la sentada de tus decisiones abiertas). La nota de cada fila admite hasta 2000 caracteres y varias líneas. <strong>El prefijo de las respuestas sigue siendo <code>s21</code></strong>: la revisión del dueño está en curso y sus respuestas se conservan; las filas que cambiaron de texto llevan «Mejorado · S22» y conviene volver a mirarlas.
+            </li>
             <li>
               <strong>v21 · La revisión completa · 2026-10-24:</strong>
               entra el filtro «Revisión completa», el primero de la barra y el que
@@ -5409,7 +5404,7 @@
           document.querySelectorAll('input[type="radio"]'),
         );
         var notas = Array.prototype.slice.call(
-          document.querySelectorAll("input.p-nota"),
+          document.querySelectorAll("textarea.p-nota"),
         );
         var filas = Array.prototype.slice.call(
           document.querySelectorAll("ul.pasos li"),
@@ -5515,6 +5510,12 @@
         function hecha(li) {
           return estado(li) !== "";
         }
+        // La nota crece con lo que se escribe; en una sección oculta no se mide (scrollHeight vale 0).
+        function ajustarAlto(n) {
+          n.style.height = "";
+          if (!n.value || !n.scrollHeight) return;
+          n.style.height = n.scrollHeight + 2 + "px";
+        }
         function actualizar() {
           var vis = filas.filter(function (li) {
             var sec = li.closest("section");
@@ -5528,6 +5529,7 @@
           barra.style.width =
             (vis.length ? (hechas / vis.length) * 100 : 0) + "%";
           contador.textContent = hechas + "/" + vis.length;
+          notas.forEach(ajustarAlto);
           calcular();
           calcularRevision();
         }
@@ -5680,8 +5682,9 @@
           return t.length > 80 ? t.slice(0, 77).replace(/\s+\S*$/, "") + "…" : t;
         }
         function notaDe(li) {
-          var n = li.querySelector("input.p-nota");
-          return n ? n.value.trim() : "";
+          var n = li.querySelector("textarea.p-nota");
+          // Una nota de varias líneas va en una sola en el texto que se copia.
+          return n ? n.value.trim().replace(/\s*\n\s*/g, " ⏎ ") : "";
         }
         function sentadaDe(li) {
           var s = li.getAttribute("data-rev");
@@ -5849,13 +5852,15 @@
           });
           caja.insertBefore(b, caja.querySelector(".p-nota"));
         });
-        // La nota corta de cada fila.
+        // La nota de cada fila.
         notas.forEach(function (n) {
           var clave = NS + n.getAttribute("data-nota-de") + ":nota";
           try {
             n.value = localStorage.getItem(clave) || "";
           } catch (e) {}
+          ajustarAlto(n);
           n.addEventListener("input", function () {
+            ajustarAlto(n);
             try {
               if (n.value) localStorage.setItem(clave, n.value);
               else localStorage.removeItem(clave);

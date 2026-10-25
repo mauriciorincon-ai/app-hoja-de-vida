@@ -63,3 +63,15 @@ mistake, and the chat is the place where a recruiter is most likely to copy a na
 - Two frozen artifacts keep the old name on purpose: the dated design reference
   `docs/contrato-ficha-tecnica/referencia.html`/`.png` (approved on 2026-09-05) and the older
   ADRs and sprint records, which describe what was true when they were written.
+
+## Addendum (2026-10-24, Sprint 022): the same read-time alias for pieces
+
+The owner asked that no agent name carry the word «Harness». The sheet that has it comes from
+another house and is not edited here (hard rule 2), so the mechanism above is extended, not
+replaced: `data/nombres-piezas.yaml` maps `<front>: <slug>: "<name>"` and
+`getPiezas()` (`src/lib/vitrina/piezas.ts`) applies it when it reads a sheet, with the same
+pure replace the apps use (`scripts/nombre-oficial.mjs`: `cambiarEnTodo`, `conNombreDePieza`).
+The chat index (`scripts/fichas-al-indice.mjs`) and the citation names (`scripts/destinos.mjs`)
+read the same file through `scripts/nombres-oficiales.mjs`. Only the front and slug matter; if
+the sister house renames the piece in its sheet, the line becomes redundant and harmless.
+This is reversible, so it is an addendum and not a new ADR.

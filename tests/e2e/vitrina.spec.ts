@@ -72,8 +72,14 @@ type Frente = {
   estado: "abierta" | "en-preparacion";
   nombre: { es: string; en: string };
   intro: { es: string; en: string };
+  detalle: { es: string; en: string };
   /** Solo las apps (dueño, 2026-09-13): los demás frentes se muestran, no se entregan. */
   listaDeEspera?: boolean;
+  /** El aviso propio de un frente en pausa (2026-10-24); sin él, el texto genérico. */
+  enPreparacion?: {
+    titulo: { es: string; en: string };
+    linea: { es: string; en: string };
+  };
 };
 const FRENTES = (
   parse(readFileSync("data/vitrina.yaml", "utf8")) as { categorias: Frente[] }
@@ -97,14 +103,23 @@ type Pieza = {
   bloques: { cuenta: number }[];
   titular: string;
 };
+// El nombre que el sitio da a una pieza (data/nombres-piezas.yaml, ADR-028 extendido):
+// la página dice ese, no el de la ficha. `frente → slug → nombre`.
+const NOMBRES_PIEZAS = (parse(
+  readFileSync("data/nombres-piezas.yaml", "utf8"),
+) ?? {}) as Record<string, Record<string, string>>;
 const piezasDe = (frente: string): Pieza[] =>
   existsSync(`content/${frente}`)
     ? readdirSync(`content/${frente}`)
         .filter((f) => f.endsWith(".ficha-tecnica.json"))
-        .map(
-          (f) =>
-            JSON.parse(readFileSync(`content/${frente}/${f}`, "utf8")) as Pieza,
-        )
+        .map((f) => {
+          const pieza = JSON.parse(
+            readFileSync(`content/${frente}/${f}`, "utf8"),
+          ) as Pieza;
+          const oficial = NOMBRES_PIEZAS[frente]?.[pieza.pieza.slug];
+          if (oficial) pieza.pieza.nombre = oficial;
+          return pieza;
+        })
     : [];
 const ABIERTOS = FRENTES.filter(
   (f) => f.estado === "abierta" && f.id !== "apps",
@@ -588,6 +603,53 @@ test.describe("Vitrina — los frentes en preparación (ADR-015)", () => {
     }
   });
 
+  test("un frente en pausa dice su aviso, no enseña ni lista sus piezas y no las deja visitar", async ({
+    page,
+    request,
+  }) => {
+    // «En pausa» = en preparación CON fichas en disco (hoy, investigaciones: se
+    // están rehaciendo). Sus fichas se quedan en content/ pero el sitio no las
+    // enseña, no las lista en el sitemap y cada una da 404.
+    const enPausa = EN_PREPARACION.map((f) => ({
+      f,
+      piezas: piezasDe(f.id),
+    })).filter((x) => x.piezas.length > 0);
+    test.skip(
+      enPausa.length === 0,
+      "ningún frente en pausa: ninguno en preparación tiene fichas en disco",
+    );
+    const sitemap = await (await request.get("/sitemap.xml")).text();
+    for (const { f, piezas } of enPausa) {
+      for (const l of ["es", "en"] as const) {
+        await page.goto(`/${l}/vitrina/${f.id}`);
+        if (f.enPreparacion) {
+          await expect(page.locator("main")).toContainText(
+            f.enPreparacion.titulo[l],
+          );
+          await expect(page.locator("main")).toContainText(
+            f.enPreparacion.linea[l],
+          );
+          // El «detalle» del frente dice lo que se publica aquí: bajo un aviso de pausa se contradice.
+          await expect(page.locator("main")).not.toContainText(
+            f.detalle[l].slice(0, 60),
+          );
+        }
+        // Ninguna tarjeta de pieza, ni su nombre, en el HTML del frente.
+        await expect(page.locator("[data-muestra-slug]")).toHaveCount(0);
+        for (const p of piezas) {
+          const r = await page.goto(`/${l}/vitrina/${f.id}/${p.pieza.slug}`);
+          expect(r?.status(), `/${l}/vitrina/${f.id}/${p.pieza.slug}`).toBe(
+            404,
+          );
+        }
+      }
+      for (const p of piezas)
+        expect(sitemap).not.toContain(`/vitrina/${f.id}/${p.pieza.slug}`);
+      // El frente mismo SÍ está: explica la pausa.
+      expect(sitemap).toContain(`/es/vitrina/${f.id}`);
+    }
+  });
+
   test("del portal se entra a un frente en preparación, y de ahí a los otros", async ({
     page,
   }) => {
@@ -774,6 +836,18 @@ test.describe("Vitrina — las estanterías: un frente ABIERTO y sus piezas (S7)
     // Aserción, no skip: las siete investigaciones llegan así por diseño
     // (aportes, no funciones). El día que ninguna pieza venga sin cuenta, esta
     // prueba tiene que AVISAR de que dejó de vigilar algo, no desaparecer.
+    // La única salida honesta: que las únicas piezas así estén en un frente EN
+    // PAUSA (hoy, investigaciones) y no tengan página que visitar. Al reabrirlo,
+    // la prueba vuelve sola.
+    const enPausa = FRENTES.filter(
+      (f) => f.estado !== "abierta" && f.id !== "apps",
+    ).flatMap((f) =>
+      piezasDe(f.id).filter((p) => p.bloques.every((b) => b.cuenta === 0)),
+    );
+    test.skip(
+      sinCuenta.length === 0 && enPausa.length > 0,
+      "las piezas sin cuenta son las de un frente en pausa: no tienen página",
+    );
     expect(
       sinCuenta.length,
       "ninguna pieza declara sus bloques en cuenta 0: esta prueba no vigila nada",
@@ -1532,10 +1606,15 @@ test.describe("Vitrina — el carrusel de la galería (Sprint 009)", () => {
     await expect(indicador).toHaveText(`1 de ${N}`);
 
     await carrusel.locator("[data-pista]").evaluate((el) => {
-      (el as HTMLElement).scrollTo({ left: el.clientWidth, behavior: "instant" });
+      (el as HTMLElement).scrollTo({
+        left: el.clientWidth,
+        behavior: "instant",
+      });
     });
     await expect(indicador).toHaveText(`2 de ${N}`);
-    await expect(carrusel.locator('[data-captura="2"]')).toBeInViewport({ ratio: 0.6 });
+    await expect(carrusel.locator('[data-captura="2"]')).toBeInViewport({
+      ratio: 0.6,
+    });
 
     // Y de vuelta, también a mano.
     await carrusel.locator("[data-pista]").evaluate((el) => {

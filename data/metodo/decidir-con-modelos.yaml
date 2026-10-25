@@ -413,8 +413,8 @@ bloques:
         porQue:
           voz: hice
           texto:
-            es: "En el Harness Paper Computacional del autor cada problema se formula dos veces —programación entera mixta con Pyomo y HiGHS, y programación por restricciones con OR-Tools— y sus óptimos deben coincidir o el modelo está mal traducido; renunciar a una de las dos formulaciones exige una justificación escrita."
-            en: "In the author's Computational Paper Harness every problem is formulated twice —mixed-integer programming with Pyomo and HiGHS, and constraint programming with OR-Tools— and their optima must match or the model was translated wrong; giving up one of the two formulations requires a written justification."
+            es: "En el Paper Computacional del autor cada problema se formula dos veces —programación entera mixta con Pyomo y HiGHS, y programación por restricciones con OR-Tools— y sus óptimos deben coincidir o el modelo está mal traducido; renunciar a una de las dos formulaciones exige una justificación escrita."
+            en: "In the author's Computational Paper every problem is formulated twice —mixed-integer programming with Pyomo and HiGHS, and constraint programming with OR-Tools— and their optima must match or the model was translated wrong; giving up one of the two formulations requires a written justification."
           corpus: [las-investigaciones]
         nota:
           voz: campo
@@ -619,10 +619,10 @@ bloques:
       - nombre: { es: "La optimización formulada dos veces", en: "Optimization formulated twice" }
         nivel: uso-real
         texto:
-          es: "En el paper de asignación conductor y bus, producido con el Harness Paper Computacional, las dos formulaciones independientes —programación entera y programación por restricciones— dieron 14.251 óptimos idénticos en 14.251 comparaciones, sobre la topología real de rutas de los datos abiertos del sistema y con un generador sintético declarado."
-          en: "In the driver-and-bus assignment paper, produced with the Computational Paper Harness, the two independent formulations —integer programming and constraint programming— gave 14,251 identical optima in 14,251 comparisons, on the real route topology from the system's open data and with a declared synthetic generator."
+          es: "En el paper de asignación conductor y bus, producido con el Paper Computacional, las dos formulaciones independientes —programación entera y programación por restricciones— dieron 14.251 óptimos idénticos en 14.251 comparaciones, sobre la topología real de rutas de los datos abiertos del sistema y con un generador sintético declarado."
+          en: "In the driver-and-bus assignment paper, produced with the Computational Paper, the two independent formulations —integer programming and constraint programming— gave 14,251 identical optima in 14,251 comparisons, on the real route topology from the system's open data and with a declared synthetic generator."
         corpus: [las-investigaciones]
-        href: /vitrina/investigaciones/asignacion-con-fallas
+        href: /vitrina/investigaciones # en pausa (2026-10-24); al reabrir: /vitrina/investigaciones/asignacion-con-fallas
       - nombre: { es: "FlexSim en Inglopres y en Cafam: simular antes de intervenir", en: "FlexSim at Inglopres and Cafam: simulate before intervening" }
         nivel: uso-real
         texto:
@@ -643,7 +643,7 @@ bloques:
           es: "En la investigación sobre convoyes de buses, la política propuesta se prueba en una simulación de eventos discretos con verdad conocida por construcción y se compara contra el mejor control clásico, nunca contra no hacer nada; las experiencias medidas son de un corredor simulado, y su ficha no afirma cifras del sistema real."
           en: "In the research on bus bunching, the proposed policy is tested in a discrete-event simulation with ground truth known by construction and compared against the best classic control, never against doing nothing; the experiences measured come from a simulated corridor, and its technical sheet claims no figures for the real system."
         corpus: [las-investigaciones]
-        href: /vitrina/investigaciones/convoyes-de-buses
+        href: /vitrina/investigaciones # en pausa (2026-10-24); al reabrir: /vitrina/investigaciones/convoyes-de-buses
 
   # ─── 9 · Límites y alcance ──────────────────────────────────────────────────
   - n: 9

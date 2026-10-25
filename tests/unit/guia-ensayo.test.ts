@@ -273,7 +273,7 @@ describe("la guía · el sí/no", () => {
     );
     expect((doc.getElementById("a4-no") as HTMLInputElement).checked).toBe(true);
     expect(
-      (doc.querySelector('[data-nota-de="a4"]') as HTMLInputElement).value,
+      (doc.querySelector('[data-nota-de="a4"]') as HTMLTextAreaElement).value,
     ).toBe("el logo se ve borroso");
     expect(calc("ensayo-si")).toBe("1");
     expect(calc("ensayo-no")).toBe("1");
@@ -311,7 +311,7 @@ describe("la guía · todo control dibujado tiene su script (regla 22)", () => {
       b.click();
       expect(b.classList.contains("activo"), b.textContent!).toBe(true);
     }
-    const notas = [...doc.querySelectorAll<HTMLInputElement>("input.p-nota")];
+    const notas = [...doc.querySelectorAll<HTMLTextAreaElement>("textarea.p-nota")];
     expect(notas.length).toBeGreaterThan(100);
     for (const n of notas.slice(0, 5)) {
       n.value = "una nota";
