@@ -46,7 +46,7 @@ todos pertenecen a **ARKHÉ**, mi ecosistema agéntico, que está explicado en e
 agentes.
 
 **Cinco están sellados** —Constructor de Tableros Power BI, Presentaciones CINE, Fábrica de
-AI-APPs, Taller de Animación y Harness Paper Computacional— y seis siguen en estado inicial. Lo
+AI-APPs, Taller de Animación y Paper Computacional— y seis siguen en estado inicial. Lo
 que no son: servicios con usuarios. Son herramientas de uso personal con entregables y evidencia —incluso las diseñadas para entregar un repositorio por cliente no han tenido usuarios distintos de mí—;
 la palabra «producción» la reservo para los 27 agentes de Vesting.
 
@@ -103,7 +103,7 @@ produce actividad nueva mientras la anterior siga sin resultados registrados.
 
 | Agente                           | Estado  | Qué promete                                                                                          | Cifra medida                                  |
 | -------------------------------- | ------- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------- |
-| **Harness Paper Computacional**  | sellado | si no está en el ledger, no está en el paper; tras tres papers de clases distintas el diff de las fases sigue vacío | **44 criterios**; 3 papers listos; 0 campos nuevos del contrato |
+| **Paper Computacional**  | sellado | si no está en el ledger, no está en el paper; tras tres papers de clases distintas el diff de las fases sigue vacío | **44 criterios**; 3 papers listos; 0 campos nuevos del contrato |
 | **Fábrica de AI-APPs**           | sellado | dos casas, un escritor por casa; ninguna app avanza sin dos aprobaciones escritas y ningún sprint cierra sin el resumen del repo de la app | 7 repositorios de app estampados; 24 sprints cerrados; 6 gates |
 
 El harness de investigación no publica: la producción termina en «listo para enviar», y
@@ -127,7 +127,7 @@ pegar: la constitución es el arranque.
 Sobre esa constitución va el **harness**: el contrato de entrada y salida, las herramientas
 permitidas, el formato de cada entregable y los **criterios binarios de aceptación** —pasa o no
 pasa, sin juicio intermedio— que se cuentan uno a uno en los work-items del paquete: 50 en el Asistente de posgrado, 99 en Hiring Copilot, 20 en el Constructor de
-Tableros, 33 en el Taller de Animación y 44 en el Harness Paper
+Tableros, 33 en el Taller de Animación y 44 en el Paper
 Computacional. Un criterio que no puede fallar no es un criterio, y por eso cada control lleva su
 **carnada**: el caso destruido a propósito que demuestra que el control dispara.
 
@@ -229,7 +229,7 @@ legal de cada contacto. **8 comandos**, **6 gates** y 19 ítems de checklist, to
 porque la primera corrida real es su primer work-item. No publica ni envía, monta video pero no lo
 anima, y el ROI modela horas liberadas (su reducción del 63,2 % sigue siendo supuesto).
 
-**Harness Paper Computacional** (sellado, v1.21) y **Fábrica de AI-APPs** (sellado, v1.1.0) tienen su
+**Paper Computacional** (sellado, v1.21) y **Fábrica de AI-APPs** (sellado, v1.1.0) tienen su
 relato en el documento de las investigaciones y en el del pipeline: el primero produjo **3 papers**
 listos para publicar con sus **44 criterios** y su ledger; la segunda estampó siete repositorios y
 cerró **24 sprints** con retrospectiva, y es la que construyó esta misma página.
@@ -242,7 +242,7 @@ Las fichas declaran un estado y una versión, y las dos palabras tienen definici
 quiere decir que el agente alcanzó su MVP: cerró al menos una corrida completa con su entregable
 real, sus gates se ejercitaron con tokens de verdad y su versión quedó estampada con fecha: el
 Constructor de Tableros (v1.1.0), Presentaciones CINE (v1.5.0), la Fábrica de AI-APPs (v1.1.0),
-el Taller de Animación (v1.3.0) y el Harness Paper Computacional (v1.21). **Inicial** quiere decir
+el Taller de Animación (v1.3.0) y el Paper Computacional (v1.21). **Inicial** quiere decir
 que el harness está construido y verificado pero no ha alcanzado su MVP: su primera corrida real
 todavía no ocurrió o no cerró: Atracción en Frío lo dice de sus ocho comandos; la Biblioteca, de diez de sus doce; el
 Asistente de posgrado, de sus 13 comandos con 0 ejercitados. Publicar ese dato es parte del

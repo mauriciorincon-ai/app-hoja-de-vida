@@ -580,7 +580,7 @@ properly separate variation from the common structure.
 
 <!-- seccion: ledger-fabrica-y-terminado -->
 
-The Computational Paper Harness protects the link between results and evidence. A figure cannot
+The Computational Paper protects the link between results and evidence. A figure cannot
 reach the final document unless it first exists as a controlled record within the flow: if it is
 not in the ledger, it is not in the paper. Every figure is a function of the ledger, so
 provenance is not documented: it becomes hard to break. This rule keeps the text from becoming an

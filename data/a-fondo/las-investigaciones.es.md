@@ -144,7 +144,7 @@ Las siete líneas de investigación pueden organizarse alrededor de tres grandes
 
 A la primera pregunta responden tres líneas que vienen del transporte y de la línea de producción: la asignación conjunta de conductor, vehículo y ruta con fallas; los convoyes de buses; y los suplementos por fatiga en el balanceo de líneas. A la segunda responden dos: FORJA, del proceso dibujado al sistema que lo ejecuta, y el reemplazo progresivo de un ERP con inteligencia artificial. Y a la tercera, dos: ARKHÉ, el ecosistema declarativo de conocimiento que es también mi ecosistema agéntico propio, y el espectro de agencia de los instrumentos de decisión.
 
-Las siete provienen de momentos distintos de mi trayectoria —de un ERP en 2016 a los agentes de 2024—, pero comparten la misma raíz. Cada una comienza con un sistema real cuya representación era insuficiente, una decisión que podía mejorarse o una capacidad organizacional que todavía no contaba con un método suficientemente claro para evolucionar. Y las siete se producen con los mismos dos harnesses, y uno de ellos, el Harness Paper Computacional, está publicado entre los 11 agentes de la vitrina.
+Las siete provienen de momentos distintos de mi trayectoria —de un ERP en 2016 a los agentes de 2024—, pero comparten la misma raíz. Cada una comienza con un sistema real cuya representación era insuficiente, una decisión que podía mejorarse o una capacidad organizacional que todavía no contaba con un método suficientemente claro para evolucionar. Y las siete se producen con los mismos dos harnesses, y uno de ellos, el Paper Computacional, está publicado entre los 11 agentes de la vitrina.
 
 ## Tres líneas sobre operaciones bajo variabilidad
 
@@ -222,15 +222,15 @@ La experiencia proporciona relevancia. El método proporciona credibilidad. La i
 
 <!-- seccion: los-harnesses -->
 
-Las investigaciones se producen con dos harnesses, y uno de ellos, el Harness Paper Computacional, está publicado entre los 11 agentes de la vitrina. Los dos declaran el paper en un solo archivo de configuración —preguntas, principios falsables, métricas, corpus, frontera de divulgación— y conducen diez fases hasta un manuscrito listo para enviar, deteniéndose en puertas donde solo una frase exacta mía deja pasar: «framing aprobado», «artefacto aprobado», «manuscrito aprobado», «sin críticos, envía». Una configuración incompleta falla al cargar en vez de rellenarse sola: el harness nunca inventa contenido de dominio que yo no declaré.
+Las investigaciones se producen con dos harnesses, y uno de ellos, el Paper Computacional, está publicado entre los 11 agentes de la vitrina. Los dos declaran el paper en un solo archivo de configuración —preguntas, principios falsables, métricas, corpus, frontera de divulgación— y conducen diez fases hasta un manuscrito listo para enviar, deteniéndose en puertas donde solo una frase exacta mía deja pasar: «framing aprobado», «artefacto aprobado», «manuscrito aprobado», «sin críticos, envía». Una configuración incompleta falla al cargar en vez de rellenarse sola: el harness nunca inventa contenido de dominio que yo no declaré.
 
 El Harness Design Science —diez fases D0 a D9, 52 criterios binarios de aceptación contados en sus archivos de fase, 7 controles endurecidos con su huella publicada, cinco gates con token verbal— es para el investigador-practicante que ya construyó artefactos que funcionan y sabe que ahí hay un paper de Design Science Research. Congela los umbrales antes de medir y publica lo que salga: en su paper piloto, dos de los tres principios del artefacto quedaron refutados por sus propias métricas, y así se escribieron. Un resultado nulo jamás se arregla redefiniendo; y un nulo no es una refutación: los dos se reportan como informativos. Cada criterio se imprime con veredicto, denominador y universo al cerrar su fase, y un lote vacío contado como verde es fallo del control, no éxito.
 
-## El Harness Paper Computacional, y lo que los dos harnesses no hacen
+## El Paper Computacional, y lo que los dos harnesses no hacen
 
 <!-- seccion: harness-paper-computacional -->
 
-El Harness Paper Computacional —44 criterios binarios de verificación, versión 1.21, sellado el 22 de agosto de 2026— produce papers computacionales de Investigación de Operaciones, y ya salieron tres, listos para publicar: el de balanceo con fatiga endógena, el de asignación conductor y bus y el de convoyes. Aplica la segunda regla: si no está en el ledger, no está en el paper. Cada problema se formula dos veces —programación entera mixta con Pyomo y HiGHS, y programación por restricciones con OR-Tools— y sus óptimos deben coincidir o el modelo está mal traducido; renunciar a una formulación exige justificación escrita.
+El Paper Computacional —44 criterios binarios de verificación, versión 1.21, sellado el 22 de agosto de 2026— produce papers computacionales de Investigación de Operaciones, y ya salieron tres, listos para publicar: el de balanceo con fatiga endógena, el de asignación conductor y bus y el de convoyes. Aplica la segunda regla: si no está en el ledger, no está en el paper. Cada problema se formula dos veces —programación entera mixta con Pyomo y HiGHS, y programación por restricciones con OR-Tools— y sus óptimos deben coincidir o el modelo está mal traducido; renunciar a una formulación exige justificación escrita.
 
 Los dos corren en un runtime de ciencia con kernel persistente y procedencia por artefacto, sobre un paquete de solo lectura; la fábrica que los construye y mantiene jamás ejecuta una fase, y esa separación es de permisos, no de intención. Los dos comparten un límite y un «nunca»: no publican —la producción termina en «listo para enviar» y el envío a revista lo ejecuto yo, con mi propio token, meses después si hace falta— y nunca mencionan mi ecosistema ni mi maquinaria en un manuscrito ni en sus metadatos, cosa que un lint binario verifica dos veces, en la primera fase y en la última.
 
@@ -262,7 +262,7 @@ AI-300 profundiza esta perspectiva mediante evaluación y observabilidad de solu
 
 <!-- seccion: trazabilidad -->
 
-El Harness Paper Computacional aplica una segunda regla: ningún número puede llegar al manuscrito si antes no existe como registro dentro del sistema que lo produjo o validó. El ledger es un registro en formato Parquet al que solo se añade, nunca se edita; el identificador de corrida es la moneda de la procedencia, y un manifiesto mapea cada figura a sus corridas y a la pregunta de investigación que responde.
+El Paper Computacional aplica una segunda regla: ningún número puede llegar al manuscrito si antes no existe como registro dentro del sistema que lo produjo o validó. El ledger es un registro en formato Parquet al que solo se añade, nunca se edita; el identificador de corrida es la moneda de la procedencia, y un manifiesto mapea cada figura a sus corridas y a la pregunta de investigación que responde.
 
 Esto elimina las cifras escritas manualmente en el texto sin una relación verificable con los datos, las consultas, las métricas o el experimento correspondiente. El documento consume resultados persistidos y no se convierte en una fuente autónoma de números: cero números editados a mano en figuras, tablas o manuscrito, y toda cifra en prosa se lee del artefacto al escribirla, con un cotejo que corre en cada cierre de fase.
 

@@ -44,7 +44,7 @@ fixes the agent's function, its sources, its tools and its input and output cont
 them belong to **ARKHÉ**, my agentic ecosystem, which is explained in the agents document.
 
 **Five are sealed** —Power BI Dashboard Builder, CINE Presentations, AI-APPs Factory, Animation
-Workshop and Computational Paper Harness— and six remain in initial state. What they are not:
+Workshop and Computational Paper— and six remain in initial state. What they are not:
 services with users. They are tools for personal use with deliverables and evidence —even those designed to hand a repository to each client have had no users other than me—; the word
 "production" I reserve for the 27 agents at Vesting.
 
@@ -104,7 +104,7 @@ results.
 
 | Agent                            | Status  | What it promises                                                                                     | Measured figure                               |
 | -------------------------------- | ------- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------- |
-| **Computational Paper Harness**  | sealed  | if it is not in the ledger, it is not in the paper; after three papers of different classes the diff of the phases is still empty | **44 criteria**; 3 papers ready; 0 new contract fields |
+| **Computational Paper**  | sealed  | if it is not in the ledger, it is not in the paper; after three papers of different classes the diff of the phases is still empty | **44 criteria**; 3 papers ready; 0 new contract fields |
 | **AI-APPs Factory**              | sealed  | two houses, one writer per house; no app moves forward without two written approvals and no sprint closes without the summary from the app's repo | 7 app repositories stamped; 24 sprints closed; 6 gates |
 
 The research harness does not publish: production ends at "ready to submit", and submission
@@ -129,7 +129,7 @@ On top of that constitution goes the **harness**: the input and output contract,
 tools, the format of each deliverable and the **binary acceptance criteria** —pass or fail, with
 no intermediate judgment— that are counted one by one in the package's work items: 50 in the Graduate Assistant, 99 in Hiring Copilot, 20 in the Dashboard
 Builder, 33 in the Animation Workshop and 44 in the
-Computational Paper Harness. A criterion that cannot fail is not a criterion, and that is why
+Computational Paper. A criterion that cannot fail is not a criterion, and that is why
 each control carries its **bait**: the case deliberately destroyed that proves the control fires.
 
 And on top of the harness, the **human gates**: points where the agent stops and does not continue
@@ -233,7 +233,7 @@ because the first real run is its first work item. It does not publish or send, 
 video but does not animate it, and the ROI models hours freed up (its 63.2% reduction is still an
 assumption).
 
-**Computational Paper Harness** (sealed, v1.21) and **AI-APPs Factory** (sealed, v1.1.0) have their
+**Computational Paper** (sealed, v1.21) and **AI-APPs Factory** (sealed, v1.1.0) have their
 story in the investigations document and in the pipeline one: the first produced **3 papers** ready
 to publish with its **44 criteria** and its ledger; the second stamped seven repositories and closed
 **24 sprints** with a retrospective, and it is the one that built this very page.
@@ -244,7 +244,7 @@ to publish with its **44 criteria** and its ledger; the second stamped seven rep
 
 The sheets declare a status and a version, and both words have a definition. **Sealed** means the agent reached its MVP: it closed at least one complete run with its real deliverable, its gates were exercised with real tokens and its version was stamped with a date: the Dashboard Builder (v1.1.0),
 CINE Presentations (v1.5.0), the AI-APPs Factory (v1.1.0), the Animation Workshop (v1.3.0) and
-the Computational Paper Harness (v1.21). **Initial** means the harness is built and verified but has not reached its MVP: its first real run has not yet happened or has not closed: Cold Attraction says so of its eight
+the Computational Paper (v1.21). **Initial** means the harness is built and verified but has not reached its MVP: its first real run has not yet happened or has not closed: Cold Attraction says so of its eight
 commands; the Library, of ten of its twelve; the Graduate Assistant, of its 13 commands with 0
 exercised. Publishing that fact is part of the method: a sheet that said "tested" without a run
 would be the same figure without provenance that the agents forbid themselves.
