@@ -501,36 +501,46 @@ function columnaDerecha(doc, cv, labels, yInicial, sitio) {
 
 /**
  * Un hito de la trayectoria: rol, organización, periodo y sus logros. Con
- * `soloDescripcion`, la descripción en vez de los logros.
+ * `conDescripcion`, la descripción va antes de los logros: es el puesto de
+ * proyectos propios, cuya descripción es la primera línea de su LinkedIn,
+ * dictada por el dueño, y el PDF la conserva (S25).
  */
-function hito(col, rol, { soloDescripcion = false } = {}) {
+function hito(col, rol, { conDescripcion = false } = {}) {
   const { doc } = col;
   estilo(doc, "Helvetica-Bold", 10, TINTA);
   // El título del hito no se queda solo al pie de una página: viaja con la
   // organización, el periodo y el primer bullet.
-  // (El compacto solo arrastra su línea de organización y la descripción.)
-  col.parrafo(ansi(rol.rol), { juntoCon: soloDescripcion ? 26 : 40 });
-  if (soloDescripcion) {
-    // El puesto propio, compacto: organización y periodo en una línea.
-    estilo(doc, "Helvetica-Bold", 9.2, NAVY);
-    col.parrafo(ansi(`${rol.organizacion} · ${rol.periodo}`));
-  } else {
-    estilo(doc, "Helvetica-Bold", 9.2, NAVY);
-    col.parrafo(ansi(rol.organizacion));
-    estilo(doc, "Helvetica", 8.2, GRIS);
-    col.parrafo(ansi(rol.periodo));
-  }
+  col.parrafo(ansi(rol.rol), { juntoCon: 40 });
+  estilo(doc, "Helvetica-Bold", 9.2, NAVY);
+  col.parrafo(ansi(rol.organizacion));
+  estilo(doc, "Helvetica", 8.2, GRIS);
+  col.parrafo(ansi(rol.periodo));
   col.espacio(3);
   // 8,8 y 7 de aire entre hitos (eran 9 y 8): el ajuste que dejó caber, en las
-  // dos páginas, el puesto propio y la etapa 2015–2016 de Inglopres (2026-10-04).
+  // dos páginas, la etapa 2015–2016 de Inglopres (2026-10-04); desde el S25 el
+  // PDF es de tres hojas y el puesto propio se imprime entero.
   estilo(doc, "Helvetica", 8.8, TINTA);
   const bullets = rol.bullets ?? [];
-  if (bullets.length > 0 && !soloDescripcion) {
+  if (conDescripcion && rol.descripcion) {
+    col.parrafo(ansi(rol.descripcion));
+    col.espacio(2);
+  }
+  if (bullets.length > 0) {
     for (const bullet of bullets) col.vineta(ansi(bullet));
   } else {
     col.parrafo(ansi(rol.descripcion));
   }
   col.espacio(7);
+}
+
+/**
+ * Lo que mide un hito impreso con `conDescripcion`: el rol, la organización y el
+ * periodo (≈ 45 pt) más la descripción y cada logro, con la sangría de la viñeta.
+ */
+function altoDeHito(col, rol) {
+  estilo(col.doc, "Helvetica", 8.8, TINTA);
+  const textos = [rol.descripcion, ...(rol.bullets ?? [])].filter(Boolean);
+  return 45 + textos.reduce((n, texto) => n + col.alto(ansi(texto), { sangria: 9 }) + 2, 0);
 }
 
 /** Un hito sin `tipo` es un empleo: el YAML llega crudo, sin el default del esquema. */
@@ -541,25 +551,31 @@ function columnaIzquierda(doc, cv, labels, yInicial) {
 
   // Los EMPLEOS van bajo «Experiencia». El puesto de proyectos propios
   // (2026-10-04) va después, en su propia sección, para que un ATS no lo lea
-  // como un empleador más, y con su DESCRIPCIÓN: sus logros nombran las piezas
-  // de la vitrina, viven en la web y en el chat, y en papel no cabían dentro de
-  // las dos páginas que el dueño fijó el 2026-09-24.
+  // como un empleador más. Desde el S25 (2026-10-25, OM-11) se imprime ENTERO:
+  // su descripción y sus seis logros, como cualquier otra experiencia. El dueño
+  // revirtió así «el PDF cabe en dos páginas» (2026-09-24): con sus logros el
+  // PDF pasa a tres hojas, y la tercera es la que le da su lugar.
   col.seccion(labels.experiencia);
   for (const rol of cv.trayectoria.filter((h) => !esProyectoPropio(h))) hito(col, rol);
   const propios = cv.trayectoria.filter(esProyectoPropio);
-  // El título de la sección viaja con el hito entero (rol, organización y la
-  // descripción): solo, al pie de la página 2, sería un título huérfano.
-  if (propios.length > 0) col.seccion(labels.proyectosPropios, { juntoCon: 40 });
-  for (const rol of propios) hito(col, rol, { soloDescripcion: true });
+  // El título de la sección viaja con el hito ENTERO (rol, organización,
+  // descripción y los seis logros): si no cabe en lo que queda de la página 2,
+  // la sección abre la 3 con su título, en vez de partirse con el título solo
+  // al pie de una hoja y los logros en la siguiente.
+  if (propios.length > 0) {
+    col.seccion(labels.proyectosPropios, { juntoCon: altoDeHito(col, propios[0]) });
+  }
+  for (const rol of propios) hito(col, rol, { conDescripcion: true });
 
   // Cada experiencia se cuenta UNA vez (2026-09-24, criterio del dueño: «que
   // no repita, y que no deje por fuera ninguna de mis experiencias y logros»).
   // Un proyecto que es el caso de estudio de un hito es la misma historia que
   // ese hito, y sus cifras ya están arriba, en los logros de la experiencia
-  // (lo exige `tests/unit/casos-de-estudio.test.ts`). Listarlo otra vez aquí
-  // repetía la historia: con los ocho, una tercera página entera; con solo el
-  // destacado, Vesting dos veces. «Proyectos» queda para lo que NO es ya una
-  // experiencia —hoy nada, así que la sección no se pinta—.
+  // (lo exige `tests/unit/casos-de-estudio.test.ts`; solo el puesto de
+  // proyectos propios queda exento: sus logros no llevan totales). Listarlo
+  // otra vez aquí repetía la historia: con todos los casos, una página entera
+  // más; con solo el destacado, Vesting dos veces. «Proyectos» queda para lo
+  // que NO es ya una experiencia —hoy nada, así que la sección no se pinta—.
   const conHito = new Set(cv.trayectoria.map((h) => h.proyecto));
   const sueltos = cv.proyectos.filter((p) => !conHito.has(p.slug));
   if (sueltos.length > 0) col.seccion(labels.proyectos);

@@ -38,7 +38,7 @@ const files = {
 /**
  * Y el MISMO PDF con dominio, que es el que baja un reclutador en producción:
  * la cabecera crece con el bloque del dominio y cada página gana su pie, así
- * que las dos páginas y la cobertura se miden también aquí. Un dominio largo a
+ * que las tres páginas y la cobertura se miden también aquí. Un dominio largo a
  * propósito: si cabe este, cabe el real (que jamás se escribe aquí, regla 16).
  */
 const DOMINIO = "nombreyapellidolargo.test";
@@ -93,12 +93,15 @@ describe("PDF ATS generado en build desde los YAML", () => {
     }
   });
 
-  // DOS PÁGINAS (2026-09-24). Un CV que lee un ATS y que se imprime tiene un
-  // techo, y nadie lo vigilaba: al darle a cada experiencia su caso de estudio,
-  // la sección «Proyectos» repitió los ocho y el PDF pasó a tres páginas sin
-  // que ninguna prueba se enterara. Se cuentan los objetos `/Type /Page` del
-  // archivo —pdfkit los escribe sin comprimir—, que es lo que ve una impresora.
-  it("cabe en dos páginas, en los dos idiomas, con dominio y sin él", () => {
+  // TRES PÁGINAS (2026-10-25; antes dos, 2026-09-24). Un CV que lee un ATS y
+  // que se imprime tiene un techo, y nadie lo vigilaba: al darle a cada
+  // experiencia su caso de estudio, la sección «Proyectos» repitió los casos y
+  // el PDF pasó a tres páginas sin que ninguna prueba se enterara. El 2026-09-24
+  // el dueño fijó el techo en dos; el 2026-10-25 (S25, OM-11) lo subió a tres
+  // para que el puesto de proyectos propios se imprima con sus logros, como las
+  // demás experiencias. Se cuentan los objetos `/Type /Page` del archivo
+  // —pdfkit los escribe sin comprimir—, que es lo que ve una impresora.
+  it("cabe en tres páginas, en los dos idiomas, con dominio y sin él", () => {
     for (const [variante, archivos] of variantes) {
       for (const [locale, file] of Object.entries(archivos)) {
         const paginas = (
@@ -108,7 +111,7 @@ describe("PDF ATS generado en build desde los YAML", () => {
         ).length;
         const nombre = `el PDF ${locale} ${variante} tiene ${paginas} páginas`;
         expect(paginas, nombre).toBeGreaterThan(0);
-        expect(paginas, nombre).toBeLessThanOrEqual(2);
+        expect(paginas, nombre).toBeLessThanOrEqual(3);
       }
     }
   });
@@ -122,13 +125,14 @@ describe("PDF ATS generado en build desde los YAML", () => {
     for (const [variante, archivos] of variantes) {
       for (const locale of ["es", "en"] as const) {
         const texto = plano(await extractText(archivos[locale]));
-        // El puesto de proyectos propios (2026-10-04) va con su descripción, no
-        // con sus logros: nombran las piezas de la vitrina, viven en la web y en
-        // el chat, y en papel no cabían dentro de las dos páginas. Ver
-        // `columnaIzquierda` en scripts/generate-cv-pdf.mjs.
+        // El puesto de proyectos propios se imprime ENTERO desde el 2026-10-25
+        // (S25, OM-11): su descripción —la primera línea del LinkedIn del
+        // dueño— y sus seis logros. Antes iba solo con su descripción porque en
+        // papel no cabían dentro de las dos páginas que entonces fijó el techo. Ver `columnaIzquierda` en
+        // scripts/generate-cv-pdf.mjs.
         const faltan = getCv(locale).trayectoria.flatMap((h) =>
           (h.tipo === "proyectos-propios"
-            ? [h.rol, h.organizacion, h.descripcion]
+            ? [h.rol, h.organizacion, h.descripcion, ...h.bullets]
             : [h.rol, h.organizacion, ...h.bullets])
             .filter((t) => !texto.includes(plano(ansi(t))))
             .map((t) => `${locale} ${variante} · ${h.organizacion}: «${t}»`),
