@@ -636,7 +636,7 @@ el mensaje te llega al correo.
   no te atribuye lo que hace el campo. Pesan **la mitad** que tus documentos a fondo (como las
   fichas): medido, a peso 1 la pieza le quitaba el contexto a tus propios documentos.
 - **Limitaciones conocidas:** las nueve piezas de la serie están publicadas; el segundo idioma se
-  revisa a ojo al cierre del hito, no en cada sprint; sin PDF descargable (decisión tuya); las respuestas fijas del chat y los documentos a fondo siguen en primera persona, a propósito.
+  revisa a ojo al cierre del hito, no en cada sprint; sin PDF descargable (decisión tuya); los documentos a fondo siguen en primera persona, a propósito (son tu voz y el combustible del chat); el chat habla de ti en tercera persona (desde el Sprint 024).
 
 #### Cómo se escribe una publicación nueva
 
@@ -715,8 +715,8 @@ Una publicación es **un archivo de datos**, no una página: un archivo `data/me
    `tests/unit/metodo-voz-piezas.test.ts` (cada pieza de `data/metodo/`); el mensaje dice el
    archivo, el campo, el idioma y la palabra. **Las citas entre comillas («…», “…») no se
    juzgan** —son la voz de una fuente o del chat—. El motor es un piso, no un techo: la lista de
-   verbos en español es cerrada, así que también se lee la pieza. `data/a-fondo/` y el chat
-   siguen en primera persona.
+   verbos en español es cerrada, así que también se lee la pieza. `data/a-fondo/` sigue en
+   primera persona (es tu voz); el chat, desde el Sprint 024, habla de ti en tercera persona.
 
 **Qué hace fallar el build** (y lo dice con el archivo y el campo): un bloque que falta o está fuera
 de orden · una fuente sin fecha, sin editor o sin enlace `https://`, o más nueva que la revisión ·
@@ -877,11 +877,12 @@ una cifra de «lo que hice» que el documento citado no dice, un conteo del siti
 
 ### El chat que responde por ti · desde Sprint 003
 
-- **Qué hace:** el botón flotante "Pregúntale a mi HV" (abajo a la derecha, en todas las
+- **Qué hace:** el botón flotante «Pregunta por la HV de Henry» (abajo a la derecha, en todas las
   páginas) abre un chat donde el visitante pregunta en español o inglés y recibe respuestas
-  basadas SOLO en tu contenido real, con **fuentes citadas** que llevan a la sección o case
-  study correspondiente. Si pregunta algo ajeno (el clima, chistes, tareas), recibe una
-  respuesta amable fija — sin gastar un solo token. Y si el proveedor de IA se cae o se queda
+  basadas SOLO en tu contenido real, **siempre en tercera persona** (habla de Henry, no como
+  Henry), con **fuentes citadas** que llevan a la sección o case study correspondiente. Si
+  pregunta algo ajeno (el clima, chistes, tareas), recibe una respuesta amable fija — sin
+  gastar un solo token y **sin ninguna fuente**. Y si el proveedor de IA se cae o se queda
   sin cuota, el chat **no muere**: pasa a "Búsqueda local" y muestra los fragmentos de la hoja
   de vida que mejor responden, avisándolo con honestidad.
 - **De dónde saca las respuestas:** de los mismos YAML de siempre + tus documentos **a fondo**
@@ -911,6 +912,43 @@ una cifra de «lo que hice» que el documento citado no dice, un conteo del siti
   búsqueda local. Tú lo notas en los logs (`proveedor falló`) y en el badge "Búsqueda local"
   al probar el chat.
 
+### Lo que el chat no contesta, y qué fuentes enseña · desde el Sprint 024 (2026-10-25)
+
+- **Lo que no hizo, no sabe o no tiene, no se contesta.** Decisión tuya (2026-10-24): los
+  contenidos no son la verdad absoluta y algo se les puede escapar, así que nada en el sitio
+  permite afirmar que *no* hiciste algo. Una pregunta como «¿qué no ha hecho nunca?», «¿cuáles
+  son sus debilidades?», «¿tiene el AI-102?» (o el DP-100) recibe **un solo texto fijo**, en el
+  idioma de la página: «Sobre eso no puedo responder desde la hoja de vida de Henry: solo
+  contesto por lo que sí consta en ella. Si quieres saber más, escríbele desde Contacto.». El
+  mismo texto contesta las preguntas que el sitio no dice y solo tú decides: salario,
+  disponibilidad, viajar. No llama al modelo (cero tokens) y no muestra fuentes. Lo que sí se
+  sigue contestando: «¿qué hace cuando el puesto pide algo que no ha usado nunca?» (es el
+  método) y los «límites» de una pieza.
+- **Cómo se decide.** Dos listas cerradas, escritas a mano y probadas contra las más de 350
+  preguntas del banco: `src/lib/ia/rehuso.ts` (ausencias, credenciales sin obtener, salario…)
+  y `src/lib/ia/tema-ajeno.ts` (el clima, chistes, código…). Si una pregunta legítima se
+  rehúsa, se **angosta la frase** en esa lista y se agrega la pregunta al banco; no se saca la
+  fila. Lo que se escape de las listas llega al modelo, y ahí lo para el prompt: «nunca
+  afirmes que Henry no hizo…». Ambos casos quedan en el registro como modo «respuesta fija».
+- **Las fuentes que ve el visitante son las que la respuesta cita** (las marcas `[1]`, `[2]`
+  del texto), no las que el buscador recuperó. Una respuesta que no cita nada no trae chips.
+- **«¿Qué estudió Henry?» cita «Estudios».** El buscador es léxico y «estudió» no es
+  «Estudios»: el fragmento lleva un campo `alias` (los verbos con que se pregunta por él) que
+  pesa ocho veces. Se escribe en `scripts/build-chat-index.mjs`, no en tu contenido.
+- **La conversación se queda en el navegador.** Recargar la página, seguir un enlace del menú
+  o cambiar de idioma **no la pierde**; si el panel estaba abierto, vuelve abierto (sin
+  mover el cursor). Se borra sola **8 horas después del último mensaje**, y el visitante la
+  borra cuando quiera con «Borrar conversación», que **solo borra la copia de ese navegador**:
+  el registro que se guarda en Supabase (Ley 1581) se conserva. No se guarda el nombre ni el
+  correo, solo las preguntas, las respuestas y sus fuentes, hasta 40 mensajes. En una ventana
+  privada, o con el almacenamiento bloqueado, el chat funciona igual, sin memoria. Esto es
+  gratis para el servidor: vive en `localStorage` del visitante.
+- **Probar con el proveedor real.** La CI usa un modelo simulado y no puede ver lo que Groq
+  de verdad responde. `pnpm test:en-vivo` (solo en tu computador, con tu clave de
+  `.env.local` y el plan gratis de Groq) hace las preguntas de la guía en español e inglés y
+  deja `privado/pasada-en-vivo-s24.md` con una marca por respuesta (voz tuya, ausencia
+  afirmada, fuentes citadas). Es de uso excepcional: se corre con tu visto bueno.
+
 ### El chat pide nombre y correo, y guarda cada conversación · desde el 2026-09-21 (ADR-024)
 
 - **Qué hace:** antes de la primera pregunta, el visitante deja **nombre y correo**, marca el
@@ -937,9 +975,11 @@ una cifra de «lo que hice» que el documento citado no dice, un conteo del siti
   el chat responde «registro no disponible» en vez de dejar pasar.
 - **Borrar los datos de alguien:** el aviso dice que puede pedirlo desde Contacto; se borra a
   mano en Supabase (`delete from chat_registro where email = …`).
-- **«¿Algo no funciona? Avísame»** (desde el 2026-09-24): bajo «Pedir otro código» —y en el
-  primer paso, si algo falló— el visitante puede avisar sin salir del panel, con un texto
-  opcional. **Te llega por correo** con el asunto «[CV Viva] Problema con la puerta del chat»,
+- **«¿Algo no funciona? Avisa a Henry»** (desde el 2026-09-24; con la sesión abierta, desde el
+  2026-10-25): bajo «Pedir otro código» —y en el primer paso, si algo falló— el visitante puede
+  avisar sin salir del panel, con un texto opcional. **Dentro del chat** el mismo botón está en
+  el pie del panel, sin pedir el correo: el servidor lo toma de la sesión (el correo no vuelve
+  al navegador) y el aviso llega como «[CV Viva] Aviso desde el chat». **Te llega por correo** con el asunto «[CV Viva] Problema con la puerta del chat»,
   dirigido para que al responder le escribas al visitante, y con el **diagnóstico del
   servidor** en ese momento: si el secreto de sesión, el almacén y el envío de correos están
   configurados. Si dice «NO» en alguno, ya sabes qué variable revisar en Vercel. Límite: tres
@@ -957,14 +997,14 @@ una cifra de «lo que hice» que el documento citado no dice, un conteo del siti
   2. **El cupo de cada persona:** **20 preguntas cada 24 horas** por correo, contadas en el
      registro de Supabase (valen igual en todos los servidores). Cuentan todas, también las
      que no tienen que ver con tu CV. Quien llega al máximo ve «Llegaste al máximo de preguntas
-     de hoy. Vuelve mañana, o escríbeme desde Contacto…».
+     de hoy. Vuelve mañana, o escríbele a Henry desde Contacto…».
   3. **La lista de bloqueados:** un correo en la lista no recibe código ni puede preguntar.
   4. **El ritmo:** 10 preguntas por minuto por conexión (en la memoria de cada servidor, así
      que no es exacto; el cupo sí lo es).
   5. **El tamaño:** preguntas de 800 caracteres como máximo, solo los últimos 12 mensajes de la
      conversación, respuestas de 700 tokens como máximo y 30 segundos.
-  6. **Las preguntas ajenas** (el clima, un chiste) reciben una respuesta fija, sin gastar un
-     token.
+  6. **Las preguntas ajenas** (el clima, un chiste) y **las de lo que no hizo** reciben una
+     respuesta fija, sin gastar un token y sin fuentes.
   7. **Si Groq se queda sin cuota** (30 pedidos/min, 1.000/día, 8.000 tokens/min, 200.000/día,
      unas 100 respuestas al día): el chat pasa a búsqueda local y sigue contestando con fuentes.
   8. **El interruptor:** `CHAT_ENABLED=false` en Vercel + Redeploy apaga el chat entero.
@@ -1376,4 +1416,5 @@ chat hoy y cuáles traería con la base aprobada. Ese informe **se genera, no se
 | Sprint 020 | **Cierre del H-2.** El lote de medios y bajos de los cierres S9 a S19 queda con un estado final y su prueba (`sprints/SPRINT_020-lote.md`, con su gate); la prueba intermitente de la vitrina se arregla en su causa (fallaba 2 de 30 bajo carga y después 0 de 80) y la del idioma cambia su espera fija por una condición, sin que se haya podido medir su efecto (se vigila en la CI); la redirección de `/metodo` es exacta y el motor de voz ya no ignora un párrafo entero entre comillas; el sitemap fecha cada publicación con su revisión; las etiquetas del mapa tienen su tope; el banco de preguntas se midió fila por fila. El blueprint, `design-system.md` y `design-sync/` se ponen al día con «Métodos» (el bundle no se publica: eso lo dispara el dueño con `/design-sync`), `CLAUDE.md` corrige sus hechos de producto y la puerta de la HOME se prueba también en inglés, con capturas. La guía de prueba v20 trae el filtro «Ensayo general H-2». |
 | Sprint 021 | **La revisión completa.** La guía de prueba abre con el filtro «Revisión completa»: todo lo pendiente en sentadas de a lo sumo 45 minutos por lugar y aparato, cada prueba una vez, con un sí o un no, una nota y el botón «Copiar mis respuestas»; entran cinco pruebas, catorce se corrigen porque ya no describían el sitio y lo que la CI respalda queda a la vista con su razón. El agente de estudio del AI-103 sale de la vitrina, del a fondo, de las cuentas y del índice del chat por orden de la Fábrica (las cuentas bajan solas desde el disco), con un gate que barre el sitio. |
 | Sprint 023 | **Sentada 1 de la revisión: «Portafolio», la casa y el inglés.** «Vitrina» pasa a llamarse «Portafolio» en textos y direcciones, con un 301 desde las viejas y la lectura de lo que escriben otras casas con la palabra nueva (ver «Una sola palabra: Portafolio»); el desplegable de «Hoja de vida» queda con cinco secciones; «Métodos» baja a después de Skills; el cambio de idioma deja de bajar la página en Safari (diez cambios seguidos, ≤ 4 px); el 404 trae el botón ES/EN; el primer Tab en Safari se explica en la guía y un e2e fija el orden del foco; la ficha de Probeta DS se refresca con su export del S17; la guía v23 avisa si no guarda, restaura desde texto y muestra lo respondido antes en las filas que cambiaron. |
+| Sprint 024 | **Sentada 3 de la revisión: el chat, en tercera persona y sin perder la conversación.** Lo que Henry no hizo, no sabe o no tiene (y el AI-102, el DP-100, el salario, la disponibilidad) recibe una respuesta fija y no llama al modelo; una pregunta ajena no cita ninguna fuente y el panel muestra solo las que la respuesta cita; el chat habla de Henry en tercera persona, también en el texto del panel y en el prompt (con «Microsoft Foundry (antes Azure AI Foundry)»); la conversación se guarda en el navegador (recargar, el menú y el cambio de idioma no la pierden, vence a las 8 h, «Borrar conversación»); «Avisa a Henry» también con la sesión abierta; «¿qué estudió Henry?» cita Estudios (campo `alias`); se adopta la constitución regenerada y el export de Probeta DS del S18; guía v24; `pnpm test:en-vivo`. |
 | Sprint 022 | **Sentada 5 de la revisión: tres agentes fuera, nombres sin «Harness» e investigaciones en pausa.** Salen de la vitrina Agente A, Agente B y el Harness Design Science (14 → 11 agentes); el agente de investigación se llama «Paper Computacional» por un alias de nombre que no edita la ficha (`data/nombres-piezas.yaml`); el frente de Investigaciones queda en pausa con su aviso propio (`enPreparacion`), sin tarjetas, fuera del sitemap y del chat y con sus fichas en 404. Gates: `retiro-piezas`, `nombres-piezas`, la pausa del índice del chat y el e2e de la pausa. La nota de cada fila de la guía admite 2000 caracteres. 

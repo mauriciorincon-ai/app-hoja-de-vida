@@ -4,8 +4,9 @@
  * Las piezas de la sección son **publicaciones profesionales en voz
  * impersonal**: ni primera persona ni la palabra «entrevista» en lo publicado,
  * ni en sus textos de interfaz, en español y en inglés. Los documentos a fondo
- * y el chat SÍ hablan en primera persona (representan al dueño); este módulo
- * solo juzga `data/metodo/` y la sección `metodo` del diccionario.
+ * SÍ hablan en primera persona (representan al dueño); el chat, desde el S24,
+ * habla en tercera (`lib/ia/voz-del-dueno.ts` vigila esa voz, con otro criterio:
+ * el asistente puede hablar de sí mismo); este módulo solo juzga `data/metodo/` y la sección `metodo` del diccionario.
  *
  * Qué detecta, a propósito acotado (un falso positivo en un texto publicado
  * es peor que uno que se escape: «diseño» también es un sustantivo):

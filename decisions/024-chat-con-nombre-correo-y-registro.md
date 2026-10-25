@@ -120,3 +120,35 @@ solo ejecuta `chat_cupo` y no puede leer ni escribir la lista.
   almacén en memoria y `topeDiario()` (unit), la ruta del chat y la del registro (integración),
   la RPC contra Postgres real (`tests/integration/chat-cupo.dbtest.ts`) y los avisos del panel
   (e2e).
+
+---
+
+## Adenda · Sprint 024 (2026-10-25) — la conversación en el navegador y el chat en tercera persona
+
+Decisiones del dueño (2026-10-24 y 2026-10-25) que cambian lo que el chat guarda en el navegador y lo
+que dice. **El registro del servidor (esta ADR) no cambia**: sigue guardando nombre, correo, pregunta,
+respuesta y fuentes, con el aviso de la Ley 1581.
+
+- **La conversación vive también en el navegador del visitante** (`localStorage`, clave
+  `cv-viva:chat:v1`, hasta 40 mensajes y 100 000 caracteres): recargar, seguir un enlace plano del
+  menú o cambiar de idioma —todo eso desmonta el panel— no la pierde. Vence a las **8 horas del
+  último mensaje** (se revisa al abrir y antes de enviar) y el visitante la borra con «Borrar
+  conversación». Se lee con Zod (el almacén es del visitante y de cualquier extensión). **No se
+  guarda el nombre ni el correo**: viven en la cookie firmada. Costo de servidor: cero. Sin
+  almacenamiento (ventana privada) el chat funciona sin memoria. «Borrar» **no toca el registro**:
+  borrarlo sigue siendo a pedido, a mano, desde Contacto (Ley 1581).
+- **Una marca en `sessionStorage`** (`cv-viva:chat:abierto`, por pestaña) reabre el panel tras una
+  carga completa, sin tomar el foco.
+- **El chat no afirma ausencias.** Una pregunta por lo que Henry no hizo, no sabe o no tiene (y por
+  las credenciales sin obtener, el salario, la disponibilidad) recibe un texto fijo y no llama al
+  proveedor; una ajena, la estática de siempre y sin fuentes. Las dos listas son cerradas y se miden
+  contra el banco (`rehuso.ts`, `tema-ajeno.ts`). Ambas se registran con `modo = 'offtopic'`: **sin
+  migración** (la planeación fijó ese default; si más adelante se quiere distinguir el rehúso, es un
+  valor nuevo del `check` de `modo`).
+- **Tercera persona.** El prompt manda hablar de Henry en tercera y reescribir las fuentes (que están
+  en primera); el texto del panel pasa a una voz neutra. El asistente puede hablar de sí mismo; lo
+  que se prohíbe es la voz del dueño (`voz-del-dueno.ts`).
+- **Solo las fuentes citadas.** El servidor sigue mandando las recuperadas; el panel pinta las que el
+  texto cita con `[n]`.
+- **El aviso de problema** gana un tercer paso, `chat`: no trae correo en el cuerpo, el servidor lo
+  toma de la cookie (401 sin sesión), así que el correo no vuelve al navegador.
