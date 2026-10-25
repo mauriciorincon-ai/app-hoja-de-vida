@@ -11,7 +11,7 @@ const PALABRA = /\bvitrinas?\b/i;
 describe("textoVisible: lo que el barrido de la palabra vieja mira", () => {
   it("el cuerpo y los atributos que un lector de pantalla dice", () => {
     const html = `<main><p>Hola</p><img alt="una vitrina"><a aria-label="ir a la vitrina" title="vitrina">x</a></main>`;
-    expect(textoVisible(html).match(/vitrina/g)).toHaveLength(3);
+    expect(textoVisible(html).split("vitrina")).toHaveLength(4); // tres veces
   });
 
   it("las metas: description, og y twitter, con el content antes o después del name", () => {
