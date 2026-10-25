@@ -55,6 +55,19 @@ export function medirAncla(scrollY: number, tops: number[]): Ancla {
   };
 }
 
+/**
+ * El destino, a un píxel entero. Los bordes de los hitos son fraccionarios
+ * (1/64 de píxel) y el desfase guardado también; WebKit TRUNCA un `scrollTo`
+ * fraccionario en vez de redondearlo, así que 1559,84 caía en 1559. Con un
+ * píxel menos en cada ida y vuelta, diez cambios de idioma en Safari bajaban la
+ * página 5 px (S23, OM-05: «cada vez baja un poco, y pulsando muchas veces
+ * llega al final»). Redondeado al más cercano, el error de un cambio no se suma
+ * al del siguiente: Chromium ya lo hacía así y no derivaba.
+ */
+export function aPixelEntero(y: number): number {
+  return Math.round(y);
+}
+
 /** El scrollY que reproduce el ancla sobre una lista nueva de candidatos. */
 export function resolverAncla(ancla: Ancla, tops: number[]): number {
   if (ancla.indice < 0 || ancla.indice >= tops.length) return ancla.y;
@@ -94,6 +107,9 @@ export function restaurarAncla(): boolean {
   }
   if (!crudo) return false;
   const ancla = JSON.parse(crudo) as Ancla;
-  window.scrollTo({ top: resolverAncla(ancla, tops()), behavior: "instant" });
+  window.scrollTo({
+    top: aPixelEntero(resolverAncla(ancla, tops())),
+    behavior: "instant",
+  });
   return true;
 }

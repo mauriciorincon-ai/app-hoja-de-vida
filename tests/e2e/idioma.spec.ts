@@ -59,7 +59,9 @@ test.describe("el botón ES/EN conserva el punto exacto de lectura", () => {
     await page.waitForLoadState("load");
     await page.evaluate(async () => {
       await document.fonts.ready;
-      await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+      await new Promise((r) =>
+        requestAnimationFrame(() => requestAnimationFrame(r)),
+      );
     });
   }
 
@@ -100,7 +102,10 @@ test.describe("el botón ES/EN conserva el punto exacto de lectura", () => {
               .evaluate((el) => Math.round(el.getBoundingClientRect().top))) -
               antes,
           ),
-        { message: `hito a ${antes}px antes: no volvió a su sitio`, timeout: 5_000 },
+        {
+          message: `hito a ${antes}px antes: no volvió a su sitio`,
+          timeout: 5_000,
+        },
       )
       .toBeLessThanOrEqual(TOLERANCIA);
   });
@@ -135,8 +140,93 @@ test.describe("el botón ES/EN conserva el punto exacto de lectura", () => {
               .evaluate((el) => Math.round(el.getBoundingClientRect().top))) -
               antes,
           ),
-        { message: `sección a ${antes}px antes: no volvió a su sitio`, timeout: 5_000 },
+        {
+          message: `sección a ${antes}px antes: no volvió a su sitio`,
+          timeout: 5_000,
+        },
       )
       .toBeLessThanOrEqual(TOLERANCIA);
   });
+});
+
+/**
+ * DIEZ CAMBIOS SEGUIDOS NO MUEVEN LA HOME (S23, OM-05).
+ *
+ * El dueño: al pulsar ES/EN la página se queda en la sección, pero «baja un
+ * poco cada vez»; pulsando muchas veces llega al final. Los tests de arriba
+ * saltaban con `window.scrollTo`, así que ningún título se revelaba antes de
+ * medir y el desplazamiento de la entrada animada era el mismo a los dos lados:
+ * no veían nada. Aquí se baja con la RUEDA, como el dueño, para que los títulos
+ * de Perfil y Trayectoria ya estén revelados cuando se guarda el ancla, y se
+ * cambia de idioma diez veces: en el mismo idioma (cada par de cambios) el
+ * punto de lectura tiene que ser el de partida, con 4 px de margen.
+ */
+test.describe("diez cambios de idioma seguidos dejan la HOME donde estaba", () => {
+  const MARGEN = 4;
+
+  async function asentada(page: import("@playwright/test").Page) {
+    await page.waitForLoadState("load");
+    await page.evaluate(async () => {
+      await document.fonts.ready;
+      await new Promise((r) =>
+        requestAnimationFrame(() => requestAnimationFrame(r)),
+      );
+    });
+  }
+
+  /** Espera a que el scroll y las entradas animadas dejen de moverse. */
+  async function quieta(page: import("@playwright/test").Page) {
+    let anterior = -1;
+    for (let i = 0; i < 40; i++) {
+      await page.waitForTimeout(150);
+      const ahora = await page.evaluate(() => {
+        const h = document.querySelector("#perfil h2")!.getBoundingClientRect();
+        return Math.round(h.top * 10) / 10;
+      });
+      if (ahora === anterior) return;
+      anterior = ahora;
+    }
+  }
+
+  for (const [seccion, titulo, bajar] of [
+    ["#perfil", "#perfil h2", 760],
+    ["#trayectoria", "#trayectoria h2", 1500],
+  ] as const) {
+    test(`leyendo ${seccion}: el título vuelve al mismo sitio cada dos cambios @webkit`, async ({
+      page,
+    }) => {
+      await page.goto("/es");
+      await asentada(page);
+      // Con la rueda, en pasos: cada título que pasa por la ventana se revela.
+      await page.mouse.move(400, 400);
+      for (let y = 0; y < bajar; y += 120) await page.mouse.wheel(0, 120);
+      await quieta(page);
+
+      const sitio = () =>
+        page.locator(titulo).evaluate((el) => el.getBoundingClientRect().top);
+      const salida = await sitio();
+      const idiomas = ["en", "es"] as const;
+      const deriva: string[] = [];
+
+      for (let i = 1; i <= 10; i++) {
+        const a = idiomas[(i - 1) % 2];
+        await page
+          .getByRole("button", {
+            name: a === "en" ? "Switch to English" : "Cambiar a español",
+          })
+          .click();
+        await expect(page).toHaveURL(new RegExp(`/${a}$`), { timeout: 15_000 });
+        await asentada(page);
+        await quieta(page);
+        if (a === "es") {
+          const ahora = await sitio();
+          deriva.push(`${i} cambios: ${(ahora - salida).toFixed(1)} px`);
+          expect(
+            Math.abs(ahora - salida),
+            `tras ${i} cambios el título está a ${(ahora - salida).toFixed(1)} px de su sitio (${deriva.join(" · ")})`,
+          ).toBeLessThanOrEqual(MARGEN);
+        }
+      }
+    });
+  }
 });
