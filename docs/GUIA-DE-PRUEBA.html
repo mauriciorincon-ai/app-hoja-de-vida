@@ -647,7 +647,7 @@
           filtro, no una prueba</strong>: «Ensayo general H-2» (bloque R). El
           Gate mínimo ⭐ no cambia de contenido, pero deja de llevar un tiempo
           escrito: la cuenta y los minutos los suma la página. El prefijo de las
-          casillas cambia a s20. <strong>v21 suma seis pruebas y un filtro</strong>: «Revisión completa», el primero de la barra y el activo al abrir (sentadas de a lo sumo 45 min por lugar y aparato, cada prueba una vez, sí/no con nota y «Copiar mis respuestas»); entran la m15, la f12, la q25, la q26 (opcional), la o15 y la o16. El prefijo de las respuestas cambia a s21. <strong>Ajuste del mismo día:</strong> la nota de cada fila admite hasta 2000 caracteres y varias líneas (antes, una línea de 300); el prefijo sigue siendo s21, así que lo ya guardado se conserva. <strong>v22 cambia lo que ve el visitante</strong>: salen del sitio los dos agentes de demostración de planlang y el agente duplicado de Design Science (los agentes pasan de 14 a 11), el agente de investigación se llama «Paper Computacional» y el frente de Investigaciones queda en pausa. Cambian de texto la k1b, la n4b, la m1b, la m4, la m6, la k9, la m10, la m11 y la R9; la k8 vuelve a la revisión (ya tiene sujeto: Investigaciones en pausa) y entra la o17, con las cuatro preguntas que dejó el retiro; el prefijo de las respuestas sigue siendo s21 y las filas que cambiaron llevan «Mejorado · S22». <strong>v23 cambia el nombre del sitio y arregla tres cosas</strong>: «portafolio» pasa a llamarse «Portafolio» en todo el sitio (el texto y la dirección; la dirección vieja se redirige: <code>/es/vitrina…</code> te lleva a <code>/es/portafolio…</code>), «Métodos» baja a después de Skills, el cambio de idioma ya no baja la página en Safari y el 404 trae el botón ES/EN. Cambian de texto la R1, la a2, la a3b, la a5, la a6, la b1, la R13, la o1, la h3, la a8 y la R8; <strong>esas filas vuelven a pendiente y te muestran lo que habías respondido antes</strong> («Antes del S23»). Entra la o18 (guardar y restaurar tus respuestas) y la guía avisa a la vista si tu navegador no guarda. El prefijo de las respuestas sigue siendo s21: las demás filas conservan tu respuesta.
+          casillas cambia a s20. <strong>v21 suma seis pruebas y un filtro</strong>: «Revisión completa», el primero de la barra y el activo al abrir (sentadas de a lo sumo 45 min por lugar y aparato, cada prueba una vez, sí/no con nota y «Copiar mis respuestas»); entran la m15, la f12, la q25, la q26 (opcional), la o15 y la o16. El prefijo de las respuestas cambia a s21. <strong>Ajuste del mismo día:</strong> la nota de cada fila admite hasta 2000 caracteres y varias líneas (antes, una línea de 300); el prefijo sigue siendo s21, así que lo ya guardado se conserva. <strong>v22 cambia lo que ve el visitante</strong>: salen del sitio los dos agentes de demostración de planlang y el agente duplicado de Design Science (los agentes pasan de 14 a 11), el agente de investigación se llama «Paper Computacional» y el frente de Investigaciones queda en pausa. Cambian de texto la k1b, la n4b, la m1b, la m4, la m6, la k9, la m10, la m11 y la R9; la k8 vuelve a la revisión (ya tiene sujeto: Investigaciones en pausa) y entra la o17, con las cuatro preguntas que dejó el retiro; el prefijo de las respuestas sigue siendo s21 y las filas que cambiaron llevan «Mejorado · S22». <strong>v23 cambia el nombre del sitio y arregla tres cosas</strong>: «vitrina» pasa a llamarse «Portafolio» en todo el sitio (el texto y la dirección; la dirección vieja se redirige: <code>/es/vitrina…</code> te lleva a <code>/es/portafolio…</code>), «Métodos» baja a después de Skills, el cambio de idioma ya no baja la página en Safari y el 404 trae el botón ES/EN. Cambian de texto la R1, la a2, la a3b, la a5, la a6, la b1, la R13, la o1, la h3, la a8, la R8, la R10 y la q24; <strong>esas filas vuelven a pendiente y te muestran lo que habías respondido antes</strong> («Antes del S23»). Entra la o18 (guardar y restaurar tus respuestas) y la guía avisa a la vista si tu navegador no guarda. El prefijo de las respuestas sigue siendo s21: las demás filas conservan tu respuesta.
         </p>
         </details>
         <div class="url-caja">
@@ -661,6 +661,8 @@
           </p>
         </div>
       </header>
+
+      <p id="rev-aviso" class="rev-aviso" role="status" aria-live="polite" hidden></p>
 
       <div class="progreso">
         <div class="progreso-fila">
@@ -722,7 +724,6 @@
           <button type="button" id="rev-restaurar-abrir" aria-controls="rev-restaurar" aria-expanded="false">Restaurar desde texto</button>
           <textarea id="rev-texto" readonly hidden rows="12" aria-label="Mis respuestas, listas para copiar"></textarea>
         </div>
-        <p id="rev-aviso" class="rev-aviso" role="status" aria-live="polite" hidden></p>
         <div id="rev-restaurar" class="rev-restaurar" hidden>
           <label for="rev-restaurar-texto">Pega aquí el texto que copiaste con «Copiar mis respuestas» (de cualquier versión de la guía):</label>
           <textarea id="rev-restaurar-texto" rows="8" autocomplete="off" spellcheck="false"></textarea>
@@ -1075,14 +1076,14 @@
               <label><input type="radio" autocomplete="off" name="r9" id="r9-no" value="no" /> No</label>
             </fieldset><textarea class="p-nota" data-nota-de="r9" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de R9" autocomplete="off"></textarea></div>
           </li>
-          <li class="ens-fila" data-origen="nuevo" data-ensayo="8" data-sentada="2" data-rev="6" data-cubre="q2 q7 q24">
+          <li class="ens-fila" data-cambio="23" data-origen="mejorado" data-ensayo="8" data-sentada="2" data-rev="6" data-cubre="q2 q7 q24">
             <div class="ens-cuerpo">
               <p>
                 <strong>R10 · «Métodos»: la puerta y dos publicaciones.</strong>
                 <span class="ens-min">8 min</span>
-                <span class="origen origen-nuevo">Nuevo · S20</span>
+                <span class="origen origen-mejorado">Mejorado · S23</span>
               </p>
-              <p>En la HOME baja a «Métodos», entre el Portafolio y los Estudios: ¿se entiende de un vistazo qué es y a dónde lleva, y están todas las publicaciones con su chip «Tema»? Entra a T2 (agentes) y a T3 (RAG) y léelas como tuyas: cada nota de Evidencia (●) ¿es verdad?, cada límite ¿lo firmarías?, el Criterio (▲) ¿es tu posición? ¿Los diez bloques van en el orden que contarías?</p>
+              <p>En la HOME baja a «Métodos», después de Skills y antes de Contacto: ¿se entiende de un vistazo qué es y a dónde lleva, y están todas las publicaciones con su chip «Tema»? Entra a T2 (agentes) y a T3 (RAG) y léelas como tuyas: cada nota de Evidencia (●) ¿es verdad?, cada límite ¿lo firmarías?, el Criterio (▲) ¿es tu posición? ¿Los diez bloques van en el orden que contarías?</p>
               <p class="chica suave">Cubre: <code>q2</code> · <code>q7</code> · <code>q24</code>.</p>
             </div>
             <div class="p-resp"><fieldset class="ens-resp">
@@ -4581,10 +4582,10 @@
               <textarea class="p-nota" data-nota-de="q23" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de q23" autocomplete="off"></textarea>
             </div>
           </li>
-          <li id="q24" class="ens-fila" data-origen="nuevo" data-minimo data-ensayo-fuera="cubierta por el flujo R10 del ensayo.">
+          <li id="q24" class="ens-fila" data-cambio="23" data-origen="mejorado" data-minimo data-ensayo-fuera="cubierta por el flujo R10 del ensayo.">
             <div class="ens-cuerpo">
               <p class="p-texto"><code class="p-id">q24</code> ⭐ <strong>La puerta de «Métodos» en la HOME.</strong> Abre
-              <code>/es</code> y baja: entre el Portafolio y los Estudios hay una
+              <code>/es</code> y baja: después de Skills y antes de Contacto hay una
               sección <strong>«Métodos»</strong> con una línea de presentación, la
               lista de las publicaciones y el botón «Ver todas las
               publicaciones». ¿Se entiende de un vistazo qué es y a dónde lleva?
@@ -4751,7 +4752,7 @@
               en Safari (diez cambios seguidos, mismo punto); el 404 trae el botón
               ES/EN; el primer Tab en Safari se explica en la a6 (no era un
               defecto del sitio). Cambian de texto la R1, la a2, la a3b, la a5, la
-              a6, la b1, la R13, la o1, la h3, la a8 y la R8 y llevan «Mejorado ·
+              a6, la b1, la R13, la o1, la h3, la a8, la R8, la R10 y la q24 y llevan «Mejorado ·
               S23»: vuelven a pendiente y muestran lo que habías respondido
               («Antes del S23»). Entra la o18 (guardar y restaurar) y la guía
               avisa a la vista si el navegador no guarda, y tiene «Restaurar
@@ -5609,7 +5610,7 @@
           calcularRevision();
         }
         // Los espacios de cada cuenta se buscan una vez: la página los reescribe en cada respuesta.
-        var calcs = {};
+        var calcs = Object.create(null);
         Array.prototype.forEach.call(
           document.querySelectorAll("[data-calc]"),
           function (e) {
@@ -5828,21 +5829,22 @@
         // Lee el texto de «Copiar mis respuestas» de cualquier versión (v21, v22, v23) y casa por ID,
         // no por título: el título de una fila cambia cuando se reescribe.
         function filaPorId() {
-          var m = {};
+          var m = Object.create(null);
           filas.forEach(function (li) {
             if (li.hasAttribute("data-rev")) m[idDe(li).toLowerCase()] = li;
           });
           return m;
         }
         function notaDeLinea(li, resto) {
-          // «título: nota». El título es el de la fila hoy; si la fila cambió, el corte es el primer «: ».
+          // «título: nota». Tres cortes, del más seguro al último recurso:
+          // 1) el título de la fila hoy, entero; 2) un título truncado al copiar (termina en «…»):
+          // la nota empieza tras el primer «…: »; 3) el primer «: ». El 2 salva las filas cuyo título
+          // cambió y trae «: » dentro (p. ej. «Entra a Vitrina desde el menú: ves el portal…»).
           var titulo = li ? tituloDe(li) : "";
-          var corte =
-            titulo && resto.indexOf(titulo + ": ") === 0
-              ? titulo.length + 2
-              : resto.indexOf(": ") < 0
-                ? -1
-                : resto.indexOf(": ") + 2;
+          var corte;
+          if (titulo && resto.indexOf(titulo + ": ") === 0) corte = titulo.length + 2;
+          else if (resto.indexOf("…: ") >= 0) corte = resto.indexOf("…: ") + 3;
+          else corte = resto.indexOf(": ") < 0 ? -1 : resto.indexOf(": ") + 2;
           return (corte < 0 ? "" : resto.slice(corte)).replace(/ ⏎ /g, "\n");
         }
         function analizarTexto(texto) {
@@ -5963,9 +5965,11 @@
               var estadoViejo = leer(NS + id);
               var notaVieja = leer(NS + id + ":nota");
               if (!estadoViejo && !notaVieja) return;
-              guardar(NS + id + ":antes", JSON.stringify({ e: estadoViejo || "", n: notaVieja || "", v: "S23" }));
-              guardar(NS + id, null);
-              guardar(NS + id + ":nota", null);
+              // Solo se mueve si «antes» quedó guardado: si no, la respuesta se queda donde estaba.
+              if (guardar(NS + id + ":antes", JSON.stringify({ e: estadoViejo || "", n: notaVieja || "", v: "S23" }))) {
+                guardar(NS + id, null);
+                guardar(NS + id + ":nota", null);
+              }
             });
             guardar(MARCA, "1");
           }
@@ -5980,7 +5984,7 @@
           el.textContent = texto;
           cuerpo.appendChild(el);
         }
-        var cubiertaPor = {};
+        var cubiertaPor = Object.create(null);
         filas.forEach(function (li) {
           if (!li.hasAttribute("data-cubre")) return;
           li.getAttribute("data-cubre").split(/\s+/).forEach(function (id) {

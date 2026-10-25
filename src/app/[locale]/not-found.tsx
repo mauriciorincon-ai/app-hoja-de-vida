@@ -5,7 +5,7 @@ import type { Locale } from "@/i18n/routing";
 import { getCv } from "@/lib/content";
 
 /**
- * El 404 de cada idioma. Lleva el ENCABEZADO de todo el sitio (S23, OM-05/06:
+ * El 404 de cada idioma. Lleva el ENCABEZADO de todo el sitio (S23, OM-06:
  * «en el 404 no aparece el ES/EN, sí el chat y volver al inicio»): quien llegó
  * a una ruta rota en español puede pasar al 404 en inglés, y de ahí a cualquier
  * sección, sin volver a escribir la dirección. El conmutador cambia de idioma

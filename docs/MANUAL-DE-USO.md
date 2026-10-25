@@ -1262,9 +1262,9 @@ chat hoy y cuáles traería con la base aprobada. Ese informe **se genera, no se
   sección renombrada) y responde antes que next-intl y después del modo mantenimiento. Prueba: `tests/unit/redireccion.test.ts`
   y `tests/e2e/portafolio.spec.ts` (con el encabezado `Location`).
 - **Lo que NO cambia (no se ve):** las carpetas y los nombres de código (`content/vitrina/`, `data/vitrina.yaml`, `src/lib/vitrina/`,
-  `src/components/vitrina/`), el espacio de nombres `portafolio` de los mensajes, las clases CSS, y la carpeta de imágenes `public/vitrina/`.
+  `src/components/vitrina/`), el espacio de nombres `vitrina` de los mensajes (y `vitrinaHome`), las clases CSS, y la carpeta de imágenes `public/vitrina/`.
 - **Lo que escriben otras casas:** los exports de las apps, las fichas de agentes, investigaciones y tableros, y los complementos de la planeadora
-  no se editan aquí. Dicen «vitrina» (unas 44 veces en los diez exports) y el sitio los **lee con la palabra nueva**
+  no se editan aquí. Dicen «vitrina» (varias decenas de veces en los diez exports) y el sitio los **lee con la palabra nueva**
   (`scripts/sin-vitrina.mjs`, la misma función que usó el corpus; con concordancia y con frases propias para un adjetivo, p. ej. «es estática» →
   «es estático»). Lo hacen el loader de las fichas, el de los complementos, el de las piezas, el índice del chat y el rótulo de las claves
   (`llamadas_a_modelos_en_la_vitrina`). Cuando cada casa mande su export con la palabra nueva, el alias no hace nada y puede quedarse.

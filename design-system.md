@@ -143,19 +143,19 @@ propios. Los números de la tabla no cambiaron; se midieron antes y después.
 | `scaleInBlur`   | scale(0.85)+blur(15px)→1 (cards)                                                                                                                                                                                                                                                                                                                                                                                                               |
 | `Counter`       | ease-out-cubic manual, ~1800ms, tabular-nums                                                                                                                                                                                                                                                                                                                                                                                                   |
 | `TimelineTrack` | rail SVG stroke-dashoffset 1.4s ease-out-expo; nodos scale(0)→1 ease-out-back sincronizados `800ms + x% × 1400ms`; cards ±32px                                                                                                                                                                                                                                                                                                                 |
-| `fadeInSlow`    | post-S8 — «leve, más marcada y lenta»: 1.2s, ease-out-expo, translateY(28px)+blur(8px)→0; escalón 140ms (Estudios, Certificaciones, cajas de la vitrina asomada)                                                                                                                                                                                                                                                                               |
+| `fadeInSlow`    | post-S8 — «leve, más marcada y lenta»: 1.2s, ease-out-expo, translateY(28px)+blur(8px)→0; escalón 140ms (Estudios, Certificaciones, cajas del portafolio asomado)                                                                                                                                                                                                                                                                               |
 | `liftIn`        | post-S8 — la tarjeta aterriza: 1.4s, ease-in-out-cubic, translateY(70px)+rotateX(14°, perspectiva 900)+scale(.94)+blur(12px)→0; escalón 120ms (Skills)                                                                                                                                                                                                                                                                                         |
 | `CifraQueLlama` | post-S8 — el CHIP entero (fondo, borde, texto) **aparece a 1.5× y se encoge a 1×** con la entrada de su tarjeta: misma duración y misma curva que `fadeInSlow` (1.2s, ease-out-expo), mismo escalón (viaja como prop `retraso`, porque el `staggerChildren` del `Stagger` no llega a los nietos — medido), origen en su borde derecho; se repite en cada pasada como toda entrada. Sin disparador propio. Solo transform (cuenta de productos) |
 
 `Stagger` acepta `stagger` (segundos entre hermanos; default 80ms) y `as` (`div` · `ul` · `li`) desde post-S8:
-las cajas de la vitrina se escalonan dentro de un `<ul>` real, y un `div` entre `ul` y `li` es HTML inválido.
+las cajas del portafolio se escalonan dentro de un `<ul>` real, y un `div` entre `ul` y `li` es HTML inválido.
 
 **Reglas duras:** solo `transform`/`opacity` en animaciones de scroll · `prefers-reduced-motion`
 salta al estado final sin movimiento, sin excepciones (hook global) · **vetado:** three.js/WebGL,
 animaciones infinitas (sweep/glitch/marquee), scroll-snap de deck, CDNs en `<head>`.
 
 > **Única excepción al veto de bucles — ADR-014 (S5):** se admite **un** bucle ambiental por
-> página y solo en la **firma del clímax** de una ficha de la vitrina, con la tarjeta abierta,
+> página y solo en la **firma del clímax** de una ficha del portafolio, con la tarjeta abierta,
 > apagado entero bajo `prefers-reduced-motion`. Es el privilegio del clímax del banco §2, no una
 > licencia general.
 
@@ -230,11 +230,11 @@ animaciones infinitas (sweep/glitch/marquee), scroll-snap de deck, CDNs en `<hea
   y pequeños para que sean seña y no cartel.
 - **Tarjeta de certificación**: mismo `fadeInSlow`, mismo logo (o icono) por dato delante del nombre. Y el
   **tercer estado**: una credencial `en curso` lleva un chip `citron`/`citron-ink` mono 11 px
-  «En curso» **en el sitio de la fecha** — el mismo chip de «en preparación» de la vitrina — y no
+  «En curso» **en el sitio de la fecha** — el mismo chip de «en preparación» del portafolio — y no
   puede nombrarse en ningún titular sin esas palabras al lado (gate de contenido).
-- **Vitrina asomada**: las mismas cajas de frente del portal, sin variante, con un botón sage
-  «Explora el portafolio» (post-S8; antes «Entrar a la vitrina»). La HOME enseña la vitrina, no la
-  copia. **Post-S8:** la sección se titula «Vitrina», las cuatro cajas aparecen levemente una a
+- **Portafolio asomado**: las mismas cajas de frente del portal, sin variante, con un botón sage
+  «Explora el portafolio» (post-S8; antes «Entrar al portafolio»). La HOME enseña el portafolio, no la
+  copia. **Post-S8:** la sección se titula «Portafolio», las cuatro cajas aparecen levemente una a
   una (`fadeInSlow` dentro de un `<ul>` escalonado, 140 ms), la cifra de **productos** —ya no
   «piezas», en todo el copy visible— aparece a 1.5× y se encoge a su tamaño con la entrada de su caja —misma duración, misma curva, mismo escalón— en cada pasada, como chip entero y sin rebote (`CifraQueLlama`), y el cierre de
   cada caja dice «Explora».
@@ -330,12 +330,12 @@ cifra `clamp(3.5rem,8vw,4.75rem)`; tres columnas dejaban dos huérfanos.
 ### Menú desplegable del encabezado · post-S5
 
 - **Cuándo se usa:** cuando varias secciones del nav **son la misma cosa**. Hoy, una sola vez: las
-  seis secciones del CV bajo «Hoja de vida» (Trayectoria · Logros · Vitrina · Estudios ·
-  Certificaciones · Skills — el orden de la página; la vitrina asomada entra con su nombre de
-  sección). El primer nivel queda en cuatro: Hoja de vida · **Portafolio** · **Métodos** · Contacto. **Post-S8:**
-  la sección recuperó el nombre «Vitrina» y por eso el portal pasó a «Portafolio» — dos enlaces
-  con el mismo nombre a destinos distintos en un mismo menú son una trampa para el lector de
-  pantalla y para cualquiera. No es un patrón para repartir: un header con dos
+  cinco secciones del CV bajo «Hoja de vida» (Trayectoria · Logros · Estudios · Certificaciones ·
+  Skills — el orden de la página). El primer nivel queda en cuatro: Hoja de vida · **Portafolio** ·
+  **Métodos** · Contacto. **S23:** el portafolio asomado en la HOME salió del grupo (antes eran
+  seis secciones, con la «Vitrina»): el portal ya es el primer nivel, y dos enlaces con el mismo
+  nombre a destinos distintos en un mismo menú son una trampa para el lector de pantalla y para
+  cualquiera. No es un patrón para repartir: un header con dos
   desplegables ya es un menú de aplicación, y esto es una pieza editorial.
 - **Forma:** panel `paper-0`, borde `paper-2`, `r-md`, `sh-2`, anclado bajo su botón. Cada opción
   con área táctil ≥44px y `hover` en `paper-1`.
@@ -350,7 +350,7 @@ cifra `clamp(3.5rem,8vw,4.75rem)`; tres columnas dejaban dos huérfanos.
 - **Y entra a los scans:** lo que nace cerrado es invisible para axe, así que el scan lo abre
   antes de analizar. Sin eso el gate pasa en verde sin haber mirado nada.
 
-### Componentes de la vitrina · S5 → S7
+### Componentes del portafolio · S5 → S7
 
 - **Ficha técnica** (`/portafolio/apps/<slug>` y `/portafolio/<frente>/<slug>`, ADR-016 · ADR-017): la capa infografía de una pieza,
   en orden fijo para cualquier frente y con **tres secciones opcionales que decide la pieza, no el
@@ -549,7 +549,7 @@ sitio y para el chat.
   y el relleno son decoración (`aria-hidden`); la lista de fases es HTML siempre.
 - **Citas y fuentes**: la cita `[n]` va en `sky-ink`, mono 11 px, y enlaza a `#fuente-n` del bloque 10; en la lista de fuentes el `[n]` es mono
   13 px `sky-ink` con ancho mínimo de 4 caracteres, para que los títulos arranquen alineados con 10 o más fuentes.
-- **La puerta en la HOME** (`src/components/home/metodos.tsx`, sección `#metodos`): entre la Vitrina y los Estudios, sin imágenes y bajo el pliegue
+- **La puerta en la HOME** (`src/components/home/metodos.tsx`, sección `#metodos`): después de Skills y antes de Contacto (desde el S23), sin imágenes y bajo el pliegue
   (el presupuesto de la HOME es el más ajustado). Título Fraunces, una línea de contexto de 60 caracteres de ancho, una cuadrícula de dos columnas
   con una tarjeta por publicación (`r-md` 12 px, `sh-1`, mín. 44 px de alto) que lleva el chip `lilac` «Tema N» y el nombre, y el botón `sage`
   «Ver todas las publicaciones →». La lista sale de `data/metodo/`: **ningún total vive escrito** (un gate lo exige contra el disco).
@@ -559,7 +559,7 @@ sitio y para el chat.
 ## Layout
 
 Scroll editorial de una columna, mobile-first (360–420px prioridad, desktop ≥1024px).
-Ancho de lectura narrativa ≤ `760px`; secciones full-bleed solo para timeline y showcase.
+Ancho de lectura narrativa ≤ `760px`; secciones full-bleed solo para timeline y portfolio.
 Header slim sticky con anchors + toggle ES/EN; a la izquierda, la marca HR y el nombre llevan al
 inicio. Footer = contacto. Nada de sidebars ni rails.
 

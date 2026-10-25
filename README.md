@@ -4,7 +4,7 @@ Una hoja de vida que se construye a sí misma, en público.
 
 No es un PDF ni una plantilla: es una aplicación web bilingüe (ES/EN) donde **el contenido es
 dato versionado**. Una sola fuente —los YAML de `data/`— alimenta la web, el chat, el PDF en
-formato ATS y la **vitrina**, el espacio donde se muestran las piezas construidas por el
+formato ATS y la **portafolio**, el espacio donde se muestran las piezas construidas por el
 pipeline: apps, agentes especializados, investigaciones y tableros de datos.
 
 Principio rector: **la producción se MUESTRA, no se entrega.** Este repositorio no publica URLs
@@ -51,7 +51,7 @@ despliegue. `docs/APROVISIONAMIENTO.md` dice cuáles hacen falta y para qué.
 
 | Ruta                       | Qué hay                                                                                         |
 | -------------------------- | ----------------------------------------------------------------------------------------------- |
-| `data/`                    | El contenido: hoja de vida (ES/EN), apps del pipeline, frentes de la vitrina, publicaciones de «Métodos» (`data/metodo/`), corpus «a fondo» del chat |
+| `data/`                    | El contenido: hoja de vida (ES/EN), apps del pipeline, frentes del portafolio, publicaciones de «Métodos» (`data/metodo/`), corpus «a fondo» del chat |
 | `content/`                 | Lo que llega de otras casas del pipeline — **no se edita aquí**: se corrige en origen           |
 | `src/`                     | `app/[locale]/` rutas · `components/` UI · `lib/` motores y carga de contenido                  |
 | `docs/MANUAL-DE-USO.md`    | Cómo se usa y **cómo alimentarla**, en español llano                                            |
