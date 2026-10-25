@@ -206,7 +206,11 @@
     "registroNoDisponible": "Chat registration is not available right now.",
     "registroBloqueado": "This email doesn't have access to the chat. If you think it's a mistake, write to Henry from the Contact section.",
     "saludo": "Hi, {nombre}. Ask anything about Henry's career.",
-    "sesionRequerida": "Your session ended. Register again to keep chatting."
+    "sesionRequerida": "Your session ended. Register again to keep chatting.",
+    "borrar": "Delete conversation",
+    "borrarNota": "It is kept only in this browser and clears itself 8 hours after the last message.",
+    "borrado": "Conversation deleted from this browser. The record kept on the server (Colombian Law 1581 of 2012) is retained; to ask for it to be deleted, write to Henry from the Contact section.",
+    "problemaEnviadoChat": "Henry got your report and will reply to the email you registered with as soon as it is reviewed."
   },
   "vitrina": {
     "eyebrow": "The portfolio",

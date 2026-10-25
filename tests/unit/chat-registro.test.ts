@@ -11,6 +11,7 @@ import {
   CODIGO_INTENTOS_MAX,
   CODIGO_VIGENCIA_MS,
   CUPO_VENTANA_HORAS,
+  problemaSchema,
   registroSchema,
   SESION_VIGENCIA_MS,
   TOPE_DIARIO_DEFECTO,
@@ -332,5 +333,36 @@ describe("los esquemas del borde", () => {
         codigo: "123456",
       }).success,
     ).toBe(false);
+  });
+});
+
+describe("problemaSchema — el aviso de la puerta y el del chat (S24, OM-15)", () => {
+  const base = { locale: "es", detalle: "", website: "" };
+
+  it("en la puerta (datos, codigo) el correo es obligatorio y se normaliza", () => {
+    for (const paso of ["datos", "codigo"] as const) {
+      expect(problemaSchema.safeParse({ ...base, paso }).success).toBe(false);
+      const ok = problemaSchema.safeParse({ ...base, paso, email: " ANA@Prueba.co " });
+      expect(ok.success).toBe(true);
+      if (ok.success && ok.data.paso !== "chat") expect(ok.data.email).toBe("ana@prueba.co");
+    }
+  });
+
+  it("dentro del chat NO se pide correo, y si llega uno se descarta", () => {
+    const ok = problemaSchema.safeParse({ ...base, paso: "chat", email: "otro@ajeno.co", nombre: "Otro" });
+    expect(ok.success).toBe(true);
+    if (ok.success) expect(Object.keys(ok.data)).not.toContain("email");
+  });
+
+  it("un paso que no existe se rechaza", () => {
+    expect(problemaSchema.safeParse({ ...base, paso: "lobby", email: "a@b.co" }).success).toBe(false);
+  });
+
+  it("el honeypot y el tope del detalle valen en los tres pasos", () => {
+    for (const paso of ["datos", "codigo", "chat"] as const) {
+      const extra = paso === "chat" ? {} : { email: "ana@prueba.co" };
+      expect(problemaSchema.safeParse({ ...base, paso, ...extra, website: "x" }).success).toBe(false);
+      expect(problemaSchema.safeParse({ ...base, paso, ...extra, detalle: "x".repeat(601) }).success).toBe(false);
+    }
   });
 });

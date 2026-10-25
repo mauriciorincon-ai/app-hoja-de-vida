@@ -206,7 +206,11 @@
     "registroNoDisponible": "El registro del chat no está disponible en este momento.",
     "registroBloqueado": "Este correo no tiene acceso al chat. Si crees que es un error, escríbele a Henry desde Contacto.",
     "saludo": "Hola, {nombre}. Pregunta lo que quieras sobre la trayectoria de Henry.",
-    "sesionRequerida": "Tu sesión terminó. Vuelve a registrarte para seguir chateando."
+    "sesionRequerida": "Tu sesión terminó. Vuelve a registrarte para seguir chateando.",
+    "borrar": "Borrar conversación",
+    "borrarNota": "Se guarda solo en este navegador y se borra sola 8 horas después del último mensaje.",
+    "borrado": "Conversación borrada de este navegador. El registro que se guarda en el servidor (Ley 1581 de 2012) se conserva; para pedir que se borre, escríbele a Henry desde Contacto.",
+    "problemaEnviadoChat": "Henry recibió tu aviso y te responderá al correo con el que te registraste en cuanto lo revise."
   },
   "vitrina": {
     "eyebrow": "El portafolio",

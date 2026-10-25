@@ -50,21 +50,44 @@ export const verificacionConNombreSchema = verificacionSchema.extend({
 });
 
 /**
- * «¿Algo no funciona? Avísame» (revisión 2026-09-24). El visitante atascado en
- * la puerta avisa sin salir del panel. El correo es obligatorio porque es a
- * quien el dueño responde; el detalle, opcional, porque «no me llega» ya dice
- * mucho. `paso` dice dónde se atascó: al pedir el código o al escribirlo.
+ * «¿Algo no funciona? Avisa a Henry» (revisión 2026-09-24; S24, OM-15). El
+ * visitante atascado en la puerta avisa sin salir del panel, y desde el S24
+ * también con la sesión abierta, dentro del chat. `paso` dice dónde estaba:
+ * al pedir el código (`datos`), al escribirlo (`codigo`) o dentro del chat
+ * (`chat`).
+ *
+ * En la puerta el correo es obligatorio porque es a quien el dueño responde;
+ * en el chat NO viaja: el servidor lo toma de la cookie firmada de la sesión
+ * (ADR-024), así que el correo no vuelve al navegador ni se vuelve a pedir, y
+ * un correo ajeno en el cuerpo no se lee. El detalle es opcional en todos:
+ * «no me llega» ya dice mucho.
  */
 export const DETALLE_PROBLEMA_MAX = 600;
-export const problemaSchema = z.object({
-  nombre: z.string().trim().max(120).default(""),
-  email: z.string().trim().toLowerCase().email().max(254),
+const problemaBase = z.object({
   locale: z.enum(["es", "en"]),
-  paso: z.enum(["datos", "codigo"]),
   detalle: z.string().trim().max(DETALLE_PROBLEMA_MAX).default(""),
   website: z.literal("").default(""),
 });
+const problemaConCorreo = problemaBase.extend({
+  nombre: z.string().trim().max(120).default(""),
+  email: z.string().trim().toLowerCase().email().max(254),
+});
+export const problemaSchema = z.discriminatedUnion("paso", [
+  problemaConCorreo.extend({ paso: z.literal("datos") }),
+  problemaConCorreo.extend({ paso: z.literal("codigo") }),
+  problemaBase.extend({ paso: z.literal("chat") }),
+]);
 export type Problema = z.infer<typeof problemaSchema>;
+export type PasoDelProblema = Problema["paso"];
+
+/** Un aviso ya resuelto: con nombre y correo, vengan del cuerpo (la puerta) o de la cookie (el chat). */
+export type ProblemaResuelto = {
+  nombre: string;
+  email: string;
+  locale: "es" | "en";
+  paso: PasoDelProblema;
+  detalle: string;
+};
 
 /** Lo que el cliente manda cuando respondió en modo búsqueda local (sin proveedor). */
 export const registroLocalSchema = z.object({
