@@ -2,8 +2,8 @@
 slug: cafam
 codigo: AF-06
 titulo: "Cafam — the WMS and the team of 20 (2020–2021)"
-resumen: "The implementation of Oracle WMS Cloud in a medicines distribution center: 20 people in testing for six months, the control BI, the VBA integrations and data quality in SQL."
-cuando_usar: "Use this when they ask what Henry did at Cafam (2020–2021): implementing a warehouse management system (Oracle WMS Cloud) in a medicines distribution center, the largest team he has led (20 people), VBA integrations, data quality in SQL and FlexSim simulation."
+resumen: "The implementation of Oracle WMS Cloud in a medicines distribution center: 20 people in testing for six months, the control BI, the VBA tools and data quality in SQL."
+cuando_usar: "Use this when they ask what Henry did at Cafam (2020–2021): implementing a warehouse management system (Oracle WMS Cloud) in a medicines distribution center, the largest team he has led (20 people), VBA tools, data quality in SQL and FlexSim simulation."
 estado: aprobado
 ancla: "/proyectos/cafam"
 actualizado: 2026-09-20
@@ -129,7 +129,7 @@ That is why each finding was related to the part of the process it affected and 
 
 This was an important stage in my evolution toward designing semantic models and advanced solutions in Power BI. I understood that a reliable analytical experience needs shared definitions, consistent relationships, verifiable measures and the possibility of traveling from an aggregated result down to the records that support it. The visualization made the project visible, but the real value was in the information structure that made it possible to interpret it correctly. How a dashboard is designed so that decision-makers use it, with the three adoption experiences compared, is in the document on BI that gets adopted.
 
-## The VBA integrations
+## The VBA tools
 
 <!-- seccion: integraciones-vba -->
 
@@ -137,7 +137,7 @@ I developed applications in Visual Basic for Applications (VBA) intended to inte
 
 The choice of VBA answered to the technological and operational context available at Cafam. It was a tool accessible to the organization, compatible with the resources the teams used and flexible enough to resolve gaps that could affect the continuity of the process. The quality of a solution does not depend on the novelty of the technology, but on its fit for the problem, the possibility of maintaining it and the result it produces.
 
-These applications made it possible to structure activities that previously depended on manual handling, apply rules in a repeatable way and reduce errors in the exchange of information. However, their purpose was not to maintain indefinitely an architecture parallel to the WMS. They worked as integration and continuity mechanisms while the process and the platform reached a higher level of adjustment. They kept running after go-live, as known peripheral pieces, with an owner and with a limit: each one knew which activity it covered, which data it depended on and what would happen the day the WMS took over that function.
+These applications made it possible to structure activities that previously depended on manual handling, apply rules in a repeatable way and reduce errors in the exchange of information. However, their purpose was not to maintain indefinitely an architecture parallel to the WMS. They worked as complement and continuity mechanisms while the process and the platform reached a higher level of adjustment. They kept running after go-live, as known peripheral pieces, with an owner and with a limit: each one knew which activity it covered, which data it depended on and what would happen the day the WMS took over that function.
 
 ## The value and the limits of peripheral solutions
 
@@ -189,7 +189,7 @@ The project's figures, as my CV and the site's case study publish them, with wha
 | ---------------------------------------- | -------------------------------------------------- | ----------------------------------------------------------------------- |
 | WMS implementation testing               | −25% errors · +15% operational efficiency          | inventory record accuracy (IRA) before and after                        |
 | BI for controlling the implementation    | +50% tracking accuracy · 15+ users                 | scenarios, coverage, defects and recurrences visible daily              |
-| VBA integrations with the WMS            | +15% automation · −50% data errors                 | manual loads replaced and errors in the exchange of information         |
+| VBA tools that complemented the WMS            | +15% automation · −50% data errors                 | manual loads replaced and errors in the exchange of information         |
 | Analytical processes automated in VBA | more than 10 hours a week of manual work saved | critical operational queries answered without manual work |
 | Data quality in SQL                      | +20% accuracy and reliability                      | 80-20 reconciliation by medicines between the WMS and the source system |
 

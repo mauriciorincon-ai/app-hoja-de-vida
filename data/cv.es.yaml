@@ -142,7 +142,7 @@ trayectoria:
       - "Lideré un equipo de 20 personas —14 de Cafam y 6 de Oracle— en seis meses de pruebas de implementación del WMS: −25% de errores y +15% de eficiencia operativa."
       - "Modelé el proceso en BPMN con Bizagi y simulé el despacho en FlexSim antes de probar."
       - "BI de control de la implementación: +50% de precisión en el seguimiento, para 15+ usuarios."
-      - "Integraciones VBA con el WMS: +15% de automatización y −50% de errores de datos; y más de 10 horas semanales de trabajo manual automatizadas."
+      - "Herramientas VBA que complementaban el WMS: +15% de automatización y −50% de errores de datos; y más de 10 horas semanales de trabajo manual automatizadas."
       - "Calidad de datos en SQL con conciliación 80-20 por medicamentos: +20%."
   - periodo: "2018 — 2020"
     rol: "Analista de Operaciones"
@@ -457,7 +457,7 @@ proyectos:
     resumen: >-
       Equipo de 20 personas en pruebas de implementación: −25% de errores y
       +15% de eficiencia; BI de control (+50% de precisión, 15+ usuarios) e
-      integraciones VBA (−50% de errores de datos).
+      herramientas VBA (−50% de errores de datos).
     stack: ["WMS", "BI", "VBA"]
     casestudy:
       titular: "Cambiar el sistema que mueve una bodega de medicamentos sin dejar de despachar: seis meses de pruebas con el equipo más grande que he liderado."
@@ -480,7 +480,7 @@ proyectos:
         - valor: 50
           prefijo: "−"
           sufijo: "%"
-          etiqueta: "de errores de datos con las integraciones VBA"
+          etiqueta: "de errores de datos con las herramientas VBA"
       capitulos:
         - titulo: "Primero el proceso, después el sistema"
           texto: >-
@@ -497,11 +497,12 @@ proyectos:
             Construí el BI de control del propio proyecto para más de 15 usuarios, de los directores
             a los coordinadores del centro de distribución: cobertura, defectos, reincidencias y
             reprocesos visibles a diario, no una sensación de avance.
-        - titulo: "Integraciones con dueño y con límite"
+        - titulo: "Herramientas VBA con dueño y con límite"
           texto: >-
-            Desarrollé integraciones en VBA con el WMS para sustituir cargas manuales. Cada pieza
-            periférica sabía quién la mantenía, de qué dependía y cuándo se retiraría: sin esas tres
-            condiciones, un puente se convierte en un sistema paralelo.
+            Desarrollé en VBA herramientas que complementaban funcionalidades que el WMS no tenía,
+            sin integrarse con él, para sustituir cargas manuales. Cada pieza periférica sabía quién
+            la mantenía, de qué dependía y cuándo se retiraría: sin esas tres condiciones, una pieza
+            así se convierte en un sistema paralelo.
         - titulo: "La conciliación 80-20 en SQL"
           texto: >-
             Al arrancar, ninguno de los medicamentos principales cuadraba entre el WMS y el sistema
@@ -510,7 +511,7 @@ proyectos:
       impacto:
         - "−25% de errores y +15% de eficiencia operativa en la implementación."
         - "+50% de precisión en el seguimiento de la implementación, con un BI de control adoptado por 15+ usuarios."
-        - "+15% de automatización y −50% de errores de datos con las integraciones VBA."
+        - "+15% de automatización y −50% de errores de datos con las herramientas VBA."
         - "+20% en calidad de datos vía SQL."
       leccion: >-
         Modernizar no consiste en sustituirlo todo de una vez, sino en diseñar una

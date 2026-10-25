@@ -591,7 +591,7 @@ bloques:
           en: "At Ceinfes, in 2018, the digitization of some 250 sheets per day was treated as a line of stations —2 for scanning, plus preparation, sorting, validation and reordering—; about 10% of the sheets required manual capture, and that station set the pace of the whole line."
         corpus: [procesos-y-simulacion]
         href: /proyectos/ceinfes
-      - nombre: { es: "Cafam: integraciones en VBA con dueño y con límite", en: "Cafam: VBA integrations with an owner and a limit" }
+      - nombre: { es: "Cafam: herramientas en VBA con dueño y con límite", en: "Cafam: VBA tools with an owner and a limit" }
         nivel: uso-real
         texto:
           es: "En Cafam, en 2020, la integración del centro de distribución con el WMS se resolvió con aplicaciones en VBA —disponibles, útiles y mantenibles en esa organización— y no con una plataforma nueva: subieron un 15 % la automatización, contribuyeron a bajar un 50 % los errores de datos y siguieron corriendo después de la salida a producción, como piezas con dueño y con límite."

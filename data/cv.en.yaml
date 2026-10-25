@@ -131,7 +131,7 @@ trayectoria:
       - "Led a 20-person team —14 from Cafam and 6 from Oracle— through six months of WMS implementation testing: −25% errors and +15% operational efficiency."
       - "Modeled the process in BPMN with Bizagi and simulated dispatch in FlexSim before testing."
       - "Implementation-control BI: +50% precision in follow-up, for 15+ users."
-      - "VBA integrations with the WMS: +15% automation and −50% data errors; and more than 10 hours a week of manual work automated."
+      - "VBA tools that complemented the WMS: +15% automation and −50% data errors; and more than 10 hours a week of manual work automated."
       - "SQL data quality with an 80-20 reconciliation by medicine: +20%."
   - periodo: "2018 — 2020"
     rol: "Operations Analyst"
@@ -437,7 +437,7 @@ proyectos:
     nombre: "Leading the quality of a WMS — Cafam (2020–2021)"
     resumen: >-
       A team of 20 through implementation testing: −25% errors and +15%
-      efficiency; control BI (+50% precision, 15+ users) and VBA integrations
+      efficiency; control BI (+50% precision, 15+ users) and VBA tools
       (−50% data errors).
     stack: ["WMS", "BI", "VBA"]
     casestudy:
@@ -462,7 +462,7 @@ proyectos:
         - valor: 50
           prefijo: "−"
           sufijo: "%"
-          etiqueta: "data errors with the VBA integrations"
+          etiqueta: "data errors with the VBA tools"
       capitulos:
         - titulo: "First the process, then the system"
           texto: >-
@@ -479,11 +479,12 @@ proyectos:
             I built the control BI for the project itself for more than 15 users, from directors to
             distribution-center coordinators: coverage, defects, recurrences and retests visible
             every day, not a feeling of progress.
-        - titulo: "Integrations with an owner and a limit"
+        - titulo: "VBA tools with an owner and a limit"
           texto: >-
-            I developed VBA integrations with the WMS to replace manual loads. Each peripheral piece
-            knew who maintained it, what it depended on and when it would be retired: without those
-            three conditions, a bridge becomes a parallel system.
+            I built VBA tools that complemented functionality the WMS lacked, without integrating
+            with it, to replace manual loads. Each peripheral piece knew who maintained it, what it
+            depended on and when it would be retired: without those three conditions, a piece like
+            that becomes a parallel system.
         - titulo: "The 80-20 reconciliation in SQL"
           texto: >-
             At the start, none of the main medicines matched between the WMS and the source system.
@@ -492,7 +493,7 @@ proyectos:
       impacto:
         - "−25% errors and +15% operational efficiency across the implementation."
         - "+50% precision in implementation follow-up, with a control BI adopted by 15+ users."
-        - "+15% automation and −50% data errors with the VBA integrations."
+        - "+15% automation and −50% data errors with the VBA tools."
         - "+20% data quality via SQL."
       leccion: >-
         Modernizing does not consist of replacing everything at once, but of designing

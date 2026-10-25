@@ -2,8 +2,8 @@
 slug: cafam
 codigo: AF-06
 titulo: "Cafam — el WMS y el equipo de 20 (2020–2021)"
-resumen: "La implementación de Oracle WMS Cloud en un centro de distribución de medicamentos: 20 personas en pruebas durante seis meses, el BI de control, las integraciones en VBA y la calidad del dato en SQL."
-cuando_usar: "Úsalo cuando pregunten qué hizo Henry en Cafam (2020–2021): la implementación de un sistema de gestión de bodega (Oracle WMS Cloud) en un centro de distribución de medicamentos, el equipo más grande que ha liderado (20 personas), integraciones en VBA, calidad de datos en SQL y simulación con FlexSim."
+resumen: "La implementación de Oracle WMS Cloud en un centro de distribución de medicamentos: 20 personas en pruebas durante seis meses, el BI de control, las herramientas en VBA y la calidad del dato en SQL."
+cuando_usar: "Úsalo cuando pregunten qué hizo Henry en Cafam (2020–2021): la implementación de un sistema de gestión de bodega (Oracle WMS Cloud) en un centro de distribución de medicamentos, el equipo más grande que ha liderado (20 personas), herramientas en VBA, calidad de datos en SQL y simulación con FlexSim."
 estado: aprobado
 ancla: "/proyectos/cafam"
 actualizado: 2026-09-20
@@ -129,7 +129,7 @@ Por eso cada hallazgo se relacionaba con la parte del proceso que afectaba y con
 
 Esta fue una etapa importante en mi evolución hacia el diseño de modelos semánticos y soluciones avanzadas en Power BI. Comprendí que una experiencia analítica confiable necesita definiciones compartidas, relaciones consistentes, medidas verificables y la posibilidad de recorrer un resultado agregado hasta los registros que lo sustentan. La visualización hacía visible el proyecto, pero el verdadero valor se encontraba en la estructura de información que permitía interpretarlo correctamente. Cómo se diseña un tablero para que lo usen quienes deciden, con las tres experiencias de adopción comparadas, está en el documento de BI que se adopta.
 
-## Las integraciones en VBA
+## Las herramientas en VBA
 
 <!-- seccion: integraciones-vba -->
 
@@ -137,7 +137,7 @@ Desarrollé aplicaciones en Visual Basic para Aplicaciones (VBA) destinadas a in
 
 La elección de VBA respondió al contexto tecnológico y operativo disponible en Cafam. Era una herramienta accesible para la organización, compatible con los recursos utilizados por los equipos y suficientemente flexible para resolver brechas que podían afectar la continuidad del proceso. La calidad de una solución no depende de la novedad de la tecnología, sino de su adecuación al problema, de la posibilidad de mantenerla y del resultado que produce.
 
-Estas aplicaciones permitieron estructurar actividades que anteriormente dependían de manipulación manual, aplicar reglas de forma repetible y reducir errores en el intercambio de información. Sin embargo, su propósito no era mantener indefinidamente una arquitectura paralela al WMS. Funcionaban como mecanismos de integración y continuidad mientras el proceso y la plataforma alcanzaban un mayor nivel de ajuste. Siguieron corriendo después de la salida a producción, como piezas periféricas conocidas, con dueño y con límite: cada una sabía qué actividad cubría, de qué datos dependía y qué pasaría el día en que el WMS asumiera esa función.
+Estas aplicaciones permitieron estructurar actividades que anteriormente dependían de manipulación manual, aplicar reglas de forma repetible y reducir errores en el intercambio de información. Sin embargo, su propósito no era mantener indefinidamente una arquitectura paralela al WMS. Funcionaban como mecanismos de complemento y continuidad mientras el proceso y la plataforma alcanzaban un mayor nivel de ajuste. Siguieron corriendo después de la salida a producción, como piezas periféricas conocidas, con dueño y con límite: cada una sabía qué actividad cubría, de qué datos dependía y qué pasaría el día en que el WMS asumiera esa función.
 
 ## El valor y los límites de las soluciones periféricas
 
@@ -189,7 +189,7 @@ Las cifras del proyecto, tal como las publica mi hoja de vida y el case study de
 | ---------------------------------------- | -------------------------------------------------- | -------------------------------------------------------------------- |
 | Pruebas de implementación del WMS        | −25 % de errores · +15 % de eficiencia operativa   | exactitud de registro de inventario (ERI) antes y después            |
 | BI de control de la implementación       | +50 % de precisión en el seguimiento · 15+ usuarios | escenarios, cobertura, defectos y reincidencias visibles a diario    |
-| Integraciones en VBA con el WMS          | +15 % de automatización · −50 % de errores de datos | cargas manuales sustituidas y errores en el intercambio de información |
+| Herramientas VBA que complementaban el WMS          | +15 % de automatización · −50 % de errores de datos | cargas manuales sustituidas y errores en el intercambio de información |
 | Procesos analíticos automatizados en VBA | más de 10 horas semanales de trabajo manual menos | consultas operativas críticas respondidas sin trabajo manual |
 | Calidad de datos en SQL                  | +20 % de precisión y confiabilidad                 | conciliación 80-20 por medicamentos entre el WMS y el sistema de origen |
 
