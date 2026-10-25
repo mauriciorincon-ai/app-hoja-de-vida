@@ -26,6 +26,16 @@ describe("lo que SÍ es la voz del dueño", () => {
     ["es", "Si me interesa lo que buscas, te escribo"],
     ["es", "He liderado equipos pequeños"],
     ["es", "Mis proyectos"],
+    // Auditoría S24 (M1): el primer ejemplo de la decisión y sus parientes.
+    ["es", "Hice la migración completa"],
+    ["es", "Tuve a cargo un equipo de cinco personas"],
+    ["es", "Fui el líder técnico del proyecto"],
+    ["es", "Reduje el tiempo de entrega a la mitad"],
+    ["es", "Me encargué de la arquitectura"],
+    ["es", "Me gradué en 2019"],
+    ["es", "Ayudé a la empresa a ahorrar costos"],
+    ["es", "Mi paso por CTIC me enseñó a medir"],
+    ["es", "Mi rol era liderar el equipo"],
     ["en", "Ask my résumé"],
     ["en", "I built the ecosystem from scratch"],
     ["en", "I led the data strategy"],
@@ -34,6 +44,14 @@ describe("lo que SÍ es la voz del dueño", () => {
     ["en", "I'm interested in what you're looking for"],
     ["en", "I have led small teams"],
     ["en", "My projects"],
+    ["en", "I was the lead engineer on the project"],
+    ["en", "I had a team of five"],
+    ["en", "I reduced delivery time by half"],
+    ["en", "I left the company in 2025"],
+    ["en", "I graduated in 2019"],
+    ["en", "I've built three apps"],
+    ["en", "I'm the lead on this"],
+    ["en", "My role was to lead the team"],
   ];
   it.each(SI)("[%s] «%s»", (idioma, texto) => {
     expect(vozDelDueno(texto, idioma as "es" | "en").length).toBeGreaterThan(0);
@@ -54,6 +72,8 @@ describe("lo que SÍ es la voz del dueño", () => {
     ],
     ["en", "That's outside my lane."],
     ["en", "I couldn't answer that one. Please try again."],
+    ["en", "I was unable to find that in the résumé."],
+    ["en", "I was not able to answer that."],
     ["en", "I can't answer that from Henry's résumé."],
     ["en", "Henry led the data strategy at Vesting [2]."],
     [

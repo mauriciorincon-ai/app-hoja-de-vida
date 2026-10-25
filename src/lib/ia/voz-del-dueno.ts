@@ -35,9 +35,9 @@ const solo = (alternativas: string, flags = "giu") =>
 
 /** Lo que es del dueño en la boca del dueño: su hoja de vida y lo que ella cuenta. */
 const DOMINIO_ES =
-  "hoja de vida|hv|cv|currículum|curriculum|trayectoria|experiencia|proyectos?|carrera|equipo|empresa|trabajo|portafolio|formación|estudios|certificaciones|perfil|historial|vida|casos|apps?|agentes|método|enfoque";
+  "hoja de vida|hv|cv|currículum|curriculum|trayectoria|experiencia|proyectos?|carrera|equipo|empresa|trabajo|portafolio|formación|estudios|certificaciones|perfil|historial|vida|casos|apps?|agentes|método|enfoque|paso|rol|cargo|aporte|puesto|labor|logros?|habilidades";
 const DOMINIO_EN =
-  "résumé|resume|cv|career|experience|projects?|work|team|company|background|portfolio|studies|certifications?|profile|history|life|cases|apps?|agents|method|approach|journey|story";
+  "résumé|resume|cv|career|experience|projects?|work|team|company|background|portfolio|studies|certifications?|profile|history|life|cases|apps?|agents|method|approach|journey|story|role|position|contribution|skills|achievements?";
 
 const ES = solo(
   [
@@ -50,6 +50,10 @@ const ES = solo(
     "me interesa|me interesan",
     // experiencia: pretérito y presente de la lista cerrada
     "construí|lideré|diseñé|implementé|desarrollé|dirigí|creé|fundé|trabajé|aprendí|estudié|entregué|lancé|migré|automaticé|coordiné|gestioné|participé",
+    // el pretérito de siempre: «hice», «tuve», «fui», «logré», «reduje»…
+    "hice|tuve|fui|logré|reduje|ahorré|ayudé|empecé|salí|usé|utilicé|analicé|probé|resolví|definí|integré|propuse|asumí|mejoré|publiqué|escribí|monté|armé",
+    // reflexivos: «me encargué», «me gradué», «me desempeñé»
+    "me encargué|me gradué|me desempeñé|me formé|me incorporé|me dediqué",
     "construyo|lidero|dirijo|implemento|gestiono|coordino",
     // «he construido», «he liderado»: el auxiliar solo, seguido de un participio
     "he(?= \\p{L}+(?:ado|ido|to|cho)(?![\\p{L}]))",
@@ -57,7 +61,7 @@ const ES = solo(
 );
 
 const EN_I = new RegExp(
-  "(?<![\\p{L}\\p{N}'’.-])I (?:built|led|designed|implemented|developed|worked|created|founded|managed|learned|studied|delivered|launched|migrated|automated|coordinated|ran|made|did|have (?:built|led|worked|designed|developed|created|managed|delivered))(?![\\p{L}\\p{N}])",
+  "(?<![\\p{L}\\p{N}'’.-])I(?: (?:built|led|designed|implemented|developed|worked|created|founded|managed|learned|studied|delivered|launched|migrated|automated|coordinated|ran|made|did|had|reduced|saved|left|helped|started|graduated|used|joined|moved|took|chose|decided|wrote|owned|drove|proposed|was(?! (?:unable|not able))|have (?:built|led|worked|designed|developed|created|managed|delivered))|['’]ve (?:built|led|worked|designed|developed|created|managed|delivered|launched))(?![\\p{L}\\p{N}])",
   "gu",
 );
 const EN = solo(
@@ -66,6 +70,8 @@ const EN = solo(
     `my(?= (?:${DOMINIO_EN}))`,
     "write (?:to )?me|contact me|reach (?:out to )?me|email me|message me|call me|let me know|get in touch with me",
     "I(?:['’]m| am) (?:interested|looking)|interests me",
+    // «I'm the lead…»: el dueño presentándose
+    "I(?:['’]m| am) the",
   ].join("|"),
 );
 
