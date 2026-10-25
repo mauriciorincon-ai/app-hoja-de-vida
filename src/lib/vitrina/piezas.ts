@@ -4,6 +4,7 @@ import path from "node:path";
 import { cache } from "react";
 import { parse } from "yaml";
 import { conNombreDePieza } from "../../../scripts/nombre-oficial.mjs";
+import { sinVitrinaEnTodo } from "../../../scripts/sin-vitrina.mjs";
 import {
   fichaTecnicaSchema,
   frentes,
@@ -112,10 +113,11 @@ export function leerFichaDeTexto(
       `Ficha ilegible en ${ruta}: ${(e as Error).message}\n${AVISO}`,
     );
   }
-  const ficha = parseFicha(raw, ruta);
+  // La palabra del sitio es una sola (S23): «vitrina» se lee «portafolio».
+  const ficha = sinVitrinaEnTodo(parseFicha(raw, ruta));
 
   // DÓNDE vive una ficha es parte de su validez, no un detalle de archivo: la
-  // ruta pública sale del CONTENIDO (`/vitrina/<pieza.frente>/<pieza.slug>`),
+  // ruta pública sale del CONTENIDO (`/portafolio/<pieza.frente>/<pieza.slug>`),
   // así que una ficha copiada al frente equivocado se pinta en el escaparate de
   // uno y enlaza al de otro — tarjeta viva, enlace muerto, y el sitemap
   // publicando una tercera cosa. El gate de contenido ya lo caza, pero eso solo
@@ -124,7 +126,7 @@ export function leerFichaDeTexto(
     throw new Error(
       `Ficha fuera de sitio en ${ruta}: declara «pieza.frente: ${ficha.pieza.frente}» ` +
         `y vive en content/${frente}/. Su tarjeta enlazaría a ` +
-        `/vitrina/${ficha.pieza.frente}/${ficha.pieza.slug}, que este frente no publica.\n${AVISO}`,
+        `/portafolio/${ficha.pieza.frente}/${ficha.pieza.slug}, que este frente no publica.\n${AVISO}`,
     );
   }
   if (archivo !== `${ficha.pieza.slug}${SUFIJO}`) {

@@ -5,7 +5,7 @@ titulo: "The research: method before result"
 resumen: "Seven research lines published with their measured gap —1,414, 900, 780, 279, 1,405, 119 and 900 works reviewed— and their findings, produced with two harnesses: Design Science (52 criteria, thresholds frozen before measuring) and Computational Paper (44 criteria, ledger: if it is not in the ledger it is not in the paper)."
 cuando_usar: "Use this when they ask what research he has done, whether he has written articles or papers, the two research harnesses (Design Science and Computational Paper), the method of measuring the gap in the literature, synthetic data and simulation, and what research has to do with an AI role."
 estado: aprobado
-ancla: "/vitrina/investigaciones"
+ancla: "/portafolio/investigaciones"
 actualizado: 2026-09-20
 preguntas_de_prueba:
   - "What research has Henry done?"
@@ -38,9 +38,9 @@ HOW THIS FILE IS WRITTEN
 
 <!-- seccion: que-son -->
 
-My portfolio gathers seven research lines published in the showcase of this site, each with a
+My portfolio gathers seven research lines published in the portfolio of this site, each with a
 technical sheet that presents its origin, question, measured gap, method, status, limits and
-expected contribution. Publishing them in the showcase means making their development visible
+expected contribution. Publishing them in the portfolio means making their development visible
 and submitting their structure to review; it does not mean claiming that all of them have already
 completed a process of scientific publication or peer review. No piece is sealed: all seven are
 in an initial state, five of them already have a paper with closed production and ready to
@@ -276,7 +276,7 @@ The seven come from different moments of my trajectory —from an ERP in 2016 to
 2024—, but they share the same root. Each begins with a real system whose representation was
 insufficient, a decision that could be improved or an organizational capability that did not yet
 have a sufficiently clear method to evolve. And all seven are produced with the same two
-harnesses, one of which, the Computational Paper, is published among the 11 agents of the showcase.
+harnesses, one of which, the Computational Paper, is published among the 11 agents of the portfolio.
 
 ## Three lines on operations under variability
 
@@ -475,7 +475,7 @@ to learn to speak without naming it.
 
 <!-- seccion: los-harnesses -->
 
-The research is produced with two harnesses, one of which, the Computational Paper, is published among the 11 agents of the showcase. Both
+The research is produced with two harnesses, one of which, the Computational Paper, is published among the 11 agents of the portfolio. Both
 declare the paper in a single configuration file —questions, falsifiable principles, metrics,
 corpus, disclosure boundary— and drive ten phases up to a manuscript ready to submit, stopping at
 gates where only an exact phrase of mine lets it through: "framing approved", "artifact
@@ -807,7 +807,7 @@ FORJA can become an applicable method for specifying activities before developin
 or agents, and it enters ARKHÉ as a demonstrative case: the specification method as
 architectural core. ARKHÉ organizes concepts and functions that already guide an artificial
 intelligence architecture: it is the architecture that produces the other six lines and the 34
-pieces of the showcase. The agency spectrum offers a criterion for selecting whether a decision
+pieces of the portfolio. The agency spectrum offers a criterion for selecting whether a decision
 needs a dashboard, an alert, a recommendation, an application or a system with the capacity to
 act.
 
@@ -906,7 +906,7 @@ superficially automate writing.
 
 They also demonstrate responsibility over the limits. Synthetic data is not presented as real
 validation, simulation is not presented as operational certainty and a piece published in the
-showcase is not automatically presented as a peer-reviewed article: five papers ready, none
+portfolio is not automatically presented as a peer-reviewed article: five papers ready, none
 submitted, and so it is written.
 
 The research connects my whole trajectory. The problems come from processes, transport,

@@ -375,59 +375,59 @@ preguntas:
   - pregunta: "Does he know mathematical optimization, with Pyomo or OR-Tools?"
     espera: [skills]
     familia: procesos
-  # ── vitrina
+  # ── portafolio
   - pregunta: "What has he built on his own, outside of work?"
     espera: [apps-pipeline]
-    familia: vitrina
+    familia: portafolio
   # 2026-10-04 (LinkedIn review): the independent projects role.
   - pregunta: "What independent AI projects has he built?"
     espera: [trayectoria]
-    familia: vitrina
+    familia: portafolio
   - pregunta: "Since when has he worked on his own generative AI projects?"
     espera: [apps-pipeline, trayectoria]
-    familia: vitrina
+    familia: portafolio
   - pregunta: "How many applications has he published?"
     espera: [apps-pipeline]
-    familia: vitrina
+    familia: portafolio
   - pregunta: "Does he have public code or repositories that can be reviewed?"
     espera: [apps-pipeline, rag-y-el-chat, contacto]
-    familia: vitrina
+    familia: portafolio
   - pregunta: "Which dashboards has he published with open data?"
     espera: [los-tableros]
-    familia: vitrina
+    familia: portafolio
   - pregunta: "Has he worked with open data or public sources?"
     espera: [los-tableros, las-investigaciones]
-    familia: vitrina
+    familia: portafolio
   - pregunta: "Can he read financial statements or accounting data?"
     espera: [los-tableros]
-    familia: vitrina
+    familia: portafolio
   - pregunta: "What research has he done?"
     espera: [las-investigaciones]
-    familia: vitrina
+    familia: portafolio
   - pregunta: "Has he written articles or papers?"
     espera: [las-investigaciones]
-    familia: vitrina
+    familia: portafolio
   - pregunta: "Which agents has he published in his portfolio?"
     espera: [agentes-en-produccion, apps-pipeline, los-agentes-de-la-vitrina]
-    familia: vitrina
-  - pregunta: "What are the eleven showcase agents for?"
+    familia: portafolio
+  - pregunta: "What are the eleven portfolio agents for?"
     espera: [los-agentes-de-la-vitrina]
-    familia: vitrina
+    familia: portafolio
   - pregunta: "What is a harness and how does he use it in his agents?"
     espera: [los-agentes-de-la-vitrina, las-investigaciones, agentes-en-produccion]
-    familia: vitrina
+    familia: portafolio
   - pregunta: "How does he control the quality of what his agents produce with Claude Code?"
     espera: [los-agentes-de-la-vitrina]
-    familia: vitrina
+    familia: portafolio
   - pregunta: "How does he verify the figures he publishes?"
     espera: [los-tableros, las-investigaciones, bi-que-se-adopta]
-    familia: vitrina
+    familia: portafolio
   - pregunta: "What is this website built with?"
     espera: [apps-pipeline, rag-y-el-chat]
-    familia: vitrina
+    familia: portafolio
   - pregunta: "Do his applications have automated tests?"
     espera: [plataforma-y-despliegue, como-aprendo, apps-pipeline]
-    familia: vitrina
+    familia: portafolio
   # ── encaje
   - pregunta: "What type of role is he looking for?"
     espera: [lo-que-busco]
@@ -606,7 +606,7 @@ preguntas:
     familia: procesos
   - pregunta: "What is Probeta DS and what does it guarantee?"
     espera: [metodo-decidir-con-modelos]
-    familia: vitrina
+    familia: portafolio
   - pregunta: "Which predictive models has Henry taken to production?"
     espera: [metodo-decidir-con-modelos, analitica-predictiva, banco-pichincha]
     familia: bi-y-analitica

@@ -145,7 +145,7 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
       .getByRole("link", { name: "Portafolio", exact: true })
       .first()
       .click();
-    await expect(page).toHaveURL(/\/es\/vitrina$/);
+    await expect(page).toHaveURL(/\/es\/portafolio$/);
 
     // El PORTAL (ADR-015): una caja por frente, en el orden del YAML.
     const cajas = page.locator("[data-frente]");
@@ -165,7 +165,7 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
       .locator('[data-frente="apps"]')
       .getByRole("link", { name: "Apps", exact: true })
       .click();
-    await expect(page).toHaveURL(/\/es\/vitrina\/apps$/);
+    await expect(page).toHaveURL(/\/es\/portafolio\/apps$/);
 
     // Las muestras, cada una con su tarjeta…
     await expect(page.locator("[data-muestra-slug]")).toHaveCount(
@@ -186,7 +186,7 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
 
     // Primero la FICHA TÉCNICA (ADR-016) …
     await expect(page).toHaveURL(
-      new RegExp(`/es/vitrina/apps/${primera.app.slug}$`),
+      new RegExp(`/es/portafolio/apps/${primera.app.slug}$`),
     );
     await expect(
       page.locator(`[data-ficha-tecnica="${primera.app.slug}"]`),
@@ -194,7 +194,7 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
     // … y de ahí, con el botón, al detalle.
     await page.locator('[data-cta="detalle"]').click();
     await expect(page).toHaveURL(
-      new RegExp(`/es/vitrina/apps/${primera.app.slug}/detalle$`),
+      new RegExp(`/es/portafolio/apps/${primera.app.slug}/detalle$`),
     );
     // Y la ficha que se abre es la de ESA app, no otra.
     await expect(
@@ -206,7 +206,7 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
     page,
   }) => {
     for (const l of ["es", "en"] as const) {
-      await page.goto(`/${l}/vitrina/apps`);
+      await page.goto(`/${l}/portafolio/apps`);
       const bloques = page.locator("section[data-categoria]");
       await expect(bloques).toHaveCount(2);
       // Profesionales ANTES que personales, y cada una con su h2.
@@ -245,7 +245,7 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
     page,
   }) => {
     for (const exp of EXPORTS) {
-      await page.goto(`/es/vitrina/apps/${exp.app.slug}/detalle`);
+      await page.goto(`/es/portafolio/apps/${exp.app.slug}/detalle`);
       const fichas = page.locator("article[data-app-slug]");
       // La razón de ser del cambio: una ficha por página, no las seis apiladas.
       await expect(fichas).toHaveCount(1);
@@ -260,7 +260,7 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
     page,
   }) => {
     // El orden que el visitante acaba de ver: profesionales y después personales.
-    await page.goto("/es/vitrina/apps");
+    await page.goto("/es/portafolio/apps");
     const orden = await page
       .locator("[data-muestra-slug]")
       .evaluateAll((els) =>
@@ -270,10 +270,10 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
 
     for (const sufijo of ["", "/detalle"]) {
       for (const [i, slug] of orden.entries()) {
-        await page.goto(`/es/vitrina/apps/${slug}${sufijo}`);
+        await page.goto(`/es/portafolio/apps/${slug}${sufijo}`);
         const anterior = page.getByRole("link", { name: /App anterior/ });
         const siguiente = page.getByRole("link", { name: /App siguiente/ });
-        const ruta = (v: string) => new RegExp(`/vitrina/apps/${v}${sufijo}$`);
+        const ruta = (v: string) => new RegExp(`/portafolio/apps/${v}${sufijo}$`);
         if (i === 0) await expect(anterior, `${slug}${sufijo}`).toHaveCount(0);
         else
           await expect(anterior, `${slug}${sufijo}`).toHaveAttribute(
@@ -299,7 +299,7 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
         const nombre = nombreVisible(exp);
         const slug = exp.app.slug;
 
-        await page.goto(`/${l}/vitrina/apps/${slug}`);
+        await page.goto(`/${l}/portafolio/apps/${slug}`);
         await expect(
           page.getByRole("heading", { level: 1, name: nombre, exact: true }),
           `${l}/${slug} ficha técnica`,
@@ -309,11 +309,11 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
         );
         // El selector de la lista de espera nombra a TODAS las apps con su nombre oficial.
         const opciones = await page
-          .locator("#contacto-vitrina select option")
+          .locator("#contacto-portafolio select option")
           .allTextContents();
         expect(opciones, `${l}/${slug} selector`).toContain(nombre);
 
-        await page.goto(`/${l}/vitrina/apps/${slug}/detalle`);
+        await page.goto(`/${l}/portafolio/apps/${slug}/detalle`);
         await expect(
           page.getByRole("heading", { level: 2, name: nombre, exact: true }),
           `${l}/${slug} detalle`,
@@ -328,7 +328,7 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
         if (oficial === exp.app.nombre || oficial.includes(exp.app.nombre))
           continue;
         const cuerpo = await (
-          await page.request.get(`/${l}/vitrina/apps/${exp.app.slug}/detalle`)
+          await page.request.get(`/${l}/portafolio/apps/${exp.app.slug}/detalle`)
         ).text();
         expect(cuerpo, `${l}/${exp.app.slug}`).not.toContain(exp.app.nombre);
       }
@@ -338,20 +338,20 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
   test("se navega entre apps vecinas sin volver al índice", async ({
     page,
   }) => {
-    await page.goto(`/es/vitrina/apps/${EXPORTS[0].app.slug}/detalle`);
+    await page.goto(`/es/portafolio/apps/${EXPORTS[0].app.slug}/detalle`);
     const siguiente = page.getByRole("link", { name: /App siguiente/ });
     // La primera del orden nunca tiene «anterior», pero siempre tiene vecina.
     await expect(siguiente).toBeVisible();
     await siguiente.click();
-    await expect(page).toHaveURL(/\/es\/vitrina\/apps\/[a-z0-9-]+\/detalle$/);
+    await expect(page).toHaveURL(/\/es\/portafolio\/apps\/[a-z0-9-]+\/detalle$/);
     await expect(page.locator("article[data-app-slug]")).toHaveCount(1);
     // Y desde ahí se sube a la ficha técnica, al escaparate, y al portal.
     await page.getByRole("link", { name: /Volver a la ficha técnica/ }).click();
-    await expect(page).toHaveURL(/\/es\/vitrina\/apps\/[a-z0-9-]+$/);
+    await expect(page).toHaveURL(/\/es\/portafolio\/apps\/[a-z0-9-]+$/);
     await page.getByRole("link", { name: /Volver a las apps/ }).click();
-    await expect(page).toHaveURL(/\/es\/vitrina\/apps$/);
-    await page.getByRole("link", { name: /Volver a la vitrina/ }).click();
-    await expect(page).toHaveURL(/\/es\/vitrina$/);
+    await expect(page).toHaveURL(/\/es\/portafolio\/apps$/);
+    await page.getByRole("link", { name: /Volver al portafolio/ }).click();
+    await expect(page).toHaveURL(/\/es\/portafolio$/);
   });
 
   test("gate ATS/SEO: la ficha entrega TODO su contenido en el HTML estático", async ({
@@ -359,7 +359,7 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
   }) => {
     const exp = MAS_LARGA;
     const res = await page.request.get(
-      `/es/vitrina/apps/${exp.app.slug}/detalle`,
+      `/es/portafolio/apps/${exp.app.slug}/detalle`,
     );
     expect(res.status()).toBe(200);
     const html = await res.text();
@@ -379,11 +379,11 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
     page,
   }) => {
     const rutas = [
-      "/es/vitrina",
-      "/es/vitrina/apps",
-      ...EXPORTS.map((e) => `/es/vitrina/apps/${e.app.slug}`),
-      ...EXPORTS.map((e) => `/es/vitrina/apps/${e.app.slug}/detalle`),
-      ...EN_PREPARACION.map((f) => `/es/vitrina/${f.id}`),
+      "/es/portafolio",
+      "/es/portafolio/apps",
+      ...EXPORTS.map((e) => `/es/portafolio/apps/${e.app.slug}`),
+      ...EXPORTS.map((e) => `/es/portafolio/apps/${e.app.slug}/detalle`),
+      ...EN_PREPARACION.map((f) => `/es/portafolio/${f.id}`),
     ];
     for (const ruta of rutas) {
       await page.goto(ruta);
@@ -400,12 +400,12 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
     page,
   }) => {
     for (const exp of EXPORTS) {
-      await page.goto(`/es/vitrina/apps/${exp.app.slug}/detalle`);
+      await page.goto(`/es/portafolio/apps/${exp.app.slug}/detalle`);
       const cta = page.locator('[data-cta="lista-de-espera"]');
       await expect(cta).toBeVisible();
-      await expect(cta).toHaveAttribute("href", "#contacto-vitrina");
+      await expect(cta).toHaveAttribute("href", "#contacto-portafolio");
       // Un ancla que no aterriza en ninguna parte es un botón roto.
-      await expect(page.locator("#contacto-vitrina")).toHaveCount(1);
+      await expect(page.locator("#contacto-portafolio")).toHaveCount(1);
       // El FORMULARIO vive en la página inicial de la app, no en el detalle
       // (la página más pesada: una isla más la sacó del presupuesto de
       // interactividad, PR #32). El cierre del detalle manda allá.
@@ -414,7 +414,7 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
         page.locator('[data-cta="ir-a-lista-de-espera"]'),
       ).toHaveAttribute(
         "href",
-        `/es/vitrina/apps/${exp.app.slug}#contacto-vitrina`,
+        `/es/portafolio/apps/${exp.app.slug}#contacto-portafolio`,
       );
     }
   });
@@ -423,7 +423,7 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
     page,
   }) => {
     for (const exp of EXPORTS) {
-      await page.goto(`/es/vitrina/apps/${exp.app.slug}/detalle`);
+      await page.goto(`/es/portafolio/apps/${exp.app.slug}/detalle`);
 
       const metricas = page.locator("[data-metrica]");
       await expect(metricas).toHaveCount(exp.metricas.length);
@@ -472,7 +472,7 @@ test.describe("Vitrina — la ficha técnica (ADR-016)", () => {
   }) => {
     for (const exp of EXPORTS) {
       const comp = COMPLEMENTOS.find((c) => c.app === exp.app.slug)!;
-      await page.goto(`/es/vitrina/apps/${exp.app.slug}`);
+      await page.goto(`/es/portafolio/apps/${exp.app.slug}`);
       const ft = page.locator(`[data-ficha-tecnica="${exp.app.slug}"]`);
       await expect(ft).toBeVisible();
       await expect(ft.locator("[data-titular]")).toContainText(
@@ -543,7 +543,7 @@ test.describe("Vitrina — la ficha técnica (ADR-016)", () => {
     const comp = COMPLEMENTOS.find((c) => c.app === exp.app.slug)!;
     const proceso = comp.proceso!;
     const html = await (
-      await page.request.get(`/es/vitrina/apps/${exp.app.slug}`)
+      await page.request.get(`/es/portafolio/apps/${exp.app.slug}`)
     ).text();
     expect(html).toContain(comp.titular.slice(0, 40));
     // Los pasos del proceso son <text> del SVG: un rastreador los lee.
@@ -561,7 +561,7 @@ test.describe("Vitrina — la ficha técnica (ADR-016)", () => {
     isMobile,
   }) => {
     test.skip(!isMobile, "solo en el proyecto móvil");
-    await page.goto(`/es/vitrina/apps/${MAS_LARGA_CON_PROCESO.app.slug}`);
+    await page.goto(`/es/portafolio/apps/${MAS_LARGA_CON_PROCESO.app.slug}`);
     const caja = page.locator(
       `[data-proceso="${MAS_LARGA.app.slug}"] [data-desliza]`,
     );
@@ -585,7 +585,7 @@ test.describe("Vitrina — los frentes en preparación (ADR-015)", () => {
       "no hay frentes en preparación: los cuatro tienen piezas",
     );
     for (const f of EN_PREPARACION) {
-      await page.goto(`/es/vitrina/${f.id}`);
+      await page.goto(`/es/portafolio/${f.id}`);
       await expect(
         page.getByRole("heading", { level: 1, name: f.nombre.es }),
       ).toBeVisible();
@@ -621,7 +621,7 @@ test.describe("Vitrina — los frentes en preparación (ADR-015)", () => {
     const sitemap = await (await request.get("/sitemap.xml")).text();
     for (const { f, piezas } of enPausa) {
       for (const l of ["es", "en"] as const) {
-        await page.goto(`/${l}/vitrina/${f.id}`);
+        await page.goto(`/${l}/portafolio/${f.id}`);
         if (f.enPreparacion) {
           await expect(page.locator("main")).toContainText(
             f.enPreparacion.titulo[l],
@@ -637,16 +637,16 @@ test.describe("Vitrina — los frentes en preparación (ADR-015)", () => {
         // Ninguna tarjeta de pieza, ni su nombre, en el HTML del frente.
         await expect(page.locator("[data-muestra-slug]")).toHaveCount(0);
         for (const p of piezas) {
-          const r = await page.goto(`/${l}/vitrina/${f.id}/${p.pieza.slug}`);
-          expect(r?.status(), `/${l}/vitrina/${f.id}/${p.pieza.slug}`).toBe(
+          const r = await page.goto(`/${l}/portafolio/${f.id}/${p.pieza.slug}`);
+          expect(r?.status(), `/${l}/portafolio/${f.id}/${p.pieza.slug}`).toBe(
             404,
           );
         }
       }
       for (const p of piezas)
-        expect(sitemap).not.toContain(`/vitrina/${f.id}/${p.pieza.slug}`);
+        expect(sitemap).not.toContain(`/portafolio/${f.id}/${p.pieza.slug}`);
       // El frente mismo SÍ está: explica la pausa.
-      expect(sitemap).toContain(`/es/vitrina/${f.id}`);
+      expect(sitemap).toContain(`/es/portafolio/${f.id}`);
     }
   });
 
@@ -662,24 +662,24 @@ test.describe("Vitrina — los frentes en preparación (ADR-015)", () => {
     // S7 puede no quedar un segundo frente en preparación — y eso no debería
     // dejar esta prueba sin sujeto.
     const segundo = FRENTES.find((f) => f.id !== primero.id)!;
-    await page.goto("/es/vitrina");
+    await page.goto("/es/portafolio");
     await page
       .locator(`[data-frente="${primero.id}"]`)
       .getByRole("link", { name: primero.nombre.es, exact: true })
       .click();
-    await expect(page).toHaveURL(new RegExp(`/es/vitrina/${primero.id}$`));
+    await expect(page).toHaveURL(new RegExp(`/es/portafolio/${primero.id}$`));
     // Los vecinos: todos los frentes menos este.
     await expect(page.locator("[data-frente-vecino]")).toHaveCount(
       FRENTES.length - 1,
     );
     await page.locator(`[data-frente-vecino="${segundo.id}"]`).click();
-    await expect(page).toHaveURL(new RegExp(`/es/vitrina/${segundo.id}$`));
+    await expect(page).toHaveURL(new RegExp(`/es/portafolio/${segundo.id}$`));
   });
 
   test("gate ATS/SEO: el portal y los frentes entregan su contenido en el HTML", async ({
     page,
   }) => {
-    const portal = await (await page.request.get("/es/vitrina")).text();
+    const portal = await (await page.request.get("/es/portafolio")).text();
     for (const f of FRENTES) {
       expect(portal).toContain(f.nombre.es);
       expect(portal).toContain(f.intro.es.slice(0, 40));
@@ -694,7 +694,7 @@ test.describe("Vitrina — los frentes en preparación (ADR-015)", () => {
         : "los cuatro frentes tienen piezas: la rama «en preparación» no se ejerce aquí",
     });
     for (const f of EN_PREPARACION) {
-      const res = await page.request.get(`/es/vitrina/${f.id}`);
+      const res = await page.request.get(`/es/portafolio/${f.id}`);
       expect(res.status()).toBe(200);
       expect(await res.text()).toContain(f.intro.es);
     }
@@ -703,10 +703,10 @@ test.describe("Vitrina — los frentes en preparación (ADR-015)", () => {
   test("un frente que no existe es 404, y «apps» no cae en la página genérica", async ({
     page,
   }) => {
-    const res = await page.goto("/es/vitrina/no-existe");
+    const res = await page.goto("/es/portafolio/no-existe");
     expect(res?.status()).toBe(404);
-    // /vitrina/apps es el escaparate (ruta estática), no un frente «en preparación».
-    await page.goto("/es/vitrina/apps");
+    // /portafolio/apps es el escaparate (ruta estática), no un frente «en preparación».
+    await page.goto("/es/portafolio/apps");
     await expect(page.locator("[data-muestra-slug]")).toHaveCount(
       EXPORTS.length,
     );
@@ -721,7 +721,7 @@ test.describe("Vitrina — las estanterías: un frente ABIERTO y sus piezas (S7)
     page,
   }) => {
     for (const f of ABIERTOS) {
-      await page.goto(`/es/vitrina/${f.id}`);
+      await page.goto(`/es/portafolio/${f.id}`);
       await expect(
         page.getByRole("heading", { level: 1, name: f.nombre.es }),
       ).toBeVisible();
@@ -748,7 +748,7 @@ test.describe("Vitrina — las estanterías: un frente ABIERTO y sus piezas (S7)
     page,
   }) => {
     for (const f of ABIERTOS) {
-      await page.goto(`/es/vitrina/${f.id}`);
+      await page.goto(`/es/portafolio/${f.id}`);
       const enPantalla = await page
         .locator("[data-muestra-slug]")
         .evaluateAll((els) =>
@@ -770,7 +770,7 @@ test.describe("Vitrina — las estanterías: un frente ABIERTO y sus piezas (S7)
   }) => {
     for (const f of ABIERTOS) {
       for (const p of f.piezas) {
-        await page.goto(`/es/vitrina/${f.id}/${p.pieza.slug}`);
+        await page.goto(`/es/portafolio/${f.id}/${p.pieza.slug}`);
         const ft = page.locator(`[data-ficha-tecnica="${p.pieza.slug}"]`);
         await expect(ft).toBeVisible();
         await expect(ft).toHaveAttribute("data-frente", f.id);
@@ -797,7 +797,7 @@ test.describe("Vitrina — las estanterías: un frente ABIERTO y sus piezas (S7)
     ).toBeGreaterThan(0);
 
     for (const { f, p } of sinProceso) {
-      await page.goto(`/es/vitrina/${f.id}/${p.pieza.slug}`);
+      await page.goto(`/es/portafolio/${f.id}/${p.pieza.slug}`);
       const ft = page.locator(`[data-ficha-tecnica="${p.pieza.slug}"]`);
       // La sección del proceso no existe, ni su declaración de procedencia.
       await expect(ft.locator("[data-procedencia-proceso]")).toHaveCount(0);
@@ -854,7 +854,7 @@ test.describe("Vitrina — las estanterías: un frente ABIERTO y sus piezas (S7)
     ).toBeGreaterThan(0);
 
     for (const { f, p } of sinCuenta) {
-      await page.goto(`/es/vitrina/${f.id}/${p.pieza.slug}`);
+      await page.goto(`/es/portafolio/${f.id}/${p.pieza.slug}`);
       const ft = page.locator(`[data-ficha-tecnica="${p.pieza.slug}"]`);
       await expect(ft).toContainText(`${p.bloques.length} grupos`);
       await expect(ft).not.toContainText(/0\s+funcionalidades/i);
@@ -877,7 +877,7 @@ test.describe("Vitrina — las estanterías: un frente ABIERTO y sus piezas (S7)
     ).toBeGreaterThan(0);
 
     for (const { f, p } of conDatos) {
-      await page.goto(`/es/vitrina/${f.id}/${p.pieza.slug}`);
+      await page.goto(`/es/portafolio/${f.id}/${p.pieza.slug}`);
       const ft = page.locator(`[data-ficha-tecnica="${p.pieza.slug}"]`);
       await expect(ft.locator("[data-conclusion]")).toHaveCount(
         p.conclusiones!.length,
@@ -910,7 +910,7 @@ test.describe("Vitrina — las estanterías: un frente ABIERTO y sus piezas (S7)
     page,
   }) => {
     for (const f of ABIERTOS) {
-      await page.goto(`/es/vitrina/${f.id}`);
+      await page.goto(`/es/portafolio/${f.id}`);
       for (const p of f.piezas) {
         await expect(
           page.locator(`[data-muestra-slug="${p.pieza.slug}"] [data-portada]`),
@@ -926,10 +926,10 @@ test.describe("Vitrina — las estanterías: un frente ABIERTO y sus piezas (S7)
     // tienen vocación comercial, así que nadie tiene por qué pedir acceso.
     // Solo las apps tienen lista de espera (vitrina.spec, ficha técnica de app).
     const { f, piezas } = { f: ABIERTOS[0], piezas: ABIERTOS[0].piezas };
-    await page.goto(`/es/vitrina/${f.id}/${piezas[0].pieza.slug}`);
+    await page.goto(`/es/portafolio/${f.id}/${piezas[0].pieza.slug}`);
     await expect(page.locator('[data-cta="detalle"]')).toHaveCount(0);
     await expect(page.locator('[data-cta="lista-de-espera"]')).toHaveCount(0);
-    await expect(page.locator("#contacto-vitrina")).toHaveCount(0);
+    await expect(page.locator("#contacto-portafolio")).toHaveCount(0);
     // Y tampoco lo promete con palabras: sin detalle, «Qué tiene» no puede
     // mandar al lector a una ficha completa que no existe.
     await expect(page.locator("main")).not.toContainText(
@@ -941,7 +941,7 @@ test.describe("Vitrina — las estanterías: un frente ABIERTO y sus piezas (S7)
     page,
   }) => {
     for (const f of ABIERTOS) {
-      await page.goto(`/es/vitrina/${f.id}`);
+      await page.goto(`/es/portafolio/${f.id}`);
       await expect(page.locator('[data-cta="lista-de-espera"]')).toHaveCount(
         f.listaDeEspera ? 1 : 0,
       );
@@ -956,11 +956,11 @@ test.describe("Vitrina — las estanterías: un frente ABIERTO y sus piezas (S7)
     page,
   }) => {
     const exp = EXPORTS[0];
-    await page.goto(`/es/vitrina/apps/${exp.app.slug}`);
+    await page.goto(`/es/portafolio/apps/${exp.app.slug}`);
     const cta = page.locator('[data-cta="lista-de-espera"]');
     await expect(cta).toHaveCount(1);
-    await expect(cta).toHaveAttribute("href", "#contacto-vitrina");
-    await expect(page.locator("#contacto-vitrina")).toHaveCount(1);
+    await expect(cta).toHaveAttribute("href", "#contacto-portafolio");
+    await expect(page.locator("#contacto-portafolio")).toHaveCount(1);
     const form = page.locator('form[data-formulario="app"]');
     await expect(form).toHaveCount(1);
     await expect(form.locator("select")).toHaveValue(exp.app.slug);
@@ -976,17 +976,17 @@ test.describe("Vitrina — las estanterías: un frente ABIERTO y sus piezas (S7)
       f.piezas.length < 2,
       "el frente necesita dos piezas para vecinas",
     );
-    await page.goto(`/es/vitrina/${f.id}`);
+    await page.goto(`/es/portafolio/${f.id}`);
     const primera = await page
       .locator("[data-muestra-slug]")
       .first()
       .getAttribute("data-muestra-slug");
-    await page.goto(`/es/vitrina/${f.id}/${primera}`);
+    await page.goto(`/es/portafolio/${f.id}/${primera}`);
     await page.getByText("Producto siguiente").click();
-    await expect(page).toHaveURL(new RegExp(`/es/vitrina/${f.id}/[a-z0-9-]+$`));
+    await expect(page).toHaveURL(new RegExp(`/es/portafolio/${f.id}/[a-z0-9-]+$`));
     // Y la miga vuelve al escaparate del frente, no a la vitrina entera.
     await page.getByText(`Volver a ${f.nombre.es}`).click();
-    await expect(page).toHaveURL(new RegExp(`/es/vitrina/${f.id}$`));
+    await expect(page).toHaveURL(new RegExp(`/es/portafolio/${f.id}$`));
   });
 
   test("gate ATS/SEO: escaparate y ficha entregan su contenido en el HTML estático", async ({
@@ -994,14 +994,14 @@ test.describe("Vitrina — las estanterías: un frente ABIERTO y sus piezas (S7)
   }) => {
     const f = ABIERTOS[0];
     const escaparate = await (
-      await page.request.get(`/es/vitrina/${f.id}`)
+      await page.request.get(`/es/portafolio/${f.id}`)
     ).text();
     for (const p of f.piezas) {
       expect(escaparate).toContain(p.pieza.nombre);
       expect(escaparate).toContain(p.titular.slice(0, 60));
     }
     const ficha = await (
-      await page.request.get(`/es/vitrina/${f.id}/${f.piezas[0].pieza.slug}`)
+      await page.request.get(`/es/portafolio/${f.id}/${f.piezas[0].pieza.slug}`)
     ).text();
     expect(ficha).toContain(f.piezas[0].promesa.tagline);
   });
@@ -1013,8 +1013,8 @@ test.describe("Vitrina — las estanterías: un frente ABIERTO y sus piezas (S7)
     // ficha la escribió una casa distinta, así que el riesgo no es del
     // renderizador —que es uno— sino del contenido, que son 26 archivos.
     const rutas = ABIERTOS.flatMap((f) => [
-      `/es/vitrina/${f.id}`,
-      ...f.piezas.map((p) => `/es/vitrina/${f.id}/${p.pieza.slug}`),
+      `/es/portafolio/${f.id}`,
+      ...f.piezas.map((p) => `/es/portafolio/${f.id}/${p.pieza.slug}`),
     ]);
     expect(rutas.length, "no hay rutas nuevas que barrer").toBeGreaterThan(4);
 
@@ -1050,7 +1050,7 @@ test.describe("Vitrina — las estanterías: un frente ABIERTO y sus piezas (S7)
       const piezas = piezasDe(f.id);
       if (piezas.length === 0) continue;
       const res = await page.goto(
-        `/es/vitrina/${f.id}/${piezas[0].pieza.slug}`,
+        `/es/portafolio/${f.id}/${piezas[0].pieza.slug}`,
       );
       expect(
         res?.status(),
@@ -1064,7 +1064,7 @@ test.describe("Vitrina — las estanterías: un frente ABIERTO y sus piezas (S7)
  * APERTURA POR LECTURA — las pruebas que el patrón exige (banco §7)
  * ──────────────────────────────────────────────────────────────────────────── */
 
-const RUTA_LARGA = `/es/vitrina/apps/${MAS_LARGA.app.slug}/detalle`;
+const RUTA_LARGA = `/es/portafolio/apps/${MAS_LARGA.app.slug}/detalle`;
 
 /**
  * Deja la tarjeta `i` con su cabecera a `frac` de la altura de pantalla y
@@ -1431,7 +1431,7 @@ test.describe("Vitrina — la simulación de una app", () => {
     test(`en ${l}: la página abre el paquete en un marco del mismo sitio al pedirlo, con su rótulo y su regreso`, async ({
       page,
     }) => {
-      const r = await page.goto(`/${l}/vitrina/apps/${sim.slug}/simulacion`);
+      const r = await page.goto(`/${l}/portafolio/apps/${sim.slug}/simulacion`);
       expect(r?.status()).toBe(200);
       await expect(
         page.locator(`[data-simulacion="${sim.slug}"]`),
@@ -1471,7 +1471,7 @@ test.describe("Vitrina — la simulación de una app", () => {
         })
         .click();
       await expect(page).toHaveURL(
-        new RegExp(`/${l}/vitrina/apps/${sim.slug}$`),
+        new RegExp(`/${l}/portafolio/apps/${sim.slug}$`),
       );
     });
   }
@@ -1479,19 +1479,19 @@ test.describe("Vitrina — la simulación de una app", () => {
   test("la ficha de una app con simulación la ofrece en su cierre; una sin ella, no", async ({
     page,
   }) => {
-    await page.goto(`/es/vitrina/apps/${sim.slug}`);
+    await page.goto(`/es/portafolio/apps/${sim.slug}`);
     const cta = page.locator('[data-cta="simulacion"]');
     await expect(cta).toHaveAttribute(
       "href",
-      `/es/vitrina/apps/${sim.slug}/simulacion`,
+      `/es/portafolio/apps/${sim.slug}/simulacion`,
     );
     await cta.click();
     await expect(page).toHaveURL(
-      new RegExp(`/es/vitrina/apps/${sim.slug}/simulacion$`),
+      new RegExp(`/es/portafolio/apps/${sim.slug}/simulacion$`),
     );
 
     if (sinSimulacion) {
-      await page.goto(`/es/vitrina/apps/${sinSimulacion.app.slug}`);
+      await page.goto(`/es/portafolio/apps/${sinSimulacion.app.slug}`);
       await expect(page.locator('[data-cta="detalle"]')).toBeVisible();
       await expect(page.locator('[data-cta="simulacion"]')).toHaveCount(0);
     }
@@ -1500,7 +1500,7 @@ test.describe("Vitrina — la simulación de una app", () => {
   test("una app sin simulación no tiene esa ruta (404)", async ({ page }) => {
     test.skip(!sinSimulacion, "todas las apps tienen simulación");
     const r = await page.goto(
-      `/es/vitrina/apps/${sinSimulacion!.app.slug}/simulacion`,
+      `/es/portafolio/apps/${sinSimulacion!.app.slug}/simulacion`,
     );
     expect(r?.status()).toBe(404);
   });
@@ -1509,7 +1509,7 @@ test.describe("Vitrina — la simulación de una app", () => {
     request,
   }) => {
     const html = await (
-      await request.get(`/es/vitrina/apps/${sim.slug}/simulacion`)
+      await request.get(`/es/portafolio/apps/${sim.slug}/simulacion`)
     ).text();
     // Sin JavaScript el botón no abre nada, pero el enlace a pantalla completa
     // sí: viaja en el HTML estático.
@@ -1524,7 +1524,7 @@ test.describe("Vitrina — el carrusel de la galería (Sprint 009)", () => {
   );
   const pieza = conGaleria[0];
   const N = pieza?.galeria?.length ?? 0;
-  const ruta = (l = "es") => `/${l}/vitrina/tableros/${pieza.pieza.slug}`;
+  const ruta = (l = "es") => `/${l}/portafolio/tableros/${pieza.pieza.slug}`;
 
   test.beforeAll(() => {
     if (!pieza)
@@ -1840,7 +1840,7 @@ test.describe("Vitrina — los bloques de apps y su carrusel de tarjetas", () =>
     );
     for (const w of [1280, 390]) {
       await page.setViewportSize({ width: w, height: 844 });
-      await page.goto("/es/vitrina/apps");
+      await page.goto("/es/portafolio/apps");
       const medidas = await page
         .locator("section[data-categoria] > h2")
         .evaluateAll((els) =>
@@ -1868,7 +1868,7 @@ test.describe("Vitrina — los bloques de apps y su carrusel de tarjetas", () =>
         "el ancho se fija aquí, en un solo proyecto",
       );
       await page.setViewportSize({ width: ancho.w, height: ancho.h });
-      await page.goto("/es/vitrina/apps");
+      await page.goto("/es/portafolio/apps");
       expect(CATEGORIAS_CON_CARRUSEL.length).toBeGreaterThan(0);
       for (const { c, n } of CATEGORIAS_CON_CARRUSEL) {
         const carrusel = page.locator(
@@ -2010,7 +2010,7 @@ test.describe("Vitrina — los bloques de apps y su carrusel de tarjetas", () =>
   }, testInfo) => {
     test.skip(testInfo.project.name === "mobile", "una sola vez basta");
     await page.setViewportSize({ width: 1280, height: 800 });
-    await page.goto("/es/vitrina/apps");
+    await page.goto("/es/portafolio/apps");
     const { c } = CATEGORIAS_CON_CARRUSEL[0];
     const carrusel = page.locator(
       `[data-categoria="${c}"] [data-carrusel-apps]`,
@@ -2029,7 +2029,7 @@ test.describe("Vitrina — los bloques de apps y su carrusel de tarjetas", () =>
   test("las seis tarjetas siguen en el HTML y en el orden del YAML, dentro de sus bloques", async ({
     page,
   }) => {
-    const res = await page.request.get("/es/vitrina/apps");
+    const res = await page.request.get("/es/portafolio/apps");
     const html = await res.text();
     const slugs = [...html.matchAll(/data-muestra-slug="([a-z0-9-]+)"/g)].map(
       (m) => m[1],
@@ -2050,7 +2050,7 @@ test.describe("Vitrina — los bloques de apps y su carrusel de tarjetas", () =>
       "el teclado es del proyecto de escritorio",
     );
     await page.setViewportSize({ width: 1280, height: 800 });
-    await page.goto("/es/vitrina/apps");
+    await page.goto("/es/portafolio/apps");
     const { c, n } = CATEGORIAS_CON_CARRUSEL[0];
     const carrusel = page.locator(
       `[data-categoria="${c}"] [data-carrusel-apps]`,
@@ -2083,7 +2083,7 @@ test.describe("Vitrina — los bloques de apps y su carrusel de tarjetas", () =>
       "el puntero es de escritorio",
     );
     await page.setViewportSize({ width: 1280, height: 800 });
-    await page.goto("/es/vitrina/apps");
+    await page.goto("/es/portafolio/apps");
     const { c, n } = CATEGORIAS_CON_CARRUSEL[0];
     const carrusel = page.locator(
       `[data-categoria="${c}"] [data-carrusel-apps]`,
@@ -2115,7 +2115,7 @@ test.describe("Vitrina — los bloques de apps y su carrusel de tarjetas", () =>
   }, testInfo) => {
     test.skip(testInfo.project.name === "mobile", "la rueda es de escritorio");
     await page.setViewportSize({ width: 1280, height: 800 });
-    await page.goto("/es/vitrina/apps");
+    await page.goto("/es/portafolio/apps");
     const { c, n } = CATEGORIAS_CON_CARRUSEL[0];
     const carrusel = page.locator(
       `[data-categoria="${c}"] [data-carrusel-apps]`,
@@ -2147,7 +2147,7 @@ test.describe("Vitrina — los bloques de apps y su carrusel de tarjetas", () =>
   }, testInfo) => {
     test.skip(testInfo.project.name === "mobile", "el foco es de escritorio");
     await page.setViewportSize({ width: 1280, height: 800 });
-    await page.goto("/es/vitrina/apps");
+    await page.goto("/es/portafolio/apps");
     const { c, n } = CATEGORIAS_CON_CARRUSEL[0];
     const carrusel = page.locator(
       `[data-categoria="${c}"] [data-carrusel-apps]`,
@@ -2170,7 +2170,7 @@ test.describe("Vitrina — los bloques de apps y su carrusel de tarjetas", () =>
     test.skip(testInfo.project.name === "mobile", "una emulación basta");
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.setViewportSize({ width: 390, height: 844 });
-    await page.goto("/es/vitrina/apps");
+    await page.goto("/es/portafolio/apps");
     const { c, n } = CATEGORIAS_CON_CARRUSEL[0];
     const carrusel = page.locator(
       `[data-categoria="${c}"] [data-carrusel-apps]`,
@@ -2189,7 +2189,7 @@ test.describe("Vitrina — los bloques de apps y su carrusel de tarjetas", () =>
 
   test("en inglés el carrusel habla inglés", async ({ page }, testInfo) => {
     test.skip(testInfo.project.name === "mobile", "una emulación basta");
-    await page.goto("/en/vitrina/apps");
+    await page.goto("/en/portafolio/apps");
     const { c, n } = CATEGORIAS_CON_CARRUSEL[0];
     const carrusel = page.locator(
       `[data-categoria="${c}"] [data-carrusel-apps]`,

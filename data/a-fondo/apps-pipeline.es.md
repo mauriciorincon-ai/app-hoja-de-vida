@@ -3,9 +3,9 @@ slug: apps-pipeline
 codigo: AF-12
 titulo: "Las apps que estoy construyendo en público"
 resumen: "El pipeline AI-APPs: diez aplicaciones hermanas, 11 agentes, 7 investigaciones y 6 tableros —34 piezas, sin contar este sitio— construidos con dos casas, un agente de fábrica, cuatro jobs de CI, un contrato de ficha desde Zod, costo real de US$0 al mes y dos reglas: código primero y todo control se demuestra fallando."
-cuando_usar: "Úsalo cuando pregunten qué ha construido por su cuenta fuera del trabajo, cuántas aplicaciones ha publicado, si tiene código público, cómo es su pipeline de construcción con Next.js, pruebas automatizadas y CI, y qué demuestra cada una de las diez apps de la vitrina."
+cuando_usar: "Úsalo cuando pregunten qué ha construido por su cuenta fuera del trabajo, cuántas aplicaciones ha publicado, si tiene código público, cómo es su pipeline de construcción con Next.js, pruebas automatizadas y CI, y qué demuestra cada una de las diez apps del portafolio."
 estado: aprobado
-ancla: "#vitrina"
+ancla: "#portafolio"
 actualizado: 2026-10-14
 preguntas_de_prueba:
   - "¿Qué aplicaciones está construyendo Henry?"
@@ -36,11 +36,11 @@ CÓMO SE ESCRIBE ESTE ARCHIVO
   -->
 
 <!-- El esqueleto del S3 apuntaba a «#apps»; esa sección de la HOME se retiró en
-     la revisión post-S7 y hoy lo que la HOME enseña de lo construido es la
-     vitrina. El roadmap propio de CV Viva se retiró entero el 13 de septiembre
+     la revisión post-S7 y hoy lo que la HOME enseña de lo construido es el
+     portafolio. El roadmap propio de CV Viva se retiró entero el 13 de septiembre
      de 2026: ninguna funcionalidad de este sitio se vota. El roadmap votable
      que existe es POR APP HERMANA y vive en la página de cada aplicación,
-     dentro de /vitrina/apps. Corregido en la migración del S8 y al día el
+     dentro de /portafolio/apps. Corregido en la migración del S8 y al día el
      2026-09-21. -->
 
 <!-- guía (viene del esqueleto de la historia, S3 — la escribió el dueño):
@@ -60,7 +60,7 @@ Durante mi trayectoria —más de diez años desde mayo de 2015— he exigido qu
 
 Mi portafolio no es una galería de demostraciones ni una colección de ejercicios. Es una arquitectura de evidencia profesional. Cada pieza busca demostrar una capacidad concreta mediante un producto que puede recorrerse, probarse y analizarse. Las aplicaciones demuestran construcción de soluciones. Los agentes muestran cómo estructuro el trabajo con inteligencia artificial. Las investigaciones hacen visible mi disciplina metodológica. Los tableros permiten evaluar mi forma de convertir datos en modelos, indicadores y experiencias de decisión.
 
-Construir en público es, en última instancia, una forma de responsabilidad profesional. No espero que una persona confíe únicamente en la descripción de mis capacidades. Le proporciono piezas que permiten examinarlas, y desde julio de 2026 cada una llega a la vitrina con su ficha, sus cifras, sus límites y sus «nunca».
+Construir en público es, en última instancia, una forma de responsabilidad profesional. No espero que una persona confíe únicamente en la descripción de mis capacidades. Le proporciono piezas que permiten examinarlas, y desde julio de 2026 cada una llega al portafolio con su ficha, sus cifras, sus límites y sus «nunca».
 
 ## Lo que no está terminado no se presenta como terminado
 
@@ -88,7 +88,7 @@ También procuro que los repositorios públicos no conviertan la transparencia e
 
 <!-- seccion: cero-enlaces-y-formularios -->
 
-Y una regla dura del pipeline que rige sobre este sitio, la número 16: cero enlaces. Ningún archivo del repositorio ni campo del proyecto contiene la URL de producción ni la de las vistas previas; la producción se muestra, jamás se entrega. Por eso el llamado público de una aplicación es una lista de espera, sin promesa de otorgamiento, y aparece únicamente donde hay una app: el escaparate de aplicaciones de la vitrina y la ficha de cada una. Los agentes, las investigaciones y los tableros se muestran, pero no se entregan: no llevan lista de espera. Junto a ella hay otras dos maneras de escribirme —la portada tiene un formulario general que pide elegir el motivo entre cinco, un proyecto, una asesoría, una capacitación, una charla o un rol, y ese motivo viaja como asunto del correo; y bajo el roadmap de cada app hermana hay una caja para proponer una funcionalidad, que también llega por correo y no publica nada—. El barrido que vigila la regla de cero enlaces corre sobre todos los archivos versionados después del último cambio, no antes.
+Y una regla dura del pipeline que rige sobre este sitio, la número 16: cero enlaces. Ningún archivo del repositorio ni campo del proyecto contiene la URL de producción ni la de las vistas previas; la producción se muestra, jamás se entrega. Por eso el llamado público de una aplicación es una lista de espera, sin promesa de otorgamiento, y aparece únicamente donde hay una app: el escaparate de aplicaciones del portafolio y la ficha de cada una. Los agentes, las investigaciones y los tableros se muestran, pero no se entregan: no llevan lista de espera. Junto a ella hay otras dos maneras de escribirme —la portada tiene un formulario general que pide elegir el motivo entre cinco, un proyecto, una asesoría, una capacitación, una charla o un rol, y ese motivo viaja como asunto del correo; y bajo el roadmap de cada app hermana hay una caja para proponer una funcionalidad, que también llega por correo y no publica nada—. El barrido que vigila la regla de cero enlaces corre sobre todos los archivos versionados después del último cambio, no antes.
 
 ## Procedencia del conocimiento y responsabilidad sobre lo asistido por IA
 
@@ -104,7 +104,7 @@ Esta distinción es especialmente importante en investigaciones y agentes. La ap
 
 <!-- seccion: que-hay-construido -->
 
-El pipeline produce cuatro familias principales de activos: aplicaciones, agentes, investigaciones y tableros analíticos. Todas las piezas terminadas se publican en la vitrina del sitio y cuentan con una ficha que explica su propósito, alcance, estado y principales decisiones de diseño. Hoy la vitrina reúne 34 piezas: diez aplicaciones hermanas, 11 agentes, 7 investigaciones y 6 tableros.
+El pipeline produce cuatro familias principales de activos: aplicaciones, agentes, investigaciones y tableros analíticos. Todas las piezas terminadas se publican en el portafolio del sitio y cuentan con una ficha que explica su propósito, alcance, estado y principales decisiones de diseño. Hoy el portafolio reúne 34 piezas: diez aplicaciones hermanas, 11 agentes, 7 investigaciones y 6 tableros.
 
 Las diez aplicaciones son Anonimizador Velo, Dash Agent, Probeta DS, Habla San, Innmobiliaria y Nutrikids, más cuatro en su etapa inicial —planlang, AngelGhost, Big-D y HackGuard—, más CV Viva, que es este mismo sitio y no una pieza del escaparate. Cada una responde a una promesa diferente, pero todas deben superar el mismo criterio: convertir una necesidad en una experiencia funcional, documentada y verificable, no únicamente en una interfaz convincente o una demostración técnica.
 
@@ -142,7 +142,7 @@ Estas cifras son una foto con fecha, se refrescan desde el repositorio de cada a
 
 <!-- seccion: apps-en-etapa-inicial -->
 
-Las cuatro restantes están en su etapa inicial —ciclo H1, versión 0.1.0, sin sellar— y publican sus propias cifras con fuente en su brochure, por eso no entran en la tabla anterior. planlang (siete sprints cerrados): escribes el plan de un agente como un contrato y un verificador sin IA mide, caso por caso, la brecha entre lo que el plan prometía y lo que el agente hizo; 21 funcionalidades, 16 ADR, 16 criterios cumplidos, 1.204 decisiones cruzadas sobre 220 casos sintéticos, cero llamadas a modelos en la vitrina y un costo de US$5,21 por corrida. AngelGhost (ocho sprints): una ventana en tu Mac que el cliente no ve aunque compartas pantalla y que te acerca tu propia experiencia en el momento justo de la reunión; 20 funcionalidades, 1.806 pruebas automáticas, 23 ADR y cero bytes que salen del equipo. Big-D (tres sprints): un planeador abierto y reproducible para elegir entre plataformas de datos con evidencia fechada; 14 funcionalidades, 3 plataformas y 63 componentes en el atlas, 33 evidencias fechadas, 2.614 pruebas automáticas y 98,55 % de cobertura. HackGuard (nueve sprints): un catálogo vivo de pruebas de seguridad que te dice qué probaste, qué esperabas, qué obtuviste y qué te falta; 18 funcionalidades, 38 pruebas en el catálogo cruzadas con 38 controles de ISO/IEC 42001, 4.390 pruebas automáticas y 97,54 % de cobertura. Las cuatro cuestan US$0 al mes de operación.
+Las cuatro restantes están en su etapa inicial —ciclo H1, versión 0.1.0, sin sellar— y publican sus propias cifras con fuente en su brochure, por eso no entran en la tabla anterior. planlang (siete sprints cerrados): escribes el plan de un agente como un contrato y un verificador sin IA mide, caso por caso, la brecha entre lo que el plan prometía y lo que el agente hizo; 21 funcionalidades, 16 ADR, 16 criterios cumplidos, 1.204 decisiones cruzadas sobre 220 casos sintéticos, cero llamadas a modelos en el portafolio y un costo de US$5,21 por corrida. AngelGhost (ocho sprints): una ventana en tu Mac que el cliente no ve aunque compartas pantalla y que te acerca tu propia experiencia en el momento justo de la reunión; 20 funcionalidades, 1.806 pruebas automáticas, 23 ADR y cero bytes que salen del equipo. Big-D (tres sprints): un planeador abierto y reproducible para elegir entre plataformas de datos con evidencia fechada; 14 funcionalidades, 3 plataformas y 63 componentes en el atlas, 33 evidencias fechadas, 2.614 pruebas automáticas y 98,55 % de cobertura. HackGuard (nueve sprints): un catálogo vivo de pruebas de seguridad que te dice qué probaste, qué esperabas, qué obtuviste y qué te falta; 18 funcionalidades, 38 pruebas en el catálogo cruzadas con 38 controles de ISO/IEC 42001, 4.390 pruebas automáticas y 97,54 % de cobertura. Las cuatro cuestan US$0 al mes de operación.
 
 ## Once agentes, siete investigaciones y seis tableros
 
@@ -160,7 +160,7 @@ Los seis tableros construidos sobre datos públicos permiten demostrar la capa a
 
 Estas cuatro familias no compiten entre sí. Forman un sistema progresivo de capacidades. Los datos permiten observar. Los tableros convierten esa observación en comprensión. Las investigaciones permiten formular y contrastar explicaciones. Las aplicaciones integran capacidades dentro de una experiencia utilizable. Los agentes amplían esa experiencia mediante conocimiento, razonamiento y herramientas dentro de límites definidos.
 
-Las familias también se alimentan entre sí en el pipeline real. Los dos harnesses de investigación producen las siete investigaciones; uno de ellos, el Paper Computacional, está publicado entre los agentes de la vitrina. La Fábrica de AI-APPs es un agente y coordina las diez aplicaciones. El Constructor de Tableros Power BI —construido y probado: crea el proyecto completo con su modelo semántico, la preparación en Power Query M, las medidas DAX y las visuales, y puede extraer datos— es un agente que produce la clase de artefacto que los seis tableros demuestran a mano. Y la investigación sobre el espectro de agencia estudia justamente cuándo una decisión merece un tablero, una alerta, una recomendación o un agente.
+Las familias también se alimentan entre sí en el pipeline real. Los dos harnesses de investigación producen las siete investigaciones; uno de ellos, el Paper Computacional, está publicado entre los agentes del portafolio. La Fábrica de AI-APPs es un agente y coordina las diez aplicaciones. El Constructor de Tableros Power BI —construido y probado: crea el proyecto completo con su modelo semántico, la preparación en Power Query M, las medidas DAX y las visuales, y puede extraer datos— es un agente que produce la clase de artefacto que los seis tableros demuestran a mano. Y la investigación sobre el espectro de agencia estudia justamente cuándo una decisión merece un tablero, una alerta, una recomendación o un agente.
 
 Cada ficha también debe declarar qué capacidad profesional pretende demostrar. Una aplicación puede evidenciar arquitectura, desarrollo o experiencia de usuario. Un agente puede demostrar recuperación de conocimiento, uso de herramientas o evaluación. Una investigación puede demostrar método. Un tablero puede demostrar ingeniería de datos, modelado semántico o comunicación analítica. Esta relación evita que las piezas se conviertan en proyectos interesantes, pero desconectados del perfil que deben sustentar.
 
@@ -172,7 +172,7 @@ Cada cifra publicada en las fichas técnicas debe declarar su naturaleza. Una ci
 
 La regla nació en Dash Agent, la primera app en publicar su brochure en agosto de 2026, y se recomendó al resto del portafolio con un argumento sencillo: una app que exige procedencia a cada número de su pantalla no puede publicar cifras sueltas sobre sí misma. Así, «740 pruebas» es medido —la salida de un comando en una fecha—; «US$0 al mes» es calculado —la suma de servicios contratados, con la regla escrita—; «0 GPU» en Probeta DS es declarado —una regla dura del producto—; y las «108 horas de coordinación eliminadas al año» de la Fábrica son una estimación, con su escenario y sus supuestos al lado.
 
-La regla no es decorativa. Un portafolio que exige procedencia a los datos de sus aplicaciones y tableros debe aplicar el mismo estándar a las afirmaciones que hace sobre sí mismo. La vitrina no solo muestra lo construido; muestra qué evidencia permite sostener cada afirmación.
+La regla no es decorativa. Un portafolio que exige procedencia a los datos de sus aplicaciones y tableros debe aplicar el mismo estándar a las afirmaciones que hace sobre sí mismo. El portafolio no solo muestra lo construido; muestra qué evidencia permite sostener cada afirmación.
 
 ## Capacidad demostrada no es tecnología utilizada
 
@@ -218,7 +218,7 @@ El portafolio no se construye como una sucesión de proyectos independientes. Ut
 
 El pipeline funciona con dos casas y un escritor por casa. Una casa planeadora, privada, donde viven el brief, la visión de producto, los sprints con su plan y su retrospectiva, las órdenes de construcción de cada app, el método y los estándares. Y el repositorio de cada app, donde viven el código, las pruebas, las decisiones de implementación, la bitácora y el resumen de cada sprint. La planeadora lee los repositorios de las apps en solo lectura y nunca escribe en ellos; cada app nunca escribe en el plan. La sincronización es lectura de git en frío —el resumen del sprint y su historial de commits—, no copiar y pegar. Nadie vuelve a ser el puente: el flujo anterior me costaba entre 4 y 8 horas de coordinación por sprint, y cuando ese tiempo se acababa el pipeline se congelaba.
 
-El pipeline es asistido por un agente de fábrica que también forma parte de la vitrina. Su función no es diseñar productos de manera autónoma ni sustituir las decisiones de arquitectura, prioridad o aceptación. Actúa como un componente de coordinación: conserva el estado de las iniciativas, verifica la existencia de los insumos requeridos, aplica reglas de avance, identifica vacíos documentales y ayuda a mantener la correspondencia entre lo aprobado, lo construido y lo publicado.
+El pipeline es asistido por un agente de fábrica que también forma parte del portafolio. Su función no es diseñar productos de manera autónoma ni sustituir las decisiones de arquitectura, prioridad o aceptación. Actúa como un componente de coordinación: conserva el estado de las iniciativas, verifica la existencia de los insumos requeridos, aplica reglas de avance, identifica vacíos documentales y ayuda a mantener la correspondencia entre lo aprobado, lo construido y lo publicado.
 
 Cada app nace estampada del mismo kit: la plantilla que trae la integración continua, los hooks de secretos y de no empujar directo a la rama principal, el presupuesto de rendimiento y el patrón de inteligencia artificial embebida ya horneados. El kit tiene versión y sus lecciones se acumulan: lo que un sprint aprende en una app viaja estampado a la siguiente, como deltas en la orden de construcción que sigue.
 
@@ -226,7 +226,7 @@ Cada app nace estampada del mismo kit: la plantilla que trae la integración con
 
 <!-- seccion: la-fabrica-en-numeros -->
 
-Lo coordina la Fábrica de AI-APPs, un agente sellado el 2 de julio de 2026 que es también una pieza de la vitrina, con sus cifras con procedencia: siete repositorios estampados desde el kit —las seis hermanas y este sitio—, con el primer commit de cada uno entre el 4 de julio y el 15 de agosto de 2026; 24 sprints cerrados con retrospectiva; nueve sesiones de re-priorización del portafolio, porque la prioridad caduca cada cuatro sprints y su gate bloquea todo trabajo hasta volver a correrla; y seis gates humanos: portafolio, visión, plan de sprint, release, edición del método y creación de repositorios o servicios.
+Lo coordina la Fábrica de AI-APPs, un agente sellado el 2 de julio de 2026 que es también una pieza del portafolio, con sus cifras con procedencia: siete repositorios estampados desde el kit —las seis hermanas y este sitio—, con el primer commit de cada uno entre el 4 de julio y el 15 de agosto de 2026; 24 sprints cerrados con retrospectiva; nueve sesiones de re-priorización del portafolio, porque la prioridad caduca cada cuatro sprints y su gate bloquea todo trabajo hasta volver a correrla; y seis gates humanos: portafolio, visión, plan de sprint, release, edición del método y creación de repositorios o servicios.
 
 La Fábrica declara tres límites, y prefiero escribirlos a esconderlos: no escribe código de producción —eso ocurre en el repositorio de cada app, jamás en la planeadora—; las fases de lanzamiento y de operación siguen sin validarse en una corrida real, son método escrito y no experiencia; y no hay librerías compartidas vivas entre apps, el reúso viaja estampado en el kit. Su retorno solo cuenta la coordinación eliminada —una estimación de 108 horas al año, con sus supuestos declarados—; el valor comercial del portafolio queda como opción no cuantificada.
 
@@ -276,7 +276,7 @@ Este sitio es el destino, no el autor, de lo que muestra. Las fichas de las apli
 
 Una ficha que no valida no se corrige aquí, ni siquiera para que quepa: se reporta archivo, campo y regla, y se corrige en origen. Si varias no caben por una razón legítima de su frente, el contrato crece de forma aditiva, en modo plan y con decisión registrada; así nacieron las versiones 1.2.0 y 1.3.0. El contrato lo generan las pruebas desde el esquema —el schema, un ejemplo, la clave visual y la referencia—, no la mano, para que el documento y el validador no puedan divergir.
 
-Un solo contrato y un solo renderizador: el componente que pinta una ficha renderiza el esquema, no un tipo de pieza, y nada específico de un frente vive en él. Lo específico de cada frente vive en datos —el catálogo de los cuatro frentes con su estado, nombre e introducción— o en el escaparate del frente. Así, agregar una pieza a la vitrina es copiar un archivo y abrir un pull request; y desde septiembre de 2026, esa misma ficha entra al índice del chat en el siguiente build, sin escribir prosa nueva.
+Un solo contrato y un solo renderizador: el componente que pinta una ficha renderiza el esquema, no un tipo de pieza, y nada específico de un frente vive en él. Lo específico de cada frente vive en datos —el catálogo de los cuatro frentes con su estado, nombre e introducción— o en el escaparate del frente. Así, agregar una pieza al portafolio es copiar un archivo y abrir un pull request; y desde septiembre de 2026, esa misma ficha entra al índice del chat en el siguiente build, sin escribir prosa nueva.
 
 ## Código primero, inteligencia artificial cuando está justificada
 
@@ -330,7 +330,7 @@ CV Viva, la plataforma desde la que se presenta este contenido, forma parte del 
 
 El contenido se mantiene separado de la presentación y se administra mediante archivos estructurados y control de versiones: la trayectoria, los estudios, los logros, los proyectos, las certificaciones y las skills viven en un archivo YAML por idioma, validado con un esquema Zod en el build. Si el contenido está malformado, el build falla, no la página. Esta decisión permite actualizar la información sin reconstruir manualmente cada página, conservar el historial de los cambios y aplicar reglas comunes sobre fechas, secciones, proyectos y afirmaciones. Editar el archivo y hacer push actualiza a la vez la web, el PDF para sistemas de selección y el chat.
 
-La generación estática reduce complejidad operativa y permite que una parte importante del sitio pueda consultarse sin depender de procesos permanentes en un servidor. Todo el contenido está en el HTML estático: un reclutador, un robot de selección o una descarga sin JavaScript ven la hoja de vida entera, con datos estructurados para buscadores y las etiquetas de idioma alternativo. La arquitectura busca que la experiencia sea rápida, accesible y resistente a fallas, y que las decisiones técnicas respondan al propósito real del producto. Las funcionalidades que se votan con un clic y sin registro ya no son las de este sitio —CV Viva retiró su propio roadmap en septiembre de 2026 y hoy no somete ninguna funcionalidad suya al voto—, sino las de cada app hermana, en la página que esa aplicación tiene en la vitrina; el contador es real, sobre una base de datos con una función atómica: si la base cae, lo dice; nunca inventa un número.
+La generación estática reduce complejidad operativa y permite que una parte importante del sitio pueda consultarse sin depender de procesos permanentes en un servidor. Todo el contenido está en el HTML estático: un reclutador, un robot de selección o una descarga sin JavaScript ven la hoja de vida entera, con datos estructurados para buscadores y las etiquetas de idioma alternativo. La arquitectura busca que la experiencia sea rápida, accesible y resistente a fallas, y que las decisiones técnicas respondan al propósito real del producto. Las funcionalidades que se votan con un clic y sin registro ya no son las de este sitio —CV Viva retiró su propio roadmap en septiembre de 2026 y hoy no somete ninguna funcionalidad suya al voto—, sino las de cada app hermana, en la página que esa aplicación tiene en el portafolio; el contador es real, sobre una base de datos con una función atómica: si la base cae, lo dice; nunca inventa un número.
 
 ## El chat, visto desde el pipeline
 
@@ -368,7 +368,7 @@ No presento esta exploración como evidencia de una experiencia profunda en Goog
 
 La exploración multi-nube no busca duplicar exactamente una solución existente. Busca identificar qué principios permanecen y qué decisiones cambian cuando la misma clase de problema se aborda mediante otro ecosistema. La arquitectura de agentes conserva necesidades como contexto, herramientas, evaluación, observabilidad, seguridad y gobierno, aunque los servicios y patrones concretos sean diferentes.
 
-En ambos casos, la condición de salida de la exploración debe estar definida antes de comenzar. Una pieza no abandona este estado por contar con una interfaz funcional o una demostración convincente. Debe tener un propósito verificable, una arquitectura documentada, fuentes y dependencias identificadas, pruebas ejecutadas, criterios de calidad satisfechos, un despliegue reproducible y una ficha que diferencie claramente los resultados medidos de las expectativas todavía no comprobadas. Solo entonces puede incorporarse al inventario de piezas construidas, y el contador de la vitrina se mueve solo cuando entra su ficha, no cuando lo anuncio.
+En ambos casos, la condición de salida de la exploración debe estar definida antes de comenzar. Una pieza no abandona este estado por contar con una interfaz funcional o una demostración convincente. Debe tener un propósito verificable, una arquitectura documentada, fuentes y dependencias identificadas, pruebas ejecutadas, criterios de calidad satisfechos, un despliegue reproducible y una ficha que diferencie claramente los resultados medidos de las expectativas todavía no comprobadas. Solo entonces puede incorporarse al inventario de piezas construidas, y el contador del portafolio se mueve solo cuando entra su ficha, no cuando lo anuncio.
 
 ## Lo que el pipeline demuestra sobre mi forma de trabajar
 

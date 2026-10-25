@@ -5,7 +5,7 @@ titulo: "RAG: cómo funciona este chat por dentro"
 resumen: "La arquitectura del chat de esta página con sus números: índice en tiempo de build, recuperación léxica con MiniSearch (BM25) sin embeddings, guardrails en capas, umbral medido, citas navegables, cinco proveedores intercambiables, fallback local, presupuesto de US$20 con costo real de cero, la puerta de nombre y correo con código de verificación, qué datos guarda el registro de conversaciones y quién los lee, y cómo se evalúa con 77 preguntas propias y 175 de afuera."
 cuando_usar: "Úsalo cuando pregunten cómo funciona el chat de esta página, qué arquitectura RAG implementó, si usa embeddings o búsqueda léxica, con qué proveedor de modelos trabaja, cómo evita que el modelo invente respuestas, y cómo evalúa el sistema con un golden set y un banco de preguntas. Úsalo también para todo lo que tenga que ver con la puerta del chat y con la privacidad: por qué pide el nombre y el correo antes de responder, para qué sirve el código de verificación de seis dígitos que llega por email, qué datos personales guarda, quién puede leerlos, cuánto duran, cómo pedir que los borren, y por qué las respuestas son de dos o tres párrafos en vez de un volcado del corpus."
 estado: aprobado
-ancla: "#vitrina"
+ancla: "#portafolio"
 actualizado: 2026-09-21
 preguntas_de_prueba:
   - "¿Cómo funciona el chat de la hoja de vida de Henry?"
@@ -44,7 +44,7 @@ Si esta respuesta fue generada por el chat de esta página, estás utilizando un
 
 No es un ejemplo aislado ni una demostración preparada para una presentación. Es una capacidad integrada en una aplicación pública desde julio de 2026, utilizada por personas reales y sometida a restricciones reales de disponibilidad, costos, latencia, seguridad, actualización y experiencia de usuario. Cada respuesta se arma con las cuatro fuentes más relevantes que la recuperación entrega al modelo, y cada una de esas fuentes navega a una sección visible del sitio.
 
-Operar esta capacidad exige tomar decisiones que un prototipo puede evitar: qué información está autorizada, cómo se recupera, cuándo debe llamarse al modelo, qué ocurre si el proveedor falla y cómo puede verificarse cada respuesta. Todas esas decisiones están escritas —tres de ellas como registros de decisión de arquitectura del repositorio: el adaptador de proveedores, el índice con su recuperación y la entrada de las fichas de la vitrina al índice— y todas se pueden contrastar con el comportamiento del chat.
+Operar esta capacidad exige tomar decisiones que un prototipo puede evitar: qué información está autorizada, cómo se recupera, cuándo debe llamarse al modelo, qué ocurre si el proveedor falla y cómo puede verificarse cada respuesta. Todas esas decisiones están escritas —tres de ellas como registros de decisión de arquitectura del repositorio: el adaptador de proveedores, el índice con su recuperación y la entrada de las fichas del portafolio al índice— y todas se pueden contrastar con el comportamiento del chat.
 
 El chat convierte así mi propia hoja de vida en un producto de inteligencia artificial observable. Cada respuesta permite evaluar directamente cómo diseño recuperación, grounding, guardrails, citación, degradación controlada y administración de costos. Con un presupuesto de US$20 al mes y un costo real observado de US$0, además, demuestra que una capacidad generativa pública puede sostenerse sin que la factura sea la que decide la arquitectura.
 
@@ -54,7 +54,7 @@ El chat convierte así mi propia hoja de vida en un producto de inteligencia art
 
 La función del modelo no es recordar mi trayectoria ni improvisar una versión persuasiva de ella. Su responsabilidad consiste en organizar y explicar la evidencia recuperada desde el sitio. La fuente de conocimiento se encuentra en el contenido publicado; el modelo actúa como una capa de interpretación condicionada por ese contenido.
 
-Esta separación protege la integridad del sistema. Mi perfil puede evolucionar mediante cambios controlados en los archivos que lo representan —los datos del currículum en YAML, las fichas de las 34 piezas de la vitrina y los documentos de esta base de conocimiento— sin depender de reentrenar un modelo ni esperar que un proveedor haya incorporado información reciente. Cuando una experiencia, certificación o proyecto cambia, la actualización ocurre en la fuente y se propaga al índice durante la siguiente construcción del sitio. No es que no sepa ajustar un modelo: lo hice en Microsoft Foundry (antes Azure AI Foundry), en varios prototipos propios. Pero un ajuste cambia cómo se comporta el modelo, no es la forma de mantener al día un hecho que cambia, y por eso aquí el conocimiento vive en la fuente y no en los pesos.
+Esta separación protege la integridad del sistema. Mi perfil puede evolucionar mediante cambios controlados en los archivos que lo representan —los datos del currículum en YAML, las fichas de las 34 piezas del portafolio y los documentos de esta base de conocimiento— sin depender de reentrenar un modelo ni esperar que un proveedor haya incorporado información reciente. Cuando una experiencia, certificación o proyecto cambia, la actualización ocurre en la fuente y se propaga al índice durante la siguiente construcción del sitio. No es que no sepa ajustar un modelo: lo hice en Microsoft Foundry (antes Azure AI Foundry), en varios prototipos propios. Pero un ajuste cambia cómo se comporta el modelo, no es la forma de mantener al día un hecho que cambia, y por eso aquí el conocimiento vive en la fuente y no en los pesos.
 
 La arquitectura refleja una decisión de fondo: la inteligencia generativa no debe ocupar el lugar del conocimiento verificable. Debe ayudar a encontrarlo, relacionarlo y comunicarlo sin romper el vínculo con su procedencia. Por eso el proveedor generativo es intercambiable por configuración entre cinco adaptados, y por eso ninguno de ellos se queda con el conocimiento: la telemetría técnica anota proveedor, modelo, milisegundos y tokens, y el registro de la conversación —que desde el 21 de septiembre de 2026 sí guarda la pregunta y la respuesta— vive en mi propia base de datos, no en la del proveedor, y se le advierte a quien pregunta antes de que escriba la primera palabra. Más abajo lo explico entero.
 
@@ -64,11 +64,11 @@ Es la misma regla que aplico en una plataforma de datos: el dato no adquiere con
 
 <!-- seccion: el-indice -->
 
-El conocimiento utilizado por el chat se compila durante la construcción del sitio y no en el momento en que una persona formula una pregunta. Un script del build recorre las fuentes autorizadas —los datos del currículum, las apps del pipeline, las fichas de la vitrina, las publicaciones de «Métodos» y los documentos aprobados de esta base—, extrae sus contenidos y produce un índice separado por idioma, español e inglés, con fragmentos, títulos, metadatos y destinos navegables.
+El conocimiento utilizado por el chat se compila durante la construcción del sitio y no en el momento en que una persona formula una pregunta. Un script del build recorre las fuentes autorizadas —los datos del currículum, las apps del pipeline, las fichas del portafolio, las publicaciones de «Métodos» y los documentos aprobados de esta base—, extrae sus contenidos y produce un índice separado por idioma, español e inglés, con fragmentos, títulos, metadatos y destinos navegables.
 
 Cada fragmento conserva una referencia hacia la sección o página de la que proviene. La recuperación no entrega únicamente texto al modelo. También suministra la identidad de la fuente y el destino que posteriormente permitirá al usuario verificar la afirmación dentro del sitio.
 
-El tamaño del fragmento está decidido y medido: como máximo 180 palabras. Una subsección más larga se parte en ventanas que conservan la misma ancla, porque un fragmento largo entra entero al contexto y compite consigo mismo; con ese tope, el peor caso del contexto de una respuesta queda acotado en unas 720 palabras. El índice tiene historia y vale la pena contarla: arrancó con 28 fragmentos por idioma, salidos solo de los YAML del currículum; las 32 fichas de la vitrina le sumaron 226; con la primera versión larga de esta base llegó a 494; y hoy, con los 25 documentos aprobados y la descripción de «cuándo usar» que cada uno declara, son 1.988 fragmentos en español y 1.978 en inglés. El número lo imprime cada build y es un artefacto regenerado, no editable a mano.
+El tamaño del fragmento está decidido y medido: como máximo 180 palabras. Una subsección más larga se parte en ventanas que conservan la misma ancla, porque un fragmento largo entra entero al contexto y compite consigo mismo; con ese tope, el peor caso del contexto de una respuesta queda acotado en unas 720 palabras. El índice tiene historia y vale la pena contarla: arrancó con 28 fragmentos por idioma, salidos solo de los YAML del currículum; las 32 fichas del portafolio le sumaron 226; con la primera versión larga de esta base llegó a 494; y hoy, con los 25 documentos aprobados y la descripción de «cuándo usar» que cada uno declara, son 1.988 fragmentos en español y 1.978 en inglés. El número lo imprime cada build y es un artefacto regenerado, no editable a mano.
 
 Esta decisión desplaza hacia el proceso de construcción actividades que no necesitan repetirse en cada consulta. El contenido se analiza, divide y valida una vez por versión publicada. La pregunta puede concentrarse entonces en recuperar los fragmentos pertinentes y construir la respuesta, sin volver a procesar todo el corpus.
 
@@ -84,11 +84,11 @@ Este diseño se relaciona con la forma en que concibo los pipelines analíticos:
 
 Un ejemplo concreto de esa trazabilidad: la ventana de 180 palabras no se eligió por intuición. Se midió sobre el corpus real, donde la subsección típica tenía 143 palabras y la más larga 247, y a 180 solo el 4 % de las subsecciones se trocea. Cambiar ese número es un cambio versionado, con su medición al lado.
 
-## Las 32 fichas de la vitrina entran al índice, con peso 0,5
+## Las 32 fichas del portafolio entran al índice, con peso 0,5
 
 <!-- seccion: fichas-en-el-indice -->
 
-Hasta septiembre de 2026 el índice se armaba con los datos del currículum y con los documentos de esta base. Las 34 piezas de la vitrina —diez apps con brochure y complemento, 11 agentes, 7 investigaciones y 6 tableros— tienen fichas con promesa, cifras con procedencia, límites, «nunca» y bloques, y el chat no las veía: cuando alguien preguntaba por una pieza concreta, la respuesta salía de la prosa que yo escribí sobre la vitrina, no de la ficha.
+Hasta septiembre de 2026 el índice se armaba con los datos del currículum y con los documentos de esta base. Las 34 piezas del portafolio —diez apps con brochure y complemento, 11 agentes, 7 investigaciones y 6 tableros— tienen fichas con promesa, cifras con procedencia, límites, «nunca» y bloques, y el chat no las veía: cuando alguien preguntaba por una pieza concreta, la respuesta salía de la prosa que yo escribí sobre el portafolio, no de la ficha.
 
 Indexarlas tal cual produjo lo previsible: 226 fragmentos nuevos, todos ricos en vocabulario, y el banco de 131 preguntas de afuera bajó de 102 a 94 aciertos en el top-4. Las fichas le ganaban el contexto a los documentos en preguntas que no eran sobre una pieza: «¿tiene posgrado?» traía la ficha del Asistente de Posgrado, y «¿qué nivel tiene con Power BI?» traía la del Constructor de Tableros Power BI.
 
@@ -102,7 +102,7 @@ La solución fue un peso por fragmento que multiplica el puntaje de la búsqueda
 | **fichas a peso 0,5** |                 **102/131** |                                 **11** |
 | fichas a peso 0,35    |                     103/131 |                                      8 |
 
-A 0,5 el banco recupera exactamente el número que tenía sin fichas y once preguntas —las de la vitrina— siguen recibiendo una ficha. Bajar más ya no compra nada y las vuelve invisibles. Las fichas no se editan para que indexen mejor: son de otras casas, y añadir una a la vitrina la mete al chat en el siguiente build, sin escribir prosa nueva. El peso vive en una constante del código, con su medición al lado, y sigue en 0,5 sobre un índice que ya va en 1.988 fragmentos.
+A 0,5 el banco recupera exactamente el número que tenía sin fichas y once preguntas —las del portafolio— siguen recibiendo una ficha. Bajar más ya no compra nada y las vuelve invisibles. Las fichas no se editan para que indexen mejor: son de otras casas, y añadir una al portafolio la mete al chat en el siguiente build, sin escribir prosa nueva. El peso vive en una constante del código, con su medición al lado, y sigue en 0,5 sobre un índice que ya va en 1.988 fragmentos.
 
 ## La recuperación léxica es una decisión de arquitectura
 
@@ -222,7 +222,7 @@ Este enfoque refleja principios que aplico en sistemas de gestión y arquitectur
 
 <!-- seccion: citas-navegables -->
 
-Cada fragmento del índice conserva un destino navegable dentro del sitio. Cuando el modelo utiliza una fuente, la respuesta presenta una marca que lleva al usuario hacia la sección correspondiente: un ancla de la HOME, la página de un case study o la ficha de una pieza de la vitrina.
+Cada fragmento del índice conserva un destino navegable dentro del sitio. Cuando el modelo utiliza una fuente, la respuesta presenta una marca que lleva al usuario hacia la sección correspondiente: un ancla de la HOME, la página de un case study o la ficha de una pieza del portafolio.
 
 Esta capacidad convierte la cita en algo más que una referencia visual. Permite recorrer la respuesta hasta la evidencia que la fundamenta y evaluar directamente si la fuente respalda la afirmación.
 
@@ -372,7 +372,7 @@ Una arquitectura RAG no debe evaluarse únicamente observando algunas respuestas
 
 El primero es el golden set: cada documento de esta base declara en su cabecera las preguntas que debe contestar —tres en cada uno y cinco en este—, y la prueba exige que cada pregunta traiga su documento entre los cuatro primeros resultados. La prueba viaja con el contenido: sumar un documento suma sus preguntas al gate sin que nadie edite las pruebas. Con 25 documentos son 77 preguntas.
 
-El segundo es el banco de preguntas escritas desde afuera, como pregunta quien recluta o entrevista: 175 preguntas legítimas en diez familias —trayectoria, forma de trabajar, certificaciones, IA y agentes, plataforma y datos, BI y analítica, gobierno, procesos, vitrina y encaje—, más 15 ajenas y 3 declaradas sin cobertura. Cada legítima debe traer una fuente esperada en el top-4, la fuente esperada debe llegar de primera en al menos el 60 % de los casos, y las 15 ajenas deben comportarse exactamente como está declarado: cuáles se bloquean sin gastar un token y cuáles pasan al modelo, con su porqué escrito al lado.
+El segundo es el banco de preguntas escritas desde afuera, como pregunta quien recluta o entrevista: 175 preguntas legítimas en diez familias —trayectoria, forma de trabajar, certificaciones, IA y agentes, plataforma y datos, BI y analítica, gobierno, procesos, portafolio y encaje—, más 15 ajenas y 3 declaradas sin cobertura. Cada legítima debe traer una fuente esperada en el top-4, la fuente esperada debe llegar de primera en al menos el 60 % de los casos, y las 15 ajenas deben comportarse exactamente como está declarado: cuáles se bloquean sin gastar un token y cuáles pasan al modelo, con su porqué escrito al lado.
 
 Las preguntas cubren hechos directos, relaciones entre secciones, formulaciones indirectas, errores de escritura, consultas ambiguas y solicitudes que no pertenecen al dominio. También incluyen preguntas cuya respuesta no existe, porque la capacidad de declarar un vacío es una parte esencial del comportamiento correcto.
 

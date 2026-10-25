@@ -328,11 +328,11 @@ built under explicit assumptions. These categories do not have the same level of
 must not be presented as if they were equivalent. The label makes it possible to understand what
 kind of evidence supports each value and which questions are reasonable before using it.
 
-## Provenance in my showcase and in the executive conversation
+## Provenance in my portfolio and in the executive conversation
 
 <!-- seccion: procedencia-en-la-vitrina -->
 
-I carried this rule into my own portfolio. The technical sheets of the 34 pieces of the showcase
+I carried this rule into my own portfolio. The technical sheets of the 34 pieces of the portfolio
 —10 applications, 11 agents, 7 research lines and 6 dashboards— declare the provenance of each of
 their figures with those four labels, so that claims about tests, coverage, users, performance
 or results can be related to the corresponding evidence. And I apply it to this very CV: the
@@ -367,7 +367,7 @@ context.
 Every visualization must justify its presence. Adding charts because there is space available
 increases cognitive load and can hide the main finding. A mature solution selects the most
 appropriate representation for the comparison, trend, composition or distribution it needs to
-communicate. In the 6 open-data dashboards of my showcase that selection is documented piece by
+communicate. In the 6 open-data dashboards of my portfolio that selection is documented piece by
 piece, with their DAX measures counted —62, 44 and 43 in three of them— and with what each
 dashboard "never" claims.
 
@@ -450,7 +450,7 @@ may need a predictive model: at Banco Pichincha, churn, delinquency and risk wer
 with one more dashboard but with scikit-learn models that reached production with more than 90%
 accuracy; at TransMilenio, demand by time band with a model that stayed in use after I left. A contextual
 query task can benefit from an agent with access to authorized sources, like the 11 agents in my
-showcase.
+portfolio.
 
 Selecting the right instrument requires understanding how long the information keeps its value,
 what level of interpretation it requires, what consequences the decision has and what
@@ -471,7 +471,7 @@ When manual and repetitive construction activities begin to limit speed, consist
 capacity to scale, the very production of analytical artifacts can become an object of
 automation.
 
-I built the **Power BI Dashboard Builder**, one of the 11 agents in my showcase, and it is fully
+I built the **Power BI Dashboard Builder**, one of the 11 agents in my portfolio, and it is fully
 tested: from a requirements text and a project with the tables, it produces the complete project
 in .pbip format —the semantic model with its relationships and columns, the transformations in
 Power Query M, the DAX measures and the visuals written in the report's native JSON—, and it can
@@ -600,7 +600,7 @@ My depth in Power BI lets me work across that entire journey. I do not start at 
 or end at publication. I can intervene in data preparation with Power Query, modeling, DAX
 measures, performance, experience, training, automation and the product's later evolution.
 DP-600, earned in December 2024, certifies that end-to-end depth in Microsoft Fabric, which at
-Vesting was the complete platform; the 6 open-data dashboards of my showcase, on the other hand,
+Vesting was the complete platform; the 6 open-data dashboards of my portfolio, on the other hand,
 are built with Power BI Desktop, Power Query, DAX and Python, without Fabric, because for public
 data nothing more was needed. And Power BI is not the only tool I handle: Shiny with R, Tableau
 and Looker Studio appear among my skills, although the specialty is one.

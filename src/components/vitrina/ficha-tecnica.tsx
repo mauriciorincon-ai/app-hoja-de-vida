@@ -105,7 +105,7 @@ export async function FichaTecnica({
   hrefDetalle?: string;
   /** Solo las apps con simulación (`data/simulaciones.yaml`): el cierre la ofrece. */
   hrefSimulacion?: string;
-  /** Solo las apps: el cierre enlaza a `#contacto-vitrina` de la misma página. */
+  /** Solo las apps: el cierre enlaza a `#contacto-portafolio` de la misma página. */
   listaDeEspera?: boolean;
 }) {
   const t = await getTranslations("fichaTecnica");
@@ -503,7 +503,7 @@ export async function FichaTecnica({
         )}
         {listaDeEspera && (
           <a
-            href="#contacto-vitrina"
+            href="#contacto-portafolio"
             data-cta="lista-de-espera"
             className="flex min-h-11 items-center gap-2 rounded-md border border-paper-3 px-6 text-[15px] font-medium text-ink-1 transition-colors duration-[120ms] hover:bg-paper-1"
           >

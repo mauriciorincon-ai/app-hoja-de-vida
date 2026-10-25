@@ -1,4 +1,4 @@
-# Apps del pipeline AI-APPs en el showcase — "solo lo real": sin fechas prometidas.
+# Apps del pipeline AI-APPs en el portfolio — "solo lo real": sin fechas prometidas.
 # Agregar/editar una card = editar este archivo + push (cero cambios de código).
 # Estados válidos (content pack §9 — estados honestos):
 #   en-produccion   → URL viva + repo público + CI verde ("esto ya lo hace")
@@ -51,8 +51,8 @@ apps:
             es: "Roadmap votable por app hermana"
             en: "A roadmap the visitor votes on, per sister app"
           descripcion:
-            es: "Las próximas features de cada app hermana se votan con un clic en su ficha de la vitrina, sin registro, y el contador es real (Supabase con RPC atómico). Si la base de datos cae, lo dice — nunca inventa un número."
-            en: "Each sister app's upcoming features are voted with one click on its showcase page, no sign-up, and the counter is real (Supabase with an atomic RPC). If the database goes down, it says so — it never fabricates a number."
+            es: "Las próximas features de cada app hermana se votan con un clic en su ficha del portafolio, sin registro, y el contador es real (Supabase con RPC atómico). Si la base de datos cae, lo dice — nunca inventa un número."
+            en: "Each sister app's upcoming features are voted with one click on its portfolio page, no sign-up, and the counter is real (Supabase with an atomic RPC). If the database goes down, it says so — it never fabricates a number."
       metricas:
         - valor: 2
           etiqueta:

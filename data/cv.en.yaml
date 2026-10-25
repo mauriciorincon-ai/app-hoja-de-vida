@@ -57,7 +57,7 @@ trayectoria:
   # 2024 (the owner moved the start from 2023 to 2024 on 2026-10-05) and the
   # PDF prints it in its own section. The description is the first line of his
   # LinkedIn, in his words. Its bullets NAME the pieces and never count them:
-  # the showcase grows every week. Guarded by tests/unit/content.test.ts, which
+  # the portfolio grows every week. Guarded by tests/unit/content.test.ts, which
   # also requires that neither this entry nor the corpus date the start in any
   # year other than the one in `periodo`.
   - periodo: "April 2024 — today"
@@ -73,7 +73,7 @@ trayectoria:
       - "Other pipeline applications: Dash Agent, to analyze the context and cost of AI agents, with 693 tests and 97.5% line coverage (August 2026); Habla San, sealed and in use by the family it was built for."
       - "Agents with binary acceptance criteria and human checkpoints: the ISO 42001 Expert, the Power BI Dashboard Builder and the AI-APPs Factory."
       - "A research pipeline, with the Design Science and Computational Paper harnesses, that fixes the criteria before measuring, measures the literature gap and takes every study through to a manuscript ready to submit."
-      - "Own research: ARKHÉ, which in my measurements cut token consumption by 52%, still without a published artifact; FORJA; the research pieces and the open-data dashboards in the showcase."
+      - "Own research: ARKHÉ, which in my measurements cut token consumption by 52%, still without a published artifact; FORJA; the research pieces and the open-data dashboards in the portfolio."
     actual: true
   # Real period (PDF, /cv, chat, cases): 2023 — 2025. «2024 — 2025» only on the
   # HOME timeline, by the owner's design: the big year says 2024 so it doesn't
@@ -551,7 +551,7 @@ proyectos:
           texto: >-
             We built more than 20 instruments of the management system —policies, procedures, matrices
             and criteria—, a third of them finished. To review them I built the ISO 42001 expert agent I
-            publish in the showcase: it cites the standard or declares the gap, and no ruling moves
+            publish in the portfolio: it cites the standard or declares the gap, and no ruling moves
             forward without a person.
       impacto:
         - "more than 25 analytical products in use for some 20 leaders across some 15 processes and about 75 users."
@@ -621,7 +621,7 @@ proyectos:
           texto: >-
             The data showed two problems I could not solve from supervision: driver–vehicle–route
             assignment and bus bunching. Today they are two of the research pieces I publish in the
-            showcase, with their method and their result.
+            portfolio, with their method and their result.
       impacto:
         - "Weekly and monthly performance reports for about 150 routes, traceable from the figure to the record."
         - "30% less processing time with the ETL automation in VBA, Power Query and SQL that fed the route supervision reports."

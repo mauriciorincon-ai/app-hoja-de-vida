@@ -5,7 +5,7 @@ titulo: "The dashboards: public data, verified"
 resumen: "Six sealed dashboards on open data —banking, companies, the monetary cycle, State spending, energy and climate, Formula 1— built with Power BI Desktop, Power Query, DAX, script-written PBIR and Python, with the source's identities run in full and the limits in plain view."
 cuando_usar: "Use this when they ask about the six dashboards published with open data (energy and climate, monetary cycle, Colombian banking, Colombia's companies, state spending, Formula 1), how he verifies the figures he publishes, financial statements and accounting data, Power Query, DAX and the rigor of each dashboard."
 estado: aprobado
-ancla: "/vitrina/tableros"
+ancla: "/portafolio/tableros"
 actualizado: 2026-09-20
 preguntas_de_prueba:
   - "What dashboards has Henry published?"
@@ -38,7 +38,7 @@ HOW THIS FILE IS WRITTEN
 
 <!-- seccion: que-son -->
 
-I have built six analytical dashboards from scratch on public data sources and published them in the showcase of this site with their respective technical sheets. All six are sealed —they were sealed between September 6 and 8, 2026, after seven construction phases each— and each one addresses a different universe, but they all follow the same principle: the data must be traceable back to its origin, the model must pass verifiable controls, and the visualization must communicate clearly both its results and its limits.
+I have built six analytical dashboards from scratch on public data sources and published them in the portfolio of this site with their respective technical sheets. All six are sealed —they were sealed between September 6 and 8, 2026, after seven construction phases each— and each one addresses a different universe, but they all follow the same principle: the data must be traceable back to its origin, the model must pass verifiable controls, and the visualization must communicate clearly both its results and its limits.
 
 I do not conceive of them as design exercises or as isolated demonstrations of Power BI. Each dashboard represents a complete analytical product that begins with identifying and evaluating the sources, continues with cleaning, integrating and transforming the data, and ends in a semantic model capable of sustaining indicators, comparisons and analytical journeys: twelve pages per dashboard, six in Spanish and six in English, generated from the same model and the same set of measures.
 
@@ -361,7 +361,7 @@ Quality is preserved through responsibilities. The source needs monitoring. The 
 
 Prepared and governed information does not need to be used only in Power BI. It can also serve applications, automated processes and artificial intelligence agents, and on a platform like Fabric that broadening of consumers is the reason the lakehouse exists: one and the same semantic asset serving people, applications and agents.
 
-This requires preserving a clear separation between the data, its meaning and the way it is consumed. An agent should not freely rebuild a metric whose definition already exists inside the semantic model. When a measure has been validated and governed, the intelligent solution should use that asset instead of generating an alternative interpretation. It is what I did at Vesting, where the platform existed to observe agents, and it is what the Power BI Dashboard Builder does in the showcase, a built and tested agent that creates the complete project —semantic model, preparation in Power Query M, DAX measures and visuals— and can extract data, with the same principle: the definition lives in the model, not in the prompt.
+This requires preserving a clear separation between the data, its meaning and the way it is consumed. An agent should not freely rebuild a metric whose definition already exists inside the semantic model. When a measure has been validated and governed, the intelligent solution should use that asset instead of generating an alternative interpretation. It is what I did at Vesting, where the platform existed to observe agents, and it is what the Power BI Dashboard Builder does in the portfolio, a built and tested agent that creates the complete project —semantic model, preparation in Power Query M, DAX measures and visuals— and can extract data, with the same principle: the definition lives in the model, not in the prompt.
 
 Public dashboards offer an especially useful environment to explore this integration because the sources can be audited and the definitions can be made visible. An application or an agent could query structured data, retrieve methodological documentation and produce explanations grounded in the same assets used by Power BI. And in fact it already happens on a small scale: the sheets of the six dashboards enter the index of this site's chat, with their figures and their "nevers", and the chat cites them toward the sheet.
 

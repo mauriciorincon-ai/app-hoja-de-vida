@@ -15,7 +15,7 @@
 #
 # La evidencia sale de `analitica-predictiva`, `transmilenio-cm`, `banco-pichincha`, `las-investigaciones`,
 # `procesos-y-simulacion`, `cm-operaciones`, `plataforma-y-despliegue` y `certificaciones`. Probeta DS se enlaza a su
-# ficha (`/vitrina/apps/ds`), no se reescribe, y va como «Prototipo»: la vitrina la ofrece con lista de espera y su ficha
+# ficha (`/portafolio/apps/ds`), no se reescribe, y va como «Prototipo»: el portafolio la ofrece con lista de espera y su ficha
 # está en estado inicial (el cierre del sprint lo lleva como [CONFIRMAR]); no se cita su número de funcionalidades porque
 # el corpus (33) y la ficha de hoy no coinciden. Sin caso propio de deriva observada, sin capa prescriptiva en un empleo,
 # PyTorch y TensorFlow como exploración, el DP-100 retirado y el AI-300 en curso. El título de la decisión 4 y el de la
@@ -615,14 +615,14 @@ bloques:
           es: "Probeta DS, una aplicación del autor, ejecuta Python, Pandas y scikit-learn en el navegador con Pyodide: dos modelos compiten contra dos líneas base a la vista —la clase mayoritaria y una regresión logística— y el veredicto dice «no supera» cuando no supera; las cinco métricas se calculan sobre el conjunto de prueba, con la matriz de confusión al lado; la fuga es imposible porque el preprocesamiento se ajusta solo con la mitad de entrenamiento, y una model card descargable guarda datos, partición, método, métricas, veredicto y límites."
           en: "Probeta DS, one of the author's applications, runs Python, Pandas and scikit-learn in the browser with Pyodide: two models compete against two baselines in plain sight —the majority class and a logistic regression— and the verdict says «does not beat it» when it does not; the five metrics are computed on the test set, with the confusion matrix beside them; leakage is impossible because preprocessing is fitted on the training half only, and a downloadable model card keeps data, split, method, metrics, verdict and limits."
         corpus: [analitica-predictiva]
-        href: /vitrina/apps/ds
+        href: /portafolio/apps/ds
       - nombre: { es: "La optimización formulada dos veces", en: "Optimization formulated twice" }
         nivel: uso-real
         texto:
           es: "En el paper de asignación conductor y bus, producido con el Paper Computacional, las dos formulaciones independientes —programación entera y programación por restricciones— dieron 14.251 óptimos idénticos en 14.251 comparaciones, sobre la topología real de rutas de los datos abiertos del sistema y con un generador sintético declarado."
           en: "In the driver-and-bus assignment paper, produced with the Computational Paper, the two independent formulations —integer programming and constraint programming— gave 14,251 identical optima in 14,251 comparisons, on the real route topology from the system's open data and with a declared synthetic generator."
         corpus: [las-investigaciones]
-        href: /vitrina/investigaciones # en pausa (2026-10-24); al reabrir: /vitrina/investigaciones/asignacion-con-fallas
+        href: /portafolio/investigaciones # en pausa (2026-10-24); al reabrir: /portafolio/investigaciones/asignacion-con-fallas
       - nombre: { es: "FlexSim en Inglopres y en Cafam: simular antes de intervenir", en: "FlexSim at Inglopres and Cafam: simulate before intervening" }
         nivel: uso-real
         texto:
@@ -636,14 +636,14 @@ bloques:
           es: "En las investigaciones del autor los umbrales que deciden si una tesis se sostiene se congelan antes de que exista un solo resultado, y lo que sale se publica: en el paper piloto, dos de los tres principios evaluados quedaron refutados por sus propias métricas, y así se escribieron."
           en: "In the author's research the thresholds that decide whether a thesis holds are frozen before a single result exists, and whatever comes out is published: in the pilot paper, two of the three principles evaluated were refuted by their own metrics, and that is how they were written up."
         corpus: [las-investigaciones]
-        href: /vitrina/investigaciones
+        href: /portafolio/investigaciones
       - nombre: { es: "Convoyes de buses: la política, contra el mejor control clásico", en: "Bus bunching: the policy, against the best classic control" }
         nivel: prototipo
         texto:
           es: "En la investigación sobre convoyes de buses, la política propuesta se prueba en una simulación de eventos discretos con verdad conocida por construcción y se compara contra el mejor control clásico, nunca contra no hacer nada; las experiencias medidas son de un corredor simulado, y su ficha no afirma cifras del sistema real."
           en: "In the research on bus bunching, the proposed policy is tested in a discrete-event simulation with ground truth known by construction and compared against the best classic control, never against doing nothing; the experiences measured come from a simulated corridor, and its technical sheet claims no figures for the real system."
         corpus: [las-investigaciones]
-        href: /vitrina/investigaciones # en pausa (2026-10-24); al reabrir: /vitrina/investigaciones/convoyes-de-buses
+        href: /portafolio/investigaciones # en pausa (2026-10-24); al reabrir: /portafolio/investigaciones/convoyes-de-buses
 
   # ─── 9 · Límites y alcance ──────────────────────────────────────────────────
   - n: 9

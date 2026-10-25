@@ -53,7 +53,7 @@ bloques:
         fila: 0
         detalle:
           es: "Lo que el sitio publica: datos del currículum, documentos aprobados, fichas y publicaciones como esta. Lo que no está publicado no existe para el chat."
-          en: "What the site publishes: résumé data, approved documents, showcase sheets and publications like this one. What is not published does not exist for the chat."
+          en: "What the site publishes: résumé data, approved documents, portfolio sheets and publications like this one. What is not published does not exist for the chat."
       - n: 2
         etiqueta: { es: "Índice del build", en: "Build-time index" }
         tipo: dato
@@ -599,8 +599,8 @@ bloques:
       - nombre: { es: "Cuántas fuentes y cuánto pesa cada una, medido", en: "How many sources and how much each weighs, measured" }
         nivel: uso-real
         texto:
-          es: "Las cuatro fuentes por respuesta salieron de dos mediciones con dos conjuntos independientes —con cuatro, 75 de 75 y 136 de 136—, y el peso de 0,5 de las fichas de la vitrina devolvió el banco de 94 a 102 aciertos de 131."
-          en: "The four sources per answer came from two measurements with two independent sets —with four, 75 out of 75 and 136 out of 136—, and the 0.5 weight on the showcase sheets brought the bank back from 94 to 102 hits out of 131."
+          es: "Las cuatro fuentes por respuesta salieron de dos mediciones con dos conjuntos independientes —con cuatro, 75 de 75 y 136 de 136—, y el peso de 0,5 de las fichas del portafolio devolvió el banco de 94 a 102 aciertos de 131."
+          en: "The four sources per answer came from two measurements with two independent sets —with four, 75 out of 75 and 136 out of 136—, and the 0.5 weight on the portfolio sheets brought the bank back from 94 to 102 hits out of 131."
         corpus: [rag-y-el-chat]
       - nombre: { es: "La capa que adapta el proveedor, una variable de entorno", en: "The layer that adapts the provider, one environment variable" }
         nivel: uso-real

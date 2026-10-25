@@ -64,7 +64,7 @@ export default async function HomePage({
         <Logros logros={cv.logros} />
         {/* El sitio de «Proyectos» lo ocupa la vitrina (revisión post-S7):
             los case studies se abren desde su hito en la trayectoria. El
-            roadmap se fue con las apps, a /vitrina/apps. */}
+            roadmap se fue con las apps, a /portafolio/apps. */}
         <VitrinaHome locale={locale as Locale} />
         {/* La puerta a «Métodos» (S19): las publicaciones, nombradas desde
             `data/metodo/`, entre lo construido y los estudios. */}

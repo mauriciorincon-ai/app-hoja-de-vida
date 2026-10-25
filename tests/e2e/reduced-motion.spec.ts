@@ -58,7 +58,7 @@ test.describe("prefers-reduced-motion (criterio de aceptación e2e)", () => {
       "#perfil h2",
       "#trayectoria h2",
       "#logros h2",
-      "#vitrina-titulo",
+      "#portafolio-titulo",
       // La puerta a «Métodos» (S19): Reveal + Stagger sobre la lista de piezas.
       "#metodos-titulo",
       "#metodos li:first-child [data-puerta-pieza]",

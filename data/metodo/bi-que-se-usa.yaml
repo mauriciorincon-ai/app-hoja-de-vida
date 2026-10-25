@@ -591,21 +591,21 @@ bloques:
           es: "Seis tableros sobre fuentes públicas, sellados en septiembre de 2026 tras siete fases de construcción cada uno: modelos en estrella, 329 medidas DAX y ninguna columna calculada; una línea base independiente en Python antes de cada refresco y la cobertura publicada como cifra, como el 84,9 % del ranking de las diez mil empresas más grandes."
           en: "Six dashboards on public sources, sealed in September 2026 after seven build phases each: star schemas, 329 DAX measures and no calculated columns; an independent Python baseline before every refresh and coverage published as a figure, such as 84.9% of the ranking of the ten thousand largest companies."
         corpus: [los-tableros]
-        href: /vitrina/tableros
+        href: /portafolio/tableros
       - nombre: { es: "Las empresas de Colombia en cifras: el sesgo de composición, corregido", en: "Las empresas de Colombia en cifras: composition bias, corrected" }
         nivel: uso-real
         texto:
           es: "El agregado decía que 2020 cayó 2,2 %; sobre las mismas 23.321 empresas presentes en los dos años, la contracción fue del 7,4 %. Por eso el tablero nunca presenta el crecimiento agregado solo: al lado va el de las mismas empresas, en el mismo eje."
           en: "The aggregate said 2020 fell 2.2%; over the same 23,321 companies present in both years, the contraction was 7.4%. That is why the dashboard never shows aggregate growth alone: next to it goes the growth of the same companies, on the same axis."
         corpus: [los-tableros]
-        href: /vitrina/tableros/empresas-de-colombia
+        href: /portafolio/tableros/empresas-de-colombia
       - nombre: { es: "Constructor de Tableros Power BI", en: "Power BI Dashboard Builder (Constructor de Tableros Power BI)" }
         nivel: uso-real
         texto:
           es: "Un agente construido y probado que, a partir de un texto de requerimientos y un proyecto con las tablas, produce el proyecto .pbip completo —modelo semántico, Power Query M, medidas DAX y visuales en el JSON nativo del reporte—; una corrida se acepta contra 20 criterios binarios, atraviesa 5 gates de aprobación humana y no cierra sin el render aprobado por una persona en Power BI Desktop."
           en: "An agent built and tested that, from a requirements text and a project with the tables, produces the complete .pbip project —semantic model, Power Query M, DAX measures and visuals in the report’s native JSON—; a run is accepted against 20 binary criteria, goes through 5 human approval gates and does not close without a person approving the render in Power BI Desktop."
         corpus: [bi-que-se-adopta]
-        href: /vitrina/agentes/constructor-tableros-powerbi
+        href: /portafolio/agentes/constructor-tableros-powerbi
       - nombre: { es: "Vesting: modos de almacenamiento y seguridad por fila sobre Fabric", en: "Vesting: storage modes and row-level security on Fabric" }
         nivel: uso-real
         texto:

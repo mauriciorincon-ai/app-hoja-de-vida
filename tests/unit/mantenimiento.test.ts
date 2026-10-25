@@ -70,7 +70,7 @@ describe("el proxy", () => {
       ["/es", "/es/mantenimiento"],
       ["/es/proyectos/vesting", "/es/mantenimiento"],
       ["/en/cv", "/en/mantenimiento"],
-      ["/en/vitrina/apps", "/en/mantenimiento"],
+      ["/en/portafolio/apps", "/en/mantenimiento"],
     ]) {
       const r = await pedir(ruta);
       expect(r.status, ruta).toBe(503);

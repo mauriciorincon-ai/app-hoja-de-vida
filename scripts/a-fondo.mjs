@@ -5,7 +5,7 @@
  * Por qué «a fondo» y no «detalle»: la palabra ya significa otras dos cosas en
  * esta app — el case study de un proyecto (`messages.detalle`,
  * `DetalleVisitTracker`) y el último tramo de la ficha larga de una app
- * (`/vitrina/apps/<slug>/detalle`). Un tercer significado habría costado más
+ * (`/portafolio/apps/<slug>/detalle`). Un tercer significado habría costado más
  * que un nombre nuevo.
  *
  * Qué es: `data/a-fondo/<slug>.<locale>.md` — frontmatter validado con Zod +
@@ -284,7 +284,7 @@ export function problemasDeDestino(doc, catalogo) {
     : [
         `${doc.archivo}: «ancla: ${doc.ancla}» no existe en el sitio. Una cita que no lleva ` +
           `a ninguna parte rompe la promesa del chat. Destinos válidos: una sección de la HOME ` +
-          `(#trayectoria, #skills…) o una ruta real (/proyectos/<slug>, /vitrina/<frente>…).`,
+          `(#trayectoria, #skills…) o una ruta real (/proyectos/<slug>, /portafolio/<frente>…).`,
       ];
 }
 

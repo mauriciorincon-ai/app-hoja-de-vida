@@ -17,7 +17,7 @@ import {
 } from "@/lib/vitrina/simulaciones-loader";
 
 /**
- * LA SIMULACIÓN DE UNA APP (2026-10-12) — `/vitrina/apps/<slug>/simulacion`.
+ * LA SIMULACIÓN DE UNA APP (2026-10-12) — `/portafolio/apps/<slug>/simulacion`.
  *
  * Algunas apps son privadas y no se publican, pero su casa entrega una
  * simulación estática (planlang: la vitrina de sus dos demos, rotulada
@@ -68,9 +68,9 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     description: ficha.export.promesa.tagline,
     alternates: {
       languages: {
-        es: `/es/vitrina/apps/${app}/simulacion`,
-        en: `/en/vitrina/apps/${app}/simulacion`,
-        "x-default": `/es/vitrina/apps/${app}/simulacion`,
+        es: `/es/portafolio/apps/${app}/simulacion`,
+        en: `/en/portafolio/apps/${app}/simulacion`,
+        "x-default": `/es/portafolio/apps/${app}/simulacion`,
       },
     },
   };
@@ -98,7 +98,7 @@ export default async function SimulacionAppPage({ params }: Params) {
         <div className="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-14">
           <nav aria-label={t("migaEtiqueta")} className="mb-8">
             <Link
-              href={`/vitrina/apps/${app}`}
+              href={`/portafolio/apps/${app}`}
               className="inline-flex min-h-11 items-center gap-2 font-mono text-[11px] tracking-[0.08em] text-ink-2 uppercase hover:text-ink-0"
             >
               <span aria-hidden="true">←</span>

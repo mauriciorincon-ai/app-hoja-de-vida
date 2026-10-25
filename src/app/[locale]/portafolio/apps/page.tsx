@@ -22,12 +22,12 @@ import { getFichasVitrina } from "@/lib/vitrina/loader";
  * apps hermanas del portafolio, re-expresadas desde su `brochure-export.json`
  * en el design system de CV Viva.
  *
- * Vivía en `/vitrina`; desde que la vitrina se reparte en cuatro frentes
+ * Vivía en `/portafolio`; desde que la vitrina se reparte en cuatro frentes
  * (apps · agentes · investigaciones · tableros) esa ruta es el PORTAL y las
  * apps tienen aquí su propio segmento. Todo lo demás sigue igual.
  *
  * **Esta ruta es la MUESTRA CORTA.** Cada app tiene su propio espacio en
- * `/vitrina/apps/<slug>`; aquí solo se asoma. La primera versión apilaba las seis
+ * `/portafolio/apps/<slug>`; aquí solo se asoma. La primera versión apilaba las seis
  * fichas enteras en esta página —más de 22 000 px de documento— y eso rompía
  * tres cosas de golpe: ninguna app era direccionable por sí sola, el visitante
  * cargaba las seis para leer una, y el escaparate dejaba de ser escaparate.
@@ -57,9 +57,9 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     description: frente?.detalle[locale as Locale],
     alternates: {
       languages: {
-        es: "/es/vitrina/apps",
-        en: "/en/vitrina/apps",
-        "x-default": "/es/vitrina/apps",
+        es: "/es/portafolio/apps",
+        en: "/en/portafolio/apps",
+        "x-default": "/es/portafolio/apps",
       },
     },
   };
@@ -116,7 +116,7 @@ export default async function VitrinaAppsPage({ params }: Params) {
         <div className="mx-auto max-w-5xl px-4 py-10 md:px-6 md:py-14">
           <nav aria-label={t("migaEtiqueta")} className="mb-8">
             <Link
-              href="/vitrina"
+              href="/portafolio"
               className="inline-flex min-h-11 items-center gap-2 font-mono text-[11px] tracking-[0.08em] text-ink-2 uppercase hover:text-ink-0"
             >
               <span aria-hidden="true">←</span>

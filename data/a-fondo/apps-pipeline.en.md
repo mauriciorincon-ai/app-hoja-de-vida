@@ -3,9 +3,9 @@ slug: apps-pipeline
 codigo: AF-12
 titulo: "The apps I am building in public"
 resumen: "The AI-APPs pipeline: ten sister applications, 11 agents, 7 research lines and 6 dashboards —34 pieces, not counting this site— built with two houses, a factory agent, four CI jobs, a sheet contract generated from Zod, a real cost of US$0 a month and two rules: code first, and every control is demonstrated by failing."
-cuando_usar: "Use this when they ask what he has built on his own outside of work, how many applications he has published, whether he has public code, how his build pipeline works with Next.js, automated tests and CI, and what each of the ten showcase apps demonstrates."
+cuando_usar: "Use this when they ask what he has built on his own outside of work, how many applications he has published, whether he has public code, how his build pipeline works with Next.js, automated tests and CI, and what each of the ten portfolio apps demonstrates."
 estado: aprobado
-ancla: "#vitrina"
+ancla: "#portafolio"
 actualizado: 2026-10-14
 preguntas_de_prueba:
   - "What applications is Henry building?"
@@ -37,10 +37,10 @@ HOW THIS FILE IS WRITTEN
 
 <!-- The S3 skeleton pointed at "#apps"; that HOME section was removed in the
      post-S7 review and today what the HOME shows of what has been built is the
-     showcase. CV Viva's own roadmap was removed entirely on September 13, 2026:
+     portfolio. CV Viva's own roadmap was removed entirely on September 13, 2026:
      no feature of this site is voted on. The votable roadmap that does exist
      is PER SISTER APP and lives on the page of each application, inside
-     /vitrina/apps. Corrected in the S8 migration and up to date on
+     /portafolio/apps. Corrected in the S8 migration and up to date on
      2026-09-21. -->
 
 <!-- guide (comes from the story skeleton, S3 — written by the owner):
@@ -60,7 +60,7 @@ Throughout my career —more than ten years since May 2015— I have demanded th
 
 My portfolio is not a gallery of demos nor a collection of exercises. It is an architecture of professional evidence. Each piece seeks to demonstrate a concrete capability through a product that can be walked through, tested and analyzed. The applications demonstrate the construction of solutions. The agents show how I structure work with artificial intelligence. The research lines make my methodological discipline visible. The dashboards allow evaluating how I turn data into models, indicators and decision experiences.
 
-Building in public is, ultimately, a form of professional responsibility. I do not expect a person to trust the description of my capabilities alone. I give them pieces that allow those capabilities to be examined, and since July 2026 each one arrives at the showcase with its sheet, its figures, its limits and its "nevers".
+Building in public is, ultimately, a form of professional responsibility. I do not expect a person to trust the description of my capabilities alone. I give them pieces that allow those capabilities to be examined, and since July 2026 each one arrives at the portfolio with its sheet, its figures, its limits and its "nevers".
 
 ## What is not finished is not presented as finished
 
@@ -88,7 +88,7 @@ I also make sure that public repositories do not turn transparency into a vulner
 
 <!-- seccion: cero-enlaces-y-formularios -->
 
-And one hard rule of the pipeline that governs this site, number 16: zero links. No file of the repository nor field of the project contains the production URL or the preview URLs; production is shown, never handed over. That is why the public call to action of an application is a waiting list, with no promise of being granted, and it appears only where there is an app: the applications storefront of the showcase and the sheet of each one. The agents, the research lines and the dashboards are shown, but not handed over: they carry no waiting list. Alongside it there are two other ways to write to me —the home page has a general contact form that asks you to choose the reason among five, a project, consulting, training, a talk or a role, and that reason travels as the subject of the email; and under the roadmap of each sister app there is a box to propose a feature, which also arrives by email and publishes nothing—. The sweep that watches over the zero-links rule runs on all versioned files after the last change, not before.
+And one hard rule of the pipeline that governs this site, number 16: zero links. No file of the repository nor field of the project contains the production URL or the preview URLs; production is shown, never handed over. That is why the public call to action of an application is a waiting list, with no promise of being granted, and it appears only where there is an app: the applications storefront of the portfolio and the sheet of each one. The agents, the research lines and the dashboards are shown, but not handed over: they carry no waiting list. Alongside it there are two other ways to write to me —the home page has a general contact form that asks you to choose the reason among five, a project, consulting, training, a talk or a role, and that reason travels as the subject of the email; and under the roadmap of each sister app there is a box to propose a feature, which also arrives by email and publishes nothing—. The sweep that watches over the zero-links rule runs on all versioned files after the last change, not before.
 
 ## Provenance of knowledge and responsibility for AI-assisted work
 
@@ -104,7 +104,7 @@ This distinction is especially important in research and agents. Openness allows
 
 <!-- seccion: que-hay-construido -->
 
-The pipeline produces four main families of assets: applications, agents, research lines and analytical dashboards. All finished pieces are published in the site's showcase and have a sheet that explains their purpose, scope, state and main design decisions. Today the showcase gathers 34 pieces: ten sister applications, 11 agents, 7 research lines and 6 dashboards.
+The pipeline produces four main families of assets: applications, agents, research lines and analytical dashboards. All finished pieces are published in the site's portfolio and have a sheet that explains their purpose, scope, state and main design decisions. Today the portfolio gathers 34 pieces: ten sister applications, 11 agents, 7 research lines and 6 dashboards.
 
 The ten applications are Anonimizador Velo, Dash Agent, Probeta DS, Habla San, Innmobiliaria and Nutrikids, plus four in their initial stage —planlang, AngelGhost, Big-D and HackGuard—, plus CV Viva, which is this very site and not a piece of the storefront. Each answers a different promise, but all must pass the same criterion: turning a need into a functional, documented and verifiable experience, not only into a convincing interface or a technical demo.
 
@@ -142,7 +142,7 @@ These figures are a dated snapshot, they are refreshed from each app's repositor
 
 <!-- seccion: apps-en-etapa-inicial -->
 
-The remaining four are in their initial stage —cycle H1, version 0.1.0, unsealed— and publish their own sourced figures in their brochure, which is why they do not enter the table above. planlang (seven sprints closed): you write an agent's plan as a contract and a verifier without AI measures, case by case, the gap between what the plan promised and what the agent did; 21 features, 16 ADRs, 16 criteria met, 1,204 crossed decisions over 220 synthetic cases, zero model calls in the showcase and a cost of US$5.21 per run. AngelGhost (eight sprints): a window on your Mac that the client does not see even when you share your screen, bringing you your own experience at the right moment of the meeting; 20 features, 1,806 automated tests, 23 ADRs and zero bytes leaving the machine. Big-D (three sprints): an open, reproducible planner for choosing between data platforms with dated evidence; 14 features, 3 platforms and 63 components in the atlas, 33 dated pieces of evidence, 2,614 automated tests and 98.55% coverage. HackGuard (nine sprints): a living catalog of security tests that tells you what you tested, what you expected, what you got and what you are missing; 18 features, 38 tests in the catalog crossed with 38 ISO/IEC 42001 controls, 4,390 automated tests and 97.54% coverage. All four cost US$0 a month to operate.
+The remaining four are in their initial stage —cycle H1, version 0.1.0, unsealed— and publish their own sourced figures in their brochure, which is why they do not enter the table above. planlang (seven sprints closed): you write an agent's plan as a contract and a verifier without AI measures, case by case, the gap between what the plan promised and what the agent did; 21 features, 16 ADRs, 16 criteria met, 1,204 crossed decisions over 220 synthetic cases, zero model calls in the portfolio and a cost of US$5.21 per run. AngelGhost (eight sprints): a window on your Mac that the client does not see even when you share your screen, bringing you your own experience at the right moment of the meeting; 20 features, 1,806 automated tests, 23 ADRs and zero bytes leaving the machine. Big-D (three sprints): an open, reproducible planner for choosing between data platforms with dated evidence; 14 features, 3 platforms and 63 components in the atlas, 33 dated pieces of evidence, 2,614 automated tests and 98.55% coverage. HackGuard (nine sprints): a living catalog of security tests that tells you what you tested, what you expected, what you got and what you are missing; 18 features, 38 tests in the catalog crossed with 38 ISO/IEC 42001 controls, 4,390 automated tests and 97.54% coverage. All four cost US$0 a month to operate.
 
 ## Eleven agents, seven research lines and six dashboards
 
@@ -160,7 +160,7 @@ The six dashboards built on public data allow demonstrating the analytical layer
 
 These four families do not compete with each other. They form a progressive system of capabilities. Data allows observing. Dashboards turn that observation into understanding. Research lines allow formulating and contrasting explanations. Applications integrate capabilities within a usable experience. Agents extend that experience through knowledge, reasoning and tools within defined limits.
 
-The families also feed each other in the real pipeline. The two research harnesses produce the seven research lines; one of them, the Computational Paper, is published among the showcase agents. The AI-APPs Factory is an agent and coordinates the ten applications. The Power BI Dashboard Builder —built and tested: it creates the complete project with its semantic model, the preparation in Power Query M, the DAX measures and the visuals, and it can extract data— is an agent that produces the class of artifact that the six dashboards demonstrate by hand. And the research on the spectrum of agency studies precisely when a decision deserves a dashboard, an alert, a recommendation or an agent.
+The families also feed each other in the real pipeline. The two research harnesses produce the seven research lines; one of them, the Computational Paper, is published among the portfolio agents. The AI-APPs Factory is an agent and coordinates the ten applications. The Power BI Dashboard Builder —built and tested: it creates the complete project with its semantic model, the preparation in Power Query M, the DAX measures and the visuals, and it can extract data— is an agent that produces the class of artifact that the six dashboards demonstrate by hand. And the research on the spectrum of agency studies precisely when a decision deserves a dashboard, an alert, a recommendation or an agent.
 
 Each sheet must also declare which professional capability it intends to demonstrate. An application can evidence architecture, development or user experience. An agent can demonstrate knowledge retrieval, tool use or evaluation. A research line can demonstrate method. A dashboard can demonstrate data engineering, semantic modeling or analytical communication. This relationship prevents the pieces from becoming interesting projects that are disconnected from the profile they must support.
 
@@ -172,7 +172,7 @@ Every figure published in the technical sheets must declare its nature. A figure
 
 The rule was born in Dash Agent, the first app to publish its brochure in August 2026, and it was recommended to the rest of the portfolio with a simple argument: an app that demands provenance for every number on its screen cannot publish loose figures about itself. Thus, "740 tests" is measured —the output of a command on a date—; "US$0 a month" is calculated —the sum of contracted services, with the rule written down—; "0 GPU" in Probeta DS is declared —a hard product rule—; and the Factory's "108 hours of coordination eliminated per year" is an estimate, with its scenario and its assumptions next to it.
 
-The rule is not decorative. A portfolio that demands provenance from the data of its applications and dashboards must apply the same standard to the claims it makes about itself. The showcase does not only show what was built; it shows what evidence allows sustaining each claim.
+The rule is not decorative. A portfolio that demands provenance from the data of its applications and dashboards must apply the same standard to the claims it makes about itself. The portfolio does not only show what was built; it shows what evidence allows sustaining each claim.
 
 ## Demonstrated capability is not technology used
 
@@ -218,7 +218,7 @@ The portfolio is not built as a succession of independent projects. I use a pipe
 
 The pipeline works with two houses and one writer per house. A planning house, private, where the brief, the product vision, the sprints with their plan and their retrospective, the construction orders of each app, the method and the standards live. And the repository of each app, where the code, the tests, the implementation decisions, the log and the summary of each sprint live. The planning house reads the app repositories read-only and never writes in them; each app never writes in the plan. Synchronization is a cold read of git —the sprint summary and its commit history—, not copy and paste. Nobody is the bridge anymore: the previous flow cost me between 4 and 8 hours of coordination per sprint, and when that time ran out the pipeline froze.
 
-The pipeline is assisted by a factory agent that is also part of the showcase. Its function is not to design products autonomously nor to replace decisions of architecture, priority or acceptance. It acts as a coordination component: it keeps the state of the initiatives, verifies the existence of the required inputs, applies advancement rules, identifies documentation gaps and helps keep the correspondence between what was approved, what was built and what was published.
+The pipeline is assisted by a factory agent that is also part of the portfolio. Its function is not to design products autonomously nor to replace decisions of architecture, priority or acceptance. It acts as a coordination component: it keeps the state of the initiatives, verifies the existence of the required inputs, applies advancement rules, identifies documentation gaps and helps keep the correspondence between what was approved, what was built and what was published.
 
 Each app is born stamped from the same kit: the template that brings continuous integration, the hooks for secrets and for not pushing directly to the main branch, the performance budget and the embedded artificial intelligence pattern already baked in. The kit has a version and its lessons accumulate: what one sprint learns in one app travels stamped to the next, as deltas in the construction order that follows.
 
@@ -226,7 +226,7 @@ Each app is born stamped from the same kit: the template that brings continuous 
 
 <!-- seccion: la-fabrica-en-numeros -->
 
-It is coordinated by the AI-APPs Factory, an agent sealed on July 2, 2026 that is also a piece of the showcase, with its figures with provenance: seven repositories stamped from the kit —the six sisters and this site—, with the first commit of each between July 4 and August 15, 2026; 24 sprints closed with a retrospective; nine portfolio re-prioritization sessions, because priority expires every four sprints and its gate blocks all work until it is run again; and six human gates: portfolio, vision, sprint plan, release, editing the method and creating repositories or services.
+It is coordinated by the AI-APPs Factory, an agent sealed on July 2, 2026 that is also a piece of the portfolio, with its figures with provenance: seven repositories stamped from the kit —the six sisters and this site—, with the first commit of each between July 4 and August 15, 2026; 24 sprints closed with a retrospective; nine portfolio re-prioritization sessions, because priority expires every four sprints and its gate blocks all work until it is run again; and six human gates: portfolio, vision, sprint plan, release, editing the method and creating repositories or services.
 
 The Factory declares three limits, and I prefer writing them down to hiding them: it does not write production code —that happens in each app's repository, never in the planning house—; the launch and operation phases remain unvalidated in a real run, they are written method and not experience; and there are no live shared libraries between apps, reuse travels stamped in the kit. Its return only counts the coordination eliminated —an estimate of 108 hours a year, with its assumptions declared—; the commercial value of the portfolio remains an unquantified option.
 
@@ -276,7 +276,7 @@ This site is the destination, not the author, of what it shows. The sheets of th
 
 A sheet that does not validate is not corrected here, not even to make it fit: the file, field and rule are reported, and it is corrected at the source. If several do not fit for a legitimate reason of their front, the contract grows additively, in plan mode and with a recorded decision; that is how versions 1.2.0 and 1.3.0 were born. The contract is generated by the tests from the schema —the schema, an example, the visual key and the reference—, not by hand, so that the document and the validator cannot diverge.
 
-One contract and one renderer: the component that paints a sheet renders the schema, not a type of piece, and nothing specific to a front lives in it. What is specific to each front lives in data —the catalog of the four fronts with their state, name and introduction— or in the front's storefront. Thus, adding a piece to the showcase is copying a file and opening a pull request; and since September 2026, that same sheet enters the chat's index on the next build, without writing new prose.
+One contract and one renderer: the component that paints a sheet renders the schema, not a type of piece, and nothing specific to a front lives in it. What is specific to each front lives in data —the catalog of the four fronts with their state, name and introduction— or in the front's storefront. Thus, adding a piece to the portfolio is copying a file and opening a pull request; and since September 2026, that same sheet enters the chat's index on the next build, without writing new prose.
 
 ## Code first, artificial intelligence when it is justified
 
@@ -330,7 +330,7 @@ CV Viva, the platform from which this content is presented, is part of the portf
 
 The content is kept separate from the presentation and is managed through structured files and version control: the career, the studies, the achievements, the projects, the certifications and the skills live in one YAML file per language, validated with a Zod schema at build time. If the content is malformed, the build fails, not the page. This decision makes it possible to update the information without manually rebuilding each page, keep the history of changes and apply common rules on dates, sections, projects and claims. Editing the file and pushing updates the web, the PDF for applicant tracking systems and the chat all at once.
 
-Static generation reduces operational complexity and allows a significant part of the site to be consulted without depending on permanent processes on a server. All the content is in the static HTML: a recruiter, a screening bot or a download without JavaScript sees the entire CV, with structured data for search engines and the alternate language tags. The architecture seeks an experience that is fast, accessible and resilient to failures, and technical decisions that respond to the real purpose of the product. The features that are voted with one click and without registration are no longer this site's —CV Viva removed its own roadmap in September 2026 and today submits none of its own features to a vote—, but those of each sister app, on the page that application has in the showcase; the counter is real, on a database with an atomic function: if the database goes down, it says so; it never invents a number.
+Static generation reduces operational complexity and allows a significant part of the site to be consulted without depending on permanent processes on a server. All the content is in the static HTML: a recruiter, a screening bot or a download without JavaScript sees the entire CV, with structured data for search engines and the alternate language tags. The architecture seeks an experience that is fast, accessible and resilient to failures, and technical decisions that respond to the real purpose of the product. The features that are voted with one click and without registration are no longer this site's —CV Viva removed its own roadmap in September 2026 and today submits none of its own features to a vote—, but those of each sister app, on the page that application has in the portfolio; the counter is real, on a database with an atomic function: if the database goes down, it says so; it never invents a number.
 
 ## The chat, seen from the pipeline
 
@@ -368,7 +368,7 @@ I do not present this exploration as evidence of deep experience in Google Cloud
 
 The multi-cloud exploration does not seek to exactly duplicate an existing solution. It seeks to identify which principles remain and which decisions change when the same class of problem is approached through another ecosystem. Agent architecture keeps needs such as context, tools, evaluation, observability, security and governance, even though the concrete services and patterns are different.
 
-In both cases, the exit condition of the exploration must be defined before starting. A piece does not leave this state by having a functional interface or a convincing demo. It must have a verifiable purpose, a documented architecture, identified sources and dependencies, executed tests, satisfied quality criteria, a reproducible deployment and a sheet that clearly differentiates measured results from expectations not yet verified. Only then can it join the inventory of built pieces, and the showcase counter moves only when its sheet enters, not when I announce it.
+In both cases, the exit condition of the exploration must be defined before starting. A piece does not leave this state by having a functional interface or a convincing demo. It must have a verifiable purpose, a documented architecture, identified sources and dependencies, executed tests, satisfied quality criteria, a reproducible deployment and a sheet that clearly differentiates measured results from expectations not yet verified. Only then can it join the inventory of built pieces, and the portfolio counter moves only when its sheet enters, not when I announce it.
 
 ## What the pipeline demonstrates about how I work
 

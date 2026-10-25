@@ -91,20 +91,20 @@ const RUTAS = [
   // MISMA FASE (regla 9 + kit v1.24.1). El portal, el escaparate de apps, LAS
   // SEIS fichas (cada una en su ruta) y los frentes en preparación — se listan
   // desde los exports y el YAML para que una pieza nueva entre al scan sola.
-  "/es/vitrina",
-  "/en/vitrina",
-  "/es/vitrina/apps",
-  "/en/vitrina/apps",
+  "/es/portafolio",
+  "/en/portafolio",
+  "/es/portafolio/apps",
+  "/en/portafolio/apps",
   // Por app: la ficha técnica (ADR-016) Y su detalle — dos rutas, dos scans.
   ...slugsVitrina.flatMap((s) => [
-    `/es/vitrina/apps/${s}`,
-    `/en/vitrina/apps/${s}`,
-    `/es/vitrina/apps/${s}/detalle`,
-    `/en/vitrina/apps/${s}/detalle`,
+    `/es/portafolio/apps/${s}`,
+    `/en/portafolio/apps/${s}`,
+    `/es/portafolio/apps/${s}/detalle`,
+    `/en/portafolio/apps/${s}/detalle`,
   ]),
   ...slugsSimulacion.flatMap((s) => [
-    `/es/vitrina/apps/${s}/simulacion`,
-    `/en/vitrina/apps/${s}/simulacion`,
+    `/es/portafolio/apps/${s}/simulacion`,
+    `/en/portafolio/apps/${s}/simulacion`,
   ]),
   // «Métodos»: la lista y cada publicación (mapa SVG, riel, voces, fuentes).
   "/es/metodos",
@@ -112,12 +112,12 @@ const RUTAS = [
   ...slugsMetodo.flatMap((s) => [`/es/metodos/${s}`, `/en/metodos/${s}`]),
   // Cada frente, y cada pieza de los que están abiertos (S7).
   ...frentesYaml.flatMap((f) => [
-    `/es/vitrina/${f.id}`,
-    `/en/vitrina/${f.id}`,
+    `/es/portafolio/${f.id}`,
+    `/en/portafolio/${f.id}`,
     ...(f.estado === "abierta"
       ? piezasDe(f.id).flatMap((s) => [
-          `/es/vitrina/${f.id}/${s}`,
-          `/en/vitrina/${f.id}/${s}`,
+          `/es/portafolio/${f.id}/${s}`,
+          `/en/portafolio/${f.id}/${s}`,
         ])
       : []),
   ]),
@@ -190,7 +190,7 @@ test("axe limpio en la simulación abierta", async ({ page }) => {
   test.skip(!slugsSimulacion.length, "ninguna app tiene simulación");
   const erroresDePagina: string[] = [];
   page.on("pageerror", (e) => erroresDePagina.push(e.message));
-  await page.goto(`/es/vitrina/apps/${slugsSimulacion[0]}/simulacion`);
+  await page.goto(`/es/portafolio/apps/${slugsSimulacion[0]}/simulacion`);
   await page.locator('[data-cta="abrir-simulacion"]').click();
   await expect(page.locator("iframe[data-marco-simulacion]")).toBeVisible();
   const results = await new AxeBuilder({ page })
@@ -223,13 +223,13 @@ test("axe limpio en el 404 de la raíz", async ({ page }) => {
 // El carrusel de apps, en el FINAL (post-S9): el estado cambia la posición de la
 // pista y los velos, y el pedazo lateral es una tarjeta real con su enlace. El
 // scan de la ruta en reposo (inicio) no lo ve: este lo audita.
-test("axe limpio en /es/vitrina/apps con los carruseles en el final", async ({
+test("axe limpio en /es/portafolio/apps con los carruseles en el final", async ({
   page,
 }) => {
   test.slow();
   const erroresDePagina: string[] = [];
   page.on("pageerror", (e) => erroresDePagina.push(e.message));
-  await page.goto("/es/vitrina/apps");
+  await page.goto("/es/portafolio/apps");
   const carruseles = page.locator("[data-carrusel-apps]");
   for (let c = 0; c < (await carruseles.count()); c++) {
     const carrusel = carruseles.nth(c);

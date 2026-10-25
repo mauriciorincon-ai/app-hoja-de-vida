@@ -4,13 +4,13 @@ import { parse } from "yaml";
 
 // El orden de la HOME desde la revisión post-S7: la vitrina ocupa el sitio de
 // «Proyectos», los estudios tienen sección propia, y el roadmap se fue con las
-// apps a /vitrina/apps. Desde el S19, «Métodos» asoma sus publicaciones entre la
+// apps a /portafolio/apps. Desde el S19, «Métodos» asoma sus publicaciones entre la
 // vitrina y los estudios.
 const SECTIONS = [
   "perfil",
   "trayectoria",
   "logros",
-  "vitrina",
+  "portafolio",
   "metodos",
   "estudios",
   "certificaciones",
@@ -43,7 +43,7 @@ const piezasMetodo = readdirSync("data/metodo")
 
 // Roadmap votable (S4 · por app hermana desde 2026-09-13): las features viven
 // en el complemento curado de cada app, `data/fichas/<slug>.yaml`, y se votan
-// en la página de ESA app (`/vitrina/apps/<slug>`), no en el escaparate. Las
+// en la página de ESA app (`/portafolio/apps/<slug>`), no en el escaparate. Las
 // de CV Viva se retiraron por decisión del dueño: ninguna se muestra.
 const roadmaps = readdirSync("data/fichas")
   .filter((f) => f.endsWith(".yaml"))
@@ -81,14 +81,14 @@ test.describe("HOME — happy path del sprint", () => {
 
     // La sección «Apps» se retiró: prometía lo mismo que la vitrina y no
     // enseñaba apps visitables. Su contenido no se perdió — las dos con
-    // brochure se alcanzan desde «De esta casa» en /vitrina (brochure.spec).
+    // brochure se alcanzan desde «De esta casa» en /portafolio (brochure.spec).
     await expect(page.locator("#apps")).toHaveCount(0);
 
     // Ni «Proyectos» ni «Roadmap» viven ya en la HOME: la vitrina asoma sus
     // cuatro frentes y el roadmap está con las apps (vitrina.spec lo vigila).
     await expect(page.locator("#proyectos")).toHaveCount(0);
     await expect(page.locator("#roadmap")).toHaveCount(0);
-    await expect(page.locator("#vitrina [data-frente]")).toHaveCount(4);
+    await expect(page.locator("#portafolio [data-frente]")).toHaveCount(4);
 
     // Toggle de idioma (conserva la página, cambia la ruta) — timeout amplio:
     // bajo carga paralela la navegación client-side puede exceder los 5s
@@ -126,10 +126,10 @@ test.describe("HOME — happy path del sprint", () => {
       expect(html).toContain('hrefLang="es"');
       expect(html).toContain('hrefLang="en"');
       // Contenido de secciones sin ejecutar JS, en el idioma de la ruta. El
-      // roadmap se fue a /vitrina/apps (su gate ATS está allá): lo que la HOME
+      // roadmap se fue a /portafolio/apps (su gate ATS está allá): lo que la HOME
       // sigue exigiendo en el HTML estático es la vitrina asomada con sus
       // cuatro frentes y los estudios recién nacidos como sección.
-      expect(html).toContain('id="vitrina"');
+      expect(html).toContain('id="portafolio"');
       // La puerta a «Métodos» (S19) también vive en el HTML estático, con una
       // entrada por publicación del disco.
       expect(html).toContain('id="metodos"');
@@ -244,10 +244,10 @@ test.describe("HOME — happy path del sprint", () => {
 });
 
 test.describe("El roadmap vive en la página de cada app (2026-09-13)", () => {
-  test("el escaparate /vitrina/apps ya NO monta el roadmap: cada app vota en su página", async ({
+  test("el escaparate /portafolio/apps ya NO monta el roadmap: cada app vota en su página", async ({
     page,
   }) => {
-    await page.goto("/es/vitrina/apps");
+    await page.goto("/es/portafolio/apps");
     await expect(page.locator("#roadmap")).toHaveCount(0);
     // Y ninguna feature de CV Viva se muestra en ningún lado (dueño).
     const html = await page.content();
@@ -256,12 +256,12 @@ test.describe("El roadmap vive en la página de cada app (2026-09-13)", () => {
     }
   });
 
-  test("/vitrina/apps/<slug> enseña una fila votable por feature de ESA app, y la HOME ninguna", async ({
+  test("/portafolio/apps/<slug> enseña una fila votable por feature de ESA app, y la HOME ninguna", async ({
     page,
     request,
   }) => {
     for (const { app, roadmap } of roadmaps) {
-      await page.goto(`/es/vitrina/apps/${app}`);
+      await page.goto(`/es/portafolio/apps/${app}`);
       await page.locator("#roadmap").scrollIntoViewIfNeeded();
       await expect(page.locator("#roadmap [data-feature-id]")).toHaveCount(
         roadmap.length,
@@ -273,7 +273,7 @@ test.describe("El roadmap vive en la página de cada app (2026-09-13)", () => {
     // Gate ATS: la feature, en el HTML estático de la página de su app.
     for (const locale of ["es", "en"] as const) {
       const html = await (
-        await request.get(`/${locale}/vitrina/apps/${primerRoadmap.app}`)
+        await request.get(`/${locale}/portafolio/apps/${primerRoadmap.app}`)
       ).text();
       expect(html).toContain(primeraFeature.titulo[locale]);
     }
@@ -528,7 +528,7 @@ test.describe("JetBrains Mono se pide DESPUÉS de la carga", () => {
   // URLs de JetBrains y exige que cada petición suya empiece después de
   // `loadEventStart`. `habla` porque su ficha dibuja un proceso BPMN, que
   // nombraba la familia a mano y la pedía por su cuenta.
-  for (const ruta of ["/es", "/es/vitrina/apps/habla"]) {
+  for (const ruta of ["/es", "/es/portafolio/apps/habla"]) {
     test(`${ruta}: la petición de la mono empieza tras el evento load`, async ({
       page,
     }, testInfo) => {

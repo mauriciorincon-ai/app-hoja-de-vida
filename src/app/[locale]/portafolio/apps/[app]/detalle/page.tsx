@@ -17,16 +17,16 @@ import { getFicha, getFichasVitrina } from "@/lib/vitrina/loader";
 /**
  * EL DETALLE DE UNA APP — la ficha completa (S5, ADR-013 · reubicada en ADR-016).
  *
- * Vivía en `/vitrina/apps/<slug>`; esa ruta es ahora la FICHA TÉCNICA (la capa
- * infografía) y el detalle baja un nivel, a `/vitrina/apps/<slug>/detalle`. Se
+ * Vivía en `/portafolio/apps/<slug>`; esa ruta es ahora la FICHA TÉCNICA (la capa
+ * infografía) y el detalle baja un nivel, a `/portafolio/apps/<slug>/detalle`. Se
  * llega desde el botón «Ver la ficha completa» de la ficha técnica.
  *
  * Cada app hermana tiene aquí una ruta entera para su detalle.
  * Es lo que la convierte en algo que se puede abrir, marcar y recorrer sin
- * arrastrar a las otras cinco. El escaparate (`/vitrina/apps`) solo las asoma,
- * y el portal (`/vitrina`) es el que reparte entre los cuatro frentes
+ * arrastrar a las otras cinco. El escaparate (`/portafolio/apps`) solo las asoma,
+ * y el portal (`/portafolio`) es el que reparte entre los cuatro frentes
  * (ADR-015): por eso las apps viven bajo su propio segmento y no sueltas en
- * `/vitrina/<slug>`, donde un slug de app chocaría con el de un frente.
+ * `/portafolio/<slug>`, donde un slug de app chocaría con el de un frente.
  *
  * 100% SSG: `generateStaticParams` cruza los dos idiomas con los slugs que
  * traen los `brochure-export.json` — agregar una app hermana es dejar caer su
@@ -57,9 +57,9 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     description: ficha.export.promesa.tagline,
     alternates: {
       languages: {
-        es: `/es/vitrina/apps/${app}/detalle`,
-        en: `/en/vitrina/apps/${app}/detalle`,
-        "x-default": `/es/vitrina/apps/${app}/detalle`,
+        es: `/es/portafolio/apps/${app}/detalle`,
+        en: `/en/portafolio/apps/${app}/detalle`,
+        "x-default": `/es/portafolio/apps/${app}/detalle`,
       },
     },
   };
@@ -96,7 +96,7 @@ export default async function DetalleAppPage({ params }: Params) {
         <div className="mx-auto max-w-4xl px-4 py-10 md:px-6 md:py-14">
           <nav aria-label={t("migaEtiqueta")} className="mb-8">
             <Link
-              href={`/vitrina/apps/${app}`}
+              href={`/portafolio/apps/${app}`}
               className="inline-flex min-h-11 items-center gap-2 font-mono text-[11px] tracking-[0.08em] text-ink-2 uppercase hover:text-ink-0"
             >
               <span aria-hidden="true">←</span>
@@ -120,7 +120,7 @@ export default async function DetalleAppPage({ params }: Params) {
               >
                 {anterior ? (
                   <Link
-                    href={`/vitrina/apps/${anterior.ancla.slug}/detalle`}
+                    href={`/portafolio/apps/${anterior.ancla.slug}/detalle`}
                     className="flex min-h-11 flex-col justify-center rounded-[10px] border border-paper-2 bg-paper-0 px-5 py-4 transition-[box-shadow] duration-[180ms] hover:shadow-sh-1"
                   >
                     <span className="font-mono text-[11px] tracking-[0.08em] text-ink-2 uppercase">
@@ -135,7 +135,7 @@ export default async function DetalleAppPage({ params }: Params) {
                 )}
                 {siguiente && (
                   <Link
-                    href={`/vitrina/apps/${siguiente.ancla.slug}/detalle`}
+                    href={`/portafolio/apps/${siguiente.ancla.slug}/detalle`}
                     className="flex min-h-11 flex-col justify-center rounded-[10px] border border-paper-2 bg-paper-0 px-5 py-4 transition-[box-shadow] duration-[180ms] hover:shadow-sh-1 sm:items-end sm:text-right"
                   >
                     <span className="font-mono text-[11px] tracking-[0.08em] text-ink-2 uppercase">
@@ -151,7 +151,7 @@ export default async function DetalleAppPage({ params }: Params) {
           )}
 
           {/* El anclaje del CTA de la ficha vive en ESTA página: el botón
-              «avísame» apunta a `#contacto-vitrina`. Pero el FORMULARIO de la
+              «avísame» apunta a `#contacto-portafolio`. Pero el FORMULARIO de la
               lista de espera vive en la página inicial de la app (la ficha
               técnica), no aquí: el detalle es la página más pesada de la
               vitrina y una isla más la sacó del presupuesto de interactividad
@@ -159,7 +159,7 @@ export default async function DetalleAppPage({ params }: Params) {
               manda al formulario con la app ya elegida. */}
           <Reveal variant="fadeInUp">
             <section
-              id="contacto-vitrina"
+              id="contacto-portafolio"
               aria-labelledby="vitrina-cierre"
               className="mt-12 scroll-mt-16 border-t border-paper-2 pt-10"
             >
@@ -173,7 +173,7 @@ export default async function DetalleAppPage({ params }: Params) {
                 {t("listaDeEsperaLinea")}
               </p>
               <Link
-                href={`/vitrina/apps/${app}#contacto-vitrina`}
+                href={`/portafolio/apps/${app}#contacto-portafolio`}
                 data-cta="ir-a-lista-de-espera"
                 className="mt-5 flex min-h-11 w-fit items-center gap-2 rounded-md bg-sage px-6 text-[15px] font-medium text-sage-ink shadow-sh-1 transition-[filter] duration-[120ms] hover:brightness-[0.97]"
               >

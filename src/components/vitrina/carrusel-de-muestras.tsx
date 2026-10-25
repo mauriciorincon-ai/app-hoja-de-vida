@@ -14,7 +14,7 @@ import {
 import { usePrefiereQuieto } from "@/components/motion/use-prefiere-quieto";
 
 /**
- * CARRUSEL DE MUESTRAS DE APP — los bloques de `/vitrina/apps` (post-S9).
+ * CARRUSEL DE MUESTRAS DE APP — los bloques de `/portafolio/apps` (post-S9).
  *
  * Cada bloque de categoría (Profesionales · Personales) pone sus muestras en
  * una pista que se recorre con los dos botones, con el dedo, con las flechas

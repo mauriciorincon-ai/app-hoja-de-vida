@@ -623,14 +623,14 @@ bloques:
           es: "En el pipeline AI-APPs ninguna aplicación avanza sin dos aprobaciones escritas —la prioridad vigente y la visión del producto— y las decisiones críticas conservan responsables humanos: de 12 iniciativas concebidas, solo 7 tienen repositorio."
           en: "In the AI-APPs pipeline no application moves forward without two written approvals —the current priority and the product vision— and critical decisions keep explicit human owners: of 12 initiatives conceived, only 7 have a repository."
         corpus: [apps-pipeline]
-        href: /vitrina/apps
-      - nombre: { es: "La vitrina, producto de la fábrica", en: "The showcase, a product of the factory" }
+        href: /portafolio/apps
+      - nombre: { es: "El portafolio, producto de la fábrica", en: "The portfolio, a product of the factory" }
         nivel: uso-real
         texto:
           es: "Diez aplicaciones hermanas, 11 agentes, 7 investigaciones y 6 tableros —34 piezas, sin contar este sitio— salen de un pipeline con dos casas, un agente de fábrica, cuatro jobs de integración continua y un contrato de ficha."
           en: "Ten sister applications, 11 agents, 7 research lines and 6 dashboards —34 pieces, not counting this site— come out of a pipeline with two houses, a factory agent, four CI jobs and a sheet contract."
         corpus: [apps-pipeline]
-        href: /vitrina
+        href: /portafolio
       - nombre: { es: "Banco Pichincha: adopción y formación como parte del producto", en: "Banco Pichincha: adoption and training as part of the product" }
         nivel: uso-real
         texto:

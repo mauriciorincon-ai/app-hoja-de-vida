@@ -130,7 +130,7 @@ jobs:
         # Solo páginas PÚBLICAS (wiki: lighthouse-solo-paginas-publicas). La lista
         # vive en lighthouse-urls.json y NO en este YAML: las dos aserciones de abajo
         # juzgan lo recolectado, así que una sola lista evita que se desincronicen.
-        # El budget (ADR-006) cubre las rutas del S4 (roadmap en /es/vitrina/apps,
+        # El budget (ADR-006) cubre las rutas del S4 (roadmap en /es/portafolio/apps,
         # brochures) y del S7 (un escaparate no-app y una de sus fichas — son
         # plantillas, basta una de cada).
         # S8: la raíz «/» salió de la lista y entró «/es». La raíz es un 307 que

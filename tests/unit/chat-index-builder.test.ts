@@ -145,7 +145,7 @@ describe("buildChunks (YAML + «a fondo» → chunks con ancla)", () => {
   });
 
   it("las apps ya no citan «#apps»: esa sección de la HOME murió en la revisión post-S7", () => {
-    expect(porId.get("app-hoja-de-vida")?.ancla).toBe("#vitrina");
+    expect(porId.get("app-hoja-de-vida")?.ancla).toBe("#portafolio");
   });
 
   it("el caso de estudio indexa tesis, cifras, impacto y lección, y un fragmento por capítulo", () => {

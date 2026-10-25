@@ -31,7 +31,7 @@ import { getPiezas, type Frente as FrentePieza } from "@/lib/vitrina/piezas";
  *    ofrece la lista de espera, sin fecha prometida (regla 16).
  *  - **`abierta`** (S7) — el frente tiene piezas reales: es el ESCAPARATE, una
  *    muestra corta por pieza, y cada una con su ruta propia en
- *    `/vitrina/<frente>/<slug>`.
+ *    `/portafolio/<frente>/<slug>`.
  *
  * Un frente no puede declararse `abierta` sin piezas: `parseVitrina` rompe el
  * build nombrándolo. Así que aquí no hay que defenderse de un escaparate vacío
@@ -66,9 +66,9 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     description: frente.intro[l],
     alternates: {
       languages: {
-        es: `/es/vitrina/${categoria}`,
-        en: `/en/vitrina/${categoria}`,
-        "x-default": `/es/vitrina/${categoria}`,
+        es: `/es/portafolio/${categoria}`,
+        en: `/en/portafolio/${categoria}`,
+        "x-default": `/es/portafolio/${categoria}`,
       },
     },
   };
@@ -98,7 +98,7 @@ export default async function FrentePage({ params }: Params) {
         >
           <nav aria-label={t("migaEtiqueta")} className="mb-8">
             <Link
-              href="/vitrina"
+              href="/portafolio"
               className="inline-flex min-h-11 items-center gap-2 font-mono text-[11px] tracking-[0.08em] text-ink-2 uppercase hover:text-ink-0"
             >
               <span aria-hidden="true">←</span>
@@ -189,7 +189,7 @@ export default async function FrentePage({ params }: Params) {
                 {otros.map((f) => (
                   <li key={f.id} className="list-none">
                     <Link
-                      href={`/vitrina/${f.id}`}
+                      href={`/portafolio/${f.id}`}
                       data-frente-vecino={f.id}
                       className="flex h-full min-h-11 flex-col justify-center rounded-[10px] border border-paper-2 bg-paper-0 px-5 py-4 transition-[box-shadow] duration-[180ms] hover:shadow-sh-1"
                     >
@@ -232,7 +232,7 @@ export default async function FrentePage({ params }: Params) {
               <Link
                 href={
                   frente.listaDeEspera
-                    ? "/vitrina/apps#contacto-vitrina"
+                    ? "/portafolio/apps#contacto-portafolio"
                     : "/#contacto"
                 }
                 data-cta={

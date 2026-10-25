@@ -74,7 +74,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const publicada = piezaPublicada(categoria, pieza);
   if (!publicada) return {};
   const t = await getTranslations({ locale, namespace: "fichaTecnica" });
-  const ruta = `/vitrina/${categoria}/${pieza}`;
+  const ruta = `/portafolio/${categoria}/${pieza}`;
 
   return {
     metadataBase: new URL(SITE_URL),
@@ -117,7 +117,7 @@ export default async function FichaDePiezaPage({ params }: Params) {
         <div className="mx-auto max-w-5xl px-4 py-10 md:px-6 md:py-14">
           <nav aria-label={t("migaEtiqueta")} className="mb-8">
             <Link
-              href={`/vitrina/${categoria}`}
+              href={`/portafolio/${categoria}`}
               className="inline-flex min-h-11 items-center gap-2 font-mono text-[11px] tracking-[0.08em] text-ink-2 uppercase hover:text-ink-0"
             >
               <span aria-hidden="true">←</span>
@@ -136,7 +136,7 @@ export default async function FichaDePiezaPage({ params }: Params) {
               >
                 {anterior ? (
                   <Link
-                    href={`/vitrina/${categoria}/${anterior.pieza.slug}`}
+                    href={`/portafolio/${categoria}/${anterior.pieza.slug}`}
                     className="flex min-h-11 flex-col justify-center rounded-[10px] border border-paper-2 bg-paper-0 px-5 py-4 transition-[box-shadow] duration-[180ms] hover:shadow-sh-1"
                   >
                     <span className="font-mono text-[11px] tracking-[0.08em] text-ink-2 uppercase">
@@ -151,7 +151,7 @@ export default async function FichaDePiezaPage({ params }: Params) {
                 )}
                 {siguiente && (
                   <Link
-                    href={`/vitrina/${categoria}/${siguiente.pieza.slug}`}
+                    href={`/portafolio/${categoria}/${siguiente.pieza.slug}`}
                     className="flex min-h-11 flex-col justify-center rounded-[10px] border border-paper-2 bg-paper-0 px-5 py-4 transition-[box-shadow] duration-[180ms] hover:shadow-sh-1 sm:items-end sm:text-right"
                   >
                     <span className="font-mono text-[11px] tracking-[0.08em] text-ink-2 uppercase">

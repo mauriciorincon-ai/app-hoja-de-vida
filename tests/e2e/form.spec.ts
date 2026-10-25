@@ -30,7 +30,7 @@ test.describe("Formulario de contacto (antes «solicitar acceso»)", () => {
   test("lista de espera de apps (vitrina): «otra» nunca sobra, y envía", async ({
     page,
   }) => {
-    await page.goto("/es/vitrina/apps");
+    await page.goto("/es/portafolio/apps");
     const form = page.locator('form[data-formulario="app"]');
     await form.scrollIntoViewIfNeeded();
     await page
@@ -46,7 +46,7 @@ test.describe("Formulario de contacto (antes «solicitar acceso»)", () => {
   test("propuesta de funcionalidad: debajo del roadmap de una app, solo texto, y confirma sin salir", async ({
     page,
   }) => {
-    await page.goto("/es/vitrina/apps/habla");
+    await page.goto("/es/portafolio/apps/habla");
     const form = page.locator('form[data-formulario="propuesta"]');
     await form.scrollIntoViewIfNeeded();
     await page
@@ -72,7 +72,7 @@ test.describe("Formulario de contacto (antes «solicitar acceso»)", () => {
       .fill("Que lea cuentos con la voz de la abuela.");
     await form.getByRole("button", { name: "Proponer" }).click();
     await expect(form.getByText(/Recibí tu propuesta/)).toBeVisible();
-    await expect(page).toHaveURL(/\/es\/vitrina\/apps\/habla$/);
+    await expect(page).toHaveURL(/\/es\/portafolio\/apps\/habla$/);
   });
 
   test("honeypot lleno: el API responde 200 silencioso (negativo)", async ({

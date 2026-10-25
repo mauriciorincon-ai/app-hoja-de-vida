@@ -240,8 +240,8 @@ export function buildChunks({
       `${L.apps} — ${app.nombre[locale]}`,
       `${app.nombre[locale]} (${app.estado}): ${app.descripcion[locale]}`,
       // «#apps» murió en la revisión post-S7 (la sección se retiró y el roadmap
-      // se fue a /vitrina/apps). Lo que la HOME enseña hoy es la vitrina.
-      "#vitrina",
+      // se fue a /portafolio/apps). Lo que la HOME enseña hoy es la vitrina.
+      "#portafolio",
       "APP",
     );
   }

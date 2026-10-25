@@ -431,7 +431,7 @@ The architecture will have to integrate open or synthetic information, analytica
 controlled access to structured data, knowledge retrieval and tool usage. The agent will have a
 delimited purpose, input and output contracts, acceptance criteria and conditions under which it
 must abstain or request intervention, which is exactly what I demand today of the 11 agents
-published in my showcase.
+published in my portfolio.
 
 BigQuery will make it possible to structure the data and analytics dimension. Google's
 artificial intelligence platform will provide the models, development mechanisms and

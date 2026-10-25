@@ -25,7 +25,7 @@ export type Frente = CategoriaVitrina & {
 
 /**
  * El nombre del frente que NO se sirve por la ruta genérica: `apps` tiene su
- * propio segmento estático (`/vitrina/apps/...`), con export + curación en vez
+ * propio segmento estático (`/portafolio/apps/...`), con export + curación en vez
  * de una ficha completa en `content/`. Estaba escrito a mano en cuatro sitios y
  * la regla se re-derivaba en cada uno; ahora se pregunta, no se recuerda.
  */

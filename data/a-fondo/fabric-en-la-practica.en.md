@@ -652,7 +652,7 @@ explore how certain definitions, measures or structures can be made available to
 or agents without letting them freely rebuild the institutional logic.
 
 It remains declared as an exploration because it does not yet meet all the criteria needed to
-join the inventory of the 34 built pieces of the showcase. It will not change status for having
+join the inventory of the 34 built pieces of the portfolio. It will not change status for having
 a working connection or a convincing dashboard. It will have to have documented architecture,
 reproducible deployment, quality controls, a verifiable semantic model, performance criteria and
 enough evidence about its results, which is the same bar the 10 sibling applications already

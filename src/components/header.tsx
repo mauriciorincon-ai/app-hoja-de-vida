@@ -39,11 +39,15 @@ import { guardarAncla, restaurarAncla } from "@/lib/ancla-de-scroll";
  * de pantalla y para cualquiera). Así que el primer nivel, que es la RUTA del
  * portal, pasa a «Portafolio»: el nombre que sus propios CTAs ya le daban
  * («Explora el portafolio»). Una es la sección, la otra la casa.
+ *
+ * Y una sola palabra (S23, 2026-10-25): «Vitrina» se llama «Portafolio» en todo
+ * el sitio, así que la sección de la HOME sale del desplegable —el primer
+ * nivel «Portafolio» ya es la puerta, y dos «Portafolio» a sitios distintos
+ * serían la misma trampa—. El desplegable queda con CINCO secciones.
  */
 const HOJA_DE_VIDA = [
   "trayectoria",
   "logros",
-  "vitrina",
   "estudios",
   "certificaciones",
   "skills",
@@ -51,7 +55,7 @@ const HOJA_DE_VIDA = [
 
 /**
  * Destinos que se ganan su sitio en el primer nivel. «Roadmap» ya no está:
- * es una pregunta sobre las apps y vive con ellas, en /vitrina/apps
+ * es una pregunta sobre las apps y vive con ellas, en /portafolio/apps
  * (revisión post-S7). El primer nivel quedaba en TRES: Hoja de vida · Vitrina
  * · Contacto. Con «Métodos» (S10, 2026-10-17; «Mi método» hasta el S14) son CUATRO:
  * es la sección propia `/metodos`, las publicaciones sobre cómo se diseñan y se
@@ -60,13 +64,13 @@ const HOJA_DE_VIDA = [
 const DIRECTAS = ["contacto"] as const;
 
 /**
- * `enHome=false` (páginas de detalle, /cv y /vitrina): los anchors del nav
+ * `enHome=false` (páginas de detalle, /cv y /portafolio): los anchors del nav
  * apuntan a la HOME (`/{locale}#seccion`) en vez del fragmento local.
  *
  * Dos disclosures, el mismo contrato de accesibilidad en ambos
  * (`aria-expanded` + `aria-controls`, Escape cierra y devuelve el foco al botón
  * que abrió, elegir una opción cierra):
- *  - **Hoja de vida** (≥md): agrupa las seis secciones del CV.
+ *  - **Hoja de vida** (≥md): agrupa las cinco secciones del CV.
  *  - **Hamburguesa** (<md): el menú completo, con la hoja de vida como grupo.
  */
 export function Header({
@@ -77,7 +81,6 @@ export function Header({
   enHome?: boolean;
 }) {
   const t = useTranslations("nav");
-  const tHome = useTranslations("vitrinaHome");
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
@@ -146,10 +149,7 @@ export function Header({
   }, [locale]);
 
   const href = (s: string) => (enHome ? `#${s}` : `/${locale}#${s}`);
-  // La sección de la vitrina en la HOME se llama como en la página («Vitrina»);
-  // el portal, en el primer nivel, es «Portafolio» (post-S8).
-  const etiqueta = (s: (typeof HOJA_DE_VIDA)[number]) =>
-    s === "vitrina" ? tHome("titulo") : t(s);
+  const etiqueta = (s: (typeof HOJA_DE_VIDA)[number]) => t(s);
 
   const ENLACE =
     "flex min-h-11 items-center text-sm text-ink-2 transition-colors duration-[120ms] hover:text-ink-0";
@@ -177,7 +177,7 @@ export function Header({
           aria-label={locale === "es" ? "Secciones" : "Sections"}
           className="hidden items-center gap-5 md:flex"
         >
-          {/* Las seis secciones del CV, bajo un solo destino. */}
+          {/* Las cinco secciones del CV, bajo un solo destino. */}
           <div ref={hvRef} className="relative">
             <button
               ref={hvToggleRef}
@@ -217,7 +217,7 @@ export function Header({
 
           {/* El portafolio es RUTA propia, no ancla de la HOME — y es la única
               puerta a «lo construido» desde que «Apps» dejó de existir. */}
-          <a href={`/${locale}/vitrina`} className={ENLACE}>
+          <a href={`/${locale}/portafolio`} className={ENLACE}>
             {t("portafolio")}
           </a>
           {/* «Métodos» (S10) también es RUTA propia (`/metodos`), no ancla de la
@@ -316,7 +316,7 @@ export function Header({
             </li>
             <li className="mt-2 border-t border-paper-2 pt-1">
               <a
-                href={`/${locale}/vitrina`}
+                href={`/${locale}/portafolio`}
                 onClick={() => setMenuAbierto(false)}
                 className="flex min-h-11 items-center text-sm text-ink-1 transition-colors duration-[120ms] hover:text-ink-0"
               >

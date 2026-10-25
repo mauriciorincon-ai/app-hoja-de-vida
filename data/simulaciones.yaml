@@ -3,7 +3,7 @@
 # Algunas apps del pipeline no se publican como producto (la app es privada),
 # pero su casa entrega una SIMULACIÓN estática que CV Viva publica: un paquete
 # de páginas que se copia tal cual a `public/piezas/<carpeta>/` y se muestra
-# dentro de este sitio, en `/vitrina/apps/<slug>/simulacion`, en un marco.
+# dentro de este sitio, en `/portafolio/apps/<slug>/simulacion`, en un marco.
 # La planeadora lo pidió así para planlang (SPRINT_002) y Big-D (C21): «página
 # SSG en iframe del mismo sitio».
 #
@@ -26,5 +26,5 @@ simulaciones:
       es: es.html
       en: en.html
     nota:
-      es: "La vitrina de planlang tal como la entrega su casa: el plan, el agente y la brecha de dos demos, caso por caso, y un playground para mover umbrales. Las decisiones humanas se simularon en lote; nada se ejecuta al visitarla."
-      en: "planlang's showcase as its house delivers it: the plan, the agent and the gap of two demos, case by case, and a playground to move thresholds. Human decisions were simulated in batch; nothing runs when you visit it."
+      es: "El portafolio de planlang tal como lo entrega su casa: el plan, el agente y la brecha de dos demos, caso por caso, y un playground para mover umbrales. Las decisiones humanas se simularon en lote; nada se ejecuta al visitarla."
+      en: "planlang's portfolio as its house delivers it: the plan, the agent and the gap of two demos, case by case, and a playground to move thresholds. Human decisions were simulated in batch; nothing runs when you visit it."

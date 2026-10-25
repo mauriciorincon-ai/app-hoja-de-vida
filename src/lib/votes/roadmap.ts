@@ -12,7 +12,7 @@ import { getManifestVitrina } from "@/lib/vitrina/loader";
  * roadmap NO sale de `apps.yaml` sino del complemento curado de cada app
  * hermana, `data/fichas/<slug>.yaml` (procedencia cv-viva: lo administra la
  * planeadora y llega por copia). Ninguna feature de CV Viva se muestra, y cada
- * app vota en su propia página (`/vitrina/apps/<slug>`).
+ * app vota en su propia página (`/portafolio/apps/<slug>`).
  */
 
 export type AppConRoadmap = {

@@ -65,7 +65,7 @@ trayectoria:
   # abril de 2024 (el dueño movió el inicio de 2023 a 2024 el 2026-10-05) y el
   # PDF lo pinta en su propia sección. La descripción es la primera línea de
   # su LinkedIn, dictada por él. Sus bullets NOMBRAN las piezas y no las
-  # cuentan: la vitrina crece cada semana y un total escrito aquí caducaría en
+  # cuentan: el portafolio crece cada semana y un total escrito aquí caducaría en
   # días. Lo vigila tests/unit/content.test.ts, que además exige que ni este
   # hito ni el corpus fechen el inicio en otro año que el de `periodo`.
   - periodo: "abril 2024 — hoy"
@@ -81,7 +81,7 @@ trayectoria:
       - "Otras aplicaciones del pipeline: Dash Agent, para analizar el contexto y el costo de los agentes de IA, con 693 pruebas y 97,5 % de cobertura de líneas (agosto de 2026); Habla San, sellada y en uso por la familia para la que se construyó."
       - "Agentes con criterios binarios de aceptación y puntos de control humano: el Experto ISO 42001, el Constructor de Tableros Power BI y la Fábrica de AI-APPs."
       - "Un pipeline de investigación, con los harnesses Design Science y Paper Computacional, que fija los criterios antes de medir, mide el vacío de la literatura y lleva cada estudio hasta un manuscrito listo para enviar."
-      - "Investigación propia: ARKHÉ, que en mis mediciones redujo un 52 % el consumo de tokens, aún sin un artefacto publicado; FORJA; las investigaciones y los tableros sobre datos abiertos de la vitrina."
+      - "Investigación propia: ARKHÉ, que en mis mediciones redujo un 52 % el consumo de tokens, aún sin un artefacto publicado; FORJA; las investigaciones y los tableros sobre datos abiertos del portafolio."
     actual: true
   # Vesting fue de agosto de 2023 a enero de 2025: ese es el periodo REAL, el
   # que leen el PDF, /cv, el chat y los casos. «2024 — 2025» es la decisión
@@ -570,7 +570,7 @@ proyectos:
           texto: >-
             Construimos más de 20 instrumentos del sistema de gestión —políticas, procedimientos, matrices
             y criterios—, un tercio de ellos terminados. Para revisarlos construí el agente experto en ISO
-            42001 que publico en la vitrina: cita la norma o declara el vacío, y ningún dictamen
+            42001 que publico en el portafolio: cita la norma o declara el vacío, y ningún dictamen
             avanza sin una persona.
       impacto:
         - "más de 25 productos analíticos en uso para unos 20 líderes de unos 15 procesos y unos 75 usuarios."
@@ -641,7 +641,7 @@ proyectos:
           texto: >-
             Los datos mostraban dos problemas que no podía resolver desde la supervisión: la
             asignación conductor–vehículo–ruta y el apelotonamiento de buses. Hoy son dos de las
-            investigaciones que publico en la vitrina, con su método y su resultado.
+            investigaciones que publico en el portafolio, con su método y su resultado.
       impacto:
         - "Informes semanales y mensuales de desempeño para unas 150 rutas, trazables desde la cifra hasta el registro."
         - "Un 30 % menos de tiempo de procesamiento con la automatización ETL en VBA, Power Query y SQL que alimentaba los informes de supervisión de las rutas."

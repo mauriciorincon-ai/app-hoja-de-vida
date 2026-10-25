@@ -211,7 +211,7 @@ bloques:
           voz: hice
           texto:
             es: "Así nacen los once agentes que este sitio muestra y que corren sobre Claude Code: una constitución en un CLAUDE.md, el harness con sus criterios binarios —20 en el Constructor de Tableros Power BI, 44 en el Paper Computacional— y una carnada por control."
-            en: "That is how the eleven agents in this site’s showcase that run on Claude Code are born: a constitution in a CLAUDE.md, the harness with its binary criteria —20 in the Power BI Dashboard Builder, 44 in the Computational Paper— and a bait case for each control."
+            en: "That is how the eleven agents in this site’s portfolio that run on Claude Code are born: a constitution in a CLAUDE.md, the harness with its binary criteria —20 in the Power BI Dashboard Builder, 44 in the Computational Paper— and a bait case for each control."
           corpus: [los-agentes-de-la-vitrina]
       - nombre: { es: "Evaluar antes de ponerlo en producción", en: "Evaluate before putting it into production" }
         entradas:
@@ -532,35 +532,35 @@ bloques:
           es: "Harnesses especializados que fijan a cada agente función, fuentes, herramientas y contrato. En mediciones propias del autor sobre 120 escenarios, frente a un generalista: 52 % menos tokens y cumplimiento de instrucciones del 71 % al 93 %. Es de uso personal; no se presenta como producción."
           en: "Specialized harnesses that set each agent’s function, sources, tools and contract. In the author’s own measurements over 120 scenarios, against a generalist: 52% fewer tokens and instruction compliance from 71% to 93%. It is for personal use; it is not presented as production."
         corpus: [agentes-en-produccion, las-investigaciones]
-        href: /vitrina/investigaciones # en pausa (2026-10-24); al reabrir: /vitrina/investigaciones/arkhe
+        href: /portafolio/investigaciones # en pausa (2026-10-24); al reabrir: /portafolio/investigaciones/arkhe
       - nombre: { es: "FORJA: del BPMN a una orquestación de agentes", en: "FORJA: from BPMN to an orchestration of agents" }
         nivel: prototipo
         texto:
           es: "FORJA es una de las investigaciones del autor: un compilador que convierte un proceso dibujado en BPMN en una orquestación de agentes. Del BPMN conserva la estructura —cada actividad se abre con entradas, función y salidas, y cada elemento traza a su realización—: en el paper sellado conservó el 99,5 %. Verificadores de distintas familias vigilan la conformidad. El demostrador existe."
           en: "FORJA is one of the author’s research lines: a compiler that turns a process drawn in BPMN into an orchestration of agents. From the BPMN it preserves the structure —every activity is opened up with inputs, function and outputs, and every element traces to its realization—: in the sealed paper it preserved 99.5%. Verifiers from different families watch for conformance. The demonstrator exists."
         corpus: [las-investigaciones]
-        href: /vitrina/investigaciones # en pausa (2026-10-24); al reabrir: /vitrina/investigaciones/forja
-      - nombre: { es: "Los agentes de la vitrina, sobre Claude Code", en: "The showcase agents, on Claude Code" }
+        href: /portafolio/investigaciones # en pausa (2026-10-24); al reabrir: /portafolio/investigaciones/forja
+      - nombre: { es: "Los agentes del portafolio, sobre Claude Code", en: "The portfolio agents, on Claude Code" }
         nivel: uso-real
         texto:
           es: "Doce sistemas de trabajo con constitución, harness, criterios binarios, carnadas y gates humanos con palabra literal; cinco están sellados. Son de uso personal, con entregables y evidencia."
           en: "Twelve work systems with a constitution, a harness, binary criteria, bait cases and human gates with a literal word; five are sealed. They are for personal use, with deliverables and evidence."
         corpus: [los-agentes-de-la-vitrina]
-        href: /vitrina/agentes
+        href: /portafolio/agentes
       - nombre: { es: "Constructor de Tableros Power BI", en: "Power BI Dashboard Builder" }
         nivel: uso-real
         texto:
           es: "Crea medidas, columnas y relaciones por el servidor MCP de modelado, probando cada medida en DAX, y escribe el reporte en el JSON nativo de Power BI; 20 criterios y 5 gates humanos, y ninguna corrida cierra sin el render aprobado por una persona."
           en: "Creates measures, columns and relationships through the modeling MCP server, testing every measure in DAX, and writes the report in Power BI’s native JSON; 20 criteria and 5 human gates, and no run closes without a person approving the render."
         corpus: [los-agentes-de-la-vitrina]
-        href: /vitrina/agentes/constructor-tableros-powerbi
+        href: /portafolio/agentes/constructor-tableros-powerbi
       - nombre: { es: "Experto ISO 42001", en: "ISO 42001 Expert" }
         nivel: uso-real
         texto:
           es: "Cada afirmación normativa cita apartado y página o declara el vacío, y ningún dictamen con consecuencias avanza sin la aprobación de una persona. Es el que se usa en la estrategia de IA de la Fundación CTIC, en la versión inicial (v1.0.0) de su ficha."
           en: "Every normative claim cites clause and page or declares the gap, and no ruling with consequences moves forward without a person’s approval. It is the one used in Fundación CTIC’s AI strategy, in the initial version (v1.0.0) of its technical sheet."
         corpus: [los-agentes-de-la-vitrina, fundacion-ctic]
-        href: /vitrina/agentes/experto-iso42001
+        href: /portafolio/agentes/experto-iso42001
       - nombre: { es: "LangChain, LangGraph, LangSmith y Langflow", en: "LangChain, LangGraph, LangSmith and Langflow" }
         nivel: uso-real
         texto:
@@ -586,8 +586,8 @@ bloques:
     limites:
       - voz: hice
         texto:
-          es: "La palabra «producción» se reserva para los 27 agentes de Vesting. Los de ARKHÉ y los de la vitrina son sistemas de trabajo de uso personal: no han tenido usuarios distintos de su autor."
-          en: "The word “production” is reserved for the 27 agents at Vesting. The ones in ARKHÉ and in the showcase are personal-use work systems: they have had no users other than their author."
+          es: "La palabra «producción» se reserva para los 27 agentes de Vesting. Los de ARKHÉ y los del portafolio son sistemas de trabajo de uso personal: no han tenido usuarios distintos de su autor."
+          en: "The word “production” is reserved for the 27 agents at Vesting. The ones in ARKHÉ and in the portfolio are personal-use work systems: they have had no users other than their author."
         corpus: [agentes-en-produccion, los-agentes-de-la-vitrina]
       - voz: hice
         texto:

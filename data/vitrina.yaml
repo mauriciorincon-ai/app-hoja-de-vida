@@ -1,6 +1,6 @@
-# Los cuatro frentes de la vitrina — "lo que se construye aquí", por categoría.
+# Los cuatro frentes del portafolio — "lo que se construye aquí", por categoría.
 # Agregar/editar un frente = editar este archivo + push (cero cambios de código).
-# `id` es la ruta: /es/vitrina/<id>. Cada frente tiene nombre, una intro corta
+# `id` es la ruta: /es/portafolio/<id>. Cada frente tiene nombre, una intro corta
 # (la que se lee en su caja del portal) y un detalle (el párrafo de su página).
 #
 # Estados honestos:

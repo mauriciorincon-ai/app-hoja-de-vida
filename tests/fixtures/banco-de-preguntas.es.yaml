@@ -449,60 +449,60 @@ preguntas:
     familia: procesos
 
   # ─────────────────────────────────────────────────────────────────────
-  # La vitrina: lo que construye en público
+  # El portafolio: lo que construye en público
   # ─────────────────────────────────────────────────────────────────────
   - pregunta: "¿Qué ha construido por su cuenta, fuera del trabajo?"
     espera: [apps-pipeline]
-    familia: vitrina
+    familia: portafolio
   # 2026-10-04 (revisión LinkedIn definitivo): el puesto de proyectos propios.
   - pregunta: "¿Qué proyectos propios de IA ha construido?"
     espera: [trayectoria]
-    familia: vitrina
+    familia: portafolio
   - pregunta: "¿Desde cuándo trabaja en proyectos propios de IA generativa?"
     espera: [apps-pipeline, trayectoria]
-    familia: vitrina
+    familia: portafolio
   - pregunta: "¿Cuántas aplicaciones ha publicado?"
     espera: [apps-pipeline]
-    familia: vitrina
+    familia: portafolio
   - pregunta: "¿Tiene código público o repositorios que se puedan revisar?"
     espera: [apps-pipeline, rag-y-el-chat, contacto]
-    familia: vitrina
+    familia: portafolio
   - pregunta: "¿Qué tableros ha publicado con datos abiertos?"
     espera: [los-tableros]
-    familia: vitrina
+    familia: portafolio
   - pregunta: "¿Ha trabajado con datos abiertos o fuentes públicas?"
     espera: [los-tableros, las-investigaciones]
-    familia: vitrina
+    familia: portafolio
   - pregunta: "¿Sabe leer estados financieros o datos contables?"
     espera: [los-tableros]
-    familia: vitrina
+    familia: portafolio
   - pregunta: "¿Qué investigaciones ha hecho?"
     espera: [las-investigaciones]
-    familia: vitrina
+    familia: portafolio
   - pregunta: "¿Ha escrito artículos o papers?"
     espera: [las-investigaciones]
-    familia: vitrina
+    familia: portafolio
   - pregunta: "¿Qué agentes tiene publicados en su portafolio?"
     espera: [agentes-en-produccion, apps-pipeline, los-agentes-de-la-vitrina]
-    familia: vitrina
-  - pregunta: "¿Para qué sirven los once agentes de la vitrina?"
+    familia: portafolio
+  - pregunta: "¿Para qué sirven los once agentes del portafolio?"
     espera: [los-agentes-de-la-vitrina]
-    familia: vitrina
+    familia: portafolio
   - pregunta: "¿Qué es un harness y cómo lo usa en sus agentes?"
     espera: [los-agentes-de-la-vitrina, las-investigaciones, agentes-en-produccion]
-    familia: vitrina
+    familia: portafolio
   - pregunta: "¿Cómo controla la calidad de lo que producen sus agentes con Claude Code?"
     espera: [los-agentes-de-la-vitrina]
-    familia: vitrina
+    familia: portafolio
   - pregunta: "¿Cómo verifica las cifras que publica?"
     espera: [los-tableros, las-investigaciones, bi-que-se-adopta]
-    familia: vitrina
+    familia: portafolio
   - pregunta: "¿Con qué está hecha esta página web?"
     espera: [apps-pipeline, rag-y-el-chat]
-    familia: vitrina
+    familia: portafolio
   - pregunta: "¿Sus aplicaciones tienen pruebas automatizadas?"
     espera: [plataforma-y-despliegue, como-aprendo, apps-pipeline]
-    familia: vitrina
+    familia: portafolio
 
   # ─────────────────────────────────────────────────────────────────────
   # Encaje, condiciones y cierre de entrevista
@@ -747,7 +747,7 @@ preguntas:
     familia: procesos
   - pregunta: "¿Qué es Probeta DS y qué garantiza?"
     espera: [metodo-decidir-con-modelos]
-    familia: vitrina
+    familia: portafolio
   - pregunta: "¿Qué modelos predictivos ha llevado Henry a producción?"
     espera: [metodo-decidir-con-modelos, analitica-predictiva, banco-pichincha]
     familia: bi-y-analitica
@@ -774,7 +774,7 @@ ajenas:
   - pregunta: "¿va a llover mañana en Madrid?"
     guardrail: pasa
     porque: >-
-      Desde que las fichas de la vitrina entran al índice (ADR-023), «mañana»
+      Desde que las fichas del portafolio entran al índice (ADR-023), «mañana»
       aparece en la ficha de Habla San («cada mañana»). La ficha es de otra
       casa y no se edita aquí; la pregunta llega al modelo y el prompt la
       declina.
