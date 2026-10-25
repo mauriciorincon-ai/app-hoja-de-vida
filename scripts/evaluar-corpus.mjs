@@ -70,6 +70,20 @@ const bancoSchema = z.object({
       }),
     )
     .min(1),
+  /**
+   * Las preguntas por una AUSENCIA (S24, OM-12): lo que no hizo, no sabe o le
+   * falta. El chat ya no las responde —las rehúsa con un texto fijo, sin
+   * llamar al modelo—, así que no tienen `espera`: lo que se vigila es que el
+   * detector (`esPreguntaDeAusencia`) las pare. Salieron de `preguntas`.
+   */
+  rehuso: z
+    .array(
+      z.object({
+        pregunta: z.string().min(8),
+        nota: z.string().optional(),
+      }),
+    )
+    .default([]),
   sin_cobertura: z
     .array(
       z.object({
@@ -226,6 +240,7 @@ export function informeMarkdown({
   L.push(
     `> Banco: \`${RUTA_BANCO}\` — **${banco.preguntas.length} preguntas** de ` +
       `${new Set(banco.preguntas.map((p) => p.familia)).size} familias, ` +
+      `${banco.rehuso.length} de rehúso (el chat no las contesta), ` +
       `${banco.ajenas.length} preguntas ajenas y ${banco.sin_cobertura.length} ` +
       `huecos declarados.`,
   );

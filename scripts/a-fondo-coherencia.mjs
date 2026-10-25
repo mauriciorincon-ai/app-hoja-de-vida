@@ -115,7 +115,10 @@ export function verdadesDelSitio() {
   const banco = parse(
     readFileSync(path.join(ROOT, "tests/fixtures/banco-de-preguntas.es.yaml"), "utf8"),
   );
-  const preguntasDeAfuera = (banco.preguntas ?? []).length;
+  // S24: las filas de `rehuso` (lo que el chat ya no contesta: «¿qué no ha hecho
+  // nunca?») salieron de `preguntas`, pero siguen siendo preguntas escritas desde
+  // afuera: la cifra que los documentos publican las cuenta.
+  const preguntasDeAfuera = (banco.preguntas ?? []).length + (banco.rehuso ?? []).length;
   const preguntasPropias = leerDocumentos("es").reduce(
     (n, d) => n + (d.preguntas_de_prueba ?? []).length,
     0,

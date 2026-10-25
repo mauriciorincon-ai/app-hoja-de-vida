@@ -11,6 +11,7 @@ import {
 } from "vitest";
 import { resetBreaker } from "@/lib/ia/breaker";
 import { RESPUESTA_OFFTOPIC } from "@/lib/ia/guardrails";
+import { RESPUESTA_REHUSO } from "@/lib/ia/rehuso";
 import { resetRateLimit } from "@/lib/rate-limit";
 
 /**
@@ -252,6 +253,72 @@ describe("guardrail off-topic (criterio: cero invocaciones al proveedor)", () =>
     const body = await res.text();
     expect(body).toContain(RESPUESTA_OFFTOPIC.en.slice(0, 30));
     expect(spyLlm).not.toHaveBeenCalled();
+  });
+});
+
+describe("S24: lo que el chat no contesta (cero llamadas al proveedor, cero fuentes)", () => {
+  const preguntar = (locale: "es" | "en", content: string) =>
+    chatRequest({ locale, messages: [{ role: "user", content }] });
+
+  it.each([
+    ["es", "¿Qué no ha hecho nunca y tendría que aprender?"],
+    ["es", "¿Tiene el AI-102?"],
+    ["es", "¿Qué pasó con el DP-100?"],
+    ["es", "¿Cuáles son sus expectativas salariales?"],
+    ["es", "¿Cuál es su disponibilidad para empezar?"],
+    ["en", "What has he never done and would have to learn?"],
+    ["en", "Does he have the AI-102?"],
+    ["en", "What are his salary expectations?"],
+    ["en", "Is he available to travel?"],
+  ] as const)("[%s] «%s» recibe el rehúso fijo sin llamar al modelo ni mostrar fuentes", async (locale, pregunta) => {
+    const res = await preguntar(locale, pregunta);
+    expect(res.status).toBe(200);
+    const body = await res.text();
+    expect(body).toContain(RESPUESTA_REHUSO[locale].slice(0, 40));
+    expect(body).not.toContain("data-fuentes");
+    expect(spyLlm).not.toHaveBeenCalled();
+  });
+
+  it("la ajena que comparte una palabra con una pieza («clima») recibe la estática, sin la ficha del tablero", async () => {
+    const res = await preguntar("es", "¿Cómo está el clima?");
+    const body = await res.text();
+    expect(body).toContain(RESPUESTA_OFFTOPIC.es.slice(0, 30));
+    expect(body).not.toContain("data-fuentes");
+    expect(body).not.toContain("energia");
+    expect(spyLlm).not.toHaveBeenCalled();
+  });
+
+  it("el rehúso y la ajena se registran como modo offtopic, con el texto fijo y sin fuentes", async () => {
+    await (await preguntar("es", "¿Tiene el AI-102?")).text();
+    await (await preguntar("es", "¿Cómo está el clima?")).text();
+    await new Promise((r) => setTimeout(r, 20));
+    expect(entradas()).toHaveLength(2);
+    expect(entradas().map((e) => e.modo)).toEqual(["offtopic", "offtopic"]);
+    expect(entradas()[0].respuesta).toBe(RESPUESTA_REHUSO.es);
+    expect(entradas()[1].respuesta).toBe(RESPUESTA_OFFTOPIC.es);
+    expect(entradas().every((e) => e.fuentes.length === 0)).toBe(true);
+  });
+
+  it("gastan cupo como cualquier pregunta (el tope es por persona)", async () => {
+    vi.stubEnv("CHAT_TOPE_DIARIO", "1");
+    await (await preguntar("es", "¿Tiene el AI-102?")).text();
+    const res = await chatRequest(preguntaValida);
+    expect(res.status).toBe(429);
+  });
+
+  it("la frontera: «qué hace cuando el puesto pide algo que no ha usado nunca» SÍ llega al modelo", async () => {
+    const res = await preguntar(
+      "es",
+      "¿Qué hace cuando el puesto pide algo que no ha usado nunca?",
+    );
+    await res.text();
+    expect(spyLlm).toHaveBeenCalledTimes(1);
+  });
+
+  it("el modelo simulado cita cada fuente que recibe, para que el panel las muestre", async () => {
+    const res = await chatRequest(preguntaValida);
+    const body = await res.text();
+    expect(body).toContain("[4]");
   });
 });
 
