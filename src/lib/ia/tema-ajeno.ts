@@ -16,27 +16,32 @@ import { normalizar } from "./rehuso";
  * solo las fuentes que la respuesta cita (`fuentesCitadas`)— cubre lo que
  * esta lista no alcance.
  *
- * La lista es CERRADA y se mide contra el banco entero: de las 175 preguntas
- * legítimas por idioma ninguna cae aquí (`tema-ajeno.test.ts`), y cada una de
- * las 15 ajenas declaradas sí. Un tema nuevo se agrega con su frase y su fila.
+ * La lista es CERRADA y se mide contra el banco entero: de las preguntas
+ * legítimas de cada idioma ninguna cae aquí (`rehuso.test.ts`), y cada una de
+ * las ajenas declaradas sí.
+ *
+ * Los pedidos de código y de traducción se leen por su FORMA de orden
+ * («escribe una función…», «translate this…»), anclada al inicio: «¿cómo
+ * traduce la estrategia en datos?» y «¿escribe código con Claude Code?» son
+ * preguntas sobre el oficio del CV y se contestan (auditoría S24, A1). Un tema nuevo se agrega con su frase y su fila.
  */
 
 const AJENO: RegExp[] = [
   // chistes y bromas
   /\b(?:chiste|chistes|broma|bromas|joke|jokes)\b/,
   // el tiempo atmosférico (no «el tablero de energía y clima»)
-  /\b(?:como|que) (?:esta|hace|hara|tal)(?: el)? (?:clima|tiempo)\b|\bque (?:clima|tiempo) (?:hace|hara|va a hacer)\b/,
+  /\b(?:como|que) (?:esta|hace|hara|tal)(?: el)? (?:clima|tiempo)\b|\bque (?:clima|tiempo) (?:hace|hara|va a hacer)\b(?! que\b)/,
   /\bva a llover\b|\bllover\b|\bllueve\b|\bpronostico del (?:tiempo|clima)\b/,
   /\b(?:whats|what is|how is|hows) the weather\b|\bweather (?:like|today|tomorrow|forecast|in)\b|\bwill it (?:rain|snow)\b/,
   // recetas, horóscopo, poemas, canciones
-  /\breceta (?:de|del|para)\b|\brecipe (?:for|of)\b/,
+  /\breceta (?:de|del|para)(?: el| la| los| las)? (?:ajiaco|sancocho|arepas?|tamales?|pollo|arroz|sopa|torta|pastel|pan|pizza|pasta|cafe|empanadas?|bandeja paisa|lasana|galletas?|brownies?)\b|\brecipe (?:for|of)(?: an?| the)? (?:\w+ )?(?:ajiaco|cake|bread|pasta|pizza|soup|chicken|rice|coffee|pancakes?|stew|cookies?|brownies?)\b/,
   /\bhoroscop[oa]\b|\bhoroscope\b/,
   /\b(?:poema|poesia|soneto|haiku|poem|poetry|sonnet)\b|\bcancion de amor\b|\blove song\b/,
   // recomendaciones de ocio
-  /\b(?:recomiendame|recomiendenme|sugiereme)\b|\b(?:recommend|suggest) (?:me )?(?:a |an |some )?(?:movie|film|show|series|book|song|restaurant)\b/,
+  /\b(?:recomiendame|recomiendenme|sugiereme) (?:una |un |algo |alguna |algun )?(?:pelicula|serie|libro|cancion|musica|restaurante|juego|videojuego|podcast)\b|\b(?:recommend|suggest) (?:me )?(?:a |an |some )?(?:movie|film|show|series|book|song|restaurant|game|podcast)\b/,
   // traducciones
-  /\btraduc\w* (?:esta|este|esto|el|la|al)\b|\btraduceme\b|\btraducir\b .* (?:al|a) (?:frances|ingles|aleman|portugues|italiano)\b/,
-  /\btranslate (?:this|that|the following|it|me)\b|\btranslate\b .* (?:into|to) (?:french|spanish|english|german|portuguese|italian)\b/,
+  /\btraduceme\b|^(?:(?:por favor|puedes|podrias) )*(?:traduce|traducir) (?:esta|este|esto|estas|estos|la siguiente|el siguiente|lo siguiente|(?:al|a) (?:frances|ingles|aleman|portugues|italiano|espanol))\b/,
+  /^(?:(?:please|can you|could you|would you) )*translate (?:this|that|these|the following|me)\b|^(?:(?:please|can you|could you|would you) )*translate\b .* (?:into|to) (?:french|spanish|english|german|portuguese|italian)\b/,
   // cultura general y deportes
   /\bcual es la capital de\b|\bque ciudad es la capital\b|\bwhat is the capital of\b|\bcapital city of\b/,
   /\b(?:mundial de futbol|copa del mundo|copa mundial|futbol|world cup|football|soccer)\b/,
@@ -46,8 +51,9 @@ const AJENO: RegExp[] = [
   /\b(?:bitcoin|ethereum|criptomonedas?|cryptocurrenc\w+|crypto)\b/,
   // pedidos de código ajenos a la trayectoria
   /\b(?:escribeme|programame|hazme|generame|creame) (?:una |un |el |la )?(?:\w+ )?(?:funcion|codigo|script|programa|algoritmo)\b/,
-  /\b(?:escribe|programa|genera) (?:una |un |el |la )?(?:funcion|codigo|script|programa|algoritmo)\b/,
-  /\b(?:write|code|build|make|give|generate) (?:me )?(?:a |an |the |some )?(?:\w+ )?(?:function|script|program|code|algorithm)\b(?! for)/,
+  /^(?:(?:por favor|puedes|podrias) )*(?:escribe|programa|genera|crea|haz) (?:una|un) (?:\w+ )?(?:funcion|codigo|script|programa|algoritmo)\b/,
+  /^(?:(?:please|can you|could you|would you|just) )*(?:write|code|build|make|give|generate)(?: me)? (?:a|an|some|the) (?:\w+ )?(?:function|script|program|code|algorithm)\b(?! for)/,
+  /^(?:write|generate) (?:some )?code\b/,
 ];
 
 /** ¿Pide esta pregunta algo ajeno a la trayectoria? Entonces recibe la respuesta fija, sin fuentes. */

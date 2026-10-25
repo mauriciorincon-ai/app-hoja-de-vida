@@ -195,7 +195,7 @@ const pesoDe = (_id: string, _term: string, stored?: Record<string, unknown>) =>
 
 /**
  * Cuánto pesa el `alias` de un fragmento frente a su título (×2) y su texto (×1).
- * **Medido en el S24 (OM-17)**, con el banco entero (ES 176 + EN 176) y las cuatro
+ * **Medido en el S24 (OM-17)**, con el banco entero (los dos idiomas) y las cuatro
  * filas nuevas que esperan «Estudios» ELLAS SOLAS («¿qué estudió Henry?», «¿dónde
  * estudió?» y sus gemelas): a ×2 el inglés no la traía (rango 23 y 53); a ×5 una
  * fila seguía fuera; a ×6 las cuatro entran pero «Where did Henry study?» queda

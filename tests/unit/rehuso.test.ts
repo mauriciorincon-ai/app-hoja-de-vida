@@ -22,8 +22,8 @@ import {
  * entero. Lo que el modelo diga después lo mide la pasada en vivo.
  *
  * Cada barrido tiene su rojo en el mismo archivo: una lista que nunca
- * rechaza nada pasaría por casualidad las +350 aserciones de «ninguna
- * pregunta legítima se rehúsa» (regla 15).
+ * rechaza nada pasaría por casualidad las aserciones de «ninguna pregunta
+ * legítima se rehúsa» (regla 15).
  */
 
 const bancos = {
@@ -103,6 +103,17 @@ describe("la pregunta que pide una ausencia se rehúsa", () => {
     ["en", "What did he study?"],
     ["en", "Which certifications does he hold?"],
     ["en", "What did he do at Vesting?"],
+    // Auditoría S24 (A2): el sujeto es una PIEZA, no la persona; sus límites y
+    // sus modos de falla están escritos en la ficha y se contestan.
+    ["es", "¿Qué no hace HackGuard?"],
+    ["es", "¿Qué no puede hacer HackGuard?"],
+    ["es", "¿Qué no cubre el tablero de energía y clima?"],
+    ["es", "¿Qué le falta a Probeta DS?"],
+    ["es", "¿Qué cosas no mide el banco de preguntas?"],
+    ["es", "¿Cuáles son las debilidades de la recuperación léxica del chat?"],
+    ["en", "What can't the chat do?"],
+    ["en", "What is missing from Probeta DS?"],
+    ["en", "What are the main weaknesses of lexical retrieval?"],
   ];
 
   it.each(NO)("[%s] «%s» se sigue contestando", (_idioma, pregunta) => {
@@ -176,18 +187,15 @@ describe("las credenciales sin obtener coinciden con el YAML del dueño", () => 
   it("AI-102 y DP-100 son las que `credenciales-nombradas.yaml` declara sin obtener", () => {
     const yaml = parse(
       readFileSync("data/credenciales-nombradas.yaml", "utf8"),
-    ) as {
-      credenciales?: { codigo?: string; estado?: string }[];
-    };
-    const crudo = readFileSync("data/credenciales-nombradas.yaml", "utf8");
+    ) as { nombradas_sin_obtener: { codigo: string }[] };
+    // Los dos conjuntos, iguales: si el dueño suma otra credencial sin obtener,
+    // este test falla hasta que el código la conozca (y al revés).
+    expect(new Set(CREDENCIALES_SIN_OBTENER)).toEqual(
+      new Set(yaml.nombradas_sin_obtener.map((c) => c.codigo)),
+    );
     for (const c of CREDENCIALES_SIN_OBTENER) {
-      expect(
-        crudo.includes(c),
-        `${c} debe figurar en credenciales-nombradas.yaml`,
-      ).toBe(true);
       expect(esPreguntaDeAusencia(`¿Tiene el ${c}?`)).toBe(true);
     }
-    expect(yaml).toBeTruthy();
   });
 });
 
@@ -234,6 +242,14 @@ describe("la pregunta ajena recibe la respuesta fija, sin fuentes", () => {
     "recomiéndame una película para el fin de semana",
     "escríbeme una función en rust que ordene una lista",
     "write a rust function that sorts a list",
+    "traduce esta frase al inglés",
+    "please translate this sentence into French",
+    "recomiéndame una serie",
+    "recommend me a restaurant",
+    "dame la receta del sancocho",
+    "what is a good recipe for pancakes?",
+    "escribe una función que ordene una lista",
+    "can you write a python script that sorts a list",
   ])("«%s» es ajena", (pregunta) => {
     expect(esTemaAjeno(pregunta)).toBe(true);
   });
@@ -245,6 +261,19 @@ describe("la pregunta ajena recibe la respuesta fija, sin fuentes", () => {
     "How does he translate business needs into models?",
     "¿Cómo se construye una función de pérdida para el modelo?",
     "¿Tiene experiencia con series de tiempo del clima?",
+    // Auditoría S24 (A1): oficios y piezas del CV que una palabra suelta atrapaba.
+    "¿Cómo traduce la estrategia en datos?",
+    "¿Cómo se traduce la necesidad del cliente en un tablero?",
+    "How does he translate it into a data model?",
+    "¿Escribe código con Claude Code?",
+    "How does Henry use AI to write code?",
+    "Does Henry write code in Python?",
+    "¿Qué agente genera código?",
+    "Did Henry build a script to automate reporting?",
+    "¿Cuál es la receta de Probeta DS?",
+    "Recomiéndame por dónde empezar",
+    "Sugiéreme por dónde empezar a leer",
+    "¿Qué tiempo hace que trabaja en CTIC?",
   ])("«%s» NO es ajena", (pregunta) => {
     expect(esTemaAjeno(pregunta)).toBe(false);
   });

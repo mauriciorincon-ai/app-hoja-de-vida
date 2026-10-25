@@ -18,8 +18,10 @@ import type { ChatLocale } from "./guardrails";
  *
  * Qué NO es una pregunta de ausencia, a propósito: la que pregunta por el
  * MÉTODO ante lo no usado («¿qué hace cuando el puesto pide algo que no ha
- * usado nunca?») y los «límites» de una pieza se siguen contestando. La
- * frontera es sintáctica: la negación pegada al «qué» de la pregunta.
+ * usado nunca?») y los «límites» de una pieza («¿qué no hace HackGuard?») se
+ * siguen contestando. La frontera tiene dos partes: sintáctica (la negación
+ * pegada al «qué» de la pregunta) y de sujeto (si la frase nombra una pieza,
+ * `SUJETO_PIEZA`, la ausencia es la de la pieza y está escrita en su ficha).
  *
  * La lista es CERRADA y se lee en los dos idiomas sea cual sea el de la
  * página: quien navega en español puede escribir en inglés. Es un piso, no un
@@ -72,7 +74,8 @@ const NEG_EN =
 const ARRANQUE =
   "(?:(?:y|entonces|dime|cuentame|a ver|oye|so|and|tell me|please) )*";
 
-const AUSENCIA: RegExp[] = [
+/** Ausencias de la PERSONA: qué no hizo, no sabe, le falta; sus debilidades. */
+const AUSENCIA_PERSONA: RegExp[] = [
   // «¿Qué no ha hecho nunca…?», «¿qué tecnologías no domina?», «¿cuáles nunca ha usado?»
   new RegExp(`^${ARRANQUE}(?:que|cuales|cuantas) ${HASTA_4}${NEG_ES}\\b`),
   // «¿Hay algo que no sepa hacer?»
@@ -97,6 +100,10 @@ const AUSENCIA: RegExp[] = [
   /\bpuntos? (?:debil(?:es)?|flacos?|ciegos?)\b|\bareas? de mejora\b/,
   /\b(?:his|henrys|your|biggest|greatest|main) (?:\w+ )?(?:weakness(?:es)?|shortcomings?|flaws?)\b/,
   /\bweak (?:points?|spots?)\b|\bareas? (?:for|to) improve(?:ment)?\b|\bblind spots?\b/,
+];
+
+/** Lo que el sitio no dice o no tiene, sea cual sea el sujeto de la frase. */
+const AUSENCIA_CONTENIDO: RegExp[] = [
   // Las credenciales que no tiene.
   /\bai ?102\b|\bdp ?100\b/,
   // Lo que el sitio no dice y solo el dueño decide: salario, disponibilidad, viajar.
@@ -109,8 +116,19 @@ const AUSENCIA: RegExp[] = [
   /\b(?:willing|able|ready) to travel\b|\bcan he travel\b|\btravel(?:ling|ing)? (?:for work|requirements?)\b/,
 ];
 
+/**
+ * El sujeto de la frase es una PIEZA del portafolio o del sitio, no la persona.
+ * «¿Qué no hace HackGuard?» pregunta por los límites de una ficha, y esos
+ * están escritos («HackGuard · límites · nunca»): se contestan (decisión 5 del
+ * dueño). Solo afloja las ausencias de la PERSONA: AI-102, salario y
+ * disponibilidad se rehúsan sea quien sea el sujeto.
+ */
+const SUJETO_PIEZA =
+  /\b(?:hackguard|planlang|probeta|velo|anonimizador|habla|nutri ?kids|big ?d|angelghost|copiloto|inmobiliaria|hiring copilot|iso 42001|tablero|tableros|dashboard|chat|rag|recuperacion|retrieval|ficha|pieza|metodo|banco|agente|app)\b/;
+
 /** ¿Pide esta pregunta una ausencia, o algo que el sitio no dice? Entonces se rehúsa. */
 export function esPreguntaDeAusencia(pregunta: string): boolean {
   const q = normalizar(pregunta);
-  return AUSENCIA.some((re) => re.test(q));
+  if (AUSENCIA_CONTENIDO.some((re) => re.test(q))) return true;
+  return !SUJETO_PIEZA.test(q) && AUSENCIA_PERSONA.some((re) => re.test(q));
 }
