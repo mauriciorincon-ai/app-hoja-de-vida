@@ -28,6 +28,14 @@ export const chatChunkSchema = z.object({
    * dueño, y a peso 1 le ganaban el contexto a los documentos a fondo.
    */
   peso: z.number().positive().max(1).optional(),
+  /**
+   * Palabras con las que se PREGUNTA por este fragmento y que él no dice (S24,
+   * OM-17). La recuperación es léxica y sin raíces: «¿qué estudió Henry?» no
+   * encontraba «Estudios» porque «estudió» no es «estudios». El alias entra al
+   * buscador como un campo más; no se muestra ni viaja al modelo. Se escribe en
+   * `build-chat-index.mjs`, no en el contenido: el contenido no se toca.
+   */
+  alias: z.string().min(1).optional(),
 });
 export type ChatChunk = z.infer<typeof chatChunkSchema>;
 

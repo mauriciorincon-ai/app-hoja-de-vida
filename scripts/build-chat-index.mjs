@@ -91,6 +91,12 @@ function readYaml(fileName) {
 }
 
 /** Chunks de los YAML estructurados (hechos) + «a fondo» (narrativa). */
+/** Verbos con que se pregunta por los estudios (el fragmento dice «Estudios», no «estudió»). */
+const ALIAS_ESTUDIOS = {
+  es: "estudió estudiar estudiado estudia estudié",
+  en: "study studied studying studies",
+};
+
 /**
  * @param {{ cv: any, apps: any, aFondo: any[], locale: string,
  *   fichas?: { apps: any[], piezas: any[] } | null,
@@ -113,9 +119,18 @@ export function buildChunks({
   const chunks = [];
   // «CV»: todo lo que sale de cv.{es,en}.yaml — el código le dice al dueño
   // que la frase citada se corrige ahí, no en un documento a fondo.
-  const push = (id, titulo, texto, ancla, codigo = "CV") => {
+  const push = (id, titulo, texto, ancla, codigo = "CV", alias = "") => {
     const clean = String(texto).replace(/\s+/g, " ").trim();
-    if (clean) chunks.push({ id, codigo, titulo, texto: clean, ancla });
+    if (clean)
+      chunks.push({
+        id,
+        codigo,
+        titulo,
+        texto: clean,
+        ancla,
+        // Las palabras con que se pregunta por este fragmento y él no dice (S24, OM-17).
+        ...(alias ? { alias } : {}),
+      });
   };
 
   const { identidad } = cv;
@@ -206,6 +221,11 @@ export function buildChunks({
       )
       .join(" · "),
     "#estudios",
+    "CV",
+    // OM-17: «¿qué estudió Henry?» no traía «Estudios»: la recuperación es léxica y
+    // sin raíces, y «estudió» no es «estudios». Sin el alias la pregunta se salvaba
+    // por «Orígenes», que habla de por qué estudió ingeniería industrial.
+    ALIAS_ESTUDIOS[locale],
   );
 
   push(

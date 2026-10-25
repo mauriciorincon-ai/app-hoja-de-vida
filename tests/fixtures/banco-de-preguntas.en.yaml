@@ -108,9 +108,11 @@ preguntas:
   - pregunta: "Why did he study industrial engineering?"
     espera: [origenes]
     familia: forma-de-trabajar
-  - pregunta: "What did he study and at which university?"
-    espera: [estudios, origenes]
+  - pregunta: "What did Henry study?"
+    espera: [estudios]
     familia: forma-de-trabajar
+    nota: >-
+      Twin of the Spanish row (S24, OM-17): it used to expect [estudios, origenes]; now `estudios` on its own.
   - pregunta: "Does he have design training?"
     espera: [origenes, procesos-y-simulacion, estudios]
     familia: forma-de-trabajar

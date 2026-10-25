@@ -137,9 +137,11 @@ preguntas:
   - pregunta: "¿Por qué estudió ingeniería industrial?"
     espera: [origenes]
     familia: forma-de-trabajar
-  - pregunta: "¿Qué estudió y en qué universidad?"
-    espera: [estudios, origenes]
+  - pregunta: "¿Qué estudió Henry?"
+    espera: [estudios]
     familia: forma-de-trabajar
+    nota: >-
+      S24 (OM-17): la pregunta literal del dueño. Esperaba [estudios, origenes] y se salvaba por `origenes` sin que `estudios` entrara; ahora exige «Estudios» ella sola. Sin filas netas nuevas: la cifra «175 de afuera» es de la prosa del dueño.
   - pregunta: "¿Tiene formación en diseño?"
     espera: [origenes, procesos-y-simulacion, estudios]
     familia: forma-de-trabajar
