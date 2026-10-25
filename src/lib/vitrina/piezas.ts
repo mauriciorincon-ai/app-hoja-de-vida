@@ -148,7 +148,11 @@ export const getNombresPiezas = cache((): NombresPiezas => {
   );
 });
 
-function leerFicha(frente: Frente, archivo: string): FichaTecnica {
+function leerFicha(
+  frente: Frente,
+  archivo: string,
+  nombres: ReturnType<typeof getNombresPiezas>,
+): FichaTecnica {
   const ficha = leerFichaDeTexto(
     readFileSync(path.join(carpeta(frente), archivo), "utf8"),
     frente,
@@ -156,7 +160,7 @@ function leerFicha(frente: Frente, archivo: string): FichaTecnica {
   );
   // NOMBRE DE LA PIEZA: se aplica aquí, UNA vez, como el alias de las apps. La ficha
   // de `content/` no cambia; el escaparate, la página y el chat dicen lo mismo.
-  const oficial = nombreDePieza(getNombresPiezas(), frente, ficha.pieza.slug);
+  const oficial = nombreDePieza(nombres, frente, ficha.pieza.slug);
   return oficial ? conNombreDePieza(ficha, oficial) : ficha;
 }
 
@@ -192,10 +196,11 @@ export const getPiezas = cache((frente: Frente): FichaTecnica[] => {
   const dir = carpeta(frente);
   if (!existsSync(dir)) return [];
 
+  const nombres = getNombresPiezas();
   const piezas = readdirSync(dir)
     .filter((f) => f.endsWith(SUFIJO))
     .sort()
-    .map((archivo) => leerFicha(frente, archivo));
+    .map((archivo) => leerFicha(frente, archivo, nombres));
 
   // NO hace falta comprobar aquí que los slugs no se repitan DENTRO del frente:
   // la regla de arriba (archivo = «<slug>.ficha-tecnica.json») ya lo garantiza,

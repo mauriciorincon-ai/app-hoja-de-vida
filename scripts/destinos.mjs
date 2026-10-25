@@ -194,6 +194,8 @@ export function nombresDeDestinos(locale) {
     if (app.brochure) nombres.set(`/apps/${app.id}`, app.nombre[locale]);
   }
 
+  // Nombre de la pieza (ADR-028, adenda del S22): el mismo que da la página.
+  const deLasPiezas = leerNombresDePiezas();
   for (const frente of leerYaml("data/vitrina.yaml").categorias ?? []) {
     nombres.set(`/vitrina/${frente.id}`, frente.nombre[locale]);
     if (frente.estado !== "abierta") continue;
@@ -211,7 +213,6 @@ export function nombresDeDestinos(locale) {
       continue;
     }
     const dir = path.join(ROOT, "content", frente.id);
-    const deLasPiezas = leerNombresDePiezas();
     for (const f of existsSync(dir) ? readdirSync(dir) : []) {
       if (!f.endsWith(".ficha-tecnica.json")) continue;
       const { pieza } = JSON.parse(readFileSync(path.join(dir, f), "utf8"));
