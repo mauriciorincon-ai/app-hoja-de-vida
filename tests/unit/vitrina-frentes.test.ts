@@ -147,12 +147,17 @@ describe("data/vitrina.yaml — los frentes", () => {
     expect(vitrinaSchema.safeParse(inventadoDentro).success).toBe(false);
   });
 
-  it("hoy investigaciones está en pausa: en preparación, con fichas en disco y aviso propio", () => {
-    const f = getFrente("investigaciones")!;
-    expect(f.estado).toBe("en-preparacion");
-    expect(f.piezas, "las fichas se quedan en content/").toBeGreaterThan(0);
-    expect(f.enPreparacion?.titulo.es).toBeTruthy();
-    expect(f.enPreparacion?.linea.en).toBeTruthy();
+  it("un frente en pausa (en preparación con fichas en disco) dice su aviso propio en los dos idiomas", () => {
+    // Sin sujeto el día que se reabre el frente: lo que se vigila es la regla, no «investigaciones».
+    const enPausa = getFrentes().filter(
+      (f) => f.estado === "en-preparacion" && f.piezas > 0,
+    );
+    for (const f of enPausa) {
+      expect(f.enPreparacion?.titulo.es, `${f.id}: título ES`).toBeTruthy();
+      expect(f.enPreparacion?.titulo.en, `${f.id}: título EN`).toBeTruthy();
+      expect(f.enPreparacion?.linea.es, `${f.id}: línea ES`).toBeTruthy();
+      expect(f.enPreparacion?.linea.en, `${f.id}: línea EN`).toBeTruthy();
+    }
   });
 });
 

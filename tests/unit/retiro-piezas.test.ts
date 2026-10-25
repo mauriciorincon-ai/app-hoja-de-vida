@@ -10,11 +10,15 @@ import { describe, expect, it } from "vitest";
  * `decisions/` son historia y no se barren; `tests/` tampoco (aquí vive el patrón).
  *
  *  · S21 (2026-10-23): el agente de estudio del AI-103, que nunca operó (orden de la Fábrica).
- *  · S22 (2026-10-24): los dos agentes demostrativos de planlang, retirados por decisión del dueño, y el Harness Design Science, que es un duplicado
- *    del Paper Computacional.
+ *  · S22 (2026-10-24): los dos agentes demostrativos de planlang, retirados por decisión
+ *    del dueño, y el Harness Design Science, que es un duplicado del Paper Computacional.
  *
  * Del Harness Design Science solo se barre la dirección de su ficha: el método de
  * investigación que describen `las-investigaciones` y el CV sigue siendo del dueño.
+ *
+ * El barrido lee cada archivo ENTERO, no línea por línea: la prosa del corpus se parte a
+ * unas 100 columnas y «Agent B,⏎for onboarding» no cabe en una línea. Por eso los patrones
+ * separan las palabras con `\s+`.
  * `public/piezas/` es la simulación de planlang: HTML que genera otra casa (ADR-029) y
  * que aquí no se edita (regla dura 2). Sus páginas de fichas todavía rotulan «Agente A» y
  * «Agente B», y el brochure de planlang (`content/vitrina`) habla de su «Demo A» y «Demo B»:
@@ -50,23 +54,25 @@ const RETIRADAS: Retirada[] = [
     slug: "planlang-demo-a",
     porQue: "S22 · Agente A, autorizaciones médicas",
     patron:
-      /vitrina\/agentes\/planlang-demo-a|Agente A\s*·|Agent A, for medical|agentes demostrativos de planlang|planlang's demonstration agents/i,
+      /vitrina\/agentes\/planlang-demo-a|Agente\s+A\s*[,·]\s*(de\s+)?autorizaciones|Agent\s+A\s*[,·]\s*(for\s+)?medical|agentes\s+demostrativos\s+de\s+planlang|planlang's\s+demonstration\s+agents/i,
     caza: [
       "**Agente A · autorizaciones médicas**",
-      "Agent A, for medical authorizations",
+      // La prosa real del corpus, con el salto de línea donde lo tenía.
+      "el Agente A, de autorizaciones\nmédicas, y el Agente B",
+      "Agent A, for medical authorizations, and Agent B,",
       "/vitrina/agentes/planlang-demo-a",
-      "los agentes demostrativos de planlang",
+      "los agentes\ndemostrativos de planlang",
     ],
     noCaza: "Demo A: autorizaciones médicas",
   },
   {
     slug: "planlang-demo-b",
-    porQue:
-      "S22 · Agente B, vinculación con debida diligencia",
+    porQue: "S22 · Agente B, vinculación con debida diligencia",
     patron:
-      /vitrina\/agentes\/planlang-demo-b|Agente B\s*·|Agent B,\s+for\s+onboarding/i,
+      /vitrina\/agentes\/planlang-demo-b|Agente\s+B\s*[,·]\s*(de\s+)?vinculaci|Agent\s+B\s*[,·]\s*(for\s+)?onboarding/i,
     caza: [
       "Agente B · vinculación con debida diligencia",
+      "y el Agente B, de vinculación con debida diligencia",
       "Agent B,\nfor onboarding with due diligence",
       "/vitrina/agentes/planlang-demo-b",
     ],
@@ -74,8 +80,7 @@ const RETIRADAS: Retirada[] = [
   },
   {
     slug: "harness-design-science",
-    porQue:
-      "S22 · duplicado del Harness Paper Computacional (solo se barre su ficha)",
+    porQue: "S22 · duplicado del Paper Computacional (solo se barre su ficha)",
     patron: /vitrina\/agentes\/harness-design-science/i,
     caza: ["/vitrina/agentes/harness-design-science"],
     noCaza: "El Harness Design Science —diez fases D0 a D9—",
@@ -105,16 +110,16 @@ const TEXTOS = CARPETAS.flatMap(archivos)
   .filter((rel) => !/^public[\\/]piezas[\\/]/.test(rel))
   .map((rel) => ({
     rel: rel.split(path.sep).join("/"),
-    lineas: readFileSync(path.join(RAIZ, rel), "utf8").split("\n"),
+    texto: readFileSync(path.join(RAIZ, rel), "utf8"),
   }));
 
-/** Cada coincidencia como `archivo:línea`, para que el fallo diga dónde está. */
+/** Cada coincidencia como `archivo:línea` (la de su primera palabra), para que el fallo diga dónde está. */
 function coincidencias(patron: RegExp): string[] {
+  const global = new RegExp(patron.source, `${patron.flags.replace("g", "")}g`);
   const halladas: string[] = [];
-  for (const { rel, lineas } of TEXTOS)
-    lineas.forEach((linea, i) => {
-      if (patron.test(linea)) halladas.push(`${rel}:${i + 1}`);
-    });
+  for (const { rel, texto } of TEXTOS)
+    for (const m of texto.matchAll(global))
+      halladas.push(`${rel}:${texto.slice(0, m.index).split("\n").length}`);
   return halladas;
 }
 
@@ -135,11 +140,7 @@ describe.each(RETIRADAS)("el retiro de $slug ($porQue)", (r) => {
   });
 
   it("el barrido sí encuentra lo que debe encontrar (el patrón no es ciego)", () => {
-    for (const frase of r.caza)
-      expect(
-        r.patron.test(frase.replace(/\n/g, " ")) || r.patron.test(frase),
-        frase,
-      ).toBe(true);
+    for (const frase of r.caza) expect(r.patron.test(frase), frase).toBe(true);
     expect(r.patron.test(r.noCaza), r.noCaza).toBe(false);
   });
 });

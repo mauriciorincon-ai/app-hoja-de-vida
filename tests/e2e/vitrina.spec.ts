@@ -72,6 +72,7 @@ type Frente = {
   estado: "abierta" | "en-preparacion";
   nombre: { es: string; en: string };
   intro: { es: string; en: string };
+  detalle: { es: string; en: string };
   /** Solo las apps (dueño, 2026-09-13): los demás frentes se muestran, no se entregan. */
   listaDeEspera?: boolean;
   /** El aviso propio de un frente en pausa (2026-10-24); sin él, el texto genérico. */
@@ -627,6 +628,10 @@ test.describe("Vitrina — los frentes en preparación (ADR-015)", () => {
           );
           await expect(page.locator("main")).toContainText(
             f.enPreparacion.linea[l],
+          );
+          // El «detalle» del frente dice lo que se publica aquí: bajo un aviso de pausa se contradice.
+          await expect(page.locator("main")).not.toContainText(
+            f.detalle[l].slice(0, 60),
           );
         }
         // Ninguna tarjeta de pieza, ni su nombre, en el HTML del frente.

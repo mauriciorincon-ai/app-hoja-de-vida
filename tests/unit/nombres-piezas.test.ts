@@ -109,13 +109,15 @@ describe("el nombre viejo no queda en ningún texto del sitio", () => {
 
   it("el barrido da 0 fuera de content/ (la ficha de la otra casa conserva el suyo)", () => {
     const halladas: string[] = [];
-    for (const rel of CARPETAS.flatMap(archivos))
-      readFileSync(path.join(RAIZ, rel), "utf8")
-        .split("\n")
-        .forEach((linea, i) => {
-          if (VIEJO.test(linea))
-            halladas.push(`${rel.split(path.sep).join("/")}:${i + 1}`);
-        });
+    // El archivo entero, no línea por línea: la prosa del corpus se parte a ~100 columnas.
+    const global = new RegExp(VIEJO.source, "g");
+    for (const rel of CARPETAS.flatMap(archivos)) {
+      const texto = readFileSync(path.join(RAIZ, rel), "utf8");
+      for (const m of texto.matchAll(global))
+        halladas.push(
+          `${rel.split(path.sep).join("/")}:${texto.slice(0, m.index).split("\n").length}`,
+        );
+    }
     expect(halladas, "el sitio llama a la pieza «Paper Computacional»").toEqual(
       [],
     );
