@@ -156,7 +156,7 @@ Estas credenciales se conectan directamente con la Ingeniería Industrial. La op
 
 El Diseño Industrial añadió una responsabilidad complementaria: los resultados debían hacerse comprensibles. La visualización no era un paso decorativo al final del análisis, sino una forma de estructurar la información para que otra persona pudiera interpretarla, cuestionarla y utilizarla. Esa combinación entre análisis, representación y experiencia continúa presente en mis soluciones de Power BI y en la forma en que diseño interacciones con aplicaciones inteligentes.
 
-Las credenciales de IBM no constituyen, por tanto, una colección independiente de cursos. Representan la base científica y computacional sobre la que posteriormente construí modelos predictivos, plataformas analíticas y soluciones de inteligencia artificial: sobre esa base entrené con scikit-learn los modelos de demanda por franja de TransMilenio y los modelos de fuga, mora y riesgo de Banco Pichincha, que llegaron a producción con más del 90 % de precisión.
+Las credenciales de IBM no constituyen, por tanto, una colección independiente de cursos. Representan la base científica y computacional sobre la que posteriormente construí modelos predictivos, plataformas analíticas y soluciones de inteligencia artificial: sobre esa base entrené con scikit-learn los modelos de demanda por franja de TransMilenio y los modelos de fuga y mora de Banco Pichincha, que llegaron a producción con más del 90 % de precisión.
 
 ## Cómo se conectan las certificaciones: una arquitectura de capacidades, no una colección de títulos
 

@@ -103,7 +103,7 @@ trayectoria:
     bullets:
       - "Led a 5-person BI team: dashboards adopted by 50+ users, driving +25% in decision-making."
       - "ETL process optimization in Power Query: −35% in analysis times."
-      - "Churn, delinquency and risk models with scikit-learn: >90% accuracy and up to +35% in predictions, by each model's own metric."
+      - "Churn and delinquency models with scikit-learn: >90% accuracy and up to +35% in predictions, by each model's own metric."
       - "Semantic model optimization with DAX Studio and Tabular Editor."
       - "Co-led the area's data governance."
       - "Analytics training program for 12 professionals: +20% productivity in preparing and using information."
@@ -347,9 +347,9 @@ proyectos:
             I optimized the Power Query ETL by separating connection, preparation and model tables,
             with early row and column selection and validations before the model. The −35% in
             analysis times came from structural decisions, not from a performance trick.
-        - titulo: "Churn, delinquency and risk in production"
+        - titulo: "Churn and delinquency in production"
           texto: >-
-            I trained and deployed churn, delinquency and risk models with scikit-learn, evaluated
+            I trained and deployed churn and delinquency models with scikit-learn, evaluated
             by segment and by what each error costs: calling a client who was not leaving costs a
             call; not calling the one who leaves costs the client.
         - titulo: "Training and governance"

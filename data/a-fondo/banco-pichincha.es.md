@@ -2,8 +2,8 @@
 slug: banco-pichincha
 codigo: AF-08
 titulo: "Banco Pichincha — BI que el negocio sí usa (2023)"
-resumen: "Cinco meses en banca: dashboards adoptados por 50+ usuarios (+25 % en decisiones), ETL −35 %, modelos de fuga, mora y riesgo en producción con scikit-learn (>90 %), un equipo de 5, 12 profesionales formados y el gobierno de datos co-liderado."
-cuando_usar: "Úsalo cuando pregunten por Banco Pichincha (2023): sector financiero, modelos de fuga, mora y riesgo en producción, modelos semánticos y DAX, adopción de BI por más de 50 usuarios, gobierno de datos co-liderado y el programa de formación de analistas."
+resumen: "Cinco meses en banca: dashboards adoptados por 50+ usuarios (+25 % en decisiones), ETL −35 %, modelos de fuga y mora en producción con scikit-learn (>90 %), un equipo de 5, 12 profesionales formados y el gobierno de datos co-liderado."
+cuando_usar: "Úsalo cuando pregunten por Banco Pichincha (2023): sector financiero, modelos de fuga y mora en producción, modelos semánticos y DAX, adopción de BI por más de 50 usuarios, gobierno de datos co-liderado y el programa de formación de analistas."
 estado: aprobado
 ancla: "/proyectos/banco-pichincha"
 actualizado: 2026-09-20
@@ -213,11 +213,11 @@ La optimización técnica tenía una consecuencia directa sobre la adopción. Un
 
 Esta etapa profundizó una de las capacidades que hoy distingue mi perfil: la especialidad en Power BI entendida de extremo a extremo. Esto comprende la preparación de datos en Power Query, el diseño del modelo semántico, la ingeniería de medidas en DAX, la optimización, la experiencia de uso y la relación entre el producto analítico y la decisión empresarial.
 
-## Los modelos predictivos: fuga, mora y riesgo en producción
+## Los modelos predictivos: fuga y mora en producción
 
 <!-- seccion: modelos-predictivos -->
 
-Entrené y llevé a producción, con scikit-learn, modelos de machine learning orientados a anticipar comportamientos relevantes para el banco: la fuga de clientes —qué cliente puede irse—, la mora —qué obligación puede dejar de pagarse— y el riesgo —qué operación lo concentra—. Son las tres preguntas que cualquier banco se hace; lo que cambia es la calidad de los datos y del proceso con que se responden. Esta experiencia amplió el alcance de la analítica desde la descripción de resultados históricos hacia la estimación de posibles escenarios futuros.
+Entrené y llevé a producción, con scikit-learn, modelos de machine learning orientados a anticipar comportamientos relevantes para el banco: la fuga de clientes —qué cliente puede irse— y la mora —qué obligación puede dejar de pagarse—. Son dos preguntas que cualquier banco se hace; lo que cambia es la calidad de los datos y del proceso con que se responden. Esta experiencia amplió el alcance de la analítica desde la descripción de resultados históricos hacia la estimación de posibles escenarios futuros.
 
 El trabajo con estos modelos reforzó un aprendizaje que había comenzado en el sector transporte con la predicción de demanda: la calidad técnica de una predicción no garantiza por sí sola su valor empresarial. El resultado debe corresponder con una decisión concreta, llegar dentro del tiempo disponible para actuar y ser suficientemente comprensible para que los responsables sepan cómo utilizarlo.
 
@@ -245,7 +245,7 @@ Esta experiencia creó un puente entre la inteligencia de negocios y la intelige
 
 También fortaleció una convicción que actualmente aplico en el diseño de aplicaciones y agentes de IA: una solución inteligente necesita ser evaluable. Debe ser posible comprender qué información utiliza, qué resultado produce, bajo qué condiciones puede fallar y cuándo corresponde mantener la intervención humana.
 
-Este aprendizaje amplió mi forma de evaluar soluciones de inteligencia artificial. La pregunta no es únicamente si un modelo funciona, sino para quién funciona, bajo qué condiciones, con qué tipo de error y dentro de qué proceso será utilizado. La evaluación técnica proporciona evidencia sobre el comportamiento; el contexto empresarial determina si ese comportamiento es suficientemente confiable para respaldar una decisión. Los modelos de fuga, mora y riesgo de 2023 fueron mi primera aplicación completa de esa pregunta en banca.
+Este aprendizaje amplió mi forma de evaluar soluciones de inteligencia artificial. La pregunta no es únicamente si un modelo funciona, sino para quién funciona, bajo qué condiciones, con qué tipo de error y dentro de qué proceso será utilizado. La evaluación técnica proporciona evidencia sobre el comportamiento; el contexto empresarial determina si ese comportamiento es suficientemente confiable para respaldar una decisión. Los modelos de fuga y mora de 2023 fueron mi primera aplicación completa de esa pregunta en banca.
 
 ## El gobierno de datos
 
@@ -289,7 +289,7 @@ Cinco meses, un equipo de cinco personas y las cifras que publica mi hoja de vid
 | ---------------------------------------- | ------------------------------------------------------------ | -------------------------------------------------------------------------- |
 | Dashboards orientados a decisión         | 50+ usuarios · +25 % en toma de decisiones                   | diseño desde la decisión, una definición por concepto, ruta del agregado al detalle |
 | Optimización del ETL en Power Query      | −35 % en tiempos de análisis                                 | consultas separadas por función, selección temprana, validaciones antes del modelo |
-| Modelos predictivos con scikit-learn     | >90 % de precisión · +35 % en predicciones · en producción   | fuga, mora y riesgo; variables disponibles al predecir; evaluación por segmentos |
+| Modelos predictivos con scikit-learn     | >90 % de precisión · +35 % en predicciones · en producción   | fuga y mora; variables disponibles al predecir; evaluación por segmentos |
 | Modelos semánticos                       | optimizados con DAX Studio y Tabular Editor                  | medidas centralizadas, convenciones, deuda técnica bajo control            |
 | Programa de formación                    | 12 profesionales · +20 % de productividad en la preparación y uso de la información | Power Query, modelado, DAX, comunicación, acompañamiento sobre productos reales |
 | Gobierno de datos                        | co-liderado                                                  | definiciones compartidas, responsables por conjunto de datos, accesos por propósito |
@@ -316,4 +316,4 @@ Esta experiencia también me permitió reconocer que cada decisión requiere un 
 
 Allí comenzó a consolidarse mi interés por el nivel de agencia que una organización transfiere a sus soluciones. Un tablero hace visible una situación, pero conserva la interpretación y la acción en la persona. Una alerta dirige la atención. Una predicción anticipa una posibilidad. Una recomendación propone un camino. Una aplicación guía la ejecución. Un agente de IA puede utilizar conocimiento y herramientas para realizar determinadas acciones. Cada avance exige mayor evaluación, trazabilidad, control y claridad sobre la responsabilidad.
 
-En Banco Pichincha los instrumentos llegaron hasta la predicción: los modelos de fuga, mora y riesgo anticipaban, y la persona decidía. Los escalones siguientes —la recomendación, la aplicación, el agente— vendrían después, con Vesting y con mis propias aplicaciones y agentes; pero la escala con la que los juzgo se fijó en el banco, en 2023.
+En Banco Pichincha los instrumentos llegaron hasta la predicción: los modelos de fuga y mora anticipaban, y la persona decidía. Los escalones siguientes —la recomendación, la aplicación, el agente— vendrían después, con Vesting y con mis propias aplicaciones y agentes; pero la escala con la que los juzgo se fijó en el banco, en 2023.

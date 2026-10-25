@@ -114,7 +114,7 @@ trayectoria:
     bullets:
       - "Lideré un equipo de BI de 5 personas: dashboards adoptados por 50+ usuarios, con +25% en toma de decisiones."
       - "Optimización de procesos ETL en Power Query: −35% en tiempos de análisis."
-      - "Modelos predictivos de fuga, mora y riesgo con scikit-learn: >90% de precisión y hasta +35% en predicciones, según la métrica de cada modelo."
+      - "Modelos predictivos de fuga y mora con scikit-learn: >90% de precisión y hasta +35% en predicciones, según la métrica de cada modelo."
       - "Optimización de modelos semánticos con DAX Studio y Tabular Editor."
       - "Co-liderazgo de la gobernanza de datos del área."
       - "Programa de formación en analítica para 12 profesionales: +20% de productividad en la preparación y uso de la información."
@@ -366,9 +366,9 @@ proyectos:
             modelo, con selección temprana de filas y columnas y validaciones antes del modelo. El
             −35 % en tiempos de análisis salió de decisiones de estructura, no de un truco de
             rendimiento.
-        - titulo: "Fuga, mora y riesgo en producción"
+        - titulo: "Fuga y mora en producción"
           texto: >-
-            Entrené y llevé a producción con scikit-learn modelos de fuga, mora y riesgo, evaluados
+            Entrené y llevé a producción con scikit-learn modelos de fuga y mora, evaluados
             por segmentos y por lo que cuesta cada error: llamar a un cliente que no iba a irse
             cuesta una llamada; no llamar al que sí se va cuesta el cliente.
         - titulo: "Formación y gobierno"

@@ -2,8 +2,8 @@
 slug: banco-pichincha
 codigo: AF-08
 titulo: "Banco Pichincha — BI the business actually uses (2023)"
-resumen: "Five months in banking: dashboards adopted by 50+ users (+25% in decisions), ETL −35%, churn, delinquency and risk models in production with scikit-learn (>90%), a team of 5, 12 professionals trained and data governance co-led."
-cuando_usar: "Use this when they ask about Banco Pichincha (2023): the financial sector, churn, delinquency and risk models in production, semantic models and DAX, BI adoption by more than 50 users, co-led data governance and the analyst training program."
+resumen: "Five months in banking: dashboards adopted by 50+ users (+25% in decisions), ETL −35%, churn and delinquency models in production with scikit-learn (>90%), a team of 5, 12 professionals trained and data governance co-led."
+cuando_usar: "Use this when they ask about Banco Pichincha (2023): the financial sector, churn and delinquency models in production, semantic models and DAX, BI adoption by more than 50 users, co-led data governance and the analyst training program."
 estado: aprobado
 ancla: "/proyectos/banco-pichincha"
 actualizado: 2026-09-20
@@ -393,13 +393,13 @@ specialty understood end to end. This comprises data preparation in Power Query,
 design, measure engineering in DAX, optimization, the user experience and the relationship between
 the analytics product and the business decision.
 
-## The predictive models: churn, delinquency and risk in production
+## The predictive models: churn and delinquency in production
 
 <!-- seccion: modelos-predictivos -->
 
 I trained and took to production, with scikit-learn, machine learning models aimed at anticipating
-behaviors relevant to the bank: customer churn —which customer may leave—, delinquency —which
-obligation may stop being paid— and risk —which operation concentrates it—. They are the three
+behaviors relevant to the bank: customer churn —which customer may leave— and delinquency —which
+obligation may stop being paid—. They are two
 questions any bank asks itself; what changes is the quality of the data and of the process with
 which they are answered. This experience extended the scope of analytics from describing historical
 results to estimating possible future scenarios.
@@ -468,7 +468,7 @@ This learning broadened the way I evaluate artificial intelligence solutions. Th
 only whether a model works, but for whom it works, under which conditions, with what kind of error
 and within which process it will be used. Technical evaluation provides evidence about behavior; the
 business context determines whether that behavior is reliable enough to support a decision. The 2023
-churn, delinquency and risk models were my first complete application of that question in banking.
+churn and delinquency models were my first complete application of that question in banking.
 
 ## Data governance
 
@@ -546,7 +546,7 @@ Five months, a team of five people and the figures my CV and the site's case stu
 | --------------------------------------- | ----------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
 | Decision-oriented dashboards            | 50+ users · +25% in decision-making                                                 | design from the decision, one definition per concept, path from aggregate to detail     |
 | ETL optimization in Power Query         | −35% in analysis times                                                              | queries separated by function, early selection, validations before the model            |
-| Predictive models with scikit-learn     | >90% accuracy · +35% in predictions · in production                                 | churn, delinquency and risk; variables available at prediction time; evaluation by segment |
+| Predictive models with scikit-learn     | >90% accuracy · +35% in predictions · in production                                 | churn and delinquency; variables available at prediction time; evaluation by segment |
 | Semantic models                         | optimized with DAX Studio and Tabular Editor                                        | centralized measures, conventions, technical debt under control                         |
 | Training program                        | 12 professionals · +20% productivity in preparing and using information             | Power Query, modeling, DAX, communication, support on real products                     |
 | Data governance                         | co-led                                                                              | shared definitions, owners per data set, access by purpose                              |
@@ -597,7 +597,7 @@ proposes a path. An application guides execution. An AI agent can use knowledge 
 certain actions. Each step forward demands more evaluation, traceability, control and clarity about
 responsibility.
 
-At Banco Pichincha the instruments went as far as prediction: the churn, delinquency and risk models
+At Banco Pichincha the instruments went as far as prediction: the churn and delinquency models
 anticipated, and the person decided. The next steps —the recommendation, the application, the agent—
 would come later, with Vesting and with my own applications and agents; but the scale by which I
 judge them was set at the bank, in 2023.

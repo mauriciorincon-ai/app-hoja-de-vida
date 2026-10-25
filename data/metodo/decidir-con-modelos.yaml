@@ -454,8 +454,8 @@ bloques:
         porQue:
           voz: hice
           texto:
-            es: "En los modelos de fuga, mora y riesgo de Banco Pichincha el modelo generaba evidencia para apoyar una decisión, no una decisión automática que sustituyera el criterio de los responsables."
-            en: "In Banco Pichincha's churn, delinquency and risk models the model produced evidence to support a decision, not an automatic decision replacing the judgment of the people in charge."
+            es: "En los modelos de fuga y mora de Banco Pichincha el modelo generaba evidencia para apoyar una decisión, no una decisión automática que sustituyera el criterio de los responsables."
+            en: "In Banco Pichincha's churn and delinquency models the model produced evidence to support a decision, not an automatic decision replacing the judgment of the people in charge."
           corpus: [analitica-predictiva]
         nota:
           voz: campo
@@ -602,11 +602,11 @@ bloques:
           en: "At C&M Consultores, between July 2021 and May 2022, a scikit-learn model predicted the system's demand by route, type of day and time band with a monthly horizon; it was validated with RMSE respecting temporal order, went into the demand report the units scheduled with, stayed in use after the author left and contributed to a reported 20% improvement in system performance."
         corpus: [analitica-predictiva, transmilenio-cm]
         href: /proyectos/transmilenio-cm
-      - nombre: { es: "Banco Pichincha: fuga, mora y riesgo, con la persona decidiendo", en: "Banco Pichincha: churn, delinquency and risk, with the person deciding" }
+      - nombre: { es: "Banco Pichincha: fuga y mora, con la persona decidiendo", en: "Banco Pichincha: churn and delinquency, with the person deciding" }
         nivel: uso-real
         texto:
-          es: "En Banco Pichincha, en 2023, modelos con scikit-learn para fuga de clientes, mora y riesgo llegaron a producción con resultados reportados de más del 90 % de precisión y hasta un 35 % de mejora frente a las predicciones que existían; la evaluación miraba dónde se concentraban los errores y las predicciones llegaban por Power BI a quienes decidían."
-          en: "At Banco Pichincha, in 2023, scikit-learn models for customer churn, delinquency and risk went into production with reported results above 90% accuracy and up to a 35% improvement over the existing predictions; the evaluation looked at where the errors piled up, and the predictions reached the decision makers through Power BI."
+          es: "En Banco Pichincha, en 2023, modelos con scikit-learn para fuga de clientes y mora llegaron a producción con resultados reportados de más del 90 % de precisión y hasta un 35 % de mejora frente a las predicciones que existían; la evaluación miraba dónde se concentraban los errores y las predicciones llegaban por Power BI a quienes decidían."
+          en: "At Banco Pichincha, in 2023, scikit-learn models for customer churn and delinquency went into production with reported results above 90% accuracy and up to a 35% improvement over the existing predictions; the evaluation looked at where the errors piled up, and the predictions reached the decision makers through Power BI."
         corpus: [analitica-predictiva, banco-pichincha]
         href: /proyectos/banco-pichincha
       - nombre: { es: "Probeta DS: lo que garantiza por construcción", en: "Probeta DS: what it guarantees by construction" }

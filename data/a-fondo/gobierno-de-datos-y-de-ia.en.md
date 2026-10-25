@@ -83,7 +83,7 @@ that more than 50 business users adopted —with +25% in decision-making— were
 every indicator had a definition, an owner and a single calculation rule, centralized in the
 semantic model and expressed as a DAX measure that every product reused. I optimized those semantic
 models with DAX Studio and Tabular Editor, reduced analysis times in the ETL processes by 35%, and
-the predictive models of churn, delinquency and risk that reached production with more than 90%
+the predictive models of churn and delinquency that reached production with more than 90%
 accuracy had the same lineage requirement as any figure on a dashboard: which data they came from,
 under which rules and since when.
 

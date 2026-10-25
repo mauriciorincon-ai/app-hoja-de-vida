@@ -689,8 +689,8 @@ tools —DAX Studio and Tabular Editor— to improve the performance and maintai
 solutions. Power BI stopped representing only the visualization layer for me and became part of
 an analytical architecture that connected sources, transformations, semantic models, security
 rules, indicators and decision experiences. The dashboards were adopted by more than 50 users,
-the optimization of the ETL reduced analysis times by 35%, and the predictive models for churn,
-delinquency and risk, trained with scikit-learn, reached production with more than 90% precision.
+the optimization of the ETL reduced analysis times by 35%, and the predictive models for churn
+and delinquency, trained with scikit-learn, reached production with more than 90% precision.
 
 In this stage I understood that the semantic model constitutes one of the most important assets
 of an analytical platform. Its function is not only to facilitate queries or reuse calculations.
