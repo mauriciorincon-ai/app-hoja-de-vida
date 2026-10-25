@@ -108,9 +108,11 @@ preguntas:
   - pregunta: "Why did he study industrial engineering?"
     espera: [origenes]
     familia: forma-de-trabajar
-  - pregunta: "What did he study and at which university?"
-    espera: [estudios, origenes]
+  - pregunta: "What did Henry study?"
+    espera: [estudios]
     familia: forma-de-trabajar
+    nota: >-
+      Twin of the Spanish row (S24, OM-17): it used to expect [estudios, origenes]; now `estudios` on its own.
   - pregunta: "Does he have design training?"
     espera: [origenes, procesos-y-simulacion, estudios]
     familia: forma-de-trabajar
@@ -470,9 +472,6 @@ preguntas:
   - pregunta: "What would he do in his first ninety days on the job?"
     espera: [lo-que-busco, como-trabajo]
     familia: encaje
-  - pregunta: "What has he never done and would have to learn?"
-    espera: [plataforma-y-despliegue, como-aprendo]
-    familia: encaje
 
   # ── Métodos (S10): the twins of the three T2 questions; same `espera`, same order
   - pregunta: "How does Henry structure a multi-agent system?"
@@ -655,6 +654,17 @@ ajenas:
     guardrail: pasa
   - pregunta: "what is my horoscope today?"
     guardrail: pasa
+
+# LO QUE EL CHAT YA NO CONTESTA (S24, OM-12). El dueño decidió el 2026-10-24 que el chat
+# responde por lo que consta, jamás por lo que NO hizo: estas preguntas piden una ausencia, el chat
+# las rehúsa con un texto fijo —sin llamar al modelo— y por eso no tienen `espera`. Lo que se vigila
+# es que `esPreguntaDeAusencia` las pare (`tests/unit/rehuso.test.ts`). Salieron de `preguntas`: la
+# frontera es que la negación esté pegada al «qué»; «qué hace cuando el puesto pide algo que no ha
+# usado nunca» sigue siendo una pregunta por el MÉTODO y se sigue contestando.
+rehuso:
+  - pregunta: "What has he never done and would have to learn?"
+    nota: >-
+      Twin of the Spanish row. It used to expect `plataforma-y-despliegue` and `como-aprendo`.
 
 sin_cobertura:
   - pregunta: "What are his salary expectations?"

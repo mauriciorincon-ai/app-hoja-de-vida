@@ -39,3 +39,31 @@ export function agruparFuentes(fuentes: readonly Fuente[]): ChipDeFuente[] {
   }
   return [...chips.values()];
 }
+
+/**
+ * Las marcas `[1]`, `[1, 3]`, `[2][4]` que el texto de una respuesta trae.
+ * Devuelve los números citados, sin repetir.
+ */
+export function numerosCitados(texto: string): Set<number> {
+  const citados = new Set<number>();
+  for (const m of texto.matchAll(/\[(\d+(?:\s*[,;]\s*\d+)*)\]/g)) {
+    for (const n of m[1].split(/[,;]/)) citados.add(Number(n.trim()));
+  }
+  return citados;
+}
+
+/**
+ * Solo las fuentes que la respuesta CITA (S24, OM-16). El servidor manda las
+ * RECUPERADAS antes de que el modelo hable, y hasta el S23 el panel pintaba
+ * un chip por cada una: «¿cómo está el clima?» salía con el tablero de
+ * energía y clima como cita, aunque la respuesta no lo usara. Ahora el chip
+ * existe porque el texto dice `[n]`; una respuesta que no cita nada (la
+ * estática, la ajena que el modelo declinó) no trae chips.
+ */
+export function fuentesCitadas(
+  texto: string,
+  fuentes: readonly Fuente[],
+): Fuente[] {
+  const citados = numerosCitados(texto);
+  return fuentes.filter((f) => citados.has(f.n));
+}

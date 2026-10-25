@@ -18,12 +18,14 @@ import {
 } from "@/lib/ia/guardrails";
 import { getChatIndex } from "@/lib/ia/index-server";
 import { chatHabilitado, resolverProveedor } from "@/lib/ia/provider";
+import { esPreguntaDeAusencia, RESPUESTA_REHUSO } from "@/lib/ia/rehuso";
 import { TOP_K_CONTEXTO } from "@/lib/ia/retrieval";
 import {
   chatRequestSchema,
   type ChatUIMessage,
   type Fuente,
 } from "@/lib/ia/schemas";
+import { esTemaAjeno } from "@/lib/ia/tema-ajeno";
 import { secretoSesion } from "@/lib/chat-registro/codigo";
 import type {
   Cupo,
@@ -52,6 +54,11 @@ import { checkRateLimit } from "@/lib/rate-limit";
  * consecuencia después: cada pregunta respondida se REGISTRA (quién, qué,
  * respuesta, fuentes, modo, costo) en el almacén del registro. Es la única
  * salida del LLM que se persiste, y se persiste tal cual, como texto.
+ *
+ * Y desde el S24, antes de buscar nada, dos listas cerradas que responden SIN
+ * proveedor y SIN fuentes: la pregunta por una ausencia (lo que no hizo, no
+ * sabe, el AI-102…) recibe el rehúso fijo y la pregunta ajena (el clima, un
+ * chiste) la estática. El chat responde por lo que consta, jamás por lo que no.
  *
  * Y desde el 2026-09-26, tras la sesión, el CUPO de esa persona: un correo
  * bloqueado recibe 403 y quien ya hizo `CHAT_TOPE_DIARIO` preguntas (20 por
@@ -186,6 +193,29 @@ export async function POST(request: Request): Promise<Response> {
         log.error({ err }, "no se pudo registrar la conversación"),
       );
   };
+
+  // 3d. Lo que el chat no contesta (S24): ni gasta un token ni cita una fuente.
+  //     El rehúso y la ajena se registran como `offtopic` (decisión por
+  //     omisión de la planeación: sin migración de Supabase, un modo menos).
+  const sinRespuesta = esPreguntaDeAusencia(pregunta.content)
+    ? { motivo: "ausencia", texto: RESPUESTA_REHUSO[locale] }
+    : esTemaAjeno(pregunta.content)
+      ? { motivo: "ajena", texto: RESPUESTA_OFFTOPIC[locale] }
+      : null;
+  if (sinRespuesta) {
+    log.info(
+      { motivo: sinRespuesta.motivo, ms: Date.now() - start },
+      "chat sin respuesta de contenido — texto fijo (cero tokens, cero fuentes)",
+    );
+    registrar({
+      pregunta: pregunta.content,
+      respuesta: sinRespuesta.texto,
+      fuentes: [],
+      modo: "offtopic",
+      ms: Date.now() - start,
+    });
+    return respuestaEstatica(sinRespuesta.texto);
+  }
 
   const { retriever } = getChatIndex(locale);
 

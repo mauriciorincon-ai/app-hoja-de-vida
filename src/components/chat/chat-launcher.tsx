@@ -3,14 +3,24 @@
 import { MessageCircle, X } from "lucide-react";
 import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
-import { useRef, useState } from "react";
+import { useRef, useState, useSyncExternalStore } from "react";
 import { trackEvent } from "@/lib/analytics";
+import {
+  almacenDelNavegador,
+  leerAbierto,
+  marcarAbierto,
+} from "@/lib/chat-panel-abierto";
 
 /**
  * Lanzador flotante del chat (todas las páginas). Presupuesto respetado:
  * es un botón fijo diminuto que NO compite por el LCP (sin motion de
  * entrada) y el panel entero — useChat, MiniSearch, UI — se carga con
  * dynamic import SOLO al abrirlo: el bundle inicial queda casi intacto.
+ *
+ * S24 (OM-14): recargar, seguir un enlace del menú o cambiar de idioma
+ * desmonta el lanzador. Si el panel estaba abierto (una marca en
+ * `sessionStorage`, por pestaña) se reabre solo —cargando el panel perezoso en
+ * esa visita— y SIN tomar el foco: nada roba el foco al cargar la página.
  */
 
 const ChatPanel = dynamic(
@@ -18,29 +28,47 @@ const ChatPanel = dynamic(
   { ssr: false },
 );
 
+/** El valor no cambia durante la vida de la página: no hay a qué suscribirse. */
+const sinSuscripcion = () => () => undefined;
+
 export function ChatLauncher() {
   const t = useTranslations("chat");
-  const [abierto, setAbierto] = useState(false);
+  // ¿Estaba abierto cuando la página se descargó? En el servidor, nunca: el
+  // primer pintado coincide con el HTML y solo después cambia (sin desajuste).
+  const abiertoAlCargar = useSyncExternalStore(
+    sinSuscripcion,
+    () => leerAbierto(almacenDelNavegador("sesion")),
+    () => false,
+  );
+  // La decisión del visitante; mientras no toque nada manda la marca de la carga.
+  const [eleccion, setEleccion] = useState<boolean | null>(null);
+  const abierto = eleccion ?? abiertoAlCargar;
+  // Reabierto solo tras una carga: no enfoca el campo hasta que el visitante
+  // toque el lanzador.
+  const reabierto = eleccion === null && abiertoAlCargar;
   // El panel queda montado tras la primera apertura: la conversación
   // sobrevive a cerrar/abrir (solo se oculta visualmente).
   const [montado, setMontado] = useState(false);
   const botonRef = useRef<HTMLButtonElement>(null);
 
   function alternar() {
-    if (!abierto) {
-      setMontado(true);
-      trackEvent("chat_abierto");
-    }
-    setAbierto(!abierto);
+    const abrir = !abierto;
+    if (abrir) trackEvent("chat_abierto");
+    setMontado(true);
+    setEleccion(abrir);
+    marcarAbierto(almacenDelNavegador("sesion"), abrir);
   }
 
   return (
     <div className="fixed right-4 bottom-4 z-40 print:hidden">
-      {montado && (
+      {(montado || abierto) && (
         <ChatPanel
           abierto={abierto}
+          enfocar={!reabierto}
           onCerrar={() => {
-            setAbierto(false);
+            setMontado(true);
+            setEleccion(false);
+            marcarAbierto(almacenDelNavegador("sesion"), false);
             botonRef.current?.focus();
           }}
         />

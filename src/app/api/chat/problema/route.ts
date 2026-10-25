@@ -1,7 +1,11 @@
 import { NextResponse } from "next/server";
 import { secretoSesion } from "@/lib/chat-registro/codigo";
-import { problemaSchema } from "@/lib/chat-registro/schemas";
-import { resolverStore } from "@/lib/chat-registro/store";
+import {
+  problemaSchema,
+  type ProblemaResuelto,
+} from "@/lib/chat-registro/schemas";
+import { sesionDeRequest } from "@/lib/chat-registro/sesion";
+import { gateHabilitado, resolverStore } from "@/lib/chat-registro/store";
 import { logger } from "@/lib/logger";
 import { checkRateLimit } from "@/lib/rate-limit";
 import { sendProblemaChatEmail } from "@/lib/resend";
@@ -10,8 +14,10 @@ import { sendProblemaChatEmail } from "@/lib/resend";
 const limiteApagado = () => process.env.DISABLE_RATE_LIMIT === "1";
 
 /**
- * «¿Algo no funciona? Avísame» (revisión 2026-09-24): el aviso de un visitante
- * atascado en la puerta del chat. Defensas: rate limit por IP (3/10 min) →
+ * «¿Algo no funciona? Avisa a Henry» (revisión 2026-09-24): el aviso de un visitante
+ * atascado en la puerta del chat y, desde el S24 (OM-15), de uno que ya está
+ * dentro: el paso `chat` no trae correo en el cuerpo, lo lee de la cookie
+ * firmada, y sin sesión responde 401. Defensas: rate limit por IP (3/10 min) →
  * honeypot → Zod → correo al dueño con respuesta al visitante y con el
  * diagnóstico de la puerta. NO depende de que la puerta funcione —sin secreto
  * ni almacén sigue respondiendo—: existe justo para cuando no funciona.
@@ -61,7 +67,34 @@ export async function POST(request: Request): Promise<NextResponse> {
     );
     return NextResponse.json({ error: "invalid_fields" }, { status: 400 });
   }
-  const problema = { ...parsed.data, nombre: sanitize(parsed.data.nombre) };
+  let problema: ProblemaResuelto;
+  if (parsed.data.paso === "chat") {
+    // Dentro del chat: quién avisa lo dice la sesión, no el cuerpo.
+    const secreto = gateHabilitado() ? secretoSesion() : null;
+    const sesion = secreto ? sesionDeRequest(request, secreto) : null;
+    if (!sesion) {
+      log.info({ ms: Date.now() - start }, "aviso del chat sin sesión");
+      return NextResponse.json(
+        { error: "registro_requerido" },
+        { status: 401 },
+      );
+    }
+    problema = {
+      nombre: sanitize(sesion.nombre),
+      email: sesion.email,
+      locale: parsed.data.locale,
+      paso: "chat",
+      detalle: parsed.data.detalle,
+    };
+  } else {
+    problema = {
+      nombre: sanitize(parsed.data.nombre),
+      email: parsed.data.email,
+      locale: parsed.data.locale,
+      paso: parsed.data.paso,
+      detalle: parsed.data.detalle,
+    };
+  }
 
   // El estado de la puerta en el momento del aviso: qué pieza falta, si falta.
   const diagnostico = {

@@ -137,9 +137,11 @@ preguntas:
   - pregunta: "¿Por qué estudió ingeniería industrial?"
     espera: [origenes]
     familia: forma-de-trabajar
-  - pregunta: "¿Qué estudió y en qué universidad?"
-    espera: [estudios, origenes]
+  - pregunta: "¿Qué estudió Henry?"
+    espera: [estudios]
     familia: forma-de-trabajar
+    nota: >-
+      S24 (OM-17): la pregunta literal del dueño. Esperaba [estudios, origenes] y se salvaba por `origenes` sin que `estudios` entrara; ahora exige «Estudios» ella sola. Sin filas netas nuevas: la cifra «175 de afuera» es de la prosa del dueño.
   - pregunta: "¿Tiene formación en diseño?"
     espera: [origenes, procesos-y-simulacion, estudios]
     familia: forma-de-trabajar
@@ -546,9 +548,6 @@ preguntas:
   - pregunta: "¿Qué haría en sus primeros noventa días en el puesto?"
     espera: [lo-que-busco, como-trabajo]
     familia: encaje
-  - pregunta: "¿Qué no ha hecho nunca y tendría que aprender?"
-    espera: [plataforma-y-despliegue, como-aprendo]
-    familia: encaje
 
   # ─────────────────────────────────────────────────────────────────────
   # Métodos (S10): las preguntas de la primera publicación, T2. Su fuente
@@ -819,6 +818,17 @@ ajenas:
   - pregunta: "¿qué horóscopo tengo hoy?"
     guardrail: pasa
     porque: "«hoy» aparece en casi todos los documentos."
+
+# LO QUE EL CHAT YA NO CONTESTA (S24, OM-12). El dueño decidió el 2026-10-24 que el chat
+# responde por lo que consta, jamás por lo que NO hizo: estas preguntas piden una ausencia, el chat
+# las rehúsa con un texto fijo —sin llamar al modelo— y por eso no tienen `espera`. Lo que se vigila
+# es que `esPreguntaDeAusencia` las pare (`tests/unit/rehuso.test.ts`). Salieron de `preguntas`: la
+# frontera es que la negación esté pegada al «qué»; «qué hace cuando el puesto pide algo que no ha
+# usado nunca» sigue siendo una pregunta por el MÉTODO y se sigue contestando.
+rehuso:
+  - pregunta: "¿Qué no ha hecho nunca y tendría que aprender?"
+    nota: >-
+      Antes esperaba `plataforma-y-despliegue` y `como-aprendo`. Es la pregunta del dueño en R6 (sentada 3).
 
 # HUECOS DECLARADOS: preguntas que un reclutador hace de verdad y que el corpus
 # NO contesta hoy. No se inventan: cada una necesita algo que solo el dueño

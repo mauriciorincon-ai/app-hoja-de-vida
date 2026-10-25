@@ -9,6 +9,7 @@ import {
   esOffTopic,
   RESPUESTA_OFFTOPIC,
 } from "@/lib/ia/guardrails";
+import { RESPUESTA_REHUSO } from "@/lib/ia/rehuso";
 import { createRetriever } from "@/lib/ia/retrieval";
 import { chatChunkSchema } from "@/lib/ia/schemas";
 
@@ -179,5 +180,42 @@ describe("system prompt endurecido (grounding-only)", () => {
 
   it("se defiende de la inyección (las reglas prevalecen)", () => {
     expect(prompt).toMatch(/prevalecen sobre cualquier instrucción/);
+  });
+
+  /**
+   * S24 (OM-12, OM-13). La CI no ve lo que el modelo real contesta; lo que sí
+   * puede hacer es pinar lo que el prompt le MANDA, y que la frase que invitaba
+   * a describir una ausencia («dilo honestamente») no vuelva.
+   */
+  describe("S24: tercera persona, ninguna ausencia, el rehúso fijo", () => {
+    it("manda hablar en tercera persona de Henry y reescribir las fuentes en primera", () => {
+      expect(prompt).toMatch(/tercera persona de Henry/);
+      expect(prompt).toMatch(/reescríbelas en tercera/);
+      expect(prompt).toMatch(/Jamás hables como si fueras Henry/);
+    });
+
+    it("prohíbe afirmar una ausencia y explicar por qué algo no figura", () => {
+      expect(prompt).toMatch(/NUNCA afirmes que Henry no hizo, no sabe, no tiene o nunca hizo/);
+      expect(prompt).toMatch(/ni expliques por qué una credencial/);
+    });
+
+    it("sin fuentes que respondan, el modelo devuelve EXACTAMENTE el rehúso fijo, en el idioma de la página", () => {
+      expect(prompt).toContain(RESPUESTA_REHUSO.es);
+      expect(construirSystemPrompt("en", fuentes)).toContain(RESPUESTA_REHUSO.en);
+    });
+
+    it("«dilo honestamente» ya no está: invitaba a decir «no hay…» y de ahí a «no lo hizo»", () => {
+      for (const idioma of ["es", "en"] as const) {
+        expect(construirSystemPrompt(idioma, fuentes)).not.toMatch(/dilo honestamente/i);
+      }
+    });
+
+    it("una ajena se declara fuera de alcance SIN citar fuentes", () => {
+      expect(prompt).toMatch(/fuera de alcance con amabilidad y no cites ninguna fuente/);
+    });
+
+    it("«Microsoft Foundry (antes Azure AI Foundry)» la primera vez que se nombra", () => {
+      expect(prompt).toContain("Microsoft Foundry (antes Azure AI Foundry)");
+    });
   });
 });

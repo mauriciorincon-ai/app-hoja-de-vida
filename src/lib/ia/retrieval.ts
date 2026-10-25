@@ -193,9 +193,22 @@ type Hit = {
 const pesoDe = (_id: string, _term: string, stored?: Record<string, unknown>) =>
   typeof stored?.peso === "number" ? stored.peso : 1;
 
+/**
+ * Cuánto pesa el `alias` de un fragmento frente a su título (×2) y su texto (×1).
+ * **Medido en el S24 (OM-17)**, con el banco entero (los dos idiomas) y las cuatro
+ * filas nuevas que esperan «Estudios» ELLAS SOLAS («¿qué estudió Henry?», «¿dónde
+ * estudió?» y sus gemelas): a ×2 el inglés no la traía (rango 23 y 53); a ×5 una
+ * fila seguía fuera; a ×6 las cuatro entran pero «Where did Henry study?» queda
+ * en el puesto 4, sin margen; a ×7 en el 2; a ×8 las cuatro van de 1.ª y la fila
+ * vieja del banco en 3.ª. Sube el costo: «Estudios» entra al contexto de 3
+ * preguntas más que hablan de estudiar («¿por qué estudió ingeniería
+ * industrial?»), que es lo que se espera de él. Solo un fragmento lleva alias.
+ */
+export const PESO_ALIAS = 8;
+
 export function createRetriever(chunks: ChatChunk[]): Retriever {
   const mini = new MiniSearch<ChatChunk>({
-    fields: ["titulo", "texto"],
+    fields: ["titulo", "texto", "alias"],
     storeFields: ["id", "codigo", "titulo", "texto", "ancla", "destino", "peso"],
     processTerm,
   });
@@ -219,7 +232,7 @@ export function createRetriever(chunks: ChatChunk[]): Retriever {
     topK(query, k = TOP_K_CONTEXTO) {
       return toScored(
         mini.search(query, {
-          boost: { titulo: 2 },
+          boost: { titulo: 2, alias: PESO_ALIAS },
           boostDocument: pesoDe,
           prefix: true,
           fuzzy: 0.2,
@@ -231,7 +244,7 @@ export function createRetriever(chunks: ChatChunk[]): Retriever {
     topKStrict(query, k = TOP_K_CONTEXTO) {
       return toScored(
         mini.search(query, {
-          boost: { titulo: 2 },
+          boost: { titulo: 2, alias: PESO_ALIAS },
           boostDocument: pesoDe,
           processTerm,
         }) as unknown as Hit[],

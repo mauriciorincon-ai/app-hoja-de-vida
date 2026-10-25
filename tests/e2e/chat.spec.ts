@@ -59,7 +59,7 @@ test.describe("chat — flujo estrella", () => {
 
     // Disclaimer de transparencia visible desde el primer momento
     await expect(page.getByTestId("chat-panel")).toContainText(
-      "puedo equivocarme",
+      "puede equivocarse",
     );
 
     await preguntar(page, "¿Qué hizo Henry en Vesting?");
@@ -114,7 +114,7 @@ test.describe("chat — flujo estrella", () => {
     await page.goto("/en");
     await abrirChat(page);
     await expect(page.getByTestId("chat-panel")).toContainText(
-      "I can make mistakes",
+      "can make mistakes",
     );
 
     await preguntar(page, "What did Henry build at Vesting?");
@@ -285,6 +285,41 @@ test.describe("chat — degradación honesta", () => {
     ).toContainText("Pichincha", { timeout: 15_000 });
   });
 
+  test("búsqueda local: la ausencia y la pregunta ajena reciben la respuesta fija, sin fuentes (OM-12 y OM-16)", async ({
+    page,
+  }) => {
+    test.slow();
+    await page.route("**/api/chat", (route) =>
+      route.fulfill({
+        status: 503,
+        contentType: "application/json",
+        body: JSON.stringify({ error: "fallback" }),
+      }),
+    );
+
+    await page.goto("/es");
+    await abrirChat(page);
+
+    // La primera pregunta cae a búsqueda local por el 503 y ya es de ausencia.
+    await preguntar(page, "¿Qué no ha hecho nunca?");
+    const respuesta = page.getByTestId("chat-mensaje-asistente").last();
+    await expect(respuesta).toContainText("Sobre eso no puedo responder", {
+      timeout: 15_000,
+    });
+    await expect(page.getByTestId("chat-modo-fallback")).toBeVisible();
+    await expect(page.getByTestId("chat-fuente")).toHaveCount(0);
+    // Nada de fragmentos crudos del corpus en primera persona.
+    await expect(respuesta).not.toContainText("[1]");
+
+    // Ya en modo local, la ajena tampoco trae chips.
+    await preguntar(page, "¿Cómo está el clima?");
+    await expect(page.getByTestId("chat-mensaje-asistente").last()).toContainText(
+      "Ese tema se me escapa",
+      { timeout: 15_000 },
+    );
+    await expect(page.getByTestId("chat-fuente")).toHaveCount(0);
+  });
+
   test("rate limit (429) → aviso amable sin romper la conversación", async ({
     page,
   }) => {
@@ -419,7 +454,8 @@ test.describe("chat — la puerta (ADR-024)", () => {
     await page.getByTestId("chat-registro-verificar").click();
     await expect(page.getByTestId("chat-saludo")).toContainText("Ana Prueba");
     await page.reload();
-    await page.getByTestId("chat-launcher").click();
+    // S24 (OM-14): el panel estaba abierto, así que tras recargar se reabre
+    // solo (sin tomar el foco). Ya no hay que pulsar el lanzador.
     await expect(page.getByTestId("chat-input")).toBeVisible();
     await expect(page.getByTestId("chat-registro")).toHaveCount(0);
   });

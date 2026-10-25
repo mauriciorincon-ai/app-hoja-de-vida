@@ -1,6 +1,6 @@
 import "server-only";
 import { Resend } from "resend";
-import type { Problema } from "./chat-registro/schemas";
+import type { ProblemaResuelto } from "./chat-registro/schemas";
 import type { Propuesta } from "./propuestas";
 import { ETIQUETAS_MOTIVO, type Solicitud } from "./schemas";
 
@@ -106,8 +106,14 @@ export type DiagnosticoPuerta = {
   correo: boolean;
 };
 
+const DONDE = {
+  datos: "al pedir el código",
+  codigo: "al escribir el código",
+  chat: "dentro del chat, con la sesión abierta",
+} as const;
+
 export async function sendProblemaChatEmail(
-  problema: Problema,
+  problema: ProblemaResuelto,
   diagnostico: DiagnosticoPuerta,
 ): Promise<SendResult> {
   const apiKey = process.env.RESEND_API_KEY;
@@ -125,12 +131,15 @@ export async function sendProblemaChatEmail(
     from,
     to,
     replyTo: problema.email,
-    subject: "[CV Viva] Problema con la puerta del chat",
+    subject:
+      problema.paso === "chat"
+        ? "[CV Viva] Aviso desde el chat"
+        : "[CV Viva] Problema con la puerta del chat",
     text: [
       `Nombre: ${problema.nombre || "(no lo escribió)"}`,
       `Email: ${problema.email}`,
       `Idioma: ${problema.locale}`,
-      `Dónde se atascó: ${problema.paso === "codigo" ? "al escribir el código" : "al pedir el código"}`,
+      `Dónde se atascó: ${DONDE[problema.paso]}`,
       "",
       "Diagnóstico del servidor en el momento del aviso:",
       `  · secreto de sesión configurado: ${si(diagnostico.secreto)}`,

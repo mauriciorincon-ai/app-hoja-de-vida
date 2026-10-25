@@ -3,9 +3,10 @@ import { z } from "zod";
 
 /**
  * Contratos del chat (estándar 7 / skill ia-embebida): todo lo que cruza la
- * frontera app↔LLM o server↔cliente pasa por estos esquemas. Nada del LLM se
- * persiste (sin DB en este sprint) — la validación protege el request y el
- * índice, no una base de datos.
+ * frontera app↔LLM o server↔cliente pasa por estos esquemas. Lo que sí se
+ * guarda de una conversación —el registro del servidor (ADR-024) y la copia en
+ * el navegador del visitante (S24, `chat-conversacion.ts`)— se valida con Zod
+ * antes de escribirlo y al leerlo (regla 4 del kit).
  */
 
 /** Un chunk del índice de conocimiento (ADR-010). `ancla` es locale-agnóstica. */
@@ -28,6 +29,14 @@ export const chatChunkSchema = z.object({
    * dueño, y a peso 1 le ganaban el contexto a los documentos a fondo.
    */
   peso: z.number().positive().max(1).optional(),
+  /**
+   * Palabras con las que se PREGUNTA por este fragmento y que él no dice (S24,
+   * OM-17). La recuperación es léxica y sin raíces: «¿qué estudió Henry?» no
+   * encontraba «Estudios» porque «estudió» no es «estudios». El alias entra al
+   * buscador como un campo más; no se muestra ni viaja al modelo. Se escribe en
+   * `build-chat-index.mjs`, no en el contenido: el contenido no se toca.
+   */
+  alias: z.string().min(1).optional(),
 });
 export type ChatChunk = z.infer<typeof chatChunkSchema>;
 

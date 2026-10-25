@@ -15,7 +15,8 @@
 Registro emocional: la confianza silenciosa de una pieza bien impresa. El visitante (recruiter,
 líder técnico) debe sentir que lee un instrumento técnico con oficio tipográfico, no una landing
 de marketing. Microcopy en primera persona, español llano ("Recibí tu solicitud, te respondo en
-1–3 días hábiles"), sin adjetivos infladas.
+1–3 días hábiles"), sin adjetivos infladas. **El chat es la excepción desde el S24:** habla de Henry
+en tercera persona, también en su propio texto de interfaz ("Avisa a Henry", "Pregunta por la HV de Henry").
 
 ## Modo
 
@@ -523,7 +524,7 @@ Una publicación por tema de método, en `/metodos` (la lista) y `/metodos/<slug
 los rótulos—, sin color nuevo. Cada pieza lleva los **diez bloques fijos** con ancla `#bloque-n` y una **hoja de impresión** (tarjetas
 con `break-inside-avoid`, títulos de bloque con `break-after-avoid`). *Texto, símbolo y color siempre juntos.* La voz de las
 publicaciones y de sus textos de interfaz es **impersonal** (desde el S14); la primera persona de la «Personalidad» vale para el resto del
-sitio y para el chat.
+sitio; el chat, desde el S24, habla de Henry en tercera persona.
 
 - **Las tres voces** (`src/components/metodo/voz.tsx`): el rótulo es un chip `r-full` mono 11 px uppercase con **símbolo + palabra + color**, y la
   afirmación lleva un **filete lateral** cuyo trazo también la distingue (no solo el color: el dueño es daltónico leve).
