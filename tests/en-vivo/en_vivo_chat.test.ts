@@ -45,8 +45,22 @@ import { marcarRespuesta, type Marcas } from "./marcas";
  */
 
 const RAIZ = process.cwd();
-const INFORME = path.join(RAIZ, "privado", "pasada-en-vivo-s24.md");
-const PAUSA_MS = 20_000; // el plan Free corta a 8 000 tokens/min
+/**
+ * ENSAYO EN SECO (`EN_VIVO_SECO=1`): el mismo arnés con el modelo SIMULADO, sin
+ * clave ni red. Sirve para ver que el arnés corre de punta a punta antes de gastar
+ * la pasada real; su informe va a OTRO archivo para que nadie lo confunda con ella.
+ */
+const SECO = process.env.EN_VIVO_SECO === "1";
+const INFORME = path.join(
+  RAIZ,
+  "privado",
+  SECO ? "pasada-en-vivo-s24-en-seco.md" : "pasada-en-vivo-s24.md",
+);
+const PAUSA_MS = SECO ? 0 : 20_000; // el plan Free corta a 8 000 tokens/min
+const proveedor = () =>
+  SECO
+    ? resolverProveedor({ ...process.env, CHAT_PROVIDER: "mock" })
+    : resolverProveedor();
 const ESPERA_429_MS = 65_000;
 
 /** Solo estas claves se leen de `.env.local`; nada más entra al proceso. */
@@ -189,26 +203,30 @@ beforeAll(() => {
   if (process.env.CI) {
     throw new Error("La pasada en vivo no corre en la CI (regla 25).");
   }
-  const cargadas = cargarEnvLocal();
-  const proveedor = process.env.CHAT_PROVIDER ?? "groq";
-  if (proveedor !== "groq") {
-    throw new Error(
-      `La pasada está autorizada contra Groq (plan Free), no contra «${proveedor}».`,
-    );
+  const cargadas = SECO ? [] : cargarEnvLocal();
+  if (!SECO) {
+    const elegido = process.env.CHAT_PROVIDER ?? "groq";
+    if (elegido !== "groq") {
+      throw new Error(
+        `La pasada está autorizada contra Groq (plan Free), no contra «${elegido}».`,
+      );
+    }
+    if (!process.env.GROQ_API_KEY) {
+      throw new Error(
+        "Falta GROQ_API_KEY en .env.local: sin la clave no hay pasada (y nunca se imprime).",
+      );
+    }
   }
-  if (!process.env.GROQ_API_KEY) {
-    throw new Error(
-      "Falta GROQ_API_KEY en .env.local: sin la clave no hay pasada (y nunca se imprime).",
-    );
-  }
-  const modelo = resolverProveedor();
+  const modelo = proveedor();
   if (!modelo) throw new Error("No se pudo resolver el proveedor del chat.");
   // Se declara el árbol ANTES de tocar nada (regla 17-bis).
   const lineas = [
-    "── PASADA EN VIVO · S24 ──",
-    `  lee:     .env.local (${cargadas.length ? cargadas.join(", ") : "variables ya en el entorno"}; los valores no se imprimen) · data/ · content/`,
-    "  escribe: public/chat-index.{es,en}.json (artefactos de build) · privado/pasada-en-vivo-s24.md",
-    `  llama:   ${modelo.proveedor} · ${modelo.modelId} — una vez por pregunta que llega al modelo`,
+    SECO ? "── ENSAYO EN SECO · S24 (modelo simulado, sin red) ──" : "── PASADA EN VIVO · S24 ──",
+    SECO
+      ? "  lee:     data/ · content/ (no lee .env.local en el ensayo en seco)"
+      : `  lee:     .env.local (${cargadas.length ? cargadas.join(", ") : "variables ya en el entorno"}; los valores no se imprimen) · data/ · content/`,
+    `  escribe: public/chat-index.{es,en}.json (artefactos de build) · privado/${path.basename(INFORME)}`,
+    `  llama:   ${modelo.proveedor} · ${modelo.modelId} — una vez por pregunta que llega al modelo${SECO ? " (simulado: no sale a la red)" : ""}`,
     "  no toca: la puerta del chat, el registro, Supabase, el correo",
   ];
   process.stdout.write(`${lineas.join("\n")}\n`);
@@ -230,7 +248,7 @@ async function responderConModelo(
 }> {
   const { retriever } = getChatIndex(locale);
   const contexto = retriever.topK(pregunta, TOP_K_CONTEXTO);
-  const modelo = resolverProveedor();
+  const modelo = proveedor();
   if (!modelo) throw new Error("proveedor sin resolver");
   const system = construirSystemPrompt(locale, contexto);
   const llamar = async () => {
@@ -417,7 +435,7 @@ describe("la pasada en vivo · el chat contra el proveedor real", () => {
 
 afterAll(() => {
   if (resultados.length === 0) return;
-  const modelo = resolverProveedor();
+  const modelo = proveedor();
   const llamadas = resultados.filter((r) => r.usada === "modelo" && !r.error);
   const tokens = llamadas.reduce(
     (t, r) => ({
@@ -473,5 +491,5 @@ afterAll(() => {
   mkdirSync(path.dirname(INFORME), { recursive: true });
   writeFileSync(INFORME, `${L.join("\n")}\n`, { mode: 0o600 });
   chmodSync(INFORME, 0o600);
-  process.stdout.write(`\nInforme: privado/pasada-en-vivo-s24.md\n`);
+  process.stdout.write(`\nInforme: privado/${path.basename(INFORME)}\n`);
 });
