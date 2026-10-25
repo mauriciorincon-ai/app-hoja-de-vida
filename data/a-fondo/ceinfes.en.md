@@ -178,5 +178,3 @@ It was my first contact with what I would later call data governance: at Ceinfes
 Seen in retrospect, Ceinfes was the experience in which I learned to run an operation as a system of interdependent flows. There I coordinated people, resources, materials and information; I built indicators —KPIs— to observe the pipeline; I went deeper into the balancing of the digitization process; I turned operational results into executive conversations with the board of directors every Friday; and I strengthened management through explicit processes, information systems, Scrum and Kanban.
 
 I was not yet building enterprise data platforms or artificial intelligence architectures, but I was already developing several of their foundations: observable processes, traceable data, shared definitions, coordinated capabilities, controlled access and evidence-based decisions. And an automation with a name: the VBA macro that replaced scheduling by hand.
-
-Inglopres taught me to structure an operation; Ceinfes taught me to run it through information.

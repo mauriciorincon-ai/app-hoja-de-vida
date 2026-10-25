@@ -46,7 +46,7 @@ trayectoria:
       Analytics, data governance and AI strategy (ISO/IEC 42001) for
       administrative and clinical decisions in healthcare.
     bullets:
-      - "I lead the structuring of the institutional AI strategy under UNE-ISO/IEC 42001:2025: more than 10 opportunities identified, half of them evaluated and a few prioritized."
+      - "I lead the structuring of the institutional AI strategy under UNE-ISO/IEC 42001:2025: more than 10 opportunities identified, half of them evaluated and some already prioritized."
       - "more than 25 analytics products in Power BI for administrative and clinical leaders: some 20 leaders of some 15 processes and about 75 users."
       - "Institutional data governance and quality, under Colombia's habeas data regime and Law 1581."
       - "Process-based control dashboards and improvement plans: close to 60% less effort preparing information (estimated on my own work)."
@@ -269,11 +269,13 @@ proyectos:
             processing over a lakehouse on OneLake, with pipelines that received the n8n flows
             orchestrating the agents. The key decision was normalizing events at ingestion:
             sessions, requests, responses, times, states and token cost, the same for all 27 agents.
-        - titulo: "What is common and what is configurable"
+        - titulo: "Shared definitions, own attributes"
           texto: >-
-            A new agent or client could not require a new table for what already had a name on the
-            platform, and it could bring its own attributes. The common part was the condition for
-            comparing; the configurable part, the condition for not slowing the startup down.
+            The fundamental events, identifiers, states and metrics needed shared definitions: a
+            session, a request, a response or a state had a single name on the platform. Each
+            client’s or agent’s particulars came in as its own attributes, inside a structure that
+            already knew how to take them, without redesigning the platform. What was common made
+            comparison possible; what was configurable kept the startup from slowing down.
         - titulo: "Governance by design"
           texto: >-
             I defined the governance to integrate client and system data with an event contract
@@ -540,12 +542,12 @@ proyectos:
         - titulo: "Dashboards by process, not by area"
           texto: >-
             I organize dashboards by process because an area can show good indicators while the
-            process crossing it piles up waits and rework. I design the improvement plans; the
-            owners of each process carry them out.
+            process crossing it piles up waits and rework. I take part in advising on the design
+            of the improvement plans; the owners of each process carry them out.
         - titulo: "The institutional AI strategy"
           texto: >-
             I lead the structuring of the AI strategy under UNE-ISO/IEC 42001:2025: more than 10 opportunities identified, half of them
-            formally evaluated and a few prioritized. Not every problem needs AI, and not every AI
+            formally evaluated and some already prioritized. Not every problem needs AI, and not every AI
             initiative needs an agent.
         - titulo: "A management system that can be demonstrated"
           texto: >-
@@ -556,7 +558,7 @@ proyectos:
       impacto:
         - "more than 25 analytical products in use for some 20 leaders across some 15 processes and about 75 users."
         - "About 60% less effort preparing information (estimated on my own work); some ten analysis plans under follow-up."
-        - "more than 10 AI opportunities identified, half of them evaluated, a few prioritized and the first ones documented."
+        - "more than 10 AI opportunities identified, half of them evaluated, some already prioritized and the first ones documented."
         - "Institutional data quality as a practice, not an event."
       leccion: >-
         My purpose is not to get the organization to use more artificial intelligence,
@@ -694,8 +696,8 @@ proyectos:
         - "Weekly reports to the board that ended in incentive programs and the redesign of positions, processes and software."
         - "Process-based management with Kanban and Scrum, and a first governance of access to students' results."
       leccion: >-
-        Inglopres taught me to structure an operation; Ceinfes taught me to run it
-        through information.
+        Seen in retrospect, Ceinfes was the experience in which I learned to run an
+        operation as a system of interdependent flows.
   - slug: "inglopres"
     nombre: "Building the data no one had — Inglopres (2015–2017)"
     resumen: >-

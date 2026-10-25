@@ -875,7 +875,7 @@ the technology or from the availability of a model. I start from the problems, t
 the institutional capabilities that need to be strengthened. From there I evaluate the
 suitability of each use case, the quality and availability of its data, the people potentially
 affected, the associated risks and the level of human intervention that must be preserved. To
-date there are more than 10 AI opportunities identified, half of them evaluated, a few prioritized and the first ones documented.
+date there are more than 10 AI opportunities identified, half of them evaluated, some already prioritized and the first ones documented.
 
 Structuring an artificial intelligence strategy also requires establishing criteria to decide which
 initiatives should move forward and under what conditions. Not every use case needs artificial

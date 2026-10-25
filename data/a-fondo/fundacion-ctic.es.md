@@ -81,7 +81,7 @@ Con esa regla, en poco más de un año la estrategia ha permitido identificar m�
 
 No todos los problemas necesitan inteligencia artificial y no toda iniciativa de IA requiere un agente. Algunas necesidades pueden abordarse mediante una mejora del proceso, un producto analítico en Power BI, una automatización convencional o una aplicación basada en reglas. Otras pueden justificar capacidades de clasificación, predicción, generación, recuperación de conocimiento o coordinación de herramientas. Mi función consiste en seleccionar el patrón de solución adecuado y evitar que la tecnología se convierta en una respuesta predeterminada.
 
-La estrategia también debe establecer una cartera institucional de iniciativas. Esto implica organizar los casos de uso según su valor potencial, viabilidad, disponibilidad de información, nivel de riesgo, dependencia de terceros, complejidad de integración y capacidad de adopción. La priorización no busca identificar únicamente las ideas más innovadoras, sino aquellas que pueden producir aprendizaje y valor sin superar la capacidad institucional para implementarlas, supervisarlas y sostenerlas. De las oportunidades identificadas, la mitad se evaluaron formalmente y unas pocas se priorizaron: esa proporción es el resultado de aplicar el filtro, no de la falta de ideas.
+La estrategia también debe establecer una cartera institucional de iniciativas. Esto implica organizar los casos de uso según su valor potencial, viabilidad, disponibilidad de información, nivel de riesgo, dependencia de terceros, complejidad de integración y capacidad de adopción. La priorización no busca identificar únicamente las ideas más innovadoras, sino aquellas que pueden producir aprendizaje y valor sin superar la capacidad institucional para implementarlas, supervisarlas y sostenerlas. De las oportunidades identificadas, la mitad se evaluaron formalmente y unas ya se priorizaron: esa proporción es el resultado de aplicar el filtro, no de la falta de ideas.
 
 Cada iniciativa debe contar con un propósito explícito, un responsable institucional, una población o proceso claramente identificado, resultados esperados y criterios de evaluación definidos antes de comenzar. También debe especificar qué información utilizará, qué decisiones apoyará, qué acciones podría ejecutar y qué responsabilidades permanecerán necesariamente en las personas. Hoy las primeras de las iniciativas priorizadas tienen ese expediente completo y documentado.
 
@@ -147,7 +147,7 @@ Cada propuesta debe presentar con claridad el problema que busca resolver, los u
 
 La evaluación debe determinar si la inteligencia artificial es necesaria y, en caso afirmativo, qué tipo de capacidad resulta apropiada. Una iniciativa puede requerir analítica predictiva, procesamiento de lenguaje, recuperación de conocimiento, generación de contenido, apoyo a una decisión o ejecución controlada de tareas. Definir correctamente esa necesidad evita construir agentes para problemas que pueden resolverse con instrumentos más simples, previsibles y sostenibles —a veces, con un tablero de Power BI—.
 
-## Validación progresiva: más de 10 oportunidades, la mitad evaluadas, unas pocas iniciativas priorizadas
+## Validación progresiva: más de 10 oportunidades, la mitad evaluadas, unas iniciativas ya priorizadas
 
 <!-- seccion: validacion-progresiva -->
 
@@ -236,11 +236,11 @@ El diseño comienza por la decisión y no por la visualización. Antes de constr
 
 También diferencio las necesidades de cada audiencia sin modificar la definición institucional de las métricas. La alta dirección necesita observar tendencias, riesgos y capacidad de respuesta. Los responsables de proceso requieren identificar restricciones, desviaciones y relaciones causales. Los equipos operativos necesitan información suficientemente detallada para comprender situaciones concretas. El modelo semántico debe conservar una única lógica, mientras la experiencia en Power BI adapta su profundidad y presentación a cada responsabilidad: es lo que permite que más de 25 productos sirvan a unos 20 líderes y a unos 75 usuarios sin que existan otras tantas definiciones distintas de un mismo indicador.
 
-## Planes de mejora: qué diseñé, qué implementé y el cerca del 60 % menos esfuerzo
+## Planes de mejora: en qué asesoré, qué implementé y el cerca del 60 % menos esfuerzo
 
 <!-- seccion: planes-de-mejora -->
 
-Mi contribución no consiste en atribuirme la implementación de los planes de mejora que corresponden a los responsables institucionales. A partir de los análisis, diseñé planes de mejora para los responsables de proceso, que son quienes los ejecutan. Mi responsabilidad es construir la capacidad analítica que permite identificar oportunidades, sustentar conversaciones, priorizar situaciones y hacer seguimiento a los indicadores relacionados con las decisiones adoptadas.
+Mi contribución no consiste en atribuirme la implementación de los planes de mejora que corresponden a los responsables institucionales. A partir de los análisis, participé en el asesoramiento del diseño de planes de mejora para los responsables de proceso, que son quienes los ejecutan. Mi responsabilidad es construir la capacidad analítica que permite identificar oportunidades, sustentar conversaciones, priorizar situaciones y hacer seguimiento a los indicadores relacionados con las decisiones adoptadas.
 
 Esta distinción es importante: la analítica no sustituye la responsabilidad del proceso. Power BI proporciona una representación confiable y comprensible de la realidad, pero son los líderes y responsables institucionales quienes determinan las acciones, asignan recursos y gestionan su ejecución. Mi función consiste en asegurar que esas decisiones puedan apoyarse en información consistente, trazable y adecuada para su propósito.
 
@@ -252,7 +252,7 @@ Cuando los responsables adoptan una decisión, las soluciones analíticas contri
 
 <!-- seccion: arquitectura-institucional-de-ia -->
 
-Estructurar la estrategia de inteligencia artificial también significa definir cómo las iniciativas podrán coexistir, reutilizar capacidades y evolucionar sin crear una nueva fragmentación tecnológica. Cada proyecto aislado puede resolver una necesidad específica, pero una sucesión de soluciones desconectadas incrementa los costos, repite errores y dificulta el gobierno. Con unas pocas iniciativas priorizadas y más de 10 oportunidades en cartera, la pregunta ya no es solo si cada una funciona, sino qué comparten.
+Estructurar la estrategia de inteligencia artificial también significa definir cómo las iniciativas podrán coexistir, reutilizar capacidades y evolucionar sin crear una nueva fragmentación tecnológica. Cada proyecto aislado puede resolver una necesidad específica, pero una sucesión de soluciones desconectadas incrementa los costos, repite errores y dificulta el gobierno. Con unas iniciativas ya priorizadas y más de 10 oportunidades en cartera, la pregunta ya no es solo si cada una funciona, sino qué comparten.
 
 La arquitectura institucional debe conectar las capacidades tecnológicas con los procesos de decisión y gobierno. Esto incluye determinar qué componentes pueden compartirse, qué información está autorizada para cada propósito, qué integraciones deben centralizarse, cómo se evaluarán las soluciones y qué mecanismos permitirán supervisarlas durante su operación. Mi objetivo no es definir únicamente cómo se construye una solución, sino establecer las condiciones bajo las cuales diferentes soluciones pueden coexistir, reutilizar capacidades y evolucionar sin fragmentar la institución.
 

@@ -178,5 +178,3 @@ Fue mi primer contacto con lo que después llamaría gobierno de datos: en Ceinf
 Vista en retrospectiva, Ceinfes fue la experiencia en la que aprendí a dirigir una operación como un sistema de flujos interdependientes. Allí coordiné personas, recursos, materiales e información; construí indicadores —KPIs— para observar el pipeline; profundicé en el balanceo del proceso de digitalización; convertí resultados operativos en conversaciones ejecutivas con la junta directiva cada viernes; y fortalecí la gestión mediante procesos explícitos, sistemas de información, Scrum y Kanban.
 
 Todavía no construía plataformas empresariales de datos ni arquitecturas de inteligencia artificial, pero ya estaba desarrollando varios de sus fundamentos: procesos observables, datos trazables, definiciones compartidas, capacidades coordinadas, acceso controlado y decisiones sustentadas en evidencia. Y una automatización con nombre: la macro en VBA que reemplazó la programación a mano.
-
-Inglopres me enseñó a estructurar una operación; Ceinfes me enseñó a dirigirla mediante información.

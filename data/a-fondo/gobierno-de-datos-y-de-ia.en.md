@@ -421,7 +421,7 @@ risk.
 
 The management system today comprises **more than 20 instruments** —policies, procedures, matrices, evaluation
 criteria and follow-up mechanisms—, of which **a third are finished and the rest under construction**. On it
-runs the portfolio: **more than 10 opportunities** for artificial intelligence identified, **half of them formally evaluated**, **a few prioritized** and **the first ones documented**. The proportion is not a lack of ideas:
+runs the portfolio: **more than 10 opportunities** for artificial intelligence identified, **half of them formally evaluated**, **some already prioritized** and **the first ones documented**. The proportion is not a lack of ideas:
 it is the filter working, because every opportunity first had to declare what problem it solved, for
 whom and with what risk before receiving an architecture.
 
@@ -429,7 +429,7 @@ The strategy must also turn governance into applicable decisions. A use case nee
 forward, controls proportional to its risk, expected results and a way of evaluating its behavior.
 The standard provides the structure; my responsibility consists of helping to turn it into a
 practice that can be incorporated into institutional operations. Two clarifications about my scope
-at Fundación CTIC: the institutional improvement plans I **design** from the analysis of results
+at Fundación CTIC: I **take part in advising on the design** of the institutional improvement plans from the analysis of results
 —implementing them belongs to each process—, and where I have indeed implemented a great many
 improvements is in my own analytics process, which is the one I govern from beginning to end.
 
