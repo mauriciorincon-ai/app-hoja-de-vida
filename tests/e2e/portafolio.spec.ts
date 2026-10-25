@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { textoVisible } from "./texto-visible";
 
 /**
  * «PORTAFOLIO» (S23) — la ruta vieja y la palabra vieja, contra el sitio real.
@@ -8,8 +9,9 @@ import { expect, test } from "@playwright/test";
  *     `maxRedirects: 0`: lo que se prueba es la respuesta, no a dónde acaba el
  *     navegador.
  *  2. Ninguna página del sitemap dice «vitrina» ni «showcase» en el texto que el
- *     visitante lee (ni en un `alt`, `aria-label` o `title`). Los exports de
- *     otras casas la traen: se leen ya con la palabra nueva.
+ *     visitante lee (ni en un `alt`, `aria-label` o `title`) ni en lo que ve un
+ *     buscador o una vista previa (`<meta content>`, JSON-LD: `texto-visible.ts`).
+ *     Los exports de otras casas la traen: se leen ya con la palabra nueva.
  *
  * El motor del 301 se prueba con cadenas en `tests/unit/redireccion.test.ts`.
  */
@@ -52,18 +54,6 @@ test.describe("las rutas viejas redirigen con 301", () => {
     }
   });
 });
-
-/** Texto que ve el visitante, más los atributos que un lector de pantalla dice. */
-function textoVisible(html: string): string {
-  const atributos = [
-    ...html.matchAll(/\b(?:alt|aria-label|title)="([^"]*)"/g),
-  ].map((m) => m[1]);
-  const cuerpo = html
-    .replace(/<script[\s\S]*?<\/script>/gi, " ")
-    .replace(/<style[\s\S]*?<\/style>/gi, " ")
-    .replace(/<[^>]+>/g, " ");
-  return `${cuerpo} ${atributos.join(" ")}`;
-}
 
 test.describe("ninguna página del sitio dice la palabra vieja", () => {
   test("todas las URL del sitemap, en texto visible", async ({ request }) => {
