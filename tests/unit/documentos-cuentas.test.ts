@@ -28,6 +28,29 @@ import {
 
 const V = verdadesDelSitio();
 
+/**
+ * Lo PUBLICADO, no lo que hay en disco: un frente en pausa (`en-preparacion`) conserva
+ * sus fichas en `content/` pero el sitio no las enseña, no las lista y el chat no las
+ * cita. La guía habla de lo que el dueño ve y de lo que el chat cita; el corpus sigue
+ * contando el disco (decisión S22: no reescribir la prosa de las siete líneas).
+ */
+const ABIERTOS = new Set(
+  (
+    parse(readFileSync("data/vitrina.yaml", "utf8")) as {
+      categorias: { id: string; estado: string }[];
+    }
+  ).categorias
+    .filter((c) => c.estado === "abierta")
+    .map((c) => c.id),
+);
+const PUBLICADAS = {
+  agentes: ABIERTOS.has("agentes") ? V["agentes-vitrina"] : 0,
+  investigaciones: ABIERTOS.has("investigaciones") ? V.investigaciones : 0,
+  tableros: ABIERTOS.has("tableros") ? V.tableros : 0,
+};
+const FICHAS_DE_OTRAS_CASAS =
+  PUBLICADAS.agentes + PUBLICADAS.investigaciones + PUBLICADAS.tableros;
+
 /** Apps cuyo complemento trae al menos una feature de roadmap votable. */
 const APPS_CON_ROADMAP = readdirSync("data/fichas")
   .filter((f) => f.endsWith(".yaml"))
@@ -74,9 +97,9 @@ const ANCLAS: Ancla[] = [
   {
     doc: "guía",
     nombre: "cuentas del portal y de la HOME (k1b, n4b)",
-    patron:
-      /Apps (\d+) · Agentes (\d+) · Investigaciones (\d+) · Tableros (\d+)/g,
-    esperado: [V.apps, V["agentes-vitrina"], V.investigaciones, V.tableros],
+    // Investigaciones está en pausa: no lleva número, dice «En preparación».
+    patron: /Apps (\d+) · Agentes (\d+) · Tableros (\d+)/g,
+    esperado: [V.apps, PUBLICADAS.agentes, PUBLICADAS.tableros],
     minimo: 2,
   },
   {
@@ -101,8 +124,8 @@ const ANCLAS: Ancla[] = [
   {
     doc: "guía",
     nombre: "fichas del bloque M",
-    patron: /Las (\d+) fichas de agentes, investigaciones y tableros/g,
-    esperado: [V["agentes-vitrina"] + V.investigaciones + V.tableros],
+    patron: /Las (\d+) fichas de agentes y tableros/g,
+    esperado: [PUBLICADAS.agentes + PUBLICADAS.tableros],
   },
   {
     doc: "guía",
@@ -114,7 +137,7 @@ const ANCLAS: Ancla[] = [
     doc: "guía",
     nombre: "fichas en el índice del chat (o12b)",
     patron: /Son las (\d+) fichas/g,
-    esperado: [V.piezas],
+    esperado: [V.apps + FICHAS_DE_OTRAS_CASAS],
   },
   {
     doc: "manual",
@@ -166,7 +189,7 @@ const ANCLAS: Ancla[] = [
     doc: "manual",
     nombre: "fichas en el índice del chat",
     patron: /incluye las \*\*(\d+) fichas de la vitrina\*\*/g,
-    esperado: [V.piezas],
+    esperado: [V.apps + FICHAS_DE_OTRAS_CASAS],
   },
 ];
 

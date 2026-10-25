@@ -54,7 +54,7 @@ function abrir(almacen?: Record<string, string>, html = HTML) {
 const minutos = (li: HTMLElement) =>
   Number(li.getAttribute("data-rev-min") ?? li.getAttribute("data-ensayo"));
 
-describe("la guía v21 · el filtro «Revisión completa»", () => {
+describe("la guía v22 · el filtro «Revisión completa»", () => {
   it("es el primero de la barra, está activo al abrir y muestra solo las filas de las sentadas", () => {
     const { doc, filas, filtro } = abrir();
     const botones = [...doc.querySelectorAll(".filtros button")];
@@ -166,7 +166,7 @@ describe("la guía v21 · el filtro «Revisión completa»", () => {
   });
 });
 
-describe("la guía v21 · las sentadas y las sumas", () => {
+describe("la guía v22 · las sentadas y las sumas", () => {
   it("cada sentada tiene su título y sus filas, ninguna pasa de 45 min y las sumas son las de la página", () => {
     const { doc, filas, calc } = abrir();
     const sentadas = [
@@ -259,7 +259,7 @@ describe("la guía v21 · las sentadas y las sumas", () => {
   });
 });
 
-describe("la guía v21 · el sí/no y la nota", () => {
+describe("la guía v22 · el sí/no y la nota", () => {
   it("cada prueba tiene su sí, su no y su nota; marcar guarda y cuenta", () => {
     const { doc, window, calc, click } = abrir();
     const pruebas = [...doc.querySelectorAll<HTMLElement>("ul.pasos li[id]")];
@@ -388,7 +388,7 @@ describe("la guía v21 · el sí/no y la nota", () => {
   });
 });
 
-describe("la guía v21 · «Copiar mis respuestas»", () => {
+describe("la guía v22 · «Copiar mis respuestas»", () => {
   function conRespuestas(portapapeles?: unknown) {
     const a = abrir();
     if (portapapeles !== undefined)
@@ -423,7 +423,7 @@ describe("la guía v21 · «Copiar mis respuestas»", () => {
     (doc.getElementById("rev-copiar") as HTMLButtonElement).click();
     await new Promise((r) => setTimeout(r, 0));
     expect(copiado).toMatch(
-      /^CV Viva · Revisión completa · guía v21\nFecha: \d{4}-\d{2}-\d{2}\n/,
+      /^CV Viva · Revisión completa · guía v22\nFecha: \d{4}-\d{2}-\d{2}\n/,
     );
     expect(copiado).toMatch(
       /Totales: \d+ pruebas · sí 1 · no 2 · pendientes \d+/,
@@ -476,7 +476,7 @@ describe("la guía v21 · «Copiar mis respuestas»", () => {
     await new Promise((r) => setTimeout(r, 0));
     const area = doc.getElementById("rev-texto") as HTMLTextAreaElement;
     expect(area.hasAttribute("hidden")).toBe(false);
-    expect(area.value).toContain("guía v21");
+    expect(area.value).toContain("guía v22");
     expect(area.value).toContain("nota: el botón no responde");
     expect(area.selectionStart).toBe(0);
     expect(area.selectionEnd).toBe(area.value.length);
@@ -494,7 +494,7 @@ describe("la guía v21 · «Copiar mis respuestas»", () => {
   });
 });
 
-describe("la guía v21 · lo que entra", () => {
+describe("la guía v22 · lo que entra", () => {
   it("las seis pruebas nuevas existen, son del S21, tienen sentada y la opcional lo dice", () => {
     const { doc } = abrir();
     for (const id of ["m15", "f12", "q25", "q26", "o15", "o16"]) {
