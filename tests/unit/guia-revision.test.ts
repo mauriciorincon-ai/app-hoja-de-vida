@@ -812,15 +812,15 @@ describe("la guía v24 · las frases que el sprint dejó falsas", () => {
 });
 
 /**
- * S24 (el chat). Seis filas cambiaron de texto: R6, f2, f9, f12, o1 y n8. Vuelven a
+ * S24 (el chat). Ocho filas cambiaron de texto: R6, f2, f9, f12, o1, o9, o10 y n8. Vuelven a
  * pendiente y muestran lo que el dueño había respondido («Antes del S24»). La
  * migración ya no está escrita para UNA versión: cada `data-cambio="N"` tiene su marca
  * `migrado:N`, y la v24 no mueve dos veces lo de la v23 ni se salta lo suyo.
  */
 describe("la guía v24 · las filas del chat", () => {
-  const FILAS_DEL_S24 = ["f2", "f9", "f12", "o1", "n8"];
+  const FILAS_DEL_S24 = ["f2", "f9", "f12", "o1", "o9", "o10", "n8"];
 
-  it("R6, f2, f9, f12, o1 y n8 llevan data-cambio 24 y «Mejorado · S24»", () => {
+  it("R6, f2, f9, f12, o1, o9, o10 y n8 llevan data-cambio 24 y «Mejorado · S24»", () => {
     const a = abrir();
     const r6 = a.filas().find((li) => li.textContent?.includes("R6 · El chat, como visitante nuevo"));
     expect(r6?.getAttribute("data-cambio")).toBe("24");
@@ -892,7 +892,7 @@ describe("la guía v24 · las filas del chat", () => {
   it("las frases que el S24 dejó falsas: ninguna fila viva dice «Avísame» ni «Recibí tu aviso»", () => {
     const a = abrir();
     const vivas = a.filas().map((li) => ({ id: li.id || li.textContent?.slice(0, 20), t: li.textContent ?? "" }));
-    const caducas = vivas.filter((f) => /Algo no funciona\? Avísame|Recibí tu aviso|Te escribo a|Pregúntale a mi HV/.test(f.t)).map((f) => f.id);
+    const caducas = vivas.filter((f) => /Algo no funciona\? Avísame|Recibí tu aviso|Te escribo a|Pregúntale a mi HV|respuesta\s+suena a\s+ti|la declina el modelo|deja\s+pasar a propósito/.test(f.t)).map((f) => f.id);
     expect(caducas, "filas con el botón o el mensaje del chat de antes del S24").toEqual([]);
   });
 });

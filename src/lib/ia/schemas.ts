@@ -3,9 +3,10 @@ import { z } from "zod";
 
 /**
  * Contratos del chat (estándar 7 / skill ia-embebida): todo lo que cruza la
- * frontera app↔LLM o server↔cliente pasa por estos esquemas. Nada del LLM se
- * persiste (sin DB en este sprint) — la validación protege el request y el
- * índice, no una base de datos.
+ * frontera app↔LLM o server↔cliente pasa por estos esquemas. Lo que sí se
+ * guarda de una conversación —el registro del servidor (ADR-024) y la copia en
+ * el navegador del visitante (S24, `chat-conversacion.ts`)— se valida con Zod
+ * antes de escribirlo y al leerlo (regla 4 del kit).
  */
 
 /** Un chunk del índice de conocimiento (ADR-010). `ancla` es locale-agnóstica. */

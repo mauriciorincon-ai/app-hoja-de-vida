@@ -875,7 +875,7 @@ una cifra de «lo que hice» que el documento citado no dice, un conteo del siti
   como `hola@`** desde Gmail («Enviar como» sale por Resend). Si se agota, hasta el día siguiente
   no llegan los avisos del formulario ni los códigos del chat, ni salen tus respuestas.
 
-### El chat que responde por ti · desde Sprint 003
+### El chat que responde sobre Henry · desde Sprint 003
 
 - **Qué hace:** el botón flotante «Pregunta por la HV de Henry» (abajo a la derecha, en todas las
   páginas) abre un chat donde el visitante pregunta en español o inglés y recibe respuestas
@@ -924,8 +924,8 @@ una cifra de «lo que hice» que el documento citado no dice, un conteo del siti
   disponibilidad, viajar. No llama al modelo (cero tokens) y no muestra fuentes. Lo que sí se
   sigue contestando: «¿qué hace cuando el puesto pide algo que no ha usado nunca?» (es el
   método) y los «límites» de una pieza.
-- **Cómo se decide.** Dos listas cerradas, escritas a mano y probadas contra las más de 350
-  preguntas del banco: `src/lib/ia/rehuso.ts` (ausencias, credenciales sin obtener, salario…)
+- **Cómo se decide.** Dos listas cerradas, escritas a mano y probadas contra todas las
+  preguntas del banco, en los dos idiomas: `src/lib/ia/rehuso.ts` (ausencias, credenciales sin obtener, salario…)
   y `src/lib/ia/tema-ajeno.ts` (el clima, chistes, código…). Si una pregunta legítima se
   rehúsa, se **angosta la frase** en esa lista y se agrega la pregunta al banco; no se saca la
   fila. Lo que se escape de las listas llega al modelo, y ahí lo para el prompt: «nunca
