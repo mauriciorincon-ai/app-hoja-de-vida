@@ -53,13 +53,6 @@ proceso:
 # cv-viva (la planeadora lo administra; llega por copia y no se edita aquí). Los
 # `id` son ESTABLES: el par (app, id) es la clave del voto en la BD.
 roadmap:
-  - id: copiloto-del-papeleo
-    titulo:
-      es: "Copiloto del papeleo legal"
-      en: "Legal paperwork copilot"
-    descripcion:
-      es: "Te explica cláusula por cláusula la promesa, la escritura y el registro, para que firmes entendiendo lo que firmas."
-      en: "Explains the promise, the deed and the registration clause by clause, so you sign understanding what you sign."
   - id: fotos-que-venden
     titulo:
       es: "Fotos que venden"
