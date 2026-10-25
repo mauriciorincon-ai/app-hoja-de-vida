@@ -1,5 +1,6 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
+import { RESPUESTA_REHUSO } from "@/lib/ia/rehuso";
 import { ausenciaAfirmada, marcarRespuesta } from "../en-vivo/marcas";
 
 /**
@@ -26,6 +27,27 @@ describe("ausenciaAfirmada", () => {
     ["en", "Henry led the data strategy at Vesting [2] and built the platform on Fabric [1]."],
   ] as const)("[%s] «%s» no afirma ninguna", (idioma, texto) => {
     expect(ausenciaAfirmada(texto, idioma)).toEqual([]);
+  });
+});
+
+/**
+ * Pasada del 2026-10-25: el modelo respondió con el rehúso fijo («I can't answer
+ * that from Henry's résumé…») y el marcador lo contó como «ausencia afirmada» por
+ * el «can't». Es la voz del asistente, no una afirmación sobre Henry: el texto
+ * fijo se descuenta antes de buscar. Una ausencia dicha DESPUÉS de él sigue marcada.
+ */
+describe("ausenciaAfirmada · el rehúso fijo no es una afirmación", () => {
+  it.each(["es", "en"] as const)("[%s] el texto fijo, solo, no marca nada", (idioma) => {
+    expect(ausenciaAfirmada(RESPUESTA_REHUSO[idioma], idioma)).toEqual([]);
+  });
+
+  it("una ausencia afirmada junto al rehúso sí se marca", () => {
+    expect(
+      ausenciaAfirmada(`${RESPUESTA_REHUSO.en} He has never used Databricks.`, "en"),
+    ).toEqual(["never"]);
+    expect(
+      ausenciaAfirmada(`${RESPUESTA_REHUSO.es} Henry nunca ha usado Databricks.`, "es"),
+    ).toEqual(["nunca"]);
   });
 });
 

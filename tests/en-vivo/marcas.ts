@@ -1,4 +1,5 @@
 import { numerosCitados } from "@/lib/ia/fuentes";
+import { RESPUESTA_REHUSO } from "@/lib/ia/rehuso";
 import { vozDelDueno, type Idioma } from "@/lib/ia/voz-del-dueno";
 
 /**
@@ -23,12 +24,18 @@ const AUSENCIA_EN: RegExp[] = [
   /\b(?:isn['’]?t|is not|not) (?:listed|mentioned|shown|stated)\b/i,
 ];
 
-/** Las frases que afirman una ausencia («no hizo», «nunca», «has never»…). */
+/**
+ * Las frases que afirman una ausencia («no hizo», «nunca», «has never»…). El
+ * rehúso fijo se descuenta antes de buscar: «I can't answer that from Henry's
+ * résumé» es la voz del asistente declinando, no una afirmación sobre Henry, y
+ * el prompt manda al modelo a responder justo eso cuando no hay fuente.
+ */
 export function ausenciaAfirmada(texto: string, idioma: Idioma): string[] {
   const res = idioma === "es" ? AUSENCIA_ES : AUSENCIA_EN;
+  const sinRehuso = texto.replace(RESPUESTA_REHUSO[idioma], " ");
   return res.flatMap((re) => {
     const g = new RegExp(re.source, "gi");
-    return [...texto.matchAll(g)].map((m) => m[0]);
+    return [...sinRehuso.matchAll(g)].map((m) => m[0]);
   });
 }
 
