@@ -16,9 +16,16 @@ type Paso = "datos" | "codigo";
 export function ChatRegistro({
   locale,
   onListo,
+  autoEnfocar = true,
 }: {
   locale: "es" | "en";
   onListo: (nombre: string) => void;
+  /**
+   * false cuando el panel se reabrió solo tras una recarga: la puerta no toma
+   * el foco al aparecer (nada roba el foco al cargar la página, S23). Los
+   * cambios de paso sí lo mueven: ahí el visitante ya está escribiendo.
+   */
+  autoEnfocar?: boolean;
 }) {
   const t = useTranslations("chat");
   const [paso, setPaso] = useState<Paso>("datos");
@@ -31,10 +38,17 @@ export function ChatRegistro({
   const [error, setError] = useState<string | null>(null);
   const nombreRef = useRef<HTMLInputElement>(null);
   const codigoRef = useRef<HTMLInputElement>(null);
+  // Si el visitante ya pasó del primer paso, mover el foco es lo esperado. Un
+  // ref (no una bandera de «primer montaje») para que el doble efecto del modo
+  // estricto, en desarrollo, no lo gaste antes de tiempo.
+  const huboAvance = useRef(false);
 
   // El foco aterriza donde hay que escribir: el nombre al abrir, el código al llegar al paso 2.
   useEffect(() => {
+    if (paso !== "datos") huboAvance.current = true;
+    if (!autoEnfocar && !huboAvance.current) return;
     (paso === "datos" ? nombreRef : codigoRef).current?.focus();
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- solo cuando cambia el paso
   }, [paso]);
 
   const mensajeDe = (code: string): string => {

@@ -15,6 +15,8 @@ import {
   leerGuardado,
 } from "@/lib/chat-conversacion";
 import { agruparFuentes, fuentesCitadas } from "@/lib/ia/fuentes";
+import { RESPUESTA_OFFTOPIC } from "@/lib/ia/guardrails";
+import { esPreguntaDeAusencia, RESPUESTA_REHUSO } from "@/lib/ia/rehuso";
 import {
   createRetriever,
   type Retriever,
@@ -25,6 +27,7 @@ import {
   type ChatUIMessage,
   type Fuente,
 } from "@/lib/ia/schemas";
+import { esTemaAjeno } from "@/lib/ia/tema-ajeno";
 import { ChatProblema } from "./chat-problema";
 import { ChatRegistro } from "./chat-registro";
 
@@ -120,8 +123,8 @@ export function ChatPanel({
   );
   const ultimoMensajeRef = useRef(guardada?.ultimo ?? 0);
 
-  const { messages, setMessages, sendMessage, status } = useChat<ChatUIMessage>(
-    {
+  const { messages, setMessages, sendMessage, status, stop } =
+    useChat<ChatUIMessage>({
       messages: (guardada?.mensajes ?? []) as ChatUIMessage[],
       transport: new DefaultChatTransport({
         api: "/api/chat",
@@ -212,8 +215,42 @@ export function ChatPanel({
     ]);
   }
 
+  /** El servidor no vio esta respuesta: se registra desde aquí (ADR-024). */
+  function registrarLocal(pregunta: string, texto: string, fuentes: Fuente[]) {
+    if (!gateActiva) return;
+    void fetch("/api/chat/log", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        locale,
+        pregunta,
+        respuesta: texto.slice(0, 4000),
+        fuentes: fuentes.map((f) => ({
+          codigo: f.codigo,
+          titulo: f.titulo,
+          ancla: f.ancla,
+        })),
+      }),
+    }).catch(() => undefined);
+  }
+
   async function responderLocal(pregunta: string) {
     try {
+      // Los dos detectores son isomórficos y el modo local NO es una puerta
+      // trasera: sin servidor también se rehúsa lo que pide una ausencia y se
+      // declina lo ajeno, sin fragmentos crudos del corpus (que están en primera
+      // persona) ni chips (auditoría S24, A3).
+      const fija = esPreguntaDeAusencia(pregunta)
+        ? RESPUESTA_REHUSO[locale]
+        : esTemaAjeno(pregunta)
+          ? RESPUESTA_OFFTOPIC[locale]
+          : null;
+      if (fija) {
+        agregarMensaje("assistant", [{ type: "text", text: fija }]);
+        trackEvent("chat_respuesta", { modo: "fallback" });
+        registrarLocal(pregunta, fija, []);
+        return;
+      }
       const retriever = await cargarRetriever();
       // El MISMO k que usa el servidor (S8). Hasta el S7 aquí había un 3
       // escrito a mano: el fallback local enseñaba menos evidencia que la que
@@ -237,23 +274,7 @@ export function ChatPanel({
         { type: "text", text: texto },
       ]);
       trackEvent("chat_respuesta", { modo: "fallback" });
-      if (gateActiva) {
-        // El servidor no vio esta respuesta: se registra desde aquí (ADR-024).
-        void fetch("/api/chat/log", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            locale,
-            pregunta,
-            respuesta: texto.slice(0, 4000),
-            fuentes: fuentes.map((f) => ({
-              codigo: f.codigo,
-              titulo: f.titulo,
-              ancla: f.ancla,
-            })),
-          }),
-        }).catch(() => undefined);
-      }
+      registrarLocal(pregunta, texto, fuentes);
     } catch {
       agregarMensaje("assistant", [{ type: "text", text: t("error") }]);
     }
@@ -277,6 +298,9 @@ export function ChatPanel({
   }
 
   function borrarConversacion() {
+    // Una respuesta a medias NO sobrevive al «Borrar»: sin cortar el stream, el
+    // SDK reponía el mensaje parcial y el guardado lo persistía (auditoría S24, M3).
+    void stop();
     vaciarConversacion();
     setBorrada(true);
     trackEvent("chat_borrado");
@@ -419,6 +443,7 @@ export function ChatPanel({
           )}
           <ChatRegistro
             locale={locale}
+            autoEnfocar={enfocar}
             onListo={(nombre) => {
               setNombreVisitante(nombre);
               setSesionPerdida(false);

@@ -93,6 +93,31 @@ test.describe("chat — la conversación sobrevive a la navegación (OM-14)", ()
     await expect(page.getByTestId("chat-input")).toBeFocused();
   });
 
+  test("sin sesión, el panel que se reabre solo muestra la puerta y tampoco roba el foco", async ({
+    page,
+  }) => {
+    test.slow();
+    await page.goto("/es");
+    await page.getByTestId("chat-launcher").click();
+    await expect(page.getByTestId("chat-registro")).toBeVisible();
+
+    await page.reload();
+    // La puerta vuelve a pintarse, pero el cursor no salta al campo «Tu nombre».
+    await expect(page.getByTestId("chat-registro")).toBeVisible({
+      timeout: 15_000,
+    });
+    await expect(page.getByTestId("chat-registro-nombre")).not.toBeFocused();
+    expect(
+      await page.evaluate(() => document.activeElement?.tagName),
+      "al cargar nadie tiene el foco",
+    ).toBe("BODY");
+
+    // Abierto por el visitante, el foco sí va al nombre (comportamiento de siempre).
+    await page.getByTestId("chat-launcher").click(); // cierra
+    await page.getByTestId("chat-launcher").click(); // abre
+    await expect(page.getByTestId("chat-registro")).toBeVisible();
+  });
+
   test("un panel cerrado queda cerrado tras recargar, pero la conversación sigue guardada", async ({
     page,
   }) => {

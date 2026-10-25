@@ -285,6 +285,41 @@ test.describe("chat — degradación honesta", () => {
     ).toContainText("Pichincha", { timeout: 15_000 });
   });
 
+  test("búsqueda local: la ausencia y la pregunta ajena reciben la respuesta fija, sin fuentes (OM-12 y OM-16)", async ({
+    page,
+  }) => {
+    test.slow();
+    await page.route("**/api/chat", (route) =>
+      route.fulfill({
+        status: 503,
+        contentType: "application/json",
+        body: JSON.stringify({ error: "fallback" }),
+      }),
+    );
+
+    await page.goto("/es");
+    await abrirChat(page);
+
+    // La primera pregunta cae a búsqueda local por el 503 y ya es de ausencia.
+    await preguntar(page, "¿Qué no ha hecho nunca?");
+    const respuesta = page.getByTestId("chat-mensaje-asistente").last();
+    await expect(respuesta).toContainText("Sobre eso no puedo responder", {
+      timeout: 15_000,
+    });
+    await expect(page.getByTestId("chat-modo-fallback")).toBeVisible();
+    await expect(page.getByTestId("chat-fuente")).toHaveCount(0);
+    // Nada de fragmentos crudos del corpus en primera persona.
+    await expect(respuesta).not.toContainText("[1]");
+
+    // Ya en modo local, la ajena tampoco trae chips.
+    await preguntar(page, "¿Cómo está el clima?");
+    await expect(page.getByTestId("chat-mensaje-asistente").last()).toContainText(
+      "Ese tema se me escapa",
+      { timeout: 15_000 },
+    );
+    await expect(page.getByTestId("chat-fuente")).toHaveCount(0);
+  });
+
   test("rate limit (429) → aviso amable sin romper la conversación", async ({
     page,
   }) => {
