@@ -169,6 +169,20 @@ function sinHistoria(archivo: string, texto: string): string {
   return texto;
 }
 
+/**
+ * Una guía o un manual SÍ pueden nombrar la ruta vieja: para pedir que se
+ * pruebe la redirección («escribe /es/vitrina… y terminas en /es/portafolio»).
+ * Solo así: la frase de al lado tiene que decir que es la redirección o la
+ * dirección vieja. Una ruta vieja a secas, en un enlace o en una lista, es un
+ * resto del renombre.
+ */
+export function explicaLaRedireccion(texto: string, indice: number): boolean {
+  const antes = texto.slice(Math.max(0, indice - 160), indice);
+  return /redirig|redirect|direcci[oó]n vieja|ruta vieja|old route/i.test(
+    antes,
+  );
+}
+
 const CARPETAS_RUTAS = ["src", "data", "docs", "messages", "tests", "scripts"];
 const ARCHIVOS_RUTAS = [
   "README.md",
@@ -191,6 +205,7 @@ function rutasViejas(): string[] {
       readFileSync(path.join(RAIZ, norm), "utf8"),
     );
     for (const m of texto.matchAll(RUTA_VIEJA)) {
+      if (explicaLaRedireccion(texto, m.index ?? 0)) continue;
       hallazgos.push(`${norm}:${lineaDe(texto, m.index ?? 0)} «${m[0]}»`);
     }
   }
@@ -225,6 +240,17 @@ describe("ninguna ruta ni ancla vieja en el árbol", () => {
 
   it("src data docs messages tests scripts: sin /vitrina ni #vitrina", () => {
     expect(rutasViejas()).toEqual([]);
+  });
+
+  it("la ruta vieja solo se nombra para explicar su redirección", () => {
+    const frase = (s: string) => explicaLaRedireccion(s, s.indexOf("/vitrina"));
+    expect(frase("La dirección vieja ya no existe: escribe /vitrina")).toBe(
+      true,
+    );
+    expect(
+      frase("te redirige: escribe /vitrina y terminas en /portafolio"),
+    ).toBe(true);
+    expect(frase("Abre /vitrina/apps y mira las fichas")).toBe(false);
   });
 
   it("el motor del 301 sí conoce la ruta vieja", () => {

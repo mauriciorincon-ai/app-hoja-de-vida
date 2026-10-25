@@ -188,7 +188,7 @@ const ANCLAS: Ancla[] = [
   {
     doc: "manual",
     nombre: "fichas en el índice del chat",
-    patron: /incluye las \*\*(\d+) fichas de la vitrina\*\*/g,
+    patron: /incluye las \*\*(\d+) fichas del portafolio\*\*/g,
     esperado: [V.apps + FICHAS_DE_OTRAS_CASAS],
   },
 ];
