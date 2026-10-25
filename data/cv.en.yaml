@@ -64,6 +64,7 @@ trayectoria:
     rol: "Generative AI Engineer"
     organizacion: "Independent projects"
     tipo: "proyectos-propios"
+    proyecto: "apps-pipeline"
     descripcion: >-
       I develop my own engineering and artificial intelligence projects to
       explore architectures, agents, RAG systems and evaluation mechanisms.
@@ -765,6 +766,71 @@ proyectos:
         The problem I was solving in 2016 —that the decision needed a piece of data
         nobody had built— is exactly the same one I solve today, with other tools and
         another scale.
+
+  - slug: "apps-pipeline"
+    nombre: "The AI-APPs pipeline — Independent projects (2024–today)"
+    resumen: >-
+      The AI-APPs pipeline: applications, agents, research lines and dashboards built with two
+      houses, a factory agent, four CI jobs, a sheet contract generated from Zod, a real cost of
+      US$0 a month and two rules: code first, and every control is demonstrated by failing.
+    stack: ["Claude Code", "Next.js", "Zod", "Supabase", "gitleaks"]
+    destacado: false
+    casestudy:
+      titular: "A governed factory to build applications, agents, research lines and dashboards: two houses, one writer per house and written approvals, so that the value also stays in the ability to build the next piece."
+      contexto: >-
+        The portfolio is not built as a succession of independent projects: applications, agents,
+        research lines and dashboards come out of one pipeline, governed by common rules to
+        prioritize, define, build, validate, document and publish each piece.
+      reto: >-
+        Taking advantage of artificial intelligence without diluting responsibility for the result:
+        nobody being the bridge between the plan and the code anymore, and quality not depending on
+        remembering how the previous piece was built.
+      cifras:
+        - valor: 2
+          etiqueta: "houses, with a single writer each"
+        - valor: 2
+          etiqueta: "written approvals before building each application"
+        - valor: 4
+          etiqueta: "continuous integration jobs on every change"
+      capitulos:
+        - titulo: "Two houses, one writer per house"
+          texto: >-
+            A private planning house keeps the brief, the product vision, the sprints with their plan
+            and their retrospective, the method and the standards; each app's repository keeps the code,
+            the tests and the summary of each sprint. The planning house reads the repositories
+            read-only and never writes in them; synchronization is a read of git, not copy and paste.
+        - titulo: "Two approvals before the code"
+          texto: >-
+            No application advances without two written approvals: the current priority, which shows why
+            that piece deserves capacity over others, and the product vision, with its purpose, its
+            users, all its features and its limits. Without them, the pipeline refuses to plan or to
+            open a sprint: conceiving is cheap; building is earned.
+        - titulo: "A factory agent with human owners"
+          texto: >-
+            A factory agent keeps the state of the initiatives, verifies the inputs, applies advancement
+            rules and identifies documentation gaps. It cannot approve a priority, modify a purpose,
+            accept a risk or declare a piece finished, and it does not edit the method or the kit
+            without my explicit approval.
+        - titulo: "Code first, AI when it is justified"
+          texto: >-
+            Generative artificial intelligence does not come in by default: I must first show what
+            demands interpretation, generation or contextual retrieval, and why a deterministic solution
+            is not enough; activating it requires a written architecture decision. Where there is a
+            model, it is an optional feature, with a deterministic fallback.
+        - titulo: "Every control is demonstrated by failing"
+          texto: >-
+            Almost all the rules were born from a red. A secrets sweep that reported "all good" let a
+            weak bait through twice; since then, a gate that was never seen failing does not count.
+            Every change goes through four continuous integration jobs, and every cycle closes with a
+            summary that the planning house reads before planning the next one.
+      impacto:
+        - "Applications, agents, research lines and dashboards built with the same method, at a real cost of US$0 a month."
+        - "Nobody is the bridge anymore: the previous flow cost between 4 and 8 hours of coordination per sprint."
+        - "What one sprint learns in one app travels stamped to the next, in a versioned kit."
+        - "Decisions of purpose, priority, risk and acceptance remain explicitly in human hands."
+      leccion: >-
+        The goal is for the value not to remain only in the finished product, but also in the
+        ability to build the next one with greater clarity, consistency and speed.
 
 certificaciones:
   # AI-102 left the list on 2026-09-10: Microsoft discontinued the certification (owner's decision).

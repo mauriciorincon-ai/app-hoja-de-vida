@@ -72,6 +72,7 @@ trayectoria:
     rol: "Ingeniero de IA Generativa"
     organizacion: "Proyectos propios · independiente"
     tipo: "proyectos-propios"
+    proyecto: "apps-pipeline"
     descripcion: >-
       Desarrollo proyectos propios de ingeniería e inteligencia artificial para
       explorar arquitecturas, agentes, sistemas RAG y mecanismos de evaluación.
@@ -789,6 +790,71 @@ proyectos:
         El problema que resolvía en 2016 —que la decisión necesitaba un dato que nadie
         había construido— es exactamente el mismo que resuelvo hoy, con otras
         herramientas y otra escala.
+
+  - slug: "apps-pipeline"
+    nombre: "El pipeline AI-APPs — Proyectos propios (2024–hoy)"
+    resumen: >-
+      El pipeline AI-APPs: aplicaciones, agentes, investigaciones y tableros construidos con dos
+      casas, un agente de fábrica, cuatro jobs de CI, un contrato de ficha desde Zod, costo real
+      de US$0 al mes y dos reglas: código primero y todo control se demuestra fallando.
+    stack: ["Claude Code", "Next.js", "Zod", "Supabase", "gitleaks"]
+    destacado: false
+    casestudy:
+      titular: "Una fábrica gobernada para construir aplicaciones, agentes, investigaciones y tableros: dos casas, un escritor por casa y aprobaciones escritas, para que el valor quede también en la capacidad de construir la siguiente pieza."
+      contexto: >-
+        El portafolio no se construye como una sucesión de proyectos independientes: aplicaciones,
+        agentes, investigaciones y tableros nacen de un mismo pipeline, gobernado por reglas comunes
+        para priorizar, definir, construir, validar, documentar y publicar cada pieza.
+      reto: >-
+        Aprovechar la inteligencia artificial sin diluir la responsabilidad sobre el resultado: que
+        nadie vuelva a ser el puente entre el plan y el código, y que la calidad no dependa de
+        recordar cómo se construyó la pieza anterior.
+      cifras:
+        - valor: 2
+          etiqueta: "casas, con un solo escritor cada una"
+        - valor: 2
+          etiqueta: "aprobaciones escritas antes de construir cada aplicación"
+        - valor: 4
+          etiqueta: "jobs de integración continua en cada cambio"
+      capitulos:
+        - titulo: "Dos casas, un escritor por casa"
+          texto: >-
+            Una casa planeadora, privada, guarda el brief, la visión de producto, los sprints con su
+            plan y su retrospectiva, el método y los estándares; el repositorio de cada app guarda el
+            código, las pruebas y el resumen de cada sprint. La planeadora lee los repositorios en solo
+            lectura y nunca escribe en ellos; la sincronización es lectura de git, no copiar y pegar.
+        - titulo: "Dos aprobaciones antes del código"
+          texto: >-
+            Ninguna aplicación avanza sin dos aprobaciones escritas: la prioridad vigente, que demuestra
+            por qué esa pieza merece capacidad frente a otras, y la visión del producto, con su
+            propósito, sus usuarios, todas sus funcionalidades y sus límites. Sin ellas, el pipeline se
+            rehúsa a planear o a abrir un sprint: concebir es barato; construir se gana.
+        - titulo: "Un agente de fábrica con responsables humanos"
+          texto: >-
+            Un agente de fábrica conserva el estado de las iniciativas, verifica los insumos, aplica
+            reglas de avance e identifica vacíos documentales. No puede aprobar una prioridad, modificar
+            un propósito, aceptar un riesgo ni declarar terminada una pieza, y no edita el método ni el
+            kit sin mi aprobación explícita.
+        - titulo: "Código primero, IA cuando está justificada"
+          texto: >-
+            La inteligencia artificial generativa no entra por defecto: antes debo demostrar qué exige
+            interpretación, generación o recuperación contextual, y por qué una solución determinista no
+            basta; activarla exige una decisión de arquitectura escrita. Donde sí hay un modelo, es una
+            función opcional, con fallback determinista.
+        - titulo: "Cada control se demuestra fallando"
+          texto: >-
+            Casi todas las reglas nacieron de un rojo. Un barrido de secretos que daba «todo bien» dejó
+            pasar dos veces una carnada floja; desde entonces, un gate que nunca se vio fallar no
+            cuenta. Cada cambio pasa por cuatro jobs de integración continua, y cada ciclo cierra con un
+            resumen que la planeadora lee antes de planear el siguiente.
+      impacto:
+        - "Aplicaciones, agentes, investigaciones y tableros construidos con el mismo método, a un costo real de US$0 al mes."
+        - "Nadie vuelve a ser el puente: el flujo anterior costaba entre 4 y 8 horas de coordinación por sprint."
+        - "Lo que un sprint aprende en una app viaja estampado a la siguiente, en un kit con versión."
+        - "Las decisiones de propósito, prioridad, riesgo y aceptación siguen explícitamente en manos humanas."
+      leccion: >-
+        El objetivo es que el valor no permanezca únicamente en el producto terminado, sino también
+        en la capacidad para construir el siguiente con mayor claridad, consistencia y velocidad.
 
 certificaciones:
   # AI-102 salió de la lista el 2026-09-10: Microsoft descontinuó la certificación (decisión del dueño).
