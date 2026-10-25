@@ -162,8 +162,12 @@ export default async function FrentePage({ params }: Params) {
             /* ── El inicio, dicho con todas sus letras ── */
             <Reveal variant="fadeInUp">
               <FrenteEnPreparacion
-                titulo={t("enPreparacionTitulo")}
-                linea={t("enPreparacionLinea")}
+                titulo={
+                  frente.enPreparacion?.titulo[l] ?? t("enPreparacionTitulo")
+                }
+                linea={
+                  frente.enPreparacion?.linea[l] ?? t("enPreparacionLinea")
+                }
               />
             </Reveal>
           )}

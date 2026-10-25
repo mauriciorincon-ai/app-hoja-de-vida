@@ -1,4 +1,5 @@
-import { readdirSync } from "node:fs";
+import { readFileSync, readdirSync } from "node:fs";
+import { parse } from "yaml";
 import { describe, expect, it } from "vitest";
 import { chunksDeApp, chunksDeFichas, chunksDePieza, leerFichas } from "../../scripts/fichas-al-indice.mjs";
 import { catalogoDeDestinos, destinoExiste } from "../../scripts/destinos.mjs";
@@ -71,20 +72,49 @@ describe("el motor, contra fichas de juguete", () => {
 const enDisco = (carpeta: string, sufijo: string) =>
   readdirSync(`content/${carpeta}`).filter((f) => f.endsWith(sufijo)).length;
 
+/** Los frentes que HOY publican sus piezas, de `data/vitrina.yaml`. */
+const frentesAbiertos = (): Set<string> =>
+  new Set(
+    (
+      parse(readFileSync("data/vitrina.yaml", "utf8")).categorias as {
+        id: string;
+        estado: string;
+      }[]
+    )
+      .filter((c) => c.estado === "abierta")
+      .map((c) => c.id),
+  );
+
+describe("un frente en pausa no se cita", () => {
+  it("el índice no trae ninguna cita a las piezas de un frente en-preparacion", () => {
+    const pausados = ["agentes", "investigaciones", "tableros"].filter(
+      (f) => !frentesAbiertos().has(f),
+    );
+    expect(pausados, "hoy está en pausa el frente de investigaciones").toContain("investigaciones");
+    const { piezas } = leerFichas();
+    const citadas = piezas.filter((p: { frente: string }) => pausados.includes(p.frente));
+    expect(citadas).toEqual([]);
+    const anclas = chunksDeFichas(leerFichas(), "es").map((c) => c.ancla);
+    for (const f of pausados)
+      expect(anclas.filter((a) => a.startsWith(`/vitrina/${f}/`)), f).toEqual([]);
+  });
+});
+
 describe("las piezas reales", () => {
   const fichas = leerFichas();
   const chunks = chunksDeFichas(fichas, "es");
   const catalogo = catalogoDeDestinos();
 
-  it("hay tantas piezas como archivos en disco y todas producen chunks", () => {
+  it("hay tantas piezas como archivos de los frentes abiertos y todas producen chunks", () => {
     // El conteo sale de `content/`, no de un número escrito a mano: una pieza
-    // nueva no debe romper este test, pero una que no llegue al índice, sí.
+    // nueva no debe romper este test, pero una que no llegue al índice, sí. Un
+    // frente en pausa (`en-preparacion`) no tiene página y no se cita: no cuenta.
+    const abiertos = frentesAbiertos();
     const enContent =
       enDisco("vitrina", ".brochure-export.json") +
-      ["agentes", "investigaciones", "tableros"].reduce(
-        (n, f) => n + enDisco(f, ".ficha-tecnica.json"),
-        0,
-      );
+      ["agentes", "investigaciones", "tableros"]
+        .filter((f) => abiertos.has(f))
+        .reduce((n, f) => n + enDisco(f, ".ficha-tecnica.json"), 0);
     expect(enContent).toBeGreaterThan(0);
     expect(fichas.apps.length + fichas.piezas.length).toBe(enContent);
     expect(new Set(chunks.map((c) => c.ancla)).size).toBe(enContent);
