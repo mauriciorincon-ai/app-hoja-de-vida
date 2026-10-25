@@ -264,7 +264,7 @@ el mensaje te llega al correo.
   Una asesoría»); sin motivo, «[CV Viva] Mensaje desde la hoja de vida». Las opciones viven en
   `MOTIVOS` (`src/lib/schemas.ts`) y sus textos en `messages/*.json` bajo `form.motivos`.
 - **Hay DOS formularios (decisión tuya, 2026-09-13):** el general de la portada, que pide un
-  motivo, y la **lista de espera de las apps**, al pie de `/vitrina/apps` y de cada ficha de app
+  motivo, y la **lista de espera de las apps**, al pie de `/portafolio/apps` y de cada ficha de app
   (ahí llega ya con esa app elegida). Su desplegable lista las apps publicadas en
   `content/vitrina/` más **«Otra»**; el asunto del correo es «[CV Viva] Lista de espera: <app>».
   **Solo las apps tienen lista de espera:** agentes, investigaciones y tableros se muestran para
@@ -317,7 +317,7 @@ el mensaje te llega al correo.
   puertas prometiendo lo mismo. **Ahora lo construido tiene una sola puerta: la Vitrina.**
 - **Nada del contenido se perdió.** `data/apps.yaml` sigue siendo la fuente y alimenta tres cosas:
   - **Las brochures** `/es/apps/hoja-de-vida` y `/es/apps/chat-hoja-de-vida` — se llega a ellas
-    desde el bloque **«De esta casa»**, al cierre de `/es/vitrina`.
+    desde el bloque **«De esta casa»**, al cierre de `/es/portafolio`.
   - **El roadmap votable** ya no sale de `apps.yaml`: vive en `data/fichas/<slug>.yaml` y se
     vota en la página de cada app hermana (ver «Roadmap con votación anónima»).
   - **El formulario de contacto** ya no lista apps (desde la tercera revisión post-S8 pide un
@@ -330,13 +330,13 @@ el mensaje te llega al correo.
 
 ### Roadmap con votación anónima · desde Sprint 004 · por app hermana desde el 2026-09-13
 
-- **Qué hace:** en la página de cada app hermana (`/es/vitrina/apps/<slug>`, entre la ficha
+- **Qué hace:** en la página de cada app hermana (`/es/portafolio/apps/<slug>`, entre la ficha
   técnica y la lista de espera) la sección "Roadmap" muestra lo que esa app tiene planeado para el
   final de su camino y deja que quien visita **vote con un clic, sin registrarse**. El número
   junto a cada feature es el **conteo real** de votos en la base de datos.
 - **Qué NO se muestra (tu decisión, 2026-09-13):** ninguna feature de CV Viva ni del chat. Las
   siete del S4 se retiraron y `apps.yaml` ya no admite `roadmap:` (si lo trae, la publicación
-  falla nombrándolo). El escaparate `/vitrina/apps` tampoco monta roadmap: solo asoma las apps.
+  falla nombrándolo). El escaparate `/portafolio/apps` tampoco monta roadmap: solo asoma las apps.
 - **De dónde salen las features:** del complemento curado de cada app, `data/fichas/<slug>.yaml`,
   campo `roadmap:`. Lo administra la **planeadora** (procedencia `cv-viva`) con el criterio que le
   pediste —las más disruptivas e innovadoras y las de cierre de plan, nunca las que ya se están
@@ -393,16 +393,16 @@ el mensaje te llega al correo.
 
 ### La vitrina: cuatro frentes · desde Sprint 005 · tres abiertos desde Sprint 007 e Investigaciones en pausa desde Sprint 022
 
-- **Qué hace:** `/es/vitrina` es el **portal** de lo que se construye aquí, repartido en
+- **Qué hace:** `/es/portafolio` es el **portal** de lo que se construye aquí, repartido en
   **cuatro frentes**, cada uno con su caja —nombre, una frase, su estado y cuántas piezas tiene—
   y **cada uno con su propio espacio**. Desde el Sprint 007 **los cuatro tienen piezas reales**; desde el Sprint 022 **Investigaciones está en pausa** (ver más abajo):
-  - **Apps** (`/es/vitrina/apps`): las apps del pipeline. **10 piezas.**
-  - **Agentes especializados** (`/es/vitrina/agentes`): agentes sin interfaz que se manejan por
+  - **Apps** (`/es/portafolio/apps`): las apps del pipeline. **10 piezas.**
+  - **Agentes especializados** (`/es/portafolio/agentes`): agentes sin interfaz que se manejan por
     comandos. **11 piezas.**
-  - **Investigaciones** (`/es/vitrina/investigaciones`): líneas de investigación, **en pausa desde el
+  - **Investigaciones** (`/es/portafolio/investigaciones`): líneas de investigación, **en pausa desde el
     2026-10-24** porque se están rehaciendo (ver «Tres agentes fuera…» más abajo): la página dice «Esta
     sección se está rehaciendo» y no enseña tarjetas. Sus fichas siguen en `content/`. **7 piezas.**
-  - **Tableros de datos** (`/es/vitrina/tableros`): tableros analíticos, sin atarse a una
+  - **Tableros de datos** (`/es/portafolio/tableros`): tableros analíticos, sin atarse a una
     herramienta. **6 piezas.**
 - **Un frente «en preparación» tiene página igual:** dice qué es y en qué punto está, **sin
   fecha prometida**, y cierra como los demás frentes (lista de espera solo si es `apps`). Marca el
@@ -420,8 +420,8 @@ el mensaje te llega al correo.
 
 #### Las piezas que no son apps · desde Sprint 007
 
-- **Qué hace:** cada frente distinto de apps tiene su **escaparate** (`/es/vitrina/agentes`) con
-  una tarjeta por pieza, y cada pieza su **ficha técnica** en `/es/vitrina/<frente>/<pieza>`. Es
+- **Qué hace:** cada frente distinto de apps tiene su **escaparate** (`/es/portafolio/agentes`) con
+  una tarjeta por pieza, y cada pieza su **ficha técnica** en `/es/portafolio/<frente>/<pieza>`. Es
   **la misma ficha** que la de una app: mismos bloques, misma tipografía, mismos chips. Lo único
   que cambia es que estas piezas **no tienen «ficha completa»** — su detalle vive en la casa que
   las construyó, no aquí.
@@ -462,16 +462,16 @@ el mensaje te llega al correo.
 
 #### Las apps dentro de la vitrina · dos capas desde 2026-09-05
 
-- **Qué hace:** `/es/vitrina/apps` asoma cada app con una muestra corta —en qué estado está, su
+- **Qué hace:** `/es/portafolio/apps` asoma cada app con una muestra corta —en qué estado está, su
   nombre, su promesa, un esquema y cuánto tiene construido— y **cada app tiene dos capas**:
-  - **La ficha técnica** (`/es/vitrina/apps/habla`): la infografía de dos minutos. Hasta siete
+  - **La ficha técnica** (`/es/portafolio/apps/habla`): la infografía de dos minutos. Hasta siete
     bloques en orden fijo: cabecera con el **titular de valor** (qué no hace nadie más), la tira
     de **cifras con su procedencia**, para quién y qué resuelve, **cómo funciona** (el proceso
     dibujado en BPMN: un carril por actor, la decisión donde se decide, los bucles a la vista;
     **opcional desde el contrato v1.1.0** — una pieza sin proceso de uso lo omite y las secciones
     se renumeran), qué tiene (una tarjeta por grupo), límites y **lo que nunca hace**, y dónde
     está. Cierra con «Ver la ficha completa».
-  - **La ficha completa** (`/es/vitrina/apps/habla/detalle`): el detalle construido en el S5 — la
+  - **La ficha completa** (`/es/portafolio/apps/habla/detalle`): el detalle construido en el S5 — la
     promesa, las cifras, las funcionalidades agrupadas en tarjetas que se abren solas al llegar
     leyendo, y los detalles finos (privacidad, stack, funcionalidades descartadas).
     Al pie del escaparate, el bloque **«De esta casa»** enlaza las dos brochures propias.
@@ -512,7 +512,7 @@ el mensaje te llega al correo.
 
 #### Categorías y carrusel · desde Sprint 009
 
-- **Dos categorías de apps.** `/es/vitrina/apps` muestra las apps en dos bloques: **Profesionales**
+- **Dos categorías de apps.** `/es/portafolio/apps` muestra las apps en dos bloques: **Profesionales**
   primero y **Personales** después, con **el mismo título** en los dos (la prioridad de lo
   profesional es el orden, no un título más grande). La pertenencia no vive en el código ni en el
   export: vive en `data/categorias-apps.yaml`, una lista por categoría con el `slug` de cada app
@@ -571,7 +571,7 @@ el mensaje te llega al correo.
 
 - **Qué hace:** algunas apps son privadas y no se publican, pero su casa entrega una
   **simulación estática**: planlang, hoy (sus dos demos, rotuladas «Simulación · no operativo»).
-  Esa app tiene una página más, `/es/vitrina/apps/planlang/simulacion`, a la que se llega con el
+  Esa app tiene una página más, `/es/portafolio/apps/planlang/simulacion`, a la que se llega con el
   botón **«Ver la simulación»** del cierre de su ficha técnica. Arriba dice qué es; debajo, un
   panel con dos botones: **«Abrir la simulación aquí»** la carga en un marco dentro de la misma
   página, y **«pantalla completa»** la abre sola. La simulación no se carga hasta que alguien la
@@ -1145,7 +1145,7 @@ dashboard, a fondo → in-depth…) vive en la bitácora `sprints/CONTENIDO-a-fo
 Desde el 2026-09-20 (ADR-023) el índice del chat incluye las **27 fichas de la vitrina** (las de un frente en pausa no entran: no tienen página que citar): por
 cada app, su presentación, funcionalidades, cifras y límites; por cada agente, investigación o
 tablero, su presentación, cifras, límites y bloques. Cada fragmento cita hacia la ficha
-(`/vitrina/apps/<slug>` o `/vitrina/<frente>/<slug>`). No hay nada que escribir: **una ficha que
+(`/portafolio/apps/<slug>` o `/portafolio/<frente>/<slug>`). No hay nada que escribir: **una ficha que
 llega a `content/` entra al chat en el siguiente build**.
 
 Las fichas pesan **la mitad** que tus documentos en el ranking: son evidencia de una pieza
@@ -1248,8 +1248,8 @@ chat hoy y cuáles traería con la base aprobada. Ese informe **se genera, no se
   quedan en `content/investigaciones/`, pero el sitio no las enseña, no las lista en el sitemap, el chat no las cita y cada una da 404. Cuatro
   evidencias de «Métodos» que enlazaban a una investigación apuntan, mientras dure la pausa, al frente (la línea del YAML guarda el slug para
   volver). **Para reabrirlas:** (1) `estado: abierta` en `data/vitrina.yaml` (el aviso `enPreparacion` puede quedarse; no se usa); (2) devolver los cuatro enlaces de
-  `data/metodo/sistema-de-agentes.yaml` y `decidir-con-modelos.yaml` a `/vitrina/investigaciones/<slug>` (la línea del YAML guarda el slug); (3) volver a
-  poner `/es/vitrina/investigaciones/forja` en `lighthouse-urls.json` si se quiere medir; (4) las cuentas de la guía y de este manual (27 → 34 piezas) y la
+  `data/metodo/sistema-de-agentes.yaml` y `decidir-con-modelos.yaml` a `/portafolio/investigaciones/<slug>` (la línea del YAML guarda el slug); (3) volver a
+  poner `/es/portafolio/investigaciones/forja` en `lighthouse-urls.json` si se quiere medir; (4) las cuentas de la guía y de este manual (27 → 34 piezas) y la
   fila m4 y la k8 de la guía, que describen la pausa, se actualizan a mano. Ninguna prueba de código fija «investigaciones» en pausa: miran el YAML.
 - **Limitaciones conocidas:** el corpus del chat sigue diciendo «7 investigaciones» y «34 piezas» porque cuenta lo que hay en disco; no se
   reescribió su prosa mientras dure la pausa (queda como pregunta al dueño). La simulación de planlang (`public/piezas/planlang`) todavía

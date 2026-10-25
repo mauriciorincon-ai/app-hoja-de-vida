@@ -238,7 +238,7 @@ animaciones infinitas (sweep/glitch/marquee), scroll-snap de deck, CDNs en `<hea
   una (`fadeInSlow` dentro de un `<ul>` escalonado, 140 ms), la cifra de **productos** —ya no
   «piezas», en todo el copy visible— aparece a 1.5× y se encoge a su tamaño con la entrada de su caja —misma duración, misma curva, mismo escalón— en cada pasada, como chip entero y sin rebote (`CifraQueLlama`), y el cierre de
   cada caja dice «Explora».
-- **Roadmap embebido**: dentro de `/vitrina/apps` va como bloque con `border-t paper-2` y título
+- **Roadmap embebido**: dentro de `/portafolio/apps` va como bloque con `border-t paper-2` y título
   `2xl` (no el `clamp` de sección de HOME). Misma isla de votación.
 
 ### Página de mantenimiento · 2026-09-24
@@ -352,7 +352,7 @@ cifra `clamp(3.5rem,8vw,4.75rem)`; tres columnas dejaban dos huérfanos.
 
 ### Componentes de la vitrina · S5 → S7
 
-- **Ficha técnica** (`/vitrina/apps/<slug>` y `/vitrina/<frente>/<slug>`, ADR-016 · ADR-017): la capa infografía de una pieza,
+- **Ficha técnica** (`/portafolio/apps/<slug>` y `/portafolio/<frente>/<slug>`, ADR-016 · ADR-017): la capa infografía de una pieza,
   en orden fijo para cualquier frente y con **tres secciones opcionales que decide la pieza, no el
   frente**: el proceso BPMN (contrato v1.1.0), los hallazgos y la galería (v1.3.0). La que falta
   no se pinta y **las demás se renumeran seguidas, nunca un hueco** — una app va 01–05, una
@@ -384,7 +384,7 @@ cifra `clamp(3.5rem,8vw,4.75rem)`; tres columnas dejaban dos huérfanos.
   proceso se parte en filas (6 columnas por fila). Por debajo de 720 px el contenedor desplaza en
   horizontal: **nunca se encoge el texto**. Las invariantes de legibilidad (rótulos que no se
   pisan ni quedan tachados) se prueban sobre los seis procesos reales.
-- **Caja de frente** (portal `/vitrina`, ADR-015 · post-S5): la unidad del portal, una por frente
+- **Caja de frente** (portal `/portafolio`, ADR-015 · post-S5): la unidad del portal, una por frente
   (apps · agentes · investigaciones · tableros). Card paper-0, borde paper-2, `r-lg`, `sh-1`,
   hover `-translate-y-0.5` + `sh-2`. Arriba, a la izquierda el **icono del frente** en un cuadro
   paper-1 de 44 px (24×24, trazo 1.5, sin relleno, dibujado en esta casa — nunca un emoji); a la
@@ -394,14 +394,14 @@ cifra `clamp(3.5rem,8vw,4.75rem)`; tres columnas dejaban dos huérfanos.
   caja **conservando el nombre del frente como nombre accesible**. **Marca un inicio, no lo
   disfraza:** un frente en preparación no enseña una cuenta inventada, y la cuenta de uno abierto
   **se mide en disco**, no se escribe.
-- **Muestra de app** (escaparate `/vitrina`): card paper-0, borde paper-2, `r-lg`, `sh-1`. Lleva
+- **Muestra de app** (escaparate `/portafolio`): card paper-0, borde paper-2, `r-lg`, `sh-1`. Lleva
   chip de estado + chip de ciclo, nombre en Fraunces, promesa en Fraunces menor, **tira**
   esquemática enmarcada en paper-1, para-quién en `ink-2`, conteos en mono y cierre «ver la ficha».
   El enlace estira su área de clic a toda la card (`after:absolute inset-0`) **conservando el
   nombre de la app como nombre accesible** — una sola parada de tabulador, y nunca «leer más».
   **Desde S9 su nombre es un `h3`** (cuelga del `h2` del bloque de categoría) y es **el nombre
   oficial** de la app, el mismo en toda la CV Viva (ADR-028).
-- **Bloque de categoría de apps** (`/vitrina/apps` · S9 · ajuste 2026-10-07): las muestras de app
+- **Bloque de categoría de apps** (`/portafolio/apps` · S9 · ajuste 2026-10-07): las muestras de app
   van en dos `<section data-categoria aria-labelledby>`, **Profesionales primero** y Personales
   después, cada una en el orden de `data/categorias-apps.yaml`. **Los dos bloques se montan igual**:
   `h2` en Fraunces 500, `clamp(1.6rem, 3.2vw, 2.1rem)`, `tracking-[-0.015em]`, `ink-0` —el mismo
@@ -448,7 +448,7 @@ cifra `clamp(3.5rem,8vw,4.75rem)`; tres columnas dejaban dos huérfanos.
   hay controles, velo, foco ni roles. La tarjeta no cambia. Sin tokens nuevos. Un bloque vacío no
   se pinta. *(La galería «Cómo se ve» de los tableros conserva su mecánica con extremos: son las
   pantallas de UNA pieza, no un conjunto que gire.)*
-- **Muestra de pieza** (escaparate de un frente que no es apps, `/vitrina/<frente>` · S7): la
+- **Muestra de pieza** (escaparate de un frente que no es apps, `/portafolio/<frente>` · S7): la
   hermana de la muestra de app, y se parece en todo menos en una cosa — **una app se reconoce por
   su pantalla y una pieza sin interfaz no tiene ninguna**. Un agente vive en una terminal, una
   investigación es un documento: una maqueta inventada sería decorado que insinúa un producto
@@ -504,7 +504,7 @@ cifra `clamp(3.5rem,8vw,4.75rem)`; tres columnas dejaban dos huérfanos.
   CV Viva inyectados (`scripts/tema-cv-viva.mjs`) para que las seis se vean de la misma casa.
   Banner apaisado enmarcado en paper-1, `alt=""` con pie visible que **declara el repintado** —
   una imagen retocada que se presenta como cruda miente igual que una maqueta que finge ser foto.
-- **Página de simulación** (`/vitrina/apps/<slug>/simulacion`, 2026-10-12, ADR-029): para la app
+- **Página de simulación** (`/portafolio/apps/<slug>/simulacion`, 2026-10-12, ADR-029): para la app
   privada cuya casa entrega una simulación estática. Contenedor `max-w-6xl`; arriba lo de CV Viva
   —el regreso a la ficha en mono, el **rótulo «Simulación · no operativo» en `peach`** (chip
   `r-full`, mono 11 px), el `h1` en Fraunces «<app>: la simulación» y la nota en 16 px `ink-1`—.
