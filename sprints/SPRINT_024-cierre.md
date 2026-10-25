@@ -5,7 +5,7 @@ hito: H-2
 opened: 2026-10-25
 closed: 2026-10-25
 branch: sprint-024/el-chat
-pr: pendiente
+pr: https://github.com/mauriciorincon-ai/app-hoja-de-vida/pull/102
 ---
 
 # Sprint 024 — Cierre ejecutivo · CV Viva · Sentada 3 de la revisión: el chat, en tercera persona y sin perder la conversación
