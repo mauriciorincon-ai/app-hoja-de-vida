@@ -139,9 +139,13 @@ export default async function FrentePage({ params }: Params) {
             <p className="mt-5 max-w-[60ch] font-display text-[1.15rem] leading-snug text-ink-1">
               {frente.intro[l]}
             </p>
-            <p className="mt-4 max-w-[60ch] text-[16px] leading-[1.75] text-ink-1">
-              {frente.detalle[l]}
-            </p>
+            {/* Un frente en pausa con su aviso propio no describe lo que
+                «se publica aquí»: lo dice el aviso, no el detalle. */}
+            {!frente.enPreparacion && (
+              <p className="mt-4 max-w-[60ch] text-[16px] leading-[1.75] text-ink-1">
+                {frente.detalle[l]}
+              </p>
+            )}
             {abierta && (
               <p className="mt-3 max-w-[60ch] text-[15px] leading-relaxed text-ink-2">
                 {t("escaparateNota")}
