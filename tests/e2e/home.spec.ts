@@ -5,16 +5,17 @@ import { parse } from "yaml";
 // El orden de la HOME desde la revisión post-S7: la vitrina ocupa el sitio de
 // «Proyectos», los estudios tienen sección propia, y el roadmap se fue con las
 // apps a /portafolio/apps. Desde el S19, «Métodos» asoma sus publicaciones entre la
-// vitrina y los estudios.
+// vitrina y los estudios. En el S23 (2026-10-25) la vitrina pasó a llamarse
+// «Portafolio» y «Métodos» bajó a después de Skills, antes de Contacto.
 const SECTIONS = [
   "perfil",
   "trayectoria",
   "logros",
   "portafolio",
-  "metodos",
   "estudios",
   "certificaciones",
   "skills",
+  "metodos",
   "contacto",
 ];
 
@@ -89,6 +90,17 @@ test.describe("HOME — happy path del sprint", () => {
     await expect(page.locator("#proyectos")).toHaveCount(0);
     await expect(page.locator("#roadmap")).toHaveCount(0);
     await expect(page.locator("#portafolio [data-frente]")).toHaveCount(4);
+
+    // OM-01 (S23): cada sección va debajo de la anterior, en el orden de SECTIONS
+    // —«Métodos» entre Skills y Contacto—, medido por su posición en la página.
+    const arriba = await page.evaluate(
+      (ids) => ids.map((id) => document.getElementById(id)!.offsetTop),
+      SECTIONS,
+    );
+    expect(arriba, SECTIONS.join(" < ")).toEqual(
+      [...arriba].sort((a, b) => a - b),
+    );
+    expect(new Set(arriba).size).toBe(SECTIONS.length);
 
     // Toggle de idioma (conserva la página, cambia la ruta) — timeout amplio:
     // bajo carga paralela la navegación client-side puede exceder los 5s
@@ -240,6 +252,34 @@ test.describe("HOME — happy path del sprint", () => {
     await expect(page.getByRole("heading", { level: 1 })).not.toContainText(
       "This page doesn't exist",
     );
+  });
+
+  // S23 (OM-06): el 404 de cada idioma lleva el conmutador ES/EN del encabezado.
+  // El dueño: «en el 404 no aparece el ES/EN, sí el chat y volver al inicio».
+  test("el 404 lleva el conmutador de idioma, y cambia al 404 del otro idioma @webkit", async ({
+    page,
+  }) => {
+    const res = await page.goto("/es/no-existe/de-verdad");
+    expect(res?.status()).toBe(404);
+    const aEn = page.getByRole("button", { name: "Switch to English" });
+    await expect(aEn).toBeVisible();
+    await aEn.click();
+    await expect(page).toHaveURL(/\/en\/no-existe\/de-verdad$/, {
+      timeout: 15_000,
+    });
+    await expect(page.getByRole("heading", { level: 1 })).toContainText(
+      "This page doesn't exist",
+    );
+    // Y de vuelta: el mismo botón, ahora hacia el español.
+    await page.getByRole("button", { name: "Cambiar a español" }).click();
+    await expect(page).toHaveURL(/\/es\/no-existe\/de-verdad$/, {
+      timeout: 15_000,
+    });
+    await expect(page.getByRole("heading", { level: 1 })).toContainText(
+      "Esta página no existe",
+    );
+    // El encabezado trae también el enlace de saltar al contenido, que apunta a su <main>.
+    await expect(page.locator("main#contenido")).toHaveCount(1);
   });
 });
 

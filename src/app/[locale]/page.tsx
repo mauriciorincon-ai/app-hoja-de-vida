@@ -66,12 +66,14 @@ export default async function HomePage({
             los case studies se abren desde su hito en la trayectoria. El
             roadmap se fue con las apps, a /portafolio/apps. */}
         <VitrinaHome locale={locale as Locale} />
-        {/* La puerta a «Métodos» (S19): las publicaciones, nombradas desde
-            `data/metodo/`, entre lo construido y los estudios. */}
-        <MetodosHome locale={locale as Locale} />
         <Estudios estudios={cv.estudios} />
         <Certificaciones certificaciones={cv.certificaciones} />
         <Skills skills={cv.skills} />
+        {/* La puerta a «Métodos» (S19): las publicaciones, nombradas desde
+            `data/metodo/`. Baja a después de Skills y antes de Contacto (S23,
+            pedido del dueño): primero lo que es y lo que construyó, al final
+            cómo lo piensa. */}
+        <MetodosHome locale={locale as Locale} />
         <Contacto identidad={cv.identidad} />
       </main>
       <Footer identidad={cv.identidad} />
