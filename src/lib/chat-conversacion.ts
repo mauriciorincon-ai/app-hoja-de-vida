@@ -1,5 +1,23 @@
 import { z } from "zod";
+import {
+  almacenDelNavegador,
+  CLAVE_ABIERTO,
+  leerAbierto,
+  marcarAbierto,
+  type Almacen,
+} from "@/lib/chat-panel-abierto";
 import { fuenteSchema, type ChatUIMessage } from "@/lib/ia/schemas";
+
+// La marca de «abierto» y el almacén viven en un módulo sin importaciones (el
+// lanzador, que está en el layout, no puede cargar Zod). Se reexportan aquí
+// para el panel y las pruebas.
+export {
+  almacenDelNavegador,
+  CLAVE_ABIERTO,
+  leerAbierto,
+  marcarAbierto,
+  type Almacen,
+};
 
 /**
  * LA CONVERSACIÓN DEL CHAT, EN EL NAVEGADOR (S24, OM-14). Motor puro: el reloj
@@ -24,12 +42,6 @@ export const MAX_MENSAJES = 40;
 /** Tope del JSON guardado, en caracteres: «solo si no llena el almacenamiento de la app». */
 export const MAX_CARACTERES = 100_000;
 export const CLAVE = "cv-viva:chat:v1";
-/** La marca de «el panel estaba abierto», en `sessionStorage` (por pestaña). */
-export const CLAVE_ABIERTO = "cv-viva:chat:abierto";
-
-/** Lo mínimo que se pide a un almacén: el `Storage` del navegador o uno de prueba. */
-export type Almacen = Pick<Storage, "getItem" | "setItem" | "removeItem">;
-
 const parteTexto = z.object({
   type: z.literal("text"),
   text: z.string().max(4000),
@@ -53,18 +65,6 @@ const guardadoSchema = z.object({
   mensajes: z.array(mensajeSchema).max(MAX_MENSAJES),
 });
 export type Guardado = z.infer<typeof guardadoSchema>;
-
-/** El `Storage` real, o null si el navegador lo niega (ventana privada, datos bloqueados). */
-export function almacenDelNavegador(
-  cual: "local" | "sesion" = "local",
-): Almacen | null {
-  try {
-    if (typeof window === "undefined") return null;
-    return cual === "local" ? window.localStorage : window.sessionStorage;
-  } catch {
-    return null;
-  }
-}
 
 /** ¿Ya pasaron las 8 horas del último mensaje? Exactas cuentan como vencida. */
 export function estaVencida(ultimo: number, ahora: number): boolean {
@@ -165,21 +165,3 @@ export function borrar(almacen: Almacen | null): boolean {
   }
 }
 
-/** ¿Estaba el panel abierto cuando la página se descargó? */
-export function leerAbierto(almacen: Almacen | null): boolean {
-  try {
-    return almacen?.getItem(CLAVE_ABIERTO) === "1";
-  } catch {
-    return false;
-  }
-}
-
-/** Anota (o quita) la marca de «el panel está abierto». Falla en silencio: es una comodidad. */
-export function marcarAbierto(almacen: Almacen | null, abierto: boolean): void {
-  try {
-    if (abierto) almacen?.setItem(CLAVE_ABIERTO, "1");
-    else almacen?.removeItem(CLAVE_ABIERTO);
-  } catch {
-    // sin almacén no hay reapertura, y no pasa nada
-  }
-}

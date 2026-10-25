@@ -9,7 +9,7 @@ import {
   almacenDelNavegador,
   leerAbierto,
   marcarAbierto,
-} from "@/lib/chat-conversacion";
+} from "@/lib/chat-panel-abierto";
 
 /**
  * Lanzador flotante del chat (todas las páginas). Presupuesto respetado:
