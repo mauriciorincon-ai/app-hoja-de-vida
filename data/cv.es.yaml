@@ -456,7 +456,7 @@ proyectos:
     nombre: "Liderar la calidad de un WMS — Cafam (2020–2021)"
     resumen: >-
       Equipo de 20 personas en pruebas de implementación: −25% de errores y
-      +15% de eficiencia; BI de control (+50% de precisión, 15+ usuarios) e
+      +15% de eficiencia; BI de control (+50% de precisión, 15+ usuarios) y
       herramientas VBA (−50% de errores de datos).
     stack: ["WMS", "BI", "VBA"]
     casestudy:
