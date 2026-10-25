@@ -748,4 +748,63 @@ describe("la guía v23 · guardar y restaurar", () => {
       true,
     );
   });
+
+  it("A2 · una línea de la v22 cuyo título cambió y trae «: » no corta la nota en el sitio equivocado", () => {
+    // Así copió la v22 la k1b: el título, truncado con «…», y tras «…: » la nota del dueño.
+    const texto = [
+      "CV Viva · Revisión completa · guía v22",
+      "Fecha: 2026-10-24",
+      "",
+      "SÍ CON NOTA (1)",
+      "  · k1b — 2 min Entra a Vitrina desde el menú: ves el portal con cuatro cajas en este…: MI NOTA k1b",
+    ].join("\n");
+    const a = abrir();
+    restaurar(a, texto);
+    expect((a.doc.getElementById("k1b-si") as HTMLInputElement).checked).toBe(
+      true,
+    );
+    expect(
+      a.doc.querySelector<HTMLTextAreaElement>('[data-nota-de="k1b"]')!.value,
+    ).toBe("MI NOTA k1b");
+  });
+
+  it("M3 · el aviso de que no guarda se ve bajo CUALQUIER filtro, no solo en «Revisión completa»", () => {
+    const a = abrir(undefined, HTML, { almacenRoto: true });
+    a.filtro("ensayo").click();
+    a.click("r1-si");
+    expect(aviso(a).hasAttribute("hidden")).toBe(false);
+    // Ningún ancestro lo esconde: el aviso vive fuera de la sección que el filtro oculta.
+    expect(aviso(a).closest("[hidden]")).toBeNull();
+    expect(aviso(a).textContent).toContain("no está guardando tus respuestas");
+  });
+});
+
+describe("la guía v23 · las frases que el sprint dejó falsas", () => {
+  it("A1 · fuera del historial, nada dice que «Métodos» está entre el portafolio y los Estudios", () => {
+    const vigente = HTML.slice(
+      0,
+      HTML.indexOf("<summary>Historial de la guía</summary>"),
+    );
+    expect(vigente.length).toBeGreaterThan(10_000);
+    expect(vigente).not.toMatch(
+      /entre\s+(?:el|la)\s+(?:portafolio|vitrina)\s+y\s+los\s+Estudios/i,
+    );
+  });
+
+  it("A1 · las dos filas que lo decían (R10 y q24) están reescritas, dicen dónde está hoy y llevan «Mejorado · S23»", () => {
+    const { doc } = abrir();
+    for (const id of ["q24"]) {
+      const li = doc.getElementById(id)!;
+      expect(li.getAttribute("data-cambio"), id).toBe("23");
+      expect(li.getAttribute("data-origen"), id).toBe("mejorado");
+      expect(li.textContent, id).toMatch(/después de Skills/);
+    }
+    // R10 no tiene id propio: es la fila que cubre q2, q7 y q24.
+    const r10 = [...doc.querySelectorAll<HTMLElement>("li[data-cubre]")].find(
+      (li) => li.getAttribute("data-cubre") === "q2 q7 q24",
+    )!;
+    expect(r10.getAttribute("data-cambio")).toBe("23");
+    expect(r10.getAttribute("data-origen")).toBe("mejorado");
+    expect(r10.textContent).toMatch(/después de Skills/);
+  });
 });
