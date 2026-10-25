@@ -1,5 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { medirAncla, resolverAncla } from "@/lib/ancla-de-scroll";
+import {
+  aPixelEntero,
+  medirAncla,
+  posicionesEnteras,
+  resolverAncla,
+} from "@/lib/ancla-de-scroll";
 
 /**
  * El cambio de idioma conserva un ANCLA DE CONTENIDO, no píxeles ni hash
@@ -47,5 +52,50 @@ describe("ancla de scroll al cambiar de idioma", () => {
   it("si el hito no existe al otro lado, cae al scrollY de respaldo; nunca negativo", () => {
     expect(resolverAncla(medirAncla(2450, es), [0, 700])).toBe(2450);
     expect(resolverAncla({ indice: 0, desfase: -40, y: 10 }, [0])).toBe(0);
+  });
+
+  it("el destino es un píxel entero: WebKit trunca lo fraccionario y la página deriva (S23, OM-05)", () => {
+    expect(aPixelEntero(1559.84375)).toBe(1560); // truncado daría 1559
+    expect(aPixelEntero(1636.15625)).toBe(1636);
+    expect(aPixelEntero(0.2)).toBe(0);
+    expect(aPixelEntero(-0.4)).toBeCloseTo(0, 5);
+  });
+
+  it("ida y vuelta con bordes fraccionarios: el error no se acumula en ningún sentido", () => {
+    // Los bordes reales medidos en WebKit (Trayectoria, ES → EN → ES).
+    const es = [1508.8125];
+    const en = [1584.96875];
+    let y = 1560;
+    const vistos = [y];
+    for (let i = 0; i < 10; i++) {
+      const [de, a] = i % 2 === 0 ? [es, en] : [en, es];
+      y = aPixelEntero(resolverAncla(medirAncla(y, de), a));
+      vistos.push(y);
+    }
+    // En español siempre 1560; en inglés siempre 1636. Con truncar, 1560 → 1559 → 1558…
+    expect(vistos.filter((_, i) => i % 2 === 0)).toEqual(Array(6).fill(1560));
+    expect(vistos.filter((_, i) => i % 2 === 1)).toEqual(Array(5).fill(1636));
+  });
+
+  it("un borde con .5 tampoco deriva: los bordes se redondean antes de medir el desfase (B1)", () => {
+    const es = [1508.5];
+    const en = [1584.0];
+    const recorrer = (posiciones: (t: number[]) => number[]) => {
+      let y = 1560;
+      const vistos = [y];
+      for (let i = 0; i < 10; i++) {
+        const [de, a] = i % 2 === 0 ? [es, en] : [en, es];
+        y = aPixelEntero(
+          resolverAncla(medirAncla(y, posiciones(de)), posiciones(a)),
+        );
+        vistos.push(y);
+      }
+      return vistos;
+    };
+    const vistos = recorrer(posicionesEnteras);
+    expect(vistos.filter((_, i) => i % 2 === 0)).toEqual(Array(6).fill(1560));
+    expect(vistos.filter((_, i) => i % 2 === 1)).toEqual(Array(5).fill(1635));
+    // Sin redondear, el empate .5 sube un píxel por ida y vuelta: por eso existe.
+    expect(recorrer((t) => t)[10]).toBeGreaterThan(1560);
   });
 });

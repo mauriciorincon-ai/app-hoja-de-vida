@@ -55,6 +55,29 @@ export function medirAncla(scrollY: number, tops: number[]): Ancla {
   };
 }
 
+/**
+ * El destino, a un píxel entero. Los bordes de los hitos son fraccionarios
+ * (1/64 de píxel) y el desfase guardado también; WebKit TRUNCA un `scrollTo`
+ * fraccionario en vez de redondearlo, así que 1559,84 caía en 1559. Con un
+ * píxel menos en cada ida y vuelta, diez cambios de idioma en Safari bajaban la
+ * página 5 px (S23, OM-05: «cada vez baja un poco, y pulsando muchas veces
+ * llega al final»). Redondeado al más cercano, el error de un cambio no se suma
+ * al del siguiente: Chromium ya lo hacía así y no derivaba.
+ */
+export function aPixelEntero(y: number): number {
+  return Math.round(y);
+}
+
+/**
+ * Las posiciones de los hitos, a píxel entero. Con el borde en x,5 y el destino
+ * redondeado, el desfase quedaba en x,5 también y cada ida y vuelta entre dos
+ * idiomas subía un píxel (1508,5 y 1584,0: +1 por vuelta). Con el borde ya
+ * entero, el desfase y el destino son enteros y la vuelta cae donde salió.
+ */
+export function posicionesEnteras(tops: number[]): number[] {
+  return tops.map(aPixelEntero);
+}
+
 /** El scrollY que reproduce el ancla sobre una lista nueva de candidatos. */
 export function resolverAncla(ancla: Ancla, tops: number[]): number {
   if (ancla.indice < 0 || ancla.indice >= tops.length) return ancla.y;
@@ -62,8 +85,10 @@ export function resolverAncla(ancla: Ancla, tops: number[]): number {
 }
 
 function tops(): number[] {
-  return Array.from(document.querySelectorAll(SELECTOR_ANCLAS)).map(
-    (el) => el.getBoundingClientRect().top + window.scrollY,
+  return posicionesEnteras(
+    Array.from(document.querySelectorAll(SELECTOR_ANCLAS)).map(
+      (el) => el.getBoundingClientRect().top + window.scrollY,
+    ),
   );
 }
 
@@ -94,6 +119,9 @@ export function restaurarAncla(): boolean {
   }
   if (!crudo) return false;
   const ancla = JSON.parse(crudo) as Ancla;
-  window.scrollTo({ top: resolverAncla(ancla, tops()), behavior: "instant" });
+  window.scrollTo({
+    top: aPixelEntero(resolverAncla(ancla, tops())),
+    behavior: "instant",
+  });
   return true;
 }

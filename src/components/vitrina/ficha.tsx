@@ -1,4 +1,5 @@
 import { getTranslations } from "next-intl/server";
+import { sinVitrina } from "../../../scripts/sin-vitrina.mjs";
 import type { FichaVitrina } from "@/lib/vitrina/loader";
 import type { FuenteMetrica } from "@/lib/vitrina/schemas";
 import { Maqueta } from "./maquetas";
@@ -49,9 +50,13 @@ const colorEstado = {
   inicial: "bg-citron text-citron-ink",
 } as const;
 
-/** `datos_del_menor_solo_en_dispositivo` → "datos del menor solo en dispositivo" */
+/**
+ * `datos_del_menor_solo_en_dispositivo` → "datos del menor solo en dispositivo".
+ * Una clave de otra casa también es texto que se lee: con la palabra del sitio
+ * (`llamadas_a_modelos_en_la_vitrina` → «…en el portafolio», S23).
+ */
 function humanizarClave(clave: string): string {
-  return clave.replace(/_/g, " ");
+  return sinVitrina(clave.replace(/_/g, " "));
 }
 
 const ROTULO = "font-mono text-[11px] tracking-[0.08em] text-ink-2 uppercase";
@@ -293,7 +298,7 @@ export async function FichaApp({ ficha }: { ficha: FichaVitrina }) {
         </p>
         <div className="mt-1 flex flex-wrap items-center gap-3">
           <a
-            href="#contacto-vitrina"
+            href="#contacto-portafolio"
             data-cta="lista-de-espera"
             className="flex min-h-11 items-center rounded-md bg-sage px-5 text-sm font-medium text-sage-ink shadow-sh-1 transition-[filter] duration-[120ms] hover:brightness-[0.97]"
           >

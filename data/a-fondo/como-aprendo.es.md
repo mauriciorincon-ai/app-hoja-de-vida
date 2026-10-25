@@ -142,7 +142,7 @@ Las cifras salen de los repositorios y no sustituyen la evaluación de la calida
 
 <!-- seccion: las-cuatro-familias -->
 
-A las diez aplicaciones hermanas se suman 11 agentes publicados, 7 investigaciones y 6 tableros construidos sobre datos públicos. En total, la vitrina reúne 34 piezas dentro de esas cuatro familias, y las cifras de cada una se cuadran contra las fichas visibles de la vitrina.
+A las diez aplicaciones hermanas se suman 11 agentes publicados, 7 investigaciones y 6 tableros construidos sobre datos públicos. En total, el portafolio reúne 34 piezas dentro de esas cuatro familias, y las cifras de cada una se cuadran contra las fichas visibles del portafolio.
 
 Cada familia demuestra una forma diferente de aprendizaje. Las aplicaciones exigen transformar nuevas tecnologías en experiencias utilizables. Los agentes requieren comprender modelos, fuentes, herramientas, contexto, memoria y evaluación. Las investigaciones obligan a formular preguntas, revisar evidencia y controlar afirmaciones. Los tableros requieren convertir fuentes públicas en modelos semánticos de Power BI, medidas verificables en DAX y experiencias de decisión, con datos que cualquiera puede verificar.
 

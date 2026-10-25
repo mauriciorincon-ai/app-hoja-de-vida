@@ -3,7 +3,7 @@ import { z } from "zod";
 /**
  * Las dos categorías de las apps de la vitrina (Sprint 009) — MOTOR PURO.
  *
- * `/vitrina/apps` muestra las apps en dos bloques, Profesionales y Personales,
+ * `/portafolio/apps` muestra las apps en dos bloques, Profesionales y Personales,
  * y la pertenencia sale de `data/categorias-apps.yaml`, no del código ni del
  * export (los exports no se editan aquí). Este módulo valida ese YAML y reparte
  * las fichas; no lee archivos (su loader es `categorias-loader.ts`) y no ordena
@@ -125,7 +125,7 @@ export function repartirApps<F extends ConSlug>(
  * después personales, cada una en el orden del YAML. Es lo que ordena a las
  * vecinas «App anterior / App siguiente» y el selector de la lista de espera:
  * si siguieran el orden del loader (selladas primero, luego por fecha), «siguiente»
- * dejaría de significar lo que el visitante acaba de ver en `/vitrina/apps`.
+ * dejaría de significar lo que el visitante acaba de ver en `/portafolio/apps`.
  * Falla igual que `repartirApps` si alguna app no tiene categoría.
  */
 export function ordenDeEscaparate<T>(

@@ -54,12 +54,13 @@ const RETIRADAS: Retirada[] = [
     slug: "planlang-demo-a",
     porQue: "S22 · Agente A, autorizaciones médicas",
     patron:
-      /vitrina\/agentes\/planlang-demo-a|Agente\s+A\s*[,·]\s*(de\s+)?autorizaciones|Agent\s+A\s*[,·]\s*(for\s+)?medical|agentes\s+demostrativos\s+de\s+planlang|planlang's\s+demonstration\s+agents/i,
+      /(?:vitrina|portafolio)\/agentes\/planlang-demo-a|Agente\s+A\s*[,·]\s*(de\s+)?autorizaciones|Agent\s+A\s*[,·]\s*(for\s+)?medical|agentes\s+demostrativos\s+de\s+planlang|planlang's\s+demonstration\s+agents/i,
     caza: [
       "**Agente A · autorizaciones médicas**",
       // La prosa real del corpus, con el salto de línea donde lo tenía.
       "el Agente A, de autorizaciones\nmédicas, y el Agente B",
       "Agent A, for medical authorizations, and Agent B,",
+      "/portafolio/agentes/planlang-demo-a",
       "/vitrina/agentes/planlang-demo-a",
       "los agentes\ndemostrativos de planlang",
     ],
@@ -69,11 +70,12 @@ const RETIRADAS: Retirada[] = [
     slug: "planlang-demo-b",
     porQue: "S22 · Agente B, vinculación con debida diligencia",
     patron:
-      /vitrina\/agentes\/planlang-demo-b|Agente\s+B\s*[,·]\s*(de\s+)?vinculaci|Agent\s+B\s*[,·]\s*(for\s+)?onboarding/i,
+      /(?:vitrina|portafolio)\/agentes\/planlang-demo-b|Agente\s+B\s*[,·]\s*(de\s+)?vinculaci|Agent\s+B\s*[,·]\s*(for\s+)?onboarding/i,
     caza: [
       "Agente B · vinculación con debida diligencia",
       "y el Agente B, de vinculación con debida diligencia",
       "Agent B,\nfor onboarding with due diligence",
+      "/portafolio/agentes/planlang-demo-b",
       "/vitrina/agentes/planlang-demo-b",
     ],
     noCaza: "Demo B: vinculación con debida diligencia",
@@ -81,8 +83,11 @@ const RETIRADAS: Retirada[] = [
   {
     slug: "harness-design-science",
     porQue: "S22 · duplicado del Paper Computacional (solo se barre su ficha)",
-    patron: /vitrina\/agentes\/harness-design-science/i,
-    caza: ["/vitrina/agentes/harness-design-science"],
+    patron: /(?:vitrina|portafolio)\/agentes\/harness-design-science/i,
+    caza: [
+      "/portafolio/agentes/harness-design-science",
+      "/vitrina/agentes/harness-design-science",
+    ],
     noCaza: "El Harness Design Science —diez fases D0 a D9—",
   },
 ];

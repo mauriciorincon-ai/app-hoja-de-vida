@@ -374,7 +374,7 @@ export type RoadmapFeature = z.infer<typeof roadmapFeatureSchema>;
 export type Brochure = z.infer<typeof brochure>;
 
 // Los frentes de la vitrina (post-S5, ADR-015): apps · agentes · investigaciones
-// · tableros. `id` es la ruta /vitrina/<id>. Un frente «abierta» necesita
+// · tableros. `id` es la ruta /portafolio/<id>. Un frente «abierta» necesita
 // PIEZAS REALES que enseñar: marcarlo abierto sin ellas publicaría una página
 // que promete y no cumple, así que el build FALLA.
 //

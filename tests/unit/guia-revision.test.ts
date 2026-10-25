@@ -26,12 +26,32 @@ const HTML = readFileSync(RUTA, "utf8");
 const LIMITE = 45;
 const NS = "guia-hoja-de-vida:s21:";
 
-function abrir(almacen?: Record<string, string>, html = HTML) {
+function abrir(
+  almacen?: Record<string, string>,
+  html = HTML,
+  opciones: { almacenRoto?: boolean } = {},
+) {
   const dom = new JSDOM(html, {
     runScripts: "dangerously",
     url: "http://localhost/guia",
     pretendToBeVisual: true,
     beforeParse(window) {
+      if (opciones.almacenRoto) {
+        // Una ventana privada estricta o sin espacio: leer da null y escribir lanza.
+        Object.defineProperty(window, "localStorage", {
+          configurable: true,
+          value: {
+            length: 0,
+            key: () => null,
+            getItem: () => null,
+            removeItem: () => undefined,
+            setItem: () => {
+              throw new Error("QuotaExceededError");
+            },
+          },
+        });
+        return;
+      }
       for (const [k, v] of Object.entries(almacen ?? {}))
         window.localStorage.setItem(k, v);
     },
@@ -54,7 +74,7 @@ function abrir(almacen?: Record<string, string>, html = HTML) {
 const minutos = (li: HTMLElement) =>
   Number(li.getAttribute("data-rev-min") ?? li.getAttribute("data-ensayo"));
 
-describe("la guía v22 · el filtro «Revisión completa»", () => {
+describe("la guía v23 · el filtro «Revisión completa»", () => {
   it("es el primero de la barra, está activo al abrir y muestra solo las filas de las sentadas", () => {
     const { doc, filas, filtro } = abrir();
     const botones = [...doc.querySelectorAll(".filtros button")];
@@ -166,7 +186,7 @@ describe("la guía v22 · el filtro «Revisión completa»", () => {
   });
 });
 
-describe("la guía v22 · las sentadas y las sumas", () => {
+describe("la guía v23 · las sentadas y las sumas", () => {
   it("cada sentada tiene su título y sus filas, ninguna pasa de 45 min y las sumas son las de la página", () => {
     const { doc, filas, calc } = abrir();
     const sentadas = [
@@ -259,7 +279,7 @@ describe("la guía v22 · las sentadas y las sumas", () => {
   });
 });
 
-describe("la guía v22 · el sí/no y la nota", () => {
+describe("la guía v23 · el sí/no y la nota", () => {
   it("cada prueba tiene su sí, su no y su nota; marcar guarda y cuenta", () => {
     const { doc, window, calc, click } = abrir();
     const pruebas = [...doc.querySelectorAll<HTMLElement>("ul.pasos li[id]")];
@@ -299,7 +319,7 @@ describe("la guía v22 · el sí/no y la nota", () => {
     const { doc, calc, filtro, click } = abrir({
       [`${NS}a1`]: "no",
       [`${NS}a1:nota`]: "se corta en el teléfono",
-      [`${NS}r1`]: "si",
+      [`${NS}r2`]: "si",
       "guia-hoja-de-vida:s20:a2": "no",
     });
     expect((doc.getElementById("a1-no") as HTMLInputElement).checked).toBe(
@@ -314,10 +334,10 @@ describe("la guía v22 · el sí/no y la nota", () => {
     ).toBe(false);
     expect(calc("rev-si")).toBe("1");
     expect(calc("rev-no")).toBe("1");
-    // R1 es la misma fila en la revisión y en el ensayo.
+    // R2 es la misma fila en la revisión y en el ensayo.
     filtro("ensayo").click();
     expect(calc("ensayo-si")).toBe("1");
-    click("r2-no");
+    click("r3-no");
     filtro("revision").click();
     expect(calc("rev-no")).toBe("2");
   });
@@ -363,32 +383,32 @@ describe("la guía v22 · el sí/no y la nota", () => {
   it("una nota larga y con saltos de línea se guarda entera y vuelve al recargar", () => {
     const larga = `${"a".repeat(900)}\n${"b".repeat(600)}`;
     const { doc, window } = abrir();
-    const nota = doc.querySelector<HTMLTextAreaElement>('[data-nota-de="a2"]')!;
+    const nota = doc.querySelector<HTMLTextAreaElement>('[data-nota-de="a1"]')!;
     nota.value = larga;
     nota.dispatchEvent(new window.Event("input", { bubbles: true }));
-    expect(window.localStorage.getItem(`${NS}a2:nota`)).toBe(larga);
-    const otra = abrir({ [`${NS}a2:nota`]: larga });
+    expect(window.localStorage.getItem(`${NS}a1:nota`)).toBe(larga);
+    const otra = abrir({ [`${NS}a1:nota`]: larga });
     expect(
-      otra.doc.querySelector<HTMLTextAreaElement>('[data-nota-de="a2"]')!.value,
+      otra.doc.querySelector<HTMLTextAreaElement>('[data-nota-de="a1"]')!.value,
     ).toBe(larga);
   });
 
   it("lo guardado con la nota de una línea sigue valiendo: la clave y el prefijo no cambiaron", () => {
     const { doc, calc } = abrir({
-      [`${NS}a2`]: "no",
-      [`${NS}a2:nota`]: "una nota corta de antes",
+      [`${NS}a1`]: "no",
+      [`${NS}a1:nota`]: "una nota corta de antes",
     });
-    expect((doc.getElementById("a2-no") as HTMLInputElement).checked).toBe(
+    expect((doc.getElementById("a1-no") as HTMLInputElement).checked).toBe(
       true,
     );
     expect(
-      doc.querySelector<HTMLTextAreaElement>('[data-nota-de="a2"]')!.value,
+      doc.querySelector<HTMLTextAreaElement>('[data-nota-de="a1"]')!.value,
     ).toBe("una nota corta de antes");
     expect(calc("rev-no")).toBe("1");
   });
 });
 
-describe("la guía v22 · «Copiar mis respuestas»", () => {
+describe("la guía v23 · «Copiar mis respuestas»", () => {
   function conRespuestas(portapapeles?: unknown) {
     const a = abrir();
     if (portapapeles !== undefined)
@@ -423,7 +443,7 @@ describe("la guía v22 · «Copiar mis respuestas»", () => {
     (doc.getElementById("rev-copiar") as HTMLButtonElement).click();
     await new Promise((r) => setTimeout(r, 0));
     expect(copiado).toMatch(
-      /^CV Viva · Revisión completa · guía v22\nFecha: \d{4}-\d{2}-\d{2}\n/,
+      /^CV Viva · Revisión completa · guía v23\nFecha: \d{4}-\d{2}-\d{2}\n/,
     );
     expect(copiado).toMatch(
       /Totales: \d+ pruebas · sí 1 · no 2 · pendientes \d+/,
@@ -476,7 +496,7 @@ describe("la guía v22 · «Copiar mis respuestas»", () => {
     await new Promise((r) => setTimeout(r, 0));
     const area = doc.getElementById("rev-texto") as HTMLTextAreaElement;
     expect(area.hasAttribute("hidden")).toBe(false);
-    expect(area.value).toContain("guía v22");
+    expect(area.value).toContain("guía v23");
     expect(area.value).toContain("nota: el botón no responde");
     expect(area.selectionStart).toBe(0);
     expect(area.selectionEnd).toBe(area.value.length);
@@ -494,7 +514,7 @@ describe("la guía v22 · «Copiar mis respuestas»", () => {
   });
 });
 
-describe("la guía v22 · lo que entra", () => {
+describe("la guía v23 · lo que entra", () => {
   it("las seis pruebas nuevas existen, son del S21, tienen sentada y la opcional lo dice", () => {
     const { doc } = abrir();
     for (const id of ["m15", "f12", "q25", "q26", "o15", "o16"]) {
@@ -519,5 +539,272 @@ describe("la guía v22 · lo que entra", () => {
     const { filas, filtro } = abrir();
     filtro("todo").click();
     expect(filas().every((li) => !li.hasAttribute("hidden"))).toBe(true);
+  });
+});
+
+/**
+ * GUARDAR Y RESTAURAR (S23, OM-35). Tras reiniciar el equipo el navegador del dueño perdió
+ * las respuestas de dos sentadas y la guía no dijo nada: se recuperaron del registro a mano.
+ * Ahora la guía avisa a la vista si no guarda o está vacía, y «Restaurar desde texto» vuelve
+ * a cargar lo que «Copiar mis respuestas» copió, de cualquier versión, casando por id.
+ */
+describe("la guía v23 · guardar y restaurar", () => {
+  /** Copia con el botón y devuelve el texto que quedó en el portapapeles. */
+  async function copiar(a: ReturnType<typeof abrir>) {
+    let copiado = "";
+    Object.defineProperty(a.window.navigator, "clipboard", {
+      value: {
+        writeText: (t: string) => {
+          copiado = t;
+          return Promise.resolve();
+        },
+      },
+      configurable: true,
+    });
+    (a.doc.getElementById("rev-copiar") as HTMLButtonElement).click();
+    await new Promise((r) => setTimeout(r, 0));
+    return copiado;
+  }
+  const escribirNota = (
+    a: ReturnType<typeof abrir>,
+    id: string,
+    texto: string,
+  ) => {
+    const n = a.doc.querySelector<HTMLTextAreaElement>(
+      `[data-nota-de="${id}"]`,
+    )!;
+    n.value = texto;
+    n.dispatchEvent(new a.window.Event("input", { bubbles: true }));
+  };
+  /** El estado de todas las filas con sentada: id → «si|no|» + nota. */
+  const foto = (a: ReturnType<typeof abrir>) =>
+    Object.fromEntries(
+      a
+        .filas("ul.pasos li[data-rev]")
+        .map((li) => {
+          const r = li.querySelector<HTMLInputElement>(
+            'input[type="radio"]:checked',
+          );
+          const n = li.querySelector<HTMLTextAreaElement>("textarea.p-nota");
+          const id = (
+            li.id || li.querySelector<HTMLInputElement>("input")!.name
+          ).toLowerCase();
+          return [id, `${r?.value ?? ""}|${n?.value ?? ""}`];
+        })
+        .filter(([, v]) => v !== "|"),
+    );
+  const restaurar = (a: ReturnType<typeof abrir>, texto: string) => {
+    (a.doc.getElementById("rev-restaurar-abrir") as HTMLButtonElement).click();
+    (a.doc.getElementById("rev-restaurar-texto") as HTMLTextAreaElement).value =
+      texto;
+    (
+      a.doc.getElementById("rev-restaurar-aplicar") as HTMLButtonElement
+    ).click();
+  };
+  const aviso = (a: ReturnType<typeof abrir>) =>
+    a.doc.getElementById("rev-aviso") as HTMLElement;
+
+  it("copiar → empezar de cero → restaurar da el MISMO estado, con las notas de varias líneas", async () => {
+    const a = abrir();
+    a.click("a1-no");
+    escribirNota(
+      a,
+      "a1",
+      "el botón no responde\nsegunda línea: con dos puntos",
+    );
+    a.click("a3b-si"); // un sí SIN nota: sin su sección no volvería
+    a.click("a5-si");
+    escribirNota(a, "a5", "se ve bien");
+    a.click("r2-si");
+    a.click("r3-no");
+    escribirNota(a, "r3", "falla en el teléfono");
+    const texto = await copiar(a);
+    expect(texto).toMatch(/SÍ SIN NOTA \(\d+\)\n  · .*a3b/);
+
+    const b = abrir(); // otro navegador, o el mismo tras reiniciar: nada guardado
+    expect(Object.keys(foto(b))).toEqual([]);
+    restaurar(b, texto);
+    expect(foto(b)).toEqual(foto(a));
+    expect(b.calc("rev-si")).toBe(a.calc("rev-si"));
+    expect(b.calc("rev-no")).toBe(a.calc("rev-no"));
+    // Y quedó GUARDADO, no solo en pantalla: recargar lo conserva.
+    const c = abrir(
+      Object.fromEntries(
+        Array.from({ length: b.window.localStorage.length }, (_, i) => {
+          const k = b.window.localStorage.key(i)!;
+          return [k, b.window.localStorage.getItem(k)!];
+        }),
+      ),
+    );
+    expect(foto(c)).toEqual(foto(a));
+    expect(
+      (b.doc.getElementById("rev-restaurar-estado") as HTMLElement).textContent,
+    ).toMatch(/Restauradas \d+ de \d+/);
+  });
+
+  it("lee el texto de la v21 y de la v22 (sin la sección de los «sí» sin nota)", () => {
+    const viejo = [
+      "CV Viva · Revisión completa · guía v22",
+      "Fecha: 2026-10-24",
+      "Totales: 115 pruebas · sí 2 · no 1 · pendientes 112",
+      "",
+      "NO (1)",
+      "  · a1 — Abre la raíz…",
+      "      Sentada 1 · en escritorio: la casa y el inglés",
+      "      nota: se corta ⏎ en dos",
+      "",
+      "SÍ CON NOTA (1)",
+      "  · a1b — Algo: una nota con: dos puntos",
+      "",
+      "PENDIENTES (112)",
+      "  · Sentada 1: a2",
+    ].join("\n");
+    const a = abrir();
+    restaurar(a, viejo);
+    expect((a.doc.getElementById("a1-no") as HTMLInputElement).checked).toBe(
+      true,
+    );
+    expect(
+      a.doc.querySelector<HTMLTextAreaElement>('[data-nota-de="a1"]')!.value,
+    ).toBe("se corta\nen dos");
+    // Un id que la guía ya no tiene se dice, no se inventa.
+    expect(
+      (a.doc.getElementById("rev-restaurar-estado") as HTMLElement).textContent,
+    ).toContain("no encontré: a1b");
+  });
+
+  it("avisa a la vista si el navegador no guarda, en cuanto se marca algo", () => {
+    const a = abrir(undefined, HTML, { almacenRoto: true });
+    a.click("a1-si");
+    expect(aviso(a).hasAttribute("hidden")).toBe(false);
+    expect(aviso(a).textContent).toContain("no está guardando tus respuestas");
+    expect(aviso(a).classList.contains("suave")).toBe(false);
+    // Y a la vista por texto, no solo por color.
+    expect(aviso(a).textContent).toContain("⚠");
+  });
+
+  it("si no hay nada guardado lo dice, con calma, y deja de decirlo al responder", () => {
+    const a = abrir();
+    expect(aviso(a).hasAttribute("hidden")).toBe(false);
+    expect(aviso(a).classList.contains("suave")).toBe(true);
+    expect(aviso(a).textContent).toContain("Restaurar desde texto");
+    a.click("a1-si");
+    expect(aviso(a).hasAttribute("hidden")).toBe(true);
+    // Con respuestas guardadas, al abrir no avisa de nada.
+    const b = abrir({ [`${NS}a1`]: "si" });
+    expect(aviso(b).hasAttribute("hidden")).toBe(true);
+  });
+
+  it("una fila reescrita en el S23 vuelve a pendiente y muestra lo que decías (una sola vez por navegador)", () => {
+    const a = abrir({ [`${NS}a2`]: "si", [`${NS}a2:nota`]: "todo bien" });
+    expect((a.doc.getElementById("a2-si") as HTMLInputElement).checked).toBe(
+      false,
+    );
+    const antes = a.doc.querySelector("#a2 .rev-antes") as HTMLElement;
+    expect(antes.textContent).toContain("Antes del S23 respondiste: Sí");
+    expect(antes.textContent).toContain("todo bien");
+    // Responderla de nuevo quita el recuerdo.
+    a.click("a2-no");
+    expect(a.doc.querySelector("#a2 .rev-antes")).toBeNull();
+    // Una fila que no cambió conserva su respuesta.
+    const b = abrir({ [`${NS}a1`]: "no" });
+    expect((b.doc.getElementById("a1-no") as HTMLInputElement).checked).toBe(
+      true,
+    );
+    // Ya migrado: la respuesta nueva no se vuelve a mover al recargar.
+    const c = abrir({ [`${NS}migrado:23`]: "1", [`${NS}a2`]: "no" });
+    expect((c.doc.getElementById("a2-no") as HTMLInputElement).checked).toBe(
+      true,
+    );
+  });
+
+  it("restaurar un texto de la v22 deja las filas reescritas pendientes, a la vista; uno de la v23 las aplica", () => {
+    const cuerpo = (version: string) =>
+      [
+        `CV Viva · Revisión completa · guía ${version}`,
+        "Fecha: 2026-10-25",
+        "Totales: 1 pruebas · sí 1 · no 0 · pendientes 0",
+        "",
+        "NO (0)",
+        "  ninguno",
+        "",
+        "SÍ CON NOTA (1)",
+        "  · a2 — Baja por la página: algo: orden distinto",
+        "",
+        "SÍ SIN NOTA (0)",
+        "  ninguno",
+      ].join("\n");
+    const v22 = abrir();
+    restaurar(v22, cuerpo("v22"));
+    expect((v22.doc.getElementById("a2-si") as HTMLInputElement).checked).toBe(
+      false,
+    );
+    expect(v22.doc.querySelector("#a2 .rev-antes")?.textContent).toContain(
+      "orden distinto",
+    );
+    const v23 = abrir();
+    restaurar(v23, cuerpo("v23"));
+    expect((v23.doc.getElementById("a2-si") as HTMLInputElement).checked).toBe(
+      true,
+    );
+  });
+
+  it("A2 · una línea de la v22 cuyo título cambió y trae «: » no corta la nota en el sitio equivocado", () => {
+    // Así copió la v22 la k1b: el título, truncado con «…», y tras «…: » la nota del dueño.
+    const texto = [
+      "CV Viva · Revisión completa · guía v22",
+      "Fecha: 2026-10-24",
+      "",
+      "SÍ CON NOTA (1)",
+      "  · k1b — 2 min Entra a Vitrina desde el menú: ves el portal con cuatro cajas en este…: MI NOTA k1b",
+    ].join("\n");
+    const a = abrir();
+    restaurar(a, texto);
+    expect((a.doc.getElementById("k1b-si") as HTMLInputElement).checked).toBe(
+      true,
+    );
+    expect(
+      a.doc.querySelector<HTMLTextAreaElement>('[data-nota-de="k1b"]')!.value,
+    ).toBe("MI NOTA k1b");
+  });
+
+  it("M3 · el aviso de que no guarda se ve bajo CUALQUIER filtro, no solo en «Revisión completa»", () => {
+    const a = abrir(undefined, HTML, { almacenRoto: true });
+    a.filtro("ensayo").click();
+    a.click("r1-si");
+    expect(aviso(a).hasAttribute("hidden")).toBe(false);
+    // Ningún ancestro lo esconde: el aviso vive fuera de la sección que el filtro oculta.
+    expect(aviso(a).closest("[hidden]")).toBeNull();
+    expect(aviso(a).textContent).toContain("no está guardando tus respuestas");
+  });
+});
+
+describe("la guía v23 · las frases que el sprint dejó falsas", () => {
+  it("A1 · fuera del historial, nada dice que «Métodos» está entre el portafolio y los Estudios", () => {
+    const vigente = HTML.slice(
+      0,
+      HTML.indexOf("<summary>Historial de la guía</summary>"),
+    );
+    expect(vigente.length).toBeGreaterThan(10_000);
+    expect(vigente).not.toMatch(
+      /entre\s+(?:el|la)\s+(?:portafolio|vitrina)\s+y\s+los\s+Estudios/i,
+    );
+  });
+
+  it("A1 · las dos filas que lo decían (R10 y q24) están reescritas, dicen dónde está hoy y llevan «Mejorado · S23»", () => {
+    const { doc } = abrir();
+    for (const id of ["q24"]) {
+      const li = doc.getElementById(id)!;
+      expect(li.getAttribute("data-cambio"), id).toBe("23");
+      expect(li.getAttribute("data-origen"), id).toBe("mejorado");
+      expect(li.textContent, id).toMatch(/después de Skills/);
+    }
+    // R10 no tiene id propio: es la fila que cubre q2, q7 y q24.
+    const r10 = [...doc.querySelectorAll<HTMLElement>("li[data-cubre]")].find(
+      (li) => li.getAttribute("data-cubre") === "q2 q7 q24",
+    )!;
+    expect(r10.getAttribute("data-cambio")).toBe("23");
+    expect(r10.getAttribute("data-origen")).toBe("mejorado");
+    expect(r10.textContent).toMatch(/después de Skills/);
   });
 });

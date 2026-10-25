@@ -6,10 +6,10 @@ import { expect, test } from "@playwright/test";
  *  - **Hamburguesa** (<md, deuda S1 pagada en S4): el menú completo.
  *  - **Hoja de vida** (≥md, 2026-09-05): agrupa las secciones del CV, que
  *    antes competían en el primer nivel con la vitrina y el contacto. Seis
- *    desde 2026-09-10: la vitrina asomada en la HOME entró con el nombre que
- *    lleva en la página — «Vitrina» desde la revisión post-S8 (2026-09-12), y
- *    por eso el portal, en el primer nivel, se llama «Portafolio»: dos enlaces
- *    iguales a sitios distintos en un mismo menú son una trampa.
+ *    desde 2026-09-10; CINCO desde el S23 (2026-10-25): «Vitrina» pasó a
+ *    llamarse «Portafolio» en todo el sitio, y el portal ya es el primer nivel
+ *    — dos enlaces «Portafolio» a sitios distintos serían la misma trampa, así
+ *    que la sección de la HOME sale del desplegable.
  *
  * Ambos comparten contrato: `aria-expanded` + `aria-controls`, Escape cierra y
  * devuelve el foco al botón que abrió, y elegir una opción cierra.
@@ -38,19 +38,22 @@ test.describe("Nav móvil (disclosure del header)", () => {
     const panel = page.locator("#nav-movil");
     await expect(panel).toBeVisible();
     await expect(panel.getByRole("link", { name: "Contacto" })).toBeVisible();
-    // La vitrina asomada en la HOME está en el grupo, con su nombre de sección.
-    await expect(
-      panel.getByRole("link", { name: "Vitrina", exact: true }),
-    ).toHaveAttribute("href", "#vitrina");
-    // Y el portal, en el primer nivel, es «Portafolio» — la RUTA, no el ancla.
+    // El portafolio es UN solo enlace —la RUTA del portal—: la sección de la
+    // HOME no se repite en el grupo con otro destino (S23).
     await expect(
       panel.getByRole("link", { name: "Portafolio", exact: true }),
-    ).toHaveAttribute("href", "/es/vitrina");
+    ).toHaveCount(1);
+    await expect(
+      panel.getByRole("link", { name: "Portafolio", exact: true }),
+    ).toHaveAttribute("href", "/es/portafolio");
+    await expect(
+      panel.getByRole("link", { name: "Vitrina", exact: true }),
+    ).toHaveCount(0);
     // «Métodos» (S10, antes «Mi método») también es una RUTA, en el primer nivel del menú móvil.
     await expect(
       panel.getByRole("link", { name: "Métodos", exact: true }),
     ).toHaveAttribute("href", "/es/metodos");
-    // «Roadmap» ya no es destino de la HOME (vive en /vitrina/apps).
+    // «Roadmap» ya no es destino de la HOME (vive en /portafolio/apps).
     await expect(panel.getByRole("link", { name: "Roadmap" })).toHaveCount(0);
 
     // Escape cierra y devuelve el foco al botón
@@ -106,7 +109,7 @@ test.describe("Desplegable «Hoja de vida» (escritorio)", () => {
 
     // «Apps» prometía lo mismo que «Vitrina» y no enseñaba apps visitables.
     await expect(nav.getByRole("link", { name: "Apps" })).toHaveCount(0);
-    // «Roadmap» es una pregunta sobre las apps: vive en /vitrina/apps.
+    // «Roadmap» es una pregunta sobre las apps: vive en /portafolio/apps.
     await expect(nav.getByRole("link", { name: "Roadmap" })).toHaveCount(0);
   });
 
@@ -122,21 +125,21 @@ test.describe("Desplegable «Hoja de vida» (escritorio)", () => {
     await toggle.click();
     await expect(toggle).toHaveAttribute("aria-expanded", "true");
     const panel = page.locator("#nav-hoja-de-vida");
-    // Las seis secciones del CV, en el orden de la página, ninguna perdida.
+    // Las cinco secciones del CV, en el orden de la página, ninguna perdida
+    // (el portafolio es el portal del primer nivel, no una sección del grupo).
     const secciones = [
       "Trayectoria",
       "Logros",
-      "Vitrina",
       "Estudios",
       "Certificaciones",
       "Skills",
     ];
     await expect(panel.getByRole("link")).toHaveText(secciones);
-    // «Vitrina» es la SECCIÓN de la HOME (#vitrina), no el portal: el portal
-    // sigue en el primer nivel, como «Portafolio».
+    // Ni «Vitrina» ni «Portafolio» están en el grupo: el portal vive en el
+    // primer nivel, y la sección de la HOME se llega por su botón (S23).
     await expect(
-      panel.getByRole("link", { name: "Vitrina", exact: true }),
-    ).toHaveAttribute("href", "#vitrina");
+      panel.getByRole("link", { name: /Vitrina|Portafolio/ }),
+    ).toHaveCount(0);
 
     // Escape cierra y devuelve el foco al botón que abrió.
     await page.keyboard.press("Escape");

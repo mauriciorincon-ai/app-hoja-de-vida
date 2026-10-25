@@ -411,6 +411,45 @@
         background: var(--fondo);
         color: var(--tinta);
       }
+      .rev-aviso {
+        margin: 6px 0;
+        padding: 8px 12px;
+        border: 1px solid var(--alerta);
+        border-radius: 8px;
+        font-size: 0.9rem;
+      }
+      .rev-aviso.suave {
+        border-color: var(--borde);
+      }
+      .rev-restaurar textarea {
+        width: 100%;
+        box-sizing: border-box;
+        font-family: ui-monospace, Menlo, monospace;
+        font-size: 0.8rem;
+        padding: 8px;
+        border: 1px solid var(--borde);
+        border-radius: 8px;
+        background: var(--fondo);
+        color: var(--tinta);
+      }
+      .rev-restaurar button {
+        font: inherit;
+        font-size: 0.9rem;
+        min-height: 40px;
+        padding: 0 16px;
+        border-radius: 99px;
+        border: 1px solid var(--acento);
+        background: var(--acento);
+        color: var(--fondo);
+        cursor: pointer;
+      }
+      .rev-antes {
+        display: block;
+        margin-top: 6px;
+        padding: 6px 10px;
+        border-left: 3px solid var(--alerta);
+        font-size: 0.85rem;
+      }
       .rev-sentada .rev-sent-resumen.pasada,
       .rev-sent-resumen .pasada {
         color: var(--alerta);
@@ -483,10 +522,10 @@
   <body>
     <div class="pagina">
       <header>
-        <p class="eyebrow">CV Viva · Guía de prueba viva y acumulativa · v21 · La revisión completa</p>
+        <p class="eyebrow">CV Viva · Guía de prueba viva y acumulativa · v23 · La revisión completa, con el Portafolio</p>
         <details class="chica">
           <summary>Versiones anteriores</summary>
-          <p class="eyebrow">v20 · El ensayo general del H-2 + v19 · Métodos: la novena pieza (T8) y la puerta en la HOME + v18 · Métodos: la octava pieza (T9) + v17 · Métodos: la séptima pieza (T5) + v16 · Métodos: la sexta pieza (T1) + v15 · Métodos: la quinta pieza (T7) + v14 · Métodos, en tercera persona + v13 · Mi método: la cuarta pieza (T6) + v12 · Mi método: la tercera pieza (T4) + v11 · Mi método: la segunda pieza (T3) + v10 · Mi método: la primera infografía (T2) + v9.29 · la ficha y el roadmap de HackGuard + v9.28 · el roadmap de AngelGhost + v9.27 · la simulación de planlang + v9.26 · el foco al final de la galería + v9.25 · las cuentas al día + las tiras de las cuatro apps nuevas + el carrusel de apps muestra dónde acaba y se recorre con el pad + el carrusel de apps muestra dónde empieza + el carrusel de apps que gira sin fin + los bloques de apps con sus tarjetas en carrusel + dos categorías de apps y el carrusel de los tableros + proyectos propios desde 2024 + LinkedIn definitivo + las entradas sin librería + el margen de la home, segunda vuelta + el margen de la home + el aire bajo el dominio + las herramientas de hoy + el cupo del chat + el ícono navy y el 404 de la raíz + las cifras en su letra y las citas del chat + rótulo del dominio, idiomas en mantenimiento y el ícono + el modo mantenimiento + el dominio en el PDF + los ocho casos de estudio completos + la cita dice de dónde sale y a dónde lleva + la cita conserva la conversación + el corpus alineado + chat/registro + a fondo v2 (el
+          <p class="eyebrow">v22 · Sentada 5: tres agentes fuera + v21 · La revisión completa + v20 · El ensayo general del H-2 + v19 · Métodos: la novena pieza (T8) y la puerta en la HOME + v18 · Métodos: la octava pieza (T9) + v17 · Métodos: la séptima pieza (T5) + v16 · Métodos: la sexta pieza (T1) + v15 · Métodos: la quinta pieza (T7) + v14 · Métodos, en tercera persona + v13 · Mi método: la cuarta pieza (T6) + v12 · Mi método: la tercera pieza (T4) + v11 · Mi método: la segunda pieza (T3) + v10 · Mi método: la primera infografía (T2) + v9.29 · la ficha y el roadmap de HackGuard + v9.28 · el roadmap de AngelGhost + v9.27 · la simulación de planlang + v9.26 · el foco al final de la galería + v9.25 · las cuentas al día + las tiras de las cuatro apps nuevas + el carrusel de apps muestra dónde acaba y se recorre con el pad + el carrusel de apps muestra dónde empieza + el carrusel de apps que gira sin fin + los bloques de apps con sus tarjetas en carrusel + dos categorías de apps y el carrusel de los tableros + proyectos propios desde 2024 + LinkedIn definitivo + las entradas sin librería + el margen de la home, segunda vuelta + el margen de la home + el aire bajo el dominio + las herramientas de hoy + el cupo del chat + el ícono navy y el 404 de la raíz + las cifras en su letra y las citas del chat + rótulo del dominio, idiomas en mantenimiento y el ícono + el modo mantenimiento + el dominio en el PDF + los ocho casos de estudio completos + la cita dice de dónde sale y a dónde lleva + la cita conserva la conversación + el corpus alineado + chat/registro + a fondo v2 (el
           detalle) + revisión post-S8 · 2026-09-12</p>
         </details>
         <h1>Guía de prueba</h1>
@@ -608,7 +647,7 @@
           filtro, no una prueba</strong>: «Ensayo general H-2» (bloque R). El
           Gate mínimo ⭐ no cambia de contenido, pero deja de llevar un tiempo
           escrito: la cuenta y los minutos los suma la página. El prefijo de las
-          casillas cambia a s20. <strong>v21 suma seis pruebas y un filtro</strong>: «Revisión completa», el primero de la barra y el activo al abrir (sentadas de a lo sumo 45 min por lugar y aparato, cada prueba una vez, sí/no con nota y «Copiar mis respuestas»); entran la m15, la f12, la q25, la q26 (opcional), la o15 y la o16. El prefijo de las respuestas cambia a s21. <strong>Ajuste del mismo día:</strong> la nota de cada fila admite hasta 2000 caracteres y varias líneas (antes, una línea de 300); el prefijo sigue siendo s21, así que lo ya guardado se conserva. <strong>v22 cambia lo que ve el visitante</strong>: salen del sitio los dos agentes de demostración de planlang y el agente duplicado de Design Science (los agentes pasan de 14 a 11), el agente de investigación se llama «Paper Computacional» y el frente de Investigaciones queda en pausa. Cambian de texto la k1b, la n4b, la m1b, la m4, la m6, la k9, la m10, la m11 y la R9; la k8 vuelve a la revisión (ya tiene sujeto: Investigaciones en pausa) y entra la o17, con las cuatro preguntas que dejó el retiro; el prefijo de las respuestas sigue siendo s21 y las filas que cambiaron llevan «Mejorado · S22».
+          casillas cambia a s20. <strong>v21 suma seis pruebas y un filtro</strong>: «Revisión completa», el primero de la barra y el activo al abrir (sentadas de a lo sumo 45 min por lugar y aparato, cada prueba una vez, sí/no con nota y «Copiar mis respuestas»); entran la m15, la f12, la q25, la q26 (opcional), la o15 y la o16. El prefijo de las respuestas cambia a s21. <strong>Ajuste del mismo día:</strong> la nota de cada fila admite hasta 2000 caracteres y varias líneas (antes, una línea de 300); el prefijo sigue siendo s21, así que lo ya guardado se conserva. <strong>v22 cambia lo que ve el visitante</strong>: salen del sitio los dos agentes de demostración de planlang y el agente duplicado de Design Science (los agentes pasan de 14 a 11), el agente de investigación se llama «Paper Computacional» y el frente de Investigaciones queda en pausa. Cambian de texto la k1b, la n4b, la m1b, la m4, la m6, la k9, la m10, la m11 y la R9; la k8 vuelve a la revisión (ya tiene sujeto: Investigaciones en pausa) y entra la o17, con las cuatro preguntas que dejó el retiro; el prefijo de las respuestas sigue siendo s21 y las filas que cambiaron llevan «Mejorado · S22». <strong>v23 cambia el nombre del sitio y arregla tres cosas</strong>: «vitrina» pasa a llamarse «Portafolio» en todo el sitio (el texto y la dirección; la dirección vieja se redirige: <code>/es/vitrina…</code> te lleva a <code>/es/portafolio…</code>), «Métodos» baja a después de Skills, el cambio de idioma ya no baja la página en Safari y el 404 trae el botón ES/EN. Cambian de texto la R1, la a2, la a3b, la a5, la a6, la b1, la R13, la o1, la h3, la a8, la R8, la R10 y la q24; <strong>esas filas vuelven a pendiente y te muestran lo que habías respondido antes</strong> («Antes del S23»). Entra la o18 (guardar y restaurar tus respuestas) y la guía avisa a la vista si tu navegador no guarda. El prefijo de las respuestas sigue siendo s21: las demás filas conservan tu respuesta.
         </p>
         </details>
         <div class="url-caja">
@@ -622,6 +661,8 @@
           </p>
         </div>
       </header>
+
+      <p id="rev-aviso" class="rev-aviso" role="status" aria-live="polite" hidden></p>
 
       <div class="progreso">
         <div class="progreso-fila">
@@ -645,8 +686,8 @@
 
 
 
-      <!-- ═══════ S. Revisión completa (v21) ═══════ -->
-      <section class="bloque" id="revision" data-version="v22">
+      <!-- ═══════ S. Revisión completa (v21 · v23) ═══════ -->
+      <section class="bloque" id="revision" data-version="v23">
         <div class="bloque-cabeza">
           <span class="letra">S</span>
           <h2>Revisión completa</h2>
@@ -680,7 +721,14 @@
         <div class="rev-acciones">
           <button type="button" id="rev-copiar">Copiar mis respuestas</button>
           <span id="rev-estado" role="status" aria-live="polite"></span>
+          <button type="button" id="rev-restaurar-abrir" aria-controls="rev-restaurar" aria-expanded="false">Restaurar desde texto</button>
           <textarea id="rev-texto" readonly hidden rows="12" aria-label="Mis respuestas, listas para copiar"></textarea>
+        </div>
+        <div id="rev-restaurar" class="rev-restaurar" hidden>
+          <label for="rev-restaurar-texto">Pega aquí el texto que copiaste con «Copiar mis respuestas» (de cualquier versión de la guía):</label>
+          <textarea id="rev-restaurar-texto" rows="8" autocomplete="off" spellcheck="false"></textarea>
+          <p class="rev-acciones"><button type="button" id="rev-restaurar-aplicar">Restaurar</button>
+          <span id="rev-restaurar-estado" role="status" aria-live="polite"></span></p>
         </div>
 
         <div class="rev-sentada" data-rev-sentada="1">
@@ -723,7 +771,7 @@
           <ul class="pasos" data-rev-lista="3"></ul>
         </div>
         <div class="rev-sentada" data-rev-sentada="4">
-          <h3 class="sentada">Sentada 4 · en escritorio: la vitrina, apps y sus fichas</h3>
+          <h3 class="sentada">Sentada 4 · en escritorio: el portafolio, apps y sus fichas</h3>
           <p class="chica suave">Tu computador personal. El portal, las apps hermanas, sus fichas por dentro y las brochures.</p>
           <p class="rev-sent-resumen chica" data-rev-resumen="4">
             <span data-calc="rev-s4-n">—</span> pruebas ·
@@ -736,7 +784,7 @@
           <ul class="pasos" data-rev-lista="4"></ul>
         </div>
         <div class="rev-sentada" data-rev-sentada="5">
-          <h3 class="sentada">Sentada 5 · en escritorio: la vitrina, agentes, investigaciones y tableros</h3>
+          <h3 class="sentada">Sentada 5 · en escritorio: el portafolio, los agentes y los tableros (las investigaciones, en pausa)</h3>
           <p class="chica suave">Tu computador personal. Los tres frentes de piezas ajenas, con sus fichas y capturas.</p>
           <p class="rev-sent-resumen chica" data-rev-resumen="5">
             <span data-calc="rev-s5-n">—</span> pruebas ·
@@ -880,14 +928,14 @@
 
         <h3 class="sentada">Tanda 1 · en escritorio: la casa, el CV, el contacto y el chat</h3>
         <ul class="pasos">
-          <li class="ens-fila" data-origen="nuevo" data-ensayo="6" data-sentada="1" data-rev="1" data-cubre="a4 a10 n9 n10 n11">
+          <li class="ens-fila" data-cambio="23" data-origen="mejorado" data-ensayo="6" data-sentada="1" data-rev="1" data-cubre="a4 a10 n9 n10 n11">
             <div class="ens-cuerpo">
               <p>
                 <strong>R1 · La HOME de punta a punta.</strong>
                 <span class="ens-min">6 min</span>
-                <span class="origen origen-nuevo">Nuevo · S20</span>
+                <span class="origen origen-mejorado">Mejorado · S23</span>
               </p>
-              <p>Abre la raíz de tu sitio en producción y baja la HOME entera, de la presentación a Contacto, como la baja un reclutador: Perfil, Trayectoria (el índice que baja contigo), Logros, Vitrina, Métodos, Estudios, Certificaciones y Skills. ¿Se siente editorial y sobria, sin saltos ni parpadeos? ¿Tu LinkedIn (el puesto de proyectos propios desde abril de 2024), tus estudios y tus certificaciones son lo que quieres que lea?</p>
+              <p>Abre la raíz de tu sitio en producción y baja la HOME entera, de la presentación a Contacto, como la baja un reclutador: Perfil, Trayectoria (el índice que baja contigo), Logros, Portafolio, Estudios, Certificaciones, Skills y, al final, Métodos —va después de Skills y antes de Contacto—. ¿Se siente editorial y sobria, sin saltos ni parpadeos? ¿Tu LinkedIn (el puesto de proyectos propios desde abril de 2024), tus estudios y tus certificaciones son lo que quieres que lea?</p>
               <p class="chica suave">Cubre: <code>a4</code> · <code>a10</code> · <code>n9</code> · <code>n10</code> · <code>n11</code>.</p>
             </div>
             <div class="p-resp"><fieldset class="ens-resp">
@@ -983,7 +1031,7 @@
                 <span class="ens-min">6 min</span>
                 <span class="origen origen-nuevo">Nuevo · S20</span>
               </p>
-              <p>En la ficha de una app con roadmap vota una funcionalidad: el contador sube y el botón queda marcado; recarga y el voto sigue (si la página dice «no disponible» en producción, es un no). Debajo del roadmap escribe una propuesta y envíala: «Recibí tu propuesta. Gracias.» y el correo llega. En el pie de Vitrina → Apps pide un lugar en la lista de espera de una app: confirma y el correo llega.</p>
+              <p>En la ficha de una app con roadmap vota una funcionalidad: el contador sube y el botón queda marcado; recarga y el voto sigue (si la página dice «no disponible» en producción, es un no). Debajo del roadmap escribe una propuesta y envíala: «Recibí tu propuesta. Gracias.» y el correo llega. En el pie de Portafolio → Apps pide un lugar en la lista de espera de una app: confirma y el correo llega.</p>
               <p class="chica suave">Cubre: <code>e5</code> · <code>g6</code> (los dos sin ⭐) y el voto, que es un flujo propio del ensayo.</p>
             </div>
             <div class="p-resp"><fieldset class="ens-resp">
@@ -994,16 +1042,16 @@
           </li>
         </ul>
 
-        <h3 class="sentada">Tanda 2 · la vitrina, «Métodos» y el teléfono real</h3>
+        <h3 class="sentada">Tanda 2 · el portafolio, «Métodos» y el teléfono real</h3>
         <ul class="pasos">
-          <li class="ens-fila" data-origen="nuevo" data-ensayo="9" data-sentada="2" data-rev="4" data-cubre="k7 k13 k14 k15f k18 l5b l6 h4">
+          <li class="ens-fila" data-cambio="23" data-origen="mejorado" data-ensayo="9" data-sentada="2" data-rev="4" data-cubre="k7 k13 k14 k15f k18 l5b l6 h4">
             <div class="ens-cuerpo">
               <p>
-                <strong>R8 · La vitrina de apps.</strong>
+                <strong>R8 · El portafolio de apps.</strong>
                 <span class="ens-min">9 min</span>
-                <span class="origen origen-nuevo">Nuevo · S20</span>
+                <span class="origen origen-mejorado">Mejorado · S23</span>
               </p>
-              <p>Entra a la Vitrina → Apps: Profesionales primero y Personales después, con el carrusel de cada bloque. Abre dos fichas: ¿la promesa y las cifras dicen la verdad, y «Cómo funciona» tiene los actores correctos? Recorre las capturas de una. En un trackpad, desliza dos dedos de lado sobre el carrusel de apps: avanza una tarjeta por gesto, sin tocar un botón. Abre la simulación de planlang («Ver la simulación») y la brochure de una app: ¿todo se ve de la misma casa, sin colores ajenos ni capturas cortadas ni datos de personas reales?</p>
+              <p>Entra al <strong>Portafolio → Apps</strong>: Profesionales primero y Personales después, con el carrusel de cada bloque. Abre dos fichas: ¿la promesa y las cifras dicen la verdad, y «Cómo funciona» tiene los actores correctos? En un trackpad, desliza dos dedos de lado sobre el carrusel de apps: avanza una tarjeta por gesto, sin tocar un botón. Abre la ficha de <strong>planlang</strong> y pulsa «Ver la simulación» (solo ella la tiene) y, al final de Apps, en «De esta casa», la página de CV Viva: ¿todo se ve de la misma casa, sin colores ajenos ni capturas cortadas ni datos de personas reales?</p>
               <p class="chica suave">Cubre: <code>k7</code> · <code>k13</code> · <code>k14</code> · <code>k15f</code> · <code>k18</code> · <code>l5b</code> · <code>l6</code> · <code>h4</code>.</p>
             </div>
             <div class="p-resp"><fieldset class="ens-resp">
@@ -1019,7 +1067,7 @@
                 <span class="ens-min">8 min</span>
                 <span class="origen origen-nuevo">Nuevo · S20</span>
               </p>
-              <p>En el portal de la Vitrina lee los frentes y abre una pieza de cada frente abierto (un agente y un tablero); Investigaciones está en pausa: lee su aviso. ¿Dicen la verdad sobre tu trabajo —promesa, cifras, límites—, ninguno promete fecha y los escaparates se ven de la misma casa? En un tablero mira las capturas: ¿se leen nítidas, sin cortes?</p>
+              <p>En el portal del Portafolio lee los frentes y abre una pieza de cada frente abierto (un agente y un tablero); Investigaciones está en pausa: lee su aviso. ¿Dicen la verdad sobre tu trabajo —promesa, cifras, límites—, ninguno promete fecha y los escaparates se ven de la misma casa? En un tablero mira las capturas: ¿se leen nítidas, sin cortes?</p>
               <p class="chica suave">Cubre: <code>k9</code> · <code>m10</code> · <code>m11</code> · <code>m12</code>.</p>
             </div>
             <div class="p-resp"><fieldset class="ens-resp">
@@ -1028,14 +1076,14 @@
               <label><input type="radio" autocomplete="off" name="r9" id="r9-no" value="no" /> No</label>
             </fieldset><textarea class="p-nota" data-nota-de="r9" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de R9" autocomplete="off"></textarea></div>
           </li>
-          <li class="ens-fila" data-origen="nuevo" data-ensayo="8" data-sentada="2" data-rev="6" data-cubre="q2 q7 q24">
+          <li class="ens-fila" data-cambio="23" data-origen="mejorado" data-ensayo="8" data-sentada="2" data-rev="6" data-cubre="q2 q7 q24">
             <div class="ens-cuerpo">
               <p>
                 <strong>R10 · «Métodos»: la puerta y dos publicaciones.</strong>
                 <span class="ens-min">8 min</span>
-                <span class="origen origen-nuevo">Nuevo · S20</span>
+                <span class="origen origen-mejorado">Mejorado · S23</span>
               </p>
-              <p>En la HOME baja a «Métodos», entre la Vitrina y los Estudios: ¿se entiende de un vistazo qué es y a dónde lleva, y están todas las publicaciones con su chip «Tema»? Entra a T2 (agentes) y a T3 (RAG) y léelas como tuyas: cada nota de Evidencia (●) ¿es verdad?, cada límite ¿lo firmarías?, el Criterio (▲) ¿es tu posición? ¿Los diez bloques van en el orden que contarías?</p>
+              <p>En la HOME baja a «Métodos», después de Skills y antes de Contacto: ¿se entiende de un vistazo qué es y a dónde lleva, y están todas las publicaciones con su chip «Tema»? Entra a T2 (agentes) y a T3 (RAG) y léelas como tuyas: cada nota de Evidencia (●) ¿es verdad?, cada límite ¿lo firmarías?, el Criterio (▲) ¿es tu posición? ¿Los diez bloques van en el orden que contarías?</p>
               <p class="chica suave">Cubre: <code>q2</code> · <code>q7</code> · <code>q24</code>.</p>
             </div>
             <div class="p-resp"><fieldset class="ens-resp">
@@ -1076,14 +1124,14 @@
               <label><input type="radio" autocomplete="off" name="r12" id="r12-no" value="no" /> No</label>
             </fieldset><textarea class="p-nota" data-nota-de="r12" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de R12" autocomplete="off"></textarea></div>
           </li>
-          <li class="ens-fila" data-origen="nuevo" data-ensayo="3" data-sentada="2" data-rev="1" data-cubre="a7 o11">
+          <li class="ens-fila" data-cambio="23" data-origen="mejorado" data-ensayo="3" data-sentada="2" data-rev="1" data-cubre="a7 o11">
             <div class="ens-cuerpo">
               <p>
                 <strong>R13 · El ícono y el 404.</strong>
                 <span class="ens-min">3 min</span>
-                <span class="origen origen-nuevo">Nuevo · S20</span>
+                <span class="origen origen-mejorado">Mejorado · S23</span>
               </p>
-              <p>Mira la pestaña de tu dominio: ¿está el ícono navy (vacía antes la memoria del navegador)? Abre una ruta que no existe en ES y en EN: el 404 se lee. El «/» entre ES y EN del encabezado y el texto de ayuda del chat también se leen a simple vista.</p>
+              <p>Mira la pestaña de tu dominio: ¿está el ícono navy (vacía antes la memoria del navegador)? Abre una ruta que no existe en ES y en EN: el 404 se lee <strong>y trae arriba el botón ES/EN</strong> (también el chat y «Volver al inicio»): púlsalo y pasas al 404 del otro idioma. El «/» entre ES y EN del encabezado y el texto de ayuda del chat también se leen a simple vista.</p>
               <p class="chica suave">Cubre: <code>a7</code> · <code>o11</code>.</p>
             </div>
             <div class="p-resp"><fieldset class="ens-resp">
@@ -1225,24 +1273,10 @@
               <textarea class="p-nota" data-nota-de="a1" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de a1" autocomplete="off"></textarea>
             </div>
           </li>
-          <li id="a2" class="ens-fila" data-origen="mejorado" data-rev="1" data-rev-min="3">
+          <li id="a2" class="ens-fila" data-cambio="23" data-origen="mejorado" data-rev="1" data-rev-min="3">
             <div class="ens-cuerpo">
-              <p class="p-texto"><code class="p-id">a2</code> Baja por la página: aparecen en orden Perfil, Trayectoria,
-              Logros, <strong>Vitrina</strong>, <strong>Métodos</strong>,
-              <strong>Estudios</strong>, Certificaciones, Skills y Contacto — ya
-              no hay "Apps", ni
-              "Proyectos", ni "Roadmap". El Perfil no trae cifras de impacto (esas son de Logros) y dice lo que haces hoy (ISO/IEC 42001).
-              <strong>Logros son ocho, en dos filas de cuatro</strong>: entraron
-              los 27 agentes de Vesting y los más de 25 productos analíticos de CTIC. En la
-              trayectoria, Vesting dice <strong>2024 — 2025</strong> —ya no
-              parece un puesto abierto— y el año grande del índice dice 2024. El CTA del hero dice
-              <strong>«Explora mi portafolio»</strong> y el de la sección
-              Vitrina <strong>«Explora el portafolio»</strong>; las cajas dicen
-              <strong>«productos»</strong> y cierran con «Explora». El pie dice
-              «Diseñada y construida por Henry Rincón».
-              <span class="origen origen-mejorado"
-                >Mejorado · proyectos propios 2024</span
-              ></p>
+              <p class="p-texto"><code class="p-id">a2</code> Baja por la página: aparecen en orden Perfil, Trayectoria, Logros, <strong>Portafolio</strong>, <strong>Estudios</strong>, Certificaciones, Skills, <strong>Métodos</strong> y Contacto — «Métodos» va después de Skills y antes de Contacto; ya no hay "Apps", ni "Proyectos", ni "Roadmap". El Perfil no trae cifras de impacto (esas son de Logros) y dice lo que haces hoy (ISO/IEC 42001). <strong>Logros son ocho, en dos filas de cuatro</strong>: entraron los 27 agentes de Vesting y los más de 25 productos analíticos de CTIC. En la trayectoria, Vesting dice <strong>2024 — 2025</strong> —ya no parece un puesto abierto— y el año grande del índice dice 2024. El botón del hero y el de la sección Portafolio dicen los dos <strong>«Explora mi portafolio»</strong>; las cajas dicen <strong>«productos»</strong> y cierran con «Explora». El pie dice «Diseñada y construida por Henry Rincón».
+              <span class="origen origen-mejorado">Mejorado · S23</span></p>
             </div>
             <div class="p-resp">
               <fieldset class="ens-resp">
@@ -1253,16 +1287,10 @@
               <textarea class="p-nota" data-nota-de="a2" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de a2" autocomplete="off"></textarea>
             </div>
           </li>
-          <li id="a3b" class="ens-fila" data-origen="mejorado" data-rev="1" data-rev-min="1">
+          <li id="a3b" class="ens-fila" data-cambio="23" data-origen="mejorado" data-rev="1" data-rev-min="1">
             <div class="ens-cuerpo">
-              <p class="p-texto"><code class="p-id">a3b</code> El menú del encabezado tiene <strong>cuatro destinos</strong>: Hoja
-              de vida, <strong>Portafolio</strong>, <strong>Métodos</strong> y
-              Contacto (más CV PDF e idioma). <strong>No hay "Roadmap"</strong>.
-              Pulsa <strong>Contacto</strong>: te lleva a esa sección; pulsa
-              <strong>Métodos</strong>: te lleva a la lista de publicaciones.
-              <span class="origen origen-mejorado"
-                >Mejorado · S14</span
-              ></p>
+              <p class="p-texto"><code class="p-id">a3b</code> El menú del encabezado tiene <strong>cuatro destinos</strong>: Hoja de vida, <strong>Portafolio</strong>, <strong>Métodos</strong> y Contacto (más CV PDF e idioma). <strong>No hay "Roadmap"</strong>. Pulsa <strong>Contacto</strong>: te lleva a esa sección; pulsa <strong>Métodos</strong>: te lleva a la lista de publicaciones; pulsa <strong>Portafolio</strong>: te lleva a su página. La dirección vieja ya no existe: escribe en la barra <code>/es/vitrina</code> detrás de tu dominio y tienes que terminar en <code>/es/portafolio</code>.
+              <span class="origen origen-mejorado">Mejorado · S23</span></p>
             </div>
             <div class="p-resp">
               <fieldset class="ens-resp">
@@ -1273,19 +1301,10 @@
               <textarea class="p-nota" data-nota-de="a3b" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de a3b" autocomplete="off"></textarea>
             </div>
           </li>
-          <li id="a5" class="ens-fila" data-origen="mejorado" data-rev="1" data-rev-min="2">
+          <li id="a5" class="ens-fila" data-cambio="23" data-origen="mejorado" data-rev="1" data-rev-min="2">
             <div class="ens-cuerpo">
-              <p class="p-texto"><code class="p-id">a5</code> Pulsa <strong>Hoja de vida</strong>: se despliegan las seis
-              secciones del CV (Trayectoria, Logros, <strong>Vitrina</strong>,
-              <strong>Estudios</strong>, Certificaciones, Skills — en ese orden,
-              el de la página). "Vitrina" te lleva a la sección asomada en la
-              HOME; el <strong>"Portafolio"</strong> del primer nivel lleva al
-              portal — por eso no se llaman igual. Elige una y te lleva ahí
-              cerrando el menú. Vuelve a abrirlo y ciérralo pulsando
-              <strong>fuera</strong>, y otra vez con <strong>Escape</strong>.
-              <span class="origen origen-mejorado"
-                >Mejorado · post-S8</span
-              ></p>
+              <p class="p-texto"><code class="p-id">a5</code> Pulsa <strong>Hoja de vida</strong>: se despliegan las <strong>cinco</strong> secciones del CV (Trayectoria, Logros, <strong>Estudios</strong>, Certificaciones, Skills — en ese orden, el de la página). <strong>El portafolio ya no está en el grupo</strong>: es el «Portafolio» del primer nivel, que lleva a su página. Elige una y te lleva ahí cerrando el menú. Vuelve a abrirlo y ciérralo pulsando <strong>fuera</strong>, y otra vez con <strong>Escape</strong>.
+              <span class="origen origen-mejorado">Mejorado · S23</span></p>
             </div>
             <div class="p-resp">
               <fieldset class="ens-resp">
@@ -1296,12 +1315,10 @@
               <textarea class="p-nota" data-nota-de="a5" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de a5" autocomplete="off"></textarea>
             </div>
           </li>
-          <li id="a6" class="ens-fila" data-origen="heredada" data-rev="1" data-rev-min="2">
+          <li id="a6" class="ens-fila" data-cambio="23" data-origen="mejorado" data-rev="1" data-rev-min="2">
             <div class="ens-cuerpo">
-              <p class="p-texto"><code class="p-id">a6</code> Abre el menú <strong>solo con teclado</strong> (Tab hasta "Hoja
-              de vida", Enter): se despliega, Tab recorre las seis, Escape
-              cierra y el foco vuelve al botón — nunca se pierde.
-              <span class="origen origen-heredada">post-S5</span></p>
+              <p class="p-texto"><code class="p-id">a6</code> Abre el menú <strong>solo con teclado</strong>. En Chrome o Edge: Tab hasta "Hoja de vida", Enter — se despliega, Tab recorre las cinco, Escape cierra y el foco vuelve al botón; nunca se pierde. <strong>En Safari</strong> el Tab a secas solo visita los campos de formulario (por eso lo primero que ves es «Tu nombre», y no es un defecto del sitio): usa <strong>Opción+Tab</strong>, o activa «Pulsar Tab para resaltar cada ítem de una página web» en Ajustes → Avanzado. Con el recorrido completo el primer foco es «Saltar al contenido», luego el logo y luego «Hoja de vida».
+              <span class="origen origen-mejorado">Mejorado · S23</span></p>
             </div>
             <div class="p-resp">
               <fieldset class="ens-resp">
@@ -1318,7 +1335,7 @@
               sobria y coherente; las animaciones al hacer scroll son elegantes,
               no distraen.
               <strong>Post-S8, mira en especial las cuatro que pediste:</strong>
-              en Vitrina las cajas aparecen levemente una a una y el chip de
+              en Portafolio las cajas aparecen levemente una a una y el chip de
               productos aparece grande (1,5×) y se encoge a su tamaño CON la
               entrada de su caja, en cada pasada; Estudios y Certificaciones
               entran más lento y más marcado, con el logo de la institución en
@@ -1380,20 +1397,10 @@
               <textarea class="p-nota" data-nota-de="a7" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de a7" autocomplete="off"></textarea>
             </div>
           </li>
-          <li id="a8" class="ens-fila" data-origen="mejorado" data-rev="1" data-rev-min="3">
+          <li id="a8" class="ens-fila" data-cambio="23" data-origen="mejorado" data-rev="1" data-rev-min="3">
             <div class="ens-cuerpo">
-              <p class="p-texto"><code class="p-id">a8</code> En esa misma <strong>ventana privada</strong> (primera visita, sin
-              caché), baja a Logros: las cifras grandes (11, 27, 25+…) salen en
-              la letra mono del sitio —ceros con punto, trazo parejo—, no en una
-              letra redonda de sistema. Igual en la banda de cifras de un caso y
-              en <code>/cv</code>. Hasta el 2026-09-26 la primera visita las
-              pintaba en Arial. La letra del sitio llega cuando la página
-              <strong>termina de cargar</strong>: antes puedes ver un instante una
-              letra mono parecida, sobre todo con una conexión lenta. Es a
-              propósito, y <strong>nada se mueve</strong> en el cambio (la de
-              respaldo está calibrada al mismo ancho y alto). Si en vez de eso
-              ves las cifras en la letra parecida para siempre, repórtamelo.
-              <span class="origen origen-mejorado">Mejorado · margen de la home, segunda vuelta</span></p>
+              <p class="p-texto"><code class="p-id">a8</code> En esa misma <strong>ventana privada</strong> (primera visita, sin caché), baja a Logros: las cifras grandes (11, 27, 25+…) se ven con trazo parejo, en la letra de cifras del sitio. No hace falta que reconozcas la letra: lo que sí tienes que ver es que <strong>nada se mueve</strong> cuando la página termina de cargar (las cifras no saltan ni cambian de ancho). Igual en la banda de cifras de un caso y en <code>/cv</code>.
+              <span class="origen origen-mejorado">Mejorado · S23</span></p>
             </div>
             <div class="p-resp">
               <fieldset class="ens-resp">
@@ -1479,19 +1486,10 @@
           El botón ES/EN del encabezado.
         </p>
         <ul class="pasos">
-          <li id="b1" class="ens-fila" data-origen="mejorado" data-rev="1" data-rev-min="2">
+          <li id="b1" class="ens-fila" data-cambio="23" data-origen="mejorado" data-rev="1" data-rev-min="2">
             <div class="ens-cuerpo">
-              <p class="p-texto"><code class="p-id">b1</code> Pulsa el botón ES/EN a <strong>media sección</strong> (por
-              ejemplo, con un hito de Trayectoria a media pantalla, o dentro del
-              texto de Perfil): TODO el contenido cambia de idioma y la ventana
-              se queda <strong>exactamente donde estabas</strong> — el mismo
-              hito a la misma altura, sin saltar al borde de la sección ni al
-              inicio, aunque el inglés sea más corto. <strong>Hazlo también en
-              el celular</strong>, leyendo un hito de la mitad para abajo de la
-              Trayectoria: hasta el 2026-09-26 ahí el hito se corría 42–87 px.
-              <span class="origen origen-mejorado"
-                >Mejorado · cifras y citas</span
-              ></p>
+              <p class="p-texto"><code class="p-id">b1</code> Pulsa el botón ES/EN a <strong>media sección</strong> (por ejemplo, con un hito de Trayectoria a media pantalla, o dentro del texto de Perfil): TODO el contenido cambia de idioma y la ventana se queda <strong>exactamente donde estabas</strong> — el mismo hito a la misma altura, sin saltar al borde de la sección ni al inicio, aunque el inglés sea más corto. <strong>Pulsa el botón diez veces seguidas</strong> (ES, EN, ES…): la página no puede bajar un poco cada vez; en Safari bajaba un píxel por cada ida y vuelta, y desde el S23 no. <strong>Hazlo también en el celular</strong>, leyendo un hito de la mitad para abajo de la Trayectoria.
+              <span class="origen origen-mejorado">Mejorado · S23</span></p>
             </div>
             <div class="p-resp">
               <fieldset class="ens-resp">
@@ -1750,7 +1748,7 @@
               <strong>«Escríbeme»</strong>, no «Solicitar acceso». El tercer
               campo es el desplegable <strong>«Motivo (opcional)»</strong> con
               esas cinco puertas y nada más (la lista de espera de las apps es
-              OTRO formulario, en la vitrina: e5). Llena nombre y correo, elige
+              OTRO formulario, en el portafolio: e5). Llena nombre y correo, elige
               «Una asesoría» y envía: ves la confirmación
               <strong>"Recibí tu mensaje"</strong>.
               <span class="origen origen-mejorado"
@@ -1831,15 +1829,15 @@
           <li id="e5" class="ens-fila" data-origen="nuevo">
             <div class="ens-cuerpo">
               <p class="p-texto"><code class="p-id">e5</code> El <strong>segundo formulario</strong>, la lista de espera de las
-              apps: en <code>/es/vitrina/apps</code>, al pie, se titula
+              apps: en <code>/es/portafolio/apps</code>, al pie, se titula
               <strong>«Lista de espera»</strong> y su desplegable «¿Qué app te
-              interesa?» lista las apps de la vitrina más
+              interesa?» lista las apps del portafolio más
               <strong>«Otra»</strong>. Entra a la ficha de una app
-              (<code>/es/vitrina/apps/habla</code>): el botón «Avísame cuando
+              (<code>/es/portafolio/apps/habla</code>): el botón «Avísame cuando
               abra» baja al mismo formulario con
               <strong>esa app ya elegida</strong>. Envía: confirmación «Recibí
               tu mensaje»; en producción el asunto del correo es «[CV Viva]
-              Lista de espera: Habla San». Y en <code>/es/vitrina/agentes</code>,
+              Lista de espera: Habla San». Y en <code>/es/portafolio/agentes</code>,
               <code>/investigaciones</code> y <code>/tableros</code>
               <strong>NO hay lista de espera</strong> ni en el frente ni en sus
               fichas (las de Investigaciones no se ven mientras dure la pausa): cierran con «Este frente se muestra para enseñar
@@ -2130,7 +2128,7 @@
           </li>
           <li id="f12" class="ens-fila" data-origen="nuevo" data-rev="3" data-rev-min="3">
             <div class="ens-cuerpo">
-              <p class="p-texto"><code class="p-id">f12</code> El chat tampoco lo presenta como agente. En el chat, en <strong>español</strong> y luego en <strong>inglés</strong>, pregúntale por el agente retirado con su nombre de antes («Super», «guía» y «AI-103», las tres palabras juntas). Con el proveedor real: no dice que exista ni que esté en la vitrina; puede decir que estudias para el AI-103 y que está «en curso». Y pregúntale «¿qué agentes tiene publicados?»: la respuesta nombra otros agentes y no a ese. <span class="origen origen-nuevo">Nuevo · S21</span></p>
+              <p class="p-texto"><code class="p-id">f12</code> El chat tampoco lo presenta como agente. En el chat, en <strong>español</strong> y luego en <strong>inglés</strong>, pregúntale por el agente retirado con su nombre de antes («Super», «guía» y «AI-103», las tres palabras juntas). Con el proveedor real: no dice que exista ni que esté en el portafolio; puede decir que estudias para el AI-103 y que está «en curso». Y pregúntale «¿qué agentes tiene publicados?»: la respuesta nombra otros agentes y no a ese. <span class="origen origen-nuevo">Nuevo · S21</span></p>
             </div>
             <div class="p-resp">
               <fieldset class="ens-resp">
@@ -2158,14 +2156,14 @@
           <h2>Roadmap con votación anónima</h2>
         </div>
         <p class="meta-bloque chica suave">
-          En <code>/es/vitrina/apps/&lt;slug&gt;</code>, sección
+          En <code>/es/portafolio/apps/&lt;slug&gt;</code>, sección
           Roadmap de cada app · la feature estrella del S4.
         </p>
         <div class="reportame">
           <p>
             <strong>Dónde y cómo (2026-09-13):</strong> el roadmap vive ahora
             <strong>en la página de cada app hermana</strong>
-            (<code>/es/vitrina/apps/habla</code>, entre la ficha técnica y la
+            (<code>/es/portafolio/apps/habla</code>, entre la ficha técnica y la
             lista de espera), con las features de cierre de plan que entregó la
             planeadora. Ninguna feature de CV Viva se muestra en ningún lado. En
             <code>localhost</code> no hay credenciales de Supabase: la votación
@@ -2178,14 +2176,14 @@
           <li id="g1d" class="ens-fila" data-origen="mejorado" data-rev="3" data-rev-min="1">
             <div class="ens-cuerpo">
               <p class="p-texto"><code class="p-id">g1d</code> Entra a la página de una app hermana
-              (<code>/es/vitrina/apps/habla</code>): debajo de la ficha técnica
+              (<code>/es/portafolio/apps/habla</code>): debajo de la ficha técnica
               está la sección <strong>Roadmap</strong> con las features de
               <em>esa</em> app (cinco; tres en dash-agent-ai y dos en planlang), cada una con su
               descripción y un número de votos. Recorre las nueve que lo tienen: cada una tiene
               su propio grupo. Big-D todavía no tiene roadmap y su
               página no muestra la sección.
               <strong
-                >Ni en <code>/es/vitrina/apps</code> ni en la HOME hay
+                >Ni en <code>/es/portafolio/apps</code> ni en la HOME hay
                 roadmap</strong
               >, y en ningún lado aparece una feature de CV Viva. Juzga el
               contenido: ¿son disruptivas, de cierre de plan, y ninguna es lo
@@ -2272,7 +2270,7 @@
           <li id="g6" class="ens-fila" data-origen="nuevo">
             <div class="ens-cuerpo">
               <p class="p-texto"><code class="p-id">g6</code> Debajo del roadmap de una app
-              (<code>/es/vitrina/apps/habla</code>) está la caja
+              (<code>/es/portafolio/apps/habla</code>) está la caja
               <strong>«¿Qué te gustaría que hiciera Habla San?»</strong> con
               correo opcional y el botón «Proponer». Envía vacío: un error
               inline y nada sale. Escribe una idea y envía: ves
@@ -2317,13 +2315,13 @@
           <h2>Página brochure por app</h2>
         </div>
         <p class="meta-bloque chica suave">
-          Bloque «De esta casa» en la vitrina y rutas
+          Bloque «De esta casa» en el portafolio y rutas
           <code>/apps/&lt;app&gt;</code>.
         </p>
         <ul class="pasos">
           <li id="h1" class="ens-fila" data-origen="heredada" data-rev="4" data-rev-min="1">
             <div class="ens-cuerpo">
-              <p class="p-texto"><code class="p-id">h1</code> Al final de <code>/es/vitrina/apps</code>, el bloque
+              <p class="p-texto"><code class="p-id">h1</code> Al final de <code>/es/portafolio/apps</code>, el bloque
               <strong>«De esta casa»</strong> muestra CV Viva y el chat: pulsa
               "Ver la app" en una y abre su brochure.
               <em
@@ -2357,11 +2355,10 @@
               <textarea class="p-nota" data-nota-de="h2" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de h2" autocomplete="off"></textarea>
             </div>
           </li>
-          <li id="h3" class="ens-fila" data-origen="heredada" data-rev="4" data-rev-min="1">
+          <li id="h3" class="ens-fila" data-cambio="23" data-origen="mejorado" data-rev="4" data-rev-min="1">
             <div class="ens-cuerpo">
-              <p class="p-texto"><code class="p-id">h3</code> Una app "en exploración" (sin funcionalidad real) NO tiene
-              brochure: entrar a su URL da 404.
-              <span class="origen origen-heredada">S4</span></p>
+              <p class="p-texto"><code class="p-id">h3</code> Las dos exploraciones que todavía no tienen funcionalidad real no tienen página propia. Escribe en la barra, detrás de tu dominio, <code>/es/apps/fabric-analitica-e2e</code>: tienes que ver la página <strong>«Esta página no existe»</strong>, con el botón ES/EN arriba. Las únicas páginas de este tipo son las de CV Viva y su chat, al final de las apps, en «De esta casa».
+              <span class="origen origen-mejorado">Mejorado · S23</span></p>
             </div>
             <div class="p-resp">
               <fieldset class="ens-resp">
@@ -2437,17 +2434,17 @@
         </ul>
       </section>
 
-      <!-- ═══════ K. La vitrina: el portal, las apps y los frentes ═══════ -->
+      <!-- ═══════ K. El portafolio: el portal, las apps y los frentes ═══════ -->
       <section class="bloque">
         <div class="bloque-cabeza">
           <span class="letra">K</span>
-          <h2>La vitrina: el portal, las apps y los frentes</h2>
+          <h2>El portafolio: el portal, las apps y los frentes</h2>
         </div>
         <p class="meta-bloque chica suave">Escritorio y un teléfono real.</p>
         <ul class="pasos">
           <li id="k1b" class="ens-fila" data-origen="mejorado" data-rev="4" data-rev-min="2">
             <div class="ens-cuerpo">
-              <p class="p-texto"><code class="p-id">k1b</code> Entra a <strong>Vitrina</strong> desde el menú: ves el
+              <p class="p-texto"><code class="p-id">k1b</code> Entra a <strong>Portafolio</strong> desde el menú: ves el
               <strong>portal</strong> con <strong>cuatro cajas</strong> en este
               orden — Apps · Agentes especializados · Investigaciones · Tableros
               de datos — cada una con su icono, una frase y su estado.
@@ -2472,11 +2469,11 @@
             <div class="ens-cuerpo">
               <p class="p-texto"><code class="p-id">k2</code> Pulsa "Ver la ficha técnica" en una: llegas a
               <strong>su ficha técnica</strong> (la dirección es
-              <code>/vitrina/apps/&lt;app&gt;</code>), la infografía de dos
+              <code>/portafolio/apps/&lt;app&gt;</code>), la infografía de dos
               minutos. Al final, "Ver la ficha completa" baja al
               <strong>detalle</strong> (<code>…/detalle</code>) y ahí está esa
               app y ninguna otra. "Volver a la ficha técnica" sube, "Volver a
-              las apps" regresa al escaparate, y desde ahí "Volver a la vitrina"
+              las apps" regresa al escaparate, y desde ahí "Volver al portafolio"
               al portal.
               <span class="origen origen-heredada">post-S5</span></p>
             </div>
@@ -2592,7 +2589,7 @@
             <div class="ens-cuerpo">
               <p class="p-texto"><code class="p-id">k18</code> ⭐ <strong>La simulación de planlang</strong>, en escritorio y en
               tu teléfono real (datos móviles). En la ficha técnica de
-              <code>/es/vitrina/apps/planlang</code>, el cierre ofrece
+              <code>/es/portafolio/apps/planlang</code>, el cierre ofrece
               <strong>«Ver la simulación»</strong>: te lleva a una página con el
               rótulo «Simulación · no operativo», una frase de qué vas a ver y un
               panel con <strong>«Abrir la simulación aquí»</strong> y
@@ -2719,7 +2716,7 @@
           </li>
           <li id="k8" class="ens-fila" data-origen="mejorado" data-rev="5" data-rev-min="1">
             <div class="ens-cuerpo">
-              <p class="p-texto"><code class="p-id">k8</code> El frente en pausa visto desde el portal. En <code>/es/vitrina</code> la caja de <strong>Investigaciones</strong> dice
+              <p class="p-texto"><code class="p-id">k8</code> El frente en pausa visto desde el portal. En <code>/es/portafolio</code> la caja de <strong>Investigaciones</strong> dice
               <strong>«En preparación»</strong> (símbolo, texto y color) y las otras tres dicen «Entrar» con su cuenta. Entra al frente: ves su
               nombre, el aviso <strong>«Esta sección se está rehaciendo»</strong> sin fecha prometida, <strong>ningún párrafo que diga lo que «se publica aquí»</strong>,
               los otros tres frentes como vecinos y, al pie, <strong>ningún botón de lista de espera</strong> (la lista es solo de apps) ni enlace externo. Antes esta
@@ -2759,8 +2756,8 @@
           <li id="k15f" class="ens-fila" data-origen="mejorado" data-minimo data-ensayo-fuera="cubierta por el flujo R8 del ensayo.">
             <div class="ens-cuerpo">
               <p class="p-texto"><code class="p-id">k15f</code> ⭐ <strong>Los dos bloques de apps y su carrusel con inicio,
-              final y vuelta</strong>, en <code>/es/vitrina/apps</code> y
-              <code>/en/vitrina/apps</code>, en escritorio y en el teléfono. Hay
+              final y vuelta</strong>, en <code>/es/portafolio/apps</code> y
+              <code>/en/portafolio/apps</code>, en escritorio y en el teléfono. Hay
               dos bloques: <strong>Profesionales</strong> primero (Probeta DS ·
               Dash Agent · Anonimizador Velo · AngelGhost · planlang · Big-D ·
               HackGuard) y <strong>Personales</strong> después (Habla San ·
@@ -2802,7 +2799,7 @@
           <li id="k16b" class="ens-fila" data-origen="mejorado" data-minimo data-ensayo-fuera="cubierta por el flujo R12 del ensayo.">
             <div class="ens-cuerpo">
               <p class="p-texto"><code class="p-id">k16b</code> ⭐ <strong>El carrusel de «Cómo se ve»</strong>, en
-              <code>/es/vitrina/tableros/banca-colombiana</code>, en
+              <code>/es/portafolio/tableros/banca-colombiana</code>, en
               <strong>escritorio y en tu teléfono real</strong> (datos móviles).
               Las seis capturas se recorren a lo ancho: desliza con el dedo y
               suelta (cada captura se acomoda sola), y prueba los botones
@@ -3030,7 +3027,7 @@
           </li>
           <li id="m4" class="ens-fila" data-origen="mejorado" data-rev="5" data-rev-min="2">
             <div class="ens-cuerpo">
-              <p class="p-texto"><code class="p-id">m4</code> Abre <code>/es/vitrina/investigaciones</code>: el frente está <strong>en pausa</strong> porque las investigaciones se están rehaciendo. La página dice <strong>«Esta sección se está rehaciendo»</strong> con «En preparación» y «Sin fecha prometida», <strong>sin tarjetas y sin lista de espera</strong>; y la dirección de una ficha de investigación (por ejemplo <code>/es/vitrina/investigaciones/arkhe</code>) da <strong>404</strong>. Repite en <code>/en/…</code>: «This section is being rebuilt». Reabrirlas es una línea de <code>data/vitrina.yaml</code>. <span class="origen origen-mejorado">Mejorado · S22</span></p>
+              <p class="p-texto"><code class="p-id">m4</code> Abre <code>/es/portafolio/investigaciones</code>: el frente está <strong>en pausa</strong> porque las investigaciones se están rehaciendo. La página dice <strong>«Esta sección se está rehaciendo»</strong> con «En preparación» y «Sin fecha prometida», <strong>sin tarjetas y sin lista de espera</strong>; y la dirección de una ficha de investigación (por ejemplo <code>/es/portafolio/investigaciones/arkhe</code>) da <strong>404</strong>. Repite en <code>/en/…</code>: «This section is being rebuilt». Reabrirlas es una línea de <code>data/vitrina.yaml</code>. <span class="origen origen-mejorado">Mejorado · S22</span></p>
             </div>
             <div class="p-resp">
               <fieldset class="ens-resp">
@@ -3083,7 +3080,7 @@
               <p class="p-texto"><code class="p-id">m7</code> Al pie de una ficha, <strong>"Producto siguiente"</strong> lleva a
               otra pieza <strong>del mismo frente</strong> (nunca a un frente
               distinto), y la miga <strong>"Volver a …"</strong> regresa al
-              escaparate de ese frente. Desde ahí, "Volver a la vitrina" al
+              escaparate de ese frente. Desde ahí, "Volver al portafolio" al
               portal. <span class="origen origen-heredada">S7</span></p>
             </div>
             <div class="p-resp">
@@ -3225,7 +3222,7 @@
           </li>
           <li id="m15" class="ens-fila" data-origen="nuevo" data-rev="5" data-rev-min="2">
             <div class="ens-cuerpo">
-              <p class="p-texto"><code class="p-id">m15</code> El agente de estudio del AI-103 <strong>ya no está en la vitrina</strong> (el dueño lo desmontó el 2026-10-23; la certificación AI-103 sigue «en curso» en Certificaciones y en el CV). Abre <code>/es/vitrina/agentes</code>: el encabezado y las tarjetas cuadran con la m1b (la cuenta sale del disco) y ninguna tarjeta es ese agente. Prueba su dirección vieja: <code>/es/vitrina/agentes/</code> seguido de su nombre de antes (<code>ai103</code>, un guion y <code>foundry</code>, todo junto) y también en <code>/en</code>: en los dos idiomas sale la página 404 y no la ficha. Las cuentas de la sección Vitrina de la HOME y del portal cuadran con las de la m1b y la k1b, y ninguna página lo presenta como agente ni como herramienta del método. <span class="origen origen-nuevo">Nuevo · S21</span></p>
+              <p class="p-texto"><code class="p-id">m15</code> El agente de estudio del AI-103 <strong>ya no está en el portafolio</strong> (el dueño lo desmontó el 2026-10-23; la certificación AI-103 sigue «en curso» en Certificaciones y en el CV). Abre <code>/es/portafolio/agentes</code>: el encabezado y las tarjetas cuadran con la m1b (la cuenta sale del disco) y ninguna tarjeta es ese agente. Prueba su dirección vieja: <code>/es/portafolio/agentes/</code> seguido de su nombre de antes (<code>ai103</code>, un guion y <code>foundry</code>, todo junto) y también en <code>/en</code>: en los dos idiomas sale la página 404 y no la ficha. Las cuentas de la sección Portafolio de la HOME y del portal cuadran con las de la m1b y la k1b, y ninguna página lo presenta como agente ni como herramienta del método. <span class="origen origen-nuevo">Nuevo · S21</span></p>
             </div>
             <div class="p-resp">
               <fieldset class="ens-resp">
@@ -3253,7 +3250,7 @@
         <div class="bloque-cabeza">
           <span class="letra">N</span>
           <h2>
-            La HOME tras la revisión: el índice que baja, la vitrina, Estudios y
+            La HOME tras la revisión: el índice que baja, el portafolio, Estudios y
             Skills
           </h2>
         </div>
@@ -3316,8 +3313,8 @@
           </li>
           <li id="n4b" class="ens-fila" data-origen="mejorado" data-rev="1" data-rev-min="2">
             <div class="ens-cuerpo">
-              <p class="p-texto"><code class="p-id">n4b</code> La sección <strong>"Vitrina"</strong> (antes «Lo que construyo»)
-              ocupa el sitio de Proyectos: las cuatro cajas de la vitrina con su
+              <p class="p-texto"><code class="p-id">n4b</code> La sección <strong>"Portafolio"</strong> (antes «Lo que construyo»)
+              ocupa el sitio de Proyectos: las cuatro cajas del portafolio con su
               cuenta (Apps 10 · Agentes 11 · Tableros 6; Investigaciones dice «En preparación») y el
               botón "Explora el portafolio", que lleva al portal. Pulsa una
               caja: entras a ese frente.
@@ -3497,12 +3494,10 @@
           chat.
         </p>
         <ul class="pasos">
-          <li id="o1" class="ens-fila" data-origen="mejorada" data-rev="3" data-rev-min="1">
+          <li id="o1" class="ens-fila" data-cambio="23" data-origen="mejorado" data-rev="3" data-rev-min="1">
             <div class="ens-cuerpo">
-              <p class="p-texto"><code class="p-id">o1</code> Abre el chat y pregunta algo que solo el a fondo sabe («¿Por qué
-              salió de Vesting?», «¿Qué hizo en Inglopres?»):
-              <strong>responde con la prosa del documento</strong> y la cita
-              navega a lo visible (el case study o la sección de la HOME). Todos los documentos están <code>aprobados</code> en los dos idiomas. Confírmalo con <code>pnpm build:chat-index</code>, que imprime una línea por idioma: <code>chat-index.es.json — N chunks (N de N documentos «a fondo» aprobados e indexados)</code>, con la N de hoy. <span class="origen origen-mejorada">Mejorado en a fondo v2</span></p>
+              <p class="p-texto"><code class="p-id">o1</code> Abre el chat y pregunta algo que solo el a fondo sabe («¿Por qué salió de Vesting?», «¿Qué hizo en Inglopres?»): <strong>responde con la prosa del documento</strong> y la cita navega a lo visible (el case study o la sección de la HOME). Si responde con algo genérico, o la cita no te lleva a ninguna parte, es un no.
+              <span class="origen origen-mejorado">Mejorado · S23</span></p>
             </div>
             <div class="p-resp">
               <fieldset class="ens-resp">
@@ -3530,9 +3525,9 @@
               <textarea class="p-nota" data-nota-de="o2" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de o2" autocomplete="off"></textarea>
             </div>
           </li>
-          <li id="o3" class="ens-fila" data-origen="mejorada" data-rev="11" data-rev-min="2">
+          <li id="o3" class="ens-fila" data-origen="mejorado" data-rev="11" data-rev-min="2">
             <div class="ens-cuerpo">
-              <p class="p-texto"><code class="p-id">o3</code> Abre <code>data/a-fondo/README.md</code>: la tabla dice cuántos documentos, subsecciones y palabras tiene el corpus (las cuentas las escribe el generador, no este texto), <strong>0 <code>[CONFIRMAR]</code></strong> y que todos están aprobados. Corre <code>pnpm corpus:informe</code> y comprueba que la tabla se regenera sola. <span class="origen origen-mejorada">Mejorado en a fondo v2</span></p>
+              <p class="p-texto"><code class="p-id">o3</code> Abre <code>data/a-fondo/README.md</code>: la tabla dice cuántos documentos, subsecciones y palabras tiene el corpus (las cuentas las escribe el generador, no este texto), <strong>0 <code>[CONFIRMAR]</code></strong> y que todos están aprobados. Corre <code>pnpm corpus:informe</code> y comprueba que la tabla se regenera sola. <span class="origen origen-mejorado">Mejorado en a fondo v2</span></p>
             </div>
             <div class="p-resp">
               <fieldset class="ens-resp">
@@ -3543,7 +3538,7 @@
               <textarea class="p-nota" data-nota-de="o3" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de o3" autocomplete="off"></textarea>
             </div>
           </li>
-          <li id="o4" class="ens-fila" data-origen="mejorada" data-rev="11" data-rev-min="3">
+          <li id="o4" class="ens-fila" data-origen="mejorado" data-rev="11" data-rev-min="3">
             <div class="ens-cuerpo">
               <p class="p-texto"><code class="p-id">o4</code> Mira cómo se defiende el canal: en cualquier
               <code>.en.md</code> cambia el id de una subsección
@@ -3553,7 +3548,7 @@
               idiomas. Deshaz el cambio. Y en cualquier <code>.es.md</code>
               escribe <code>[CONFIRMAR: algo]</code>: el build vuelve a
               detenerse — un aprobado no puede llevar preguntas abiertas.
-              <span class="origen origen-mejorada">Mejorado en a fondo v2</span></p>
+              <span class="origen origen-mejorado">Mejorado en a fondo v2</span></p>
             </div>
             <div class="p-resp">
               <fieldset class="ens-resp">
@@ -3564,9 +3559,9 @@
               <textarea class="p-nota" data-nota-de="o4" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de o4" autocomplete="off"></textarea>
             </div>
           </li>
-          <li id="o5" class="ens-fila" data-origen="mejorada" data-rev="11" data-rev-min="2">
+          <li id="o5" class="ens-fila" data-origen="mejorado" data-rev="11" data-rev-min="2">
             <div class="ens-cuerpo">
-              <p class="p-texto"><code class="p-id">o5</code> Corre <code>pnpm corpus:informe</code> (reescribe <code>sprints/SPRINT_008-banco-de-preguntas.md</code>; descártalo después con git) y ábrelo: en «El número», <strong>todas</strong> las preguntas de afuera traen su fuente en el top-4 y <strong>cero</strong> preguntas legítimas reciben «eso se me escapa»; en «Preguntas ajenas», las que no son tuyas las para el guardrail sin gastar tokens o las declina el prompt. Los tres huecos declarados (salario, disponibilidad, viajes) son tuyos. <span class="origen origen-mejorada">Mejorado en a fondo v2</span></p>
+              <p class="p-texto"><code class="p-id">o5</code> Corre <code>pnpm corpus:informe</code> (reescribe <code>sprints/SPRINT_008-banco-de-preguntas.md</code>; descártalo después con git) y ábrelo: en «El número», <strong>todas</strong> las preguntas de afuera traen su fuente en el top-4 y <strong>cero</strong> preguntas legítimas reciben «eso se me escapa»; en «Preguntas ajenas», las que no son tuyas las para el guardrail sin gastar tokens o las declina el prompt. Los tres huecos declarados (salario, disponibilidad, viajes) son tuyos. <span class="origen origen-mejorado">Mejorado en a fondo v2</span></p>
             </div>
             <div class="p-resp">
               <fieldset class="ens-resp">
@@ -3577,7 +3572,7 @@
               <textarea class="p-nota" data-nota-de="o5" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de o5" autocomplete="off"></textarea>
             </div>
           </li>
-          <li id="o6" class="ens-fila" data-origen="mejorada" data-minimo data-ensayo-fuera="no es un flujo de cliente: es una lectura del repositorio (data/a-fondo/), no de producción; queda para el gate de juicio del hito." data-rev="11" data-rev-min="7">
+          <li id="o6" class="ens-fila" data-origen="mejorado" data-minimo data-ensayo-fuera="no es un flujo de cliente: es una lectura del repositorio (data/a-fondo/), no de producción; queda para el gate de juicio del hito." data-rev="11" data-rev-min="7">
             <div class="ens-cuerpo">
               <p class="p-texto"><code class="p-id">o6</code> ⭐
               <strong>Lee un documento entero y decide si es tuyo.</strong>
@@ -3588,7 +3583,7 @@
               dirías así? Lo que el chat cite saldrá de ahí
               <strong>palabra por palabra</strong>, y nadie más que tú puede
               juzgarlo. Lo que corrijas se corrige en el <code>.es.md</code> y
-              en su gemelo. <span class="origen origen-mejorada">Mejorado en a fondo v2</span
+              en su gemelo. <span class="origen origen-mejorado">Mejorado en a fondo v2</span
               ><span class="minimo">⭐ mínimo</span></p>
             </div>
             <div class="p-resp">
@@ -3620,7 +3615,7 @@
               <textarea class="p-nota" data-nota-de="o7" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de o7" autocomplete="off"></textarea>
             </div>
           </li>
-          <li id="o8" class="ens-fila" data-origen="mejorada" data-minimo data-ensayo-fuera="no es un flujo de cliente: es una lectura del repositorio (data/a-fondo/), no de producción; tests/unit/a-fondo-cifras-gemelas.test.ts respalda las cifras y el resto queda para el gate de juicio del hito." data-rev="11" data-rev-min="6">
+          <li id="o8" class="ens-fila" data-origen="mejorado" data-minimo data-ensayo-fuera="no es un flujo de cliente: es una lectura del repositorio (data/a-fondo/), no de producción; tests/unit/a-fondo-cifras-gemelas.test.ts respalda las cifras y el resto queda para el gate de juicio del hito." data-rev="11" data-rev-min="6">
             <div class="ens-cuerpo">
               <p class="p-texto"><code class="p-id">o8</code> ⭐
               <strong>Las cifras y las fechas son verdaderas.</strong> Contrasta
@@ -3632,7 +3627,7 @@
               fechas de los ocho cargos las vigila un test contra
               <code>cv.es.yaml</code> mes a mes; una cifra publicada que no
               puedas sostener en una entrevista es peor que no publicarla.
-              <span class="origen origen-mejorada">Mejorado en a fondo v2</span
+              <span class="origen origen-mejorado">Mejorado en a fondo v2</span
               ><span class="minimo">⭐ mínimo</span></p>
             </div>
             <div class="p-resp">
@@ -3644,7 +3639,7 @@
               <textarea class="p-nota" data-nota-de="o8" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de o8" autocomplete="off"></textarea>
             </div>
           </li>
-          <li id="o9" class="ens-fila" data-origen="mejorada" data-minimo data-ensayo-fuera="cubierta por el flujo R6 del ensayo.">
+          <li id="o9" class="ens-fila" data-origen="mejorado" data-minimo data-ensayo-fuera="cubierta por el flujo R6 del ensayo.">
             <div class="ens-cuerpo">
               <p class="p-texto"><code class="p-id">o9</code> ⭐
               <strong>M1, ya activa.</strong> En la preview, con el proveedor
@@ -3654,7 +3649,7 @@
               <strong>navegue a algo visible</strong> del sitio
               (<code>/proyectos/vesting</code>). Juzga si la respuesta suena a
               ti. Repite en <code>/en</code>: responde en inglés con el gemelo.
-              <span class="origen origen-mejorada">Mejorado en a fondo v2</span
+              <span class="origen origen-mejorado">Mejorado en a fondo v2</span
               ><span class="minimo">⭐ mínimo</span></p>
             </div>
             <div class="p-resp">
@@ -3666,7 +3661,7 @@
               <textarea class="p-nota" data-nota-de="o9" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de o9" autocomplete="off"></textarea>
             </div>
           </li>
-          <li id="o10" class="ens-fila" data-origen="mejorada" data-minimo data-ensayo-fuera="cubierta por el flujo R6 del ensayo.">
+          <li id="o10" class="ens-fila" data-origen="mejorado" data-minimo data-ensayo-fuera="cubierta por el flujo R6 del ensayo.">
             <div class="ens-cuerpo">
               <p class="p-texto"><code class="p-id">o10</code> ⭐ <strong>M2, ya activa.</strong> Con el proveedor real, hazle
               al chat <strong>cinco preguntas del banco</strong> —una de
@@ -3678,7 +3673,7 @@
               pasar a propósito)— y juzga: ¿concretas y fieles a las fuentes?
               ¿la cita correcta? ¿y la ajena la declina el modelo sin colar
               nada del CV?
-              <span class="origen origen-mejorada">Mejorado en a fondo v2</span
+              <span class="origen origen-mejorado">Mejorado en a fondo v2</span
               ><span class="minimo">⭐ mínimo</span></p>
             </div>
             <div class="p-resp">
@@ -3722,7 +3717,7 @@
               Habla San?» o «¿Cuántos criterios tiene el Paper
               Computacional?». La respuesta sale de la ficha, nombra la app con
               su nombre oficial y la cita navega a
-              <code>/vitrina/apps/habla</code> o a la ficha del agente
+              <code>/portafolio/apps/habla</code> o a la ficha del agente
               — no a la HOME. Son las 27 fichas, con la mitad del peso que tus
               documentos (ADR-023).
               <span class="origen origen-nuevo">Nuevo · a fondo v2</span><span class="origen origen-mejorado">Mejorado · post-S9</span
@@ -3767,7 +3762,7 @@
               —<code>data/a-fondo/lo-que-busco.en.md</code>— al lado de su
               español: mismas cifras (con puntuación inglesa: 1,000 · 52%),
               mismas subsecciones, nada nuevo en inglés y nada perdido. El
-              glosario fijo (showcase, sheet, dashboard, in-depth) está en la
+              glosario fijo (portfolio, sheet, dashboard, in-depth) está en la
               bitácora. Una traducción que dice algo que el español no dice es
               un documento que no aprobaste.
               <span class="origen origen-nuevo">Nuevo · a fondo v2</span
@@ -3810,7 +3805,7 @@
           </li>
           <li id="o17" class="ens-fila" data-origen="nuevo" data-rev="10" data-rev-min="4">
             <div class="ens-cuerpo">
-              <p class="p-texto"><code class="p-id">o17</code> Lo que dejó abierto el retiro de tres agentes y la pausa de Investigaciones (Sprint 22). Contéstalas en la nota, una línea cada una, o escribe «sin cambio»: <strong>(1)</strong> mientras dure la pausa, el corpus (<code>las-investigaciones</code>, <code>cm-operaciones</code>, <code>inglopres</code>, <code>procesos-y-simulacion</code>), el CV y la pieza «IA en la organización» de Métodos siguen diciendo «siete investigaciones» y «34 piezas», porque cuentan lo que hay en el disco; ¿reescribo esas líneas para que digan lo que el visitante ve (27 piezas, investigaciones en preparación) o las dejas hasta que reabras? · <strong>(2)</strong> el método de Design Science sigue descrito en <code>las-investigaciones</code> y en el CV (cuenta cómo se hicieron las investigaciones; ya no hay ficha de ese agente): ¿se queda o también sale? · <strong>(3)</strong> la simulación de planlang y la ficha de planlang (brochure) todavía hablan de «Agente A / Agente B» y «Demo A / Demo B», que son los dos agentes de demostración retirados del escaparate; viven en el export de otra casa, así que quitarlos pasa por la planeadora: ¿quieres que se los pida? · <strong>(4)</strong> en <code>apps-pipeline</code> quité el ejemplo «52 criterios binarios, cinco puertas, una frase exacta mía» del agente retirado; tu propio texto de <code>las-investigaciones</code> da «44 criterios» para el Paper Computacional: ¿lo pongo como ejemplo en su lugar o queda sin ejemplo? <span class="origen origen-nuevo">Nuevo · S22</span></p>
+              <p class="p-texto"><code class="p-id">o17</code> Lo que dejó abierto el retiro de tres agentes y la pausa de Investigaciones (Sprint 22). Contéstalas en la nota, una línea cada una, o escribe «sin cambio»: <strong>(1)</strong> mientras dure la pausa, el corpus (<code>las-investigaciones</code>, <code>cm-operaciones</code>, <code>inglopres</code>, <code>procesos-y-simulacion</code>), el CV y la pieza «IA en la organización» de Métodos siguen diciendo «siete investigaciones» y «34 piezas», porque cuentan lo que hay en el disco; ¿reescribo esas líneas para que digan lo que el visitante ve (27 piezas, investigaciones en preparación) o las dejas hasta que reabras? · <strong>(2)</strong> el método de Design Science sigue descrito en <code>las-investigaciones</code> y en el CV (cuenta cómo se hicieron las investigaciones; ya no hay ficha de ese agente): ¿se queda o también sale? · <strong>(3)</strong> <em>ya respondida, no la contestes</em>: la planeadora decidió que las fichas de los dos agentes de demostración de planlang dejan de exportarse en el próximo sprint de esa app, y que su brochure y su simulación quedan como están. · <strong>(4)</strong> en <code>apps-pipeline</code> quité el ejemplo «52 criterios binarios, cinco puertas, una frase exacta mía» del agente retirado; tu propio texto de <code>las-investigaciones</code> da «44 criterios» para el Paper Computacional: ¿lo pongo como ejemplo en su lugar o queda sin ejemplo? <span class="origen origen-nuevo">Nuevo · S22</span></p>
             </div>
             <div class="p-resp">
               <fieldset class="ens-resp">
@@ -3819,6 +3814,19 @@
                 <label><input type="radio" autocomplete="off" name="o17" id="o17-no" value="no" /> No</label>
               </fieldset>
               <textarea class="p-nota" data-nota-de="o17" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de o17" autocomplete="off"></textarea>
+            </div>
+          </li>
+          <li id="o18" class="ens-fila" data-origen="nuevo" data-rev="10" data-rev-min="3">
+            <div class="ens-cuerpo">
+              <p class="p-texto"><code class="p-id">o18</code> Guardar y restaurar tus respuestas. Pulsa <strong>«Copiar mis respuestas»</strong>; en una fila que ya respondiste pulsa «Quitar respuesta»; abre <strong>«Restaurar desde texto»</strong>, pega lo que copiaste y pulsa «Restaurar»: la respuesta que quitaste tiene que volver, con su nota. Si tu navegador no guarda (una ventana privada estricta, o sin espacio), la guía te lo dice arriba, con un aviso, en cuanto marcas algo. <span class="origen origen-nuevo">Nuevo · S23</span></p>
+            </div>
+            <div class="p-resp">
+              <fieldset class="ens-resp">
+                <legend>¿Salió como esperabas? (o18)</legend>
+                <label><input type="radio" autocomplete="off" name="o18" id="o18-si" value="si" /> Sí</label>
+                <label><input type="radio" autocomplete="off" name="o18" id="o18-no" value="no" /> No</label>
+              </fieldset>
+              <textarea class="p-nota" data-nota-de="o18" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de o18" autocomplete="off"></textarea>
             </div>
           </li>
         </ul>
@@ -4443,7 +4451,7 @@
               las integraciones en VBA de Cafam (el 15 % más de automatización y el
               «contribuyeron a bajar un 50 %» de los errores de datos), Kanban y Scrum en Ceinfes,
               el proceso core de once etapas sobre n8n en Vesting (27 agentes) y
-              el BPMN que la vitrina genera sola; la tarjeta de FORJA lleva el
+              el BPMN que el portafolio genera sola; la tarjeta de FORJA lleva el
               nivel <strong>«Prototipo»</strong> y su «Ver dónde» te lleva a la
               publicación T2, sin reescribirla. En los <strong>límites</strong>
               (bloque 9), ¿están los que dirías tú —la minería de procesos es un
@@ -4518,7 +4526,7 @@
               FlexSim en Inglopres y en Cafam, los criterios congelados y los
               resultados negativos, y los convoyes de buses. <strong>Probeta
               DS</strong> lleva el nivel <strong>«Prototipo»</strong>, con su
-              «Ver dónde» a la ficha de la vitrina, sin reescribirla: ¿es el nivel
+              «Ver dónde» a la ficha del portafolio, sin reescribirla: ¿es el nivel
               que quieres? En los <strong>límites</strong> (bloque 9), ¿están los
               que dirías tú —sin una deriva observada propia, sin una capa
               prescriptiva en un empleo, magnitudes sintéticas, PyTorch y
@@ -4574,10 +4582,10 @@
               <textarea class="p-nota" data-nota-de="q23" rows="2" maxlength="2000" placeholder="Nota (opcional)" aria-label="Nota de q23" autocomplete="off"></textarea>
             </div>
           </li>
-          <li id="q24" class="ens-fila" data-origen="nuevo" data-minimo data-ensayo-fuera="cubierta por el flujo R10 del ensayo.">
+          <li id="q24" class="ens-fila" data-cambio="23" data-origen="mejorado" data-minimo data-ensayo-fuera="cubierta por el flujo R10 del ensayo.">
             <div class="ens-cuerpo">
               <p class="p-texto"><code class="p-id">q24</code> ⭐ <strong>La puerta de «Métodos» en la HOME.</strong> Abre
-              <code>/es</code> y baja: entre la Vitrina y los Estudios hay una
+              <code>/es</code> y baja: después de Skills y antes de Contacto hay una
               sección <strong>«Métodos»</strong> con una línea de presentación, la
               lista de las publicaciones y el botón «Ver todas las
               publicaciones». ¿Se entiende de un vistazo qué es y a dónde lleva?
@@ -4585,7 +4593,7 @@
               hay, en el orden de los temas, y cada una lleva a su página? En
               escritorio son dos columnas y en el teléfono una, sin que la página
               se mueva de lado; los enlaces se pulsan sin esfuerzo. ¿Pesa lo mismo
-              que la sección de la Vitrina o queda más ligera, como debe, porque no
+              que la sección del Portafolio o queda más ligera, como debe, porque no
               lleva imágenes? ¿La línea habla como una publicación profesional, sin
               «yo» ni «entrevista», y sin escribir cuántas son? Repite en
               <code>/en</code>. Si algo no te gusta, anótalo: es FORMA y TEXTO, y se
@@ -4675,7 +4683,7 @@
           </li>
           <li id="j4" class="ens-fila" data-origen="heredada" data-rev="7" data-rev-min="2">
             <div class="ens-cuerpo">
-              <p class="p-texto"><code class="p-id">j4</code> En una ficha de la vitrina, recorre con Tab: el foco llega a cada
+              <p class="p-texto"><code class="p-id">j4</code> En una ficha del portafolio, recorre con Tab: el foco llega a cada
               tarjeta de "Qué hace", Enter la abre y la cierra, y el foco se ve
               siempre. <span class="origen origen-heredada">S5</span></p>
             </div>
@@ -4736,6 +4744,25 @@
           <summary>Historial de la guía</summary>
           <ul>
             <li>
+              <strong>v23 · «Portafolio», la casa y el inglés · 2026-10-25:</strong>
+              «vitrina» pasa a llamarse «Portafolio» en todo el sitio, texto y
+              dirección (las direcciones viejas redirigen con un 301); el
+              desplegable de «Hoja de vida» queda con cinco secciones; «Métodos»
+              baja a después de Skills; el cambio de idioma ya no baja la página
+              en Safari (diez cambios seguidos, mismo punto); el 404 trae el botón
+              ES/EN; el primer Tab en Safari se explica en la a6 (no era un
+              defecto del sitio). Cambian de texto la R1, la a2, la a3b, la a5, la
+              a6, la b1, la R13, la o1, la h3, la a8, la R8, la R10 y la q24 y llevan «Mejorado ·
+              S23»: vuelven a pendiente y muestran lo que habías respondido
+              («Antes del S23»). Entra la o18 (guardar y restaurar) y la guía
+              avisa a la vista si el navegador no guarda, y tiene «Restaurar
+              desde texto» (lee el texto de «Copiar mis respuestas» de la v21, la
+              v22 y la v23; «Copiar» suma la sección «SÍ SIN NOTA»). Además: el
+              encabezado dice v23, el historial recupera la v20 y la o1 ya no
+              pide un comando de terminal. El prefijo de las respuestas sigue
+              siendo s21.
+            </li>
+            <li>
               <strong>v22 · Sentada 5: tres agentes fuera y una sección en pausa · 2026-10-24:</strong>
               salen del sitio los dos agentes de demostración de planlang y el agente duplicado de Design Science (los agentes pasan de 14 a 11 y las piezas de 37 a 34 en disco); el agente de investigación pasa a llamarse «Paper Computacional» y ningún agente lleva «Harness» en el nombre; el frente de Investigaciones queda <em>en pausa</em> («En preparación», con su aviso, sin tarjetas, fuera del sitemap y del chat, y con sus fichas dando 404). Cambian de texto la k1b y la n4b (las cuentas del portal: tres con número e Investigaciones en preparación), la m1b (11 agentes y su orden), la m4 (ahora mira la página en pausa, no una ficha de investigación), la m6, la k9, la m10, la m11 y la R9, y el bloque M y la o12b suman lo publicado (17 y 27 fichas). Vuelve a la revisión la k8 (esperaba un frente vacío que no existía; hoy lo es Investigaciones) y entra la o17 (las cuatro preguntas que dejó el retiro, en la sentada de tus decisiones abiertas). La nota de cada fila admite hasta 2000 caracteres y varias líneas. <strong>El prefijo de las respuestas sigue siendo <code>s21</code></strong>: la revisión del dueño está en curso y sus respuestas se conservan; las filas que cambiaron de texto llevan «Mejorado · S22» y conviene volver a mirarlas.
             </li>
@@ -4762,7 +4789,14 @@
               generador y el informe), las cuentas de agentes y de fichas bajaron con el retiro, y se corrigieron las que ya no describían el sitio: la a2 (el Perfil sí trae «más de diez años»), la c1, la c2 y la c3 (hay nueve hitos y ocho casos), la e5 (el asunto dice «Habla San»), la i1 (el menú ya no tiene Roadmap), la k1b (las cajas dicen «Explora»), la m3 (las fichas de agentes no tienen lista de espera), la m7 («Producto siguiente»), la n2 (los años de la trayectoria), la n3 («Ver caso de estudio»), la n5 (el logro dice tres certificaciones profesionales), la o1 (el número de chunks sale del build) y la o13 (el número de apps sale del disco). Salieron de la cabeza de cada bloque los «~N min» escritos a mano (los minutos los suma la página), las sentadas del filtro «Ensayo general H-2» pasan a llamarse tandas para no confundirse con las de la revisión, y cada fila tiene «Quitar respuesta» por si marcaste por error. <strong>El prefijo de las respuestas cambia a
               <code>s21</code></strong>: ninguna marca vieja vale.
             </li>
-            <li>
+                        <li>
+              <strong>v20 · El ensayo general del H-2 · 2026-10-23:</strong>
+              suma un filtro, no una prueba: «Ensayo general H-2» (el bloque R).
+              El Gate mínimo ⭐ no cambia de contenido, pero deja de llevar un
+              tiempo escrito: la cuenta y los minutos los suma la página. El
+              prefijo de las casillas pasa a s20.
+            </li>
+<li>
               <strong>v19 · «Métodos», la novena publicación (T8) y la puerta en la HOME · 2026-10-22:</strong>
               entra «Cómo se debe decidir con modelos»: diez bloques, diez fuentes
               con fecha, un mapa de 14 nodos de la línea base a la decisión
@@ -5398,8 +5432,50 @@
     <script>
       (function () {
         // NS VERSIONADO POR SPRINT: al publicar la guía de un sprint nuevo se cambia
-        // s007c — así una regresión sin correr no aparece marcada por la versión anterior.
+        // s21 (el de hoy) — así una regresión sin correr no aparece marcada por la versión anterior.
         var NS = "guia-hoja-de-vida:s21:";
+
+        // El almacenamiento del navegador puede fallar (ventana privada estricta, sin espacio, bloqueado):
+        // antes cada escritura callaba y la respuesta se perdía sin avisar. Ahora toda lectura y escritura
+        // pasa por aquí, y si algo falla la página lo dice a la vista (S23, OM-35).
+        var avisoCaja = document.getElementById("rev-aviso");
+        function avisar(texto, suave) {
+          if (!avisoCaja) return;
+          avisoCaja.textContent = texto;
+          avisoCaja.classList.toggle("suave", !!suave);
+          avisoCaja.hidden = !texto;
+        }
+        function leer(clave) {
+          try {
+            return localStorage.getItem(clave);
+          } catch (e) {
+            avisarFallo();
+            return null;
+          }
+        }
+        function avisarFallo() {
+          avisar(
+            "⚠ Tu navegador no está guardando tus respuestas (una ventana privada estricta, o sin espacio). " +
+              "Lo que marques se pierde al cerrar la página: usa «Copiar mis respuestas» a menudo.",
+            false,
+          );
+        }
+        function guardar(clave, valor) {
+          try {
+            if (valor === null) {
+              localStorage.removeItem(clave);
+            } else {
+              localStorage.setItem(clave, valor);
+              // Algunos navegadores aceptan la escritura y no la guardan: se relee.
+              if (localStorage.getItem(clave) !== valor) throw new Error("no se guardó");
+            }
+            if (avisoCaja && avisoCaja.classList.contains("suave")) avisar("");
+            return true;
+          } catch (e) {
+            avisarFallo();
+            return false;
+          }
+        }
         var radios = Array.prototype.slice.call(
           document.querySelectorAll('input[type="radio"]'),
         );
@@ -5534,7 +5610,7 @@
           calcularRevision();
         }
         // Los espacios de cada cuenta se buscan una vez: la página los reescribe en cada respuesta.
-        var calcs = {};
+        var calcs = Object.create(null);
         Array.prototype.forEach.call(
           document.querySelectorAll("[data-calc]"),
           function (e) {
@@ -5727,6 +5803,12 @@
           conNota.forEach(function (li) {
             L.push("  · " + idDe(li) + " — " + tituloDe(li) + ": " + notaDe(li));
           });
+          // Sin esta sección «Restaurar desde texto» no podría devolver los «sí» que no llevan nota.
+          var sinNota = si.filter(function (li) { return !notaDe(li); });
+          L.push("");
+          L.push("SÍ SIN NOTA (" + sinNota.length + ")");
+          if (!sinNota.length) L.push("  ninguno");
+          else L.push("  · " + sinNota.map(idDe).join(", "));
           L.push("");
           L.push("PENDIENTES (" + obligatorias.length + (pend.length > obligatorias.length ? " y " + (pend.length - obligatorias.length) + " opcional" : "") + ")");
           if (!pend.length) L.push("  ninguno");
@@ -5742,6 +5824,157 @@
           return L.join("\n");
         }
 
+
+        // ── Restaurar desde texto (S23, OM-35) ─────────────────────────────────────────────
+        // Lee el texto de «Copiar mis respuestas» de cualquier versión (v21, v22, v23) y casa por ID,
+        // no por título: el título de una fila cambia cuando se reescribe.
+        function filaPorId() {
+          var m = Object.create(null);
+          filas.forEach(function (li) {
+            if (li.hasAttribute("data-rev")) m[idDe(li).toLowerCase()] = li;
+          });
+          return m;
+        }
+        function notaDeLinea(li, resto) {
+          // «título: nota». Tres cortes, del más seguro al último recurso:
+          // 1) el título de la fila hoy, entero; 2) un título truncado al copiar (termina en «…»):
+          // la nota empieza tras el primer «…: »; 3) el primer «: ». El 2 salva las filas cuyo título
+          // cambió y trae «: » dentro (p. ej. «Entra a Vitrina desde el menú: ves el portal…»).
+          var titulo = li ? tituloDe(li) : "";
+          var corte;
+          if (titulo && resto.indexOf(titulo + ": ") === 0) corte = titulo.length + 2;
+          else if (resto.indexOf("…: ") >= 0) corte = resto.indexOf("…: ") + 3;
+          else corte = resto.indexOf(": ") < 0 ? -1 : resto.indexOf(": ") + 2;
+          return (corte < 0 ? "" : resto.slice(corte)).replace(/ ⏎ /g, "\n");
+        }
+        function analizarTexto(texto) {
+          var lineas = String(texto).replace(/\r\n?/g, "\n").split("\n");
+          var cab = /gu[ií]a v(\d+)/.exec(lineas.slice(0, 3).join(" "));
+          var mapa = filaPorId();
+          var entradas = [];
+          var seccion = "";
+          var actual = null;
+          lineas.forEach(function (l) {
+            if (/^NO \(\d+\)/.test(l)) { seccion = "no"; actual = null; return; }
+            if (/^S[ÍI] CON NOTA \(\d+\)/.test(l)) { seccion = "si-nota"; actual = null; return; }
+            if (/^S[ÍI] SIN NOTA \(\d+\)/.test(l)) { seccion = "si-sin"; actual = null; return; }
+            if (/^PENDIENTES/.test(l)) { seccion = ""; actual = null; return; }
+            var m;
+            if (seccion === "si-sin") {
+              m = /^\s*·\s+(.+)$/.exec(l);
+              if (m)
+                m[1].split(/[,\s]+/).filter(Boolean).forEach(function (x) {
+                  entradas.push({ id: x.toLowerCase(), estado: "si", nota: "" });
+                });
+              return;
+            }
+            m = /^\s*·\s+(\S+)\s+—\s+(.*)$/.exec(l);
+            if (m && (seccion === "no" || seccion === "si-nota")) {
+              actual = {
+                id: m[1].toLowerCase(),
+                estado: seccion === "no" ? "no" : "si",
+                nota: seccion === "si-nota" ? notaDeLinea(mapa[m[1].toLowerCase()], m[2]) : "",
+              };
+              entradas.push(actual);
+              return;
+            }
+            if (seccion === "no" && actual) {
+              m = /^\s+nota:\s?(.*)$/.exec(l);
+              if (m) actual.nota = m[1] === "(sin nota)" ? "" : m[1].replace(/ ⏎ /g, "\n");
+            }
+          });
+          return { version: cab ? Number(cab[1]) : null, entradas: entradas };
+        }
+        function ponerRespuesta(li, estado, nota) {
+          var id = idDe(li).toLowerCase();
+          var radio = li.querySelector('input[type="radio"][value="' + estado + '"]');
+          if (radio) {
+            radio.checked = true;
+            guardar(NS + id, estado);
+          }
+          var n = li.querySelector("textarea.p-nota");
+          if (n) {
+            n.value = nota || "";
+            guardar(NS + id + ":nota", nota ? nota : null);
+            ajustarAlto(n);
+          }
+          quitarAntes(li);
+        }
+        function aplicarTexto(texto) {
+          var r = analizarTexto(texto);
+          var mapa = filaPorId();
+          var puestas = 0;
+          var antes = 0;
+          var desconocidas = [];
+          r.entradas.forEach(function (e) {
+            var li = mapa[e.id];
+            if (!li) {
+              desconocidas.push(e.id);
+              return;
+            }
+            var cambio = Number(li.getAttribute("data-cambio") || 0);
+            // Una respuesta de una versión anterior a la que reescribió la fila no vale para el texto nuevo:
+            // se guarda aparte y se muestra, y la fila sigue pendiente.
+            if (cambio && (r.version === null || r.version < cambio)) {
+              guardar(NS + e.id + ":antes", JSON.stringify({ e: e.estado, n: e.nota, v: "S" + cambio }));
+              antes++;
+              return;
+            }
+            ponerRespuesta(li, e.estado, e.nota);
+            puestas++;
+          });
+          mostrarAntes();
+          actualizar();
+          return { puestas: puestas, antes: antes, desconocidas: desconocidas, entradas: r.entradas.length };
+        }
+
+        // ── Las filas que cambiaron: lo respondido antes se muestra, no se pierde ──────────
+        function quitarAntes(li) {
+          if (!li) return;
+          var viejo = li.querySelector(".rev-antes");
+          if (viejo) viejo.parentNode.removeChild(viejo);
+          if (li.hasAttribute("data-cambio")) guardar(NS + idDe(li).toLowerCase() + ":antes", null);
+        }
+        function mostrarAntes() {
+          filas.forEach(function (li) {
+            if (!li.hasAttribute("data-cambio")) return;
+            var crudo = leer(NS + idDe(li).toLowerCase() + ":antes");
+            var previo = li.querySelector(".rev-antes");
+            if (previo) previo.parentNode.removeChild(previo);
+            if (!crudo) return;
+            var d;
+            try { d = JSON.parse(crudo); } catch (e) { return; }
+            var cuerpo = li.querySelector(".ens-cuerpo");
+            if (!cuerpo) return;
+            var el = document.createElement("small");
+            el.className = "rev-antes";
+            el.textContent =
+              "Antes del " + (d.v || "S23") + " respondiste: " + (d.e === "si" ? "Sí" : d.e === "no" ? "No" : "(sin respuesta)") +
+              (d.n ? " — «" + d.n + "»" : "") +
+              ". Esta fila cambió: vuelve a responderla.";
+            cuerpo.appendChild(el);
+          });
+        }
+        // Una sola vez por navegador: lo que ya estaba guardado en una fila reescrita pasa a «antes» y la fila queda pendiente.
+        function migrarFilasCambiadas() {
+          var MARCA = NS + "migrado:23";
+          if (!leer(MARCA)) {
+            filas.forEach(function (li) {
+              if (li.getAttribute("data-cambio") !== "23") return;
+              var id = idDe(li).toLowerCase();
+              var estadoViejo = leer(NS + id);
+              var notaVieja = leer(NS + id + ":nota");
+              if (!estadoViejo && !notaVieja) return;
+              // Solo se mueve si «antes» quedó guardado: si no, la respuesta se queda donde estaba.
+              if (guardar(NS + id + ":antes", JSON.stringify({ e: estadoViejo || "", n: notaVieja || "", v: "S23" }))) {
+                guardar(NS + id, null);
+                guardar(NS + id + ":nota", null);
+              }
+            });
+            guardar(MARCA, "1");
+          }
+        }
+
         // Cada ⭐ o prueba que sale del ensayo o de la revisión lleva su razón: en su fila y en la lista.
         function nota(li, texto) {
           var cuerpo = li.querySelector(".ens-cuerpo");
@@ -5751,7 +5984,7 @@
           el.textContent = texto;
           cuerpo.appendChild(el);
         }
-        var cubiertaPor = {};
+        var cubiertaPor = Object.create(null);
         filas.forEach(function (li) {
           if (!li.hasAttribute("data-cubre")) return;
           li.getAttribute("data-cubre").split(/\s+/).forEach(function (id) {
@@ -5817,14 +6050,12 @@
           });
         });
         // El sí/no de cada prueba y de cada flujo (un radio por respuesta, guardado por nombre).
+        migrarFilasCambiadas();
         radios.forEach(function (r) {
-          try {
-            r.checked = localStorage.getItem(NS + r.name) === r.value;
-          } catch (e) {}
+          r.checked = leer(NS + r.name) === r.value;
           r.addEventListener("change", function () {
-            try {
-              if (r.checked) localStorage.setItem(NS + r.name, r.value);
-            } catch (e) {}
+            if (r.checked) guardar(NS + r.name, r.value);
+            quitarAntes(r.closest("li"));
             actualizar();
           });
         });
@@ -5843,9 +6074,7 @@
               li.querySelectorAll('input[type="radio"]'),
               function (r) {
                 r.checked = false;
-                try {
-                  localStorage.removeItem(NS + r.name);
-                } catch (e) {}
+                guardar(NS + r.name, null);
               },
             );
             actualizar();
@@ -5855,16 +6084,11 @@
         // La nota de cada fila.
         notas.forEach(function (n) {
           var clave = NS + n.getAttribute("data-nota-de") + ":nota";
-          try {
-            n.value = localStorage.getItem(clave) || "";
-          } catch (e) {}
+          n.value = leer(clave) || "";
           ajustarAlto(n);
           n.addEventListener("input", function () {
             ajustarAlto(n);
-            try {
-              if (n.value) localStorage.setItem(clave, n.value);
-              else localStorage.removeItem(clave);
-            } catch (e) {}
+            guardar(clave, n.value ? n.value : null);
           });
         });
         // «Copiar mis respuestas»: texto plano; si el portapapeles falla, queda a la vista y seleccionado.
@@ -5896,6 +6120,51 @@
               aVista("Tu navegador no deja copiar solo: el texto está abajo, seleccionado. Cópialo con Cmd+C.");
             }
           });
+        }
+        // «Restaurar desde texto».
+        var restAbrir = document.getElementById("rev-restaurar-abrir");
+        var restCaja = document.getElementById("rev-restaurar");
+        var restTexto = document.getElementById("rev-restaurar-texto");
+        var restAplicar = document.getElementById("rev-restaurar-aplicar");
+        var restEstado = document.getElementById("rev-restaurar-estado");
+        if (restAbrir && restCaja) {
+          restAbrir.addEventListener("click", function () {
+            var abrir = restCaja.hasAttribute("hidden");
+            restCaja.toggleAttribute("hidden", !abrir);
+            restAbrir.setAttribute("aria-expanded", abrir ? "true" : "false");
+            if (abrir && restTexto) restTexto.focus();
+          });
+        }
+        if (restAplicar && restTexto) {
+          restAplicar.addEventListener("click", function () {
+            if (!restTexto.value.trim()) {
+              restEstado.textContent = "Pega primero el texto que copiaste.";
+              return;
+            }
+            var r = aplicarTexto(restTexto.value);
+            restEstado.textContent =
+              "Restauradas " + r.puestas + " de " + r.entradas + " respuestas" +
+              (r.antes ? " · " + r.antes + " son de filas que cambiaron: quedan a la vista, sin marcar" : "") +
+              (r.desconocidas.length ? " · no encontré: " + r.desconocidas.join(", ") : "") + ".";
+          });
+        }
+        mostrarAntes();
+        // Al abrir: si no hay dónde guardar, o no hay nada guardado, la página lo dice a la vista.
+        var sondeo = guardar(NS + "sondeo", "1");
+        if (sondeo) {
+          guardar(NS + "sondeo", null);
+          var guardadas = 0;
+          try {
+            for (var i = 0; i < localStorage.length; i++) {
+              var k = localStorage.key(i) || "";
+              if (k.indexOf(NS) === 0 && !/:migrado|:sondeo|:antes$/.test(k) && k.indexOf(NS + "migrado") !== 0) guardadas++;
+            }
+          } catch (e) {}
+          if (!guardadas)
+            avisar(
+              "Este navegador no tiene respuestas guardadas todavía. Si ya respondiste antes, pega tu último «Copiar mis respuestas» en «Restaurar desde texto».",
+              true,
+            );
         }
         aplicarFiltro("revision");
       })();

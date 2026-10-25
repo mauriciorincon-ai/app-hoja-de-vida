@@ -25,10 +25,10 @@ import { roadmapDe } from "@/lib/votes/roadmap";
 /**
  * LA FICHA TÉCNICA DE UNA APP — la capa infografía (ADR-016).
  *
- * `/vitrina/apps/<slug>` es ahora lo primero que se ve de una app: la
+ * `/portafolio/apps/<slug>` es ahora lo primero que se ve de una app: la
  * infografía de dos minutos (titular · cifras · para quién · el proceso en
  * BPMN · qué tiene · límites · dónde está). El detalle que construyó el S5
- * bajó un nivel, a `/vitrina/apps/<slug>/detalle`, y se llega con el botón
+ * bajó un nivel, a `/portafolio/apps/<slug>/detalle`, y se llega con el botón
  * «Ver la ficha completa».
  *
  * 100% SSG: `generateStaticParams` cruza idiomas con los slugs de los exports.
@@ -59,9 +59,9 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     description: ft.promesa.tagline,
     alternates: {
       languages: {
-        es: `/es/vitrina/apps/${app}`,
-        en: `/en/vitrina/apps/${app}`,
-        "x-default": `/es/vitrina/apps/${app}`,
+        es: `/es/portafolio/apps/${app}`,
+        en: `/en/portafolio/apps/${app}`,
+        "x-default": `/es/portafolio/apps/${app}`,
       },
     },
   };
@@ -84,7 +84,7 @@ export default async function FichaTecnicaAppPage({ params }: Params) {
   const roadmap = roadmapDe(app);
 
   // Vecinas en el orden del escaparate (profesionales, personales): el mismo
-  // que el visitante acaba de ver en /vitrina/apps, no el del loader.
+  // que el visitante acaba de ver en /portafolio/apps, no el del loader.
   const todas = ordenDeEscaparate(
     getFichasTecnicas(),
     (f) => f.pieza.slug,
@@ -101,7 +101,7 @@ export default async function FichaTecnicaAppPage({ params }: Params) {
         <div className="mx-auto max-w-5xl px-4 py-10 md:px-6 md:py-14">
           <nav aria-label={t("migaEtiqueta")} className="mb-8">
             <Link
-              href="/vitrina/apps"
+              href="/portafolio/apps"
               className="inline-flex min-h-11 items-center gap-2 font-mono text-[11px] tracking-[0.08em] text-ink-2 uppercase hover:text-ink-0"
             >
               <span aria-hidden="true">←</span>
@@ -113,9 +113,11 @@ export default async function FichaTecnicaAppPage({ params }: Params) {
           <FichaTecnica
             datos={ft}
             locale={l}
-            hrefDetalle={`/vitrina/apps/${app}/detalle`}
+            hrefDetalle={`/portafolio/apps/${app}/detalle`}
             hrefSimulacion={
-              getSimulacion(app) ? `/vitrina/apps/${app}/simulacion` : undefined
+              getSimulacion(app)
+                ? `/portafolio/apps/${app}/simulacion`
+                : undefined
             }
             listaDeEspera
           />
@@ -144,7 +146,7 @@ export default async function FichaTecnicaAppPage({ params }: Params) {
               >
                 {anterior ? (
                   <Link
-                    href={`/vitrina/apps/${anterior.pieza.slug}`}
+                    href={`/portafolio/apps/${anterior.pieza.slug}`}
                     className="flex min-h-11 flex-col justify-center rounded-[10px] border border-paper-2 bg-paper-0 px-5 py-4 transition-[box-shadow] duration-[180ms] hover:shadow-sh-1"
                   >
                     <span className="font-mono text-[11px] tracking-[0.08em] text-ink-2 uppercase">
@@ -159,7 +161,7 @@ export default async function FichaTecnicaAppPage({ params }: Params) {
                 )}
                 {siguiente && (
                   <Link
-                    href={`/vitrina/apps/${siguiente.pieza.slug}`}
+                    href={`/portafolio/apps/${siguiente.pieza.slug}`}
                     className="flex min-h-11 flex-col justify-center rounded-[10px] border border-paper-2 bg-paper-0 px-5 py-4 transition-[box-shadow] duration-[180ms] hover:shadow-sh-1 sm:items-end sm:text-right"
                   >
                     <span className="font-mono text-[11px] tracking-[0.08em] text-ink-2 uppercase">

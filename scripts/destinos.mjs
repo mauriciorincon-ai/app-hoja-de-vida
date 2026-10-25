@@ -40,7 +40,7 @@ function piezasDeMetodo() {
  *
  * El segundo salto solo mira los archivos del primero: `roadmap.tsx` declara
  * `id="roadmap"` y vive en `components/home/`, pero la HOME ya no lo monta —
- * el roadmap se fue a /vitrina/apps. Listarlo sería revivir el error de `#apps`
+ * el roadmap se fue a /portafolio/apps. Listarlo sería revivir el error de `#apps`
  * con otro nombre.
  */
 export function anclasDeHome() {
@@ -92,7 +92,7 @@ export function anclasDeHome() {
 
 /** Las rutas salen de los mismos datos con los que se generan las páginas. */
 export function rutasDeDatos() {
-  const rutas = new Set(["/", "/cv", "/vitrina"]);
+  const rutas = new Set(["/", "/cv", "/portafolio"]);
 
   // «Métodos» (S10): la lista y una página por publicación de `data/metodo/`.
   // La ruta sale del archivo, igual que la página (`generateStaticParams`).
@@ -113,7 +113,7 @@ export function rutasDeDatos() {
   for (const frente of leerYaml("data/vitrina.yaml").categorias ?? []) {
     // Un frente en preparación TIENE página (lo declara y ofrece la lista de
     // espera); lo que no publica son sus piezas.
-    rutas.add(`/vitrina/${frente.id}`);
+    rutas.add(`/portafolio/${frente.id}`);
     if (frente.estado !== "abierta") continue;
 
     if (frente.id === "apps") {
@@ -121,8 +121,8 @@ export function rutasDeDatos() {
       for (const f of existsSync(dir) ? readdirSync(dir) : []) {
         if (!f.endsWith(".brochure-export.json")) continue;
         const { app } = JSON.parse(readFileSync(path.join(dir, f), "utf8"));
-        rutas.add(`/vitrina/apps/${app.slug}`);
-        rutas.add(`/vitrina/apps/${app.slug}/detalle`);
+        rutas.add(`/portafolio/apps/${app.slug}`);
+        rutas.add(`/portafolio/apps/${app.slug}/detalle`);
       }
       continue;
     }
@@ -131,7 +131,7 @@ export function rutasDeDatos() {
     for (const f of existsSync(dir) ? readdirSync(dir) : []) {
       if (!f.endsWith(".ficha-tecnica.json")) continue;
       const { pieza } = JSON.parse(readFileSync(path.join(dir, f), "utf8"));
-      rutas.add(`/vitrina/${frente.id}/${pieza.slug}`);
+      rutas.add(`/portafolio/${frente.id}/${pieza.slug}`);
     }
   }
 
@@ -166,8 +166,8 @@ export function nombresDeDestinos(locale) {
   }
   if (msg.perfil?.titulo) nombres.set("#perfil", msg.perfil.titulo);
   if (msg.vitrinaHome?.titulo) {
-    nombres.set("#vitrina", msg.vitrinaHome.titulo);
-    nombres.set("/vitrina", msg.vitrinaHome.titulo);
+    nombres.set("#portafolio", msg.vitrinaHome.titulo);
+    nombres.set("/portafolio", msg.vitrinaHome.titulo);
   }
   if (msg.nav?.hojaDeVida) {
     nombres.set("/", msg.nav.hojaDeVida);
@@ -197,7 +197,7 @@ export function nombresDeDestinos(locale) {
   // Nombre de la pieza (ADR-028, adenda del S22): el mismo que da la página.
   const deLasPiezas = leerNombresDePiezas();
   for (const frente of leerYaml("data/vitrina.yaml").categorias ?? []) {
-    nombres.set(`/vitrina/${frente.id}`, frente.nombre[locale]);
+    nombres.set(`/portafolio/${frente.id}`, frente.nombre[locale]);
     if (frente.estado !== "abierta") continue;
     if (frente.id === "apps") {
       const dir = path.join(ROOT, "content", "vitrina");
@@ -207,8 +207,8 @@ export function nombresDeDestinos(locale) {
         if (!f.endsWith(".brochure-export.json")) continue;
         const { app } = JSON.parse(readFileSync(path.join(dir, f), "utf8"));
         const nombre = oficiales.get(app.slug) ?? app.nombre;
-        nombres.set(`/vitrina/apps/${app.slug}`, nombre);
-        nombres.set(`/vitrina/apps/${app.slug}/detalle`, nombre);
+        nombres.set(`/portafolio/apps/${app.slug}`, nombre);
+        nombres.set(`/portafolio/apps/${app.slug}/detalle`, nombre);
       }
       continue;
     }
@@ -217,7 +217,7 @@ export function nombresDeDestinos(locale) {
       if (!f.endsWith(".ficha-tecnica.json")) continue;
       const { pieza } = JSON.parse(readFileSync(path.join(dir, f), "utf8"));
       nombres.set(
-        `/vitrina/${frente.id}/${pieza.slug}`,
+        `/portafolio/${frente.id}/${pieza.slug}`,
         deLasPiezas.get(`${frente.id}/${pieza.slug}`) ?? pieza.nombre,
       );
     }

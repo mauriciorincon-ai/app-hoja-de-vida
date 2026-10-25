@@ -196,8 +196,8 @@ describe("UN solo nombre por app, en todo el sitio (ADR-028)", () => {
     for (const crudo of crudos) {
       const oficial = nombreOficial(categorias, crudo.app.slug)!;
       expect(texto, crudo.app.slug).toContain(oficial);
-      expect(destinos.get(`/vitrina/apps/${crudo.app.slug}`)).toBe(oficial);
-      expect(destinos.get(`/vitrina/apps/${crudo.app.slug}/detalle`)).toBe(
+      expect(destinos.get(`/portafolio/apps/${crudo.app.slug}`)).toBe(oficial);
+      expect(destinos.get(`/portafolio/apps/${crudo.app.slug}/detalle`)).toBe(
         oficial,
       );
     }

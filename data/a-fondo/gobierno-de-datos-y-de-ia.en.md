@@ -238,7 +238,7 @@ information, sensitive details of the processes or internal knowledge whose disc
 the people or the institution. I can explain capabilities, architecture principles and governance
 practices; I do not reveal the information they operate on.
 
-And I brought it to my showcase: one of the 10 published applications is an anonymizer, because the
+And I brought it to my portfolio: one of the 10 published applications is an anonymizer, because the
 first need of anyone who wants to analyze people's data with artificial intelligence is to stop
 having the people in the data. The rule does not belong to one job: it is mine. And since September
 2026 it stopped applying only to what I do for others: this very CV started collecting personal
@@ -353,7 +353,7 @@ accuracy and its lineage; an agent that acts is governed, in addition, by what i
 Autonomy must be designed in proportion to risk. A solution can limit itself to retrieving
 information, generating a draft or recommending an action. Only certain tasks should allow direct
 execution, especially when the result can be verified, reverted and kept within clearly defined
-limits. In the 11 agents of my showcase that decision is written on each sheet: what it does, what
+limits. In the 11 agents of my portfolio that decision is written on each sheet: what it does, what
 limits it has and what it "never" does; the Power BI Dashboard Builder, for example, has 5
 human-approval gates and does not close a run without a person approving the result.
 
@@ -366,7 +366,7 @@ My experience allows me to work at both levels. I can analyze the data architect
 models that sustain the solution —that is what DP-600, earned in December 2024, validates—, but also
 understand how the agent interprets the context, uses tools, produces results and distributes
 responsibility between the technology and the people, which is what I built at Vesting and what I
-keep building in my showcase. The two levels need each other: AI governance without data governance
+keep building in my portfolio. The two levels need each other: AI governance without data governance
 watches the behavior of a system fed with information that nobody answers for; data governance
 without AI governance protects the input and leaves the output free.
 
@@ -438,7 +438,7 @@ improvements is in my own analytics process, which is the one I govern from begi
 <!-- seccion: iso-42001 -->
 
 I built an agent specialized in ISO/IEC 42001, the **ISO 42001 Expert**, and published it in my
-showcase as one of the 11 agents, as evidence of my way of working with generative artificial
+portfolio as one of the 11 agents, as evidence of my way of working with generative artificial
 intelligence and normative knowledge.
 
 The agent does not use the model's general memory as the authority on the standard. Its answers must
@@ -503,7 +503,7 @@ statement, it must not present it with normative authority.
 <!-- seccion: gobierno-de-mi-proceso -->
 
 I apply these principles to my own pipeline of applications, agents, research pieces and dashboards:
-the 34 pieces of the showcase. The purpose is to demonstrate that governance is not a set of
+the 34 pieces of the portfolio. The purpose is to demonstrate that governance is not a set of
 recommendations aimed at others, but a discipline I use to control my own work.
 
 No application moves forward without two documented decisions. The first confirms its priority
@@ -762,7 +762,7 @@ to build 27 agents; and I currently lead the structuring of an institutional art
 This experience is not limited to incidental exposure to those domains. I have worked in the
 responsibilities I need to govern: I built pipelines and semantic models before establishing
 criteria on analytics assets; I designed observability before formulating requirements on
-monitoring; and I developed agents and harnesses —the 13 in my showcase, with their gates and their
+monitoring; and I developed agents and harnesses —the 13 in my portfolio, with their gates and their
 sheets— before taking on strategic responsibilities over their governance. I know what it costs to
 meet a control because I have had to meet it from the other side.
 
@@ -787,7 +787,7 @@ the solution level, I bring in purpose, behavior, sources, tools, autonomy, eval
 observability. At the institutional level, I connect those capabilities with responsibilities,
 risks, policies, third parties, decisions and continuous improvement. Each level has its case in my
 track record: the data at Banco Pichincha and in the data quality of Fundación CTIC, the solution in
-the 27 agents at Vesting and the 13 in my showcase, the organization in the more than 20 instruments of the
+the 27 agents at Vesting and the 13 in my portfolio, the organization in the more than 20 instruments of the
 management system.
 
 Industrial Engineering provides the systemic vision needed to understand how these levels influence
@@ -818,7 +818,7 @@ Nor do I consider an initiative governed merely because it meets a set of contro
 protect the purpose for which the solution was authorized and make it possible to evaluate whether
 it keeps generating the expected value. A capability that has stopped being useful, that operates
 outside its context or that introduces a disproportionate risk needs to be reviewed, restricted or
-withdrawn, even if it technically keeps working. In my showcase I have done it: in Dash Agent,
+withdrawn, even if it technically keeps working. In my portfolio I have done it: in Dash Agent,
 one of the 10 applications, a feature was withdrawn when the evidence showed 83 out-of-context
 suggestions, and the withdrawal is told on its sheet, not hidden.
 

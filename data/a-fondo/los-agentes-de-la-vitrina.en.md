@@ -1,15 +1,15 @@
 ---
 slug: los-agentes-de-la-vitrina
 codigo: AF-25
-titulo: "The eleven agents of the showcase"
+titulo: "The eleven agents of the portfolio"
 resumen: "The 11 published agents, all from ARKHÉ, one by one in four families. For each one: what it promises, its measured figure, its limit and its \"never\". Five sealed. All with human gates, baits that prove the controls fire, zero cost in tools (except the Animation Workshop's GPU) and the same rule: no claim comes out of the model's memory."
-cuando_usar: "Use this when they ask which agents he has published in his portfolio, what each of the eleven showcase agents is for, what a harness is, how he controls quality with human gates and bait, and what the eleven share."
+cuando_usar: "Use this when they ask which agents he has published in his portfolio, what each of the eleven portfolio agents is for, what a harness is, how he controls quality with human gates and bait, and what the eleven share."
 estado: aprobado
-ancla: "/vitrina/agentes"
+ancla: "/portafolio/agentes"
 actualizado: 2026-09-21
 preguntas_de_prueba:
-  - "What are the eleven agents of the showcase and what are they not?"
-  - "What do the eleven agents of the showcase share?"
+  - "What are the eleven agents of the portfolio and what are they not?"
+  - "What do the eleven agents of the portfolio share?"
   - "How do the agents produce pieces with human gates?"
 ---
 
@@ -38,7 +38,7 @@ HOW THIS FILE IS WRITTEN
 
 <!-- seccion: que-son -->
 
-The showcase publishes **11 agents**, each with its technical sheet: promise, figures with
+The portfolio publishes **11 agents**, each with its technical sheet: promise, figures with
 provenance, limits, "never" and the process drawn. They are work systems that run on **Claude Code** inside a **harness** —the wrapper that
 fixes the agent's function, its sources, its tools and its input and output contract—, and all of
 them belong to **ARKHÉ**, my agentic ecosystem, which is explained in the agents document.

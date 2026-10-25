@@ -56,7 +56,7 @@ describe("el motor, contra fichas de juguete", () => {
       "tableros-banca-bloques",
     ]);
     expect(new Set(chunks.map((c) => c.ancla))).toEqual(
-      new Set(["/vitrina/tableros/banca"]),
+      new Set(["/portafolio/tableros/banca"]),
     );
     expect(chunks[1].texto).toContain("Combinaciones: 7779 casos (medido)");
     expect(chunks[2].texto).toContain("Nunca: Suma niveles");
@@ -68,7 +68,7 @@ describe("el motor, contra fichas de juguete", () => {
     ).toThrow(/pieza.slug/);
   });
 
-  it("una app usa el brochure y su complemento, y cita a /vitrina/apps/<slug>", () => {
+  it("una app usa el brochure y su complemento, y cita a /portafolio/apps/<slug>", () => {
     const chunks = chunksDeApp({
       brochure: {
         app: { slug: "habla", nombre: "Habla San", estado: "sellado" },
@@ -104,7 +104,7 @@ describe("el motor, contra fichas de juguete", () => {
       "pieza-apps-habla-cifras",
       "pieza-apps-habla-limites",
     ]);
-    expect(chunks.every((c) => c.ancla === "/vitrina/apps/habla")).toBe(true);
+    expect(chunks.every((c) => c.ancla === "/portafolio/apps/habla")).toBe(true);
     expect(chunks[3].texto).toContain("Privacidad: La voz nunca se graba.");
   });
 
@@ -118,7 +118,7 @@ describe("el motor, contra fichas de juguete", () => {
       c.id.startsWith("tableros-banca-bloques"),
     );
     expect(bloques.length).toBeGreaterThan(1);
-    expect(bloques.every((c) => c.ancla === "/vitrina/tableros/banca")).toBe(
+    expect(bloques.every((c) => c.ancla === "/portafolio/tableros/banca")).toBe(
       true,
     );
     expect(bloques[0].id).toBe("tableros-banca-bloques~1");
@@ -157,7 +157,7 @@ describe("un frente en pausa no se cita", () => {
     const anclas = chunksDeFichas(leerFichas(), "es").map((c) => c.ancla);
     for (const f of pausados)
       expect(
-        anclas.filter((a) => a.startsWith(`/vitrina/${f}/`)),
+        anclas.filter((a) => a.startsWith(`/portafolio/${f}/`)),
         f,
       ).toEqual([]);
   });

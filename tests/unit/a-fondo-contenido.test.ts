@@ -142,7 +142,7 @@ describe("conservación de la historia retirada (S3 → S8)", () => {
       expect(d!.titulo).toBe(TITULOS_CAMBIADOS[id] ?? s.titulo);
       // Los destinos que cambiaron, cada uno con su razón declarada:
       //  · «#apps» murió en la revisión post-S7 (la sección se retiró y el
-      //    roadmap se fue a la vitrina) → «#vitrina».
+      //    roadmap se fue a la vitrina) → «#portafolio».
       //  · 2026-09-24: Inglopres, Ceinfes y C&M Consorcio ganaron su caso de
       //    estudio, y la cita de su documento pasó de la trayectoria —donde solo
       //    había un hito— a su página. Solo se admite ESE salto: de
@@ -152,7 +152,7 @@ describe("conservación de la historia retirada (S3 → S8)", () => {
       );
       const esperado =
         s.ancla === "#apps"
-          ? "#vitrina"
+          ? "#portafolio"
           : s.ancla === "#trayectoria" && conCaso.has(id)
             ? `/proyectos/${id}`
             : s.ancla;

@@ -10,7 +10,7 @@ import { Maqueta, tieneMaqueta } from "./maquetas";
  * La vitrina es el escaparate, no el catálogo: aquí cada app enseña lo justo
  * para decidir si entras —su estado, su nombre, su promesa, su tira y el
  * tamaño de lo construido— y **su ficha completa vive en su propia página**
- * (`/vitrina/apps/<slug>`). Antes las seis fichas se apilaban en una sola ruta: un
+ * (`/portafolio/apps/<slug>`). Antes las seis fichas se apilaban en una sola ruta: un
  * documento de más de 22 000 px donde ninguna app tenía sitio propio, ninguna
  * podía enlazarse ni compartirse por separado, y el visitante pagaba de una
  * vez el peso de las seis.
@@ -58,7 +58,7 @@ export async function MuestraApp({ ficha }: { ficha: FichaVitrina }) {
                 nombre accesible sigue siendo el de la app — una sola parada de
                 tabulador por muestra, y se lee «Habla», no «leer más». */}
           <Link
-            href={`/vitrina/apps/${ancla.slug}`}
+            href={`/portafolio/apps/${ancla.slug}`}
             className="after:absolute after:inset-0 after:rounded-[14px] after:content-['']"
           >
             {exp.app.nombre}

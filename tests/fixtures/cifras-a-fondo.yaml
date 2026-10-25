@@ -1,7 +1,7 @@
 # CIFRAS DEL SITIO — los conteos que el corpus no puede contradecir (a fondo v2).
 #
 # Por qué existe: el visitante PUEDE CONTAR. Si el chat dice «siete aplicaciones»
-# y la vitrina muestra seis, la cifra no es un detalle de redacción: es la única
+# y el portafolio muestra seis, la cifra no es un detalle de redacción: es la única
 # afirmación del sitio que cualquiera desmiente en diez segundos, y se lleva por
 # delante la credibilidad de las otras treinta.
 #
@@ -26,36 +26,36 @@
 
 conceptos:
   - id: apps
-    etiqueta: "las apps hermanas de la vitrina"
+    etiqueta: "las apps hermanas del portafolio"
     fuente: "content/vitrina/*.json"
     sustantivos: [aplicaciones, apps]
     salvedades:
       - frase: "aplicaciones de power bi"
         razon: "un conteo de informes, no del pipeline"
       - frase: "aplicaciones empresariales"
-        razon: "categoría de software, no piezas de la vitrina"
+        razon: "categoría de software, no piezas del portafolio"
 
   - id: piezas
-    etiqueta: "las piezas publicadas en la vitrina"
+    etiqueta: "las piezas publicadas en el portafolio"
     fuente: "content/vitrina + agentes + investigaciones + tableros"
     sustantivos: [piezas]
 
   - id: agentes-vitrina
-    etiqueta: "los agentes publicados en la vitrina"
+    etiqueta: "los agentes publicados en el portafolio"
     fuente: "content/agentes/*.json"
     sustantivos: [agentes]
     contexto:
       - publicados
-      - "de la vitrina"
-      - "en la vitrina"
       - "del portafolio"
       - "en el portafolio"
-    # Los 27 agentes de Vesting son los de una startup, no los de la vitrina; su inventario
+      - "del portafolio"
+      - "en el portafolio"
+    # Los 27 agentes de Vesting son los de una startup, no los del portafolio; su inventario
     # vive fuera de este repositorio (ver la nota de arriba). Entró con las publicaciones de
-    # «Métodos» (S11): «los 27 agentes de Vesting» y «los de la vitrina» van en una frase.
+    # «Métodos» (S11): «los 27 agentes de Vesting» y «los del portafolio» van en una frase.
     salvedades:
       - frase: "agentes de vesting"
-        razon: "los agentes de Vesting son de una startup, no los publicados en la vitrina; su inventario está fuera de este repositorio"
+        razon: "los agentes de Vesting son de una startup, no los publicados en el portafolio; su inventario está fuera de este repositorio"
 
   - id: investigaciones
     etiqueta: "las investigaciones publicadas"
@@ -67,11 +67,11 @@ conceptos:
     fuente: "content/tableros/*.json"
     sustantivos: [tableros]
     # Un tablero es también lo que se construye en un empleo («más de 20 tableros de control» en
-    # CTIC): solo se juzga el conteo cuando cerca se habla de la vitrina o de datos públicos.
+    # CTIC): solo se juzga el conteo cuando cerca se habla del portafolio o de datos públicos.
     contexto:
       - publicados
-      - "de la vitrina"
-      - "en la vitrina"
+      - "del portafolio"
+      - "en el portafolio"
       - "del portafolio"
       - "en el portafolio"
       - "datos publicos"
@@ -79,9 +79,9 @@ conceptos:
       - "datos abiertos"
     salvedades:
       - frase: "tableros de control"
-        razon: "habla del oficio, no del inventario de la vitrina"
+        razon: "habla del oficio, no del inventario del portafolio"
       - frase: "tableros de bi"
-        razon: "habla del oficio, no del inventario de la vitrina"
+        razon: "habla del oficio, no del inventario del portafolio"
 
   - id: credenciales-obtenidas
     etiqueta: "las credenciales obtenidas"
@@ -183,7 +183,7 @@ conceptos:
       # Esta NO es un hito (un hito exime el número en TODAS partes, y el 1.467 «de hoy» tiene
       # que seguir juzgándose): es la frase de historia, y solo ella.
       - frase: "salto de 494 a"
-        razon: "historia: el índice con el corpus v3 (de unas 30.000 a unas 158.000 palabras por idioma), antes de las fichas de la vitrina y de «Métodos»"
+        razon: "historia: el índice con el corpus v3 (de unas 30.000 a unas 158.000 palabras por idioma), antes de las fichas del portafolio y de «Métodos»"
     # TOLERANCIA, y por qué. Este número se mueve con CADA edición del corpus:
     # añadir un párrafo lo cambia. Exigirlo exacto haría el gate circular —
     # corriges la cifra, y corregirla mueve la cifra. Con una banda del 5 %, una
@@ -196,7 +196,7 @@ conceptos:
       - valor: 28
         razon: "el índice al nacer, solo con los YAML, antes del corpus a fondo"
       - valor: 226
-        razon: "lo que aportan las 32 fichas de la vitrina al entrar (ADR-023)"
+        razon: "lo que aportan las 32 fichas del portafolio al entrar (ADR-023)"
       - valor: 494
         razon: "el índice con el corpus v2, antes de que v3 ampliara los documentos"
       - valor: 162

@@ -142,28 +142,28 @@ const ANCLAS: Ancla[] = [
   {
     doc: "manual",
     nombre: "piezas del frente Apps",
-    patron: /\*\*Apps\*\* \(`\/es\/vitrina\/apps`\):.*?\*\*(\d+) piezas\.\*\*/g,
+    patron: /\*\*Apps\*\* \(`\/es\/portafolio\/apps`\):.*?\*\*(\d+) piezas\.\*\*/g,
     esperado: [V.apps],
   },
   {
     doc: "manual",
     nombre: "piezas del frente Agentes",
     patron:
-      /\*\*Agentes especializados\*\* \(`\/es\/vitrina\/agentes`\):.*?\*\*(\d+) piezas\.\*\*/g,
+      /\*\*Agentes especializados\*\* \(`\/es\/portafolio\/agentes`\):.*?\*\*(\d+) piezas\.\*\*/g,
     esperado: [V["agentes-vitrina"]],
   },
   {
     doc: "manual",
     nombre: "piezas del frente Investigaciones",
     patron:
-      /\*\*Investigaciones\*\* \(`\/es\/vitrina\/investigaciones`\):.*?\*\*(\d+) piezas\.\*\*/g,
+      /\*\*Investigaciones\*\* \(`\/es\/portafolio\/investigaciones`\):.*?\*\*(\d+) piezas\.\*\*/g,
     esperado: [V.investigaciones],
   },
   {
     doc: "manual",
     nombre: "piezas del frente Tableros",
     patron:
-      /\*\*Tableros de datos\*\* \(`\/es\/vitrina\/tableros`\):.*?\*\*(\d+) piezas\.\*\*/g,
+      /\*\*Tableros de datos\*\* \(`\/es\/portafolio\/tableros`\):.*?\*\*(\d+) piezas\.\*\*/g,
     esperado: [V.tableros],
   },
   {
@@ -188,7 +188,7 @@ const ANCLAS: Ancla[] = [
   {
     doc: "manual",
     nombre: "fichas en el índice del chat",
-    patron: /incluye las \*\*(\d+) fichas de la vitrina\*\*/g,
+    patron: /incluye las \*\*(\d+) fichas del portafolio\*\*/g,
     esperado: [V.apps + FICHAS_DE_OTRAS_CASAS],
   },
 ];

@@ -553,7 +553,7 @@ bloques:
           es: "Las aplicaciones hermanas y este sitio comparten criterios y, en lo esencial, esta cadena: Git y GitHub, integración continua con pruebas unitarias, de integración y de extremo a extremo, accesibilidad con axe, presupuesto de rendimiento con Lighthouse y despliegue en Vercel con una vista previa por cambio (Innmobiliaria sale desde el borde en Cloudflare Workers y Dash Agent no se despliega); ninguna rama llega a producción con uno de esos trabajos en rojo."
           en: "The sibling apps and this site share criteria and, in essence, this chain: Git and GitHub, continuous integration with unit, integration and end-to-end tests, accessibility with axe, a performance budget with Lighthouse and deployment on Vercel with one preview per change (Innmobiliaria is served from the edge on Cloudflare Workers and Dash Agent is not deployed); no branch reaches production with one of those jobs red."
         corpus: [plataforma-y-despliegue]
-        href: /vitrina/apps
+        href: /portafolio/apps
       - nombre: { es: "Este sitio: la integración continua contra una base real", en: "This site: continuous integration against a real database" }
         nivel: uso-real
         texto:

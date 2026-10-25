@@ -1,6 +1,6 @@
-# Las dos categorías de las apps de la vitrina (Sprint 009, 2026-10-06).
+# Las dos categorías de las apps del portafolio (Sprint 009, 2026-10-06).
 #
-# /vitrina/apps las muestra en dos bloques: PROFESIONALES primero (encabezado
+# /portafolio/apps las muestra en dos bloques: PROFESIONALES primero (encabezado
 # mayor) y PERSONALES después. Cada app se clasifica aquí por su `slug`, que es
 # el de su `content/vitrina/<slug>.brochure-export.json`.
 #
@@ -14,7 +14,7 @@
 #
 # `nombre` es el NOMBRE OFICIAL de la app, UNO solo, igual en español y en inglés
 # y en todo el sitio (ADR-028). El export no se edita (regla de content/), así
-# que el alias vive aquí y el loader de la vitrina lo aplica al leerlo: de ahí lo
+# que el alias vive aquí y el loader del portafolio lo aplica al leerlo: de ahí lo
 # heredan el escaparate, la ficha, el detalle, las vecinas, el manifest, el chat,
 # los correos y el PDF. Los textos propios (`data/**`) usan este mismo nombre, y
 # un test falla si vuelve a colarse el del export.

@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import { FrenteEnPreparacion } from "@/components/vitrina/frente-en-preparacion";
 
 /**
- * La rama «en preparación» de `/vitrina/<frente>` se quedó SIN SUJETO cuando
+ * La rama «en preparación» de `/portafolio/<frente>` se quedó SIN SUJETO cuando
  * los cuatro frentes abrieron (S7): ninguna prueba e2e la ejerce. Esta la
  * mantiene en la red hasta que nazca un quinto frente.
  */

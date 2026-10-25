@@ -5,7 +5,7 @@ titulo: "AI agents: the Vesting platform and ARKHÉ, my own ecosystem"
 resumen: "Two experiences with agents: 27 built with Vesting's core process on n8n and monitored in real time, and ARKHÉ, my agentic ecosystem of specialized harnesses, measured on 120 scenarios: −52% tokens and instruction compliance from 71% to 93%."
 cuando_usar: "Use this when they ask whether he has built artificial intelligence agents, which agent frameworks he has used (n8n, Claude Code), how he monitors an agent in production, what ARKHÉ is, how he keeps the model from making things up, and his experience with generative AI and large language models."
 estado: aprobado
-ancla: "/vitrina/agentes"
+ancla: "/portafolio/agentes"
 actualizado: 2026-09-26
 preguntas_de_prueba:
   - "Has Henry built artificial intelligence agents in production?"
@@ -71,7 +71,7 @@ of its components. It is a system of my own, built later with another vision, ot
 a level of specialization aimed at producing verifiable assets within my pipeline of
 applications, research, dashboards and professional knowledge.
 
-Currently, the showcase gathers 11 published agents, each with a specific function and technical
+Currently, the portfolio gathers 11 published agents, each with a specific function and technical
 sheet. However, those eleven agents do not by themselves constitute the complete ecosystem.
 They are visible capabilities built on a common architecture of harnesses, sources, tools,
 memory, controls and coordination rules. The eleven, one by one, are in their own document;
@@ -289,7 +289,7 @@ be deleted.
 
 <!-- seccion: dash-agent-ai -->
 
-Dash Agent is an application of my own published in my showcase, which I conceived and designed entirely in 2026, with my own means and outside Fundación CTIC, in my own app pipeline and well after Vesting. It is not a bridge from Vesting's platform: it is not part of it and does not use its confidential architecture. It is
+Dash Agent is an application of my own published in my portfolio, which I conceived and designed entirely in 2026, with my own means and outside Fundación CTIC, in my own app pipeline and well after Vesting. It is not a bridge from Vesting's platform: it is not part of it and does not use its confidential architecture. It is
 an independent application that answers a more current and different question: what information
 an agent knows, keeps or uses about the person it interacts with, and how much it costs that
 person to work with it.
@@ -347,7 +347,7 @@ and its date, and the 12 features the app declares do not count it.
 
 My own work evolved toward ARKHÉ, an advanced agentic ecosystem that neither reproduces the
 architecture used at Vesting nor is limited to the agents published individually in the
-showcase. It is a higher-level structure designed to coordinate agents, harnesses, knowledge,
+portfolio. It is a higher-level structure designed to coordinate agents, harnesses, knowledge,
 tools, controls and memory within a single production system, and to turn large language models
 (LLMs), generative artificial intelligence, into verifiable work capacity.
 
@@ -373,7 +373,7 @@ control architecture. It also makes it possible to improve the rules, the source
 or the context management without confusing those changes with the agent's own capabilities. The
 model can change; the system's responsibility must remain explicit.
 
-ARKHÉ is also a research piece published in the showcase. Its central idea is that work systems
+ARKHÉ is also a research piece published in the portfolio. Its central idea is that work systems
 are not built from scratch: they are instantiated from declarative contracts —roles, rules,
 evidence— that are reused as molds, evolve and return what was learned to the core. It has been
 operating for months in unrelated domains, and to validate that the topic was new I reviewed
@@ -552,7 +552,7 @@ does not back a decision, and an answer without a source does not back it either
 
 <!-- seccion: sistemas-de-trabajo -->
 
-The agents published in my showcase are not designed as generic chats. They are specialized work
+The agents published in my portfolio are not designed as generic chats. They are specialized work
 systems that produce deliverables, use tools, apply controls and keep evidence about the way they
 execute a task.
 

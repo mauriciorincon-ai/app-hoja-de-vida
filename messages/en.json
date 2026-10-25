@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Living CV — Henry Rincón",
-    "description": "Henry Rincón's interactive résumé — AI & Analytics Engineer · Industrial Engineer (DP-600): career, achievements, showcase and a chat that answers with his evidence, as an animated editorial experience."
+    "description": "Henry Rincón's interactive résumé — AI & Analytics Engineer · Industrial Engineer (DP-600): career, achievements, portfolio and a chat that answers with his evidence, as an animated editorial experience."
   },
   "nav": {
     "trayectoria": "Career",
@@ -209,7 +209,7 @@
     "sesionRequerida": "Your session ended. Register again to keep chatting."
   },
   "vitrina": {
-    "eyebrow": "The showcase",
+    "eyebrow": "The portfolio",
     "titulo": "What gets built here, on four fronts",
     "subtitulo": "Each front has its own space; this is just the window. What is already built is shown; what is starting is declared.",
     "portalNota": "Nothing you see is handed over from here: it is shown. Only the apps have a waiting list.",
@@ -227,7 +227,7 @@
     "verQueViene": "See what's coming",
     "enPreparacionTitulo": "This front is starting",
     "enPreparacionLinea": "The first products get published here once they are built — each with what it does and with what evidence. No date promised.",
-    "otrosFrentes": "The other fronts of the showcase",
+    "otrosFrentes": "The other fronts of the portfolio",
     "notaIdioma": "Each app's own words are kept in Spanish, exactly as its team wrote them.",
     "estados": {
       "sellado": "Sealed",
@@ -268,12 +268,12 @@
     "sinListaDeEspera": "This front is shown to demonstrate capabilities: it is not handed over and has no waiting list. If something here is useful to you, write to me.",
     "escribeme": "Write to me",
     "anclaje": "Card pinned to the export of {fecha} · v{version} · {sprints, plural, one {# closed sprint} other {# closed sprints}}",
-    "anclajeNota": "The showcase shows each app's pinned version, not its real-time state.",
+    "anclajeNota": "The portfolio shows each app's pinned version, not its real-time state.",
     "sí": "yes",
     "no": "no",
     "muestraPie": "A schematic of the app's ideas, drawn in this page's visual language. Not a screenshot.",
     "capturasPie": "A real screen of the running app, with made-up data — repainted in this page's palette.",
-    "firmaPie": "The signature scene of its own showcase product, redrawn in this page's visual language.",
+    "firmaPie": "The signature scene of its own portfolio product, redrawn in this page's visual language.",
     "indiceNota": "Each app has its own page. This is just the window.",
     "categoriaProfesionales": "Professional",
     "categoriaProfesionalesLinea": "Apps for professional use.",
@@ -287,10 +287,10 @@
     "verFicha": "Open the technical sheet",
     "cuentaFuncionalidades": "{n} features",
     "cuentaCifras": "{n, plural, one {# number} other {# numbers}}",
-    "volverIndice": "Back to the showcase",
+    "volverIndice": "Back to the portfolio",
     "volverApps": "Back to the apps",
     "migaEtiqueta": "Where you are",
-    "vecinasEtiqueta": "Other apps in the showcase",
+    "vecinasEtiqueta": "Other apps in the portfolio",
     "appAnterior": "Previous app",
     "appSiguiente": "Next app",
     "escaparateCuenta": "{n, plural, one {# published product} other {# published products}}",
@@ -488,9 +488,9 @@
     }
   },
   "vitrinaHome": {
-    "titulo": "Showcase",
+    "titulo": "Portfolio",
     "linea": "Four fronts: apps, agents, research and dashboards. Every published product carries its technical sheet.",
-    "ir": "Explore the portfolio"
+    "ir": "Explore my portfolio"
   },
   "estudios": {
     "sinPeriodo": "No date declared"

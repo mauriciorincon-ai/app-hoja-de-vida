@@ -5,7 +5,7 @@ titulo: "Las investigaciones: método antes que resultado"
 resumen: "Siete líneas de investigación publicadas con su vacío medido —1.414, 900, 780, 279, 1.405, 119 y 900 obras revisadas— y sus hallazgos, producidas con dos harnesses: Design Science (52 criterios, umbrales congelados antes de medir) y Paper Computacional (44 criterios, ledger: si no está en el ledger no está en el paper)."
 cuando_usar: "Úsalo cuando pregunten qué investigaciones ha hecho, si ha escrito artículos o papers, los dos harnesses de investigación (Design Science y Paper Computacional), el método de medir el vacío en la literatura, datos sintéticos y simulación, y qué tiene que ver la investigación con un rol de IA."
 estado: aprobado
-ancla: "/vitrina/investigaciones"
+ancla: "/portafolio/investigaciones"
 actualizado: 2026-09-20
 preguntas_de_prueba:
   - "¿Qué investigaciones ha hecho Henry?"
@@ -38,7 +38,7 @@ CÓMO SE ESCRIBE ESTE ARCHIVO
 
 <!-- seccion: que-son -->
 
-Mi portafolio reúne siete líneas de investigación publicadas en la vitrina de este sitio, cada una con una ficha técnica que presenta su origen, pregunta, vacío medido, método, estado, límites y contribución esperada. Publicarlas en la vitrina significa hacer visible su desarrollo y someter su estructura a revisión; no implica afirmar que todas hayan completado todavía un proceso de publicación científica o evaluación por pares. Ninguna pieza está sellada: las siete están en estado inicial, cinco de ellas tienen ya un paper con producción cerrada y listo para enviar, y ninguno se ha enviado todavía, por una decisión de agenda que está registrada.
+Mi portafolio reúne siete líneas de investigación publicadas en el portafolio de este sitio, cada una con una ficha técnica que presenta su origen, pregunta, vacío medido, método, estado, límites y contribución esperada. Publicarlas en el portafolio significa hacer visible su desarrollo y someter su estructura a revisión; no implica afirmar que todas hayan completado todavía un proceso de publicación científica o evaluación por pares. Ninguna pieza está sellada: las siete están en estado inicial, cinco de ellas tienen ya un paper con producción cerrada y listo para enviar, y ninguno se ha enviado todavía, por una decisión de agenda que está registrada.
 
 No son ensayos construidos alrededor de una opinión. Cada línea comienza con una pregunta delimitada, una revisión estructurada de la literatura y una medición explícita del vacío que pretende abordar. Mi propósito no es declarar que un tema ha sido poco estudiado, sino establecer qué se ha investigado, bajo qué condiciones, qué resultados existen y qué combinación específica de elementos continúa sin una respuesta suficiente.
 
@@ -144,7 +144,7 @@ Las siete líneas de investigación pueden organizarse alrededor de tres grandes
 
 A la primera pregunta responden tres líneas que vienen del transporte y de la línea de producción: la asignación conjunta de conductor, vehículo y ruta con fallas; los convoyes de buses; y los suplementos por fatiga en el balanceo de líneas. A la segunda responden dos: FORJA, del proceso dibujado al sistema que lo ejecuta, y el reemplazo progresivo de un ERP con inteligencia artificial. Y a la tercera, dos: ARKHÉ, el ecosistema declarativo de conocimiento que es también mi ecosistema agéntico propio, y el espectro de agencia de los instrumentos de decisión.
 
-Las siete provienen de momentos distintos de mi trayectoria —de un ERP en 2016 a los agentes de 2024—, pero comparten la misma raíz. Cada una comienza con un sistema real cuya representación era insuficiente, una decisión que podía mejorarse o una capacidad organizacional que todavía no contaba con un método suficientemente claro para evolucionar. Y las siete se producen con los mismos dos harnesses, y uno de ellos, el Paper Computacional, está publicado entre los 11 agentes de la vitrina.
+Las siete provienen de momentos distintos de mi trayectoria —de un ERP en 2016 a los agentes de 2024—, pero comparten la misma raíz. Cada una comienza con un sistema real cuya representación era insuficiente, una decisión que podía mejorarse o una capacidad organizacional que todavía no contaba con un método suficientemente claro para evolucionar. Y las siete se producen con los mismos dos harnesses, y uno de ellos, el Paper Computacional, está publicado entre los 11 agentes del portafolio.
 
 ## Tres líneas sobre operaciones bajo variabilidad
 
@@ -222,7 +222,7 @@ La experiencia proporciona relevancia. El método proporciona credibilidad. La i
 
 <!-- seccion: los-harnesses -->
 
-Las investigaciones se producen con dos harnesses, y uno de ellos, el Paper Computacional, está publicado entre los 11 agentes de la vitrina. Los dos declaran el paper en un solo archivo de configuración —preguntas, principios falsables, métricas, corpus, frontera de divulgación— y conducen diez fases hasta un manuscrito listo para enviar, deteniéndose en puertas donde solo una frase exacta mía deja pasar: «framing aprobado», «artefacto aprobado», «manuscrito aprobado», «sin críticos, envía». Una configuración incompleta falla al cargar en vez de rellenarse sola: el harness nunca inventa contenido de dominio que yo no declaré.
+Las investigaciones se producen con dos harnesses, y uno de ellos, el Paper Computacional, está publicado entre los 11 agentes del portafolio. Los dos declaran el paper en un solo archivo de configuración —preguntas, principios falsables, métricas, corpus, frontera de divulgación— y conducen diez fases hasta un manuscrito listo para enviar, deteniéndose en puertas donde solo una frase exacta mía deja pasar: «framing aprobado», «artefacto aprobado», «manuscrito aprobado», «sin críticos, envía». Una configuración incompleta falla al cargar en vez de rellenarse sola: el harness nunca inventa contenido de dominio que yo no declaré.
 
 El Harness Design Science —diez fases D0 a D9, 52 criterios binarios de aceptación contados en sus archivos de fase, 7 controles endurecidos con su huella publicada, cinco gates con token verbal— es para el investigador-practicante que ya construyó artefactos que funcionan y sabe que ahí hay un paper de Design Science Research. Congela los umbrales antes de medir y publica lo que salga: en su paper piloto, dos de los tres principios del artefacto quedaron refutados por sus propias métricas, y así se escribieron. Un resultado nulo jamás se arregla redefiniendo; y un nulo no es una refutación: los dos se reportan como informativos. Cada criterio se imprime con veredicto, denominador y universo al cerrar su fase, y un lote vacío contado como verde es fallo del control, no éxito.
 
@@ -356,7 +356,7 @@ La publicación de límites genera confianza porque demuestra que el objetivo no
 
 Las investigaciones no permanecen aisladas del resto de mi portafolio. Sus preguntas, métodos y resultados alimentan aplicaciones, agentes, modelos, patrones y decisiones de arquitectura.
 
-FORJA puede convertirse en un método aplicable para especificar actividades antes de desarrollar aplicaciones o agentes, y entra dentro de ARKHÉ como caso demostrativo: el método de especificación como núcleo arquitectónico. ARKHÉ organiza conceptos y funciones que ya orientan una arquitectura de inteligencia artificial: es la arquitectura que produce las otras seis líneas y las 34 piezas de la vitrina. El espectro de agencia ofrece un criterio para seleccionar si una decisión necesita un tablero, una alerta, una recomendación, una aplicación o un sistema con capacidad de acción.
+FORJA puede convertirse en un método aplicable para especificar actividades antes de desarrollar aplicaciones o agentes, y entra dentro de ARKHÉ como caso demostrativo: el método de especificación como núcleo arquitectónico. ARKHÉ organiza conceptos y funciones que ya orientan una arquitectura de inteligencia artificial: es la arquitectura que produce las otras seis líneas y las 34 piezas del portafolio. El espectro de agencia ofrece un criterio para seleccionar si una decisión necesita un tablero, una alerta, una recomendación, una aplicación o un sistema con capacidad de acción.
 
 Las investigaciones de transporte permiten desarrollar modelos de asignación y políticas de control que pueden materializarse en simulaciones, herramientas de decisión o aplicaciones operacionales: la mecánica de adelantamiento entra como capacidad nueva del banco de pruebas, y el daño del convoy tiene su entregable de divulgación acoplado al paper. La línea sobre fatiga puede influir sobre modelos de balanceo y criterios para diseñar cargas de trabajo más sostenibles, y su siguiente paso es el protocolo en campo: medir en una planta real, y hasta entonces el protocolo es método, no resultado.
 
@@ -398,7 +398,7 @@ Demuestran ingeniería de trazabilidad. Cada cifra necesita un registro, cada ta
 
 Demuestran capacidad para construir sistemas reutilizables. La tubería no depende de un artículo específico —tres papers de clases distintas y un diff vacío lo prueban— y los agentes no dependen de una única tarea. El objetivo es acumular capacidad investigativa, no automatizar superficialmente la escritura.
 
-También demuestran responsabilidad sobre los límites. Los datos sintéticos no se presentan como validación real, la simulación no se presenta como certeza operacional y una pieza publicada en la vitrina no se presenta automáticamente como artículo evaluado por pares: cinco papers listos, ninguno enviado, y así está escrito.
+También demuestran responsabilidad sobre los límites. Los datos sintéticos no se presentan como validación real, la simulación no se presenta como certeza operacional y una pieza publicada en el portafolio no se presenta automáticamente como artículo evaluado por pares: cinco papers listos, ninguno enviado, y así está escrito.
 
 Las investigaciones conectan toda mi trayectoria. Los problemas provienen de procesos, transporte, sistemas empresariales, datos e inteligencia artificial. Los métodos integran revisión, modelado, optimización, simulación, arquitectura, aplicaciones y agentes.
 

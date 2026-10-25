@@ -5,7 +5,7 @@ titulo: "Los tableros: datos públicos, verificados"
 resumen: "Seis tableros sellados sobre datos abiertos —banca, empresas, ciclo monetario, gasto del Estado, energía y clima, Fórmula 1— construidos con Power BI Desktop, Power Query, DAX, PBIR escrito por script y Python, con las identidades del origen corridas enteras y los límites a la vista."
 cuando_usar: "Úsalo cuando pregunten por los seis tableros publicados con datos abiertos (energía y clima, ciclo monetario, banca colombiana, empresas de Colombia, gasto del Estado, Fórmula 1), cómo verifica las cifras que publica, estados financieros y datos contables, Power Query, DAX y el rigor de cada tablero."
 estado: aprobado
-ancla: "/vitrina/tableros"
+ancla: "/portafolio/tableros"
 actualizado: 2026-09-20
 preguntas_de_prueba:
   - "¿Qué tableros ha publicado Henry?"
@@ -38,7 +38,7 @@ CÓMO SE ESCRIBE ESTE ARCHIVO
 
 <!-- seccion: que-son -->
 
-He construido desde cero seis tableros analíticos sobre fuentes de datos públicas y los he publicado en la vitrina de este sitio con sus respectivas fichas técnicas. Los seis están sellados —se sellaron entre el 6 y el 8 de septiembre de 2026, tras siete fases de construcción cada uno— y cada uno aborda un universo diferente, pero todos siguen el mismo principio: los datos deben poder rastrearse hasta su origen, el modelo debe superar controles verificables y la visualización debe comunicar con claridad tanto sus resultados como sus límites.
+He construido desde cero seis tableros analíticos sobre fuentes de datos públicas y los he publicado en el portafolio de este sitio con sus respectivas fichas técnicas. Los seis están sellados —se sellaron entre el 6 y el 8 de septiembre de 2026, tras siete fases de construcción cada uno— y cada uno aborda un universo diferente, pero todos siguen el mismo principio: los datos deben poder rastrearse hasta su origen, el modelo debe superar controles verificables y la visualización debe comunicar con claridad tanto sus resultados como sus límites.
 
 No los concibo como ejercicios de diseño ni como demostraciones aisladas de Power BI. Cada tablero representa un producto analítico completo que comienza con la identificación y evaluación de las fuentes, continúa con la limpieza, integración y transformación de los datos, y termina en un modelo semántico capaz de sostener indicadores, comparaciones y recorridos de análisis: doce páginas por tablero, seis en español y seis en inglés, generadas desde el mismo modelo y el mismo juego de medidas.
 
@@ -361,7 +361,7 @@ La calidad se conserva mediante responsabilidades. La fuente necesita seguimient
 
 La información preparada y gobernada no necesita utilizarse únicamente en Power BI. También puede servir a aplicaciones, procesos automatizados y agentes de inteligencia artificial, y en una plataforma como Fabric esa ampliación de consumidores es la razón de ser del lakehouse: un mismo activo semántico sirviendo a personas, aplicaciones y agentes.
 
-Esto exige conservar una separación clara entre los datos, su significado y la forma de consumo. Un agente no debería reconstruir libremente una métrica cuya definición ya existe dentro del modelo semántico. Cuando una medida ha sido validada y gobernada, la solución inteligente debería utilizar ese activo en lugar de generar una interpretación alternativa. Es lo que hice en Vesting, donde la plataforma existía para observar agentes, y es lo que hace en la vitrina el Constructor de Tableros Power BI, un agente construido y probado que crea el proyecto completo —modelo semántico, preparación en Power Query M, medidas DAX y visuales— y puede extraer datos, con el mismo principio: la definición vive en el modelo, no en el prompt.
+Esto exige conservar una separación clara entre los datos, su significado y la forma de consumo. Un agente no debería reconstruir libremente una métrica cuya definición ya existe dentro del modelo semántico. Cuando una medida ha sido validada y gobernada, la solución inteligente debería utilizar ese activo en lugar de generar una interpretación alternativa. Es lo que hice en Vesting, donde la plataforma existía para observar agentes, y es lo que hace en el portafolio el Constructor de Tableros Power BI, un agente construido y probado que crea el proyecto completo —modelo semántico, preparación en Power Query M, medidas DAX y visuales— y puede extraer datos, con el mismo principio: la definición vive en el modelo, no en el prompt.
 
 Los tableros públicos ofrecen un entorno especialmente útil para explorar esta integración porque las fuentes pueden auditarse y las definiciones pueden hacerse visibles. Una aplicación o un agente podría consultar datos estructurados, recuperar documentación metodológica y producir explicaciones sustentadas en los mismos activos utilizados por Power BI. Y de hecho ya ocurre en pequeño: las fichas de los seis tableros entran al índice del chat de este sitio, con sus cifras y sus «nunca», y el chat las cita hacia la ficha.
 

@@ -8,7 +8,7 @@
 ## Qué es esta app
 
 CV Viva es tu hoja de vida convertida en una página web que se recorre como una pieza editorial
-animada: identidad, trayectoria, logros, proyectos, la vitrina de apps del pipeline y, desde el
+animada: identidad, trayectoria, logros, proyectos, el portafolio de apps del pipeline y, desde el
 Sprint 010, «Métodos» (publicaciones largas sobre cómo se diseñan sistemas de IA, datos y BI; antes «Mi método»), en español e inglés. Quien la visita puede escribirte —por una app, una asesoría, una charla o un rol— y
 el mensaje te llega al correo.
 
@@ -81,14 +81,14 @@ el mensaje te llega al correo.
   años de la línea (su 2024 repite el de Vesting a propósito) y el PDF lo pone en su sección
   «Proyectos propios», después de la experiencia, con su descripción en vez de sus logros. **Sus
   logros nombran las piezas y nunca las cuentan**: si escribes «32 piezas» o «6 aplicaciones»
-  ahí, `pnpm test` falla, porque la vitrina crece cada semana. **Y su año de inicio es uno solo**:
+  ahí, `pnpm test` falla, porque el portafolio crece cada semana. **Y su año de inicio es uno solo**:
   si cambias el `periodo`, `pnpm test` también falla mientras la descripción, los logros o una
   frase del corpus («desde abril de 2024 planeo y diseño…») sigan diciendo otro año. Sin `tipo`,
   un hito es un empleo.
 - **Ver case study desde el hito:** un hito con `proyecto: <slug>` enseña «Ver caso de estudio →» («View case study →» en inglés) hacia
   `/proyectos/<slug>`. El slug tiene que ser el de un proyecto **con** `casestudy:`; si no, **la
   publicación falla** y te dice qué hito. Es la única puerta a los case studies desde la HOME
-  (la sección «Proyectos» ya no existe: ahí está la vitrina).
+  (la sección «Proyectos» ya no existe: ahí está el portafolio).
 
 ### El "grueso" de cada experiencia (bullets expandibles) · desde Sprint 002
 
@@ -225,7 +225,7 @@ el mensaje te llega al correo.
     `agentes-en-produccion`), para que el chat conteste «¿qué frameworks de agentes ha usado?»
     con todo eso y no solo con n8n en Vesting.
   - **Big data multiplataforma** abre con el chip «Planeador de Fabric, Databricks y Snowflake —
-    en preparación». **Cuando el planeador llegue a la vitrina**, ese chip se cambia por uno que
+    en preparación». **Cuando el planeador llegue al portafolio**, ese chip se cambia por uno que
     remita a él (y cuando llegue la app de LangChain, igual). Es la misma regla que «Google
     Cloud — en exploración»: una etiqueta honesta hasta que haya evidencia pública.
   - **El PDF sigue en dos páginas, pero la columna de la derecha quedó casi llena.** Si agregas
@@ -237,7 +237,7 @@ el mensaje te llega al correo.
 
 ### Estudios · desde la revisión post-S7
 
-- **Qué hace:** sección propia entre la vitrina y las certificaciones, con una tarjeta por
+- **Qué hace:** sección propia entre el portafolio y las certificaciones, con una tarjeta por
   estudio. Antes la formación era un hito más de la trayectoria; ahora es un dato que también
   leen `/cv`, el PDF y el chat.
 - **Cómo se alimenta:** en `data/cv.es.yaml` y `cv.en.yaml`, el bloque `estudios:` — cada entrada
@@ -248,23 +248,23 @@ el mensaje te llega al correo.
   año:** un `periodo` sin cuatro dígitos pone rojo el test de contenido. Mismo número de estudios
   en ES y EN.
 
-### La vitrina, asomada en la HOME · desde la revisión post-S7
+### El portafolio, asomada en la HOME · desde la revisión post-S7
 
-- **Qué hace:** en el sitio que tenía «Proyectos», la HOME enseña las cuatro cajas de la vitrina
+- **Qué hace:** en el sitio que tenía «Proyectos», la HOME enseña las cuatro cajas del portafolio
   con su cuenta real de **productos** y un botón «Explora el portafolio». Son las mismas cajas del
   portal: no hay nada que editar aparte de `data/vitrina.yaml`.
-- **Nombres, desde la revisión post-S8:** la sección se llama **«Vitrina»** (antes «Lo que
+- **Nombres, desde la revisión post-S8:** la sección se llama **«Portafolio»** (antes «Lo que
   construyo») y el primer nivel del menú que lleva al portal se llama **«Portafolio»** — dos
-  enlaces «Vitrina» en el mismo menú a sitios distintos era una trampa. En todo el copy visible,
+  enlaces «Portafolio» en el mismo menú a sitios distintos era una trampa. En todo el copy visible,
   «pieza» pasó a **«producto»**; en el código, el contrato de ficha técnica y `public/piezas/`
-  sigue diciendo pieza, a propósito: es el nombre del dominio, no el de la vitrina.
+  sigue diciendo pieza, a propósito: es el nombre del dominio, no el del portafolio.
 - **El formulario de contacto (post-S8):** ya no se titula «Solicitar acceso» sino **«Escríbeme»**,
   y el tercer campo es el desplegable **«Motivo (opcional)»**: un proyecto, una asesoría, una
   capacitación, una charla o un rol. El motivo elegido es el **asunto** del correo («[CV Viva]
   Una asesoría»); sin motivo, «[CV Viva] Mensaje desde la hoja de vida». Las opciones viven en
   `MOTIVOS` (`src/lib/schemas.ts`) y sus textos en `messages/*.json` bajo `form.motivos`.
 - **Hay DOS formularios (decisión tuya, 2026-09-13):** el general de la portada, que pide un
-  motivo, y la **lista de espera de las apps**, al pie de `/vitrina/apps` y de cada ficha de app
+  motivo, y la **lista de espera de las apps**, al pie de `/portafolio/apps` y de cada ficha de app
   (ahí llega ya con esa app elegida). Su desplegable lista las apps publicadas en
   `content/vitrina/` más **«Otra»**; el asunto del correo es «[CV Viva] Lista de espera: <app>».
   **Solo las apps tienen lista de espera:** agentes, investigaciones y tableros se muestran para
@@ -313,11 +313,11 @@ el mensaje te llega al correo.
 
 - **Qué cambió:** la sección **«Apps» de la portada se retiró**. No enseñaba apps que se pudieran
   visitar: enseñaba _esta misma página_ (CV Viva y su chat) y dos exploraciones sin producto —
-  mientras «Vitrina», a un centímetro en el mismo menú, sí llevaba a seis apps construidas. Dos
-  puertas prometiendo lo mismo. **Ahora lo construido tiene una sola puerta: la Vitrina.**
+  mientras «Portafolio», a un centímetro en el mismo menú, sí llevaba a seis apps construidas. Dos
+  puertas prometiendo lo mismo. **Ahora lo construido tiene una sola puerta: el Portafolio.**
 - **Nada del contenido se perdió.** `data/apps.yaml` sigue siendo la fuente y alimenta tres cosas:
   - **Las brochures** `/es/apps/hoja-de-vida` y `/es/apps/chat-hoja-de-vida` — se llega a ellas
-    desde el bloque **«De esta casa»**, al cierre de `/es/vitrina`.
+    desde el bloque **«De esta casa»**, al cierre de `/es/portafolio`.
   - **El roadmap votable** ya no sale de `apps.yaml`: vive en `data/fichas/<slug>.yaml` y se
     vota en la página de cada app hermana (ver «Roadmap con votación anónima»).
   - **El formulario de contacto** ya no lista apps (desde la tercera revisión post-S8 pide un
@@ -330,13 +330,13 @@ el mensaje te llega al correo.
 
 ### Roadmap con votación anónima · desde Sprint 004 · por app hermana desde el 2026-09-13
 
-- **Qué hace:** en la página de cada app hermana (`/es/vitrina/apps/<slug>`, entre la ficha
+- **Qué hace:** en la página de cada app hermana (`/es/portafolio/apps/<slug>`, entre la ficha
   técnica y la lista de espera) la sección "Roadmap" muestra lo que esa app tiene planeado para el
   final de su camino y deja que quien visita **vote con un clic, sin registrarse**. El número
   junto a cada feature es el **conteo real** de votos en la base de datos.
 - **Qué NO se muestra (tu decisión, 2026-09-13):** ninguna feature de CV Viva ni del chat. Las
   siete del S4 se retiraron y `apps.yaml` ya no admite `roadmap:` (si lo trae, la publicación
-  falla nombrándolo). El escaparate `/vitrina/apps` tampoco monta roadmap: solo asoma las apps.
+  falla nombrándolo). El escaparate `/portafolio/apps` tampoco monta roadmap: solo asoma las apps.
 - **De dónde salen las features:** del complemento curado de cada app, `data/fichas/<slug>.yaml`,
   campo `roadmap:`. Lo administra la **planeadora** (procedencia `cv-viva`) con el criterio que le
   pediste —las más disruptivas e innovadoras y las de cierre de plan, nunca las que ya se están
@@ -377,7 +377,7 @@ el mensaje te llega al correo.
 
 - **Qué hace:** cada app **con funcionalidad real** tiene su propia página tipo brochure
   (`/es/apps/hoja-de-vida`, `/es/apps/chat-hoja-de-vida`) con un hero, sus funcionalidades en
-  movimiento, métricas, el stack y un botón para hablar contigo. Desde la card del showcase, el
+  movimiento, métricas, el stack y un botón para hablar contigo. Desde la card del portfolio, el
   enlace "Ver la app" lleva ahí.
 - **Cómo dar de alta una brochure (cero código):** en `data/apps.yaml`, a la app le agregas un
   bloque `brochure:` con:
@@ -391,18 +391,18 @@ el mensaje te llega al correo.
   roadmap. Una app sin `brochure:` simplemente no tiene página (su URL da 404).
 - **Analítica:** evento `brochure_vista` (con la app y el idioma).
 
-### La vitrina: cuatro frentes · desde Sprint 005 · tres abiertos desde Sprint 007 e Investigaciones en pausa desde Sprint 022
+### El portafolio: cuatro frentes · desde Sprint 005 · tres abiertos desde Sprint 007 e Investigaciones en pausa desde Sprint 022
 
-- **Qué hace:** `/es/vitrina` es el **portal** de lo que se construye aquí, repartido en
+- **Qué hace:** `/es/portafolio` es el **portal** de lo que se construye aquí, repartido en
   **cuatro frentes**, cada uno con su caja —nombre, una frase, su estado y cuántas piezas tiene—
   y **cada uno con su propio espacio**. Desde el Sprint 007 **los cuatro tienen piezas reales**; desde el Sprint 022 **Investigaciones está en pausa** (ver más abajo):
-  - **Apps** (`/es/vitrina/apps`): las apps del pipeline. **10 piezas.**
-  - **Agentes especializados** (`/es/vitrina/agentes`): agentes sin interfaz que se manejan por
+  - **Apps** (`/es/portafolio/apps`): las apps del pipeline. **10 piezas.**
+  - **Agentes especializados** (`/es/portafolio/agentes`): agentes sin interfaz que se manejan por
     comandos. **11 piezas.**
-  - **Investigaciones** (`/es/vitrina/investigaciones`): líneas de investigación, **en pausa desde el
+  - **Investigaciones** (`/es/portafolio/investigaciones`): líneas de investigación, **en pausa desde el
     2026-10-24** porque se están rehaciendo (ver «Tres agentes fuera…» más abajo): la página dice «Esta
     sección se está rehaciendo» y no enseña tarjetas. Sus fichas siguen en `content/`. **7 piezas.**
-  - **Tableros de datos** (`/es/vitrina/tableros`): tableros analíticos, sin atarse a una
+  - **Tableros de datos** (`/es/portafolio/tableros`): tableros analíticos, sin atarse a una
     herramienta. **6 piezas.**
 - **Un frente «en preparación» tiene página igual:** dice qué es y en qué punto está, **sin
   fecha prometida**, y cierra como los demás frentes (lista de espera solo si es `apps`). Marca el
@@ -420,8 +420,8 @@ el mensaje te llega al correo.
 
 #### Las piezas que no son apps · desde Sprint 007
 
-- **Qué hace:** cada frente distinto de apps tiene su **escaparate** (`/es/vitrina/agentes`) con
-  una tarjeta por pieza, y cada pieza su **ficha técnica** en `/es/vitrina/<frente>/<pieza>`. Es
+- **Qué hace:** cada frente distinto de apps tiene su **escaparate** (`/es/portafolio/agentes`) con
+  una tarjeta por pieza, y cada pieza su **ficha técnica** en `/es/portafolio/<frente>/<pieza>`. Es
   **la misma ficha** que la de una app: mismos bloques, misma tipografía, mismos chips. Lo único
   que cambia es que estas piezas **no tienen «ficha completa»** — su detalle vive en la casa que
   las construyó, no aquí.
@@ -460,18 +460,18 @@ el mensaje te llega al correo.
 > varias no caben por una razón legítima del frente, lo que crece es **el contrato** (así nació la
 > v1.3.0 con las conclusiones y la galería de los tableros), nunca se recorta la ficha.
 
-#### Las apps dentro de la vitrina · dos capas desde 2026-09-05
+#### Las apps dentro del portafolio · dos capas desde 2026-09-05
 
-- **Qué hace:** `/es/vitrina/apps` asoma cada app con una muestra corta —en qué estado está, su
+- **Qué hace:** `/es/portafolio/apps` asoma cada app con una muestra corta —en qué estado está, su
   nombre, su promesa, un esquema y cuánto tiene construido— y **cada app tiene dos capas**:
-  - **La ficha técnica** (`/es/vitrina/apps/habla`): la infografía de dos minutos. Hasta siete
+  - **La ficha técnica** (`/es/portafolio/apps/habla`): la infografía de dos minutos. Hasta siete
     bloques en orden fijo: cabecera con el **titular de valor** (qué no hace nadie más), la tira
     de **cifras con su procedencia**, para quién y qué resuelve, **cómo funciona** (el proceso
     dibujado en BPMN: un carril por actor, la decisión donde se decide, los bucles a la vista;
     **opcional desde el contrato v1.1.0** — una pieza sin proceso de uso lo omite y las secciones
     se renumeran), qué tiene (una tarjeta por grupo), límites y **lo que nunca hace**, y dónde
     está. Cierra con «Ver la ficha completa».
-  - **La ficha completa** (`/es/vitrina/apps/habla/detalle`): el detalle construido en el S5 — la
+  - **La ficha completa** (`/es/portafolio/apps/habla/detalle`): el detalle construido en el S5 — la
     promesa, las cifras, las funcionalidades agrupadas en tarjetas que se abren solas al llegar
     leyendo, y los detalles finos (privacidad, stack, funcionalidades descartadas).
     Al pie del escaparate, el bloque **«De esta casa»** enlaza las dos brochures propias.
@@ -512,7 +512,7 @@ el mensaje te llega al correo.
 
 #### Categorías y carrusel · desde Sprint 009
 
-- **Dos categorías de apps.** `/es/vitrina/apps` muestra las apps en dos bloques: **Profesionales**
+- **Dos categorías de apps.** `/es/portafolio/apps` muestra las apps en dos bloques: **Profesionales**
   primero y **Personales** después, con **el mismo título** en los dos (la prioridad de lo
   profesional es el orden, no un título más grande). La pertenencia no vive en el código ni en el
   export: vive en `data/categorias-apps.yaml`, una lista por categoría con el `slug` de cada app
@@ -571,7 +571,7 @@ el mensaje te llega al correo.
 
 - **Qué hace:** algunas apps son privadas y no se publican, pero su casa entrega una
   **simulación estática**: planlang, hoy (sus dos demos, rotuladas «Simulación · no operativo»).
-  Esa app tiene una página más, `/es/vitrina/apps/planlang/simulacion`, a la que se llega con el
+  Esa app tiene una página más, `/es/portafolio/apps/planlang/simulacion`, a la que se llega con el
   botón **«Ver la simulación»** del cierre de su ficha técnica. Arriba dice qué es; debajo, un
   panel con dos botones: **«Abrir la simulación aquí»** la carga en un marco dentro de la misma
   página, y **«pantalla completa»** la abre sola. La simulación no se carga hasta que alguien la
@@ -591,7 +591,7 @@ el mensaje te llega al correo.
   `/metodos/<slug>` y es una página larga que contesta **una pregunta de método en tercera
   persona** —«Cómo se debe…»—: las fases, las decisiones, los controles y la evidencia de
   proyectos. Se muestra tal cual: ni habla de «yo» ni de «entrevista». Hoy hay nueve piezas publicadas, la serie completa —la lista de `/metodos` las cuenta y las nombra—, y la
-  HOME las asoma en su sección «Métodos», entre la Vitrina y los Estudios. «Métodos» también está en el menú, junto a Portafolio y Contacto. **La cuenta de
+  HOME las asoma en su sección «Métodos», después de Skills y antes de Contacto (desde el Sprint 023). «Métodos» también está en el menú, junto a Portafolio y Contacto. **La cuenta de
   piezas de la lista se mide** de `data/metodo/`: nunca la escribas. **Las direcciones viejas siguen
   vivas:** `/metodo` y `/metodo/<slug>` (con o sin idioma, y con su `#bloque-n`) redirigen con un
   301 permanente a `/metodos/…`, así que un enlace guardado no se rompe.
@@ -613,8 +613,7 @@ el mensaje te llega al correo.
 - **Imprimir:** Cmd + P (o Ctrl + P) en la pieza. La hoja de estilo oculta el menú, el pie y el
   botón del chat, deja el mapa legible y no parte una tarjeta entre dos hojas; sirve en A4 y en
   carta. No hay PDF generado: la impresión del navegador es el PDF.
-- **La puerta en la HOME (desde el Sprint 019):** la sección «Métodos» de la HOME, entre la Vitrina y
-  los Estudios, nombra cada publicación con su chip «Tema T#» y su título como enlace (dos columnas
+- **La puerta en la HOME (desde el Sprint 019; después de Skills y antes de Contacto desde el Sprint 023):** la sección «Métodos» de la HOME, nombra cada publicación con su chip «Tema T#» y su título como enlace (dos columnas
   en escritorio, una en móvil) y cierra con el botón «Ver todas las publicaciones», que lleva a
   `/metodos`. **La lista se mide** de `data/metodo/`: una pieza nueva aparece sola, sin tocar la HOME,
   y ningún texto de la puerta escribe un total (lo vigila `tests/unit/home-puerta-metodos.test.tsx`,
@@ -737,14 +736,16 @@ una cifra de «lo que hice» que el documento citado no dice, un conteo del siti
 
 ### El menú del encabezado · desde Sprint 001 · reorganizado 2026-09-05
 
-- **Qué hace:** el menú tiene **cuatro destinos**: **Hoja de vida** (que despliega Trayectoria,
-  Logros, Lo que construyo, Estudios, Certificaciones y Skills — el orden de la página),
-  **Portafolio** (la vitrina), **Métodos** (desde el Sprint 010, antes «Mi método») y **Contacto**; más el botón de
-  CV en PDF y el cambio de idioma. «Lo que construyo» (desde 2026-09-10) es la sección de la HOME
-  donde se asoma la vitrina; «Portafolio» en el primer nivel es el portal.
+- **Qué hace:** el menú tiene **cuatro destinos**: **Hoja de vida** (que despliega **cinco**
+  secciones: Trayectoria, Logros, Estudios, Certificaciones y Skills — el orden de la página),
+  **Portafolio**, **Métodos** (desde el Sprint 010, antes «Mi método») y **Contacto**; más el botón de
+  CV en PDF y el cambio de idioma. **Desde el Sprint 023 el portafolio ya no está dentro del
+  desplegable** (era la sección «Portafolio» de la HOME, y dos «Portafolio» a sitios distintos eran una
+  trampa): «Portafolio» en el primer nivel lleva a su página, y la sección de la HOME se alcanza con
+  el botón «Explora mi portafolio» del primer pliego.
 - **Por qué se agrupó:** había llegado a nueve destinos y dejaba de caber en pantallas medianas.
-  Cinco de esos nueve son **una sola cosa** —tu hoja de vida— y competían de tú a tú con la
-  vitrina y el contacto. No se perdió ningún acceso: las cinco viven dentro del desplegable.
+  Cinco de esos nueve son **una sola cosa** —tu hoja de vida— y competían de tú a tú con el
+  portafolio y el contacto. No se perdió ningún acceso: las cinco viven dentro del desplegable.
 - **Cómo se usa:** nada que configurar. Se abre con clic o con Enter, se cierra con Escape (y el
   foco vuelve al botón), pulsando fuera, o al elegir una sección.
 
@@ -783,6 +784,13 @@ una cifra de «lo que hice» que el documento citado no dice, un conteo del siti
 - **Corregido el 2026-09-26, en móvil:** en la Trayectoria, el año grande que se queda fijo a media
   pantalla confundía la búsqueda de ese hito, y el que estabas leyendo se corría 42 a 87 px al
   cambiar de idioma, más cuanto más abajo. Ahora se queda quieto (0–1 px) en móvil y en escritorio.
+- **Corregido el 2026-10-25 (Sprint 023), en Safari:** pulsar ES/EN varias veces seguidas bajaba la
+  página un píxel por cada ida y vuelta (WebKit trunca un desplazamiento fraccionario y Chromium lo
+  redondea). El destino se redondea al píxel más cercano. Un e2e (`tests/e2e/idioma.spec.ts`) pulsa
+  el botón **diez veces seguidas con scroll real** en Chromium, móvil y WebKit y exige quedar a 4 px o
+  menos del punto de partida. Ojo con lo que NO cambió: leyendo la parte baja del primer pliego
+  (antes de «Perfil») el inglés es más largo y el contenido se mueve unos 76 px al cambiar; vuelve al
+  regresar. No se acumula.
 - **Cómo se usa:** nada que configurar; el contenido sale de los dos YAML espejo.
 
 ### El ícono de la pestaña · desde el 2026-09-26
@@ -834,7 +842,9 @@ una cifra de «lo que hice» que el documento citado no dice, un conteo del siti
   buscaba `data/cv.favicon.png.yaml`. Ahora un idioma que no existe es una página que no existe
   (`src/lib/content.ts`).
 - **Lo que no cambia:** una dirección desconocida dentro de un idioma (`/es/no-existe`) sigue
-  dando el 404 en ese idioma, con el botón del chat.
+  dando el 404 en ese idioma, con el botón del chat. **Desde el Sprint 023** lleva además el
+  **encabezado del sitio, con el botón ES/EN**: púlsalo y pasas al 404 del otro idioma (`/en/no-existe`),
+  y desde ahí al menú. El 404 sin idioma (`/favicon.png`) sigue siendo el que habla los dos idiomas.
 - **Cómo se usa:** nada que configurar. Los textos son los del 404 de cada idioma
   (`messages/es.json` y `messages/en.json`, clave `notFound`).
 - **Qué lo prueba:** e2e en `tests/e2e/home.spec.ts` (tres rutas responden 404 y no 500; la página
@@ -1029,7 +1039,7 @@ ejemplo `[1] AF-09 · Vesting`. El código (`AF-NN`, dos dígitos) te dice **qu�
 cuando una respuesta te suene rara: `AF-09` es `vesting.{es,en}.md`, y la tabla de
 `data/a-fondo/README.md` los lista todos. Un documento nuevo toma el siguiente número libre y
 **no se reutiliza** un código retirado. Lo que el chat cita del CV lleva `CV`, lo de `apps.yaml`
-lleva `APP` y lo de una ficha de la vitrina lleva `FT` (esa se corrige en origen, no aquí). El
+lleva `APP` y lo de una ficha del portafolio lleva `FT` (esa se corrige en origen, no aquí). El
 **destino** («Vesting», «Plataforma de datos», «Agentes especializados») no lo escribes: sale del
 nombre del proyecto en el CV, de la etiqueta del menú, del nombre de la tarjeta de Skills o del
 nombre del frente o la pieza, en cada idioma.
@@ -1118,8 +1128,8 @@ construye el build, igual que las otras: **aquí tampoco se escribe ningún núm
 
 Dos detalles de ese gate, porque el corpus los necesita:
 
-- **La historia del índice se declara.** El índice nació con 28 fragmentos, las fichas de la
-  vitrina aportaron 226, con el corpus v2 eran 494 y hoy son del orden de 1.600. Contar de dónde
+- **La historia del índice se declara.** El índice nació con 28 fragmentos, las fichas del
+  portafolio aportaron 226, con el corpus v2 eran 494 y hoy son del orden de 1.600. Contar de dónde
   viene es parte del argumento y es verdad, así que el número de cada etapa se declara como hito
   en `tests/fixtures/cifras-a-fondo.yaml`, con su razón escrita al lado. Lo que el gate no deja
   pasar es presentar un número de otra época como si fuera el de hoy.
@@ -1137,15 +1147,15 @@ documento (`tests/fixtures/lexico-a-fondo.yaml`) y tres preguntas suyas en el ba
 
 **El gemelo en inglés** se traduce del español ya cerrado, subsección por subsección: mismos
 ids, mismas tablas, mismas cifras (con la puntuación inglesa: `1,000`, `52%`), **nada nuevo en
-inglés**. El glosario de términos fijos (vitrina → showcase, ficha → sheet, tablero →
+inglés**. El glosario de términos fijos (portafolio → portfolio, ficha → sheet, tablero →
 dashboard, a fondo → in-depth…) vive en la bitácora `sprints/CONTENIDO-a-fondo-v2-bitacora.md`.
 
-### Las fichas de la vitrina también hablan por el chat · desde a fondo v2
+### Las fichas del portafolio también hablan por el chat · desde a fondo v2
 
-Desde el 2026-09-20 (ADR-023) el índice del chat incluye las **27 fichas de la vitrina** (las de un frente en pausa no entran: no tienen página que citar): por
+Desde el 2026-09-20 (ADR-023) el índice del chat incluye las **27 fichas del portafolio** (las de un frente en pausa no entran: no tienen página que citar): por
 cada app, su presentación, funcionalidades, cifras y límites; por cada agente, investigación o
 tablero, su presentación, cifras, límites y bloques. Cada fragmento cita hacia la ficha
-(`/vitrina/apps/<slug>` o `/vitrina/<frente>/<slug>`). No hay nada que escribir: **una ficha que
+(`/portafolio/apps/<slug>` o `/portafolio/<frente>/<slug>`). No hay nada que escribir: **una ficha que
 llega a `content/` entra al chat en el siguiente build**.
 
 Las fichas pesan **la mitad** que tus documentos en el ranking: son evidencia de una pieza
@@ -1213,7 +1223,7 @@ chat hoy y cuáles traería con la base aprobada. Ese informe **se genera, no se
 ### La revisión completa y el retiro del agente de estudio del AI-103 · desde Sprint 021
 
 - **Qué hace:** la guía de prueba abre ahora con el filtro **«Revisión completa»**: toda la guía en una sola pasada, en **sentadas de a lo
-  sumo 45 minutos y ordenadas por lugar y aparato** (el escritorio, el chat, la vitrina, «Métodos», la accesibilidad, el teléfono real, los
+  sumo 45 minutos y ordenadas por lugar y aparato** (el escritorio, el chat, el portafolio, «Métodos», la accesibilidad, el teléfono real, los
   Criterios, el repositorio y el panel de Vercel). Cada prueba vigente aparece **una sola vez** y lleva **un sí o un no y una nota (hasta 2000 caracteres, con varias líneas)**;
   los flujos del ensayo (R1 a R18) abren cada sentada y llevan dentro las ⭐ que cubren. Cuántas pruebas hay, cuántos minutos suma cada
   sentada y cuántas horas la revisión entera lo calcula la página: ningún total está escrito, y una sentada que pase de 45 minutos se marca en rojo.
@@ -1221,11 +1231,17 @@ chat hoy y cuáles traería con la base aprobada. Ese informe **se genera, no se
   Puedes parar y seguir otro día: las respuestas y las notas se guardan solas en ese navegador (prefijo `s21`). **«Copiar mis respuestas»**
   copia un texto con la fecha, la versión de la guía, los totales, cada «no» con su nota, los «sí» que llevan nota y los pendientes por
   sentada; pégalo en la sesión de la planeadora. Si el navegador no deja copiar solo, el texto aparece abajo ya seleccionado: cópialo con Cmd+C. Si marcaste una respuesta por error, **«Quitar respuesta»** (en la misma fila) la devuelve a pendiente.
+- **Guardar y restaurar (desde el Sprint 023):** la guía **avisa a la vista** si el navegador no guarda (una ventana privada estricta o sin espacio:
+  «⚠ Tu navegador no está guardando tus respuestas…») y, con calma, si no encuentra nada guardado («Este navegador no tiene respuestas
+  guardadas todavía…»). **«Restaurar desde texto»** (junto a «Copiar mis respuestas») lee el texto que copiaste —de la v21, la v22 o la v23— y devuelve cada
+  respuesta y nota **casando por id**, no por título (el título cambia cuando se reescribe una fila). «Copiar» suma una sección `SÍ SIN NOTA` para que los «sí»
+  sin nota también vuelvan. Las filas que el Sprint 23 reescribió (llevan «Mejorado · S23») **vuelven a pendiente y te muestran lo que habías respondido**
+  («Antes del S23 respondiste: Sí — …»): una sola vez por navegador, o al restaurar un texto de una versión anterior. Si vuelves a responderlas, el recuerdo se va.
 - **Lo que queda fuera de la revisión:** lo que la CI respalda y no se ve en producción (el registro y el cupo del chat contra Postgres, la
   votación apagada, el modo mantenimiento, una prueba sin sujeto desde el Sprint 007) se ve al final **con su razón y sin sí/no**; no se
   borra. Hay una prueba opcional: el Node del build en el panel de Vercel.
-- **El retiro del agente de estudio del AI-103:** el dueño desmontó ese agente de la Fábrica el 2026-10-23 (nunca operó). Su ficha salió de la
-  vitrina: la de agentes muestra una tarjeta menos y su dirección vieja responde 404 en los dos idiomas. Los tres documentos del a fondo que
+- **El retiro del agente de estudio del AI-103:** el dueño desmontó ese agente de la Fábrica el 2026-10-23 (nunca operó). Su ficha salió del
+  portafolio: la de agentes muestra una tarjeta menos y su dirección vieja responde 404 en los dos idiomas. Los tres documentos del a fondo que
   lo presentaban dejaron de hacerlo sin afirmar nada nuevo, y las cuentas (agentes, piezas, «los de ARKHÉ») bajan solas desde el disco. La
   certificación AI-103 sigue «en curso» y el chat ya no presenta ese agente. Un gate (`tests/unit/retiro-piezas.test.ts`, que desde el Sprint 022 vigila todas las piezas retiradas) barre el sitio
   con el patrón de la orden de la Fábrica y falla si el nombre vuelve.
@@ -1233,9 +1249,45 @@ chat hoy y cuáles traería con la base aprobada. Ese informe **se genera, no se
   mismo en la revisión y en el filtro «Ensayo general H-2»; lo que dependa de ti en el corpus (por ejemplo, si quieres hablar de una guía de
   estudio propia, o las preguntas que siguen abiertas de los cierres S10 a S13) no se escribió: va como pregunta en la sentada de tus decisiones abiertas, y la lectura del corpus va en la del repositorio.
 
+### Una sola palabra: «Portafolio» (antes «vitrina»), la HOME y el teclado · desde Sprint 023
+
+- **Qué cambió:** «vitrina» pasa a llamarse **«Portafolio»** en todo el sitio, texto y dirección. Las páginas viven ahora
+  en `/portafolio` (el portal), `/portafolio/apps`, `/portafolio/apps/<app>` (con `/detalle` y, en planlang, `/simulacion`),
+  `/portafolio/<frente>` y `/portafolio/<frente>/<pieza>`, en `/es` y en `/en`. La sección de la HOME se llama «Portafolio» y su ancla es `#portafolio`.
+  Los dos botones de la HOME dicen lo mismo: **«Explora mi portafolio»**. El texto cambió con su artículo y su concordancia («de la vitrina»
+  → «del portafolio»; «the showcase» → «the portfolio») en los mensajes, los datos, «Métodos» y el corpus.
+- **Los enlaces que ya circulan siguen vivos:** las direcciones viejas se redirigen con un **301 (permanente)**: `/vitrina`,
+  `/es/vitrina/apps/habla`, `/en/vitrina/apps/planlang/simulacion` (con idioma o sin él, con cualquier resto y con la consulta intacta)
+  llevan a la misma página bajo `/portafolio`. Lo hace el mismo motor de «Métodos» (`src/lib/redireccion.ts`: una fila por
+  sección renombrada) y responde antes que next-intl y después del modo mantenimiento. Prueba: `tests/unit/redireccion.test.ts`
+  y `tests/e2e/portafolio.spec.ts` (con el encabezado `Location`).
+- **Lo que NO cambia (no se ve):** las carpetas y los nombres de código (`content/vitrina/`, `data/vitrina.yaml`, `src/lib/vitrina/`,
+  `src/components/vitrina/`), el espacio de nombres `vitrina` de los mensajes (y `vitrinaHome`), las clases CSS, y la carpeta de imágenes `public/vitrina/`.
+- **Lo que escriben otras casas:** los exports de las apps, las fichas de agentes, investigaciones y tableros, y los complementos de la planeadora
+  no se editan aquí. Dicen «vitrina» (varias decenas de veces en los diez exports) y el sitio los **lee con la palabra nueva**
+  (`scripts/sin-vitrina.mjs`, la misma función que usó el corpus; con concordancia y con frases propias para un adjetivo, p. ej. «es estática» →
+  «es estático»). Lo hacen el loader de las fichas, el de los complementos, el de las piezas, el índice del chat y el rótulo de las claves
+  (`llamadas_a_modelos_en_la_vitrina`). Cuando cada casa mande su export con la palabra nueva, el alias no hace nada y puede quedarse.
+- **Gate (`tests/unit/sin-vitrina.test.ts`, `tests/e2e/portafolio.spec.ts`):** la función con sus casos de concordancia; ninguna ruta ni ancla vieja en
+  `src data docs messages tests scripts` (barrido del archivo entero; solo se nombra la ruta vieja para explicar su redirección, y la historia de la guía y
+  de este manual no se reescribe); ningún mensaje con la palabra vieja; lo de otras casas leído sin ella; ninguna concordancia rota (un artículo femenino delante de «portafolio»); y cada
+  página del sitemap sin la palabra en el texto que lee el visitante. Si algo falla, el mensaje dice el archivo y la línea.
+- **«Métodos» baja en la HOME:** la sección va **después de Skills y antes de Contacto** (antes, entre el portafolio y los estudios). El menú y las
+  anclas no cambian. Lo vigila `tests/e2e/home.spec.ts` por la posición real de cada sección.
+- **El primer Tab:** en **Safari** el Tab a secas solo visita los campos de formulario (por eso el primer foco que se ve es «Tu nombre»; el
+  sitio no mueve el foco al cargar). Para recorrer todo hay que pulsar **Opción+Tab**, o activar «Pulsar Tab para resaltar cada ítem de una página web»
+  en Ajustes → Avanzado. Con el recorrido completo el orden es «Saltar al contenido» → el logo → «Hoja de vida», y Enter abre el menú.
+  Lo vigila `tests/e2e/teclado.spec.ts` (Tab en Chromium, Opción+Tab en WebKit) y que nada robe el foco al cargar.
+- **Probeta DS (orden de la planeadora, 2026-10-25):** la ficha de ds se refrescó con el export del Sprint 17 de esa app (62 funcionalidades, 2026-10-24) y
+  su roadmap votable ya no ofrece lo construido: quedan «un gemelo sintético de tus datos» y «¿qué pasaría si…? con el impacto en dinero».
+- **Limitaciones conocidas:** el contrato de la ficha técnica (`docs/contrato-ficha-tecnica/`), la carpeta `design-sync/` y la constitución
+  (`CLAUDE.md`) todavía nombran «vitrina» y la ruta vieja (`/vitrina`): el contrato se toca con el rediseño de las fichas, `design-sync/` al cierre del hito
+  y la constitución la regenera la planeadora. La letra del año grande de la Trayectoria (Fraunces, la de los títulos) se queda hasta que el dueño elija
+  con las dos muestras.
+
 ### Tres agentes fuera, nombres sin «Harness» e investigaciones en pausa · desde Sprint 022
 
-- **Qué hace:** salieron de la vitrina de agentes los dos agentes de demostración de planlang (por decisión del dueño) y el Harness Design Science
+- **Qué hace:** salieron del portafolio de agentes los dos agentes de demostración de planlang (por decisión del dueño) y el Harness Design Science
   (duplicado del Paper Computacional). Los agentes pasan de 14 a **11**; las
   cuentas del corpus, de «Métodos», de la guía y de este manual bajan con el disco. El método de investigación que describen
   `las-investigaciones` y el CV (Design Science) se conserva: cuenta cómo se hicieron las investigaciones, no es una ficha publicada.
@@ -1248,8 +1300,8 @@ chat hoy y cuáles traería con la base aprobada. Ese informe **se genera, no se
   quedan en `content/investigaciones/`, pero el sitio no las enseña, no las lista en el sitemap, el chat no las cita y cada una da 404. Cuatro
   evidencias de «Métodos» que enlazaban a una investigación apuntan, mientras dure la pausa, al frente (la línea del YAML guarda el slug para
   volver). **Para reabrirlas:** (1) `estado: abierta` en `data/vitrina.yaml` (el aviso `enPreparacion` puede quedarse; no se usa); (2) devolver los cuatro enlaces de
-  `data/metodo/sistema-de-agentes.yaml` y `decidir-con-modelos.yaml` a `/vitrina/investigaciones/<slug>` (la línea del YAML guarda el slug); (3) volver a
-  poner `/es/vitrina/investigaciones/forja` en `lighthouse-urls.json` si se quiere medir; (4) las cuentas de la guía y de este manual (27 → 34 piezas) y la
+  `data/metodo/sistema-de-agentes.yaml` y `decidir-con-modelos.yaml` a `/portafolio/investigaciones/<slug>` (la línea del YAML guarda el slug); (3) volver a
+  poner `/es/portafolio/investigaciones/forja` en `lighthouse-urls.json` si se quiere medir; (4) las cuentas de la guía y de este manual (27 → 34 piezas) y la
   fila m4 y la k8 de la guía, que describen la pausa, se actualizan a mano. Ninguna prueba de código fija «investigaciones» en pausa: miran el YAML.
 - **Limitaciones conocidas:** el corpus del chat sigue diciendo «7 investigaciones» y «34 piezas» porque cuenta lo que hay en disco; no se
   reescribió su prosa mientras dure la pausa (queda como pregunta al dueño). La simulación de planlang (`public/piezas/planlang`) todavía
@@ -1323,4 +1375,5 @@ chat hoy y cuáles traería con la base aprobada. Ese informe **se genera, no se
 | Sprint 019 | **«Métodos», novena y última pieza: «Cómo se debe decidir con modelos» (T8), y la puerta en la HOME.** Diez bloques con 10 fuentes fechadas (seis páginas de Microsoft Learn sobre ciencia de datos en Fabric, MLflow, el modelo de madurez de MLOps, la vigilancia de modelos y la guía de estudio del AI-300, que está en curso, y cuatro trabajos de arXiv sobre modelos fundacionales de series de tiempo y modelos de lenguaje como asistentes de formulación; de noviembre de 2024 a junio de 2026) y un mapa de 14 nodos, del problema del proceso a la decisión vigilada, con la línea base, el orden temporal, la prueba sin fuga, el error por segmento, la ficha del modelo y la deriva, y la optimización formulada dos veces y la simulación al lado. La Evidencia sale de `analitica-predictiva` (TransMilenio y Banco Pichincha), `las-investigaciones`, `procesos-y-simulacion` y `cm-operaciones`; Probeta DS se enlaza a su ficha con el nivel «Prototipo», sin reescribirla. MLflow, los modelos fundacionales de series de tiempo y los asistentes de formulación no tienen un caso en ningún documento a fondo: entran solo como estado del campo. Sin deriva observada propia y sin una capa prescriptiva en un empleo: así lo dice la pieza. La lista `/metodos` y la nueva puerta de la HOME cuentan nueve piezas, medidas; «hasta ahora» y «las otras llegan una por sprint» salieron del manual y de la guía porque la serie quedó completa. El banco suma tres preguntas por idioma y exigen la pieza la de la formulación de un problema de optimización y la de Probeta DS (la decisión del dueño); los contadores del corpus pasan de 172 a 175 preguntas de afuera y de dieciocho a diecinueve sprints. Se pagó la deuda corta del Sprint 018: el título del bloque 5 de T9 dice lo que dice HEAT y la guía del skill de pruebas apunta a `vitest.config.mts`. Detalle en `sprints/SPRINT_019-cierre.md`. |
 | Sprint 020 | **Cierre del H-2.** El lote de medios y bajos de los cierres S9 a S19 queda con un estado final y su prueba (`sprints/SPRINT_020-lote.md`, con su gate); la prueba intermitente de la vitrina se arregla en su causa (fallaba 2 de 30 bajo carga y después 0 de 80) y la del idioma cambia su espera fija por una condición, sin que se haya podido medir su efecto (se vigila en la CI); la redirección de `/metodo` es exacta y el motor de voz ya no ignora un párrafo entero entre comillas; el sitemap fecha cada publicación con su revisión; las etiquetas del mapa tienen su tope; el banco de preguntas se midió fila por fila. El blueprint, `design-system.md` y `design-sync/` se ponen al día con «Métodos» (el bundle no se publica: eso lo dispara el dueño con `/design-sync`), `CLAUDE.md` corrige sus hechos de producto y la puerta de la HOME se prueba también en inglés, con capturas. La guía de prueba v20 trae el filtro «Ensayo general H-2». |
 | Sprint 021 | **La revisión completa.** La guía de prueba abre con el filtro «Revisión completa»: todo lo pendiente en sentadas de a lo sumo 45 minutos por lugar y aparato, cada prueba una vez, con un sí o un no, una nota y el botón «Copiar mis respuestas»; entran cinco pruebas, catorce se corrigen porque ya no describían el sitio y lo que la CI respalda queda a la vista con su razón. El agente de estudio del AI-103 sale de la vitrina, del a fondo, de las cuentas y del índice del chat por orden de la Fábrica (las cuentas bajan solas desde el disco), con un gate que barre el sitio. |
+| Sprint 023 | **Sentada 1 de la revisión: «Portafolio», la casa y el inglés.** «Vitrina» pasa a llamarse «Portafolio» en textos y direcciones, con un 301 desde las viejas y la lectura de lo que escriben otras casas con la palabra nueva (ver «Una sola palabra: Portafolio»); el desplegable de «Hoja de vida» queda con cinco secciones; «Métodos» baja a después de Skills; el cambio de idioma deja de bajar la página en Safari (diez cambios seguidos, ≤ 4 px); el 404 trae el botón ES/EN; el primer Tab en Safari se explica en la guía y un e2e fija el orden del foco; la ficha de Probeta DS se refresca con su export del S17; la guía v23 avisa si no guarda, restaura desde texto y muestra lo respondido antes en las filas que cambiaron. |
 | Sprint 022 | **Sentada 5 de la revisión: tres agentes fuera, nombres sin «Harness» e investigaciones en pausa.** Salen de la vitrina Agente A, Agente B y el Harness Design Science (14 → 11 agentes); el agente de investigación se llama «Paper Computacional» por un alias de nombre que no edita la ficha (`data/nombres-piezas.yaml`); el frente de Investigaciones queda en pausa con su aviso propio (`enPreparacion`), sin tarjetas, fuera del sitemap y del chat y con sus fichas en 404. Gates: `retiro-piezas`, `nombres-piezas`, la pausa del índice del chat y el e2e de la pausa. La nota de cada fila de la guía admite 2000 caracteres. 

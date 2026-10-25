@@ -6,7 +6,7 @@ import { ordenDeEscaparate } from "@/lib/vitrina/categorias-apps";
 import { getManifestVitrina } from "@/lib/vitrina/loader";
 
 /**
- * El cierre de las páginas de APPS de la vitrina: la sección `#contacto-vitrina`
+ * El cierre de las páginas de APPS de la vitrina: la sección `#contacto-portafolio`
  * a la que apuntan los botones «Avísame cuando abra» de las fichas, con el
  * formulario de lista de espera adentro (antes mandaba al formulario general
  * de la HOME, que ya no lista apps). Solo las apps la tienen: es lo que
@@ -25,7 +25,7 @@ export async function ListaDeEspera({ appInicial }: { appInicial?: string }) {
   return (
     <Reveal variant="fadeInUp">
       <section
-        id="contacto-vitrina"
+        id="contacto-portafolio"
         aria-labelledby="vitrina-cierre"
         className="mt-14 scroll-mt-16 border-t border-paper-2 pt-10"
       >

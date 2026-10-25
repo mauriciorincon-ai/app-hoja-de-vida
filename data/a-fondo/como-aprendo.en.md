@@ -236,8 +236,8 @@ concrete condition and try to demonstrate that it can go red against the failure
 <!-- seccion: las-cuatro-familias -->
 
 To the ten sister applications are added 11 published agents, 7 research pieces and 6 dashboards
-built on public data. In total, the showcase brings together 34 pieces within those four families,
-and the figures of each one are reconciled against the visible sheets of the showcase.
+built on public data. In total, the portfolio brings together 34 pieces within those four families,
+and the figures of each one are reconciled against the visible sheets of the portfolio.
 
 Each family demonstrates a different way of learning. The applications require transforming new
 technologies into usable experiences. The agents require understanding models, sources, tools,

@@ -5,7 +5,7 @@ titulo: "Agentes de IA: la plataforma de Vesting y ARKHÉ, mi ecosistema propio"
 resumen: "Dos experiencias con agentes: 27 construidos con el proceso core de Vesting sobre n8n y monitoreados en tiempo real, y ARKHÉ, mi ecosistema agéntico de harnesses especializados, medido en 120 escenarios: −52 % de tokens y cumplimiento del 71 % al 93 %."
 cuando_usar: "Úsalo cuando pregunten si ha construido agentes de inteligencia artificial, qué frameworks de agentes ha usado (n8n, Claude Code), cómo monitorea un agente en producción, qué es ARKHÉ, cómo evita que el modelo invente, y su experiencia con IA generativa y modelos de lenguaje grandes."
 estado: aprobado
-ancla: "/vitrina/agentes"
+ancla: "/portafolio/agentes"
 actualizado: 2026-09-26
 preguntas_de_prueba:
   - "¿Qué experiencia tiene Henry construyendo agentes de IA?"
@@ -52,7 +52,7 @@ La base de automatización utilizaba n8n como uno de sus componentes fundamental
 
 La segunda trayectoria corresponde a ARKHÉ, mi propio ecosistema agéntico, y a los agentes publicados en CV Viva. Este trabajo no es una extensión de la arquitectura de Vesting ni una reproducción de sus componentes. Es un sistema propio, construido posteriormente con otra visión, otros controles y un nivel de especialización orientado a producir activos verificables dentro de mi pipeline de aplicaciones, investigaciones, tableros y conocimiento profesional.
 
-Actualmente, la vitrina reúne 11 agentes publicados, cada uno con una función y una ficha técnica específica. Sin embargo, esos once agentes no constituyen por sí solos el ecosistema completo. Son capacidades visibles construidas sobre una arquitectura común de harnesses, fuentes, herramientas, memoria, controles y reglas de coordinación. Los once, uno a uno, están en su propio documento; aquí hablo de la arquitectura que los sostiene.
+Actualmente, el portafolio reúne 11 agentes publicados, cada uno con una función y una ficha técnica específica. Sin embargo, esos once agentes no constituyen por sí solos el ecosistema completo. Son capacidades visibles construidas sobre una arquitectura común de harnesses, fuentes, herramientas, memoria, controles y reglas de coordinación. Los once, uno a uno, están en su propio documento; aquí hablo de la arquitectura que los sostiene.
 
 En este ecosistema, los agentes no son automatizaciones independientes ni conversaciones especializadas. Operan mediante harnesses que delimitan su función, administran el contexto, seleccionan fuentes y herramientas, controlan las transiciones y verifican los resultados antes de permitir que el trabajo avance. El propósito no es multiplicar agentes, sino construir una arquitectura capaz de distribuir correctamente la responsabilidad entre código, modelos, conocimiento, controles y personas.
 
@@ -144,7 +144,7 @@ La lección principal fue que no es posible gobernar una solución inteligente c
 
 <!-- seccion: dash-agent-ai -->
 
-Dash Agent es una aplicación propia publicada en mi vitrina que concebí y diseñé completamente en 2026, con mis propios medios y fuera de la Fundación CTIC, en mi propio pipeline de apps y bien después de Vesting. No es un puente desde la plataforma de Vesting: no forma parte de ella ni utiliza su arquitectura confidencial. Es una aplicación independiente que responde a una pregunta más actual y distinta: qué información conoce, conserva o utiliza un agente sobre la persona con la que interactúa, y cuánto le cuesta a esa persona trabajar con él.
+Dash Agent es una aplicación propia publicada en mi portafolio que concebí y diseñé completamente en 2026, con mis propios medios y fuera de la Fundación CTIC, en mi propio pipeline de apps y bien después de Vesting. No es un puente desde la plataforma de Vesting: no forma parte de ella ni utiliza su arquitectura confidencial. Es una aplicación independiente que responde a una pregunta más actual y distinta: qué información conoce, conserva o utiliza un agente sobre la persona con la que interactúa, y cuánto le cuesta a esa persona trabajar con él.
 
 Dash Agent convierte una dimensión abstracta de la confianza en una experiencia examinable. En lugar de pedir al usuario que acepte de forma general que un agente utiliza contexto o memoria, la aplicación muestra qué elementos están disponibles y cómo pueden influir sobre la interacción. Su función estrella es el auditor de memoria: el inventario de todo lo que los agentes tienen escrito sobre la persona —archivos de instrucciones, memorias, configuración— y la detección determinista de lo que dejó de ser cierto, con archivo, línea y texto exacto. El plan de limpieza es una lista que ejecuta la persona; la app no borra ni edita nada.
 
@@ -168,7 +168,7 @@ También cuento lo que se retiró. Una funcionalidad —el sugeridor de skills y
 
 <!-- seccion: ecosistema-agentico-propio -->
 
-Mi trabajo propio evolucionó hacia ARKHÉ, un ecosistema agéntico avanzado que no reproduce la arquitectura utilizada en Vesting ni se limita a los agentes publicados individualmente en la vitrina. Es una estructura de nivel superior diseñada para coordinar agentes, harnesses, conocimiento, herramientas, controles y memoria dentro de un mismo sistema de producción, y para convertir modelos de lenguaje grandes (LLM), la inteligencia artificial generativa, en capacidad de trabajo verificable.
+Mi trabajo propio evolucionó hacia ARKHÉ, un ecosistema agéntico avanzado que no reproduce la arquitectura utilizada en Vesting ni se limita a los agentes publicados individualmente en el portafolio. Es una estructura de nivel superior diseñada para coordinar agentes, harnesses, conocimiento, herramientas, controles y memoria dentro de un mismo sistema de producción, y para convertir modelos de lenguaje grandes (LLM), la inteligencia artificial generativa, en capacidad de trabajo verificable.
 
 Los agentes publicados son las capacidades visibles. El ecosistema es la infraestructura lógica que establece cómo se seleccionan, cómo reciben contexto, qué herramientas pueden utilizar, qué entregables producen y qué controles deben superar. Esta distinción es esencial porque la sofisticación no reside en la cantidad de agentes, sino en la arquitectura que permite que trabajen de manera coordinada.
 
@@ -178,7 +178,7 @@ Distingo con claridad entre el agente y el harness que controla su ejecución. E
 
 Esta separación permite que la inteligencia del modelo evolucione sin obligar a reconstruir toda la arquitectura de control. También permite mejorar las reglas, las fuentes, los validadores o la administración del contexto sin confundir esos cambios con las capacidades propias del agente. El modelo puede cambiar; la responsabilidad del sistema debe permanecer explícita.
 
-ARKHÉ es también una investigación publicada en la vitrina. Su idea central es que los sistemas de trabajo no se construyen desde cero: se instancian desde contratos declarativos —roles, reglas, evidencia— que se reutilizan como moldes, evolucionan y devuelven lo aprendido al núcleo. Opera desde hace meses en dominios sin relación entre sí, y para validar que el tema era nuevo revisé 1.405 obras una a una sin encontrar un ecosistema equivalente; 6 de sus 9 conceptos ya son citables con literatura revisada.
+ARKHÉ es también una investigación publicada en el portafolio. Su idea central es que los sistemas de trabajo no se construyen desde cero: se instancian desde contratos declarativos —roles, reglas, evidencia— que se reutilizan como moldes, evolucionan y devuelven lo aprendido al núcleo. Opera desde hace meses en dominios sin relación entre sí, y para validar que el tema era nuevo revisé 1.405 obras una a una sin encontrar un ecosistema equivalente; 6 de sus 9 conceptos ya son citables con literatura revisada.
 
 ## Especialización, contexto como recurso limitado y economía de tokens
 
@@ -258,7 +258,7 @@ Es la misma regla del gobierno de datos aplicada a un modelo de lenguaje: un ind
 
 <!-- seccion: sistemas-de-trabajo -->
 
-Los agentes publicados en mi vitrina no se diseñan como chats genéricos. Son sistemas de trabajo especializados que producen entregables, utilizan herramientas, aplican controles y conservan evidencia sobre la forma en que ejecutan una tarea.
+Los agentes publicados en mi portafolio no se diseñan como chats genéricos. Son sistemas de trabajo especializados que producen entregables, utilizan herramientas, aplican controles y conservan evidencia sobre la forma en que ejecutan una tarea.
 
 Un sistema de trabajo necesita una definición de terminado. No basta con producir una respuesta coherente. El resultado debe cumplir un formato, utilizar las fuentes correspondientes, superar las validaciones y dejar la evidencia necesaria para que otra persona pueda revisarlo o para que otro componente pueda continuar el proceso.
 

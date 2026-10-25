@@ -392,8 +392,8 @@ bloques:
         porQue:
           voz: hice
           texto:
-            es: "En los 11 agentes de la vitrina, qué hace cada uno, qué límites tiene y qué «nunca» hace está escrito en su ficha."
-            en: "For the 11 agents in the showcase, what each one does, what limits it has and what it «never» does is written in its sheet."
+            es: "En los 11 agentes del portafolio, qué hace cada uno, qué límites tiene y qué «nunca» hace está escrito en su ficha."
+            en: "For the 11 agents in the portfolio, what each one does, what limits it has and what it «never» does is written in its sheet."
           corpus: [gobierno-de-datos-y-de-ia]
         nota:
           voz: campo
@@ -455,8 +455,8 @@ bloques:
         porQue:
           voz: hice
           texto:
-            es: "El Experto ISO 42001 de la vitrina sintetiza los 38 controles del Anexo A y conoce los 24 documentos portadores que un auditor pide en la fase documental; cada afirmación normativa cita apartado y página o declara el vacío."
-            en: "The ISO 42001 Expert in the showcase synthesizes the 38 Annex A controls and knows the 24 supporting documents an auditor asks for in the documentation stage; every normative statement cites clause and page or declares the gap."
+            es: "El Experto ISO 42001 del portafolio sintetiza los 38 controles del Anexo A y conoce los 24 documentos portadores que un auditor pide en la fase documental; cada afirmación normativa cita apartado y página o declara el vacío."
+            en: "The ISO 42001 Expert in the portfolio synthesizes the 38 Annex A controls and knows the 24 supporting documents an auditor asks for in the documentation stage; every normative statement cites clause and page or declares the gap."
           corpus: [gobierno-de-datos-y-de-ia]
         nota:
           voz: campo
@@ -616,10 +616,10 @@ bloques:
       - nombre: { es: "El Experto ISO 42001: la norma con apartado y página", en: "The ISO 42001 Expert: the standard with clause and page" }
         nivel: uso-real
         texto:
-          es: "Agente de la vitrina, en la versión inicial (v1.0.0) de su ficha, con los 38 controles del Anexo A y los 24 documentos portadores que pide un auditor; cada afirmación normativa cita apartado y página o declara el vacío, y estampa la fecha en que se verificó la fuente. Con él se revisan los instrumentos del sistema de gestión contra la norma, pero no decide si uno está terminado ni sustituye una auditoría."
-          en: "A showcase agent, in the initial version (v1.0.0) of its technical sheet, with the 38 Annex A controls and the 24 supporting documents an auditor asks for; every normative statement cites clause and page or declares the gap, and stamps the date on which the source was verified. The management system's instruments are reviewed against the standard with it, but it does not decide whether one is finished nor does it replace an audit."
+          es: "Agente del portafolio, en la versión inicial (v1.0.0) de su ficha, con los 38 controles del Anexo A y los 24 documentos portadores que pide un auditor; cada afirmación normativa cita apartado y página o declara el vacío, y estampa la fecha en que se verificó la fuente. Con él se revisan los instrumentos del sistema de gestión contra la norma, pero no decide si uno está terminado ni sustituye una auditoría."
+          en: "A portfolio agent, in the initial version (v1.0.0) of its technical sheet, with the 38 Annex A controls and the 24 supporting documents an auditor asks for; every normative statement cites clause and page or declares the gap, and stamps the date on which the source was verified. The management system's instruments are reviewed against the standard with it, but it does not decide whether one is finished nor does it replace an audit."
         corpus: [gobierno-de-datos-y-de-ia, los-agentes-de-la-vitrina]
-        href: /vitrina/agentes/experto-iso42001
+        href: /portafolio/agentes/experto-iso42001
       - nombre: { es: "Ceinfes: el acceso como parte del diseño", en: "Ceinfes: access as part of the design" }
         nivel: uso-real
         texto:
@@ -627,13 +627,13 @@ bloques:
           en: "In 2018, with results from students at more than 100 schools, who queried what and what for was defined before building the report: the permission was part of the process design, not an afterthought."
         corpus: [ceinfes]
         href: /proyectos/ceinfes
-      - nombre: { es: "La vitrina: la autonomía escrita en cada ficha", en: "The showcase: autonomy written in each sheet" }
+      - nombre: { es: "El portafolio: la autonomía escrita en cada ficha", en: "The portfolio: autonomy written in each sheet" }
         nivel: uso-real
         texto:
-          es: "En los 11 agentes de la vitrina, qué hace cada uno, qué límites tiene y qué «nunca» hace está escrito en su ficha técnica."
-          en: "For the 11 agents in the showcase, what each one does, what limits it has and what it «never» does is written in its technical sheet."
+          es: "En los 11 agentes del portafolio, qué hace cada uno, qué límites tiene y qué «nunca» hace está escrito en su ficha técnica."
+          en: "For the 11 agents in the portfolio, what each one does, what limits it has and what it «never» does is written in its technical sheet."
         corpus: [gobierno-de-datos-y-de-ia]
-        href: /vitrina/agentes
+        href: /portafolio/agentes
 
   # ─── 9 · Límites y alcance ──────────────────────────────────────────────────
   - n: 9

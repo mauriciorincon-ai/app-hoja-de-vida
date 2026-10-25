@@ -26,7 +26,7 @@ describe("lighthouse-urls.json", () => {
       const ruta = u.replace(/^\/(es|en)/, "") || "/";
       if (rutas.has(ruta)) return false;
       // La simulación de una app vive bajo la ficha de la app (ADR-029).
-      const m = ruta.match(/^(\/vitrina\/apps\/[^/]+)\/simulacion$/);
+      const m = ruta.match(/^(\/portafolio\/apps\/[^/]+)\/simulacion$/);
       return !(m && rutas.has(m[1]));
     });
     expect(huerfanas, "URL de Lighthouse sin página").toEqual([]);

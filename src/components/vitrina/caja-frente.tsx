@@ -127,7 +127,7 @@ export async function CajaFrente({
       <div>
         <h2 className="font-display text-[1.45rem] leading-tight font-medium tracking-[-0.02em] text-ink-0">
           <Link
-            href={`/vitrina/${frente.id}`}
+            href={`/portafolio/${frente.id}`}
             className="after:absolute after:inset-0 after:rounded-[14px] after:content-['']"
           >
             {frente.nombre[locale]}

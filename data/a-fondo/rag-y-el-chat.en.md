@@ -5,7 +5,7 @@ titulo: "RAG: how this chat works on the inside"
 resumen: "The architecture of this page's chat with its numbers: build-time index, lexical retrieval with MiniSearch (BM25) without embeddings, layered guardrails, a measured threshold, navigable citations, five interchangeable providers, local fallback, a US$20 budget with a real cost of zero, the name and email gate with its six-digit verification code, what data the conversation log stores and who reads it, and how it is evaluated with 77 questions of its own and 175 from outside."
 cuando_usar: "Use this when they ask how the chat on this page works, which RAG architecture he implemented, whether he uses embeddings or lexical search, which model provider he works with, how he keeps the model from making up answers, and how he evaluates the system with a golden set and a question bank. Use it too for everything that has to do with the chat gate and with privacy: why the chat asks for your name and email before answering, what the six-digit verification code that arrives by email is for, what personal data it stores, who can read it, how long it is kept, how to ask for it to be deleted, and why the answers are two or three paragraphs instead of a dump of the corpus."
 estado: aprobado
-ancla: "#vitrina"
+ancla: "#portafolio"
 actualizado: 2026-09-21
 preguntas_de_prueba:
   - "How does the chat on Henry's CV work?"
@@ -55,7 +55,7 @@ Operating this capability demands decisions that a prototype can avoid: what inf
 authorized, how it is retrieved, when the model should be called, what happens if the provider
 fails and how each answer can be verified. All of those decisions are written down —three of
 them as architecture decision records in the repository: the provider adapter, the index with
-its retrieval, and the entry of the showcase sheets into the index— and all of them can be
+its retrieval, and the entry of the portfolio sheets into the index— and all of them can be
 checked against the chat's behavior.
 
 The chat thus turns my own CV into an observable artificial intelligence product. Each answer
@@ -74,7 +74,7 @@ knowledge is the published content; the model acts as an interpretation layer co
 that content.
 
 This separation protects the integrity of the system. My profile can evolve through controlled
-changes to the files that represent it —the résumé data in YAML, the sheets of the 34 showcase
+changes to the files that represent it —the résumé data in YAML, the sheets of the 34 portfolio
 pieces and the documents of this knowledge base— without depending on retraining a model or
 waiting for a provider to have absorbed recent information. When an experience, certification
 or project changes, the update happens at the source and propagates to the index during the
@@ -103,7 +103,7 @@ content, in the structure of the index and in the preservation of its metadata.
 
 The knowledge the chat uses is compiled during the build of the site, not at the moment a person
 asks a question. A build script walks the authorized sources —the résumé data, the pipeline's
-apps, the showcase sheets, the «Methods» publications and the approved documents of this base—, extracts their contents and
+apps, the portfolio sheets, the «Methods» publications and the approved documents of this base—, extracts their contents and
 produces an index separated by language, Spanish and English, with chunks, titles, metadata and
 navigable destinations.
 
@@ -115,7 +115,7 @@ The chunk size is decided and measured: at most 180 words. A longer subsection i
 windows that keep the same anchor, because a long chunk enters the context whole and competes
 with itself; with that cap, the worst case of one answer's context is bounded at about 720 words.
 The index has a history and it is worth telling: it started with 28 chunks per language, drawn
-only from the résumé YAML files; the 32 showcase sheets added 226; with the first long version of
+only from the résumé YAML files; the 32 portfolio sheets added 226; with the first long version of
 this base it reached 494; and today, with the 25 approved documents and the "when to use"
 description each one declares, there are 1,988 chunks in Spanish and 1,978 in English. The number
 is printed by every build and is a regenerated artifact, not something edited by hand.
@@ -154,15 +154,15 @@ measured on the real corpus, where the typical subsection had 143 words and the 
 at 180 only 4% of the subsections get split. Changing that number is a versioned change, with its
 measurement beside it.
 
-## The 32 showcase sheets enter the index, at weight 0.5
+## The 32 portfolio sheets enter the index, at weight 0.5
 
 <!-- seccion: fichas-en-el-indice -->
 
 Until September 2026 the index was assembled from the résumé data and from the documents of this
-base. The 34 showcase pieces —ten apps with brochure and complement, 11 agents, 7 research pieces
+base. The 34 portfolio pieces —ten apps with brochure and complement, 11 agents, 7 research pieces
 and 6 dashboards— have sheets with a promise, figures with provenance, limits, "nevers" and
 blocks, and the chat could not see them: when someone asked about a specific piece, the answer
-came from the prose I wrote about the showcase, not from the sheet.
+came from the prose I wrote about the portfolio, not from the sheet.
 
 Indexing them as-is produced the predictable result: 226 new chunks, all rich in vocabulary, and
 the bank of 131 outside questions dropped from 102 to 94 hits in the top-4. The sheets were
@@ -184,9 +184,9 @@ chunks:
 | sheets at weight 0.35     |                      103/131 |                                     8 |
 
 At 0.5 the bank recovers exactly the number it had without sheets, and eleven questions —the
-showcase ones— still receive a sheet. Going lower buys nothing more and makes them invisible. The
+portfolio ones— still receive a sheet. Going lower buys nothing more and makes them invisible. The
 sheets are not edited to index better: they belong to other houses, and adding one to the
-showcase puts it into the chat on the next build, without writing new prose. The weight lives in
+portfolio puts it into the chat on the next build, without writing new prose. The weight lives in
 a constant in the code, with its measurement beside it, and it is still at 0.5 over an index that
 is now up to 1,988 chunks.
 
@@ -453,7 +453,7 @@ in red has demonstrated nothing.
 
 Each chunk of the index keeps a navigable destination within the site. When the model uses a
 source, the answer shows a mark that takes the user to the corresponding section: an anchor of
-the HOME, the page of a case study or the sheet of a showcase piece.
+the HOME, the page of a case study or the sheet of a portfolio piece.
 
 This capability turns the citation into something more than a visual reference. It allows
 walking from the answer to the evidence that grounds it and directly evaluating whether the
@@ -791,7 +791,7 @@ the gate without anyone editing the tests. With 25 documents that is 77 question
 
 The second is the bank of questions written from outside, the way a recruiter or interviewer
 asks: 175 legitimate questions in ten families —career, way of working, certifications, AI and
-agents, platform and data, BI and analytics, governance, processes, showcase and fit—, plus 15
+agents, platform and data, BI and analytics, governance, processes, portfolio and fit—, plus 15
 off-topic ones and 3 declared without coverage. Each legitimate one must bring an expected source
 in the top-4, the expected source must arrive first in at least 60% of the cases, and the 15
 off-topic ones must behave exactly as declared: which ones are blocked without spending a token

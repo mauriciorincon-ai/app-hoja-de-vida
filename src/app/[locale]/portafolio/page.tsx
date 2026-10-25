@@ -22,9 +22,9 @@ import { getFrentes } from "@/lib/vitrina/categorias";
  * de las cuatro cosas; ponerlo todo en una sola página, repetir el error que
  * el S5 corrigió (las seis fichas apiladas).
  *
- * Así que `/vitrina` reparte: una caja por frente, con su intro corta y su
+ * Así que `/portafolio` reparte: una caja por frente, con su intro corta y su
  * estado honesto, y **cada frente tiene su propio espacio** en
- * `/vitrina/<frente>`. Las apps pasaron a `/vitrina/apps`; los otros tres
+ * `/portafolio/<frente>`. Las apps pasaron a `/portafolio/apps`; los otros tres
  * frentes nacen «en preparación» y su página lo declara — marcan el inicio,
  * no lo disfrazan.
  *
@@ -50,9 +50,9 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     description: t("subtitulo"),
     alternates: {
       languages: {
-        es: "/es/vitrina",
-        en: "/en/vitrina",
-        "x-default": "/es/vitrina",
+        es: "/es/portafolio",
+        en: "/en/portafolio",
+        "x-default": "/es/portafolio",
       },
     },
   };
@@ -119,7 +119,7 @@ export default async function VitrinaPage({ params }: Params) {
                 {t("listaDeEsperaLinea")}
               </p>
               <Link
-                href="/vitrina/apps#contacto-vitrina"
+                href="/portafolio/apps#contacto-portafolio"
                 data-cta="lista-de-espera"
                 className="mt-5 flex min-h-11 w-fit items-center gap-2 rounded-md bg-sage px-6 text-[15px] font-medium text-sage-ink shadow-sh-1 transition-[filter] duration-[120ms] hover:brightness-[0.97]"
               >

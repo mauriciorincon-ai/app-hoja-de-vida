@@ -3,6 +3,7 @@ import { readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { cache } from "react";
 import { conNombreOficial, nombreOficial } from "./categorias-apps";
+import { sinVitrinaEnTodo } from "../../../scripts/sin-vitrina.mjs";
 import { getCategoriasApps } from "./categorias-loader";
 import {
   brochureExportSchema,
@@ -20,7 +21,9 @@ import {
  * Los exports NO se editan aquí (regla dura 4): si uno está mal, el error de
  * build es el aviso para reportarlo a la planeadora y que su app lo corrija.
  * Lo único que cambia al leerlos es el NOMBRE de la app, por su nombre oficial
- * (`data/categorias-apps.yaml`, ADR-028).
+ * (`data/categorias-apps.yaml`, ADR-028), y una palabra: «vitrina» se lee
+ * «portafolio» (S23, `scripts/sin-vitrina.mjs`) hasta que cada casa mande su
+ * export con la palabra nueva.
  */
 
 const VITRINA_DIR = path.join(process.cwd(), "content", "vitrina");
@@ -107,7 +110,8 @@ export const getFichasVitrina = cache((): FichaVitrina[] => {
     const raw = JSON.parse(
       readFileSync(path.join(VITRINA_DIR, archivo), "utf8"),
     ) as unknown;
-    const leido = parseOrThrow(raw, archivo);
+    // «Vitrina» → «portafolio» al leer (S23): la palabra del sitio es una sola.
+    const leido = sinVitrinaEnTodo(parseOrThrow(raw, archivo));
     // NOMBRE OFICIAL (ADR-028): se aplica aquí, UNA vez, y de aquí lo heredan el
     // escaparate, la ficha, el chat, el manifest, los correos y el PDF. El
     // archivo de `content/` no cambia: es una lectura con alias.

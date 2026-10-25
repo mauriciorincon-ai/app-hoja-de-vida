@@ -32,7 +32,7 @@ describe("anclasDeHome — se leen de la HOME, no de una lista", () => {
       "#perfil",
       "#trayectoria",
       "#logros",
-      "#vitrina",
+      "#portafolio",
       "#metodos",
       "#estudios",
       "#certificaciones",
@@ -66,7 +66,7 @@ describe("anclasDeHome — se leen de la HOME, no de una lista", () => {
 
   it("NO trae «#roadmap»: el componente existe, pero la HOME ya no lo monta", () => {
     // roadmap.tsx declara id="roadmap" y vive en components/home/, pero el
-    // roadmap se fue a /vitrina/apps. Listarlo sería revivir el error de #apps
+    // roadmap se fue a /portafolio/apps. Listarlo sería revivir el error de #apps
     // con otro nombre: por eso el catálogo mira QUÉ se monta dentro del <main>,
     // no qué archivos hay en la carpeta.
     expect(anclas.has("#roadmap")).toBe(false);
@@ -79,15 +79,15 @@ describe("rutasDeDatos — salen de los mismos datos que generan las páginas", 
   it("incluye los case studies, la vitrina y sus frentes", () => {
     expect(rutas.has("/proyectos/vesting")).toBe(true);
     expect(rutas.has("/cv")).toBe(true);
-    expect(rutas.has("/vitrina")).toBe(true);
-    expect(rutas.has("/vitrina/apps")).toBe(true);
-    expect(rutas.has("/vitrina/agentes")).toBe(true);
+    expect(rutas.has("/portafolio")).toBe(true);
+    expect(rutas.has("/portafolio/apps")).toBe(true);
+    expect(rutas.has("/portafolio/agentes")).toBe(true);
   });
 
   it("incluye las piezas publicadas de un frente abierto", () => {
-    expect(rutas.has("/vitrina/agentes/hr-develop-ai-apps")).toBe(true);
-    expect(rutas.has("/vitrina/apps/habla")).toBe(true);
-    expect(rutas.has("/vitrina/apps/habla/detalle")).toBe(true);
+    expect(rutas.has("/portafolio/agentes/hr-develop-ai-apps")).toBe(true);
+    expect(rutas.has("/portafolio/apps/habla")).toBe(true);
+    expect(rutas.has("/portafolio/apps/habla/detalle")).toBe(true);
   });
 
   it("no inventa rutas: un proyecto sin case study no tiene página", () => {
@@ -171,14 +171,14 @@ describe("nombreDeDestino — a dónde lleva la cita, con el nombre que el visit
   });
 
   it("un frente y una pieza de la vitrina toman su nombre de los datos", () => {
-    expect(nombreDeDestino("/vitrina/agentes", es)).toBe(
+    expect(nombreDeDestino("/portafolio/agentes", es)).toBe(
       "Agentes especializados",
     );
-    expect(nombreDeDestino("/vitrina/agentes", en)).toBe("Specialized agents");
+    expect(nombreDeDestino("/portafolio/agentes", en)).toBe("Specialized agents");
     expect(
-      nombreDeDestino("/vitrina/agentes/hr-develop-ai-apps", es),
+      nombreDeDestino("/portafolio/agentes/hr-develop-ai-apps", es),
     ).toBeTruthy();
-    expect(nombreDeDestino("/vitrina/apps/habla/detalle", es)).toBeTruthy();
+    expect(nombreDeDestino("/portafolio/apps/habla/detalle", es)).toBeTruthy();
   });
 
   it("un destino sin nombre devuelve null — y eso rompe el build, no el chip", () => {
@@ -228,7 +228,7 @@ describe("nombreDeDestino — a dónde lleva la cita, con el nombre que el visit
  *    componente.
  *  · **`href="#x"`, solo en lo que se MONTA en la HOME** (`components/home/**`
  *    y la propia `page.tsx`): ahí un ancla suelta es la HOME. Fuera de ahí es
- *    un ancla de su propia página —`#contacto-vitrina` en una ficha, el
+ *    un ancla de su propia página —`#contacto-portafolio` en una ficha, el
  *    `#contenido` del salto al contenido— y juzgarla contra la HOME daría
  *    falsos positivos.
  */

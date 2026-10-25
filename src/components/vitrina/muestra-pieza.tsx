@@ -61,7 +61,7 @@ export async function MuestraPieza({
                 nombre accesible sigue siendo el de la pieza — una sola parada
                 de tabulador, y se lee «FORJA», no «leer más». */}
             <Link
-              href={`/vitrina/${pieza.frente}/${pieza.slug}`}
+              href={`/portafolio/${pieza.frente}/${pieza.slug}`}
               className="after:absolute after:inset-0 after:rounded-[14px] after:content-['']"
             >
               {pieza.nombre}

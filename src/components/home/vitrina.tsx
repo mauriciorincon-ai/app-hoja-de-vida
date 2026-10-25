@@ -28,14 +28,14 @@ export async function VitrinaHome({ locale }: { locale: Locale }) {
 
   return (
     <section
-      id="vitrina"
-      aria-labelledby="vitrina-titulo"
+      id="portafolio"
+      aria-labelledby="portafolio-titulo"
       className="scroll-mt-16"
     >
       <div className="mx-auto max-w-5xl px-4 py-20 md:px-6 md:py-28">
         <Reveal variant="fadeInUp">
           <h2
-            id="vitrina-titulo"
+            id="portafolio-titulo"
             className="font-display text-[clamp(1.75rem,3.5vw,2.5rem)] font-medium tracking-[-0.015em] text-ink-0"
           >
             {t("titulo")}
@@ -67,7 +67,7 @@ export async function VitrinaHome({ locale }: { locale: Locale }) {
         <Reveal variant="fadeInUp">
           <p className="mt-10">
             <Link
-              href="/vitrina"
+              href="/portafolio"
               data-ir-vitrina
               className="inline-flex min-h-11 items-center gap-2 rounded-md bg-sage px-6 text-[15px] font-medium text-sage-ink shadow-sh-1 transition-[filter] duration-[120ms] hover:brightness-[0.97]"
             >

@@ -23,6 +23,7 @@ import process from "node:process";
 import { parse } from "yaml";
 import { TOPE_PALABRAS_CHUNK, ventanasPorParrafo } from "./a-fondo.mjs";
 import { conNombreDePieza, conNombreOficial } from "./nombre-oficial.mjs";
+import { sinVitrinaEnTodo } from "./sin-vitrina.mjs";
 import { leerNombresDePiezas, leerNombresOficiales } from "./nombres-oficiales.mjs";
 
 const ROOT = process.cwd();
@@ -36,7 +37,8 @@ const FRENTES_DE_FICHA = ["agentes", "investigaciones", "tableros"];
 
 /** Lee lo que hay en disco. Tolera que un frente no exista todavía. */
 export function leerFichas() {
-  const leerJson = (ruta) => JSON.parse(readFileSync(ruta, "utf8"));
+  // Misma lectura que el loader: «vitrina» se lee «portafolio» (S23).
+  const leerJson = (ruta) => sinVitrinaEnTodo(JSON.parse(readFileSync(ruta, "utf8")));
   const dirApps = path.join(ROOT, "content", "vitrina");
   // Nombre oficial (ADR-028): el chat dice lo mismo que el escaparate. Se aplica
   // al LEER el export, igual que en el loader de la vitrina.
@@ -49,7 +51,7 @@ export function leerFichas() {
       const brochure = oficial ? conNombreOficial(crudo, oficial) : crudo;
       const complementoRuta = path.join(ROOT, "data", "fichas", `${brochure.app.slug}.yaml`);
       const complemento = existsSync(complementoRuta)
-        ? parse(readFileSync(complementoRuta, "utf8"))
+        ? sinVitrinaEnTodo(parse(readFileSync(complementoRuta, "utf8")))
         : null;
       return { brochure, complemento };
     });
@@ -106,7 +108,7 @@ export function chunksDePieza({ frente, ficha }, locale = "es", tope = TOPE_PALA
   if (!p?.slug || !p?.nombre) {
     throw new Error(`content/${frente}: una ficha sin «pieza.slug» o «pieza.nombre» no puede citarse.`);
   }
-  const ancla = `/vitrina/${frente}/${p.slug}`;
+  const ancla = `/portafolio/${frente}/${p.slug}`;
   const base = `${frente}-${p.slug}`;
   const nombre = `${L[frente]} — ${p.nombre}`;
   const chunks = [];
@@ -164,7 +166,7 @@ export function chunksDeApp({ brochure, complemento }, locale = "es", tope = TOP
   if (!a?.slug || !a?.nombre) {
     throw new Error("content/vitrina: un brochure sin «app.slug» o «app.nombre» no puede citarse.");
   }
-  const ancla = `/vitrina/apps/${a.slug}`;
+  const ancla = `/portafolio/apps/${a.slug}`;
   const base = `pieza-apps-${a.slug}`;
   const nombre = `${L.apps} — ${a.nombre}`;
   const chunks = [];

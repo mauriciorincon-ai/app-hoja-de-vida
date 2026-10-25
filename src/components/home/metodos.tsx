@@ -10,7 +10,8 @@ import type { PiezaMetodo } from "@/lib/metodo/schema";
 /**
  * LA PUERTA A «MÉTODOS» EN LA HOME (S19). Las publicaciones tenían una sola
  * entrada, el menú; con la novena pieza la funcionalidad queda completa y la
- * HOME las asoma, entre la vitrina y los estudios: el mismo gesto que
+ * HOME las asoma, después de Skills y antes de Contacto desde el S23 (entre el
+ * portafolio y los estudios hasta entonces): el mismo gesto que
  * `VitrinaHome`, sin imágenes y bajo el pliegue (el presupuesto de rendimiento
  * de la HOME es el más ajustado del sitio).
  *

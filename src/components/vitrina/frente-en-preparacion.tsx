@@ -1,7 +1,7 @@
 /**
  * EL INICIO DE UN FRENTE, dicho con todas sus letras (ADR-015 · S7).
  *
- * Es la rama de `/vitrina/<frente>` que se pinta cuando el frente existe y aún
+ * Es la rama de `/portafolio/<frente>` que se pinta cuando el frente existe y aún
  * no tiene piezas. Desde que los cuatro frentes abrieron **no tiene sujeto en
  * producción**, y por eso vive aparte: un componente puro que recibe sus dos
  * textos ya traducidos y se prueba solo, sin esperar a que nazca un quinto

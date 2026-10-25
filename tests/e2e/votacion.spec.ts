@@ -11,7 +11,7 @@ import { parse } from "yaml";
  */
 
 // Las features viven en el complemento de cada app hermana
-// (`data/fichas/<slug>.yaml`) y se votan en `/vitrina/apps/<slug>` (2026-09-13).
+// (`data/fichas/<slug>.yaml`) y se votan en `/portafolio/apps/<slug>` (2026-09-13).
 type Complemento = { app: string; roadmap?: { id: string }[] };
 const features = readdirSync("data/fichas")
   .filter((f) => f.endsWith(".yaml"))
@@ -41,7 +41,7 @@ test.describe("Votación del roadmap", () => {
       }),
     );
 
-    await page.goto(`/es/vitrina/apps/${features[0].app}`);
+    await page.goto(`/es/portafolio/apps/${features[0].app}`);
     await page.locator("#roadmap").scrollIntoViewIfNeeded();
 
     // Aviso honesto visible
@@ -86,7 +86,7 @@ test.describe("Votación del roadmap", () => {
       }),
     );
 
-    await page.goto(`/es/vitrina/apps/${objetivo.app}`);
+    await page.goto(`/es/portafolio/apps/${objetivo.app}`);
     await page.locator("#roadmap").scrollIntoViewIfNeeded();
 
     const fila = page.locator(
@@ -128,7 +128,7 @@ test.describe("Votación del roadmap", () => {
       }),
     );
 
-    await page.goto(`/es/vitrina/apps/${objetivo.app}`);
+    await page.goto(`/es/portafolio/apps/${objetivo.app}`);
     await page.locator("#roadmap").scrollIntoViewIfNeeded();
 
     const fila = page.locator(
@@ -158,7 +158,7 @@ test.describe("Votación del roadmap", () => {
     const idx = testInfo.project.name === "mobile" ? 1 : 0;
     const objetivo = features[idx] ?? features[0];
 
-    await page.goto(`/es/vitrina/apps/${objetivo.app}`);
+    await page.goto(`/es/portafolio/apps/${objetivo.app}`);
     await page.locator("#roadmap").scrollIntoViewIfNeeded();
 
     const fila = page.locator(
@@ -192,7 +192,7 @@ test.describe("Votación del roadmap", () => {
     const idx = testInfo.project.name === "mobile" ? 3 : 2;
     const objetivo = features[idx] ?? features[0];
 
-    await page.goto(`/es/vitrina/apps/${objetivo.app}`);
+    await page.goto(`/es/portafolio/apps/${objetivo.app}`);
     await page.locator("#roadmap").scrollIntoViewIfNeeded();
     const fila = page.locator(
       `#roadmap [data-feature-id="${objetivo.feature}"][data-app-id="${objetivo.app}"]`,
