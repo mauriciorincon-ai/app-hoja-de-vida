@@ -17,6 +17,7 @@ export type AnalyticsEvent =
   | "chat_respuesta"
   | "chat_offtopic"
   | "chat_fallback"
+  | "chat_borrado"
   | "chat_registro_codigo_pedido"
   | "chat_registro_verificado"
   | "chat_registro_problema"

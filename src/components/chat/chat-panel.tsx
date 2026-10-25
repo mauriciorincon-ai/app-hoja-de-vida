@@ -7,6 +7,13 @@ import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "@/i18n/navigation";
 import { trackEvent } from "@/lib/analytics";
+import {
+  almacenDelNavegador,
+  borrar,
+  estaVencida,
+  guardar,
+  leerGuardado,
+} from "@/lib/chat-conversacion";
 import { agruparFuentes, fuentesCitadas } from "@/lib/ia/fuentes";
 import {
   createRetriever,
@@ -18,6 +25,7 @@ import {
   type ChatUIMessage,
   type Fuente,
 } from "@/lib/ia/schemas";
+import { ChatProblema } from "./chat-problema";
 import { ChatRegistro } from "./chat-registro";
 
 /**
@@ -32,6 +40,12 @@ import { ChatRegistro } from "./chat-registro";
  * código) y solo después el chat. Un 401 del chat devuelve a la puerta. Las
  * respuestas del modo local se mandan a `/api/chat/log` para que el registro
  * no tenga huecos cuando el proveedor cae.
+ *
+ * Desde el S24 (OM-14) la conversación vive también en el navegador
+ * (`lib/chat-conversacion.ts`): recargar, seguir un enlace del menú o cambiar
+ * de idioma —todo eso desmonta el panel— no la pierde. Vence a las 8 horas del
+ * último mensaje, y el visitante la borra cuando quiera. Un panel que se
+ * reabre solo NO toma el foco (`enfocar`): nada roba el foco al cargar.
  */
 
 type EstadoSesion = "cargando" | "gate" | "ok";
@@ -52,12 +66,25 @@ function recortar(texto: string, max: number): string {
   return texto.length <= max ? texto : `${texto.slice(0, max).trimEnd()}…`;
 }
 
+/** El reloj, fuera del cuerpo del componente: solo se lee en eventos y efectos, nunca al pintar. */
+const ahoraMs = () => Date.now();
+
+/** Una huella barata de la conversación: cambia cuando llega o crece un mensaje. */
+function firmaDe(mensajes: readonly ChatUIMessage[]): string {
+  return mensajes
+    .map((m) => `${m.id}:${textoDe(m).length}:${fuentesDe(m).length}`)
+    .join("|");
+}
+
 export function ChatPanel({
   abierto,
   onCerrar,
+  enfocar = true,
 }: {
   abierto: boolean;
   onCerrar: () => void;
+  /** false cuando el panel se reabrió solo tras una recarga: no toma el foco. */
+  enfocar?: boolean;
 }) {
   const t = useTranslations("chat");
   const locale = useLocale() as "es" | "en";
@@ -78,9 +105,24 @@ export function ChatPanel({
   const [gateActiva, setGateActiva] = useState(false);
   const [nombreVisitante, setNombreVisitante] = useState<string | null>(null);
   const [sesionPerdida, setSesionPerdida] = useState(false);
+  const [borrada, setBorrada] = useState(false);
+
+  // La conversación guardada en este navegador (vencida o ilegible = vacía).
+  // El panel solo existe en el cliente (dynamic, ssr:false): leer aquí es seguro.
+  const [guardada] = useState(() =>
+    leerGuardado(almacenDelNavegador(), ahoraMs()),
+  );
+  // La huella de lo último que se guardó o restauró, y cuándo se escribió el
+  // último mensaje. Restaurar NO cuenta como «un mensaje nuevo»: no refresca
+  // las 8 horas.
+  const firmaGuardadaRef = useRef(
+    firmaDe((guardada?.mensajes ?? []) as ChatUIMessage[]),
+  );
+  const ultimoMensajeRef = useRef(guardada?.ultimo ?? 0);
 
   const { messages, setMessages, sendMessage, status } = useChat<ChatUIMessage>(
     {
+      messages: (guardada?.mensajes ?? []) as ChatUIMessage[],
       transport: new DefaultChatTransport({
         api: "/api/chat",
         // Errores HTTP tipados para decidir el estado en onError
@@ -217,9 +259,36 @@ export function ChatPanel({
     }
   }
 
+  /** Vació la conversación de la pantalla y del almacén; no toca el servidor. */
+  function vaciarConversacion() {
+    borrar(almacenDelNavegador());
+    setMessages([]);
+    firmaGuardadaRef.current = "";
+    ultimoMensajeRef.current = 0;
+  }
+
+  /** ¿Pasaron las 8 horas del último mensaje con el panel ya montado? */
+  function conversacionVencida(): boolean {
+    return (
+      messages.length > 0 &&
+      ultimoMensajeRef.current > 0 &&
+      estaVencida(ultimoMensajeRef.current, ahoraMs())
+    );
+  }
+
+  function borrarConversacion() {
+    vaciarConversacion();
+    setBorrada(true);
+    trackEvent("chat_borrado");
+  }
+
   function preguntar(texto: string) {
     const pregunta = texto.trim();
     if (!pregunta || ocupado) return;
+    // Revisa el vencimiento ANTES de enviar: una pestaña dejada abierta toda la
+    // noche no arrastra la conversación de ayer al modelo.
+    if (conversacionVencida()) vaciarConversacion();
+    setBorrada(false);
     setRateLimited(false);
     setSinCupo(null);
     setInput("");
@@ -237,8 +306,25 @@ export function ChatPanel({
   const sugerencias = [t("sugerencia1"), t("sugerencia2"), t("sugerencia3")];
 
   useEffect(() => {
-    if (abierto && sesion === "ok") inputRef.current?.focus();
-  }, [abierto, sesion]);
+    if (abierto && sesion === "ok" && enfocar) inputRef.current?.focus();
+  }, [abierto, sesion, enfocar]);
+
+  // Al abrir, la conversación vencida no se enseña.
+  useEffect(() => {
+    if (abierto && conversacionVencida()) vaciarConversacion();
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- solo al abrir
+  }, [abierto]);
+
+  // Guarda al enviar y al terminar cada respuesta, no a cada trozo del stream.
+  useEffect(() => {
+    if (status === "streaming" || messages.length === 0) return;
+    const firma = firmaDe(messages);
+    if (firma === firmaGuardadaRef.current) return;
+    firmaGuardadaRef.current = firma;
+    const ahora = ahoraMs();
+    ultimoMensajeRef.current = ahora;
+    guardar(almacenDelNavegador(), messages, ahora);
+  }, [messages, status]);
 
   // Al abrir por primera vez: ¿hay puerta, y hay sesión?
   useEffect(() => {
@@ -352,6 +438,15 @@ export function ChatPanel({
           aria-live="polite"
           className="flex-1 space-y-4 overflow-y-auto px-4 py-4"
         >
+          {borrada && messages.length === 0 && (
+            <p
+              role="status"
+              data-testid="chat-borrado"
+              className="text-xs leading-relaxed text-ink-1"
+            >
+              {t("borrado")}
+            </p>
+          )}
           {messages.length === 0 && nombreVisitante && (
             <p data-testid="chat-saludo" className="text-sm text-ink-1">
               {t("saludo", { nombre: nombreVisitante })}
@@ -487,6 +582,38 @@ export function ChatPanel({
             <Send aria-hidden="true" className="size-4" />
           </button>
         </form>
+      )}
+
+      {sesion === "ok" && (messages.length > 0 || gateActiva) && (
+        <div className="border-t border-paper-2 px-3 pb-2">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-0">
+            {messages.length > 0 && (
+              <button
+                type="button"
+                onClick={borrarConversacion}
+                data-testid="chat-borrar"
+                className="py-1 text-xs text-ink-2 underline decoration-paper-3 underline-offset-2 hover:text-ink-0"
+              >
+                {t("borrar")}
+              </button>
+            )}
+            {/* OM-15: el aviso, a mano con la sesión abierta. Sin puerta no hay
+                correo de quien leerlo, así que sin puerta no hay aviso. */}
+            {gateActiva && (
+              <div className="ml-auto max-w-full has-[[role=group]]:w-full">
+                <ChatProblema paso="chat" locale={locale} />
+              </div>
+            )}
+          </div>
+          {messages.length > 0 && (
+            <p
+              data-testid="chat-guardado-nota"
+              className="text-[11px] leading-snug text-ink-2"
+            >
+              {t("borrarNota")}
+            </p>
+          )}
+        </div>
       )}
     </div>
   );

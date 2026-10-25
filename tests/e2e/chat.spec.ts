@@ -419,7 +419,8 @@ test.describe("chat — la puerta (ADR-024)", () => {
     await page.getByTestId("chat-registro-verificar").click();
     await expect(page.getByTestId("chat-saludo")).toContainText("Ana Prueba");
     await page.reload();
-    await page.getByTestId("chat-launcher").click();
+    // S24 (OM-14): el panel estaba abierto, así que tras recargar se reabre
+    // solo (sin tomar el foco). Ya no hay que pulsar el lanzador.
     await expect(page.getByTestId("chat-input")).toBeVisible();
     await expect(page.getByTestId("chat-registro")).toHaveCount(0);
   });
