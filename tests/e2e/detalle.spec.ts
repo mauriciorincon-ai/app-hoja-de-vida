@@ -94,13 +94,13 @@ test.describe("Páginas de detalle /proyectos/<slug> (capa 2)", () => {
 
   // Revisión 2026-09-24: cada caso trae su pieza completa — tesis, banda de
   // cifras, capítulos numerados y lección — y ninguno se queda en cuatro frases.
-  // Recorre los OCHO, leídos del YAML: un caso nuevo entra a esta prueba solo.
+  // Recorre TODOS, leídos del YAML: un caso nuevo entra a esta prueba solo.
   test("cada caso de estudio muestra tesis, cifras, capítulos y lección", async ({
     page,
   }) => {
     test.slow();
     const casos = cvEs.proyectos.filter((p) => p.casestudy);
-    expect(casos.length).toBeGreaterThanOrEqual(8);
+    expect(casos.length).toBeGreaterThanOrEqual(9);
     for (const p of casos) {
       const c = p.casestudy!;
       await page.goto(`/es/proyectos/${p.slug}`);
@@ -116,6 +116,42 @@ test.describe("Páginas de detalle /proyectos/<slug> (capa 2)", () => {
       );
       await expect(page.getByTestId("cs-leccion"), p.slug).toContainText(
         c.leccion,
+      );
+    }
+  });
+
+  // S25 (OM-11): el puesto de proyectos propios tiene su caso, `apps-pipeline`, y
+  // la HOME lo enlaza desde su hito como a cualquier otro; el caso está en el
+  // HTML estático en los dos idiomas (gate ATS/SEO) y en la HOME aparece una vez.
+  test("el puesto de proyectos propios lleva a su caso, en los dos idiomas", async ({
+    page,
+    request,
+  }) => {
+    for (const [locale, cv] of [
+      ["es", cvEs],
+      ["en", cvEn],
+    ] as const) {
+      const p = cv.proyectos.find((x) => x.slug === "apps-pipeline");
+      expect(p?.casestudy, `${locale}: falta el caso apps-pipeline`).toBeDefined();
+      const html = await (
+        await request.get(`/${locale}/proyectos/apps-pipeline`)
+      ).text();
+      expect(html).toContain(p!.casestudy!.titular);
+      expect(html).toContain(p!.casestudy!.leccion);
+
+      await page.goto(`/${locale}`);
+      await page.locator("form[data-hydrated=true]").waitFor();
+      const enlace = page.locator(
+        `#trayectoria [data-case-study][href$="/proyectos/apps-pipeline"]`,
+      );
+      await expect(enlace, locale).toHaveCount(1);
+      await enlace.click();
+      await expect(page).toHaveURL(
+        new RegExp(`/${locale}/proyectos/apps-pipeline$`),
+        { timeout: 15_000 },
+      );
+      await expect(page.getByTestId("cs-titular")).toHaveText(
+        p!.casestudy!.titular,
       );
     }
   });

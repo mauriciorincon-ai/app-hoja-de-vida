@@ -107,6 +107,33 @@ export function cifrasFueraDeSuHito(
     );
 }
 
+/**
+ * Las cifras de los casos que sus logros callan, en TODA la trayectoria — puro,
+ * para ver fallar la excepción.
+ *
+ * LA EXCEPCIÓN (S25, OM-11): el puesto de proyectos propios tiene caso desde el
+ * 2026-10-25 (`apps-pipeline`) y su banda cuenta lo que no crece con cada pieza
+ * —dos casas, dos aprobaciones, cuatro jobs de CI—, pero sus logros NOMBRAN las
+ * piezas y no las cuentan, a propósito (2026-10-04: «el portafolio crece cada
+ * semana y un total escrito aquí caducaría en días»; lo vigila
+ * `content.test.ts`). Exigirle al puesto que repita las cifras de su caso en
+ * los logros era exigirle los totales que se decidió no escribir. Los EMPLEOS
+ * siguen obligados: el PDF no repite el caso, y lo que el caso destaca y el
+ * hito calla, el PDF lo deja por fuera.
+ */
+export function cifrasDeCasosFueraDeSusLogros(
+  cv: Cv,
+  locale: "es" | "en",
+): string[] {
+  return cv.trayectoria
+    .filter((h) => h.tipo !== "proyectos-propios")
+    .flatMap((hito) => {
+      const p = cv.proyectos.find((x) => x.slug === hito.proyecto);
+      if (!p?.casestudy) return [];
+      return cifrasFueraDeSuHito(p.slug, p.casestudy, hito.bullets, locale);
+    });
+}
+
 /** Los problemas de UN caso contra su documento — puro, para poder verlo fallar. */
 export function cifrasSinFuente(
   slug: string,
@@ -167,10 +194,12 @@ describe("los casos de estudio", () => {
   });
 
   it("cada hito de la trayectoria tiene su caso de estudio", () => {
-    // Solo los EMPLEOS: el puesto de proyectos propios (2026-10-04) corre en
-    // paralelo a ellos y su evidencia es la vitrina entera, no un caso.
+    // TODOS, también el puesto de proyectos propios: el 2026-10-04 se decidió
+    // que no era un caso («su evidencia es la vitrina entera») y el 2026-10-25
+    // el dueño lo revirtió (S25, OM-11): su caso es `apps-pipeline`, el
+    // pipeline con el que se construye la vitrina.
     const sinCaso = es.trayectoria
-      .filter((h) => h.tipo === "empleo" && !h.proyecto)
+      .filter((h) => !h.proyecto)
       .map((h) => `${h.periodo} · ${h.rol} · ${h.organizacion}`);
     expect(
       sinCaso,
@@ -201,19 +230,10 @@ describe("los casos de estudio", () => {
   // logros de la trayectoria. Nació en rojo: las 120 máquinas de Inglopres, las
   // cinco fuentes de C&M Consorcio y, en inglés, los diez meses de TransMilenio.
   it("cada cifra de un caso está también en los logros de su experiencia (ES y EN)", () => {
-    const problemas: string[] = [];
-    for (const [locale, cv] of [
-      ["es", es],
-      ["en", en],
-    ] as const) {
-      for (const hito of cv.trayectoria) {
-        const p = cv.proyectos.find((x) => x.slug === hito.proyecto);
-        if (!p?.casestudy) continue;
-        problemas.push(
-          ...cifrasFueraDeSuHito(p.slug, p.casestudy, hito.bullets, locale),
-        );
-      }
-    }
+    const problemas = [
+      ...cifrasDeCasosFueraDeSusLogros(es, "es"),
+      ...cifrasDeCasosFueraDeSusLogros(en, "en"),
+    ];
     expect(problemas.join("\n")).toBe("");
   });
 
@@ -395,5 +415,65 @@ describe("la navegación entre casos", () => {
     const ultimo = vecinosDeCaso(es, orden[orden.length - 1]);
     expect(ultimo.siguiente).toBeUndefined();
     expect(ultimo.anterior?.slug).toBe(orden[orden.length - 2]);
+  });
+});
+
+describe("el puesto de proyectos propios y su caso (S25, OM-11)", () => {
+  const propios = (cv: Cv) =>
+    cv.trayectoria.find((h) => h.tipo === "proyectos-propios")!;
+
+  it("el puesto tiene su caso, `apps-pipeline`, en los dos idiomas", () => {
+    for (const cv of [es, en]) {
+      expect(propios(cv).proyecto).toBe("apps-pipeline");
+      expect(
+        cv.proyectos.find((p) => p.slug === "apps-pipeline")?.casestudy,
+      ).toBeDefined();
+    }
+  });
+
+  it("la excepción HACE algo: sin ella, las cifras del caso sí faltarían en sus logros", () => {
+    for (const [locale, cv] of [
+      ["es", es],
+      ["en", en],
+    ] as const) {
+      const hito = propios(cv);
+      const caso = cv.proyectos.find((p) => p.slug === hito.proyecto)!
+        .casestudy!;
+      // Si la excepción no existiera, este es el rojo que dispararía.
+      expect(
+        cifrasFueraDeSuHito("apps-pipeline", caso, hito.bullets, locale)
+          .length,
+      ).toBeGreaterThan(0);
+      // Con ella, el gate de la trayectoria entera sigue en verde.
+      expect(cifrasDeCasosFueraDeSusLogros(cv, locale)).toEqual([]);
+    }
+  });
+
+  it("la excepción no se ensancha: un EMPLEO que calla una cifra de su caso sigue fallando", () => {
+    const roto = structuredClone(es);
+    const cafam = roto.trayectoria.find((h) => h.proyecto === "cafam")!;
+    cafam.bullets = ["Sin ninguna cifra."];
+    const problemas = cifrasDeCasosFueraDeSusLogros(roto, "es");
+    expect(problemas.length).toBeGreaterThan(0);
+    expect(problemas.join("\n")).toContain("cafam");
+    expect(problemas.join("\n")).not.toContain("apps-pipeline");
+  });
+
+  it("la excepción es del TIPO del puesto, no de su nombre: si deja de ser `proyectos-propios`, falla", () => {
+    const otro = structuredClone(es);
+    propios(otro).tipo = "empleo";
+    expect(cifrasDeCasosFueraDeSusLogros(otro, "es").join("\n")).toContain(
+      "apps-pipeline",
+    );
+  });
+
+  it("los vecinos siguen la trayectoria: CTIC → propios → Vesting", () => {
+    const v = vecinosDeCaso(es, "apps-pipeline");
+    expect(v.anterior?.slug).toBe("fundacion-ctic");
+    expect(v.siguiente?.slug).toBe("vesting");
+    expect(vecinosDeCaso(es, "vesting").anterior?.slug).toBe("apps-pipeline");
+    expect(vecinosDeCaso(es, "fundacion-ctic").siguiente?.slug).toBe(
+      "apps-pipeline",
+    );
   });
 });
