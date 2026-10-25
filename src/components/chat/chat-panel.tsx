@@ -7,7 +7,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "@/i18n/navigation";
 import { trackEvent } from "@/lib/analytics";
-import { agruparFuentes } from "@/lib/ia/fuentes";
+import { agruparFuentes, fuentesCitadas } from "@/lib/ia/fuentes";
 import {
   createRetriever,
   type Retriever,
@@ -378,7 +378,9 @@ export function ChatPanel({
           )}
 
           {messages.map((m) => {
-            const fuentes = fuentesDe(m);
+            // Solo las fuentes que el texto CITA con [n] (S24, OM-16): el
+            // servidor manda las recuperadas, no las que la respuesta usó.
+            const fuentes = fuentesCitadas(textoDe(m), fuentesDe(m));
             return (
               <div
                 key={m.id}
