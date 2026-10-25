@@ -100,7 +100,7 @@ el mensaje te llega al correo.
   simplemente no muestra el botón.
 - **Ojo:** mantén el mismo número de bullets en ES y EN (hay una prueba que lo vigila y
   bloquea la publicación si se desbalancean).
-- **Desde el 2026-09-24** los bullets de los ocho hitos llevan las cifras del corpus a fondo
+- **Desde el 2026-09-24** los bullets de los empleos llevan las cifras del corpus a fondo
   (Inglopres, Ceinfes y C&M Consorcio pasaron de 2 o 3 a 5), y en la sección **Logros** de la
   HOME entraron dos: los 27 agentes construidos con el proceso core de Vesting y los productos
   analíticos de la Fundación CTIC —hoy «25+», la cifra que corregiste el 2026-10-04—. Son ocho
@@ -228,8 +228,9 @@ el mensaje te llega al correo.
     en preparación». **Cuando el planeador llegue al portafolio**, ese chip se cambia por uno que
     remita a él (y cuando llegue la app de LangChain, igual). Es la misma regla que «Google
     Cloud — en exploración»: una etiqueta honesta hasta que haya evidencia pública.
-  - **El PDF sigue en dos páginas, pero la columna de la derecha quedó casi llena.** Si agregas
-    herramientas y el PDF pasa a tres páginas, `pnpm test` lo dice (el test de las dos páginas).
+  - **El PDF es de tres páginas y la columna de la derecha de la segunda quedó casi llena.** Si
+    agregas herramientas y el PDF pasa a cuatro páginas, `pnpm test` lo dice (el test del techo
+    de páginas).
 - **Cada grupo lleva un `id`** (desde 2026-09-26), por ejemplo `id: plataforma-de-datos`: es el
   ancla de su tarjeta (`#skills-plataforma-de-datos`), a donde llevan las citas del chat de los
   documentos de esa capacidad. Minúsculas, cifras y guiones, y **el mismo en español y en
@@ -295,19 +296,23 @@ el mensaje te llega al correo.
   variable se pone **cuando el dominio ya abra el sitio**: antes, el PDF mandaría a los
   reclutadores a una dirección que no carga. Una certificación «en curso» dice «(en curso)» en vez de
   fecha.
-- **Dos páginas, sin repetir y sin dejar nada por fuera** (desde el 2026-09-24). El PDF cuenta
-  **cada experiencia una sola vez**: los nueve cargos con **todos** sus logros —y, desde el
-  2026-10-04, el puesto de proyectos propios en su propia sección, con su descripción—, y ningún caso de
-  estudio vuelve a aparecer como «Proyecto», porque es la misma historia que su experiencia. La
-  sección «Proyectos» solo sale si agregas un proyecto que **no** es de ningún empleo (hoy no hay
-  ninguno, así que no se pinta). Cuatro pruebas lo cuidan, y la publicación te avisa si una falla:
-  - el PDF no pasa de **dos páginas**;
-  - **cada logro de cada empleo** está en el PDF (nadie puede recortarlos para que quepa); del
-    puesto de proyectos propios van su cargo, su organización y su descripción;
+- **Tres páginas, sin repetir y sin dejar nada por fuera** (desde el 2026-10-25; antes dos, desde
+  el 2026-09-24). El PDF cuenta **cada experiencia una sola vez**: los cargos de empleo con
+  **todos** sus logros y, en su propia sección —desde el 2026-10-04—, el puesto de proyectos
+  propios, que desde el 2026-10-25 también va **entero**: su descripción y sus seis logros, en la
+  tercera hoja con su título. Ningún caso de estudio vuelve a aparecer como «Proyecto», porque es la
+  misma historia que su experiencia. La sección «Proyectos» solo sale si agregas un proyecto que
+  **no** es de ningún hito (hoy no hay ninguno, así que no se pinta). Cuatro pruebas lo cuidan, y la
+  publicación te avisa si una falla:
+  - el PDF no pasa de **tres páginas**;
+  - **cada logro de cada experiencia**, el puesto de proyectos propios incluido, está en el PDF
+    (nadie puede recortarlos para que quepa), y de ese puesto también su descripción;
   - **ningún caso se repite** como proyecto;
-  - **cada cifra de la banda de un caso está también en los logros de su experiencia**. Si
+  - **cada cifra de la banda de un caso de empleo está también en los logros de su experiencia**. Si
     agregas una cifra a un caso y no a los logros de su empleo, la prueba te dice cuál falta y
-    dónde ponerla: el PDF no lista los casos, así que sin eso esa cifra quedaría por fuera.
+    dónde ponerla: el PDF no lista los casos, así que sin eso esa cifra quedaría por fuera. **El
+    puesto de proyectos propios queda exento**: sus logros nombran las piezas sin contarlas, a
+    propósito (el portafolio crece cada semana), y su caso cuenta lo que no crece con cada pieza.
 
 ### Las apps del pipeline (`data/apps.yaml`) · desde Sprint 001 · reorganizado 2026-09-05
 
