@@ -1,5 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { aPixelEntero, medirAncla, resolverAncla } from "@/lib/ancla-de-scroll";
+import {
+  aPixelEntero,
+  medirAncla,
+  posicionesEnteras,
+  resolverAncla,
+} from "@/lib/ancla-de-scroll";
 
 /**
  * El cambio de idioma conserva un ANCLA DE CONTENIDO, no píxeles ni hash
@@ -70,5 +75,27 @@ describe("ancla de scroll al cambiar de idioma", () => {
     // En español siempre 1560; en inglés siempre 1636. Con truncar, 1560 → 1559 → 1558…
     expect(vistos.filter((_, i) => i % 2 === 0)).toEqual(Array(6).fill(1560));
     expect(vistos.filter((_, i) => i % 2 === 1)).toEqual(Array(5).fill(1636));
+  });
+
+  it("un borde con .5 tampoco deriva: los bordes se redondean antes de medir el desfase (B1)", () => {
+    const es = [1508.5];
+    const en = [1584.0];
+    const recorrer = (posiciones: (t: number[]) => number[]) => {
+      let y = 1560;
+      const vistos = [y];
+      for (let i = 0; i < 10; i++) {
+        const [de, a] = i % 2 === 0 ? [es, en] : [en, es];
+        y = aPixelEntero(
+          resolverAncla(medirAncla(y, posiciones(de)), posiciones(a)),
+        );
+        vistos.push(y);
+      }
+      return vistos;
+    };
+    const vistos = recorrer(posicionesEnteras);
+    expect(vistos.filter((_, i) => i % 2 === 0)).toEqual(Array(6).fill(1560));
+    expect(vistos.filter((_, i) => i % 2 === 1)).toEqual(Array(5).fill(1635));
+    // Sin redondear, el empate .5 sube un píxel por ida y vuelta: por eso existe.
+    expect(recorrer((t) => t)[10]).toBeGreaterThan(1560);
   });
 });

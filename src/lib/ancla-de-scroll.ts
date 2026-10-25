@@ -68,6 +68,16 @@ export function aPixelEntero(y: number): number {
   return Math.round(y);
 }
 
+/**
+ * Las posiciones de los hitos, a píxel entero. Con el borde en x,5 y el destino
+ * redondeado, el desfase quedaba en x,5 también y cada ida y vuelta entre dos
+ * idiomas subía un píxel (1508,5 y 1584,0: +1 por vuelta). Con el borde ya
+ * entero, el desfase y el destino son enteros y la vuelta cae donde salió.
+ */
+export function posicionesEnteras(tops: number[]): number[] {
+  return tops.map(aPixelEntero);
+}
+
 /** El scrollY que reproduce el ancla sobre una lista nueva de candidatos. */
 export function resolverAncla(ancla: Ancla, tops: number[]): number {
   if (ancla.indice < 0 || ancla.indice >= tops.length) return ancla.y;
@@ -75,8 +85,10 @@ export function resolverAncla(ancla: Ancla, tops: number[]): number {
 }
 
 function tops(): number[] {
-  return Array.from(document.querySelectorAll(SELECTOR_ANCLAS)).map(
-    (el) => el.getBoundingClientRect().top + window.scrollY,
+  return posicionesEnteras(
+    Array.from(document.querySelectorAll(SELECTOR_ANCLAS)).map(
+      (el) => el.getBoundingClientRect().top + window.scrollY,
+    ),
   );
 }
 
