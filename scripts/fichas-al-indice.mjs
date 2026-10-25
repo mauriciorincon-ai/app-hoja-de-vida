@@ -22,8 +22,8 @@ import path from "node:path";
 import process from "node:process";
 import { parse } from "yaml";
 import { TOPE_PALABRAS_CHUNK, ventanasPorParrafo } from "./a-fondo.mjs";
-import { conNombreOficial } from "./nombre-oficial.mjs";
-import { leerNombresOficiales } from "./nombres-oficiales.mjs";
+import { conNombreDePieza, conNombreOficial } from "./nombre-oficial.mjs";
+import { leerNombresDePiezas, leerNombresOficiales } from "./nombres-oficiales.mjs";
 
 const ROOT = process.cwd();
 
@@ -54,11 +54,22 @@ export function leerFichas() {
       return { brochure, complemento };
     });
   const piezas = [];
-  for (const frente of FRENTES_DE_FICHA) {
+  // Solo los frentes abiertos se citan: la ficha de un frente en pausa no tiene página
+  // (da 404) y una cita a un 404 está prohibida; el build para en `destinoExiste`.
+  const abiertos = new Set(
+    (parse(readFileSync(path.join(ROOT, "data", "vitrina.yaml"), "utf8")).categorias ?? [])
+      .filter((c) => c.estado === "abierta")
+      .map((c) => c.id),
+  );
+  // Mismo alias que el loader de las piezas: el chat llama a cada una como la página.
+  const nombresDePiezas = leerNombresDePiezas();
+  for (const frente of FRENTES_DE_FICHA.filter((f) => abiertos.has(f))) {
     const dir = path.join(ROOT, "content", frente);
     for (const f of existsSync(dir) ? readdirSync(dir) : []) {
       if (!f.endsWith(".ficha-tecnica.json")) continue;
-      piezas.push({ frente, ficha: leerJson(path.join(dir, f)) });
+      const crudo = leerJson(path.join(dir, f));
+      const oficial = nombresDePiezas.get(`${frente}/${crudo.pieza?.slug}`);
+      piezas.push({ frente, ficha: oficial ? conNombreDePieza(crudo, oficial) : crudo });
     }
   }
   return { apps, piezas };

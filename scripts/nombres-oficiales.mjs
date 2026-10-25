@@ -19,3 +19,21 @@ export function leerNombresOficiales() {
   }
   return nombres;
 }
+
+/**
+ * Los nombres que el sitio da a las piezas de los otros frentes, `frente/slug →
+ * nombre`, leídos de `data/nombres-piezas.yaml` (2026-10-24, extiende el ADR-028).
+ * El esquema y sus reglas viven en `src/lib/vitrina/nombres-piezas.ts`.
+ * @returns {Map<string, string>}
+ */
+export function leerNombresDePiezas() {
+  const ruta = path.join(process.cwd(), "data", "nombres-piezas.yaml");
+  const yaml = parse(readFileSync(ruta, "utf8"));
+  const nombres = new Map();
+  for (const [frente, piezas] of Object.entries(yaml ?? {})) {
+    for (const [slug, nombre] of Object.entries(piezas ?? {})) {
+      nombres.set(`${frente}/${slug}`, nombre);
+    }
+  }
+  return nombres;
+}
