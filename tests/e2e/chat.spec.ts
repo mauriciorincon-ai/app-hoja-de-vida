@@ -59,7 +59,7 @@ test.describe("chat — flujo estrella", () => {
 
     // Disclaimer de transparencia visible desde el primer momento
     await expect(page.getByTestId("chat-panel")).toContainText(
-      "puedo equivocarme",
+      "puede equivocarse",
     );
 
     await preguntar(page, "¿Qué hizo Henry en Vesting?");
@@ -114,7 +114,7 @@ test.describe("chat — flujo estrella", () => {
     await page.goto("/en");
     await abrirChat(page);
     await expect(page.getByTestId("chat-panel")).toContainText(
-      "I can make mistakes",
+      "can make mistakes",
     );
 
     await preguntar(page, "What did Henry build at Vesting?");
