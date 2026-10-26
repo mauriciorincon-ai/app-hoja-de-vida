@@ -35,12 +35,33 @@ const sinAlias = (chunks: ChatChunk[]): ChatChunk[] =>
     return resto;
   });
 
-describe("el chunk de estudios lleva su alias", () => {
+// «Estudios» lleva su alias en los dos idiomas. Desde el S25 llevan el suyo la sección de «Qué
+// datos guarda este chat» (SOLO en inglés, `chat-alias-privacidad.test.ts`) y la de la salida de
+// Vesting (los dos idiomas, `chat-alias-salida-vesting.test.ts`): la lista exacta vive aquí para
+// que un alias nuevo no entre sin que alguien lo vea. Una sección larga parte su texto en tramos
+// (`~1`, `~2`…): se compara la sección, no el tramo.
+const CON_ALIAS = {
+  es: ["a-fondo-vesting-por-que-sali-y-el-puente", "estudios"],
+  en: [
+    "a-fondo-rag-y-el-chat-que-datos-guarda-el-chat",
+    "a-fondo-vesting-por-que-sali-y-el-puente",
+    "estudios",
+  ],
+} as const;
+export const seccionesConAlias = (chunks: ChatChunk[]): string[] =>
+  [
+    ...new Set(
+      chunks.filter((c) => c.alias).map((c) => c.id.replace(/~\d+$/, "")),
+    ),
+  ].sort();
+
+describe("los fragmentos con alias son los que se declaran", () => {
   it.each(["es", "en"] as const)(
-    "[%s] solo ese fragmento lo trae",
+    "[%s] solo esas secciones lo traen",
     (locale) => {
-      const conAlias = chunksDe(locale).filter((c) => c.alias);
-      expect(conAlias.map((c) => c.id)).toEqual(["estudios"]);
+      expect(seccionesConAlias(chunksDe(locale))).toEqual([
+        ...CON_ALIAS[locale],
+      ]);
     },
   );
 });
