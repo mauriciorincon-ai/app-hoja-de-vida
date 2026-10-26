@@ -52,11 +52,4 @@ proceso:
 # de esta app — features disruptivas, no en construcción, sin fechas. PROCEDENCIA:
 # cv-viva (la planeadora lo administra; llega por copia y no se edita aquí). Los
 # `id` son ESTABLES: el par (app, id) es la clave del voto en la BD.
-roadmap:
-  - id: datos-sinteticos
-    titulo:
-      es: "Un gemelo sintético de tus datos para compartirlos sin exponerlos"
-      en: "A synthetic twin of your data to share without exposing it"
-    descripcion:
-      es: "Generas un conjunto con la misma forma estadística y sin filas reales, para que otros trabajen sobre él mientras el original nunca sale de tu máquina."
-      en: "Generate a set with the same statistical shape and no real rows, so others can work on it while the original never leaves your machine."
+roadmap: []

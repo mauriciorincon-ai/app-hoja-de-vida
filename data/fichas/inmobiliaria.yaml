@@ -52,11 +52,4 @@ proceso:
 # de esta app — features disruptivas, no en construcción, sin fechas. PROCEDENCIA:
 # cv-viva (la planeadora lo administra; llega por copia y no se edita aquí). Los
 # `id` son ESTABLES: el par (app, id) es la clave del voto en la BD.
-roadmap:
-  - id: fotos-que-venden
-    titulo:
-      es: "Fotos que venden"
-      en: "Photos that sell"
-    descripcion:
-      es: "Asistencia fotográfica para tu publicación: la app deja de solo calificar tus fotos y te ayuda a conseguir las que cierran ventas."
-      en: "Photo assistance for your listing: the app stops merely grading your photos and helps you get the ones that close sales."
+roadmap: []
