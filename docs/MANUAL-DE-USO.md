@@ -77,9 +77,10 @@ el mensaje te llega al correo.
   de su caso, y la línea de la HOME no puede repetir un año.
 - **Un hito que no es un empleo** (desde el 2026-10-04): `tipo: proyectos-propios` marca el puesto
   que trabajas por tu cuenta en paralelo a tus empleos —hoy, «Ingeniero de IA Generativa ·
-  Proyectos propios», desde abril de 2024—. No necesita caso de estudio, no entra en la regla de
+  Proyectos propios», desde abril de 2024—. Desde el 2026-10-25 **tiene su caso de estudio**
+  (`apps-pipeline`, «El pipeline AI-APPs»: cómo se construye el portafolio), no entra en la regla de
   años de la línea (su 2024 repite el de Vesting a propósito) y el PDF lo pone en su sección
-  «Proyectos propios», después de la experiencia, con su descripción en vez de sus logros. **Sus
+  «Proyectos propios», después de la experiencia y entero: su descripción y sus logros. **Sus
   logros nombran las piezas y nunca las cuentan**: si escribes «32 piezas» o «6 aplicaciones»
   ahí, `pnpm test` falla, porque el portafolio crece cada semana. **Y su año de inicio es uno solo**:
   si cambias el `periodo`, `pnpm test` también falla mientras la descripción, los logros o una
@@ -109,9 +110,10 @@ el mensaje te llega al correo.
 ### Casos de estudio con página propia · desde Sprint 002 · rehechos el 2026-09-24
 
 - **Qué hace:** cada experiencia de la trayectoria tiene su caso de estudio con URL propia
-  (`/es/proyectos/vesting`, por ejemplo), en los dos idiomas. **Son ocho, uno por hito**:
-  Fundación CTIC, Vesting, Banco Pichincha, C&M Consultores, Cafam y, desde el 2026-09-24,
-  C&M Consorcio, Ceinfes e Inglopres.
+  (`/es/proyectos/vesting`, por ejemplo), en los dos idiomas. **Hay uno por hito**: Fundación
+  CTIC, Proyectos propios («El pipeline AI-APPs», desde el 2026-10-25), Vesting, Banco
+  Pichincha, C&M Consultores, Cafam y, desde el 2026-09-24, C&M Consorcio, Ceinfes e Inglopres.
+  Su número no está escrito aquí: lo cuentan las pruebas desde `data/cv.es.yaml`.
 - **Cómo se ve cada caso, de arriba abajo:** la tesis en una frase bajo el título · una banda
   de 3 o 4 cifras grandes · contexto y reto lado a lado · «Cómo lo hice» en capítulos
   numerados · el impacto · «Lo que me llevo», una frase tuya en cita · y el caso anterior y el
@@ -119,7 +121,10 @@ el mensaje te llega al correo.
 - **De dónde sale el texto:** del corpus a fondo que aprobaste. Cada cifra de la banda **tiene
   que aparecer en el documento a fondo del mismo nombre** (`data/a-fondo/<slug>.es.md`), en
   número o en letras; si pones una que el documento no dice, la publicación falla nombrándola.
-  La lección es una frase de ese mismo documento.
+  La lección es una frase de ese mismo documento. **El caso de Proyectos propios sale de
+  `apps-pipeline`** (su documento a fondo), y es el único cuyas cifras no se exigen también en los
+  logros del hito: sus logros no llevan totales (el portafolio crece cada semana) y su banda cuenta
+  lo que no crece con cada pieza —dos casas, dos aprobaciones, cuatro jobs de CI—.
 - **Cómo agregar o editar uno (cero código):** en `data/cv.es.yaml` y `cv.en.yaml`, el proyecto
   lleva un `slug:` (IGUAL en los dos idiomas) y un bloque `casestudy:` con estos campos, en
   este orden:
@@ -939,7 +944,18 @@ una cifra de «lo que hice» que el documento citado no dice, un conteo del siti
   del texto), no las que el buscador recuperó. Una respuesta que no cita nada no trae chips.
 - **«¿Qué estudió Henry?» cita «Estudios».** El buscador es léxico y «estudió» no es
   «Estudios»: el fragmento lleva un campo `alias` (los verbos con que se pregunta por él) que
-  pesa ocho veces. Se escribe en `scripts/build-chat-index.mjs`, no en tu contenido.
+  pesa ocho veces. Se escribe en `scripts/build-chat-index.mjs`, no en tu contenido. **Desde el
+  Sprint 025 llevan alias dos secciones más**: «Qué datos guarda este chat…» (solo en inglés, para que
+  «What data do you keep about me?» la encuentre: tu documento dice «stores») y la de cómo cerró la
+  etapa en Vesting (en los dos idiomas: sus palabras de salida, porque su título ya no promete un
+  «por qué»). La lista exacta de secciones con alias la declara
+  `tests/unit/chat-alias-estudios.test.ts`.
+- **El chat no atribuye motivos que tu documento no da.** «¿Por qué salió de Vesting?» se contesta
+  con lo que consta (la etapa cerró en enero de 2025, con el ecosistema y el proceso documentados) y
+  el prompt prohíbe añadir causas o intenciones («el deseo de…», «para pasar a otra etapa…»). La CI
+  fija la regla del prompt; lo que el modelo real hace con ella lo marca la pasada en vivo
+  (columna «Motivos»), y lo lee una persona. Si algún día quieres que el visitante lea un motivo, es
+  tu prosa: lo escribes en `vesting.*.md` y el chat lo dice.
 - **La conversación se queda en el navegador.** Recargar la página, seguir un enlace del menú
   o cambiar de idioma **no la pierde**; si el panel estaba abierto, vuelve abierto (sin
   mover el cursor). Se borra sola **8 horas después del último mensaje**, y el visitante la
@@ -951,8 +967,8 @@ una cifra de «lo que hice» que el documento citado no dice, un conteo del siti
 - **Probar con el proveedor real.** La CI usa un modelo simulado y no puede ver lo que Groq
   de verdad responde. `pnpm test:en-vivo` (solo en tu computador, con tu clave de
   `.env.local` y el plan gratis de Groq) hace las preguntas de la guía en español e inglés y
-  deja `privado/pasada-en-vivo-s24.md` con una marca por respuesta (voz tuya, ausencia
-  afirmada, fuentes citadas). Es de uso excepcional: se corre con tu visto bueno.
+  deja `privado/pasada-en-vivo-s25.md` con una marca por respuesta (voz tuya, ausencia
+  afirmada, motivos que tus documentos quizá no dan, fuentes citadas). Es de uso excepcional: se corre con tu visto bueno.
 
 ### El chat pide nombre y correo, y guarda cada conversación · desde el 2026-09-21 (ADR-024)
 
@@ -1422,4 +1438,5 @@ chat hoy y cuáles traería con la base aprobada. Ese informe **se genera, no se
 | Sprint 021 | **La revisión completa.** La guía de prueba abre con el filtro «Revisión completa»: todo lo pendiente en sentadas de a lo sumo 45 minutos por lugar y aparato, cada prueba una vez, con un sí o un no, una nota y el botón «Copiar mis respuestas»; entran cinco pruebas, catorce se corrigen porque ya no describían el sitio y lo que la CI respalda queda a la vista con su razón. El agente de estudio del AI-103 sale de la vitrina, del a fondo, de las cuentas y del índice del chat por orden de la Fábrica (las cuentas bajan solas desde el disco), con un gate que barre el sitio. |
 | Sprint 023 | **Sentada 1 de la revisión: «Portafolio», la casa y el inglés.** «Vitrina» pasa a llamarse «Portafolio» en textos y direcciones, con un 301 desde las viejas y la lectura de lo que escriben otras casas con la palabra nueva (ver «Una sola palabra: Portafolio»); el desplegable de «Hoja de vida» queda con cinco secciones; «Métodos» baja a después de Skills; el cambio de idioma deja de bajar la página en Safari (diez cambios seguidos, ≤ 4 px); el 404 trae el botón ES/EN; el primer Tab en Safari se explica en la guía y un e2e fija el orden del foco; la ficha de Probeta DS se refresca con su export del S17; la guía v23 avisa si no guarda, restaura desde texto y muestra lo respondido antes en las filas que cambiaron. |
 | Sprint 024 | **Sentada 3 de la revisión: el chat, en tercera persona y sin perder la conversación.** Lo que Henry no hizo, no sabe o no tiene (y el AI-102, el DP-100, el salario, la disponibilidad) recibe una respuesta fija y no llama al modelo; una pregunta ajena no cita ninguna fuente y el panel muestra solo las que la respuesta cita; el chat habla de Henry en tercera persona, también en el texto del panel y en el prompt (con «Microsoft Foundry (antes Azure AI Foundry)»); la conversación se guarda en el navegador (recargar, el menú y el cambio de idioma no la pierden, vence a las 8 h, «Borrar conversación»); «Avisa a Henry» también con la sesión abierta; «¿qué estudió Henry?» cita Estudios (campo `alias`); se adopta la constitución regenerada y el export de Probeta DS del S18; guía v24; `pnpm test:en-vivo`. |
+| Sprint 025 | **Sentada 2 de la revisión: el CV dice lo que pasó, y Proyectos propios con su caso.** CTIC dice «unas ya priorizadas» y que participas en el asesoramiento del diseño de los planes de mejora (CV y corpus); la lección de Ceinfes es tu frase de la retrospectiva; el capítulo de Vesting es «Definiciones comunes, atributos propios»; Banco Pichincha queda con dos modelos, fuga y mora; Cafam cuenta herramientas VBA que complementaban el WMS, no una integración. **Proyectos propios tiene su caso** («El pipeline AI-APPs», de `apps-pipeline`) con su enlace en la Trayectoria, y el **PDF pasa a tres hojas**, la tercera con el puesto entero. El chat cuenta cómo cerró la etapa en Vesting sin atribuirle un motivo (regla 5 del prompt y una marca «Motivos» en la pasada en vivo) y encuentra en inglés lo que guarda («What data do you keep about me?»); la fila del banco sube las preguntas de afuera a 176. Entran los exports de Probeta DS (S19) e Innmobiliaria (S14) y salen del roadmap los dos ítems que esos sprints construyeron («¿Qué pasaría si…? con el impacto en dinero» y «Copiloto del papeleo legal»). Guía v25 con once filas «Mejorado · S25». |
 | Sprint 022 | **Sentada 5 de la revisión: tres agentes fuera, nombres sin «Harness» e investigaciones en pausa.** Salen de la vitrina Agente A, Agente B y el Harness Design Science (14 → 11 agentes); el agente de investigación se llama «Paper Computacional» por un alias de nombre que no edita la ficha (`data/nombres-piezas.yaml`); el frente de Investigaciones queda en pausa con su aviso propio (`enPreparacion`), sin tarjetas, fuera del sitemap y del chat y con sus fichas en 404. Gates: `retiro-piezas`, `nombres-piezas`, la pausa del índice del chat y el e2e de la pausa. La nota de cada fila de la guía admite 2000 caracteres. 

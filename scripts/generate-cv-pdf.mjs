@@ -553,7 +553,7 @@ function columnaIzquierda(doc, cv, labels, yInicial) {
   // (2026-10-04) va después, en su propia sección, para que un ATS no lo lea
   // como un empleador más. Desde el S25 (2026-10-25, OM-11) se imprime ENTERO:
   // su descripción y sus seis logros, como cualquier otra experiencia. El dueño
-  // revirtió así «el PDF cabe en dos páginas» (2026-09-24): con sus logros el
+  // revirtió así el techo de dos páginas (2026-09-24): con sus logros el
   // PDF pasa a tres hojas, y la tercera es la que le da su lugar.
   col.seccion(labels.experiencia);
   for (const rol of cv.trayectoria.filter((h) => !esProyectoPropio(h))) hito(col, rol);

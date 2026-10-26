@@ -5,7 +5,7 @@ import { corpusSimulado } from "../../scripts/evaluar-corpus.mjs";
 
 /**
  * LA PREGUNTA POR LA SALIDA DE VESTING TRAE SU SECCIÓN (S25). El dueño cambió el
- * título de esa sección de «Por qué salí de Vesting…» a «Cómo cerré mi etapa en
+ * título de esa sección, que prometía un «por qué», a «Cómo cerré mi etapa en
  * Vesting…» (decisión 10a: el título prometía un motivo que el párrafo no da). El
  * título viejo era lo que llevaba la pregunta «¿por qué salió?» al fragmento: con el
  * nuevo, «Why did he leave Vesting?» lo dejaba fuera de los 14 primeros y el modelo

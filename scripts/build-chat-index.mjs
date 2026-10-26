@@ -111,8 +111,8 @@ const ALIAS_ESTUDIOS = {
  *   you keep about me?»; la recuperación es léxica y sin raíces. Solo el inglés lo necesita: en
  *   español la pregunta natural ya comparte «guarda». Un alias en las cuatro familias de
  *   privacidad llenaba el contexto de «Datos personales» (medido).
- * · La salida de Vesting (S25): el título «Por qué salí de Vesting…» llevaba la pregunta al
- *   fragmento; con el título del dueño («Cómo cerré mi etapa en Vesting…») «Why did he leave
+ * · La salida de Vesting (S25): el título anterior, que prometía un «por qué», llevaba la
+ *   pregunta al fragmento; con el título del dueño («Cómo cerré mi etapa en Vesting…») «Why did he leave
  *   Vesting?» lo dejaba en el puesto 9 y el modelo contestaba con otras fuentes. El alias
  *   devuelve a ese fragmento las palabras con que se pregunta por la salida.
  */
