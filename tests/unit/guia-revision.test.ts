@@ -939,19 +939,19 @@ describe("la guía S24 · las filas del chat", () => {
 });
 
 /**
- * S25 (el CV dice lo que pasó). Once filas cambiaron de texto: R3, R4, R6, c2, c3, a10, d1, d3,
+ * S25 (el CV dice lo que pasó). Doce filas cambiaron de texto: R3, R4, R6, c2, c3, a10, d1, d3, g1d,
  * o1, q20 y q22. Vuelven a pendiente y muestran lo que el dueño había respondido («Antes del
  * S25»). Las del S24 que no se tocaron siguen siendo del S24: la migración es por versión.
  */
 describe("la guía v25 · el CV, los casos y el PDF", () => {
-  const FILAS_DEL_S25 = ["c2", "c3", "a10", "d1", "d3", "o1", "q20", "q22"];
+  const FILAS_DEL_S25 = ["c2", "c3", "a10", "d1", "d3", "g1d", "o1", "q20", "q22"];
   const FLUJOS_DEL_S25 = [
     "R3 · Dos casos de estudio",
     "R4 · El CV en PDF",
     "R6 · El chat, como visitante nuevo",
   ];
 
-  it("las once filas llevan data-cambio 25, «mejorado» y «Mejorado · S25»", () => {
+  it("las doce filas llevan data-cambio 25, «mejorado» y «Mejorado · S25»", () => {
     const a = abrir();
     for (const id of FILAS_DEL_S25) {
       const li = a.doc.getElementById(id) as HTMLElement;
