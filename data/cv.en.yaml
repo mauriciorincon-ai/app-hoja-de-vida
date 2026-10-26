@@ -274,7 +274,7 @@ proyectos:
           texto: >-
             The fundamental events, identifiers, states and metrics needed shared definitions: a
             session, a request, a response or a state had a single name on the platform. Each
-            client’s or agent’s particulars came in as its own attributes, inside a structure that
+            client's or agent's particulars came in as its own attributes, inside a structure that
             already knew how to take them, without redesigning the platform. What was common made
             comparison possible; what was configurable kept the startup from slowing down.
         - titulo: "Governance by design"

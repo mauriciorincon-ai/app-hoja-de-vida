@@ -527,7 +527,7 @@ function hito(col, rol, { conDescripcion = false } = {}) {
   }
   if (bullets.length > 0) {
     for (const bullet of bullets) col.vineta(ansi(bullet));
-  } else {
+  } else if (!conDescripcion) {
     col.parrafo(ansi(rol.descripcion));
   }
   col.espacio(7);

@@ -12,7 +12,7 @@
  * Qué se vigila: la cifra EXACTA junto al sustantivo que la hace de CTIC. Las
  * formas aprobadas son las de la tabla de abajo, y ninguna lleva el número
  * exacto: «más de 25», «más de 20» (instrumentos), «un tercio», «la mitad»
- * (oportunidades), «unos 20», «unos 15», «una decena», «unas pocas», «las
+ * (oportunidades), «unos 20», «unos 15», «una decena», «unas ya priorizadas», «las
  * primeras», «unos 75».
  *
  * EL 2026-10-04 EL DUEÑO CORRIGIÓ LA CIFRA DE PRODUCTOS. «Yo no creé 40 tableros
@@ -387,7 +387,7 @@ export function problemasDeCticExacta(archivos) {
       if (m) {
         problemas.push(
           `${archivo}:${i + 1}: la fila de tabla dice «${m[1]}» — toda cifra de la Fundación CTIC ` +
-            `se escribe aproximada («más de 40», «unos 20 · unos 15», «unas pocas · las primeras»…).`,
+            `se escribe aproximada («más de 40», «unos 20 · unos 15», «unas ya priorizadas · las primeras»…).`,
         );
       }
     });

@@ -48,8 +48,7 @@ completely different.
 In transport, the phenomenon was how many people were going to board each route in each time band
 of the following month; the error cost extra buses on one route and users without room on
 another; and the result went into a monthly demand report. In banking, the phenomenon was which
-customer might leave, which obligation might stop being paid and which operation concentrated
-risk; the error cost an unnecessary intervention or a lost retention opportunity; and the result
+customer might leave and which obligation might stop being paid; the error cost an unnecessary intervention or a lost retention opportunity; and the result
 went into the prioritization of retention and collection actions.
 
 These two sectors demonstrated that the predictive method can be carried over, but the meaning of
