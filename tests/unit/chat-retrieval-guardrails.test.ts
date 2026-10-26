@@ -199,6 +199,16 @@ describe("system prompt endurecido (grounding-only)", () => {
       expect(prompt).toMatch(/ni expliques por qué una credencial/);
     });
 
+    // S25 (fila B.1 de la pasada en vivo del 024): «¿Por qué salió de Vesting?» salía con un motivo
+    // que el corpus no da («el deseo de entregar una infraestructura madura…»): la tercera persona no
+    // garantiza la fidelidad, el modelo infiere causas. Se pina lo que el prompt MANDA; lo que el
+    // modelo real hace con ello lo marca la pasada en vivo (`tests/en-vivo/marcas.ts`, `motivos`).
+    it("prohíbe atribuir motivos, causas e intenciones que las fuentes no den, y manda contar solo lo que consta", () => {
+      expect(prompt).toMatch(/Tampoco atribuyas motivos, causas ni intenciones/);
+      expect(prompt).toMatch(/que las fuentes no digan/);
+      expect(prompt).toMatch(/cuenta solo lo que consta/);
+    });
+
     it("sin fuentes que respondan, el modelo devuelve EXACTAMENTE el rehúso fijo, en el idioma de la página", () => {
       expect(prompt).toContain(RESPUESTA_REHUSO.es);
       expect(construirSystemPrompt("en", fuentes)).toContain(RESPUESTA_REHUSO.en);
