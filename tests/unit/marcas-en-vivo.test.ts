@@ -70,6 +70,31 @@ describe("ausenciaAfirmada · el rehúso fijo no es una afirmación", () => {
   });
 });
 
+describe("ausenciaAfirmada · la fila de privacidad de la pasada del 025", () => {
+  // La respuesta real de Groq a «What data do you keep about me?» (pasada del 2026-10-25): cada frase
+  // está en `rag-y-el-chat.en.md` («What is not stored: no IP address…», «Who reads it: me, and nobody
+  // else»). El marcador las ve —es un piso—; por eso esa fila, y solo ella, no las cuenta como defecto.
+  const RESPUESTA_REAL =
+    "Conversely, the system does not collect IP addresses, browser identifiers, cross-site tracking data, " +
+    "or the original email verification code. Access to this stored information is limited to the " +
+    "administrator via a secured service key; the public key used by the site cannot retrieve it.";
+
+  it("el marcador ve las frases de la fuente (por eso la fila lo declara)", () => {
+    expect(ausenciaAfirmada(RESPUESTA_REAL, "en")).toEqual([
+      "does not",
+      "cannot",
+    ]);
+  });
+
+  it("solo la fila de privacidad lleva `ausenciasEnLaFuente`", () => {
+    const fuente = readFileSync("tests/en-vivo/en_vivo_chat.test.ts", "utf8");
+    expect(fuente.match(/ausenciasEnLaFuente: true/g) ?? []).toHaveLength(1);
+    expect(fuente).toMatch(
+      /en: "What data do you keep about me\?",[\s\S]{0,400}ausenciasEnLaFuente: true/,
+    );
+  });
+});
+
 describe("marcarRespuesta", () => {
   it("cuenta lo citado, separa lo inventado y ve la voz del dueño", () => {
     const m = marcarRespuesta(

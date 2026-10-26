@@ -83,6 +83,11 @@ type Pregunta = {
   sinCredenciales?: boolean;
   /** La pregunta pide un porqué que el corpus no da: se marcan las causas e intenciones que añada (S25). */
   vigilaMotivos?: boolean;
+  /**
+   * La fuente de esta pregunta ESCRIBE lo que no hay («no se guarda ninguna IP», «nadie más lo lee»):
+   * la marca de ausencia sigue en la columna del informe, pero ahí no es un defecto (S25).
+   */
+  ausenciasEnLaFuente?: boolean;
 };
 
 const PREGUNTAS: Pregunta[] = [
@@ -122,7 +127,8 @@ const PREGUNTAS: Pregunta[] = [
     en: "What data do you keep about me?",
     ruta: "modelo",
     espera:
-      "trae «Qué datos guarda este chat» (también en inglés, con «keep») y contesta con eso, sin afirmar ausencias",
+      "trae «Qué datos guarda este chat» (también en inglés, con «keep») y contesta con eso; lo que no se guarda lo dice la fuente, no el modelo",
+    ausenciasEnLaFuente: true,
   },
   {
     es: "¿Por qué salió de Vesting?",
@@ -302,7 +308,7 @@ function defectosDe(
     d.push("debió declinarse como ajena y llegó al modelo");
   if (!marcas) return d;
   if (marcas.voz.length) d.push(`voz del dueño: ${marcas.voz.join(", ")}`);
-  if (marcas.ausencia.length)
+  if (marcas.ausencia.length && !p.ausenciasEnLaFuente)
     d.push(`ausencia afirmada: ${marcas.ausencia.join(" | ")}`);
   if (marcas.motivos.length)
     d.push(
