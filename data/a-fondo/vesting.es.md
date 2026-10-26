@@ -293,7 +293,7 @@ Obtuve la certificación Microsoft Fabric Analytics Engineer Associate (DP-600) 
 
 Por eso el DP-600 es, en mi perfil, la credencial de esta etapa: certifica la ingeniería de analítica con la que se construyó la plataforma de datos de una startup de agentes. Lo que significa en trabajo concreto, tema por tema, está en el documento de Fabric en la práctica; cómo la preparé, en el de cómo aprendo.
 
-## Por qué salí de Vesting, y el puente que esta experiencia construyó
+## Cómo cerré mi etapa en Vesting, y el puente que esta experiencia construyó
 
 <!-- seccion: por-que-sali-y-el-puente -->
 

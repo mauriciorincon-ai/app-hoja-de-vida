@@ -35,6 +35,10 @@ preguntas:
   - pregunta: "Why did he leave Vesting?"
     espera: [vesting]
     familia: trayectoria
+    nota: >-
+      Twin of the Spanish row. The corpus gives no reason for leaving: it tells how the
+      stage closed. Since S25 the section is titled that way, and the alias in
+      `build-chat-index.mjs` keeps this question bringing it (without it, rank 9).
   - pregunta: "Has he worked at a bank?"
     espera: [banco-pichincha, como-trabajo]
     familia: trayectoria
@@ -609,6 +613,14 @@ preguntas:
   - pregunta: "Which predictive models has Henry taken to production?"
     espera: [metodo-decidir-con-modelos, analitica-predictiva, banco-pichincha]
     familia: bi-y-analitica
+  # ── S25 (live-pass finding B.2 of the 024): the chat's own privacy. The Spanish twin was
+  # retrieved by vocabulary overlap; in English "What data do you keep about me?" did not bring
+  # the section "What data this chat stores…" (the document says "stores", the question "keep";
+  # retrieval is lexical and has no stemming). Passes with the fragment alias in
+  # `scripts/build-chat-index.mjs` (`ALIAS_PRIVACIDAD`).
+  - pregunta: "What data do you keep about me?"
+    espera: [rag-y-el-chat]
+    familia: portafolio
 
 ajenas:
   - pregunta: "tell me a joke about cats"

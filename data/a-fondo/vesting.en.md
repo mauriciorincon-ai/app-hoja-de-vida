@@ -293,7 +293,7 @@ I earned the Microsoft Fabric Analytics Engineer Associate certification (DP-600
 
 That is why DP-600 is, in my profile, the credential of this period: it certifies the analytics engineering with which the data platform of an agent startup was built. What it means in concrete work, topic by topic, is in the document on Fabric in practice; how I prepared for it, in the one on how I learn.
 
-## Why I left Vesting, and the bridge this experience built
+## How I closed my time at Vesting, and the bridge this experience built
 
 <!-- seccion: por-que-sali-y-el-puente -->
 
