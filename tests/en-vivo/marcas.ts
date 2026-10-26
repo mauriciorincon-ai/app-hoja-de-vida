@@ -43,35 +43,42 @@ export function ausenciaAfirmada(texto: string, idioma: Idioma): string[] {
  * LOS MOTIVOS QUE LAS FUENTES NO DAN (S25, fila B.1 de la pasada del 024). «¿Por qué salió
  * de Vesting?» salía con «pues consideró que había cumplido…» y «driven by the desire to hand
  * over…»: el corpus cuenta CÓMO cerró la etapa, no un motivo, y el modelo infiere causas aunque
- * hable en tercera persona. No se mide bien por léxico: es una lista CERRADA de marcas causales
- * y de intención (un piso, no un techo) para que quien lee el informe sepa dónde mirar; la
- * lectura de si el motivo está en las fuentes es humana (el STOP del sprint).
+ * hable en tercera persona. No se mide bien por léxico: es una lista CERRADA de marcas CAUSALES
+ * (porque, debido a, el deseo de, decidió salir…) y de intención sobre la salida, un piso y no un
+ * techo, para que quien lee el informe sepa dónde mirar. Se aplica SOLO a las preguntas que piden
+ * un porqué (`vigilaMotivos` en la matriz de la pasada): «porque» o «because» son corrientes en
+ * cualquier respuesta legítima. La lectura de si el motivo está en las fuentes es humana (el STOP).
  */
-/** Una palabra entera, con Unicode: `\b` de JS no ve «ó» como letra y «consideró» no cerraba. */
+/** Una palabra entera, con Unicode: `\\b` de JS no ve «ó» como letra y «consideró» no cerraba. */
 const entera = (patron: string) =>
   new RegExp(`(?<![\\p{L}\\p{N}])(?:${patron})(?![\\p{L}\\p{N}])`, "giu");
 
 const MOTIVO_ES: RegExp[] = [
+  "porque",
+  "debido\\s+a",
+  "a\\s+causa\\s+de",
   "pues\\s+(?:consideró|decidió|quería|buscaba|prefirió|le\\s+interesaba)",
-  "(?:motivad[oa]|impulsad[oa])\\s+por",
-  "por\\s+(?:el\\s+)?(?:deseo|interés|afán|objetivo)\\s+de",
-  "(?:decidió|quería|buscaba|deseaba|prefirió|optó\\s+por)\\s+(?:salir|dejar|retirarse|irse|pasar|seguir|dedicarse|avanzar|buscar|explorar)",
-  "para\\s+(?:poder\\s+)?(?:dedicarse|buscar|explorar|enfocarse|pasar\\s+a)",
-  "nuev[oa]s?\\s+(?:retos?|desafíos?|oportunidades|etapas?)",
-  "próxim[oa]\\s+(?:etapa|fase|paso)",
+  "motivad[oa]\\s+por",
+  "(?:por|con)\\s+(?:el\\s+)?(?:deseo|interés|afán|fin|objetivo|propósito)\\s+de",
+  "(?:decidió|quería|buscaba|deseaba|prefirió|optó\\s+por)\\s+(?:salir|dejar(?!\\s+de\\b)|retirarse|irse|pasar\\s+a|dedicarse|buscar|explorar)",
+  "nuev[oa]s?\\s+(?:retos?|desafíos?)",
+  "próxim[oa]\\s+(?:etapa|fase)\\s+de\\s+su\\s+(?:carrera|vida)",
   "Esta\\s+decisión\\s+le\\s+permitió",
   "(?:su|la)\\s+(?:salida|decisión)\\s+(?:se\\s+debió|obedeció|respondió|fue\\s+motivada)",
 ].map(entera);
 const MOTIVO_EN: RegExp[] = [
+  "because",
+  "due\\s+to",
   "driven\\s+by",
-  "the\\s+desire\\s+to",
+  "(?:motivated|prompted)\\s+by",
+  "(?:the\\s+)?(?:desire|wish)\\s+to",
   "while\\s+he\\s+pursued",
-  "next\\s+(?:phase|chapter|step)",
+  "(?:decided|chose|wanted|wished|aimed|sought|preferred)\\s+to\\s+(?:leave|move\\s+on|pursue|transition|step\\s+down)",
+  "next\\s+(?:phase|chapter)\\s+of\\s+his\\s+career",
   "new\\s+(?:challenges|opportunities|ventures)",
-  "(?:decided|chose|wanted|wished|aimed|sought|preferred)\\s+to\\s+(?:leave|move|pursue|pass|focus|explore|transition|step)",
-  "in\\s+order\\s+to\\s+(?:pursue|move\\s+on|focus|explore)",
-  "so\\s+(?:that\\s+)?he\\s+could\\s+(?:pursue|move|focus|explore)",
-  "strategic\\s+(?:exit|departure|move)",
+  "in\\s+order\\s+to\\s+(?:pursue|move\\s+on)",
+  "so\\s+(?:that\\s+)?he\\s+could\\s+(?:pursue|move)",
+  "strategic\\s+(?:exit|departure)",
   "allowing\\s+him\\s+to\\s+transition",
 ].map(entera);
 

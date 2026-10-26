@@ -180,6 +180,13 @@ describe("motivoAtribuido · los motivos que el modelo añadió a la salida de V
       "es",
       "Esta decisión le permitió consolidar y transferir su aporte a Vesting",
     ],
+    ["es", "Henry salió de Vesting porque quería enfocarse en nuevos retos"],
+    [
+      "es",
+      "con el deseo de entregar una infraestructura madura y autosuficiente",
+    ],
+    ["es", "Su salida se debió a que la startup ya no dependía de él"],
+    ["es", "decidió dejar Vesting para explorar otras opciones"],
     [
       "en",
       "His departure was therefore driven by the desire to hand over a mature, self-sufficient data and AI infrastructure",
@@ -192,6 +199,8 @@ describe("motivoAtribuido · los motivos que el modelo añadió a la salida de V
       "en",
       "allowing him to transition to new challenges. This strategic exit reflects his focus",
     ],
+    ["en", "He left Vesting because he wanted to move on"],
+    ["en", "He moved on, prompted by a wish to build something new"],
   ] as const)("[%s] «%s» se marca", (idioma, texto) => {
     expect(motivoAtribuido(texto, idioma).length).toBeGreaterThan(0);
   });
@@ -213,12 +222,20 @@ describe("motivoAtribuido · los motivos que el modelo añadió a la salida de V
       "en",
       "an eleven-stage process that enabled the startup to develop new solutions consistently without relying on him [1].",
     ],
-  ] as const)(
-    "[%s] «%s» no se marca (lo que el corpus sí cuenta)",
-    (idioma, texto) => {
-      expect(motivoAtribuido(texto, idioma)).toEqual([]);
-    },
-  );
+    // La marca solo se aplica donde se pide un porqué, pero estas frases corrientes de otras respuestas no deben saltar por las marcas de intención:
+    [
+      "es",
+      "Desarrolla proyectos propios para explorar arquitecturas, agentes y sistemas RAG [2].",
+    ],
+    ["es", "Usa MiniSearch para buscar fragmentos del corpus [1]."],
+    ["es", "La próxima fase del roadmap de Probeta DS [3]."],
+    ["es", "decidió dejar de usar embeddings y recuperar por léxico [2]."],
+    ["en", "He chose to focus on lexical retrieval [1]."],
+    ["en", "The next step in the pipeline is the audit [2]."],
+    ["en", "The schema is validated with Zod [3]."],
+  ] as const)("[%s] «%s» no se marca", (idioma, texto) => {
+    expect(motivoAtribuido(texto, idioma)).toEqual([]);
+  });
 
   it.each(["es", "en"] as const)(
     "[%s] el rehúso fijo, solo, no marca nada",

@@ -617,7 +617,7 @@ preguntas:
   # retrieved by vocabulary overlap; in English "What data do you keep about me?" did not bring
   # the section "What data this chat stores…" (the document says "stores", the question "keep";
   # retrieval is lexical and has no stemming). Passes with the fragment alias in
-  # `scripts/build-chat-index.mjs` (`ALIAS_PRIVACIDAD`).
+  # `scripts/build-chat-index.mjs` (`ALIAS_DE_SECCION`).
   - pregunta: "What data do you keep about me?"
     espera: [rag-y-el-chat]
     familia: portafolio

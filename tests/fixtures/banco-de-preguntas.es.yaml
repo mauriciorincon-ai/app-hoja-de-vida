@@ -760,7 +760,7 @@ preguntas:
   # «What data do you keep about me?» no traía la sección «Qué datos guarda este chat» (el
   # documento dice «stores», la pregunta «keep»; el recuperador es léxico y sin raíces). Esta
   # fila y su gemela exigen `rag-y-el-chat`; el inglés pasa con el alias del fragmento
-  # (`scripts/build-chat-index.mjs`, `ALIAS_PRIVACIDAD`). Sube las preguntas de afuera de 175 a 176.
+  # (`scripts/build-chat-index.mjs`, `ALIAS_DE_SECCION`). Sube las preguntas de afuera de 175 a 176.
   # ─────────────────────────────────────────────────────────────────────
   - pregunta: "¿Qué datos guardan sobre mí?"
     espera: [rag-y-el-chat]

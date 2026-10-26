@@ -81,6 +81,8 @@ type Pregunta = {
   citaDestino?: RegExp;
   /** La respuesta no debe nombrar el AI-102 ni el DP-100 (nadie los preguntó). */
   sinCredenciales?: boolean;
+  /** La pregunta pide un porqué que el corpus no da: se marcan las causas e intenciones que añada (S25). */
+  vigilaMotivos?: boolean;
 };
 
 const PREGUNTAS: Pregunta[] = [
@@ -120,14 +122,15 @@ const PREGUNTAS: Pregunta[] = [
     en: "What data do you keep about me?",
     ruta: "modelo",
     espera:
-      "contesta por la puerta del chat o la declina, sin afirmar ausencias",
+      "trae «Qué datos guarda este chat» (también en inglés, con «keep») y contesta con eso, sin afirmar ausencias",
   },
   {
     es: "¿Por qué salió de Vesting?",
     en: "Why did he leave Vesting?",
     ruta: "modelo",
     espera:
-      "la fuente está en primera persona: la respuesta va en tercera (OM-13)",
+      "cuenta cómo cerró la etapa (enero de 2025, ecosistema y proceso documentados), en tercera persona, SIN añadir un motivo que el documento no da",
+    vigilaMotivos: true,
   },
   {
     es: "¿Tiene el AI-102?",
@@ -399,6 +402,8 @@ describe("la pasada en vivo · el chat contra el proveedor real", () => {
         try {
           const r = await responderConModelo(locale, pregunta);
           const marcas = marcarRespuesta(r.texto, locale, r.fuentes.length);
+          // Los motivos solo se miran donde la pregunta pide un porqué (S25): «porque» sobra en cualquier otra.
+          if (!p.vigilaMotivos) marcas.motivos = [];
           resultados.push({
             ...base,
             usada: "modelo",

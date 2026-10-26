@@ -9,7 +9,7 @@ import { corpusSimulado } from "../../scripts/evaluar-corpus.mjs";
  * recuperaba la sección «Qué datos guarda este chat…» y el modelo rehusaba una
  * pregunta que el sitio sí sabe contestar. Causa: recuperación léxica y sin
  * raíces; el documento dice «stores» y la pregunta, «keep». El arreglo es un
- * alias de esos dos tramos (`build-chat-index.mjs`, `ALIAS_PRIVACIDAD`), solo en
+ * alias de esos dos tramos (`build-chat-index.mjs`, `ALIAS_DE_SECCION`), solo en
  * inglés. Esta prueba fija las tres formulaciones medidas y trae su propio
  * rojo: sin el alias, ninguna de las tres trae la sección.
  */
@@ -93,5 +93,7 @@ describe("el español sigue trayéndola, con o sin alias (no se tocó)", () => {
     const puesto = puestoDeLaSeccion(chunks, pregunta);
     expect(puesto).toBeGreaterThanOrEqual(0);
     expect(puesto).toBeLessThan(TOP_K_CONTEXTO);
+    // Con o sin alias: en español no lo lleva, así que el índice sin alias da lo mismo.
+    expect(puestoDeLaSeccion(sinAlias(chunks), pregunta)).toBe(puesto);
   });
 });

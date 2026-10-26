@@ -126,8 +126,10 @@ const ALIAS_DE_SECCION = [
   {
     seccion: "a-fondo-vesting-por-que-sali-y-el-puente",
     alias: {
-      es: "salió salida salir dejó dejar dejado renunció retiró motivo razón",
-      en: "leave left leaving departure exit quit resign reason",
+      // Sin «motivo», «razón» ni «reason»: arrastraban la sección a «¿cuál fue el motivo para
+      // elegir scikit-learn?» (medido). Con estas, las seis formulaciones de la salida van 1.ª.
+      es: "salió salida dejó renunció",
+      en: "leave left leaving departure quit resign",
     },
   },
 ];

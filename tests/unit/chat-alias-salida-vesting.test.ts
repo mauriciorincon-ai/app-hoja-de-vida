@@ -24,11 +24,27 @@ const PREGUNTAS = {
     "Why did he leave Vesting?",
     "When did he leave Vesting?",
     "Why did Henry quit Vesting?",
+    "Why did he resign from Vesting?",
   ],
   es: [
     "¿Por qué salió de Vesting?",
     "¿Cuándo salió de Vesting?",
     "¿Por qué dejó Vesting?",
+    "¿Por qué renunció a Vesting?",
+  ],
+} as const;
+
+// Preguntas por «el motivo» de OTRA cosa: la sección de la salida no debe colarse entre las cuatro
+// que van al modelo (con «motivo» y «reason» en el alias entraba 3.ª y 4.ª; es donde más importa
+// que el modelo no tenga a mano una salida a la que atribuirle un porqué).
+const AJENAS = {
+  en: [
+    "What is the reason he chose scikit-learn?",
+    "Why did he choose Fabric?",
+  ],
+  es: [
+    "¿Cuál fue el motivo para elegir scikit-learn?",
+    "¿Por qué eligió Fabric?",
   ],
 } as const;
 
@@ -59,6 +75,9 @@ for (const locale of ["es", "en"] as const) {
     });
     it.each(PREGUNTAS[locale])("«%s»: la sección va primera", (pregunta) => {
       expect(puesto(chunks, pregunta)).toBe(0);
+    });
+    it.each(AJENAS[locale])("«%s»: la sección NO se cuela", (pregunta) => {
+      expect(puesto(chunks, pregunta)).toBe(-1);
     });
   });
 }
