@@ -81,7 +81,7 @@ My contribution in this field begins before selecting the model. Industrial Engi
 
 <!-- seccion: estrategia-y-gobierno-de-ia -->
 
-In artificial intelligence strategy and governance I can contribute to establishing the way an organization identifies, evaluates, prioritizes and supervises its initiatives. This covers defining criteria for use cases, responsibilities, risk management, impact assessment, vendor governance, life-cycle monitoring and the adoption of standards such as ISO/IEC 42001. It is what I do today at Fundación CTIC, where out of more than 10 identified opportunities half were evaluated and a few were prioritized.
+In artificial intelligence strategy and governance I can contribute to establishing the way an organization identifies, evaluates, prioritizes and supervises its initiatives. This covers defining criteria for use cases, responsibilities, risk management, impact assessment, vendor governance, life-cycle monitoring and the adoption of standards such as ISO/IEC 42001. It is what I do today at Fundación CTIC, where out of more than 10 identified opportunities half were evaluated and some were already prioritized.
 
 At this level I am not interested in formulating policies disconnected from technical reality. My experience building data platforms and observing agents allows me to understand which controls are applicable, what evidence an architecture can produce and which responsibilities must remain with people. Likewise, my work with senior management —the board of directors at Ceinfes, the founders at Vesting, the Planning Directorate and the sub-directorates at Fundación CTIC— allows me to translate those decisions into conversations about value, risk, institutional capacity and sustainability.
 

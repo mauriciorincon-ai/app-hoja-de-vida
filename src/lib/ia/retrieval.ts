@@ -202,7 +202,10 @@ const pesoDe = (_id: string, _term: string, stored?: Record<string, unknown>) =>
  * en el puesto 4, sin margen; a ×7 en el 2; a ×8 las cuatro van de 1.ª y la fila
  * vieja del banco en 3.ª. Sube el costo: «Estudios» entra al contexto de 3
  * preguntas más que hablan de estudiar («¿por qué estudió ingeniería
- * industrial?»), que es lo que se espera de él. Solo un fragmento lleva alias.
+ * industrial?»), que es lo que se espera de él. Llevan alias «Estudios» y, solo en
+ * inglés, los dos tramos de «Qué datos guarda este chat» (S25), y en los dos
+ * idiomas la sección de la salida de Vesting: las declara
+ * `tests/unit/chat-alias-estudios.test.ts`.
  */
 export const PESO_ALIAS = 8;
 

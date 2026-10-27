@@ -156,7 +156,7 @@ These credentials connect directly with Industrial Engineering. Process optimiza
 
 Industrial Design added a complementary responsibility: the results had to be made understandable. Visualization was not a decorative step at the end of the analysis, but a way of structuring information so that another person could interpret it, question it and use it. That combination of analysis, representation and experience is still present in my Power BI solutions and in the way I design interactions with intelligent applications.
 
-The IBM credentials are not, therefore, an independent collection of courses. They represent the scientific and computational base on which I later built predictive models, analytics platforms and artificial intelligence solutions: on that base I trained with scikit-learn the demand-by-time-band models for TransMilenio and the churn, delinquency and risk models for Banco Pichincha, which reached production with more than 90% accuracy.
+The IBM credentials are not, therefore, an independent collection of courses. They represent the scientific and computational base on which I later built predictive models, analytics platforms and artificial intelligence solutions: on that base I trained with scikit-learn the demand-by-time-band models for TransMilenio and the churn and delinquency models for Banco Pichincha, which reached production with more than 90% accuracy.
 
 ## How the certifications connect: an architecture of capabilities, not a collection of titles
 

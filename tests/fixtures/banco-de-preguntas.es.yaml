@@ -58,9 +58,13 @@ preguntas:
     espera: [vesting]
     familia: trayectoria
     nota: >-
-      El corpus no dice por qué salió, y está bien que no lo diga. Lo que se
-      exige aquí es que traiga el documento de Vesting: con esas fuentes
-      delante, el modelo contesta lo que sí consta y declara lo que no.
+      El corpus no da un motivo de salida: cuenta cómo cerró la etapa (enero de
+      2025, con el ecosistema y el proceso documentados), y su sección se titula
+      así desde el S25. Lo que se exige aquí es que traiga ESA sección (el alias
+      de `build-chat-index.mjs` le devuelve las palabras con que se pregunta por
+      la salida); con esas fuentes delante, el modelo cuenta lo que consta y NO
+      añade motivos (regla 5 del prompt; el banco no lo ve, lo marca la pasada
+      en vivo).
   - pregunta: "¿Ha trabajado en un banco?"
     espera: [banco-pichincha, como-trabajo]
     familia: trayectoria
@@ -750,6 +754,17 @@ preguntas:
   - pregunta: "¿Qué modelos predictivos ha llevado Henry a producción?"
     espera: [metodo-decidir-con-modelos, analitica-predictiva, banco-pichincha]
     familia: bi-y-analitica
+  # ─────────────────────────────────────────────────────────────────────
+  # S25 (fila B.2 de la pasada en vivo del 024): la privacidad del propio chat. Ninguna fila la
+  # vigilaba: en español se recupera por coincidencia de vocabulario («guarda»), y en inglés
+  # «What data do you keep about me?» no traía la sección «Qué datos guarda este chat» (el
+  # documento dice «stores», la pregunta «keep»; el recuperador es léxico y sin raíces). Esta
+  # fila y su gemela exigen `rag-y-el-chat`; el inglés pasa con el alias del fragmento
+  # (`scripts/build-chat-index.mjs`, `ALIAS_DE_SECCION`). Sube las preguntas de afuera de 175 a 176.
+  # ─────────────────────────────────────────────────────────────────────
+  - pregunta: "¿Qué datos guardan sobre mí?"
+    espera: [rag-y-el-chat]
+    familia: portafolio
 
 # Preguntas AJENAS. Cada una declara qué le hace el guardrail de entrada, y hay
 # DOS resultados legítimos —confundirlos sería mentir sobre lo que el guardrail

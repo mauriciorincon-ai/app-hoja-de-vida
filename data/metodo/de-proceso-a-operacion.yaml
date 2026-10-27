@@ -591,11 +591,11 @@ bloques:
           en: "At Ceinfes, in 2018, the digitization of some 250 sheets per day was treated as a line of stations —2 for scanning, plus preparation, sorting, validation and reordering—; about 10% of the sheets required manual capture, and that station set the pace of the whole line."
         corpus: [procesos-y-simulacion]
         href: /proyectos/ceinfes
-      - nombre: { es: "Cafam: integraciones en VBA con dueño y con límite", en: "Cafam: VBA integrations with an owner and a limit" }
+      - nombre: { es: "Cafam: herramientas en VBA con dueño y con límite", en: "Cafam: VBA tools with an owner and a limit" }
         nivel: uso-real
         texto:
-          es: "En Cafam, en 2020, la integración del centro de distribución con el WMS se resolvió con aplicaciones en VBA —disponibles, útiles y mantenibles en esa organización— y no con una plataforma nueva: subieron un 15 % la automatización, contribuyeron a bajar un 50 % los errores de datos y siguieron corriendo después de la salida a producción, como piezas con dueño y con límite."
-          en: "At Cafam, in 2020, the integration of the distribution center with the WMS was solved with VBA applications —available, useful and maintainable in that organization— and not with a new platform: they raised automation by 15%, helped cut data errors by 50% and kept running after go-live, as pieces with an owner and a limit."
+          es: "En Cafam, en 2020, lo que el WMS no cubría en el centro de distribución se resolvió con herramientas en VBA que lo complementaban —disponibles, útiles y mantenibles en esa organización— y no con una plataforma nueva: subieron un 15 % la automatización, contribuyeron a bajar un 50 % los errores de datos y siguieron corriendo después de la salida a producción, como piezas con dueño y con límite."
+          en: "At Cafam, in 2020, what the WMS did not cover at the distribution center was solved with VBA tools that complemented it —available, useful and maintainable in that organization— and not with a new platform: they raised automation by 15%, helped cut data errors by 50% and kept running after go-live, as pieces with an owner and a limit."
         corpus: [como-trabajo, cafam]
         href: /proyectos/cafam
       - nombre: { es: "Ceinfes: Kanban para las solicitudes, Scrum para los proyectos", en: "Ceinfes: Kanban for requests, Scrum for projects" }

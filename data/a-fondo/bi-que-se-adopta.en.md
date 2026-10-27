@@ -446,7 +446,7 @@ decisions have a frequency, urgency or structure that requires another kind of i
 
 An exceptional condition that needs immediate attention may be better resolved through an alert.
 A repetitive decision may require an application that guides the action. A need for anticipation
-may need a predictive model: at Banco Pichincha, churn, delinquency and risk were not handled
+may need a predictive model: at Banco Pichincha, churn and delinquency were not handled
 with one more dashboard but with scikit-learn models that reached production with more than 90%
 accuracy; at TransMilenio, demand by time band with a model that stayed in use after I left. A contextual
 query task can benefit from an agent with access to authorized sources, like the 11 agents in my

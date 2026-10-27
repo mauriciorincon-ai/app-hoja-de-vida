@@ -7,7 +7,7 @@ import { defineConfig } from "vitest/config";
  * de TODA otra suite: ni `pnpm test`, ni la CI, ni `playwright` la ven. Solo
  * `pnpm test:en-vivo` la corre, en la máquina del dueño y con su «sí»: llama al
  * proveedor REAL con la clave de `.env.local` (plan Free de Groq, sin factura
- * posible) y deja el resultado en `privado/pasada-en-vivo-s24.md`.
+ * posible) y deja el resultado en `privado/pasada-en-vivo-s25.md`.
  */
 export default defineConfig({
   test: {

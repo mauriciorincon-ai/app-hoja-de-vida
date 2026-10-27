@@ -12,7 +12,7 @@
  * Qué se vigila: la cifra EXACTA junto al sustantivo que la hace de CTIC. Las
  * formas aprobadas son las de la tabla de abajo, y ninguna lleva el número
  * exacto: «más de 25», «más de 20» (instrumentos), «un tercio», «la mitad»
- * (oportunidades), «unos 20», «unos 15», «una decena», «unas pocas», «las
+ * (oportunidades), «unos 20», «unos 15», «una decena», «unas ya priorizadas», «las
  * primeras», «unos 75».
  *
  * EL 2026-10-04 EL DUEÑO CORRIGIÓ LA CIFRA DE PRODUCTOS. «Yo no creé 40 tableros
@@ -28,7 +28,7 @@
  * | tableros                        | sin cifra propia: «entre ellos»      | no figure of their own: «among them» |
  * | 23 instrumentos (8 · 15)        | más de 20 · un tercio · el resto     | more than 20 · a third · the rest   |
  * | 12 oportunidades · 7 evaluadas  | más de 10 · la mitad                 | more than 10 · half of them         |
- * | 3 priorizadas · 2 documentadas  | unas pocas · las primeras            | a few · the first ones              |
+ * | 3 priorizadas · 2 documentadas  | unas ya priorizadas · las primeras   | some already prioritized · the first ones |
  * | 20 líderes · 15 procesos        | unos 20 · unos 15                    | some 20 · some 15                   |
  * | 10 planes de análisis           | una decena                           | some ten                            |
  * | 75 usuarios                     | unos 75                              | some 75                             |
@@ -86,7 +86,7 @@ export const CIFRAS_EXACTAS_DE_CTIC = [
   },
   {
     patron: /\b3\s+(?:iniciativas priorizadas|prioritized initiatives)\b/gi,
-    que: "3 priorizadas → «unas pocas»",
+    que: "3 priorizadas → «unas ya priorizadas»",
   },
   {
     patron: /\b8\s+(?:son\s+|are\s+|están\s+)?(?:terminados|finished)\b/gi,
@@ -387,7 +387,7 @@ export function problemasDeCticExacta(archivos) {
       if (m) {
         problemas.push(
           `${archivo}:${i + 1}: la fila de tabla dice «${m[1]}» — toda cifra de la Fundación CTIC ` +
-            `se escribe aproximada («más de 40», «unos 20 · unos 15», «unas pocas · las primeras»…).`,
+            `se escribe aproximada («más de 40», «unos 20 · unos 15», «unas ya priorizadas · las primeras»…).`,
         );
       }
     });

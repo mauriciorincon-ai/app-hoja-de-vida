@@ -23,7 +23,7 @@ import { esTemaAjeno } from "@/lib/ia/tema-ajeno";
 import { marcarRespuesta, type Marcas } from "./marcas";
 
 /**
- * LA PASADA EN VIVO DEL CHAT (S24, reglas 24 y 25). El banco y el golden NO
+ * LA PASADA EN VIVO DEL CHAT (S24, reglas 24 y 25; ampliada en el S25 con la marca de motivos). El banco y el golden NO
  * llaman al modelo, y la CI usa uno simulado: nada de lo que se prueba allí
  * puede ver si el modelo REAL habla en tercera persona, si afirma una ausencia
  * o si cita lo que usó. Esta pasada sí lo mira, UNA vez, con las preguntas de la
@@ -37,7 +37,7 @@ import { marcarRespuesta, type Marcas } from "./marcas";
  *  · LEE   `.env.local` (solo las claves del chat, en memoria; JAMÁS se imprimen),
  *          `data/` y `content/` (para regenerar el índice, igual que el build);
  *  · ESCRIBE `public/chat-index.{es,en}.json` (artefactos de build, ignorados por
- *          git) y `privado/pasada-en-vivo-s24.md` (ignorado por git, modo 600);
+ *          git) y `privado/pasada-en-vivo-s25.md` (ignorado por git, modo 600);
  *  · LLAMA al proveedor del chat — Groq, plan Free (≈ US$0, sin factura posible) —
  *          una vez por pregunta que llega al modelo (16 en total);
  *  · NO cruza la puerta ni el registro del chat: no hay sesión, no escribe en
@@ -54,7 +54,7 @@ const SECO = process.env.EN_VIVO_SECO === "1";
 const INFORME = path.join(
   RAIZ,
   "privado",
-  SECO ? "pasada-en-vivo-s24-en-seco.md" : "pasada-en-vivo-s24.md",
+  SECO ? "pasada-en-vivo-s25-en-seco.md" : "pasada-en-vivo-s25.md",
 );
 const PAUSA_MS = SECO ? 0 : 20_000; // el plan Free corta a 8 000 tokens/min
 const proveedor = () =>
@@ -81,6 +81,13 @@ type Pregunta = {
   citaDestino?: RegExp;
   /** La respuesta no debe nombrar el AI-102 ni el DP-100 (nadie los preguntó). */
   sinCredenciales?: boolean;
+  /** La pregunta pide un porqué que el corpus no da: se marcan las causas e intenciones que añada (S25). */
+  vigilaMotivos?: boolean;
+  /**
+   * La fuente de esta pregunta ESCRIBE lo que no hay («no se guarda ninguna IP», «nadie más lo lee»):
+   * la marca de ausencia sigue en la columna del informe, pero ahí no es un defecto (S25).
+   */
+  ausenciasEnLaFuente?: boolean;
 };
 
 const PREGUNTAS: Pregunta[] = [
@@ -120,14 +127,16 @@ const PREGUNTAS: Pregunta[] = [
     en: "What data do you keep about me?",
     ruta: "modelo",
     espera:
-      "contesta por la puerta del chat o la declina, sin afirmar ausencias",
+      "trae «Qué datos guarda este chat» (también en inglés, con «keep») y contesta con eso; lo que no se guarda lo dice la fuente, no el modelo",
+    ausenciasEnLaFuente: true,
   },
   {
     es: "¿Por qué salió de Vesting?",
     en: "Why did he leave Vesting?",
     ruta: "modelo",
     espera:
-      "la fuente está en primera persona: la respuesta va en tercera (OM-13)",
+      "cuenta cómo cerró la etapa (enero de 2025, ecosistema y proceso documentados), en tercera persona, SIN añadir un motivo que el documento no da",
+    vigilaMotivos: true,
   },
   {
     es: "¿Tiene el AI-102?",
@@ -221,7 +230,9 @@ beforeAll(() => {
   if (!modelo) throw new Error("No se pudo resolver el proveedor del chat.");
   // Se declara el árbol ANTES de tocar nada (regla 17-bis).
   const lineas = [
-    SECO ? "── ENSAYO EN SECO · S24 (modelo simulado, sin red) ──" : "── PASADA EN VIVO · S24 ──",
+    SECO
+      ? "── ENSAYO EN SECO · S25 (modelo simulado, sin red) ──"
+      : "── PASADA EN VIVO · S25 ──",
     SECO
       ? "  lee:     data/ · content/ (no lee .env.local en el ensayo en seco)"
       : `  lee:     .env.local (${cargadas.length ? cargadas.join(", ") : "variables ya en el entorno"}; los valores no se imprimen) · data/ · content/`,
@@ -297,8 +308,12 @@ function defectosDe(
     d.push("debió declinarse como ajena y llegó al modelo");
   if (!marcas) return d;
   if (marcas.voz.length) d.push(`voz del dueño: ${marcas.voz.join(", ")}`);
-  if (marcas.ausencia.length)
+  if (marcas.ausencia.length && !p.ausenciasEnLaFuente)
     d.push(`ausencia afirmada: ${marcas.ausencia.join(" | ")}`);
+  if (marcas.motivos.length)
+    d.push(
+      `motivo que las fuentes quizá no dan (léelo): ${marcas.motivos.join(" | ")}`,
+    );
   if (marcas.inventadas.length)
     d.push(`cita [${marcas.inventadas.join(", ")}] que no existe`);
   if (
@@ -393,6 +408,8 @@ describe("la pasada en vivo · el chat contra el proveedor real", () => {
         try {
           const r = await responderConModelo(locale, pregunta);
           const marcas = marcarRespuesta(r.texto, locale, r.fuentes.length);
+          // Los motivos solo se miran donde la pregunta pide un porqué (S25): «porque» sobra en cualquier otra.
+          if (!p.vigilaMotivos) marcas.motivos = [];
           resultados.push({
             ...base,
             usada: "modelo",
@@ -445,7 +462,7 @@ afterAll(() => {
     { entrada: 0, salida: 0 },
   );
   const L: string[] = [];
-  L.push("# Pasada en vivo del chat · Sprint 024");
+  L.push("# Pasada en vivo del chat · Sprint 025");
   L.push("");
   L.push(
     `Proveedor: ${modelo?.proveedor ?? "?"} · modelo: ${modelo?.modelId ?? "?"} · ` +
@@ -454,14 +471,15 @@ afterAll(() => {
   );
   L.push("");
   L.push(
-    "| Idioma | Pregunta | Ruta | Voz del dueño | Ausencia | Fuentes citadas | Defectos |",
+    "| Idioma | Pregunta | Ruta | Voz del dueño | Ausencia | Motivos | Fuentes citadas | Defectos |",
   );
-  L.push("|---|---|---|---|---|---|---|");
+  L.push("|---|---|---|---|---|---|---|---|");
   for (const r of resultados) {
     const m = r.marcas;
     L.push(
       `| ${r.locale} | ${r.pregunta} | ${r.usada} | ${m ? (m.voz.length ? m.voz.join(", ") : "—") : "—"} | ` +
         `${m ? (m.ausencia.length ? m.ausencia.join(" · ") : "—") : "—"} | ` +
+        `${m ? (m.motivos.length ? m.motivos.join(" · ") : "—") : "—"} | ` +
         `${m ? (m.citadas.length ? m.citadas.map((n) => `[${n}]`).join(" ") : "ninguna") : "—"} | ` +
         `${r.defectos.length ? r.defectos.join("; ") : "ninguno"} |`,
     );

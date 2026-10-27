@@ -50,7 +50,11 @@ import {
   nombresDeDestinos,
 } from "./destinos.mjs";
 import { chunksDeFichas, leerFichas } from "./fichas-al-indice.mjs";
-import { chunksDeMetodo, leerMetodo, problemasDeEvidencia } from "./metodo-al-indice.mjs";
+import {
+  chunksDeMetodo,
+  leerMetodo,
+  problemasDeEvidencia,
+} from "./metodo-al-indice.mjs";
 
 const ROOT = process.cwd();
 // Los tests pasan un directorio temporal como argv[2] (patrón del script del PDF)
@@ -96,6 +100,39 @@ const ALIAS_ESTUDIOS = {
   es: "estudió estudiar estudiado estudia estudié",
   en: "study studied studying studies",
 };
+
+/**
+ * Alias de SECCIONES del a fondo (S25): las palabras con que se pregunta por ellas y que ellas
+ * no dicen. El alias va a TODOS los tramos de la sección (`~1`, `~2`…) y a ningún otro
+ * fragmento. El contenido no se toca: aquí vive, igual que `ALIAS_ESTUDIOS`.
+ *
+ * · Privacidad del chat (fila B.2 de la pasada en vivo del 024): la sección «Qué datos guarda
+ *   este chat…» (`rag-y-el-chat`) dice «stores»/«stored» y el visitante pregunta «What data do
+ *   you keep about me?»; la recuperación es léxica y sin raíces. Solo el inglés lo necesita: en
+ *   español la pregunta natural ya comparte «guarda». Un alias en las cuatro familias de
+ *   privacidad llenaba el contexto de «Datos personales» (medido).
+ * · La salida de Vesting (S25): el título anterior, que prometía un «por qué», llevaba la
+ *   pregunta al fragmento; con el título del dueño («Cómo cerré mi etapa en Vesting…») «Why did he leave
+ *   Vesting?» lo dejaba en el puesto 9 y el modelo contestaba con otras fuentes. El alias
+ *   devuelve a ese fragmento las palabras con que se pregunta por la salida.
+ */
+const ALIAS_DE_SECCION = [
+  {
+    seccion: "a-fondo-rag-y-el-chat-que-datos-guarda-el-chat",
+    alias: {
+      en: "keep keeps kept hold holds held save saves saved retain retains",
+    },
+  },
+  {
+    seccion: "a-fondo-vesting-por-que-sali-y-el-puente",
+    alias: {
+      // Sin «motivo», «razón» ni «reason»: arrastraban la sección a «¿cuál fue el motivo para
+      // elegir scikit-learn?» (medido). Con estas, las seis formulaciones de la salida van 1.ª.
+      es: "salió salida dejó renunció",
+      en: "leave left leaving departure quit resign",
+    },
+  },
+];
 
 /**
  * @param {{ cv: any, apps: any, aFondo: any[], locale: string,
@@ -269,6 +306,13 @@ export function buildChunks({
   // Solo los documentos APROBADOS entran al índice: un borrador es material de
   // trabajo del dueño, no evidencia que el chat pueda citar.
   chunks.push(...chunksDeAFondo(aFondo ?? [], L.aFondo));
+  for (const { seccion, alias } of ALIAS_DE_SECCION) {
+    if (!alias[locale]) continue;
+    for (const c of chunks) {
+      if (c.id === seccion || c.id.startsWith(`${seccion}~`))
+        c.alias = alias[locale];
+    }
+  }
   // Las 32 piezas de la vitrina, con sus fichas (a fondo v2, D3): promesa,
   // cifras con procedencia, límites y «nunca», citando a la página de cada
   // pieza. El texto es el que mandó cada casa, en español, en los dos índices.
@@ -305,8 +349,11 @@ function main() {
     detener("«Métodos» (data/metodo/)", [e.message]);
   }
   const catalogo = catalogoDeDestinos();
-  const enlacesRotos = problemasDeEvidencia(metodo.piezas, (d) => destinoExiste(d, catalogo));
-  if (enlacesRotos.length > 0) detener("«Métodos»: enlaces de la evidencia", enlacesRotos);
+  const enlacesRotos = problemasDeEvidencia(metodo.piezas, (d) =>
+    destinoExiste(d, catalogo),
+  );
+  if (enlacesRotos.length > 0)
+    detener("«Métodos»: enlaces de la evidencia", enlacesRotos);
 
   // --- ADUANA DEL CANAL «A FONDO» -----------------------------------------
   const docs = {};

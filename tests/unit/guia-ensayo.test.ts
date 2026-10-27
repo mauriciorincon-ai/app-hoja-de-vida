@@ -258,20 +258,22 @@ describe("la guía · el sí/no", () => {
     expect(calc("ensayo-no")).toBe("1");
   });
 
-  it("al recargar, el sí/no y las notas vuelven como se dejaron", () => {
+  it("al recargar, el sí/no y las notas vuelven como se dejaron (en una fila que ningún sprint reescribió)", () => {
     const { doc, calc } = abrir({
       [`${NS}r2`]: "no",
-      [`${NS}r3`]: "si",
+      [`${NS}r5`]: "si",
       [`${NS}a4`]: "no",
       [`${NS}a4:nota`]: "el logo se ve borroso",
     });
     expect((doc.getElementById("r2-no") as HTMLInputElement).checked).toBe(
       true,
     );
-    expect((doc.getElementById("r3-si") as HTMLInputElement).checked).toBe(
+    expect((doc.getElementById("r5-si") as HTMLInputElement).checked).toBe(
       true,
     );
-    expect((doc.getElementById("a4-no") as HTMLInputElement).checked).toBe(true);
+    expect((doc.getElementById("a4-no") as HTMLInputElement).checked).toBe(
+      true,
+    );
     expect(
       (doc.querySelector('[data-nota-de="a4"]') as HTMLTextAreaElement).value,
     ).toBe("el logo se ve borroso");
@@ -311,7 +313,9 @@ describe("la guía · todo control dibujado tiene su script (regla 22)", () => {
       b.click();
       expect(b.classList.contains("activo"), b.textContent!).toBe(true);
     }
-    const notas = [...doc.querySelectorAll<HTMLTextAreaElement>("textarea.p-nota")];
+    const notas = [
+      ...doc.querySelectorAll<HTMLTextAreaElement>("textarea.p-nota"),
+    ];
     expect(notas.length).toBeGreaterThan(100);
     for (const n of notas.slice(0, 5)) {
       n.value = "una nota";

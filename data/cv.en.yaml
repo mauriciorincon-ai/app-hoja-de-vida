@@ -46,7 +46,7 @@ trayectoria:
       Analytics, data governance and AI strategy (ISO/IEC 42001) for
       administrative and clinical decisions in healthcare.
     bullets:
-      - "I lead the structuring of the institutional AI strategy under UNE-ISO/IEC 42001:2025: more than 10 opportunities identified, half of them evaluated and a few prioritized."
+      - "I lead the structuring of the institutional AI strategy under UNE-ISO/IEC 42001:2025: more than 10 opportunities identified, half of them evaluated and some already prioritized."
       - "more than 25 analytics products in Power BI for administrative and clinical leaders: some 20 leaders of some 15 processes and about 75 users."
       - "Institutional data governance and quality, under Colombia's habeas data regime and Law 1581."
       - "Process-based control dashboards and improvement plans: close to 60% less effort preparing information (estimated on my own work)."
@@ -64,6 +64,7 @@ trayectoria:
     rol: "Generative AI Engineer"
     organizacion: "Independent projects"
     tipo: "proyectos-propios"
+    proyecto: "apps-pipeline"
     descripcion: >-
       I develop my own engineering and artificial intelligence projects to
       explore architectures, agents, RAG systems and evaluation mechanisms.
@@ -103,7 +104,7 @@ trayectoria:
     bullets:
       - "Led a 5-person BI team: dashboards adopted by 50+ users, driving +25% in decision-making."
       - "ETL process optimization in Power Query: −35% in analysis times."
-      - "Churn, delinquency and risk models with scikit-learn: >90% accuracy and up to +35% in predictions, by each model's own metric."
+      - "Churn and delinquency models with scikit-learn: >90% accuracy and up to +35% in predictions, by each model's own metric."
       - "Semantic model optimization with DAX Studio and Tabular Editor."
       - "Co-led the area's data governance."
       - "Analytics training program for 12 professionals: +20% productivity in preparing and using information."
@@ -131,7 +132,7 @@ trayectoria:
       - "Led a 20-person team —14 from Cafam and 6 from Oracle— through six months of WMS implementation testing: −25% errors and +15% operational efficiency."
       - "Modeled the process in BPMN with Bizagi and simulated dispatch in FlexSim before testing."
       - "Implementation-control BI: +50% precision in follow-up, for 15+ users."
-      - "VBA integrations with the WMS: +15% automation and −50% data errors; and more than 10 hours a week of manual work automated."
+      - "VBA tools that complemented the WMS: +15% automation and −50% data errors; and more than 10 hours a week of manual work automated."
       - "SQL data quality with an 80-20 reconciliation by medicine: +20%."
   - periodo: "2018 — 2020"
     rol: "Operations Analyst"
@@ -269,11 +270,13 @@ proyectos:
             processing over a lakehouse on OneLake, with pipelines that received the n8n flows
             orchestrating the agents. The key decision was normalizing events at ingestion:
             sessions, requests, responses, times, states and token cost, the same for all 27 agents.
-        - titulo: "What is common and what is configurable"
+        - titulo: "Shared definitions, own attributes"
           texto: >-
-            A new agent or client could not require a new table for what already had a name on the
-            platform, and it could bring its own attributes. The common part was the condition for
-            comparing; the configurable part, the condition for not slowing the startup down.
+            The fundamental events, identifiers, states and metrics needed shared definitions: a
+            session, a request, a response or a state had a single name on the platform. Each
+            client's or agent's particulars came in as its own attributes, inside a structure that
+            already knew how to take them, without redesigning the platform. What was common made
+            comparison possible; what was configurable kept the startup from slowing down.
         - titulo: "Governance by design"
           texto: >-
             I defined the governance to integrate client and system data with an event contract
@@ -345,9 +348,9 @@ proyectos:
             I optimized the Power Query ETL by separating connection, preparation and model tables,
             with early row and column selection and validations before the model. The −35% in
             analysis times came from structural decisions, not from a performance trick.
-        - titulo: "Churn, delinquency and risk in production"
+        - titulo: "Churn and delinquency in production"
           texto: >-
-            I trained and deployed churn, delinquency and risk models with scikit-learn, evaluated
+            I trained and deployed churn and delinquency models with scikit-learn, evaluated
             by segment and by what each error costs: calling a client who was not leaving costs a
             call; not calling the one who leaves costs the client.
         - titulo: "Training and governance"
@@ -435,7 +438,7 @@ proyectos:
     nombre: "Leading the quality of a WMS — Cafam (2020–2021)"
     resumen: >-
       A team of 20 through implementation testing: −25% errors and +15%
-      efficiency; control BI (+50% precision, 15+ users) and VBA integrations
+      efficiency; control BI (+50% precision, 15+ users) and VBA tools
       (−50% data errors).
     stack: ["WMS", "BI", "VBA"]
     casestudy:
@@ -460,7 +463,7 @@ proyectos:
         - valor: 50
           prefijo: "−"
           sufijo: "%"
-          etiqueta: "data errors with the VBA integrations"
+          etiqueta: "data errors with the VBA tools"
       capitulos:
         - titulo: "First the process, then the system"
           texto: >-
@@ -477,11 +480,12 @@ proyectos:
             I built the control BI for the project itself for more than 15 users, from directors to
             distribution-center coordinators: coverage, defects, recurrences and retests visible
             every day, not a feeling of progress.
-        - titulo: "Integrations with an owner and a limit"
+        - titulo: "VBA tools with an owner and a limit"
           texto: >-
-            I developed VBA integrations with the WMS to replace manual loads. Each peripheral piece
-            knew who maintained it, what it depended on and when it would be retired: without those
-            three conditions, a bridge becomes a parallel system.
+            I built VBA tools that complemented functionality the WMS lacked, without integrating
+            with it, to replace manual loads. Each peripheral piece knew who maintained it, what it
+            depended on and when it would be retired: without those three conditions, a piece like
+            that becomes a parallel system.
         - titulo: "The 80-20 reconciliation in SQL"
           texto: >-
             At the start, none of the main medicines matched between the WMS and the source system.
@@ -490,7 +494,7 @@ proyectos:
       impacto:
         - "−25% errors and +15% operational efficiency across the implementation."
         - "+50% precision in implementation follow-up, with a control BI adopted by 15+ users."
-        - "+15% automation and −50% data errors with the VBA integrations."
+        - "+15% automation and −50% data errors with the VBA tools."
         - "+20% data quality via SQL."
       leccion: >-
         Modernizing does not consist of replacing everything at once, but of designing
@@ -540,12 +544,12 @@ proyectos:
         - titulo: "Dashboards by process, not by area"
           texto: >-
             I organize dashboards by process because an area can show good indicators while the
-            process crossing it piles up waits and rework. I design the improvement plans; the
-            owners of each process carry them out.
+            process crossing it piles up waits and rework. I take part in advising on the design
+            of the improvement plans; the owners of each process carry them out.
         - titulo: "The institutional AI strategy"
           texto: >-
             I lead the structuring of the AI strategy under UNE-ISO/IEC 42001:2025: more than 10 opportunities identified, half of them
-            formally evaluated and a few prioritized. Not every problem needs AI, and not every AI
+            formally evaluated and some already prioritized. Not every problem needs AI, and not every AI
             initiative needs an agent.
         - titulo: "A management system that can be demonstrated"
           texto: >-
@@ -556,7 +560,7 @@ proyectos:
       impacto:
         - "more than 25 analytical products in use for some 20 leaders across some 15 processes and about 75 users."
         - "About 60% less effort preparing information (estimated on my own work); some ten analysis plans under follow-up."
-        - "more than 10 AI opportunities identified, half of them evaluated, a few prioritized and the first ones documented."
+        - "more than 10 AI opportunities identified, half of them evaluated, some already prioritized and the first ones documented."
         - "Institutional data quality as a practice, not an event."
       leccion: >-
         My purpose is not to get the organization to use more artificial intelligence,
@@ -694,8 +698,8 @@ proyectos:
         - "Weekly reports to the board that ended in incentive programs and the redesign of positions, processes and software."
         - "Process-based management with Kanban and Scrum, and a first governance of access to students' results."
       leccion: >-
-        Inglopres taught me to structure an operation; Ceinfes taught me to run it
-        through information.
+        Seen in retrospect, Ceinfes was the experience in which I learned to run an
+        operation as a system of interdependent flows.
   - slug: "inglopres"
     nombre: "Building the data no one had — Inglopres (2015–2017)"
     resumen: >-
@@ -762,6 +766,71 @@ proyectos:
         The problem I was solving in 2016 —that the decision needed a piece of data
         nobody had built— is exactly the same one I solve today, with other tools and
         another scale.
+
+  - slug: "apps-pipeline"
+    nombre: "The AI-APPs pipeline — Independent projects (2024–today)"
+    resumen: >-
+      The AI-APPs pipeline: applications, agents, research lines and dashboards built with two
+      houses, a factory agent, four CI jobs, a sheet contract generated from Zod, a real cost of
+      US$0 a month and two rules: code first, and every control is demonstrated by failing.
+    stack: ["Claude Code", "Next.js", "Zod", "Supabase", "gitleaks"]
+    destacado: false
+    casestudy:
+      titular: "A governed factory to build applications, agents, research lines and dashboards: two houses, one writer per house and written approvals, so that the value also stays in the ability to build the next piece."
+      contexto: >-
+        The portfolio is not built as a succession of independent projects: applications, agents,
+        research lines and dashboards come out of one pipeline, governed by common rules to
+        prioritize, define, build, validate, document and publish each piece.
+      reto: >-
+        Taking advantage of artificial intelligence without diluting responsibility for the result:
+        nobody being the bridge between the plan and the code anymore, and quality not depending on
+        remembering how the previous piece was built.
+      cifras:
+        - valor: 2
+          etiqueta: "houses, with a single writer each"
+        - valor: 2
+          etiqueta: "written approvals before building each application"
+        - valor: 4
+          etiqueta: "continuous integration jobs on every change"
+      capitulos:
+        - titulo: "Two houses, one writer per house"
+          texto: >-
+            A private planning house keeps the brief, the product vision, the sprints with their plan
+            and their retrospective, the method and the standards; each app's repository keeps the code,
+            the tests and the summary of each sprint. The planning house reads the repositories
+            read-only and never writes in them; synchronization is a read of git, not copy and paste.
+        - titulo: "Two approvals before the code"
+          texto: >-
+            No application advances without two written approvals: the current priority, which shows why
+            that piece deserves capacity over others, and the product vision, with its purpose, its
+            users, all its features and its limits. Without them, the pipeline refuses to plan or to
+            open a sprint: conceiving is cheap; building is earned.
+        - titulo: "A factory agent with human owners"
+          texto: >-
+            A factory agent keeps the state of the initiatives, verifies the inputs, applies advancement
+            rules and identifies documentation gaps. It cannot approve a priority, modify a purpose,
+            accept a risk or declare a piece finished, and it does not edit the method or the kit
+            without my explicit approval.
+        - titulo: "Code first, AI when it is justified"
+          texto: >-
+            Generative artificial intelligence does not come in by default: I must first show what
+            demands interpretation, generation or contextual retrieval, and why a deterministic solution
+            is not enough; activating it requires a written architecture decision. Where there is a
+            model, it is an optional feature, with a deterministic fallback.
+        - titulo: "Every control is demonstrated by failing"
+          texto: >-
+            Almost all the rules were born from a red. A secrets sweep that reported "all good" let a
+            weak bait through twice; since then, a gate that was never seen failing does not count.
+            Every change goes through four continuous integration jobs, and every cycle closes with a
+            summary that the planning house reads before planning the next one.
+      impacto:
+        - "Applications, agents, research lines and dashboards built with the same method, at a real cost of US$0 a month."
+        - "Nobody is the bridge anymore: the previous flow cost between 4 and 8 hours of coordination per sprint."
+        - "What one sprint learns in one app travels stamped to the next, in a versioned kit."
+        - "Decisions of purpose, priority, risk and acceptance remain explicitly in human hands."
+      leccion: >-
+        The goal is for the value not to remain only in the finished product, but also in the
+        ability to build the next one with greater clarity, consistency and speed.
 
 certificaciones:
   # AI-102 left the list on 2026-09-10: Microsoft discontinued the certification (owner's decision).

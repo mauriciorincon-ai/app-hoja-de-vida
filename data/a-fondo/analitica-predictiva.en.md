@@ -2,8 +2,8 @@
 slug: analitica-predictiva
 codigo: AF-21
 titulo: "Predictive analytics"
-resumen: "Two families of models in production with scikit-learn —SITP demand by route and time band, and churn, delinquency and risk in banking with over 90% accuracy—, the machine learning tools I use and at what level, the statistics and feature engineering that hold the model up, and Probeta DS."
-cuando_usar: "Use this when they ask about predictive models and machine learning: demand forecasting, churn, delinquency and risk models, the accuracy reached, tools (Python, scikit-learn, pandas, numpy, R, SQL), his statistics background, programming languages, natural language processing and Probeta DS."
+resumen: "Two families of models in production with scikit-learn —SITP demand by route and time band, and churn and delinquency in banking with over 90% accuracy—, the machine learning tools I use and at what level, the statistics and feature engineering that hold the model up, and Probeta DS."
+cuando_usar: "Use this when they ask about predictive models and machine learning: demand forecasting, churn and delinquency models, the accuracy reached, tools (Python, scikit-learn, pandas, numpy, R, SQL), his statistics background, programming languages, natural language processing and Probeta DS."
 estado: aprobado
 ancla: "#skills-ia-y-ml"
 actualizado: 2026-09-20
@@ -48,8 +48,7 @@ completely different.
 In transport, the phenomenon was how many people were going to board each route in each time band
 of the following month; the error cost extra buses on one route and users without room on
 another; and the result went into a monthly demand report. In banking, the phenomenon was which
-customer might leave, which obligation might stop being paid and which operation concentrated
-risk; the error cost an unnecessary intervention or a lost retention opportunity; and the result
+customer might leave and which obligation might stop being paid; the error cost an unnecessary intervention or a lost retention opportunity; and the result
 went into the prioritization of retention and collection actions.
 
 These two sectors demonstrated that the predictive method can be carried over, but the meaning of
@@ -90,12 +89,12 @@ it coincides with the moment at which the organization can still change a decisi
 estimate that arrives after the schedule has closed may be of analytical interest, but it loses
 an important part of its operational usefulness.
 
-## Churn, delinquency and risk at Banco Pichincha
+## Churn and delinquency at Banco Pichincha
 
 <!-- seccion: fuga-mora-y-riesgo -->
 
-At Banco Pichincha, in 2023, I trained and took to production predictive models aimed at three
-families of behavior: customer churn, delinquency and risk. The models sought to anticipate events
+At Banco Pichincha, in 2023, I trained and took to production predictive models aimed at two
+families of behavior: customer churn and delinquency. The models sought to anticipate events
 that might require a differentiated intervention, allowing the organization to prioritize
 analysis and actions on groups with relevant signals.
 
@@ -108,8 +107,7 @@ analysis looked at where the errors concentrated and not only how many there wer
 In customer churn, the prediction had to help identify signals associated with a possible
 departure and facilitate the prioritization of retention actions. In delinquency, the purpose was
 to recognize in advance obligations that might stop being paid, so that collections acted before
-and not after. In risk, the signal helped recognize which operations deserved more attention and
-provided an additional input within the corresponding analysis. In all three cases, the model
+and not after. In both cases, the model
 generated evidence to support a decision, not an automatic decision that replaced the judgment of
 those responsible.
 

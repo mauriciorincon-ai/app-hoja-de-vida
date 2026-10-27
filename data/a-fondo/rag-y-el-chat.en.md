@@ -2,7 +2,7 @@
 slug: rag-y-el-chat
 codigo: AF-16
 titulo: "RAG: how this chat works on the inside"
-resumen: "The architecture of this page's chat with its numbers: build-time index, lexical retrieval with MiniSearch (BM25) without embeddings, layered guardrails, a measured threshold, navigable citations, five interchangeable providers, local fallback, a US$20 budget with a real cost of zero, the name and email gate with its six-digit verification code, what data the conversation log stores and who reads it, and how it is evaluated with 77 questions of its own and 175 from outside."
+resumen: "The architecture of this page's chat with its numbers: build-time index, lexical retrieval with MiniSearch (BM25) without embeddings, layered guardrails, a measured threshold, navigable citations, five interchangeable providers, local fallback, a US$20 budget with a real cost of zero, the name and email gate with its six-digit verification code, what data the conversation log stores and who reads it, and how it is evaluated with 77 questions of its own and 176 from outside."
 cuando_usar: "Use this when they ask how the chat on this page works, which RAG architecture he implemented, whether he uses embeddings or lexical search, which model provider he works with, how he keeps the model from making up answers, and how he evaluates the system with a golden set and a question bank. Use it too for everything that has to do with the chat gate and with privacy: why the chat asks for your name and email before answering, what the six-digit verification code that arrives by email is for, what personal data it stores, who can read it, how long it is kept, how to ask for it to be deleted, and why the answers are two or three paragraphs instead of a dump of the corpus."
 estado: aprobado
 ancla: "#portafolio"
@@ -262,7 +262,7 @@ produce.
 Embeddings remain a possible evolution, not an automatic improvement. Adding them would make
 sense if a representative set of questions showed that lexical search fails systematically at
 retrieving paraphrases, semantic relationships or concepts expressed with sufficiently different
-vocabularies. Today that set exists —175 questions written from outside— and it does not show
+vocabularies. Today that set exists —176 questions written from outside— and it does not show
 that failure: with four sources per answer, none is left without its own. I do not leave them out
 because I do not know them: I compared vector search with lexical search.
 
@@ -309,7 +309,7 @@ That is why evaluation must observe both layers. For retrieval, what matters is 
 relevant chunks appear among the first results and whether irrelevant content stays out; that is
 what the golden set and the question bank measure on the real index, with the same search module
 that runs in production. For the answer, what matters is whether the claims are supported,
-whether the citations correspond to them and whether the system properly declares the gaps.
+whether the citations correspond to them and whether the system refuses, with a fixed answer, what is not on record.
 
 The final answer must also be evaluated as an experience. A technically correct retrieval can
 produce a barely useful answer if the content is presented without hierarchy, repeats chunks or
@@ -790,7 +790,7 @@ first four results. The test travels with the content: adding a document adds it
 the gate without anyone editing the tests. With 25 documents that is 77 questions.
 
 The second is the bank of questions written from outside, the way a recruiter or interviewer
-asks: 175 legitimate questions in ten families —career, way of working, certifications, AI and
+asks: 176 legitimate questions in ten families —career, way of working, certifications, AI and
 agents, platform and data, BI and analytics, governance, processes, portfolio and fit—, plus 15
 off-topic ones and 3 declared without coverage. Each legitimate one must bring an expected source
 in the top-4, the expected source must arrive first in at least 60% of the cases, and the 15
@@ -799,7 +799,7 @@ and which ones pass to the model, with their reason written beside them.
 
 The questions cover direct facts, relationships between sections, indirect phrasings, typing
 errors, ambiguous queries and requests that do not belong to the domain. They also include
-questions whose answer does not exist, because the ability to declare a gap is an essential part
+questions whose answer does not exist, because refusing them with a fixed answer, without asserting an absence, is an essential part
 of correct behavior.
 
 For generation there is no automatic validator yet —the subsection on the chips says so—: the verification is by reading, over the golden set's answers, and it checks that each factual claim is supported, that no data foreign to the corpus
@@ -891,5 +891,5 @@ user can understand the answer, walk through its evidence and recognize when the
 degraded.
 
 The difference between declaring experience in RAG and demonstrating it is this application. I do
-not need to limit myself to describing a possible architecture. With 77 questions of my own and 175 from outside running on every change, the visitor can ask a question, observe the answer,
+not need to limit myself to describing a possible architecture. With 77 questions of my own and 176 from outside running on every change, the visitor can ask a question, observe the answer,
 open its sources and directly examine the decisions that sustain the system.

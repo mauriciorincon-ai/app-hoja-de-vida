@@ -2,8 +2,8 @@
 slug: analitica-predictiva
 codigo: AF-21
 titulo: "Analítica predictiva"
-resumen: "Dos familias de modelos en producción con scikit-learn —demanda del SITP por ruta y franja, y fuga, mora y riesgo en banca con más del 90 % de precisión—, las herramientas de machine learning que uso y con qué nivel, la estadística y la ingeniería de variables que sostienen el modelo, y Probeta DS."
-cuando_usar: "Úsalo cuando pregunten por modelos predictivos y machine learning: predicción de demanda, modelos de fuga, mora y riesgo, precisión alcanzada, herramientas (Python, scikit-learn, pandas, numpy, R, SQL), su base estadística, lenguajes de programación, procesamiento de lenguaje natural y Probeta DS."
+resumen: "Dos familias de modelos en producción con scikit-learn —demanda del SITP por ruta y franja, y fuga y mora en banca con más del 90 % de precisión—, las herramientas de machine learning que uso y con qué nivel, la estadística y la ingeniería de variables que sostienen el modelo, y Probeta DS."
+cuando_usar: "Úsalo cuando pregunten por modelos predictivos y machine learning: predicción de demanda, modelos de fuga y mora, precisión alcanzada, herramientas (Python, scikit-learn, pandas, numpy, R, SQL), su base estadística, lenguajes de programación, procesamiento de lenguaje natural y Probeta DS."
 estado: aprobado
 ancla: "#skills-ia-y-ml"
 actualizado: 2026-09-20
@@ -40,7 +40,7 @@ CÓMO SE ESCRIBE ESTE ARCHIVO
 
 He desarrollado y llevado a producción soluciones de machine learning en dos contextos especialmente diferentes: la planeación de la demanda en transporte masivo, con C&M Consultores para TransMilenio, y la anticipación de comportamientos de clientes en el sector financiero, en Banco Pichincha. En ambos casos utilicé aprendizaje automático con scikit-learn para ampliar la capacidad de decisión de la organización, pero el fenómeno, el horizonte, las consecuencias del error y la forma de incorporar el resultado eran completamente distintos.
 
-En transporte, el fenómeno era cuánta gente iba a subirse a cada ruta en cada franja horaria del mes siguiente; el error costaba buses de más en una ruta y usuarios sin cupo en otra; y el resultado entraba en un informe mensual de demanda. En banca, el fenómeno era qué cliente podía irse, qué obligación podía dejar de pagarse y qué operación concentraba riesgo; el error costaba una intervención innecesaria o una oportunidad de retención perdida; y el resultado entraba en la priorización de acciones de retención y cobro.
+En transporte, el fenómeno era cuánta gente iba a subirse a cada ruta en cada franja horaria del mes siguiente; el error costaba buses de más en una ruta y usuarios sin cupo en otra; y el resultado entraba en un informe mensual de demanda. En banca, el fenómeno era qué cliente podía irse y qué obligación podía dejar de pagarse; el error costaba una intervención innecesaria o una oportunidad de retención perdida; y el resultado entraba en la priorización de acciones de retención y cobro.
 
 Estos dos sectores demostraron que el método predictivo puede trasladarse, pero el significado del problema no. El pipeline de preparación, entrenamiento, validación y evaluación conserva principios comunes. Sin embargo, las variables, los errores, los umbrales, el horizonte y las consecuencias deben diseñarse nuevamente para cada dominio.
 
@@ -58,15 +58,15 @@ La validación se hizo con RMSE y respetando el orden temporal: el modelo se eva
 
 El aprendizaje más importante, sin embargo, fue comprender que una predicción solo produce valor cuando coincide con el momento en el que la organización todavía puede cambiar una decisión. Una estimación exacta que llega después de cerrar la programación puede tener interés analítico, pero pierde una parte importante de su utilidad operacional.
 
-## Fuga, mora y riesgo en Banco Pichincha
+## Fuga y mora en Banco Pichincha
 
 <!-- seccion: fuga-mora-y-riesgo -->
 
-En Banco Pichincha, en 2023, entrené y llevé a producción modelos predictivos orientados a tres familias de comportamiento: fuga de clientes, mora y riesgo. Los modelos buscaban anticipar eventos que podían requerir una intervención diferenciada, permitiendo que la organización priorizara análisis y acciones sobre grupos con señales relevantes.
+En Banco Pichincha, en 2023, entrené y llevé a producción modelos predictivos orientados a dos familias de comportamiento: fuga de clientes y mora. Los modelos buscaban anticipar eventos que podían requerir una intervención diferenciada, permitiendo que la organización priorizara análisis y acciones sobre grupos con señales relevantes.
 
 Los resultados reportados superaron el 90 % de precisión y mejoraron hasta un 35 % las predicciones existentes. Estas cifras deben interpretarse dentro de los conjuntos de datos, poblaciones, horizontes y métricas utilizados en cada caso. No presento una medida general como si describiera por sí sola todo el comportamiento de los modelos, y una precisión alta sobre una clase desbalanceada dice menos de lo que parece: por eso el análisis miraba dónde se concentraban los errores y no solo cuántos había.
 
-En fuga de clientes, la predicción debía contribuir a identificar señales asociadas con una posible desvinculación y facilitar la priorización de acciones de retención. En mora, el propósito era reconocer anticipadamente obligaciones que podían dejar de pagarse, para que el cobro actuara antes y no después. En riesgo, la señal ayudaba a reconocer qué operaciones ameritaban mayor atención y aportaba una entrada adicional dentro del análisis correspondiente. En los tres casos, el modelo generaba evidencia para apoyar una decisión, no una decisión automática que sustituyera el criterio de los responsables.
+En fuga de clientes, la predicción debía contribuir a identificar señales asociadas con una posible desvinculación y facilitar la priorización de acciones de retención. En mora, el propósito era reconocer anticipadamente obligaciones que podían dejar de pagarse, para que el cobro actuara antes y no después. En los dos casos, el modelo generaba evidencia para apoyar una decisión, no una decisión automática que sustituyera el criterio de los responsables.
 
 Las predicciones llegaban a quienes las usaban a través de Power BI, junto con la información histórica y contextual del cliente, en los mismos tableros que habían adoptado más de 50 usuarios del negocio. Un modelo de fuga cuyo resultado nadie abre no retiene a nadie; el canal de entrega era parte del diseño del modelo.
 

@@ -401,8 +401,8 @@ bloques:
         porQue:
           voz: hice
           texto:
-            es: "En la Fundación CTIC los casos de uso se priorizan con esos siete criterios: de más de 10 oportunidades se evaluó formalmente la mitad y se priorizaron unas pocas, y esa proporción es el filtro funcionando, no falta de ideas."
-            en: "At Fundación CTIC use cases are prioritized with those seven criteria: of more than 10 opportunities half were formally evaluated and a few were prioritized, and that proportion is the filter working, not a lack of ideas."
+            es: "En la Fundación CTIC los casos de uso se priorizan con esos siete criterios: de más de 10 oportunidades se evaluó formalmente la mitad y unas ya se priorizaron, y esa proporción es el filtro funcionando, no falta de ideas."
+            en: "At Fundación CTIC use cases are prioritized with those seven criteria: of more than 10 opportunities half were formally evaluated and some were already prioritized, and that proportion is the filter working, not a lack of ideas."
           corpus: [fundacion-ctic]
         nota:
           voz: campo
@@ -606,8 +606,8 @@ bloques:
       - nombre: { es: "Fundación CTIC: una cartera de IA con criterios comunes", en: "Fundación CTIC: an AI portfolio with shared criteria" }
         nivel: uso-real
         texto:
-          es: "Desde marzo de 2025 se estructura en la Fundación CTIC la estrategia institucional de IA: más de 10 oportunidades identificadas, la mitad evaluadas formalmente y unas pocas priorizadas; de estas, las primeras ya tienen responsables, resultados esperados, riesgos iniciales y criterios de evaluación documentados."
-          en: "Since March 2025 Fundación CTIC's institutional AI strategy has been structured: more than 10 opportunities identified, half of them formally evaluated and a few prioritized; of these, the first ones already have owners, expected results, initial risks and evaluation criteria documented."
+          es: "Desde marzo de 2025 se estructura en la Fundación CTIC la estrategia institucional de IA: más de 10 oportunidades identificadas, la mitad evaluadas formalmente y unas ya priorizadas; de estas, las primeras ya tienen responsables, resultados esperados, riesgos iniciales y criterios de evaluación documentados."
+          en: "Since March 2025 Fundación CTIC's institutional AI strategy has been structured: more than 10 opportunities identified, half of them formally evaluated and some already prioritized; of these, the first ones already have owners, expected results, initial risks and evaluation criteria documented."
         corpus: [fundacion-ctic]
         href: /proyectos/fundacion-ctic
       - nombre: { es: "Fundación CTIC: el sistema de gestión bajo ISO/IEC 42001", en: "Fundación CTIC: the management system under ISO/IEC 42001" }

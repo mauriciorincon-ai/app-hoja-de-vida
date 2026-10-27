@@ -54,7 +54,7 @@ trayectoria:
       Analítica, gobierno de datos y estrategia de IA (ISO/IEC 42001) para
       decisiones administrativas y asistenciales en salud.
     bullets:
-      - "Lidero la estructuración de la estrategia institucional de IA bajo UNE-ISO/IEC 42001:2025: más de 10 oportunidades identificadas, la mitad evaluadas y unas pocas priorizadas."
+      - "Lidero la estructuración de la estrategia institucional de IA bajo UNE-ISO/IEC 42001:2025: más de 10 oportunidades identificadas, la mitad evaluadas y unas ya priorizadas."
       - "más de 25 productos analíticos en Power BI para líderes administrativos y asistenciales: unos 20 líderes de unos 15 procesos y unos 75 usuarios."
       - "Gobierno y calidad de datos institucional, bajo el régimen de habeas data y la Ley 1581."
       - "Tableros de control por procesos y planes de mejora: cerca de 60 % menos esfuerzo en la preparación de la información (estimado sobre mi propio trabajo)."
@@ -72,6 +72,7 @@ trayectoria:
     rol: "Ingeniero de IA Generativa"
     organizacion: "Proyectos propios · independiente"
     tipo: "proyectos-propios"
+    proyecto: "apps-pipeline"
     descripcion: >-
       Desarrollo proyectos propios de ingeniería e inteligencia artificial para
       explorar arquitecturas, agentes, sistemas RAG y mecanismos de evaluación.
@@ -114,7 +115,7 @@ trayectoria:
     bullets:
       - "Lideré un equipo de BI de 5 personas: dashboards adoptados por 50+ usuarios, con +25% en toma de decisiones."
       - "Optimización de procesos ETL en Power Query: −35% en tiempos de análisis."
-      - "Modelos predictivos de fuga, mora y riesgo con scikit-learn: >90% de precisión y hasta +35% en predicciones, según la métrica de cada modelo."
+      - "Modelos predictivos de fuga y mora con scikit-learn: >90% de precisión y hasta +35% en predicciones, según la métrica de cada modelo."
       - "Optimización de modelos semánticos con DAX Studio y Tabular Editor."
       - "Co-liderazgo de la gobernanza de datos del área."
       - "Programa de formación en analítica para 12 profesionales: +20% de productividad en la preparación y uso de la información."
@@ -142,7 +143,7 @@ trayectoria:
       - "Lideré un equipo de 20 personas —14 de Cafam y 6 de Oracle— en seis meses de pruebas de implementación del WMS: −25% de errores y +15% de eficiencia operativa."
       - "Modelé el proceso en BPMN con Bizagi y simulé el despacho en FlexSim antes de probar."
       - "BI de control de la implementación: +50% de precisión en el seguimiento, para 15+ usuarios."
-      - "Integraciones VBA con el WMS: +15% de automatización y −50% de errores de datos; y más de 10 horas semanales de trabajo manual automatizadas."
+      - "Herramientas VBA que complementaban el WMS: +15% de automatización y −50% de errores de datos; y más de 10 horas semanales de trabajo manual automatizadas."
       - "Calidad de datos en SQL con conciliación 80-20 por medicamentos: +20%."
   - periodo: "2018 — 2020"
     rol: "Analista de Operaciones"
@@ -285,11 +286,13 @@ proyectos:
             que orquestaban a los agentes. La decisión clave fue normalizar los eventos desde el
             ingreso: sesiones, solicitudes, respuestas, tiempos, estados y costo en tokens, iguales
             para los 27 agentes.
-        - titulo: "Lo común y lo configurable"
+        - titulo: "Definiciones comunes, atributos propios"
           texto: >-
-            Un agente o un cliente nuevo no podía requerir una tabla nueva para lo que ya tenía
-            nombre en la plataforma, y sí podía traer atributos propios. Lo común era la condición
-            de comparar; lo configurable, la condición de no frenar a la startup.
+            Los eventos fundamentales, los identificadores, los estados y las métricas necesitaban
+            definiciones compartidas: una sesión, una solicitud, una respuesta o un estado tenían un
+            solo nombre en la plataforma. Las particularidades de cada cliente o agente entraban
+            como atributos propios, dentro de una estructura que ya sabía recibirlos, sin rediseñar
+            la plataforma. Lo común permitía comparar; lo configurable evitaba frenar a la startup.
         - titulo: "Gobernanza desde el diseño"
           texto: >-
             Definí la gobernanza para integrar datos de clientes y sistemas con un contrato de
@@ -364,9 +367,9 @@ proyectos:
             modelo, con selección temprana de filas y columnas y validaciones antes del modelo. El
             −35 % en tiempos de análisis salió de decisiones de estructura, no de un truco de
             rendimiento.
-        - titulo: "Fuga, mora y riesgo en producción"
+        - titulo: "Fuga y mora en producción"
           texto: >-
-            Entrené y llevé a producción con scikit-learn modelos de fuga, mora y riesgo, evaluados
+            Entrené y llevé a producción con scikit-learn modelos de fuga y mora, evaluados
             por segmentos y por lo que cuesta cada error: llamar a un cliente que no iba a irse
             cuesta una llamada; no llamar al que sí se va cuesta el cliente.
         - titulo: "Formación y gobierno"
@@ -454,8 +457,8 @@ proyectos:
     nombre: "Liderar la calidad de un WMS — Cafam (2020–2021)"
     resumen: >-
       Equipo de 20 personas en pruebas de implementación: −25% de errores y
-      +15% de eficiencia; BI de control (+50% de precisión, 15+ usuarios) e
-      integraciones VBA (−50% de errores de datos).
+      +15% de eficiencia; BI de control (+50% de precisión, 15+ usuarios) y
+      herramientas VBA (−50% de errores de datos).
     stack: ["WMS", "BI", "VBA"]
     casestudy:
       titular: "Cambiar el sistema que mueve una bodega de medicamentos sin dejar de despachar: seis meses de pruebas con el equipo más grande que he liderado."
@@ -478,7 +481,7 @@ proyectos:
         - valor: 50
           prefijo: "−"
           sufijo: "%"
-          etiqueta: "de errores de datos con las integraciones VBA"
+          etiqueta: "de errores de datos con las herramientas VBA"
       capitulos:
         - titulo: "Primero el proceso, después el sistema"
           texto: >-
@@ -495,11 +498,12 @@ proyectos:
             Construí el BI de control del propio proyecto para más de 15 usuarios, de los directores
             a los coordinadores del centro de distribución: cobertura, defectos, reincidencias y
             reprocesos visibles a diario, no una sensación de avance.
-        - titulo: "Integraciones con dueño y con límite"
+        - titulo: "Herramientas VBA con dueño y con límite"
           texto: >-
-            Desarrollé integraciones en VBA con el WMS para sustituir cargas manuales. Cada pieza
-            periférica sabía quién la mantenía, de qué dependía y cuándo se retiraría: sin esas tres
-            condiciones, un puente se convierte en un sistema paralelo.
+            Desarrollé en VBA herramientas que complementaban funcionalidades que el WMS no tenía,
+            sin integrarse con él, para sustituir cargas manuales. Cada pieza periférica sabía quién
+            la mantenía, de qué dependía y cuándo se retiraría: sin esas tres condiciones, una pieza
+            así se convierte en un sistema paralelo.
         - titulo: "La conciliación 80-20 en SQL"
           texto: >-
             Al arrancar, ninguno de los medicamentos principales cuadraba entre el WMS y el sistema
@@ -508,7 +512,7 @@ proyectos:
       impacto:
         - "−25% de errores y +15% de eficiencia operativa en la implementación."
         - "+50% de precisión en el seguimiento de la implementación, con un BI de control adoptado por 15+ usuarios."
-        - "+15% de automatización y −50% de errores de datos con las integraciones VBA."
+        - "+15% de automatización y −50% de errores de datos con las herramientas VBA."
         - "+20% en calidad de datos vía SQL."
       leccion: >-
         Modernizar no consiste en sustituirlo todo de una vez, sino en diseñar una
@@ -559,12 +563,13 @@ proyectos:
         - titulo: "Tableros por procesos, no por áreas"
           texto: >-
             Organizo los tableros por procesos porque un área puede mostrar buenos indicadores
-            mientras el proceso que la atraviesa acumula esperas y reprocesos. Diseño los planes de
-            mejora; los ejecutan los responsables de cada proceso.
+            mientras el proceso que la atraviesa acumula esperas y reprocesos. Participo en el
+            asesoramiento del diseño de los planes de mejora; los ejecutan los responsables de
+            cada proceso.
         - titulo: "La estrategia institucional de IA"
           texto: >-
             Lidero la estructuración de la estrategia de IA bajo UNE-ISO/IEC 42001:2025: más de 10 oportunidades identificadas,
-            la mitad evaluadas formalmente y unas pocas priorizadas. No todo problema necesita IA, y no toda
+            la mitad evaluadas formalmente y unas ya priorizadas. No todo problema necesita IA, y no toda
             iniciativa de IA necesita un agente.
         - titulo: "Un sistema de gestión que se demuestra"
           texto: >-
@@ -575,7 +580,7 @@ proyectos:
       impacto:
         - "más de 25 productos analíticos en uso para unos 20 líderes de unos 15 procesos y unos 75 usuarios."
         - "Cerca de 60% menos esfuerzo en la preparación de la información (estimado sobre mi propio trabajo); una decena de planes de análisis en seguimiento."
-        - "más de 10 oportunidades de IA identificadas, la mitad evaluadas, unas pocas priorizadas y las primeras documentadas."
+        - "más de 10 oportunidades de IA identificadas, la mitad evaluadas, unas ya priorizadas y las primeras documentadas."
         - "Calidad de datos institucional como práctica, no como evento."
       leccion: >-
         Mi propósito no es conseguir que la organización utilice más inteligencia
@@ -716,8 +721,8 @@ proyectos:
         - "Informes semanales a la junta directiva que terminaron en programas de incentivos y en el rediseño de puestos, procesos y software."
         - "Gestión por procesos con Kanban y Scrum, y un primer gobierno del acceso a los resultados de los estudiantes."
       leccion: >-
-        Inglopres me enseñó a estructurar una operación; Ceinfes me enseñó a dirigirla
-        mediante información.
+        Vista en retrospectiva, Ceinfes fue la experiencia en la que aprendí a dirigir una
+        operación como un sistema de flujos interdependientes.
   - slug: "inglopres"
     nombre: "Construir el dato que nadie tenía — Inglopres (2015–2017)"
     resumen: >-
@@ -785,6 +790,71 @@ proyectos:
         El problema que resolvía en 2016 —que la decisión necesitaba un dato que nadie
         había construido— es exactamente el mismo que resuelvo hoy, con otras
         herramientas y otra escala.
+
+  - slug: "apps-pipeline"
+    nombre: "El pipeline AI-APPs — Proyectos propios (2024–hoy)"
+    resumen: >-
+      El pipeline AI-APPs: aplicaciones, agentes, investigaciones y tableros construidos con dos
+      casas, un agente de fábrica, cuatro jobs de CI, un contrato de ficha desde Zod, costo real
+      de US$0 al mes y dos reglas: código primero y todo control se demuestra fallando.
+    stack: ["Claude Code", "Next.js", "Zod", "Supabase", "gitleaks"]
+    destacado: false
+    casestudy:
+      titular: "Una fábrica gobernada para construir aplicaciones, agentes, investigaciones y tableros: dos casas, un escritor por casa y aprobaciones escritas, para que el valor quede también en la capacidad de construir la siguiente pieza."
+      contexto: >-
+        El portafolio no se construye como una sucesión de proyectos independientes: aplicaciones,
+        agentes, investigaciones y tableros nacen de un mismo pipeline, gobernado por reglas comunes
+        para priorizar, definir, construir, validar, documentar y publicar cada pieza.
+      reto: >-
+        Aprovechar la inteligencia artificial sin diluir la responsabilidad sobre el resultado: que
+        nadie vuelva a ser el puente entre el plan y el código, y que la calidad no dependa de
+        recordar cómo se construyó la pieza anterior.
+      cifras:
+        - valor: 2
+          etiqueta: "casas, con un solo escritor cada una"
+        - valor: 2
+          etiqueta: "aprobaciones escritas antes de construir cada aplicación"
+        - valor: 4
+          etiqueta: "jobs de integración continua en cada cambio"
+      capitulos:
+        - titulo: "Dos casas, un escritor por casa"
+          texto: >-
+            Una casa planeadora, privada, guarda el brief, la visión de producto, los sprints con su
+            plan y su retrospectiva, el método y los estándares; el repositorio de cada app guarda el
+            código, las pruebas y el resumen de cada sprint. La planeadora lee los repositorios en solo
+            lectura y nunca escribe en ellos; la sincronización es lectura de git, no copiar y pegar.
+        - titulo: "Dos aprobaciones antes del código"
+          texto: >-
+            Ninguna aplicación avanza sin dos aprobaciones escritas: la prioridad vigente, que demuestra
+            por qué esa pieza merece capacidad frente a otras, y la visión del producto, con su
+            propósito, sus usuarios, todas sus funcionalidades y sus límites. Sin ellas, el pipeline se
+            rehúsa a planear o a abrir un sprint: concebir es barato; construir se gana.
+        - titulo: "Un agente de fábrica con responsables humanos"
+          texto: >-
+            Un agente de fábrica conserva el estado de las iniciativas, verifica los insumos, aplica
+            reglas de avance e identifica vacíos documentales. No puede aprobar una prioridad, modificar
+            un propósito, aceptar un riesgo ni declarar terminada una pieza, y no edita el método ni el
+            kit sin mi aprobación explícita.
+        - titulo: "Código primero, IA cuando está justificada"
+          texto: >-
+            La inteligencia artificial generativa no entra por defecto: antes debo demostrar qué exige
+            interpretación, generación o recuperación contextual, y por qué una solución determinista no
+            basta; activarla exige una decisión de arquitectura escrita. Donde sí hay un modelo, es una
+            función opcional, con fallback determinista.
+        - titulo: "Cada control se demuestra fallando"
+          texto: >-
+            Casi todas las reglas nacieron de un rojo. Un barrido de secretos que daba «todo bien» dejó
+            pasar dos veces una carnada floja; desde entonces, un gate que nunca se vio fallar no
+            cuenta. Cada cambio pasa por cuatro jobs de integración continua, y cada ciclo cierra con un
+            resumen que la planeadora lee antes de planear el siguiente.
+      impacto:
+        - "Aplicaciones, agentes, investigaciones y tableros construidos con el mismo método, a un costo real de US$0 al mes."
+        - "Nadie vuelve a ser el puente: el flujo anterior costaba entre 4 y 8 horas de coordinación por sprint."
+        - "Lo que un sprint aprende en una app viaja estampado a la siguiente, en un kit con versión."
+        - "Las decisiones de propósito, prioridad, riesgo y aceptación siguen explícitamente en manos humanas."
+      leccion: >-
+        El objetivo es que el valor no permanezca únicamente en el producto terminado, sino también
+        en la capacidad para construir el siguiente con mayor claridad, consistencia y velocidad.
 
 certificaciones:
   # AI-102 salió de la lista el 2026-09-10: Microsoft descontinuó la certificación (decisión del dueño).

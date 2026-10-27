@@ -145,8 +145,8 @@ organizing the use cases according to their potential value, feasibility, availa
 information, level of risk, dependence on third parties, integration complexity and adoption
 capacity. Prioritization does not seek to identify only the most innovative ideas, but those that
 can produce learning and value without exceeding the institutional capacity to implement,
-supervise and sustain them. Of the opportunities identified, half were formally evaluated and a few
-were prioritized: that proportion is the result of applying the filter, not of a lack of ideas.
+supervise and sustain them. Of the opportunities identified, half were formally evaluated and some
+were already prioritized: that proportion is the result of applying the filter, not of a lack of ideas.
 
 Each initiative must have an explicit purpose, an institutional owner, a clearly identified
 population or process, expected results and evaluation criteria defined before it begins. It must
@@ -305,7 +305,7 @@ execution of tasks. Correctly defining that need avoids building agents for prob
 solved with simpler, more predictable and more sustainable instruments —sometimes, with a Power
 BI dashboard—.
 
-## Progressive validation: more than 10 opportunities, half of them evaluated, a few initiatives prioritized
+## Progressive validation: more than 10 opportunities, half of them evaluated, some initiatives already prioritized
 
 <!-- seccion: validacion-progresiva -->
 
@@ -490,12 +490,12 @@ single logic, while the Power BI experience adapts its depth and presentation to
 responsibility: it is what allows more than 25 products to serve some 20 leaders and some 75 users without there
 being as many different definitions of the same indicator.
 
-## Improvement plans: what I designed, what I implemented and the close to 60% less effort
+## Improvement plans: where I advised, what I implemented and the close to 60% less effort
 
 <!-- seccion: planes-de-mejora -->
 
 My contribution does not consist of claiming the implementation of the improvement plans that
-belong to the institutional owners. From the analyses, I designed improvement plans for the
+belong to the institutional owners. From the analyses, I took part in advising on the design of improvement plans for the
 process owners, who are the ones who execute them. My responsibility is to build the analytical
 capacity that makes it possible to identify opportunities, support conversations, prioritize
 situations and follow up on the indicators related to the decisions adopted.
@@ -526,7 +526,7 @@ processes, and have supported the ten or so analysis plans under follow-up durin
 Structuring the artificial intelligence strategy also means defining how the initiatives will be able
 to coexist, reuse capabilities and evolve without creating a new technological fragmentation.
 Each isolated project can solve a specific need, but a succession of disconnected solutions
-increases costs, repeats mistakes and makes governance harder. With a few prioritized initiatives and more than 10 opportunities in the portfolio, the question is no longer only whether each one works, but
+increases costs, repeats mistakes and makes governance harder. With some initiatives already prioritized and more than 10 opportunities in the portfolio, the question is no longer only whether each one works, but
 what they share.
 
 The institutional architecture must connect the technological capabilities with the decision and
