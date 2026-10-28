@@ -661,7 +661,7 @@ that data must be evaluated within the complete journey it makes through an appl
 error can originate in the capture, in a rule, in an integration, in a transformation or in a
 definition interpreted differently by two components. Solving it requires traceability from the
 result back to the event that produced it. At Cafam that traceability took concrete form: VBA
-applications that integrated distribution center processes into the WMS, with 15% more
+tools that complemented the WMS in distribution center processes, with 15% more
 automation and 50% fewer data errors, and that kept running after go-live; data quality
 monitoring in SQL across several systems, which raised the precision of the WMS by 20%; and a BI
 for controlling the tests, 50% more precise, used by more than 15 people, among directors,
@@ -846,7 +846,7 @@ purpose or the conditions under which it can be used to guide a decision.
 
 The figures to date: more than 25 analytical products in use for some 20 leaders of some 15 processes and some 75
 users; close to 60% less effort, estimated, in the preparation of information; some ten analysis plans
-under follow-up; and improvement plans that I designed from the results so that the processes
+under follow-up; and improvement plans whose design I advised on from the results so that the processes
 execute them; the improvements I implemented with my own hands were, above all, those of my own
 work process.
 

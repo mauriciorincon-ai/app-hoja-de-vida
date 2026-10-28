@@ -326,7 +326,7 @@ risk, allocate resources consciously and build an implementation sequence consis
 organization's maturity.
 
 To date, the strategy has made it possible to identify more than 10 artificial intelligence opportunities,
-formally evaluate half of them and prioritize a few initiatives for validation or progressive
+formally evaluate half of them and have some initiatives already prioritized for validation or progressive
 development. Of these, the first ones have documented owners, expected results, initial risks and evaluation
 criteria. That most of the evaluated cases have not yet moved forward is the filter working, not
 an inventory of failures.
@@ -595,11 +595,11 @@ indicators and their incorporation into the spaces where institutional performan
 | Analytics         | analysis plans under follow-up             |                 some ten |
 | AI                | opportunities identified                   |             more than 10 |
 | AI                | use cases formally evaluated               |                     half |
-| AI                | initiatives prioritized · documented       |   a few · the first ones |
+| AI                | initiatives prioritized · documented       |    some · the first ones |
 | Management system | instruments: finished · under construction |       a third · the rest |
 
 In artificial intelligence, the strategy has made it possible to identify more than 10 opportunities,
-formally evaluate half of them and prioritize a few initiatives for exploration, validation or
+formally evaluate half of them and have some initiatives already prioritized for exploration, validation or
 progressive development. Of these, the first ones have documented purpose, owner, expected results, required
 information, initial risks and evaluation criteria.
 
