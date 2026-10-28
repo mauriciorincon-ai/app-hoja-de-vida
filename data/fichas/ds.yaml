@@ -1,20 +1,25 @@
-# Complemento de la ficha técnica de Probeta DS (ADR-016). PROCEDENCIA:
-# cv-viva — derivado de su export por CV Viva; se retira cuando la app mande el suyo.
+# Complemento de la ficha técnica de Probeta DS (`ds`). PROCEDENCIA: planeadora — pedido 026 de CV Viva
+# (sentada 4a de la revisión del H-2), 2026-10-27. Curado desde la base `origin/main` d302949 de app-ds (export
+# del S20, 76 funcionalidades), su manual de uso y la VISION v2.1.0. Reemplaza al que derivó CV Viva el 2026-09-05.
+# `cifras_destacadas` son CLAVES de `metricas[]` del export: el export las trae con su fuente.
+# El `proceso` es el que armó CV Viva («Un modelo que se pueda defender»), corregido: ver RESPUESTA-026.md.
 schema_version: "1.0.0"
 app: ds
-procedencia: cv-viva
-declarado_en: "2026-09-05"
-titular: "Enseña la pantalla en la que su propio producto falla: el veredicto contra el baseline dice «NO supera» cuando no supera, la fuga de datos es imposible por construcción y toda cifra sale del conjunto de prueba."
-cifras_destacadas: [funcionalidades, filas_del_usuario_en_la_red, cobertura_lineas, gpu_requerida, costo_operacion_mensual]
+procedencia: planeadora
+declarado_en: "2026-10-27"
+titular: "Te muestra la pantalla en la que tu modelo pierde: si no le gana a una regla simple, dice «NO supera» con la cifra exacta; la prueba nunca contamina el entrenamiento y tu tabla no sale de tu navegador."
+cifras_destacadas: [funcionalidades, etapas_protocolo, filas_del_usuario_en_la_red, pruebas_unitarias, cobertura_lineas]
 limites:
-  - "Si el modelo no supera al baseline, lo dice — el incentivo del mercado es el contrario."
-  - "El preprocesamiento se ajusta solo con la mitad de entrenamiento; la interfaz no ofrece otro camino."
-  - "No es una app local: se sirve desde la web con UNA ruta de servidor — pero el dataset sí lo es: nunca se sube."
+  - "Archivos de hasta 5 MB o 50 000 filas, y todo en CPU dentro del navegador: una liga grande puede tardar minutos."
+  - "El chequeo de fuga atrapa los casos evidentes, una columna a la vez: es una ayuda honesta, no una garantía."
+  - "No es una app local: se sirve desde la web, con una sola ruta de servidor para la narración con IA, que nunca recibe filas."
+  - "Explica qué pesa en el modelo, no qué causa qué: una causa pide un experimento, y el Protocolo se detiene si la buscas."
 nunca:
-  - "Sube el dataset a un servidor."
-  - "Ajusta el preprocesamiento con datos de prueba."
-  - "Necesita una GPU."
-  - "Maquilla un veredicto."
+  - "Sube tu tabla a un servidor."
+  - "Ajusta el preprocesamiento con las filas de prueba."
+  - "Maquilla un veredicto: si no le gana a la regla simple, dice «NO supera»."
+  - "Rellena en silencio una columna que falta para poder puntuar."
+  - "Necesita una tarjeta gráfica."
 proceso:
   titulo: "Un modelo que se pueda defender"
   carriles:
@@ -24,6 +29,7 @@ proceso:
     - { id: ini, tipo: inicio, carril: persona, texto: "Un dataset y una pregunta" }
     - { id: carga, tipo: tarea, carril: persona, texto: "Carga el dataset en el navegador" }
     - { id: perfila, tipo: tarea, carril: probeta, texto: "Perfila y sanea los datos" }
+    - { id: elige, tipo: tarea, carril: persona, texto: "Elige qué quiere predecir" }
     - { id: parte, tipo: tarea, carril: probeta, texto: "Parte en entrenamiento y prueba" }
     - { id: ajusta, tipo: tarea, carril: probeta, texto: "Ajusta el preprocesamiento con entrenamiento" }
     - { id: entrena, tipo: tarea, carril: probeta, texto: "Entrena y compara con el baseline" }
@@ -35,18 +41,21 @@ proceso:
   flujos:
     - { de: ini, a: carga }
     - { de: carga, a: perfila }
-    - { de: perfila, a: parte }
+    - { de: perfila, a: elige }
+    - { de: elige, a: parte }
     - { de: parte, a: ajusta }
     - { de: ajusta, a: entrena }
     - { de: entrena, a: supera }
     - { de: supera, a: veredicto, etiqueta: "no supera" }
-    - { de: veredicto, a: perfila, etiqueta: "vuelve a los datos" }
+    - { de: veredicto, a: carga, etiqueta: "corrige su tabla" }
     - { de: supera, a: porque, etiqueta: "sí" }
     - { de: porque, a: usa }
     - { de: usa, a: fin }
   anotaciones:
+    - { paso: ini, texto: "¿Prefiere el camino lento? Protocolo DS recorre lo mismo en diez etapas con compuertas que no se saltan." }
     - { paso: carga, texto: "El dataset nunca se sube: perfilado, entrenamiento y scoring corren en el navegador con Pyodide." }
-    - { paso: ajusta, texto: "La fuga de datos es imposible por construcción: la interfaz no ofrece otro camino." }
+    - { paso: ajusta, texto: "La prueba no contamina el entrenamiento: el preprocesamiento aprende solo de él y la interfaz no ofrece otro camino." }
+    - { paso: supera, texto: "Cuatro veredictos: ▲ supera, ＝ empata, ▼ NO supera y ⚠ sospechoso, cuando una columna adivina demasiado bien." }
 
 # Roadmap votable (2026-09-13): lo que la planeadora entrega como cierre de plan
 # de esta app — features disruptivas, no en construcción, sin fechas. PROCEDENCIA:
