@@ -123,16 +123,16 @@ Las seis de la tabla alcanzaron su MVP y están en operación sostenida —si es
 
 <!-- seccion: las-seis-apps-en-cifras -->
 
-Cada aplicación publica su brochure con cifras que declaran su fuente, y esta tabla las reúne tal como estaban en sus exports de agosto de 2026:
+Cada aplicación publica su brochure con cifras que declaran su fuente, y esta tabla las reúne tal como estaban en sus exports, con el mes de cada fila:
 
 | Aplicación            | Funcionalidades | Pantallas | Pruebas unitarias e integración | Pruebas de extremo a extremo | Cobertura de líneas | ADR |
 | --------------------- | --------------: | --------: | ------------------------------: | ---------------------------: | ------------------: | --: |
-| **Anonimizador Velo** |              14 |         5 |                             740 |                          153 |             96,17 % |   8 |
-| **Dash Agent**        |              12 |         8 |                             693 |                            — |              97,5 % |  13 |
-| **Probeta DS**        |              33 |         5 |                             267 |                           24 |             90,69 % |   8 |
-| **Habla San**         |              24 |        10 |                             261 |                          169 |             94,02 % |  14 |
-| **Innmobiliaria**     |              13 |        11 |                             172 |                           76 |             98,31 % |   6 |
-| **Nutrikids**         |              19 |         8 |                             214 |                           94 |             99,52 % |   7 |
+| **Anonimizador Velo** (oct. 2026) |              14 |         5 |                             740 |                          153 |             96,17 % |   8 |
+| **Dash Agent** (ago. 2026) |              12 |         8 |                             693 |                            — |              97,5 % |  13 |
+| **Probeta DS** (oct. 2026) |              76 |         5 |                           3.047 |                          168 |             95,39 % |  29 |
+| **Habla San** (ago. 2026) |              24 |        10 |                             261 |                          169 |             94,02 % |  14 |
+| **Innmobiliaria** (ago. 2026) |              13 |        11 |                             172 |                           76 |             98,31 % |   6 |
+| **Nutrikids** (oct. 2026) |              19 |         8 |                             214 |                           94 |             99,52 % |   7 |
 
 El costo de operación mensual de las seis de la tabla es US$0, calculado como la suma de los servicios contratados: hosting en plan gratuito, sin servidores propios y, cuando hay un proveedor de IA, dentro de su cuota gratuita. Cuatro de las seis de la tabla no usan inteligencia artificial en absoluto —Anonimizador Velo, Dash Agent, Habla San e Innmobiliaria, que la tiene en cero modelos por regla de producto—, y sus fichas lo declaran como regla, no como ausencia; Probeta DS y Nutrikids la usan en una sola función, con fallback determinista y conmutable por variable de entorno.
 

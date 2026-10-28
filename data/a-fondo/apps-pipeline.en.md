@@ -123,16 +123,16 @@ The six in the table reached their MVP and are in sustained operation —if they
 
 <!-- seccion: las-seis-apps-en-cifras -->
 
-Each application publishes its brochure with figures that declare their source, and this table gathers them as they stood in their August 2026 exports:
+Each application publishes its brochure with figures that declare their source, and this table gathers them as they stood in their exports, with each row's month:
 
 | Application           | Features | Screens | Unit and integration tests | End-to-end tests | Line coverage | ADRs |
 | --------------------- | -------: | ------: | -------------------------: | ---------------: | ------------: | ---: |
-| **Anonimizador Velo** |       14 |       5 |                        740 |              153 |        96.17% |    8 |
-| **Dash Agent**        |       12 |       8 |                        693 |                — |         97.5% |   13 |
-| **Probeta DS**        |       33 |       5 |                        267 |               24 |        90.69% |    8 |
-| **Habla San**         |       24 |      10 |                        261 |              169 |        94.02% |   14 |
-| **Innmobiliaria**     |       13 |      11 |                        172 |               76 |        98.31% |    6 |
-| **Nutrikids**         |       19 |       8 |                        214 |               94 |        99.52% |    7 |
+| **Anonimizador Velo** (Oct 2026) |       14 |       5 |                        740 |              153 |        96.17% |    8 |
+| **Dash Agent** (Aug 2026) |       12 |       8 |                        693 |                — |         97.5% |   13 |
+| **Probeta DS** (Oct 2026) |       76 |       5 |                      3,047 |              168 |        95.39% |   29 |
+| **Habla San** (Aug 2026) |       24 |      10 |                        261 |              169 |        94.02% |   14 |
+| **Innmobiliaria** (Aug 2026) |       13 |      11 |                        172 |               76 |        98.31% |    6 |
+| **Nutrikids** (Oct 2026) |       19 |       8 |                        214 |               94 |        99.52% |    7 |
 
 The monthly operating cost of the six in the table is US$0, calculated as the sum of the contracted services: hosting on a free plan, no servers of our own and, when there is an AI provider, within its free quota. Four of the six in the table do not use artificial intelligence at all —Anonimizador Velo, Dash Agent, Habla San and Innmobiliaria, which has it at zero models by product rule—, and their sheets declare it as a rule, not as an absence; Probeta DS and Nutrikids use it in a single feature, with a deterministic fallback and switchable by environment variable.
 
