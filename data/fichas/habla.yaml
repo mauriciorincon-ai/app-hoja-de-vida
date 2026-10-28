@@ -1,22 +1,27 @@
-# Complemento de la ficha técnica de Habla San (ADR-016). Lo que su
+# Complemento de la ficha técnica de Habla San (ADR-016 de CV Viva). Lo que su
 # brochure-export v1.0.0 no trae: titular · cifras destacadas · límites ·
-# nunca · proceso. PROCEDENCIA: cv-viva — derivado de su export por CV Viva;
-# se retira el día que la app lo mande en el suyo.
+# nunca · proceso. PROCEDENCIA: planeadora — pedido 026 de CV Viva, armado por
+# la planeadora el 2026-10-27 desde una copia aislada de app-habla en 6c4d113
+# (export, manual de uso, pantallas y pruebas). El proceso es el que armó CV
+# Viva («Una sesión de práctica en casa»), confirmado con dos pasos corregidos
+# (ver RESPUESTA-026.md). Se retira el día que la app lo mande en su export.
 schema_version: "1.0.0"
 app: habla
-procedencia: cv-viva
-declarado_en: "2026-09-05"
-titular: "Solo afirma lo que de verdad midió —hubo voz, duró tanto, el tono subió— y jamás finge reconocer la palabra: quien juzga el acierto es el padre. Y la voz del niño no se graba nunca."
-cifras_destacadas: [funcionalidades, pantallas, llamadas_de_red, cobertura_lineas, costo_operacion_mensual]
+procedencia: planeadora
+declarado_en: "2026-10-27"
+titular: "Una idea de práctica para cada día y cuatro juegos que tu hijo juega con la voz. La app solo afirma lo que midió, jamás finge reconocer la palabra, y su voz no se graba nunca."
+cifras_destacadas: [funcionalidades, capsulas, llamadas_de_red, pruebas_e2e, cobertura_lineas]
 limites:
-  - "Acompaña la terapia; jamás la reemplaza."
-  - "Se juega de a dos: no existe un «modo niño solo», a propósito."
-  - "No reconoce la palabra ni califica la pronunciación: ninguna tecnología lo hace hoy con fiabilidad en español para 4–6 años, y esta no lo simula."
+  - "Acompaña sus terapias del lenguaje; jamás las reemplaza ni da diagnósticos."
+  - "Se juega de a dos: no existe un modo para que el niño juegue solo, a propósito."
+  - "No reconoce la palabra ni califica la pronunciación: el reconocimiento de voz se equivoca demasiado a esa edad, y la app no lo finge."
+  - "Solo en español: las ideas, los juegos y el diccionario están hechos para esa lengua."
 nunca:
-  - "Graba, guarda o envía la voz del niño — hay pruebas en el CI que rompen el código si alguien lo intenta."
+  - "Graba, guarda o envía la voz de tu hijo: pruebas automáticas rompen el código si alguien lo intenta."
   - "Usa la cámara."
-  - "Pide cuenta, nube ni IA."
-  - "Hace una sola petición a internet durante el juego."
+  - "Pide cuentas, usa la nube o recurre a inteligencia artificial."
+  - "Hace una sola petición a internet mientras juegan."
+  - "Le pone nota, puntaje o plazo a tu hijo, ni lo compara con otros niños."
 proceso:
   titulo: "Una sesión de práctica en casa"
   carriles:
@@ -30,9 +35,9 @@ proceso:
     - { id: habla, tipo: tarea, carril: nino, texto: "Habla: su voz es el control" }
     - { id: mide, tipo: tarea, carril: app, texto: "Mide energía y tono, en memoria" }
     - { id: descarta, tipo: tarea, carril: app, texto: "Descarta el audio al instante" }
-    - { id: responde, tipo: tarea, carril: app, texto: "Responde con la voz de la familia" }
+    - { id: responde, tipo: tarea, carril: app, texto: "Responde: el globo vuela, el dibujo se enciende" }
     - { id: acierto, tipo: decision, carril: padre, texto: "¿Acertó?" }
-    - { id: suma, tipo: tarea, carril: app, texto: "Suma al objetivo de la semana" }
+    - { id: suma, tipo: tarea, carril: app, texto: "Cuenta lo que tú marcaste" }
     - { id: rumbo, tipo: tarea, carril: padre, texto: "Revisa el rumbo, semana a semana" }
     - { id: fin, tipo: fin, carril: padre, texto: "" }
   flujos:
@@ -49,7 +54,7 @@ proceso:
     - { de: rumbo, a: fin }
   anotaciones:
     - { paso: mide, texto: "La voz del niño nunca se guarda ni sale del aparato: se analiza en memoria y se descarta." }
-    - { paso: responde, texto: "Con la voz que la familia grabó una sola vez en el Estudio, en ese mismo aparato." }
+    - { paso: juego, texto: "Si la familia grabó su voz en el Estudio, consignas y palabras suenan con ella, en ese mismo aparato." }
 
 # Roadmap votable (2026-09-13): lo que la planeadora entrega como cierre de plan
 # de esta app — features disruptivas, no en construcción, sin fechas. PROCEDENCIA:
