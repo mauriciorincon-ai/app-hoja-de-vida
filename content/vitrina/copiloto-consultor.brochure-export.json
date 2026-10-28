@@ -12,21 +12,21 @@
     "enlaces.produccion": "null cuando la app no tiene URL pública. `razon` explica por qué, y es lo que la vitrina muestra en lugar del enlace. Nunca se rellena con un enlace de repositorio ni con una promesa."
   },
   "schema_version": "1.0.0",
-  "actualizado": "2026-10-12",
+  "actualizado": "2026-10-27",
   "app": {
     "slug": "copiloto-consultor",
     "nombre": "AngelGhost",
-    "ciclo": "H-1",
+    "ciclo": "H-2",
     "estado": "inicial",
     "sellado_en": null,
-    "sprints_cerrados": 8,
+    "sprints_cerrados": 14,
     "version_repo": "0.1.0"
   },
   "promesa": {
-    "tagline": "Tu propia experiencia, en la reunión, en el momento justo — y solo tú la ves.",
-    "intro": "Una ventana pequeña en tu Mac o en tu PC con Windows, durante Zoom, Meet o Teams. Escucha la reunión y lee la pantalla; cuando el cliente pregunta —«¿eso está en el alcance?»— te pone delante la ficha exacta de tu propuesta, tu marco, tu caso o tu trayectoria: un titular, una línea y de dónde sale. Nada se graba ni sale de tu equipo; al cerrar solo quedan tus notas.",
-    "para_quien": "Para el consultor de datos, BI e IA que hoy, con la pantalla compartida y una pregunta en el aire, elige entre responder de memoria o decir «déjame revisarlo y te cuento».",
-    "diferencial": "No es «un asistente invisible más». Los que existen son para ventas o entrevistas, en inglés, y viven de ocultarse. Esta responde desde tu propuesta, tu marco, tu caso y tu trayectoria; corre entera en tu equipo; y su promesa no es «nadie lo nota» sino «nada queda», demostrable con un contador y una prueba."
+    "tagline": "Tu propia experiencia, en la reunión y en el momento justo. Solo tú la ves.",
+    "intro": "Una ventana discreta en tu Mac o en tu PC con Windows que te acompaña en Zoom, Meet o Teams. Escucha la conversación y lee la pantalla de la reunión, y cuando el cliente pregunta «¿eso está en el alcance?», te pone delante la respuesta de tus propios documentos: un titular, una línea y la fuente exacta. De la reunión solo queda lo que tú decides guardar.",
+    "para_quien": "Para el consultor de datos, BI e IA que comparte pantalla con su cliente y, cuando llega la pregunta difícil, hoy elige entre responder de memoria o decir «déjame revisarlo y te cuento». Con AngelGhost responde con su propia propuesta, su método, sus casos y su trayectoria a la vista, sin abrir un solo archivo delante del cliente.",
+    "diferencial": "No es otro asistente que vive de esconderse. Los seis asistentes en vivo que verificó la investigación de mercado de la app están hechos para ventas o para entrevistas; AngelGhost está hecho para el consultor. Responde con lo que tú ya escribiste —tu propuesta, tu método, tus casos y tu trayectoria—, corre en tu equipo y su promesa no es «nadie lo nota», sino «nada queda»: un contador de bytes y un botón que vacía la memoria lo demuestran."
   },
   "funcionalidades": {
     "total": 20,
@@ -43,25 +43,25 @@
       {
         "orden": 1,
         "estrella": true,
-        "nombre": "Nada queda, y se comprueba",
-        "linea": "Lo del cliente vive en memoria y muere al cerrar; lo tuyo se guarda cifrado, y la app enseña la cuenta.",
+        "nombre": "Nada queda, y lo puedes comprobar",
+        "linea": "Lo que dice y muestra el cliente vive en memoria y muere al cerrar; solo queda lo que tú decides guardar, cifrado.",
         "features": [
           {
             "id": "N1",
-            "nombre": "Nada se graba, y se puede comprobar",
-            "que_hace": "El audio, lo que se dijo y el último cuadro leído de la pantalla viven solo en memoria y mueren al cerrar. Honestidad enseña cuánto ocupa cada uno ahora mismo y cuántos bytes salieron de tu equipo.",
+            "nombre": "Nada se graba, y lo compruebas tú",
+            "que_hace": "Compruebas, en vez de creer, que nada de la reunión se graba. El audio, lo que se dijo y lo leído de la pantalla viven solo en memoria y mueren al cerrar. La pantalla Honestidad muestra cuánto ocupa cada cosa y cuántos bytes salieron.",
             "seccion_manual": "Nada se graba, y se puede comprobar"
           },
           {
             "id": "N2",
-            "nombre": "Tus notas: lo único de la reunión que queda",
-            "que_hace": "Tu nota, tus acuerdos y las fichas que fijaste se guardan al terminar en un archivo por reunión, cifrado, en la carpeta privada de la app. Del cliente no se guarda ni su voz, ni sus turnos, ni lo que se leyó de su pantalla.",
+            "nombre": "Tus notas, lo único que se queda",
+            "que_hace": "Al día siguiente conservas solo lo tuyo: tu nota, tus acuerdos y las fichas que fijaste. Se guardan cifrados, en un archivo por reunión que se borra solo al vencer el plazo que elijas. Del cliente no se guarda su voz ni la conversación.",
             "seccion_manual": "Tus notas: lo único de la reunión que queda"
           },
           {
             "id": "N3",
-            "nombre": "La app te propone qué guardar, y la bandeja",
-            "que_hace": "Propone con reglas publicadas y sin modelo cifras, plazos, tus compromisos y lo que choca con una ficha fijada. Nada entra sin tu sí. Lo que no decides espera en una bandeja con cuenta atrás (3 h de fábrica, 24 h como mucho) y se borra sola al vencer, aunque no abras la app.",
+            "nombre": "Te propone qué guardar y espera tu sí",
+            "que_hace": "No tienes que tomar notas en plena reunión. La app te propone cifras, plazos y compromisos con reglas publicadas, sin inteligencia artificial, y nada se guarda sin tu sí. Lo que no decides espera en una bandeja con cuenta atrás y se borra sola.",
             "seccion_manual": "La app te propone qué guardar, y la bandeja"
           }
         ]
@@ -70,30 +70,30 @@
         "orden": 2,
         "estrella": false,
         "nombre": "Tu evidencia, en el momento justo",
-        "linea": "Una pregunta, una cifra, un término tuyo o un silencio, y aparece la ficha de tus propios documentos.",
+        "linea": "Una pregunta, una cifra o un silencio del cliente, y aparece la respuesta de tus propios documentos, con su fuente.",
         "features": [
           {
             "id": "E1",
-            "nombre": "Tu corpus, indexado",
-            "que_hace": "Lee tus PDF, Word y Markdown donde están, sin copiarlos ni subirlos, y los reparte en las cinco unidades del trabajo de consultoría: propuesta, marco, caso, ficha de cliente y tu perfil.",
+            "nombre": "Tus documentos, listos para responder",
+            "que_hace": "Tu experiencia escrita queda lista para usarse en vivo. La app lee tus PDF, Word y Markdown donde ya están, sin copiarlos ni subirlos. Los ordena en cinco tipos: propuestas, métodos, casos, fichas de cliente y tu propia trayectoria.",
             "seccion_manual": "Tu corpus, indexado"
           },
           {
             "id": "E2",
-            "nombre": "La ficha en el momento justo",
-            "que_hace": "Cuando el cliente pregunta, dice una cifra, nombra algo de tus documentos o se queda callado, pone en la banda un titular de ocho palabras, una línea y la fuente exacta. Si tu corpus no tiene la respuesta pero sí algo cercano, te lo nombra.",
+            "nombre": "La respuesta, justo cuando la necesitas",
+            "que_hace": "Cuando el cliente pregunta, menciona una cifra o se queda callado, la respuesta aparece sola en la banda. Es una ficha de tus documentos: un titular de ocho palabras, una línea y la fuente exacta. Si no la encuentra, te nombra lo más cercano.",
             "seccion_manual": "La ficha en el momento justo"
           },
           {
             "id": "E3",
-            "nombre": "La sugerencia: qué decir, con su fuente",
-            "que_hace": "Debajo de la ficha propone qué decir en una frase: la redacta el modelo de tu Mac o, si lo enciendes con tu clave, Claude o Groq; en Windows, siempre el API que elijas. Dice dónde se redactó y con qué confianza, y se descarta sola si afirma algo que su ficha no dice.",
+            "nombre": "Qué decir, en una frase y con su fuente",
+            "que_hace": "Debajo de la ficha aparece una frase lista para decir. La escribe un modelo de inteligencia artificial en tu equipo o, en el Mac, si quieres, Claude o Groq con tu clave. Si afirma algo que la ficha no dice, se descarta.",
             "seccion_manual": "La sugerencia: qué decir, con su fuente"
           },
           {
             "id": "E4",
-            "nombre": "El modo solo audio: la ficha, al oído",
-            "que_hace": "Te lee la ficha en voz alta con la voz del sistema mientras la banda se encoge a una línea, para que recuperes la pantalla completa de la reunión. Si el sonido sale por altavoces, se calla.",
+            "nombre": "La ficha, al oído",
+            "que_hace": "Recuperas la pantalla completa de la reunión sin perder la ayuda. La app te lee la ficha por tus auriculares mientras la banda se reduce a una sola línea. Nunca habla encima de nadie, y si el sonido sale por altavoces, se calla.",
             "seccion_manual": "El modo solo audio: la ficha, al oído"
           }
         ]
@@ -101,25 +101,25 @@
       {
         "orden": 3,
         "estrella": false,
-        "nombre": "La ventana que solo tú ves",
-        "linea": "Una banda junto a la cámara que no aparece en lo que compartes — donde la corrida en vivo lo verificó.",
+        "nombre": "Una ventana pensada solo para ti",
+        "linea": "Una banda junto a la cámara que le pide al sistema quedar fuera de lo que compartes, y te dice dónde está comprobado.",
         "features": [
           {
             "id": "V1",
-            "nombre": "La banda protegida",
-            "que_hace": "Una franja junto a la cámara, o abajo, donde aparece todo lo que la app tiene que decirte. La app le pide al sistema que la deje fuera de la captura de pantalla. Está verificado en Google Meet sobre macOS 26.6.2 con la banda abajo; en lo demás, la app dice «sin verificar» y tú lo compruebas.",
+            "nombre": "La banda, fuera de lo que compartes",
+            "que_hace": "Lo que la app tiene que decirte aparece en una franja junto a la cámara. Le pide al sistema dejarla fuera de lo que compartes. Está comprobado en Google Meet sobre macOS, con la banda abajo; en lo demás, la app avisa que falta verificarlo.",
             "seccion_manual": "La banda protegida"
           },
           {
             "id": "V2",
-            "nombre": "El acople: la reunión se hace sitio",
-            "que_hace": "Le hace sitio a la banda en la ventana de la videollamada, como dos aplicaciones pegadas, y al cerrar la devuelve a su sitio y a su tamaño. En el Mac pide el permiso de Accesibilidad; en Windows no pide ninguno.",
+            "nombre": "La reunión se acomoda a la banda",
+            "que_hace": "Ves la videollamada completa, sin que la banda le tape nada. La ventana de la reunión se encoge para dejarle sitio, como dos aplicaciones pegadas, y al cerrar vuelve a su tamaño. En el Mac necesita el permiso de Accesibilidad; en Windows, ninguno.",
             "seccion_manual": "El acople: la reunión se hace sitio"
           },
           {
             "id": "V3",
-            "nombre": "Arriba o abajo: la banda junto a la cámara",
-            "que_hace": "De fábrica la banda va arriba, junto a la cámara, para que leer la ficha se vea como mirar a quien habla. Con un gesto pasa abajo y la ventana de la reunión se recoloca.",
+            "nombre": "Arriba, junto a la cámara",
+            "que_hace": "Leer la ficha se ve como mirar a quien te habla. Por eso la banda va de fábrica arriba, junto a la cámara, y la ventana de la reunión baja para hacerle sitio. Si la prefieres abajo, la cambias con un atajo de teclado.",
             "seccion_manual": "Arriba o abajo: la banda junto a la cámara"
           }
         ]
@@ -127,43 +127,43 @@
       {
         "orden": 4,
         "estrella": false,
-        "nombre": "Escucha y lee, sin bot",
-        "linea": "Oye y lee lo que pasa en la reunión dentro de tu equipo, sin entrar en ella.",
+        "nombre": "Escucha y lee, sin entrar a la reunión",
+        "linea": "Oye la conversación y lee la pantalla compartida desde tu propio equipo, sin bots en la llamada ni audio que salga.",
         "features": [
           {
             "id": "L1",
-            "nombre": "Escucha las dos pistas",
-            "que_hace": "Oye tu micrófono (tú) y el audio del equipo (el cliente) por separado y los convierte a texto dentro de tu equipo: sabe quién habla por la pista, sin identificar la voz de nadie. Ningún audio sale de tu equipo.",
+            "nombre": "Oye a los dos lados por separado",
+            "que_hace": "La app sabe qué dijiste tú y qué dijo el cliente sin reconocer la voz de nadie. Escucha tu micrófono y el audio de tu equipo como dos pistas separadas y las convierte en texto ahí mismo. Ningún audio sale de tu equipo.",
             "seccion_manual": "Escucha las dos pistas"
           },
           {
             "id": "L2",
-            "nombre": "Presencial: la app escucha la sala",
-            "que_hace": "En la mesa con el cliente, o con tu Mac al lado de un PC donde corre la videollamada, escucha la sala por el micrófono y te da la ficha de siempre, de fábrica al oído. La tolerancia a tu propia voz son reglas sobre el texto y el tiempo, medidas con voces sintéticas, nunca reconociendo la voz de nadie.",
+            "nombre": "También en la reunión presencial",
+            "que_hace": "Funciona en la mesa con el cliente o junto al equipo donde corre la videollamada. Escucha la sala por el micrófono y te da la misma ficha, de fábrica al oído. Para no dispararse con tu voz usa reglas de tiempo y de texto.",
             "seccion_manual": "Presencial: la app escucha la sala"
           },
           {
             "id": "L3",
-            "nombre": "Lee la pantalla de la reunión",
-            "que_hace": "Mira la ventana de Zoom, Teams o Meet y solo lee lo nuevo, una vez: si trae una cifra o uno de tus términos te trae la ficha, y si dos fichas responden igual de bien, lo que se ve en pantalla desempata. La imagen vive en memoria y se descarta al leerla.",
+            "nombre": "Lee lo que se comparte en pantalla",
+            "que_hace": "Si el cliente muestra una diapositiva con una cifra o un término tuyo, la ficha llega sin que nadie pregunte. La app mira la ventana de Zoom, Teams o Meet, lee solo lo nuevo, una vez, y descarta la imagen enseguida.",
             "seccion_manual": "Lee la pantalla de la reunión"
           },
           {
             "id": "L4",
-            "nombre": "El modelo de voz de un idioma",
-            "que_hace": "Idioma dice de cada pista si su modelo de voz está instalado y, si falta, ofrece instalarlo: el de macOS en el Mac, whisper (1,6 GB, con su huella comprobada) en Windows. Es la única vez que la transcripción toca la red, y solo porque tú lo pides.",
+            "nombre": "Tu modelo de voz, sin depender de la red",
+            "que_hace": "La transcripción trabaja sin conexión una vez que tienes el modelo de voz de tu idioma. La pantalla Idioma te dice si falta y lo instala con un botón. En Windows, la app comprueba que el archivo descargado sea el original antes de usarlo.",
             "seccion_manual": "El modelo de voz de un idioma"
           },
           {
             "id": "L5",
-            "nombre": "Español e inglés, en todo",
-            "que_hace": "La app entera, incluidos los textos que el sistema enseña al pedir permisos, está en español y en inglés, y sigue el idioma del sistema.",
+            "nombre": "En español y en inglés",
+            "que_hace": "La app te habla en tu idioma y escucha cada lado de la conversación en el suyo. Toda la interfaz, incluidos los avisos del sistema al pedir permisos, está en español y en inglés, y sigue el idioma de tu equipo.",
             "seccion_manual": "Español e inglés, en todo"
           },
           {
             "id": "L6",
-            "nombre": "Tu diccionario técnico",
-            "que_hace": "Corrige después de transcribir la jerga que el motor de voz oye mal («power by» → Power BI, «the ax» → DAX), en tu equipo y sin modelo. Viene con la jerga de datos puesta, y los nombres de tus clientes salen solos de tu corpus.",
+            "nombre": "Entiende tu jerga técnica",
+            "que_hace": "Evita que una palabra mal transcrita te deje sin la ficha correcta. Un diccionario corrige lo que el motor de voz oye mal, como «power by» por Power BI, sin inteligencia artificial. Los nombres de tus clientes los toma solo de tus documentos.",
             "seccion_manual": "Tu diccionario técnico"
           }
         ]
@@ -172,12 +172,12 @@
         "orden": 5,
         "estrella": false,
         "nombre": "Antes de la reunión",
-        "linea": "Ensaya con las preguntas que ese cliente probablemente hará.",
+        "linea": "Ensaya con las preguntas que ese cliente probablemente hará, sacadas de tu propia propuesta.",
         "features": [
           {
             "id": "P1",
-            "nombre": "El ensayo: practica antes de la reunión",
-            "que_hace": "Eliges cliente y propuesta y la app te hace las preguntas que ese cliente probablemente hará, sacadas con reglas publicadas de tu propuesta, de su ficha y de un catálogo de objeciones de datos, BI e IA. Te escucha solo por el micrófono y te dice qué evidencia usaste y cuál tenías y no usaste, tu ritmo y tus muletillas.",
+            "nombre": "Ensaya antes de la reunión",
+            "que_hace": "Llegas preparado a la reunión difícil. Eliges cliente y propuesta, y la app te hace las preguntas que ese cliente probablemente hará, sacadas de tus documentos. Al responder en voz alta ves qué evidencia usaste, cuál te faltó, tu ritmo y tus muletillas.",
             "seccion_manual": "El ensayo: practica antes de la reunión"
           }
         ]
@@ -185,25 +185,25 @@
       {
         "orden": 6,
         "estrella": false,
-        "nombre": "El marco y tu equipo, protegidos",
-        "linea": "Qué regla aplica a cada cliente, quién graba o te vigila, y un agente que opera la app sin tocar la reunión.",
+        "nombre": "Reglas claras y tu equipo protegido",
+        "linea": "Qué norma aplica a cada cliente, quién graba o vigila tu equipo y un agente local que no toca la reunión.",
         "features": [
           {
             "id": "M1",
-            "nombre": "El marco en la mano: tu cliente, su jurisdicción y su NDA",
-            "que_hace": "Antes de empezar, Sesión enseña qué regla aplica a este cliente, con sus normas y su fecha; pregunta si su NDA prohíbe grabar o transcribir y, si lo prohíbe, propone el modo solo notas; y da una cláusula modelo para tu carta de encargo. Nunca te bloquea y dice siempre que no es asesoría legal.",
+            "nombre": "Las reglas de cada cliente, a la vista",
+            "que_hace": "Antes de empezar ves qué norma aplica según dónde está tu cliente, con fuente y fecha. Si su acuerdo de confidencialidad prohíbe transcribir, la app te propone tomar solo notas. Incluye una cláusula modelo para tu carta de encargo, sin ser asesoría legal.",
             "seccion_manual": "El marco en la mano: tu cliente, su jurisdicción y su NDA"
           },
           {
             "id": "M2",
-            "nombre": "El radar: quién graba y quién te vigila",
-            "que_hace": "Mirando solo tu equipo y tu pantalla, avisa en ámbar si la reunión muestra el aviso de grabación o un bot de notas, y en coral si en tu equipo corre software de monitoreo o de supervisión de exámenes de un catálogo con fuente por fila y fecha de lectura. Jamás toca la máquina de nadie.",
+            "nombre": "Te avisa si te graban o te vigilan",
+            "que_hace": "Sabes si la reunión se está grabando o si un programa de tu propio equipo mira tu pantalla. La app reconoce el aviso de grabación o un bot de notas en la reunión, y los programas de monitoreo en tu equipo. Avisa, pero nunca bloquea.",
             "seccion_manual": "El radar: quién graba y quién te vigila"
           },
           {
             "id": "M3",
-            "nombre": "La puerta local: que Claude Code opere la app",
-            "que_hace": "Claude Code, en tu Mac y en tu sesión, opera la app con el comando ghost: buscar en tu corpus, reindexarlo, correr el kit de evaluación, cambiar algunas preferencias y abrir tus notas guardadas. Nace cerrada, en reunión o durante un ensayo se cierra sola, y no sale a la red.",
+            "nombre": "Tu agente local, con la puerta cerrada",
+            "que_hace": "Puedes delegar tareas en Claude Code, el agente de Anthropic que trabaja en tu equipo: buscar en tus documentos, reindexarlos o medir la búsqueda. La puerta nace cerrada, se cierra sola durante una reunión o un ensayo, y no usa internet.",
             "seccion_manual": "La puerta local: que Claude Code opere la app"
           }
         ]
@@ -222,10 +222,10 @@
     {
       "clave": "pruebas_automaticas",
       "etiqueta": "Pruebas automáticas",
-      "valor": 1806,
+      "valor": 2161,
       "unidad": "pruebas",
       "fuente": "medido",
-      "detalle": "Las que corrió la CI (commit ba58ca7, corrida 38285677757): Vitest 629 de 631 (allí se saltan 2: comparan con copias que viven en otros repos de este Mac); cargo test en macOS 748 (librería 699, contra el Mac 30, puerta 14, ghost 5; las 3 «en_vivo_» se corren a mano, con el usuario delante); Playwright 429, con 3 saltadas a propósito. En Windows, la librería pasa 672 y su integración 4."
+      "detalle": "Las que corrió la CI sobre 67052a9 (corrida 39359241474; leída el 2026-10-27): Vitest 865 de 868 (3 se saltan: comparan con archivos de otros repos); cargo test en macOS 820 (librería 771, contra el Mac 30, puerta 14, ghost 5; las 3 «en_vivo_» se corren a mano); Playwright 476, con 3 saltadas a propósito. En Windows, x64 y ARM64, la librería pasa 747."
     },
     {
       "clave": "bytes_que_salen_del_equipo",
@@ -246,10 +246,10 @@
     {
       "clave": "decisiones_registradas",
       "etiqueta": "Decisiones de arquitectura registradas",
-      "valor": 23,
+      "valor": 24,
       "unidad": "ADR",
       "fuente": "medido",
-      "detalle": "Archivos de decisions/ (001–023). Lo recuenta tests/unit/brochure-export.test.ts."
+      "detalle": "Archivos de decisions/ (001–024). Lo recuenta tests/unit/brochure-export.test.ts."
     },
     {
       "clave": "precision_del_disparador",
@@ -270,10 +270,10 @@
     {
       "clave": "latencia_pregunta_a_ficha",
       "etiqueta": "De la pregunta a la ficha, el peor caso del kit",
-      "valor": 1.3,
+      "valor": 1.4,
       "unidad": "ms",
       "fuente": "medido",
-      "detalle": "El tramo determinista del kit v0, de la pregunta transcrita a la ficha: mediana 0,706 ms, p90 0,998 ms, peor 1,3 ms. No incluye la captura ni la transcripción: el presupuesto de la app es de 4 s del fin de turno a la ficha, y ese tramo con voz real la CI no lo mide, porque no tiene modelos de voz. Misma corrida."
+      "detalle": "El tramo determinista del kit v0, de la pregunta transcrita a la ficha: mediana 0,747 ms, p90 1,089 ms, peor 1,449 ms. No incluye la captura ni la transcripción: el presupuesto de la app es de 4 s del fin de turno a la ficha, y ese tramo con voz real la CI no lo mide. CI de 67052a9 (corrida 39359241474; leída el 2026-10-27)."
     },
     {
       "clave": "fichas_falsas_por_tu_voz_en_la_sala",
@@ -322,13 +322,13 @@
     "local_only": true,
     "red_saliente": false,
     "usa_ia": true,
-    "detalle": "Todo corre en tu equipo: la transcripción, la lectura de pantalla, la búsqueda y, si no enciendes el API, la sugerencia. El audio, el transcript y lo leído de la pantalla viven solo en memoria y mueren al cerrar; ningún audio ni imagen sale del equipo. Por defecto no hay tráfico de salida y el contador de Honestidad marca 0 B. Las dos salidas que existen las abres tú: la descarga de un modelo de voz, y el API externo de la sugerencia, que nace apagado y, si lo enciendes con tu clave, solo recibe texto minimizado y anonimizado. La IA es un acento: la ficha del corpus no usa ningún modelo."
+    "detalle": "Lo esencial ocurre en tu equipo: la transcripción, la lectura de pantalla, la búsqueda en tus documentos y, si la enciendes, la frase sugerida con un modelo local. El audio, la conversación y lo leído de la pantalla viven solo en memoria y mueren al cerrar. La app no envía nada mientras no lo pidas, y el contador de Honestidad marca 0 B. Algo sale solo cuando instalas un modelo o, en el Mac, si enciendes un proveedor externo con tu clave, que recibe texto corto y anonimizado. En Windows, el motor de la ventana (WebView2, de Microsoft Edge) mantiene por su cuenta 2 o 3 conexiones con Microsoft que ese contador no cuenta, y la app lo dice. La ficha nunca usa inteligencia artificial."
   },
   "enlaces": {
     "produccion": null,
-    "razon": "App de escritorio para macOS y Windows: no tiene URL de producción. Se instala en el equipo, y por la regla de cero enlaces del portafolio este export no publica ningún enlace de acceso.",
+    "razon": "Es una app de escritorio para macOS y Windows: se instala en tu equipo y no tiene una dirección web. Por la regla de cero enlaces del Portafolio, esta ficha no publica ningún enlace de acceso.",
     "repositorio": null,
-    "razon_repositorio": "Ningún enlace viaja en este export: es la regla de cero enlaces del portafolio, no una cuestión de visibilidad del repositorio.",
+    "razon_repositorio": "Ningún enlace viaja en esta ficha: es la regla de cero enlaces del Portafolio, no una cuestión de si el repositorio es público.",
     "brochure_archivo": "docs/BROCHURE.html",
     "brochure_ruta_local": "/conoce"
   }

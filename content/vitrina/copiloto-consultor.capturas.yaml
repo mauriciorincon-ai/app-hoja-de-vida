@@ -1,0 +1,27 @@
+# Capturas del pedido 026 de AngelGhost: el build del frontend (vite preview) con los datos sintéticos de la app
+# (clientes «Páramo Azul» y «Sur del Valle», del kit de muestra), sin Rust, sin audio y sin modelo. Viewport 1024×640 a
+# DPR 1.5 (archivo 1536×960), tema claro, interfaz en español; macOS salvo L4 (la muestra de Windows de la app).
+# Las que muestran la banda la ponen a su alto real sobre el cuaderno, que va a escala sobre el escritorio: son dos
+# ventanas reales del build en una misma imagen.
+portada: entrada.webp
+capturas:
+  - { funcionalidad: N1, archivo: N1.webp, pie: { es: "Honestidad: qué vive en memoria ahora y cuántos bytes salieron: cero", en: "Honesty: what lives in memory right now and how many bytes left: zero" } }
+  - { funcionalidad: N2, archivo: N2.webp, pie: { es: "Tus reuniones guardadas: cifradas y con fecha de borrado", en: "Your saved meetings: encrypted and with a deletion date" } }
+  - { funcionalidad: N3, archivo: N3.webp, pie: { es: "La bandeja: decides qué guardar antes de que la cuenta llegue a cero", en: "The tray: you decide what to keep before the countdown hits zero" } }
+  - { funcionalidad: E1, archivo: E1.webp, pie: { es: "Tu corpus: tus documentos leídos donde están, en cinco tipos", en: "Your corpus: your documents read where they live, in five kinds" } }
+  - { funcionalidad: E2, archivo: E2.webp, pie: { es: "La ficha en la banda: titular, línea y fuente, de tu propuesta", en: "The card in the band: headline, line and source, from your proposal" } }
+  - { funcionalidad: E3, archivo: E3.webp, pie: { es: "La frase sugerida junto a su ficha, redactada en tu equipo", en: "The suggested line next to its card, drafted on your computer" } }
+  - { funcionalidad: E4, archivo: E4.webp, pie: { es: "Solo audio: la banda se reduce a una línea mientras te lee la ficha", en: "Audio only: the band shrinks to one line while it reads you the card" } }
+  - { funcionalidad: V1, archivo: V1.webp, pie: { es: "La banda abajo, protegida en Meet, mientras tomas notas", en: "The band at the bottom, protected in Meet, while you take notes" } }
+  - { funcionalidad: V2, archivo: V2.webp, pie: { es: "Permisos: acoplar la reunión para que la banda no tape la llamada", en: "Permissions: dock the meeting so the band never covers the call" } }
+  - { funcionalidad: V3, archivo: V3.webp, pie: { es: "La banda arriba, junto a la cámara, y el aviso de la primera vez", en: "The band on top, next to the camera, and the first-time notice" } }
+  - { funcionalidad: L1, archivo: L1.webp, pie: { es: "Tú y el cliente, en dos pistas separadas, solo en memoria", en: "You and the client, on two separate tracks, in memory only" } }
+  - { funcionalidad: L2, archivo: L2.webp, pie: { es: "Presencial: la app escucha la sala y te da la ficha al oído", en: "In person: the app listens to the room and reads you the card in your ear" } }
+  - { funcionalidad: L3, archivo: L3.webp, pie: { es: "Una ficha que llegó por lo que se ve en pantalla, sin preguntas", en: "A card brought by what is on screen, with no question asked" } }
+  - { funcionalidad: L4, archivo: L4.webp, pie: { es: "Idioma en Windows: whisper transcribe en tu PC, sin servicios", en: "Language on Windows: whisper transcribes on your PC, no services" } }
+  - { funcionalidad: L6, archivo: L6.webp, pie: { es: "Tu diccionario técnico: términos de tu corpus y de tu archivo", en: "Your technical dictionary: terms from your corpus and your file" } }
+  - { funcionalidad: P1, archivo: P1.webp, pie: { es: "El ensayo: qué evidencia usaste, cuál faltó, ritmo y muletillas", en: "The rehearsal: evidence used, evidence missed, pace and fillers" } }
+  - { funcionalidad: M1, archivo: M1.webp, pie: { es: "La NDA lo prohíbe: la app te propone el modo solo notas", en: "The NDA forbids it: the app offers notes-only mode" } }
+  - { funcionalidad: M2, archivo: M2.webp, pie: { es: "El radar: un programa de tu equipo que mira tu pantalla", en: "The radar: a program on your computer that watches your screen" } }
+  - { funcionalidad: M3, archivo: M3.webp, pie: { es: "La puerta local: lo que tu agente puede hacer y lo que nunca", en: "The local door: what your agent can do and what it never can" } }
+sin_pantalla: [L5]
