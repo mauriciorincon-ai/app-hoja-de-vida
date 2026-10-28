@@ -1,0 +1,22 @@
+# Capturas de la ficha de Anonimizador Velo — pedido 026, planeadora, 2026-10-27.
+# Tomadas de un build de producción de la base `origin/main` 5bac57b, en tema claro, 1536×960 y
+# deviceScaleFactor 1, recorriendo la app por su interfaz con archivos del generador sintético
+# seeded de la propia app (`docs/kit-de-prueba/generador.mjs`, perfil clínico, semillas 42, 7 y 11).
+# Ningún dato real: nombres, documentos y correos salen de un PRNG con semilla.
+portada: entrada.webp
+capturas:
+  - { funcionalidad: C1, archivo: C1.webp, pie: { es: "Un CSV de 500.000 filas abriéndose en la pestaña, con su etapa real", en: "A 500,000-row CSV opening inside the tab, showing its real stage" } }
+  - { funcionalidad: C2, archivo: C2.webp, pie: { es: "Cada columna con su categoría de la ley, el porqué y una muestra tapada", en: "Each column with its legal category, the reason and a masked sample" } }
+  - { funcionalidad: C13, archivo: C13.webp, pie: { es: "El reporte del diagnóstico, visto antes de descargarlo", en: "The diagnosis report, previewed before you download it" } }
+  - { funcionalidad: C3, archivo: C3.webp, pie: { es: "Una regla por columna: tapar, seudónimo, recortar o quitar", en: "One rule per column: mask, pseudonym, truncate or remove" } }
+  - { funcionalidad: C14, archivo: C14.webp, pie: { es: "Habeas Data de un clic, con lo que reconoce sola y lo que te toca a ti", en: "Habeas Data in one click: what it detects and what is left to you" } }
+  - { funcionalidad: C4, archivo: C4.webp, pie: { es: "Antes y después, valor por valor, con cuatro técnicas distintas", en: "Before and after, value by value, with four different techniques" } }
+  - { funcionalidad: C10, archivo: C10.webp, pie: { es: "Cédulas y NIT disfrazados que conservan su forma y su dígito", en: "Disguised ID and tax numbers that keep their shape and check digit" } }
+  - { funcionalidad: C9, archivo: C9.webp, pie: { es: "La llave lista: su huella y la sal que guardas para repetir seudónimos", en: "The key is ready: its fingerprint and the salt to repeat pseudonyms" } }
+  - { funcionalidad: C5, archivo: C5.webp, pie: { es: "Las columnas que delatan al juntarse, con su grupo más pequeño real", en: "Columns that single people out together, with their real smallest group" } }
+  - { funcionalidad: C6, archivo: C6.webp, pie: { es: "El riesgo en la población declarada, marcado como estimado", en: "Risk in the declared population, labelled as an estimate" } }
+  - { funcionalidad: C7, archivo: C7.webp, pie: { es: "El balance: lo que quedó sin proteger va antes que las cifras", en: "The balance: whatever is left unprotected comes before the figures" } }
+  - { funcionalidad: C8, archivo: C8.webp, pie: { es: "El regreso: los valores reales vuelven aunque el tercero movió filas", en: "The return: real values come back even after rows were reordered" } }
+  - { funcionalidad: C11, archivo: C11.webp, pie: { es: "El certificado de la entrega, con las dos huellas, antes de descargarlo", en: "The delivery certificate with both fingerprints, before downloading" } }
+  - { funcionalidad: C12, archivo: C12.webp, pie: { es: "La bitácora cifrada, abierta: tres entregas, una desplegada", en: "The encrypted log, opened: three deliveries, one expanded" } }
+sin_pantalla: []

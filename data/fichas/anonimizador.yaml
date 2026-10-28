@@ -1,39 +1,49 @@
-# Complemento de la ficha técnica de Anonimizador Velo (ADR-016). PROCEDENCIA: cv-viva —
-# derivado de su export por CV Viva; se retira cuando la app mande el suyo.
+# Complemento de la ficha técnica de Anonimizador Velo (`anonimizador`, ADR-016). PROCEDENCIA: planeadora —
+# pedido 026 de CV Viva (sentada 4a), ejecutado por la planeadora el 2026-10-27 desde una copia aislada de la
+# base `origin/main` 5bac57b de app-anonimizador. Sustituye al complemento derivado por CV Viva (2026-09-05).
+# `cifras_destacadas` son CLAVES de `metricas[]` del export (un solo cero: el de la promesa, nada sale del
+# navegador). El `proceso` corrige el que armó CV Viva («Entregar sin entregar, y recuperar»): mismos actores;
+# pasos en lenguaje llano, con la bóveda, la devolución del tercero y la restauración. El `roadmap` se copia
+# tal cual del yaml de CV Viva: sus ids son la clave del voto.
 schema_version: "1.0.0"
 app: anonimizador
-procedencia: cv-viva
-declarado_en: "2026-09-05"
-titular: "La única que hace el viaje completo dentro del navegador —entregas sin entregar y recuperas con tu bóveda— con validadores que citan su fuente oficial y cero IA: el mismo archivo produce siempre el mismo resultado, byte por byte."
-cifras_destacadas: [funcionalidades, filas_procesadas, llamadas_de_red_con_datos, cobertura_lineas, costo_operacion_mensual]
+procedencia: planeadora
+declarado_en: "2026-10-27"
+titular: "Entregas tablas con datos de personas sin entregar a nadie: Velo las disfraza dentro de tu navegador, mide el riesgo con cifras exactas y, con tu bóveda cifrada, te devuelve los valores reales cuando el trabajo regresa."
+cifras_destacadas: [funcionalidades, filas_procesadas, llamadas_de_red_con_datos, pruebas_unitarias, cobertura_lineas]
 limites:
-  - "Cero inteligencia artificial, a propósito: el resultado es determinista y reproducible."
-  - "Todo ocurre dentro de la pestaña, en un hilo aparte: no hay servidor que reciba el archivo — ni que lo respalde."
-  - "Los validadores citan su fuente oficial; lo que no tiene fuente no se valida."
+  - "Mide el riesgo de reidentificación y te lo muestra; no lo elimina ni declara anónimo ningún archivo."
+  - "Reconoce documentos, contactos, ubicaciones y datos demográficos; un código interno de tu organización puede pasar sin que lo note."
+  - "Lee CSV y Excel (hasta 150 MB) y entrega CSV; no lee bases de datos, JSON ni PDF."
+  - "Sin tu frase de paso no hay recuperación: ni Velo ni nadie puede abrir la bóveda."
 nunca:
-  - "Sube el archivo a un servidor."
+  - "Sube tu archivo a un servidor."
   - "Deja copia al cerrar la pestaña."
-  - "Decide con IA qué se anonimiza."
-  - "Desvela sin tu bóveda."
+  - "Usa inteligencia artificial para decidir qué se anonimiza."
+  - "Mezcla una cifra estimada con una exacta."
+  - "Desvela sin tu bóveda y tu frase de paso."
 proceso:
   titulo: "Entregar sin entregar, y recuperar"
   carriles:
     - { id: persona, nombre: "Quien entrega" }
     - { id: velo, nombre: "Anonimizador Velo · en el navegador" }
-    - { id: tercero, nombre: "El tercero" }
+    - { id: tercero, nombre: "El tercero: consultor, IA o herramienta" }
   pasos:
-    - { id: ini, tipo: inicio, carril: persona, texto: "Un archivo con datos de personas" }
-    - { id: abre, tipo: tarea, carril: persona, texto: "Abre el archivo en la pestaña" }
-    - { id: delata, tipo: tarea, carril: velo, texto: "Señala lo que te delata" }
+    - { id: ini, tipo: inicio, carril: persona, texto: "Una tabla con datos de personas" }
+    - { id: abre, tipo: tarea, carril: persona, texto: "Suelta el archivo en la pestaña" }
+    - { id: delata, tipo: tarea, carril: velo, texto: "Señala qué columnas identifican a alguien" }
     - { id: decide, tipo: tarea, carril: persona, texto: "Decide qué se le hace a cada columna" }
-    - { id: vela, tipo: tarea, carril: velo, texto: "Vela con exactitud" }
-    - { id: riesgo, tipo: tarea, carril: velo, texto: "Mide el riesgo de reidentificación" }
-    - { id: acepta, tipo: decision, carril: persona, texto: "¿Aceptable?" }
-    - { id: certifica, tipo: tarea, carril: velo, texto: "Certifica con las dos huellas" }
-    - { id: entrega, tipo: tarea, carril: persona, texto: "Entrega el archivo velado" }
-    - { id: trabaja, tipo: tarea, carril: tercero, texto: "Trabaja sobre datos velados" }
-    - { id: recupera, tipo: tarea, carril: persona, texto: "Recupera con su bóveda" }
-    - { id: fin, tipo: fin, carril: persona, texto: "" }
+    - { id: vela, tipo: tarea, carril: velo, texto: "Disfraza cada columna según la política" }
+    - { id: riesgo, tipo: tarea, carril: velo, texto: "Mide el riesgo antes y después" }
+    - { id: acepta, tipo: decision, carril: persona, texto: "¿El riesgo que queda es aceptable?" }
+    - { id: certifica, tipo: tarea, carril: velo, texto: "Certifica la entrega con las dos huellas" }
+    - { id: boveda, tipo: tarea, carril: persona, texto: "Guarda la bóveda cifrada con su frase" }
+    - { id: entrega, tipo: tarea, carril: persona, texto: "Entrega el archivo disfrazado" }
+    - { id: trabaja, tipo: tarea, carril: tercero, texto: "Trabaja sobre los datos disfrazados" }
+    - { id: devuelve, tipo: tarea, carril: tercero, texto: "Devuelve el archivo trabajado" }
+    - { id: carga, tipo: tarea, carril: persona, texto: "Abre la bóveda y carga lo devuelto" }
+    - { id: restaura, tipo: tarea, carril: velo, texto: "Restaura los valores reales" }
+    - { id: fin, tipo: fin, carril: persona, texto: "El trabajo, con los datos reales" }
   flujos:
     - { de: ini, a: abre }
     - { de: abre, a: delata }
@@ -43,13 +53,17 @@ proceso:
     - { de: riesgo, a: acepta }
     - { de: acepta, a: certifica, etiqueta: "sí" }
     - { de: acepta, a: decide, etiqueta: "no · ajusta" }
-    - { de: certifica, a: entrega }
+    - { de: certifica, a: boveda }
+    - { de: boveda, a: entrega }
     - { de: entrega, a: trabaja }
-    - { de: trabaja, a: recupera }
-    - { de: recupera, a: fin }
+    - { de: trabaja, a: devuelve }
+    - { de: devuelve, a: carga }
+    - { de: carga, a: restaura }
+    - { de: restaura, a: fin }
   anotaciones:
     - { paso: vela, texto: "En un hilo aparte del navegador: no hay subida, no hay servidor y no queda copia al cerrar." }
-    - { paso: recupera, texto: "Solo con la bóveda de quien entregó: sin ella nadie desvela." }
+    - { paso: boveda, texto: "Viaja aparte, nunca junto al archivo entregado: solo quien entregó la tiene." }
+    - { paso: restaura, texto: "Por valor, no por posición: sobrevive a filas reordenadas, columnas nuevas y valores corregidos." }
 
 # Roadmap votable (2026-09-13): lo que la planeadora entrega como cierre de plan
 # de esta app — features disruptivas, no en construcción, sin fechas. PROCEDENCIA:
