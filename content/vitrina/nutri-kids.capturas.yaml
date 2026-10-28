@@ -1,0 +1,25 @@
+# Capturas de Nutrikids — pedido 026 (planeadora, 2026-10-27). Build de producción de
+# origin/main 69538dc, viewport 1024×640 a DPR 1,5 (archivo 1536×960), tema de CV Viva (tema-cv-viva.mjs).
+# Datos 100 % sintéticos: la «Dieta demo» inventada del repo y un plan sintético derivado
+# de ella; el registro y las notas son de ejemplo. Reloj fijo en lunes 2026-09-21,
+# dentro de la ventana de la restricción demo. F18 va en inglés a propósito: es el cambio de idioma.
+portada: entrada.webp
+capturas:
+  - { funcionalidad: F1, archivo: F1.webp, pie: { es: "Buscas «ma» y el semáforo responde: evitar, con límite o se puede", en: "Search «ma» and the traffic light answers: avoid, limited or allowed" } }
+  - { funcionalidad: F2, archivo: F2.webp, pie: { es: "La manzana en descanso, hasta cuándo y con qué reemplazarla", en: "Apple on pause, until when, and what to swap it for" } }
+  - { funcionalidad: F3, archivo: F3.webp, pie: { es: "La pestaña Rojo: lo que se evita y los aditivos que vigilar en la etiqueta", en: "The Red tab: what to avoid and the additives to watch on the label" } }
+  - { funcionalidad: F4, archivo: F4.webp, pie: { es: "La lista del día a media tarde: suplemento tomado y dos vasos de agua", en: "The day's checklist mid-afternoon: supplement taken, two glasses of water" } }
+  - { funcionalidad: F5, archivo: F5.webp, pie: { es: "«Ahora mismo»: toca la media mañana, sigue el almuerzo y falta el suplemento", en: "«Right now»: mid-morning snack is due, lunch is next, supplement pending" } }
+  - { funcionalidad: F6, archivo: F6.webp, pie: { es: "Al marcar el almuerzo queda la hora real: «Hecho · 12:48 p. m.»", en: "Checking off lunch keeps the real time: «Done · 12:48 p.m.»" } }
+  - { funcionalidad: F7, archivo: F7.webp, pie: { es: "Una nota para el almuerzo: «Lo rechazó» y una línea para el pediatra", en: "A note on lunch: «Refused it» plus one line for the pediatrician" } }
+  - { funcionalidad: F8, archivo: F8.webp, pie: { es: "Los días anteriores, por fecha, con las horas y las notas de cada comida", en: "Previous days by date, with each meal's times and notes" } }
+  - { funcionalidad: F9, archivo: F9.webp, pie: { es: "El calendario de suplementos: hoy resaltado y ya tomado", en: "The supplement calendar: today highlighted and already taken" } }
+  - { funcionalidad: F10, archivo: F10.webp, pie: { es: "«¿La manzana se puede?»: respuesta al instante desde el plan, sin IA", en: "«Can he have apples?»: an instant answer from the plan, no AI" } }
+  - { funcionalidad: F11, archivo: F11.webp, pie: { es: "Pregunta abierta con el asistente de prueba, marcada «Respuesta de IA»", en: "An open question with the test assistant, labeled «AI answer»" } }
+  - { funcionalidad: F12, archivo: F12.webp, pie: { es: "Pregunta por una dosis y el chat la devuelve al pediatra", en: "Ask about a dose and the chat sends you back to the pediatrician" } }
+  - { funcionalidad: F14, archivo: F14.webp, pie: { es: "Un plan sintético cargado: el resumen de lo que la app encontró", en: "A synthetic plan loaded: the summary of what the app found" } }
+  - { funcionalidad: F15, archivo: F15.webp, pie: { es: "Plan B: el contenido del archivo, pegado en la caja de texto", en: "Plan B: the file's content pasted into the text box" } }
+  - { funcionalidad: F16, archivo: F16.webp, pie: { es: "El letrero dice «Tu dieta» y un toque vuelve a la demo", en: "The badge reads «Your diet» and one tap goes back to the demo" } }
+  - { funcionalidad: F18, archivo: F18.webp, pie: { es: "Un toque en English y toda la app cambia de idioma", en: "One tap on English and the whole app switches language" } }
+  - { funcionalidad: F19, archivo: F19.webp, pie: { es: "«Borrar mis datos» pide confirmación antes de borrarlo todo", en: "«Delete my data» asks for confirmation before wiping everything" } }
+sin_pantalla: [F13, F17]
