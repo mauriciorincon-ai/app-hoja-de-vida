@@ -114,9 +114,9 @@ describe("complementos reales", () => {
   });
 
   // El proceso es OPCIONAL (contrato v1.1.0). Las seis apps de la línea base
-  // lo traen curado por CV Viva; las que llegan con complemento de otra casa
-  // (planlang, AngelGhost, Big-D, HackGuard · 2026-10-11) todavía no. Un
-  // proceso sin dueño sigue siendo una cifra sin fuente.
+  // lo trajeron curado por CV Viva; con el pedido 026 (2026-10-27) la planeadora
+  // lo adopta y las entregas llegan con `procedencia: planeadora`. Un proceso
+  // sin dueño sigue siendo una cifra sin fuente.
   it("todo complemento con proceso lo trae con su procedencia y es BPMN válido; la línea base sigue trayéndolo", () => {
     for (const c of complementos) {
       if (!c.proceso) continue;
@@ -128,7 +128,7 @@ describe("complementos reales", () => {
     for (const app of LINEA_BASE) {
       const c = complementos.find((x) => x.app === app)!;
       expect(c.proceso, app).toBeDefined();
-      expect(c.procedencia, app).toBe("cv-viva");
+      expect(["cv-viva", "planeadora"], app).toContain(c.procedencia);
     }
   });
 });
@@ -382,7 +382,7 @@ describe("el proceso es opcional (contrato v1.1.0)", () => {
     for (const slug of LINEA_BASE) {
       const ft = fichas.find((f) => f.pieza.slug === slug)!;
       expect(ft.proceso, slug).toBeDefined();
-      expect(ft.procedencia_proceso, slug).toBe("cv-viva");
+      expect(["cv-viva", "planeadora"], slug).toContain(ft.procedencia_proceso);
     }
   });
 });
