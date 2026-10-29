@@ -86,7 +86,7 @@ Las pruebas incluyen distintos niveles según la naturaleza de cada producto. La
 | --- | --- | --- | --- |
 | Anonimizador Velo (oct. 2026) | 740 | 153 | 96 % |
 | Dash Agent (ago. 2026) | 693 | — | 97,5 % |
-| Probeta DS (oct. 2026) | 3.047 | 168 | 95,4 % |
+| Probeta DS (oct. 2026) | 3.461 | 183 | 95,4 % |
 | Habla San (ago. 2026) | 261 | 169 | 94 % |
 | Innmobiliaria (ago. 2026) | 172 | 76 | 98,3 % del motor |
 | Nutrikids (oct. 2026) | 214 | 94 | 99,5 % del motor |

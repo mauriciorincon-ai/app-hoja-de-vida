@@ -129,7 +129,7 @@ Each application publishes its brochure with figures that declare their source, 
 | --------------------- | -------: | ------: | -------------------------: | ---------------: | ------------: | ---: |
 | **Anonimizador Velo** (Oct 2026) |       14 |       5 |                        740 |              153 |        96.17% |    8 |
 | **Dash Agent** (Aug 2026) |       12 |       8 |                        693 |                — |         97.5% |   13 |
-| **Probeta DS** (Oct 2026) |       76 |       5 |                      3,047 |              168 |        95.39% |   29 |
+| **Probeta DS** (Oct 2026) |       77 |       5 |                      3,461 |              183 |        95.35% |   30 |
 | **Habla San** (Aug 2026) |       24 |      10 |                        261 |              169 |        94.02% |   14 |
 | **Innmobiliaria** (Aug 2026) |       13 |      11 |                        172 |               76 |        98.31% |    6 |
 | **Nutrikids** (Oct 2026) |       19 |       8 |                        214 |               94 |        99.52% |    7 |
