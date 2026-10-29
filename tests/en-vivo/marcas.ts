@@ -4,7 +4,7 @@ import { vozDelDueno, type Idioma } from "@/lib/ia/voz-del-dueno";
 
 /**
  * LAS MARCAS DE LA PASADA EN VIVO (S24). Detectores de lectura para el informe
- * `privado/pasada-en-vivo-s25.md`: dicen qué mirar en lo que el modelo REAL
+ * `privado/pasada-en-vivo-s26.md`: dicen qué mirar en lo que el modelo REAL
  * contestó, no lo juzgan por el dueño. Viven aparte de la pasada para que la CI
  * pueda probarlos (`tests/unit/marcas-en-vivo.test.ts`) sin llamar a nadie.
  *
@@ -92,6 +92,19 @@ export function motivoAtribuido(texto: string, idioma: Idioma): string[] {
     .map((m) => m[0]);
 }
 
+/**
+ * ¿Cuenta el cierre de una etapa? (S26, la regla positiva del chat). La fuente de «¿Por qué salió de Vesting?» dice
+ * CÓMO cerró —en enero de 2025, dejando el ecosistema y el proceso documentados— y no por qué: la respuesta buena
+ * narra eso (la fecha y lo documentado); el rehúso fijo y el motivo inventado, no. Un piso, no un juez: la lectura
+ * humana del STOP decide, y `motivoAtribuido` vigila lo que se añada.
+ */
+export function narraElCierre(texto: string, idioma: Idioma): boolean {
+  const sinRehuso = texto.replace(RESPUESTA_REHUSO[idioma], " ");
+  const fecha =
+    idioma === "es" ? /enero\s+(?:de\s+)?2025/i : /January\s+(?:of\s+)?2025/i;
+  return fecha.test(sinRehuso) && /document/i.test(sinRehuso);
+}
+
 export type Marcas = {
   /** Voz del dueño («mi», «hice», «escríbeme»…). */
   voz: string[];
@@ -99,6 +112,8 @@ export type Marcas = {
   ausencia: string[];
   /** Marcas causales o de intención («driven by», «pues consideró»): ¿el motivo está en las fuentes? */
   motivos: string[];
+  /** ¿Narra el cierre de la etapa (la fecha y lo documentado)? Solo se exige donde la pregunta lo pide (S26). */
+  cierre: boolean;
   /** Números `[n]` que la respuesta cita, y los que citó sin que existieran. */
   citadas: number[];
   inventadas: number[];
@@ -123,6 +138,7 @@ export function marcarRespuesta(
     voz: vozDelDueno(texto, idioma).map((h) => h.termino),
     ausencia: ausenciaAfirmada(texto, idioma),
     motivos: motivoAtribuido(texto, idioma),
+    cierre: narraElCierre(texto, idioma),
     citadas: citadas.filter((n) => n >= 1 && n <= recuperadas),
     inventadas: citadas.filter((n) => n < 1 || n > recuperadas),
     credencialesSinObtener: credenciales,

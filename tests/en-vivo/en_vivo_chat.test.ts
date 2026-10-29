@@ -23,7 +23,7 @@ import { esTemaAjeno } from "@/lib/ia/tema-ajeno";
 import { marcarRespuesta, type Marcas } from "./marcas";
 
 /**
- * LA PASADA EN VIVO DEL CHAT (S24, reglas 24 y 25; ampliada en el S25 con la marca de motivos). El banco y el golden NO
+ * LA PASADA EN VIVO DEL CHAT (S24, reglas 24 y 25; ampliada en el S25 con la marca de motivos y en el S26 con la del cierre narrado). El banco y el golden NO
  * llaman al modelo, y la CI usa uno simulado: nada de lo que se prueba allí
  * puede ver si el modelo REAL habla en tercera persona, si afirma una ausencia
  * o si cita lo que usó. Esta pasada sí lo mira, UNA vez, con las preguntas de la
@@ -37,7 +37,7 @@ import { marcarRespuesta, type Marcas } from "./marcas";
  *  · LEE   `.env.local` (solo las claves del chat, en memoria; JAMÁS se imprimen),
  *          `data/` y `content/` (para regenerar el índice, igual que el build);
  *  · ESCRIBE `public/chat-index.{es,en}.json` (artefactos de build, ignorados por
- *          git) y `privado/pasada-en-vivo-s25.md` (ignorado por git, modo 600);
+ *          git) y `privado/pasada-en-vivo-s26.md` (ignorado por git, modo 600);
  *  · LLAMA al proveedor del chat — Groq, plan Free (≈ US$0, sin factura posible) —
  *          una vez por pregunta que llega al modelo (16 en total);
  *  · NO cruza la puerta ni el registro del chat: no hay sesión, no escribe en
@@ -54,7 +54,7 @@ const SECO = process.env.EN_VIVO_SECO === "1";
 const INFORME = path.join(
   RAIZ,
   "privado",
-  SECO ? "pasada-en-vivo-s25-en-seco.md" : "pasada-en-vivo-s25.md",
+  SECO ? "pasada-en-vivo-s26-en-seco.md" : "pasada-en-vivo-s26.md",
 );
 const PAUSA_MS = SECO ? 0 : 20_000; // el plan Free corta a 8 000 tokens/min
 const proveedor = () =>
@@ -83,6 +83,11 @@ type Pregunta = {
   sinCredenciales?: boolean;
   /** La pregunta pide un porqué que el corpus no da: se marcan las causas e intenciones que añada (S25). */
   vigilaMotivos?: boolean;
+  /**
+   * La fuente de esta pregunta cuenta CÓMO cerró una etapa y no por qué: la respuesta debe NARRAR ese cierre (la
+   * fecha y lo documentado), no devolver el rehúso fijo (S26, la regla positiva de la regla 5).
+   */
+  narraElCierre?: boolean;
   /**
    * La fuente de esta pregunta ESCRIBE lo que no hay («no se guarda ninguna IP», «nadie más lo lee»):
    * la marca de ausencia sigue en la columna del informe, pero ahí no es un defecto (S25).
@@ -135,8 +140,9 @@ const PREGUNTAS: Pregunta[] = [
     en: "Why did he leave Vesting?",
     ruta: "modelo",
     espera:
-      "cuenta cómo cerró la etapa (enero de 2025, ecosistema y proceso documentados), en tercera persona, SIN añadir un motivo que el documento no da",
+      "NARRA cómo cerró la etapa (enero de 2025, ecosistema y proceso documentados), en tercera persona, SIN añadir un motivo que el documento no da y SIN devolver el rehúso fijo",
     vigilaMotivos: true,
+    narraElCierre: true,
   },
   {
     es: "¿Tiene el AI-102?",
@@ -231,8 +237,8 @@ beforeAll(() => {
   // Se declara el árbol ANTES de tocar nada (regla 17-bis).
   const lineas = [
     SECO
-      ? "── ENSAYO EN SECO · S25 (modelo simulado, sin red) ──"
-      : "── PASADA EN VIVO · S25 ──",
+      ? "── ENSAYO EN SECO · S26 (modelo simulado, sin red) ──"
+      : "── PASADA EN VIVO · S26 ──",
     SECO
       ? "  lee:     data/ · content/ (no lee .env.local en el ensayo en seco)"
       : `  lee:     .env.local (${cargadas.length ? cargadas.join(", ") : "variables ya en el entorno"}; los valores no se imprimen) · data/ · content/`,
@@ -313,6 +319,11 @@ function defectosDe(
   if (marcas.motivos.length)
     d.push(
       `motivo que las fuentes quizá no dan (léelo): ${marcas.motivos.join(" | ")}`,
+    );
+  // En el ensayo en seco el modelo es un SIMULADOR que no sabe de Vesting: lo que cuenta es la pasada real.
+  if (p.narraElCierre && !SECO && !marcas.cierre)
+    d.push(
+      "no narra el cierre de la etapa (enero de 2025, ecosistema y proceso documentados)",
     );
   if (marcas.inventadas.length)
     d.push(`cita [${marcas.inventadas.join(", ")}] que no existe`);

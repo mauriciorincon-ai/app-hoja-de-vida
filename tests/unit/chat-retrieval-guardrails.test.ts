@@ -209,6 +209,18 @@ describe("system prompt endurecido (grounding-only)", () => {
       expect(prompt).toMatch(/cuenta solo lo que consta/);
     });
 
+    // S26 (la pasada del 025: «¿Por qué salió de Vesting?» devolvía el rehúso fijo aunque la sección que
+    // cuenta cómo cerró la etapa llegaba de primera). La regla 5 se queda y suma la positiva: si la fuente
+    // cuenta CÓMO terminó algo y no POR QUÉ, el chat cuenta lo que consta, sin motivo.
+    it("manda contar lo que consta cuando la fuente dice cómo ocurrió algo pero no por qué, y reserva el rehúso para lo que las fuentes no dicen", () => {
+      expect(prompt).toMatch(/Cuando te pregunten el porqué de algo/);
+      expect(prompt).toMatch(/cuenten CÓMO ocurrió pero no POR QUÉ/);
+      expect(prompt).toMatch(/contesta con lo que consta, con su cita \[n\], y NO uses el texto de la regla 1/);
+      expect(prompt).toMatch(/Usa el texto de la regla 1 solo si las fuentes no dicen nada de lo que se pregunta/);
+      // y la regla de no atribuir motivos sigue ahí, antes que la positiva
+      expect(prompt.indexOf("Tampoco atribuyas motivos")).toBeLessThan(prompt.indexOf("Cuando te pregunten el porqué"));
+    });
+
     it("sin fuentes que respondan, el modelo devuelve EXACTAMENTE el rehúso fijo, en el idioma de la página", () => {
       expect(prompt).toContain(RESPUESTA_REHUSO.es);
       expect(construirSystemPrompt("en", fuentes)).toContain(RESPUESTA_REHUSO.en);
