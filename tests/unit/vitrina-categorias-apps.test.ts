@@ -85,6 +85,26 @@ describe("el YAML real de categorías", () => {
       expect(de("personales"), s).toContain(s);
   });
 
+  // OM-27 (decisión del dueño, revisión del H-2): en /portafolio/apps las siete profesionales van en ESTE orden y
+  // las tres personales no cambian. El test fija el YAML, no una lista que se calcula: si el dueño vuelve a ordenarlas,
+  // se cambia aquí a propósito.
+  it("las siete profesionales van en el orden del dueño (OM-27) y las personales siguen igual", () => {
+    expect(categorias.profesionales.map((e) => e.slug)).toEqual([
+      "ds",
+      "planlang",
+      "hackguard",
+      "anonimizador",
+      "big-d",
+      "dash-agent-ai",
+      "copiloto-consultor",
+    ]);
+    expect(categorias.personales.map((e) => e.slug)).toEqual([
+      "habla",
+      "inmobiliaria",
+      "nutri-kids",
+    ]);
+  });
+
   it("AngelGhost se declara UNA sola vez, y las apps declaradas sin export se ignoran", () => {
     const todos = [...categorias.profesionales, ...categorias.personales].map(
       (e) => e.slug,
