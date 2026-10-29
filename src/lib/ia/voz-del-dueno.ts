@@ -17,7 +17,13 @@
  *  · verbos de experiencia en primera persona, de una lista CERRADA (piso, no
  *    techo): «construí, lideré, diseñé…» · «I built, I led…»;
  *  · invitaciones del dueño a sus visitantes: «escríbeme, contáctame,
- *    avísame» · «write to me, contact me, let me know».
+ *    avísame» · «write to me, contact me, let me know»;
+ *
+ * Y lo que NO es su voz aunque se le parezca: la cortesía del ASISTENTE a quien
+ * pregunta («Let me know if you’d like more details», «avísame si quieres…»,
+ * `CORTESIA_DEL_ASISTENTE`, S27). Una lista cerrada; lo que venga detrás de la
+ * cortesía se sigue juzgando («Let me know if you’d like to see my projects»
+ * marca «my»).
  *
  * Uso: vigilar las cadenas fijas y el espacio `chat` de `messages/`, y marcar
  * la respuesta del modelo en la pasada en vivo (la CI no ve al modelo real).
@@ -75,14 +81,26 @@ const EN = solo(
   ].join("|"),
 );
 
+/**
+ * Las cortesías del ASISTENTE hacia quien pregunta (S27, decisión del dueño 2026-10-28: «Let me know…» no es su voz).
+ * En la pasada en vivo del 026 el modelo cerró una respuesta con «Let me know if you’d like more details…» y el marcador
+ * lo contó como la invitación del dueño. La lista es CERRADA y mínima —solo la cortesía, no el resto de la frase—:
+ * «Let me know.» y «Escríbeme» siguen siendo la voz del dueño, y lo que venga después de la cortesía se sigue juzgando.
+ */
+const CORTESIA_DEL_ASISTENTE: Record<Idioma, RegExp> = {
+  en: /(?<![\p{L}\p{N}'’-])let me know if (?:you(?:['’]d| would| do| did)? (?:like|prefer|want|need|wish)|you(?:['’]re| are) (?:interested|curious)|there(?:['’]s| is| are) (?:anything|something|more))(?![\p{L}\p{N}])/giu,
+  es: /(?<![\p{L}\p{N}'’-])avísame si (?:quieres|te gustaría|necesitas|prefieres|deseas|te interesa|hay algo)(?![\p{L}\p{N}])/giu,
+};
+
 /** Lo que de voz del dueño hay en un texto, en el orden en que aparece. */
 export function vozDelDueno(
   texto: string,
   idioma: Idioma,
 ): HallazgoDeVozDelDueno[] {
   const res = idioma === "es" ? [ES] : [EN_I, EN];
+  const sinCortesia = texto.replace(CORTESIA_DEL_ASISTENTE[idioma], " ");
   return res
-    .flatMap((re) => [...texto.matchAll(re)])
+    .flatMap((re) => [...sinCortesia.matchAll(re)])
     .sort((a, b) => (a.index ?? 0) - (b.index ?? 0))
     .map((m) => ({ termino: m[0] }));
 }

@@ -100,6 +100,60 @@ describe("lo que SÍ es la voz del dueño", () => {
   });
 });
 
+/**
+ * LA CORTESÍA DEL ASISTENTE NO ES LA VOZ DEL DUEÑO (S27, decisión del dueño 2026-10-28). En la pasada en vivo del
+ * Sprint 026 el modelo cerró «What data do you keep about me?» con «Let me know if you’d like more details…» y el
+ * marcador lo marcó como la invitación del dueño. No lo es: es el asistente ofreciéndole algo a quien pregunta. La
+ * exención es una lista CERRADA de cortesías («let me know if you’d like…», «avísame si quieres…»); la invitación del
+ * dueño («Let me know.», «Escríbeme») y lo que venga después de la cortesía se siguen juzgando.
+ */
+describe("la cortesía del asistente no es la voz del dueño (S27)", () => {
+  // La frase tal como salió en la pasada del 026 (sin datos personales: es el asistente hablando del registro del chat).
+  const PASADA_026 =
+    "If you wish to have your records removed, you can request deletion through the contact form, and Henry will delete the rows in compliance with Colombian law [1]. Let me know if you’d like more details on the deletion process.";
+
+  const CORTESIAS: [string, string][] = [
+    ["en", PASADA_026],
+    ["en", "Let me know if you'd like more detail."],
+    ["en", "Let me know if you would like me to expand on that."],
+    ["en", "Let me know if you want the dates."],
+    ["en", "Let me know if there is anything else you need."],
+    ["es", "Avísame si quieres más detalle."],
+    ["es", "Avísame si te gustaría ver las fechas."],
+  ];
+  it.each(CORTESIAS)("[%s] «%s» NO es la voz del dueño", (idioma, texto) => {
+    expect(vozDelDueno(texto, idioma as "es" | "en")).toEqual([]);
+  });
+
+  // Lo que SIGUE marcado: la invitación del dueño y su voz detrás de una cortesía.
+  const SIGUEN: [string, string][] = [
+    ["en", "Something not working? Let me know"],
+    ["en", "Let me know."],
+    ["en", "Let me know when you are ready."],
+    ["es", "¿Algo no funciona? Avísame"],
+    ["es", "Escríbeme desde Contacto"],
+    ["en", "Write to me from the Contact section"],
+    ["en", "Let me know if you'd like to see my projects"],
+    ["es", "Avísame si quieres ver mis proyectos"],
+  ];
+  it.each(SIGUEN)("[%s] «%s» SIGUE marcada", (idioma, texto) => {
+    expect(vozDelDueno(texto, idioma as "es" | "en").length).toBeGreaterThan(0);
+  });
+
+  it("detrás de la cortesía se sigue juzgando: «my projects» es la voz del dueño aunque la frase sea cortés", () => {
+    expect(
+      vozDelDueno("Let me know if you'd like to see my projects", "en").map(
+        (h) => h.termino,
+      ),
+    ).toEqual(["my"]);
+    expect(
+      vozDelDueno("Avísame si quieres ver mis proyectos", "es").map(
+        (h) => h.termino,
+      ),
+    ).toEqual(["mis"]);
+  });
+});
+
 describe("el panel y las respuestas fijas no usan la voz del dueño", () => {
   for (const idioma of ["es", "en"] as const) {
     const mensajes = JSON.parse(
