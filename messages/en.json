@@ -337,7 +337,7 @@
     "desliza": "Scroll sideways to see the whole process.",
     "procesoCvViva": "Process declared by Living CV from the app's export — the app doesn't ship it in its own yet.",
     "procesoApp": "Process declared by the app itself in its export.",
-    "procesoPlaneadora": "Process drawn by the AI-APPs pipeline from what the app declares in its export.",
+    "procesoPlaneadora": "Process traced by the AI-APPs pipeline from the app itself and its export.",
     "stackParaQue": "What each one is for",
     "s03": "What it has",
     "s03sub": "{grupos, plural, one {# group} other {# groups}} · {n} features. The detail of each one lives in the full card.",

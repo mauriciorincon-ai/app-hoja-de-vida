@@ -337,7 +337,7 @@
     "desliza": "Desliza para ver el proceso completo.",
     "procesoCvViva": "Proceso declarado por CV Viva a partir del export de la app — la app aún no lo envía en el suyo.",
     "procesoApp": "Proceso declarado por la propia app en su export.",
-    "procesoPlaneadora": "Proceso trazado por el pipeline AI-APPs con lo que la app declara en su export.",
+    "procesoPlaneadora": "Proceso trazado por el pipeline AI-APPs desde la propia app y su export.",
     "stackParaQue": "Para qué sirve cada uno",
     "s03": "Qué tiene",
     "s03sub": "{grupos, plural, one {# grupo} other {# grupos}} · {n} funcionalidades. El detalle de cada una vive en la ficha completa.",
