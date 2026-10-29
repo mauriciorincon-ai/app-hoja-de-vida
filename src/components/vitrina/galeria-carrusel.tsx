@@ -71,12 +71,30 @@ export type EtiquetasCarrusel = {
 export function GaleriaCarrusel({
   capturas,
   frente,
+  base,
+  ancho = 2560,
+  alto = 1440,
+  sinOptimizar = false,
   etiquetas,
   sizes = "(min-width: 1024px) 976px, 100vw",
 }: {
   capturas: CapturaCarrusel[];
   /** Carpeta de `public/piezas/<frente>/` de la que salen las imágenes. */
-  frente: string;
+  frente?: string;
+  /**
+   * Una carpeta pública cualquiera (la de las capturas: `public/vitrina/<slug>`), en vez de la de un
+   * frente: las capturas de las apps (026) viven ahí.
+   */
+  base?: string;
+  /** Las dimensiones de las imágenes (los tableros, 2560×1440; las apps, 1536×960). */
+  ancho?: number;
+  alto?: number;
+  /**
+   * Sirve el archivo tal cual, sin pasar por el optimizador de Next. Las
+   * capturas de las apps ya llegan en WebP de ≤ 80 KB: optimizar 250 imágenes
+   * gastaría el cupo mensual del plan Hobby de Vercel sin ganar un byte.
+   */
+  sinOptimizar?: boolean;
   etiquetas: EtiquetasCarrusel;
   sizes?: string;
 }) {
@@ -149,11 +167,12 @@ export function GaleriaCarrusel({
             <figure className="m-0">
               <div className="overflow-hidden rounded-[12px] border border-paper-2 bg-paper-1 shadow-sh-1">
                 <Image
-                  src={`/piezas/${frente}/${g.archivo}`}
+                  src={`${base ?? `/piezas/${frente}`}/${g.archivo}`}
                   alt={g.pie}
-                  width={2560}
-                  height={1440}
+                  width={ancho}
+                  height={alto}
                   sizes={sizes}
+                  unoptimized={sinOptimizar}
                   loading="lazy"
                   className="block h-auto w-full"
                 />

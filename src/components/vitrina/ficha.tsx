@@ -1,5 +1,13 @@
-import { getTranslations } from "next-intl/server";
-import { sinVitrina } from "../../../scripts/sin-vitrina.mjs";
+import { getLocale, getTranslations } from "next-intl/server";
+import {
+  CONSERVAN_VITRINA,
+  sinVitrina,
+} from "../../../scripts/sin-vitrina.mjs";
+import {
+  capturasDelGrupo,
+  getCapturas,
+  urlDeCapturas,
+} from "@/lib/vitrina/capturas";
 import type { FichaVitrina } from "@/lib/vitrina/loader";
 import type { FuenteMetrica } from "@/lib/vitrina/schemas";
 import { Maqueta } from "./maquetas";
@@ -55,8 +63,10 @@ const colorEstado = {
  * Una clave de otra casa también es texto que se lee: con la palabra del sitio
  * (`llamadas_a_modelos_en_la_vitrina` → «…en el portafolio», S23).
  */
-function humanizarClave(clave: string): string {
-  return sinVitrina(clave.replace(/_/g, " "));
+function humanizarClave(clave: string, slug: string): string {
+  const legible = clave.replace(/_/g, " ");
+  // planlang llama «vitrina» a su propia pantalla y la conserva (026).
+  return CONSERVAN_VITRINA.includes(slug) ? legible : sinVitrina(legible);
 }
 
 const ROTULO = "font-mono text-[11px] tracking-[0.08em] text-ink-2 uppercase";
@@ -67,7 +77,10 @@ const RESUMEN =
 
 export async function FichaApp({ ficha }: { ficha: FichaVitrina }) {
   const t = await getTranslations("vitrina");
+  const idioma = (await getLocale()) === "en" ? "en" : "es";
   const { ancla, export: exp } = ficha;
+  // Las pantallas reales por funcionalidad (026); una app sin tabla todavía no las lleva.
+  const tabla = getCapturas(ancla.slug);
   const { promesa, funcionalidades, metricas, privacidad, enlaces, stack } =
     exp;
 
@@ -183,18 +196,45 @@ export async function FichaApp({ ficha }: { ficha: FichaVitrina }) {
         </h3>
         <p className="mt-1 mb-5 text-sm leading-relaxed text-ink-2">
           {t("queHaceLinea", { n: funcionalidades.total })}
+          {tabla ? ` ${t("capturasNota")}` : ""}
         </p>
         <div className="flex flex-col gap-3">
-          {grupos.map((g) => (
-            <TarjetaGrupo
-              key={g.orden}
-              grupo={g}
-              slug={ancla.slug}
-              etiquetaEstrella={t("estrella")}
-              pieCaptura={t("capturasPie")}
-              pieFirma={t("firmaPie")}
-            />
-          ))}
+          {grupos.map((g) => {
+            const pantallas = tabla ? capturasDelGrupo(tabla, g, idioma) : [];
+            return (
+              <TarjetaGrupo
+                key={g.orden}
+                grupo={g}
+                slug={ancla.slug}
+                etiquetaEstrella={t("estrella")}
+                galeria={
+                  pantallas.length
+                    ? {
+                        base: urlDeCapturas(ancla.slug),
+                        capturas: pantallas.map((c) => ({
+                          archivo: c.archivo,
+                          pie: c.pie,
+                        })),
+                        etiquetas: {
+                          etiqueta: t("capturasEtiqueta", { grupo: g.nombre }),
+                          pista: t("capturasPista"),
+                          anterior: t("capturasAnterior"),
+                          siguiente: t("capturasSiguiente"),
+                          indicadores: pantallas.map((_, i) =>
+                            t("capturasIndicador", {
+                              n: i + 1,
+                              total: pantallas.length,
+                            }),
+                          ),
+                          pies: pantallas.map((c) => `${c.id} · ${c.nombre}`),
+                        },
+                      }
+                    : undefined
+                }
+                pieFirma={t("firmaPie")}
+              />
+            );
+          })}
         </div>
       </section>
 
@@ -219,7 +259,7 @@ export async function FichaApp({ ficha }: { ficha: FichaVitrina }) {
                       key={clave}
                       className="rounded-full border border-paper-3 px-2 py-0.5 font-mono text-[10px] text-ink-2"
                     >
-                      {humanizarClave(clave)}:{" "}
+                      {humanizarClave(clave, ancla.slug)}:{" "}
                       <span className="text-ink-0">
                         {valor ? t("sí") : t("no")}
                       </span>

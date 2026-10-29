@@ -617,17 +617,6 @@
   transition-delay: 0.38s;
 }
 
-/* ── Capturas: el marco que dice «esto es una pantalla» ────────────────────
- * Sobrio a propósito: un marco de teléfono dibujado competiría con la propia
- * pantalla que estamos enseñando. Radio y sombra son los del design system.
- */
-.marco-captura {
-  overflow: hidden;
-  border-radius: 14px;
-  border: 1px solid var(--color-paper-3);
-  background: var(--color-paper-1);
-  box-shadow: var(--shadow-sh-2, 0 6px 18px rgb(0 0 0 / 0.07));
-}
 /* ── Firmas: el clímax del brochure de cada app, re-dibujado ───────────────
  * La escena de habla: las barras BAILAN con la voz y se apagan AQUÍ ADENTRO;
  * la fuga llega al borde y se devuelve. Es la coreografía del brochure

@@ -1,5 +1,12 @@
+import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
+import {
+  CAPTURA_ALTO,
+  CAPTURA_ANCHO,
+  getCapturas,
+  urlDeCapturas,
+} from "@/lib/vitrina/capturas";
 import { COLOR_ESTADO } from "@/lib/vitrina/estilos";
 import type { FichaVitrina } from "@/lib/vitrina/loader";
 import { Maqueta, tieneMaqueta } from "./maquetas";
@@ -15,11 +22,12 @@ import { Maqueta, tieneMaqueta } from "./maquetas";
  * podía enlazarse ni compartirse por separado, y el visitante pagaba de una
  * vez el peso de las seis.
  *
- * La tira va aquí porque es lo que hace reconocible a la app de un vistazo, y
- * es dibujo de esta casa: muestras que se ven de la misma familia. Sin tira no
- * se pinta ni su marco (el 2026-10-11 cuatro apps entraron sin dibujo y el
- * marco quedó como una caja vacía); el gate que exige la tira vive en
- * `tests/unit/maquetas.test.tsx`.
+ * La PORTADA es la pantalla de entrada de la app, tal como corre (026, OM-21):
+ * lo que ya hacen las tarjetas de tableros. Una app que todavía no trae sus
+ * capturas conserva la TIRA esquemática, dibujo de esta casa: sin tira ni
+ * portada no se pinta ni su marco (el 2026-10-11 cuatro apps entraron sin
+ * dibujo y el marco quedó como una caja vacía); el gate que exige la tira vive
+ * en `tests/unit/maquetas.test.tsx`.
  *
  * Su nombre es un `h3`: desde el Sprint 009 las muestras viven dentro de un bloque
  * de categoría (Profesionales · Personales) que lleva el `h2`. La raíz es el
@@ -33,6 +41,7 @@ export async function MuestraApp({ ficha }: { ficha: FichaVitrina }) {
   const { ancla, export: exp } = ficha;
 
   const colorEstado = COLOR_ESTADO[ancla.estado];
+  const portada = getCapturas(ancla.slug)?.portada;
 
   return (
     <article
@@ -69,13 +78,34 @@ export async function MuestraApp({ ficha }: { ficha: FichaVitrina }) {
         </p>
       </div>
 
-      {tieneMaqueta(ancla.slug) && (
+      {portada ? (
         <div
-          aria-hidden="true"
-          className="overflow-hidden rounded-[10px] border border-paper-2 bg-paper-1 p-3"
+          data-portada
+          className="overflow-hidden rounded-[10px] border border-paper-2 bg-paper-1"
         >
-          <Maqueta slug={ancla.slug} />
+          <Image
+            src={`${urlDeCapturas(ancla.slug)}/${portada}`}
+            alt=""
+            width={CAPTURA_ANCHO}
+            height={CAPTURA_ALTO}
+            sizes="(min-width: 1024px) 480px, (min-width: 640px) 50vw, 100vw"
+            loading="lazy"
+            // La portada es contexto, no el contenido principal: cede ancho de
+            // banda a la fuente que el texto del escaparate necesita para
+            // pintar (el precedente de las portadas de tableros).
+            fetchPriority="low"
+            className="block h-auto w-full"
+          />
         </div>
+      ) : (
+        tieneMaqueta(ancla.slug) && (
+          <div
+            aria-hidden="true"
+            className="overflow-hidden rounded-[10px] border border-paper-2 bg-paper-1 p-3"
+          >
+            <Maqueta slug={ancla.slug} />
+          </div>
+        )
       )}
 
       <p className="text-[14px] leading-relaxed text-ink-2">

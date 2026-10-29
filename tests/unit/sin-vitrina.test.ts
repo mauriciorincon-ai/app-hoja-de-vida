@@ -202,7 +202,7 @@ const RUTA_VIEJA =
  *  · el motor del 301 y su prueba: la ruta vieja es lo que se redirige;
  *  · `retiro-piezas`: el patrón de las piezas retiradas caza la ruta vieja y la nueva;
  *  · este archivo y su gemelo e2e: describen y prueban la ruta vieja;
- *  · `capturas.tsx`: sirve las imágenes de la carpeta de estáticos `public/vitrina/`.
+ *  · `capturas.ts`: nombra la carpeta de estáticos `public/vitrina/` de las capturas.
  */
 const RUTA_VIEJA_PERMITIDA = new Set([
   "src/lib/redireccion.ts",
@@ -210,7 +210,7 @@ const RUTA_VIEJA_PERMITIDA = new Set([
   "tests/unit/retiro-piezas.test.ts",
   "tests/unit/sin-vitrina.test.ts",
   "tests/e2e/portafolio.spec.ts",
-  "src/components/vitrina/capturas.tsx",
+  "src/lib/vitrina/capturas.ts",
   "src/proxy.ts",
 ]);
 

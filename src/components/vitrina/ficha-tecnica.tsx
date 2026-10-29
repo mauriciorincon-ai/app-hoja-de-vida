@@ -1,3 +1,4 @@
+import { ChevronDown } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
@@ -182,15 +183,44 @@ export async function FichaTecnica({
         <p className="mt-3 max-w-[40ch] font-display text-[1.35rem] leading-snug text-ink-1">
           {promesa.tagline}
         </p>
+        {/* El Stack va COMPRIMIDO de entrada —las cápsulas— y se despliega con
+            el «para qué» de cada componente (OM-23, 026): lo que antes
+            escondía un `title`, que no existe en el teléfono ni lo lee un
+            lector de pantalla. `<details>` nativo: sin JS, con teclado, y la
+            forma del árbol no cambia con «reducir movimiento» (regla 7). */}
         <ul aria-label="Stack" className="mt-4 flex flex-wrap gap-2">
           {datos.stack.map((s) => (
             <li key={s.nombre}>
-              <span className={CHIP} title={s.papel}>
-                {s.nombre}
-              </span>
+              <span className={CHIP}>{s.nombre}</span>
             </li>
           ))}
         </ul>
+        <details
+          data-stack-detalle
+          className="group mt-3 max-w-[74ch] rounded-[10px] border border-paper-2 bg-paper-0 px-4"
+        >
+          <summary className="flex min-h-11 cursor-pointer list-none items-center gap-2 font-mono text-[11px] tracking-[0.08em] text-ink-2 uppercase marker:content-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-ink">
+            {t("stackParaQue")}
+            <ChevronDown
+              size={16}
+              strokeWidth={1.5}
+              aria-hidden="true"
+              className="shrink-0 transition-transform duration-[120ms] group-open:rotate-180 motion-reduce:transition-none"
+            />
+          </summary>
+          <dl className="grid gap-x-5 gap-y-3 pt-1 pb-4 sm:grid-cols-[minmax(0,13rem)_1fr]">
+            {datos.stack.map((s) => (
+              <div key={s.nombre} className="contents">
+                <dt className="font-mono text-[12px] tracking-[0.02em] text-ink-0 uppercase">
+                  {s.nombre}
+                </dt>
+                <dd className="m-0 text-[13px] leading-snug text-ink-1">
+                  {s.papel}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </details>
         <div
           data-titular
           className="mt-6 max-w-[74ch] rounded-[10px] border-l-[3px] border-sage-ink bg-paper-1 px-5 py-4"
@@ -280,9 +310,13 @@ export async function FichaTecnica({
               data-procedencia-proceso={datos.procedencia_proceso}
               className="mt-3 border-t border-paper-2 pt-3 font-mono text-[10.5px] tracking-[0.04em] text-ink-2 uppercase"
             >
-              {datos.procedencia_proceso === "app"
-                ? t("procesoApp")
-                : t("procesoCvViva")}
+              {t(
+                datos.procedencia_proceso === "app"
+                  ? "procesoApp"
+                  : datos.procedencia_proceso === "planeadora"
+                    ? "procesoPlaneadora"
+                    : "procesoCvViva",
+              )}
             </p>
           </div>
         </Seccion>

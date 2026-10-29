@@ -32,6 +32,18 @@ vi.mock("@/i18n/navigation", () => ({
 vi.mock("next-intl/server", () => ({
   getTranslations: async () => (clave: string) => clave,
 }));
+// La portada (026) reemplaza a la tira en la tarjeta de una app que ya trae sus
+// capturas; la tira es lo que queda para la que todavía no. Para probar las dos
+// puertas se apaga la tabla de capturas a voluntad.
+const sinCapturas = vi.hoisted(() => ({ activo: false }));
+vi.mock("@/lib/vitrina/capturas", async (importOriginal) => {
+  const real = await importOriginal<typeof import("@/lib/vitrina/capturas")>();
+  return {
+    ...real,
+    getCapturas: (slug: string) =>
+      sinCapturas.activo ? undefined : real.getCapturas(slug),
+  };
+});
 
 const FICHAS = getFichasVitrina();
 const ROTULO =
@@ -77,9 +89,22 @@ describe("las tiras de la vitrina", () => {
     expect(html).not.toContain('aria-hidden="true" class="overflow-hidden');
   });
 
-  it("una app con tira la pinta dentro de su marco", async () => {
+  it("una app que todavía no trae capturas conserva su tira dentro de su marco", async () => {
+    sinCapturas.activo = true;
+    try {
+      const html = renderToString(await MuestraApp({ ficha: FICHAS[0] }));
+      expect(html).toContain('aria-hidden="true" class="overflow-hidden');
+      expect(html).toContain('class="maqueta"');
+      expect(html).not.toContain("data-portada");
+    } finally {
+      sinCapturas.activo = false;
+    }
+  });
+
+  it("una app con capturas pinta su portada y no la tira (OM-21)", async () => {
     const html = renderToString(await MuestraApp({ ficha: FICHAS[0] }));
-    expect(html).toContain('aria-hidden="true" class="overflow-hidden');
-    expect(html).toContain('class="maqueta"');
+    expect(html).toContain("data-portada");
+    expect(html).toContain(`${FICHAS[0].ancla.slug}%2Fentrada.webp`);
+    expect(html).not.toContain('class="maqueta"');
   });
 });
