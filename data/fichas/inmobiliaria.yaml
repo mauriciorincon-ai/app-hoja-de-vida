@@ -1,52 +1,85 @@
 # Complemento de la ficha técnica de Innmobiliaria (ADR-016). PROCEDENCIA:
-# cv-viva — derivado de su export por CV Viva; se retira cuando la app mande el suyo.
+# planeadora — pedido 026 de CV Viva (2026-10-27), escrito desde una copia aislada de la
+# rama `sprint-016/listo-para-abrir` (620ca99) contra su VISION v2.1.0, su manual y su código.
+# Sustituye al que derivó CV Viva el 2026-09-05 sobre el producto viejo (solo el vendedor).
 schema_version: "1.0.0"
 app: inmobiliaria
-procedencia: cv-viva
-declarado_en: "2026-09-05"
-titular: "Publicar ES unirse, y nada se declara sin comprobarse: el sello de propietario se gana mostrando el certificado —que se ve y nunca se almacena— y los anuncios vencen si nadie los renueva. Cero contadores inventados, cero IA."
-cifras_destacadas: [funcionalidades, pantallas, cobertura_lineas, modelos_de_ia, costo_operacion_mensual]
+procedencia: planeadora
+declarado_en: "2026-10-27"
+titular: "Vivienda directo con el dueño en Bogotá, sin comisión y verificada de los dos lados: el dueño muestra su certificado de tradición, el comprador prueba su WhatsApp, y el precio y el papeleo llegan con su fuente."
+cifras_destacadas: [funcionalidades, pantallas, pruebas_e2e, cobertura_lineas, modelos_de_ia]
 limites:
-  - "Bogotá primero: los cupos por zona salen de la base de datos o simplemente no se muestran."
-  - "Se pide el mínimo dato necesario; el WhatsApp del dueño solo es público si él lo activa."
-  - "Sin inteligencia artificial: todo es código determinista."
+  - "Solo Bogotá: los usados se publican y se buscan en Bogotá; la vivienda nueva cubre Bogotá y la Sabana con la revista del mes."
+  - "«¿Está caro?» compara solo con anuncios de Innmobiliaria: es lo que piden los dueños, no un avalúo, y mejora con más anuncios."
+  - "El lector del certificado de tradición está construido y apagado: se enciende solo cuando se valide con certificados reales."
+  - "El papeleo usa las tarifas de 2026: desde el 1 de enero de 2027 las nombra sin cifra y remite a la notaría."
 nunca:
-  - "Cobra comisión."
-  - "Almacena tu Certificado de Tradición."
-  - "Registra a nadie sin autorización expresa."
-  - "Le vende el vendedor a alguien más."
-  - "Muestra un contador que no salga de una fila real."
+  - "Cobra comisión sobre la venta o el arriendo."
+  - "Guarda tu certificado de tradición: se ve una vez y solo quedan la matrícula y la fecha."
+  - "Publica tu número, tu correo, tu dirección ni tu matrícula en la ficha de tu inmueble."
+  - "Registra a nadie sin su autorización expresa (Ley 1581)."
+  - "Oculta un anuncio por una señal automática: las reglas avisan y una persona del equipo decide."
 proceso:
-  titulo: "Vender directo, sin comisión"
+  titulo: "Del anuncio a la visita, directo y verificado"
   carriles:
-    - { id: dueno, nombre: "El propietario" }
-    - { id: inn, nombre: "Innmobiliaria" }
-    - { id: busca, nombre: "Quien busca" }
+    - { id: dueno, nombre: "El dueño" }
+    - { id: app, nombre: "Innmobiliaria" }
+    - { id: equipo, nombre: "El equipo" }
+    - { id: comprador, nombre: "Quien compra" }
   pasos:
-    - { id: ini, tipo: inicio, carril: dueno, texto: "Quiere vender o arrendar directo" }
-    - { id: publica, tipo: tarea, carril: dueno, texto: "Publica su inmueble" }
-    - { id: minimo, tipo: tarea, carril: inn, texto: "Pide el mínimo dato y la autorización" }
-    - { id: muestra, tipo: tarea, carril: dueno, texto: "Muestra el Certificado de Tradición" }
-    - { id: sello, tipo: tarea, carril: inn, texto: "Otorga el sello de propietario" }
-    - { id: anuncio, tipo: tarea, carril: inn, texto: "Publica el anuncio, con cupo por zona" }
-    - { id: contacta, tipo: tarea, carril: busca, texto: "Encuentra y contacta directo" }
-    - { id: renueva, tipo: decision, carril: dueno, texto: "¿Renueva?" }
-    - { id: vence, tipo: tarea, carril: inn, texto: "El anuncio vence" }
-    - { id: fin, tipo: fin, carril: inn, texto: "" }
+    - { id: ini, tipo: inicio, carril: dueno, texto: "Quiere vender o arrendar sin intermediarios" }
+    - { id: publica, tipo: tarea, carril: dueno, texto: "Publica su inmueble en tres pasos" }
+    - { id: enlace, tipo: tarea, carril: app, texto: "Le entrega su enlace privado «mi anuncio»" }
+    - { id: completa, tipo: tarea, carril: dueno, texto: "Sube sus fotos y escribe la descripción" }
+    - { id: quiere-sello, tipo: decision, carril: dueno, texto: "¿Quiere el sello de propietario?" }
+    - { id: muestra, tipo: tarea, carril: dueno, texto: "Muestra su certificado de tradición" }
+    - { id: sello, tipo: tarea, carril: equipo, texto: "Otorga el sello con la fecha del certificado" }
+    - { id: vivo, tipo: tarea, carril: app, texto: "Muestra el anuncio vivo por 60 días" }
+    - { id: busca, tipo: tarea, carril: comprador, texto: "Busca con filtros o dibuja su zona" }
+    - { id: compara, tipo: tarea, carril: comprador, texto: "Compara el precio con su zona" }
+    - { id: verifica, tipo: tarea, carril: comprador, texto: "Verifica su WhatsApp enviando un código" }
+    - { id: pide, tipo: tarea, carril: comprador, texto: "Pide una visita y cuenta para qué busca" }
+    - { id: tarjeta, tipo: decision, carril: dueno, texto: "¿Le sirve el comprador de la tarjeta?" }
+    - { id: propone, tipo: tarea, carril: dueno, texto: "Propone hasta tres horarios" }
+    - { id: confirma, tipo: tarea, carril: comprador, texto: "Confirma el horario que le sirve" }
+    - { id: recuerda, tipo: tarea, carril: app, texto: "Les recuerda la visita por correo el día antes" }
+    - { id: asistio, tipo: tarea, carril: dueno, texto: "Marca si el comprador asistió" }
+    - { id: cerro, tipo: decision, carril: dueno, texto: "¿Cerró el negocio?" }
+    - { id: fin, tipo: fin, carril: dueno, texto: "Vende directo, sin pagar comisión" }
+    - { id: renueva, tipo: decision, carril: dueno, texto: "¿Renueva el anuncio a tiempo?" }
+    - { id: vence, tipo: tarea, carril: app, texto: "Lo deja de mostrar, sin borrarlo" }
+    - { id: fin-vence, tipo: fin, carril: app, texto: "" }
   flujos:
     - { de: ini, a: publica }
-    - { de: publica, a: minimo }
-    - { de: minimo, a: muestra }
+    - { de: publica, a: enlace }
+    - { de: enlace, a: completa }
+    - { de: completa, a: quiere-sello }
+    - { de: quiere-sello, a: muestra, etiqueta: "sí" }
+    - { de: quiere-sello, a: vivo, etiqueta: "no: queda fundador" }
     - { de: muestra, a: sello }
-    - { de: sello, a: anuncio }
-    - { de: anuncio, a: contacta }
-    - { de: contacta, a: renueva }
-    - { de: renueva, a: anuncio, etiqueta: "sí" }
+    - { de: sello, a: vivo }
+    - { de: vivo, a: busca }
+    - { de: busca, a: compara }
+    - { de: compara, a: verifica }
+    - { de: verifica, a: pide }
+    - { de: pide, a: tarjeta }
+    - { de: tarjeta, a: propone, etiqueta: "sí" }
+    - { de: tarjeta, a: vivo, etiqueta: "no: sigue publicado" }
+    - { de: propone, a: confirma }
+    - { de: confirma, a: recuerda }
+    - { de: recuerda, a: asistio }
+    - { de: asistio, a: cerro }
+    - { de: cerro, a: fin, etiqueta: "sí" }
+    - { de: cerro, a: renueva, etiqueta: "no" }
+    - { de: renueva, a: vivo, etiqueta: "sí: 60 días más" }
     - { de: renueva, a: vence, etiqueta: "no" }
-    - { de: vence, a: fin }
+    - { de: vence, a: fin-vence }
   anotaciones:
-    - { paso: minimo, texto: "Sin autorización expresa no hay registro (Ley 1581): la fecha del consentimiento se guarda en la misma fila." }
-    - { paso: sello, texto: "El certificado se ve y nunca se almacena." }
+    - { paso: publica, texto: "Sin cuenta ni contraseña. Sin autorización expresa no hay registro (Ley 1581): la fecha queda en la misma fila." }
+    - { paso: sello, texto: "El certificado se ve una vez y nunca se guarda: solo quedan la matrícula y la fecha." }
+    - { paso: verifica, texto: "Navegar y guardar son libres; escribir o agendar exige el WhatsApp verificado. El dueño nunca ve su correo." }
+    - { paso: tarjeta, texto: "Nombre, últimos 4 dígitos, nivel de verificación y visitas a las que asistió. Puede exigir compradores identificados." }
+    - { paso: vivo, texto: "Las reglas antifraude señalan anuncios al equipo; una persona revisa y decide, nada se oculta solo." }
 
 # Roadmap votable (2026-09-13): lo que la planeadora entrega como cierre de plan
 # de esta app — features disruptivas, no en construcción, sin fechas. PROCEDENCIA:

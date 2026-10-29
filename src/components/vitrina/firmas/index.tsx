@@ -31,7 +31,9 @@ const FIRMAS: Record<
   ds: { orden: 1, Dibujo: FirmaDs },
   // «El día de hoy»: aquí nadie califica a tu hijo.
   "nutri-kids": { orden: 2, Dibujo: FirmaNutriKids },
-  // «Confianza y quién opera»: nada se declara, todo se comprueba.
+  // Grupo 4, hoy «Privacidad y el panel del equipo» (export del 2026-10-29; antes «Confianza y quién opera»): el sello
+  // se gana viendo el certificado, que no se guarda (C1), y nada se declara, todo se comprueba. Se queda en el 4 y no pasa
+  // a «Confianza de los dos lados» (el 6), que trata del comprador.
   inmobiliaria: { orden: 4, Dibujo: FirmaInmobiliaria },
 };
 

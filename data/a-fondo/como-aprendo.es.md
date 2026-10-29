@@ -129,7 +129,7 @@ Mi portafolio reúne diez aplicaciones hermanas publicadas —Anonimizador Velo,
 | Dash Agent | 693 unitarias          |    97,5 % |               13 | hacer visible el contexto que un agente conserva              |
 | Probeta DS    | 3.461 unitarias, 183 e2e |   95,35 % |               30 | Python, Pandas y scikit-learn en el navegador con WebAssembly |
 | Habla San  | 261 unitarias, 169 e2e |   94,02 % |               14 | 50 cápsulas y 16 hitos de contenido, sin grabar la voz        |
-| Innmobiliaria | 172 unitarias, 76 e2e  |   98,31 % |                6 | flujos de negocio con validación                              |
+| Innmobiliaria | 1.959 unitarias, 836 e2e |   99,72 % |               21 | flujos de negocio con validación                              |
 | Nutrikids    | 214 unitarias, 94 e2e  |   99,52 % |                7 | un motor de cálculo con cobertura casi total                  |
 
 Probeta DS me llevó a ejecutar Python, Pandas y scikit-learn dentro del navegador mediante WebAssembly. Anonimizador Velo exigió procesamiento local de archivos y una arquitectura que evitara transferir información hacia un servidor. Otras aplicaciones incorporaron trabajadores web, bases de datos embebidas, capacidades instalables, operación sin conexión, despliegue en el borde, síntesis de voz y captura de audio en el navegador.

@@ -111,14 +111,16 @@ describe("las capturas de las apps que ya entregaron", () => {
 });
 
 describe("las apps que esperan su entrega", () => {
-  for (const slug of ESPERAN_SU_ENTREGA) {
-    it(`${slug}: sin tabla de capturas todavía; si ya llegó, sácala de ESPERAN_SU_ENTREGA`, () => {
+  // La lista puede estar VACÍA (lo está desde el Sprint 027, cuando entró Innmobiliaria): por eso la prueba es una sola
+  // y recorre la lista, en vez de una por app. Una app que ya trae su tabla de capturas no puede seguir esperándola.
+  it("ninguna trae todavía su tabla de capturas; si ya llegó, sácala de ESPERAN_SU_ENTREGA", () => {
+    for (const slug of ESPERAN_SU_ENTREGA) {
       expect(
         existsSync(`content/vitrina/${slug}.capturas.yaml`),
         `«${slug}» ya trae su tabla: quítala de tests/fixtures/esperan-su-entrega.ts para que los gates de la entrega le apliquen`,
       ).toBe(false);
-    });
-  }
+    }
+  });
 });
 
 /** El motor puro: lo que debe romper, nombrando la cosa (el rojo de cada regla). */

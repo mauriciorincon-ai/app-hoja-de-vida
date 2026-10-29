@@ -114,7 +114,7 @@ The ten applications are Anonimizador Velo, Dash Agent, Probeta DS, Habla San, I
 | **Dash Agent**        | what context your agents keep about you and what they cost you, on your machine and without a single network call; it withdrew a feature of 83 suggestions that did not help |
 | **Probeta DS**        | Python, Pandas and scikit-learn in the browser with Pyodide (WebAssembly), with a verdict that says "does not beat" when it does not beat                                    |
 | **Habla San**         | 50 capsules and 16 milestones to practice speech as a family, with 169 end-to-end tests and the child's voice never recorded                                                 |
-| **Innmobiliaria**     | business flows with real validation —the certificate is seen and never stored— and 98% coverage in its engine                                                                |
+| **Innmobiliaria**     | business flows with real validation —the certificate is seen and never stored— and 99.7% coverage in its engine                                                              |
 | **Nutrikids**         | a calculation engine with 99.5% coverage and a daily log that never leaves the phone                                                                                         |
 
 The six in the table reached their MVP and are in sustained operation —if they are on the site it is because they reached that condition—, and all keep evolving permanently. The other four —planlang, AngelGhost, Big-D and HackGuard— are in their initial stage: cycle H1, version 0.1.0 and unsealed. Habla San is the most advanced: the only one sealed, since August 2026, and in use by the family it was built for.
@@ -131,7 +131,7 @@ Each application publishes its brochure with figures that declare their source, 
 | **Dash Agent** (Aug 2026) |       12 |       8 |                        693 |                — |         97.5% |   13 |
 | **Probeta DS** (Oct 2026) |       77 |       5 |                      3,461 |              183 |        95.35% |   30 |
 | **Habla San** (Aug 2026) |       24 |      10 |                        261 |              169 |        94.02% |   14 |
-| **Innmobiliaria** (Aug 2026) |       13 |      11 |                        172 |               76 |        98.31% |    6 |
+| **Innmobiliaria** (Oct 2026) |       37 |      33 |                      1,959 |              836 |        99.72% |   21 |
 | **Nutrikids** (Oct 2026) |       19 |       8 |                        214 |               94 |        99.52% |    7 |
 
 The monthly operating cost of the six in the table is US$0, calculated as the sum of the contracted services: hosting on a free plan, no servers of our own and, when there is an AI provider, within its free quota. Four of the six in the table do not use artificial intelligence at all —Anonimizador Velo, Dash Agent, Habla San and Innmobiliaria, which has it at zero models by product rule—, and their sheets declare it as a rule, not as an absence; Probeta DS and Nutrikids use it in a single feature, with a deterministic fallback and switchable by environment variable.

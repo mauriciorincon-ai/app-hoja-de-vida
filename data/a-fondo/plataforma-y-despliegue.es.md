@@ -88,7 +88,7 @@ Las pruebas incluyen distintos niveles según la naturaleza de cada producto. La
 | Dash Agent (ago. 2026) | 693 | — | 97,5 % |
 | Probeta DS (oct. 2026) | 3.461 | 183 | 95,4 % |
 | Habla San (ago. 2026) | 261 | 169 | 94 % |
-| Innmobiliaria (ago. 2026) | 172 | 76 | 98,3 % del motor |
+| Innmobiliaria (oct. 2026) | 1.959 | 836 | 99,7 % del motor |
 | Nutrikids (oct. 2026) | 214 | 94 | 99,5 % del motor |
 
 Estas cifras deben mantenerse sincronizadas con los repositorios, porque su valor depende de que sean observables y verificables. Algunas de esas pruebas son permanentes por diseño: Dash Agent tiene una que falla si el runtime abre un socket saliente; Anonimizador Velo, una que intercepta todas las peticiones del navegador y falla si una sola lleva datos del usuario; Habla San, una que verifica que tras jugar no queda rastro de la voz del niño en ningún almacenamiento.
