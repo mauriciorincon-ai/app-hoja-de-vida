@@ -1,7 +1,12 @@
 import { ChevronDown } from "lucide-react";
+import { CAPTURA_ALTO, CAPTURA_ANCHO } from "@/lib/vitrina/capturas";
 import type { GrupoExport } from "@/lib/vitrina/schemas";
-import { CapturaGrupo } from "./capturas";
 import { FirmaGrupo } from "./firmas";
+import {
+  GaleriaCarrusel,
+  type CapturaCarrusel,
+  type EtiquetasCarrusel,
+} from "./galeria-carrusel";
 import { IconoGrupo } from "./iconos-grupo";
 
 /**
@@ -24,17 +29,29 @@ import { IconoGrupo } from "./iconos-grupo";
  * del árbol de accesibilidad: sin eso el lector de pantalla recita las 24
  * funcionalidades "cerradas" y axe no lo ve.
  */
+/**
+ * Las pantallas reales del grupo (026): una por cada funcionalidad que tiene
+ * pantalla, en el orden de la tarjeta. Ya llegan armadas (idioma, rótulos y
+ * textos accesibles) desde `FichaApp`, que es quien sabe de traducciones.
+ */
+export type GaleriaDelGrupo = {
+  /** La carpeta pública de la app (`public/vitrina/<slug>`). */
+  base: string;
+  capturas: CapturaCarrusel[];
+  etiquetas: EtiquetasCarrusel;
+};
+
 export function TarjetaGrupo({
   grupo,
   slug,
   etiquetaEstrella,
-  pieCaptura,
+  galeria,
   pieFirma,
 }: {
   grupo: GrupoExport;
   slug: string;
   etiquetaEstrella: string;
-  pieCaptura: string;
+  galeria?: GaleriaDelGrupo;
   pieFirma: string;
 }) {
   const id = `g-${slug}-${grupo.orden}`;
@@ -95,9 +112,22 @@ export function TarjetaGrupo({
       >
         <div className="tarjeta-detalle-interior">
           <div className="tarjeta-detalle-cuerpo flex flex-col gap-5 border-t border-paper-2 px-5 pt-5 pb-6 md:px-6">
-            {/* LA PANTALLA REAL del grupo primero, a lo ancho: la imagen ancla
-                las palabras que vienen debajo. */}
-            <CapturaGrupo slug={slug} orden={grupo.orden} pie={pieCaptura} />
+            {/* LAS PANTALLAS REALES del grupo primero, a lo ancho: la imagen
+                ancla las palabras que vienen debajo. Un carrusel con una
+                captura por funcionalidad que la tiene (las transversales no
+                llevan figura: sin captura, sin relleno). */}
+            {galeria && (
+              <GaleriaCarrusel
+                base={galeria.base}
+                capturas={galeria.capturas}
+                ancho={CAPTURA_ANCHO}
+                alto={CAPTURA_ALTO}
+                sinOptimizar
+                diferir
+                sizes="(min-width: 896px) 720px, 100vw"
+                etiquetas={galeria.etiquetas}
+              />
+            )}
             {/* Y donde el grupo no es una pantalla sino EL CLÍMAX del brochure
                 de la app, va su FIRMA: la escena re-dibujada en nuestros
                 tokens (gate M1). */}

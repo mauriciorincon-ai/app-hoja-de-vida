@@ -30,15 +30,14 @@ const complementos = readdirSync("data/fichas")
       >,
   );
 
-/** Las seis apps cuyo complemento (y proceso BPMN) curó CV Viva en el S6. */
-const LINEA_BASE = [
-  "anonimizador",
-  "dash-agent-ai",
-  "ds",
-  "habla",
-  "inmobiliaria",
-  "nutri-kids",
-];
+/**
+ * Las apps de un complemento que NO traen «Cómo funciona»: el contrato deja el
+ * proceso OPCIONAL (v1.1.0, una pieza que no lo trae sale sin esa sección), pero
+ * toda APP lo lleva (OM-20, pedido 026: «las diez apps tienen Cómo funciona»).
+ */
+function appsSinProceso(lista: Array<Record<string, unknown>>): string[] {
+  return lista.filter((c) => !c.proceso).map((c) => String(c.app));
+}
 
 function habla() {
   return structuredClone(complementos.find((c) => c.app === "habla")!) as {
@@ -113,11 +112,11 @@ describe("complementos reales", () => {
       expect(complementoSchema.safeParse(c).success).toBe(true);
   });
 
-  // El proceso es OPCIONAL (contrato v1.1.0). Las seis apps de la línea base
-  // lo traen curado por CV Viva; las que llegan con complemento de otra casa
-  // (planlang, AngelGhost, Big-D, HackGuard · 2026-10-11) todavía no. Un
+  // El proceso es OPCIONAL en el CONTRATO (v1.1.0): una investigación o un
+  // tablero puede salir sin él. Una APP no: desde el pedido 026 las diez lo
+  // traen, y la planeadora lo adopta como suyo (`procedencia: planeadora`). Un
   // proceso sin dueño sigue siendo una cifra sin fuente.
-  it("todo complemento con proceso lo trae con su procedencia y es BPMN válido; la línea base sigue trayéndolo", () => {
+  it("todo complemento con proceso lo trae con su procedencia y es BPMN válido", () => {
     for (const c of complementos) {
       if (!c.proceso) continue;
       expect(procedencias, String(c.app)).toContain(c.procedencia);
@@ -125,11 +124,17 @@ describe("complementos reales", () => {
         true,
       );
     }
-    for (const app of LINEA_BASE) {
-      const c = complementos.find((x) => x.app === app)!;
-      expect(c.proceso, app).toBeDefined();
-      expect(c.procedencia, app).toBe("cv-viva");
-    }
+  });
+
+  it("«Cómo funciona» en TODAS las apps (OM-20): ninguna sale sin su proceso", () => {
+    expect(appsSinProceso(complementos)).toEqual([]);
+  });
+
+  it("el gate de «Cómo funciona» nombra la app que lo pierde (su rojo)", () => {
+    const sinHabla = complementos.map((c) =>
+      c.app === "habla" ? { ...c, proceso: undefined } : c,
+    );
+    expect(appsSinProceso(sinHabla)).toEqual(["habla"]);
   });
 });
 
@@ -184,7 +189,7 @@ describe("armarFichaTecnica", () => {
     expect(ft.cifras.every((c) => c.fuente)).toBe(true);
     expect(ft.bloques).toHaveLength(8);
     expect(ft.hitos.map((h) => h.etiqueta)).toContain("sellada");
-    expect(ft.procedencia_proceso).toBe("cv-viva");
+    expect(["cv-viva", "planeadora"]).toContain(ft.procedencia_proceso);
   });
 
   it("una cifra destacada que no existe en el export rompe nombrándola", () => {
@@ -372,17 +377,13 @@ describe("el proceso es opcional (contrato v1.1.0)", () => {
     );
   });
 
-  it("las seis apps de la línea base siguen trayendo su proceso, y toda ficha con proceso trae su procedencia", () => {
+  it("toda ficha con proceso trae su procedencia; y todas las de apps traen proceso", () => {
     const fichas = getFichasTecnicas();
     for (const ft of fichas) {
       if (ft.proceso)
         expect(ft.procedencia_proceso, ft.pieza.slug).toBeDefined();
       else expect(ft.procedencia_proceso, ft.pieza.slug).toBeUndefined();
-    }
-    for (const slug of LINEA_BASE) {
-      const ft = fichas.find((f) => f.pieza.slug === slug)!;
-      expect(ft.proceso, slug).toBeDefined();
-      expect(ft.procedencia_proceso, slug).toBe("cv-viva");
+      expect(ft.proceso, ft.pieza.slug).toBeDefined();
     }
   });
 });

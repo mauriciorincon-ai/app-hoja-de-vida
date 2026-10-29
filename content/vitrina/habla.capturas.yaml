@@ -1,0 +1,33 @@
+# Capturas de Habla San (pedido 026, planeadora, 2026-10-27). Build de producción de 6c4d113 en
+# una copia aislada; viewport 1024×640 a deviceScaleFactor 1.5 (WebP de 1536×960), tema claro de la
+# app e interfaz en español. Perfil 100 % sintético («Pipo», temas genéricos), historial y sesiones
+# fabricados, banco de voz = WAV de silencio inyectado; el micrófono es el falso de Chromium con los
+# WAV sintéticos de las pruebas e2e. Ningún nombre, voz, foto ni audio de un niño real.
+# Los pictogramas de 06, 07 y 11 son de ARASAAC (Sergio Palao, Gobierno de Aragón, CC BY-NC-SA):
+# su pie lleva la atribución.
+portada: entrada.webp
+capturas:
+  - { funcionalidad: "01", archivo: 01.webp, pie: { es: "La idea del día: tu frase, la actividad y el estudio que la respalda", en: "Today's idea: your line, the activity and the study behind it" } }
+  - { funcionalidad: "02", archivo: 02.webp, pie: { es: "Un toque marca el día: «Hecho hoy» y 12 días practicados juntos", en: "One tap marks the day: “Done today” and 12 days practiced together" } }
+  - { funcionalidad: "03", archivo: 03.webp, pie: { es: "Antes del globo, tu línea de hoy: tú diriges y la pantalla acompaña", en: "Before the balloon, today's line: you lead, the screen supports" } }
+  - { funcionalidad: "04", archivo: 04.webp, pie: { es: "El globo vuela con su voz y celebra su primera vuelta con confeti", en: "The balloon flies on his voice and celebrates its first lap with confetti" } }
+  - { funcionalidad: "05", archivo: 05.webp, pie: { es: "El cohete sigue el tono de su voz: ya subió y bajó una vez", en: "The rocket follows his pitch: it has gone up and down once" } }
+  - { funcionalidad: "06", archivo: 06.webp, pie: { es: "Marcas la palabra y suben globos · S. Palao, ARASAAC, Gob. Aragón, CC BY-NC-SA", en: "Mark the word, balloons rise · S. Palao, ARASAAC, Gov. of Aragón, CC BY-NC-SA" } }
+  - { funcionalidad: "07", archivo: 07.webp, pie: { es: "Dijo «luna» y lo marcaste · S. Palao, ARASAAC, Gob. Aragón, CC BY-NC-SA", en: "He said “luna”, you marked it · S. Palao, ARASAAC, Gov. of Aragón, CC BY-NC-SA" } }
+  - { funcionalidad: "08", archivo: 08.webp, pie: { es: "El Estudio: grabaste «perro»; escúchala, guárdala o vuelve a grabar", en: "The Studio: you recorded “perro”; play it, keep it or record again" } }
+  - { funcionalidad: "09", archivo: 09.webp, pie: { es: "Con tu voz vas: el avance por grupo y un botón para grabar cada uno", en: "Your voice so far: progress per group and a record button for each" } }
+  - { funcionalidad: "10", archivo: 10.webp, pie: { es: "Lo que ya grabaste, por grupos; borrar pide un segundo toque", en: "Everything you recorded, by group; deleting asks for a second tap" } }
+  - { funcionalidad: "11", archivo: 11.webp, pie: { es: "El dibujo suena con tu voz · S. Palao, ARASAAC, Gob. Aragón, CC BY-NC-SA", en: "The drawing plays your voice · S. Palao, ARASAAC, Gov. of Aragón, CC BY-NC-SA" } }
+  - { funcionalidad: "12", archivo: 12.webp, pie: { es: "Escribes «animales» y la app dice qué pone primero: 5 cápsulas, 8 dibujos", en: "You type “animales” and the app shows what goes first: 5 capsules, 8 drawings" } }
+  - { funcionalidad: "13", archivo: 13.webp, pie: { es: "Mientras escribes: lo que la app alinea y palabras bien escritas", en: "As you type: what the app can align, plus correctly spelled words" } }
+  - { funcionalidad: "14", archivo: 14.webp, pie: { es: "El objetivo activo, con su estado: alineando 5 cápsulas y 8 dibujos", en: "The active goal and its status: aligning 5 capsules and 8 drawings" } }
+  - { funcionalidad: "15", archivo: 15.webp, pie: { es: "Semana a semana: días juntos, vueltas del globo y segundos de voz", en: "Week by week: days together, balloon laps and seconds of voice" } }
+  - { funcionalidad: "16", archivo: 16.webp, pie: { es: "Lo que ya lograron: cada logro con su fecha, sin notas ni puntajes", en: "What they've achieved: each milestone dated, no grades or scores" } }
+  - { funcionalidad: "17", archivo: 17.webp, pie: { es: "La primera vez: un apodo inventado y hasta tres temas que le gustan", en: "First run: a made-up nickname and up to three topics he likes" } }
+  - { funcionalidad: "18", archivo: 18.webp, pie: { es: "Ajustes: eliges en qué etapa del habla está hoy tu hijo", en: "Settings: you pick the speech stage your child is at today" } }
+  - { funcionalidad: "19", archivo: 19.webp, pie: { es: "Modo calma: colores de atardecer y un globo que solo flota con su voz", en: "Calm mode: sunset colors and a balloon that just floats on his voice" } }
+  - { funcionalidad: "20", archivo: 20.webp, pie: { es: "Reducir animaciones, activado: menos movimiento en toda la app", en: "Reduce animations, switched on: less motion across the app" } }
+  - { funcionalidad: "21", archivo: 21.webp, pie: { es: "Tu pantalla en oscuro; la del niño sigue clara siempre", en: "Your screen in dark mode; the child's screen always stays light" } }
+  - { funcionalidad: "23", archivo: 23.webp, pie: { es: "Tu voz vive solo en el aparato; de la voz de tu hijo no hay nada que borrar", en: "Your voice stays on the device; there is nothing of your child's to delete" } }
+  - { funcionalidad: "24", archivo: 24.webp, pie: { es: "Qué mide y qué no mide la app, dicho en pantalla", en: "What the app measures and what it doesn't, stated on screen" } }
+sin_pantalla: ["22"]

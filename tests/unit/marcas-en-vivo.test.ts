@@ -5,6 +5,7 @@ import {
   ausenciaAfirmada,
   marcarRespuesta,
   motivoAtribuido,
+  narraElCierre,
 } from "../en-vivo/marcas";
 
 /**
@@ -283,5 +284,58 @@ describe("motivoAtribuido · los motivos que el modelo añadió a la salida de V
         4,
       ).motivos,
     ).toEqual([]);
+  });
+});
+
+/**
+ * S26 · la regla positiva de la salida de Vesting. Antes de la regla, la pasada del 025 devolvía el rehúso fijo
+ * (ES y EN) a «¿Por qué salió de Vesting?» aunque la fuente cuenta cómo cerró la etapa. El marcador exige que la
+ * respuesta NARRE ese cierre: la fecha y lo documentado.
+ */
+describe("narraElCierre · la fila de la salida de Vesting", () => {
+  it.each(["es", "en"] as const)(
+    "[%s] el rehúso fijo del 025 NO narra el cierre (su rojo)",
+    (idioma) => {
+      expect(narraElCierre(RESPUESTA_REHUSO[idioma], idioma)).toBe(false);
+    },
+  );
+
+  it.each([
+    [
+      "es",
+      "La etapa de Henry en Vesting cerró en enero de 2025, y dejó el ecosistema de datos y el proceso documentados [1].",
+    ],
+    [
+      "en",
+      "Henry's stage at Vesting closed in January 2025, leaving the data ecosystem and the process documented [1].",
+    ],
+  ] as const)(
+    "[%s] una respuesta que narra el cierre lo cuenta",
+    (idioma, texto) => {
+      expect(narraElCierre(texto, idioma)).toBe(true);
+      expect(motivoAtribuido(texto, idioma)).toEqual([]);
+    },
+  );
+
+  it.each([
+    ["es", "Henry dejó Vesting en enero de 2025 para explorar nuevos retos."],
+    [
+      "en",
+      "Henry left Vesting to pursue new challenges and explore other paths.",
+    ],
+  ] as const)(
+    "[%s] la fecha sin lo documentado, o un motivo sin cierre, no cuenta como narrar",
+    (idioma, texto) => {
+      expect(narraElCierre(texto, idioma)).toBe(false);
+    },
+  );
+
+  it("solo la fila de Vesting exige narrar el cierre, y marcarRespuesta lo expone", () => {
+    const fuente = readFileSync("tests/en-vivo/en_vivo_chat.test.ts", "utf8");
+    expect(fuente.match(/narraElCierre: true/g) ?? []).toHaveLength(1);
+    expect(fuente).toMatch(
+      /en: "Why did he leave Vesting\?",[\s\S]{0,600}narraElCierre: true/,
+    );
+    expect(marcarRespuesta(RESPUESTA_REHUSO.es, "es", 4).cierre).toBe(false);
   });
 });

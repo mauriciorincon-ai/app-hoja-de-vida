@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { CONSERVAN_VITRINA } from "../../scripts/sin-vitrina.mjs";
 import { textoVisible } from "./texto-visible";
 
 /**
@@ -11,7 +12,9 @@ import { textoVisible } from "./texto-visible";
  *  2. Ninguna página del sitemap dice «vitrina» ni «showcase» en el texto que el
  *     visitante lee (ni en un `alt`, `aria-label` o `title`) ni en lo que ve un
  *     buscador o una vista previa (`<meta content>`, JSON-LD: `texto-visible.ts`).
- *     Los exports de otras casas la traen: se leen ya con la palabra nueva.
+ *     Los exports de otras casas la traen: se leen ya con la palabra nueva,
+ *     salvo planlang, que llama «vitrina» a su propia pantalla y la conserva
+ *     (`CONSERVAN_VITRINA`, Sprint 026): sus dos páginas no entran en la cuenta.
  *
  * El motor del 301 se prueba con cadenas en `tests/unit/redireccion.test.ts`.
  */
@@ -65,10 +68,15 @@ test.describe("ninguna página del sitio dice la palabra vieja", () => {
     // Ninguna URL del sitemap es la ruta vieja.
     expect(rutas.filter((r) => /\/vitrina(\/|$)/.test(r))).toEqual([]);
 
+    const conservan = (ruta: string) =>
+      CONSERVAN_VITRINA.some((slug) =>
+        new RegExp(`^/(es|en)/portafolio/apps/${slug}(/|$)`).test(ruta),
+      );
     const conPalabra: string[] = [];
     for (const ruta of rutas) {
       const res = await request.get(ruta);
       expect(res.status(), ruta).toBe(200);
+      if (conservan(ruta)) continue;
       const visible = textoVisible(await res.text());
       const m = visible.match(/.{0,30}\b(?:vitrinas?|showcases?)\b.{0,30}/i);
       if (m) conPalabra.push(`${ruta}: «${m[0].replace(/\s+/g, " ").trim()}»`);

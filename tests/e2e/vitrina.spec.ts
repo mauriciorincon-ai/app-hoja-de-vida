@@ -1,4 +1,5 @@
 import { existsSync, readdirSync, readFileSync } from "node:fs";
+import AxeBuilder from "@axe-core/playwright";
 import { expect, test, type Locator, type Page } from "@playwright/test";
 import { parse } from "yaml";
 
@@ -171,11 +172,19 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
     await expect(page.locator("[data-muestra-slug]")).toHaveCount(
       EXPORTS.length,
     );
-    // … y cada una con su tira dibujada. Sin tira no hay marco (una caja
-    // vacía entró con cuatro apps nuevas el 2026-10-11); una app nueva sin
-    // dibujo cae aquí y en tests/unit/maquetas.test.tsx, no en producción.
+    // … y cada una con su PORTADA —la pantalla de entrada— si ya trae sus
+    // capturas (pedido 026), o con su tira dibujada si todavía no. Sin una ni
+    // otra no hay marco (una caja vacía entró con cuatro apps nuevas el
+    // 2026-10-11); una app nueva sin dibujo cae aquí y en
+    // tests/unit/maquetas.test.tsx, no en producción.
+    const conCapturas = EXPORTS.filter((e) =>
+      existsSync(`content/vitrina/${e.app.slug}.capturas.yaml`),
+    ).length;
+    await expect(
+      page.locator("[data-muestra-slug] [data-portada]"),
+    ).toHaveCount(conCapturas);
     await expect(page.locator("[data-muestra-slug] svg.maqueta")).toHaveCount(
-      EXPORTS.length,
+      EXPORTS.length - conCapturas,
     );
 
     const primera = MAS_LARGA;
@@ -504,10 +513,9 @@ test.describe("Vitrina — la ficha técnica (ADR-016)", () => {
         ).toHaveAttribute("data-fuente", m.fuente);
       }
 
-      // El proceso es OPCIONAL (contrato v1.1.0): las seis apps de la línea
-      // base lo traen curado por CV Viva; las que llegan con complemento de
-      // otra casa (planlang, AngelGhost, Big-D, HackGuard · 2026-10-11) aún no,
-      // y entonces la ficha no pinta ni el diagrama ni una procedencia vacía.
+      // El proceso es OPCIONAL en el contrato (v1.1.0), pero las diez apps lo
+      // traen desde el pedido 026 (un gate lo exige); si una pieza saliera sin
+      // él, la ficha no pinta ni el diagrama ni una procedencia vacía.
       const proceso = ft.locator(`[data-proceso="${exp.app.slug}"]`);
       if (comp.proceso) {
         // Un nodo por paso, y las anotaciones como notas al pie.
@@ -2202,5 +2210,149 @@ test.describe("Vitrina — los bloques de apps y su carrusel de tarjetas", () =>
     await expect(
       carrusel.getByRole("button", { name: "Previous card" }),
     ).toBeEnabled();
+  });
+});
+
+test.describe("Vitrina — las pantallas por funcionalidad y el Stack explicado (Sprint 026)", () => {
+  type Tabla = {
+    portada: string;
+    capturas: { funcionalidad: string; archivo: string }[];
+  };
+  type ExportConGrupos = {
+    app: { slug: string };
+    stack: { nombre: string; papel: string }[];
+    funcionalidades: {
+      grupos: { orden: number; features: { id: string }[] }[];
+    };
+  };
+  const tablaDe = (slug: string) =>
+    parse(
+      readFileSync(`content/vitrina/${slug}.capturas.yaml`, "utf8"),
+    ) as Tabla;
+  const exportDe = (slug: string) =>
+    JSON.parse(
+      readFileSync(`content/vitrina/${slug}.brochure-export.json`, "utf8"),
+    ) as ExportConGrupos;
+
+  /** El grupo de ds con MÁS pantallas: el carrusel con más que recorrer. */
+  function grupoMasLleno(slug: string) {
+    const tabla = tablaDe(slug);
+    const ids = new Set(tabla.capturas.map((c) => c.funcionalidad));
+    return exportDe(slug)
+      .funcionalidades.grupos.map((g) => ({
+        orden: g.orden,
+        n: g.features.filter((f) => ids.has(f.id)).length,
+      }))
+      .reduce((a, b) => (b.n > a.n ? b : a));
+  }
+
+  test("la tarjeta de un grupo abre con una pantalla por funcionalidad, y solo pide la primera hasta deslizar", async ({
+    page,
+  }) => {
+    const { orden, n } = grupoMasLleno("ds");
+    expect(n).toBeGreaterThan(1);
+    const pedidas = new Set<string>();
+    page.on("request", (r) => {
+      // Las capturas de ds viven en la carpeta pública `vitrina/ds` (sin optimizar: la ruta tal cual).
+      const partes = new URL(r.url()).pathname.split("/");
+      if (partes[1] === "vitrina" && partes[2] === "ds") pedidas.add(partes[3]);
+    });
+    await page.goto("/es/portafolio/apps/ds/detalle");
+    await page.waitForLoadState("networkidle");
+    // Con todas las tarjetas cerradas no se pide NI UNA captura: el detalle de
+    // una app pesa su texto, no sus ≈ 70 pantallas (presupuesto de Lighthouse).
+    expect([...pedidas], "capturas pedidas con las tarjetas cerradas").toEqual(
+      [],
+    );
+    const tarjeta = page.locator(`[data-grupo-orden="${orden}"]`);
+    await tarjeta.locator(".tarjeta-boton").click();
+    const carrusel = tarjeta.locator("[data-carrusel]");
+    await carrusel.scrollIntoViewIfNeeded();
+    await expect(carrusel.locator("[data-captura]")).toHaveCount(n);
+    await expect(carrusel.locator("[data-indicador]")).toHaveText(`1 de ${n}`);
+    // El pie dice de qué funcionalidad es: «V1 · nombre».
+    await expect(carrusel.locator("figcaption").first()).toContainText(/·/);
+    await carrusel.getByRole("button", { name: "Pantalla siguiente" }).click();
+    await expect(carrusel.locator("[data-indicador]")).toHaveText(`2 de ${n}`);
+    await expect(carrusel.locator('[data-captura="2"]')).toBeInViewport({
+      ratio: 0.5,
+    });
+    // Las capturas fuera de la pista no se piden hasta deslizar: nunca las n de golpe.
+    expect(pedidas.size).toBeLessThan(n);
+  });
+
+  test("las pantallas de una tarjeta abierta pasan axe (AA)", async ({
+    page,
+  }) => {
+    const { orden } = grupoMasLleno("ds");
+    await page.goto("/es/portafolio/apps/ds/detalle");
+    const tarjeta = page.locator(`[data-grupo-orden="${orden}"]`);
+    await tarjeta.locator(".tarjeta-boton").click();
+    await tarjeta.locator("[data-carrusel]").scrollIntoViewIfNeeded();
+    const r = await new AxeBuilder({ page })
+      .include(`[data-grupo-orden="${orden}"]`)
+      .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
+      .analyze();
+    expect(r.violations.map((v) => `${v.id}: ${v.nodes.length}`)).toEqual([]);
+  });
+
+  test("el Stack se despliega con el para qué de cada componente, sin tooltips", async ({
+    page,
+  }) => {
+    const exp = exportDe("habla");
+    await page.goto("/es/portafolio/apps/habla");
+    const ft = page.locator('[data-ficha-tecnica="habla"]');
+    // La vista comprimida: una cápsula por componente, sin `title`.
+    const capsulas = ft.locator('ul[aria-label="Stack"] li span');
+    await expect(capsulas).toHaveCount(exp.stack.length);
+    expect(
+      await capsulas.evaluateAll(
+        (els) => els.filter((e) => e.hasAttribute("title")).length,
+      ),
+    ).toBe(0);
+    const detalle = ft.locator("[data-stack-detalle]");
+    await expect(detalle.locator("dd").first()).toBeHidden();
+    await detalle.locator("summary").click();
+    await expect(detalle.locator("dd").first()).toBeVisible();
+    await expect(detalle.locator("dd").first()).toHaveText(exp.stack[0].papel);
+    await expect(detalle.locator("dt")).toHaveCount(exp.stack.length);
+  });
+
+  test("planlang y Big-D, que no tenían «Cómo funciona», ahora lo traen con su procedencia", async ({
+    page,
+  }) => {
+    for (const slug of ["planlang", "big-d"]) {
+      await page.goto(`/es/portafolio/apps/${slug}`);
+      const ft = page.locator(`[data-ficha-tecnica="${slug}"]`);
+      await expect(ft.locator(`[data-proceso="${slug}"]`)).toBeVisible();
+      await expect(ft.locator("[data-procedencia-proceso]")).toHaveAttribute(
+        "data-procedencia-proceso",
+        "planeadora",
+      );
+      await expect(ft.locator("[data-procedencia-proceso]")).toContainText(
+        "pipeline AI-APPs",
+      );
+    }
+  });
+
+  test("la portada del escaparate es una imagen que carga, en cada app que ya trae sus capturas", async ({
+    page,
+  }) => {
+    await page.goto("/es/portafolio/apps");
+    const portadas = page.locator("[data-muestra-slug] [data-portada] img");
+    const n = await portadas.count();
+    expect(n).toBeGreaterThan(0);
+    for (let i = 0; i < n; i++) {
+      await portadas.nth(i).scrollIntoViewIfNeeded();
+      await expect
+        .poll(() =>
+          portadas
+            .nth(i)
+            .evaluate(
+              (img: HTMLImageElement) => img.complete && img.naturalWidth > 0,
+            ),
+        )
+        .toBe(true);
+    }
   });
 });

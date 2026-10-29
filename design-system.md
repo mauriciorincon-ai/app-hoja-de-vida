@@ -396,8 +396,8 @@ cifra `clamp(3.5rem,8vw,4.75rem)`; tres columnas dejaban dos huérfanos.
   disfraza:** un frente en preparación no enseña una cuenta inventada, y la cuenta de uno abierto
   **se mide en disco**, no se escribe.
 - **Muestra de app** (escaparate `/portafolio`): card paper-0, borde paper-2, `r-lg`, `sh-1`. Lleva
-  chip de estado + chip de ciclo, nombre en Fraunces, promesa en Fraunces menor, **tira**
-  esquemática enmarcada en paper-1, para-quién en `ink-2`, conteos en mono y cierre «ver la ficha».
+  chip de estado + chip de ciclo, nombre en Fraunces, promesa en Fraunces menor, **portada** (la
+  pantalla de entrada de la app; la **tira** esquemática solo si la app aún no la trae) enmarcada en paper-1, para-quién en `ink-2`, conteos en mono y cierre «ver la ficha».
   El enlace estira su área de clic a toda la card (`after:absolute inset-0`) **conservando el
   nombre de la app como nombre accesible** — una sola parada de tabulador, y nunca «leer más».
   **Desde S9 su nombre es un `h3`** (cuelga del `h2` del bloque de categoría) y es **el nombre
@@ -494,17 +494,26 @@ cifra `clamp(3.5rem,8vw,4.75rem)`; tres columnas dejaban dos huérfanos.
 - **Chip de procedencia**: `r-full`, mono 10px uppercase, un pastel por origen —
   `sage`=medido · `sky`=calculada · `lilac`=declarado · `peach`=estimación. **Ninguna cifra se
   pinta sin él.**
-- **Tira y firma** (dibujo, no captura): SVG con los tokens de esta página. La **tira** resume las
+- **Tira y firma** (dibujo, no captura; desde el Sprint 026 la tira encabeza la ficha de detalle y es el
+  respaldo de la tarjeta del escaparate, que muestra la portada): SVG con los tokens de esta página. La **tira** resume las
   ideas de la app en cuatro columnas (viewBox 320×92, rótulos mono 6px de **13 caracteres como
   máximo**: uno más largo se toca con el vecino); la **firma** re-dibuja la escena clímax de su
   brochure. Se declaran como dibujo en su pie: jamás fingen ser una captura. **Toda app con export
   lleva su tira** (diez desde 2026-10-11: AngelGhost, planlang, Big-D y HackGuard entraron sin ella y
   la muestra pintó el marco vacío) y **sin tira no se pinta ni el marco**; la gramática y la
   presencia las vigila `tests/unit/maquetas.test.tsx`, y el escaparate las cuenta en e2e.
-- **Captura repintada**: pantalla real de la app hermana corriendo, fotografiada con los tokens de
-  CV Viva inyectados (`scripts/tema-cv-viva.mjs`) para que las seis se vean de la misma casa.
-  Banner apaisado enmarcado en paper-1, `alt=""` con pie visible que **declara el repintado** —
-  una imagen retocada que se presenta como cruda miente igual que una maqueta que finge ser foto.
+- **Captura**: pantalla real de la app hermana corriendo (1536×960, WebP ≤ 80 KB, datos
+  sintéticos), una por funcionalidad que tiene pantalla, en un carrusel dentro de la tarjeta de su
+  grupo (`GaleriaCarrusel`, patrón APG: sin rotación automática, botones apagados con
+  `aria-disabled`). Cada una lleva su pie visible —id y nombre de la funcionalidad, y una frase—;
+  la portada del escaparate es la pantalla de entrada. Una imagen retocada que se presenta como
+  cruda miente igual que una maqueta que finge ser foto: las capturas llegan tal cual las toma la
+  planeadora (`scripts/tema-cv-viva.mjs` se conserva: es el tema que ella puede leer para
+  repintar una toma).
+- **Stack explicado** (ficha técnica, los cuatro frentes): las cápsulas son la vista comprimida y no llevan
+  `title`; debajo, un `<details data-stack-detalle>` nativo («Para qué sirve cada uno») despliega
+  «nombre — papel». Sin JavaScript y sin tooltip: el teléfono no tiene cursor. Su forma no depende de
+  `prefers-reduced-motion`.
 - **Página de simulación** (`/portafolio/apps/<slug>/simulacion`, 2026-10-12, ADR-029): para la app
   privada cuya casa entrega una simulación estática. Contenedor `max-w-6xl`; arriba lo de CV Viva
   —el regreso a la ficha en mono, el **rótulo «Simulación · no operativo» en `peach`** (chip

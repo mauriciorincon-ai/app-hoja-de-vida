@@ -253,3 +253,26 @@ export function sinVitrinaEnTodo(v) {
   }
   return v;
 }
+
+/**
+ * Las apps cuyo propio producto se llama «vitrina» (decisión del dueño por la
+ * planeadora, 2026-10-27, pedido 026): planlang tiene una pantalla que se llama
+ * así —«la vitrina: siete pantallas en español e inglés, sin servidor»— y
+ * leerla «portafolio» le cambia el sentido. Lo suyo (export, complemento y
+ * tabla de capturas) se lee tal cual; el resto del sitio sigue diciendo
+ * «portafolio». Una sola lista, usada por todos los lectores.
+ * @type {ReadonlyArray<string>}
+ */
+export const CONSERVAN_VITRINA = ["planlang"];
+
+/**
+ * `sinVitrinaEnTodo` para lo que escribe la app `slug`: la palabra nueva,
+ * salvo en las apps que conservan la suya.
+ * @template T
+ * @param {string} slug
+ * @param {T} v
+ * @returns {T}
+ */
+export function sinVitrinaDe(slug, v) {
+  return CONSERVAN_VITRINA.includes(slug) ? v : sinVitrinaEnTodo(v);
+}

@@ -28,7 +28,7 @@
  * | tableros                        | sin cifra propia: «entre ellos»      | no figure of their own: «among them» |
  * | 23 instrumentos (8 · 15)        | más de 20 · un tercio · el resto     | more than 20 · a third · the rest   |
  * | 12 oportunidades · 7 evaluadas  | más de 10 · la mitad                 | more than 10 · half of them         |
- * | 3 priorizadas · 2 documentadas  | unas ya priorizadas · las primeras   | some already prioritized · the first ones |
+ * | 3 priorizadas · 2 documentadas  | algunas · las primeras               | some · the first ones               |
  * | 20 líderes · 15 procesos        | unos 20 · unos 15                    | some 20 · some 15                   |
  * | 10 planes de análisis           | una decena                           | some ten                            |
  * | 75 usuarios                     | unos 75                              | some 75                             |
@@ -387,7 +387,7 @@ export function problemasDeCticExacta(archivos) {
       if (m) {
         problemas.push(
           `${archivo}:${i + 1}: la fila de tabla dice «${m[1]}» — toda cifra de la Fundación CTIC ` +
-            `se escribe aproximada («más de 40», «unos 20 · unos 15», «unas ya priorizadas · las primeras»…).`,
+            `se escribe aproximada («más de 40», «unos 20 · unos 15», «algunas · las primeras»…).`,
         );
       }
     });

@@ -23,7 +23,7 @@ import process from "node:process";
 import { parse } from "yaml";
 import { TOPE_PALABRAS_CHUNK, ventanasPorParrafo } from "./a-fondo.mjs";
 import { conNombreDePieza, conNombreOficial } from "./nombre-oficial.mjs";
-import { sinVitrinaEnTodo } from "./sin-vitrina.mjs";
+import { sinVitrinaDe, sinVitrinaEnTodo } from "./sin-vitrina.mjs";
 import { leerNombresDePiezas, leerNombresOficiales } from "./nombres-oficiales.mjs";
 
 const ROOT = process.cwd();
@@ -39,6 +39,11 @@ const FRENTES_DE_FICHA = ["agentes", "investigaciones", "tableros"];
 export function leerFichas() {
   // Misma lectura que el loader: «vitrina» se lee «portafolio» (S23).
   const leerJson = (ruta) => sinVitrinaEnTodo(JSON.parse(readFileSync(ruta, "utf8")));
+  // Los exports de las APPS: igual, salvo las que conservan la palabra para su pantalla (planlang).
+  const leerExportDeApp = (ruta) => {
+    const crudo = JSON.parse(readFileSync(ruta, "utf8"));
+    return sinVitrinaDe(crudo.app.slug, crudo);
+  };
   const dirApps = path.join(ROOT, "content", "vitrina");
   // Nombre oficial (ADR-028): el chat dice lo mismo que el escaparate. Se aplica
   // al LEER el export, igual que en el loader de la vitrina.
@@ -46,12 +51,12 @@ export function leerFichas() {
   const apps = (existsSync(dirApps) ? readdirSync(dirApps) : [])
     .filter((f) => f.endsWith(".brochure-export.json"))
     .map((f) => {
-      const crudo = leerJson(path.join(dirApps, f));
+      const crudo = leerExportDeApp(path.join(dirApps, f));
       const oficial = oficiales.get(crudo.app.slug);
       const brochure = oficial ? conNombreOficial(crudo, oficial) : crudo;
       const complementoRuta = path.join(ROOT, "data", "fichas", `${brochure.app.slug}.yaml`);
       const complemento = existsSync(complementoRuta)
-        ? sinVitrinaEnTodo(parse(readFileSync(complementoRuta, "utf8")))
+        ? sinVitrinaDe(brochure.app.slug, parse(readFileSync(complementoRuta, "utf8")))
         : null;
       return { brochure, complemento };
     });

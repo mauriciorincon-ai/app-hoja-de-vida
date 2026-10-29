@@ -11,10 +11,8 @@
     "metricas[].fuente": "Una de cuatro: \"medido\" (salió de un contador o un comando), \"calculada\" (medido operado con una tarifa o una regla, y se dice cuál), \"declarado\" (lo fijó una persona), \"estimacion\" (deducido). Una cifra sin fuente no entra.",
     "enlaces.produccion": "null cuando la app no tiene URL pública. `razon` explica por qué, y es lo que la vitrina muestra en lugar del enlace. Nunca se rellena con un enlace de repositorio ni con una promesa."
   },
-
   "schema_version": "1.0.0",
-  "actualizado": "2026-08-19",
-
+  "actualizado": "2026-10-27",
   "app": {
     "slug": "dash-agent-ai",
     "nombre": "Dash Agent AI",
@@ -24,14 +22,12 @@
     "sprints_cerrados": 3,
     "version_repo": "0.1.0"
   },
-
   "promesa": {
     "tagline": "Tus agentes de IA saben todo de ti. Es hora de que tú sepas todo de ellos.",
-    "intro": "Un panel que vive entero en tu computador, lee el rastro de trabajo que tus agentes dejan en tu disco y te dice qué te cuestan, si te rinden y qué saben de ti.",
-    "para_quien": "Para quien trabaja a diario con agentes de IA, paga una suscripción y hoy no puede saber cuánto costó construir cada cosa, si la suscripción le rinde, ni qué hay escrito sobre él en los archivos de instrucciones que sus agentes leen.",
-    "diferencial": "Medir tokens ya lo hacen varias herramientas gratuitas. Lo que no hace nadie es el auditor de memoria: el inventario de lo que tus agentes saben de ti y la detección determinista de lo que dejó de ser cierto."
+    "intro": "Dash Agent es un panel que vive entero en tu computador y lee el rastro que Claude Code deja en tu disco. Te responde tres preguntas: cuánto te cuestan de verdad tus agentes, si la suscripción te rinde y qué tienen escrito sobre ti que ya no es cierto. Mira sin tocar: no modifica tus archivos, no se conecta a internet y operarlo cuesta cero.",
+    "para_quien": "Para quien programa a diario con agentes de IA y paga una suscripción, pero hoy no sabe cuánto le costó construir cada proyecto, si el plan le rinde frente a pagar por uso, ni qué instrucciones viejas siguen guiando a sus agentes sin que nadie las revise.",
+    "diferencial": "Contar tokens ya lo hacen varias herramientas gratuitas. Dash va más allá: revisa lo que tus agentes tienen escrito sobre ti y te señala, con archivo y línea, lo que ya no es cierto. Todo con reglas fijas y verificables, sin IA que opine."
   },
-
   "funcionalidades": {
     "total": 12,
     "fuente_del_conteo": "docs/MANUAL-DE-USO.md",
@@ -47,19 +43,19 @@
       {
         "orden": 1,
         "estrella": true,
-        "nombre": "Lo que saben de ti",
-        "linea": "Y si sigue siendo cierto. Esto no lo hace nadie más.",
+        "nombre": "Lo que tus agentes no te cuentan",
+        "linea": "Qué tienen escrito sobre ti, si sigue siendo cierto y en qué sesiones se fue el trabajo sin producir nada.",
         "features": [
           {
             "id": "B1",
-            "nombre": "Auditor de memoria — con su plan de limpieza",
-            "que_hace": "Inventario de todo lo que tus agentes tienen escrito sobre ti (CLAUDE.md, memorias, configuración de MCP) y detección determinista de lo que caducó, con archivo, línea y texto exacto. El plan de limpieza es una lista que ejecutas tú: la app no borra ni edita nada.",
+            "nombre": "Auditor de memoria con plan de limpieza",
+            "que_hace": "Descubre qué tienen escrito tus agentes sobre ti y qué ya no es cierto. Dash revisa sus instrucciones y las notas que guardan entre sesiones, y señala cada problema con archivo, línea y texto. La limpieza la haces tú: la app no borra nada.",
             "seccion_manual": "Auditor de memoria · El plan de limpieza"
           },
           {
             "id": "B2",
             "nombre": "Detector de desperdicio",
-            "que_hace": "Los patrones donde el trabajo se va sin producir nada —bucles de reintento, sesiones abandonadas, re-lecturas masivas— cada uno con su umbral escrito y sus casos concretos.",
+            "que_hace": "Encuentra las sesiones en que tus agentes trabajaron sin producir nada, y lo que costaron. Busca tres patrones con su regla a la vista: reintentos en bucle, sesiones de más de 30 minutos sin tocar archivos y un archivo leído diez veces o más.",
             "seccion_manual": "Desperdicio"
           }
         ]
@@ -67,31 +63,31 @@
       {
         "orden": 2,
         "estrella": false,
-        "nombre": "Lo que te cuestan",
-        "linea": "Tus tokens reales, en dólares — y si el plan te rinde.",
+        "nombre": "Cuánto te cuestan de verdad",
+        "linea": "Tus tokens reales convertidos a dólares con tarifas fechadas, y la respuesta a si tu suscripción te rinde.",
         "features": [
           {
             "id": "C1",
             "nombre": "Medidor de consumo real",
-            "que_hace": "Tokens por sesión, modelo y día, con los cuatro contadores separados: entrada, salida, caché de creación y caché de lectura.",
+            "que_hace": "Mira cuánto consumes de verdad, por modelo y por día, leído de los registros que Claude Code deja en tu disco. Lo verás en tokens, las unidades con las que se cobra un modelo, separados en entrada, salida y las dos clases de caché.",
             "seccion_manual": "Resumen · Costos y ROI"
           },
           {
             "id": "C2",
-            "nombre": "Tarifas con fuente y fecha",
-            "que_hace": "Cada dólar declara con qué tarifas se calculó y de qué fecha son, desde una copia local versionada con su origen y su sha256. Sin llamadas a internet.",
+            "nombre": "Tarifas con fecha y huella",
+            "que_hace": "Conoce el origen de cada dólar que ves. Dash lo calcula con una copia local de las tarifas de lista, con su fecha, su origen y su huella digital. Así puedes comprobarlo por tu cuenta, sin que nada se consulte en internet.",
             "seccion_manual": "Cómo se lee una cifra"
           },
           {
             "id": "C3",
-            "nombre": "ROI de la suscripción frente a la API",
-            "que_hace": "Compara lo que pagas con lo que habrías pagado por API a tarifas de lista con este mismo consumo. Las dos cifras nunca se suman, y viajan con sus dos advertencias: es un contrafactual, y los límites reales de cada plan no son públicos.",
+            "nombre": "¿Te rinde la suscripción?",
+            "que_hace": "Averigua si tu plan te rinde. Dash pone lo que pagas junto a lo que costaría ese consumo pagando por uso, a tarifas de lista. Nunca resta una cifra de la otra. Te recuerda que los límites de cada plan no son públicos.",
             "seccion_manual": "Costos y ROI · Las dos advertencias"
           },
           {
             "id": "C6",
-            "nombre": "Presupuesto y proyección",
-            "que_hace": "Umbral mensual declarado y proyección de fin de mes con el ritmo real de los últimos siete días. No proyecta cuando no puede, y dice cuál de las tres razones lo impide.",
+            "nombre": "Presupuesto y proyección del mes",
+            "que_hace": "Anticipa cómo cerrará tu mes. Dash proyecta el cierre con tu ritmo real de los últimos siete días y lo compara con el tope mensual que declares. Cuando no puede proyectar, no inventa un número: te dice cuál de las tres razones lo impide.",
             "seccion_manual": "La proyección · Declarar lo que pagas"
           }
         ]
@@ -99,19 +95,19 @@
       {
         "orden": 3,
         "estrella": false,
-        "nombre": "Dónde se fue, y qué hiciste",
-        "linea": "El gasto anclado al repo donde ocurrió, tarea por tarea.",
+        "nombre": "Dónde se fue tu trabajo",
+        "linea": "El costo de cada proyecto y de cada tarea, anclado al repositorio donde de verdad ocurrió.",
         "features": [
           {
             "id": "C4",
-            "nombre": "Atribución por app",
-            "que_hace": "Cuánto costó construir cada app del portafolio, con el gasto anclado al repositorio donde ocurrió — el dato existe en la fuente, no se reparte a ojo. Una sesión en dos repos se parte.",
+            "nombre": "Costo por proyecto",
+            "que_hace": "Conoce cuánto te costó construir cada proyecto. Dash usa el repositorio que viene anotado en cada mensaje, sin repartir a ojo, y si una sesión trabajó en dos, la divide. Al abrir un proyecto ves en qué ramas de código se fue el consumo.",
             "seccion_manual": "Atribución por app"
           },
           {
             "id": "C5",
             "nombre": "Línea de tiempo de tareas",
-            "que_hace": "Las sesiones día a día con lo que se pidió y lo que costó cada tarea. Una sesión leída a medias se muestra rota, con la línea exacta donde se cortó.",
+            "que_hace": "Revive tu trabajo día a día: cada sesión con lo que pediste, lo que costó cada tarea y cuántos archivos tocó. Si un registro se leyó incompleto, la sesión aparece marcada como rota, con la línea exacta donde se cortó.",
             "seccion_manual": "Línea de tiempo"
           }
         ]
@@ -119,19 +115,19 @@
       {
         "orden": 4,
         "estrella": false,
-        "nombre": "Lo que no se pierde",
-        "linea": "Claude Code borra tu rastro a los 30 días. Aquí no.",
+        "nombre": "Tu historial, a salvo",
+        "linea": "Claude Code borra sus registros a los 30 días; Dash conserva lo que importa y lo resume en un reporte que te llevas.",
         "features": [
           {
             "id": "C8",
-            "nombre": "Índice propio incremental",
-            "que_hace": "Indexa los transcripts en streaming antes de que Claude Code los borre a los 30 días, siempre fuera de las fuentes, y declara cuántas líneas repetían un consumo ya contado.",
+            "nombre": "Historial que no caduca",
+            "que_hace": "Conserva tu historial aunque Claude Code borre sus registros a los 30 días. Dash guarda su propio índice en tu computador, separado de los originales. Al actualizarlo te dice qué leyó y cuántas líneas repetidas descartó para no contar doble.",
             "seccion_manual": "El índice es tuyo"
           },
           {
             "id": "C10",
             "nombre": "Reporte de evidencia",
-            "que_hace": "Un HTML autocontenido con el snapshot del período, que se abre sin la app y sin internet, e incluye lo que no se pudo leer. Sin marca de hora: dos reportes del mismo período son idénticos byte a byte.",
+            "que_hace": "Guarda la evidencia de un período en un archivo que abre cualquier navegador, sin la app y sin internet. Trae costos, rendimiento del plan y lo que no se pudo leer. Dos reportes del mismo período salen idénticos: compararlos muestra solo lo que cambió.",
             "seccion_manual": "El reporte de evidencia"
           }
         ]
@@ -139,26 +135,25 @@
       {
         "orden": 5,
         "estrella": false,
-        "nombre": "Por qué puedes creerle",
-        "linea": "La garantía no se promete: se comprueba en pantalla.",
+        "nombre": "Por qué puedes confiar",
+        "linea": "La garantía de solo lectura se comprueba en pantalla, junto con todo lo que tus agentes tienen conectado.",
         "features": [
           {
             "id": "C9",
-            "nombre": "Solo lectura demostrable",
-            "que_hace": "Las cuatro capas de la garantía con cómo se comprueba cada una. La de permisos se mide en el momento preguntándole al propio Node; las otras dicen «verificada en CI» y no una hora que no tienen.",
+            "nombre": "Solo lectura comprobable",
+            "que_hace": "Comprueba tú mismo que Dash no puede modificar tus archivos. La pantalla Confianza muestra las cuatro capas de esa garantía y cómo se verifica cada una. La de permisos se mide en vivo: Dash le pregunta al propio sistema si podría escribir.",
             "seccion_manual": "Confianza"
           },
           {
             "id": "C7",
-            "nombre": "Stack y MCP",
-            "que_hace": "Inventario de los servidores MCP declarados en las configuraciones locales, si su binario existe en disco, y el censo de versiones del CLI que escribieron la historia. No prueba conexiones ni edita nada.",
+            "nombre": "Conexiones de tus agentes",
+            "que_hace": "Mira qué herramientas externas tienen conectadas tus agentes: los servidores MCP que declaran tus configuraciones y si su programa existe de verdad en tu disco. Verás también qué versiones de Claude Code escribieron tu historial. Solo inventaría: no conecta ni edita nada.",
             "seccion_manual": "Stack y MCP"
           }
         ]
       }
     ]
   },
-
   "metricas": [
     {
       "clave": "funcionalidades",
@@ -179,10 +174,10 @@
     {
       "clave": "pruebas_unitarias",
       "etiqueta": "Pruebas unitarias y de integración",
-      "valor": 693,
+      "valor": 709,
       "unidad": "pruebas",
       "fuente": "medido",
-      "detalle": "Salida de `pnpm test` el 2026-08-19: 44 archivos, 693 pruebas."
+      "detalle": "Salida de `pnpm test` (vitest con --maxWorkers=2) el 2026-10-27 sobre f80375f: 46 archivos, 709 pruebas, todas en verde."
     },
     {
       "clave": "cobertura_lineas",
@@ -190,7 +185,7 @@
       "valor": 97.5,
       "unidad": "%",
       "fuente": "medido",
-      "detalle": "v8 sobre engine, reader, db, lib y components; umbrales por glob en vitest.config.mts."
+      "detalle": "v8 sobre engine, reader, db, lib y components; umbrales por glob en vitest.config.mts. Medida con `pnpm test` el 2026-10-27 sobre f80375f: 97,53 % de líneas."
     },
     {
       "clave": "dependencias_runtime",
@@ -233,28 +228,40 @@
       "detalle": "Archivos de decisions/."
     }
   ],
-
   "stack": [
-    { "nombre": "Next.js", "papel": "la app y su servidor local, que escucha solo en 127.0.0.1" },
-    { "nombre": "TypeScript", "papel": "modo estricto en todo el repositorio" },
-    { "nombre": "SQLite (better-sqlite3)", "papel": "el índice propio, siempre fuera de las fuentes" },
-    { "nombre": "Vitest y Playwright", "papel": "las pruebas, incluidas las tres permanentes de la garantía" },
-    { "nombre": "Pino", "papel": "registro local; no sale nada de la máquina" }
+    {
+      "nombre": "Next.js",
+      "papel": "la app y su servidor local, que escucha solo en 127.0.0.1"
+    },
+    {
+      "nombre": "TypeScript",
+      "papel": "modo estricto en todo el repositorio"
+    },
+    {
+      "nombre": "SQLite (better-sqlite3)",
+      "papel": "el índice propio, siempre fuera de las fuentes"
+    },
+    {
+      "nombre": "Vitest y Playwright",
+      "papel": "las pruebas, incluidas las tres permanentes de la garantía"
+    },
+    {
+      "nombre": "Pino",
+      "papel": "registro local; no sale nada de la máquina"
+    }
   ],
-
   "privacidad": {
     "local_only": true,
     "red_saliente": false,
     "escribe_en_las_fuentes": false,
     "usa_ia": false,
-    "detalle": "La app vive entera en la máquina de quien la usa. No hay servidor, cuenta ni nube. La garantía de solo lectura tiene cuatro capas —el modelo de permisos de Node al arrancar, una frontera de módulo única, el índice siempre fuera de las fuentes, y tres pruebas permanentes en el CI— y una pantalla dedicada a comprobarlas."
+    "detalle": "Dash vive entero en el computador de quien lo usa: no hay servidor, cuenta ni nube, y no se conecta a internet. Tampoco puede escribir en los archivos de tus agentes. Esa garantía tiene cuatro capas: el bloqueo de escritura del sistema al arrancar, un único punto del código que lee, un índice separado de los originales y pruebas automáticas permanentes. Una pantalla te deja comprobarlas."
   },
-
   "enlaces": {
     "produccion": null,
-    "razon": "App 100 % local: no existe URL de producción y no la habrá. El servidor escucha solo en 127.0.0.1, en la máquina de quien la usa.",
+    "razon": "Dash corre solo en el computador de quien lo usa y no se publica en internet: no hay una dirección que visitar, ni la habrá.",
     "repositorio": null,
-    "razon_repositorio": "Repositorio privado.",
+    "razon_repositorio": "El código vive en un repositorio privado.",
     "brochure_archivo": "docs/BROCHURE.html",
     "brochure_ruta_local": "/conoce"
   }

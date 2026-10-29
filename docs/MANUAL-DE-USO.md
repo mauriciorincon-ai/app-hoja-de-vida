@@ -485,16 +485,32 @@ el mensaje te llega al correo.
     promesa, las cifras, las funcionalidades agrupadas en tarjetas que se abren solas al llegar
     leyendo, y los detalles finos (privacidad, stack, funcionalidades descartadas).
     Al pie del escaparate, el bloque **«De esta casa»** enlaza las dos brochures propias.
-- **De dónde sale la ficha técnica:** del `brochure-export.json` de la app **más un complemento**
-  que hoy escribe esta casa, en `data/fichas/<app>.yaml`: el titular, cuáles 3–5 cifras van
-  arriba, los límites, los «nunca» y el proceso. Cada complemento dice `procedencia: cv-viva`, y la
-  ficha lo declara al pie del diagrama: **el proceso lo derivó CV Viva del export; la app aún no
-  lo envía**. El día que la app lo mande en su export, ese archivo se retira.
-- **Cómo cambiar el titular, las cifras destacadas, los límites o el proceso de una app:** edita
-  `data/fichas/<app>.yaml` y haz push. El proceso se describe con datos (carriles · pasos ·
-  flujos · anotaciones), no se dibuja: el diagrama lo genera la app. Si el proceso está mal
+- **De dónde sale la ficha técnica:** del `brochure-export.json` de la app **más un complemento**,
+  en `data/fichas/<app>.yaml`: el titular, cuáles 3–5 cifras van arriba, los límites, los «nunca» y
+  el proceso. Desde el pedido 026 (Sprint 026) **los exporta y los cura la planeadora** —ya no se
+  escriben aquí— y cada complemento dice `procedencia: planeadora`; la ficha lo declara al pie del
+  diagrama («Proceso trazado por el pipeline AI-APPs…»). Los complementos no se editan aquí: llegan
+  por copia, con el export y las capturas de la misma app.
+- **Las diez apps traen «Cómo funciona»** (un gate lo exige: si una app sale sin proceso, la
+  publicación falla nombrándola) y **a lo sumo un cero en su tira de cifras**: un cero vale cuando
+  es LA promesa de la app («cero IA»), y los demás siguen completos en la ficha de detalle, con su
+  fuente. Qué cifras van en la tira lo decide el complemento.
+- **El Stack, explicado:** las cápsulas de arriba son la vista comprimida; debajo, «Para qué sirve
+  cada uno» las despliega con el para qué de cada componente (lo que antes escondía un tooltip que
+  no existe en el teléfono). Vale igual para apps, agentes, investigaciones y tableros.
+- **Las pantallas, una por funcionalidad:** cada app llega con su tabla de capturas
+  (`content/vitrina/<app>.capturas.yaml`) y sus imágenes (`public/vitrina/<app>/`). En la ficha de
+  detalle, cada grupo abre con un carrusel con la pantalla de cada funcionalidad que la tiene; las
+  transversales no llevan figura. La portada de la tarjeta del escaparate es la pantalla de entrada.
+  Un gate exige que toda funcionalidad tenga su captura o esté declarada sin pantalla, que cada
+  archivo exista y sea un WebP de 1536×960 y ≤ 80 KB.
+- **Cómo cambiar el titular, las cifras destacadas, los límites o el proceso de una app:** se pide a
+  la planeadora, que cura su entrega; aquí se copia. El proceso se describe con datos (carriles ·
+  pasos · flujos · anotaciones), no se dibuja: el diagrama lo genera la app. Si el proceso está mal
   formado (sin fin, una decisión con un solo camino, un paso al que nadie llega, una cifra que no
   existe en el export), **la publicación falla** y el error dice qué y dónde.
+- **Una excepción de palabra:** planlang llama «vitrina» a su propia pantalla y la conserva; el resto
+  del sitio dice «portafolio» (`CONSERVAN_VITRINA` en `scripts/sin-vitrina.mjs`).
 - **Para que otra casa produzca fichas técnicas** (investigaciones, agentes, tableros): el
   paquete de entrega está en `docs/contrato-ficha-tecnica/` — empieza por `CLAVE-VISUAL.md`.
   Entregan un JSON; CV Viva lo pinta. Nunca HTML. Contrato vigente: **v1.3.1** (ver «Cómo
@@ -509,12 +525,10 @@ el mensaje te llega al correo.
   falla** y el error dice qué archivo y qué campo — nunca se publica una ficha que miente sobre sí
   misma.
 - **Las imágenes de las pantallas:** son capturas de cada app **corriendo de verdad**, con datos
-  inventados, tomadas con un comando de este repo y **repintadas con la paleta de la hoja de vida**
-  para que las seis se vean de la misma casa. Para regenerarlas:
-  - necesitas las apps hermanas clonadas al lado de este repo, con sus dependencias instaladas, y
-    `cwebp` disponible (`brew install webp`);
-  - `pnpm capturas:vitrina` las rehace todas, `pnpm capturas:vitrina habla` solo una;
-  - quedan en `public/vitrina/` como WebP.
+  inventados, que toma la planeadora desde una copia aislada de la app y entrega ya en WebP. **Aquí
+  no se toman ni se regeneran:** se copian byte a byte (el comando `pnpm capturas:vitrina` se retiró
+  en el Sprint 026). Cada una se revisa una por una antes de entrar: datos sintéticos, sin personas
+  reales y, en las apps de un menor, sin nada que lo identifique.
 - **Ninguna ficha entrega un enlace** a la app ni a su repositorio: se muestra la **razón** de que
   no lo haya y un único botón de **lista de espera** (solo en las apps), sin promesa de fecha.
 - **Lo que se muestra es la versión anclada** del export (con su fecha, a la vista al pie de cada
@@ -535,8 +549,10 @@ el mensaje te llega al correo.
   no tiene export **se ignora** y aparece sola el día que llegue su export (así entraron AngelGhost,
   planlang, Big-D y HackGuard el 2026-10-11: las diez apps del YAML ya tienen el suyo). Un `slug` no
   puede estar en las dos listas.
-- **Su tira.** La muestra de cada app lleva un **dibujo esquemático** de esta casa —no una captura—
-  que resume sus ideas en cuatro columnas; vive en `src/components/vitrina/maquetas/<slug>.tsx` y se
+- **Su tira.** La tarjeta del escaparate muestra la **portada** de la app (su pantalla de entrada, que
+  entrega la planeadora); la tira es el **dibujo esquemático** de esta casa —no una captura— que
+  encabeza la ficha de detalle, y la tarjeta de una app que aún no trae portada (hoy Innmobiliaria).
+  La tira resume sus ideas en cuatro columnas; vive en `src/components/vitrina/maquetas/<slug>.tsx` y se
   registra en el índice de esa carpeta. **Una app nueva entra con su tira**: si llega su export sin
   dibujo, la CI falla nombrando la app (y mientras tanto la muestra no pinta el marco vacío, como
   pasó el 2026-10-11 con las cuatro que entraron sin él).
@@ -1440,3 +1456,4 @@ chat hoy y cuáles traería con la base aprobada. Ese informe **se genera, no se
 | Sprint 024 | **Sentada 3 de la revisión: el chat, en tercera persona y sin perder la conversación.** Lo que Henry no hizo, no sabe o no tiene (y el AI-102, el DP-100, el salario, la disponibilidad) recibe una respuesta fija y no llama al modelo; una pregunta ajena no cita ninguna fuente y el panel muestra solo las que la respuesta cita; el chat habla de Henry en tercera persona, también en el texto del panel y en el prompt (con «Microsoft Foundry (antes Azure AI Foundry)»); la conversación se guarda en el navegador (recargar, el menú y el cambio de idioma no la pierden, vence a las 8 h, «Borrar conversación»); «Avisa a Henry» también con la sesión abierta; «¿qué estudió Henry?» cita Estudios (campo `alias`); se adopta la constitución regenerada y el export de Probeta DS del S18; guía v24; `pnpm test:en-vivo`. |
 | Sprint 025 | **Sentada 2 de la revisión: el CV dice lo que pasó, y Proyectos propios con su caso.** CTIC dice «unas ya priorizadas» y que participas en el asesoramiento del diseño de los planes de mejora (CV y corpus); la lección de Ceinfes es tu frase de la retrospectiva; el capítulo de Vesting es «Definiciones comunes, atributos propios»; Banco Pichincha queda con dos modelos, fuga y mora; Cafam cuenta herramientas VBA que complementaban el WMS, no una integración. **Proyectos propios tiene su caso** («El pipeline AI-APPs», de `apps-pipeline`) con su enlace en la Trayectoria, y el **PDF pasa a tres hojas**, la tercera con el puesto entero. El chat cuenta cómo cerró la etapa en Vesting sin atribuirle un motivo (regla 5 del prompt y una marca «Motivos» en la pasada en vivo) y encuentra en inglés lo que guarda («What data do you keep about me?»); la fila del banco sube las preguntas de afuera a 176. Entran los exports de Probeta DS (S19) e Innmobiliaria (S14) y salen del roadmap los cuatro ítems que esas apps ya construyeron («¿Qué pasaría si…? con el impacto en dinero», «Un gemelo sintético de tus datos», «Copiloto del papeleo legal» y «Fotos que venden»): el roadmap de las dos queda vacío y la guía recorre siete apps con roadmap, no nueve. Guía v25 con doce filas «Mejorado · S25». |
 | Sprint 022 | **Sentada 5 de la revisión: tres agentes fuera, nombres sin «Harness» e investigaciones en pausa.** Salen de la vitrina Agente A, Agente B y el Harness Design Science (14 → 11 agentes); el agente de investigación se llama «Paper Computacional» por un alias de nombre que no edita la ficha (`data/nombres-piezas.yaml`); el frente de Investigaciones queda en pausa con su aviso propio (`enPreparacion`), sin tarjetas, fuera del sitemap y del chat y con sus fichas en 404. Gates: `retiro-piezas`, `nombres-piezas`, la pausa del índice del chat y el e2e de la pausa. La nota de cada fila de la guía admite 2000 caracteres. 
+| Sprint 026 | **Sentada 4a: las fichas de las apps, a la altura.** Nueve apps llegan rehechas por la planeadora (export, complemento y capturas, copiados byte a byte; Innmobiliaria espera su entrega y su fila queda como estaba): cada una trae «Cómo funciona» y a lo sumo un cero en su tira de cifras, y la tarjeta del escaparate muestra la pantalla de entrada de la app. En la ficha de detalle cada grupo abre con un carrusel con la pantalla de cada funcionalidad (un WebP de 1536×960 y ≤ 80 KB; las transversales no llevan figura), y el Stack despliega «Para qué sirve cada uno» en vez de un tooltip que el teléfono no tiene. El diagrama de Nutrikids ya no cruza una caja, planlang conserva su palabra «vitrina» y el proceso lo rotula la planeadora, no CV Viva. Se aplican las 16 líneas de la orden de correcciones del Sprint 025 y dos de las tres tablas de cifras de la prosa llevan el mes de cada fila («oct. 2026» o «ago. 2026»; la de «Cómo aprendo» no cabe en el tope de su subsección y solo cambia la fila de Probeta DS). El chat narra con su cita lo que consta de «¿Por qué salió de Vesting?» sin añadir un motivo, y la pasada en vivo lo vigila con una marca nueva. Tres gates nuevos (capturas, ceros, «Cómo funciona»), cada uno visto en rojo. Guía v26 con ocho filas «Mejorado · S26». |

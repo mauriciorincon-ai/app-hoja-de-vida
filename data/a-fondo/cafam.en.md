@@ -133,7 +133,7 @@ This was an important stage in my evolution toward designing semantic models and
 
 <!-- seccion: integraciones-vba -->
 
-I developed applications in Visual Basic for Applications (VBA) intended to integrate distribution center activities with the warehouse management system: data loads that previously depended on manual handling went on to apply rules in a repeatable way. These solutions increased automation by fifteen percent and contributed to reducing data errors by fifty percent. I also automated in VBA analytical processes that were done by hand: more than ten hours a week of manual work saved, and faster answers to critical operational queries.
+I developed applications in Visual Basic for Applications (VBA) that complemented functionality the warehouse management system lacked, without integrating with it: data loads that previously depended on manual handling went on to apply rules in a repeatable way. These solutions increased automation by fifteen percent and contributed to reducing data errors by fifty percent. I also automated in VBA analytical processes that were done by hand: more than ten hours a week of manual work saved, and faster answers to critical operational queries.
 
 The choice of VBA answered to the technological and operational context available at Cafam. It was a tool accessible to the organization, compatible with the resources the teams used and flexible enough to resolve gaps that could affect the continuity of the process. The quality of a solution does not depend on the novelty of the technology, but on its fit for the problem, the possibility of maintaining it and the result it produces.
 

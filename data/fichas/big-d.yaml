@@ -1,17 +1,78 @@
-# Complemento de la ficha técnica de Big-D (`big-d`). PROCEDENCIA: planeadora (curado desde VISION v1.1.2
-# y el brief, 2026-10-11). Se copia tal cual a data/fichas/big-d.yaml de hoja-de-vida junto con el export.
-# `cifras_destacadas` son CLAVES de `metricas[]` del export: el export debe traerlas con su fuente.
+# Complemento de la ficha técnica de Big-D (`big-d`). PROCEDENCIA: planeadora — pedido 026 de CV Viva
+# (`portafolio/big-d/ordenes/FICHA-2026-10-27-pedido-026.md`), escrito el 2026-10-27 sobre `app-big-d` `origin/main`
+# `84aa911` (el S7 «El H-1 se cierra» ya mergeado): manual de uso, núcleo y pantallas de esa base, VISION v1.1.2 y brief.
+# Se copia tal cual a data/fichas/big-d.yaml de hoja-de-vida junto con el export.
+# `cifras_destacadas` son CLAVES de `metricas[]` del export: el export debe traerlas con su fuente. Un solo cero en la
+# tira, el que declara la promesa: el resultado sale de un núcleo sin IA (`ia_en_tiempo_de_ejecucion`).
 schema_version: "1.0.0"
 app: big-d
-declarado_en: "2026-10-11"
-titular: "Elige tu plataforma de datos con evidencia fechada y un cálculo que puedes repetir: quién gana, por cuánto, qué tan seguro es y con qué peso cambiarías de opinión; y entiende Databricks, Fabric y Snowflake con el mismo mapa, en dos idiomas."
-cifras_destacadas: [funcionalidades, plataformas_en_el_atlas, evidencias_fechadas, pruebas_automaticas, costo_operacion_mensual]
+procedencia: planeadora
+declarado_en: "2026-10-27"
+titular: "Elige tu plataforma de datos con un cálculo que cualquiera puede repetir: quién gana, por cuánto, qué tan seguro es y con qué peso cambiaría. Y entiende Databricks, Fabric y Snowflake con un mismo mapa."
+cifras_destacadas: [plataformas_en_el_atlas, evidencias_fechadas, motores_con_la_misma_huella, pruebas_automaticas, ia_en_tiempo_de_ejecucion]
 limites:
-  - "Compara con evidencia pública fechada; no se conecta a ninguna plataforma ni corre cargas reales."
-  - "Las plataformas son N por diseño: hoy tres; agregar una es agregar datos, no código."
-  - "La única IA es un investigador a demanda cuyas propuestas apruebas afirmación por afirmación."
+  - "Compara con documentación pública y fechada de los fabricantes: no se conecta a ninguna plataforma ni mide cargas reales."
+  - "No decide por ti: muestra quién gana con tus pesos y tus supuestos, y la decisión es de quien pregunta."
+  - "Las plataformas reales se puntúan cuando una persona aprueba el perfil del caso; hasta entonces, la comparación lo dice y no inventa un ganador."
+  - "La única IA es el investigador, que corre a demanda y fuera de la app; una persona aprueba cada afirmación que propone."
 nunca:
-  - "Opera, prueba o se conecta a una plataforma: cero cuentas."
-  - "Escribe la narrativa con un modelo de lenguaje."
-  - "Muestra logos de fabricantes ni cifras virales sin fuente fechada."
-  - "Cablea el número de plataformas."
+  - "Se conecta a una plataforma, pide cuentas o corre cargas: planea, no opera."
+  - "Aprueba algo por su cuenta: cada aprobación es un comando que corre una persona."
+  - "Escribe el informe con un modelo de lenguaje: el texto sale de plantillas y de datos aprobados."
+  - "Da trato especial a un fabricante: no hay logos, y reordenar las plataformas no cambia el resultado."
+  - "Fija en el código cuántas plataformas compara: agregar una es agregar datos."
+proceso:
+  titulo: "De la duda a una decisión que puedes defender"
+  carriles:
+    - { id: persona, nombre: "Quien elige la plataforma" }
+    - { id: big-d, nombre: "Big-D · en el navegador" }
+    - { id: investigador, nombre: "Investigador IA · a demanda" }
+  pasos:
+    - { id: ini, tipo: inicio, carril: persona, texto: "Una plataforma de datos por elegir" }
+    - { id: recorre, tipo: tarea, carril: persona, texto: "Recorre cada plataforma en el mismo mapa" }
+    - { id: al-dia, tipo: decision, carril: big-d, texto: "¿La evidencia está al día?" }
+    - { id: solicita, tipo: tarea, carril: persona, texto: "Solicita una investigación" }
+    - { id: propone, tipo: tarea, carril: investigador, texto: "Propone afirmaciones, cada una con su cita" }
+    - { id: comprueba, tipo: tarea, carril: big-d, texto: "Comprueba cada cita contra la fuente" }
+    - { id: revisa, tipo: tarea, carril: persona, texto: "Aprueba o rechaza cada afirmación" }
+    - { id: define, tipo: tarea, carril: persona, texto: "Define pesos, márgenes y restricciones" }
+    - { id: aprueba-perfil, tipo: tarea, carril: persona, texto: "Aprueba el perfil con su comando" }
+    - { id: puntua, tipo: tarea, carril: big-d, texto: "Puntúa con la evidencia aprobada" }
+    - { id: mide, tipo: tarea, carril: big-d, texto: "Mide sensibilidad y robustez" }
+    - { id: ordena, tipo: tarea, carril: big-d, texto: "Ordena las decisiones por reversibilidad" }
+    - { id: prioriza, tipo: tarea, carril: big-d, texto: "Prioriza riesgos y supuestos por probar" }
+    - { id: bloqueos, tipo: decision, carril: big-d, texto: "¿El plan tiene bloqueos?" }
+    - { id: resuelve, tipo: tarea, carril: persona, texto: "Resuelve el ciclo o la mitigación que falta" }
+    - { id: aprueba-plan, tipo: tarea, carril: persona, texto: "Aprueba el plan con su comando" }
+    - { id: arma, tipo: tarea, carril: big-d, texto: "Arma hoja de ruta, alistamiento e informe" }
+    - { id: presenta, tipo: tarea, carril: persona, texto: "Presenta y defiende la decisión" }
+    - { id: fin, tipo: fin, carril: persona, texto: "" }
+  flujos:
+    - { de: ini, a: recorre }
+    - { de: recorre, a: al-dia }
+    - { de: al-dia, a: solicita, etiqueta: "falta o envejeció" }
+    - { de: solicita, a: propone }
+    - { de: propone, a: comprueba }
+    - { de: comprueba, a: revisa }
+    - { de: revisa, a: recorre, etiqueta: "mapa aprobado" }
+    - { de: al-dia, a: define, etiqueta: "sí" }
+    - { de: define, a: aprueba-perfil }
+    - { de: aprueba-perfil, a: puntua }
+    - { de: puntua, a: mide }
+    - { de: mide, a: ordena }
+    - { de: ordena, a: prioriza }
+    - { de: prioriza, a: bloqueos }
+    - { de: bloqueos, a: resuelve, etiqueta: "sí" }
+    - { de: resuelve, a: ordena }
+    - { de: bloqueos, a: aprueba-plan, etiqueta: "no" }
+    - { de: aprueba-plan, a: arma }
+    - { de: arma, a: presenta }
+    - { de: presenta, a: fin }
+  anotaciones:
+    - { paso: propone, texto: "La IA trabaja fuera de la app y solo cuando alguien la llama: mientras usas Big-D, ninguna IA interviene." }
+    - { paso: aprueba-perfil, texto: "Solo una persona aprueba: la pantalla arma el comando y un candado impide que la IA lo corra." }
+    - { paso: mide, texto: "Diez mil combinaciones de pesos con semilla: quien repita el cálculo obtiene los mismos bytes." }
+    - { paso: arma, texto: "Catorce secciones en español e inglés, con las mismas cifras; el texto sale de plantillas y se imprime sin menús." }
+
+# Roadmap votable: el yaml de CV Viva de hoy (data/fichas/big-d.yaml en 11d8066) no trae `roadmap`; se copia tal cual,
+# es decir, sin la clave (el esquema la deja en []). Los `id` son la clave del voto: no se tocan aquí.

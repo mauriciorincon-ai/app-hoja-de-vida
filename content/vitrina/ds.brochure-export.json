@@ -12,24 +12,24 @@
     "enlaces.produccion": "null cuando la app no tiene URL pública. `razon` explica por qué, y es lo que la vitrina muestra en lugar del enlace. Nunca se rellena con un enlace de repositorio ni con una promesa."
   },
   "schema_version": "1.0.0",
-  "actualizado": "2026-10-25",
+  "actualizado": "2026-10-27",
   "app": {
     "slug": "ds",
     "nombre": "Probeta DS",
     "ciclo": "H-2",
     "estado": "inicial",
     "sellado_en": null,
-    "sprints_cerrados": 19,
+    "sprints_cerrados": 20,
     "version_repo": "0.1.0"
   },
   "promesa": {
-    "tagline": "Construye un modelo que puedas defender.",
-    "intro": "Traes una tabla propia y la app entrena un modelo de verdad dentro de tu navegador —y te dice con franqueza si sirve o no—, en el laboratorio rápido de Probeta o en el camino lento de Protocolo DS: diez etapas con compuertas que no se saltan y una ficha que se escribe sola. Sin ser científico de datos, sin escribir código y sin una sola tarjeta gráfica.",
-    "para_quien": "Para el profesional que no es científico de datos —analistas, financieros, investigadores aplicados— y que tiene que defender un modelo ante su jefe o su comité, no ganar un leaderboard.",
-    "diferencial": "Entrenar un modelo lo hacen muchas herramientas. Lo que no hace ninguna es enseñar la pantalla en la que su propio producto falla: el veredicto contra el baseline dice «NO supera» cuando no supera, la fuga de datos es imposible por construcción (el preprocesamiento se ajusta solo con la parte de entrenamiento y la UI no ofrece otro camino), y el veredicto sale del conjunto de prueba, que se abre una sola vez, después de elegir el modelo con validación cruzada. El incentivo del mercado es el optimismo; aquí es la honestidad. En Protocolo DS la honestidad además detiene: ninguna etapa se abre sin el criterio de salida de la anterior, la prueba se sella antes de tocar el modelo y se abre una vez, con cada apertura distinta contada, y «no usarlo» es un resultado válido que queda escrito."
+    "tagline": "Construye un modelo que puedas defender, sin código y sin maquillaje.",
+    "intro": "Traes una tabla en CSV o Excel, eliges qué quieres predecir y Probeta hace competir una liga de modelos dentro de tu navegador. Después te dice de frente si el ganador le gana a una regla simple, por cuánto y por qué. Si prefieres ir paso a paso, Protocolo DS te lleva por diez etapas con compuertas hasta una ficha del modelo que se escribe sola. Sin código y sin subir tus datos.",
+    "para_quien": "Para analistas, financieros, ingenieros e investigadores aplicados que saben pensar con datos pero no son científicos de datos, y que tienen que defender un modelo ante su jefe o su comité, no ganar una competencia de puntajes.",
+    "diferencial": "Entrenar un modelo ya no es lo difícil; lo difícil es saber si se le puede creer. Probeta te muestra la pantalla en la que tu modelo pierde: si no le gana a una regla simple de referencia, dice «NO supera», con la cifra. La prueba nunca contamina el entrenamiento: la preparación de los datos, como rellenar vacíos, aprende solo de la parte de entrenamiento, y la interfaz no ofrece otro camino. El ganador se elige con validación cruzada, sin mirar la prueba, y la prueba se usa después, para el veredicto. Y si una columna adivina el resultado casi a la perfección, el titular dice «sospechoso» en vez de celebrar. En Protocolo DS la honestidad además detiene: ninguna etapa abre sin cumplir la anterior, la prueba queda sellada antes de entrenar y se abre una sola vez, y «no usarlo» es un resultado válido que queda escrito."
   },
   "funcionalidades": {
-    "total": 73,
+    "total": 76,
     "fuente_del_conteo": "docs/MANUAL-DE-USO.md",
     "descartadas": [],
     "grupos": [
@@ -37,90 +37,90 @@
         "orden": 1,
         "estrella": true,
         "nombre": "El veredicto honesto",
-        "linea": "Entrena un modelo real con tu tabla y te dice, sin rodeos, si sirve o no.",
+        "linea": "Una liga de modelos entrena con tu tabla y te dice, con la cifra exacta, si el ganador sirve o no.",
         "features": [
           {
             "id": "V1",
-            "nombre": "Eliges qué predecir",
-            "que_hace": "Seleccionas la columna objetivo: dos categorías (sí/no, aprobado/rechazado), desde el Sprint 007 de 3 a 20 categorías (un plan, una región), o desde el Sprint 006 una cantidad (un precio, un consumo). Si no hay nada que predecir, la app agrupa las filas (grupo «Agrupar sin objetivo»).",
+            "nombre": "Tú eliges qué predecir",
+            "que_hace": "Respondes una sola pregunta, qué columna quieres predecir, y la app reconoce la tarea por ti. Puede ser un sí o no, de 3 a 20 categorías o una cantidad, como un precio. Si no hay nada que predecir, te ofrece agrupar filas parecidas.",
             "seccion_manual": "El veredicto honesto"
           },
           {
             "id": "V2",
-            "nombre": "Entrenamiento con el progreso a la vista",
-            "que_hace": "El motor corre en el navegador y muestra el avance paso a paso, sin pantallas en blanco.",
+            "nombre": "El entrenamiento, con el progreso a la vista",
+            "que_hace": "Ves en todo momento qué modelo está compitiendo y cuánto falta, con una barra de avance y el tiempo estimado. Todo el cálculo corre dentro de tu navegador, sin pantallas en blanco.",
             "seccion_manual": "El veredicto honesto"
           },
           {
             "id": "V3",
-            "nombre": "El veredicto contra el baseline",
-            "que_hace": "▲ supera · ＝ empata · ▼ NO supera, con el número exacto de la diferencia. Si el modelo no aporta, se dice de frente.",
+            "nombre": "El veredicto: ¿le gana a lo simple?",
+            "que_hace": "Sabes de un vistazo si tu modelo vale la pena: ▲ supera, ＝ empata o ▼ NO supera a la línea base, una regla simple de referencia, con la diferencia exacta. Si el modelo no aporta, la app lo dice de frente.",
             "seccion_manual": "El veredicto honesto"
           },
           {
             "id": "V4",
             "nombre": "Un resultado demasiado bueno no se celebra",
-            "que_hace": "Si una columna predice el objetivo casi a la perfección, el titular dice «Posible fuga de datos — sospechoso» en vez de «supera», en las tres tareas con objetivo (desde el Sprint 007, el mismo titular para todas).",
+            "que_hace": "Te protege del espejismo más caro: si una columna predice el resultado casi a la perfección, el titular dice «Posible fuga de datos: sospechoso» en vez de «supera». Casi siempre es un dato que no tendrías al momento de predecir.",
             "seccion_manual": "El veredicto honesto"
           },
           {
             "id": "V5",
-            "nombre": "Advertencia de fuga con la columna nombrada",
-            "que_hace": "Señala por nombre la columna que podría ser un proxy del objetivo, y qué hacer con ella. Con varias categorías nombra también la categoría que la columna delata.",
+            "nombre": "La columna sospechosa, con nombre propio",
+            "que_hace": "Sabes exactamente qué columna revisar: la app nombra la que podría estar delatando el resultado y te dice qué hacer, quitarla y volver a entrenar. Con varias categorías, nombra también la categoría que esa columna delata.",
             "seccion_manual": "El veredicto honesto"
           },
           {
             "id": "V6",
-            "nombre": "Las métricas, todas sobre datos no vistos",
-            "que_hace": "Con dos categorías: exactitud, precisión, sensibilidad, F1 y AUC. Con varias: la exactitud balanceada, que pesa igual cada categoría, y el F1 macro. Al estimar: MAE, RMSE, R² y MedAE, en las unidades de la columna. Todo sobre el conjunto de prueba.",
+            "nombre": "Métricas medidas sobre datos no vistos",
+            "que_hace": "Cada cifra se calcula sobre la cuarta parte de tus filas que el modelo nunca vio al entrenar. Con dos categorías ves exactitud, precisión, sensibilidad, F1 y AUC; con varias, la exactitud balanceada; al estimar, el error en las unidades de tu columna.",
             "seccion_manual": "El veredicto honesto"
           },
           {
             "id": "V7",
-            "nombre": "Matriz de confusión",
-            "que_hace": "En qué se equivoca el modelo, no solo cuánto.",
+            "nombre": "Matriz de confusión: en qué se equivoca",
+            "que_hace": "Ves no solo cuánto acierta el modelo, sino en qué se equivoca. Una tabla cruza lo real con lo predicho y muestra cuántos casos confundió en cada dirección, para que sepas qué error comete más.",
             "seccion_manual": "El veredicto honesto"
           },
           {
             "id": "V8",
-            "nombre": "Los baselines, a la vista",
-            "que_hace": "Al clasificar, la clase mayoritaria y la regresión logística; al estimar, la mediana y la regresión lineal: los rivales que hay que batir, con sus cifras.",
+            "nombre": "Los rivales simples, a la vista",
+            "que_hace": "Ves contra quién compite tu modelo y con qué cifras: al clasificar, responder siempre lo más frecuente y una regresión logística; al estimar, la mediana y una regresión lineal. Ganarle al mejor de ellos es la condición para servir.",
             "seccion_manual": "El veredicto honesto"
           },
           {
             "id": "V9",
             "nombre": "Una liga de modelos, elegida sin mirar la prueba",
-            "que_hace": "Compiten todos los modelos que el navegador puede entrenar, con validación cruzada dentro del entrenamiento; la prueba se abre una sola vez. El usuario puede elegir otro, etiquetado «elegido por ti».",
+            "que_hace": "Obtienes al mejor de hasta 14 modelos sin inflar el resultado: compiten con validación cruzada, que los mide rotando partes del entrenamiento, y la prueba se reserva para el veredicto. Si prefieres otro, lo eliges y queda marcado «elegido por ti».",
             "seccion_manual": "La liga honesta"
           },
           {
             "id": "V11",
             "nombre": "Estimar una cantidad, con el error en sus unidades",
-            "que_hace": "Una liga de 11 modelos que estiman un número; el veredicto dice cuánto se equivoca en promedio en las unidades de la columna, contra adivinar la mediana o una regresión lineal, con el gráfico estimado frente a real.",
+            "que_hace": "Si quieres predecir un número, como un precio o un consumo, compiten 11 modelos y el veredicto dice cuánto se equivoca en promedio, en las unidades de tu columna. Un gráfico enfrenta lo estimado con lo real.",
             "seccion_manual": "Estimar una cantidad"
           },
           {
             "id": "V13",
             "nombre": "Clasificar en varias categorías",
-            "que_hace": "De 3 a 20 categorías: la exactitud balanceada contra la categoría más frecuente y una regresión logística, la matriz de confusión con los aciertos marcados ✓ y, en una frase, la confusión más frecuente.",
+            "que_hace": "Si tu respuesta tiene de 3 a 20 categorías, como un plan o una región, el veredicto usa la exactitud balanceada, que pesa igual cada categoría. La matriz marca los aciertos con ✓ y una frase nombra la confusión más frecuente.",
             "seccion_manual": "Clasificar en varias categorías"
           },
           {
             "id": "V12",
             "nombre": "¿Categorías o una cantidad? Te lo pregunta",
-            "que_hace": "Si una columna tiene pocos números distintos, la app no adivina: pregunta, con la lectura más probable marcada. Desde el Sprint 007, las dos respuestas entrenan.",
+            "que_hace": "Cuando una columna tiene pocos números distintos, como una nota del 1 al 5, la app no adivina si son categorías o una cantidad: te pregunta, con la lectura más probable marcada. Las dos respuestas entrenan.",
             "seccion_manual": "Estimar una cantidad"
           },
           {
             "id": "V10",
-            "nombre": "Nuevo experimento",
-            "que_hace": "Un botón devuelve la app al inicio para volver a empezar.",
+            "nombre": "Nuevo experimento con un clic",
+            "que_hace": "Vuelves al inicio con un solo botón para probar otra tabla u otra pregunta, sin recargar la página. El siguiente experimento arranca desde cero.",
             "seccion_manual": "El veredicto honesto"
           },
           {
             "id": "V14",
             "nombre": "El margen de error de la cifra",
-            "que_hace": "Mil remuestreos de la prueba dan un intervalo del 95 % para la métrica del veredicto, con la semilla del experimento: repetirlo da lo mismo. Dice cuánto se movería la cifra con otra muestra de las mismas filas.",
+            "que_hace": "Sabes cuánto podría moverse la cifra del veredicto con otra muestra de las mismas filas: la app remuestrea mil veces la prueba y te da un intervalo del 95 %. Con la misma semilla, repetirlo da lo mismo.",
             "seccion_manual": "Entender los datos y confiar en la cifra"
           }
         ]
@@ -129,72 +129,72 @@
         "orden": 2,
         "estrella": false,
         "nombre": "Datos reales, tratados de frente",
-        "linea": "Tus tablas, en CSV o Excel, vienen con huecos, basura y filas repetidas. Se limpian contándote cada paso.",
+        "linea": "CSV o Excel con huecos, basura y filas repetidas: se limpian a la vista y cada paso te lo cuentan.",
         "features": [
           {
             "id": "D1",
-            "nombre": "Subir tu propio CSV",
-            "que_hace": "Arrastrando o eligiendo el archivo. El dataset se queda en el equipo de quien lo sube.",
+            "nombre": "Sube tu tabla, sin que salga de tu equipo",
+            "que_hace": "Arrastras tu archivo o lo eliges con un clic, y empiezas a trabajar al instante. El archivo se lee dentro de tu navegador: tus filas no se suben a ningún servidor.",
             "seccion_manual": "El veredicto honesto"
           },
           {
             "id": "D2",
-            "nombre": "Siete ejemplos incluidos",
-            "que_hace": "Datos sintéticos empaquetados para recorrer la app entera sin traer nada propio.",
+            "nombre": "Siete ejemplos para probar sin datos propios",
+            "que_hace": "Recorres la app entera sin traer nada tuyo: siete tablas sintéticas, de una campaña de marketing al consumo de energía de una casa, cada una pensada para mostrar algo, como una fuga plantada o datos sucios.",
             "seccion_manual": "El veredicto honesto"
           },
           {
             "id": "D3",
             "nombre": "Vista previa con el perfil de cada columna",
-            "que_hace": "Tipo, valores vacíos y aviso cuando algo parece una fecha.",
+            "que_hace": "Antes de entrenar ves tu tabla y el tipo de cada columna, numérica o de categorías, con sus valores vacíos. Si una columna parece una fecha, la app te avisa, porque las fechas no entran al entrenamiento.",
             "seccion_manual": "El veredicto honesto"
           },
           {
             "id": "D4",
             "nombre": "Límites dichos de frente",
-            "que_hace": "5 MB o 50,000 filas. Por encima avisa; no se cuelga fingiendo que trabaja.",
+            "que_hace": "Sabes desde el inicio hasta dónde llega: archivos de hasta 5 MB o 50 000 filas. Si el tuyo es más grande, la app te avisa en lugar de colgarse fingiendo que trabaja.",
             "seccion_manual": "Limitaciones conocidas (Sprint 001)"
           },
           {
             "id": "D5",
-            "nombre": "Saneamiento transparente con el conteo exacto",
-            "que_hace": "Filas duplicadas eliminadas, columnas identificadoras o constantes apartadas, celdas basura vaciadas. Y si el dataset venía limpio, un franco «nada que sanear».",
+            "nombre": "Limpieza automática, con el conteo exacto",
+            "que_hace": "Tu tabla llega limpia y sabes qué se le hizo: se quitan filas duplicadas, se apartan columnas que identifican o no cambian y se vacían celdas basura, cada cosa con su conteo. Si venía limpia, te dice «nada que sanear».",
             "seccion_manual": "Sobrevive datos reales"
           },
           {
             "id": "D6",
             "nombre": "Cinco alertas antes de entrenar",
-            "que_hace": "Columna que huele a fuga, columna que parece un identificador, objetivo desbalanceado y, al estimar, objetivo muy sesgado u objetivo con valores muy lejos del resto. Con símbolo y texto, nunca solo color. Con varias categorías, la fuga y el desbalance nombran la categoría.",
+            "que_hace": "Te enteras de los riesgos antes de entrenar: una columna que huele a fuga, otra que parece un identificador, un resultado desbalanceado y, al estimar, un objetivo muy sesgado o con valores extremos. Cada alerta lleva símbolo y texto, nunca solo color.",
             "seccion_manual": "Sobrevive datos reales"
           },
           {
             "id": "D7",
-            "nombre": "Bloqueo del CSV con separador equivocado",
-            "que_hace": "El caso típico de Excel en español: se nombra el separador real en vez de adivinarlo, porque una lectura adivinada convertiría columnas numéricas en categorías en silencio.",
+            "nombre": "El CSV de Excel en español, detectado",
+            "que_hace": "Si tu CSV viene separado con punto y coma, como lo guarda Excel en español, la app te dice cuál es el separador y cómo volver a guardarlo. No lo adivina, porque una mala lectura convertiría tus columnas de números en categorías sin avisarte.",
             "seccion_manual": "Sobrevive datos reales"
           },
           {
             "id": "D8",
             "nombre": "También entra un Excel",
-            "que_hace": "Un libro .xlsx se lee en tu navegador, con los mismos límites que un CSV, y la app dice qué hoja leyó. Uno con contraseña, uno antiguo (.xls) o uno dañado se rechaza diciendo por qué.",
+            "que_hace": "Traes tu libro de Excel tal cual y la app lo lee en tu navegador, con los mismos límites que un CSV, y te dice qué hoja leyó. Uno con contraseña, uno antiguo (.xls) o uno dañado se rechaza explicando por qué.",
             "seccion_manual": "Traer un Excel"
           },
           {
             "id": "D9",
             "nombre": "Aviso de posibles datos personales",
-            "que_hace": "Busca correos, teléfonos, documentos y nombres por su contenido y por el nombre de la columna, y avisa la columna y el tipo, jamás el valor. Es un aviso aproximado, no un bloqueo.",
+            "que_hace": "Te enteras de si tu tabla trae datos personales: la app busca correos, teléfonos, documentos de identidad y nombres, y te dice la columna y el tipo, nunca el valor. Es un aviso aproximado, no un bloqueo.",
             "seccion_manual": "Datos personales y plan de limpieza"
           },
           {
             "id": "D10",
             "nombre": "Un plan de limpieza que apruebas tú",
-            "que_hace": "El código propone hasta doce pasos y tú apruebas o rechazas cada uno; lo que no apruebas no se aplica, lo que depende de los datos se calcula solo con el entrenamiento y la decisión queda en la ficha y en el archivo del modelo.",
+            "que_hace": "Recibes hasta doce pasos de limpieza, cada uno con lo que hace, cuántas celdas toca y cómo se deshace. Tú apruebas o rechazas cada paso: lo que no apruebas no se aplica, y tu decisión queda en la ficha y en el archivo del modelo.",
             "seccion_manual": "Datos personales y plan de limpieza"
           },
           {
             "id": "D11",
             "nombre": "Explora tus datos antes de entrenar",
-            "que_hace": "Cómo se reparte cada columna, la correlación de Pearson entre las numéricas, la V de Cramér entre las de texto y un resumen escrito cuyas cifras se recalculan aparte desde tu tabla.",
+            "que_hace": "Entiendes tu tabla antes de modelarla: cómo se reparte cada columna, qué números se mueven juntos y qué categorías van de la mano, con un resumen escrito. Cada cifra del resumen se recalcula aparte desde tu tabla antes de mostrarse.",
             "seccion_manual": "Entender los datos y confiar en la cifra"
           }
         ]
@@ -203,48 +203,48 @@
         "orden": 3,
         "estrella": false,
         "nombre": "El porqué, contado honesto",
-        "linea": "Qué variables pesan, hacia dónde empujan, cuánto aguanta el modelo y una explicación en palabras llanas.",
+        "linea": "Qué columnas pesan, hacia dónde empujan, cuánto aguanta el modelo y una explicación en palabras llanas.",
         "features": [
           {
             "id": "P1",
-            "nombre": "Gráfico de importancia con dirección",
-            "que_hace": "Importancia por permutación sobre el conjunto de prueba. Si el modelo no se apoya en una variable, se dice así: no se le pinta una flecha que la medición no respalda. Con varias categorías una variable no empuja en una sola dirección, y se dice.",
+            "nombre": "Qué pesa en el modelo, y hacia dónde",
+            "que_hace": "Ves qué columnas pesan más en las predicciones y hacia dónde empujan, medido al desordenar cada una sobre la prueba. Si el modelo no se apoya en una columna, no se le pinta una flecha que la medición no respalda.",
             "seccion_manual": "El porqué, contado honesto"
           },
           {
             "id": "P2",
-            "nombre": "Texto explicativo sin IA y sin internet",
-            "que_hace": "Lo genera la propia app con los números del experimento. Siempre está disponible.",
+            "nombre": "Una explicación en palabras llanas, sin IA",
+            "que_hace": "Lees en palabras llanas el veredicto, qué mide la métrica principal y qué columnas pesan más. La escribe la propia app con los números de tu experimento, sin IA ni internet, así que siempre está ahí.",
             "seccion_manual": "El porqué, contado honesto"
           },
           {
             "id": "P3",
-            "nombre": "Narración con IA, solo a petición",
-            "que_hace": "Solo con dos categorías, y marcada «✓ verificada con los números»: si cita una cifra o una variable que no existe, se descarta antes de mostrarse. Las demás tareas usan el texto estándar.",
+            "nombre": "Narración con IA, solo si la pides",
+            "que_hace": "Si quieres una narración más natural, la pides con un botón y llega marcada «✓ verificada con los números». Si la IA cita una cifra o una columna que no existe, se descarta antes de mostrarse. Hoy cubre las tareas de dos categorías.",
             "seccion_manual": "El porqué, contado honesto"
           },
           {
             "id": "P4",
-            "nombre": "Aviso honesto si la narración falla, con reintento",
-            "que_hace": "Dice cuál de los motivos ocurrió: el proveedor no respondió, no pasó la verificación, o no está configurada.",
+            "nombre": "Si la narración falla, sabes por qué",
+            "que_hace": "Si la narración con IA no llega, la app te dice el motivo: el proveedor no respondió, no pasó la verificación o no está configurada. Un botón te deja intentarlo de nuevo, y la explicación de la app sigue ahí.",
             "seccion_manual": "El porqué, contado honesto"
           },
           {
             "id": "P5",
-            "nombre": "Model card descargable",
-            "que_hace": "La ficha completa del experimento: datos, partición, método, métricas, veredicto y límites; al agrupar, la lectura, los grupos y la regla de asignación.",
+            "nombre": "La ficha del experimento, descargable",
+            "que_hace": "Te llevas en un documento la constancia completa de tu experimento, su ficha o «model card»: los datos, cómo se partieron, el método, las métricas, el veredicto y sus límites. Se arma en tu navegador, en tu idioma.",
             "seccion_manual": "El porqué, contado honesto"
           },
           {
             "id": "P6",
             "nombre": "Prueba de estrés: ¿cuánto aguanta?",
-            "que_hace": "Con ruido, una columna revuelta y un corrimiento, mide el mismo modelo sobre la misma prueba y dice si sigue ganándole a su rival sin modelo.",
+            "que_hace": "Sabes cuánto de tu veredicto sobrevive si los datos cambian: el mismo modelo se mide con ruido, con una columna revuelta y con un corrimiento como el del paso del tiempo. Al final dice si todavía le gana a su rival sin modelo.",
             "seccion_manual": "Estrésalo: ¿cuánto aguanta tu modelo?"
           },
           {
             "id": "P7",
-            "nombre": "El texto estándar, comprobado contra tus números",
-            "que_hace": "En las cuatro tareas, el texto pasa una comprobación de cifras y de orden antes de mostrarse; si no cuadra, se muestran solo las cifras. Es una comprobación del texto, no una garantía de que el modelo sea bueno.",
+            "nombre": "Explicaciones comprobadas contra tus números",
+            "que_hace": "Cada explicación escrita pasa una comprobación antes de mostrarse: sus cifras tienen que ser las de tu resultado y las columnas, en el orden en que pesaron. Si no cuadra, ves solo las cifras. Comprueba el texto, no la calidad del modelo.",
             "seccion_manual": "Entender los datos y confiar en la cifra"
           }
         ]
@@ -252,135 +252,153 @@
       {
         "orden": 4,
         "estrella": false,
-        "nombre": "El modelo se usa",
-        "linea": "Puntúa datos nuevos, guarda el modelo y se lo lleva: receta, puntuador portátil y servicio.",
+        "nombre": "El modelo sale a trabajar",
+        "linea": "Puntúa tablas nuevas, simula decisiones, vigila su desempeño y se va contigo fuera de Probeta.",
         "features": [
           {
             "id": "U1",
             "nombre": "Puntuar datos nuevos",
-            "que_hace": "Se sube otra tabla y se obtiene la predicción de cada fila.",
+            "que_hace": "Subes otra tabla con las mismas columnas y obtienes la predicción de cada fila, sin volver a entrenar. No hace falta la columna que predices: aquí es el modelo el que responde.",
             "seccion_manual": "El modelo se usa"
           },
           {
             "id": "U2",
-            "nombre": "Bloqueo honesto por columnas faltantes",
-            "que_hace": "Si falta alguna columna del modelo, se niega a puntuar y dice exactamente cuáles. Nunca rellena en silencio.",
+            "nombre": "Si falta una columna, no adivina",
+            "que_hace": "Si a tu archivo nuevo le falta alguna columna que el modelo necesita, la app se niega a puntuar y te dice exactamente cuáles faltan. Nunca rellena en silencio para darte un resultado a medias.",
             "seccion_manual": "El modelo se usa"
           },
           {
             "id": "U3",
-            "nombre": "Aviso de novedad con el porcentaje de filas",
-            "que_hace": "Valores que el modelo nunca vio al entrenar: se declara en cuántas filas está adivinando.",
+            "nombre": "Te dice dónde el modelo está adivinando",
+            "que_hace": "Sabes en qué parte de tus filas nuevas el modelo adivina: la app cuenta los valores que nunca vio al entrenar, como categorías nuevas o números fuera de rango, y te dice en qué porcentaje de filas aparecen.",
             "seccion_manual": "El modelo se usa"
           },
           {
             "id": "U4",
-            "nombre": "Distribución de predicciones y vista previa",
-            "que_hace": "Antes de descargar nada.",
+            "nombre": "Las predicciones, antes de descargarlas",
+            "que_hace": "Antes de descargar nada ves cómo se reparten las predicciones y una vista previa de tu tabla con las columnas nuevas. Así detectas una sorpresa antes de que llegue a tu hoja de cálculo.",
             "seccion_manual": "El modelo se usa"
           },
           {
             "id": "U5",
-            "nombre": "CSV puntuado sin pisar columnas",
-            "que_hace": "La tabla completa más la predicción y, si el modelo la da, su probabilidad (con varias categorías, la de la categoría predicha); al estimar, la cantidad estimada con los decimales de la columna. Si ya existía una columna con ese nombre, la nueva sale con sufijo.",
+            "nombre": "Tu tabla puntuada, sin pisar tus columnas",
+            "que_hace": "Descargas tu tabla completa con la predicción y, si el modelo la da, su probabilidad. Si ya tenías una columna con ese nombre, la nueva sale con un sufijo, y una celda que parece fórmula se escribe como texto.",
             "seccion_manual": "El modelo se usa"
           },
           {
             "id": "U6",
-            "nombre": "Exportar el modelo a un archivo",
-            "que_hace": "Lo que aprendió y su constancia, no las filas del usuario (el modelo de vecinos más cercanos guarda filas de entrenamiento y la app lo dice).",
+            "nombre": "El modelo, guardado en un archivo",
+            "que_hace": "Guardas el modelo en un solo archivo para usarlo otro día o en otro computador. Lleva lo que aprendió y su constancia, no tus filas; la excepción son los vecinos más cercanos, que guardan filas de entrenamiento, y la app lo dice.",
             "seccion_manual": "El modelo se usa"
           },
           {
             "id": "U7",
-            "nombre": "Importar validando la integridad",
-            "que_hace": "Un archivo ajeno, corrupto o manipulado se rechaza con la razón exacta, sin llegar a abrirse.",
+            "nombre": "Un modelo ajeno o alterado no entra",
+            "que_hace": "Cuando abres un modelo guardado, la app comprueba primero que sea de Probeta y que esté íntegro, con una huella digital de su contenido. Un archivo ajeno, dañado o manipulado se rechaza con la razón exacta, sin llegar a abrirse.",
             "seccion_manual": "El modelo se usa"
           },
           {
             "id": "U8",
-            "nombre": "Resumen honesto antes de usar un modelo importado",
-            "que_hace": "Con qué datos nació, qué métrica sacó y qué advertencias trae.",
+            "nombre": "Qué trae un modelo, antes de usarlo",
+            "que_hace": "Antes de usar un modelo importado ves con qué datos nació, qué predice, qué cifra sacó en su prueba, cómo se eligió y qué advertencias trae. Decides con conocimiento, no a ciegas.",
             "seccion_manual": "El modelo se usa"
           },
           {
             "id": "U9",
-            "nombre": "Puntuar sin volver a entrenar",
-            "que_hace": "Otro día, otro computador, el mismo modelo.",
+            "nombre": "Puntuar otro día, sin volver a entrenar",
+            "que_hace": "Otro día y en otro computador, abres el archivo del modelo y puntúas tablas nuevas directamente. No necesitas los datos con que se entrenó ni esperar a que vuelva a entrenar.",
             "seccion_manual": "El modelo se usa"
           },
           {
             "id": "U10",
-            "nombre": "Receta reproducible",
-            "que_hace": "Un .py con versiones fijas que, con tu CSV, repite el experimento y dice si reproduce; no lleva ni una fila de tus datos.",
+            "nombre": "Una receta que reproduce el experimento",
+            "que_hace": "Te llevas un archivo de Python con versiones fijas que, con tu CSV, repite el experimento paso a paso y dice si reproduce las mismas métricas. No lleva ni una fila de tus datos.",
             "seccion_manual": "Llévatelo: la receta, el puntuador y el servicio"
           },
           {
             "id": "U11",
-            "nombre": "Puntuador portátil",
-            "que_hace": "Un solo .html con el modelo adentro: quien lo abre arrastra un CSV y su navegador lo puntúa, sin servidor y sin costo.",
+            "nombre": "El modelo en una página web portátil",
+            "que_hace": "Compartes tu modelo como una sola página web: quien la abre arrastra un CSV y su propio navegador lo puntúa, sin servidor y sin costo. La primera vez necesita internet para bajar el motor de cálculo.",
             "seccion_manual": "Llévatelo: la receta, el puntuador y el servicio"
           },
           {
             "id": "U12",
-            "nombre": "Plantilla de servicio",
-            "que_hace": "Un .zip con un servicio FastAPI de versiones fijas y un README para mantener el costo predecible; Probeta no despliega nada ni guarda credenciales.",
+            "nombre": "Una plantilla para servirlo a otros sistemas",
+            "que_hace": "Si otro sistema necesita consultar tu modelo, descargas un servicio web en Python, con versiones fijas y una guía para mantener el costo predecible. Probeta no despliega nada ni guarda credenciales: tú decides dónde corre.",
             "seccion_manual": "Llévatelo: la receta, el puntuador y el servicio"
           },
           {
             "id": "U13",
             "nombre": "¿Qué pasaría si?, en dinero",
-            "que_hace": "Cambias una columna —un porcentaje, un valor fijo u otra categoría que exista— para todas las filas o un segmento, y ves cuántas decisiones del modelo se mueven y su costo esperado por cada 100 decisiones con tus costos. Es una simulación con las probabilidades del modelo, no una medición.",
+            "que_hace": "Simulas un cambio, como subir una columna un 10 % en un segmento, y ves cuántas decisiones del modelo se mueven y su costo esperado por cada 100 decisiones, con tus costos. Es una simulación con las probabilidades del modelo, no una medición.",
             "seccion_manual": "¿Qué pasaría si?"
           },
           {
             "id": "U14",
             "nombre": "El modelo en reglas, con su fidelidad",
-            "que_hace": "Un árbol de pocas preguntas sobre tus columnas copia lo que el modelo decide y se descarga como texto y como SQL. La pantalla dice cuánto se le parece; debajo de 0,90 de coincidencia no lo llama «el modelo en reglas».",
+            "que_hace": "Te llevas tu modelo como unas pocas reglas «si… entonces», en texto y en SQL, para usarlo donde no corre Python. La pantalla mide cuánto se parecen al modelo; por debajo de 0,90 de coincidencia no las llama «el modelo en reglas».",
             "seccion_manual": "El modelo en reglas"
           },
           {
             "id": "U15",
             "nombre": "Vigilar el desempeño",
-            "que_hace": "Con filas nuevas que traen el resultado real, la cifra de hoy —con su margen del 95 %— junto a la de la prueba del modelo y un veredicto: sigue, revisar o reentrenar. Los resultados los subes tú; la app no los trae de ningún sistema.",
+            "que_hace": "Con filas nuevas que traen lo que de verdad pasó, comparas la cifra de hoy, con su margen del 95 %, contra la que sacó el modelo en su prueba. El veredicto es claro: sigue, revisar o reentrenar. Los resultados los subes tú.",
             "seccion_manual": "Vigilar el desempeño y llevarte el ganador del Protocolo"
+          },
+          {
+            "id": "U16",
+            "nombre": "Pronosticar una serie",
+            "que_hace": "Con una fecha y un número, como las ventas de cada mes, ves qué viene en los próximos periodos, con bandas del 80 y del 95 %. Seis métodos compiten y el veredicto dice si el ganador le gana al mejor método simple.",
+            "seccion_manual": "Pronosticar una serie"
+          },
+          {
+            "id": "U17",
+            "nombre": "Un gemelo sintético de tus datos",
+            "que_hace": "Compartes una muestra sin compartir a las personas: una tabla nueva con la forma de la tuya, que vuelve a sacar toda fila idéntica a una tuya y deja fuera datos personales, identificadores y fechas. Un informe mide el parecido y puede decir «no compartir».",
+            "seccion_manual": "El gemelo sintético"
+          },
+          {
+            "id": "U18",
+            "nombre": "Las reglas, armadas con tu archivo",
+            "que_hace": "También un modelo importado, o el ganador del Protocolo, se vuelve reglas: el árbol se arma con las filas de un archivo que subes. Si ese archivo trae el resultado real, fuera del Protocolo las reglas se miden también contra la verdad.",
+            "seccion_manual": "Con tus filas (desde Sprint 020)"
           }
         ]
       },
       {
         "orden": 5,
         "estrella": false,
-        "nombre": "Agrupar sin objetivo",
-        "linea": "Cuando no hay nada que predecir: encuentra grupos y te dice si existen de verdad.",
+        "nombre": "Grupos, sin nada que predecir",
+        "linea": "Cuando no hay nada que predecir, encuentra grupos de filas parecidas y te dice si existen de verdad.",
         "features": [
           {
             "id": "G1",
             "nombre": "Agrupar filas parecidas, sin objetivo",
-            "que_hace": "K-Means, el jerárquico y la mezcla gaussiana prueban de 2 a 10 grupos y eligen cuántos (con la silueta o el BIC); HDBSCAN los encuentra por densidad. Cada uno dice cómo eligió.",
+            "que_hace": "Descubres si tus clientes, productos o casos forman grupos: cuatro agrupadores, como K-Means, buscan los grupos y eligen cuántos con un criterio medido. Cada uno dice cómo eligió, y gana el número de grupos en que más coinciden.",
             "seccion_manual": "Agrupar filas parecidas, sin objetivo"
           },
           {
             "id": "G2",
             "nombre": "Te dice si los grupos existen",
-            "que_hace": "● existen · ⚠ frágiles · ○ no hay estructura: compara con el mismo agrupador sobre datos al azar y repite el agrupamiento sobre partes de las filas. Sin prueba ni baseline, porque no hay respuesta que examinar.",
+            "que_hace": "Sabes si tus grupos son un hallazgo o solo una forma de partir la tabla: la app los compara con datos al azar y repite el agrupamiento sobre partes de tus filas. La lectura es ● existen, ⚠ frágiles u ○ sin estructura.",
             "seccion_manual": "Agrupar filas parecidas, sin objetivo"
           },
           {
             "id": "G3",
             "nombre": "Qué distingue a cada grupo",
-            "que_hace": "Su tamaño y las columnas que más lo separan, en las unidades del usuario; las filas que no caen en ningún grupo, aparte.",
+            "que_hace": "Cada grupo llega con su tamaño y las columnas que más lo separan, en las unidades de tu tabla y frente al promedio de todos. Las filas que no caen en ningún grupo aparecen aparte, sin forzarlas.",
             "seccion_manual": "Agrupar filas parecidas, sin objetivo"
           },
           {
             "id": "G4",
             "nombre": "Tus filas con su grupo",
-            "que_hace": "La tabla entera con una columna más, armada en el navegador en el momento; no se guarda en ningún otro lado.",
+            "que_hace": "Descargas tu tabla entera con una columna más que dice a qué grupo pertenece cada fila. Se arma en tu navegador en el momento y no se guarda en ningún otro lado.",
             "seccion_manual": "Agrupar filas parecidas, sin objetivo"
           },
           {
             "id": "G5",
             "nombre": "Asignar filas nuevas a un grupo",
-            "que_hace": "Con la regla dicha (el centro más cercano, el grupo más probable o «fuera de todo grupo») y un archivo de modelo sin ninguna fila del usuario.",
+            "que_hace": "Clasificas filas nuevas en los grupos que ya encontraste, con una regla dicha, como el centro más cercano o «fuera de todo grupo». El archivo del modelo lleva esa regla y ninguna de tus filas.",
             "seccion_manual": "Agrupar filas parecidas, sin objetivo"
           }
         ]
@@ -388,121 +406,121 @@
       {
         "orden": 6,
         "estrella": false,
-        "nombre": "Protocolo DS, el camino lento",
-        "linea": "Diez etapas con compuertas que no se saltan, con tus datos; al final, una ficha que se escribe sola.",
+        "nombre": "Protocolo DS: diez etapas sin atajos",
+        "linea": "El camino lento, con tus propios datos: compuertas que no se saltan y una ficha del modelo que se escribe sola.",
         "features": [
           {
             "id": "L1",
             "nombre": "Una compuerta que no se salta",
-            "que_hace": "Ninguna etapa se abre sin el criterio de salida de la anterior, verificado por código o por tu respuesta escrita; no existe un botón «saltar».",
+            "que_hace": "Avanzas solo cuando cumples: ninguna etapa se abre sin el criterio de salida de la anterior, verificado por código o por tu respuesta escrita. No existe un botón para saltar; una etapa se cumple o se corrige.",
             "seccion_manual": "Protocolo DS, el camino lento"
           },
           {
             "id": "L2",
             "nombre": "Un cuaderno que se escribe solo",
-            "que_hace": "Cada compuerta deja su evidencia en tu navegador, atada a la huella de tu archivo; se exporta y se importa, sin una sola fila de tus datos.",
+            "que_hace": "Cada etapa cumplida deja su evidencia en un cuaderno que vive en tu navegador, atado a la huella de tu archivo, un código que sale de su contenido exacto. Lo exportas y lo importas sin una sola fila de tus datos.",
             "seccion_manual": "Protocolo DS, el camino lento"
           },
           {
             "id": "L3",
-            "nombre": "El porqué de cada etapa, con tu trampa",
-            "que_hace": "Cada etapa dice por qué existe y te muestra, en tus propios datos, lo que acaba de evitar.",
+            "nombre": "Cada etapa te muestra la trampa que evitas",
+            "que_hace": "Aprendes por qué existe cada etapa viendo, en tus propios datos, la trampa que acabas de evitar, como «tu unidad se repite: 361 filas para 100 unidades». No es un curso con datos ajenos.",
             "seccion_manual": "Protocolo DS, el camino lento"
           },
           {
             "id": "L4",
             "nombre": "Un glosario a un clic",
-            "que_hace": "Cada término de una compuerta enlaza a una definición breve y propia, con una vía al glosario de Google donde existe.",
+            "que_hace": "Cada término técnico de una etapa enlaza a una definición breve y propia, al pie de la página. Donde existe, también te lleva a la entrada del glosario de aprendizaje automático de Google.",
             "seccion_manual": "Protocolo DS, el camino lento"
           },
           {
             "id": "L5",
             "nombre": "La decisión y lo que cuesta equivocarse",
-            "que_hace": "Nombras la decisión, quién la toma y cuánto cuesta cada error; de ahí salen el umbral o el cuantil, no de la costumbre.",
+            "que_hace": "Empiezas por el negocio, no por el modelo: nombras la decisión, quién la toma y cuánto cuesta cada error. De ahí sale desde qué probabilidad conviene actuar, que no siempre es 0,5.",
             "seccion_manual": "Protocolo DS, el camino lento"
           },
           {
             "id": "L6",
             "nombre": "El objetivo y la unidad, con su momento",
-            "que_hace": "Defines qué es una fila y qué predices, con el momento en que se conoce; la app lo verifica en tus datos y no adivina tus fechas.",
+            "que_hace": "Defines qué es una fila, qué predices y en qué momento se conoce. La app lo comprueba en tus datos, cuenta cuántas filas tiene cada unidad y, si una fecha es ambigua, te pregunta en vez de adivinar.",
             "seccion_manual": "Protocolo DS, el camino lento"
           },
           {
             "id": "L7",
             "nombre": "¿Predecir o explicar?",
-            "que_hace": "Si buscas una causa, el Protocolo se detiene: eso pide un experimento, no un modelo.",
+            "que_hace": "Si lo que buscas es una causa, el Protocolo se detiene y te lo dice: eso pide un experimento, no un modelo predictivo. Puedes reformular tu pregunta como una predicción y seguir.",
             "seccion_manual": "Protocolo DS, el camino lento"
           },
           {
             "id": "L8",
-            "nombre": "Diseño y tamaño de muestra, con sus supuestos",
-            "que_hace": "Población, periodo y exclusiones; la app calcula cuántas filas hacen falta, dice qué supone y, si no alcanzan, te pide un aviso firmado.",
+            "nombre": "Cuántas filas hacen falta, con sus supuestos",
+            "que_hace": "Escribes la población, el periodo y las exclusiones, y la app calcula cuántas filas hacen falta para tus variables, diciendo qué supone. Si no te alcanzan, no te frena: te pide un aviso escrito que queda en el cuaderno.",
             "seccion_manual": "Protocolo DS, el camino lento"
           },
           {
             "id": "L9",
             "nombre": "¿Existe al decidir? Columna por columna",
-            "que_hace": "Declaras quién produce cada columna y cuándo se llena; las que no sabes no entran al modelo.",
+            "que_hace": "Declaras, columna por columna, quién la produce y si se conoce antes o después de decidir. Lo que se llena después solo se puede excluir, y lo que no sabes no entra al modelo.",
             "seccion_manual": "Protocolo DS, el camino lento"
           },
           {
             "id": "L10",
             "nombre": "Apuesta dónde está la fuga",
-            "que_hace": "Antes de ver lo que encontró la app, marcas qué columnas crees que filtran el resultado; después se comparan.",
+            "que_hace": "Antes de ver lo que encontró la app, apuestas qué columnas crees que filtran el resultado. Al revelar, tu apuesta queda fija y una comparación te muestra qué acertaste y qué te sorprendió.",
             "seccion_manual": "Protocolo DS, el camino lento"
           },
           {
             "id": "L11",
-            "nombre": "La línea base sin modelo y la regla de hoy",
-            "que_hace": "Mides lo que ya se logra sin modelo, en la moneda de tu decisión, antes de abrir ninguno.",
+            "nombre": "La vara sin modelo y la regla de hoy",
+            "que_hace": "Mides lo que ya se logra sin modelo, en costo por cada 100 decisiones, y la regla que tu gente aplica hoy, medida en tus filas. Es la vara que cualquier modelo tendrá que superar.",
             "seccion_manual": "Protocolo DS, el camino lento"
           },
           {
             "id": "L12",
-            "nombre": "Partición según tu caso, con prueba sellada",
-            "que_hace": "Por tiempo, por grupo o estratificada, con su porqué; verifica que no haya solape y sella la prueba con una huella.",
+            "nombre": "Una prueba sellada, según tu caso",
+            "que_hace": "La app aparta tu prueba según tu caso, por tiempo, por grupo o al azar estratificado, y te explica por qué. Verifica que nada se cruce entre lados y sella la prueba con una huella antes de entrenar.",
             "seccion_manual": "Protocolo DS, el camino lento"
           },
           {
             "id": "L13",
             "nombre": "La liga, con la prueba cerrada",
-            "que_hace": "Los modelos compiten con validación cruzada sobre el entrenamiento y heredan todas tus decisiones; la prueba sigue cerrada.",
+            "que_hace": "Los modelos compiten solo dentro del entrenamiento, con pliegues que respetan tu partición y heredan tus decisiones. El ganador se compara con la línea base, con un intervalo del 95 %, y la prueba sigue cerrada.",
             "seccion_manual": "Protocolo DS, el camino lento"
           },
           {
             "id": "L14",
-            "nombre": "¿Hay señal real?",
-            "que_hace": "Una prueba de permutación de etiquetas te dice si el modelo encontró estructura o solo azar.",
+            "nombre": "¿Hay señal real, o es azar?",
+            "que_hace": "Sabes si el modelo encontró estructura o solo azar: una prueba de permutación baraja las etiquetas muchas veces y vuelve a validar al ganador. Te da el valor p con su resolución, que depende de cuántas veces barajó.",
             "seccion_manual": "Protocolo DS, el camino lento"
           },
           {
             "id": "L15",
-            "nombre": "El error por segmento y la calibración",
-            "que_hace": "La prueba se abre una vez, y cada apertura distinta queda contada: lees el peor segmento, la calibración y los peores casos para nombrar el patrón de fallo.",
+            "nombre": "Dónde falla, con la prueba abierta una vez",
+            "que_hace": "La prueba se abre una sola vez y ves dónde falla el modelo: el peor segmento, si sus probabilidades dicen la verdad y los diez casos más caros. Con eso escribes el patrón de fallo, y cada apertura distinta queda contada.",
             "seccion_manual": "Protocolo DS, el camino lento"
           },
           {
             "id": "L16",
             "nombre": "¿Sirve para la decisión?",
-            "que_hace": "El modelo traducido a tu decisión: falsas alarmas por cada cien, costo y beneficio frente a lo de hoy. «No usarlo» es un resultado válido y queda escrito.",
+            "que_hace": "El modelo se traduce a tu decisión: alertas y falsas alarmas por cada 100 casos, costo y beneficio frente a lo que haces hoy. Decides usarlo, iterar o no usarlo; «no usarlo» es un resultado válido y queda escrito.",
             "seccion_manual": "Protocolo DS, el camino lento"
           },
           {
             "id": "L17",
             "nombre": "La ficha del modelo y su vigilancia",
-            "que_hace": "La ficha sale del cuaderno con la fuente de cada línea; con «usarlo» trae el plan de vigilancia, la cadencia de reentreno, quién responde y un chequeo de deriva de las entradas.",
+            "que_hace": "Te llevas la ficha del modelo, armada sola desde el cuaderno, con la etapa y la huella de cada línea. Si decides usarlo, trae el plan de vigilancia, quién responde, cada cuánto se reentrena y un chequeo de si las entradas cambian.",
             "seccion_manual": "Protocolo DS, el camino lento"
           },
           {
             "id": "L18",
             "nombre": "¿Qué pasaría si?, sin abrir la prueba",
-            "que_hace": "En la etapa 9, con los costos de la etapa 1 y solo las filas de entrenamiento: informa la decisión y no entra al cuaderno ni a la compuerta. La prueba no se vuelve a abrir.",
+            "que_hace": "En la etapa de la decisión simulas cambios con tus costos usando solo las filas de entrenamiento, así que la prueba no se vuelve a abrir. Lo simulado informa tu decisión, pero no entra al cuaderno ni a la compuerta.",
             "seccion_manual": "¿Qué pasaría si?"
           },
           {
             "id": "L19",
-            "nombre": "El ganador como archivo",
-            "que_hace": "La etapa 10 guarda el ganador de la etapa 7 como un archivo que Probeta abre para puntuar y vigilar. Lleva la cifra de su prueba y ninguna fila, y se vuelve a ajustar solo con el entrenamiento.",
+            "nombre": "El ganador, listo para usarse",
+            "que_hace": "Si decides usarlo, guardas el ganador como un archivo que Probeta abre para puntuar filas nuevas y vigilar su desempeño. Lleva la cifra de su prueba, se reajusta solo con el entrenamiento y, salvo con vecinos más cercanos, no lleva filas tuyas.",
             "seccion_manual": "Vigilar el desempeño y llevarte el ganador del Protocolo"
           }
         ]
@@ -510,19 +528,19 @@
       {
         "orden": 7,
         "estrella": false,
-        "nombre": "Transversales",
-        "linea": "Lo que acompaña a toda la app, no a una pantalla.",
+        "nombre": "En toda la app",
+        "linea": "Lo que acompaña a cada pantalla: dos idiomas completos y un diccionario para cada término.",
         "features": [
           {
             "id": "T1",
             "nombre": "Bilingüe español e inglés",
-            "que_hace": "Toda la interfaz, con conmutador de idioma; hay pruebas que fallan si una clave existe en un idioma y no en el otro.",
+            "que_hace": "Usas toda la interfaz en español o en inglés, con un conmutador en la esquina superior. Hay pruebas automáticas que fallan si un texto existe en un idioma y falta en el otro.",
             "seccion_manual": "Primeros pasos"
           },
           {
             "id": "T2",
             "nombre": "Diccionario de términos",
-            "que_hace": "Cada palabra de la app explicada en una línea: baseline, veredicto, fuga, desbalance, importancia, novedad, model card y cada métrica: las de clasificar, las de estimar y las de agrupar (silueta, estabilidad, «fuera de todo grupo»).",
+            "que_hace": "Cuando una palabra te frena, el manual de uso la explica en una línea: línea base, veredicto, fuga, desbalance, importancia, novedad y cada métrica de clasificar, estimar y agrupar.",
             "seccion_manual": "Diccionario de términos"
           }
         ]
@@ -533,10 +551,10 @@
     {
       "clave": "funcionalidades",
       "etiqueta": "Funcionalidades",
-      "valor": 73,
+      "valor": 76,
       "unidad": "funcionalidades",
       "fuente": "medido",
-      "detalle": "Contadas contra docs/MANUAL-DE-USO.md (54 de Probeta y 19 de Protocolo DS); el pie de docs/BROCHURE.html declara el mismo número. Ninguna funcionalidad de la VISION está descartada: lo que aún no existe (S20 y S21) ni se cuenta ni se lista aquí."
+      "detalle": "Contadas contra docs/MANUAL-DE-USO.md (57 de Probeta y 19 de Protocolo DS); el pie de docs/BROCHURE.html declara el mismo número. Ninguna funcionalidad de la VISION está descartada: lo que aún no existe (el S21) ni se cuenta ni se lista aquí."
     },
     {
       "clave": "pantallas",
@@ -557,26 +575,26 @@
     {
       "clave": "pruebas_unitarias",
       "etiqueta": "Pruebas unitarias y de integración",
-      "valor": 2862,
+      "valor": 3047,
       "unidad": "pruebas",
       "fuente": "medido",
-      "detalle": "Salida del 2026-10-25 sobre el árbol final: `pnpm test` 2669 pruebas en 158 archivos + `pnpm test:integration` 193 en 21 archivos (con Pyodide real; una más se salta, el emisor del fixture del S6). Aparte, 17 pruebas de Python en CPython 3.14.0 que corre el job `integration` de la CI (el servicio y la receta, y el SQL de las reglas)."
+      "detalle": "Salida del 2026-10-27 sobre d302949, en una copia aislada: `pnpm test` 2814 pruebas en 165 archivos + `pnpm test:integration` 233 en 23 archivos (con Pyodide real; una más se salta, el emisor del fixture del S6). Aparte, 17 pruebas de Python (tests/python/) que corre en CPython 3.14.0 el job `integration` de la CI; aquí no se corrieron."
     },
     {
       "clave": "pruebas_e2e",
       "etiqueta": "Pruebas end-to-end",
-      "valor": 156,
+      "valor": 168,
       "unidad": "pruebas",
       "fuente": "medido",
-      "detalle": "Salida de la suite e2e entera el 2026-10-25, sobre el build de producción: 35 specs de Playwright sobre 2 dispositivos (móvil y escritorio), con axe en los dos temas; 156 pasan y 6 se omiten a propósito en móvil (Tab no aplica al teléfono; el puntuador, con Pyodide y sus wheels, se prueba una vez en escritorio). Cero flaky."
+      "detalle": "Salida de la suite e2e entera el 2026-10-28 sobre d302949, en el build de producción de una copia aislada, con un worker y sin reintentos: 38 specs de Playwright sobre 2 dispositivos (móvil y escritorio), con axe en los dos temas; 168 pasan y 6 se omiten a propósito en móvil (Tab no aplica al teléfono; el puntuador se prueba una vez en escritorio). Cero flaky."
     },
     {
       "clave": "cobertura_lineas",
       "etiqueta": "Cobertura de líneas",
-      "valor": 95.24,
+      "valor": 95.39,
       "unidad": "%",
       "fuente": "medido",
-      "detalle": "v8 sobre engine, lib, components y workers; 10272 de 10785 líneas (salida de `pnpm test` del 2026-10-25, sobre el árbol final: imprime 95,24 %). Los motores puros de engine/ llevan umbral propio más alto."
+      "detalle": "v8 sobre engine, lib, components y workers; 11010 de 11541 líneas (salida de `pnpm test` del 2026-10-27 sobre d302949: imprime 95,39 %). Los motores puros de engine/ llevan umbral propio más alto."
     },
     {
       "clave": "dependencias_runtime",
@@ -592,7 +610,7 @@
       "valor": 0,
       "unidad": "filas",
       "fuente": "medido",
-      "detalle": "Diecinueve specs e2e vigilan las peticiones de red (las de Probeta y las de las etapas 4 a 10 del Protocolo): fallan si una lleva valores del dataset o, donde no hay consentimiento, una petición de narración; y el cuaderno exportado tampoco lleva filas. Lo único que sale con contenido del usuario es la narración con IA de Probeta, a petición y solo con agregados: 652 B medidos."
+      "detalle": "Veintitrés specs e2e vigilan las peticiones de red (contadas el 2026-10-27 sobre d302949: las de Probeta, con el pronóstico, el gemelo y «Llévatelo», y las de las etapas 4 a 10 del Protocolo): fallan si una lleva valores del dataset o, sin consentimiento, una petición de narración. Lo único que sale con contenido del usuario es la narración con IA, a petición y solo con agregados: 652 B medidos."
     },
     {
       "clave": "gpu_requerida",
@@ -613,7 +631,7 @@
     {
       "clave": "peso_brochure",
       "etiqueta": "Peso de este brochure",
-      "valor": 133135,
+      "valor": 136173,
       "unidad": "bytes",
       "fuente": "medido",
       "detalle": "`wc -c docs/BROCHURE.html` (lo recuenta tests/unit/brochure-export.test.ts). Archivo autocontenido: cero CDN y cero peticiones de red, verificado instrumentando el navegador."
@@ -621,10 +639,10 @@
     {
       "clave": "decisiones_registradas",
       "etiqueta": "Decisiones de arquitectura registradas",
-      "valor": 27,
+      "valor": 29,
       "unidad": "ADR",
       "fuente": "medido",
-      "detalle": "Archivos de decisions/ (001–027): el 023 y el 024 son la prueba de estrés y lo que el usuario se lleva; el 025 y el 026, el lector de Excel y el plan de limpieza; el 027, del modelo a la decisión (el «¿qué pasaría si?» en dinero, el modelo en reglas y vigilar el desempeño). Lo recuenta tests/unit/brochure-export.test.ts."
+      "detalle": "Archivos de decisions/ (001–029): el 023 y el 024 son la prueba de estrés y lo que el usuario se lleva; el 025 y el 026, el lector de Excel y el plan de limpieza; el 027, del modelo a la decisión (el «¿qué pasaría si?» en dinero, el modelo en reglas y vigilar el desempeño); el 028, pronosticar una serie; el 029, el gemelo sintético. Lo recuenta tests/unit/brochure-export.test.ts."
     }
   ],
   "stack": [
@@ -662,13 +680,13 @@
     "red_saliente": true,
     "escribe_en_las_fuentes": false,
     "usa_ia": true,
-    "detalle": "La app se sirve desde la web y tiene UNA ruta de servidor, así que no es una app local — pero los datos sí lo son: el perfilado, el saneamiento, el entrenamiento y el scoring corren en el navegador con Pyodide, y el dataset nunca se sube a ningún servidor porque no existe uno al que subirlo. Lo único que sale con contenido del usuario es la narración con IA, y solo cuando el usuario pulsa su botón: viajan nombres de columnas y cifras agregadas —652 B en una medición real—, jamás filas. Los errores mandan a Sentry solo metadatos (número de filas y columnas, tarea), nunca valores. El cuaderno de Protocolo DS (decisiones, costos, nombres de columnas y huellas de archivos, nunca filas) se guarda solo en el almacenamiento del propio navegador y se exporta únicamente si la persona lo pide; el modo entero es código determinista, sin IA generativa."
+    "detalle": "Probeta se sirve desde la web, pero tus datos se quedan en tu equipo: el perfilado, la limpieza, el entrenamiento y la puntuación corren en tu navegador, y tu tabla nunca se sube a un servidor. Solo sale algo si pides la narración con IA: los nombres de tus columnas y cifras agregadas (652 bytes en una medición real), jamás filas. Los errores reportan solo metadatos, como cuántas filas y columnas hay, nunca valores. El cuaderno de Protocolo DS vive en el almacenamiento de tu navegador y sale solo si tú lo exportas; ese modo es todo código determinista, sin IA generativa."
   },
   "enlaces": {
     "produccion": null,
-    "razon": "El acceso a la app es por lista de espera, sin promesa de otorgamiento. La producción existe y se muestra en este brochure; el enlace no se publica.",
+    "razon": "El acceso a la app es por lista de espera, sin promesa de otorgamiento. La app está en producción y se muestra aquí; el enlace no se publica.",
     "repositorio": null,
-    "razon_repositorio": "Ningún enlace de acceso viaja en este export: es la regla de cero enlaces del portafolio, no una cuestión de visibilidad del repositorio.",
+    "razon_repositorio": "Ningún enlace de acceso viaja en esta ficha: es la regla de cero enlaces del portafolio, no una cuestión de visibilidad del repositorio.",
     "brochure_archivo": "docs/BROCHURE.html",
     "brochure_ruta_local": "/conoce"
   }

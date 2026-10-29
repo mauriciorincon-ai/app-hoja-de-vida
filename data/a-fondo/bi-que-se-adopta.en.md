@@ -518,8 +518,8 @@ binary.
 
 The Cafam experience reinforced this criterion early on. There, between October 2020 and June
 2021, I used Visual Basic for Applications because it was an available, useful and maintainable
-technology within the organization's context: the VBA applications that integrated the
-distribution center's processes with the WMS raised automation by 15%, reduced data errors by 50%
+technology within the organization's context: the VBA tools that complemented the WMS in the
+distribution center's processes raised automation by 15%, reduced data errors by 50%
 and kept running after go-live. Today I use agents and automated structures when the nature of
 the problem justifies it. The tool changes; the principle remains.
 

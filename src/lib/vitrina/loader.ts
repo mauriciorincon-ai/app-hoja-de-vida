@@ -3,7 +3,7 @@ import { readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { cache } from "react";
 import { conNombreOficial, nombreOficial } from "./categorias-apps";
-import { sinVitrinaEnTodo } from "../../../scripts/sin-vitrina.mjs";
+import { sinVitrinaDe } from "../../../scripts/sin-vitrina.mjs";
 import { getCategoriasApps } from "./categorias-loader";
 import {
   brochureExportSchema,
@@ -110,8 +110,10 @@ export const getFichasVitrina = cache((): FichaVitrina[] => {
     const raw = JSON.parse(
       readFileSync(path.join(VITRINA_DIR, archivo), "utf8"),
     ) as unknown;
-    // «Vitrina» → «portafolio» al leer (S23): la palabra del sitio es una sola.
-    const leido = sinVitrinaEnTodo(parseOrThrow(raw, archivo));
+    // «Vitrina» → «portafolio» al leer (S23): la palabra del sitio es una sola,
+    // salvo en las apps que llaman así a su propia pantalla (planlang, 026).
+    const crudo = parseOrThrow(raw, archivo);
+    const leido = sinVitrinaDe(crudo.app.slug, crudo);
     // NOMBRE OFICIAL (ADR-028): se aplica aquí, UNA vez, y de aquí lo heredan el
     // escaparate, la ficha, el chat, el manifest, los correos y el PDF. El
     // archivo de `content/` no cambia: es una lectura con alias.

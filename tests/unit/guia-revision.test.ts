@@ -74,7 +74,7 @@ function abrir(
 const minutos = (li: HTMLElement) =>
   Number(li.getAttribute("data-rev-min") ?? li.getAttribute("data-ensayo"));
 
-describe("la guía v25 · el filtro «Revisión completa»", () => {
+describe("la guía v26 · el filtro «Revisión completa»", () => {
   it("es el primero de la barra, está activo al abrir y muestra solo las filas de las sentadas", () => {
     const { doc, filas, filtro } = abrir();
     const botones = [...doc.querySelectorAll(".filtros button")];
@@ -186,7 +186,7 @@ describe("la guía v25 · el filtro «Revisión completa»", () => {
   });
 });
 
-describe("la guía v25 · las sentadas y las sumas", () => {
+describe("la guía v26 · las sentadas y las sumas", () => {
   it("cada sentada tiene su título y sus filas, ninguna pasa de 45 min y las sumas son las de la página", () => {
     const { doc, filas, calc } = abrir();
     const sentadas = [
@@ -279,7 +279,7 @@ describe("la guía v25 · las sentadas y las sumas", () => {
   });
 });
 
-describe("la guía v25 · el sí/no y la nota", () => {
+describe("la guía v26 · el sí/no y la nota", () => {
   it("cada prueba tiene su sí, su no y su nota; marcar guarda y cuenta", () => {
     const { doc, window, calc, click } = abrir();
     const pruebas = [...doc.querySelectorAll<HTMLElement>("ul.pasos li[id]")];
@@ -408,7 +408,7 @@ describe("la guía v25 · el sí/no y la nota", () => {
   });
 });
 
-describe("la guía v25 · «Copiar mis respuestas»", () => {
+describe("la guía v26 · «Copiar mis respuestas»", () => {
   function conRespuestas(portapapeles?: unknown) {
     const a = abrir();
     if (portapapeles !== undefined)
@@ -443,7 +443,7 @@ describe("la guía v25 · «Copiar mis respuestas»", () => {
     (doc.getElementById("rev-copiar") as HTMLButtonElement).click();
     await new Promise((r) => setTimeout(r, 0));
     expect(copiado).toMatch(
-      /^CV Viva · Revisión completa · guía v25\nFecha: \d{4}-\d{2}-\d{2}\n/,
+      /^CV Viva · Revisión completa · guía v26\nFecha: \d{4}-\d{2}-\d{2}\n/,
     );
     expect(copiado).toMatch(
       /Totales: \d+ pruebas · sí 1 · no 2 · pendientes \d+/,
@@ -496,7 +496,7 @@ describe("la guía v25 · «Copiar mis respuestas»", () => {
     await new Promise((r) => setTimeout(r, 0));
     const area = doc.getElementById("rev-texto") as HTMLTextAreaElement;
     expect(area.hasAttribute("hidden")).toBe(false);
-    expect(area.value).toContain("guía v25");
+    expect(area.value).toContain("guía v26");
     expect(area.value).toContain("nota: el botón no responde");
     expect(area.selectionStart).toBe(0);
     expect(area.selectionEnd).toBe(area.value.length);
@@ -514,7 +514,7 @@ describe("la guía v25 · «Copiar mis respuestas»", () => {
   });
 });
 
-describe("la guía v25 · lo que entra", () => {
+describe("la guía v26 · lo que entra", () => {
   it("las seis pruebas nuevas existen, son del S21, tienen sentada y la opcional lo dice", () => {
     const { doc } = abrir();
     for (const id of ["m15", "f12", "q25", "q26", "o15", "o16"]) {
@@ -554,7 +554,7 @@ describe("la guía v25 · lo que entra", () => {
  * Ahora la guía avisa a la vista si no guarda o está vacía, y «Restaurar desde texto» vuelve
  * a cargar lo que «Copiar mis respuestas» copió, de cualquier versión, casando por id.
  */
-describe("la guía v25 · guardar y restaurar", () => {
+describe("la guía v26 · guardar y restaurar", () => {
   /** Copia con el botón y devuelve el texto que quedó en el portapapeles. */
   async function copiar(a: ReturnType<typeof abrir>) {
     let copiado = "";
@@ -756,22 +756,22 @@ describe("la guía v25 · guardar y restaurar", () => {
   });
 
   it("A2 · una línea de la v22 cuyo título cambió y trae «: » no corta la nota en el sitio equivocado", () => {
-    // Así copió la v22 la k1b: el título, truncado con «…», y tras «…: » la nota del dueño.
+    // Así copió la v22 la c1 (la k1b dejó de servir de vehículo: el S26 la reescribió y su respuesta vieja va a «Antes del S26»): el título, truncado con «…», y tras «…: » la nota del dueño.
     const texto = [
       "CV Viva · Revisión completa · guía v22",
       "Fecha: 2026-10-24",
       "",
       "SÍ CON NOTA (1)",
-      "  · k1b — 2 min Entra a Vitrina desde el menú: ves el portal con cuatro cajas en este…: MI NOTA k1b",
+      "  · c1 — 1 min En un hito de la Trayectoria, pulsa «Ver logros completos»: se despliegan los bullets; vuelve a pulsar y se…: MI NOTA c1",
     ].join("\n");
     const a = abrir();
     restaurar(a, texto);
-    expect((a.doc.getElementById("k1b-si") as HTMLInputElement).checked).toBe(
+    expect((a.doc.getElementById("c1-si") as HTMLInputElement).checked).toBe(
       true,
     );
     expect(
-      a.doc.querySelector<HTMLTextAreaElement>('[data-nota-de="k1b"]')!.value,
-    ).toBe("MI NOTA k1b");
+      a.doc.querySelector<HTMLTextAreaElement>('[data-nota-de="c1"]')!.value,
+    ).toBe("MI NOTA c1");
   });
 
   it("M3 · el aviso de que no guarda se ve bajo CUALQUIER filtro, no solo en «Revisión completa»", () => {
@@ -785,7 +785,7 @@ describe("la guía v25 · guardar y restaurar", () => {
   });
 });
 
-describe("la guía v25 · las frases que el sprint dejó falsas", () => {
+describe("la guía v26 · las frases que el sprint dejó falsas", () => {
   it("A1 · fuera del historial, nada dice que «Métodos» está entre el portafolio y los Estudios", () => {
     const vigente = HTML.slice(
       0,
@@ -943,7 +943,7 @@ describe("la guía S24 · las filas del chat", () => {
  * o1, q20 y q22. Vuelven a pendiente y muestran lo que el dueño había respondido («Antes del
  * S25»). Las del S24 que no se tocaron siguen siendo del S24: la migración es por versión.
  */
-describe("la guía v25 · el CV, los casos y el PDF", () => {
+describe("la guía v26 · el CV, los casos y el PDF", () => {
   const FILAS_DEL_S25 = ["c2", "c3", "a10", "d1", "d3", "g1d", "o1", "q20", "q22"];
   const FLUJOS_DEL_S25 = [
     "R3 · Dos casos de estudio",
@@ -1020,5 +1020,57 @@ describe("la guía v25 · el CV, los casos y el PDF", () => {
       )
       .map((f) => f.id);
     expect(caducas, "filas con la frase de antes del S25").toEqual([]);
+  });
+});
+
+/**
+ * S26 (las fichas de las apps, a la altura). Ocho filas cambiaron de texto: k1b, k10, k11, k13, k15f, k17, l6 y m6. Vuelven a
+ * pendiente y muestran lo que el dueño había respondido («Antes del S26»). Las del S25 siguen siendo del S25: la
+ * migración es por versión y no las mueve dos veces.
+ */
+describe("la guía v26 · las fichas de las apps", () => {
+  const FILAS_DEL_S26 = ["k1b", "k10", "k11", "k13", "k15f", "k17", "l6", "m6"];
+
+  it("la página dice v26 y las ocho filas llevan data-cambio 26, «mejorado» y «Mejorado · S26»", () => {
+    const a = abrir();
+    expect(a.doc.getElementById("revision")?.getAttribute("data-version")).toBe("v26");
+    for (const id of FILAS_DEL_S26) {
+      const li = a.doc.getElementById(id) as HTMLElement;
+      expect(li.getAttribute("data-cambio"), id).toBe("26");
+      expect(li.getAttribute("data-origen"), id).toBe("mejorado");
+      expect(li.textContent, id).toContain("Mejorado · S26");
+    }
+    expect(a.doc.querySelectorAll('[data-cambio="26"]').length).toBe(FILAS_DEL_S26.length);
+  });
+
+  it("las frases que el sprint dejó falsas ya no están: k17 ya no dice que planlang y Big-D no traen «Cómo funciona», k11 no dice «declarado por CV Viva»", () => {
+    const a = abrir();
+    const k17 = a.doc.getElementById("k17")!.textContent ?? "";
+    expect(k17).not.toMatch(/no tienen el bloque/);
+    expect(k17).not.toMatch(/solo las seis apps/);
+    // La tarjeta del escaparate ya no lleva una tira dibujada sino la portada de la app (Innmobiliaria conserva la tira
+    // hasta que llegue su entrega): las dos filas que describían el escaparate no pueden seguir diciendo «dibujada».
+    for (const id of ["k1b", "k15f"]) {
+      const texto = (a.doc.getElementById(id)!.textContent ?? "").replace(/\s+/g, " ");
+      expect(texto, id).toContain("portada");
+      expect(texto, id).not.toMatch(/su tira dibujada|un esquema dibujado/);
+    }
+    expect(a.doc.getElementById("k11")!.textContent).not.toContain("declarado por CV Viva");
+    expect(a.doc.getElementById("k13")!.textContent).not.toMatch(/derivó CV Viva/);
+  });
+
+  it("las filas del S25 que no se tocaron siguen siendo del S25 (la migración no las mueve dos veces)", () => {
+    const a = abrir();
+    for (const id of ["c2", "c3", "a10", "d1", "d3", "g1d", "o1", "q20", "q22"]) {
+      expect(a.doc.getElementById(id)?.getAttribute("data-cambio"), id).toBe("25");
+    }
+  });
+
+  it("lo que respondió el dueño en una fila reescrita por el S26 pasa a «Antes del S26» y la fila vuelve a pendiente", () => {
+    const a = abrir({ [NS + "k17"]: "si", [NS + "k17:nota"]: "se veía bien" });
+    const k17 = a.doc.getElementById("k17") as HTMLElement;
+    expect((k17.querySelector('input[value="si"]') as HTMLInputElement).checked).toBe(false);
+    expect(k17.textContent).toContain("Antes del S26 respondiste: Sí");
+    expect(k17.textContent).toContain("se veía bien");
   });
 });

@@ -1,0 +1,80 @@
+# Capturas de Probeta DS para su ficha en CV Viva — pedido 026, planeadora, tomadas el 2026-10-27 y el 2026-10-28.
+# Build de producción de app-ds en d302949, viewport 1024×640 a deviceScaleFactor 1.5 (archivo de 1536×960), tema claro,
+# interfaz en español, datos sintéticos del kit de prueba de la app. Pies en ES y EN (≤ 80 caracteres).
+portada: entrada.webp
+capturas:
+  - { funcionalidad: V1, archivo: V1.webp, pie: { es: "Eliges la columna y la app reconoce la tarea: aquí, sí o no", en: "Pick the column and the app spots the task: here, yes or no" } }
+  - { funcionalidad: V2, archivo: V2.webp, pie: { es: "La liga entrena en tu navegador, modelo por modelo, a la vista", en: "The league trains in your browser, model by model, in plain sight" } }
+  - { funcionalidad: V3, archivo: V3.webp, pie: { es: "El veredicto: el ganador supera a la línea base, con la cifra", en: "The verdict: the winner beats the baseline, with the number" } }
+  - { funcionalidad: V4, archivo: V4.webp, pie: { es: "Una columna adivina demasiado bien: el titular dice «sospechoso»", en: "One column guesses too well: the headline says «suspicious»" } }
+  - { funcionalidad: V5, archivo: V5.webp, pie: { es: "Antes de entrenar, la alerta nombra la columna que delata el resultado", en: "Before training, the alert names the column that gives the answer away" } }
+  - { funcionalidad: V6, archivo: V6.webp, pie: { es: "Al estimar, el error se lee en kWh, sobre datos no vistos", en: "When estimating, the error reads in kWh, on unseen data" } }
+  - { funcionalidad: V7, archivo: V7.webp, pie: { es: "La matriz de confusión: aciertos y errores, sobre la prueba", en: "The confusion matrix: hits and misses, on the test set" } }
+  - { funcionalidad: V8, archivo: V8.webp, pie: { es: "Aquí ningún modelo le gana a la regresión de referencia, y lo dice", en: "Here no model beats the reference regression, and it says so" } }
+  - { funcionalidad: V9, archivo: V9.webp, pie: { es: "La liga: once modelos con validación cruzada, sin mirar la prueba", en: "The league: eleven models cross-validated, test set untouched" } }
+  - { funcionalidad: V11, archivo: V11.webp, pie: { es: "Estimado frente a real: cada punto, una fila de la prueba", en: "Estimated vs. actual: each dot is a test-set row" } }
+  - { funcionalidad: V13, archivo: V13.webp, pie: { es: "Cinco categorías: la matriz marca los aciertos con ✓", en: "Five categories: the matrix marks the hits with ✓" } }
+  - { funcionalidad: V12, archivo: V12.webp, pie: { es: "¿Categorías o una cantidad? La app pregunta en vez de adivinar", en: "Categories or a quantity? The app asks instead of guessing" } }
+  - { funcionalidad: V10, archivo: V10.webp, pie: { es: "Un botón para empezar otro experimento desde cero, aquí con el foco", en: "One button to start another experiment from scratch, here in focus" } }
+  - { funcionalidad: V14, archivo: V14.webp, pie: { es: "El margen de error: un intervalo del 95 % para la cifra", en: "The margin of error: a 95% interval around the number" } }
+  - { funcionalidad: D1, archivo: D1.webp, pie: { es: "Arrastras tu archivo y se lee en tu navegador, sin subirlo", en: "Drag your file in; it is read in your browser, never uploaded" } }
+  - { funcionalidad: D2, archivo: D2.webp, pie: { es: "Siete ejemplos sintéticos para recorrer la app sin datos propios", en: "Seven synthetic examples to tour the app without your own data" } }
+  - { funcionalidad: D3, archivo: D3.webp, pie: { es: "La vista previa, con el tipo de cada columna", en: "The preview, with each column's type" } }
+  - { funcionalidad: D4, archivo: D4.webp, pie: { es: "Un archivo de más de 50 000 filas: la app lo dice en vez de colgarse", en: "A file over 50,000 rows: the app says so instead of hanging" } }
+  - { funcionalidad: D5, archivo: D5.webp, pie: { es: "La limpieza, contada: duplicados, columnas apartadas y celdas basura", en: "Cleaning, counted: duplicates, set-aside columns and junk cells" } }
+  - { funcionalidad: D6, archivo: D6.webp, pie: { es: "Antes de entrenar: una posible fuga y un objetivo sesgado, con símbolo", en: "Before training: a possible leak and a skewed target, with a symbol" } }
+  - { funcionalidad: D7, archivo: D7.webp, pie: { es: "Un CSV con punto y coma: la app nombra el separador real", en: "A semicolon CSV: the app names the real separator" } }
+  - { funcionalidad: D8, archivo: D8.webp, pie: { es: "Entra un Excel: la app dice qué hoja leyó", en: "An Excel file comes in: the app says which sheet it read" } }
+  - { funcionalidad: D9, archivo: D9.webp, pie: { es: "Aviso de datos personales: la columna y el tipo, nunca el valor", en: "Personal-data warning: the column and type, never the value" } }
+  - { funcionalidad: D10, archivo: D10.webp, pie: { es: "El plan de limpieza: apruebas o rechazas cada paso", en: "The cleaning plan: approve or reject each step" } }
+  - { funcionalidad: D11, archivo: D11.webp, pie: { es: "Explora tus datos: un resumen verificado contra tus números", en: "Explore your data: a summary checked against your numbers" } }
+  - { funcionalidad: P1, archivo: P1.webp, pie: { es: "Qué columnas pesan y hacia dónde empujan, medido en la prueba", en: "Which columns weigh in and which way they push, on the test set" } }
+  - { funcionalidad: P2, archivo: P2.webp, pie: { es: "La explicación de la app, sin IA, verificada contra tus números", en: "The app's own explanation, no AI, checked against your numbers" } }
+  - { funcionalidad: P3, archivo: P3.webp, pie: { es: "La narración con IA, solo a petición y «✓ verificada»", en: "The AI narration, on request only and «✓ verified»" } }
+  - { funcionalidad: P4, archivo: P4.webp, pie: { es: "Si la narración falla, dice por qué y deja reintentar", en: "If the narration fails, it says why and lets you retry" } }
+  - { funcionalidad: P5, archivo: P5.webp, pie: { es: "La ficha del experimento, lista para descargar", en: "The experiment's model card, ready to download" } }
+  - { funcionalidad: P6, archivo: P6.webp, pie: { es: "Estrésalo: cuánto cae la cifra con ruido y si aún gana", en: "Stress it: how far the score drops with noise and if it still wins" } }
+  - { funcionalidad: P7, archivo: P7.webp, pie: { es: "Al estimar, la explicación también pasa la comprobación", en: "When estimating, the explanation passes the check too" } }
+  - { funcionalidad: U1, archivo: U1.webp, pie: { es: "Puntuar datos nuevos: la predicción de cada fila", en: "Scoring new data: a prediction for every row" } }
+  - { funcionalidad: U2, archivo: U2.webp, pie: { es: "Falta una columna: la app se niega a puntuar y dice cuál", en: "A column is missing: the app refuses to score and names it" } }
+  - { funcionalidad: U3, archivo: U3.webp, pie: { es: "El aviso de novedad: en cuántas filas nuevas el modelo adivina", en: "The novelty warning: in how many new rows the model is guessing" } }
+  - { funcionalidad: U4, archivo: U4.webp, pie: { es: "Cómo se reparten las predicciones, antes de descargar", en: "How the predictions spread, before you download" } }
+  - { funcionalidad: U5, archivo: U5.webp, pie: { es: "Ya había una columna «prediccion»: la nueva sale como prediccion_2", en: "A «prediccion» column already existed: the new one becomes prediccion_2" } }
+  - { funcionalidad: U6, archivo: U6.webp, pie: { es: "Exportar el modelo: qué lleva el archivo, dicho de frente", en: "Export the model: what the file carries, said up front" } }
+  - { funcionalidad: U7, archivo: U7.webp, pie: { es: "Un archivo manipulado se rechaza con la razón exacta", en: "A tampered file is rejected with the exact reason" } }
+  - { funcionalidad: U8, archivo: U8.webp, pie: { es: "Antes de usar un modelo importado, su resumen honesto", en: "Before using an imported model, its honest summary" } }
+  - { funcionalidad: U9, archivo: U9.webp, pie: { es: "Un modelo importado puntúa 300 filas nuevas sin volver a entrenar", en: "An imported model scores 300 new rows without retraining" } }
+  - { funcionalidad: U10, archivo: U10.webp, pie: { es: "Llévatelo: qué lleva cada archivo y la receta reproducible", en: "Take it with you: what each file carries and the recipe" } }
+  - { funcionalidad: U11, archivo: U11.webp, pie: { es: "El puntuador portátil: una página que puntúa en tu navegador", en: "The portable scorer: a page that scores in your browser" } }
+  - { funcionalidad: U12, archivo: U12.webp, pie: { es: "La plantilla de servicio, para usar el modelo desde otro sistema", en: "The service template, to call the model from another system" } }
+  - { funcionalidad: U13, archivo: U13.webp, pie: { es: "¿Qué pasaría si?: decisiones que cambian y su costo esperado", en: "What if?: decisions that change and their expected cost" } }
+  - { funcionalidad: U14, archivo: U14.webp, pie: { es: "El modelo en reglas, con cuánto se parece al modelo", en: "The model as rules, with how closely they match it" } }
+  - { funcionalidad: U15, archivo: U15.webp, pie: { es: "Vigilar el desempeño: la cifra de hoy frente a la de la prueba", en: "Monitoring: today's score against the test-set score" } }
+  - { funcionalidad: U16, archivo: U16.webp, pie: { es: "Pronóstico de una serie, contra el mejor método simple", en: "A series forecast, against the best simple method" } }
+  - { funcionalidad: U17, archivo: U17.webp, pie: { es: "El gemelo sintético y su informe: «se puede compartir»", en: "The synthetic twin and its report: «safe to share»" } }
+  - { funcionalidad: U18, archivo: U18.webp, pie: { es: "Las reglas armadas con las filas de un archivo tuyo", en: "Rules built from the rows of a file of yours" } }
+  - { funcionalidad: G1, archivo: G1.webp, pie: { es: "Los agrupadores compiten y cada uno dice cómo eligió", en: "The clusterers compete and each one says how it chose" } }
+  - { funcionalidad: G2, archivo: G2.webp, pie: { es: "La lectura: los grupos existen, comprobado contra el azar", en: "The reading: the groups exist, checked against chance" } }
+  - { funcionalidad: G3, archivo: G3.webp, pie: { es: "Qué distingue a cada grupo, en las unidades de tu tabla", en: "What sets each group apart, in your table's units" } }
+  - { funcionalidad: G4, archivo: G4.webp, pie: { es: "Tus filas con su grupo, armadas en tu navegador", en: "Your rows with their group, built in your browser" } }
+  - { funcionalidad: G5, archivo: G5.webp, pie: { es: "Filas nuevas asignadas a un grupo, con la regla dicha", en: "New rows assigned to a group, with the rule stated" } }
+  - { funcionalidad: L1, archivo: L1.webp, pie: { es: "Diez etapas: cada una abre solo cuando cumples la anterior", en: "Ten stages: each opens only when you complete the previous one" } }
+  - { funcionalidad: L2, archivo: L2.webp, pie: { es: "El cuaderno: la evidencia de cada etapa, sin filas de tus datos", en: "The notebook: each stage's evidence, without your data rows" } }
+  - { funcionalidad: L3, archivo: L3.webp, pie: { es: "«En tus datos»: la trampa que la etapa acaba de evitar", en: "«In your data»: the trap the stage just avoided" } }
+  - { funcionalidad: L4, archivo: L4.webp, pie: { es: "El glosario, a un clic de cada término", en: "The glossary, one click from every term" } }
+  - { funcionalidad: L5, archivo: L5.webp, pie: { es: "La decisión y sus costos: desde qué probabilidad actuar", en: "The decision and its costs: from what probability to act" } }
+  - { funcionalidad: L6, archivo: L6.webp, pie: { es: "El objetivo, la unidad y el momento, comprobados en tus datos", en: "Target, unit and timing, checked against your data" } }
+  - { funcionalidad: L7, archivo: L7.webp, pie: { es: "¿Buscas una causa? El Protocolo te recuerda que eso pide un experimento", en: "Looking for a cause? The Protocol reminds you that takes an experiment" } }
+  - { funcionalidad: L8, archivo: L8.webp, pie: { es: "Cuántas filas hacen falta, con lo que el cálculo supone", en: "How many rows you need, with what the math assumes" } }
+  - { funcionalidad: L9, archivo: L9.webp, pie: { es: "Columna por columna: quién la produce y cuándo se conoce", en: "Column by column: who produces it and when it is known" } }
+  - { funcionalidad: L10, archivo: L10.webp, pie: { es: "Tu apuesta frente a lo que encontró la app", en: "Your bet against what the app found" } }
+  - { funcionalidad: L11, archivo: L11.webp, pie: { es: "La línea base sin modelo y tu regla de hoy, en costo", en: "The no-model baseline and today's rule, in cost" } }
+  - { funcionalidad: L12, archivo: L12.webp, pie: { es: "La prueba por tiempo y por grupo, con su hueco y sin cruces", en: "A test set split by time and by group, with its gap and no overlap" } }
+  - { funcionalidad: L13, archivo: L13.webp, pie: { es: "La liga dentro del entrenamiento, con la prueba cerrada", en: "The league inside training, with the test set closed" } }
+  - { funcionalidad: L14, archivo: L14.webp, pie: { es: "¿Señal o azar? La prueba de permutación con su valor p", en: "Signal or chance? The permutation test with its p-value" } }
+  - { funcionalidad: L15, archivo: L15.webp, pie: { es: "La prueba abierta una vez: el error por segmento", en: "The test set opened once: error by segment" } }
+  - { funcionalidad: L16, archivo: L16.webp, pie: { es: "¿Sirve para la decisión? Alertas, costo y beneficio por cada 100", en: "Fit for the decision? Alerts, cost and benefit per 100" } }
+  - { funcionalidad: L17, archivo: L17.webp, pie: { es: "La ficha del modelo, armada sola desde el cuaderno", en: "The model sheet, assembled from the notebook" } }
+  - { funcionalidad: L18, archivo: L18.webp, pie: { es: "¿Qué pasaría si? en la etapa 9, sin volver a abrir la prueba", en: "What if? at stage 9, without reopening the test set" } }
+  - { funcionalidad: L19, archivo: L19.webp, pie: { es: "El ganador del Protocolo, guardado para puntuar y vigilar", en: "The Protocol's winner, saved to score and monitor" } }
+sin_pantalla: [T1, T2]

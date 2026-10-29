@@ -3,7 +3,7 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 import { cache } from "react";
 import { parse } from "yaml";
-import { sinVitrinaEnTodo } from "../../../../scripts/sin-vitrina.mjs";
+import { sinVitrinaDe } from "../../../../scripts/sin-vitrina.mjs";
 import { getFicha, getFichasVitrina } from "../loader";
 import { armarFichaTecnica } from "./armar";
 import { complementoSchema, type FichaTecnica } from "./schema";
@@ -36,8 +36,9 @@ export const getComplemento = cache((slug: string) => {
       `Complemento inválido en data/fichas/${slug}.yaml:\n${issues}`,
     );
   }
-  // La palabra del sitio es una sola (S23): «vitrina» se lee «portafolio».
-  return sinVitrinaEnTodo(r.data);
+  // La palabra del sitio es una sola (S23): «vitrina» se lee «portafolio»
+  // (salvo en planlang, que la conserva para su pantalla, 026).
+  return sinVitrinaDe(slug, r.data);
 });
 
 export const getFichaTecnica = cache(

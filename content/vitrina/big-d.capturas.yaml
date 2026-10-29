@@ -1,0 +1,22 @@
+# Capturas de Big-D para CV Viva — pedido 026, planeadora, 2026-10-27. Base: app-big-d origin/main 84aa911, export
+# estático (build de producción) servido en la copia aislada. Viewport 1024×640 a deviceScaleFactor 1.5 (archivo de
+# 1536×960), tema claro, interfaz en español. Datos: los del repo (documentación pública de los fabricantes y el hospital
+# ficticio); F11 sale de la base sembrada de la app (plataformas ficticias Norte, Sur y Ejemplo); F6, de la propuesta real
+# de evidencias de Snowflake del 2026-10-05 reabierta como pendiente en la copia (carpeta «-ensayo»).
+portada: entrada.webp
+capturas:
+  - { funcionalidad: F1, archivo: F1.webp, pie: { es: "Visión general de Fabric: cada bloque se abre y muestra sus componentes", en: "Fabric overview: each block opens to show its components" } }
+  - { funcionalidad: F2, archivo: F2.webp, pie: { es: "Ficha de un componente: qué hace, por qué importa, términos y fuentes", en: "A component sheet: what it does, why it matters, terms and sources" } }
+  - { funcionalidad: F3, archivo: F3.webp, pie: { es: "El viaje de un dato por Fabric, paso a paso: aquí, el paso 3 de 8", en: "A datum's journey through Fabric, step by step: here, step 3 of 8" } }
+  - { funcionalidad: F7, archivo: F7.webp, pie: { es: "Databricks, Fabric y Snowflake lado a lado, cada banda en su columna", en: "Databricks, Fabric and Snowflake side by side, each band in its column" } }
+  - { funcionalidad: F5, archivo: F5.webp, pie: { es: "Snowflake con el mismo mapa: las mismas capas, colores y símbolos", en: "Snowflake on the same map: the same layers, colors and symbols" } }
+  - { funcionalidad: F4, archivo: F4.webp, pie: { es: "Debajo del mapa, la lectura en texto: lo mismo, como una lista", en: "Below the map, the text reading: the same content, as a list" } }
+  - { funcionalidad: F10, archivo: F10.webp, pie: { es: "El perfil del caso: pesos que suman 100, cada uno con su rango", en: "The case profile: weights that add up to 100, each with its range" } }
+  - { funcionalidad: F11, archivo: F11.webp, pie: { es: "Totales con el empate técnico declarado (base de prueba, ficticia)", en: "Totals with the technical tie declared (fictional test base)" } }
+  - { funcionalidad: F13, archivo: F13.webp, pie: { es: "Las decisiones por ondas: primero las de una sola vía", en: "Decisions in waves: the one-way ones come first" } }
+  - { funcionalidad: F14, archivo: F14.webp, pie: { es: "El informe: catorce secciones en español e inglés, listo para imprimir", en: "The report: fourteen sections in Spanish and English, ready to print" } }
+  - { funcionalidad: F6, archivo: F6.webp, pie: { es: "Una propuesta de la IA en revisión: el código verificó cada cita", en: "An AI proposal under review: the code checked every quote" } }
+  - { funcionalidad: F9, archivo: F9.webp, pie: { es: "La base de conocimiento: evidencias aprobadas, con su vigencia y su huella", en: "The knowledge base: approved evidence, with its freshness and fingerprint" } }
+  - { funcionalidad: F8, archivo: F8.webp, pie: { es: "Versiones del mapa de Fabric: de la v0.2.0 a la v0.3.0, lo nuevo marcado", en: "Fabric map versions: from v0.2.0 to v0.3.0, with what is new marked" } }
+  - { funcionalidad: F12, archivo: F12.webp, pie: { es: "El instrumento en verde: casos de referencia, propiedades y errores sembrados", en: "The instrument in green: reference cases, properties and seeded errors" } }
+sin_pantalla: []

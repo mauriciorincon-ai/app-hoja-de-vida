@@ -1,21 +1,82 @@
 # Complemento de la ficha técnica de AngelGhost (`copiloto-consultor`). PROCEDENCIA: planeadora
-# (curado desde VISION v1.5.0 y el brief, 2026-10-11; al día con el cierre del H-1, S8, 2026-10-12).
-# Se copia tal cual a data/fichas/copiloto-consultor.yaml de hoja-de-vida junto con el export.
-# `cifras_destacadas` son CLAVES de `metricas[]` del export: el export debe traerlas con su fuente.
+# (pedido 026 de CV Viva, 2026-10-27: sentada 4a de la revisión del H-2; reescrito para quien llega por primera vez,
+# sobre el export de `origin/main` 67052a9 y su manual de uso). Se copia tal cual a data/fichas/copiloto-consultor.yaml
+# de hoja-de-vida junto con el export de esta misma carpeta.
+# `cifras_destacadas` son CLAVES de `metricas[]` del export: el export debe traerlas con su fuente. Un solo cero en la
+# tira, el que declara la promesa (bytes que salen del equipo); el costo de operación en cero queda en la ficha de detalle.
+# `roadmap`: copiado tal cual del yaml de CV Viva en 11d8066 (los ids son la clave del voto; no se toca).
 schema_version: "1.0.0"
 app: copiloto-consultor
-declarado_en: "2026-10-12"
-titular: "Tu propia experiencia en la reunión, en el momento justo, en una ventana que el cliente no ve aunque compartas pantalla: responde desde tu propuesta, tu marco y tu trayectoria, corre entera en tu Mac o tu PC y al cerrar no queda nada."
-cifras_destacadas: [funcionalidades, pruebas_automaticas, bytes_que_salen_del_equipo, costo_operacion_mensual]
+procedencia: planeadora
+declarado_en: "2026-10-27"
+titular: "Cuando el cliente pregunta, tu propia evidencia aparece en una banda junto a la cámara: un titular, una línea y la fuente, sacados de tus documentos. Corre en tu Mac o tu PC, y de la reunión solo queda lo que tú guardas."
+cifras_destacadas: [funcionalidades, pruebas_automaticas, bytes_que_salen_del_equipo, latencia_pregunta_a_ficha]
 limites:
-  - "Corre en macOS y en Windows; el instalador de Windows todavía no está firmado y su prueba en un equipo real está pendiente."
-  - "Responde solo con lo que tú le diste: sin corpus propio no hay ficha que mostrar."
-  - "Sugerencia breve con el modelo del Mac o, en Windows, con tu clave de API; se apaga y no reemplaza tu criterio ni habla por ti."
+  - "Responde solo con tus documentos: sin una carpeta tuya indexada no hay ficha que mostrar."
+  - "Que la banda no salga en lo que compartes está comprobado solo en Google Meet sobre macOS; en lo demás, la app lo marca «sin verificar»."
+  - "No distingue voces en un mismo canal ni cancela el eco: con altavoces funciona peor, por eso pide auriculares."
+  - "El instalador todavía no está firmado: Windows muestra un aviso de seguridad antes de instalarlo."
 nunca:
-  - "Entra como bot a la reunión ni graba audio o transcripción."
-  - "Envía audio, capturas o texto a un servicio externo por defecto."
-  - "Se presenta como «indetectable»: la promesa es «nada queda», demostrable con un contador."
-  - "Accede, sondea o actúa sobre el computador de la contraparte."
+  - "Entra como bot a la reunión ni graba el audio o la conversación."
+  - "Envía audio, imágenes de la pantalla o documentos enteros a un servicio externo."
+  - "Se presenta como «indetectable»: su promesa es «nada queda», y se puede comprobar."
+  - "Accede, sondea o actúa sobre el equipo de la otra parte."
+  - "Guarda una propuesta sobre la reunión sin tu sí."
+proceso:
+  titulo: "Una reunión con AngelGhost, de la preparación al cierre"
+  carriles:
+    - { id: consultor, nombre: "Tú, el consultor" }
+    - { id: app, nombre: "AngelGhost, en tu equipo" }
+    - { id: cliente, nombre: "El cliente" }
+  pasos:
+    - { id: inicio, tipo: inicio, carril: consultor, texto: "Tienes una reunión con un cliente" }
+    - { id: senalar-carpeta, tipo: tarea, carril: consultor, texto: "Señala la carpeta con tus documentos" }
+    - { id: indexar, tipo: tarea, carril: app, texto: "Indexa tus documentos donde están" }
+    - { id: quieres-ensayar, tipo: decision, carril: consultor, texto: "¿Quieres ensayar antes?" }
+    - { id: ensayar, tipo: tarea, carril: consultor, texto: "Responde en voz alta las preguntas probables" }
+    - { id: evaluar-ensayo, tipo: tarea, carril: app, texto: "Te dice qué evidencia usaste y cuál faltó" }
+    - { id: mostrar-norma, tipo: tarea, carril: app, texto: "Muestra qué norma aplica a ese cliente" }
+    - { id: nda-prohibe, tipo: decision, carril: consultor, texto: "¿Su acuerdo de confidencialidad lo prohíbe?" }
+    - { id: solo-notas, tipo: tarea, carril: consultor, texto: "Inicia en modo solo notas" }
+    - { id: iniciar-sesion, tipo: tarea, carril: consultor, texto: "Inicia la sesión" }
+    - { id: cliente-pregunta, tipo: tarea, carril: cliente, texto: "Pregunta, da una cifra o comparte pantalla" }
+    - { id: escuchar-leer, tipo: tarea, carril: app, texto: "Escucha y lee en memoria, sin grabar" }
+    - { id: mostrar-ficha, tipo: tarea, carril: app, texto: "Muestra la ficha con su fuente en la banda" }
+    - { id: responder, tipo: tarea, carril: consultor, texto: "Responde con tu propia evidencia" }
+    - { id: anotar, tipo: tarea, carril: consultor, texto: "Anota y fija lo que importa" }
+    - { id: terminar, tipo: tarea, carril: consultor, texto: "Termina la sesión" }
+    - { id: decidir, tipo: tarea, carril: consultor, texto: "Decide qué propuestas guardar" }
+    - { id: cifrar, tipo: tarea, carril: app, texto: "Cifra tus notas en un archivo por reunión" }
+    - { id: borrar-memoria, tipo: tarea, carril: app, texto: "Borra el audio, la conversación y la pantalla" }
+    - { id: fin, tipo: fin, carril: consultor, texto: "Solo queda lo que decidiste guardar" }
+  flujos:
+    - { de: inicio, a: senalar-carpeta }
+    - { de: senalar-carpeta, a: indexar }
+    - { de: indexar, a: quieres-ensayar }
+    - { de: quieres-ensayar, a: ensayar, etiqueta: "sí" }
+    - { de: quieres-ensayar, a: mostrar-norma, etiqueta: "no" }
+    - { de: ensayar, a: evaluar-ensayo }
+    - { de: evaluar-ensayo, a: mostrar-norma }
+    - { de: mostrar-norma, a: nda-prohibe }
+    - { de: nda-prohibe, a: solo-notas, etiqueta: "sí" }
+    - { de: nda-prohibe, a: iniciar-sesion, etiqueta: "no" }
+    - { de: solo-notas, a: anotar }
+    - { de: iniciar-sesion, a: cliente-pregunta }
+    - { de: cliente-pregunta, a: escuchar-leer }
+    - { de: escuchar-leer, a: mostrar-ficha }
+    - { de: mostrar-ficha, a: responder }
+    - { de: responder, a: anotar }
+    - { de: anotar, a: terminar }
+    - { de: terminar, a: decidir }
+    - { de: decidir, a: cifrar }
+    - { de: cifrar, a: borrar-memoria }
+    - { de: borrar-memoria, a: fin }
+  anotaciones:
+    - { paso: indexar, texto: "Lee PDF, Word y Markdown sin copiarlos ni subirlos. Se hace una vez y la app vuelve a leer la carpeta al arrancar." }
+    - { paso: nda-prohibe, texto: "La app nunca te bloquea: propone y tú decides. Te da una cláusula modelo para tu carta de encargo; no es asesoría legal." }
+    - { paso: escuchar-leer, texto: "Tu micrófono y el audio del equipo van por separado. Nada de eso toca el disco ni sale por la app: el contador marca 0 B." }
+    - { paso: mostrar-ficha, texto: "Un titular, una línea y la fuente exacta. Se repite con cada pregunta, cifra o silencio del cliente." }
+    - { paso: decidir, texto: "Lo que no decides espera en una bandeja con cuenta atrás (3 h de fábrica) y se borra solo, aunque no abras la app." }
 roadmap:
   - id: iphone-presencial
     titulo:

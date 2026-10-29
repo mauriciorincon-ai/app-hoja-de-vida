@@ -157,7 +157,7 @@ Detener o rediseñar un caso de uso después de invalidar correctamente una hip�
 
 Con este enfoque, el portafolio deja de ser una lista de proyectos y se convierte en un mecanismo de gobierno. Permite comparar iniciativas bajo criterios comunes, equilibrar valor y riesgo, asignar recursos de manera consciente y construir una secuencia de implementación coherente con la madurez de la organización.
 
-A la fecha, la estrategia ha permitido identificar más de 10 oportunidades de inteligencia artificial, evaluar formalmente la mitad y priorizar unas pocas iniciativas para validación o desarrollo progresivo. De estas, las primeras cuentan con responsables, resultados esperados, riesgos iniciales y criterios de evaluación documentados. Que la mayoría de los casos evaluados no avanzaran todavía es el filtro funcionando, no un inventario de fracasos.
+A la fecha, la estrategia ha permitido identificar más de 10 oportunidades de inteligencia artificial, evaluar formalmente la mitad y tener unas iniciativas ya priorizadas para validación o desarrollo progresivo. De estas, las primeras cuentan con responsables, resultados esperados, riesgos iniciales y criterios de evaluación documentados. Que la mayoría de los casos evaluados no avanzaran todavía es el filtro funcionando, no un inventario de fracasos.
 
 ## Analítica por procesos, para dos audiencias: líderes administrativos y asistenciales
 
@@ -287,10 +287,10 @@ Actualmente, más de 25 soluciones analíticas en Power BI se encuentran en uso 
 | Analítica          | planes de análisis en seguimiento          |                una decena |
 | IA                 | oportunidades identificadas                |                 más de 10 |
 | IA                 | casos de uso evaluados formalmente         |                  la mitad |
-| IA                 | iniciativas priorizadas · documentadas     | unas pocas · las primeras |
+| IA                 | iniciativas priorizadas · documentadas     |    algunas · las primeras |
 | Sistema de gestión | instrumentos: terminados · en construcción |      un tercio · el resto |
 
-En inteligencia artificial, la estrategia ha permitido identificar más de 10 oportunidades, evaluar formalmente la mitad y priorizar unas pocas iniciativas para exploración, validación o desarrollo progresivo. De ellas, las primeras cuentan con propósito, responsable, resultados esperados, información requerida, riesgos iniciales y criterios de evaluación documentados.
+En inteligencia artificial, la estrategia ha permitido identificar más de 10 oportunidades, evaluar formalmente la mitad y tener unas iniciativas ya priorizadas para exploración, validación o desarrollo progresivo. De ellas, las primeras cuentan con propósito, responsable, resultados esperados, información requerida, riesgos iniciales y criterios de evaluación documentados.
 
 La construcción del sistema de gestión comprende actualmente más de 20 instrumentos institucionales entre políticas, procedimientos, matrices, criterios de evaluación y mecanismos de seguimiento, un tercio terminados y el resto en construcción. Estos componentes se encuentran en diferentes estados de definición, revisión, aprobación o aplicación, por lo que su avance se comunica de acuerdo con su estado real y no únicamente a partir de la existencia de documentos.
 

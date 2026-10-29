@@ -1,0 +1,19 @@
+# Capturas de Dash Agent para su ficha en CV Viva (pedido 026, planeadora, 2026-10-27).
+# Ventana 1024×640 a DPR 1.5 (archivo 1536×960), tema claro, interfaz en español, build de producción con el
+# arranque endurecido de la app. Datos 100 % sintéticos: el árbol del kit de prueba de la app (semilla 20260816,
+# la persona inventada «ana»); ninguna captura lee el ~/.claude real.
+portada: entrada.webp
+capturas:
+  - { funcionalidad: B1, archivo: B1.webp, pie: { es: "El auditor señala dos instrucciones que se contradicen, con archivo y línea", en: "The auditor flags two contradicting instructions, with file and line" } }
+  - { funcionalidad: B2, archivo: B2.webp, pie: { es: "Tres patrones de desperdicio con su regla, y el caso que más costó", en: "Three waste patterns with their rule, and the costliest case" } }
+  - { funcionalidad: C1, archivo: C1.webp, pie: { es: "Tokens por modelo: entrada, salida y caché; sin tarifa, la app pone «—»", en: "Tokens per model: input, output and cache; no price shows as «—»" } }
+  - { funcionalidad: C2, archivo: C2.webp, pie: { es: "La fecha de las tarifas, y el aviso cuando pasan de 30 días", en: "The pricing date, and a warning once it is over 30 days old" } }
+  - { funcionalidad: C3, archivo: C3.webp, pie: { es: "Lo que pagas y lo que costaría pagar por uso, lado a lado y sin restarlos", en: "What you pay next to the pay-as-you-go cost, side by side, never subtracted" } }
+  - { funcionalidad: C6, archivo: C6.webp, pie: { es: "Tu tope del mes frente a la proyección: a este ritmo te pasarías US$ 3", en: "Your monthly cap against the projection: at this pace, about US$3 over" } }
+  - { funcionalidad: C4, archivo: C4.webp, pie: { es: "El costo de cada proyecto y, al abrir uno, su desglose por rama", en: "The cost of each project and, when you open one, its split by branch" } }
+  - { funcionalidad: C5, archivo: C5.webp, pie: { es: "Un día de trabajo: cada pedido con sus tokens, su costo y lo que tocó", en: "A workday: every request with its tokens, its cost and what it touched" } }
+  - { funcionalidad: C8, archivo: C8.webp, pie: { es: "21 sesiones que Claude Code ya borró, conservadas en el índice de Dash", en: "21 sessions Claude Code already deleted, kept in Dash's own index" } }
+  - { funcionalidad: C10, archivo: C10.webp, pie: { es: "El reporte abierto sin la app: procedencia, huella y consumo del período", en: "The report opened without the app: provenance, fingerprint and usage" } }
+  - { funcionalidad: C9, archivo: C9.webp, pie: { es: "La garantía de permisos medida en vivo: este proceso no puede escribir", en: "The permission guarantee checked live: this process cannot write" } }
+  - { funcionalidad: C7, archivo: C7.webp, pie: { es: "Los servidores MCP y si su programa existe en disco, sin probar nada", en: "MCP servers and whether their program is on disk, without testing any" } }
+sin_pantalla: []

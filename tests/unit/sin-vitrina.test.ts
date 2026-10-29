@@ -4,7 +4,9 @@ import { describe, expect, it } from "vitest";
 import { parse } from "yaml";
 import {
   CONCORDANCIA_ROTA,
+  CONSERVAN_VITRINA,
   sinVitrina,
+  sinVitrinaDe,
   sinVitrinaEnTodo,
 } from "../../scripts/sin-vitrina.mjs";
 
@@ -200,7 +202,7 @@ const RUTA_VIEJA =
  *  · el motor del 301 y su prueba: la ruta vieja es lo que se redirige;
  *  · `retiro-piezas`: el patrón de las piezas retiradas caza la ruta vieja y la nueva;
  *  · este archivo y su gemelo e2e: describen y prueban la ruta vieja;
- *  · `capturas.tsx`: sirve las imágenes de la carpeta de estáticos `public/vitrina/`.
+ *  · `capturas.ts`: nombra la carpeta de estáticos `public/vitrina/` de las capturas.
  */
 const RUTA_VIEJA_PERMITIDA = new Set([
   "src/lib/redireccion.ts",
@@ -208,7 +210,7 @@ const RUTA_VIEJA_PERMITIDA = new Set([
   "tests/unit/retiro-piezas.test.ts",
   "tests/unit/sin-vitrina.test.ts",
   "tests/e2e/portafolio.spec.ts",
-  "src/components/vitrina/capturas.tsx",
+  "src/lib/vitrina/capturas.ts",
   "src/proxy.ts",
 ]);
 
@@ -375,6 +377,15 @@ function leidosDeOtrasCasas(): Array<{ archivo: string; datos: unknown }> {
   const fuentes: Array<{ archivo: string; datos: unknown }> = [];
   for (const carpeta of ["content"]) {
     for (const f of archivos(carpeta)) {
+      // Los exports, las fichas de otros frentes y, desde el 026, la tabla de
+      // capturas de cada app (sus pies son texto que se lee).
+      if (f.endsWith(".capturas.yaml")) {
+        fuentes.push({
+          archivo: f,
+          datos: parse(readFileSync(path.join(RAIZ, f), "utf8")),
+        });
+        continue;
+      }
       if (!f.endsWith(".json")) continue;
       fuentes.push({
         archivo: f,
@@ -397,9 +408,13 @@ describe("lo que escriben otras casas se lee sin la palabra vieja", () => {
     expect(leidosDeOtrasCasas().length).toBeGreaterThan(30);
   });
 
-  it("al leerlo, ningún texto la deja suelta", () => {
+  it("al leerlo, ningún texto la deja suelta (salvo las apps que conservan la suya)", () => {
     const sueltas: string[] = [];
     for (const { archivo, datos } of leidosDeOtrasCasas()) {
+      const conserva = CONSERVAN_VITRINA.some((slug) =>
+        path.basename(archivo).startsWith(`${slug}.`),
+      );
+      if (conserva) continue;
       for (const [ruta, valor] of textos(sinVitrinaEnTodo(datos))) {
         for (const m of valor.matchAll(PALABRA_SUELTA)) {
           sueltas.push(`${archivo}${ruta} «${m[0]}»`);
@@ -417,8 +432,29 @@ describe("lo que escriben otras casas se lee sin la palabra vieja", () => {
       "scripts/fichas-al-indice.mjs",
     ]) {
       const fuente = readFileSync(path.join(RAIZ, lector), "utf8");
-      expect(fuente, lector).toMatch(/sinVitrinaEnTodo\(/);
+      expect(fuente, lector).toMatch(/sinVitrina(?:De|EnTodo)\(/);
     }
+  });
+
+  // planlang tiene una pantalla que se llama «vitrina» (decisión del 2026-10-27,
+  // pedido 026): lo suyo se lee tal cual y todo lo demás, con la palabra nueva.
+  it("planlang conserva «vitrina» para su pantalla; ninguna otra app la conserva", () => {
+    expect(CONSERVAN_VITRINA).toEqual(["planlang"]);
+    const suya = { enlaces: { razon: "su vitrina viaja como paquete" } };
+    expect(sinVitrinaDe("planlang", suya)).toEqual(suya);
+    expect(sinVitrinaDe("habla", suya)).toEqual({
+      enlaces: { razon: "su portafolio viaja como paquete" },
+    });
+  });
+
+  it("y la conserva de verdad: su export y su complemento SÍ traen la palabra", () => {
+    const conPalabra = leidosDeOtrasCasas().filter(
+      ({ archivo, datos }) =>
+        path.basename(archivo).startsWith("planlang.") &&
+        textos(datos).some(([, v]) => PALABRA_SUELTA.test(v)),
+    );
+    PALABRA_SUELTA.lastIndex = 0;
+    expect(conPalabra.length).toBeGreaterThan(0);
   });
 
   it("y sin leerlo SÍ la traen: el alias hace trabajo (el gate no es ciego)", () => {
