@@ -34,7 +34,9 @@ import { TarjetaGrupo } from "./tarjeta-grupo";
  *  - **Cero enlaces:** ni un `href` a la app ni a su repo. Se muestra la RAZÓN
  *    de que no lo haya (es contenido, no vacío) y un CTA de lista de espera.
  *  - **Toda cifra con su procedencia:** cada métrica lleva su badge de `fuente`.
- *  - **Las descartadas se muestran:** ni pendientes ni entregadas.
+ *  - **Las descartadas NO se pintan** (OM-24, decisión del dueño): el export
+ *    puede traerlas —el campo sigue en el contrato y la ficha de la otra casa
+ *    no se edita—, pero ninguna ficha las muestra, ni tachadas ni de otra forma.
  *  - **El anclaje se declara:** de qué fecha es el export, sin prometer tiempo real.
  *
  * Server component: cero JS por ficha. La máquina de apertura es UNA isla para
@@ -289,36 +291,6 @@ export async function FichaApp({ ficha }: { ficha: FichaVitrina }) {
               ))}
             </ul>
           </details>
-
-          {funcionalidades.descartadas.length > 0 && (
-            <details className="acordeon-fino py-1">
-              <summary className={RESUMEN}>
-                <span aria-hidden="true" className="acordeon-signo">
-                  +
-                </span>
-                {t("descartadas")}
-              </summary>
-              <ul className="flex flex-col gap-3 pb-4">
-                {funcionalidades.descartadas.map((d) => (
-                  <li
-                    key={d.id}
-                    data-descartada-id={d.id}
-                    className="rounded-[6px] border border-paper-2 bg-paper-1 p-4"
-                  >
-                    <p className="text-sm font-medium text-ink-1 line-through decoration-ink-3">
-                      {d.nombre}
-                    </p>
-                    <p className="mt-1 text-sm leading-relaxed text-ink-2">
-                      {d.razon}
-                    </p>
-                    <p className="mt-1.5 font-mono text-[11px] text-ink-2">
-                      {t("descartadaEl", { fecha: d.fecha })}
-                    </p>
-                  </li>
-                ))}
-              </ul>
-            </details>
-          )}
         </div>
       </section>
 

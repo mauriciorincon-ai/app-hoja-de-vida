@@ -11,7 +11,7 @@ import { parse } from "yaml";
  *  1. **La vitrina como contenido**: el portal por frentes (ADR-015), el
  *     escaparate de apps, la ruta propia de cada app, el gate ATS/SEO (todo en el HTML estático), las reglas duras que la ficha
  *     hace visibles (cero enlaces · toda cifra con su procedencia · las
- *     descartadas se muestran) y el CTA de lista de espera con su anclaje.
+ *     descartadas NO se pintan, OM-24) y el CTA de lista de espera con su anclaje.
  *
  *  2. **La apertura por lectura** (banco §7): el patrón exige sus propias
  *     pruebas y las nombra. Van aquí, incluida la **deriva cero** con el bucle
@@ -428,9 +428,18 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
     }
   });
 
-  test("toda cifra lleva su procedencia y las descartadas se muestran", async ({
+  test("toda cifra lleva su procedencia y ninguna funcionalidad descartada se pinta (OM-24)", async ({
     page,
   }) => {
+    // El dato queda en el contrato (la ficha de la otra casa no se edita), pero el dueño no quiere ver funcionalidades
+    // descartadas tachadas: ninguna ficha las pinta, traiga lo que traiga el export. Se anota cuántos exports las traen
+    // para que el informe diga si la aserción miró algo.
+    test.info().annotations.push({
+      type: "exports-con-descartadas",
+      description: String(
+        EXPORTS.filter((e) => e.funcionalidades.descartadas.length > 0).length,
+      ),
+    });
     for (const exp of EXPORTS) {
       await page.goto(`/es/portafolio/apps/${exp.app.slug}/detalle`);
 
@@ -443,10 +452,8 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
         ).toHaveAttribute("data-fuente", m.fuente);
       }
 
-      // Ni pendientes ni entregadas: retiradas, y a la vista.
-      await expect(page.locator("[data-descartada-id]")).toHaveCount(
-        exp.funcionalidades.descartadas.length,
-      );
+      // OM-24: ni tachadas ni de ninguna otra forma.
+      await expect(page.locator("[data-descartada-id]")).toHaveCount(0);
     }
   });
 });
