@@ -122,9 +122,12 @@ export function GaleriaCarrusel({
   useEffect(() => {
     if (!diferir) return;
     const el = pista.current;
-    if (!el || typeof IntersectionObserver === "undefined") {
-      setVista(true);
-      return;
+    if (!el) return;
+    if (typeof IntersectionObserver === "undefined") {
+      // Sin IntersectionObserver (un navegador viejo): se monta todo, pero no
+      // dentro del efecto —el estado no se mueve de forma síncrona aquí—.
+      const marco = requestAnimationFrame(() => setVista(true));
+      return () => cancelAnimationFrame(marco);
     }
     const io = new IntersectionObserver((entradas) => {
       if (entradas.some((e) => e.isIntersecting)) {
@@ -137,9 +140,10 @@ export function GaleriaCarrusel({
   }, [diferir]);
 
   // La pantalla a la vista y la siguiente (para que deslizar no espere).
-  useEffect(() => {
-    setTope((t) => Math.max(t, activo + 1));
-  }, [activo]);
+  function verPantalla(i: number) {
+    setActivo(i);
+    setTope((t) => Math.max(t, i + 1));
+  }
 
   // Qué captura está a la vista: la que ocupa más del 60 % de la pista.
   useEffect(() => {
@@ -149,8 +153,11 @@ export function GaleriaCarrusel({
     const io = new IntersectionObserver(
       (entradas) => {
         for (const e of entradas) {
-          if (e.isIntersecting)
-            setActivo(slides.indexOf(e.target as HTMLElement));
+          if (e.isIntersecting) {
+            const i = slides.indexOf(e.target as HTMLElement);
+            setActivo(i);
+            setTope((t) => Math.max(t, i + 1));
+          }
         }
       },
       { root: el, threshold: 0.6 },
@@ -167,7 +174,7 @@ export function GaleriaCarrusel({
       left: i * el.clientWidth,
       behavior: quieto ? "auto" : "smooth",
     });
-    setActivo(i);
+    verPantalla(i);
   }
 
   const enInicio = activo === 0;

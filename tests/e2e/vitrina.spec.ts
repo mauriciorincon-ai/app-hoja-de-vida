@@ -2260,8 +2260,9 @@ test.describe("Vitrina — las pantallas por funcionalidad y el Stack explicado 
     expect(n).toBeGreaterThan(1);
     const pedidas = new Set<string>();
     page.on("request", (r) => {
-      const m = /vitrina%2Fds%2F([^&?]+)|\/vitrina\/ds\/([^&?]+)/.exec(r.url());
-      if (m) pedidas.add(m[1] ?? m[2]);
+      // Las capturas de ds viven en la carpeta pública `vitrina/ds` (sin optimizar: la ruta tal cual).
+      const partes = new URL(r.url()).pathname.split("/");
+      if (partes[1] === "vitrina" && partes[2] === "ds") pedidas.add(partes[3]);
     });
     await page.goto("/es/portafolio/apps/ds/detalle");
     await page.waitForLoadState("networkidle");
