@@ -483,7 +483,9 @@ el mensaje te llega al correo.
     está. Cierra con «Ver la ficha completa».
   - **La ficha completa** (`/es/portafolio/apps/habla/detalle`): el detalle construido en el S5 — la
     promesa, las cifras, las funcionalidades agrupadas en tarjetas que se abren solas al llegar
-    leyendo, y los detalles finos (privacidad, stack, funcionalidades descartadas).
+    leyendo, y los detalles finos (privacidad y stack). **Ninguna ficha pinta las funcionalidades
+    descartadas**, aunque el export de la app las traiga (OM-24): el campo sigue en el contrato, y
+    la ficha de otra casa no se edita para quitarlas.
     Al pie del escaparate, el bloque **«De esta casa»** enlaza las dos brochures propias.
 - **De dónde sale la ficha técnica:** del `brochure-export.json` de la app **más un complemento**,
   en `data/fichas/<app>.yaml`: el titular, cuáles 3–5 cifras van arriba, los límites, los «nunca» y
@@ -542,7 +544,10 @@ el mensaje te llega al correo.
   export: vive en `data/categorias-apps.yaml`, una lista por categoría con el `slug` de cada app
   (el de su `content/vitrina/<slug>.brochure-export.json`) y su **nombre oficial**, uno solo, igual
   en español y en inglés. **El orden de la lista es el orden de la página**, y también el de los botones «App
-  anterior / App siguiente» de cada ficha y el del selector de la lista de espera.
+  anterior / App siguiente» de cada ficha y el del selector de la lista de espera. Las siete profesionales
+  van, desde el Sprint 027 y por decisión del dueño (OM-27), en este orden: Probeta DS · planlang ·
+  HackGuard · Anonimizador Velo · Big-D · Dash Agent · AngelGhost; las personales, sin cambio (Habla San ·
+  Innmobiliaria · Nutrikids). Un test fija ese orden: si lo cambias, cambia también el test.
 - **Cómo clasificar una app nueva.** El día que llega su export, se agrega su `slug` a una de las dos
   listas del YAML. **Si no lo haces, la publicación falla** y el error dice el slug que falta: una
   app nueva se clasifica el mismo día, o no se publica. Una app que ya está en el YAML pero todavía
@@ -551,7 +556,8 @@ el mensaje te llega al correo.
   puede estar en las dos listas.
 - **Su tira.** La tarjeta del escaparate muestra la **portada** de la app (su pantalla de entrada, que
   entrega la planeadora); la tira es el **dibujo esquemático** de esta casa —no una captura— que
-  encabeza la ficha de detalle, y la tarjeta de una app que aún no trae portada (hoy Innmobiliaria).
+  encabeza la ficha de detalle, y la tarjeta de una app que aún no trae portada (hoy ninguna: las
+  diez la traen desde el Sprint 027).
   La tira resume sus ideas en cuatro columnas; vive en `src/components/vitrina/maquetas/<slug>.tsx` y se
   registra en el índice de esa carpeta. **Una app nueva entra con su tira**: si llega su export sin
   dibujo, la CI falla nombrando la app (y mientras tanto la muestra no pinta el marco vacío, como
@@ -966,12 +972,21 @@ una cifra de «lo que hice» que el documento citado no dice, un conteo del siti
   etapa en Vesting (en los dos idiomas: sus palabras de salida, porque su título ya no promete un
   «por qué»). La lista exacta de secciones con alias la declara
   `tests/unit/chat-alias-estudios.test.ts`.
-- **El chat no atribuye motivos que tu documento no da.** «¿Por qué salió de Vesting?» se contesta
-  con lo que consta (la etapa cerró en enero de 2025, con el ecosistema y el proceso documentados) y
-  el prompt prohíbe añadir causas o intenciones («el deseo de…», «para pasar a otra etapa…»). La CI
-  fija la regla del prompt; lo que el modelo real hace con ella lo marca la pasada en vivo
-  (columna «Motivos»), y lo lee una persona. Si algún día quieres que el visitante lea un motivo, es
-  tu prosa: lo escribes en `vesting.*.md` y el chat lo dice.
+- **«¿Por qué salió de Vesting?» tiene una respuesta fija, sin modelo (desde el Sprint 027).** Dos
+  reglas de prompt seguidas no lograron que el modelo real la contestara con lo que consta, y el
+  corpus no da un «porqué» sino un «cómo», así que la pregunta ya no llega al modelo: una lista
+  cerrada (`src/lib/ia/salida-de-vesting.ts`) la reconoce —«por qué salió / se fue / dejó Vesting»,
+  «cuándo salió», «cómo cerró su etapa», «why did he leave Vesting», en español y en inglés, sea cual
+  sea el idioma de la página— y responde siempre el mismo texto, en tercera persona, con su cita a
+  la Trayectoria: *Henry cerró su etapa en Vesting en enero de 2025, al dejar el ecosistema y el
+  proceso documentados…* No gasta ni un token, funciona también con el chat en búsqueda local, y se
+  registra como las demás respuestas fijas, con su fuente. **Lo que no entra en esa lista sigue yendo
+  al modelo**: «¿Qué hizo Henry en Vesting?», «¿por qué entró?», «¿cuánto tiempo estuvo?» y las
+  preguntas que mezclan la entrada con la salida. El texto sale de `data/a-fondo/origenes.*.md` (la
+  sección del marco replicable): si algún día quieres que el visitante lea un motivo, es tu prosa:
+  la escribes ahí y el texto fijo se actualiza con ella. Para el resto de los «por qué», el prompt
+  sigue prohibiendo añadir causas o intenciones («el deseo de…»), y lo que el modelo hace con esa
+  regla lo marca la pasada en vivo (columna «Motivos»).
 - **La conversación se queda en el navegador.** Recargar la página, seguir un enlace del menú
   o cambiar de idioma **no la pierde**; si el panel estaba abierto, vuelve abierto (sin
   mover el cursor). Se borra sola **8 horas después del último mensaje**, y el visitante la
@@ -1457,3 +1472,4 @@ chat hoy y cuáles traería con la base aprobada. Ese informe **se genera, no se
 | Sprint 025 | **Sentada 2 de la revisión: el CV dice lo que pasó, y Proyectos propios con su caso.** CTIC dice «unas ya priorizadas» y que participas en el asesoramiento del diseño de los planes de mejora (CV y corpus); la lección de Ceinfes es tu frase de la retrospectiva; el capítulo de Vesting es «Definiciones comunes, atributos propios»; Banco Pichincha queda con dos modelos, fuga y mora; Cafam cuenta herramientas VBA que complementaban el WMS, no una integración. **Proyectos propios tiene su caso** («El pipeline AI-APPs», de `apps-pipeline`) con su enlace en la Trayectoria, y el **PDF pasa a tres hojas**, la tercera con el puesto entero. El chat cuenta cómo cerró la etapa en Vesting sin atribuirle un motivo (regla 5 del prompt y una marca «Motivos» en la pasada en vivo) y encuentra en inglés lo que guarda («What data do you keep about me?»); la fila del banco sube las preguntas de afuera a 176. Entran los exports de Probeta DS (S19) e Innmobiliaria (S14) y salen del roadmap los cuatro ítems que esas apps ya construyeron («¿Qué pasaría si…? con el impacto en dinero», «Un gemelo sintético de tus datos», «Copiloto del papeleo legal» y «Fotos que venden»): el roadmap de las dos queda vacío y la guía recorre siete apps con roadmap, no nueve. Guía v25 con doce filas «Mejorado · S25». |
 | Sprint 022 | **Sentada 5 de la revisión: tres agentes fuera, nombres sin «Harness» e investigaciones en pausa.** Salen de la vitrina Agente A, Agente B y el Harness Design Science (14 → 11 agentes); el agente de investigación se llama «Paper Computacional» por un alias de nombre que no edita la ficha (`data/nombres-piezas.yaml`); el frente de Investigaciones queda en pausa con su aviso propio (`enPreparacion`), sin tarjetas, fuera del sitemap y del chat y con sus fichas en 404. Gates: `retiro-piezas`, `nombres-piezas`, la pausa del índice del chat y el e2e de la pausa. La nota de cada fila de la guía admite 2000 caracteres. 
 | Sprint 026 | **Sentada 4a: las fichas de las apps, a la altura.** Nueve apps llegan rehechas por la planeadora (export, complemento y capturas, copiados byte a byte; Innmobiliaria espera su entrega y su fila queda como estaba): cada una trae «Cómo funciona» y a lo sumo un cero en su tira de cifras, y la tarjeta del escaparate muestra la pantalla de entrada de la app. En la ficha de detalle cada grupo abre con un carrusel con la pantalla de cada funcionalidad (un WebP de 1536×960 y ≤ 80 KB; las transversales no llevan figura), y el Stack despliega «Para qué sirve cada uno» en vez de un tooltip que el teléfono no tiene. El diagrama de Nutrikids ya no cruza una caja, planlang conserva su palabra «vitrina» y el proceso lo rotula la planeadora, no CV Viva. Se aplican las 16 líneas de la orden de correcciones del Sprint 025 y dos de las tres tablas de cifras de la prosa llevan el mes de cada fila («oct. 2026» o «ago. 2026»; la de «Cómo aprendo» no cabe en el tope de su subsección y solo cambia la fila de Probeta DS). El chat narra con su cita lo que consta de «¿Por qué salió de Vesting?» sin añadir un motivo, y la pasada en vivo lo vigila con una marca nueva. Tres gates nuevos (capturas, ceros, «Cómo funciona»), cada uno visto en rojo. Guía v26 con ocho filas «Mejorado · S26». |
+| Sprint 027 | **Sentada 4b: lo que dejó el 026, cerrado.** Innmobiliaria entra con su ficha nueva —la décima— y las retomas de Dash Agent, HackGuard, AngelGhost, Nutrikids (con el tema propio de la app) y Probeta DS (sobre su S21, 77 funcionalidades) reemplazan lo que entró con el 026, todo por copia byte a byte; antes de copiar, otro lector revisó una por una las 71 imágenes que llegaban. Las filas de Innmobiliaria y de Probeta DS de tus tablas de apps toman las cifras de sus exports nuevos. Las siete apps profesionales van en el orden que pediste (OM-27) y ninguna ficha pinta funcionalidades descartadas (OM-24). «¿Por qué salió de Vesting?» y su gemela en inglés ya no pasan por el modelo: responden un texto fijo con su cita a la Trayectoria, y el marcador de la pasada en vivo ya no cuenta como tu voz la cortesía del asistente («Let me know if you’d like…»). El diagrama de «Cómo funciona» apila los círculos de enlace que comparten margen (Innmobiliaria, Dash Agent, HackGuard, Big-D, AngelGhost). Guía v27 con cuatro filas «Mejorado · S27». |
