@@ -16,7 +16,7 @@ capturas:
   - { funcionalidad: C5, archivo: C5.webp, pie: { es: "Las columnas que delatan al juntarse, con su grupo más pequeño real", en: "Columns that single people out together, with their real smallest group" } }
   - { funcionalidad: C6, archivo: C6.webp, pie: { es: "El riesgo en la población declarada, marcado como estimado", en: "Risk in the declared population, labelled as an estimate" } }
   - { funcionalidad: C7, archivo: C7.webp, pie: { es: "El balance: lo que quedó sin proteger va antes que las cifras", en: "The balance: whatever is left unprotected comes before the figures" } }
-  - { funcionalidad: C8, archivo: C8.webp, pie: { es: "El regreso: los valores reales vuelven aunque el tercero movió filas", en: "The return: real values come back even after rows were reordered" } }
+  - { funcionalidad: C8, archivo: C8.webp, pie: { es: "El regreso: 1.163 de 1.163 celdas vuelven a su valor real, ninguna ambigua", en: "The return: 1,163 of 1,163 cells back to their real value, none ambiguous" } }
   - { funcionalidad: C11, archivo: C11.webp, pie: { es: "El certificado de la entrega, con las dos huellas, antes de descargarlo", en: "The delivery certificate with both fingerprints, before downloading" } }
-  - { funcionalidad: C12, archivo: C12.webp, pie: { es: "La bitácora cifrada, abierta: tres entregas, una desplegada", en: "The encrypted log, opened: three deliveries, one expanded" } }
+  - { funcionalidad: C12, archivo: C12.webp, pie: { es: "La bitácora cifrada, abierta: tres entregas, una con su política y huellas", en: "The encrypted log, opened: three deliveries, one with its policy and hashes" } }
 sin_pantalla: []

@@ -21,6 +21,6 @@ capturas:
   - { funcionalidad: playground, archivo: playground.webp, pie: { es: "Alto costo movido a 1600: 12 casos cambian de camino, con su costo", en: "High cost moved to 1600: 12 cases change path, with what it costs" } }
   - { funcionalidad: visor, archivo: visor.webp, pie: { es: "El grafo del agente, dibujado desde el código que corrió, por capas", en: "The agent's graph, drawn from the code that ran, layer by layer" } }
   - { funcionalidad: entrada, archivo: entrada-como-funciona.webp, pie: { es: "Cómo funciona: planear, construir y medir, con lo que midió el demo A", en: "How it works: plan, build and measure, with what demo A measured" } }
-  - { funcionalidad: pestanas, archivo: pestanas.webp, pie: { es: "El demo B: sus seis pestañas, A o B, idioma, tema y el aviso de simulación", en: "Demo B: its six tabs, A or B, language, theme and the simulation notice" } }
+  - { funcionalidad: pestanas, archivo: pestanas.webp, pie: { es: "El demo B: sus siete pestañas, A o B, idioma, tema y el aviso de simulación", en: "Demo B: its seven tabs, A or B, language, theme and the simulation notice" } }
   - { funcionalidad: fichas, archivo: fichas.webp, pie: { es: "La ficha para repetir la corrida: versiones, huellas, semilla, modelo y fecha", en: "The record to repeat the run: versions, fingerprints, seed, model and date" } }
 sin_pantalla: [entrevistador]

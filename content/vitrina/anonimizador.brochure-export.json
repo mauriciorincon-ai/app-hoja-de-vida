@@ -291,7 +291,7 @@
   },
   "enlaces": {
     "produccion": null,
-    "razon": "Velo está desplegado y funcionando, pero su dirección todavía no se publica: el acceso va por lista de espera mientras termina la ronda de pruebas.",
+    "razon": "Anonimizador Velo está desplegado y funcionando. Su dirección no se publica: el acceso es por lista de espera.",
     "repositorio": null,
     "razon_repositorio": "El repositorio no se enlaza desde el Portafolio: ninguna ficha publica enlaces de acceso.",
     "brochure_archivo": "docs/BROCHURE.html",

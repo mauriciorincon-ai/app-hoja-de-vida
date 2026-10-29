@@ -9,13 +9,13 @@ schema_version: "1.0.0"
 app: anonimizador
 procedencia: planeadora
 declarado_en: "2026-10-27"
-titular: "Entregas tablas con datos de personas sin entregar a nadie: Velo las disfraza dentro de tu navegador, mide el riesgo con cifras exactas y, con tu bóveda cifrada, te devuelve los valores reales cuando el trabajo regresa."
+titular: "Entregas tablas con datos de personas sin entregar a nadie: Anonimizador Velo las disfraza dentro de tu navegador, mide el riesgo con cifras exactas y, con tu bóveda cifrada, te devuelve los valores reales cuando el trabajo regresa."
 cifras_destacadas: [funcionalidades, filas_procesadas, llamadas_de_red_con_datos, pruebas_unitarias, cobertura_lineas]
 limites:
   - "Mide el riesgo de reidentificación y te lo muestra; no lo elimina ni declara anónimo ningún archivo."
   - "Reconoce documentos, contactos, ubicaciones y datos demográficos; un código interno de tu organización puede pasar sin que lo note."
   - "Lee CSV y Excel (hasta 150 MB) y entrega CSV; no lee bases de datos, JSON ni PDF."
-  - "Sin tu frase de paso no hay recuperación: ni Velo ni nadie puede abrir la bóveda."
+  - "Sin tu frase de paso no hay recuperación: ni Anonimizador Velo ni nadie puede abrir la bóveda."
 nunca:
   - "Sube tu archivo a un servidor."
   - "Deja copia al cerrar la pestaña."
