@@ -123,6 +123,7 @@ export function TarjetaGrupo({
                 ancho={CAPTURA_ANCHO}
                 alto={CAPTURA_ALTO}
                 sinOptimizar
+                diferir
                 sizes="(min-width: 896px) 720px, 100vw"
                 etiquetas={galeria.etiquetas}
               />

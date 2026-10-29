@@ -75,6 +75,7 @@ export function GaleriaCarrusel({
   ancho = 2560,
   alto = 1440,
   sinOptimizar = false,
+  diferir = false,
   etiquetas,
   sizes = "(min-width: 1024px) 976px, 100vw",
 }: {
@@ -95,6 +96,15 @@ export function GaleriaCarrusel({
    * gastaría el cupo mensual del plan Hobby de Vercel sin ganar un byte.
    */
   sinOptimizar?: boolean;
+  /**
+   * No monta ninguna imagen hasta que la pista se ve (una tarjeta cerrada, no),
+   * y de ahí solo la pantalla a la vista y la siguiente. Las apps (026) traen
+   * una pista por grupo y hasta 19 pantallas cada una: con `loading="lazy"` a
+   * secas Chromium pedía 4 por pista —24 imágenes con todas las tarjetas
+   * cerradas, 40 en el teléfono— y el detalle de una app pasaba el presupuesto de
+   * 1 MB de Lighthouse. Los pies siguen en el HTML: lo que se difiere es el peso.
+   */
+  diferir?: boolean;
   etiquetas: EtiquetasCarrusel;
   sizes?: string;
 }) {
@@ -103,6 +113,33 @@ export function GaleriaCarrusel({
   const pista = useRef<HTMLDivElement>(null);
   const [activo, setActivo] = useState(0);
   const quieto = usePrefiereQuieto();
+  // `diferir`: la pista ya se vio (la tarjeta que la contiene se abrió) y hasta
+  // qué pantalla se han pedido imágenes. Con `diferir` apagado, todo se monta.
+  const [vista, setVista] = useState(!diferir);
+  const [tope, setTope] = useState(0);
+  const pedir = (i: number) => !diferir || (vista && i <= tope);
+
+  useEffect(() => {
+    if (!diferir) return;
+    const el = pista.current;
+    if (!el || typeof IntersectionObserver === "undefined") {
+      setVista(true);
+      return;
+    }
+    const io = new IntersectionObserver((entradas) => {
+      if (entradas.some((e) => e.isIntersecting)) {
+        setVista(true);
+        io.disconnect();
+      }
+    });
+    io.observe(el);
+    return () => io.disconnect();
+  }, [diferir]);
+
+  // La pantalla a la vista y la siguiente (para que deslizar no espere).
+  useEffect(() => {
+    setTope((t) => Math.max(t, activo + 1));
+  }, [activo]);
 
   // Qué captura está a la vista: la que ocupa más del 60 % de la pista.
   useEffect(() => {
@@ -166,16 +203,26 @@ export function GaleriaCarrusel({
           >
             <figure className="m-0">
               <div className="overflow-hidden rounded-[12px] border border-paper-2 bg-paper-1 shadow-sh-1">
-                <Image
-                  src={`${base ?? `/piezas/${frente}`}/${g.archivo}`}
-                  alt={g.pie}
-                  width={ancho}
-                  height={alto}
-                  sizes={sizes}
-                  unoptimized={sinOptimizar}
-                  loading="lazy"
-                  className="block h-auto w-full"
-                />
+                {pedir(i) ? (
+                  <Image
+                    src={`${base ?? `/piezas/${frente}`}/${g.archivo}`}
+                    alt={g.pie}
+                    width={ancho}
+                    height={alto}
+                    sizes={sizes}
+                    unoptimized={sinOptimizar}
+                    loading="lazy"
+                    className="block h-auto w-full"
+                  />
+                ) : (
+                  // El hueco de la pantalla que todavía no se pide: mismo
+                  // encuadre, para que la pista no salte al llegar la imagen.
+                  <div
+                    aria-hidden="true"
+                    style={{ aspectRatio: `${ancho} / ${alto}` }}
+                    className="block w-full"
+                  />
+                )}
               </div>
               <figcaption className="mt-2 flex flex-wrap items-baseline gap-x-2 text-[12.5px] leading-snug text-ink-2">
                 <span className="font-mono text-[10px] tracking-[0.06em] uppercase">
