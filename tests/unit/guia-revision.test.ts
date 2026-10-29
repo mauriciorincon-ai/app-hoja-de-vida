@@ -74,7 +74,7 @@ function abrir(
 const minutos = (li: HTMLElement) =>
   Number(li.getAttribute("data-rev-min") ?? li.getAttribute("data-ensayo"));
 
-describe("la guía v26 · el filtro «Revisión completa»", () => {
+describe("la guía v27 · el filtro «Revisión completa»", () => {
   it("es el primero de la barra, está activo al abrir y muestra solo las filas de las sentadas", () => {
     const { doc, filas, filtro } = abrir();
     const botones = [...doc.querySelectorAll(".filtros button")];
@@ -186,7 +186,7 @@ describe("la guía v26 · el filtro «Revisión completa»", () => {
   });
 });
 
-describe("la guía v26 · las sentadas y las sumas", () => {
+describe("la guía v27 · las sentadas y las sumas", () => {
   it("cada sentada tiene su título y sus filas, ninguna pasa de 45 min y las sumas son las de la página", () => {
     const { doc, filas, calc } = abrir();
     const sentadas = [
@@ -279,7 +279,7 @@ describe("la guía v26 · las sentadas y las sumas", () => {
   });
 });
 
-describe("la guía v26 · el sí/no y la nota", () => {
+describe("la guía v27 · el sí/no y la nota", () => {
   it("cada prueba tiene su sí, su no y su nota; marcar guarda y cuenta", () => {
     const { doc, window, calc, click } = abrir();
     const pruebas = [...doc.querySelectorAll<HTMLElement>("ul.pasos li[id]")];
@@ -408,7 +408,7 @@ describe("la guía v26 · el sí/no y la nota", () => {
   });
 });
 
-describe("la guía v26 · «Copiar mis respuestas»", () => {
+describe("la guía v27 · «Copiar mis respuestas»", () => {
   function conRespuestas(portapapeles?: unknown) {
     const a = abrir();
     if (portapapeles !== undefined)
@@ -443,7 +443,7 @@ describe("la guía v26 · «Copiar mis respuestas»", () => {
     (doc.getElementById("rev-copiar") as HTMLButtonElement).click();
     await new Promise((r) => setTimeout(r, 0));
     expect(copiado).toMatch(
-      /^CV Viva · Revisión completa · guía v26\nFecha: \d{4}-\d{2}-\d{2}\n/,
+      /^CV Viva · Revisión completa · guía v27\nFecha: \d{4}-\d{2}-\d{2}\n/,
     );
     expect(copiado).toMatch(
       /Totales: \d+ pruebas · sí 1 · no 2 · pendientes \d+/,
@@ -496,7 +496,7 @@ describe("la guía v26 · «Copiar mis respuestas»", () => {
     await new Promise((r) => setTimeout(r, 0));
     const area = doc.getElementById("rev-texto") as HTMLTextAreaElement;
     expect(area.hasAttribute("hidden")).toBe(false);
-    expect(area.value).toContain("guía v26");
+    expect(area.value).toContain("guía v27");
     expect(area.value).toContain("nota: el botón no responde");
     expect(area.selectionStart).toBe(0);
     expect(area.selectionEnd).toBe(area.value.length);
@@ -514,7 +514,7 @@ describe("la guía v26 · «Copiar mis respuestas»", () => {
   });
 });
 
-describe("la guía v26 · lo que entra", () => {
+describe("la guía v27 · lo que entra", () => {
   it("las seis pruebas nuevas existen, son del S21, tienen sentada y la opcional lo dice", () => {
     const { doc } = abrir();
     for (const id of ["m15", "f12", "q25", "q26", "o15", "o16"]) {
@@ -554,7 +554,7 @@ describe("la guía v26 · lo que entra", () => {
  * Ahora la guía avisa a la vista si no guarda o está vacía, y «Restaurar desde texto» vuelve
  * a cargar lo que «Copiar mis respuestas» copió, de cualquier versión, casando por id.
  */
-describe("la guía v26 · guardar y restaurar", () => {
+describe("la guía v27 · guardar y restaurar", () => {
   /** Copia con el botón y devuelve el texto que quedó en el portapapeles. */
   async function copiar(a: ReturnType<typeof abrir>) {
     let copiado = "";
@@ -785,7 +785,7 @@ describe("la guía v26 · guardar y restaurar", () => {
   });
 });
 
-describe("la guía v26 · las frases que el sprint dejó falsas", () => {
+describe("la guía v27 · las frases que el sprint dejó falsas", () => {
   it("A1 · fuera del historial, nada dice que «Métodos» está entre el portafolio y los Estudios", () => {
     const vigente = HTML.slice(
       0,
@@ -824,7 +824,7 @@ describe("la guía v26 · las frases que el sprint dejó falsas", () => {
 describe("la guía S24 · las filas del chat", () => {
   const FILAS_DEL_S24 = ["f2", "f9", "f12", "o1", "o9", "o10", "n8"];
 
-  it("f2, f9, f12, o9, o10 y n8 llevan data-cambio 24 y «Mejorado · S24»; la R6 y la o1 las volvió a reescribir el S25", () => {
+  it("f2, f9, f12, o9, o10 y n8 llevan data-cambio 24 y «Mejorado · S24»; la R6 la volvió a reescribir el S25 y la o1 el S27", () => {
     const a = abrir();
     const r6 = a
       .filas()
@@ -835,11 +835,11 @@ describe("la guía S24 · las filas del chat", () => {
     expect(r6?.textContent).toContain("Mejorado · S25");
     for (const id of FILAS_DEL_S24) {
       const li = a.doc.getElementById(id) as HTMLElement;
-      const delS25 = id === "o1";
-      expect(li.getAttribute("data-cambio"), id).toBe(delS25 ? "25" : "24");
+      const delS27 = id === "o1";
+      expect(li.getAttribute("data-cambio"), id).toBe(delS27 ? "27" : "24");
       expect(li.getAttribute("data-origen"), id).toBe("mejorado");
       expect(li.textContent, id).toContain(
-        delS25 ? "Mejorado · S25" : "Mejorado · S24",
+        delS27 ? "Mejorado · S27" : "Mejorado · S24",
       );
     }
   });
@@ -943,15 +943,16 @@ describe("la guía S24 · las filas del chat", () => {
  * o1, q20 y q22. Vuelven a pendiente y muestran lo que el dueño había respondido («Antes del
  * S25»). Las del S24 que no se tocaron siguen siendo del S24: la migración es por versión.
  */
-describe("la guía v26 · el CV, los casos y el PDF", () => {
-  const FILAS_DEL_S25 = ["c2", "c3", "a10", "d1", "d3", "g1d", "o1", "q20", "q22"];
+describe("la guía v27 · el CV, los casos y el PDF", () => {
+  // La o1 también era del S25: la reescribió el S27 y ya vive allí.
+  const FILAS_DEL_S25 = ["c2", "c3", "a10", "d1", "d3", "g1d", "q20", "q22"];
   const FLUJOS_DEL_S25 = [
     "R3 · Dos casos de estudio",
     "R4 · El CV en PDF",
     "R6 · El chat, como visitante nuevo",
   ];
 
-  it("las doce filas llevan data-cambio 25, «mejorado» y «Mejorado · S25»", () => {
+  it("las once filas llevan data-cambio 25, «mejorado» y «Mejorado · S25»", () => {
     const a = abrir();
     for (const id of FILAS_DEL_S25) {
       const li = a.doc.getElementById(id) as HTMLElement;
@@ -1029,11 +1030,11 @@ describe("la guía v26 · el CV, los casos y el PDF", () => {
  * migración es por versión y no las mueve dos veces.
  */
 describe("la guía v26 · las fichas de las apps", () => {
-  const FILAS_DEL_S26 = ["k1b", "k10", "k11", "k13", "k15f", "k17", "l6", "m6"];
+  // El S27 reescribió después la k15f y la k17 (y la k6, la o1): ya viven allí. Del S26 quedan seis.
+  const FILAS_DEL_S26 = ["k1b", "k10", "k11", "k13", "l6", "m6"];
 
-  it("la página dice v26 y las ocho filas llevan data-cambio 26, «mejorado» y «Mejorado · S26»", () => {
+  it("las seis filas que siguen siendo del S26 llevan data-cambio 26, «mejorado» y «Mejorado · S26»", () => {
     const a = abrir();
-    expect(a.doc.getElementById("revision")?.getAttribute("data-version")).toBe("v26");
     for (const id of FILAS_DEL_S26) {
       const li = a.doc.getElementById(id) as HTMLElement;
       expect(li.getAttribute("data-cambio"), id).toBe("26");
@@ -1061,16 +1062,76 @@ describe("la guía v26 · las fichas de las apps", () => {
 
   it("las filas del S25 que no se tocaron siguen siendo del S25 (la migración no las mueve dos veces)", () => {
     const a = abrir();
-    for (const id of ["c2", "c3", "a10", "d1", "d3", "g1d", "o1", "q20", "q22"]) {
+    for (const id of ["c2", "c3", "a10", "d1", "d3", "g1d", "q20", "q22"]) {
       expect(a.doc.getElementById(id)?.getAttribute("data-cambio"), id).toBe("25");
     }
   });
 
   it("lo que respondió el dueño en una fila reescrita por el S26 pasa a «Antes del S26» y la fila vuelve a pendiente", () => {
-    const a = abrir({ [NS + "k17"]: "si", [NS + "k17:nota"]: "se veía bien" });
-    const k17 = a.doc.getElementById("k17") as HTMLElement;
-    expect((k17.querySelector('input[value="si"]') as HTMLInputElement).checked).toBe(false);
-    expect(k17.textContent).toContain("Antes del S26 respondiste: Sí");
-    expect(k17.textContent).toContain("se veía bien");
+    const a = abrir({ [NS + "k10"]: "si", [NS + "k10:nota"]: "se veía bien" });
+    const k10 = a.doc.getElementById("k10") as HTMLElement;
+    expect((k10.querySelector('input[value="si"]') as HTMLInputElement).checked).toBe(false);
+    expect(k10.textContent).toContain("Antes del S26 respondiste: Sí");
+    expect(k10.textContent).toContain("se veía bien");
+  });
+});
+
+/**
+ * S27 (las diez fichas al día y Vesting con su respuesta fija). Cuatro filas cambiaron de texto: k6 (las descartadas ya no se
+ * pintan), k15f (el orden de las profesionales y la portada de las diez), k17 (los cruces entre filas de «Cómo funciona») y o1
+ * (la salida de Vesting es una respuesta fija). Vuelven a pendiente y muestran lo que el dueño había respondido («Antes del S27»).
+ * Las del S26 que no se tocaron siguen siendo del S26: la migración es por versión y no las mueve dos veces.
+ */
+describe("la guía v27 · las diez fichas al día y Vesting", () => {
+  const FILAS_DEL_S27 = ["k6", "k15f", "k17", "o1"];
+
+  it("la página dice v27 y las cuatro filas llevan data-cambio 27, «mejorado» y «Mejorado · S27»", () => {
+    const a = abrir();
+    expect(a.doc.getElementById("revision")?.getAttribute("data-version")).toBe("v27");
+    for (const id of FILAS_DEL_S27) {
+      const li = a.doc.getElementById(id) as HTMLElement;
+      expect(li.getAttribute("data-cambio"), id).toBe("27");
+      expect(li.getAttribute("data-origen"), id).toBe("mejorado");
+      expect(li.textContent, id).toContain("Mejorado · S27");
+    }
+    expect(a.doc.querySelectorAll('[data-cambio="27"]').length).toBe(FILAS_DEL_S27.length);
+  });
+
+  it("las frases que el sprint dejó falsas ya no están: k6 no dice «tachadas», k15f no dice el orden de antes ni «solo Innmobiliaria», o1 no dice que responde «con la prosa»", () => {
+    const a = abrir();
+    const texto = (id: string) => (a.doc.getElementById(id)!.textContent ?? "").replace(/\s+/g, " ");
+    expect(texto("k6")).not.toMatch(/aparecen tachadas|se ve que no son pendientes/);
+    expect(texto("k6")).toContain("Ninguna ficha muestra funcionalidades descartadas");
+    expect(texto("k15f")).not.toContain("solo Innmobiliaria conserva");
+    expect(texto("k15f")).not.toContain("Probeta DS · Dash Agent · Anonimizador Velo");
+    // El orden del YAML (OM-27) está escrito en la fila, tal cual.
+    expect(texto("k15f")).toContain(
+      "Probeta DS · planlang · HackGuard · Anonimizador Velo · Big-D · Dash Agent · AngelGhost",
+    );
+    expect(texto("o1")).toContain("una respuesta fija, sin modelo");
+    expect(texto("o1")).not.toContain("La de Vesting cuenta cómo cerró la etapa");
+  });
+
+  it("las filas del S26 que no se tocaron siguen siendo del S26 (la migración no las mueve dos veces)", () => {
+    const a = abrir();
+    for (const id of ["k1b", "k10", "k11", "k13", "l6", "m6"]) {
+      expect(a.doc.getElementById(id)?.getAttribute("data-cambio"), id).toBe("26");
+    }
+  });
+
+  it("lo que respondió el dueño en una fila reescrita por el S27 pasa a «Antes del S27»; una del S26 ya migrada no se mueve", () => {
+    const a = abrir({
+      [NS + "migrado:26"]: "1",
+      [NS + "k6"]: "si",
+      [NS + "k6:nota"]: "las vi tachadas",
+      [NS + "k10"]: "si", // del S26, ya migrado: se queda como estaba
+    });
+    const k6 = a.doc.getElementById("k6") as HTMLElement;
+    expect((k6.querySelector('input[value="si"]') as HTMLInputElement).checked).toBe(false);
+    expect(k6.textContent).toContain("Antes del S27 respondiste: Sí");
+    expect(k6.textContent).toContain("las vi tachadas");
+    expect(
+      (a.doc.getElementById("k10")!.querySelector('input[value="si"]') as HTMLInputElement).checked,
+    ).toBe(true);
   });
 });
