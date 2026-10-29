@@ -485,16 +485,32 @@ el mensaje te llega al correo.
     promesa, las cifras, las funcionalidades agrupadas en tarjetas que se abren solas al llegar
     leyendo, y los detalles finos (privacidad, stack, funcionalidades descartadas).
     Al pie del escaparate, el bloque **«De esta casa»** enlaza las dos brochures propias.
-- **De dónde sale la ficha técnica:** del `brochure-export.json` de la app **más un complemento**
-  que hoy escribe esta casa, en `data/fichas/<app>.yaml`: el titular, cuáles 3–5 cifras van
-  arriba, los límites, los «nunca» y el proceso. Cada complemento dice `procedencia: cv-viva`, y la
-  ficha lo declara al pie del diagrama: **el proceso lo derivó CV Viva del export; la app aún no
-  lo envía**. El día que la app lo mande en su export, ese archivo se retira.
-- **Cómo cambiar el titular, las cifras destacadas, los límites o el proceso de una app:** edita
-  `data/fichas/<app>.yaml` y haz push. El proceso se describe con datos (carriles · pasos ·
-  flujos · anotaciones), no se dibuja: el diagrama lo genera la app. Si el proceso está mal
+- **De dónde sale la ficha técnica:** del `brochure-export.json` de la app **más un complemento**,
+  en `data/fichas/<app>.yaml`: el titular, cuáles 3–5 cifras van arriba, los límites, los «nunca» y
+  el proceso. Desde el pedido 026 (Sprint 026) **los exporta y los cura la planeadora** —ya no se
+  escriben aquí— y cada complemento dice `procedencia: planeadora`; la ficha lo declara al pie del
+  diagrama («Proceso trazado por el pipeline AI-APPs…»). Los complementos no se editan aquí: llegan
+  por copia, con el export y las capturas de la misma app.
+- **Las diez apps traen «Cómo funciona»** (un gate lo exige: si una app sale sin proceso, la
+  publicación falla nombrándola) y **a lo sumo un cero en su tira de cifras**: un cero vale cuando
+  es LA promesa de la app («cero IA»), y los demás siguen completos en la ficha de detalle, con su
+  fuente. Qué cifras van en la tira lo decide el complemento.
+- **El Stack, explicado:** las cápsulas de arriba son la vista comprimida; debajo, «Para qué sirve
+  cada uno» las despliega con el para qué de cada componente (lo que antes escondía un tooltip que
+  no existe en el teléfono). Vale igual para apps, agentes, investigaciones y tableros.
+- **Las pantallas, una por funcionalidad:** cada app llega con su tabla de capturas
+  (`content/vitrina/<app>.capturas.yaml`) y sus imágenes (`public/vitrina/<app>/`). En la ficha de
+  detalle, cada grupo abre con un carrusel con la pantalla de cada funcionalidad que la tiene; las
+  transversales no llevan figura. La portada de la tarjeta del escaparate es la pantalla de entrada.
+  Un gate exige que toda funcionalidad tenga su captura o esté declarada sin pantalla, que cada
+  archivo exista y sea un WebP de 1536×960 y ≤ 80 KB.
+- **Cómo cambiar el titular, las cifras destacadas, los límites o el proceso de una app:** se pide a
+  la planeadora, que cura su entrega; aquí se copia. El proceso se describe con datos (carriles ·
+  pasos · flujos · anotaciones), no se dibuja: el diagrama lo genera la app. Si el proceso está mal
   formado (sin fin, una decisión con un solo camino, un paso al que nadie llega, una cifra que no
   existe en el export), **la publicación falla** y el error dice qué y dónde.
+- **Una excepción de palabra:** planlang llama «vitrina» a su propia pantalla y la conserva; el resto
+  del sitio dice «portafolio» (`CONSERVAN_VITRINA` en `scripts/sin-vitrina.mjs`).
 - **Para que otra casa produzca fichas técnicas** (investigaciones, agentes, tableros): el
   paquete de entrega está en `docs/contrato-ficha-tecnica/` — empieza por `CLAVE-VISUAL.md`.
   Entregan un JSON; CV Viva lo pinta. Nunca HTML. Contrato vigente: **v1.3.1** (ver «Cómo
@@ -509,12 +525,10 @@ el mensaje te llega al correo.
   falla** y el error dice qué archivo y qué campo — nunca se publica una ficha que miente sobre sí
   misma.
 - **Las imágenes de las pantallas:** son capturas de cada app **corriendo de verdad**, con datos
-  inventados, tomadas con un comando de este repo y **repintadas con la paleta de la hoja de vida**
-  para que las seis se vean de la misma casa. Para regenerarlas:
-  - necesitas las apps hermanas clonadas al lado de este repo, con sus dependencias instaladas, y
-    `cwebp` disponible (`brew install webp`);
-  - `pnpm capturas:vitrina` las rehace todas, `pnpm capturas:vitrina habla` solo una;
-  - quedan en `public/vitrina/` como WebP.
+  inventados, que toma la planeadora desde una copia aislada de la app y entrega ya en WebP. **Aquí
+  no se toman ni se regeneran:** se copian byte a byte (el comando `pnpm capturas:vitrina` se retiró
+  en el Sprint 026). Cada una se revisa una por una antes de entrar: datos sintéticos, sin personas
+  reales y, en las apps de un menor, sin nada que lo identifique.
 - **Ninguna ficha entrega un enlace** a la app ni a su repositorio: se muestra la **razón** de que
   no lo haya y un único botón de **lista de espera** (solo en las apps), sin promesa de fecha.
 - **Lo que se muestra es la versión anclada** del export (con su fecha, a la vista al pie de cada

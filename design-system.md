@@ -501,10 +501,14 @@ cifra `clamp(3.5rem,8vw,4.75rem)`; tres columnas dejaban dos huérfanos.
   lleva su tira** (diez desde 2026-10-11: AngelGhost, planlang, Big-D y HackGuard entraron sin ella y
   la muestra pintó el marco vacío) y **sin tira no se pinta ni el marco**; la gramática y la
   presencia las vigila `tests/unit/maquetas.test.tsx`, y el escaparate las cuenta en e2e.
-- **Captura repintada**: pantalla real de la app hermana corriendo, fotografiada con los tokens de
-  CV Viva inyectados (`scripts/tema-cv-viva.mjs`) para que las seis se vean de la misma casa.
-  Banner apaisado enmarcado en paper-1, `alt=""` con pie visible que **declara el repintado** —
-  una imagen retocada que se presenta como cruda miente igual que una maqueta que finge ser foto.
+- **Captura**: pantalla real de la app hermana corriendo (1536×960, WebP ≤ 80 KB, datos
+  sintéticos), una por funcionalidad que tiene pantalla, en un carrusel dentro de la tarjeta de su
+  grupo (`GaleriaCarrusel`, patrón APG: sin rotación automática, botones apagados con
+  `aria-disabled`). Cada una lleva su pie visible —id y nombre de la funcionalidad, y una frase—;
+  la portada del escaparate es la pantalla de entrada. Una imagen retocada que se presenta como
+  cruda miente igual que una maqueta que finge ser foto: las capturas llegan tal cual las toma la
+  planeadora (`scripts/tema-cv-viva.mjs` se conserva: es el tema que ella puede leer para
+  repintar una toma).
 - **Página de simulación** (`/portafolio/apps/<slug>/simulacion`, 2026-10-12, ADR-029): para la app
   privada cuya casa entrega una simulación estática. Contenedor `max-w-6xl`; arriba lo de CV Viva
   —el regreso a la ficha en mono, el **rótulo «Simulación · no operativo» en `peach`** (chip
