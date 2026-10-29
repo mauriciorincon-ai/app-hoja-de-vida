@@ -282,8 +282,7 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
         await page.goto(`/es/portafolio/apps/${slug}${sufijo}`);
         const anterior = page.getByRole("link", { name: /App anterior/ });
         const siguiente = page.getByRole("link", { name: /App siguiente/ });
-        const ruta = (v: string) =>
-          new RegExp(`/portafolio/apps/${v}${sufijo}$`);
+        const ruta = (v: string) => new RegExp(`/portafolio/apps/${v}${sufijo}$`);
         if (i === 0) await expect(anterior, `${slug}${sufijo}`).toHaveCount(0);
         else
           await expect(anterior, `${slug}${sufijo}`).toHaveAttribute(
@@ -338,9 +337,7 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
         if (oficial === exp.app.nombre || oficial.includes(exp.app.nombre))
           continue;
         const cuerpo = await (
-          await page.request.get(
-            `/${l}/portafolio/apps/${exp.app.slug}/detalle`,
-          )
+          await page.request.get(`/${l}/portafolio/apps/${exp.app.slug}/detalle`)
         ).text();
         expect(cuerpo, `${l}/${exp.app.slug}`).not.toContain(exp.app.nombre);
       }
@@ -355,9 +352,7 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
     // La primera del orden nunca tiene «anterior», pero siempre tiene vecina.
     await expect(siguiente).toBeVisible();
     await siguiente.click();
-    await expect(page).toHaveURL(
-      /\/es\/portafolio\/apps\/[a-z0-9-]+\/detalle$/,
-    );
+    await expect(page).toHaveURL(/\/es\/portafolio\/apps\/[a-z0-9-]+\/detalle$/);
     await expect(page.locator("article[data-app-slug]")).toHaveCount(1);
     // Y desde ahí se sube a la ficha técnica, al escaparate, y al portal.
     await page.getByRole("link", { name: /Volver a la ficha técnica/ }).click();
@@ -996,9 +991,7 @@ test.describe("Vitrina — las estanterías: un frente ABIERTO y sus piezas (S7)
       .getAttribute("data-muestra-slug");
     await page.goto(`/es/portafolio/${f.id}/${primera}`);
     await page.getByText("Producto siguiente").click();
-    await expect(page).toHaveURL(
-      new RegExp(`/es/portafolio/${f.id}/[a-z0-9-]+$`),
-    );
+    await expect(page).toHaveURL(new RegExp(`/es/portafolio/${f.id}/[a-z0-9-]+$`));
     // Y la miga vuelve al escaparate del frente, no a la vitrina entera.
     await page.getByText(`Volver a ${f.nombre.es}`).click();
     await expect(page).toHaveURL(new RegExp(`/es/portafolio/${f.id}$`));
