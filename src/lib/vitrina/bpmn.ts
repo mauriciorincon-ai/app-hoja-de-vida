@@ -389,10 +389,27 @@ export function trazar(proceso: Proceso, opciones: Opciones = {}): Trazo {
     } else if (A.col < B.col) {
       // Adelante, cambia de carril: canal vertical justo antes de la columna destino.
       const canal = colXB - 8;
+      // Si el carril del ORIGEN tiene cajas entre A y la columna del destino, el
+      // tramo recto pasaría por detrás de ellas («remite» → «fin» atravesaba
+      // «envía», Nutrikids, 026): sale por el CANAL de su carril —abajo si el
+      // destino está abajo, arriba si está arriba—, corre 7px fuera de las cajas
+      // y solo entonces cruza al carril del destino por el canal vertical.
+      const tapado = nodos.some(
+        (n) =>
+          n.fila === A.fila &&
+          n.carril === A.carril &&
+          n.col > A.col &&
+          n.col < B.col,
+      );
+      const bajando = B.y > A.y;
+      const carrilA = filaY.carriles.find((c) => c.id === A.carril)!;
+      const yCanalA = bajando ? carrilA.y + carrilA.alto - 14 : carrilA.y + 14;
       flujos.push({
         de: A.id,
         a: B.id,
-        d: `M${A.r},${A.y} H${canal} V${B.y} H${B.l}`,
+        d: tapado
+          ? `M${A.x},${bajando ? A.b : A.t} V${yCanalA} H${canal} V${B.y} H${B.l}`
+          : `M${A.r},${A.y} H${canal} V${B.y} H${B.l}`,
         etiqueta: f.etiqueta,
         // Sobre el tramo VERTICAL, a la altura del primer borde de carril que
         // cruza: esa franja nunca tiene cajas (van a ±29 del centro) ni
@@ -401,10 +418,9 @@ export function trazar(proceso: Proceso, opciones: Opciones = {}): Trazo {
         // decisión cuando el destino está en la columna siguiente
         // («no supera» + «sí» = «no superasí», DS 2026-09-06).
         lx: canal + 5,
-        ly:
-          B.y > A.y
-            ? A.y + G.ALTO_CARRIL / 2 - 5
-            : A.y - G.ALTO_CARRIL / 2 + 13,
+        ly: bajando
+          ? A.y + G.ALTO_CARRIL / 2 - 5
+          : A.y - G.ALTO_CARRIL / 2 + 13,
       });
     } else if (A.col === B.col) {
       // Vertical, misma columna.
