@@ -303,6 +303,153 @@ describe("trazar — los rótulos se leen (los procesos reales)", () => {
 });
 
 /**
+ * LOS EVENTOS DE ENLACE (S27). Cuando un proceso se parte en filas, cada cruce lleva un círculo con su letra en cada
+ * margen. Dos cruces del mismo carril y fila caían en el MISMO punto —dos círculos encimados, las letras una sobre
+ * otra, y el «sí» y el «no» de una misma compuerta en un solo trazo— y ningún gate lo miraba: solo veía que no se
+ * pisaran los rótulos. Innmobiliaria (siete cruces, una compuerta con dos salidas) lo puso en rojo.
+ * Invariantes: los círculos de un mismo margen nunca se tocan; cada flujo de un enlace termina (o empieza) EN su
+ * círculo; y ningún flujo ajeno atraviesa el círculo de otro.
+ */
+describe("trazar — los eventos de enlace (los procesos reales)", () => {
+  const R = G.RADIO_ENLACE;
+  /**
+   * DEUDA DECLARADA (S27, al lote del hito): en estos procesos el canal VERTICAL de una salida —baja al borde de la fila
+   * y sube por el margen derecho— pasa por el centro del círculo de un enlace de un carril más abajo. Ya era así antes
+   * del S27 (el trazo no cambió); lo vigila esta prueba por los dos lados: si un proceso nuevo lo hace, rojo; si uno de
+   * estos deja de hacerlo, rojo también, para sacarlo de la lista.
+   */
+  const CRUCE_CON_DEUDA = [
+    "anonimizador",
+    "big-d",
+    "copiloto-consultor",
+    "hackguard",
+  ];
+  // Distancia de un punto a un segmento horizontal o vertical.
+  const distancia = (
+    p: { x: number; y: number },
+    [x1, y1, x2, y2]: [number, number, number, number],
+  ) => {
+    const cx = Math.min(Math.max(p.x, Math.min(x1, x2)), Math.max(x1, x2));
+    const cy = Math.min(Math.max(p.y, Math.min(y1, y2)), Math.max(y1, y2));
+    return Math.hypot(p.x - cx, p.y - cy);
+  };
+
+  for (const { slug, proceso } of procesosReales) {
+    it(`${slug}: dos círculos de un mismo margen nunca se pisan`, () => {
+      const t = trazar(proceso);
+      for (const lado of ["salida", "entrada"] as const)
+        for (let i = 0; i < t.enlaces.length; i++)
+          for (let j = i + 1; j < t.enlaces.length; j++) {
+            const a = t.enlaces[i][lado];
+            const b = t.enlaces[j][lado];
+            if (a.x !== b.x) continue;
+            expect(
+              Math.hypot(a.x - b.x, a.y - b.y),
+              `los enlaces ${t.enlaces[i].letra} y ${t.enlaces[j].letra} (${lado}) caen en el mismo sitio`,
+            ).toBeGreaterThanOrEqual(2 * R);
+          }
+    });
+
+    it(`${slug}: cada flujo de un enlace empieza o termina EN su círculo`, () => {
+      const t = trazar(proceso);
+      for (const e of t.enlaces) {
+        const sal = t.flujos.find(
+          (f) => f.de === e.de && f.a === `enlace:${e.letra}`,
+        )!;
+        const ent = t.flujos.find(
+          (f) => f.de === `enlace:${e.letra}` && f.a === e.a,
+        )!;
+        const ss = segmentos(sal.d);
+        const fin = ss[ss.length - 1];
+        // Llega al círculo por la izquierda (recta) o por abajo (canal).
+        expect(
+          [fin[2], fin[3]],
+          `el flujo ${e.de}→${e.letra} no toca su círculo`,
+        ).toSatisfy(
+          ([x, y]: number[]) =>
+            (x === e.salida.x - R && y === e.salida.y) ||
+            (x === e.salida.x && y === e.salida.y + R),
+        );
+        const es = segmentos(ent.d);
+        const ini = es[0];
+        // Sale del círculo por la derecha (recta) o por arriba (canal).
+        expect(
+          [ini[0], ini[1]],
+          `el flujo ${e.letra}→${e.a} no sale de su círculo`,
+        ).toSatisfy(
+          ([x, y]: number[]) =>
+            (x === e.entrada.x + R && y === e.entrada.y) ||
+            (x === e.entrada.x && y === e.entrada.y - R),
+        );
+      }
+    });
+
+    it(`${slug}: ${CRUCE_CON_DEUDA.includes(slug) ? "(deuda declarada) un flujo pasa sobre el círculo de otro enlace" : "ningún flujo atraviesa el círculo de otro enlace"}`, () => {
+      const t = trazar(proceso);
+      const pisados: string[] = [];
+      for (const e of t.enlaces)
+        for (const p of [e.salida, e.entrada])
+          for (const f of t.flujos) {
+            // Los dos flujos del propio enlace sí tocan su círculo.
+            if (f.a === `enlace:${e.letra}` || f.de === `enlace:${e.letra}`)
+              continue;
+            if (segmentos(f.d).some((s) => distancia(p, s) <= R))
+              pisados.push(`${f.de}→${f.a} sobre ${e.letra}`);
+          }
+      if (CRUCE_CON_DEUDA.includes(slug))
+        expect(
+          pisados.length,
+          `«${slug}» ya no pasa sobre ningún círculo: sácala de CRUCE_CON_DEUDA`,
+        ).toBeGreaterThan(0);
+      else expect(pisados).toEqual([]);
+    });
+  }
+
+  it("una compuerta con dos salidas a la fila siguiente separa sus eventos y sus rótulos (sí / no)", () => {
+    const p: Proceso = {
+      carriles: [
+        { id: "a", nombre: "Dueño" },
+        { id: "b", nombre: "App" },
+      ],
+      pasos: [
+        { id: "ini", tipo: "inicio", texto: "", carril: "a" },
+        { id: "t1", tipo: "tarea", texto: "Hace algo", carril: "a" },
+        { id: "t2", tipo: "tarea", texto: "Revisa", carril: "a" },
+        { id: "dec", tipo: "decision", texto: "¿Listo?", carril: "a" },
+        { id: "fin", tipo: "fin", texto: "", carril: "b" },
+        { id: "otra", tipo: "tarea", texto: "Otra vez", carril: "b" },
+      ],
+      flujos: [
+        { de: "ini", a: "t1" },
+        { de: "t1", a: "t2" },
+        { de: "t2", a: "dec" },
+        { de: "dec", a: "fin", etiqueta: "sí" },
+        { de: "dec", a: "otra", etiqueta: "no" },
+      ],
+    } as Proceso;
+    const t = trazar(p, { columnasPorFila: 4 });
+    expect(t.enlaces).toHaveLength(2);
+    const [e1, e2] = t.enlaces;
+    expect(e1.salida.y).not.toBe(e2.salida.y);
+    expect(Math.abs(e1.salida.y - e2.salida.y)).toBeGreaterThanOrEqual(2 * R);
+    expect(e1.entrada.y).not.toBe(e2.entrada.y);
+    const rotulos = t.flujos.filter((f) => f.etiqueta && f.de === "dec");
+    expect(rotulos).toHaveLength(2);
+    const [r1, r2] = rotulos.map((f) => cajaRotulo(f)!);
+    expect(seCruzan(r1, r2)).toBe(false);
+  });
+
+  it("con UN solo evento por margen nada cambia: el mismo punto y el mismo trazo de siempre", () => {
+    const t = trazar(habla, { columnasPorFila: 6 });
+    const nodo = Object.fromEntries(t.nodos.map((n) => [n.id, n]));
+    for (const e of t.enlaces) {
+      expect(e.salida.y).toBe(nodo[e.de].y);
+      expect(e.entrada.y).toBe(nodo[e.a].y);
+    }
+  });
+});
+
+/**
  * Lo que la revisión visual del 2026-09-06 destapó de rebote en Dash: el
  * «no» de «¿Corregir?» iba RECTO al fin por el mismo carril, pasando por
  * detrás de «Corrige la memoria» — la caja tapaba la línea y el rótulo, y la
