@@ -18,11 +18,17 @@ import { agruparFuentes, fuentesCitadas } from "@/lib/ia/fuentes";
 import { RESPUESTA_OFFTOPIC } from "@/lib/ia/guardrails";
 import { esPreguntaDeAusencia, RESPUESTA_REHUSO } from "@/lib/ia/rehuso";
 import {
+  esPreguntaPorLaSalida,
+  fuenteDeLaSalida,
+  RESPUESTA_SALIDA,
+} from "@/lib/ia/salida-de-vesting";
+import {
   createRetriever,
   type Retriever,
   TOP_K_CONTEXTO,
 } from "@/lib/ia/retrieval";
 import {
+  type ChatChunk,
   parseChatIndex,
   type ChatUIMessage,
   type Fuente,
@@ -103,6 +109,7 @@ export function ChatPanel({
   const inputRef = useRef<HTMLInputElement>(null);
   const logRef = useRef<HTMLDivElement>(null);
   const retrieverRef = useRef<Retriever | null>(null);
+  const chunksRef = useRef<ChatChunk[]>([]);
   const ultimaPreguntaRef = useRef("");
   const [sesion, setSesion] = useState<EstadoSesion>("cargando");
   const [gateActiva, setGateActiva] = useState(false);
@@ -200,6 +207,7 @@ export function ChatPanel({
     if (!retrieverRef.current) {
       const res = await fetch(`/chat-index.${locale}.json`);
       const index = parseChatIndex(await res.json(), "chat-index");
+      chunksRef.current = index.chunks;
       retrieverRef.current = createRetriever(index.chunks);
     }
     return retrieverRef.current;
@@ -240,7 +248,24 @@ export function ChatPanel({
       // trasera: sin servidor también se rehúsa lo que pide una ausencia y se
       // declina lo ajeno, sin fragmentos crudos del corpus (que están en primera
       // persona) ni chips (auditoría S24, A3).
-      const fija = esPreguntaDeAusencia(pregunta)
+      const ausencia = esPreguntaDeAusencia(pregunta);
+      // La salida de Vesting (S27): la misma respuesta fija y la misma cita que da el servidor, sobre el índice que el
+      // modo local ya carga. Sin proveedor no hay otra cosa que decir, y no es una puerta trasera a la prosa en primera
+      // persona del corpus.
+      if (!ausencia && esPreguntaPorLaSalida(pregunta)) {
+        await cargarRetriever();
+        const fuente = fuenteDeLaSalida(chunksRef.current, locale);
+        if (fuente) {
+          agregarMensaje("assistant", [
+            { type: "data-fuentes", data: [fuente] },
+            { type: "text", text: RESPUESTA_SALIDA[locale] },
+          ]);
+          trackEvent("chat_respuesta", { modo: "fallback" });
+          registrarLocal(pregunta, RESPUESTA_SALIDA[locale], [fuente]);
+          return;
+        }
+      }
+      const fija = ausencia
         ? RESPUESTA_REHUSO[locale]
         : esTemaAjeno(pregunta)
           ? RESPUESTA_OFFTOPIC[locale]

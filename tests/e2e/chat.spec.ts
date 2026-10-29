@@ -183,6 +183,27 @@ test.describe("chat — flujo estrella", () => {
     });
   }
 
+  test("«¿Por qué salió de Vesting?» → respuesta fija con su cita a «Trayectoria», sin proveedor (S27)", async ({
+    page,
+  }) => {
+    await page.goto("/es");
+    await abrirChat(page);
+    await preguntar(page, "¿Por qué salió de Vesting?");
+
+    // El mock del e2e habría contestado con su prosa de siempre («Microsoft Fabric…»): este texto es el FIJO.
+    const respuesta = page.getByTestId("chat-mensaje-asistente").last();
+    await expect(respuesta).toContainText(
+      "Henry cerró su etapa en Vesting en enero de 2025",
+      { timeout: 15_000 },
+    );
+    await expect(respuesta).toContainText("Inglopres");
+    await expect(respuesta).not.toContainText("Microsoft Fabric");
+    // La cita [1] es un chip a la Trayectoria, como cualquier otra respuesta.
+    const fuente = respuesta.getByTestId("chat-fuente").first();
+    await expect(fuente).toHaveText(/^\[1\] AF-02 · Trayectoria$/);
+    await expect(fuente).toHaveAttribute("href", /\/trayectoria|#trayectoria/);
+  });
+
   test("pregunta off-topic → respuesta estática elegante (sin proveedor)", async ({
     page,
   }) => {
@@ -253,6 +274,36 @@ test.describe("chat — la puerta", () => {
 });
 
 test.describe("chat — degradación honesta", () => {
+  test("búsqueda local: la salida de Vesting recibe la misma respuesta fija con su cita (S27)", async ({
+    page,
+  }) => {
+    test.slow();
+    await page.route("**/api/chat", (route) =>
+      route.fulfill({
+        status: 503,
+        contentType: "application/json",
+        body: JSON.stringify({ error: "fallback" }),
+      }),
+    );
+
+    await page.goto("/es");
+    await abrirChat(page);
+    await preguntar(page, "¿Por qué salió de Vesting?");
+
+    // Sin servidor también se responde lo mismo, con el chip a «Trayectoria»: no es una puerta trasera a la prosa
+    // en primera persona del corpus.
+    const respuesta = page.getByTestId("chat-mensaje-asistente").last();
+    await expect(respuesta).toContainText(
+      "Henry cerró su etapa en Vesting en enero de 2025",
+      { timeout: 15_000 },
+    );
+    await expect(respuesta).not.toContainText("Sobre eso no puedo responder");
+    await expect(respuesta).not.toContainText("Mi etapa");
+    await expect(respuesta.getByTestId("chat-fuente").first()).toHaveText(
+      /^\[1\] AF-02 · Trayectoria$/,
+    );
+  });
+
   test("proveedor caído (503) → búsqueda local con aviso y fuentes del índice", async ({
     page,
   }) => {

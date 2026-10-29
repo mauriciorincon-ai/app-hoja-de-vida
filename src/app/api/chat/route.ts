@@ -19,6 +19,11 @@ import {
 import { getChatIndex } from "@/lib/ia/index-server";
 import { chatHabilitado, resolverProveedor } from "@/lib/ia/provider";
 import { esPreguntaDeAusencia, RESPUESTA_REHUSO } from "@/lib/ia/rehuso";
+import {
+  esPreguntaPorLaSalida,
+  fuenteDeLaSalida,
+  RESPUESTA_SALIDA,
+} from "@/lib/ia/salida-de-vesting";
 import { TOP_K_CONTEXTO } from "@/lib/ia/retrieval";
 import {
   chatRequestSchema,
@@ -79,6 +84,24 @@ function respuestaEstatica(texto: string): Response {
       writer.write({ type: "text-start", id: "estatica" });
       writer.write({ type: "text-delta", id: "estatica", delta: texto });
       writer.write({ type: "text-end", id: "estatica" });
+      writer.write({ type: "finish" });
+    },
+  });
+  return createUIMessageStreamResponse({ stream });
+}
+
+/**
+ * Respuesta fija CON su cita (S27, la salida de Vesting): el mismo stream que el del modelo —`data-fuentes` y el texto—
+ * pero sin proveedor. No lleva `data-offtopic`: es una respuesta de contenido, no una declinación.
+ */
+function respuestaFijaConFuentes(texto: string, fuentes: Fuente[]): Response {
+  const stream = createUIMessageStream<ChatUIMessage>({
+    execute: ({ writer }) => {
+      writer.write({ type: "start" });
+      writer.write({ type: "data-fuentes", data: fuentes });
+      writer.write({ type: "text-start", id: "fija" });
+      writer.write({ type: "text-delta", id: "fija", delta: texto });
+      writer.write({ type: "text-end", id: "fija" });
       writer.write({ type: "finish" });
     },
   });
@@ -197,7 +220,37 @@ export async function POST(request: Request): Promise<Response> {
   // 3d. Lo que el chat no contesta (S24): ni gasta un token ni cita una fuente.
   //     El rehúso y la ajena se registran como `offtopic` (decisión por
   //     omisión de la planeación: sin migración de Supabase, un modo menos).
-  const sinRespuesta = esPreguntaDeAusencia(pregunta.content)
+  const ausencia = esPreguntaDeAusencia(pregunta.content);
+
+  // 3d-bis. La salida de Vesting (S27): UNA respuesta fija con su cita, sin proveedor (cero tokens). Va después del
+  //     rehúso y antes de la ajena. Se registra como `offtopic` —el modo de todo texto fijo desde el S24, sin
+  //     migración— pero ESTA vez con su fuente. Si el índice no trae el fragmento, la pregunta sigue al modelo: el
+  //     chat no muere (un test impide que eso pase en un build sano).
+  if (!ausencia && esPreguntaPorLaSalida(pregunta.content)) {
+    const fuente = fuenteDeLaSalida(getChatIndex(locale).index.chunks, locale);
+    if (fuente) {
+      log.info(
+        { motivo: "salida-de-vesting", ms: Date.now() - start },
+        "chat con respuesta fija y su cita — cero tokens",
+      );
+      registrar({
+        pregunta: pregunta.content,
+        respuesta: RESPUESTA_SALIDA[locale],
+        fuentes: [
+          { codigo: fuente.codigo, titulo: fuente.titulo, ancla: fuente.ancla },
+        ],
+        modo: "offtopic",
+        ms: Date.now() - start,
+      });
+      return respuestaFijaConFuentes(RESPUESTA_SALIDA[locale], [fuente]);
+    }
+    log.error(
+      { locale },
+      "la salida de Vesting no encontró su fragmento en el índice — sigue al modelo",
+    );
+  }
+
+  const sinRespuesta = ausencia
     ? { motivo: "ausencia", texto: RESPUESTA_REHUSO[locale] }
     : esTemaAjeno(pregunta.content)
       ? { motivo: "ajena", texto: RESPUESTA_OFFTOPIC[locale] }
