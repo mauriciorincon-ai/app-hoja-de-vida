@@ -756,22 +756,22 @@ describe("la guía v26 · guardar y restaurar", () => {
   });
 
   it("A2 · una línea de la v22 cuyo título cambió y trae «: » no corta la nota en el sitio equivocado", () => {
-    // Así copió la v22 la k1b: el título, truncado con «…», y tras «…: » la nota del dueño.
+    // Así copió la v22 la c1 (la k1b dejó de servir de vehículo: el S26 la reescribió y su respuesta vieja va a «Antes del S26»): el título, truncado con «…», y tras «…: » la nota del dueño.
     const texto = [
       "CV Viva · Revisión completa · guía v22",
       "Fecha: 2026-10-24",
       "",
       "SÍ CON NOTA (1)",
-      "  · k1b — 2 min Entra a Vitrina desde el menú: ves el portal con cuatro cajas en este…: MI NOTA k1b",
+      "  · c1 — 1 min En un hito de la Trayectoria, pulsa «Ver logros completos»: se despliegan los bullets; vuelve a pulsar y se…: MI NOTA c1",
     ].join("\n");
     const a = abrir();
     restaurar(a, texto);
-    expect((a.doc.getElementById("k1b-si") as HTMLInputElement).checked).toBe(
+    expect((a.doc.getElementById("c1-si") as HTMLInputElement).checked).toBe(
       true,
     );
     expect(
-      a.doc.querySelector<HTMLTextAreaElement>('[data-nota-de="k1b"]')!.value,
-    ).toBe("MI NOTA k1b");
+      a.doc.querySelector<HTMLTextAreaElement>('[data-nota-de="c1"]')!.value,
+    ).toBe("MI NOTA c1");
   });
 
   it("M3 · el aviso de que no guarda se ve bajo CUALQUIER filtro, no solo en «Revisión completa»", () => {
@@ -1024,14 +1024,14 @@ describe("la guía v26 · el CV, los casos y el PDF", () => {
 });
 
 /**
- * S26 (las fichas de las apps, a la altura). Seis filas cambiaron de texto: k10, k11, k13, k17, l6 y m6. Vuelven a
+ * S26 (las fichas de las apps, a la altura). Ocho filas cambiaron de texto: k1b, k10, k11, k13, k15f, k17, l6 y m6. Vuelven a
  * pendiente y muestran lo que el dueño había respondido («Antes del S26»). Las del S25 siguen siendo del S25: la
  * migración es por versión y no las mueve dos veces.
  */
 describe("la guía v26 · las fichas de las apps", () => {
-  const FILAS_DEL_S26 = ["k10", "k11", "k13", "k17", "l6", "m6"];
+  const FILAS_DEL_S26 = ["k1b", "k10", "k11", "k13", "k15f", "k17", "l6", "m6"];
 
-  it("la página dice v26 y las seis filas llevan data-cambio 26, «mejorado» y «Mejorado · S26»", () => {
+  it("la página dice v26 y las ocho filas llevan data-cambio 26, «mejorado» y «Mejorado · S26»", () => {
     const a = abrir();
     expect(a.doc.getElementById("revision")?.getAttribute("data-version")).toBe("v26");
     for (const id of FILAS_DEL_S26) {
@@ -1048,6 +1048,13 @@ describe("la guía v26 · las fichas de las apps", () => {
     const k17 = a.doc.getElementById("k17")!.textContent ?? "";
     expect(k17).not.toMatch(/no tienen el bloque/);
     expect(k17).not.toMatch(/solo las seis apps/);
+    // La tarjeta del escaparate ya no lleva una tira dibujada sino la portada de la app (Innmobiliaria conserva la tira
+    // hasta que llegue su entrega): las dos filas que describían el escaparate no pueden seguir diciendo «dibujada».
+    for (const id of ["k1b", "k15f"]) {
+      const texto = (a.doc.getElementById(id)!.textContent ?? "").replace(/\s+/g, " ");
+      expect(texto, id).toContain("portada");
+      expect(texto, id).not.toMatch(/su tira dibujada|un esquema dibujado/);
+    }
     expect(a.doc.getElementById("k11")!.textContent).not.toContain("declarado por CV Viva");
     expect(a.doc.getElementById("k13")!.textContent).not.toMatch(/derivó CV Viva/);
   });
