@@ -109,7 +109,10 @@ export function problemasDeCapturas(
  * capturas la usa para exigir los 1536×960 de cada imagen.
  */
 export function dimensionesWebp(b: Buffer): [number, number] | undefined {
-  if (b.toString("ascii", 0, 4) !== "RIFF" || b.toString("ascii", 8, 12) !== "WEBP")
+  if (
+    b.toString("ascii", 0, 4) !== "RIFF" ||
+    b.toString("ascii", 8, 12) !== "WEBP"
+  )
     return undefined;
   const tipo = b.toString("ascii", 12, 16);
   if (tipo === "VP8 ")
@@ -118,7 +121,8 @@ export function dimensionesWebp(b: Buffer): [number, number] | undefined {
     const v = b.readUInt32LE(21);
     return [(v & 0x3fff) + 1, ((v >> 14) & 0x3fff) + 1];
   }
-  if (tipo === "VP8X") return [b.readUIntLE(24, 3) + 1, b.readUIntLE(27, 3) + 1];
+  if (tipo === "VP8X")
+    return [b.readUIntLE(24, 3) + 1, b.readUIntLE(27, 3) + 1];
   return undefined;
 }
 

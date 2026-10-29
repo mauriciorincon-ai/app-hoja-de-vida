@@ -68,7 +68,10 @@ describe("las capturas de las apps que ya entregaron", () => {
 
       it(`cada imagen es un WebP de ${CAPTURA_ANCHO}×${CAPTURA_ALTO} y de ${CAPTURA_MAX_KB} KB como máximo`, () => {
         const tabla = leer();
-        const archivos = [tabla.portada, ...tabla.capturas.map((c) => c.archivo)];
+        const archivos = [
+          tabla.portada,
+          ...tabla.capturas.map((c) => c.archivo),
+        ];
         const mal: string[] = [];
         for (const a of archivos) {
           const f = path.join("public/vitrina", slug, a);
@@ -84,9 +87,9 @@ describe("las capturas de las apps que ya entregaron", () => {
       it("el escaparate le pinta su portada: la pantalla de entrada", () => {
         const tabla = leer();
         expect(tabla.portada).toMatch(/\.webp$/);
-        expect(existsSync(path.join("public/vitrina", slug, tabla.portada))).toBe(
-          true,
-        );
+        expect(
+          existsSync(path.join("public/vitrina", slug, tabla.portada)),
+        ).toBe(true);
       });
 
       it("cada grupo con pantallas las trae en el orden de sus funcionalidades", () => {
@@ -123,8 +126,16 @@ describe("problemasDeCapturas — lo que rompe y cómo lo dice", () => {
   const base: Capturas = {
     portada: "entrada.webp",
     capturas: [
-      { funcionalidad: "A1", archivo: "A1.webp", pie: { es: "uno", en: "one" } },
-      { funcionalidad: "A2", archivo: "A2.webp", pie: { es: "dos", en: "two" } },
+      {
+        funcionalidad: "A1",
+        archivo: "A1.webp",
+        pie: { es: "uno", en: "one" },
+      },
+      {
+        funcionalidad: "A2",
+        archivo: "A2.webp",
+        pie: { es: "dos", en: "two" },
+      },
     ],
     sin_pantalla: ["T1"],
   };
@@ -142,11 +153,19 @@ describe("problemasDeCapturas — lo que rompe y cómo lo dice", () => {
 
   it("una captura de una funcionalidad que el export no tiene se nombra", () => {
     const r = problemasDeCapturas(
-      { ...base, capturas: [...base.capturas, { ...base.capturas[0], funcionalidad: "Z9" }] },
+      {
+        ...base,
+        capturas: [
+          ...base.capturas,
+          { ...base.capturas[0], funcionalidad: "Z9" },
+        ],
+      },
       ids,
       todo,
     );
-    expect(r.join("|")).toContain("capturas.Z9: no es una funcionalidad del export");
+    expect(r.join("|")).toContain(
+      "capturas.Z9: no es una funcionalidad del export",
+    );
   });
 
   it("una captura que apunta al vacío se nombra con su archivo", () => {
@@ -160,7 +179,11 @@ describe("problemasDeCapturas — lo que rompe y cómo lo dice", () => {
   });
 
   it("una funcionalidad con captura y declarada sin pantalla se nombra", () => {
-    const r = problemasDeCapturas({ ...base, sin_pantalla: ["T1", "A1"] }, ids, todo);
+    const r = problemasDeCapturas(
+      { ...base, sin_pantalla: ["T1", "A1"] },
+      ids,
+      todo,
+    );
     expect(r.join("|")).toContain("A1: está en capturas y en sin_pantalla");
   });
 
@@ -174,11 +197,15 @@ describe("problemasDeCapturas — lo que rompe y cómo lo dice", () => {
   });
 
   it("el esquema rechaza una ruta que se escapa, un pie largo y un campo de más", () => {
-    expect(capturasSchema.safeParse({ ...base, portada: "../x.webp" }).success).toBe(false);
+    expect(
+      capturasSchema.safeParse({ ...base, portada: "../x.webp" }).success,
+    ).toBe(false);
     expect(
       capturasSchema.safeParse({
         ...base,
-        capturas: [{ ...base.capturas[0], pie: { es: "x".repeat(81), en: "ok" } }],
+        capturas: [
+          { ...base.capturas[0], pie: { es: "x".repeat(81), en: "ok" } },
+        ],
       }).success,
     ).toBe(false);
     expect(capturasSchema.safeParse({ ...base, otro: 1 }).success).toBe(false);

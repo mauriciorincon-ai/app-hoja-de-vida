@@ -35,9 +35,7 @@ const complementos = readdirSync("data/fichas")
  * proceso OPCIONAL (v1.1.0, una pieza que no lo trae sale sin esa sección), pero
  * toda APP lo lleva (OM-20, pedido 026: «las diez apps tienen Cómo funciona»).
  */
-function appsSinProceso(
-  lista: Array<Record<string, unknown>>,
-): string[] {
+function appsSinProceso(lista: Array<Record<string, unknown>>): string[] {
   return lista.filter((c) => !c.proceso).map((c) => String(c.app));
 }
 
