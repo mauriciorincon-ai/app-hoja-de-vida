@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { RESPUESTA_REHUSO } from "@/lib/ia/rehuso";
+import { RESPUESTA_SALIDA } from "@/lib/ia/salida-de-vesting";
 import {
   ausenciaAfirmada,
   marcarRespuesta,
@@ -337,5 +338,41 @@ describe("narraElCierre · la fila de la salida de Vesting", () => {
       /en: "Why did he leave Vesting\?",[\s\S]{0,600}narraElCierre: true/,
     );
     expect(marcarRespuesta(RESPUESTA_REHUSO.es, "es", 4).cierre).toBe(false);
+  });
+
+  // S27: la salida de Vesting ya no va al modelo. La pasada la mide por la ruta FIJA (mismo texto, misma cita), y la
+  // pregunta vecina —«¿qué hizo en Vesting?»— sigue yendo al modelo real.
+  it("las filas de la salida de Vesting van por la ruta fija y la de «qué hizo» sigue al modelo", () => {
+    const fuente = readFileSync("tests/en-vivo/en_vivo_chat.test.ts", "utf8");
+    expect(fuente).toMatch(
+      /es: "¿Por qué salió de Vesting\?",[\s\S]{0,200}ruta: "fija"/,
+    );
+    expect(fuente).toMatch(
+      /en: "Why did he leave Vesting\?",[\s\S]{0,200}ruta: "fija"/,
+    );
+    expect(fuente).toMatch(
+      /es: "¿Qué hizo Henry en Vesting\?",[\s\S]{0,200}ruta: "modelo"/,
+    );
+  });
+
+  it("la respuesta fija de la salida SÍ narra el cierre y la marcan los mismos detectores que al modelo", () => {
+    for (const idioma of ["es", "en"] as const) {
+      const m = marcarRespuesta(RESPUESTA_SALIDA[idioma], idioma, 1);
+      expect(m.cierre, idioma).toBe(true);
+      expect(m.voz, idioma).toEqual([]);
+      expect(m.motivos, idioma).toEqual([]);
+      expect(m.citadas, idioma).toEqual([1]);
+      expect(m.inventadas, idioma).toEqual([]);
+    }
+  });
+
+  it("la cortesía del asistente que salió en la pasada del 026 ya no marca la voz del dueño (S27)", () => {
+    const frase026 =
+      "Henry will delete the rows in compliance with Colombian law [1]. Let me know if you’d like more details on the deletion process.";
+    expect(marcarRespuesta(frase026, "en", 2).voz).toEqual([]);
+    // Y la invitación del dueño sigue marcada.
+    expect(
+      marcarRespuesta("Something not working? Let me know", "en", 1).voz,
+    ).toEqual(["Let me know"]);
   });
 });

@@ -18,12 +18,17 @@ import {
 import { getChatIndex } from "@/lib/ia/index-server";
 import { resolverProveedor } from "@/lib/ia/provider";
 import { esPreguntaDeAusencia, RESPUESTA_REHUSO } from "@/lib/ia/rehuso";
+import {
+  esPreguntaPorLaSalida,
+  fuenteDeLaSalida,
+  RESPUESTA_SALIDA,
+} from "@/lib/ia/salida-de-vesting";
 import { TOP_K_CONTEXTO } from "@/lib/ia/retrieval";
 import { esTemaAjeno } from "@/lib/ia/tema-ajeno";
 import { marcarRespuesta, type Marcas } from "./marcas";
 
 /**
- * LA PASADA EN VIVO DEL CHAT (S24, reglas 24 y 25; ampliada en el S25 con la marca de motivos y en el S26 con la del cierre narrado). El banco y el golden NO
+ * LA PASADA EN VIVO DEL CHAT (S24, reglas 24 y 25; ampliada en el S25 con la marca de motivos, en el S26 con la del cierre narrado y en el S27 con la ruta «fija» de la salida de Vesting). El banco y el golden NO
  * llaman al modelo, y la CI usa uno simulado: nada de lo que se prueba allí
  * puede ver si el modelo REAL habla en tercera persona, si afirma una ausencia
  * o si cita lo que usó. Esta pasada sí lo mira, UNA vez, con las preguntas de la
@@ -39,7 +44,7 @@ import { marcarRespuesta, type Marcas } from "./marcas";
  *  · ESCRIBE `public/chat-index.{es,en}.json` (artefactos de build, ignorados por
  *          git) y `privado/pasada-en-vivo-s26.md` (ignorado por git, modo 600);
  *  · LLAMA al proveedor del chat — Groq, plan Free (≈ US$0, sin factura posible) —
- *          una vez por pregunta que llega al modelo (16 en total);
+ *          una vez por pregunta que llega al modelo (14 en total);
  *  · NO cruza la puerta ni el registro del chat: no hay sesión, no escribe en
  *          Supabase, no manda correo.
  */
@@ -70,7 +75,8 @@ const CLAVES_PERMITIDAS = [
   "GROQ_API_KEY",
 ] as const;
 
-type Ruta = "modelo" | "rehuso" | "ajena";
+/** «fija» (S27): la salida de Vesting, respuesta fija con su cita y sin modelo. */
+type Ruta = "modelo" | "rehuso" | "ajena" | "fija";
 type Pregunta = {
   es: string;
   en: string;
@@ -138,9 +144,9 @@ const PREGUNTAS: Pregunta[] = [
   {
     es: "¿Por qué salió de Vesting?",
     en: "Why did he leave Vesting?",
-    ruta: "modelo",
+    ruta: "fija",
     espera:
-      "NARRA cómo cerró la etapa (enero de 2025, ecosistema y proceso documentados), en tercera persona, SIN añadir un motivo que el documento no da y SIN devolver el rehúso fijo",
+      "respuesta FIJA, sin llamar al modelo: NARRA cómo cerró la etapa (enero de 2025, ecosistema y proceso documentados), en tercera persona, con su cita [1] a «Trayectoria», SIN un motivo que el documento no da y SIN el rehúso",
     vigilaMotivos: true,
     narraElCierre: true,
   },
@@ -310,6 +316,10 @@ function defectosDe(
   const d: string[] = [];
   if (p.ruta === "rehuso" && usada !== "rehuso")
     d.push("debió rehusarse y no se rehusó");
+  if (p.ruta === "fija" && usada !== "fija")
+    d.push(
+      "debió responderse con el texto fijo y su cita, y llegó a otro lado",
+    );
   if (p.ruta === "ajena" && usada !== "ajena" && usada !== "offtopic-lexico")
     d.push("debió declinarse como ajena y llegó al modelo");
   if (!marcas) return d;
@@ -321,7 +331,7 @@ function defectosDe(
       `motivo que las fuentes quizá no dan (léelo): ${marcas.motivos.join(" | ")}`,
     );
   // En el ensayo en seco el modelo es un SIMULADOR que no sabe de Vesting: lo que cuenta es la pasada real.
-  if (p.narraElCierre && !SECO && !marcas.cierre)
+  if (p.narraElCierre && (!SECO || usada === "fija") && !marcas.cierre)
     d.push(
       "no narra el cierre de la etapa (enero de 2025, ecosistema y proceso documentados)",
     );
@@ -372,6 +382,32 @@ describe("la pasada en vivo · el chat contra el proveedor real", () => {
               null,
               [],
             ),
+          });
+          return;
+        }
+        // 1b) La salida de Vesting (S27): texto fijo con su cita, sin modelo (cero tokens).
+        if (esPreguntaPorLaSalida(pregunta)) {
+          const fuente = fuenteDeLaSalida(
+            getChatIndex(locale).index.chunks,
+            locale,
+          );
+          const texto = RESPUESTA_SALIDA[locale];
+          const fuentes = fuente
+            ? [`[1] ${fuente.codigo} · ${fuente.destino} (${fuente.ancla})`]
+            : [];
+          const marcas = marcarRespuesta(texto, locale, fuentes.length);
+          if (!p.vigilaMotivos) marcas.motivos = [];
+          resultados.push({
+            ...base,
+            usada: "fija",
+            respuesta: texto,
+            fuentes,
+            marcas,
+            ms: Date.now() - t0,
+            defectos: [
+              ...defectosDe(p, "fija", texto, marcas, fuentes),
+              ...(fuente ? [] : ["el índice no trae el fragmento de la cita"]),
+            ],
           });
           return;
         }
