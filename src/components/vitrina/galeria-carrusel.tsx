@@ -68,6 +68,22 @@ export type EtiquetasCarrusel = {
   pies: string[];
 };
 
+/** De dónde salen las imágenes: la carpeta de un frente o una carpeta pública cualquiera, nunca ninguna. */
+export type OrigenCarrusel =
+  | {
+      /** Carpeta de `public/piezas/<frente>/` de la que salen las imágenes. */
+      frente: string;
+      base?: undefined;
+    }
+  | {
+      /**
+       * Una carpeta pública cualquiera (la de las capturas: `public/vitrina/<slug>`), en vez de la de un
+       * frente: las capturas de las apps (026) viven ahí.
+       */
+      base: string;
+      frente?: undefined;
+    };
+
 export function GaleriaCarrusel({
   capturas,
   frente,
@@ -78,15 +94,8 @@ export function GaleriaCarrusel({
   diferir = false,
   etiquetas,
   sizes = "(min-width: 1024px) 976px, 100vw",
-}: {
+}: OrigenCarrusel & {
   capturas: CapturaCarrusel[];
-  /** Carpeta de `public/piezas/<frente>/` de la que salen las imágenes. */
-  frente?: string;
-  /**
-   * Una carpeta pública cualquiera (la de las capturas: `public/vitrina/<slug>`), en vez de la de un
-   * frente: las capturas de las apps (026) viven ahí.
-   */
-  base?: string;
   /** Las dimensiones de las imágenes (los tableros, 2560×1440; las apps, 1536×960). */
   ancho?: number;
   alto?: number;
@@ -126,7 +135,10 @@ export function GaleriaCarrusel({
     if (typeof IntersectionObserver === "undefined") {
       // Sin IntersectionObserver (un navegador viejo): se monta todo, pero no
       // dentro del efecto —el estado no se mueve de forma síncrona aquí—.
-      const marco = requestAnimationFrame(() => setVista(true));
+      const marco = requestAnimationFrame(() => {
+        setVista(true);
+        setTope(total);
+      });
       return () => cancelAnimationFrame(marco);
     }
     const io = new IntersectionObserver((entradas) => {
@@ -137,7 +149,7 @@ export function GaleriaCarrusel({
     });
     io.observe(el);
     return () => io.disconnect();
-  }, [diferir]);
+  }, [diferir, total]);
 
   // La pantalla a la vista y la siguiente (para que deslizar no espere).
   function verPantalla(i: number) {

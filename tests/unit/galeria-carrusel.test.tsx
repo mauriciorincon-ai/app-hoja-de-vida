@@ -5,6 +5,7 @@ import {
   fireEvent,
   render,
   screen,
+  waitFor,
   within,
 } from "@testing-library/react";
 import { renderToStaticMarkup } from "react-dom/server";
@@ -256,5 +257,128 @@ describe("GaleriaCarrusel — con una sola captura", () => {
     expect(container.querySelectorAll("[data-captura]")).toHaveLength(1);
     expect(screen.getByAltText("Pie de la pantalla 1")).toBeInTheDocument();
     expect(container).toHaveTextContent("Pantalla 1 de 1");
+  });
+});
+
+/**
+ * LAS CAPTURAS DE LAS APPS (Sprint 026) — `base`, `ancho`/`alto`, `sinOptimizar` y `diferir`.
+ *
+ * Con `diferir` hay DOS observadores: el que mira si la pista se ve (la tarjeta se abrió) y el que mira qué
+ * pantalla ocupa la pista. Se registran todos y cada prueba dirige al que necesita.
+ */
+describe("GaleriaCarrusel — las capturas de las apps (026)", () => {
+  type Observador = { callback: (e: Entrada[]) => void; vistos: Element[] };
+  let todos: Observador[] = [];
+  const BASE = "/publico/apps/ds";
+  const imagenes = () => Array.from(document.querySelectorAll("img"));
+
+  beforeEach(() => {
+    todos = [];
+    vi.stubGlobal(
+      "IntersectionObserver",
+      class {
+        private yo: Observador;
+        constructor(callback: (e: Entrada[]) => void) {
+          this.yo = { callback, vistos: [] };
+          todos.push(this.yo);
+        }
+        observe(el: Element) {
+          this.yo.vistos.push(el);
+        }
+        disconnect() {}
+      },
+    );
+  });
+
+  const montarApp = (diferir: boolean, n = N) =>
+    render(
+      <GaleriaCarrusel
+        capturas={capturas.slice(0, n)}
+        base={BASE}
+        ancho={1536}
+        alto={960}
+        sinOptimizar
+        diferir={diferir}
+        etiquetas={etiquetas(n)}
+      />,
+    );
+  /** El primer observador es el de «la pista se ve»; el segundo, el de «qué pantalla está a la vista». */
+  const pistaSeVe = () =>
+    act(() => {
+      const o = todos[0];
+      o.callback([{ isIntersecting: true, target: o.vistos[0] }]);
+    });
+  const pantallaAlaVista = (i: number) =>
+    act(() => {
+      const o = todos[1];
+      o.callback([{ isIntersecting: true, target: o.vistos[i] }]);
+    });
+
+  it("la carpeta, las dimensiones y el servir tal cual llegan a la imagen", () => {
+    montarApp(false, 2);
+    const img = screen.getByAltText("Pie de la pantalla 1");
+    expect(img).toHaveAttribute("src", `${BASE}/capturas/demo/01-pantalla.png`);
+  });
+
+  it("sin diferir se monta cada imagen, como siempre", () => {
+    montarApp(false);
+    expect(imagenes()).toHaveLength(N);
+  });
+
+  it("con diferir y la pista sin verse, NO hay ninguna imagen, pero los pies y el hueco sí", () => {
+    const { container } = montarApp(true);
+    expect(imagenes()).toHaveLength(0);
+    // El pie sigue en el HTML (lo que se difiere es el peso) y cada pantalla guarda su hueco con el encuadre.
+    expect(container.querySelectorAll("figcaption")).toHaveLength(N);
+    const huecos = container.querySelectorAll<HTMLElement>(
+      'figure div[aria-hidden="true"]',
+    );
+    expect(huecos).toHaveLength(N);
+    expect(huecos[0].style.aspectRatio).toBe("1536 / 960");
+  });
+
+  it("al verse la pista sale solo la primera; la pantalla a la vista pide la siguiente", () => {
+    montarApp(true);
+    pistaSeVe();
+    expect(imagenes()).toHaveLength(1);
+    expect(imagenes()[0]).toHaveAttribute(
+      "src",
+      `${BASE}/capturas/demo/01-pantalla.png`,
+    );
+    // La 1.ª ocupa la pista: se pide también la 2.ª para que deslizar no espere.
+    pantallaAlaVista(0);
+    expect(imagenes()).toHaveLength(2);
+  });
+
+  it("pulsar «siguiente» monta la pantalla que sigue y no más", () => {
+    montarApp(true);
+    pistaSeVe();
+    fireEvent.click(screen.getByRole("button", { name: "Pantalla siguiente" }));
+    // Ir a la 2.ª (índice 1) pide hasta la 3.ª (índice 2).
+    expect(imagenes()).toHaveLength(3);
+    expect(scrollTo).toHaveBeenCalledTimes(1);
+  });
+
+  it("sin IntersectionObserver (navegador viejo) se monta todo", async () => {
+    vi.unstubAllGlobals();
+    montarApp(true);
+    await waitFor(() => expect(imagenes()).toHaveLength(N));
+  });
+
+  it("la FORMA del árbol es la misma con y sin «reducir movimiento», también con diferir", () => {
+    const forma = (quieto: boolean | null) => {
+      hook.quieto = quieto;
+      const html = renderToStaticMarkup(
+        <GaleriaCarrusel
+          capturas={capturas}
+          base={BASE}
+          diferir
+          etiquetas={etiquetas(N)}
+        />,
+      );
+      return html;
+    };
+    expect(forma(true)).toBe(forma(false));
+    expect(forma(null)).toBe(forma(false));
   });
 });
