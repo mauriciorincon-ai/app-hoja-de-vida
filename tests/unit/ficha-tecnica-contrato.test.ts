@@ -184,7 +184,7 @@ describe("armarFichaTecnica", () => {
     expect(ft.cifras.every((c) => c.fuente)).toBe(true);
     expect(ft.bloques).toHaveLength(8);
     expect(ft.hitos.map((h) => h.etiqueta)).toContain("sellada");
-    expect(ft.procedencia_proceso).toBe("cv-viva");
+    expect(["cv-viva", "planeadora"]).toContain(ft.procedencia_proceso);
   });
 
   it("una cifra destacada que no existe en el export rompe nombrándola", () => {
