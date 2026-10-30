@@ -5,7 +5,7 @@ hito: H-2
 opened: 2026-10-29
 closed: 2026-10-29
 branch: sprint-027/lo-que-dejo-el-026
-pr: PENDIENTE
+pr: https://github.com/mauriciorincon-ai/app-hoja-de-vida/pull/106
 ---
 
 # Sprint 027 — Cierre ejecutivo · CV Viva · Sentada 4b: lo que dejó el 026, cerrado
