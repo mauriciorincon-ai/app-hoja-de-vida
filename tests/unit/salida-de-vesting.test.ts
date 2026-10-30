@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
-import { esPreguntaDeAusencia } from "@/lib/ia/rehuso";
+import { esPreguntaDeAusencia, normalizar } from "@/lib/ia/rehuso";
 import {
   esPreguntaPorLaSalida,
   FUENTE_DE_LA_SALIDA,
@@ -26,7 +26,8 @@ import {
  *  · que la lista entre por la salida y NO se pase de ancha («¿qué hizo en Vesting?» sigue yendo al modelo);
  *  · que, medida contra el banco entero, atrape SOLO las dos filas de la salida;
  *  · que la cita resuelva a UN fragmento del índice real, en los dos idiomas.
- * Cada barrido trae su rojo en el mismo archivo (regla 15): una lista que nunca atrapa nada pasaría por casualidad.
+ * El rojo del barrido va en su propio control (regla 15): el mismo barrido con un detector ancho NO da lo esperado, así que
+ * la aserción puede fallar; y una lista que nunca atrapara nada se vería en las dos filas de la salida, que sí entran.
  */
 
 const bancos = {
@@ -111,6 +112,14 @@ describe("la lista cerrada: entra la pregunta por la salida y solo esa", () => {
     ["en", "What was the reason he left Vesting?"],
     ["en", "What was his departure from Vesting like?"],
     ["en", "Why did he resign from Vesting?"],
+    // La palabra interrogativa abre la frase aunque la preceda una cortesía.
+    ["es", "Hola, ¿por qué salió de Vesting?"],
+    ["es", "Dime por qué dejó Vesting"],
+    ["es", "Y entonces, ¿por qué se fue de Vesting?"],
+    ["es", "Quiero saber por qué salió de Vesting"],
+    ["en", "So why did he leave Vesting?"],
+    ["en", "Tell me why he left Vesting"],
+    ["en", "Can you tell me when he left Vesting?"],
   ];
 
   it.each(ENTRAN)("[%s] «%s» entra", (_idioma, pregunta) => {
@@ -148,6 +157,20 @@ describe("la lista cerrada: entra la pregunta por la salida y solo esa", () => {
     ["en", "Why did he leave Cafam?"],
     ["en", "What happened to the platform after Vesting?"],
     ["en", "Does he regret leaving Vesting?"],
+    // «cuando / como / when / how» como conjunción, y la salida como simple punto de referencia (auditoría del S27, M1):
+    // la pregunta es OTRA y el texto fijo no la contesta.
+    ["es", "¿Cuántas personas tenía a cargo cuando salió de Vesting?"],
+    ["es", "¿Qué hizo Henry cuando salió de Vesting?"],
+    ["es", "¿Qué hizo Henry como líder antes de salir de Vesting?"],
+    ["es", "¿Cómo documentó el proceso antes de dejar Vesting?"],
+    ["es", "¿Por qué entró a Cafam después de salir de Vesting?"],
+    ["en", "What was his title when he left Vesting?"],
+    ["en", "How many people reported to him when he left Vesting?"],
+    ["en", "Why did he go to Cafam after leaving Vesting?"],
+    ["en", "How did he document the process before leaving Vesting?"],
+    // Un segundo interrogativo tras el que abre la frase: la pregunta es otra.
+    ["es", "Cuando salió de Vesting, ¿qué hacía Henry?"],
+    ["es", "¿Qué hizo Henry después de su salida de Vesting?"],
   ];
 
   it.each(NO_ENTRAN)("[%s] «%s» NO entra", (_idioma, pregunta) => {
@@ -171,6 +194,14 @@ describe("el barrido contra el banco entero", () => {
         atrapadas,
         "la lista se pasó de ancha: angostar la frase, no sacar la fila",
       ).toEqual([esperada]);
+    });
+
+    it(`[${idioma}] el barrido puede fallar: un detector ancho (cualquier frase con «Vesting») atrapa más que la fila de la salida`, () => {
+      const ancho = banco.preguntas
+        .filter((p: Pregunta) => /\bvesting\b/.test(normalizar(p.pregunta)))
+        .map((p: Pregunta) => p.pregunta);
+      expect(ancho.length).toBeGreaterThan(1);
+      expect(ancho).not.toEqual([esperada]);
     });
 
     it(`[${idioma}] no pisa lo que ya detienen el rehúso, la ajena ni las sin cobertura`, () => {

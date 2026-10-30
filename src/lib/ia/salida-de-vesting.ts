@@ -79,10 +79,37 @@ export function fuenteDeLaSalida(
 const OTRA = "(?:la |su |esa |esta |ese )?";
 const LA_EMPRESA = `${OTRA}(?:vesting|startup|empresa|compania|company)`;
 
-/** Las palabras con que se pregunta por una salida: porqué, cuándo, cómo, motivo… */
-const INTERROGANTE = new RegExp(
-  "\\b(?:por que|porque|cuando|como|en que momento|motivo|motivos|razon|razones|causa|causas|why|when|how|reason|reasons|motive|motives|cause)\\b",
+/**
+ * Lo que puede preceder a la palabra interrogativa sin cambiar la pregunta: un saludo o una muletilla. Lista CERRADA:
+ * lo que no esté aquí no abre la frase y la pregunta sigue al modelo (es un piso, no un techo).
+ */
+const PREAMBULO =
+  "(?:(?:hola|hello|hi|hey|y|entonces|dime|cuentame|oye|oiga|a ver|por favor|puedes decirme|me puedes decir|podrias decirme|sabes|quiero saber|quisiera saber|me gustaria saber|so|and|well|please|tell me|can you tell me|could you tell me|do you know|i want to know|id like to know|i would like to know|i wonder) )*";
+
+/**
+ * La palabra con que ABRE una pregunta por la salida: porqué, cuándo, cómo… «cuando» y «como» (y «when» y «how») son
+ * también conjunciones: en «¿qué hizo cuando salió de Vesting?» o «¿cuántas personas tenía a cargo cuando salió?» la
+ * pregunta es otra y la salida es solo el momento. Por eso cuentan solo si ABREN la frase (S27, auditoría M1).
+ */
+const INTERROGANTE_QUE_ABRE = new RegExp(
+  `^${PREAMBULO}(?:por que|porque|cuando|como|en que momento|why|when|how)\\b`,
 );
+
+/**
+ * Una segunda palabra interrogativa DESPUÉS de la que abre la frase delata otra pregunta: «how many people reported to
+ * him when he left Vesting» (how … when), «cuando salió de Vesting, ¿qué hizo?» (cuando … qué). Se mira solo en la rama
+ * del opener: «¿cuál fue el motivo de su salida?» lleva su «cuál» y es la pregunta de la salida.
+ */
+const OTRA_INTERROGACION =
+  /\b(?:que|quien|quienes|cual|cuales|cuanto|cuantos|cuanta|cuantas|donde|como|cuando|por que|what|who|which|where|how|when|why)\b/;
+
+/** Los sustantivos de la causa no son conjunciones: valen en cualquier lugar («¿cuál fue el motivo de…?», «what was the reason he left…»). */
+const CAUSA =
+  /\b(?:motivo|motivos|razon|razones|causa|causas|reason|reasons|motive|motives|cause)\b/;
+
+/** La salida usada como PUNTO DE REFERENCIA de otra pregunta: «antes de salir de Vesting», «después de su salida», «after leaving Vesting». */
+const SALIDA_COMO_REFERENCIA =
+  /\b(?:antes de|despues de|tras|luego de|desde que|hasta que|mientras|after|before|since|until|while|once|following)\b/;
 
 /** Salir, irse, dejar, renunciar, terminar o cerrar la etapa — siempre con Vesting (o la empresa) por objeto. */
 const VERBO_DE_SALIDA: RegExp[] = [
@@ -146,6 +173,11 @@ export function esPreguntaPorLaSalida(pregunta: string): boolean {
   const q = normalizar(pregunta);
   if (!/\bvesting\b/.test(q)) return false;
   if (MEZCLA_CON_OTRA_COSA.test(q)) return false;
+  if (SALIDA_COMO_REFERENCIA.test(q)) return false;
   if (NOMBRE_DE_SALIDA.some((re) => re.test(q))) return true;
-  return INTERROGANTE.test(q) && VERBO_DE_SALIDA.some((re) => re.test(q));
+  const abre = INTERROGANTE_QUE_ABRE.exec(q);
+  const preguntaPorLaCausa =
+    (abre !== null && !OTRA_INTERROGACION.test(q.slice(abre[0].length))) ||
+    CAUSA.test(q);
+  return preguntaPorLaCausa && VERBO_DE_SALIDA.some((re) => re.test(q));
 }
