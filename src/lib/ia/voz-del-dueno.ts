@@ -88,8 +88,8 @@ const EN = solo(
  * «Let me know.» y «Escríbeme» siguen siendo la voz del dueño, y lo que venga después de la cortesía se sigue juzgando.
  */
 const CORTESIA_DEL_ASISTENTE: Record<Idioma, RegExp> = {
-  en: /(?<![\p{L}\p{N}'’-])let me know if (?:you(?:['’]d| would| do| did)? (?:like|prefer|want|need|wish)|you(?:['’]re| are) (?:interested|curious)|there(?:['’]s| is| are) (?:anything|something|more))(?![\p{L}\p{N}])/giu,
-  es: /(?<![\p{L}\p{N}'’-])avísame si (?:quieres|te gustaría|necesitas|prefieres|deseas|te interesa|hay algo)(?![\p{L}\p{N}])/giu,
+  en: /(?<![\p{L}\p{N}'’-])let me know if (?:you(?:['’]d| would| do| did)? (?:like|prefer|want|need|wish)|you(?:['’]re| are) (?:interested|curious)|you(?:['’]ve(?: got)?| have(?: got)?) (?:(?:any|more|other|further|some) )+(?:questions?|doubts?)|i can (?:help|assist)|there(?:['’]s| is| are) (?:anything|something|more))(?![\p{L}\p{N}])/giu,
+  es: /(?<![\p{L}\p{N}'’-])avísame si (?:quieres|te gustaría|necesitas|prefieres|deseas|te interesa|hay algo|tienes (?:(?:alguna|algunas|más|otra|otras) ){1,2}(?:preguntas?|dudas?))(?![\p{L}\p{N}])/giu,
 };
 
 /** Lo que de voz del dueño hay en un texto, en el orden en que aparece. */

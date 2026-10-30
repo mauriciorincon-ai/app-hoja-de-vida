@@ -120,6 +120,12 @@ describe("la cortesía del asistente no es la voz del dueño (S27)", () => {
     ["en", "Let me know if there is anything else you need."],
     ["es", "Avísame si quieres más detalle."],
     ["es", "Avísame si te gustaría ver las fechas."],
+    // Auditoría del S27 (B2): las otras cortesías de cierre que el modelo usa con la misma frecuencia.
+    ["en", "Let me know if you have any other questions."],
+    ["en", "Let me know if you've got more questions about the dates."],
+    ["en", "Let me know if I can help with anything else."],
+    ["es", "Avísame si tienes alguna otra pregunta."],
+    ["es", "Avísame si tienes más preguntas sobre las fechas."],
   ];
   it.each(CORTESIAS)("[%s] «%s» NO es la voz del dueño", (idioma, texto) => {
     expect(vozDelDueno(texto, idioma as "es" | "en")).toEqual([]);
@@ -135,6 +141,8 @@ describe("la cortesía del asistente no es la voz del dueño (S27)", () => {
     ["en", "Write to me from the Contact section"],
     ["en", "Let me know if you'd like to see my projects"],
     ["es", "Avísame si quieres ver mis proyectos"],
+    ["en", "Let me know if you have any questions about my projects"],
+    ["es", "Avísame si tienes alguna pregunta sobre mis proyectos"],
   ];
   it.each(SIGUEN)("[%s] «%s» SIGUE marcada", (idioma, texto) => {
     expect(vozDelDueno(texto, idioma as "es" | "en").length).toBeGreaterThan(0);
