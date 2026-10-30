@@ -2294,8 +2294,31 @@ test.describe("Vitrina — las pantallas por funcionalidad y el Stack explicado 
     const { orden } = grupoMasLleno("ds");
     await page.goto("/es/portafolio/apps/ds/detalle");
     const tarjeta = page.locator(`[data-grupo-orden="${orden}"]`);
-    await tarjeta.locator(".tarjeta-boton").click();
+    await tarjeta.waitFor();
+    // Tres carreras de la prueba, no de la ficha (1 de ~1000 corridas del e2e completo, S27): (1) el clic
+    // hace su propio scroll hasta la tarjeta, la cruza, la «apertura por lectura» la abre sola y el clic la
+    // CIERRA; (2) el clic puede caer antes de que la isla se hidrate y no abrir nada; (3) axe leía los bloques
+    // `.escalona` a medio fundido (contraste 1,1 con el texto casi transparente). `data-manual` es lo que
+    // pone el toque del visitante —la saca del automático—: desde ahí solo el clic de la prueba la mueve.
+    await tarjeta.evaluate((t) => t.setAttribute("data-manual", ""));
+    const boton = tarjeta.locator(".tarjeta-boton");
+    await expect(async () => {
+      if ((await boton.getAttribute("aria-expanded")) !== "true")
+        await boton.click();
+      await expect(boton).toHaveAttribute("aria-expanded", "true", {
+        timeout: 1_000,
+      });
+    }).toPass({ timeout: 10_000 });
     await tarjeta.locator("[data-carrusel]").scrollIntoViewIfNeeded();
+    await expect
+      .poll(() =>
+        tarjeta
+          .locator(".escalona")
+          .evaluateAll((els) =>
+            els.every((e) => getComputedStyle(e).opacity === "1"),
+          ),
+      )
+      .toBe(true);
     const r = await new AxeBuilder({ page })
       .include(`[data-grupo-orden="${orden}"]`)
       .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
