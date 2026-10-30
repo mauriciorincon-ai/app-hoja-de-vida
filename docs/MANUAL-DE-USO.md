@@ -981,10 +981,14 @@ una cifra de «lo que hice» que el documento citado no dice, un conteo del siti
   la Trayectoria: *Henry cerró su etapa en Vesting en enero de 2025, al dejar el ecosistema y el
   proceso documentados…* No gasta ni un token, funciona también con el chat en búsqueda local, y se
   registra como las demás respuestas fijas, con su fuente. **Lo que no entra en esa lista sigue yendo
-  al modelo**: «¿Qué hizo Henry en Vesting?», «¿por qué entró?», «¿cuánto tiempo estuvo?» y las
-  preguntas que mezclan la entrada con la salida. El texto sale de `data/a-fondo/origenes.*.md` (la
+  al modelo**: «¿Qué hizo Henry en Vesting?», «¿por qué entró?», «¿cuánto tiempo estuvo?», las
+  preguntas que mezclan la entrada con la salida y aquellas donde la salida es solo el momento
+  («¿qué hacía cuando salió de Vesting?», «why did he go to Cafam after leaving Vesting?»). La
+  palabra interrogativa tiene que abrir la frase: es un piso, no un techo, y una pregunta rara
+  puede llegar al modelo aunque trate de la salida. El texto sale de `data/a-fondo/origenes.*.md` (la
   sección del marco replicable): si algún día quieres que el visitante lea un motivo, es tu prosa:
-  la escribes ahí y el texto fijo se actualiza con ella. Para el resto de los «por qué», el prompt
+  la escribes ahí y se cambia el texto fijo de `salida-de-vesting.ts` para que diga lo mismo (una
+  prueba se pone roja si el a-fondo y el texto se separan). Para el resto de los «por qué», el prompt
   sigue prohibiendo añadir causas o intenciones («el deseo de…»), y lo que el modelo hace con esa
   regla lo marca la pasada en vivo (columna «Motivos»).
 - **La conversación se queda en el navegador.** Recargar la página, seguir un enlace del menú
