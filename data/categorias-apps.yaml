@@ -5,7 +5,8 @@
 # el de su `content/vitrina/<slug>.brochure-export.json`.
 #
 # Reglas (las hace cumplir src/lib/vitrina/categorias-apps.ts y su test):
-#  · El ORDEN de cada lista es el orden en la página.
+#  · El ORDEN de cada lista es el orden en la página. El de las profesionales es el
+#    que pidió el dueño en la revisión del H-2 (OM-27, 2026-10-29); lo fija su test.
 #  · Un export SIN categoría rompe el build y nombra el slug: una app nueva se
 #    clasifica el mismo día que llega, o no se publica.
 #  · Un slug declarado SIN export se ignora: aparece solo el día que llega su
@@ -22,18 +23,18 @@
 profesionales:
   - slug: ds
     nombre: "Probeta DS"
-  - slug: dash-agent-ai
-    nombre: "Dash Agent"
-  - slug: anonimizador
-    nombre: "Anonimizador Velo"
-  - slug: copiloto-consultor
-    nombre: "AngelGhost"
   - slug: planlang
     nombre: "planlang"
-  - slug: big-d
-    nombre: "Big-D"
   - slug: hackguard
     nombre: "HackGuard"
+  - slug: anonimizador
+    nombre: "Anonimizador Velo"
+  - slug: big-d
+    nombre: "Big-D"
+  - slug: dash-agent-ai
+    nombre: "Dash Agent"
+  - slug: copiloto-consultor
+    nombre: "AngelGhost"
 
 personales:
   - slug: habla

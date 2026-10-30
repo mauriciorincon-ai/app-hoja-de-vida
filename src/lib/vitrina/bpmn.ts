@@ -292,7 +292,69 @@ export function trazar(proceso: Proceso, opciones: Opciones = {}): Trazo {
   const enlaces: Enlace[] = [];
   let letra = 0;
 
-  for (const f of proceso.flujos) {
+  // EVENTOS DE ENLACE QUE COMPARTEN MARGEN (S27). Cada cruce de fila lleva un evento de salida en el margen derecho de su
+  // fila y uno de entrada en el izquierdo, a la altura de SU carril. Cuando dos cruces comparten carril y fila —una
+  // decisión con dos salidas hacia la fila siguiente, tres flujos que vuelven al mismo paso— sus eventos caían en el
+  // MISMO punto: dos círculos encimados, con sus letras una sobre otra, y los dos rótulos «sí» y «no» en el mismo sitio
+  // (el proceso de Innmobiliaria lo hizo evidente). Ahora se apilan en vertical, centrados en el carril, y el flujo
+  // salta al nivel de su evento. Con UN solo evento en el carril nada cambia: el mismo punto y el mismo trazo de siempre.
+  // El orden importa por los canales: un flujo por CANAL sale por debajo (la salida) o entra por arriba (la entrada) y
+  // recorre en vertical el margen, así que va en el extremo por el que viaja —la salida por canal, la más baja; la
+  // entrada por canal, la más alta— y no atraviesa los círculos de los demás.
+  const PASO_ENLACE = 2 * G.RADIO_ENLACE + 8;
+  const cruces = proceso.flujos.map((f) => {
+    const A = nodo.get(f.de)!;
+    const B = nodo.get(f.a)!;
+    if (A.fila === B.fila) return null;
+    return {
+      A,
+      B,
+      libreDerecha: !nodos.some(
+        (n) => n.fila === A.fila && n.carril === A.carril && n.col > A.col,
+      ),
+      libreIzquierda: !nodos.some(
+        (n) => n.fila === B.fila && n.carril === B.carril && n.col < B.col,
+      ),
+      offS: 0,
+      offE: 0,
+    };
+  });
+  const apilar = (
+    clave: (c: NonNullable<(typeof cruces)[number]>) => string,
+    rango: (c: NonNullable<(typeof cruces)[number]>) => number,
+    poner: (c: NonNullable<(typeof cruces)[number]>, off: number) => void,
+  ) => {
+    const grupos = new Map<string, NonNullable<(typeof cruces)[number]>[]>();
+    for (const c of cruces) {
+      if (!c) continue;
+      const k = clave(c);
+      grupos.set(k, [...(grupos.get(k) ?? []), c]);
+    }
+    for (const g of grupos.values()) {
+      const n = g.length;
+      if (n < 2) continue;
+      // Cabe en el carril: a ±(RADIO_ENLACE + 4) del borde de cada lado.
+      const paso = Math.min(
+        PASO_ENLACE,
+        (G.ALTO_CARRIL - 2 * (G.RADIO_ENLACE + 4)) / (n - 1),
+      );
+      [...g]
+        .sort((a, b) => rango(a) - rango(b)) // estable: a igual rango, el orden de los flujos
+        .forEach((c, k) => poner(c, (k - (n - 1) / 2) * paso));
+    }
+  };
+  apilar(
+    (c) => `${c.A.fila}|${c.A.carril}`,
+    (c) => (c.libreDerecha ? 0 : 1), // en recta arriba, por canal abajo
+    (c, off) => (c.offS = off),
+  );
+  apilar(
+    (c) => `${c.B.fila}|${c.B.carril}`,
+    (c) => (c.libreIzquierda ? 1 : 0), // por canal arriba, en recta abajo
+    (c, off) => (c.offE = off),
+  );
+
+  for (const [i, f] of proceso.flujos.entries()) {
     const A = nodo.get(f.de)!;
     const B = nodo.get(f.a)!;
 
@@ -307,22 +369,22 @@ export function trazar(proceso: Proceso, opciones: Opciones = {}): Trazo {
       const L = LETRAS[letra++ % LETRAS.length];
       const filaA = filasTrazadas[A.fila];
       const filaB = filasTrazadas[B.fila];
-      const salida = { x: ancho - G.ENLACE / 2, y: A.y };
-      const entrada = { x: G.ROTULO_CARRIL + G.ENLACE / 2, y: B.y };
+      const { libreDerecha, libreIzquierda, offS, offE } = cruces[i]!;
+      const salida = { x: ancho - G.ENLACE / 2, y: A.y + offS };
+      const entrada = { x: G.ROTULO_CARRIL + G.ENLACE / 2, y: B.y + offE };
       enlaces.push({ letra: L, de: A.id, a: B.id, salida, entrada });
-      const libreDerecha = !nodos.some(
-        (n) => n.fila === A.fila && n.carril === A.carril && n.col > A.col,
-      );
-      const libreIzquierda = !nodos.some(
-        (n) => n.fila === B.fila && n.carril === B.carril && n.col < B.col,
-      );
       const canalInf = filaA.y + filaA.alto - 8;
       const canalSup = filaB.y + 8;
+      // Con el evento desplazado, el flujo en recta salta (un tramo vertical corto) hacia su nivel.
+      const xSalidaSalto = (A.r + salida.x - G.RADIO_ENLACE) / 2;
+      const xEntradaSalto = (entrada.x + G.RADIO_ENLACE + B.l) / 2;
       flujos.push({
         de: A.id,
         a: `enlace:${L}`,
         d: libreDerecha
-          ? `M${A.r},${A.y} H${salida.x - G.RADIO_ENLACE}`
+          ? offS === 0
+            ? `M${A.r},${A.y} H${salida.x - G.RADIO_ENLACE}`
+            : `M${A.r},${A.y} H${xSalidaSalto} V${salida.y} H${salida.x - G.RADIO_ENLACE}`
           : `M${A.x},${A.b} V${canalInf} H${salida.x} V${salida.y + G.RADIO_ENLACE}`,
         etiqueta: f.etiqueta,
         // Con canal, el rótulo va al ARRANQUE DEL CANAL INFERIOR, a la derecha
@@ -332,15 +394,17 @@ export function trazar(proceso: Proceso, opciones: Opciones = {}): Trazo {
         // siguiente («no · otra vez» sobre el «sí», Habla) — entre ambas hay
         // 52px y un rótulo corto mide 80. La franja del canal, en cambio, no
         // tiene cajas (terminan 13px arriba) ni verticales ajenas.
-        lx: libreDerecha ? A.r + 6 : A.x + 6,
-        ly: libreDerecha ? A.y - 6 : canalInf - 3,
+        lx: libreDerecha ? (offS === 0 ? A.r : xSalidaSalto) + 6 : A.x + 6,
+        ly: libreDerecha ? salida.y - 6 : canalInf - 3,
         anclaTexto: "start",
       });
       flujos.push({
         de: `enlace:${L}`,
         a: B.id,
         d: libreIzquierda
-          ? `M${entrada.x + G.RADIO_ENLACE},${B.y} H${B.l}`
+          ? offE === 0
+            ? `M${entrada.x + G.RADIO_ENLACE},${B.y} H${B.l}`
+            : `M${entrada.x + G.RADIO_ENLACE},${entrada.y} H${xEntradaSalto} V${B.y} H${B.l}`
           : `M${entrada.x},${entrada.y - G.RADIO_ENLACE} V${canalSup} H${B.x} V${B.t}`,
       });
       continue;

@@ -1,5 +1,6 @@
 # Capturas de Probeta DS para su ficha en CV Viva — pedido 026, planeadora, tomadas el 2026-10-27 y el 2026-10-28.
-# Build de producción de app-ds en d302949, viewport 1024×640 a deviceScaleFactor 1.5 (archivo de 1536×960), tema claro,
+# Reentrega 2026-10-28: U1, P3, D12 (nueva, del S21), D9, L7, U13, U14, U15, U17 y U18 retomadas sobre 988489c (S21);
+# las demás, de d302949 (su pantalla no cambió en el S21). Build de producción, viewport 1024×640 a deviceScaleFactor 1.5 (archivo de 1536×960), tema claro,
 # interfaz en español, datos sintéticos del kit de prueba de la app. Pies en ES y EN (≤ 80 caracteres).
 portada: entrada.webp
 capturas:
@@ -25,17 +26,18 @@ capturas:
   - { funcionalidad: D6, archivo: D6.webp, pie: { es: "Antes de entrenar: una posible fuga y un objetivo sesgado, con símbolo", en: "Before training: a possible leak and a skewed target, with a symbol" } }
   - { funcionalidad: D7, archivo: D7.webp, pie: { es: "Un CSV con punto y coma: la app nombra el separador real", en: "A semicolon CSV: the app names the real separator" } }
   - { funcionalidad: D8, archivo: D8.webp, pie: { es: "Entra un Excel: la app dice qué hoja leyó", en: "An Excel file comes in: the app says which sheet it read" } }
-  - { funcionalidad: D9, archivo: D9.webp, pie: { es: "Aviso de datos personales: la columna y el tipo, nunca el valor", en: "Personal-data warning: the column and type, never the value" } }
+  - { funcionalidad: D9, archivo: D9.webp, pie: { es: "Aviso de datos personales: columna, tipo y qué parte de las celdas, sin valores", en: "Personal-data warning: column, type and share of cells, no values" } }
   - { funcionalidad: D10, archivo: D10.webp, pie: { es: "El plan de limpieza: apruebas o rechazas cada paso", en: "The cleaning plan: approve or reject each step" } }
   - { funcionalidad: D11, archivo: D11.webp, pie: { es: "Explora tus datos: un resumen verificado contra tus números", en: "Explore your data: a summary checked against your numbers" } }
+  - { funcionalidad: D12, archivo: D12.webp, pie: { es: "Escribes la pregunta y, antes de correr, ves cómo la entendió y qué comprobó", en: "You type the question and, before it runs, see how it was read and checked" } }
   - { funcionalidad: P1, archivo: P1.webp, pie: { es: "Qué columnas pesan y hacia dónde empujan, medido en la prueba", en: "Which columns weigh in and which way they push, on the test set" } }
   - { funcionalidad: P2, archivo: P2.webp, pie: { es: "La explicación de la app, sin IA, verificada contra tus números", en: "The app's own explanation, no AI, checked against your numbers" } }
-  - { funcionalidad: P3, archivo: P3.webp, pie: { es: "La narración con IA, solo a petición y «✓ verificada»", en: "The AI narration, on request only and «✓ verified»" } }
+  - { funcionalidad: P3, archivo: P3.webp, pie: { es: "Si la narración de la IA no cuadra con tus números, no se muestra y lo dice", en: "If the AI narration doesn't match your numbers, it's not shown, and it says so" } }
   - { funcionalidad: P4, archivo: P4.webp, pie: { es: "Si la narración falla, dice por qué y deja reintentar", en: "If the narration fails, it says why and lets you retry" } }
   - { funcionalidad: P5, archivo: P5.webp, pie: { es: "La ficha del experimento, lista para descargar", en: "The experiment's model card, ready to download" } }
   - { funcionalidad: P6, archivo: P6.webp, pie: { es: "Estrésalo: cuánto cae la cifra con ruido y si aún gana", en: "Stress it: how far the score drops with noise and if it still wins" } }
   - { funcionalidad: P7, archivo: P7.webp, pie: { es: "Al estimar, la explicación también pasa la comprobación", en: "When estimating, the explanation passes the check too" } }
-  - { funcionalidad: U1, archivo: U1.webp, pie: { es: "Puntuar datos nuevos: la predicción de cada fila", en: "Scoring new data: a prediction for every row" } }
+  - { funcionalidad: U1, archivo: U1.webp, pie: { es: "Puntuar datos nuevos: cada fila sale con su predicción y su probabilidad", en: "Scoring new data: every row comes out with its prediction and probability" } }
   - { funcionalidad: U2, archivo: U2.webp, pie: { es: "Falta una columna: la app se niega a puntuar y dice cuál", en: "A column is missing: the app refuses to score and names it" } }
   - { funcionalidad: U3, archivo: U3.webp, pie: { es: "El aviso de novedad: en cuántas filas nuevas el modelo adivina", en: "The novelty warning: in how many new rows the model is guessing" } }
   - { funcionalidad: U4, archivo: U4.webp, pie: { es: "Cómo se reparten las predicciones, antes de descargar", en: "How the predictions spread, before you download" } }

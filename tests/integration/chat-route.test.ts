@@ -12,6 +12,7 @@ import {
 import { resetBreaker } from "@/lib/ia/breaker";
 import { RESPUESTA_OFFTOPIC } from "@/lib/ia/guardrails";
 import { RESPUESTA_REHUSO } from "@/lib/ia/rehuso";
+import { RESPUESTA_SALIDA } from "@/lib/ia/salida-de-vesting";
 import { resetRateLimit } from "@/lib/rate-limit";
 
 /**
@@ -319,6 +320,51 @@ describe("S24: lo que el chat no contesta (cero llamadas al proveedor, cero fuen
     const res = await chatRequest(preguntaValida);
     const body = await res.text();
     expect(body).toContain("[4]");
+  });
+});
+
+describe("S27: la salida de Vesting — respuesta fija con su cita, cero llamadas al proveedor", () => {
+  const preguntar = (locale: "es" | "en", content: string) =>
+    chatRequest({ locale, messages: [{ role: "user", content }] });
+
+  it.each([
+    ["es", "¿Por qué salió de Vesting?"],
+    ["en", "Why did he leave Vesting?"],
+  ] as const)(
+    "[%s] «%s» recibe el texto fijo con su cita [1] a «Trayectoria», sin llamar al modelo",
+    async (locale, pregunta) => {
+      const res = await preguntar(locale, pregunta);
+      expect(res.status).toBe(200);
+      const body = await res.text();
+      expect(body).toContain(RESPUESTA_SALIDA[locale].slice(0, 40));
+      // La cita viaja como en cualquier respuesta: el chip «AF-02 · Trayectoria» y su ancla.
+      expect(body).toContain("data-fuentes");
+      expect(body).toContain("AF-02");
+      expect(body).toContain("#trayectoria");
+      // No es una declinación: no lleva la marca de off-topic.
+      expect(body).not.toContain("data-offtopic");
+      expect(spyLlm).not.toHaveBeenCalled();
+    },
+  );
+
+  it("se registra como offtopic (sin migración), con el texto fijo Y con su fuente", async () => {
+    await (await preguntar("es", "¿Por qué salió de Vesting?")).text();
+    await new Promise((r) => setTimeout(r, 20));
+    expect(entradas()).toHaveLength(1);
+    expect(entradas()[0].modo).toBe("offtopic");
+    expect(entradas()[0].respuesta).toBe(RESPUESTA_SALIDA.es);
+    expect(entradas()[0].fuentes).toHaveLength(1);
+    expect(entradas()[0].fuentes[0]).toMatchObject({
+      codigo: "AF-02",
+      ancla: "#trayectoria",
+    });
+  });
+
+  it("«¿Qué hizo Henry en Vesting?» NO entra: sigue yendo al modelo", async () => {
+    const res = await preguntar("es", "¿Qué hizo Henry en Vesting?");
+    expect(res.status).toBe(200);
+    await res.text();
+    expect(spyLlm).toHaveBeenCalledTimes(1);
   });
 });
 

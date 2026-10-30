@@ -33,7 +33,7 @@ describe("a lo sumo un cero en la tira de cada app", () => {
   );
 
   it("hay fichas de apps que revisar", () => {
-    expect(fichas.length).toBeGreaterThanOrEqual(9);
+    expect(fichas.length).toBeGreaterThanOrEqual(10);
   });
 
   for (const f of fichas) {

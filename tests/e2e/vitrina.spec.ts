@@ -11,7 +11,7 @@ import { parse } from "yaml";
  *  1. **La vitrina como contenido**: el portal por frentes (ADR-015), el
  *     escaparate de apps, la ruta propia de cada app, el gate ATS/SEO (todo en el HTML estático), las reglas duras que la ficha
  *     hace visibles (cero enlaces · toda cifra con su procedencia · las
- *     descartadas se muestran) y el CTA de lista de espera con su anclaje.
+ *     descartadas NO se pintan, OM-24) y el CTA de lista de espera con su anclaje.
  *
  *  2. **La apertura por lectura** (banco §7): el patrón exige sus propias
  *     pruebas y las nombra. Van aquí, incluida la **deriva cero** con el bucle
@@ -428,9 +428,18 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
     }
   });
 
-  test("toda cifra lleva su procedencia y las descartadas se muestran", async ({
+  test("toda cifra lleva su procedencia y ninguna funcionalidad descartada se pinta (OM-24)", async ({
     page,
   }) => {
+    // El dato queda en el contrato (la ficha de la otra casa no se edita), pero el dueño no quiere ver funcionalidades
+    // descartadas tachadas: ninguna ficha las pinta, traiga lo que traiga el export. Se anota cuántos exports las traen
+    // para que el informe diga si la aserción miró algo.
+    test.info().annotations.push({
+      type: "exports-con-descartadas",
+      description: String(
+        EXPORTS.filter((e) => e.funcionalidades.descartadas.length > 0).length,
+      ),
+    });
     for (const exp of EXPORTS) {
       await page.goto(`/es/portafolio/apps/${exp.app.slug}/detalle`);
 
@@ -443,10 +452,8 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
         ).toHaveAttribute("data-fuente", m.fuente);
       }
 
-      // Ni pendientes ni entregadas: retiradas, y a la vista.
-      await expect(page.locator("[data-descartada-id]")).toHaveCount(
-        exp.funcionalidades.descartadas.length,
-      );
+      // OM-24: ni tachadas ni de ninguna otra forma.
+      await expect(page.locator("[data-descartada-id]")).toHaveCount(0);
     }
   });
 });
@@ -2287,8 +2294,31 @@ test.describe("Vitrina — las pantallas por funcionalidad y el Stack explicado 
     const { orden } = grupoMasLleno("ds");
     await page.goto("/es/portafolio/apps/ds/detalle");
     const tarjeta = page.locator(`[data-grupo-orden="${orden}"]`);
-    await tarjeta.locator(".tarjeta-boton").click();
+    await tarjeta.waitFor();
+    // Tres carreras de la prueba, no de la ficha (1 de ~1000 corridas del e2e completo, S27): (1) el clic
+    // hace su propio scroll hasta la tarjeta, la cruza, la «apertura por lectura» la abre sola y el clic la
+    // CIERRA; (2) el clic puede caer antes de que la isla se hidrate y no abrir nada; (3) axe leía los bloques
+    // `.escalona` a medio fundido (contraste 1,1 con el texto casi transparente). `data-manual` es lo que
+    // pone el toque del visitante —la saca del automático—: desde ahí solo el clic de la prueba la mueve.
+    await tarjeta.evaluate((t) => t.setAttribute("data-manual", ""));
+    const boton = tarjeta.locator(".tarjeta-boton");
+    await expect(async () => {
+      if ((await boton.getAttribute("aria-expanded")) !== "true")
+        await boton.click();
+      await expect(boton).toHaveAttribute("aria-expanded", "true", {
+        timeout: 1_000,
+      });
+    }).toPass({ timeout: 10_000 });
     await tarjeta.locator("[data-carrusel]").scrollIntoViewIfNeeded();
+    await expect
+      .poll(() =>
+        tarjeta
+          .locator(".escalona")
+          .evaluateAll((els) =>
+            els.every((e) => getComputedStyle(e).opacity === "1"),
+          ),
+      )
+      .toBe(true);
     const r = await new AxeBuilder({ page })
       .include(`[data-grupo-orden="${orden}"]`)
       .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])

@@ -7,6 +7,10 @@
  * se declara: todo se comprueba.** El sello se gana mostrando el Certificado
  * de Tradición y Libertad, que se ve UNA vez y nunca se almacena; y cada
  * anuncio vive 60 días: lo que está publicado, está vivo.
+ *
+ * Dónde vive (Sprint 027): en el grupo 4 del export del 2026-10-29, «Privacidad y el panel del equipo», cuya C1 dice
+ * «el sello de propietario se otorga tras ver el certificado de tradición: solo se guardan la matrícula y la fecha». Los
+ * 60 días son B3, del grupo 1.
  */
 export function FirmaInmobiliaria() {
   return (

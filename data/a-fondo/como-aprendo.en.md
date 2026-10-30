@@ -212,9 +212,9 @@ MVP and keep evolving in sustained operation; the other four are in their initia
 | ------------- | ---------------------- | --------: | --------------: | ----------------------------------------------------------------- |
 | Anonimizador Velo          | 740 unit, 153 e2e      |    96.17% |               8 | local processing with no server, 500,000 rows                     |
 | Dash Agent | 693 unit               |     97.5% |              13 | making visible the context an agent keeps                         |
-| Probeta DS    | 3,047 unit, 168 e2e    |    95.39% |              29 | Python, Pandas and scikit-learn in the browser with WebAssembly   |
+| Probeta DS    | 3,461 unit, 183 e2e    |    95.35% |              30 | Python, Pandas and scikit-learn in the browser with WebAssembly   |
 | Habla San  | 261 unit, 169 e2e      |    94.02% |              14 | 50 capsules and 16 content milestones, without recording the voice |
-| Innmobiliaria | 172 unit, 76 e2e       |    98.31% |               6 | business flows with validation                                    |
+| Innmobiliaria | 1,959 unit, 836 e2e    |    99.72% |              21 | business flows with validation                                    |
 | Nutrikids    | 214 unit, 94 e2e       |    99.52% |               7 | a calculation engine with almost total coverage                   |
 
 Probeta DS led me to run Python, Pandas and scikit-learn inside the browser through WebAssembly.

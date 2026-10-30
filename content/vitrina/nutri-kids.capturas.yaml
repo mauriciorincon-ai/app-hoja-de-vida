@@ -1,8 +1,12 @@
 # Capturas de Nutrikids — pedido 026 (planeadora, 2026-10-27). Build de producción de
-# origin/main 69538dc, viewport 1024×640 a DPR 1,5 (archivo 1536×960), tema de CV Viva (tema-cv-viva.mjs).
+# origin/main 69538dc, viewport 1024×640 a DPR 1,5 (archivo 1536×960), con el tema propio de la app: el claro
+# (crema y terracota) de su design-system, el único que declara; ya sin tema-cv-viva.mjs. Pantallas reales de la app corriendo.
+# Retomadas el 2026-10-28 por decisión del dueño («3a»): la portada y las 17 capturas, en los mismos estados.
 # Datos 100 % sintéticos: la «Dieta demo» inventada del repo y un plan sintético derivado
 # de ella; el registro y las notas son de ejemplo. Reloj fijo en lunes 2026-09-21,
 # dentro de la ventana de la restricción demo. F18 va en inglés a propósito: es el cambio de idioma.
+# Reentrega 2026-10-28: F3 con el mismo plan sintético, corto en rojo (1 restringido, 1 «también evitar»,
+# los 3 aditivos), para que la pestaña Rojo y los aditivos quepan en un cuadro; F16 en la demo, sin dieta cargada.
 portada: entrada.webp
 capturas:
   - { funcionalidad: F1, archivo: F1.webp, pie: { es: "Buscas «ma» y el semáforo responde: evitar, con límite o se puede", en: "Search «ma» and the traffic light answers: avoid, limited or allowed" } }
@@ -19,7 +23,7 @@ capturas:
   - { funcionalidad: F12, archivo: F12.webp, pie: { es: "Pregunta por una dosis y el chat la devuelve al pediatra", en: "Ask about a dose and the chat sends you back to the pediatrician" } }
   - { funcionalidad: F14, archivo: F14.webp, pie: { es: "Un plan sintético cargado: el resumen de lo que la app encontró", en: "A synthetic plan loaded: the summary of what the app found" } }
   - { funcionalidad: F15, archivo: F15.webp, pie: { es: "Plan B: el contenido del archivo, pegado en la caja de texto", en: "Plan B: the file's content pasted into the text box" } }
-  - { funcionalidad: F16, archivo: F16.webp, pie: { es: "El letrero dice «Tu dieta» y un toque vuelve a la demo", en: "The badge reads «Your diet» and one tap goes back to the demo" } }
+  - { funcionalidad: F16, archivo: F16.webp, pie: { es: "Sin dieta cargada, el letrero dice «Dieta demo» y la app se explora con ella", en: "No diet loaded: the badge reads «Demo diet» and you explore the app with it" } }
   - { funcionalidad: F18, archivo: F18.webp, pie: { es: "Un toque en English y toda la app cambia de idioma", en: "One tap on English and the whole app switches language" } }
   - { funcionalidad: F19, archivo: F19.webp, pie: { es: "«Borrar mis datos» pide confirmación antes de borrarlo todo", en: "«Delete my data» asks for confirmation before wiping everything" } }
 sin_pantalla: [F13, F17]

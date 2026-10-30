@@ -144,9 +144,9 @@ from the published sheets of each app in 2026:
 | --- | --- | --- | --- |
 | Anonimizador Velo (Oct 2026) | 740 | 153 | 96% |
 | Dash Agent (Aug 2026) | 693 | — | 97.5% |
-| Probeta DS (Oct 2026) | 3,047 | 168 | 95.4% |
+| Probeta DS (Oct 2026) | 3,461 | 183 | 95.4% |
 | Habla San (Aug 2026) | 261 | 169 | 94% |
-| Innmobiliaria (Aug 2026) | 172 | 76 | 98.3% of the engine |
+| Innmobiliaria (Oct 2026) | 1,959 | 836 | 99.7% of the engine |
 | Nutrikids (Oct 2026) | 214 | 94 | 99.5% of the engine |
 
 These figures must be kept in sync with the repositories, because their value depends on their

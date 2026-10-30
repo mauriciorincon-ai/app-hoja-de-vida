@@ -1,0 +1,43 @@
+# Capturas de Innmobiliaria — pedido 026 (planeadora, 2026-10-27). Build de producción de la rama
+# `sprint-016/listo-para-abrir` (620ca99) en una copia aislada, contra una base local aislada con datos
+# SINTÉTICOS; viewport 1024×640 a DPR 1.5 (1536×960), interfaz en español, tema claro. Las «fotos» de los
+# inmuebles son ilustraciones de demostración, rotuladas como tales.
+portada: entrada.webp
+capturas:
+  - { funcionalidad: C7a, archivo: C7a.webp, pie: { es: "Cupos de fundador que quedan por localidad, contados desde la base", en: "Founder spots left in each locality, counted from the database" } }
+  - { funcionalidad: C7b, archivo: C7b.webp, pie: { es: "Tu enlace para invitar y cuántos dueños ya publicaron con él", en: "Your invite link and how many owners already listed with it" } }
+  - { funcionalidad: B3, archivo: B3.webp, pie: { es: "Tu anuncio, vivo hasta una fecha y con el botón para renovarlo", en: "Your listing, live until a set date, with the button to renew it" } }
+  - { funcionalidad: B2, archivo: B2.webp, pie: { es: "Las cuatro guías gratis del paquete de fundador", en: "The four free guides in the founder pack" } }
+  - { funcionalidad: A1, archivo: A1.webp, pie: { es: "La página de inicio: lo que ya funciona del lado de quien compra", en: "The landing page: what already works on the buyer's side" } }
+  - { funcionalidad: A2, archivo: A2.webp, pie: { es: "Paso 2 de 3: el inmueble, con el barrio del catálogo de Catastro", en: "Step 2 of 3: the property, with the neighborhood from the city catalog" } }
+  - { funcionalidad: A3, archivo: A3.webp, pie: { es: "Registrado como fundador, con tu enlace privado para completarlo", en: "Registered as a founder, with your private link to complete it" } }
+  - { funcionalidad: B1, archivo: B1.webp, pie: { es: "Tu anuncio al 97 %: las fotos, la portada y lo que le falta", en: "Your listing at 97%: the photos, the cover and what is missing" } }
+  - { funcionalidad: B4, archivo: B4.webp, pie: { es: "La ficha pública: sello, precio, área y el precio dentro del rango", en: "The public page: badge, price, size and a price within range" } }
+  - { funcionalidad: L1, archivo: L1.webp, pie: { es: "La política de tratamiento de datos, según la Ley 1581", en: "The data processing policy under Colombia's Law 1581" } }
+  - { funcionalidad: C1, archivo: C1.webp, pie: { es: "El panel del equipo: cada registro con sus fotos, su nivel y el sello", en: "The team panel: every listing with its photos, level and badge" } }
+  - { funcionalidad: C8a, archivo: C8a.webp, pie: { es: "El embudo real de la campaña y el envío de correos por lotes", en: "The campaign's real funnel and batch email sending" } }
+  - { funcionalidad: C8b, archivo: C8b.webp, pie: { es: "El cupo de fundador por localidad, los publicados y lo que queda", en: "Founder quota per locality, listings so far and spots left" } }
+  - { funcionalidad: H2-01, archivo: H2-01.webp, pie: { es: "Una zona dibujada en el mapa y los anuncios vivos dentro de ella", en: "A zone drawn on the map and the live listings inside it" } }
+  - { funcionalidad: H2-02, archivo: H2-02.webp, pie: { es: "El sello Propietario verificado, con la fecha de su certificado", en: "The Verified owner badge, with the date of the title certificate" } }
+  - { funcionalidad: H2-03, archivo: H2-03.webp, pie: { es: "Cuatro favoritos comparados: precio por m², sello y si está caro", en: "Four saved listings compared: price per m², badge and price check" } }
+  - { funcionalidad: H2-04, archivo: H2-04.webp, pie: { es: "Una alerta con tu búsqueda: anuncios nuevos y bajas de precio", en: "An alert for your search: new listings and price drops" } }
+  - { funcionalidad: H2-05, archivo: H2-05.webp, pie: { es: "Datos de la zona: m² mediano, oferta activa y el valor de Catastro", en: "Area data: median m², active supply and the city's land value" } }
+  - { funcionalidad: H2-06, archivo: H2-06.webp, pie: { es: "El código que el comprador envía por WhatsApp para verificarse", en: "The code the buyer sends over WhatsApp to get verified" } }
+  - { funcionalidad: H2-07, archivo: H2-07.webp, pie: { es: "Comprador identificado con su cédula; el número no se guarda", en: "Buyer identified with their ID card; the number is not stored" } }
+  - { funcionalidad: H2-08, archivo: H2-08.webp, pie: { es: "La tarjeta del comprador que el dueño ve antes de aceptar", en: "The buyer card the owner sees before accepting a visit" } }
+  - { funcionalidad: H2-09, archivo: H2-09.webp, pie: { es: "Revisión antifraude: un precio 44 % bajo su zona y un reporte", en: "Fraud review: a price 44% below its area and a buyer report" } }
+  - { funcionalidad: H2-10, archivo: H2-10.webp, pie: { es: "El mensaje ya escrito que abre el chat de WhatsApp con la dueña", en: "The pre-written message that opens a WhatsApp chat with the owner" } }
+  - { funcionalidad: H2-11, archivo: H2-11.webp, pie: { es: "El horario que propone la dueña, listo para confirmar", en: "The time slot the owner proposes, ready to confirm" } }
+  - { funcionalidad: H2-12, archivo: H2-12.webp, pie: { es: "¿Está caro? El precio por m² frente a 6 anuncios parecidos", en: "Is it overpriced? Price per m² against 6 similar listings" } }
+  - { funcionalidad: H2-13, archivo: H2-13.webp, pie: { es: "Tu cuota mensual, si cabe en el 40 % y hasta cuánto puedes pagar", en: "Your monthly payment, the 40% check and how much you can afford" } }
+  - { funcionalidad: H2-14, archivo: H2-14.webp, pie: { es: "Lo que paga cada parte al escriturar, con la norma de cada cifra", en: "What each side pays at closing, with the rule behind each figure" } }
+  - { funcionalidad: H2-15, archivo: H2-15.webp, pie: { es: "El lector marca un embargo y la vivienda familiar (aún apagado)", en: "The reader flags a lien and a family-home status (still switched off)" } }
+  - { funcionalidad: H2-16, archivo: H2-16.webp, pie: { es: "Pagas al menos: el «desde» más el registro y el parqueadero aparte", en: "You pay at least: the 'from' price plus registration and parking" } }
+  - { funcionalidad: H2-17, archivo: H2-17.webp, pie: { es: "Nuevo o usado: lo que cabe en tu presupuesto, lado a lado", en: "New or resale: what fits your budget, side by side" } }
+  - { funcionalidad: H2-18, archivo: H2-18.webp, pie: { es: "La espera cuesta: el arriendo de 20 meses hasta la entrega", en: "Waiting costs: 20 months of rent until handover" } }
+  - { funcionalidad: H2-19, archivo: H2-19.webp, pie: { es: "Te alcanza con subsidio: cuántos proyectos caben, con y sin ayuda", en: "Subsidy check: how many projects fit, with and without aid" } }
+  - { funcionalidad: H2-20, archivo: H2-20.webp, pie: { es: "El índice de vivienda nueva: la mediana del m² privado por región", en: "The new-housing index: median private m² by region" } }
+  - { funcionalidad: H2-21, archivo: H2-21.webp, pie: { es: "La ficha honesta: el aviso dice 1 de los 9 datos para decidir", en: "The honest sheet: the ad states 1 of the 9 facts you need" } }
+  - { funcionalidad: H2-22, archivo: H2-22.webp, pie: { es: "Pedir la visita a la sala de ventas, eligiendo la franja", en: "Requesting a sales-office visit, choosing the time slot" } }
+  - { funcionalidad: H2-23, archivo: H2-23.webp, pie: { es: "La sesión de fotos que agendó el equipo, vista por el dueño", en: "The photo session the team scheduled, as the owner sees it" } }
+sin_pantalla: [H2-24]

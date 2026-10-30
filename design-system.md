@@ -382,9 +382,13 @@ cifra `clamp(3.5rem,8vw,4.75rem)`; tres columnas dejaban dos huérfanos.
   un evento de enlace por canal, al arranque del canal inferior. Nunca dos junto al mismo
   origen: se pisaban («no supera» + «sí»). Llamadas de anotación ①② `lilac`/`lilac-ink` en la
   esquina de su tarea con las notas al pie en HTML; eventos de enlace Ⓐ mono 10px cuando el
-  proceso se parte en filas (6 columnas por fila). Por debajo de 720 px el contenedor desplaza en
+  proceso se parte en filas (6 columnas por fila). **Los círculos de enlace de un mismo margen se
+  apilan en vertical, centrados en el carril** (S27; con uno solo, el punto de siempre): el flujo
+  en recta salta a su nivel, y por canal ocupa el extremo por donde viaja (la salida, el más
+  bajo; la entrada, el más alto). Por debajo de 720 px el contenedor desplaza en
   horizontal: **nunca se encoge el texto**. Las invariantes de legibilidad (rótulos que no se
-  pisan ni quedan tachados) se prueban sobre los seis procesos reales.
+  pisan ni quedan tachados, círculos que no se tocan, flujos que terminan en su círculo) se
+  prueban sobre los procesos reales.
 - **Caja de frente** (portal `/portafolio`, ADR-015 · post-S5): la unidad del portal, una por frente
   (apps · agentes · investigaciones · tableros). Card paper-0, borde paper-2, `r-lg`, `sh-1`,
   hover `-translate-y-0.5` + `sh-2`. Arriba, a la izquierda el **icono del frente** en un cuadro
