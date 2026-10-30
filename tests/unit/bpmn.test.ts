@@ -447,6 +447,44 @@ describe("trazar — los eventos de enlace (los procesos reales)", () => {
       expect(e.entrada.y).toBe(nodo[e.a].y);
     }
   });
+
+  // El trazo EXACTO que el motor daba a Habla ANTES del S27 (capturado del router de `main` en 60d8cbc; Habla tiene un
+  // solo evento por margen). Si cambia `data/fichas/habla.yaml` en origen, este literal se vuelve a capturar; si cambia
+  // el motor, esta prueba dice que el diagrama de una app que no debía moverse se movió.
+  it("el trazo de Habla es, carácter por carácter, el que tenía antes de los eventos apilados", () => {
+    const t = trazar(habla, { columnasPorFila: 6 });
+    expect(t.flujos.map((f) => [f.de, f.a, f.d])).toEqual([
+      ["ini", "idea", "M221,80 H264"],
+      ["idea", "juego", "M380,80 H396"],
+      ["juego", "habla", "M512,80 H512 V180 H528"],
+      ["habla", "mide", "M644,180 H644 V280 H660"],
+      ["mide", "descarta", "M776,280 H792"],
+      ["descarta", "enlace:A", "M908,280 H925"],
+      ["enlace:A", "responde", "M151,616 H168"],
+      ["responde", "acierto", "M284,616 H284 V416 H336"],
+      ["acierto", "suma", "M380,416 H416 V616 H432"],
+      ["acierto", "enlace:B", "M358,438 V658 H936 V427"],
+      ["enlace:B", "habla", "M151,180 H528"],
+      ["suma", "rumbo", "M548,616 H548 V416 H564"],
+      ["rumbo", "fin", "M680,416 H699"],
+    ]);
+    expect(t.enlaces).toEqual([
+      {
+        letra: "A",
+        de: "descarta",
+        a: "responde",
+        salida: { x: 936, y: 280 },
+        entrada: { x: 140, y: 616 },
+      },
+      {
+        letra: "B",
+        de: "acierto",
+        a: "habla",
+        salida: { x: 936, y: 416 },
+        entrada: { x: 140, y: 180 },
+      },
+    ]);
+  });
 });
 
 /**
