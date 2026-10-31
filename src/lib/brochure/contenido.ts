@@ -256,7 +256,8 @@ const enSchema = z
           .object({
             titulo: t,
             carriles: z.record(z.string(), t),
-            pasos: z.record(z.string(), t),
+            // Un paso final puede ir sin rótulo (`texto: ""` en el complemento): su inglés también.
+            pasos: z.record(z.string(), z.string().max(MAX)),
             etiquetas: z.record(z.string(), t).default({}),
             anotaciones: z.record(z.string(), t).default({}),
           })

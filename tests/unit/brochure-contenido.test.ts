@@ -279,6 +279,16 @@ describe("la FORMA del contenido v2", () => {
     if (!r.ok) expect(r.problemas.join("\n")).toMatch(esperado);
   });
 
+  it("un paso final sin rótulo en el complemento admite su inglés vacío (paridad), pero no un texto vacío en otro campo", () => {
+    expect(
+      leerContenido(con((c) => (c.en.complemento.proceso.pasos.fin = ""))).ok,
+    ).toBe(true);
+    expect(
+      leerContenido(con((c) => (c.en.complemento.proceso.carriles.app = "")))
+        .ok,
+    ).toBe(false);
+  });
+
   it("la paleta es de seis acentos, los de la maqueta", () => {
     expect([...ACENTOS]).toEqual([
       "sage",
@@ -454,6 +464,10 @@ describe.skipIf(
   const archivos = readdirSync(DIR).filter((f) =>
     f.endsWith(".contenido.json"),
   );
+
+  it("la piloto, Innmobiliaria, tiene su contenido v2", () => {
+    expect(archivos).toContain("inmobiliaria.contenido.json");
+  });
 
   it.each(archivos)(
     "%s valida y es coherente con su export, sus capturas y su complemento",
