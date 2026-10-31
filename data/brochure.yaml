@@ -8,10 +8,14 @@
 #    Todos los pares de color que usa la hoja cumplen AA: lo prueba tests/unit/brochure-contraste.test.ts.
 #  · `datos_sinteticos` — si las capturas de esa app llevan la etiqueta «datos sintéticos». Es verdadero
 #    en las diez apps; falso en las dos de la casa, que son este mismo sitio, sin datos de ejemplo.
+#  · `ejemplos_busqueda` (opcional) — lo que sugiere la caja del buscador; sin él, una frase general.
 #
 # Un slug sin entrada rompe el build (src/lib/brochure/config.ts) y el test nombra el que falta o sobra.
 apps:
-  inmobiliaria: { acento: sage, datos_sinteticos: true }
+  inmobiliaria:
+    acento: sage
+    datos_sinteticos: true
+    ejemplos_busqueda: { es: "sello, cuota, WhatsApp", en: "badge, payment, WhatsApp" }
   nutri-kids: { acento: sage, datos_sinteticos: true }
   big-d: { acento: sky, datos_sinteticos: true }
   hackguard: { acento: sky, datos_sinteticos: true }

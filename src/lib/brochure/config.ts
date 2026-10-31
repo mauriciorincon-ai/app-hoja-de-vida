@@ -27,6 +27,14 @@ export const configBrochureSchema = z
         .object({
           acento: z.enum(ACENTOS),
           datos_sinteticos: z.boolean(),
+          // Lo que el buscador sugiere en su caja («Busca: sello, cuota, WhatsApp…»); sin esto, una frase general.
+          ejemplos_busqueda: z
+            .object({
+              es: z.string().trim().min(1).max(60),
+              en: z.string().trim().min(1).max(60),
+            })
+            .strict()
+            .optional(),
         })
         .strict(),
     ),
