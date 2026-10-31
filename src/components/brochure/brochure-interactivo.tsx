@@ -9,8 +9,10 @@ import { useEffect } from "react";
  * Regla de esta isla: SOLO CAMBIA ATRIBUTOS — `open`, `hidden`, `aria-*`, `data-b-*`, el `src` de una
  * imagen diferida y el `style` de nodos que React no estiliza—, nunca texto ni hijos de un nodo de
  * React. Por eso todo lo que se alterna (el pie de cada pantalla de la portada, el detalle de cada
- * cifra, cada diapositiva del Recorrido) ya viene en el HTML, y aquí se muestra uno y se esconden los
- * demás. Escucha por delegación dentro de `[data-brochure]` y lo suelta todo al desmontarse.
+ * cifra) ya viene en el HTML, y aquí se muestra uno y se esconden los demás; las diapositivas del
+ * Recorrido y los textos de la vista previa los pinta `recorrido.tsx` cuando la isla se lo pide con un
+ * evento, la primera vez. Escucha por delegación dentro de `[data-brochure]` y lo suelta todo al
+ * desmontarse.
  *
  * Con el movimiento reducido no rota la portada ni crece la cinta; con la pausa (`data-b-quieto`,
  * WCAG 2.2.2) se detiene todo lo que se mueve solo.
@@ -196,14 +198,23 @@ export function BrochureInteractivo({ slug }: { slug: string }) {
     );
     const irA = (id: string, destino?: string) => {
       cerrarIndice();
+      // las secciones fuera de pantalla guardan una altura provisional (content-visibility): antes
+      // del primer salto se pintan todas, para que el destino se calcule con las alturas reales y no
+      // se corra mientras el desplazamiento pasa por ellas
+      raiz.setAttribute("data-b-entero", "");
       if (id === "top") {
         window.scrollTo({ top: 0, behavior: conducta() });
         return;
       }
       const sec = document.getElementById(`s-${id}`);
       if (!sec) return;
+      // un capítulo recién abierto redibuja su flujo al ancho del marco en el cuadro siguiente (en el
+      // móvil crece hacia abajo): se espera ese cuadro antes de calcular el destino
+      const abre = sec instanceof HTMLDetailsElement && !sec.open;
       if (sec instanceof HTMLDetailsElement) sec.open = true;
-      requestAnimationFrame(() => {
+      const luegoDe = (f: () => void) =>
+        requestAnimationFrame(() => (abre ? requestAnimationFrame(f) : f()));
+      luegoDe(() => {
         const el = (destino && document.getElementById(destino)) || sec;
         el.scrollIntoView({
           block: destino ? "center" : "start",
@@ -278,11 +289,13 @@ export function BrochureInteractivo({ slug }: { slug: string }) {
       $(".ficha-voltea", f)?.setAttribute("aria-pressed", String(x));
     };
     // la altura de la cara más larga, medida fuera de pantalla con el ancho que tendrá cada ficha
-    // (los capítulos cerrados no se pueden medir en su sitio)
+    // (los capítulos cerrados no se pueden medir en su sitio). Solo se mide con un capítulo abierto:
+    // al cargar, todas las fichas están en capítulos cerrados, y medir ahí forzaba el diseño de la
+    // página entera dentro de la hidratación (el TBT de la piloto).
     function igualarFichas() {
       const cap = $("details.capitulo");
       const caras = $$(".fichas .ficha .cara");
-      if (!cap || !caras.length) return;
+      if (!cap || !caras.length || !$("details.capitulo[open] .fichas")) return;
       const ancho = cap.clientWidth - 52;
       const gap = 16;
       const cols = Math.max(1, Math.floor((ancho + gap) / (400 + gap)));
@@ -305,7 +318,10 @@ export function BrochureInteractivo({ slug }: { slug: string }) {
         ),
       );
       caja.remove();
-      raiz!.style.setProperty("--alto-ficha", `${Math.ceil(alto)}px`);
+      // en cada rejilla de fichas y no en la raíz: una variable en la raíz recalcula el estilo de
+      // toda la página
+      for (const g of $$(".fichas"))
+        g.style.setProperty("--alto-ficha", `${Math.ceil(alto)}px`);
     }
     igualarFichas();
     void document.fonts?.ready.then(igualarFichas);
@@ -328,6 +344,8 @@ export function BrochureInteractivo({ slug }: { slug: string }) {
       const grande = el.classList.contains("cinta-item");
       // en la cinta la pantalla crece en su sitio; la tarjeta flotante queda solo con el movimiento reducido
       if (grande && !RM()) return;
+      // sus textos los pinta `recorrido.tsx` la primera vez que hace falta
+      document.dispatchEvent(new Event("brochure:arma-previa"));
       const p = $(`[data-b-previa="${CSS.escape(id)}"]`, previa);
       if (!p) return;
       sí(previa, "data-b-grande", grande);
@@ -378,14 +396,14 @@ export function BrochureInteractivo({ slug }: { slug: string }) {
     };
 
     // ── el Recorrido ───────────────────────────────────────────────────────────────────────
+    // sus diapositivas las pinta `recorrido.tsx` la primera vez que se abre: se cuentan al usarlas
     const rec = $<HTMLDialogElement>("dialog.recorrido");
-    const diapos = rec ? $$("[data-b-r]", rec) : [];
-    const total = rec ? $$<HTMLImageElement>(".r-marco img", rec).length : 0;
+    let total = 0;
     const R = { i: 0, auto: 0 };
     const rMostrar = (i: number) => {
       if (!rec || !total) return;
       R.i = (i + total) % total;
-      for (const el of diapos) {
+      for (const el of $$("[data-b-r]", rec)) {
         const es = Number(el.dataset.bR) === R.i;
         if (el.tagName === "IMG") {
           if (es) cargar(el as HTMLImageElement);
@@ -432,7 +450,9 @@ export function BrochureInteractivo({ slug }: { slug: string }) {
     const rAbrir = (id?: string) => {
       if (!rec) return;
       ocultarPrevia();
+      document.dispatchEvent(new Event("brochure:arma-recorrido"));
       const imgs = $$(".r-marco img", rec);
+      total = imgs.length;
       const i = id ? imgs.findIndex((x) => x.dataset.id === id) : 0;
       rec.showModal();
       rMostrar(i < 0 ? 0 : i);

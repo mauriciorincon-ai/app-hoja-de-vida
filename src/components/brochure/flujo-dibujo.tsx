@@ -55,10 +55,12 @@ export function FlujoDibujo({
     const el = marco.current;
     if (!el) return;
     let imprimiendo = false;
+    // el redibujo entra en el mismo cuadro (flushSync): un salto a algo que va debajo del flujo se
+    // calcula con su alto nuevo
     const medir = () => {
       if (imprimiendo) return;
       const cw = el.clientWidth;
-      if (cw > 0) setW(cw);
+      if (cw > 0) flushSync(() => setW(cw));
     };
     const ro = new ResizeObserver(medir);
     ro.observe(el);

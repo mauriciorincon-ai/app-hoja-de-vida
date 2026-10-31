@@ -8,6 +8,10 @@ import type {
   VistaBrochure,
 } from "@/lib/brochure/modelo";
 import { FlujoDibujo } from "./flujo-dibujo";
+import {
+  Previa as PreviaCliente,
+  Recorrido as RecorridoCliente,
+} from "./recorrido";
 import { SVG } from "./iconos";
 import {
   Cabeza,
@@ -28,7 +32,8 @@ import {
  *  - los capítulos son `<details>`: se abren sin JavaScript, Ctrl+F los abre y axe los recorre;
  *  - la ficha no anida botones: un botón de volteo cubre la ficha y la cita va encima;
  *  - lo que la maqueta reescribía (el pie de la pantalla de la portada, el detalle de una cifra, el
- *    rótulo del índice, cada diapositiva del Recorrido) ya viene escrito y se alterna con `hidden`.
+ *    rótulo del índice) ya viene escrito y se alterna con `hidden`; las diapositivas del Recorrido y
+ *    los textos de la vista previa los pinta el cliente la primera vez que se abren (`recorrido.tsx`).
  */
 
 /** El ancho del marco de un flujo en escritorio (1440 px): el primer dibujo que escribe el servidor. */
@@ -42,7 +47,12 @@ const st = (o: Record<string, string | number>) => o as CSSProperties;
 export function Barra({ v, t, buscador }: P & { buscador: React.ReactNode }) {
   return (
     <nav className="barra" data-b-oscura="" aria-label={v.nombre}>
-      <button type="button" className="marca" data-ir-sec="top">
+      <button
+        type="button"
+        className="marca"
+        data-ir-sec="top"
+        aria-label={v.nombre}
+      >
         <i aria-hidden="true">{v.inicial}</i>
         <span>{v.nombre}</span>
       </button>
@@ -87,7 +97,12 @@ export function Barra({ v, t, buscador }: P & { buscador: React.ReactNode }) {
       </div>
       <div className="barra-der">
         {buscador}
-        <button type="button" className="icono-boton" data-recorrido="">
+        <button
+          type="button"
+          className="icono-boton"
+          data-recorrido=""
+          aria-label={t("recorrido")}
+        >
           <span
             className="b-svg"
             aria-hidden="true"
@@ -217,7 +232,6 @@ export function Portada({ v, t }: P) {
                     key={p.id}
                     src={p.src}
                     alt={p.pie}
-                    modo={i === 0 ? "ahora" : "diferida"}
                     extra={{
                       "data-id": p.id,
                       ...(i === 0
@@ -443,7 +457,7 @@ export function Antes({ v, t, s }: P & { s: Seccion }) {
                         data-previa={x.mini.id}
                         aria-label={`${t("verGrande")}: ${x.mini.nombre}`}
                       >
-                        <Captura src={x.mini.src} modo="lazy" />
+                        <Captura src={x.mini.src} />
                       </button>
                     ) : null}
                   </div>
@@ -969,7 +983,7 @@ export function Proceso({ v, t, s }: P & { s: Seccion }) {
         />
         {Pr.notas.length ? (
           <>
-            <h4 className="sr">{t("notas")}</h4>
+            <h3 className="sr">{t("notas")}</h3>
             <ol className="notas">
               {Pr.notas.map((x) => (
                 <li key={x.n}>
@@ -1116,146 +1130,36 @@ export function Cierre({
   );
 }
 
-/* ── la vista previa y el Recorrido ───────────────────────────────────────────────────── */
+/* ── la vista previa y el Recorrido: los pinta el cliente al primer uso (`recorrido.tsx`) ── */
 export function Previa({ v }: { v: VistaBrochure }) {
-  return (
-    <div className="previa" id="previa" aria-hidden="true">
-      {/* eslint-disable-next-line @next/next/no-img-element -- el src lo pone la isla al mostrarla */}
-      <img alt="" width={1536} height={960} />
-      {v.pantallas.map((p) => (
-        <p key={p.id} data-b-previa={p.id} data-src={p.src} hidden>
-          <b>
-            {p.rotuloGrupo.split(" · ")[0]} · {p.nombre}
-          </b>
-          {p.pie}
-        </p>
-      ))}
-    </div>
-  );
+  return <PreviaCliente pantallas={v.pantallas} />;
 }
 
 export function Recorrido({ v, t }: P) {
   const grupos = v.capitulos
     .map((c) => ({
-      c,
+      orden: c.orden,
+      nombre: c.nombre,
       n: v.pantallas.filter((p) => p.grupo === c.orden).length,
     }))
-    .filter((x) => x.n);
+    .filter((g) => g.n);
   return (
-    <dialog
-      className="recorrido"
-      id="recorrido"
-      aria-label={`${t("recorrido")} · ${v.nombre}`}
-    >
-      <div className="r-cabeza">
-        <span className="marca">
-          <i aria-hidden="true">{v.inicial}</i>
-          {v.nombre}
-        </span>
-        <span className="r-grupo">
-          {v.pantallas.map((p, i) => (
-            <span key={p.id} data-b-r={i} hidden>
-              {p.rotuloGrupo}
-            </span>
-          ))}
-        </span>
-        <span className="r-cuenta">
-          {v.pantallas.map((p, i) => (
-            <span key={p.id} data-b-r={i} hidden>
-              {t("rCuenta", { i: i + 1, n: v.pantallas.length })}
-            </span>
-          ))}
-        </span>
-        <button
-          type="button"
-          className="r-boton"
-          id="r-auto"
-          aria-pressed="false"
-        >
-          <span data-b-auto="off">
-            <Svg nombre="play" />
-            {t("rPlay")}
-          </span>
-          <span data-b-auto="on" hidden>
-            <Svg nombre="pausa" />
-            {t("rPausa")}
-          </span>
-        </button>
-        <button type="button" className="r-boton" id="r-cerrar">
-          <Svg nombre="cerrar" />
-          <span>{t("rCerrar")}</span>
-        </button>
-      </div>
-      <div className="r-segmentos">
-        {grupos.map((x) => (
-          <button
-            key={x.c.orden}
-            type="button"
-            className="r-seg"
-            style={st({ "--n": x.n })}
-            data-g={x.c.orden}
-            aria-label={x.c.nombre}
-          >
-            <i />
-          </button>
-        ))}
-      </div>
-      <div className="r-escenario">
-        <div className="r-marco">
-          {v.pantallas.map((p, i) => (
-            <Captura
-              key={p.id}
-              src={p.src}
-              alt={p.pie}
-              extra={{ "data-b-r": i, "data-id": p.id, "data-g": p.grupo }}
-            />
-          ))}
-        </div>
-        <button
-          type="button"
-          className="r-flecha r-ant"
-          id="r-ant"
-          aria-label={t("rAnt")}
-        >
-          <Svg nombre="izq" />
-        </button>
-        <button
-          type="button"
-          className="r-flecha r-sig"
-          id="r-sig"
-          aria-label={t("rSig")}
-        >
-          <Svg nombre="der" />
-        </button>
-      </div>
-      <div className="r-texto">
-        {v.pantallas.map((p, i) => (
-          <div key={p.id} className="r-diapo" data-b-r={i} hidden>
-            <b>{p.nombre}</b>
-            <p className="r-pie">{p.pie}</p>
-            <p>{p.queHace}</p>
-          </div>
-        ))}
-        <div>
-          <button type="button" className="r-boton" id="r-capitulo">
-            {t("rCapitulo")} →
-          </button>
-        </div>
-      </div>
-      <div className="r-tiras">
-        {v.pantallas.map((p, i) => (
-          <button
-            key={p.id}
-            type="button"
-            className="r-tira"
-            data-ri={i}
-            aria-label={p.nombre}
-          >
-            <Captura src={p.src} modo="lazy" />
-          </button>
-        ))}
-      </div>
-      <p className="r-teclas">{t("rTeclas")}</p>
-    </dialog>
+    <RecorridoCliente
+      nombre={v.nombre}
+      inicial={v.inicial}
+      pantallas={v.pantallas}
+      grupos={grupos}
+      x={{
+        etiqueta: `${t("recorrido")} · ${v.nombre}`,
+        cuenta: t("rCuenta", { i: "{i}", n: "{n}" }),
+        play: t("rPlay"),
+        pausa: t("rPausa"),
+        cerrar: t("rCerrar"),
+        ant: t("rAnt"),
+        sig: t("rSig"),
+        capitulo: t("rCapitulo"),
+        teclas: t("rTeclas"),
+      }}
+    />
   );
 }

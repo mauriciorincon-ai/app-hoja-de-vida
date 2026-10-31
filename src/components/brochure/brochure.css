@@ -627,9 +627,19 @@
   #hero-rotulo>span[hidden],.pie-pantalla>span[hidden],.cifra-detalle>span[hidden],.indice>button>span[hidden],.indice>button>b[hidden]{display:none}
   /* sin JavaScript, imágenes diferidas: su caja guarda el lugar */
   img[data-b-src]:not([src]){visibility:hidden}
+  /* el texto de la portada entra subiendo, sin desvanecerse: es lo primero que se lee y la pintura
+     más grande del móvil (el LCP), y la regla 7 no deja que una entrada la retrase. La escena y las
+     cifras sí se desvanecen, como en la maqueta. */
+  .portada-rejilla>div:first-child>.entra{opacity:1}
+  /* las secciones 01–05 fuera de pantalla no se estilan ni se diseñan hasta acercarse: siguen en el
+     DOM (Ctrl+F, lectores de pantalla, impresión), pero la piloto tiene 4.000 nodos y cada cambio
+     tras la hidratación (la letra mono, el flujo que se redibuja en el móvil) rehacía la página entera */
+  .sec{content-visibility:auto;contain-intrinsic-size:auto 1400px}
+  &[data-b-entero] .sec{content-visibility:visible}
 
   @media print{
     [data-b-no-imprimir]{display:none!important}
+    .sec{content-visibility:visible}
   }
 }
 }

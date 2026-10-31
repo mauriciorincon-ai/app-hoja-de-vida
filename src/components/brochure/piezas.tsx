@@ -96,10 +96,11 @@ export function Valor({
 }
 
 /**
- * Una captura. `ahora`: la pide el HTML (solo la primera de la portada, con prioridad alta). `lazy`:
- * la carga perezosa del navegador (las que viven en capítulos cerrados no se piden). Sin ninguna de
- * las dos, la imagen es DIFERIDA: llega sin `src` y la isla se lo pone al acercarse a la vista (la
- * cinta, las pantallas que rotan): así la portada no pide treinta y seis imágenes al cargar.
+ * Una captura. `lazy`: la carga perezosa del navegador (las que viven en capítulos cerrados no se
+ * piden). Si no, la imagen es DIFERIDA: llega sin `src` y la isla se lo pone al acercarse a la vista.
+ * Así es TODA imagen que se ve al cargar, la primera pantalla de la portada incluida: lo que el HTML
+ * pide antes de la primera pintura le quita ancho de banda al texto, que es el LCP del móvil (medido:
+ * con la primera pantalla en el HTML, el LCP de la piloto subía de 3,3 a 3,6 s).
  */
 export function Captura({
   src,
@@ -111,7 +112,7 @@ export function Captura({
 }: {
   src: string;
   alt?: string;
-  modo?: "ahora" | "lazy" | "diferida";
+  modo?: "lazy" | "diferida";
   className?: string;
   style?: CSSProperties;
   extra?: Record<string, string | number | undefined>;
@@ -127,16 +128,6 @@ export function Captura({
   // Las capturas se sirven tal cual (WebP de 1536×960 ≤ 80 KB, cupo de Vercel Hobby): sin optimizador,
   // y la diferida llega sin `src` (se lo pone la isla).
   /* eslint-disable @next/next/no-img-element */
-  if (modo === "ahora")
-    return (
-      <img
-        src={src}
-        alt={alt}
-        fetchPriority="high"
-        loading="eager"
-        {...comun}
-      />
-    );
   if (modo === "lazy")
     return <img src={src} alt={alt} loading="lazy" {...comun} />;
   return <img data-b-src={src} alt={alt} {...comun} />;
