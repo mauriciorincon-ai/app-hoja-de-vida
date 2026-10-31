@@ -1,6 +1,5 @@
 # Capturas de HackGuard para su ficha en CV Viva (pedido 026, 2026-10-27). Build de producción de b5acd4b en una copia
-# aislada, con la fecha de consulta del commit (2026-10-14), tema claro, interfaz en español; viewport de 1024×640 a
-# escala 1,5 (archivo de 1536×960, decisión del dueño en el gate M1 de CV Viva): a ese ancho la app usa su barra inferior.
+# aislada, con la fecha de consulta del commit (2026-10-14), tema claro, interfaz en español; tomas con propósito (2026-10-31): cada pieza completa, centrada sobre el fondo de la app, con margen, y ampliada hasta llenar el lienzo de 1536×960 (a DPR 3, en el ancho de ventana que más llena); la barra de navegación no entra en ninguna.
 # Datos: solo los activos, lotes, hallazgos y propuestas demo sintéticos del repo. Ninguna muestra una carga ni un ataque.
 portada: entrada.webp
 capturas:
@@ -20,6 +19,6 @@ capturas:
   - { funcionalidad: F14, archivo: F14.webp, pie: { es: "Un lote de ZAP por confirmar: lo que no corrió dice «no ejecutada»", en: "A ZAP batch to confirm: what did not run says “not run”" } }
   - { funcionalidad: F15, archivo: F15.webp, pie: { es: "La propuesta del extractor: citas verificadas y veredicto por regla", en: "The extractor's proposal: verified quotes and a rule-based verdict" } }
   - { funcionalidad: F16, archivo: F16.webp, pie: { es: "La brecha: lo planeado contra lo ejecutado, por activo", en: "The gap: planned against run, by asset" } }
-  - { funcionalidad: F17, archivo: F17.webp, pie: { es: "Un control de ISO/IEC 42001 con fallas: sus tres pruebas, evidencia y hallazgo", en: "An ISO/IEC 42001 control with failures: its three tests, evidence and finding" } }
-  - { funcionalidad: F18, archivo: F18.webp, pie: { es: "El tablero con las comprobaciones del instrumento, todas en verde", en: "The dashboard with the instrument's checks, all green" } }
+  - { funcionalidad: F17, archivo: F17.webp, pie: { es: "Un control con fallas: sus tres pruebas, la evidencia y el hallazgo", en: "A failing control: its three tests, the evidence and the finding" } }
+  - { funcionalidad: F18, archivo: F18.webp, pie: { es: "Las comprobaciones del instrumento, todas en verde", en: "The instrument's checks, all green" } }
 sin_pantalla: []
