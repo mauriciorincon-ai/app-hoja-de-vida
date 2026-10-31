@@ -1,5 +1,5 @@
 # Capturas de planlang para CV Viva (pedido 026, 2026-10-27). Export de producción de la base 269a68e, servido en
-# local; viewport 1024×640 a deviceScaleFactor 1.5 (archivo de 1536×960), tema claro, interfaz en español; datos 100 % sintéticos.
+# local; tomas con propósito (2026-10-31): cada pieza completa, capturada a DPR 3 en el ancho de ventana que más llena y centrada sobre el fondo de la app con margen (archivo de 1536×960), tema claro, interfaz en español; datos 100 % sintéticos.
 # «entrada» (la funcionalidad) usa un estado distinto al de la portada: «Cómo funciona», debajo del titular.
 portada: entrada.webp
 capturas:
@@ -12,7 +12,7 @@ capturas:
   - { funcionalidad: demo-b, archivo: demo-b.webp, pie: { es: "El agente de vinculación: documentos, listas, zona gris y el oficial", en: "The onboarding agent: documents, watchlists, gray zone and the officer" } }
   - { funcionalidad: expediente, archivo: expediente.webp, pie: { es: "El expediente de B-005: cada conclusión cita su regla o su coincidencia", en: "B-005's case file: every conclusion cites its rule or its list match" } }
   - { funcionalidad: documento-adverso, archivo: documento-adverso.webp, pie: { es: "La negación de A-017: causal legal, regla, datos y cómo contradecirla", en: "A-017's denial: legal ground, rule, data and how to appeal it" } }
-  - { funcionalidad: lotes, archivo: lotes.webp, pie: { es: "La corrida por dentro: modelo por suscripción, lotes de 20 y trazas con huella", en: "Inside the run: subscription model, batches of 20, fingerprinted traces" } }
+  - { funcionalidad: lotes, archivo: lotes.webp, pie: { es: "La corrida por dentro: modelo por suscripción, lotes de 20 y sus versiones", en: "Inside the run: subscription model, batches of 20 and its versions" } }
   - { funcionalidad: verificador, archivo: verificador.webp, pie: { es: "El veredicto del demo A: 10 de 10 criterios y sus tres fallas a la vista", en: "Demo A's verdict: 10 of 10 criteria and its three failures in plain sight" } }
   - { funcionalidad: supuestos, archivo: supuestos.webp, pie: { es: "Dos supuestos del plan, refutados con su medida frente a lo que pedía", en: "Two plan assumptions refuted, measured against what the plan asked" } }
   - { funcionalidad: comparar, archivo: comparar.webp, pie: { es: "Varios agentes frente a uno solo: veredicto, exactitud, tiempo y costo", en: "Several agents versus one: verdict, accuracy, time and cost" } }
