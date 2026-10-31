@@ -1,0 +1,79 @@
+# Complemento de la ficha técnica del chat de CV Viva (ADR-016). PROCEDENCIA: planeadora — entrega 028 (2026-10-31),
+# decisión «1a» del dueño al G-Plan del Sprint 028 (OM-26: «lo mismo para el chat»). Escrito desde una copia aislada de
+# `b9acf15` (main tras el #106) contra su manual, su código (src/app/api/chat/, src/lib/ia/, src/lib/chat-registro/)
+# y su VISION v1.4.2.
+schema_version: "1.0.0"
+app: chat-hoja-de-vida
+procedencia: planeadora
+declarado_en: "2026-10-31"
+titular: "Un chat que contesta por la hoja de vida solo con lo que consta, cita la sección que lo respalda, no afirma lo que no consta y, si el proveedor de IA cae, sigue respondiendo con búsqueda local."
+cifras_destacadas: [funcionalidades, fragmentos_del_indice, preguntas_del_banco, proveedores_conmutables, tokens_en_respuestas_fijas]
+limites:
+  - "El buscador es léxico: si el contenido no dice la palabra de quien pregunta, no la encuentra; el banco de preguntas lo vigila."
+  - "Las listas del rehúso y de la salida de Vesting son un piso, no un techo: una pregunta rara puede llegar al modelo."
+  - "El ritmo por minuto vive en la memoria de cada servidor y no es exacto; el cupo diario sí lo es."
+  - "Las pruebas usan un proveedor simulado: lo que responde el modelo real se mide aparte y con permiso del dueño."
+nunca:
+  - "Afirma que Henry no hizo, no sabe o no tiene algo."
+  - "Habla como si fuera Henry: responde siempre en tercera persona."
+  - "Atribuye motivos o causas que la hoja de vida no dice."
+  - "Enseña una fuente que su respuesta no cita."
+  - "Contesta sin la puerta: sin nombre, correo y código no hay chat."
+proceso:
+  titulo: "De la pregunta a la respuesta con su fuente"
+  carriles:
+    - { id: visita, nombre: "Quien pregunta" }
+    - { id: chat, nombre: "El chat" }
+    - { id: proveedor, nombre: "El proveedor de IA" }
+  pasos:
+    - { id: ini, tipo: inicio, carril: visita, texto: "Quiere saber algo de la trayectoria" }
+    - { id: registra, tipo: tarea, carril: visita, texto: "Deja nombre y correo y acepta el aviso" }
+    - { id: codigo, tipo: tarea, carril: chat, texto: "Le envía un código de seis dígitos" }
+    - { id: pregunta, tipo: tarea, carril: visita, texto: "Entra con el código y pregunta" }
+    - { id: cupo, tipo: decision, carril: chat, texto: "¿Le queda cupo hoy?" }
+    - { id: tope, tipo: tarea, carril: chat, texto: "Le pide que vuelva mañana" }
+    - { id: fin-tope, tipo: fin, carril: visita, texto: "" }
+    - { id: consta, tipo: decision, carril: chat, texto: "¿Pregunta por lo que consta?" }
+    - { id: fija, tipo: tarea, carril: chat, texto: "Responde un texto fijo, sin gastar tokens" }
+    - { id: busca, tipo: tarea, carril: chat, texto: "Busca los fragmentos que responden" }
+    - { id: responde, tipo: decision, carril: proveedor, texto: "¿Responde el proveedor?" }
+    - { id: redacta, tipo: tarea, carril: proveedor, texto: "Redacta en tercera persona y cita [n]" }
+    - { id: local, tipo: tarea, carril: chat, texto: "Muestra los fragmentos en búsqueda local" }
+    - { id: fuentes, tipo: tarea, carril: chat, texto: "Enseña solo las fuentes que la respuesta cita" }
+    - { id: registro, tipo: tarea, carril: chat, texto: "Guarda la pregunta, la respuesta y su modo" }
+    - { id: cita, tipo: decision, carril: visita, texto: "¿La respuesta trae una cita?" }
+    - { id: sigue, tipo: tarea, carril: visita, texto: "Sigue la cita hasta la sección del sitio" }
+    - { id: fin, tipo: fin, carril: visita, texto: "Llega a la evidencia" }
+    - { id: fin-sin-cita, tipo: fin, carril: visita, texto: "" }
+  flujos:
+    - { de: ini, a: registra }
+    - { de: registra, a: codigo }
+    - { de: codigo, a: pregunta }
+    - { de: pregunta, a: cupo }
+    - { de: cupo, a: consta, etiqueta: "sí" }
+    - { de: cupo, a: tope, etiqueta: "no: llegó a 20" }
+    - { de: tope, a: fin-tope }
+    - { de: consta, a: busca, etiqueta: "sí" }
+    - { de: consta, a: fija, etiqueta: "no: no consta o ajena" }
+    - { de: fija, a: registro }
+    - { de: busca, a: responde }
+    - { de: responde, a: redacta, etiqueta: "sí" }
+    - { de: responde, a: local, etiqueta: "no: cae o sin cuota" }
+    - { de: redacta, a: fuentes }
+    - { de: fuentes, a: registro }
+    - { de: local, a: registro }
+    - { de: registro, a: cita }
+    - { de: cita, a: sigue, etiqueta: "sí" }
+    - { de: cita, a: fin-sin-cita, etiqueta: "no" }
+    - { de: sigue, a: fin }
+  anotaciones:
+    - { paso: registra, texto: "Sin el código no hay chat: vale diez minutos y cinco intentos, y la sesión dura 30 días en ese navegador." }
+    - { paso: cupo, texto: "20 preguntas cada 24 horas por correo y 10 por minuto por conexión; un correo bloqueado no entra." }
+    - { paso: fija, texto: "Ausencias, credenciales que no tiene, salario y temas ajenos: texto fijo. La salida de Vesting lleva su cita." }
+    - { paso: redacta, texto: "Solo con los cuatro fragmentos recuperados, sin hablar como Henry; hasta 700 tokens y 30 segundos." }
+    - { paso: local, texto: "El mismo índice corre en el navegador: el chat no se queda mudo y lo dice con «Búsqueda local»." }
+    - { paso: registro, texto: "Quién preguntó, qué se respondió, con qué fuentes y en qué modo: solo el dueño lo lee." }
+
+# Roadmap votable: ninguna funcionalidad del chat se muestra ni se vota (decisión del dueño, 2026-09-13; el manual,
+# «Roadmap con votación anónima»). Vacío a propósito.
+roadmap: []

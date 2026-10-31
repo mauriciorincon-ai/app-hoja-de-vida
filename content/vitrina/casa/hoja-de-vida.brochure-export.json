@@ -1,0 +1,376 @@
+{
+  "_schema": {
+    "_lee_esto_primero": "Este bloque documenta el formato y no es dato de la app. Se conserva en cada export para que el esquema viaje con el archivo: quien lo consuma no necesita buscar otro documento. Las apps que adopten este formato copian este bloque tal cual y rellenan el resto.",
+    "_origen": "Definido por app-dash-agent-ai en su entrega de brochure (2026-08-19). Es el PRIMER export del portafolio; las demás apps lo adoptan.",
+    "_consumidor": "La vitrina de hoja-de-vida. Renderiza la ficha de cada app sin abrir su repositorio.",
+    "_regla_madre": "Toda cifra de `metricas[]` lleva su etiqueta de `fuente`. Es la regla dura 3 de Dash Agent AI aplicada a su propia ficha: una app que exige procedencia a cada número de su pantalla no puede publicar cifras sueltas sobre sí misma. Se recomienda al resto del portafolio.",
+    "schema_version": "semver del FORMATO, no de la app. Cambio mayor = campo eliminado o con significado distinto; menor = campo nuevo opcional; parche = documentación.",
+    "app.estado": "\"inicial\" mientras el brochure describe la construcción cerrada; \"sellado\" cuando el gate de pruebas del usuario terminó. `sellado_en` es null hasta entonces.",
+    "funcionalidades.total": "El número que el brochure declara en su pie. `fuente_del_conteo` dice contra qué documento se cuadró — sin eso, el total es una afirmación.",
+    "funcionalidades.descartadas": "Las que se construyeron o se planearon y NO existen. Van aquí con su razón y su fecha para que nadie las cuente como pendientes ni como entregadas.",
+    "metricas[].fuente": "Una de cuatro: \"medido\" (salió de un contador o un comando), \"calculada\" (medido operado con una tarifa o una regla, y se dice cuál), \"declarado\" (lo fijó una persona), \"estimacion\" (deducido). Una cifra sin fuente no entra.",
+    "enlaces.produccion": "null cuando la app no tiene URL pública. `razon` explica por qué, y es lo que la vitrina muestra en lugar del enlace. Nunca se rellena con un enlace de repositorio ni con una promesa."
+  },
+  "schema_version": "1.0.0",
+  "actualizado": "2026-10-31",
+  "app": {
+    "slug": "hoja-de-vida",
+    "nombre": "CV Viva",
+    "ciclo": "H-2",
+    "estado": "inicial",
+    "sellado_en": null,
+    "sprints_cerrados": 26,
+    "version_repo": "0.1.0"
+  },
+  "promesa": {
+    "tagline": "Una hoja de vida que se recorre, con su evidencia a un clic.",
+    "intro": "CV Viva es la hoja de vida de Henry Rincón convertida en un sitio que se recorre: la trayectoria baja contigo, cada experiencia abre su caso de estudio con sus cifras y el CV sale en PDF para los sistemas de reclutamiento, de la misma fuente. También es la casa del Portafolio, donde cada producto tiene su ficha técnica, y de «Métodos», nueve publicaciones sobre cómo se diseña.",
+    "para_quien": "Para quien recluta y tiene segundos para decidir, para el líder técnico que quiere saber cómo piensa alguien y no solo dónde trabajó, y para quien llega a ver las apps del Portafolio. Un PDF estático no puede mostrar lo que alguien sabe hacer; aquí cada afirmación lleva a su evidencia.",
+    "diferencial": "No es una plantilla ni un PDF con animaciones. Todo el contenido vive en datos validados: si un campo está mal formado, si la cifra de un caso no aparece en su documento de fondo o si un enlace no lleva a ninguna parte, la publicación se detiene antes de salir. Las cuentas del sitio (apps, piezas, publicaciones) se miden del contenido y ninguna se escribe a mano. Y el mismo sitio es la prueba: el Portafolio publica cada app con su proceso dibujado y cada cifra con su procedencia, sin un solo enlace de acceso."
+  },
+  "funcionalidades": {
+    "total": 28,
+    "fuente_del_conteo": "docs/MANUAL-DE-USO.md",
+    "descartadas": [],
+    "grupos": [
+      {
+        "orden": 1,
+        "estrella": false,
+        "nombre": "Tu trayectoria, para recorrerla",
+        "linea": "Nueve experiencias en una línea que baja contigo, con sus logros, sus cifras y sus credenciales a la vista.",
+        "features": [
+          {
+            "id": "CV-01",
+            "nombre": "Una línea de tiempo que baja contigo",
+            "que_hace": "Una sola línea recorre las nueve experiencias. Al bajar, un círculo se queda a media pantalla y a su lado aparece el año grande de la que estás leyendo. Con «reducir movimiento» activado, todo queda quieto.",
+            "seccion_manual": "La trayectoria: el índice que baja contigo"
+          },
+          {
+            "id": "CV-02",
+            "nombre": "Los logros completos, a un clic",
+            "que_hace": "Cada experiencia despliega con «Ver logros completos» sus logros con cifras, los mismos que lleva el PDF. Una prueba exige el mismo número de logros en español y en inglés.",
+            "seccion_manual": "El \"grueso\" de cada experiencia (bullets expandibles)"
+          },
+          {
+            "id": "CV-03",
+            "nombre": "Ocho logros con su número",
+            "que_hace": "Ocho logros en cuatro columnas, cada uno con su número grande y de dónde sale. Los años de trayectoria no se escriben a mano: se calculan en cada publicación desde la fecha de inicio.",
+            "seccion_manual": "Alimentar la CV Viva (editar tu contenido)"
+          },
+          {
+            "id": "CV-04",
+            "nombre": "Certificaciones con su estado",
+            "que_hace": "Cada certificación con su institución y su año, y las que están en preparación con el sello «En curso» en lugar de fecha. Nombrar en el CV una credencial que no está en la lista hace fallar las pruebas.",
+            "seccion_manual": "Perfil, Certificaciones y Skills en la HOME"
+          },
+          {
+            "id": "CV-05",
+            "nombre": "Skills por grupo, sin porcentajes",
+            "que_hace": "Nueve grupos de herramientas, cada uno en su tarjeta con un ícono dibujado en casa. No hay porcentajes ni niveles de dominio: lo que está en exploración o es un prototipo lo dice en su chip.",
+            "seccion_manual": "Perfil, Certificaciones y Skills en la HOME"
+          },
+          {
+            "id": "CV-06",
+            "nombre": "Estudios con su institución",
+            "que_hace": "Los tres estudios en su propia sección, con la institución, el periodo y su logo. La misma información la leen el PDF, la hoja de vida imprimible y el chat.",
+            "seccion_manual": "Estudios"
+          }
+        ]
+      },
+      {
+        "orden": 2,
+        "estrella": false,
+        "nombre": "La evidencia, a un clic",
+        "linea": "Un caso de estudio por experiencia y un PDF que leen los reclutadores, los dos de la misma fuente.",
+        "features": [
+          {
+            "id": "CV-07",
+            "nombre": "Un caso de estudio por experiencia",
+            "que_hace": "Cada experiencia tiene su página: la tesis, tres o cuatro cifras, el contexto, el reto, «Cómo lo hice» en capítulos y lo que se llevó. Una cifra que su documento de fondo no diga detiene la publicación.",
+            "seccion_manual": "Casos de estudio con página propia"
+          },
+          {
+            "id": "CV-08",
+            "nombre": "El CV en PDF, legible por los ATS",
+            "que_hace": "El botón «CV (PDF)» entrega un PDF de texto seleccionable, a dos columnas y en el orden en que lo lee un sistema de reclutamiento. Se genera en cada publicación desde la misma fuente que la página, en español y en inglés.",
+            "seccion_manual": "Descargar CV en PDF (ATS)"
+          }
+        ]
+      },
+      {
+        "orden": 3,
+        "estrella": true,
+        "nombre": "El Portafolio, con fichas que se leen",
+        "linea": "Cada producto con su ficha técnica: el proceso dibujado, las cifras con su procedencia y ningún enlace de acceso.",
+        "features": [
+          {
+            "id": "CV-09",
+            "nombre": "Cuatro frentes, cada uno con su espacio",
+            "que_hace": "Apps, agentes, investigaciones y tableros: cada frente con su caja, su estado y cuántos productos tiene. Esa cuenta no se escribe: se mide del contenido publicado.",
+            "seccion_manual": "El portafolio: cuatro frentes"
+          },
+          {
+            "id": "CV-10",
+            "nombre": "Profesionales y personales, en carrusel",
+            "que_hace": "Las apps van en dos bloques, las profesionales primero, y cada bloque en un carrusel que muestra dónde empieza y dónde acaba. Se recorre con las flechas, con el dedo, con el teclado o con el gesto lateral del pad.",
+            "seccion_manual": "Categorías y carrusel"
+          },
+          {
+            "id": "CV-11",
+            "nombre": "Una ficha técnica de dos minutos",
+            "que_hace": "Cada app tiene su ficha: el titular de lo que no hace nadie más, de tres a cinco cifras con su procedencia, para quién es, qué tiene, sus límites y lo que nunca hace.",
+            "seccion_manual": "Las apps dentro del portafolio"
+          },
+          {
+            "id": "CV-12",
+            "nombre": "El proceso, dibujado desde los datos",
+            "que_hace": "«Cómo funciona» dibuja el proceso de cada app en BPMN: un carril por actor, la decisión donde se decide y las vueltas a la vista. El diagrama sale de los datos, y un proceso mal formado detiene la publicación.",
+            "seccion_manual": "Las apps dentro del portafolio"
+          },
+          {
+            "id": "CV-13",
+            "nombre": "Una pantalla por funcionalidad",
+            "que_hace": "La ficha completa agrupa las funcionalidades en tarjetas que se abren al llegar leyendo, y cada grupo abre con un carrusel con la pantalla de cada una: la app corriendo de verdad, con datos inventados.",
+            "seccion_manual": "Las apps dentro del portafolio"
+          },
+          {
+            "id": "CV-14",
+            "nombre": "Agentes y tableros, con lo que dicen sus datos",
+            "que_hace": "Las piezas que no son apps usan la misma ficha. Las que traen datos suman «Lo que dicen los datos»: cada hallazgo con su cifra y su procedencia.",
+            "seccion_manual": "Las piezas que no son apps"
+          },
+          {
+            "id": "CV-15",
+            "nombre": "La simulación, sin salir de la ficha",
+            "que_hace": "Una app privada puede enseñar su simulación estática: se abre en un marco dentro de la página o a pantalla completa, y no se carga hasta que alguien la pide.",
+            "seccion_manual": "La simulación de una app"
+          }
+        ]
+      },
+      {
+        "orden": 4,
+        "estrella": false,
+        "nombre": "Quien visita también decide",
+        "linea": "Vota lo que viene, propone una idea, se anota en la lista de espera o escribe, sin crear una cuenta.",
+        "features": [
+          {
+            "id": "CV-16",
+            "nombre": "Un roadmap que se vota sin registrarse",
+            "que_hace": "Cada app muestra lo que tiene planeado y deja votar con un clic, sin registro. El contador sale de la base de datos en el momento; si la base no responde, la sección lo dice y apaga los botones.",
+            "seccion_manual": "Roadmap con votación anónima"
+          },
+          {
+            "id": "CV-17",
+            "nombre": "Proponer una funcionalidad",
+            "que_hace": "Bajo el roadmap, una caja recibe ideas en las palabras de quien visita, con correo opcional. La propuesta llega al correo del dueño y no se publica ni se guarda en la base de datos.",
+            "seccion_manual": "Roadmap con votación anónima"
+          },
+          {
+            "id": "CV-18",
+            "nombre": "La lista de espera de las apps",
+            "que_hace": "Al pie de cada ficha de app, un formulario anota a quien quiere entrar, con la app ya elegida y sin promesa de fecha. Solo las apps la tienen: agentes, investigaciones y tableros se muestran y no se entregan.",
+            "seccion_manual": "El portafolio, asomada en la HOME"
+          },
+          {
+            "id": "CV-19",
+            "nombre": "«Escríbeme», con su motivo",
+            "que_hace": "El formulario de contacto pide nombre, correo, un motivo opcional (un proyecto, una asesoría, una capacitación, una charla o un rol) y el mensaje, y lo lleva al correo del dueño. Tiene límite por visitante y una trampa contra robots.",
+            "seccion_manual": "El formulario «Escríbeme»"
+          }
+        ]
+      },
+      {
+        "orden": 5,
+        "estrella": false,
+        "nombre": "Métodos: cómo se diseña, publicado",
+        "linea": "Nueve publicaciones en voz impersonal, con diez bloques fijos, tres voces separadas y fuentes fechadas.",
+        "features": [
+          {
+            "id": "CV-20",
+            "nombre": "Nueve publicaciones de método",
+            "que_hace": "«Métodos» reúne nueve publicaciones largas, cada una sobre una pregunta «Cómo se debe…» de IA, datos o BI. La lista cuenta sus piezas desde los archivos: ningún total se escribe a mano.",
+            "seccion_manual": "Métodos: una publicación por tema"
+          },
+          {
+            "id": "CV-21",
+            "nombre": "Diez bloques y tres voces",
+            "que_hace": "Cada publicación tiene los mismos diez bloques, con un índice y un ancla por bloque. La evidencia de proyectos, el estado del campo y el criterio del autor van rotulados con símbolo, palabra y color, nunca solo con color.",
+            "seccion_manual": "Métodos: una publicación por tema"
+          },
+          {
+            "id": "CV-22",
+            "nombre": "Un mapa dibujado desde el dato",
+            "que_hace": "Cada publicación trae su mapa: un diagrama con texto real, que se selecciona y se traduce, y debajo su lectura nodo por nodo, para los lectores de pantalla y para la impresión.",
+            "seccion_manual": "Métodos: una publicación por tema"
+          }
+        ]
+      },
+      {
+        "orden": 6,
+        "estrella": false,
+        "nombre": "Una casa cuidada",
+        "linea": "Dos idiomas, un menú corto, un aviso de mantenimiento, un 404 que se entiende y movimiento que se puede apagar.",
+        "features": [
+          {
+            "id": "CV-23",
+            "nombre": "Un menú de cuatro destinos",
+            "que_hace": "El encabezado lleva la marca HR, cuatro destinos (Hoja de vida, Portafolio, Métodos y Contacto), el CV en PDF y el idioma. En el teléfono, el mismo menú se abre con un botón y se cierra con Escape.",
+            "seccion_manual": "El menú del encabezado"
+          },
+          {
+            "id": "CV-24",
+            "nombre": "Modo mantenimiento, con el CV a mano",
+            "que_hace": "Una variable pone todo el sitio en «Estoy afinando mi sitio», en el idioma de quien llega y con el CV en PDF en los dos idiomas. Responde 503 con «vuelve después», así que los buscadores no reemplazan el sitio.",
+            "seccion_manual": "Modo mantenimiento"
+          },
+          {
+            "id": "CV-25",
+            "nombre": "Un 404 que habla los dos idiomas",
+            "que_hace": "Un archivo que no existe responde 404, y no un error del servidor, con una página en español y en inglés y un botón a cada inicio.",
+            "seccion_manual": "Un archivo que no existe responde 404, en los dos idiomas"
+          },
+          {
+            "id": "CV-26",
+            "nombre": "Español e inglés, sin perder el sitio",
+            "que_hace": "Todo el sitio existe en español y en inglés. Cambiar de idioma te deja en el mismo punto de lectura, aunque el inglés sea más corto, y la raíz abre siempre en español.",
+            "seccion_manual": "Idiomas"
+          },
+          {
+            "id": "CV-27",
+            "nombre": "Movimiento que se puede apagar",
+            "que_hace": "Las secciones se revelan al bajar, con contadores y la línea de tiempo en movimiento. Con «reducir movimiento» activado en el sistema, todo el contenido aparece quieto.",
+            "seccion_manual": "Animaciones y accesibilidad"
+          },
+          {
+            "id": "CV-28",
+            "nombre": "Contenido como datos, con aduana",
+            "que_hace": "Todo el contenido vive en archivos de datos en español y en inglés: editar y publicar actualiza la web, el PDF y el chat a la vez. Un campo mal formado detiene la publicación y la página en línea no se rompe.",
+            "seccion_manual": "Alimentar la CV Viva (editar tu contenido)"
+          }
+        ]
+      }
+    ]
+  },
+  "metricas": [
+    {
+      "clave": "funcionalidades",
+      "etiqueta": "Funcionalidades del producto",
+      "valor": 28,
+      "unidad": "funcionalidades",
+      "fuente": "medido",
+      "detalle": "Una por función de docs/MANUAL-DE-USO.md en b9acf15 que ve o usa quien visita o el dueño, cuadrada sección por sección; las del chat van en su propia ficha. La lista y lo que se dejó fuera, en la respuesta 028 de la planeadora."
+    },
+    {
+      "clave": "casos_de_estudio",
+      "etiqueta": "Casos de estudio",
+      "valor": 9,
+      "unidad": "casos",
+      "fuente": "medido",
+      "detalle": "Proyectos con caso de estudio en data/cv.es.yaml en b9acf15: uno por cada experiencia de la trayectoria, en español y en inglés."
+    },
+    {
+      "clave": "publicaciones_metodos",
+      "etiqueta": "Publicaciones de Métodos",
+      "valor": 9,
+      "unidad": "publicaciones",
+      "fuente": "medido",
+      "detalle": "Archivos de data/metodo/ en b9acf15; la lista de /metodos las cuenta desde la misma carpeta."
+    },
+    {
+      "clave": "pruebas_unitarias",
+      "etiqueta": "Pruebas unitarias y de integración",
+      "valor": 2628,
+      "unidad": "pruebas",
+      "fuente": "medido",
+      "detalle": "En verde en la CI del #106 (b9acf15, 2026-10-29): 2628 en 96 archivos, según el cierre del Sprint 027 de la app."
+    },
+    {
+      "clave": "pruebas_e2e",
+      "etiqueta": "Pruebas de punta a punta",
+      "valor": 1049,
+      "unidad": "pruebas",
+      "fuente": "medido",
+      "detalle": "Salida de `playwright test --list` sobre una copia de b9acf15 el 2026-10-31: 1049 en 17 archivos (Chromium, móvil y las de WebKit). En la CI del #106 pasaron 1014 y 35 quedan omitidas a propósito."
+    },
+    {
+      "clave": "pantallas",
+      "etiqueta": "Pantallas del sitio",
+      "valor": 16,
+      "unidad": "pantallas",
+      "fuente": "medido",
+      "detalle": "Archivos page.tsx bajo src/app/ en b9acf15, contados con find: incluyen la de mantenimiento, el 404 de cada idioma y la página de app que el Sprint 028 retira."
+    },
+    {
+      "clave": "decisiones_registradas",
+      "etiqueta": "Decisiones registradas",
+      "valor": 29,
+      "unidad": "decisiones",
+      "fuente": "medido",
+      "detalle": "Archivos numerados de decisions/ en b9acf15: de ADR-001 a ADR-029."
+    },
+    {
+      "clave": "idiomas",
+      "etiqueta": "Idiomas",
+      "valor": 2,
+      "unidad": "idiomas",
+      "fuente": "medido",
+      "detalle": "Las rutas /es y /en, con el contenido en dos archivos espejo (data/cv.es.yaml y data/cv.en.yaml) y una prueba que exige paridad."
+    },
+    {
+      "clave": "costo_operacion_mensual",
+      "etiqueta": "Costo de operación mensual",
+      "valor": 0,
+      "unidad": "USD",
+      "fuente": "declarado",
+      "detalle": "Lo declaran data/apps.yaml («todo en free tier») y el manual: Vercel en su plan Hobby (ADR-004) y Resend en su plan gratis, de 100 correos al día. No incluye el dominio propio."
+    }
+  ],
+  "stack": [
+    {
+      "nombre": "Next.js 16 y TypeScript",
+      "papel": "el sitio entero, con todo el contenido en HTML estático para los reclutadores, los ATS y los buscadores"
+    },
+    {
+      "nombre": "Zod sobre YAML",
+      "papel": "el contenido como datos, validado en cada publicación: un campo mal formado detiene el build y nombra el archivo"
+    },
+    {
+      "nombre": "next-intl",
+      "papel": "español e inglés en las mismas rutas, /es y /en, con el mismo punto de lectura al cambiar"
+    },
+    {
+      "nombre": "PDFKit",
+      "papel": "el CV en PDF de texto seleccionable para los ATS, generado en cada publicación desde los mismos YAML"
+    },
+    {
+      "nombre": "Supabase",
+      "papel": "el conteo real de los votos del roadmap, sin datos personales"
+    },
+    {
+      "nombre": "Resend",
+      "papel": "los mensajes de «Escríbeme», de la lista de espera y de las propuestas, que llegan al correo del dueño"
+    },
+    {
+      "nombre": "Vercel y Sentry",
+      "papel": "el hosting en el plan Hobby y la vigilancia de errores en producción"
+    },
+    {
+      "nombre": "Vitest, Playwright y Lighthouse",
+      "papel": "las pruebas de cada cambio: unidad, recorridos con navegador en dos tamaños y el presupuesto de rendimiento en la CI"
+    }
+  ],
+  "privacidad": {
+    "votos_sin_datos_personales": true,
+    "formularios_sin_base_de_datos": true,
+    "contenido_en_html_estatico": true,
+    "detalle": "Un voto del roadmap guarda la app, la funcionalidad y la fecha: ni la IP ni la identidad de quien vota (Ley 1581). El aviso de «ya votaste» vive en el navegador de quien visita. «Escríbeme», la lista de espera y las propuestas no se guardan en ninguna base: viajan por correo al dueño. El correo que se muestra en la página no es el que recibe los mensajes. Lo que hace el chat con los datos está en su propia ficha."
+  },
+  "enlaces": {
+    "produccion": null,
+    "razon": "Es el sitio que estás recorriendo. Esta ficha no publica su dirección: es la regla de cero enlaces del Portafolio.",
+    "repositorio": null,
+    "razon_repositorio": "El repositorio no se enlaza desde el Portafolio: ninguna ficha publica enlaces de acceso ni de código.",
+    "brochure_archivo": "data/apps.yaml (bloque brochure, ADR-012)",
+    "brochure_ruta_local": "/apps/hoja-de-vida"
+  }
+}
