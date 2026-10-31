@@ -47,7 +47,7 @@ export type EntradaBrochure = {
   };
   /** El nombre en el idioma de la página (la casa lo toma de `data/apps.yaml`). */
   nombre?: string;
-  /** La carpeta pública de sus capturas (`/vitrina/<slug>`). */
+  /** La URL de la carpeta de sus capturas (la de `public/vitrina/<slug>`). */
   urlCapturas: string;
   t: Textos;
 };
