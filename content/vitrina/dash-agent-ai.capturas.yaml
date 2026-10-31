@@ -1,5 +1,5 @@
 # Capturas de Dash Agent para su ficha en CV Viva (pedido 026, planeadora, 2026-10-27).
-# Ventana 1024×640 a DPR 1.5 (archivo 1536×960), tema claro, interfaz en español, build de producción con el
+# Tomas con propósito (2026-10-31): cada pieza completa, centrada sobre el fondo de la app, con margen, y ampliada hasta llenar el lienzo de 1536×960 (a DPR 3, en el ancho de ventana que más llena); tema claro, interfaz en español, build de producción con el
 # arranque endurecido de la app. Datos 100 % sintéticos: el árbol del kit de prueba de la app (semilla 20260816,
 # la persona inventada «ana»); ninguna captura lee el ~/.claude real.
 portada: entrada.webp
