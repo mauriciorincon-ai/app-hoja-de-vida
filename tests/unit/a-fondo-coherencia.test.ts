@@ -1,4 +1,6 @@
-import { readFileSync } from "node:fs";
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
+import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { parse } from "yaml";
 import { leerDocumentos } from "../../scripts/a-fondo.mjs";
@@ -7,6 +9,7 @@ import { leerFichas } from "../../scripts/fichas-al-indice.mjs";
 import { leerMetodo } from "../../scripts/metodo-al-indice.mjs";
 import {
   conPortada,
+  cuentaPiezas,
   fixture,
   problemasDeCargosContraElSitio,
   problemasDeCifras,
@@ -441,5 +444,23 @@ describe("los motores de coherencia, uno a uno", () => {
     const rojo = problemasDeNormas([doc("x", [{ id: "s", texto: "Implemento ISO/IEC 42001:2025." }])]);
     expect(rojo[0]).toContain("«ISO/IEC 42001:2025»");
     expect(rojo[0]).toContain("es de 2023");
+  });
+});
+
+describe("la cuenta de piezas es por sufijo (S28)", () => {
+  it("un .contenido.json, un .capturas.yaml o una carpeta junto al export no suman una app", () => {
+    const dir = mkdtempSync(path.join(tmpdir(), "piezas-"));
+    try {
+      writeFileSync(path.join(dir, "uno.brochure-export.json"), "{}");
+      writeFileSync(path.join(dir, "dos.brochure-export.json"), "{}");
+      writeFileSync(path.join(dir, "uno.contenido.json"), "{}");
+      writeFileSync(path.join(dir, "uno.capturas.yaml"), "");
+      mkdirSync(path.join(dir, "casa"));
+      writeFileSync(path.join(dir, "casa", "cv.brochure-export.json"), "{}");
+      expect(cuentaPiezas(dir, ".brochure-export.json")).toBe(2);
+      expect(cuentaPiezas(path.join(dir, "no-existe"), ".brochure-export.json")).toBe(0);
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
   });
 });
