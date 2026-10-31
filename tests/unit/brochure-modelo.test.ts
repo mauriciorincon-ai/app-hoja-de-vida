@@ -1,81 +1,15 @@
 import { readFileSync } from "node:fs";
-import { createTranslator } from "next-intl";
 import { describe, expect, it } from "vitest";
-import { parse } from "yaml";
 import { getCasa } from "@/lib/brochure/casa";
-import { parseConfigBrochure } from "@/lib/brochure/config";
-import { leerContenido } from "@/lib/brochure/contenido";
-import {
-  armarBrochure,
-  type Cita,
-  type Locale,
-  type VistaBrochure,
-} from "@/lib/brochure/modelo";
-import { getCapturas, urlDeCapturas } from "@/lib/vitrina/capturas";
+import type { Cita, VistaBrochure } from "@/lib/brochure/modelo";
 import { getComplemento } from "@/lib/vitrina/ficha-tecnica/loader";
-import { getFichasVitrina } from "@/lib/vitrina/loader";
+import { config, vistaDe as vista } from "../fixtures/brochure/vista";
 
 /**
  * EL MODELO DEL BROCHURE (S28), sobre las doce apps reales en los dos idiomas: la numeración va
  * seguida (01–05 y 2.1…, OM-29), toda cita resuelve a algo que la página pinta, ningún texto queda
  * en `undefined` ni vacío donde se pinta, la piloto trae todos sus bloques v2 y las demás su 01.
  */
-
-const config = parseConfigBrochure(
-  parse(readFileSync("data/brochure.yaml", "utf8")),
-  "data/brochure.yaml",
-);
-const mensajes = (l: Locale) =>
-  JSON.parse(readFileSync(`messages/${l}.json`, "utf8"));
-const contenidoDe = (slug: string) => {
-  try {
-    const r = leerContenido(
-      JSON.parse(
-        readFileSync(`content/vitrina/${slug}.contenido.json`, "utf8"),
-      ),
-    );
-    return r.ok ? r.contenido : undefined;
-  } catch {
-    return undefined;
-  }
-};
-
-function vista(slug: string, locale: Locale): VistaBrochure {
-  const t = createTranslator({
-    locale,
-    messages: mensajes(locale),
-    namespace: "brochure",
-  });
-  const textos = (k: string, v?: Record<string, string | number>) =>
-    t(k as never, v as never);
-  const pieza = getCasa().find((p) => p.slug === slug);
-  if (pieza)
-    return armarBrochure({
-      slug,
-      casa: true,
-      locale,
-      export: pieza.export,
-      capturas: pieza.capturas,
-      complemento: pieza.complemento,
-      config: config.apps[slug]!,
-      nombre: pieza.nombre[locale],
-      urlCapturas: urlDeCapturas(slug),
-      t: textos,
-    });
-  const ficha = getFichasVitrina().find((f) => f.ancla.slug === slug)!;
-  return armarBrochure({
-    slug,
-    casa: false,
-    locale,
-    export: ficha.export,
-    capturas: getCapturas(slug)!,
-    complemento: getComplemento(slug),
-    contenido: contenidoDe(slug),
-    config: config.apps[slug]!,
-    urlCapturas: urlDeCapturas(slug),
-    t: textos,
-  });
-}
 
 const SLUGS = Object.keys(config.apps).sort();
 const CASOS = SLUGS.flatMap((s) =>

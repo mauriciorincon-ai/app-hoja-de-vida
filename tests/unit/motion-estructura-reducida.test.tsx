@@ -1,7 +1,12 @@
 // @vitest-environment node
 /* eslint-disable @next/next/no-img-element -- el mock de next/image pinta una <img> plana a propósito */
+import { NextIntlClientProvider } from "next-intl";
 import { renderToString } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
+import { Brochure } from "@/components/brochure/brochure";
+import { BrochureInteractivo } from "@/components/brochure/brochure-interactivo";
+import { Buscador } from "@/components/brochure/buscador";
+import { FlujoDibujo } from "@/components/brochure/flujo-dibujo";
 import { PuertaMetodos } from "@/components/home/metodos";
 import { IconoSkill } from "@/components/home/skills-iconos";
 import { Reveal } from "@/components/motion/reveal";
@@ -13,6 +18,7 @@ import { RielDeFases } from "@/components/metodo/riel-de-fases";
 import { GaleriaCarrusel } from "@/components/vitrina/galeria-carrusel";
 import type { EtiquetasCarrusel } from "@/components/vitrina/galeria-carrusel";
 import { leerPiezasDeDisco } from "@/lib/metodo/loader";
+import { mensajes, textosDe, vistaDe } from "../fixtures/brochure/vista";
 import { ejemploSintetico, traductorDe } from "../fixtures/metodo/ayudas";
 
 /**
@@ -68,6 +74,19 @@ const ETIQUETAS_CARRUSEL: EtiquetasCarrusel = {
   indicadores: ["1 de 2", "2 de 2"],
   pies: ["Pantalla 1 de 2", "Pantalla 2 de 2"],
 };
+
+// S28: el brochure de la piloto, con sus flujos y su buscador (la isla lee «reducir movimiento» con
+// `matchMedia` dentro de sus efectos, nunca al pintar).
+const BROCHURE = vistaDe("inmobiliaria", "es");
+const T_BROCHURE = textosDe("es");
+const BUSCADOR = (
+  <NextIntlClientProvider
+    locale="es"
+    messages={{ brochure: mensajes("es").brochure }}
+  >
+    <Buscador ph={BROCHURE.buscarPh} etiqueta={T_BROCHURE("buscar")} />
+  </NextIntlClientProvider>
+);
 
 const CASOS: Record<string, React.ReactNode> = {
   TimelineTrack: (
@@ -146,8 +165,22 @@ const CASOS: Record<string, React.ReactNode> = {
   RielDeFases: (
     <RielDeFases
       fases={[
-        { nombre: "Uno", entradas: ["a"], actividades: ["b"], artefactos: ["c"], decide: "X", control: "Y" },
-        { nombre: "Dos", entradas: ["a"], actividades: ["b"], artefactos: ["c"], decide: "X", control: "Y" },
+        {
+          nombre: "Uno",
+          entradas: ["a"],
+          actividades: ["b"],
+          artefactos: ["c"],
+          decide: "X",
+          control: "Y",
+        },
+        {
+          nombre: "Dos",
+          entradas: ["a"],
+          actividades: ["b"],
+          artefactos: ["c"],
+          decide: "X",
+          control: "Y",
+        },
       ]}
       etiquetas={{
         fase: "Fase {n}",
@@ -161,7 +194,11 @@ const CASOS: Record<string, React.ReactNode> = {
     />
   ),
   InfografiaVista: (
-    <InfografiaVista pieza={ejemploSintetico()} idioma="es" t={traductorDe("es")} />
+    <InfografiaVista
+      pieza={ejemploSintetico()}
+      idioma="es"
+      t={traductorDe("es")}
+    />
   ),
   // S19: la puerta a «Métodos» en la HOME (Reveal + Stagger sobre la lista de
   // `data/metodo/`): misma regla, el árbol no depende del hook.
@@ -172,6 +209,27 @@ const CASOS: Record<string, React.ReactNode> = {
       t={traductorDe("es")}
     />
   ),
+  // S28: el brochure entero (portada, cinta y bucles, capítulos, flujos, Recorrido) con su isla, y
+  // sus dos piezas de cliente sueltas: el dibujo del flujo y el buscador.
+  Brochure: (
+    <>
+      <Brochure
+        v={BROCHURE}
+        t={T_BROCHURE}
+        href={(d) => `/es${d}`}
+        buscador={BUSCADOR}
+      />
+      <BrochureInteractivo slug="inmobiliaria" />
+    </>
+  ),
+  FlujoDibujo: (
+    <FlujoDibujo
+      vista={BROCHURE.proceso!.flujo}
+      ancho={1382}
+      verEnRecorrido={T_BROCHURE("verEnRecorrido")}
+    />
+  ),
+  Buscador: BUSCADOR,
 };
 
 describe("motion: la estructura del DOM no depende de useReducedMotion()", () => {
