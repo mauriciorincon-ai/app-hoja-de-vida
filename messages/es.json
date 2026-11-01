@@ -153,7 +153,7 @@
     "notas": "Notas del proceso",
     "cierreT": "¿La quieres usar?",
     "cierreCasaT": "¿Hablamos?",
-    "ctaLista": "Unirme a la lista de espera",
+    "vecApps": "Portafolio · Apps",
     "ctaCasa": "Escríbeme",
     "arriba": "Volver arriba",
     "rCerrar": "Cerrar",
@@ -194,7 +194,9 @@
     "rateLimited": "Vas muy rápido — espera un momento antes de votar de nuevo.",
     "error": "No pude registrar tu voto. Intenta de nuevo en un momento.",
     "votarAria": "Votar por {feature}",
-    "cargando": "Cargando votos…"
+    "cargando": "Cargando votos…",
+    "verIdeas": "Ver las {n} ideas",
+    "verMenos": "Ver menos"
   },
   "contacto": {
     "eyebrow": "Contacto",

@@ -153,7 +153,7 @@
     "notas": "Process notes",
     "cierreT": "Want to use it?",
     "cierreCasaT": "Shall we talk?",
-    "ctaLista": "Join the waitlist",
+    "vecApps": "Portfolio · Apps",
     "ctaCasa": "Write to me",
     "arriba": "Back to top",
     "rCerrar": "Close",
@@ -194,7 +194,9 @@
     "rateLimited": "You're going too fast — wait a moment before voting again.",
     "error": "I couldn't record your vote. Please try again in a moment.",
     "votarAria": "Vote for {feature}",
-    "cargando": "Loading votes…"
+    "cargando": "Loading votes…",
+    "verIdeas": "See all {n} ideas",
+    "verMenos": "See fewer"
   },
   "contacto": {
     "eyebrow": "Contact",
