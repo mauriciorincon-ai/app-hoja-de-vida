@@ -8,7 +8,11 @@ import { BrochureVisitTracker } from "@/components/brochure-visit-tracker";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import type { Locale } from "@/i18n/routing";
-import { entradaDe, textosBrochure } from "@/lib/brochure/entrada";
+import {
+  entradaDe,
+  textosBrochure,
+  textosDeUsala,
+} from "@/lib/brochure/entrada";
 import { armarBrochure } from "@/lib/brochure/modelo";
 import { getCv } from "@/lib/content";
 
@@ -28,6 +32,7 @@ export async function PaginaBrochure({
   const e = await entradaDe(app, locale, t);
   if (!e) notFound();
   const v = armarBrochure(e);
+  const usala = await textosDeUsala(locale);
   const cv = getCv(locale);
 
   // El buscador es la única isla con textos propios: solo los suyos viajan al cliente.
@@ -54,6 +59,7 @@ export async function PaginaBrochure({
           v={v}
           t={t}
           href={(destino) => `/${locale}${destino}`}
+          usala={usala}
           buscador={
             <NextIntlClientProvider messages={{ brochure: delBuscador }}>
               <Buscador ph={v.buscarPh} etiqueta={t("buscar")} />

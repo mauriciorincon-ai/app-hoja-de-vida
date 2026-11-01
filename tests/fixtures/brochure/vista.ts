@@ -2,6 +2,8 @@ import { readFileSync } from "node:fs";
 import { createTranslator } from "next-intl";
 import { parse } from "yaml";
 import { getCasa } from "@/lib/brochure/casa";
+import { datosDeUsala } from "@/lib/brochure/entrada";
+import { armarTextosDeUsala } from "@/lib/brochure/usala-textos";
 import { parseConfigBrochure } from "@/lib/brochure/config";
 import { leerContenido, type Contenido } from "@/lib/brochure/contenido";
 import {
@@ -54,6 +56,15 @@ export function textosDe(locale: Locale): Textos {
   return (k, v) => t(k as never, v as never);
 }
 
+/** Los textos de «Úsala» (los de la ficha, la lista de espera, el roadmap y la propuesta) en un idioma. */
+export const textosDeUsalaDe = (locale: Locale) => {
+  const m = mensajes(locale);
+  return armarTextosDeUsala((namespace) => {
+    const t = createTranslator({ locale, messages: m, namespace });
+    return (clave) => t(clave as never);
+  });
+};
+
 /**
  * `cambia` recibe el contenido v2 que la app tenga (o `undefined`) y devuelve el que se usa: así una
  * prueba del modelo varía un campo sin escribir un archivo.
@@ -90,6 +101,7 @@ export function vistaDe(
     contenido: cambia(contenidoDe(slug)),
     config: config.apps[slug]!,
     urlCapturas: urlDeCapturas(slug),
+    usala: datosDeUsala(slug),
     t,
   });
 }

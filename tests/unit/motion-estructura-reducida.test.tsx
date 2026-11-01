@@ -24,7 +24,12 @@ import { leerPiezasDeDisco } from "@/lib/metodo/loader";
 import { getFrentes } from "@/lib/vitrina/categorias";
 import { partirItem } from "@/lib/skills/explorador";
 import es from "../../messages/es.json";
-import { mensajes, textosDe, vistaDe } from "../fixtures/brochure/vista";
+import {
+  mensajes,
+  textosDe,
+  textosDeUsalaDe,
+  vistaDe,
+} from "../fixtures/brochure/vista";
 import { ejemploSintetico, traductorDe } from "../fixtures/metodo/ayudas";
 
 /**
@@ -56,6 +61,8 @@ vi.mock("@/components/motion/use-prefiere-quieto", () => ({
 // no-op bastan (next-intl arrastra `next/navigation`, que no vive en node).
 vi.mock("@/i18n/navigation", () => ({
   Link: (props: React.ComponentProps<"a">) => <a {...props} />,
+  // «Úsala» (S30) lleva los formularios de la app: el de la lista de espera navega al enviar.
+  useRouter: () => ({ push: () => {} }),
 }));
 vi.mock("@/lib/analytics", () => ({ trackEvent: () => {} }));
 // El carrusel pinta `next/image`; en node basta una <img> plana.
@@ -261,14 +268,47 @@ const CASOS: Record<string, React.ReactNode> = {
   // sus dos piezas de cliente sueltas: el dibujo del flujo y el buscador.
   Brochure: (
     <>
-      <Brochure
-        v={BROCHURE}
-        t={T_BROCHURE}
-        href={(d) => `/es${d}`}
-        buscador={BUSCADOR}
-      />
+      {/* «Úsala» (S30) trae la lista de espera, el roadmap y la propuesta: islas con los textos del layout. */}
+      <NextIntlClientProvider
+        locale="es"
+        messages={{
+          form: es.form,
+          listaDeEspera: es.listaDeEspera,
+          propuesta: es.propuesta,
+          roadmap: es.roadmap,
+        }}
+      >
+        <Brochure
+          v={BROCHURE}
+          t={T_BROCHURE}
+          href={(d) => `/es${d}`}
+          usala={textosDeUsalaDe("es")}
+          buscador={BUSCADOR}
+        />
+      </NextIntlClientProvider>
       <BrochureInteractivo slug="inmobiliaria" />
     </>
+  ),
+  // S30: el cierre «Úsala» de una app con ideas en su roadmap (11, de las que se ven 5): el voto, «Ver las N
+  // ideas» y la propuesta, con los tres valores del hook.
+  BrochureConIdeas: (
+    <NextIntlClientProvider
+      locale="es"
+      messages={{
+        form: es.form,
+        listaDeEspera: es.listaDeEspera,
+        propuesta: es.propuesta,
+        roadmap: es.roadmap,
+      }}
+    >
+      <Brochure
+        v={vistaDe("hackguard", "es")}
+        t={T_BROCHURE}
+        href={(d) => `/es${d}`}
+        usala={textosDeUsalaDe("es")}
+        buscador={BUSCADOR}
+      />
+    </NextIntlClientProvider>
   ),
   FlujoDibujo: (
     <FlujoDibujo

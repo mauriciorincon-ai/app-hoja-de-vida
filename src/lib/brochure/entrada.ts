@@ -4,14 +4,23 @@ import { getTranslations } from "next-intl/server";
 import { cache } from "react";
 import { entradasBrochure } from "../../../scripts/entradas-brochure.mjs";
 import type { Locale } from "@/i18n/routing";
+import { getCategoriasApps } from "@/lib/content";
 import { SITE_URL } from "@/lib/site";
 import { getCapturas, urlDeCapturas } from "@/lib/vitrina/capturas";
+import { ordenDeEscaparate } from "@/lib/vitrina/categorias-apps";
 import { getComplemento } from "@/lib/vitrina/ficha-tecnica/loader";
-import { getFicha } from "@/lib/vitrina/loader";
+import { getFicha, getManifestVitrina } from "@/lib/vitrina/loader";
+import { getSimulacion } from "@/lib/vitrina/simulaciones-loader";
 import { getPiezaDeCasa } from "./casa";
 import { getConfigDeApp } from "./config-loader";
 import { getContenido } from "./contenido-loader";
-import { textoEnEspanol, type EntradaBrochure, type Textos } from "./modelo";
+import { armarTextosDeUsala, type TextosDeUsala } from "./usala-textos";
+import {
+  textoEnEspanol,
+  type DatosDeUsala,
+  type EntradaBrochure,
+  type Textos,
+} from "./modelo";
 
 /**
  * EL BROCHURE COMO ENTRADA DE LA APP (S30, «1b»).
@@ -39,6 +48,38 @@ export function rutaDelBrochure(slug: string): string {
 export async function textosBrochure(locale: Locale): Promise<Textos> {
   const t = await getTranslations({ locale, namespace: "brochure" });
   return (clave, valores) => t(clave as never, valores as never);
+}
+
+/** Los textos de «Úsala» en el idioma de la página: los de la ficha, la lista de espera, el roadmap y la propuesta. */
+export async function textosDeUsala(locale: Locale): Promise<TextosDeUsala> {
+  const [vitrina, fichaTecnica, listaDeEspera, roadmap, propuesta] =
+    await Promise.all(
+      (
+        ["vitrina", "fichaTecnica", "listaDeEspera", "roadmap", "propuesta"] as const
+      ).map((namespace) => getTranslations({ locale, namespace })),
+    );
+  const por = { vitrina, fichaTecnica, listaDeEspera, roadmap, propuesta };
+  return armarTextosDeUsala((ns) => (clave) => por[ns](clave as never));
+}
+
+/**
+ * Lo que «Úsala» toma del Portafolio (S30): las apps del selector de la lista de espera y las vecinas, en
+ * el orden del escaparate que el visitante acaba de ver (profesionales y después personales), y si la app
+ * tiene su simulación. El nombre de cada una ya es el oficial (el alias se aplica al leer el export).
+ */
+export function datosDeUsala(app: string): DatosDeUsala {
+  const orden = ordenDeEscaparate(
+    getManifestVitrina(),
+    (a) => a.slug,
+    getCategoriasApps(),
+  ).map((a) => ({ slug: a.slug, nombre: a.nombre }));
+  const i = orden.findIndex((a) => a.slug === app);
+  return {
+    apps: orden,
+    ...(i > 0 ? { anterior: orden[i - 1] } : {}),
+    ...(i >= 0 && i < orden.length - 1 ? { siguiente: orden[i + 1] } : {}),
+    simulacion: getSimulacion(app) !== undefined,
+  };
 }
 
 /** Lo que el modelo necesita para armar el brochure de una app, o `undefined` si la app no existe. */
@@ -76,6 +117,7 @@ export async function entradaDe(
     capturas,
     complemento: getComplemento(app),
     contenido: getContenido(app),
+    usala: datosDeUsala(app),
   };
 }
 

@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import type { TextosDeUsala } from "@/lib/brochure/usala-textos";
 import type { Textos, VistaBrochure } from "@/lib/brochure/modelo";
 import { Svg } from "./piezas";
 import {
@@ -28,9 +29,12 @@ export function Brochure({
   t,
   href,
   buscador,
+  usala,
 }: {
   v: VistaBrochure;
   t: Textos;
+  /** Los textos de «Úsala» que son del Portafolio y no del brochure (S30). */
+  usala: TextosDeUsala;
   /** Un destino de este sitio en el idioma de la página («/#contacto» → «/es#contacto»). */
   href: (destino: string) => string;
   buscador: ReactNode;
@@ -46,7 +50,7 @@ export function Brochure({
         {v.proceso ? <Proceso v={v} t={t} s={sec("proceso")} /> : null}
         <Metodo v={v} t={t} s={sec("metodo")} />
       </div>
-      <Cierre v={v} t={t} s={sec("cierre")} href={href} />
+      <Cierre v={v} t={t} s={sec("cierre")} href={href} u={usala} />
       <button type="button" className="regreso" id="regreso" hidden>
         <Svg nombre="izq" />↩ {t("volverDonde")}
       </button>

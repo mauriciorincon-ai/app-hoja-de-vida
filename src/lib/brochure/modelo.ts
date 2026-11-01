@@ -7,6 +7,7 @@ import {
   type Contenido,
   type GrupoContenido,
 } from "./contenido";
+import { hitosDe, type Hito } from "@/lib/vitrina/ficha-tecnica/hitos";
 import type { Flujo, TipoNodo } from "./flujo";
 
 /**
@@ -54,7 +55,23 @@ export type EntradaBrochure = {
   nombre?: string;
   /** La URL de la carpeta de sus capturas (la de `public/vitrina/<slug>`). */
   urlCapturas: string;
+  /** Lo de «Úsala» que sale del Portafolio y no de la entrega de la app (S30). Sin él, solo la propia app. */
+  usala?: DatosDeUsala;
   t: Textos;
+};
+
+/** Una app del Portafolio con su nombre oficial. */
+export type AppDelPortafolio = { slug: string; nombre: string };
+
+/**
+ * Lo que «Úsala» toma del Portafolio (S30): las apps del selector de la lista de espera y las vecinas
+ * (los dos en el orden del escaparate: profesionales y después personales), y si la app tiene simulación.
+ */
+export type DatosDeUsala = {
+  apps: AppDelPortafolio[];
+  anterior?: AppDelPortafolio;
+  siguiente?: AppDelPortafolio;
+  simulacion: boolean;
 };
 
 export type Fuente = "medido" | "calculada" | "declarado" | "estimacion";
@@ -236,10 +253,31 @@ export type VistaBrochure = {
   cierre: {
     titulo: string;
     razon: string;
-    cta: { texto: string; href: string };
     pie: string;
+    /** CV Viva y su chat no son apps: cierran con «Escríbeme», sin lista de espera ni roadmap. */
+    casa: boolean;
+    /** La casa: «Escríbeme» al contacto de CV Viva. */
+    contacto?: { texto: string; href: string };
+    /** Las apps con simulación: «Ver la simulación →». */
+    simulacion?: { href: string };
+    /** Las apps: la lista de espera con esta app ya elegida, y las apps del selector. */
+    lista?: { appInicial: string; apps: AppDelPortafolio[] };
+    /** Las apps con ideas en su roadmap: el roadmap votable de ESTA app. */
+    roadmap?: {
+      app: string;
+      nombre: string;
+      features: { feature: string; titulo: string; descripcion: string }[];
+    };
+    /** Las apps: «¿Qué le falta a <app>?». */
+    propuesta?: { app: string; nombre: string };
+    /** «Dónde está»: los hitos de la app, o de la casa. */
+    hitos: Hito[];
+    /** La app anterior y la siguiente del escaparate (solo las apps); sus rutas sin idioma. */
+    vecinas: { anterior?: Vecina; siguiente?: Vecina };
   };
 };
+
+export type Vecina = { nombre: string; href: string };
 
 /** Los actores con nombre y color propios (los de la maqueta, más `visita` y `proveedor` desde el S30). */
 const ACTORES_MAQUETA = ACTORES;
@@ -836,15 +874,54 @@ export function armarBrochure(e: EntradaBrochure): VistaBrochure {
       razon: C.enlaces_razon
         ? T(C.enlaces_razon)
         : (EN?.enlaces_razon ?? E.enlaces.razon),
-      cta: e.casa
-        ? { texto: t("ctaCasa"), href: "/#contacto" }
-        : {
-            texto: t("ctaLista"),
-            href: `/portafolio/apps/${e.slug}#contacto-portafolio`,
-          },
       pie: `${NOMBRE} · ${t("pie", { fecha: fecha(E.actualizado, locale) })}${
         e.config.datos_sinteticos ? ` · ${t("pieSinteticos")}` : ""
       }`,
+      casa: e.casa,
+      ...(e.casa
+        ? { contacto: { texto: t("ctaCasa"), href: "/#contacto" } }
+        : {
+            lista: {
+              appInicial: e.slug,
+              apps: e.usala?.apps ?? [{ slug: e.slug, nombre: NOMBRE }],
+            },
+            ...(K.roadmap.length
+              ? {
+                  roadmap: {
+                    app: e.slug,
+                    nombre: NOMBRE,
+                    features: K.roadmap.map((f) => ({
+                      feature: f.id,
+                      titulo: T(f.titulo),
+                      descripcion: T(f.descripcion),
+                    })),
+                  },
+                }
+              : {}),
+            propuesta: { app: e.slug, nombre: NOMBRE },
+            ...(e.usala?.simulacion
+              ? { simulacion: { href: `/portafolio/apps/${e.slug}/simulacion` } }
+              : {}),
+          }),
+      hitos: hitosDe(E),
+      vecinas: {
+        ...(e.usala?.anterior
+          ? {
+              anterior: {
+                nombre: e.usala.anterior.nombre,
+                href: `/portafolio/apps/${e.usala.anterior.slug}`,
+              },
+            }
+          : {}),
+        ...(e.usala?.siguiente
+          ? {
+              siguiente: {
+                nombre: e.usala.siguiente.nombre,
+                href: `/portafolio/apps/${e.usala.siguiente.slug}`,
+              },
+            }
+          : {}),
+      },
     },
   };
 }

@@ -1,4 +1,8 @@
 import type { CSSProperties } from "react";
+import { ListaDeEsperaForm } from "@/components/forms/lista-de-espera-form";
+import { PropuestaForm } from "@/components/forms/propuesta-form";
+import { RoadmapVoting } from "@/components/home/roadmap-voting";
+import type { TextosDeUsala } from "@/lib/brochure/usala-textos";
 import type {
   Afirmacion,
   Capitulo,
@@ -1099,22 +1103,57 @@ export function Metodo({ v, t, s }: P & { s: Seccion }) {
   );
 }
 
-/* ── 05 · úsala ───────────────────────────────────────────────────────────────────────── */
+/* ── 05 · úsala ──────────────────────────────────────────────────────────────────────── */
+/** Las ideas que se ven antes de «Ver las N ideas». */
+const IDEAS_VISIBLES = 5;
+
+/**
+ * «ÚSALA» (S30, «1b»): el cierre del brochure recibe lo que vivía en la página de la ficha —la lista de
+ * espera, el roadmap votable, las propuestas, la simulación, «Dónde está» y las vecinas— porque el brochure
+ * es ahora la entrada de la app. Uno a uno con `htmlCierre` de la maqueta aprobada; los formularios,
+ * el voto y las vecinas funcionan de verdad (en la maqueta solo mostraban una nota). La casa (CV Viva y su
+ * chat) cierra con «Escríbeme», «Dónde está» y «Volver a las apps», sin lista de espera ni roadmap.
+ *
+ * Al imprimir (la hoja): sin formularios, sin votar, sin «Ver las N ideas» y con todas las ideas.
+ */
 export function Cierre({
   v,
   t,
   s,
   href,
-}: P & { s: Seccion; href: (destino: string) => string }) {
+  u,
+}: P & {
+  s: Seccion;
+  href: (destino: string) => string;
+  u: TextosDeUsala;
+}) {
   const C = v.cierre;
+  const hayIdeas = !!C.roadmap;
   return (
     <footer className="cierre" id="s-cierre" data-sec="cierre">
+      {/* Sin JavaScript el botón «Ver las N ideas» no abre nada: las ideas nacen todas a la vista. */}
+      {C.roadmap && C.roadmap.features.length > IDEAS_VISIBLES ? (
+        <noscript>
+          <style>{`.votable[data-plegada]{display:grid!important}.ver-ideas{display:none!important}`}</style>
+        </noscript>
+      ) : null}
       <div className="envoltura">
         <Cabeza s={s} titulo={C.titulo} intro={C.razon} />
         <div className="cierre-acciones">
-          <a className="boton" href={href(C.cta.href)} data-cta="">
-            {C.cta.texto}
-          </a>
+          {C.contacto ? (
+            <a className="boton" href={href(C.contacto.href)} data-cta="">
+              {C.contacto.texto}
+            </a>
+          ) : null}
+          {C.simulacion ? (
+            <a
+              className="boton"
+              href={href(C.simulacion.href)}
+              data-cta="simulacion"
+            >
+              {u.verSimulacion} →
+            </a>
+          ) : null}
           <button type="button" className="boton linea" data-recorrido="">
             <Svg nombre="play" />
             {t("recorrido")}
@@ -1127,6 +1166,107 @@ export function Cierre({
             ↑ {t("arriba")}
           </button>
         </div>
+
+        {C.lista ? (
+          <div className="usala-rejilla">
+            {/* La lista de espera: el mismo formulario de la ficha, con esta app ya elegida. */}
+            <section
+              className="usala-panel"
+              id="lista-de-espera"
+              aria-labelledby="t-lista"
+            >
+              <span className="usala-ceja">{u.acceso}</span>
+              <h3 id="t-lista">{u.listaTitulo}</h3>
+              <p className="usala-ayuda">{u.listaLinea}</p>
+              <ListaDeEsperaForm
+                apps={C.lista.apps}
+                appInicial={C.lista.appInicial}
+                tono="tinta"
+                textoEnviar={u.cta}
+              />
+            </section>
+            {/* El roadmap votable y, debajo, la propuesta: «qué viene» y «qué más». */}
+            <section
+              className={
+                hayIdeas ? "usala-panel" : "usala-panel solo-propuesta"
+              }
+              aria-label={hayIdeas ? u.roadmapEyebrow : u.propuestaEyebrow}
+            >
+              {C.roadmap ? (
+                <>
+                  <span className="usala-ceja">{u.roadmapEyebrow}</span>
+                  <h3>{u.roadmapTitulo}</h3>
+                  <p className="usala-ayuda">{u.roadmapSubtitulo}</p>
+                  <RoadmapVoting
+                    grupos={[
+                      {
+                        appId: C.roadmap.app,
+                        appNombre: C.roadmap.nombre,
+                        features: C.roadmap.features.map((f) => ({
+                          app: C.roadmap!.app,
+                          ...f,
+                        })),
+                      },
+                    ]}
+                    conNombreDeApp={false}
+                    tono="tinta"
+                    visibles={IDEAS_VISIBLES}
+                    diferido
+                  />
+                </>
+              ) : null}
+              {C.propuesta ? (
+                <PropuestaForm
+                  app={C.propuesta.app}
+                  nombreApp={C.propuesta.nombre}
+                  tono="tinta"
+                  conIdeas={hayIdeas}
+                />
+              ) : null}
+            </section>
+          </div>
+        ) : null}
+
+        <section className="donde" aria-labelledby="t-donde">
+          <div>
+            <h3 id="t-donde">{u.dondeTitulo}</h3>
+            <p>
+              {u.dondeSub} {u.dondeNota}
+            </p>
+          </div>
+          <ol>
+            {C.hitos.map((h) => (
+              <li key={`${h.etiqueta}-${h.valor}`}>
+                <b>{h.valor}</b>
+                <span>{u.hitos[h.etiqueta] ?? h.etiqueta}</span>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <nav className="vecinas" aria-label={u.volverApps}>
+          {C.vecinas.anterior ? (
+            <a className="vecina" href={href(C.vecinas.anterior.href)}>
+              <small>← {u.appAnterior}</small>
+              <b>{C.vecinas.anterior.nombre}</b>
+            </a>
+          ) : (
+            <span />
+          )}
+          <a className="vecina centro" href={href("/portafolio/apps")}>
+            <small>↑ {t("vecApps")}</small>
+            <b>{u.volverApps}</b>
+          </a>
+          {C.vecinas.siguiente ? (
+            <a className="vecina der" href={href(C.vecinas.siguiente.href)}>
+              <small>{u.appSiguiente} →</small>
+              <b>{C.vecinas.siguiente.nombre}</b>
+            </a>
+          ) : (
+            <span />
+          )}
+        </nav>
+
         <div className="pie-final">
           <span>{C.pie}</span>
           <span>{t("pieDerecha")}</span>
