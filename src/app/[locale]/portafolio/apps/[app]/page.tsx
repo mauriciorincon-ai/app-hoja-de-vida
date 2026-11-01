@@ -24,6 +24,10 @@ import { getFichasVitrina } from "@/lib/vitrina/loader";
  * Cero enlaces (regla 17): los únicos destinos son rutas de este repo.
  */
 
+// Solo las que el build genera: una app que no existe es un 404 (el brochure arma su configuración del
+// disco y para un slug desconocido fallaría con un 500).
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return routing.locales.flatMap((locale) =>
     [...getFichasVitrina().map((f) => f.ancla.slug), ...SLUGS_CASA].map(
