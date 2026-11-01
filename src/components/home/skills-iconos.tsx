@@ -11,11 +11,8 @@
  * tarjeta y el destino de las citas del chat), así que es la llave correcta.
  * `tests/unit/skills-iconos.test.ts` exige un dibujo propio por grupo.
  *
- * El trazo se DIBUJA al llegar la tarjeta: cada figura lleva `pathLength=1` y
- * su `stroke-dashoffset` va de 1 a 0 en CSS (`data-reveal-item="trazo"`,
- * globals.css) cuando el grupo de Skills recibe `data-visto`. Es un componente
- * de servidor desde el 2026-09-27 (ADR-027). El estado por defecto es el
- * icono dibujado — si el disparo no llegara, se ve igual (lección del S5).
+ * Hasta el S28 el trazo se dibujaba al llegar la tarjeta; desde el S29 la lista
+ * es estática, como en la maqueta, y el movimiento vive en el escenario.
  */
 const DIBUJOS: Record<string, React.ReactElement[]> = {
   // Agentes e IA generativa (2026-09-26) — el agente que orquesta sus
@@ -99,61 +96,27 @@ export function tieneDibujo(id: string): boolean {
 const ROMBO = [<path key="a" d="M12 3l9 9-9 9-9-9z" />];
 
 /**
- * La partitura de una tarjeta de Skills (post-S8, segunda vuelta; apretada
- * el 2026-09-27 a pedido del dueño, «opción A»: con nueve tarjetas la de
- * antes —0,2 s entre tarjetas, cabecera a los 0,8 s, chips cada 0,1 s—
- * terminaba pasados los 3,5 s), en segundos desde que la tarjeta arranca.
- * Cada tarjeta corre la suya desplazada `ESCALON_SKILLS_S × i`: aterriza
- * vacía (1,4 s) → a los 0,5 s la cabecera y, 0,2 s después, el trazo, figura
- * a figura → los chips, uno cada 0,06 s, detrás de la cabecera. La cabecera y
- * los chips los orquesta la tarjeta (`hijos`); el trazo lo orquesta la
- * cabecera (también `hijos`), así sigue a SU tarjeta: con la librería el
- * trazo corría con retraso absoluto y en las tarjetas de atrás se dibujaba
- * antes de que la cabecera apareciera.
+ * El dibujo del grupo, en la familia del design system: 24×24, trazo 1.7, sin relleno (S29). Lo usan la
+ * lista (en su baldosa) y el escenario (dentro de cada burbuja, con el color de su tinta); el tamaño lo
+ * pone la hoja. Ya no se dibuja al llegar: la lista de la maqueta es estática.
  */
-export const ESCALON_SKILLS_S = 0.12;
-export const RETRASO_CABECERA_S = 0.5;
-export const RETRASO_TRAZO_S = 0.2;
-export const ESCALON_TRAZO_S = 0.2;
-export const ESCALON_CHIP_S = 0.06;
-
-export function IconoSkill({ id }: { id: string }) {
+export function DibujoSkill({ id }: { id: string }) {
   // El rombo queda de reserva para que un grupo nuevo no rompa la página;
   // el test es el que no lo deja llegar a producción.
-  const figuras = tieneDibujo(id) ? DIBUJOS[id] : ROMBO;
   return (
-    <span
+    <svg
+      viewBox="0 0 24 24"
+      width="24"
+      height="24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.7"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       aria-hidden="true"
-      className="flex size-12 shrink-0 items-center justify-center rounded-[10px] border border-paper-2 bg-paper-1 text-sage-ink"
+      focusable="false"
     >
-      <svg
-        viewBox="0 0 24 24"
-        width="24"
-        height="24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.7"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        focusable="false"
-      >
-        {figuras.map((f) => {
-          // Cada figura, con pathLength normalizada; su turno se lo da la
-          // cabecera que la contiene (`hijos` en skills.tsx): RETRASO_TRAZO_S
-          // después de ella y ESCALON_TRAZO_S entre figuras.
-          const Tag = f.type as "path" | "circle" | "ellipse";
-          return (
-            <Tag
-              key={f.key}
-              {...(f.props as object)}
-              data-motion=""
-              data-motion-svg=""
-              data-reveal-item="trazo"
-              pathLength={1}
-            />
-          );
-        })}
-      </svg>
-    </span>
+      {tieneDibujo(id) ? DIBUJOS[id] : ROMBO}
+    </svg>
   );
 }

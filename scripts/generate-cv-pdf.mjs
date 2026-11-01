@@ -4,6 +4,7 @@ import process from "node:process";
 import { parse } from "yaml";
 import PDFDocument from "pdfkit";
 import { aniosCumplidos } from "./anios.mjs";
+import { contarPiezas } from "./contar-piezas.mjs";
 import { correosPublicos } from "./correos.mjs";
 
 /**
@@ -621,12 +622,16 @@ export function renderCv(
   return new Promise((resolve) => salida.on("finish", resolve));
 }
 
-/** Los logros calculados (`desde`) llegan con su valor, como en la web. */
+/** Los logros calculados (`desde`, `contar`) llegan con su valor, como en la web. */
 function conLogrosCalculados(cv) {
   return {
     ...cv,
     logros: (cv.logros ?? []).map((l) =>
-      l.desde ? { ...l, valor: aniosCumplidos(l.desde) } : l,
+      l.desde
+        ? { ...l, valor: aniosCumplidos(l.desde) }
+        : l.contar
+          ? { ...l, valor: contarPiezas(l.contar) }
+          : l,
     ),
   };
 }

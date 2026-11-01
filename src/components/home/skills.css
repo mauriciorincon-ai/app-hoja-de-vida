@@ -1,0 +1,197 @@
+/*
+ * SKILLS, EL EXPLORADOR (S29, OM-02): la hoja de la maqueta aprobada, portada a esta casa.
+ *
+ * Origen: referencias-ui/home/maqueta/plantilla.html (planeadora, aprobada el 2026-10-31 tras cinco
+ * vueltas), portada por transformaciones explícitas. Lo que cambió, y por qué:
+ *  - todo vive bajo [data-skills] en @layer components: no toca el resto del sitio;
+ *  - las clases que la maqueta conmuta por JS son atributos data-* (la isla y el escenario solo cambian
+ *    atributos): data-vivo (hay JavaScript), data-vista (áreas | lista), data-sin-escenario (su chunk no
+ *    llegó: queda la lista, sin conmutador), data-visto, data-listo,
+ *    data-elegido, data-angosto, data-arrastrando en el rectángulo; data-sobre, data-agarrada,
+ *    data-centro, data-viaja y data-abierta (la «.vista» de la maqueta) en cada burbuja; data-ver en
+ *    las líneas y las herramientas;
+ *  - los colores del escenario son variables al tope de [data-skills]: ninguna regla lleva un hex suelto;
+ *    tests/unit/skills-contraste.test.ts comprueba que digan lo mismo que src/lib/skills/paleta.ts y mide
+ *    cada texto contra el punto más claro del fondo;
+ *  - «← Todas las áreas» y la barra «← 2 · 4 →» quedan además con visibility:hidden mientras no hay un
+ *    área abierta: invisibles, tampoco existen para el lector de pantalla (en la maqueta solo se apagaban);
+ *  - las medidas de la sección (paddings, título y línea) son las del sitio; la barra negra y los rótulos
+ *    eran solo de la maqueta;
+ *  - antes de que llegue el escenario, su hueco ya tiene el alto y el fondo del rectángulo: nada salta.
+ */
+
+@layer components {
+[data-skills]{
+  --paper-0:var(--color-paper-0);--paper-1:var(--color-paper-1);--paper-2:var(--color-paper-2);--paper-3:var(--color-paper-3);
+  --ink-0:var(--color-ink-0);--ink-1:var(--color-ink-1);--ink-2:var(--color-ink-2);--ink-3:var(--color-ink-3);
+  --sage:var(--color-sage);--sage-ink:var(--color-sage-ink);--sky:var(--color-sky);--sky-ink:var(--color-sky-ink);
+  --lilac:var(--color-lilac);--lilac-ink:var(--color-lilac-ink);--peach:var(--color-peach);--peach-ink:var(--color-peach-ink);
+  --rose:var(--color-rose);--rose-ink:var(--color-rose-ink);--citron:var(--color-citron);--citron-ink:var(--color-citron-ink);
+  --sh-1:var(--shadow-sh-1);
+  --ease-out-expo:cubic-bezier(.16,1,.3,1);--ease-out-back:cubic-bezier(.34,1.56,.64,1);--ease-out-cubic:cubic-bezier(.21,.61,.35,1);
+  --f-display:var(--font-display),Georgia,serif;--f-sans:var(--font-sans),system-ui,sans-serif;--f-mono:var(--fuente-mono);
+  /* el escenario (src/lib/skills/paleta.ts → ESCENARIO) */
+  --esc-centro:#23211e;--esc-medio:#151412;--esc-borde:#0e0d0c;
+  --esc-luz-max:rgba(236,231,218,.09);--esc-luz-media:rgba(236,231,218,.035);--esc-luz-cero:rgba(236,231,218,0);
+  --esc-texto:#d9d5ca;--esc-tenue:#bdb8ab;
+  --esc-ficha:rgba(18,17,16,.82);
+  --esc-sombra:0 18px 48px -18px rgba(18,17,16,.45);
+  --esc-borde-claro:rgba(255,255,255,.22);--esc-velo:rgba(255,255,255,.06);--esc-velo-sobre:rgba(255,255,255,.12);
+  --esc-sombra-negra:rgba(0,0,0,.85);--esc-brillo:rgba(255,255,255,.42);--esc-brillo-tenue:rgba(255,255,255,.12);
+  --esc-brillo-cero:rgba(255,255,255,0);--esc-hondo:#1a1816;--esc-borde-bajo:rgba(20,18,16,.3);--esc-filo:rgba(255,255,255,.38);
+  --esc-aro-fino:rgba(255,255,255,.06);--esc-aro-agarrada:rgba(255,255,255,.08);--esc-ficha-borde:rgba(255,255,255,.28);
+  --esc-ficha-sombra:rgba(0,0,0,.6);--esc-chip-borde:rgba(255,255,255,.25);
+}
+
+[data-skills] .skills-cabeza{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 24px}
+[data-skills] .vista{display:inline-flex;border:1px solid var(--paper-3);border-radius:999px;padding:3px;background:var(--paper-1)}
+[data-skills] .vista button{appearance:none;border:0;background:transparent;border-radius:999px;padding:7px 14px;font:500 13.5px var(--f-sans);color:var(--ink-2);cursor:pointer;min-height:36px}
+[data-skills] .vista button[aria-pressed="true"]{background:var(--paper-0);color:var(--ink-0);box-shadow:var(--sh-1)}
+[data-skills] .vista button:focus-visible{outline:2px solid var(--sage-ink);outline-offset:3px}
+
+/* sin JavaScript (y en el HTML del servidor) va la lista; con él, el rectángulo y el conmutador */
+[data-skills]:not([data-vivo]) .vista,
+[data-skills]:not([data-vivo]) .escenario-hueco,
+[data-skills][data-vista="lista"] .escenario-hueco,
+[data-skills][data-sin-escenario] .vista,
+[data-skills][data-sin-escenario] .escenario-hueco,
+[data-skills][data-vivo][data-vista="areas"] .lista{display:none}
+
+/* el escenario: un rectángulo oscuro donde las áreas flotan sueltas, con una luz tenue en el centro */
+[data-skills] .escenario-hueco{margin-top:28px;scroll-margin-top:64px}
+[data-skills] .escenario,
+[data-skills] .escenario-hueco:empty{position:relative;height:620px;border-radius:22px;overflow:hidden;color:var(--paper-0);
+  background:radial-gradient(40% 36% at 50% 50%,var(--esc-luz-max) 0%,var(--esc-luz-media) 52%,var(--esc-luz-cero) 100%),
+    radial-gradient(70% 60% at 50% 45%,var(--esc-centro) 0%,var(--esc-medio) 62%,var(--esc-borde) 100%);box-shadow:var(--esc-sombra)}
+/* el fondo: una red tenue de puntos que derivan y se enlazan con los cercanos (canvas, debajo de todo) */
+[data-skills] .red{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+[data-skills] .escenario[data-arrastrando]{cursor:grabbing;-webkit-user-select:none;user-select:none}
+[data-skills] .invita{position:absolute;left:16px;right:16px;top:22px;z-index:4;margin:0;text-align:center;font:500 15px/1.4 var(--f-sans);color:var(--esc-texto);
+  opacity:0;transition:opacity .3s var(--ease-out-cubic) .15s;pointer-events:none}
+[data-skills] .invita::before{content:"";display:inline-block;width:7px;height:7px;margin:0 9px 2px 0;border-radius:50%;background:var(--sage);vertical-align:middle;animation:sk-latido 2.4s ease-in-out infinite}
+@keyframes sk-latido{50%{opacity:.35}}
+/* cuántas llevas, y al terminar las nueve, la lista a un clic */
+[data-skills] .progreso{margin-left:6px;font:500 12.5px var(--f-mono);letter-spacing:.02em;color:var(--sage);white-space:nowrap}
+[data-skills] .ver-lista{margin-left:10px;pointer-events:auto;appearance:none;border:1px solid var(--esc-borde-claro);background:var(--esc-velo);border-radius:999px;
+  padding:5px 12px;min-height:32px;font:500 13px var(--f-sans);color:var(--paper-0);cursor:pointer}
+[data-skills] .ver-lista[hidden],[data-skills] .progreso[hidden]{display:none}
+[data-skills] .ver-lista:hover{background:var(--esc-velo-sobre)}
+[data-skills] .escenario[data-visto] .invita{opacity:1}
+/* con un área abierta la invitación se va ENTERA: opacity sola dejaba «Ver todo en lista» invisible y enfocable (WCAG 2.4.7) */
+[data-skills] .escenario[data-elegido] .invita{opacity:0;visibility:hidden;transition:opacity .3s var(--ease-out-cubic),visibility 0s linear .3s}
+[data-skills] .escenario[data-elegido] .ver-lista{pointer-events:none}
+[data-skills] .lineas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+[data-skills] .lineas line{stroke:var(--esc-texto);stroke-width:1.1;opacity:0;transition:opacity .35s var(--ease-out-cubic) .15s}
+[data-skills] .lineas[data-ver] line{opacity:.32}
+[data-skills] .volver,[data-skills] .pasos button{appearance:none;border:1px solid var(--esc-borde-claro);background:var(--esc-velo);border-radius:999px;
+  padding:7px 14px;min-height:36px;font:500 13.5px var(--f-sans);color:var(--paper-0);cursor:pointer}
+[data-skills] .volver{position:absolute;left:16px;top:14px;z-index:6;
+  opacity:0;visibility:hidden;transform:translateY(-6px);pointer-events:none;
+  transition:opacity .25s var(--ease-out-cubic),transform .25s var(--ease-out-cubic),visibility 0s linear .25s}
+[data-skills] .escenario[data-elegido] .volver{opacity:1;visibility:visible;transform:none;pointer-events:auto;transition-delay:0s}
+[data-skills] .volver:hover,[data-skills] .pasos button:hover{background:var(--esc-velo-sobre)}
+[data-skills] .volver:focus-visible,[data-skills] .burbuja:focus-visible,[data-skills] .pasos button:focus-visible,[data-skills] .ver-lista:focus-visible{outline:2px solid var(--sage);outline-offset:4px}
+/* con un área abierta: la anterior y la siguiente por número (también con las flechas del teclado); da la vuelta del 9 al 1 */
+[data-skills] .pasos{position:absolute;left:50%;bottom:14px;z-index:6;display:flex;align-items:center;gap:10px;white-space:nowrap;
+  opacity:0;visibility:hidden;transform:translate(-50%,6px);pointer-events:none;
+  transition:opacity .25s var(--ease-out-cubic),transform .25s var(--ease-out-cubic),visibility 0s linear .25s}
+[data-skills] .escenario[data-elegido] .pasos{opacity:1;visibility:visible;transform:translate(-50%,0);pointer-events:auto;transition-delay:0s}
+[data-skills] .pasos .cual{font:500 12px var(--f-mono);letter-spacing:.04em;color:var(--esc-tenue)}
+[data-skills] .pasos .nom{color:var(--esc-texto)}
+[data-skills] .escenario[data-angosto] .pasos .nom{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+
+/* una burbuja por área: la posición (que mueve el escenario cuadro a cuadro) en .burbuja; la entrada y la salida en .disco.
+   En el celular, un deslizamiento rápido baja por la página; para arrastrar hay que mantener el dedo 0,3 s */
+[data-skills] .burbuja{position:absolute;left:0;top:0;width:var(--d);height:var(--d);margin:0;padding:0;border:0;background:none;cursor:grab;border-radius:50%;z-index:3;will-change:transform;
+  touch-action:manipulation;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
+[data-skills] .burbuja[data-color="sage"]{--c:var(--sage);--ci:var(--sage-ink)}
+[data-skills] .burbuja[data-color="sky"]{--c:var(--sky);--ci:var(--sky-ink)}
+[data-skills] .burbuja[data-color="lilac"]{--c:var(--lilac);--ci:var(--lilac-ink)}
+[data-skills] .burbuja[data-color="peach"]{--c:var(--peach);--ci:var(--peach-ink)}
+[data-skills] .burbuja[data-color="citron"]{--c:var(--citron);--ci:var(--citron-ink)}
+[data-skills] .burbuja[data-color="rose"]{--c:var(--rose);--ci:var(--rose-ink)}
+[data-skills] .burbuja[data-viaja]{transition:transform .6s var(--ease-out-expo)}
+[data-skills] .burbuja[data-sobre]{z-index:4}
+[data-skills] .burbuja[data-agarrada]{z-index:5;cursor:grabbing}
+/* volumen sobrio: la luz llega de arriba a la izquierda (un brillo suave, sin mancha blanca), el borde de abajo se curva
+   hacia la sombra y la burbuja proyecta su sombra sobre el fondo; el centro, donde va el texto, conserva el color plano.
+   El relleno y el aro de las ya abiertas son dos capas detrás del contenido: al abrirla, una se apaga y la otra se enciende */
+[data-skills] .disco{position:relative;isolation:isolate;width:100%;height:100%;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:var(--ci);
+  box-shadow:0 0 0 1px var(--esc-aro-fino),0 24px 30px -16px var(--esc-sombra-negra),0 0 42px -12px color-mix(in srgb,var(--c) 40%,transparent);
+  text-align:center;opacity:0;transform:scale(.8);
+  transition:opacity .3s var(--ease-out-cubic),transform .38s var(--ease-out-back),box-shadow .3s var(--ease-out-cubic),color .3s var(--ease-out-cubic)}
+[data-skills] .disco::before,[data-skills] .disco::after{content:"";position:absolute;inset:0;z-index:-1;border-radius:50%;transition:opacity .35s var(--ease-out-cubic)}
+[data-skills] .disco::before{background:radial-gradient(circle at 34% 26%,var(--esc-brillo) 0,var(--esc-brillo-tenue) 20%,var(--esc-brillo-cero) 42%),
+    radial-gradient(circle at 44% 40%,var(--c) 0,var(--c) 48%,color-mix(in srgb,var(--c) 70%,var(--esc-hondo)) 100%);
+  box-shadow:inset 0 -12px 20px -8px var(--esc-borde-bajo),inset 0 2px 1px var(--esc-filo)}
+[data-skills] .disco::after{opacity:0;background:radial-gradient(circle at 44% 40%,color-mix(in srgb,var(--c) 14%,transparent),color-mix(in srgb,var(--c) 5%,transparent) 72%);
+  box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--c) 80%,transparent)}
+[data-skills] .escenario[data-visto] .disco{opacity:1;transform:none;transition-delay:calc(var(--i) * 30ms),calc(var(--i) * 30ms)}
+[data-skills] .escenario[data-listo] .disco{transition-delay:0s}
+/* la que tiene el cursor encima se detiene y crece un 20 %; agarrada, igual, con la sombra más lejos */
+[data-skills] .burbuja[data-sobre] .disco{transform:scale(1.2)}
+[data-skills] .burbuja[data-agarrada] .disco{transform:scale(1.2);box-shadow:0 0 0 1px var(--esc-aro-agarrada),0 34px 38px -18px var(--esc-sombra-negra),0 0 48px -10px color-mix(in srgb,var(--c) 50%,transparent)}
+[data-skills] .escenario[data-elegido] .burbuja{cursor:pointer;touch-action:auto}
+[data-skills] .escenario[data-elegido] .burbuja:not([data-centro]){pointer-events:none;visibility:hidden;transition:visibility 0s linear .3s}
+[data-skills] .escenario[data-angosto] .burbuja[data-centro] .cuantas{display:none}
+[data-skills] .escenario[data-elegido] .burbuja:not([data-centro]) .disco{opacity:0;transform:scale(.55);transition-delay:0s}
+[data-skills] .burbuja[data-centro] .disco{transform:scale(var(--sc,1.3))}
+/* el número del área, en el borde de arriba a la izquierda (a 45°), y su ✓ cuando ya se abrió */
+[data-skills] .num{position:absolute;left:calc(14.6% - 12px);top:calc(14.6% - 12px);display:inline-flex;align-items:center;gap:3px;min-width:24px;height:24px;padding:0 7px;
+  border:1px solid var(--esc-ficha-borde);border-radius:999px;background:var(--esc-ficha);color:var(--paper-0);
+  font:600 11.5px/1 var(--f-mono);box-shadow:0 4px 10px -4px var(--esc-ficha-sombra);justify-content:center}
+[data-skills] .num i{display:none;font-style:normal;color:var(--sage)}
+/* las que ya abriste quedan como un aro de su color, transparentes por dentro y con el texto claro: se nota que ya las
+   viste y se leen bien; su número lleva ✓. Al pasar el cursor vuelven a ser burbujas llenas */
+[data-skills] .burbuja[data-abierta] .num i{display:inline}
+[data-skills] .escenario:not([data-elegido]) .burbuja[data-abierta]:not([data-sobre]):not([data-agarrada]) .disco{color:var(--c);box-shadow:0 0 30px -14px color-mix(in srgb,var(--c) 45%,transparent)}
+[data-skills] .escenario:not([data-elegido]) .burbuja[data-abierta]:not([data-sobre]):not([data-agarrada]) .disco::before{opacity:0}
+[data-skills] .escenario:not([data-elegido]) .burbuja[data-abierta]:not([data-sobre]):not([data-agarrada]) .disco::after{opacity:1}
+[data-skills] .disco svg{width:26px;height:26px;flex:none}
+[data-skills] .disco .nombre{display:block;width:calc(var(--d) * .8);font:600 14px/1.22 var(--f-sans);overflow-wrap:normal;hyphens:none}
+[data-skills] .disco .cuantas{font:500 11px var(--f-mono);letter-spacing:.04em;opacity:0;max-height:0;transition:opacity .3s}
+[data-skills] .burbuja[data-centro] .cuantas{opacity:.8;max-height:20px}
+/* el medidor de los nombres: fuera de la vista, con la letra de las burbujas */
+[data-skills] .medidor{position:absolute;left:-9999px;top:0;visibility:hidden;text-align:center;line-height:1.22;font-weight:600;font-family:var(--f-sans)}
+
+/* las herramientas del área elegida, alrededor de ella y conectadas */
+[data-skills] .chips{position:absolute;inset:0;margin:0;padding:0;list-style:none;pointer-events:none;z-index:2}
+[data-skills] .chip{position:absolute;left:0;top:0;max-width:var(--chip-max,200px);padding:6px 12px 7px;border:1px solid var(--esc-chip-borde);border-radius:14px;background:var(--paper-0);
+  box-shadow:0 6px 18px -8px var(--esc-ficha-sombra);font:500 var(--chip-fs,13.5px)/1.3 var(--f-sans);color:var(--ink-0);text-align:center;opacity:0;
+  transition:transform .55s var(--ease-out-expo),opacity .3s var(--ease-out-cubic);transition-delay:calc(var(--j) * 22ms)}
+[data-skills] .chip[data-ver]{opacity:1}
+[data-skills] .chip small{display:block;margin-top:2px;font:400 calc(var(--chip-fs,13.5px) - 2px)/1.3 var(--f-sans);color:var(--ink-2)}
+[data-skills] .chip .estado{display:table;margin:4px auto 0;padding:1px 7px;border:1px dashed var(--ink-3);border-radius:999px;font:500 10px/1.5 var(--f-mono);
+  letter-spacing:.05em;text-transform:uppercase;color:var(--ink-2)}
+
+/* la vista de lista: lo que hay en el HTML siempre (ATS, SEO, sin JavaScript e impresión) */
+[data-skills] .lista{margin-top:28px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+[data-skills] .grupo{border:1px solid var(--paper-2);border-radius:14px;background:var(--paper-0);padding:18px 18px 16px;box-shadow:var(--sh-1)}
+[data-skills] .grupo:last-child:nth-child(odd){grid-column:1/-1}
+[data-skills] .grupo h3{display:flex;align-items:center;gap:12px;margin:0 0 12px;font:500 1.1rem/1.25 var(--f-display);color:var(--ink-0)}
+[data-skills] .grupo h3 .n{flex:none;font:600 12px var(--f-mono);color:var(--ink-2);min-width:16px}
+[data-skills] .grupo h3 .baldosa{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;border:1px solid var(--paper-2);background:var(--paper-1);color:var(--sage-ink);flex:none}
+[data-skills] .grupo h3 svg{width:22px;height:22px}
+[data-skills] .grupo ul{display:flex;flex-wrap:wrap;gap:6px;margin:0;padding:0;list-style:none}
+[data-skills] .grupo li{padding:4px 10px;border:1px solid var(--paper-3);border-radius:999px;font-size:13.5px;color:var(--ink-1);background:var(--paper-1)}
+/* el espacio entre el nombre y su estado es un espacio de verdad (el texto se lee «Airflow en estudio», no pegado) */
+[data-skills] .grupo li .estado{margin-left:2px;font:500 10px var(--f-mono);letter-spacing:.05em;text-transform:uppercase;color:var(--ink-2)}
+
+@media (max-width:640px){
+  [data-skills] .lista{grid-template-columns:minmax(0,1fr)}
+  [data-skills] .grupo:last-child:nth-child(odd){grid-column:auto}
+  [data-skills] .escenario-hueco:empty{height:600px}
+  [data-skills] .disco svg{width:18px;height:18px}
+  [data-skills] .disco{gap:4px}
+  [data-skills] .num{left:calc(14.6% - 11px);top:calc(14.6% - 11px);min-width:22px;height:22px;padding:0 6px;font-size:10.5px}
+  [data-skills] .invita{font-size:14px}
+}
+@media (prefers-reduced-motion:reduce){
+  [data-skills] .burbuja[data-viaja],[data-skills] .chip,[data-skills] .disco,[data-skills] .volver{transition-duration:.01ms!important;transition-delay:0s!important}
+  [data-skills] .invita::before{animation:none}
+}
+@media print{
+  [data-skills] .vista,[data-skills] .escenario-hueco{display:none!important}
+  [data-skills] .lista{display:grid!important}
+}
+}

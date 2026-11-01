@@ -53,14 +53,10 @@ const escapar = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
 describe("las entradas en CSS", () => {
   it("encuentra las variantes en el código (si no, el barrido está roto)", () => {
+    // S29: «trazo» salió de la lista: solo lo escribían los iconos de la lista de Skills, que desde
+    // entonces es estática. Su CSS sigue en el vocabulario de motion, como `liftIn`.
     expect([...variantes].sort()).toEqual(
-      expect.arrayContaining([
-        "fadeInUp",
-        "liftIn",
-        "scaleInBlur",
-        "trazo",
-        "pulso",
-      ]),
+      expect.arrayContaining(["fadeInUp", "liftIn", "scaleInBlur", "pulso"]),
     );
   });
 

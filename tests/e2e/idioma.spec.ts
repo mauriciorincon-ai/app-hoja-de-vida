@@ -147,6 +147,50 @@ test.describe("el botón ES/EN conserva el punto exacto de lectura", () => {
       )
       .toBeLessThanOrEqual(TOLERANCIA);
   });
+
+  test("con «Ver todo en lista» puesto en Skills, Métodos queda a la misma altura al cambiar de idioma (S29, M1)", async ({
+    page,
+  }) => {
+    // La lista de Skills solo tiene caja con esa vista, y la home vuelve a montarse en «Áreas» al cambiar
+    // de idioma: sus 18 hitos existían de un lado y no del otro, y el índice del ancla caía 18 hitos más
+    // abajo. Se mide en Métodos, debajo de Skills y lejos del final (en Contacto la página se clava abajo
+    // y la prueba no vería nada).
+    await page.goto("/es");
+    await asentada(page);
+    await page
+      .getByRole("button", { name: "Ver todo en lista", exact: true })
+      .click();
+    await expect(page.locator("#skills .lista")).toBeVisible();
+    await page.evaluate(() => {
+      const el = document.querySelector("#metodos")!;
+      window.scrollTo(0, el.getBoundingClientRect().top + window.scrollY + 20);
+    });
+    const antes = await page
+      .locator("#metodos")
+      .evaluate((el) => Math.round(el.getBoundingClientRect().top));
+
+    await page.getByRole("button", { name: "Switch to English" }).click();
+    await expect(page).toHaveURL(/\/en$/, { timeout: 15_000 });
+    await expect(page.locator("#skills .escenario-hueco")).toBeAttached({
+      timeout: 15_000,
+    });
+    await asentada(page);
+    await expect
+      .poll(
+        async () =>
+          Math.abs(
+            (await page
+              .locator("#metodos")
+              .evaluate((el) => Math.round(el.getBoundingClientRect().top))) -
+              antes,
+          ),
+        {
+          message: `Métodos a ${antes}px antes: no volvió a su sitio`,
+          timeout: 5_000,
+        },
+      )
+      .toBeLessThanOrEqual(TOLERANCIA);
+  });
 });
 
 /**
@@ -175,14 +219,17 @@ test.describe("diez cambios de idioma seguidos dejan la HOME donde estaba", () =
   }
 
   /** Espera a que el scroll y las entradas animadas dejen de moverse. */
-  async function quieta(page: import("@playwright/test").Page) {
+  async function quieta(
+    page: import("@playwright/test").Page,
+    selector = "#perfil h2",
+  ) {
     let anterior = -1;
     for (let i = 0; i < 40; i++) {
       await page.waitForTimeout(150);
-      const ahora = await page.evaluate(() => {
-        const h = document.querySelector("#perfil h2")!.getBoundingClientRect();
+      const ahora = await page.evaluate((s) => {
+        const h = document.querySelector(s)!.getBoundingClientRect();
         return Math.round(h.top * 10) / 10;
-      });
+      }, selector);
       if (ahora === anterior) return;
       anterior = ahora;
     }
@@ -224,6 +271,64 @@ test.describe("diez cambios de idioma seguidos dejan la HOME donde estaba", () =
           expect(
             Math.abs(ahora - salida),
             `tras ${i} cambios el título está a ${(ahora - salida).toFixed(1)} px de su sitio (${deriva.join(" · ")})`,
+          ).toBeLessThanOrEqual(MARGEN);
+        }
+      }
+    });
+  }
+
+  // S29 («el inglés y el español hacen que la página vaya bajando», el dueño): las dos pruebas de
+  // arriba solo miran Perfil y Trayectoria. Las entradas animadas (Reveal, `fadeInSlow`) están en su
+  // estado inicial, desplazadas hacia abajo, en el primer cuadro del otro idioma, y medir el ancla con
+  // el rectángulo transformado dejaba la ventana ese tanto más abajo en cada ida y vuelta (−51 px por
+  // vuelta en Estudios y Certificaciones del celular). Aquí se baja con la rueda hasta quedar DENTRO
+  // de cada sección y se exige que vuelva a su sitio.
+  for (const seccion of [
+    "trayectoria",
+    "estudios",
+    "certificaciones",
+    "skills",
+    "metodos",
+  ]) {
+    test(`a media #${seccion}: cada dos cambios la sección vuelve al mismo sitio @webkit`, async ({
+      page,
+    }) => {
+      await page.goto("/es");
+      await asentada(page);
+      await page.mouse.move(200, 400);
+      for (let i = 0; i < 80; i++) {
+        const top = await page
+          .locator(`#${seccion}`)
+          .evaluate((el) => el.getBoundingClientRect().top);
+        if (top <= -120) break;
+        await page.mouse.wheel(0, top > 1200 ? 400 : 120);
+        await page.waitForTimeout(40);
+      }
+      await quieta(page, `#${seccion}`);
+
+      const sitio = () =>
+        page
+          .locator(`#${seccion}`)
+          .evaluate((el) => el.getBoundingClientRect().top);
+      const salida = await sitio();
+      const deriva: string[] = [];
+
+      for (let i = 1; i <= 4; i++) {
+        const a = i % 2 === 1 ? "en" : "es";
+        await page
+          .getByRole("button", {
+            name: a === "en" ? "Switch to English" : "Cambiar a español",
+          })
+          .click();
+        await expect(page).toHaveURL(new RegExp(`/${a}$`), { timeout: 15_000 });
+        await asentada(page);
+        await quieta(page, `#${seccion}`);
+        if (a === "es") {
+          const ahora = await sitio();
+          deriva.push(`${i} cambios: ${(ahora - salida).toFixed(1)} px`);
+          expect(
+            Math.abs(ahora - salida),
+            `tras ${i} cambios #${seccion} está a ${(ahora - salida).toFixed(1)} px de su sitio (${deriva.join(" · ")})`,
           ).toBeLessThanOrEqual(MARGEN);
         }
       }

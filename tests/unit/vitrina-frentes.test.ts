@@ -54,11 +54,12 @@ describe("data/vitrina.yaml — los frentes", () => {
 
   it("el YAML real valida y trae los cuatro frentes en orden", () => {
     const v = parseVitrina(real, "data/vitrina.yaml", MEDIDOS);
+    // S29: Investigaciones (en pausa) baja al final por decisión del dueño (2026-10-31).
     expect(v.categorias.map((c) => c.id)).toEqual([
       "apps",
       "agentes",
-      "investigaciones",
       "tableros",
+      "investigaciones",
     ]);
   });
 
@@ -208,5 +209,53 @@ describe("lib/vitrina/categorias — la cuenta de piezas", () => {
 
   it("un frente que no existe es undefined, no un error", () => {
     expect(getFrente("no-existe")).toBeUndefined();
+  });
+});
+
+describe("el orden del portafolio (S29, decisión del dueño 2026-10-31)", () => {
+  it("Investigaciones va ÚLTIMA: apps, agentes, tableros e investigaciones", () => {
+    // «No la quiero en s28 … la quiero en la 29»: el frente en pausa baja al final, en el portal y en
+    // la puerta de la home (los dos salen de `getFrentes()`, el orden del YAML).
+    expect(getFrentes().map((f) => f.id)).toEqual([
+      "apps",
+      "agentes",
+      "tableros",
+      "investigaciones",
+    ]);
+  });
+
+  it("la línea de la puerta de la home nombra los frentes en ese mismo orden, en ES y EN", () => {
+    const orden = getFrentes().map((f) => f.id);
+    const palabras = {
+      es: {
+        apps: "apps",
+        agentes: "agentes",
+        tableros: "tableros",
+        investigaciones: "investigaciones",
+      },
+      en: {
+        apps: "apps",
+        agentes: "agents",
+        tableros: "dashboards",
+        investigaciones: "research",
+      },
+    } as const;
+    for (const l of ["es", "en"] as const) {
+      const { vitrinaHome } = JSON.parse(
+        readFileSync(`messages/${l}.json`, "utf8"),
+      ) as { vitrinaHome: { linea: string } };
+      const pos = orden.map((id) =>
+        vitrinaHome.linea.indexOf(
+          palabras[l][id as keyof (typeof palabras)[typeof l]],
+        ),
+      );
+      expect(
+        pos.every((p) => p >= 0),
+        `${l}: falta un frente en «${vitrinaHome.linea}»`,
+      ).toBe(true);
+      expect(pos, `${l}: la línea no sigue el orden del portal`).toEqual(
+        [...pos].sort((a, b) => a - b),
+      );
+    }
   });
 });

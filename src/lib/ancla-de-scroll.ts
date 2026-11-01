@@ -84,11 +84,43 @@ export function resolverAncla(ancla: Ancla, tops: number[]): number {
   return Math.max(0, tops[ancla.indice] + ancla.desfase);
 }
 
+/**
+ * El borde superior del hito en el documento, por su posición de LAYOUT (`offsetTop` sumado hasta el
+ * `body`), no por `getBoundingClientRect`. En el primer cuadro del otro idioma todas las entradas
+ * animadas están en su estado inicial, desplazadas 28 a 70 px hacia abajo, y el rectángulo del hito las
+ * incluye: la ventana se colocaba esos píxeles más abajo y el cambio siguiente partía de ese punto ya
+ * corrido, así que en cada ida y vuelta la página bajaba otro poco (el dueño, S29: «el inglés y el
+ * español hacen que la página vaya bajando»; −51 px por vuelta en el celular, en Estudios). El layout
+ * no sabe de transformaciones. Lo que se resta al guardar y se suma al restaurar es la misma medida,
+ * así que su sesgo (los bordes de los padres posicionados) se cancela.
+ */
+function topDeLayout(el: Element): number {
+  if (!(el instanceof HTMLElement)) {
+    return el.getBoundingClientRect().top + window.scrollY;
+  }
+  let y = 0;
+  for (
+    let n: HTMLElement | null = el;
+    n;
+    n = n.offsetParent as HTMLElement | null
+  ) {
+    y += n.offsetTop;
+  }
+  return y;
+}
+
 function tops(): number[] {
   return posicionesEnteras(
-    Array.from(document.querySelectorAll(SELECTOR_ANCLAS)).map(
-      (el) => el.getBoundingClientRect().top + window.scrollY,
-    ),
+    Array.from(document.querySelectorAll(SELECTOR_ANCLAS))
+      // Un hito sin caja no es un hito (S29): la lista de Skills queda oculta (`display:none`) detrás
+      // del explorador, y el borde de un elemento sin caja «está» en el scroll actual, así que se
+      // quedaba con el ancla y el cambio de idioma no movía nada.
+      .filter((el) => el.getClientRects().length > 0)
+      // La lista de Skills solo tiene caja con «Ver todo en lista» puesto, y esa vista no sobrevive al
+      // cambio de idioma (la home se monta de nuevo en «Áreas»): sus 18 hitos existirían de un lado y
+      // no del otro, y el índice del ancla caería 18 hitos más abajo. No son candidatos.
+      .filter((el) => !el.closest("[data-skills] .lista"))
+      .map(topDeLayout),
   );
 }
 

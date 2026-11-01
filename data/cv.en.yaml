@@ -49,7 +49,7 @@ trayectoria:
       - "I lead the structuring of the institutional AI strategy under UNE-ISO/IEC 42001:2025: more than 10 opportunities identified, half of them evaluated and some already prioritized."
       - "more than 25 analytics products in Power BI for administrative and clinical leaders: some 20 leaders of some 15 processes and about 75 users."
       - "Institutional data governance and quality, under Colombia's habeas data regime and Law 1581."
-      - "Process-based control dashboards and improvement plans: close to 60% less effort preparing information (estimated on my own work)."
+      - "Process-based control dashboards and improvement plans: 50+ indicators addressed and close to 60% less effort preparing information (estimated on my own work)."
       - "I take part in structuring the AI management system: more than 20 instruments, a third finished and the ISO 42001 Expert agent that reviews them."
     actual: true
   # INDEPENDENT PROJECTS (2026-10-04, LinkedIn review): NOT a job
@@ -94,6 +94,7 @@ trayectoria:
       - "Defined the data governance to integrate client and system data, with each client isolated in its own workspace."
       - "Built real-time monitoring for the agents in production: up to 23 monitored at once."
       - "Documented the replicable 11-stage core process used to build the 27 agents in the inventory."
+      - "Power BI dashboards: 5+ analytics products, with about 20 users."
   - periodo: "2023"
     rol: "Senior Analytics and Reporting Analyst"
     organizacion: "Banco Pichincha"
@@ -102,7 +103,7 @@ trayectoria:
       BI adopted by 50+ users, ETL times cut by 35%, predictive models above
       90% accuracy, and co-led data governance.
     bullets:
-      - "Led a 5-person BI team: dashboards adopted by 50+ users, driving +25% in decision-making."
+      - "Led a 5-person BI team: 5+ analytics products in Power BI adopted by 50+ users, 10+ indicators addressed and +25% in decision-making."
       - "ETL process optimization in Power Query: −35% in analysis times."
       - "Churn and delinquency models with scikit-learn: >90% accuracy and up to +35% in predictions, by each model's own metric."
       - "Semantic model optimization with DAX Studio and Tabular Editor."
@@ -116,7 +117,7 @@ trayectoria:
       BI adoption (+35% efficiency), an ETL that unified sources (+70%) and
       demand forecasting with scikit-learn.
     bullets:
-      - "Led the implementation of Power BI across operations: +35% efficiency with 25+ key users."
+      - "Led the implementation of Power BI across operations: 10+ analytics products and +35% efficiency with 25+ key users."
       - "ETL that unified five heterogeneous sources (fare collection, fleet and GPS, scheduling, incidents and user complaints): +70% in analysis precision and speed."
       - "ETL scripts with VBA and Power Query for the post-operational analysis, with validations and visible exceptions: −40% in repetitive tasks."
       - "Strategy sessions with the SITP concessionaires: +25% in indicators."
@@ -205,32 +206,51 @@ logros:
   - desde: "2015-05"
     etiqueta: "years of professional experience"
     descripcion: "From process engineering to data platforms for AI agents (May 2015 → today)."
-  - valor: 27
-    etiqueta: "AI agents built with the core process I structured"
-    descripcion: "Vesting: 12 clients integrated and up to 23 agents monitored at once, in real time, on Microsoft Fabric."
-  - valor: 25
-    sufijo: "+"
-    etiqueta: "analytics products in Power BI in use in healthcare"
-    descripcion: "Fundación CTIC: some 20 leaders of some 15 processes and about 75 users, on shared institutional definitions."
-  - valor: 50
-    sufijo: "+"
-    etiqueta: "users adopted my dashboards in banking"
-    descripcion: "BI dashboards at Banco Pichincha, driving +25% in decision-making."
-  - valor: 70
-    sufijo: "%"
-    etiqueta: "more precise and faster analysis with a unified ETL"
-    descripcion: "Unifying heterogeneous sources at C&M Consultores (TransMilenio)."
-  - valor: 90
-    prefijo: ">"
-    sufijo: "%"
-    etiqueta: "accuracy of predictive models in production"
-    descripcion: "scikit-learn models at Banco Pichincha."
   - valor: 20
     etiqueta: "people in the largest team I've led"
     descripcion: "WMS implementation at Cafam: −25% errors, +15% efficiency."
-  - valor: 3
-    etiqueta: "professional certifications"
-    descripcion: "Microsoft's DP-600 and 2 from IBM in data science: the Professional Certificate (with its Python and SQL courses) and R."
+  - valor: 45
+    sufijo: "+"
+    etiqueta: "analytics products in Power BI"
+    descripcion: "In healthcare (Fundación CTIC, 25+), transport (C&M Consultores for TransMilenio, 10+), banking (Banco Pichincha, 5+) and AI agents (Vesting, 5+)."
+  - valor: 170
+    sufijo: "+"
+    etiqueta: "users adopted my dashboards"
+    descripcion: "Fundación CTIC (about 75), Banco Pichincha (50+), C&M Consultores for TransMilenio (25+ key users) and Vesting (about 20)."
+  - valor: 27
+    etiqueta: "AI agents built with the core process I structured"
+    descripcion: "Vesting: 12 clients integrated and up to 23 agents monitored at once, in real time, on Microsoft Fabric."
+  - contar: "agentes"
+    etiqueta: "AI agents of my own, published with human gates and a technical sheet"
+    descripcion: "Independent projects: each with its promise, figures with provenance, limits and what it «never» does; five sealed."
+  - valor: 52
+    sufijo: "%"
+    etiqueta: "token savings with my ARKHÉ agentic ecosystem"
+    descripcion: "In my measurements: 120 scenarios against a generalist agent, and instruction compliance rose from 71% to 93%."
+  - valor: 90
+    prefijo: ">"
+    sufijo: "%"
+    etiqueta: "average accuracy of predictive models in production"
+    descripcion: "Churn and delinquency models with scikit-learn at Banco Pichincha."
+  - valor: 70
+    sufijo: "%"
+    etiqueta: "more precise and faster analysis by unifying sources"
+    descripcion: "At C&M Consultores for TransMilenio (five sources: fare collection, fleet and GPS, scheduling, incidents and user complaints), Fundación CTIC and Banco Pichincha."
+  - valor: 60
+    prefijo: "~"
+    sufijo: "%"
+    etiqueta: "less effort preparing information"
+    descripcion: "On average, with process-based control dashboards, at Fundación CTIC, Banco Pichincha and C&M Consultores for TransMilenio."
+  - valor: 35
+    prefijo: "−"
+    sufijo: "%"
+    etiqueta: "in processing times with an optimized ETL"
+    descripcion: "On average, at Banco Pichincha, Fundación CTIC and C&M Consultores for TransMilenio, with queries separated by function, early selection and validations before the model."
+  - valor: 25
+    prefijo: "+"
+    sufijo: "%"
+    etiqueta: "in the indicators addressed"
+    descripcion: "On average, across the 60+ indicators at Fundación CTIC (50+) and Banco Pichincha (10+) and in the strategy sessions with the SITP concessionaires (TransMilenio)."
 
 proyectos:
   - slug: "vesting"

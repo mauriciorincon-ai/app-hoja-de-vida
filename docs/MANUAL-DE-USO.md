@@ -53,12 +53,21 @@ el mensaje te llega al correo.
 - **Red de seguridad:** si un archivo queda mal formado (falta un campo, un email inválido), la
   publicación **falla antes de salir** con un mensaje que dice exactamente qué campo está mal.
   La página que ya está en línea no se rompe.
+- **Los logros son doce (desde el Sprint 029), en tres filas de cuatro:** escala y liderazgo, IA e
+  impacto en datos. Su redacción es la que aprobaste y se copió **textual**. Los totales son sumas
+  de lo que cada descripción nombra (45+ = 25 + 10 + 5 + 5; 170+ = 75 + 50 + 25 + 20). Y los cuatro
+  bullets de la trayectoria que sumaron cifras (CTIC, Pichincha, C&M y el quinto de Vesting) llevan lo
+  mismo, para que el chat y el PDF lo citen igual.
 - **Limitaciones conocidas:** los logros usan `valor` numérico (el contador anima ese número);
   máximo 2 decimales. **Excepción que se calcula sola (corrección de contenido 2026-09-12):** el
   logro de «años de trayectoria profesional» no lleva `valor` sino `desde: "2016-08"`, y el número
   se calcula en cada build como años cumplidos — 10 hasta julio de 2027, 11 desde agosto. Un
   `desde` en el futuro, o un logro sin `valor` ni `desde`, rompe el build; y si alguien vuelve a
-  escribir el número a mano, `tests/unit/content.test.ts` lo nombra.
+  escribir el número a mano, `tests/unit/content.test.ts` lo nombra. **Otra que se calcula sola (Sprint
+  029): el logro de «agentes de IA propios»** no lleva `valor` sino `contar: "agentes"`: el número es
+  cuántas fichas hay en `content/agentes/`, la misma cuenta que la puerta de la HOME (hoy 11), y la
+  usan igual el chat y el PDF. Para contar otro frente: `contar: apps | agentes | investigaciones |
+  tableros`. `contar` con `valor` o con `desde`, o un frente que no existe, rompe el build.
 
 ### La trayectoria: el índice que baja contigo · desde Sprint 001 · rehecha en la revisión post-S7
 
@@ -186,8 +195,7 @@ el mensaje te llega al correo.
   HOME la enseña con el chip «En curso» en el sitio de la fecha; `/cv` y el chat dicen «(en
   curso)». Así entraron el **AI-103** y el **AI-300**, en paralelo. (El DP-100 ocupó ese lugar hasta
   el 2026-09-19: Microsoft lo retiró el 1 de junio de 2026 y declaró el AI-300 como su
-  reemplazo, así que salió de `certificaciones` y pasó a `data/credenciales-nombradas.yaml`.) El logro «3 certificaciones» (desde 2026-09-27: Python y SQL de IBM son cursos del Certificado Profesional) sigue contando solo las
-  obtenidas. **Y el gate vigila lo contrario:** cada vez que el titular, el perfil, un logro,
+  reemplazo, así que salió de `certificaciones` y pasó a `data/credenciales-nombradas.yaml`.) Hasta el Sprint 029 un logro «3 certificaciones» contaba solo las obtenidas; **salió de los logros** (la sección de Certificaciones no cambia). **Y el gate vigila lo contrario:** cada vez que el titular, el perfil, un logro,
   `messages/` o `apps.yaml` nombran un código en curso, tienen que llevar «en curso» (o «en
   ruta», «en preparación», «in progress») a menos de 48 caracteres — «(AI-103)» a secas pone
   rojo el test nombrando la ruta exacta. Nombrar una credencial que no se tiene es una decisión;
@@ -208,16 +216,45 @@ el mensaje te llega al correo.
   sin color). Un nombre fuera de la lista rompe el build.
 - **Links de verificación:** cuando tengas los links de Credly/Microsoft Learn, pégalos en
   el campo `verificacion:` de cada certificación — el botón "Verificar ↗" aparece solo.
-- **Skills, desde la revisión post-S7:** una tarjeta por grupo con un icono dibujado en casa
-  (se termina de trazar al llegar la tarjeta) y los ítems como chips que entran escalonados.
-  **El icono va por el `id` del grupo** (desde 2026-09-26): puedes reordenar los grupos en el
-  YAML y cada uno se lleva su icono. Antes iba por posición, y al entrar «Procesos y simulación»
-  en quinto lugar (2026-09-20) esa tarjeta se quedó con el dibujo de «Cómo trabajo» y «Cómo
-  trabajo» con un rombo, en producción. Sin porcentajes ni «nivel de dominio», a propósito.
+- **Skills, desde el Sprint 029: un explorador de nueve áreas.** Sale de la maqueta que aprobaste
+  tras cinco vueltas. Es un rectángulo oscuro con las **nueve áreas** —una por grupo del CV,
+  numeradas del 1 al 9 en el orden del YAML, cada una con su icono y su color— que **flotan solas**
+  y chocan entre sí y contra los bordes. Arriba dice «Elige un área y te muestro con qué trabajo en
+  ella». Cómo se usa:
+  - **Pasa el cursor por una:** se detiene y crece un 20 % (el fondo no frena nada). Con el clic
+    sostenido la **agarras y la lanzas** contra las otras; en el teléfono, **mantén el dedo 0,3 s**
+    (antes, deslizar baja la página).
+  - **Pulsa una:** las otras se van, ella pasa al centro y sus herramientas quedan alrededor,
+    **conectadas con una línea**. Los estados («prototipo», «en estudio», «en exploración», «en
+    preparación») van como etiqueta con texto; las notas («el chat de este sitio»), debajo, en pequeño.
+  - **«← 5 · 7 →»** (y las flechas ← → del teclado) pasa a la anterior o la siguiente, y del 9 se
+    vuelve al 1. **«Todas las áreas», tocar el centro o Escape** devuelven al rectángulo, con el foco
+    en el área que estaba abierta.
+  - **Las que ya abriste** quedan como un **aro** de su color con ✓, y arriba dice cuántas llevas
+    («· 3 de 9 vistas»); con las nueve, «Ya las viste todas.» y «Ver todo en lista» a un clic. Eso
+    vive **solo en memoria**: se reinicia al recargar o al volver a entrar a la página, y no se
+    pierde al cambiar de idioma.
+  - **«Áreas | Ver todo en lista»** (arriba a la derecha) muestra las **nueve tarjetas de siempre**,
+    con todas las herramientas a la vista, y **detiene el movimiento**. Esa lista es lo que viaja en
+    el HTML (ATS, buscadores, quien navega sin JavaScript) y lo que sale **al imprimir**; el
+    rectángulo es una mejora encima. Con «reducir movimiento» en tu sistema, nada flota ni se
+    arrastra (el clic sigue eligiendo) y el fondo queda quieto. Si el rectángulo no alcanza a
+    cargar (una red que se corta, o una página abierta de antes de una actualización), la sección
+    se queda en la lista y sin el conmutador: el resto de la página sigue entera. Recargar lo trae.
+  - **Una cita del chat abre el área:** el chat sigue llevando a `/#skills-<id>` y el explorador
+    abre esa área, a la vista bajo el encabezado (con la lista puesta, el salto llega a su tarjeta).
+- **Lo que hay detrás, para quien edite:** las cuentas del movimiento viven en
+  `src/lib/skills/explorador.ts` (un motor puro, con su prueba contra lo que dibuja la maqueta); el
+  escenario, en `src/components/home/skills-escenario.tsx`, que **no se carga al abrir la página**
+  sino cuando la sección se acerca (el presupuesto de Lighthouse de la HOME es el más justo del
+  sitio); los colores, en `src/components/home/skills.css` y `src/lib/skills/paleta.ts` (una prueba
+  exige AA en cada texto del escenario). **El icono va por el `id` del grupo** (desde
+  2026-09-26): puedes reordenar los grupos en el YAML y cada uno se lleva su icono y su número.
+  Sin porcentajes ni «nivel de dominio», a propósito.
 - **Un grupo nuevo necesita dos cosas:** su `id` en los dos YAML y **su dibujo** en
   `src/components/home/skills-iconos.tsx`. Sin dibujo, la tarjeta sale con un rombo de reserva,
   pero `pnpm test` falla nombrando el grupo, así que no llega a producción. Pídemelo y lo dibujo.
-- **La rejilla es de dos columnas;** si los grupos quedan impares, el último ocupa las dos. El
+- **La lista (la vista «Ver todo en lista») es de dos columnas;** si los grupos quedan impares, el último ocupa las dos. El
   orden de hoy empareja tarjetas de tamaño parecido: Agentes con Plataforma de datos, Desarrollo
   asistido con Big data. Si agregas muchas herramientas a un grupo, revisa que su pareja no quede
   vacía al lado.
@@ -238,7 +275,7 @@ el mensaje te llega al correo.
     de páginas).
 - **Cada grupo lleva un `id`** (desde 2026-09-26), por ejemplo `id: plataforma-de-datos`: es el
   ancla de su tarjeta (`#skills-plataforma-de-datos`), a donde llevan las citas del chat de los
-  documentos de esa capacidad. Minúsculas, cifras y guiones, y **el mismo en español y en
+  documentos de esa capacidad (desde el Sprint 029, el explorador abre esa área). Minúsculas, cifras y guiones, y **el mismo en español y en
   inglés**: el build y un test lo exigen. Un grupo nuevo necesita su `id`.
 
 ### Estudios · desde la revisión post-S7
@@ -439,11 +476,13 @@ el mensaje te llega al correo.
   - **Apps** (`/es/portafolio/apps`): las apps del pipeline. **10 piezas.**
   - **Agentes especializados** (`/es/portafolio/agentes`): agentes sin interfaz que se manejan por
     comandos. **11 piezas.**
+  - **Tableros de datos** (`/es/portafolio/tableros`): tableros analíticos, sin atarse a una
+    herramienta. **6 piezas.**
   - **Investigaciones** (`/es/portafolio/investigaciones`): líneas de investigación, **en pausa desde el
     2026-10-24** porque se están rehaciendo (ver «Tres agentes fuera…» más abajo): la página dice «Esta
     sección se está rehaciendo» y no enseña tarjetas. Sus fichas siguen en `content/`. **7 piezas.**
-  - **Tableros de datos** (`/es/portafolio/tableros`): tableros analíticos, sin atarse a una
-    herramienta. **6 piezas.**
+    **Va la última desde el Sprint 029**, en el portal y en la puerta de la HOME (decisión tuya,
+    2026-10-31); si la reabres, no hace falta moverla.
 - **Un frente «en preparación» tiene página igual:** dice qué es y en qué punto está, **sin
   fecha prometida**, y cierra como los demás frentes (lista de espera solo si es `apps`). Marca el
   inicio —o una pausa—; no lo disfraza. Hoy lo está **Investigaciones** (pausa): su aviso propio sale
@@ -1173,7 +1212,7 @@ nombre del frente o la pieza, en cada idioma.
 **Una capacidad cita hacia SU tarjeta de Skills (desde 2026-09-26).** Cada tarjeta de Skills tiene
 su ancla, `#skills-<id>`, con el `id` que lleva el grupo en `data/cv.{es,en}.yaml` (el mismo en los
 dos idiomas; un test lo exige). Un documento sobre una capacidad apunta a la tarjeta, no a la
-sección entera: `ancla: "#skills-plataforma-de-datos"`. Los seis que decían `#skills` quedaron así:
+sección entera: `ancla: "#skills-plataforma-de-datos"` (desde el Sprint 029 esa cita abre el área en el explorador de Skills). Los seis que decían `#skills` quedaron así:
 
 | Documento                           | Tarjeta                                                            |
 | ----------------------------------- | ------------------------------------------------------------------ |
@@ -1508,3 +1547,4 @@ chat hoy y cuáles traería con la base aprobada. Ese informe **se genera, no se
 | Sprint 026 | **Sentada 4a: las fichas de las apps, a la altura.** Nueve apps llegan rehechas por la planeadora (export, complemento y capturas, copiados byte a byte; Innmobiliaria espera su entrega y su fila queda como estaba): cada una trae «Cómo funciona» y a lo sumo un cero en su tira de cifras, y la tarjeta del escaparate muestra la pantalla de entrada de la app. En la ficha de detalle cada grupo abre con un carrusel con la pantalla de cada funcionalidad (un WebP de 1536×960 y ≤ 80 KB; las transversales no llevan figura), y el Stack despliega «Para qué sirve cada uno» en vez de un tooltip que el teléfono no tiene. El diagrama de Nutrikids ya no cruza una caja, planlang conserva su palabra «vitrina» y el proceso lo rotula la planeadora, no CV Viva. Se aplican las 16 líneas de la orden de correcciones del Sprint 025 y dos de las tres tablas de cifras de la prosa llevan el mes de cada fila («oct. 2026» o «ago. 2026»; la de «Cómo aprendo» no cabe en el tope de su subsección y solo cambia la fila de Probeta DS). El chat narra con su cita lo que consta de «¿Por qué salió de Vesting?» sin añadir un motivo, y la pasada en vivo lo vigila con una marca nueva. Tres gates nuevos (capturas, ceros, «Cómo funciona»), cada uno visto en rojo. Guía v26 con ocho filas «Mejorado · S26». |
 | Sprint 027 | **Sentada 4b: lo que dejó el 026, cerrado.** Innmobiliaria entra con su ficha nueva —la décima— y las retomas de Dash Agent, HackGuard, AngelGhost, Nutrikids (con el tema propio de la app) y Probeta DS (sobre su S21, 77 funcionalidades) reemplazan lo que entró con el 026, todo por copia byte a byte; antes de copiar, otro lector revisó una por una las 71 imágenes que llegaban. Las filas de Innmobiliaria y de Probeta DS de tus tablas de apps toman las cifras de sus exports nuevos. Las siete apps profesionales van en el orden que pediste (OM-27) y ninguna ficha pinta funcionalidades descartadas (OM-24). «¿Por qué salió de Vesting?» y su gemela en inglés ya no pasan por el modelo: responden un texto fijo con su cita a la Trayectoria, y el marcador de la pasada en vivo ya no cuenta como tu voz la cortesía del asistente («Let me know if you’d like…»). El diagrama de «Cómo funciona» apila los círculos de enlace que comparten margen (Innmobiliaria, Dash Agent, HackGuard, Big-D, AngelGhost). Guía v27 con cuatro filas «Mejorado · S27». |
 | Sprint 028 | **Sentada 4c: el brochure, una sola plantilla para las doce.** Las diez apps y las dos de la casa (CV Viva y su chat) tienen un brochure en `/portafolio/apps/<app>/brochure`, con la misma plantilla: portada, antes y después, un capítulo por grupo con su flujo y sus preguntas, el proceso, el método con sus cifras y su procedencia, y el cierre; índice, buscador `/`, citas con «↩ Volver», Recorrido a pantalla grande, fichas que se voltean, **pausa del movimiento** e impresión en carta. El detalle de cada app y la página de la casa se retiran y redirigen con un 301 en un solo salto; la ficha técnica pasa a «Qué aporta» y «Ver brochure»; «De esta casa» enlaza los dos brochures de la casa; y la HOME deja de repetir el portal: es una **puerta** al Portafolio, con la cifra medida de cada frente. Lo nuevo de datos: `scripts/copiar-entrega.mjs`, `data/brochure.yaml` y el contenido v2 opcional (borrador). |
+| Sprint 029 | **Sentada 4d: Skills como explorador, los doce logros y el portafolio en su orden.** Skills pasa de nueve tarjetas a un rectángulo oscuro con las nueve áreas flotando (se detienen y crecen con el cursor, se agarran y se lanzan, se eligen para ver sus herramientas alrededor, con «← 5 · 7 →», las que ya abriste como un aro y «Ver todo en lista», que detiene el movimiento y es lo que va al imprimir y sin JavaScript); una cita del chat abre su área. Los logros son doce, los que aprobaste y en su orden, y el de agentes propios se cuenta (`contar`, hoy 11) en la HOME, el chat y el PDF; la trayectoria suma cuatro bullets; Investigaciones va al final del portafolio. |
