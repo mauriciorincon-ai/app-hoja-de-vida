@@ -76,8 +76,8 @@
       },
       "fuente": "medido",
       "detalle": {
-        "es": "Además de la hoja de vida, las fichas del Portafolio y Métodos, el chat lee 25 documentos de fondo que Henry escribió y que el sitio no publica como páginas: los 25 están aprobados y entran al índice en español y en inglés. La cita no abre el documento: dice de dónde salió la frase (AF-09, por ejemplo) y lleva a la sección del sitio que la respalda.",
-        "en": "Besides the résumé, the Portfolio sheets and Methods, the chat reads 25 in-depth documents Henry wrote and the site doesn't publish as pages: all 25 are approved and indexed in Spanish and English. A citation doesn't open the document: it says where the sentence came from (AF-09, for example) and leads to the section of the site that backs it."
+        "es": "Además de la hoja de vida, el Portafolio y Métodos, el chat lee 25 documentos de fondo que Henry escribió y que el sitio no publica como páginas: los 25 están aprobados y entran al índice en español y en inglés. La cita no abre el documento: dice de dónde salió la frase (AF-09, por ejemplo) y lleva a la sección del sitio que la respalda.",
+        "en": "Besides the résumé, the Portfolio and Methods, the chat reads 25 in-depth documents Henry wrote and the site doesn't publish as pages: all 25 are approved and indexed in Spanish and English. A citation doesn't open the document: it says where the sentence came from (AF-09, for example) and leads to the section of the site that backs it."
       },
       "cita": "CH-16"
     },
@@ -124,8 +124,8 @@
           "en": "The apps and the methods live on other pages, far from the question."
         },
         "despues": {
-          "es": "Una pregunta por una app o por un método trae su cita a la ficha o al bloque exacto.",
-          "en": "A question about an app or a method brings its citation to the sheet or the exact block."
+          "es": "Una pregunta por una app o por un método trae su cita al brochure, a la ficha o al bloque exacto.",
+          "en": "A question about an app or a method brings its citation to the brochure, the sheet or the exact block."
         },
         "funcionalidad": "CH-03",
         "fuente": "CH-03"
@@ -367,8 +367,8 @@
         },
         {
           "texto": {
-            "es": "Preguntas por una app del Portafolio o por un método, y quieres la ficha o el bloque exacto.",
-            "en": "You ask about a Portfolio app or a method, and want the sheet or the exact block."
+            "es": "Preguntas por una app del Portafolio o por un método, y quieres su página o el bloque exacto.",
+            "en": "You ask about a Portfolio app or a method, and want its page or the exact block."
           },
           "fuente": "CH-03"
         }
@@ -455,8 +455,8 @@
             "tipo": "tarea",
             "actor": "app",
             "texto": {
-              "es": "El chip lleva a la sección, a la ficha o al bloque de Métodos",
-              "en": "The chip leads to the section, the sheet or the Methods block"
+              "es": "El chip lleva a la sección, a la pieza o al bloque de Métodos",
+              "en": "The chip leads to the section, the piece or the Methods block"
             },
             "funcionalidad": "CH-03"
           },
@@ -517,8 +517,8 @@
             "en": "What does a chip like “[1, 2] AF-09 · Vesting” say?"
           },
           "respuesta": {
-            "es": "Los números son las marcas de la respuesta que salen de esa fuente. El código dice de dónde salió la frase: AF para un documento de fondo, CV para la hoja de vida, APP para la lista de apps, FT para una ficha del Portafolio, y el número de la publicación para Métodos (T4, por ejemplo). Lo último dice a dónde lleva: la sección del sitio que respalda la frase.",
-            "en": "The numbers are the marks in the answer that come from that source. The code says where the sentence came from: AF for an in-depth document, CV for the résumé, APP for the apps list, FT for a Portfolio sheet, and the publication's number for Methods (T4, for example). The last part says where it leads: the section of the site that backs the sentence."
+            "es": "Los números son las marcas de la respuesta que salen de esa fuente. El código dice de dónde salió la frase: AF para un documento de fondo, CV para la hoja de vida, APP para la lista de apps, FT para una pieza del Portafolio, y el número de la publicación para Métodos (T4, por ejemplo). Lo último dice a dónde lleva: la sección del sitio que respalda la frase.",
+            "en": "The numbers are the marks in the answer that come from that source. The code says where the sentence came from: AF for an in-depth document, CV for the résumé, APP for the apps list, FT for a Portfolio piece, and the publication's number for Methods (T4, for example). The last part says where it leads: the section of the site that backs the sentence."
           },
           "fuente": "CH-01"
         },
@@ -559,12 +559,12 @@
         {
           "tipo": "decision",
           "pregunta": {
-            "es": "Preguntas por una app del Portafolio: ¿qué gana, su ficha o los documentos de Henry?",
-            "en": "You ask about a Portfolio app: what wins, its sheet or Henry's documents?"
+            "es": "Preguntas por una app del Portafolio: ¿qué gana, lo que publica el Portafolio o los documentos de Henry?",
+            "en": "You ask about a Portfolio app: what wins, what the Portfolio publishes or Henry's documents?"
           },
           "respuesta": {
-            "es": "Si la pregunta es por una pieza, gana su ficha, y la cita lleva a ella; si es por Henry, gana su documento. En la búsqueda, las fichas pesan la mitad que los documentos de fondo: son evidencia de una pieza, y la voz de Henry son sus documentos.",
-            "en": "If the question is about a piece, its sheet wins and the citation leads to it; if it is about Henry, his document wins. In the search, sheets weigh half as much as in-depth documents: they are evidence of one piece, and Henry's voice is his documents."
+            "es": "Si la pregunta es por una pieza, gana lo que publica el Portafolio, y la cita lleva a su página; si es por Henry, gana su documento. En la búsqueda, los fragmentos del Portafolio pesan la mitad que los documentos de fondo: son evidencia de una pieza, y la voz de Henry son sus documentos.",
+            "en": "If the question is about a piece, what the Portfolio publishes wins and the citation leads to its page; if it is about Henry, his document wins. In the search, Portfolio fragments weigh half as much as in-depth documents: they are evidence of one piece, and Henry's voice is his documents."
           },
           "fuente": "CH-03"
         },
@@ -784,8 +784,8 @@
             "en": "“What doesn't HackGuard do?”: does that get refused too?"
           },
           "respuesta": {
-            "es": "No. Los límites de una pieza están escritos en su ficha y se contestan; lo que se rehúsa son las ausencias de la persona. Y «¿qué hace cuando el puesto pide algo que no ha usado?» también se contesta: es su método.",
-            "en": "No. A piece's limits are written in its sheet and get answered; what gets refused is the person's absences. And “what does he do when a role asks for something he hasn't used?” gets answered too: it is his method."
+            "es": "No. Los límites de una pieza están escritos en el Portafolio y se contestan; lo que se rehúsa son las ausencias de la persona. Y «¿qué hace cuando el puesto pide algo que no ha usado?» también se contesta: es su método.",
+            "en": "No. A piece's limits are written in the Portfolio and get answered; what gets refused is the person's absences. And “what does he do when a role asks for something he hasn't used?” gets answered too: it is his method."
           },
           "lados": [
             {
@@ -804,8 +804,8 @@
                 "en": "A piece"
               },
               "texto": {
-                "es": "«¿Qué no hace HackGuard?»: sus límites constan en su ficha, y la respuesta los cita.",
-                "en": "“What doesn't HackGuard do?”: its limits are on record in its sheet, and the answer cites them."
+                "es": "«¿Qué no hace HackGuard?»: sus límites constan en su brochure, y la respuesta los cita.",
+                "en": "“What doesn't HackGuard do?”: its limits are on record in its brochure, and the answer cites them."
               }
             }
           ],
@@ -1582,8 +1582,8 @@
         },
         {
           "texto": {
-            "es": "Quieres saber de dónde salen las respuestas: la hoja de vida, 25 documentos de fondo, las fichas y Métodos.",
-            "en": "You want to know where the answers come from: the résumé, 25 in-depth documents, the sheets and Methods."
+            "es": "Quieres saber de dónde salen las respuestas: la hoja de vida, 25 documentos de fondo, el Portafolio y Métodos.",
+            "en": "You want to know where the answers come from: the résumé, 25 in-depth documents, the Portfolio and Methods."
           },
           "fuente": "CH-16"
         },
@@ -1817,8 +1817,8 @@
             "en": "What goes into the chat's index?"
           },
           "respuesta": {
-            "es": "La hoja de vida, la lista de apps, los documentos de fondo aprobados, las fichas del Portafolio y las publicaciones de Métodos, bloque a bloque: 1939 fragmentos en español y 1930 en inglés en la última medición. Un documento en borrador no entra, y uno aprobado exige su gemelo en inglés.",
-            "en": "The résumé, the apps list, the approved in-depth documents, the Portfolio sheets and the Methods publications, block by block: 1939 fragments in Spanish and 1930 in English at the last count. A draft document doesn't go in, and an approved one requires its English twin."
+            "es": "La hoja de vida, la lista de apps, los documentos de fondo aprobados, cada pieza del Portafolio y las publicaciones de Métodos, bloque a bloque: 1939 fragmentos en español y 1930 en inglés en la última medición. Un documento en borrador no entra, y uno aprobado exige su gemelo en inglés.",
+            "en": "The résumé, the apps list, the approved in-depth documents, every Portfolio piece and the Methods publications, block by block: 1939 fragments in Spanish and 1930 in English at the last count. A draft document doesn't go in, and an approved one requires its English twin."
           },
           "fuente": "CH-16"
         },
@@ -1840,7 +1840,7 @@
   "en": {
     "promesa": {
       "tagline": "Ask the résumé: it answers with what's on record and cites its source.",
-      "intro": "CV Viva's chat answers in Spanish or English about Henry Rincón's career, always in the third person and only with the site's content: the résumé, 25 in-depth documents, the Portfolio sheets and the Methods publications. Every claim carries its citation to the section that backs it, and if the AI provider goes down, it keeps answering with local search.",
+      "intro": "CV Viva's chat answers in Spanish or English about Henry Rincón's career, always in the third person and only with the site's content: the résumé, 25 in-depth documents, every Portfolio piece and the Methods publications. Every claim carries its citation to the section that backs it, and if the AI provider goes down, it keeps answering with local search.",
       "para_quien": "For recruiters who want a specific answer (“what did he do at Vesting?”, “what does he know about Microsoft Fabric?”) without reading the whole site, and for anyone who wants to check it: every answer says where it comes from and takes you there. What isn't on record isn't answered, and the chat says so.",
       "diferencial": "A résumé chat that doesn't make things up takes more than a good prompt. Here, what isn't on record (what he didn't do, what he doesn't know, salary, a credential he doesn't hold) gets a fixed text before it reaches the model, without spending a token; leaving Vesting has its own fixed answer with its citation, and the panel shows only the sources the answer cites. Behind it sit an index rebuilt on every publish and a bank of 175 outside questions per language that proves, on every change, that the content answers. And it never goes silent: if the provider fails, the same search runs in the browser."
     },
@@ -1880,8 +1880,8 @@
         "que_hace": "The chat talks about Henry, never as Henry. The in-depth content is in the first person because it is his voice, and the answer moves it to the third; a test flags the owner's voice if it slips in."
       },
       "CH-03": {
-        "nombre": "The sheets and Methods, citable too",
-        "que_hace": "The index adds the Portfolio sheets and the Methods publications, block by block: a question about an app or a method brings its citation, which leads to the sheet or the exact block."
+        "nombre": "The Portfolio and Methods, citable too",
+        "que_hace": "The index adds every Portfolio piece and the Methods publications, block by block: a question about an app, an agent or a method brings its citation, which leads to the app's brochure, the piece's sheet or the exact block."
       },
       "CH-04": {
         "nombre": "One text for what isn't on record",
@@ -1933,7 +1933,7 @@
       },
       "CH-16": {
         "nombre": "An index built on publish",
-        "que_hace": "Every publish rebuilds the index from the résumé, the in-depth documents, the sheets and Methods. A draft document doesn't go in, and an approved one requires its English twin."
+        "que_hace": "Every publish rebuilds the index from the résumé, the in-depth documents, the Portfolio and Methods. A draft document doesn't go in, and an approved one requires its English twin."
       },
       "CH-17": {
         "nombre": "A bank of outside questions",
@@ -1948,12 +1948,12 @@
       "funcionalidades": {
         "etiqueta": "Chat features",
         "unidad": "features",
-        "detalle": "One per chat feature documented in docs/MANUAL-DE-USO.md at c3e4d2c, matched section by section; the list is in the planner's 028 reply."
+        "detalle": "One per chat feature documented in docs/MANUAL-DE-USO.md at 5ead9d6, matched section by section; the list is in the planner's 028 reply."
       },
       "fragmentos_del_indice": {
         "etiqueta": "Index fragments",
         "unidad": "fragments",
-        "detalle": "Output of scripts/build-chat-index.mjs in the build of a copy of c3e4d2c on 2026-11-01: 1939 fragments in Spanish and 1930 in English."
+        "detalle": "Output of scripts/build-chat-index.mjs in the build of a copy of 5ead9d6 on 2026-11-01: 1939 fragments in Spanish and 1930 in English."
       },
       "documentos_a_fondo": {
         "etiqueta": "In-depth documents indexed",
@@ -1963,17 +1963,17 @@
       "preguntas_del_banco": {
         "etiqueta": "Bank questions, per language",
         "unidad": "questions",
-        "detalle": "Legitimate questions in tests/fixtures/banco-de-preguntas.es.yaml at c3e4d2c, and the same 175 in English; the bank also holds 15 unrelated, 1 refusal and 3 uncovered questions per language."
+        "detalle": "Legitimate questions in tests/fixtures/banco-de-preguntas.es.yaml at 5ead9d6, and the same 175 in English; the bank also holds 15 unrelated, 1 refusal and 3 uncovered questions per language."
       },
       "pruebas_e2e_del_chat": {
         "etiqueta": "Chat end-to-end tests",
         "unidad": "tests",
-        "detalle": "Output of `playwright test --list` on a copy of c3e4d2c: chat.spec.ts and chat-conversacion.spec.ts, 47 on Chromium and 47 on mobile, with the simulated provider."
+        "detalle": "Output of `playwright test --list` on a copy of 5ead9d6: chat.spec.ts and chat-conversacion.spec.ts, 47 on Chromium and 47 on mobile, with the simulated provider."
       },
       "proveedores_conmutables": {
         "etiqueta": "Switchable providers",
         "unidad": "providers",
-        "detalle": "PROVEEDORES_CHAT in src/lib/ia/provider.ts at c3e4d2c, without the tests' simulated one: Groq, Gemini, Azure, Anthropic and an OpenAI-compatible one."
+        "detalle": "PROVEEDORES_CHAT in src/lib/ia/provider.ts at 5ead9d6, without the tests' simulated one: Groq, Gemini, Azure, Anthropic and an OpenAI-compatible one."
       },
       "fuentes_por_respuesta": {
         "etiqueta": "Fragments per answer",
