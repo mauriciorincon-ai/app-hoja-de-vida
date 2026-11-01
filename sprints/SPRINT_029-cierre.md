@@ -5,7 +5,7 @@ hito: H-2
 opened: 2026-10-31
 closed: 2026-11-01
 branch: sprint-029/skills-y-logros
-pr: PENDIENTE
+pr: https://github.com/mauriciorincon-ai/app-hoja-de-vida/pull/108
 ---
 
 # Sprint 029 — Cierre ejecutivo · CV Viva · Sentada 4d: Skills como explorador, los doce logros y el portafolio en su orden
