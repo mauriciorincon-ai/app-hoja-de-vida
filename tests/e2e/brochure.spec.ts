@@ -219,19 +219,28 @@ test.describe("Brochure — el HTML de las doce, en los dos idiomas", () => {
     }
   });
 
-  test("el cierre lleva a la lista de espera de la ficha (las diez) o al contacto de la casa", async ({
+  test("el cierre «Úsala» trae la lista de espera de la app elegida (las diez) o «Escríbeme» al contacto (la casa)", async ({
     request,
   }) => {
     for (const exp of EXPORTS) {
       const html = await (await request.get(ruta("es", exp.app.slug))).text();
-      const cta = /<a class="boton" href="([^"]+)" data-cta="">/.exec(html);
-      expect(cta, exp.app.slug).not.toBeNull();
       const esCasa = CASA.some((c) => c.app.slug === exp.app.slug);
-      expect(cta![1], exp.app.slug).toBe(
-        esCasa
-          ? "/es/#contacto"
-          : `/es/portafolio/apps/${exp.app.slug}#contacto-portafolio`,
-      );
+      const cierre = html.slice(html.indexOf('id="s-cierre"'));
+      if (esCasa) {
+        // Sin formularios, y «Escríbeme» al contacto de CV Viva.
+        expect(cierre, exp.app.slug).toContain(
+          'href="/es/#contacto" data-cta=""',
+        );
+        expect(cierre, exp.app.slug).not.toContain("<form");
+      } else {
+        expect(cierre, exp.app.slug).toContain('id="lista-de-espera"');
+        expect(cierre, exp.app.slug).toMatch(
+          new RegExp(
+            `<option value="${exp.app.slug}" selected=""|<option selected="" value="${exp.app.slug}"`,
+          ),
+        );
+        expect(html, exp.app.slug).not.toContain("contacto-portafolio");
+      }
     }
   });
 });

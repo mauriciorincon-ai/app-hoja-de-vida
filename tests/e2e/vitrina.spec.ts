@@ -430,15 +430,18 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
       await expect(page.locator("#contacto-portafolio")).toHaveCount(1);
       await expect(page.locator('form[data-formulario="app"]')).toHaveCount(1);
 
-      // El brochure no lleva el formulario (es la página más pesada): su cierre manda allá, y
-      // el ancla aterriza en el formulario con esa app ya elegida.
+      // El brochure (S30) cierra con «Úsala»: la lista de espera vive en su MISMA página, con esa app ya
+      // elegida, en `#lista-de-espera`; el ancla de la ficha ya no existe allí.
       await page.goto(`/es/portafolio/apps/${exp.app.slug}/brochure`);
-      const cierre = page.locator("#s-cierre [data-cta]").first();
-      await expect(page.locator('form[data-formulario="app"]')).toHaveCount(0);
-      await expect(cierre).toHaveAttribute(
-        "href",
-        `/es/portafolio/apps/${exp.app.slug}#contacto-portafolio`,
-      );
+      await expect(page.locator("#s-cierre #lista-de-espera")).toHaveCount(1);
+      await expect(
+        page.locator('#s-cierre form[data-formulario="app"]'),
+      ).toHaveCount(1);
+      await expect(page.locator("#contacto-portafolio")).toHaveCount(0);
+      await expect(
+        page.locator('#s-cierre select[name="app"]'),
+        exp.app.slug,
+      ).toHaveValue(exp.app.slug);
     }
   });
   test("toda cifra lleva su procedencia y ninguna funcionalidad descartada se pinta (OM-24)", async ({
