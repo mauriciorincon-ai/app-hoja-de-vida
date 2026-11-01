@@ -11,10 +11,10 @@
  *  - La «vitrina» (`/vitrina`) pasó a «Portafolio» (`/portafolio`) en el S23,
  *    2026-10-25: el dueño quiso una sola palabra para todo el sitio.
  *  - El brochure (S28) reemplazó al detalle de cada app (`…/apps/<app>/detalle`) y a
- *    la página de la casa (`/apps/hoja-de-vida`, `/apps/chat-hoja-de-vida`): ahora
- *    todas son `…/portafolio/apps/<app>/brochure`.
- *  - El brochure es la ENTRADA de una app con su contenido v2 y de la casa (S30, «1b»):
- *    su `/brochure` (y lo que antes llevaba a él) llega a `…/portafolio/apps/<app>`.
+ *    la página de la casa (`/apps/hoja-de-vida`, `/apps/chat-hoja-de-vida`).
+ *  - El brochure es la ENTRADA de la app (S30 «1b» para las que tenían su contenido v2 y la casa;
+ *    S31 para las diez, sin interruptor): su `/brochure`, su `/detalle` y la página vieja de la
+ *    casa llegan a `…/portafolio/apps/<app>`.
  *
  * Vive aparte del `proxy.ts` para poder probarse con cadenas, y el proxy es
  * quien responde el 301: `redirects()` de `next.config` solo emite 308, y el
@@ -25,7 +25,7 @@
  * retirada, una a `RETIRADAS`.
  *
  * **Siempre en un solo salto.** `RETIRADAS` se aplica sobre la ruta YA renombrada,
- * así que `/vitrina/apps/habla/detalle` llega a `/es/portafolio/apps/habla/brochure`
+ * así que `/vitrina/apps/habla/detalle` llega a `/es/portafolio/apps/habla` (la entrada)
  * sin pasar por `/es/portafolio/apps/habla/detalle`: un 301 encadenado le cuesta
  * una ida y vuelta al visitante y al buscador. La prueba fija que ninguna ruta
  * nueva vuelve a redirigir.
@@ -48,29 +48,19 @@ const CASA = ["hoja-de-vida", "chat-hoja-de-vida"] as const;
  */
 const RETIRADAS = [
   {
-    // El detalle de una app: lo reemplaza su brochure.
+    // El detalle de una app: lo reemplaza su brochure, que es su entrada.
     patron: /^(?:\/(es|en))?\/portafolio\/apps\/([^/]+)\/detalle\/?$/,
-    destino: (m: RegExpExecArray) =>
-      `/${m[1] ?? "es"}/portafolio/apps/${m[2]}/brochure`,
+    destino: (m: RegExpExecArray) => `/${m[1] ?? "es"}/portafolio/apps/${m[2]}`,
   },
   {
-    // La página de la casa: ahora es el brochure de CV Viva y el de su chat.
+    // La página de la casa: ahora es el brochure de CV Viva y el de su chat, en su entrada.
     patron: new RegExp(`^(?:/(es|en))?/apps/(${CASA.join("|")})/?$`),
-    destino: (m: RegExpExecArray) =>
-      `/${m[1] ?? "es"}/portafolio/apps/${m[2]}/brochure`,
+    destino: (m: RegExpExecArray) => `/${m[1] ?? "es"}/portafolio/apps/${m[2]}`,
   },
 ];
 
-/** El brochure de una app, con idioma o sin él: si la app abre en su brochure, es su entrada. */
+/** El brochure de una app, con idioma o sin él: desde el S31 es la entrada de TODAS, así que su `/brochure` redirige siempre. */
 const BROCHURE = /^(?:\/(es|en))?\/portafolio\/apps\/([^/]+)\/brochure\/?$/;
-
-/**
- * Las apps que abren en su brochure (`scripts/entradas-brochure.mjs`): `next.config.ts` las mide del
- * disco en build y las inlina aquí, porque el proxy no lee el disco. La casa abre en él siempre.
- */
-export function entradasDelEntorno(): string[] {
-  return (process.env.CV_ENTRADAS_BROCHURE ?? "").split(",").filter(Boolean);
-}
 
 /**
  * `/<vieja>` o `/<vieja>/…`, con idioma (`/es`, `/en`) o sin él. Exacta: ni
@@ -89,14 +79,11 @@ const PATRONES = RENOMBRADAS.map((r) => ({
  * cualquier otra cosa que solo se parezca (`/es/metodo-x`, `/es/vitrinas`) no
  * se tocan.
  *
- * `entradas` son las apps que abren en su brochure (por defecto, las que midió el
- * build); la casa siempre lo está. Su `/brochure` se resuelve al final, sobre la
- * ruta ya renombrada y ya retirada: también ese es un solo salto.
+ * El `/brochure` de cualquier app se resuelve al final, sobre la ruta ya renombrada y
+ * ya retirada: también ese es un solo salto. El proxy no sabe qué apps hay (no lee el
+ * disco), así que el de un slug que no existe llega a una entrada que da 404.
  */
-export function rutaNueva(
-  pathname: string,
-  entradas: readonly string[] = entradasDelEntorno(),
-): string | null {
+export function rutaNueva(pathname: string): string | null {
   let ruta = pathname;
   let cambio = false;
   for (const { patron, nueva } of PATRONES) {
@@ -114,7 +101,6 @@ export function rutaNueva(
     break;
   }
   const b = BROCHURE.exec(ruta);
-  if (b && [...CASA, ...entradas].includes(b[2]!))
-    return `/${b[1] ?? "es"}/portafolio/apps/${b[2]}`;
+  if (b) return `/${b[1] ?? "es"}/portafolio/apps/${b[2]}`;
   return cambio ? ruta : null;
 }

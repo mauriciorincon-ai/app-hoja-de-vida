@@ -1,7 +1,6 @@
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { expect, test, type Locator } from "@playwright/test";
 import { parse } from "yaml";
-import { entradasBrochure } from "../../scripts/entradas-brochure.mjs";
 
 /**
  * LA VITRINA (S5) — e2e.
@@ -49,17 +48,11 @@ const EXPORTS: Export[] = readdirSync("content/vitrina")
 if (EXPORTS.length === 0) throw new Error("content/vitrina sin exports");
 
 /**
- * Las apps que abren en su brochure (S30): las que tienen su contenido v2, medidas del disco como
- * las mide el build. Su entrada no es la ficha; lo que es de la ficha se mira en las demás.
+ * Desde el S31 las diez apps abren en su brochure, sin ficha: `/portafolio/apps/<app>` es su brochure
+ * (S30 lo hizo app por app, con el contenido v2) y su `/brochure` es un 301 a ella
+ * (`entrada.spec.ts`). La ficha técnica (ADR-016) queda en los agentes, las investigaciones y los tableros.
  */
-const ENTRADAS = entradasBrochure();
-const CON_FICHA = EXPORTS.filter((e) => !ENTRADAS.includes(e.app.slug));
-if (CON_FICHA.length === 0) throw new Error("ninguna app sigue con su ficha");
-/** Dónde vive el brochure de una app: su entrada, o su `/brochure` si sigue con su ficha. */
-const brochureDe = (l: string, slug: string) =>
-  ENTRADAS.includes(slug)
-    ? `/${l}/portafolio/apps/${slug}`
-    : `/${l}/portafolio/apps/${slug}/brochure`;
+const brochureDe = (l: string, slug: string) => `/${l}/portafolio/apps/${slug}`;
 
 /**
  * Las dos categorías de las apps y sus nombres oficiales (Sprint 009), leídas
@@ -141,13 +134,13 @@ const ABIERTOS = FRENTES.filter(
 if (ABIERTOS.length === 0)
   throw new Error("data/vitrina.yaml sin frentes abiertos fuera de «apps»");
 
-/** La ficha con más grupos de funcionalidades: la que más estresa el recorrido de las pantallas y las tarjetas. */
-const MAS_LARGA = CON_FICHA.reduce((a, b) =>
+/** La app con más grupos de funcionalidades: la que más estresa el recorrido de las pantallas y las tarjetas. */
+const MAS_LARGA = EXPORTS.reduce((a, b) =>
   b.funcionalidades.grupos.length > a.funcionalidades.grupos.length ? b : a,
 );
 
 test.describe("Vitrina — el escaparate y las fichas", () => {
-  test("se llega a la vitrina y de ahí a la ficha de una app (por la UI)", async ({
+  test("se llega a la vitrina y de ahí al brochure de una app (por la UI)", async ({
     page,
   }) => {
     await page.goto("/es");
@@ -206,47 +199,25 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
       .getByRole("link", { name: nombreVisible(primera) })
       .click();
 
-    // Primero la FICHA TÉCNICA (ADR-016) …
+    // La entrada de la app es su BROCHURE (S31): ninguna app tiene ficha técnica.
     await expect(page).toHaveURL(
       new RegExp(`/es/portafolio/apps/${primera.app.slug}$`),
     );
-    await expect(
-      page.locator(`[data-ficha-tecnica="${primera.app.slug}"]`),
-    ).toBeVisible();
-    // … y de ahí, con el botón, al brochure (S28).
-    await page.locator('[data-cta="brochure"]').click();
-    await expect(page).toHaveURL(
-      new RegExp(`/es/portafolio/apps/${primera.app.slug}/brochure$`),
-    );
-    // Y el brochure que se abre es el de ESA app, no otro: un solo brochure, con su nombre oficial.
     await expect(page.locator("[data-brochure]")).toHaveCount(1);
+    await expect(page.locator("[data-ficha-tecnica]")).toHaveCount(0);
+    // Y el brochure que se abre es el de ESA app, no otro: un solo brochure, con su nombre oficial.
     await expect(page.locator("[data-brochure] .nombre").first()).toContainText(
       nombreVisible(primera),
     );
 
-    // La que abre en su brochure (S30): su tarjeta lleva directo a él, sin ficha de por medio.
-    const entrada = EXPORTS.find((e) => ENTRADAS.includes(e.app.slug));
-    if (entrada) {
-      await page.goto("/es/portafolio/apps");
-      // Su tarjeta no promete una ficha que ya no existe; la de una app que la conserva, sí.
-      await expect(
-        page.locator(`[data-muestra-slug="${entrada.app.slug}"]`),
-      ).toContainText("Ver brochure");
-      await expect(
-        page.locator(`[data-muestra-slug="${entrada.app.slug}"]`),
-      ).not.toContainText("Ver la ficha técnica");
-      await expect(
-        page.locator(`[data-muestra-slug="${primera.app.slug}"]`),
-      ).toContainText("Ver la ficha técnica");
-      await page
-        .locator(`[data-muestra-slug="${entrada.app.slug}"]`)
-        .getByRole("link", { name: nombreVisible(entrada) })
-        .click();
-      await expect(page).toHaveURL(
-        new RegExp(`/es/portafolio/apps/${entrada.app.slug}$`),
+    // Su tarjeta lo dice: «Ver brochure», en todas, y ninguna promete una ficha que ya no existe.
+    await page.goto("/es/portafolio/apps");
+    for (const exp of EXPORTS) {
+      const tarjeta = page.locator(`[data-muestra-slug="${exp.app.slug}"]`);
+      await expect(tarjeta, exp.app.slug).toContainText("Ver brochure");
+      await expect(tarjeta, exp.app.slug).not.toContainText(
+        "Ver la ficha técnica",
       );
-      await expect(page.locator("[data-brochure]")).toHaveCount(1);
-      await expect(page.locator("[data-ficha-tecnica]")).toHaveCount(0);
     }
   });
 
@@ -289,85 +260,29 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
     }
   });
 
-  test("cada app tiene su ruta propia: su ficha técnica y su brochure, o su brochure como entrada", async ({
+  test("cada app tiene su ruta propia, y es su brochure (sin ficha)", async ({
     page,
   }) => {
     for (const exp of EXPORTS) {
       const nombre = nombreVisible(exp);
-      if (!ENTRADAS.includes(exp.app.slug)) {
-        await page.goto(`/es/portafolio/apps/${exp.app.slug}`);
-        // La razón de ser del cambio: una ficha por página, no las seis apiladas.
-        const fichas = page.locator("[data-ficha-tecnica]");
-        await expect(fichas).toHaveCount(1);
-        await expect(fichas).toHaveAttribute(
-          "data-ficha-tecnica",
-          exp.app.slug,
-        );
-      }
       await page.goto(brochureDe("es", exp.app.slug));
+      // La razón de ser del cambio: un brochure por página, y ninguna ficha técnica de una app.
       await expect(page.locator("[data-brochure]")).toHaveCount(1);
+      await expect(page.locator("[data-ficha-tecnica]")).toHaveCount(0);
       await expect(
         page.locator("[data-brochure] .nombre").first(),
         exp.app.slug,
       ).toContainText(nombre);
     }
   });
-  test("las vecinas «App anterior / App siguiente» siguen el orden del escaparate, en la ficha", async ({
-    page,
-  }) => {
-    // El orden que el visitante acaba de ver: profesionales y después personales.
-    await page.goto("/es/portafolio/apps");
-    const orden = await page
-      .locator("[data-muestra-slug]")
-      .evaluateAll((els) =>
-        els.map((e) => e.getAttribute("data-muestra-slug") as string),
-      );
-    expect(orden).toHaveLength(EXPORTS.length);
 
-    for (const [i, slug] of orden.entries()) {
-      // Las que abren en su brochure no tienen ficha (S30): aquí se miran solo las fichas.
-      if (ENTRADAS.includes(slug)) continue;
-      await page.goto(`/es/portafolio/apps/${slug}`);
-      const anterior = page.getByRole("link", { name: /App anterior/ });
-      const siguiente = page.getByRole("link", { name: /App siguiente/ });
-      const ruta = (v: string) => new RegExp(`/portafolio/apps/${v}$`);
-      if (i === 0) await expect(anterior, slug).toHaveCount(0);
-      else
-        await expect(anterior, slug).toHaveAttribute(
-          "href",
-          ruta(orden[i - 1]),
-        );
-      if (i === orden.length - 1) await expect(siguiente, slug).toHaveCount(0);
-      else
-        await expect(siguiente, slug).toHaveAttribute(
-          "href",
-          ruta(orden[i + 1]),
-        );
-    }
-  });
-  test("cada app lleva UN nombre, el oficial, en la muestra, la ficha técnica, el brochure, el título y el selector, en español y en inglés", async ({
+  test("cada app lleva UN nombre, el oficial, en la muestra, el brochure, el título y el selector, en español y en inglés", async ({
     page,
   }) => {
     for (const l of ["es", "en"] as const) {
       for (const exp of EXPORTS) {
         const nombre = nombreVisible(exp);
         const slug = exp.app.slug;
-
-        if (!ENTRADAS.includes(slug)) {
-          await page.goto(`/${l}/portafolio/apps/${slug}`);
-          await expect(
-            page.getByRole("heading", { level: 1, name: nombre, exact: true }),
-            `${l}/${slug} ficha técnica`,
-          ).toBeVisible();
-          await expect(page, `${l}/${slug} título`).toHaveTitle(
-            new RegExp(`^${nombre}`),
-          );
-          // El selector de la lista de espera nombra a TODAS las apps con su nombre oficial.
-          const opciones = await page
-            .locator("#contacto-portafolio select option")
-            .allTextContents();
-          expect(opciones, `${l}/${slug} selector`).toContain(nombre);
-        }
 
         await page.goto(brochureDe(l, slug));
         await expect(
@@ -377,6 +292,11 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
         await expect(page, `${l}/${slug} título del brochure`).toHaveTitle(
           new RegExp(`^${nombre}`),
         );
+        // El selector de la lista de espera de «Úsala» nombra a TODAS las apps con su nombre oficial.
+        const opciones = await page
+          .locator('#s-cierre select[name="app"] option')
+          .allTextContents();
+        expect(opciones, `${l}/${slug} selector`).toContain(nombre);
       }
       // Y ningún nombre que trae un export (y el oficial reemplaza) queda a la vista.
       for (const exp of EXPORTS) {
@@ -390,16 +310,18 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
       }
     }
   });
+
   test("se navega entre apps vecinas sin volver al índice", async ({
     page,
   }) => {
     await page.goto(`/es/portafolio/apps/${EXPORTS[0].app.slug}`);
+    // Las vecinas viven en «Úsala», el cierre del brochure.
     const siguiente = page.getByRole("link", { name: /App siguiente/ });
     // La primera del orden nunca tiene «anterior», pero siempre tiene vecina.
     await expect(siguiente).toBeVisible();
     await siguiente.click();
     await expect(page).toHaveURL(/\/es\/portafolio\/apps\/[a-z0-9-]+$/);
-    await expect(page.locator("[data-ficha-tecnica]")).toHaveCount(1);
+    await expect(page.locator("[data-brochure]")).toHaveCount(1);
     // Y desde ahí se sube al escaparate, y al portal.
     await page.getByRole("link", { name: /Volver a las apps/ }).click();
     await expect(page).toHaveURL(/\/es\/portafolio\/apps$/);
@@ -413,7 +335,6 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
       "/es/portafolio",
       "/es/portafolio/apps",
       ...EXPORTS.map((e) => `/es/portafolio/apps/${e.app.slug}`),
-      ...CON_FICHA.map((e) => `/es/portafolio/apps/${e.app.slug}/brochure`),
       ...EN_PREPARACION.map((f) => `/es/portafolio/${f.id}`),
     ];
     for (const ruta of rutas) {
@@ -427,22 +348,13 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
     }
   });
 
-  test("el CTA de lista de espera existe y su anclaje está en la MISMA página", async ({
+  test("la lista de espera de «Úsala» vive en la MISMA página, con esa app ya elegida", async ({
     page,
   }) => {
-    for (const exp of CON_FICHA) {
-      // El formulario vive en la ficha técnica de la app.
-      await page.goto(`/es/portafolio/apps/${exp.app.slug}`);
-      const cta = page.locator('[data-cta="lista-de-espera"]');
-      await expect(cta).toBeVisible();
-      await expect(cta).toHaveAttribute("href", "#contacto-portafolio");
-      // Un ancla que no aterriza en ninguna parte es un botón roto.
-      await expect(page.locator("#contacto-portafolio")).toHaveCount(1);
-      await expect(page.locator('form[data-formulario="app"]')).toHaveCount(1);
-
+    for (const exp of EXPORTS) {
       // El brochure (S30) cierra con «Úsala»: la lista de espera vive en su MISMA página, con esa app ya
-      // elegida, en `#lista-de-espera`; el ancla de la ficha ya no existe allí.
-      await page.goto(`/es/portafolio/apps/${exp.app.slug}/brochure`);
+      // elegida, en `#lista-de-espera`; el ancla `#contacto-portafolio` de la ficha ya no existe allí.
+      await page.goto(brochureDe("es", exp.app.slug));
       await expect(page.locator("#s-cierre #lista-de-espera")).toHaveCount(1);
       await expect(
         page.locator('#s-cierre form[data-formulario="app"]'),
@@ -486,139 +398,6 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
       for (const d of exp.funcionalidades.descartadas)
         await expect(page.locator(`[id="${d.id}"]`)).toHaveCount(0);
     }
-  });
-});
-
-test.describe("Vitrina — la ficha técnica (ADR-016)", () => {
-  type Complemento = {
-    app: string;
-    titular: string;
-    cifras_destacadas: string[];
-    nunca: string[];
-    procedencia?: string;
-    proceso?: {
-      titulo: string;
-      carriles: { id: string; nombre: string }[];
-      pasos: { id: string; tipo: string; texto: string }[];
-      anotaciones: { texto: string }[];
-    };
-  };
-  const COMPLEMENTOS: Complemento[] = readdirSync("data/fichas")
-    .filter((f) => f.endsWith(".yaml"))
-    .map((f) => parse(readFileSync(`data/fichas/${f}`, "utf8")) as Complemento);
-  /** La ficha más larga ENTRE LAS QUE TRAEN PROCESO: lo que prueban el gate ATS y el móvil. */
-  const CON_PROCESO = CON_FICHA.filter(
-    (e) => COMPLEMENTOS.find((c) => c.app === e.app.slug)?.proceso,
-  );
-  const MAS_LARGA_CON_PROCESO = CON_PROCESO.reduce((a, b) =>
-    b.funcionalidades.grupos.length > a.funcionalidades.grupos.length ? b : a,
-  );
-
-  test("cada app con ficha tiene su ficha técnica: titular, 3–5 cifras con procedencia, proceso y «nunca»", async ({
-    page,
-  }) => {
-    for (const exp of CON_FICHA) {
-      const comp = COMPLEMENTOS.find((c) => c.app === exp.app.slug)!;
-      await page.goto(`/es/portafolio/apps/${exp.app.slug}`);
-      const ft = page.locator(`[data-ficha-tecnica="${exp.app.slug}"]`);
-      await expect(ft).toBeVisible();
-      await expect(ft.locator("[data-titular]")).toContainText(
-        comp.titular.slice(0, 40),
-      );
-
-      // La FECHA de sello viene del contrato (`pieza.sellado_en`), no de un hito
-      // de texto libre: si la pieza está sellada se enseña, y si no lo está el
-      // chip no existe — un campo del contrato que nadie pinta es un campo que
-      // nadie corrige cuando miente.
-      const sello = ft.locator("[data-sellado-en]");
-      if (exp.app.estado === "sellado") {
-        await expect(sello).toHaveAttribute(
-          "data-sellado-en",
-          exp.app.sellado_en!,
-        );
-        await expect(sello).toContainText(exp.app.sellado_en!);
-      } else {
-        await expect(sello).toHaveCount(0);
-      }
-
-      const cifras = ft.locator("[data-cifra]");
-      await expect(cifras).toHaveCount(comp.cifras_destacadas.length);
-      // Cada cifra destacada es una métrica del export, con SU fuente.
-      for (const clave of comp.cifras_destacadas) {
-        const m = exp.metricas.find((x) => x.clave === clave)!;
-        await expect(
-          ft.locator(`[data-cifra="${clave}"] [data-fuente]`),
-        ).toHaveAttribute("data-fuente", m.fuente);
-      }
-
-      // El proceso es OPCIONAL en el contrato (v1.1.0), pero las diez apps lo
-      // traen desde el pedido 026 (un gate lo exige); si una pieza saliera sin
-      // él, la ficha no pinta ni el diagrama ni una procedencia vacía.
-      const proceso = ft.locator(`[data-proceso="${exp.app.slug}"]`);
-      if (comp.proceso) {
-        // Un nodo por paso, y las anotaciones como notas al pie.
-        await expect(proceso.locator("[data-paso]")).toHaveCount(
-          comp.proceso.pasos.length,
-        );
-        await expect(proceso.locator("[data-nota]")).toHaveCount(
-          comp.proceso.anotaciones.length,
-        );
-        // Y su procedencia se declara junto con él.
-        await expect(ft.locator("[data-procedencia-proceso]")).toHaveAttribute(
-          "data-procedencia-proceso",
-          comp.procedencia!,
-        );
-      } else {
-        await expect(proceso).toHaveCount(0);
-        await expect(ft.locator("[data-procedencia-proceso]")).toHaveCount(0);
-      }
-
-      await expect(ft.locator("[data-nunca] li")).toHaveCount(
-        comp.nunca.length,
-      );
-      await expect(ft.locator("[data-bloque]")).toHaveCount(
-        exp.funcionalidades.grupos.length,
-      );
-    }
-  });
-
-  test("gate ATS/SEO: la ficha técnica entrega el proceso como texto en el HTML", async ({
-    page,
-  }) => {
-    const exp = MAS_LARGA_CON_PROCESO;
-    const comp = COMPLEMENTOS.find((c) => c.app === exp.app.slug)!;
-    const proceso = comp.proceso!;
-    const html = await (
-      await page.request.get(`/es/portafolio/apps/${exp.app.slug}`)
-    ).text();
-    expect(html).toContain(comp.titular.slice(0, 40));
-    // Los pasos del proceso son <text> del SVG: un rastreador los lee.
-    for (const paso of proceso.pasos
-      .filter((p) => p.tipo === "tarea")
-      .slice(0, 3)) {
-      const primeraPalabra = paso.texto.split(" ")[0];
-      expect(html).toContain(primeraPalabra);
-    }
-    expect(html).toContain(proceso.titulo.toUpperCase());
-  });
-
-  test("la ficha técnica en móvil no encoge el proceso: se desliza", async ({
-    page,
-    isMobile,
-  }) => {
-    test.skip(!isMobile, "solo en el proyecto móvil");
-    await page.goto(`/es/portafolio/apps/${MAS_LARGA_CON_PROCESO.app.slug}`);
-    const caja = page.locator(
-      `[data-proceso="${MAS_LARGA_CON_PROCESO.app.slug}"] [data-desliza]`,
-    );
-    const { scrollWidth, clientWidth } = await caja.evaluate((el) => ({
-      scrollWidth: el.scrollWidth,
-      clientWidth: el.clientWidth,
-    }));
-    expect(scrollWidth).toBeGreaterThan(clientWidth);
-    await expect(
-      page.getByText("Desliza para ver el proceso completo."),
-    ).toBeVisible();
   });
 });
 
@@ -759,6 +538,116 @@ test.describe("Vitrina — los frentes en preparación (ADR-015)", () => {
     await expect(
       page.locator('header[data-estado="en-preparacion"]'),
     ).toHaveCount(0);
+  });
+});
+
+/**
+ * LA FICHA TÉCNICA: EL PROCESO BPMN Y EL STACK (ADR-016). Hasta el S30 estas pruebas miraban la ficha de las apps; desde el S31 las
+ * apps abren en su brochure, pero el renderizador (`FichaTecnica`, `ProcesoBpmn`) sigue vivo en los agentes —que traen su proceso y su
+ * stack—, así que lo que vigilaban sigue vigilándose, ahora sobre ellos: un nodo por paso, las anotaciones como notas, la procedencia
+ * declarada, el proceso como texto en el HTML (ATS), el deslizamiento en móvil y el Stack desplegable sin tooltips.
+ */
+test.describe("Vitrina — la ficha técnica de un agente: proceso y Stack (ADR-016)", () => {
+  type FichaViva = {
+    pieza: { slug: string };
+    titular: string;
+    stack: { nombre: string; papel: string }[];
+    procedencia_proceso?: string;
+    proceso?: {
+      titulo: string;
+      pasos: { tipo: string; texto: string }[];
+      anotaciones: unknown[];
+    };
+  };
+  const AGENTES = (ABIERTOS.find((f) => f.id === "agentes")?.piezas ??
+    []) as unknown as FichaViva[];
+  const CON_PROCESO = AGENTES.filter((a) => a.proceso);
+  /** El agente con más pasos: el que más estresa el diagrama (el gate ATS y el móvil). */
+  const MAS_LARGO = CON_PROCESO.reduce((a, b) =>
+    b.proceso!.pasos.length > a.proceso!.pasos.length ? b : a,
+  );
+
+  test("hay agentes con proceso y con stack (si no, estas pruebas no miden nada)", () => {
+    expect(CON_PROCESO.length).toBeGreaterThan(0);
+    expect(AGENTES.some((a) => a.stack.length > 0)).toBe(true);
+  });
+
+  test("cada agente con proceso lo pinta: un nodo por paso, sus anotaciones como notas y su procedencia declarada", async ({
+    page,
+  }) => {
+    for (const a of CON_PROCESO) {
+      await page.goto(`/es/portafolio/agentes/${a.pieza.slug}`);
+      const ft = page.locator(`[data-ficha-tecnica="${a.pieza.slug}"]`);
+      const proceso = ft.locator(`[data-proceso="${a.pieza.slug}"]`);
+      await expect(proceso.locator("[data-paso]"), a.pieza.slug).toHaveCount(
+        a.proceso!.pasos.length,
+      );
+      await expect(proceso.locator("[data-nota]"), a.pieza.slug).toHaveCount(
+        a.proceso!.anotaciones.length,
+      );
+      await expect(
+        ft.locator("[data-procedencia-proceso]"),
+        a.pieza.slug,
+      ).toHaveAttribute("data-procedencia-proceso", a.procedencia_proceso!);
+    }
+  });
+
+  test("gate ATS/SEO: la ficha técnica entrega el proceso como texto en el HTML", async ({
+    request,
+  }) => {
+    const a = MAS_LARGO;
+    const html = await (
+      await request.get(`/es/portafolio/agentes/${a.pieza.slug}`)
+    ).text();
+    expect(html).toContain(a.titular.slice(0, 40));
+    // Los pasos del proceso son <text> del SVG: un rastreador los lee.
+    for (const paso of a
+      .proceso!.pasos.filter((p) => p.tipo === "tarea")
+      .slice(0, 3)) {
+      expect(html).toContain(paso.texto.split(" ")[0]);
+    }
+    expect(html).toContain(a.proceso!.titulo.toUpperCase());
+  });
+
+  test("la ficha técnica en móvil no encoge el proceso: se desliza", async ({
+    page,
+    isMobile,
+  }) => {
+    test.skip(!isMobile, "solo en el proyecto móvil");
+    await page.goto(`/es/portafolio/agentes/${MAS_LARGO.pieza.slug}`);
+    const caja = page.locator(
+      `[data-proceso="${MAS_LARGO.pieza.slug}"] [data-desliza]`,
+    );
+    const { scrollWidth, clientWidth } = await caja.evaluate((el) => ({
+      scrollWidth: el.scrollWidth,
+      clientWidth: el.clientWidth,
+    }));
+    expect(scrollWidth).toBeGreaterThan(clientWidth);
+    await expect(
+      page.getByText("Desliza para ver el proceso completo."),
+    ).toBeVisible();
+  });
+
+  test("el Stack se despliega con el para qué de cada componente, sin tooltips", async ({
+    page,
+  }) => {
+    const a = AGENTES.find((x) => x.stack.length > 0)!;
+    await page.goto(`/es/portafolio/agentes/${a.pieza.slug}`);
+    const ft = page.locator(`[data-ficha-tecnica="${a.pieza.slug}"]`);
+    // La vista comprimida: una cápsula por componente, sin `title`.
+    const capsulas = ft.locator('ul[aria-label="Stack"] li span');
+    await expect(capsulas).toHaveCount(a.stack.length);
+    expect(
+      await capsulas.evaluateAll(
+        (els) => els.filter((e) => e.hasAttribute("title")).length,
+      ),
+    ).toBe(0);
+    const detalle = ft.locator("[data-stack-detalle]");
+    await expect(detalle.locator("dd").first()).toBeHidden();
+    await detalle.locator("summary").click();
+    await expect(detalle.locator("dd").first()).toBeVisible();
+    await expect(detalle.locator("dd").first()).toHaveText(a.stack[0].papel);
+    await expect(detalle.locator("dt")).toHaveCount(a.stack.length);
   });
 });
 
@@ -970,7 +859,7 @@ test.describe("Vitrina — las estanterías: un frente ABIERTO y sus piezas (S7)
   }) => {
     // Decisión del dueño (2026-09-13): agentes, investigaciones y tableros no
     // tienen vocación comercial, así que nadie tiene por qué pedir acceso.
-    // Solo las apps tienen lista de espera (vitrina.spec, ficha técnica de app).
+    // Solo las apps tienen lista de espera (en «Úsala», el cierre de su brochure: `usala.spec.ts`).
     const { f, piezas } = { f: ABIERTOS[0], piezas: ABIERTOS[0].piezas };
     await page.goto(`/es/portafolio/${f.id}/${piezas[0].pieza.slug}`);
     await expect(page.locator('[data-cta="brochure"]')).toHaveCount(0);
@@ -994,22 +883,6 @@ test.describe("Vitrina — las estanterías: un frente ABIERTO y sus piezas (S7)
         page.locator('[data-lista-de-espera="no"] [data-cta="escribeme"]'),
       ).toHaveCount(f.listaDeEspera ? 0 : 1);
     }
-  });
-
-  test("la ficha técnica de una APP sí cierra con la lista de espera, con esa app ya elegida", async ({
-    page,
-  }) => {
-    const exp = EXPORTS[0];
-    await page.goto(`/es/portafolio/apps/${exp.app.slug}`);
-    const cta = page.locator('[data-cta="lista-de-espera"]');
-    await expect(cta).toHaveCount(1);
-    await expect(cta).toHaveAttribute("href", "#contacto-portafolio");
-    await expect(page.locator("#contacto-portafolio")).toHaveCount(1);
-    const form = page.locator('form[data-formulario="app"]');
-    await expect(form).toHaveCount(1);
-    await expect(form.locator("select")).toHaveValue(exp.app.slug);
-    // «Otra» nunca sobra.
-    await expect(form.locator('option[value="otra"]')).toHaveCount(1);
   });
 
   test("se navega entre piezas VECINAS del mismo frente, sin salir de él", async ({
@@ -1107,8 +980,8 @@ test.describe("Vitrina — las estanterías: un frente ABIERTO y sus piezas (S7)
 });
 
 // LA SIMULACIÓN DE UNA APP (2026-10-12): la ruta existe solo para las apps de
-// data/simulaciones.yaml, muestra el paquete en un marco del mismo sitio y la
-// ficha la ofrece en su cierre. El resto de las apps no la tiene (404).
+// data/simulaciones.yaml, muestra el paquete en un marco del mismo sitio y el
+// brochure la ofrece en «Úsala» (`usala.spec.ts`). El resto de las apps no la tiene (404).
 type SimulacionYaml = {
   simulaciones: {
     slug: string;
@@ -1165,13 +1038,10 @@ test.describe("Vitrina — la simulación de una app", () => {
       await expect(
         page.locator('[data-cta="simulacion-completa"]'),
       ).toHaveAttribute("href", entrada);
-      // Y el regreso a la ficha técnica.
+      // Y el regreso al brochure, que es la entrada de la app (S31).
       await page
         .getByRole("link", {
-          name:
-            l === "es"
-              ? "Volver a la ficha técnica"
-              : "Back to the technical sheet",
+          name: l === "es" ? "Volver al brochure" : "Back to the brochure",
         })
         .click();
       await expect(page).toHaveURL(
@@ -1179,27 +1049,6 @@ test.describe("Vitrina — la simulación de una app", () => {
       );
     });
   }
-
-  test("la ficha de una app con simulación la ofrece en su cierre; una sin ella, no", async ({
-    page,
-  }) => {
-    await page.goto(`/es/portafolio/apps/${sim.slug}`);
-    const cta = page.locator('[data-cta="simulacion"]');
-    await expect(cta).toHaveAttribute(
-      "href",
-      `/es/portafolio/apps/${sim.slug}/simulacion`,
-    );
-    await cta.click();
-    await expect(page).toHaveURL(
-      new RegExp(`/es/portafolio/apps/${sim.slug}/simulacion$`),
-    );
-
-    if (sinSimulacion) {
-      await page.goto(`/es/portafolio/apps/${sinSimulacion.app.slug}`);
-      await expect(page.locator('[data-cta="brochure"]')).toBeVisible();
-      await expect(page.locator('[data-cta="simulacion"]')).toHaveCount(0);
-    }
-  });
 
   test("una app sin simulación no tiene esa ruta (404)", async ({ page }) => {
     test.skip(!sinSimulacion, "todas las apps tienen simulación");
@@ -1909,58 +1758,7 @@ test.describe("Vitrina — los bloques de apps y su carrusel de tarjetas", () =>
   });
 });
 
-test.describe("Vitrina — el Stack explicado y las portadas (Sprint 026)", () => {
-  type ExportConGrupos = {
-    app: { slug: string };
-    stack: { nombre: string; papel: string }[];
-    funcionalidades: {
-      grupos: { orden: number; features: { id: string }[] }[];
-    };
-  };
-  const exportDe = (slug: string) =>
-    JSON.parse(
-      readFileSync(`content/vitrina/${slug}.brochure-export.json`, "utf8"),
-    ) as ExportConGrupos;
-
-  test("el Stack se despliega con el para qué de cada componente, sin tooltips", async ({
-    page,
-  }) => {
-    const exp = exportDe("habla");
-    await page.goto("/es/portafolio/apps/habla");
-    const ft = page.locator('[data-ficha-tecnica="habla"]');
-    // La vista comprimida: una cápsula por componente, sin `title`.
-    const capsulas = ft.locator('ul[aria-label="Stack"] li span');
-    await expect(capsulas).toHaveCount(exp.stack.length);
-    expect(
-      await capsulas.evaluateAll(
-        (els) => els.filter((e) => e.hasAttribute("title")).length,
-      ),
-    ).toBe(0);
-    const detalle = ft.locator("[data-stack-detalle]");
-    await expect(detalle.locator("dd").first()).toBeHidden();
-    await detalle.locator("summary").click();
-    await expect(detalle.locator("dd").first()).toBeVisible();
-    await expect(detalle.locator("dd").first()).toHaveText(exp.stack[0].papel);
-    await expect(detalle.locator("dt")).toHaveCount(exp.stack.length);
-  });
-
-  test("planlang y Big-D, que no tenían «Cómo funciona», ahora lo traen con su procedencia", async ({
-    page,
-  }) => {
-    for (const slug of ["planlang", "big-d"]) {
-      await page.goto(`/es/portafolio/apps/${slug}`);
-      const ft = page.locator(`[data-ficha-tecnica="${slug}"]`);
-      await expect(ft.locator(`[data-proceso="${slug}"]`)).toBeVisible();
-      await expect(ft.locator("[data-procedencia-proceso]")).toHaveAttribute(
-        "data-procedencia-proceso",
-        "planeadora",
-      );
-      await expect(ft.locator("[data-procedencia-proceso]")).toContainText(
-        "pipeline AI-APPs",
-      );
-    }
-  });
-
+test.describe("Vitrina — las portadas del escaparate (Sprint 026; el Stack explicado y el proceso con procedencia eran de la ficha de una app, que ya no existe)", () => {
   test("la portada del escaparate es una imagen que carga, en cada app que ya trae sus capturas", async ({
     page,
   }) => {

@@ -2,7 +2,6 @@ import { existsSync, readdirSync, readFileSync } from "node:fs";
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 import { parse } from "yaml";
-import { entradasBrochure } from "../../scripts/entradas-brochure.mjs";
 
 // El scan audita el estado final de la página, no frames intermedios de
 // animación (elementos a media opacidad disparan falsos positivos de contraste)
@@ -59,12 +58,8 @@ const slugsCasa = readdirSync("content/vitrina/casa")
       ).app.slug,
   );
 if (slugsCasa.length !== 2) throw new Error("content/vitrina/casa sin las dos");
-// Las que abren en su brochure (S30): su brochure vive en su entrada, no en `/brochure`.
-const ENTRADAS = entradasBrochure();
-const brochureDe = (l: string, s: string) =>
-  ENTRADAS.includes(s)
-    ? `/${l}/portafolio/apps/${s}`
-    : `/${l}/portafolio/apps/${s}/brochure`;
+// Desde el S31 el brochure de toda app vive en su entrada (`/brochure` es un 301 a ella).
+const brochureDe = (l: string, s: string) => `/${l}/portafolio/apps/${s}`;
 
 // Los frentes (ADR-015 · S7): cada uno tiene su página —escaparate si está
 // abierto, «en preparación» si no— y los abiertos tienen además una ruta por
@@ -107,12 +102,7 @@ const RUTAS = [
     "/en/portafolio",
     "/es/portafolio/apps",
     "/en/portafolio/apps",
-    // Por app, su entrada: la ficha técnica (ADR-016), o su brochure si ya abre en él (S30).
-    ...slugsVitrina.flatMap((s) => [
-      `/es/portafolio/apps/${s}`,
-      `/en/portafolio/apps/${s}`,
-    ]),
-    // El brochure de las doce (las diez y las dos de la casa), en los dos idiomas, donde vive.
+    // El brochure de las doce (las diez y las dos de la casa), en los dos idiomas: es la entrada de cada app (S31).
     ...[...slugsVitrina, ...slugsCasa].flatMap((s) => [
       brochureDe("es", s),
       brochureDe("en", s),

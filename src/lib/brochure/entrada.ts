@@ -1,8 +1,6 @@
 import "server-only";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { cache } from "react";
-import { entradasBrochure } from "../../../scripts/entradas-brochure.mjs";
 import type { Locale } from "@/i18n/routing";
 import { getCategoriasApps } from "@/lib/content";
 import { SITE_URL } from "@/lib/site";
@@ -23,27 +21,12 @@ import {
 } from "./modelo";
 
 /**
- * EL BROCHURE COMO ENTRADA DE LA APP (S30, «1b»).
+ * EL BROCHURE COMO ENTRADA DE LA APP (S30 «1b»; de las diez, sin interruptor, desde el S31).
  *
- * Una app abre `/portafolio/apps/<app>` en su brochure cuando su contenido v2 llegó por copia, y la casa
- * siempre (`scripts/entradas-brochure.mjs`, medido del disco). Las demás siguen con su ficha y su brochure
- * en `/brochure`. Las dos rutas pintan el mismo brochure (`PaginaBrochure`) con lo que arma este módulo.
+ * `/portafolio/apps/<app>` es el brochure de la app, tenga o no su contenido v2 (el v2 lo enriquece y trae
+ * su inglés, pero ya no cambia la puerta), y el de la casa. Su `/brochure` es un 301 a la entrada
+ * (`src/lib/redireccion.ts`). La página pinta el brochure con lo que arma este módulo.
  */
-
-export const getEntradasBrochure = cache(
-  (): ReadonlySet<string> => new Set(entradasBrochure()),
-);
-
-export function entradaEsBrochure(slug: string): boolean {
-  return getEntradasBrochure().has(slug);
-}
-
-/** Dónde vive el brochure de una app: su entrada, o su `/brochure` si sigue con ficha. */
-export function rutaDelBrochure(slug: string): string {
-  return entradaEsBrochure(slug)
-    ? `/portafolio/apps/${slug}`
-    : `/portafolio/apps/${slug}/brochure`;
-}
 
 export async function textosBrochure(locale: Locale): Promise<Textos> {
   const t = await getTranslations({ locale, namespace: "brochure" });
@@ -130,7 +113,7 @@ export async function metadataDeBrochure(
   const e = await entradaDe(app, locale, t);
   if (!e) return {};
   const nombre = e.nombre ?? e.export.app.nombre;
-  const ruta = rutaDelBrochure(app);
+  const ruta = `/portafolio/apps/${app}`;
   return {
     metadataBase: new URL(SITE_URL),
     title: t("titulo", { nombre }),

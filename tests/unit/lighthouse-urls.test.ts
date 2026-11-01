@@ -2,7 +2,6 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { rutasDeDatos } from "../../scripts/destinos.mjs";
-import { entradasBrochure } from "../../scripts/entradas-brochure.mjs";
 
 /**
  * LAS URL DE LIGHTHOUSE EXISTEN (Sprint 022). `lhci collect` recorre cada una
@@ -33,7 +32,7 @@ describe("lighthouse-urls.json", () => {
     expect(huerfanas, "URL de Lighthouse sin página").toEqual([]);
   });
 
-  it("un brochure medido lleva el presupuesto del brochure, también en su entrada (S30)", () => {
+  it("toda app medida es un brochure (su entrada) y lleva el presupuesto del brochure; ninguna es un `/brochure` (S31)", () => {
     type Presupuesto = {
       path: string;
       resourceSizes: { resourceType: string }[];
@@ -51,18 +50,19 @@ describe("lighthouse-urls.json", () => {
       presupuestos.filter((b) => casa(b.path, url)).at(-1);
     const delBrochure = (b?: Presupuesto) =>
       !!b?.resourceSizes.some((r) => r.resourceType === "document");
-    const entradas = new Set(entradasBrochure());
-    const brochures = urls.filter((u) => {
-      const m = u.match(
-        /^\/(?:es|en)\/portafolio\/apps\/([^/]+)(\/brochure)?$/,
-      );
-      return !!m && (m[2] === "/brochure" || entradas.has(m[1]!));
-    });
-    expect(brochures.length, "Lighthouse mide algún brochure").toBeGreaterThan(
+    // Desde el S31 el brochure es la entrada de TODAS las apps: toda URL `/portafolio/apps/<app>` medida lo es.
+    const entradas = urls.filter((u) =>
+      /^\/(?:es|en)\/portafolio\/apps\/[^/]+$/.test(u),
+    );
+    expect(entradas.length, "Lighthouse mide alguna entrada").toBeGreaterThan(
       0,
     );
-    for (const u of brochures) expect(delBrochure(aplica(u)), u).toBe(true);
-    // Y una ficha no hereda el del brochure.
-    expect(delBrochure(aplica("/es/portafolio/apps/habla"))).toBe(false);
+    for (const u of entradas) expect(delBrochure(aplica(u)), u).toBe(true);
+    // Su `/brochure` es un 301: no se mide (Lighthouse mediría la redirección, no la página).
+    expect(urls.filter((u) => u.endsWith("/brochure"))).toEqual([]);
+    // Y el presupuesto del brochure no se cuela en la simulación de una app (no es un brochure).
+    expect(delBrochure(aplica("/es/portafolio/apps/planlang/simulacion"))).toBe(
+      false,
+    );
   });
 });

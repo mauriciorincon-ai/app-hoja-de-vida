@@ -2,7 +2,6 @@ import { readFileSync } from "node:fs";
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test, type Page } from "@playwright/test";
 import { parse } from "yaml";
-import { entradasBrochure } from "../../scripts/entradas-brochure.mjs";
 
 /**
  * «ÚSALA» (S30, «1b»), contra el sitio real. El brochure es la entrada de la app y su cierre recibe lo que
@@ -20,7 +19,6 @@ import { entradasBrochure } from "../../scripts/entradas-brochure.mjs";
  * Corre en chromium y en móvil. Data-driven: el orden y las ideas salen de los mismos YAML que las páginas.
  */
 
-const ENTRADAS = entradasBrochure();
 const categorias = parse(
   readFileSync("data/categorias-apps.yaml", "utf8"),
 ) as Record<"profesionales" | "personales", { slug: string }[]>;
@@ -33,17 +31,12 @@ const ideasDe = (app: string) =>
       roadmap?: { id: string }[];
     }
   ).roadmap?.map((r) => r.id) ?? [];
-/** El brochure de una app, donde vive: su entrada, o su `/brochure` si sigue con su ficha. */
-const brochureDe = (l: string, app: string) =>
-  ENTRADAS.includes(app)
-    ? `/${l}/portafolio/apps/${app}`
-    : `/${l}/portafolio/apps/${app}/brochure`;
+/** El brochure de una app, donde vive: su entrada (desde el S31, la de las diez). */
+const brochureDe = (l: string, app: string) => `/${l}/portafolio/apps/${app}`;
 
 // Una con 11 ideas (se ven 5), una sin ninguna y una con simulación: las tres formas del dato.
 const CON_IDEAS = ESCAPARATE.find((a) => ideasDe(a).length > 5)!;
-const SIN_IDEAS = ESCAPARATE.find(
-  (a) => ideasDe(a).length === 0 && ENTRADAS.includes(a),
-)!;
+const SIN_IDEAS = ESCAPARATE.find((a) => ideasDe(a).length === 0)!;
 const CON_SIMULACION = (
   parse(readFileSync("data/simulaciones.yaml", "utf8")) as {
     simulaciones: { slug: string }[];

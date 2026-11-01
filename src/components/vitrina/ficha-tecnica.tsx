@@ -1,6 +1,5 @@
 import { ChevronDown } from "lucide-react";
 import { getTranslations } from "next-intl/server";
-import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import type { FichaTecnica as Datos } from "@/lib/vitrina/ficha-tecnica/schema";
 import { COLOR_ESTADO, intlLocale } from "@/lib/vitrina/estilos";
@@ -16,8 +15,9 @@ import { ProcesoBpmn } from "./proceso-bpmn";
  *
  * Es la capa de arriba: lo que se lee en dos minutos y decide si se baja al
  * detalle. Hasta siete bloques, siempre en el mismo orden, para cualquier
- * frente (apps hoy; agentes, investigaciones y tableros cuando lleguen), porque
- * renderiza UN contrato (`fichaTecnicaSchema`) y no un tipo de pieza:
+ * frente (hoy agentes, investigaciones y tableros: desde el S31 ninguna app la
+ * tiene, su brochure es su entrada), porque renderiza UN contrato
+ * (`fichaTecnicaSchema`) y no un tipo de pieza:
  *
  *   0 cabecera (estado —con su fecha de sello si la trae— · nombre · tagline
  *     · stack · TITULAR de valor)
@@ -27,12 +27,12 @@ import { ProcesoBpmn } from "./proceso-bpmn";
  *     desde v1.1.0: si la pieza no trae proceso, la sección no existe y las
  *     siguientes se renumeran — `numerarSecciones`)
  *   · lo que dicen los datos — conclusiones con su cifra y su fuente
- *     (OPCIONAL, v1.3.0: lo trae una pieza que produce datos, no una app)
- *   3 qué aporta — una tarjeta por bloque, sin listar el detalle (vive en el brochure)
+ *     (OPCIONAL, v1.3.0: lo trae una pieza que produce datos, como un tablero)
+ *   3 qué aporta — una tarjeta por bloque, sin listar el detalle
  *   · cómo se ve — la galería de pantallas reales (OPCIONAL, v1.3.0)
  *   4 límites, y lo que nunca hace
  *   5 dónde está — la versión anclada
- *   — cierre: al brochure + lista de espera
+ *   — cierre: la nota «Aquí se muestra; no se entrega.»
  *
  * Anatomía tomada de las plantillas de la planeadora (cabecera con titular de
  * valor · facts · secciones numeradas con subtítulo · flujo con carriles ·
@@ -88,18 +88,9 @@ function Seccion({
 export async function FichaTecnica({
   datos,
   locale,
-  hrefBrochure,
-  hrefSimulacion,
-  listaDeEspera = false,
 }: {
   datos: Datos;
   locale: Locale;
-  /** Ruta del brochure, si la pieza lo tiene (hoy, solo las apps). */
-  hrefBrochure?: string;
-  /** Solo las apps con simulación (`data/simulaciones.yaml`): el cierre la ofrece. */
-  hrefSimulacion?: string;
-  /** Solo las apps: el cierre enlaza a `#contacto-portafolio` de la misma página. */
-  listaDeEspera?: boolean;
 }) {
   const t = await getTranslations("fichaTecnica");
   const tv = await getTranslations("vitrina");
@@ -361,16 +352,13 @@ export async function FichaTecnica({
         n={n.s03}
         id={`ft-${n.s03}-${pieza.slug}`}
         titulo={t("s03")}
-        // «El detalle de cada una vive en el brochure» solo es verdad si ese
-        // brochure existe. Una pieza sin brochure no puede mandar al lector a un
-        // sitio que no hay — el subtítulo dice la cuenta y calla.
-        // Y si la ficha NO cuenta funcionalidades (`cuenta: 0` en todos sus
+        // Si la ficha NO cuenta funcionalidades (`cuenta: 0` en todos sus
         // bloques — una investigación tiene aportes, no funciones), el subtítulo
         // no inventa un «0 funcionalidades» que la pieza jamás declaró.
         sub={
           totalFuncionalidades === 0
             ? t("s03subSoloGrupos", { grupos: bloques.length })
-            : t(hrefBrochure ? "s03sub" : "s03subSinBrochure", {
+            : t("s03sub", {
                 grupos: bloques.length,
                 n: totalFuncionalidades,
               })
@@ -504,38 +492,9 @@ export async function FichaTecnica({
       </Seccion>
 
       {/* ── Cierre ───────────────────────────────────────────────────────── */}
-      {/* La lista de espera la decide la PÁGINA (por frente, desde
-          `data/vitrina.yaml`), no este componente: solo las apps la tienen. */}
+      {/* Desde el S31 ninguna app tiene ficha (su brochure es su entrada): el cierre es solo la nota. Los frentes
+          de agentes, investigaciones y tableros se muestran, no se entregan. */}
       <div className="mt-12 flex flex-wrap items-center gap-3 border-t border-paper-2 pt-8">
-        {hrefBrochure && (
-          <Link
-            href={hrefBrochure}
-            data-cta="brochure"
-            className="flex min-h-11 items-center gap-2 rounded-md bg-sage px-6 text-[15px] font-medium text-sage-ink shadow-sh-1 transition-[filter] duration-[120ms] hover:brightness-[0.97]"
-          >
-            {t("verBrochure")}
-            <span aria-hidden="true">→</span>
-          </Link>
-        )}
-        {hrefSimulacion && (
-          <Link
-            href={hrefSimulacion}
-            data-cta="simulacion"
-            className="flex min-h-11 items-center gap-2 rounded-md border border-sage-ink/40 px-6 text-[15px] font-medium text-sage-ink transition-colors duration-[120ms] hover:bg-sage/40"
-          >
-            {t("verSimulacion")}
-            <span aria-hidden="true">→</span>
-          </Link>
-        )}
-        {listaDeEspera && (
-          <a
-            href="#contacto-portafolio"
-            data-cta="lista-de-espera"
-            className="flex min-h-11 items-center gap-2 rounded-md border border-paper-3 px-6 text-[15px] font-medium text-ink-1 transition-colors duration-[120ms] hover:bg-paper-1"
-          >
-            {tv("cta")}
-          </a>
-        )}
         <p className="max-w-[40ch] text-[13px] leading-snug text-ink-2 sm:ml-auto">
           {t("cierreNota")}
         </p>

@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 /**
  * LOS CAMPOS DE LOS FORMULARIOS, EN DOS TONOS (S30, «Úsala»).
  *
- * Los formularios de la app (lista de espera, propuesta, voto) son de fondo claro y viven en la ficha.
+ * Los formularios de la app (lista de espera, propuesta, voto) son de fondo claro y viven en el escaparate de apps.
  * El brochure los recibe en su cierre, que es de tinta: allí la hoja del brochure pinta los campos con
  * las clases de la maqueta aprobada (`.campo`, `.boton`…). Esa hoja vive en `@layer components` y no puede
  * pisar las utilidades de Tailwind, que van en una capa posterior; por eso el tono `tinta` NO lleva

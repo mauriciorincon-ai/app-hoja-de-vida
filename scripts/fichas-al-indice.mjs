@@ -163,7 +163,7 @@ export function chunksDePieza({ frente, ficha }, locale = "es", tope = TOPE_PALA
 /**
  * Una app hermana → su brochure más el complemento curado de CV Viva: promesa
  * y titular, funcionalidades por grupo, métricas con procedencia y stack,
- * límites, «nunca» y privacidad. Cita a la ficha de la app en la vitrina.
+ * límites, «nunca» y privacidad. Cita a la entrada de la app, que es su brochure.
  */
 export function chunksDeApp({ brochure, complemento }, locale = "es", tope = TOPE_PALABRAS_CHUNK) {
   const L = ETIQUETAS[locale];

@@ -12,9 +12,8 @@ vi.mock("next-intl/middleware", () => ({
     return NextResponse.next();
   },
 }));
-import { entradasBrochure } from "../../scripts/entradas-brochure.mjs";
 import { SLUGS_CASA } from "@/lib/brochure/config";
-import { entradasDelEntorno, rutaNueva } from "@/lib/redireccion";
+import { rutaNueva } from "@/lib/redireccion";
 import proxy from "@/proxy";
 
 /**
@@ -26,13 +25,11 @@ import proxy from "@/proxy";
  * prueba el e2e `metodo.spec.ts`.
  *
  * Y las páginas que reemplazó el brochure (S28): el detalle de una app y la página
- * de la casa llegan a su `/brochure` **en un solo salto**, también desde la ruta
- * de la «vitrina» de antes del S23. Desde el S30 el brochure es la ENTRADA de la casa
- * y de las apps con su contenido v2: para ellas, ese salto único llega a la entrada.
+ * de la casa llegan a la ENTRADA de la app (`/portafolio/apps/<app>`) **en un solo
+ * salto**, también desde la ruta de la «vitrina» de antes del S23. Desde el S31 el
+ * brochure es la entrada de TODAS (sin interruptor): el `/brochure` de cualquier app
+ * llega a ella por el mismo salto único.
  */
-
-/** Las apps que abren en su brochure HOY, medidas del disco como las mide el build. */
-const ENTRADAS = entradasBrochure();
 
 const pedir = (ruta: string) =>
   proxy(new NextRequest(new URL(ruta, "https://sitio.test")));
@@ -107,37 +104,32 @@ describe("la ruta nueva de una ruta vieja, como función", () => {
 
 describe("las páginas que reemplazó el brochure, en un solo salto", () => {
   it.each([
-    // El detalle de una app.
-    ["/es/portafolio/apps/habla/detalle", "/es/portafolio/apps/habla/brochure"],
-    // Innmobiliaria abre en su brochure (S30): su detalle llega a la entrada, no a `/brochure`.
+    // El detalle de una app: llega a su entrada, que es su brochure (S31, las diez).
+    ["/es/portafolio/apps/habla/detalle", "/es/portafolio/apps/habla"],
     [
       "/en/portafolio/apps/inmobiliaria/detalle",
       "/en/portafolio/apps/inmobiliaria",
     ],
-    [
-      "/es/portafolio/apps/habla/detalle/",
-      "/es/portafolio/apps/habla/brochure",
-    ],
+    ["/es/portafolio/apps/habla/detalle/", "/es/portafolio/apps/habla"],
     // Sin idioma: la raíz del sitio abre en español.
-    ["/portafolio/apps/ds/detalle", "/es/portafolio/apps/ds/brochure"],
+    ["/portafolio/apps/ds/detalle", "/es/portafolio/apps/ds"],
     // Desde la «vitrina» de antes del S23: UN salto, no dos.
-    ["/es/vitrina/apps/habla/detalle", "/es/portafolio/apps/habla/brochure"],
-    ["/en/vitrina/apps/habla/detalle", "/en/portafolio/apps/habla/brochure"],
-    ["/vitrina/apps/habla/detalle", "/es/portafolio/apps/habla/brochure"],
-    // La página de la casa (el brochure del S4): desde el S30, su brochure es su entrada.
+    ["/es/vitrina/apps/habla/detalle", "/es/portafolio/apps/habla"],
+    ["/en/vitrina/apps/habla/detalle", "/en/portafolio/apps/habla"],
+    ["/vitrina/apps/habla/detalle", "/es/portafolio/apps/habla"],
+    // La página de la casa (el brochure del S4): su brochure es su entrada.
     ["/es/apps/hoja-de-vida", "/es/portafolio/apps/hoja-de-vida"],
     ["/en/apps/hoja-de-vida", "/en/portafolio/apps/hoja-de-vida"],
     ["/es/apps/chat-hoja-de-vida", "/es/portafolio/apps/chat-hoja-de-vida"],
     ["/apps/chat-hoja-de-vida", "/es/portafolio/apps/chat-hoja-de-vida"],
     ["/es/apps/hoja-de-vida/", "/es/portafolio/apps/hoja-de-vida"],
   ])("%s → %s", (vieja, nueva) => {
-    expect(rutaNueva(vieja, ENTRADAS)).toBe(nueva);
+    expect(rutaNueva(vieja)).toBe(nueva);
     // Un solo salto: la ruta a la que llega no vuelve a redirigir.
-    expect(rutaNueva(nueva, ENTRADAS), `${nueva} redirige otra vez`).toBeNull();
+    expect(rutaNueva(nueva), `${nueva} redirige otra vez`).toBeNull();
   });
 
   it.each([
-    "/es/portafolio/apps/habla/brochure",
     "/es/portafolio/apps/habla/simulacion",
     "/es/portafolio/apps/habla",
     // Solo las dos de la casa tuvieron `/apps/<slug>`: las demás siguen dando 404.
@@ -151,7 +143,7 @@ describe("las páginas que reemplazó el brochure, en un solo salto", () => {
     "/es/portafolio/apps/habla/Detalle",
     "/es/portafolio/agentes/hr-develop-ai-apps/detalle",
   ])("%s no es una página retirada: no se toca", (ruta) => {
-    expect(rutaNueva(ruta, ENTRADAS)).toBeNull();
+    expect(rutaNueva(ruta)).toBeNull();
   });
 
   it("las dos de la casa son las mismas que las del brochure", () => {
@@ -164,21 +156,16 @@ describe("las páginas que reemplazó el brochure, en un solo salto", () => {
   });
 });
 
-describe("el brochure como entrada (S30): su `/brochure` llega a la entrada en un salto", () => {
-  it("las apps que abren en su brochure son la casa y las que tienen su contenido v2", () => {
-    expect(ENTRADAS).toEqual(expect.arrayContaining([...SLUGS_CASA]));
-    expect(ENTRADAS).toContain("inmobiliaria");
-  });
-
+describe("el brochure es la entrada de TODAS las apps (S31): su `/brochure` llega a la entrada en un salto", () => {
   it.each([
+    // Con su contenido v2, sin él y de la casa: ya no hay lista que decida.
     [
       "/es/portafolio/apps/inmobiliaria/brochure",
       "/es/portafolio/apps/inmobiliaria",
     ],
-    [
-      "/en/portafolio/apps/inmobiliaria/brochure/",
-      "/en/portafolio/apps/inmobiliaria",
-    ],
+    ["/en/portafolio/apps/habla/brochure/", "/en/portafolio/apps/habla"],
+    ["/portafolio/apps/ds/brochure", "/es/portafolio/apps/ds"],
+    ["/es/portafolio/apps/hackguard/brochure", "/es/portafolio/apps/hackguard"],
     [
       "/portafolio/apps/hoja-de-vida/brochure",
       "/es/portafolio/apps/hoja-de-vida",
@@ -192,44 +179,31 @@ describe("el brochure como entrada (S30): su `/brochure` llega a la entrada en u
       "/en/vitrina/apps/inmobiliaria/brochure",
       "/en/portafolio/apps/inmobiliaria",
     ],
+    ["/vitrina/apps/habla/brochure", "/es/portafolio/apps/habla"],
     ["/vitrina/apps/inmobiliaria/detalle", "/es/portafolio/apps/inmobiliaria"],
   ])("%s → %s", (vieja, nueva) => {
-    expect(rutaNueva(vieja, ENTRADAS)).toBe(nueva);
-    expect(rutaNueva(nueva, ENTRADAS), `${nueva} redirige otra vez`).toBeNull();
+    expect(rutaNueva(vieja)).toBe(nueva);
+    expect(rutaNueva(nueva), `${nueva} redirige otra vez`).toBeNull();
   });
 
-  it("el brochure de una app que sigue con su ficha no se toca", () => {
+  it("la entrada y la simulación de una app no se tocan", () => {
     for (const ruta of [
-      "/es/portafolio/apps/habla/brochure",
-      "/en/portafolio/apps/hackguard/brochure",
-      "/es/portafolio/apps/inmobiliaria",
-      "/es/portafolio/apps/inmobiliaria/simulacion",
-    ])
-      expect(rutaNueva(ruta, ENTRADAS), ruta).toBeNull();
-  });
-
-  it("el interruptor es la lista: una app con contenido v2 nuevo pasa sola", () => {
-    expect(rutaNueva("/es/portafolio/apps/habla/brochure", ["habla"])).toBe(
       "/es/portafolio/apps/habla",
-    );
-    // Sin lista, solo la casa (que no tiene ficha) abre en su brochure.
-    expect(
-      rutaNueva("/es/portafolio/apps/inmobiliaria/brochure", []),
-    ).toBeNull();
-    expect(rutaNueva("/es/portafolio/apps/hoja-de-vida/brochure", [])).toBe(
-      "/es/portafolio/apps/hoja-de-vida",
-    );
+      "/es/portafolio/apps/inmobiliaria",
+      "/es/portafolio/apps/planlang/simulacion",
+    ])
+      expect(rutaNueva(ruta), ruta).toBeNull();
   });
 
-  it("la lista llega al proxy por el entorno que `next.config.ts` calcula en build", () => {
-    vi.stubEnv("CV_ENTRADAS_BROCHURE", "inmobiliaria,hoja-de-vida");
-    expect(entradasDelEntorno()).toEqual(["inmobiliaria", "hoja-de-vida"]);
-    expect(rutaNueva("/es/portafolio/apps/inmobiliaria/brochure")).toBe(
-      "/es/portafolio/apps/inmobiliaria",
-    );
-    vi.stubEnv("CV_ENTRADAS_BROCHURE", "");
-    expect(entradasDelEntorno()).toEqual([]);
-    vi.unstubAllEnvs();
+  it("lo que solo se parece a un `/brochure` no se toca", () => {
+    for (const ruta of [
+      "/es/portafolio/apps/habla/brochure/otra-cosa",
+      "/es/portafolio/apps//brochure",
+      "/es/portafolio/apps/habla/Brochure",
+      "/es/cv/portafolio/apps/habla/brochure",
+      "/es/portafolio/agentes/hr-develop-ai-apps/brochure",
+    ])
+      expect(rutaNueva(ruta), ruta).toBeNull();
   });
 });
 
@@ -268,17 +242,22 @@ describe("el proxy responde el 301 de las secciones renombradas", () => {
     expect(delegadas, "la redirección va antes de next-intl").toEqual([]);
   });
 
-  it("el detalle y la página de la casa redirigen con 301 a donde vive su brochure y conservan la consulta", () => {
+  it("el detalle, el `/brochure` y la página de la casa redirigen con 301 a la entrada y conservan la consulta", () => {
     for (const [vieja, nueva] of [
       [
         "/es/portafolio/apps/habla/detalle",
-        "https://sitio.test/es/portafolio/apps/habla/brochure",
+        "https://sitio.test/es/portafolio/apps/habla",
       ],
       [
         "/en/vitrina/apps/habla/detalle?utm=x",
-        "https://sitio.test/en/portafolio/apps/habla/brochure?utm=x",
+        "https://sitio.test/en/portafolio/apps/habla?utm=x",
       ],
-      // La casa abre en su brochure (S30): su página vieja llega a la entrada.
+      // Y el `/brochure` de una app sin contenido v2 (S31): también a su entrada.
+      [
+        "/en/portafolio/apps/habla/brochure?utm=x",
+        "https://sitio.test/en/portafolio/apps/habla?utm=x",
+      ],
+      // La casa abre en su brochure: su página vieja llega a la entrada.
       [
         "/apps/hoja-de-vida",
         "https://sitio.test/es/portafolio/apps/hoja-de-vida",

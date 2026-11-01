@@ -11,7 +11,8 @@ import { parse } from "yaml";
  */
 
 // Las features viven en el complemento de cada app hermana
-// (`data/fichas/<slug>.yaml`) y se votan en `/portafolio/apps/<slug>` (2026-09-13).
+// (`data/fichas/<slug>.yaml`) y se votan en `/portafolio/apps/<slug>` (2026-09-13), hoy en «Úsala»,
+// el cierre de su brochure (`#s-cierre`, S30).
 type Complemento = { app: string; roadmap?: { id: string }[] };
 const features = readdirSync("data/fichas")
   .filter((f) => f.endsWith(".yaml"))
@@ -42,13 +43,16 @@ test.describe("Votación del roadmap", () => {
     );
 
     await page.goto(`/es/portafolio/apps/${features[0].app}`);
-    await page.locator("#roadmap").scrollIntoViewIfNeeded();
+    await page
+      .locator("#s-cierre [data-feature-id]")
+      .first()
+      .scrollIntoViewIfNeeded();
 
     // Aviso honesto visible
     await expect(page.getByText(/votación no está disponible/i)).toBeVisible();
 
     // Todos los botones de voto deshabilitados — jamás un contador falso
-    const botones = page.locator('#roadmap [data-testid="roadmap-votar"]');
+    const botones = page.locator('#s-cierre [data-testid="roadmap-votar"]');
     const n = await botones.count();
     expect(n).toBeGreaterThan(0);
     for (let i = 0; i < n; i++) {
@@ -56,7 +60,7 @@ test.describe("Votación del roadmap", () => {
     }
     // No hay ningún número de conteo (solo el guion "—")
     await expect(
-      page.locator('#roadmap [data-testid="roadmap-conteo"]').first(),
+      page.locator('#s-cierre [data-testid="roadmap-conteo"]').first(),
     ).toHaveText("—");
   });
 
@@ -87,10 +91,13 @@ test.describe("Votación del roadmap", () => {
     );
 
     await page.goto(`/es/portafolio/apps/${objetivo.app}`);
-    await page.locator("#roadmap").scrollIntoViewIfNeeded();
+    await page
+      .locator("#s-cierre [data-feature-id]")
+      .first()
+      .scrollIntoViewIfNeeded();
 
     const fila = page.locator(
-      `#roadmap [data-feature-id="${objetivo.feature}"][data-app-id="${objetivo.app}"]`,
+      `#s-cierre [data-feature-id="${objetivo.feature}"][data-app-id="${objetivo.app}"]`,
     );
     const boton = fila.locator('[data-testid="roadmap-votar"]');
     const conteoEl = fila.locator('[data-testid="roadmap-conteo"]');
@@ -129,10 +136,13 @@ test.describe("Votación del roadmap", () => {
     );
 
     await page.goto(`/es/portafolio/apps/${objetivo.app}`);
-    await page.locator("#roadmap").scrollIntoViewIfNeeded();
+    await page
+      .locator("#s-cierre [data-feature-id]")
+      .first()
+      .scrollIntoViewIfNeeded();
 
     const fila = page.locator(
-      `#roadmap [data-feature-id="${objetivo.feature}"][data-app-id="${objetivo.app}"]`,
+      `#s-cierre [data-feature-id="${objetivo.feature}"][data-app-id="${objetivo.app}"]`,
     );
     const boton = fila.locator('[data-testid="roadmap-votar"]');
 
@@ -159,10 +169,13 @@ test.describe("Votación del roadmap", () => {
     const objetivo = features[idx] ?? features[0];
 
     await page.goto(`/es/portafolio/apps/${objetivo.app}`);
-    await page.locator("#roadmap").scrollIntoViewIfNeeded();
+    await page
+      .locator("#s-cierre [data-feature-id]")
+      .first()
+      .scrollIntoViewIfNeeded();
 
     const fila = page.locator(
-      `#roadmap [data-feature-id="${objetivo.feature}"][data-app-id="${objetivo.app}"]`,
+      `#s-cierre [data-feature-id="${objetivo.feature}"][data-app-id="${objetivo.app}"]`,
     );
     const boton = fila.locator('[data-testid="roadmap-votar"]');
     const conteoEl = fila.locator('[data-testid="roadmap-conteo"]');
@@ -193,9 +206,12 @@ test.describe("Votación del roadmap", () => {
     const objetivo = features[idx] ?? features[0];
 
     await page.goto(`/es/portafolio/apps/${objetivo.app}`);
-    await page.locator("#roadmap").scrollIntoViewIfNeeded();
+    await page
+      .locator("#s-cierre [data-feature-id]")
+      .first()
+      .scrollIntoViewIfNeeded();
     const fila = page.locator(
-      `#roadmap [data-feature-id="${objetivo.feature}"][data-app-id="${objetivo.app}"]`,
+      `#s-cierre [data-feature-id="${objetivo.feature}"][data-app-id="${objetivo.app}"]`,
     );
     const boton = fila.locator('[data-testid="roadmap-votar"]');
     await expect(boton).toBeEnabled({ timeout: 15_000 });

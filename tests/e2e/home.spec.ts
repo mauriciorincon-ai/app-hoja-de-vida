@@ -301,14 +301,14 @@ test.describe("El roadmap vive en la página de cada app (2026-09-13)", () => {
     request,
   }) => {
     for (const { app, roadmap } of roadmaps) {
+      // Desde el S30 el roadmap votable vive en «Úsala», el cierre del brochure (S31: el de las diez apps).
       await page.goto(`/es/portafolio/apps/${app}`);
-      await page.locator("#roadmap").scrollIntoViewIfNeeded();
-      await expect(page.locator("#roadmap [data-feature-id]")).toHaveCount(
+      await expect(page.locator("#s-cierre [data-feature-id]")).toHaveCount(
         roadmap.length,
       );
-      await expect(page.locator(`#roadmap [data-app-id="${app}"]`)).toHaveCount(
-        roadmap.length,
-      );
+      await expect(
+        page.locator(`#s-cierre [data-app-id="${app}"]`),
+      ).toHaveCount(roadmap.length);
     }
     // Gate ATS: la feature, en el HTML estático de la página de su app.
     for (const locale of ["es", "en"] as const) {
