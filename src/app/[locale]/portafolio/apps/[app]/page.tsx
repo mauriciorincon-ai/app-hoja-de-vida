@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
+import { PaginaBrochure } from "@/components/brochure/pagina-brochure";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { Roadmap } from "@/components/home/roadmap";
@@ -11,6 +12,8 @@ import { FichaTecnica } from "@/components/vitrina/ficha-tecnica";
 import { ListaDeEspera } from "@/components/vitrina/lista-de-espera";
 import { Link } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
+import { SLUGS_CASA } from "@/lib/brochure/config";
+import { entradaEsBrochure, metadataDeBrochure } from "@/lib/brochure/entrada";
 import { getCategoriasApps, getCv } from "@/lib/content";
 import { SITE_URL } from "@/lib/site";
 import { ordenDeEscaparate } from "@/lib/vitrina/categorias-apps";
@@ -23,15 +26,15 @@ import { getSimulacion } from "@/lib/vitrina/simulaciones-loader";
 import { roadmapDe } from "@/lib/votes/roadmap";
 
 /**
- * LA FICHA TÉCNICA DE UNA APP — la capa infografía (ADR-016).
+ * LA ENTRADA DE UNA APP — `/portafolio/apps/<slug>`.
  *
- * `/portafolio/apps/<slug>` es ahora lo primero que se ve de una app: la
- * infografía de dos minutos (titular · cifras · para quién · el proceso en
- * BPMN · qué aporta · límites · dónde está). El detalle que construyó el S5 lo
- * reemplazó el brochure del S28, a `/portafolio/apps/<slug>/brochure`, y se
- * llega con el botón «Ver brochure».
+ * Desde el S30 («1b»: «Definitivamente los brochure van a remplazar las fichas»), app por app: la que
+ * tiene su contenido v2 abre aquí su brochure completo, y la casa (CV Viva y su chat) también, siempre
+ * (`src/lib/brochure/entrada.ts`). Las demás siguen con su FICHA TÉCNICA, la capa infografía (ADR-016):
+ * titular · cifras · para quién · el proceso en BPMN · qué aporta · límites · dónde está, con su
+ * brochure en `/portafolio/apps/<slug>/brochure` («Ver brochure»).
  *
- * 100% SSG: `generateStaticParams` cruza idiomas con los slugs de los exports.
+ * 100% SSG: `generateStaticParams` cruza idiomas con los slugs de los exports y los de la casa.
  * La ficha se arma de export + complemento (`data/fichas/<slug>.yaml`) y si a
  * una app le falta el complemento, el build FALLA nombrándola.
  *
@@ -40,7 +43,9 @@ import { roadmapDe } from "@/lib/votes/roadmap";
 
 export function generateStaticParams() {
   return routing.locales.flatMap((locale) =>
-    getFichasVitrina().map((f) => ({ locale, app: f.ancla.slug })),
+    [...getFichasVitrina().map((f) => f.ancla.slug), ...SLUGS_CASA].map(
+      (app) => ({ locale, app }),
+    ),
   );
 }
 
@@ -49,6 +54,7 @@ type Params = { params: Promise<{ locale: string; app: string }> };
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { locale, app } = await params;
   if (!hasLocale(routing.locales, locale)) return {};
+  if (entradaEsBrochure(app)) return metadataDeBrochure(app, locale);
   const ft = getFichaTecnica(app);
   if (!ft) return {};
   const t = await getTranslations({ locale, namespace: "fichaTecnica" });
@@ -71,11 +77,12 @@ export default async function FichaTecnicaAppPage({ params }: Params) {
   const { locale, app } = await params;
   if (!hasLocale(routing.locales, locale)) notFound();
   setRequestLocale(locale);
+  const l = locale as Locale;
+  if (entradaEsBrochure(app)) return <PaginaBrochure app={app} locale={l} />;
 
   const ft = getFichaTecnica(app);
   if (!ft) notFound();
 
-  const l = locale as Locale;
   const cv = getCv(l);
   const categorias = getCategoriasApps();
   const t = await getTranslations("vitrina");
