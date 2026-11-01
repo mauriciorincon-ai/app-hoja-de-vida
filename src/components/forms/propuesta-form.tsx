@@ -2,12 +2,18 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import { trackEvent } from "@/lib/analytics";
 import { PROPUESTA_MAX, PROPUESTA_MIN } from "@/lib/contacto-constantes";
+import {
+  AreaDeTexto,
+  AvisoDeError,
+  Campo,
+  Enviar,
+  Entrada,
+  ErrorDeCampo,
+  Etiqueta,
+  type Tono,
+} from "./campos";
 
 /**
  * «Un espacio muy simple para proponer nuevas funcionalidades ahí mismo,
@@ -24,9 +30,15 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 export function PropuestaForm({
   app,
   nombreApp,
+  tono = "claro",
+  conIdeas = false,
 }: {
   app: string;
   nombreApp: string;
+  /** `tinta` en el cierre del brochure (S30): la hoja del brochure pinta los campos. */
+  tono?: Tono;
+  /** En tinta: va debajo del roadmap (título más chico y una raya que lo separa) o solo en su panel. */
+  conIdeas?: boolean;
 }) {
   const t = useTranslations("propuesta");
   const [status, setStatus] = useState<Status>("reposo");
@@ -77,29 +89,46 @@ export function PropuestaForm({
   }
 
   const enviando = status === "enviando";
+  const tinta = tono === "tinta";
 
-  return (
+  const formulario = (
     <form
       onSubmit={handleSubmit}
       noValidate
       ref={(el) => el?.setAttribute("data-hydrated", "true")}
       data-formulario="propuesta"
       aria-labelledby={`propuesta-titulo-${app}`}
-      className="flex flex-col gap-4 rounded-[10px] border border-paper-3 bg-paper-0 p-6 shadow-sh-1 md:p-8"
+      className={
+        tinta
+          ? "usala-form"
+          : "flex flex-col gap-4 rounded-[10px] border border-paper-3 bg-paper-0 p-6 shadow-sh-1 md:p-8"
+      }
     >
-      <p className="font-mono text-[11px] tracking-[0.08em] text-ink-2 uppercase">
-        {t("eyebrow")}
-      </p>
-      <div className="flex flex-col gap-2">
-        <Label
+      {!tinta && (
+        <p className="font-mono text-[11px] tracking-[0.08em] text-ink-2 uppercase">
+          {t("eyebrow")}
+        </p>
+      )}
+      <Campo tono={tono}>
+        <Etiqueta
+          tono={tono}
           htmlFor={`propuesta-texto-${app}`}
           id={`propuesta-titulo-${app}`}
-          className="font-display text-lg font-medium text-ink-0"
+          className={
+            tinta
+              ? conIdeas
+                ? "h4"
+                : "h3"
+              : "font-display text-lg font-medium text-ink-0"
+          }
         >
           {t("titulo", { app: nombreApp })}
-        </Label>
-        <p className="text-sm text-ink-2">{t("ayuda")}</p>
-        <Textarea
+        </Etiqueta>
+        <p className={tinta ? "usala-ayuda" : "text-sm text-ink-2"}>
+          {t("ayuda")}
+        </p>
+        <AreaDeTexto
+          tono={tono}
           id={`propuesta-texto-${app}`}
           name="propuesta"
           rows={3}
@@ -112,21 +141,22 @@ export function PropuestaForm({
           disabled={enviando}
         />
         {errores.propuesta && (
-          <p
-            id={`propuesta-error-${app}`}
-            role="alert"
-            className="text-sm text-rose-ink"
-          >
+          <ErrorDeCampo tono={tono} id={`propuesta-error-${app}`}>
             {errores.propuesta}
-          </p>
+          </ErrorDeCampo>
         )}
-      </div>
+      </Campo>
 
-      <div className="flex flex-col gap-2">
-        <Label htmlFor={`propuesta-email-${app}`} className="text-sm">
+      <Campo tono={tono}>
+        <Etiqueta
+          tono={tono}
+          htmlFor={`propuesta-email-${app}`}
+          className={tinta ? undefined : "text-sm"}
+        >
           {t("email")}
-        </Label>
-        <Input
+        </Etiqueta>
+        <Entrada
+          tono={tono}
           id={`propuesta-email-${app}`}
           name="email"
           type="email"
@@ -139,15 +169,11 @@ export function PropuestaForm({
           disabled={enviando}
         />
         {errores.email && (
-          <p
-            id={`propuesta-error-email-${app}`}
-            role="alert"
-            className="text-sm text-rose-ink"
-          >
+          <ErrorDeCampo tono={tono} id={`propuesta-error-email-${app}`}>
             {errores.email}
-          </p>
+          </ErrorDeCampo>
         )}
-      </div>
+      </Campo>
 
       {/* Honeypot: invisible para humanos, irresistible para bots */}
       <div aria-hidden="true" className="hidden">
@@ -163,16 +189,13 @@ export function PropuestaForm({
       </div>
 
       {status === "error" && (
-        <div
-          role="alert"
-          className="rounded-md border border-danger/40 bg-rose px-4 py-3 text-sm text-rose-ink"
-        >
-          {t("error")}
-        </div>
+        <AvisoDeError tono={tono}>{t("error")}</AvisoDeError>
       )}
 
       <div className="flex flex-wrap items-center gap-4">
-        <Button
+        <Enviar
+          tono={tono}
+          linea
           type="submit"
           disabled={enviando}
           className="min-h-11 bg-sage px-6 text-[15px] font-medium text-sage-ink shadow-sh-1 hover:bg-sage hover:brightness-[0.97]"
@@ -182,13 +205,30 @@ export function PropuestaForm({
             : status === "error"
               ? t("reintentar")
               : t("enviar")}
-        </Button>
+        </Enviar>
         {status === "enviado" && (
-          <p role="status" className="text-sm font-medium text-sage-ink">
+          <p
+            role="status"
+            className={
+              tinta
+                ? "usala-ok"
+                : "text-sm font-medium text-sage-ink"
+            }
+          >
             {t("gracias")}
           </p>
         )}
       </div>
     </form>
+  );
+
+  // En tinta, la ceja va fuera del formulario y todo cuelga de `.propon` si hay ideas encima (maqueta).
+  return tinta ? (
+    <div className={conIdeas ? "propon" : undefined}>
+      <span className="usala-ceja">{t("eyebrow")}</span>
+      {formulario}
+    </div>
+  ) : (
+    formulario
   );
 }

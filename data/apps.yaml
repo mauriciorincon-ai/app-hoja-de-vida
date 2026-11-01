@@ -14,7 +14,7 @@ apps:
     estado: en-produccion
     nombre:
       es: "CV Viva"
-      en: "Living CV"
+      en: "CV Viva"
     descripcion:
       es: "Esta misma página: Next.js 16 + SSG + motion system + CI con gates de calidad. El repo es público — lo que estás viendo es el demo."
       en: "This very page: Next.js 16 + SSG + a motion system + CI with quality gates. The repo is public — what you're looking at is the demo."

@@ -90,13 +90,19 @@ describe("rutasDeDatos — salen de los mismos datos que generan las páginas", 
     expect(rutas.has("/portafolio/apps/habla/brochure")).toBe(true);
   });
 
-  it("el brochure de cada app y de la casa es destino; el detalle y la página vieja de la casa ya no", () => {
-    expect(rutas.has("/portafolio/apps/hoja-de-vida/brochure")).toBe(true);
-    expect(rutas.has("/portafolio/apps/chat-hoja-de-vida/brochure")).toBe(true);
+  it("el brochure de cada app y de la casa es destino donde vive; lo que redirige ya no", () => {
+    // La casa y las apps con su contenido v2 abren en su brochure (S30): su entrada es el destino,
+    // y su `/brochure` es un 301 a ella. Una cita no lleva a una redirección.
+    expect(rutas.has("/portafolio/apps/hoja-de-vida")).toBe(true);
+    expect(rutas.has("/portafolio/apps/chat-hoja-de-vida")).toBe(true);
+    expect(rutas.has("/portafolio/apps/inmobiliaria")).toBe(true);
     for (const muerta of [
       "/portafolio/apps/habla/detalle",
       "/apps/hoja-de-vida",
       "/apps/chat-hoja-de-vida",
+      "/portafolio/apps/hoja-de-vida/brochure",
+      "/portafolio/apps/chat-hoja-de-vida/brochure",
+      "/portafolio/apps/inmobiliaria/brochure",
     ])
       expect(rutas.has(muerta), muerta).toBe(false);
   });
@@ -185,7 +191,9 @@ describe("nombreDeDestino — a dónde lleva la cita, con el nombre que el visit
     expect(nombreDeDestino("/portafolio/agentes", es)).toBe(
       "Agentes especializados",
     );
-    expect(nombreDeDestino("/portafolio/agentes", en)).toBe("Specialized agents");
+    expect(nombreDeDestino("/portafolio/agentes", en)).toBe(
+      "Specialized agents",
+    );
     expect(
       nombreDeDestino("/portafolio/agentes/hr-develop-ai-apps", es),
     ).toBeTruthy();
@@ -193,15 +201,15 @@ describe("nombreDeDestino — a dónde lleva la cita, con el nombre que el visit
   });
 
   it("el brochure de la casa se llama como la casa lo dice, en cada idioma", () => {
-    expect(nombreDeDestino("/portafolio/apps/hoja-de-vida/brochure", es)).toBe(
+    expect(nombreDeDestino("/portafolio/apps/hoja-de-vida", es)).toBe(
       "CV Viva",
     );
-    expect(nombreDeDestino("/portafolio/apps/hoja-de-vida/brochure", en)).toBe(
-      "Living CV",
+    expect(nombreDeDestino("/portafolio/apps/hoja-de-vida", en)).toBe(
+      "CV Viva",
     );
-    expect(
-      nombreDeDestino("/portafolio/apps/chat-hoja-de-vida/brochure", en),
-    ).toBe("Chat with my résumé");
+    expect(nombreDeDestino("/portafolio/apps/chat-hoja-de-vida", en)).toBe(
+      "Chat with my résumé",
+    );
   });
 
   it("un destino sin nombre devuelve null — y eso rompe el build, no el chip", () => {

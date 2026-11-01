@@ -1,0 +1,2099 @@
+{
+  "schema_version": "2.0.0-borrador",
+  "app": "chat-hoja-de-vida",
+  "acento": "citron",
+  "portada": {
+    "resalta": {
+      "es": "cita su fuente",
+      "en": "cites its source"
+    },
+    "pantallas": [
+      "CH-01",
+      "CH-04",
+      "CH-07",
+      "CH-10"
+    ],
+    "lugar": {
+      "es": "Dentro de CV Viva",
+      "en": "Inside CV Viva"
+    },
+    "categoria": {
+      "es": "Reclutamiento",
+      "en": "Recruiting"
+    },
+    "insignias": [
+      {
+        "simbolo": "[1]",
+        "texto": {
+          "es": "Cada afirmación, con su cita",
+          "en": "Every claim, with its citation"
+        },
+        "funcionalidad": "CH-01"
+      },
+      {
+        "simbolo": "0",
+        "texto": {
+          "es": "0 tokens en lo que no consta",
+          "en": "0 tokens on what isn't on record"
+        },
+        "funcionalidad": "CH-04"
+      },
+      {
+        "simbolo": "↻",
+        "texto": {
+          "es": "Si el proveedor cae, búsqueda local",
+          "en": "If the provider fails, local search"
+        },
+        "funcionalidad": "CH-07"
+      }
+    ]
+  },
+  "antes_despues": {
+    "titulo": {
+      "es": "Lo que cambia cuando la hoja de vida responde",
+      "en": "What changes when the résumé answers back"
+    },
+    "antes_rotulo": {
+      "es": "Hoy",
+      "en": "Today"
+    },
+    "despues_rotulo": {
+      "es": "Con el chat",
+      "en": "With the chat"
+    },
+    "prueba": {
+      "antes": {
+        "es": "0",
+        "en": "0"
+      },
+      "despues": {
+        "es": "25",
+        "en": "25"
+      },
+      "texto": {
+        "es": "documentos de fondo a tu alcance: el sitio no los publica, el chat los lee y los cita",
+        "en": "in-depth documents within reach: the site doesn't publish them, the chat reads and cites them"
+      },
+      "fuente": "medido",
+      "detalle": {
+        "es": "Además de la hoja de vida, las fichas del Portafolio y Métodos, el chat lee 25 documentos de fondo que Henry escribió y que el sitio no publica como páginas: los 25 están aprobados y entran al índice en español y en inglés. La cita no abre el documento: dice de dónde salió la frase (AF-09, por ejemplo) y lleva a la sección del sitio que la respalda.",
+        "en": "Besides the résumé, the Portfolio sheets and Methods, the chat reads 25 in-depth documents Henry wrote and the site doesn't publish as pages: all 25 are approved and indexed in Spanish and English. A citation doesn't open the document: it says where the sentence came from (AF-09, for example) and leads to the section of the site that backs it."
+      },
+      "cita": "CH-16"
+    },
+    "pares": [
+      {
+        "antes": {
+          "es": "Lees páginas enteras para encontrar un dato, y no sabes de dónde sale.",
+          "en": "You read whole pages to find one fact, and you can't tell where it comes from."
+        },
+        "despues": {
+          "es": "Preguntas con tus palabras, y cada afirmación trae su número, que lleva a la sección que la respalda.",
+          "en": "You ask in your own words, and every claim carries its number, which leads to the section that backs it."
+        },
+        "funcionalidad": "CH-01",
+        "fuente": "CH-01"
+      },
+      {
+        "antes": {
+          "es": "Ante lo que no está escrito, un modelo puede rellenar el hueco.",
+          "en": "Faced with what isn't written down, a model may fill the gap."
+        },
+        "despues": {
+          "es": "Lo que no consta recibe un texto fijo, sin llamar al modelo ni gastar un token.",
+          "en": "What isn't on record gets a fixed text, without calling the model or spending a token."
+        },
+        "funcionalidad": "CH-04",
+        "fuente": "CH-04"
+      },
+      {
+        "antes": {
+          "es": "Preguntas por qué dejó un empleo, y la respuesta puede suponer un motivo.",
+          "en": "You ask why he left a job, and the answer may assume a motive."
+        },
+        "despues": {
+          "es": "«¿Por qué salió de Vesting?» tiene una respuesta fija: cómo cerró la etapa, con su cita y sin causas añadidas.",
+          "en": "“Why did he leave Vesting?” has a fixed answer: how the stage closed, with its citation and no added causes."
+        },
+        "funcionalidad": "CH-05",
+        "fuente": "CH-05"
+      },
+      {
+        "antes": {
+          "es": "Las apps y los métodos viven en otras páginas, lejos de la pregunta.",
+          "en": "The apps and the methods live on other pages, far from the question."
+        },
+        "despues": {
+          "es": "Una pregunta por una app o por un método trae su cita a la ficha o al bloque exacto.",
+          "en": "A question about an app or a method brings its citation to the sheet or the exact block."
+        },
+        "funcionalidad": "CH-03",
+        "fuente": "CH-03"
+      },
+      {
+        "antes": {
+          "es": "Si el servicio de IA cae o se queda sin cuota, el chat se queda mudo.",
+          "en": "If the AI service goes down or runs out of quota, the chat goes silent."
+        },
+        "despues": {
+          "es": "Pasa a «Búsqueda local» y sigue mostrando los fragmentos que mejor responden.",
+          "en": "It switches to “Local search” and keeps showing the fragments that best answer."
+        },
+        "funcionalidad": "CH-07",
+        "fuente": "CH-07"
+      },
+      {
+        "antes": {
+          "es": "Recargas la página o cambias de idioma, y la conversación se pierde.",
+          "en": "You reload the page or switch language, and the conversation is lost."
+        },
+        "despues": {
+          "es": "Sigue al recargar, navegar o cambiar de idioma; vence a las 8 horas y la borras con un clic.",
+          "en": "It survives reloads, navigation and a language switch; it expires after 8 hours and you clear it with one click."
+        },
+        "funcionalidad": "CH-14",
+        "fuente": "CH-14"
+      }
+    ],
+    "corto": {
+      "es": "Lo que cambia",
+      "en": "What changes"
+    },
+    "para_quien_titulo": {
+      "es": "Para quién y por qué",
+      "en": "Who it is for, and why"
+    }
+  },
+  "mapa": {
+    "intro": {
+      "es": "De arriba abajo, en el orden en que pasa una pregunta: quien visita entra por la puerta, pregunta y recibe su respuesta con la fuente o un texto fijo, y el chat sigue en pie aunque el proveedor caiga o la página se recargue. A la derecha, lo que atraviesa todo.",
+      "en": "Top to bottom, in the order a question happens: the visitor comes through the gate, asks and gets an answer with its source or a fixed text, and the chat stays up even if the provider fails or the page reloads. On the right, what runs through everything."
+    },
+    "capas": [
+      {
+        "nombre": {
+          "es": "Entra por la puerta",
+          "en": "Through the gate"
+        },
+        "sub": {
+          "es": "Nombre, correo y un código; un cupo por persona",
+          "en": "Name, email and a code; a quota per person"
+        },
+        "grupos": [
+          4
+        ]
+      },
+      {
+        "nombre": {
+          "es": "Pregunta y recibe",
+          "en": "Asks and gets an answer"
+        },
+        "sub": {
+          "es": "Con su cita, o con un texto fijo si no consta",
+          "en": "With its citation, or a fixed text if it isn't on record"
+        },
+        "grupos": [
+          1,
+          2
+        ]
+      },
+      {
+        "nombre": {
+          "es": "Sigue en pie",
+          "en": "Stays up"
+        },
+        "sub": {
+          "es": "Si el proveedor cae, y al recargar o cambiar de idioma",
+          "en": "If the provider fails, and on reload or a language switch"
+        },
+        "grupos": [
+          3,
+          5
+        ]
+      }
+    ],
+    "transversal": {
+      "nombre": {
+        "es": "Lo que atraviesa todo",
+        "en": "What runs through everything"
+      },
+      "sub": {
+        "es": "Un índice probado, la ley y el costo",
+        "en": "A tested index, the law and the cost"
+      },
+      "grupos": [
+        6
+      ],
+      "rasgos": [
+        {
+          "titulo": {
+            "es": "0 tokens en lo fijo",
+            "en": "0 tokens on fixed answers"
+          },
+          "texto": {
+            "es": "El rehúso, la pregunta ajena y la salida de Vesting no llaman al modelo.",
+            "en": "The refusal, unrelated questions and leaving Vesting never call the model."
+          },
+          "fuente": "metricas",
+          "metrica": "tokens_en_respuestas_fijas"
+        },
+        {
+          "titulo": {
+            "es": "Ley 1581, con aviso",
+            "en": "Law 1581, with notice"
+          },
+          "texto": {
+            "es": "Sin aceptar el aviso no hay código ni chat.",
+            "en": "No accepted notice, no code and no chat."
+          },
+          "fuente": "privacidad"
+        },
+        {
+          "titulo": {
+            "es": "Al modelo, solo lo público",
+            "en": "Only public content reaches the model"
+          },
+          "texto": {
+            "es": "Del sitio, el modelo solo ve fragmentos públicos.",
+            "en": "From the site, the model only sees public fragments."
+          },
+          "fuente": "privacidad"
+        },
+        {
+          "titulo": {
+            "es": "Español e inglés",
+            "en": "Spanish and English"
+          },
+          "texto": {
+            "es": "El panel, las respuestas fijas y las fuentes, en el idioma de la página.",
+            "en": "The panel, the fixed answers and the sources, in the page's language."
+          },
+          "fuente": "CH-15"
+        },
+        {
+          "titulo": {
+            "es": "US$0 al mes",
+            "en": "US$0 a month"
+          },
+          "texto": {
+            "es": "El proveedor de producción va en su plan gratuito; si se agota, búsqueda local.",
+            "en": "The production provider runs on its free plan; if it runs out, local search."
+          },
+          "fuente": "metricas",
+          "metrica": "costo_operacion_mensual"
+        }
+      ]
+    }
+  },
+  "iconos": {
+    "1": "sello",
+    "2": "escudo",
+    "3": "lupa",
+    "4": "calendario",
+    "5": "idiomas",
+    "6": "lista"
+  },
+  "proceso_pantallas": {
+    "registra": "CH-10",
+    "tope": "CH-12",
+    "fija": "CH-04",
+    "redacta": "CH-03",
+    "fuentes": "CH-01",
+    "local": "CH-07"
+  },
+  "metricas_texto": {
+    "funcionalidades": {
+      "es": "Una por cada función del chat que documenta su manual de uso, cuadrada sección por sección: 18, en seis grupos.",
+      "en": "One per chat feature documented in its user manual, matched section by section: 18, in six groups."
+    },
+    "fragmentos_del_indice": {
+      "es": "Los pedazos citables en que se parte el contenido del sitio para que el chat los busque: 1939 en español y 1930 en inglés, contados al armar el sitio el 31 de octubre de 2026.",
+      "en": "The citable pieces the site's content is split into so the chat can search them: 1939 in Spanish and 1930 in English, counted when the site was built on October 31, 2026."
+    },
+    "documentos_a_fondo": {
+      "es": "Los documentos que Henry escribió para el chat, más allá de la hoja de vida. Los 25 están aprobados y entran al índice en los dos idiomas.",
+      "en": "The documents Henry wrote for the chat, beyond the résumé. All 25 are approved and indexed in both languages."
+    },
+    "preguntas_del_banco": {
+      "es": "Preguntas escritas con las palabras de quien recluta, las mismas 175 en cada idioma. El banco suma además, por idioma, 15 ajenas, 1 que se rehúsa y 3 huecos declarados.",
+      "en": "Questions written in a recruiter's words, the same 175 in each language. Per language, the bank also holds 15 unrelated ones, 1 that gets refused and 3 declared gaps."
+    },
+    "pruebas_e2e_del_chat": {
+      "es": "Recorridos del chat de punta a punta en un navegador de verdad, 47 en escritorio y 47 en móvil, con un proveedor simulado.",
+      "en": "End-to-end chat journeys in a real browser, 47 on desktop and 47 on mobile, with a simulated provider."
+    },
+    "proveedores_conmutables": {
+      "es": "Los servicios de IA entre los que se elige con una variable: Groq, Gemini, Azure con Microsoft Foundry, Anthropic y uno compatible con OpenAI. No cuenta el simulado de las pruebas.",
+      "en": "The AI services chosen with a variable: Groq, Gemini, Azure with Microsoft Foundry, Anthropic and an OpenAI-compatible one. The tests' simulated one doesn't count."
+    },
+    "fuentes_por_respuesta": {
+      "es": "Cuántos fragmentos recibe el modelo, numerados, para armar cada respuesta y citarlos. Es un número fijado en el código, y la búsqueda local muestra los mismos cuatro.",
+      "en": "How many fragments the model receives, numbered, to build each answer and cite them. It's a number set in the code, and local search shows the same four."
+    },
+    "tope_diario": {
+      "es": "Cuántas preguntas puede hacer cada correo en 24 horas, contadas en el registro. El dueño lo cambia con una variable, de 1 a 1000.",
+      "en": "How many questions each email can ask in 24 hours, counted in the log. The owner changes it with a variable, from 1 to 1000."
+    },
+    "tokens_en_respuestas_fijas": {
+      "es": "Por construcción: el rehúso, la pregunta ajena y la salida de Vesting se contestan en el servidor antes de elegir proveedor, así que no llaman al modelo.",
+      "en": "By construction: the refusal, unrelated questions and leaving Vesting are answered on the server before a provider is chosen, so they never call the model."
+    },
+    "costo_operacion_mensual": {
+      "es": "Lo declara el manual: el proveedor de producción, Groq, va en su plan gratuito, que no cobra; solo corta cuando se acaba la cuota, y entonces el chat pasa a búsqueda local.",
+      "en": "Declared by the manual: the production provider, Groq, runs on its free plan, which doesn't charge; it only cuts off when the quota runs out, and then the chat switches to local search."
+    }
+  },
+  "grupos": [
+    {
+      "orden": 1,
+      "que_resuelve": {
+        "es": "A una hoja de vida no se le puede preguntar nada, y una respuesta sin fuente no se puede comprobar. Aquí quien pregunta recibe dos o tres párrafos en tercera persona, hechos solo con el contenido del sitio, y cada afirmación lleva el número de su fuente, que lleva a la sección que la respalda.",
+        "en": "You can't ask a résumé anything, and an answer without a source can't be checked. Here whoever asks gets two or three paragraphs in the third person, built only from the site's content, and every claim carries the number of its source, which leads to the section that backs it."
+      },
+      "te_sirve": [
+        {
+          "texto": {
+            "es": "Reclutas y quieres una respuesta concreta sin leer el sitio entero.",
+            "en": "You recruit and want a specific answer without reading the whole site."
+          },
+          "fuente": "promesa"
+        },
+        {
+          "texto": {
+            "es": "Quieres comprobar una respuesta: el chip te lleva a la sección del sitio que la respalda.",
+            "en": "You want to check an answer: the chip takes you to the section of the site that backs it."
+          },
+          "fuente": "CH-01"
+        },
+        {
+          "texto": {
+            "es": "Preguntas por una app del Portafolio o por un método, y quieres la ficha o el bloque exacto.",
+            "en": "You ask about a Portfolio app or a method, and want the sheet or the exact block."
+          },
+          "fuente": "CH-03"
+        }
+      ],
+      "no_es": [
+        {
+          "texto": {
+            "es": "No habla como Henry: habla de él, siempre en tercera persona.",
+            "en": "It doesn't speak as Henry: it speaks about him, always in the third person."
+          },
+          "fuente": "CH-02"
+        },
+        {
+          "texto": {
+            "es": "No enseña las fuentes que buscó y no usó: solo las que su respuesta cita.",
+            "en": "It doesn't show sources it retrieved and didn't use: only the ones its answer cites."
+          },
+          "fuente": "nunca"
+        }
+      ],
+      "flujo": {
+        "titulo": {
+          "es": "De la pregunta a la sección que la respalda",
+          "en": "From the question to the section that backs it"
+        },
+        "nodos": [
+          {
+            "id": "n1",
+            "tipo": "inicio",
+            "actor": "app",
+            "texto": {
+              "es": "Llega una pregunta sobre la trayectoria",
+              "en": "A question about the career arrives"
+            }
+          },
+          {
+            "id": "n2",
+            "tipo": "tarea",
+            "actor": "app",
+            "texto": {
+              "es": "Busca los cuatro fragmentos que mejor responden",
+              "en": "Finds the four fragments that best answer"
+            }
+          },
+          {
+            "id": "n3",
+            "tipo": "tarea",
+            "actor": "app",
+            "texto": {
+              "es": "Pide dos o tres párrafos en tercera persona, citando [n]",
+              "en": "Asks for two or three paragraphs in the third person, citing [n]"
+            }
+          },
+          {
+            "id": "n4",
+            "tipo": "decision",
+            "actor": "app",
+            "texto": {
+              "es": "¿La respuesta cita alguna fuente?",
+              "en": "Does the answer cite any source?"
+            }
+          },
+          {
+            "id": "n5",
+            "tipo": "tarea",
+            "actor": "app",
+            "texto": {
+              "es": "Pinta un chip por cada fuente citada",
+              "en": "Shows one chip per cited source"
+            },
+            "funcionalidad": "CH-01"
+          },
+          {
+            "id": "n6",
+            "tipo": "fin",
+            "actor": "app",
+            "texto": {
+              "es": "Responde sin chips",
+              "en": "Answers with no chips"
+            }
+          },
+          {
+            "id": "n7",
+            "tipo": "tarea",
+            "actor": "app",
+            "texto": {
+              "es": "El chip lleva a la sección, a la ficha o al bloque de Métodos",
+              "en": "The chip leads to the section, the sheet or the Methods block"
+            },
+            "funcionalidad": "CH-03"
+          },
+          {
+            "id": "n8",
+            "tipo": "fin",
+            "actor": "app",
+            "texto": {
+              "es": "Sin perder la conversación",
+              "en": "Without losing the conversation"
+            }
+          }
+        ],
+        "aristas": [
+          {
+            "de": "n1",
+            "a": "n2"
+          },
+          {
+            "de": "n2",
+            "a": "n3"
+          },
+          {
+            "de": "n3",
+            "a": "n4"
+          },
+          {
+            "de": "n4",
+            "a": "n5",
+            "etiqueta": {
+              "es": "sí",
+              "en": "yes"
+            }
+          },
+          {
+            "de": "n4",
+            "a": "n6",
+            "etiqueta": {
+              "es": "no",
+              "en": "no"
+            }
+          },
+          {
+            "de": "n5",
+            "a": "n7"
+          },
+          {
+            "de": "n7",
+            "a": "n8"
+          }
+        ]
+      },
+      "fichas": [
+        {
+          "tipo": "concepto",
+          "pregunta": {
+            "es": "¿Qué dice un chip como «[1, 2] AF-09 · Vesting»?",
+            "en": "What does a chip like “[1, 2] AF-09 · Vesting” say?"
+          },
+          "respuesta": {
+            "es": "Los números son las marcas de la respuesta que salen de esa fuente. El código dice de dónde salió la frase: AF para un documento de fondo, CV para la hoja de vida, APP para la lista de apps, FT para una ficha del Portafolio, y el número de la publicación para Métodos (T4, por ejemplo). Lo último dice a dónde lleva: la sección del sitio que respalda la frase.",
+            "en": "The numbers are the marks in the answer that come from that source. The code says where the sentence came from: AF for an in-depth document, CV for the résumé, APP for the apps list, FT for a Portfolio sheet, and the publication's number for Methods (T4, for example). The last part says where it leads: the section of the site that backs the sentence."
+          },
+          "fuente": "CH-01"
+        },
+        {
+          "tipo": "diferencia",
+          "pregunta": {
+            "es": "¿Quién habla en el chat?",
+            "en": "Who is speaking in the chat?"
+          },
+          "respuesta": {
+            "es": "El chat puede hablar de sí mismo, pero de Henry habla siempre en tercera persona. Sus documentos de fondo están en primera persona porque son su voz, y la respuesta los pasa a tercera.",
+            "en": "The chat may talk about itself, but it always talks about Henry in the third person. His in-depth documents are in the first person because they are his voice, and the answer moves them to the third."
+          },
+          "lados": [
+            {
+              "titulo": {
+                "es": "El asistente",
+                "en": "The assistant"
+              },
+              "texto": {
+                "es": "Puede decir «solo contesto por lo que sí consta»: habla de sí, no de Henry.",
+                "en": "It may say “I only answer from what the résumé actually shows”: it talks about itself, not about Henry."
+              }
+            },
+            {
+              "titulo": {
+                "es": "Henry",
+                "en": "Henry"
+              },
+              "texto": {
+                "es": "Siempre «Henry», «él», «su»; nunca «yo» ni «mi» para su experiencia. Una prueba marca la voz del dueño si se cuela.",
+                "en": "Always “Henry”, “he”, “his”; never “I” or “my” for his experience. A test flags the owner's voice if it slips in."
+              }
+            }
+          ],
+          "fuente": "CH-02"
+        },
+        {
+          "tipo": "decision",
+          "pregunta": {
+            "es": "Preguntas por una app del Portafolio: ¿qué gana, su ficha o los documentos de Henry?",
+            "en": "You ask about a Portfolio app: what wins, its sheet or Henry's documents?"
+          },
+          "respuesta": {
+            "es": "Si la pregunta es por una pieza, gana su ficha, y la cita lleva a ella; si es por Henry, gana su documento. En la búsqueda, las fichas pesan la mitad que los documentos de fondo: son evidencia de una pieza, y la voz de Henry son sus documentos.",
+            "en": "If the question is about a piece, its sheet wins and the citation leads to it; if it is about Henry, his document wins. In the search, sheets weigh half as much as in-depth documents: they are evidence of one piece, and Henry's voice is his documents."
+          },
+          "fuente": "CH-03"
+        },
+        {
+          "tipo": "decision",
+          "pregunta": {
+            "es": "La respuesta usa dos partes del mismo documento: ¿salen dos chips?",
+            "en": "The answer uses two parts of the same document: do two chips show up?"
+          },
+          "respuesta": {
+            "es": "No. Sale un solo chip con los dos números, como «[3, 4] AF-17 · BI & decisión», y al pasar el cursor muestra los títulos de las dos partes. Ningún número se pierde, porque la respuesta cita por número.",
+            "en": "No. One chip shows up with both numbers, like “[3, 4] AF-17 · BI & decisión”, and on hover it shows the titles of both parts. No number is lost, because the answer cites by number."
+          },
+          "fuente": "CH-01"
+        }
+      ]
+    },
+    {
+      "orden": 2,
+      "que_resuelve": {
+        "es": "Un modelo al que se le pregunta por lo que no está escrito puede rellenar el hueco. Aquí las ausencias, el salario, la disponibilidad o un tema ajeno reciben un texto fijo antes de llegar al modelo, sin gastar un token, y la salida de Vesting tiene su respuesta fija, con su cita.",
+        "en": "A model asked about what isn't written down may fill the gap. Here absences, salary, availability or an unrelated topic get a fixed text before reaching the model, without spending a token, and leaving Vesting has its own fixed answer, with its citation."
+      },
+      "te_sirve": [
+        {
+          "texto": {
+            "es": "Quieres saber si tiene una credencial y prefieres que el chat no adivine.",
+            "en": "You want to know whether he holds a credential and would rather the chat didn't guess."
+          },
+          "fuente": "CH-04"
+        },
+        {
+          "texto": {
+            "es": "Preguntas por qué salió de Vesting y quieres lo que consta, con su cita.",
+            "en": "You ask why he left Vesting and want what's on record, with its citation."
+          },
+          "fuente": "CH-05"
+        },
+        {
+          "texto": {
+            "es": "Necesitas hablar de salario o de disponibilidad: el chat te lleva a Contacto.",
+            "en": "You need to talk about salary or availability: the chat points you to Contact."
+          },
+          "fuente": "CH-04"
+        }
+      ],
+      "no_es": [
+        {
+          "texto": {
+            "es": "No dice que Henry no hizo, no sabe o no tiene algo: lo que no consta no se contesta, y lo dice.",
+            "en": "It doesn't say Henry didn't do, doesn't know or doesn't have something: what isn't on record isn't answered, and it says so."
+          },
+          "fuente": "nunca"
+        },
+        {
+          "texto": {
+            "es": "Las listas son un piso, no un techo: una pregunta rara puede llegar al modelo, y ahí la para el prompt.",
+            "en": "The lists are a floor, not a ceiling: an unusual question can reach the model, and the prompt stops it there."
+          },
+          "fuente": "limites"
+        }
+      ],
+      "flujo": {
+        "titulo": {
+          "es": "Antes de llamar al modelo",
+          "en": "Before calling the model"
+        },
+        "nodos": [
+          {
+            "id": "n1",
+            "tipo": "inicio",
+            "actor": "app",
+            "texto": {
+              "es": "Llega una pregunta",
+              "en": "A question arrives"
+            }
+          },
+          {
+            "id": "n2",
+            "tipo": "decision",
+            "actor": "app",
+            "texto": {
+              "es": "¿Pide lo que no consta?",
+              "en": "Does it ask for what isn't on record?"
+            }
+          },
+          {
+            "id": "n3",
+            "tipo": "tarea",
+            "actor": "app",
+            "texto": {
+              "es": "Responde el texto fijo, sin fuentes ni tokens",
+              "en": "Gives the fixed text, with no sources or tokens"
+            },
+            "funcionalidad": "CH-04"
+          },
+          {
+            "id": "n4",
+            "tipo": "decision",
+            "actor": "app",
+            "texto": {
+              "es": "¿Es por la salida de Vesting?",
+              "en": "Is it about leaving Vesting?"
+            }
+          },
+          {
+            "id": "n5",
+            "tipo": "tarea",
+            "actor": "app",
+            "texto": {
+              "es": "Cuenta cómo cerró la etapa, con su cita",
+              "en": "Tells how the stage closed, with its citation"
+            },
+            "funcionalidad": "CH-05"
+          },
+          {
+            "id": "n6",
+            "tipo": "decision",
+            "actor": "app",
+            "texto": {
+              "es": "¿Es ajena a la trayectoria?",
+              "en": "Is it unrelated to the career?"
+            }
+          },
+          {
+            "id": "n7",
+            "tipo": "tarea",
+            "actor": "app",
+            "texto": {
+              "es": "Invita a preguntar por la trayectoria",
+              "en": "Invites a question about the career"
+            },
+            "funcionalidad": "CH-06"
+          },
+          {
+            "id": "n8",
+            "tipo": "fin",
+            "actor": "app",
+            "texto": {
+              "es": "Sigue a la búsqueda y al modelo",
+              "en": "Goes on to search and the model"
+            }
+          }
+        ],
+        "aristas": [
+          {
+            "de": "n1",
+            "a": "n2"
+          },
+          {
+            "de": "n2",
+            "a": "n3",
+            "etiqueta": {
+              "es": "sí",
+              "en": "yes"
+            }
+          },
+          {
+            "de": "n2",
+            "a": "n4",
+            "etiqueta": {
+              "es": "no",
+              "en": "no"
+            }
+          },
+          {
+            "de": "n4",
+            "a": "n5",
+            "etiqueta": {
+              "es": "sí",
+              "en": "yes"
+            }
+          },
+          {
+            "de": "n4",
+            "a": "n6",
+            "etiqueta": {
+              "es": "no",
+              "en": "no"
+            }
+          },
+          {
+            "de": "n6",
+            "a": "n7",
+            "etiqueta": {
+              "es": "sí",
+              "en": "yes"
+            }
+          },
+          {
+            "de": "n6",
+            "a": "n8",
+            "etiqueta": {
+              "es": "no",
+              "en": "no"
+            }
+          }
+        ]
+      },
+      "fichas": [
+        {
+          "tipo": "concepto",
+          "pregunta": {
+            "es": "¿Qué es «lo que no consta»?",
+            "en": "What does “not on record” mean?"
+          },
+          "respuesta": {
+            "es": "Lo que la hoja de vida no dice: lo que Henry no hizo, no sabe o no tiene, una credencial que no figura, el salario, la disponibilidad o si viaja. Los contenidos no son la verdad absoluta y algo se les puede escapar, así que el chat no afirma ausencias: responde un solo texto fijo, en el idioma de la página, e invita a escribir desde Contacto.",
+            "en": "What the résumé doesn't say: what Henry didn't do, doesn't know or doesn't have, a credential that isn't listed, salary, availability or whether he travels. The content isn't the absolute truth and something may slip through, so the chat never claims an absence: it gives one fixed text, in the page's language, and invites you to write from Contact."
+          },
+          "fuente": "CH-04"
+        },
+        {
+          "tipo": "diferencia",
+          "pregunta": {
+            "es": "«¿Qué no hace HackGuard?»: ¿también se rehúsa?",
+            "en": "“What doesn't HackGuard do?”: does that get refused too?"
+          },
+          "respuesta": {
+            "es": "No. Los límites de una pieza están escritos en su ficha y se contestan; lo que se rehúsa son las ausencias de la persona. Y «¿qué hace cuando el puesto pide algo que no ha usado?» también se contesta: es su método.",
+            "en": "No. A piece's limits are written in its sheet and get answered; what gets refused is the person's absences. And “what does he do when a role asks for something he hasn't used?” gets answered too: it is his method."
+          },
+          "lados": [
+            {
+              "titulo": {
+                "es": "La persona",
+                "en": "The person"
+              },
+              "texto": {
+                "es": "«¿Qué no ha hecho nunca?», sus debilidades, una credencial que no tiene: texto fijo, sin fuentes.",
+                "en": "“What has he never done?”, his weaknesses, a credential he doesn't hold: fixed text, no sources."
+              }
+            },
+            {
+              "titulo": {
+                "es": "Una pieza",
+                "en": "A piece"
+              },
+              "texto": {
+                "es": "«¿Qué no hace HackGuard?»: sus límites constan en su ficha, y la respuesta los cita.",
+                "en": "“What doesn't HackGuard do?”: its limits are on record in its sheet, and the answer cites them."
+              }
+            }
+          ],
+          "fuente": "CH-04"
+        },
+        {
+          "tipo": "decision",
+          "pregunta": {
+            "es": "Preguntas «¿Por qué salió de Vesting?»: ¿qué responde?",
+            "en": "You ask “Why did he leave Vesting?”: what does it answer?"
+          },
+          "respuesta": {
+            "es": "Una respuesta fija, en tercera persona, que cuenta cómo cerró la etapa en enero de 2025, con su cita a la Trayectoria. No añade causas que el contenido no da, no llama al modelo y funciona también en búsqueda local. Dos reglas de prompt seguidas no lograron que el modelo contestara solo con lo que consta; por eso esta pregunta ya no le llega.",
+            "en": "A fixed answer, in the third person, that tells how the stage closed in January 2025, with its citation to the Career section. It adds no causes the content doesn't give, doesn't call the model and works in local search too. Two prompt rules in a row didn't get the model to answer only with what's on record; that's why this question no longer reaches it."
+          },
+          "fuente": "CH-05"
+        },
+        {
+          "tipo": "concepto",
+          "pregunta": {
+            "es": "¿Cómo sabe el chat que una pregunta es ajena?",
+            "en": "How does the chat know a question is unrelated?"
+          },
+          "respuesta": {
+            "es": "De dos maneras: una lista cerrada (el clima, un chiste, una receta, un pedido de código) y una búsqueda estricta en el índice que no encuentra nada. En los dos casos responde una invitación fija a preguntar por la trayectoria, sin fuentes y sin llamar al modelo. Lo que se escapa llega al modelo, y el prompt lo declina.",
+            "en": "In two ways: a closed list (the weather, a joke, a recipe, a request for code) and a strict search of the index that finds nothing. Either way it gives a fixed invitation to ask about the career, with no sources and without calling the model. Whatever slips through reaches the model, and the prompt declines it."
+          },
+          "fuente": "CH-06"
+        }
+      ]
+    },
+    {
+      "orden": 3,
+      "que_resuelve": {
+        "es": "Un chat que depende de un solo servicio de IA se calla cuando ese servicio falla o se queda sin cuota. Aquí pasa a búsqueda local con el mismo índice y lo dice; el proveedor se elige con una variable de entorno, sin tocar código, y otra variable apaga el chat entero.",
+        "en": "A chat that depends on a single AI service goes quiet when that service fails or runs out of quota. Here it switches to local search over the same index and says so; the provider is chosen with an environment variable, without touching code, and another variable turns the whole chat off."
+      },
+      "te_sirve": [
+        {
+          "texto": {
+            "es": "Preguntas justo cuando el proveedor falla y aun así quieres los fragmentos que responden.",
+            "en": "You ask right when the provider fails and still want the fragments that answer."
+          },
+          "fuente": "CH-07"
+        },
+        {
+          "texto": {
+            "es": "Te interesa cómo se cambia de proveedor de IA sin tocar el código.",
+            "en": "You're interested in how the AI provider is switched without touching the code."
+          },
+          "fuente": "CH-08"
+        },
+        {
+          "texto": {
+            "es": "Evalúas cómo se opera un chat de IA: hay un interruptor que lo apaga entero.",
+            "en": "You're assessing how an AI chat is run: there is a switch that turns it all off."
+          },
+          "fuente": "CH-09"
+        }
+      ],
+      "no_es": [
+        {
+          "texto": {
+            "es": "La búsqueda local no redacta: muestra los fragmentos tal como están, recortados y numerados.",
+            "en": "Local search doesn't write: it shows the fragments as they are, trimmed and numbered."
+          },
+          "fuente": "CH-07"
+        },
+        {
+          "texto": {
+            "es": "No salta sola de un proveedor a otro: si el elegido falla, pasa a búsqueda local.",
+            "en": "It doesn't jump from one provider to another by itself: if the chosen one fails, it switches to local search."
+          },
+          "fuente": "CH-08"
+        }
+      ],
+      "flujo": {
+        "titulo": {
+          "es": "Cuando el proveedor falla",
+          "en": "When the provider fails"
+        },
+        "nodos": [
+          {
+            "id": "n1",
+            "tipo": "inicio",
+            "actor": "app",
+            "texto": {
+              "es": "Llega una pregunta con contenido",
+              "en": "A question with content arrives"
+            }
+          },
+          {
+            "id": "n3",
+            "tipo": "tarea",
+            "actor": "app",
+            "texto": {
+              "es": "Pide la respuesta al proveedor, si no está en pausa",
+              "en": "Asks the provider for the answer, unless it's paused"
+            }
+          },
+          {
+            "id": "n4",
+            "tipo": "decision",
+            "actor": "app",
+            "texto": {
+              "es": "¿Responde el proveedor?",
+              "en": "Does the provider answer?"
+            }
+          },
+          {
+            "id": "n5",
+            "tipo": "fin",
+            "actor": "app",
+            "texto": {
+              "es": "Responde con sus citas",
+              "en": "Answers with its citations"
+            }
+          },
+          {
+            "id": "n6",
+            "tipo": "tarea",
+            "actor": "app",
+            "texto": {
+              "es": "Cuenta la falla: tres seguidas lo pausan un minuto",
+              "en": "Counts the failure: three in a row pause it for a minute"
+            }
+          },
+          {
+            "id": "n7",
+            "tipo": "tarea",
+            "actor": "app",
+            "texto": {
+              "es": "Muestra «Búsqueda local» y los fragmentos que responden",
+              "en": "Shows “Local search” and the fragments that answer"
+            },
+            "funcionalidad": "CH-07"
+          },
+          {
+            "id": "n8",
+            "tipo": "fin",
+            "actor": "app",
+            "texto": {
+              "es": "El panel registra la respuesta como local",
+              "en": "The panel logs the answer as local"
+            }
+          }
+        ],
+        "aristas": [
+          {
+            "de": "n1",
+            "a": "n3"
+          },
+          {
+            "de": "n3",
+            "a": "n4"
+          },
+          {
+            "de": "n4",
+            "a": "n5",
+            "etiqueta": {
+              "es": "sí",
+              "en": "yes"
+            }
+          },
+          {
+            "de": "n4",
+            "a": "n6",
+            "etiqueta": {
+              "es": "no: cae o sin cuota",
+              "en": "no: down or out of quota"
+            }
+          },
+          {
+            "de": "n6",
+            "a": "n7"
+          },
+          {
+            "de": "n7",
+            "a": "n8"
+          }
+        ]
+      },
+      "fichas": [
+        {
+          "tipo": "concepto",
+          "pregunta": {
+            "es": "¿Qué es la «Búsqueda local»?",
+            "en": "What is “Local search”?"
+          },
+          "respuesta": {
+            "es": "Es el modo de respaldo. Cuando el proveedor de IA falla, el navegador descarga el mismo índice que usa el servidor y muestra los cuatro fragmentos que mejor responden, recortados y numerados, con la etiqueta «Búsqueda local» a la vista. No redacta: enseña la evidencia tal cual. El índice solo se descarga en ese momento.",
+            "en": "It is the fallback mode. When the AI provider fails, the browser downloads the same index the server uses and shows the four fragments that best answer, trimmed and numbered, with the “Local search” label in plain sight. It doesn't write: it shows the evidence as it is. The index is downloaded only at that moment."
+          },
+          "fuente": "CH-07"
+        },
+        {
+          "tipo": "diferencia",
+          "pregunta": {
+            "es": "¿Respuesta del modelo o búsqueda local?",
+            "en": "Model answer or local search?"
+          },
+          "respuesta": {
+            "es": "Las dos salen del mismo índice y del mismo número de fragmentos; cambia quién arma la respuesta.",
+            "en": "Both come from the same index and the same number of fragments; what changes is who puts the answer together."
+          },
+          "lados": [
+            {
+              "titulo": {
+                "es": "El modelo",
+                "en": "The model"
+              },
+              "texto": {
+                "es": "Dos o tres párrafos en tercera persona, con sus citas [n], hechos con los cuatro fragmentos.",
+                "en": "Two or three paragraphs in the third person, with their [n] citations, built from the four fragments."
+              }
+            },
+            {
+              "titulo": {
+                "es": "Búsqueda local",
+                "en": "Local search"
+              },
+              "texto": {
+                "es": "Los mismos cuatro fragmentos, sin redactar, numerados y con sus chips; los textos fijos también responden.",
+                "en": "The same four fragments, unwritten, numbered and with their chips; the fixed texts still answer too."
+              }
+            }
+          ],
+          "fuente": "CH-07"
+        },
+        {
+          "tipo": "decision",
+          "pregunta": {
+            "es": "El proveedor retira el modelo que usa el chat: ¿qué pasa?",
+            "en": "The provider retires the model the chat uses: what happens?"
+          },
+          "respuesta": {
+            "es": "Las respuestas siguen, en búsqueda local y con la etiqueta a la vista. Las pruebas automáticas no lo ven, porque usan un proveedor simulado; el dueño lo nota en la etiqueta o en los registros del servidor, y lo arregla eligiendo otro modelo con una variable, sin tocar código. Ya pasó una vez, y el chat no se quedó mudo.",
+            "en": "Answers keep coming, in local search and with the label in plain sight. The automated tests can't see it, because they use a simulated provider; the owner notices it in the label or in the server logs, and fixes it by choosing another model with a variable, without touching code. It has happened once, and the chat didn't go silent."
+          },
+          "fuente": "CH-08"
+        },
+        {
+          "tipo": "decision",
+          "pregunta": {
+            "es": "El dueño quiere apagar el chat ya: ¿cómo lo hace?",
+            "en": "The owner wants to turn the chat off right now: how?"
+          },
+          "respuesta": {
+            "es": "Pone en falso la variable del interruptor y vuelve a publicar: el botón desaparece de todas las páginas y la ruta del servidor responde que el chat está apagado. Para encenderlo, la borra o la pone en verdadero.",
+            "en": "He sets the switch variable to false and republishes: the button disappears from every page and the server route answers that the chat is off. To turn it back on, he deletes the variable or sets it to true."
+          },
+          "fuente": "CH-09"
+        }
+      ]
+    },
+    {
+      "orden": 4,
+      "que_resuelve": {
+        "es": "Un chat abierto lo puede gastar cualquiera, y del otro lado nadie sabe quién preguntó. Aquí quien visita deja su nombre y su correo, acepta el aviso de la Ley 1581 y entra con un código; cada persona tiene 20 preguntas cada 24 horas, un correo se puede bloquear y cada conversación queda en un registro que solo lee el dueño.",
+        "en": "An open chat can be used up by anyone, and on the other side nobody knows who asked. Here the visitor leaves their name and email, accepts the Law 1581 notice and gets in with a code; each person has 20 questions every 24 hours, an email can be blocked and every conversation goes into a log only the owner reads."
+      },
+      "te_sirve": [
+        {
+          "texto": {
+            "es": "Quieres que Henry sepa quién pregunta y pueda seguir la conversación.",
+            "en": "You want Henry to know who is asking and to be able to follow up."
+          },
+          "fuente": "CH-10"
+        },
+        {
+          "texto": {
+            "es": "Algo falla y quieres avisarle sin salir del chat.",
+            "en": "Something fails and you want to tell him without leaving the chat."
+          },
+          "fuente": "CH-13"
+        },
+        {
+          "texto": {
+            "es": "Quieres saber qué se guarda de ti y cómo pedir que se borre.",
+            "en": "You want to know what is kept about you and how to ask for it to be deleted."
+          },
+          "fuente": "privacidad"
+        }
+      ],
+      "no_es": [
+        {
+          "texto": {
+            "es": "No es una cuenta: no hay contraseña; el código prueba que el correo es tuyo y la sesión dura 30 días en ese navegador.",
+            "en": "It isn't an account: there is no password; the code proves the email is yours and the session lasts 30 days in that browser."
+          },
+          "fuente": "CH-10"
+        },
+        {
+          "texto": {
+            "es": "No es un registro público: solo el dueño lo lee, y ningún visitante puede verlo.",
+            "en": "It isn't a public log: only the owner reads it, and no visitor can see it."
+          },
+          "fuente": "CH-11"
+        }
+      ],
+      "flujo": {
+        "titulo": {
+          "es": "De la puerta a la pregunta",
+          "en": "From the gate to the question"
+        },
+        "nodos": [
+          {
+            "id": "n1",
+            "tipo": "inicio",
+            "actor": "app",
+            "texto": {
+              "es": "Se abre el chat sin sesión",
+              "en": "The chat opens with no session"
+            }
+          },
+          {
+            "id": "n2",
+            "tipo": "tarea",
+            "actor": "app",
+            "texto": {
+              "es": "Pide nombre, correo y el aviso de la Ley 1581",
+              "en": "Asks for name, email and the Law 1581 notice"
+            },
+            "funcionalidad": "CH-10"
+          },
+          {
+            "id": "n3",
+            "tipo": "decision",
+            "actor": "app",
+            "texto": {
+              "es": "¿El correo está en la lista de bloqueados?",
+              "en": "Is the email on the blocklist?"
+            }
+          },
+          {
+            "id": "n4",
+            "tipo": "fin",
+            "actor": "app",
+            "texto": {
+              "es": "No envía código",
+              "en": "Sends no code"
+            }
+          },
+          {
+            "id": "n5",
+            "tipo": "tarea",
+            "actor": "app",
+            "texto": {
+              "es": "Envía un código: diez minutos, cinco intentos",
+              "en": "Sends a code: ten minutes, five tries"
+            }
+          },
+          {
+            "id": "n6",
+            "tipo": "decision",
+            "actor": "app",
+            "texto": {
+              "es": "¿El código coincide?",
+              "en": "Does the code match?"
+            }
+          },
+          {
+            "id": "n7",
+            "tipo": "decision",
+            "actor": "app",
+            "texto": {
+              "es": "¿Le quedan preguntas hoy?",
+              "en": "Any questions left today?"
+            }
+          },
+          {
+            "id": "n8",
+            "tipo": "fin",
+            "actor": "app",
+            "texto": {
+              "es": "Responde y deja la conversación en el registro",
+              "en": "Answers and logs the conversation"
+            }
+          },
+          {
+            "id": "n9",
+            "tipo": "fin",
+            "actor": "app",
+            "texto": {
+              "es": "Le pide volver mañana",
+              "en": "Asks them to come back tomorrow"
+            },
+            "funcionalidad": "CH-12"
+          }
+        ],
+        "aristas": [
+          {
+            "de": "n1",
+            "a": "n2"
+          },
+          {
+            "de": "n2",
+            "a": "n3"
+          },
+          {
+            "de": "n3",
+            "a": "n4",
+            "etiqueta": {
+              "es": "sí",
+              "en": "yes"
+            }
+          },
+          {
+            "de": "n3",
+            "a": "n5",
+            "etiqueta": {
+              "es": "no",
+              "en": "no"
+            }
+          },
+          {
+            "de": "n5",
+            "a": "n6"
+          },
+          {
+            "de": "n6",
+            "a": "n5",
+            "etiqueta": {
+              "es": "no: pide otro",
+              "en": "no: request another"
+            },
+            "vuelta": true
+          },
+          {
+            "de": "n6",
+            "a": "n7",
+            "etiqueta": {
+              "es": "sí: sesión de 30 días",
+              "en": "yes: 30-day session"
+            }
+          },
+          {
+            "de": "n7",
+            "a": "n8",
+            "etiqueta": {
+              "es": "sí",
+              "en": "yes"
+            }
+          },
+          {
+            "de": "n7",
+            "a": "n9",
+            "etiqueta": {
+              "es": "no: llegó a 20",
+              "en": "no: reached 20"
+            }
+          }
+        ]
+      },
+      "fichas": [
+        {
+          "tipo": "concepto",
+          "pregunta": {
+            "es": "¿Por qué el chat pide nombre y correo?",
+            "en": "Why does the chat ask for a name and email?"
+          },
+          "respuesta": {
+            "es": "Para que Henry sepa quién pregunta y pueda seguir la conversación, y para que quien solo viene a probar no gaste el chat de todos. No hay contraseñas ni cuentas: el código de seis dígitos prueba que el correo es de quien lo escribe, y con él la sesión dura 30 días en ese navegador.",
+            "en": "So Henry knows who is asking and can follow up, and so someone who only comes to poke around doesn't use up everyone's chat. There are no passwords or accounts: the six-digit code proves the email belongs to whoever typed it, and with it the session lasts 30 days in that browser."
+          },
+          "fuente": "CH-10"
+        },
+        {
+          "tipo": "diferencia",
+          "pregunta": {
+            "es": "¿El tope del día o el ritmo por minuto?",
+            "en": "The daily cap or the per-minute rate?"
+          },
+          "respuesta": {
+            "es": "Son dos frenos distintos: el cupo cuenta a la persona; el ritmo, la conexión.",
+            "en": "They are two different brakes: the quota counts the person; the rate, the connection."
+          },
+          "lados": [
+            {
+              "titulo": {
+                "es": "El tope del día",
+                "en": "The daily cap"
+              },
+              "texto": {
+                "es": "20 preguntas cada 24 horas por correo, contadas en el registro: vale igual en todos los servidores y es exacto.",
+                "en": "20 questions every 24 hours per email, counted in the log: it holds across every server and is exact."
+              }
+            },
+            {
+              "titulo": {
+                "es": "El ritmo",
+                "en": "The rate"
+              },
+              "texto": {
+                "es": "10 preguntas por minuto por conexión, en la memoria de cada servidor: frena ráfagas, pero no es exacto.",
+                "en": "10 questions per minute per connection, in each server's memory: it stops bursts, but it isn't exact."
+              }
+            }
+          ],
+          "fuente": "CH-12"
+        },
+        {
+          "tipo": "decision",
+          "pregunta": {
+            "es": "Ya hiciste 20 preguntas hoy: ¿qué pasa con la siguiente?",
+            "en": "You've already asked 20 questions today: what happens to the next one?"
+          },
+          "respuesta": {
+            "es": "Ves «Llegaste al máximo de preguntas de hoy»: vuelve mañana o escríbele a Henry desde Contacto. No es una falla, así que el chat no pasa a búsqueda local. Cuentan todas las preguntas, también las que reciben un texto fijo.",
+            "en": "You see that you've reached today's question limit: come back tomorrow or write to Henry from Contact. It isn't a failure, so the chat doesn't switch to local search. Every question counts, including the ones that get a fixed text."
+          },
+          "fuente": "CH-12"
+        },
+        {
+          "tipo": "decision",
+          "pregunta": {
+            "es": "Algo no funciona dentro del chat: ¿cómo avisas?",
+            "en": "Something isn't working inside the chat: how do you report it?"
+          },
+          "respuesta": {
+            "es": "Con «¿Algo no funciona? Avisa a Henry», en el pie del panel: escribes, si quieres, qué pasó, y el aviso le llega por correo. Dentro del chat no te pide el correo: el servidor lo toma de tu sesión y no lo devuelve al navegador. Si lo que falla es la puerta, el mismo aviso está en el primer paso.",
+            "en": "With “Something not working? Tell Henry”, at the foot of the panel: you write what happened, if you want, and the report reaches him by email. Inside the chat it doesn't ask for your email: the server takes it from your session and never sends it back to the browser. If what fails is the gate itself, the same report is on the first step."
+          },
+          "fuente": "CH-13"
+        }
+      ]
+    },
+    {
+      "orden": 5,
+      "que_resuelve": {
+        "es": "Una conversación que se pierde al recargar o al cambiar de idioma obliga a empezar de nuevo. Aquí sigue en el navegador al recargar, seguir un enlace o cambiar de idioma; vence sola a las 8 horas del último mensaje y «Borrar conversación» la quita con un clic. Todo, en español y en inglés.",
+        "en": "A conversation that's lost on reload or a language switch forces you to start over. Here it stays in the browser when you reload, follow a link or switch language; it expires by itself 8 hours after the last message and “Delete conversation” removes it with one click. All of it, in Spanish and English."
+      },
+      "te_sirve": [
+        {
+          "texto": {
+            "es": "Navegas por el sitio mientras preguntas y no quieres perder el hilo.",
+            "en": "You browse the site while you ask and don't want to lose the thread."
+          },
+          "fuente": "CH-14"
+        },
+        {
+          "texto": {
+            "es": "Lees en inglés: el panel, las respuestas fijas y las fuentes salen en el idioma de la página.",
+            "en": "You read in English: the panel, the fixed answers and the sources come out in the page's language."
+          },
+          "fuente": "CH-15"
+        },
+        {
+          "texto": {
+            "es": "Usas un computador compartido y quieres borrar lo que preguntaste.",
+            "en": "You're on a shared computer and want to delete what you asked."
+          },
+          "fuente": "CH-14"
+        }
+      ],
+      "no_es": [
+        {
+          "texto": {
+            "es": "«Borrar conversación» no borra el registro del servidor: eso se pide desde Contacto.",
+            "en": "“Delete conversation” doesn't delete the server log: that is requested from Contact."
+          },
+          "fuente": "CH-14"
+        },
+        {
+          "texto": {
+            "es": "El navegador no guarda tu nombre ni tu correo: solo las preguntas y las respuestas.",
+            "en": "The browser keeps neither your name nor your email: only the questions and answers."
+          },
+          "fuente": "privacidad"
+        }
+      ],
+      "flujo": {
+        "titulo": {
+          "es": "La vida de una conversación",
+          "en": "The life of a conversation"
+        },
+        "nodos": [
+          {
+            "id": "n1",
+            "tipo": "inicio",
+            "actor": "app",
+            "texto": {
+              "es": "Llega una respuesta",
+              "en": "An answer arrives"
+            }
+          },
+          {
+            "id": "n2",
+            "tipo": "tarea",
+            "actor": "app",
+            "texto": {
+              "es": "La guarda en este navegador, sin nombre ni correo",
+              "en": "Keeps it in this browser, without name or email"
+            }
+          },
+          {
+            "id": "n3",
+            "tipo": "decision",
+            "actor": "app",
+            "texto": {
+              "es": "¿Qué pasa después?",
+              "en": "What happens next?"
+            }
+          },
+          {
+            "id": "n4",
+            "tipo": "tarea",
+            "actor": "app",
+            "texto": {
+              "es": "La vuelve a mostrar; el panel reabre si estaba abierto",
+              "en": "Shows it again; the panel reopens if it was open"
+            }
+          },
+          {
+            "id": "n5",
+            "tipo": "tarea",
+            "actor": "app",
+            "texto": {
+              "es": "Vence y la borra sola",
+              "en": "Expires and clears itself"
+            }
+          },
+          {
+            "id": "n6",
+            "tipo": "tarea",
+            "actor": "app",
+            "texto": {
+              "es": "La quita de este navegador",
+              "en": "Removes it from this browser"
+            },
+            "funcionalidad": "CH-14"
+          },
+          {
+            "id": "n7",
+            "tipo": "fin",
+            "actor": "app",
+            "texto": {
+              "es": "El registro del servidor se conserva",
+              "en": "The server log is kept"
+            }
+          },
+          {
+            "id": "n8",
+            "tipo": "fin",
+            "actor": "app",
+            "texto": {
+              "es": "Sigue donde iba",
+              "en": "Picks up where it left off"
+            }
+          }
+        ],
+        "aristas": [
+          {
+            "de": "n1",
+            "a": "n2"
+          },
+          {
+            "de": "n2",
+            "a": "n3"
+          },
+          {
+            "de": "n3",
+            "a": "n4",
+            "etiqueta": {
+              "es": "recarga, enlace o idioma",
+              "en": "reload, link or language"
+            }
+          },
+          {
+            "de": "n3",
+            "a": "n5",
+            "etiqueta": {
+              "es": "8 horas sin mensajes",
+              "en": "8 hours with no messages"
+            }
+          },
+          {
+            "de": "n3",
+            "a": "n6",
+            "etiqueta": {
+              "es": "«Borrar conversación»",
+              "en": "“Delete conversation”"
+            }
+          },
+          {
+            "de": "n4",
+            "a": "n8"
+          },
+          {
+            "de": "n5",
+            "a": "n7"
+          },
+          {
+            "de": "n6",
+            "a": "n7"
+          }
+        ]
+      },
+      "fichas": [
+        {
+          "tipo": "diferencia",
+          "pregunta": {
+            "es": "¿Navegador o servidor?",
+            "en": "Browser or server?"
+          },
+          "respuesta": {
+            "es": "Son dos copias con fines distintos: la del navegador es para ti; la del servidor, para que Henry sepa quién preguntó y qué se respondió.",
+            "en": "They are two copies with different purposes: the browser's is for you; the server's, so Henry knows who asked and what was answered."
+          },
+          "lados": [
+            {
+              "titulo": {
+                "es": "En tu navegador",
+                "en": "In your browser"
+              },
+              "texto": {
+                "es": "Hasta 40 mensajes con sus fuentes, sin nombre ni correo. Vence a las 8 horas del último mensaje y la borras con un clic.",
+                "en": "Up to 40 messages with their sources, without name or email. It expires 8 hours after the last message and you clear it with one click."
+              }
+            },
+            {
+              "titulo": {
+                "es": "En el servidor",
+                "en": "On the server"
+              },
+              "texto": {
+                "es": "Cada pregunta con su respuesta, sus fuentes, su modo, tu nombre y tu correo. Solo el dueño lo lee, y se borra a pedido desde Contacto.",
+                "en": "Every question with its answer, sources, mode, your name and your email. Only the owner reads it, and it is deleted on request from Contact."
+              }
+            }
+          ],
+          "fuente": "privacidad"
+        },
+        {
+          "tipo": "decision",
+          "pregunta": {
+            "es": "Abres el sitio en una ventana privada: ¿funciona el chat?",
+            "en": "You open the site in a private window: does the chat work?"
+          },
+          "respuesta": {
+            "es": "Sí, igual, pero sin memoria: si el navegador no deja guardar, la conversación no sobrevive a recargar la página.",
+            "en": "Yes, the same, but without memory: if the browser doesn't allow storage, the conversation doesn't survive a page reload."
+          },
+          "fuente": "CH-14"
+        },
+        {
+          "tipo": "decision",
+          "pregunta": {
+            "es": "Escribes en inglés con la página en español: ¿qué pasa?",
+            "en": "You write in English on a Spanish page: what happens?"
+          },
+          "respuesta": {
+            "es": "El chat responde en el idioma de la página. Las listas del rehúso y de la salida de Vesting leen los dos idiomas, así que una pregunta por el salario escrita en inglés recibe igual el texto fijo.",
+            "en": "The chat answers in the page's language. The refusal and leaving-Vesting lists read both languages, so a question about salary written in English still gets the fixed text."
+          },
+          "fuente": "CH-15"
+        }
+      ]
+    },
+    {
+      "orden": 6,
+      "que_resuelve": {
+        "es": "Un chat que busca por palabras solo encuentra lo que el contenido dice con las palabras de quien pregunta. Aquí el índice se vuelve a armar en cada publicación, solo con lo aprobado, y un banco de 175 preguntas por idioma, escritas con las palabras de quien recluta, exige en cada corrida de pruebas que cada una traiga la fuente que debería contestarla.",
+        "en": "A chat that searches by words only finds what the content says in the asker's words. Here the index is rebuilt on every publish, only from what's approved, and a bank of 175 questions per language, written in a recruiter's words, requires on every test run that each one brings the source that should answer it."
+      },
+      "te_sirve": [
+        {
+          "texto": {
+            "es": "Te interesa cómo se prueba un chat de IA sin llamar a un modelo en cada cambio.",
+            "en": "You're interested in how an AI chat is tested without calling a model on every change."
+          },
+          "fuente": "CH-17"
+        },
+        {
+          "texto": {
+            "es": "Quieres saber de dónde salen las respuestas: la hoja de vida, 25 documentos de fondo, las fichas y Métodos.",
+            "en": "You want to know where the answers come from: the résumé, 25 in-depth documents, the sheets and Methods."
+          },
+          "fuente": "CH-16"
+        },
+        {
+          "texto": {
+            "es": "Te preguntas qué pasa con las preguntas que el contenido todavía no contesta.",
+            "en": "You wonder what happens to the questions the content doesn't answer yet."
+          },
+          "fuente": "CH-17"
+        }
+      ],
+      "no_es": [
+        {
+          "texto": {
+            "es": "La integración continua no llama a un modelo real: usa uno simulado; el real se mide aparte, con permiso del dueño.",
+            "en": "Continuous integration never calls a real model: it uses a simulated one; the real one is measured separately, with the owner's permission."
+          },
+          "fuente": "limites"
+        },
+        {
+          "texto": {
+            "es": "No es una búsqueda por significado: es léxica. Si el contenido no dice la palabra, no la encuentra, y el banco lo vigila.",
+            "en": "It isn't a search by meaning: it is lexical. If the content doesn't use the word, it won't find it, and the bank watches for that."
+          },
+          "fuente": "limites"
+        }
+      ],
+      "flujo": {
+        "titulo": {
+          "es": "De un documento aprobado a una respuesta probada",
+          "en": "From an approved document to a tested answer"
+        },
+        "nodos": [
+          {
+            "id": "n1",
+            "tipo": "inicio",
+            "actor": "dueno",
+            "texto": {
+              "es": "Escribe o corrige un documento de fondo",
+              "en": "Writes or edits an in-depth document"
+            }
+          },
+          {
+            "id": "n2",
+            "tipo": "decision",
+            "actor": "dueno",
+            "texto": {
+              "es": "¿Lo marca como aprobado?",
+              "en": "Does he mark it approved?"
+            }
+          },
+          {
+            "id": "n3",
+            "tipo": "fin",
+            "actor": "app",
+            "texto": {
+              "es": "Queda en borrador, fuera del índice",
+              "en": "Stays a draft, out of the index"
+            }
+          },
+          {
+            "id": "n4",
+            "tipo": "decision",
+            "actor": "app",
+            "texto": {
+              "es": "¿Tiene su gemelo en inglés, completo?",
+              "en": "Does it have its full English twin?"
+            }
+          },
+          {
+            "id": "n5",
+            "tipo": "fin",
+            "actor": "app",
+            "texto": {
+              "es": "La publicación se detiene y dice qué falta",
+              "en": "Publishing stops and says what's missing"
+            }
+          },
+          {
+            "id": "n6",
+            "tipo": "tarea",
+            "actor": "app",
+            "texto": {
+              "es": "Arma el índice al publicar",
+              "en": "Builds the index on publish"
+            }
+          },
+          {
+            "id": "n7",
+            "tipo": "tarea",
+            "actor": "app",
+            "texto": {
+              "es": "Las pruebas hacen las 175 preguntas por idioma",
+              "en": "The tests ask the 175 questions per language"
+            }
+          },
+          {
+            "id": "n8",
+            "tipo": "decision",
+            "actor": "app",
+            "texto": {
+              "es": "¿Cada una trae su fuente?",
+              "en": "Does each one bring its source?"
+            }
+          },
+          {
+            "id": "n9",
+            "tipo": "fin",
+            "actor": "app",
+            "texto": {
+              "es": "Se publica, probado",
+              "en": "It ships, tested"
+            }
+          }
+        ],
+        "aristas": [
+          {
+            "de": "n1",
+            "a": "n2"
+          },
+          {
+            "de": "n2",
+            "a": "n3",
+            "etiqueta": {
+              "es": "no",
+              "en": "no"
+            }
+          },
+          {
+            "de": "n2",
+            "a": "n4",
+            "etiqueta": {
+              "es": "sí",
+              "en": "yes"
+            }
+          },
+          {
+            "de": "n4",
+            "a": "n5",
+            "etiqueta": {
+              "es": "no",
+              "en": "no"
+            }
+          },
+          {
+            "de": "n4",
+            "a": "n6",
+            "etiqueta": {
+              "es": "sí",
+              "en": "yes"
+            }
+          },
+          {
+            "de": "n6",
+            "a": "n7"
+          },
+          {
+            "de": "n7",
+            "a": "n8"
+          },
+          {
+            "de": "n8",
+            "a": "n9",
+            "etiqueta": {
+              "es": "sí",
+              "en": "yes"
+            }
+          },
+          {
+            "de": "n8",
+            "a": "n1",
+            "etiqueta": {
+              "es": "no: se corrige",
+              "en": "no: fix it"
+            },
+            "vuelta": true
+          }
+        ]
+      },
+      "fichas": [
+        {
+          "tipo": "diferencia",
+          "pregunta": {
+            "es": "¿Banco de preguntas o pasada en vivo?",
+            "en": "Question bank or live pass?"
+          },
+          "respuesta": {
+            "es": "El banco prueba que el contenido contesta; la pasada en vivo, lo que el modelo real hace con él.",
+            "en": "The bank proves the content answers; the live pass, what the real model does with it."
+          },
+          "lados": [
+            {
+              "titulo": {
+                "es": "El banco",
+                "en": "The bank"
+              },
+              "texto": {
+                "es": "175 preguntas por idioma en cada corrida de pruebas, con un proveedor simulado: mide que la búsqueda traiga la fuente.",
+                "en": "175 questions per language on every test run, with a simulated provider: it checks that the search brings the source."
+              }
+            },
+            {
+              "titulo": {
+                "es": "La pasada en vivo",
+                "en": "The live pass"
+              },
+              "texto": {
+                "es": "Las preguntas de la guía al modelo real, solo en el equipo del dueño y con su permiso: marca la voz, las ausencias, los motivos y las fuentes.",
+                "en": "The guide's questions to the real model, only on the owner's machine and with his permission: it marks voice, absences, motives and sources."
+              }
+            }
+          ],
+          "fuente": "CH-18"
+        },
+        {
+          "tipo": "decision",
+          "pregunta": {
+            "es": "Una pregunta del banco se pone en rojo: ¿qué se hace?",
+            "en": "A bank question turns red: what's done?"
+          },
+          "respuesta": {
+            "es": "Hay dos salidas honestas, y ninguna es aflojar la prueba: si el contenido no lo dice con las palabras de quien pregunta, se corrige el contenido; si otra fuente la contesta mejor, se corrige la fuente esperada. Inventar contenido para que pase está prohibido.",
+            "en": "There are two honest ways out, and neither is loosening the test: if the content doesn't say it in the asker's words, the content is fixed; if another source answers it better, the expected source is fixed. Making up content so it passes is forbidden."
+          },
+          "fuente": "CH-17"
+        },
+        {
+          "tipo": "concepto",
+          "pregunta": {
+            "es": "¿Qué entra al índice del chat?",
+            "en": "What goes into the chat's index?"
+          },
+          "respuesta": {
+            "es": "La hoja de vida, la lista de apps, los documentos de fondo aprobados, las fichas del Portafolio y las publicaciones de Métodos, bloque a bloque: 1939 fragmentos en español y 1930 en inglés en la última medición. Un documento en borrador no entra, y uno aprobado exige su gemelo en inglés.",
+            "en": "The résumé, the apps list, the approved in-depth documents, the Portfolio sheets and the Methods publications, block by block: 1939 fragments in Spanish and 1930 in English at the last count. A draft document doesn't go in, and an approved one requires its English twin."
+          },
+          "fuente": "CH-16"
+        },
+        {
+          "tipo": "decision",
+          "pregunta": {
+            "es": "¿Qué pasa con las preguntas que el contenido no contesta todavía?",
+            "en": "What happens to the questions the content doesn't answer yet?"
+          },
+          "respuesta": {
+            "es": "Se declaran como huecos y no se inventan: hoy son 3 por idioma (el salario y la disponibilidad para empezar o para viajar), y cada una espera algo que solo Henry decide. Mientras tanto reciben el texto fijo. La prueba las cuenta y les pone un techo: la lista solo puede encoger.",
+            "en": "They are declared as gaps and never made up: today there are 3 per language (salary and availability to start or to travel), and each waits for something only Henry decides. Meanwhile they get the fixed text. The test counts them and caps them: the list can only shrink."
+          },
+          "fuente": "CH-17"
+        }
+      ]
+    }
+  ],
+  "en": {
+    "promesa": {
+      "tagline": "Ask the résumé: it answers with what's on record and cites its source.",
+      "intro": "CV Viva's chat answers in Spanish or English about Henry Rincón's career, always in the third person and only with the site's content: the résumé, 25 in-depth documents, the Portfolio sheets and the Methods publications. Every claim carries its citation to the section that backs it, and if the AI provider goes down, it keeps answering with local search.",
+      "para_quien": "For recruiters who want a specific answer (“what did he do at Vesting?”, “what does he know about Microsoft Fabric?”) without reading the whole site, and for anyone who wants to check it: every answer says where it comes from and takes you there. What isn't on record isn't answered, and the chat says so.",
+      "diferencial": "A résumé chat that doesn't make things up takes more than a good prompt. Here, what isn't on record (what he didn't do, what he doesn't know, salary, a credential he doesn't hold) gets a fixed text before it reaches the model, without spending a token; leaving Vesting has its own fixed answer with its citation, and the panel shows only the sources the answer cites. Behind it sit an index rebuilt on every publish and a bank of 175 outside questions per language that proves, on every change, that the content answers. And it never goes silent: if the provider fails, the same search runs in the browser."
+    },
+    "grupos": {
+      "1": {
+        "nombre": "Answers with the source in sight",
+        "linea": "Every claim carries its number, and every number leads to the section of the site that backs it."
+      },
+      "2": {
+        "nombre": "Not on record, not answered",
+        "linea": "Absences, salary or an unrelated question get a fixed text, without calling the model or spending a token."
+      },
+      "3": {
+        "nombre": "It never goes silent",
+        "linea": "If the provider fails or runs out of quota, local search takes over; switching provider is switching a variable."
+      },
+      "4": {
+        "nombre": "A gate and a quota",
+        "linea": "Name, email and a code before the first question; a quota per person and a blocklist."
+      },
+      "5": {
+        "nombre": "The conversation is yours",
+        "linea": "It survives reloads, navigation and a language switch; it expires after 8 hours and clears with one click."
+      },
+      "6": {
+        "nombre": "Tested question by question",
+        "linea": "An index rebuilt on every publish and a question bank that proves, in two languages, that the content answers."
+      }
+    },
+    "features": {
+      "CH-01": {
+        "nombre": "Answers that cite the résumé",
+        "que_hace": "Whoever asks gets two or three paragraphs based only on the site's content, and every claim ends with its citation. The chip says which source the sentence came from and which section it leads to, without losing the conversation."
+      },
+      "CH-02": {
+        "nombre": "Always in the third person",
+        "que_hace": "The chat talks about Henry, never as Henry. The in-depth content is in the first person because it is his voice, and the answer moves it to the third; a test flags the owner's voice if it slips in."
+      },
+      "CH-03": {
+        "nombre": "The sheets and Methods, citable too",
+        "que_hace": "The index adds the Portfolio sheets and the Methods publications, block by block: a question about an app or a method brings its citation, which leads to the sheet or the exact block."
+      },
+      "CH-04": {
+        "nombre": "One text for what isn't on record",
+        "que_hace": "“What has he never done?”, his weaknesses, a credential he doesn't hold, salary or availability all get the same fixed text, in the page's language, with no sources and without calling the model."
+      },
+      "CH-05": {
+        "nombre": "Leaving Vesting, with its citation",
+        "que_hace": "“Why did he leave Vesting?” has a fixed answer that tells how the stage closed, with its citation to the Career section. It adds no causes the content doesn't give and spends no tokens."
+      },
+      "CH-06": {
+        "nombre": "Unrelated questions, out",
+        "que_hace": "The weather, a joke, a recipe or a request for code get a friendly fixed answer that invites a question about the career, with no sources and without calling the model."
+      },
+      "CH-07": {
+        "nombre": "Local search if the provider fails",
+        "que_hace": "If the provider goes down or runs out of quota, the chat switches to “Local search” and shows the fragments that best answer. After three failures in a row it stops trying for a minute."
+      },
+      "CH-08": {
+        "nombre": "Five providers, one variable",
+        "que_hace": "Groq, Gemini, Azure with Microsoft Foundry (formerly Azure AI Foundry), Anthropic or a self-hosted OpenAI-compatible server: switching provider is switching an environment variable, without touching code."
+      },
+      "CH-09": {
+        "nombre": "A switch that turns it off",
+        "que_hace": "One variable turns the whole chat off: the button disappears from every page and the server route answers that it is off."
+      },
+      "CH-10": {
+        "nombre": "The gate: name, email and a code",
+        "que_hace": "Before the first question, the visitor leaves their name and email, accepts the Law 1581 notice and receives a six-digit code valid for ten minutes. With it they get in and don't register again for 30 days."
+      },
+      "CH-11": {
+        "nombre": "Every conversation, logged with consent",
+        "que_hace": "Every question is logged with its answer, its sources and its mode (AI, fixed text or local search), and only the owner reads it. Anyone who wants it deleted asks from Contact."
+      },
+      "CH-12": {
+        "nombre": "A quota per person and a blocklist",
+        "que_hace": "Each email gets 20 questions every 24 hours, counted in the log, and whoever hits the cap is asked to come back tomorrow. An email on the blocklist gets no code and can't ask."
+      },
+      "CH-13": {
+        "nombre": "Tell Henry without leaving the chat",
+        "que_hace": "If something fails, “Something not working? Tell Henry” sends a report with an optional note. Inside the chat it doesn't ask for the email: the server takes it from the session."
+      },
+      "CH-14": {
+        "nombre": "It stays in your browser, and you delete it",
+        "que_hace": "The conversation survives a page reload, following a link or switching language. It clears itself 8 hours after the last message, and “Delete conversation” removes it from that browser."
+      },
+      "CH-15": {
+        "nombre": "In Spanish and English",
+        "que_hace": "The panel, the fixed answers and the sources come out in the page's language, and the refusal lists read both languages, whatever the page's language."
+      },
+      "CH-16": {
+        "nombre": "An index built on publish",
+        "que_hace": "Every publish rebuilds the index from the résumé, the in-depth documents, the sheets and Methods. A draft document doesn't go in, and an approved one requires its English twin."
+      },
+      "CH-17": {
+        "nombre": "A bank of outside questions",
+        "que_hace": "Every test run asks 175 questions per language, in a recruiter's words, and requires each one to bring the source that should answer it."
+      },
+      "CH-18": {
+        "nombre": "The real-provider test, with permission",
+        "que_hace": "Continuous integration uses a simulated provider. A separate pass, only on the owner's machine and with his permission, asks the guide's questions to the real model and marks every answer."
+      }
+    },
+    "metricas": {
+      "funcionalidades": {
+        "etiqueta": "Chat features",
+        "unidad": "features",
+        "detalle": "One per chat feature documented in docs/MANUAL-DE-USO.md at c3e4d2c, matched section by section; the list is in the planner's 028 reply."
+      },
+      "fragmentos_del_indice": {
+        "etiqueta": "Index fragments",
+        "unidad": "fragments",
+        "detalle": "Output of scripts/build-chat-index.mjs in the build of a copy of c3e4d2c on 2026-11-01: 1939 fragments in Spanish and 1930 in English."
+      },
+      "documentos_a_fondo": {
+        "etiqueta": "In-depth documents indexed",
+        "unidad": "documents",
+        "detalle": "Same build output: 25 of 25 in-depth documents approved and indexed in each language."
+      },
+      "preguntas_del_banco": {
+        "etiqueta": "Bank questions, per language",
+        "unidad": "questions",
+        "detalle": "Legitimate questions in tests/fixtures/banco-de-preguntas.es.yaml at c3e4d2c, and the same 175 in English; the bank also holds 15 unrelated, 1 refusal and 3 uncovered questions per language."
+      },
+      "pruebas_e2e_del_chat": {
+        "etiqueta": "Chat end-to-end tests",
+        "unidad": "tests",
+        "detalle": "Output of `playwright test --list` on a copy of c3e4d2c: chat.spec.ts and chat-conversacion.spec.ts, 47 on Chromium and 47 on mobile, with the simulated provider."
+      },
+      "proveedores_conmutables": {
+        "etiqueta": "Switchable providers",
+        "unidad": "providers",
+        "detalle": "PROVEEDORES_CHAT in src/lib/ia/provider.ts at c3e4d2c, without the tests' simulated one: Groq, Gemini, Azure, Anthropic and an OpenAI-compatible one."
+      },
+      "fuentes_por_respuesta": {
+        "etiqueta": "Fragments per answer",
+        "unidad": "fragments",
+        "detalle": "TOP_K_CONTEXTO in src/lib/ia/retrieval.ts: the four fragments the model receives numbered and can cite."
+      },
+      "tope_diario": {
+        "etiqueta": "Questions per person every 24 hours",
+        "unidad": "questions",
+        "detalle": "TOPE_DIARIO_DEFECTO in src/lib/chat-registro/schemas.ts; the owner changes it with the CHAT_TOPE_DIARIO variable, from 1 to 1000."
+      },
+      "tokens_en_respuestas_fijas": {
+        "etiqueta": "Tokens in fixed answers",
+        "unidad": "tokens",
+        "detalle": "By construction: the refusal, unrelated questions and leaving Vesting are answered in src/app/api/chat/route.ts before the provider is resolved, so they don't call the model."
+      },
+      "costo_operacion_mensual": {
+        "etiqueta": "Monthly operating cost",
+        "unidad": "USD",
+        "detalle": "Declared by the manual: the production provider, Groq, is on its Free plan, which doesn't charge and only cuts off when the quota runs out; if it does, the chat switches to local search."
+      }
+    },
+    "stack": [
+      {
+        "nombre": "Vercel AI SDK",
+        "papel": "the streamed answer and the adapter that switches provider with a variable"
+      },
+      {
+        "nombre": "Groq and four more providers",
+        "papel": "the production model on its free plan; Gemini, Azure with Microsoft Foundry, Anthropic or a self-hosted server plug in without touching code"
+      },
+      {
+        "nombre": "MiniSearch",
+        "papel": "the lexical index built on every publish, used by the server and by the browser's local search"
+      },
+      {
+        "nombre": "Supabase",
+        "papel": "the log of every conversation, the per-email quota and the blocklist"
+      },
+      {
+        "nombre": "Resend",
+        "papel": "the gate's six-digit code and the reports that reach the owner"
+      },
+      {
+        "nombre": "Zod",
+        "papel": "validates every question (800 characters, 12 messages) and every index fragment before building it"
+      },
+      {
+        "nombre": "Next.js",
+        "papel": "the chat's server route, with the session signed in a cookie and the prompt assembled only there"
+      },
+      {
+        "nombre": "Vitest and Playwright",
+        "papel": "the tests with a simulated provider: continuous integration never calls a real model"
+      }
+    ],
+    "privacidad": "Before the first question, a name and email are requested and the Law 1581 notice is accepted. Every question is logged with its answer, its sources, its mode and the name and email of whoever asked; no visitor can read that log, only the owner, and it is deleted on request from Contact. The browser copy keeps neither the name nor the email, only the questions and answers, and it expires after 8 hours. The model only sees public fragments of the site.",
+    "enlaces_razon": "The chat lives inside CV Viva, in the floating button on every page, and its address isn't published: it's the Portfolio's zero-links rule.",
+    "complemento": {
+      "titular": "A chat that answers for the résumé only with what's on record, cites the section that backs it, never claims what isn't on record and, if the AI provider goes down, keeps answering with local search.",
+      "limites": [
+        "The search is lexical: if the content doesn't use the asker's word, it won't find it; the question bank watches for that.",
+        "The refusal and leaving-Vesting lists are a floor, not a ceiling: an unusual question can reach the model.",
+        "The per-minute rate lives in each server's memory and isn't exact; the daily quota is.",
+        "The tests use a simulated provider: what the real model answers is measured separately, with the owner's permission."
+      ],
+      "nunca": [
+        "Claims that Henry didn't do, doesn't know or doesn't have something.",
+        "Speaks as if it were Henry: it always answers in the third person.",
+        "Attributes motives or causes the résumé doesn't state.",
+        "Shows a source its answer doesn't cite.",
+        "Answers without the gate: no name, email and code, no chat."
+      ],
+      "proceso": {
+        "titulo": "From the question to the answer with its source",
+        "carriles": {
+          "visita": "The asker",
+          "chat": "The chat",
+          "proveedor": "The AI provider"
+        },
+        "pasos": {
+          "ini": "Wants to know something about the career",
+          "registra": "Leaves name and email and accepts the notice",
+          "codigo": "Sends a six-digit code",
+          "pregunta": "Gets in with the code and asks",
+          "cupo": "Any quota left today?",
+          "tope": "Asks them to come back tomorrow",
+          "fin-tope": "",
+          "consta": "Is it about what's on record?",
+          "fija": "Gives a fixed text, spending no tokens",
+          "busca": "Finds the fragments that answer",
+          "responde": "Does the provider answer?",
+          "redacta": "Writes in the third person and cites [n]",
+          "local": "Shows the fragments in local search",
+          "fuentes": "Shows only the sources the answer cites",
+          "registro": "Logs the question, the answer and its mode",
+          "cita": "Does the answer carry a citation?",
+          "sigue": "Follows the citation to the site's section",
+          "fin": "Reaches the evidence",
+          "fin-sin-cita": ""
+        },
+        "etiquetas": {
+          "cupo>consta": "yes",
+          "cupo>tope": "no: reached 20",
+          "consta>busca": "yes",
+          "consta>fija": "no: not on record or unrelated",
+          "responde>redacta": "yes",
+          "responde>local": "no: down or out of quota",
+          "cita>sigue": "yes",
+          "cita>fin-sin-cita": "no"
+        },
+        "anotaciones": {
+          "registra": "No code, no chat: it's valid for ten minutes and five tries, and the session lasts 30 days in that browser.",
+          "cupo": "20 questions every 24 hours per email and 10 per minute per connection; a blocked email doesn't get in.",
+          "fija": "Absences, credentials he doesn't hold, salary and unrelated topics: fixed text. Leaving Vesting carries its citation.",
+          "redacta": "Only with the four retrieved fragments, never speaking as Henry; up to 700 tokens and 30 seconds.",
+          "local": "The same index runs in the browser: the chat doesn't go silent and says so with “Local search”.",
+          "registro": "Who asked, what was answered, with which sources and in which mode: only the owner reads it."
+        }
+      }
+    }
+  }
+}

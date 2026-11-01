@@ -436,7 +436,7 @@ cifra `clamp(3.5rem,8vw,4.75rem)`; tres columnas dejaban dos huérfanos.
   **se mide en disco**, no se escribe.
 - **Muestra de app** (escaparate `/portafolio`): card paper-0, borde paper-2, `r-lg`, `sh-1`. Lleva
   chip de estado + chip de ciclo, nombre en Fraunces, promesa en Fraunces menor, **portada** (la
-  pantalla de entrada de la app; la **tira** esquemática solo si la app aún no la trae) enmarcada en paper-1, para-quién en `ink-2`, conteos en mono y cierre «ver la ficha».
+  pantalla de entrada de la app; la **tira** esquemática solo si la app aún no la trae) enmarcada en paper-1, para-quién en `ink-2`, conteos en mono y cierre «ver la ficha técnica» (o «ver brochure», en la app que ya abre en él).
   El enlace estira su área de clic a toda la card (`after:absolute inset-0`) **conservando el
   nombre de la app como nombre accesible** — una sola parada de tabulador, y nunca «leer más».
   **Desde S9 su nombre es un `h3`** (cuelga del `h2` del bloque de categoría) y es **el nombre
@@ -544,7 +544,8 @@ cifra `clamp(3.5rem,8vw,4.75rem)`; tres columnas dejaban dos huérfanos.
   cruda miente igual que una maqueta que finge ser foto: las capturas llegan tal cual las toma la
   planeadora (`scripts/tema-cv-viva.mjs` se conserva: es el tema que ella puede leer para
   repintar una toma).
-- **Brochure de una app** (`/portafolio/apps/<app>/brochure`, S28, ADR-030): una plantilla para las doce, con
+- **Brochure de una app** (S28, ADR-030; la entrada de la app desde el S30: `/portafolio/apps/<app>` en la que ya
+  tiene su contenido v2 y en la casa, `/portafolio/apps/<app>/brochure` en las demás): una plantilla para las doce, con
   la gramática de la maqueta aprobada y los tokens de esta página; su hoja (`brochure.css`) vive anidada bajo
   `[data-brochure]` en `@layer components` —nada global—, y `tests/unit/brochure-contraste.test.ts` la lee
   contra la tabla de contraste (ningún hex suelto, y los `--color-*` globales iguales a la paleta).
@@ -552,10 +553,11 @@ cifra `clamp(3.5rem,8vw,4.75rem)`; tres columnas dejaban dos huérfanos.
     uno con su tinta (`--ac` / `--ac-ink`, ≥ 4.5 : 1 por par). Dos apps por acento; la asignación es de forma y se
     revisa en el gate humano del hito.
   - **Token «tenue sobre oscuro»** (`--tenue-oscuro`, el `ink-3` de la maqueta que sobre fondo oscuro mide
-    ≈ 6,9 : 1): permitido como color de texto **solo** en las seis reglas de las secciones oscuras que lista
+    ≈ 6,9 : 1): permitido como color de texto **solo** en las diez reglas de las secciones oscuras que lista
     la prueba (el buscador de la barra sobre la portada, la barra del dispositivo, el pie de pantalla, el
-    rótulo de la cinta, el pie final y las teclas del Recorrido); un séptimo uso falla. `ink-3` sigue vetado como texto en la
-    parte clara.
+    rótulo de la cinta, el pie final, las teclas del Recorrido y, en «Úsala», el ejemplo de un campo, la
+    nota bajo un formulario, la nota de «Dónde está» y el rótulo de una vecina); un uso más falla (una regla
+    por línea en la hoja, para que la prueba las cuente). `ink-3` sigue vetado como texto en la parte clara.
   - **Movimiento ambiental con pausa:** la cinta de pantallas (un dock que crece ×2,2 con `transform`), las
     olas, las insignias y la portada se mueven solas; un botón de pausa visible en la franja de la cinta las
     detiene (`[data-b-quieto]`) y con «reducir movimiento» nada se mueve. Entradas: `.entra` / `.aparece` con
@@ -566,6 +568,21 @@ cifra `clamp(3.5rem,8vw,4.75rem)`; tres columnas dejaban dos huérfanos.
     lleva el índice. Las imágenes son diferidas (`Captura`): nada se pide antes de la primera pintura.
   - **Impresión:** carta, vertical; se abre todo, los flujos se trazan a 700 px y las secciones lejanas
     (`content-visibility: auto` al leer) se pintan enteras.
+  - **«Úsala» (05, S30):** el cierre sobre tinta lleva la lista de espera, el roadmap votable, «Propón una
+    funcionalidad», «Dónde está» y las vecinas (la casa: «Escríbeme», «Dónde está» y «Volver a las apps»).
+    Superficies translúcidas (`rgba(255,255,255,.04–.06)`), campos de 16 px y blancos táctiles de 44 px. Los
+    formularios son los de la app con **`tono="tinta"`**: la hoja del brochure vive en `@layer components` y
+    no puede pisar las utilidades de Tailwind (van en una capa posterior), así que en tinta el campo **no
+    lleva ninguna utilidad de color** (`src/components/forms/campos.tsx` elige entre `Input`/`Label`/`Button`
+    y el `<input>`/`.boton` desnudos) y lo pinta la hoja; el tono `claro` (la ficha) no cambió. Las ideas más
+    allá de las cinco primeras nacen en el HTML con **`data-plegada`**, no con `hidden`: el preflight de
+    Tailwind fuerza `[hidden]{display:none!important}` en una capa anterior y ni la impresión ni el
+    `<noscript>` podrían mostrarlas. **Al imprimir:** sin formularios, sin votar, sin «Ver las N ideas», sin
+    vecinas y con todas las ideas. Los conteos del voto se piden cuando el roadmap se acerca a la pantalla
+    (`diferido`), no al cargar.
+  - **Contrato v2 (S30):** `enlaces_razon {es, en}` de primer nivel (manda sobre `en.enlaces_razon` y sobre
+    la razón del export), los actores `visita` («Quien visita» · `--sage-ink`) y `proveedor` («El
+    proveedor» · `--peach-ink`) con su nombre siempre a la vista, y los íconos `conversacion` y `llave`.
 - **Stack explicado** (ficha técnica, los cuatro frentes): las cápsulas son la vista comprimida y no llevan
   `title`; debajo, un `<details data-stack-detalle>` nativo («Para qué sirve cada uno») despliega
   «nombre — papel». Sin JavaScript y sin tooltip: el teléfono no tiene cursor. Su forma no depende de

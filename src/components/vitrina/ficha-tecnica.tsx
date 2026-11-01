@@ -4,6 +4,7 @@ import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import type { FichaTecnica as Datos } from "@/lib/vitrina/ficha-tecnica/schema";
 import { COLOR_ESTADO, intlLocale } from "@/lib/vitrina/estilos";
+import { HITOS_CONOCIDOS } from "@/lib/vitrina/ficha-tecnica/hitos";
 import { numerarSecciones } from "@/lib/vitrina/ficha-tecnica/secciones";
 import type { FuenteMetrica } from "@/lib/vitrina/schemas";
 import { GaleriaCarrusel } from "./galeria-carrusel";
@@ -83,15 +84,6 @@ function Seccion({
     </section>
   );
 }
-
-const HITOS_CONOCIDOS = new Set([
-  "ciclo",
-  "sprints",
-  "sellada",
-  "construccion",
-  "version",
-  "decisiones",
-]);
 
 export async function FichaTecnica({
   datos,

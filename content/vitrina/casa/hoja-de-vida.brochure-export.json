@@ -12,14 +12,14 @@
     "enlaces.produccion": "null cuando la app no tiene URL pública. `razon` explica por qué, y es lo que la vitrina muestra en lugar del enlace. Nunca se rellena con un enlace de repositorio ni con una promesa."
   },
   "schema_version": "1.0.0",
-  "actualizado": "2026-10-31",
+  "actualizado": "2026-11-01",
   "app": {
     "slug": "hoja-de-vida",
     "nombre": "CV Viva",
     "ciclo": "H-2",
     "estado": "inicial",
     "sellado_en": null,
-    "sprints_cerrados": 26,
+    "sprints_cerrados": 28,
     "version_repo": "0.1.0"
   },
   "promesa": {
@@ -53,8 +53,8 @@
           },
           {
             "id": "CV-03",
-            "nombre": "Ocho logros con su número",
-            "que_hace": "Ocho logros en cuatro columnas, cada uno con su número grande y de dónde sale. Los años de trayectoria no se escriben a mano: se calculan en cada publicación desde la fecha de inicio.",
+            "nombre": "Doce logros con su número",
+            "que_hace": "Doce logros en tres filas de cuatro, cada uno con su número grande y de dónde sale. Dos no se escriben a mano: los años de trayectoria se calculan desde la fecha de inicio y los agentes propios se cuentan de sus fichas publicadas.",
             "seccion_manual": "Alimentar la CV Viva (editar tu contenido)"
           },
           {
@@ -65,8 +65,8 @@
           },
           {
             "id": "CV-05",
-            "nombre": "Skills por grupo, sin porcentajes",
-            "que_hace": "Nueve grupos de herramientas, cada uno en su tarjeta con un ícono dibujado en casa. No hay porcentajes ni niveles de dominio: lo que está en exploración o es un prototipo lo dice en su chip.",
+            "nombre": "Skills: nueve áreas para explorar",
+            "que_hace": "Nueve áreas numeradas flotan en un rectángulo oscuro: se agarran, se lanzan y, al elegir una, sus herramientas quedan alrededor, unidas por una línea. «Ver todo en lista» muestra las nueve tarjetas. Sin porcentajes ni niveles de dominio.",
             "seccion_manual": "Perfil, Certificaciones y Skills en la HOME"
           },
           {
@@ -106,7 +106,7 @@
           {
             "id": "CV-09",
             "nombre": "Cuatro frentes, cada uno con su espacio",
-            "que_hace": "Apps, agentes, investigaciones y tableros: cada frente con su caja, su estado y cuántos productos tiene. Esa cuenta no se escribe: se mide del contenido publicado.",
+            "que_hace": "Apps, agentes, tableros e investigaciones: cada frente con su caja, su estado y cuántos productos tiene. Esa cuenta no se escribe: se mide del contenido publicado.",
             "seccion_manual": "El portafolio: cuatro frentes"
           },
           {
@@ -129,9 +129,9 @@
           },
           {
             "id": "CV-13",
-            "nombre": "Una pantalla por funcionalidad",
-            "que_hace": "La ficha completa agrupa las funcionalidades en tarjetas que se abren al llegar leyendo, y cada grupo abre con un carrusel con la pantalla de cada una: la app corriendo de verdad, con datos inventados.",
-            "seccion_manual": "Las apps dentro del portafolio"
+            "nombre": "Un brochure por app, con sus pantallas",
+            "que_hace": "Cada app tiene su brochure: la promesa con sus cifras y pantallas, un capítulo por grupo de funcionalidades, el proceso de punta a punta y las cifras con su procedencia. Tiene índice, buscador, un Recorrido de las pantallas y se imprime.",
+            "seccion_manual": "El brochure de cada app"
           },
           {
             "id": "CV-14",
@@ -258,7 +258,7 @@
       "valor": 28,
       "unidad": "funcionalidades",
       "fuente": "medido",
-      "detalle": "Una por función de docs/MANUAL-DE-USO.md en b9acf15 que ve o usa quien visita o el dueño, cuadrada sección por sección; las del chat van en su propia ficha. La lista y lo que se dejó fuera, en la respuesta 028 de la planeadora."
+      "detalle": "Una por función de docs/MANUAL-DE-USO.md en c3e4d2c que ve o usa quien visita o el dueño, cuadrada sección por sección; las del chat van en su propio brochure. La lista y lo que se dejó fuera, en la respuesta 028 de la planeadora."
     },
     {
       "clave": "casos_de_estudio",
@@ -266,7 +266,7 @@
       "valor": 9,
       "unidad": "casos",
       "fuente": "medido",
-      "detalle": "Proyectos con caso de estudio en data/cv.es.yaml en b9acf15: uno por cada experiencia de la trayectoria, en español y en inglés."
+      "detalle": "Proyectos con caso de estudio en data/cv.es.yaml en c3e4d2c: uno por cada experiencia de la trayectoria, en español y en inglés."
     },
     {
       "clave": "publicaciones_metodos",
@@ -274,39 +274,39 @@
       "valor": 9,
       "unidad": "publicaciones",
       "fuente": "medido",
-      "detalle": "Archivos de data/metodo/ en b9acf15; la lista de /metodos las cuenta desde la misma carpeta."
+      "detalle": "Archivos de data/metodo/ en c3e4d2c; la lista de /metodos las cuenta desde la misma carpeta."
     },
     {
       "clave": "pruebas_unitarias",
       "etiqueta": "Pruebas unitarias y de integración",
-      "valor": 2628,
+      "valor": 3486,
       "unidad": "pruebas",
       "fuente": "medido",
-      "detalle": "En verde en la CI del #106 (b9acf15, 2026-10-29): 2628 en 96 archivos, según el cierre del Sprint 027 de la app."
+      "detalle": "En verde en el cierre del Sprint 029 de la app (c3e4d2c, #108, 2026-11-01): 3486 en 109 archivos. La planeadora no las corrió; la CI del #108 cerró en verde."
     },
     {
       "clave": "pruebas_e2e",
       "etiqueta": "Pruebas de punta a punta",
-      "valor": 1049,
+      "valor": 1210,
       "unidad": "pruebas",
       "fuente": "medido",
-      "detalle": "Salida de `playwright test --list` sobre una copia de b9acf15 el 2026-10-31: 1049 en 17 archivos (Chromium, móvil y las de WebKit). En la CI del #106 pasaron 1014 y 35 quedan omitidas a propósito."
+      "detalle": "Salida de `playwright test --list` sobre una copia de c3e4d2c el 2026-11-01: 1210 en 19 archivos (Chromium, móvil y las de WebKit). En el cierre del Sprint 029 pasaron 1155 y 55 quedan omitidas a propósito."
     },
     {
       "clave": "pantallas",
       "etiqueta": "Pantallas del sitio",
-      "valor": 16,
+      "valor": 15,
       "unidad": "pantallas",
       "fuente": "medido",
-      "detalle": "Archivos page.tsx bajo src/app/ en b9acf15, contados con find: incluyen la de mantenimiento, el 404 de cada idioma y la página de app que el Sprint 028 retira."
+      "detalle": "Archivos page.tsx bajo src/app/ en c3e4d2c, contados con find: incluyen la de mantenimiento, el 404 de cada idioma y la del brochure, una sola para las doce."
     },
     {
       "clave": "decisiones_registradas",
       "etiqueta": "Decisiones registradas",
-      "valor": 29,
+      "valor": 30,
       "unidad": "decisiones",
       "fuente": "medido",
-      "detalle": "Archivos numerados de decisions/ en b9acf15: de ADR-001 a ADR-029."
+      "detalle": "Archivos numerados de decisions/ en c3e4d2c: de ADR-001 a ADR-030."
     },
     {
       "clave": "idiomas",
@@ -322,7 +322,7 @@
       "valor": 0,
       "unidad": "USD",
       "fuente": "declarado",
-      "detalle": "Lo declaran data/apps.yaml («todo en free tier») y el manual: Vercel en su plan Hobby (ADR-004) y Resend en su plan gratis, de 100 correos al día. No incluye el dominio propio."
+      "detalle": "Lo declaran ADR-004 (Vercel en su plan Hobby) y el manual (Resend en su plan gratis, de 100 correos al día). No incluye el dominio propio."
     }
   ],
   "stack": [
@@ -363,14 +363,14 @@
     "votos_sin_datos_personales": true,
     "formularios_sin_base_de_datos": true,
     "contenido_en_html_estatico": true,
-    "detalle": "Un voto del roadmap guarda la app, la funcionalidad y la fecha: ni la IP ni la identidad de quien vota (Ley 1581). El aviso de «ya votaste» vive en el navegador de quien visita. «Escríbeme», la lista de espera y las propuestas no se guardan en ninguna base: viajan por correo al dueño. El correo que se muestra en la página no es el que recibe los mensajes. Lo que hace el chat con los datos está en su propia ficha."
+    "detalle": "Un voto del roadmap guarda la app, la funcionalidad y la fecha: ni la IP ni la identidad de quien vota (Ley 1581). El aviso de «ya votaste» vive en el navegador de quien visita. «Escríbeme», la lista de espera y las propuestas no se guardan en ninguna base: viajan por correo al dueño. El correo que se muestra en la página no es el que recibe los mensajes. Lo que hace el chat con los datos está en su propio brochure."
   },
   "enlaces": {
     "produccion": null,
-    "razon": "Es el sitio que estás recorriendo. Esta ficha no publica su dirección: es la regla de cero enlaces del Portafolio.",
+    "razon": "Es el sitio que estás recorriendo, y su dirección no se publica: es la regla de cero enlaces del Portafolio.",
     "repositorio": null,
     "razon_repositorio": "El repositorio no se enlaza desde el Portafolio: ninguna ficha publica enlaces de acceso ni de código.",
-    "brochure_archivo": "data/apps.yaml (bloque brochure, ADR-012)",
-    "brochure_ruta_local": "/apps/hoja-de-vida"
+    "brochure_archivo": "sin archivo propio: la plantilla del brochure lo arma desde esta entrega (ADR-030)",
+    "brochure_ruta_local": "/portafolio/apps/hoja-de-vida"
   }
 }

@@ -5,8 +5,11 @@ import { existsSync, readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { parse } from "yaml";
+import { ICONOS as DIBUJOS } from "@/components/brochure/iconos";
 import {
   ACENTOS,
+  ACTORES,
+  ICONOS,
   contenidoSchema,
   leerContenido,
   problemasDeContenido,
@@ -299,6 +302,41 @@ describe("la FORMA del contenido v2", () => {
       "citron",
     ]);
     expect(contenidoSchema.shape.acento.options).toHaveLength(6);
+  });
+});
+
+describe("lo que pidió la tanda 1 (S30)", () => {
+  it("`enlaces_razon` de primer nivel va en los dos idiomas, o no va", () => {
+    expect(
+      leerContenido(
+        con((c) => (c.enlaces_razon = bi("Se conoce por este brochure"))),
+      ).ok,
+    ).toBe(true);
+    expect(
+      leerContenido(con((c) => (c.enlaces_razon = { es: "solo español" }))).ok,
+    ).toBe(false);
+  });
+
+  it("quien visita y el proveedor son actores; uno inventado sigue fuera", () => {
+    expect(ACTORES).toEqual(expect.arrayContaining(["visita", "proveedor"]));
+    for (const actor of ["visita", "proveedor"])
+      expect(
+        leerContenido(con((c) => (c.grupos[0].flujo.nodos[0].actor = actor)))
+          .ok,
+        actor,
+      ).toBe(true);
+    expect(
+      leerContenido(con((c) => (c.grupos[0].flujo.nodos[0].actor = "cliente")))
+        .ok,
+    ).toBe(false);
+  });
+
+  it("la conversación y la llave son íconos, y la hoja sabe dibujarlos", () => {
+    for (const i of ["conversacion", "llave"] as const) {
+      expect(ICONOS, i).toContain(i);
+      expect(leerContenido(con((c) => (c.iconos["1"] = i))).ok, i).toBe(true);
+      expect(DIBUJOS[i], i).toMatch(/<(path|circle) /);
+    }
   });
 });
 

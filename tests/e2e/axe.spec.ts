@@ -2,6 +2,7 @@ import { existsSync, readdirSync, readFileSync } from "node:fs";
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 import { parse } from "yaml";
+import { entradasBrochure } from "../../scripts/entradas-brochure.mjs";
 
 // El scan audita el estado final de la página, no frames intermedios de
 // animación (elementos a media opacidad disparan falsos positivos de contraste)
@@ -58,6 +59,12 @@ const slugsCasa = readdirSync("content/vitrina/casa")
       ).app.slug,
   );
 if (slugsCasa.length !== 2) throw new Error("content/vitrina/casa sin las dos");
+// Las que abren en su brochure (S30): su brochure vive en su entrada, no en `/brochure`.
+const ENTRADAS = entradasBrochure();
+const brochureDe = (l: string, s: string) =>
+  ENTRADAS.includes(s)
+    ? `/${l}/portafolio/apps/${s}`
+    : `/${l}/portafolio/apps/${s}/brochure`;
 
 // Los frentes (ADR-015 · S7): cada uno tiene su página —escaparate si está
 // abierto, «en preparación» si no— y los abiertos tienen además una ruta por
@@ -84,48 +91,51 @@ const piezasDe = (frente: string): string[] => {
     );
 };
 
+// Sin repetidas: la entrada de una app que abre en su brochure es también su brochure.
 const RUTAS = [
-  "/es",
-  "/en",
-  ...slugsCasos.flatMap((s) => [`/es/proyectos/${s}`, `/en/proyectos/${s}`]),
-  "/es/cv",
-  "/en/cv",
-  // La vitrina (S5 · ADR-015): rutas públicas nuevas ⇒ entran a axe EN SU
-  // MISMA FASE (regla 9 + kit v1.24.1). El portal, el escaparate de apps, LAS
-  // SEIS fichas (cada una en su ruta) y los frentes en preparación — se listan
-  // desde los exports y el YAML para que una pieza nueva entre al scan sola.
-  "/es/portafolio",
-  "/en/portafolio",
-  "/es/portafolio/apps",
-  "/en/portafolio/apps",
-  // Por app: la ficha técnica (ADR-016) y su brochure (S28) — dos rutas, dos scans.
-  ...slugsVitrina.flatMap((s) => [
-    `/es/portafolio/apps/${s}`,
-    `/en/portafolio/apps/${s}`,
-  ]),
-  // El brochure de las doce (las diez y las dos de la casa), en los dos idiomas.
-  ...[...slugsVitrina, ...slugsCasa].flatMap((s) => [
-    `/es/portafolio/apps/${s}/brochure`,
-    `/en/portafolio/apps/${s}/brochure`,
-  ]),
-  ...slugsSimulacion.flatMap((s) => [
-    `/es/portafolio/apps/${s}/simulacion`,
-    `/en/portafolio/apps/${s}/simulacion`,
-  ]),
-  // «Métodos»: la lista y cada publicación (mapa SVG, riel, voces, fuentes).
-  "/es/metodos",
-  "/en/metodos",
-  ...slugsMetodo.flatMap((s) => [`/es/metodos/${s}`, `/en/metodos/${s}`]),
-  // Cada frente, y cada pieza de los que están abiertos (S7).
-  ...frentesYaml.flatMap((f) => [
-    `/es/portafolio/${f.id}`,
-    `/en/portafolio/${f.id}`,
-    ...(f.estado === "abierta"
-      ? piezasDe(f.id).flatMap((s) => [
-          `/es/portafolio/${f.id}/${s}`,
-          `/en/portafolio/${f.id}/${s}`,
-        ])
-      : []),
+  ...new Set([
+    "/es",
+    "/en",
+    ...slugsCasos.flatMap((s) => [`/es/proyectos/${s}`, `/en/proyectos/${s}`]),
+    "/es/cv",
+    "/en/cv",
+    // La vitrina (S5 · ADR-015): rutas públicas nuevas ⇒ entran a axe EN SU
+    // MISMA FASE (regla 9 + kit v1.24.1). El portal, el escaparate de apps, LAS
+    // SEIS fichas (cada una en su ruta) y los frentes en preparación — se listan
+    // desde los exports y el YAML para que una pieza nueva entre al scan sola.
+    "/es/portafolio",
+    "/en/portafolio",
+    "/es/portafolio/apps",
+    "/en/portafolio/apps",
+    // Por app, su entrada: la ficha técnica (ADR-016), o su brochure si ya abre en él (S30).
+    ...slugsVitrina.flatMap((s) => [
+      `/es/portafolio/apps/${s}`,
+      `/en/portafolio/apps/${s}`,
+    ]),
+    // El brochure de las doce (las diez y las dos de la casa), en los dos idiomas, donde vive.
+    ...[...slugsVitrina, ...slugsCasa].flatMap((s) => [
+      brochureDe("es", s),
+      brochureDe("en", s),
+    ]),
+    ...slugsSimulacion.flatMap((s) => [
+      `/es/portafolio/apps/${s}/simulacion`,
+      `/en/portafolio/apps/${s}/simulacion`,
+    ]),
+    // «Métodos»: la lista y cada publicación (mapa SVG, riel, voces, fuentes).
+    "/es/metodos",
+    "/en/metodos",
+    ...slugsMetodo.flatMap((s) => [`/es/metodos/${s}`, `/en/metodos/${s}`]),
+    // Cada frente, y cada pieza de los que están abiertos (S7).
+    ...frentesYaml.flatMap((f) => [
+      `/es/portafolio/${f.id}`,
+      `/en/portafolio/${f.id}`,
+      ...(f.estado === "abierta"
+        ? piezasDe(f.id).flatMap((s) => [
+            `/es/portafolio/${f.id}/${s}`,
+            `/en/portafolio/${f.id}/${s}`,
+          ])
+        : []),
+    ]),
   ]),
 ];
 
@@ -287,7 +297,7 @@ test("axe: el contraste pasa en cada uno de los seis acentos del brochure", asyn
   expect(ACENTOS, "los seis acentos de data/brochure.yaml").toHaveLength(6);
   const erroresDePagina: string[] = [];
   page.on("pageerror", (e) => erroresDePagina.push(e.message));
-  await page.goto("/es/portafolio/apps/inmobiliaria/brochure");
+  await page.goto("/es/portafolio/apps/inmobiliaria");
   await expect(page.locator("[data-brochure][data-b-listo]")).toHaveCount(1);
   await page.evaluate(() => {
     for (const d of document.querySelectorAll("details")) d.open = true;

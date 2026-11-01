@@ -209,7 +209,7 @@ export default async function VitrinaAppsPage({ params }: Params) {
                   {propias.map((app) => (
                     <li key={app.slug} className="list-none">
                       <Link
-                        href={`/portafolio/apps/${app.slug}/brochure`}
+                        href={`/portafolio/apps/${app.slug}`}
                         data-app-propia={app.slug}
                         className="flex h-full flex-col gap-1.5 rounded-[10px] border border-paper-2 bg-paper-0 p-5 transition-[box-shadow] duration-[180ms] hover:shadow-sh-1"
                       >

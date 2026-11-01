@@ -1,7 +1,13 @@
 import type { Capturas } from "@/lib/vitrina/capturas";
 import type { Complemento } from "@/lib/vitrina/ficha-tecnica/schema";
 import type { BrochureExport, MetricaExport } from "@/lib/vitrina/schemas";
-import type { Acento, Contenido, GrupoContenido } from "./contenido";
+import {
+  ACTORES,
+  type Acento,
+  type Contenido,
+  type GrupoContenido,
+} from "./contenido";
+import { hitosDe, type Hito } from "@/lib/vitrina/ficha-tecnica/hitos";
 import type { Flujo, TipoNodo } from "./flujo";
 
 /**
@@ -16,8 +22,8 @@ import type { Flujo, TipoNodo } from "./flujo";
  *     que sale del export; así la numeración de las doce páginas es la misma (01–05, y 2.1… en el mapa).
  *  2. **Toda cita dice «número · título del destino»**, y una cita cuyo destino no existe en esta
  *     página no se pinta (un bloque sin datos no se pinta).
- *  3. **Los actores se nombran, nunca solo con color.** Los cuatro de la maqueta (dueño, comprador,
- *     equipo, la app) con sus etiquetas; los del proceso de las otras apps, con el nombre de su carril.
+ *  3. **Los actores se nombran, nunca solo con color.** Los seis (`ACTORES`: dueño, comprador,
+ *     equipo, la app, quien visita y el proveedor) con sus etiquetas; los del proceso de las otras apps, con el nombre de su carril.
  *
  * Todo texto llega ya en el idioma de la página: el del contenido v2 de su `{ es, en }`, y el del
  * export —que el contrato v1 trae solo en español— del bloque `en` del v2 cuando lo hay.
@@ -49,7 +55,23 @@ export type EntradaBrochure = {
   nombre?: string;
   /** La URL de la carpeta de sus capturas (la de `public/vitrina/<slug>`). */
   urlCapturas: string;
+  /** Lo de «Úsala» que sale del Portafolio y no de la entrega de la app (S30). Sin él, solo la propia app. */
+  usala?: DatosDeUsala;
   t: Textos;
+};
+
+/** Una app del Portafolio con su nombre oficial. */
+export type AppDelPortafolio = { slug: string; nombre: string };
+
+/**
+ * Lo que «Úsala» toma del Portafolio (S30): las apps del selector de la lista de espera y las vecinas
+ * (los dos en el orden del escaparate: profesionales y después personales), y si la app tiene simulación.
+ */
+export type DatosDeUsala = {
+  apps: AppDelPortafolio[];
+  anterior?: AppDelPortafolio;
+  siguiente?: AppDelPortafolio;
+  simulacion: boolean;
 };
 
 export type Fuente = "medido" | "calculada" | "declarado" | "estimacion";
@@ -231,12 +253,32 @@ export type VistaBrochure = {
   cierre: {
     titulo: string;
     razon: string;
-    cta: { texto: string; href: string };
     pie: string;
+    /** La casa (CV Viva y su chat no son apps): «Escríbeme» al contacto, sin lista de espera ni roadmap. */
+    contacto?: { texto: string; href: string };
+    /** Las apps con simulación: «Ver la simulación →». */
+    simulacion?: { href: string };
+    /** Las apps: la lista de espera con esta app ya elegida, y las apps del selector. */
+    lista?: { appInicial: string; apps: AppDelPortafolio[] };
+    /** Las apps con ideas en su roadmap: el roadmap votable de ESTA app. */
+    roadmap?: {
+      app: string;
+      nombre: string;
+      features: { feature: string; titulo: string; descripcion: string }[];
+    };
+    /** Las apps: «¿Qué le falta a <app>?». */
+    propuesta?: { app: string; nombre: string };
+    /** «Dónde está»: los hitos de la app, o de la casa. */
+    hitos: Hito[];
+    /** La app anterior y la siguiente del escaparate (solo las apps); sus rutas sin idioma. */
+    vecinas: { anterior?: Vecina; siguiente?: Vecina };
   };
 };
 
-const ACTORES_MAQUETA = ["dueno", "comprador", "equipo", "app"] as const;
+export type Vecina = { nombre: string; href: string };
+
+/** Los actores con nombre y color propios (los de la maqueta, más `visita` y `proveedor` desde el S30). */
+const ACTORES_MAQUETA = ACTORES;
 
 /**
  * ¿La página en este idioma lleva su texto en español? Sí cuando se pide en inglés y la app no trae
@@ -492,6 +534,8 @@ export function armarBrochure(e: EntradaBrochure): VistaBrochure {
       comprador: t("actorComprador"),
       equipo: t("actorEquipo"),
       app: NOMBRE,
+      visita: t("actorVisita"),
+      proveedor: t("actorProveedor"),
     };
   const tipoNombre: Record<TipoNodo, string> = {
     inicio: t("nodoInicio"),
@@ -824,16 +868,59 @@ export function armarBrochure(e: EntradaBrochure): VistaBrochure {
     },
     cierre: {
       titulo: e.casa ? t("cierreCasaT") : t("cierreT"),
-      razon: EN?.enlaces_razon ?? E.enlaces.razon,
-      cta: e.casa
-        ? { texto: t("ctaCasa"), href: "/#contacto" }
-        : {
-            texto: t("ctaLista"),
-            href: `/portafolio/apps/${e.slug}#contacto-portafolio`,
-          },
+      // La del contenido manda (S30): la del export dice «esta ficha», y el brochure ya es la entrada.
+      razon: C.enlaces_razon
+        ? T(C.enlaces_razon)
+        : (EN?.enlaces_razon ?? E.enlaces.razon),
       pie: `${NOMBRE} · ${t("pie", { fecha: fecha(E.actualizado, locale) })}${
         e.config.datos_sinteticos ? ` · ${t("pieSinteticos")}` : ""
       }`,
+      ...(e.casa
+        ? { contacto: { texto: t("ctaCasa"), href: "/#contacto" } }
+        : {
+            lista: {
+              appInicial: e.slug,
+              apps: e.usala?.apps ?? [{ slug: e.slug, nombre: NOMBRE }],
+            },
+            ...(K.roadmap.length
+              ? {
+                  roadmap: {
+                    app: e.slug,
+                    nombre: NOMBRE,
+                    features: K.roadmap.map((f) => ({
+                      feature: f.id,
+                      titulo: T(f.titulo),
+                      descripcion: T(f.descripcion),
+                    })),
+                  },
+                }
+              : {}),
+            propuesta: { app: e.slug, nombre: NOMBRE },
+            ...(e.usala?.simulacion
+              ? {
+                  simulacion: { href: `/portafolio/apps/${e.slug}/simulacion` },
+                }
+              : {}),
+          }),
+      hitos: hitosDe(E),
+      vecinas: {
+        ...(e.usala?.anterior
+          ? {
+              anterior: {
+                nombre: e.usala.anterior.nombre,
+                href: `/portafolio/apps/${e.usala.anterior.slug}`,
+              },
+            }
+          : {}),
+        ...(e.usala?.siguiente
+          ? {
+              siguiente: {
+                nombre: e.usala.siguiente.nombre,
+                href: `/portafolio/apps/${e.usala.siguiente.slug}`,
+              },
+            }
+          : {}),
+      },
     },
   };
 }

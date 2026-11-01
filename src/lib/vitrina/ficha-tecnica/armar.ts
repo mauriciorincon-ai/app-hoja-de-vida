@@ -1,4 +1,5 @@
 import type { FichaVitrina } from "../loader";
+import { hitosDe } from "./hitos";
 import {
   fichaTecnicaSchema,
   type Complemento,
@@ -38,26 +39,8 @@ export function armarFichaTecnica(
     };
   });
 
-  // Las etiquetas son CLAVES (`ciclo` · `sprints` · `sellada` · `construccion` ·
-  // `version` · `decisiones`): el componente las traduce; una ficha externa
-  // puede traer texto libre y se pinta tal cual.
-  const hitos: FichaTecnica["hitos"] = [
-    { valor: ancla.ciclo, etiqueta: "ciclo" },
-    { valor: String(ancla.sprintsCerrados), etiqueta: "sprints" },
-    ancla.selladoEn
-      ? { valor: ancla.selladoEn, etiqueta: "sellada" }
-      : { valor: "—", etiqueta: "construccion" },
-    { valor: `v${ancla.versionRepo}`, etiqueta: "version" },
-  ];
-  const decisiones = exp.metricas.find(
-    (m) => m.clave === "decisiones_registradas",
-  );
-  if (decisiones)
-    // La CLAVE del hito, no su texto: el renderizador traduce las etiquetas que
-    // conoce y cae al literal para las que no. Con «decisiones registradas» aquí
-    // nunca coincidía, y las seis fichas en inglés enseñaban esas dos palabras en
-    // español mientras `fichaTecnica.hitos.decisiones` era código muerto.
-    hitos.push({ valor: String(decisiones.valor), etiqueta: "decisiones" });
+  // Los hitos: `hitosDe` (compartido con el cierre «Úsala» del brochure, S30).
+  const hitos = hitosDe(exp);
 
   return fichaTecnicaSchema.parse({
     schema_version: "1.3.1",

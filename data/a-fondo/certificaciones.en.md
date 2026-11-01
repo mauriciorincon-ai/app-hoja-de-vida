@@ -50,7 +50,7 @@ you know how to do thanks to each one, how they connect with each other and with
 | IBM    | Applied Data Science with R                                         | earned                   | January – November 2024     |
 | IBM    | Data Science Professional Certificate (with its Python and SQL courses) | earned                   | May – November 2022         |
 
-Three credentials earned —the DP-600 and two from IBM— and two paths in progress: right now I am getting certified in the AI-103 and the AI-300. It is the same count the site publishes: the achievement "3 professional certifications" counts only the earned ones, and the two paths appear with their "in progress" chip.
+Three credentials earned —the DP-600 and two from IBM— and two paths in progress: right now I am getting certified in the AI-103 and the AI-300. It is the same count the site publishes under Certifications: the three earned, and the two paths with their "in progress" chip.
 
 Two codes that appear in my story and not in the table: the AI-102, which Microsoft discontinued and whose path is today the AI-103, and the DP-100, which Microsoft retired on June 1, 2026 and whose declared replacement is the AI-300. Neither of the two is presented as earned, and neither appears in my CV any longer.
 

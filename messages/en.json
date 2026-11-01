@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Living CV — Henry Rincón",
+    "title": "CV Viva — Henry Rincón",
     "description": "Henry Rincón's interactive résumé — AI & Analytics Engineer · Industrial Engineer (DP-600): career, achievements, portfolio and a chat that answers with his evidence, as an animated editorial experience."
   },
   "nav": {
@@ -132,6 +132,8 @@
     "actorDueno": "Owner",
     "actorComprador": "Buyer",
     "actorEquipo": "Team",
+    "actorVisita": "Visitor",
+    "actorProveedor": "The provider",
     "nodoInicio": "Start",
     "nodoTarea": "Step",
     "nodoDecision": "Decision",
@@ -151,7 +153,7 @@
     "notas": "Process notes",
     "cierreT": "Want to use it?",
     "cierreCasaT": "Shall we talk?",
-    "ctaLista": "Join the waitlist",
+    "vecApps": "Portfolio · Apps",
     "ctaCasa": "Write to me",
     "arriba": "Back to top",
     "rCerrar": "Close",
@@ -192,7 +194,9 @@
     "rateLimited": "You're going too fast — wait a moment before voting again.",
     "error": "I couldn't record your vote. Please try again in a moment.",
     "votarAria": "Vote for {feature}",
-    "cargando": "Loading votes…"
+    "cargando": "Loading votes…",
+    "verIdeas": "See all {n} ideas",
+    "verMenos": "See fewer"
   },
   "contacto": {
     "eyebrow": "Contact",
@@ -424,7 +428,7 @@
     "s02": "How it works",
     "s02sub": "The process in BPMN: one lane per actor, the decision where it is made, and the loop in plain sight.",
     "desliza": "Scroll sideways to see the whole process.",
-    "procesoCvViva": "Process declared by Living CV from the app's export — the app doesn't ship it in its own yet.",
+    "procesoCvViva": "Process declared by CV Viva from the app's export — the app doesn't ship it in its own yet.",
     "procesoApp": "Process declared by the app itself in its export.",
     "procesoPlaneadora": "Process traced by the AI-APPs pipeline from the app itself and its export.",
     "stackParaQue": "What each one is for",
@@ -589,7 +593,7 @@
   },
   "vitrinaHome": {
     "titulo": "Portfolio",
-    "linea": "Four fronts: apps, agents, dashboards and research. Every published product carries its technical sheet.",
+    "linea": "Four fronts: apps, agents, dashboards and research. Every published product is shown with its technical sheet or its brochure.",
     "ir": "Explore my portfolio",
     "publicados": "{n} published",
     "enPreparacion": "In preparation"

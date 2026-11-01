@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { APP_OTRA } from "@/lib/contacto-constantes";
+import type { Tono } from "./campos";
 import { FormularioContacto } from "./formulario-contacto";
 
 /**
@@ -14,9 +15,15 @@ import { FormularioContacto } from "./formulario-contacto";
 export function ListaDeEsperaForm({
   apps,
   appInicial,
+  tono = "claro",
+  textoEnviar,
 }: {
   apps: { slug: string; nombre: string }[];
   appInicial?: string;
+  /** `tinta` en el cierre del brochure (S30). */
+  tono?: Tono;
+  /** El rótulo del botón («Avísame cuando abra»); sin él, el «Enviar» del formulario. */
+  textoEnviar?: string;
 }) {
   const t = useTranslations("listaDeEspera");
   return (
@@ -34,6 +41,8 @@ export function ListaDeEsperaForm({
         inicial: appInicial,
       }}
       nota={t("nota")}
+      tono={tono}
+      textoEnviar={textoEnviar}
     />
   );
 }

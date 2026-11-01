@@ -2,6 +2,10 @@
   "schema_version": "2.0.0-borrador",
   "app": "inmobiliaria",
   "acento": "sage",
+  "enlaces_razon": {
+    "es": "La app está desplegada en privado y no se indexa. Su dirección no se publica: en el Portafolio se conoce por este brochure y sus capturas, y el acceso es por lista de espera.",
+    "en": "The app is deployed privately and is not indexed. Its address is not published: in the Portfolio it is known through this brochure and its screenshots, and access is by waiting list."
+  },
   "portada": {
     "resalta": {
       "es": "sin comisión",

@@ -2,6 +2,7 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { rutasDeDatos } from "../../scripts/destinos.mjs";
+import { entradasBrochure } from "../../scripts/entradas-brochure.mjs";
 
 /**
  * LAS URL DE LIGHTHOUSE EXISTEN (Sprint 022). `lhci collect` recorre cada una
@@ -30,5 +31,38 @@ describe("lighthouse-urls.json", () => {
       return !(m && rutas.has(m[1]));
     });
     expect(huerfanas, "URL de Lighthouse sin página").toEqual([]);
+  });
+
+  it("un brochure medido lleva el presupuesto del brochure, también en su entrada (S30)", () => {
+    type Presupuesto = {
+      path: string;
+      resourceSizes: { resourceType: string }[];
+    };
+    const presupuestos: Presupuesto[] = JSON.parse(
+      readFileSync(path.join(process.cwd(), "perf-budget.json"), "utf8"),
+    );
+    // La ruta de Lighthouse es estilo robots.txt: `*` cualquier cosa, `$` el final.
+    const casa = (patron: string, url: string) =>
+      new RegExp(
+        `^${patron.replace(/[.+?^{}()|[\]\\]/g, "\\$&").replace(/\*/g, ".*")}`,
+      ).test(url);
+    // Lighthouse aplica el ÚLTIMO presupuesto cuya ruta casa.
+    const aplica = (url: string) =>
+      presupuestos.filter((b) => casa(b.path, url)).at(-1);
+    const delBrochure = (b?: Presupuesto) =>
+      !!b?.resourceSizes.some((r) => r.resourceType === "document");
+    const entradas = new Set(entradasBrochure());
+    const brochures = urls.filter((u) => {
+      const m = u.match(
+        /^\/(?:es|en)\/portafolio\/apps\/([^/]+)(\/brochure)?$/,
+      );
+      return !!m && (m[2] === "/brochure" || entradas.has(m[1]!));
+    });
+    expect(brochures.length, "Lighthouse mide algún brochure").toBeGreaterThan(
+      0,
+    );
+    for (const u of brochures) expect(delBrochure(aplica(u)), u).toBe(true);
+    // Y una ficha no hereda el del brochure.
+    expect(delBrochure(aplica("/es/portafolio/apps/habla"))).toBe(false);
   });
 });

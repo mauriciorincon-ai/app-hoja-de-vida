@@ -2,8 +2,10 @@ import { readFileSync } from "node:fs";
 import { createTranslator } from "next-intl";
 import { parse } from "yaml";
 import { getCasa } from "@/lib/brochure/casa";
+import { datosDeUsala } from "@/lib/brochure/entrada";
+import { armarTextosDeUsala } from "@/lib/brochure/usala-textos";
 import { parseConfigBrochure } from "@/lib/brochure/config";
-import { leerContenido } from "@/lib/brochure/contenido";
+import { leerContenido, type Contenido } from "@/lib/brochure/contenido";
 import {
   armarBrochure,
   type Locale,
@@ -28,11 +30,14 @@ export const config = parseConfigBrochure(
 export const mensajes = (l: Locale) =>
   JSON.parse(readFileSync(`messages/${l}.json`, "utf8"));
 
-const contenidoDe = (slug: string) => {
+const contenidoDe = (slug: string, casa = false) => {
   try {
     const r = leerContenido(
       JSON.parse(
-        readFileSync(`content/vitrina/${slug}.contenido.json`, "utf8"),
+        readFileSync(
+          `content/vitrina/${casa ? "casa/" : ""}${slug}.contenido.json`,
+          "utf8",
+        ),
       ),
     );
     return r.ok ? r.contenido : undefined;
@@ -51,7 +56,24 @@ export function textosDe(locale: Locale): Textos {
   return (k, v) => t(k as never, v as never);
 }
 
-export function vistaDe(slug: string, locale: Locale): VistaBrochure {
+/** Los textos de «Úsala» (los de la ficha, la lista de espera, el roadmap y la propuesta) en un idioma. */
+export const textosDeUsalaDe = (locale: Locale) => {
+  const m = mensajes(locale);
+  return armarTextosDeUsala((namespace) => {
+    const t = createTranslator({ locale, messages: m, namespace });
+    return (clave) => t(clave as never);
+  });
+};
+
+/**
+ * `cambia` recibe el contenido v2 que la app tenga (o `undefined`) y devuelve el que se usa: así una
+ * prueba del modelo varía un campo sin escribir un archivo.
+ */
+export function vistaDe(
+  slug: string,
+  locale: Locale,
+  cambia: (c?: Contenido) => Contenido | undefined = (c) => c,
+): VistaBrochure {
   const t = textosDe(locale);
   const pieza = getCasa().find((p) => p.slug === slug);
   if (pieza)
@@ -64,6 +86,7 @@ export function vistaDe(slug: string, locale: Locale): VistaBrochure {
       complemento: pieza.complemento,
       config: config.apps[slug]!,
       nombre: pieza.nombre[locale],
+      contenido: cambia(contenidoDe(slug, true)),
       urlCapturas: urlDeCapturas(slug),
       t,
     });
@@ -75,9 +98,10 @@ export function vistaDe(slug: string, locale: Locale): VistaBrochure {
     export: ficha.export,
     capturas: getCapturas(slug)!,
     complemento: getComplemento(slug),
-    contenido: contenidoDe(slug),
+    contenido: cambia(contenidoDe(slug)),
     config: config.apps[slug]!,
     urlCapturas: urlDeCapturas(slug),
+    usala: datosDeUsala(slug),
     t,
   });
 }

@@ -1,6 +1,7 @@
 import { readdirSync, readFileSync } from "node:fs";
 import { expect, test, type Page } from "@playwright/test";
 import { parse } from "yaml";
+import { entradasBrochure } from "../../scripts/entradas-brochure.mjs";
 
 /**
  * EL BROCHURE (S28, ADR-030) — e2e.
@@ -47,14 +48,21 @@ const EXPORTS = [...APPS, ...CASA];
 if (CASA.length !== 2) throw new Error("content/vitrina/casa: faltan las dos");
 
 const IDIOMAS = ["es", "en"] as const;
+// Desde el S30 la casa y las apps con su contenido v2 abren `/portafolio/apps/<app>` en su brochure.
+const ENTRADAS = entradasBrochure();
 const ruta = (l: string, slug: string) =>
-  `/${l}/portafolio/apps/${slug}/brochure`;
+  ENTRADAS.includes(slug)
+    ? `/${l}/portafolio/apps/${slug}`
+    : `/${l}/portafolio/apps/${slug}/brochure`;
 
 /** Las cifras que el contenido v2 de una app oculta a propósito de «04 · Método»; sin v2, ninguna. */
 const ocultasDe = (slug: string): string[] => {
+  const dir = CASA.some((c) => c.app.slug === slug)
+    ? "content/vitrina/casa"
+    : "content/vitrina";
   try {
     const v2 = JSON.parse(
-      readFileSync(`content/vitrina/${slug}.contenido.json`, "utf8"),
+      readFileSync(`${dir}/${slug}.contenido.json`, "utf8"),
     ) as { metodo?: { ocultar?: string[] } };
     return v2.metodo?.ocultar ?? [];
   } catch {
@@ -159,16 +167,19 @@ test.describe("Brochure — el HTML de las doce, en los dos idiomas", () => {
   test("en inglés, donde el texto es español, la portada lo dice; en español y con el bloque en, no", async ({
     request,
   }) => {
+    // El bloque `en` lo trae el v2 de quien ya lo recibió: el de una app vive en `content/vitrina/` y el de la
+    // casa, en `content/vitrina/casa/` (S30: CV Viva y su chat ya lo tienen).
     const conBloqueEn = (slug: string) => {
-      try {
-        return Boolean(
-          JSON.parse(
-            readFileSync(`content/vitrina/${slug}.contenido.json`, "utf8"),
-          ).en,
-        );
-      } catch {
-        return false;
-      }
+      for (const dir of ["content/vitrina", "content/vitrina/casa"])
+        try {
+          return Boolean(
+            JSON.parse(readFileSync(`${dir}/${slug}.contenido.json`, "utf8"))
+              .en,
+          );
+        } catch {
+          // sin v2 en esta carpeta: se mira la otra
+        }
+      return false;
     };
     expect(conBloqueEn("inmobiliaria"), "la piloto trae su inglés").toBe(true);
     for (const exp of EXPORTS) {
@@ -211,19 +222,28 @@ test.describe("Brochure — el HTML de las doce, en los dos idiomas", () => {
     }
   });
 
-  test("el cierre lleva a la lista de espera de la ficha (las diez) o al contacto de la casa", async ({
+  test("el cierre «Úsala» trae la lista de espera de la app elegida (las diez) o «Escríbeme» al contacto (la casa)", async ({
     request,
   }) => {
     for (const exp of EXPORTS) {
       const html = await (await request.get(ruta("es", exp.app.slug))).text();
-      const cta = /<a class="boton" href="([^"]+)" data-cta="">/.exec(html);
-      expect(cta, exp.app.slug).not.toBeNull();
       const esCasa = CASA.some((c) => c.app.slug === exp.app.slug);
-      expect(cta![1], exp.app.slug).toBe(
-        esCasa
-          ? "/es/#contacto"
-          : `/es/portafolio/apps/${exp.app.slug}#contacto-portafolio`,
-      );
+      const cierre = html.slice(html.indexOf('id="s-cierre"'));
+      if (esCasa) {
+        // Sin formularios, y «Escríbeme» al contacto de CV Viva.
+        expect(cierre, exp.app.slug).toContain(
+          'href="/es#contacto" data-cta=""',
+        );
+        expect(cierre, exp.app.slug).not.toContain("<form");
+      } else {
+        expect(cierre, exp.app.slug).toContain('id="lista-de-espera"');
+        expect(cierre, exp.app.slug).toMatch(
+          new RegExp(
+            `<option value="${exp.app.slug}" selected=""|<option selected="" value="${exp.app.slug}"`,
+          ),
+        );
+        expect(html, exp.app.slug).not.toContain("contacto-portafolio");
+      }
     }
   });
 });
@@ -247,6 +267,31 @@ test.describe("Brochure — sin JavaScript", () => {
   });
 });
 
+test.describe("Brochure — a 390 px nada se sale de la pantalla", () => {
+  test.use({ viewport: { width: 390, height: 844 } });
+
+  test("la rejilla de «te sirve si» cabe con sus citas largas, en las doce y en los dos idiomas", async ({
+    page,
+  }) => {
+    for (const l of IDIOMAS)
+      for (const exp of EXPORTS) {
+        await page.goto(ruta(l, exp.app.slug));
+        await page.evaluate(() => {
+          for (const d of document.querySelectorAll("details")) d.open = true;
+          document
+            .querySelector("[data-brochure]")
+            ?.setAttribute("data-b-entero", "");
+        });
+        const fuera = await page.evaluate(() =>
+          [...document.querySelectorAll(".cuando li")]
+            .filter((li) => li.getBoundingClientRect().right > innerWidth + 1)
+            .map((li) => (li.textContent ?? "").slice(0, 40)),
+        );
+        expect(fuera, `${l}/${exp.app.slug}`).toEqual([]);
+      }
+  });
+});
+
 /** Lo que una persona haría con el brochure, en tres formas del dato. */
 const FORMAS = [
   {
@@ -261,7 +306,13 @@ const FORMAS = [
     busca: "pronun",
     fichas: false,
   },
-  { slug: "hoja-de-vida", forma: "de la casa", busca: "chat", fichas: false },
+  // La casa trae su v2 desde el S30 (por copia): sus preguntas y respuestas son fichas, como las de la piloto.
+  {
+    slug: "hoja-de-vida",
+    forma: "de la casa, con su v2",
+    busca: "chat",
+    fichas: true,
+  },
 ];
 
 /** Una página lista: la isla ya puso `data-b-listo`, y los errores de consola se recogen. */

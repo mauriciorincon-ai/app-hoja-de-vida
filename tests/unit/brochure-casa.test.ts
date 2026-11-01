@@ -40,7 +40,7 @@ describe("la casa", () => {
       expect(p.nombre.es.length).toBeGreaterThan(0);
       expect(p.nombre.en.length).toBeGreaterThan(0);
     }
-    expect(casa[0]!.nombre).toEqual({ es: "CV Viva", en: "Living CV" });
+    expect(casa[0]!.nombre).toEqual({ es: "CV Viva", en: "CV Viva" });
   });
 
   it("su descripción en los dos idiomas sale de data/apps.yaml: es la línea en inglés de «De esta casa»", () => {

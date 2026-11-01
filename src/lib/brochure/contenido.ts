@@ -46,6 +46,22 @@ export const ICONOS = [
   "edificio",
   "idiomas",
   "pantalla",
+  // S30, lo que pidió la tanda 1 (CV Viva y su chat): la conversación y la llave.
+  "conversacion",
+  "llave",
+] as const;
+
+/**
+ * Quién hace cada paso de un flujo. Los cuatro de la maqueta, más los dos que pidió la tanda 1 (S30):
+ * quien visita (el actor principal de CV Viva, que «comprador» y «equipo» desmentirían) y el proveedor.
+ */
+export const ACTORES = [
+  "dueno",
+  "comprador",
+  "equipo",
+  "app",
+  "visita",
+  "proveedor",
 ] as const;
 
 /** Qué puede citar una afirmación además de una funcionalidad. */
@@ -193,7 +209,7 @@ const nodoSchema = z
   .object({
     id: slug,
     tipo: z.enum(["inicio", "tarea", "decision", "paralelo", "fin"]),
-    actor: z.enum(["dueno", "comprador", "equipo", "app"]),
+    actor: z.enum(ACTORES),
     texto: bi,
     funcionalidad: id.optional(),
   })
@@ -275,6 +291,9 @@ export const contenidoSchema = z
       .regex(/^2\.\d+\.\d+(-borrador)?$/, "debe ser 2.x.y[-borrador]"),
     app: slug,
     acento: z.enum(ACENTOS),
+    // La razón de «Úsala» (S30): la del export dice «esta ficha», y con el brochure como entrada quedó
+    // vieja. Manda sobre la del export y sobre la de `en`.
+    enlaces_razon: bi.optional(),
     portada: portadaSchema.optional(),
     antes_despues: antesDespuesSchema.optional(),
     mapa: mapaSchema.optional(),

@@ -582,14 +582,14 @@ bloques:
           es: "Se construyó y está en uso público desde julio de 2026: índice en el build, recuperación con BM25, nueve defensas en el servidor, citas que navegan a una sección visible y búsqueda local si el proveedor falla. Se puede abrir y probar."
           en: "It was built and has been in public use since July 2026: a build-time index, BM25 retrieval, nine defenses on the server, citations that lead to a visible section and local search if the provider fails. It can be opened and tried."
         corpus: [rag-y-el-chat]
-        href: /portafolio/apps/chat-hoja-de-vida/brochure
+        href: /portafolio/apps/chat-hoja-de-vida
       - nombre: { es: "El índice como puerta de calidad", en: "The index as a quality gate" }
         nivel: uso-real
         texto:
           es: "Un script del build arma un índice por idioma con fragmentos de hasta 180 palabras, títulos y destinos; si un documento no valida su esquema, un identificador se repite o un destino no existe, el sitio no se publica."
           en: "A build script assembles one index per language with passages of up to 180 words, titles and destinations; if a document fails its schema, an identifier repeats or a destination does not exist, the site is not published."
         corpus: [rag-y-el-chat]
-        href: /portafolio/apps/hoja-de-vida/brochure
+        href: /portafolio/apps/hoja-de-vida
       - nombre: { es: "Dos suites de preguntas en cada cambio", en: "Two question suites on every change" }
         nivel: uso-real
         texto:

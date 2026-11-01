@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
+import { entradaEsBrochure } from "@/lib/brochure/entrada";
 import {
   CAPTURA_ALTO,
   CAPTURA_ANCHO,
@@ -17,7 +18,7 @@ import { Maqueta, tieneMaqueta } from "./maquetas";
  * La vitrina es el escaparate, no el catálogo: aquí cada app enseña lo justo
  * para decidir si entras —su estado, su nombre, su promesa, su tira y el
  * tamaño de lo construido— y **su ficha vive en su propia página**
- * (`/portafolio/apps/<slug>`), y su brochure, a un botón de ella. Antes las seis fichas se apilaban en una sola ruta: un
+ * (`/portafolio/apps/<slug>`), y su brochure, a un botón de ella; la que ya abre en su brochure (S30) lo enseña directo. Antes las seis fichas se apilaban en una sola ruta: un
  * documento de más de 22 000 px donde ninguna app tenía sitio propio, ninguna
  * podía enlazarse ni compartirse por separado, y el visitante pagaba de una
  * vez el peso de las seis.
@@ -121,7 +122,8 @@ export async function MuestraApp({ ficha }: { ficha: FichaVitrina }) {
       </p>
 
       <p className="flex items-center gap-1.5 text-[14px] font-medium text-sage-ink">
-        {t("verFicha")}
+        {/* Una app que ya abre en su brochure (S30) no tiene ficha: su tarjeta lo dice. */}
+        {entradaEsBrochure(ficha.ancla.slug) ? t("verBrochure") : t("verFicha")}
         <span aria-hidden="true">→</span>
       </p>
     </article>

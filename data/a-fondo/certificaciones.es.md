@@ -50,7 +50,7 @@ sabes hacer gracias a cada una, cómo se conectan entre sí y con tu trabajo. --
 | IBM    | Ciencia de Datos Aplicada con R                                     | obtenida             | enero – noviembre de 2024      |
 | IBM    | Certificado Profesional en Ciencia de Datos (con sus cursos de Python y SQL) | obtenida             | mayo – noviembre de 2022       |
 
-Tres credenciales obtenidas —el DP-600 y dos de IBM— y dos rutas en curso: en este momento me estoy certificando en el AI-103 y en el AI-300. Es el mismo conteo que publica el sitio: el logro «3 certificaciones profesionales» cuenta solo las obtenidas, y las dos rutas aparecen con su chip de «en curso».
+Tres credenciales obtenidas —el DP-600 y dos de IBM— y dos rutas en curso: en este momento me estoy certificando en el AI-103 y en el AI-300. Es el mismo conteo que publica el sitio en Certificaciones: las tres obtenidas, y las dos rutas con su chip de «en curso».
 
 Dos códigos que aparecen en mi historia y no en la tabla: el AI-102, que Microsoft descontinuó y cuya ruta es hoy el AI-103, y el DP-100, que Microsoft retiró el 1 de junio de 2026 y cuyo reemplazo declarado es el AI-300. Ninguno de los dos se presenta como obtenido, y ninguno aparece ya en mi hoja de vida.
 

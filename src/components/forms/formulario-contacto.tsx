@@ -2,12 +2,18 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import { useRouter } from "@/i18n/navigation";
 import { trackEvent } from "@/lib/analytics";
+import {
+  AreaDeTexto,
+  AvisoDeError,
+  Campo,
+  Enviar,
+  Entrada,
+  ErrorDeCampo,
+  Etiqueta,
+  type Tono,
+} from "./campos";
 
 /**
  * El NÚCLEO de los dos formularios de la app (decisión del dueño, bloque E del
@@ -38,11 +44,17 @@ export function FormularioContacto({
   idPrefijo,
   campo,
   nota,
+  tono = "claro",
+  textoEnviar,
 }: {
   titulo: string;
   idPrefijo: string;
   campo: CampoSelect;
   nota?: string;
+  /** `tinta` en el cierre del brochure (S30): la hoja del brochure pinta los campos; el título lo pone el panel. */
+  tono?: Tono;
+  /** El rótulo del botón; sin él, el «Enviar» del formulario. */
+  textoEnviar?: string;
 }) {
   const t = useTranslations("form");
   const router = useRouter();
@@ -98,8 +110,14 @@ export function FormularioContacto({
 
   const enviando = status === "enviando";
   const id = (sufijo: string) => `${idPrefijo}-${sufijo}`;
+  const tinta = tono === "tinta";
+  const rotulo = enviando
+    ? t("enviando")
+    : status === "error"
+      ? t("reintentar")
+      : (textoEnviar ?? t("enviar"));
 
-  return (
+  const formulario = (
     <form
       onSubmit={handleSubmit}
       noValidate
@@ -107,13 +125,24 @@ export function FormularioContacto({
       ref={(el) => el?.setAttribute("data-hydrated", "true")}
       data-formulario={campo.name}
       aria-label={titulo}
-      className="flex flex-col gap-5 rounded-[10px] border border-paper-3 bg-paper-0 p-6 shadow-sh-1 md:p-8"
+      className={
+        tinta
+          ? "usala-form"
+          : "flex flex-col gap-5 rounded-[10px] border border-paper-3 bg-paper-0 p-6 shadow-sh-1 md:p-8"
+      }
     >
-      <h3 className="font-display text-xl font-medium text-ink-0">{titulo}</h3>
+      {!tinta && (
+        <h3 className="font-display text-xl font-medium text-ink-0">
+          {titulo}
+        </h3>
+      )}
 
-      <div className="flex flex-col gap-2">
-        <Label htmlFor={id("nombre")}>{t("nombre")}</Label>
-        <Input
+      <Campo tono={tono}>
+        <Etiqueta tono={tono} htmlFor={id("nombre")}>
+          {t("nombre")}
+        </Etiqueta>
+        <Entrada
+          tono={tono}
           id={id("nombre")}
           name="nombre"
           autoComplete="name"
@@ -123,19 +152,18 @@ export function FormularioContacto({
           disabled={enviando}
         />
         {errors.nombre && (
-          <p
-            id={id("error-nombre")}
-            role="alert"
-            className="text-sm text-rose-ink"
-          >
+          <ErrorDeCampo tono={tono} id={id("error-nombre")}>
             {errors.nombre}
-          </p>
+          </ErrorDeCampo>
         )}
-      </div>
+      </Campo>
 
-      <div className="flex flex-col gap-2">
-        <Label htmlFor={id("email")}>{t("email")}</Label>
-        <Input
+      <Campo tono={tono}>
+        <Etiqueta tono={tono} htmlFor={id("email")}>
+          {t("email")}
+        </Etiqueta>
+        <Entrada
+          tono={tono}
           id={id("email")}
           name="email"
           type="email"
@@ -146,25 +174,23 @@ export function FormularioContacto({
           disabled={enviando}
         />
         {errors.email && (
-          <p
-            id={id("error-email")}
-            role="alert"
-            className="text-sm text-rose-ink"
-          >
+          <ErrorDeCampo tono={tono} id={id("error-email")}>
             {errors.email}
-          </p>
+          </ErrorDeCampo>
         )}
-      </div>
+      </Campo>
 
-      <div className="flex flex-col gap-2">
-        <Label htmlFor={id(campo.name)}>{campo.label}</Label>
+      <Campo tono={tono}>
+        <Etiqueta tono={tono} htmlFor={id(campo.name)}>
+          {campo.label}
+        </Etiqueta>
         {/* Opcional: la primera opción es válida, no un hueco. */}
         <select
           id={id(campo.name)}
           name={campo.name}
           defaultValue={inicial}
           disabled={enviando}
-          className={SELECT_CLASS}
+          className={tinta ? undefined : SELECT_CLASS}
         >
           <option value="">{campo.placeholder}</option>
           {campo.opciones.map((o) => (
@@ -173,18 +199,21 @@ export function FormularioContacto({
             </option>
           ))}
         </select>
-      </div>
+      </Campo>
 
-      <div className="flex flex-col gap-2">
-        <Label htmlFor={id("mensaje")}>{t("mensaje")}</Label>
-        <Textarea
+      <Campo tono={tono}>
+        <Etiqueta tono={tono} htmlFor={id("mensaje")}>
+          {t("mensaje")}
+        </Etiqueta>
+        <AreaDeTexto
+          tono={tono}
           id={id("mensaje")}
           name="mensaje"
           rows={4}
           maxLength={1000}
           disabled={enviando}
         />
-      </div>
+      </Campo>
 
       {/* Honeypot: invisible para humanos, irresistible para bots */}
       <div aria-hidden="true" className="hidden">
@@ -200,28 +229,30 @@ export function FormularioContacto({
       </div>
 
       {status === "error" && (
-        <div
-          role="alert"
-          className="rounded-md border border-danger/40 bg-rose px-4 py-3 text-sm text-rose-ink"
-        >
-          {t("errorEnvio")}
-        </div>
+        <AvisoDeError tono={tono}>{t("errorEnvio")}</AvisoDeError>
       )}
 
       <div className="flex flex-wrap items-center gap-4">
-        <Button
+        <Enviar
+          tono={tono}
           type="submit"
           disabled={enviando}
           className="min-h-11 bg-sage px-6 text-[15px] font-medium text-sage-ink shadow-sh-1 hover:bg-sage hover:brightness-[0.97]"
         >
-          {enviando
-            ? t("enviando")
-            : status === "error"
-              ? t("reintentar")
-              : t("enviar")}
-        </Button>
-        {nota && <p className="text-[13px] text-ink-2">{nota}</p>}
+          {rotulo}
+        </Enviar>
+        {!tinta && nota && <p className="text-[13px] text-ink-2">{nota}</p>}
       </div>
     </form>
+  );
+
+  // En tinta la nota va debajo del formulario, como en la maqueta (y al imprimir se queda, sin el formulario).
+  return tinta ? (
+    <>
+      {formulario}
+      {nota && <p className="usala-nota">{nota}</p>}
+    </>
+  ) : (
+    formulario
   );
 }

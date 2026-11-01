@@ -1,6 +1,7 @@
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { expect, test, type Page } from "@playwright/test";
 import { parse } from "yaml";
+import { entradasBrochure } from "../../scripts/entradas-brochure.mjs";
 
 /**
  * LA NUMERACIÓN DE LAS SECCIONES (OM-29, S28) — en todas las páginas de una pieza.
@@ -16,8 +17,15 @@ import { parse } from "yaml";
  *  2. **El brochure** de las doce numera 01… seguido (portada aparte), y sus capítulos, 2.1…
  *
  * Data-driven: los frentes y las piezas salen de `data/vitrina.yaml` y `content/`, la misma fuente
- * que renderiza la página. Una pieza nueva entra a la prueba sola.
+ * que renderiza la página. Una pieza nueva entra a la prueba sola. Desde el S30 una app con su
+ * contenido v2 abre en su brochure, sin ficha: se mide como brochure, en su entrada.
  */
+
+const ENTRADAS = entradasBrochure();
+const rutaDelBrochure = (slug: string) =>
+  ENTRADAS.includes(slug)
+    ? `/es/portafolio/apps/${slug}`
+    : `/es/portafolio/apps/${slug}/brochure`;
 
 type Frente = { id: string; estado: "abierta" | "en-preparacion" };
 const FRENTES = (
@@ -44,10 +52,9 @@ const FICHAS: { frente: string; ruta: string }[] = FRENTES.filter(
   (f) => f.estado === "abierta",
 ).flatMap((f) =>
   f.id === "apps"
-    ? slugsDe("content/vitrina", ".brochure-export.json", "app").map((s) => ({
-        frente: f.id,
-        ruta: `/es/portafolio/apps/${s}`,
-      }))
+    ? slugsDe("content/vitrina", ".brochure-export.json", "app")
+        .filter((s) => !ENTRADAS.includes(s))
+        .map((s) => ({ frente: f.id, ruta: `/es/portafolio/apps/${s}` }))
     : slugsDe(`content/${f.id}`, ".ficha-tecnica.json", "pieza").map((s) => ({
         frente: f.id,
         ruta: `/es/portafolio/${f.id}/${s}`,
@@ -98,7 +105,7 @@ test.describe("OM-29 · el brochure numera sus secciones y sus capítulos", () =
     test(`${slug}: 01… seguido en las secciones y 2.1… seguido en los capítulos`, async ({
       page,
     }) => {
-      await page.goto(`/es/portafolio/apps/${slug}/brochure`);
+      await page.goto(rutaDelBrochure(slug));
       const secciones = await textos(page, "[data-brochure] .sec-num");
       expect(secciones.length, "secciones numeradas").toBeGreaterThanOrEqual(4);
       expect(secciones, "secciones: 01… seguido").toEqual(

@@ -132,6 +132,8 @@
     "actorDueno": "Dueño",
     "actorComprador": "Comprador",
     "actorEquipo": "Equipo",
+    "actorVisita": "Quien visita",
+    "actorProveedor": "El proveedor",
     "nodoInicio": "Inicio",
     "nodoTarea": "Paso",
     "nodoDecision": "Decisión",
@@ -151,7 +153,7 @@
     "notas": "Notas del proceso",
     "cierreT": "¿La quieres usar?",
     "cierreCasaT": "¿Hablamos?",
-    "ctaLista": "Unirme a la lista de espera",
+    "vecApps": "Portafolio · Apps",
     "ctaCasa": "Escríbeme",
     "arriba": "Volver arriba",
     "rCerrar": "Cerrar",
@@ -192,7 +194,9 @@
     "rateLimited": "Vas muy rápido — espera un momento antes de votar de nuevo.",
     "error": "No pude registrar tu voto. Intenta de nuevo en un momento.",
     "votarAria": "Votar por {feature}",
-    "cargando": "Cargando votos…"
+    "cargando": "Cargando votos…",
+    "verIdeas": "Ver las {n} ideas",
+    "verMenos": "Ver menos"
   },
   "contacto": {
     "eyebrow": "Contacto",
@@ -589,7 +593,7 @@
   },
   "vitrinaHome": {
     "titulo": "Portafolio",
-    "linea": "Cuatro frentes: apps, agentes, tableros e investigaciones. Cada producto publicado lleva su ficha técnica.",
+    "linea": "Cuatro frentes: apps, agentes, tableros e investigaciones. Cada producto publicado se enseña con su ficha técnica o su brochure.",
     "ir": "Explora mi portafolio",
     "publicados": "{n} publicados",
     "enPreparacion": "En preparación"

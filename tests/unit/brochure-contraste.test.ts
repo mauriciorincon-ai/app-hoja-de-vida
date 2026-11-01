@@ -169,7 +169,11 @@ function selectoresDelTenue(css: string): string[] {
     .map((l) => l.slice(0, l.indexOf("{")).trim());
 }
 
-/** Las seis reglas oscuras de la maqueta donde el tenue pinta texto (y su fondo, para que se lea). */
+/**
+ * Las reglas oscuras de la maqueta donde el tenue pinta texto (y su fondo, para que se lea). Las cuatro
+ * últimas son de «Úsala» (S30): sobre la tinta 0 del cierre y los velos de 4 a 6 % de sus paneles, campos y
+ * tarjetas, que el gate de arriba ya mide hasta el 16 %.
+ */
 const SECCIONES_OSCURAS = [
   ".barra[data-b-oscura] .busca input::placeholder", // la barra sobre la portada (tinta 0)
   ".dispositivo-barra", // la barra del dispositivo de la portada (#262522)
@@ -177,6 +181,10 @@ const SECCIONES_OSCURAS = [
   ".cinta-rotulo", // el rótulo de la cinta (tinta 0)
   ".pie-final", // el pie del cierre 05 (tinta 0)
   ".r-teclas", // las teclas del Recorrido (el diálogo oscuro)
+  ".campo input::placeholder,.campo textarea::placeholder", // el ejemplo de un campo de «Úsala»
+  ".usala-nota", // la nota bajo un formulario, o una advertencia del voto
+  ".donde p", // la nota de «Dónde está»
+  ".vecina small", // el rótulo de una vecina («← App anterior»)
 ];
 
 describe("el tenue solo pinta texto en las secciones oscuras", () => {
@@ -185,7 +193,7 @@ describe("el tenue solo pinta texto en las secciones oscuras", () => {
     expect(selectoresDelTenue(plantado)).toContain(".cap-cuerpo p");
   });
 
-  it("la hoja lo usa exactamente en las seis reglas oscuras, ni una más", () => {
+  it("la hoja lo usa exactamente en las reglas oscuras listadas, ni una más", () => {
     expect(selectoresDelTenue(HOJA).sort()).toEqual(
       [...SECCIONES_OSCURAS].sort(),
     );

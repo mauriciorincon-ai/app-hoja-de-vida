@@ -1,12 +1,16 @@
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
+import { parse } from "yaml";
 import { getCasa } from "@/lib/brochure/casa";
+import type { Contenido } from "@/lib/brochure/contenido";
 import {
   textoEnEspanol,
   type Cita,
   type VistaBrochure,
 } from "@/lib/brochure/modelo";
 import { getComplemento } from "@/lib/vitrina/ficha-tecnica/loader";
+import { hitosDe } from "@/lib/vitrina/ficha-tecnica/hitos";
+import { getFichasVitrina } from "@/lib/vitrina/loader";
 import { config, vistaDe as vista } from "../fixtures/brochure/vista";
 
 /**
@@ -167,16 +171,25 @@ describe("lo que cambia entre la piloto, las v1 y la casa", () => {
   });
 
   it("en inglés avisa que el texto es español donde el v2 no trae su bloque en; en español, nunca", () => {
-    // Solo Innmobiliaria trae el bloque `en`: las otras once y las dos de la casa leen el export, que es español.
-    const conEn = (slug: string) =>
-      JSON.parse(readFileSync(`content/vitrina/${slug}.contenido.json`, "utf8"))
-        .en;
+    // El bloque `en` lo trae el v2 de quien ya lo recibió (hoy, la piloto y la casa); las demás leen el export, que
+    // es español. Se mide del disco: una copia nueva (S30: la casa) cambia la respuesta sin tocar esta prueba.
+    const conEn = (slug: string) => {
+      const ruta = [
+        `content/vitrina/${slug}.contenido.json`,
+        `content/vitrina/casa/${slug}.contenido.json`,
+      ].find((r) => existsSync(r));
+      return ruta
+        ? (JSON.parse(readFileSync(ruta, "utf8")).en as object | undefined)
+        : undefined;
+    };
     expect(conEn("inmobiliaria")).toBeTruthy();
+    expect(
+      SLUGS.some((s) => !conEn(s)),
+      "alguna aún en español",
+    ).toBe(true);
     for (const slug of SLUGS) {
       expect(vista(slug, "es").textoEnEs, `${slug} · es`).toBe(false);
-      expect(vista(slug, "en").textoEnEs, `${slug} · en`).toBe(
-        slug !== "inmobiliaria",
-      );
+      expect(vista(slug, "en").textoEnEs, `${slug} · en`).toBe(!conEn(slug));
     }
     // La función pura que usa también la metadata de la página.
     expect(textoEnEspanol("en", undefined)).toBe(true);
@@ -203,17 +216,164 @@ describe("lo que cambia entre la piloto, las v1 y la casa", () => {
     expect(v.proceso?.flujo.actores.map((a) => a.nombre)).toContain(
       "Quien defiende el modelo",
     );
-    expect(v.cierre.cta.href).toBe("/portafolio/apps/ds#contacto-portafolio");
+    expect(v.cierre.lista?.appInicial).toBe("ds");
     expect(v.portada.rotuloCinta).toMatch(/datos sintéticos$/);
+  });
+
+  it("la razón de «Úsala»: la del contenido manda sobre la de `en` y sobre la del export (S30)", () => {
+    const razones = {
+      es: "Se conoce por este brochure.",
+      en: "Known by this brochure.",
+    };
+    for (const l of ["es", "en"] as const)
+      expect(
+        vista("inmobiliaria", l, (c) => ({ ...c!, enlaces_razon: razones }))
+          .cierre.razon,
+        l,
+      ).toBe(razones[l]);
+    // Sin ella, la de antes: la del export en español y la de su bloque `en` en inglés.
+    const sinRazon = (c?: Contenido) => {
+      const copia = structuredClone(c!);
+      delete copia.enlaces_razon;
+      return copia;
+    };
+    const ficha = getFichasVitrina().find(
+      (f) => f.ancla.slug === "inmobiliaria",
+    )!;
+    expect(vista("inmobiliaria", "es", sinRazon).cierre.razon).toBe(
+      ficha.export.enlaces.razon,
+    );
+    const v2 = JSON.parse(
+      readFileSync("content/vitrina/inmobiliaria.contenido.json", "utf8"),
+    ) as Contenido;
+    expect(vista("inmobiliaria", "en", sinRazon).cierre.razon).toBe(
+      v2.en!.enlaces_razon,
+    );
   });
 
   it("la casa no lleva lista de espera ni «datos sintéticos», y su nombre sale de apps.yaml", () => {
     const v = vista("hoja-de-vida", "en");
-    expect(v.nombre).toBe("Living CV");
+    expect(v.nombre).toBe("CV Viva");
     expect(v.casa).toBe(true);
-    expect(v.cierre.cta.href).toBe("/#contacto");
+    expect(v.cierre.contacto?.href).toBe("/#contacto");
+    expect(v.cierre.lista).toBeUndefined();
+    expect(v.cierre.roadmap).toBeUndefined();
+    expect(v.cierre.propuesta).toBeUndefined();
     expect(v.portada.rotuloCinta).not.toMatch(/synthetic/);
     expect(v.cierre.pie).not.toMatch(/synthetic/);
     expect(v.acento).toBe("rose");
   });
+});
+
+/**
+ * «ÚSALA» (S30): el brochure es la entrada de la app y su cierre recibe lo que vivía en la ficha. El modelo
+ * arma lo que cada app tiene: la lista de espera con ella elegida, su roadmap (si lo trae), la propuesta, su
+ * simulación (si la tiene), «Dónde está» y las vecinas del escaparate. La casa no es una app: «Escríbeme».
+ */
+describe("«Úsala»: lo que cada brochure trae en su cierre", () => {
+  const DE_CASA = new Set<string>(getCasa().map((p) => p.slug));
+  const APPS = SLUGS.filter((s) => !DE_CASA.has(s));
+  const categorias = parse(
+    readFileSync("data/categorias-apps.yaml", "utf8"),
+  ) as Record<"profesionales" | "personales", { slug: string }[]>;
+  // El orden del escaparate: profesionales primero, como lo ve el visitante.
+  const ESCAPARATE = [...categorias.profesionales, ...categorias.personales]
+    .map((a) => a.slug)
+    .filter((s) => APPS.includes(s));
+  const CON_SIMULACION = new Set(
+    (
+      parse(readFileSync("data/simulaciones.yaml", "utf8")) as {
+        simulaciones: { slug: string }[];
+      }
+    ).simulaciones.map((x) => x.slug),
+  );
+
+  it("hay diez apps y dos de la casa (si no, este bloque no mide nada)", () => {
+    expect(APPS).toHaveLength(10);
+    expect(DE_CASA.size).toBe(2);
+    expect(ESCAPARATE).toHaveLength(10);
+  });
+
+  describe.each(APPS)("%s", (slug) => {
+    it("la lista de espera lleva a las diez en el orden del escaparate, con esta elegida", () => {
+      const { lista } = vista(slug, "es").cierre;
+      expect(lista?.appInicial).toBe(slug);
+      expect(lista?.apps.map((a) => a.slug)).toEqual(ESCAPARATE);
+      // El nombre es el oficial (uno por app, el mismo en los dos idiomas).
+      expect(vista(slug, "en").cierre.lista?.apps).toEqual(lista?.apps);
+    });
+
+    it("las vecinas son la anterior y la siguiente del escaparate, a su entrada", () => {
+      const i = ESCAPARATE.indexOf(slug);
+      const { vecinas } = vista(slug, "es").cierre;
+      expect(vecinas.anterior?.href).toBe(
+        i > 0 ? `/portafolio/apps/${ESCAPARATE[i - 1]}` : undefined,
+      );
+      expect(vecinas.siguiente?.href).toBe(
+        i < ESCAPARATE.length - 1
+          ? `/portafolio/apps/${ESCAPARATE[i + 1]}`
+          : undefined,
+      );
+    });
+
+    it("la simulación solo la tiene quien la tiene", () => {
+      expect(vista(slug, "es").cierre.simulacion?.href).toBe(
+        CON_SIMULACION.has(slug)
+          ? `/portafolio/apps/${slug}/simulacion`
+          : undefined,
+      );
+    });
+
+    it.each(["es", "en"] as const)(
+      "el roadmap es el de su complemento, en %s (sin ideas, no hay roadmap)",
+      (l) => {
+        const ideas = getComplemento(slug).roadmap;
+        const { roadmap } = vista(slug, l).cierre;
+        if (ideas.length === 0) return expect(roadmap).toBeUndefined();
+        expect(roadmap?.app).toBe(slug);
+        expect(roadmap?.features).toEqual(
+          ideas.map((f) => ({
+            feature: f.id,
+            titulo: f.titulo[l],
+            descripcion: f.descripcion[l],
+          })),
+        );
+      },
+    );
+
+    it("la propuesta y «Dónde está» no faltan nunca", () => {
+      const v = vista(slug, "es");
+      expect(v.cierre.propuesta).toEqual({ app: slug, nombre: v.nombre });
+      expect(v.cierre.contacto).toBeUndefined();
+      const ficha = getFichasVitrina().find((f) => f.ancla.slug === slug)!;
+      expect(v.cierre.hitos).toEqual(hitosDe(ficha.export));
+    });
+  });
+
+  it("el escaparate empieza sin «anterior» y termina sin «siguiente»", () => {
+    expect(vista(ESCAPARATE[0]!, "es").cierre.vecinas.anterior).toBeUndefined();
+    expect(
+      vista(ESCAPARATE.at(-1)!, "es").cierre.vecinas.siguiente,
+    ).toBeUndefined();
+  });
+
+  it.each([...DE_CASA])(
+    "%s (la casa): «Escríbeme», «Dónde está» y nada más (ni lista, ni roadmap, ni propuesta, ni vecinas)",
+    (slug) => {
+      const v = vista(slug, "es");
+      const pieza = getCasa().find((p) => p.slug === slug)!;
+      expect(v.casa).toBe(true);
+      expect(v.cierre.contacto).toEqual({
+        texto: "Escríbeme",
+        href: "/#contacto",
+      });
+      expect(v.cierre.hitos).toEqual(hitosDe(pieza.export));
+      expect(v.cierre.hitos.length).toBeGreaterThanOrEqual(4);
+      expect(v.cierre.lista).toBeUndefined();
+      expect(v.cierre.roadmap).toBeUndefined();
+      expect(v.cierre.propuesta).toBeUndefined();
+      expect(v.cierre.simulacion).toBeUndefined();
+      expect(v.cierre.vecinas).toEqual({});
+    },
+  );
 });
