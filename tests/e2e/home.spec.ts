@@ -6,15 +6,17 @@ import { parse } from "yaml";
 // «Proyectos», los estudios tienen sección propia, y el roadmap se fue con las
 // apps a /portafolio/apps. Desde el S19, «Métodos» asoma sus publicaciones entre la
 // vitrina y los estudios. En el S23 (2026-10-25) la vitrina pasó a llamarse
-// «Portafolio» y «Métodos» bajó a después de Skills, antes de Contacto.
+// «Portafolio» y «Métodos» bajó a después de Skills, antes de Contacto. Desde el
+// ajuste de la HOME (2026-11-01) el Portafolio va justo antes de Métodos: después de
+// Skills y no después de Logros.
 const SECTIONS = [
   "perfil",
   "trayectoria",
   "logros",
-  "portafolio",
   "estudios",
   "certificaciones",
   "skills",
+  "portafolio",
   "metodos",
   "contacto",
 ];
@@ -92,7 +94,7 @@ test.describe("HOME — happy path del sprint", () => {
     await expect(page.locator("#portafolio [data-frente]")).toHaveCount(4);
 
     // OM-01 (S23): cada sección va debajo de la anterior, en el orden de SECTIONS
-    // —«Métodos» entre Skills y Contacto—, medido por su posición en la página.
+    // —«Portafolio» y «Métodos» entre Skills y Contacto—, medido por su posición en la página.
     const arriba = await page.evaluate(
       (ids) => ids.map((id) => document.getElementById(id)!.offsetTop),
       SECTIONS,
@@ -281,6 +283,41 @@ test.describe("HOME — happy path del sprint", () => {
     // El encabezado trae también el enlace de saltar al contenido, que apunta a su <main>.
     await expect(page.locator("main#contenido")).toHaveCount(1);
   });
+});
+
+// El orden de las secciones y sus fondos (ajuste de la HOME, 2026-11-01). El fondo
+// sale del orden, no de cada sección: desde Perfil, una sección sí y otra no
+// (paper-1 / paper-0), hasta Contacto. El Hero conserva el suyo; el pie no cuenta.
+test.describe("la HOME: el orden de las secciones y sus fondos", () => {
+  for (const locale of ["es", "en"] as const) {
+    test(`/${locale}: las secciones de main van en el orden de SECTIONS`, async ({
+      page,
+    }) => {
+      await page.goto(`/${locale}`);
+      const ids = await page.evaluate(() =>
+        [...document.querySelectorAll("main > section[id]")].map((s) => s.id),
+      );
+      expect(ids).toEqual(SECTIONS);
+    });
+
+    test(`/${locale}: el fondo calculado cambia de una sección a la siguiente, de Perfil a Contacto`, async ({
+      page,
+    }) => {
+      await page.goto(`/${locale}`);
+      const fondos = await page.evaluate(() =>
+        [...document.querySelectorAll("main > section[id]")].map((s) => ({
+          id: s.id,
+          fondo: getComputedStyle(s).backgroundColor,
+        })),
+      );
+      for (let i = 1; i < fondos.length; i++) {
+        expect(
+          fondos[i]!.fondo,
+          `${fondos[i - 1]!.id} → ${fondos[i]!.id}`,
+        ).not.toBe(fondos[i - 1]!.fondo);
+      }
+    });
+  }
 });
 
 test.describe("El roadmap vive en la página de cada app (2026-09-13)", () => {
