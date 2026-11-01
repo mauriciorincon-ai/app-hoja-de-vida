@@ -254,11 +254,14 @@ el mensaje te llega al correo.
   año:** un `periodo` sin cuatro dígitos pone rojo el test de contenido. Mismo número de estudios
   en ES y EN.
 
-### El portafolio, asomada en la HOME · desde la revisión post-S7
+### El portafolio, asomada en la HOME · desde la revisión post-S7 · una puerta desde Sprint 028
 
-- **Qué hace:** en el sitio que tenía «Proyectos», la HOME enseña las cuatro cajas del portafolio
-  con su cuenta real de **productos** y un botón «Explora el portafolio». Son las mismas cajas del
-  portal: no hay nada que editar aparte de `data/vitrina.yaml`.
+- **Qué hace (desde el Sprint 028):** entre Logros y Estudios, la HOME ya no repite las cuatro cajas
+  del portal: es una **puerta**, igual que la de «Métodos». Un título y una línea, **una fila por frente**
+  —su cifra, su nombre y su frase— y el botón **«Explora mi portafolio»**. La cifra se mide de los
+  archivos (nunca está escrita), así que un frente que gana una pieza la cambia solo; un frente en
+  pausa dice «En preparación» y no enseña cuenta. El botón del inicio de la HOME lleva a la misma
+  página, `/portafolio`. No hay nada que editar aparte de `data/vitrina.yaml` (el nombre y la frase de cada frente).
 - **Nombres, desde la revisión post-S8:** la sección se llama **«Portafolio»** (antes «Lo que
   construyo») y el primer nivel del menú que lleva al portal se llama **«Portafolio»** — dos
   enlaces «Portafolio» en el mismo menú a sitios distintos era una trampa. En todo el copy visible,
@@ -326,17 +329,18 @@ el mensaje te llega al correo.
   mientras «Portafolio», a un centímetro en el mismo menú, sí llevaba a seis apps construidas. Dos
   puertas prometiendo lo mismo. **Ahora lo construido tiene una sola puerta: el Portafolio.**
 - **Nada del contenido se perdió.** `data/apps.yaml` sigue siendo la fuente y alimenta tres cosas:
-  - **Las brochures** `/es/apps/hoja-de-vida` y `/es/apps/chat-hoja-de-vida` — se llega a ellas
-    desde el bloque **«De esta casa»**, al cierre de `/es/portafolio`.
+  - **El nombre de CV Viva y de su chat** en los dos idiomas (el brochure de cada una, ver
+    «El brochure de cada app», lleva su texto en `content/vitrina/casa/`): se llega a ellos desde
+    el bloque **«De esta casa»**, al cierre de `/es/portafolio/apps`.
   - **El roadmap votable** ya no sale de `apps.yaml`: vive en `data/fichas/<slug>.yaml` y se
     vota en la página de cada app hermana (ver «Roadmap con votación anónima»).
   - **El formulario de contacto** ya no lista apps (desde la tercera revisión post-S8 pide un
     «Motivo»). El campo `solicitable:` **se retiró** de `apps.yaml` (2026-09-13): la lista de
     espera lista las apps de `content/vitrina/`. Si un YAML viejo lo trae, la publicación falla
     nombrándolo.
-- **Cómo dar de alta una app:** editar `data/apps.yaml` + push, igual que siempre. Si le pones
-  bloque `brochure:`, aparece su página y su enlace en «De esta casa»; si le pones `roadmap:`,
-  entra a la votación.
+- **Cómo dar de alta una app:** editar `data/apps.yaml` + push, igual que siempre. El bloque
+  `brochure:` **se retiró en el Sprint 028** (el brochure sale de la entrega de la app, no de este
+  archivo): si un YAML viejo lo trae, la publicación falla nombrándolo. `roadmap:` tampoco vive aquí.
 
 ### Roadmap con votación anónima · desde Sprint 004 · por app hermana desde el 2026-09-13
 
@@ -383,22 +387,45 @@ el mensaje te llega al correo.
   ellas: las buenas se las pasas a la planeadora en la revisión de features. Cuando haya
   volumen, se evaluará hacerlas públicas y votables, con control de spam — no antes.
 
-### Página brochure por app · desde Sprint 004
+### El brochure de cada app · desde Sprint 028 (reemplaza a «Página brochure por app», Sprint 004, y al detalle, Sprint 005)
 
-- **Qué hace:** cada app **con funcionalidad real** tiene su propia página tipo brochure
-  (`/es/apps/hoja-de-vida`, `/es/apps/chat-hoja-de-vida`) con un hero, sus funcionalidades en
-  movimiento, métricas, el stack y un botón para hablar contigo. Desde la card del portfolio, el
-  enlace "Ver la app" lleva ahí.
-- **Cómo dar de alta una brochure (cero código):** en `data/apps.yaml`, a la app le agregas un
-  bloque `brochure:` con:
-  - `tagline` (frase corta, ES/EN) e `intro` (párrafo de apertura, ES/EN),
-  - `funcionalidades:` — lista de `{ titulo, descripcion }` en ES/EN (al menos una),
-  - `metricas:` (opcional) — lista de `{ valor, sufijo, etiqueta }`; el número se anima,
-  - `stack:` (opcional) — lista de tecnologías (texto suelto).
-    Push y la página aparece sola, con su URL, su SEO (hreflang + JSON-LD) y su lugar en el sitemap.
-- **La regla "solo lo real":** ponle `brochure:` **solo a apps que ya funcionan de verdad** (las
-  que están `en-produccion`). Las apps `en-exploracion` no llevan brochure — su lugar es el
-  roadmap. Una app sin `brochure:` simplemente no tiene página (su URL da 404).
+- **Qué hace:** las **doce** —las diez apps del Portafolio y las dos de esta casa, CV Viva y su chat—
+  tienen un brochure en `/es/portafolio/apps/<app>/brochure` (y en `/en/…`), todas con **una sola
+  plantilla**. Se llega con el botón **«Ver brochure»** de la ficha técnica de cada app y, para las dos de
+  la casa, desde **«De esta casa»**. Tiene una portada (la promesa, sus cifras y sus pantallas), la
+  sección **01** («Antes y después»), la **02** con un capítulo por grupo de funcionalidades
+  (2.1, 2.2…, cada uno con su flujo dibujado, sus pantallas y sus preguntas y respuestas), la **03** («Cómo
+  funciona», el proceso con un carril por actor), la **04** («El método»: cifras **con su procedencia**,
+  stack, privacidad, límites y lo que nunca hace) y la **05** («Úsala»: la lista de espera de la ficha para
+  las diez; el contacto de este sitio para las dos de la casa). Las funcionalidades descartadas **no se
+  pintan** (OM-24).
+- **Cómo se recorre:** el índice de arriba marca la sección en curso; las **citas** («2.4 · Nombre») saltan
+  al destino, lo destellan y dejan un botón **«↩ Volver a donde estabas»**; la tecla **`/`** abre el
+  buscador (Enter salta al resultado); el botón **Recorrido** abre las pantallas a tamaño grande (← →
+  pasan, Espacio las pasa solas, Esc cierra); pasar el cursor por una cita enseña su vista previa; las
+  fichas se voltean y se filtran por tipo. **Imprimir** lo abre todo y lo deja en carta, vertical.
+- **El movimiento tiene pausa:** la cinta de pantallas, las olas, las insignias y la portada se mueven
+  solas; el botón **«Pausar el movimiento»** de la franja de la cinta las detiene todas (WCAG 2.2.2). Con
+  «reducir movimiento» del sistema nada se mueve. **Es la única diferencia intencional con la maqueta
+  aprobada** (además de las que el cierre del Sprint 028 declara).
+- **Cómo se alimenta (sin tocar código):**
+  - **Lo que llega de la planeadora se copia, no se edita:** `node scripts/copiar-entrega.mjs
+    <carpeta-de-entrega>` copia el export, las capturas, el complemento y las imágenes de una app, y exige
+    que cada archivo quede idéntico al origen. Con `--casa` es para CV Viva y su chat (van a
+    `content/vitrina/casa/`, fuera de las diez); con `--contenido <carpeta>` junta el contenido v2.
+  - **Lo que es de esta casa** vive en `data/brochure.yaml`: el color de cada app (`acento`: salvia, cielo,
+    lila, durazno, cidra o rosa), si lleva la etiqueta «datos sintéticos» y, opcional, lo que el buscador
+    sugiere. Un slug de más o de menos rompe la publicación.
+  - **El contenido v2** (`content/vitrina/<app>.contenido.json`) es **opcional y está en borrador**: con
+    él el brochure trae sus pares, sus servicios y su prueba; sin él se arma solo del export, y esos
+    bloques no salen (nunca se pinta uno vacío).
+- **Limitaciones conocidas:** en inglés, las apps que no traen contenido v2 muestran el texto de su export,
+  que está en español (hoy solo Innmobiliaria trae su inglés); el texto de la portada entra subiendo pero
+  **ya no se desvanece** (cuesta el rendimiento en el celular), y la primera pantalla de la portada llega
+  cuando la página termina de cargar; las secciones lejanas se pintan al acercarse (al imprimir, todo).
+- **Las páginas viejas siguen respondiendo:** el detalle de cada app (`…/detalle`) y las dos páginas de la
+  casa del Sprint 004 (también las de antes de «Portafolio») redirigen con un 301 **en un solo salto** al
+  brochure.
 - **Analítica:** evento `brochure_vista` (con la app y el idioma).
 
 ### El portafolio: cuatro frentes · desde Sprint 005 · tres abiertos desde Sprint 007 e Investigaciones en pausa desde Sprint 022
@@ -433,7 +460,7 @@ el mensaje te llega al correo.
 - **Qué hace:** cada frente distinto de apps tiene su **escaparate** (`/es/portafolio/agentes`) con
   una tarjeta por pieza, y cada pieza su **ficha técnica** en `/es/portafolio/<frente>/<pieza>`. Es
   **la misma ficha** que la de una app: mismos bloques, misma tipografía, mismos chips. Lo único
-  que cambia es que estas piezas **no tienen «ficha completa»** — su detalle vive en la casa que
+  que cambia es que estas piezas **no tienen brochure** — su detalle vive en la casa que
   las construyó, no aquí.
 - **La tarjeta del escaparate** enseña: el estado (sellada / sin sellar) y el ciclo, el nombre, la
   frase de la pieza, su **titular de valor** y sus **tres primeras cifras** con su procedencia. Si
@@ -479,14 +506,14 @@ el mensaje te llega al correo.
     de **cifras con su procedencia**, para quién y qué resuelve, **cómo funciona** (el proceso
     dibujado en BPMN: un carril por actor, la decisión donde se decide, los bucles a la vista;
     **opcional desde el contrato v1.1.0** — una pieza sin proceso de uso lo omite y las secciones
-    se renumeran), qué tiene (una tarjeta por grupo), límites y **lo que nunca hace**, y dónde
-    está. Cierra con «Ver la ficha completa».
-  - **La ficha completa** (`/es/portafolio/apps/habla/detalle`): el detalle construido en el S5 — la
-    promesa, las cifras, las funcionalidades agrupadas en tarjetas que se abren solas al llegar
-    leyendo, y los detalles finos (privacidad y stack). **Ninguna ficha pinta las funcionalidades
-    descartadas**, aunque el export de la app las traiga (OM-24): el campo sigue en el contrato, y
-    la ficha de otra casa no se edita para quitarlas.
-    Al pie del escaparate, el bloque **«De esta casa»** enlaza las dos brochures propias.
+    se renumeran), **qué aporta** (una tarjeta por grupo; hasta el Sprint 027 se llamaba «Qué tiene»), límites y **lo que nunca hace**, y dónde
+    está. Cierra con **«Ver brochure»**.
+  - **El brochure** (`/es/portafolio/apps/habla/brochure`): lo que antes era la «ficha completa» (el
+    detalle del Sprint 005, con sus tarjetas que se abrían solas y sus firmas animadas) **se retiró en el
+    Sprint 28 y lo reemplaza el brochure** (ver «El brochure de cada app»). **Ninguna página pinta las
+    funcionalidades descartadas**, aunque el export de la app las traiga (OM-24): el campo sigue en el
+    contrato, y la ficha de otra casa no se edita para quitarlas.
+    Al pie del escaparate, el bloque **«De esta casa»** enlaza los brochures de CV Viva y de su chat.
 - **De dónde sale la ficha técnica:** del `brochure-export.json` de la app **más un complemento**,
   en `data/fichas/<app>.yaml`: el titular, cuáles 3–5 cifras van arriba, los límites, los «nunca» y
   el proceso. Desde el pedido 026 (Sprint 026) **los exporta y los cura la planeadora** —ya no se
@@ -495,7 +522,7 @@ el mensaje te llega al correo.
   por copia, con el export y las capturas de la misma app.
 - **Las diez apps traen «Cómo funciona»** (un gate lo exige: si una app sale sin proceso, la
   publicación falla nombrándola) y **a lo sumo un cero en su tira de cifras**: un cero vale cuando
-  es LA promesa de la app («cero IA»), y los demás siguen completos en la ficha de detalle, con su
+  es LA promesa de la app («cero IA»), y los demás siguen completos en el brochure, con su
   fuente. Qué cifras van en la tira lo decide el complemento.
 - **El Stack, explicado:** las cápsulas de arriba son la vista comprimida; debajo, «Para qué sirve
   cada uno» las despliega con el para qué de cada componente (lo que antes escondía un tooltip que
@@ -556,8 +583,8 @@ el mensaje te llega al correo.
   puede estar en las dos listas.
 - **Su tira.** La tarjeta del escaparate muestra la **portada** de la app (su pantalla de entrada, que
   entrega la planeadora); la tira es el **dibujo esquemático** de esta casa —no una captura— que
-  encabeza la ficha de detalle, y la tarjeta de una app que aún no trae portada (hoy ninguna: las
-  diez la traen desde el Sprint 027).
+  la tarjeta muestra mientras una app aún no trae portada (hoy ninguna: las diez la traen desde el
+  Sprint 027; el detalle donde también encabezaba se retiró en el Sprint 028).
   La tira resume sus ideas en cuatro columnas; vive en `src/components/vitrina/maquetas/<slug>.tsx` y se
   registra en el índice de esa carpeta. **Una app nueva entra con su tira**: si llega su export sin
   dibujo, la CI falla nombrando la app (y mientras tanto la muestra no pinta el marco vacío, como
@@ -569,7 +596,7 @@ el mensaje te llega al correo.
   corrigen en el mismo PR de contenido. Si reescribes una de esas frases, el gate te pide moverle el
   ancla.
 - **El nombre oficial (alias).** Cada app tiene **un solo nombre** en toda la CV Viva: en la
-  muestra, la ficha técnica, el detalle, las apps vecinas, el formulario de propuestas, el selector
+  muestra, la ficha técnica, el brochure, las apps vecinas, el formulario de propuestas, el selector
   de la lista de espera, los correos, el manifest, el chat (su índice y sus citas) y el PDF. **El
   export no se toca**: el nombre oficial vive en el YAML y se aplica al leerlo (ADR-028), de modo que
   el sitio nunca dice «Habla San» en un lado y «Hablemos San» en otro. Los textos tuyos (`data/cv.*.yaml`,
@@ -1348,7 +1375,7 @@ chat hoy y cuáles traería con la base aprobada. Ese informe **se genera, no se
 ### Una sola palabra: «Portafolio» (antes «vitrina»), la HOME y el teclado · desde Sprint 023
 
 - **Qué cambió:** «vitrina» pasa a llamarse **«Portafolio»** en todo el sitio, texto y dirección. Las páginas viven ahora
-  en `/portafolio` (el portal), `/portafolio/apps`, `/portafolio/apps/<app>` (con `/detalle` y, en planlang, `/simulacion`),
+  en `/portafolio` (el portal), `/portafolio/apps`, `/portafolio/apps/<app>` (con `/brochure` y, en planlang, `/simulacion`),
   `/portafolio/<frente>` y `/portafolio/<frente>/<pieza>`, en `/es` y en `/en`. La sección de la HOME se llama «Portafolio» y su ancla es `#portafolio`.
   Los dos botones de la HOME dicen lo mismo: **«Explora mi portafolio»**. El texto cambió con su artículo y su concordancia («de la vitrina»
   → «del portafolio»; «the showcase» → «the portfolio») en los mensajes, los datos, «Métodos» y el corpus.
@@ -1401,8 +1428,8 @@ chat hoy y cuáles traería con la base aprobada. Ese informe **se genera, no se
   fila m4 y la k8 de la guía, que describen la pausa, se actualizan a mano. Ninguna prueba de código fija «investigaciones» en pausa: miran el YAML.
 - **Limitaciones conocidas:** el corpus del chat sigue diciendo «7 investigaciones» y «34 piezas» porque cuenta lo que hay en disco; no se
   reescribió su prosa mientras dure la pausa (queda como pregunta al dueño). La simulación de planlang (`public/piezas/planlang`) todavía
-  rotula «Agente A» y «Agente B» en sus páginas de fichas: es de otra casa y se pidió allí. «Qué tiene» sigue llamándose así en las fichas
-  (la clave es compartida con el contrato de la ficha técnica); el cambio a «Qué aporta» se decide con el rediseño de las fichas.
+  rotula «Agente A» y «Agente B» en sus páginas de fichas: es de otra casa y se pidió allí. «Qué tiene» pasó a llamarse «Qué aporta» en el
+  Sprint 028 (la clave es compartida con el contrato de la ficha técnica).
 
 ### Animaciones y accesibilidad · desde Sprint 001
 
@@ -1477,3 +1504,4 @@ chat hoy y cuáles traería con la base aprobada. Ese informe **se genera, no se
 | Sprint 022 | **Sentada 5 de la revisión: tres agentes fuera, nombres sin «Harness» e investigaciones en pausa.** Salen de la vitrina Agente A, Agente B y el Harness Design Science (14 → 11 agentes); el agente de investigación se llama «Paper Computacional» por un alias de nombre que no edita la ficha (`data/nombres-piezas.yaml`); el frente de Investigaciones queda en pausa con su aviso propio (`enPreparacion`), sin tarjetas, fuera del sitemap y del chat y con sus fichas en 404. Gates: `retiro-piezas`, `nombres-piezas`, la pausa del índice del chat y el e2e de la pausa. La nota de cada fila de la guía admite 2000 caracteres. 
 | Sprint 026 | **Sentada 4a: las fichas de las apps, a la altura.** Nueve apps llegan rehechas por la planeadora (export, complemento y capturas, copiados byte a byte; Innmobiliaria espera su entrega y su fila queda como estaba): cada una trae «Cómo funciona» y a lo sumo un cero en su tira de cifras, y la tarjeta del escaparate muestra la pantalla de entrada de la app. En la ficha de detalle cada grupo abre con un carrusel con la pantalla de cada funcionalidad (un WebP de 1536×960 y ≤ 80 KB; las transversales no llevan figura), y el Stack despliega «Para qué sirve cada uno» en vez de un tooltip que el teléfono no tiene. El diagrama de Nutrikids ya no cruza una caja, planlang conserva su palabra «vitrina» y el proceso lo rotula la planeadora, no CV Viva. Se aplican las 16 líneas de la orden de correcciones del Sprint 025 y dos de las tres tablas de cifras de la prosa llevan el mes de cada fila («oct. 2026» o «ago. 2026»; la de «Cómo aprendo» no cabe en el tope de su subsección y solo cambia la fila de Probeta DS). El chat narra con su cita lo que consta de «¿Por qué salió de Vesting?» sin añadir un motivo, y la pasada en vivo lo vigila con una marca nueva. Tres gates nuevos (capturas, ceros, «Cómo funciona»), cada uno visto en rojo. Guía v26 con ocho filas «Mejorado · S26». |
 | Sprint 027 | **Sentada 4b: lo que dejó el 026, cerrado.** Innmobiliaria entra con su ficha nueva —la décima— y las retomas de Dash Agent, HackGuard, AngelGhost, Nutrikids (con el tema propio de la app) y Probeta DS (sobre su S21, 77 funcionalidades) reemplazan lo que entró con el 026, todo por copia byte a byte; antes de copiar, otro lector revisó una por una las 71 imágenes que llegaban. Las filas de Innmobiliaria y de Probeta DS de tus tablas de apps toman las cifras de sus exports nuevos. Las siete apps profesionales van en el orden que pediste (OM-27) y ninguna ficha pinta funcionalidades descartadas (OM-24). «¿Por qué salió de Vesting?» y su gemela en inglés ya no pasan por el modelo: responden un texto fijo con su cita a la Trayectoria, y el marcador de la pasada en vivo ya no cuenta como tu voz la cortesía del asistente («Let me know if you’d like…»). El diagrama de «Cómo funciona» apila los círculos de enlace que comparten margen (Innmobiliaria, Dash Agent, HackGuard, Big-D, AngelGhost). Guía v27 con cuatro filas «Mejorado · S27». |
+| Sprint 028 | **Sentada 4c: el brochure, una sola plantilla para las doce.** Las diez apps y las dos de la casa (CV Viva y su chat) tienen un brochure en `/portafolio/apps/<app>/brochure`, con la misma plantilla: portada, antes y después, un capítulo por grupo con su flujo y sus preguntas, el proceso, el método con sus cifras y su procedencia, y el cierre; índice, buscador `/`, citas con «↩ Volver», Recorrido a pantalla grande, fichas que se voltean, **pausa del movimiento** e impresión en carta. El detalle de cada app y la página de la casa se retiran y redirigen con un 301 en un solo salto; la ficha técnica pasa a «Qué aporta» y «Ver brochure»; «De esta casa» enlaza los dos brochures de la casa; y la HOME deja de repetir el portal: es una **puerta** al Portafolio, con la cifra medida de cada frente. Lo nuevo de datos: `scripts/copiar-entrega.mjs`, `data/brochure.yaml` y el contenido v2 opcional (borrador). |
