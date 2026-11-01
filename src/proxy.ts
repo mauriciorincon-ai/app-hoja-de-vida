@@ -31,7 +31,9 @@ export default function proxy(request: NextRequest) {
     });
   }
   // Las secciones renombradas —«Mi método» (`/metodo` → `/metodos`, S14) y la
-  // «vitrina» (`/vitrina` → `/portafolio`, S23)— redirigen sus rutas viejas con
+  // «vitrina» (`/vitrina` → `/portafolio`, S23)— y las páginas que el brochure
+  // reemplazó (el `/brochure` y el `/detalle` de una app, la página vieja de la
+  // casa: a la entrada de la app, S31) redirigen sus rutas viejas con
   // un 301 (permanente), con la consulta intacta. Va DESPUÉS del mantenimiento
   // —con el sitio apagado, toda página responde 503— y ANTES de next-intl, que
   // si no la mandaría primero a `/es/metodo`.

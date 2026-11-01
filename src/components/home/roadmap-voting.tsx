@@ -62,7 +62,7 @@ export function RoadmapVoting({
   /** `tinta` en el cierre del brochure (S30): la hoja del brochure pinta la lista, como la maqueta. */
   tono?: Tono;
   /**
-   * Cuántas ideas se ven antes de «Ver las N ideas» (S30; la ficha no corta). Las demás nacen en el HTML
+   * Cuántas ideas se ven antes de «Ver las N ideas» (S30; sin él, se ven todas). Las demás nacen en el HTML
    * —un rastreador las lee— con `data-plegada` (no `hidden`: el preflight de Tailwind lo fuerza con `!important` y la hoja de impresión no podría mostrarlas), y el botón las muestra.
    */
   visibles?: number;

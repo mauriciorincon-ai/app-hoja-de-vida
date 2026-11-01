@@ -15,8 +15,9 @@ import { ProcesoBpmn } from "./proceso-bpmn";
  *
  * Es la capa de arriba: lo que se lee en dos minutos y decide si se baja al
  * detalle. Hasta siete bloques, siempre en el mismo orden, para cualquier
- * frente (apps hoy; agentes, investigaciones y tableros cuando lleguen), porque
- * renderiza UN contrato (`fichaTecnicaSchema`) y no un tipo de pieza:
+ * frente (hoy agentes, investigaciones y tableros: desde el S31 ninguna app la
+ * tiene, su brochure es su entrada), porque renderiza UN contrato
+ * (`fichaTecnicaSchema`) y no un tipo de pieza:
  *
  *   0 cabecera (estado —con su fecha de sello si la trae— · nombre · tagline
  *     · stack · TITULAR de valor)
@@ -26,12 +27,12 @@ import { ProcesoBpmn } from "./proceso-bpmn";
  *     desde v1.1.0: si la pieza no trae proceso, la sección no existe y las
  *     siguientes se renumeran — `numerarSecciones`)
  *   · lo que dicen los datos — conclusiones con su cifra y su fuente
- *     (OPCIONAL, v1.3.0: lo trae una pieza que produce datos, no una app)
- *   3 qué aporta — una tarjeta por bloque, sin listar el detalle (vive en el brochure)
+ *     (OPCIONAL, v1.3.0: lo trae una pieza que produce datos, como un tablero)
+ *   3 qué aporta — una tarjeta por bloque, sin listar el detalle
  *   · cómo se ve — la galería de pantallas reales (OPCIONAL, v1.3.0)
  *   4 límites, y lo que nunca hace
  *   5 dónde está — la versión anclada
- *   — cierre: al brochure + lista de espera
+ *   — cierre: la nota «Aquí se muestra; no se entrega.»
  *
  * Anatomía tomada de las plantillas de la planeadora (cabecera con titular de
  * valor · facts · secciones numeradas con subtítulo · flujo con carriles ·
@@ -351,8 +352,7 @@ export async function FichaTecnica({
         n={n.s03}
         id={`ft-${n.s03}-${pieza.slug}`}
         titulo={t("s03")}
-        // Una pieza sin brochure no manda al lector a un sitio que no hay: el subtítulo dice la cuenta y calla.
-        // Y si la ficha NO cuenta funcionalidades (`cuenta: 0` en todos sus
+        // Si la ficha NO cuenta funcionalidades (`cuenta: 0` en todos sus
         // bloques — una investigación tiene aportes, no funciones), el subtítulo
         // no inventa un «0 funcionalidades» que la pieza jamás declaró.
         sub={

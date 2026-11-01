@@ -25,7 +25,7 @@
  * retirada, una a `RETIRADAS`.
  *
  * **Siempre en un solo salto.** `RETIRADAS` se aplica sobre la ruta YA renombrada,
- * así que `/vitrina/apps/habla/detalle` llega a `/es/portafolio/apps/habla/brochure`
+ * así que `/vitrina/apps/habla/detalle` llega a `/es/portafolio/apps/habla` (la entrada)
  * sin pasar por `/es/portafolio/apps/habla/detalle`: un 301 encadenado le cuesta
  * una ida y vuelta al visitante y al buscador. La prueba fija que ninguna ruta
  * nueva vuelve a redirigir.
