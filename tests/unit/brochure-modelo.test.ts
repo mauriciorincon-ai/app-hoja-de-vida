@@ -253,7 +253,7 @@ describe("lo que cambia entre la piloto, las v1 y la casa", () => {
 
   it("la casa no lleva lista de espera ni «datos sintéticos», y su nombre sale de apps.yaml", () => {
     const v = vista("hoja-de-vida", "en");
-    expect(v.nombre).toBe("Living CV");
+    expect(v.nombre).toBe("CV Viva");
     expect(v.casa).toBe(true);
     expect(v.cierre.contacto?.href).toBe("/#contacto");
     expect(v.cierre.lista).toBeUndefined();

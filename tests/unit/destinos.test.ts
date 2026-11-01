@@ -205,7 +205,7 @@ describe("nombreDeDestino — a dónde lleva la cita, con el nombre que el visit
       "CV Viva",
     );
     expect(nombreDeDestino("/portafolio/apps/hoja-de-vida", en)).toBe(
-      "Living CV",
+      "CV Viva",
     );
     expect(nombreDeDestino("/portafolio/apps/chat-hoja-de-vida", en)).toBe(
       "Chat with my résumé",

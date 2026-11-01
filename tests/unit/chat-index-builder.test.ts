@@ -74,7 +74,7 @@ describe("buildChunks (YAML + «a fondo» → chunks con ancla)", () => {
       {
         id: "hoja-de-vida",
         estado: "en-produccion",
-        nombre: { es: "CV Viva", en: "Living CV" },
+        nombre: { es: "CV Viva", en: "CV Viva" },
         descripcion: { es: "Esta página.", en: "This page." },
       },
     ],

@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Living CV — Henry Rincón",
+    "title": "CV Viva — Henry Rincón",
     "description": "Henry Rincón's interactive résumé — AI & Analytics Engineer · Industrial Engineer (DP-600): career, achievements, portfolio and a chat that answers with his evidence, as an animated editorial experience."
   },
   "nav": {
@@ -428,7 +428,7 @@
     "s02": "How it works",
     "s02sub": "The process in BPMN: one lane per actor, the decision where it is made, and the loop in plain sight.",
     "desliza": "Scroll sideways to see the whole process.",
-    "procesoCvViva": "Process declared by Living CV from the app's export — the app doesn't ship it in its own yet.",
+    "procesoCvViva": "Process declared by CV Viva from the app's export — the app doesn't ship it in its own yet.",
     "procesoApp": "Process declared by the app itself in its export.",
     "procesoPlaneadora": "Process traced by the AI-APPs pipeline from the app itself and its export.",
     "stackParaQue": "What each one is for",
