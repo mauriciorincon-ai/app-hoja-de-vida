@@ -310,6 +310,10 @@ test.describe("la HOME: el orden de las secciones y sus fondos", () => {
           fondo: getComputedStyle(s).backgroundColor,
         })),
       );
+      // Son los dos tokens y no «transparente»: una sección sin fondo sería
+      // distinta de su vecina y pasaría la comparación de abajo.
+      const PAPER = ["rgb(251, 250, 247)", "rgb(245, 243, 237)"]; // paper-0, paper-1
+      for (const f of fondos) expect(PAPER, f.id).toContain(f.fondo);
       for (let i = 1; i < fondos.length; i++) {
         expect(
           fondos[i]!.fondo,
