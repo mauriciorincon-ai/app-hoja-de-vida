@@ -5,7 +5,7 @@
  * Por qué «a fondo» y no «detalle»: la palabra ya significa otras dos cosas en
  * esta app — el case study de un proyecto (`messages.detalle`,
  * `DetalleVisitTracker`) y el último tramo de la ficha larga de una app
- * (`/portafolio/apps/<slug>/detalle`). Un tercer significado habría costado más
+ * (la página de detalle, que el S28 retiró). Un tercer significado habría costado más
  * que un nombre nuevo.
  *
  * Qué es: `data/a-fondo/<slug>.<locale>.md` — frontmatter validado con Zod +

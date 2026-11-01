@@ -393,9 +393,9 @@ el mensaje te llega al correo.
   tienen un brochure en `/es/portafolio/apps/<app>/brochure` (y en `/en/…`), todas con **una sola
   plantilla**. Se llega con el botón **«Ver brochure»** de la ficha técnica de cada app y, para las dos de
   la casa, desde **«De esta casa»**. Tiene una portada (la promesa, sus cifras y sus pantallas), la
-  sección **01** («Antes y después»), la **02** con un capítulo por grupo de funcionalidades
-  (2.1, 2.2…, cada uno con su flujo dibujado, sus pantallas y sus preguntas y respuestas), la **03** («Cómo
-  funciona», el proceso con un carril por actor), la **04** («El método»: cifras **con su procedencia**,
+  sección **01** («Lo que cambia»), la **02** («El mapa») con un capítulo por grupo de funcionalidades
+  (2.1, 2.2…, cada uno con su flujo dibujado, sus pantallas y sus preguntas y respuestas), la **03** («De punta a punta»,
+  el proceso completo, donde cada caja dice quién la hace), la **04** («Hecho con método»: cifras **con su procedencia**,
   stack, privacidad, límites y lo que nunca hace) y la **05** («Úsala»: la lista de espera de la ficha para
   las diez; el contacto de este sitio para las dos de la casa). Las funcionalidades descartadas **no se
   pintan** (OM-24).
@@ -420,7 +420,10 @@ el mensaje te llega al correo.
     él el brochure trae sus pares, sus servicios y su prueba; sin él se arma solo del export, y esos
     bloques no salen (nunca se pinta uno vacío).
 - **Limitaciones conocidas:** en inglés, las apps que no traen contenido v2 muestran el texto de su export,
-  que está en español (hoy solo Innmobiliaria trae su inglés); el texto de la portada entra subiendo pero
+  que está en español (hoy solo Innmobiliaria trae su inglés), y la portada lo avisa en una línea
+  («The text of this brochure is in Spanish.»). Eso incluye a **CV Viva y su chat**, que antes de este
+  sprint tenían su inglés en `data/apps.yaml` y ahora lo esperan de la planeadora (el bloque «De esta
+  casa» sí dice su línea en inglés); el texto de la portada entra subiendo pero
   **ya no se desvanece** (cuesta el rendimiento en el celular), y la primera pantalla de la portada llega
   cuando la página termina de cargar; las secciones lejanas se pintan al acercarse (al imprimir, todo).
 - **Las páginas viejas siguen respondiendo:** el detalle de cada app (`…/detalle`) y las dos páginas de la

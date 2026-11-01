@@ -104,4 +104,9 @@ All are declared again in the sprint's closing and in the fidelity matrix the ow
   if either is missing or malformed.
 - Contract v2 is a draft: until it is fixed with the planner, it lives in its own optional file and does not
   touch the v1 export. The `gaps` and `_lee_esto` notes of the planner's package are not part of the contract.
-- English: apps without a v2 `en` block show their export's Spanish text, as the technical sheet already did.
+- English: apps without a v2 `en` block show their export's Spanish text, as the technical sheet already did,
+  and the cover says so in one line (`textoEnEs`; the page's `description` is not the Spanish tagline either).
+  **This includes the two house apps**, which had their English in `data/apps.yaml` (the `brochure` block this
+  decision removes) and now wait for the planner's English; the «De esta casa» tiles read the `descripcion`
+  of the same YAML in English meanwhile. The attribute `lang` of the page stays the page's: the chrome is in
+  the page's language and only the delivered text is Spanish, as on the technical sheet.

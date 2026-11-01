@@ -127,7 +127,7 @@ const ABIERTOS = FRENTES.filter(
 if (ABIERTOS.length === 0)
   throw new Error("data/vitrina.yaml sin frentes abiertos fuera de «apps»");
 
-/** La ficha con más tarjetas: la que mejor estresa la apertura por lectura. */
+/** La ficha con más grupos de funcionalidades: la que más estresa el recorrido de las pantallas y las tarjetas. */
 const MAS_LARGA = EXPORTS.reduce((a, b) =>
   b.funcionalidades.grupos.length > a.funcionalidades.grupos.length ? b : a,
 );

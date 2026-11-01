@@ -27,11 +27,11 @@ import { ProcesoBpmn } from "./proceso-bpmn";
  *     siguientes se renumeran — `numerarSecciones`)
  *   · lo que dicen los datos — conclusiones con su cifra y su fuente
  *     (OPCIONAL, v1.3.0: lo trae una pieza que produce datos, no una app)
- *   3 qué tiene — una tarjeta por bloque, sin listar el detalle
+ *   3 qué aporta — una tarjeta por bloque, sin listar el detalle (vive en el brochure)
  *   · cómo se ve — la galería de pantallas reales (OPCIONAL, v1.3.0)
  *   4 límites, y lo que nunca hace
  *   5 dónde está — la versión anclada
- *   — cierre: al detalle + lista de espera
+ *   — cierre: al brochure + lista de espera
  *
  * Anatomía tomada de las plantillas de la planeadora (cabecera con titular de
  * valor · facts · secciones numeradas con subtítulo · flujo con carriles ·

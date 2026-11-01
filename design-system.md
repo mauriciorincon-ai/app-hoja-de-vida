@@ -144,12 +144,12 @@ propios. Los números de la tabla no cambiaron; se midieron antes y después.
 | `scaleInBlur`   | scale(0.85)+blur(15px)→1 (cards)                                                                                                                                                                                                                                                                                                                                                                                                               |
 | `Counter`       | ease-out-cubic manual, ~1800ms, tabular-nums                                                                                                                                                                                                                                                                                                                                                                                                   |
 | `TimelineTrack` | rail SVG stroke-dashoffset 1.4s ease-out-expo; nodos scale(0)→1 ease-out-back sincronizados `800ms + x% × 1400ms`; cards ±32px                                                                                                                                                                                                                                                                                                                 |
-| `fadeInSlow`    | post-S8 — «leve, más marcada y lenta»: 1.2s, ease-out-expo, translateY(28px)+blur(8px)→0; escalón 140ms (Estudios, Certificaciones, cajas del portafolio asomado)                                                                                                                                                                                                                                                                               |
+| `fadeInSlow`    | post-S8 — «leve, más marcada y lenta»: 1.2s, ease-out-expo, translateY(28px)+blur(8px)→0; escalón 140ms (Estudios, Certificaciones; las filas de la puerta al Portafolio, a 60 ms)                                                                                                                                                                                                                                                                               |
 | `liftIn`        | post-S8 — la tarjeta aterriza: 1.4s, ease-in-out-cubic, translateY(70px)+rotateX(14°, perspectiva 900)+scale(.94)+blur(12px)→0; escalón 120ms (Skills)                                                                                                                                                                                                                                                                                         |
 | `CifraQueLlama` | post-S8 — el CHIP entero (fondo, borde, texto) **aparece a 1.5× y se encoge a 1×** con la entrada de su tarjeta: misma duración y misma curva que `fadeInSlow` (1.2s, ease-out-expo), mismo escalón (viaja como prop `retraso`, porque el `staggerChildren` del `Stagger` no llega a los nietos — medido), origen en su borde derecho; se repite en cada pasada como toda entrada. Sin disparador propio. Solo transform (cuenta de productos) |
 
 `Stagger` acepta `stagger` (segundos entre hermanos; default 80ms) y `as` (`div` · `ul` · `li`) desde post-S8:
-las cajas del portafolio se escalonan dentro de un `<ul>` real, y un `div` entre `ul` y `li` es HTML inválido.
+las cajas del portal y las filas de las puertas de la HOME se escalonan dentro de un `<ul>` real, y un `div` entre `ul` y `li` es HTML inválido.
 
 **Reglas duras:** solo `transform`/`opacity` en animaciones de scroll · `prefers-reduced-motion`
 salta al estado final sin movimiento, sin excepciones (hook global) · **vetado:** three.js/WebGL,
@@ -236,12 +236,17 @@ animaciones infinitas (sweep/glitch/marquee), scroll-snap de deck, CDNs en `<hea
   **tercer estado**: una credencial `en curso` lleva un chip `citron`/`citron-ink` mono 11 px
   «En curso» **en el sitio de la fecha** — el mismo chip de «en preparación» del portafolio — y no
   puede nombrarse en ningún titular sin esas palabras al lado (gate de contenido).
-- **Portafolio asomado**: las mismas cajas de frente del portal, sin variante, con un botón sage
-  «Explora el portafolio» (post-S8; antes «Entrar al portafolio»). La HOME enseña el portafolio, no la
-  copia. **Post-S8:** la sección se titula «Portafolio», las cuatro cajas aparecen levemente una a
-  una (`fadeInSlow` dentro de un `<ul>` escalonado, 140 ms), la cifra de **productos** —ya no
-  «piezas», en todo el copy visible— aparece a 1.5× y se encoge a su tamaño con la entrada de su caja —misma duración, misma curva, mismo escalón— en cada pasada, como chip entero y sin rebote (`CifraQueLlama`), y el cierre de
-  cada caja dice «Explora».
+- **La puerta al Portafolio en la HOME** (S28, OM-18; antes «Portafolio asomado», que repetía las cuatro cajas
+  del portal): `src/components/home/vitrina.tsx`, sección `#portafolio` (el ancla del chat y del catálogo de destinos),
+  entre Logros y Estudios. Tiene la forma de la puerta de «Métodos»: título Fraunces, una línea de contexto de 60
+  caracteres de ancho, **una fila por frente** (un enlace de mín. 44 px de alto, `r-md` 12 px, `sh-1`, con
+  `data-frente` y `data-estado`) y el botón `sage` «Explora mi portafolio →» a `/portafolio`; el botón del hero
+  también va ahí. Cada fila lleva una **píldora estática con la cuenta del frente** (mono 12 px; sage · sky ·
+  lilac · peach según el frente), su nombre y su `intro`; un frente en preparación pone «…» en la píldora y «En
+  preparación» donde los demás dicen su frase, sin cuenta inventada. El lector de pantalla oye «N publicados»
+  (la cifra visible es `aria-hidden`). Las filas aparecen levemente una a una (`fadeInSlow` dentro de un `<ul>`
+  escalonado, 60 ms). **Ninguna cuenta vive escrita:** salen de `getFrentes()` y `tests/unit/home-puerta-portafolio.test.tsx`
+  las mide del disco por su cuenta. La cuenta animada (`CifraQueLlama`) vive ahora solo en las cajas del portal.
 - **Roadmap embebido**: dentro de `/portafolio/apps` va como bloque con `border-t paper-2` y título
   `2xl` (no el `clamp` de sección de HOME). Misma isla de votación.
 
