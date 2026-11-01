@@ -593,7 +593,7 @@
   },
   "vitrinaHome": {
     "titulo": "Portafolio",
-    "linea": "Cuatro frentes: apps, agentes, tableros e investigaciones. Cada producto publicado lleva su ficha técnica.",
+    "linea": "Cuatro frentes: apps, agentes, tableros e investigaciones. Cada producto publicado se enseña con su ficha técnica o su brochure.",
     "ir": "Explora mi portafolio",
     "publicados": "{n} publicados",
     "enPreparacion": "En preparación"

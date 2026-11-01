@@ -228,6 +228,16 @@ test.describe("Vitrina — el escaparate y las fichas", () => {
     const entrada = EXPORTS.find((e) => ENTRADAS.includes(e.app.slug));
     if (entrada) {
       await page.goto("/es/portafolio/apps");
+      // Su tarjeta no promete una ficha que ya no existe; la de una app que la conserva, sí.
+      await expect(
+        page.locator(`[data-muestra-slug="${entrada.app.slug}"]`),
+      ).toContainText("Ver brochure");
+      await expect(
+        page.locator(`[data-muestra-slug="${entrada.app.slug}"]`),
+      ).not.toContainText("Ver la ficha técnica");
+      await expect(
+        page.locator(`[data-muestra-slug="${primera.app.slug}"]`),
+      ).toContainText("Ver la ficha técnica");
       await page
         .locator(`[data-muestra-slug="${entrada.app.slug}"]`)
         .getByRole("link", { name: nombreVisible(entrada) })
