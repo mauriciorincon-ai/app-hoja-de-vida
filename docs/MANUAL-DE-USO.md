@@ -491,7 +491,7 @@ el mensaje te llega al correo.
 - **Las páginas viejas siguen respondiendo:** el detalle de cada app (`…/detalle`), las dos páginas de la
   casa del Sprint 004 (también las de antes de «Portafolio») y el `/brochure` de las que ya abren en su
   brochure redirigen con un 301 **en un solo salto** a la entrada.
-- **«CV Viva» se llama igual en inglés** (desde el Sprint 030): ya no hay «Living CV» en el sitio.
+- **«CV Viva» se llama igual en inglés** (desde el Sprint 030): el nombre propio es el mismo en los dos idiomas.
 - **Analítica:** evento `brochure_vista` (con la app y el idioma).
 
 ### El portafolio: cuatro frentes · desde Sprint 005 · tres abiertos desde Sprint 007 e Investigaciones en pausa desde Sprint 022

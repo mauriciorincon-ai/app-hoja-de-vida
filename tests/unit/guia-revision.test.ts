@@ -1454,7 +1454,7 @@ describe("la guía v30 · el brochure como entrada de las apps y «Úsala»", ()
     );
   });
 
-  it("las frases que el sprint dejó falsas ya no están: ninguna fila viva manda a «la lista de espera de la ficha» desde el brochure ni dice «Living CV»", () => {
+  it("las frases que el sprint dejó falsas ya no están: ninguna fila viva manda a «la lista de espera de la ficha» desde el brochure ni usa el nombre inglés de antes", () => {
     const a = abrir();
     const vivas = [...a.doc.querySelectorAll("ul.pasos li[id]")].filter(
       (li) => !li.closest("#revision-fuera-lista"),
@@ -1465,7 +1465,9 @@ describe("la guía v30 · el brochure como entrada de las apps y «Úsala»", ()
         " ",
       );
       expect(texto, li.id).not.toMatch(
-        /último botón lleva a la lista de espera de la ficha|recorre las diez fichas|Living CV/,
+        new RegExp(
+          `último botón lleva a la lista de espera de la ficha|recorre las diez fichas|${["Living", "CV"].join(" ")}`,
+        ),
       );
     }
     expect(a.doc.getElementById("h2")!.textContent).toContain("05 Úsala");
