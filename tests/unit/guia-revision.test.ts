@@ -74,7 +74,7 @@ function abrir(
 const minutos = (li: HTMLElement) =>
   Number(li.getAttribute("data-rev-min") ?? li.getAttribute("data-ensayo"));
 
-describe("la guía v28 · el filtro «Revisión completa»", () => {
+describe("la guía v29 · el filtro «Revisión completa»", () => {
   it("es el primero de la barra, está activo al abrir y muestra solo las filas de las sentadas", () => {
     const { doc, filas, filtro } = abrir();
     const botones = [...doc.querySelectorAll(".filtros button")];
@@ -186,7 +186,7 @@ describe("la guía v28 · el filtro «Revisión completa»", () => {
   });
 });
 
-describe("la guía v28 · las sentadas y las sumas", () => {
+describe("la guía v29 · las sentadas y las sumas", () => {
   it("cada sentada tiene su título y sus filas, ninguna pasa de 45 min y las sumas son las de la página", () => {
     const { doc, filas, calc } = abrir();
     const sentadas = [
@@ -279,7 +279,7 @@ describe("la guía v28 · las sentadas y las sumas", () => {
   });
 });
 
-describe("la guía v28 · el sí/no y la nota", () => {
+describe("la guía v29 · el sí/no y la nota", () => {
   it("cada prueba tiene su sí, su no y su nota; marcar guarda y cuenta", () => {
     const { doc, window, calc, click } = abrir();
     const pruebas = [...doc.querySelectorAll<HTMLElement>("ul.pasos li[id]")];
@@ -408,7 +408,7 @@ describe("la guía v28 · el sí/no y la nota", () => {
   });
 });
 
-describe("la guía v28 · «Copiar mis respuestas»", () => {
+describe("la guía v29 · «Copiar mis respuestas»", () => {
   function conRespuestas(portapapeles?: unknown) {
     const a = abrir();
     if (portapapeles !== undefined)
@@ -443,7 +443,7 @@ describe("la guía v28 · «Copiar mis respuestas»", () => {
     (doc.getElementById("rev-copiar") as HTMLButtonElement).click();
     await new Promise((r) => setTimeout(r, 0));
     expect(copiado).toMatch(
-      /^CV Viva · Revisión completa · guía v28\nFecha: \d{4}-\d{2}-\d{2}\n/,
+      /^CV Viva · Revisión completa · guía v29\nFecha: \d{4}-\d{2}-\d{2}\n/,
     );
     expect(copiado).toMatch(
       /Totales: \d+ pruebas · sí 1 · no 2 · pendientes \d+/,
@@ -496,7 +496,7 @@ describe("la guía v28 · «Copiar mis respuestas»", () => {
     await new Promise((r) => setTimeout(r, 0));
     const area = doc.getElementById("rev-texto") as HTMLTextAreaElement;
     expect(area.hasAttribute("hidden")).toBe(false);
-    expect(area.value).toContain("guía v28");
+    expect(area.value).toContain("guía v29");
     expect(area.value).toContain("nota: el botón no responde");
     expect(area.selectionStart).toBe(0);
     expect(area.selectionEnd).toBe(area.value.length);
@@ -514,7 +514,7 @@ describe("la guía v28 · «Copiar mis respuestas»", () => {
   });
 });
 
-describe("la guía v28 · lo que entra", () => {
+describe("la guía v29 · lo que entra", () => {
   it("las seis pruebas nuevas existen, son del S21, tienen sentada y la opcional lo dice", () => {
     const { doc } = abrir();
     for (const id of ["m15", "f12", "q25", "q26", "o15", "o16"]) {
@@ -554,7 +554,7 @@ describe("la guía v28 · lo que entra", () => {
  * Ahora la guía avisa a la vista si no guarda o está vacía, y «Restaurar desde texto» vuelve
  * a cargar lo que «Copiar mis respuestas» copió, de cualquier versión, casando por id.
  */
-describe("la guía v28 · guardar y restaurar", () => {
+describe("la guía v29 · guardar y restaurar", () => {
   /** Copia con el botón y devuelve el texto que quedó en el portapapeles. */
   async function copiar(a: ReturnType<typeof abrir>) {
     let copiado = "";
@@ -702,24 +702,24 @@ describe("la guía v28 · guardar y restaurar", () => {
   });
 
   it("una fila reescrita en el S23 vuelve a pendiente y muestra lo que decías (una sola vez por navegador)", () => {
-    const a = abrir({ [`${NS}a2`]: "si", [`${NS}a2:nota`]: "todo bien" });
-    expect((a.doc.getElementById("a2-si") as HTMLInputElement).checked).toBe(
+    const a = abrir({ [`${NS}a5`]: "si", [`${NS}a5:nota`]: "todo bien" });
+    expect((a.doc.getElementById("a5-si") as HTMLInputElement).checked).toBe(
       false,
     );
-    const antes = a.doc.querySelector("#a2 .rev-antes") as HTMLElement;
+    const antes = a.doc.querySelector("#a5 .rev-antes") as HTMLElement;
     expect(antes.textContent).toContain("Antes del S23 respondiste: Sí");
     expect(antes.textContent).toContain("todo bien");
     // Responderla de nuevo quita el recuerdo.
-    a.click("a2-no");
-    expect(a.doc.querySelector("#a2 .rev-antes")).toBeNull();
+    a.click("a5-no");
+    expect(a.doc.querySelector("#a5 .rev-antes")).toBeNull();
     // Una fila que no cambió conserva su respuesta.
     const b = abrir({ [`${NS}a1`]: "no" });
     expect((b.doc.getElementById("a1-no") as HTMLInputElement).checked).toBe(
       true,
     );
     // Ya migrado: la respuesta nueva no se vuelve a mover al recargar.
-    const c = abrir({ [`${NS}migrado:23`]: "1", [`${NS}a2`]: "no" });
-    expect((c.doc.getElementById("a2-no") as HTMLInputElement).checked).toBe(
+    const c = abrir({ [`${NS}migrado:23`]: "1", [`${NS}a5`]: "no" });
+    expect((c.doc.getElementById("a5-no") as HTMLInputElement).checked).toBe(
       true,
     );
   });
@@ -735,22 +735,22 @@ describe("la guía v28 · guardar y restaurar", () => {
         "  ninguno",
         "",
         "SÍ CON NOTA (1)",
-        "  · a2 — Baja por la página: algo: orden distinto",
+        "  · a5 — Baja por la página: algo: orden distinto",
         "",
         "SÍ SIN NOTA (0)",
         "  ninguno",
       ].join("\n");
     const v22 = abrir();
     restaurar(v22, cuerpo("v22"));
-    expect((v22.doc.getElementById("a2-si") as HTMLInputElement).checked).toBe(
+    expect((v22.doc.getElementById("a5-si") as HTMLInputElement).checked).toBe(
       false,
     );
-    expect(v22.doc.querySelector("#a2 .rev-antes")?.textContent).toContain(
+    expect(v22.doc.querySelector("#a5 .rev-antes")?.textContent).toContain(
       "orden distinto",
     );
     const v23 = abrir();
     restaurar(v23, cuerpo("v23"));
-    expect((v23.doc.getElementById("a2-si") as HTMLInputElement).checked).toBe(
+    expect((v23.doc.getElementById("a5-si") as HTMLInputElement).checked).toBe(
       true,
     );
   });
@@ -785,7 +785,7 @@ describe("la guía v28 · guardar y restaurar", () => {
   });
 });
 
-describe("la guía v28 · las frases que el sprint dejó falsas", () => {
+describe("la guía v29 · las frases que el sprint dejó falsas", () => {
   it("A1 · fuera del historial, nada dice que «Métodos» está entre el portafolio y los Estudios", () => {
     const vigente = HTML.slice(
       0,
@@ -846,8 +846,8 @@ describe("la guía S24 · las filas del chat", () => {
 
   it("las filas de la v23 que no cambiaron en el S24 siguen siendo de la v23", () => {
     const a = abrir();
-    // La h3 la reescribió después el S28 (el brochure): ya vive allí.
-    for (const id of ["a2", "a3b", "a5", "a6", "b1", "a8", "q24"]) {
+    // La h3 la reescribió después el S28 (el brochure) y la a2 y la a8 el S29: ya viven allí.
+    for (const id of ["a3b", "a5", "a6", "b1", "q24"]) {
       expect(a.doc.getElementById(id)?.getAttribute("data-cambio"), id).toBe(
         "23",
       );
@@ -883,16 +883,16 @@ describe("la guía S24 · las filas del chat", () => {
     );
   });
 
-  it("quien ya migró la v23 migra la v24: la marca 23 no impide la 24, y a2 no se mueve dos veces", () => {
+  it("quien ya migró la v23 migra la v24: la marca 23 no impide la 24, y a5 no se mueve dos veces", () => {
     const a = abrir({
       [`${NS}migrado:23`]: "1",
-      [`${NS}a2`]: "si", // respondida DESPUÉS de la v23: no se mueve
+      [`${NS}a5`]: "si", // respondida DESPUÉS de la v23: no se mueve
       [`${NS}o9`]: "si", // era de la v23 y en la v24 vuelve a cambiar: se mueve
     });
-    expect((a.doc.getElementById("a2-si") as HTMLInputElement).checked).toBe(
+    expect((a.doc.getElementById("a5-si") as HTMLInputElement).checked).toBe(
       true,
     );
-    expect(a.doc.querySelector("#a2 .rev-antes")).toBeNull();
+    expect(a.doc.querySelector("#a5 .rev-antes")).toBeNull();
     expect((a.doc.getElementById("o9-si") as HTMLInputElement).checked).toBe(
       false,
     );
@@ -944,9 +944,10 @@ describe("la guía S24 · las filas del chat", () => {
  * o1, q20 y q22. Vuelven a pendiente y muestran lo que el dueño había respondido («Antes del
  * S25»). Las del S24 que no se tocaron siguen siendo del S24: la migración es por versión.
  */
-describe("la guía v28 · el CV, los casos y el PDF", () => {
+describe("la guía v29 · el CV, los casos y el PDF", () => {
   // La o1 también era del S25: la reescribió el S27 y ya vive allí.
-  const FILAS_DEL_S25 = ["c2", "c3", "a10", "d1", "d3", "g1d", "q20", "q22"];
+  // La a10 la reescribió después el S29 (los Logros son doce): ya vive allí.
+  const FILAS_DEL_S25 = ["c2", "c3", "d1", "d3", "g1d", "q20", "q22"];
   const FLUJOS_DEL_S25 = [
     "R3 · Dos casos de estudio",
     "R4 · El CV en PDF",
@@ -1032,7 +1033,8 @@ describe("la guía v28 · el CV, los casos y el PDF", () => {
  */
 describe("la guía v26 · las fichas de las apps", () => {
   // El S27 reescribió después la k15f y la k17 (y la k6, la o1) y el S28 la k10 y la l6: ya viven allí. Del S26 quedan cuatro.
-  const FILAS_DEL_S26 = ["k1b", "k11", "k13", "m6"];
+  // La k1b la reescribió después el S29 (Investigaciones al final): ya vive allí.
+  const FILAS_DEL_S26 = ["k11", "k13", "m6"];
 
   it("las cuatro filas que siguen siendo del S26 llevan data-cambio 26, «mejorado» y «Mejorado · S26»", () => {
     const a = abrir();
@@ -1072,7 +1074,7 @@ describe("la guía v26 · las fichas de las apps", () => {
 
   it("las filas del S25 que no se tocaron siguen siendo del S25 (la migración no las mueve dos veces)", () => {
     const a = abrir();
-    for (const id of ["c2", "c3", "a10", "d1", "d3", "g1d", "q20", "q22"]) {
+    for (const id of ["c2", "c3", "d1", "d3", "g1d", "q20", "q22"]) {
       expect(a.doc.getElementById(id)?.getAttribute("data-cambio"), id).toBe(
         "25",
       );
@@ -1096,7 +1098,7 @@ describe("la guía v26 · las fichas de las apps", () => {
  * (la salida de Vesting es una respuesta fija). Vuelven a pendiente y muestran lo que el dueño había respondido («Antes del S27»).
  * Las del S26 que no se tocaron siguen siendo del S26: la migración es por versión y no las mueve dos veces.
  */
-describe("la guía v28 · las diez fichas al día y Vesting", () => {
+describe("la guía v29 · las diez fichas al día y Vesting", () => {
   // El S28 reescribió después la k6 (las descartadas, ahora en el brochure): ya vive allí.
   const FILAS_DEL_S27 = ["k15f", "k17", "o1"];
 
@@ -1133,7 +1135,7 @@ describe("la guía v28 · las diez fichas al día y Vesting", () => {
 
   it("las filas del S26 que no se tocaron siguen siendo del S26 (la migración no las mueve dos veces)", () => {
     const a = abrir();
-    for (const id of ["k1b", "k11", "k13", "m6"]) {
+    for (const id of ["k11", "k13", "m6"]) {
       expect(a.doc.getElementById(id)?.getAttribute("data-cambio"), id).toBe(
         "26",
       );
@@ -1166,9 +1168,9 @@ describe("la guía v28 · las diez fichas al día y Vesting", () => {
 /**
  * S28 (el brochure de las doce y la puerta de la HOME). Salen las cuatro pruebas de la «apertura por lectura» (las tarjetas que se
  * abrían solas se fueron con el detalle); entran ocho pruebas nuevas del brochure; y trece filas y el flujo R8 cambian de texto:
- * h1 a h4, k2, k6, k10, m3, l5b, l6, l7, a4 y n4b. Vuelven a pendiente y muestran lo que el dueño había respondido («Antes del S28»).
+ * h1 a h4, k2, k6, k10, m3, l5b, l6, l7, a4 y n4b (las dos últimas las reescribió después el S29). Vuelven a pendiente y muestran lo que el dueño había respondido («Antes del S28»).
  */
-describe("la guía v28 · el brochure de las doce y la puerta de la HOME", () => {
+describe("la guía v29 · el brochure de las doce y la puerta de la HOME", () => {
   const FILAS_DEL_S28 = [
     "h1",
     "h2",
@@ -1181,23 +1183,18 @@ describe("la guía v28 · el brochure de las doce y la puerta de la HOME", () =>
     "l5b",
     "l6",
     "l7",
-    "a4",
-    "n4b",
   ];
   const FILAS_NUEVAS = ["h5", "h6", "h7", "h8", "h9", "h10", "h11", "h12"];
 
-  it("la página dice v28 y las filas reescritas llevan data-cambio 28, «mejorado» y «Mejorado · S28»", () => {
+  it("las filas que el S29 no volvió a tocar llevan data-cambio 28, «mejorado» y «Mejorado · S28»", () => {
     const a = abrir();
-    expect(a.doc.getElementById("revision")?.getAttribute("data-version")).toBe(
-      "v28",
-    );
     for (const id of FILAS_DEL_S28) {
       const li = a.doc.getElementById(id) as HTMLElement;
       expect(li.getAttribute("data-cambio"), id).toBe("28");
       expect(li.getAttribute("data-origen"), id).toBe("mejorado");
       expect(li.textContent, id).toContain("Mejorado · S28");
     }
-    // Las trece filas y el flujo R8 (que recorre el portafolio de apps) son las únicas del S28.
+    // Las once filas (la a4 y la n4b las reescribió después el S29) y el flujo R8 (que recorre el portafolio de apps) son las únicas del S28.
     const conCambio = [...a.doc.querySelectorAll('[data-cambio="28"]')];
     expect(conCambio.length).toBe(FILAS_DEL_S28.length + 1);
     expect(
@@ -1291,5 +1288,138 @@ describe("la guía v28 · el brochure de las doce y la puerta de la HOME", () =>
     );
     expect(min).toBeGreaterThan(0);
     expect(min).toBeLessThanOrEqual(45);
+  });
+});
+
+/**
+ * S29 (Skills como explorador, los doce logros y el portafolio en su orden). Entran tres pruebas nuevas (n12 el teclado y el movimiento
+ * reducido, n13 el dedo en el teléfono, n14 la fidelidad con las maquetas); once filas y el flujo R1 cambian de texto: a2, a4, a8, a10, f1,
+ * k1b, n4b, n5, n6, n7 y n10. Vuelven a pendiente y muestran lo que el dueño había respondido («Antes del S29»).
+ */
+describe("la guía v29 · Skills como explorador y los doce logros", () => {
+  const FILAS_DEL_S29 = [
+    "a2",
+    "a4",
+    "a8",
+    "a10",
+    "f1",
+    "k1b",
+    "n4b",
+    "n5",
+    "n6",
+    "n7",
+    "n10",
+  ];
+  const FILAS_NUEVAS = ["n12", "n13", "n14"];
+
+  it("la página dice v29 y las filas reescritas llevan data-cambio 29, «mejorado» y «Mejorado · S29»", () => {
+    const a = abrir();
+    expect(a.doc.getElementById("revision")?.getAttribute("data-version")).toBe(
+      "v29",
+    );
+    for (const id of FILAS_DEL_S29) {
+      const li = a.doc.getElementById(id) as HTMLElement;
+      expect(li.getAttribute("data-cambio"), id).toBe("29");
+      expect(li.getAttribute("data-origen"), id).toBe("mejorado");
+      expect(li.textContent, id).toContain("Mejorado · S29");
+    }
+    // Las once filas y el flujo R1 (la HOME de punta a punta) son las únicas del S29.
+    const conCambio = [...a.doc.querySelectorAll('[data-cambio="29"]')];
+    expect(conCambio.length).toBe(FILAS_DEL_S29.length + 1);
+    const r1 = a
+      .filas()
+      .find((li) => li.textContent?.includes("R1 · La HOME de punta a punta"));
+    expect(r1?.getAttribute("data-cambio")).toBe("29");
+    expect(r1?.textContent).toContain("explorador");
+  });
+
+  it("las tres pruebas nuevas existen, son del S29 y tienen sentada y minutos: el teclado en la de accesibilidad, el dedo en la del teléfono y la fidelidad en la de la HOME", () => {
+    const a = abrir();
+    for (const id of FILAS_NUEVAS) {
+      const li = a.doc.getElementById(id) as HTMLElement;
+      expect(li, id).not.toBeNull();
+      expect(li.getAttribute("data-origen"), id).toBe("nuevo");
+      expect(li.textContent, id).toContain("Nuevo · S29");
+      expect(Number(li.getAttribute("data-rev-min")), id).toBeGreaterThan(0);
+    }
+    expect(a.doc.getElementById("n12")!.getAttribute("data-rev")).toBe("7");
+    expect(a.doc.getElementById("n13")!.getAttribute("data-rev")).toBe("8");
+    expect(a.doc.getElementById("n14")!.getAttribute("data-rev")).toBe("1");
+    expect(a.doc.getElementById("n14")!.textContent).toContain(
+      "Fidelidad con las maquetas",
+    );
+  });
+
+  it("las frases que el sprint dejó falsas ya no están: ocho logros, dos filas de cuatro, el logro de las certificaciones, el trazo de los iconos, las cajas en el orden viejo", () => {
+    const a = abrir();
+    const vigente = HTML.slice(
+      0,
+      HTML.indexOf("<summary>Historial de la guía</summary>"),
+    );
+    const vivas = [...a.doc.querySelectorAll("ul.pasos li[id]")].filter(
+      (li) => !li.closest("#revision-fuera-lista"),
+    );
+    for (const li of vivas) {
+      const texto = (li.querySelector(".p-texto")?.textContent ?? "").replace(
+        /\s+/g,
+        " ",
+      );
+      expect(texto, li.id).not.toMatch(
+        /Logros son ocho|dos filas de cuatro|3 certificaciones profesionales|aterriza vacía|el trazo (?:del icono )?se dibuja|se termina de dibujar|aparecen ya dibujados|Apps · Agentes especializados · Investigaciones · Tableros|25\+<\/strong> productos/,
+      );
+    }
+    expect(vigente).not.toMatch(/Logros son ocho/);
+    // El portal y la puerta de la HOME nombran Investigaciones al final.
+    const orden = (a.doc.getElementById("k1b")!.textContent ?? "").replace(
+      /\s+/g,
+      " ",
+    );
+    expect(orden.indexOf("Tableros de datos")).toBeGreaterThan(0);
+    expect(orden.indexOf("Investigaciones")).toBeGreaterThan(
+      orden.indexOf("Tableros de datos"),
+    );
+    // La cita del chat abre el área en el explorador: f1 ya no dice «su tarjeta de Skills, con el título a la vista».
+    expect(a.doc.getElementById("f1")!.textContent).toContain("su área");
+    // Las cifras de a8 y de a10 son las de Logros hoy.
+    expect(a.doc.getElementById("a8")!.textContent).toContain("45+");
+    expect(a.doc.getElementById("a10")!.textContent).toContain("45+");
+  });
+
+  it("lo que respondió el dueño en una fila reescrita por el S29 pasa a «Antes del S29»; una del S28 ya migrada no se mueve", () => {
+    const a = abrir({
+      [NS + "migrado:28"]: "1",
+      [NS + "n6"]: "si",
+      [NS + "n6:nota"]: "las tarjetas con el trazo se veían bien",
+      [NS + "k2"]: "si", // del S28, ya migrado: se queda como estaba
+    });
+    const n6 = a.doc.getElementById("n6") as HTMLElement;
+    expect(
+      (n6.querySelector('input[value="si"]') as HTMLInputElement).checked,
+    ).toBe(false);
+    expect(n6.textContent).toContain("Antes del S29 respondiste: Sí");
+    expect(n6.textContent).toContain("las tarjetas con el trazo se veían bien");
+    expect(
+      (
+        a.doc
+          .getElementById("k2")!
+          .querySelector('input[value="si"]') as HTMLInputElement
+      ).checked,
+    ).toBe(true);
+  });
+
+  it("las sentadas que recibieron pruebas (1, 7 y 8) siguen dentro de los 45 minutos", () => {
+    const a = abrir();
+    for (const n of [1, 7, 8]) {
+      const min = [...a.doc.querySelectorAll(`li[data-rev="${n}"]`)].reduce(
+        (t, li) => t + Number(li.getAttribute("data-rev-min") ?? 0),
+        0,
+      );
+      expect(min, `sentada ${n}`).toBeGreaterThan(0);
+      // La suma la hace la página (las filas y los flujos R de la sentada): ninguna pasa del límite.
+      expect(
+        Number(a.calc(`rev-s${n}-min`)),
+        `sentada ${n}`,
+      ).toBeLessThanOrEqual(LIMITE);
+    }
   });
 });
