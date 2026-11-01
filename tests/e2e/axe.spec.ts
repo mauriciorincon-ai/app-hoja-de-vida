@@ -17,13 +17,6 @@ const { proyectos } = parse(readFileSync("data/cv.es.yaml", "utf8")) as {
 const slugsCasos = proyectos.filter((p) => p.casestudy).map((p) => p.slug);
 if (slugsCasos.length === 0) throw new Error("cv.es.yaml sin case studies");
 
-// Primera app con brochure (S4): la ruta pública nueva también pasa por axe
-const { apps } = parse(readFileSync("data/apps.yaml", "utf8")) as {
-  apps: { id: string; brochure?: unknown }[];
-};
-const brochureSlug = apps.find((a) => a.brochure)?.id;
-if (!brochureSlug) throw new Error("apps.yaml sin brochures");
-
 // Las apps hermanas de la vitrina (S5), leídas de los exports igual que la
 // página: el slug sale del contenido, no del nombre del archivo.
 // Las apps con simulación (2026-10-12): su página entra al scan, sin el
@@ -53,6 +46,18 @@ const slugsVitrina = readdirSync("content/vitrina")
       ).app.slug,
   );
 if (slugsVitrina.length === 0) throw new Error("content/vitrina sin exports");
+// Las dos de la casa (S28): CV Viva y su chat tienen brochure, aunque no sean apps del Portafolio.
+const slugsCasa = readdirSync("content/vitrina/casa")
+  .filter((f) => f.endsWith(".brochure-export.json"))
+  .map(
+    (f) =>
+      (
+        JSON.parse(readFileSync(`content/vitrina/casa/${f}`, "utf8")) as {
+          app: { slug: string };
+        }
+      ).app.slug,
+  );
+if (slugsCasa.length !== 2) throw new Error("content/vitrina/casa sin las dos");
 
 // Los frentes (ADR-015 · S7): cada uno tiene su página —escaparate si está
 // abierto, «en preparación» si no— y los abiertos tienen además una ruta por
@@ -85,8 +90,6 @@ const RUTAS = [
   ...slugsCasos.flatMap((s) => [`/es/proyectos/${s}`, `/en/proyectos/${s}`]),
   "/es/cv",
   "/en/cv",
-  `/es/apps/${brochureSlug}`,
-  `/en/apps/${brochureSlug}`,
   // La vitrina (S5 · ADR-015): rutas públicas nuevas ⇒ entran a axe EN SU
   // MISMA FASE (regla 9 + kit v1.24.1). El portal, el escaparate de apps, LAS
   // SEIS fichas (cada una en su ruta) y los frentes en preparación — se listan
@@ -95,12 +98,15 @@ const RUTAS = [
   "/en/portafolio",
   "/es/portafolio/apps",
   "/en/portafolio/apps",
-  // Por app: la ficha técnica (ADR-016) Y su detalle — dos rutas, dos scans.
+  // Por app: la ficha técnica (ADR-016) y su brochure (S28) — dos rutas, dos scans.
   ...slugsVitrina.flatMap((s) => [
     `/es/portafolio/apps/${s}`,
     `/en/portafolio/apps/${s}`,
-    `/es/portafolio/apps/${s}/detalle`,
-    `/en/portafolio/apps/${s}/detalle`,
+  ]),
+  // El brochure de las doce (las diez y las dos de la casa), en los dos idiomas.
+  ...[...slugsVitrina, ...slugsCasa].flatMap((s) => [
+    `/es/portafolio/apps/${s}/brochure`,
+    `/en/portafolio/apps/${s}/brochure`,
   ]),
   ...slugsSimulacion.flatMap((s) => [
     `/es/portafolio/apps/${s}/simulacion`,
@@ -136,7 +142,8 @@ for (const ruta of RUTAS) {
     page.on("pageerror", (e) => erroresDePagina.push(e.message));
     await page.goto(ruta);
     // Estado final de la página (el footer existe en todas las rutas)
-    await page.locator("footer").scrollIntoViewIfNeeded();
+    // (El brochure lleva además su propio <footer> de cierre, dentro de <main>: el del sitio es el último.)
+    await page.locator("footer").last().scrollIntoViewIfNeeded();
 
     // Lo plegado TAMBIÉN se audita. Sin esto, todo lo que vive dentro de una
     // tarjeta o de un <details> sale del scan y la ruta pasa en verde por no
@@ -157,14 +164,11 @@ for (const ruta of RUTAS) {
 
     await page.evaluate(() => {
       for (const d of document.querySelectorAll("details")) d.open = true;
-      for (const t of document.querySelectorAll(".tarjeta-vitrina")) {
-        t.setAttribute("data-abierta", "");
-        t.setAttribute("data-manual", ""); // que el scroll del scan no la cierre
-        t.querySelector(".tarjeta-boton")?.setAttribute(
-          "aria-expanded",
-          "true",
-        );
-      }
+      // El brochure difiere el pintado de sus secciones lejanas (`content-visibility:auto`) y axe
+      // no mide el contraste de lo que no se pinta: se pide entero, como al imprimir.
+      document
+        .querySelector("[data-brochure]")
+        ?.setAttribute("data-b-entero", "");
     });
 
     const results = await new AxeBuilder({ page })
@@ -258,4 +262,54 @@ test("axe limpio en /es/portafolio/apps con los carruseles en el final", async (
   expect(erroresDePagina, "errores de página (hidratación incluida)").toEqual(
     [],
   );
+});
+
+// Los seis acentos del brochure (S28): una página, seis pieles. Cada app lleva el suyo, así que el
+// scan de arriba solo ve el de cada una; este cambia `data-acento` sobre la MISMA página con todo
+// abierto y pasa la regla de contraste en cada piel, con las tintas, los chips y las zonas oscuras.
+// El contraste de la tabla se prueba aparte en `brochure-contraste.test.ts`: aquí se mira lo PINTADO.
+const ACENTOS = [
+  ...new Set(
+    Object.values(
+      (
+        parse(readFileSync("data/brochure.yaml", "utf8")) as {
+          apps: Record<string, { acento: string }>;
+        }
+      ).apps,
+    ).map((a) => a.acento),
+  ),
+];
+
+test("axe: el contraste pasa en cada uno de los seis acentos del brochure", async ({
+  page,
+}) => {
+  test.slow();
+  expect(ACENTOS, "los seis acentos de data/brochure.yaml").toHaveLength(6);
+  const erroresDePagina: string[] = [];
+  page.on("pageerror", (e) => erroresDePagina.push(e.message));
+  await page.goto("/es/portafolio/apps/inmobiliaria/brochure");
+  await expect(page.locator("[data-brochure][data-b-listo]")).toHaveCount(1);
+  await page.evaluate(() => {
+    for (const d of document.querySelectorAll("details")) d.open = true;
+    document
+      .querySelector("[data-brochure]")
+      ?.setAttribute("data-b-entero", "");
+  });
+  for (const acento of ACENTOS) {
+    await page.evaluate(
+      (a) =>
+        document
+          .querySelector("[data-brochure]")
+          ?.setAttribute("data-acento", a),
+      acento,
+    );
+    const results = await new AxeBuilder({ page })
+      .withRules(["color-contrast"])
+      .analyze();
+    expect(
+      results.violations.map((v) => `${v.id}: ${v.nodes.length} nodos`),
+      `acento ${acento}`,
+    ).toEqual([]);
+  }
+  expect(erroresDePagina, "errores de página").toEqual([]);
 });
