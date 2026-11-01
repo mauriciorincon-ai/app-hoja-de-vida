@@ -70,12 +70,6 @@
     }
   },
   "brochure": {
-    "volver": "Apps",
-    "eyebrow": "Brochure",
-    "funcionalidades": "What it does",
-    "stack": "Stack",
-    "verApp": "See the app",
-    "cta": "Sound like your team? Let's talk",
     "titulo": "{nombre} — brochure — Henry Rincón",
     "indice": "Contents",
     "buscar": "Search the brochure",
@@ -415,7 +409,7 @@
     "piezaSiguiente": "Next product",
     "deEstaCasa": "From this house",
     "deEstaCasaLinea": "What holds up the page you are reading: they are pipeline apps too, and they can also be walked through.",
-    "verLaApp": "See the app",
+    "verBrochure": "View brochure",
     "detalleTitulo": "Full card",
     "volverFichaTecnica": "Back to the technical sheet",
     "simulacionTitulo": "The simulation",
@@ -444,9 +438,9 @@
     "procesoApp": "Process declared by the app itself in its export.",
     "procesoPlaneadora": "Process traced by the AI-APPs pipeline from the app itself and its export.",
     "stackParaQue": "What each one is for",
-    "s03": "What it has",
-    "s03sub": "{grupos, plural, one {# group} other {# groups}} · {n} features. The detail of each one lives in the full card.",
-    "s03subSinDetalle": "{grupos, plural, one {# group} other {# groups}} · {n} features.",
+    "s03": "What it brings",
+    "s03sub": "{grupos, plural, one {# group} other {# groups}} · {n} features. The detail of each one lives in the brochure.",
+    "s03subSinBrochure": "{grupos, plural, one {# group} other {# groups}} · {n} features.",
     "s03subSoloGrupos": "{grupos, plural, one {# group} other {# groups}}.",
     "s04": "Limits, and what it never does",
     "s04sub": "What it chose not to be counts as much as what it is.",
@@ -472,7 +466,7 @@
       "version": "repo version",
       "decisiones": "recorded decisions"
     },
-    "verDetalle": "Open the full card",
+    "verBrochure": "View brochure",
     "verSimulacion": "See the simulation",
     "cierreNota": "Shown here; not handed over.",
     "volverFichaTecnica": "Back to the technical sheet"
@@ -606,7 +600,9 @@
   "vitrinaHome": {
     "titulo": "Portfolio",
     "linea": "Four fronts: apps, agents, research and dashboards. Every published product carries its technical sheet.",
-    "ir": "Explore my portfolio"
+    "ir": "Explore my portfolio",
+    "publicados": "{n} published",
+    "enPreparacion": "In preparation"
   },
   "estudios": {
     "sinPeriodo": "No date declared"

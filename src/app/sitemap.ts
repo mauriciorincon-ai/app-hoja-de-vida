@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { routing } from "@/i18n/routing";
-import { appsConBrochure } from "@/lib/brochure";
+import { SLUGS_CASA } from "@/lib/brochure/config";
 import { getCv } from "@/lib/content";
 import { SITE_URL } from "@/lib/site";
 import { FRENTE_PROPIO, getFrentes } from "@/lib/vitrina/categorias";
@@ -10,7 +10,7 @@ import { bloqueDe } from "@/lib/metodo/schema";
 import { getSimulaciones } from "@/lib/vitrina/simulaciones-loader";
 import { esFrente, getPiezas } from "@/lib/vitrina/piezas";
 
-/** HOME + /cv + case studies + brochures + vitrina por frentes (data-driven: una ruta nueva entra sola). */
+/** HOME + /cv + case studies + el Portafolio por frentes, con el brochure de cada app y de la casa (data-driven: una ruta nueva entra sola). */
 export default function sitemap(): MetadataRoute.Sitemap {
   const alternatesFor = (path: string) => ({
     languages: Object.fromEntries(
@@ -36,11 +36,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
         lastModified: new Date(),
         alternates: alternatesFor(`/proyectos/${p.slug}`),
       })),
-    ...appsConBrochure().map((app) => ({
-      url: `${SITE_URL}/${locale}/apps/${app.id}`,
-      lastModified: new Date(),
-      alternates: alternatesFor(`/apps/${app.id}`),
-    })),
     // La vitrina (ADR-015): el portal, el escaparate de apps, cada app con su
     // ruta propia y los frentes en preparación — todo entra solo desde los
     // exports y de data/vitrina.yaml.
@@ -74,14 +69,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(bloqueDe(p, 10).revisado),
       alternates: alternatesFor(`/metodos/${p.slug}`),
     })),
-    // Por app: la ficha técnica (ADR-016) y su detalle.
+    // Por app: la ficha técnica (ADR-016) y su brochure (S28).
     ...getManifestVitrina().flatMap((a) =>
-      ["", "/detalle"].map((sub) => ({
+      ["", "/brochure"].map((sub) => ({
         url: `${SITE_URL}/${locale}/portafolio/apps/${a.slug}${sub}`,
         lastModified: new Date(),
         alternates: alternatesFor(`/portafolio/apps/${a.slug}${sub}`),
       })),
     ),
+    // El brochure de las dos de la casa, CV Viva y su chat: no son apps del
+    // Portafolio (no tienen ficha técnica propia), pero sí brochure.
+    ...SLUGS_CASA.map((slug) => ({
+      url: `${SITE_URL}/${locale}/portafolio/apps/${slug}/brochure`,
+      lastModified: new Date(),
+      alternates: alternatesFor(`/portafolio/apps/${slug}/brochure`),
+    })),
     // Y su simulación, si la tiene (data/simulaciones.yaml, 2026-10-12).
     ...getSimulaciones().map((s) => ({
       url: `${SITE_URL}/${locale}/portafolio/apps/${s.slug}/simulacion`,

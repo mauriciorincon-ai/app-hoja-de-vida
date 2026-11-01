@@ -96,14 +96,14 @@ const HITOS_CONOCIDOS = new Set([
 export async function FichaTecnica({
   datos,
   locale,
-  hrefDetalle,
+  hrefBrochure,
   hrefSimulacion,
   listaDeEspera = false,
 }: {
   datos: Datos;
   locale: Locale;
-  /** Ruta del detalle, si la pieza lo tiene. */
-  hrefDetalle?: string;
+  /** Ruta del brochure, si la pieza lo tiene (hoy, solo las apps). */
+  hrefBrochure?: string;
   /** Solo las apps con simulación (`data/simulaciones.yaml`): el cierre la ofrece. */
   hrefSimulacion?: string;
   /** Solo las apps: el cierre enlaza a `#contacto-portafolio` de la misma página. */
@@ -369,16 +369,16 @@ export async function FichaTecnica({
         n={n.s03}
         id={`ft-${n.s03}-${pieza.slug}`}
         titulo={t("s03")}
-        // «El detalle de cada una vive en la ficha completa» solo es verdad si
-        // esa ficha completa existe. Una pieza sin detalle no puede mandar al
-        // lector a un sitio que no hay — el subtítulo dice la cuenta y calla.
+        // «El detalle de cada una vive en el brochure» solo es verdad si ese
+        // brochure existe. Una pieza sin brochure no puede mandar al lector a un
+        // sitio que no hay — el subtítulo dice la cuenta y calla.
         // Y si la ficha NO cuenta funcionalidades (`cuenta: 0` en todos sus
         // bloques — una investigación tiene aportes, no funciones), el subtítulo
         // no inventa un «0 funcionalidades» que la pieza jamás declaró.
         sub={
           totalFuncionalidades === 0
             ? t("s03subSoloGrupos", { grupos: bloques.length })
-            : t(hrefDetalle ? "s03sub" : "s03subSinDetalle", {
+            : t(hrefBrochure ? "s03sub" : "s03subSinBrochure", {
                 grupos: bloques.length,
                 n: totalFuncionalidades,
               })
@@ -515,13 +515,13 @@ export async function FichaTecnica({
       {/* La lista de espera la decide la PÁGINA (por frente, desde
           `data/vitrina.yaml`), no este componente: solo las apps la tienen. */}
       <div className="mt-12 flex flex-wrap items-center gap-3 border-t border-paper-2 pt-8">
-        {hrefDetalle && (
+        {hrefBrochure && (
           <Link
-            href={hrefDetalle}
-            data-cta="detalle"
+            href={hrefBrochure}
+            data-cta="brochure"
             className="flex min-h-11 items-center gap-2 rounded-md bg-sage px-6 text-[15px] font-medium text-sage-ink shadow-sh-1 transition-[filter] duration-[120ms] hover:brightness-[0.97]"
           >
-            {t("verDetalle")}
+            {t("verBrochure")}
             <span aria-hidden="true">→</span>
           </Link>
         )}

@@ -8,7 +8,7 @@ import { Reveal } from "@/components/motion/reveal";
 import { ListaDeEspera } from "@/components/vitrina/lista-de-espera";
 import { CarruselDeMuestras } from "@/components/vitrina/carrusel-de-muestras";
 import { MuestraApp } from "@/components/vitrina/muestra";
-import { appsConBrochure } from "@/lib/brochure";
+import { getCasa } from "@/lib/brochure/casa";
 import { Link } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
 import { getCategoriasApps, getCv } from "@/lib/content";
@@ -99,13 +99,11 @@ export default async function VitrinaAppsPage({ params }: Params) {
   // El párrafo del hero sale del YAML del frente, como el de los otros tres.
   const frente = getFrente("apps");
   if (!frente) notFound();
-  // «De esta casa»: las apps del pipeline que viven en ESTA página y tienen
-  // brochure propia. No son fichas de la vitrina —su contenido nace de
-  // `apps.yaml`, no de un `brochure-export.json`, y el ADR-013 mantiene esas
-  // dos fuentes separadas— pero sí pertenecen a «lo construido», que desde
-  // ahora tiene UNA sola puerta. Antes su acceso era la sección «Apps» de la
-  // HOME, retirada por prometer lo mismo que la vitrina.
-  const propias = appsConBrochure();
+  // «De esta casa» (OM-26): CV Viva y su chat, que tienen brochure como las demás
+  // pero no son fichas del Portafolio —su entrega vive en `content/vitrina/casa/`,
+  // no entra al loader y su cuenta no se suma a la de las apps—. El nombre es el
+  // de `data/apps.yaml` (bilingüe) y el tagline, el de su propio export.
+  const propias = getCasa();
   // «Qué viene — y tú decides el orden» se contesta en la página de CADA app
   // (2026-09-13): el escaparate solo asoma, y las features se votan adentro.
 
@@ -207,20 +205,20 @@ export default async function VitrinaAppsPage({ params }: Params) {
                 </p>
                 <ul className="mt-5 grid gap-3 sm:grid-cols-2">
                   {propias.map((app) => (
-                    <li key={app.id} className="list-none">
+                    <li key={app.slug} className="list-none">
                       <Link
-                        href={`/apps/${app.id}`}
-                        data-app-propia={app.id}
+                        href={`/portafolio/apps/${app.slug}/brochure`}
+                        data-app-propia={app.slug}
                         className="flex h-full flex-col gap-1.5 rounded-[10px] border border-paper-2 bg-paper-0 p-5 transition-[box-shadow] duration-[180ms] hover:shadow-sh-1"
                       >
                         <span className="font-display text-[1.05rem] font-medium text-ink-0">
                           {app.nombre[l]}
                         </span>
                         <span className="text-sm leading-relaxed text-ink-2">
-                          {app.brochure.tagline[l]}
+                          {app.export.promesa.tagline}
                         </span>
                         <span className="mt-1 flex items-center gap-1.5 text-[14px] font-medium text-sage-ink">
-                          {t("verLaApp")}
+                          {t("verBrochure")}
                           <span aria-hidden="true">→</span>
                         </span>
                       </Link>

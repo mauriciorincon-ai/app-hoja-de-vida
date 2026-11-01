@@ -356,6 +356,17 @@ describe("showcase data-driven (criterio de aceptación)", () => {
     conCampoViejo.apps[0].solicitable = true;
     expect(() => parseApps(conCampoViejo, "apps.yaml")).toThrow(/solicitable/);
   });
+
+  it("`brochure` se retiró (S28): un YAML que aún lo traiga rompe el build nombrándolo", () => {
+    // El brochure de cada app sale de su export y el de la casa de
+    // `content/vitrina/casa/`; el bloque del S4 quedó sin consumidor. Es la misma
+    // salida que `solicitable`: el esquema es estricto y el campo muerto no pasa.
+    const conBloqueViejo = structuredClone(getApps()) as {
+      apps: Record<string, unknown>[];
+    };
+    conBloqueViejo.apps[0].brochure = { tagline: { es: "x", en: "x" } };
+    expect(() => parseApps(conBloqueViejo, "apps.yaml")).toThrow(/brochure/);
+  });
 });
 
 /**

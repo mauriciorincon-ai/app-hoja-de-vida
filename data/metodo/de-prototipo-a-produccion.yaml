@@ -560,7 +560,7 @@ bloques:
           es: "El trabajo de integración levanta un Supabase real, le aplica las migraciones y prueba contra Postgres; un permiso de la base se da por verificado cuando una prueba intenta saltárselo y no puede."
           en: "The integration job spins up a real Supabase, applies the migrations and tests against Postgres; a database permission counts as verified when a test tries to get around it and cannot."
         corpus: [plataforma-y-despliegue]
-        href: /apps/hoja-de-vida
+        href: /portafolio/apps/hoja-de-vida/brochure
       - nombre: { es: "Un control se demuestra fallando", en: "A control proves itself by failing" }
         nivel: uso-real
         texto:
@@ -573,7 +573,7 @@ bloques:
           es: "Una variable de entorno elige el proveedor del chat. En el sprint 3 una credencial devolvió un 401 en la integración, el circuito se abrió y la búsqueda local respondió sobre el mismo índice, diciendo que no era una respuesta del modelo."
           en: "An environment variable picks the chat’s provider. In sprint 3 a credential returned a 401 in integration, the circuit opened and local search answered over the same index, saying it was not the model’s answer."
         corpus: [rag-y-el-chat]
-        href: /apps/chat-hoja-de-vida
+        href: /portafolio/apps/chat-hoja-de-vida/brochure
       - nombre: { es: "Un techo de costo y el costo medido", en: "A cost ceiling and the measured cost" }
         nivel: uso-real
         texto:

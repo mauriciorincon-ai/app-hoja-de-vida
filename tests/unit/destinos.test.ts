@@ -87,7 +87,18 @@ describe("rutasDeDatos — salen de los mismos datos que generan las páginas", 
   it("incluye las piezas publicadas de un frente abierto", () => {
     expect(rutas.has("/portafolio/agentes/hr-develop-ai-apps")).toBe(true);
     expect(rutas.has("/portafolio/apps/habla")).toBe(true);
-    expect(rutas.has("/portafolio/apps/habla/detalle")).toBe(true);
+    expect(rutas.has("/portafolio/apps/habla/brochure")).toBe(true);
+  });
+
+  it("el brochure de cada app y de la casa es destino; el detalle y la página vieja de la casa ya no", () => {
+    expect(rutas.has("/portafolio/apps/hoja-de-vida/brochure")).toBe(true);
+    expect(rutas.has("/portafolio/apps/chat-hoja-de-vida/brochure")).toBe(true);
+    for (const muerta of [
+      "/portafolio/apps/habla/detalle",
+      "/apps/hoja-de-vida",
+      "/apps/chat-hoja-de-vida",
+    ])
+      expect(rutas.has(muerta), muerta).toBe(false);
   });
 
   it("no inventa rutas: un proyecto sin case study no tiene página", () => {
@@ -178,7 +189,19 @@ describe("nombreDeDestino — a dónde lleva la cita, con el nombre que el visit
     expect(
       nombreDeDestino("/portafolio/agentes/hr-develop-ai-apps", es),
     ).toBeTruthy();
-    expect(nombreDeDestino("/portafolio/apps/habla/detalle", es)).toBeTruthy();
+    expect(nombreDeDestino("/portafolio/apps/habla/brochure", es)).toBeTruthy();
+  });
+
+  it("el brochure de la casa se llama como la casa lo dice, en cada idioma", () => {
+    expect(nombreDeDestino("/portafolio/apps/hoja-de-vida/brochure", es)).toBe(
+      "CV Viva",
+    );
+    expect(nombreDeDestino("/portafolio/apps/hoja-de-vida/brochure", en)).toBe(
+      "Living CV",
+    );
+    expect(
+      nombreDeDestino("/portafolio/apps/chat-hoja-de-vida/brochure", en),
+    ).toBe("Chat with my résumé");
   });
 
   it("un destino sin nombre devuelve null — y eso rompe el build, no el chip", () => {

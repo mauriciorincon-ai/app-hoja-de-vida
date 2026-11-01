@@ -70,12 +70,6 @@
     }
   },
   "brochure": {
-    "volver": "Apps",
-    "eyebrow": "Brochure",
-    "funcionalidades": "Qué hace",
-    "stack": "Stack",
-    "verApp": "Ver la app",
-    "cta": "¿Te suena a tu equipo? Hablemos",
     "titulo": "{nombre} — brochure — Henry Rincón",
     "indice": "Índice",
     "buscar": "Buscar en el brochure",
@@ -415,7 +409,7 @@
     "piezaSiguiente": "Producto siguiente",
     "deEstaCasa": "De esta casa",
     "deEstaCasaLinea": "Lo que sostiene la página que estás leyendo: también son apps del pipeline, y también se pueden recorrer.",
-    "verLaApp": "Ver la app",
+    "verBrochure": "Ver brochure",
     "detalleTitulo": "Ficha completa",
     "volverFichaTecnica": "Volver a la ficha técnica",
     "simulacionTitulo": "La simulación",
@@ -444,9 +438,9 @@
     "procesoApp": "Proceso declarado por la propia app en su export.",
     "procesoPlaneadora": "Proceso trazado por el pipeline AI-APPs desde la propia app y su export.",
     "stackParaQue": "Para qué sirve cada uno",
-    "s03": "Qué tiene",
-    "s03sub": "{grupos, plural, one {# grupo} other {# grupos}} · {n} funcionalidades. El detalle de cada una vive en la ficha completa.",
-    "s03subSinDetalle": "{grupos, plural, one {# grupo} other {# grupos}} · {n} funcionalidades.",
+    "s03": "Qué aporta",
+    "s03sub": "{grupos, plural, one {# grupo} other {# grupos}} · {n} funcionalidades. El detalle de cada una vive en el brochure.",
+    "s03subSinBrochure": "{grupos, plural, one {# grupo} other {# grupos}} · {n} funcionalidades.",
     "s03subSoloGrupos": "{grupos, plural, one {# grupo} other {# grupos}}.",
     "s04": "Límites, y lo que nunca hace",
     "s04sub": "Lo que decidió no ser vale tanto como lo que es.",
@@ -472,7 +466,7 @@
       "version": "versión del repo",
       "decisiones": "decisiones registradas"
     },
-    "verDetalle": "Ver la ficha completa",
+    "verBrochure": "Ver brochure",
     "verSimulacion": "Ver la simulación",
     "cierreNota": "Aquí se muestra; no se entrega.",
     "volverFichaTecnica": "Volver a la ficha técnica"
@@ -606,7 +600,9 @@
   "vitrinaHome": {
     "titulo": "Portafolio",
     "linea": "Cuatro frentes: apps, agentes, investigaciones y tableros. Cada producto publicado lleva su ficha técnica.",
-    "ir": "Explora mi portafolio"
+    "ir": "Explora mi portafolio",
+    "publicados": "{n} publicados",
+    "enPreparacion": "En preparación"
   },
   "estudios": {
     "sinPeriodo": "Sin fecha declarada"
