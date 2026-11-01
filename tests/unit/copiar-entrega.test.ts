@@ -11,6 +11,7 @@ import path from "node:path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import {
   componerContenido,
+  copiarContenido,
   copiarEntrega,
   destinosDe,
   sonIguales,
@@ -190,5 +191,46 @@ describe("el contenido v2 se junta sin las notas de la planeadora", () => {
     expect(() => componerContenido(path.join(dir, "maqueta", "z"))).toThrow(
       /falta contenido\.json/,
     );
+  });
+
+  it("--solo-contenido: copia solo el v2 (S30), con el slug de su contenido, y no toca la entrega", () => {
+    escribir(
+      path.join(raiz, "content", "vitrina", "x.brochure-export.json"),
+      "ya estaba",
+    );
+    const h = copiarContenido({ contenido: maqueta(), raiz });
+    expect(h.slug).toBe("x");
+    expect(h.copiados).toEqual([]);
+    expect(h.contenido).toBe("content/vitrina/x.contenido.json");
+    expect(
+      readFileSync(
+        path.join(raiz, "content/vitrina/x.brochure-export.json"),
+        "utf8",
+      ),
+    ).toBe("ya estaba");
+    expect(
+      JSON.parse(readFileSync(path.join(raiz, h.contenido), "utf8")),
+    ).toEqual({
+      schema_version: "2.0.0-borrador",
+      app: "x",
+      acento: "sage",
+      grupos: [{ orden: 1 }],
+      en: { promesa: { tagline: "t" } },
+    });
+    // La casa, al suyo: nunca junto a las diez.
+    expect(
+      copiarContenido({ contenido: maqueta(), raiz, casa: true }).contenido,
+    ).toBe("content/vitrina/casa/x.contenido.json");
+  });
+
+  it("--solo-contenido se niega con un slug raro o sin contenido.json", () => {
+    const m = path.join(dir, "maqueta", "raro");
+    escribir(path.join(m, "contenido.json"), '{"app":"../afuera"}');
+    expect(() => copiarContenido({ contenido: m, raiz })).toThrow(
+      /slug inválido/,
+    );
+    expect(() =>
+      copiarContenido({ contenido: path.join(dir, "maqueta", "nada"), raiz }),
+    ).toThrow(/falta contenido\.json/);
   });
 });
