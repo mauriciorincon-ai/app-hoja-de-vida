@@ -225,6 +225,10 @@ el mensaje te llega al correo.
   - **Pasa el cursor por una:** se detiene y crece un 20 % (el fondo no frena nada). Con el clic
     sostenido la **agarras y la lanzas** contra las otras; en el teléfono, **mantén el dedo 0,3 s**
     (antes, deslizar baja la página).
+  - **En el teléfono, el rectángulo es más alto (ajuste del 2026-11-01).** Por debajo de 640 px de
+    ancho el alto sale de cuántas áreas son —las burbujas ocupan a lo sumo el 38 % del espacio libre— y
+    por debajo de 480 px miden 112 px (los nombres se ajustan solos, ≈ 11 px). A 390 px el rectángulo
+    mide ≈ 734 px de alto; antes eran 600 y las nueve se empujaban sin avanzar. En escritorio no cambia.
   - **Pulsa una:** las otras se van, ella pasa al centro y sus herramientas quedan alrededor,
     **conectadas con una línea**. Los estados («prototipo», «en estudio», «en exploración», «en
     preparación») van como etiqueta con texto; las notas («el chat de este sitio»), debajo, en pequeño.
@@ -464,7 +468,10 @@ el mensaje te llega al correo.
   fichas se voltean y se filtran por tipo. **Imprimir** lo abre todo y lo deja en carta, vertical.
 - **El movimiento tiene pausa:** la cinta de pantallas, las olas, las insignias y la portada se mueven
   solas; el botón **«Pausar el movimiento»** de la franja de la cinta las detiene todas (WCAG 2.2.2). Con
-  «reducir movimiento» del sistema nada se mueve. **Es la única diferencia intencional con la maqueta
+  «reducir movimiento» del sistema nada se mueve. **La cinta crece y se detiene solo con un ratón de
+  verdad encima (o un lápiz) o con el foco del teclado**, no con un toque de dedo: en el teléfono, tocar una
+  pantalla, verla en el Recorrido y cerrarlo deja la cinta andando (ajuste del 2026-11-01; antes quedaba
+  esa pantalla grande y la cinta quieta). **Es la única diferencia intencional con la maqueta
   aprobada** (además de las que el cierre del Sprint 028 declara, y de que en «Úsala» los formularios,
   el voto y las vecinas funcionan de verdad).
 - **Cómo se alimenta (sin tocar código):**

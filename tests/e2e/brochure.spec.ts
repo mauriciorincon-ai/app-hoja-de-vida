@@ -648,3 +648,169 @@ test.describe("Brochure — impresión", () => {
     await page.emulateMedia({ media: "screen" });
   });
 });
+
+/**
+ * LA CINTA, TRAS CERRAR EL RECORRIDO (ajuste del 2026-11-01).
+ *
+ * En el celular: tocar una pantalla de la cinta, verla en el Recorrido y cerrarlo dejaba esa pantalla
+ * grande y la cinta detenida. El diálogo devuelve el foco a la pantalla que lo abrió; el `focusin` la
+ * crecía y `:focus-within` pausaba el bucle, y con el dedo no hay «salir». Además el toque dispara
+ * `mouseover`, y `(hover: none)` no protege en navegadores táctiles que dicen `hover: hover` (Samsung
+ * Internet). Ahora crece y se detiene solo con un ratón de verdad (`pointerType` mouse o pen) o con el foco
+ * del teclado (`:focus-visible`).
+ */
+test.describe("Brochure — la cinta tras cerrar el Recorrido", () => {
+  const SLUG = "inmobiliaria";
+
+  const cinta = (page: Page) => page.locator("[data-brochure] .cinta-pista");
+  const crecidas = (page: Page) =>
+    page.locator('.cinta-item[data-b-dock="crece"]');
+  const transformada = (page: Page) =>
+    cinta(page).evaluate((el) => getComputedStyle(el).transform);
+
+  /** La cinta corre: su transform cambia en 1 s (el bucle mueve la pista, no los atributos). */
+  async function corre(page: Page) {
+    const antes = await transformada(page);
+    await page.waitForTimeout(1000);
+    expect(await transformada(page), "la cinta corre").not.toBe(antes);
+  }
+
+  /** La pantalla de la cinta más cerca del centro: la pista corre sin parar, así que se mide en el momento. */
+  const pantallaCentral = (page: Page) =>
+    page.evaluate(() => {
+      document.querySelector(".cinta")!.scrollIntoView({ block: "center" });
+      let mejor: DOMRect | null = null;
+      let lejos = Infinity;
+      for (const el of document.querySelectorAll<HTMLElement>(
+        ".cinta-pista .cinta-item:not([aria-hidden])",
+      )) {
+        const r = el.getBoundingClientRect();
+        const d = Math.abs(r.x + r.width / 2 - innerWidth / 2);
+        if (d < lejos) {
+          lejos = d;
+          mejor = r;
+        }
+      }
+      return {
+        x: mejor!.x + mejor!.width / 2,
+        y: mejor!.y + mejor!.height / 2,
+      };
+    });
+
+  /** Un toque de dedo de verdad (eventos táctiles), sin mover el ratón: así llega a Samsung Internet. */
+  async function dedo(page: Page) {
+    const cdp = await page.context().newCDPSession(page);
+    return async (p: { x: number; y: number }) => {
+      await cdp.send("Input.dispatchTouchEvent", {
+        type: "touchStart",
+        touchPoints: [{ x: p.x, y: p.y }],
+      });
+      await cdp.send("Input.dispatchTouchEvent", {
+        type: "touchEnd",
+        touchPoints: [],
+      });
+    };
+  }
+
+  async function tocarYCerrar(page: Page) {
+    const tocar = await dedo(page);
+    await abrir(page, SLUG);
+    await page.waitForTimeout(500);
+    await tocar(await pantallaCentral(page));
+    const dlg = page.locator("dialog.recorrido");
+    await expect
+      .poll(() => dlg.evaluate((d: HTMLDialogElement) => d.open))
+      .toBe(true);
+    await tocar(
+      await page.evaluate(() => {
+        const r = document.querySelector("#r-cerrar")!.getBoundingClientRect();
+        return { x: r.x + r.width / 2, y: r.y + r.height / 2 };
+      }),
+    );
+    await expect
+      .poll(() => dlg.evaluate((d: HTMLDialogElement) => d.open))
+      .toBe(false);
+    // el diálogo devolvió el foco a la pantalla que lo abrió (como siempre)
+    await expect(page.locator(".cinta-item:focus")).toHaveCount(1);
+  }
+
+  test("el celular (hover: none): tocar una pantalla, verla y cerrar deja la cinta andando", async ({
+    page,
+  }, testInfo) => {
+    test.skip(
+      testInfo.project.name !== "mobile",
+      "el celular de verdad (Pixel 7)",
+    );
+    await tocarYCerrar(page);
+    await expect(crecidas(page)).toHaveCount(0);
+    await expect(cinta(page)).not.toHaveAttribute("data-b-abierta", "");
+    await corre(page);
+  });
+
+  test("un navegador táctil que dice hover: hover (como Samsung Internet): tocar, ver y cerrar deja la cinta andando y ninguna pantalla grande", async ({
+    page,
+  }, testInfo) => {
+    test.skip(
+      testInfo.project.name !== "chromium",
+      "contexto de escritorio con toques de dedo",
+    );
+    await tocarYCerrar(page);
+    expect(
+      await page.evaluate(() => matchMedia("(hover: hover)").matches),
+      "la premisa: este contexto dice hover: hover",
+    ).toBe(true);
+    await expect(crecidas(page)).toHaveCount(0);
+    await expect(cinta(page)).not.toHaveAttribute("data-b-abierta", "");
+    await corre(page);
+  });
+
+  test("con un ratón, la pantalla crece y la cinta se detiene; al salir, sigue", async ({
+    page,
+  }, testInfo) => {
+    test.skip(
+      testInfo.project.name !== "chromium",
+      "el ratón es de escritorio",
+    );
+    await abrir(page, SLUG);
+    await page.waitForTimeout(500);
+    const p = await pantallaCentral(page);
+    await page.mouse.move(p.x, p.y);
+    await expect(crecidas(page)).toHaveCount(1);
+    await expect(cinta(page)).toHaveAttribute("data-b-abierta", "");
+    await expect(cinta(page)).toHaveCSS("animation-play-state", "paused");
+    await page.mouse.move(5, 5);
+    await expect(cinta(page)).not.toHaveAttribute("data-b-abierta", "");
+    await expect(cinta(page)).toHaveCSS("animation-play-state", "running");
+    await corre(page);
+  });
+
+  test("con el teclado, Tab llega a la pantalla, crece y se detiene; cerrar el Recorrido con Esc la devuelve al foco", async ({
+    page,
+  }, testInfo) => {
+    test.skip(
+      testInfo.project.name !== "chromium",
+      "el teclado es de escritorio",
+    );
+    await abrir(page, SLUG);
+    // el último botón del rótulo es el anterior en el orden de Tab a la primera pantalla
+    await page.locator(".cinta-rotulo button").last().focus();
+    await page.keyboard.press("Tab");
+    const primera = cinta(page).locator(".cinta-item").first();
+    await expect(primera).toBeFocused();
+    await expect(crecidas(page)).toHaveCount(1);
+    await expect(cinta(page)).toHaveCSS("animation-play-state", "paused");
+    await page.keyboard.press("Enter");
+    const dlg = page.locator("dialog.recorrido");
+    await expect
+      .poll(() => dlg.evaluate((d: HTMLDialogElement) => d.open))
+      .toBe(true);
+    await page.keyboard.press("Escape");
+    await expect
+      .poll(() => dlg.evaluate((d: HTMLDialogElement) => d.open))
+      .toBe(false);
+    // con el teclado el foco vuelve a la pantalla, como antes: crece y la cinta espera
+    await expect(primera).toBeFocused();
+    await expect(crecidas(page)).toHaveCount(1);
+    await expect(cinta(page)).toHaveCSS("animation-play-state", "paused");
+  });
+});

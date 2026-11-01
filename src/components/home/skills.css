@@ -180,7 +180,17 @@
 @media (max-width:640px){
   [data-skills] .lista{grid-template-columns:minmax(0,1fr)}
   [data-skills] .grupo:last-child:nth-child(odd){grid-column:auto}
-  [data-skills] .escenario-hueco:empty{height:600px}
+  /* el hueco reserva el alto que tendrá el escenario antes de que llegue (el `medidas()` del motor: por debajo de
+     640 px el alto sale de cuántas áreas son; 233337 = 9 áreas de 112 px / 0,38 y 267862 = 9 de 120 px / 0,38),
+     así que no se mueve nada al llegar. Sin `tan(atan2())` se queda el mínimo de siempre, 600 px. */
+  [data-skills] .escenario-hueco:empty{height:auto;container-type:inline-size}
+  [data-skills] .escenario-hueco:empty::before{content:"";display:block;height:600px}
+  @supports (height:calc(1px * tan(atan2(1px,1px)))){
+    [data-skills] .escenario-hueco:empty::before{height:max(600px,calc(82px + 1px * 233337 / tan(atan2(100cqw,1px))))}
+    @container (min-width:480px){
+      [data-skills] .escenario-hueco:empty::before{height:max(600px,calc(82px + 1px * 267862 / tan(atan2(100cqw,1px))))}
+    }
+  }
   [data-skills] .disco svg{width:18px;height:18px}
   [data-skills] .disco{gap:4px}
   [data-skills] .num{left:calc(14.6% - 11px);top:calc(14.6% - 11px);min-width:22px;height:22px;padding:0 6px;font-size:10.5px}

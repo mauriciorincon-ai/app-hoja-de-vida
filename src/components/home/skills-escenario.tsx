@@ -127,7 +127,7 @@ export function SkillsEscenario({
   // Las funciones del escenario leen los elementos y el motor por referencia; los manejadores que se
   // instalan una sola vez llegan a la versión vigente por `acciones`.
   const medidasActuales = () =>
-    M.medidas(motor.current.W, motor.current.techoInv);
+    M.medidas(motor.current.W, motor.current.techoInv, areas.length);
 
   const medirTecho = () => {
     const p = invitaRef.current;
@@ -479,7 +479,7 @@ export function SkillsEscenario({
 
     mo.W = esc.clientWidth;
     medirTecho();
-    const m0 = M.medidas(mo.W, mo.techoInv);
+    const m0 = M.medidas(mo.W, mo.techoInv, areas.length);
     esc.style.setProperty("--d", `${m0.d}px`);
     mo.cuerpos = M.sembrar(areas.length, m0, Math.random);
     mo.sem = { W: m0.W, H: m0.H };
@@ -601,7 +601,7 @@ export function SkillsEscenario({
         esc.setAttribute("data-arrastrando", "");
       }
       const c = mo.cuerpos[a.i]!;
-      const m = M.medidas(mo.W, mo.techoInv);
+      const m = M.medidas(mo.W, mo.techoInv, areas.length);
       const q = M.dentro(p.x + a.dx, p.y + a.dy, (m.d / 2) * c.k, m);
       c.x = q.x;
       c.y = q.y;

@@ -447,3 +447,112 @@ test.describe("Skills — el dedo en el celular", () => {
     await expect(burbuja(page, 2)).toHaveAttribute("aria-pressed", "false");
   });
 });
+
+/**
+ * EN EL CELULAR LAS NUEVE ÁREAS FLOTAN SUELTAS (ajuste del 2026-11-01).
+ *
+ * A 360–414 px el rectángulo medía ≈ 330–380 × 600 y las nueve se empujaban sin avanzar. Ahora su alto sale
+ * de cuántas áreas son (el `medidas()` del motor) y por debajo de 480 px miden 112. Aquí se mira en el
+ * navegador lo que el motor puro ya prueba con números: que se mueven, que los nombres caben en su círculo
+ * y que el hueco reserva el alto del escenario antes de que llegue.
+ */
+test.describe("Skills — en el celular flotan sueltas", () => {
+  test.use({ viewport: { width: 390, height: 844 } });
+
+  const centros = (page: Page) =>
+    page.evaluate(() =>
+      [...document.querySelectorAll("#skills .burbuja")].map((b) => {
+        const r = b.getBoundingClientRect();
+        return { x: r.x + r.width / 2, y: r.y + r.height / 2 };
+      }),
+    );
+
+  test("a 390 px las nueve áreas cambian de sitio en 3 s", async ({ page }) => {
+    const errores = await abrirSkills(page);
+    const antes = await centros(page);
+    expect(antes).toHaveLength(N);
+    await page.waitForTimeout(3000);
+    const despues = await centros(page);
+    const corrido = antes.map((a, i) =>
+      Math.hypot(a.x - despues[i]!.x, a.y - despues[i]!.y),
+    );
+    const media = corrido.reduce((s, c) => s + c, 0) / N;
+    expect(
+      corrido.filter((c) => c > 10).length,
+      `corrido: ${corrido.map((c) => c.toFixed(0)).join(" ")}`,
+    ).toBeGreaterThanOrEqual(7);
+    expect(media).toBeGreaterThan(25);
+    expect(errores, "consola").toEqual([]);
+  });
+
+  for (const [l, ruta] of [
+    ["es", "/es"],
+    ["en", "/en"],
+  ] as const) {
+    test(`/${l}: ningún nombre se sale de su círculo`, async ({ page }) => {
+      await abrirSkills(page, ruta);
+      const sueltos = await page.evaluate(() =>
+        [...document.querySelectorAll<HTMLElement>("#skills .burbuja")]
+          .map((b) => {
+            const disco = b.querySelector<HTMLElement>(".disco")!;
+            const nombre = b.querySelector<HTMLElement>(".nombre")!;
+            const c = disco.getBoundingClientRect();
+            const rg = document.createRange();
+            rg.selectNodeContents(nombre);
+            const t = rg.getBoundingClientRect();
+            const cx = c.x + c.width / 2;
+            const cy = c.y + c.height / 2;
+            const r = c.width / 2;
+            const fuera = [
+              [t.left, t.top],
+              [t.right, t.top],
+              [t.left, t.bottom],
+              [t.right, t.bottom],
+            ].filter(([x, y]) => Math.hypot(x! - cx, y! - cy) > r + 0.5);
+            return {
+              nombre: nombre.textContent,
+              fuera: fuera.length,
+            };
+          })
+          .filter((x) => x.fuera > 0),
+      );
+      expect(sueltos, "nombres fuera de su círculo").toEqual([]);
+    });
+  }
+
+  // La invitación de arriba puede ocupar más líneas (en inglés, o en una pantalla angosta) y empuja el techo: el
+  // hueco cuenta con el mínimo de 74 px, así que esta prueba lo mira en los dos idiomas y a 320 px también.
+  const HUECOS = [320, 360, 390, 414].flatMap((ancho) =>
+    (["es", "en"] as const).map((l) => [ancho, l] as const),
+  );
+  for (const [ancho, l] of HUECOS) {
+    test(`/${l}: a ${ancho} px el hueco reserva el alto que tendrá el escenario`, async ({
+      page,
+    }) => {
+      await page.setViewportSize({ width: ancho, height: 844 });
+      await abrirSkills(page, `/${l}`);
+      // Un hueco vacío como el que se ve antes de que llegue el escenario, con la misma hoja y el mismo ancho.
+      const { hueco, escenario: alto } = await page.evaluate(() => {
+        const real = document.querySelector<HTMLElement>(
+          "#skills .escenario-hueco",
+        )!;
+        const sonda = document.createElement("div");
+        sonda.className = "escenario-hueco";
+        real.parentElement!.insertBefore(sonda, real);
+        const h = sonda.getBoundingClientRect().height;
+        sonda.remove();
+        return {
+          hueco: h,
+          escenario: document
+            .querySelector<HTMLElement>("#skills .escenario")!
+            .getBoundingClientRect().height,
+        };
+      });
+      expect(alto, "el escenario ya no mide 600").toBeGreaterThan(650);
+      expect(
+        Math.abs(hueco - alto),
+        `hueco ${hueco} · escenario ${alto}`,
+      ).toBeLessThanOrEqual(2);
+    });
+  }
+});

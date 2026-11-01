@@ -205,7 +205,10 @@ animaciones infinitas (sweep/glitch/marquee), scroll-snap de deck, CDNs en `<hea
   `referencias-ui/home/maqueta/` de la planeadora): `src/components/home/skills.tsx` (la lista, de
   servidor), `skills-explorador.tsx` (la isla ligera, que solo cambia atributos) y `skills-escenario.tsx`
   (el rectángulo, en su propio chunk). Las cuentas del movimiento son de `src/lib/skills/explorador.ts`.
-  - **El escenario:** un rectángulo de 620 px de alto (600 en móvil; crece con las herramientas de un
+  - **El escenario:** un rectángulo de 620 px de alto (en móvil, por debajo de 640 px de ancho, su alto
+    sale de cuántas áreas son: las burbujas ocupan a lo sumo el 38 % del espacio libre —`DENSIDAD_CELULAR`
+    del motor—, con un mínimo de 600, ≈ 734 a 390 px; por debajo de 480 px las burbujas miden 112 y el
+    hueco `:empty` reserva ese alto antes de que llegue el escenario; crece con las herramientas de un
     área abierta), `r-[22px]`, **oscuro** (`#23211e` → `#151412` → `#0e0d0c`, degradado radial) con una
     **luz tenue en el centro** (≈ 9 % de un blanco cálido): el sitio sigue siendo de un solo tema, solo
     este rectángulo es oscuro. Los colores viven como variables al tope de `[data-skills]`
@@ -560,7 +563,11 @@ cifra `clamp(3.5rem,8vw,4.75rem)`; tres columnas dejaban dos huérfanos.
     por línea en la hoja, para que la prueba las cuente). `ink-3` sigue vetado como texto en la parte clara.
   - **Movimiento ambiental con pausa:** la cinta de pantallas (un dock que crece ×2,2 con `transform`), las
     olas, las insignias y la portada se mueven solas; un botón de pausa visible en la franja de la cinta las
-    detiene (`[data-b-quieto]`) y con «reducir movimiento» nada se mueve. Entradas: `.entra` / `.aparece` con
+    detiene (`[data-b-quieto]`) y con «reducir movimiento» nada se mueve. **La cinta crece y se detiene solo con
+    un ratón de verdad (`pointerType` mouse o pen) o con el foco del teclado (`:focus-visible`)**: un toque de dedo
+    dispara `mouseover` y el Recorrido devuelve el foco a la pantalla que lo abrió, y ninguno de los dos es un
+    visitante que «sale»; la pausa del CSS sigue a `[data-b-abierta]` y a `:has(:focus-visible)`, no a `:hover` ni a
+    `:focus-within` (ajuste del 2026-11-01; la vista previa flotante sigue la misma regla). Entradas: `.entra` / `.aparece` con
     `data-motion`, así que el cinturón de `globals.css` las deja en su estado final sin JavaScript.
   - **Estructura:** los capítulos son `<details>` (sin JS funcionan; Ctrl+F los abre); las fichas no anidan
     controles (un botón de volteo a toda la ficha, `aria-pressed`, y la cita encima); las cajas del flujo

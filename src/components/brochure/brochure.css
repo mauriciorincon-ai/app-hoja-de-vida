@@ -166,7 +166,10 @@
   .cinta-rotulo{display:flex;justify-content:space-between;gap:12px;align-items:baseline;font:500 12px var(--f-mono);letter-spacing:.07em;text-transform:uppercase;color:var(--tenue-oscuro);margin-bottom:16px}
   .cinta-rotulo button{all:unset;cursor:pointer;color:var(--ac);text-transform:none;letter-spacing:0;font-size:13px}
   .cinta-pista{display:flex;gap:14px;width:max-content;animation:b-desliza 120s linear infinite}
-  .cinta-pista:hover,.cinta-pista:focus-within{animation-play-state:paused}
+  /* se detiene con un ratón de verdad encima o con el foco del teclado, no con un toque de dedo ni con el foco que el
+     Recorrido devuelve a la pantalla tras cerrarse: la isla marca `data-b-abierta` en esos dos casos (`crecerCinta`) */
+  .cinta-pista[data-b-abierta]{animation-play-state:paused}
+  .cinta-pista:has(:focus-visible){animation-play-state:paused}
 
   .cinta-item{appearance:none;flex:none;width:var(--cinta-w);padding:0;border:1px solid rgba(255,255,255,.1);border-radius:10px;overflow:hidden;background:#1c1b19;cursor:zoom-in;transform-origin:50% 100%;transition:transform .4s var(--ease),border-color .3s,box-shadow .4s}
   .cinta-item:hover,.cinta-item:focus-visible{border-color:var(--ac)}
