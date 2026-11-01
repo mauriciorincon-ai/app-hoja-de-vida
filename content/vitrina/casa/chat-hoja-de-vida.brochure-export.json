@@ -12,14 +12,14 @@
     "enlaces.produccion": "null cuando la app no tiene URL pública. `razon` explica por qué, y es lo que la vitrina muestra en lugar del enlace. Nunca se rellena con un enlace de repositorio ni con una promesa."
   },
   "schema_version": "1.0.0",
-  "actualizado": "2026-10-31",
+  "actualizado": "2026-11-01",
   "app": {
     "slug": "chat-hoja-de-vida",
     "nombre": "Chat con mi hoja de vida",
     "ciclo": "H-2",
     "estado": "inicial",
     "sellado_en": null,
-    "sprints_cerrados": 26,
+    "sprints_cerrados": 28,
     "version_repo": "0.1.0"
   },
   "promesa": {
@@ -198,7 +198,7 @@
       "valor": 18,
       "unidad": "funcionalidades",
       "fuente": "medido",
-      "detalle": "Una por función del chat documentada en docs/MANUAL-DE-USO.md en b9acf15, cuadrada sección por sección; la lista, en la respuesta 028 de la planeadora."
+      "detalle": "Una por función del chat documentada en docs/MANUAL-DE-USO.md en c3e4d2c, cuadrada sección por sección; la lista, en la respuesta 028 de la planeadora."
     },
     {
       "clave": "fragmentos_del_indice",
@@ -206,7 +206,7 @@
       "valor": 1939,
       "unidad": "fragmentos",
       "fuente": "medido",
-      "detalle": "Salida de scripts/build-chat-index.mjs en el build de una copia de b9acf15 el 2026-10-31: 1939 fragmentos en español y 1930 en inglés."
+      "detalle": "Salida de scripts/build-chat-index.mjs en el build de una copia de c3e4d2c el 2026-11-01: 1939 fragmentos en español y 1930 en inglés."
     },
     {
       "clave": "documentos_a_fondo",
@@ -222,7 +222,7 @@
       "valor": 175,
       "unidad": "preguntas",
       "fuente": "medido",
-      "detalle": "Preguntas legítimas de tests/fixtures/banco-de-preguntas.es.yaml en b9acf15, y las mismas 175 en inglés; el banco suma además 15 ajenas, 1 de rehúso y 3 sin cobertura por idioma."
+      "detalle": "Preguntas legítimas de tests/fixtures/banco-de-preguntas.es.yaml en c3e4d2c, y las mismas 175 en inglés; el banco suma además 15 ajenas, 1 de rehúso y 3 sin cobertura por idioma."
     },
     {
       "clave": "pruebas_e2e_del_chat",
@@ -230,7 +230,7 @@
       "valor": 94,
       "unidad": "pruebas",
       "fuente": "medido",
-      "detalle": "Salida de `playwright test --list` sobre una copia de b9acf15: chat.spec.ts y chat-conversacion.spec.ts, 47 en Chromium y 47 en móvil, con el proveedor simulado."
+      "detalle": "Salida de `playwright test --list` sobre una copia de c3e4d2c: chat.spec.ts y chat-conversacion.spec.ts, 47 en Chromium y 47 en móvil, con el proveedor simulado."
     },
     {
       "clave": "proveedores_conmutables",
@@ -238,7 +238,7 @@
       "valor": 5,
       "unidad": "proveedores",
       "fuente": "medido",
-      "detalle": "PROVEEDORES_CHAT en src/lib/ia/provider.ts en b9acf15, sin el simulado de las pruebas: Groq, Gemini, Azure, Anthropic y uno compatible con OpenAI."
+      "detalle": "PROVEEDORES_CHAT en src/lib/ia/provider.ts en c3e4d2c, sin el simulado de las pruebas: Groq, Gemini, Azure, Anthropic y uno compatible con OpenAI."
     },
     {
       "clave": "fuentes_por_respuesta",
@@ -316,10 +316,10 @@
   },
   "enlaces": {
     "produccion": null,
-    "razon": "El chat vive dentro de CV Viva, en el botón flotante de cada página. Esta ficha no publica su dirección: es la regla de cero enlaces del Portafolio.",
+    "razon": "El chat vive dentro de CV Viva, en el botón flotante de cada página, y su dirección no se publica: es la regla de cero enlaces del Portafolio.",
     "repositorio": null,
     "razon_repositorio": "El código no se enlaza desde el Portafolio: ninguna ficha publica enlaces de acceso ni de repositorio.",
-    "brochure_archivo": "data/apps.yaml (bloque brochure, ADR-012)",
-    "brochure_ruta_local": "/apps/chat-hoja-de-vida"
+    "brochure_archivo": "sin archivo propio: la plantilla del brochure lo arma desde esta entrega (ADR-030)",
+    "brochure_ruta_local": "/portafolio/apps/chat-hoja-de-vida"
   }
 }
