@@ -67,12 +67,14 @@ test.describe("prefers-reduced-motion (criterio de aceptación e2e)", () => {
       "#skills h2",
       "#contacto h2",
       // Lo nuevo de la revisión post-S7 que nace con estilos inline de motion:
-      // el año grande del índice y los trazos de los iconos de skills.
+      // el año grande del índice.
       "#trayectoria [data-timeline-anio]",
       // El relleno de la línea existe siempre (misma estructura que el
       // servidor); con reducción queda completo y quieto por el cinturón CSS.
       "#trayectoria [data-timeline-relleno]",
-      "#skills [data-skill-grupo='0'] svg",
+      // S29: Skills ya no anima su lista (es estática); lo que la isla pone
+      // al montar es el conmutador «Áreas | Ver todo en lista».
+      "#skills [data-skills][data-vivo] .vista",
     ]) {
       expect(await findAnimatedAncestor(page.locator(selector))).toBeNull();
     }

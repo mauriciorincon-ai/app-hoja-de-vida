@@ -654,46 +654,41 @@ test.describe("el título de Contacto emerge de su máscara", () => {
   });
 });
 
-test.describe("una cita del chat aterriza en su tarjeta de Skills", () => {
-  // 2026-09-26: seis documentos «a fondo» llevan a una tarjeta de Skills
-  // (`#skills-<id>`), no a la sección entera. La tarjeta entra con liftIn (70
-  // px abajo y encogida): si el salto llega antes que la animación, apunta a la
-  // posición de ARRANQUE, y al subir el título quedaba BAJO el encabezado.
-  // Se mide cuando la animación TERMINÓ: a mitad de camino la tarjeta aún está
-  // abajo y la prueba pasaría en falso.
-  test("/es#skills-bi-y-decision deja el título de la tarjeta a la vista", async ({
+test.describe("una cita del chat abre su área de Skills bajo el encabezado", () => {
+  // 2026-09-26: seis documentos «a fondo» llevan a una tarjeta de Skills (`#skills-<id>`), no a la
+  // sección entera. S29: con el explorador puesto la lista queda detrás de «Ver todo en lista», así que la
+  // isla reconoce el ancla y abre ESA área en el rectángulo, que queda a la vista bajo el encabezado (el
+  // chat no se toca). El clic en un enlace dentro de la misma página está en tests/e2e/skills.spec.ts.
+  test("/es#skills-bi-y-decision abre «BI & decisión» y deja el rectángulo a la vista", async ({
     page,
   }) => {
     await page.goto("/es#skills-bi-y-decision");
-    const tarjeta = page.locator("#skills-bi-y-decision");
-    // Terminó cuando la tarjeta es del todo visible Y su título dejó de
-    // moverse entre dos lecturas. No sirve mirar el `transform`: el contenedor
-    // lleva una perspectiva fija que nunca vuelve a `none`.
+    const area = page.locator("#skills .burbuja[aria-pressed=true]");
+    await expect(area).toHaveCount(1);
+    await expect(area.locator(".nombre")).toHaveText("BI & decisión");
+    await expect(page.locator("#skills .chip").first()).toBeVisible();
+    // Terminó cuando el rectángulo dejó de moverse entre dos lecturas.
     let previo = "";
     await expect
       .poll(
         async () => {
-          const ahora = await tarjeta.evaluate((el) => {
-            let opacidad = 1;
-            for (let n: Element | null = el; n; n = n.parentElement) {
-              opacidad *= Number(getComputedStyle(n).opacity);
-            }
-            const y = el.querySelector("h3")!.getBoundingClientRect().y;
-            return `${opacidad.toFixed(2)}|${y.toFixed(1)}`;
-          });
-          const quieta = ahora === previo && ahora.startsWith("1.00|");
+          const y = (await page.locator("#skills .escenario").boundingBox())?.y;
+          const ahora = String(y?.toFixed(1));
+          const quieto = ahora === previo;
           previo = ahora;
-          return quieta;
+          return quieto;
         },
         { intervals: [250], timeout: 10_000 },
       )
       .toBe(true);
     const encabezado = await page.locator("header").first().boundingBox();
-    const titulo = await tarjeta.locator("h3").boundingBox();
-    expect(titulo && encabezado, "sin caja").toBeTruthy();
+    const rect = await page.locator("#skills .escenario").boundingBox();
+    expect(rect && encabezado, "sin caja").toBeTruthy();
     expect(
-      titulo!.y,
-      "el título de la tarjeta quedó bajo el encabezado",
-    ).toBeGreaterThanOrEqual(encabezado!.y + encabezado!.height);
+      rect!.y,
+      "el rectángulo quedó bajo el encabezado",
+    ).toBeGreaterThanOrEqual(encabezado!.y + encabezado!.height - 1);
+    await expect(area).toBeInViewport();
   });
 });
+
