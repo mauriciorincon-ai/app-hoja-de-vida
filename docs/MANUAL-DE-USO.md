@@ -298,7 +298,7 @@ el mensaje te llega al correo.
 
 ### El portafolio, asomada en la HOME · desde la revisión post-S7 · una puerta desde Sprint 028
 
-- **Qué hace (desde el Sprint 028):** entre Logros y Estudios, la HOME ya no repite las cuatro cajas
+- **Qué hace (desde el Sprint 028):** entre Skills y Métodos (desde el ajuste de la HOME, 2026-11-01; antes iba entre Logros y Estudios), la HOME ya no repite las cuatro cajas
   del portal: es una **puerta**, igual que la de «Métodos». Un título y una línea, **una fila por frente**
   —su cifra, su nombre y su frase— y el botón **«Explora mi portafolio»**. La cifra se mide de los
   archivos (nunca está escrita), así que un frente que gana una pieza la cambia solo; un frente en

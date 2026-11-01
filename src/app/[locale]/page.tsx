@@ -54,21 +54,29 @@ export default async function HomePage({
     ],
   };
 
+  // Los fondos de las secciones salen del orden, no de cada una: desde Perfil, una
+  // sí y otra no (paper-1 / paper-0), según la posición en `main`. Así, mover una
+  // sección no rompe la alternancia. El Hero (primer hijo) conserva el suyo.
   return (
     <>
       <Header nombre={cv.identidad.nombre} />
-      <main id="contenido" className="flex-1">
+      <main
+        id="contenido"
+        className="flex-1 [&>section:nth-child(even)]:bg-paper-1 [&>section:nth-child(odd):not(:first-child)]:bg-paper-0"
+      >
         <Hero identidad={cv.identidad} />
         <Perfil identidad={cv.identidad} />
         <Trayectoria trayectoria={cv.trayectoria} proyectos={cv.proyectos} />
         <Logros logros={cv.logros} />
-        {/* El sitio de «Proyectos» lo ocupa la vitrina (revisión post-S7):
-            los case studies se abren desde su hito en la trayectoria. El
-            roadmap se fue con las apps, a /portafolio/apps. */}
-        <VitrinaHome locale={locale as Locale} />
         <Estudios estudios={cv.estudios} />
         <Certificaciones certificaciones={cv.certificaciones} />
         <Skills skills={cv.skills} />
+        {/* La puerta del Portafolio (ajuste de la HOME, 2026-11-01): justo antes de
+            «Métodos». Primero lo que es y lo que construyó; al final, cómo lo piensa.
+            La vitrina asumió el lugar conceptual de «Proyectos»: los case studies se abren
+            desde su hito en la trayectoria, y el roadmap se fue con las apps, a
+            /portafolio/apps. */}
+        <VitrinaHome locale={locale as Locale} />
         {/* La puerta a «Métodos» (S19): las publicaciones, nombradas desde
             `data/metodo/`. Baja a después de Skills y antes de Contacto (S23,
             pedido del dueño): primero lo que es y lo que construyó, al final

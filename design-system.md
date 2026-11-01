@@ -76,6 +76,8 @@ vetados_como_texto:
 
 Regla de avaricia: el acento se gasta en CTAs, estados y datos clave. Fondos de sección = papers.
 
+**Regla de los fondos de la HOME (ajuste 2026-11-01):** desde Perfil hasta Contacto, una sección sí y otra no, `paper-1` y `paper-0` alternados. El fondo sale del **orden de `main`** (la posición en el DOM, en `src/app/[locale]/page.tsx`), no de cada sección: mover una sección no rompe la alternancia y ningún componente fija su fondo. El Hero conserva el suyo y el pie (`paper-1`, con su borde) no cuenta. Lo vigila `tests/e2e/home.spec.ts`.
+
 ### Tipografía — dos voces + evidencia
 
 | Voz               | Familia (`next/font`)                                 | Uso                                   | Pesos       |
@@ -268,7 +270,7 @@ animaciones infinitas (sweep/glitch/marquee), scroll-snap de deck, CDNs en `<hea
   puede nombrarse en ningún titular sin esas palabras al lado (gate de contenido).
 - **La puerta al Portafolio en la HOME** (S28, OM-18; antes «Portafolio asomado», que repetía las cuatro cajas
   del portal): `src/components/home/vitrina.tsx`, sección `#portafolio` (el ancla del chat y del catálogo de destinos),
-  entre Logros y Estudios. Tiene la forma de la puerta de «Métodos»: título Fraunces, una línea de contexto de 60
+  entre Skills y Métodos (ajuste de la HOME, 2026-11-01). Tiene la forma de la puerta de «Métodos»: título Fraunces, una línea de contexto de 60
   caracteres de ancho, **una fila por frente** (un enlace de mín. 44 px de alto, `r-md` 12 px, `sh-1`, con
   `data-frente` y `data-estado`) y el botón `sage` «Explora mi portafolio →» a `/portafolio`; el botón del hero
   también va ahí. Cada fila lleva una **píldora estática con la cuenta del frente** (mono 12 px; sage · sky ·
