@@ -9,7 +9,9 @@ import { Buscador } from "@/components/brochure/buscador";
 import { FlujoDibujo } from "@/components/brochure/flujo-dibujo";
 import { PuertaMetodos } from "@/components/home/metodos";
 import { PuertaPortafolio } from "@/components/home/vitrina";
-import { IconoSkill } from "@/components/home/skills-iconos";
+import { SkillsEscenario } from "@/components/home/skills-escenario";
+import { SkillsExplorador } from "@/components/home/skills-explorador";
+import { DibujoSkill } from "@/components/home/skills-iconos";
 import { Reveal } from "@/components/motion/reveal";
 import { Stagger, StaggerItem } from "@/components/motion/stagger";
 import { TimelineTrack } from "@/components/motion/timeline-track";
@@ -20,6 +22,7 @@ import { GaleriaCarrusel } from "@/components/vitrina/galeria-carrusel";
 import type { EtiquetasCarrusel } from "@/components/vitrina/galeria-carrusel";
 import { leerPiezasDeDisco } from "@/lib/metodo/loader";
 import { getFrentes } from "@/lib/vitrina/categorias";
+import { partirItem } from "@/lib/skills/explorador";
 import es from "../../messages/es.json";
 import { mensajes, textosDe, vistaDe } from "../fixtures/brochure/vista";
 import { ejemploSintetico, traductorDe } from "../fixtures/metodo/ayudas";
@@ -91,6 +94,14 @@ const BUSCADOR = (
   </NextIntlClientProvider>
 );
 
+// S29: el explorador de Skills. La isla y el escenario leen «reducir movimiento» con `matchMedia` en sus
+// efectos y manejadores, nunca al pintar; aquí se exige el mismo HTML con los tres valores del hook.
+const AREAS = [
+  { id: "ia-y-ml", nombre: "ML", items: ["scikit-learn", "PyTorch — en exploración"].map(partirItem) },
+  { id: "ingenieria", nombre: "Ingeniería", items: ["Python", "CI/CD — este sitio corre con ello"].map(partirItem) },
+];
+const TEXTOS_SKILLS = es.skills.explorador;
+
 const CASOS: Record<string, React.ReactNode> = {
   TimelineTrack: (
     <TimelineTrack
@@ -134,7 +145,28 @@ const CASOS: Record<string, React.ReactNode> = {
       </StaggerItem>
     </Stagger>
   ),
-  IconoSkill: <IconoSkill id="ia-y-ml" />,
+  DibujoSkill: <DibujoSkill id="ia-y-ml" />,
+  SkillsExplorador: (
+    <SkillsExplorador
+      areas={AREAS}
+      textos={TEXTOS_SKILLS}
+      locale="es"
+      cabeza={<h2>Skills</h2>}
+    >
+      <div className="lista">
+        <article id="skills-ia-y-ml">ML</article>
+      </div>
+    </SkillsExplorador>
+  ),
+  SkillsEscenario: (
+    <SkillsEscenario
+      areas={AREAS}
+      textos={TEXTOS_SKILLS}
+      activo
+      pedido={null}
+      onVerLista={() => {}}
+    />
+  ),
   // Sprint 009: el carrusel de la galería usa el hook SOLO para el `behavior`
   // del desplazamiento; la forma del árbol no puede depender de él.
   GaleriaCarrusel: (

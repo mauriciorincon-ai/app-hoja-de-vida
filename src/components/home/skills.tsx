@@ -1,45 +1,38 @@
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Reveal } from "@/components/motion/reveal";
-import { Stagger, StaggerItem } from "@/components/motion/stagger";
 import type { Cv } from "@/lib/schemas";
-import {
-  ESCALON_CHIP_S,
-  ESCALON_SKILLS_S,
-  ESCALON_TRAZO_S,
-  IconoSkill,
-  RETRASO_CABECERA_S,
-  RETRASO_TRAZO_S,
-} from "./skills-iconos";
+import { partirItem } from "@/lib/skills/explorador";
+import { DibujoSkill } from "./skills-iconos";
+import { SkillsExplorador, type TextosExplorador } from "./skills-explorador";
+import "./skills.css";
 
 /**
- * Skills (revisión post-S7): una tarjeta por grupo, con su icono dibujado en
- * casa —el trazo se termina de dibujar al llegar la tarjeta— y los ítems como
- * chips que entran escalonados. Un grupo, una tarjeta, una rejilla de dos
- * columnas; si los grupos son impares, el último ocupa las dos (2026-09-26:
- * nueve grupos dejaban un hueco al final).
+ * Skills (S29, OM-02): el explorador por área de la maqueta aprobada (`referencias-ui/home/maqueta/`,
+ * pieza 1), montado sobre la lista de siempre.
  *
- * Lo que NO hay, a propósito: barras de porcentaje ni «nivel de dominio». Un
- * 80 % de Python no significa nada y nadie lo puede medir; lo que aparece es
- * lo que se sabe hacer, y la trayectoria es la prueba.
+ * Lo que pinta el servidor es la LISTA: las nueve tarjetas numeradas en el orden del CV, con la baldosa
+ * de su icono, sus herramientas y el estado como etiqueta con texto («prototipo», «en estudio»…). Es lo
+ * que ve un ATS, un buscador, quien navega sin JavaScript y quien imprime. La isla
+ * (`skills-explorador.tsx`) pone encima el rectángulo oscuro con las áreas flotando, y «Ver todo en
+ * lista» vuelve a esta lista (y oculta el movimiento: WCAG 2.2.2).
  *
- * Revisión post-S8 — «más impactante, pero elegante», segunda vuelta («no lo
- * veo»): tres momentos que se DISTINGUEN, no tres capas que se pisan. La
- * tarjeta ATERRIZA VACÍA (`liftIn`: 70 px, 14° de perspectiva, 1,4 s
- * ease-in-out, 120 ms de escalón) → a los 0,5 s, cuando ya se ve, aparece la
- * cabecera (icono y título) y el trazo del icono se dibuja → los chips caen
- * uno a uno detrás, con 60 ms entre ellos, que es un escalón que el ojo
- * separa (2026-09-27, opción A del dueño: con nueve tarjetas la partitura de
- * 200/800/100 ms terminaba pasados los 3,5 s). La partitura interna la orquesta LA TARJETA (`hijos` en su
- * `StaggerItem`: `delayChildren` + `staggerChildren`), y así cada tarjeta
- * arrastra a los suyos con su propio escalón — la cuarta no recibe sus chips
- * antes de aterrizar. No es un `Stagger` anidado ni un `delay` por ítem: las
- * dos cosas congelan al nieto (ver `StaggerItem`). Todo transform/opacity/
- * filter; con reducción de movimiento, quieto.
+ * La lista es estática desde el S29, como en la maqueta: la entrada escalonada de las tarjetas (`liftIn`
+ * y el trazo de los iconos) se fue con ella; el movimiento vive en el escenario.
+ *
+ * Lo que NO hay, a propósito: barras de porcentaje ni «nivel de dominio». Un 80 % de Python no significa
+ * nada y nadie lo puede medir; lo que aparece es lo que se sabe hacer, y la trayectoria es la prueba.
  */
 export async function Skills({ skills }: { skills: Cv["skills"] }) {
   const tNav = await getTranslations("nav");
   const t = await getTranslations("skills");
+  const locale = await getLocale();
   if (skills.length === 0) return null;
+
+  const areas = skills.map((g) => ({
+    id: g.id,
+    nombre: g.grupo,
+    items: g.items.map(partirItem),
+  }));
 
   return (
     <section
@@ -48,67 +41,60 @@ export async function Skills({ skills }: { skills: Cv["skills"] }) {
       className="scroll-mt-16"
     >
       <div className="mx-auto max-w-5xl px-4 py-20 md:px-6 md:py-28">
-        <Reveal variant="fadeInUp">
-          <h2
-            id="skills-titulo"
-            className="font-display text-[clamp(1.75rem,3.5vw,2.5rem)] font-medium tracking-[-0.015em] text-ink-0"
-          >
-            {tNav("skills")}
-          </h2>
-          <p className="mt-4 mb-12 max-w-[60ch] text-[16px] leading-[1.75] text-ink-1">
-            {t("linea")}
-          </p>
-        </Reveal>
-        <Stagger
-          className="grid gap-5 md:grid-cols-2"
-          stagger={ESCALON_SKILLS_S}
+        <SkillsExplorador
+          areas={areas}
+          textos={t.raw("explorador") as TextosExplorador}
+          locale={locale}
+          cabeza={
+            <Reveal variant="fadeInUp">
+              <h2
+                id="skills-titulo"
+                className="font-display text-[clamp(1.75rem,3.5vw,2.5rem)] font-medium tracking-[-0.015em] text-ink-0"
+              >
+                {tNav("skills")}
+              </h2>
+              <p className="mt-4 max-w-[60ch] text-[16px] leading-[1.75] text-ink-1">
+                {t("linea")}
+              </p>
+            </Reveal>
+          }
         >
-          {skills.map((grupo, i) => (
-            <StaggerItem
-              key={grupo.grupo}
-              variant="liftIn"
-              className={
-                i === skills.length - 1 && skills.length % 2 === 1
-                  ? "h-full md:col-span-2"
-                  : "h-full"
-              }
-              hijos={{ delay: RETRASO_CABECERA_S, escalon: ESCALON_CHIP_S }}
-            >
-              {/* El id es el destino de una cita del chat: los documentos «a
-                  fondo» de una capacidad llevan a SU tarjeta, no a la sección
-                  entera (scripts/destinos.mjs lo lee de aquí). scroll-mt-40 y
-                  no 16: si la tarjeta aún no entró, el salto apunta a su
-                  posición de ARRANQUE de liftIn (70 px abajo y encogida), y al
-                  subir quedaba bajo el encabezado. 160 px = encabezado + ese
-                  recorrido; ya entrada, solo deja más aire. */}
+          <div className="lista">
+            {areas.map((grupo, i) => (
+              // El id es el destino de una cita del chat: los documentos «a fondo» de una capacidad
+              // llevan a SU tarjeta (scripts/destinos.mjs lo lee de aquí). Con el explorador puesto, la
+              // isla reconoce el ancla y abre esa área.
               <article
+                key={grupo.id}
                 id={`skills-${grupo.id}`}
                 data-skill-grupo={i}
-                className="skill-tarjeta scroll-mt-40 flex h-full flex-col gap-5 rounded-[14px] border border-paper-2 bg-paper-0 p-6 shadow-sh-1 transition-[box-shadow,transform] duration-[180ms] ease-[var(--ease-out-cubic)] hover:-translate-y-0.5 hover:shadow-sh-2"
+                className="grupo scroll-mt-16"
               >
-                <StaggerItem
-                  variant="fadeInUp"
-                  className="flex items-center gap-4"
-                  hijos={{ delay: RETRASO_TRAZO_S, escalon: ESCALON_TRAZO_S }}
-                >
-                  <IconoSkill id={grupo.id} />
-                  <h3 className="font-display text-[1.35rem] leading-tight font-medium tracking-[-0.015em] text-ink-0">
-                    {grupo.grupo}
-                  </h3>
-                </StaggerItem>
-                <div className="flex flex-wrap gap-2">
-                  {grupo.items.map((item) => (
-                    <StaggerItem key={item} variant="scaleInBlur">
-                      <span className="inline-flex min-h-8 items-center rounded-full border border-paper-3 bg-paper-1 px-3 py-1 text-[14px] text-ink-1">
-                        {item}
-                      </span>
-                    </StaggerItem>
+                <h3>
+                  <span className="n">{i + 1}</span>
+                  <span className="baldosa" aria-hidden="true">
+                    <DibujoSkill id={grupo.id} />
+                  </span>
+                  {grupo.nombre}
+                </h3>
+                <ul>
+                  {grupo.items.map((it) => (
+                    <li key={`${it.nombre}${it.nota ?? ""}`}>
+                      {it.nombre}
+                      {it.nota ? ` — ${it.nota}` : ""}
+                      {it.estado && (
+                        <>
+                          {" "}
+                          <span className="estado">{it.estado}</span>
+                        </>
+                      )}
+                    </li>
                   ))}
-                </div>
+                </ul>
               </article>
-            </StaggerItem>
-          ))}
-        </Stagger>
+            ))}
+          </div>
+        </SkillsExplorador>
       </div>
     </section>
   );

@@ -598,7 +598,23 @@
     "sinPeriodo": "Sin fecha declarada"
   },
   "skills": {
-    "linea": "Lo que uso a diario, por grupo. Sin porcentajes inventados: lo que aparece aquí es lo que sé hacer."
+    "linea": "Lo que uso a diario, por grupo. Sin porcentajes inventados: lo que aparece aquí es lo que sé hacer.",
+    "explorador": {
+      "areas": "Áreas",
+      "lista": "Ver todo en lista",
+      "conmutador": "Áreas / Ver todo en lista",
+      "invita": "Elige un área y te muestro con qué trabajo en ella",
+      "todas": "Ya las viste todas.",
+      "progreso": "· {n} de {t} vistas",
+      "volver": "← Todas las áreas",
+      "cuantas": "{n} herramientas",
+      "anuncio": "{grupo}: {n} herramientas. Escape para volver a todas las áreas.",
+      "yaVista": ", ya la abriste",
+      "pasos": "Las otras áreas, por número",
+      "cual": "{n} de {t}",
+      "anterior": "Anterior",
+      "siguiente": "Siguiente"
+    }
   },
   "mantenimiento": {
     "meta": "En mantenimiento",

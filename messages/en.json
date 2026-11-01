@@ -598,7 +598,23 @@
     "sinPeriodo": "No date declared"
   },
   "skills": {
-    "linea": "What I use day to day, by group. No made-up percentages: what you see here is what I can do."
+    "linea": "What I use day to day, by group. No made-up percentages: what you see here is what I can do.",
+    "explorador": {
+      "areas": "Areas",
+      "lista": "See it all as a list",
+      "conmutador": "Areas / See it all as a list",
+      "invita": "Pick an area and I will show you what I work with in it",
+      "todas": "You have seen them all.",
+      "progreso": "· {n} of {t} seen",
+      "volver": "← All areas",
+      "cuantas": "{n} tools",
+      "anuncio": "{grupo}: {n} tools. Escape to go back to all areas.",
+      "yaVista": ", already opened",
+      "pasos": "The other areas, by number",
+      "cual": "{n} of {t}",
+      "anterior": "Previous",
+      "siguiente": "Next"
+    }
   },
   "mantenimiento": {
     "meta": "Under maintenance",
