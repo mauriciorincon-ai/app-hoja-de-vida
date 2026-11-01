@@ -12,6 +12,7 @@ vi.mock("next-intl/middleware", () => ({
     return NextResponse.next();
   },
 }));
+import { SLUGS_CASA } from "@/lib/brochure/config";
 import { rutaNueva } from "@/lib/redireccion";
 import proxy from "@/proxy";
 
@@ -22,6 +23,10 @@ import proxy from "@/proxy";
  * lo que solo se parece NO se toca; y con el sitio en mantenimiento manda el
  * 503, no la redirección. El ancla (`#bloque-n`) la conserva el navegador: lo
  * prueba el e2e `metodo.spec.ts`.
+ *
+ * Y las páginas que reemplazó el brochure (S28): el detalle de una app y la página
+ * de la casa llegan a su `/brochure` **en un solo salto**, también desde la ruta
+ * de la «vitrina» de antes del S23.
  */
 
 const pedir = (ruta: string) =>
@@ -48,7 +53,6 @@ describe("la ruta nueva de una ruta vieja, como función", () => {
     ["/en/vitrina", "/en/portafolio"],
     ["/es/vitrina/apps", "/es/portafolio/apps"],
     ["/es/vitrina/apps/habla", "/es/portafolio/apps/habla"],
-    ["/en/vitrina/apps/habla/detalle", "/en/portafolio/apps/habla/detalle"],
     [
       "/es/vitrina/apps/planlang/simulacion",
       "/es/portafolio/apps/planlang/simulacion",
@@ -96,6 +100,64 @@ describe("la ruta nueva de una ruta vieja, como función", () => {
   });
 });
 
+describe("las páginas que reemplazó el brochure, en un solo salto", () => {
+  it.each([
+    // El detalle de una app.
+    ["/es/portafolio/apps/habla/detalle", "/es/portafolio/apps/habla/brochure"],
+    [
+      "/en/portafolio/apps/inmobiliaria/detalle",
+      "/en/portafolio/apps/inmobiliaria/brochure",
+    ],
+    ["/es/portafolio/apps/habla/detalle/", "/es/portafolio/apps/habla/brochure"],
+    // Sin idioma: la raíz del sitio abre en español.
+    ["/portafolio/apps/ds/detalle", "/es/portafolio/apps/ds/brochure"],
+    // Desde la «vitrina» de antes del S23: UN salto, no dos.
+    ["/es/vitrina/apps/habla/detalle", "/es/portafolio/apps/habla/brochure"],
+    ["/en/vitrina/apps/habla/detalle", "/en/portafolio/apps/habla/brochure"],
+    ["/vitrina/apps/habla/detalle", "/es/portafolio/apps/habla/brochure"],
+    // La página de la casa (el brochure del S4).
+    ["/es/apps/hoja-de-vida", "/es/portafolio/apps/hoja-de-vida/brochure"],
+    ["/en/apps/hoja-de-vida", "/en/portafolio/apps/hoja-de-vida/brochure"],
+    [
+      "/es/apps/chat-hoja-de-vida",
+      "/es/portafolio/apps/chat-hoja-de-vida/brochure",
+    ],
+    ["/apps/chat-hoja-de-vida", "/es/portafolio/apps/chat-hoja-de-vida/brochure"],
+    ["/es/apps/hoja-de-vida/", "/es/portafolio/apps/hoja-de-vida/brochure"],
+  ])("%s → %s", (vieja, nueva) => {
+    expect(rutaNueva(vieja)).toBe(nueva);
+    // Un solo salto: la ruta a la que llega no vuelve a redirigir.
+    expect(rutaNueva(nueva), `${nueva} redirige otra vez`).toBeNull();
+  });
+
+  it.each([
+    "/es/portafolio/apps/habla/brochure",
+    "/es/portafolio/apps/habla/simulacion",
+    "/es/portafolio/apps/habla",
+    // Solo las dos de la casa tuvieron `/apps/<slug>`: las demás siguen dando 404.
+    "/es/apps/habla",
+    "/es/apps",
+    "/es/apps/hoja-de-vida/otra-cosa",
+    "/es/apps/hoja-de-vida-2",
+    "/es/portafolio/apps/habla/detalle/otra-cosa",
+    "/es/portafolio/apps//detalle",
+    "/es/cv/portafolio/apps/habla/detalle",
+    "/es/portafolio/apps/habla/Detalle",
+    "/es/portafolio/agentes/hr-develop-ai-apps/detalle",
+  ])("%s no es una página retirada: no se toca", (ruta) => {
+    expect(rutaNueva(ruta)).toBeNull();
+  });
+
+  it("las dos de la casa son las mismas que las del brochure", () => {
+    for (const slug of SLUGS_CASA)
+      expect(rutaNueva(`/es/apps/${slug}`), slug).toBe(
+        `/es/portafolio/apps/${slug}/brochure`,
+      );
+    // Ni una más: la tabla del proxy no puede quedarse con un slug que el brochure ya no sirve.
+    expect(rutaNueva("/es/apps/otra-app-de-la-casa")).toBeNull();
+  });
+});
+
 describe("el proxy responde el 301 de las secciones renombradas", () => {
   it("la lista vieja y una pieza vieja redirigen con 301 y conservan la consulta", () => {
     for (const [vieja, nueva] of [
@@ -122,6 +184,28 @@ describe("el proxy responde el 301 de las secciones renombradas", () => {
       [
         "/en/vitrina/apps/planlang/simulacion",
         "https://sitio.test/en/portafolio/apps/planlang/simulacion",
+      ],
+    ]) {
+      const res = pedir(vieja);
+      expect(res.status, vieja).toBe(301);
+      expect(res.headers.get("location"), vieja).toBe(nueva);
+    }
+    expect(delegadas, "la redirección va antes de next-intl").toEqual([]);
+  });
+
+  it("el detalle y la página de la casa redirigen con 301 al brochure y conservan la consulta", () => {
+    for (const [vieja, nueva] of [
+      [
+        "/es/portafolio/apps/habla/detalle",
+        "https://sitio.test/es/portafolio/apps/habla/brochure",
+      ],
+      [
+        "/en/vitrina/apps/habla/detalle?utm=x",
+        "https://sitio.test/en/portafolio/apps/habla/brochure?utm=x",
+      ],
+      [
+        "/apps/hoja-de-vida",
+        "https://sitio.test/es/portafolio/apps/hoja-de-vida/brochure",
       ],
     ]) {
       const res = pedir(vieja);
