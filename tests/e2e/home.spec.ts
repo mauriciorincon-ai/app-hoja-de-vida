@@ -691,4 +691,3 @@ test.describe("una cita del chat abre su área de Skills bajo el encabezado", ()
     await expect(area).toBeInViewport();
   });
 });
-

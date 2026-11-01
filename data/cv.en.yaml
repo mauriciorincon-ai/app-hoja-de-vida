@@ -252,7 +252,6 @@ logros:
     etiqueta: "in the indicators addressed"
     descripcion: "On average, across the 60+ indicators at Fundación CTIC (50+) and Banco Pichincha (10+) and in the strategy sessions with the SITP concessionaires (TransMilenio)."
 
-
 proyectos:
   - slug: "vesting"
     nombre: "A data platform for AI agents — Vesting (2023–2025)"
