@@ -2,18 +2,17 @@
 import { readdirSync, readFileSync, statSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
-import { entradasBrochure } from "../../scripts/entradas-brochure.mjs";
 
 /**
  * LAS RUTAS QUE EL BROCHURE RETIRÓ NO LAS NOMBRA NADIE (S28).
  *
- * El brochure (`/portafolio/apps/<app>/brochure`) reemplazó a dos páginas:
+ * El brochure reemplazó a dos páginas:
  *
  *  - el detalle de cada app, `/portafolio/apps/<app>/detalle` (S5), y
  *  - la página de la casa, `/apps/hoja-de-vida` y `/apps/chat-hoja-de-vida` (S4).
  *
- * Desde el S30 el brochure es además la ENTRADA de la casa y de las apps con su contenido v2
- * (`/portafolio/apps/<app>`), y su `/brochure` es un 301 a ella: tampoco se nombra.
+ * Desde el S30 el brochure es además la ENTRADA de la casa y de las apps con su contenido v2, y desde el
+ * S31 la de las diez (`/portafolio/apps/<app>`): su `/brochure` es un 301 a ella, y tampoco se nombra.
  *
  * Todas siguen respondiendo, pero con un 301 (`src/lib/redireccion.ts`). Lo que ya no puede pasar es
  * que el código, los datos o los textos las nombren como destino: un enlace que depende de la
@@ -48,12 +47,9 @@ const RETIRADAS: Retirada[] = [
     patron: /(?<!portafolio)\/apps\/\$\{/,
   },
   {
-    // S30: la lista sale del disco, como la mide el build (copiar un v2 suma su app aquí sola).
-    nombre:
-      "el `/brochure` de una app que abre en su brochure (es un 301 a su entrada)",
-    patron: new RegExp(
-      `apps\\/(?:${entradasBrochure().join("|")})\\/brochure\\b`,
-    ),
+    // S31: la entrada de TODAS es su brochure, así que el `/brochure` de cualquier app es un 301.
+    nombre: "el `/brochure` de una app (es un 301 a su entrada)",
+    patron: /apps\/(?:[\w.-]+|\$\{[^}]+\}|\[[^\]]+\])\/brochure\b/,
   },
 ];
 
@@ -138,14 +134,23 @@ describe("el patrón caza lo que debe y no lo que no", () => {
       '"/es/portafolio/apps/inmobiliaria/brochure",',
       3,
     ],
+    // Lo que el repo tenía antes del S31: el `/brochure` de las que seguían con ficha.
+    [
+      "la URL de Lighthouse de una app con ficha",
+      '"/es/portafolio/apps/habla/brochure",',
+      3,
+    ],
+    [
+      "el sitemap o el catálogo, con la plantilla",
+      "rutas.add(`/portafolio/apps/${app.slug}/brochure`);",
+      3,
+    ],
   ] as const)("%s se caza", (_nombre, linea, cual) => {
     expect(RETIRADAS[cual].patron.test(linea)).toBe(true);
   });
 
   it.each([
     "href: /portafolio/apps/chat-hoja-de-vida",
-    '"/es/portafolio/apps/habla/brochure",',
-    "rutas.add(`/portafolio/apps/${app.slug}/brochure`);",
     "rutas.add(`/portafolio/apps/${app.slug}`);",
     "await page.goto(`/es/portafolio/apps/${slug}/simulacion`);",
     "href={`/portafolio/apps/${app}#contacto-portafolio`}",

@@ -1,15 +1,9 @@
 import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
-import { entradasBrochure } from "./scripts/entradas-brochure.mjs";
 
 const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
 const nextConfig: NextConfig = {
-  // Las apps que abren en su brochure (S30), medidas del disco en build: el proxy redirige su
-  // `/brochure` a la entrada y no puede leer el disco, así que la lista viaja inlinada en su bundle.
-  env: {
-    CV_ENTRADAS_BROCHURE: entradasBrochure().join(","),
-  },
   // `next dev` (16.3) reescribe CLAUDE.md con un bloque propio en cada
   // arranque. CLAUDE.md es la constitución de esta app y la escribe su dueño:
   // apagado (hallazgo post-S8, 2026-09-12).

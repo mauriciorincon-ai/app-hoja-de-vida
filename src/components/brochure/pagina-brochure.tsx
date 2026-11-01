@@ -18,8 +18,7 @@ import { rutaEnIdioma } from "@/lib/brochure/ruta";
 import { getCv } from "@/lib/content";
 
 /**
- * La página del brochure de una app, la misma en sus dos rutas (S30): la entrada
- * (`/portafolio/apps/<app>`) de las que abren en él, y `/brochure` de las que siguen con ficha.
+ * La página del brochure de una app, la de su entrada (`/portafolio/apps/<app>`, S30; de las diez desde el S31).
  * Todo el texto está en el HTML; las islas solo le dan comportamiento.
  */
 export async function PaginaBrochure({
