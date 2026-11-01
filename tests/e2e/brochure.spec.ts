@@ -1,6 +1,7 @@
 import { readdirSync, readFileSync } from "node:fs";
 import { expect, test, type Page } from "@playwright/test";
 import { parse } from "yaml";
+import { entradasBrochure } from "../../scripts/entradas-brochure.mjs";
 
 /**
  * EL BROCHURE (S28, ADR-030) — e2e.
@@ -47,14 +48,21 @@ const EXPORTS = [...APPS, ...CASA];
 if (CASA.length !== 2) throw new Error("content/vitrina/casa: faltan las dos");
 
 const IDIOMAS = ["es", "en"] as const;
+// Desde el S30 la casa y las apps con su contenido v2 abren `/portafolio/apps/<app>` en su brochure.
+const ENTRADAS = entradasBrochure();
 const ruta = (l: string, slug: string) =>
-  `/${l}/portafolio/apps/${slug}/brochure`;
+  ENTRADAS.includes(slug)
+    ? `/${l}/portafolio/apps/${slug}`
+    : `/${l}/portafolio/apps/${slug}/brochure`;
 
 /** Las cifras que el contenido v2 de una app oculta a propósito de «04 · Método»; sin v2, ninguna. */
 const ocultasDe = (slug: string): string[] => {
+  const dir = CASA.some((c) => c.app.slug === slug)
+    ? "content/vitrina/casa"
+    : "content/vitrina";
   try {
     const v2 = JSON.parse(
-      readFileSync(`content/vitrina/${slug}.contenido.json`, "utf8"),
+      readFileSync(`${dir}/${slug}.contenido.json`, "utf8"),
     ) as { metodo?: { ocultar?: string[] } };
     return v2.metodo?.ocultar ?? [];
   } catch {
