@@ -314,6 +314,12 @@ test.describe("la HOME: el orden de las secciones y sus fondos", () => {
       // distinta de su vecina y pasaría la comparación de abajo.
       const PAPER = ["rgb(251, 250, 247)", "rgb(245, 243, 237)"]; // paper-0, paper-1
       for (const f of fondos) expect(PAPER, f.id).toContain(f.fondo);
+      // Perfil abre en paper-1 (la fase), y el Hero, primer hijo de main, no tiene fondo propio.
+      expect(fondos[0]!.fondo, "perfil").toBe("rgb(245, 243, 237)");
+      const hero = await page.evaluate(() =>
+        getComputedStyle(document.querySelector("main > section")!).backgroundColor,
+      );
+      expect(hero, "hero").toBe("rgba(0, 0, 0, 0)");
       for (let i = 1; i < fondos.length; i++) {
         expect(
           fondos[i]!.fondo,
