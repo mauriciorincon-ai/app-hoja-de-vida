@@ -235,6 +235,7 @@ export function RoadmapVoting({
               </h3>
             )}
             <ul
+              id={`ideas-${grupo.appId}`}
               className={tinta ? "votables" : "flex flex-col gap-3"}
               // Es una lista de ideas: sin viñetas ni número, la hoja la dibuja.
               role="list"
@@ -369,6 +370,7 @@ export function RoadmapVoting({
                 type="button"
                 onClick={() => setExpandido((v) => !v)}
                 aria-expanded={expandido}
+                aria-controls={`ideas-${grupo.appId}`}
                 data-testid="roadmap-ver-ideas"
                 className={
                   tinta

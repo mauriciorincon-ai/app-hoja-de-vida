@@ -23,6 +23,8 @@ export type TextosDeUsala = {
   /** El rótulo de cada hito conocido; uno que no se conoce se pinta tal cual. */
   hitos: Record<string, string>;
   volverApps: string;
+  /** El nombre de la navegación entre apps vecinas («Otras apps del portafolio»). */
+  vecinasEtiqueta: string;
   appAnterior: string;
   appSiguiente: string;
 };
@@ -56,6 +58,7 @@ export function armarTextosDeUsala(
       [...HITOS_CONOCIDOS].map((k) => [k, f(`hitos.${k}`)]),
     ),
     volverApps: v("volverApps"),
+    vecinasEtiqueta: v("vecinasEtiqueta"),
     appAnterior: v("appAnterior"),
     appSiguiente: v("appSiguiente"),
   };

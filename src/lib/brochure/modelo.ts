@@ -22,8 +22,8 @@ import type { Flujo, TipoNodo } from "./flujo";
  *     que sale del export; así la numeración de las doce páginas es la misma (01–05, y 2.1… en el mapa).
  *  2. **Toda cita dice «número · título del destino»**, y una cita cuyo destino no existe en esta
  *     página no se pinta (un bloque sin datos no se pinta).
- *  3. **Los actores se nombran, nunca solo con color.** Los cuatro de la maqueta (dueño, comprador,
- *     equipo, la app) con sus etiquetas; los del proceso de las otras apps, con el nombre de su carril.
+ *  3. **Los actores se nombran, nunca solo con color.** Los seis (`ACTORES`: dueño, comprador,
+ *     equipo, la app, quien visita y el proveedor) con sus etiquetas; los del proceso de las otras apps, con el nombre de su carril.
  *
  * Todo texto llega ya en el idioma de la página: el del contenido v2 de su `{ es, en }`, y el del
  * export —que el contrato v1 trae solo en español— del bloque `en` del v2 cuando lo hay.
@@ -254,9 +254,7 @@ export type VistaBrochure = {
     titulo: string;
     razon: string;
     pie: string;
-    /** CV Viva y su chat no son apps: cierran con «Escríbeme», sin lista de espera ni roadmap. */
-    casa: boolean;
-    /** La casa: «Escríbeme» al contacto de CV Viva. */
+    /** La casa (CV Viva y su chat no son apps): «Escríbeme» al contacto, sin lista de espera ni roadmap. */
     contacto?: { texto: string; href: string };
     /** Las apps con simulación: «Ver la simulación →». */
     simulacion?: { href: string };
@@ -877,7 +875,6 @@ export function armarBrochure(e: EntradaBrochure): VistaBrochure {
       pie: `${NOMBRE} · ${t("pie", { fecha: fecha(E.actualizado, locale) })}${
         e.config.datos_sinteticos ? ` · ${t("pieSinteticos")}` : ""
       }`,
-      casa: e.casa,
       ...(e.casa
         ? { contacto: { texto: t("ctaCasa"), href: "/#contacto" } }
         : {
@@ -900,7 +897,9 @@ export function armarBrochure(e: EntradaBrochure): VistaBrochure {
               : {}),
             propuesta: { app: e.slug, nombre: NOMBRE },
             ...(e.usala?.simulacion
-              ? { simulacion: { href: `/portafolio/apps/${e.slug}/simulacion` } }
+              ? {
+                  simulacion: { href: `/portafolio/apps/${e.slug}/simulacion` },
+                }
               : {}),
           }),
       hitos: hitosDe(E),

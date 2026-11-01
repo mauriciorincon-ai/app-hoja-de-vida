@@ -232,7 +232,7 @@ test.describe("Brochure — el HTML de las doce, en los dos idiomas", () => {
       if (esCasa) {
         // Sin formularios, y «Escríbeme» al contacto de CV Viva.
         expect(cierre, exp.app.slug).toContain(
-          'href="/es/#contacto" data-cta=""',
+          'href="/es#contacto" data-cta=""',
         );
         expect(cierre, exp.app.slug).not.toContain("<form");
       } else {

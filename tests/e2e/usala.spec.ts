@@ -327,7 +327,7 @@ test.describe("«Úsala» de la casa", () => {
       const c = cierre(page);
       await expect(c.locator("a[data-cta]")).toHaveAttribute(
         "href",
-        "/es/#contacto",
+        "/es#contacto",
       );
       await expect(c.locator("a[data-cta]")).toContainText("Escríbeme");
       await expect(c.locator("section.donde")).toContainText("Dónde está");

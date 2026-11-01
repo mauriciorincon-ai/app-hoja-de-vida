@@ -5,6 +5,7 @@ import { FormularioContacto } from "@/components/forms/formulario-contacto";
 import { PropuestaForm } from "@/components/forms/propuesta-form";
 import { RoadmapVoting } from "@/components/home/roadmap-voting";
 import { Cierre } from "@/components/brochure/secciones";
+import { rutaEnIdioma } from "@/lib/brochure/ruta";
 import {
   mensajes,
   textosDe,
@@ -46,7 +47,7 @@ function cierre(slug: string, locale: "es" | "en" = "es") {
       v={v}
       t={textosDe(locale)}
       s={v.secciones.find((x) => x.id === "cierre")!}
-      href={(d) => `/${locale}${d}`}
+      href={(d) => rutaEnIdioma(locale, d)}
       u={textosDeUsalaDe(locale)}
     />,
     locale,
@@ -124,7 +125,7 @@ describe("«Úsala» de la casa", () => {
   const h = cierre("hoja-de-vida");
 
   it("cierra con «Escríbeme» al contacto, «Dónde está» y «Volver a las apps»; sin formularios ni roadmap", () => {
-    expect(leido(h)).toMatch(/href="\/es\/#contacto"[^>]*>Escríbeme/);
+    expect(leido(h)).toMatch(/href="\/es#contacto"[^>]*>Escríbeme/);
     expect(h).toContain("Dónde está");
     expect(h).toContain("Volver a las apps");
     expect(h).not.toContain("<form");

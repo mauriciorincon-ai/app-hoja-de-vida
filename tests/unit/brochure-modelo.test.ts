@@ -362,7 +362,7 @@ describe("«Úsala»: lo que cada brochure trae en su cierre", () => {
     (slug) => {
       const v = vista(slug, "es");
       const pieza = getCasa().find((p) => p.slug === slug)!;
-      expect(v.cierre.casa).toBe(true);
+      expect(v.casa).toBe(true);
       expect(v.cierre.contacto).toEqual({
         texto: "Escríbeme",
         href: "/#contacto",

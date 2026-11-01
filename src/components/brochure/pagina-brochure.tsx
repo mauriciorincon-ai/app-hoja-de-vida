@@ -14,6 +14,7 @@ import {
   textosDeUsala,
 } from "@/lib/brochure/entrada";
 import { armarBrochure } from "@/lib/brochure/modelo";
+import { rutaEnIdioma } from "@/lib/brochure/ruta";
 import { getCv } from "@/lib/content";
 
 /**
@@ -58,7 +59,7 @@ export async function PaginaBrochure({
         <Brochure
           v={v}
           t={t}
-          href={(destino) => `/${locale}${destino}`}
+          href={(destino) => rutaEnIdioma(locale, destino)}
           usala={usala}
           buscador={
             <NextIntlClientProvider messages={{ brochure: delBuscador }}>

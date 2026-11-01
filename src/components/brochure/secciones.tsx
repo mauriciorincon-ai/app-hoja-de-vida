@@ -1244,7 +1244,7 @@ export function Cierre({
           </ol>
         </section>
 
-        <nav className="vecinas" aria-label={u.volverApps}>
+        <nav className="vecinas" aria-label={u.vecinasEtiqueta}>
           {C.vecinas.anterior ? (
             <a className="vecina" href={href(C.vecinas.anterior.href)}>
               <small>← {u.appAnterior}</small>

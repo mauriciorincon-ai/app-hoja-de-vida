@@ -145,12 +145,16 @@ test.describe("nadie lleva a una redirección", () => {
     const vistos = new Set<string>();
     for (const p of paginas) {
       const html = await (await request.get(p)).text();
+      // TODO enlace interno (`/es…`, `/en…`), con o sin ancla: «Escríbeme» de la casa salía `/es/#contacto`, que
+      // redirige con un 308, y esta prueba solo miraba `/portafolio/apps/…`.
       for (const m of html.matchAll(
-        /href="(\/(?:es|en)\/portafolio\/apps\/[^"#?]*)/g,
+        /href="(\/(?:es|en)(?:\/[^"#?]*)?)(?:[#?][^"]*)?"/g,
       ))
         vistos.add(m[1]!);
     }
     expect(vistos.size).toBeGreaterThan(10);
+    // Y el botón de la casa no lleva la barra que redirige.
+    expect([...vistos].filter((h) => h.endsWith("/"))).toEqual([]);
     for (const href of vistos) {
       const res = await request.get(href, { maxRedirects: 0 });
       expect(res.status(), href).toBe(200);
