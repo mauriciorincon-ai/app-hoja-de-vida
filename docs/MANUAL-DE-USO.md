@@ -1447,7 +1447,7 @@ chat hoy y cuáles traería con la base aprobada. Ese informe **se genera, no se
 ### Una sola palabra: «Portafolio» (antes «vitrina»), la HOME y el teclado · desde Sprint 023
 
 - **Qué cambió:** «vitrina» pasa a llamarse **«Portafolio»** en todo el sitio, texto y dirección. Las páginas viven ahora
-  en `/portafolio` (el portal), `/portafolio/apps`, `/portafolio/apps/<app>` (con `/brochure` y, en planlang, `/simulacion`),
+  en `/portafolio` (el portal), `/portafolio/apps`, `/portafolio/apps/<app>` (su brochure y, en planlang, `/simulacion`),
   `/portafolio/<frente>` y `/portafolio/<frente>/<pieza>`, en `/es` y en `/en`. La sección de la HOME se llama «Portafolio» y su ancla es `#portafolio`.
   Los dos botones de la HOME dicen lo mismo: **«Explora mi portafolio»**. El texto cambió con su artículo y su concordancia («de la vitrina»
   → «del portafolio»; «the showcase» → «the portfolio») en los mensajes, los datos, «Métodos» y el corpus.

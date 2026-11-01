@@ -1172,8 +1172,8 @@ describe("la guía v31 · las diez fichas al día y Vesting", () => {
  * h1 a h4, k2, k6, k10, m3, l5b, l6, l7, a4 y n4b (las dos últimas las reescribió después el S29). Vuelven a pendiente y muestran lo que el dueño había respondido («Antes del S28»).
  */
 describe("la guía v31 · el brochure de las doce y la puerta de la HOME", () => {
-  // La h3 y la m3 las reescribió después el S31 (ninguna app tiene ficha): ya viven allí.
-  const FILAS_DEL_S28 = ["h1", "h4", "k6", "k10", "l6", "l7"];
+  // La h3, la k10 y la m3 y el flujo R8 los reescribió después el S31 (ninguna app tiene ficha): ya viven allí.
+  const FILAS_DEL_S28 = ["h1", "h4", "k6", "l6", "l7"];
   const FILAS_NUEVAS = ["h5", "h6", "h7", "h8", "h9", "h10", "h11", "h12"];
 
   it("las filas que el S29 y el S30 no volvieron a tocar llevan data-cambio 28, «mejorado» y «Mejorado · S28»", () => {
@@ -1184,12 +1184,13 @@ describe("la guía v31 · el brochure de las doce y la puerta de la HOME", () =>
       expect(li.getAttribute("data-origen"), id).toBe("mejorado");
       expect(li.textContent, id).toContain("Mejorado · S28");
     }
-    // Las ocho filas (la a4 y la n4b las reescribió después el S29, y la h2, la k2 y la l5b, el S30) y el flujo R8 (que recorre el portafolio de apps) son las únicas del S28.
+    // Esas cinco son las únicas del S28 que nadie volvió a tocar (la a4 y la n4b las reescribió el S29, la h2 el S30).
     const conCambio = [...a.doc.querySelectorAll('[data-cambio="28"]')];
-    expect(conCambio.length).toBe(FILAS_DEL_S28.length + 1);
+    expect(conCambio.length).toBe(FILAS_DEL_S28.length);
+    // El flujo R8 (que recorre el portafolio de apps) lo reescribió el S31.
     expect(
       a.doc.querySelector('li[data-ensayo="9"]')?.getAttribute("data-cambio"),
-    ).toBe("28");
+    ).toBe("31");
   });
 
   it("las ocho pruebas nuevas existen, son del S28, tienen sentada y minutos, y la ⭐ de fidelidad está entre ellas", () => {
@@ -1235,8 +1236,10 @@ describe("la guía v31 · el brochure de las doce y la puerta de la HOME", () =>
       );
       expect(texto, li.id).not.toMatch(/\/es\/apps\/fabric/);
     }
-    // k10 dice «Qué aporta» y avisa de que antes se llamaba «Qué tiene».
-    expect(a.doc.getElementById("k10")!.textContent).toContain("Qué aporta");
+    // k10 (reescrita después por el S31) recorre las secciones del brochure, no los bloques de una ficha.
+    expect(a.doc.getElementById("k10")!.textContent).toContain(
+      "De punta a punta",
+    );
     // La puerta de la HOME ya no habla de cajas ni del chip que se encoge.
     const n4b = (a.doc.getElementById("n4b")!.textContent ?? "").replace(
       /\s+/g,
@@ -1543,8 +1546,8 @@ describe("la guía v31 · el brochure como entrada de las apps y «Úsala»", ()
 });
 
 /**
- * S31 (el brochure, la entrada de todas las apps). No entra ninguna prueba; trece filas cambian de texto —e5, g1d, h3, h10, k2, k12,
- * k17, k18, l5b, m3, n15, n17 y o12b— porque ninguna app tiene ya su ficha técnica. Vuelven a pendiente y muestran lo que el dueño había
+ * S31 (el brochure, la entrada de todas las apps). No entra ninguna prueba; diecisiete filas y dos flujos cambian de texto —e5, g1d, h3,
+ * h10, k2, k3, k4, k10, k12, k14, k17, k18, l5b, m3, n15, n17 y o12b, y los flujos R7 y R8— porque ninguna app tiene ya su ficha técnica. Vuelven a pendiente y muestran lo que el dueño había
  * respondido («Antes del S31»). Y el ajuste del celular del mismo día (PR #110) suma dos pruebas, n20 y n21, a la sentada del teléfono.
  */
 describe("la guía v31 · el brochure, la entrada de todas las apps", () => {
@@ -1554,7 +1557,11 @@ describe("la guía v31 · el brochure, la entrada de todas las apps", () => {
     "h3",
     "h10",
     "k2",
+    "k3",
+    "k4",
+    "k10",
     "k12",
+    "k14",
     "k17",
     "k18",
     "l5b",
@@ -1564,7 +1571,7 @@ describe("la guía v31 · el brochure, la entrada de todas las apps", () => {
     "o12b",
   ];
 
-  it("la página dice v31 y las trece filas reescritas llevan data-cambio 31, «mejorado» y «Mejorado · S31»; ninguna otra", () => {
+  it("la página dice v31 y las diecisiete filas y los dos flujos (R7 y R8) reescritos llevan data-cambio 31, «mejorado» y «Mejorado · S31»; ninguna otra", () => {
     const a = abrir();
     expect(a.doc.getElementById("revision")?.getAttribute("data-version")).toBe(
       "v31",
@@ -1575,8 +1582,16 @@ describe("la guía v31 · el brochure, la entrada de todas las apps", () => {
       expect(li.getAttribute("data-origen"), id).toBe("mejorado");
       expect(li.textContent, id).toContain("Mejorado · S31");
     }
+    for (const titulo of [
+      "R7 · Votar, proponer",
+      "R8 · El portafolio de apps",
+    ]) {
+      const flujo = a.filas().find((x) => x.textContent?.includes(titulo))!;
+      expect(flujo.getAttribute("data-cambio"), titulo).toBe("31");
+      expect(flujo.textContent, titulo).toContain("Mejorado · S31");
+    }
     expect(a.doc.querySelectorAll('[data-cambio="31"]').length).toBe(
-      FILAS_DEL_S31.length,
+      FILAS_DEL_S31.length + 2,
     );
   });
 

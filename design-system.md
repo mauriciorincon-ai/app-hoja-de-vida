@@ -394,8 +394,8 @@ cifra `clamp(3.5rem,8vw,4.75rem)`; tres columnas dejaban dos huérfanos.
 - **Ficha técnica** (`/portafolio/<frente>/<slug>` de agentes, investigaciones y tableros, ADR-016 · ADR-017; desde el S31 ninguna app la tiene: su brochure es su entrada): la capa infografía de una pieza,
   en orden fijo para cualquier frente y con **tres secciones opcionales que decide la pieza, no el
   frente**: el proceso BPMN (contrato v1.1.0), los hallazgos y la galería (v1.3.0). La que falta
-  no se pinta y **las demás se renumeran seguidas, nunca un hueco** — una app va 01–05, una
-  investigación 01–04, un tablero 01–06. Y la app **no inventa lo que la ficha no declara**: si
+  no se pinta y **las demás se renumeran seguidas, nunca un hueco** — una
+  investigación va 01–04 y un tablero 01–06. Y la ficha **no inventa lo que la pieza no declara**: si
   los bloques vienen con la cuenta en cero (una investigación tiene aportes, no funciones), el
   subtítulo cuenta grupos y **calla el número**. Cabecera: eyebrow + chips de estado —con **«Sellada el {fecha}»** a su lado cuando
   la pieza viene sellada y el contrato trae `pieza.sellado_en`— ciclo, sprints, versión y

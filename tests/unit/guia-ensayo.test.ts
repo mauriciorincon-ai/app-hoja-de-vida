@@ -262,8 +262,8 @@ describe("la guía · el sí/no", () => {
     const { doc, calc } = abrir({
       [`${NS}r2`]: "no",
       [`${NS}r5`]: "si",
-      [`${NS}k3`]: "no",
-      [`${NS}k3:nota`]: "el logo se ve borroso",
+      [`${NS}k5`]: "no",
+      [`${NS}k5:nota`]: "el logo se ve borroso",
     });
     expect((doc.getElementById("r2-no") as HTMLInputElement).checked).toBe(
       true,
@@ -271,11 +271,11 @@ describe("la guía · el sí/no", () => {
     expect((doc.getElementById("r5-si") as HTMLInputElement).checked).toBe(
       true,
     );
-    expect((doc.getElementById("k3-no") as HTMLInputElement).checked).toBe(
+    expect((doc.getElementById("k5-no") as HTMLInputElement).checked).toBe(
       true,
     );
     expect(
-      (doc.querySelector('[data-nota-de="k3"]') as HTMLTextAreaElement).value,
+      (doc.querySelector('[data-nota-de="k5"]') as HTMLTextAreaElement).value,
     ).toBe("el logo se ve borroso");
     expect(calc("ensayo-si")).toBe("1");
     expect(calc("ensayo-no")).toBe("1");
