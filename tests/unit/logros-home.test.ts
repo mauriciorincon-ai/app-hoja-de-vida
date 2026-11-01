@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import { parse } from "yaml";
 import { getCv } from "@/lib/content";
 import { getFrentes } from "@/lib/vitrina/categorias";
+import { getPiezas } from "@/lib/vitrina/piezas";
 
 /**
  * LOS DOCE LOGROS DE LA HOME Y LOS CUATRO BULLETS DE LA TRAYECTORIA (S29, OM-03).
@@ -154,5 +155,73 @@ describe("los cuatro bullets nuevos de la trayectoria", () => {
       );
       expect(v?.bullets).toHaveLength(5);
     }
+  });
+});
+
+describe("el «cinco sellados» del logro de agentes se vigila (S29, M4)", () => {
+  // La cuenta del total se mide; la de las selladas la escribió el dueño en palabras. Hoy es cierta:
+  // la regla dura 2 pide que un conteo de estado se mida, no que se escriba y envejezca.
+  const PALABRAS = {
+    es: {
+      uno: 1,
+      dos: 2,
+      tres: 3,
+      cuatro: 4,
+      cinco: 5,
+      seis: 6,
+      siete: 7,
+      ocho: 8,
+      nueve: 9,
+      diez: 10,
+      once: 11,
+    },
+    en: {
+      one: 1,
+      two: 2,
+      three: 3,
+      four: 4,
+      five: 5,
+      six: 6,
+      seven: 7,
+      eight: 8,
+      nine: 9,
+      ten: 10,
+      eleven: 11,
+    },
+  } as const;
+  const PATRON = {
+    es: /\b(\w+) sellad[oa]s?\b/i,
+    en: /\b(\w+) sealed\b/i,
+  } as const;
+
+  /** El número que el texto dice antes de «sellados» / «sealed», o null si no dice ninguno. */
+  function selladosDichos(texto: string, l: "es" | "en"): number | null {
+    const palabra = PATRON[l].exec(texto)?.[1]?.toLowerCase();
+    return palabra && palabra in PALABRAS[l]
+      ? PALABRAS[l][palabra as keyof (typeof PALABRAS)[typeof l]]
+      : null;
+  }
+
+  for (const l of LOCALES) {
+    it(`cv.${l}: lo que el logro dice de selladas es lo que hay en content/agentes`, () => {
+      const logro = crudo(l).logros.find((x) => x.contar === "agentes");
+      const dichos = selladosDichos(String(logro?.descripcion), l);
+      expect(
+        dichos,
+        "el logro ya no dice cuántos están sellados",
+      ).not.toBeNull();
+      const selladas = getPiezas("agentes").filter(
+        (f) => f.pieza.estado === "sellado",
+      ).length;
+      expect(dichos, "selladas en disco").toBe(selladas);
+    });
+  }
+
+  it("el lector del texto distingue una cuenta falsa", () => {
+    expect(selladosDichos("…lo que «nunca» hace; seis sellados.", "es")).toBe(
+      6,
+    );
+    expect(selladosDichos("…what it «never» does; five sealed.", "en")).toBe(5);
+    expect(selladosDichos("sin cuenta", "es")).toBeNull();
   });
 });
