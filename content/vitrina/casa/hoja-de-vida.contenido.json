@@ -1967,7 +1967,7 @@
       },
       "CV-11": {
         "nombre": "Each app's page is its brochure",
-        "que_hace": "All ten apps open on their brochure, at a single address per app: the showcase card says “View brochure” and old links arrive in a single hop. At the foot, “Where it stands” gives the pinned version, and the neighbors lead to the previous or the next app without going back to the showcase."
+        "que_hace": "All ten apps open on their brochure, at a single address per app: the app's card in the Portfolio says “View brochure” and old links arrive in a single hop. At the foot, “Where it stands” gives the pinned version, and the neighbors lead to the previous or the next app without going back to the apps list."
       },
       "CV-12": {
         "nombre": "The process, drawn from the data",
@@ -1995,7 +1995,7 @@
       },
       "CV-18": {
         "nombre": "The apps' waiting list",
-        "que_hace": "In “Use it”, the close of each app's brochure, a form signs up whoever wants in, with the app already chosen and no promised date; it is also at the foot of the apps showcase. Only the apps have one: agents, research and dashboards are shown, not handed over."
+        "que_hace": "In “Use it”, the close of each app's brochure, a form signs up whoever wants in, with the app already chosen and no promised date; it is also at the foot of the apps list. Only the apps have one: agents, research and dashboards are shown, not handed over."
       },
       "CV-19": {
         "nombre": "“Write to me”, with a reason",
