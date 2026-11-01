@@ -371,7 +371,7 @@
   .nodo.t-decision .nodo-actor{color:var(--lilac-ink)}
   .nodo.t-inicio .nodo-actor{color:var(--sage-ink)}
   .nodo-actor i{width:7px;height:7px;border-radius:50%;flex:none}
-  .a-dueno i{background:var(--sky-ink)}.a-comprador i{background:var(--citron-ink)}.a-equipo i{background:var(--rose-ink)}.a-app i{background:var(--ink-1)}
+  .a-dueno i{background:var(--sky-ink)}.a-comprador i{background:var(--citron-ink)}.a-equipo i{background:var(--rose-ink)}.a-app i{background:var(--ink-1)}.a-visita i{background:var(--sage-ink)}.a-proveedor i{background:var(--peach-ink)}
   .nodo[data-func]{cursor:zoom-in}
   .nodo[data-func]:hover,.nodo[data-func]:focus-visible{border-color:var(--ac-ink);box-shadow:var(--sh-3)}
   .nodo-pant{position:absolute;right:7px;top:5px;width:16px;height:16px;color:var(--ink-2)}

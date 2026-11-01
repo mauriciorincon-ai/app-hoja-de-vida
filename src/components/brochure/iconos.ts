@@ -28,6 +28,11 @@ export const ICONOS: Record<(typeof NOMBRES)[number], string> = {
     '<path d="M3.5 5.5h9M8 3.5v2M5.6 5.5c.6 3.1 2.6 5.6 5.6 7.1M10.4 5.5c-.6 3.1-2.6 5.6-5.6 7.1"/><path d="m13 20.5 4-9 4 9M14.4 17.5h5.2"/>',
   pantalla:
     '<rect x="2.5" y="4" width="19" height="13" rx="2"/><path d="M8 20.5h8M12 17v3.5"/>',
+  // S30, los que pidió la tanda 1: la conversación (un globo con dos líneas) y la llave.
+  conversacion:
+    '<path d="M4 5h16v10.5H10L5.5 19.5v-4H4z"/><path d="M8 9h8M8 12h5"/>',
+  llave:
+    '<circle cx="8" cy="15.5" r="4"/><path d="m10.9 12.6 8.6-8.6M16.2 6.9l2.4 2.4M13.6 9.5l2 2"/>',
 };
 
 export const SVG = {

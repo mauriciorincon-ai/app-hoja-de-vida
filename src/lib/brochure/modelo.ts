@@ -1,7 +1,12 @@
 import type { Capturas } from "@/lib/vitrina/capturas";
 import type { Complemento } from "@/lib/vitrina/ficha-tecnica/schema";
 import type { BrochureExport, MetricaExport } from "@/lib/vitrina/schemas";
-import type { Acento, Contenido, GrupoContenido } from "./contenido";
+import {
+  ACTORES,
+  type Acento,
+  type Contenido,
+  type GrupoContenido,
+} from "./contenido";
 import type { Flujo, TipoNodo } from "./flujo";
 
 /**
@@ -236,7 +241,8 @@ export type VistaBrochure = {
   };
 };
 
-const ACTORES_MAQUETA = ["dueno", "comprador", "equipo", "app"] as const;
+/** Los actores con nombre y color propios (los de la maqueta, más `visita` y `proveedor` desde el S30). */
+const ACTORES_MAQUETA = ACTORES;
 
 /**
  * ¿La página en este idioma lleva su texto en español? Sí cuando se pide en inglés y la app no trae
@@ -492,6 +498,8 @@ export function armarBrochure(e: EntradaBrochure): VistaBrochure {
       comprador: t("actorComprador"),
       equipo: t("actorEquipo"),
       app: NOMBRE,
+      visita: t("actorVisita"),
+      proveedor: t("actorProveedor"),
     };
   const tipoNombre: Record<TipoNodo, string> = {
     inicio: t("nodoInicio"),
@@ -824,7 +832,10 @@ export function armarBrochure(e: EntradaBrochure): VistaBrochure {
     },
     cierre: {
       titulo: e.casa ? t("cierreCasaT") : t("cierreT"),
-      razon: EN?.enlaces_razon ?? E.enlaces.razon,
+      // La del contenido manda (S30): la del export dice «esta ficha», y el brochure ya es la entrada.
+      razon: C.enlaces_razon
+        ? T(C.enlaces_razon)
+        : (EN?.enlaces_razon ?? E.enlaces.razon),
       cta: e.casa
         ? { texto: t("ctaCasa"), href: "/#contacto" }
         : {

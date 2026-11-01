@@ -1,12 +1,14 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { getCasa } from "@/lib/brochure/casa";
+import type { Contenido } from "@/lib/brochure/contenido";
 import {
   textoEnEspanol,
   type Cita,
   type VistaBrochure,
 } from "@/lib/brochure/modelo";
 import { getComplemento } from "@/lib/vitrina/ficha-tecnica/loader";
+import { getFichasVitrina } from "@/lib/vitrina/loader";
 import { config, vistaDe as vista } from "../fixtures/brochure/vista";
 
 /**
@@ -205,6 +207,37 @@ describe("lo que cambia entre la piloto, las v1 y la casa", () => {
     );
     expect(v.cierre.cta.href).toBe("/portafolio/apps/ds#contacto-portafolio");
     expect(v.portada.rotuloCinta).toMatch(/datos sintéticos$/);
+  });
+
+  it("la razón de «Úsala»: la del contenido manda sobre la de `en` y sobre la del export (S30)", () => {
+    const razones = {
+      es: "Se conoce por este brochure.",
+      en: "Known by this brochure.",
+    };
+    for (const l of ["es", "en"] as const)
+      expect(
+        vista("inmobiliaria", l, (c) => ({ ...c!, enlaces_razon: razones }))
+          .cierre.razon,
+        l,
+      ).toBe(razones[l]);
+    // Sin ella, la de antes: la del export en español y la de su bloque `en` en inglés.
+    const sinRazon = (c?: Contenido) => {
+      const copia = structuredClone(c!);
+      delete copia.enlaces_razon;
+      return copia;
+    };
+    const ficha = getFichasVitrina().find(
+      (f) => f.ancla.slug === "inmobiliaria",
+    )!;
+    expect(vista("inmobiliaria", "es", sinRazon).cierre.razon).toBe(
+      ficha.export.enlaces.razon,
+    );
+    const v2 = JSON.parse(
+      readFileSync("content/vitrina/inmobiliaria.contenido.json", "utf8"),
+    ) as Contenido;
+    expect(vista("inmobiliaria", "en", sinRazon).cierre.razon).toBe(
+      v2.en!.enlaces_razon,
+    );
   });
 
   it("la casa no lleva lista de espera ni «datos sintéticos», y su nombre sale de apps.yaml", () => {

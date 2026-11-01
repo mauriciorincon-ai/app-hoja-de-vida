@@ -132,6 +132,8 @@
     "actorDueno": "Dueño",
     "actorComprador": "Comprador",
     "actorEquipo": "Equipo",
+    "actorVisita": "Quien visita",
+    "actorProveedor": "El proveedor",
     "nodoInicio": "Inicio",
     "nodoTarea": "Paso",
     "nodoDecision": "Decisión",

@@ -132,6 +132,8 @@
     "actorDueno": "Owner",
     "actorComprador": "Buyer",
     "actorEquipo": "Team",
+    "actorVisita": "Visitor",
+    "actorProveedor": "The provider",
     "nodoInicio": "Start",
     "nodoTarea": "Step",
     "nodoDecision": "Decision",
