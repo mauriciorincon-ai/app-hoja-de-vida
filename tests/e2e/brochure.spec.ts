@@ -167,16 +167,19 @@ test.describe("Brochure — el HTML de las doce, en los dos idiomas", () => {
   test("en inglés, donde el texto es español, la portada lo dice; en español y con el bloque en, no", async ({
     request,
   }) => {
+    // El bloque `en` lo trae el v2 de quien ya lo recibió: el de una app vive en `content/vitrina/` y el de la
+    // casa, en `content/vitrina/casa/` (S30: CV Viva y su chat ya lo tienen).
     const conBloqueEn = (slug: string) => {
-      try {
-        return Boolean(
-          JSON.parse(
-            readFileSync(`content/vitrina/${slug}.contenido.json`, "utf8"),
-          ).en,
-        );
-      } catch {
-        return false;
-      }
+      for (const dir of ["content/vitrina", "content/vitrina/casa"])
+        try {
+          return Boolean(
+            JSON.parse(readFileSync(`${dir}/${slug}.contenido.json`, "utf8"))
+              .en,
+          );
+        } catch {
+          // sin v2 en esta carpeta: se mira la otra
+        }
+      return false;
     };
     expect(conBloqueEn("inmobiliaria"), "la piloto trae su inglés").toBe(true);
     for (const exp of EXPORTS) {
@@ -303,7 +306,13 @@ const FORMAS = [
     busca: "pronun",
     fichas: false,
   },
-  { slug: "hoja-de-vida", forma: "de la casa", busca: "chat", fichas: false },
+  // La casa trae su v2 desde el S30 (por copia): sus preguntas y respuestas son fichas, como las de la piloto.
+  {
+    slug: "hoja-de-vida",
+    forma: "de la casa, con su v2",
+    busca: "chat",
+    fichas: true,
+  },
 ];
 
 /** Una página lista: la isla ya puso `data-b-listo`, y los errores de consola se recogen. */
