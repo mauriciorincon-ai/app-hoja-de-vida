@@ -25,7 +25,7 @@ export async function Estudios({ estudios }: { estudios: Cv["estudios"] }) {
     <section
       id="estudios"
       aria-labelledby="estudios-titulo"
-      className="scroll-mt-16 bg-paper-1"
+      className="scroll-mt-16"
     >
       <div className="mx-auto max-w-5xl px-4 py-20 md:px-6 md:py-28">
         <Reveal variant="fadeInUp">

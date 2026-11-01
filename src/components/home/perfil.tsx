@@ -11,7 +11,7 @@ export async function Perfil({ identidad }: { identidad: Cv["identidad"] }) {
     <section
       id="perfil"
       aria-labelledby="perfil-titulo"
-      className="scroll-mt-16 bg-paper-1"
+      className="scroll-mt-16"
     >
       <div className="mx-auto max-w-5xl px-4 py-20 md:px-6 md:py-24">
         <Reveal variant="fadeInUp">

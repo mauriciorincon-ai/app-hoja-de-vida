@@ -13,7 +13,7 @@ export async function Logros({ logros }: { logros: Cv["logros"] }) {
     <section
       id="logros"
       aria-labelledby="logros-titulo"
-      className="scroll-mt-16 bg-paper-1"
+      className="scroll-mt-16"
     >
       <div className="mx-auto max-w-5xl px-4 py-20 md:px-6 md:py-28">
         <Reveal variant="fadeInUp">
