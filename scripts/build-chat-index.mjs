@@ -42,6 +42,7 @@ import process from "node:process";
 import { parse } from "yaml";
 import { chunksDeAFondo, leerDocumentos, revisarAduana } from "./a-fondo.mjs";
 import { aniosCumplidos } from "./anios.mjs";
+import { contarPiezas } from "./contar-piezas.mjs";
 import { correosPublicos } from "./correos.mjs";
 import {
   catalogoDeDestinos,
@@ -201,7 +202,7 @@ export function buildChunks({
     cv.logros
       .map(
         (l) =>
-          `${l.prefijo ?? ""}${l.desde ? aniosCumplidos(l.desde) : l.valor}${l.sufijo ?? ""} ${l.etiqueta}: ${l.descripcion}`,
+          `${l.prefijo ?? ""}${l.desde ? aniosCumplidos(l.desde) : l.contar ? contarPiezas(l.contar, ROOT) : l.valor}${l.sufijo ?? ""} ${l.etiqueta}: ${l.descripcion}`,
       )
       .join(" · "),
     "#logros",

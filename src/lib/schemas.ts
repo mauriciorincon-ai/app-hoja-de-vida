@@ -1,5 +1,9 @@
 import { z } from "zod";
 import { aniosCumplidos, DESDE_RE, esFuturo } from "../../scripts/anios.mjs";
+import {
+  contarPiezas,
+  FRENTES_CONTABLES,
+} from "../../scripts/contar-piezas.mjs";
 import { MOTIVOS } from "./contacto-constantes";
 
 /**
@@ -141,9 +145,14 @@ export const cvSchema = z.object({
         .object({
           // Corrección de contenido 2026-09-12: un logro puede declarar `desde`
           // ("YYYY-MM") y su `valor` se CALCULA en build como años cumplidos —
-          // el número deja de envejecer solo. Sin `desde`, `valor` es obligatorio.
+          // el número deja de envejecer solo. S29: o `contar` (un frente del
+          // Portafolio), y su `valor` es cuántas piezas tiene publicadas
+          // (`scripts/contar-piezas.mjs`, la misma cuenta que la puerta de la
+          // home). Sin ninguno de los dos, `valor` es obligatorio; con dos, el
+          // build falla: un total escrito a mano caducaría en días.
           valor: z.number().optional(),
           desde: z.string().regex(DESDE_RE, "desde must be YYYY-MM").optional(),
+          contar: z.enum(FRENTES_CONTABLES).optional(),
           prefijo: z.string().default(""),
           sufijo: z.string().default(""),
           decimales: z.number().int().min(0).max(2).default(0),
@@ -151,6 +160,21 @@ export const cvSchema = z.object({
           descripcion: z.string().min(1),
         })
         .transform((l, ctx) => {
+          const fuentes = [l.valor, l.desde, l.contar].filter(
+            (x) => x !== undefined,
+          );
+          if (fuentes.length > 1) {
+            ctx.addIssue({
+              code: "custom",
+              path: ["valor"],
+              message:
+                "un logro lleva UNA sola fuente de su cifra: `valor`, `desde` o `contar`",
+            });
+            return z.NEVER;
+          }
+          if (l.contar !== undefined) {
+            return { ...l, valor: contarPiezas(l.contar) };
+          }
           if (l.desde !== undefined) {
             if (esFuturo(l.desde)) {
               ctx.addIssue({
@@ -166,7 +190,8 @@ export const cvSchema = z.object({
             ctx.addIssue({
               code: "custom",
               path: ["valor"],
-              message: "un logro lleva `valor`, o `desde` para calcularlo",
+              message:
+                "un logro lleva `valor`, o `desde` o `contar` para calcularlo",
             });
             return z.NEVER;
           }
