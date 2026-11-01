@@ -238,7 +238,9 @@ el mensaje te llega al correo.
     con todas las herramientas a la vista, y **detiene el movimiento**. Esa lista es lo que viaja en
     el HTML (ATS, buscadores, quien navega sin JavaScript) y lo que sale **al imprimir**; el
     rectángulo es una mejora encima. Con «reducir movimiento» en tu sistema, nada flota ni se
-    arrastra (el clic sigue eligiendo) y el fondo queda quieto.
+    arrastra (el clic sigue eligiendo) y el fondo queda quieto. Si el rectángulo no alcanza a
+    cargar (una red que se corta, o una página abierta de antes de una actualización), la sección
+    se queda en la lista y sin el conmutador: el resto de la página sigue entera. Recargar lo trae.
   - **Una cita del chat abre el área:** el chat sigue llevando a `/#skills-<id>` y el explorador
     abre esa área, a la vista bajo el encabezado (con la lista puesta, el salto llega a su tarjeta).
 - **Lo que hay detrás, para quien edite:** las cuentas del movimiento viven en

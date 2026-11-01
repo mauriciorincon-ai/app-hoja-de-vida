@@ -206,6 +206,12 @@ test.describe("Skills — el explorador", () => {
     await expect(page.locator("#skills .burbuja[data-abierta]")).toHaveCount(N);
     const verLista = page.locator("#skills .ver-lista");
     await expect(verLista).toBeVisible();
+    // Con un área abierta la invitación se va entera: opacity sola lo dejaba invisible y enfocable (2.4.7).
+    await burbuja(page, 0).click({ force: true });
+    await expect(escenario(page)).toHaveAttribute("data-elegido", "");
+    await expect(verLista).toHaveCSS("visibility", "hidden");
+    await page.keyboard.press("Escape");
+    await expect(verLista).toBeVisible();
     await verLista.click();
     await expect(page.locator("#skills .lista")).toBeVisible();
     await expect(escenario(page)).toBeHidden();
@@ -276,6 +282,42 @@ test.describe("Skills — el explorador", () => {
     await expect(page.locator("#skills .lista")).toBeVisible();
     await expect(page.locator("#skills .escenario-hueco")).toBeHidden();
     await expect(page.locator("#skills .vista")).toBeHidden();
+  });
+});
+
+test.describe("Skills — si el chunk del escenario no llega", () => {
+  test("la home sigue en pie y queda la lista, sin conmutador (S29, M2)", async ({
+    page,
+  }) => {
+    // Se aborta SOLO el chunk del escenario (el que trae la clase de las burbujas); los demás pasan.
+    let abortados = 0;
+    await page.route(/\/_next\/static\/.*\.js(\?.*)?$/, async (route) => {
+      const res = await route.fetch();
+      const cuerpo = await res.text();
+      if (/\bburbuja\b/.test(cuerpo) && !/escenario-hueco/.test(cuerpo)) {
+        abortados++;
+        await route.abort();
+      } else {
+        await route.fulfill({ response: res, body: cuerpo });
+      }
+    });
+    await page.goto("/es");
+    await page.locator("#skills").scrollIntoViewIfNeeded();
+    await expect(
+      page.locator("[data-skills][data-sin-escenario]"),
+    ).toBeAttached();
+    expect(
+      abortados,
+      "el chunk del escenario se pidió y se abortó",
+    ).toBeGreaterThan(0);
+    await expect(page.locator("#skills .lista")).toBeVisible();
+    await expect(page.locator("#skills .escenario")).toHaveCount(0);
+    await expect(
+      page.getByRole("button", { name: "Ver todo en lista", exact: true }),
+    ).toBeHidden();
+    // y el resto de la home no se reemplazó por la página de error
+    await expect(page.locator("#contacto")).toBeAttached();
+    await expect(page.locator("#skills .lista li").first()).toBeVisible();
   });
 });
 

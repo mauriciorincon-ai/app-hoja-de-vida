@@ -9,6 +9,7 @@ import {
   type ReactNode,
 } from "react";
 import type { AreaExplorador, TextosEscenario } from "./skills-escenario";
+import { LimiteDelEscenario } from "./skills-limite";
 import { entrarAHome, salirDeHome } from "./skills-memoria";
 
 /**
@@ -63,6 +64,8 @@ export function SkillsExplorador({
   );
   const [vista, setVista] = useState<"areas" | "lista">("areas");
   const [cargar, setCargar] = useState(false);
+  // El escenario no llegó: se queda la lista, sin conmutador (un reintento exigiría recargar la página).
+  const [fallo, setFallo] = useState(false);
   const [pedido, setPedido] = useState<{ id: string; n: number } | null>(null);
   const huecoRef = useRef<HTMLDivElement>(null);
   const vistaRef = useRef(vista);
@@ -136,9 +139,18 @@ export function SkillsExplorador({
   }, [areas]);
 
   const verLista = () => setVista("lista");
+  const alFallar = () => {
+    setFallo(true);
+    setVista("lista");
+  };
 
   return (
-    <div data-skills="" data-vivo={vivo ? "" : undefined} data-vista={vista}>
+    <div
+      data-skills=""
+      data-vivo={vivo ? "" : undefined}
+      data-vista={vista}
+      data-sin-escenario={fallo ? "" : undefined}
+    >
       <div className="skills-cabeza">
         <div>{cabeza}</div>
         <div className="vista" role="group" aria-label={textos.conmutador}>
@@ -163,13 +175,15 @@ export function SkillsExplorador({
       </div>
       <div ref={huecoRef} className="escenario-hueco">
         {cargar && (
-          <SkillsEscenario
-            areas={areas}
-            textos={textos}
-            activo={vista === "areas"}
-            pedido={pedido}
-            onVerLista={verLista}
-          />
+          <LimiteDelEscenario onFallo={alFallar}>
+            <SkillsEscenario
+              areas={areas}
+              textos={textos}
+              activo={vista === "areas"}
+              pedido={pedido}
+              onVerLista={verLista}
+            />
+          </LimiteDelEscenario>
         )}
       </div>
       {children}

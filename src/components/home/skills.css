@@ -5,7 +5,8 @@
  * vueltas), portada por transformaciones explícitas. Lo que cambió, y por qué:
  *  - todo vive bajo [data-skills] en @layer components: no toca el resto del sitio;
  *  - las clases que la maqueta conmuta por JS son atributos data-* (la isla y el escenario solo cambian
- *    atributos): data-vivo (hay JavaScript), data-vista (áreas | lista), data-visto, data-listo,
+ *    atributos): data-vivo (hay JavaScript), data-vista (áreas | lista), data-sin-escenario (su chunk no
+ *    llegó: queda la lista, sin conmutador), data-visto, data-listo,
  *    data-elegido, data-angosto, data-arrastrando en el rectángulo; data-sobre, data-agarrada,
  *    data-centro, data-viaja y data-abierta (la «.vista» de la maqueta) en cada burbuja; data-ver en
  *    las líneas y las herramientas;
@@ -52,6 +53,8 @@
 [data-skills]:not([data-vivo]) .vista,
 [data-skills]:not([data-vivo]) .escenario-hueco,
 [data-skills][data-vista="lista"] .escenario-hueco,
+[data-skills][data-sin-escenario] .vista,
+[data-skills][data-sin-escenario] .escenario-hueco,
 [data-skills][data-vivo][data-vista="areas"] .lista{display:none}
 
 /* el escenario: un rectángulo oscuro donde las áreas flotan sueltas, con una luz tenue en el centro */
@@ -74,7 +77,8 @@
 [data-skills] .ver-lista[hidden],[data-skills] .progreso[hidden]{display:none}
 [data-skills] .ver-lista:hover{background:var(--esc-velo-sobre)}
 [data-skills] .escenario[data-visto] .invita{opacity:1}
-[data-skills] .escenario[data-elegido] .invita{opacity:0;transition-delay:0s}
+/* con un área abierta la invitación se va ENTERA: opacity sola dejaba «Ver todo en lista» invisible y enfocable (WCAG 2.4.7) */
+[data-skills] .escenario[data-elegido] .invita{opacity:0;visibility:hidden;transition:opacity .3s var(--ease-out-cubic),visibility 0s linear .3s}
 [data-skills] .escenario[data-elegido] .ver-lista{pointer-events:none}
 [data-skills] .lineas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
 [data-skills] .lineas line{stroke:var(--esc-texto);stroke-width:1.1;opacity:0;transition:opacity .35s var(--ease-out-cubic) .15s}

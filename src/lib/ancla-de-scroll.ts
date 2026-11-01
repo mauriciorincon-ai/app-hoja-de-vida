@@ -91,6 +91,10 @@ function tops(): number[] {
       // del explorador, y el borde de un elemento sin caja «está» en el scroll actual, así que se
       // quedaba con el ancla y el cambio de idioma no movía nada.
       .filter((el) => el.getClientRects().length > 0)
+      // La lista de Skills solo tiene caja con «Ver todo en lista» puesto, y esa vista no sobrevive al
+      // cambio de idioma (la home se monta de nuevo en «Áreas»): sus 18 hitos existirían de un lado y
+      // no del otro, y el índice del ancla caería 18 hitos más abajo. No son candidatos.
+      .filter((el) => !el.closest("[data-skills] .lista"))
       .map((el) => el.getBoundingClientRect().top + window.scrollY),
   );
 }

@@ -147,6 +147,50 @@ test.describe("el botón ES/EN conserva el punto exacto de lectura", () => {
       )
       .toBeLessThanOrEqual(TOLERANCIA);
   });
+
+  test("con «Ver todo en lista» puesto en Skills, Métodos queda a la misma altura al cambiar de idioma (S29, M1)", async ({
+    page,
+  }) => {
+    // La lista de Skills solo tiene caja con esa vista, y la home vuelve a montarse en «Áreas» al cambiar
+    // de idioma: sus 18 hitos existían de un lado y no del otro, y el índice del ancla caía 18 hitos más
+    // abajo. Se mide en Métodos, debajo de Skills y lejos del final (en Contacto la página se clava abajo
+    // y la prueba no vería nada).
+    await page.goto("/es");
+    await asentada(page);
+    await page
+      .getByRole("button", { name: "Ver todo en lista", exact: true })
+      .click();
+    await expect(page.locator("#skills .lista")).toBeVisible();
+    await page.evaluate(() => {
+      const el = document.querySelector("#metodos")!;
+      window.scrollTo(0, el.getBoundingClientRect().top + window.scrollY + 20);
+    });
+    const antes = await page
+      .locator("#metodos")
+      .evaluate((el) => Math.round(el.getBoundingClientRect().top));
+
+    await page.getByRole("button", { name: "Switch to English" }).click();
+    await expect(page).toHaveURL(/\/en$/, { timeout: 15_000 });
+    await expect(page.locator("#skills .escenario-hueco")).toBeAttached({
+      timeout: 15_000,
+    });
+    await asentada(page);
+    await expect
+      .poll(
+        async () =>
+          Math.abs(
+            (await page
+              .locator("#metodos")
+              .evaluate((el) => Math.round(el.getBoundingClientRect().top))) -
+              antes,
+          ),
+        {
+          message: `Métodos a ${antes}px antes: no volvió a su sitio`,
+          timeout: 5_000,
+        },
+      )
+      .toBeLessThanOrEqual(TOLERANCIA);
+  });
 });
 
 /**
