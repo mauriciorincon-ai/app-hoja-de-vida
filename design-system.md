@@ -156,7 +156,7 @@ salta al estado final sin movimiento, sin excepciones (hook global) · **vetado:
 animaciones infinitas (sweep/glitch/marquee), scroll-snap de deck, CDNs en `<head>`.
 
 > **Dos excepciones al veto de bucles.** (1) **ADR-030 (S28, reemplaza al ADR-014):** el **brochure** de una
-> app (`/portafolio/apps/<app>/brochure`) conserva el movimiento ambiental de la maqueta aprobada —la
+> app (`/portafolio/apps/<app>`, su entrada) conserva el movimiento ambiental de la maqueta aprobada —la
 > cinta de pantallas, las olas, las insignias y la rotación de la portada—, **siempre con un botón
 > visible de pausa** en la franja de la cinta (WCAG 2.2.2, nivel A; `[data-b-quieto]` los detiene todos)
 > y apagado entero bajo `prefers-reduced-motion`. (2) **El explorador de Skills (S29, OM-02):** las nueve
@@ -391,7 +391,7 @@ cifra `clamp(3.5rem,8vw,4.75rem)`; tres columnas dejaban dos huérfanos.
 
 ### Componentes del portafolio · S5 → S7
 
-- **Ficha técnica** (`/portafolio/apps/<slug>` y `/portafolio/<frente>/<slug>`, ADR-016 · ADR-017): la capa infografía de una pieza,
+- **Ficha técnica** (`/portafolio/<frente>/<slug>` de agentes, investigaciones y tableros, ADR-016 · ADR-017; desde el S31 ninguna app la tiene: su brochure es su entrada): la capa infografía de una pieza,
   en orden fijo para cualquier frente y con **tres secciones opcionales que decide la pieza, no el
   frente**: el proceso BPMN (contrato v1.1.0), los hallazgos y la galería (v1.3.0). La que falta
   no se pinta y **las demás se renumeran seguidas, nunca un hueco** — una app va 01–05, una
@@ -439,7 +439,7 @@ cifra `clamp(3.5rem,8vw,4.75rem)`; tres columnas dejaban dos huérfanos.
   **se mide en disco**, no se escribe.
 - **Muestra de app** (escaparate `/portafolio`): card paper-0, borde paper-2, `r-lg`, `sh-1`. Lleva
   chip de estado + chip de ciclo, nombre en Fraunces, promesa en Fraunces menor, **portada** (la
-  pantalla de entrada de la app; la **tira** esquemática solo si la app aún no la trae) enmarcada en paper-1, para-quién en `ink-2`, conteos en mono y cierre «ver la ficha técnica» (o «ver brochure», en la app que ya abre en él).
+  pantalla de entrada de la app; la **tira** esquemática solo si la app aún no la trae) enmarcada en paper-1, para-quién en `ink-2`, conteos en mono y cierre «Ver brochure» (desde el S31 las diez abren en él; «ver la ficha técnica» es de la muestra de una pieza de los otros frentes).
   El enlace estira su área de clic a toda la card (`after:absolute inset-0`) **conservando el
   nombre de la app como nombre accesible** — una sola parada de tabulador, y nunca «leer más».
   **Desde S9 su nombre es un `h3`** (cuelga del `h2` del bloque de categoría) y es **el nombre
@@ -547,8 +547,8 @@ cifra `clamp(3.5rem,8vw,4.75rem)`; tres columnas dejaban dos huérfanos.
   cruda miente igual que una maqueta que finge ser foto: las capturas llegan tal cual las toma la
   planeadora (`scripts/tema-cv-viva.mjs` se conserva: es el tema que ella puede leer para
   repintar una toma).
-- **Brochure de una app** (S28, ADR-030; la entrada de la app desde el S30: `/portafolio/apps/<app>` en la que ya
-  tiene su contenido v2 y en la casa, `/portafolio/apps/<app>/brochure` en las demás): una plantilla para las doce, con
+- **Brochure de una app** (S28, ADR-030; la entrada de las diez apps y de la casa desde el S31 —desde el S30 lo era la que
+  tenía su contenido v2—: `/portafolio/apps/<app>`, y su `/brochure` es un 301 a ella): una plantilla para las doce, con
   la gramática de la maqueta aprobada y los tokens de esta página; su hoja (`brochure.css`) vive anidada bajo
   `[data-brochure]` en `@layer components` —nada global—, y `tests/unit/brochure-contraste.test.ts` la lee
   contra la tabla de contraste (ningún hex suelto, y los `--color-*` globales iguales a la paleta).
@@ -590,7 +590,7 @@ cifra `clamp(3.5rem,8vw,4.75rem)`; tres columnas dejaban dos huérfanos.
   - **Contrato v2 (S30):** `enlaces_razon {es, en}` de primer nivel (manda sobre `en.enlaces_razon` y sobre
     la razón del export), los actores `visita` («Quien visita» · `--sage-ink`) y `proveedor` («El
     proveedor» · `--peach-ink`) con su nombre siempre a la vista, y los íconos `conversacion` y `llave`.
-- **Stack explicado** (ficha técnica, los cuatro frentes): las cápsulas son la vista comprimida y no llevan
+- **Stack explicado** (ficha técnica de los frentes que la tienen; el de una app vive en «04 · Método» de su brochure): las cápsulas son la vista comprimida y no llevan
   `title`; debajo, un `<details data-stack-detalle>` nativo («Para qué sirve cada uno») despliega
   «nombre — papel». Sin JavaScript y sin tooltip: el teléfono no tiene cursor. Su forma no depende de
   `prefers-reduced-motion`.
@@ -603,8 +603,7 @@ cifra `clamp(3.5rem,8vw,4.75rem)`; tres columnas dejaban dos huérfanos.
   fondo paper-0)—. El marco nace **al pulsar**, a ancho completo, `78dvh` (mínimo 560 px), en
   la misma caja; el botón desaparece y **el foco pasa al marco**. Sin JavaScript la pantalla
   completa es un enlace y funciona. Lo de dentro del marco es de la otra casa: ni se repinta ni
-  se edita. En la ficha técnica, el cierre ofrece «Ver la simulación» (borde `sage-ink`, texto
-  `sage-ink`) junto a «Ver brochure».
+  se edita. En «Úsala», el cierre del brochure, se ofrece «Ver la simulación →» y su regreso dice «Volver al brochure».
 
 ### «Métodos» · S10 → S20 (publicaciones largas en tercera persona)
 

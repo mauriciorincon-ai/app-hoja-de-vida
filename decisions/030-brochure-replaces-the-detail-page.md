@@ -110,3 +110,14 @@ All are declared again in the sprint's closing and in the fidelity matrix the ow
   decision removes) and now wait for the planner's English; the «De esta casa» tiles read the `descripcion`
   of the same YAML in English meanwhile. The attribute `lang` of the page stays the page's: the chrome is in
   the page's language and only the delivered text is Spanish, as on the technical sheet.
+
+## Addendum (Sprint 031, 2026-11-01): the brochure is the entry of every app
+
+The owner decided it ("lo que necesito es reemplazar las fichas por el brochure, punto") and Sprint 030's
+app-by-app switch is gone. `/portafolio/apps/<app>` paints the brochure for the ten apps and the house,
+with or without the v2 content (the v2 enriches the page and brings its English; it no longer changes the
+door). `scripts/entradas-brochure.mjs` and the `CV_ENTRADAS_BROCHURE` variable are deleted, and the proxy
+sends the `/brochure` of any app (and the retired `/detalle` and the house's `/apps/<slug>`) to the entry in a
+single 301. The technical sheet (ADR-016) is no longer an app's page: it stays only for agents, researches and
+boards. The complement `data/fichas/<slug>.yaml` stays (the brochure reads its roadmap and milestones, and it is
+the planner's contract) and so do `armar.ts` and the contract tests that assemble a sheet from it.
