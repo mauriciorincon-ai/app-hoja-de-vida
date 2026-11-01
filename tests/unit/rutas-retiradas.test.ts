@@ -2,6 +2,7 @@
 import { readdirSync, readFileSync, statSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
+import { entradasBrochure } from "../../scripts/entradas-brochure.mjs";
 
 /**
  * LAS RUTAS QUE EL BROCHURE RETIRÓ NO LAS NOMBRA NADIE (S28).
@@ -11,7 +12,10 @@ import { describe, expect, it } from "vitest";
  *  - el detalle de cada app, `/portafolio/apps/<app>/detalle` (S5), y
  *  - la página de la casa, `/apps/hoja-de-vida` y `/apps/chat-hoja-de-vida` (S4).
  *
- * Ambas siguen respondiendo, pero con un 301 (`src/lib/redireccion.ts`). Lo que ya no puede pasar es
+ * Desde el S30 el brochure es además la ENTRADA de la casa y de las apps con su contenido v2
+ * (`/portafolio/apps/<app>`), y su `/brochure` es un 301 a ella: tampoco se nombra.
+ *
+ * Todas siguen respondiendo, pero con un 301 (`src/lib/redireccion.ts`). Lo que ya no puede pasar es
  * que el código, los datos o los textos las nombren como destino: un enlace que depende de la
  * redirección es un salto de más para el visitante y para el buscador, y un catálogo del chat que las
  * lista es una cita a una página que ya no existe. Ninguna otra prueba lo vigilaba: el build valida
@@ -43,6 +47,14 @@ const RETIRADAS: Retirada[] = [
     nombre: "la ruta `/apps/<id>` del S4 armada con una plantilla",
     patron: /(?<!portafolio)\/apps\/\$\{/,
   },
+  {
+    // S30: la lista sale del disco, como la mide el build (copiar un v2 suma su app aquí sola).
+    nombre:
+      "el `/brochure` de una app que abre en su brochure (es un 301 a su entrada)",
+    patron: new RegExp(
+      `apps\\/(?:${entradasBrochure().join("|")})\\/brochure\\b`,
+    ),
+  },
 ];
 
 /** Dónde se busca (relativo a la raíz). */
@@ -63,6 +75,7 @@ const EXENTOS = new Set([
   "tests/unit/redireccion.test.ts",
   "tests/unit/destinos.test.ts", // lista las rutas muertas a propósito, para afirmar que ya no son destino
   "tests/e2e/portafolio.spec.ts", // los 301 contra el sitio real
+  "tests/e2e/entrada.spec.ts", // los 301 del `/brochure` de las entradas, contra el sitio real
   "tests/unit/sin-vitrina.test.ts", // un texto de muestra del patrón de la palabra vieja
   "tests/unit/rutas-retiradas.test.ts", // este archivo
 ]);
@@ -109,13 +122,29 @@ describe("el patrón caza lo que debe y no lo que no", () => {
       "await page.goto(`/es/portafolio/apps/${slug}/detalle`);",
       0,
     ],
+    // Lo que el repo tenía antes del S30.
+    [
+      "un enlace de «Métodos» a la casa",
+      "href: /portafolio/apps/chat-hoja-de-vida/brochure",
+      3,
+    ],
+    [
+      "la URL de Lighthouse de la casa",
+      '"/es/portafolio/apps/hoja-de-vida/brochure",',
+      3,
+    ],
+    [
+      "la URL de Lighthouse de la piloto",
+      '"/es/portafolio/apps/inmobiliaria/brochure",',
+      3,
+    ],
   ] as const)("%s se caza", (_nombre, linea, cual) => {
     expect(RETIRADAS[cual].patron.test(linea)).toBe(true);
   });
 
   it.each([
-    "href: /portafolio/apps/chat-hoja-de-vida/brochure",
-    '"/es/portafolio/apps/hoja-de-vida/brochure",',
+    "href: /portafolio/apps/chat-hoja-de-vida",
+    '"/es/portafolio/apps/habla/brochure",',
     "rutas.add(`/portafolio/apps/${app.slug}/brochure`);",
     "rutas.add(`/portafolio/apps/${app.slug}`);",
     "await page.goto(`/es/portafolio/apps/${slug}/simulacion`);",

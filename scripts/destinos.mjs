@@ -18,6 +18,7 @@ import { existsSync, readFileSync, readdirSync } from "node:fs";
 import path from "node:path";
 import process from "node:process";
 import { parse } from "yaml";
+import { entradasBrochure } from "./entradas-brochure.mjs";
 import { anclasDeBloques } from "./metodo-al-indice.mjs";
 import { leerNombresDePiezas, leerNombresOficiales } from "./nombres-oficiales.mjs";
 
@@ -104,6 +105,7 @@ export function anclasDeHome() {
 /** Las rutas salen de los mismos datos con los que se generan las páginas. */
 export function rutasDeDatos() {
   const rutas = new Set(["/", "/cv", "/portafolio"]);
+  const entradas = new Set(entradasBrochure(ROOT));
 
   // «Métodos» (S10): la lista y una página por publicación de `data/metodo/`.
   // La ruta sale del archivo, igual que la página (`generateStaticParams`).
@@ -129,11 +131,13 @@ export function rutasDeDatos() {
         if (!f.endsWith(".brochure-export.json")) continue;
         const { app } = JSON.parse(readFileSync(path.join(dir, f), "utf8"));
         rutas.add(`/portafolio/apps/${app.slug}`);
-        rutas.add(`/portafolio/apps/${app.slug}/brochure`);
+        // Su `/brochure` solo si sigue con ficha: el de una app que abre en su brochure es un 301 a
+        // la entrada (S30), y una cita no puede llevar a una redirección.
+        if (!entradas.has(app.slug))
+          rutas.add(`/portafolio/apps/${app.slug}/brochure`);
       }
-      // El brochure de las dos de la casa: CV Viva y su chat.
-      for (const slug of slugsDeLaCasa())
-        rutas.add(`/portafolio/apps/${slug}/brochure`);
+      // Las dos de la casa: su entrada es su brochure.
+      for (const slug of slugsDeLaCasa()) rutas.add(`/portafolio/apps/${slug}`);
       continue;
     }
 
@@ -161,6 +165,7 @@ export function rutasDeDatos() {
  */
 export function nombresDeDestinos(locale) {
   const nombres = new Map();
+  const entradas = new Set(entradasBrochure(ROOT));
   const msg = JSON.parse(
     readFileSync(path.join(ROOT, "messages", `${locale}.json`), "utf8"),
   );
@@ -214,14 +219,15 @@ export function nombresDeDestinos(locale) {
         const { app } = JSON.parse(readFileSync(path.join(dir, f), "utf8"));
         const nombre = oficiales.get(app.slug) ?? app.nombre;
         nombres.set(`/portafolio/apps/${app.slug}`, nombre);
-        nombres.set(`/portafolio/apps/${app.slug}/brochure`, nombre);
+        if (!entradas.has(app.slug))
+          nombres.set(`/portafolio/apps/${app.slug}/brochure`, nombre);
       }
       // Las de la casa se llaman como en `data/apps.yaml`: el export solo trae el español.
       const deLaCasa = new Map(
         (leerYaml("data/apps.yaml").apps ?? []).map((a) => [a.id, a.nombre[locale]]),
       );
       for (const slug of slugsDeLaCasa())
-        nombres.set(`/portafolio/apps/${slug}/brochure`, deLaCasa.get(slug) ?? slug);
+        nombres.set(`/portafolio/apps/${slug}`, deLaCasa.get(slug) ?? slug);
       continue;
     }
     const dir = path.join(ROOT, "content", frente.id);

@@ -10,7 +10,7 @@ import { bloqueDe } from "@/lib/metodo/schema";
 import { getSimulaciones } from "@/lib/vitrina/simulaciones-loader";
 import { esFrente, getPiezas } from "@/lib/vitrina/piezas";
 
-/** HOME + /cv + case studies + el Portafolio por frentes, con el brochure de cada app y de la casa (data-driven: una ruta nueva entra sola). */
+/** HOME + /cv + case studies + el Portafolio por frentes, con la entrada de cada app y de la casa (data-driven: una ruta nueva entra sola). */
 export default function sitemap(): MetadataRoute.Sitemap {
   const alternatesFor = (path: string) => ({
     languages: Object.fromEntries(
@@ -69,21 +69,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(bloqueDe(p, 10).revisado),
       alternates: alternatesFor(`/metodos/${p.slug}`),
     })),
-    // Por app: la ficha técnica (ADR-016) y su brochure (S28).
-    ...getManifestVitrina().flatMap((a) =>
-      ["", "/brochure"].map((sub) => ({
-        url: `${SITE_URL}/${locale}/portafolio/apps/${a.slug}${sub}`,
+    // Una URL por app (S30): su entrada, que es su brochure si su contenido v2 llegó y su ficha
+    // técnica (ADR-016) si no. Ninguna redirige. Las dos de la casa, CV Viva y su chat, no son apps
+    // del Portafolio pero sí tienen entrada: su brochure.
+    ...[...getManifestVitrina().map((a) => a.slug), ...SLUGS_CASA].map(
+      (slug) => ({
+        url: `${SITE_URL}/${locale}/portafolio/apps/${slug}`,
         lastModified: new Date(),
-        alternates: alternatesFor(`/portafolio/apps/${a.slug}${sub}`),
-      })),
+        alternates: alternatesFor(`/portafolio/apps/${slug}`),
+      }),
     ),
-    // El brochure de las dos de la casa, CV Viva y su chat: no son apps del
-    // Portafolio (no tienen ficha técnica propia), pero sí brochure.
-    ...SLUGS_CASA.map((slug) => ({
-      url: `${SITE_URL}/${locale}/portafolio/apps/${slug}/brochure`,
-      lastModified: new Date(),
-      alternates: alternatesFor(`/portafolio/apps/${slug}/brochure`),
-    })),
     // Y su simulación, si la tiene (data/simulaciones.yaml, 2026-10-12).
     ...getSimulaciones().map((s) => ({
       url: `${SITE_URL}/${locale}/portafolio/apps/${s.slug}/simulacion`,
