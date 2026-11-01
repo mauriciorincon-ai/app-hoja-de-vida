@@ -1,7 +1,6 @@
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { expect, test, type Page } from "@playwright/test";
 import { parse } from "yaml";
-import { entradasBrochure } from "../../scripts/entradas-brochure.mjs";
 
 /**
  * LA NUMERACIÓN DE LAS SECCIONES (OM-29, S28) — en todas las páginas de una pieza.
@@ -17,15 +16,11 @@ import { entradasBrochure } from "../../scripts/entradas-brochure.mjs";
  *  2. **El brochure** de las doce numera 01… seguido (portada aparte), y sus capítulos, 2.1…
  *
  * Data-driven: los frentes y las piezas salen de `data/vitrina.yaml` y `content/`, la misma fuente
- * que renderiza la página. Una pieza nueva entra a la prueba sola. Desde el S30 una app con su
- * contenido v2 abre en su brochure, sin ficha: se mide como brochure, en su entrada.
+ * que renderiza la página. Una pieza nueva entra a la prueba sola. Desde el S31 ninguna app tiene
+ * ficha: las diez abren en su brochure y se miden como brochure, en su entrada.
  */
 
-const ENTRADAS = entradasBrochure();
-const rutaDelBrochure = (slug: string) =>
-  ENTRADAS.includes(slug)
-    ? `/es/portafolio/apps/${slug}`
-    : `/es/portafolio/apps/${slug}/brochure`;
+const rutaDelBrochure = (slug: string) => `/es/portafolio/apps/${slug}`;
 
 type Frente = { id: string; estado: "abierta" | "en-preparacion" };
 const FRENTES = (
@@ -47,18 +42,16 @@ const slugsDe = (dir: string, sufijo: string, campo: "app" | "pieza") =>
         )
     : [];
 
-/** Las páginas de pieza que se publican, por frente. */
-const FICHAS: { frente: string; ruta: string }[] = FRENTES.filter(
-  (f) => f.estado === "abierta",
-).flatMap((f) =>
-  f.id === "apps"
-    ? slugsDe("content/vitrina", ".brochure-export.json", "app")
-        .filter((s) => !ENTRADAS.includes(s))
-        .map((s) => ({ frente: f.id, ruta: `/es/portafolio/apps/${s}` }))
-    : slugsDe(`content/${f.id}`, ".ficha-tecnica.json", "pieza").map((s) => ({
-        frente: f.id,
-        ruta: `/es/portafolio/${f.id}/${s}`,
-      })),
+/** Las fichas técnicas que se publican, por frente: las de las apps no están (son brochures, S31). */
+const FRENTES_CON_FICHA = FRENTES.filter(
+  (f) => f.estado === "abierta" && f.id !== "apps",
+);
+const FICHAS: { frente: string; ruta: string }[] = FRENTES_CON_FICHA.flatMap(
+  (f) =>
+    slugsDe(`content/${f.id}`, ".ficha-tecnica.json", "pieza").map((s) => ({
+      frente: f.id,
+      ruta: `/es/portafolio/${f.id}/${s}`,
+    })),
 );
 const SLUGS_BROCHURE = [
   ...slugsDe("content/vitrina", ".brochure-export.json", "app"),
@@ -74,7 +67,7 @@ async function textos(page: Page, selector: string) {
 test.describe("OM-29 · la ficha técnica numera sus secciones, en los frentes abiertos", () => {
   test("hay fichas de los frentes abiertos (si no, esta prueba no mide nada)", () => {
     expect(FICHAS.length).toBeGreaterThan(0);
-    for (const f of FRENTES.filter((f) => f.estado === "abierta"))
+    for (const f of FRENTES_CON_FICHA)
       expect(
         FICHAS.some((x) => x.frente === f.id),
         `el frente «${f.id}» está abierto: tiene fichas`,

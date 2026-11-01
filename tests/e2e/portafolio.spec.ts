@@ -10,9 +10,10 @@ import { textoVisible } from "./texto-visible";
  *     `maxRedirects: 0`: lo que se prueba es la respuesta, no a dónde acaba el
  *     navegador.
  *     Y las páginas que reemplazó el brochure (S28): el detalle de una app y la
- *     página de la casa llegan a su `/brochure` EN UN SOLO SALTO, también desde
- *     la ruta de la «vitrina»; el destino responde 200, no otra redirección. Desde
- *     el S30 la casa abre en su brochure: su página vieja llega a la entrada.
+ *     página de la casa llegan a su ENTRADA (`/portafolio/apps/<app>`, que es su
+ *     brochure) EN UN SOLO SALTO, también desde la ruta de la «vitrina»; el destino
+ *     responde 200, no otra redirección. Desde el S31 la entrada es el brochure de
+ *     las diez apps y la casa, y su `/brochure` también llega a ella.
  *  2. Ninguna página del sitemap dice «vitrina» ni «showcase» en el texto que el
  *     visitante lee (ni en un `alt`, `aria-label` o `title`) ni en lo que ve un
  *     buscador o una vista previa (`<meta content>`, JSON-LD: `texto-visible.ts`).
@@ -34,16 +35,15 @@ test.describe("las rutas viejas redirigen con 301", () => {
       "/en/portafolio/apps/planlang/simulacion",
     ],
     ["/es/vitrina/agentes", "/es/portafolio/agentes"],
-    // El brochure reemplazó al detalle y a la página de la casa (S28): un solo salto.
-    ["/es/portafolio/apps/habla/detalle", "/es/portafolio/apps/habla/brochure"],
-    [
-      "/en/vitrina/apps/habla/detalle?utm=x",
-      "/en/portafolio/apps/habla/brochure?utm=x",
-    ],
-    // La casa abre en su brochure (S30): su página vieja llega a la entrada.
+    // El brochure reemplazó al detalle y a la página de la casa: un solo salto, a la entrada.
+    ["/es/portafolio/apps/habla/detalle", "/es/portafolio/apps/habla"],
+    ["/en/vitrina/apps/habla/detalle?utm=x", "/en/portafolio/apps/habla?utm=x"],
+    // La casa abre en su brochure: su página vieja llega a la entrada.
     ["/es/apps/hoja-de-vida", "/es/portafolio/apps/hoja-de-vida"],
-    // Y el `/brochure` de una app que abre en él, aun con la palabra vieja: un salto, no dos.
+    // Y el `/brochure` de cualquier app, aun con la palabra vieja: un salto, no dos.
     ["/vitrina/apps/inmobiliaria/brochure", "/es/portafolio/apps/inmobiliaria"],
+    ["/vitrina/apps/habla/brochure", "/es/portafolio/apps/habla"],
+    ["/en/vitrina/apps/ds/detalle", "/en/portafolio/apps/ds"],
     ["/apps/chat-hoja-de-vida", "/es/portafolio/apps/chat-hoja-de-vida"],
   ]) {
     test(`${vieja} → ${nueva}`, async ({ request }) => {

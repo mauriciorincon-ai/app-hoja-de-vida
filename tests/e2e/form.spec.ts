@@ -52,9 +52,9 @@ test.describe("Formulario de contacto (antes «solicitar acceso»)", () => {
     await page
       .locator('form[data-formulario="propuesta"][data-hydrated=true]')
       .waitFor();
-    // Debajo del roadmap: el formulario viene DESPUÉS de la sección #roadmap.
+    // Debajo del roadmap de «Úsala»: el formulario viene DESPUÉS de sus ideas votables.
     const orden = await page.evaluate(() => {
-      const r = document.querySelector("#roadmap");
+      const r = document.querySelector("#s-cierre [data-feature-id]");
       const f = document.querySelector('form[data-formulario="propuesta"]');
       return r && f
         ? Boolean(
