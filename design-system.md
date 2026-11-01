@@ -270,7 +270,7 @@ animaciones infinitas (sweep/glitch/marquee), scroll-snap de deck, CDNs en `<hea
   puede nombrarse en ningún titular sin esas palabras al lado (gate de contenido).
 - **La puerta al Portafolio en la HOME** (S28, OM-18; antes «Portafolio asomado», que repetía las cuatro cajas
   del portal): `src/components/home/vitrina.tsx`, sección `#portafolio` (el ancla del chat y del catálogo de destinos),
-  entre Logros y Estudios. Tiene la forma de la puerta de «Métodos»: título Fraunces, una línea de contexto de 60
+  entre Skills y Métodos (ajuste de la HOME, 2026-11-01). Tiene la forma de la puerta de «Métodos»: título Fraunces, una línea de contexto de 60
   caracteres de ancho, **una fila por frente** (un enlace de mín. 44 px de alto, `r-md` 12 px, `sh-1`, con
   `data-frente` y `data-estado`) y el botón `sage` «Explora mi portafolio →» a `/portafolio`; el botón del hero
   también va ahí. Cada fila lleva una **píldora estática con la cuenta del frente** (mono 12 px; sage · sky ·
