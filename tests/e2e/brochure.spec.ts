@@ -1,5 +1,6 @@
 import { readdirSync, readFileSync } from "node:fs";
 import { expect, test, type Page } from "@playwright/test";
+import { parse } from "yaml";
 
 /**
  * EL BROCHURE (S28, ADR-030) — e2e.
@@ -153,6 +154,61 @@ test.describe("Brochure — el HTML de las doce, en los dos idiomas", () => {
     // El inglés del v2 reemplaza el texto del export: la portada en inglés dice lo que su bloque `en` dice.
     const en = await (await request.get(ruta("en", "inmobiliaria"))).text();
     expect(textoDe(en)).toContain(v2.en.promesa.intro.slice(0, 40));
+  });
+
+  test("en inglés, donde el texto es español, la portada lo dice; en español y con el bloque en, no", async ({
+    request,
+  }) => {
+    const conBloqueEn = (slug: string) => {
+      try {
+        return Boolean(
+          JSON.parse(
+            readFileSync(`content/vitrina/${slug}.contenido.json`, "utf8"),
+          ).en,
+        );
+      } catch {
+        return false;
+      }
+    };
+    expect(conBloqueEn("inmobiliaria"), "la piloto trae su inglés").toBe(true);
+    for (const exp of EXPORTS) {
+      const slug = exp.app.slug;
+      const es = await (await request.get(ruta("es", slug))).text();
+      expect(es, `${slug} · es`).not.toContain("aviso-idioma");
+      const en = await (await request.get(ruta("en", slug))).text();
+      if (conBloqueEn(slug))
+        expect(en, `${slug} · en`).not.toContain("aviso-idioma");
+      else {
+        expect(textoDe(en), `${slug} · en`).toContain(
+          "The text of this brochure is in Spanish.",
+        );
+        // Y la descripción de la página no es el tagline español del export.
+        const descripcion = /<meta name="description" content="([^"]*)"/.exec(
+          en,
+        )![1]!;
+        expect(descripcion, `${slug} · description`).not.toContain(
+          exp.promesa.tagline.slice(0, 30),
+        );
+      }
+    }
+  });
+
+  test("«De esta casa» en inglés dice la línea inglesa de la casa, no el tagline español de su export", async ({
+    request,
+  }) => {
+    const apps = (
+      parse(readFileSync("data/apps.yaml", "utf8")) as {
+        apps: { id: string; descripcion: { es: string; en: string } }[];
+      }
+    ).apps;
+    const en = textoDe(await (await request.get("/en/portafolio/apps")).text());
+    const es = textoDe(await (await request.get("/es/portafolio/apps")).text());
+    for (const exp of CASA) {
+      const desc = apps.find((a) => a.id === exp.app.slug)!.descripcion.en;
+      expect(en, exp.app.slug).toContain(desc.slice(0, 40));
+      expect(en, exp.app.slug).not.toContain(exp.promesa.tagline);
+      expect(es, exp.app.slug).toContain(exp.promesa.tagline);
+    }
   });
 
   test("el cierre lleva a la lista de espera de la ficha (las diez) o al contacto de la casa", async ({

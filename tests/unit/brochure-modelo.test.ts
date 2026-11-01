@@ -1,7 +1,11 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { getCasa } from "@/lib/brochure/casa";
-import type { Cita, VistaBrochure } from "@/lib/brochure/modelo";
+import {
+  textoEnEspanol,
+  type Cita,
+  type VistaBrochure,
+} from "@/lib/brochure/modelo";
 import { getComplemento } from "@/lib/vitrina/ficha-tecnica/loader";
 import { config, vistaDe as vista } from "../fixtures/brochure/vista";
 
@@ -160,6 +164,24 @@ describe("lo que cambia entre la piloto, las v1 y la casa", () => {
     expect(v.secciones.find((s) => s.id === "antes")!.corto).toBe(
       "What changes",
     );
+  });
+
+  it("en inglés avisa que el texto es español donde el v2 no trae su bloque en; en español, nunca", () => {
+    // Solo Innmobiliaria trae el bloque `en`: las otras once y las dos de la casa leen el export, que es español.
+    const conEn = (slug: string) =>
+      JSON.parse(readFileSync(`content/vitrina/${slug}.contenido.json`, "utf8"))
+        .en;
+    expect(conEn("inmobiliaria")).toBeTruthy();
+    for (const slug of SLUGS) {
+      expect(vista(slug, "es").textoEnEs, `${slug} · es`).toBe(false);
+      expect(vista(slug, "en").textoEnEs, `${slug} · en`).toBe(
+        slug !== "inmobiliaria",
+      );
+    }
+    // La función pura que usa también la metadata de la página.
+    expect(textoEnEspanol("en", undefined)).toBe(true);
+    expect(textoEnEspanol("en", {})).toBe(true);
+    expect(textoEnEspanol("es", undefined)).toBe(false);
   });
 
   it("una app v1 conserva su 01 con «Para quién y por qué», sin los bloques que no tiene", () => {

@@ -43,6 +43,17 @@ describe("la casa", () => {
     expect(casa[0]!.nombre).toEqual({ es: "CV Viva", en: "Living CV" });
   });
 
+  it("su descripción en los dos idiomas sale de data/apps.yaml: es la línea en inglés de «De esta casa»", () => {
+    const apps = getApps().apps;
+    for (const p of casa) {
+      const card = apps.find((a) => a.id === p.slug)!;
+      expect(p.descripcion).toEqual(card.descripcion);
+      // El export de la casa es solo español: la línea inglesa no puede ser su tagline.
+      expect(p.descripcion.en).not.toBe(p.export.promesa.tagline);
+      expect(p.descripcion.en.length).toBeGreaterThan(0);
+    }
+  });
+
   it("nunca entran a la cuenta de las diez apps del Portafolio", () => {
     const apps = getFichasVitrina().map((f) => f.ancla.slug);
     expect(apps).toHaveLength(10);

@@ -19,6 +19,7 @@ import { getConfigDeApp } from "@/lib/brochure/config-loader";
 import { getContenido } from "@/lib/brochure/contenido-loader";
 import {
   armarBrochure,
+  textoEnEspanol,
   type EntradaBrochure,
   type Textos,
 } from "@/lib/brochure/modelo";
@@ -105,7 +106,10 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   return {
     metadataBase: new URL(SITE_URL),
     title: t("titulo", { nombre }),
-    description: e.export.promesa.tagline,
+    // El tagline del export es español: en una página inglesa sin su bloque `en` no es su descripción.
+    description: textoEnEspanol(locale, e.contenido)
+      ? t("descripcion", { nombre })
+      : e.export.promesa.tagline,
     alternates: {
       languages: {
         es: `/es/portafolio/apps/${app}/brochure`,

@@ -149,6 +149,15 @@ export function Portada({ v, t }: P) {
             >
               {P.intro}
             </p>
+            {v.textoEnEs ? (
+              <p
+                className="aviso-idioma entra"
+                data-motion=""
+                style={st({ "--d": ".2s" })}
+              >
+                {t("soloEs")}
+              </p>
+            ) : null}
             <div
               className="acciones entra"
               data-motion=""

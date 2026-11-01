@@ -102,7 +102,9 @@ export default async function VitrinaAppsPage({ params }: Params) {
   // «De esta casa» (OM-26): CV Viva y su chat, que tienen brochure como las demás
   // pero no son fichas del Portafolio —su entrega vive en `content/vitrina/casa/`,
   // no entra al loader y su cuenta no se suma a la de las apps—. El nombre es el
-  // de `data/apps.yaml` (bilingüe) y el tagline, el de su propio export.
+  // de `data/apps.yaml` (bilingüe) y la línea, el tagline de su propio export en español; el
+  // export de la casa es solo español, así que en inglés la línea es la `descripcion` de ese mismo
+  // YAML (hasta que la planeadora entregue su inglés).
   const propias = getCasa();
   // «Qué viene — y tú decides el orden» se contesta en la página de CADA app
   // (2026-09-13): el escaparate solo asoma, y las features se votan adentro.
@@ -215,7 +217,9 @@ export default async function VitrinaAppsPage({ params }: Params) {
                           {app.nombre[l]}
                         </span>
                         <span className="text-sm leading-relaxed text-ink-2">
-                          {app.export.promesa.tagline}
+                          {l === "es"
+                            ? app.export.promesa.tagline
+                            : app.descripcion[l]}
                         </span>
                         <span className="mt-1 flex items-center gap-1.5 text-[14px] font-medium text-sage-ink">
                           {t("verBrochure")}

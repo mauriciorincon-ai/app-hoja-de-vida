@@ -46,6 +46,11 @@ export type PiezaDeCasa = {
   slug: (typeof SLUGS_CASA)[number];
   /** El nombre oficial en los dos idiomas, de `data/apps.yaml`. */
   nombre: { es: string; en: string };
+  /**
+   * Su descripción en los dos idiomas, de `data/apps.yaml`. El export de la casa es solo en español:
+   * donde la página necesita una línea en inglés (el bloque «De esta casa»), sale de aquí.
+   */
+  descripcion: { es: string; en: string };
   export: BrochureExport;
   capturas: Capturas;
   complemento: Complemento;
@@ -109,15 +114,16 @@ function leerPieza(slug: PiezaDeCasa["slug"]): PiezaDeCasa {
       `${rel("complemento.yaml")}: app «${k.data.app}» no es «${slug}»`,
     );
 
-  const nombre = getApps().apps.find((a) => a.id === slug)?.nombre;
-  if (!nombre)
+  const app = getApps().apps.find((a) => a.id === slug);
+  if (!app)
     throw new Error(
-      `data/apps.yaml: falta «${slug}» (su nombre en español e inglés)`,
+      `data/apps.yaml: falta «${slug}» (su nombre y su descripción en español e inglés)`,
     );
 
   return {
     slug,
-    nombre,
+    nombre: app.nombre,
+    descripcion: app.descripcion,
     export: sinVitrinaDe(slug, e.data),
     capturas: sinVitrinaDe(slug, c.data),
     complemento: sinVitrinaDe(slug, k.data),

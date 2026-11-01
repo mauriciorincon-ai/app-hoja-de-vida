@@ -162,6 +162,8 @@ export type VistaBrochure = {
   slug: string;
   casa: boolean;
   lang: Locale;
+  /** En inglés y sin bloque `en` del contenido v2: el texto de la página sale del export, en español. */
+  textoEnEs: boolean;
   nombre: string;
   inicial: string;
   acento: Acento;
@@ -235,6 +237,16 @@ export type VistaBrochure = {
 };
 
 const ACTORES_MAQUETA = ["dueno", "comprador", "equipo", "app"] as const;
+
+/**
+ * ¿La página en este idioma lleva su texto en español? Sí cuando se pide en inglés y la app no trae
+ * el bloque `en` del contenido v2 (las once sin v2 y las dos de la casa): el export es solo español.
+ * La portada lo avisa y la metadata no pasa el tagline español como descripción de una página inglesa.
+ */
+export const textoEnEspanol = (
+  locale: Locale,
+  contenido?: Partial<Contenido>,
+): boolean => locale === "en" && !contenido?.en;
 
 export function armarBrochure(e: EntradaBrochure): VistaBrochure {
   const { t, locale } = e;
@@ -703,6 +715,7 @@ export function armarBrochure(e: EntradaBrochure): VistaBrochure {
     slug: e.slug,
     casa: e.casa,
     lang: locale,
+    textoEnEs: textoEnEspanol(locale, C),
     nombre: NOMBRE,
     inicial: NOMBRE.charAt(0),
     acento: e.config.acento,
