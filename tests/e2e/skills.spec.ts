@@ -520,12 +520,17 @@ test.describe("Skills — en el celular flotan sueltas", () => {
     });
   }
 
-  for (const ancho of [360, 390, 414]) {
-    test(`a ${ancho} px el hueco reserva el alto que tendrá el escenario`, async ({
+  // La invitación de arriba puede ocupar más líneas (en inglés, o en una pantalla angosta) y empuja el techo: el
+  // hueco cuenta con el mínimo de 74 px, así que esta prueba lo mira en los dos idiomas y a 320 px también.
+  const HUECOS = [320, 360, 390, 414].flatMap((ancho) =>
+    (["es", "en"] as const).map((l) => [ancho, l] as const),
+  );
+  for (const [ancho, l] of HUECOS) {
+    test(`/${l}: a ${ancho} px el hueco reserva el alto que tendrá el escenario`, async ({
       page,
     }) => {
       await page.setViewportSize({ width: ancho, height: 844 });
-      await abrirSkills(page);
+      await abrirSkills(page, `/${l}`);
       // Un hueco vacío como el que se ve antes de que llegue el escenario, con la misma hoja y el mismo ancho.
       const { hueco, escenario: alto } = await page.evaluate(() => {
         const real = document.querySelector<HTMLElement>(

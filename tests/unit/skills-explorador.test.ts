@@ -547,8 +547,8 @@ describe("en el celular las nueve áreas flotan sueltas", () => {
   const VUELO = 10 * CUADROS;
   const VENTANA = CUADROS / 4;
 
-  function volar(W: number, semilla: number) {
-    const m = M.medidas(W, TECHO, AREAS);
+  function volar(W: number, semilla: number, medidas?: M.Medidas) {
+    const m = medidas ?? M.medidas(W, TECHO, AREAS);
     const rng = mulberry32(semilla);
     const cs = M.sembrar(AREAS, m, rng);
     for (let k = 0; k < ARRANQUE; k++)
@@ -599,27 +599,20 @@ describe("en el celular las nueve áreas flotan sueltas", () => {
     });
   }
 
-  it("la prueba puede fallar: con las medidas de antes (120 px, 600 de alto) a 328 px las nueve se traban", () => {
-    const m: M.Medidas = {
-      W: 328,
+  it("la prueba puede fallar: con las medidas de antes (120 px, 600 de alto) las nueve se traban", () => {
+    const antes = (W: number): M.Medidas => ({
+      W,
       angosto: true,
       d: 120,
       H: 600,
       techo: TECHO,
-    };
-    const rng = mulberry32(2026);
-    const cs = M.sembrar(AREAS, m, rng);
-    for (let k = 0; k < ARRANQUE; k++)
-      M.paso(cs, 1 / CUADROS, m, SIN_FIJOS, rng);
-    let contacto = 0;
-    for (let k = 0; k < VUELO; k++) {
-      M.paso(cs, 1 / CUADROS, m, SIN_FIJOS, rng);
-      for (let p = 0; p < AREAS; p++)
-        for (let q = p + 1; q < AREAS; q++)
-          if (Math.hypot(cs[p]!.x - cs[q]!.x, cs[p]!.y - cs[q]!.y) < m.d + 12)
-            contacto++;
-    }
-    expect(contacto / VUELO).toBeGreaterThan(6);
+    });
+    // a 328 px se empujan sin soltarse (más de 6 pares en contacto); a 358 y 382 casi no avanzan
+    expect(volar(328, 2026, antes(328)).pares).toBeGreaterThan(6);
+    for (const W of [328, 358, 382])
+      expect(volar(W, 2026, antes(W)).desplazamiento, `W ${W}`).toBeLessThan(
+        30,
+      );
   });
 
   it("en escritorio el alto no cambia: 620 px con las nueve", () => {
