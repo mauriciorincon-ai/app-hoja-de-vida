@@ -155,13 +155,21 @@ las cajas del portal y las filas de las puertas de la HOME se escalonan dentro d
 salta al estado final sin movimiento, sin excepciones (hook global) · **vetado:** three.js/WebGL,
 animaciones infinitas (sweep/glitch/marquee), scroll-snap de deck, CDNs en `<head>`.
 
-> **Única excepción al veto de bucles — ADR-030 (S28, reemplaza al ADR-014):** el **brochure** de una
+> **Dos excepciones al veto de bucles.** (1) **ADR-030 (S28, reemplaza al ADR-014):** el **brochure** de una
 > app (`/portafolio/apps/<app>/brochure`) conserva el movimiento ambiental de la maqueta aprobada —la
 > cinta de pantallas, las olas, las insignias y la rotación de la portada—, **siempre con un botón
 > visible de pausa** en la franja de la cinta (WCAG 2.2.2, nivel A; `[data-b-quieto]` los detiene todos)
-> y apagado entero bajo `prefers-reduced-motion`. Solo animan `transform`/`opacity`, y ninguna
-> animación negocia el presupuesto de rendimiento. No es una licencia general: en el resto del sitio
-> sigue vetado.
+> y apagado entero bajo `prefers-reduced-motion`. (2) **El explorador de Skills (S29, OM-02):** las nueve
+> áreas flotan solas en su rectángulo oscuro y el fondo es una red de puntos que deriva (`canvas`);
+> el mecanismo de WCAG 2.2.2 es **«Ver todo en lista»**, siempre visible arriba a la derecha, que
+> **oculta** el movimiento entero y muestra la lista estática; bajo `prefers-reduced-motion` nada flota
+> ni se arrastra (el clic sigue eligiendo) y la red queda quieta. En las dos, solo animan
+> `transform`/`opacity` (y el `canvas`, que no toca el diseño de la página), el cuadro se detiene cuando
+> el rectángulo no se ve o la pestaña está oculta, y ninguna animación negocia el presupuesto de
+> rendimiento: el escenario de Skills se carga **cuando la sección se acerca**, no al abrir la HOME.
+> No es una licencia general: en el resto del sitio sigue vetado. *(No hay una ADR-031 para la
+> segunda: la cuenta de ADR alimenta `a-fondo-coherencia` y el sprint no toca `data/a-fondo/`; la regla
+> queda escrita aquí, y la propone como ADR el siguiente sprint que toque ese corpus.)*
 
 ## Componentes canon
 
@@ -193,31 +201,50 @@ animaciones infinitas (sweep/glitch/marquee), scroll-snap de deck, CDNs en `<hea
   (React #418, cazado el 2026-09-10 en este mismo relleno). En la tarjeta, las **dos acciones en
   una fila** («Ver logros completos» · «Ver case
   study →») y el panel de bullets abre debajo de la fila.
-- **Tarjeta de skills**: card `paper-0`, borde `paper-2`, `r-[14px]`, `sh-1`, hover
-  `-translate-y-0.5` + `sh-2`. Cabecera con el **icono** en cuadro `paper-1` de 48 px (24×24,
-  trazo 1.7, `sage-ink`, dibujado en casa, **uno por grupo, buscado por su `id`** —desde el
-  2026-09-26; antes iba por posición, y un grupo insertado en medio corrió los dibujos: lo vigila
-  `tests/unit/skills-iconos.test.ts`—) y el nombre en Fraunces
-  1.35rem. Los ítems son chips `paper-1` con borde `paper-3` que entran con `scaleInBlur`
-  escalonado. El trazo del icono se dibuja al llegar la tarjeta (`pathLength` 0→1, en cascada de
-  200 ms por figura) orquestado por su cabecera; el estado por defecto es el icono
-  dibujado. Cada tarjeta lleva `id="skills-<id>"` (el `id` del grupo en el YAML): es el destino
-  de las citas del chat de esa capacidad, con `scroll-mt-40` para que el título quede a la vista
-  aunque el salto llegue antes que el `liftIn`. Rejilla de dos columnas; **si los grupos son
-  impares, el último ocupa las dos** (nueve grupos desde el 2026-09-26), y el orden empareja
-  tarjetas de tamaño parecido. **Prohibido:** barras o porcentajes de dominio. **Coreografía post-S8, tres capas** (apretada el
-  2026-09-27, opción A del dueño: con nueve tarjetas la de 200/800/100 ms terminaba pasados los
-  3,5 s): la tarjeta **aterriza vacía** (`liftIn`, escalón 120 ms) → a los 0,5 s, cuando ya se
-  ve, aparece la cabecera (`fadeInUp`) y 0,2 s después el trazo del icono se dibuja, figura a
-  figura cada 0,2 s, **siguiendo a su tarjeta** (lo orquesta la cabecera con `hijos`) → los chips
-  caen uno a uno detrás (`scaleInBlur`, 60 ms). Cada tarjeta corre la partitura desplazada por su escalón:
-  la orquesta la propia tarjeta (`hijos` en `StaggerItem` = `delayChildren` + `staggerChildren`).
-  Segunda vuelta del dueño: la primera versión (1 s ease-out-expo, chips a 45 ms) resolvía el
-  87 % del viaje en 300 ms y se leía como un fundido más; el in-out y los tres momentos separados
-  son lo que hace que se VEA. **Regla de motion que nació aquí:** dentro de un árbol de
-  variantes, un ítem con `transition.delay` propio o un `Stagger` anidado con su disparador se
-  congelan al nacer (medido); el escalón de los nietos se orquesta desde el padre. Solo
-  transform/opacity/filter; con reducción de movimiento, todo quieto.
+- **Skills: el explorador de nueve áreas** (S29, OM-02; sale de la maqueta aprobada tras cinco vueltas,
+  `referencias-ui/home/maqueta/` de la planeadora): `src/components/home/skills.tsx` (la lista, de
+  servidor), `skills-explorador.tsx` (la isla ligera, que solo cambia atributos) y `skills-escenario.tsx`
+  (el rectángulo, en su propio chunk). Las cuentas del movimiento son de `src/lib/skills/explorador.ts`.
+  - **El escenario:** un rectángulo de 620 px de alto (600 en móvil; crece con las herramientas de un
+    área abierta), `r-[22px]`, **oscuro** (`#23211e` → `#151412` → `#0e0d0c`, degradado radial) con una
+    **luz tenue en el centro** (≈ 9 % de un blanco cálido): el sitio sigue siendo de un solo tema, solo
+    este rectángulo es oscuro. Los colores viven como variables al tope de `[data-skills]`
+    (`src/components/home/skills.css`) y como datos en `src/lib/skills/paleta.ts`;
+    `tests/unit/skills-contraste.test.ts` exige 4,5:1 en cada texto **contra el punto más claro del
+    fondo** y que la hoja y la paleta digan lo mismo (axe no mide sobre degradados).
+  - **La burbuja** (una por área, `<button aria-pressed>`, 120/140/160 px según el ancho): el pastel del
+    área (`COLORES_AREAS`: sage · sky · lilac · peach · citron · rose · sky · peach · sage) con la luz
+    arriba a la izquierda y un borde inferior que se curva a la sombra; el centro, donde va el texto,
+    conserva el color plano. El nombre, el icono (`DibujoSkill`, 26 px) y, en el centro, cuántas
+    herramientas. **Todos los nombres del mismo tamaño** (14 px; 12 en móvil), el del que más tuvo que
+    achicarse para caber en su círculo. El **número** del área va en una ficha oscura sobre el borde de
+    arriba a la izquierda, y su ✓ cuando ya se abrió; una área abierta queda como un **aro** de su color
+    (transparente por dentro, texto del color, ≈ 9,5:1). Sin porcentajes ni «nivel de dominio».
+  - **El movimiento:** deriva al azar desde el primer instante (nacen repartidas, cada una en su rumbo:
+    ángulo áureo), rebote contra los bordes y entre ellas; **la que tiene el cursor encima se detiene y
+    crece un 20 %** (se mide el círculo, no su caja); agarrada con el clic sostenido (el dedo, tras
+    0,3 s) sale con la velocidad de la mano, con tope de 1100 px/s. La **red** del fondo es un `canvas`
+    de puntos pequeños que se enlazan con los cercanos a baja opacidad (≈ 60 en escritorio, ≈ 24 en móvil).
+  - **El área elegida:** las otras se van, ella pasa al centro (×1,3; ×1,12 en móvil) y sus herramientas
+    —chips `paper-0` de `r-14`, con el estado como etiqueta mono y la nota debajo— se acomodan
+    **alrededor, conectadas con una línea**, sin encimarse ni tapar el centro. «← Todas las áreas» arriba
+    a la izquierda y «← 5 · 7 →» abajo (también las flechas del teclado; del 9 al 1); Escape y tocar el
+    centro devuelven al rectángulo, con el foco de vuelta en esa área. Todo con teclado y con un aviso
+    `aria-live`.
+  - **La forma del árbol no depende de «reducir movimiento»** (regla 7; lo vigila
+    `tests/unit/motion-estructura-reducida.test.tsx` con la isla y el escenario). Lo que cambia a
+    cada cuadro se escribe en el DOM (`transform`, atributos `data-*`) sin pasar por React.
+- **Skills: la lista** (la vista «Ver todo en lista», lo que viaja en el HTML y lo que se imprime): card
+  `paper-0`, borde `paper-2`, `r-[14px]`, `sh-1`, **estática** desde el S29 (la entrada escalonada y el
+  trazo del icono se fueron con ella; `liftIn` y el trazo siguen en el vocabulario de motion, sin uso en
+  la HOME). Cabecera con el **número** del grupo, el **icono** en baldosa `paper-1` de 40 px (24×24, trazo
+  1.7, `sage-ink`, dibujado en casa, **uno por grupo, buscado por su `id`** —lo vigila
+  `tests/unit/skills-iconos.test.ts`—) y el nombre en Fraunces 1.1rem. Los ítems son chips `paper-1` con
+  borde `paper-3`; el estado («prototipo», «en estudio», «en exploración», «en preparación») va como
+  etiqueta mono con texto. Cada tarjeta lleva `id="skills-<id>"` (el `id` del grupo en el YAML): es el
+  destino de las citas del chat de esa capacidad, y con el explorador puesto la isla abre esa área.
+  Rejilla de dos columnas; **si los grupos son impares, el último ocupa las dos** (nueve grupos).
+  **Prohibido:** barras o porcentajes de dominio.
 - **Tarjeta de estudio**: como la de certificación (`r-md`, borde `paper-3`, `sh-1`), título en
   Fraunces `xl`, institución en mono, periodo en mono `ink-2` — y **sin fecha, «Sin fecha
   declarada» en cursiva `ink-2`**, nunca `ink-3` (2.7:1; axe lo cazó otra vez). **Post-S8:** entra
