@@ -24,10 +24,11 @@ export async function Logros({ logros }: { logros: Cv["logros"] }) {
             {t("logros")}
           </h2>
         </Reveal>
-        {/* 2026-09-24: ocho logros (entraron los agentes de Vesting y los
-            productos de CTIC). Tres columnas dejaban dos huérfanos al final;
-            cuatro dan dos filas completas en escritorio y dos por fila en tablet.
-            La cifra baja un punto para que «>90%» quepa en un cuarto de ancho. */}
+        {/* 2026-09-24: ocho logros; S29 (OM-03): doce, los que el dueño aprobó con
+            su orden: fila 1 escala y liderazgo, fila 2 IA, fila 3 impacto en
+            datos. Cuatro columnas dan tres filas completas en escritorio y seis
+            filas de dos en tablet. La cifra baja un punto para que «>90%»
+            quepa en un cuarto de ancho. */}
         <Stagger className="grid gap-12 sm:grid-cols-2 sm:gap-x-8 lg:grid-cols-4 lg:gap-x-8">
           {logros.map((logro) => (
             <StaggerItem key={logro.etiqueta} className="flex flex-col gap-3">

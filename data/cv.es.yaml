@@ -57,7 +57,7 @@ trayectoria:
       - "Lidero la estructuración de la estrategia institucional de IA bajo UNE-ISO/IEC 42001:2025: más de 10 oportunidades identificadas, la mitad evaluadas y unas ya priorizadas."
       - "más de 25 productos analíticos en Power BI para líderes administrativos y asistenciales: unos 20 líderes de unos 15 procesos y unos 75 usuarios."
       - "Gobierno y calidad de datos institucional, bajo el régimen de habeas data y la Ley 1581."
-      - "Tableros de control por procesos y planes de mejora: cerca de 60 % menos esfuerzo en la preparación de la información (estimado sobre mi propio trabajo)."
+      - "Tableros de control por procesos y planes de mejora: 50+ indicadores intervenidos y cerca de 60 % menos esfuerzo en la preparación de la información (estimado sobre mi propio trabajo)."
       - "Participo en la estructuración del sistema de gestión de IA: más de 20 instrumentos, un tercio listos y el agente Experto ISO 42001 que los revisa."
     actual: true
   # PROYECTOS PROPIOS (2026-10-04, revisión LinkedIn definitivo): NO es un
@@ -104,6 +104,7 @@ trayectoria:
       - "Definí la gobernanza de datos para integrar información de clientes y sistemas, con cada cliente aislado en su propio workspace."
       - "Construí el monitoreo en tiempo real de los agentes en producción: hasta 23 vigilados a la vez."
       - "Documenté el proceso core replicable, de 11 etapas, con el que se construyeron los 27 agentes del inventario."
+      - "Tableros en Power BI: 5+ productos analíticos, con unos 20 usuarios."
   - periodo: "2023"
     rol: "Analista Senior de Analítica y Reportes"
     organizacion: "Banco Pichincha"
@@ -113,7 +114,7 @@ trayectoria:
       predictivos con >90% de precisión y co-liderazgo de la gobernanza de
       datos.
     bullets:
-      - "Lideré un equipo de BI de 5 personas: dashboards adoptados por 50+ usuarios, con +25% en toma de decisiones."
+      - "Lideré un equipo de BI de 5 personas: 5+ productos analíticos en Power BI adoptados por 50+ usuarios, 10+ indicadores intervenidos y +25% en toma de decisiones."
       - "Optimización de procesos ETL en Power Query: −35% en tiempos de análisis."
       - "Modelos predictivos de fuga y mora con scikit-learn: >90% de precisión y hasta +35% en predicciones, según la métrica de cada modelo."
       - "Optimización de modelos semánticos con DAX Studio y Tabular Editor."
@@ -127,7 +128,7 @@ trayectoria:
       Adopción de BI (+35% de eficiencia), ETL que unificó fuentes (+70%) y
       predicción de demanda con scikit-learn.
     bullets:
-      - "Lideré la implementación de Power BI en la operación: +35% de eficiencia con 25+ usuarios clave."
+      - "Lideré la implementación de Power BI en la operación: 10+ productos analíticos y +35% de eficiencia con 25+ usuarios clave."
       - "ETL que unificó cinco fuentes heterogéneas (recaudo, flota y GPS, programación, novedades y PQR): +70% en precisión y velocidad de análisis."
       - "Scripts ETL con VBA y Power Query para el análisis post-operacional, con validaciones y excepciones visibles: −40% en tareas repetitivas."
       - "Mesas de estrategia con los concesionarios del SITP: +25% en indicadores."
@@ -219,32 +220,52 @@ logros:
   - desde: "2015-05"
     etiqueta: "años de trayectoria profesional"
     descripcion: "De la ingeniería de procesos a plataformas de datos para agentes de IA (mayo 2015 → hoy)."
-  - valor: 27
-    etiqueta: "agentes de IA construidos con el proceso core que estructuré"
-    descripcion: "Vesting: 12 clientes integrados y hasta 23 agentes vigilados a la vez, en tiempo real, sobre Microsoft Fabric."
-  - valor: 25
-    sufijo: "+"
-    etiqueta: "productos analíticos en Power BI en uso en salud"
-    descripcion: "Fundación CTIC: unos 20 líderes de unos 15 procesos y unos 75 usuarios, sobre definiciones institucionales comunes."
-  - valor: 50
-    sufijo: "+"
-    etiqueta: "usuarios adoptaron mis dashboards en banca"
-    descripcion: "Tableros de BI en Banco Pichincha, con +25% en toma de decisiones."
-  - valor: 70
-    sufijo: "%"
-    etiqueta: "más precisión y velocidad de análisis con ETL unificado"
-    descripcion: "Unificación de fuentes heterogéneas en C&M Consultores (TransMilenio)."
-  - valor: 90
-    prefijo: ">"
-    sufijo: "%"
-    etiqueta: "de precisión en modelos predictivos en producción"
-    descripcion: "Modelos con scikit-learn en Banco Pichincha."
   - valor: 20
     etiqueta: "personas en el mayor equipo que he liderado"
     descripcion: "Implementación del WMS en Cafam: −25% de errores, +15% de eficiencia."
-  - valor: 3
-    etiqueta: "certificaciones profesionales"
-    descripcion: "DP-600 de Microsoft y 2 de IBM en ciencia de datos: el Certificado Profesional (con sus cursos de Python y SQL) y R."
+  - valor: 45
+    sufijo: "+"
+    etiqueta: "productos analíticos en Power BI"
+    descripcion: "En salud (Fundación CTIC, 25+), transporte (C&M Consultores para TransMilenio, 10+), banca (Banco Pichincha, 5+) y agentes de IA (Vesting, 5+)."
+  - valor: 170
+    sufijo: "+"
+    etiqueta: "usuarios adoptaron mis dashboards"
+    descripcion: "Fundación CTIC (unos 75), Banco Pichincha (50+), C&M Consultores para TransMilenio (25+ usuarios clave) y Vesting (unos 20)."
+  - valor: 27
+    etiqueta: "agentes de IA construidos con el proceso core que estructuré"
+    descripcion: "Vesting: 12 clientes integrados y hasta 23 agentes vigilados a la vez, en tiempo real, sobre Microsoft Fabric."
+  - contar: "agentes"
+    etiqueta: "agentes de IA propios, publicados con gates humanos y ficha técnica"
+    descripcion: "Proyectos propios: cada uno con promesa, cifras con procedencia, límites y lo que «nunca» hace; cinco sellados."
+  - valor: 52
+    sufijo: "%"
+    etiqueta: "de ahorro de tokens con mi ecosistema agéntico ARKHÉ"
+    descripcion: "En mis mediciones: 120 escenarios frente a un agente generalista, y el cumplimiento de instrucciones subió del 71% al 93%."
+  - valor: 90
+    prefijo: ">"
+    sufijo: "%"
+    etiqueta: "de precisión promedio en modelos predictivos en producción"
+    descripcion: "Modelos de fuga y mora con scikit-learn en Banco Pichincha."
+  - valor: 70
+    sufijo: "%"
+    etiqueta: "más precisión y velocidad de análisis al unificar fuentes"
+    descripcion: "En C&M Consultores para TransMilenio (cinco fuentes: recaudo, flota y GPS, programación, novedades y PQR), Fundación CTIC y Banco Pichincha."
+  - valor: 60
+    prefijo: "~"
+    sufijo: "%"
+    etiqueta: "menos esfuerzo en la preparación de la información"
+    descripcion: "En promedio, con tableros de control por procesos, en Fundación CTIC, Banco Pichincha y C&M Consultores para TransMilenio."
+  - valor: 35
+    prefijo: "−"
+    sufijo: "%"
+    etiqueta: "en tiempos de procesamiento con ETL optimizado"
+    descripcion: "En promedio, en Banco Pichincha, Fundación CTIC y C&M Consultores para TransMilenio, con consultas separadas por función, selección temprana y validaciones antes del modelo."
+  - valor: 25
+    prefijo: "+"
+    sufijo: "%"
+    etiqueta: "en los indicadores intervenidos"
+    descripcion: "En promedio, en los 60+ indicadores de Fundación CTIC (50+) y Banco Pichincha (10+) y en las mesas de estrategia con los concesionarios del SITP (TransMilenio)."
+
 
 proyectos:
   - slug: "vesting"
