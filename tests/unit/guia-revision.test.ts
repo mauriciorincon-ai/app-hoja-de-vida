@@ -1171,7 +1171,7 @@ describe("la guía v30 · las diez fichas al día y Vesting", () => {
  * h1 a h4, k2, k6, k10, m3, l5b, l6, l7, a4 y n4b (las dos últimas las reescribió después el S29). Vuelven a pendiente y muestran lo que el dueño había respondido («Antes del S28»).
  */
 describe("la guía v30 · el brochure de las doce y la puerta de la HOME", () => {
-  const FILAS_DEL_S28 = ["h1", "h3", "h4", "k2", "k6", "k10", "m3", "l6", "l7"];
+  const FILAS_DEL_S28 = ["h1", "h3", "h4", "k6", "k10", "m3", "l6", "l7"];
   const FILAS_NUEVAS = ["h5", "h6", "h7", "h8", "h9", "h10", "h11", "h12"];
 
   it("las filas que el S29 y el S30 no volvieron a tocar llevan data-cambio 28, «mejorado» y «Mejorado · S28»", () => {
@@ -1182,7 +1182,7 @@ describe("la guía v30 · el brochure de las doce y la puerta de la HOME", () =>
       expect(li.getAttribute("data-origen"), id).toBe("mejorado");
       expect(li.textContent, id).toContain("Mejorado · S28");
     }
-    // Las nueve filas (la a4 y la n4b las reescribió después el S29, y la h2 y la l5b, el S30) y el flujo R8 (que recorre el portafolio de apps) son las únicas del S28.
+    // Las ocho filas (la a4 y la n4b las reescribió después el S29, y la h2, la k2 y la l5b, el S30) y el flujo R8 (que recorre el portafolio de apps) son las únicas del S28.
     const conCambio = [...a.doc.querySelectorAll('[data-cambio="28"]')];
     expect(conCambio.length).toBe(FILAS_DEL_S28.length + 1);
     expect(
@@ -1247,16 +1247,16 @@ describe("la guía v30 · el brochure de las doce y la puerta de la HOME", () =>
   it("lo que respondió el dueño en una fila reescrita por el S28 pasa a «Antes del S28»; una del S27 ya migrada no se mueve", () => {
     const a = abrir({
       [NS + "migrado:27"]: "1",
-      [NS + "k2"]: "si",
-      [NS + "k2:nota"]: "el botón de la ficha completa estaba bien",
+      [NS + "k6"]: "si",
+      [NS + "k6:nota"]: "el botón de la ficha completa estaba bien",
       [NS + "k17"]: "si", // del S27, ya migrado: se queda como estaba
     });
-    const k2 = a.doc.getElementById("k2") as HTMLElement;
+    const k6 = a.doc.getElementById("k6") as HTMLElement;
     expect(
-      (k2.querySelector('input[value="si"]') as HTMLInputElement).checked,
+      (k6.querySelector('input[value="si"]') as HTMLInputElement).checked,
     ).toBe(false);
-    expect(k2.textContent).toContain("Antes del S28 respondiste: Sí");
-    expect(k2.textContent).toContain(
+    expect(k6.textContent).toContain("Antes del S28 respondiste: Sí");
+    expect(k6.textContent).toContain(
       "el botón de la ficha completa estaba bien",
     );
     expect(
@@ -1375,7 +1375,7 @@ describe("la guía v30 · Skills como explorador y los doce logros", () => {
       [NS + "migrado:28"]: "1",
       [NS + "n6"]: "si",
       [NS + "n6:nota"]: "las tarjetas con el trazo se veían bien",
-      [NS + "k2"]: "si", // del S28, ya migrado: se queda como estaba
+      [NS + "k6"]: "si", // del S28, ya migrado: se queda como estaba
     });
     const n6 = a.doc.getElementById("n6") as HTMLElement;
     expect(
@@ -1386,7 +1386,7 @@ describe("la guía v30 · Skills como explorador y los doce logros", () => {
     expect(
       (
         a.doc
-          .getElementById("k2")!
+          .getElementById("k6")!
           .querySelector('input[value="si"]') as HTMLInputElement
       ).checked,
     ).toBe(true);
@@ -1411,11 +1411,11 @@ describe("la guía v30 · Skills como explorador y los doce logros", () => {
 
 /**
  * S30 (el brochure como entrada de las apps y «Úsala»). Entran cinco pruebas nuevas (n15 la entrada, n16 «Úsala» de una app, n17 el
- * roadmap, la simulación y la impresión, n18 la casa en sus dos idiomas y n19 la fidelidad ⭐); dos filas cambian de texto, h2 y l5b.
+ * roadmap, la simulación y la impresión, n18 la casa en sus dos idiomas y n19 la fidelidad ⭐); tres filas cambian de texto, h2, k2 y l5b.
  * Vuelven a pendiente y muestran lo que el dueño había respondido («Antes del S30»).
  */
 describe("la guía v30 · el brochure como entrada de las apps y «Úsala»", () => {
-  const FILAS_DEL_S30 = ["h2", "l5b"];
+  const FILAS_DEL_S30 = ["h2", "k2", "l5b"];
   const FILAS_NUEVAS = ["n15", "n16", "n17", "n18", "n19"];
 
   it("la página dice v30 y las filas reescritas llevan data-cambio 30, «mejorado» y «Mejorado · S30»", () => {

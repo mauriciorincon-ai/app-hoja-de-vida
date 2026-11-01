@@ -311,8 +311,8 @@ el mensaje te llega al correo.
   Una asesoría»); sin motivo, «[CV Viva] Mensaje desde la hoja de vida». Las opciones viven en
   `MOTIVOS` (`src/lib/schemas.ts`) y sus textos en `messages/*.json` bajo `form.motivos`.
 - **Hay DOS formularios (decisión tuya, 2026-09-13):** el general de la portada, que pide un
-  motivo, y la **lista de espera de las apps**, al pie de `/portafolio/apps` y de cada ficha de app
-  (ahí llega ya con esa app elegida). Su desplegable lista las apps publicadas en
+  motivo, y la **lista de espera de las apps**, al pie de `/portafolio/apps`, de cada ficha de app y de
+  «Úsala», el cierre del brochure de las que ya abren en él (ahí llega ya con esa app elegida). Su desplegable lista las apps publicadas en
   `content/vitrina/` más **«Otra»**; el asunto del correo es «[CV Viva] Lista de espera: <app>».
   **Solo las apps tienen lista de espera:** agentes, investigaciones y tableros se muestran para
   enseñar capacidades y no se entregan, así que sus páginas cierran con «Escríbeme» al formulario

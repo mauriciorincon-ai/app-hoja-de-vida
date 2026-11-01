@@ -436,7 +436,7 @@ cifra `clamp(3.5rem,8vw,4.75rem)`; tres columnas dejaban dos huérfanos.
   **se mide en disco**, no se escribe.
 - **Muestra de app** (escaparate `/portafolio`): card paper-0, borde paper-2, `r-lg`, `sh-1`. Lleva
   chip de estado + chip de ciclo, nombre en Fraunces, promesa en Fraunces menor, **portada** (la
-  pantalla de entrada de la app; la **tira** esquemática solo si la app aún no la trae) enmarcada en paper-1, para-quién en `ink-2`, conteos en mono y cierre «ver la ficha».
+  pantalla de entrada de la app; la **tira** esquemática solo si la app aún no la trae) enmarcada en paper-1, para-quién en `ink-2`, conteos en mono y cierre «ver la ficha técnica» (o «ver brochure», en la app que ya abre en él).
   El enlace estira su área de clic a toda la card (`after:absolute inset-0`) **conservando el
   nombre de la app como nombre accesible** — una sola parada de tabulador, y nunca «leer más».
   **Desde S9 su nombre es un `h3`** (cuelga del `h2` del bloque de categoría) y es **el nombre
