@@ -86,9 +86,12 @@ export function resolverAncla(ancla: Ancla, tops: number[]): number {
 
 function tops(): number[] {
   return posicionesEnteras(
-    Array.from(document.querySelectorAll(SELECTOR_ANCLAS)).map(
-      (el) => el.getBoundingClientRect().top + window.scrollY,
-    ),
+    Array.from(document.querySelectorAll(SELECTOR_ANCLAS))
+      // Un hito sin caja no es un hito (S29): la lista de Skills queda oculta (`display:none`) detrás
+      // del explorador, y el borde de un elemento sin caja «está» en el scroll actual, así que se
+      // quedaba con el ancla y el cambio de idioma no movía nada.
+      .filter((el) => el.getClientRects().length > 0)
+      .map((el) => el.getBoundingClientRect().top + window.scrollY),
   );
 }
 
