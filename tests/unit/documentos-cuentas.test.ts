@@ -7,7 +7,6 @@ import {
   normalizar,
   verdadesDelSitio,
 } from "../../scripts/a-fondo-coherencia.mjs";
-import { entradasBrochure } from "../../scripts/entradas-brochure.mjs";
 
 /**
  * LAS CUENTAS QUE ESCRIBEN LA GUÍA DE PRUEBA Y EL MANUAL (2026-10-11).
@@ -51,16 +50,6 @@ const PUBLICADAS = {
 };
 const FICHAS_DE_OTRAS_CASAS =
   PUBLICADAS.agentes + PUBLICADAS.investigaciones + PUBLICADAS.tableros;
-
-/**
- * Las apps que siguen con su ficha técnica: desde el S30 las que abren en su brochure (las de la casa y la
- * que ya tiene su contenido v2) no la tienen, y una guía que manda a «recorrer las fichas» las cuenta sin ellas.
- */
-const APPS_CON_FICHA =
-  V.apps -
-  entradasBrochure().filter((slug: string) =>
-    readdirSync("data/fichas").includes(`${slug}.yaml`),
-  ).length;
 
 /** Apps cuyo complemento trae al menos una feature de roadmap votable. */
 const APPS_CON_ROADMAP = readdirSync("data/fichas")
@@ -121,9 +110,10 @@ const ANCLAS: Ancla[] = [
   },
   {
     doc: "guía",
-    nombre: "fichas de apps en la aprobación visual (l5b)",
-    patron: /recorre las (\S+) fichas que quedan/g,
-    esperado: [APPS_CON_FICHA],
+    // Desde el S31 ninguna app abre en su ficha: la aprobación visual recorre el brochure de las diez.
+    nombre: "brochures de apps en la aprobación visual (l5b)",
+    patron: /recorre el brochure de las (\S+) apps/g,
+    esperado: [V.apps],
   },
   {
     doc: "guía",

@@ -584,7 +584,7 @@ el mensaje te llega al correo.
     se renumeran), **qué aporta** (una tarjeta por grupo; hasta el Sprint 027 se llamaba «Qué tiene»), límites y **lo que nunca hace**, y dónde
     está. Cierra con **«Ver brochure»**. Una app deja de tener ficha el día que su brochure pasa a ser su
     entrada (Sprint 030; ver «El brochure de cada app»).
-  - **El brochure** (`/es/portafolio/apps/habla/brochure`): lo que antes era la «ficha completa» (el
+  - **El brochure** (`/es/portafolio/apps/habla`): lo que antes era la «ficha completa» (el
     detalle del Sprint 005, con sus tarjetas que se abrían solas y sus firmas animadas) **se retiró en el
     Sprint 28 y lo reemplaza el brochure** (ver «El brochure de cada app»). **Ninguna página pinta las
     funcionalidades descartadas**, aunque el export de la app las traiga (OM-24): el campo sigue en el

@@ -1472,8 +1472,9 @@ describe("la guía v30 · el brochure como entrada de las apps y «Úsala»", ()
     }
     expect(a.doc.getElementById("h2")!.textContent).toContain("05 Úsala");
     expect(a.doc.getElementById("h2")!.textContent).toContain("Escríbeme");
+    // S31: ninguna app abre ya en su ficha, así que la aprobación visual recorre el brochure de las diez.
     expect(a.doc.getElementById("l5b")!.textContent).toContain(
-      "nueve fichas que quedan",
+      "recorre el brochure de las diez apps",
     );
   });
 
