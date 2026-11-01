@@ -19,12 +19,12 @@
     "ciclo": "H-2",
     "estado": "inicial",
     "sellado_en": null,
-    "sprints_cerrados": 28,
+    "sprints_cerrados": 30,
     "version_repo": "0.1.0"
   },
   "promesa": {
     "tagline": "Pregúntale a la hoja de vida: responde con lo que consta y cita su fuente.",
-    "intro": "El chat de CV Viva contesta en español o en inglés sobre la trayectoria de Henry Rincón, siempre en tercera persona y solo con el contenido del sitio: la hoja de vida, 25 documentos de fondo, las fichas del Portafolio y las publicaciones de Métodos. Cada afirmación lleva su cita a la sección que la respalda, y si el proveedor de IA cae, sigue respondiendo con búsqueda local.",
+    "intro": "El chat de CV Viva contesta en español o en inglés sobre la trayectoria de Henry Rincón, siempre en tercera persona y solo con el contenido del sitio: la hoja de vida, 25 documentos de fondo, cada pieza del Portafolio y las publicaciones de Métodos. Cada afirmación lleva su cita a la sección que la respalda, y si el proveedor de IA cae, sigue respondiendo con búsqueda local.",
     "para_quien": "Para quien recluta y quiere una respuesta concreta («¿qué hizo en Vesting?», «¿qué sabe de Microsoft Fabric?») sin leer el sitio entero, y para quien quiere comprobarla: cada respuesta dice de dónde sale y lleva allí. Lo que no consta no se contesta, y lo dice.",
     "diferencial": "Un chat de CV que no inventa no basta con un buen prompt. Aquí lo que no consta (lo que no hizo, lo que no sabe, el salario, una credencial que no tiene) recibe un texto fijo antes de llegar al modelo, sin gastar un token; la salida de Vesting tiene su respuesta fija con su cita, y el panel enseña solo las fuentes que la respuesta cita. Detrás hay un índice que se arma en cada publicación y un banco de 175 preguntas de afuera, por idioma, que prueba en cada cambio que el contenido contesta. Y nunca se queda mudo: si el proveedor falla, la misma búsqueda corre en el navegador."
   },
@@ -53,8 +53,8 @@
           },
           {
             "id": "CH-03",
-            "nombre": "Las fichas y los Métodos, también citables",
-            "que_hace": "El índice suma las fichas del Portafolio y las publicaciones de Métodos, bloque a bloque: una pregunta por una app o por un método trae su cita, que lleva a la ficha o al bloque exacto.",
+            "nombre": "El Portafolio y los Métodos, también citables",
+            "que_hace": "El índice suma cada pieza del Portafolio y las publicaciones de Métodos, bloque a bloque: una pregunta por una app, un agente o un método trae su cita, que lleva al brochure de la app, a la ficha de la pieza o al bloque exacto.",
             "seccion_manual": "Las fichas del portafolio también hablan por el chat"
           }
         ]
@@ -172,7 +172,7 @@
           {
             "id": "CH-16",
             "nombre": "Un índice que se arma al publicar",
-            "que_hace": "Cada publicación vuelve a armar el índice desde la hoja de vida, los documentos de fondo, las fichas y los Métodos. Un documento en borrador no entra, y uno aprobado exige su gemelo en inglés.",
+            "que_hace": "Cada publicación vuelve a armar el índice desde la hoja de vida, los documentos de fondo, el Portafolio y los Métodos. Un documento en borrador no entra, y uno aprobado exige su gemelo en inglés.",
             "seccion_manual": "Cómo alimentar el «a fondo» (el combustible del chat)"
           },
           {
@@ -198,7 +198,7 @@
       "valor": 18,
       "unidad": "funcionalidades",
       "fuente": "medido",
-      "detalle": "Una por función del chat documentada en docs/MANUAL-DE-USO.md en c3e4d2c, cuadrada sección por sección; la lista, en la respuesta 028 de la planeadora."
+      "detalle": "Una por función del chat documentada en docs/MANUAL-DE-USO.md en 5ead9d6, cuadrada sección por sección; la lista, en la respuesta 028 de la planeadora."
     },
     {
       "clave": "fragmentos_del_indice",
@@ -206,7 +206,7 @@
       "valor": 1939,
       "unidad": "fragmentos",
       "fuente": "medido",
-      "detalle": "Salida de scripts/build-chat-index.mjs en el build de una copia de c3e4d2c el 2026-11-01: 1939 fragmentos en español y 1930 en inglés."
+      "detalle": "Salida de scripts/build-chat-index.mjs en el build de una copia de 5ead9d6 el 2026-11-01: 1939 fragmentos en español y 1930 en inglés."
     },
     {
       "clave": "documentos_a_fondo",
@@ -222,7 +222,7 @@
       "valor": 175,
       "unidad": "preguntas",
       "fuente": "medido",
-      "detalle": "Preguntas legítimas de tests/fixtures/banco-de-preguntas.es.yaml en c3e4d2c, y las mismas 175 en inglés; el banco suma además 15 ajenas, 1 de rehúso y 3 sin cobertura por idioma."
+      "detalle": "Preguntas legítimas de tests/fixtures/banco-de-preguntas.es.yaml en 5ead9d6, y las mismas 175 en inglés; el banco suma además 15 ajenas, 1 de rehúso y 3 sin cobertura por idioma."
     },
     {
       "clave": "pruebas_e2e_del_chat",
@@ -230,7 +230,7 @@
       "valor": 94,
       "unidad": "pruebas",
       "fuente": "medido",
-      "detalle": "Salida de `playwright test --list` sobre una copia de c3e4d2c: chat.spec.ts y chat-conversacion.spec.ts, 47 en Chromium y 47 en móvil, con el proveedor simulado."
+      "detalle": "Salida de `playwright test --list` sobre una copia de 5ead9d6: chat.spec.ts y chat-conversacion.spec.ts, 47 en Chromium y 47 en móvil, con el proveedor simulado."
     },
     {
       "clave": "proveedores_conmutables",
@@ -238,7 +238,7 @@
       "valor": 5,
       "unidad": "proveedores",
       "fuente": "medido",
-      "detalle": "PROVEEDORES_CHAT en src/lib/ia/provider.ts en c3e4d2c, sin el simulado de las pruebas: Groq, Gemini, Azure, Anthropic y uno compatible con OpenAI."
+      "detalle": "PROVEEDORES_CHAT en src/lib/ia/provider.ts en 5ead9d6, sin el simulado de las pruebas: Groq, Gemini, Azure, Anthropic y uno compatible con OpenAI."
     },
     {
       "clave": "fuentes_por_respuesta",
@@ -318,7 +318,7 @@
     "produccion": null,
     "razon": "El chat vive dentro de CV Viva, en el botón flotante de cada página, y su dirección no se publica: es la regla de cero enlaces del Portafolio.",
     "repositorio": null,
-    "razon_repositorio": "El código no se enlaza desde el Portafolio: ninguna ficha publica enlaces de acceso ni de repositorio.",
+    "razon_repositorio": "El código no se enlaza desde el Portafolio: ninguna página del Portafolio publica enlaces de acceso ni de repositorio.",
     "brochure_archivo": "sin archivo propio: la plantilla del brochure lo arma desde esta entrega (ADR-030)",
     "brochure_ruta_local": "/portafolio/apps/chat-hoja-de-vida"
   }

@@ -7,6 +7,10 @@
 # Reentrega 2026-11-01 (tras el 028 y el 029): CV-02, CV-03, CV-05, CV-09, CV-10 y CV-13 se retomaron de una copia aislada
 # de `c3e4d2c` (main tras el #108), con el mismo entorno y el mismo ancho de ventana de cada una; Skills (CV-05) con el
 # azar sembrado y el movimiento reducido, para que salga igual cada vez. Las demás salen iguales píxel a píxel en c3e4d2c.
+# Segunda reentrega 2026-11-01 (tras el 030 y el 031): CV-10, CV-11, CV-12, CV-16, CV-17 y CV-18 se retomaron de una copia aislada
+# de `5ead9d6` (main tras el #111), con el mismo entorno: la página de cada app es su brochure, y el roadmap, las propuestas y
+# la lista de espera viven en «Úsala», su cierre. Las demás salen iguales en 5ead9d6 (CV-04 y CV-06, corridas 2 px por la
+# animación de entrada, con el mismo contenido).
 portada: entrada.webp
 capturas:
   - { funcionalidad: CV-01, archivo: CV-01.webp, pie: { es: "La trayectoria: la línea, el año grande y las tres primeras experiencias", en: "The career: the line, the big year and the first three roles" } }
@@ -19,14 +23,14 @@ capturas:
   - { funcionalidad: CV-08, archivo: CV-08.webp, pie: { es: "La hoja de vida imprimible y su botón del PDF, de la misma fuente", en: "The printable résumé and its PDF button, from the same source" } }
   - { funcionalidad: CV-09, archivo: CV-09.webp, pie: { es: "El Portafolio: cuatro frentes, cada uno con su estado y su cuenta", en: "The Portfolio: four fronts, each with its status and count" } }
   - { funcionalidad: CV-10, archivo: CV-10.webp, pie: { es: "Las apps profesionales en carrusel: dos enteras y la tercera asoma", en: "Professional apps in a carousel: two in full and the third peeking in" } }
-  - { funcionalidad: CV-11, archivo: CV-11.webp, pie: { es: "La ficha técnica de HackGuard: titular, stack y cifras con su fuente", en: "HackGuard's tech sheet: headline, stack and figures with their source" } }
-  - { funcionalidad: CV-12, archivo: CV-12.webp, pie: { es: "«Cómo funciona» de Probeta DS: el proceso en BPMN, por carriles", en: "How Probeta DS works: its BPMN process, lane by lane" } }
+  - { funcionalidad: CV-11, archivo: CV-11.webp, pie: { es: "Al pie del brochure de HackGuard: dónde está y sus dos vecinas", en: "At the foot of HackGuard's brochure: where it stands and its two neighbors" } }
+  - { funcionalidad: CV-12, archivo: CV-12.webp, pie: { es: "«De punta a punta» de Probeta DS: cada caja dice quién la hace, con sus notas", en: "Probeta DS end to end: each box says who does it, with its notes" } }
   - { funcionalidad: CV-13, archivo: CV-13.webp, pie: { es: "El brochure de HackGuard: la promesa, su pantalla y las cinco secciones", en: "HackGuard's brochure: the promise, its screen and the five sections" } }
   - { funcionalidad: CV-14, archivo: CV-14.webp, pie: { es: "Energía y clima: seis hallazgos, cada uno con su cifra y su procedencia", en: "Energy and climate: six findings, each with its figure and source" } }
   - { funcionalidad: CV-15, archivo: CV-15.webp, pie: { es: "La simulación de planlang, abierta en un marco dentro de su página", en: "planlang's simulation, opened in a frame inside its page" } }
-  - { funcionalidad: CV-16, archivo: CV-16.webp, pie: { es: "El roadmap de Dash Agent: tres ideas por votar, aún sin votos", en: "Dash Agent's roadmap: three ideas to vote on, no votes yet" } }
+  - { funcionalidad: CV-16, archivo: CV-16.webp, pie: { es: "El roadmap de Dash Agent en «Úsala»: tres ideas por votar, aún sin votos", en: "Dash Agent's roadmap in “Use it”: three ideas to vote on, no votes yet" } }
   - { funcionalidad: CV-17, archivo: CV-17.webp, pie: { es: "La caja para proponerle una funcionalidad a Dash Agent", en: "The box to propose a feature for Dash Agent" } }
-  - { funcionalidad: CV-18, archivo: CV-18.webp, pie: { es: "La lista de espera, con la app ya elegida y sin promesa de fecha", en: "The waitlist, with the app already chosen and no promised date" } }
+  - { funcionalidad: CV-18, archivo: CV-18.webp, pie: { es: "La lista de espera en «Úsala», con la app ya elegida y sin promesa de fecha", en: "The waitlist in “Use it”, with the app already chosen and no promised date" } }
   - { funcionalidad: CV-19, archivo: CV-19.webp, pie: { es: "«Escríbeme»: nombre, correo, motivo y mensaje", en: "The contact form: name, email, reason and message" } }
   - { funcionalidad: CV-20, archivo: CV-20.webp, pie: { es: "Métodos: la presentación, nueve publicaciones y las dos primeras", en: "Methods: the introduction, nine publications and the first two" } }
   - { funcionalidad: CV-21, archivo: CV-21.webp, pie: { es: "Las tres voces rotuladas y el índice de los diez bloques", en: "The three labeled voices and the index of the ten blocks" } }

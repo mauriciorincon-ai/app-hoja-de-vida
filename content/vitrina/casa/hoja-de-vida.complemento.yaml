@@ -34,7 +34,7 @@ proceso:
     - { id: recorre, tipo: tarea, carril: visita, texto: "Recorre la trayectoria y los logros" }
     - { id: evidencia, tipo: decision, carril: visita, texto: "¿Quiere ver la evidencia?" }
     - { id: caso, tipo: tarea, carril: visita, texto: "Abre el caso de estudio con sus cifras" }
-    - { id: portafolio, tipo: tarea, carril: visita, texto: "Explora el Portafolio y sus fichas" }
+    - { id: portafolio, tipo: tarea, carril: visita, texto: "Explora el Portafolio y el brochure de cada app" }
     - { id: metodos, tipo: tarea, carril: visita, texto: "Lee cómo se diseña en Métodos" }
     - { id: pdf, tipo: tarea, carril: visita, texto: "Descarga el CV en PDF para su sistema" }
     - { id: hablar, tipo: decision, carril: visita, texto: "¿Quiere hablar con el dueño?" }

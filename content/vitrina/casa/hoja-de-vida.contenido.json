@@ -152,8 +152,8 @@
           "en": "A project is told with a link and a line."
         },
         "despues": {
-          "es": "Cada producto tiene su ficha: lo que no hace nadie más, sus cifras con procedencia y sus límites.",
-          "en": "Every product has its sheet: what no one else does, its figures with their source and its limits."
+          "es": "Cada app tiene su brochure y cada pieza su ficha: lo que no hace nadie más, sus cifras con procedencia y sus límites.",
+          "en": "Every app has its brochure and every other piece its sheet: what no one else does, its figures with their source and its limits."
         },
         "funcionalidad": "CV-11",
         "fuente": "CV-11"
@@ -309,12 +309,12 @@
       "en": "The ones that passed in continuous integration on the last change this version includes. Among other things, they check that the data is well formed, that the case figures are in their document and that Spanish and English say the same; some of them run against a real database."
     },
     "pruebas_e2e": {
-      "es": "Recorridos de punta a punta con un navegador de verdad: en escritorio, en el teléfono y en Safari. Se cuentan listándolas; en la última corrida completa pasaron 1155 y 55 se omiten a propósito.",
-      "en": "End-to-end journeys in a real browser: on desktop, on a phone and in Safari. They are counted by listing them; in the last full run 1155 passed and 55 are skipped on purpose."
+      "es": "Recorridos de punta a punta con un navegador de verdad: en escritorio, en el teléfono y en Safari. Se cuentan listándolas; en la última corrida completa pasaron 1257 y 59 se omiten a propósito.",
+      "en": "End-to-end journeys in a real browser: on desktop, on a phone and in Safari. They are counted by listing them; in the last full run 1257 passed and 59 are skipped on purpose."
     },
     "pantallas": {
-      "es": "Las plantillas de página del sitio, contadas en sus archivos en la versión anclada: una sola sirve, por ejemplo, a los nueve casos de estudio. Incluyen la de mantenimiento, el 404 y la del brochure, una sola para las doce.",
-      "en": "The site's page templates, counted in its files at the pinned version: a single one serves, for example, all nine case studies. They include the maintenance page, the 404 and the brochure page, a single one for all twelve."
+      "es": "Las plantillas de página del sitio, contadas en sus archivos en la versión anclada: una sola sirve, por ejemplo, a los nueve casos de estudio. Incluyen la de mantenimiento, el 404 y la entrada de cada app, que es su brochure: una sola para las doce.",
+      "en": "The site's page templates, counted in its files at the pinned version: a single one serves, for example, all nine case studies. They include the maintenance page, the 404 and each app's entry, which is its brochure: a single one for all twelve."
     },
     "decisiones_registradas": {
       "es": "Las decisiones de arquitectura y de producto escritas y numeradas en el repositorio, de la 1 a la 30 en esta versión.",
@@ -845,8 +845,8 @@
     {
       "orden": 3,
       "que_resuelve": {
-        "es": "Contar un proyecto con un enlace deja a quien lee buscando la evidencia. Aquí cada producto tiene su ficha técnica de dos minutos: lo que no hace nadie más, sus cifras con procedencia, su proceso dibujado y sus límites, sin un solo enlace de acceso.",
-        "en": "Telling a project with a link leaves the reader hunting for the evidence. Here every product has its two-minute technical sheet: what no one else does, its figures with their source, its process drawn and its limits, without a single access link."
+        "es": "Contar un proyecto con un enlace deja a quien lee buscando la evidencia. Aquí cada app tiene su brochure y cada agente, tablero o investigación su ficha técnica: lo que no hace nadie más, sus cifras con procedencia, su proceso dibujado y sus límites, sin un solo enlace de acceso.",
+        "en": "Telling a project with a link leaves the reader hunting for the evidence. Here every app has its brochure and every agent, dashboard or research piece its technical sheet: what no one else does, its figures with their source, its process drawn and its limits, without a single access link."
       },
       "te_sirve": [
         {
@@ -858,8 +858,8 @@
         },
         {
           "texto": {
-            "es": "Quieres entender en dos minutos qué hace una app y qué no hace.",
-            "en": "You want to understand in two minutes what an app does and what it doesn't."
+            "es": "Quieres entender qué hace una app y qué no hace, con sus pantallas y sus cifras.",
+            "en": "You want to understand what an app does and what it doesn't, with its screens and its figures."
           },
           "fuente": "CV-11"
         },
@@ -889,8 +889,8 @@
       ],
       "flujo": {
         "titulo": {
-          "es": "Del portal de cuatro frentes a la ficha de una app",
-          "en": "From the four-front portal to an app's sheet"
+          "es": "Del portal de cuatro frentes al brochure de una app",
+          "en": "From the four-front portal to an app's brochure"
         },
         "nodos": [
           {
@@ -936,8 +936,8 @@
             "tipo": "tarea",
             "actor": "app",
             "texto": {
-              "es": "Abre su ficha con sus cifras",
-              "en": "Opens its sheet and figures"
+              "es": "Abre su brochure con sus cifras",
+              "en": "Opens its brochure and figures"
             },
             "funcionalidad": "CV-11"
           },
@@ -946,8 +946,8 @@
             "tipo": "tarea",
             "actor": "app",
             "texto": {
-              "es": "Dibuja su proceso en BPMN",
-              "en": "Draws its process in BPMN"
+              "es": "Dibuja su proceso de punta a punta",
+              "en": "Draws its process end to end"
             },
             "funcionalidad": "CV-12"
           },
@@ -1027,12 +1027,12 @@
         {
           "tipo": "concepto",
           "pregunta": {
-            "es": "¿Qué es una ficha técnica?",
-            "en": "What is a technical sheet?"
+            "es": "¿Qué es el brochure de una app?",
+            "en": "What is an app's brochure?"
           },
           "respuesta": {
-            "es": "La infografía de dos minutos de cada producto: el titular de lo que no hace nadie más, de tres a cinco cifras con su procedencia, para quién es, sus funcionalidades, sus límites y lo que nunca hace.",
-            "en": "Each product's two-minute infographic: the headline of what no one else does, three to five figures with their source, who it is for, its features, its limits and what it never does."
+            "es": "La página de cada app: abre con la promesa, sus cifras y sus pantallas, recorre sus funcionalidades capítulo a capítulo y cierra con «Úsala». Agentes, tableros e investigaciones tienen, en cambio, una ficha técnica de dos minutos.",
+            "en": "Each app's page: it opens with the promise, its figures and its screens, walks through its features chapter by chapter and closes with “Use it”. Agents, dashboards and research pieces have a two-minute technical sheet instead."
           },
           "fuente": "CV-11"
         },
@@ -1046,7 +1046,7 @@
             "es": "Es su procedencia. Medido sale de un contador o un comando; calculada, de una medición con una tarifa o una regla; declarado lo fijó una persona; estimación es deducido. Una cifra sin procedencia no entra.",
             "en": "It is its source. Measured comes from a counter or a command; calculated, from a measurement with a rate or a rule; declared was set by a person; estimate is inferred. A figure with no source doesn't get in."
           },
-          "fuente": "CV-11"
+          "fuente": "CV-13"
         },
         {
           "tipo": "diferencia",
@@ -1055,8 +1055,8 @@
             "en": "An app or an agent?"
           },
           "respuesta": {
-            "es": "Los cuatro frentes comparten la misma ficha. Lo que cambia es lo que trae cada producto y si se puede pedir.",
-            "en": "All four fronts share the same sheet. What changes is what each product brings and whether it can be requested."
+            "es": "Una app se muestra en su brochure; un agente, un tablero o una investigación, en su ficha técnica. Lo que cambia es cuánto trae cada producto y si se puede pedir.",
+            "en": "An app is shown in its brochure; an agent, a dashboard or a research piece, in its technical sheet. What changes is how much each product brings and whether it can be requested."
           },
           "lados": [
             {
@@ -1065,8 +1065,8 @@
                 "en": "An app"
               },
               "texto": {
-                "es": "Su ficha dibuja el proceso en BPMN y cierra con la lista de espera, sin promesa de fecha.",
-                "en": "Its sheet draws the process in BPMN and closes with the waiting list, with no promised date."
+                "es": "Su brochure dibuja el proceso de punta a punta y cierra con «Úsala»: la lista de espera, sin promesa de fecha, y el roadmap para votar.",
+                "en": "Its brochure draws the process end to end and closes with “Use it”: the waiting list, with no promised date, and the roadmap to vote on."
               }
             },
             {
@@ -1075,8 +1075,8 @@
                 "en": "An agent or a dashboard"
               },
               "texto": {
-                "es": "La misma ficha; si trae datos, suma «Lo que dicen los datos». Se muestra y no se entrega.",
-                "en": "The same sheet; with data, it adds “What the data says”. It is shown, not handed over."
+                "es": "Su ficha técnica de dos minutos; si trae datos, suma «Lo que dicen los datos». Se muestra y no se entrega.",
+                "en": "Its two-minute technical sheet; with data, it adds “What the data says”. It is shown, not handed over."
               }
             }
           ],
@@ -1320,8 +1320,8 @@
                 "en": "Waiting list"
               },
               "texto": {
-                "es": "Solo en las apps, al pie de su ficha, con la app ya elegida y sin promesa de fecha.",
-                "en": "Only on apps, at the foot of their sheet, with the app already chosen and no promised date."
+                "es": "Solo en las apps, en «Úsala», el cierre de su brochure, con la app ya elegida y sin promesa de fecha.",
+                "en": "Only on apps, in “Use it”, the close of their brochure, with the app already chosen and no promised date."
               }
             },
             {
@@ -1894,7 +1894,7 @@
   "en": {
     "promesa": {
       "tagline": "A résumé you walk through, with its evidence one click away.",
-      "intro": "CV Viva is Henry Rincón's résumé turned into a site you walk through: the career scrolls with you, each role opens its case study with its figures, and the CV comes out as a PDF for applicant tracking systems, from the same source. It is also home to the Portfolio, where every product has its technical sheet, and to “Methods”, nine publications on how design is done.",
+      "intro": "CV Viva is Henry Rincón's résumé turned into a site you walk through: the career scrolls with you, each role opens its case study with its figures, and the CV comes out as a PDF for applicant tracking systems, from the same source. It is also home to the Portfolio, where every app opens on its brochure, and to “Methods”, nine publications on how design is done.",
       "para_quien": "For recruiters who have seconds to decide, for technical leads who want to know how someone thinks and not just where they worked, and for whoever comes to see the apps in the Portfolio. A static PDF can't show what someone knows how to do; here every claim leads to its evidence.",
       "diferencial": "It isn't a template or a PDF with animations. All the content lives in validated data: if a field is malformed, if a case's figure doesn't appear in its background document or if a link leads nowhere, the publish stops before it goes out. The site's counts (apps, products, publications) are measured from the content and none is typed by hand. And the site itself is the proof: the Portfolio publishes every app with its process drawn and every figure with its source, without a single access link."
     },
@@ -1908,8 +1908,8 @@
         "linea": "A case study per role and a PDF that recruiting systems read, both from the same source."
       },
       "3": {
-        "nombre": "The Portfolio, with sheets worth reading",
-        "linea": "Every product with its technical sheet: the process drawn, the figures with their source and no access link."
+        "nombre": "The Portfolio, with a brochure per app",
+        "linea": "One brochure per app and one sheet per piece: the process drawn, the figures with their source and no access link."
       },
       "4": {
         "nombre": "Visitors get a say too",
@@ -1966,28 +1966,28 @@
         "que_hace": "The apps come in two blocks, professional first, each in a carousel that shows where it starts and where it ends. You move through it with the arrows, a finger, the keyboard or the trackpad's sideways swipe."
       },
       "CV-11": {
-        "nombre": "A two-minute technical sheet",
-        "que_hace": "Each app has its sheet: the headline of what no one else does, three to five figures with their source, who it is for, what it has, its limits and what it never does."
+        "nombre": "Each app's page is its brochure",
+        "que_hace": "All ten apps open on their brochure, at a single address per app: the showcase card says “View brochure” and old links arrive in a single hop. At the foot, “Where it stands” gives the pinned version, and the neighbors lead to the previous or the next app without going back to the showcase."
       },
       "CV-12": {
         "nombre": "The process, drawn from the data",
-        "que_hace": "“How it works” draws each app's process in BPMN: one lane per actor, the decision where it is made and the loops in plain sight. The diagram comes from the data, and a malformed process stops the publish."
+        "que_hace": "In each app's brochure, “End to end” draws the whole process: each box says who does it, the decision is marked where it is made and the loops stay in plain sight. The sheets of agents, dashboards and research pieces that have a process draw it in BPMN, one lane per actor. Both come from the data, and a malformed process stops the publish."
       },
       "CV-13": {
         "nombre": "A brochure per app, with its screens",
-        "que_hace": "Each app has its brochure: the promise with its figures and screens, a chapter per feature group, the end-to-end process and the figures with their source. It has contents, a search box, an app tour of the screens, and it prints."
+        "que_hace": "Each app has its brochure: the promise with its figures and screens, a chapter per feature group, the end-to-end process, the figures with their source and, at the close, “Use it”. It has contents, a search box, an app tour of the screens, and it prints."
       },
       "CV-14": {
-        "nombre": "Agents and dashboards, with what their data says",
-        "que_hace": "The pieces that aren't apps use the same sheet. Those that bring data add “What the data says”: each finding with its figure and its source."
+        "nombre": "Agents, dashboards and research, with their sheet",
+        "que_hace": "The pieces that aren't apps have their two-minute technical sheet: the headline of what no one else does, its figures with their source, its limits and what it never does. Those that bring data add “What the data says”: each finding with its figure and its source."
       },
       "CV-15": {
-        "nombre": "The simulation, inside the sheet",
-        "que_hace": "A private app can show its static simulation: it opens in a frame inside the page or full screen, and it doesn't load until someone asks for it."
+        "nombre": "The simulation, from the brochure",
+        "que_hace": "A private app can show its static simulation: “See the simulation →”, in “Use it”, opens its page, where it plays in a frame or full screen and doesn't load until someone asks for it."
       },
       "CV-16": {
         "nombre": "A roadmap you vote on, no sign-up",
-        "que_hace": "Each app shows what it has planned and lets you vote with one click, no sign-up. The count comes from the database at that moment; if the database doesn't respond, the section says so and turns off the buttons."
+        "que_hace": "In “Use it”, each app shows what it has planned and lets you vote with one click, no sign-up; five ideas are shown and “See all N ideas” shows the rest. The count comes from the database at that moment; if the database doesn't respond, the section says so and turns off the buttons."
       },
       "CV-17": {
         "nombre": "Propose a feature",
@@ -1995,7 +1995,7 @@
       },
       "CV-18": {
         "nombre": "The apps' waiting list",
-        "que_hace": "At the foot of each app's sheet, a form signs up whoever wants in, with the app already chosen and no promised date. Only the apps have one: agents, research and dashboards are shown, not handed over."
+        "que_hace": "In “Use it”, the close of each app's brochure, a form signs up whoever wants in, with the app already chosen and no promised date; it is also at the foot of the apps showcase. Only the apps have one: agents, research and dashboards are shown, not handed over."
       },
       "CV-19": {
         "nombre": "“Write to me”, with a reason",
@@ -2042,37 +2042,37 @@
       "funcionalidades": {
         "etiqueta": "Product features",
         "unidad": "features",
-        "detalle": "One per function in docs/MANUAL-DE-USO.md at c3e4d2c that a visitor or the owner sees or uses, matched section by section; the chat's go in its own brochure. The list, and what was left out, are in the planner's 028 response."
+        "detalle": "One per function in docs/MANUAL-DE-USO.md at 5ead9d6 that a visitor or the owner sees or uses, matched section by section; the chat's go in its own brochure. The list, and what was left out, are in the planner's 028 response."
       },
       "casos_de_estudio": {
         "etiqueta": "Case studies",
         "unidad": "cases",
-        "detalle": "Projects with a case study in data/cv.es.yaml at c3e4d2c: one for each role in the career, in Spanish and in English."
+        "detalle": "Projects with a case study in data/cv.es.yaml at 5ead9d6: one for each role in the career, in Spanish and in English."
       },
       "publicaciones_metodos": {
         "etiqueta": "Methods publications",
         "unidad": "publications",
-        "detalle": "Files in data/metodo/ at c3e4d2c; the /metodos list counts them from the same folder."
+        "detalle": "Files in data/metodo/ at 5ead9d6; the /metodos list counts them from the same folder."
       },
       "pruebas_unitarias": {
         "etiqueta": "Unit and integration tests",
         "unidad": "tests",
-        "detalle": "Green in the app's Sprint 029 closing (c3e4d2c, #108, 2026-11-01): 3486 in 109 files. The planner didn't run them; the CI of #108 finished green."
+        "detalle": "Green in the app's Sprint 031 closing (5ead9d6, #111, 2026-11-01): 3618 in 114 files. The planner didn't run them; the CI of #111 finished green."
       },
       "pruebas_e2e": {
         "etiqueta": "End-to-end tests",
         "unidad": "tests",
-        "detalle": "Output of `playwright test --list` on a copy of c3e4d2c on 2026-11-01: 1210 in 19 files (Chromium, mobile and the WebKit ones). In the Sprint 029 closing, 1155 passed and 55 are skipped on purpose."
+        "detalle": "Output of `playwright test --list` on a copy of 5ead9d6 on 2026-11-01: 1316 in 21 files (Chromium, mobile and the WebKit ones). In the Sprint 031 closing, 1257 passed and 59 are skipped on purpose."
       },
       "pantallas": {
         "etiqueta": "Site screens",
         "unidad": "screens",
-        "detalle": "page.tsx files under src/app/ at c3e4d2c, counted with find: they include the maintenance page, the 404 for each language and the brochure page, a single one for all twelve."
+        "detalle": "page.tsx files under src/app/ at 5ead9d6, counted with find: they include the maintenance page, the 404 for each language and each app's entry, which is its brochure: a single one for all twelve."
       },
       "decisiones_registradas": {
         "etiqueta": "Recorded decisions",
         "unidad": "decisions",
-        "detalle": "Numbered files in decisions/ at c3e4d2c: from ADR-001 to ADR-030."
+        "detalle": "Numbered files in decisions/ at 5ead9d6: from ADR-001 to ADR-030."
       },
       "idiomas": {
         "etiqueta": "Languages",
@@ -2153,7 +2153,7 @@
           "recorre": "Walks through the career and the achievements",
           "evidencia": "Wants to see the evidence?",
           "caso": "Opens the case study with its figures",
-          "portafolio": "Explores the Portfolio and its sheets",
+          "portafolio": "Explores the Portfolio and each app's brochure",
           "metodos": "Reads how design is done in Methods",
           "pdf": "Downloads the PDF résumé for their system",
           "hablar": "Wants to talk to the owner?",

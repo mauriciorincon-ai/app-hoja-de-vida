@@ -19,12 +19,12 @@
     "ciclo": "H-2",
     "estado": "inicial",
     "sellado_en": null,
-    "sprints_cerrados": 28,
+    "sprints_cerrados": 30,
     "version_repo": "0.1.0"
   },
   "promesa": {
     "tagline": "Una hoja de vida que se recorre, con su evidencia a un clic.",
-    "intro": "CV Viva es la hoja de vida de Henry Rincón convertida en un sitio que se recorre: la trayectoria baja contigo, cada experiencia abre su caso de estudio con sus cifras y el CV sale en PDF para los sistemas de reclutamiento, de la misma fuente. También es la casa del Portafolio, donde cada producto tiene su ficha técnica, y de «Métodos», nueve publicaciones sobre cómo se diseña.",
+    "intro": "CV Viva es la hoja de vida de Henry Rincón convertida en un sitio que se recorre: la trayectoria baja contigo, cada experiencia abre su caso de estudio con sus cifras y el CV sale en PDF para los sistemas de reclutamiento, de la misma fuente. También es la casa del Portafolio, donde cada app abre en su brochure, y de «Métodos», nueve publicaciones sobre cómo se diseña.",
     "para_quien": "Para quien recluta y tiene segundos para decidir, para el líder técnico que quiere saber cómo piensa alguien y no solo dónde trabajó, y para quien llega a ver las apps del Portafolio. Un PDF estático no puede mostrar lo que alguien sabe hacer; aquí cada afirmación lleva a su evidencia.",
     "diferencial": "No es una plantilla ni un PDF con animaciones. Todo el contenido vive en datos validados: si un campo está mal formado, si la cifra de un caso no aparece en su documento de fondo o si un enlace no lleva a ninguna parte, la publicación se detiene antes de salir. Las cuentas del sitio (apps, piezas, publicaciones) se miden del contenido y ninguna se escribe a mano. Y el mismo sitio es la prueba: el Portafolio publica cada app con su proceso dibujado y cada cifra con su procedencia, sin un solo enlace de acceso."
   },
@@ -100,8 +100,8 @@
       {
         "orden": 3,
         "estrella": true,
-        "nombre": "El Portafolio, con fichas que se leen",
-        "linea": "Cada producto con su ficha técnica: el proceso dibujado, las cifras con su procedencia y ningún enlace de acceso.",
+        "nombre": "El Portafolio, con un brochure por app",
+        "linea": "Un brochure por app y una ficha por pieza: el proceso dibujado, las cifras con su procedencia y ningún enlace de acceso.",
         "features": [
           {
             "id": "CV-09",
@@ -117,32 +117,32 @@
           },
           {
             "id": "CV-11",
-            "nombre": "Una ficha técnica de dos minutos",
-            "que_hace": "Cada app tiene su ficha: el titular de lo que no hace nadie más, de tres a cinco cifras con su procedencia, para quién es, qué tiene, sus límites y lo que nunca hace.",
+            "nombre": "La página de cada app es su brochure",
+            "que_hace": "Las diez apps abren en su brochure, con una sola dirección por app: la tarjeta del escaparate dice «Ver brochure» y los enlaces viejos llegan en un solo salto. Al pie, «Dónde está» da la versión anclada y las vecinas llevan a la app anterior o a la siguiente sin volver al escaparate.",
             "seccion_manual": "Las apps dentro del portafolio"
           },
           {
             "id": "CV-12",
             "nombre": "El proceso, dibujado desde los datos",
-            "que_hace": "«Cómo funciona» dibuja el proceso de cada app en BPMN: un carril por actor, la decisión donde se decide y las vueltas a la vista. El diagrama sale de los datos, y un proceso mal formado detiene la publicación.",
+            "que_hace": "En el brochure de cada app, «De punta a punta» dibuja el proceso completo: cada caja dice quién la hace, la decisión se marca donde se decide y las vueltas quedan a la vista. Las fichas de agentes, tableros e investigaciones que traen proceso lo dibujan en BPMN, un carril por actor. Los dos salen de los datos, y un proceso mal formado detiene la publicación.",
             "seccion_manual": "Las apps dentro del portafolio"
           },
           {
             "id": "CV-13",
             "nombre": "Un brochure por app, con sus pantallas",
-            "que_hace": "Cada app tiene su brochure: la promesa con sus cifras y pantallas, un capítulo por grupo de funcionalidades, el proceso de punta a punta y las cifras con su procedencia. Tiene índice, buscador, un Recorrido de las pantallas y se imprime.",
-            "seccion_manual": "El brochure de cada app"
+            "que_hace": "Cada app tiene su brochure: la promesa con sus cifras y pantallas, un capítulo por grupo de funcionalidades, el proceso de punta a punta, las cifras con su procedencia y, al cierre, «Úsala». Tiene índice, buscador, un Recorrido de las pantallas y se imprime.",
+            "seccion_manual": "El brochure de cada app, y cuándo es la entrada"
           },
           {
             "id": "CV-14",
-            "nombre": "Agentes y tableros, con lo que dicen sus datos",
-            "que_hace": "Las piezas que no son apps usan la misma ficha. Las que traen datos suman «Lo que dicen los datos»: cada hallazgo con su cifra y su procedencia.",
+            "nombre": "Agentes, tableros e investigaciones, con su ficha",
+            "que_hace": "Las piezas que no son apps tienen su ficha técnica de dos minutos: el titular de lo que no hace nadie más, sus cifras con procedencia, sus límites y lo que nunca hace. Las que traen datos suman «Lo que dicen los datos»: cada hallazgo con su cifra y su procedencia.",
             "seccion_manual": "Las piezas que no son apps"
           },
           {
             "id": "CV-15",
-            "nombre": "La simulación, sin salir de la ficha",
-            "que_hace": "Una app privada puede enseñar su simulación estática: se abre en un marco dentro de la página o a pantalla completa, y no se carga hasta que alguien la pide.",
+            "nombre": "La simulación, desde el brochure",
+            "que_hace": "Una app privada puede enseñar su simulación estática: «Ver la simulación →», en «Úsala», abre su página, donde se ve en un marco o a pantalla completa y no se carga hasta que alguien la pide.",
             "seccion_manual": "La simulación de una app"
           }
         ]
@@ -156,7 +156,7 @@
           {
             "id": "CV-16",
             "nombre": "Un roadmap que se vota sin registrarse",
-            "que_hace": "Cada app muestra lo que tiene planeado y deja votar con un clic, sin registro. El contador sale de la base de datos en el momento; si la base no responde, la sección lo dice y apaga los botones.",
+            "que_hace": "En «Úsala», cada app muestra lo que tiene planeado y deja votar con un clic, sin registro; se ven cinco ideas y «Ver las N ideas» muestra el resto. El contador sale de la base de datos en el momento; si la base no responde, la sección lo dice y apaga los botones.",
             "seccion_manual": "Roadmap con votación anónima"
           },
           {
@@ -168,7 +168,7 @@
           {
             "id": "CV-18",
             "nombre": "La lista de espera de las apps",
-            "que_hace": "Al pie de cada ficha de app, un formulario anota a quien quiere entrar, con la app ya elegida y sin promesa de fecha. Solo las apps la tienen: agentes, investigaciones y tableros se muestran y no se entregan.",
+            "que_hace": "En «Úsala», el cierre del brochure de cada app, un formulario anota a quien quiere entrar, con la app ya elegida y sin promesa de fecha; también está al pie del escaparate de las apps. Solo las apps la tienen: agentes, investigaciones y tableros se muestran y no se entregan.",
             "seccion_manual": "El portafolio, asomada en la HOME"
           },
           {
@@ -258,7 +258,7 @@
       "valor": 28,
       "unidad": "funcionalidades",
       "fuente": "medido",
-      "detalle": "Una por función de docs/MANUAL-DE-USO.md en c3e4d2c que ve o usa quien visita o el dueño, cuadrada sección por sección; las del chat van en su propio brochure. La lista y lo que se dejó fuera, en la respuesta 028 de la planeadora."
+      "detalle": "Una por función de docs/MANUAL-DE-USO.md en 5ead9d6 que ve o usa quien visita o el dueño, cuadrada sección por sección; las del chat van en su propio brochure. La lista y lo que se dejó fuera, en la respuesta 028 de la planeadora."
     },
     {
       "clave": "casos_de_estudio",
@@ -266,7 +266,7 @@
       "valor": 9,
       "unidad": "casos",
       "fuente": "medido",
-      "detalle": "Proyectos con caso de estudio en data/cv.es.yaml en c3e4d2c: uno por cada experiencia de la trayectoria, en español y en inglés."
+      "detalle": "Proyectos con caso de estudio en data/cv.es.yaml en 5ead9d6: uno por cada experiencia de la trayectoria, en español y en inglés."
     },
     {
       "clave": "publicaciones_metodos",
@@ -274,31 +274,31 @@
       "valor": 9,
       "unidad": "publicaciones",
       "fuente": "medido",
-      "detalle": "Archivos de data/metodo/ en c3e4d2c; la lista de /metodos las cuenta desde la misma carpeta."
+      "detalle": "Archivos de data/metodo/ en 5ead9d6; la lista de /metodos las cuenta desde la misma carpeta."
     },
     {
       "clave": "pruebas_unitarias",
       "etiqueta": "Pruebas unitarias y de integración",
-      "valor": 3486,
+      "valor": 3618,
       "unidad": "pruebas",
       "fuente": "medido",
-      "detalle": "En verde en el cierre del Sprint 029 de la app (c3e4d2c, #108, 2026-11-01): 3486 en 109 archivos. La planeadora no las corrió; la CI del #108 cerró en verde."
+      "detalle": "En verde en el cierre del Sprint 031 de la app (5ead9d6, #111, 2026-11-01): 3618 en 114 archivos. La planeadora no las corrió; la CI del #111 cerró en verde."
     },
     {
       "clave": "pruebas_e2e",
       "etiqueta": "Pruebas de punta a punta",
-      "valor": 1210,
+      "valor": 1316,
       "unidad": "pruebas",
       "fuente": "medido",
-      "detalle": "Salida de `playwright test --list` sobre una copia de c3e4d2c el 2026-11-01: 1210 en 19 archivos (Chromium, móvil y las de WebKit). En el cierre del Sprint 029 pasaron 1155 y 55 quedan omitidas a propósito."
+      "detalle": "Salida de `playwright test --list` sobre una copia de 5ead9d6 el 2026-11-01: 1316 en 21 archivos (Chromium, móvil y las de WebKit). En el cierre del Sprint 031 pasaron 1257 y 59 quedan omitidas a propósito."
     },
     {
       "clave": "pantallas",
       "etiqueta": "Pantallas del sitio",
-      "valor": 15,
+      "valor": 14,
       "unidad": "pantallas",
       "fuente": "medido",
-      "detalle": "Archivos page.tsx bajo src/app/ en c3e4d2c, contados con find: incluyen la de mantenimiento, el 404 de cada idioma y la del brochure, una sola para las doce."
+      "detalle": "Archivos page.tsx bajo src/app/ en 5ead9d6, contados con find: incluyen la de mantenimiento, el 404 de cada idioma y la entrada de cada app, que es su brochure: una sola para las doce."
     },
     {
       "clave": "decisiones_registradas",
@@ -306,7 +306,7 @@
       "valor": 30,
       "unidad": "decisiones",
       "fuente": "medido",
-      "detalle": "Archivos numerados de decisions/ en c3e4d2c: de ADR-001 a ADR-030."
+      "detalle": "Archivos numerados de decisions/ en 5ead9d6: de ADR-001 a ADR-030."
     },
     {
       "clave": "idiomas",
@@ -369,7 +369,7 @@
     "produccion": null,
     "razon": "Es el sitio que estás recorriendo, y su dirección no se publica: es la regla de cero enlaces del Portafolio.",
     "repositorio": null,
-    "razon_repositorio": "El repositorio no se enlaza desde el Portafolio: ninguna ficha publica enlaces de acceso ni de código.",
+    "razon_repositorio": "El repositorio no se enlaza desde el Portafolio: ninguna página del Portafolio publica enlaces de acceso ni de código.",
     "brochure_archivo": "sin archivo propio: la plantilla del brochure lo arma desde esta entrega (ADR-030)",
     "brochure_ruta_local": "/portafolio/apps/hoja-de-vida"
   }
