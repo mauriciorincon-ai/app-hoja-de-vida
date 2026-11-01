@@ -8,6 +8,7 @@ import { BrochureInteractivo } from "@/components/brochure/brochure-interactivo"
 import { Buscador } from "@/components/brochure/buscador";
 import { FlujoDibujo } from "@/components/brochure/flujo-dibujo";
 import { PuertaMetodos } from "@/components/home/metodos";
+import { PuertaPortafolio } from "@/components/home/vitrina";
 import { IconoSkill } from "@/components/home/skills-iconos";
 import { Reveal } from "@/components/motion/reveal";
 import { Stagger, StaggerItem } from "@/components/motion/stagger";
@@ -18,6 +19,8 @@ import { RielDeFases } from "@/components/metodo/riel-de-fases";
 import { GaleriaCarrusel } from "@/components/vitrina/galeria-carrusel";
 import type { EtiquetasCarrusel } from "@/components/vitrina/galeria-carrusel";
 import { leerPiezasDeDisco } from "@/lib/metodo/loader";
+import { getFrentes } from "@/lib/vitrina/categorias";
+import es from "../../messages/es.json";
 import { mensajes, textosDe, vistaDe } from "../fixtures/brochure/vista";
 import { ejemploSintetico, traductorDe } from "../fixtures/metodo/ayudas";
 
@@ -207,6 +210,19 @@ const CASOS: Record<string, React.ReactNode> = {
       piezas={leerPiezasDeDisco()}
       locale="es"
       t={traductorDe("es")}
+    />
+  ),
+  // S28: la puerta al Portafolio en la HOME (Reveal + Stagger sobre sus cuatro filas): misma regla.
+  PuertaPortafolio: (
+    <PuertaPortafolio
+      frentes={getFrentes()}
+      locale="es"
+      t={(clave, valores) =>
+        (es.vitrinaHome as Record<string, string>)[clave].replace(
+          /\{(\w+)\}/g,
+          (_, k) => String(valores?.[k] ?? ""),
+        )
+      }
     />
   ),
   // S28: el brochure entero (portada, cinta y bucles, capítulos, flujos, Recorrido) con su isla, y

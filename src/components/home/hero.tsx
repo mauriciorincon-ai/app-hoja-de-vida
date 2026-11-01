@@ -1,4 +1,5 @@
 import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import type { Cv } from "@/lib/schemas";
 
 /**
@@ -69,13 +70,15 @@ export async function Hero({ identidad }: { identidad: Cv["identidad"] }) {
           className="anim-fade-in-up mt-10 flex flex-wrap items-center gap-5"
           style={{ "--anim-delay": "0.9s" } as React.CSSProperties}
         >
-          <a
-            href="#portafolio"
+          {/* A la página del Portafolio, no al ancla de la HOME (S28, OM-18): la puerta de abajo ya no
+              repite las cajas, así que «explorar» es entrar. */}
+          <Link
+            href="/portafolio"
             className="flex min-h-11 items-center gap-2 rounded-md bg-sage px-6 text-[15px] font-medium text-sage-ink shadow-sh-1 transition-colors duration-[120ms] hover:brightness-[0.97]"
           >
             {t("ctaApps")}
             <span aria-hidden="true">→</span>
-          </a>
+          </Link>
           <a
             href="#contacto"
             className="flex min-h-11 items-center text-sm text-ink-2 underline decoration-paper-3 underline-offset-4 transition-colors duration-[120ms] hover:text-ink-0 hover:decoration-ink-3"
