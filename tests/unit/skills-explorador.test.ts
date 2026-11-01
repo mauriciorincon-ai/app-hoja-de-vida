@@ -531,3 +531,108 @@ describe("las áreas vistas sobreviven al cambio de idioma y a nada más", () =>
     ).toEqual([]);
   });
 });
+
+describe("en el celular las nueve áreas flotan sueltas", () => {
+  /**
+   * Medido por la planeadora con el motor puro (2026-11-01): a 360–414 px el escenario mide ≈ 330–380 ×
+   * 600 y cada área ocupa 120 px + 12 de holgura. Solo caben dos por fila y unas ocho en total, así que las
+   * nueve se empujaban sin avanzar (a 390 px, ≈ 8 px de desplazamiento en 10 s y nueve pares en contacto;
+   * en escritorio, ≈ 90 px y ninguno). Aquí se mide con el mismo motor, una semilla fija, 2 s de arranque
+   * y 10 s de vuelo.
+   */
+  const AREAS = 9;
+  const TECHO = 74;
+  const CUADROS = 60;
+  const ARRANQUE = 2 * CUADROS;
+  const VUELO = 10 * CUADROS;
+  const VENTANA = CUADROS / 4;
+
+  function volar(W: number, semilla: number) {
+    const m = M.medidas(W, TECHO, AREAS);
+    const rng = mulberry32(semilla);
+    const cs = M.sembrar(AREAS, m, rng);
+    for (let k = 0; k < ARRANQUE; k++)
+      M.paso(cs, 1 / CUADROS, m, SIN_FIJOS, rng);
+    const inicio = cs.map((c) => ({ x: c.x, y: c.y }));
+    // la rapidez se mide en ventanas de ¼ de segundo: cuánto avanza cada área de verdad, no cuánto tiembla en su sitio
+    let previo = inicio;
+    let rapidez = 0;
+    let ventanas = 0;
+    let contacto = 0;
+    for (let k = 1; k <= VUELO; k++) {
+      M.paso(cs, 1 / CUADROS, m, SIN_FIJOS, rng);
+      for (let p = 0; p < AREAS; p++)
+        for (let q = p + 1; q < AREAS; q++)
+          if (Math.hypot(cs[p]!.x - cs[q]!.x, cs[p]!.y - cs[q]!.y) < m.d + 12)
+            contacto++;
+      if (k % VENTANA === 0) {
+        const ahora = cs.map((c) => ({ x: c.x, y: c.y }));
+        for (let i = 0; i < AREAS; i++) {
+          rapidez +=
+            (CUADROS / VENTANA) *
+            Math.hypot(ahora[i]!.x - previo[i]!.x, ahora[i]!.y - previo[i]!.y);
+          ventanas++;
+        }
+        previo = ahora;
+      }
+    }
+    const desplazamiento =
+      cs.reduce(
+        (s, c, i) => s + Math.hypot(c.x - inicio[i]!.x, c.y - inicio[i]!.y),
+        0,
+      ) / AREAS;
+    return {
+      m,
+      desplazamiento,
+      rapidez: rapidez / ventanas,
+      pares: contacto / VUELO,
+    };
+  }
+
+  for (const W of [328, 358, 382]) {
+    it(`a ${W} px: se desplazan ≥ 30 px, avanzan ≥ 20 px/s y en promedio ≤ 2 pares se tocan`, () => {
+      const r = volar(W, 2026);
+      const dato = `W ${W}, alto ${r.m.H}: desplazamiento ${r.desplazamiento.toFixed(1)} px, rapidez ${r.rapidez.toFixed(1)} px/s, pares ${r.pares.toFixed(2)}`;
+      expect(r.desplazamiento, dato).toBeGreaterThanOrEqual(30);
+      expect(r.rapidez, dato).toBeGreaterThanOrEqual(20);
+      expect(r.pares, dato).toBeLessThanOrEqual(2);
+    });
+  }
+
+  it("la prueba puede fallar: con las medidas de antes (120 px, 600 de alto) a 328 px las nueve se traban", () => {
+    const m: M.Medidas = {
+      W: 328,
+      angosto: true,
+      d: 120,
+      H: 600,
+      techo: TECHO,
+    };
+    const rng = mulberry32(2026);
+    const cs = M.sembrar(AREAS, m, rng);
+    for (let k = 0; k < ARRANQUE; k++)
+      M.paso(cs, 1 / CUADROS, m, SIN_FIJOS, rng);
+    let contacto = 0;
+    for (let k = 0; k < VUELO; k++) {
+      M.paso(cs, 1 / CUADROS, m, SIN_FIJOS, rng);
+      for (let p = 0; p < AREAS; p++)
+        for (let q = p + 1; q < AREAS; q++)
+          if (Math.hypot(cs[p]!.x - cs[q]!.x, cs[p]!.y - cs[q]!.y) < m.d + 12)
+            contacto++;
+    }
+    expect(contacto / VUELO).toBeGreaterThan(6);
+  });
+
+  it("en escritorio el alto no cambia: 620 px con las nueve", () => {
+    expect(M.medidas(976, 62, AREAS).H).toBe(620);
+    expect(M.medidas(700, 62, AREAS).H).toBe(620);
+  });
+
+  it("el alto del celular sale de cuántas áreas son y baja el diámetro por debajo de 480 px", () => {
+    const a = M.medidas(358, TECHO, AREAS);
+    expect(a.d).toBe(112);
+    expect(a.H).toBeGreaterThan(700);
+    expect(M.medidas(358, TECHO, 5).H).toBeLessThan(a.H);
+    expect(M.medidas(500, TECHO, AREAS).d).toBe(120);
+    expect(M.medidas(639, TECHO, AREAS).H).toBe(600);
+  });
+});

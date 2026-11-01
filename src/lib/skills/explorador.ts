@@ -57,16 +57,34 @@ export const GRACIA_SOLTAR_MS = 350;
 
 const ANGULO_AUREO = 2.39996;
 
-/** Las medidas del rectángulo según su ancho y el alto de la invitación (que en el celular ocupa dos o tres líneas). */
-export function medidas(W: number, techoInvitacion: number): Medidas {
+/**
+ * En el celular el alto sale de cuántas áreas son (ajuste del 2026-11-01): con nueve de 120 px en 600 px de alto
+ * solo cabían ocho y se quedaban trabadas, empujándose sin avanzar. Las burbujas ocupan a lo sumo el 38 % del área
+ * libre (en escritorio, ≈ 32 %). Es `DENSIDAD_CELULAR` de la maqueta.
+ */
+export const DENSIDAD_CELULAR = 0.38;
+
+/**
+ * Las medidas del rectángulo según su ancho, el alto de la invitación (que en el celular ocupa dos o tres líneas) y
+ * cuántas áreas son. Por debajo de 640 px el alto sale de ese número; por debajo de 480 px las áreas miden 112
+ * (los nombres se ajustan solos). Escritorio no cambia: 620 px.
+ */
+export function medidas(
+  W: number,
+  techoInvitacion: number,
+  areas = 9,
+): Medidas {
   const angosto = W < 640;
-  return {
-    W,
-    angosto,
-    d: angosto ? 120 : W < 860 ? 140 : 160,
-    H: angosto ? 600 : 620,
-    techo: Math.max(angosto ? 74 : 62, techoInvitacion),
-  };
+  const techo = Math.max(angosto ? 74 : 62, techoInvitacion);
+  const d = !angosto ? (W < 860 ? 140 : 160) : W < 480 ? 112 : 120;
+  const ocupa = (areas || 9) * Math.PI * (d / 2) ** 2;
+  // sin ancho (el rectángulo aún no se midió) la cuenta no tiene sentido: el alto de siempre
+  const H = !angosto
+    ? 620
+    : W > 0
+      ? Math.max(600, Math.ceil(techo + ocupa / (DENSIDAD_CELULAR * W) + 8))
+      : 600;
+  return { W, angosto, d, H, techo };
 }
 
 /**
