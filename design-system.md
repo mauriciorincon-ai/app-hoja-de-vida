@@ -76,6 +76,8 @@ vetados_como_texto:
 
 Regla de avaricia: el acento se gasta en CTAs, estados y datos clave. Fondos de sección = papers.
 
+**Regla de los fondos de la HOME (ajuste 2026-11-01):** desde Perfil hasta Contacto, una sección sí y otra no, `paper-1` y `paper-0` alternados. El fondo sale del **orden de `main`** (la posición en el DOM, en `src/app/[locale]/page.tsx`), no de cada sección: mover una sección no rompe la alternancia y ningún componente fija su fondo. El Hero conserva el suyo y el pie (`paper-1`, con su borde) no cuenta. Lo vigila `tests/e2e/home.spec.ts`.
+
 ### Tipografía — dos voces + evidencia
 
 | Voz               | Familia (`next/font`)                                 | Uso                                   | Pesos       |
