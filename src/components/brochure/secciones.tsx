@@ -47,12 +47,9 @@ const st = (o: Record<string, string | number>) => o as CSSProperties;
 export function Barra({ v, t, buscador }: P & { buscador: React.ReactNode }) {
   return (
     <nav className="barra" data-b-oscura="" aria-label={v.nombre}>
-      <button
-        type="button"
-        className="marca"
-        data-ir-sec="top"
-        aria-label={v.nombre}
-      >
+      {/* Sin aria-label: su nombre sale del texto visible (`<i>` es decorativo) y así axe no ve una
+          etiqueta que no contiene lo que se lee (label-content-name-mismatch). */}
+      <button type="button" className="marca" data-ir-sec="top">
         <i aria-hidden="true">{v.inicial}</i>
         <span>{v.nombre}</span>
       </button>
