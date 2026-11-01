@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { parse } from "yaml";
 import { getCasa } from "@/lib/brochure/casa";
@@ -171,16 +171,25 @@ describe("lo que cambia entre la piloto, las v1 y la casa", () => {
   });
 
   it("en inglés avisa que el texto es español donde el v2 no trae su bloque en; en español, nunca", () => {
-    // Solo Innmobiliaria trae el bloque `en`: las otras once y las dos de la casa leen el export, que es español.
-    const conEn = (slug: string) =>
-      JSON.parse(readFileSync(`content/vitrina/${slug}.contenido.json`, "utf8"))
-        .en;
+    // El bloque `en` lo trae el v2 de quien ya lo recibió (hoy, la piloto y la casa); las demás leen el export, que
+    // es español. Se mide del disco: una copia nueva (S30: la casa) cambia la respuesta sin tocar esta prueba.
+    const conEn = (slug: string) => {
+      const ruta = [
+        `content/vitrina/${slug}.contenido.json`,
+        `content/vitrina/casa/${slug}.contenido.json`,
+      ].find((r) => existsSync(r));
+      return ruta
+        ? (JSON.parse(readFileSync(ruta, "utf8")).en as object | undefined)
+        : undefined;
+    };
     expect(conEn("inmobiliaria")).toBeTruthy();
+    expect(
+      SLUGS.some((s) => !conEn(s)),
+      "alguna aún en español",
+    ).toBe(true);
     for (const slug of SLUGS) {
       expect(vista(slug, "es").textoEnEs, `${slug} · es`).toBe(false);
-      expect(vista(slug, "en").textoEnEs, `${slug} · en`).toBe(
-        slug !== "inmobiliaria",
-      );
+      expect(vista(slug, "en").textoEnEs, `${slug} · en`).toBe(!conEn(slug));
     }
     // La función pura que usa también la metadata de la página.
     expect(textoEnEspanol("en", undefined)).toBe(true);
@@ -342,9 +351,7 @@ describe("«Úsala»: lo que cada brochure trae en su cierre", () => {
   });
 
   it("el escaparate empieza sin «anterior» y termina sin «siguiente»", () => {
-    expect(
-      vista(ESCAPARATE[0]!, "es").cierre.vecinas.anterior,
-    ).toBeUndefined();
+    expect(vista(ESCAPARATE[0]!, "es").cierre.vecinas.anterior).toBeUndefined();
     expect(
       vista(ESCAPARATE.at(-1)!, "es").cierre.vecinas.siguiente,
     ).toBeUndefined();
@@ -356,7 +363,10 @@ describe("«Úsala»: lo que cada brochure trae en su cierre", () => {
       const v = vista(slug, "es");
       const pieza = getCasa().find((p) => p.slug === slug)!;
       expect(v.cierre.casa).toBe(true);
-      expect(v.cierre.contacto).toEqual({ texto: "Escríbeme", href: "/#contacto" });
+      expect(v.cierre.contacto).toEqual({
+        texto: "Escríbeme",
+        href: "/#contacto",
+      });
       expect(v.cierre.hitos).toEqual(hitosDe(pieza.export));
       expect(v.cierre.hitos.length).toBeGreaterThanOrEqual(4);
       expect(v.cierre.lista).toBeUndefined();

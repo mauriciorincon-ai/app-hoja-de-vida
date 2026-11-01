@@ -1,0 +1,2184 @@
+{
+  "schema_version": "2.0.0-borrador",
+  "app": "hoja-de-vida",
+  "acento": "rose",
+  "iconos": {
+    "1": "calendario",
+    "2": "lupa",
+    "3": "pantalla",
+    "4": "megafono",
+    "5": "lista",
+    "6": "escudo"
+  },
+  "portada": {
+    "resalta": {
+      "es": "evidencia a un clic",
+      "en": "one click away"
+    },
+    "pantallas": [
+      "CV-01",
+      "CV-07",
+      "CV-12",
+      "CV-20"
+    ],
+    "lugar": {
+      "es": "Bogotá, Colombia",
+      "en": "Bogotá, Colombia"
+    },
+    "categoria": {
+      "es": "Hoja de vida",
+      "en": "Résumé"
+    },
+    "insignias": [
+      {
+        "simbolo": "✓",
+        "texto": {
+          "es": "Cada cifra, con su documento de fondo",
+          "en": "Every figure, backed by its document"
+        },
+        "funcionalidad": "CV-07"
+      },
+      {
+        "simbolo": "◆",
+        "texto": {
+          "es": "CV en PDF para los ATS",
+          "en": "ATS-ready PDF résumé"
+        },
+        "funcionalidad": "CV-08"
+      },
+      {
+        "simbolo": "0",
+        "texto": {
+          "es": "Cero enlaces de acceso",
+          "en": "Zero access links"
+        },
+        "fuente": "nunca"
+      }
+    ]
+  },
+  "antes_despues": {
+    "titulo": {
+      "es": "Lo que cambia cuando la hoja de vida se recorre",
+      "en": "What changes when a résumé is something you walk through"
+    },
+    "antes_rotulo": {
+      "es": "Un CV de siempre",
+      "en": "A typical CV"
+    },
+    "despues_rotulo": {
+      "es": "Con CV Viva",
+      "en": "With CV Viva"
+    },
+    "corto": {
+      "es": "Lo que cambia",
+      "en": "What changes"
+    },
+    "para_quien_titulo": {
+      "es": "Para quién y por qué",
+      "en": "Who it is for, and why"
+    },
+    "prueba": {
+      "antes": {
+        "es": "Un PDF",
+        "en": "A PDF"
+      },
+      "despues": {
+        "es": "9 casos",
+        "en": "9 cases"
+      },
+      "texto": {
+        "es": "de estudio, uno por cada experiencia, con sus cifras",
+        "en": "studies, one per role, with their figures"
+      },
+      "fuente": "medido",
+      "detalle": {
+        "es": "Un PDF estático no puede mostrar lo que alguien sabe hacer. Aquí cada una de las nueve experiencias de la trayectoria abre su caso de estudio con tres o cuatro cifras, y cada cifra tiene que estar en su documento de fondo. El PDF para los sistemas de reclutamiento sigue ahí, y sale de la misma fuente.",
+        "en": "A static PDF can't show what someone knows how to do. Here each of the nine roles in the career opens its case study with three or four figures, and every figure has to be in its background document. The PDF for applicant tracking systems is still there, from the same source."
+      },
+      "cita": "CV-07"
+    },
+    "pares": [
+      {
+        "antes": {
+          "es": "Un PDF dice dónde trabajó alguien, no lo que sabe hacer.",
+          "en": "A PDF says where someone worked, not what they can do."
+        },
+        "despues": {
+          "es": "Cada experiencia abre su caso: la tesis, sus cifras, el reto y cómo se hizo.",
+          "en": "Each role opens its case: the thesis, its figures, the challenge and how it was done."
+        },
+        "funcionalidad": "CV-07",
+        "fuente": "promesa"
+      },
+      {
+        "antes": {
+          "es": "Una cifra suelta: no sabes de dónde sale.",
+          "en": "A bare figure: you can't tell where it comes from."
+        },
+        "despues": {
+          "es": "Cada logro con su número y de dónde sale; los años de trayectoria se calculan solos.",
+          "en": "Every achievement with its number and where it comes from; the years of experience are calculated on their own."
+        },
+        "funcionalidad": "CV-03",
+        "fuente": "CV-03"
+      },
+      {
+        "antes": {
+          "es": "Barras de porcentaje que nadie puede comprobar.",
+          "en": "Percentage bars no one can check."
+        },
+        "despues": {
+          "es": "Las herramientas por grupo, sin porcentajes: lo que está en exploración lo dice en su chip.",
+          "en": "Tools by group, with no percentages: whatever is still being explored says so on its chip."
+        },
+        "funcionalidad": "CV-05",
+        "fuente": "CV-05"
+      },
+      {
+        "antes": {
+          "es": "La web y el PDF se editan por separado y terminan diciendo cosas distintas.",
+          "en": "The website and the PDF are edited separately and end up saying different things."
+        },
+        "despues": {
+          "es": "La página y el PDF para los ATS salen de los mismos datos en cada publicación.",
+          "en": "The page and the ATS-ready PDF come from the same data on every publish."
+        },
+        "funcionalidad": "CV-08",
+        "fuente": "CV-08"
+      },
+      {
+        "antes": {
+          "es": "Un proyecto se cuenta con un enlace y una línea.",
+          "en": "A project is told with a link and a line."
+        },
+        "despues": {
+          "es": "Cada producto tiene su ficha: lo que no hace nadie más, sus cifras con procedencia y sus límites.",
+          "en": "Every product has its sheet: what no one else does, its figures with their source and its limits."
+        },
+        "funcionalidad": "CV-11",
+        "fuente": "CV-11"
+      },
+      {
+        "antes": {
+          "es": "Cómo piensa alguien no cabe en una hoja de vida.",
+          "en": "How someone thinks doesn't fit on a résumé."
+        },
+        "despues": {
+          "es": "«Métodos» lo publica: nueve piezas sobre cómo se diseña, con la evidencia separada del criterio.",
+          "en": "“Methods” publishes it: nine pieces on how design is done, with the evidence kept apart from judgment."
+        },
+        "funcionalidad": "CV-20",
+        "fuente": "promesa"
+      }
+    ]
+  },
+  "mapa": {
+    "intro": {
+      "es": "De arriba abajo, en el orden en que alguien recorre el sitio: lee la trayectoria y abre su evidencia, explora lo que se construye y cómo se diseña, y decide si escribe. A la derecha, lo que atraviesa todo.",
+      "en": "Top to bottom, in the order someone moves through the site: they read the career and open its evidence, explore what gets built and how it is designed, and decide whether to write. On the right, what runs through everything."
+    },
+    "capas": [
+      {
+        "nombre": {
+          "es": "La trayectoria y su evidencia",
+          "en": "The career and its evidence"
+        },
+        "sub": {
+          "es": "La línea baja contigo y cada cifra lleva a su caso",
+          "en": "The line scrolls with you and every figure leads to its case"
+        },
+        "grupos": [
+          1,
+          2
+        ]
+      },
+      {
+        "nombre": {
+          "es": "Lo que se construye y cómo se diseña",
+          "en": "What gets built and how it is designed"
+        },
+        "sub": {
+          "es": "El Portafolio y «Métodos», con cada cifra y cada fuente a la vista",
+          "en": "The Portfolio and “Methods”, with every figure and every source in view"
+        },
+        "grupos": [
+          3,
+          5
+        ]
+      },
+      {
+        "nombre": {
+          "es": "Quien visita responde",
+          "en": "The visitor answers back"
+        },
+        "sub": {
+          "es": "Vota, propone, se anota o escribe, sin crear una cuenta",
+          "en": "Votes, proposes, signs up or writes, with no account"
+        },
+        "grupos": [
+          4
+        ]
+      }
+    ],
+    "transversal": {
+      "nombre": {
+        "es": "Lo que atraviesa todo",
+        "en": "What runs through everything"
+      },
+      "sub": {
+        "es": "Dos idiomas, datos con aduana y nada que se entregue",
+        "en": "Two languages, checked data and nothing handed over"
+      },
+      "grupos": [
+        6
+      ],
+      "rasgos": [
+        {
+          "titulo": {
+            "es": "Cero enlaces de acceso",
+            "en": "Zero access links"
+          },
+          "texto": {
+            "es": "El Portafolio muestra; no entrega.",
+            "en": "The Portfolio shows; it doesn't hand over."
+          },
+          "fuente": "nunca"
+        },
+        {
+          "titulo": {
+            "es": "Ningún total a mano",
+            "en": "No total typed by hand"
+          },
+          "texto": {
+            "es": "Las cuentas se miden del contenido.",
+            "en": "Counts are measured from the content."
+          },
+          "fuente": "nunca"
+        },
+        {
+          "titulo": {
+            "es": "Español e inglés",
+            "en": "Spanish and English"
+          },
+          "texto": {
+            "es": "Todo el sitio, y una prueba exige que los dos digan lo mismo.",
+            "en": "The whole site, and a test requires both to say the same."
+          },
+          "fuente": "metricas",
+          "metrica": "idiomas"
+        },
+        {
+          "titulo": {
+            "es": "US$0 al mes",
+            "en": "US$0 a month"
+          },
+          "texto": {
+            "es": "Su operación se declara en planes gratuitos.",
+            "en": "Its operation is declared on free plans."
+          },
+          "fuente": "metricas",
+          "metrica": "costo_operacion_mensual"
+        }
+      ]
+    }
+  },
+  "proceso_pantallas": {
+    "publica": "CV-08",
+    "recorre": "CV-01",
+    "caso": "CV-07",
+    "portafolio": "CV-11",
+    "metodos": "CV-20",
+    "pdf": "CV-08",
+    "escribe": "CV-19"
+  },
+  "metricas_texto": {
+    "funcionalidades": {
+      "es": "Una por cada función del manual de uso que ve o usa quien visita o el dueño, cuadrada sección por sección. Las del chat no cuentan aquí: van en su propio brochure.",
+      "en": "One per function in the user manual that a visitor or the owner sees or uses, matched section by section. The chat's don't count here: they go in its own brochure."
+    },
+    "casos_de_estudio": {
+      "es": "Uno por cada experiencia de la trayectoria, en español y en inglés, contados en los datos del CV.",
+      "en": "One for each role in the career, in Spanish and English, counted in the CV's data."
+    },
+    "publicaciones_metodos": {
+      "es": "Los archivos de «Métodos». La lista del sitio los cuenta desde la misma carpeta, así que nadie escribe ese número.",
+      "en": "The “Methods” files. The site's list counts them from the same folder, so no one types that number."
+    },
+    "pruebas_unitarias": {
+      "es": "Las que pasaron en verde en la integración continua del último cambio que recoge esta versión. Revisan, entre otras cosas, que los datos estén bien formados, que las cifras de los casos estén en su documento y que el español y el inglés digan lo mismo; una parte corre contra una base de datos real.",
+      "en": "The ones that passed in continuous integration on the last change this version includes. Among other things, they check that the data is well formed, that the case figures are in their document and that Spanish and English say the same; some of them run against a real database."
+    },
+    "pruebas_e2e": {
+      "es": "Recorridos de punta a punta con un navegador de verdad: en escritorio, en el teléfono y en Safari. Se cuentan listándolas; en la última corrida completa pasaron 1155 y 55 se omiten a propósito.",
+      "en": "End-to-end journeys in a real browser: on desktop, on a phone and in Safari. They are counted by listing them; in the last full run 1155 passed and 55 are skipped on purpose."
+    },
+    "pantallas": {
+      "es": "Las plantillas de página del sitio, contadas en sus archivos en la versión anclada: una sola sirve, por ejemplo, a los nueve casos de estudio. Incluyen la de mantenimiento, el 404 y la del brochure, una sola para las doce.",
+      "en": "The site's page templates, counted in its files at the pinned version: a single one serves, for example, all nine case studies. They include the maintenance page, the 404 and the brochure page, a single one for all twelve."
+    },
+    "decisiones_registradas": {
+      "es": "Las decisiones de arquitectura y de producto escritas y numeradas en el repositorio, de la 1 a la 30 en esta versión.",
+      "en": "The architecture and product decisions written down and numbered in the repository, 1 to 30 in this version."
+    },
+    "idiomas": {
+      "es": "Español e inglés, cada uno en sus propias direcciones y con el contenido en dos archivos espejo. Una prueba exige que digan lo mismo.",
+      "en": "Spanish and English, each at its own addresses, with the content in two mirror files. A test requires them to say the same."
+    },
+    "costo_operacion_mensual": {
+      "es": "Lo declara el dueño: el alojamiento va en un plan gratuito y los correos en el plan gratis de su servicio, de 100 al día. No incluye el dominio propio.",
+      "en": "Declared by the owner: hosting runs on a free plan and email on its service's free plan, at 100 a day. The custom domain is not included."
+    }
+  },
+  "grupos": [
+    {
+      "orden": 1,
+      "que_resuelve": {
+        "es": "Un CV en papel se lee de corrido y pide creerle cada cifra. Aquí la trayectoria se recorre: una línea baja contigo con el año de cada experiencia, los logros completos se abren a un clic y cada credencial dice si está obtenida o en curso.",
+        "en": "A paper CV is read top to bottom and asks you to take every figure on trust. Here the career is something you walk through: a line scrolls with you showing each role's year, the full achievements open with one click and every credential says whether it is earned or in progress."
+      },
+      "te_sirve": [
+        {
+          "texto": {
+            "es": "Tienes segundos y quieres ver de un vistazo dónde ha trabajado y en qué años.",
+            "en": "You have seconds and want to see at a glance where he has worked and when."
+          },
+          "fuente": "CV-01"
+        },
+        {
+          "texto": {
+            "es": "Quieres los logros de un rol con sus cifras, los mismos que trae el PDF.",
+            "en": "You want a role's achievements with their figures, the same ones the PDF carries."
+          },
+          "fuente": "CV-02"
+        },
+        {
+          "texto": {
+            "es": "Necesitas saber qué certificaciones están obtenidas y cuáles en preparación.",
+            "en": "You need to know which certifications are earned and which are in preparation."
+          },
+          "fuente": "CV-04"
+        }
+      ],
+      "no_es": [
+        {
+          "texto": {
+            "es": "No mide habilidades en porcentajes ni en niveles de dominio.",
+            "en": "It doesn't rate skills in percentages or proficiency levels."
+          },
+          "fuente": "CV-05"
+        },
+        {
+          "texto": {
+            "es": "No obliga a ver animaciones: con «reducir movimiento» activado, todo queda quieto.",
+            "en": "It doesn't force animations on anyone: with “reduce motion” turned on, everything stays still."
+          },
+          "fuente": "CV-01"
+        }
+      ],
+      "flujo": {
+        "titulo": {
+          "es": "De la línea de tiempo a las credenciales",
+          "en": "From the timeline to the credentials"
+        },
+        "nodos": [
+          {
+            "id": "n1",
+            "tipo": "inicio",
+            "actor": "app",
+            "texto": {
+              "es": "Se abre la trayectoria",
+              "en": "The career section opens"
+            }
+          },
+          {
+            "id": "n2",
+            "tipo": "decision",
+            "actor": "app",
+            "texto": {
+              "es": "¿«Reducir movimiento» activado?",
+              "en": "“Reduce motion” on?"
+            }
+          },
+          {
+            "id": "n3",
+            "tipo": "tarea",
+            "actor": "app",
+            "texto": {
+              "es": "Anima la línea y el año grande",
+              "en": "Animates the line and big year"
+            },
+            "funcionalidad": "CV-01"
+          },
+          {
+            "id": "n4",
+            "tipo": "tarea",
+            "actor": "app",
+            "texto": {
+              "es": "Deja la línea y el año quietos",
+              "en": "Keeps the line and year still"
+            }
+          },
+          {
+            "id": "n5",
+            "tipo": "tarea",
+            "actor": "app",
+            "texto": {
+              "es": "Despliega los logros completos",
+              "en": "Expands the full achievements"
+            },
+            "funcionalidad": "CV-02"
+          },
+          {
+            "id": "n6",
+            "tipo": "tarea",
+            "actor": "app",
+            "texto": {
+              "es": "Muestra cada logro y su origen",
+              "en": "Shows each achievement's source"
+            },
+            "funcionalidad": "CV-03"
+          },
+          {
+            "id": "n7",
+            "tipo": "decision",
+            "actor": "app",
+            "texto": {
+              "es": "¿La certificación ya se obtuvo?",
+              "en": "Certification earned?"
+            }
+          },
+          {
+            "id": "n8",
+            "tipo": "fin",
+            "actor": "app",
+            "texto": {
+              "es": "Su institución y su año",
+              "en": "Its institution and year"
+            }
+          },
+          {
+            "id": "n9",
+            "tipo": "fin",
+            "actor": "app",
+            "texto": {
+              "es": "Sello «En curso» en vez del año",
+              "en": "“In progress” instead of a year"
+            },
+            "funcionalidad": "CV-04"
+          }
+        ],
+        "aristas": [
+          {
+            "de": "n1",
+            "a": "n2"
+          },
+          {
+            "de": "n2",
+            "a": "n3",
+            "etiqueta": {
+              "es": "no",
+              "en": "no"
+            }
+          },
+          {
+            "de": "n2",
+            "a": "n4",
+            "etiqueta": {
+              "es": "sí",
+              "en": "yes"
+            }
+          },
+          {
+            "de": "n3",
+            "a": "n5"
+          },
+          {
+            "de": "n4",
+            "a": "n5"
+          },
+          {
+            "de": "n5",
+            "a": "n6"
+          },
+          {
+            "de": "n6",
+            "a": "n7"
+          },
+          {
+            "de": "n7",
+            "a": "n8",
+            "etiqueta": {
+              "es": "sí",
+              "en": "yes"
+            }
+          },
+          {
+            "de": "n7",
+            "a": "n9",
+            "etiqueta": {
+              "es": "no: en curso",
+              "en": "no: in progress"
+            }
+          }
+        ]
+      },
+      "fichas": [
+        {
+          "tipo": "concepto",
+          "pregunta": {
+            "es": "¿Qué es el año grande de la trayectoria?",
+            "en": "What is the big year in the career section?"
+          },
+          "respuesta": {
+            "es": "Es el año de la experiencia que está a la altura del círculo, que se queda a media pantalla mientras bajas. Sale del periodo de cada experiencia: sus primeros cuatro dígitos.",
+            "en": "It is the year of the role level with the circle, which stays at mid-screen as you scroll. It comes from each role's period: its first four digits."
+          },
+          "fuente": "CV-01"
+        },
+        {
+          "tipo": "diferencia",
+          "pregunta": {
+            "es": "¿Certificación obtenida o en curso?",
+            "en": "Earned certification or in progress?"
+          },
+          "respuesta": {
+            "es": "Las dos viven en la misma lista de certificaciones, y nombrar en el CV una credencial que no está en esa lista hace fallar las pruebas.",
+            "en": "Both live on the same certifications list, and naming a credential in the CV that isn't on that list makes the tests fail."
+          },
+          "lados": [
+            {
+              "titulo": {
+                "es": "Obtenida",
+                "en": "Earned"
+              },
+              "texto": {
+                "es": "Lleva su institución y el año en que se obtuvo.",
+                "en": "It carries its institution and the year it was earned."
+              }
+            },
+            {
+              "titulo": {
+                "es": "En curso",
+                "en": "In progress"
+              },
+              "texto": {
+                "es": "Lleva el sello «En curso» en lugar de fecha.",
+                "en": "It carries an “In progress” tag instead of a date."
+              }
+            }
+          ],
+          "fuente": "CV-04"
+        },
+        {
+          "tipo": "decision",
+          "pregunta": {
+            "es": "Se cumple un año más de trayectoria: ¿quién cambia la cifra?",
+            "en": "Another year of experience goes by: who updates the figure?"
+          },
+          "respuesta": {
+            "es": "Nadie. Los años de trayectoria no se escriben a mano: se calculan en cada publicación desde la fecha de inicio, así que la cifra sube sola.",
+            "en": "No one. The years of experience aren't typed by hand: they are calculated on every publish from the start date, so the figure goes up on its own."
+          },
+          "fuente": "CV-03"
+        },
+        {
+          "tipo": "decision",
+          "pregunta": {
+            "es": "Un rol tiene un logro en español que falta en inglés: ¿qué pasa?",
+            "en": "A role has an achievement in Spanish that is missing in English: what happens?"
+          },
+          "respuesta": {
+            "es": "La publicación no sale. Una prueba exige el mismo número de logros en los dos idiomas, y el PDF lleva los mismos que la página.",
+            "en": "The publish doesn't go out. A test requires the same number of achievements in both languages, and the PDF carries the same ones as the page."
+          },
+          "fuente": "CV-02"
+        }
+      ]
+    },
+    {
+      "orden": 2,
+      "que_resuelve": {
+        "es": "Una hoja de vida afirma y casi nunca muestra. Aquí cada experiencia abre su caso de estudio con sus cifras, y cada cifra tiene que estar en su documento de fondo. Para el sistema de reclutamiento, el mismo contenido sale en un PDF de texto.",
+        "en": "A résumé makes claims and rarely shows them. Here each role opens its case study with its figures, and every figure has to be in its background document. For the recruiting system, the same content comes out as a text PDF."
+      },
+      "te_sirve": [
+        {
+          "texto": {
+            "es": "Quieres ver cómo se hizo un trabajo: el contexto, el reto, los capítulos y lo que dejó.",
+            "en": "You want to see how a job was done: the context, the challenge, the chapters and what it left behind."
+          },
+          "fuente": "CV-07"
+        },
+        {
+          "texto": {
+            "es": "Tu proceso pasa por un sistema de reclutamiento (ATS) y necesitas un PDF que pueda leer.",
+            "en": "Your process goes through an applicant tracking system (ATS) and you need a PDF it can read."
+          },
+          "fuente": "CV-08"
+        },
+        {
+          "texto": {
+            "es": "Quieres saber de dónde sale una cifra antes de creerla.",
+            "en": "You want to know where a figure comes from before you believe it."
+          },
+          "fuente": "nunca"
+        }
+      ],
+      "no_es": [
+        {
+          "texto": {
+            "es": "El PDF no es una pieza de diseño: es sobrio a propósito, para que lo lean los ATS.",
+            "en": "The PDF is not a design piece: it is plain on purpose, so ATS can read it."
+          },
+          "fuente": "CV-08"
+        },
+        {
+          "texto": {
+            "es": "Un caso no publica una cifra que su documento de fondo no diga.",
+            "en": "A case doesn't publish a figure its background document doesn't state."
+          },
+          "fuente": "nunca"
+        }
+      ],
+      "flujo": {
+        "titulo": {
+          "es": "De una cifra nueva al PDF del reclutador",
+          "en": "From a new figure to the recruiter's PDF"
+        },
+        "nodos": [
+          {
+            "id": "n1",
+            "tipo": "inicio",
+            "actor": "dueno",
+            "texto": {
+              "es": "Tiene una cifra nueva para un caso",
+              "en": "Has a new figure for a case"
+            }
+          },
+          {
+            "id": "n2",
+            "tipo": "tarea",
+            "actor": "dueno",
+            "texto": {
+              "es": "La escribe en español e inglés",
+              "en": "Writes it in Spanish and English"
+            }
+          },
+          {
+            "id": "n3",
+            "tipo": "tarea",
+            "actor": "app",
+            "texto": {
+              "es": "La busca en el documento de fondo",
+              "en": "Checks the background document"
+            }
+          },
+          {
+            "id": "n4",
+            "tipo": "decision",
+            "actor": "app",
+            "texto": {
+              "es": "¿El documento la dice?",
+              "en": "Does the document state it?"
+            }
+          },
+          {
+            "id": "n5",
+            "tipo": "tarea",
+            "actor": "app",
+            "texto": {
+              "es": "Detiene y nombra la cifra",
+              "en": "Stops and names the figure"
+            }
+          },
+          {
+            "id": "n6",
+            "tipo": "tarea",
+            "actor": "app",
+            "texto": {
+              "es": "Publica el caso con sus cifras",
+              "en": "Publishes the case and figures"
+            },
+            "funcionalidad": "CV-07"
+          },
+          {
+            "id": "n7",
+            "tipo": "tarea",
+            "actor": "app",
+            "texto": {
+              "es": "Genera el PDF de la misma fuente",
+              "en": "Builds the PDF from that source"
+            },
+            "funcionalidad": "CV-08"
+          },
+          {
+            "id": "n8",
+            "tipo": "fin",
+            "actor": "app",
+            "texto": {
+              "es": "PDF de texto, listo para los ATS",
+              "en": "Text PDF, ready for ATS"
+            }
+          }
+        ],
+        "aristas": [
+          {
+            "de": "n1",
+            "a": "n2"
+          },
+          {
+            "de": "n2",
+            "a": "n3"
+          },
+          {
+            "de": "n3",
+            "a": "n4"
+          },
+          {
+            "de": "n4",
+            "a": "n6",
+            "etiqueta": {
+              "es": "sí",
+              "en": "yes"
+            }
+          },
+          {
+            "de": "n4",
+            "a": "n5",
+            "etiqueta": {
+              "es": "no",
+              "en": "no"
+            }
+          },
+          {
+            "de": "n5",
+            "a": "n2",
+            "etiqueta": {
+              "es": "se corrige",
+              "en": "gets fixed"
+            },
+            "vuelta": true
+          },
+          {
+            "de": "n6",
+            "a": "n7"
+          },
+          {
+            "de": "n7",
+            "a": "n8"
+          }
+        ]
+      },
+      "fichas": [
+        {
+          "tipo": "concepto",
+          "pregunta": {
+            "es": "¿Qué trae un caso de estudio?",
+            "en": "What does a case study contain?"
+          },
+          "respuesta": {
+            "es": "La tesis en una frase, una banda de tres o cuatro cifras, el contexto y el reto, «Cómo lo hice» en capítulos, el impacto y «Lo que me llevo». Hay uno por cada experiencia de la trayectoria, en español y en inglés.",
+            "en": "The thesis in one sentence, a band of three or four figures, the context and the challenge, “How I did it” in chapters, the impact and “What I take with me”. There is one for each role in the career, in Spanish and English."
+          },
+          "fuente": "CV-07"
+        },
+        {
+          "tipo": "concepto",
+          "pregunta": {
+            "es": "¿Qué es el documento de fondo de un caso?",
+            "en": "What is a case's background document?"
+          },
+          "respuesta": {
+            "es": "Es el texto largo, aprobado, del que sale lo que dice la página del caso. Cada cifra de la banda tiene que aparecer en él, en número o en letras.",
+            "en": "It is the long, approved text the case page draws from. Every figure in the band has to appear in it, as a number or in words."
+          },
+          "fuente": "CV-07"
+        },
+        {
+          "tipo": "diferencia",
+          "pregunta": {
+            "es": "¿La página o el PDF?",
+            "en": "The page or the PDF?"
+          },
+          "respuesta": {
+            "es": "Los dos salen de los mismos datos en cada publicación, así que nunca dicen cosas distintas: cambia la forma, no el contenido.",
+            "en": "Both come from the same data on every publish, so they never say different things: the form changes, not the content."
+          },
+          "lados": [
+            {
+              "titulo": {
+                "es": "La página",
+                "en": "The page"
+              },
+              "texto": {
+                "es": "El caso de estudio con su tesis, sus cifras y sus capítulos, para leerlo con calma.",
+                "en": "The case study with its thesis, figures and chapters, to read at leisure."
+              }
+            },
+            {
+              "titulo": {
+                "es": "El PDF",
+                "en": "The PDF"
+              },
+              "texto": {
+                "es": "Texto seleccionable a dos columnas, en el orden en que lo lee un ATS.",
+                "en": "Selectable text in two columns, in the order an ATS reads it."
+              }
+            }
+          ],
+          "fuente": "CV-08"
+        },
+        {
+          "tipo": "decision",
+          "pregunta": {
+            "es": "Se escribe en un caso una cifra que su documento de fondo no dice: ¿qué pasa?",
+            "en": "A case gets a figure its background document doesn't state: what happens?"
+          },
+          "respuesta": {
+            "es": "La publicación se detiene y nombra la cifra. La versión en línea sigue como estaba hasta que la cifra se corrige o el documento la respalda.",
+            "en": "The publish stops and names the figure. The live version stays as it was until the figure is fixed or the document backs it."
+          },
+          "fuente": "CV-07"
+        }
+      ]
+    },
+    {
+      "orden": 3,
+      "que_resuelve": {
+        "es": "Contar un proyecto con un enlace deja a quien lee buscando la evidencia. Aquí cada producto tiene su ficha técnica de dos minutos: lo que no hace nadie más, sus cifras con procedencia, su proceso dibujado y sus límites, sin un solo enlace de acceso.",
+        "en": "Telling a project with a link leaves the reader hunting for the evidence. Here every product has its two-minute technical sheet: what no one else does, its figures with their source, its process drawn and its limits, without a single access link."
+      },
+      "te_sirve": [
+        {
+          "texto": {
+            "es": "Quieres ver lo que alguien construye, no solo lo que dice que sabe.",
+            "en": "You want to see what someone builds, not just what they say they know."
+          },
+          "fuente": "promesa"
+        },
+        {
+          "texto": {
+            "es": "Quieres entender en dos minutos qué hace una app y qué no hace.",
+            "en": "You want to understand in two minutes what an app does and what it doesn't."
+          },
+          "fuente": "CV-11"
+        },
+        {
+          "texto": {
+            "es": "Quieres ver una app privada por dentro, sin instalar nada.",
+            "en": "You want to see inside a private app, without installing anything."
+          },
+          "fuente": "CV-15"
+        }
+      ],
+      "no_es": [
+        {
+          "texto": {
+            "es": "No entrega las apps: no hay enlaces de acceso ni de código.",
+            "en": "It doesn't hand the apps over: there are no access or code links."
+          },
+          "fuente": "nunca"
+        },
+        {
+          "texto": {
+            "es": "No muestra el estado en tiempo real: cada producto se ve en su versión anclada, con su fecha.",
+            "en": "It doesn't show the real-time state: each product is shown at its pinned version, with its date."
+          },
+          "fuente": "limites"
+        }
+      ],
+      "flujo": {
+        "titulo": {
+          "es": "Del portal de cuatro frentes a la ficha de una app",
+          "en": "From the four-front portal to an app's sheet"
+        },
+        "nodos": [
+          {
+            "id": "n1",
+            "tipo": "inicio",
+            "actor": "app",
+            "texto": {
+              "es": "Se abre el Portafolio",
+              "en": "The Portfolio opens"
+            }
+          },
+          {
+            "id": "n2",
+            "tipo": "tarea",
+            "actor": "app",
+            "texto": {
+              "es": "Muestra los frentes y su cuenta",
+              "en": "Shows the fronts and their counts"
+            },
+            "funcionalidad": "CV-09"
+          },
+          {
+            "id": "n3",
+            "tipo": "decision",
+            "actor": "app",
+            "texto": {
+              "es": "¿El producto es una app?",
+              "en": "Is the product an app?"
+            }
+          },
+          {
+            "id": "n4",
+            "tipo": "tarea",
+            "actor": "app",
+            "texto": {
+              "es": "Carruseles: profesionales primero",
+              "en": "Carousels: professional first"
+            },
+            "funcionalidad": "CV-10"
+          },
+          {
+            "id": "n5",
+            "tipo": "tarea",
+            "actor": "app",
+            "texto": {
+              "es": "Abre su ficha con sus cifras",
+              "en": "Opens its sheet and figures"
+            },
+            "funcionalidad": "CV-11"
+          },
+          {
+            "id": "n6",
+            "tipo": "tarea",
+            "actor": "app",
+            "texto": {
+              "es": "Dibuja su proceso en BPMN",
+              "en": "Draws its process in BPMN"
+            },
+            "funcionalidad": "CV-12"
+          },
+          {
+            "id": "n7",
+            "tipo": "fin",
+            "actor": "app",
+            "texto": {
+              "es": "Lista de espera, sin enlace",
+              "en": "Waiting list, no access link"
+            }
+          },
+          {
+            "id": "n8",
+            "tipo": "tarea",
+            "actor": "app",
+            "texto": {
+              "es": "Suma «Lo que dicen los datos»",
+              "en": "Adds “What the data says”"
+            },
+            "funcionalidad": "CV-14"
+          },
+          {
+            "id": "n9",
+            "tipo": "fin",
+            "actor": "app",
+            "texto": {
+              "es": "Se muestra, sin lista de espera",
+              "en": "Shown, with no waiting list"
+            }
+          }
+        ],
+        "aristas": [
+          {
+            "de": "n1",
+            "a": "n2"
+          },
+          {
+            "de": "n2",
+            "a": "n3"
+          },
+          {
+            "de": "n3",
+            "a": "n4",
+            "etiqueta": {
+              "es": "sí",
+              "en": "yes"
+            }
+          },
+          {
+            "de": "n3",
+            "a": "n8",
+            "etiqueta": {
+              "es": "no: agente o tablero",
+              "en": "no: agent or dashboard"
+            }
+          },
+          {
+            "de": "n4",
+            "a": "n5"
+          },
+          {
+            "de": "n5",
+            "a": "n6"
+          },
+          {
+            "de": "n6",
+            "a": "n7"
+          },
+          {
+            "de": "n8",
+            "a": "n9"
+          }
+        ]
+      },
+      "fichas": [
+        {
+          "tipo": "concepto",
+          "pregunta": {
+            "es": "¿Qué es una ficha técnica?",
+            "en": "What is a technical sheet?"
+          },
+          "respuesta": {
+            "es": "La infografía de dos minutos de cada producto: el titular de lo que no hace nadie más, de tres a cinco cifras con su procedencia, para quién es, sus funcionalidades, sus límites y lo que nunca hace.",
+            "en": "Each product's two-minute infographic: the headline of what no one else does, three to five figures with their source, who it is for, its features, its limits and what it never does."
+          },
+          "fuente": "CV-11"
+        },
+        {
+          "tipo": "concepto",
+          "pregunta": {
+            "es": "¿Qué quieren decir «medido» y «declarado» junto a una cifra?",
+            "en": "What do “measured” and “declared” mean next to a figure?"
+          },
+          "respuesta": {
+            "es": "Es su procedencia. Medido sale de un contador o un comando; calculada, de una medición con una tarifa o una regla; declarado lo fijó una persona; estimación es deducido. Una cifra sin procedencia no entra.",
+            "en": "It is its source. Measured comes from a counter or a command; calculated, from a measurement with a rate or a rule; declared was set by a person; estimate is inferred. A figure with no source doesn't get in."
+          },
+          "fuente": "CV-11"
+        },
+        {
+          "tipo": "diferencia",
+          "pregunta": {
+            "es": "¿Una app o un agente?",
+            "en": "An app or an agent?"
+          },
+          "respuesta": {
+            "es": "Los cuatro frentes comparten la misma ficha. Lo que cambia es lo que trae cada producto y si se puede pedir.",
+            "en": "All four fronts share the same sheet. What changes is what each product brings and whether it can be requested."
+          },
+          "lados": [
+            {
+              "titulo": {
+                "es": "Una app",
+                "en": "An app"
+              },
+              "texto": {
+                "es": "Su ficha dibuja el proceso en BPMN y cierra con la lista de espera, sin promesa de fecha.",
+                "en": "Its sheet draws the process in BPMN and closes with the waiting list, with no promised date."
+              }
+            },
+            {
+              "titulo": {
+                "es": "Un agente o un tablero",
+                "en": "An agent or a dashboard"
+              },
+              "texto": {
+                "es": "La misma ficha; si trae datos, suma «Lo que dicen los datos». Se muestra y no se entrega.",
+                "en": "The same sheet; with data, it adds “What the data says”. It is shown, not handed over."
+              }
+            }
+          ],
+          "fuente": "CV-14"
+        },
+        {
+          "tipo": "decision",
+          "pregunta": {
+            "es": "Una app llega con un proceso sin fin o con una decisión de un solo camino: ¿qué pasa?",
+            "en": "An app arrives with a process that has no end, or a decision with a single path: what happens?"
+          },
+          "respuesta": {
+            "es": "La publicación falla y el error dice qué y dónde. El diagrama sale de los datos, así que un proceso mal formado nunca llega a dibujarse.",
+            "en": "The publish fails and the error says what and where. The diagram comes from the data, so a malformed process never gets drawn."
+          },
+          "fuente": "CV-12"
+        }
+      ]
+    },
+    {
+      "orden": 4,
+      "que_resuelve": {
+        "es": "Quien visita no solo lee: vota lo que viene en cada app con un clic, propone una idea, se anota en la lista de espera o escribe. Nada de eso pide una cuenta, y los mensajes viajan al correo del dueño sin guardarse en ninguna base.",
+        "en": "Visitors don't just read: they vote on what's next for each app with one click, propose an idea, join the waiting list or write. None of it requires an account, and the messages travel to the owner's inbox without being stored in any database."
+      },
+      "te_sirve": [
+        {
+          "texto": {
+            "es": "Quieres que una app construya primero la funcionalidad que te importa.",
+            "en": "You want an app to build the feature you care about first."
+          },
+          "fuente": "CV-16"
+        },
+        {
+          "texto": {
+            "es": "Te interesa una app y quieres que te avisen cuando abra, sin promesa de fecha.",
+            "en": "An app interests you and you want to hear when it opens, with no promised date."
+          },
+          "fuente": "CV-18"
+        },
+        {
+          "texto": {
+            "es": "Quieres proponer un proyecto, una asesoría, una capacitación, una charla o un rol.",
+            "en": "You want to propose a project, an advisory, a training, a talk or a role."
+          },
+          "fuente": "CV-19"
+        }
+      ],
+      "no_es": [
+        {
+          "texto": {
+            "es": "No es un registro: votar no pide cuenta, y el voto no guarda tu IP ni tu identidad.",
+            "en": "It is not a sign-up: voting asks for no account, and the vote stores neither your IP nor your identity."
+          },
+          "fuente": "privacidad"
+        },
+        {
+          "texto": {
+            "es": "No es un foro: las propuestas llegan al correo del dueño y no se publican.",
+            "en": "It is not a forum: proposals reach the owner's inbox and are not published."
+          },
+          "fuente": "CV-17"
+        }
+      ],
+      "flujo": {
+        "titulo": {
+          "es": "Un voto con su contador honesto",
+          "en": "A vote with an honest counter"
+        },
+        "nodos": [
+          {
+            "id": "n1",
+            "tipo": "inicio",
+            "actor": "app",
+            "texto": {
+              "es": "Se abre el roadmap de una app",
+              "en": "An app's roadmap opens"
+            }
+          },
+          {
+            "id": "n2",
+            "tipo": "decision",
+            "actor": "app",
+            "texto": {
+              "es": "¿La base de datos responde?",
+              "en": "Does the database respond?"
+            }
+          },
+          {
+            "id": "n3",
+            "tipo": "tarea",
+            "actor": "app",
+            "texto": {
+              "es": "Lo dice y apaga los botones",
+              "en": "Says so and turns off buttons"
+            }
+          },
+          {
+            "id": "n4",
+            "tipo": "tarea",
+            "actor": "app",
+            "texto": {
+              "es": "Muestra el conteo real",
+              "en": "Shows the real count"
+            },
+            "funcionalidad": "CV-16"
+          },
+          {
+            "id": "n5",
+            "tipo": "decision",
+            "actor": "app",
+            "texto": {
+              "es": "¿Este navegador ya votó?",
+              "en": "Has this browser voted?"
+            }
+          },
+          {
+            "id": "n6",
+            "tipo": "tarea",
+            "actor": "app",
+            "texto": {
+              "es": "Guarda app, funcionalidad y fecha",
+              "en": "Stores app, feature and date"
+            }
+          },
+          {
+            "id": "n7",
+            "tipo": "tarea",
+            "actor": "app",
+            "texto": {
+              "es": "Deja el botón en «Ya votaste»",
+              "en": "Shows “You voted”"
+            }
+          },
+          {
+            "id": "n8",
+            "tipo": "tarea",
+            "actor": "app",
+            "texto": {
+              "es": "Lleva las ideas nuevas al correo",
+              "en": "Emails new ideas to the owner"
+            },
+            "funcionalidad": "CV-17"
+          },
+          {
+            "id": "n9",
+            "tipo": "fin",
+            "actor": "app",
+            "texto": {
+              "es": "Nada se publica ni se guarda",
+              "en": "Nothing published or stored"
+            }
+          }
+        ],
+        "aristas": [
+          {
+            "de": "n1",
+            "a": "n2"
+          },
+          {
+            "de": "n2",
+            "a": "n3",
+            "etiqueta": {
+              "es": "no",
+              "en": "no"
+            }
+          },
+          {
+            "de": "n2",
+            "a": "n4",
+            "etiqueta": {
+              "es": "sí",
+              "en": "yes"
+            }
+          },
+          {
+            "de": "n4",
+            "a": "n5"
+          },
+          {
+            "de": "n5",
+            "a": "n6",
+            "etiqueta": {
+              "es": "no",
+              "en": "no"
+            }
+          },
+          {
+            "de": "n5",
+            "a": "n7",
+            "etiqueta": {
+              "es": "sí",
+              "en": "yes"
+            }
+          },
+          {
+            "de": "n6",
+            "a": "n7"
+          },
+          {
+            "de": "n3",
+            "a": "n8"
+          },
+          {
+            "de": "n7",
+            "a": "n8"
+          },
+          {
+            "de": "n8",
+            "a": "n9"
+          }
+        ]
+      },
+      "fichas": [
+        {
+          "tipo": "concepto",
+          "pregunta": {
+            "es": "¿Qué guarda un voto?",
+            "en": "What does a vote store?"
+          },
+          "respuesta": {
+            "es": "Solo la app, la funcionalidad y la fecha: ni la IP ni la identidad de quien vota. El aviso de «ya votaste» vive en el navegador de quien visita.",
+            "en": "Only the app, the feature and the date: neither the IP nor the identity of whoever votes. The “you already voted” notice lives in the visitor's browser."
+          },
+          "fuente": "privacidad"
+        },
+        {
+          "tipo": "diferencia",
+          "pregunta": {
+            "es": "¿Lista de espera o «Escríbeme»?",
+            "en": "Waiting list or “Write to me”?"
+          },
+          "respuesta": {
+            "es": "Los dos llegan al correo del dueño y ninguno se guarda en una base. Agentes, investigaciones y tableros no tienen lista de espera: se muestran y no se entregan.",
+            "en": "Both reach the owner's inbox and neither is stored in a database. Agents, research and dashboards have no waiting list: they are shown, not handed over."
+          },
+          "lados": [
+            {
+              "titulo": {
+                "es": "Lista de espera",
+                "en": "Waiting list"
+              },
+              "texto": {
+                "es": "Solo en las apps, al pie de su ficha, con la app ya elegida y sin promesa de fecha.",
+                "en": "Only on apps, at the foot of their sheet, with the app already chosen and no promised date."
+              }
+            },
+            {
+              "titulo": {
+                "es": "«Escríbeme»",
+                "en": "“Write to me”"
+              },
+              "texto": {
+                "es": "El formulario general: nombre, correo, un motivo opcional y el mensaje.",
+                "en": "The general form: name, email, an optional reason and the message."
+              }
+            }
+          ],
+          "fuente": "CV-18"
+        },
+        {
+          "tipo": "decision",
+          "pregunta": {
+            "es": "Alguien borra los datos de su navegador y vuelve a votar: ¿cuenta?",
+            "en": "Someone clears their browser data and votes again: does it count?"
+          },
+          "respuesta": {
+            "es": "Sí: la votación cuenta un voto por navegador. Es el precio de no pedir registro ni guardar datos personales, y está dicho como límite.",
+            "en": "Yes: voting counts one vote per browser. It is the price of asking for no sign-up and storing no personal data, and it is stated as a limit."
+          },
+          "fuente": "limites"
+        },
+        {
+          "tipo": "decision",
+          "pregunta": {
+            "es": "Alguien envía «Escríbeme» y el servicio de correo no está configurado: ¿qué pasa?",
+            "en": "Someone sends “Write to me” and the email service isn't configured: what happens?"
+          },
+          "respuesta": {
+            "es": "Quien escribe ve la confirmación, pero el mensaje no llega. Como el formulario no guarda nada, no queda copia: es uno de los límites declarados.",
+            "en": "The sender sees the confirmation, but the message doesn't arrive. Since the form stores nothing, no copy is left: it is one of the stated limits."
+          },
+          "fuente": "limites"
+        }
+      ]
+    },
+    {
+      "orden": 5,
+      "que_resuelve": {
+        "es": "Un CV dice dónde trabajó alguien, no cómo diseña. «Métodos» lo publica: nueve piezas largas sobre cómo se diseñan sistemas de IA, datos y BI, con los mismos diez bloques, la evidencia separada del criterio y fuentes con fecha.",
+        "en": "A CV says where someone worked, not how they design. “Methods” publishes it: nine long pieces on how AI, data and BI systems are designed, with the same ten blocks, the evidence kept apart from judgment and dated sources."
+      },
+      "te_sirve": [
+        {
+          "texto": {
+            "es": "Eres líder técnico y quieres saber cómo piensa alguien, no solo dónde trabajó.",
+            "en": "You are a technical lead and want to know how someone thinks, not just where they worked."
+          },
+          "fuente": "promesa"
+        },
+        {
+          "texto": {
+            "es": "Buscas un tema concreto, como estructurar un sistema de agentes, y quieres ir directo al bloque que te interesa.",
+            "en": "You are after a specific topic, such as structuring an agent system, and want to jump straight to the block you need."
+          },
+          "fuente": "CV-21"
+        },
+        {
+          "texto": {
+            "es": "Necesitas distinguir lo que se hizo en un proyecto de lo que hace el campo y de la opinión del autor.",
+            "en": "You need to tell what was done in a project apart from what the field does and from the author's opinion."
+          },
+          "fuente": "CV-21"
+        }
+      ],
+      "no_es": [
+        {
+          "texto": {
+            "es": "No es un blog en primera persona: las piezas van en voz impersonal.",
+            "en": "It is not a first-person blog: the pieces are written in an impersonal voice."
+          },
+          "fuente": "CV-20"
+        },
+        {
+          "texto": {
+            "es": "El criterio del autor no se presenta como un hecho: va rotulado como posición.",
+            "en": "The author's judgment is not presented as fact: it is labeled as a position."
+          },
+          "fuente": "CV-21"
+        }
+      ],
+      "flujo": {
+        "titulo": {
+          "es": "Cada afirmación, con la evidencia de su voz",
+          "en": "Every claim, with the evidence its voice requires"
+        },
+        "nodos": [
+          {
+            "id": "n1",
+            "tipo": "inicio",
+            "actor": "dueno",
+            "texto": {
+              "es": "Escribe una afirmación en una pieza",
+              "en": "Writes a claim in a piece"
+            }
+          },
+          {
+            "id": "n2",
+            "tipo": "decision",
+            "actor": "dueno",
+            "texto": {
+              "es": "¿De qué voz es?",
+              "en": "Which voice is it?"
+            }
+          },
+          {
+            "id": "n3",
+            "tipo": "tarea",
+            "actor": "app",
+            "texto": {
+              "es": "Evidencia: exige su documento",
+              "en": "Evidence: needs its document"
+            }
+          },
+          {
+            "id": "n4",
+            "tipo": "tarea",
+            "actor": "app",
+            "texto": {
+              "es": "Campo: exige fuente con fecha",
+              "en": "Field: needs a dated source"
+            }
+          },
+          {
+            "id": "n5",
+            "tipo": "tarea",
+            "actor": "app",
+            "texto": {
+              "es": "Criterio: rotulado, sin fuente",
+              "en": "Judgment: labeled, no source"
+            }
+          },
+          {
+            "id": "n6",
+            "tipo": "decision",
+            "actor": "app",
+            "texto": {
+              "es": "¿Lleva lo que su voz exige?",
+              "en": "Has what its voice needs?"
+            }
+          },
+          {
+            "id": "n7",
+            "tipo": "tarea",
+            "actor": "app",
+            "texto": {
+              "es": "Detiene y nombra archivo y campo",
+              "en": "Stops and names file and field"
+            }
+          },
+          {
+            "id": "n8",
+            "tipo": "tarea",
+            "actor": "app",
+            "texto": {
+              "es": "Publica con sus voces rotuladas",
+              "en": "Publishes with voices labeled"
+            },
+            "funcionalidad": "CV-21"
+          },
+          {
+            "id": "n9",
+            "tipo": "fin",
+            "actor": "app",
+            "texto": {
+              "es": "El mapa, con su lectura",
+              "en": "The map, with its reading"
+            },
+            "funcionalidad": "CV-22"
+          }
+        ],
+        "aristas": [
+          {
+            "de": "n1",
+            "a": "n2"
+          },
+          {
+            "de": "n2",
+            "a": "n3",
+            "etiqueta": {
+              "es": "● evidencia",
+              "en": "● evidence"
+            }
+          },
+          {
+            "de": "n2",
+            "a": "n4",
+            "etiqueta": {
+              "es": "◆ campo",
+              "en": "◆ field"
+            }
+          },
+          {
+            "de": "n2",
+            "a": "n5",
+            "etiqueta": {
+              "es": "▲ criterio",
+              "en": "▲ judgment"
+            }
+          },
+          {
+            "de": "n3",
+            "a": "n6"
+          },
+          {
+            "de": "n4",
+            "a": "n6"
+          },
+          {
+            "de": "n5",
+            "a": "n6"
+          },
+          {
+            "de": "n6",
+            "a": "n8",
+            "etiqueta": {
+              "es": "sí",
+              "en": "yes"
+            }
+          },
+          {
+            "de": "n6",
+            "a": "n7",
+            "etiqueta": {
+              "es": "no",
+              "en": "no"
+            }
+          },
+          {
+            "de": "n7",
+            "a": "n1",
+            "etiqueta": {
+              "es": "se corrige",
+              "en": "gets fixed"
+            },
+            "vuelta": true
+          },
+          {
+            "de": "n8",
+            "a": "n9"
+          }
+        ]
+      },
+      "fichas": [
+        {
+          "tipo": "concepto",
+          "pregunta": {
+            "es": "¿Cuáles son las tres voces?",
+            "en": "What are the three voices?"
+          },
+          "respuesta": {
+            "es": "La Evidencia (●): lo que se hizo en un proyecto con nombre, y sale solo del corpus del sitio. El Estado del campo (◆): lo que hace el campo, de una fuente con título, editor, fecha y enlace. El Criterio (▲): la posición del autor, rotulada como tal. Cada una lleva símbolo, palabra y color, nunca solo color.",
+            "en": "Evidence (●): what was done in a named project, drawn only from the site's corpus. State of the field (◆): what the field does, from a source with title, publisher, date and link. Judgment (▲): the author's position, labeled as such. Each carries a symbol, a word and a color, never color alone."
+          },
+          "fuente": "CV-21"
+        },
+        {
+          "tipo": "concepto",
+          "pregunta": {
+            "es": "¿Cuáles son los diez bloques?",
+            "en": "What are the ten blocks?"
+          },
+          "respuesta": {
+            "es": "El problema, el mapa, las fases, las decisiones de diseño, lo innovador en 2026, los modos de falla, las métricas y controles, la evidencia en proyectos, los límites y alcance, y las fuentes con su fecha de revisión. Siempre en ese orden, cada uno con su ancla.",
+            "en": "The problem, the map, the phases, the design decisions, what is new in 2026, the failure modes, the metrics and controls, the evidence from projects, the limits and scope, and the sources with their review date. Always in that order, each with its anchor."
+          },
+          "fuente": "CV-21"
+        },
+        {
+          "tipo": "diferencia",
+          "pregunta": {
+            "es": "¿El mapa o su lectura?",
+            "en": "The map or its reading?"
+          },
+          "respuesta": {
+            "es": "Los dos dicen lo mismo: el diagrama para verlo, la lectura para quien no lo ve o lo imprime.",
+            "en": "Both say the same: the diagram to see it, the reading for whoever can't see it or prints it."
+          },
+          "lados": [
+            {
+              "titulo": {
+                "es": "El mapa",
+                "en": "The map"
+              },
+              "texto": {
+                "es": "Un diagrama dibujado desde el dato, con texto real que se selecciona y se traduce.",
+                "en": "A diagram drawn from the data, with real text you can select and translate."
+              }
+            },
+            {
+              "titulo": {
+                "es": "La lectura",
+                "en": "The reading"
+              },
+              "texto": {
+                "es": "El mismo mapa en palabras, nodo por nodo, para los lectores de pantalla y la impresión.",
+                "en": "The same map in words, node by node, for screen readers and for print."
+              }
+            }
+          ],
+          "fuente": "CV-22"
+        },
+        {
+          "tipo": "decision",
+          "pregunta": {
+            "es": "Una afirmación del estado del campo llega sin fuente: ¿qué pasa?",
+            "en": "A state-of-the-field claim arrives without a source: what happens?"
+          },
+          "respuesta": {
+            "es": "La publicación se detiene y nombra el archivo y el campo. Cada voz lleva solo la evidencia de su voz: el campo, su fuente fechada; la evidencia, su documento; el criterio, ninguna.",
+            "en": "The publish stops and names the file and the field. Each voice carries only its own evidence: the field, its dated source; the evidence, its document; the judgment, none."
+          },
+          "fuente": "CV-21"
+        }
+      ]
+    },
+    {
+      "orden": 6,
+      "que_resuelve": {
+        "es": "Los detalles que hacen confiable un sitio también se cuidan: todo existe en español e inglés, el menú cabe en cuatro destinos, una dirección que no existe responde un 404 que se entiende, el movimiento se puede apagar y un dato mal escrito detiene la publicación sin romper lo que ya está en línea.",
+        "en": "The details that make a site trustworthy are looked after too: everything exists in Spanish and English, the menu fits in four destinations, an address that doesn't exist returns a 404 that makes sense, motion can be turned off and a mistyped field stops the publish without breaking what is already live."
+      },
+      "te_sirve": [
+        {
+          "texto": {
+            "es": "Lees en inglés y quieres cambiar de idioma sin perder dónde ibas.",
+            "en": "You read in English and want to switch language without losing your place."
+          },
+          "fuente": "CV-26"
+        },
+        {
+          "texto": {
+            "es": "Prefieres el movimiento reducido y quieres el contenido quieto.",
+            "en": "You prefer reduced motion and want the content to stay still."
+          },
+          "fuente": "CV-27"
+        },
+        {
+          "texto": {
+            "es": "Llegas por una dirección vieja o mal escrita y quieres una salida, no un error del servidor.",
+            "en": "You arrive through an old or mistyped address and want a way out, not a server error."
+          },
+          "fuente": "CV-25"
+        }
+      ],
+      "no_es": [
+        {
+          "texto": {
+            "es": "Todavía no tiene modo oscuro: es solo tema claro, y está registrado como deuda.",
+            "en": "It has no dark mode yet: it is light theme only, recorded as a debt."
+          },
+          "fuente": "limites"
+        },
+        {
+          "texto": {
+            "es": "No adivina tu idioma: la raíz abre siempre en español, y el botón ES/EN lo cambia.",
+            "en": "It doesn't guess your language: the root always opens in Spanish, and the ES/EN button changes it."
+          },
+          "fuente": "CV-26"
+        }
+      ],
+      "flujo": {
+        "titulo": {
+          "es": "Una petición al sitio, sin callejones sin salida",
+          "en": "A request to the site, with no dead ends"
+        },
+        "nodos": [
+          {
+            "id": "n1",
+            "tipo": "inicio",
+            "actor": "app",
+            "texto": {
+              "es": "Llega una petición al sitio",
+              "en": "A request reaches the site"
+            }
+          },
+          {
+            "id": "n2",
+            "tipo": "decision",
+            "actor": "app",
+            "texto": {
+              "es": "¿Mantenimiento encendido?",
+              "en": "Maintenance mode on?"
+            }
+          },
+          {
+            "id": "n3",
+            "tipo": "fin",
+            "actor": "app",
+            "texto": {
+              "es": "Aviso, CV en PDF y un 503",
+              "en": "Notice, PDF résumé and a 503"
+            },
+            "funcionalidad": "CV-24"
+          },
+          {
+            "id": "n4",
+            "tipo": "decision",
+            "actor": "app",
+            "texto": {
+              "es": "¿La dirección existe?",
+              "en": "Does the address exist?"
+            }
+          },
+          {
+            "id": "n5",
+            "tipo": "fin",
+            "actor": "app",
+            "texto": {
+              "es": "Un 404, no un error del servidor",
+              "en": "A 404, not a server error"
+            },
+            "funcionalidad": "CV-25"
+          },
+          {
+            "id": "n6",
+            "tipo": "tarea",
+            "actor": "app",
+            "texto": {
+              "es": "Sirve la página en /es o /en",
+              "en": "Serves the page in /es or /en"
+            }
+          },
+          {
+            "id": "n7",
+            "tipo": "tarea",
+            "actor": "app",
+            "texto": {
+              "es": "Muestra el menú y el idioma",
+              "en": "Shows the menu and language"
+            },
+            "funcionalidad": "CV-23"
+          },
+          {
+            "id": "n8",
+            "tipo": "fin",
+            "actor": "app",
+            "texto": {
+              "es": "ES/EN, sin perder el punto",
+              "en": "ES/EN, keeping your place"
+            }
+          }
+        ],
+        "aristas": [
+          {
+            "de": "n1",
+            "a": "n2"
+          },
+          {
+            "de": "n2",
+            "a": "n3",
+            "etiqueta": {
+              "es": "sí",
+              "en": "yes"
+            }
+          },
+          {
+            "de": "n2",
+            "a": "n4",
+            "etiqueta": {
+              "es": "no",
+              "en": "no"
+            }
+          },
+          {
+            "de": "n4",
+            "a": "n5",
+            "etiqueta": {
+              "es": "no",
+              "en": "no"
+            }
+          },
+          {
+            "de": "n4",
+            "a": "n6",
+            "etiqueta": {
+              "es": "sí",
+              "en": "yes"
+            }
+          },
+          {
+            "de": "n6",
+            "a": "n7"
+          },
+          {
+            "de": "n7",
+            "a": "n8"
+          }
+        ]
+      },
+      "fichas": [
+        {
+          "tipo": "concepto",
+          "pregunta": {
+            "es": "¿Qué es la aduana del contenido?",
+            "en": "What is the content gate?"
+          },
+          "respuesta": {
+            "es": "Todo el contenido vive en archivos de datos, en español y en inglés, que se validan en cada publicación. Un campo mal formado detiene la publicación y nombra el archivo; la página en línea no se rompe. Editar y publicar actualiza la web, el PDF y el chat a la vez.",
+            "en": "All the content lives in data files, in Spanish and English, validated on every publish. A malformed field stops the publish and names the file; the live page doesn't break. Editing and publishing updates the website, the PDF and the chat at once."
+          },
+          "fuente": "CV-28"
+        },
+        {
+          "tipo": "diferencia",
+          "pregunta": {
+            "es": "¿Mantenimiento o 404?",
+            "en": "Maintenance or 404?"
+          },
+          "respuesta": {
+            "es": "Uno es una pausa a propósito; el otro, una página que no está. Ninguno deja a quien llega sin salida.",
+            "en": "One is a deliberate pause; the other, a page that isn't there. Neither leaves the visitor without a way out."
+          },
+          "lados": [
+            {
+              "titulo": {
+                "es": "Mantenimiento",
+                "en": "Maintenance"
+              },
+              "texto": {
+                "es": "Todo el sitio dice «Estoy afinando mi sitio», con el CV en PDF en los dos idiomas, y responde 503 para que los buscadores vuelvan después.",
+                "en": "The whole site says “I'm fine-tuning my site”, with the PDF résumé in both languages, and returns 503 so search engines come back later."
+              }
+            },
+            {
+              "titulo": {
+                "es": "404",
+                "en": "404"
+              },
+              "texto": {
+                "es": "Una dirección que no existe responde 404, no un error del servidor, con un botón a cada inicio.",
+                "en": "An address that doesn't exist returns 404, not a server error, with a button to each home page."
+              }
+            }
+          ],
+          "fuente": "CV-24"
+        },
+        {
+          "tipo": "decision",
+          "pregunta": {
+            "es": "Cambias a inglés a mitad de la trayectoria: ¿dónde quedas?",
+            "en": "You switch to English halfway through the career: where do you land?"
+          },
+          "respuesta": {
+            "es": "En el mismo punto de lectura: la experiencia que ibas leyendo queda a la misma altura, aunque el inglés sea más corto.",
+            "en": "At the same reading point: the role you were reading stays at the same height, even though the English text is shorter."
+          },
+          "fuente": "CV-26"
+        },
+        {
+          "tipo": "decision",
+          "pregunta": {
+            "es": "Activas «reducir movimiento» en tu sistema: ¿qué cambia?",
+            "en": "You turn on “reduce motion” in your system: what changes?"
+          },
+          "respuesta": {
+            "es": "Las secciones dejan de revelarse al bajar, y los contadores y la línea de tiempo quedan quietos: todo el contenido aparece de una vez.",
+            "en": "Sections stop revealing themselves as you scroll, and the counters and the timeline stay still: all the content appears at once."
+          },
+          "fuente": "CV-27"
+        }
+      ]
+    }
+  ],
+  "en": {
+    "promesa": {
+      "tagline": "A résumé you walk through, with its evidence one click away.",
+      "intro": "CV Viva is Henry Rincón's résumé turned into a site you walk through: the career scrolls with you, each role opens its case study with its figures, and the CV comes out as a PDF for applicant tracking systems, from the same source. It is also home to the Portfolio, where every product has its technical sheet, and to “Methods”, nine publications on how design is done.",
+      "para_quien": "For recruiters who have seconds to decide, for technical leads who want to know how someone thinks and not just where they worked, and for whoever comes to see the apps in the Portfolio. A static PDF can't show what someone knows how to do; here every claim leads to its evidence.",
+      "diferencial": "It isn't a template or a PDF with animations. All the content lives in validated data: if a field is malformed, if a case's figure doesn't appear in its background document or if a link leads nowhere, the publish stops before it goes out. The site's counts (apps, products, publications) are measured from the content and none is typed by hand. And the site itself is the proof: the Portfolio publishes every app with its process drawn and every figure with its source, without a single access link."
+    },
+    "grupos": {
+      "1": {
+        "nombre": "Your career, to walk through",
+        "linea": "Nine roles on a line that scrolls with you, with their achievements, figures and credentials in view."
+      },
+      "2": {
+        "nombre": "The evidence, one click away",
+        "linea": "A case study per role and a PDF that recruiting systems read, both from the same source."
+      },
+      "3": {
+        "nombre": "The Portfolio, with sheets worth reading",
+        "linea": "Every product with its technical sheet: the process drawn, the figures with their source and no access link."
+      },
+      "4": {
+        "nombre": "Visitors get a say too",
+        "linea": "Vote on what's next, propose an idea, join the waiting list or write, without creating an account."
+      },
+      "5": {
+        "nombre": "Methods: how design is done, published",
+        "linea": "Nine publications in an impersonal voice, with ten fixed blocks, three separate voices and dated sources."
+      },
+      "6": {
+        "nombre": "A well-kept house",
+        "linea": "Two languages, a short menu, a maintenance notice, a 404 that makes sense and motion you can turn off."
+      }
+    },
+    "features": {
+      "CV-01": {
+        "nombre": "A timeline that scrolls with you",
+        "que_hace": "A single line runs through all nine roles. As you scroll, a circle stays at mid-screen and next to it appears the big year of the role you're reading. With “reduce motion” turned on, everything stays still."
+      },
+      "CV-02": {
+        "nombre": "The full achievements, one click away",
+        "que_hace": "Each role expands its achievements with figures under “See full achievements”, the same ones the PDF carries. A test requires the same number of achievements in Spanish and in English."
+      },
+      "CV-03": {
+        "nombre": "Twelve achievements with their number",
+        "que_hace": "Twelve achievements in three rows of four, each with its big number and where it comes from. Two aren't typed by hand: the years of experience are calculated from the start date, and his own AI agents are counted from their published fact sheets."
+      },
+      "CV-04": {
+        "nombre": "Certifications with their status",
+        "que_hace": "Each certification with its institution and its year, and the ones in preparation with an “In progress” tag instead of a date. Naming a credential in the CV that isn't on the list makes the tests fail."
+      },
+      "CV-05": {
+        "nombre": "Skills: nine areas to explore",
+        "que_hace": "Nine numbered areas float in a dark rectangle: you can grab them, throw them and, when you pick one, its tools gather around it, joined by a line. “See it all as a list” shows the nine cards. No percentages or proficiency levels."
+      },
+      "CV-06": {
+        "nombre": "Education with its institution",
+        "que_hace": "The three degrees and courses in their own section, with the institution, the period and its logo. The PDF, the printable résumé and the chat read the same information."
+      },
+      "CV-07": {
+        "nombre": "A case study for each role",
+        "que_hace": "Each role has its page: the thesis, three or four figures, the context, the challenge, “How I did it” in chapters and what he took away from it. A figure its background document doesn't state stops the publish."
+      },
+      "CV-08": {
+        "nombre": "The CV as an ATS-readable PDF",
+        "que_hace": "The “CV (PDF)” button delivers a PDF with selectable text, in two columns and in the order an applicant tracking system reads it. It is generated on every publish from the same source as the page, in Spanish and in English."
+      },
+      "CV-09": {
+        "nombre": "Four fronts, each with its own space",
+        "que_hace": "Apps, agents, dashboards and research: each front with its box, its status and how many products it has. That count isn't typed: it is measured from the published content."
+      },
+      "CV-10": {
+        "nombre": "Professional and personal, in a carousel",
+        "que_hace": "The apps come in two blocks, professional first, each in a carousel that shows where it starts and where it ends. You move through it with the arrows, a finger, the keyboard or the trackpad's sideways swipe."
+      },
+      "CV-11": {
+        "nombre": "A two-minute technical sheet",
+        "que_hace": "Each app has its sheet: the headline of what no one else does, three to five figures with their source, who it is for, what it has, its limits and what it never does."
+      },
+      "CV-12": {
+        "nombre": "The process, drawn from the data",
+        "que_hace": "“How it works” draws each app's process in BPMN: one lane per actor, the decision where it is made and the loops in plain sight. The diagram comes from the data, and a malformed process stops the publish."
+      },
+      "CV-13": {
+        "nombre": "A brochure per app, with its screens",
+        "que_hace": "Each app has its brochure: the promise with its figures and screens, a chapter per feature group, the end-to-end process and the figures with their source. It has contents, a search box, an app tour of the screens, and it prints."
+      },
+      "CV-14": {
+        "nombre": "Agents and dashboards, with what their data says",
+        "que_hace": "The pieces that aren't apps use the same sheet. Those that bring data add “What the data says”: each finding with its figure and its source."
+      },
+      "CV-15": {
+        "nombre": "The simulation, inside the sheet",
+        "que_hace": "A private app can show its static simulation: it opens in a frame inside the page or full screen, and it doesn't load until someone asks for it."
+      },
+      "CV-16": {
+        "nombre": "A roadmap you vote on, no sign-up",
+        "que_hace": "Each app shows what it has planned and lets you vote with one click, no sign-up. The count comes from the database at that moment; if the database doesn't respond, the section says so and turns off the buttons."
+      },
+      "CV-17": {
+        "nombre": "Propose a feature",
+        "que_hace": "Below the roadmap, a box takes ideas in the visitor's own words, with an optional email. The proposal reaches the owner's inbox and is neither published nor stored in the database."
+      },
+      "CV-18": {
+        "nombre": "The apps' waiting list",
+        "que_hace": "At the foot of each app's sheet, a form signs up whoever wants in, with the app already chosen and no promised date. Only the apps have one: agents, research and dashboards are shown, not handed over."
+      },
+      "CV-19": {
+        "nombre": "“Write to me”, with a reason",
+        "que_hace": "The contact form asks for a name, an email, an optional reason (a project, an advisory, a training, a talk or a role) and the message, and delivers it to the owner's inbox. It has a per-visitor limit and a trap for bots."
+      },
+      "CV-20": {
+        "nombre": "Nine method publications",
+        "que_hace": "“Methods” gathers nine long publications, each on a “How … should be …” question about AI, data or BI. The list counts its pieces from the files: no total is typed by hand."
+      },
+      "CV-21": {
+        "nombre": "Ten blocks and three voices",
+        "que_hace": "Every publication has the same ten blocks, with an index and an anchor per block. The evidence from projects, the state of the field and the author's judgment are labeled with a symbol, a word and a color, never with color alone."
+      },
+      "CV-22": {
+        "nombre": "A map drawn from the data",
+        "que_hace": "Every publication has its map: a diagram with real text, which can be selected and translated, and below it a node-by-node reading, for screen readers and for print."
+      },
+      "CV-23": {
+        "nombre": "A menu with four destinations",
+        "que_hace": "The header carries the HR mark, four destinations (Résumé, Portfolio, Methods and Contact), the PDF résumé and the language. On a phone, the same menu opens with a button and closes with Escape."
+      },
+      "CV-24": {
+        "nombre": "Maintenance mode, with the CV at hand",
+        "que_hace": "One variable puts the whole site into “I'm fine-tuning my site”, in the visitor's language and with the PDF résumé in both languages. It returns 503 with “come back later”, so search engines don't replace the site."
+      },
+      "CV-25": {
+        "nombre": "A 404 that speaks both languages",
+        "que_hace": "A file that doesn't exist returns a 404, not a server error, with a page in Spanish and in English and a button to each home page."
+      },
+      "CV-26": {
+        "nombre": "Spanish and English, same place",
+        "que_hace": "The whole site exists in Spanish and in English. Switching language keeps you at the same reading point, even though the English is shorter, and the root always opens in Spanish."
+      },
+      "CV-27": {
+        "nombre": "Motion you can turn off",
+        "que_hace": "Sections reveal themselves as you scroll, with counters and the timeline in motion. With “reduce motion” turned on in the system, all the content appears still."
+      },
+      "CV-28": {
+        "nombre": "Content as data, with a gate",
+        "que_hace": "All the content lives in data files in Spanish and in English: editing and publishing updates the website, the PDF and the chat at once. A malformed field stops the publish and the live page doesn't break."
+      }
+    },
+    "metricas": {
+      "funcionalidades": {
+        "etiqueta": "Product features",
+        "unidad": "features",
+        "detalle": "One per function in docs/MANUAL-DE-USO.md at c3e4d2c that a visitor or the owner sees or uses, matched section by section; the chat's go in its own brochure. The list, and what was left out, are in the planner's 028 response."
+      },
+      "casos_de_estudio": {
+        "etiqueta": "Case studies",
+        "unidad": "cases",
+        "detalle": "Projects with a case study in data/cv.es.yaml at c3e4d2c: one for each role in the career, in Spanish and in English."
+      },
+      "publicaciones_metodos": {
+        "etiqueta": "Methods publications",
+        "unidad": "publications",
+        "detalle": "Files in data/metodo/ at c3e4d2c; the /metodos list counts them from the same folder."
+      },
+      "pruebas_unitarias": {
+        "etiqueta": "Unit and integration tests",
+        "unidad": "tests",
+        "detalle": "Green in the app's Sprint 029 closing (c3e4d2c, #108, 2026-11-01): 3486 in 109 files. The planner didn't run them; the CI of #108 finished green."
+      },
+      "pruebas_e2e": {
+        "etiqueta": "End-to-end tests",
+        "unidad": "tests",
+        "detalle": "Output of `playwright test --list` on a copy of c3e4d2c on 2026-11-01: 1210 in 19 files (Chromium, mobile and the WebKit ones). In the Sprint 029 closing, 1155 passed and 55 are skipped on purpose."
+      },
+      "pantallas": {
+        "etiqueta": "Site screens",
+        "unidad": "screens",
+        "detalle": "page.tsx files under src/app/ at c3e4d2c, counted with find: they include the maintenance page, the 404 for each language and the brochure page, a single one for all twelve."
+      },
+      "decisiones_registradas": {
+        "etiqueta": "Recorded decisions",
+        "unidad": "decisions",
+        "detalle": "Numbered files in decisions/ at c3e4d2c: from ADR-001 to ADR-030."
+      },
+      "idiomas": {
+        "etiqueta": "Languages",
+        "unidad": "languages",
+        "detalle": "The /es and /en routes, with the content in two mirror files (data/cv.es.yaml and data/cv.en.yaml) and a test that requires parity."
+      },
+      "costo_operacion_mensual": {
+        "etiqueta": "Monthly operating cost",
+        "unidad": "USD",
+        "detalle": "Declared by ADR-004 (Vercel on its Hobby plan) and the manual (Resend on its free plan, at 100 emails a day). Does not include the custom domain."
+      }
+    },
+    "stack": [
+      {
+        "nombre": "Next.js 16 and TypeScript",
+        "papel": "the whole site, with all the content in static HTML for recruiters, ATS and search engines"
+      },
+      {
+        "nombre": "Zod over YAML",
+        "papel": "content as data, validated on every publish: a malformed field stops the build and names the file"
+      },
+      {
+        "nombre": "next-intl",
+        "papel": "Spanish and English on the same routes, /es and /en, keeping the same reading point when you switch"
+      },
+      {
+        "nombre": "PDFKit",
+        "papel": "the CV as a selectable-text PDF for ATS, generated on every publish from the same YAML files"
+      },
+      {
+        "nombre": "Supabase",
+        "papel": "the real count of roadmap votes, with no personal data"
+      },
+      {
+        "nombre": "Resend",
+        "papel": "the messages from “Write to me”, the waiting list and the proposals, which reach the owner's inbox"
+      },
+      {
+        "nombre": "Vercel and Sentry",
+        "papel": "hosting on the Hobby plan and error monitoring in production"
+      },
+      {
+        "nombre": "Vitest, Playwright and Lighthouse",
+        "papel": "the tests for every change: unit, browser journeys at two sizes and the performance budget in CI"
+      }
+    ],
+    "privacidad": "A roadmap vote stores the app, the feature and the date: neither the IP nor the identity of whoever votes (Law 1581). The “you already voted” notice lives in the visitor's browser. “Write to me”, the waiting list and the proposals aren't stored in any database: they travel by email to the owner. The email shown on the page is not the one that receives the messages. What the chat does with data is in its own brochure.",
+    "enlaces_razon": "It is the site you're browsing, and its address isn't published: that is the Portfolio's zero-links rule.",
+    "complemento": {
+      "titular": "The résumé you walk through like an editorial piece, which comes out as a PDF for ATS from the same source and opens the Portfolio: every product with its process drawn and every figure with its source.",
+      "limites": [
+        "Light theme only: dark mode doesn't exist yet and is a recorded design debt.",
+        "Voting counts one vote per browser: someone who clears their data or switches devices can vote again.",
+        "The forms store nothing: if the email service isn't configured, the message doesn't arrive even though the confirmation shows.",
+        "The Portfolio shows each product's pinned version, with its date, not its real-time state."
+      ],
+      "nunca": [
+        "Publishes an access link to an app or to its code: the Portfolio shows, it doesn't hand over.",
+        "Writes a total by hand: the counts of apps, products and publications are measured from the content.",
+        "Publishes a case figure that its background document doesn't state.",
+        "Stores personal data for a vote: only the app, the feature and the date.",
+        "Names a credential in the CV that isn't on the certifications list."
+      ],
+      "proceso": {
+        "titulo": "From the published résumé to the conversation",
+        "carriles": {
+          "dueno": "The owner",
+          "cv-viva": "CV Viva",
+          "visita": "The visitor"
+        },
+        "pasos": {
+          "ini": "Has something new to tell",
+          "edita": "Edits the content in Spanish and English",
+          "valida": "Validates the content, the figures and the citations",
+          "aduana": "Does it pass the gate?",
+          "nombra": "Stops the publish and names the field",
+          "publica": "Publishes the site and the PDF from one source",
+          "recorre": "Walks through the career and the achievements",
+          "evidencia": "Wants to see the evidence?",
+          "caso": "Opens the case study with its figures",
+          "portafolio": "Explores the Portfolio and its sheets",
+          "metodos": "Reads how design is done in Methods",
+          "pdf": "Downloads the PDF résumé for their system",
+          "hablar": "Wants to talk to the owner?",
+          "escribe": "Writes or joins the waiting list",
+          "correo": "Delivers the message to the owner's inbox",
+          "responde": "Replies to whoever wrote",
+          "fin": "The conversation begins",
+          "fin-visita": ""
+        },
+        "etiquetas": {
+          "aduana>publica": "yes",
+          "aduana>nombra": "no",
+          "evidencia>caso": "yes",
+          "evidencia>pdf": "no: the PDF is enough",
+          "hablar>escribe": "yes",
+          "hablar>fin-visita": "no"
+        },
+        "anotaciones": {
+          "valida": "A malformed field, a figure its document doesn't state or a citation that leads nowhere stops the publish.",
+          "publica": "The website, the PDF and the chat's index come from the same data: they never fall out of sync.",
+          "caso": "Every figure in a case's band has to be in its background document, or the build fails naming it.",
+          "portafolio": "Each app with its process drawn and its figures sourced, and no access link: it is shown, not handed over.",
+          "escribe": "No form is stored in a database: the message travels by email. The waiting list is only for the apps."
+        }
+      }
+    }
+  }
+}

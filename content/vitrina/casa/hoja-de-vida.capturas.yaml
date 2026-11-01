@@ -4,13 +4,16 @@
 # pieza completa, centrada sobre el fondo de la app, con margen, y ampliada hasta llenar el lienzo (a DPR 3, en el
 # ancho de ventana que más llena); interfaz en español, tema claro. Contenido real del sitio público del dueño; los
 # votos del roadmap, con la base vacía (sin votos). El botón flotante del chat se oculta: tiene su propia entrega.
+# Reentrega 2026-11-01 (tras el 028 y el 029): CV-02, CV-03, CV-05, CV-09, CV-10 y CV-13 se retomaron de una copia aislada
+# de `c3e4d2c` (main tras el #108), con el mismo entorno y el mismo ancho de ventana de cada una; Skills (CV-05) con el
+# azar sembrado y el movimiento reducido, para que salga igual cada vez. Las demás salen iguales píxel a píxel en c3e4d2c.
 portada: entrada.webp
 capturas:
   - { funcionalidad: CV-01, archivo: CV-01.webp, pie: { es: "La trayectoria: la línea, el año grande y las tres primeras experiencias", en: "The career: the line, the big year and the first three roles" } }
   - { funcionalidad: CV-02, archivo: CV-02.webp, pie: { es: "Vesting, con sus logros completos desplegados", en: "Vesting, with its full achievements expanded" } }
-  - { funcionalidad: CV-03, archivo: CV-03.webp, pie: { es: "Los ocho logros, cada uno con su número y de dónde sale", en: "The eight achievements, each with its number and where it comes from" } }
+  - { funcionalidad: CV-03, archivo: CV-03.webp, pie: { es: "Los doce logros en tres filas, cada uno con su número y de dónde sale", en: "The twelve achievements in three rows, each with its number and source" } }
   - { funcionalidad: CV-04, archivo: CV-04.webp, pie: { es: "Cinco certificaciones, dos con el sello «En curso» en vez de año", en: "Five certifications, two marked as in progress instead of a year" } }
-  - { funcionalidad: CV-05, archivo: CV-05.webp, pie: { es: "Skills: dos de los nueve grupos con sus herramientas, sin porcentajes", en: "Skills: two of the nine groups with their tools, no percentages" } }
+  - { funcionalidad: CV-05, archivo: CV-05.webp, pie: { es: "Skills: las nueve áreas del explorador, en reposo y sin porcentajes", en: "Skills: the explorer's nine areas at rest, with no percentages" } }
   - { funcionalidad: CV-06, archivo: CV-06.webp, pie: { es: "Los tres estudios, con su institución y su periodo", en: "The three degrees and courses, with institution and period" } }
   - { funcionalidad: CV-07, archivo: CV-07.webp, pie: { es: "El caso de Vesting: la tesis, sus temas y cuatro cifras", en: "The Vesting case: its thesis, its topics and four figures" } }
   - { funcionalidad: CV-08, archivo: CV-08.webp, pie: { es: "La hoja de vida imprimible y su botón del PDF, de la misma fuente", en: "The printable résumé and its PDF button, from the same source" } }
@@ -18,7 +21,7 @@ capturas:
   - { funcionalidad: CV-10, archivo: CV-10.webp, pie: { es: "Las apps profesionales en carrusel: dos enteras y la tercera asoma", en: "Professional apps in a carousel: two in full and the third peeking in" } }
   - { funcionalidad: CV-11, archivo: CV-11.webp, pie: { es: "La ficha técnica de HackGuard: titular, stack y cifras con su fuente", en: "HackGuard's tech sheet: headline, stack and figures with their source" } }
   - { funcionalidad: CV-12, archivo: CV-12.webp, pie: { es: "«Cómo funciona» de Probeta DS: el proceso en BPMN, por carriles", en: "How Probeta DS works: its BPMN process, lane by lane" } }
-  - { funcionalidad: CV-13, archivo: CV-13.webp, pie: { es: "La ficha completa: la pantalla de cada funcionalidad, en carrusel", en: "The full sheet: the screen of each feature, in a carousel" } }
+  - { funcionalidad: CV-13, archivo: CV-13.webp, pie: { es: "El brochure de HackGuard: la promesa, su pantalla y las cinco secciones", en: "HackGuard's brochure: the promise, its screen and the five sections" } }
   - { funcionalidad: CV-14, archivo: CV-14.webp, pie: { es: "Energía y clima: seis hallazgos, cada uno con su cifra y su procedencia", en: "Energy and climate: six findings, each with its figure and source" } }
   - { funcionalidad: CV-15, archivo: CV-15.webp, pie: { es: "La simulación de planlang, abierta en un marco dentro de su página", en: "planlang's simulation, opened in a frame inside its page" } }
   - { funcionalidad: CV-16, archivo: CV-16.webp, pie: { es: "El roadmap de Dash Agent: tres ideas por votar, aún sin votos", en: "Dash Agent's roadmap: three ideas to vote on, no votes yet" } }
