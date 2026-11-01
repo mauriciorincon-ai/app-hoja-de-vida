@@ -15,7 +15,6 @@ import {
 } from "@/lib/vitrina/categorias-apps";
 import { getFichaTecnica } from "@/lib/vitrina/ficha-tecnica/loader";
 import { getFichasVitrina, getManifestVitrina } from "@/lib/vitrina/loader";
-import { entradasBrochure } from "../../scripts/entradas-brochure.mjs";
 import { nombresDeDestinos } from "../../scripts/destinos.mjs";
 import { chunksDeFichas, leerFichas } from "../../scripts/fichas-al-indice.mjs";
 
@@ -218,10 +217,6 @@ describe("UN solo nombre por app, en todo el sitio (ADR-028)", () => {
       const oficial = nombreOficial(categorias, crudo.app.slug)!;
       expect(texto, crudo.app.slug).toContain(oficial);
       expect(destinos.get(`/portafolio/apps/${crudo.app.slug}`)).toBe(oficial);
-      // Su `/brochure` es destino solo si sigue con ficha (S30): si no, es un 301 a la entrada.
-      expect(destinos.get(`/portafolio/apps/${crudo.app.slug}/brochure`)).toBe(
-        entradasBrochure().includes(crudo.app.slug) ? undefined : oficial,
-      );
     }
     for (const viejo of ["Hablemos San", "Nutri-Kids", "Dash Agent AI"]) {
       expect(texto).not.toContain(viejo);

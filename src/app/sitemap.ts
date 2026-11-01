@@ -69,9 +69,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(bloqueDe(p, 10).revisado),
       alternates: alternatesFor(`/metodos/${p.slug}`),
     })),
-    // Una URL por app (S30): su entrada, que es su brochure si su contenido v2 llegó y su ficha
-    // técnica (ADR-016) si no. Ninguna redirige. Las dos de la casa, CV Viva y su chat, no son apps
-    // del Portafolio pero sí tienen entrada: su brochure.
+    // Una URL por app (S31): su entrada, que es su brochure en las diez (y en las dos de la casa, CV Viva
+    // y su chat, que no son apps del Portafolio pero sí tienen entrada). Ninguna redirige.
     ...[...getManifestVitrina().map((a) => a.slug), ...SLUGS_CASA].map(
       (slug) => ({
         url: `${SITE_URL}/${locale}/portafolio/apps/${slug}`,

@@ -13,7 +13,7 @@
     ]
   },
   {
-    "path": "/*/brochure$",
+    "path": "/*/portafolio/apps/habla$",
     "timings": [
       { "metric": "first-contentful-paint", "budget": 1500 },
       { "metric": "largest-contentful-paint", "budget": 3850 },

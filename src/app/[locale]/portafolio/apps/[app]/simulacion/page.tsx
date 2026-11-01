@@ -102,7 +102,7 @@ export default async function SimulacionAppPage({ params }: Params) {
               className="inline-flex min-h-11 items-center gap-2 font-mono text-[11px] tracking-[0.08em] text-ink-2 uppercase hover:text-ink-0"
             >
               <span aria-hidden="true">←</span>
-              {t("volverFichaTecnica")}
+              {t("volverBrochure")}
             </Link>
           </nav>
 

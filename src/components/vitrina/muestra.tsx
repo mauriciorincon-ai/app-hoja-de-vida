@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { entradaEsBrochure } from "@/lib/brochure/entrada";
 import {
   CAPTURA_ALTO,
   CAPTURA_ANCHO,
@@ -122,8 +121,8 @@ export async function MuestraApp({ ficha }: { ficha: FichaVitrina }) {
       </p>
 
       <p className="flex items-center gap-1.5 text-[14px] font-medium text-sage-ink">
-        {/* Una app que ya abre en su brochure (S30) no tiene ficha: su tarjeta lo dice. */}
-        {entradaEsBrochure(ficha.ancla.slug) ? t("verBrochure") : t("verFicha")}
+        {/* Desde el S31 toda app abre en su brochure: la tarjeta lo dice. */}
+        {t("verBrochure")}
         <span aria-hidden="true">→</span>
       </p>
     </article>

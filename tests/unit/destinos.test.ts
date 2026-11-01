@@ -86,13 +86,14 @@ describe("rutasDeDatos — salen de los mismos datos que generan las páginas", 
 
   it("incluye las piezas publicadas de un frente abierto", () => {
     expect(rutas.has("/portafolio/agentes/hr-develop-ai-apps")).toBe(true);
+    // Una app sin contenido v2 también abre en su brochure (S31): su entrada es el destino.
     expect(rutas.has("/portafolio/apps/habla")).toBe(true);
-    expect(rutas.has("/portafolio/apps/habla/brochure")).toBe(true);
+    expect(rutas.has("/portafolio/apps/habla/brochure")).toBe(false);
   });
 
   it("el brochure de cada app y de la casa es destino donde vive; lo que redirige ya no", () => {
-    // La casa y las apps con su contenido v2 abren en su brochure (S30): su entrada es el destino,
-    // y su `/brochure` es un 301 a ella. Una cita no lleva a una redirección.
+    // Las diez apps y la casa abren en su brochure (S30 para la casa y las que tenían su v2, S31 para
+    // todas): su entrada es el destino, y su `/brochure` es un 301 a ella. Una cita no lleva a una redirección.
     expect(rutas.has("/portafolio/apps/hoja-de-vida")).toBe(true);
     expect(rutas.has("/portafolio/apps/chat-hoja-de-vida")).toBe(true);
     expect(rutas.has("/portafolio/apps/inmobiliaria")).toBe(true);
@@ -103,6 +104,8 @@ describe("rutasDeDatos — salen de los mismos datos que generan las páginas", 
       "/portafolio/apps/hoja-de-vida/brochure",
       "/portafolio/apps/chat-hoja-de-vida/brochure",
       "/portafolio/apps/inmobiliaria/brochure",
+      "/portafolio/apps/habla/brochure",
+      "/portafolio/apps/ds/brochure",
     ])
       expect(rutas.has(muerta), muerta).toBe(false);
   });
@@ -197,7 +200,9 @@ describe("nombreDeDestino — a dónde lleva la cita, con el nombre que el visit
     expect(
       nombreDeDestino("/portafolio/agentes/hr-develop-ai-apps", es),
     ).toBeTruthy();
-    expect(nombreDeDestino("/portafolio/apps/habla/brochure", es)).toBeTruthy();
+    expect(nombreDeDestino("/portafolio/apps/habla", es)).toBeTruthy();
+    // Su `/brochure` ya no es un destino (S31): no tiene nombre.
+    expect(nombreDeDestino("/portafolio/apps/habla/brochure", es)).toBeNull();
   });
 
   it("el brochure de la casa se llama como la casa lo dice, en cada idioma", () => {
