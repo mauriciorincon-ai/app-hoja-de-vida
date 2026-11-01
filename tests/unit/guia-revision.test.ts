@@ -1292,9 +1292,38 @@ describe("la guía v31 · el brochure de las doce y la puerta de la HOME", () =>
  * reducido, n13 el dedo en el teléfono, n14 la fidelidad con las maquetas); once filas y el flujo R1 cambian de texto: a2, a4, a8, a10, f1,
  * k1b, n4b, n5, n6, n7 y n10. Vuelven a pendiente y muestran lo que el dueño había respondido («Antes del S29»).
  */
+describe("la guía v31 · el ajuste de la HOME (2026-11-01, sin subir de versión)", () => {
+  it("la a2 y el R1 llevan data-cambio 31 y «Mejorado · ajuste de la HOME», y dicen el orden nuevo: el Portafolio justo antes de Métodos", () => {
+    const a = abrir();
+    const a2 = a.doc.getElementById("a2") as HTMLElement;
+    expect(a2.getAttribute("data-cambio")).toBe("31");
+    expect(a2.getAttribute("data-origen")).toBe("mejorado");
+    expect(a2.textContent).toContain("Mejorado · ajuste de la HOME");
+    expect(a2.textContent).toContain("Skills, Portafolio, Métodos y Contacto");
+
+    const r1 = a
+      .filas()
+      .find((li) => li.textContent?.includes("R1 · La HOME de punta a punta"))!;
+    expect(r1.getAttribute("data-cambio")).toBe("31");
+    expect(r1.textContent).toContain("Mejorado · ajuste de la HOME");
+    expect(r1.textContent).toContain("Skills, Portafolio y, al final, Métodos");
+    expect(r1.textContent).toContain("Los fondos se alternan");
+  });
+
+  it("ninguna fila viva dice que el Portafolio va entre Logros y Estudios", () => {
+    const a = abrir();
+    const vivas = a
+      .filas()
+      .filter((li) => !li.closest("details"))
+      .map((li) => li.textContent ?? "");
+    expect(vivas.filter((t) => /Logros,\s*Portafolio/.test(t))).toEqual([]);
+  });
+});
+
 describe("la guía v31 · Skills como explorador y los doce logros", () => {
+  // La a2 y el flujo R1 (la HOME de punta a punta) las reescribió el ajuste de la HOME
+  // (2026-11-01): llevan data-cambio 31 y su propio test, al final de este archivo.
   const FILAS_DEL_S29 = [
-    "a2",
     "a4",
     "a8",
     "a10",
@@ -1316,13 +1345,13 @@ describe("la guía v31 · Skills como explorador y los doce logros", () => {
       expect(li.getAttribute("data-origen"), id).toBe("mejorado");
       expect(li.textContent, id).toContain("Mejorado · S29");
     }
-    // Las once filas y el flujo R1 (la HOME de punta a punta) son las únicas del S29.
+    // Las diez filas del S29 son las únicas con data-cambio 29 (la a2 y el R1 pasaron al ajuste).
     const conCambio = [...a.doc.querySelectorAll('[data-cambio="29"]')];
-    expect(conCambio.length).toBe(FILAS_DEL_S29.length + 1);
+    expect(conCambio.length).toBe(FILAS_DEL_S29.length);
     const r1 = a
       .filas()
       .find((li) => li.textContent?.includes("R1 · La HOME de punta a punta"));
-    expect(r1?.getAttribute("data-cambio")).toBe("29");
+    expect(r1?.getAttribute("data-cambio")).toBe("31");
     expect(r1?.textContent).toContain("explorador");
   });
 
@@ -1590,8 +1619,9 @@ describe("la guía v31 · el brochure, la entrada de todas las apps", () => {
       expect(flujo.getAttribute("data-cambio"), titulo).toBe("31");
       expect(flujo.textContent, titulo).toContain("Mejorado · S31");
     }
+    // Dos flujos (R7 y R8) y, desde el ajuste de la HOME, la a2 y el R1: cuatro más las filas del S31.
     expect(a.doc.querySelectorAll('[data-cambio="31"]').length).toBe(
-      FILAS_DEL_S31.length + 2,
+      FILAS_DEL_S31.length + 4,
     );
   });
 
