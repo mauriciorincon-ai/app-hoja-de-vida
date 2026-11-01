@@ -27,9 +27,9 @@ import { roadmapDe } from "@/lib/votes/roadmap";
  *
  * `/portafolio/apps/<slug>` es ahora lo primero que se ve de una app: la
  * infografía de dos minutos (titular · cifras · para quién · el proceso en
- * BPMN · qué tiene · límites · dónde está). El detalle que construyó el S5
- * bajó un nivel, a `/portafolio/apps/<slug>/detalle`, y se llega con el botón
- * «Ver la ficha completa».
+ * BPMN · qué aporta · límites · dónde está). El detalle que construyó el S5 lo
+ * reemplazó el brochure del S28, a `/portafolio/apps/<slug>/brochure`, y se
+ * llega con el botón «Ver brochure».
  *
  * 100% SSG: `generateStaticParams` cruza idiomas con los slugs de los exports.
  * La ficha se arma de export + complemento (`data/fichas/<slug>.yaml`) y si a
@@ -113,7 +113,7 @@ export default async function FichaTecnicaAppPage({ params }: Params) {
           <FichaTecnica
             datos={ft}
             locale={l}
-            hrefDetalle={`/portafolio/apps/${app}/detalle`}
+            hrefBrochure={`/portafolio/apps/${app}/brochure`}
             hrefSimulacion={
               getSimulacion(app)
                 ? `/portafolio/apps/${app}/simulacion`

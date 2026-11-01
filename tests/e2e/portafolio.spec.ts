@@ -9,6 +9,9 @@ import { textoVisible } from "./texto-visible";
  *     los dos idiomas, sin idioma y con la consulta intacta. Las pide la CI con
  *     `maxRedirects: 0`: lo que se prueba es la respuesta, no a dónde acaba el
  *     navegador.
+ *     Y las páginas que reemplazó el brochure (S28): el detalle de una app y la
+ *     página de la casa llegan a su `/brochure` EN UN SOLO SALTO, también desde
+ *     la ruta de la «vitrina»; el destino responde 200, no otra redirección.
  *  2. Ninguna página del sitemap dice «vitrina» ni «showcase» en el texto que el
  *     visitante lee (ni en un `alt`, `aria-label` o `title`) ni en lo que ve un
  *     buscador o una vista previa (`<meta content>`, JSON-LD: `texto-visible.ts`).
@@ -30,6 +33,17 @@ test.describe("las rutas viejas redirigen con 301", () => {
       "/en/portafolio/apps/planlang/simulacion",
     ],
     ["/es/vitrina/agentes", "/es/portafolio/agentes"],
+    // El brochure reemplazó al detalle y a la página de la casa (S28): un solo salto.
+    ["/es/portafolio/apps/habla/detalle", "/es/portafolio/apps/habla/brochure"],
+    [
+      "/en/vitrina/apps/habla/detalle?utm=x",
+      "/en/portafolio/apps/habla/brochure?utm=x",
+    ],
+    ["/es/apps/hoja-de-vida", "/es/portafolio/apps/hoja-de-vida/brochure"],
+    [
+      "/apps/chat-hoja-de-vida",
+      "/es/portafolio/apps/chat-hoja-de-vida/brochure",
+    ],
   ]) {
     test(`${vieja} → ${nueva}`, async ({ request }) => {
       const res = await request.get(vieja, { maxRedirects: 0 });
@@ -39,6 +53,9 @@ test.describe("las rutas viejas redirigen con 301", () => {
         "http://localhost:3000",
       );
       expect(destino.pathname + destino.search).toBe(nueva);
+      // Un solo salto: el destino responde, no vuelve a redirigir.
+      const final = await request.get(nueva, { maxRedirects: 0 });
+      expect(final.status(), `${nueva} responde`).toBe(200);
     });
   }
 

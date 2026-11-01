@@ -1,0 +1,29 @@
+# El brochure de cada app y de la casa (Sprint 028, 2026-10-31).
+#
+# Una sola plantilla sirve a las diez apps del Portafolio y a las dos de la casa (CV Viva y su chat);
+# lo único que cambia por app, y que no viaja en su export ni en su contenido v2, vive aquí.
+#
+#  · `acento` — el color pastel de la piel de esa app: sage · sky · lilac · peach · rose · citron.
+#    La asignación es de FORMA (§ 2 de SPRINT_028) y se revisa en el gate humano del hito.
+#    Todos los pares de color que usa la hoja cumplen AA: lo prueba tests/unit/brochure-contraste.test.ts.
+#  · `datos_sinteticos` — si las capturas de esa app llevan la etiqueta «datos sintéticos». Es verdadero
+#    en las diez apps; falso en las dos de la casa, que son este mismo sitio, sin datos de ejemplo.
+#  · `ejemplos_busqueda` (opcional) — lo que sugiere la caja del buscador; sin él, una frase general.
+#
+# Un slug sin entrada rompe el build (src/lib/brochure/config.ts) y el test nombra el que falta o sobra.
+apps:
+  inmobiliaria:
+    acento: sage
+    datos_sinteticos: true
+    ejemplos_busqueda: { es: "sello, cuota, WhatsApp", en: "badge, payment, WhatsApp" }
+  nutri-kids: { acento: sage, datos_sinteticos: true }
+  big-d: { acento: sky, datos_sinteticos: true }
+  hackguard: { acento: sky, datos_sinteticos: true }
+  anonimizador: { acento: lilac, datos_sinteticos: true }
+  planlang: { acento: lilac, datos_sinteticos: true }
+  copiloto-consultor: { acento: peach, datos_sinteticos: true }
+  habla: { acento: peach, datos_sinteticos: true }
+  dash-agent-ai: { acento: citron, datos_sinteticos: true }
+  chat-hoja-de-vida: { acento: citron, datos_sinteticos: false }
+  ds: { acento: rose, datos_sinteticos: true }
+  hoja-de-vida: { acento: rose, datos_sinteticos: false }

@@ -25,6 +25,17 @@ const ROOT = process.cwd();
 
 const leerYaml = (rel) => parse(readFileSync(path.join(ROOT, rel), "utf8"));
 
+/**
+ * Las dos de la casa (CV Viva y su chat, S28): tienen brochure pero no son apps del
+ * Portafolio, así que no están en el loader. Sus entregas viven en `content/vitrina/casa/`.
+ */
+function slugsDeLaCasa() {
+  const dir = path.join(ROOT, "content", "vitrina", "casa");
+  return (existsSync(dir) ? readdirSync(dir) : [])
+    .filter((f) => f.endsWith(".brochure-export.json"))
+    .map((f) => JSON.parse(readFileSync(path.join(dir, f), "utf8")).app.slug);
+}
+
 /** Las publicaciones de «Métodos»: `{slug, nombre: {es, en}}` por cada archivo de `data/metodo/`. */
 function piezasDeMetodo() {
   const dir = path.join(ROOT, "data", "metodo");
@@ -106,10 +117,6 @@ export function rutasDeDatos() {
     }
   }
 
-  for (const app of leerYaml("data/apps.yaml").apps ?? []) {
-    if (app.brochure) rutas.add(`/apps/${app.id}`);
-  }
-
   for (const frente of leerYaml("data/vitrina.yaml").categorias ?? []) {
     // Un frente en preparación TIENE página (lo declara y ofrece la lista de
     // espera); lo que no publica son sus piezas.
@@ -122,8 +129,11 @@ export function rutasDeDatos() {
         if (!f.endsWith(".brochure-export.json")) continue;
         const { app } = JSON.parse(readFileSync(path.join(dir, f), "utf8"));
         rutas.add(`/portafolio/apps/${app.slug}`);
-        rutas.add(`/portafolio/apps/${app.slug}/detalle`);
+        rutas.add(`/portafolio/apps/${app.slug}/brochure`);
       }
+      // El brochure de las dos de la casa: CV Viva y su chat.
+      for (const slug of slugsDeLaCasa())
+        rutas.add(`/portafolio/apps/${slug}/brochure`);
       continue;
     }
 
@@ -190,10 +200,6 @@ export function nombresDeDestinos(locale) {
       nombres.set(`/proyectos/${p.slug}`, nombreCortoDeProyecto(p.nombre));
   }
 
-  for (const app of leerYaml("data/apps.yaml").apps ?? []) {
-    if (app.brochure) nombres.set(`/apps/${app.id}`, app.nombre[locale]);
-  }
-
   // Nombre de la pieza (ADR-028, adenda del S22): el mismo que da la página.
   const deLasPiezas = leerNombresDePiezas();
   for (const frente of leerYaml("data/vitrina.yaml").categorias ?? []) {
@@ -208,8 +214,14 @@ export function nombresDeDestinos(locale) {
         const { app } = JSON.parse(readFileSync(path.join(dir, f), "utf8"));
         const nombre = oficiales.get(app.slug) ?? app.nombre;
         nombres.set(`/portafolio/apps/${app.slug}`, nombre);
-        nombres.set(`/portafolio/apps/${app.slug}/detalle`, nombre);
+        nombres.set(`/portafolio/apps/${app.slug}/brochure`, nombre);
       }
+      // Las de la casa se llaman como en `data/apps.yaml`: el export solo trae el español.
+      const deLaCasa = new Map(
+        (leerYaml("data/apps.yaml").apps ?? []).map((a) => [a.id, a.nombre[locale]]),
+      );
+      for (const slug of slugsDeLaCasa())
+        nombres.set(`/portafolio/apps/${slug}/brochure`, deLaCasa.get(slug) ?? slug);
       continue;
     }
     const dir = path.join(ROOT, "content", frente.id);

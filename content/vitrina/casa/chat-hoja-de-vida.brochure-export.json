@@ -1,0 +1,325 @@
+{
+  "_schema": {
+    "_lee_esto_primero": "Este bloque documenta el formato y no es dato de la app. Se conserva en cada export para que el esquema viaje con el archivo: quien lo consuma no necesita buscar otro documento. Las apps que adopten este formato copian este bloque tal cual y rellenan el resto.",
+    "_origen": "Definido por app-dash-agent-ai en su entrega de brochure (2026-08-19). Es el PRIMER export del portafolio; las demás apps lo adoptan.",
+    "_consumidor": "La vitrina de hoja-de-vida. Renderiza la ficha de cada app sin abrir su repositorio.",
+    "_regla_madre": "Toda cifra de `metricas[]` lleva su etiqueta de `fuente`. Es la regla dura 3 de Dash Agent AI aplicada a su propia ficha: una app que exige procedencia a cada número de su pantalla no puede publicar cifras sueltas sobre sí misma. Se recomienda al resto del portafolio.",
+    "schema_version": "semver del FORMATO, no de la app. Cambio mayor = campo eliminado o con significado distinto; menor = campo nuevo opcional; parche = documentación.",
+    "app.estado": "\"inicial\" mientras el brochure describe la construcción cerrada; \"sellado\" cuando el gate de pruebas del usuario terminó. `sellado_en` es null hasta entonces.",
+    "funcionalidades.total": "El número que el brochure declara en su pie. `fuente_del_conteo` dice contra qué documento se cuadró — sin eso, el total es una afirmación.",
+    "funcionalidades.descartadas": "Las que se construyeron o se planearon y NO existen. Van aquí con su razón y su fecha para que nadie las cuente como pendientes ni como entregadas.",
+    "metricas[].fuente": "Una de cuatro: \"medido\" (salió de un contador o un comando), \"calculada\" (medido operado con una tarifa o una regla, y se dice cuál), \"declarado\" (lo fijó una persona), \"estimacion\" (deducido). Una cifra sin fuente no entra.",
+    "enlaces.produccion": "null cuando la app no tiene URL pública. `razon` explica por qué, y es lo que la vitrina muestra en lugar del enlace. Nunca se rellena con un enlace de repositorio ni con una promesa."
+  },
+  "schema_version": "1.0.0",
+  "actualizado": "2026-10-31",
+  "app": {
+    "slug": "chat-hoja-de-vida",
+    "nombre": "Chat con mi hoja de vida",
+    "ciclo": "H-2",
+    "estado": "inicial",
+    "sellado_en": null,
+    "sprints_cerrados": 26,
+    "version_repo": "0.1.0"
+  },
+  "promesa": {
+    "tagline": "Pregúntale a la hoja de vida: responde con lo que consta y cita su fuente.",
+    "intro": "El chat de CV Viva contesta en español o en inglés sobre la trayectoria de Henry Rincón, siempre en tercera persona y solo con el contenido del sitio: la hoja de vida, 25 documentos de fondo, las fichas del Portafolio y las publicaciones de Métodos. Cada afirmación lleva su cita a la sección que la respalda, y si el proveedor de IA cae, sigue respondiendo con búsqueda local.",
+    "para_quien": "Para quien recluta y quiere una respuesta concreta («¿qué hizo en Vesting?», «¿qué sabe de Microsoft Fabric?») sin leer el sitio entero, y para quien quiere comprobarla: cada respuesta dice de dónde sale y lleva allí. Lo que no consta no se contesta, y lo dice.",
+    "diferencial": "Un chat de CV que no inventa no basta con un buen prompt. Aquí lo que no consta (lo que no hizo, lo que no sabe, el salario, una credencial que no tiene) recibe un texto fijo antes de llegar al modelo, sin gastar un token; la salida de Vesting tiene su respuesta fija con su cita, y el panel enseña solo las fuentes que la respuesta cita. Detrás hay un índice que se arma en cada publicación y un banco de 175 preguntas de afuera, por idioma, que prueba en cada cambio que el contenido contesta. Y nunca se queda mudo: si el proveedor falla, la misma búsqueda corre en el navegador."
+  },
+  "funcionalidades": {
+    "total": 18,
+    "fuente_del_conteo": "docs/MANUAL-DE-USO.md",
+    "descartadas": [],
+    "grupos": [
+      {
+        "orden": 1,
+        "estrella": true,
+        "nombre": "Responde con la fuente a la vista",
+        "linea": "Cada afirmación lleva su número, y cada número lleva a la sección del sitio que la respalda.",
+        "features": [
+          {
+            "id": "CH-01",
+            "nombre": "Respuestas que citan la hoja de vida",
+            "que_hace": "Quien pregunta recibe dos o tres párrafos basados solo en el contenido del sitio, y cada afirmación termina con su cita. El chip dice de qué fuente salió la frase y a qué sección lleva, sin perder la conversación.",
+            "seccion_manual": "El chat que responde sobre Henry"
+          },
+          {
+            "id": "CH-02",
+            "nombre": "Siempre en tercera persona",
+            "que_hace": "El chat habla de Henry, nunca como Henry. El contenido de fondo está en primera persona porque es su voz, y la respuesta lo pasa a tercera; una prueba marca la voz del dueño si se cuela.",
+            "seccion_manual": "El chat que responde sobre Henry"
+          },
+          {
+            "id": "CH-03",
+            "nombre": "Las fichas y los Métodos, también citables",
+            "que_hace": "El índice suma las fichas del Portafolio y las publicaciones de Métodos, bloque a bloque: una pregunta por una app o por un método trae su cita, que lleva a la ficha o al bloque exacto.",
+            "seccion_manual": "Las fichas del portafolio también hablan por el chat"
+          }
+        ]
+      },
+      {
+        "orden": 2,
+        "estrella": false,
+        "nombre": "Lo que no consta, no se contesta",
+        "linea": "Las ausencias, el salario o una pregunta ajena reciben un texto fijo, sin llamar al modelo ni gastar un token.",
+        "features": [
+          {
+            "id": "CH-04",
+            "nombre": "Un solo texto para lo que no consta",
+            "que_hace": "«¿Qué no ha hecho nunca?», sus debilidades, una credencial que no tiene, el salario o la disponibilidad reciben el mismo texto fijo, en el idioma de la página, sin fuentes y sin llamar al modelo.",
+            "seccion_manual": "Lo que el chat no contesta, y qué fuentes enseña"
+          },
+          {
+            "id": "CH-05",
+            "nombre": "La salida de Vesting, con su cita",
+            "que_hace": "«¿Por qué salió de Vesting?» tiene una respuesta fija que cuenta cómo cerró la etapa, con su cita a la Trayectoria. No añade causas que el contenido no da y no gasta un token.",
+            "seccion_manual": "Lo que el chat no contesta, y qué fuentes enseña"
+          },
+          {
+            "id": "CH-06",
+            "nombre": "Las preguntas ajenas, fuera",
+            "que_hace": "El clima, un chiste, una receta o un pedido de código reciben una respuesta amable fija que invita a preguntar por la trayectoria, sin fuentes y sin llamar al modelo.",
+            "seccion_manual": "El chat que responde sobre Henry"
+          }
+        ]
+      },
+      {
+        "orden": 3,
+        "estrella": false,
+        "nombre": "Nunca se queda mudo",
+        "linea": "Si el proveedor cae o se queda sin cuota, sigue con búsqueda local; cambiar de proveedor es cambiar una variable.",
+        "features": [
+          {
+            "id": "CH-07",
+            "nombre": "Búsqueda local si el proveedor falla",
+            "que_hace": "Si el proveedor se cae o se agota su cuota, el chat pasa a «Búsqueda local» y muestra los fragmentos que mejor responden. Tras tres fallas seguidas deja de intentarlo durante un minuto.",
+            "seccion_manual": "El chat que responde sobre Henry"
+          },
+          {
+            "id": "CH-08",
+            "nombre": "Cinco proveedores, una variable",
+            "que_hace": "Groq, Gemini, Azure con Microsoft Foundry (antes Azure AI Foundry), Anthropic o un servidor propio compatible con OpenAI: cambiar de proveedor es cambiar una variable de entorno, sin tocar código.",
+            "seccion_manual": "El chat que responde sobre Henry"
+          },
+          {
+            "id": "CH-09",
+            "nombre": "Un interruptor que lo apaga",
+            "que_hace": "Una variable apaga el chat entero: el botón desaparece de todas las páginas y la ruta del servidor responde que está apagado.",
+            "seccion_manual": "El chat que responde sobre Henry"
+          }
+        ]
+      },
+      {
+        "orden": 4,
+        "estrella": false,
+        "nombre": "Una puerta y un cupo",
+        "linea": "Nombre, correo y un código antes de la primera pregunta; un cupo por persona y una lista de bloqueados.",
+        "features": [
+          {
+            "id": "CH-10",
+            "nombre": "La puerta: nombre, correo y un código",
+            "que_hace": "Antes de la primera pregunta, quien visita deja su nombre y su correo, acepta el aviso de la Ley 1581 y recibe un código de seis dígitos que vale diez minutos. Con él entra y no vuelve a registrarse en 30 días.",
+            "seccion_manual": "El chat pide nombre y correo, y guarda cada conversación"
+          },
+          {
+            "id": "CH-11",
+            "nombre": "Cada conversación, registrada con permiso",
+            "que_hace": "Cada pregunta queda registrada con su respuesta, sus fuentes y su modo (IA, texto fijo o búsqueda local), y solo el dueño la lee. Quien quiera que se borre lo pide desde Contacto.",
+            "seccion_manual": "El chat pide nombre y correo, y guarda cada conversación"
+          },
+          {
+            "id": "CH-12",
+            "nombre": "Un cupo por persona y una lista de bloqueados",
+            "que_hace": "Cada correo tiene 20 preguntas cada 24 horas, contadas en el registro, y quien llega al tope ve que vuelva mañana. Un correo en la lista de bloqueados no recibe código ni puede preguntar.",
+            "seccion_manual": "Cómo está protegido el chat, y cómo bloquear a alguien"
+          },
+          {
+            "id": "CH-13",
+            "nombre": "Avisar a Henry sin salir del chat",
+            "que_hace": "Si algo falla, «¿Algo no funciona? Avisa a Henry» manda un aviso con un texto opcional. Dentro del chat no pide el correo: el servidor lo toma de la sesión.",
+            "seccion_manual": "El chat pide nombre y correo, y guarda cada conversación"
+          }
+        ]
+      },
+      {
+        "orden": 5,
+        "estrella": false,
+        "nombre": "La conversación es tuya",
+        "linea": "Sigue al recargar, al navegar o al cambiar de idioma; vence a las 8 horas y se borra con un clic.",
+        "features": [
+          {
+            "id": "CH-14",
+            "nombre": "Se queda en tu navegador, y la borras",
+            "que_hace": "La conversación sobrevive a recargar la página, seguir un enlace o cambiar de idioma. Se borra sola 8 horas después del último mensaje, y «Borrar conversación» la quita de ese navegador.",
+            "seccion_manual": "Lo que el chat no contesta, y qué fuentes enseña"
+          },
+          {
+            "id": "CH-15",
+            "nombre": "En español y en inglés",
+            "que_hace": "El panel, las respuestas fijas y las fuentes salen en el idioma de la página, y las listas del rehúso leen los dos idiomas, sea cual sea el de la página.",
+            "seccion_manual": "El chat que responde sobre Henry"
+          }
+        ]
+      },
+      {
+        "orden": 6,
+        "estrella": false,
+        "nombre": "Probado pregunta por pregunta",
+        "linea": "Un índice que se arma en cada publicación y un banco de preguntas que prueba, en dos idiomas, que el contenido contesta.",
+        "features": [
+          {
+            "id": "CH-16",
+            "nombre": "Un índice que se arma al publicar",
+            "que_hace": "Cada publicación vuelve a armar el índice desde la hoja de vida, los documentos de fondo, las fichas y los Métodos. Un documento en borrador no entra, y uno aprobado exige su gemelo en inglés.",
+            "seccion_manual": "Cómo alimentar el «a fondo» (el combustible del chat)"
+          },
+          {
+            "id": "CH-17",
+            "nombre": "Un banco de preguntas de afuera",
+            "que_hace": "Cada corrida de pruebas hace 175 preguntas por idioma, con las palabras de quien recluta, y exige que cada una traiga la fuente que debería contestarla.",
+            "seccion_manual": "Cómo se prueba que el contenido contesta"
+          },
+          {
+            "id": "CH-18",
+            "nombre": "La prueba con el proveedor real, con permiso",
+            "que_hace": "La integración continua usa un proveedor simulado. Una pasada aparte, solo en el equipo del dueño y con su permiso, hace las preguntas de la guía al modelo real y marca cada respuesta.",
+            "seccion_manual": "Lo que el chat no contesta, y qué fuentes enseña"
+          }
+        ]
+      }
+    ]
+  },
+  "metricas": [
+    {
+      "clave": "funcionalidades",
+      "etiqueta": "Funcionalidades del chat",
+      "valor": 18,
+      "unidad": "funcionalidades",
+      "fuente": "medido",
+      "detalle": "Una por función del chat documentada en docs/MANUAL-DE-USO.md en b9acf15, cuadrada sección por sección; la lista, en la respuesta 028 de la planeadora."
+    },
+    {
+      "clave": "fragmentos_del_indice",
+      "etiqueta": "Fragmentos del índice",
+      "valor": 1939,
+      "unidad": "fragmentos",
+      "fuente": "medido",
+      "detalle": "Salida de scripts/build-chat-index.mjs en el build de una copia de b9acf15 el 2026-10-31: 1939 fragmentos en español y 1930 en inglés."
+    },
+    {
+      "clave": "documentos_a_fondo",
+      "etiqueta": "Documentos de fondo indexados",
+      "valor": 25,
+      "unidad": "documentos",
+      "fuente": "medido",
+      "detalle": "Misma salida del build: 25 de 25 documentos «a fondo» aprobados e indexados en cada idioma."
+    },
+    {
+      "clave": "preguntas_del_banco",
+      "etiqueta": "Preguntas del banco, por idioma",
+      "valor": 175,
+      "unidad": "preguntas",
+      "fuente": "medido",
+      "detalle": "Preguntas legítimas de tests/fixtures/banco-de-preguntas.es.yaml en b9acf15, y las mismas 175 en inglés; el banco suma además 15 ajenas, 1 de rehúso y 3 sin cobertura por idioma."
+    },
+    {
+      "clave": "pruebas_e2e_del_chat",
+      "etiqueta": "Pruebas de punta a punta del chat",
+      "valor": 94,
+      "unidad": "pruebas",
+      "fuente": "medido",
+      "detalle": "Salida de `playwright test --list` sobre una copia de b9acf15: chat.spec.ts y chat-conversacion.spec.ts, 47 en Chromium y 47 en móvil, con el proveedor simulado."
+    },
+    {
+      "clave": "proveedores_conmutables",
+      "etiqueta": "Proveedores conmutables",
+      "valor": 5,
+      "unidad": "proveedores",
+      "fuente": "medido",
+      "detalle": "PROVEEDORES_CHAT en src/lib/ia/provider.ts en b9acf15, sin el simulado de las pruebas: Groq, Gemini, Azure, Anthropic y uno compatible con OpenAI."
+    },
+    {
+      "clave": "fuentes_por_respuesta",
+      "etiqueta": "Fragmentos por respuesta",
+      "valor": 4,
+      "unidad": "fragmentos",
+      "fuente": "declarado",
+      "detalle": "TOP_K_CONTEXTO en src/lib/ia/retrieval.ts: los cuatro fragmentos que el modelo recibe numerados y puede citar."
+    },
+    {
+      "clave": "tope_diario",
+      "etiqueta": "Preguntas por persona cada 24 horas",
+      "valor": 20,
+      "unidad": "preguntas",
+      "fuente": "declarado",
+      "detalle": "TOPE_DIARIO_DEFECTO en src/lib/chat-registro/schemas.ts; el dueño lo cambia con la variable CHAT_TOPE_DIARIO, de 1 a 1000."
+    },
+    {
+      "clave": "tokens_en_respuestas_fijas",
+      "etiqueta": "Tokens en las respuestas fijas",
+      "valor": 0,
+      "unidad": "tokens",
+      "fuente": "declarado",
+      "detalle": "Por construcción: el rehúso, la pregunta ajena y la salida de Vesting se responden en src/app/api/chat/route.ts antes de resolver el proveedor, así que no llaman al modelo."
+    },
+    {
+      "clave": "costo_operacion_mensual",
+      "etiqueta": "Costo de operación mensual",
+      "valor": 0,
+      "unidad": "USD",
+      "fuente": "declarado",
+      "detalle": "Lo declara el manual: el proveedor de producción, Groq, va en su plan Free, que no cobra y solo corta al acabarse la cuota; si se agota, el chat pasa a búsqueda local."
+    }
+  ],
+  "stack": [
+    {
+      "nombre": "Vercel AI SDK",
+      "papel": "la respuesta en streaming y el adaptador que cambia de proveedor con una variable"
+    },
+    {
+      "nombre": "Groq y cuatro proveedores más",
+      "papel": "el modelo de producción en su plan gratis; Gemini, Azure con Microsoft Foundry, Anthropic o un servidor propio entran sin tocar código"
+    },
+    {
+      "nombre": "MiniSearch",
+      "papel": "el índice léxico que se arma en cada publicación y que usan el servidor y la búsqueda local del navegador"
+    },
+    {
+      "nombre": "Supabase",
+      "papel": "el registro de cada conversación, el cupo por correo y la lista de bloqueados"
+    },
+    {
+      "nombre": "Resend",
+      "papel": "el código de seis dígitos de la puerta y los avisos que llegan al dueño"
+    },
+    {
+      "nombre": "Zod",
+      "papel": "valida cada pregunta (800 caracteres, 12 mensajes) y cada fragmento del índice antes de armarlo"
+    },
+    {
+      "nombre": "Next.js",
+      "papel": "la ruta del chat en el servidor, con la sesión firmada en una cookie y el prompt armado solo allí"
+    },
+    {
+      "nombre": "Vitest y Playwright",
+      "papel": "las pruebas con un proveedor simulado: la integración continua jamás llama a un modelo real"
+    }
+  ],
+  "privacidad": {
+    "usa_ia": true,
+    "consentimiento_explicito": true,
+    "conversacion_registrada": true,
+    "conversacion_en_el_navegador": true,
+    "detalle": "Antes de la primera pregunta se piden nombre y correo y se acepta el aviso de la Ley 1581. Cada pregunta queda registrada con su respuesta, sus fuentes, su modo y el nombre y el correo de quien preguntó; ningún visitante puede leer ese registro, solo el dueño, y se borra a pedido desde Contacto. La copia del navegador no guarda el nombre ni el correo, solo las preguntas y las respuestas, y vence a las 8 horas. El modelo solo ve fragmentos públicos del sitio."
+  },
+  "enlaces": {
+    "produccion": null,
+    "razon": "El chat vive dentro de CV Viva, en el botón flotante de cada página. Esta ficha no publica su dirección: es la regla de cero enlaces del Portafolio.",
+    "repositorio": null,
+    "razon_repositorio": "El código no se enlaza desde el Portafolio: ninguna ficha publica enlaces de acceso ni de repositorio.",
+    "brochure_archivo": "data/apps.yaml (bloque brochure, ADR-012)",
+    "brochure_ruta_local": "/apps/chat-hoja-de-vida"
+  }
+}

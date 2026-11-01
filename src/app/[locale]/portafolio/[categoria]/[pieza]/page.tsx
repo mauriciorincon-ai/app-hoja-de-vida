@@ -21,7 +21,7 @@ import { esFrente, getPieza, getPiezas } from "@/lib/vitrina/piezas";
  *
  * Rinde `FichaTecnica`, el MISMO componente que usa una app: renderiza un
  * CONTRATO, no un tipo de pieza. La única diferencia con la ruta de una app es
- * lo que esta pieza no tiene: **no hay `hrefDetalle`**, porque una
+ * lo que esta pieza no tiene: **no hay `hrefBrochure`**, porque una
  * investigación o un agente no traen un brochure debajo. El cierre queda con la
  * lista de espera y nada más — cero promesas de lo que no existe.
  *
@@ -125,7 +125,7 @@ export default async function FichaDePiezaPage({ params }: Params) {
             </Link>
           </nav>
 
-          {/* Sin `hrefDetalle`: esta pieza no tiene un nivel debajo. */}
+          {/* Sin `hrefBrochure`: esta pieza no tiene un nivel debajo. */}
           <FichaTecnica datos={ficha} locale={l} />
 
           {(anterior || siguiente) && (

@@ -1,6 +1,5 @@
 # Capturas del pedido 026 de AngelGhost: el build del frontend (vite preview) con los datos sintéticos de la app
-# (clientes «Páramo Azul» y «Sur del Valle», del kit de muestra), sin Rust, sin audio y sin modelo. Viewport 1024×640 a
-# DPR 1.5 (archivo 1536×960), tema claro, interfaz en español; macOS salvo L4 (la muestra de Windows de la app).
+# (clientes «Páramo Azul» y «Sur del Valle», del kit de muestra), sin Rust, sin audio y sin modelo. Tomas con propósito (2026-10-31): cada pieza completa (la pantalla del cuaderno sin el rail, o la composición entera), centrada sobre el fondo de la app, con margen, y ampliada hasta llenar el lienzo (a DPR 3, en el ancho de ventana que más llena; archivo 1536×960), tema claro, interfaz en español; macOS salvo L4 (la muestra de Windows de la app).
 # Las que muestran la banda la ponen a su alto real sobre el cuaderno, que va a escala sobre el escritorio: son dos
 # ventanas reales del build en una misma imagen.
 portada: entrada.webp

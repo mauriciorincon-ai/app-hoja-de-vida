@@ -144,21 +144,24 @@ propios. Los números de la tabla no cambiaron; se midieron antes y después.
 | `scaleInBlur`   | scale(0.85)+blur(15px)→1 (cards)                                                                                                                                                                                                                                                                                                                                                                                                               |
 | `Counter`       | ease-out-cubic manual, ~1800ms, tabular-nums                                                                                                                                                                                                                                                                                                                                                                                                   |
 | `TimelineTrack` | rail SVG stroke-dashoffset 1.4s ease-out-expo; nodos scale(0)→1 ease-out-back sincronizados `800ms + x% × 1400ms`; cards ±32px                                                                                                                                                                                                                                                                                                                 |
-| `fadeInSlow`    | post-S8 — «leve, más marcada y lenta»: 1.2s, ease-out-expo, translateY(28px)+blur(8px)→0; escalón 140ms (Estudios, Certificaciones, cajas del portafolio asomado)                                                                                                                                                                                                                                                                               |
+| `fadeInSlow`    | post-S8 — «leve, más marcada y lenta»: 1.2s, ease-out-expo, translateY(28px)+blur(8px)→0; escalón 140ms (Estudios, Certificaciones; las filas de la puerta al Portafolio, a 60 ms)                                                                                                                                                                                                                                                                               |
 | `liftIn`        | post-S8 — la tarjeta aterriza: 1.4s, ease-in-out-cubic, translateY(70px)+rotateX(14°, perspectiva 900)+scale(.94)+blur(12px)→0; escalón 120ms (Skills)                                                                                                                                                                                                                                                                                         |
 | `CifraQueLlama` | post-S8 — el CHIP entero (fondo, borde, texto) **aparece a 1.5× y se encoge a 1×** con la entrada de su tarjeta: misma duración y misma curva que `fadeInSlow` (1.2s, ease-out-expo), mismo escalón (viaja como prop `retraso`, porque el `staggerChildren` del `Stagger` no llega a los nietos — medido), origen en su borde derecho; se repite en cada pasada como toda entrada. Sin disparador propio. Solo transform (cuenta de productos) |
 
 `Stagger` acepta `stagger` (segundos entre hermanos; default 80ms) y `as` (`div` · `ul` · `li`) desde post-S8:
-las cajas del portafolio se escalonan dentro de un `<ul>` real, y un `div` entre `ul` y `li` es HTML inválido.
+las cajas del portal y las filas de las puertas de la HOME se escalonan dentro de un `<ul>` real, y un `div` entre `ul` y `li` es HTML inválido.
 
 **Reglas duras:** solo `transform`/`opacity` en animaciones de scroll · `prefers-reduced-motion`
 salta al estado final sin movimiento, sin excepciones (hook global) · **vetado:** three.js/WebGL,
 animaciones infinitas (sweep/glitch/marquee), scroll-snap de deck, CDNs en `<head>`.
 
-> **Única excepción al veto de bucles — ADR-014 (S5):** se admite **un** bucle ambiental por
-> página y solo en la **firma del clímax** de una ficha del portafolio, con la tarjeta abierta,
-> apagado entero bajo `prefers-reduced-motion`. Es el privilegio del clímax del banco §2, no una
-> licencia general.
+> **Única excepción al veto de bucles — ADR-030 (S28, reemplaza al ADR-014):** el **brochure** de una
+> app (`/portafolio/apps/<app>/brochure`) conserva el movimiento ambiental de la maqueta aprobada —la
+> cinta de pantallas, las olas, las insignias y la rotación de la portada—, **siempre con un botón
+> visible de pausa** en la franja de la cinta (WCAG 2.2.2, nivel A; `[data-b-quieto]` los detiene todos)
+> y apagado entero bajo `prefers-reduced-motion`. Solo animan `transform`/`opacity`, y ninguna
+> animación negocia el presupuesto de rendimiento. No es una licencia general: en el resto del sitio
+> sigue vetado.
 
 ## Componentes canon
 
@@ -233,12 +236,17 @@ animaciones infinitas (sweep/glitch/marquee), scroll-snap de deck, CDNs en `<hea
   **tercer estado**: una credencial `en curso` lleva un chip `citron`/`citron-ink` mono 11 px
   «En curso» **en el sitio de la fecha** — el mismo chip de «en preparación» del portafolio — y no
   puede nombrarse en ningún titular sin esas palabras al lado (gate de contenido).
-- **Portafolio asomado**: las mismas cajas de frente del portal, sin variante, con un botón sage
-  «Explora el portafolio» (post-S8; antes «Entrar al portafolio»). La HOME enseña el portafolio, no la
-  copia. **Post-S8:** la sección se titula «Portafolio», las cuatro cajas aparecen levemente una a
-  una (`fadeInSlow` dentro de un `<ul>` escalonado, 140 ms), la cifra de **productos** —ya no
-  «piezas», en todo el copy visible— aparece a 1.5× y se encoge a su tamaño con la entrada de su caja —misma duración, misma curva, mismo escalón— en cada pasada, como chip entero y sin rebote (`CifraQueLlama`), y el cierre de
-  cada caja dice «Explora».
+- **La puerta al Portafolio en la HOME** (S28, OM-18; antes «Portafolio asomado», que repetía las cuatro cajas
+  del portal): `src/components/home/vitrina.tsx`, sección `#portafolio` (el ancla del chat y del catálogo de destinos),
+  entre Logros y Estudios. Tiene la forma de la puerta de «Métodos»: título Fraunces, una línea de contexto de 60
+  caracteres de ancho, **una fila por frente** (un enlace de mín. 44 px de alto, `r-md` 12 px, `sh-1`, con
+  `data-frente` y `data-estado`) y el botón `sage` «Explora mi portafolio →» a `/portafolio`; el botón del hero
+  también va ahí. Cada fila lleva una **píldora estática con la cuenta del frente** (mono 12 px; sage · sky ·
+  lilac · peach según el frente), su nombre y su `intro`; un frente en preparación pone «…» en la píldora y «En
+  preparación» donde los demás dicen su frase, sin cuenta inventada. El lector de pantalla oye «N publicados»
+  (la cifra visible es `aria-hidden`). Las filas aparecen levemente una a una (`fadeInSlow` dentro de un `<ul>`
+  escalonado, 60 ms). **Ninguna cuenta vive escrita:** salen de `getFrentes()` y `tests/unit/home-puerta-portafolio.test.tsx`
+  las mide del disco por su cuenta. La cuenta animada (`CifraQueLlama`) vive ahora solo en las cajas del portal.
 - **Roadmap embebido**: dentro de `/portafolio/apps` va como bloque con `border-t paper-2` y título
   `2xl` (no el `clamp` de sección de HOME). Misma isla de votación.
 
@@ -490,30 +498,47 @@ cifra `clamp(3.5rem,8vw,4.75rem)`; tres columnas dejaban dos huérfanos.
   100vw"`; se sirven de `/piezas/<frente>/…` —espacio propio—, **tal como llegaron**: convertirlas
   obligaría a editar la ficha de otra casa. Sin JS la pista sigue siendo una tira que se desliza
   con el dedo o la rueda.
-- **Tarjeta de grupo** (dentro de una ficha): `r-md`, borde paper-3. Cabecera `<h4><button>` —
-  jamás `<button><h4>` — con índice mono, icono del DS de la app de origen, nombre, línea y
-  chevron. Cerrada, el interior va con `visibility: hidden` (fuera del árbol de accesibilidad);
-  abierta, sus features **escalonan** a ~60 ms. Gobernada por la isla de **apertura por lectura**
-  (banco §7): abierta exactamente mientras está a la vista, y el toque manda para siempre.
 - **Chip de procedencia**: `r-full`, mono 10px uppercase, un pastel por origen —
   `sage`=medido · `sky`=calculada · `lilac`=declarado · `peach`=estimación. **Ninguna cifra se
   pinta sin él.**
-- **Tira y firma** (dibujo, no captura; desde el Sprint 026 la tira encabeza la ficha de detalle y es el
-  respaldo de la tarjeta del escaparate, que muestra la portada): SVG con los tokens de esta página. La **tira** resume las
+- **Tira** (dibujo, no captura; desde el Sprint 028 es solo el respaldo de la tarjeta del escaparate,
+  que muestra la portada): SVG con los tokens de esta página. La **tira** resume las
   ideas de la app en cuatro columnas (viewBox 320×92, rótulos mono 6px de **13 caracteres como
-  máximo**: uno más largo se toca con el vecino); la **firma** re-dibuja la escena clímax de su
-  brochure. Se declaran como dibujo en su pie: jamás fingen ser una captura. **Toda app con export
+  máximo**: uno más largo se toca con el vecino). (La **firma** del clímax y la tarjeta de grupo se
+  retiraron con el detalle, ADR-030.) Se declara como dibujo en su pie: jamás finge ser una captura. **Toda app con export
   lleva su tira** (diez desde 2026-10-11: AngelGhost, planlang, Big-D y HackGuard entraron sin ella y
   la muestra pintó el marco vacío) y **sin tira no se pinta ni el marco**; la gramática y la
   presencia las vigila `tests/unit/maquetas.test.tsx`, y el escaparate las cuenta en e2e.
 - **Captura**: pantalla real de la app hermana corriendo (1536×960, WebP ≤ 80 KB, datos
-  sintéticos), una por funcionalidad que tiene pantalla, en un carrusel dentro de la tarjeta de su
-  grupo (`GaleriaCarrusel`, patrón APG: sin rotación automática, botones apagados con
-  `aria-disabled`). Cada una lleva su pie visible —id y nombre de la funcionalidad, y una frase—;
+  sintéticos), una por funcionalidad que tiene pantalla: en el brochure, dentro del capítulo de su grupo; en la
+  galería de las fichas de los demás frentes, en un carrusel (`GaleriaCarrusel`, patrón APG: sin rotación
+  automática, botones apagados con `aria-disabled`). Cada una lleva su pie visible —id y nombre de la funcionalidad, y una frase—;
   la portada del escaparate es la pantalla de entrada. Una imagen retocada que se presenta como
   cruda miente igual que una maqueta que finge ser foto: las capturas llegan tal cual las toma la
   planeadora (`scripts/tema-cv-viva.mjs` se conserva: es el tema que ella puede leer para
   repintar una toma).
+- **Brochure de una app** (`/portafolio/apps/<app>/brochure`, S28, ADR-030): una plantilla para las doce, con
+  la gramática de la maqueta aprobada y los tokens de esta página; su hoja (`brochure.css`) vive anidada bajo
+  `[data-brochure]` en `@layer components` —nada global—, y `tests/unit/brochure-contraste.test.ts` la lee
+  contra la tabla de contraste (ningún hex suelto, y los `--color-*` globales iguales a la paleta).
+  - **Acento por app** (`data/brochure.yaml`): `sage` · `sky` · `lilac` · `peach` · `rose` · `citron`, cada
+    uno con su tinta (`--ac` / `--ac-ink`, ≥ 4.5 : 1 por par). Dos apps por acento; la asignación es de forma y se
+    revisa en el gate humano del hito.
+  - **Token «tenue sobre oscuro»** (`--tenue-oscuro`, el `ink-3` de la maqueta que sobre fondo oscuro mide
+    ≈ 6,9 : 1): permitido como color de texto **solo** en las seis reglas de las secciones oscuras que lista
+    la prueba (el buscador de la barra sobre la portada, la barra del dispositivo, el pie de pantalla, el
+    rótulo de la cinta, el pie final y las teclas del Recorrido); un séptimo uso falla. `ink-3` sigue vetado como texto en la
+    parte clara.
+  - **Movimiento ambiental con pausa:** la cinta de pantallas (un dock que crece ×2,2 con `transform`), las
+    olas, las insignias y la portada se mueven solas; un botón de pausa visible en la franja de la cinta las
+    detiene (`[data-b-quieto]`) y con «reducir movimiento» nada se mueve. Entradas: `.entra` / `.aparece` con
+    `data-motion`, así que el cinturón de `globals.css` las deja en su estado final sin JavaScript.
+  - **Estructura:** los capítulos son `<details>` (sin JS funcionan; Ctrl+F los abre); las fichas no anidan
+    controles (un botón de volteo a toda la ficha, `aria-pressed`, y la cita encima); las cajas del flujo
+    son una lista con su actor nombrado, nunca solo con color; una barra pegajosa bajo el header del sitio
+    lleva el índice. Las imágenes son diferidas (`Captura`): nada se pide antes de la primera pintura.
+  - **Impresión:** carta, vertical; se abre todo, los flujos se trazan a 700 px y las secciones lejanas
+    (`content-visibility: auto` al leer) se pintan enteras.
 - **Stack explicado** (ficha técnica, los cuatro frentes): las cápsulas son la vista comprimida y no llevan
   `title`; debajo, un `<details data-stack-detalle>` nativo («Para qué sirve cada uno») despliega
   «nombre — papel». Sin JavaScript y sin tooltip: el teléfono no tiene cursor. Su forma no depende de
@@ -528,7 +553,7 @@ cifra `clamp(3.5rem,8vw,4.75rem)`; tres columnas dejaban dos huérfanos.
   la misma caja; el botón desaparece y **el foco pasa al marco**. Sin JavaScript la pantalla
   completa es un enlace y funciona. Lo de dentro del marco es de la otra casa: ni se repinta ni
   se edita. En la ficha técnica, el cierre ofrece «Ver la simulación» (borde `sage-ink`, texto
-  `sage-ink`) junto a «Ver la ficha completa».
+  `sage-ink`) junto a «Ver brochure».
 
 ### «Métodos» · S10 → S20 (publicaciones largas en tercera persona)
 

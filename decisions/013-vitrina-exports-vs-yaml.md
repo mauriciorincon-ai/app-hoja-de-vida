@@ -1,6 +1,6 @@
 # ADR-013 — La vitrina de los exports frente al showcase propio del S4
 
-- **Status:** accepted (2026-08-22)
+- **Status:** accepted (2026-08-22); its detail layer (`…/detalle`) superseded by ADR-030 (2026-10-31) — exports stay the source, the brochure replaces the detail page
 - **Context:** Sprint 005 (branch `sprint-005/la-vitrina-de-los-seis`), primer sprint del ciclo H2.
   Resuelve el **O3** de la orden: la relación entre las páginas `/apps/[slug]` nacidas del YAML
   propio (S4) y la vitrina de los 6 `brochure-export.json` del portafolio.

@@ -56,19 +56,26 @@ const ALTERNATIVAS_NUMERO = [...NUMEROS_ES.keys()]
   .join("|");
 
 /**
+ * Cuenta las piezas de una carpeta POR SUFIJO, no por extensión (S28). Junto al
+ * export de cada app viven ahora otros JSON (`<slug>.contenido.json`, el contenido
+ * v2 del brochure) y una carpeta `casa/`: contar cada `.json` llevaba las diez
+ * apps a once. Una pieza es el archivo que la define, y nada más.
+ */
+export function cuentaPiezas(dir, sufijo) {
+  return existsSync(dir) ? readdirSync(dir).filter((f) => f.endsWith(sufijo)).length : 0;
+}
+
+/**
  * LA VERDAD, DERIVADA. Ninguna de estas cifras se escribe a mano: salen de los
  * mismos archivos con los que se construyen las páginas.
  */
 export function verdadesDelSitio() {
-  const cuenta = (rel) =>
-    existsSync(path.join(ROOT, rel))
-      ? readdirSync(path.join(ROOT, rel)).filter((f) => f.endsWith(".json")).length
-      : 0;
+  const cuenta = (rel, sufijo) => cuentaPiezas(path.join(ROOT, rel), sufijo);
 
-  const apps = cuenta("content/vitrina");
-  const agentes = cuenta("content/agentes");
-  const investigaciones = cuenta("content/investigaciones");
-  const tableros = cuenta("content/tableros");
+  const apps = cuenta("content/vitrina", ".brochure-export.json");
+  const agentes = cuenta("content/agentes", ".ficha-tecnica.json");
+  const investigaciones = cuenta("content/investigaciones", ".ficha-tecnica.json");
+  const tableros = cuenta("content/tableros", ".ficha-tecnica.json");
 
   const cv = parse(readFileSync(path.join(ROOT, "data/cv.es.yaml"), "utf8"));
   const certificaciones = cv.certificaciones ?? [];

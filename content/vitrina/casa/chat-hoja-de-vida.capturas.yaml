@@ -1,0 +1,21 @@
+# Capturas del chat de CV Viva — entrega 028 (planeadora, 2026-10-31). Build de producción de una copia aislada de
+# `b9acf15` (main tras el #106), servida en local con el entorno de sus e2e: el proveedor simulado (`CHAT_PROVIDER=mock`,
+# src/lib/ia/mock-model.ts), la puerta en memoria con código fijo y sin correo ni Supabase. Cero llamadas a un modelo
+# real: el texto de las respuestas de CH-01 y CH-03 es el del proveedor simulado; las fuentes, las que recupera el índice
+# real del build; las respuestas fijas (CH-04, CH-05, CH-06), las del código. CH-07, con el proveedor caído
+# (CHAT_MOCK_MODE=error); CH-12, con CHAT_TOPE_DIARIO=1. Quien pregunta se registra como «Visitante». El panel es fijo:
+# se toma en coordenadas de la ventana (1280 × 800, donde llega a su alto máximo) y se compone a DPR 3 sobre el fondo
+# de la app, con margen; interfaz en español, tema claro. La portada es la ventana entera, con el panel sobre la HOME.
+portada: entrada.webp
+capturas:
+  - { funcionalidad: CH-01, archivo: CH-01.webp, pie: { es: "Una respuesta con sus citas: los chips llevan a Vesting y a BI & decisión", en: "An answer with its citations: the chips lead to Vesting and BI & decision" } }
+  - { funcionalidad: CH-03, archivo: CH-03.webp, pie: { es: "La respuesta cita el Perfil, Vesting y una publicación de Métodos", en: "The answer cites the Profile, Vesting and a Methods publication" } }
+  - { funcionalidad: CH-04, archivo: CH-04.webp, pie: { es: "«¿Cuáles son sus debilidades?»: el texto fijo, sin fuentes", en: "«What are his weaknesses?»: the fixed text, with no sources" } }
+  - { funcionalidad: CH-05, archivo: CH-05.webp, pie: { es: "«¿Por qué salió de Vesting?»: la respuesta fija, con su cita", en: "«Why did he leave Vesting?»: the fixed answer, with its citation" } }
+  - { funcionalidad: CH-06, archivo: CH-06.webp, pie: { es: "Un chiste no se contesta: el chat invita a preguntar por la trayectoria", en: "A joke gets no answer: the chat invites a question about the career" } }
+  - { funcionalidad: CH-07, archivo: CH-07.webp, pie: { es: "Sin proveedor, «Búsqueda local» muestra los fragmentos que responden", en: "With no provider, local search shows the fragments that answer" } }
+  - { funcionalidad: CH-10, archivo: CH-10.webp, pie: { es: "La puerta del chat: nombre, correo y el aviso de la Ley 1581", en: "The chat's gate: name, email and the Law 1581 notice" } }
+  - { funcionalidad: CH-12, archivo: CH-12.webp, pie: { es: "El tope del día: «Llegaste al máximo de preguntas de hoy»", en: "The daily cap: you reached today's maximum of questions" } }
+  - { funcionalidad: CH-13, archivo: CH-13.webp, pie: { es: "«Avisa a Henry», abierto dentro del chat y sin pedir el correo", en: "«Tell Henry», opened inside the chat without asking for the email" } }
+  - { funcionalidad: CH-14, archivo: CH-14.webp, pie: { es: "Conversación borrada del navegador; el registro del servidor se conserva", en: "Conversation cleared from the browser; the server log is kept" } }
+sin_pantalla: [CH-02, CH-08, CH-09, CH-11, CH-15, CH-16, CH-17, CH-18]

@@ -1,11 +1,11 @@
 # Capturas de Big-D para CV Viva — pedido 026, planeadora, 2026-10-27. Base: app-big-d origin/main 84aa911, export
-# estático (build de producción) servido en la copia aislada. Viewport 1024×640 a deviceScaleFactor 1.5 (archivo de
-# 1536×960), tema claro, interfaz en español. Datos: los del repo (documentación pública de los fabricantes y el hospital
+# estático (build de producción) servido en la copia aislada. Tomas con propósito (2026-10-31): cada pieza completa, centrada sobre el fondo de la app, con margen, y ampliada hasta llenar el lienzo de 1536×960 (a DPR 3, en el ancho de ventana que más llena); la portada, página arriba;
+# tema claro, interfaz en español. Datos: los del repo (documentación pública de los fabricantes y el hospital
 # ficticio); F11 sale de la base sembrada de la app (plataformas ficticias Norte, Sur y Ejemplo); F6, de la propuesta real
 # de evidencias de Snowflake del 2026-10-05 reabierta como pendiente en la copia (carpeta «-ensayo»).
 portada: entrada.webp
 capturas:
-  - { funcionalidad: F1, archivo: F1.webp, pie: { es: "Visión general de Fabric: cada bloque se abre y muestra sus componentes", en: "Fabric overview: each block opens to show its components" } }
+  - { funcionalidad: F1, archivo: F1.webp, pie: { es: "Fabric en una página: seis capas y tres franjas, cada bloque con sus componentes", en: "Fabric on one page: six layers and three bands, each block with its components" } }
   - { funcionalidad: F2, archivo: F2.webp, pie: { es: "Ficha de un componente: qué hace, por qué importa, términos y fuentes", en: "A component sheet: what it does, why it matters, terms and sources" } }
   - { funcionalidad: F3, archivo: F3.webp, pie: { es: "El viaje de un dato por Fabric, paso a paso: aquí, el paso 3 de 8", en: "A datum's journey through Fabric, step by step: here, step 3 of 8" } }
   - { funcionalidad: F7, archivo: F7.webp, pie: { es: "Databricks, Fabric y Snowflake lado a lado, cada banda en su columna", en: "Databricks, Fabric and Snowflake side by side, each band in its column" } }

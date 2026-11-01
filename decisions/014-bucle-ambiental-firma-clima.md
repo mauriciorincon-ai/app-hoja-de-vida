@@ -1,6 +1,6 @@
 # ADR-014 — El bucle ambiental de la firma clímax
 
-- **Status:** accepted (2026-08-23)
+- **Status:** superseded by ADR-030 (2026-10-31) — the signature is gone with the detail page; ambient motion now has a visible pause control
 - **Context:** Sprint 005 (branch `sprint-005/la-vitrina-de-los-seis`), gate de mirada M1 → M2.
 
 ## Context

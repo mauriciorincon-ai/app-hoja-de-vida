@@ -1,6 +1,6 @@
 # ADR-012 — Brochure animada por app: schema y ruta SSG
 
-- **Status:** accepted (2026-07-20)
+- **Status:** superseded by ADR-030 (2026-10-31) — the `brochure` block of `data/apps.yaml` and the `/apps/<id>` route are gone
 - **Context:** Sprint 004 (branch `sprint-004/la-vitrina-completa`), pieza "brochure animada
   por app" de la VISION v1.1 (pedido directo del usuario).
 

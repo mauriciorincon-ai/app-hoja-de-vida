@@ -1,0 +1,3001 @@
+{
+  "schema_version": "2.0.0-borrador",
+  "app": "inmobiliaria",
+  "acento": "sage",
+  "portada": {
+    "resalta": {
+      "es": "sin comisión",
+      "en": "commission-free"
+    },
+    "pantallas": [
+      "H2-01",
+      "B4",
+      "H2-12",
+      "H2-08"
+    ],
+    "lugar": {
+      "es": "Bogotá",
+      "en": "Bogotá"
+    },
+    "categoria": {
+      "es": "Vivienda",
+      "en": "Housing"
+    },
+    "insignias": [
+      {
+        "simbolo": "✓",
+        "texto": {
+          "es": "Propietario verificado",
+          "en": "Verified owner"
+        },
+        "funcionalidad": "H2-02"
+      },
+      {
+        "simbolo": "$",
+        "texto": {
+          "es": "Comisión $0",
+          "en": "Zero commission"
+        },
+        "fuente": "promesa"
+      },
+      {
+        "simbolo": "◆",
+        "texto": {
+          "es": "Comprador verificado por WhatsApp",
+          "en": "WhatsApp-verified buyer"
+        },
+        "funcionalidad": "H2-06"
+      }
+    ]
+  },
+  "antes_despues": {
+    "titulo": {
+      "es": "Lo que cambia cuando vendes y compras directo",
+      "en": "What changes when you sell and buy direct"
+    },
+    "antes_rotulo": {
+      "es": "Hoy",
+      "en": "Today"
+    },
+    "despues_rotulo": {
+      "es": "Con Innmobiliaria",
+      "en": "With Innmobiliaria"
+    },
+    "prueba": {
+      "antes": {
+        "es": "≈ $12 millones",
+        "en": "≈ COP 12 million"
+      },
+      "despues": {
+        "es": "$0",
+        "en": "COP 0"
+      },
+      "texto": {
+        "es": "de comisión en una vivienda de $400 millones",
+        "en": "in commission on a COP 400 million home"
+      },
+      "fuente": "declarado",
+      "detalle": {
+        "es": "Con una inmobiliaria, la comisión de costumbre es el 3 % del precio: unos $12 millones en una vivienda de $400 millones. En Innmobiliaria, la comisión es $0.",
+        "en": "With a real-estate agency, the customary commission is 3% of the price: about COP 12 million on a COP 400 million home. On Innmobiliaria, the commission is zero."
+      },
+      "cita": "promesa"
+    },
+    "pares": [
+      {
+        "antes": {
+          "es": "Pagas el 3 % del precio a una inmobiliaria, o pagas por cada aviso.",
+          "en": "You pay an agency 3% of the price, or you pay for every ad."
+        },
+        "despues": {
+          "es": "Publicas gratis en tres pasos, y la comisión es $0.",
+          "en": "You list for free in three steps, and the commission is zero."
+        },
+        "funcionalidad": "A2",
+        "fuente": "promesa"
+      },
+      {
+        "antes": {
+          "es": "Nadie te dice si quien publica es el dueño, ni si quien escribe es real.",
+          "en": "Nobody tells you whether the seller owns the home, or whether the buyer is real."
+        },
+        "despues": {
+          "es": "El dueño muestra su certificado de tradición y el comprador prueba su WhatsApp.",
+          "en": "The owner shows their title certificate and the buyer proves their WhatsApp."
+        },
+        "funcionalidad": "H2-02",
+        "fuente": "promesa"
+      },
+      {
+        "antes": {
+          "es": "Un precio suelto: no sabes si está caro.",
+          "en": "A bare price: you can't tell if it's too high."
+        },
+        "despues": {
+          "es": "Su metro cuadrado frente a anuncios parecidos de la zona: en rango, por encima o sospechosamente barato.",
+          "en": "Its price per m² against similar listings nearby: in range, above, or suspiciously cheap."
+        },
+        "funcionalidad": "H2-12",
+        "fuente": "H2-12"
+      },
+      {
+        "antes": {
+          "es": "El papeleo llega al final, con sus sorpresas.",
+          "en": "The paperwork shows up at the end, with its surprises."
+        },
+        "despues": {
+          "es": "Antes de firmar sabes cuánto paga cada parte, qué documentos pedir y qué dice cada cláusula.",
+          "en": "Before you sign, you know what each side pays, which documents to ask for and what each clause says."
+        },
+        "funcionalidad": "H2-14",
+        "fuente": "H2-14"
+      },
+      {
+        "antes": {
+          "es": "La vivienda nueva se anuncia con un «precio desde».",
+          "en": "New homes are advertised with a \"from\" price."
+        },
+        "despues": {
+          "es": "Ves lo mínimo que pagas: el «desde» más el registro y el parqueadero que se cobra aparte.",
+          "en": "You see the least you'll pay: the \"from\" price plus registration and parking sold separately."
+        },
+        "funcionalidad": "H2-16",
+        "fuente": "H2-16"
+      },
+      {
+        "antes": {
+          "es": "Anuncios abandonados que siguen apareciendo.",
+          "en": "Abandoned listings that keep showing up."
+        },
+        "despues": {
+          "es": "Cada anuncio dura 60 días; si nadie lo renueva, deja de verse sin borrarse.",
+          "en": "Each listing lasts 60 days; if nobody renews it, it stops showing without being deleted."
+        },
+        "funcionalidad": "B3",
+        "fuente": "B3"
+      }
+    ],
+    "corto": {
+      "es": "Lo que cambia",
+      "en": "What changes"
+    },
+    "para_quien_titulo": {
+      "es": "Para quién y por qué",
+      "en": "Who it is for, and why"
+    }
+  },
+  "mapa": {
+    "intro": {
+      "es": "De arriba abajo, en el orden en que pasa una venta: el dueño publica, quien compra encuentra y decide, y los dos se encuentran verificados. A la derecha, lo que atraviesa todo.",
+      "en": "Top to bottom, in the order a sale happens: the owner lists, the buyer finds and decides, and both meet verified. On the right, what runs through everything."
+    },
+    "capas": [
+      {
+        "nombre": {
+          "es": "El dueño publica",
+          "en": "The owner lists"
+        },
+        "sub": {
+          "es": "Gratis, en tres pasos y con su sello",
+          "en": "Free, in three steps, with their badge"
+        },
+        "grupos": [
+          1,
+          2,
+          3,
+          10
+        ]
+      },
+      {
+        "nombre": {
+          "es": "Quien compra encuentra y decide",
+          "en": "The buyer finds and decides"
+        },
+        "sub": {
+          "es": "Sin cuenta y con los números a la vista",
+          "en": "No account, with the numbers in plain sight"
+        },
+        "grupos": [
+          5,
+          8,
+          9
+        ]
+      },
+      {
+        "nombre": {
+          "es": "Se encuentran, verificados",
+          "en": "They meet, verified"
+        },
+        "sub": {
+          "es": "Los dos lados prueban quiénes son",
+          "en": "Both sides prove who they are"
+        },
+        "grupos": [
+          6,
+          7
+        ]
+      }
+    ],
+    "transversal": {
+      "nombre": {
+        "es": "Lo que atraviesa todo",
+        "en": "What runs through everything"
+      },
+      "sub": {
+        "es": "Una persona del equipo, la ley y el código",
+        "en": "A team member, the law and the code"
+      },
+      "grupos": [
+        4
+      ],
+      "rasgos": [
+        {
+          "titulo": {
+            "es": "Cero IA",
+            "en": "Zero AI"
+          },
+          "texto": {
+            "es": "Toda la funcionalidad es código determinista.",
+            "en": "Every feature is deterministic code."
+          },
+          "fuente": "metricas",
+          "metrica": "modelos_de_ia"
+        },
+        {
+          "titulo": {
+            "es": "Ley 1581 por construcción",
+            "en": "Law 1581 by design"
+          },
+          "texto": {
+            "es": "Sin autorización expresa no hay registro.",
+            "en": "No explicit consent, no sign-up."
+          },
+          "fuente": "privacidad"
+        },
+        {
+          "titulo": {
+            "es": "Español e inglés",
+            "en": "Spanish and English"
+          },
+          "texto": {
+            "es": "Toda la app, con el mismo enlace.",
+            "en": "The whole app, on the same link."
+          },
+          "fuente": "H2-24"
+        },
+        {
+          "titulo": {
+            "es": "US$0 al mes",
+            "en": "US$0 a month"
+          },
+          "texto": {
+            "es": "Su operación cabe en capas gratuitas.",
+            "en": "It runs on free tiers."
+          },
+          "fuente": "metricas",
+          "metrica": "costo_operacion_mensual"
+        }
+      ]
+    }
+  },
+  "iconos": {
+    "1": "megafono",
+    "2": "lista",
+    "3": "foto",
+    "4": "escudo",
+    "5": "lupa",
+    "6": "sello",
+    "7": "calendario",
+    "8": "calculadora",
+    "9": "edificio",
+    "10": "idiomas"
+  },
+  "proceso_pantallas": {
+    "publica": "A2",
+    "enlace": "A3",
+    "completa": "B1",
+    "sello": "C1",
+    "vivo": "B3",
+    "busca": "H2-01",
+    "compara": "H2-12",
+    "verifica": "H2-06",
+    "tarjeta": "H2-08",
+    "confirma": "H2-11",
+    "renueva": "B3"
+  },
+  "servicios": {
+    "titulo": {
+      "es": "Vende directo, con la ayuda que tú eliges",
+      "en": "Sell direct, with the help you choose"
+    },
+    "texto": {
+      "es": "Vender directo te ahorra la comisión. Y para que lo hagas seguro, Innmobiliaria está lista para ofrecerte servicios individuales: tú eliges cuál o cuáles necesitas, a tu medida, sin costos ocultos ni ataduras a paquetes.",
+      "en": "Selling direct saves you the commission. And so you can do it with confidence, Innmobiliaria is ready to offer you individual services: you choose which ones you need, tailored to you, with no hidden costs and no bundles."
+    },
+    "fuente": "declarado",
+    "nota": {
+      "es": "Lo que hoy ya está listo en la app",
+      "en": "What is already live in the app"
+    },
+    "items": [
+      {
+        "funcionalidad": "H2-23",
+        "titulo": {
+          "es": "Sesión de fotos",
+          "en": "Photo session"
+        },
+        "texto": {
+          "es": "La pides desde tu anuncio y el equipo te escribe para acordar el día. Pedirla no cuesta ni compromete.",
+          "en": "You request it from your listing and the team messages you to set the day. Asking costs nothing and commits you to nothing."
+        }
+      },
+      {
+        "funcionalidad": "C1",
+        "titulo": {
+          "es": "Sello de propietario",
+          "en": "Owner badge"
+        },
+        "texto": {
+          "es": "Una persona del equipo ve tu certificado de tradición y te da el sello. Solo quedan la matrícula y la fecha.",
+          "en": "A team member looks at your title certificate and grants the badge. Only the registration number and the date are kept."
+        }
+      },
+      {
+        "funcionalidad": "H2-14",
+        "titulo": {
+          "es": "El papeleo, explicado",
+          "en": "Paperwork, explained"
+        },
+        "texto": {
+          "es": "Cuánto paga cada parte al escriturar, qué documentos pedir y qué dice cada cláusula, con la norma de cada cifra.",
+          "en": "What each side pays at deed signing, which documents to ask for and what each clause says, with the rule behind each figure."
+        }
+      },
+      {
+        "funcionalidad": "B2",
+        "titulo": {
+          "es": "Guías para vender sin intermediario",
+          "en": "Guides to sell without an agent"
+        },
+        "texto": {
+          "es": "Cómo tomar las fotos, el checklist legal y notarial, cómo sacar tu certificado en 10 minutos y cómo fijar el precio. Gratis.",
+          "en": "How to take the photos, the legal and notary checklist, how to get your certificate in 10 minutes and how to set the price. Free."
+        }
+      }
+    ]
+  },
+  "metricas_texto": {
+    "funcionalidades": {
+      "es": "Una por cada sección del manual de uso: 13 del primer ciclo y 24 del producto completo.",
+      "en": "One per section of the user manual: 13 from the first cycle and 24 from the complete product."
+    },
+    "pantallas": {
+      "es": "Las páginas de la app: 26 para quien vende, quien compra o el público, y 7 para el equipo.",
+      "en": "The app’s pages: 26 for sellers, buyers or the public, and 7 for the team."
+    },
+    "pruebas_unitarias": {
+      "es": "Las cuenta el propio conjunto de pruebas al correr. Revisan la lógica y cada componente, que el español y el inglés digan lo mismo, el lector del certificado y que ninguna cifra prohibida llegue a la pantalla.",
+      "en": "Counted by the test suite itself when it runs. They check the logic and every component, that Spanish and English say the same thing, the certificate reader, and that no forbidden figure reaches the screen."
+    },
+    "pruebas_e2e": {
+      "es": "Recorridos de punta a punta con un navegador de verdad, en móvil y en escritorio, contra una base de datos real.",
+      "en": "End-to-end journeys in a real browser, on mobile and desktop, against a real database."
+    },
+    "cobertura_lineas": {
+      "es": "Qué tanto de la lógica de la app recorren las pruebas. La integración continua no deja que baje, y el lector del certificado y las reglas antifraude tienen todos sus caminos cubiertos.",
+      "en": "How much of the app’s logic the tests run through. Continuous integration won’t let it drop, and the certificate reader and the anti-fraud rules have every path covered."
+    },
+    "decisiones_registradas": {
+      "es": "Las decisiones de arquitectura y de producto que quedaron escritas y numeradas en el repositorio.",
+      "en": "The architecture and product decisions written down and numbered in the repository."
+    },
+    "modelos_de_ia": {
+      "es": "Es una regla del producto: todo funciona con código determinista. Usar inteligencia artificial exigiría antes una decisión escrita.",
+      "en": "It’s a product rule: everything runs on deterministic code. Using AI would first require a written decision."
+    },
+    "costo_operacion_mensual": {
+      "es": "A este volumen, todo cabe en los planes gratuitos de sus servicios: alojamiento, fotos, base de datos, correos y analítica. Verificar el WhatsApp del comprador no cuesta. No incluye el dominio propio.",
+      "en": "At this volume, everything fits in its services’ free plans: hosting, photos, database, email and analytics. Verifying the buyer’s WhatsApp is free. The custom domain is not included."
+    }
+  },
+  "metodo": {
+    "ocultar": [
+      "peso_brochure"
+    ]
+  },
+  "grupos": [
+    {
+      "orden": 1,
+      "que_resuelve": {
+        "es": "Vender directo en Bogotá suele ser ir solo y sin herramientas. Aquí el dueño entra como fundador: ve cupos reales en su localidad, invita a otros dueños, su anuncio no se muere y recibe cuatro guías gratis.",
+        "en": "Selling directly in Bogotá usually means going it alone, with no tools. Here owners join as founders: real spots per locality, invites for other owners, listings that never go stale and four free guides."
+      },
+      "te_sirve": [
+        {
+          "texto": {
+            "es": "Eres dueño en Bogotá y quieres vender o arrendar directo, sin pagar comisión.",
+            "en": "You own a home in Bogotá and want to sell or rent it directly, with no commission."
+          },
+          "fuente": "promesa"
+        },
+        {
+          "texto": {
+            "es": "Quieres saber cuántos cupos de fundador quedan en tu localidad antes de publicar.",
+            "en": "You want to know how many founder spots are left in your locality before you list."
+          },
+          "fuente": "C7a"
+        },
+        {
+          "texto": {
+            "es": "Conoces a otros dueños y quieres invitarlos con tu propio enlace por WhatsApp.",
+            "en": "You know other owners and want to invite them over WhatsApp with your own link."
+          },
+          "fuente": "C7b"
+        }
+      ],
+      "no_es": [
+        {
+          "texto": {
+            "es": "No es un contador de urgencia: donde el equipo no fijó cupo, no aparece ninguna cifra.",
+            "en": "It is not an urgency counter: where the team has set no quota, no number appears."
+          },
+          "fuente": "C7a"
+        },
+        {
+          "texto": {
+            "es": "Las guías citan sus fuentes, pero no reemplazan la asesoría de un abogado ni de un notario.",
+            "en": "The guides cite their sources, but they do not replace advice from a lawyer or a notary."
+          },
+          "fuente": "B2"
+        }
+      ],
+      "flujo": {
+        "titulo": {
+          "es": "Del cupo de fundador al anuncio que sigue vivo",
+          "en": "From a founder spot to a listing that stays live"
+        },
+        "nodos": [
+          {
+            "id": "n1",
+            "tipo": "inicio",
+            "actor": "dueno",
+            "texto": {
+              "es": "Quiere vender directo en Bogotá",
+              "en": "Wants to sell directly in Bogotá"
+            }
+          },
+          {
+            "id": "n2",
+            "tipo": "tarea",
+            "actor": "dueno",
+            "texto": {
+              "es": "Toca «Asegura tu cupo» y publica",
+              "en": "Claims a founder spot and lists"
+            },
+            "funcionalidad": "C7a"
+          },
+          {
+            "id": "n3",
+            "tipo": "paralelo",
+            "actor": "app",
+            "texto": {
+              "es": "A la vez",
+              "en": "At the same time"
+            }
+          },
+          {
+            "id": "n4",
+            "tipo": "tarea",
+            "actor": "dueno",
+            "texto": {
+              "es": "Invita a otros dueños por WhatsApp",
+              "en": "Invites other owners on WhatsApp"
+            },
+            "funcionalidad": "C7b"
+          },
+          {
+            "id": "n5",
+            "tipo": "fin",
+            "actor": "dueno",
+            "texto": {
+              "es": "Ve cuántos publicaron con su enlace",
+              "en": "Sees how many listed with their link"
+            }
+          },
+          {
+            "id": "n6",
+            "tipo": "tarea",
+            "actor": "app",
+            "texto": {
+              "es": "Mantiene el anuncio vivo 60 días",
+              "en": "Keeps the listing live for 60 days"
+            },
+            "funcionalidad": "B3"
+          },
+          {
+            "id": "n7",
+            "tipo": "decision",
+            "actor": "dueno",
+            "texto": {
+              "es": "¿Lo renueva antes de que venza?",
+              "en": "Does the owner renew it in time?"
+            }
+          },
+          {
+            "id": "n8",
+            "tipo": "fin",
+            "actor": "app",
+            "texto": {
+              "es": "Deja de mostrarlo, sin borrarlo",
+              "en": "Hides it from the public, without deleting it"
+            }
+          }
+        ],
+        "aristas": [
+          {
+            "de": "n1",
+            "a": "n2"
+          },
+          {
+            "de": "n2",
+            "a": "n3"
+          },
+          {
+            "de": "n3",
+            "a": "n4"
+          },
+          {
+            "de": "n3",
+            "a": "n6"
+          },
+          {
+            "de": "n4",
+            "a": "n5"
+          },
+          {
+            "de": "n6",
+            "a": "n7"
+          },
+          {
+            "de": "n7",
+            "a": "n6",
+            "etiqueta": {
+              "es": "sí: 60 días más",
+              "en": "yes: 60 more days"
+            },
+            "vuelta": true
+          },
+          {
+            "de": "n7",
+            "a": "n8",
+            "etiqueta": {
+              "es": "no",
+              "en": "no"
+            }
+          }
+        ]
+      },
+      "fichas": [
+        {
+          "tipo": "concepto",
+          "pregunta": {
+            "es": "¿Qué es un cupo de fundador?",
+            "en": "What is a founder spot?"
+          },
+          "respuesta": {
+            "es": "Es uno de los lugares de fundador que el equipo abre en cada localidad de Bogotá. La cifra que ves es el cupo fijado menos los dueños que ya publicaron allí, contada en la base de datos. Donde no hay cupo fijado, no aparece ningún número.",
+            "en": "It is one of the founder places the team opens in each Bogotá locality. The number you see is the quota set minus the owners who already listed there, counted in the database. Where no quota is set, no number appears at all."
+          },
+          "fuente": "C7a"
+        },
+        {
+          "tipo": "diferencia",
+          "pregunta": {
+            "es": "¿Anuncio vencido o anuncio borrado?",
+            "en": "Expired listing or deleted listing?"
+          },
+          "respuesta": {
+            "es": "Un anuncio que vence no se pierde. Deja de verse en público, pero sigue guardado, y lo traes de vuelta renovándolo con tu enlace privado.",
+            "en": "An expired listing is not lost. It stops showing publicly but stays saved, and you bring it back by renewing it with your private link."
+          },
+          "lados": [
+            {
+              "titulo": {
+                "es": "Vivo",
+                "en": "Live"
+              },
+              "texto": {
+                "es": "Se ve en la búsqueda y en su ficha hasta su fecha de vigencia. Lo renuevas con un clic por 60 días más.",
+                "en": "It shows in search and on its page until its end date. One click renews it for 60 more days."
+              }
+            },
+            {
+              "titulo": {
+                "es": "Vencido",
+                "en": "Expired"
+              },
+              "texto": {
+                "es": "Deja de verse en público, sin borrarse. Quien busca no se topa con anuncios abandonados.",
+                "en": "It no longer shows publicly, but it is not deleted. Buyers never run into abandoned listings."
+              }
+            }
+          ],
+          "fuente": "B3"
+        },
+        {
+          "tipo": "decision",
+          "pregunta": {
+            "es": "Tu anuncio llega a sus 60 días y nadie lo renueva: ¿qué pasa?",
+            "en": "Your listing reaches its 60 days and nobody renews it: what happens?"
+          },
+          "respuesta": {
+            "es": "Deja de verse en la búsqueda y en su ficha pública, pero no se borra. Con tu enlace privado lo renuevas con un clic por 60 días más y vuelve a estar vivo. Lo publicado aquí está vivo.",
+            "en": "It drops out of search and off its public page, but it is not deleted. With your private link, one click renews it for 60 more days and it is live again. What is listed here is live."
+          },
+          "fuente": "B3"
+        },
+        {
+          "tipo": "decision",
+          "pregunta": {
+            "es": "Invitas a una vecina y ella publica con tu enlace: ¿qué ves tú?",
+            "en": "You invite a neighbor and she lists with your link: what do you see?"
+          },
+          "respuesta": {
+            "es": "Su registro queda como invitado tuyo y tu conteo sube. Ves cuántos dueños publicaron con tu enlace, nunca quiénes son ni sus datos. Solo cuentan los invitados que de verdad publicaron.",
+            "en": "Her listing is recorded as invited by you and your count goes up. You see how many owners listed with your link, never who they are or their details. Only invitees who actually listed count."
+          },
+          "fuente": "C7b"
+        }
+      ]
+    },
+    {
+      "orden": 2,
+      "que_resuelve": {
+        "es": "Una lista de espera pide un correo y no deja nada publicado. Aquí el dueño se registra publicando su inmueble en tres pasos cortos, sin cuenta ni contraseña, y se lleva un enlace privado para completarlo.",
+        "en": "A waitlist asks for an email and leaves nothing listed. Here owners sign up by listing their home in three short steps, with no account or password, and get a private link to finish it."
+      },
+      "te_sirve": [
+        {
+          "texto": {
+            "es": "Quieres publicar desde el celular sin crear cuenta ni recordar otra contraseña.",
+            "en": "You want to list from your phone without creating an account or remembering another password."
+          },
+          "fuente": "proceso"
+        },
+        {
+          "texto": {
+            "es": "Te interrumpieron a mitad del registro: el borrador se guarda solo y sigues donde ibas.",
+            "en": "You got interrupted halfway through: the draft saves itself and you pick up where you left off."
+          },
+          "fuente": "A2"
+        },
+        {
+          "texto": {
+            "es": "Quieres entender primero por qué vender directo y cuánto cobra una inmobiliaria.",
+            "en": "You first want to understand why selling direct makes sense and what an agency charges."
+          },
+          "fuente": "A1"
+        }
+      ],
+      "no_es": [
+        {
+          "texto": {
+            "es": "No registra a nadie sin su autorización expresa de datos (Ley 1581).",
+            "en": "It registers no one without their express data consent (Colombia's Law 1581)."
+          },
+          "fuente": "nunca"
+        },
+        {
+          "texto": {
+            "es": "No hay usuario ni contraseña: tu enlace «mi anuncio» es tu llave, así que guárdalo.",
+            "en": "There is no username or password: your \"my listing\" link is your key, so keep it safe."
+          },
+          "fuente": "A3"
+        }
+      ],
+      "flujo": {
+        "titulo": {
+          "es": "Publicar en tres pasos",
+          "en": "Listing in three steps"
+        },
+        "nodos": [
+          {
+            "id": "n1",
+            "tipo": "inicio",
+            "actor": "dueno",
+            "texto": {
+              "es": "Toca «Publica tu inmueble como fundador»",
+              "en": "Taps the button to list as a founder"
+            }
+          },
+          {
+            "id": "n2",
+            "tipo": "tarea",
+            "actor": "dueno",
+            "texto": {
+              "es": "Pasos 1 y 2: sus datos y los del inmueble",
+              "en": "Steps 1 and 2: their details and the home's"
+            },
+            "funcionalidad": "A2"
+          },
+          {
+            "id": "n3",
+            "tipo": "tarea",
+            "actor": "dueno",
+            "texto": {
+              "es": "Paso 3: revisa y marca la autorización",
+              "en": "Step 3: reviews and ticks the consent box"
+            }
+          },
+          {
+            "id": "n4",
+            "tipo": "decision",
+            "actor": "dueno",
+            "texto": {
+              "es": "¿Marcó la casilla de autorización?",
+              "en": "Consent box ticked?"
+            }
+          },
+          {
+            "id": "n5",
+            "tipo": "tarea",
+            "actor": "app",
+            "texto": {
+              "es": "Lo registra y le da su enlace «mi anuncio»",
+              "en": "Registers it and gives the private link"
+            },
+            "funcionalidad": "A3"
+          },
+          {
+            "id": "n6",
+            "tipo": "fin",
+            "actor": "dueno",
+            "texto": {
+              "es": "Completa su anuncio cuando quiera",
+              "en": "Finishes the listing whenever they like"
+            }
+          }
+        ],
+        "aristas": [
+          {
+            "de": "n1",
+            "a": "n2"
+          },
+          {
+            "de": "n2",
+            "a": "n3"
+          },
+          {
+            "de": "n3",
+            "a": "n4"
+          },
+          {
+            "de": "n4",
+            "a": "n3",
+            "etiqueta": {
+              "es": "no: no deja enviar",
+              "en": "no: can't submit"
+            },
+            "vuelta": true
+          },
+          {
+            "de": "n4",
+            "a": "n5",
+            "etiqueta": {
+              "es": "sí",
+              "en": "yes"
+            }
+          },
+          {
+            "de": "n5",
+            "a": "n6"
+          }
+        ]
+      },
+      "fichas": [
+        {
+          "tipo": "concepto",
+          "pregunta": {
+            "es": "¿Qué quiere decir «publicar es registrarte»?",
+            "en": "What does \"listing is signing up\" mean?"
+          },
+          "respuesta": {
+            "es": "Que no dejas un correo para esperar: tu registro es tu inmueble ya publicado. Tus datos, los del inmueble y tu autorización van en tres pasos cortos, y al terminar quedas como fundador con tu enlace privado para completarlo.",
+            "en": "You don't leave an email and wait: your sign-up is your home, already listed. Your details, the home's and your consent go in three short steps, and you finish as a founder with a private link to complete it."
+          },
+          "fuente": "A2"
+        },
+        {
+          "tipo": "diferencia",
+          "pregunta": {
+            "es": "¿Un correo en una lista o un inmueble publicado?",
+            "en": "An email on a list, or a listed home?"
+          },
+          "respuesta": {
+            "es": "La diferencia es lo que te queda al terminar. Aquí no es una promesa de avisarte después: es tu inmueble registrado y una llave para seguir.",
+            "en": "The difference is what you have when you finish. Here it is not a promise to notify you later: it is your home, registered, and a key to keep going."
+          },
+          "lados": [
+            {
+              "titulo": {
+                "es": "Dejar un correo en una lista",
+                "en": "Leaving an email on a list"
+              },
+              "texto": {
+                "es": "Esperas a que te escriban. No queda nada tuyo publicado.",
+                "en": "You wait for someone to write to you. Nothing of yours is listed."
+              }
+            },
+            {
+              "titulo": {
+                "es": "Publicar es registrarte",
+                "en": "Listing is signing up"
+              },
+              "texto": {
+                "es": "Tu inmueble queda registrado como fundador y te llevas el enlace «mi anuncio» para sumar fotos y descripción.",
+                "en": "Your home is registered as a founder listing and you get the \"my listing\" link to add photos and a description."
+              }
+            }
+          ],
+          "fuente": "A2"
+        },
+        {
+          "tipo": "decision",
+          "pregunta": {
+            "es": "Cierras la página a mitad del paso 2: ¿pierdes lo que llevabas?",
+            "en": "You close the page halfway through step 2: do you lose your progress?"
+          },
+          "respuesta": {
+            "es": "No. El borrador se guarda solo en tu navegador y, al volver, el formulario retoma donde ibas. Nada se publica hasta que revisas, marcas la autorización de datos y tocas «Publicar mi inmueble».",
+            "en": "No. The draft saves itself in your browser and, when you come back, the form picks up where you were. Nothing is listed until you review, tick the data consent box and submit."
+          },
+          "fuente": "A2"
+        }
+      ]
+    },
+    {
+      "orden": 3,
+      "que_resuelve": {
+        "es": "Un anuncio a medias no convence a nadie, y completarlo no debería pedir un computador. Aquí el dueño sube fotos y descripción desde el celular y comparte su ficha por WhatsApp sin mostrar su número.",
+        "en": "A half-finished listing convinces no one, and finishing it shouldn't need a computer. Here owners add photos and a description from their phone and share their page on WhatsApp without exposing their number."
+      },
+      "te_sirve": [
+        {
+          "texto": {
+            "es": "Tienes las fotos en el celular y quieres subirlas sin pensar en el peso: se comprimen antes de subir.",
+            "en": "Your photos are on your phone and you want to upload them without worrying about size: they are compressed first."
+          },
+          "fuente": "B1"
+        },
+        {
+          "texto": {
+            "es": "Quieres saber qué le falta a tu anuncio: una barra te lo muestra en vivo.",
+            "en": "You want to know what your listing is missing: a bar shows you, live."
+          },
+          "fuente": "B1"
+        },
+        {
+          "texto": {
+            "es": "Quieres mandar tu ficha por WhatsApp con portada, barrio y precio en la vista previa.",
+            "en": "You want to send your page on WhatsApp with the cover photo, neighborhood and price in the preview."
+          },
+          "fuente": "B4"
+        }
+      ],
+      "no_es": [
+        {
+          "texto": {
+            "es": "La ficha pública no muestra tu número, tu correo, tu dirección ni tu matrícula.",
+            "en": "The public page never shows your number, email, address or property registration number."
+          },
+          "fuente": "B4"
+        },
+        {
+          "texto": {
+            "es": "No entra cualquier foto: caben hasta 12, y las demasiado pequeñas se rechazan con un aviso.",
+            "en": "Not every photo goes in: up to 12 fit, and ones that are too small are rejected with a notice."
+          },
+          "fuente": "B1"
+        }
+      ],
+      "flujo": {
+        "titulo": {
+          "es": "Completar y compartir tu anuncio",
+          "en": "Finishing and sharing your listing"
+        },
+        "nodos": [
+          {
+            "id": "n1",
+            "tipo": "inicio",
+            "actor": "dueno",
+            "texto": {
+              "es": "Abre su enlace privado «mi anuncio»",
+              "en": "Opens the private \"my listing\" link"
+            }
+          },
+          {
+            "id": "n2",
+            "tipo": "tarea",
+            "actor": "dueno",
+            "texto": {
+              "es": "Sube fotos, elige portada y describe",
+              "en": "Adds photos, picks a cover, describes"
+            },
+            "funcionalidad": "B1"
+          },
+          {
+            "id": "n3",
+            "tipo": "decision",
+            "actor": "app",
+            "texto": {
+              "es": "¿La foto es demasiado pequeña?",
+              "en": "Is a photo too small?"
+            }
+          },
+          {
+            "id": "n4",
+            "tipo": "tarea",
+            "actor": "dueno",
+            "texto": {
+              "es": "Comparte su ficha pública por WhatsApp",
+              "en": "Shares the public page on WhatsApp"
+            },
+            "funcionalidad": "B4"
+          },
+          {
+            "id": "n5",
+            "tipo": "decision",
+            "actor": "dueno",
+            "texto": {
+              "es": "¿Activó el contacto en «mi anuncio»?",
+              "en": "Contact turned on in \"my listing\"?"
+            }
+          },
+          {
+            "id": "n6",
+            "tipo": "fin",
+            "actor": "comprador",
+            "texto": {
+              "es": "Si verificó su WhatsApp, puede escribirle",
+              "en": "If WhatsApp-verified, can message the owner"
+            }
+          },
+          {
+            "id": "n7",
+            "tipo": "fin",
+            "actor": "comprador",
+            "texto": {
+              "es": "Ve la ficha, sin botón para escribirle",
+              "en": "Sees the page, with no message button"
+            }
+          }
+        ],
+        "aristas": [
+          {
+            "de": "n1",
+            "a": "n2"
+          },
+          {
+            "de": "n2",
+            "a": "n3"
+          },
+          {
+            "de": "n3",
+            "a": "n2",
+            "etiqueta": {
+              "es": "sí: se rechaza",
+              "en": "yes: rejected"
+            },
+            "vuelta": true
+          },
+          {
+            "de": "n3",
+            "a": "n4",
+            "etiqueta": {
+              "es": "no: la barra sube",
+              "en": "no: the bar goes up"
+            }
+          },
+          {
+            "de": "n4",
+            "a": "n5"
+          },
+          {
+            "de": "n5",
+            "a": "n6",
+            "etiqueta": {
+              "es": "sí",
+              "en": "yes"
+            }
+          },
+          {
+            "de": "n5",
+            "a": "n7",
+            "etiqueta": {
+              "es": "no",
+              "en": "no"
+            }
+          }
+        ]
+      },
+      "fichas": [
+        {
+          "tipo": "concepto",
+          "pregunta": {
+            "es": "¿Qué mide la barra de tu anuncio?",
+            "en": "What does your listing's progress bar measure?"
+          },
+          "respuesta": {
+            "es": "Cuánto le falta a tu anuncio para estar completo. Sube en vivo a medida que agregas fotos, eliges la portada y escribes la descripción guiada, así sabes qué completar antes de compartir tu ficha.",
+            "en": "How far your listing is from complete. It rises live as you add photos, pick a cover and write the guided description, so you know what to finish before sharing your page."
+          },
+          "fuente": "B1"
+        },
+        {
+          "tipo": "diferencia",
+          "pregunta": {
+            "es": "¿Qué ve todo el mundo y qué solo ves tú?",
+            "en": "What does everyone see, and what only you?"
+          },
+          "respuesta": {
+            "es": "La ficha pública es para compartir; tu enlace privado es para administrar. Nadie llega a tu número desde la ficha: solo te escribe un comprador verificado, y solo si tú lo activas.",
+            "en": "The public page is for sharing; your private link is for managing. No one reaches your number from the page: only a verified buyer can message you, and only if you turn it on."
+          },
+          "lados": [
+            {
+              "titulo": {
+                "es": "La ficha pública",
+                "en": "The public page"
+              },
+              "texto": {
+                "es": "Fotos, datos, barrio, precio y sello. Nunca tu número, tu correo, tu dirección ni tu matrícula.",
+                "en": "Photos, details, neighborhood, price and badge. Never your number, email, address or registration number."
+              }
+            },
+            {
+              "titulo": {
+                "es": "Tu enlace «mi anuncio»",
+                "en": "Your \"my listing\" link"
+              },
+              "texto": {
+                "es": "Solo tú lo tienes. Con él completas y editas tu anuncio, activas el contacto y ves quién te escribió.",
+                "en": "Only you have it. With it you complete and edit your listing, turn on contact and see who messaged you."
+              }
+            }
+          ],
+          "fuente": "B4"
+        },
+        {
+          "tipo": "decision",
+          "pregunta": {
+            "es": "Subes una foto muy pequeña desde el celular: ¿qué pasa?",
+            "en": "You upload a very small photo from your phone: what happens?"
+          },
+          "respuesta": {
+            "es": "Se rechaza con un aviso claro y tu anuncio sigue igual. Las demás se comprimen solas antes de subir, hasta 12, y tú eliges cuál es la portada o eliminas las que no quieras.",
+            "en": "It is rejected with a clear notice and your listing stays as it was. The others are compressed before uploading, up to 12, and you choose the cover or remove the ones you don't want."
+          },
+          "fuente": "B1"
+        }
+      ]
+    },
+    {
+      "orden": 4,
+      "que_resuelve": {
+        "es": "Un mercado directo necesita que alguien verifique sin quedarse con tus papeles. Aquí una persona del equipo otorga el sello mirando el certificado, mide la campaña y fija cupos; tus datos siguen la Ley 1581.",
+        "en": "A direct market needs someone to verify owners without keeping their papers. Here a team member grants the badge after seeing the certificate, tracks the campaign and sets quotas; your data follows Law 1581."
+      },
+      "te_sirve": [
+        {
+          "texto": {
+            "es": "Eres del equipo y necesitas ver cada registro con su nivel, sus fotos y su fecha.",
+            "en": "You are on the team and need to see every listing with its level, photos and date."
+          },
+          "fuente": "C1"
+        },
+        {
+          "texto": {
+            "es": "Quieres saber cuántos fundadores publicaron, cuántos tienen fotos y cuántos están verificados.",
+            "en": "You want to know how many founders listed, how many have photos and how many are verified."
+          },
+          "fuente": "C8a"
+        },
+        {
+          "texto": {
+            "es": "Eres dueño y quieres saber quién trata tus datos, para qué y cuáles son tus derechos.",
+            "en": "You are an owner and want to know who handles your data, why, and what your rights are."
+          },
+          "fuente": "L1"
+        }
+      ],
+      "no_es": [
+        {
+          "texto": {
+            "es": "El sello no es automático: lo otorga una persona después de ver el certificado de tradición.",
+            "en": "The badge is not automatic: a person grants it after seeing the certificate of title."
+          },
+          "fuente": "C1"
+        },
+        {
+          "texto": {
+            "es": "No es un archivo de documentos: el certificado se ve una vez y solo quedan la matrícula y la fecha.",
+            "en": "It is not a document store: the certificate is seen once and only the registration number and date remain."
+          },
+          "fuente": "nunca"
+        }
+      ],
+      "flujo": {
+        "titulo": {
+          "es": "Otorgar el sello de propietario",
+          "en": "Granting the owner badge"
+        },
+        "nodos": [
+          {
+            "id": "n1",
+            "tipo": "inicio",
+            "actor": "dueno",
+            "texto": {
+              "es": "Le muestra su certificado de tradición",
+              "en": "Shows the team their certificate of title"
+            }
+          },
+          {
+            "id": "n2",
+            "tipo": "tarea",
+            "actor": "equipo",
+            "texto": {
+              "es": "Lo ve y confirma que el titular coincide",
+              "en": "Views it and checks the holder matches"
+            },
+            "funcionalidad": "C1"
+          },
+          {
+            "id": "n3",
+            "tipo": "decision",
+            "actor": "equipo",
+            "texto": {
+              "es": "¿El certificado tiene 30 días o menos?",
+              "en": "Is the certificate 30 days old or less?"
+            }
+          },
+          {
+            "id": "n4",
+            "tipo": "fin",
+            "actor": "dueno",
+            "texto": {
+              "es": "Sigue como Fundador hasta traer otro",
+              "en": "Stays a Founder until bringing a new one"
+            }
+          },
+          {
+            "id": "n5",
+            "tipo": "tarea",
+            "actor": "equipo",
+            "texto": {
+              "es": "Registra la matrícula y la fecha",
+              "en": "Records the registration number and date"
+            },
+            "funcionalidad": "C1"
+          },
+          {
+            "id": "n6",
+            "tipo": "paralelo",
+            "actor": "app",
+            "texto": {
+              "es": "A la vez",
+              "en": "At the same time"
+            }
+          },
+          {
+            "id": "n7",
+            "tipo": "fin",
+            "actor": "comprador",
+            "texto": {
+              "es": "Ve «Propietario verificado» con su fecha",
+              "en": "Sees \"Verified owner\" with its date"
+            }
+          },
+          {
+            "id": "n8",
+            "tipo": "fin",
+            "actor": "app",
+            "texto": {
+              "es": "No guarda el documento: solo matrícula y fecha",
+              "en": "Keeps no copy: only number and date"
+            }
+          }
+        ],
+        "aristas": [
+          {
+            "de": "n1",
+            "a": "n2"
+          },
+          {
+            "de": "n2",
+            "a": "n3"
+          },
+          {
+            "de": "n3",
+            "a": "n4",
+            "etiqueta": {
+              "es": "no: no deja confirmar",
+              "en": "no: can't confirm"
+            }
+          },
+          {
+            "de": "n3",
+            "a": "n5",
+            "etiqueta": {
+              "es": "sí",
+              "en": "yes"
+            }
+          },
+          {
+            "de": "n5",
+            "a": "n6"
+          },
+          {
+            "de": "n6",
+            "a": "n7"
+          },
+          {
+            "de": "n6",
+            "a": "n8"
+          }
+        ]
+      },
+      "fichas": [
+        {
+          "tipo": "concepto",
+          "pregunta": {
+            "es": "¿Para qué sirve el panel del equipo?",
+            "en": "What is the team panel for?"
+          },
+          "respuesta": {
+            "es": "Es el lugar privado donde una persona del equipo ve todos los registros con su nivel y su fecha, atiende la cola de verificación, otorga el sello de propietario y re-contacta por WhatsApp a los fundadores. Solo entra el correo autorizado.",
+            "en": "It is the private space where a team member sees every listing with its level and date, works the verification queue, grants the owner badge and follows up with founders on WhatsApp. Only the authorized email can sign in."
+          },
+          "fuente": "C1"
+        },
+        {
+          "tipo": "diferencia",
+          "pregunta": {
+            "es": "¿Qué decide el equipo y qué cuenta la base de datos?",
+            "en": "What does the team decide, and what does the database count?"
+          },
+          "respuesta": {
+            "es": "El contador de cupos del inicio junta las dos cosas: el cupo que decide una persona menos los dueños que de verdad publicaron. La escasez es real o no se muestra.",
+            "en": "The home page's spot counter combines both: the quota a person sets minus the owners who actually listed. Scarcity is real, or it isn't shown."
+          },
+          "lados": [
+            {
+              "titulo": {
+                "es": "El cupo",
+                "en": "The quota"
+              },
+              "texto": {
+                "es": "Lo fija el equipo para cada localidad. Si no lo fija, el inicio no muestra contador en esa localidad.",
+                "en": "The team sets it for each locality. If it doesn't, the home page shows no counter there."
+              }
+            },
+            {
+              "titulo": {
+                "es": "Los publicados",
+                "en": "Listings so far"
+              },
+              "texto": {
+                "es": "Salen de la base de datos y no se pueden editar: el número de publicados es real.",
+                "en": "They come from the database and cannot be edited: the number of listings is real."
+              }
+            }
+          ],
+          "fuente": "C8b"
+        },
+        {
+          "tipo": "decision",
+          "pregunta": {
+            "es": "El equipo envía el correo «gana tu sello» a los fundadores: ¿a quién le llega?",
+            "en": "The team sends the badge campaign email to founders: who gets it?"
+          },
+          "respuesta": {
+            "es": "Solo a quienes dejaron su correo al publicar, que es opcional, y a cada uno en el idioma en que publicó. El envío queda registrado y respeta el tope diario de correos, que las visitas y las alertas usan primero.",
+            "en": "Only those who left an email when listing, which is optional, each in the language they listed in. The send is logged and stays within the daily email cap, which visits and alerts use first."
+          },
+          "fuente": "C8a"
+        }
+      ]
+    },
+    {
+      "orden": 5,
+      "que_resuelve": {
+        "es": "Quien busca vivienda en Bogotá quiere filtrar, ubicar y comparar sin abrir otra cuenta. Aquí busca por filtros o dibujando su zona, guarda y compara, y recibe un correo solo cuando hay algo nuevo.",
+        "en": "Home seekers in Bogotá want to filter, locate and compare without opening yet another account. Here they search by filters or by drawing their area, save and compare, and get an email only when something is new."
+      },
+      "te_sirve": [
+        {
+          "texto": {
+            "es": "Sabes en qué barrios quieres vivir y prefieres dibujar tu zona en el mapa.",
+            "en": "You know which neighborhoods you want and would rather draw your area on the map."
+          },
+          "fuente": "H2-01"
+        },
+        {
+          "texto": {
+            "es": "Decides en pareja o en familia y quieres comparar hasta cuatro anuncios y dejar notas.",
+            "en": "You decide as a couple or a family and want to compare up to four listings and leave notes."
+          },
+          "fuente": "H2-03"
+        },
+        {
+          "texto": {
+            "es": "No quieres buscar todos los días: prefieres un resumen por correo cuando aparezca algo.",
+            "en": "You don't want to search every day: you'd rather get an email digest when something turns up."
+          },
+          "fuente": "H2-04"
+        }
+      ],
+      "no_es": [
+        {
+          "texto": {
+            "es": "El mapa no muestra direcciones: cada anuncio se ubica por el área de su barrio, nunca por un punto.",
+            "en": "The map shows no addresses: each listing is placed by its neighborhood's area, never by a pin."
+          },
+          "fuente": "H2-01"
+        },
+        {
+          "texto": {
+            "es": "Las alertas no son al instante ni por WhatsApp: llega un resumen al día, solo por correo.",
+            "en": "Alerts are not instant and never come by WhatsApp: you get one digest a day, by email only."
+          },
+          "fuente": "H2-04"
+        }
+      ],
+      "flujo": {
+        "titulo": {
+          "es": "De la búsqueda a la alerta",
+          "en": "From search to alert"
+        },
+        "nodos": [
+          {
+            "id": "n1",
+            "tipo": "inicio",
+            "actor": "comprador",
+            "texto": {
+              "es": "Toca «Buscar», sin crear cuenta",
+              "en": "Opens Search, with no account"
+            }
+          },
+          {
+            "id": "n2",
+            "tipo": "tarea",
+            "actor": "comprador",
+            "texto": {
+              "es": "Filtra o dibuja su zona en el mapa",
+              "en": "Filters or draws an area on the map"
+            },
+            "funcionalidad": "H2-01"
+          },
+          {
+            "id": "n3",
+            "tipo": "decision",
+            "actor": "comprador",
+            "texto": {
+              "es": "¿Encontró algo que le guste?",
+              "en": "Found something they like?"
+            }
+          },
+          {
+            "id": "n4",
+            "tipo": "tarea",
+            "actor": "comprador",
+            "texto": {
+              "es": "Guarda con un corazón y compara hasta 4",
+              "en": "Saves with a heart and compares up to 4"
+            },
+            "funcionalidad": "H2-03"
+          },
+          {
+            "id": "n5",
+            "tipo": "tarea",
+            "actor": "comprador",
+            "texto": {
+              "es": "Guarda la búsqueda como alerta",
+              "en": "Saves the search as an alert"
+            },
+            "funcionalidad": "H2-04"
+          },
+          {
+            "id": "n6",
+            "tipo": "fin",
+            "actor": "comprador",
+            "texto": {
+              "es": "Comparte una lista con notas",
+              "en": "Shares a list with notes"
+            }
+          },
+          {
+            "id": "n7",
+            "tipo": "decision",
+            "actor": "comprador",
+            "texto": {
+              "es": "¿Confirmó su correo?",
+              "en": "Email confirmed?"
+            }
+          },
+          {
+            "id": "n8",
+            "tipo": "fin",
+            "actor": "comprador",
+            "texto": {
+              "es": "Recibe un resumen diario, solo si hay algo",
+              "en": "Gets a daily digest, only if there is news"
+            }
+          },
+          {
+            "id": "n9",
+            "tipo": "fin",
+            "actor": "app",
+            "texto": {
+              "es": "A los 7 días borra la alerta",
+              "en": "Deletes the alert after 7 days"
+            }
+          }
+        ],
+        "aristas": [
+          {
+            "de": "n1",
+            "a": "n2"
+          },
+          {
+            "de": "n2",
+            "a": "n3"
+          },
+          {
+            "de": "n3",
+            "a": "n4",
+            "etiqueta": {
+              "es": "sí",
+              "en": "yes"
+            }
+          },
+          {
+            "de": "n3",
+            "a": "n5",
+            "etiqueta": {
+              "es": "no: que le avisen",
+              "en": "no: get alerted"
+            }
+          },
+          {
+            "de": "n4",
+            "a": "n6"
+          },
+          {
+            "de": "n5",
+            "a": "n7"
+          },
+          {
+            "de": "n7",
+            "a": "n8",
+            "etiqueta": {
+              "es": "sí",
+              "en": "yes"
+            }
+          },
+          {
+            "de": "n7",
+            "a": "n9",
+            "etiqueta": {
+              "es": "no",
+              "en": "no"
+            }
+          }
+        ]
+      },
+      "fichas": [
+        {
+          "tipo": "concepto",
+          "pregunta": {
+            "es": "¿Qué son los datos de tu zona?",
+            "en": "What is the area data?"
+          },
+          "respuesta": {
+            "es": "Tres cifras de contexto en cada ficha: el metro cuadrado mediano que piden los anuncios de la zona, cuántos anuncios vivos hay y el valor de referencia del terreno según Catastro Bogotá. Cada una trae su fecha y su fuente; la de Catastro es solo del terreno.",
+            "en": "Three context figures on each listing page: the median asking price per square meter in the area, how many live listings there are, and the city cadastre's reference land value. Each carries its date and source; the cadastre figure covers land only."
+          },
+          "fuente": "H2-05"
+        },
+        {
+          "tipo": "diferencia",
+          "pregunta": {
+            "es": "¿«Fundador» o «Propietario verificado»?",
+            "en": "\"Founder\" or \"Verified owner\"?"
+          },
+          "respuesta": {
+            "es": "Los dos son dueños directos y publican igual. Cambia la prueba: cada tarjeta y cada ficha llevan un solo sello, con símbolo y texto, para que sepas de un vistazo quién demostró ser dueño.",
+            "en": "Both are direct owners and list the same way. The proof is what differs: every card and page carries a single badge, with symbol and text, so you can tell at a glance who proved ownership."
+          },
+          "lados": [
+            {
+              "titulo": {
+                "es": "Fundador",
+                "en": "Founder"
+              },
+              "texto": {
+                "es": "Publicó sin mostrar papeles. Es el nivel de entrada.",
+                "en": "Listed without showing any papers. It is the entry level."
+              }
+            },
+            {
+              "titulo": {
+                "es": "Propietario verificado",
+                "en": "Verified owner"
+              },
+              "texto": {
+                "es": "Mostró al equipo un certificado de tradición de 30 días o menos. El sello lleva la fecha de ese certificado.",
+                "en": "Showed the team a certificate of title no older than 30 days. The badge carries that certificate's date."
+              }
+            }
+          ],
+          "fuente": "H2-02"
+        },
+        {
+          "tipo": "decision",
+          "pregunta": {
+            "es": "Un dueño baja el precio de un anuncio que coincide con tu alerta: ¿te enteras?",
+            "en": "An owner lowers the price of a listing that matches your alert: will you know?"
+          },
+          "respuesta": {
+            "es": "Sí, si la baja es del 1 % o más: aparece en tu resumen diario por correo. Si la baja es menor o el precio sube, no se avisa a nadie. Cada correo trae su enlace para darte de baja con un clic.",
+            "en": "Yes, if the drop is 1% or more: it shows up in your daily email digest. If the drop is smaller or the price goes up, no one is notified. Every email has a one-click unsubscribe."
+          },
+          "fuente": "H2-04"
+        }
+      ]
+    },
+    {
+      "orden": 6,
+      "que_resuelve": {
+        "es": "Sin intermediario, el miedo es no saber quién está al otro lado. Aquí el dueño demuestra que es dueño, quien compra prueba que su WhatsApp es suyo y las reglas antifraude están escritas y a la vista.",
+        "en": "Without a middleman, the fear is not knowing who is on the other side. Here owners prove they own, buyers prove their WhatsApp is theirs, and the anti-fraud rules are written down for anyone to read."
+      },
+      "te_sirve": [
+        {
+          "texto": {
+            "es": "Eres dueño y quieres saber quién te pide una visita antes de abrirle la puerta.",
+            "en": "You are an owner and want to know who is asking for a visit before you open the door."
+          },
+          "fuente": "H2-08"
+        },
+        {
+          "texto": {
+            "es": "Compras y quieres dar más confianza: además del WhatsApp, validas tu cédula si quieres.",
+            "en": "You are buying and want to earn more trust: besides WhatsApp, you can validate your ID card if you wish."
+          },
+          "fuente": "H2-07"
+        },
+        {
+          "texto": {
+            "es": "Un anuncio te parece sospechoso y quieres reportarlo sin que el dueño sepa que fuiste tú.",
+            "en": "A listing looks suspicious and you want to report it without the owner knowing it was you."
+          },
+          "fuente": "H2-09"
+        }
+      ],
+      "no_es": [
+        {
+          "texto": {
+            "es": "Verificar el WhatsApp prueba que el número es tuyo, no quién eres: para eso está la cédula, opcional.",
+            "en": "Verifying WhatsApp proves the number is yours, not who you are: that is what the optional ID check is for."
+          },
+          "fuente": "H2-06"
+        },
+        {
+          "texto": {
+            "es": "Una señal o un reporte no ocultan un anuncio: lo revisa una persona del equipo, que decide.",
+            "en": "A flag or a report never hides a listing on its own: a team member reviews it and decides."
+          },
+          "fuente": "nunca"
+        }
+      ],
+      "flujo": {
+        "titulo": {
+          "es": "Del comprador verificado a la tarjeta del dueño",
+          "en": "From verified buyer to the owner's buyer card"
+        },
+        "nodos": [
+          {
+            "id": "n1",
+            "tipo": "inicio",
+            "actor": "comprador",
+            "texto": {
+              "es": "Quiere escribirle o pedir una visita",
+              "en": "Wants to message or request a visit"
+            }
+          },
+          {
+            "id": "n2",
+            "tipo": "tarea",
+            "actor": "comprador",
+            "texto": {
+              "es": "Envía por WhatsApp el código ya escrito",
+              "en": "Sends the pre-written code on WhatsApp"
+            },
+            "funcionalidad": "H2-06"
+          },
+          {
+            "id": "n3",
+            "tipo": "decision",
+            "actor": "comprador",
+            "texto": {
+              "es": "¿Valida también su cédula?",
+              "en": "Also validates their ID card?"
+            }
+          },
+          {
+            "id": "n4",
+            "tipo": "tarea",
+            "actor": "comprador",
+            "texto": {
+              "es": "Cédula y nombre contra la Registraduría",
+              "en": "ID and name checked by the registry"
+            },
+            "funcionalidad": "H2-07"
+          },
+          {
+            "id": "n5",
+            "tipo": "tarea",
+            "actor": "dueno",
+            "texto": {
+              "es": "Ve su tarjeta antes de aceptar la visita",
+              "en": "Sees the buyer card before accepting"
+            },
+            "funcionalidad": "H2-08"
+          },
+          {
+            "id": "n6",
+            "tipo": "fin",
+            "actor": "dueno",
+            "texto": {
+              "es": "Propone horarios o toca «No me interesa»",
+              "en": "Proposes times or declines"
+            }
+          }
+        ],
+        "aristas": [
+          {
+            "de": "n1",
+            "a": "n2"
+          },
+          {
+            "de": "n2",
+            "a": "n3"
+          },
+          {
+            "de": "n3",
+            "a": "n4",
+            "etiqueta": {
+              "es": "sí",
+              "en": "yes"
+            }
+          },
+          {
+            "de": "n3",
+            "a": "n5",
+            "etiqueta": {
+              "es": "no: solo WhatsApp",
+              "en": "no: WhatsApp only"
+            }
+          },
+          {
+            "de": "n4",
+            "a": "n5"
+          },
+          {
+            "de": "n5",
+            "a": "n6"
+          }
+        ]
+      },
+      "fichas": [
+        {
+          "tipo": "concepto",
+          "pregunta": {
+            "es": "¿Qué prueba un comprador verificado?",
+            "en": "What does a verified buyer prove?"
+          },
+          "respuesta": {
+            "es": "Que el WhatsApp es suyo. Para contactar o agendar, envía desde su número un código ya escrito hacia Innmobiliaria; el código dura 10 minutos, sirve una vez y debe llegar desde el número que escribió. Navegar y guardar siguen libres.",
+            "en": "That the WhatsApp number is theirs. To contact or book, they send a pre-written code from their number to Innmobiliaria; the code lasts 10 minutes, works once and must come from the number they entered. Browsing and saving stay open to all."
+          },
+          "fuente": "H2-06"
+        },
+        {
+          "tipo": "diferencia",
+          "pregunta": {
+            "es": "¿Comprador verificado o comprador identificado?",
+            "en": "Verified buyer or identified buyer?"
+          },
+          "respuesta": {
+            "es": "Verificar el WhatsApp es lo que se pide para contactar; identificarse es opcional y da más confianza. El dueño ve en la tarjeta cuál de los dos tiene cada comprador.",
+            "en": "Verifying WhatsApp is what contacting requires; identifying is optional and builds more trust. The owner sees on the buyer card which one each buyer has."
+          },
+          "lados": [
+            {
+              "titulo": {
+                "es": "Verificado",
+                "en": "Verified"
+              },
+              "texto": {
+                "es": "Probó que su WhatsApp es suyo enviando un código. Basta para escribirle a un dueño o pedir una visita.",
+                "en": "Proved their WhatsApp is theirs by sending a code. Enough to message an owner or request a visit."
+              }
+            },
+            {
+              "titulo": {
+                "es": "Identificado",
+                "en": "Identified"
+              },
+              "texto": {
+                "es": "Además validó su cédula y su nombre contra la Registraduría. El número no se guarda: solo que salió bien y cuándo.",
+                "en": "Also validated their ID card and name with the national registry. The number is not stored: only that it passed, and when."
+              }
+            }
+          ],
+          "fuente": "H2-07"
+        },
+        {
+          "tipo": "decision",
+          "pregunta": {
+            "es": "Un comprador sin identificar pide visita y tú exiges identificados: ¿qué pasa?",
+            "en": "A buyer who hasn't identified asks to visit and you require identified buyers: what happens?"
+          },
+          "respuesta": {
+            "es": "Su solicitud queda en espera hasta que tú la aceptes con «Aceptar igual»; quien se identificó con su cédula entra directo. Ese comprador puede seguir escribiéndote por WhatsApp: la regla aplica a las visitas.",
+            "en": "Their request waits on hold until you accept it anyway; buyers who identified with their ID card go straight through. That buyer can still message you on WhatsApp: the rule applies to visits."
+          },
+          "fuente": "H2-08"
+        }
+      ]
+    },
+    {
+      "orden": 7,
+      "que_resuelve": {
+        "es": "Escribirle a un dueño y cuadrar una visita suele ser una cadena de mensajes sueltos. Aquí un toque abre el chat con el mensaje listo y la visita se agenda de punta a punta, con recordatorio por correo.",
+        "en": "Messaging an owner and setting up a visit is usually a chain of loose messages. Here one tap opens the chat with the message ready, and the visit is booked end to end, with an email reminder."
+      },
+      "te_sirve": [
+        {
+          "texto": {
+            "es": "Viste un anuncio y quieres escribirle al dueño ya, con el mensaje sobre el anuncio escrito.",
+            "en": "You saw a listing and want to message the owner now, with a message about it already written."
+          },
+          "fuente": "H2-10"
+        },
+        {
+          "texto": {
+            "es": "Quieres que el dueño te proponga horarios y confirmar uno sin ir y venir de mensajes.",
+            "en": "You want the owner to propose times and to confirm one without back-and-forth messages."
+          },
+          "fuente": "H2-11"
+        },
+        {
+          "texto": {
+            "es": "Eres dueño y quieres saber quién abrió el chat contigo y si vino a la visita.",
+            "en": "You are an owner and want to know who opened a chat with you and whether they showed up."
+          },
+          "fuente": "H2-11"
+        }
+      ],
+      "no_es": [
+        {
+          "texto": {
+            "es": "La app no envía mensajes por WhatsApp: los avisos de la visita van por correo.",
+            "en": "The app sends no WhatsApp messages: visit notices go by email."
+          },
+          "fuente": "H2-11"
+        },
+        {
+          "texto": {
+            "es": "No publica tu dirección: se la das tú al comprador por tu WhatsApp cuando la visita está confirmada.",
+            "en": "It never publishes your address: you give it to the buyer on your own WhatsApp once the visit is confirmed."
+          },
+          "fuente": "H2-11"
+        }
+      ],
+      "flujo": {
+        "titulo": {
+          "es": "Escribir o visitar, de punta a punta",
+          "en": "Message or visit, end to end"
+        },
+        "nodos": [
+          {
+            "id": "n1",
+            "tipo": "inicio",
+            "actor": "comprador",
+            "texto": {
+              "es": "Abre la ficha con su WhatsApp verificado",
+              "en": "Opens the listing, WhatsApp verified"
+            }
+          },
+          {
+            "id": "n2",
+            "tipo": "decision",
+            "actor": "comprador",
+            "texto": {
+              "es": "¿Le escribe o le pide una visita?",
+              "en": "Message the owner or request a visit?"
+            }
+          },
+          {
+            "id": "n3",
+            "tipo": "tarea",
+            "actor": "comprador",
+            "texto": {
+              "es": "Un toque abre el chat con el mensaje listo",
+              "en": "One tap opens the chat, message ready"
+            },
+            "funcionalidad": "H2-10"
+          },
+          {
+            "id": "n4",
+            "tipo": "fin",
+            "actor": "dueno",
+            "texto": {
+              "es": "Lo ve en «Compradores que abrieron tu chat»",
+              "en": "Sees it under buyers who opened a chat"
+            }
+          },
+          {
+            "id": "n5",
+            "tipo": "tarea",
+            "actor": "dueno",
+            "texto": {
+              "es": "Propone hasta tres horarios",
+              "en": "Proposes up to three time slots"
+            },
+            "funcionalidad": "H2-11"
+          },
+          {
+            "id": "n6",
+            "tipo": "decision",
+            "actor": "comprador",
+            "texto": {
+              "es": "¿Le sirve alguno de los horarios?",
+              "en": "Does any slot work?"
+            }
+          },
+          {
+            "id": "n7",
+            "tipo": "tarea",
+            "actor": "app",
+            "texto": {
+              "es": "Les recuerda por correo el día antes",
+              "en": "Emails both a reminder the day before"
+            }
+          },
+          {
+            "id": "n8",
+            "tipo": "fin",
+            "actor": "dueno",
+            "texto": {
+              "es": "Marca «Sí, vino» o «No vino»",
+              "en": "Marks whether the buyer showed up"
+            }
+          }
+        ],
+        "aristas": [
+          {
+            "de": "n1",
+            "a": "n2"
+          },
+          {
+            "de": "n2",
+            "a": "n3",
+            "etiqueta": {
+              "es": "le escribe",
+              "en": "message"
+            }
+          },
+          {
+            "de": "n2",
+            "a": "n5",
+            "etiqueta": {
+              "es": "pide visita",
+              "en": "visit"
+            }
+          },
+          {
+            "de": "n3",
+            "a": "n4"
+          },
+          {
+            "de": "n5",
+            "a": "n6"
+          },
+          {
+            "de": "n6",
+            "a": "n7",
+            "etiqueta": {
+              "es": "sí: confirma",
+              "en": "yes: confirms"
+            }
+          },
+          {
+            "de": "n6",
+            "a": "n5",
+            "etiqueta": {
+              "es": "no: «Ninguno me sirve»",
+              "en": "no: none works"
+            },
+            "vuelta": true
+          },
+          {
+            "de": "n7",
+            "a": "n8"
+          }
+        ]
+      },
+      "fichas": [
+        {
+          "tipo": "concepto",
+          "pregunta": {
+            "es": "¿Qué queda registrado cuando escribes con un toque?",
+            "en": "What gets recorded when you message with one tap?"
+          },
+          "respuesta": {
+            "es": "Que abriste el chat con ese dueño. Él lo ve en «Compradores que abrieron tu chat» con tu nombre, los últimos 4 dígitos de tu número y la fecha. Tu número completo no sale en ninguna página pública.",
+            "en": "That you opened a chat with that owner. They see it in their list of buyers who opened a chat, with your name, the last 4 digits of your number and the date. Your full number appears on no public page."
+          },
+          "fuente": "H2-10"
+        },
+        {
+          "tipo": "diferencia",
+          "pregunta": {
+            "es": "¿Escribirle al dueño o pedir una visita?",
+            "en": "Message the owner, or request a visit?"
+          },
+          "respuesta": {
+            "es": "Escribir abre una conversación entre ustedes. La visita la lleva la app de punta a punta: horarios, confirmación, recordatorio por correo y asistencia marcada por el dueño.",
+            "en": "Messaging opens a conversation between you. The visit is handled by the app end to end: time slots, confirmation, an email reminder and attendance marked by the owner."
+          },
+          "lados": [
+            {
+              "titulo": {
+                "es": "Escribirle",
+                "en": "Message"
+              },
+              "texto": {
+                "es": "Un toque abre WhatsApp con un mensaje ya escrito sobre el anuncio. Basta tu WhatsApp verificado.",
+                "en": "One tap opens WhatsApp with a message about the listing already written. A verified WhatsApp is enough."
+              }
+            },
+            {
+              "titulo": {
+                "es": "Pedir una visita",
+                "en": "Request a visit"
+              },
+              "texto": {
+                "es": "Cuentas para qué buscas y dejas tu correo para los avisos; el dueño ve tu tarjeta y te propone hasta tres horarios.",
+                "en": "You say what you are looking for and leave an email for notices; the owner sees your card and proposes up to three slots."
+              }
+            }
+          ],
+          "fuente": "H2-11"
+        },
+        {
+          "tipo": "decision",
+          "pregunta": {
+            "es": "Confirmaste la visita: ¿cómo te llega la dirección exacta?",
+            "en": "You confirmed the visit: how do you get the exact address?"
+          },
+          "respuesta": {
+            "es": "Te la da el dueño por su propio WhatsApp. Solo cuando confirmas, él ve tu número completo y un botón para escribirte; antes ve los últimos 4 dígitos. La app no publica direcciones ni envía WhatsApp.",
+            "en": "The owner sends it from their own WhatsApp. Only once you confirm do they see your full number and a button to message you; before that, they see the last 4 digits. The app neither publishes addresses nor sends WhatsApp messages."
+          },
+          "fuente": "H2-11"
+        }
+      ]
+    },
+    {
+      "orden": 8,
+      "que_resuelve": {
+        "es": "Comprar sin saber si el precio tiene sentido, cuánto puedes pagar o cuánto cuesta escriturar es comprar a ciegas. Aquí cada número trae su comparación o su norma: un rango, no un avalúo.",
+        "en": "Buying without knowing whether a price makes sense, what you can afford or what closing costs is buying blind. Here every number comes with its comparison or its rule: a range, not an appraisal."
+      },
+      "te_sirve": [
+        {
+          "texto": {
+            "es": "Viste un precio y quieres saber si está en rango, por encima o sospechosamente barato.",
+            "en": "You saw a price and want to know if it is in range, above it or suspiciously cheap."
+          },
+          "fuente": "H2-12"
+        },
+        {
+          "texto": {
+            "es": "Quieres saber cuánto pagarías al mes y hasta qué precio te alcanza con tus ingresos.",
+            "en": "You want to know your monthly payment and the highest price your income allows."
+          },
+          "fuente": "H2-13"
+        },
+        {
+          "texto": {
+            "es": "Vas a firmar la promesa y quieres saber cuánto paga cada parte al escriturar.",
+            "en": "You are about to sign the purchase promise and want to know what each side pays at closing."
+          },
+          "fuente": "H2-14"
+        }
+      ],
+      "no_es": [
+        {
+          "texto": {
+            "es": "«¿Está caro?» compara solo con anuncios de Innmobiliaria: es lo que piden los dueños, no un avalúo.",
+            "en": "\"Is it overpriced?\" compares only with Innmobiliaria listings: it is what owners ask, not an appraisal."
+          },
+          "fuente": "limites"
+        },
+        {
+          "texto": {
+            "es": "El lector del certificado de tradición está construido y apagado hasta validarlo con certificados reales.",
+            "en": "The certificate-of-title reader is built but switched off until it is validated with real certificates."
+          },
+          "fuente": "H2-15"
+        }
+      ],
+      "flujo": {
+        "titulo": {
+          "es": "Del precio de un anuncio a lo que puedes pagar",
+          "en": "From a listing's price to what you can afford"
+        },
+        "nodos": [
+          {
+            "id": "n1",
+            "tipo": "inicio",
+            "actor": "comprador",
+            "texto": {
+              "es": "Abre la ficha de un anuncio en venta",
+              "en": "Opens a for-sale listing"
+            }
+          },
+          {
+            "id": "n2",
+            "tipo": "decision",
+            "actor": "app",
+            "texto": {
+              "es": "¿Hay cinco o más anuncios parecidos?",
+              "en": "Five or more similar listings?"
+            }
+          },
+          {
+            "id": "n3",
+            "tipo": "tarea",
+            "actor": "app",
+            "texto": {
+              "es": "Compara su m² con el rango de su zona",
+              "en": "Compares its m² with the area's range"
+            },
+            "funcionalidad": "H2-12"
+          },
+          {
+            "id": "n4",
+            "tipo": "tarea",
+            "actor": "comprador",
+            "texto": {
+              "es": "Calcula su cuota en «Herramientas»",
+              "en": "Works out the payment in the tools"
+            },
+            "funcionalidad": "H2-13"
+          },
+          {
+            "id": "n5",
+            "tipo": "decision",
+            "actor": "app",
+            "texto": {
+              "es": "¿La cuota cabe en el 40 % de sus ingresos?",
+              "en": "Payment within 40% of income?"
+            }
+          },
+          {
+            "id": "n6",
+            "tipo": "fin",
+            "actor": "comprador",
+            "texto": {
+              "es": "Ve lo que le cuesta escriturar ese anuncio",
+              "en": "Checks the closing costs for that listing"
+            }
+          },
+          {
+            "id": "n7",
+            "tipo": "fin",
+            "actor": "comprador",
+            "texto": {
+              "es": "Busca ya filtrado por lo que puede pagar",
+              "en": "Searches filtered by what they can afford"
+            }
+          }
+        ],
+        "aristas": [
+          {
+            "de": "n1",
+            "a": "n2"
+          },
+          {
+            "de": "n2",
+            "a": "n3",
+            "etiqueta": {
+              "es": "sí",
+              "en": "yes"
+            }
+          },
+          {
+            "de": "n2",
+            "a": "n4",
+            "etiqueta": {
+              "es": "no: «sin datos»",
+              "en": "no: not enough data"
+            }
+          },
+          {
+            "de": "n3",
+            "a": "n4"
+          },
+          {
+            "de": "n4",
+            "a": "n5"
+          },
+          {
+            "de": "n5",
+            "a": "n6",
+            "etiqueta": {
+              "es": "sí: cabe",
+              "en": "yes: fits"
+            }
+          },
+          {
+            "de": "n5",
+            "a": "n7",
+            "etiqueta": {
+              "es": "no: pasa",
+              "en": "no: exceeds"
+            }
+          }
+        ]
+      },
+      "fichas": [
+        {
+          "tipo": "concepto",
+          "pregunta": {
+            "es": "¿Cómo se responde «¿Está caro este anuncio?»?",
+            "en": "How is \"Is it overpriced?\" answered?"
+          },
+          "respuesta": {
+            "es": "Se compara el metro cuadrado del anuncio con el de anuncios parecidos: mismo tipo y operación, área dentro de ±30 % y vivos hoy. El rango va del percentil 25 al 75, con cuántos anuncios entraron, su fecha y su fuente.",
+            "en": "The listing's price per square meter is compared with similar listings: same type and deal, size within ±30% and live today. The range runs from the 25th to the 75th percentile, with how many listings counted, their date and source."
+          },
+          "fuente": "H2-12"
+        },
+        {
+          "tipo": "diferencia",
+          "pregunta": {
+            "es": "¿Un rango o un avalúo?",
+            "en": "A range or an appraisal?"
+          },
+          "respuesta": {
+            "es": "El rango dice si un precio pedido tiene sentido frente a otros precios pedidos. No dice cuánto vale el inmueble ni en cuánto se cerrará el negocio.",
+            "en": "The range tells you whether an asking price makes sense next to other asking prices. It does not say what the home is worth or what it will sell for."
+          },
+          "lados": [
+            {
+              "titulo": {
+                "es": "El rango de «¿Está caro?»",
+                "en": "The \"Is it overpriced?\" range"
+              },
+              "texto": {
+                "es": "Lo que piden los dueños por anuncios parecidos de Innmobiliaria. Mejora con más anuncios; con menos de cinco, no se da.",
+                "en": "What owners ask for similar Innmobiliaria listings. It improves with more listings; with fewer than five, none is given."
+              }
+            },
+            {
+              "titulo": {
+                "es": "Un avalúo",
+                "en": "An appraisal"
+              },
+              "texto": {
+                "es": "Es otra cosa: «¿Está caro?» no lo da ni lo reemplaza, y tampoco es el precio de cierre.",
+                "en": "Something else: \"Is it overpriced?\" neither gives nor replaces one, and it is not the closing price either."
+              }
+            }
+          ],
+          "fuente": "H2-12"
+        },
+        {
+          "tipo": "decision",
+          "pregunta": {
+            "es": "Un anuncio pide 30 % o más por debajo de la mediana de su zona: ¿qué te dice la app?",
+            "en": "A listing asks 30% or more below its area's median: what does the app tell you?"
+          },
+          "respuesta": {
+            "es": "«Sospechosamente barato», con símbolo y texto, y el consejo de siempre: visita antes de pagar, pide el certificado de tradición y nunca des anticipos.",
+            "en": "\"Suspiciously cheap\", with symbol and text, plus the usual advice: visit before paying, ask for the certificate of title and never pay anything up front."
+          },
+          "fuente": "H2-12"
+        }
+      ]
+    },
+    {
+      "orden": 9,
+      "que_resuelve": {
+        "es": "El aviso de vivienda nueva muestra el «precio desde» y calla el resto. Aquí quien quiere estrenar ve lo mínimo que paga de verdad, lo que el aviso no dice y qué le alcanza nuevo o usado con la misma plata.",
+        "en": "New-build ads show a \"from\" price and leave out the rest. Here buyers who want a new home see the least they will really pay, what the ad doesn't say, and what new or resale gets them for the same money."
+      },
+      "te_sirve": [
+        {
+          "texto": {
+            "es": "Dudas entre nuevo y usado y quieres ver qué te alcanza en la misma zona con tu presupuesto.",
+            "en": "You are torn between new and resale and want to see what your budget buys in the same area."
+          },
+          "fuente": "H2-17"
+        },
+        {
+          "texto": {
+            "es": "Pagas arriendo y quieres saber cuánto te cuesta esperar la entrega.",
+            "en": "You pay rent and want to know what waiting for handover will cost you."
+          },
+          "fuente": "H2-18"
+        },
+        {
+          "texto": {
+            "es": "Quieres saber qué subsidios de vivienda te sirven según el ingreso de tu hogar.",
+            "en": "You want to know which housing subsidies fit your household income."
+          },
+          "fuente": "H2-19"
+        }
+      ],
+      "no_es": [
+        {
+          "texto": {
+            "es": "«Pagas al menos» es un mínimo, no un total: lo que falta sumar se nombra, sin inventar cifra.",
+            "en": "\"You pay at least\" is a floor, not a total: what is left to add is named, with no made-up figure."
+          },
+          "fuente": "H2-16"
+        },
+        {
+          "texto": {
+            "es": "La ficha honesta no acusa a nadie: nombra lo que el aviso no dice y separa los mensajes de venta.",
+            "en": "The honest sheet accuses no one: it names what the ad leaves out and sets sales slogans apart."
+          },
+          "fuente": "H2-21"
+        }
+      ],
+      "flujo": {
+        "titulo": {
+          "es": "Del «desde» del aviso a la sala de ventas",
+          "en": "From the ad's \"from\" price to the sales office"
+        },
+        "nodos": [
+          {
+            "id": "n1",
+            "tipo": "inicio",
+            "actor": "comprador",
+            "texto": {
+              "es": "Abre la pestaña «Nuevos» en «Buscar»",
+              "en": "Opens the New tab in Search"
+            }
+          },
+          {
+            "id": "n2",
+            "tipo": "tarea",
+            "actor": "comprador",
+            "texto": {
+              "es": "Ve «Pagas al menos», no el «desde»",
+              "en": "Sees \"you pay at least\", not \"from\""
+            },
+            "funcionalidad": "H2-16"
+          },
+          {
+            "id": "n3",
+            "tipo": "tarea",
+            "actor": "comprador",
+            "texto": {
+              "es": "Lo compara con usados con la misma plata",
+              "en": "Compares it with resale for the same money"
+            },
+            "funcionalidad": "H2-17"
+          },
+          {
+            "id": "n4",
+            "tipo": "tarea",
+            "actor": "comprador",
+            "texto": {
+              "es": "Pide la visita a la sala y elige la franja",
+              "en": "Requests a sales-office visit and a slot"
+            },
+            "funcionalidad": "H2-22"
+          },
+          {
+            "id": "n5",
+            "tipo": "decision",
+            "actor": "equipo",
+            "texto": {
+              "es": "¿La sala responde en dos días hábiles?",
+              "en": "Office replies within two business days?"
+            }
+          },
+          {
+            "id": "n6",
+            "tipo": "fin",
+            "actor": "comprador",
+            "texto": {
+              "es": "Elige un horario y queda confirmada",
+              "en": "Picks a time and the visit is confirmed"
+            }
+          },
+          {
+            "id": "n7",
+            "tipo": "fin",
+            "actor": "app",
+            "texto": {
+              "es": "Le avisa por correo; sigue abierta",
+              "en": "Emails a notice; the request stays open"
+            }
+          }
+        ],
+        "aristas": [
+          {
+            "de": "n1",
+            "a": "n2"
+          },
+          {
+            "de": "n2",
+            "a": "n3"
+          },
+          {
+            "de": "n3",
+            "a": "n4"
+          },
+          {
+            "de": "n4",
+            "a": "n5"
+          },
+          {
+            "de": "n5",
+            "a": "n6",
+            "etiqueta": {
+              "es": "sí",
+              "en": "yes"
+            }
+          },
+          {
+            "de": "n5",
+            "a": "n7",
+            "etiqueta": {
+              "es": "no",
+              "en": "no"
+            }
+          }
+        ]
+      },
+      "fichas": [
+        {
+          "tipo": "concepto",
+          "pregunta": {
+            "es": "¿De dónde salen los proyectos nuevos?",
+            "en": "Where do the new projects come from?"
+          },
+          "respuesta": {
+            "es": "De la edición vigente de la revista Estrenar Vivienda, para Bogotá y la Sabana: los proyectos que la revista no imprime no existen aquí. Cada mes sale la mediana del metro cuadrado, y un mes sin edición se dice y no se rellena.",
+            "en": "From the current issue of Estrenar Vivienda magazine, for Bogotá and the Sabana: projects the magazine doesn't print don't exist here. Each month brings the median price per square meter, and a month with no issue is stated, not filled in."
+          },
+          "fuente": "H2-20"
+        },
+        {
+          "tipo": "diferencia",
+          "pregunta": {
+            "es": "¿Precio «desde» o precio verdadero?",
+            "en": "The \"from\" price or the true price?"
+          },
+          "respuesta": {
+            "es": "«Pagas al menos» es un mínimo, no un total: lo que falta, como los derechos notariales o el impuesto de registro, se nombra sin cifra. Desde el 1 de enero de 2027 no suma tarifas de 2026.",
+            "en": "\"You pay at least\" is a floor, not a total: what is missing, such as notary fees or the registration tax, is named without a figure. From January 1, 2027, it adds no 2026 rates."
+          },
+          "lados": [
+            {
+              "titulo": {
+                "es": "El «desde» del aviso",
+                "en": "The ad's \"from\" price"
+              },
+              "texto": {
+                "es": "El precio de entrada que imprime el aviso del proyecto.",
+                "en": "The entry price the project's ad prints."
+              }
+            },
+            {
+              "titulo": {
+                "es": "«Pagas al menos»",
+                "en": "\"You pay at least\""
+              },
+              "texto": {
+                "es": "El «desde» más los derechos de registro y el parqueadero que se cobra aparte, cada peso con su norma.",
+                "en": "The \"from\" price plus registration fees and parking sold separately, every peso with its rule."
+              }
+            }
+          ],
+          "fuente": "H2-16"
+        },
+        {
+          "tipo": "decision",
+          "pregunta": {
+            "es": "Tienes presupuesto para estrenar en la Sabana: ¿te compara con usados?",
+            "en": "You have a budget for a new home in the Sabana: does it compare with resale?"
+          },
+          "respuesta": {
+            "es": "No. Innmobiliaria publica usados solo en Bogotá, así que en la Sabana no compara y lo dice. En Bogotá tampoco compara con menos de cinco usados comparables en tu presupuesto y zona: «No hay comparación honesta».",
+            "en": "No. Innmobiliaria lists resale homes only in Bogotá, so in the Sabana it doesn't compare, and says so. In Bogotá it won't compare either with fewer than five comparable resale homes in your budget and area, and it tells you so."
+          },
+          "fuente": "H2-17"
+        }
+      ]
+    },
+    {
+      "orden": 10,
+      "que_resuelve": {
+        "es": "No todo dueño sabe tomar buenas fotos, y no todo comprador lee en español. Aquí el dueño pide una sesión de fotos desde su anuncio, y toda la app funciona en español y en inglés con el mismo enlace.",
+        "en": "Not every owner can take good photos, and not every buyer reads Spanish. Here owners request a photo session from their listing, and the whole app works in Spanish and English on the same link."
+      },
+      "te_sirve": [
+        {
+          "texto": {
+            "es": "Prefieres que alguien del equipo tome las fotos de tu inmueble.",
+            "en": "You'd rather have someone from the team photograph your home."
+          },
+          "fuente": "H2-23"
+        },
+        {
+          "texto": {
+            "es": "Vives fuera de Colombia o lees mejor en inglés: el selector ES/EN cambia la app y lo recuerda.",
+            "en": "You live abroad or read English more easily: the ES/EN switch changes the app and remembers it."
+          },
+          "fuente": "H2-24"
+        },
+        {
+          "texto": {
+            "es": "Publicaste en inglés y quieres que tus avisos te lleguen en inglés.",
+            "en": "You listed in English and want your notices to arrive in English."
+          },
+          "fuente": "H2-24"
+        }
+      ],
+      "no_es": [
+        {
+          "texto": {
+            "es": "La app no agenda sola la sesión de fotos: el equipo te escribe por WhatsApp para acordar el día.",
+            "en": "The app doesn't book the photo session by itself: the team messages you on WhatsApp to agree on a day."
+          },
+          "fuente": "H2-23"
+        },
+        {
+          "texto": {
+            "es": "El idioma de tus avisos queda fijado al publicar y no se edita después.",
+            "en": "The language of your notices is set when you list and cannot be changed later."
+          },
+          "fuente": "H2-24"
+        }
+      ],
+      "flujo": {
+        "titulo": {
+          "es": "Pedir tu sesión de fotos",
+          "en": "Requesting your photo session"
+        },
+        "nodos": [
+          {
+            "id": "n1",
+            "tipo": "inicio",
+            "actor": "dueno",
+            "texto": {
+              "es": "Abre «Mi anuncio», en «Sesión de fotos»",
+              "en": "Opens Photo session in their listing"
+            }
+          },
+          {
+            "id": "n2",
+            "tipo": "tarea",
+            "actor": "dueno",
+            "texto": {
+              "es": "Elige entre semana, sábado o domingo",
+              "en": "Picks weekday, Saturday or Sunday"
+            }
+          },
+          {
+            "id": "n3",
+            "tipo": "tarea",
+            "actor": "equipo",
+            "texto": {
+              "es": "Le escribe por WhatsApp y la agenda",
+              "en": "Messages on WhatsApp and schedules it"
+            }
+          },
+          {
+            "id": "n4",
+            "tipo": "tarea",
+            "actor": "dueno",
+            "texto": {
+              "es": "Ve su sesión «Agendada», con fecha y hora",
+              "en": "Sees it scheduled, with date and time"
+            },
+            "funcionalidad": "H2-23"
+          },
+          {
+            "id": "n5",
+            "tipo": "decision",
+            "actor": "dueno",
+            "texto": {
+              "es": "¿Sigue en pie la sesión?",
+              "en": "Is the session still on?"
+            }
+          },
+          {
+            "id": "n6",
+            "tipo": "fin",
+            "actor": "equipo",
+            "texto": {
+              "es": "La marca como «Hecha»",
+              "en": "Marks it as done"
+            }
+          },
+          {
+            "id": "n7",
+            "tipo": "fin",
+            "actor": "dueno",
+            "texto": {
+              "es": "La cancela mientras esté abierta",
+              "en": "Cancels it while it is still open"
+            }
+          }
+        ],
+        "aristas": [
+          {
+            "de": "n1",
+            "a": "n2"
+          },
+          {
+            "de": "n2",
+            "a": "n3"
+          },
+          {
+            "de": "n3",
+            "a": "n4"
+          },
+          {
+            "de": "n4",
+            "a": "n5"
+          },
+          {
+            "de": "n5",
+            "a": "n6",
+            "etiqueta": {
+              "es": "sí",
+              "en": "yes"
+            }
+          },
+          {
+            "de": "n5",
+            "a": "n7",
+            "etiqueta": {
+              "es": "no",
+              "en": "no"
+            }
+          }
+        ]
+      },
+      "fichas": [
+        {
+          "tipo": "concepto",
+          "pregunta": {
+            "es": "¿Qué es «Fotos que venden»?",
+            "en": "What is the photo session request?"
+          },
+          "respuesta": {
+            "es": "Es la sesión de fotos que pides desde «Mi anuncio», eligiendo entre semana, sábado o domingo. El equipo te escribe por WhatsApp para acordar el día y tú ves el estado: pedida, agendada, hecha o cancelada. Pedirla no cuesta ni compromete.",
+            "en": "It is the photo session you request from your listing, choosing a weekday, Saturday or Sunday. The team messages you on WhatsApp to agree on a day, and you see its status: requested, scheduled, done or canceled. Asking costs nothing and commits you to nothing."
+          },
+          "fuente": "H2-23"
+        },
+        {
+          "tipo": "diferencia",
+          "pregunta": {
+            "es": "¿El idioma de la página o el idioma de tus avisos?",
+            "en": "The page's language, or your notices' language?"
+          },
+          "respuesta": {
+            "es": "Son dos cosas distintas: puedes leer la app en inglés y seguir recibiendo tus avisos en español, si publicaste en español.",
+            "en": "They are separate: you can read the app in English and still get your notices in Spanish, if you listed in Spanish."
+          },
+          "lados": [
+            {
+              "titulo": {
+                "es": "La página",
+                "en": "The page"
+              },
+              "texto": {
+                "es": "Toma el idioma de tu navegador; el selector ES/EN lo cambia y lo recuerda. El enlace no cambia.",
+                "en": "Follows your browser's language; the ES/EN switch changes it and remembers. The link stays the same."
+              }
+            },
+            {
+              "titulo": {
+                "es": "Tus avisos",
+                "en": "Your notices"
+              },
+              "texto": {
+                "es": "Te llegan en el idioma en que publicaste, y ese idioma no se edita después.",
+                "en": "Arrive in the language you listed in, and that language cannot be changed later."
+              }
+            }
+          ],
+          "fuente": "H2-24"
+        },
+        {
+          "tipo": "decision",
+          "pregunta": {
+            "es": "Le mandas tu ficha a alguien que lee en inglés: ¿la ve en inglés?",
+            "en": "You send your listing page to someone who reads English: do they see it in English?"
+          },
+          "respuesta": {
+            "es": "Sí, si su navegador pide inglés antes que español: el mismo enlace se ve en el idioma de quien lo abre, y con ES/EN lo cambia cuando quiera. Los precios siguen en pesos colombianos.",
+            "en": "Yes, if their browser asks for English before Spanish: the same link shows in the language of whoever opens it, and ES/EN switches it anytime. Prices stay in Colombian pesos."
+          },
+          "fuente": "H2-24"
+        }
+      ]
+    }
+  ],
+  "en": {
+    "promesa": {
+      "tagline": "Buy and sell homes directly, commission-free and verified on both sides.",
+      "intro": "Innmobiliaria is Bogotá's housing marketplace between owners and buyers, with no real estate agency in the middle. Owners list for free in three steps and can earn their owner badge; buyers search on a map, prove their WhatsApp is theirs, message the owner with one tap and book the visit, with the price compared against its area and the paperwork explained before signing.",
+      "para_quien": "For owners in Bogotá who want to sell or rent directly. With a real estate agency, the customary commission is 3% of the price: about COP 12 million on a COP 400 million home. On Innmobiliaria, the commission is $0. And for anyone buying, or looking for a brand-new home, who needs to know who is on the other side of the listing.",
+      "diferencial": "The big portals charge for the ad or hand the owner off to an agency. Here, owners prove they own the property by showing their title certificate, which is viewed and never stored, and buyers prove they are real with their WhatsApp. The price is compared with its area, the paperwork comes with the regulation behind it, new housing shows what the ad leaves out and the anti-fraud rules are there for anyone to read. Everything is deterministic code: zero artificial intelligence."
+    },
+    "grupos": {
+      "1": {
+        "nombre": "Founding owners",
+        "linea": "Real spots per locality, WhatsApp invitations, listings that never go stale and free guides."
+      },
+      "2": {
+        "nombre": "Listing is signing up",
+        "linea": "Three short steps, no account or password: your property is registered and you take away the key to complete it."
+      },
+      "3": {
+        "nombre": "Your listing, complete",
+        "linea": "Up to 12 lightweight photos, a guided description and a property page you can share on WhatsApp."
+      },
+      "4": {
+        "nombre": "Privacy and the team panel",
+        "linea": "Your data protected under Law 1581 and a private panel where a person verifies, tracks the campaign and sets the spots."
+      },
+      "5": {
+        "nombre": "Find without an account",
+        "linea": "Filters, a map where you draw your zone, favorites to compare and alerts that arrive on their own."
+      },
+      "6": {
+        "nombre": "Trust on both sides",
+        "linea": "The owner proves they own it, the buyer proves they are real and the anti-fraud rules are there for anyone to read."
+      },
+      "7": {
+        "nombre": "Contact and visit",
+        "linea": "One tap to message the owner and a visit booked end to end, with a reminder."
+      },
+      "8": {
+        "nombre": "Decide with numbers",
+        "linea": "A range, not an appraisal; a monthly payment, not a loan approval; the paperwork with its regulation before you sign."
+      },
+      "9": {
+        "nombre": "New housing, for real",
+        "linea": "What you really pay for a brand-new home and what the ad doesn't say, with the source of every figure."
+      },
+      "10": {
+        "nombre": "Photo help, in two languages",
+        "linea": "A photo session you request from your listing, and the whole app in Spanish and English."
+      }
+    },
+    "features": {
+      "C7a": {
+        "nombre": "Founder spots per locality",
+        "que_hace": "You know how many founder spots are left in your Bogotá locality. The figure comes from the database, the quota the team sets minus those who already listed, and if no quota has been set, no figure is shown."
+      },
+      "C7b": {
+        "nombre": "Invite another owner over WhatsApp",
+        "que_hace": "You invite other owners with your own link, which opens WhatsApp with the message ready to send. Whoever lists with it counts as your invitee, and you see how many there are without seeing who they are."
+      },
+      "B3": {
+        "nombre": "Listings that are always live",
+        "que_hace": "Each listing lasts 60 days and renews with one click from your private link. If no one renews it, it stops showing publicly without being deleted: buyers never run into abandoned listings."
+      },
+      "B2": {
+        "nombre": "Founder pack: four free guides",
+        "que_hace": "You get four free guides for selling without an intermediary: how to take the photos, the legal and notary checklist, how to get your title certificate in 10 minutes and how to set the price, each with its sources."
+      },
+      "A1": {
+        "nombre": "The landing page",
+        "que_hace": "You see right away why it pays to sell directly: the page shows what an agency charges, how registration works, what buyers can already do and the frequently asked questions. It is static, so it loads instantly."
+      },
+      "A2": {
+        "nombre": "List in three steps",
+        "que_hace": "Signing up means listing your property, not leaving an email on a list. Your details, the property's details and your consent go in three short steps, and the draft saves itself so you can pick up where you left off."
+      },
+      "A3": {
+        "nombre": "Your private “my listing” link",
+        "que_hace": "When you finish you receive your private “my listing” link, the only key to complete and edit your listing. Its key sits in the part of the address the browser doesn't send, so it never reaches the server."
+      },
+      "B1": {
+        "nombre": "Photos, description and listing meter",
+        "que_hace": "You build your listing from your phone: up to 12 photos that are compressed before upload, the cover you choose and a guided description. A bar shows you live how much is still missing, and photos that are too small are rejected with a clear notice."
+      },
+      "B4": {
+        "nombre": "Shareable public page",
+        "que_hace": "Each property has its own page, ready for WhatsApp with a preview of the cover, neighborhood and price. Your number, your email, your address and the registration number never appear on it: only a verified buyer can message you, and only if you turn that on."
+      },
+      "L1": {
+        "nombre": "Privacy policy (Law 1581)",
+        "que_hace": "You know who processes your data, for what purpose and what your rights are under Colombia's data protection law, Law 1581. The policy is one tap away from the sign-up consent and from the footer of every page."
+      },
+      "C1": {
+        "nombre": "Team panel and owner badge",
+        "que_hace": "The team sees every registration with its level and date, works through the verification queue and follows up over WhatsApp. The owner badge is granted after viewing the title certificate: only the registration number and the date are stored."
+      },
+      "C8a": {
+        "nombre": "Campaign panel",
+        "que_hace": "The team sees the campaign's real funnel: how many listed, how many have photos and how many are verified. From there it sends batch emails with three fixed templates, each send logged and within the daily email cap."
+      },
+      "C8b": {
+        "nombre": "Zones, spots and density",
+        "que_hace": "The team sets how many founder spots each locality has, which is what feeds the banner on the home page, and sees how many properties there are by locality, type and price range."
+      },
+      "H2-01": {
+        "nombre": "Search with filters and a drawn zone",
+        "que_hace": "You find live listings from owners selling directly in Bogotá by type, locality, price and bedrooms, or by drawing your zone on the map, even with the keyboard alone. No account needed, and the search stays in the link so you can share it."
+      },
+      "H2-02": {
+        "nombre": "The owner badge, in plain sight",
+        "que_hace": "You know at a glance who proved they are the owner. Every card and every page carries a single badge, with symbol and text: Verified owner with the date of the title certificate, re-verification pending, or Founder."
+      },
+      "H2-03": {
+        "nombre": "Favorites, comparison and lists with notes",
+        "que_hace": "You save listings with a heart without creating an account and compare up to four in a table. To decide as a couple or as a family, you build lists with notes and share them over WhatsApp with whoever you choose."
+      },
+      "H2-04": {
+        "nombre": "Email alerts",
+        "que_hace": "You stay informed without searching every day: you save your search and get a daily email digest, only when there are new listings or price drops of 1% or more. You confirm your email once and unsubscribe in one click."
+      },
+      "H2-05": {
+        "nombre": "Data for your area",
+        "que_hace": "You see the context of each listing's area: the median asking price per square meter, how many live listings there are and the reference land value from the Bogotá cadastre (Catastro Bogotá), each figure with its date and source."
+      },
+      "H2-06": {
+        "nombre": "Buyer verified via WhatsApp",
+        "que_hace": "The owner knows the message comes from a person with a real number. To contact or book, the buyer sends a pre-written code from their WhatsApp to Innmobiliaria; browsing and saving stay free, and receiving that message costs the platform nothing."
+      },
+      "H2-07": {
+        "nombre": "Buyer identified with national ID",
+        "que_hace": "Buyers who want to build more trust can, if they wish, validate their national ID card (cédula) and name against the national registry (Registraduría) through a provider. The number is not stored: only the fact that it passed and when."
+      },
+      "H2-08": {
+        "nombre": "Buyer card for the owner",
+        "que_hace": "Before accepting a visit, the owner sees who is asking: name, the last 4 digits of their WhatsApp, whether they are identified, why they are looking, what they declared and how many visits they attended. The owner never sees their email, and can require identified buyers."
+      },
+      "H2-09": {
+        "nombre": "Anti-fraud rules in plain sight",
+        "que_hace": "Four written, public rules flag to the team a price 30% below its area, a photo reused with another phone number, the same registration number with another phone number, or a WhatsApp number with two names. Any verified buyer can report, and a person decides."
+      },
+      "H2-10": {
+        "nombre": "Message the owner with one tap",
+        "que_hace": "With your verified WhatsApp, one tap opens the chat with the owner with a pre-written message about the listing. The contact is logged for both sides: the owner sees it under “Buyers who opened your chat”."
+      },
+      "H2-11": {
+        "nombre": "Visit scheduling",
+        "que_hace": "You request the visit saying why you are looking; the owner proposes up to three time slots, you confirm one and both of you get an email reminder the day before. Afterwards, the owner marks whether you attended."
+      },
+      "H2-12": {
+        "nombre": "Is this listing overpriced?",
+        "que_hace": "You know whether a price makes sense: its price per square meter is compared with similar listings in the area, and the answer is within range, above range or suspiciously cheap. It is a range, not an appraisal; with fewer than five comparables, no answer is given."
+      },
+      "H2-13": {
+        "nombre": "Monthly payment and affordability simulator",
+        "que_hace": "You know how much you would pay each month and the highest price you can afford. With price, down payment, term, rate and income it calculates your payment and whether it fits within the 40% of income set by regulation, and it opens the search already filtered."
+      },
+      "H2-14": {
+        "nombre": "Paperwork assistant",
+        "que_hace": "Before signing the purchase promise agreement you know how much each party pays at deed signing, which documents to ask for, how long each step takes and what each clause says, with that year's regulated rates. Anything that could not be verified is named without a figure."
+      },
+      "H2-15": {
+        "nombre": "Title certificate reader",
+        "que_hace": "You paste the text of the title certificate, the property's legal history, and the reader flags mortgages, liens, lawsuits, ownership limitations and defective title (falsa tradición) by their registry code, and warns you if the text looks incomplete. It is built and switched off until it is validated with real certificates."
+      },
+      "H2-16": {
+        "nombre": "The true price, not the “from” price",
+        "que_hace": "You know the minimum you will pay for a new project. The ad's “from” price is topped up with the registration fees and the separately charged parking space, every peso backed by its regulation; whatever is still missing is named, without inventing a figure."
+      },
+      "H2-17": {
+        "nombre": "New or resale, for the same money",
+        "que_hace": "With your budget and in the same area, you see how many new apartments fit at their true price versus the resale homes for sale on Innmobiliaria, and how much more or less the square meter costs when buying new."
+      },
+      "H2-18": {
+        "nombre": "Waiting costs",
+        "que_hace": "You know what waiting for handover costs you: it counts the months until you get the keys and, if you enter your rent, what you will pay while they build, next to a fixed price or one that rises. Your rent never leaves your phone."
+      },
+      "H2-19": {
+        "nombre": "Within reach, with a subsidy",
+        "que_hace": "You see which housing subsidies you qualify for based on your household income, the national one and the District's, each with its regulation, its amount and the date of its status, and how many social-interest housing (VIS) projects are within your reach."
+      },
+      "H2-20": {
+        "nombre": "The new-housing index",
+        "que_hace": "Every month, the median price per square meter of new housing in Bogotá and the Sabana, by zone, price band and social-interest housing (VIS) or not, drawn from Estrenar Vivienda magazine. A month without an issue is stated as such and not filled in."
+      },
+      "H2-21": {
+        "nombre": "The honest ad sheet",
+        "que_hace": "For each project you see which key facts the ad states, which it leaves out, which are illegible and where two pages print different figures. Sales messages are kept apart: it accuses no one, it names what is missing."
+      },
+      "H2-22": {
+        "nombre": "Sales-office visit",
+        "que_hace": "Once you've run your numbers, you request a visit to the sales office with your verified WhatsApp and choose weekday, Saturday or Sunday. The team coordinates with the sales office and confirms with you; if the office doesn't reply within two business days, you get an email letting you know."
+      },
+      "H2-23": {
+        "nombre": "“Photos that sell”: book your session",
+        "que_hace": "You request a photo session from “My listing”, choosing weekday, Saturday or Sunday, and the team messages you on WhatsApp to agree on the day. You see whether it is requested, scheduled, done or canceled; requesting it costs nothing and commits you to nothing."
+      },
+      "H2-24": {
+        "nombre": "Spanish and English across the app",
+        "que_hace": "The whole app exists in Spanish and English at the same link: it picks up your browser's language, the ES/EN switch changes it and remembers your choice, and owners receive their notices in the language they listed in."
+      }
+    },
+    "metricas": {
+      "funcionalidades": {
+        "etiqueta": "Product features",
+        "unidad": "features",
+        "detalle": "One per feature section of docs/MANUAL-DE-USO.md (third-level headings): 13 from cycle 1 and 24 from the complete product (VISION v2.1.0). The brochure states the same number in its footer."
+      },
+      "pantallas": {
+        "etiqueta": "App screens",
+        "unidad": "screens",
+        "detalle": "page.tsx files under src/app/: 26 for the seller, the buyer or public, and 7 for the operator. The /conoce route serves this brochure and is not a product screen."
+      },
+      "pruebas_unitarias": {
+        "etiqueta": "Unit and component tests",
+        "unidad": "tests",
+        "detalle": "Output of `pnpm test --maxWorkers=2` on 2026-10-27 at 620ca99: 101 files, 1959 tests (including this export's contract, es/en parity, the hard-coded string sweep, the reader's code catalog and the forbidden-figure gates)."
+      },
+      "pruebas_e2e": {
+        "etiqueta": "End-to-end tests",
+        "unidad": "tests",
+        "detalle": "Output of `pnpm exec playwright test --list` on 2026-10-27 at 620ca99: 836 tests in 38 files across two browsers (mobile and desktop) against Postgres; some run only on desktop on purpose (permission catalogs and database tests)."
+      },
+      "cobertura_lineas": {
+        "etiqueta": "Engine line coverage",
+        "unidad": "%",
+        "detalle": "v8 over src/engine (the pure logic) with `pnpm test --maxWorkers=2` on 2026-10-27 at 620ca99, with thresholds enforced by CI in vitest.config.ts; the title certificate reader and anti-fraud engines are at 100% branch coverage."
+      },
+      "decisiones_registradas": {
+        "etiqueta": "Recorded decisions",
+        "unidad": "decisions",
+        "detalle": "Numbered files in decisions/, counted on 2026-10-27 at 620ca99."
+      },
+      "modelos_de_ia": {
+        "etiqueta": "AI models in the app",
+        "unidad": "models",
+        "detalle": "Product rule: all functionality is deterministic. Enabling any AI would require a “code first” ADR."
+      },
+      "costo_operacion_mensual": {
+        "etiqueta": "Monthly operating cost",
+        "unidad": "USD",
+        "detalle": "Sum of the contracted plans: Cloudflare Workers, Cloudflare R2, Supabase, Brevo and PostHog, all on their free tier at this volume; WhatsApp verification works by inbound message and costs nothing, and the optional identification stays within the provider's free tier, with a cap. Does not include the custom domain, which is paid for separately."
+      },
+      "peso_brochure": {
+        "etiqueta": "Brochure size",
+        "unidad": "bytes",
+        "detalle": "Self-contained file with not a single external request: it includes the app's real screenshots embedded as WebP data: URIs. `wc -c docs/BROCHURE.html` on 2026-10-27 at 620ca99."
+      }
+    },
+    "stack": [
+      {
+        "nombre": "Next.js",
+        "papel": "the whole app, served from the edge on Cloudflare Workers"
+      },
+      {
+        "nombre": "TypeScript",
+        "papel": "strict mode across the entire repository"
+      },
+      {
+        "nombre": "Supabase (Postgres)",
+        "papel": "the database, with row-level security from the first table and every write through a transactional function"
+      },
+      {
+        "nombre": "Cloudflare R2",
+        "papel": "the photos, uploaded from the browser with a signed URL"
+      },
+      {
+        "nombre": "Vitest y Playwright",
+        "papel": "the tests: pure engine, components and real browser journeys"
+      },
+      {
+        "nombre": "Brevo y PostHog",
+        "papel": "batch campaign emails and funnel analytics, with no personal data"
+      },
+      {
+        "nombre": "MapLibre",
+        "papel": "the drawn-zone map, with the neighborhoods from the Bogotá cadastre"
+      },
+      {
+        "nombre": "WhatsApp Cloud API y Didit",
+        "papel": "buyer verification: WhatsApp receives the buyer's code, without the app sending any messages, and Didit checks the optional ID card, which is not stored"
+      }
+    ],
+    "privacidad": "Without express consent there is no registration: Colombia's data protection law, Law 1581, is met by construction, with the consent date stored in the same row. Only the minimum necessary data is requested. The owner's number is never on their public page: only a buyer with a verified WhatsApp can message them, and only if the owner turned that on. The title certificate is viewed once and never stored: only the registration number and the date remain. The key of each listing's private link sits in the part of the address the browser doesn't send, so it never reaches the server or its logs. Analytics captures no personal data, does not record the screen and does not track browsing. Buyers prove their WhatsApp by sending a code, and the platform only receives the message; their ID card, if they use it, is checked against the national registry (Registraduría) and the number is not stored. The price, income and rent they type into the tools stay on their phone.",
+    "enlaces_razon": "The app is deployed privately and is not indexed. Its address is not published: in the Portfolio it is known through this fact sheet, its screenshots and its brochure, and access is by waiting list.",
+    "complemento": {
+      "titular": "Homes direct from the owner in Bogotá, commission-free and verified on both sides: the owner shows their title certificate, the buyer proves their WhatsApp, and the price and the paperwork come with their source.",
+      "limites": [
+        "Bogotá only: resale homes are listed and searched in Bogotá; new housing covers Bogotá and the Sabana with the month's magazine issue.",
+        "“Is it overpriced?” compares only against Innmobiliaria listings: it reflects what owners are asking, not an appraisal, and it improves as listings grow.",
+        "The title certificate reader is built and switched off: it turns on only once it has been validated with real certificates.",
+        "The paperwork uses 2026 rates: from January 1, 2027 it names them without a figure and refers you to the notary's office."
+      ],
+      "nunca": [
+        "Charges a commission on the sale or the rental.",
+        "Stores your title certificate: it is viewed once and only the registration number and the date remain.",
+        "Publishes your number, your email, your address or your registration number on your property's page.",
+        "Registers anyone without their express consent (Law 1581).",
+        "Hides a listing because of an automated signal: the rules flag it and a person on the team decides."
+      ],
+      "proceso": {
+        "titulo": "From listing to visit, direct and verified",
+        "carriles": {
+          "dueno": "The owner",
+          "app": "Innmobiliaria",
+          "equipo": "The team",
+          "comprador": "The buyer"
+        },
+        "pasos": {
+          "ini": "Wants to sell or rent without intermediaries",
+          "publica": "Lists the property in three steps",
+          "enlace": "Hands over the private “my listing” link",
+          "completa": "Uploads photos and writes the description",
+          "quiere-sello": "Wants the owner badge?",
+          "muestra": "Shows the title certificate",
+          "sello": "Grants the badge with the certificate's date",
+          "vivo": "Shows the listing live for 60 days",
+          "busca": "Searches with filters or draws a zone",
+          "compara": "Compares the price with the area",
+          "verifica": "Verifies WhatsApp by sending a code",
+          "pide": "Requests a visit and says why they are looking",
+          "tarjeta": "Is the buyer on the card a good fit?",
+          "propone": "Proposes up to three time slots",
+          "confirma": "Confirms the slot that works",
+          "recuerda": "Emails both a reminder the day before the visit",
+          "asistio": "Marks whether the buyer showed up",
+          "cerro": "Closed the deal?",
+          "fin": "Sells directly, with no commission",
+          "renueva": "Renews the listing in time?",
+          "vence": "Stops showing it, without deleting it",
+          "fin-vence": ""
+        },
+        "etiquetas": {
+          "quiere-sello>muestra": "yes",
+          "quiere-sello>vivo": "no: remains Founder",
+          "tarjeta>propone": "yes",
+          "tarjeta>vivo": "no: stays listed",
+          "cerro>fin": "yes",
+          "cerro>renueva": "no",
+          "renueva>vivo": "yes: 60 more days",
+          "renueva>vence": "no"
+        },
+        "anotaciones": {
+          "publica": "No account or password. Without express consent there is no registration (Law 1581): the date is stored in the same row.",
+          "sello": "The certificate is viewed once and never stored: only the registration number and the date remain.",
+          "verifica": "Browsing and saving are free; messaging or booking requires a verified WhatsApp. The owner never sees the buyer's email.",
+          "tarjeta": "Name, last 4 digits, verification level and visits attended. The owner can require identified buyers.",
+          "vivo": "The anti-fraud rules flag listings to the team; a person reviews and decides, nothing is hidden automatically."
+        }
+      }
+    }
+  }
+}

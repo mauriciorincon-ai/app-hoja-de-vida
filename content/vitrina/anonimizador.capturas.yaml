@@ -1,6 +1,6 @@
 # Capturas de la ficha de Anonimizador Velo — pedido 026, planeadora, 2026-10-27.
-# Tomadas de un build de producción de la base `origin/main` 5bac57b, en tema claro, 1536×960 y
-# deviceScaleFactor 1, recorriendo la app por su interfaz con archivos del generador sintético
+# Tomadas de un build de producción de la base `origin/main` 5bac57b, en tema claro; tomas con propósito (2026-10-31): cada pieza completa, centrada sobre el fondo de la app, con margen, y ampliada hasta llenar el lienzo de 1536×960 (a DPR 3, en el ancho de ventana que más llena),
+# recorriendo la app por su interfaz con archivos del generador sintético
 # seeded de la propia app (`docs/kit-de-prueba/generador.mjs`, perfil clínico, semillas 42, 7 y 11).
 # Ningún dato real: nombres, documentos y correos salen de un PRNG con semilla.
 portada: entrada.webp

@@ -16,7 +16,7 @@
 # `nombre` es el NOMBRE OFICIAL de la app, UNO solo, igual en español y en inglés
 # y en todo el sitio (ADR-028). El export no se edita (regla de content/), así
 # que el alias vive aquí y el loader del portafolio lo aplica al leerlo: de ahí lo
-# heredan el escaparate, la ficha, el detalle, las vecinas, el manifest, el chat,
+# heredan el escaparate, la ficha, el brochure, las vecinas, el manifest, el chat,
 # los correos y el PDF. Los textos propios (`data/**`) usan este mismo nombre, y
 # un test falla si vuelve a colarse el del export.
 

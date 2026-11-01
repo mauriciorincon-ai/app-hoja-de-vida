@@ -16,8 +16,8 @@ import { Maqueta, tieneMaqueta } from "./maquetas";
  *
  * La vitrina es el escaparate, no el catálogo: aquí cada app enseña lo justo
  * para decidir si entras —su estado, su nombre, su promesa, su tira y el
- * tamaño de lo construido— y **su ficha completa vive en su propia página**
- * (`/portafolio/apps/<slug>`). Antes las seis fichas se apilaban en una sola ruta: un
+ * tamaño de lo construido— y **su ficha vive en su propia página**
+ * (`/portafolio/apps/<slug>`), y su brochure, a un botón de ella. Antes las seis fichas se apilaban en una sola ruta: un
  * documento de más de 22 000 px donde ninguna app tenía sitio propio, ninguna
  * podía enlazarse ni compartirse por separado, y el visitante pagaba de una
  * vez el peso de las seis.

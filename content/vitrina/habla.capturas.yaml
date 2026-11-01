@@ -1,5 +1,5 @@
 # Capturas de Habla San (pedido 026, planeadora, 2026-10-27). Build de producción de 6c4d113 en
-# una copia aislada; viewport 1024×640 a deviceScaleFactor 1.5 (WebP de 1536×960), tema claro de la
+# una copia aislada; tomas con propósito (2026-10-31): cada pieza completa, centrada sobre el fondo de la app, con margen, y ampliada hasta llenar el lienzo (a DPR 3, en el ancho de ventana que más llena; WebP de 1536×960), con el reloj de la página en el día de la entrega (27 de octubre); tema claro de la
 # app e interfaz en español. Perfil 100 % sintético («Pipo», temas genéricos), historial y sesiones
 # fabricados, banco de voz = WAV de silencio inyectado; el micrófono es el falso de Chromium con los
 # WAV sintéticos de las pruebas e2e. Ningún nombre, voz, foto ni audio de un niño real.

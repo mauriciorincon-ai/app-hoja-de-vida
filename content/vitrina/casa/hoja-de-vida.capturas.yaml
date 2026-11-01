@@ -1,0 +1,34 @@
+# Capturas de CV Viva — entrega 028 (planeadora, 2026-10-31). Build de producción de una copia aislada de `b9acf15`
+# (main tras el #106), servida en local con el entorno de sus e2e: sin Supabase, sin correo y con el chat simulado;
+# el modo mantenimiento (CV-24), de otra build de la misma copia con MANTENIMIENTO=on. Tomas con propósito: cada
+# pieza completa, centrada sobre el fondo de la app, con margen, y ampliada hasta llenar el lienzo (a DPR 3, en el
+# ancho de ventana que más llena); interfaz en español, tema claro. Contenido real del sitio público del dueño; los
+# votos del roadmap, con la base vacía (sin votos). El botón flotante del chat se oculta: tiene su propia entrega.
+portada: entrada.webp
+capturas:
+  - { funcionalidad: CV-01, archivo: CV-01.webp, pie: { es: "La trayectoria: la línea, el año grande y las tres primeras experiencias", en: "The career: the line, the big year and the first three roles" } }
+  - { funcionalidad: CV-02, archivo: CV-02.webp, pie: { es: "Vesting, con sus logros completos desplegados", en: "Vesting, with its full achievements expanded" } }
+  - { funcionalidad: CV-03, archivo: CV-03.webp, pie: { es: "Los ocho logros, cada uno con su número y de dónde sale", en: "The eight achievements, each with its number and where it comes from" } }
+  - { funcionalidad: CV-04, archivo: CV-04.webp, pie: { es: "Cinco certificaciones, dos con el sello «En curso» en vez de año", en: "Five certifications, two marked as in progress instead of a year" } }
+  - { funcionalidad: CV-05, archivo: CV-05.webp, pie: { es: "Skills: dos de los nueve grupos con sus herramientas, sin porcentajes", en: "Skills: two of the nine groups with their tools, no percentages" } }
+  - { funcionalidad: CV-06, archivo: CV-06.webp, pie: { es: "Los tres estudios, con su institución y su periodo", en: "The three degrees and courses, with institution and period" } }
+  - { funcionalidad: CV-07, archivo: CV-07.webp, pie: { es: "El caso de Vesting: la tesis, sus temas y cuatro cifras", en: "The Vesting case: its thesis, its topics and four figures" } }
+  - { funcionalidad: CV-08, archivo: CV-08.webp, pie: { es: "La hoja de vida imprimible y su botón del PDF, de la misma fuente", en: "The printable résumé and its PDF button, from the same source" } }
+  - { funcionalidad: CV-09, archivo: CV-09.webp, pie: { es: "El Portafolio: cuatro frentes, cada uno con su estado y su cuenta", en: "The Portfolio: four fronts, each with its status and count" } }
+  - { funcionalidad: CV-10, archivo: CV-10.webp, pie: { es: "Las apps profesionales en carrusel: dos enteras y la tercera asoma", en: "Professional apps in a carousel: two in full and the third peeking in" } }
+  - { funcionalidad: CV-11, archivo: CV-11.webp, pie: { es: "La ficha técnica de HackGuard: titular, stack y cifras con su fuente", en: "HackGuard's tech sheet: headline, stack and figures with their source" } }
+  - { funcionalidad: CV-12, archivo: CV-12.webp, pie: { es: "«Cómo funciona» de Probeta DS: el proceso en BPMN, por carriles", en: "How Probeta DS works: its BPMN process, lane by lane" } }
+  - { funcionalidad: CV-13, archivo: CV-13.webp, pie: { es: "La ficha completa: la pantalla de cada funcionalidad, en carrusel", en: "The full sheet: the screen of each feature, in a carousel" } }
+  - { funcionalidad: CV-14, archivo: CV-14.webp, pie: { es: "Energía y clima: seis hallazgos, cada uno con su cifra y su procedencia", en: "Energy and climate: six findings, each with its figure and source" } }
+  - { funcionalidad: CV-15, archivo: CV-15.webp, pie: { es: "La simulación de planlang, abierta en un marco dentro de su página", en: "planlang's simulation, opened in a frame inside its page" } }
+  - { funcionalidad: CV-16, archivo: CV-16.webp, pie: { es: "El roadmap de Dash Agent: tres ideas por votar, aún sin votos", en: "Dash Agent's roadmap: three ideas to vote on, no votes yet" } }
+  - { funcionalidad: CV-17, archivo: CV-17.webp, pie: { es: "La caja para proponerle una funcionalidad a Dash Agent", en: "The box to propose a feature for Dash Agent" } }
+  - { funcionalidad: CV-18, archivo: CV-18.webp, pie: { es: "La lista de espera, con la app ya elegida y sin promesa de fecha", en: "The waitlist, with the app already chosen and no promised date" } }
+  - { funcionalidad: CV-19, archivo: CV-19.webp, pie: { es: "«Escríbeme»: nombre, correo, motivo y mensaje", en: "The contact form: name, email, reason and message" } }
+  - { funcionalidad: CV-20, archivo: CV-20.webp, pie: { es: "Métodos: la presentación, nueve publicaciones y las dos primeras", en: "Methods: the introduction, nine publications and the first two" } }
+  - { funcionalidad: CV-21, archivo: CV-21.webp, pie: { es: "Las tres voces rotuladas y el índice de los diez bloques", en: "The three labeled voices and the index of the ten blocks" } }
+  - { funcionalidad: CV-22, archivo: CV-22.webp, pie: { es: "El mapa de un sistema de agentes, con su leyenda de formas", en: "The map of an agent system, with its shape legend" } }
+  - { funcionalidad: CV-23, archivo: CV-23.webp, pie: { es: "El menú en el teléfono: la marca HR y los cuatro destinos", en: "The phone menu: the HR mark and the four destinations" } }
+  - { funcionalidad: CV-24, archivo: CV-24.webp, pie: { es: "En mantenimiento: el aviso y el CV en PDF, en los dos idiomas", en: "Under maintenance: the notice and the PDF résumé in both languages" } }
+  - { funcionalidad: CV-25, archivo: CV-25.webp, pie: { es: "El 404 en español y en inglés, con un botón a cada inicio", en: "The 404 in Spanish and English, with a button to each home page" } }
+sin_pantalla: [CV-26, CV-27, CV-28]

@@ -1,0 +1,75 @@
+# Complemento de la ficha técnica de CV Viva (ADR-016). PROCEDENCIA: planeadora — entrega 028 (2026-10-31), decisión
+# «1a» del dueño al G-Plan del Sprint 028 (OM-26: «la ficha estándar, con su BPMN y contenidos de valor, como las
+# demás»). Escrito desde una copia aislada de `b9acf15` (main tras el #106) contra su manual, su código y su VISION v1.4.2.
+schema_version: "1.0.0"
+app: hoja-de-vida
+procedencia: planeadora
+declarado_en: "2026-10-31"
+titular: "La hoja de vida que se recorre como una pieza editorial, sale en PDF para los ATS de la misma fuente y abre el Portafolio: cada producto con su proceso dibujado y cada cifra con su procedencia."
+cifras_destacadas: [funcionalidades, casos_de_estudio, publicaciones_metodos, pruebas_unitarias, pruebas_e2e]
+limites:
+  - "Solo tema claro: el modo oscuro todavía no existe y es una deuda de diseño registrada."
+  - "La votación cuenta un voto por navegador: quien borra sus datos o cambia de equipo puede votar otra vez."
+  - "Los formularios no guardan nada: si el servicio de correo no está configurado, el mensaje no llega aunque se vea la confirmación."
+  - "El Portafolio muestra la versión anclada de cada producto, con su fecha, no su estado en tiempo real."
+nunca:
+  - "Publica un enlace de acceso a una app ni a su código: el Portafolio muestra, no entrega."
+  - "Escribe a mano un total: las cuentas de apps, productos y publicaciones se miden del contenido."
+  - "Publica la cifra de un caso que su documento de fondo no diga."
+  - "Guarda un dato personal por un voto: solo la app, la funcionalidad y la fecha."
+  - "Nombra en el CV una credencial que no está en la lista de certificaciones."
+proceso:
+  titulo: "De la hoja de vida publicada a la conversación"
+  carriles:
+    - { id: dueno, nombre: "El dueño" }
+    - { id: cv-viva, nombre: "CV Viva" }
+    - { id: visita, nombre: "Quien visita" }
+  pasos:
+    - { id: ini, tipo: inicio, carril: dueno, texto: "Tiene algo nuevo que contar" }
+    - { id: edita, tipo: tarea, carril: dueno, texto: "Edita su contenido en español e inglés" }
+    - { id: valida, tipo: tarea, carril: cv-viva, texto: "Valida el contenido, las cifras y las citas" }
+    - { id: aduana, tipo: decision, carril: cv-viva, texto: "¿Pasa la aduana?" }
+    - { id: nombra, tipo: tarea, carril: cv-viva, texto: "Detiene la publicación y nombra el campo" }
+    - { id: publica, tipo: tarea, carril: cv-viva, texto: "Publica la web y el PDF desde la misma fuente" }
+    - { id: recorre, tipo: tarea, carril: visita, texto: "Recorre la trayectoria y los logros" }
+    - { id: evidencia, tipo: decision, carril: visita, texto: "¿Quiere ver la evidencia?" }
+    - { id: caso, tipo: tarea, carril: visita, texto: "Abre el caso de estudio con sus cifras" }
+    - { id: portafolio, tipo: tarea, carril: visita, texto: "Explora el Portafolio y sus fichas" }
+    - { id: metodos, tipo: tarea, carril: visita, texto: "Lee cómo se diseña en Métodos" }
+    - { id: pdf, tipo: tarea, carril: visita, texto: "Descarga el CV en PDF para su sistema" }
+    - { id: hablar, tipo: decision, carril: visita, texto: "¿Quiere hablar con el dueño?" }
+    - { id: escribe, tipo: tarea, carril: visita, texto: "Escribe o se anota en la lista de espera" }
+    - { id: correo, tipo: tarea, carril: cv-viva, texto: "Le lleva el mensaje al correo del dueño" }
+    - { id: responde, tipo: tarea, carril: dueno, texto: "Responde a quien escribió" }
+    - { id: fin, tipo: fin, carril: dueno, texto: "Empieza la conversación" }
+    - { id: fin-visita, tipo: fin, carril: visita, texto: "" }
+  flujos:
+    - { de: ini, a: edita }
+    - { de: edita, a: valida }
+    - { de: valida, a: aduana }
+    - { de: aduana, a: publica, etiqueta: "sí" }
+    - { de: aduana, a: nombra, etiqueta: "no" }
+    - { de: nombra, a: edita }
+    - { de: publica, a: recorre }
+    - { de: recorre, a: evidencia }
+    - { de: evidencia, a: caso, etiqueta: "sí" }
+    - { de: evidencia, a: pdf, etiqueta: "no: le basta el PDF" }
+    - { de: caso, a: portafolio }
+    - { de: portafolio, a: metodos }
+    - { de: metodos, a: pdf }
+    - { de: pdf, a: hablar }
+    - { de: hablar, a: escribe, etiqueta: "sí" }
+    - { de: hablar, a: fin-visita, etiqueta: "no" }
+    - { de: escribe, a: correo }
+    - { de: correo, a: responde }
+    - { de: responde, a: fin }
+  anotaciones:
+    - { paso: valida, texto: "Un campo mal formado, una cifra que su documento no dice o una cita que no lleva a ninguna parte detienen la publicación." }
+    - { paso: publica, texto: "La web, el PDF y el índice del chat salen de los mismos datos: nunca quedan desactualizados entre sí." }
+    - { paso: caso, texto: "Cada cifra de la banda de un caso tiene que estar en su documento de fondo, o el build falla nombrándola." }
+    - { paso: portafolio, texto: "Cada app con su proceso dibujado y sus cifras con procedencia, y ningún enlace de acceso: se muestra, no se entrega." }
+    - { paso: escribe, texto: "Ningún formulario se guarda en una base: el mensaje viaja por correo. La lista de espera es solo para las apps." }
+
+# Roadmap votable: ninguna funcionalidad de CV Viva se muestra ni se vota (decisión del dueño, 2026-09-13; el manual,
+# «Roadmap con votación anónima»). Vacío a propósito.
+roadmap: []

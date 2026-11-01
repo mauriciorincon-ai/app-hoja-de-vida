@@ -1,6 +1,6 @@
 # Capturas de Probeta DS para su ficha en CV Viva — pedido 026, planeadora, tomadas el 2026-10-27 y el 2026-10-28.
 # Reentrega 2026-10-28: U1, P3, D12 (nueva, del S21), D9, L7, U13, U14, U15, U17 y U18 retomadas sobre 988489c (S21);
-# las demás, de d302949 (su pantalla no cambió en el S21). Build de producción, viewport 1024×640 a deviceScaleFactor 1.5 (archivo de 1536×960), tema claro,
+# las demás, de d302949 (su pantalla no cambió en el S21). Build de producción; tomas con propósito (2026-10-31): cada pieza completa, centrada sobre el fondo de la app, con margen, y ampliada hasta llenar el lienzo (a DPR 3, en el ancho de ventana que más llena; archivo de 1536×960), tema claro,
 # interfaz en español, datos sintéticos del kit de prueba de la app. Pies en ES y EN (≤ 80 caracteres).
 portada: entrada.webp
 capturas:
