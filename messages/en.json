@@ -589,7 +589,7 @@
   },
   "vitrinaHome": {
     "titulo": "Portfolio",
-    "linea": "Four fronts: apps, agents, research and dashboards. Every published product carries its technical sheet.",
+    "linea": "Four fronts: apps, agents, dashboards and research. Every published product carries its technical sheet.",
     "ir": "Explore my portfolio",
     "publicados": "{n} published",
     "enPreparacion": "In preparation"
