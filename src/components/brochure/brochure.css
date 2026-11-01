@@ -524,7 +524,9 @@
   @media (max-width:700px){
     &{--alto-barra:56px}
     .envoltura,.proceso-marco{padding:0 16px}
-    .barra{padding:0 12px;gap:8px}.marca span,.indice>button span:not(.b-svg),.icono-boton span:not(.b-svg){display:none}
+    .barra{padding:0 12px;gap:8px}.indice>button span:not(.b-svg),.icono-boton span:not(.b-svg){display:none}
+    /* El nombre de la app es el NOMBRE del botón (sin aria-label: coincide con lo visible): en móvil solo se ve la inicial, pero el texto queda para el lector de pantalla. */
+    .marca span{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
     .busca{width:auto;flex:1;min-width:0}
     .uso{grid-template-columns:minmax(0,1fr)}
     .sec{padding-top:72px}.sec-cabeza{grid-template-columns:minmax(0,1fr)}.sec-cabeza p{grid-column:1}
