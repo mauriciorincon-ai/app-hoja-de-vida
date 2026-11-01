@@ -9,7 +9,7 @@ import { getFrentes, type Frente } from "@/lib/vitrina/categorias";
  * LA PUERTA AL PORTAFOLIO EN LA HOME (S28, OM-18 — «1a»). Desde la revisión post-S7 la HOME repetía
  * las cuatro cajas del portal (`/portafolio`): el mismo gesto dos veces, con la misma cuenta. Ahora
  * es lo que la maqueta aprobada llama «pieza 2» (`referencias-ui/home/maqueta/`): la forma de
- * `PuertaMetodos` —el título y la línea, una fila por frente y el botón— entre Logros y Estudios.
+ * `PuertaMetodos` —el título y la línea, una fila por frente y el botón— entre Skills y Métodos.
  *
  * Cada fila lleva la cifra del frente y su `intro`; un frente en preparación dice «En preparación»
  * donde los demás dicen su frase, y no enseña una cuenta inventada. **Las cifras salen del disco**

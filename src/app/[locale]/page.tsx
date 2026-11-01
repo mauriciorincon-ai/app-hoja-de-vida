@@ -73,7 +73,7 @@ export default async function HomePage({
         <Skills skills={cv.skills} />
         {/* La puerta del Portafolio (ajuste de la HOME, 2026-11-01): justo antes de
             «Métodos». Primero lo que es y lo que construyó; al final, cómo lo piensa.
-            El sitio de «Proyectos» lo ocupa la vitrina: los case studies se abren
+            La vitrina asumió el lugar conceptual de «Proyectos»: los case studies se abren
             desde su hito en la trayectoria, y el roadmap se fue con las apps, a
             /portafolio/apps. */}
         <VitrinaHome locale={locale as Locale} />
