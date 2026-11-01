@@ -41,8 +41,14 @@ export function BrochureInteractivo({ slug }: { slug: string }) {
       const t = (e as PointerEvent).pointerType;
       return t === "mouse" || t === "pen";
     };
-    const porTeclado = (t: EventTarget | null) =>
-      t instanceof Element && t.matches(":focus-visible");
+    const porTeclado = (t: EventTarget | null) => {
+      if (!(t instanceof Element)) return false;
+      try {
+        return t.matches(":focus-visible");
+      } catch {
+        return true; // un navegador sin `:focus-visible`: se queda como antes, el foco crece
+      }
+    };
     const conducta = (): ScrollBehavior => (RM() ? "auto" : "smooth");
     const quieto = () => raiz.hasAttribute("data-b-quieto");
     const observadores: IntersectionObserver[] = [];
