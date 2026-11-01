@@ -33,6 +33,16 @@ export function BrochureInteractivo({ slug }: { slug: string }) {
     ) => [...r.querySelectorAll<T>(s)];
     const RM = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
     const sinHover = () => matchMedia("(hover: none)").matches;
+    // «Un ratón de verdad» (o un lápiz) y «el foco del teclado»: lo único que crece o detiene la cinta. Un toque con
+    // el dedo también dispara `mouseover`, y `(hover: none)` no lo ataja en los navegadores táctiles que dicen
+    // `hover: hover` (Samsung Internet); y el diálogo del Recorrido devuelve el foco a la pantalla que lo abrió,
+    // pero tras un toque ese foco no es de teclado (`:focus-visible` no coincide).
+    const deRaton = (e: Event) => {
+      const t = (e as PointerEvent).pointerType;
+      return t === "mouse" || t === "pen";
+    };
+    const porTeclado = (t: EventTarget | null) =>
+      t instanceof Element && t.matches(":focus-visible");
     const conducta = (): ScrollBehavior => (RM() ? "auto" : "smooth");
     const quieto = () => raiz.hasAttribute("data-b-quieto");
     const observadores: IntersectionObserver[] = [];
@@ -615,6 +625,7 @@ export function BrochureInteractivo({ slug }: { slug: string }) {
     raiz.addEventListener(
       "focusin",
       (e) => {
+        if (!porTeclado(e.target)) return;
         const el = conPrevia(e.target);
         if (el?.dataset.previa) mostrarPrevia(el);
         const ci = deCinta(e.target);
@@ -634,8 +645,9 @@ export function BrochureInteractivo({ slug }: { slug: string }) {
       o,
     );
     raiz.addEventListener(
-      "mouseover",
+      "pointerover",
       (e) => {
+        if (!deRaton(e)) return;
         const el = conPrevia(e.target);
         if (el?.dataset.previa) mostrarPrevia(el);
         const ci = deCinta(e.target);
@@ -644,8 +656,9 @@ export function BrochureInteractivo({ slug }: { slug: string }) {
       o,
     );
     raiz.addEventListener(
-      "mouseout",
+      "pointerout",
       (e) => {
+        if (!deRaton(e)) return;
         const el = conPrevia(e.target);
         if (el && !el.contains(e.relatedTarget as Node)) ocultarPrevia();
         const pi = (e.target as HTMLElement).closest?.<HTMLElement>(
