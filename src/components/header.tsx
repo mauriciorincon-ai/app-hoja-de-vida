@@ -159,7 +159,9 @@ export function Header({
     "flex min-h-11 items-center text-sm text-ink-2 transition-colors duration-[120ms] hover:text-ink-0";
 
   return (
-    <header className={`sticky top-0 z-10 border-b border-paper-2 bg-paper-0/95${sinImprimir ? " print:hidden" : ""}`}>
+    <header
+      className={`sticky top-0 z-10 border-b border-paper-2 bg-paper-0/95 ${sinImprimir ? "print:hidden" : ""}`}
+    >
       <a
         href={enHome ? "#contenido" : `/${locale}#contenido`}
         className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:rounded-md focus:bg-paper-0 focus:px-3 focus:py-2 focus:text-sm focus:text-ink-0 focus:shadow-sh-2"
