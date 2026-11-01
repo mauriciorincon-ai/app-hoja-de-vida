@@ -20,7 +20,7 @@ import { parse } from "yaml";
  * ficha: las diez abren en su brochure y se miden como brochure, en su entrada.
  */
 
-const rutaDelBrochure = (slug: string) => `/es/portafolio/apps/${slug}`;
+const entradaDe = (slug: string) => `/es/portafolio/apps/${slug}`;
 
 type Frente = { id: string; estado: "abierta" | "en-preparacion" };
 const FRENTES = (
@@ -98,7 +98,7 @@ test.describe("OM-29 · el brochure numera sus secciones y sus capítulos", () =
     test(`${slug}: 01… seguido en las secciones y 2.1… seguido en los capítulos`, async ({
       page,
     }) => {
-      await page.goto(rutaDelBrochure(slug));
+      await page.goto(entradaDe(slug));
       const secciones = await textos(page, "[data-brochure] .sec-num");
       expect(secciones.length, "secciones numeradas").toBeGreaterThanOrEqual(4);
       expect(secciones, "secciones: 01… seguido").toEqual(

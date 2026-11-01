@@ -541,6 +541,116 @@ test.describe("Vitrina — los frentes en preparación (ADR-015)", () => {
   });
 });
 
+/**
+ * LA FICHA TÉCNICA: EL PROCESO BPMN Y EL STACK (ADR-016). Hasta el S30 estas pruebas miraban la ficha de las apps; desde el S31 las
+ * apps abren en su brochure, pero el renderizador (`FichaTecnica`, `ProcesoBpmn`) sigue vivo en los agentes —que traen su proceso y su
+ * stack—, así que lo que vigilaban sigue vigilándose, ahora sobre ellos: un nodo por paso, las anotaciones como notas, la procedencia
+ * declarada, el proceso como texto en el HTML (ATS), el deslizamiento en móvil y el Stack desplegable sin tooltips.
+ */
+test.describe("Vitrina — la ficha técnica de un agente: proceso y Stack (ADR-016)", () => {
+  type FichaViva = {
+    pieza: { slug: string };
+    titular: string;
+    stack: { nombre: string; papel: string }[];
+    procedencia_proceso?: string;
+    proceso?: {
+      titulo: string;
+      pasos: { tipo: string; texto: string }[];
+      anotaciones: unknown[];
+    };
+  };
+  const AGENTES = (ABIERTOS.find((f) => f.id === "agentes")?.piezas ??
+    []) as unknown as FichaViva[];
+  const CON_PROCESO = AGENTES.filter((a) => a.proceso);
+  /** El agente con más pasos: el que más estresa el diagrama (el gate ATS y el móvil). */
+  const MAS_LARGO = CON_PROCESO.reduce((a, b) =>
+    b.proceso!.pasos.length > a.proceso!.pasos.length ? b : a,
+  );
+
+  test("hay agentes con proceso y con stack (si no, estas pruebas no miden nada)", () => {
+    expect(CON_PROCESO.length).toBeGreaterThan(0);
+    expect(AGENTES.some((a) => a.stack.length > 0)).toBe(true);
+  });
+
+  test("cada agente con proceso lo pinta: un nodo por paso, sus anotaciones como notas y su procedencia declarada", async ({
+    page,
+  }) => {
+    for (const a of CON_PROCESO) {
+      await page.goto(`/es/portafolio/agentes/${a.pieza.slug}`);
+      const ft = page.locator(`[data-ficha-tecnica="${a.pieza.slug}"]`);
+      const proceso = ft.locator(`[data-proceso="${a.pieza.slug}"]`);
+      await expect(proceso.locator("[data-paso]"), a.pieza.slug).toHaveCount(
+        a.proceso!.pasos.length,
+      );
+      await expect(proceso.locator("[data-nota]"), a.pieza.slug).toHaveCount(
+        a.proceso!.anotaciones.length,
+      );
+      await expect(
+        ft.locator("[data-procedencia-proceso]"),
+        a.pieza.slug,
+      ).toHaveAttribute("data-procedencia-proceso", a.procedencia_proceso!);
+    }
+  });
+
+  test("gate ATS/SEO: la ficha técnica entrega el proceso como texto en el HTML", async ({
+    request,
+  }) => {
+    const a = MAS_LARGO;
+    const html = await (
+      await request.get(`/es/portafolio/agentes/${a.pieza.slug}`)
+    ).text();
+    expect(html).toContain(a.titular.slice(0, 40));
+    // Los pasos del proceso son <text> del SVG: un rastreador los lee.
+    for (const paso of a
+      .proceso!.pasos.filter((p) => p.tipo === "tarea")
+      .slice(0, 3)) {
+      expect(html).toContain(paso.texto.split(" ")[0]);
+    }
+    expect(html).toContain(a.proceso!.titulo.toUpperCase());
+  });
+
+  test("la ficha técnica en móvil no encoge el proceso: se desliza", async ({
+    page,
+    isMobile,
+  }) => {
+    test.skip(!isMobile, "solo en el proyecto móvil");
+    await page.goto(`/es/portafolio/agentes/${MAS_LARGO.pieza.slug}`);
+    const caja = page.locator(
+      `[data-proceso="${MAS_LARGO.pieza.slug}"] [data-desliza]`,
+    );
+    const { scrollWidth, clientWidth } = await caja.evaluate((el) => ({
+      scrollWidth: el.scrollWidth,
+      clientWidth: el.clientWidth,
+    }));
+    expect(scrollWidth).toBeGreaterThan(clientWidth);
+    await expect(
+      page.getByText("Desliza para ver el proceso completo."),
+    ).toBeVisible();
+  });
+
+  test("el Stack se despliega con el para qué de cada componente, sin tooltips", async ({
+    page,
+  }) => {
+    const a = AGENTES.find((x) => x.stack.length > 0)!;
+    await page.goto(`/es/portafolio/agentes/${a.pieza.slug}`);
+    const ft = page.locator(`[data-ficha-tecnica="${a.pieza.slug}"]`);
+    // La vista comprimida: una cápsula por componente, sin `title`.
+    const capsulas = ft.locator('ul[aria-label="Stack"] li span');
+    await expect(capsulas).toHaveCount(a.stack.length);
+    expect(
+      await capsulas.evaluateAll(
+        (els) => els.filter((e) => e.hasAttribute("title")).length,
+      ),
+    ).toBe(0);
+    const detalle = ft.locator("[data-stack-detalle]");
+    await expect(detalle.locator("dd").first()).toBeHidden();
+    await detalle.locator("summary").click();
+    await expect(detalle.locator("dd").first()).toBeVisible();
+    await expect(detalle.locator("dd").first()).toHaveText(a.stack[0].papel);
+    await expect(detalle.locator("dt")).toHaveCount(a.stack.length);
+  });
+});
+
 test.describe("Vitrina — las estanterías: un frente ABIERTO y sus piezas (S7)", () => {
   test("el escaparate lista TODAS las piezas del frente, y la cuenta es la medida", async ({
     page,
@@ -749,7 +859,7 @@ test.describe("Vitrina — las estanterías: un frente ABIERTO y sus piezas (S7)
   }) => {
     // Decisión del dueño (2026-09-13): agentes, investigaciones y tableros no
     // tienen vocación comercial, así que nadie tiene por qué pedir acceso.
-    // Solo las apps tienen lista de espera (vitrina.spec, ficha técnica de app).
+    // Solo las apps tienen lista de espera (en «Úsala», el cierre de su brochure: `usala.spec.ts`).
     const { f, piezas } = { f: ABIERTOS[0], piezas: ABIERTOS[0].piezas };
     await page.goto(`/es/portafolio/${f.id}/${piezas[0].pieza.slug}`);
     await expect(page.locator('[data-cta="brochure"]')).toHaveCount(0);

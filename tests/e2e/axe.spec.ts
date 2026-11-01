@@ -102,12 +102,7 @@ const RUTAS = [
     "/en/portafolio",
     "/es/portafolio/apps",
     "/en/portafolio/apps",
-    // Por app, su entrada: la ficha técnica (ADR-016), o su brochure si ya abre en él (S30).
-    ...slugsVitrina.flatMap((s) => [
-      `/es/portafolio/apps/${s}`,
-      `/en/portafolio/apps/${s}`,
-    ]),
-    // El brochure de las doce (las diez y las dos de la casa), en los dos idiomas, donde vive.
+    // El brochure de las doce (las diez y las dos de la casa), en los dos idiomas: es la entrada de cada app (S31).
     ...[...slugsVitrina, ...slugsCasa].flatMap((s) => [
       brochureDe("es", s),
       brochureDe("en", s),
