@@ -264,6 +264,31 @@ test.describe("Brochure — sin JavaScript", () => {
   });
 });
 
+test.describe("Brochure — a 390 px nada se sale de la pantalla", () => {
+  test.use({ viewport: { width: 390, height: 844 } });
+
+  test("la rejilla de «te sirve si» cabe con sus citas largas, en las doce y en los dos idiomas", async ({
+    page,
+  }) => {
+    for (const l of IDIOMAS)
+      for (const exp of EXPORTS) {
+        await page.goto(ruta(l, exp.app.slug));
+        await page.evaluate(() => {
+          for (const d of document.querySelectorAll("details")) d.open = true;
+          document
+            .querySelector("[data-brochure]")
+            ?.setAttribute("data-b-entero", "");
+        });
+        const fuera = await page.evaluate(() =>
+          [...document.querySelectorAll(".cuando li")]
+            .filter((li) => li.getBoundingClientRect().right > innerWidth + 1)
+            .map((li) => (li.textContent ?? "").slice(0, 40)),
+        );
+        expect(fuera, `${l}/${exp.app.slug}`).toEqual([]);
+      }
+  });
+});
+
 /** Lo que una persona haría con el brochure, en tres formas del dato. */
 const FORMAS = [
   {
