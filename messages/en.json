@@ -433,8 +433,7 @@
     "procesoPlaneadora": "Process traced by the AI-APPs pipeline from the app itself and its export.",
     "stackParaQue": "What each one is for",
     "s03": "What it brings",
-    "s03sub": "{grupos, plural, one {# group} other {# groups}} · {n} features. The detail of each one lives in the brochure.",
-    "s03subSinBrochure": "{grupos, plural, one {# group} other {# groups}} · {n} features.",
+    "s03sub": "{grupos, plural, one {# group} other {# groups}} · {n} features.",
     "s03subSoloGrupos": "{grupos, plural, one {# group} other {# groups}}.",
     "s04": "Limits, and what it never does",
     "s04sub": "What it chose not to be counts as much as what it is.",
@@ -460,10 +459,8 @@
       "version": "repo version",
       "decisiones": "recorded decisions"
     },
-    "verBrochure": "View brochure",
     "verSimulacion": "See the simulation",
-    "cierreNota": "Shown here; not handed over.",
-    "volverFichaTecnica": "Back to the technical sheet"
+    "cierreNota": "Shown here; not handed over."
   },
   "metodo": {
     "eyebrow": "Methods",

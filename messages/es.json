@@ -433,8 +433,7 @@
     "procesoPlaneadora": "Proceso trazado por el pipeline AI-APPs desde la propia app y su export.",
     "stackParaQue": "Para qué sirve cada uno",
     "s03": "Qué aporta",
-    "s03sub": "{grupos, plural, one {# grupo} other {# grupos}} · {n} funcionalidades. El detalle de cada una vive en el brochure.",
-    "s03subSinBrochure": "{grupos, plural, one {# grupo} other {# grupos}} · {n} funcionalidades.",
+    "s03sub": "{grupos, plural, one {# grupo} other {# grupos}} · {n} funcionalidades.",
     "s03subSoloGrupos": "{grupos, plural, one {# grupo} other {# grupos}}.",
     "s04": "Límites, y lo que nunca hace",
     "s04sub": "Lo que decidió no ser vale tanto como lo que es.",
@@ -460,10 +459,8 @@
       "version": "versión del repo",
       "decisiones": "decisiones registradas"
     },
-    "verBrochure": "Ver brochure",
     "verSimulacion": "Ver la simulación",
-    "cierreNota": "Aquí se muestra; no se entrega.",
-    "volverFichaTecnica": "Volver a la ficha técnica"
+    "cierreNota": "Aquí se muestra; no se entrega."
   },
   "metodo": {
     "eyebrow": "Métodos",

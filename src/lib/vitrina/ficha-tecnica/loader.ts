@@ -41,6 +41,9 @@ export const getComplemento = cache((slug: string) => {
   return sinVitrinaDe(slug, r.data);
 });
 
+// Desde el S31 ninguna página pinta la ficha de una app (su brochure es su entrada): estas dos armas la ficha que
+// el contrato (`docs/contrato-ficha-tecnica/`) describe, y las leen sus pruebas (`ficha-tecnica-contrato.test.ts`),
+// que son las que vigilan que el complemento y el export siguen componiendo una ficha válida.
 export const getFichaTecnica = cache(
   (slug: string): FichaTecnica | undefined => {
     const ficha = getFicha(slug);

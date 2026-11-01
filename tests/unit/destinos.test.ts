@@ -64,11 +64,10 @@ describe("anclasDeHome — se leen de la HOME, no de una lista", () => {
     expect(anclas.has("#apps")).toBe(false);
   });
 
-  it("NO trae «#roadmap»: el componente existe, pero la HOME ya no lo monta", () => {
-    // roadmap.tsx declara id="roadmap" y vive en components/home/, pero el
-    // roadmap se fue a /portafolio/apps. Listarlo sería revivir el error de #apps
-    // con otro nombre: por eso el catálogo mira QUÉ se monta dentro del <main>,
-    // no qué archivos hay en la carpeta.
+  it("NO trae «#roadmap»: la HOME ya no lo monta", () => {
+    // El roadmap declaró id="roadmap" en components/home/, pero se fue a /portafolio/apps y después al cierre
+    // del brochure de cada app. Listarlo sería revivir el error de #apps con otro nombre: por eso el catálogo
+    // mira QUÉ se monta dentro del <main>, no qué archivos hay en la carpeta.
     expect(anclas.has("#roadmap")).toBe(false);
   });
 });

@@ -1,6 +1,5 @@
 import { ChevronDown } from "lucide-react";
 import { getTranslations } from "next-intl/server";
-import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import type { FichaTecnica as Datos } from "@/lib/vitrina/ficha-tecnica/schema";
 import { COLOR_ESTADO, intlLocale } from "@/lib/vitrina/estilos";
@@ -88,18 +87,9 @@ function Seccion({
 export async function FichaTecnica({
   datos,
   locale,
-  hrefBrochure,
-  hrefSimulacion,
-  listaDeEspera = false,
 }: {
   datos: Datos;
   locale: Locale;
-  /** Ruta del brochure, si la pieza lo tiene (hoy, solo las apps). */
-  hrefBrochure?: string;
-  /** Solo las apps con simulación (`data/simulaciones.yaml`): el cierre la ofrece. */
-  hrefSimulacion?: string;
-  /** Solo las apps: el cierre enlaza a `#contacto-portafolio` de la misma página. */
-  listaDeEspera?: boolean;
 }) {
   const t = await getTranslations("fichaTecnica");
   const tv = await getTranslations("vitrina");
@@ -361,16 +351,14 @@ export async function FichaTecnica({
         n={n.s03}
         id={`ft-${n.s03}-${pieza.slug}`}
         titulo={t("s03")}
-        // «El detalle de cada una vive en el brochure» solo es verdad si ese
-        // brochure existe. Una pieza sin brochure no puede mandar al lector a un
-        // sitio que no hay — el subtítulo dice la cuenta y calla.
+        // Una pieza sin brochure no manda al lector a un sitio que no hay: el subtítulo dice la cuenta y calla.
         // Y si la ficha NO cuenta funcionalidades (`cuenta: 0` en todos sus
         // bloques — una investigación tiene aportes, no funciones), el subtítulo
         // no inventa un «0 funcionalidades» que la pieza jamás declaró.
         sub={
           totalFuncionalidades === 0
             ? t("s03subSoloGrupos", { grupos: bloques.length })
-            : t(hrefBrochure ? "s03sub" : "s03subSinBrochure", {
+            : t("s03sub", {
                 grupos: bloques.length,
                 n: totalFuncionalidades,
               })
@@ -504,38 +492,9 @@ export async function FichaTecnica({
       </Seccion>
 
       {/* ── Cierre ───────────────────────────────────────────────────────── */}
-      {/* La lista de espera la decide la PÁGINA (por frente, desde
-          `data/vitrina.yaml`), no este componente: solo las apps la tienen. */}
+      {/* Desde el S31 ninguna app tiene ficha (su brochure es su entrada): el cierre es solo la nota. Los frentes
+          de agentes, investigaciones y tableros se muestran, no se entregan. */}
       <div className="mt-12 flex flex-wrap items-center gap-3 border-t border-paper-2 pt-8">
-        {hrefBrochure && (
-          <Link
-            href={hrefBrochure}
-            data-cta="brochure"
-            className="flex min-h-11 items-center gap-2 rounded-md bg-sage px-6 text-[15px] font-medium text-sage-ink shadow-sh-1 transition-[filter] duration-[120ms] hover:brightness-[0.97]"
-          >
-            {t("verBrochure")}
-            <span aria-hidden="true">→</span>
-          </Link>
-        )}
-        {hrefSimulacion && (
-          <Link
-            href={hrefSimulacion}
-            data-cta="simulacion"
-            className="flex min-h-11 items-center gap-2 rounded-md border border-sage-ink/40 px-6 text-[15px] font-medium text-sage-ink transition-colors duration-[120ms] hover:bg-sage/40"
-          >
-            {t("verSimulacion")}
-            <span aria-hidden="true">→</span>
-          </Link>
-        )}
-        {listaDeEspera && (
-          <a
-            href="#contacto-portafolio"
-            data-cta="lista-de-espera"
-            className="flex min-h-11 items-center gap-2 rounded-md border border-paper-3 px-6 text-[15px] font-medium text-ink-1 transition-colors duration-[120ms] hover:bg-paper-1"
-          >
-            {tv("cta")}
-          </a>
-        )}
         <p className="max-w-[40ch] text-[13px] leading-snug text-ink-2 sm:ml-auto">
           {t("cierreNota")}
         </p>

@@ -19,7 +19,10 @@ import path from "node:path";
 import process from "node:process";
 import { parse } from "yaml";
 import { anclasDeBloques } from "./metodo-al-indice.mjs";
-import { leerNombresDePiezas, leerNombresOficiales } from "./nombres-oficiales.mjs";
+import {
+  leerNombresDePiezas,
+  leerNombresOficiales,
+} from "./nombres-oficiales.mjs";
 
 const ROOT = process.cwd();
 
@@ -49,10 +52,9 @@ function piezasDeMetodo() {
  *   1. qué componentes se montan DENTRO de `<main>` en page.tsx,
  *   2. qué `id="…"` declara cada uno de esos componentes.
  *
- * El segundo salto solo mira los archivos del primero: `roadmap.tsx` declara
- * `id="roadmap"` y vive en `components/home/`, pero la HOME ya no lo monta —
- * el roadmap se fue a /portafolio/apps. Listarlo sería revivir el error de `#apps`
- * con otro nombre.
+ * El segundo salto solo mira los archivos del primero: el roadmap declaró `id="roadmap"` y vivió en
+ * `components/home/`, pero la HOME ya no lo montaba — el roadmap se fue a /portafolio/apps y, desde el S30, al
+ * cierre del brochure de cada app. Listarlo sería revivir el error de `#apps` con otro nombre.
  */
 export function anclasDeHome() {
   const pageFile = path.join(ROOT, "src", "app", "[locale]", "page.tsx");
@@ -187,7 +189,8 @@ export function nombresDeDestinos(locale) {
   // «Métodos»: la lista se llama como el menú; cada pieza, como su nombre; y la
   // puerta de la HOME (S19, `#metodos`) se llama como su título.
   if (msg.nav?.metodo) nombres.set("/metodos", msg.nav.metodo);
-  if (msg.metodo?.puertaTitulo) nombres.set("#metodos", msg.metodo.puertaTitulo);
+  if (msg.metodo?.puertaTitulo)
+    nombres.set("#metodos", msg.metodo.puertaTitulo);
   for (const p of piezasDeMetodo()) {
     if (p.nombre?.[locale]) nombres.set(`/metodos/${p.slug}`, p.nombre[locale]);
   }
@@ -217,7 +220,10 @@ export function nombresDeDestinos(locale) {
       }
       // Las de la casa se llaman como en `data/apps.yaml`: el export solo trae el español.
       const deLaCasa = new Map(
-        (leerYaml("data/apps.yaml").apps ?? []).map((a) => [a.id, a.nombre[locale]]),
+        (leerYaml("data/apps.yaml").apps ?? []).map((a) => [
+          a.id,
+          a.nombre[locale],
+        ]),
       );
       for (const slug of slugsDeLaCasa())
         nombres.set(`/portafolio/apps/${slug}`, deLaCasa.get(slug) ?? slug);
