@@ -3,6 +3,10 @@
 # tema claro, interfaz en español. Datos: los del repo (documentación pública de los fabricantes y el hospital
 # ficticio); F11 sale de la base sembrada de la app (plataformas ficticias Norte, Sur y Ejemplo); F6, de la propuesta real
 # de evidencias de Snowflake del 2026-10-05 reabierta como pendiente en la copia (carpeta «-ensayo»).
+# F15–F21 (2026-11-14, para el PR de contenido del S10): base app-big-d 4299759 en copia aislada (git archive), build con
+# BIGD_FECHA_CONSULTA=2026-11-12, 1024×640 a DPR 1,5 (1536×960), solo el área visible, tema claro, en español. F15 sale de la
+# base sembrada (la única con dos instantáneas; ficticia); F21, del paquete de la demo (huella inicial c0633ab23044). F19 no
+# tiene pantalla propia: es un comando que una persona corre y su resultado se ve dentro de la propuesta de F6.
 portada: entrada.webp
 capturas:
   - { funcionalidad: F1, archivo: F1.webp, pie: { es: "Fabric en una página: seis capas y tres franjas, cada bloque con sus componentes", en: "Fabric on one page: six layers and three bands, each block with its components" } }
@@ -19,4 +23,10 @@ capturas:
   - { funcionalidad: F9, archivo: F9.webp, pie: { es: "La base de conocimiento: evidencias aprobadas, con su vigencia y su huella", en: "The knowledge base: approved evidence, with its freshness and fingerprint" } }
   - { funcionalidad: F8, archivo: F8.webp, pie: { es: "Versiones del mapa de Fabric: de la v0.2.0 a la v0.3.0, lo nuevo marcado", en: "Fabric map versions: from v0.2.0 to v0.3.0, with what is new marked" } }
   - { funcionalidad: F12, archivo: F12.webp, pie: { es: "El instrumento en verde: casos de referencia, propiedades y errores sembrados", en: "The instrument in green: reference cases, properties and seeded errors" } }
-sin_pantalla: []
+  - { funcionalidad: F15, archivo: F15.webp, pie: { es: "Qué cambió entre dos instantáneas y en cada caso (base de prueba, ficticia)", en: "What changed between two snapshots and in each case (fictional test base)" } }
+  - { funcionalidad: F16, archivo: F16.webp, pie: { es: "Comparar por pares: la pantalla propone los pesos y no aprueba nada", en: "Comparing in pairs: the screen proposes the weights and approves nothing" } }
+  - { funcionalidad: F17, archivo: F17.webp, pie: { es: "Duplicar el caso: una persona corre el comando y el original no cambia", en: "Duplicating the case: a person runs the command; the original stays as is" } }
+  - { funcionalidad: F18, archivo: F18.webp, pie: { es: "El perfil con preguntas: una por criterio, sin pensar en ninguna plataforma", en: "The profile from questions: one per criterion, no platform in mind" } }
+  - { funcionalidad: F20, archivo: F20.webp, pie: { es: "BigQuery entra «próximamente» hasta que una persona apruebe su mapa", en: "BigQuery comes in as \"coming soon\" until a person approves its map" } }
+  - { funcionalidad: F21, archivo: F21.webp, pie: { es: "La demo pública: mueves los pesos de un hospital inventado y el orden cambia", en: "The public demo: move a made-up hospital's weights and the ranking changes" } }
+sin_pantalla: [F19]
