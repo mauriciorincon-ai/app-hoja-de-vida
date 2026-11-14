@@ -28,3 +28,12 @@ simulaciones:
     nota:
       es: "El portafolio de planlang tal como lo entrega su casa: el plan, el agente y la brecha de dos demos, caso por caso, y un playground para mover umbrales. Las decisiones humanas se simularon en lote; nada se ejecuta al visitarla."
       en: "planlang's portfolio as its house delivers it: the plan, the agent and the gap of two demos, case by case, and a playground to move thresholds. Human decisions were simulated in batch; nothing runs when you visit it."
+
+  - slug: big-d
+    carpeta: big-d
+    entrada:
+      es: es.html
+      en: en.html
+    nota:
+      es: "El atlas real de Databricks, Snowflake y Fabric, con BigQuery «próximamente», y el caso del hospital: los pesos se pueden mover y son un perfil en borrador del autor, no una verdad de la casa. «Probar la neutralidad» reordena las plataformas y muestra que la huella no cambia. Nada se envía ni se guarda."
+      en: "The real atlas of Databricks, Snowflake and Fabric, with BigQuery «coming soon», and the hospital case: the weights can be moved and are the author's draft profile, not a house verdict. «Test the neutrality» reorders the platforms and shows the signature does not change. Nothing is sent or saved."
