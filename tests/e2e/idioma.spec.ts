@@ -218,19 +218,27 @@ test.describe("diez cambios de idioma seguidos dejan la HOME donde estaba", () =
     });
   }
 
-  /** Espera a que el scroll y las entradas animadas dejen de moverse. */
+  /**
+   * Espera a que el scroll y las entradas animadas dejen de moverse: el borde del hito Y el
+   * `scrollY`, iguales en cuatro lecturas seguidas (600 ms). PR #115 (2026-11-14, reproducido en
+   * un contenedor de Playwright en Linux): con dos lecturas y sin vaciar la cola de la rueda, el
+   * último giro se aplicaba con el clic, DESPUÉS de medir la salida, y la prueba daba −120 px
+   * aunque el ancla hiciera su ida y vuelta exacta (también en `main`, 3 de 20).
+   */
   async function quieta(
     page: import("@playwright/test").Page,
     selector = "#perfil h2",
   ) {
-    let anterior = -1;
-    for (let i = 0; i < 40; i++) {
+    let anterior = "";
+    let iguales = 0;
+    for (let i = 0; i < 60; i++) {
       await page.waitForTimeout(150);
       const ahora = await page.evaluate((s) => {
         const h = document.querySelector(s)!.getBoundingClientRect();
-        return Math.round(h.top * 10) / 10;
+        return `${Math.round(h.top * 10) / 10}|${Math.round(window.scrollY)}`;
       }, selector);
-      if (ahora === anterior) return;
+      iguales = ahora === anterior ? iguales + 1 : 0;
+      if (iguales >= 3) return;
       anterior = ahora;
     }
   }
@@ -247,6 +255,7 @@ test.describe("diez cambios de idioma seguidos dejan la HOME donde estaba", () =
       // Con la rueda, en pasos: cada título que pasa por la ventana se revela.
       await page.mouse.move(400, 400);
       for (let y = 0; y < bajar; y += 120) await page.mouse.wheel(0, 120);
+      await page.mouse.move(401, 401); // vacía la cola de la rueda (ver «a media», abajo)
       await quieta(page);
 
       const sitio = () =>
@@ -304,6 +313,9 @@ test.describe("diez cambios de idioma seguidos dejan la HOME donde estaba", () =
         await page.mouse.wheel(0, top > 1200 ? 400 : 120);
         await page.waitForTimeout(40);
       }
+      // WebKit de Linux retiene el último giro de rueda hasta el siguiente evento de entrada: sin
+      // este movimiento, ese giro se aplicaba con el clic del botón, DESPUÉS de medir la salida.
+      await page.mouse.move(201, 401);
       await quieta(page, `#${seccion}`);
 
       const sitio = () =>
