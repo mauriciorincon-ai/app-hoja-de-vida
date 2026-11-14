@@ -161,29 +161,40 @@ export function restaurarAncla(): boolean {
   return true;
 }
 
-/** Cuánto tiempo, como máximo, se sostiene el ancla mientras la página se asienta. */
-export const SOSTENER_MS = 1500;
+/** El ancla se suelta cuando el documento lleva este lapso sin cambiar de alto. */
+export const QUIETA_MS = 500;
+/** Tope: pase lo que pase, el ancla se suelta a este tiempo. */
+export const SOSTENER_MAX_MS = 5000;
 
 /**
  * El ancla se SOSTIENE mientras el otro idioma se asienta (PR #115, 2026-11-14). Restaurarla una
- * sola vez, en el primer cuadro, dependía de que nada de arriba cambiara de alto después; con el
- * JavaScript del lote de dependencias de noviembre, en WebKit de Linux algo por encima de Estudios
- * terminaba de crecer después de ese cuadro y la ventana quedaba 17 a 29 px corrida (e2e
- * `idioma.spec.ts`, «a media #estudios»). Ahora, cada vez que el documento cambia de alto en ese
- * lapso, se vuelve a colocar la misma ancla. El primer gesto del visitante (rueda, toque, tecla,
- * puntero) la suelta: jamás se pelea con quien está desplazándose.
+ * sola vez, en el primer cuadro, dependía de que nada de arriba cambiara de alto después. Con el
+ * JavaScript del lote de dependencias de noviembre, en WebKit de Linux sí cambiaba: los logos de
+ * Estudios y Certificaciones (alto fijo, ancho `auto`, carga diferida) llegan tarde, su ancho real
+ * reparte de nuevo el texto de su tarjeta y la ventana quedaba 8 a 29 px corrida (e2e
+ * `idioma.spec.ts`, «a media #estudios» y «#certificaciones»). Un plazo fijo (1,5 s) no bastó en la
+ * CI. El invariante: cada vez que el documento cambia de alto se vuelve a colocar la misma ancla, y
+ * se suelta cuando lleva `QUIETA_MS` quieto (tope `SOSTENER_MAX_MS`). El primer gesto del
+ * visitante (rueda, toque, tecla, puntero) la suelta antes: jamás se pelea con quien se desplaza.
  */
 function sostenerAncla(colocar: () => void): void {
   if (typeof ResizeObserver === "undefined") return;
-  const ro = new ResizeObserver(() => colocar());
   const gestos = ["wheel", "touchstart", "keydown", "pointerdown"] as const;
-  // `soltar` corre siempre después de que `reloj` existe: lo llaman el propio reloj o un gesto.
+  let quieta: ReturnType<typeof setTimeout> | undefined;
+  const ro = new ResizeObserver(() => {
+    colocar();
+    clearTimeout(quieta);
+    quieta = setTimeout(soltar, QUIETA_MS);
+  });
+  // `soltar` corre siempre después de que `tope` existe: lo llaman los relojes o un gesto.
   const soltar = () => {
     ro.disconnect();
-    clearTimeout(reloj);
+    clearTimeout(quieta);
+    clearTimeout(tope);
     for (const g of gestos) window.removeEventListener(g, soltar);
   };
-  const reloj = setTimeout(soltar, SOSTENER_MS);
+  const tope = setTimeout(soltar, SOSTENER_MAX_MS);
+  quieta = setTimeout(soltar, QUIETA_MS);
   for (const g of gestos)
     window.addEventListener(g, soltar, { passive: true, once: true });
   ro.observe(document.body);
