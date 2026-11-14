@@ -151,9 +151,31 @@ export function restaurarAncla(): boolean {
   }
   if (!crudo) return false;
   const ancla = JSON.parse(crudo) as Ancla;
+  sinAnclajeDelNavegador();
   window.scrollTo({
     top: aPixelEntero(resolverAncla(ancla, tops())),
     behavior: "instant",
   });
   return true;
+}
+
+/**
+ * Mientras la ventana quede donde la puso el ancla, el navegador no la corrige por su cuenta
+ * (PR #115, 2026-11-14). El WebKit de Playwright 1.65, el que llegará a Safari, trae «scroll
+ * anchoring» y justo después del cambio de idioma corría la ventana 17 a 40 px: dos correcciones
+ * del scroll peleándose (e2e `idioma.spec.ts` «a media»; en Linux, 11 de 20 sin esto y 20 de 20
+ * con esto). No se apaga para todo el sitio: abrir un área de Skills desde una cita del chat sí
+ * cuenta con él (`home.spec.ts`, «una cita del chat abre su área de Skills»). El primer gesto del
+ * visitante (rueda, toque, tecla, puntero) se lo devuelve.
+ */
+function sinAnclajeDelNavegador(): void {
+  const html = document.documentElement;
+  html.style.overflowAnchor = "none";
+  const gestos = ["wheel", "touchstart", "keydown", "pointerdown"] as const;
+  const devolver = () => {
+    html.style.removeProperty("overflow-anchor");
+    for (const g of gestos) window.removeEventListener(g, devolver);
+  };
+  for (const g of gestos)
+    window.addEventListener(g, devolver, { passive: true, once: true });
 }
