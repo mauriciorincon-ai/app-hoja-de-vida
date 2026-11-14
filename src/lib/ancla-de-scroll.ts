@@ -151,40 +151,9 @@ export function restaurarAncla(): boolean {
   }
   if (!crudo) return false;
   const ancla = JSON.parse(crudo) as Ancla;
-  const colocar = () => {
-    const destino = aPixelEntero(resolverAncla(ancla, tops()));
-    if (Math.abs(window.scrollY - destino) >= 1)
-      window.scrollTo({ top: destino, behavior: "instant" });
-  };
-  colocar();
-  sostenerAncla(colocar);
+  window.scrollTo({
+    top: aPixelEntero(resolverAncla(ancla, tops())),
+    behavior: "instant",
+  });
   return true;
-}
-
-/** Cuánto tiempo, como máximo, se sostiene el ancla mientras la página se asienta. */
-export const SOSTENER_MS = 1500;
-
-/**
- * El ancla se SOSTIENE mientras el otro idioma se asienta (PR #115, 2026-11-14). Restaurarla una
- * sola vez, en el primer cuadro, dependía de que nada de arriba cambiara de alto después; con el
- * JavaScript del lote de dependencias de noviembre, en WebKit de Linux algo por encima de Estudios
- * terminaba de crecer después de ese cuadro y la ventana quedaba 17 a 29 px corrida (e2e
- * `idioma.spec.ts`, «a media #estudios»). Ahora, cada vez que el documento cambia de alto en ese
- * lapso, se vuelve a colocar la misma ancla. El primer gesto del visitante (rueda, toque, tecla,
- * puntero) la suelta: jamás se pelea con quien está desplazándose.
- */
-function sostenerAncla(colocar: () => void): void {
-  if (typeof ResizeObserver === "undefined") return;
-  const ro = new ResizeObserver(() => colocar());
-  const gestos = ["wheel", "touchstart", "keydown", "pointerdown"] as const;
-  // `soltar` corre siempre después de que `reloj` existe: lo llaman el propio reloj o un gesto.
-  const soltar = () => {
-    ro.disconnect();
-    clearTimeout(reloj);
-    for (const g of gestos) window.removeEventListener(g, soltar);
-  };
-  const reloj = setTimeout(soltar, SOSTENER_MS);
-  for (const g of gestos)
-    window.addEventListener(g, soltar, { passive: true, once: true });
-  ro.observe(document.body);
 }
