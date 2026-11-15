@@ -97,12 +97,12 @@ urban, logistics, operational supervision and healthcare contexts. The organizat
 and the decisions were different, but the principle remained: an analytical solution only begins
 to generate value when it is incorporated into the work of the people who can act on its results.
 
-| Where                              | When                       | Product                                                                 | Adoption                                         | Effect                                                  |
-| ---------------------------------- | -------------------------- | ----------------------------------------------------------------------- | ------------------------------------------------ | ------------------------------------------------------- |
-| **Banco Pichincha**                | March – July 2023          | decision-oriented dashboards, with a team of 5 people                   | **more than 50** business **users**              | +25% in decision-making                                 |
-| **TransMilenio / C&M Consultores** | July 2021 – May 2022       | Power BI in the post-operational analysis                               | **more than 25 key users** of the operation      | +35% in efficiency of the analytical processes          |
-| **Cafam**                          | October 2020 – June 2021   | the BI that controlled the WMS implementation                           | **more than 15** directors, coordinators and heads | +50% in accuracy of test tracking                       |
-| **Fundación CTIC**                 | since March 2025           | more than 25 analytics products in Power BI, control dashboards among them        | **some 20 leaders** of some 15 processes, some 75 users    | close to 60% less preparation effort, estimated         |
+| Where                              | When                     | Product                                                                    | Adoption                                                                        | Effect                                          |
+| ---------------------------------- | ------------------------ | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ----------------------------------------------- |
+| **Banco Pichincha**                | March – July 2023        | decision-oriented dashboards, with a team of 5 people                      | **more than 50** business **users**                                             | +25% in decision-making                         |
+| **TransMilenio / C&M Consultores** | July 2021 – May 2022     | Power BI in the post-operational analysis                                  | **more than 25 key users** of the operation                                     | +35% in efficiency of the analytical processes  |
+| **Cafam**                          | October 2020 – June 2021 | the BI that controlled the WMS implementation                              | **more than 15** directors, coordinators and heads                              | +50% in accuracy of test tracking               |
+| **Fundación CTIC**                 | since March 2025         | more than 25 analytics products in Power BI, control dashboards among them | **some 20 leaders** of some 15 processes, between 100 and 200 users (estimated) | close to 60% less preparation effort, estimated |
 
 ## Banco Pichincha and C&M Consultores: more than 50 users and more than 25 key users
 
@@ -116,8 +116,8 @@ models, technical optimization —the semantic models with DAX Studio and Tabula
 with 35% less analysis time—, training and a clearer relationship between the metrics and the
 users' needs.
 
-At C&M Consultores, in the post-operational analysis of TransMilenio, I led the implementation of
-specialized business intelligence tools —Power BI— adopted by more than twenty-five key users.
+At C&M Consultores, in the post-operational analysis of TransMilenio, I built the operation's BI from scratch and
+led it: I implemented specialized business intelligence tools —Power BI— adopted by more than twenty-five key users.
 The intervention contributed to a thirty-five percent improvement in the efficiency of the
 analytical processes. In this context, key users did not simply mean people with access to the
 tool, but responsible people who used the information within scheduling, follow-up and
@@ -141,7 +141,7 @@ companies, with Excel, VBA, Power Query and SQL. Those reports were adopted by m
 operational records into traceable evidence for supervision and the evaluation of commitments,
 and in those reports' processing times dropping by 30% with the ETL automation.
 
-At Fundación CTIC, since March 2025, the more than 25 analytical products in Power BI —control dashboards by process among them— are used by some 20 leaders of some 15 processes and some 75 users, administrative
+At Fundación CTIC, where since March 2025 I have built the institution's BI from scratch, the more than 25 analytical products in Power BI —control dashboards by process among them— are used by some 20 leaders of some 15 processes and between 100 and 200 users (estimated), administrative
 and clinical leaders with very different needs. The effect figure I declare as what it is: close
 to 60% less effort in preparing the information, estimated, and some ten analysis plans under
 follow-up.

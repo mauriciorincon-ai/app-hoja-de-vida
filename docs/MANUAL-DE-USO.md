@@ -55,7 +55,7 @@ el mensaje te llega al correo.
   La página que ya está en línea no se rompe.
 - **Los logros son doce (desde el Sprint 029), en tres filas de cuatro:** escala y liderazgo, IA e
   impacto en datos. Su redacción es la que aprobaste y se copió **textual**. Los totales son sumas
-  de lo que cada descripción nombra (45+ = 25 + 10 + 5 + 5; 170+ = 75 + 50 + 25 + 20). Y los cuatro
+  de lo que cada descripción nombra (45+ = 25 + 10 + 5 + 5; 195+ = 100 + 50 + 25 + 20, con los usuarios de CTIC en su piso: entre 100 y 200, estimado). Y los cuatro
   bullets de la trayectoria que sumaron cifras (CTIC, Pichincha, C&M y el quinto de Vesting) llevan lo
   mismo, para que el chat y el PDF lo citen igual.
 - **Limitaciones conocidas:** los logros usan `valor` numérico (el contador anima ese número);

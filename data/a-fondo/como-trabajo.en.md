@@ -100,12 +100,12 @@ For that reason I always design solutions starting from the decision they will h
 
 I do not state it as doctrine: I have measured it four times, with different users and decisions in each context.
 
-| Where                                         | Product                                                                | Adoption                                            | Effect                                          |
-| --------------------------------------------- | ---------------------------------------------------------------------- | --------------------------------------------------- | ----------------------------------------------- |
-| **Banco Pichincha**, 2023 | dashboards for deciding, built by the team of 5 I led | **more than 50 business users** | +25% in decision-making |
-| **TransMilenio / C&M Consultores**, 2021–2022 | Power BI in post-operational analysis                                  | **more than 25 key users** of the operation         | +35% efficiency of the analytical processes     |
-| **Cafam**, 2020–2021                          | the BI for controlling the WMS implementation                          | **more than 15** directors, coordinators and heads  | +50% accuracy in test tracking                  |
-| **Fundación CTIC**, since 2025                | more than 25 analytics products in Power BI, control dashboards among them               | **some 20 leaders** of some 15 processes and some 75 users    | close to 60% less preparation effort (estimated) |
+| Where                                         | Product                                                                    | Adoption                                                                           | Effect                                           |
+| --------------------------------------------- | -------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------ |
+| **Banco Pichincha**, 2023                     | dashboards for deciding, built by the team of 5 I led                      | **more than 50 business users**                                                    | +25% in decision-making                          |
+| **TransMilenio / C&M Consultores**, 2021–2022 | Power BI in post-operational analysis                                      | **more than 25 key users** of the operation                                        | +35% efficiency of the analytical processes      |
+| **Cafam**, 2020–2021                          | the BI for controlling the WMS implementation                              | **more than 15** directors, coordinators and heads                                 | +50% accuracy in test tracking                   |
+| **Fundación CTIC**, since 2025                | more than 25 analytics products in Power BI, control dashboards among them | **some 20 leaders** of some 15 processes and between 100 and 200 users (estimated) | close to 60% less preparation effort (estimated) |
 
 "Key users" matters: in transit they were not people with access but the people responsible for scheduling, tracking and service decisions. At Cafam, the fifteen were the roles that answered for the project —the medicines directorate, the IT one, the project one, the distribution center one and its coordinators and heads—, and fifteen people with direct responsibility over a critical process are worth more than hundreds who consult it every now and then. How I distinguish access, use, adoption and impact, and how I measure adoption without confusing it with visits, is in the BI document.
 

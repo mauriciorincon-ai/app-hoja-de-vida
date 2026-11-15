@@ -26,6 +26,18 @@ preguntas:
   - pregunta: "Does he have experience with healthcare data?"
     espera: [fundacion-ctic]
     familia: trayectoria
+  - pregunta: "How many people use his dashboards at Fundación CTIC?"
+    espera: [fundacion-ctic, trayectoria, casestudy-fundacion-ctic, bi-que-se-adopta]
+    familia: trayectoria
+    nota: >-
+      Revisión de contenido del harness de hiring (2026-11-03, decisiones del dueño):
+      between 100 and 200 users, estimated; no longer «some 75».
+  - pregunta: "Did he build the BI from scratch or inherit it?"
+    espera: [transmilenio-cm, fundacion-ctic, trayectoria, casestudy-transmilenio-cm, casestudy-fundacion-ctic]
+    familia: trayectoria
+    nota: >-
+      Revisión de contenido del harness de hiring (2026-11-03, decisiones del dueño):
+      he built the BI from scratch at TransMilenio and at Fundación CTIC, and led the first one.
   - pregunta: "What did he do at Vesting?"
     espera: [vesting, agentes-en-produccion, trayectoria]
     familia: trayectoria

@@ -258,8 +258,24 @@ test.describe("diez cambios de idioma seguidos dejan la HOME donde estaba", () =
       await page.mouse.move(401, 401); // vacía la cola de la rueda (ver «a media», abajo)
       await quieta(page);
 
+      // El sitio del título por su LAYOUT (`offsetTop` hasta el body, menos el scroll), no por su
+      // rectángulo (PR #117, 2026-11-15). Con 1500 px de rueda el título de Trayectoria queda justo
+      // por encima del borde y su entrada animada a medio camino (opacidad 0,07, 37 px abajo): el
+      // rectángulo medía la animación, no el sitio, y con otro largo del texto de arriba daba −6 a
+      // +15 px aunque el ancla volviera exacta (y = 1560 a la ida y a la vuelta, layout −61 px las
+      // tres veces). Es la misma medida del motor (`topDeLayout`, S29); la deriva real —el scroll
+      // truncado del S23, el ancla transformada del S29— mueve `scrollY` y la sigue cazando.
       const sitio = () =>
-        page.locator(titulo).evaluate((el) => el.getBoundingClientRect().top);
+        page.locator(titulo).evaluate((el) => {
+          let y = 0;
+          for (
+            let n: HTMLElement | null = el as HTMLElement;
+            n;
+            n = n.offsetParent as HTMLElement | null
+          )
+            y += n.offsetTop;
+          return y - window.scrollY;
+        });
       const salida = await sitio();
       const idiomas = ["en", "es"] as const;
       const deriva: string[] = [];

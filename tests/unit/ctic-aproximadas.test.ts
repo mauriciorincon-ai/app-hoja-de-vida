@@ -59,8 +59,8 @@ describe("el motor, contra textos de juguete", () => {
     expect(
       juzgar(
         "En la Fundación CTIC: más de 40 productos analíticos, la mitad de ellos tableros de control, " +
-          "unos 20 líderes de unos 15 procesos y unos 75 usuarios; más de 10 oportunidades, " +
-          "the more than 40 products, some 20 leaders of some 15 processes, about 75 users.",
+          "unos 20 líderes de unos 15 procesos y entre 100 y 200 usuarios (estimado); más de 10 oportunidades, " +
+          "the more than 40 products, some 20 leaders of some 15 processes, between 100 and 200 users (estimated).",
       ),
     ).toEqual([]);
   });
@@ -163,6 +163,30 @@ describe("la cifra de productos de CTIC es una sola: más de 25 (decisión del d
         "más de 25 productos analíticos en Power BI, tableros de control entre ellos; " +
           "more than 25 analytics products in Power BI; −40 % en el tiempo de procesamiento; " +
           "coordinaba cerca de 40 personas; la mitad de las oportunidades evaluadas.",
+      ),
+    ).toEqual([]);
+  });
+});
+
+describe("los usuarios de CTIC son entre 100 y 200, estimado (decisión del dueño, 2026-11-03)", () => {
+  const juzgar = (texto: string) => problemasDeCifrasRetiradasDeCtic([{ archivo: "x.md", texto }]);
+
+  it("caza el «unos 75» viejo en los dos idiomas, la celda «~75» y el total de la HOME que lo sumaba", () => {
+    expect(juzgar("unos 20 líderes de unos 15 procesos y unos 75 usuarios")).toHaveLength(1);
+    expect(juzgar("y los de la Fundación CTIC los usan unos 75.")).toHaveLength(1);
+    expect(juzgar("some 20 leaders of some 15 processes and about\n75 users")).toHaveLength(1);
+    expect(juzgar("| Analítica | usuarios | ~75 |")).toHaveLength(1);
+    const logro = juzgar('  - valor: 170\n    sufijo: "+"\n    etiqueta: "usuarios adoptaron mis dashboards"');
+    expect(logro).toHaveLength(1);
+    expect(logro[0]).toContain("2026-11-03");
+  });
+
+  it("aprueba la cifra nueva y deja en paz los 75 que no son usuarios de CTIC", () => {
+    expect(
+      juzgar(
+        "entre 100 y 200 usuarios (estimado); between 100 and 200 users (estimated); " +
+          "| usuarios | 100 a 200 (estimado) |; el golden set dio 75 de 75; cerca de 75 % de avance; " +
+          '  - valor: 195\n    sufijo: "+"\n    etiqueta: "usuarios adoptaron mis dashboards"',
       ),
     ).toEqual([]);
   });

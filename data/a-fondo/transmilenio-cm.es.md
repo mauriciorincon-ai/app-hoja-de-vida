@@ -2,7 +2,7 @@
 slug: transmilenio-cm
 codigo: AF-07
 titulo: "C&M Consultores / TransMilenio — análisis post-operacional (2021–2022)"
-resumen: "El análisis post-operacional del SITP: el ETL que unificó recaudo, flota, programación, novedades y PQR (+70 %), BI adoptado por 25+ usuarios clave (+35 %), las mesas con la dirección de los concesionarios del SITP (+25 %) y un modelo de demanda en scikit-learn que siguió en uso después de mi salida."
+resumen: "El análisis post-operacional del SITP: el ETL que unificó recaudo, flota, programación, novedades y PQR (+70 %), el BI creado desde cero y liderado, adoptado por 25+ usuarios clave (+35 %), las mesas con la dirección de los concesionarios del SITP (+25 %) y un modelo de demanda en scikit-learn que siguió en uso después de mi salida."
 cuando_usar: "Úsalo cuando pregunten por TransMilenio y C&M Consultores (2021–2022): análisis post-operacional, fuentes de datos heterogéneas (recaudo, flota, programación, novedades, PQR), pipelines ETL, predicción de demanda por ruta y franja, mesas con la dirección de los concesionarios del SITP y adopción de tableros."
 estado: aprobado
 ancla: "/proyectos/transmilenio-cm"
@@ -45,7 +45,7 @@ de demanda con scikit-learn. -->
 
 Regresé al entorno de TransMilenio en julio de 2021, esta vez como Profesional de Análisis Post-Operacional en C&M Consultores, dentro de la Fuerza Operativa de TransMilenio S.A., y permanecí en el cargo hasta mayo de 2022. Volví al mismo dominio en el que había trabajado como analista de operaciones de la supervisión del sistema, pero con una responsabilidad distinta y con una comprensión más madura de la relación entre operación, datos y decisiones: ya no se trataba de supervisar el cumplimiento, sino de explicar la operación del Sistema Integrado de Transporte Público (SITP) y ayudar a decidir cómo ajustarla.
 
-El principal obstáculo era que la operación generaba información más rápido de lo que podía prepararse y analizarse manualmente. Los datos se encontraban distribuidos entre fuentes heterogéneas, con estructuras, niveles de detalle y reglas diferentes. Una parte considerable del esfuerzo se consumía reuniendo archivos, validando correspondencias y conciliando resultados antes de que pudiera comenzar el análisis realmente valioso.
+El principal obstáculo era que la operación generaba información más rápido de lo que podía prepararse y analizarse manualmente. Los datos se encontraban distribuidos entre fuentes heterogéneas, con estructuras, niveles de detalle y reglas diferentes. Una parte considerable del esfuerzo se consumía reuniendo archivos, validando correspondencias y conciliando resultados antes de que pudiera comenzar el análisis realmente valioso. Y no existía un BI que reuniera esas fuentes: el análisis dependía de reportes manuales.
 
 Esta experiencia me permitió reconocer una diferencia fundamental entre disponer de datos y contar con una capacidad analítica. Los datos podían existir y, aun así, no estar preparados para responder las preguntas de la operación. El verdadero desafío consistía en construir un recorrido confiable desde el evento operacional —un bus que sale tarde, una validación de tarjeta, una queja— hasta el indicador, el análisis y la decisión.
 
@@ -103,7 +103,7 @@ Por eso las reglas del ETL se escribieron como reglas y no como pasos de una rut
 
 <!-- seccion: la-adopcion -->
 
-Lideré la implementación de Power BI como herramienta especializada de inteligencia de negocios en la operación, logrando un aumento del 35 % en la eficiencia de los procesos analíticos y la adopción de los tableros por más de 25 usuarios clave.
+Creé desde cero el BI del análisis post-operacional y lo lideré: implementé Power BI como herramienta especializada de inteligencia de negocios en la operación, logrando un aumento del 35 % en la eficiencia de los procesos analíticos y la adopción de los tableros por más de 25 usuarios clave.
 
 El término usuarios clave es importante. En una operación de esta naturaleza, el valor no dependía de maximizar el número de personas que abrían un tablero, sino de conseguir que lo utilizaran quienes tenían responsabilidad sobre la programación, el seguimiento y las decisiones de servicio. La adopción debía observarse en la incorporación del producto analítico a las rutinas de trabajo, no solamente en sus estadísticas de acceso.
 

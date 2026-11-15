@@ -59,7 +59,7 @@ currently one of the most important of my career, consists of leading the struct
 I work in a direct line with the Planning Directorate and with the sub-directorates of technology,
 information management and quality. I do not lead a team of direct reports: I lead complete
 processes that bring together a large number of people —today, some 20 leaders of some 15 administrative
-and clinical processes and some 75 users of the analytical solutions—. It is a different form of
+and clinical processes and between 100 and 200 users of the analytical solutions, by my estimate—. It is a different form of
 leadership from the one I exercised at Cafam with a team of 20 people: there I directed people;
 here I lead the structuring of the strategy with which an institution measures, decides and adopts artificial intelligence.
 
@@ -335,10 +335,11 @@ an inventory of failures.
 
 <!-- seccion: dos-audiencias -->
 
-I have developed analytical solutions in Power BI for administrative and clinical leaders,
+I built the institution's BI from scratch. I have developed analytical solutions in Power BI for
+administrative and clinical leaders,
 structuring semantic models, indicators and visualization experiences adapted to their
-responsibilities, but grounded in consistent institutional definitions. They are more than 25 analytics products in Power BI —control dashboards among them— that today are used by some 20 leaders of some 15 processes and some 75
-users.
+responsibilities, but grounded in consistent institutional definitions. They are more than 25 analytics products in Power BI —control dashboards among them— that today are used by some 20 leaders of some 15 processes and between 100
+and 200 users (estimated).
 
 These audiences work on the same organization, but they do not necessarily ask the same questions
 or use the information for the same purpose. Administrative management concentrates on
@@ -487,7 +488,7 @@ the metrics. Top management needs to observe trends, risks and response capacity
 need to identify constraints, deviations and causal relationships. Operational teams need
 information detailed enough to understand concrete situations. The semantic model must keep a
 single logic, while the Power BI experience adapts its depth and presentation to each
-responsibility: it is what allows more than 25 products to serve some 20 leaders and some 75 users without there
+responsibility: it is what allows more than 25 products to serve some 20 leaders and between 100 and 200 users without there
 being as many different definitions of the same indicator.
 
 ## Improvement plans: where I advised, what I implemented and the close to 60% less effort
@@ -590,7 +591,7 @@ indicators and their incorporation into the spaces where institutional performan
 | ----------------- | ------------------------------------------ | -----------------------: |
 | Analytics         | analytical products in use or follow-up    |             more than 25 |
 | Analytics         | leaders supported · processes              |        some 20 · some 15 |
-| Analytics         | users                                      |                      ~75 |
+| Analytics         | users                                      |   100 to 200 (estimated) |
 | Analytics         | reduction of effort in preparation         | close to 60% (estimated) |
 | Analytics         | analysis plans under follow-up             |                 some ten |
 | AI                | opportunities identified                   |             more than 10 |

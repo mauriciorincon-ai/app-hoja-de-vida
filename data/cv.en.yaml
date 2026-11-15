@@ -20,9 +20,9 @@ identidad:
     process engineering to data and AI— in healthcare, technology, banking,
     transport, logistics and education. Today I lead the structuring of the
     institutional AI strategy under ISO/IEC 42001, take part in that of the
-    management system and built more than 25 analytics products in Power BI.
-    Before that I designed from scratch the data platform of an AI-agent
-    startup on Microsoft Fabric. On my own I build apps and agents with RAG
+    management system and built the institution's BI from scratch, with
+    more than 25 analytics products in Power BI. Before that, also from
+    scratch, I designed the data platform of an AI-agent startup on Microsoft Fabric. On my own I build apps and agents with RAG
     and evaluation. Microsoft-certified as a Fabric Analytics Engineer
     (DP-600), on the way to AI-103 and AI-300. Want to know anything else?
     Ask this résumé's chat.
@@ -47,7 +47,7 @@ trayectoria:
       administrative and clinical decisions in healthcare.
     bullets:
       - "I lead the structuring of the institutional AI strategy under UNE-ISO/IEC 42001:2025: more than 10 opportunities identified, half of them evaluated and some already prioritized."
-      - "more than 25 analytics products in Power BI for administrative and clinical leaders: some 20 leaders of some 15 processes and about 75 users."
+      - "I built the institution's BI from scratch: more than 25 analytics products in Power BI for some 20 administrative and clinical leaders of some 15 processes and between 100 and 200 users (estimated)."
       - "Institutional data governance and quality, under Colombia's habeas data regime and Law 1581."
       - "Process-based control dashboards and improvement plans: 50+ indicators addressed and close to 60% less effort preparing information (estimated on my own work)."
       - "I take part in structuring the AI management system: more than 20 instruments, a third finished and the ISO 42001 Expert agent that reviews them."
@@ -114,10 +114,10 @@ trayectoria:
     organizacion: "C&M Consultores (TransMilenio)"
     proyecto: "transmilenio-cm"
     descripcion: >-
-      BI adoption (+35% efficiency), an ETL that unified sources (+70%) and
-      demand forecasting with scikit-learn.
+      BI built from scratch and led (+35% efficiency), an ETL that unified
+      sources (+70%) and demand forecasting with scikit-learn.
     bullets:
-      - "Led the implementation of Power BI across operations: 10+ analytics products and +35% efficiency with 25+ key users."
+      - "Built the post-operational analysis BI from scratch and led it: Power BI across operations, 10+ analytics products and +35% efficiency with 25+ key users."
       - "ETL that unified five heterogeneous sources (fare collection, fleet and GPS, scheduling, incidents and user complaints): +70% in analysis precision and speed."
       - "ETL scripts with VBA and Power Query for the post-operational analysis, with validations and visible exceptions: −40% in repetitive tasks."
       - "Strategy sessions with the SITP concessionaires: +25% in indicators."
@@ -213,10 +213,10 @@ logros:
     sufijo: "+"
     etiqueta: "analytics products in Power BI"
     descripcion: "In healthcare (Fundación CTIC, 25+), transport (C&M Consultores for TransMilenio, 10+), banking (Banco Pichincha, 5+) and AI agents (Vesting, 5+)."
-  - valor: 170
+  - valor: 195
     sufijo: "+"
     etiqueta: "users adopted my dashboards"
-    descripcion: "Fundación CTIC (about 75), Banco Pichincha (50+), C&M Consultores for TransMilenio (25+ key users) and Vesting (about 20)."
+    descripcion: "Fundación CTIC (between 100 and 200, estimated), Banco Pichincha (50+), C&M Consultores for TransMilenio (25+ key users) and Vesting (about 20)."
   - valor: 27
     etiqueta: "AI agents built with the core process I structured"
     descripcion: "Vesting: 12 clients integrated and up to 23 agents monitored at once, in real time, on Microsoft Fabric."
@@ -389,8 +389,8 @@ proyectos:
   - slug: "transmilenio-cm"
     nombre: "Data that moves a city — TransMilenio / C&M (2021–2022)"
     resumen: >-
-      BI adoption (+35% efficiency, 25+ key users), an ETL that unified
-      heterogeneous sources (+70% in precision and speed), demand forecasting
+      BI built from scratch and led (+35% efficiency, 25+ key users), an ETL
+      that unified heterogeneous sources (+70% in precision and speed), demand forecasting
       with scikit-learn (+20% system performance) and strategy sessions with
       the management of the SITP concessionaires (+25% in indicators).
     stack: ["BI", "ETL", "scikit-learn"]
@@ -398,8 +398,9 @@ proyectos:
       titular: "I returned to the same system with a different question: no longer supervising compliance, but explaining how the SITP operated and helping decide how to adjust it."
       contexto: >-
         Post-operational analysis of the TransMilenio system relied on
-        heterogeneous sources and manual reports: the city's operation
-        produced data faster than it could be analyzed.
+        heterogeneous sources and manual reports, with no BI bringing them
+        together: the city's operation produced data faster than it could be
+        analyzed.
       reto: >-
         Unify the sources, speed up the analysis and bring the data to the
         tables where the transit system's operation is decided.
@@ -428,7 +429,7 @@ proyectos:
             GPS and no dispatch stayed visible, not silently corrected.
         - titulo: "BI around operational questions"
           texto: >-
-            I led the implementation of Power BI, adopted by more than 25 key users: the people who scheduled and
+            I built the BI from scratch and led the implementation of Power BI, adopted by more than 25 key users: the people who scheduled and
             decided the service. Each dashboard answered a concrete question, such as which routes
             and time slots saw demand exceed the scheduled supply, or which concessionaires
             concentrated the incidents.
@@ -523,8 +524,8 @@ proyectos:
   - slug: "fundacion-ctic"
     nombre: "Analytics in healthcare — Fundación CTIC (2025–today)"
     resumen: >-
-      Analysis and visualization models for administrative and clinical
-      leaders, institutional data governance and quality, and process-based
+      The institution's BI, built from scratch: analysis and visualization
+      models for administrative and clinical leaders, institutional data governance and quality, and process-based
       control dashboards.
     stack: ["Analytics", "Data governance", "AI strategy", "ISO/IEC 42001", "Power BI"]
     casestudy:
@@ -532,7 +533,7 @@ proyectos:
       contexto: >-
         In healthcare, administrative and clinical decisions depend on
         institutional data that historically lived scattered and without
-        clear governance.
+        clear governance, and the institution had no BI: I built it from scratch.
       reto: >-
         Bring data governance, quality and analytics to the decisions of the
         Foundation's administrative and clinical leaders.
@@ -552,8 +553,8 @@ proyectos:
       capitulos:
         - titulo: "Process analytics for two audiences"
           texto: >-
-            I develop analysis and visualization models in Power BI for administrative and clinical
-            leaders: more than 25 products, control dashboards among them. An indicator keeps a single
+            I built the institution's BI from scratch and develop analysis and visualization models in
+            Power BI for administrative and clinical leaders: more than 25 products, control dashboards among them. An indicator keeps a single
             institutional definition, even if each audience sees it with its own level of detail.
         - titulo: "Data governance and quality in healthcare"
           texto: >-
@@ -578,7 +579,7 @@ proyectos:
             publish in the portfolio: it cites the standard or declares the gap, and no ruling moves
             forward without a person.
       impacto:
-        - "more than 25 analytical products in use for some 20 leaders across some 15 processes and about 75 users."
+        - "more than 25 analytical products in use for some 20 leaders across some 15 processes and between 100 and 200 users (estimated)."
         - "About 60% less effort preparing information (estimated on my own work); some ten analysis plans under follow-up."
         - "more than 10 AI opportunities identified, half of them evaluated, some already prioritized and the first ones documented."
         - "Institutional data quality as a practice, not an event."

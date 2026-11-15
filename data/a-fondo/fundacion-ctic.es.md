@@ -47,7 +47,7 @@ Desde marzo de 2025 trabajo como Profesional de Analítica en la Fundación CTIC
 
 Mi trabajo integra dos responsabilidades complementarias. La primera consiste en desarrollar capacidades analíticas en Power BI que permitan integrar información, modelar procesos administrativos y asistenciales, estructurar indicadores confiables y ofrecer a los líderes una base común para comprender el desempeño institucional y respaldar sus decisiones. La segunda, y actualmente una de las más importantes de mi trayectoria, consiste en liderar la estructuración de la estrategia institucional de inteligencia artificial, orientando la forma en que la organización identifica, evalúa, prioriza, diseña y gobierna sus iniciativas de IA, y en participar en la estructuración de su sistema de gestión de IA.
 
-Trabajo en línea directa con la Dirección de Planeación y con las subdirecciones de tecnología, de gestión de la información y de calidad. No lidero un equipo de personas a cargo: lidero procesos completos que integran a una gran cantidad de personas —hoy, unos 20 líderes de unos 15 procesos administrativos y asistenciales y unos 75 usuarios de las soluciones analíticas—. Es una forma distinta de liderazgo respecto de la que ejercí en Cafam con un equipo de 20 personas: allí dirigía personas; aquí lidero la estructuración de la estrategia con la que una institución mide, decide y adopta la inteligencia artificial.
+Trabajo en línea directa con la Dirección de Planeación y con las subdirecciones de tecnología, de gestión de la información y de calidad. No lidero un equipo de personas a cargo: lidero procesos completos que integran a una gran cantidad de personas —hoy, unos 20 líderes de unos 15 procesos administrativos y asistenciales y entre 100 y 200 usuarios de las soluciones analíticas, según mi estimación—. Es una forma distinta de liderazgo respecto de la que ejercí en Cafam con un equipo de 20 personas: allí dirigía personas; aquí lidero la estructuración de la estrategia con la que una institución mide, decide y adopta la inteligencia artificial.
 
 ## Qué reúne este rol: ingeniería de datos, agentes de IA y arquitectura empresarial
 
@@ -163,7 +163,7 @@ A la fecha, la estrategia ha permitido identificar más de 10 oportunidades de i
 
 <!-- seccion: dos-audiencias -->
 
-He desarrollado soluciones analíticas en Power BI para líderes administrativos y asistenciales, estructurando modelos semánticos, indicadores y experiencias de visualización adaptadas a sus responsabilidades, pero sustentadas en definiciones institucionales consistentes. Son más de 25 productos analíticos en Power BI —tableros de control entre ellos— que hoy usan unos 20 líderes de unos 15 procesos y unos 75 usuarios.
+Creé desde cero el BI de la institución. He desarrollado soluciones analíticas en Power BI para líderes administrativos y asistenciales, estructurando modelos semánticos, indicadores y experiencias de visualización adaptadas a sus responsabilidades, pero sustentadas en definiciones institucionales consistentes. Son más de 25 productos analíticos en Power BI —tableros de control entre ellos— que hoy usan unos 20 líderes de unos 15 procesos y entre 100 y 200 usuarios (estimado).
 
 Estas audiencias trabajan sobre una misma organización, pero no necesariamente formulan las mismas preguntas ni utilizan la información con el mismo propósito. La gestión administrativa se concentra en dimensiones como recursos, capacidad, oportunidad, productividad y cumplimiento. La gestión asistencial observa la continuidad de los procesos, las condiciones de atención y los resultados asociados con su responsabilidad: los indicadores de calidad que una IPS reporta y los que la habilitación exige.
 
@@ -234,7 +234,7 @@ Los indicadores funcionan como medidores distribuidos a lo largo del flujo. Los 
 
 El diseño comienza por la decisión y no por la visualización. Antes de construir un tablero, procuro establecer quién utilizará la información, qué pregunta necesita responder, qué nivel de detalle requiere, con qué frecuencia debe actualizarse y qué condiciones deben hacerse visibles. Esta orientación evita desarrollar productos extensos que muestran grandes cantidades de información, pero no ayudan a comprender qué merece atención.
 
-También diferencio las necesidades de cada audiencia sin modificar la definición institucional de las métricas. La alta dirección necesita observar tendencias, riesgos y capacidad de respuesta. Los responsables de proceso requieren identificar restricciones, desviaciones y relaciones causales. Los equipos operativos necesitan información suficientemente detallada para comprender situaciones concretas. El modelo semántico debe conservar una única lógica, mientras la experiencia en Power BI adapta su profundidad y presentación a cada responsabilidad: es lo que permite que más de 25 productos sirvan a unos 20 líderes y a unos 75 usuarios sin que existan otras tantas definiciones distintas de un mismo indicador.
+También diferencio las necesidades de cada audiencia sin modificar la definición institucional de las métricas. La alta dirección necesita observar tendencias, riesgos y capacidad de respuesta. Los responsables de proceso requieren identificar restricciones, desviaciones y relaciones causales. Los equipos operativos necesitan información suficientemente detallada para comprender situaciones concretas. El modelo semántico debe conservar una única lógica, mientras la experiencia en Power BI adapta su profundidad y presentación a cada responsabilidad: es lo que permite que más de 25 productos sirvan a unos 20 líderes y a entre 100 y 200 usuarios sin que existan otras tantas definiciones distintas de un mismo indicador.
 
 ## Planes de mejora: en qué asesoré, qué implementé y el cerca del 60 % menos esfuerzo
 
@@ -282,7 +282,7 @@ Actualmente, más de 25 soluciones analíticas en Power BI se encuentran en uso 
 | ------------------ | ------------------------------------------ | ------------------------: |
 | Analítica          | productos analíticos en uso o seguimiento  |                 más de 25 |
 | Analítica          | líderes respaldados · procesos             |         unos 20 · unos 15 |
-| Analítica          | usuarios                                   |                       ~75 |
+| Analítica          | usuarios                                   |      100 a 200 (estimado) |
 | Analítica          | reducción de esfuerzo en preparación       | cerca del 60 % (estimado) |
 | Analítica          | planes de análisis en seguimiento          |                una decena |
 | IA                 | oportunidades identificadas                |                 más de 10 |

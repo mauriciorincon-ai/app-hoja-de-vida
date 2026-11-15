@@ -13,7 +13,7 @@
  * formas aprobadas son las de la tabla de abajo, y ninguna lleva el número
  * exacto: «más de 25», «más de 20» (instrumentos), «un tercio», «la mitad»
  * (oportunidades), «unos 20», «unos 15», «una decena», «unas ya priorizadas», «las
- * primeras», «unos 75».
+ * primeras», «entre 100 y 200 (estimado)».
  *
  * EL 2026-10-04 EL DUEÑO CORRIGIÓ LA CIFRA DE PRODUCTOS. «Yo no creé 40 tableros
  * o más, yo creé 25 o más», y «para mí es una sola cifra»: en CTIC hay UNA
@@ -21,6 +21,12 @@
  * llevan número propio —ni «la mitad», ni «más de 20»—, porque esas dos
  * formas se calcularon sobre el total viejo. `CIFRAS_RETIRADAS_DE_CTIC` veta
  * las formas viejas aunque sean aproximadas: no son exactas, son falsas.
+ *
+ * EL 2026-11-03 EL DUEÑO CORRIGIÓ LA CIFRA DE USUARIOS. «Realmente no se cuantifican
+ * exactamente, pero estimamos que los usuarios pueden ser entre 100 y 200 personas»: el «unos
+ * 75» de antes ya no es la cifra, así que también se veta, y con él el total de la HOME que lo
+ * sumaba (170+ = 75 + 50 + 25 + 20, hoy 195+ = 100 + 50 + 25 + 20). Se escribe «entre 100 y
+ * 200 usuarios (estimado)», porque es una estimación del dueño y no un conteo.
  *
  * | Cifra interna                   | ES                                   | EN                                  |
  * | ------------------------------- | ------------------------------------ | ----------------------------------- |
@@ -31,7 +37,7 @@
  * | 3 priorizadas · 2 documentadas  | algunas · las primeras               | some · the first ones               |
  * | 20 líderes · 15 procesos        | unos 20 · unos 15                    | some 20 · some 15                   |
  * | 10 planes de análisis           | una decena                           | some ten                            |
- * | 75 usuarios                     | unos 75                              | some 75                             |
+ * | usuarios (estimado del dueño)   | entre 100 y 200 (estimado)           | between 100 and 200 (estimated)     |
  *
  * Qué NO se vigila, a propósito: los números de otras experiencias que
  * comparten sustantivo —«hasta 23 agentes» de Vesting, «12 profesionales» de
@@ -109,7 +115,7 @@ export const CIFRAS_EXACTAS_DE_CTIC = [
   },
   {
     patron: new RegExp(String.raw`${APROX}\b75\s+(?:usuarios|users)\b`, "gi"),
-    que: "75 usuarios → «unos 75»",
+    que: "75 usuarios → «entre 100 y 200 usuarios (estimado)»",
   },
   {
     patron: /\b(?:(?:los|the)\s+)?10\s+(?:planes|analysis plans)\b/gi,
@@ -130,13 +136,20 @@ export const CIFRAS_EXACTAS_DE_CTIC = [
   },
 ];
 
+const NOTA_PRODUCTOS = "El dueño corrigió la cifra el 2026-10-04: en CTIC hay una sola, más de 25.";
+const NOTA_USUARIOS =
+  "El dueño corrigió la cifra el 2026-11-03: los usuarios de CTIC son entre 100 y 200, estimado.";
+
 /**
- * LAS CIFRAS QUE EL DUEÑO RETIRÓ (2026-10-04). No son exactas: son falsas. La
+ * LAS CIFRAS QUE EL DUEÑO RETIRÓ (2026-10-04 y 2026-11-03). No son exactas: son falsas. La
  * de productos pasó de «más de 40» a «más de 25», y las que se calcularon sobre
  * el total viejo —la mitad son tableros, más de 20 tableros— se fueron con él.
  * Juzgan sin lookbehind de aproximación, porque la forma vetada YA es aproximada.
+ * El 2026-11-03 se sumó la de usuarios: «unos 75» pasó a «entre 100 y 200 (estimado)», y el
+ * logro de la HOME que la sumaba, de 170+ a 195+. Cada entrada trae su `nota`, la fecha de la
+ * decisión que la retiró; sin ella, la de productos.
  *
- * @type {{ patron: RegExp, que: string }[]}
+ * @type {{ patron: RegExp, que: string, nota?: string }[]}
  */
 export const CIFRAS_RETIRADAS_DE_CTIC = [
   {
@@ -165,6 +178,21 @@ export const CIFRAS_RETIRADAS_DE_CTIC = [
     patron: /\b(?:más\s+de|more\s+than)\s+20\s+(?:tableros|(?:control\s+)?dashboards)\b/gi,
     que: "«más de 20 tableros» → sin cifra propia: «tableros de control entre ellos»",
   },
+  {
+    patron: /\b(?:unos|unas|some|about|around|roughly|cerca\s+de)\s+75\b(?!\s*%)/gi,
+    que: "«unos 75» (usuarios de CTIC) → «entre 100 y 200 usuarios (estimado)»",
+    nota: NOTA_USUARIOS,
+  },
+  {
+    patron: /\|\s*~\s*75\s*\|/g,
+    que: "la celda «~75» de usuarios → «100 a 200 (estimado)»",
+    nota: NOTA_USUARIOS,
+  },
+  {
+    patron: /\bvalor:\s*170\s+sufijo:\s*"\+"\s+etiqueta:\s*"(?:usuarios|users)/gi,
+    que: "el logro de la HOME en 170+ (sumaba los 75 de CTIC) → `valor: 195` (100 + 50 + 25 + 20)",
+    nota: NOTA_USUARIOS,
+  },
 ];
 
 /** Filas de tabla de CTIC que el dueño retiró: la de tableros, y la de productos en 40. */
@@ -183,11 +211,11 @@ export function problemasDeCifrasRetiradasDeCtic(archivos) {
   for (const { archivo, texto } of archivos) {
     const plano = texto.replace(/\n/g, " ");
     const linea = (/** @type {number} */ i) => texto.slice(0, i).split("\n").length;
-    for (const { patron, que } of CIFRAS_RETIRADAS_DE_CTIC) {
+    for (const { patron, que, nota } of CIFRAS_RETIRADAS_DE_CTIC) {
       for (const m of plano.matchAll(new RegExp(patron.source, patron.flags))) {
         problemas.push(
           `${archivo}:${linea(m.index ?? 0)}: «${m[0].replace(/\s+/g, " ")}» — ${que}. ` +
-            `El dueño corrigió la cifra el 2026-10-04: en CTIC hay una sola, más de 25.`,
+            (nota ?? NOTA_PRODUCTOS),
         );
       }
     }

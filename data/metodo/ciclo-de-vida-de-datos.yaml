@@ -584,8 +584,8 @@ bloques:
       - nombre: { es: "Separar desarrollo y producción en la Fundación CTIC", en: "Keeping development and production apart at Fundación CTIC" }
         nivel: uso-real
         texto:
-          es: "En la Fundación CTIC, con más de 25 productos analíticos en uso, separar los estados de una solución es lo que permite corregir un modelo sin que unos 75 usuarios vean una cifra a medias."
-          en: "At Fundación CTIC, with more than 25 analytics products in use, keeping a solution’s states apart is what lets a model be corrected without some 75 users seeing a half-finished figure."
+          es: "En la Fundación CTIC, con más de 25 productos analíticos en uso, separar los estados de una solución es lo que permite corregir un modelo sin que sus usuarios —entre 100 y 200, estimados— vean una cifra a medias."
+          en: "At Fundación CTIC, with more than 25 analytics products in use, keeping a solution’s states apart is what lets a model be corrected without its users —between 100 and 200, estimated— seeing a half-finished figure."
         corpus: [fabric-en-la-practica]
       - nombre: { es: "Banco Pichincha: preparar con pasos separados", en: "Banco Pichincha: preparing in separate steps" }
         nivel: uso-real

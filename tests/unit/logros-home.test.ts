@@ -86,7 +86,7 @@ describe("los doce logros", () => {
       `${anios}`,
       "20",
       "45+",
-      "170+",
+      "195+",
       "27",
       `${agentes}`,
       "52%",
@@ -98,18 +98,19 @@ describe("los doce logros", () => {
     ]);
   });
 
-  it("los totales son sumas de lo que sus descripciones nombran (45+ = 25+10+5+5 · 170+ = 75+50+25+20 · 60+ = 50+10)", () => {
+  it("los totales son sumas de lo que sus descripciones nombran (45+ = 25+10+5+5 · 195+ = 100+50+25+20 · 60+ = 50+10)", () => {
     const logros = getCv("es").logros;
     const productos = logros.find((x) => x.valor === 45)!;
-    const usuarios = logros.find((x) => x.valor === 170)!;
+    const usuarios = logros.find((x) => x.valor === 195)!;
     const indicadores = logros.find(
       (x) => x.valor === 25 && x.prefijo === "+",
     )!;
     expect(productos.descripcion).toMatch(/25\+.*10\+.*5\+.*5\+/);
-    expect(usuarios.descripcion).toMatch(/75.*50\+.*25\+.*20/);
+    // CTIC es un rango estimado (el dueño, 2026-11-03): el total suma su piso, 100.
+    expect(usuarios.descripcion).toMatch(/100 y 200.*50\+.*25\+.*20/);
     expect(indicadores.descripcion).toMatch(/60\+.*50\+.*10\+/);
     expect(25 + 10 + 5 + 5).toBe(45);
-    expect(75 + 50 + 25 + 20).toBe(170);
+    expect(100 + 50 + 25 + 20).toBe(195);
     expect(50 + 10).toBe(60);
   });
 });
