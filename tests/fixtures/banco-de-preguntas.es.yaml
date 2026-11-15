@@ -45,6 +45,18 @@ preguntas:
   - pregunta: "¿Tiene experiencia con datos del sector salud?"
     espera: [fundacion-ctic]
     familia: trayectoria
+  - pregunta: "¿Cuántas personas usan sus tableros en la Fundación CTIC?"
+    espera: [fundacion-ctic, trayectoria, casestudy-fundacion-ctic, bi-que-se-adopta]
+    familia: trayectoria
+    nota: >-
+      Revisión de contenido del harness de hiring (2026-11-03, decisiones del dueño):
+      entre 100 y 200 usuarios, estimado; ya no «unos 75».
+  - pregunta: "¿Creó el BI desde cero o lo heredó?"
+    espera: [transmilenio-cm, fundacion-ctic, trayectoria, casestudy-transmilenio-cm, casestudy-fundacion-ctic]
+    familia: trayectoria
+    nota: >-
+      Revisión de contenido del harness de hiring (2026-11-03, decisiones del dueño):
+      el BI de TransMilenio y el de la Fundación CTIC los creó desde cero, y lideró el primero.
   - pregunta: "¿Qué hizo en Vesting?"
     espera: [vesting, agentes-en-produccion, trayectoria]
     familia: trayectoria
