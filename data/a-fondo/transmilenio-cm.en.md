@@ -2,7 +2,7 @@
 slug: transmilenio-cm
 codigo: AF-07
 titulo: "C&M Consultores / TransMilenio — post-operational analysis (2021–2022)"
-resumen: "The post-operational analysis of the SITP: the ETL that unified fare collection, fleet, scheduling, incidents and PQR (+70%), BI adopted by 25+ key users (+35%), the working sessions with the management of the SITP concessionaires (+25%) and a demand model in scikit-learn that stayed in use after I left."
+resumen: "The post-operational analysis of the SITP: the ETL that unified fare collection, fleet, scheduling, incidents and PQR (+70%), the BI built from scratch and led, adopted by 25+ key users (+35%), the working sessions with the management of the SITP concessionaires (+25%) and a demand model in scikit-learn that stayed in use after I left."
 cuando_usar: "Use this when they ask about TransMilenio and C&M Consultores (2021–2022): post-operational analysis, heterogeneous data sources (fare collection, fleet, scheduling, incidents, PQR), ETL pipelines, demand forecasting by route and time band, working sessions with the management of the SITP concessionaires and dashboard adoption."
 estado: aprobado
 ancla: "/proyectos/transmilenio-cm"
@@ -55,7 +55,8 @@ The main obstacle was that the operation generated information faster than it co
 and analyzed manually. The data was spread across heterogeneous sources, with different
 structures, levels of detail and rules. A considerable part of the effort was consumed gathering
 files, validating correspondences and reconciling results before the truly valuable analysis
-could begin.
+could begin. And there was no BI bringing those sources together: the analysis depended on
+manual reports.
 
 This experience allowed me to recognize a fundamental difference between having data and having
 an analytical capability. The data could exist and still not be prepared to answer the
@@ -168,8 +169,8 @@ changed or the way of calculating it had changed.
 
 <!-- seccion: la-adopcion -->
 
-I led the implementation of Power BI as the specialized business intelligence tool in the
-operation, achieving a 35% increase in the efficiency of analytical processes and the adoption
+I built the post-operational analysis BI from scratch and led it: I implemented Power BI as the
+specialized business intelligence tool in the operation, achieving a 35% increase in the efficiency of analytical processes and the adoption
 of the dashboards by more than 25 key users.
 
 The term key users matters. In an operation of this nature, the value did not depend on

@@ -567,8 +567,8 @@ bloques:
       - nombre: { es: "TransMilenio: Power BI en el análisis post-operacional", en: "TransMilenio: Power BI in post-operational analysis" }
         nivel: uso-real
         texto:
-          es: "Entre julio de 2021 y mayo de 2022, en C&M Consultores, Power BI fue adoptado por más de 25 usuarios clave —responsables de programación, seguimiento y decisión, no solo personas con acceso— y contribuyó a mejorar un 35 % la eficiencia de los procesos analíticos; cada cifra podía recorrerse hasta la fuente que la produjo."
-          en: "Between July 2021 and May 2022, at C&M Consultores, Power BI was adopted by more than 25 key users —people responsible for scheduling, monitoring and decisions, not merely people with access— and contributed to a 35% improvement in the efficiency of analytical processes; every figure could be traced back to the source that produced it."
+          es: "Entre julio de 2021 y mayo de 2022, en C&M Consultores, el BI se creó desde cero y Power BI fue adoptado por más de 25 usuarios clave —responsables de programación, seguimiento y decisión, no solo personas con acceso— y contribuyó a mejorar un 35 % la eficiencia de los procesos analíticos; cada cifra podía recorrerse hasta la fuente que la produjo."
+          en: "Between July 2021 and May 2022, at C&M Consultores, the BI was built from scratch and Power BI was adopted by more than 25 key users —people responsible for scheduling, monitoring and decisions, not merely people with access— and contributed to a 35% improvement in the efficiency of analytical processes; every figure could be traced back to the source that produced it."
         corpus: [bi-que-se-adopta]
         href: /proyectos/transmilenio-cm
       - nombre: { es: "Cafam: un BI de control adoptado por cargo", en: "Cafam: a control BI adopted by role" }
@@ -581,8 +581,8 @@ bloques:
       - nombre: { es: "Fundación CTIC: productos analíticos por procesos", en: "Fundación CTIC: analytics products by process" }
         nivel: uso-real
         texto:
-          es: "Desde marzo de 2025, más de 25 productos analíticos en Power BI —tableros de control entre ellos— los usan unos 20 líderes de unos 15 procesos y unos 75 usuarios, administrativos y asistenciales; cada indicador conserva una definición institucional y cada audiencia lo lee con la profundidad de su responsabilidad. El efecto se declara como estimación: cerca de un 60 % menos de esfuerzo de preparación."
-          en: "Since March 2025, more than 25 analytics products in Power BI —control dashboards among them— are used by some 20 leaders of some 15 processes and some 75 users, administrative and clinical; every indicator keeps one institutional definition and each audience reads it at the depth of its responsibility. The effect is declared as an estimate: close to 60% less preparation effort."
+          es: "Desde marzo de 2025, con un BI creado desde cero, más de 25 productos analíticos en Power BI —tableros de control entre ellos— los usan unos 20 líderes de unos 15 procesos y entre 100 y 200 usuarios (estimado), administrativos y asistenciales; cada indicador conserva una definición institucional y cada audiencia lo lee con la profundidad de su responsabilidad. El efecto se declara como estimación: cerca de un 60 % menos de esfuerzo de preparación."
+          en: "Since March 2025, with a BI built from scratch, more than 25 analytics products in Power BI —control dashboards among them— are used by some 20 leaders of some 15 processes and between 100 and 200 users (estimated), administrative and clinical; every indicator keeps one institutional definition and each audience reads it at the depth of its responsibility. The effect is declared as an estimate: close to 60% less preparation effort."
         corpus: [bi-que-se-adopta, fundacion-ctic]
         href: /proyectos/fundacion-ctic
       - nombre: { es: "Los seis tableros de datos abiertos", en: "The six open-data dashboards" }

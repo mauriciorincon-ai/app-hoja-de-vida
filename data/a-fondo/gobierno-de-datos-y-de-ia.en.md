@@ -141,7 +141,7 @@ duplicate detection, reconciliation between sources that describe the same fact,
 that, when exceeded, trigger a review before the figure reaches a dashboard. I do not publish the
 figures of those rules; I do publish the principle: data quality as a permanent practice, not as a
 cleaning event before a report. On that base run more than 25 analytics products in Power BI for some 20 leaders of
-some 15 processes and about 75 users, with close to 60% less effort in preparing the information
+some 15 processes and between 100 and 200 users (estimated), with close to 60% less effort in preparing the information
 —estimated— and some ten analysis plans under follow-up.
 
 I currently also lead the structuring of the institutional artificial intelligence strategy from the principles and requirements of ISO/IEC 42001 in its Spanish edition, UNE-ISO/IEC 42001:2025. This

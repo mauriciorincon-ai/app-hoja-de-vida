@@ -72,7 +72,7 @@ For me, the greatest value of the DP-600 lies in the depth it grants to the sema
 
 Industrial Engineering lets me understand the processes, resources, constraints and decisions that must be represented. The DP-600 validates my ability to turn that understanding into an analytical architecture: prepare the information, organize it in warehouses and models, structure verifiable measures in DAX and make it available through business-oriented analysis experiences.
 
-Industrial Design brings a complementary dimension. An analytical architecture can be technically correct and still fail if people do not understand how to use it. That is why my specialty in Power BI does not end with building the model. It includes the way information is presented, the hierarchy with which it is organized and the ease with which a person can travel through it from an executive view down to the evidence that supports the result. It is the reason why the Banco Pichincha dashboards were adopted by more than 50 users and those of Fundación CTIC are used by some 75.
+Industrial Design brings a complementary dimension. An analytical architecture can be technically correct and still fail if people do not understand how to use it. That is why my specialty in Power BI does not end with building the model. It includes the way information is presented, the hierarchy with which it is organized and the ease with which a person can travel through it from an executive view down to the evidence that supports the result. It is the reason why the Banco Pichincha dashboards were adopted by more than 50 users and those of Fundación CTIC are used by between 100 and 200 people (estimated).
 
 ## How I use the DP-600 today: from Microsoft Fabric at Vesting to Power BI at Fundación CTIC
 

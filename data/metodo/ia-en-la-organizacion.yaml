@@ -641,8 +641,8 @@ bloques:
       - nombre: { es: "TransMilenio: adopción por usuarios clave", en: "TransMilenio: adoption by key users" }
         nivel: uso-real
         texto:
-          es: "Entre julio de 2021 y mayo de 2022, en C&M Consultores, Power BI fue adoptado por más de 25 usuarios clave —responsables de programación, seguimiento y decisión, no solo personas con acceso— y contribuyó a mejorar un 35 % la eficiencia de los procesos analíticos."
-          en: "Between July 2021 and May 2022, at C&M Consultores, Power BI was adopted by more than 25 key users —people responsible for scheduling, monitoring and decisions, not just people with access— and helped improve the efficiency of the analytical processes by 35%."
+          es: "Entre julio de 2021 y mayo de 2022, en C&M Consultores, el BI se creó desde cero y Power BI fue adoptado por más de 25 usuarios clave —responsables de programación, seguimiento y decisión, no solo personas con acceso— y contribuyó a mejorar un 35 % la eficiencia de los procesos analíticos."
+          en: "Between July 2021 and May 2022, at C&M Consultores, the BI was built from scratch and Power BI was adopted by more than 25 key users —people responsible for scheduling, monitoring and decisions, not just people with access— and helped improve the efficiency of the analytical processes by 35%."
         corpus: [transmilenio-cm]
         href: /proyectos/transmilenio-cm
       - nombre: { es: "Cafam: una tecnología nueva que entra por el proceso", en: "Cafam: a new technology that enters through the process" }

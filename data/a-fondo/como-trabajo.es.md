@@ -100,12 +100,12 @@ Por esa razón siempre diseño las soluciones comenzando por la decisión que de
 
 No lo afirmo como doctrina: lo he medido cuatro veces, con usuarios y decisiones distintas en cada contexto.
 
-| Dónde                                         | Producto                                                              | Adopción                                         | Efecto                                          |
-| --------------------------------------------- | --------------------------------------------------------------------- | ------------------------------------------------ | ----------------------------------------------- |
-| **Banco Pichincha**, 2023 | dashboards para decidir, construidos por el equipo de 5 que lideré | **más de 50 usuarios** del negocio | +25 % en la toma de decisiones |
-| **TransMilenio / C&M Consultores**, 2021–2022 | Power BI en el análisis post-operacional                              | **más de 25 usuarios clave** de la operación     | +35 % de eficiencia de los procesos analíticos  |
-| **Cafam**, 2020–2021                          | el BI de control de la implementación del WMS                         | **más de 15** directores, coordinadores y jefes  | +50 % de precisión en el seguimiento de pruebas |
-| **Fundación CTIC**, desde 2025                | más de 25 productos analíticos en Power BI, tableros de control entre ellos | **unos 20 líderes** de unos 15 procesos y unos 75 usuarios | cerca de 60 % menos esfuerzo de preparación (estimado) |
+| Dónde                                         | Producto                                                                    | Adopción                                                                      | Efecto                                                 |
+| --------------------------------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ------------------------------------------------------ |
+| **Banco Pichincha**, 2023                     | dashboards para decidir, construidos por el equipo de 5 que lideré          | **más de 50 usuarios** del negocio                                            | +25 % en la toma de decisiones                         |
+| **TransMilenio / C&M Consultores**, 2021–2022 | Power BI en el análisis post-operacional                                    | **más de 25 usuarios clave** de la operación                                  | +35 % de eficiencia de los procesos analíticos         |
+| **Cafam**, 2020–2021                          | el BI de control de la implementación del WMS                               | **más de 15** directores, coordinadores y jefes                               | +50 % de precisión en el seguimiento de pruebas        |
+| **Fundación CTIC**, desde 2025                | más de 25 productos analíticos en Power BI, tableros de control entre ellos | **unos 20 líderes** de unos 15 procesos y entre 100 y 200 usuarios (estimado) | cerca de 60 % menos esfuerzo de preparación (estimado) |
 
 «Usuarios clave» importa: en transporte no eran personas con acceso sino los responsables de programación, seguimiento y decisiones de servicio. En Cafam, los quince eran los roles que respondían por el proyecto —la dirección de medicamentos, la de TI, la del proyecto, la del centro de distribución y sus coordinadores y jefes—, y quince personas con responsabilidad directa sobre un proceso crítico valen más que cientos que consultan de vez en cuando. Cómo distingo acceso, uso, adopción e impacto, y cómo mido la adopción sin confundirla con visitas, está en el documento de BI.
 

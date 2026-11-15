@@ -844,8 +844,8 @@ indicators for process monitoring and the formulation of evidence-based improvem
 opportunities. In this context, a metric cannot be separated from its definition, provenance,
 purpose or the conditions under which it can be used to guide a decision.
 
-The figures to date: more than 25 analytical products in use for some 20 leaders of some 15 processes and some 75
-users; close to 60% less effort, estimated, in the preparation of information; some ten analysis plans
+The figures to date: more than 25 analytical products in use for some 20 leaders of some 15 processes and between 100
+and 200 users, estimated; close to 60% less effort, estimated, in the preparation of information; some ten analysis plans
 under follow-up; and improvement plans whose design I advised on from the results so that the processes
 execute them; the improvements I implemented with my own hands were, above all, those of my own
 work process.
